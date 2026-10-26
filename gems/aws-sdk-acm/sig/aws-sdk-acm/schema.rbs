@@ -3,34 +3,106 @@ module Aws::ACM
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AcmCertificateMetadata: StructureShape
+    AcmCertificateMetadataFilter: UnionShape
+    AcmeAccount: StructureShape
+    AcmeAccountId: StringShape
+    AcmeAccountList: ListShape
+    AcmeAccountStatus: EnumShape
+    AcmeAccountSummary: StructureShape
+    AcmeAuthorizationBehavior: EnumShape
+    AcmeContact: EnumShape
+    AcmeDomainValidation: StructureShape
+    AcmeDomainValidationArn: StringShape
+    AcmeDomainValidationFailureReason: EnumShape
+    AcmeDomainValidationList: ListShape
+    AcmeDomainValidationStatus: EnumShape
+    AcmeDomainValidationSummary: StructureShape
+    AcmeEndpoint: StructureShape
+    AcmeEndpointArn: StringShape
+    AcmeEndpointList: ListShape
+    AcmeEndpointStatus: EnumShape
+    AcmeEndpointSummary: StructureShape
+    AcmeExternalAccountBinding: StructureShape
+    AcmeExternalAccountBindingArn: StringShape
+    AcmeExternalAccountBindingList: ListShape
+    AcmeExternalAccountBindingSummary: StructureShape
     AddTagsToCertificateRequest: StructureShape
     Arn: StringShape
     AvailabilityErrorMessage: StringShape
+    CertificateArn: StringShape
+    CertificateAuthority: UnionShape
     CertificateBody: StringShape
     CertificateBodyBlob: BlobShape
     CertificateChain: StringShape
     CertificateChainBlob: BlobShape
     CertificateDetail: StructureShape
     CertificateExport: EnumShape
+    CertificateFilter: UnionShape
+    CertificateFilterStatement: UnionShape
+    CertificateFilterStatementList: ListShape
+    CertificateKeyPairOrigin: EnumShape
+    CertificateKeyPairOrigins: ListShape
     CertificateManagedBy: EnumShape
+    CertificateMetadata: UnionShape
     CertificateOptions: StructureShape
+    CertificateSearchResult: StructureShape
+    CertificateSearchResultList: ListShape
     CertificateStatus: EnumShape
     CertificateStatuses: ListShape
     CertificateSummary: StructureShape
     CertificateSummaryList: ListShape
     CertificateTransparencyLoggingPreference: EnumShape
     CertificateType: EnumShape
+    CommonNameFilter: StructureShape
+    ComparisonOperator: EnumShape
     ConflictException: StructureShape
+    ContactList: ListShape
+    CoralAvailabilityThrottledResource: StringShape
+    CoralAvailabilityThrottlingReason: StringShape
+    CreateAcmeDomainValidationRequest: StructureShape
+    CreateAcmeDomainValidationResponse: StructureShape
+    CreateAcmeEndpointRequest: StructureShape
+    CreateAcmeEndpointResponse: StructureShape
+    CreateAcmeExternalAccountBindingRequest: StructureShape
+    CreateAcmeExternalAccountBindingResponse: StructureShape
+    CustomAttribute: StructureShape
+    CustomAttributeList: ListShape
+    DeleteAcmeDomainValidationRequest: StructureShape
+    DeleteAcmeEndpointRequest: StructureShape
+    DeleteAcmeExternalAccountBindingRequest: StructureShape
     DeleteCertificateRequest: StructureShape
+    DescribeAcmeAccountRequest: StructureShape
+    DescribeAcmeAccountResponse: StructureShape
+    DescribeAcmeDomainValidationRequest: StructureShape
+    DescribeAcmeDomainValidationResponse: StructureShape
+    DescribeAcmeEndpointRequest: StructureShape
+    DescribeAcmeEndpointResponse: StructureShape
+    DescribeAcmeExternalAccountBindingRequest: StructureShape
+    DescribeAcmeExternalAccountBindingResponse: StructureShape
     DescribeCertificateRequest: StructureShape
     DescribeCertificateResponse: StructureShape
+    DistinguishedName: StructureShape
+    DnsNameFilter: StructureShape
+    DnsPrevalidationDetails: StructureShape
+    DnsPrevalidationOptions: StructureShape
+    DnsValidationChallenge: StructureShape
+    DomainComponentList: ListShape
     DomainList: ListShape
+    DomainName: StringShape
     DomainNameString: StringShape
+    DomainScope: StructureShape
+    DomainScopeOption: EnumShape
     DomainStatus: EnumShape
     DomainValidation: StructureShape
     DomainValidationList: ListShape
+    DomainValidationMethodUpdateSummary: StructureShape
     DomainValidationOption: StructureShape
     DomainValidationOptionList: ListShape
+    DomainValidationSummary: StructureShape
+    DomainValidationSummaryList: ListShape
+    EmailValidationChallenge: StructureShape
+    Expiration: StructureShape
     ExpiryEventsConfiguration: StructureShape
     ExportCertificateRequest: StructureShape
     ExportCertificateResponse: StructureShape
@@ -39,16 +111,24 @@ module Aws::ACM
     ExtendedKeyUsageList: ListShape
     ExtendedKeyUsageName: EnumShape
     ExtendedKeyUsageNames: ListShape
+    FailureDetails: StructureShape
     FailureReason: EnumShape
+    FilterString: StringShape
     Filters: StructureShape
+    GeneralName: UnionShape
+    GeneralNameList: ListShape
     GetAccountConfigurationResponse: StructureShape
+    GetAcmeExternalAccountBindingCredentialsRequest: StructureShape
+    GetAcmeExternalAccountBindingCredentialsResponse: StructureShape
     GetCertificateRequest: StructureShape
     GetCertificateResponse: StructureShape
+    HostedZoneId: StringShape
     HttpRedirect: StructureShape
     IdempotencyToken: StringShape
     ImportCertificateRequest: StructureShape
     ImportCertificateResponse: StructureShape
     InUseList: ListShape
+    InternalServerException: StructureShape
     InvalidArgsException: StructureShape
     InvalidArnException: StructureShape
     InvalidDomainValidationOptionsException: StructureShape
@@ -63,18 +143,38 @@ module Aws::ACM
     KeyUsageName: EnumShape
     KeyUsageNames: ListShape
     LimitExceededException: StructureShape
+    ListAcmeAccountsRequest: StructureShape
+    ListAcmeAccountsResponse: StructureShape
+    ListAcmeDomainValidationsRequest: StructureShape
+    ListAcmeDomainValidationsResponse: StructureShape
+    ListAcmeEndpointsRequest: StructureShape
+    ListAcmeEndpointsResponse: StructureShape
+    ListAcmeExternalAccountBindingsRequest: StructureShape
+    ListAcmeExternalAccountBindingsResponse: StructureShape
+    ListCertificateDomainValidationsRequest: StructureShape
+    ListCertificateDomainValidationsResponse: StructureShape
     ListCertificatesRequest: StructureShape
     ListCertificatesResponse: StructureShape
     ListTagsForCertificateRequest: StructureShape
     ListTagsForCertificateResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    MacKey: StringShape
     MaxItems: IntegerShape
     NextToken: StringShape
     NullableBoolean: BooleanShape
+    OtherName: StructureShape
     PassphraseBlob: BlobShape
     PcaArn: StringShape
     PositiveInteger: IntegerShape
+    PrevalidationDetails: UnionShape
+    PrevalidationOptions: UnionShape
+    PrevalidationType: EnumShape
     PrivateKey: StringShape
     PrivateKeyBlob: BlobShape
+    PublicCertificateAuthority: StructureShape
+    PublicKeyAlgorithm: EnumShape
+    PublicKeyAlgorithmList: ListShape
     PutAccountConfigurationRequest: StructureShape
     RecordType: EnumShape
     RemoveTagsFromCertificateRequest: StructureShape
@@ -90,25 +190,53 @@ module Aws::ACM
     ResourceNotFoundException: StructureShape
     ResourceRecord: StructureShape
     RevocationReason: EnumShape
+    RevokeAcmeAccountRequest: StructureShape
+    RevokeAcmeExternalAccountBindingRequest: StructureShape
     RevokeCertificateRequest: StructureShape
     RevokeCertificateResponse: StructureShape
+    RoleArn: StringShape
+    SearchCertificatesRequest: StructureShape
+    SearchCertificatesResponse: StructureShape
+    SearchCertificatesSortBy: EnumShape
+    SearchCertificatesSortOrder: EnumShape
+    SearchMaxResults: IntegerShape
+    SerialNumber: StringShape
     ServiceErrorMessage: StringShape
+    ServiceQuotaExceededException: StructureShape
     SortBy: EnumShape
     SortOrder: EnumShape
     String: StringShape
+    SubjectAlternativeNameFilter: UnionShape
+    SubjectFilter: UnionShape
     TStamp: TimestampShape
     Tag: StructureShape
     TagKey: StringShape
+    TagKeyList: ListShape
     TagList: ListShape
     TagPolicyException: StructureShape
+    TagResourceRequest: StructureShape
     TagValue: StringShape
     ThrottlingException: StructureShape
+    ThrottlingReason: StructureShape
+    ThrottlingReasonList: ListShape
+    TimeType: EnumShape
+    TimestampRange: StructureShape
     TooManyTagsException: StructureShape
+    UntagResourceRequest: StructureShape
+    UpdateAcmeDomainValidationRequest: StructureShape
+    UpdateAcmeEndpointRequest: StructureShape
     UpdateCertificateOptionsRequest: StructureShape
+    UpdateStatus: EnumShape
+    UpdateSummary: StructureShape
+    UpdateType: EnumShape
+    ValidationChallenge: UnionShape
+    ValidationConfiguration: StructureShape
     ValidationEmailList: ListShape
     ValidationException: StructureShape
     ValidationExceptionMessage: StringShape
     ValidationMethod: EnumShape
+    X509AttributeFilter: UnionShape
+    X509Attributes: StructureShape
 
     CertificateManager: ServiceShape
   end

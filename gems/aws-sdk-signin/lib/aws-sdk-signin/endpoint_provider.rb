@@ -9,6 +9,54 @@ module Aws::Signin
     # @return [Smithy::Client::EndpointRules::Endpoint]
     # @raise [ArgumentError]
     def resolve(parameters)
+      if Smithy::Client::EndpointRules.set?(parameters.is_control_plane) && Smithy::Client::EndpointRules.boolean_equals?(parameters.is_control_plane, true) && Smithy::Client::EndpointRules.set?(parameters.region) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
+        if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws")
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://signin.#{parameters.region}.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "signin", "signingRegion" => "#{parameters.region}"}]})
+        end
+        if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-cn")
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://signin.#{parameters.region}.api.amazonwebservices.com.cn", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "signin", "signingRegion" => "#{parameters.region}"}]})
+        end
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://signin.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "signin", "signingRegion" => "#{parameters.region}"}]})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.is_o_auth_endpoint) && Smithy::Client::EndpointRules.boolean_equals?(parameters.is_o_auth_endpoint, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
+        raise ArgumentError, "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation."
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.is_o_auth_endpoint) && Smithy::Client::EndpointRules.boolean_equals?(parameters.is_o_auth_endpoint, true) && Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.oauth.signin.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "signin", "signingRegion" => "#{parameters.region}"}]})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.aws.amazon.com", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-cn")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.amazonaws.cn", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.amazonaws-us-gov.com", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.c2shome.ic.gov", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-b")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.sc2shome.sgov.gov", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-f")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.csphome.hci.ic.gov", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-e")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.csphome.adc-e.uk", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-eusc")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.amazonaws-eusc.eu", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && Smithy::Client::EndpointRules.string_equals?(parameters.region, "us-gov-west-1")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://signin-fips.amazonaws-us-gov.com", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region)) && Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov")
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin-fips.amazonaws-us-gov.com", headers: {}, properties: {})
+      end
+      if Smithy::Client::EndpointRules.set?(parameters.region) && Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.region}.signin.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+      end
       if Smithy::Client::EndpointRules.set?(parameters.endpoint)
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
           raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"

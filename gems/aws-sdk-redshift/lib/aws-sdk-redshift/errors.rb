@@ -118,9 +118,12 @@ module Aws::Redshift
   # * {NumberOfNodesPerClusterLimitExceededFault}
   # * {NumberOfNodesQuotaExceededFault}
   # * {PartnerNotFoundFault}
+  # * {Qev2IdcApplicationAlreadyExistsFault}
+  # * {Qev2IdcApplicationNotExistsFault}
   # * {RedshiftIdcApplicationAlreadyExistsFault}
   # * {RedshiftIdcApplicationNotExistsFault}
   # * {RedshiftIdcApplicationQuotaExceededFault}
+  # * {RedshiftInvalidParameterFault}
   # * {ReservedNodeAlreadyExistsFault}
   # * {ReservedNodeAlreadyMigratedFault}
   # * {ReservedNodeExchangeNotFoundFault}
@@ -386,8 +389,8 @@ module Aws::Redshift
     end
 
     # <p>The request would result in the user exceeding the allowed number of cluster
-    #             parameter groups. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             parameter groups.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class ClusterParameterGroupQuotaExceededFault < Smithy::Client::ServiceError
@@ -403,8 +406,8 @@ module Aws::Redshift
     end
 
     # <p>The request would exceed the allowed number of cluster instances for this account.
-    #             
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class ClusterQuotaExceededFault < Smithy::Client::ServiceError
@@ -447,8 +450,8 @@ module Aws::Redshift
     end
 
     # <p>The request would result in the user exceeding the allowed number of cluster
-    #             security groups. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             security groups.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class ClusterSecurityGroupQuotaExceededFault < Smithy::Client::ServiceError
@@ -533,8 +536,8 @@ module Aws::Redshift
     end
 
     # <p>The request would result in user exceeding the allowed number of cluster subnet
-    #             groups. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             groups.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class ClusterSubnetGroupQuotaExceededFault < Smithy::Client::ServiceError
@@ -550,8 +553,8 @@ module Aws::Redshift
     end
 
     # <p>The request would result in user exceeding the allowed number of subnets in a
-    #             cluster subnet groups. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             cluster subnet groups.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class ClusterSubnetQuotaExceededFault < Smithy::Client::ServiceError
@@ -752,8 +755,8 @@ module Aws::Redshift
     end
 
     # <p>The request would exceed the allowed number of event subscriptions for this
-    #             account. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #             account.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class EventSubscriptionQuotaExceededFault < Smithy::Client::ServiceError
@@ -796,8 +799,8 @@ module Aws::Redshift
       end
     end
 
-    # <p>The quota for HSM client certificates has been reached. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    # <p>The quota for HSM client certificates has been reached.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class HsmClientCertificateQuotaExceededFault < Smithy::Client::ServiceError
@@ -839,8 +842,8 @@ module Aws::Redshift
       end
     end
 
-    # <p>The quota for HSM configurations has been reached. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    # <p>The quota for HSM configurations has been reached.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class HsmConfigurationQuotaExceededFault < Smithy::Client::ServiceError
@@ -1003,7 +1006,7 @@ module Aws::Redshift
       end
     end
 
-    # <p>The authentication profile request is not valid. The profile name can't be null or empty. 
+    # <p>The authentication profile request is not valid. The profile name can't be null or empty.
     #             The authentication profile API operation must be available in the Amazon Web Services Region.</p>
     class InvalidAuthenticationProfileRequestFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -1463,8 +1466,8 @@ module Aws::Redshift
     end
 
     # <p>The operation would exceed the number of nodes allotted to the account.
-    #             
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    #
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class NumberOfNodesQuotaExceededFault < Smithy::Client::ServiceError
@@ -1483,6 +1486,32 @@ module Aws::Redshift
     class PartnerNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::PartnerNotFoundFault] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The Amazon Redshift Query Editor (QEV2) IAM Identity Center application already exists. Use a different application name or describe existing applications to find the ARN.</p>
+    class Qev2IdcApplicationAlreadyExistsFault < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Redshift::Types::Qev2IdcApplicationAlreadyExistsFault] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified Amazon Redshift Query Editor (QEV2) IAM Identity Center application doesn't exist. Verify that the application ARN is correct and that the application exists in this Region.</p>
+    class Qev2IdcApplicationNotExistsFault < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Redshift::Types::Qev2IdcApplicationNotExistsFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -1522,6 +1551,22 @@ module Aws::Redshift
     class RedshiftIdcApplicationQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Redshift::Types::RedshiftIdcApplicationQuotaExceededFault] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request contains one or more invalid parameters.
+    #             This error occurs when required parameters are missing,
+    #             parameter values are outside acceptable ranges,
+    #             or parameter formats are incorrect.</p>
+    class RedshiftInvalidParameterFault < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Redshift::Types::RedshiftInvalidParameterFault] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -1596,8 +1641,8 @@ module Aws::Redshift
       end
     end
 
-    # <p>Request would exceed the user's compute node quota. 
-    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a> 
+    # <p>Request would exceed the user's compute node quota.
+    # For information about increasing your quota, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Limits in Amazon Redshift</a>
     # in the <i>Amazon Redshift Cluster Management Guide</i>.
     # </p>
     class ReservedNodeQuotaExceededFault < Smithy::Client::ServiceError

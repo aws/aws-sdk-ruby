@@ -12,6 +12,7 @@ module Aws::RedshiftServerless
     Association = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#Association", name: "Association")
     AssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftserverless#AssociationList", name: "AssociationList")
     Capacity = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.redshiftserverless#Capacity", name: "Capacity", traits: {"smithy.api#default" => 0})
+    CatalogNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#CatalogNameString", name: "CatalogNameString", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$"})
     Charge = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.redshiftserverless#Charge", name: "Charge", traits: {"smithy.api#default" => 0})
     ConfigParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#ConfigParameter", name: "ConfigParameter")
     ConfigParameterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftserverless#ConfigParameterList", name: "ConfigParameterList")
@@ -61,6 +62,7 @@ module Aws::RedshiftServerless
     DeleteUsageLimitResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#DeleteUsageLimitResponse", name: "DeleteUsageLimitResponse")
     DeleteWorkgroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#DeleteWorkgroupRequest", name: "DeleteWorkgroupRequest")
     DeleteWorkgroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#DeleteWorkgroupResponse", name: "DeleteWorkgroupResponse")
+    DryRunException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#DryRunException", name: "DryRunException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     Duration = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.redshiftserverless#Duration", name: "Duration", traits: {"smithy.api#default" => 0})
     Endpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#Endpoint", name: "Endpoint")
     EndpointAccess = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#EndpointAccess", name: "EndpointAccess")
@@ -71,6 +73,8 @@ module Aws::RedshiftServerless
     GetCustomDomainAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#GetCustomDomainAssociationResponse", name: "GetCustomDomainAssociationResponse")
     GetEndpointAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#GetEndpointAccessRequest", name: "GetEndpointAccessRequest")
     GetEndpointAccessResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#GetEndpointAccessResponse", name: "GetEndpointAccessResponse")
+    GetIdentityCenterAuthTokenRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#GetIdentityCenterAuthTokenRequest", name: "GetIdentityCenterAuthTokenRequest")
+    GetIdentityCenterAuthTokenResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#GetIdentityCenterAuthTokenResponse", name: "GetIdentityCenterAuthTokenResponse", traits: {"smithy.api#sensitive" => {}})
     GetNamespaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#GetNamespaceRequest", name: "GetNamespaceRequest")
     GetNamespaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#GetNamespaceResponse", name: "GetNamespaceResponse")
     GetRecoveryPointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#GetRecoveryPointRequest", name: "GetRecoveryPointRequest")
@@ -101,6 +105,8 @@ module Aws::RedshiftServerless
     IpAddressType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#IpAddressType", name: "IpAddressType", traits: {"smithy.api#pattern" => "^(ipv4|dualstack)$"})
     Ipv6CidrBlockNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#Ipv6CidrBlockNotFoundException", name: "Ipv6CidrBlockNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     KmsKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#KmsKeyId", name: "KmsKeyId")
+    LakehouseIdcRegistration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#LakehouseIdcRegistration", name: "LakehouseIdcRegistration", traits: {"smithy.api#enum" => [{"name" => "ASSOCIATE", "value" => "Associate"}, {"name" => "DISASSOCIATE", "value" => "Disassociate"}]})
+    LakehouseRegistration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#LakehouseRegistration", name: "LakehouseRegistration", traits: {"smithy.api#enum" => [{"name" => "REGISTER", "value" => "Register"}, {"name" => "DEREGISTER", "value" => "Deregister"}]})
     ListCustomDomainAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#ListCustomDomainAssociationsRequest", name: "ListCustomDomainAssociationsRequest")
     ListCustomDomainAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#ListCustomDomainAssociationsResponse", name: "ListCustomDomainAssociationsResponse")
     ListEndpointAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#ListEndpointAccessRequest", name: "ListEndpointAccessRequest")
@@ -131,6 +137,7 @@ module Aws::RedshiftServerless
     ListUsageLimitsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#ListUsageLimitsResponse", name: "ListUsageLimitsResponse")
     ListWorkgroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#ListWorkgroupsRequest", name: "ListWorkgroupsRequest")
     ListWorkgroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#ListWorkgroupsResponse", name: "ListWorkgroupsResponse")
+    LogDestinationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#LogDestinationType", name: "LogDestinationType", traits: {"smithy.api#enum" => [{"name" => "S3TABLE", "value" => "s3table"}, {"name" => "CLOUDWATCH", "value" => "cloudwatch"}]})
     LogExport = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#LogExport", name: "LogExport", traits: {"smithy.api#enum" => [{"name" => "USER_ACTIVITY_LOG", "value" => "useractivitylog"}, {"name" => "USER_LOG", "value" => "userlog"}, {"name" => "CONNECTION_LOG", "value" => "connectionlog"}]})
     LogExportList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftserverless#LogExportList", name: "LogExportList", traits: {"smithy.api#length" => {"min" => 0, "max" => 16}})
     ManagedWorkgroupListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#ManagedWorkgroupListItem", name: "ManagedWorkgroupListItem")
@@ -173,6 +180,12 @@ module Aws::RedshiftServerless
     RestoreTableFromRecoveryPointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#RestoreTableFromRecoveryPointResponse", name: "RestoreTableFromRecoveryPointResponse")
     RestoreTableFromSnapshotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#RestoreTableFromSnapshotRequest", name: "RestoreTableFromSnapshotRequest")
     RestoreTableFromSnapshotResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#RestoreTableFromSnapshotResponse", name: "RestoreTableFromSnapshotResponse")
+    S3TableAction = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#S3TableAction", name: "S3TableAction", traits: {"smithy.api#enum" => [{"name" => "ENABLE", "value" => "Enable"}, {"name" => "DISABLE", "value" => "Disable"}]})
+    S3TableGranularity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#S3TableGranularity", name: "S3TableGranularity", traits: {"smithy.api#enum" => [{"name" => "NAMESPACE", "value" => "namespace"}, {"name" => "ACCOUNT", "value" => "account"}]})
+    S3TableLastIngestionTimeMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.redshiftserverless#S3TableLastIngestionTimeMap", name: "S3TableLastIngestionTimeMap")
+    S3TableName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#S3TableName", name: "S3TableName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(all|sys_[a-z0-9_]+)$"})
+    S3TableNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftserverless#S3TableNameList", name: "S3TableNameList", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    S3TablePublishStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#S3TablePublishStatus", name: "S3TablePublishStatus")
     Schedule = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.redshiftserverless#Schedule", name: "Schedule")
     ScheduledActionAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#ScheduledActionAssociation", name: "ScheduledActionAssociation")
     ScheduledActionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#ScheduledActionName", name: "ScheduledActionName", traits: {"smithy.api#length" => {"min" => 3, "max" => 60}, "smithy.api#pattern" => "^[a-z0-9-]+$"})
@@ -213,6 +226,8 @@ module Aws::RedshiftServerless
     UpdateCustomDomainAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#UpdateCustomDomainAssociationResponse", name: "UpdateCustomDomainAssociationResponse")
     UpdateEndpointAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#UpdateEndpointAccessRequest", name: "UpdateEndpointAccessRequest")
     UpdateEndpointAccessResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#UpdateEndpointAccessResponse", name: "UpdateEndpointAccessResponse")
+    UpdateLakehouseConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#UpdateLakehouseConfigurationRequest", name: "UpdateLakehouseConfigurationRequest")
+    UpdateLakehouseConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#UpdateLakehouseConfigurationResponse", name: "UpdateLakehouseConfigurationResponse")
     UpdateNamespaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#UpdateNamespaceRequest", name: "UpdateNamespaceRequest")
     UpdateNamespaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#UpdateNamespaceResponse", name: "UpdateNamespaceResponse")
     UpdateScheduledActionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#UpdateScheduledActionRequest", name: "UpdateScheduledActionRequest")
@@ -243,6 +258,7 @@ module Aws::RedshiftServerless
     Workgroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftserverless#Workgroup", name: "Workgroup")
     WorkgroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftserverless#WorkgroupList", name: "WorkgroupList")
     WorkgroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#WorkgroupName", name: "WorkgroupName", traits: {"smithy.api#length" => {"min" => 3, "max" => 64}, "smithy.api#pattern" => "^[a-z0-9-]+$"})
+    WorkgroupNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftserverless#WorkgroupNameList", name: "WorkgroupNameList", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     WorkgroupStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftserverless#WorkgroupStatus", name: "WorkgroupStatus", traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING"}, {"name" => "AVAILABLE", "value" => "AVAILABLE"}, {"name" => "MODIFYING", "value" => "MODIFYING"}, {"name" => "DELETING", "value" => "DELETING"}]})
 
     AccessDeniedException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "code"))
@@ -359,6 +375,7 @@ module Aws::RedshiftServerless
     CreateWorkgroupRequest.add_member(:price_performance_target, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceTarget, name: "pricePerformanceTarget"))
     CreateWorkgroupRequest.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "ipAddressType"))
     CreateWorkgroupRequest.add_member(:track_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackName, name: "trackName"))
+    CreateWorkgroupRequest.add_member(:extra_compute_for_automatic_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "extraComputeForAutomaticOptimization"))
     CreateWorkgroupRequest.type = Types::CreateWorkgroupRequest
     CreateWorkgroupResponse.add_member(:workgroup, ::Smithy::Schema::Shapes::MemberShape.new(target: Workgroup, name: "workgroup"))
     CreateWorkgroupResponse.type = Types::CreateWorkgroupResponse
@@ -399,6 +416,8 @@ module Aws::RedshiftServerless
     DeleteWorkgroupRequest.type = Types::DeleteWorkgroupRequest
     DeleteWorkgroupResponse.add_member(:workgroup, ::Smithy::Schema::Shapes::MemberShape.new(target: Workgroup, name: "workgroup", traits: {"smithy.api#required" => {}}))
     DeleteWorkgroupResponse.type = Types::DeleteWorkgroupResponse
+    DryRunException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    DryRunException.type = Types::DryRunException
     Endpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "address"))
     Endpoint.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "port"))
     Endpoint.add_member(:vpc_endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointList, name: "vpcEndpoints"))
@@ -437,6 +456,11 @@ module Aws::RedshiftServerless
     GetEndpointAccessRequest.type = Types::GetEndpointAccessRequest
     GetEndpointAccessResponse.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccess, name: "endpoint"))
     GetEndpointAccessResponse.type = Types::GetEndpointAccessResponse
+    GetIdentityCenterAuthTokenRequest.add_member(:workgroup_names, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupNameList, name: "workgroupNames", traits: {"smithy.api#required" => {}}))
+    GetIdentityCenterAuthTokenRequest.type = Types::GetIdentityCenterAuthTokenRequest
+    GetIdentityCenterAuthTokenResponse.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "token", traits: {"smithy.api#jsonName" => "Token"}))
+    GetIdentityCenterAuthTokenResponse.add_member(:expiration_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "expirationTime", traits: {"smithy.api#jsonName" => "ExpirationTime", "smithy.api#timestampFormat" => "date-time"}))
+    GetIdentityCenterAuthTokenResponse.type = Types::GetIdentityCenterAuthTokenResponse
     GetNamespaceRequest.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, name: "namespaceName", traits: {"smithy.api#required" => {}}))
     GetNamespaceRequest.type = Types::GetNamespaceRequest
     GetNamespaceResponse.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "namespace", traits: {"smithy.api#required" => {}}))
@@ -628,6 +652,9 @@ module Aws::RedshiftServerless
     Namespace.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "creationDate", traits: {"smithy.api#timestampFormat" => "date-time"}))
     Namespace.add_member(:admin_password_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "adminPasswordSecretArn"))
     Namespace.add_member(:admin_password_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "adminPasswordSecretKmsKeyId"))
+    Namespace.add_member(:lakehouse_registration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lakehouseRegistrationStatus"))
+    Namespace.add_member(:catalog_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "catalogArn"))
+    Namespace.add_member(:s3_table_publish_status, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TablePublishStatus, name: "s3TablePublishStatus"))
     Namespace.type = Types::Namespace
     NamespaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "member"))
     NetworkInterface.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "networkInterfaceId"))
@@ -680,6 +707,7 @@ module Aws::RedshiftServerless
     RestoreFromRecoveryPointRequest.add_member(:recovery_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recoveryPointId", traits: {"smithy.api#required" => {}}))
     RestoreFromRecoveryPointRequest.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, name: "namespaceName", traits: {"smithy.api#required" => {}}))
     RestoreFromRecoveryPointRequest.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupName, name: "workgroupName", traits: {"smithy.api#required" => {}}))
+    RestoreFromRecoveryPointRequest.add_member(:maintain_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "maintainIntegration"))
     RestoreFromRecoveryPointRequest.type = Types::RestoreFromRecoveryPointRequest
     RestoreFromRecoveryPointResponse.add_member(:recovery_point_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recoveryPointId"))
     RestoreFromRecoveryPointResponse.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "namespace"))
@@ -691,6 +719,7 @@ module Aws::RedshiftServerless
     RestoreFromSnapshotRequest.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ownerAccount"))
     RestoreFromSnapshotRequest.add_member(:manage_admin_password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "manageAdminPassword"))
     RestoreFromSnapshotRequest.add_member(:admin_password_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "adminPasswordSecretKmsKeyId"))
+    RestoreFromSnapshotRequest.add_member(:maintain_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "maintainIntegration"))
     RestoreFromSnapshotRequest.type = Types::RestoreFromSnapshotRequest
     RestoreFromSnapshotResponse.add_member(:snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "snapshotName"))
     RestoreFromSnapshotResponse.add_member(:owner_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ownerAccount"))
@@ -722,6 +751,15 @@ module Aws::RedshiftServerless
     RestoreTableFromSnapshotRequest.type = Types::RestoreTableFromSnapshotRequest
     RestoreTableFromSnapshotResponse.add_member(:table_restore_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TableRestoreStatus, name: "tableRestoreStatus"))
     RestoreTableFromSnapshotResponse.type = Types::RestoreTableFromSnapshotResponse
+    S3TableLastIngestionTimeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    S3TableLastIngestionTimeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    S3TableNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableName, name: "member"))
+    S3TablePublishStatus.add_member(:s3_tables, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableNameList, name: "s3Tables"))
+    S3TablePublishStatus.add_member(:s3_table_namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "s3TableNamespace"))
+    S3TablePublishStatus.add_member(:s3_table_granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableGranularity, name: "s3TableGranularity"))
+    S3TablePublishStatus.add_member(:enabled_all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabledAll"))
+    S3TablePublishStatus.add_member(:last_ingestion_times, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableLastIngestionTimeMap, name: "lastIngestionTimes"))
+    S3TablePublishStatus.type = Types::S3TablePublishStatus
     Schedule.add_member(:at, Types::Schedule::At, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "at"))
     Schedule.add_member(:cron, Types::Schedule::Cron, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cron"))
     Schedule.add_member(:unknown, Types::Schedule::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -837,6 +875,18 @@ module Aws::RedshiftServerless
     UpdateEndpointAccessRequest.type = Types::UpdateEndpointAccessRequest
     UpdateEndpointAccessResponse.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointAccess, name: "endpoint"))
     UpdateEndpointAccessResponse.type = Types::UpdateEndpointAccessResponse
+    UpdateLakehouseConfigurationRequest.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, name: "namespaceName", traits: {"smithy.api#required" => {}}))
+    UpdateLakehouseConfigurationRequest.add_member(:lakehouse_registration, ::Smithy::Schema::Shapes::MemberShape.new(target: LakehouseRegistration, name: "lakehouseRegistration"))
+    UpdateLakehouseConfigurationRequest.add_member(:catalog_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogNameString, name: "catalogName"))
+    UpdateLakehouseConfigurationRequest.add_member(:lakehouse_idc_registration, ::Smithy::Schema::Shapes::MemberShape.new(target: LakehouseIdcRegistration, name: "lakehouseIdcRegistration"))
+    UpdateLakehouseConfigurationRequest.add_member(:lakehouse_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lakehouseIdcApplicationArn"))
+    UpdateLakehouseConfigurationRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "dryRun"))
+    UpdateLakehouseConfigurationRequest.type = Types::UpdateLakehouseConfigurationRequest
+    UpdateLakehouseConfigurationResponse.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, name: "namespaceName"))
+    UpdateLakehouseConfigurationResponse.add_member(:lakehouse_idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lakehouseIdcApplicationArn"))
+    UpdateLakehouseConfigurationResponse.add_member(:lakehouse_registration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lakehouseRegistrationStatus"))
+    UpdateLakehouseConfigurationResponse.add_member(:catalog_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "catalogArn"))
+    UpdateLakehouseConfigurationResponse.type = Types::UpdateLakehouseConfigurationResponse
     UpdateNamespaceRequest.add_member(:namespace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NamespaceName, name: "namespaceName", traits: {"smithy.api#required" => {}}))
     UpdateNamespaceRequest.add_member(:admin_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: DbPassword, name: "adminUserPassword"))
     UpdateNamespaceRequest.add_member(:admin_username, ::Smithy::Schema::Shapes::MemberShape.new(target: DbUser, name: "adminUsername"))
@@ -846,6 +896,11 @@ module Aws::RedshiftServerless
     UpdateNamespaceRequest.add_member(:log_exports, ::Smithy::Schema::Shapes::MemberShape.new(target: LogExportList, name: "logExports"))
     UpdateNamespaceRequest.add_member(:manage_admin_password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "manageAdminPassword"))
     UpdateNamespaceRequest.add_member(:admin_password_secret_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "adminPasswordSecretKmsKeyId"))
+    UpdateNamespaceRequest.add_member(:log_destination_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDestinationType, name: "logDestinationType"))
+    UpdateNamespaceRequest.add_member(:s3_table_action, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableAction, name: "s3TableAction"))
+    UpdateNamespaceRequest.add_member(:s3_table_names, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableNameList, name: "s3TableNames"))
+    UpdateNamespaceRequest.add_member(:s3_table_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "s3TableKmsKeyId"))
+    UpdateNamespaceRequest.add_member(:s3_table_granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: S3TableGranularity, name: "s3TableGranularity"))
     UpdateNamespaceRequest.type = Types::UpdateNamespaceRequest
     UpdateNamespaceResponse.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: Namespace, name: "namespace", traits: {"smithy.api#required" => {}}))
     UpdateNamespaceResponse.type = Types::UpdateNamespaceResponse
@@ -892,6 +947,7 @@ module Aws::RedshiftServerless
     UpdateWorkgroupRequest.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "ipAddressType"))
     UpdateWorkgroupRequest.add_member(:price_performance_target, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceTarget, name: "pricePerformanceTarget"))
     UpdateWorkgroupRequest.add_member(:track_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackName, name: "trackName"))
+    UpdateWorkgroupRequest.add_member(:extra_compute_for_automatic_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "extraComputeForAutomaticOptimization"))
     UpdateWorkgroupRequest.type = Types::UpdateWorkgroupRequest
     UpdateWorkgroupResponse.add_member(:workgroup, ::Smithy::Schema::Shapes::MemberShape.new(target: Workgroup, name: "workgroup", traits: {"smithy.api#required" => {}}))
     UpdateWorkgroupResponse.type = Types::UpdateWorkgroupResponse
@@ -942,14 +998,16 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:price_performance_target, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceTarget, name: "pricePerformanceTarget"))
     Workgroup.add_member(:track_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackName, name: "trackName"))
     Workgroup.add_member(:pending_track_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackName, name: "pendingTrackName"))
+    Workgroup.add_member(:extra_compute_for_automatic_optimization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "extraComputeForAutomaticOptimization"))
     Workgroup.type = Types::Workgroup
     WorkgroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Workgroup, name: "member"))
+    WorkgroupNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupName, name: "member"))
 
     RedshiftServerless = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.redshiftserverless#RedshiftServerless"
       service.name = "RedshiftServerless"
       service.version = "2021-04-21"
-      service.traits = {"aws.api#service" => {"sdkId" => "Redshift Serverless", "arnNamespace" => "redshift-serverless"}, "aws.auth#sigv4" => {"name" => "redshift-serverless"}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Redshift Serverless"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Redshift Serverless", "arnNamespace" => "redshift-serverless"}, "aws.auth#sigv4" => {"name" => "redshift-serverless"}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Redshift Serverless", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-serverless-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-serverless-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-serverless.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-serverless.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:convert_recovery_point_to_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.redshiftserverless#ConvertRecoveryPointToSnapshot"
         operation.name = "ConvertRecoveryPointToSnapshot"
@@ -1211,6 +1269,20 @@ module Aws::RedshiftServerless
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_identity_center_auth_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.redshiftserverless#GetIdentityCenterAuthToken"
+        operation.name = "GetIdentityCenterAuthToken"
+        operation.input = GetIdentityCenterAuthTokenRequest
+        operation.output = GetIdentityCenterAuthTokenResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DryRunException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:get_namespace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.redshiftserverless#GetNamespace"
         operation.name = "GetNamespace"
@@ -1300,6 +1372,7 @@ module Aws::RedshiftServerless
         operation.output = GetTrackResponse
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
+        operation.errors << DryRunException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
@@ -1598,6 +1671,18 @@ module Aws::RedshiftServerless
         operation.output = UpdateEndpointAccessResponse
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_lakehouse_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.redshiftserverless#UpdateLakehouseConfiguration"
+        operation.name = "UpdateLakehouseConfiguration"
+        operation.input = UpdateLakehouseConfigurationRequest
+        operation.output = UpdateLakehouseConfigurationResponse
+        operation.errors << ConflictException
+        operation.errors << DryRunException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException

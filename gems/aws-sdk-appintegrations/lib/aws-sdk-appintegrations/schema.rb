@@ -12,16 +12,20 @@ module Aws::AppIntegrations
     ApplicationAssociationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appintegrations#ApplicationAssociationsList", name: "ApplicationAssociationsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     ApplicationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#ApplicationConfig", name: "ApplicationConfig")
     ApplicationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#ApplicationName", name: "ApplicationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9\\/\\._ \\-]+$"})
-    ApplicationNamespace = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#ApplicationNamespace", name: "ApplicationNamespace", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[a-zA-Z0-9\\/\\._\\-]+$"})
+    ApplicationNamespace = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#ApplicationNamespace", name: "ApplicationNamespace", traits: {"smithy.api#length" => {"min" => 1, "max" => 211}, "smithy.api#pattern" => "^[a-zA-Z0-9\\/\\._\\-]+$"})
     ApplicationSourceConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#ApplicationSourceConfig", name: "ApplicationSourceConfig")
     ApplicationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#ApplicationSummary", name: "ApplicationSummary")
     ApplicationTrustedSource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#ApplicationTrustedSource", name: "ApplicationTrustedSource", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^\\w+\\:\\/\\/.*$"})
+    ApplicationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appintegrations#ApplicationType", name: "ApplicationType")
     ApplicationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appintegrations#ApplicationsList", name: "ApplicationsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"})
     ArnOrUUID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#ArnOrUUID", name: "ArnOrUUID", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})(:[\\w\\$]+)?$"})
+    AuthConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#AuthConfig", name: "AuthConfig")
+    AuthType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appintegrations#AuthType", name: "AuthType")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.appintegrations#Boolean", name: "Boolean", traits: {"smithy.api#default" => false})
     ClientAssociationMetadata = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.appintegrations#ClientAssociationMetadata", name: "ClientAssociationMetadata")
     ClientId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#ClientId", name: "ClientId", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => ".*"})
+    ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ContactHandling = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#ContactHandling", name: "ContactHandling")
     ContactHandlingScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appintegrations#ContactHandlingScope", name: "ContactHandlingScope")
     CreateApplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#CreateApplicationRequest", name: "CreateApplicationRequest")
@@ -108,7 +112,7 @@ module Aws::AppIntegrations
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#ResourceQuotaExceededException", name: "ResourceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     ScheduleConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#ScheduleConfiguration", name: "ScheduleConfiguration")
-    Source = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#Source", name: "Source", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^aws\\.partner\\/.*$"})
+    Source = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#Source", name: "Source", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^(aws\\.(partner\\/.*|cases|cases\\-test))|Pipe\\s.[a-zA-Z0-9\\/\\._\\-]+$|app\\-integrations\\.webhooks\\/[a-zA-Z0-9\\-_.\\/]+$"})
     SourceURI = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appintegrations#SourceURI", name: "SourceURI", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}, "smithy.api#pattern" => "^(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+$)|(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+[\\w/!@#+=.-]+[\\w/!@#+=.,-]+$)$"})
     Subscription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appintegrations#Subscription", name: "Subscription")
     SubscriptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appintegrations#SubscriptionList", name: "SubscriptionList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
@@ -152,11 +156,24 @@ module Aws::AppIntegrations
     ApplicationSummary.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationNamespace, name: "Namespace"))
     ApplicationSummary.add_member(:created_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedTime"))
     ApplicationSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
-    ApplicationSummary.add_member(:is_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsService", traits: {"smithy.api#default" => false}))
+    ApplicationSummary.add_member(:is_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsService", traits: {"smithy.api#default" => false, "smithy.api#deprecated" => {"since" => "2025-12-01", "message" => "IsService has been deprecated in favor of ApplicationType"}}))
+    ApplicationSummary.add_member(:application_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationType, name: "ApplicationType"))
     ApplicationSummary.type = Types::ApplicationSummary
+    ApplicationType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    ApplicationType.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
+    ApplicationType.add_member(:mcp_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MCP_SERVER", traits: {"smithy.api#enumValue" => "MCP_SERVER"}))
+    ApplicationType.add_member(:a2_a_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "A2A_SERVER", traits: {"smithy.api#enumValue" => "A2A_SERVER"}))
     ApplicationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
+    AuthConfig.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "AuthType"))
+    AuthConfig.add_member(:credential_provider_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CredentialProviderIdentifier"))
+    AuthConfig.add_member(:audience_override, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "AudienceOverride"))
+    AuthConfig.type = Types::AuthConfig
+    AuthType.add_member(:api_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "API_KEY", traits: {"smithy.api#enumValue" => "API_KEY"}))
+    AuthType.add_member(:connect_jwt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECT_JWT", traits: {"smithy.api#enumValue" => "CONNECT_JWT"}))
     ClientAssociationMetadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "key"))
     ClientAssociationMetadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "value"))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
+    ConflictException.type = Types::ConflictException
     ContactHandling.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactHandlingScope, name: "Scope"))
     ContactHandling.type = Types::ContactHandling
     ContactHandlingScope.add_member(:cross_contacts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_CONTACTS", traits: {"smithy.api#enumValue" => "CROSS_CONTACTS"}))
@@ -170,10 +187,12 @@ module Aws::AppIntegrations
     CreateApplicationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateApplicationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     CreateApplicationRequest.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionList, name: "Permissions"))
-    CreateApplicationRequest.add_member(:is_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsService", traits: {"smithy.api#default" => false}))
+    CreateApplicationRequest.add_member(:is_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsService", traits: {"smithy.api#default" => false, "smithy.api#deprecated" => {"since" => "2025-12-01", "message" => "IsService has been deprecated in favor of ApplicationType"}}))
     CreateApplicationRequest.add_member(:initialization_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: InitializationTimeout, name: "InitializationTimeout"))
     CreateApplicationRequest.add_member(:application_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationConfig, name: "ApplicationConfig"))
     CreateApplicationRequest.add_member(:iframe_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IframeConfig, name: "IframeConfig"))
+    CreateApplicationRequest.add_member(:application_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationType, name: "ApplicationType"))
+    CreateApplicationRequest.add_member(:auth_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthConfig, name: "AuthConfig"))
     CreateApplicationRequest.type = Types::CreateApplicationRequest
     CreateApplicationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     CreateApplicationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id"))
@@ -234,6 +253,7 @@ module Aws::AppIntegrations
     DataIntegrationSummary.type = Types::DataIntegrationSummary
     DataIntegrationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataIntegrationSummary, name: "member"))
     DeleteApplicationRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnOrUUID, name: "Arn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteApplicationRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Force", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "force"}))
     DeleteApplicationRequest.type = Types::DeleteApplicationRequest
     DeleteApplicationResponse.type = Types::DeleteApplicationResponse
     DeleteDataIntegrationRequest.add_member(:data_integration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "DataIntegrationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -295,10 +315,12 @@ module Aws::AppIntegrations
     GetApplicationResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     GetApplicationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     GetApplicationResponse.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionList, name: "Permissions"))
-    GetApplicationResponse.add_member(:is_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsService", traits: {"smithy.api#default" => false}))
+    GetApplicationResponse.add_member(:is_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsService", traits: {"smithy.api#default" => false, "smithy.api#deprecated" => {"since" => "2025-12-01", "message" => "IsService has been deprecated in favor of ApplicationType"}}))
     GetApplicationResponse.add_member(:initialization_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: InitializationTimeout, name: "InitializationTimeout"))
     GetApplicationResponse.add_member(:application_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationConfig, name: "ApplicationConfig"))
     GetApplicationResponse.add_member(:iframe_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IframeConfig, name: "IframeConfig"))
+    GetApplicationResponse.add_member(:application_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationType, name: "ApplicationType"))
+    GetApplicationResponse.add_member(:auth_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthConfig, name: "AuthConfig"))
     GetApplicationResponse.type = Types::GetApplicationResponse
     GetDataIntegrationRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDataIntegrationRequest.type = Types::GetDataIntegrationRequest
@@ -342,6 +364,7 @@ module Aws::AppIntegrations
     ListApplicationAssociationsResponse.type = Types::ListApplicationAssociationsResponse
     ListApplicationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListApplicationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListApplicationsRequest.add_member(:application_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationType, name: "ApplicationType", traits: {"smithy.api#httpQuery" => "applicationType"}))
     ListApplicationsRequest.type = Types::ListApplicationsRequest
     ListApplicationsResponse.add_member(:applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationsList, name: "Applications"))
     ListApplicationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -421,10 +444,12 @@ module Aws::AppIntegrations
     UpdateApplicationRequest.add_member(:subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionList, name: "Subscriptions", traits: {"smithy.api#deprecated" => {"message" => "Subscriptions has been replaced with Permissions"}}))
     UpdateApplicationRequest.add_member(:publications, ::Smithy::Schema::Shapes::MemberShape.new(target: PublicationList, name: "Publications", traits: {"smithy.api#deprecated" => {"message" => "Publications has been replaced with Permissions"}}))
     UpdateApplicationRequest.add_member(:permissions, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionList, name: "Permissions"))
-    UpdateApplicationRequest.add_member(:is_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsService", traits: {"smithy.api#default" => nil}))
+    UpdateApplicationRequest.add_member(:is_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsService", traits: {"smithy.api#default" => nil, "smithy.api#deprecated" => {"since" => "2025-12-01", "message" => "IsService has been deprecated in favor of ApplicationType"}}))
     UpdateApplicationRequest.add_member(:initialization_timeout, ::Smithy::Schema::Shapes::MemberShape.new(target: InitializationTimeout, name: "InitializationTimeout"))
     UpdateApplicationRequest.add_member(:application_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationConfig, name: "ApplicationConfig"))
     UpdateApplicationRequest.add_member(:iframe_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IframeConfig, name: "IframeConfig"))
+    UpdateApplicationRequest.add_member(:application_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationType, name: "ApplicationType"))
+    UpdateApplicationRequest.add_member(:auth_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthConfig, name: "AuthConfig"))
     UpdateApplicationRequest.type = Types::UpdateApplicationRequest
     UpdateApplicationResponse.type = Types::UpdateApplicationResponse
     UpdateDataIntegrationAssociationRequest.add_member(:data_integration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "DataIntegrationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -446,7 +471,7 @@ module Aws::AppIntegrations
       service.id = "com.amazonaws.appintegrations#AmazonAppIntegrationService"
       service.name = "AmazonAppIntegrationService"
       service.version = "2020-07-29"
-      service.traits = {"aws.api#service" => {"sdkId" => "AppIntegrations", "arnNamespace" => "app-integrations", "cloudFormationName" => "AppIntegrations", "cloudTrailEventSource" => "app-integrations.amazonaws.com", "endpointPrefix" => "app-integrations"}, "aws.auth#sigv4" => {"name" => "app-integrations"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon AppIntegrations Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "AppIntegrations", "arnNamespace" => "app-integrations", "cloudFormationName" => "AppIntegrations", "cloudTrailEventSource" => "app-integrations.amazonaws.com", "endpointPrefix" => "app-integrations"}, "aws.auth#sigv4" => {"name" => "app-integrations"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon AppIntegrations Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://app-integrations-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://app-integrations-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://app-integrations.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://app-integrations.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appintegrations#CreateApplication"
         operation.name = "CreateApplication"
@@ -686,6 +711,7 @@ module Aws::AppIntegrations
         operation.input = UpdateApplicationRequest
         operation.output = UpdateApplicationResponse
         operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << InternalServiceError
         operation.errors << InvalidRequestException
         operation.errors << ResourceNotFoundException

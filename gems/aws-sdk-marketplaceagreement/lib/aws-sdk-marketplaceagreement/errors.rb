@@ -23,8 +23,10 @@ module Aws::MarketplaceAgreement
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -46,8 +48,43 @@ module Aws::MarketplaceAgreement
         @data[:request_id]
       end
 
+      # <p>Description of the error.</p>
       def message
         @data[:message]
+      end
+
+      # <p>The reason for the access denied exception.</p>
+      def reason
+        @data[:reason]
+      end
+    end
+
+    # <p>Request was denied due to a resource conflict.</p>
+    class ConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MarketplaceAgreement::Types::ConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The unique identifier for the error.</p>
+      def request_id
+        @data[:request_id]
+      end
+
+      # <p>Description of the error.</p>
+      def message
+        @data[:message]
+      end
+
+      # <p>The unique identifier of the resource involved in the conflict.</p>
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # <p>The type of the resource involved in the conflict.</p>
+      def resource_type
+        @data[:resource_type]
       end
     end
 
@@ -64,6 +101,7 @@ module Aws::MarketplaceAgreement
         @data[:request_id]
       end
 
+      # <p>Description of the error.</p>
       def message
         @data[:message]
       end
@@ -82,6 +120,7 @@ module Aws::MarketplaceAgreement
         @data[:request_id]
       end
 
+      # <p>Description of the error.</p>
       def message
         @data[:message]
       end
@@ -94,6 +133,45 @@ module Aws::MarketplaceAgreement
       # <p>The type of resource.</p>
       def resource_type
         @data[:resource_type]
+      end
+    end
+
+    # <p>Request exceeded the maximum allowed limit (quota) for a specific resource or API operation.</p>
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MarketplaceAgreement::Types::ServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The unique identifier for the error.</p>
+      def request_id
+        @data[:request_id]
+      end
+
+      # <p>Description of the error.</p>
+      def message
+        @data[:message]
+      end
+
+      # <p>The code of the quota that was exceeded.</p>
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # <p>The code of the service whose quota was exceeded.</p>
+      def service_code
+        @data[:service_code]
+      end
+
+      # <p>The type of the resource that exceeded the quota.</p>
+      def resource_type
+        @data[:resource_type]
+      end
+
+      # <p>The unique identifier of the resource that exceeded the quota.</p>
+      def resource_id
+        @data[:resource_id]
       end
     end
 
@@ -110,6 +188,7 @@ module Aws::MarketplaceAgreement
         @data[:request_id]
       end
 
+      # <p>Description of the error.</p>
       def message
         @data[:message]
       end
@@ -128,6 +207,7 @@ module Aws::MarketplaceAgreement
         @data[:request_id]
       end
 
+      # <p>Description of the error.</p>
       def message
         @data[:message]
       end

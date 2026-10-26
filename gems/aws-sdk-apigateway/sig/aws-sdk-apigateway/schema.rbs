@@ -8,6 +8,7 @@ module Aws::APIGateway
     ApiKeySourceType: EnumShape
     ApiKeysFormat: EnumShape
     ApiStage: StructureShape
+    ApiStatus: EnumShape
     Authorizer: StructureShape
     AuthorizerType: EnumShape
     BadRequestException: StructureShape
@@ -86,6 +87,7 @@ module Aws::APIGateway
     DomainNameAccessAssociation: StructureShape
     DomainNameStatus: EnumShape
     Double: FloatShape
+    EndpointAccessMode: EnumShape
     EndpointConfiguration: StructureShape
     EndpointType: EnumShape
     ExportResponse: StructureShape
@@ -272,6 +274,7 @@ module Aws::APIGateway
     RequestValidator: StructureShape
     Resource: StructureShape
     ResourceOwner: EnumShape
+    ResponseTransferMode: EnumShape
     RestApi: StructureShape
     RoutingMode: EnumShape
     SdkConfigurationProperty: StructureShape

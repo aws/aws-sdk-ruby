@@ -230,9 +230,18 @@ module Aws::Route53Domains
     #               </dd>
     #            </dl>
     #   @return [String]
+    # @!attribute price
+    #   <p>The price to register the domain name, in the currency that <code>Currency</code>
+    #   			specifies. If the domain has registry premium pricing, this price is different from the
+    #   			standard rate for the TLD that <code>ListPrices</code> returns. Use
+    #   				<code>PriceType</code> to determine which rate applies.</p>
+    #            <p>This element is returned only when <code>Availability</code> is
+    #   				<code>AVAILABLE</code>.</p>
+    #   @return [Types::PriceWithCurrency]
     class CheckDomainAvailabilityResponse < Struct.new(
       nil,
       :availability,
+      :price,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -285,21 +294,31 @@ module Aws::Route53Domains
     # @!attribute message
     #   <p>Provides an explanation for when a domain can't be transferred.</p>
     #   @return [String]
+    # @!attribute price
+    #   <p>The price to transfer the domain name to Route 53, in the currency that
+    #   				<code>Currency</code> specifies. If the domain has registry premium pricing, this
+    #   			price is different from the standard rate for the TLD that <code>ListPrices</code>
+    #   			returns. Use <code>PriceType</code> to determine which rate applies.</p>
+    #            <p>This element is returned only when Route 53 can determine whether the domain is
+    #   			transferable.</p>
+    #   @return [Types::PriceWithCurrency]
     class CheckDomainTransferabilityResponse < Struct.new(
       nil,
       :transferability,
       :message,
+      :price,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p> Customer's consent for the owner change request. </p>
+    # <p> The maximum amount that you agree to pay for an operation, and the
+    # 			currency for that amount. </p>
     # @!attribute max_price
-    #   <p> Maximum amount the customer agreed to accept. </p>
+    #   <p> The maximum amount that you agree to accept. </p>
     #   @return [Float]
     # @!attribute currency
-    #   <p> Currency for the <code>MaxPrice</code>. </p>
+    #   <p> The currency for the <code>MaxPrice</code>. </p>
     #   @return [String]
     class Consent < Struct.new(
       nil,
@@ -533,15 +552,18 @@ module Aws::Route53Domains
     #            <p>For more information about enabling DNSSEC signing, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec-enable-signing.html">Enabling DNSSEC signing and establishing a chain of trust</a>.</p>
     #   @return [Integer]
     # @!attribute flags
-    #   <p>Defines the type of key. It can be either a KSK (key-signing-key, value 257) or ZSK
-    #   			(zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK if your DNS
-    #   			provider isn't Route 53 and you don’t have KSK available.</p>
-    #            <p>If you have KSK and ZSK keys, always use KSK to create a delegations signer (DS)
-    #   			record. If you have ZSK keys only – use ZSK to create a DS record.</p>
+    #   <p>The DNSKEY flags that indicate the key type. This field is deprecated; the
+    #   			<code>DnssecKey</code> response no longer returns the flags.</p>
+    #   @deprecated
+    #     The DnssecKey response no longer returns the flags.
+    #     Since: 2026-10-01
     #   @return [Integer]
     # @!attribute public_key
-    #   <p>The base64-encoded public key part of the key pair that is passed to the registry
-    #   			.</p>
+    #   <p>The base64-encoded public key of the key pair. This field is deprecated; the
+    #   			<code>DnssecKey</code> response no longer returns the public key.</p>
+    #   @deprecated
+    #     The DnssecKey response no longer returns the public key.
+    #     Since: 2026-10-01
     #   @return [String]
     # @!attribute digest_type
     #   <p> The number of the DS digest algorithm according to an IANA assignment.</p>
@@ -625,9 +647,9 @@ module Aws::Route53Domains
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the domain price associated with a TLD.</p>
+    # <p>Information about the prices associated with a TLD or a domain name.</p>
     # @!attribute name
-    #   <p>The name of the TLD for which the prices apply.</p>
+    #   <p>The TLD or domain name that the prices apply to.</p>
     #   @return [String]
     # @!attribute registration_price
     #   <p>The price for domain registration with Route 53.</p>
@@ -662,7 +684,9 @@ module Aws::Route53Domains
     #   <p>A suggested domain name.</p>
     #   @return [String]
     # @!attribute availability
-    #   <p>Whether the domain name is available for registering.</p>
+    #   <p>Specifies whether the domain name is available for registering. This element is
+    #   			populated only if you specified <code>true</code> for <code>OnlyAvailable</code> in the
+    #   			request.</p>
     #            <note>
     #               <p>You can register only the domains that are designated as
     #   				<code>AVAILABLE</code>.</p>
@@ -713,10 +737,16 @@ module Aws::Route53Domains
     #               </dd>
     #            </dl>
     #   @return [String]
+    # @!attribute price
+    #   <p>The price to register the suggested domain name, in the currency that
+    #   			<code>Currency</code> specifies. This element is populated only if you specified
+    #   			<code>true</code> for <code>OnlyAvailable</code> in the request.</p>
+    #   @return [Types::PriceWithCurrency]
     class DomainSuggestion < Struct.new(
       nil,
       :domain_name,
       :availability,
+      :price,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -768,7 +798,16 @@ module Aws::Route53Domains
     #               </dd>
     #               <dt>DONT_KNOW</dt>
     #               <dd>
-    #                  <p>Reserved for future use.</p>
+    #                  <p>The TLD registry didn't reply with a definitive answer about whether the
+    #   						domain name can be transferred. Route 53 can return this response for a
+    #   						variety of reasons, for example, the registry is performing maintenance. Try
+    #   						again later.</p>
+    #               </dd>
+    #               <dt>PENDING</dt>
+    #               <dd>
+    #                  <p>The TLD registry didn't return a response in the expected amount of time.
+    #   						When the response is delayed, it usually takes just a few extra seconds. You
+    #   						can resubmit the request immediately.</p>
     #               </dd>
     #               <dt>DOMAIN_IN_OWN_ACCOUNT</dt>
     #               <dd>
@@ -857,9 +896,14 @@ module Aws::Route53Domains
     #   			the top-level domains that require additional parameters and the names of the parameters
     #   			that they require:</p>
     #            <dl>
-    #               <dt>.com.au and .net.au</dt>
+    #               <dt>.au, .com.au, and .net.au</dt>
     #               <dd>
     #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>AU_REGISTRANT_NAME</code>
+    #                        </p>
+    #                     </li>
     #                     <li>
     #                        <p>
     #                           <code>AU_ID_NUMBER</code>
@@ -882,6 +926,159 @@ module Aws::Route53Domains
     #                           <li>
     #                              <p>
     #                                 <code>TM</code> (Trademark number)</p>
+    #                           </li>
+    #                        </ul>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>AU_ELIGIBILITY_TYPE</code>
+    #                        </p>
+    #                        <p>Valid values include the following:</p>
+    #                        <ul>
+    #                           <li>
+    #                              <p>CHARITABLE_TRUST (Charitable trust)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>CHARITY (Charity)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>CHILD_CARE_CENTRE (Child care centre)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>CLUB (Club)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>COMMERCIAL_STATUTORY_BODY (Commercial statutory body)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>COMMONWEALTH_ENTITY (Commonwealth entity)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>COMPANY (Company)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>COMPANY_LIMITED_BY_GUARANTEE (Company limited by guarantee)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>EDUCATIONAL_INSTITUTION (Educational institution)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>GOVERNMENT_SCHOOL (Government school)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>HIGHER_EDUCATION_INSTITUTION (Higher education institution)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>INCORPORATED_ASSOCIATION (Incorporated association)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>INDIGENOUS_CORPORATION (Indigenous corporation)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>INDUSTRY_BODY (Industry body)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>INDUSTRY_ORGANISATION (Industry association)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>NATIONAL_BODY (National body)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>NON_DISTRIBUTING_COOPERATIVE (Non-distributing cooperative)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>NON_GOVERNMENT_SCHOOL (Non-government school)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>NON_PROFIT_ORGANISATION (Non-profit organisation)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>NON_TRADING_COOPERATIVE (Non-trading cooperative)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>NOT_FOR_PROFIT_COMMUNITY_GROUP (Not-for-profit community group)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>PARTNERSHIP (Partnership)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>PEAK_STATE_TERRITORY_BODY (Peak state/territory body)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>PENDING_TM_OWNER (Pending TM owner)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>POLITICAL_PARTY (Political party)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>PRESCHOOL (Pre-school)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>PUBLIC_PRIVATE_ANCILLARY_FUND (Public/private ancillary fund)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>REGISTERED_BUSINESS (Registered business)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>REGISTERED_ORGANISATION (Registered organisation)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>REGISTRABLE_BODY (Registrable body)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>RESEARCH_ORGANISATION (Research organisation)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>STATUTORY_BODY (Statutory body)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>TRADE_UNION (Trade union)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>TRADEMARK_OWNER (Trademark owner)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>TRADING_COOPERATIVE (Trading cooperative)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>TRAINING_ORGANISATION (Training organisation)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>TRUST (Trust)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>UNINCORPORATED_ASSOCIATION (Unincorporated association)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>EDUCATION_AND_CARE_SERVICES_CHILDCARE (Education and care services (child care))</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>GOVERNMENT_BODY (Government body)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>PROVIDER_OF_NON_ACCREDITED_TRAINING (Provider of non-accredited training)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>RELIGIOUS_CHURCH_GROUP (Religious/church group)</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>SOLE_TRADER (Sole trader)</p>
+    #                           </li>
+    #                        </ul>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>AU_POLICY_REASON</code>
+    #                        </p>
+    #                        <p>Valid values include the following:</p>
+    #                        <ul>
+    #                           <li>
+    #                              <p>
+    #                                 <code>POLICY_REASON_1</code>
+    #                              </p>
+    #                              <p>
+    #                                 <code>POLICY_REASON_2</code>
+    #                              </p>
     #                           </li>
     #                        </ul>
     #                     </li>
@@ -1845,8 +2042,7 @@ module Aws::Route53Domains
     #   			in Unix time format and Coordinated Universal time (UTC).</p>
     #   @return [Time]
     # @!attribute reseller
-    #   <p>Reseller of the domain. Domains registered or transferred using Route 53 domains will
-    #   			have <code>"Amazon"</code> as the reseller. </p>
+    #   <p>Reserved for future use.</p>
     #   @return [String]
     # @!attribute dns_sec
     #   <p>Deprecated.</p>
@@ -1908,6 +2104,31 @@ module Aws::Route53Domains
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The GetDomainPrices request includes the following element.</p>
+    # @!attribute domain_name
+    #   <p>The name of the domain that you want to get the prices for.</p>
+    #   @return [String]
+    class GetDomainPricesRequest < Struct.new(
+      nil,
+      :domain_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The GetDomainPrices response includes the following element.</p>
+    # @!attribute domain_price
+    #   <p>The registration, transfer, owner change, renewal, and restoration prices for
+    #   			the specified domain.</p>
+    #   @return [Types::DomainPrice]
+    class GetDomainPricesResponse < Struct.new(
+      nil,
+      :domain_price,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute domain_name
     #   <p>A domain name that you want to use as the basis for a list of possible domain names.
     #   			The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. For a
@@ -1938,20 +2159,29 @@ module Aws::Route53Domains
     #   @return [String]
     # @!attribute suggestion_count
     #   <p>The number of suggested domain names that you want Route 53 to return. Specify a value
-    #   			between 1 and 50.</p>
+    #   			between 1 and 50. Note that fewer than the requested number might be returned.</p>
     #   @return [Integer]
     # @!attribute only_available
     #   <p>If <code>OnlyAvailable</code> is <code>true</code>, Route 53 returns only domain names
     #   			that are available. If <code>OnlyAvailable</code> is <code>false</code>, Route 53
     #   			returns domain names without checking whether they're available to be registered. To
-    #   			determine whether the domain is available, you can call
-    #   				<code>checkDomainAvailability</code> for each suggestion.</p>
+    #   			determine whether the domain is available, call <code>checkDomainAvailability</code> for
+    #   			each suggestion.</p>
+    #            <p>If <code>OnlyAvailable</code> is <code>false</code>, Route 53 does not return pricing
+    #   			information for the suggested domain names.</p>
+    #   @return [Boolean]
+    # @!attribute only_standard_prices
+    #   <p>If <code>true</code>, Route 53 returns only domain names that are priced at the
+    #   			standard registration rate for their TLD. If <code>false</code>, Route 53 includes
+    #   			domain names with premium pricing in the suggestions list. The default is
+    #   			<code>true</code>.</p>
     #   @return [Boolean]
     class GetDomainSuggestionsRequest < Struct.new(
       nil,
       :domain_name,
       :suggestion_count,
       :only_available,
+      :only_standard_prices,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2369,10 +2599,17 @@ module Aws::Route53Domains
     # @!attribute currency
     #   <p>The currency specifier.</p>
     #   @return [String]
+    # @!attribute price_type
+    #   <p>Indicates whether the domain has standard or premium pricing. A value of
+    #   			<code>STANDARD</code> means the domain is priced at the regular rate for its TLD. A
+    #   			value of <code>REGISTRY_PREMIUM</code> means the domain has registry premium pricing,
+    #   			which may be different than the standard rate.</p>
+    #   @return [String]
     class PriceWithCurrency < Struct.new(
       nil,
       :price,
       :currency,
+      :price_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2509,6 +2746,12 @@ module Aws::Route53Domains
     #   				technical contacts.</p>
     #            </note>
     #   @return [Boolean]
+    # @!attribute consent
+    #   <p>Specifies the maximum price that you agree to pay to register the domain name. This element is
+    #   			required if the domain has registry premium pricing, and optional if the domain
+    #   			is priced at the standard rate for its TLD. If you include it and the registration
+    #   			price is more than <code>MaxPrice</code>, the request fails.</p>
+    #   @return [Types::Consent]
     class RegisterDomainRequest < Struct.new(
       nil,
       :domain_name,
@@ -2523,6 +2766,7 @@ module Aws::Route53Domains
       :privacy_protect_tech_contact,
       :billing_contact,
       :privacy_protect_billing_contact,
+      :consent,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2588,11 +2832,18 @@ module Aws::Route53Domains
     #   <p>The year when the registration for the domain is set to expire. This value must match
     #   			the current expiration date for the domain.</p>
     #   @return [Integer]
+    # @!attribute consent
+    #   <p>Specifies the maximum price that you agree to pay to renew the domain name. This element is
+    #   			required if the domain has registry premium pricing, and optional if the domain
+    #   			is priced at the standard rate for its TLD. If you include it and the renewal
+    #   			price is more than <code>MaxPrice</code>, the request fails.</p>
+    #   @return [Types::Consent]
     class RenewDomainRequest < Struct.new(
       nil,
       :domain_name,
       :duration_in_years,
       :current_expiry_year,
+      :consent,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2702,6 +2953,22 @@ module Aws::Route53Domains
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The top-level domain is currently undergoing maintenance and the request cannot be processed. Try again later.</p>
+    # @!attribute message
+    #   <p>The top-level domain is currently undergoing maintenance and the request cannot be processed. Try again later.</p>
+    #   @return [String]
+    # @!attribute tld
+    #   <p>The top-level domain that is currently undergoing maintenance.</p>
+    #   @return [String]
+    class TLDInMaintenance < Struct.new(
+      nil,
+      :message,
+      :tld,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The top-level domain does not support this operation.</p>
     # @!attribute message
     #   <p>The top-level domain does not support this operation.</p>
@@ -2763,8 +3030,8 @@ module Aws::Route53Domains
     #   <p>Reserved for future use.</p>
     #   @return [String]
     # @!attribute duration_in_years
-    #   <p>The number of years that you want to register the domain for. Domains are registered
-    #   			for a minimum of one year. The maximum period depends on the top-level domain.</p>
+    #   <p>Reserved for future use.</p>
+    #            <p>Currently, the effect of a domain transfer on the registration period varies by TLD. For information about how transferring a domain affects the expiration date, see the Transfer Term column in the pricing information at <a href="http://aws.amazon.com/route53/pricing/">Amazon Route 53 Pricing</a>.</p>
     #            <p>Default: 1</p>
     #   @return [Integer]
     # @!attribute nameservers
@@ -2842,6 +3109,12 @@ module Aws::Route53Domains
     #   				technical contacts.</p>
     #            </note>
     #   @return [Boolean]
+    # @!attribute consent
+    #   <p>Specifies the maximum price that you agree to pay to transfer the domain name to Route 53. This element is
+    #   			required if the domain has registry premium pricing, and optional if the domain
+    #   			is priced at the standard rate for its TLD. If you include it and the transfer
+    #   			price is more than <code>MaxPrice</code>, the request fails.</p>
+    #   @return [Types::Consent]
     class TransferDomainRequest < Struct.new(
       nil,
       :domain_name,
@@ -2858,6 +3131,7 @@ module Aws::Route53Domains
       :privacy_protect_tech_contact,
       :billing_contact,
       :privacy_protect_billing_contact,
+      :consent,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3015,7 +3289,7 @@ module Aws::Route53Domains
     #   <p>Provides detailed contact information.</p>
     #   @return [Types::ContactDetail]
     # @!attribute consent
-    #   <p> Customer's consent for the owner change request. Required if the domain is not free (consent price is more than $0.00).</p>
+    #   <p> The maximum amount that you agree to pay for the owner change. Required if the domain is not free (consent price is more than USD $0.00).</p>
     #   @return [Types::Consent]
     # @!attribute billing_contact
     #   <p>Provides detailed contact information.</p>

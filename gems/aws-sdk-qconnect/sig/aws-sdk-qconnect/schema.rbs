@@ -12,6 +12,7 @@ module Aws::QConnect
     AIAgentType: StringShape
     AIAgentVersionSummariesList: ListShape
     AIAgentVersionSummary: StructureShape
+    AIGuardrailAssessment: StructureShape
     AIGuardrailBlockedMessaging: StringShape
     AIGuardrailContentPolicyConfig: StructureShape
     AIGuardrailContextualGroundingPolicyConfig: StructureShape
@@ -26,25 +27,31 @@ module Aws::QConnect
     AIGuardrailWordPolicyConfig: StructureShape
     AIPromptAPIFormat: StringShape
     AIPromptData: StructureShape
+    AIPromptInferenceConfiguration: StructureShape
     AIPromptModelIdentifier: StringShape
     AIPromptSummary: StructureShape
     AIPromptSummaryList: ListShape
     AIPromptTemplateConfiguration: UnionShape
     AIPromptTemplateType: StringShape
     AIPromptType: StringShape
+    AIPromptTypeList: ListShape
     AIPromptVersionSummariesList: ListShape
     AIPromptVersionSummary: StructureShape
     AccessDeniedException: StructureShape
+    AccessRoleArn: StringShape
     ActivateMessageTemplateRequest: StructureShape
     ActivateMessageTemplateResponse: StructureShape
     AgentAttributes: StructureShape
+    AgentTarget: UnionShape
     AmazonConnectGuideAssociationData: StructureShape
     AndConditions: ListShape
+    Annotation: StructureShape
     AnswerRecommendationAIAgentConfiguration: StructureShape
     AppIntegrationsConfiguration: StructureShape
     Arn: StringShape
     ArnWithQualifier: StringShape
     AssistantAssociationData: StructureShape
+    AssistantAssociationIdList: ListShape
     AssistantAssociationInputData: UnionShape
     AssistantAssociationOutputData: UnionShape
     AssistantAssociationSummary: StructureShape
@@ -63,14 +70,21 @@ module Aws::QConnect
     AssociationType: StringShape
     AttachmentFileName: StringShape
     BedrockFoundationModelConfigurationForParsing: StructureShape
+    BedrockKnowledgeBaseArn: StringShape
     BedrockModelArnForParsing: StringShape
+    CaseArn: StringShape
+    CaseSummarizationAIAgentConfiguration: StructureShape
+    CaseSummarizationChunkDataDetails: StructureShape
+    CaseSummarizationInputData: StructureShape
     Channel: StringShape
     ChannelSubtype: StringShape
     Channels: ListShape
     ChunkingConfiguration: StructureShape
     ChunkingStrategy: StringShape
+    Citation: StructureShape
     CitationSpan: StructureShape
     CitationSpanOffset: IntegerShape
+    Citations: ListShape
     ClientToken: StringShape
     Configuration: UnionShape
     ConflictException: StructureShape
@@ -131,6 +145,7 @@ module Aws::QConnect
     CreateQuickResponseResponse: StructureShape
     CreateSessionInput: StructureShape
     CreateSessionOutput: StructureShape
+    CrossRegionStatus: StringShape
     CustomAttributes: MapShape
     CustomerProfileAttributes: StructureShape
     DataDetails: UnionShape
@@ -139,6 +154,7 @@ module Aws::QConnect
     DataSummaryList: ListShape
     DeactivateMessageTemplateRequest: StructureShape
     DeactivateMessageTemplateResponse: StructureShape
+    DelegateAgentConfiguration: StructureShape
     DeleteAIAgentRequest: StructureShape
     DeleteAIAgentResponse: StructureShape
     DeleteAIAgentVersionRequest: StructureShape
@@ -186,10 +202,13 @@ module Aws::QConnect
     EmailResponseAIAgentConfiguration: StructureShape
     EmailResponseChunkDataDetails: StructureShape
     ExtendedMessageTemplateData: StructureShape
+    ExternalBedrockKnowledgeBaseConfig: StructureShape
     ExternalSource: StringShape
     ExternalSourceConfiguration: StructureShape
     FailureReason: ListShape
     Filter: StructureShape
+    FilterAttribute: StructureShape
+    FilterAttributeKey: StringShape
     FilterField: StringShape
     FilterList: ListShape
     FilterOperator: StringShape
@@ -233,6 +252,7 @@ module Aws::QConnect
     GroupingCriteria: StringShape
     GroupingValue: StringShape
     GroupingValues: ListShape
+    GuardrailAction: StringShape
     GuardrailContentFilterConfig: StructureShape
     GuardrailContentFilterType: StringShape
     GuardrailContentFiltersConfig: ListShape
@@ -247,12 +267,16 @@ module Aws::QConnect
     GuardrailPiiEntitiesConfig: ListShape
     GuardrailPiiEntityConfig: StructureShape
     GuardrailPiiEntityType: StringShape
+    GuardrailPolicyResult: StructureShape
+    GuardrailPolicyResultList: ListShape
+    GuardrailPolicyType: StringShape
     GuardrailRegexConfig: StructureShape
     GuardrailRegexDescription: StringShape
     GuardrailRegexName: StringShape
     GuardrailRegexPattern: StringShape
     GuardrailRegexesConfig: ListShape
     GuardrailSensitiveInformationAction: StringShape
+    GuardrailSource: StringShape
     GuardrailTopicConfig: StructureShape
     GuardrailTopicDefinition: StringShape
     GuardrailTopicExample: StringShape
@@ -263,6 +287,7 @@ module Aws::QConnect
     GuardrailWordConfig: StructureShape
     GuardrailWordText: StringShape
     GuardrailWordsConfig: ListShape
+    HandoffAgentConfiguration: StructureShape
     Headers: MapShape
     HierarchicalChunkingConfiguration: StructureShape
     HierarchicalChunkingLevelConfiguration: StructureShape
@@ -277,6 +302,9 @@ module Aws::QConnect
     ImportJobType: StringShape
     IntentDetectedDataDetails: StructureShape
     IntentInputData: StructureShape
+    InteractionMode: StringShape
+    JSONDocument: DocumentShape
+    JSONDocumentList: ListShape
     KnowledgeBaseAssociationConfigurationData: StructureShape
     KnowledgeBaseAssociationData: StructureShape
     KnowledgeBaseData: StructureShape
@@ -285,6 +313,7 @@ module Aws::QConnect
     KnowledgeBaseStatus: StringShape
     KnowledgeBaseSummary: StructureShape
     KnowledgeBaseType: StringShape
+    KnowledgeSource: UnionShape
     LanguageCode: StringShape
     ListAIAgentVersionsRequest: StructureShape
     ListAIAgentVersionsResponse: StructureShape
@@ -316,18 +345,25 @@ module Aws::QConnect
     ListMessageTemplatesResponse: StructureShape
     ListMessagesRequest: StructureShape
     ListMessagesResponse: StructureShape
+    ListModelsRequest: StructureShape
+    ListModelsResponse: StructureShape
     ListQuickResponsesRequest: StructureShape
     ListQuickResponsesResponse: StructureShape
+    ListSpansRequest: StructureShape
+    ListSpansResponse: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
     LlmModelId: StringShape
     ManagedSourceConfiguration: UnionShape
     ManualSearchAIAgentConfiguration: StructureShape
     MaxResults: IntegerShape
+    MaxTokensToSample: IntegerShape
     MessageConfiguration: StructureShape
     MessageData: UnionShape
+    MessageFilterType: StringShape
     MessageInput: StructureShape
     MessageList: ListShape
+    MessageMetadata: MapShape
     MessageOutput: StructureShape
     MessageTemplateAttachment: StructureShape
     MessageTemplateAttachmentList: ListShape
@@ -355,16 +391,30 @@ module Aws::QConnect
     MessageTemplateSearchExpression: StructureShape
     MessageTemplateSearchResultData: StructureShape
     MessageTemplateSearchResultsList: ListShape
+    MessageTemplateSourceConfiguration: UnionShape
+    MessageTemplateSourceConfigurationSummary: UnionShape
     MessageTemplateSummary: StructureShape
     MessageTemplateSummaryList: ListShape
     MessageTemplateVersionSummary: StructureShape
     MessageTemplateVersionSummaryList: ListShape
     MessageType: StringShape
+    ModelDisplayName: StringShape
+    ModelId: StringShape
+    ModelLifecycle: StringShape
+    ModelSummary: StructureShape
+    ModelSummaryList: ListShape
+    MultiAgentConfiguration: UnionShape
+    MultiAgentConfigurationList: ListShape
+    MultiAgentExampleList: ListShape
+    MultiAgentInstruction: StructureShape
     Name: StringShape
     NextToken: StringShape
     NonEmptySensitiveString: StringShape
     NonEmptyString: StringShape
     NonEmptyUnlimitedString: StringShape
+    NoteTakingAIAgentConfiguration: StructureShape
+    NotesChunkDataDetails: StructureShape
+    NotesDataDetails: StructureShape
     NotifyRecommendationsReceivedError: StructureShape
     NotifyRecommendationsReceivedErrorList: ListShape
     NotifyRecommendationsReceivedErrorMessage: StringShape
@@ -373,6 +423,9 @@ module Aws::QConnect
     ObjectFieldsList: ListShape
     OrCondition: UnionShape
     OrConditions: ListShape
+    OrchestrationAIAgentConfiguration: StructureShape
+    OrchestratorConfigurationEntry: StructureShape
+    OrchestratorConfigurationList: ListShape
     Order: StringShape
     Origin: StringShape
     ParsingConfiguration: StructureShape
@@ -382,6 +435,14 @@ module Aws::QConnect
     Participant: StringShape
     PreconditionFailedException: StructureShape
     Priority: StringShape
+    ProactiveRecommendationDataDetails: StructureShape
+    Probability: FloatShape
+    PushADMMessageTemplateContent: StructureShape
+    PushAPNSMessageTemplateContent: StructureShape
+    PushBaiduMessageTemplateContent: StructureShape
+    PushFCMMessageTemplateContent: StructureShape
+    PushMessageAction: StringShape
+    PushMessageTemplateContent: StructureShape
     PutFeedbackRequest: StructureShape
     PutFeedbackResponse: StructureShape
     QueryAssistantInput: StructureShape
@@ -447,6 +508,17 @@ module Aws::QConnect
     RequestTimeoutException: StructureShape
     ResourceNotFoundException: StructureShape
     ResultData: StructureShape
+    RetrievalConfiguration: StructureShape
+    RetrievalFilterConfiguration: UnionShape
+    RetrievalFilterList: ListShape
+    RetrieveError: StructureShape
+    RetrieveErrorCode: StringShape
+    RetrieveErrorList: ListShape
+    RetrieveRequest: StructureShape
+    RetrieveResponse: StructureShape
+    RetrieveResult: StructureShape
+    RetrieveResultList: ListShape
+    ReturnReason: StringShape
     RuntimeSessionData: StructureShape
     RuntimeSessionDataList: ListShape
     RuntimeSessionDataValue: UnionShape
@@ -481,11 +553,32 @@ module Aws::QConnect
     SourceConfiguration: UnionShape
     SourceContentDataDetails: StructureShape
     SourceContentType: StringShape
+    Span: StructureShape
+    SpanAttributes: StructureShape
+    SpanCitation: StructureShape
+    SpanCitationList: ListShape
+    SpanFinishReasonList: ListShape
+    SpanGuardrailAssessment: StructureShape
+    SpanGuardrailAssessmentList: ListShape
+    SpanList: ListShape
+    SpanMessage: StructureShape
+    SpanMessageList: ListShape
+    SpanMessageValue: UnionShape
+    SpanMessageValueList: ListShape
+    SpanReasoningValue: StructureShape
+    SpanStatus: StringShape
+    SpanTextValue: StructureShape
+    SpanToolResultValue: StructureShape
+    SpanToolUseValue: StructureShape
+    SpanType: StringShape
     StartContentUploadInput: StructureShape
     StartContentUploadOutput: StructureShape
     StartImportJobRequest: StructureShape
     StartImportJobResponse: StructureShape
     Status: StringShape
+    SuggestedMessageDataDetails: StructureShape
+    SuggestedMessageReference: StructureShape
+    SuggestedMessagesList: ListShape
     SyncStatus: StringShape
     SystemAttributes: StructureShape
     SystemEndpointAttributes: StructureShape
@@ -505,7 +598,23 @@ module Aws::QConnect
     ThrottlingException: StructureShape
     TimeToLive: IntegerShape
     TooManyTagsException: StructureShape
+    ToolConfiguration: StructureShape
+    ToolConfigurationList: ListShape
+    ToolExampleList: ListShape
+    ToolInstruction: StructureShape
+    ToolOutputConfiguration: StructureShape
+    ToolOutputFilter: StructureShape
+    ToolOutputFilterList: ListShape
+    ToolOverrideConstantInputValue: StructureShape
+    ToolOverrideInputValue: StructureShape
+    ToolOverrideInputValueConfiguration: UnionShape
+    ToolOverrideInputValueList: ListShape
+    ToolOverrideInputValueType: StringShape
+    ToolType: StringShape
+    ToolUseResultData: StructureShape
+    TopK: IntegerShape
     UnauthorizedException: StructureShape
+    UnprocessableContentException: StructureShape
     UntagResourceInput: StructureShape
     UntagResourceOutput: StructureShape
     UpdateAIAgentRequest: StructureShape
@@ -536,6 +645,7 @@ module Aws::QConnect
     UrlConfiguration: StructureShape
     UrlFilterList: ListShape
     UrlFilterPattern: StringShape
+    UserInteractionConfiguration: StructureShape
     Uuid: StringShape
     UuidOrArn: StringShape
     UuidOrArnOrEitherWithQualifier: StringShape
@@ -549,6 +659,17 @@ module Aws::QConnect
     WebCrawlerLimits: StructureShape
     WebScopeType: StringShape
     WebUrl: StringShape
+    WhatsAppBusinessAccountId: StringShape
+    WhatsAppMessageTemplateComponent: StringShape
+    WhatsAppMessageTemplateComponents: ListShape
+    WhatsAppMessageTemplateContent: StructureShape
+    WhatsAppMessageTemplateContentData: StringShape
+    WhatsAppMessageTemplateId: StringShape
+    WhatsAppMessageTemplateLanguage: StringShape
+    WhatsAppMessageTemplateName: StringShape
+    WhatsAppMessageTemplateSourceConfiguration: StructureShape
+    WhatsAppMessageTemplateSourceConfigurationSummary: StructureShape
+    WhatsAppSourceConfigurationStatus: StringShape
 
     WisdomService: ServiceShape
   end

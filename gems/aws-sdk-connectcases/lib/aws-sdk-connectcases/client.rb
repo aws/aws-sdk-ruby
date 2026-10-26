@@ -144,18 +144,18 @@ module Aws::ConnectCases
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -214,7 +214,7 @@ module Aws::ConnectCases
     # @option params [String] :domain_id
     #   <p>Unique identifier of a Cases domain.</p>
     # @option params [Array<Types::CaseRuleIdentifier>] :case_rules
-    #   <p>List of case rule identifiers.</p>
+    #   <p>A list of case rule identifiers.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_id: "DomainId", # required
@@ -269,6 +269,72 @@ module Aws::ConnectCases
     #                   }
     #                 },
     #                 result: false, # required
+    #               },
+    #               and_all: {
+    #                 conditions: { # required
+    #                   # recursive BooleanConditionList
+    #                 }
+    #               },
+    #               or_all: {
+    #                 conditions: { # required
+    #                   # recursive BooleanConditionList
+    #                 }
+    #               }
+    #             }]
+    #           },
+    #           field_options: {
+    #             parent_field_id: "FieldId",
+    #             child_field_id: "FieldId",
+    #             parent_child_field_options_mappings: [ # required
+    #               {
+    #                 parent_field_option_value: "ParentChildFieldOptionValue", # required
+    #                 child_field_option_values: ["ParentChildFieldOptionValue"], # required
+    #               }
+    #             ]
+    #           },
+    #           hidden: {
+    #             default_value: false, # required
+    #             conditions: [{ # required
+    #               # One of:
+    #               equal_to: {
+    #                 operand_one: { # required
+    #                   # One of:
+    #                   field_id: "FieldId"
+    #                 },
+    #                 operand_two: { # required
+    #                   # One of:
+    #                   string_value: "String",
+    #                   boolean_value: false,
+    #                   double_value: 1.0,
+    #                   empty_value: {
+    #                   }
+    #                 },
+    #                 result: false, # required
+    #               },
+    #               not_equal_to: {
+    #                 operand_one: { # required
+    #                   # One of:
+    #                   field_id: "FieldId"
+    #                 },
+    #                 operand_two: { # required
+    #                   # One of:
+    #                   string_value: "String",
+    #                   boolean_value: false,
+    #                   double_value: 1.0,
+    #                   empty_value: {
+    #                   }
+    #                 },
+    #                 result: false, # required
+    #               },
+    #               and_all: {
+    #                 conditions: { # required
+    #                   # recursive BooleanConditionList
+    #                 }
+    #               },
+    #               or_all: {
+    #                 conditions: { # required
+    #                   # recursive BooleanConditionList
+    #                 }
     #               }
     #             }]
     #           }
@@ -288,7 +354,8 @@ module Aws::ConnectCases
     #         error_code: "String", # required
     #         message: "String"
     #       }
-    #     ]
+    #     ],
+    #     unprocessed_case_rules: ["CaseRuleId"]
     #   }
     # @return [Types::BatchGetCaseRuleResponse]
     def batch_get_case_rule(params = {}, options = {})
@@ -329,7 +396,13 @@ module Aws::ConnectCases
     #         },
     #         deleted: false,
     #         created_time: Time.now,
-    #         last_modified_time: Time.now
+    #         last_modified_time: Time.now,
+    #         attributes: {
+    #           # One of:
+    #           text: {
+    #             is_multiline: false, # required
+    #           }
+    #         }
     #       }
     #     ],
     #     errors: [ # required
@@ -385,7 +458,7 @@ module Aws::ConnectCases
       request.send_request(options)
     end
 
-    # <note> <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html">connect:DescribeUser</a> permission on the User ARN resource that you provide</p> </note> <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>The following fields are required when creating a case:</p> <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>
+    # <note> <p>If you provide a value for <code>PerformedBy.UserArn</code> you must also have <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html">connect:DescribeUser</a> permission on the User ARN resource that you provide</p> </note> <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>When creating a case from a template that has tag propagation configurations, the specified tags are automatically applied to the case.</p> <p>The following fields are required when creating a case:</p> <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>
     # @param [Hash, Types::CreateCaseInput] params
     # @option params [String] :domain_id
     #   <p>The unique identifier of the Cases domain. </p>
@@ -397,6 +470,8 @@ module Aws::ConnectCases
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     # @option params [Types::UserUnion] :performed_by
     #   <p>Represents the entity that performed the action.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_id: "DomainId", # required
@@ -420,6 +495,9 @@ module Aws::ConnectCases
     #       # One of:
     #       user_arn: "UserArn",
     #       custom_entity: "CustomEntity"
+    #     },
+    #     tags: {
+    #       "MutableTagKey" => "TagValueString"
     #     }
     #   }
     #   options = {}
@@ -486,6 +564,72 @@ module Aws::ConnectCases
     #               }
     #             },
     #             result: false, # required
+    #           },
+    #           and_all: {
+    #             conditions: { # required
+    #               # recursive BooleanConditionList
+    #             }
+    #           },
+    #           or_all: {
+    #             conditions: { # required
+    #               # recursive BooleanConditionList
+    #             }
+    #           }
+    #         }]
+    #       },
+    #       field_options: {
+    #         parent_field_id: "FieldId",
+    #         child_field_id: "FieldId",
+    #         parent_child_field_options_mappings: [ # required
+    #           {
+    #             parent_field_option_value: "ParentChildFieldOptionValue", # required
+    #             child_field_option_values: ["ParentChildFieldOptionValue"], # required
+    #           }
+    #         ]
+    #       },
+    #       hidden: {
+    #         default_value: false, # required
+    #         conditions: [{ # required
+    #           # One of:
+    #           equal_to: {
+    #             operand_one: { # required
+    #               # One of:
+    #               field_id: "FieldId"
+    #             },
+    #             operand_two: { # required
+    #               # One of:
+    #               string_value: "String",
+    #               boolean_value: false,
+    #               double_value: 1.0,
+    #               empty_value: {
+    #               }
+    #             },
+    #             result: false, # required
+    #           },
+    #           not_equal_to: {
+    #             operand_one: { # required
+    #               # One of:
+    #               field_id: "FieldId"
+    #             },
+    #             operand_two: { # required
+    #               # One of:
+    #               string_value: "String",
+    #               boolean_value: false,
+    #               double_value: 1.0,
+    #               empty_value: {
+    #               }
+    #             },
+    #             result: false, # required
+    #           },
+    #           and_all: {
+    #             conditions: { # required
+    #               # recursive BooleanConditionList
+    #             }
+    #           },
+    #           or_all: {
+    #             conditions: { # required
+    #               # recursive BooleanConditionList
+    #             }
     #           }
     #         }]
     #       }
@@ -538,12 +682,20 @@ module Aws::ConnectCases
     #   <p>Defines the data type, some system constraints, and default display of the field.</p>
     # @option params [String] :description
     #   <p>The description of the field.</p>
+    # @option params [Types::FieldAttributes] :attributes
+    #   <p>Union of field attributes.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_id: "DomainId", # required
     #     name: "FieldName", # required
     #     type: "FieldType", # required
-    #     description: "FieldDescription"
+    #     description: "FieldDescription",
+    #     attributes: {
+    #       # One of:
+    #       text: {
+    #         is_multiline: false, # required
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.create_field(params, options)
@@ -617,7 +769,7 @@ module Aws::ConnectCases
       request.send_request(options)
     end
 
-    # <p>Creates a related item (comments, tasks, and contacts) and associates it with a case.</p> <note> <ul> <li> <p>A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a <code>contactArn</code>). All Related Items have their own internal identifier, the <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and <code>contacts</code>.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code> you must also have <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p>The <code>type</code> field is reserved for internal use only.</p> </li> </ul> </note>
+    # <p>Creates a related item (comments, tasks, and contacts) and associates it with a case.</p> <p>There's a quota for the number of fields allowed in a Custom type related item. See <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas">Amazon Connect Cases quotas</a>.</p> <p> <b>Use cases</b> </p> <p>Following are examples of related items that you may want to associate with a case:</p> <ul> <li> <p>Related contacts, such as calls, chats, emails tasks</p> </li> <li> <p>Comments, for agent notes</p> </li> <li> <p>SLAs, to capture target resolution goals</p> </li> <li> <p>Cases, to capture related Amazon Connect Cases</p> </li> <li> <p>Files, such as policy documentation or customer-provided attachments</p> </li> <li> <p>Custom related items, which provide flexibility for you to define related items that such as bookings, orders, products, notices, and more</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>If you are associating a contact to a case by passing in <code>Contact</code> for a <code>type</code>, you must have <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeContact.html">DescribeContact</a> permission on the ARN of the contact that you provide in <code>content.contact.contactArn</code>.</p> </li> <li> <p>A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a <code>contactArn</code>). All Related Items have their own internal identifier, the <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and <code>contacts</code>.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code> you must also have <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p>The <code>type</code> field is reserved for internal use only.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and quotas</a>.</p>
     # @param [Hash, Types::CreateRelatedItemInput] params
     # @option params [String] :domain_id
     #   <p>The unique identifier of the Cases domain. </p>
@@ -720,6 +872,8 @@ module Aws::ConnectCases
     #   <p>The status of the template.</p>
     # @option params [Array<Types::TemplateRule>] :rules
     #   <p>A list of case rules (also known as <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">case field conditions</a>) on a template. </p>
+    # @option params [Array<Types::TagPropagationConfiguration>] :tag_propagation_configurations
+    #   <p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_id: "DomainId", # required
@@ -737,7 +891,15 @@ module Aws::ConnectCases
     #     rules: [
     #       {
     #         case_rule_id: "CaseRuleId", # required
-    #         field_id: "FieldId", # required
+    #         field_id: "FieldId"
+    #       }
+    #     ],
+    #     tag_propagation_configurations: [
+    #       {
+    #         resource_type: "TagPropagationResourceType", # required
+    #         tag_map: { # required
+    #           "MutableTagKey" => "TagValueString"
+    #         }
     #       }
     #     ]
     #   }
@@ -818,7 +980,7 @@ module Aws::ConnectCases
       request.send_request(options)
     end
 
-    # <p>Deletes a field from a cases template. You can delete up to 100 fields per domain.</p> <p>After a field is deleted:</p> <ul> <li> <p>You can still retrieve the field by calling <code>BatchGetField</code>.</p> </li> <li> <p>You cannot update a deleted field by calling <code>UpdateField</code>; it throws a <code>ValidationException</code>.</p> </li> <li> <p>Deleted fields are not included in the <code>ListFields</code> response.</p> </li> <li> <p>Calling <code>CreateCase</code> with a deleted field throws a <code>ValidationException</code> denoting which field IDs in the request have been deleted.</p> </li> <li> <p>Calling <code>GetCase</code> with a deleted field ID returns the deleted field's value if one exists.</p> </li> <li> <p>Calling <code>UpdateCase</code> with a deleted field ID throws a <code>ValidationException</code> if the case does not already contain a value for the deleted field. Otherwise it succeeds, allowing you to update or remove (using <code>emptyValue: {}</code>) the field's value from the case.</p> </li> <li> <p> <code>GetTemplate</code> does not return field IDs for deleted fields.</p> </li> <li> <p> <code>GetLayout</code> does not return field IDs for deleted fields.</p> </li> <li> <p>Calling <code>SearchCases</code> with the deleted field ID as a filter returns any cases that have a value for the deleted field that matches the filter criteria.</p> </li> <li> <p>Calling <code>SearchCases</code> with a <code>searchTerm</code> value that matches a deleted field's value on a case returns the case in the response.</p> </li> <li> <p>Calling <code>BatchPutFieldOptions</code> with a deleted field ID throw a <code>ValidationException</code>.</p> </li> <li> <p>Calling <code>GetCaseEventConfiguration</code> does not return field IDs for deleted fields.</p> </li> </ul>
+    # <p>Deletes a field from a cases template.</p> <p>After a field is deleted:</p> <ul> <li> <p>You can still retrieve the field by calling <code>BatchGetField</code>.</p> </li> <li> <p>You cannot update a deleted field by calling <code>UpdateField</code>; it throws a <code>ValidationException</code>.</p> </li> <li> <p>Deleted fields are not included in the <code>ListFields</code> response.</p> </li> <li> <p>Calling <code>CreateCase</code> with a deleted field throws a <code>ValidationException</code> denoting which field identifiers in the request have been deleted.</p> </li> <li> <p>Calling <code>GetCase</code> with a deleted field identifier returns the deleted field's value if one exists.</p> </li> <li> <p>Calling <code>UpdateCase</code> with a deleted field ID throws a <code>ValidationException</code> if the case does not already contain a value for the deleted field. Otherwise it succeeds, allowing you to update or remove (using <code>emptyValue: {}</code>) the field's value from the case.</p> </li> <li> <p> <code>GetTemplate</code> does not return field IDs for deleted fields.</p> </li> <li> <p> <code>GetLayout</code> does not return field IDs for deleted fields.</p> </li> <li> <p>Calling <code>SearchCases</code> with the deleted field ID as a filter returns any cases that have a value for the deleted field that matches the filter criteria.</p> </li> <li> <p>Calling <code>SearchCases</code> with a <code>searchTerm</code> value that matches a deleted field's value on a case returns the case in the response.</p> </li> <li> <p>Calling <code>BatchPutFieldOptions</code> with a deleted field ID throw a <code>ValidationException</code>.</p> </li> <li> <p>Calling <code>GetCaseEventConfiguration</code> does not return field IDs for deleted fields.</p> </li> </ul>
     # @param [Hash, Types::DeleteFieldRequest] params
     # @option params [String] :domain_id
     #   <p>The unique identifier of the Cases domain.</p>
@@ -1194,7 +1356,15 @@ module Aws::ConnectCases
     #     rules: [
     #       {
     #         case_rule_id: "CaseRuleId", # required
-    #         field_id: "FieldId", # required
+    #         field_id: "FieldId"
+    #       }
+    #     ],
+    #     tag_propagation_configurations: [
+    #       {
+    #         resource_type: "TagPropagationResourceType", # required
+    #         tag_map: { # required
+    #           "MutableTagKey" => "TagValueString"
+    #         }
     #       }
     #     ]
     #   }
@@ -1373,6 +1543,12 @@ module Aws::ConnectCases
     #         name: "FieldName", # required
     #         type: "FieldType", # required
     #         namespace: "FieldNamespace", # required
+    #         attributes: {
+    #           # One of:
+    #           text: {
+    #             is_multiline: false, # required
+    #           }
+    #         }
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1468,6 +1644,14 @@ module Aws::ConnectCases
     #         template_arn: "TemplateArn", # required
     #         name: "TemplateName", # required
     #         status: "TemplateStatus", # required
+    #         tag_propagation_configurations: [
+    #           {
+    #             resource_type: "TagPropagationResourceType", # required
+    #             tag_map: { # required
+    #               "MutableTagKey" => "TagValueString"
+    #             }
+    #           }
+    #         ]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1514,7 +1698,7 @@ module Aws::ConnectCases
       request.send_request(options)
     end
 
-    # <p>Searches for related items across all cases within a domain. This is a global search operation that returns related items from multiple cases, unlike the case-specific <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItems.html">SearchRelatedItems</a> API.</p> <p> <b>Use cases</b> </p> <p>Following are common uses cases for this API:</p> <ul> <li> <p>Find cases with similar issues across the domain. For example, search for all cases containing comments about "product defect" to identify patterns and existing solutions.</p> </li> <li> <p>Locate all cases associated with specific contacts or orders. For example, find all cases linked to a contactArn to understand the complete customer journey. </p> </li> <li> <p>Monitor SLA compliance across cases. For example, search for all cases with "Active" SLA status to prioritize remediation efforts.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>This API returns case IDs, not complete case objects. To retrieve full case details, you must make additional calls to the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCase.html">GetCase</a> API for each returned case ID. </p> </li> <li> <p>This API searches across related items content, not case fields. Use the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchCases.html">SearchCases</a> API to search within case field values.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and quotas</a>.</p>
+    # <p>Searches for related items across all cases within a domain. This is a global search operation that returns related items from multiple cases, unlike the case-specific <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchRelatedItems.html">SearchRelatedItems</a> API.</p> <p> <b>Use cases</b> </p> <p>Following are common uses cases for this API:</p> <ul> <li> <p>Find cases with similar issues across the domain. For example, search for all cases containing comments about "product defect" to identify patterns and existing solutions.</p> </li> <li> <p>Locate all cases associated with specific contacts or orders. For example, find all cases linked to a contactArn to understand the complete customer journey. </p> </li> <li> <p>Monitor SLA compliance across cases. For example, search for all cases with "Active" SLA status to prioritize remediation efforts.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>This API returns case identifiers, not complete case objects. To retrieve full case details, you must make additional calls to the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCase.html">GetCase</a> API for each returned case ID. </p> </li> <li> <p>This API searches across related items content, not case fields. Use the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_SearchCases.html">SearchCases</a> API to search within case field values.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and quotas</a>.</p>
     # @param [Hash, Types::SearchAllRelatedItemsRequest] params
     # @option params [String] :domain_id
     #   <p>The unique identifier of the Cases domain. </p>
@@ -1830,6 +2014,13 @@ module Aws::ConnectCases
     #       not: {
     #         # recursive CaseFilter
     #       },
+    #       tag: {
+    #         # One of:
+    #         equal_to: {
+    #           key: "SearchTagKey",
+    #           value: "TagValueString"
+    #         }
+    #       },
     #       and_all: [{
     #         # recursive CaseFilter
     #       }],
@@ -1877,7 +2068,8 @@ module Aws::ConnectCases
     #           "String" => "String"
     #         }
     #       }
-    #     ]
+    #     ],
+    #     total_count: 1
     #   }
     # @return [Types::SearchCasesOutput]
     def search_cases(params = {}, options = {})
@@ -2237,6 +2429,72 @@ module Aws::ConnectCases
     #               }
     #             },
     #             result: false, # required
+    #           },
+    #           and_all: {
+    #             conditions: { # required
+    #               # recursive BooleanConditionList
+    #             }
+    #           },
+    #           or_all: {
+    #             conditions: { # required
+    #               # recursive BooleanConditionList
+    #             }
+    #           }
+    #         }]
+    #       },
+    #       field_options: {
+    #         parent_field_id: "FieldId",
+    #         child_field_id: "FieldId",
+    #         parent_child_field_options_mappings: [ # required
+    #           {
+    #             parent_field_option_value: "ParentChildFieldOptionValue", # required
+    #             child_field_option_values: ["ParentChildFieldOptionValue"], # required
+    #           }
+    #         ]
+    #       },
+    #       hidden: {
+    #         default_value: false, # required
+    #         conditions: [{ # required
+    #           # One of:
+    #           equal_to: {
+    #             operand_one: { # required
+    #               # One of:
+    #               field_id: "FieldId"
+    #             },
+    #             operand_two: { # required
+    #               # One of:
+    #               string_value: "String",
+    #               boolean_value: false,
+    #               double_value: 1.0,
+    #               empty_value: {
+    #               }
+    #             },
+    #             result: false, # required
+    #           },
+    #           not_equal_to: {
+    #             operand_one: { # required
+    #               # One of:
+    #               field_id: "FieldId"
+    #             },
+    #             operand_two: { # required
+    #               # One of:
+    #               string_value: "String",
+    #               boolean_value: false,
+    #               double_value: 1.0,
+    #               empty_value: {
+    #               }
+    #             },
+    #             result: false, # required
+    #           },
+    #           and_all: {
+    #             conditions: { # required
+    #               # recursive BooleanConditionList
+    #             }
+    #           },
+    #           or_all: {
+    #             conditions: { # required
+    #               # recursive BooleanConditionList
+    #             }
     #           }
     #         }]
     #       }
@@ -2263,12 +2521,20 @@ module Aws::ConnectCases
     #   <p>The name of the field.</p>
     # @option params [String] :description
     #   <p>The description of a field.</p>
+    # @option params [Types::FieldAttributes] :attributes
+    #   <p>Union of field attributes.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_id: "DomainId", # required
     #     field_id: "FieldId", # required
     #     name: "FieldName",
-    #     description: "FieldDescription"
+    #     description: "FieldDescription",
+    #     attributes: {
+    #       # One of:
+    #       text: {
+    #         is_multiline: false, # required
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.update_field(params, options)
@@ -2339,6 +2605,134 @@ module Aws::ConnectCases
       request.send_request(options)
     end
 
+    # <p>Updates the content of a related item associated with a case. The following related item types are supported:</p> <ul> <li> <p> <b>Comment</b> - Update the text content of an existing comment</p> </li> <li> <p> <b>Custom</b> - Update the fields of a custom related item. You can add, modify, and remove fields from a custom related item. There's a quota for the number of fields allowed in a Custom type related item. See <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas">Amazon Connect Cases quotas</a>.</p> </li> </ul> <p> <b>Important things to know</b> </p> <ul> <li> <p>When updating a Custom related item, all existing and new fields, and their associated values should be included in the request. Fields not included as part of this request will be removed.</p> </li> <li> <p>If you provide a value for <code>performedBy.userArn</code> you must also have <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html">DescribeUser</a> permission on the ARN of the user that you provide.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields">System case fields</a> cannot be used in a custom related item.</p> </li> </ul> <p> <b>Endpoints</b>: See <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect endpoints and quotas</a>.</p>
+    # @param [Hash, Types::UpdateRelatedItemRequest] params
+    # @option params [String] :domain_id
+    #   <p>The unique identifier of the Cases domain. </p>
+    # @option params [String] :case_id
+    #   <p>A unique identifier of the case.</p>
+    # @option params [String] :related_item_id
+    #   <p>Unique identifier of a related item.</p>
+    # @option params [Types::RelatedItemUpdateContent] :content
+    #   <p>The content of a related item to be updated.</p>
+    # @option params [Types::UserUnion] :performed_by
+    #   <p>Represents the user who performed the update of the related item.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_id: "DomainId", # required
+    #     case_id: "CaseId", # required
+    #     related_item_id: "RelatedItemId", # required
+    #     content: { # required
+    #       # One of:
+    #       comment: {
+    #         body: "CommentBody", # required
+    #         content_type: "CommentBodyTextType", # required
+    #       },
+    #       custom: {
+    #         fields: [ # required
+    #           {
+    #             id: "FieldId", # required
+    #             value: { # required
+    #               # One of:
+    #               string_value: "String",
+    #               double_value: 1.0,
+    #               boolean_value: false,
+    #               empty_value: {
+    #               },
+    #               user_arn_value: "String"
+    #             }
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     performed_by: {
+    #       # One of:
+    #       user_arn: "UserArn",
+    #       custom_entity: "CustomEntity"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_related_item(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     related_item_id: "RelatedItemId", # required
+    #     related_item_arn: "RelatedItemArn", # required
+    #     type: "RelatedItemType", # required
+    #     content: { # required
+    #       # One of:
+    #       contact: {
+    #         contact_arn: "ContactArn", # required
+    #         channel: "Channel", # required
+    #         connected_to_system_time: Time.now, # required
+    #       },
+    #       comment: {
+    #         body: "CommentBody", # required
+    #         content_type: "CommentBodyTextType", # required
+    #       },
+    #       file: {
+    #         file_arn: "FileArn", # required
+    #       },
+    #       sla: {
+    #         sla_configuration: { # required
+    #           name: "SlaName", # required
+    #           type: "SlaType", # required
+    #           status: "SlaStatus", # required
+    #           field_id: "FieldId",
+    #           target_field_values: [{
+    #             # One of:
+    #             string_value: "String",
+    #             double_value: 1.0,
+    #             boolean_value: false,
+    #             empty_value: {
+    #             },
+    #             user_arn_value: "String"
+    #           }],
+    #           target_time: Time.now, # required
+    #           completion_time: Time.now
+    #         }
+    #       },
+    #       connect_case: {
+    #         case_id: "CaseId", # required
+    #       },
+    #       custom: {
+    #         fields: [ # required
+    #           {
+    #             id: "FieldId", # required
+    #             value: { # required
+    #               # One of:
+    #               string_value: "String",
+    #               double_value: 1.0,
+    #               boolean_value: false,
+    #               empty_value: {
+    #               },
+    #               user_arn_value: "String"
+    #             }
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     association_time: Time.now, # required
+    #     tags: {
+    #       "String" => "String"
+    #     },
+    #     last_updated_user: {
+    #       # One of:
+    #       user_arn: "UserArn",
+    #       custom_entity: "CustomEntity"
+    #     },
+    #     created_by: {
+    #       # One of:
+    #       user_arn: "UserArn",
+    #       custom_entity: "CustomEntity"
+    #     }
+    #   }
+    # @return [Types::UpdateRelatedItemResponse]
+    def update_related_item(params = {}, options = {})
+      request = build_request(:update_related_item, params)
+      request.send_request(options)
+    end
+
     # <p>Updates the attributes of an existing template. The template attributes that can be modified include <code>name</code>, <code>description</code>, <code>layoutConfiguration</code>, <code>requiredFields</code>, and <code>status</code>. At least one of these attributes must not be null. If a null value is provided for a given attribute, that attribute is ignored and its current value is preserved.</p> <p>Other template APIs are:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateTemplate.html">CreateTemplate</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_DeleteTemplate.html">DeleteTemplate</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetTemplate.html">GetTemplate</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_ListTemplates.html">ListTemplates</a> </p> </li> </ul>
     # @param [Hash, Types::UpdateTemplateInput] params
     # @option params [String] :domain_id
@@ -2357,6 +2751,8 @@ module Aws::ConnectCases
     #   <p>The status of the template.</p>
     # @option params [Array<Types::TemplateRule>] :rules
     #   <p>A list of case rules (also known as <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">case field conditions</a>) on a template.</p>
+    # @option params [Array<Types::TagPropagationConfiguration>] :tag_propagation_configurations
+    #   <p>Defines tag propagation configuration for resources created within a domain. Tags specified here will be automatically applied to resources being created for the specified resource type.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_id: "DomainId", # required
@@ -2375,7 +2771,15 @@ module Aws::ConnectCases
     #     rules: [
     #       {
     #         case_rule_id: "CaseRuleId", # required
-    #         field_id: "FieldId", # required
+    #         field_id: "FieldId"
+    #       }
+    #     ],
+    #     tag_propagation_configurations: [
+    #       {
+    #         resource_type: "TagPropagationResourceType", # required
+    #         tag_map: { # required
+    #           "MutableTagKey" => "TagValueString"
+    #         }
     #       }
     #     ]
     #   }

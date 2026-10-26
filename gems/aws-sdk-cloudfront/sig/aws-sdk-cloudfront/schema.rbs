@@ -28,6 +28,8 @@ module Aws::CloudFront
     AwsAccountNumberList: ListShape
     BatchTooLarge: StructureShape
     CNAMEAlreadyExists: StructureShape
+    CaCertificatesBundleS3Location: StructureShape
+    CaCertificatesBundleSource: UnionShape
     CacheBehavior: StructureShape
     CacheBehaviorList: ListShape
     CacheBehaviors: StructureShape
@@ -45,6 +47,7 @@ module Aws::CloudFront
     CachePolicySummary: StructureShape
     CachePolicySummaryList: ListShape
     CachePolicyType: EnumShape
+    CacheTagConfig: StructureShape
     CachedMethods: StructureShape
     CannotChangeImmutablePublicKeyFields: StructureShape
     CannotDeleteEntityWhileInUse: StructureShape
@@ -63,6 +66,10 @@ module Aws::CloudFront
     ConflictingAlias: StructureShape
     ConflictingAliases: ListShape
     ConflictingAliasesList: StructureShape
+    ConnectionFunctionAssociation: StructureShape
+    ConnectionFunctionSummary: StructureShape
+    ConnectionFunctionSummaryList: ListShape
+    ConnectionFunctionTestResult: StructureShape
     ConnectionGroup: StructureShape
     ConnectionGroupAssociationFilter: StructureShape
     ConnectionGroupSummary: StructureShape
@@ -93,6 +100,8 @@ module Aws::CloudFront
     CreateCachePolicyResult: StructureShape
     CreateCloudFrontOriginAccessIdentityRequest: StructureShape
     CreateCloudFrontOriginAccessIdentityResult: StructureShape
+    CreateConnectionFunctionRequest: StructureShape
+    CreateConnectionFunctionResult: StructureShape
     CreateConnectionGroupRequest: StructureShape
     CreateConnectionGroupResult: StructureShape
     CreateContinuousDeploymentPolicyRequest: StructureShape
@@ -133,6 +142,8 @@ module Aws::CloudFront
     CreateStreamingDistributionResult: StructureShape
     CreateStreamingDistributionWithTagsRequest: StructureShape
     CreateStreamingDistributionWithTagsResult: StructureShape
+    CreateTrustStoreRequest: StructureShape
+    CreateTrustStoreResult: StructureShape
     CreateVpcOriginRequest: StructureShape
     CreateVpcOriginResult: StructureShape
     CustomErrorResponse: StructureShape
@@ -146,6 +157,7 @@ module Aws::CloudFront
     DeleteAnycastIpListRequest: StructureShape
     DeleteCachePolicyRequest: StructureShape
     DeleteCloudFrontOriginAccessIdentityRequest: StructureShape
+    DeleteConnectionFunctionRequest: StructureShape
     DeleteConnectionGroupRequest: StructureShape
     DeleteContinuousDeploymentPolicyRequest: StructureShape
     DeleteDistributionRequest: StructureShape
@@ -161,10 +173,14 @@ module Aws::CloudFront
     DeleteOriginRequestPolicyRequest: StructureShape
     DeletePublicKeyRequest: StructureShape
     DeleteRealtimeLogConfigRequest: StructureShape
+    DeleteResourcePolicyRequest: StructureShape
     DeleteResponseHeadersPolicyRequest: StructureShape
     DeleteStreamingDistributionRequest: StructureShape
+    DeleteTrustStoreRequest: StructureShape
     DeleteVpcOriginRequest: StructureShape
     DeleteVpcOriginResult: StructureShape
+    DescribeConnectionFunctionRequest: StructureShape
+    DescribeConnectionFunctionResult: StructureShape
     DescribeFunctionRequest: StructureShape
     DescribeFunctionResult: StructureShape
     DescribeKeyValueStoreRequest: StructureShape
@@ -179,6 +195,9 @@ module Aws::CloudFront
     DistributionConfigWithTags: StructureShape
     DistributionIdList: StructureShape
     DistributionIdListSummary: ListShape
+    DistributionIdOwner: StructureShape
+    DistributionIdOwnerItemList: ListShape
+    DistributionIdOwnerList: StructureShape
     DistributionList: StructureShape
     DistributionNotDisabled: StructureShape
     DistributionResourceId: StructureShape
@@ -261,6 +280,8 @@ module Aws::CloudFront
     GetCloudFrontOriginAccessIdentityConfigResult: StructureShape
     GetCloudFrontOriginAccessIdentityRequest: StructureShape
     GetCloudFrontOriginAccessIdentityResult: StructureShape
+    GetConnectionFunctionRequest: StructureShape
+    GetConnectionFunctionResult: StructureShape
     GetConnectionGroupByRoutingEndpointRequest: StructureShape
     GetConnectionGroupByRoutingEndpointResult: StructureShape
     GetConnectionGroupRequest: StructureShape
@@ -313,6 +334,8 @@ module Aws::CloudFront
     GetPublicKeyResult: StructureShape
     GetRealtimeLogConfigRequest: StructureShape
     GetRealtimeLogConfigResult: StructureShape
+    GetResourcePolicyRequest: StructureShape
+    GetResourcePolicyResult: StructureShape
     GetResponseHeadersPolicyConfigRequest: StructureShape
     GetResponseHeadersPolicyConfigResult: StructureShape
     GetResponseHeadersPolicyRequest: StructureShape
@@ -321,6 +344,8 @@ module Aws::CloudFront
     GetStreamingDistributionConfigResult: StructureShape
     GetStreamingDistributionRequest: StructureShape
     GetStreamingDistributionResult: StructureShape
+    GetTrustStoreRequest: StructureShape
+    GetTrustStoreResult: StructureShape
     GetVpcOriginRequest: StructureShape
     GetVpcOriginResult: StructureShape
     GrpcConfig: StructureShape
@@ -368,6 +393,10 @@ module Aws::CloudFront
     InvalidationSummary: StructureShape
     InvalidationSummaryList: ListShape
     IpAddressType: EnumShape
+    IpamCidrConfig: StructureShape
+    IpamCidrConfigList: ListShape
+    IpamCidrStatus: EnumShape
+    IpamConfig: StructureShape
     ItemSelection: EnumShape
     KGKeyPairIds: StructureShape
     KGKeyPairIdsList: ListShape
@@ -401,6 +430,8 @@ module Aws::CloudFront
     ListCloudFrontOriginAccessIdentitiesResult: StructureShape
     ListConflictingAliasesRequest: StructureShape
     ListConflictingAliasesResult: StructureShape
+    ListConnectionFunctionsRequest: StructureShape
+    ListConnectionFunctionsResult: StructureShape
     ListConnectionGroupsRequest: StructureShape
     ListConnectionGroupsResult: StructureShape
     ListContinuousDeploymentPoliciesRequest: StructureShape
@@ -413,16 +444,22 @@ module Aws::CloudFront
     ListDistributionsByAnycastIpListIdResult: StructureShape
     ListDistributionsByCachePolicyIdRequest: StructureShape
     ListDistributionsByCachePolicyIdResult: StructureShape
+    ListDistributionsByConnectionFunctionRequest: StructureShape
+    ListDistributionsByConnectionFunctionResult: StructureShape
     ListDistributionsByConnectionModeRequest: StructureShape
     ListDistributionsByConnectionModeResult: StructureShape
     ListDistributionsByKeyGroupRequest: StructureShape
     ListDistributionsByKeyGroupResult: StructureShape
     ListDistributionsByOriginRequestPolicyIdRequest: StructureShape
     ListDistributionsByOriginRequestPolicyIdResult: StructureShape
+    ListDistributionsByOwnedResourceRequest: StructureShape
+    ListDistributionsByOwnedResourceResult: StructureShape
     ListDistributionsByRealtimeLogConfigRequest: StructureShape
     ListDistributionsByRealtimeLogConfigResult: StructureShape
     ListDistributionsByResponseHeadersPolicyIdRequest: StructureShape
     ListDistributionsByResponseHeadersPolicyIdResult: StructureShape
+    ListDistributionsByTrustStoreRequest: StructureShape
+    ListDistributionsByTrustStoreResult: StructureShape
     ListDistributionsByVpcOriginIdRequest: StructureShape
     ListDistributionsByVpcOriginIdResult: StructureShape
     ListDistributionsByWebACLIdRequest: StructureShape
@@ -459,6 +496,8 @@ module Aws::CloudFront
     ListStreamingDistributionsResult: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResult: StructureShape
+    ListTrustStoresRequest: StructureShape
+    ListTrustStoresResult: StructureShape
     ListVpcOriginsRequest: StructureShape
     ListVpcOriginsResult: StructureShape
     LocationList: ListShape
@@ -511,6 +550,7 @@ module Aws::CloudFront
     OriginGroupSelectionCriteria: EnumShape
     OriginGroups: StructureShape
     OriginList: ListShape
+    OriginMtlsConfig: StructureShape
     OriginProtocolPolicy: EnumShape
     OriginRequestPolicy: StructureShape
     OriginRequestPolicyAlreadyExists: StructureShape
@@ -550,8 +590,12 @@ module Aws::CloudFront
     PublicKeyList: StructureShape
     PublicKeySummary: StructureShape
     PublicKeySummaryList: ListShape
+    PublishConnectionFunctionRequest: StructureShape
+    PublishConnectionFunctionResult: StructureShape
     PublishFunctionRequest: StructureShape
     PublishFunctionResult: StructureShape
+    PutResourcePolicyRequest: StructureShape
+    PutResourcePolicyResult: StructureShape
     QueryArgProfile: StructureShape
     QueryArgProfileConfig: StructureShape
     QueryArgProfileEmpty: StructureShape
@@ -571,6 +615,7 @@ module Aws::CloudFront
     RealtimeMetricsSubscriptionStatus: EnumShape
     ReferrerPolicyList: EnumShape
     ResourceARN: StringShape
+    ResourceId: StringShape
     ResourceInUse: StructureShape
     ResourceNotDisabled: StructureShape
     ResponseHeadersPolicy: StructureShape
@@ -636,6 +681,8 @@ module Aws::CloudFront
     TagValue: StringShape
     Tags: StructureShape
     TenantConfig: StructureShape
+    TestConnectionFunctionRequest: StructureShape
+    TestConnectionFunctionResult: StructureShape
     TestFunctionFailed: StructureShape
     TestFunctionRequest: StructureShape
     TestFunctionResult: StructureShape
@@ -693,6 +740,11 @@ module Aws::CloudFront
     TooManyStreamingDistributions: StructureShape
     TooManyTrustedSigners: StructureShape
     TrafficConfig: StructureShape
+    TrustStore: StructureShape
+    TrustStoreConfig: StructureShape
+    TrustStoreList: ListShape
+    TrustStoreStatus: EnumShape
+    TrustStoreSummary: StructureShape
     TrustedKeyGroupDoesNotExist: StructureShape
     TrustedKeyGroupIdList: ListShape
     TrustedKeyGroups: StructureShape
@@ -700,10 +752,14 @@ module Aws::CloudFront
     TrustedSigners: StructureShape
     UnsupportedOperation: StructureShape
     UntagResourceRequest: StructureShape
+    UpdateAnycastIpListRequest: StructureShape
+    UpdateAnycastIpListResult: StructureShape
     UpdateCachePolicyRequest: StructureShape
     UpdateCachePolicyResult: StructureShape
     UpdateCloudFrontOriginAccessIdentityRequest: StructureShape
     UpdateCloudFrontOriginAccessIdentityResult: StructureShape
+    UpdateConnectionFunctionRequest: StructureShape
+    UpdateConnectionFunctionResult: StructureShape
     UpdateConnectionGroupRequest: StructureShape
     UpdateConnectionGroupResult: StructureShape
     UpdateContinuousDeploymentPolicyRequest: StructureShape
@@ -738,6 +794,8 @@ module Aws::CloudFront
     UpdateResponseHeadersPolicyResult: StructureShape
     UpdateStreamingDistributionRequest: StructureShape
     UpdateStreamingDistributionResult: StructureShape
+    UpdateTrustStoreRequest: StructureShape
+    UpdateTrustStoreResult: StructureShape
     UpdateVpcOriginRequest: StructureShape
     UpdateVpcOriginResult: StructureShape
     ValidationTokenDetail: StructureShape
@@ -746,7 +804,10 @@ module Aws::CloudFront
     VerifyDnsConfigurationRequest: StructureShape
     VerifyDnsConfigurationResult: StructureShape
     ViewerCertificate: StructureShape
+    ViewerMtlsConfig: StructureShape
+    ViewerMtlsMode: EnumShape
     ViewerProtocolPolicy: EnumShape
+    VpcIpAddressType: EnumShape
     VpcOrigin: StructureShape
     VpcOriginConfig: StructureShape
     VpcOriginEndpointConfig: StructureShape

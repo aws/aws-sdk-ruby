@@ -13,24 +13,39 @@ module Aws::MediaTailor
     AdBreakOpportunities = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#AdBreakOpportunities", name: "AdBreakOpportunities")
     AdBreakOpportunity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AdBreakOpportunity", name: "AdBreakOpportunity")
     AdConditioningConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AdConditioningConfiguration", name: "AdConditioningConfiguration")
+    AdDecisionServerConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AdDecisionServerConfiguration", name: "AdDecisionServerConfiguration")
     AdMarkerPassthrough = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AdMarkerPassthrough", name: "AdMarkerPassthrough")
     AdMarkupType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#AdMarkupType", name: "AdMarkupType")
+    AdSequencingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#AdSequencingMode", name: "AdSequencingMode")
     AdsInteractionExcludeEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#AdsInteractionExcludeEventType", name: "AdsInteractionExcludeEventType")
     AdsInteractionLog = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AdsInteractionLog", name: "AdsInteractionLog")
     AdsInteractionPublishOptInEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#AdsInteractionPublishOptInEventType", name: "AdsInteractionPublishOptInEventType")
+    AdsPersonalizationConcurrency = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AdsPersonalizationConcurrency", name: "AdsPersonalizationConcurrency")
+    AdsPersonalizationTimeouts = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AdsPersonalizationTimeouts", name: "AdsPersonalizationTimeouts")
     Alert = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#Alert", name: "Alert")
     AlertCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#AlertCategory", name: "AlertCategory")
     AlternateMedia = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AlternateMedia", name: "AlternateMedia")
+    ApsPublisherId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mediatailor#ApsPublisherId", name: "ApsPublisherId", traits: {"smithy.api#length" => {"min" => 1, "max" => 36}, "smithy.api#pattern" => "^[a-z0-9-]+$"})
+    ApsRegion = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#ApsRegion", name: "ApsRegion")
     AudienceMedia = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AudienceMedia", name: "AudienceMedia")
     Audiences = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#Audiences", name: "Audiences")
     AvailMatchingCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AvailMatchingCriteria", name: "AvailMatchingCriteria")
     AvailSuppression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AvailSuppression", name: "AvailSuppression")
+    AwsServiceRequestConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#AwsServiceRequestConfiguration", name: "AwsServiceRequestConfiguration")
+    AwsTargetService = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mediatailor#AwsTargetService", name: "AwsTargetService", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-z0-9-]+$"})
     BadRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#BadRequestException", name: "BadRequestException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    BeaconEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#BeaconEventType", name: "BeaconEventType")
+    BeaconEventTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#BeaconEventTypeList", name: "BeaconEventTypeList")
+    BeaconingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#BeaconingConfiguration", name: "BeaconingConfiguration")
     Bumper = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#Bumper", name: "Bumper")
     CdnConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#CdnConfiguration", name: "CdnConfiguration")
     Channel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#Channel", name: "Channel", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mediatailor#ChannelResource"}]})
     ChannelState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#ChannelState", name: "ChannelState")
+    ClientSideBeaconingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ClientSideBeaconingConfiguration", name: "ClientSideBeaconingConfiguration")
+    ClientSideBeaconingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#ClientSideBeaconingMode", name: "ClientSideBeaconingMode")
     ClipRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ClipRange", name: "ClipRange")
+    CompressionMethod = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#CompressionMethod", name: "CompressionMethod")
+    ConcurrentExecutorConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ConcurrentExecutorConfiguration", name: "ConcurrentExecutorConfiguration")
     ConfigurationAliasesRequest = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mediatailor#ConfigurationAliasesRequest", name: "ConfigurationAliasesRequest")
     ConfigurationAliasesResponse = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mediatailor#ConfigurationAliasesResponse", name: "ConfigurationAliasesResponse")
     ConfigureLogsForChannelInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ConfigureLogsForChannelInput", name: "ConfigureLogsForChannelInput")
@@ -49,14 +64,17 @@ module Aws::MediaTailor
     CreateSourceLocationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#CreateSourceLocationOutput", name: "CreateSourceLocationOutput")
     CreateVodSourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#CreateVodSourceInput", name: "CreateVodSourceInput")
     CreateVodSourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#CreateVodSourceOutput", name: "CreateVodSourceOutput")
+    CustomOutputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#CustomOutputConfiguration", name: "CustomOutputConfiguration")
     DashConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DashConfiguration", name: "DashConfiguration")
     DashConfigurationForPut = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DashConfigurationForPut", name: "DashConfigurationForPut")
     DashPlaylistSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DashPlaylistSettings", name: "DashPlaylistSettings")
     DefaultSegmentDeliveryConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DefaultSegmentDeliveryConfiguration", name: "DefaultSegmentDeliveryConfiguration")
     DeleteChannelInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeleteChannelInput", name: "DeleteChannelInput")
     DeleteChannelOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeleteChannelOutput", name: "DeleteChannelOutput")
-    DeleteChannelPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeleteChannelPolicyInput", name: "DeleteChannelPolicyInput")
+    DeleteChannelPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeleteChannelPolicyInput", name: "DeleteChannelPolicyInput", traits: {"aws.api#data" => "permissions"})
     DeleteChannelPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeleteChannelPolicyOutput", name: "DeleteChannelPolicyOutput")
+    DeleteFunctionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeleteFunctionRequest", name: "DeleteFunctionRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mediatailor#FunctionResource"}]})
+    DeleteFunctionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeleteFunctionResponse", name: "DeleteFunctionResponse")
     DeleteLiveSourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeleteLiveSourceInput", name: "DeleteLiveSourceInput")
     DeleteLiveSourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeleteLiveSourceOutput", name: "DeleteLiveSourceOutput")
     DeletePlaybackConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DeletePlaybackConfigurationInput", name: "DeletePlaybackConfigurationInput")
@@ -79,11 +97,18 @@ module Aws::MediaTailor
     DescribeSourceLocationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DescribeSourceLocationOutput", name: "DescribeSourceLocationOutput")
     DescribeVodSourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DescribeVodSourceInput", name: "DescribeVodSourceInput")
     DescribeVodSourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#DescribeVodSourceOutput", name: "DescribeVodSourceOutput")
+    EventName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#EventName", name: "EventName")
     FillPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#FillPolicy", name: "FillPolicy")
+    Function = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#Function", name: "Function")
+    FunctionMapping = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mediatailor#FunctionMapping", name: "FunctionMapping")
+    FunctionRef = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#FunctionRef", name: "FunctionRef")
+    FunctionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#FunctionType", name: "FunctionType")
     GetChannelPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#GetChannelPolicyInput", name: "GetChannelPolicyInput")
     GetChannelPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#GetChannelPolicyOutput", name: "GetChannelPolicyOutput")
     GetChannelScheduleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#GetChannelScheduleInput", name: "GetChannelScheduleInput")
     GetChannelScheduleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#GetChannelScheduleOutput", name: "GetChannelScheduleOutput")
+    GetFunctionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#GetFunctionRequest", name: "GetFunctionRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mediatailor#FunctionResource"}]})
+    GetFunctionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#GetFunctionResponse", name: "GetFunctionResponse", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mediatailor#FunctionResource"}]})
     GetPlaybackConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#GetPlaybackConfigurationInput", name: "GetPlaybackConfigurationInput")
     GetPlaybackConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#GetPlaybackConfigurationOutput", name: "GetPlaybackConfigurationOutput")
     GetPrefetchScheduleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#GetPrefetchScheduleInput", name: "GetPrefetchScheduleInput")
@@ -93,12 +118,17 @@ module Aws::MediaTailor
     HttpConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#HttpConfiguration", name: "HttpConfiguration")
     HttpPackageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#HttpPackageConfiguration", name: "HttpPackageConfiguration")
     HttpPackageConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#HttpPackageConfigurations", name: "HttpPackageConfigurations")
+    HttpRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#HttpRequest", name: "HttpRequest")
+    HttpRequestCacheConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#HttpRequestCacheConfiguration", name: "HttpRequestCacheConfiguration")
+    HttpRequestConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#HttpRequestConfiguration", name: "HttpRequestConfiguration")
     InsertionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#InsertionMode", name: "InsertionMode")
     KeyValuePair = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#KeyValuePair", name: "KeyValuePair")
     ListAlertsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ListAlertsInput", name: "ListAlertsInput")
     ListAlertsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ListAlertsOutput", name: "ListAlertsOutput")
     ListChannelsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ListChannelsInput", name: "ListChannelsInput")
     ListChannelsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ListChannelsOutput", name: "ListChannelsOutput")
+    ListFunctionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ListFunctionsRequest", name: "ListFunctionsRequest")
+    ListFunctionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ListFunctionsResponse", name: "ListFunctionsResponse")
     ListLiveSourcesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ListLiveSourcesInput", name: "ListLiveSourcesInput")
     ListLiveSourcesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ListLiveSourcesOutput", name: "ListLiveSourcesOutput")
     ListPlaybackConfigurationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ListPlaybackConfigurationsInput", name: "ListPlaybackConfigurationsInput")
@@ -122,19 +152,29 @@ module Aws::MediaTailor
     ManifestProcessingRules = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ManifestProcessingRules", name: "ManifestProcessingRules")
     ManifestServiceExcludeEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#ManifestServiceExcludeEventType", name: "ManifestServiceExcludeEventType")
     ManifestServiceInteractionLog = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ManifestServiceInteractionLog", name: "ManifestServiceInteractionLog")
+    ManifestServicePublishOptInEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#ManifestServicePublishOptInEventType", name: "ManifestServicePublishOptInEventType")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mediatailor#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MessageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#MessageType", name: "MessageType")
+    Method = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#Method", name: "Method")
+    MethodType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#MethodType", name: "MethodType")
+    MinimumUnfilledDurationSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mediatailor#MinimumUnfilledDurationSeconds", name: "MinimumUnfilledDurationSeconds", traits: {"smithy.api#range" => {"min" => 6, "max" => 3600}})
     Mode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#Mode", name: "Mode")
+    OpenRtbTemplateString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mediatailor#OpenRtbTemplateString", name: "OpenRtbTemplateString", traits: {"smithy.api#length" => {"min" => 1, "max" => 102400}})
     Operator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#Operator", name: "Operator")
     OriginManifestType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#OriginManifestType", name: "OriginManifestType")
     PlaybackConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PlaybackConfiguration", name: "PlaybackConfiguration", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mediatailor#PlaybackConfigurationResource"}]})
     PlaybackMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#PlaybackMode", name: "PlaybackMode")
+    PreRollAdDecisionServerConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PreRollAdDecisionServerConfiguration", name: "PreRollAdDecisionServerConfiguration")
+    PreRollAdSequencingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#PreRollAdSequencingMode", name: "PreRollAdSequencingMode")
+    PreRollVastResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PreRollVastResponse", name: "PreRollVastResponse")
     PrefetchConsumption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PrefetchConsumption", name: "PrefetchConsumption")
     PrefetchRetrieval = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PrefetchRetrieval", name: "PrefetchRetrieval")
     PrefetchSchedule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PrefetchSchedule", name: "PrefetchSchedule", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mediatailor#PrefetchScheduleResource"}]})
     PrefetchScheduleType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#PrefetchScheduleType", name: "PrefetchScheduleType")
     PutChannelPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PutChannelPolicyInput", name: "PutChannelPolicyInput")
     PutChannelPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PutChannelPolicyOutput", name: "PutChannelPolicyOutput")
+    PutFunctionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PutFunctionRequest", name: "PutFunctionRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mediatailor#FunctionResource"}]})
+    PutFunctionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PutFunctionResponse", name: "PutFunctionResponse")
     PutPlaybackConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PutPlaybackConfigurationInput", name: "PutPlaybackConfigurationInput")
     PutPlaybackConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#PutPlaybackConfigurationOutput", name: "PutPlaybackConfigurationOutput")
     RecurringConsumption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#RecurringConsumption", name: "RecurringConsumption")
@@ -145,6 +185,7 @@ module Aws::MediaTailor
     RequestOutputs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#RequestOutputs", name: "RequestOutputs")
     ResponseOutputItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ResponseOutputItem", name: "ResponseOutputItem")
     ResponseOutputs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#ResponseOutputs", name: "ResponseOutputs")
+    RuntimeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#RuntimeType", name: "RuntimeType")
     ScheduleAdBreak = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ScheduleAdBreak", name: "ScheduleAdBreak")
     ScheduleConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ScheduleConfiguration", name: "ScheduleConfiguration")
     ScheduleEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#ScheduleEntry", name: "ScheduleEntry")
@@ -153,6 +194,7 @@ module Aws::MediaTailor
     SegmentDeliveryConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#SegmentDeliveryConfiguration", name: "SegmentDeliveryConfiguration")
     SegmentationDescriptor = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#SegmentationDescriptor", name: "SegmentationDescriptor")
     SegmentationDescriptorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#SegmentationDescriptorList", name: "SegmentationDescriptorList")
+    SequentialExecutorConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#SequentialExecutorConfiguration", name: "SequentialExecutorConfiguration")
     SlateSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#SlateSource", name: "SlateSource")
     SourceLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#SourceLocation", name: "SourceLocation", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mediatailor#SourceLocationResource"}]})
     SpliceInsertMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#SpliceInsertMessage", name: "SpliceInsertMessage")
@@ -161,6 +203,7 @@ module Aws::MediaTailor
     StopChannelInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#StopChannelInput", name: "StopChannelInput")
     StopChannelOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#StopChannelOutput", name: "StopChannelOutput")
     StreamingMediaFileConditioning = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#StreamingMediaFileConditioning", name: "StreamingMediaFileConditioning")
+    StringMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mediatailor#StringMap", name: "StringMap")
     TagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#TagResourceInput", name: "TagResourceInput")
     Tier = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mediatailor#Tier", name: "Tier")
     TimeShiftConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#TimeShiftConfiguration", name: "TimeShiftConfiguration")
@@ -183,7 +226,10 @@ module Aws::MediaTailor
     UpdateSourceLocationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#UpdateSourceLocationOutput", name: "UpdateSourceLocationOutput")
     UpdateVodSourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#UpdateVodSourceInput", name: "UpdateVodSourceInput")
     UpdateVodSourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#UpdateVodSourceOutput", name: "UpdateVodSourceOutput")
+    VastRequestConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#VastRequestConfiguration", name: "VastRequestConfiguration")
+    VastResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#VastResponse", name: "VastResponse")
     VodSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#VodSource", name: "VodSource", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.mediatailor#VodSourceResource"}]})
+    YieldOptimizationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mediatailor#YieldOptimizationConfiguration", name: "YieldOptimizationConfiguration")
     Adsinteractionexcludeeventtypeslist = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__adsInteractionExcludeEventTypesList", name: "Adsinteractionexcludeeventtypeslist")
     Adsinteractionpublishoptineventtypeslist = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__adsInteractionPublishOptInEventTypesList", name: "Adsinteractionpublishoptineventtypeslist")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.mediatailor#__boolean", name: "Boolean")
@@ -196,6 +242,8 @@ module Aws::MediaTailor
     Listofaudiencemedia = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__listOfAudienceMedia", name: "Listofaudiencemedia")
     Listofavailmatchingcriteria = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__listOfAvailMatchingCriteria", name: "Listofavailmatchingcriteria")
     Listofchannel = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__listOfChannel", name: "Listofchannel")
+    Listoffunctionsref = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__listOfFunctionsRef", name: "Listoffunctionsref")
+    Listoffunctionsresponse = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__listOfFunctionsResponse", name: "Listoffunctionsresponse")
     Listoflivesource = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__listOfLiveSource", name: "Listoflivesource")
     Listofloggingstrategies = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__listOfLoggingStrategies", name: "Listofloggingstrategies")
     Listofplaybackconfiguration = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__listOfPlaybackConfiguration", name: "Listofplaybackconfiguration")
@@ -208,6 +256,7 @@ module Aws::MediaTailor
     ListofString = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__listOf__string", name: "ListofString")
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mediatailor#__long", name: "Long")
     Manifestserviceexcludeeventtypeslist = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__manifestServiceExcludeEventTypesList", name: "Manifestserviceexcludeeventtypeslist")
+    Manifestservicepublishoptineventtypeslist = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mediatailor#__manifestServicePublishOptInEventTypesList", name: "Manifestservicepublishoptineventtypeslist")
     MapofString = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.mediatailor#__mapOf__string", name: "MapofString")
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mediatailor#__string", name: "String")
     Timestampunix = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.mediatailor#__timestampUnix", name: "Timestampunix", traits: {"smithy.api#timestampFormat" => "epoch-seconds"})
@@ -232,10 +281,17 @@ module Aws::MediaTailor
     AdBreakOpportunity.type = Types::AdBreakOpportunity
     AdConditioningConfiguration.add_member(:streaming_media_file_conditioning, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamingMediaFileConditioning, name: "StreamingMediaFileConditioning", traits: {"smithy.api#required" => {}}))
     AdConditioningConfiguration.type = Types::AdConditioningConfiguration
+    AdDecisionServerConfiguration.add_member(:http_request, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequest, name: "HttpRequest"))
+    AdDecisionServerConfiguration.add_member(:vast_response, ::Smithy::Schema::Shapes::MemberShape.new(target: VastResponse, name: "VastResponse"))
+    AdDecisionServerConfiguration.type = Types::AdDecisionServerConfiguration
     AdMarkerPassthrough.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#default" => false}))
     AdMarkerPassthrough.type = Types::AdMarkerPassthrough
     AdMarkupType.add_member(:daterange, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATERANGE", traits: {"smithy.api#enumValue" => "DATERANGE"}))
     AdMarkupType.add_member(:scte35_enhanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCTE35_ENHANCED", traits: {"smithy.api#enumValue" => "SCTE35_ENHANCED"}))
+    AdSequencingMode.add_member(:follow_ad_sequence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOLLOW_AD_SEQUENCE", traits: {"smithy.api#enumValue" => "FOLLOW_AD_SEQUENCE"}))
+    AdSequencingMode.add_member(:ignore_ad_sequence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IGNORE_AD_SEQUENCE", traits: {"smithy.api#enumValue" => "IGNORE_AD_SEQUENCE"}))
+    AdSequencingMode.add_member(:follow_ad_sequence_only_live, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOLLOW_AD_SEQUENCE_ONLY_LIVE", traits: {"smithy.api#enumValue" => "FOLLOW_AD_SEQUENCE_ONLY_LIVE"}))
+    AdSequencingMode.add_member(:follow_ad_sequence_only_vod, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOLLOW_AD_SEQUENCE_ONLY_VOD", traits: {"smithy.api#enumValue" => "FOLLOW_AD_SEQUENCE_ONLY_VOD"}))
     AdsInteractionExcludeEventType.add_member(:ad_marker_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AD_MARKER_FOUND", traits: {"smithy.api#enumValue" => "AD_MARKER_FOUND"}))
     AdsInteractionExcludeEventType.add_member(:non_ad_marker_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_AD_MARKER_FOUND", traits: {"smithy.api#enumValue" => "NON_AD_MARKER_FOUND"}))
     AdsInteractionExcludeEventType.add_member(:making_ads_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAKING_ADS_REQUEST", traits: {"smithy.api#enumValue" => "MAKING_ADS_REQUEST"}))
@@ -277,10 +333,35 @@ module Aws::MediaTailor
     AdsInteractionExcludeEventType.add_member(:vod_time_based_avail_plan_warning_no_advertisements, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", traits: {"smithy.api#enumValue" => "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS"}))
     AdsInteractionExcludeEventType.add_member(:interstitial_vod_success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERSTITIAL_VOD_SUCCESS", traits: {"smithy.api#enumValue" => "INTERSTITIAL_VOD_SUCCESS"}))
     AdsInteractionExcludeEventType.add_member(:interstitial_vod_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERSTITIAL_VOD_FAILURE", traits: {"smithy.api#enumValue" => "INTERSTITIAL_VOD_FAILURE"}))
+    AdsInteractionExcludeEventType.add_member(:pre_ads_request_hook_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_ADS_REQUEST_HOOK_ERROR", traits: {"smithy.api#enumValue" => "PRE_ADS_REQUEST_HOOK_ERROR"}))
+    AdsInteractionExcludeEventType.add_member(:pre_ads_request_function_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_ADS_REQUEST_FUNCTION_ERROR", traits: {"smithy.api#enumValue" => "PRE_ADS_REQUEST_FUNCTION_ERROR"}))
+    AdsInteractionExcludeEventType.add_member(:beacon_received, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEACON_RECEIVED", traits: {"smithy.api#enumValue" => "BEACON_RECEIVED"}))
+    AdsInteractionExcludeEventType.add_member(:post_ads_response_hook_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_ADS_RESPONSE_HOOK_ERROR", traits: {"smithy.api#enumValue" => "POST_ADS_RESPONSE_HOOK_ERROR"}))
+    AdsInteractionExcludeEventType.add_member(:post_ads_response_function_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_ADS_RESPONSE_FUNCTION_ERROR", traits: {"smithy.api#enumValue" => "POST_ADS_RESPONSE_FUNCTION_ERROR"}))
+    AdsInteractionExcludeEventType.add_member(:pre_manifest_insertion_hook_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_MANIFEST_INSERTION_HOOK_ERROR", traits: {"smithy.api#enumValue" => "PRE_MANIFEST_INSERTION_HOOK_ERROR"}))
+    AdsInteractionExcludeEventType.add_member(:pre_manifest_insertion_function_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_MANIFEST_INSERTION_FUNCTION_ERROR", traits: {"smithy.api#enumValue" => "PRE_MANIFEST_INSERTION_FUNCTION_ERROR"}))
     AdsInteractionLog.add_member(:publish_opt_in_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: Adsinteractionpublishoptineventtypeslist, name: "PublishOptInEventTypes"))
     AdsInteractionLog.add_member(:exclude_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: Adsinteractionexcludeeventtypeslist, name: "ExcludeEventTypes"))
     AdsInteractionLog.type = Types::AdsInteractionLog
     AdsInteractionPublishOptInEventType.add_member(:raw_ads_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RAW_ADS_RESPONSE", traits: {"smithy.api#enumValue" => "RAW_ADS_RESPONSE"}))
+    AdsInteractionPublishOptInEventType.add_member(:raw_ads_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RAW_ADS_REQUEST", traits: {"smithy.api#enumValue" => "RAW_ADS_REQUEST"}))
+    AdsInteractionPublishOptInEventType.add_member(:raw_bid_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RAW_BID_REQUEST", traits: {"smithy.api#enumValue" => "RAW_BID_REQUEST"}))
+    AdsInteractionPublishOptInEventType.add_member(:raw_bid_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RAW_BID_RESPONSE", traits: {"smithy.api#enumValue" => "RAW_BID_RESPONSE"}))
+    AdsInteractionPublishOptInEventType.add_member(:pre_ads_request_hook_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_ADS_REQUEST_HOOK_SUMMARY", traits: {"smithy.api#enumValue" => "PRE_ADS_REQUEST_HOOK_SUMMARY"}))
+    AdsInteractionPublishOptInEventType.add_member(:pre_ads_request_function_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_ADS_REQUEST_FUNCTION_COMPLETED", traits: {"smithy.api#enumValue" => "PRE_ADS_REQUEST_FUNCTION_COMPLETED"}))
+    AdsInteractionPublishOptInEventType.add_member(:post_ads_response_hook_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_ADS_RESPONSE_HOOK_SUMMARY", traits: {"smithy.api#enumValue" => "POST_ADS_RESPONSE_HOOK_SUMMARY"}))
+    AdsInteractionPublishOptInEventType.add_member(:post_ads_response_function_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_ADS_RESPONSE_FUNCTION_COMPLETED", traits: {"smithy.api#enumValue" => "POST_ADS_RESPONSE_FUNCTION_COMPLETED"}))
+    AdsInteractionPublishOptInEventType.add_member(:pre_manifest_insertion_hook_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_MANIFEST_INSERTION_HOOK_SUMMARY", traits: {"smithy.api#enumValue" => "PRE_MANIFEST_INSERTION_HOOK_SUMMARY"}))
+    AdsInteractionPublishOptInEventType.add_member(:pre_manifest_insertion_function_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED", traits: {"smithy.api#enumValue" => "PRE_MANIFEST_INSERTION_FUNCTION_COMPLETED"}))
+    AdsPersonalizationConcurrency.add_member(:max_concurrent_ads_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxConcurrentAdsRequests"))
+    AdsPersonalizationConcurrency.add_member(:enable_vod_vast_parallelization, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableVodVastParallelization"))
+    AdsPersonalizationConcurrency.type = Types::AdsPersonalizationConcurrency
+    AdsPersonalizationTimeouts.add_member(:ads_request_timeout_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AdsRequestTimeoutMilliseconds"))
+    AdsPersonalizationTimeouts.add_member(:live_maximum_ads_personalization_time_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "LiveMaximumAdsPersonalizationTimeMilliseconds"))
+    AdsPersonalizationTimeouts.add_member(:vod_maximum_ads_personalization_time_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VodMaximumAdsPersonalizationTimeMilliseconds"))
+    AdsPersonalizationTimeouts.add_member(:prefetch_ads_request_timeout_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "PrefetchAdsRequestTimeoutMilliseconds"))
+    AdsPersonalizationTimeouts.add_member(:prefetch_maximum_ads_personalization_time_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "PrefetchMaximumAdsPersonalizationTimeMilliseconds"))
+    AdsPersonalizationTimeouts.type = Types::AdsPersonalizationTimeouts
     Alert.add_member(:alert_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AlertCode", traits: {"smithy.api#required" => {}}))
     Alert.add_member(:alert_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AlertMessage", traits: {"smithy.api#required" => {}}))
     Alert.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampunix, name: "LastModifiedTime", traits: {"smithy.api#required" => {}}))
@@ -299,6 +380,9 @@ module Aws::MediaTailor
     AlternateMedia.add_member(:ad_breaks, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofadbreak, name: "AdBreaks"))
     AlternateMedia.add_member(:duration_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "DurationMillis"))
     AlternateMedia.type = Types::AlternateMedia
+    ApsRegion.add_member(:americas, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMERICAS", traits: {"smithy.api#enumValue" => "AMERICAS"}))
+    ApsRegion.add_member(:europe, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EUROPE", traits: {"smithy.api#enumValue" => "EUROPE"}))
+    ApsRegion.add_member(:asia_pacific, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASIA_PACIFIC", traits: {"smithy.api#enumValue" => "ASIA_PACIFIC"}))
     AudienceMedia.add_member(:audience, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Audience"))
     AudienceMedia.add_member(:alternate_media, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofalternatemedia, name: "AlternateMedia"))
     AudienceMedia.type = Types::AudienceMedia
@@ -310,8 +394,26 @@ module Aws::MediaTailor
     AvailSuppression.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
     AvailSuppression.add_member(:fill_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: FillPolicy, name: "FillPolicy"))
     AvailSuppression.type = Types::AvailSuppression
+    AwsServiceRequestConfiguration.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeType, name: "Runtime", traits: {"smithy.api#required" => {}}))
+    AwsServiceRequestConfiguration.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Output"))
+    AwsServiceRequestConfiguration.add_member(:method_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MethodType, name: "MethodType", traits: {"smithy.api#required" => {}}))
+    AwsServiceRequestConfiguration.add_member(:request_timeout_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "RequestTimeoutMilliseconds", traits: {"smithy.api#required" => {}}))
+    AwsServiceRequestConfiguration.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Url", traits: {"smithy.api#required" => {}}))
+    AwsServiceRequestConfiguration.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Body"))
+    AwsServiceRequestConfiguration.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Headers"))
+    AwsServiceRequestConfiguration.add_member(:cache, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequestCacheConfiguration, name: "Cache"))
+    AwsServiceRequestConfiguration.add_member(:target_service, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsTargetService, name: "TargetService", traits: {"smithy.api#required" => {}}))
+    AwsServiceRequestConfiguration.add_member(:target_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetRegion", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#required" => {}}))
+    AwsServiceRequestConfiguration.type = Types::AwsServiceRequestConfiguration
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     BadRequestException.type = Types::BadRequestException
+    BeaconEventType.add_member(:mute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MUTE", traits: {"smithy.api#enumValue" => "MUTE"}))
+    BeaconEventType.add_member(:unmute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNMUTE", traits: {"smithy.api#enumValue" => "UNMUTE"}))
+    BeaconEventType.add_member(:pause, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAUSE", traits: {"smithy.api#enumValue" => "PAUSE"}))
+    BeaconEventType.add_member(:skip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKIP", traits: {"smithy.api#enumValue" => "SKIP"}))
+    BeaconEventTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconEventType, name: "member"))
+    BeaconingConfiguration.add_member(:client_side, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSideBeaconingConfiguration, name: "ClientSide"))
+    BeaconingConfiguration.type = Types::BeaconingConfiguration
     Bumper.add_member(:end_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EndUrl"))
     Bumper.add_member(:start_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StartUrl"))
     Bumper.type = Types::Bumper
@@ -333,9 +435,22 @@ module Aws::MediaTailor
     Channel.type = Types::Channel
     ChannelState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
     ChannelState.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "STOPPED"}))
+    ClientSideBeaconingConfiguration.add_member(:reporting_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientSideBeaconingMode, name: "ReportingMode", traits: {"smithy.api#required" => {}}))
+    ClientSideBeaconingConfiguration.add_member(:additional_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconEventTypeList, name: "AdditionalEventTypes"))
+    ClientSideBeaconingConfiguration.type = Types::ClientSideBeaconingConfiguration
+    ClientSideBeaconingMode.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ClientSideBeaconingMode.add_member(:insights, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSIGHTS", traits: {"smithy.api#enumValue" => "INSIGHTS"}))
     ClipRange.add_member(:end_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "EndOffsetMillis", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => 0}))
     ClipRange.add_member(:start_offset_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "StartOffsetMillis"))
     ClipRange.type = Types::ClipRange
+    CompressionMethod.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    CompressionMethod.add_member(:gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GZIP", traits: {"smithy.api#enumValue" => "GZIP"}))
+    ConcurrentExecutorConfiguration.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeType, name: "Runtime", traits: {"smithy.api#required" => {}}))
+    ConcurrentExecutorConfiguration.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Output", traits: {"smithy.api#required" => {}}))
+    ConcurrentExecutorConfiguration.add_member(:function_list, ::Smithy::Schema::Shapes::MemberShape.new(target: Listoffunctionsref, name: "FunctionList", traits: {"smithy.api#required" => {}}))
+    ConcurrentExecutorConfiguration.add_member(:timeout_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TimeoutMilliseconds", traits: {"smithy.api#required" => {}}))
+    ConcurrentExecutorConfiguration.add_member(:max_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxConcurrency", traits: {"smithy.api#required" => {}}))
+    ConcurrentExecutorConfiguration.type = Types::ConcurrentExecutorConfiguration
     ConfigurationAliasesRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
     ConfigurationAliasesRequest.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "value"))
     ConfigurationAliasesResponse.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
@@ -400,6 +515,7 @@ module Aws::MediaTailor
     CreatePrefetchScheduleInput.add_member(:recurring_prefetch_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringPrefetchConfiguration, name: "RecurringPrefetchConfiguration"))
     CreatePrefetchScheduleInput.add_member(:schedule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefetchScheduleType, name: "ScheduleType"))
     CreatePrefetchScheduleInput.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamId"))
+    CreatePrefetchScheduleInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     CreatePrefetchScheduleInput.type = Types::CreatePrefetchScheduleInput
     CreatePrefetchScheduleOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn"))
     CreatePrefetchScheduleOutput.add_member(:consumption, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefetchConsumption, name: "Consumption"))
@@ -409,6 +525,7 @@ module Aws::MediaTailor
     CreatePrefetchScheduleOutput.add_member(:recurring_prefetch_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringPrefetchConfiguration, name: "RecurringPrefetchConfiguration"))
     CreatePrefetchScheduleOutput.add_member(:schedule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefetchScheduleType, name: "ScheduleType"))
     CreatePrefetchScheduleOutput.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamId"))
+    CreatePrefetchScheduleOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     CreatePrefetchScheduleOutput.type = Types::CreatePrefetchScheduleOutput
     CreateProgramInput.add_member(:ad_breaks, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofadbreak, name: "AdBreaks"))
     CreateProgramInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ChannelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -418,6 +535,7 @@ module Aws::MediaTailor
     CreateProgramInput.add_member(:source_location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceLocationName", traits: {"smithy.api#required" => {}}))
     CreateProgramInput.add_member(:vod_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VodSourceName"))
     CreateProgramInput.add_member(:audience_media, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofaudiencemedia, name: "AudienceMedia"))
+    CreateProgramInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     CreateProgramInput.type = Types::CreateProgramInput
     CreateProgramOutput.add_member(:ad_breaks, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofadbreak, name: "AdBreaks"))
     CreateProgramOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn"))
@@ -431,6 +549,7 @@ module Aws::MediaTailor
     CreateProgramOutput.add_member(:clip_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ClipRange, name: "ClipRange"))
     CreateProgramOutput.add_member(:duration_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "DurationMillis"))
     CreateProgramOutput.add_member(:audience_media, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofaudiencemedia, name: "AudienceMedia"))
+    CreateProgramOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     CreateProgramOutput.type = Types::CreateProgramOutput
     CreateSourceLocationInput.add_member(:access_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessConfiguration, name: "AccessConfiguration"))
     CreateSourceLocationInput.add_member(:default_segment_delivery_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultSegmentDeliveryConfiguration, name: "DefaultSegmentDeliveryConfiguration"))
@@ -462,7 +581,11 @@ module Aws::MediaTailor
     CreateVodSourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     CreateVodSourceOutput.add_member(:vod_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VodSourceName"))
     CreateVodSourceOutput.type = Types::CreateVodSourceOutput
+    CustomOutputConfiguration.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeType, name: "Runtime", traits: {"smithy.api#required" => {}}))
+    CustomOutputConfiguration.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Output"))
+    CustomOutputConfiguration.type = Types::CustomOutputConfiguration
     DashConfiguration.add_member(:manifest_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ManifestEndpointPrefix"))
+    DashConfiguration.add_member(:dual_stack_manifest_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DualStackManifestEndpointPrefix"))
     DashConfiguration.add_member(:mpd_location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MpdLocation"))
     DashConfiguration.add_member(:origin_manifest_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OriginManifestType, name: "OriginManifestType"))
     DashConfiguration.type = Types::DashConfiguration
@@ -482,6 +605,9 @@ module Aws::MediaTailor
     DeleteChannelPolicyInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ChannelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteChannelPolicyInput.type = Types::DeleteChannelPolicyInput
     DeleteChannelPolicyOutput.type = Types::DeleteChannelPolicyOutput
+    DeleteFunctionRequest.add_member(:function_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FunctionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteFunctionRequest.type = Types::DeleteFunctionRequest
+    DeleteFunctionResponse.type = Types::DeleteFunctionResponse
     DeleteLiveSourceInput.add_member(:live_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LiveSourceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteLiveSourceInput.add_member(:source_location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceLocationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteLiveSourceInput.type = Types::DeleteLiveSourceInput
@@ -546,6 +672,7 @@ module Aws::MediaTailor
     DescribeProgramOutput.add_member(:clip_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ClipRange, name: "ClipRange"))
     DescribeProgramOutput.add_member(:duration_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "DurationMillis"))
     DescribeProgramOutput.add_member(:audience_media, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofaudiencemedia, name: "AudienceMedia"))
+    DescribeProgramOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     DescribeProgramOutput.type = Types::DescribeProgramOutput
     DescribeSourceLocationInput.add_member(:source_location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceLocationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeSourceLocationInput.type = Types::DescribeSourceLocationInput
@@ -571,8 +698,36 @@ module Aws::MediaTailor
     DescribeVodSourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     DescribeVodSourceOutput.add_member(:vod_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VodSourceName"))
     DescribeVodSourceOutput.type = Types::DescribeVodSourceOutput
+    EventName.add_member(:pre_session_initialization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_SESSION_INITIALIZATION", traits: {"smithy.api#enumValue" => "PRE_SESSION_INITIALIZATION"}))
+    EventName.add_member(:pre_ads_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_ADS_REQUEST", traits: {"smithy.api#enumValue" => "PRE_ADS_REQUEST"}))
+    EventName.add_member(:post_ads_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_ADS_RESPONSE", traits: {"smithy.api#enumValue" => "POST_ADS_RESPONSE"}))
+    EventName.add_member(:pre_manifest_insertion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_MANIFEST_INSERTION", traits: {"smithy.api#enumValue" => "PRE_MANIFEST_INSERTION"}))
     FillPolicy.add_member(:full_avail_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_AVAIL_ONLY", traits: {"smithy.api#enumValue" => "FULL_AVAIL_ONLY"}))
     FillPolicy.add_member(:partial_avail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIAL_AVAIL", traits: {"smithy.api#enumValue" => "PARTIAL_AVAIL"}))
+    Function.add_member(:function_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FunctionId", traits: {"smithy.api#required" => {}}))
+    Function.add_member(:function_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionType, name: "FunctionType", traits: {"smithy.api#required" => {}}))
+    Function.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
+    Function.add_member(:http_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequestConfiguration, name: "HttpRequestConfiguration"))
+    Function.add_member(:aws_service_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsServiceRequestConfiguration, name: "AwsServiceRequestConfiguration"))
+    Function.add_member(:custom_output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomOutputConfiguration, name: "CustomOutputConfiguration"))
+    Function.add_member(:concurrent_executor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcurrentExecutorConfiguration, name: "ConcurrentExecutorConfiguration"))
+    Function.add_member(:sequential_executor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SequentialExecutorConfiguration, name: "SequentialExecutorConfiguration"))
+    Function.add_member(:vast_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: VastRequestConfiguration, name: "VastRequestConfiguration"))
+    Function.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    Function.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn"))
+    Function.type = Types::Function
+    FunctionMapping.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EventName, name: "key"))
+    FunctionMapping.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    FunctionRef.add_member(:run_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RunCondition"))
+    FunctionRef.add_member(:function_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FunctionId"))
+    FunctionRef.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Alias"))
+    FunctionRef.type = Types::FunctionRef
+    FunctionType.add_member(:http_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP_REQUEST", traits: {"smithy.api#enumValue" => "HTTP_REQUEST"}))
+    FunctionType.add_member(:aws_service_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SERVICE_REQUEST", traits: {"smithy.api#enumValue" => "AWS_SERVICE_REQUEST"}))
+    FunctionType.add_member(:custom_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_OUTPUT", traits: {"smithy.api#enumValue" => "CUSTOM_OUTPUT"}))
+    FunctionType.add_member(:concurrent_executor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONCURRENT_EXECUTOR", traits: {"smithy.api#enumValue" => "CONCURRENT_EXECUTOR"}))
+    FunctionType.add_member(:sequential_executor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEQUENTIAL_EXECUTOR", traits: {"smithy.api#enumValue" => "SEQUENTIAL_EXECUTOR"}))
+    FunctionType.add_member(:vast_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VAST_REQUEST", traits: {"smithy.api#enumValue" => "VAST_REQUEST"}))
     GetChannelPolicyInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ChannelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetChannelPolicyInput.type = Types::GetChannelPolicyInput
     GetChannelPolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Policy"))
@@ -586,6 +741,20 @@ module Aws::MediaTailor
     GetChannelScheduleOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofscheduleentry, name: "Items"))
     GetChannelScheduleOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     GetChannelScheduleOutput.type = Types::GetChannelScheduleOutput
+    GetFunctionRequest.add_member(:function_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FunctionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetFunctionRequest.type = Types::GetFunctionRequest
+    GetFunctionResponse.add_member(:function_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FunctionId", traits: {"smithy.api#required" => {}}))
+    GetFunctionResponse.add_member(:function_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionType, name: "FunctionType", traits: {"smithy.api#required" => {}}))
+    GetFunctionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
+    GetFunctionResponse.add_member(:http_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequestConfiguration, name: "HttpRequestConfiguration"))
+    GetFunctionResponse.add_member(:aws_service_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsServiceRequestConfiguration, name: "AwsServiceRequestConfiguration"))
+    GetFunctionResponse.add_member(:custom_output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomOutputConfiguration, name: "CustomOutputConfiguration"))
+    GetFunctionResponse.add_member(:concurrent_executor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcurrentExecutorConfiguration, name: "ConcurrentExecutorConfiguration"))
+    GetFunctionResponse.add_member(:sequential_executor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SequentialExecutorConfiguration, name: "SequentialExecutorConfiguration"))
+    GetFunctionResponse.add_member(:vast_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: VastRequestConfiguration, name: "VastRequestConfiguration"))
+    GetFunctionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    GetFunctionResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn"))
+    GetFunctionResponse.type = Types::GetFunctionResponse
     GetPlaybackConfigurationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetPlaybackConfigurationInput.type = Types::GetPlaybackConfigurationInput
     GetPlaybackConfigurationOutput.add_member(:ad_decision_server_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AdDecisionServerUrl"))
@@ -603,12 +772,20 @@ module Aws::MediaTailor
     GetPlaybackConfigurationOutput.add_member(:personalization_threshold_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1, name: "PersonalizationThresholdSeconds"))
     GetPlaybackConfigurationOutput.add_member(:playback_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlaybackConfigurationArn"))
     GetPlaybackConfigurationOutput.add_member(:playback_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlaybackEndpointPrefix"))
+    GetPlaybackConfigurationOutput.add_member(:dual_stack_playback_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DualStackPlaybackEndpointPrefix"))
     GetPlaybackConfigurationOutput.add_member(:session_initialization_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SessionInitializationEndpointPrefix"))
+    GetPlaybackConfigurationOutput.add_member(:dual_stack_session_initialization_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DualStackSessionInitializationEndpointPrefix"))
     GetPlaybackConfigurationOutput.add_member(:slate_ad_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SlateAdUrl"))
     GetPlaybackConfigurationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     GetPlaybackConfigurationOutput.add_member(:transcode_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TranscodeProfileName"))
     GetPlaybackConfigurationOutput.add_member(:video_content_source_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VideoContentSourceUrl"))
     GetPlaybackConfigurationOutput.add_member(:ad_conditioning_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConditioningConfiguration, name: "AdConditioningConfiguration"))
+    GetPlaybackConfigurationOutput.add_member(:ad_decision_server_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdDecisionServerConfiguration, name: "AdDecisionServerConfiguration"))
+    GetPlaybackConfigurationOutput.add_member(:yield_optimization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: YieldOptimizationConfiguration, name: "YieldOptimizationConfiguration"))
+    GetPlaybackConfigurationOutput.add_member(:function_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionMapping, name: "FunctionMapping"))
+    GetPlaybackConfigurationOutput.add_member(:ads_personalization_timeouts, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsPersonalizationTimeouts, name: "AdsPersonalizationTimeouts"))
+    GetPlaybackConfigurationOutput.add_member(:ads_personalization_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsPersonalizationConcurrency, name: "AdsPersonalizationConcurrency"))
+    GetPlaybackConfigurationOutput.add_member(:beaconing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconingConfiguration, name: "BeaconingConfiguration"))
     GetPlaybackConfigurationOutput.type = Types::GetPlaybackConfigurationOutput
     GetPrefetchScheduleInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetPrefetchScheduleInput.add_member(:playback_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlaybackConfigurationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -621,8 +798,10 @@ module Aws::MediaTailor
     GetPrefetchScheduleOutput.add_member(:schedule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefetchScheduleType, name: "ScheduleType"))
     GetPrefetchScheduleOutput.add_member(:recurring_prefetch_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringPrefetchConfiguration, name: "RecurringPrefetchConfiguration"))
     GetPrefetchScheduleOutput.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamId"))
+    GetPrefetchScheduleOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     GetPrefetchScheduleOutput.type = Types::GetPrefetchScheduleOutput
     HlsConfiguration.add_member(:manifest_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ManifestEndpointPrefix"))
+    HlsConfiguration.add_member(:dual_stack_manifest_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DualStackManifestEndpointPrefix"))
     HlsConfiguration.type = Types::HlsConfiguration
     HlsPlaylistSettings.add_member(:manifest_window_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ManifestWindowSeconds"))
     HlsPlaylistSettings.add_member(:ad_markup_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AdMarkupTypes, name: "AdMarkupType"))
@@ -634,6 +813,24 @@ module Aws::MediaTailor
     HttpPackageConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "Type", traits: {"smithy.api#required" => {}}))
     HttpPackageConfiguration.type = Types::HttpPackageConfiguration
     HttpPackageConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPackageConfiguration, name: "member"))
+    HttpRequest.add_member(:method, ::Smithy::Schema::Shapes::MemberShape.new(target: Method, name: "Method"))
+    HttpRequest.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Body"))
+    HttpRequest.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "Headers"))
+    HttpRequest.add_member(:compress_request, ::Smithy::Schema::Shapes::MemberShape.new(target: CompressionMethod, name: "CompressRequest"))
+    HttpRequest.type = Types::HttpRequest
+    HttpRequestCacheConfiguration.add_member(:ttl_minimum_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1, name: "TtlMinimumSeconds", traits: {"smithy.api#required" => {}}))
+    HttpRequestCacheConfiguration.add_member(:ttl_maximum_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1, name: "TtlMaximumSeconds", traits: {"smithy.api#required" => {}}))
+    HttpRequestCacheConfiguration.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
+    HttpRequestCacheConfiguration.type = Types::HttpRequestCacheConfiguration
+    HttpRequestConfiguration.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeType, name: "Runtime", traits: {"smithy.api#required" => {}}))
+    HttpRequestConfiguration.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Output"))
+    HttpRequestConfiguration.add_member(:method_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MethodType, name: "MethodType", traits: {"smithy.api#required" => {}}))
+    HttpRequestConfiguration.add_member(:request_timeout_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "RequestTimeoutMilliseconds", traits: {"smithy.api#required" => {}}))
+    HttpRequestConfiguration.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Url", traits: {"smithy.api#required" => {}}))
+    HttpRequestConfiguration.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Body"))
+    HttpRequestConfiguration.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Headers"))
+    HttpRequestConfiguration.add_member(:cache, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequestCacheConfiguration, name: "Cache"))
+    HttpRequestConfiguration.type = Types::HttpRequestConfiguration
     InsertionMode.add_member(:stitched_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STITCHED_ONLY", traits: {"smithy.api#enumValue" => "STITCHED_ONLY"}))
     InsertionMode.add_member(:player_select, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLAYER_SELECT", traits: {"smithy.api#enumValue" => "PLAYER_SELECT"}))
     KeyValuePair.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Key", traits: {"smithy.api#required" => {}}))
@@ -652,6 +849,12 @@ module Aws::MediaTailor
     ListChannelsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofchannel, name: "Items"))
     ListChannelsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListChannelsOutput.type = Types::ListChannelsOutput
+    ListFunctionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListFunctionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListFunctionsRequest.type = Types::ListFunctionsRequest
+    ListFunctionsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: Listoffunctionsresponse, name: "Items"))
+    ListFunctionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListFunctionsResponse.type = Types::ListFunctionsResponse
     ListLiveSourcesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListLiveSourcesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListLiveSourcesInput.add_member(:source_location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceLocationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -696,6 +899,7 @@ module Aws::MediaTailor
     ListVodSourcesOutput.type = Types::ListVodSourcesOutput
     LivePreRollConfiguration.add_member(:ad_decision_server_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AdDecisionServerUrl"))
     LivePreRollConfiguration.add_member(:max_duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MaxDurationSeconds"))
+    LivePreRollConfiguration.add_member(:ad_decision_server_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PreRollAdDecisionServerConfiguration, name: "AdDecisionServerConfiguration"))
     LivePreRollConfiguration.type = Types::LivePreRollConfiguration
     LiveSource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#required" => {}}))
     LiveSource.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampunix, name: "CreationTime"))
@@ -750,10 +954,19 @@ module Aws::MediaTailor
     ManifestServiceExcludeEventType.add_member(:error_profile_name_interpolation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR_PROFILE_NAME_INTERPOLATION", traits: {"smithy.api#enumValue" => "ERROR_PROFILE_NAME_INTERPOLATION"}))
     ManifestServiceExcludeEventType.add_member(:error_bumper_start_interpolation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR_BUMPER_START_INTERPOLATION", traits: {"smithy.api#enumValue" => "ERROR_BUMPER_START_INTERPOLATION"}))
     ManifestServiceExcludeEventType.add_member(:error_bumper_end_interpolation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR_BUMPER_END_INTERPOLATION", traits: {"smithy.api#enumValue" => "ERROR_BUMPER_END_INTERPOLATION"}))
+    ManifestServiceExcludeEventType.add_member(:pre_session_init_hook_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_SESSION_INIT_HOOK_ERROR", traits: {"smithy.api#enumValue" => "PRE_SESSION_INIT_HOOK_ERROR"}))
+    ManifestServiceExcludeEventType.add_member(:pre_session_init_function_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_SESSION_INIT_FUNCTION_ERROR", traits: {"smithy.api#enumValue" => "PRE_SESSION_INIT_FUNCTION_ERROR"}))
+    ManifestServiceInteractionLog.add_member(:publish_opt_in_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: Manifestservicepublishoptineventtypeslist, name: "PublishOptInEventTypes"))
     ManifestServiceInteractionLog.add_member(:exclude_event_types, ::Smithy::Schema::Shapes::MemberShape.new(target: Manifestserviceexcludeeventtypeslist, name: "ExcludeEventTypes"))
     ManifestServiceInteractionLog.type = Types::ManifestServiceInteractionLog
+    ManifestServicePublishOptInEventType.add_member(:pre_session_init_hook_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_SESSION_INIT_HOOK_SUMMARY", traits: {"smithy.api#enumValue" => "PRE_SESSION_INIT_HOOK_SUMMARY"}))
+    ManifestServicePublishOptInEventType.add_member(:pre_session_init_function_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_SESSION_INIT_FUNCTION_COMPLETED", traits: {"smithy.api#enumValue" => "PRE_SESSION_INIT_FUNCTION_COMPLETED"}))
     MessageType.add_member(:splice_insert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPLICE_INSERT", traits: {"smithy.api#enumValue" => "SPLICE_INSERT"}))
     MessageType.add_member(:time_signal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME_SIGNAL", traits: {"smithy.api#enumValue" => "TIME_SIGNAL"}))
+    Method.add_member(:get, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GET", traits: {"smithy.api#enumValue" => "GET"}))
+    Method.add_member(:post, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST", traits: {"smithy.api#enumValue" => "POST"}))
+    MethodType.add_member(:get, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GET", traits: {"smithy.api#enumValue" => "GET"}))
+    MethodType.add_member(:post, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST", traits: {"smithy.api#enumValue" => "POST"}))
     Mode.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
     Mode.add_member(:behind_live_edge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEHIND_LIVE_EDGE", traits: {"smithy.api#enumValue" => "BEHIND_LIVE_EDGE"}))
     Mode.add_member(:after_live_edge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AFTER_LIVE_EDGE", traits: {"smithy.api#enumValue" => "AFTER_LIVE_EDGE"}))
@@ -775,15 +988,29 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:personalization_threshold_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1, name: "PersonalizationThresholdSeconds"))
     PlaybackConfiguration.add_member(:playback_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlaybackConfigurationArn"))
     PlaybackConfiguration.add_member(:playback_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlaybackEndpointPrefix"))
+    PlaybackConfiguration.add_member(:dual_stack_playback_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DualStackPlaybackEndpointPrefix"))
     PlaybackConfiguration.add_member(:session_initialization_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SessionInitializationEndpointPrefix"))
+    PlaybackConfiguration.add_member(:dual_stack_session_initialization_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DualStackSessionInitializationEndpointPrefix"))
     PlaybackConfiguration.add_member(:slate_ad_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SlateAdUrl"))
     PlaybackConfiguration.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     PlaybackConfiguration.add_member(:transcode_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TranscodeProfileName"))
     PlaybackConfiguration.add_member(:video_content_source_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VideoContentSourceUrl"))
     PlaybackConfiguration.add_member(:ad_conditioning_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConditioningConfiguration, name: "AdConditioningConfiguration"))
+    PlaybackConfiguration.add_member(:ad_decision_server_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdDecisionServerConfiguration, name: "AdDecisionServerConfiguration"))
+    PlaybackConfiguration.add_member(:yield_optimization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: YieldOptimizationConfiguration, name: "YieldOptimizationConfiguration"))
+    PlaybackConfiguration.add_member(:function_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionMapping, name: "FunctionMapping"))
+    PlaybackConfiguration.add_member(:ads_personalization_timeouts, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsPersonalizationTimeouts, name: "AdsPersonalizationTimeouts"))
+    PlaybackConfiguration.add_member(:ads_personalization_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsPersonalizationConcurrency, name: "AdsPersonalizationConcurrency"))
+    PlaybackConfiguration.add_member(:beaconing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconingConfiguration, name: "BeaconingConfiguration"))
     PlaybackConfiguration.type = Types::PlaybackConfiguration
     PlaybackMode.add_member(:loop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOOP", traits: {"smithy.api#enumValue" => "LOOP"}))
     PlaybackMode.add_member(:linear, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINEAR", traits: {"smithy.api#enumValue" => "LINEAR"}))
+    PreRollAdDecisionServerConfiguration.add_member(:vast_response, ::Smithy::Schema::Shapes::MemberShape.new(target: PreRollVastResponse, name: "VastResponse"))
+    PreRollAdDecisionServerConfiguration.type = Types::PreRollAdDecisionServerConfiguration
+    PreRollAdSequencingMode.add_member(:follow_ad_sequence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOLLOW_AD_SEQUENCE", traits: {"smithy.api#enumValue" => "FOLLOW_AD_SEQUENCE"}))
+    PreRollAdSequencingMode.add_member(:ignore_ad_sequence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IGNORE_AD_SEQUENCE", traits: {"smithy.api#enumValue" => "IGNORE_AD_SEQUENCE"}))
+    PreRollVastResponse.add_member(:ad_sequencing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PreRollAdSequencingMode, name: "AdSequencingMode"))
+    PreRollVastResponse.type = Types::PreRollVastResponse
     PrefetchConsumption.add_member(:avail_matching_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofavailmatchingcriteria, name: "AvailMatchingCriteria"))
     PrefetchConsumption.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampunix, name: "EndTime", traits: {"smithy.api#required" => {}}))
     PrefetchConsumption.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampunix, name: "StartTime"))
@@ -803,13 +1030,37 @@ module Aws::MediaTailor
     PrefetchSchedule.add_member(:schedule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefetchScheduleType, name: "ScheduleType"))
     PrefetchSchedule.add_member(:recurring_prefetch_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringPrefetchConfiguration, name: "RecurringPrefetchConfiguration"))
     PrefetchSchedule.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamId"))
+    PrefetchSchedule.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     PrefetchSchedule.type = Types::PrefetchSchedule
     PrefetchScheduleType.add_member(:single, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE", traits: {"smithy.api#enumValue" => "SINGLE"}))
     PrefetchScheduleType.add_member(:recurring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECURRING", traits: {"smithy.api#enumValue" => "RECURRING"}))
     PutChannelPolicyInput.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ChannelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    PutChannelPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Policy", traits: {"smithy.api#required" => {}}))
+    PutChannelPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Policy", traits: {"aws.api#data" => "permissions", "smithy.api#required" => {}}))
     PutChannelPolicyInput.type = Types::PutChannelPolicyInput
     PutChannelPolicyOutput.type = Types::PutChannelPolicyOutput
+    PutFunctionRequest.add_member(:function_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FunctionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutFunctionRequest.add_member(:function_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionType, name: "FunctionType", traits: {"smithy.api#required" => {}}))
+    PutFunctionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
+    PutFunctionRequest.add_member(:http_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequestConfiguration, name: "HttpRequestConfiguration"))
+    PutFunctionRequest.add_member(:aws_service_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsServiceRequestConfiguration, name: "AwsServiceRequestConfiguration"))
+    PutFunctionRequest.add_member(:custom_output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomOutputConfiguration, name: "CustomOutputConfiguration"))
+    PutFunctionRequest.add_member(:concurrent_executor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcurrentExecutorConfiguration, name: "ConcurrentExecutorConfiguration"))
+    PutFunctionRequest.add_member(:sequential_executor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SequentialExecutorConfiguration, name: "SequentialExecutorConfiguration"))
+    PutFunctionRequest.add_member(:vast_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: VastRequestConfiguration, name: "VastRequestConfiguration"))
+    PutFunctionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    PutFunctionRequest.type = Types::PutFunctionRequest
+    PutFunctionResponse.add_member(:function_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FunctionId", traits: {"smithy.api#required" => {}}))
+    PutFunctionResponse.add_member(:function_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionType, name: "FunctionType", traits: {"smithy.api#required" => {}}))
+    PutFunctionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
+    PutFunctionResponse.add_member(:http_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequestConfiguration, name: "HttpRequestConfiguration"))
+    PutFunctionResponse.add_member(:aws_service_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsServiceRequestConfiguration, name: "AwsServiceRequestConfiguration"))
+    PutFunctionResponse.add_member(:custom_output_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomOutputConfiguration, name: "CustomOutputConfiguration"))
+    PutFunctionResponse.add_member(:concurrent_executor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConcurrentExecutorConfiguration, name: "ConcurrentExecutorConfiguration"))
+    PutFunctionResponse.add_member(:sequential_executor_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SequentialExecutorConfiguration, name: "SequentialExecutorConfiguration"))
+    PutFunctionResponse.add_member(:vast_request_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: VastRequestConfiguration, name: "VastRequestConfiguration"))
+    PutFunctionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    PutFunctionResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn"))
+    PutFunctionResponse.type = Types::PutFunctionResponse
     PutPlaybackConfigurationInput.add_member(:ad_decision_server_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AdDecisionServerUrl"))
     PutPlaybackConfigurationInput.add_member(:avail_suppression, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailSuppression, name: "AvailSuppression"))
     PutPlaybackConfigurationInput.add_member(:bumper, ::Smithy::Schema::Shapes::MemberShape.new(target: Bumper, name: "Bumper"))
@@ -826,6 +1077,12 @@ module Aws::MediaTailor
     PutPlaybackConfigurationInput.add_member(:transcode_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TranscodeProfileName"))
     PutPlaybackConfigurationInput.add_member(:video_content_source_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VideoContentSourceUrl"))
     PutPlaybackConfigurationInput.add_member(:ad_conditioning_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConditioningConfiguration, name: "AdConditioningConfiguration"))
+    PutPlaybackConfigurationInput.add_member(:ad_decision_server_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdDecisionServerConfiguration, name: "AdDecisionServerConfiguration"))
+    PutPlaybackConfigurationInput.add_member(:yield_optimization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: YieldOptimizationConfiguration, name: "YieldOptimizationConfiguration"))
+    PutPlaybackConfigurationInput.add_member(:function_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionMapping, name: "FunctionMapping"))
+    PutPlaybackConfigurationInput.add_member(:ads_personalization_timeouts, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsPersonalizationTimeouts, name: "AdsPersonalizationTimeouts"))
+    PutPlaybackConfigurationInput.add_member(:ads_personalization_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsPersonalizationConcurrency, name: "AdsPersonalizationConcurrency"))
+    PutPlaybackConfigurationInput.add_member(:beaconing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconingConfiguration, name: "BeaconingConfiguration"))
     PutPlaybackConfigurationInput.type = Types::PutPlaybackConfigurationInput
     PutPlaybackConfigurationOutput.add_member(:ad_decision_server_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AdDecisionServerUrl"))
     PutPlaybackConfigurationOutput.add_member(:avail_suppression, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailSuppression, name: "AvailSuppression"))
@@ -842,12 +1099,20 @@ module Aws::MediaTailor
     PutPlaybackConfigurationOutput.add_member(:personalization_threshold_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1, name: "PersonalizationThresholdSeconds"))
     PutPlaybackConfigurationOutput.add_member(:playback_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlaybackConfigurationArn"))
     PutPlaybackConfigurationOutput.add_member(:playback_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlaybackEndpointPrefix"))
+    PutPlaybackConfigurationOutput.add_member(:dual_stack_playback_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DualStackPlaybackEndpointPrefix"))
     PutPlaybackConfigurationOutput.add_member(:session_initialization_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SessionInitializationEndpointPrefix"))
+    PutPlaybackConfigurationOutput.add_member(:dual_stack_session_initialization_endpoint_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DualStackSessionInitializationEndpointPrefix"))
     PutPlaybackConfigurationOutput.add_member(:slate_ad_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SlateAdUrl"))
     PutPlaybackConfigurationOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     PutPlaybackConfigurationOutput.add_member(:transcode_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TranscodeProfileName"))
     PutPlaybackConfigurationOutput.add_member(:video_content_source_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VideoContentSourceUrl"))
     PutPlaybackConfigurationOutput.add_member(:ad_conditioning_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdConditioningConfiguration, name: "AdConditioningConfiguration"))
+    PutPlaybackConfigurationOutput.add_member(:ad_decision_server_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AdDecisionServerConfiguration, name: "AdDecisionServerConfiguration"))
+    PutPlaybackConfigurationOutput.add_member(:yield_optimization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: YieldOptimizationConfiguration, name: "YieldOptimizationConfiguration"))
+    PutPlaybackConfigurationOutput.add_member(:function_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionMapping, name: "FunctionMapping"))
+    PutPlaybackConfigurationOutput.add_member(:ads_personalization_timeouts, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsPersonalizationTimeouts, name: "AdsPersonalizationTimeouts"))
+    PutPlaybackConfigurationOutput.add_member(:ads_personalization_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsPersonalizationConcurrency, name: "AdsPersonalizationConcurrency"))
+    PutPlaybackConfigurationOutput.add_member(:beaconing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BeaconingConfiguration, name: "BeaconingConfiguration"))
     PutPlaybackConfigurationOutput.type = Types::PutPlaybackConfigurationOutput
     RecurringConsumption.add_member(:retrieved_ad_expiration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "RetrievedAdExpirationSeconds"))
     RecurringConsumption.add_member(:avail_matching_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofavailmatchingcriteria, name: "AvailMatchingCriteria"))
@@ -875,9 +1140,11 @@ module Aws::MediaTailor
     ResponseOutputItem.add_member(:hls_playlist_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: HlsPlaylistSettings, name: "HlsPlaylistSettings"))
     ResponseOutputItem.add_member(:manifest_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ManifestName", traits: {"smithy.api#required" => {}}))
     ResponseOutputItem.add_member(:playback_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlaybackUrl", traits: {"smithy.api#required" => {}}))
+    ResponseOutputItem.add_member(:dual_stack_playback_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DualStackPlaybackUrl"))
     ResponseOutputItem.add_member(:source_group, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceGroup", traits: {"smithy.api#required" => {}}))
     ResponseOutputItem.type = Types::ResponseOutputItem
     ResponseOutputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseOutputItem, name: "member"))
+    RuntimeType.add_member(:jsonata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSONATA", traits: {"smithy.api#enumValue" => "JSONATA"}))
     ScheduleAdBreak.add_member(:approximate_duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "ApproximateDurationSeconds"))
     ScheduleAdBreak.add_member(:approximate_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampunix, name: "ApproximateStartTime"))
     ScheduleAdBreak.add_member(:source_location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceLocationName"))
@@ -918,6 +1185,11 @@ module Aws::MediaTailor
     SegmentationDescriptor.add_member(:sub_segments_expected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "SubSegmentsExpected"))
     SegmentationDescriptor.type = Types::SegmentationDescriptor
     SegmentationDescriptorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SegmentationDescriptor, name: "member"))
+    SequentialExecutorConfiguration.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeType, name: "Runtime", traits: {"smithy.api#required" => {}}))
+    SequentialExecutorConfiguration.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Output"))
+    SequentialExecutorConfiguration.add_member(:function_list, ::Smithy::Schema::Shapes::MemberShape.new(target: Listoffunctionsref, name: "FunctionList", traits: {"smithy.api#required" => {}}))
+    SequentialExecutorConfiguration.add_member(:timeout_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TimeoutMilliseconds", traits: {"smithy.api#required" => {}}))
+    SequentialExecutorConfiguration.type = Types::SequentialExecutorConfiguration
     SlateSource.add_member(:source_location_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceLocationName"))
     SlateSource.add_member(:vod_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VodSourceName"))
     SlateSource.type = Types::SlateSource
@@ -944,6 +1216,8 @@ module Aws::MediaTailor
     StopChannelOutput.type = Types::StopChannelOutput
     StreamingMediaFileConditioning.add_member(:transcode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSCODE", traits: {"smithy.api#enumValue" => "TRANSCODE"}))
     StreamingMediaFileConditioning.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags", "smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
@@ -1020,6 +1294,7 @@ module Aws::MediaTailor
     UpdateProgramOutput.add_member(:duration_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "DurationMillis"))
     UpdateProgramOutput.add_member(:scheduled_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampunix, name: "ScheduledStartTime"))
     UpdateProgramOutput.add_member(:audience_media, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofaudiencemedia, name: "AudienceMedia"))
+    UpdateProgramOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     UpdateProgramOutput.type = Types::UpdateProgramOutput
     UpdateProgramScheduleConfiguration.add_member(:transition, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateProgramTransition, name: "Transition"))
     UpdateProgramScheduleConfiguration.add_member(:clip_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ClipRange, name: "ClipRange"))
@@ -1055,6 +1330,17 @@ module Aws::MediaTailor
     UpdateVodSourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     UpdateVodSourceOutput.add_member(:vod_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VodSourceName"))
     UpdateVodSourceOutput.type = Types::UpdateVodSourceOutput
+    VastRequestConfiguration.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: RuntimeType, name: "Runtime", traits: {"smithy.api#required" => {}}))
+    VastRequestConfiguration.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Output"))
+    VastRequestConfiguration.add_member(:method_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MethodType, name: "MethodType", traits: {"smithy.api#required" => {}}))
+    VastRequestConfiguration.add_member(:request_timeout_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "RequestTimeoutMilliseconds", traits: {"smithy.api#required" => {}}))
+    VastRequestConfiguration.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Url", traits: {"smithy.api#required" => {}}))
+    VastRequestConfiguration.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Body"))
+    VastRequestConfiguration.add_member(:headers, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Headers"))
+    VastRequestConfiguration.add_member(:cache, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequestCacheConfiguration, name: "Cache"))
+    VastRequestConfiguration.type = Types::VastRequestConfiguration
+    VastResponse.add_member(:ad_sequencing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AdSequencingMode, name: "AdSequencingMode"))
+    VastResponse.type = Types::VastResponse
     VodSource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#required" => {}}))
     VodSource.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampunix, name: "CreationTime"))
     VodSource.add_member(:http_package_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpPackageConfigurations, name: "HttpPackageConfigurations", traits: {"smithy.api#required" => {}}))
@@ -1063,6 +1349,11 @@ module Aws::MediaTailor
     VodSource.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     VodSource.add_member(:vod_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VodSourceName", traits: {"smithy.api#required" => {}}))
     VodSource.type = Types::VodSource
+    YieldOptimizationConfiguration.add_member(:minimum_unfilled_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumUnfilledDurationSeconds, name: "MinimumUnfilledDuration", traits: {"smithy.api#required" => {}}))
+    YieldOptimizationConfiguration.add_member(:publisher_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApsPublisherId, name: "PublisherId", traits: {"smithy.api#required" => {}}))
+    YieldOptimizationConfiguration.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ApsRegion, name: "Region", traits: {"smithy.api#required" => {}}))
+    YieldOptimizationConfiguration.add_member(:open_rtb_template, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenRtbTemplateString, name: "OpenRtbTemplate", traits: {"smithy.api#required" => {}}))
+    YieldOptimizationConfiguration.type = Types::YieldOptimizationConfiguration
     Adsinteractionexcludeeventtypeslist.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsInteractionExcludeEventType, name: "member"))
     Adsinteractionpublishoptineventtypeslist.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdsInteractionPublishOptInEventType, name: "member"))
     Listofadbreak.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdBreak, name: "member"))
@@ -1071,6 +1362,8 @@ module Aws::MediaTailor
     Listofaudiencemedia.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceMedia, name: "member"))
     Listofavailmatchingcriteria.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailMatchingCriteria, name: "member"))
     Listofchannel.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "member"))
+    Listoffunctionsref.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FunctionRef, name: "member"))
+    Listoffunctionsresponse.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Function, name: "member"))
     Listoflivesource.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LiveSource, name: "member"))
     Listofloggingstrategies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingStrategy, name: "member"))
     Listofplaybackconfiguration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaybackConfiguration, name: "member"))
@@ -1082,6 +1375,7 @@ module Aws::MediaTailor
     Listofvodsource.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VodSource, name: "member"))
     ListofString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Manifestserviceexcludeeventtypeslist.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestServiceExcludeEventType, name: "member"))
+    Manifestservicepublishoptineventtypeslist.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManifestServicePublishOptInEventType, name: "member"))
     MapofString.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
     MapofString.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
     AdMarkupTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdMarkupType, name: "member"))
@@ -1090,189 +1384,203 @@ module Aws::MediaTailor
       service.id = "com.amazonaws.mediatailor#MediaTailor"
       service.name = "MediaTailor"
       service.version = "2018-04-23"
-      service.traits = {"aws.api#service" => {"sdkId" => "MediaTailor", "arnNamespace" => "mediatailor", "cloudFormationName" => "MediaTailor", "cloudTrailEventSource" => "mediatailor.amazonaws.com", "endpointPrefix" => "api.mediatailor"}, "aws.auth#sigv4" => {"name" => "mediatailor"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amz-apigw-id", "date"], "maxAge" => 86400}, "smithy.api#title" => "AWS MediaTailor"}
+      service.traits = {"aws.api#service" => {"sdkId" => "MediaTailor", "arnNamespace" => "mediatailor", "cloudFormationName" => "MediaTailor", "cloudTrailEventSource" => "mediatailor.amazonaws.com", "endpointPrefix" => "api.mediatailor"}, "aws.api#tagEnabled" => {}, "aws.auth#sigv4" => {"name" => "mediatailor"}, "aws.endpoints#standardRegionalEndpoints" => {"partitionSpecialCases" => {"aws" => [{"endpoint" => "https://mediatailor.{region}.{dualStackDnsSuffix}", "dualStack" => true}]}}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by tag key-value pairs attached to the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the presence of tag key-value pairs in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the presence of tag keys in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amz-apigw-id", "date"], "maxAge" => 86400}, "smithy.api#title" => "AWS MediaTailor", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://mediatailor.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.mediatailor-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.mediatailor-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.mediatailor.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.mediatailor.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAkAAAAGAAAABQAAAAcF9eELAAAABgX14QQAAAAIAAAABwX14QkF9eEKAAAABAAAAAsAAAAKAAAABQX14QYF9eEIAAAABQAAAAwF9eEHAAAABwX14QUF9eEGAAAAAwX14QEAAAAOAAAABQX14QIF9eED"}}
       service.add_operation(:configure_logs_for_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#ConfigureLogsForChannel"
         operation.name = "ConfigureLogsForChannel"
         operation.input = ConfigureLogsForChannelInput
         operation.output = ConfigureLogsForChannelOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/configureLogs/channel", "code" => 200}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to configure logs on the channel with the specified channel name", "relativeDocumentation" => "configurelogs-channel.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/configureLogs/channel", "code" => 200}}
       end)
       service.add_operation(:configure_logs_for_playback_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#ConfigureLogsForPlaybackConfiguration"
         operation.name = "ConfigureLogsForPlaybackConfiguration"
         operation.input = ConfigureLogsForPlaybackConfigurationInput
         operation.output = ConfigureLogsForPlaybackConfigurationOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/configureLogs/playbackConfiguration", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to configure logs for a playback configuration", "relativeDocumentation" => "configurelogs-playbackconfiguration.html", "requiredActions" => ["iam:CreateServiceLinkedRole"], "resources" => {"required" => {"playbackConfiguration" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/configureLogs/playbackConfiguration", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#CreateChannel"
         operation.name = "CreateChannel"
         operation.input = CreateChannelInput
         operation.output = CreateChannelOutput
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/channel/{ChannelName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to create a new channel", "relativeDocumentation" => "channel-channelname.html", "createsResources" => ["channel"], "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"]}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/channel/{ChannelName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_live_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#CreateLiveSource"
         operation.name = "CreateLiveSource"
         operation.input = CreateLiveSourceInput
         operation.output = CreateLiveSourceOutput
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to create a new live source on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-livesource-livesourcename.html", "createsResources" => ["liveSource"], "resources" => {"required" => {"liveSource" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"]}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_prefetch_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#CreatePrefetchSchedule"
         operation.name = "CreatePrefetchSchedule"
         operation.input = CreatePrefetchScheduleInput
         operation.output = CreatePrefetchScheduleOutput
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/prefetchSchedule/{PlaybackConfigurationName}/{Name}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a prefetch schedule for the playback configuration with the specified playback configuration name", "relativeDocumentation" => "prefetchschedule-playbackconfigurationname-name.html", "createsResources" => ["prefetchSchedule"], "resources" => {"required" => {"playbackConfiguration" => {}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/prefetchSchedule/{PlaybackConfigurationName}/{Name}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_program, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#CreateProgram"
         operation.name = "CreateProgram"
         operation.input = CreateProgramInput
         operation.output = CreateProgramOutput
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/channel/{ChannelName}/program/{ProgramName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to create a new program on the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-program-programname.html"}, "smithy.api#http" => {"method" => "POST", "uri" => "/channel/{ChannelName}/program/{ProgramName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_source_location, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#CreateSourceLocation"
         operation.name = "CreateSourceLocation"
         operation.input = CreateSourceLocationInput
         operation.output = CreateSourceLocationOutput
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/sourceLocation/{SourceLocationName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to create a new source location", "relativeDocumentation" => "sourcelocation-sourcelocationname.html", "createsResources" => ["sourceLocation"], "resources" => {"required" => {"sourceLocation" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"]}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/sourceLocation/{SourceLocationName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_vod_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#CreateVodSource"
         operation.name = "CreateVodSource"
         operation.input = CreateVodSourceInput
         operation.output = CreateVodSourceOutput
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to create a new VOD source on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-vodsource-vodsourcename.html", "createsResources" => ["vodSource"], "resources" => {"required" => {"vodSource" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"]}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DeleteChannel"
         operation.name = "DeleteChannel"
         operation.input = DeleteChannelInput
         operation.output = DeleteChannelOutput
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/channel/{ChannelName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the channel with the specified channel name", "relativeDocumentation" => "channel-channelname.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/channel/{ChannelName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_channel_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DeleteChannelPolicy"
         operation.name = "DeleteChannelPolicy"
         operation.input = DeleteChannelPolicyInput
         operation.output = DeleteChannelPolicyOutput
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/channel/{ChannelName}/policy", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the IAM policy on the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-policy.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/channel/{ChannelName}/policy", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_function, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mediatailor#DeleteFunction"
+        operation.name = "DeleteFunction"
+        operation.input = DeleteFunctionRequest
+        operation.output = DeleteFunctionResponse
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/function/{FunctionId}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_live_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DeleteLiveSource"
         operation.name = "DeleteLiveSource"
         operation.input = DeleteLiveSourceInput
         operation.output = DeleteLiveSourceOutput
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the live source with the specified live source name on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-livesource-livesourcename.html", "resources" => {"required" => {"liveSource" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_playback_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DeletePlaybackConfiguration"
         operation.name = "DeletePlaybackConfiguration"
         operation.input = DeletePlaybackConfigurationInput
         operation.output = DeletePlaybackConfigurationOutput
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/playbackConfiguration/{Name}", "code" => 204}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the specified playback configuration", "relativeDocumentation" => "playbackconfiguration-name.html", "resources" => {"required" => {"playbackConfiguration" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/playbackConfiguration/{Name}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_prefetch_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DeletePrefetchSchedule"
         operation.name = "DeletePrefetchSchedule"
         operation.input = DeletePrefetchScheduleInput
         operation.output = DeletePrefetchScheduleOutput
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/prefetchSchedule/{PlaybackConfigurationName}/{Name}", "code" => 204}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete a prefetch schedule for a playback configuration with the specified prefetch schedule name", "relativeDocumentation" => "prefetchschedule-playbackconfigurationname-name.html", "resources" => {"required" => {"playbackConfiguration" => {}, "prefetchSchedule" => {}}}}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/prefetchSchedule/{PlaybackConfigurationName}/{Name}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_program, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DeleteProgram"
         operation.name = "DeleteProgram"
         operation.input = DeleteProgramInput
         operation.output = DeleteProgramOutput
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/channel/{ChannelName}/program/{ProgramName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the program with the specified program name on the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-program-programname.html", "resources" => {"required" => {"program" => {}}}}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/channel/{ChannelName}/program/{ProgramName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_source_location, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DeleteSourceLocation"
         operation.name = "DeleteSourceLocation"
         operation.input = DeleteSourceLocationInput
         operation.output = DeleteSourceLocationOutput
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/sourceLocation/{SourceLocationName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname.html", "resources" => {"required" => {"sourceLocation" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/sourceLocation/{SourceLocationName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_vod_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DeleteVodSource"
         operation.name = "DeleteVodSource"
         operation.input = DeleteVodSourceInput
         operation.output = DeleteVodSourceOutput
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to delete the VOD source with the specified VOD source name on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-vodsource-vodsourcename.html", "resources" => {"required" => {"vodSource" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DescribeChannel"
         operation.name = "DescribeChannel"
         operation.input = DescribeChannelInput
         operation.output = DescribeChannelOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/channel/{ChannelName}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the channel with the specified channel name", "relativeDocumentation" => "channel-channelname.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/channel/{ChannelName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_live_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DescribeLiveSource"
         operation.name = "DescribeLiveSource"
         operation.input = DescribeLiveSourceInput
         operation.output = DescribeLiveSourceOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the live source with the specified live source name on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-livesource-livesourcename.html", "resources" => {"required" => {"liveSource" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_program, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DescribeProgram"
         operation.name = "DescribeProgram"
         operation.input = DescribeProgramInput
         operation.output = DescribeProgramOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/channel/{ChannelName}/program/{ProgramName}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the program with the specified program name on the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-program-programname.html", "resources" => {"required" => {"program" => {}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/channel/{ChannelName}/program/{ProgramName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_source_location, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DescribeSourceLocation"
         operation.name = "DescribeSourceLocation"
         operation.input = DescribeSourceLocationInput
         operation.output = DescribeSourceLocationOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname.html", "resources" => {"required" => {"sourceLocation" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_vod_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#DescribeVodSource"
         operation.name = "DescribeVodSource"
         operation.input = DescribeVodSourceInput
         operation.output = DescribeVodSourceOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the VOD source with the specified VOD source name on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-vodsource-vodsourcename.html", "resources" => {"required" => {"vodSource" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_channel_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#GetChannelPolicy"
         operation.name = "GetChannelPolicy"
         operation.input = GetChannelPolicyInput
         operation.output = GetChannelPolicyOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/channel/{ChannelName}/policy", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to read the IAM policy on the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-policy.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/channel/{ChannelName}/policy", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_channel_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#GetChannelSchedule"
         operation.name = "GetChannelSchedule"
         operation.input = GetChannelScheduleInput
         operation.output = GetChannelScheduleOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/channel/{ChannelName}/schedule", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the schedule of programs on the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-schedule.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/channel/{ChannelName}/schedule", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::GetChannelSchedule.new
+      end)
+      service.add_operation(:get_function, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mediatailor#GetFunction"
+        operation.name = "GetFunction"
+        operation.input = GetFunctionRequest
+        operation.output = GetFunctionResponse
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/function/{FunctionId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_playback_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#GetPlaybackConfiguration"
         operation.name = "GetPlaybackConfiguration"
         operation.input = GetPlaybackConfigurationInput
         operation.output = GetPlaybackConfigurationOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/playbackConfiguration/{Name}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the configuration for the specified name", "relativeDocumentation" => "playbackconfiguration-name.html", "resources" => {"required" => {"playbackConfiguration" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/playbackConfiguration/{Name}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_prefetch_schedule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#GetPrefetchSchedule"
         operation.name = "GetPrefetchSchedule"
         operation.input = GetPrefetchScheduleInput
         operation.output = GetPrefetchScheduleOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/prefetchSchedule/{PlaybackConfigurationName}/{Name}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve prefetch schedule for a playback configuration with the specified prefetch schedule name", "relativeDocumentation" => "prefetchschedule-playbackconfigurationname-name.html", "resources" => {"required" => {"playbackConfiguration" => {}, "prefetchSchedule" => {}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/prefetchSchedule/{PlaybackConfigurationName}/{Name}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_alerts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#ListAlerts"
         operation.name = "ListAlerts"
         operation.input = ListAlertsInput
         operation.output = ListAlertsOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/alerts", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the list of alerts on a resource", "relativeDocumentation" => "alerts.html"}, "smithy.api#http" => {"method" => "GET", "uri" => "/alerts", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAlerts.new
       end)
       service.add_operation(:list_channels, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1280,15 +1588,23 @@ module Aws::MediaTailor
         operation.name = "ListChannels"
         operation.input = ListChannelsInput
         operation.output = ListChannelsOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/channels", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the list of existing channels", "relativeDocumentation" => "channels.html"}, "smithy.api#http" => {"method" => "GET", "uri" => "/channels", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListChannels.new
+      end)
+      service.add_operation(:list_functions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mediatailor#ListFunctions"
+        operation.name = "ListFunctions"
+        operation.input = ListFunctionsRequest
+        operation.output = ListFunctionsResponse
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/functions", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListFunctions.new
       end)
       service.add_operation(:list_live_sources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#ListLiveSources"
         operation.name = "ListLiveSources"
         operation.input = ListLiveSourcesInput
         operation.output = ListLiveSourcesOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}/liveSources", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the list of existing live sources on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-livesources.html"}, "smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}/liveSources", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListLiveSources.new
       end)
       service.add_operation(:list_playback_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1296,7 +1612,7 @@ module Aws::MediaTailor
         operation.name = "ListPlaybackConfigurations"
         operation.input = ListPlaybackConfigurationsInput
         operation.output = ListPlaybackConfigurationsOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/playbackConfigurations", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the list of available configurations", "relativeDocumentation" => "playbackconfigurations.html"}, "smithy.api#http" => {"method" => "GET", "uri" => "/playbackConfigurations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListPlaybackConfigurations.new
       end)
       service.add_operation(:list_prefetch_schedules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1304,7 +1620,7 @@ module Aws::MediaTailor
         operation.name = "ListPrefetchSchedules"
         operation.input = ListPrefetchSchedulesInput
         operation.output = ListPrefetchSchedulesOutput
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/prefetchSchedule/{PlaybackConfigurationName}", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the list of prefetch schedules for a playback configuration", "relativeDocumentation" => "prefetchschedule-playbackconfigurationname.html", "resources" => {"required" => {"playbackConfiguration" => {}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/prefetchSchedule/{PlaybackConfigurationName}", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
         operation[:paginator] = Paginators::ListPrefetchSchedules.new
       end)
       service.add_operation(:list_source_locations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1312,7 +1628,7 @@ module Aws::MediaTailor
         operation.name = "ListSourceLocations"
         operation.input = ListSourceLocationsInput
         operation.output = ListSourceLocationsOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocations", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the list of existing source locations", "relativeDocumentation" => "sourcelocations.html"}, "smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSourceLocations.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1321,14 +1637,14 @@ module Aws::MediaTailor
         operation.input = ListTagsForResourceInput
         operation.output = ListTagsForResourceOutput
         operation.errors << BadRequestException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to list the tags assigned to the specified playback configuration resource", "relativeDocumentation" => "tags-resourcearn.html", "resources" => {"optional" => {"playbackConfiguration" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}, "channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}, "sourceLocation" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}, "vodSource" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}, "liveSource" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}, "function" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_vod_sources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#ListVodSources"
         operation.name = "ListVodSources"
         operation.input = ListVodSourcesInput
         operation.output = ListVodSourcesOutput
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}/vodSources", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve the list of existing VOD sources on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-vodsources.html"}, "smithy.api#http" => {"method" => "GET", "uri" => "/sourceLocation/{SourceLocationName}/vodSources", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListVodSources.new
       end)
       service.add_operation(:put_channel_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1336,28 +1652,35 @@ module Aws::MediaTailor
         operation.name = "PutChannelPolicy"
         operation.input = PutChannelPolicyInput
         operation.output = PutChannelPolicyOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}/policy", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to set the IAM policy on the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-policy.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}/policy", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:put_function, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mediatailor#PutFunction"
+        operation.name = "PutFunction"
+        operation.input = PutFunctionRequest
+        operation.output = PutFunctionResponse
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "smithy.api#http" => {"method" => "PUT", "uri" => "/function/{FunctionId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_playback_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#PutPlaybackConfiguration"
         operation.name = "PutPlaybackConfiguration"
         operation.input = PutPlaybackConfigurationInput
         operation.output = PutPlaybackConfigurationOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/playbackConfiguration", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to add a new configuration", "relativeDocumentation" => "playbackconfiguration.html", "createsResources" => ["playbackConfiguration"], "resources" => {"required" => {"playbackConfiguration" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/playbackConfiguration", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:start_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#StartChannel"
         operation.name = "StartChannel"
         operation.input = StartChannelInput
         operation.output = StartChannelOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}/start", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to start the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-start.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}/start", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:stop_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#StopChannel"
         operation.name = "StopChannel"
         operation.input = StopChannelInput
         operation.output = StopChannelOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}/stop", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to stop the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-stop.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}/stop", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#TagResource"
@@ -1365,7 +1688,7 @@ module Aws::MediaTailor
         operation.input = TagResourceInput
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << BadRequestException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{ResourceArn}", "code" => 204}}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to add tags to the specified playback configuration resource", "relativeDocumentation" => "tags-resourcearn.html", "resources" => {"optional" => {"playbackConfiguration" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "channel" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "sourceLocation" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "vodSource" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "liveSource" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "function" => {"conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "POST", "uri" => "/tags/{ResourceArn}", "code" => 204}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#UntagResource"
@@ -1373,42 +1696,42 @@ module Aws::MediaTailor
         operation.input = UntagResourceInput
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << BadRequestException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{ResourceArn}", "code" => 204}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#conditionKeys" => ["aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to remove tags from the specified playback configuration resource", "relativeDocumentation" => "tags-resourcearn.html", "resources" => {"optional" => {"playbackConfiguration" => {"conditionKeys" => ["aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "channel" => {"conditionKeys" => ["aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "sourceLocation" => {"conditionKeys" => ["aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "vodSource" => {"conditionKeys" => ["aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "liveSource" => {"conditionKeys" => ["aws:TagKeys", "aws:ResourceTag/${TagKey}"]}, "function" => {"conditionKeys" => ["aws:TagKeys", "aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{ResourceArn}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_channel, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#UpdateChannel"
         operation.name = "UpdateChannel"
         operation.input = UpdateChannelInput
         operation.output = UpdateChannelOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update the channel with the specified channel name", "relativeDocumentation" => "channel-channelname.html", "resources" => {"required" => {"channel" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_live_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#UpdateLiveSource"
         operation.name = "UpdateLiveSource"
         operation.input = UpdateLiveSourceInput
         operation.output = UpdateLiveSourceOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update the live source with the specified live source name on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-livesource-livesourcename.html", "resources" => {"required" => {"liveSource" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/sourceLocation/{SourceLocationName}/liveSource/{LiveSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_program, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#UpdateProgram"
         operation.name = "UpdateProgram"
         operation.input = UpdateProgramInput
         operation.output = UpdateProgramOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}/program/{ProgramName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update the program with the specified program name on the channel with the specified channel name", "relativeDocumentation" => "channel-channelname-program-programname.html", "resources" => {"required" => {"program" => {}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/channel/{ChannelName}/program/{ProgramName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_source_location, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#UpdateSourceLocation"
         operation.name = "UpdateSourceLocation"
         operation.input = UpdateSourceLocationInput
         operation.output = UpdateSourceLocationOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/sourceLocation/{SourceLocationName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname.html", "resources" => {"required" => {"sourceLocation" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/sourceLocation/{SourceLocationName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_vod_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediatailor#UpdateVodSource"
         operation.name = "UpdateVodSource"
         operation.input = UpdateVodSourceInput
         operation.output = UpdateVodSourceOutput
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to update the VOD source with the specified VOD source name on the source location with the specified source location name", "relativeDocumentation" => "sourcelocation-sourcelocationname-vodsource-vodsourcename.html", "resources" => {"required" => {"vodSource" => {"conditionKeys" => ["aws:ResourceTag/${TagKey}"]}}}}, "smithy.api#http" => {"method" => "PUT", "uri" => "/sourceLocation/{SourceLocationName}/vodSource/{VodSourceName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
     end
 

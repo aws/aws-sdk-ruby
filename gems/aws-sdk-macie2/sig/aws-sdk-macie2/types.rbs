@@ -3621,12 +3621,14 @@ module Aws::Macie2
 
       def initialize: (
         ?bucket_name: String,
+        ?expected_bucket_owner: String,
         ?key_prefix: String,
         ?kms_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor bucket_name: String?
+      attr_accessor expected_bucket_owner: String?
       attr_accessor key_prefix: String?
       attr_accessor kms_key_arn: String?
     end

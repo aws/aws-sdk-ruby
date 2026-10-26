@@ -70,7 +70,8 @@ module Aws::TrustedAdvisor
       def recommendation: () -> Types::Recommendation?
     end
     def get_recommendation: (
-      ?recommendation_identifier: String
+      ?recommendation_identifier: String,
+      ?language: String
     ) -> _GetRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationResponse
 
     interface _ListChecksResponse
@@ -143,7 +144,8 @@ module Aws::TrustedAdvisor
       ?status: String,
       ?exclusion_status: String,
       ?region_code: String,
-      ?recommendation_identifier: String
+      ?recommendation_identifier: String,
+      ?language: String
     ) -> _ListRecommendationResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationResourcesResponse
 
     interface _ListRecommendationsResponse
@@ -161,8 +163,24 @@ module Aws::TrustedAdvisor
       ?source: String,
       ?check_identifier: String,
       ?after_last_updated_at: Time,
-      ?before_last_updated_at: Time
+      ?before_last_updated_at: Time,
+      ?language: String
     ) -> _ListRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationsResponse
+
+    interface _ListRecommendationsForResourceResponse
+      include Smithy::Client::_Response[Types::ListRecommendationsForResourceResponse]
+      def next_token: () -> String?
+      def recommendation_for_resource_summaries: () -> Array[Types::RecommendationForResourceSummary]?
+    end
+    def list_recommendations_for_resource: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?aws_resource_arn: String,
+      ?pillar: String,
+      ?status: String,
+      ?check_arn: String,
+      ?language: String
+    ) -> _ListRecommendationsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationsForResourceResponse
 
     interface _UpdateOrganizationRecommendationLifecycleResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]

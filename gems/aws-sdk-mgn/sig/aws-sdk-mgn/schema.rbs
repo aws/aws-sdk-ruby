@@ -10,6 +10,7 @@ module Aws::Mgn
     ActionID: StringShape
     ActionIDs: ListShape
     ActionName: StringShape
+    AnalyzerType: StringShape
     Application: StructureShape
     ApplicationAggregatedStatus: StructureShape
     ApplicationDescription: StringShape
@@ -37,8 +38,18 @@ module Aws::Mgn
     ChangeServerLifeCycleStateOutput: StructureShape
     ChangeServerLifeCycleStateSourceServerLifecycle: StructureShape
     ChangeServerLifeCycleStateSourceServerLifecycleState: StringShape
+    Checksum: StructureShape
+    Cidr: StringShape
+    CidrBlock: StringShape
+    CidrMapping: StructureShape
+    CidrMappingsList: ListShape
     ClientIdempotencyToken: StringShape
     CloudWatchLogGroupName: StringShape
+    CodeGenerationOutputFormatStatus: StringShape
+    CodeGenerationOutputFormatStatusDetails: StructureShape
+    CodeGenerationOutputFormatStatusDetailsMap: MapShape
+    CodeGenerationOutputFormatType: StringShape
+    CodeGenerationOutputFormatTypes: ListShape
     ConflictException: StructureShape
     ConflictExceptionErrors: ListShape
     Connector: StructureShape
@@ -48,6 +59,9 @@ module Aws::Mgn
     ConnectorName: StringShape
     ConnectorSsmCommandConfig: StructureShape
     ConnectorsList: ListShape
+    ConstructID: StringShape
+    ConstructProperties: MapShape
+    ConstructPropertyKey: StringShape
     Cpus: ListShape
     CreateApplicationInput: StructureShape
     CreateApplicationOutput: StructureShape
@@ -55,6 +69,8 @@ module Aws::Mgn
     CreateConnectorRequest: StructureShape
     CreateLaunchConfigurationTemplateInput: StructureShape
     CreateLaunchConfigurationTemplateOutput: StructureShape
+    CreateNetworkMigrationDefinitionOutput: StructureShape
+    CreateNetworkMigrationDefinitionRequest: StructureShape
     CreateReplicationConfigurationTemplateInput: StructureShape
     CreateReplicationConfigurationTemplateOutput: StructureShape
     CreateWaveInput: StructureShape
@@ -77,6 +93,9 @@ module Aws::Mgn
     DeleteJobOutput: StructureShape
     DeleteLaunchConfigurationTemplateInput: StructureShape
     DeleteLaunchConfigurationTemplateOutput: StructureShape
+    DeleteNetworkMigrationDefinitionRequest: StructureShape
+    DeleteNetworkMigrationDefinitionResponse: StructureShape
+    DeleteOperation: StructureShape
     DeleteReplicationConfigurationTemplateInput: StructureShape
     DeleteReplicationConfigurationTemplateOutput: StructureShape
     DeleteSourceServerInput: StructureShape
@@ -114,7 +133,13 @@ module Aws::Mgn
     EC2InstanceID: StringShape
     EC2InstanceType: StringShape
     EC2LaunchConfigurationTemplateID: StringShape
+    EncryptionAlgorithm: StringShape
+    EnrichmentSourceS3Configuration: StructureShape
+    EnrichmentTargetS3Configuration: StructureShape
     ErrorDetails: StructureShape
+    ExecutionStage: StringShape
+    ExecutionStageActivity: StringShape
+    ExecutionStatus: StringShape
     ExportErrorData: StructureShape
     ExportErrors: ListShape
     ExportID: StringShape
@@ -126,10 +151,17 @@ module Aws::Mgn
     FinalizeCutoverInput: StructureShape
     FinalizeCutoverOutput: StructureShape
     FirstBoot: StringShape
+    FqdnForActionFramework: StringShape
+    FsxOntapConfiguration: StructureShape
     GetLaunchConfigurationInput: StructureShape
     GetLaunchConfigurationOutput: StructureShape
+    GetNetworkMigrationDefinitionOutput: StructureShape
+    GetNetworkMigrationDefinitionRequest: StructureShape
+    GetNetworkMigrationMapperSegmentConstructRequest: StructureShape
+    GetNetworkMigrationMapperSegmentConstructResponse: StructureShape
     GetReplicationConfigurationInput: StructureShape
     GetReplicationConfigurationOutput: StructureShape
+    Hash: StringShape
     IPsList: ListShape
     ISO8601DatetimeString: StringShape
     ISO8601DurationString: StringShape
@@ -137,6 +169,11 @@ module Aws::Mgn
     ImportErrorData: StructureShape
     ImportErrorType: StringShape
     ImportErrors: ListShape
+    ImportFileEnrichment: StructureShape
+    ImportFileEnrichmentJobID: StringShape
+    ImportFileEnrichmentStatus: StringShape
+    ImportFileEnrichmentsIDsFilter: ListShape
+    ImportFileEnrichmentsList: ListShape
     ImportID: StringShape
     ImportIDsFilter: ListShape
     ImportList: ListShape
@@ -151,7 +188,9 @@ module Aws::Mgn
     InitializeServiceOutput: StructureShape
     InitiatedBy: StringShape
     InternalServerException: StructureShape
+    InternetProtocol: StringShape
     Iops: IntegerShape
+    IpAssignmentStrategy: StringShape
     JmesPathString: StringShape
     Job: StructureShape
     JobID: StringShape
@@ -163,7 +202,12 @@ module Aws::Mgn
     JobStatus: StringShape
     JobType: StringShape
     JobsList: ListShape
+    KmsKeyArn: StringShape
     LargeBoundedString: StringShape
+    LastKnownCheck: StructureShape
+    LastKnownCheckStatus: StringShape
+    LastKnownCheckType: StringShape
+    LastKnownChecksList: ListShape
     LaunchConfigurationTemplate: StructureShape
     LaunchConfigurationTemplateID: StringShape
     LaunchConfigurationTemplateIDs: ListShape
@@ -198,11 +242,58 @@ module Aws::Mgn
     ListExportsRequestFiltersExportIDs: ListShape
     ListImportErrorsInput: StructureShape
     ListImportErrorsOutput: StructureShape
+    ListImportFileEnrichmentsFilters: StructureShape
+    ListImportFileEnrichmentsRequest: StructureShape
+    ListImportFileEnrichmentsResponse: StructureShape
     ListImportsInput: StructureShape
     ListImportsOutput: StructureShape
     ListImportsRequestFilters: StructureShape
     ListManagedAccountsRequest: StructureShape
     ListManagedAccountsResponse: StructureShape
+    ListNetworkMigrationAnalysesFilters: StructureShape
+    ListNetworkMigrationAnalysesIDsFilter: ListShape
+    ListNetworkMigrationAnalysesRequest: StructureShape
+    ListNetworkMigrationAnalysesResponse: StructureShape
+    ListNetworkMigrationAnalysisResultsFilters: StructureShape
+    ListNetworkMigrationAnalysisResultsRequest: StructureShape
+    ListNetworkMigrationAnalysisResultsResponse: StructureShape
+    ListNetworkMigrationCodeGenerationSegmentsFilters: StructureShape
+    ListNetworkMigrationCodeGenerationSegmentsIDsFilter: ListShape
+    ListNetworkMigrationCodeGenerationSegmentsRequest: StructureShape
+    ListNetworkMigrationCodeGenerationSegmentsResponse: StructureShape
+    ListNetworkMigrationCodeGenerationsFilters: StructureShape
+    ListNetworkMigrationCodeGenerationsIDsFilter: ListShape
+    ListNetworkMigrationCodeGenerationsRequest: StructureShape
+    ListNetworkMigrationCodeGenerationsResponse: StructureShape
+    ListNetworkMigrationDefinitionsRequest: StructureShape
+    ListNetworkMigrationDefinitionsRequestFilters: StructureShape
+    ListNetworkMigrationDefinitionsResponse: StructureShape
+    ListNetworkMigrationDeployedStacksRequest: StructureShape
+    ListNetworkMigrationDeployedStacksResponse: StructureShape
+    ListNetworkMigrationDeployerJobFilters: StructureShape
+    ListNetworkMigrationDeployerJobIDsFilters: ListShape
+    ListNetworkMigrationDeploymentsOutput: StructureShape
+    ListNetworkMigrationDeploymentsRequest: StructureShape
+    ListNetworkMigrationExecutionRequestFilters: StructureShape
+    ListNetworkMigrationExecutionsRequest: StructureShape
+    ListNetworkMigrationExecutionsResponse: StructureShape
+    ListNetworkMigrationMapperSegmentConstructTypesFilter: ListShape
+    ListNetworkMigrationMapperSegmentConstructsFilters: StructureShape
+    ListNetworkMigrationMapperSegmentConstructsIDsFilter: ListShape
+    ListNetworkMigrationMapperSegmentConstructsRequest: StructureShape
+    ListNetworkMigrationMapperSegmentConstructsResponse: StructureShape
+    ListNetworkMigrationMapperSegmentsFilters: StructureShape
+    ListNetworkMigrationMapperSegmentsIDsFilter: ListShape
+    ListNetworkMigrationMapperSegmentsRequest: StructureShape
+    ListNetworkMigrationMapperSegmentsResponse: StructureShape
+    ListNetworkMigrationMappingUpdatesFilters: StructureShape
+    ListNetworkMigrationMappingUpdatesIDsFilter: ListShape
+    ListNetworkMigrationMappingUpdatesRequest: StructureShape
+    ListNetworkMigrationMappingUpdatesResponse: StructureShape
+    ListNetworkMigrationMappingsFilters: StructureShape
+    ListNetworkMigrationMappingsIDsFilter: ListShape
+    ListNetworkMigrationMappingsRequest: StructureShape
+    ListNetworkMigrationMappingsResponse: StructureShape
     ListSourceServerActionsInput: StructureShape
     ListSourceServerActionsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
@@ -212,21 +303,76 @@ module Aws::Mgn
     ListWavesInput: StructureShape
     ListWavesOutput: StructureShape
     ListWavesRequestFilters: StructureShape
+    LogicalID: StringShape
     ManagedAccount: StructureShape
     ManagedAccounts: ListShape
     MarkAsArchivedInput: StructureShape
     MarkAsArchivedOutput: StructureShape
+    MarshalledResourceDefinition: StringShape
     MaxResultsType: IntegerShape
+    MergeConstruct: StructureShape
+    MergeConstructs: ListShape
+    MergeOperation: StructureShape
     NetworkInterface: StructureShape
     NetworkInterfaces: ListShape
+    NetworkMigrationAnalysesList: ListShape
+    NetworkMigrationAnalysisJobDetails: StructureShape
+    NetworkMigrationAnalysisResult: StructureShape
+    NetworkMigrationAnalysisResultSource: StructureShape
+    NetworkMigrationAnalysisResultStatus: StringShape
+    NetworkMigrationAnalysisResultTarget: StructureShape
+    NetworkMigrationAnalysisResultsList: ListShape
+    NetworkMigrationCodeGenerationArtifact: StructureShape
+    NetworkMigrationCodeGenerationArtifactID: StringShape
+    NetworkMigrationCodeGenerationArtifactSubType: StringShape
+    NetworkMigrationCodeGenerationArtifactType: StringShape
+    NetworkMigrationCodeGenerationArtifacts: ListShape
+    NetworkMigrationCodeGenerationJobDetails: StructureShape
+    NetworkMigrationCodeGenerationSegment: StructureShape
+    NetworkMigrationCodeGenerationSegmentType: StringShape
+    NetworkMigrationCodeGenerationSegmentsList: ListShape
+    NetworkMigrationCodeGenerationsList: ListShape
+    NetworkMigrationDefinitionDescription: StringShape
+    NetworkMigrationDefinitionID: StringShape
+    NetworkMigrationDefinitionName: StringShape
+    NetworkMigrationDefinitionSummariesList: ListShape
+    NetworkMigrationDefinitionSummary: StructureShape
+    NetworkMigrationDefintionsIDsFilter: ListShape
+    NetworkMigrationDeployedStackDetails: StructureShape
+    NetworkMigrationDeployedStackStatus: StringShape
+    NetworkMigrationDeployedStacksList: ListShape
+    NetworkMigrationDeployerJobDetails: StructureShape
+    NetworkMigrationDeployerJobList: ListShape
+    NetworkMigrationExecution: StructureShape
+    NetworkMigrationExecutionID: StringShape
+    NetworkMigrationExecutionIDsFilter: ListShape
+    NetworkMigrationExecutionStatusesFilter: ListShape
+    NetworkMigrationExecutionsList: ListShape
+    NetworkMigrationFailedResourceDetails: StructureShape
+    NetworkMigrationFailedResourceStatus: StringShape
+    NetworkMigrationFailedResourcesList: ListShape
+    NetworkMigrationJobID: StringShape
+    NetworkMigrationJobStatus: StringShape
+    NetworkMigrationMapperSegment: StructureShape
+    NetworkMigrationMapperSegmentConstruct: StructureShape
+    NetworkMigrationMapperSegmentConstructType: StringShape
+    NetworkMigrationMapperSegmentConstructs: ListShape
+    NetworkMigrationMapperSegmentType: StringShape
+    NetworkMigrationMapperSegmentsList: ListShape
+    NetworkMigrationMappingJobDetails: StructureShape
+    NetworkMigrationMappingUpdateJobDetails: StructureShape
+    NetworkMigrationMappingUpdatesList: ListShape
+    NetworkMigrationMappingsList: ListShape
     OS: StructureShape
     OperatingSystemString: StringShape
+    OperationUnion: UnionShape
     OrderType: IntegerShape
     PaginationToken: StringShape
     ParticipatingServer: StructureShape
     ParticipatingServers: ListShape
     PauseReplicationOutput: StructureShape
     PauseReplicationRequest: StructureShape
+    PhysicalID: StringShape
     PositiveInteger: IntegerShape
     PostLaunchActionExecutionStatus: StringShape
     PostLaunchActions: StructureShape
@@ -254,6 +400,7 @@ module Aws::Mgn
     ReplicationServersSecurityGroupsIDs: ListShape
     ReplicationType: StringShape
     ReplicationTypes: ListShape
+    ReplicatorID: StringShape
     ResourceNotFoundException: StructureShape
     ResumeReplicationOutput: StructureShape
     ResumeReplicationRequest: StructureShape
@@ -261,13 +408,28 @@ module Aws::Mgn
     RetryDataReplicationOutput: StructureShape
     S3BucketName: StringShape
     S3BucketSource: StructureShape
+    S3Configuration: StructureShape
     S3Key: StringShape
+    S3KeyName: StringShape
     S3LogBucketName: StringShape
+    ScopeTagKey: StringShape
+    ScopeTagValue: StringShape
+    ScopeTagsMap: MapShape
     SecretArn: StringShape
     SecurityGroupID: StringShape
+    SecurityGroupMappingStrategy: StringShape
+    SegmentConstructDescription: StringShape
+    SegmentConstructName: StringShape
+    SegmentDescription: StringShape
+    SegmentID: StringShape
+    SegmentName: StringShape
     ServiceQuotaExceededException: StructureShape
     SmallBoundedString: StringShape
+    SourceConfiguration: StructureShape
+    SourceConfigurationList: ListShape
+    SourceEnvironment: StringShape
     SourceProperties: StructureShape
+    SourceS3Configuration: StructureShape
     SourceServer: StructureShape
     SourceServerActionDocument: StructureShape
     SourceServerActionDocuments: ListShape
@@ -275,6 +437,9 @@ module Aws::Mgn
     SourceServerConnectorAction: StructureShape
     SourceServerID: StringShape
     SourceServersList: ListShape
+    SplitConstruct: StructureShape
+    SplitConstructs: ListShape
+    SplitOperation: StructureShape
     SsmDocument: StructureShape
     SsmDocumentExternalParameters: MapShape
     SsmDocumentName: StringShape
@@ -293,8 +458,24 @@ module Aws::Mgn
     StartCutoverRequestSourceServerIDs: ListShape
     StartExportInput: StructureShape
     StartExportOutput: StructureShape
+    StartImportFileEnrichmentRequest: StructureShape
+    StartImportFileEnrichmentResponse: StructureShape
     StartImportInput: StructureShape
     StartImportOutput: StructureShape
+    StartNetworkMigrationAnalysisRequest: StructureShape
+    StartNetworkMigrationAnalysisResponse: StructureShape
+    StartNetworkMigrationCodeGenerationRequest: StructureShape
+    StartNetworkMigrationCodeGenerationResponse: StructureShape
+    StartNetworkMigrationDeploymentOutput: StructureShape
+    StartNetworkMigrationDeploymentRequest: StructureShape
+    StartNetworkMigrationMappingRequest: StructureShape
+    StartNetworkMigrationMappingResponse: StructureShape
+    StartNetworkMigrationMappingUpdateConstruct: StructureShape
+    StartNetworkMigrationMappingUpdateConstructs: ListShape
+    StartNetworkMigrationMappingUpdateRequest: StructureShape
+    StartNetworkMigrationMappingUpdateResponse: StructureShape
+    StartNetworkMigrationMappingUpdateSegment: StructureShape
+    StartNetworkMigrationMappingUpdateSegments: ListShape
     StartReplicationInput: StructureShape
     StartReplicationOutput: StructureShape
     StartTestInput: StructureShape
@@ -302,6 +483,9 @@ module Aws::Mgn
     StartTestRequestSourceServerIDs: ListShape
     StopReplicationOutput: StructureShape
     StopReplicationRequest: StructureShape
+    StorageConfiguration: StructureShape
+    StorageType: StringShape
+    StorageVirtualMachineId: StringShape
     StrictlyPositiveInteger: IntegerShape
     SubnetID: StringShape
     TagKey: StringShape
@@ -309,7 +493,13 @@ module Aws::Mgn
     TagResourceInput: StructureShape
     TagValue: StringShape
     TagsMap: MapShape
+    TargetDeployment: StringShape
     TargetInstanceTypeRightSizingMethod: StringShape
+    TargetNetwork: StructureShape
+    TargetNetworkTopology: StringShape
+    TargetNetworkUpdate: StructureShape
+    TargetS3Configuration: StructureShape
+    TargetS3ConfigurationUpdate: StructureShape
     TemplateActionDocument: StructureShape
     TemplateActionDocuments: ListShape
     TemplateActionsRequestFilters: StructureShape
@@ -332,6 +522,11 @@ module Aws::Mgn
     UpdateLaunchConfigurationOutput: StructureShape
     UpdateLaunchConfigurationTemplateInput: StructureShape
     UpdateLaunchConfigurationTemplateOutput: StructureShape
+    UpdateNetworkMigrationDefinitionOutput: StructureShape
+    UpdateNetworkMigrationDefinitionRequest: StructureShape
+    UpdateNetworkMigrationMapperSegmentOutput: StructureShape
+    UpdateNetworkMigrationMapperSegmentRequest: StructureShape
+    UpdateOperation: StructureShape
     UpdateReplicationConfigurationInput: StructureShape
     UpdateReplicationConfigurationOutput: StructureShape
     UpdateReplicationConfigurationTemplateInput: StructureShape
@@ -342,6 +537,7 @@ module Aws::Mgn
     UpdateSourceServerRequest: StructureShape
     UpdateWaveInput: StructureShape
     UpdateWaveOutput: StructureShape
+    UserProvidedId: StringShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
@@ -349,7 +545,11 @@ module Aws::Mgn
     VcenterClient: StructureShape
     VcenterClientID: StringShape
     VcenterClientList: ListShape
+    VolumeInitializationRate: IntegerShape
     VolumeType: StringShape
+    VpcID: StringShape
+    VpcIDsFilter: ListShape
+    VpcProvisioningStrategy: StringShape
     Wave: StructureShape
     WaveAggregatedStatus: StructureShape
     WaveDescription: StringShape
@@ -359,6 +559,7 @@ module Aws::Mgn
     WaveName: StringShape
     WaveProgressStatus: StringShape
     WavesList: ListShape
+    ReferencedSegmentsList: ListShape
 
     ApplicationMigrationService: ServiceShape
   end

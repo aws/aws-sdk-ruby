@@ -105,10 +105,14 @@ module Aws::Notifications
     # @!attribute managed_notification_configuration_arn
     #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the Account Contact.</p>
     #   @return [String]
+    # @!attribute is_sensitive_events_subscribed
+    #   <p>Specifies whether this contact is subscribed to sensitive events. The <code>notifications:SubscribeSensitiveEvents</code> permission controls access to sensitive events. Defaults to false.</p>
+    #   @return [Boolean]
     class AssociateManagedNotificationAccountContactRequest < Struct.new(
       nil,
       :contact_identifier,
       :managed_notification_configuration_arn,
+      :is_sensitive_events_subscribed,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -127,10 +131,14 @@ module Aws::Notifications
     # @!attribute managed_notification_configuration_arn
     #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the additional Channel.</p>
     #   @return [String]
+    # @!attribute is_sensitive_events_subscribed
+    #   <p>Specifies whether this channel is subscribed to sensitive events. The <code>notifications:SubscribeSensitiveEvents</code> permission controls access to sensitive events. Defaults to false.</p>
+    #   @return [Boolean]
     class AssociateManagedNotificationAdditionalChannelRequest < Struct.new(
       nil,
       :channel_arn,
       :managed_notification_configuration_arn,
+      :is_sensitive_events_subscribed,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -301,7 +309,7 @@ module Aws::Notifications
     end
 
     # @!attribute notification_hub_region
-    #   <p>The <code>NotificationConfiguration</code> Region.</p>
+    #   <p>The <code>NotificationHub</code> Region.</p>
     #   @return [String]
     class DeregisterNotificationHubRequest < Struct.new(
       nil,
@@ -312,10 +320,10 @@ module Aws::Notifications
     end
 
     # @!attribute notification_hub_region
-    #   <p>The <code>NotificationConfiguration</code> Region.</p>
+    #   <p>The <code>NotificationHub</code> Region.</p>
     #   @return [String]
     # @!attribute status_summary
-    #   <p> <code>NotificationConfiguration</code> status information.</p>
+    #   <p> <code>NotificationHub</code> status information.</p>
     #   @return [Types::NotificationHubStatusSummary]
     class DeregisterNotificationHubResponse < Struct.new(
       nil,
@@ -1013,6 +1021,9 @@ module Aws::Notifications
     # @!attribute related_account
     #   <p>The Amazon Web Services account ID associated with the Managed Notification Events.</p>
     #   @return [String]
+    # @!attribute include_sensitive_events
+    #   <p>Specifies whether to include sensitive events in the result. By default, only non-sensitive events are returned. The <code>notifications:AccessSensitiveEvents</code> permission controls access to sensitive events.</p>
+    #   @return [Boolean]
     class ListManagedNotificationEventsRequest < Struct.new(
       nil,
       :start_time,
@@ -1023,6 +1034,7 @@ module Aws::Notifications
       :next_token,
       :organizational_unit_id,
       :related_account,
+      :include_sensitive_events,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1289,17 +1301,21 @@ module Aws::Notifications
     # @!attribute override_option
     #   <p>Controls whether users can modify channel associations for a notification configuration.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ENABLED</code> </p> <ul> <li> <p>Users can associate or disassociate channels with the notification configuration.</p> </li> </ul> </li> <li> <p> <code>DISABLED</code> </p> <ul> <li> <p>Users cannot associate or disassociate channels with the notification configuration.</p> </li> </ul> </li> </ul> </li> </ul>
     #   @return [String]
+    # @!attribute is_sensitive_events_subscribed
+    #   <p>Specifies whether this channel association is subscribed to sensitive events. Defaults to false for associations created without the flag.</p>
+    #   @return [Boolean]
     class ManagedNotificationChannelAssociationSummary < Struct.new(
       nil,
       :channel_identifier,
       :channel_type,
       :override_option,
+      :is_sensitive_events_subscribed,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A ManagedNotificationChildEvent is a notification-focused representation of an event. They contain semantic information used to create aggregated or non-aggregated end-user notifications.</p>
+    # <p>A notification-focused representation of an event. They contain semantic information used to create aggregated or non-aggregated end-user notifications.</p>
     # @!attribute schema_version
     #   <p>The schema version of the Managed Notification Child Event.</p>
     #   @return [String]
@@ -1487,6 +1503,9 @@ module Aws::Notifications
     # @!attribute organizational_unit_id
     #   <p>The Organizational Unit Id that an Amazon Web Services account belongs to.</p>
     #   @return [String]
+    # @!attribute attachments
+    #   <p>A list of files attached to the notification event.</p>
+    #   @return [Array<Types::NotificationEventAttachment>]
     class ManagedNotificationEvent < Struct.new(
       nil,
       :schema_version,
@@ -1502,6 +1521,7 @@ module Aws::Notifications
       :end_time,
       :text_parts,
       :organizational_unit_id,
+      :attachments,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1661,6 +1681,9 @@ module Aws::Notifications
     # @!attribute complete_description
     #   <p>A complete summary with all possible relevant information.</p>
     #   @return [String]
+    # @!attribute markup_description
+    #   <p>A rich description in Portable Text format, which you can convert to markup formats such as HTML, Markdown, or plain text. Channels that don't support rich rendering ignore this field and use the plain text components instead.</p>
+    #   @return [String]
     # @!attribute dimensions
     #   <p>A list of properties in key-value pairs. Pairs are shown in order of importance from most important to least important. Channels may limit the number of dimensions shown to the notification viewer.</p> <note> <p>Included dimensions, keys, and values are subject to change.</p> </note>
     #   @return [Array<Types::Dimension>]
@@ -1669,6 +1692,7 @@ module Aws::Notifications
       :headline,
       :paragraph_summary,
       :complete_description,
+      :markup_description,
       :dimensions,
       keyword_init: true
     )
@@ -1718,6 +1742,26 @@ module Aws::Notifications
       :creation_time,
       :aggregation_duration,
       :subtype,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A file attached to a notification event.</p>
+    # @!attribute display_name
+    #   <p>The name of the attachment that recipients see.</p>
+    #   @return [String]
+    # @!attribute attachment_download_url
+    #   <p>A temporary URL for downloading the attachment. The URL expires shortly after it's issued.</p>
+    #   @return [String]
+    # @!attribute content_type
+    #   <p>The MIME content type of the attachment, for example <code>application/pdf</code>.</p>
+    #   @return [String]
+    class NotificationEventAttachment < Struct.new(
+      nil,
+      :display_name,
+      :attachment_download_url,
+      :content_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1934,7 +1978,7 @@ module Aws::Notifications
     #   <p>The Region of the <code>NotificationHub</code>.</p>
     #   @return [String]
     # @!attribute status_summary
-    #   <p>Provides additional information about the current <code>NotificationConfiguration</code> status information.</p>
+    #   <p>Provides additional information about the current <code>NotificationHub</code> status information.</p>
     #   @return [Types::NotificationHubStatusSummary]
     # @!attribute creation_time
     #   <p>The date the resource was created.</p>
@@ -2239,6 +2283,32 @@ module Aws::Notifications
       :arn,
       :notification_configuration_arn,
       :status_summary_by_region,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute managed_notification_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> whose Channel association property you want to update.</p>
+    #   @return [String]
+    # @!attribute channel_identifier
+    #   <p>The identifier of the channel association to update. You can specify one of the following:</p> <ul> <li> <p>An Account contact identifier.</p> </li> <li> <p>A Channel ARN.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute is_sensitive_events_subscribed
+    #   <p>Specifies whether the association is subscribed to sensitive events. The <code>notifications:SubscribeSensitiveEvents</code> permission controls access to sensitive events.</p>
+    #   @return [Boolean]
+    class UpdateManagedNotificationChannelAssociationRequest < Struct.new(
+      nil,
+      :managed_notification_configuration_arn,
+      :channel_identifier,
+      :is_sensitive_events_subscribed,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateManagedNotificationChannelAssociationResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

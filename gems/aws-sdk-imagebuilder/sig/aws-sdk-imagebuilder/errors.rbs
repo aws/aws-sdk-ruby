@@ -1,9 +1,15 @@
 module Aws::Imagebuilder
   module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class CallRateLimitExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ClientException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DryRunOperationException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ForbiddenException < Smithy::Client::ServiceError
@@ -49,6 +55,9 @@ module Aws::Imagebuilder
       def message: () -> String?
     end
     class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
       def message: () -> String?
     end
   end

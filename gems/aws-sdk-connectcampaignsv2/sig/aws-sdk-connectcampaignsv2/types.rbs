@@ -1,6 +1,23 @@
 module Aws::ConnectCampaignsV2
   module Types
 
+    class AbandonmentRatePacingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_rate: Float,
+        ?connection_start_point: String,
+        ?connection_threshold_seconds: Integer,
+        ?evaluation_window: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_rate: Float?
+      attr_accessor connection_start_point: String?
+      attr_accessor connection_threshold_seconds: Integer?
+      attr_accessor evaluation_window: String?
+    end
+
     class AccessDeniedException
       include Smithy::Schema::Structure
 
@@ -45,9 +62,11 @@ module Aws::ConnectCampaignsV2
         ?name: String,
         ?connect_instance_id: String,
         ?channel_subtype_config: Types::ChannelSubtypeConfig,
+        ?type: String,
         ?source: Types::Source,
         ?connect_campaign_flow_arn: String,
         ?schedule: Types::Schedule,
+        ?entry_limits_config: Types::EntryLimitsConfig,
         ?communication_time_config: Types::CommunicationTimeConfig,
         ?communication_limits_override: Types::CommunicationLimitsConfig,
         ?tags: Hash[String, String],
@@ -59,9 +78,11 @@ module Aws::ConnectCampaignsV2
       attr_accessor name: String?
       attr_accessor connect_instance_id: String?
       attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig?
+      attr_accessor type: String?
       attr_accessor source: Types::Source?
       attr_accessor connect_campaign_flow_arn: String?
       attr_accessor schedule: Types::Schedule?
+      attr_accessor entry_limits_config: Types::EntryLimitsConfig?
       attr_accessor communication_time_config: Types::CommunicationTimeConfig?
       attr_accessor communication_limits_override: Types::CommunicationLimitsConfig?
       attr_accessor tags: Hash[String, String]?
@@ -87,7 +108,9 @@ module Aws::ConnectCampaignsV2
         ?name: String,
         ?connect_instance_id: String,
         ?channel_subtypes: Array[String],
+        ?type: String,
         ?schedule: Types::Schedule,
+        ?entry_limits_config: Types::EntryLimitsConfig,
         ?connect_campaign_flow_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -97,8 +120,21 @@ module Aws::ConnectCampaignsV2
       attr_accessor name: String?
       attr_accessor connect_instance_id: String?
       attr_accessor channel_subtypes: Array[String]?
+      attr_accessor type: String?
       attr_accessor schedule: Types::Schedule?
+      attr_accessor entry_limits_config: Types::EntryLimitsConfig?
       attr_accessor connect_campaign_flow_arn: String?
+    end
+
+    class ChannelContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_notification_context: Types::WebNotificationContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_notification_context: Types::WebNotificationContext?
     end
 
     class ChannelSubtypeConfig
@@ -108,12 +144,14 @@ module Aws::ConnectCampaignsV2
         ?telephony: Types::TelephonyChannelSubtypeConfig,
         ?sms: Types::SmsChannelSubtypeConfig,
         ?email: Types::EmailChannelSubtypeConfig,
+        ?whats_app: Types::WhatsAppChannelSubtypeConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor telephony: Types::TelephonyChannelSubtypeConfig?
       attr_accessor sms: Types::SmsChannelSubtypeConfig?
       attr_accessor email: Types::EmailChannelSubtypeConfig?
+      attr_accessor whats_app: Types::WhatsAppChannelSubtypeConfig?
     end
 
     class ChannelSubtypeParameters
@@ -123,18 +161,22 @@ module Aws::ConnectCampaignsV2
         ?telephony: Types::TelephonyChannelSubtypeParameters,
         ?sms: Types::SmsChannelSubtypeParameters,
         ?email: Types::EmailChannelSubtypeParameters,
+        ?whats_app: Types::WhatsAppChannelSubtypeParameters,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor telephony: Types::TelephonyChannelSubtypeParameters?
       attr_accessor sms: Types::SmsChannelSubtypeParameters?
       attr_accessor email: Types::EmailChannelSubtypeParameters?
+      attr_accessor whats_app: Types::WhatsAppChannelSubtypeParameters?
 
       class Telephony < ChannelSubtypeParameters
       end
       class Sms < ChannelSubtypeParameters
       end
       class Email < ChannelSubtypeParameters
+      end
+      class WhatsApp < ChannelSubtypeParameters
       end
       class Unknown < ChannelSubtypeParameters
       end
@@ -192,6 +234,7 @@ module Aws::ConnectCampaignsV2
         ?telephony: Types::TimeWindow,
         ?sms: Types::TimeWindow,
         ?email: Types::TimeWindow,
+        ?whats_app: Types::TimeWindow,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -199,6 +242,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor telephony: Types::TimeWindow?
       attr_accessor sms: Types::TimeWindow?
       attr_accessor email: Types::TimeWindow?
+      attr_accessor whats_app: Types::TimeWindow?
     end
 
     class ConflictException
@@ -221,9 +265,11 @@ module Aws::ConnectCampaignsV2
         ?name: String,
         ?connect_instance_id: String,
         ?channel_subtype_config: Types::ChannelSubtypeConfig,
+        ?type: String,
         ?source: Types::Source,
         ?connect_campaign_flow_arn: String,
         ?schedule: Types::Schedule,
+        ?entry_limits_config: Types::EntryLimitsConfig,
         ?communication_time_config: Types::CommunicationTimeConfig,
         ?communication_limits_override: Types::CommunicationLimitsConfig,
         ?tags: Hash[String, String],
@@ -233,9 +279,11 @@ module Aws::ConnectCampaignsV2
       attr_accessor name: String?
       attr_accessor connect_instance_id: String?
       attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig?
+      attr_accessor type: String?
       attr_accessor source: Types::Source?
       attr_accessor connect_campaign_flow_arn: String?
       attr_accessor schedule: Types::Schedule?
+      attr_accessor entry_limits_config: Types::EntryLimitsConfig?
       attr_accessor communication_time_config: Types::CommunicationTimeConfig?
       attr_accessor communication_limits_override: Types::CommunicationLimitsConfig?
       attr_accessor tags: Hash[String, String]?
@@ -330,6 +378,17 @@ module Aws::ConnectCampaignsV2
 
       attr_accessor id: String?
       attr_accessor config: String?
+    end
+
+    class DeleteCampaignEntryLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
     end
 
     class DeleteCampaignRequest
@@ -480,6 +539,19 @@ module Aws::ConnectCampaignsV2
       attr_accessor key_arn: String?
     end
 
+    class EntryLimitsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_entry_count: Integer,
+        ?min_entry_interval: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_entry_count: Integer?
+      attr_accessor min_entry_interval: String?
+    end
+
     class EventTrigger
       include Smithy::Schema::Structure
 
@@ -489,6 +561,19 @@ module Aws::ConnectCampaignsV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor customer_profiles_domain_arn: String?
+    end
+
+    class EventTriggerContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_event: String,
+        ?channel_context: Types::ChannelContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_event: String?
+      attr_accessor channel_context: Types::ChannelContext?
     end
 
     class FailedCampaignStateResponse
@@ -706,15 +791,19 @@ module Aws::ConnectCampaignsV2
       def initialize: (
         ?customer_profiles: Types::CustomerProfilesIntegrationConfig,
         ?q_connect: Types::QConnectIntegrationConfig,
+        ?lambda: Types::LambdaIntegrationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor customer_profiles: Types::CustomerProfilesIntegrationConfig?
       attr_accessor q_connect: Types::QConnectIntegrationConfig?
+      attr_accessor lambda: Types::LambdaIntegrationConfig?
 
       class CustomerProfiles < IntegrationConfig
       end
       class QConnect < IntegrationConfig
+      end
+      class Lambda < IntegrationConfig
       end
       class Unknown < IntegrationConfig
       end
@@ -726,15 +815,19 @@ module Aws::ConnectCampaignsV2
       def initialize: (
         ?customer_profiles: Types::CustomerProfilesIntegrationIdentifier,
         ?q_connect: Types::QConnectIntegrationIdentifier,
+        ?lambda: Types::LambdaIntegrationIdentifier,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor customer_profiles: Types::CustomerProfilesIntegrationIdentifier?
       attr_accessor q_connect: Types::QConnectIntegrationIdentifier?
+      attr_accessor lambda: Types::LambdaIntegrationIdentifier?
 
       class CustomerProfiles < IntegrationIdentifier
       end
       class QConnect < IntegrationIdentifier
+      end
+      class Lambda < IntegrationIdentifier
       end
       class Unknown < IntegrationIdentifier
       end
@@ -746,15 +839,19 @@ module Aws::ConnectCampaignsV2
       def initialize: (
         ?customer_profiles: Types::CustomerProfilesIntegrationSummary,
         ?q_connect: Types::QConnectIntegrationSummary,
+        ?lambda: Types::LambdaIntegrationSummary,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor customer_profiles: Types::CustomerProfilesIntegrationSummary?
       attr_accessor q_connect: Types::QConnectIntegrationSummary?
+      attr_accessor lambda: Types::LambdaIntegrationSummary?
 
       class CustomerProfiles < IntegrationSummary
       end
       class QConnect < IntegrationSummary
+      end
+      class Lambda < IntegrationSummary
       end
       class Unknown < IntegrationSummary
       end
@@ -799,6 +896,39 @@ module Aws::ConnectCampaignsV2
 
       attr_accessor message: String?
       attr_accessor x_amz_error_type: String?
+    end
+
+    class LambdaIntegrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+    end
+
+    class LambdaIntegrationIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+    end
+
+    class LambdaIntegrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
     end
 
     class ListCampaignsRequest
@@ -885,11 +1015,13 @@ module Aws::ConnectCampaignsV2
       def initialize: (
         ?default_time_zone: String,
         ?local_time_zone_detection: Array[String],
+        ?local_time_zone_detection_scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor default_time_zone: String?
       attr_accessor local_time_zone_detection: Array[String]?
+      attr_accessor local_time_zone_detection_scope: String?
     end
 
     class OpenHours
@@ -923,6 +1055,22 @@ module Aws::ConnectCampaignsV2
       attr_accessor channel_subtype_parameters: Types::ChannelSubtypeParameters?
     end
 
+    class PacingStrategy
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?abandonment_rate: Types::AbandonmentRatePacingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor abandonment_rate: Types::AbandonmentRatePacingConfig?
+
+      class AbandonmentRate < PacingStrategy
+      end
+      class Unknown < PacingStrategy
+      end
+    end
+
     class PauseCampaignRequest
       include Smithy::Schema::Structure
 
@@ -939,10 +1087,27 @@ module Aws::ConnectCampaignsV2
 
       def initialize: (
         ?bandwidth_allocation: Float,
+        ?pacing_strategies: Array[Types::PacingStrategy],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor bandwidth_allocation: Float?
+      attr_accessor pacing_strategies: Array[Types::PacingStrategy]?
+    end
+
+    class PreviewConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bandwidth_allocation: Float,
+        ?timeout_config: Types::TimeoutConfig,
+        ?agent_actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bandwidth_allocation: Float?
+      attr_accessor timeout_config: Types::TimeoutConfig?
+      attr_accessor agent_actions: Array[String]?
     end
 
     class ProfileOutboundRequest
@@ -952,12 +1117,14 @@ module Aws::ConnectCampaignsV2
         ?client_token: String,
         ?profile_id: String,
         ?expiration_time: Time,
+        ?event_trigger_context: Types::EventTriggerContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor client_token: String?
       attr_accessor profile_id: String?
       attr_accessor expiration_time: Time?
+      attr_accessor event_trigger_context: Types::EventTriggerContext?
     end
 
     class ProgressiveConfig
@@ -1369,6 +1536,7 @@ module Aws::ConnectCampaignsV2
         ?attributes: Hash[String, String],
         ?connect_source_phone_number: String,
         ?answer_machine_detection_config: Types::AnswerMachineDetectionConfig,
+        ?ring_timeout: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1376,6 +1544,7 @@ module Aws::ConnectCampaignsV2
       attr_accessor attributes: Hash[String, String]?
       attr_accessor connect_source_phone_number: String?
       attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig?
+      attr_accessor ring_timeout: Integer?
     end
 
     class TelephonyOutboundConfig
@@ -1385,12 +1554,14 @@ module Aws::ConnectCampaignsV2
         ?connect_contact_flow_id: String,
         ?connect_source_phone_number: String,
         ?answer_machine_detection_config: Types::AnswerMachineDetectionConfig,
+        ?ring_timeout: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connect_contact_flow_id: String?
       attr_accessor connect_source_phone_number: String?
       attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig?
+      attr_accessor ring_timeout: Integer?
     end
 
     class TelephonyOutboundMode
@@ -1400,18 +1571,22 @@ module Aws::ConnectCampaignsV2
         ?progressive: Types::ProgressiveConfig,
         ?predictive: Types::PredictiveConfig,
         ?agentless: Types::AgentlessConfig,
+        ?preview: Types::PreviewConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor progressive: Types::ProgressiveConfig?
       attr_accessor predictive: Types::PredictiveConfig?
       attr_accessor agentless: Types::AgentlessConfig?
+      attr_accessor preview: Types::PreviewConfig?
 
       class Progressive < TelephonyOutboundMode
       end
       class Predictive < TelephonyOutboundMode
       end
       class Agentless < TelephonyOutboundMode
+      end
+      class Preview < TelephonyOutboundMode
       end
       class Unknown < TelephonyOutboundMode
       end
@@ -1454,6 +1629,17 @@ module Aws::ConnectCampaignsV2
 
       attr_accessor open_hours: Types::OpenHours?
       attr_accessor restricted_periods: Types::RestrictedPeriods?
+    end
+
+    class TimeoutConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_seconds: Integer?
     end
 
     class UntagResourceRequest
@@ -1506,6 +1692,19 @@ module Aws::ConnectCampaignsV2
 
       attr_accessor id: String?
       attr_accessor communication_time_config: Types::CommunicationTimeConfig?
+    end
+
+    class UpdateCampaignEntryLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?entry_limits_config: Types::EntryLimitsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor entry_limits_config: Types::EntryLimitsConfig?
     end
 
     class UpdateCampaignFlowAssociationRequest
@@ -1571,6 +1770,80 @@ module Aws::ConnectCampaignsV2
 
       attr_accessor message: String?
       attr_accessor x_amz_error_type: String?
+    end
+
+    class WebNotificationContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?browser_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor browser_id: String?
+    end
+
+    class WhatsAppChannelSubtypeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Float,
+        ?outbound_mode: Types::WhatsAppOutboundMode,
+        ?default_outbound_config: Types::WhatsAppOutboundConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Float?
+      attr_accessor outbound_mode: Types::WhatsAppOutboundMode?
+      attr_accessor default_outbound_config: Types::WhatsAppOutboundConfig?
+    end
+
+    class WhatsAppChannelSubtypeParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_phone_number: String,
+        ?connect_source_phone_number_arn: String,
+        ?template_arn: String,
+        ?template_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_phone_number: String?
+      attr_accessor connect_source_phone_number_arn: String?
+      attr_accessor template_arn: String?
+      attr_accessor template_parameters: Hash[String, String]?
+    end
+
+    class WhatsAppOutboundConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_source_phone_number_arn: String,
+        ?wisdom_template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_source_phone_number_arn: String?
+      attr_accessor wisdom_template_arn: String?
+    end
+
+    class WhatsAppOutboundMode
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?agentless: Types::AgentlessConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agentless: Types::AgentlessConfig?
+
+      class Agentless < WhatsAppOutboundMode
+      end
+      class Unknown < WhatsAppOutboundMode
+      end
     end
   end
 end

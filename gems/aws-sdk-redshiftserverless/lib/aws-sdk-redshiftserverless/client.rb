@@ -144,18 +144,18 @@ module Aws::RedshiftServerless
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,8 +209,7 @@ module Aws::RedshiftServerless
       super
     end
 
-    # <p>Converts a recovery point to a snapshot. For more information about recovery points and snapshots, 
-    #          see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery-points.html">Working with snapshots and recovery points</a>.</p>
+    # <p>Converts a recovery point to a snapshot. For more information about recovery points and snapshots, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery-points.html">Working with snapshots and recovery points</a>.</p>
     # @param [Hash, Types::ConvertRecoveryPointToSnapshotRequest] params
     # @option params [String] :recovery_point_id
     #   <p>The unique identifier of the recovery point.</p>
@@ -219,8 +218,7 @@ module Aws::RedshiftServerless
     # @option params [Integer] :retention_period
     #   <p>How long to retain the snapshot.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>An array of <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html">Tag objects</a> 
-    #            to associate with the created snapshot.</p>
+    #   <p>An array of <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html">Tag objects</a> to associate with the created snapshot.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     recovery_point_id: "String", # required
@@ -302,17 +300,13 @@ module Aws::RedshiftServerless
     # <p>Creates an Amazon Redshift Serverless managed VPC endpoint.</p>
     # @param [Hash, Types::CreateEndpointAccessRequest] params
     # @option params [String] :endpoint_name
-    #   <p>The name of the VPC endpoint. An endpoint name must contain 1-30 characters. 
-    #            Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. 
-    #            The name can't contain two consecutive hyphens or end with a hyphen.</p>
+    #   <p>The name of the VPC endpoint. An endpoint name must contain 1-30 characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. The name can't contain two consecutive hyphens or end with a hyphen.</p>
     # @option params [Array<String>] :subnet_ids
-    #   <p>The unique identifers of subnets from which 
-    #            Amazon Redshift Serverless chooses one to deploy a VPC endpoint.</p>
+    #   <p>The unique identifers of subnets from which Amazon Redshift Serverless chooses one to deploy a VPC endpoint.</p>
     # @option params [String] :workgroup_name
     #   <p>The name of the workgroup to associate with the VPC endpoint.</p>
     # @option params [Array<String>] :vpc_security_group_ids
-    #   <p>The unique identifiers of the security group that defines the ports, 
-    #            protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
+    #   <p>The unique identifiers of the security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
     # @option params [String] :owner_account
     #   <p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>
     # @example Request syntax with placeholder values
@@ -371,8 +365,7 @@ module Aws::RedshiftServerless
     # @option params [String] :admin_username
     #   <p>The username of the administrator for the first database created in the namespace.</p>
     # @option params [String] :admin_user_password
-    #   <p>The password of the administrator for the first database created in the namespace.</p>
-    #            <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>
+    #   <p>The password of the administrator for the first database created in the namespace.</p> <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>
     # @option params [String] :db_name
     #   <p>The name of the first database created in the namespace.</p>
     # @option params [String] :kms_key_id
@@ -382,19 +375,13 @@ module Aws::RedshiftServerless
     # @option params [Array<String>] :iam_roles
     #   <p>A list of IAM roles to associate with the namespace.</p>
     # @option params [Array<String>] :log_exports
-    #   <p>The types of logs the namespace can export. 
-    #            Available export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>
+    #   <p>The types of logs the namespace can export. Available export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>A list of tag instances.</p>
     # @option params [Boolean] :manage_admin_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. 
-    #            You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. 
-    #            If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses 
-    #            <code>adminUserPassword</code> for the admin user account's password.
-    #         </p>
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses <code>adminUserPassword</code> for the admin user account's password. </p>
     # @option params [String] :admin_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. 
-    #            You can only use this parameter if <code>manageAdminPassword</code> is true.</p>
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if <code>manageAdminPassword</code> is true.</p>
     # @option params [String] :redshift_idc_application_arn
     #   <p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>
     # @example Request syntax with placeholder values
@@ -435,7 +422,18 @@ module Aws::RedshiftServerless
     #       status: "NamespaceStatus",
     #       creation_date: Time.now,
     #       admin_password_secret_arn: "String",
-    #       admin_password_secret_kms_key_id: "KmsKeyId"
+    #       admin_password_secret_kms_key_id: "KmsKeyId",
+    #       lakehouse_registration_status: "String",
+    #       catalog_arn: "String",
+    #       s3_table_publish_status: {
+    #         s3_tables: ["S3TableName"],
+    #         s3_table_namespace: "String",
+    #         s3_table_granularity: "S3TableGranularity",
+    #         enabled_all: false,
+    #         last_ingestion_times: {
+    #           "String" => "String"
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::CreateNamespaceResponse]
@@ -444,18 +442,14 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Creates an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) 
-    #          for a year at a discount from Serverless on-demand (OD) rates.</p>
+    # <p>Creates an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) for a year at a discount from Serverless on-demand (OD) rates.</p>
     # @param [Hash, Types::CreateReservationRequest] params
     # @option params [Integer] :capacity
     #   <p>The number of Redshift Processing Units (RPUs) to reserve.</p>
     # @option params [String] :offering_id
     #   <p>The ID of the offering associated with the reservation. The offering determines the payment schedule for the reservation.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services 
-    #            SDK populates this field. This token must be a valid UUIDv4 value. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">
-    #               Making retries safe with idempotent APIs
-    #            </a>.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. This token must be a valid UUIDv4 value. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"> Making retries safe with idempotent APIs </a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     capacity: 1, # required
@@ -490,37 +484,20 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. 
-    #          For example, you can create a schedule of when to run the <code>CreateSnapshot</code> API operation.</p>
+    # <p>Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the <code>CreateSnapshot</code> API operation.</p>
     # @param [Hash, Types::CreateScheduledActionRequest] params
     # @option params [String] :scheduled_action_name
     #   <p>The name of the scheduled action.</p>
     # @option params [Types::TargetAction] :target_action
-    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p>
-    #            <p>
-    #               <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code>
-    #            </p>
+    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p> <p> <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code> </p>
     # @option params [Types::Schedule] :schedule
-    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <ul> <li> <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p> </li> <li> <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> </li> </ul>
     # @option params [String] :role_arn
-    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. 
-    #            This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. 
-    #            For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for 
-    #               Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
+    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots. (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
     # @option params [String] :namespace_name
     #   <p>The name of the namespace for which to create a scheduled action.</p>
     # @option params [Boolean] :enabled
-    #   <p>Indicates whether the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> 
-    #            of the scheduled action, see <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_ScheduledAction.html">ScheduledAction</a>.</p>
+    #   <p>Indicates whether the schedule is enabled. If false, the scheduled action does not trigger. For more information about <code>state</code> of the scheduled action, see <a href="https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_ScheduledAction.html">ScheduledAction</a>.</p>
     # @option params [String] :scheduled_action_description
     #   <p>The description of the scheduled action.</p>
     # @option params [Time] :start_time
@@ -598,10 +575,7 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Creates a snapshot of all databases in a namespace.
-    #          For more information about snapshots, see 
-    #          <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery-points.html">
-    #          Working with snapshots and recovery points</a>.</p>
+    # <p>Creates a snapshot of all databases in a namespace. For more information about snapshots, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery-points.html"> Working with snapshots and recovery points</a>.</p>
     # @param [Hash, Types::CreateSnapshotRequest] params
     # @option params [String] :namespace_name
     #   <p>The namespace to create a snapshot for.</p>
@@ -696,16 +670,14 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Creates a usage limit for a specified Amazon Redshift Serverless usage type. The usage limit is identified by the returned usage limit identifier.
-    #       </p>
+    # <p>Creates a usage limit for a specified Amazon Redshift Serverless usage type. The usage limit is identified by the returned usage limit identifier. </p>
     # @param [Hash, Types::CreateUsageLimitRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Amazon Redshift Serverless resource to create the usage limit for.</p>
     # @option params [String] :usage_type
     #   <p>The type of Amazon Redshift Serverless usage to create a usage limit for.</p>
     # @option params [Integer] :amount
-    #   <p>The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data
-    #            transferred between Regions in cross-account sharing. The value must be a positive number.</p>
+    #   <p>The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.</p>
     # @option params [String] :period
     #   <p>The time period that the amount applies to. A weekly period begins on Sunday. The default is monthly.</p>
     # @option params [String] :breach_action
@@ -739,24 +711,7 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Creates an workgroup in Amazon Redshift Serverless.</p>
-    #          <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that
-    #          you own in a Region from reaching or being reached from the internet through internet
-    #          gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA
-    #          turned on, the following capabilities are blocked: </p>
-    #          <ul>
-    #             <li>
-    #                <p>Creating a public access workgroup</p>
-    #             </li>
-    #             <li>
-    #                <p>Modifying a private workgroup to public</p>
-    #             </li>
-    #             <li>
-    #                <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is
-    #                public</p>
-    #             </li>
-    #          </ul>
-    #          <p>For more information about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
+    # <p>Creates an workgroup in Amazon Redshift Serverless.</p> <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA turned on, the following capabilities are blocked: </p> <ul> <li> <p>Creating a public access workgroup</p> </li> <li> <p>Modifying a private workgroup to public</p> </li> <li> <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is public</p> </li> </ul> <p>For more information about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::CreateWorkgroupRequest] params
     # @option params [String] :workgroup_name
     #   <p>The name of the created workgroup.</p>
@@ -765,14 +720,9 @@ module Aws::RedshiftServerless
     # @option params [Integer] :base_capacity
     #   <p>The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).</p>
     # @option params [Boolean] :enhanced_vpc_routing
-    #   <p>The value that specifies whether to turn on enhanced virtual 
-    #            private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.</p>
+    #   <p>The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.</p>
     # @option params [Array<Types::ConfigParameter>] :config_parameters
-    #   <p>An array of parameters to set for advanced control over a database. The
-    #            options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,
-    #            <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see 
-    #            <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless">
-    #               Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
+    #   <p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and either <code>wlm_json_configuration</code> or query monitoring metrics that let you define performance boundaries. You can either specify individual query monitoring metrics (such as <code>max_scan_row_count</code>, <code>max_query_execution_time</code>) or use <code>wlm_json_configuration</code> to define query queues with rules, but not both. If you're using <code>wlm_json_configuration</code>, the maximum size of <code>parameterValue</code> is 8000 characters. For more information about query monitoring rules and available metrics, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
     # @option params [Array<String>] :security_group_ids
     #   <p>An array of security group IDs to associate with the workgroup.</p>
     # @option params [Array<String>] :subnet_ids
@@ -790,8 +740,9 @@ module Aws::RedshiftServerless
     # @option params [String] :ip_address_type
     #   <p>The IP address type that the workgroup supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>
     # @option params [String] :track_name
-    #   <p>An optional parameter for the name of the track for the workgroup. If you don't provide 
-    #            a track name, the workgroup is assigned to the <code>current</code> track.</p>
+    #   <p>An optional parameter for the name of the track for the workgroup. If you don't provide a track name, the workgroup is assigned to the <code>current</code> track.</p>
+    # @option params [Boolean] :extra_compute_for_automatic_optimization
+    #   <p>If <code>true</code>, allocates additional compute resources for running automatic optimization operations.</p> <p>Default: false</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workgroup_name: "WorkgroupName", # required
@@ -820,7 +771,8 @@ module Aws::RedshiftServerless
     #       level: 1
     #     },
     #     ip_address_type: "IpAddressType",
-    #     track_name: "TrackName"
+    #     track_name: "TrackName",
+    #     extra_compute_for_automatic_optimization: false
     #   }
     #   options = {}
     #   response = client.create_workgroup(params, options)
@@ -878,7 +830,8 @@ module Aws::RedshiftServerless
     #         level: 1
     #       },
     #       track_name: "TrackName",
-    #       pending_track_name: "TrackName"
+    #       pending_track_name: "TrackName",
+    #       extra_compute_for_automatic_optimization: false
     #     }
     #   }
     # @return [Types::CreateWorkgroupResponse]
@@ -958,8 +911,7 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Deletes a namespace from Amazon Redshift Serverless. 
-    #          Before you delete the namespace, you can create a final snapshot that has all of the data within the namespace.</p>
+    # <p>Deletes a namespace from Amazon Redshift Serverless. Before you delete the namespace, you can create a final snapshot that has all of the data within the namespace.</p>
     # @param [Hash, Types::DeleteNamespaceRequest] params
     # @option params [String] :namespace_name
     #   <p>The name of the namespace to delete.</p>
@@ -991,7 +943,18 @@ module Aws::RedshiftServerless
     #       status: "NamespaceStatus",
     #       creation_date: Time.now,
     #       admin_password_secret_arn: "String",
-    #       admin_password_secret_kms_key_id: "KmsKeyId"
+    #       admin_password_secret_kms_key_id: "KmsKeyId",
+    #       lakehouse_registration_status: "String",
+    #       catalog_arn: "String",
+    #       s3_table_publish_status: {
+    #         s3_tables: ["S3TableName"],
+    #         s3_table_namespace: "String",
+    #         s3_table_granularity: "S3TableGranularity",
+    #         enabled_all: false,
+    #         last_ingestion_times: {
+    #           "String" => "String"
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::DeleteNamespaceResponse]
@@ -1234,7 +1197,8 @@ module Aws::RedshiftServerless
     #         level: 1
     #       },
     #       track_name: "TrackName",
-    #       pending_track_name: "TrackName"
+    #       pending_track_name: "TrackName",
+    #       extra_compute_for_automatic_optimization: false
     #     }
     #   }
     # @return [Types::DeleteWorkgroupResponse]
@@ -1243,41 +1207,12 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Returns a database user name and temporary password with
-    #          temporary authorization to log in to Amazon Redshift Serverless.</p>
-    #          <p>By default, the temporary credentials expire in 900 seconds. 
-    #          You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).</p>
-    #          <p>The Identity and Access Management (IAM) user or role that runs 
-    #       GetCredentials must have an IAM policy attached that allows access to all 
-    #       necessary actions and resources.</p>
-    #          <p>If the <code>DbName</code> parameter is specified, the IAM policy must 
-    #       allow access to the resource dbname for the specified database name.</p>
+    # <p>Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless.</p> <p>By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).</p> <p>The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.</p>
     # @param [Hash, Types::GetCredentialsRequest] params
     # @option params [String] :db_name
-    #   <p>The name of the database to get temporary authorization to log on to.</p>
-    #            <p>Constraints:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Must be 1 to 64 alphanumeric characters or hyphens.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Must contain only uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The first character must be a letter.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Must not contain a colon ( : ) or slash ( / ).</p>
-    #               </li>
-    #               <li>
-    #                  <p>Cannot be a reserved word. A list of reserved words can be found 
-    #                  in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words </a> 
-    #                  in the Amazon Redshift Database Developer Guide</p>
-    #               </li>
-    #            </ul>
+    #   <p>The name of the database to get temporary authorization to log on to.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens.</p> </li> <li> <p>Must contain only uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ).</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words </a> in the Amazon Redshift Database Developer Guide</p> </li> </ul>
     # @option params [Integer] :duration_seconds
-    #   <p>The number of seconds until the returned temporary password expires.
-    #            The minimum is 900 seconds, and the maximum is 3600 seconds.</p>
+    #   <p>The number of seconds until the returned temporary password expires. The minimum is 900 seconds, and the maximum is 3600 seconds.</p>
     # @option params [String] :workgroup_name
     #   <p>The name of the workgroup associated with the database.</p>
     # @option params [String] :custom_domain_name
@@ -1381,6 +1316,28 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
+    # <p>Returns an Identity Center authentication token for accessing Amazon Redshift Serverless workgroups.</p> <p>The token provides secure access to data within the specified workgroups using Identity Center identity propagation. The token expires after a specified duration and must be refreshed for continued access.</p> <p>The Identity and Access Management (IAM) user or role that runs GetIdentityCenterAuthToken must have appropriate permissions to access the specified workgroups and Identity Center integration must be configured for the workgroups.</p>
+    # @param [Hash, Types::GetIdentityCenterAuthTokenRequest] params
+    # @option params [Array<String>] :workgroup_names
+    #   <p>A list of workgroup names for which to generate the Identity Center authentication token.</p> <p>Constraints:</p> <ul> <li> <p>Must contain between 1 and 20 workgroup names.</p> </li> <li> <p>Each workgroup name must be a valid Amazon Redshift Serverless workgroup identifier.</p> </li> <li> <p>All specified workgroups must have Identity Center integration enabled.</p> </li> </ul>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workgroup_names: ["WorkgroupName"], # required
+    #   }
+    #   options = {}
+    #   response = client.get_identity_center_auth_token(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     token: "String",
+    #     expiration_time: Time.now
+    #   }
+    # @return [Types::GetIdentityCenterAuthTokenResponse]
+    def get_identity_center_auth_token(params = {}, options = {})
+      request = build_request(:get_identity_center_auth_token, params)
+      request.send_request(options)
+    end
+
     # <p>Returns information about a namespace in Amazon Redshift Serverless.</p>
     # @param [Hash, Types::GetNamespaceRequest] params
     # @option params [String] :namespace_name
@@ -1407,7 +1364,18 @@ module Aws::RedshiftServerless
     #       status: "NamespaceStatus",
     #       creation_date: Time.now,
     #       admin_password_secret_arn: "String",
-    #       admin_password_secret_kms_key_id: "KmsKeyId"
+    #       admin_password_secret_kms_key_id: "KmsKeyId",
+    #       lakehouse_registration_status: "String",
+    #       catalog_arn: "String",
+    #       s3_table_publish_status: {
+    #         s3_tables: ["S3TableName"],
+    #         s3_table_namespace: "String",
+    #         s3_table_granularity: "S3TableGranularity",
+    #         enabled_all: false,
+    #         last_ingestion_times: {
+    #           "String" => "String"
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::GetNamespaceResponse]
@@ -1444,8 +1412,7 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Gets an Amazon Redshift Serverless reservation. A reservation gives you the option to commit to a specified number of Redshift Processing Units (RPUs) 
-    #          for a year at a discount from Serverless on-demand (OD) rates.</p>
+    # <p>Gets an Amazon Redshift Serverless reservation. A reservation gives you the option to commit to a specified number of Redshift Processing Units (RPUs) for a year at a discount from Serverless on-demand (OD) rates.</p>
     # @param [Hash, Types::GetReservationRequest] params
     # @option params [String] :reservation_id
     #   <p>The ID of the reservation to retrieve.</p>
@@ -1794,7 +1761,8 @@ module Aws::RedshiftServerless
     #         level: 1
     #       },
     #       track_name: "TrackName",
-    #       pending_track_name: "TrackName"
+    #       pending_track_name: "TrackName",
+    #       extra_compute_for_automatic_optimization: false
     #     }
     #   }
     # @return [Types::GetWorkgroupResponse]
@@ -1806,12 +1774,9 @@ module Aws::RedshiftServerless
     # <p> Lists custom domain associations for Amazon Redshift Serverless.</p>
     # @param [Hash, Types::ListCustomDomainAssociationsRequest] params
     # @option params [String] :next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     # @option params [String] :custom_domain_name
     #   <p>The custom domain name associated with the workgroup.</p>
     # @option params [String] :custom_domain_certificate_arn
@@ -1847,12 +1812,9 @@ module Aws::RedshiftServerless
     # <p>Returns an array of <code>EndpointAccess</code> objects and relevant information.</p>
     # @param [Hash, Types::ListEndpointAccessRequest] params
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListEndpointAccess</code> operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following <code>ListEndpointAccess</code> operations,
-    #            which returns results in the next page.</p>
+    #   <p>If your initial <code>ListEndpointAccess</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListEndpointAccess</code> operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     # @option params [String] :workgroup_name
     #   <p>The name of the workgroup associated with the VPC endpoint to return.</p>
     # @option params [String] :vpc_id
@@ -1914,15 +1876,11 @@ module Aws::RedshiftServerless
     # <p>Returns information about a list of specified managed workgroups in your account.</p>
     # @param [Hash, Types::ListManagedWorkgroupsRequest] params
     # @option params [String] :source_arn
-    #   <p>The Amazon Resource Name (ARN) for the managed 
-    #            workgroup in the AWS Glue Data Catalog.</p>
+    #   <p>The Amazon Resource Name (ARN) for the managed workgroup in the Glue Data Catalog.</p>
     # @option params [String] :next_token
-    #   <p>If your initial ListManagedWorkgroups operation returns a nextToken, 
-    #            you can include the returned nextToken in following ListManagedWorkgroups 
-    #            operations, which returns results in the next page.</p>
+    #   <p>If your initial ListManagedWorkgroups operation returns a nextToken, you can include the returned nextToken in following ListManagedWorkgroups operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number 
-    #            of results to return. You can use nextToken to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_arn: "SourceArn",
@@ -1954,12 +1912,9 @@ module Aws::RedshiftServerless
     # <p>Returns information about a list of specified namespaces.</p>
     # @param [Hash, Types::ListNamespacesRequest] params
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListNamespaces</code> operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following <code>ListNamespaces</code> operations,
-    #            which returns results in the next page.</p>
+    #   <p>If your initial <code>ListNamespaces</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListNamespaces</code> operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "String",
@@ -1985,7 +1940,18 @@ module Aws::RedshiftServerless
     #         status: "NamespaceStatus",
     #         creation_date: Time.now,
     #         admin_password_secret_arn: "String",
-    #         admin_password_secret_kms_key_id: "KmsKeyId"
+    #         admin_password_secret_kms_key_id: "KmsKeyId",
+    #         lakehouse_registration_status: "String",
+    #         catalog_arn: "String",
+    #         s3_table_publish_status: {
+    #           s3_tables: ["S3TableName"],
+    #           s3_table_namespace: "String",
+    #           s3_table_granularity: "S3TableGranularity",
+    #           enabled_all: false,
+    #           last_ingestion_times: {
+    #             "String" => "String"
+    #           }
+    #         }
     #       }
     #     ]
     #   }
@@ -1998,12 +1964,9 @@ module Aws::RedshiftServerless
     # <p>Returns an array of recovery points.</p>
     # @param [Hash, Types::ListRecoveryPointsRequest] params
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListRecoveryPoints</code> operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following <code>ListRecoveryPoints</code> operations,
-    #            which returns results in the next page.</p>
+    #   <p>If your initial <code>ListRecoveryPoints</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListRecoveryPoints</code> operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     # @option params [Time] :start_time
     #   <p>The time when the recovery point's creation was initiated.</p>
     # @option params [Time] :end_time
@@ -2123,8 +2086,7 @@ module Aws::RedshiftServerless
     # <p>Returns a list of scheduled actions. You can use the flags to filter the list of returned scheduled actions.</p>
     # @param [Hash, Types::ListScheduledActionsRequest] params
     # @option params [String] :next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     # @option params [Integer] :max_results
     #   <p>An optional parameter that specifies the maximum number of results to return. Use <code>nextToken</code> to display the next page of results.</p>
     # @option params [String] :namespace_name
@@ -2159,8 +2121,7 @@ module Aws::RedshiftServerless
     # @option params [String] :namespace_name
     #   <p>The namespace from which to list all snapshot copy configurations.</p>
     # @option params [String] :next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using 
-    #            the returned token to retrieve the next page.</p>
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     # @option params [Integer] :max_results
     #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     # @example Request syntax with placeholder values
@@ -2195,12 +2156,9 @@ module Aws::RedshiftServerless
     # <p>Returns a list of snapshots.</p>
     # @param [Hash, Types::ListSnapshotsRequest] params
     # @option params [String] :next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. 
-    #            The value of <code>nextToken</code> is a unique pagination token for each page. 
-    #            Make the call again using the returned token to retrieve the next page.</p>
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     # @option params [String] :namespace_name
     #   <p>The namespace from which to list all snapshots.</p>
     # @option params [String] :namespace_arn
@@ -2263,12 +2221,9 @@ module Aws::RedshiftServerless
     # <p>Returns information about an array of <code>TableRestoreStatus</code> objects.</p>
     # @param [Hash, Types::ListTableRestoreStatusRequest] params
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListTableRestoreStatus</code> operation returns a nextToken, 
-    #            you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code>
-    #            operations. This will return results on the next page.</p>
+    #   <p>If your initial <code>ListTableRestoreStatus</code> operation returns a nextToken, you can include the returned <code>nextToken</code> in following <code>ListTableRestoreStatus</code> operations. This will return results on the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to 
-    #            return. You can use nextToken to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.</p>
     # @option params [String] :namespace_name
     #   <p>The namespace from which to list all of the statuses of <code>RestoreTableFromSnapshot</code> operations .</p>
     # @option params [String] :workgroup_name
@@ -2342,15 +2297,9 @@ module Aws::RedshiftServerless
     # <p>List the Amazon Redshift Serverless versions.</p>
     # @param [Hash, Types::ListTracksRequest] params
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListTracksRequest</code> operation returns a 
-    #            <code>nextToken</code>, you can include the returned <code>nextToken</code>
-    #            in following <code>ListTracksRequest</code> operations, which returns results in the next page.</p>
+    #   <p>If your initial <code>ListTracksRequest</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListTracksRequest</code> operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of response records to return in each call. 
-    #            If the number of remaining response records exceeds the specified 
-    #            MaxRecords value, a value is returned in a marker field of the response. 
-    #            You can retrieve the next set of records by retrying the command with the 
-    #            returned marker value.</p>
+    #   <p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "PaginationToken",
@@ -2388,13 +2337,9 @@ module Aws::RedshiftServerless
     # @option params [String] :usage_type
     #   <p>The Amazon Redshift Serverless feature whose limits you want to see.</p>
     # @option params [String] :next_token
-    #   <p>If your initial <code>ListUsageLimits</code> operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following <code>ListUsageLimits</code> operations,
-    #            which returns results in the next page.
-    #         </p>
+    #   <p>If your initial <code>ListUsageLimits</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following <code>ListUsageLimits</code> operations, which returns results in the next page. </p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to get the next page of results. The default is 100.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 100.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "String",
@@ -2429,12 +2374,9 @@ module Aws::RedshiftServerless
     # <p>Returns information about a list of specified workgroups.</p>
     # @param [Hash, Types::ListWorkgroupsRequest] params
     # @option params [String] :next_token
-    #   <p>If your initial ListWorkgroups operation returns a <code>nextToken</code>,
-    #            you can include the returned <code>nextToken</code> in following ListNamespaces operations,
-    #            which returns results in the next page.</p>
+    #   <p>If your initial ListWorkgroups operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in following ListNamespaces operations, which returns results in the next page.</p>
     # @option params [Integer] :max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return.
-    #            You can use <code>nextToken</code> to display the next page of results.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to display the next page of results.</p>
     # @option params [String] :owner_account
     #   <p>The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.</p>
     # @example Request syntax with placeholder values
@@ -2501,7 +2443,8 @@ module Aws::RedshiftServerless
     #           level: 1
     #         },
     #         track_name: "TrackName",
-    #         pending_track_name: "TrackName"
+    #         pending_track_name: "TrackName",
+    #         extra_compute_for_automatic_optimization: false
     #       }
     #     ]
     #   }
@@ -2516,13 +2459,7 @@ module Aws::RedshiftServerless
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the account to create or update a resource policy for.</p>
     # @option params [String] :policy
-    #   <p>The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.</p>
-    #            <p>
-    #               <code>"{\"Version\": \"2012-10-17\", \"Statement\" : 
-    #               [{ \"Sid\": \"AllowUserRestoreFromSnapshot\", \"Principal\":{\"AWS\": 
-    #               [\"739247239426\"]}, \"Action\": [\"redshift-serverless:RestoreFromSnapshot\"]
-    #               , \"Effect\": \"Allow\" }]}"</code>
-    #            </p>
+    #   <p>The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.</p> <p> <code>"{\"Version\": \"2012-10-17\", \"Statement\" : [{ \"Sid\": \"AllowUserRestoreFromSnapshot\", \"Principal\":{\"AWS\": [\"739247239426\"]}, \"Action\": [\"redshift-serverless:RestoreFromSnapshot\"] , \"Effect\": \"Allow\" }]}"</code> </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "String", # required
@@ -2552,11 +2489,14 @@ module Aws::RedshiftServerless
     #   <p>The name of the namespace to restore data into.</p>
     # @option params [String] :workgroup_name
     #   <p>The name of the workgroup used to restore data.</p>
+    # @option params [Boolean] :maintain_integration
+    #   <p>If <code>true</code>, maintain existing data sharing, zero-ETL and S3 event integrations when restoring. Otherwise, integrations will not be maintained after the restore operation. Integrations are only maintained when restored to the same serverless namespace.</p> <p>Default: true</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     recovery_point_id: "String", # required
     #     namespace_name: "NamespaceName", # required
     #     workgroup_name: "WorkgroupName", # required
+    #     maintain_integration: false
     #   }
     #   options = {}
     #   response = client.restore_from_recovery_point(params, options)
@@ -2577,7 +2517,18 @@ module Aws::RedshiftServerless
     #       status: "NamespaceStatus",
     #       creation_date: Time.now,
     #       admin_password_secret_arn: "String",
-    #       admin_password_secret_kms_key_id: "KmsKeyId"
+    #       admin_password_secret_kms_key_id: "KmsKeyId",
+    #       lakehouse_registration_status: "String",
+    #       catalog_arn: "String",
+    #       s3_table_publish_status: {
+    #         s3_tables: ["S3TableName"],
+    #         s3_table_namespace: "String",
+    #         s3_table_granularity: "S3TableGranularity",
+    #         enabled_all: false,
+    #         last_ingestion_times: {
+    #           "String" => "String"
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::RestoreFromRecoveryPointResponse]
@@ -2595,19 +2546,15 @@ module Aws::RedshiftServerless
     # @option params [String] :snapshot_name
     #   <p>The name of the snapshot to restore from. Must not be specified at the same time as <code>snapshotArn</code>.</p>
     # @option params [String] :snapshot_arn
-    #   <p>The Amazon Resource Name (ARN) of the snapshot to restore from. Required if restoring
-    #            from a provisioned cluster to Amazon Redshift Serverless. Must not be specified at the same time as
-    #               <code>snapshotName</code>.</p>
-    #            <p>The format of the ARN is arn:aws:redshift:&lt;region&gt;:&lt;account_id&gt;:snapshot:&lt;cluster_identifier&gt;/&lt;snapshot_identifier&gt;.</p>
+    #   <p>The Amazon Resource Name (ARN) of the snapshot to restore from. Required if restoring from a provisioned cluster to Amazon Redshift Serverless. Must not be specified at the same time as <code>snapshotName</code>.</p> <p>The format of the ARN is arn:aws:redshift:&lt;region&gt;:&lt;account_id&gt;:snapshot:&lt;cluster_identifier&gt;/&lt;snapshot_identifier&gt;.</p>
     # @option params [String] :owner_account
     #   <p>The Amazon Web Services account that owns the snapshot.</p>
     # @option params [Boolean] :manage_admin_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored 
-    #            snapshot's admin credentials. If <code>MmanageAdminPassword</code> is false or not set, 
-    #            Amazon Redshift uses the admin credentials that the namespace or cluster 
-    #            had at the time the snapshot was taken.</p>
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the restored snapshot's admin credentials. If <code>MmanageAdminPassword</code> is false or not set, Amazon Redshift uses the admin credentials that the namespace or cluster had at the time the snapshot was taken.</p>
     # @option params [String] :admin_password_secret_kms_key_id
     #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.</p>
+    # @option params [Boolean] :maintain_integration
+    #   <p>If <code>true</code>, maintain existing data sharing, zero-ETL and S3 event integrations when restoring. Otherwise, integrations will not be maintained after the restore operation. Integrations are only maintained when restored to the same serverless namespace.</p> <p>Default: true</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     namespace_name: "NamespaceName", # required
@@ -2616,7 +2563,8 @@ module Aws::RedshiftServerless
     #     snapshot_arn: "String",
     #     owner_account: "String",
     #     manage_admin_password: false,
-    #     admin_password_secret_kms_key_id: "KmsKeyId"
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
+    #     maintain_integration: false
     #   }
     #   options = {}
     #   response = client.restore_from_snapshot(params, options)
@@ -2638,7 +2586,18 @@ module Aws::RedshiftServerless
     #       status: "NamespaceStatus",
     #       creation_date: Time.now,
     #       admin_password_secret_arn: "String",
-    #       admin_password_secret_kms_key_id: "KmsKeyId"
+    #       admin_password_secret_kms_key_id: "KmsKeyId",
+    #       lakehouse_registration_status: "String",
+    #       catalog_arn: "String",
+    #       s3_table_publish_status: {
+    #         s3_tables: ["S3TableName"],
+    #         s3_table_namespace: "String",
+    #         s3_table_granularity: "S3TableGranularity",
+    #         enabled_all: false,
+    #         last_ingestion_times: {
+    #           "String" => "String"
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::RestoreFromSnapshotResponse]
@@ -2712,8 +2671,7 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Restores a table from a snapshot to your Amazon Redshift Serverless instance. You can't use this operation to
-    #          restore tables with <a href="https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved">interleaved sort keys</a>.</p>
+    # <p>Restores a table from a snapshot to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with <a href="https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved">interleaved sort keys</a>.</p>
     # @param [Hash, Types::RestoreTableFromSnapshotRequest] params
     # @option params [String] :namespace_name
     #   <p>The namespace of the snapshot to restore from.</p>
@@ -2734,9 +2692,7 @@ module Aws::RedshiftServerless
     # @option params [String] :new_table_name
     #   <p>The name of the table to create from the restore operation.</p>
     # @option params [Boolean] :activate_case_sensitive_identifier
-    #   <p>Indicates whether name identifiers for database, schema, and table 
-    #            are case sensitive. If true, the names are case sensitive. If 
-    #            false, the names are not case sensitive. The default is false.</p>
+    #   <p>Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false, the names are not case sensitive. The default is false.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     namespace_name: "String", # required
@@ -2911,37 +2867,75 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Updates a namespace with the specified settings. Unless required, you can't update multiple parameters in one request. For example,
-    #       you must specify both <code>adminUsername</code> and <code>adminUserPassword</code> to update either field, but you can't update both <code>kmsKeyId</code>
-    #       and <code>logExports</code> in a single request.</p>
+    # <p>Modifies the lakehouse configuration for a namespace. This operation allows you to manage Amazon Redshift federated permissions and Amazon Web Services IAM Identity Center trusted identity propagation.</p>
+    # @param [Hash, Types::UpdateLakehouseConfigurationRequest] params
+    # @option params [String] :namespace_name
+    #   <p>The name of the namespace whose lakehouse configuration you want to modify.</p>
+    # @option params [String] :lakehouse_registration
+    #   <p>Specifies whether to register or deregister the namespace with Amazon Redshift federated permissions. Valid values are <code>Register</code> or <code>Deregister</code>.</p>
+    # @option params [String] :catalog_name
+    #   <p>The name of the Glue Data Catalog that will be associated with the namespace enabled with Amazon Redshift federated permissions.</p> <p>Pattern: <code>^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$</code> </p>
+    # @option params [String] :lakehouse_idc_registration
+    #   <p>Modifies the Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions. Valid values are <code>Associate</code> or <code>Disassociate</code>.</p>
+    # @option params [String] :lakehouse_idc_application_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>A boolean value that, if <code>true</code>, validates the request without actually updating the lakehouse configuration. Use this to check for errors before making changes.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     namespace_name: "NamespaceName", # required
+    #     lakehouse_registration: "LakehouseRegistration",
+    #     catalog_name: "CatalogNameString",
+    #     lakehouse_idc_registration: "LakehouseIdcRegistration",
+    #     lakehouse_idc_application_arn: "String",
+    #     dry_run: false
+    #   }
+    #   options = {}
+    #   response = client.update_lakehouse_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     namespace_name: "NamespaceName",
+    #     lakehouse_idc_application_arn: "String",
+    #     lakehouse_registration_status: "String",
+    #     catalog_arn: "String"
+    #   }
+    # @return [Types::UpdateLakehouseConfigurationResponse]
+    def update_lakehouse_configuration(params = {}, options = {})
+      request = build_request(:update_lakehouse_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a namespace with the specified settings. Unless required, you can't update multiple parameters in one request. For example, you must specify both <code>adminUsername</code> and <code>adminUserPassword</code> to update either field, but you can't update both <code>kmsKeyId</code> and <code>logExports</code> in a single request.</p> <p>Similarly, an S3 Tables log-publishing update (a request where <code>logDestinationType</code> is <code>s3table</code>) cannot be combined with any other namespace configuration change and must be submitted as its own request.</p>
     # @param [Hash, Types::UpdateNamespaceRequest] params
     # @option params [String] :namespace_name
     #   <p>The name of the namespace to update. You can't update the name of a namespace once it is created.</p>
     # @option params [String] :admin_user_password
-    #   <p>The password of the administrator for the first database created in the namespace. This parameter must be updated together
-    #         with <code>adminUsername</code>.</p>
-    #            <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p>
+    #   <p>The password of the administrator for the first database created in the namespace. This parameter must be updated together with <code>adminUsername</code>.</p> <p>You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. </p> <p>If your admin user account is locked, this operation also unlocks your account and resets the failed-login counter. This option is available only when account lockout security is enabled for the namespace.</p>
     # @option params [String] :admin_username
-    #   <p>The username of the administrator for the first database created in the namespace. This parameter must be updated
-    #         together with <code>adminUserPassword</code>.</p>
+    #   <p>The username of the administrator for the first database created in the namespace. This parameter must be updated together with <code>adminUserPassword</code>.</p>
     # @option params [String] :kms_key_id
     #   <p>The ID of the Amazon Web Services Key Management Service key used to encrypt your data.</p>
     # @option params [String] :default_iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. This parameter must be updated together
-    #         with <code>iamRoles</code>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. This parameter must be updated together with <code>iamRoles</code>.</p>
     # @option params [Array<String>] :iam_roles
     #   <p>A list of IAM roles to associate with the namespace. This parameter must be updated together with <code>defaultIamRoleArn</code>.</p>
     # @option params [Array<String>] :log_exports
     #   <p>The types of logs the namespace can export. The export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>
     # @option params [Boolean] :manage_admin_password
-    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. 
-    #            You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. 
-    #            If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses 
-    #            <code>adminUserPassword</code> for the admin user account's password.
-    #         </p>
+    #   <p>If <code>true</code>, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. You can't use <code>adminUserPassword</code> if <code>manageAdminPassword</code> is true. If <code>manageAdminPassword</code> is false or not set, Amazon Redshift uses <code>adminUserPassword</code> for the admin user account's password. </p>
     # @option params [String] :admin_password_secret_kms_key_id
-    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. 
-    #            You can only use this parameter if <code>manageAdminPassword</code> is true.</p>
+    #   <p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if <code>manageAdminPassword</code> is true.</p>
+    # @option params [String] :log_destination_type
+    #   <p>The destination for the log data. Valid values are <code>s3table</code> and <code>cloudwatch</code>.</p> <p>Set this to <code>s3table</code> to manage Amazon S3 Tables system-table publishing for the namespace.</p>
+    # @option params [String] :s3_table_action
+    #   <p>Whether to enable or disable Amazon S3 Tables publishing. Valid values are <code>Enable</code> and <code>Disable</code>, matched case-insensitively.</p> <p>When omitted, defaults to <code>Enable</code>. Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>
+    # @option params [Array<String>] :s3_table_names
+    #   <p>The system tables to publish (on enable) or to stop publishing (on disable). Each value is either a system table view name that begins with <code>sys_</code> or the keyword <code>all</code>.</p> <p>Omitting this parameter, passing an empty list, or including <code>all</code> each select every current and future system table. Each name must be 1-128 characters, and the list can contain up to 256 names.</p> <p>Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>
+    # @option params [String] :s3_table_kms_key_id
+    #   <p>The identifier of the Key Management Service key used to encrypt the published Amazon S3 Tables data. When omitted, the data is encrypted with SSE-S3 (Amazon S3 managed keys).</p> <p>Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>
+    # @option params [String] :s3_table_granularity
+    #   <p>The scope of the Amazon S3 Tables destination. Valid values are <code>namespace</code> and <code>account</code>, matched case-insensitively. <code>namespace</code> scopes the published tables to this namespace; <code>account</code> scopes them to the Amazon Web Services account.</p> <p>Required when enabling. Omitting this parameter or passing a blank value fails with <code>ValidationException</code>. Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     namespace_name: "NamespaceName", # required
@@ -2952,7 +2946,12 @@ module Aws::RedshiftServerless
     #     iam_roles: ["IamRoleArn"],
     #     log_exports: ["LogExport"],
     #     manage_admin_password: false,
-    #     admin_password_secret_kms_key_id: "KmsKeyId"
+    #     admin_password_secret_kms_key_id: "KmsKeyId",
+    #     log_destination_type: "LogDestinationType",
+    #     s3_table_action: "S3TableAction",
+    #     s3_table_names: ["S3TableName"],
+    #     s3_table_kms_key_id: "KmsKeyId",
+    #     s3_table_granularity: "S3TableGranularity"
     #   }
     #   options = {}
     #   response = client.update_namespace(params, options)
@@ -2972,7 +2971,18 @@ module Aws::RedshiftServerless
     #       status: "NamespaceStatus",
     #       creation_date: Time.now,
     #       admin_password_secret_arn: "String",
-    #       admin_password_secret_kms_key_id: "KmsKeyId"
+    #       admin_password_secret_kms_key_id: "KmsKeyId",
+    #       lakehouse_registration_status: "String",
+    #       catalog_arn: "String",
+    #       s3_table_publish_status: {
+    #         s3_tables: ["S3TableName"],
+    #         s3_table_namespace: "String",
+    #         s3_table_granularity: "S3TableGranularity",
+    #         enabled_all: false,
+    #         last_ingestion_times: {
+    #           "String" => "String"
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::UpdateNamespaceResponse]
@@ -2986,26 +2996,11 @@ module Aws::RedshiftServerless
     # @option params [String] :scheduled_action_name
     #   <p>The name of the scheduled action to update to.</p>
     # @option params [Types::TargetAction] :target_action
-    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p>
-    #            <p>
-    #               <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code>
-    #            </p>
+    #   <p>A JSON format string of the Amazon Redshift Serverless API operation with input parameters. The following is an example of a target action.</p> <p> <code>"{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot", "retentionPeriod": "1"}}"</code> </p>
     # @option params [Types::Schedule] :schedule
-    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p> <ul> <li> <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p> </li> <li> <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>"(0 10 ? * MON *)"</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p> </li> </ul>
     # @option params [String] :role_arn
-    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. 
-    #            This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. 
-    #            For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for 
-    #               Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
+    #   <p>The ARN of the IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift Serverless API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler to schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using Identity-Based Policies for Amazon Redshift</a> in the Amazon Redshift Management Guide</p>
     # @option params [Boolean] :enabled
     #   <p>Specifies whether to enable the scheduled action.</p>
     # @option params [String] :scheduled_action_description
@@ -3167,9 +3162,7 @@ module Aws::RedshiftServerless
     # @option params [String] :usage_limit_id
     #   <p>The identifier of the usage limit to update.</p>
     # @option params [Integer] :amount
-    #   <p>The new limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. 
-    #            If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. 
-    #            The value must be a positive number.</p>
+    #   <p>The new limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.</p>
     # @option params [String] :breach_action
     #   <p>The new action that Amazon Redshift Serverless takes when the limit is reached.</p>
     # @example Request syntax with placeholder values
@@ -3199,41 +3192,16 @@ module Aws::RedshiftServerless
       request.send_request(options)
     end
 
-    # <p>Updates a workgroup with the specified configuration settings. You can't update multiple parameters in one request. For example,
-    #       you can update <code>baseCapacity</code> or <code>port</code> in a single request, but you can't update both in the same request.</p>
-    #          <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that
-    #          you own in a Region from reaching or being reached from the internet through internet
-    #          gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA
-    #          turned on, the following capabilities are blocked: </p>
-    #          <ul>
-    #             <li>
-    #                <p>Creating a public access workgroup</p>
-    #             </li>
-    #             <li>
-    #                <p>Modifying a private workgroup to public</p>
-    #             </li>
-    #             <li>
-    #                <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is
-    #                public</p>
-    #             </li>
-    #          </ul>
-    #          <p>For more information about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and
-    #             subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
+    # <p>Updates a workgroup with the specified configuration settings. You can't update multiple parameters in one request. For example, you can update <code>baseCapacity</code> or <code>port</code> in a single request, but you can't update both in the same request.</p> <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways. If a workgroup is in an account with VPC BPA turned on, the following capabilities are blocked: </p> <ul> <li> <p>Creating a public access workgroup</p> </li> <li> <p>Modifying a private workgroup to public</p> </li> <li> <p>Adding a subnet with VPC BPA turned on to the workgroup when the workgroup is public</p> </li> </ul> <p>For more information about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
     # @param [Hash, Types::UpdateWorkgroupRequest] params
     # @option params [String] :workgroup_name
     #   <p>The name of the workgroup to update. You can't update the name of a workgroup once it is created.</p>
     # @option params [Integer] :base_capacity
     #   <p>The new base data warehouse capacity in Redshift Processing Units (RPUs).</p>
     # @option params [Boolean] :enhanced_vpc_routing
-    #   <p>The value that specifies whether to turn on enhanced virtual 
-    #            private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>
+    #   <p>The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>
     # @option params [Array<Types::ConfigParameter>] :config_parameters
-    #   <p>An array of parameters to set for advanced control over a database. The
-    #            options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,
-    #            <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you 
-    #            define performance boundaries. For more information about query monitoring rules and available metrics, see 
-    #            <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless"> 
-    #               Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
+    #   <p>An array of parameters to set for advanced control over a database. The options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>, <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and either <code>wlm_json_configuration</code> or query monitoring metrics that let you define performance boundaries. You can either specify individual query monitoring metrics (such as <code>max_scan_row_count</code>, <code>max_query_execution_time</code>) or use <code>wlm_json_configuration</code> to define query queues with rules, but not both. If you're using <code>wlm_json_configuration</code>, the maximum size of <code>parameterValue</code> is 8000 characters. For more information about query monitoring rules and available metrics, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>
     # @option params [Boolean] :publicly_accessible
     #   <p>A value that specifies whether the workgroup can be accessible from a public network.</p>
     # @option params [Array<String>] :subnet_ids
@@ -3249,8 +3217,9 @@ module Aws::RedshiftServerless
     # @option params [Types::PerformanceTarget] :price_performance_target
     #   <p>An object that represents the price performance target settings for the workgroup.</p>
     # @option params [String] :track_name
-    #   <p>An optional parameter for the name of the track for the workgroup. If you don't provide 
-    #            a track name, the workgroup is assigned to the <code>current</code> track.</p>
+    #   <p>An optional parameter for the name of the track for the workgroup. If you don't provide a track name, the workgroup is assigned to the <code>current</code> track.</p>
+    # @option params [Boolean] :extra_compute_for_automatic_optimization
+    #   <p>If <code>true</code>, allocates additional compute resources for running automatic optimization operations.</p> <p>Default: false</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workgroup_name: "WorkgroupName", # required
@@ -3272,7 +3241,8 @@ module Aws::RedshiftServerless
     #       status: "PerformanceTargetStatus",
     #       level: 1
     #     },
-    #     track_name: "TrackName"
+    #     track_name: "TrackName",
+    #     extra_compute_for_automatic_optimization: false
     #   }
     #   options = {}
     #   response = client.update_workgroup(params, options)
@@ -3330,7 +3300,8 @@ module Aws::RedshiftServerless
     #         level: 1
     #       },
     #       track_name: "TrackName",
-    #       pending_track_name: "TrackName"
+    #       pending_track_name: "TrackName",
+    #       extra_compute_for_automatic_optimization: false
     #     }
     #   }
     # @return [Types::UpdateWorkgroupResponse]

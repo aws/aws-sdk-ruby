@@ -19,6 +19,9 @@ module Aws::VPCLattice
     BatchUpdateRuleOutput: StructureShape
     Boolean: BooleanShape
     CertificateArn: StringShape
+    CidrRange: StringShape
+    CidrRangeList: ListShape
+    CidrResource: StructureShape
     ClientToken: StringShape
     ConflictException: StructureShape
     CreateAccessLogSubscriptionInput: StructureShape
@@ -47,6 +50,8 @@ module Aws::VPCLattice
     DeleteAccessLogSubscriptionOutput: StructureShape
     DeleteAuthPolicyInput: StructureShape
     DeleteAuthPolicyOutput: StructureShape
+    DeleteDomainVerificationRequest: StructureShape
+    DeleteDomainVerificationResponse: StructureShape
     DeleteListenerInput: StructureShape
     DeleteListenerOutput: StructureShape
     DeleteResourceConfigurationRequest: StructureShape
@@ -74,8 +79,14 @@ module Aws::VPCLattice
     DeregisterTargetsInput: StructureShape
     DeregisterTargetsOutput: StructureShape
     DnsEntry: StructureShape
+    DnsOptions: StructureShape
     DnsResource: StructureShape
     DomainName: StringShape
+    DomainVerificationArn: StringShape
+    DomainVerificationId: StringShape
+    DomainVerificationIdentifier: StringShape
+    DomainVerificationList: ListShape
+    DomainVerificationSummary: StructureShape
     FailureCode: StringShape
     FailureMessage: StringShape
     FixedResponseAction: StructureShape
@@ -84,6 +95,8 @@ module Aws::VPCLattice
     GetAccessLogSubscriptionOutput: StructureShape
     GetAuthPolicyInput: StructureShape
     GetAuthPolicyOutput: StructureShape
+    GetDomainVerificationRequest: StructureShape
+    GetDomainVerificationResponse: StructureShape
     GetListenerInput: StructureShape
     GetListenerOutput: StructureShape
     GetResourceConfigurationRequest: StructureShape
@@ -124,6 +137,7 @@ module Aws::VPCLattice
     HttpMatch: StructureShape
     HttpMethod: StringShape
     HttpStatusCode: IntegerShape
+    IdleTimeoutSeconds: IntegerShape
     InternalServerException: StructureShape
     IpAddress: StringShape
     IpAddressType: StringShape
@@ -132,6 +146,8 @@ module Aws::VPCLattice
     LambdaEventStructureVersion: StringShape
     ListAccessLogSubscriptionsInput: StructureShape
     ListAccessLogSubscriptionsOutput: StructureShape
+    ListDomainVerificationsRequest: StructureShape
+    ListDomainVerificationsResponse: StructureShape
     ListListenersInput: StructureShape
     ListListenersOutput: StructureShape
     ListResourceConfigurationsRequest: StructureShape
@@ -174,11 +190,18 @@ module Aws::VPCLattice
     PathMatchExact: StringShape
     PathMatchPrefix: StringShape
     PathMatchType: UnionShape
+    PayerResponsibilityEntry: StructureShape
+    PayerResponsibilityList: ListShape
+    PayerResponsibilityPayer: EnumShape
+    PayerResponsibilityScope: EnumShape
     PolicyString: StringShape
     Port: IntegerShape
     PortRange: StringShape
     PortRangeList: ListShape
-    ProtocolType: StringShape
+    PrivateDnsPreference: StringShape
+    PrivateDnsSpecifiedDomain: StringShape
+    PrivateDnsSpecifiedDomainsList: ListShape
+    ProtocolType: EnumShape
     PutAuthPolicyInput: StructureShape
     PutAuthPolicyOutput: StructureShape
     PutResourcePolicyInput: StructureShape
@@ -186,6 +209,7 @@ module Aws::VPCLattice
     RegisterTargetsInput: StructureShape
     RegisterTargetsOutput: StructureShape
     ResourceArn: StringShape
+    ResourceConfigDnsResolution: StringShape
     ResourceConfigurationArn: StringShape
     ResourceConfigurationDefinition: UnionShape
     ResourceConfigurationId: StringShape
@@ -195,7 +219,7 @@ module Aws::VPCLattice
     ResourceConfigurationStatus: StringShape
     ResourceConfigurationSummary: StructureShape
     ResourceConfigurationSummaryList: ListShape
-    ResourceConfigurationType: StringShape
+    ResourceConfigurationType: EnumShape
     ResourceEndpointAssociationArn: StringShape
     ResourceEndpointAssociationId: StringShape
     ResourceEndpointAssociationIdentifier: StringShape
@@ -269,6 +293,8 @@ module Aws::VPCLattice
     ServiceStatus: StringShape
     ServiceSummary: StructureShape
     SharingConfig: StructureShape
+    StartDomainVerificationRequest: StructureShape
+    StartDomainVerificationResponse: StructureShape
     SubnetId: StringShape
     SubnetList: ListShape
     TagKey: StringShape
@@ -298,6 +324,7 @@ module Aws::VPCLattice
     TargetSummaryList: ListShape
     ThrottlingException: StructureShape
     Timestamp: TimestampShape
+    TxtMethodConfig: StructureShape
     UnhealthyThresholdCount: IntegerShape
     UntagResourceInput: StructureShape
     UntagResourceOutput: StructureShape
@@ -323,6 +350,7 @@ module Aws::VPCLattice
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: StringShape
+    VerificationStatus: StringShape
     VpcEndpointId: StringShape
     VpcEndpointOwner: StringShape
     VpcId: StringShape

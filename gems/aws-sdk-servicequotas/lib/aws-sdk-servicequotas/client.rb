@@ -144,18 +144,18 @@ module Aws::ServiceQuotas
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -227,7 +227,7 @@ module Aws::ServiceQuotas
       request.send_request(options)
     end
 
-    # <p>Creates a Support case for an existing quota increase request. This call only creates 
+    # <p>Creates a Support case for an existing quota increase request. This call only creates
     #             a Support case if the request has a <code>Pending</code> status. </p>
     # @param [Hash, Types::CreateSupportCaseRequest] params
     # @option params [String] :request_id
@@ -251,10 +251,10 @@ module Aws::ServiceQuotas
     #             template.</p>
     # @param [Hash, Types::DeleteServiceQuotaIncreaseRequestFromTemplateRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific 
+    #   <p>Specifies the quota identifier. To find the quota code for a specific
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     # @option params [String] :aws_region
@@ -297,10 +297,10 @@ module Aws::ServiceQuotas
     #             reflect any quota increases.</p>
     # @param [Hash, Types::GetAWSDefaultServiceQuotaRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific 
+    #   <p>Specifies the quota identifier. To find the quota code for a specific
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     # @example Request syntax with placeholder values
@@ -343,7 +343,8 @@ module Aws::ServiceQuotas
     #       quota_context: {
     #         context_scope: "RESOURCE" # One of: ["RESOURCE", "ACCOUNT"],
     #         context_scope_type: "QuotaContextScopeType",
-    #         context_id: "QuotaContextId"
+    #         context_id: "QuotaContextId",
+    #         adjustable_at_level: "ACCOUNT" # One of: ["ACCOUNT", "PER_RESOURCE", "ALL"]
     #       },
     #       description: "QuotaDescription"
     #     }
@@ -371,6 +372,93 @@ module Aws::ServiceQuotas
       request.send_request(options)
     end
 
+    # <p>Retrieves information about your <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html">Service Quotas Automatic Management</a> configuration. Automatic Management monitors your Service Quotas utilization and notifies you before you
+    #             run out of your allocated quotas.</p>
+    # @param [Hash, Types::GetAutoManagementConfigurationRequest] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.get_auto_management_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     opt_in_level: "ACCOUNT" # One of: ["ACCOUNT"],
+    #     opt_in_type: "NotifyOnly" # One of: ["NotifyOnly", "NotifyAndAdjust"],
+    #     notification_arn: "AmazonResourceName",
+    #     opt_in_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     exclusion_list: {
+    #       "ExcludedService" => [
+    #         {
+    #           quota_code: "QuotaCode",
+    #           quota_name: "QuotaName"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetAutoManagementConfigurationResponse]
+    def get_auto_management_configuration(params = {}, options = {})
+      request = build_request(:get_auto_management_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the quota utilization report for your Amazon Web Services account. This operation returns
+    #             paginated results showing your quota usage across all Amazon Web Services services, sorted by utilization
+    #             percentage in descending order (highest utilization first).</p>
+    #          <p>You must first initiate a report using the <code>StartQuotaUtilizationReport</code>
+    #             operation. The report generation process is asynchronous and may take several seconds to
+    #             complete. Poll this operation periodically to check the status and retrieve results when
+    #             the report is ready.</p>
+    #          <p>Each report contains up to 1,000 quota records per page. Use the <code>NextToken</code>
+    #             parameter to retrieve additional pages of results. Reports are automatically deleted after
+    #             15 minutes.</p>
+    # @param [Hash, Types::GetQuotaUtilizationReportRequest] params
+    # @option params [String] :report_id
+    #   <p>The unique identifier for the quota utilization report. This identifier is returned by
+    #               the <code>StartQuotaUtilizationReport</code> operation.</p>
+    # @option params [String] :next_token
+    #   <p>A token that indicates the next page of results to retrieve. This token is returned in
+    #               the response when there are more results available. Omit this parameter for the first request.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page. The default value is 1,000 and the
+    #               maximum allowed value is 1,000.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     report_id: "ReportId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.get_quota_utilization_report(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     report_id: "ReportId",
+    #     status: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"],
+    #     generated_at: Time.now,
+    #     total_count: 1,
+    #     quotas: [
+    #       {
+    #         quota_code: "QuotaCode",
+    #         service_code: "ServiceCode",
+    #         quota_name: "QuotaName",
+    #         namespace: "QuotaMetricNamespace",
+    #         utilization: 1.0,
+    #         default_value: 1.0,
+    #         applied_value: 1.0,
+    #         service_name: "ServiceName",
+    #         adjustable: false
+    #       }
+    #     ],
+    #     next_token: "NextToken",
+    #     error_code: "ReportErrorCode",
+    #     error_message: "ReportErrorMessage"
+    #   }
+    # @return [Types::GetQuotaUtilizationReportResponse]
+    def get_quota_utilization_report(params = {}, options = {})
+      request = build_request(:get_quota_utilization_report, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves information about the specified quota increase request.</p>
     # @param [Hash, Types::GetRequestedServiceQuotaChangeRequest] params
     # @option params [String] :request_id
@@ -386,6 +474,7 @@ module Aws::ServiceQuotas
     #   {
     #     requested_quota: {
     #       id: "RequestId",
+    #       request_type: "AutomaticManagement" # One of: ["AutomaticManagement"],
     #       case_id: "CustomerServiceEngagementId",
     #       service_code: "ServiceCode",
     #       service_name: "ServiceName",
@@ -403,7 +492,8 @@ module Aws::ServiceQuotas
     #       quota_context: {
     #         context_scope: "RESOURCE" # One of: ["RESOURCE", "ACCOUNT"],
     #         context_scope_type: "QuotaContextScopeType",
-    #         context_id: "QuotaContextId"
+    #         context_id: "QuotaContextId",
+    #         adjustable_at_level: "ACCOUNT" # One of: ["ACCOUNT", "PER_RESOURCE", "ALL"]
     #       }
     #     }
     #   }
@@ -413,15 +503,15 @@ module Aws::ServiceQuotas
       request.send_request(options)
     end
 
-    # <p>Retrieves the applied quota value for the specified account-level or resource-level quota. For some quotas, only the
-    #             default values are available. If the applied quota value is not available for a quota,
-    #             the quota is not retrieved.</p>
+    # <p>Retrieves the applied quota value for the specified account-level or resource-level
+    #             quota. For some quotas, only the default values are available. If the applied quota
+    #             value is not available for a quota, the quota is not retrieved.</p>
     # @param [Hash, Types::GetServiceQuotaRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific 
+    #   <p>Specifies the quota identifier. To find the quota code for a specific
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     # @option params [String] :context_id
@@ -467,7 +557,8 @@ module Aws::ServiceQuotas
     #       quota_context: {
     #         context_scope: "RESOURCE" # One of: ["RESOURCE", "ACCOUNT"],
     #         context_scope_type: "QuotaContextScopeType",
-    #         context_id: "QuotaContextId"
+    #         context_id: "QuotaContextId",
+    #         adjustable_at_level: "ACCOUNT" # One of: ["ACCOUNT", "PER_RESOURCE", "ALL"]
     #       },
     #       description: "QuotaDescription"
     #     }
@@ -482,10 +573,10 @@ module Aws::ServiceQuotas
     #             template.</p>
     # @param [Hash, Types::GetServiceQuotaIncreaseRequestFromTemplateRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific 
+    #   <p>Specifies the quota identifier. To find the quota code for a specific
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     # @option params [String] :aws_region
@@ -522,24 +613,24 @@ module Aws::ServiceQuotas
     #             value does not reflect any quota increases.</p>
     # @param [Hash, Types::ListAWSDefaultServiceQuotasRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :next_token
-    #   <p>Specifies a value for receiving additional results after you 
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
-    #       response indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
+    #   <p>Specifies a value for receiving additional results after you
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+    #       response indicates that more output is available. Set this parameter to the value of the previous
+    #       call's <code>NextToken</code> response to indicate where the output should continue
     #       from.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the maximum number of results that you want included on each 
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
-    #       to the operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
+    #   <p>Specifies the maximum number of results that you want included on each
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
+    #       to the operation. If additional items exist beyond those included in the current response, the
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
+    #               <p>An API operation can return fewer results than the maximum even when there are
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure
     #       that you receive all of the results.</p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -585,7 +676,8 @@ module Aws::ServiceQuotas
     #         quota_context: {
     #           context_scope: "RESOURCE" # One of: ["RESOURCE", "ACCOUNT"],
     #           context_scope_type: "QuotaContextScopeType",
-    #           context_id: "QuotaContextId"
+    #           context_id: "QuotaContextId",
+    #           adjustable_at_level: "ACCOUNT" # One of: ["ACCOUNT", "PER_RESOURCE", "ALL"]
     #         },
     #         description: "QuotaDescription"
     #       }
@@ -597,31 +689,32 @@ module Aws::ServiceQuotas
       request.send_request(options)
     end
 
-    # <p>Retrieves the quota increase requests for the specified Amazon Web Services service. Filter responses to return quota requests at 
-    #         either the account level, resource level, or all levels. Responses include any open or closed requests within 90 days.</p>
+    # <p>Retrieves the quota increase requests for the specified Amazon Web Services service. Filter
+    #             responses to return quota requests at either the account level, resource level, or all
+    #             levels. Responses include any open or closed requests within 90 days.</p>
     # @param [Hash, Types::ListRequestedServiceQuotaChangeHistoryRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :status
     #   <p>Specifies that you want to filter the results to only the requests with the matching
     #               status.</p>
     # @option params [String] :next_token
-    #   <p>Specifies a value for receiving additional results after you 
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
-    #       response indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
+    #   <p>Specifies a value for receiving additional results after you
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+    #       response indicates that more output is available. Set this parameter to the value of the previous
+    #       call's <code>NextToken</code> response to indicate where the output should continue
     #       from.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the maximum number of results that you want included on each 
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
-    #       to the operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
+    #   <p>Specifies the maximum number of results that you want included on each
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
+    #       to the operation. If additional items exist beyond those included in the current response, the
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
+    #               <p>An API operation can return fewer results than the maximum even when there are
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure
     #       that you receive all of the results.</p>
     #            </note>
     # @option params [String] :quota_requested_at_level
@@ -643,6 +736,7 @@ module Aws::ServiceQuotas
     #     requested_quotas: [
     #       {
     #         id: "RequestId",
+    #         request_type: "AutomaticManagement" # One of: ["AutomaticManagement"],
     #         case_id: "CustomerServiceEngagementId",
     #         service_code: "ServiceCode",
     #         service_name: "ServiceName",
@@ -660,7 +754,8 @@ module Aws::ServiceQuotas
     #         quota_context: {
     #           context_scope: "RESOURCE" # One of: ["RESOURCE", "ACCOUNT"],
     #           context_scope_type: "QuotaContextScopeType",
-    #           context_id: "QuotaContextId"
+    #           context_id: "QuotaContextId",
+    #           adjustable_at_level: "ACCOUNT" # One of: ["ACCOUNT", "PER_RESOURCE", "ALL"]
     #         }
     #       }
     #     ]
@@ -671,35 +766,35 @@ module Aws::ServiceQuotas
       request.send_request(options)
     end
 
-    # <p>Retrieves the quota increase requests for the specified quota. Filter responses to return quota requests at either the
-    #             account level, resource level, or all levels.</p>
+    # <p>Retrieves the quota increase requests for the specified quota. Filter responses to
+    #             return quota requests at either the account level, resource level, or all levels.</p>
     # @param [Hash, Types::ListRequestedServiceQuotaChangeHistoryByQuotaRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific 
+    #   <p>Specifies the quota identifier. To find the quota code for a specific
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     # @option params [String] :status
     #   <p>Specifies that you want to filter the results to only the requests with the matching
     #               status.</p>
     # @option params [String] :next_token
-    #   <p>Specifies a value for receiving additional results after you 
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
-    #       response indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
+    #   <p>Specifies a value for receiving additional results after you
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+    #       response indicates that more output is available. Set this parameter to the value of the previous
+    #       call's <code>NextToken</code> response to indicate where the output should continue
     #       from.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the maximum number of results that you want included on each 
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
-    #       to the operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
+    #   <p>Specifies the maximum number of results that you want included on each
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
+    #       to the operation. If additional items exist beyond those included in the current response, the
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
+    #               <p>An API operation can return fewer results than the maximum even when there are
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure
     #       that you receive all of the results.</p>
     #            </note>
     # @option params [String] :quota_requested_at_level
@@ -722,6 +817,7 @@ module Aws::ServiceQuotas
     #     requested_quotas: [
     #       {
     #         id: "RequestId",
+    #         request_type: "AutomaticManagement" # One of: ["AutomaticManagement"],
     #         case_id: "CustomerServiceEngagementId",
     #         service_code: "ServiceCode",
     #         service_name: "ServiceName",
@@ -739,7 +835,8 @@ module Aws::ServiceQuotas
     #         quota_context: {
     #           context_scope: "RESOURCE" # One of: ["RESOURCE", "ACCOUNT"],
     #           context_scope_type: "QuotaContextScopeType",
-    #           context_id: "QuotaContextId"
+    #           context_id: "QuotaContextId",
+    #           adjustable_at_level: "ACCOUNT" # One of: ["ACCOUNT", "PER_RESOURCE", "ALL"]
     #         }
     #       }
     #     ]
@@ -753,26 +850,26 @@ module Aws::ServiceQuotas
     # <p>Lists the quota increase requests in the specified quota request template.</p>
     # @param [Hash, Types::ListServiceQuotaIncreaseRequestsInTemplateRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :aws_region
     #   <p>Specifies the Amazon Web Services Region for which you made the request.</p>
     # @option params [String] :next_token
-    #   <p>Specifies a value for receiving additional results after you 
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
-    #       response indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
+    #   <p>Specifies a value for receiving additional results after you
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+    #       response indicates that more output is available. Set this parameter to the value of the previous
+    #       call's <code>NextToken</code> response to indicate where the output should continue
     #       from.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the maximum number of results that you want included on each 
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
-    #       to the operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
+    #   <p>Specifies the maximum number of results that you want included on each
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
+    #       to the operation. If additional items exist beyond those included in the current response, the
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
+    #               <p>An API operation can return fewer results than the maximum even when there are
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure
     #       that you receive all of the results.</p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -809,32 +906,32 @@ module Aws::ServiceQuotas
 
     # <p>Lists the applied quota values for the specified Amazon Web Services service. For some quotas, only
     #             the default values are available. If the applied quota value is not available for a
-    #             quota, the quota is not retrieved. Filter responses to return applied quota values at either the account level,
-    #             resource level, or all levels.</p>
+    #             quota, the quota is not retrieved. Filter responses to return applied quota values at
+    #             either the account level, resource level, or all levels.</p>
     # @param [Hash, Types::ListServiceQuotasRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :next_token
-    #   <p>Specifies a value for receiving additional results after you 
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
-    #       response indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
+    #   <p>Specifies a value for receiving additional results after you
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+    #       response indicates that more output is available. Set this parameter to the value of the previous
+    #       call's <code>NextToken</code> response to indicate where the output should continue
     #       from.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the maximum number of results that you want included on each 
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
-    #       to the operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
+    #   <p>Specifies the maximum number of results that you want included on each
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
+    #       to the operation. If additional items exist beyond those included in the current response, the
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
+    #               <p>An API operation can return fewer results than the maximum even when there are
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure
     #       that you receive all of the results.</p>
     #            </note>
     # @option params [String] :quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific 
+    #   <p>Specifies the quota identifier. To find the quota code for a specific
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     # @option params [String] :quota_applied_at_level
@@ -884,7 +981,8 @@ module Aws::ServiceQuotas
     #         quota_context: {
     #           context_scope: "RESOURCE" # One of: ["RESOURCE", "ACCOUNT"],
     #           context_scope_type: "QuotaContextScopeType",
-    #           context_id: "QuotaContextId"
+    #           context_id: "QuotaContextId",
+    #           adjustable_at_level: "ACCOUNT" # One of: ["ACCOUNT", "PER_RESOURCE", "ALL"]
     #         },
     #         description: "QuotaDescription"
     #       }
@@ -899,21 +997,21 @@ module Aws::ServiceQuotas
     # <p>Lists the names and codes for the Amazon Web Services services integrated with Service Quotas.</p>
     # @param [Hash, Types::ListServicesRequest] params
     # @option params [String] :next_token
-    #   <p>Specifies a value for receiving additional results after you 
-    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> 
-    #       response indicates that more output is available. Set this parameter to the value of the previous 
-    #       call's <code>NextToken</code> response to indicate where the output should continue 
+    #   <p>Specifies a value for receiving additional results after you
+    #       receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+    #       response indicates that more output is available. Set this parameter to the value of the previous
+    #       call's <code>NextToken</code> response to indicate where the output should continue
     #       from.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the maximum number of results that you want included on each 
-    #       page of the response. If you do not include this parameter, it defaults to a value appropriate 
-    #       to the operation. If additional items exist beyond those included in the current response, the 
-    #       <code>NextToken</code> response element is present and has a value (is not null). Include that 
-    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get 
+    #   <p>Specifies the maximum number of results that you want included on each
+    #       page of the response. If you do not include this parameter, it defaults to a value appropriate
+    #       to the operation. If additional items exist beyond those included in the current response, the
+    #       <code>NextToken</code> response element is present and has a value (is not null). Include that
+    #       value as the <code>NextToken</code> request parameter in the next call to the operation to get
     #       the next part of the results.</p>
     #            <note>
-    #               <p>An API operation can return fewer results than the maximum even when there are 
-    #       more results available. You should check <code>NextToken</code> after every operation to ensure 
+    #               <p>An API operation can return fewer results than the maximum even when there are
+    #       more results available. You should check <code>NextToken</code> after every operation to ensure
     #       that you receive all of the results.</p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -971,11 +1069,11 @@ module Aws::ServiceQuotas
     # <p>Adds a quota increase request to your quota request template.</p>
     # @param [Hash, Types::PutServiceQuotaIncreaseRequestIntoTemplateRequest] params
     # @option params [String] :quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific 
+    #   <p>Specifies the quota identifier. To find the quota code for a specific
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :aws_region
     #   <p>Specifies the Amazon Web Services Region to which the template applies.</p>
@@ -1010,13 +1108,14 @@ module Aws::ServiceQuotas
       request.send_request(options)
     end
 
-    # <p>Submits a quota increase request for the specified quota at the account or resource level.</p>
+    # <p>Submits a quota increase request for the specified quota at the account or resource
+    #             level.</p>
     # @param [Hash, Types::RequestServiceQuotaIncreaseRequest] params
     # @option params [String] :service_code
-    #   <p>Specifies the service identifier. To find the service code value 
+    #   <p>Specifies the service identifier. To find the service code value
     #                for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
     # @option params [String] :quota_code
-    #   <p>Specifies the quota identifier. To find the quota code for a specific 
+    #   <p>Specifies the quota identifier. To find the quota code for a specific
     #                quota, use the <a>ListServiceQuotas</a> operation, and look for the
     #                <code>QuotaCode</code> response in the output for the quota you want.</p>
     # @option params [Float] :desired_value
@@ -1025,9 +1124,9 @@ module Aws::ServiceQuotas
     #   <p>Specifies the resource with an Amazon Resource Name (ARN).</p>
     # @option params [Boolean] :support_case_allowed
     #   <p>Specifies if an Amazon Web Services Support case can be opened for the quota increase request. This parameter is optional. </p>
-    #            <p>By default, this flag is set to <code>True</code> and Amazon Web Services may create a support case for some quota increase requests. 
-    #               You can set this flag to <code>False</code> 
-    #              if you do not want a support case created when you request a quota increase. If you set the flag to <code>False</code>, 
+    #            <p>By default, this flag is set to <code>True</code> and Amazon Web Services may create a support case for some quota increase requests.
+    #               You can set this flag to <code>False</code>
+    #              if you do not want a support case created when you request a quota increase. If you set the flag to <code>False</code>,
     #               Amazon Web Services does not open a support case and updates the request status to <code>Not approved</code>. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1044,6 +1143,7 @@ module Aws::ServiceQuotas
     #   {
     #     requested_quota: {
     #       id: "RequestId",
+    #       request_type: "AutomaticManagement" # One of: ["AutomaticManagement"],
     #       case_id: "CustomerServiceEngagementId",
     #       service_code: "ServiceCode",
     #       service_name: "ServiceName",
@@ -1061,13 +1161,91 @@ module Aws::ServiceQuotas
     #       quota_context: {
     #         context_scope: "RESOURCE" # One of: ["RESOURCE", "ACCOUNT"],
     #         context_scope_type: "QuotaContextScopeType",
-    #         context_id: "QuotaContextId"
+    #         context_id: "QuotaContextId",
+    #         adjustable_at_level: "ACCOUNT" # One of: ["ACCOUNT", "PER_RESOURCE", "ALL"]
     #       }
     #     }
     #   }
     # @return [Types::RequestServiceQuotaIncreaseResponse]
     def request_service_quota_increase(params = {}, options = {})
       request = build_request(:request_service_quota_increase, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html">Service Quotas Automatic Management</a> for an Amazon Web Services account, including notification preferences
+    #             and excluded quotas configurations. Automatic Management monitors your Service Quotas utilization and notifies you before you
+    #             run out of your allocated quotas.</p>
+    # @param [Hash, Types::StartAutoManagementRequest] params
+    # @option params [String] :opt_in_level
+    #   <p>Sets the opt-in level for Automatic Management. Only Amazon Web Services account level is supported.</p>
+    # @option params [String] :opt_in_type
+    #   <p>Sets the opt-in type for Automatic Management. There are two modes: Notify only and Notify and Auto-Adjust. Currently, only
+    #                                   NotifyOnly is available.</p>
+    # @option params [String] :notification_arn
+    #   <p>The <a href="https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table">User Notifications</a> Amazon Resource Name (ARN) for Automatic Management notifications.</p>
+    # @option params [Hash<String, Array<String>>] :exclusion_list
+    #   <p>List of Amazon Web Services services excluded from Automatic Management.
+    #               You won't be notified of Service Quotas utilization for Amazon Web Services services added to the
+    #                   Automatic Management exclusion list.
+    #            </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     opt_in_level: "ACCOUNT" # One of: ["ACCOUNT"], # required
+    #     opt_in_type: "NotifyOnly" # One of: ["NotifyOnly", "NotifyAndAdjust"], # required
+    #     notification_arn: "AmazonResourceName",
+    #     exclusion_list: {
+    #       "ExcludedService" => ["ExcludedLimit"]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.start_auto_management(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::StartAutoManagementResponse]
+    def start_auto_management(params = {}, options = {})
+      request = build_request(:start_auto_management, params)
+      request.send_request(options)
+    end
+
+    # <p>Initiates the generation of a quota utilization report for your Amazon Web Services account. This
+    #             asynchronous operation analyzes your quota usage across all Amazon Web Services services and returns
+    #             a unique report identifier that you can use to retrieve the results.</p>
+    #          <p>The report generation process may take several seconds to complete, depending on the
+    #             number of quotas in your account. Use the <code>GetQuotaUtilizationReport</code> operation
+    #             to check the status and retrieve the results when the report is ready.</p>
+    # @param [Hash, Types::StartQuotaUtilizationReportRequest] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.start_quota_utilization_report(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     report_id: "ReportId",
+    #     status: "PENDING" # One of: ["PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"],
+    #     message: "ReportMessage"
+    #   }
+    # @return [Types::StartQuotaUtilizationReportResponse]
+    def start_quota_utilization_report(params = {}, options = {})
+      request = build_request(:start_quota_utilization_report, params)
+      request.send_request(options)
+    end
+
+    # <p>Stops <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html">Service Quotas Automatic Management</a> for an Amazon Web Services account and removes all associated
+    #             configurations. Automatic Management monitors your Service Quotas utilization and notifies you before you
+    #             run out of your allocated quotas.</p>
+    # @param [Hash, Types::StopAutoManagementRequest] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.stop_auto_management(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::StopAutoManagementResponse]
+    def stop_auto_management(params = {}, options = {})
+      request = build_request(:stop_auto_management, params)
       request.send_request(options)
     end
 
@@ -1106,7 +1284,7 @@ module Aws::ServiceQuotas
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can
     #               get this information by using the Service Quotas console, or by listing the quotas using the
-    #               <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> Amazon Web Services API operation.</p>
+    #                   <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> Amazon Web Services API operation.</p>
     # @option params [Array<String>] :tag_keys
     #   <p>The keys of the tags that you want to remove from the resource.</p>
     # @example Request syntax with placeholder values
@@ -1122,6 +1300,41 @@ module Aws::ServiceQuotas
     # @return [Types::UntagResourceResponse]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates your <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html">Service Quotas Automatic Management</a> configuration, including notification preferences and
+    #             excluded quotas. Automatic Management monitors your Service Quotas utilization and notifies you before you
+    #             run out of your allocated quotas.</p>
+    # @param [Hash, Types::UpdateAutoManagementRequest] params
+    # @option params [String] :opt_in_type
+    #   <p>Information on the opt-in type for your Automatic Management configuration.
+    #               There are two modes: Notify only and Notify and Auto-Adjust. Currently, only
+    #                                   NotifyOnly is available.</p>
+    # @option params [String] :notification_arn
+    #   <p>The <a href="https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table">User Notifications</a> Amazon Resource Name (ARN) for Automatic Management notifications you want
+    #               to update.</p>
+    # @option params [Hash<String, Array<String>>] :exclusion_list
+    #   <p>List of Amazon Web Services services you want to exclude from Automatic Management.
+    #               You won't be notified of Service Quotas utilization for Amazon Web Services services added to the
+    #                   Automatic Management exclusion list.
+    #            </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     opt_in_type: "NotifyOnly" # One of: ["NotifyOnly", "NotifyAndAdjust"],
+    #     notification_arn: "AmazonResourceName",
+    #     exclusion_list: {
+    #       "ExcludedService" => ["ExcludedLimit"]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_auto_management(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateAutoManagementResponse]
+    def update_auto_management(params = {}, options = {})
+      request = build_request(:update_auto_management, params)
       request.send_request(options)
     end
 

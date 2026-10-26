@@ -2,23 +2,65 @@ module Aws::QuickSight
   module Schema
     include Smithy::Schema::Shapes
 
+    APIKey: StringShape
+    APIKeyConnectionMetadata: StructureShape
+    AccessControlConfiguration: StructureShape
     AccessDeniedException: StructureShape
     AccountCustomization: StructureShape
+    AccountId: StringShape
     AccountInfo: StructureShape
     AccountName: StringShape
     AccountSettings: StructureShape
+    ActionConnector: StructureShape
+    ActionConnectorDescription: StringShape
+    ActionConnectorError: StructureShape
+    ActionConnectorErrorType: EnumShape
+    ActionConnectorName: StringShape
+    ActionConnectorSearchFilter: StructureShape
+    ActionConnectorSearchFilterList: ListShape
+    ActionConnectorSearchFilterNameEnum: EnumShape
+    ActionConnectorSummary: StructureShape
+    ActionConnectorSummaryList: ListShape
+    ActionConnectorType: EnumShape
+    ActionId: StringShape
+    ActionIdList: ListShape
     ActionList: ListShape
+    ActionPassword: StringShape
+    ActionUserName: StringShape
+    ActionsList: ListShape
+    ActionsListMemberString: StringShape
     ActiveIAMPolicyAssignment: StructureShape
     ActiveIAMPolicyAssignmentList: ListShape
     AdHocFilteringOption: StructureShape
     AdditionalDashboardIdList: ListShape
+    AdditionalNotes: StructureShape
+    AdditionalNotesText: StringShape
+    Agent: StructureShape
+    AgentActionConnectorsList: ListShape
+    AgentArn: StringShape
+    AgentDescription: StringShape
+    AgentId: StringShape
+    AgentLifecycle: EnumShape
+    AgentName: StringShape
+    AgentOwnershipFilterAttribute: EnumShape
+    AgentSearchFilter: StructureShape
+    AgentSearchFilterList: ListShape
+    AgentSpacesList: ListShape
+    AgentStatus: EnumShape
+    AgentSummaries: ListShape
+    AgentSummary: StructureShape
+    AgentSummaryList: ListShape
+    AgentsMaxResults: IntegerShape
     AggFunction: StructureShape
     AggFunctionParamKey: StringShape
     AggFunctionParamMap: MapShape
     AggFunctionParamValue: StringShape
     AggType: EnumShape
+    AggregateOperation: StructureShape
+    Aggregation: StructureShape
     AggregationFunction: StructureShape
     AggregationFunctionParameters: MapShape
+    AggregationList: ListShape
     AggregationPartitionBy: StructureShape
     AggregationPartitionByList: ListShape
     AggregationSortConfiguration: StructureShape
@@ -62,7 +104,21 @@ module Aws::QuickSight
     AnonymousUserSnapshotJobResultList: ListShape
     AnswerId: StringShape
     AnswerIds: ListShape
+    AppId: StringShape
+    AppName: StringShape
+    AppSummary: StructureShape
+    AppSummaryList: ListShape
+    AppVisibility: EnumShape
+    AppendOperation: StructureShape
+    AppendedColumn: StructureShape
+    AppendedColumnList: ListShape
+    ApplicableTo: StructureShape
+    ApplicableToType: EnumShape
+    ApplicationArn: StringShape
     ApplicationTheme: StructureShape
+    ApprovalGroupList: ListShape
+    ApprovalPolicy: StructureShape
+    ApprovalPolicyList: ListShape
     ArcAxisConfiguration: StructureShape
     ArcAxisDisplayRange: StructureShape
     ArcConfiguration: StructureShape
@@ -107,6 +163,10 @@ module Aws::QuickSight
     AssetBundleExportJobThemeOverridePropertiesList: ListShape
     AssetBundleExportJobThemePropertyToOverride: EnumShape
     AssetBundleExportJobThemePropertyToOverrideList: ListShape
+    AssetBundleExportJobTopicV2OverrideProperties: StructureShape
+    AssetBundleExportJobTopicV2OverridePropertiesList: ListShape
+    AssetBundleExportJobTopicV2PropertyToOverride: EnumShape
+    AssetBundleExportJobTopicV2PropertyToOverrideList: ListShape
     AssetBundleExportJobVPCConnectionOverrideProperties: StructureShape
     AssetBundleExportJobVPCConnectionOverridePropertiesList: ListShape
     AssetBundleExportJobVPCConnectionPropertyToOverride: EnumShape
@@ -166,6 +226,12 @@ module Aws::QuickSight
     AssetBundleImportJobThemeOverridePermissionsList: ListShape
     AssetBundleImportJobThemeOverrideTags: StructureShape
     AssetBundleImportJobThemeOverrideTagsList: ListShape
+    AssetBundleImportJobTopicV2OverrideParameters: StructureShape
+    AssetBundleImportJobTopicV2OverrideParametersList: ListShape
+    AssetBundleImportJobTopicV2OverridePermissions: StructureShape
+    AssetBundleImportJobTopicV2OverridePermissionsList: ListShape
+    AssetBundleImportJobTopicV2OverrideTags: StructureShape
+    AssetBundleImportJobTopicV2OverrideTagsList: ListShape
     AssetBundleImportJobVPCConnectionOverrideParameters: StructureShape
     AssetBundleImportJobVPCConnectionOverrideParametersList: ListShape
     AssetBundleImportJobVPCConnectionOverrideTags: StructureShape
@@ -181,18 +247,31 @@ module Aws::QuickSight
     AssetBundleRestrictiveResourceId: StringShape
     AssetBundleRestrictiveResourceIdList: ListShape
     AssetOptions: StructureShape
+    AssetType: EnumShape
+    AssetTypeList: ListShape
     AssignmentStatus: EnumShape
     AthenaParameters: StructureShape
     AttributeAggregationFunction: StructureShape
+    AudioExtractionConfiguration: StructureShape
+    AudioExtractionStatus: EnumShape
     AuroraParameters: StructureShape
     AuroraPostgreSqlParameters: StructureShape
+    AuthConfig: StructureShape
+    AuthType: EnumShape
+    AuthenticationMetadata: UnionShape
     AuthenticationMethodOption: EnumShape
     AuthenticationType: EnumShape
     AuthorSpecifiedAggregation: EnumShape
     AuthorSpecifiedAggregations: ListShape
+    AuthorizationCodeGrantCredentialsDetails: UnionShape
+    AuthorizationCodeGrantCredentialsSource: EnumShape
+    AuthorizationCodeGrantDetails: StructureShape
+    AuthorizationCodeGrantMetadata: StructureShape
     AuthorizedTargetsByService: StructureShape
     AuthorizedTargetsByServices: ListShape
     AuthorizedTargetsList: ListShape
+    AutomateId: StringShape
+    AutomationJobStatus: EnumShape
     AwsAccountId: StringShape
     AwsAndAccountId: StringShape
     AwsIotAnalyticsParameters: StructureShape
@@ -211,16 +290,33 @@ module Aws::QuickSight
     AxisTickLabelOptions: StructureShape
     BarChartAggregatedFieldWells: StructureShape
     BarChartConfiguration: StructureShape
+    BarChartDefaultSeriesSettings: StructureShape
     BarChartFieldWells: StructureShape
     BarChartOrientation: EnumShape
+    BarChartSeriesSettings: StructureShape
     BarChartSortConfiguration: StructureShape
     BarChartVisual: StructureShape
+    BarSeriesItem: StructureShape
+    BarSeriesItemList: ListShape
     BarsArrangement: EnumShape
     BaseMapStyleType: EnumShape
+    BasicAuthConnectionMetadata: StructureShape
     BatchCreateTopicReviewedAnswerRequest: StructureShape
     BatchCreateTopicReviewedAnswerResponse: StructureShape
+    BatchDeleteKnowledgeBaseFailure: StructureShape
+    BatchDeleteKnowledgeBaseFailureList: ListShape
+    BatchDeleteKnowledgeBaseRequest: StructureShape
+    BatchDeleteKnowledgeBaseRequestKnowledgeBaseIdsList: ListShape
+    BatchDeleteKnowledgeBaseResponse: StructureShape
+    BatchDeleteKnowledgeBaseSuccess: StructureShape
+    BatchDeleteKnowledgeBaseSuccessList: ListShape
     BatchDeleteTopicReviewedAnswerRequest: StructureShape
     BatchDeleteTopicReviewedAnswerResponse: StructureShape
+    BatchDescribeUserLimitsError: StructureShape
+    BatchDescribeUserLimitsErrorList: ListShape
+    BatchDescribeUserLimitsRequest: StructureShape
+    BatchDescribeUserLimitsRequestUsersList: ListShape
+    BatchDescribeUserLimitsResponse: StructureShape
     BigQueryParameters: StructureShape
     BinCountLimit: IntegerShape
     BinCountOptions: StructureShape
@@ -241,6 +337,8 @@ module Aws::QuickSight
     BookmarksConfigurations: StructureShape
     Boolean: BooleanShape
     BooleanObject: BooleanShape
+    BorderRadius: StringShape
+    BorderSettings: StructureShape
     BorderStyle: StructureShape
     BoxPlotAggregatedFieldWells: StructureShape
     BoxPlotChartConfiguration: StructureShape
@@ -260,6 +358,7 @@ module Aws::QuickSight
     BrandSummary: StructureShape
     BrandSummaryList: ListShape
     BrandVersionStatus: EnumShape
+    CACertificatesBundleS3Uri: StringShape
     CIDR: StringShape
     CalculatedColumn: StructureShape
     CalculatedColumnList: ListShape
@@ -272,10 +371,15 @@ module Aws::QuickSight
     CancelIngestionResponse: StructureShape
     Capabilities: StructureShape
     CapabilityState: EnumShape
+    CapacityBytesRangeFilter: StructureShape
+    CapacityBytesRangeFilterMaxBytesLong: IntegerShape
+    CapacityBytesRangeFilterMinBytesLong: IntegerShape
     CascadingControlConfiguration: StructureShape
     CascadingControlSource: StructureShape
     CascadingControlSourceList: ListShape
     CastColumnTypeOperation: StructureShape
+    CastColumnTypeOperationList: ListShape
+    CastColumnTypesOperation: StructureShape
     Catalog: StringShape
     CategoricalAggregationFunction: EnumShape
     CategoricalDimensionField: StructureShape
@@ -290,15 +394,23 @@ module Aws::QuickSight
     CategoryInnerFilter: StructureShape
     CategoryValue: StringShape
     CategoryValueList: ListShape
+    CellValue: StringShape
     CellValueSynonym: StructureShape
     CellValueSynonyms: ListShape
     ChartAxisLabelOptions: StructureShape
+    ClientCredentialsDetails: UnionShape
+    ClientCredentialsGrantDetails: StructureShape
+    ClientCredentialsGrantMetadata: StructureShape
+    ClientCredentialsSource: EnumShape
+    ClientId: StringShape
+    ClientSecret: StringShape
     ClusterId: StringShape
     ClusterMarker: StructureShape
     ClusterMarkerConfiguration: StructureShape
     CollectiveConstant: StructureShape
     CollectiveConstantEntry: StructureShape
     CollectiveConstantEntryList: ListShape
+    Color: StringShape
     ColorFillType: EnumShape
     ColorList: ListShape
     ColorScale: StructureShape
@@ -323,6 +435,7 @@ module Aws::QuickSight
     ColumnId: StringShape
     ColumnIdentifier: StructureShape
     ColumnLevelPermissionRule: StructureShape
+    ColumnLevelPermissionRuleColumnNameList: ListShape
     ColumnLevelPermissionRuleList: ListShape
     ColumnList: ListShape
     ColumnName: StringShape
@@ -331,23 +444,33 @@ module Aws::QuickSight
     ColumnRole: EnumShape
     ColumnSchema: StructureShape
     ColumnSchemaList: ListShape
+    ColumnSemanticProperty: StructureShape
+    ColumnSemanticPropertyList: ListShape
+    ColumnSemanticType: StructureShape
     ColumnSort: StructureShape
     ColumnTag: StructureShape
     ColumnTagList: ListShape
     ColumnTagName: EnumShape
     ColumnTagNames: ListShape
+    ColumnToUnpivot: StructureShape
+    ColumnToUnpivotList: ListShape
     ColumnTooltipItem: StructureShape
     ComboChartAggregatedFieldWells: StructureShape
     ComboChartConfiguration: StructureShape
+    ComboChartDefaultSeriesSettings: StructureShape
     ComboChartFieldWells: StructureShape
+    ComboChartSeriesSettings: StructureShape
     ComboChartSortConfiguration: StructureShape
     ComboChartVisual: StructureShape
+    ComboSeriesItem: StructureShape
+    ComboSeriesItemList: ListShape
     CommitMode: EnumShape
     ComparativeOrder: StructureShape
     ComparisonConfiguration: StructureShape
     ComparisonFormatConfiguration: StructureShape
     ComparisonMethod: EnumShape
     ComparisonMethodType: EnumShape
+    ComparisonOperator: EnumShape
     Computation: StructureShape
     ComputationList: ListShape
     ConcurrentUpdatingException: StructureShape
@@ -362,9 +485,12 @@ module Aws::QuickSight
     ConditionalFormattingIconSetType: EnumShape
     ConditionalFormattingSolidColor: StructureShape
     ConflictException: StructureShape
+    ConfluenceParameters: StructureShape
+    ConnectionAuthType: EnumShape
     ConstantType: EnumShape
     ConstantValueString: StringShape
     ContextMenuOption: StructureShape
+    ContextualAccentPalette: StructureShape
     ContributionAnalysisDefault: StructureShape
     ContributionAnalysisDefaultList: ListShape
     ContributionAnalysisDirection: EnumShape
@@ -373,13 +499,31 @@ module Aws::QuickSight
     ContributionAnalysisSortType: EnumShape
     ContributionAnalysisTimeRanges: StructureShape
     ContributorDimensionList: ListShape
+    ControlSortConfiguration: StructureShape
+    ControlSortConfigurationList: ListShape
+    ControlSortDirection: EnumShape
+    ControlTitleFontConfiguration: StructureShape
+    ControlTitleFormatText: StructureShape
+    ControlTitlePlainText: StringShape
+    ControlTitleRichText: StringShape
+    Coordinate: StructureShape
+    CoordinateLatitudeDouble: FloatShape
+    CoordinateLongitudeDouble: FloatShape
     CopySourceArn: StringShape
     CreateAccountCustomizationRequest: StructureShape
     CreateAccountCustomizationResponse: StructureShape
     CreateAccountSubscriptionRequest: StructureShape
     CreateAccountSubscriptionResponse: StructureShape
+    CreateActionConnectorRequest: StructureShape
+    CreateActionConnectorResponse: StructureShape
+    CreateAgentRequest: StructureShape
+    CreateAgentRequestActionConnectorsList: ListShape
+    CreateAgentRequestSpacesList: ListShape
+    CreateAgentResponse: StructureShape
     CreateAnalysisRequest: StructureShape
     CreateAnalysisResponse: StructureShape
+    CreateApprovalPolicyRequest: StructureShape
+    CreateApprovalPolicyResponse: StructureShape
     CreateBrandRequest: StructureShape
     CreateBrandResponse: StructureShape
     CreateColumnsOperation: StructureShape
@@ -391,6 +535,11 @@ module Aws::QuickSight
     CreateDataSetResponse: StructureShape
     CreateDataSourceRequest: StructureShape
     CreateDataSourceResponse: StructureShape
+    CreateDlpSettingRequest: StructureShape
+    CreateDlpSettingResponse: StructureShape
+    CreateFlowRequest: StructureShape
+    CreateFlowRequestClientTokenString: StringShape
+    CreateFlowResponse: StructureShape
     CreateFolderMembershipRequest: StructureShape
     CreateFolderMembershipResponse: StructureShape
     CreateFolderRequest: StructureShape
@@ -403,12 +552,22 @@ module Aws::QuickSight
     CreateIAMPolicyAssignmentResponse: StructureShape
     CreateIngestionRequest: StructureShape
     CreateIngestionResponse: StructureShape
+    CreateKnowledgeBaseRequest: StructureShape
+    CreateKnowledgeBaseResponse: StructureShape
+    CreateLimitsProfileRequest: StructureShape
+    CreateLimitsProfileRequestClientTokenString: StringShape
+    CreateLimitsProfileRequestResourceLimitsMap: MapShape
+    CreateLimitsProfileResponse: StructureShape
     CreateNamespaceRequest: StructureShape
     CreateNamespaceResponse: StructureShape
+    CreateOAuthClientApplicationRequest: StructureShape
+    CreateOAuthClientApplicationResponse: StructureShape
     CreateRefreshScheduleRequest: StructureShape
     CreateRefreshScheduleResponse: StructureShape
     CreateRoleMembershipRequest: StructureShape
     CreateRoleMembershipResponse: StructureShape
+    CreateSpaceRequest: StructureShape
+    CreateSpaceResponse: StructureShape
     CreateTemplateAliasRequest: StructureShape
     CreateTemplateAliasResponse: StructureShape
     CreateTemplateRequest: StructureShape
@@ -423,9 +582,12 @@ module Aws::QuickSight
     CreateTopicResponse: StructureShape
     CreateTopicReviewedAnswer: StructureShape
     CreateTopicReviewedAnswers: ListShape
+    CreateTopicV2Request: StructureShape
+    CreateTopicV2Response: StructureShape
     CreateVPCConnectionRequest: StructureShape
     CreateVPCConnectionResponse: StructureShape
     CredentialPair: StructureShape
+    CredentialStatus: EnumShape
     CrossDatasetTypes: EnumShape
     CurrencyCode: StringShape
     CurrencyDisplayFormatConfiguration: StructureShape
@@ -443,6 +605,8 @@ module Aws::QuickSight
     CustomContentVisual: StructureShape
     CustomFilterConfiguration: StructureShape
     CustomFilterListConfiguration: StructureShape
+    CustomInstruction: StructureShape
+    CustomInstructionList: ListShape
     CustomInstructions: StructureShape
     CustomInstructionsString: StringShape
     CustomLabel: StringShape
@@ -451,12 +615,19 @@ module Aws::QuickSight
     CustomPermissions: StructureShape
     CustomPermissionsList: ListShape
     CustomPermissionsName: StringShape
+    CustomPromptInput: UnionShape
+    CustomPromptInputParameters: StructureShape
+    CustomPromptInterface: StructureShape
+    CustomPromptProfile: StructureShape
     CustomSql: StructureShape
     CustomSqlName: StringShape
     CustomValuesConfiguration: StructureShape
     CustomerManagedKeyUnavailableException: StructureShape
     Dashboard: StructureShape
     DashboardBehavior: EnumShape
+    DashboardCustomizationStatus: EnumShape
+    DashboardCustomizationSummaryConfigurations: StructureShape
+    DashboardCustomizationVisualOptions: StructureShape
     DashboardError: StructureShape
     DashboardErrorList: ListShape
     DashboardErrorType: EnumShape
@@ -482,6 +653,8 @@ module Aws::QuickSight
     DataBarsOptions: StructureShape
     DataColor: StructureShape
     DataColorPalette: StructureShape
+    DataFieldBarSeriesItem: StructureShape
+    DataFieldComboSeriesItem: StructureShape
     DataFieldSeriesItem: StructureShape
     DataLabelContent: EnumShape
     DataLabelOptions: StructureShape
@@ -499,19 +672,38 @@ module Aws::QuickSight
     DataPointDrillUpDownOption: StructureShape
     DataPointMenuLabelOption: StructureShape
     DataPointTooltipOption: StructureShape
+    DataPrepAggregationFunction: StructureShape
+    DataPrepConfiguration: StructureShape
+    DataPrepListAggregationFunction: StructureShape
+    DataPrepSimpleAggregationFunction: StructureShape
+    DataPrepSimpleAggregationFunctionType: EnumShape
     DataQAEnabledOption: StructureShape
     DataQnAConfigurations: StructureShape
     DataSet: StructureShape
     DataSetArnsList: ListShape
     DataSetCalculatedFieldExpression: StringShape
+    DataSetColumnIdMapping: StructureShape
+    DataSetColumnIdMappingList: ListShape
     DataSetConfiguration: StructureShape
     DataSetConfigurationList: ListShape
+    DataSetDateComparisonFilterCondition: StructureShape
+    DataSetDateComparisonFilterOperator: EnumShape
+    DataSetDateFilterCondition: StructureShape
+    DataSetDateFilterValue: StructureShape
+    DataSetDateRangeFilterCondition: StructureShape
+    DataSetDescriptiveText: StringShape
+    DataSetEntityResourceId: StringShape
     DataSetFilterAttribute: EnumShape
     DataSetIdentifier: StringShape
     DataSetIdentifierDeclaration: StructureShape
     DataSetIdentifierDeclarationList: ListShape
     DataSetImportMode: EnumShape
     DataSetName: StringShape
+    DataSetNumericComparisonFilterCondition: StructureShape
+    DataSetNumericComparisonFilterOperator: EnumShape
+    DataSetNumericFilterCondition: StructureShape
+    DataSetNumericFilterValue: StructureShape
+    DataSetNumericRangeFilterCondition: StructureShape
     DataSetReference: StructureShape
     DataSetReferenceList: ListShape
     DataSetRefreshProperties: StructureShape
@@ -519,11 +711,25 @@ module Aws::QuickSight
     DataSetSchema: StructureShape
     DataSetSearchFilter: StructureShape
     DataSetSearchFilterList: ListShape
+    DataSetSemanticDescription: StructureShape
+    DataSetSemanticMetadata: StructureShape
+    DataSetSemanticMetadataList: ListShape
+    DataSetStatus: EnumShape
+    DataSetStringComparisonFilterCondition: StructureShape
+    DataSetStringComparisonFilterOperator: EnumShape
+    DataSetStringFilterCondition: StructureShape
+    DataSetStringFilterStaticValue: StringShape
+    DataSetStringFilterStaticValueList: ListShape
+    DataSetStringFilterValue: StructureShape
+    DataSetStringListFilterCondition: StructureShape
+    DataSetStringListFilterOperator: EnumShape
+    DataSetStringListFilterValue: StructureShape
     DataSetSummary: StructureShape
     DataSetSummaryList: ListShape
     DataSetUsageConfiguration: StructureShape
     DataSetUseAs: EnumShape
     DataSource: StructureShape
+    DataSourceArn: StringShape
     DataSourceCredentials: StructureShape
     DataSourceErrorInfo: StructureShape
     DataSourceErrorInfoType: EnumShape
@@ -573,6 +779,11 @@ module Aws::QuickSight
     DayOfTheWeek: EnumShape
     DayOfWeek: EnumShape
     DbUsername: StringShape
+    DecalPatternType: EnumShape
+    DecalSettings: StructureShape
+    DecalSettingsConfiguration: StructureShape
+    DecalSettingsList: ListShape
+    DecalStyleType: EnumShape
     DecimalDatasetParameter: StructureShape
     DecimalDatasetParameterDefaultValue: FloatShape
     DecimalDatasetParameterDefaultValues: StructureShape
@@ -586,6 +797,8 @@ module Aws::QuickSight
     DecimalPlacesConfiguration: StructureShape
     DecimalValueWhenUnsetConfiguration: StructureShape
     DefaultAggregation: EnumShape
+    DefaultCategoryEffect: EnumShape
+    DefaultCategoryEffectsMap: MapShape
     DefaultDateTimePickerControlOptions: StructureShape
     DefaultFilterControlConfiguration: StructureShape
     DefaultFilterControlOptions: StructureShape
@@ -594,6 +807,8 @@ module Aws::QuickSight
     DefaultFormatting: StructureShape
     DefaultFreeFormLayoutConfiguration: StructureShape
     DefaultGridLayoutConfiguration: StructureShape
+    DefaultHierarchyFilterDropDownControlOptions: StructureShape
+    DefaultHierarchyFilterListControlOptions: StructureShape
     DefaultInteractiveLayoutConfiguration: StructureShape
     DefaultNewSheetConfiguration: StructureShape
     DefaultPaginatedLayoutConfiguration: StructureShape
@@ -608,8 +823,16 @@ module Aws::QuickSight
     DeleteAccountCustomizationResponse: StructureShape
     DeleteAccountSubscriptionRequest: StructureShape
     DeleteAccountSubscriptionResponse: StructureShape
+    DeleteActionConnectorRequest: StructureShape
+    DeleteActionConnectorResponse: StructureShape
+    DeleteAgentRequest: StructureShape
+    DeleteAgentResponse: StructureShape
     DeleteAnalysisRequest: StructureShape
     DeleteAnalysisResponse: StructureShape
+    DeleteAppRequest: StructureShape
+    DeleteAppResponse: StructureShape
+    DeleteApprovalPolicyRequest: StructureShape
+    DeleteApprovalPolicyResponse: StructureShape
     DeleteBrandAssignmentRequest: StructureShape
     DeleteBrandAssignmentResponse: StructureShape
     DeleteBrandRequest: StructureShape
@@ -626,6 +849,10 @@ module Aws::QuickSight
     DeleteDataSourceResponse: StructureShape
     DeleteDefaultQBusinessApplicationRequest: StructureShape
     DeleteDefaultQBusinessApplicationResponse: StructureShape
+    DeleteDlpSettingRequest: StructureShape
+    DeleteDlpSettingResponse: StructureShape
+    DeleteFlowRequest: StructureShape
+    DeleteFlowResponse: StructureShape
     DeleteFolderMembershipRequest: StructureShape
     DeleteFolderMembershipResponse: StructureShape
     DeleteFolderRequest: StructureShape
@@ -638,14 +865,22 @@ module Aws::QuickSight
     DeleteIAMPolicyAssignmentResponse: StructureShape
     DeleteIdentityPropagationConfigRequest: StructureShape
     DeleteIdentityPropagationConfigResponse: StructureShape
+    DeleteKnowledgeBaseRequest: StructureShape
+    DeleteKnowledgeBaseResponse: StructureShape
+    DeleteLimitsProfileRequest: StructureShape
+    DeleteLimitsProfileResponse: StructureShape
     DeleteNamespaceRequest: StructureShape
     DeleteNamespaceResponse: StructureShape
+    DeleteOAuthClientApplicationRequest: StructureShape
+    DeleteOAuthClientApplicationResponse: StructureShape
     DeleteRefreshScheduleRequest: StructureShape
     DeleteRefreshScheduleResponse: StructureShape
     DeleteRoleCustomPermissionRequest: StructureShape
     DeleteRoleCustomPermissionResponse: StructureShape
     DeleteRoleMembershipRequest: StructureShape
     DeleteRoleMembershipResponse: StructureShape
+    DeleteSpaceRequest: StructureShape
+    DeleteSpaceResponse: StructureShape
     DeleteTemplateAliasRequest: StructureShape
     DeleteTemplateAliasResponse: StructureShape
     DeleteTemplateRequest: StructureShape
@@ -658,6 +893,8 @@ module Aws::QuickSight
     DeleteTopicRefreshScheduleResponse: StructureShape
     DeleteTopicRequest: StructureShape
     DeleteTopicResponse: StructureShape
+    DeleteTopicV2Request: StructureShape
+    DeleteTopicV2Response: StructureShape
     DeleteUserByPrincipalIdRequest: StructureShape
     DeleteUserByPrincipalIdResponse: StructureShape
     DeleteUserCustomPermissionRequest: StructureShape
@@ -675,16 +912,32 @@ module Aws::QuickSight
     DescribeAccountSettingsResponse: StructureShape
     DescribeAccountSubscriptionRequest: StructureShape
     DescribeAccountSubscriptionResponse: StructureShape
+    DescribeActionConnectorPermissionsRequest: StructureShape
+    DescribeActionConnectorPermissionsResponse: StructureShape
+    DescribeActionConnectorRequest: StructureShape
+    DescribeActionConnectorResponse: StructureShape
+    DescribeAgentPermissionsRequest: StructureShape
+    DescribeAgentPermissionsResponse: StructureShape
+    DescribeAgentRequest: StructureShape
+    DescribeAgentResponse: StructureShape
     DescribeAnalysisDefinitionRequest: StructureShape
     DescribeAnalysisDefinitionResponse: StructureShape
     DescribeAnalysisPermissionsRequest: StructureShape
     DescribeAnalysisPermissionsResponse: StructureShape
     DescribeAnalysisRequest: StructureShape
     DescribeAnalysisResponse: StructureShape
+    DescribeAppPermissionsRequest: StructureShape
+    DescribeAppPermissionsResponse: StructureShape
+    DescribeAppRequest: StructureShape
+    DescribeAppResponse: StructureShape
+    DescribeApprovalPolicyRequest: StructureShape
+    DescribeApprovalPolicyResponse: StructureShape
     DescribeAssetBundleExportJobRequest: StructureShape
     DescribeAssetBundleExportJobResponse: StructureShape
     DescribeAssetBundleImportJobRequest: StructureShape
     DescribeAssetBundleImportJobResponse: StructureShape
+    DescribeAutomationJobRequest: StructureShape
+    DescribeAutomationJobResponse: StructureShape
     DescribeBrandAssignmentRequest: StructureShape
     DescribeBrandAssignmentResponse: StructureShape
     DescribeBrandPublishedVersionRequest: StructureShape
@@ -717,6 +970,10 @@ module Aws::QuickSight
     DescribeDataSourceResponse: StructureShape
     DescribeDefaultQBusinessApplicationRequest: StructureShape
     DescribeDefaultQBusinessApplicationResponse: StructureShape
+    DescribeDlpSettingRequest: StructureShape
+    DescribeDlpSettingResponse: StructureShape
+    DescribeFlowRequest: StructureShape
+    DescribeFlowResponse: StructureShape
     DescribeFolderPermissionsRequest: StructureShape
     DescribeFolderPermissionsResponse: StructureShape
     DescribeFolderRequest: StructureShape
@@ -735,8 +992,16 @@ module Aws::QuickSight
     DescribeIpRestrictionResponse: StructureShape
     DescribeKeyRegistrationRequest: StructureShape
     DescribeKeyRegistrationResponse: StructureShape
+    DescribeKnowledgeBasePermissionsRequest: StructureShape
+    DescribeKnowledgeBasePermissionsResponse: StructureShape
+    DescribeKnowledgeBaseRequest: StructureShape
+    DescribeKnowledgeBaseResponse: StructureShape
+    DescribeLimitsProfileRequest: StructureShape
+    DescribeLimitsProfileResponse: StructureShape
     DescribeNamespaceRequest: StructureShape
     DescribeNamespaceResponse: StructureShape
+    DescribeOAuthClientApplicationRequest: StructureShape
+    DescribeOAuthClientApplicationResponse: StructureShape
     DescribeQPersonalizationConfigurationRequest: StructureShape
     DescribeQPersonalizationConfigurationResponse: StructureShape
     DescribeQuickSightQSearchConfigurationRequest: StructureShape
@@ -745,6 +1010,12 @@ module Aws::QuickSight
     DescribeRefreshScheduleResponse: StructureShape
     DescribeRoleCustomPermissionRequest: StructureShape
     DescribeRoleCustomPermissionResponse: StructureShape
+    DescribeSelfUpgradeConfigurationRequest: StructureShape
+    DescribeSelfUpgradeConfigurationResponse: StructureShape
+    DescribeSpacePermissionsRequest: StructureShape
+    DescribeSpacePermissionsResponse: StructureShape
+    DescribeSpaceRequest: StructureShape
+    DescribeSpaceResponse: StructureShape
     DescribeTemplateAliasRequest: StructureShape
     DescribeTemplateAliasResponse: StructureShape
     DescribeTemplateDefinitionRequest: StructureShape
@@ -761,23 +1032,40 @@ module Aws::QuickSight
     DescribeThemeResponse: StructureShape
     DescribeTopicPermissionsRequest: StructureShape
     DescribeTopicPermissionsResponse: StructureShape
+    DescribeTopicPermissionsV2Request: StructureShape
+    DescribeTopicPermissionsV2Response: StructureShape
     DescribeTopicRefreshRequest: StructureShape
     DescribeTopicRefreshResponse: StructureShape
     DescribeTopicRefreshScheduleRequest: StructureShape
     DescribeTopicRefreshScheduleResponse: StructureShape
     DescribeTopicRequest: StructureShape
     DescribeTopicResponse: StructureShape
+    DescribeTopicV2Request: StructureShape
+    DescribeTopicV2Response: StructureShape
     DescribeUserRequest: StructureShape
     DescribeUserResponse: StructureShape
     DescribeVPCConnectionRequest: StructureShape
     DescribeVPCConnectionResponse: StructureShape
     Description: StringShape
+    DescriptionSensitiveString: StringShape
     DestinationParameterValueConfiguration: StructureShape
+    DestinationTable: StructureShape
+    DestinationTableAlias: StringShape
+    DestinationTableMap: MapShape
+    DestinationTableSource: StructureShape
     DigitGroupingStyle: EnumShape
     DimensionField: StructureShape
     DimensionFieldList: ListShape
     DisplayFormat: EnumShape
     DisplayFormatOptions: StructureShape
+    DlpAction: EnumShape
+    DlpProviderType: EnumShape
+    DlpSettingDetails: StructureShape
+    DlpSettingId: StringShape
+    DlpSettingName: StringShape
+    DlpSettingStatus: EnumShape
+    DlpSettingSummary: StructureShape
+    DlpSettingSummaryList: ListShape
     DnsResolverList: ListShape
     Domain: StringShape
     DomainNotWhitelistedException: StructureShape
@@ -789,9 +1077,15 @@ module Aws::QuickSight
     DropDownControlDisplayOptions: StructureShape
     DynamicDefaultValue: StructureShape
     Edition: EnumShape
+    EffectiveLimit: StructureShape
+    EffectiveLimitLimitValueLong: IntegerShape
+    EffectiveLimitList: ListShape
+    ElementValue: StringShape
+    Email: StringShape
     EmbeddingIdentityType: EnumShape
     EmbeddingUrl: StringShape
     EmptyVisual: StructureShape
+    Endpoint: StringShape
     Entity: StructureShape
     EntityList: ListShape
     EntryPath: StringShape
@@ -810,15 +1104,24 @@ module Aws::QuickSight
     ExportToCSVOption: StructureShape
     ExportWithHiddenFieldsOption: StructureShape
     Expression: StringShape
+    FMKBKnowledgeBaseArn: StringShape
+    FMKBParameters: StructureShape
     FailedKeyRegistrationEntries: ListShape
     FailedKeyRegistrationEntry: StructureShape
+    FailedSpaceResourceOperation: StructureShape
+    FailedSpaceResourceOperations: ListShape
+    FailedToUpdateAssociation: StructureShape
+    FailedToUpdateAssociationList: ListShape
+    FieldBarSeriesItem: StructureShape
     FieldBasedTooltip: StructureShape
+    FieldComboSeriesItem: StructureShape
     FieldFolder: StructureShape
     FieldFolderDescription: StringShape
     FieldFolderMap: MapShape
     FieldFolderPath: StringShape
     FieldId: StringShape
     FieldLabelType: StructureShape
+    FieldName: EnumShape
     FieldOrderList: ListShape
     FieldSeriesItem: StructureShape
     FieldSort: StructureShape
@@ -827,6 +1130,7 @@ module Aws::QuickSight
     FieldTooltipItem: StructureShape
     FieldValue: StringShape
     FileFormat: EnumShape
+    FileSource: StructureShape
     FilledMapAggregatedFieldWells: StructureShape
     FilledMapConditionalFormatting: StructureShape
     FilledMapConditionalFormattingOption: StructureShape
@@ -854,6 +1158,7 @@ module Aws::QuickSight
     FilterListControl: StructureShape
     FilterNullOption: EnumShape
     FilterOperation: StructureShape
+    FilterOperationList: ListShape
     FilterOperationSelectedFieldsConfiguration: StructureShape
     FilterOperationTargetVisualsConfiguration: StructureShape
     FilterOperator: EnumShape
@@ -863,8 +1168,18 @@ module Aws::QuickSight
     FilterSliderControl: StructureShape
     FilterTextAreaControl: StructureShape
     FilterTextFieldControl: StructureShape
+    FilterValue: StringShape
     FilterVisualScope: EnumShape
     FilteredVisualsList: ListShape
+    FiltersOperation: StructureShape
+    FlowDescription: StringShape
+    FlowDescriptionInput: StringShape
+    FlowDetail: StructureShape
+    FlowId: StringShape
+    FlowMaxResults: IntegerShape
+    FlowPublishState: EnumShape
+    FlowSummary: StructureShape
+    FlowSummaryList: ListShape
     Folder: StructureShape
     FolderArnList: ListShape
     FolderColumnList: ListShape
@@ -932,6 +1247,15 @@ module Aws::QuickSight
     GeoSpatialColumnGroup: StructureShape
     GeoSpatialCountryCode: EnumShape
     GeoSpatialDataRole: EnumShape
+    GeocodePreference: StructureShape
+    GeocodePreferenceList: ListShape
+    GeocodePreferenceValue: UnionShape
+    GeocoderHierarchy: StructureShape
+    GeocoderHierarchyCityString: StringShape
+    GeocoderHierarchyCountryString: StringShape
+    GeocoderHierarchyCountyString: StringShape
+    GeocoderHierarchyPostCodeString: StringShape
+    GeocoderHierarchyStateString: StringShape
     GeospatialCategoricalColor: StructureShape
     GeospatialCategoricalDataColor: StructureShape
     GeospatialCategoricalDataColorList: ListShape
@@ -985,15 +1309,28 @@ module Aws::QuickSight
     GeospatialWindowOptions: StructureShape
     GetDashboardEmbedUrlRequest: StructureShape
     GetDashboardEmbedUrlResponse: StructureShape
+    GetFlowMetadataInput: StructureShape
+    GetFlowMetadataOutput: StructureShape
+    GetFlowPermissionsInput: StructureShape
+    GetFlowPermissionsOutput: StructureShape
+    GetIdentityContextRequest: StructureShape
+    GetIdentityContextResponse: StructureShape
     GetSessionEmbedUrlRequest: StructureShape
     GetSessionEmbedUrlResponse: StructureShape
     GlobalTableBorderOptions: StructureShape
+    GoogleDriveParameters: StructureShape
+    Governance: StructureShape
+    GovernanceCategoryName: StringShape
+    GovernedAction: EnumShape
+    GovernedActionList: ListShape
     GradientColor: StructureShape
     GradientStop: StructureShape
     GradientStopList: ListShape
     GridLayoutCanvasSizeOptions: StructureShape
     GridLayoutConfiguration: StructureShape
     GridLayoutElement: StructureShape
+    GridLayoutElementBackgroundStyle: StructureShape
+    GridLayoutElementBorderStyle: StructureShape
     GridLayoutElementColumnIndex: IntegerShape
     GridLayoutElementColumnSpan: IntegerShape
     GridLayoutElementList: ListShape
@@ -1001,6 +1338,8 @@ module Aws::QuickSight
     GridLayoutElementRowSpan: IntegerShape
     GridLayoutScreenCanvasSizeOptions: StructureShape
     Group: StructureShape
+    GroupArnList: ListShape
+    GroupByColumnNameList: ListShape
     GroupDescription: StringShape
     GroupFilterAttribute: EnumShape
     GroupFilterOperator: EnumShape
@@ -1026,7 +1365,20 @@ module Aws::QuickSight
     HeatMapVisual: StructureShape
     HexColor: StringShape
     HexColorWithTransparency: StringShape
+    HierarchyFilter: StructureShape
+    HierarchyFilterDropDownControl: StructureShape
+    HierarchyFilterDropDownControlDisplayOptions: StructureShape
+    HierarchyFilterLevel: StructureShape
+    HierarchyFilterLevelList: ListShape
+    HierarchyFilterListControl: StructureShape
+    HierarchyFilterListControlDisplayOptions: StructureShape
+    HierarchyFilterListControlSearchOptions: StructureShape
+    HierarchyFilterMatchOperator: EnumShape
+    HierarchyFilterNode: StructureShape
+    HierarchyFilterNodeList: ListShape
+    HierarchyFilterValue: StringShape
     HierarchyId: StringShape
+    HierarchyValuesList: ListShape
     HistogramAggregatedFieldWells: StructureShape
     HistogramBinOptions: StructureShape
     HistogramBinType: EnumShape
@@ -1036,12 +1388,14 @@ module Aws::QuickSight
     HistogramVisual: StructureShape
     HorizontalTextAlignment: EnumShape
     Host: StringShape
+    IAMConnectionMetadata: StructureShape
     IAMPolicyAssignment: StructureShape
     IAMPolicyAssignmentName: StringShape
     IAMPolicyAssignmentSummary: StructureShape
     IAMPolicyAssignmentSummaryList: ListShape
     IPv4Address: StringShape
     Icon: EnumShape
+    IconId: StringShape
     Identifier: StructureShape
     IdentityCenterConfiguration: StructureShape
     IdentityMap: MapShape
@@ -1059,6 +1413,8 @@ module Aws::QuickSight
     ImageCustomActionOperation: StructureShape
     ImageCustomActionOperationList: ListShape
     ImageCustomActionTrigger: EnumShape
+    ImageExtractionConfiguration: StructureShape
+    ImageExtractionStatus: EnumShape
     ImageInteractionOptions: StructureShape
     ImageMenuOption: StructureShape
     ImageSet: StructureShape
@@ -1066,6 +1422,8 @@ module Aws::QuickSight
     ImageSource: UnionShape
     ImageStaticFile: StructureShape
     ImpalaParameters: StructureShape
+    ImportTableOperation: StructureShape
+    ImportTableOperationSource: StructureShape
     IncludeFolderMembers: EnumShape
     IncludeGeneratedAnswer: EnumShape
     IncludeQuickSightQIndex: EnumShape
@@ -1079,6 +1437,8 @@ module Aws::QuickSight
     IngestionStatus: EnumShape
     IngestionType: EnumShape
     Ingestions: ListShape
+    InlineCustomInstruction: StructureShape
+    InlineCustomInstructionText: StringShape
     InnerFilter: StructureShape
     InputColumn: StructureShape
     InputColumnDataType: EnumShape
@@ -1096,10 +1456,13 @@ module Aws::QuickSight
     IntegerParameter: StructureShape
     IntegerParameterDeclaration: StructureShape
     IntegerParameterList: ListShape
+    IntegerValue: IntegerShape
     IntegerValueWhenUnsetConfiguration: StructureShape
     InternalFailureException: StructureShape
     InternalServerException: StructureShape
+    InvalidDataSetParameterValueException: StructureShape
     InvalidNextTokenException: StructureShape
+    InvalidParameterException: StructureShape
     InvalidParameterValueException: StructureShape
     InvalidRequestException: StructureShape
     InvalidTopicReviewedAnswer: StructureShape
@@ -1110,6 +1473,10 @@ module Aws::QuickSight
     JiraParameters: StructureShape
     JoinInstruction: StructureShape
     JoinKeyProperties: StructureShape
+    JoinOperandProperties: StructureShape
+    JoinOperation: StructureShape
+    JoinOperationOnClause: StringShape
+    JoinOperationType: EnumShape
     JoinType: EnumShape
     KPIActualValueConditionalFormatting: StructureShape
     KPIComparisonValueConditionalFormatting: StructureShape
@@ -1128,7 +1495,32 @@ module Aws::QuickSight
     KPIVisualLayoutOptions: StructureShape
     KPIVisualStandardLayout: StructureShape
     KPIVisualStandardLayoutType: EnumShape
+    KbAwsAccountId: StringShape
+    KbIngestionId: StringShape
+    KbIngestionStatus: EnumShape
+    KbTemplate: DocumentShape
+    KbTemplateConfiguration: StructureShape
+    KeyPairCredentials: StructureShape
     KeyRegistration: ListShape
+    KnowledgeBase: StructureShape
+    KnowledgeBaseArn: StringShape
+    KnowledgeBaseConfiguration: StructureShape
+    KnowledgeBaseDescription: StringShape
+    KnowledgeBaseId: StringShape
+    KnowledgeBaseIngestionSummary: StructureShape
+    KnowledgeBaseName: StringShape
+    KnowledgeBaseSearchFilter: StructureShape
+    KnowledgeBaseSearchFilterName: EnumShape
+    KnowledgeBaseSearchFilters: ListShape
+    KnowledgeBaseSearchOperator: EnumShape
+    KnowledgeBaseSortBy: StructureShape
+    KnowledgeBaseSortByField: EnumShape
+    KnowledgeBaseSummaries: ListShape
+    KnowledgeBaseSummary: StructureShape
+    LabelActionMapping: StructureShape
+    LabelActionMappingList: ListShape
+    LabelId: StringShape
+    LabelName: StringShape
     LabelOptions: StructureShape
     Latitude: FloatShape
     LayerCustomAction: StructureShape
@@ -1146,7 +1538,12 @@ module Aws::QuickSight
     LegendPosition: EnumShape
     Length: StringShape
     LimitExceededException: StructureShape
+    LimitSource: EnumShape
+    LimitUnit: EnumShape
+    LimitedSensitiveString: StringShape
     LimitedString: StringShape
+    LimitsProfile: StructureShape
+    LimitsProfileList: ListShape
     LineChartAggregatedFieldWells: StructureShape
     LineChartConfiguration: StructureShape
     LineChartDefaultSeriesSettings: StructureShape
@@ -1164,8 +1561,19 @@ module Aws::QuickSight
     LinkEntityArn: StringShape
     LinkEntityArnList: ListShape
     LinkSharingConfiguration: StructureShape
+    LinkedDataSourceId: StringShape
+    LinkedDataSourceIds: ListShape
+    ListActionConnectorsRequest: StructureShape
+    ListActionConnectorsResponse: StructureShape
+    ListAgentsRequest: StructureShape
+    ListAgentsRequestMaxResultsInteger: IntegerShape
+    ListAgentsResponse: StructureShape
     ListAnalysesRequest: StructureShape
     ListAnalysesResponse: StructureShape
+    ListApprovalPoliciesRequest: StructureShape
+    ListApprovalPoliciesResponse: StructureShape
+    ListAppsRequest: StructureShape
+    ListAppsResponse: StructureShape
     ListAssetBundleExportJobsRequest: StructureShape
     ListAssetBundleExportJobsResponse: StructureShape
     ListAssetBundleImportJobsRequest: StructureShape
@@ -1185,6 +1593,10 @@ module Aws::QuickSight
     ListDataSetsResponse: StructureShape
     ListDataSourcesRequest: StructureShape
     ListDataSourcesResponse: StructureShape
+    ListDlpSettingsRequest: StructureShape
+    ListDlpSettingsResponse: StructureShape
+    ListFlowsInput: StructureShape
+    ListFlowsOutput: StructureShape
     ListFolderMembersRequest: StructureShape
     ListFolderMembersResponse: StructureShape
     ListFoldersForResourceRequest: StructureShape
@@ -1204,12 +1616,25 @@ module Aws::QuickSight
     ListIdentityPropagationMaxResults: IntegerShape
     ListIngestionsRequest: StructureShape
     ListIngestionsResponse: StructureShape
+    ListKnowledgeBasesRequest: StructureShape
+    ListKnowledgeBasesResponse: StructureShape
+    ListLimitsProfilesRequest: StructureShape
+    ListLimitsProfilesRequestMaxResultsInteger: IntegerShape
+    ListLimitsProfilesResponse: StructureShape
     ListNamespacesRequest: StructureShape
     ListNamespacesResponse: StructureShape
+    ListOAuthClientApplicationsRequest: StructureShape
+    ListOAuthClientApplicationsResponse: StructureShape
     ListRefreshSchedulesRequest: StructureShape
     ListRefreshSchedulesResponse: StructureShape
     ListRoleMembershipsRequest: StructureShape
     ListRoleMembershipsResponse: StructureShape
+    ListSelfUpgradesRequest: StructureShape
+    ListSelfUpgradesResponse: StructureShape
+    ListSpaceResourcesRequest: StructureShape
+    ListSpaceResourcesResponse: StructureShape
+    ListSpacesRequest: StructureShape
+    ListSpacesResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     ListTemplateAliasesRequest: StructureShape
@@ -1230,8 +1655,13 @@ module Aws::QuickSight
     ListTopicReviewedAnswersResponse: StructureShape
     ListTopicsRequest: StructureShape
     ListTopicsResponse: StructureShape
+    ListTopicsV2Request: StructureShape
+    ListTopicsV2Response: StructureShape
     ListUserGroupsRequest: StructureShape
     ListUserGroupsResponse: StructureShape
+    ListUsersIndexCapacityRequest: StructureShape
+    ListUsersIndexCapacityRequestMaxResultsInteger: IntegerShape
+    ListUsersIndexCapacityResponse: StructureShape
     ListUsersRequest: StructureShape
     ListUsersResponse: StructureShape
     ListVPCConnectionsRequest: StructureShape
@@ -1251,6 +1681,7 @@ module Aws::QuickSight
     LongFormatText: StructureShape
     LongPlainText: StringShape
     LongRichText: StringShape
+    LongValue: IntegerShape
     Longitude: FloatShape
     LookbackWindow: StructureShape
     LookbackWindowSizeUnit: EnumShape
@@ -1260,6 +1691,7 @@ module Aws::QuickSight
     MappedDataSetParameters: ListShape
     MarginStyle: StructureShape
     MariaDbParameters: StructureShape
+    MaxContributors: IntegerShape
     MaxResults: IntegerShape
     MaxTopicsToConsider: IntegerShape
     MaximumLabelType: StructureShape
@@ -1267,13 +1699,18 @@ module Aws::QuickSight
     MaximumMinimumComputationType: EnumShape
     MeasureField: StructureShape
     MeasureFieldList: ListShape
+    MediaExtractionConfiguration: StructureShape
     MemberIdArnPair: StructureShape
     MemberType: EnumShape
+    MetadataFilesLocation: StringShape
     MetricComparisonComputation: StructureShape
+    MicrosoftPurviewCredentials: StructureShape
+    MicrosoftPurviewProviderConfig: StructureShape
     MinimumLabelType: StructureShape
     MissingDataConfiguration: StructureShape
     MissingDataConfigurationList: ListShape
     MissingDataTreatmentOption: EnumShape
+    ModelProfileId: StringShape
     MySqlParameters: StructureShape
     Name: StringShape
     NamedEntityAggType: EnumShape
@@ -1281,6 +1718,8 @@ module Aws::QuickSight
     NamedEntityDefinitionMetric: StructureShape
     NamedEntityDefinitions: ListShape
     NamedEntityRef: StructureShape
+    NamedEntitySort: StructureShape
+    NamedEntitySortList: ListShape
     NamedFilterAggType: EnumShape
     NamedFilterType: EnumShape
     Namespace: StringShape
@@ -1300,13 +1739,16 @@ module Aws::QuickSight
     NetworkInterfaceList: ListShape
     NetworkInterfaceStatus: EnumShape
     NewDefaultValues: StructureShape
+    NextToken: StringShape
     NonEmptyString: StringShape
     NonRepeatingVisualsList: ListShape
+    NoneConnectionMetadata: StructureShape
     NullFilterOption: EnumShape
     NullFilterType: EnumShape
     NullString: StringShape
     NullValueFormatConfiguration: StructureShape
     NullableBoolean: BooleanShape
+    NullableInteger: IntegerShape
     NumberDisplayFormatConfiguration: StructureShape
     NumberFormatConfiguration: StructureShape
     NumberScale: EnumShape
@@ -1323,9 +1765,24 @@ module Aws::QuickSight
     NumericalAggregationFunction: StructureShape
     NumericalDimensionField: StructureShape
     NumericalMeasureField: StructureShape
+    OAuthAuthorizationEndpointUrl: StringShape
+    OAuthClientApplication: StructureShape
+    OAuthClientApplicationId: StringShape
+    OAuthClientApplicationSummary: StructureShape
+    OAuthClientApplicationSummaryList: ListShape
+    OAuthClientAuthenticationType: EnumShape
+    OAuthClientCredentials: StructureShape
+    OAuthClientId: StringShape
+    OAuthClientSecret: StringShape
     OAuthParameters: StructureShape
     OAuthScope: StringShape
+    OAuthScopesString: StringShape
+    OAuthTokenEndpointUrl: StringShape
+    OAuthUsername: StringShape
     OnClause: StringShape
+    OneDriveClientId: StringShape
+    OneDriveParameters: StructureShape
+    OneDriveTenantId: StringShape
     Opacity: FloatShape
     OperandList: ListShape
     OptionalPort: IntegerShape
@@ -1333,9 +1790,13 @@ module Aws::QuickSight
     OtherCategories: EnumShape
     OutputColumn: StructureShape
     OutputColumnList: ListShape
+    OutputColumnNameOverride: StructureShape
+    OutputColumnNameOverrideList: ListShape
     OverrideDatasetParameterOperation: StructureShape
+    Padding: StringShape
     PageNumber: IntegerShape
     PaginationConfiguration: StructureShape
+    PaginationToken: StringShape
     Palette: StructureShape
     PanelBorderStyle: EnumShape
     PanelConfiguration: StructureShape
@@ -1357,6 +1818,7 @@ module Aws::QuickSight
     ParameterTextFieldControl: StructureShape
     ParameterValueType: EnumShape
     Parameters: StructureShape
+    ParentDataSet: StructureShape
     Password: StringShape
     Path: ListShape
     PercentNumber: FloatShape
@@ -1369,6 +1831,9 @@ module Aws::QuickSight
     PeriodToDateComputation: StructureShape
     PeriodsBackward: IntegerShape
     PeriodsForward: IntegerShape
+    Permission: StructureShape
+    PermissionPrincipalString: StringShape
+    PermissionsList: ListShape
     PersonalizationMode: EnumShape
     PhysicalTable: UnionShape
     PhysicalTableId: StringShape
@@ -1378,9 +1843,12 @@ module Aws::QuickSight
     PieChartFieldWells: StructureShape
     PieChartSortConfiguration: StructureShape
     PieChartVisual: StructureShape
+    PivotConfiguration: StructureShape
     PivotFieldSortOptions: StructureShape
     PivotFieldSortOptionsList: ListShape
+    PivotGroupByColumnNameList: ListShape
     PivotMeasureFieldList: ListShape
+    PivotOperation: StructureShape
     PivotTableAggregatedFieldWells: StructureShape
     PivotTableCellConditionalFormatting: StructureShape
     PivotTableConditionalFormatting: StructureShape
@@ -1416,6 +1884,8 @@ module Aws::QuickSight
     PivotTableTotalOptions: StructureShape
     PivotTableVisual: StructureShape
     PivotTotalOptions: StructureShape
+    PivotedLabel: StructureShape
+    PivotedLabelList: ListShape
     PixelLength: StringShape
     PluginVisual: StructureShape
     PluginVisualAxisName: EnumShape
@@ -1428,6 +1898,9 @@ module Aws::QuickSight
     PluginVisualProperty: StructureShape
     PluginVisualSortConfiguration: StructureShape
     PluginVisualTableQuerySort: StructureShape
+    PolicyDescription: StringShape
+    PolicyId: StringShape
+    PolicyName: StringShape
     Port: IntegerShape
     PositiveInteger: IntegerShape
     PositiveLong: IntegerShape
@@ -1443,12 +1916,22 @@ module Aws::QuickSight
     PrimaryValueDisplayType: EnumShape
     Principal: StringShape
     PrincipalList: ListShape
+    PrivateKey: StringShape
+    PrivateKeyPassphrase: StringShape
+    ProfileDescription: StringShape
+    ProfileId: StringShape
+    ProfileLimitValue: StructureShape
+    ProfileLimitValueMaxValueLong: IntegerShape
+    ProfileName: StringShape
     ProgressBarOptions: StructureShape
     ProjectId: StringShape
     ProjectOperation: StructureShape
-    ProjectedColumnList: ListShape
+    ProjectedColumnNameList: ListShape
     PropertyRole: EnumShape
     PropertyUsage: EnumShape
+    ProviderConfig: UnionShape
+    PublicSpaceArn: StringShape
+    PublicSpaceId: StringShape
     PurchaseMode: EnumShape
     PutDataSetRefreshPropertiesRequest: StructureShape
     PutDataSetRefreshPropertiesResponse: StructureShape
@@ -1458,15 +1941,18 @@ module Aws::QuickSight
     QAResults: ListShape
     QAUrl: StringShape
     QBusinessInsightsStatus: EnumShape
+    QBusinessParameters: StructureShape
     QDataKey: StructureShape
     QDataKeyType: EnumShape
     QSearchStatus: EnumShape
+    QbsAwsAccountId: StringShape
     Query: StringShape
     QueryExecutionMode: EnumShape
     QueryExecutionOptions: StructureShape
     QuestionId: StringShape
     QueueInfo: StructureShape
     QuickSightUserNotFoundException: StructureShape
+    QuickSuiteActionsOption: StructureShape
     RadarChartAggregatedFieldWells: StructureShape
     RadarChartAreaStyleSettings: StructureShape
     RadarChartAxesRangeScale: EnumShape
@@ -1483,6 +1969,18 @@ module Aws::QuickSight
     RangeConstant: StructureShape
     RangeEndsLabelType: StructureShape
     RdsParameters: StructureShape
+    ReadAPIKeyConnectionMetadata: StructureShape
+    ReadAuthConfig: StructureShape
+    ReadAuthenticationMetadata: UnionShape
+    ReadAuthorizationCodeGrantCredentialsDetails: UnionShape
+    ReadAuthorizationCodeGrantDetails: StructureShape
+    ReadAuthorizationCodeGrantMetadata: StructureShape
+    ReadBasicAuthConnectionMetadata: StructureShape
+    ReadClientCredentialsDetails: UnionShape
+    ReadClientCredentialsGrantDetails: StructureShape
+    ReadClientCredentialsGrantMetadata: StructureShape
+    ReadIamConnectionMetadata: StructureShape
+    ReadNoneConnectionMetadata: StructureShape
     RecentSnapshotsConfigurations: StructureShape
     RecoveryWindowInDays: IntegerShape
     RedshiftIAMParameters: StructureShape
@@ -1509,6 +2007,7 @@ module Aws::QuickSight
     RefreshInterval: EnumShape
     RefreshSchedule: StructureShape
     RefreshSchedules: ListShape
+    Region: StringShape
     RegisterUserRequest: StructureShape
     RegisterUserResponse: StructureShape
     RegisteredCustomerManagedKey: StructureShape
@@ -1519,7 +2018,10 @@ module Aws::QuickSight
     RegisteredUserEmbeddingExperienceConfiguration: StructureShape
     RegisteredUserGenerativeQnAEmbeddingConfiguration: StructureShape
     RegisteredUserQSearchBarEmbeddingConfiguration: StructureShape
+    RegisteredUserQuickChatEmbeddingConfiguration: StructureShape
     RegisteredUserQuickSightConsoleEmbeddingConfiguration: StructureShape
+    RegisteredUserSnapshotJobResult: StructureShape
+    RegisteredUserSnapshotJobResultList: ListShape
     RelationalTable: StructureShape
     RelationalTableCatalog: StringShape
     RelationalTableName: StringShape
@@ -1529,14 +2031,20 @@ module Aws::QuickSight
     RelativeDatesFilter: StructureShape
     RelativeFontSize: EnumShape
     RenameColumnOperation: StructureShape
+    RenameColumnOperationList: ListShape
+    RenameColumnsOperation: StructureShape
     ResizeOption: EnumShape
+    ResourceArn: StringShape
     ResourceExistsException: StructureShape
     ResourceId: StringShape
+    ResourceLimitsMap: MapShape
     ResourceName: StringShape
     ResourceNotFoundException: StructureShape
     ResourcePermission: StructureShape
     ResourcePermissionList: ListShape
     ResourceStatus: EnumShape
+    ResourceType: EnumShape
+    ResourceTypeList: ListShape
     ResourceUnavailableException: StructureShape
     RestoreAnalysisRequest: StructureShape
     RestoreAnalysisResponse: StructureShape
@@ -1550,7 +2058,9 @@ module Aws::QuickSight
     RowAlternateColorList: ListShape
     RowAlternateColorOptions: StructureShape
     RowInfo: StructureShape
+    RowLevelPermissionConfiguration: StructureShape
     RowLevelPermissionDataSet: StructureShape
+    RowLevelPermissionDataSetMap: MapShape
     RowLevelPermissionFormatVersion: EnumShape
     RowLevelPermissionPolicy: EnumShape
     RowLevelPermissionTagConfiguration: StructureShape
@@ -1563,9 +2073,13 @@ module Aws::QuickSight
     S3Bucket: StringShape
     S3BucketConfiguration: StructureShape
     S3Key: StringShape
+    S3KnowledgeBaseParameters: StructureShape
     S3Parameters: StructureShape
     S3Source: StructureShape
+    S3TableBucketArn: StringShape
+    S3TablesParameters: StructureShape
     S3Uri: StringShape
+    SaaSTable: StructureShape
     SameSheetTargetVisualConfiguration: StructureShape
     SankeyDiagramAggregatedFieldWells: StructureShape
     SankeyDiagramChartConfiguration: StructureShape
@@ -1581,23 +2095,45 @@ module Aws::QuickSight
     ScheduleRefreshOnEntity: StructureShape
     SchedulesConfigurations: StructureShape
     ScrollBarOptions: StructureShape
+    SearchActionConnectorsRequest: StructureShape
+    SearchActionConnectorsRequestMaxResultsInteger: IntegerShape
+    SearchActionConnectorsResponse: StructureShape
+    SearchAgentsRequest: StructureShape
+    SearchAgentsResponse: StructureShape
     SearchAnalysesRequest: StructureShape
     SearchAnalysesResponse: StructureShape
+    SearchAppsFilter: StructureShape
+    SearchAppsFilterList: ListShape
+    SearchAppsFilterName: EnumShape
+    SearchAppsRequest: StructureShape
+    SearchAppsResponse: StructureShape
     SearchDashboardsRequest: StructureShape
     SearchDashboardsResponse: StructureShape
     SearchDataSetsRequest: StructureShape
     SearchDataSetsResponse: StructureShape
     SearchDataSourcesRequest: StructureShape
     SearchDataSourcesResponse: StructureShape
+    SearchFilterOperator: EnumShape
+    SearchFlowsFilter: StructureShape
+    SearchFlowsFilterList: ListShape
+    SearchFlowsInput: StructureShape
+    SearchFlowsOutput: StructureShape
     SearchFoldersRequest: StructureShape
     SearchFoldersResponse: StructureShape
     SearchGroupsRequest: StructureShape
     SearchGroupsResponse: StructureShape
+    SearchKnowledgeBasesRequest: StructureShape
+    SearchKnowledgeBasesResponse: StructureShape
+    SearchSpacesRequest: StructureShape
+    SearchSpacesResponse: StructureShape
     SearchTopicsRequest: StructureShape
     SearchTopicsResponse: StructureShape
+    SearchTopicsV2Request: StructureShape
+    SearchTopicsV2Response: StructureShape
     Seasonality: IntegerShape
     SecondaryValueOptions: StructureShape
     SecretArn: StringShape
+    SecretManagerArn: StringShape
     SectionAfterPageBreak: StructureShape
     SectionBasedLayoutCanvasSizeOptions: StructureShape
     SectionBasedLayoutConfiguration: StructureShape
@@ -1609,15 +2145,28 @@ module Aws::QuickSight
     SecurityGroupId: StringShape
     SecurityGroupIdList: ListShape
     SelectAllValueOptions: EnumShape
+    SelectableValuesSort: StructureShape
     SelectedFieldList: ListShape
     SelectedFieldOptions: EnumShape
     SelectedSheetsFilterScopeConfiguration: StructureShape
     SelectedTooltipType: EnumShape
+    SelfUpgradeAdminAction: EnumShape
+    SelfUpgradeConfiguration: StructureShape
+    SelfUpgradeRequestDetail: StructureShape
+    SelfUpgradeRequestDetailList: ListShape
+    SelfUpgradeRequestStatus: EnumShape
+    SelfUpgradeStatus: EnumShape
     SemanticEntityType: StructureShape
+    SemanticModelConfiguration: StructureShape
+    SemanticTable: StructureShape
+    SemanticTableAlias: StringShape
+    SemanticTableMap: MapShape
     SemanticType: StructureShape
+    SensitiveDocument: DocumentShape
     SensitiveDouble: FloatShape
     SensitiveDoubleList: ListShape
     SensitiveDoubleObject: FloatShape
+    SensitiveIOPayload: StringShape
     SensitiveLong: IntegerShape
     SensitiveLongList: ListShape
     SensitiveLongObject: IntegerShape
@@ -1625,8 +2174,10 @@ module Aws::QuickSight
     SensitiveString: StringShape
     SensitiveStringList: ListShape
     SensitiveStringObject: StringShape
+    SensitiveText: StringShape
     SensitiveTimestamp: TimestampShape
     SensitiveTimestampList: ListShape
+    Separator: StringShape
     SeriesItem: StructureShape
     SeriesItemList: ListShape
     ServiceNowParameters: StructureShape
@@ -1641,9 +2192,16 @@ module Aws::QuickSight
     SetParameterValueConfiguration: StructureShape
     SetParameterValueConfigurationList: ListShape
     ShapeConditionalFormat: StructureShape
+    SharePointClientId: StringShape
+    SharePointDomain: StringShape
+    SharePointParameters: StructureShape
+    SharePointTenantId: StringShape
+    SharedColumnSemanticMetadata: StructureShape
+    SharedColumnSemanticMetadataList: ListShape
     SharedViewConfigurations: StructureShape
     SharingModel: EnumShape
     Sheet: StructureShape
+    SheetBackgroundStyle: StructureShape
     SheetContentType: EnumShape
     SheetControlDateTimePickerType: EnumShape
     SheetControlInfoIconLabelOptions: StructureShape
@@ -1670,6 +2228,11 @@ module Aws::QuickSight
     SheetImageTooltipConfiguration: StructureShape
     SheetImageTooltipText: StructureShape
     SheetLayoutElementMaximizationOption: StructureShape
+    SheetLayoutGroup: StructureShape
+    SheetLayoutGroupList: ListShape
+    SheetLayoutGroupMember: StructureShape
+    SheetLayoutGroupMemberList: ListShape
+    SheetLayoutGroupMemberType: EnumShape
     SheetList: ListShape
     SheetName: StringShape
     SheetStyle: StructureShape
@@ -1677,6 +2240,7 @@ module Aws::QuickSight
     SheetTextBoxContent: StringShape
     SheetTextBoxList: ListShape
     SheetTitle: StringShape
+    SheetTooltip: StructureShape
     SheetVisualScopingConfiguration: StructureShape
     SheetVisualScopingConfigurations: ListShape
     ShortFormatText: StructureShape
@@ -1729,8 +2293,34 @@ module Aws::QuickSight
     SnapshotUserConfigurationRedacted: StructureShape
     SnowflakeParameters: StructureShape
     SortDirection: EnumShape
+    SortOrder: EnumShape
+    SourceTable: StructureShape
+    SourceTableMap: MapShape
+    SpaceContributor: StructureShape
+    SpaceContributorList: ListShape
+    SpaceDescription: StringShape
+    SpaceDetails: StructureShape
+    SpaceName: StringShape
+    SpaceQuickSightResource: StructureShape
+    SpaceQuickSightResourceDetails: UnionShape
+    SpaceQuickSightResourceType: EnumShape
+    SpaceQuickSightResources: ListShape
+    SpaceQuickSightSearchFilterName: EnumShape
+    SpaceQuicksightSearchFilter: StructureShape
+    SpaceQuicksightSearchFilters: ListShape
+    SpaceResourceOperation: StructureShape
+    SpaceResourceOperations: ListShape
+    SpaceResourceSummaries: ListShape
+    SpaceResourceSummary: StructureShape
+    SpaceSearchOperator: EnumShape
+    SpaceSummaries: ListShape
+    SpaceSummary: StructureShape
+    SpacesMaxResults: IntegerShape
     Spacing: StructureShape
     SparkParameters: StructureShape
+    SparklineAxisBehavior: EnumShape
+    SparklineVisualType: EnumShape
+    SparklinesOptions: StructureShape
     SpatialStaticFile: StructureShape
     SpecialValue: EnumShape
     SqlEndpointPath: StringShape
@@ -1743,10 +2333,14 @@ module Aws::QuickSight
     StartAssetBundleExportJobResponse: StructureShape
     StartAssetBundleImportJobRequest: StructureShape
     StartAssetBundleImportJobResponse: StructureShape
+    StartAutomationJobRequest: StructureShape
+    StartAutomationJobResponse: StructureShape
     StartDashboardSnapshotJobRequest: StructureShape
     StartDashboardSnapshotJobResponse: StructureShape
     StartDashboardSnapshotJobScheduleRequest: StructureShape
     StartDashboardSnapshotJobScheduleResponse: StructureShape
+    StarterPrompt: StringShape
+    StarterPromptList: ListShape
     StatePersistenceConfigurations: StructureShape
     StaticFile: StructureShape
     StaticFileList: ListShape
@@ -1755,6 +2349,10 @@ module Aws::QuickSight
     StaticFileUrlSourceOptions: StructureShape
     Status: EnumShape
     StatusCode: IntegerShape
+    StatusCode2: IntegerShape
+    StepAliasList: ListShape
+    StepAliasMapping: StructureShape
+    StepId: StringShape
     String: StringShape
     StringDatasetParameter: StructureShape
     StringDatasetParameterDefaultValue: StringShape
@@ -1768,15 +2366,18 @@ module Aws::QuickSight
     StringParameterDeclaration: StructureShape
     StringParameterList: ListShape
     StringValueWhenUnsetConfiguration: StructureShape
+    StyleDescription: StringShape
     StyledCellType: EnumShape
     SubnetId: StringShape
     SubnetIdList: ListShape
+    SubscriptionId: StringShape
     SubtotalOptions: StructureShape
     SucceededTopicReviewedAnswer: StructureShape
     SucceededTopicReviewedAnswers: ListShape
     SuccessfulKeyRegistrationEntries: ListShape
     SuccessfulKeyRegistrationEntry: StructureShape
     Suffix: StringShape
+    SynonymString: StringShape
     Synonyms: ListShape
     TableAggregatedFieldWells: StructureShape
     TableBorderOptions: StructureShape
@@ -1808,8 +2409,13 @@ module Aws::QuickSight
     TableOptions: StructureShape
     TableOrientation: EnumShape
     TablePaginatedReportOptions: StructureShape
+    TablePathElement: StructureShape
+    TablePathElementId: StringShape
+    TablePathElementList: ListShape
+    TablePathElementName: StringShape
     TablePinnedFieldOptions: StructureShape
     TableRowConditionalFormatting: StructureShape
+    TableSemanticMetadata: StructureShape
     TableSideBorderOptions: StructureShape
     TableSortConfiguration: StructureShape
     TableStyleTarget: StructureShape
@@ -1854,6 +2460,7 @@ module Aws::QuickSight
     TextControlPlaceholderOptions: StructureShape
     TextFieldControlDisplayOptions: StructureShape
     TextQualifier: EnumShape
+    TextTransform: EnumShape
     TextWrap: EnumShape
     Theme: StructureShape
     ThemeAlias: StructureShape
@@ -1881,10 +2488,17 @@ module Aws::QuickSight
     TimeRangeFilter: StructureShape
     TimeRangeFilterValue: StructureShape
     Timestamp: TimestampShape
+    Title: StringShape
+    TitleInput: StringShape
     TokenProviderUrl: StringShape
     TooltipItem: StructureShape
     TooltipItemList: ListShape
     TooltipOptions: StructureShape
+    TooltipSheetDefinition: StructureShape
+    TooltipSheetDefinitionList: ListShape
+    TooltipSheetImageList: ListShape
+    TooltipSheetTextBoxList: ListShape
+    TooltipSheetVisualList: ListShape
     TooltipTarget: EnumShape
     TooltipTitleType: EnumShape
     TopBottomComputationType: EnumShape
@@ -1894,6 +2508,7 @@ module Aws::QuickSight
     TopBottomRankedComputation: StructureShape
     TopBottomRankedComputationResultSize: IntegerShape
     TopBottomSortOrder: EnumShape
+    TopicArnsList: ListShape
     TopicCalculatedField: StructureShape
     TopicCalculatedFields: ListShape
     TopicCategoryFilter: StructureShape
@@ -1901,8 +2516,11 @@ module Aws::QuickSight
     TopicColumn: StructureShape
     TopicColumns: ListShape
     TopicConfigOptions: StructureShape
+    TopicConfiguration: StructureShape
+    TopicConfigurationList: ListShape
     TopicConstantValue: StructureShape
     TopicDateRangeFilter: StructureShape
+    TopicDescription: StringShape
     TopicDetails: StructureShape
     TopicFilter: StructureShape
     TopicFilterAttribute: EnumShape
@@ -1921,6 +2539,9 @@ module Aws::QuickSight
     TopicIRMetric: StructureShape
     TopicIRMetricList: ListShape
     TopicId: StringShape
+    TopicIdentifier: StringShape
+    TopicIdentifierDeclaration: StructureShape
+    TopicIdentifierDeclarationList: ListShape
     TopicNamedEntities: ListShape
     TopicNamedEntity: StructureShape
     TopicNullFilter: StructureShape
@@ -1928,6 +2549,8 @@ module Aws::QuickSight
     TopicNumericRangeFilter: StructureShape
     TopicNumericSeparatorSymbol: EnumShape
     TopicRangeFilterConstant: StructureShape
+    TopicReference: StructureShape
+    TopicReferenceList: ListShape
     TopicRefreshDetails: StructureShape
     TopicRefreshSchedule: StructureShape
     TopicRefreshScheduleSummaries: ListShape
@@ -1948,6 +2571,16 @@ module Aws::QuickSight
     TopicTemplate: StructureShape
     TopicTimeGranularity: EnumShape
     TopicUserExperienceVersion: EnumShape
+    TopicV2DataSetReference: StructureShape
+    TopicV2DataSetReferences: ListShape
+    TopicV2DataSetRelation: StructureShape
+    TopicV2DataSetRelationColumnNames: ListShape
+    TopicV2DataSetRelationEndpoint: StructureShape
+    TopicV2DataSetRelationList: ListShape
+    TopicV2Details: StructureShape
+    TopicV2PublishOption: EnumShape
+    TopicV2Summaries: ListShape
+    TopicV2Summary: StructureShape
     TopicVisual: StructureShape
     TopicVisuals: ListShape
     TotalAggregationComputation: StructureShape
@@ -1956,7 +2589,11 @@ module Aws::QuickSight
     TotalAggregationOptionList: ListShape
     TotalOptions: StructureShape
     TransformOperation: UnionShape
+    TransformOperationAlias: StringShape
     TransformOperationList: ListShape
+    TransformOperationSource: StructureShape
+    TransformStep: StructureShape
+    TransformStepMap: MapShape
     TransposedColumnIndex: IntegerShape
     TransposedColumnType: EnumShape
     TransposedTableOption: StructureShape
@@ -1986,6 +2623,7 @@ module Aws::QuickSight
     UniqueKeyList: ListShape
     UniqueValuesComputation: StructureShape
     UnlimitedPixelLength: StringShape
+    UnpivotOperation: StructureShape
     UnsupportedPricingPlanException: StructureShape
     UnsupportedUserEditionException: StructureShape
     UntagColumnOperation: StructureShape
@@ -1997,12 +2635,30 @@ module Aws::QuickSight
     UpdateAccountCustomizationResponse: StructureShape
     UpdateAccountSettingsRequest: StructureShape
     UpdateAccountSettingsResponse: StructureShape
+    UpdateActionConnectorPermissionsRequest: StructureShape
+    UpdateActionConnectorPermissionsResponse: StructureShape
+    UpdateActionConnectorRequest: StructureShape
+    UpdateActionConnectorResponse: StructureShape
+    UpdateAgentPermissionsRequest: StructureShape
+    UpdateAgentPermissionsRequestGrantPermissionsList: ListShape
+    UpdateAgentPermissionsRequestRevokePermissionsList: ListShape
+    UpdateAgentPermissionsResponse: StructureShape
+    UpdateAgentRequest: StructureShape
+    UpdateAgentRequestActionConnectorsToAddList: ListShape
+    UpdateAgentRequestActionConnectorsToRemoveList: ListShape
+    UpdateAgentRequestSpacesToAddList: ListShape
+    UpdateAgentRequestSpacesToRemoveList: ListShape
+    UpdateAgentResponse: StructureShape
     UpdateAnalysisPermissionsRequest: StructureShape
     UpdateAnalysisPermissionsResponse: StructureShape
     UpdateAnalysisRequest: StructureShape
     UpdateAnalysisResponse: StructureShape
+    UpdateAppPermissionsRequest: StructureShape
+    UpdateAppPermissionsResponse: StructureShape
     UpdateApplicationWithTokenExchangeGrantRequest: StructureShape
     UpdateApplicationWithTokenExchangeGrantResponse: StructureShape
+    UpdateApprovalPolicyRequest: StructureShape
+    UpdateApprovalPolicyResponse: StructureShape
     UpdateBrandAssignmentRequest: StructureShape
     UpdateBrandAssignmentResponse: StructureShape
     UpdateBrandPublishedVersionRequest: StructureShape
@@ -2031,6 +2687,15 @@ module Aws::QuickSight
     UpdateDataSourceResponse: StructureShape
     UpdateDefaultQBusinessApplicationRequest: StructureShape
     UpdateDefaultQBusinessApplicationResponse: StructureShape
+    UpdateDlpSettingRequest: StructureShape
+    UpdateDlpSettingResponse: StructureShape
+    UpdateFlowPermissionsInput: StructureShape
+    UpdateFlowPermissionsInputGrantPermissionsList: ListShape
+    UpdateFlowPermissionsInputRevokePermissionsList: ListShape
+    UpdateFlowPermissionsOutput: StructureShape
+    UpdateFlowRequest: StructureShape
+    UpdateFlowRequestClientTokenString: StringShape
+    UpdateFlowResponse: StructureShape
     UpdateFolderPermissionsRequest: StructureShape
     UpdateFolderPermissionsResponse: StructureShape
     UpdateFolderRequest: StructureShape
@@ -2045,7 +2710,15 @@ module Aws::QuickSight
     UpdateIpRestrictionResponse: StructureShape
     UpdateKeyRegistrationRequest: StructureShape
     UpdateKeyRegistrationResponse: StructureShape
+    UpdateKnowledgeBasePermissionsRequest: StructureShape
+    UpdateKnowledgeBasePermissionsResponse: StructureShape
+    UpdateKnowledgeBaseRequest: StructureShape
+    UpdateKnowledgeBaseResponse: StructureShape
+    UpdateLimitsProfileRequest: StructureShape
+    UpdateLimitsProfileResponse: StructureShape
     UpdateLinkPermissionList: ListShape
+    UpdateOAuthClientApplicationRequest: StructureShape
+    UpdateOAuthClientApplicationResponse: StructureShape
     UpdatePublicSharingSettingsRequest: StructureShape
     UpdatePublicSharingSettingsResponse: StructureShape
     UpdateQPersonalizationConfigurationRequest: StructureShape
@@ -2059,6 +2732,16 @@ module Aws::QuickSight
     UpdateRoleCustomPermissionResponse: StructureShape
     UpdateSPICECapacityConfigurationRequest: StructureShape
     UpdateSPICECapacityConfigurationResponse: StructureShape
+    UpdateSelfUpgradeConfigurationRequest: StructureShape
+    UpdateSelfUpgradeConfigurationResponse: StructureShape
+    UpdateSelfUpgradeRequest: StructureShape
+    UpdateSelfUpgradeResponse: StructureShape
+    UpdateSpacePermissionsRequest: StructureShape
+    UpdateSpacePermissionsResponse: StructureShape
+    UpdateSpaceRequest: StructureShape
+    UpdateSpaceResourcesRequest: StructureShape
+    UpdateSpaceResourcesResponse: StructureShape
+    UpdateSpaceResponse: StructureShape
     UpdateTemplateAliasRequest: StructureShape
     UpdateTemplateAliasResponse: StructureShape
     UpdateTemplatePermissionsRequest: StructureShape
@@ -2073,10 +2756,14 @@ module Aws::QuickSight
     UpdateThemeResponse: StructureShape
     UpdateTopicPermissionsRequest: StructureShape
     UpdateTopicPermissionsResponse: StructureShape
+    UpdateTopicPermissionsV2Request: StructureShape
+    UpdateTopicPermissionsV2Response: StructureShape
     UpdateTopicRefreshScheduleRequest: StructureShape
     UpdateTopicRefreshScheduleResponse: StructureShape
     UpdateTopicRequest: StructureShape
     UpdateTopicResponse: StructureShape
+    UpdateTopicV2Request: StructureShape
+    UpdateTopicV2Response: StructureShape
     UpdateUserCustomPermissionRequest: StructureShape
     UpdateUserCustomPermissionResponse: StructureShape
     UpdateUserRequest: StructureShape
@@ -2084,9 +2771,22 @@ module Aws::QuickSight
     UpdateVPCConnectionRequest: StructureShape
     UpdateVPCConnectionResponse: StructureShape
     UploadSettings: StructureShape
+    UploadedDocumentMetadata: StructureShape
+    UploadedDocumentName: StringShape
     User: StructureShape
+    UserIdentifier: UnionShape
+    UserIndexCapacity: StructureShape
+    UserIndexCapacityFilter: UnionShape
+    UserIndexCapacityFilters: ListShape
+    UserIndexCapacityList: ListShape
+    UserIndexCapacitySortBy: EnumShape
+    UserIndexCapacitySortOrder: EnumShape
+    UserLimits: StructureShape
+    UserLimitsEntry: StructureShape
+    UserLimitsList: ListShape
     UserList: ListShape
     UserName: StringShape
+    UserNameOrEmailFilter: StructureShape
     UserRole: EnumShape
     VPCConnection: StructureShape
     VPCConnectionAvailabilityStatus: EnumShape
@@ -2097,10 +2797,14 @@ module Aws::QuickSight
     VPCConnectionSummaryList: ListShape
     ValidationStrategy: StructureShape
     ValidationStrategyMode: EnumShape
+    ValueColumnConfiguration: StructureShape
     ValueWhenUnsetOption: EnumShape
     VersionDescription: StringShape
     VersionNumber: IntegerShape
     VerticalTextAlignment: EnumShape
+    VideoExtractionConfiguration: StructureShape
+    VideoExtractionStatus: EnumShape
+    VideoExtractionType: EnumShape
     Visibility: EnumShape
     VisiblePanelColumns: IntegerShape
     VisiblePanelRows: IntegerShape
@@ -2114,17 +2818,25 @@ module Aws::QuickSight
     VisualCustomActionOperation: StructureShape
     VisualCustomActionOperationList: ListShape
     VisualCustomActionTrigger: EnumShape
+    VisualCustomizationAdditionalFieldsList: ListShape
+    VisualCustomizationFieldsConfiguration: StructureShape
     VisualHighlightOperation: StructureShape
     VisualHighlightTrigger: EnumShape
     VisualInteractionOptions: StructureShape
     VisualList: ListShape
     VisualMenuOption: StructureShape
+    VisualMessageConfiguration: StructureShape
+    VisualMessageLinkUrl: StringShape
+    VisualMessageText: StringShape
+    VisualMessages: StructureShape
     VisualOptions: StructureShape
     VisualPalette: StructureShape
     VisualRole: EnumShape
     VisualSubtitle: StringShape
+    VisualSubtitleFontConfiguration: StructureShape
     VisualSubtitleLabelOptions: StructureShape
     VisualTitle: StringShape
+    VisualTitleFontConfiguration: StructureShape
     VisualTitleLabelOptions: StructureShape
     VpcConnectionProperties: StructureShape
     VpcEndpointId: StringShape
@@ -2142,9 +2854,14 @@ module Aws::QuickSight
     WaterfallChartOptions: StructureShape
     WaterfallChartSortConfiguration: StructureShape
     WaterfallVisual: StructureShape
+    WebCrawlerAuthType: EnumShape
+    WebCrawlerParameters: StructureShape
+    WebProxyCredentials: StructureShape
+    WelcomeMessage: StringShape
     WhatIfPointScenario: StructureShape
     WhatIfRangeScenario: StructureShape
     WidgetStatus: EnumShape
+    Width: StringShape
     WordCloudAggregatedFieldWells: StructureShape
     WordCloudChartConfiguration: StructureShape
     WordCloudCloudLayout: EnumShape
@@ -2160,6 +2877,7 @@ module Aws::QuickSight
     WordCloudWordPadding: EnumShape
     WordCloudWordScaling: EnumShape
     WorkGroup: StringShape
+    XpathFields: StringShape
     YAxisOptions: StructureShape
 
     QuickSight20180401: ServiceShape

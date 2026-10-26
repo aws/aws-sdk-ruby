@@ -6,13 +6,101 @@ module Aws::Ivs
   # This module contains the types returned by client operations.
   module Types
 
-    # <p/>
+    # <p>User does not have sufficient access to perform this action.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p>User does not have sufficient access to perform this action.</p>
     #   @return [String]
     class AccessDeniedException < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Object specifying a configuration for a server-side advertising insertion (which can be triggered with the operation).</p>
+    # @!attribute arn
+    #   <p>Ad configuration ARN.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Ad configuration name. Defaults to “”.</p>
+    #   @return [String]
+    # @!attribute media_tailor_playback_configurations
+    #   <p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html">Generate and Sign IVS Playback Tokens</a>.</p>
+    #   @return [Array<Types::MediaTailorPlaybackConfiguration>]
+    # @!attribute post_roll_configuration
+    #   <p>Configuration for the post-roll ad break to use for this ad configuration.</p>
+    #   @return [Types::PostRollConfiguration]
+    # @!attribute tags
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
+    #   @return [Hash<String, String>]
+    class AdConfiguration < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :media_tailor_playback_configurations,
+      :post_roll_configuration,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about an ad configuration.</p>
+    # @!attribute arn
+    #   <p>Ad configuration ARN.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Ad configuration name. Defaults to “”.</p>
+    #   @return [String]
+    # @!attribute media_tailor_playback_configurations
+    #   <p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html">Generate and Sign IVS Playback Tokens</a>.</p>
+    #   @return [Array<Types::MediaTailorPlaybackConfiguration>]
+    # @!attribute post_roll_configuration
+    #   <p>Configuration for the post-roll ad break to use for this ad configuration.</p>
+    #   @return [Types::PostRollConfiguration]
+    # @!attribute tags
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
+    #   @return [Hash<String, String>]
+    class AdConfigurationSummary < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :media_tailor_playback_configurations,
+      :post_roll_configuration,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -32,7 +120,7 @@ module Aws::Ivs
     #   <p>Number of audio channels.</p>
     #   @return [Integer]
     # @!attribute track
-    #   <p>Name of the audio track (if the stream has an audio track). If multitrack is not enabled, this is track0 (the sole track).</p>
+    #   <p>Name of the audio track (if the stream has an audio track). If multitrack is not enabled, this is Track0 (the sole track).</p>
     #   @return [String]
     class AudioConfiguration < Struct.new(
       nil,
@@ -84,6 +172,27 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute access_control_allow_origin
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy">Content-Security-Policy</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">Strict-Transport-Security</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options">X-Content-Type-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options">X-Frame-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
     # @!attribute channels
     #   <p/>
     #   @return [Array<Types::Channel>]
@@ -92,6 +201,13 @@ module Aws::Ivs
     #   @return [Array<Types::BatchError>]
     class BatchGetChannelOutput < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
       :channels,
       :errors,
       keyword_init: true
@@ -110,6 +226,27 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute access_control_allow_origin
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy">Content-Security-Policy</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">Strict-Transport-Security</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options">X-Content-Type-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options">X-Frame-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
     # @!attribute stream_keys
     #   <p/>
     #   @return [Array<Types::StreamKey>]
@@ -118,6 +255,13 @@ module Aws::Ivs
     #   @return [Array<Types::BatchError>]
     class BatchGetStreamKeyOutput < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
       :stream_keys,
       :errors,
       keyword_init: true
@@ -125,8 +269,7 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Error for a request in the batch for BatchStartViewerSessionRevocation. Each error is
-    #       related to a specific channel-ARN and viewer-ID pair.</p>
+    # <p>Error for a request in the batch for BatchStartViewerSessionRevocation. Each error is related to a specific channel-ARN and viewer-ID pair.</p>
     # @!attribute channel_arn
     #   <p>Channel ARN.</p>
     #   @return [String]
@@ -161,12 +304,39 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute access_control_allow_origin
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control">Cache-Control</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy">Content-Security-Policy</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">Strict-Transport-Security</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options">X-Content-Type-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options">X-Frame-Options</a> in the MDN Web Docs.</p>
+    #   @return [String]
     # @!attribute errors
-    #   <p>Each error object is related to a specific <code>channelArn</code> and
-    #           <code>viewerId</code> pair in the request.</p>
+    #   <p>Each error object is related to a specific <code>channelArn</code> and <code>viewerId</code> pair in the request.</p>
     #   @return [Array<Types::BatchStartViewerSessionRevocationError>]
     class BatchStartViewerSessionRevocationOutput < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
       :errors,
       keyword_init: true
     )
@@ -178,12 +348,10 @@ module Aws::Ivs
     #   <p>The ARN of the channel associated with the viewer session to revoke.</p>
     #   @return [String]
     # @!attribute viewer_id
-    #   <p>The ID of the viewer associated with the viewer session to revoke. Do not use this field
-    #         for personally identifying, confidential, or sensitive information.</p>
+    #   <p>The ID of the viewer associated with the viewer session to revoke. Do not use this field for personally identifying, confidential, or sensitive information.</p>
     #   @return [String]
     # @!attribute viewer_session_versions_less_than_or_equal_to
-    #   <p>An optional filter on which versions of the viewer session to revoke. All versions less
-    #         than or equal to the specified version will be revoked. Default: 0.</p>
+    #   <p>An optional filter on which versions of the viewer session to revoke. All versions less than or equal to the specified version will be revoked. Default: 0.</p>
     #   @return [Integer]
     class BatchStartViewerSessionRevocationViewerSession < Struct.new(
       nil,
@@ -208,59 +376,46 @@ module Aws::Ivs
     #   <p>Channel name.</p>
     #   @return [String]
     # @!attribute latency_mode
-    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to
-    #         Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default:
-    #           <code>LOW</code>.</p>
+    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you
-    #           exceed the allowable input resolution or bitrate, the stream probably will disconnect
-    #           immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html">Channel
-    #           Types</a>.</p>
+    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html">Channel Types</a>.</p>
     #   @return [String]
     # @!attribute recording_configuration_arn
-    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables
-    #         recording. Default: "" (empty string, recording is disabled).</p>
+    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).</p>
     #   @return [String]
     # @!attribute ingest_endpoint
-    #   <p>Channel ingest endpoint, part of the definition of an ingest server, used when you set up
-    #         streaming software.</p>
+    #   <p>Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.</p>
     #   @return [String]
     # @!attribute playback_url
     #   <p>Channel playback URL.</p>
     #   @return [String]
     # @!attribute authorized
-    #   <p>Whether the channel is private (enabled for playback authorization). Default:
-    #           <code>false</code>.</p>
+    #   <p>Whether the channel is private (enabled for playback authorization). Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     # @!attribute insecure_ingest
     #   <p>Whether the channel allows insecure RTMP ingest. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute preset
-    #   <p>Optional transcode preset for the channel. This is selectable only for
-    #           <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel
-    #         types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other
-    #         channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty
-    #         string (<code>""</code>).</p>
+    #   <p>Optional transcode preset for the channel. This is selectable only for <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty string (<code>""</code>).</p>
     #   @return [String]
     # @!attribute srt
     #   <p>Specifies the endpoint and optional passphrase for streaming with the SRT protocol.</p>
     #   @return [Types::Srt]
     # @!attribute playback_restriction_policy_arn
-    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables
-    #         playback restriction. Default: "" (empty string, no playback restriction policy is
-    #         applied).</p>
+    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).</p>
     #   @return [String]
     # @!attribute multitrack_input_configuration
     #   <p>Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.</p>
     #   @return [Types::MultitrackInputConfiguration]
     # @!attribute container_format
     #   <p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>
+    #   @return [String]
+    # @!attribute ad_configuration_arn
+    #   <p>ARN of the ad configuration associated with the channel.</p>
     #   @return [String]
     class Channel < Struct.new(
       nil,
@@ -279,6 +434,7 @@ module Aws::Ivs
       :playback_restriction_policy_arn,
       :multitrack_input_configuration,
       :container_format,
+      :ad_configuration_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -290,12 +446,44 @@ module Aws::Ivs
       end
     end
 
-    # <p/>
+    # <p>The stream is offline for the given channel ARN.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p>The stream is offline for the given channel ARN.</p>
     #   @return [String]
     class ChannelNotBroadcasting < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
       keyword_init: true
     )
@@ -310,43 +498,31 @@ module Aws::Ivs
     #   <p>Channel name.</p>
     #   @return [String]
     # @!attribute latency_mode
-    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to
-    #         Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default:
-    #           <code>LOW</code>.</p>
+    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>.</p>
     #   @return [String]
     # @!attribute authorized
-    #   <p>Whether the channel is private (enabled for playback authorization). Default:
-    #           <code>false</code>.</p>
+    #   <p>Whether the channel is private (enabled for playback authorization). Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute recording_configuration_arn
-    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables
-    #         recording. Default: "" (empty string, recording is disabled).</p>
+    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     # @!attribute insecure_ingest
     #   <p>Whether the channel allows insecure RTMP ingest. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute type
-    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you
-    #           exceed the allowable input resolution or bitrate, the stream probably will disconnect
-    #           immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html">Channel
-    #           Types</a>.</p>
+    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html">Channel Types</a>.</p>
     #   @return [String]
     # @!attribute preset
-    #   <p>Optional transcode preset for the channel. This is selectable only for
-    #           <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel
-    #         types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other
-    #         channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty
-    #         string (<code>""</code>).</p>
+    #   <p>Optional transcode preset for the channel. This is selectable only for <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty string (<code>""</code>).</p>
     #   @return [String]
     # @!attribute playback_restriction_policy_arn
-    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables
-    #         playback restriction. Default: "" (empty string, no playback restriction policy is
-    #         applied).</p>
+    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).</p>
+    #   @return [String]
+    # @!attribute ad_configuration_arn
+    #   <p>ARN of the ad configuration associated with the channel.</p>
     #   @return [String]
     class ChannelSummary < Struct.new(
       nil,
@@ -360,6 +536,7 @@ module Aws::Ivs
       :type,
       :preset,
       :playback_restriction_policy_arn,
+      :ad_configuration_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -371,13 +548,79 @@ module Aws::Ivs
       end
     end
 
-    # <p/>
+    # <p>Updating or deleting a resource can cause an inconsistent state.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p>Updating or deleting a resource can cause an inconsistent state.</p>
     #   @return [String]
     class ConflictException < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>Ad configuration name. Defaults to “”.</p>
+    #   @return [String]
+    # @!attribute media_tailor_playback_configurations
+    #   <p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html">Generate and Sign IVS Playback Tokens</a>.</p>
+    #   @return [Array<Types::MediaTailorPlaybackConfiguration>]
+    # @!attribute post_roll_configuration
+    #   <p>Configuration for the post-roll ad break to use for this ad configuration. Default: disabled (<code>enabled</code> set to false, <code>durationSeconds</code> set to 15).</p>
+    #   @return [Types::PostRollConfiguration]
+    # @!attribute tags
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
+    #   @return [Hash<String, String>]
+    class CreateAdConfigurationRequest < Struct.new(
+      nil,
+      :name,
+      :media_tailor_playback_configurations,
+      :post_roll_configuration,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ad_configuration
+    #   <p/>
+    #   @return [Types::AdConfiguration]
+    class CreateAdConfigurationResponse < Struct.new(
+      nil,
+      :ad_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -387,46 +630,37 @@ module Aws::Ivs
     #   <p>Channel name.</p>
     #   @return [String]
     # @!attribute latency_mode
-    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to
-    #         Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>.</p>
+    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you
-    #           exceed the allowable input resolution or bitrate, the stream probably will disconnect
-    #           immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html">Channel
-    #           Types</a>.</p>
+    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html">Channel Types</a>.</p>
     #   @return [String]
     # @!attribute authorized
-    #   <p>Whether the channel is private (enabled for playback authorization). Default:
-    #           <code>false</code>.</p>
+    #   <p>Whether the channel is private (enabled for playback authorization). Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute recording_configuration_arn
-    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording.
-    #        Default: "" (empty string, recording is disabled).</p>
+    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     # @!attribute insecure_ingest
     #   <p>Whether the channel allows insecure RTMP and SRT ingest. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute preset
-    #   <p>Optional transcode preset for the channel. This is selectable only for
-    #           <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel
-    #         types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other
-    #         channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty
-    #         string (<code>""</code>).</p>
+    #   <p>Optional transcode preset for the channel. This is selectable only for <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty string (<code>""</code>).</p>
     #   @return [String]
     # @!attribute playback_restriction_policy_arn
-    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction.
-    #       Default: "" (empty string, no playback restriction policy is applied).</p>
+    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).</p>
     #   @return [String]
     # @!attribute multitrack_input_configuration
     #   <p>Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.</p>
     #   @return [Types::MultitrackInputConfiguration]
     # @!attribute container_format
     #   <p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>
+    #   @return [String]
+    # @!attribute ad_configuration_arn
+    #   <p>ARN of the ad configuration associated with the channel.</p>
     #   @return [String]
     class CreateChannelInput < Struct.new(
       nil,
@@ -441,6 +675,7 @@ module Aws::Ivs
       :playback_restriction_policy_arn,
       :multitrack_input_configuration,
       :container_format,
+      :ad_configuration_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -462,25 +697,19 @@ module Aws::Ivs
     end
 
     # @!attribute allowed_countries
-    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the
-    #         officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1
-    #           alpha-2</a> codes. Default: All countries (an empty array).</p>
+    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> codes. Default: All countries (an empty array).</p>
     #   @return [Array<String>]
     # @!attribute allowed_origins
-    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid
-    #         values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All
-    #         origins (an empty array).</p>
+    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All origins (an empty array).</p>
     #   @return [Array<String>]
     # @!attribute enable_strict_origin_enforcement
-    #   <p>Whether channel playback is constrained by origin site. Default:
-    #         <code>false</code>.</p>
+    #   <p>Whether channel playback is constrained by origin site. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute name
     #   <p>Playback-restriction-policy name. The value does not need to be unique.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class CreatePlaybackRestrictionPolicyRequest < Struct.new(
       nil,
@@ -509,20 +738,16 @@ module Aws::Ivs
     #   <p>Recording-configuration name. The value does not need to be unique.</p>
     #   @return [String]
     # @!attribute destination_configuration
-    #   <p>A complex type that contains a destination configuration for where recorded video will be
-    #         stored.</p>
+    #   <p>A complex type that contains a destination configuration for where recorded video will be stored.</p>
     #   @return [Types::DestinationConfiguration]
     # @!attribute tags
-    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     # @!attribute thumbnail_configuration
-    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for a live
-    #         session and modify the interval at which thumbnails are generated for the live session.</p>
+    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.</p>
     #   @return [Types::ThumbnailConfiguration]
     # @!attribute recording_reconnect_window_seconds
-    #   <p>If a broadcast disconnects and then reconnects within the specified interval, the multiple
-    #         streams will be considered a single broadcast and merged together. Default: 0.</p>
+    #   <p>If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.</p>
     #   @return [Integer]
     # @!attribute rendition_configuration
     #   <p>Object that describes which renditions should be recorded for a stream.</p>
@@ -555,8 +780,7 @@ module Aws::Ivs
     #   <p>ARN of the channel for which to create the stream key.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class CreateStreamKeyInput < Struct.new(
       nil,
@@ -573,6 +797,17 @@ module Aws::Ivs
     class CreateStreamKeyOutput < Struct.new(
       nil,
       :stream_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>ARN of the ad configuration to be deleted.</p>
+    #   @return [String]
+    class DeleteAdConfigurationRequest < Struct.new(
+      nil,
+      :arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -640,15 +875,35 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A complex type that describes a location where recorded videos will be stored. Each member
-    #       represents a type of destination configuration. For recording, you define one and only one
-    #       type of destination configuration.</p>
+    # <p>A complex type that describes a location where recorded videos will be stored. Each member represents a type of destination configuration. For recording, you define one and only one type of destination configuration.</p>
     # @!attribute s3
     #   <p>An S3 destination configuration where recorded videos will be stored.</p>
     #   @return [Types::S3DestinationConfiguration]
     class DestinationConfiguration < Struct.new(
       nil,
       :s3,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>ARN of the ad configuration to be retrieved.</p>
+    #   @return [String]
+    class GetAdConfigurationRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ad_configuration
+    #   <p/>
+    #   @return [Types::AdConfiguration]
+    class GetAdConfigurationResponse < Struct.new(
+      nil,
+      :ad_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -790,9 +1045,7 @@ module Aws::Ivs
     #   <p>ARN of the channel resource</p>
     #   @return [String]
     # @!attribute stream_id
-    #   <p>Unique identifier for a live or previously live stream in the specified channel. If no
-    #           <code>streamId</code> is provided, this returns the most recent stream session for the
-    #         channel, if it exists.</p>
+    #   <p>Unique identifier for a live or previously live stream in the specified channel. If no <code>streamId</code> is provided, this returns the most recent stream session for the channel, if it exists.</p>
     #   @return [String]
     class GetStreamSessionInput < Struct.new(
       nil,
@@ -821,8 +1074,7 @@ module Aws::Ivs
     #   <p>Playback-key-pair name. The value does not need to be unique.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Any tags provided with the request are added to the playback key pair tags. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    #         documented there.</p>
+    #   <p>Any tags provided with the request are added to the playback key pair tags. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class ImportPlaybackKeyPairInput < Struct.new(
       nil,
@@ -845,10 +1097,7 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Object specifying the ingest configuration set up by the broadcaster, usually in an
-    #       encoder.</p>
-    #          <p>
-    #             <b>Note:</b> IngestConfiguration is deprecated in favor of <a>IngestConfigurations</a> but retained to ensure backward compatibility. If multitrack is not enabled, IngestConfiguration and IngestConfigurations contain the same data, namely information about track0 (the sole track). If multitrack is enabled, IngestConfiguration contains data for only the first track (track0) and IngestConfigurations contains data for all tracks.</p>
+    # <p>Object specifying the ingest configuration set up by the broadcaster, usually in an encoder.</p> <p> <b>Note:</b> IngestConfiguration is deprecated in favor of <a>IngestConfigurations</a> but retained to ensure backward compatibility. If multitrack is not enabled, IngestConfiguration and IngestConfigurations contain the same data, namely information about Track0 (the sole track). If multitrack is enabled, IngestConfiguration contains data for only the first track (Track0) and IngestConfigurations contains data for all tracks.</p>
     # @!attribute video
     #   <p>Encoder settings for video.</p>
     #   @return [Types::VideoConfiguration]
@@ -864,9 +1113,7 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Object specifying the ingest configuration set up by the broadcaster, usually in an encoder. </p>
-    #          <p>
-    #             <b>Note:</b> Use IngestConfigurations instead of <a>IngestConfiguration</a> (which is deprecated). If multitrack is not enabled, IngestConfiguration and IngestConfigurations contain the same data, namely information about track0 (the sole track). If multitrack is enabled, IngestConfiguration contains data for only the first track (track0) and IngestConfigurations contains data for all tracks.</p>
+    # <p>Object specifying the ingest configuration set up by the broadcaster, usually in an encoder. </p> <p> <b>Note:</b> Use IngestConfigurations instead of <a>IngestConfiguration</a> (which is deprecated). If multitrack is not enabled, IngestConfiguration and IngestConfigurations contain the same data, namely information about Track0 (the sole track). If multitrack is enabled, IngestConfiguration contains data for only the first track (Track0) and IngestConfigurations contains data for all tracks.</p>
     # @!attribute video_configurations
     #   <p>Encoder settings for video</p>
     #   @return [Array<Types::VideoConfiguration>]
@@ -882,13 +1129,101 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # @!attribute channel_arn
+    #   <p>ARN of the channel into which the ad break is inserted.</p>
+    #   @return [String]
+    # @!attribute duration_seconds
+    #   <p>Duration of the ad break, in seconds.</p>
+    #   @return [Integer]
+    class InsertAdBreakRequest < Struct.new(
+      nil,
+      :channel_arn,
+      :duration_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ad_break_id
+    #   <p>Unique identifier for the ad break that was inserted into the playlist.</p>
+    #   @return [String]
+    class InsertAdBreakResponse < Struct.new(
+      nil,
+      :ad_break_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Unexpected error during processing of request.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p>Unexpected error during processing of request.</p>
     #   @return [String]
     class InternalServerException < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The first ad configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Maximum number of ad configurations to return. Default: your service quota or 100, whichever is smaller.</p>
+    #   @return [Integer]
+    class ListAdConfigurationsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ad_configurations
+    #   <p>List of the matching ad configurations.</p>
+    #   @return [Array<Types::AdConfigurationSummary>]
+    # @!attribute next_token
+    #   <p>If there are more ad configurations than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
+    #   @return [String]
+    class ListAdConfigurationsResponse < Struct.new(
+      nil,
+      :ad_configurations,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -903,9 +1238,11 @@ module Aws::Ivs
     # @!attribute filter_by_playback_restriction_policy_arn
     #   <p>Filters the channel list to match the specified policy.</p>
     #   @return [String]
+    # @!attribute filter_by_ad_configuration_arn
+    #   <p>Filters the channel list to match the specified ad configuration ARN.</p>
+    #   @return [String]
     # @!attribute next_token
-    #   <p>The first channel to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #         response field.</p>
+    #   <p>The first channel to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of channels to return. Default: 100.</p>
@@ -915,6 +1252,7 @@ module Aws::Ivs
       :filter_by_name,
       :filter_by_recording_configuration_arn,
       :filter_by_playback_restriction_policy_arn,
+      :filter_by_ad_configuration_arn,
       :next_token,
       :max_results,
       keyword_init: true
@@ -926,8 +1264,7 @@ module Aws::Ivs
     #   <p>List of the matching channels.</p>
     #   @return [Array<Types::ChannelSummary>]
     # @!attribute next_token
-    #   <p>If there are more channels than <code>maxResults</code>, use <code>nextToken</code> in the
-    #         request to get the next set.</p>
+    #   <p>If there are more channels than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListChannelsOutput < Struct.new(
       nil,
@@ -939,12 +1276,10 @@ module Aws::Ivs
     end
 
     # @!attribute next_token
-    #   <p>The first key pair to retrieve. This is used for pagination; see the
-    #           <code>nextToken</code> response field.</p>
+    #   <p>The first key pair to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Maximum number of key pairs to return. Default: your service quota or 100, whichever is
-    #         smaller.</p>
+    #   <p>Maximum number of key pairs to return. Default: your service quota or 100, whichever is smaller.</p>
     #   @return [Integer]
     class ListPlaybackKeyPairsInput < Struct.new(
       nil,
@@ -959,8 +1294,7 @@ module Aws::Ivs
     #   <p>List of key pairs.</p>
     #   @return [Array<Types::PlaybackKeyPairSummary>]
     # @!attribute next_token
-    #   <p>If there are more key pairs than <code>maxResults</code>, use <code>nextToken</code> in
-    #         the request to get the next set.</p>
+    #   <p>If there are more key pairs than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListPlaybackKeyPairsOutput < Struct.new(
       nil,
@@ -972,8 +1306,7 @@ module Aws::Ivs
     end
 
     # @!attribute next_token
-    #   <p>The first policy to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #         response field.</p>
+    #   <p>The first policy to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of policies to return. Default: 1.</p>
@@ -991,8 +1324,7 @@ module Aws::Ivs
     #   <p>List of the matching policies.</p>
     #   @return [Array<Types::PlaybackRestrictionPolicySummary>]
     # @!attribute next_token
-    #   <p>If there are more channels than <code>maxResults</code>, use <code>nextToken</code> in the
-    #         request to get the next set.</p>
+    #   <p>If there are more channels than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListPlaybackRestrictionPoliciesResponse < Struct.new(
       nil,
@@ -1004,12 +1336,10 @@ module Aws::Ivs
     end
 
     # @!attribute next_token
-    #   <p>The first recording configuration to retrieve. This is used for pagination; see the
-    #           <code>nextToken</code> response field.</p>
+    #   <p>The first recording configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>Maximum number of recording configurations to return. Default: your service quota or 100,
-    #         whichever is smaller. </p>
+    #   <p>Maximum number of recording configurations to return. Default: your service quota or 100, whichever is smaller. </p>
     #   @return [Integer]
     class ListRecordingConfigurationsInput < Struct.new(
       nil,
@@ -1024,8 +1354,7 @@ module Aws::Ivs
     #   <p>List of the matching recording configurations.</p>
     #   @return [Array<Types::RecordingConfigurationSummary>]
     # @!attribute next_token
-    #   <p>If there are more recording configurations than <code>maxResults</code>, use
-    #           <code>nextToken</code> in the request to get the next set.</p>
+    #   <p>If there are more recording configurations than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListRecordingConfigurationsOutput < Struct.new(
       nil,
@@ -1040,8 +1369,7 @@ module Aws::Ivs
     #   <p>Channel ARN used to filter the list.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The first stream key to retrieve. This is used for pagination; see the
-    #           <code>nextToken</code> response field.</p>
+    #   <p>The first stream key to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of streamKeys to return. Default: 1.</p>
@@ -1060,8 +1388,7 @@ module Aws::Ivs
     #   <p>List of stream keys.</p>
     #   @return [Array<Types::StreamKeySummary>]
     # @!attribute next_token
-    #   <p>If there are more stream keys than <code>maxResults</code>, use <code>nextToken</code> in
-    #         the request to get the next set.</p>
+    #   <p>If there are more stream keys than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListStreamKeysOutput < Struct.new(
       nil,
@@ -1076,8 +1403,7 @@ module Aws::Ivs
     #   <p>Channel ARN used to filter the list.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The first stream to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #         response field.</p>
+    #   <p>The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of streams to return. Default: 100.</p>
@@ -1096,8 +1422,7 @@ module Aws::Ivs
     #   <p>List of stream sessions.</p>
     #   @return [Array<Types::StreamSessionSummary>]
     # @!attribute next_token
-    #   <p>If there are more streams than <code>maxResults</code>, use <code>nextToken</code> in the
-    #         request to get the next set.</p>
+    #   <p>If there are more streams than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListStreamSessionsOutput < Struct.new(
       nil,
@@ -1112,8 +1437,7 @@ module Aws::Ivs
     #   <p>Filters the stream list to match the specified criterion.</p>
     #   @return [Types::StreamFilters]
     # @!attribute next_token
-    #   <p>The first stream to retrieve. This is used for pagination; see the <code>nextToken</code>
-    #         response field.</p>
+    #   <p>The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>Maximum number of streams to return. Default: 100.</p>
@@ -1132,8 +1456,7 @@ module Aws::Ivs
     #   <p>List of streams.</p>
     #   @return [Array<Types::StreamSummary>]
     # @!attribute next_token
-    #   <p>If there are more streams than <code>maxResults</code>, use <code>nextToken</code> in the
-    #         request to get the next set.</p>
+    #   <p>If there are more streams than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>
     #   @return [String]
     class ListStreamsOutput < Struct.new(
       nil,
@@ -1156,12 +1479,23 @@ module Aws::Ivs
     end
 
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string
-    #           (key:value)</code>.</p>
+    #   <p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceOutput < Struct.new(
       nil,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Object specifying a configuration for integration with an AWS Elemental MediaTailor (EMT).</p>
+    # @!attribute playback_configuration_arn
+    #   <p>ARN of the customer-created EMT PlaybackConfiguration resource in the same region and account.</p>
+    #   @return [String]
+    class MediaTailorPlaybackConfiguration < Struct.new(
+      nil,
+      :playback_configuration_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1192,12 +1526,44 @@ module Aws::Ivs
       end
     end
 
-    # <p/>
+    # <p>Your account is pending verification.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p> Your account is pending verification. </p>
     #   @return [String]
     class PendingVerification < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
       keyword_init: true
     )
@@ -1215,9 +1581,7 @@ module Aws::Ivs
     #   <p>Key-pair identifier.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PlaybackKeyPair < Struct.new(
       nil,
@@ -1238,9 +1602,7 @@ module Aws::Ivs
     #   <p>Playback-key-pair name. The value does not need to be unique.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PlaybackKeyPairSummary < Struct.new(
       nil,
@@ -1252,32 +1614,24 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object representing a policy to constrain playback by country and/or origin
-    #       sites.</p>
+    # <p>An object representing a policy to constrain playback by country and/or origin sites.</p>
     # @!attribute arn
     #   <p>Playback-restriction-policy ARN</p>
     #   @return [String]
     # @!attribute allowed_countries
-    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the
-    #         officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1
-    #           alpha-2</a> codes. Default: All countries (an empty array).</p>
+    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> codes. Default: All countries (an empty array).</p>
     #   @return [Array<String>]
     # @!attribute allowed_origins
-    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid
-    #         values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All
-    #         origins (an empty array).</p>
+    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All origins (an empty array).</p>
     #   @return [Array<String>]
     # @!attribute enable_strict_origin_enforcement
-    #   <p>Whether channel playback is constrained by origin site. Default:
-    #         <code>false</code>.</p>
+    #   <p>Whether channel playback is constrained by origin site. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute name
     #   <p>Playback-restriction-policy name. The value does not need to be unique.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PlaybackRestrictionPolicy < Struct.new(
       nil,
@@ -1297,26 +1651,19 @@ module Aws::Ivs
     #   <p>Playback-restriction-policy ARN</p>
     #   @return [String]
     # @!attribute allowed_countries
-    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the
-    #         officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1
-    #           alpha-2</a> codes. Default: All countries (an empty array).</p>
+    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> codes. Default: All countries (an empty array).</p>
     #   @return [Array<String>]
     # @!attribute allowed_origins
-    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid
-    #         values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All
-    #         origins (an empty array).</p>
+    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All origins (an empty array).</p>
     #   @return [Array<String>]
     # @!attribute enable_strict_origin_enforcement
-    #   <p>Whether channel playback is constrained by origin site. Default:
-    #         <code>false</code>.</p>
+    #   <p>Whether channel playback is constrained by origin site. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute name
     #   <p>Playback-restriction-policy name. The value does not need to be unique.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class PlaybackRestrictionPolicySummary < Struct.new(
       nil,
@@ -1331,9 +1678,29 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for the post-roll ad break to use for this ad configuration.</p>
+    # @!attribute duration_seconds
+    #   <p>Duration of the post-roll ad break, in seconds.</p>
+    #   @return [Integer]
+    # @!attribute enabled
+    #   <p>Whether the post-roll ad configuration is enabled.</p>
+    #   @return [Boolean]
+    class PostRollConfiguration < Struct.new(
+      nil,
+      :duration_seconds,
+      :enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enabled] = false unless options.key?(:enabled)
+        super
+      end
+    end
+
     # @!attribute channel_arn
-    #   <p>ARN of the channel into which metadata is inserted. This channel must have an active
-    #         stream.</p>
+    #   <p>ARN of the channel into which metadata is inserted. This channel must have an active stream.</p>
     #   @return [String]
     # @!attribute metadata
     #   <p>Metadata to insert into the stream. Maximum: 1 KB per request.</p>
@@ -1358,21 +1725,16 @@ module Aws::Ivs
     #   <p>A complex type that contains information about where recorded video will be stored.</p>
     #   @return [Types::DestinationConfiguration]
     # @!attribute state
-    #   <p>Indicates the current state of the recording configuration. When the state is
-    #           <code>ACTIVE</code>, the configuration is ready for recording a channel stream.</p>
+    #   <p>Indicates the current state of the recording configuration. When the state is <code>ACTIVE</code>, the configuration is ready for recording a channel stream.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     # @!attribute thumbnail_configuration
-    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for a live
-    #         session and modify the interval at which thumbnails are generated for the live session.</p>
+    #   <p>A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.</p>
     #   @return [Types::ThumbnailConfiguration]
     # @!attribute recording_reconnect_window_seconds
-    #   <p>If a broadcast disconnects and then reconnects within the specified interval, the multiple
-    #         streams will be considered a single broadcast and merged together. Default: 0.</p>
+    #   <p>If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.</p>
     #   @return [Integer]
     # @!attribute rendition_configuration
     #   <p>Object that describes which renditions should be recorded for a stream.</p>
@@ -1408,13 +1770,10 @@ module Aws::Ivs
     #   <p>A complex type that contains information about where recorded video will be stored.</p>
     #   @return [Types::DestinationConfiguration]
     # @!attribute state
-    #   <p>Indicates the current state of the recording configuration. When the state is
-    #           <code>ACTIVE</code>, the configuration is ready for recording a channel stream.</p>
+    #   <p>Indicates the current state of the recording configuration. When the state is <code>ACTIVE</code>, the configuration is ready for recording a channel stream.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class RecordingConfigurationSummary < Struct.new(
       nil,
@@ -1430,17 +1789,10 @@ module Aws::Ivs
 
     # <p>Object that describes which renditions should be recorded for a stream.</p>
     # @!attribute rendition_selection
-    #   <p>Indicates which set of renditions are recorded for a stream. For <code>BASIC</code>
-    #         channels, the <code>CUSTOM</code> value has no effect. If <code>CUSTOM</code> is specified, a
-    #         set of renditions must be specified in the <code>renditions</code> field. Default:
-    #           <code>ALL</code>.</p>
+    #   <p>Indicates which set of renditions are recorded for a stream. For <code>BASIC</code> channels, the <code>CUSTOM</code> value has no effect. If <code>CUSTOM</code> is specified, a set of renditions must be specified in the <code>renditions</code> field. Default: <code>ALL</code>.</p>
     #   @return [String]
     # @!attribute renditions
-    #   <p>Indicates which renditions are recorded for a stream, if <code>renditionSelection</code>
-    #         is <code>CUSTOM</code>; otherwise, this field is irrelevant. The selected renditions are
-    #         recorded if they are available during the stream. If a selected rendition is unavailable, the
-    #         best available rendition is recorded. For details on the resolution dimensions of each
-    #         rendition, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html">Auto-Record to Amazon S3</a>.</p>
+    #   <p>Indicates which renditions are recorded for a stream, if <code>renditionSelection</code> is <code>CUSTOM</code>; otherwise, this field is irrelevant. The selected renditions are recorded if they are available during the stream. If a selected rendition is unavailable, the best available rendition is recorded. For details on the resolution dimensions of each rendition, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html">Auto-Record to Amazon S3</a>.</p>
     #   @return [Array<String>]
     class RenditionConfiguration < Struct.new(
       nil,
@@ -1451,12 +1803,44 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # <p>Request references a resource which does not exist.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p>Request references a resource which does not exist.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
       keyword_init: true
     )
@@ -1475,12 +1859,88 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # <p>Request would cause a service quota to be exceeded.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p>Request would cause a service quota to be exceeded.</p>
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
+      :exception_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The service is temporarily unavailable.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
+    # @!attribute exception_message
+    #   <p>The service is temporarily unavailable.</p>
+    #   @return [String]
+    class ServiceUnavailable < Struct.new(
+      nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
       keyword_init: true
     )
@@ -1492,9 +1952,7 @@ module Aws::Ivs
     #   <p>The endpoint to be used when streaming with IVS using the SRT protocol.</p>
     #   @return [String]
     # @!attribute passphrase
-    #   <p>Auto-generated passphrase to enable encryption. This field is applicable only if the end
-    #         user has <i>not</i> enabled the <code>insecureIngest</code> option for the
-    #         channel.</p>
+    #   <p>Auto-generated passphrase to enable encryption. This field is applicable only if the end user has <i>not</i> enabled the <code>insecureIngest</code> option for the channel.</p>
     #   @return [String]
     class Srt < Struct.new(
       nil,
@@ -1509,12 +1967,10 @@ module Aws::Ivs
     #   <p>The ARN of the channel associated with the viewer session to revoke.</p>
     #   @return [String]
     # @!attribute viewer_id
-    #   <p>The ID of the viewer associated with the viewer session to revoke. Do not use this field
-    #         for personally identifying, confidential, or sensitive information.</p>
+    #   <p>The ID of the viewer associated with the viewer session to revoke. Do not use this field for personally identifying, confidential, or sensitive information.</p>
     #   @return [String]
     # @!attribute viewer_session_versions_less_than_or_equal_to
-    #   <p>An optional filter on which versions of the viewer session to revoke. All versions less
-    #         than or equal to the specified version will be revoked. Default: 0.</p>
+    #   <p>An optional filter on which versions of the viewer session to revoke. All versions less than or equal to the specified version will be revoked. Default: 0.</p>
     #   @return [Integer]
     class StartViewerSessionRevocationInput < Struct.new(
       nil,
@@ -1562,22 +2018,16 @@ module Aws::Ivs
     #   <p>URL of the master playlist, required by the video player to play the HLS stream.</p>
     #   @return [String]
     # @!attribute start_time
-    #   <p>Time of the stream’s start. This is an ISO 8601 timestamp; <i>note that this is
-    #           returned as a string</i>.</p>
+    #   <p>Time of the stream’s start. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     # @!attribute state
-    #   <p>The stream’s state. Do not rely on the <code>OFFLINE</code> state, as the API may not
-    #         return it; instead, a "NotBroadcasting" error will indicate that the stream is not
-    #         live.</p>
+    #   <p>The stream’s state. Do not rely on the <code>OFFLINE</code> state, as the API may not return it; instead, a "NotBroadcasting" error will indicate that the stream is not live.</p>
     #   @return [String]
     # @!attribute health
     #   <p>The stream’s health.</p>
     #   @return [String]
     # @!attribute viewer_count
-    #   <p>A count of concurrent views of the stream. Typically, a new view appears in
-    #           <code>viewerCount</code> within 15 seconds of when video playback starts and a view is
-    #         removed from <code>viewerCount</code> within 1 minute of when video playback ends. A value of
-    #         -1 indicates that the request timed out; in this case, retry.</p>
+    #   <p>A count of concurrent views of the stream. Typically, a new view appears in <code>viewerCount</code> within 15 seconds of when video playback starts and a view is removed from <code>viewerCount</code> within 1 minute of when video playback ends. A value of -1 indicates that the request timed out; in this case, retry.</p>
     #   @return [Integer]
     class Stream < Struct.new(
       nil,
@@ -1598,8 +2048,7 @@ module Aws::Ivs
       end
     end
 
-    # <p>Object specifying a stream’s events. For a list of events, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html">Using Amazon EventBridge with Amazon
-    #       IVS</a>.</p>
+    # <p>Object specifying a stream’s events. For a list of events, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html">Using Amazon EventBridge with Amazon IVS</a>.</p>
     # @!attribute name
     #   <p>Name that identifies the stream event within a <code>type</code>.</p>
     #   @return [String]
@@ -1607,47 +2056,10 @@ module Aws::Ivs
     #   <p>Logical group for certain events.</p>
     #   @return [String]
     # @!attribute event_time
-    #   <p>Time when the event occurred. This is an ISO 8601 timestamp; <i>note that this is
-    #           returned as a string</i>.</p>
+    #   <p>Time when the event occurred. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     # @!attribute code
-    #   <p>Provides additional details about the stream event. There are several values; the long descriptions are provided in the IVS console but not delivered through the IVS API or EventBridge. Multitrack-related codes are used only for certain Session Ended events.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>MultitrackInputNotAllowed</code> — The broadcast client attempted to connect with multitrack input, but multitrack input was not enabled on the channel. Check your broadcast software settings or set <code>MultitrackInputConfiguration.Policy</code> to <code>ALLOW</code> or <code>REQUIRE</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>MultitrackInputRequired</code> — The broadcast client attempted to connect with single-track video, but multitrack input is required on this channel. Enable multitrack video in your broadcast software or configure the channel’s <code>MultitrackInputConfiguration.Policy</code> to <code>ALLOW</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>InvalidGetClientConfigurationStreamKey</code> — The broadcast client attempted to connect with an invalid, expired, or corrupt stream key.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>GetClientConfigurationStreamKeyRequired</code> — The broadcast client attempted to stream multitrack video without providing an authenticated stream key from GetClientConfiguration.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>InvalidMultitrackInputTrackCount</code> — The multitrack input stream contained an invalid number of tracks.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>InvalidMultitrackInputVideoTrackMediaProperties</code> — The multitrack input stream contained one or more tracks with an invalid codec, resolution, bitrate, or framerate.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>StreamTakeoverMediaMismatch</code> — The broadcast client attempted to take over with different media properties (e.g., codec, resolution, or video track type) from the original stream.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>StreamTakeoverInvalidPriority</code> — The broadcast client attempted a takeover with either a priority integer value equal to or lower than the original stream's value or a value outside the allowed range of 1 to 2,147,483,647.</p>
-    #                  <p>
-    #                     <code>StreamTakeoverLimitBreached</code> — The broadcast client reached the maximum allowed takeover attempts for this stream.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Provides additional details about the stream event. There are several values; the long descriptions are provided in the IVS console but not delivered through the IVS API or EventBridge. Multitrack-related codes are used only for certain Session Ended events.</p> <ul> <li> <p> <code>MultitrackInputNotAllowed</code> — The broadcast client attempted to connect with multitrack input, but multitrack input was not enabled on the channel. Check your broadcast software settings or set <code>MultitrackInputConfiguration.Policy</code> to <code>ALLOW</code> or <code>REQUIRE</code>.</p> </li> <li> <p> <code>MultitrackInputRequired</code> — The broadcast client attempted to connect with single-track video, but multitrack input is required on this channel. Enable multitrack video in your broadcast software or configure the channel’s <code>MultitrackInputConfiguration.Policy</code> to <code>ALLOW</code>.</p> </li> <li> <p> <code>InvalidGetClientConfigurationStreamKey</code> — The broadcast client attempted to connect with an invalid, expired, or corrupt stream key.</p> </li> <li> <p> <code>GetClientConfigurationStreamKeyRequired</code> — The broadcast client attempted to stream multitrack video without providing an authenticated stream key from GetClientConfiguration.</p> </li> <li> <p> <code>InvalidMultitrackInputTrackCount</code> — The multitrack input stream contained an invalid number of tracks.</p> </li> <li> <p> <code>InvalidMultitrackInputVideoTrackMediaProperties</code> — The multitrack input stream contained one or more tracks with an invalid codec, resolution, bitrate, or framerate.</p> </li> <li> <p> <code>StreamTakeoverMediaMismatch</code> — The broadcast client attempted to take over with different media properties (e.g., codec, resolution, or video track type) from the original stream.</p> </li> <li> <p> <code>StreamTakeoverInvalidPriority</code> — The broadcast client attempted a takeover with either a priority integer value equal to or lower than the original stream's value or a value outside the allowed range of 1 to 2,147,483,647.</p> <p> <code>StreamTakeoverLimitBreached</code> — The broadcast client reached the maximum allowed takeover attempts for this stream.</p> </li> </ul>
     #   @return [String]
     class StreamEvent < Struct.new(
       nil,
@@ -1683,9 +2095,7 @@ module Aws::Ivs
     #   <p>Channel ARN for the stream.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class StreamKey < Struct.new(
       nil,
@@ -1706,9 +2116,7 @@ module Aws::Ivs
     #   <p>Channel ARN for the stream.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class StreamKeySummary < Struct.new(
       nil,
@@ -1720,39 +2128,30 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Object that captures the Amazon IVS configuration that the customer provisioned, the
-    #       ingest configurations that the broadcaster used, and the most recent Amazon IVS stream events
-    #       it encountered.</p>
+    # <p>Object that captures the Amazon IVS configuration that the customer provisioned, the ingest configurations that the broadcaster used, and the most recent Amazon IVS stream events it encountered.</p>
     # @!attribute stream_id
     #   <p>Unique identifier for a live or previously live stream in the specified channel.</p>
     #   @return [String]
     # @!attribute start_time
-    #   <p>Time when the channel went live. This is an ISO 8601 timestamp; <i>note that this
-    #           is returned as a string</i>.</p>
+    #   <p>Time when the channel went live. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>Time when the channel went offline. This is an ISO 8601 timestamp; <i>note that
-    #           this is returned as a string</i>. For live streams, this is <code>NULL</code>.</p>
+    #   <p>Time when the channel went offline. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>. For live streams, this is <code>NULL</code>.</p>
     #   @return [Time]
     # @!attribute channel
     #   <p>The properties of the channel at the time of going live.</p>
     #   @return [Types::Channel]
     # @!attribute ingest_configuration
-    #   <p>The properties of the incoming RTMP stream.</p>
-    #            <p>
-    #               <b>Note:</b>
-    #               <code>ingestConfiguration</code> is deprecated in favor of <code>ingestConfigurations</code> but retained to ensure backward compatibility. If multitrack is not enabled, <code>ingestConfiguration</code> and <code>ingestConfigurations</code> contain the same data, namely information about track0 (the sole track). If multitrack is enabled, <code>ingestConfiguration</code> contains data for only the first track (track0) and <code>ingestConfigurations</code> contains data for all tracks.</p>
+    #   <p>The properties of the incoming RTMP stream.</p> <p> <b>Note:</b> <code>ingestConfiguration</code> is deprecated in favor of <code>ingestConfigurations</code> but retained to ensure backward compatibility. If multitrack is not enabled, <code>ingestConfiguration</code> and <code>ingestConfigurations</code> contain the same data, namely information about Track0 (the sole track). If multitrack is enabled, <code>ingestConfiguration</code> contains data for only the first track (Track0) and <code>ingestConfigurations</code> contains data for all tracks.</p>
     #   @return [Types::IngestConfiguration]
     # @!attribute ingest_configurations
-    #   <p>The properties of the incoming RTMP stream. If multitrack is enabled, <code>ingestConfigurations</code> contains data for all tracks; otherwise, it contains data only for track0 (the sole track).</p>
+    #   <p>The properties of the incoming RTMP stream. If multitrack is enabled, <code>ingestConfigurations</code> contains data for all tracks; otherwise, it contains data only for Track0 (the sole track).</p>
     #   @return [Types::IngestConfigurations]
     # @!attribute recording_configuration
     #   <p>The properties of recording the live stream.</p>
     #   @return [Types::RecordingConfiguration]
     # @!attribute truncated_events
-    #   <p>List of Amazon IVS events that the stream encountered. The list is sorted by most recent
-    #         events and contains up to 500 events. For Amazon IVS events, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html">Using Amazon EventBridge with Amazon
-    #         IVS</a>.</p>
+    #   <p>List of Amazon IVS events that the stream encountered. The list is sorted by most recent events and contains up to 500 events. For Amazon IVS events, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html">Using Amazon EventBridge with Amazon IVS</a>.</p>
     #   @return [Array<Types::StreamEvent>]
     class StreamSession < Struct.new(
       nil,
@@ -1774,12 +2173,10 @@ module Aws::Ivs
     #   <p>Unique identifier for a live or previously live stream in the specified channel.</p>
     #   @return [String]
     # @!attribute start_time
-    #   <p>Time when the channel went live. This is an ISO 8601 timestamp; <i>note that this
-    #           is returned as a string</i>.</p>
+    #   <p>Time when the channel went live. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>Time when the channel went offline. This is an ISO 8601 timestamp; <i>note that
-    #           this is returned as a string</i>. For live streams, this is <code>NULL</code>.</p>
+    #   <p>Time when the channel went offline. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>. For live streams, this is <code>NULL</code>.</p>
     #   @return [Time]
     # @!attribute has_error_event
     #   <p>If <code>true</code>, this stream encountered a quota breach or failure.</p>
@@ -1808,22 +2205,16 @@ module Aws::Ivs
     #   <p>Unique identifier for a live or previously live stream in the specified channel.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>The stream’s state. Do not rely on the <code>OFFLINE</code> state, as the API may not
-    #         return it; instead, a "NotBroadcasting" error will indicate that the stream is not
-    #         live.</p>
+    #   <p>The stream’s state. Do not rely on the <code>OFFLINE</code> state, as the API may not return it; instead, a "NotBroadcasting" error will indicate that the stream is not live.</p>
     #   @return [String]
     # @!attribute health
     #   <p>The stream’s health.</p>
     #   @return [String]
     # @!attribute viewer_count
-    #   <p>A count of concurrent views of the stream. Typically, a new view appears in
-    #           <code>viewerCount</code> within 15 seconds of when video playback starts and a view is
-    #         removed from <code>viewerCount</code> within 1 minute of when video playback ends. A value of
-    #         -1 indicates that the request timed out; in this case, retry.</p>
+    #   <p>A count of concurrent views of the stream. Typically, a new view appears in <code>viewerCount</code> within 15 seconds of when video playback starts and a view is removed from <code>viewerCount</code> within 1 minute of when video playback ends. A value of -1 indicates that the request timed out; in this case, retry.</p>
     #   @return [Integer]
     # @!attribute start_time
-    #   <p>Time of the stream’s start. This is an ISO 8601 timestamp; <i>note that this is
-    #           returned as a string</i>. </p>
+    #   <p>Time of the stream’s start. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>. </p>
     #   @return [Time]
     class StreamSummary < Struct.new(
       nil,
@@ -1843,12 +2234,44 @@ module Aws::Ivs
       end
     end
 
-    # <p/>
+    # <p>The stream is temporarily unavailable.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p>The stream is temporarily unavailable.</p>
     #   @return [String]
     class StreamUnavailable < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
       keyword_init: true
     )
@@ -1856,13 +2279,10 @@ module Aws::Ivs
     end
 
     # @!attribute resource_arn
-    #   <p>ARN of the resource for which tags are to be added or updated. The ARN must be
-    #         URL-encoded.</p>
+    #   <p>ARN of the resource for which tags are to be added or updated. The ARN must be URL-encoded.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Array of tags to be added or updated. Array of maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Hash<String, String>]
     class TagResourceInput < Struct.new(
       nil,
@@ -1880,12 +2300,44 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # <p>Request was denied due to request throttling.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p>Request was denied due to request throttling.</p>
     #   @return [String]
     class ThrottlingException < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
       keyword_init: true
     )
@@ -1897,31 +2349,13 @@ module Aws::Ivs
     #   <p>Thumbnail recording mode. Default: <code>INTERVAL</code>.</p>
     #   @return [String]
     # @!attribute target_interval_seconds
-    #   <p>The targeted thumbnail-generation interval in seconds. This is configurable (and required)
-    #         only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p>
-    #            <p>
-    #               <b>Important:</b> For the <code>BASIC</code> channel type,
-    #         or the <code>STANDARD</code> channel type with multitrack input,
-    #         setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are
-    #         generated at the specified interval. For thumbnails to be generated at the
-    #           <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the
-    #         input video must be less than the <code>targetIntervalSeconds</code> value. See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html"> Amazon IVS Streaming
-    #           Configuration</a> for information on setting <code>IDR/Keyframe</code> to the
-    #         recommended value in video-encoder settings.</p>
+    #   <p>The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p> <p> <b>Important:</b> For the <code>BASIC</code> channel type, or the <code>STANDARD</code> channel type with multitrack input, setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the input video must be less than the <code>targetIntervalSeconds</code> value. See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html"> Amazon IVS Streaming Configuration</a> for information on setting <code>IDR/Keyframe</code> to the recommended value in video-encoder settings.</p>
     #   @return [Integer]
     # @!attribute resolution
-    #   <p>Indicates the desired resolution of recorded thumbnails. Thumbnails are recorded at the
-    #         selected resolution if the corresponding rendition is available during the stream; otherwise,
-    #         they are recorded at source resolution. For more information about resolution values and their
-    #         corresponding height and width dimensions, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html">Auto-Record to Amazon S3</a>. Default:
-    #         Null (source resolution is returned).</p>
+    #   <p>Indicates the desired resolution of recorded thumbnails. Thumbnails are recorded at the selected resolution if the corresponding rendition is available during the stream; otherwise, they are recorded at source resolution. For more information about resolution values and their corresponding height and width dimensions, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html">Auto-Record to Amazon S3</a>. Default: Null (source resolution is returned).</p>
     #   @return [String]
     # @!attribute storage
-    #   <p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all
-    #         generated thumbnails in a serial manner, to the media/thumbnails directory.
-    #           <code>LATEST</code> saves the latest thumbnail in media/latest_thumbnail/thumb.jpg and
-    #         overwrites it at the interval specified by <code>targetIntervalSeconds</code>. You can enable
-    #         both <code>SEQUENTIAL</code> and <code>LATEST</code>. Default: <code>SEQUENTIAL</code>.</p>
+    #   <p>Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all generated thumbnails in a serial manner, to the media/thumbnails directory. <code>LATEST</code> saves the latest thumbnail in media/latest_thumbnail/thumb.jpg and overwrites it at the interval specified by <code>targetIntervalSeconds</code>. You can enable both <code>SEQUENTIAL</code> and <code>LATEST</code>. Default: <code>SEQUENTIAL</code>.</p>
     #   @return [Array<String>]
     class ThumbnailConfiguration < Struct.new(
       nil,
@@ -1938,9 +2372,7 @@ module Aws::Ivs
     #   <p>ARN of the resource for which tags are to be removed. The ARN must be URL-encoded.</p>
     #   @return [String]
     # @!attribute tag_keys
-    #   <p>Array of tags to be removed. Array of maps, each of the form <code>string:string
-    #           (key:value)</code>. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-    #         service-specific constraints beyond what is documented there.</p>
+    #   <p>Array of tag keys (strings) for the tags to be removed. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
       nil,
@@ -1959,47 +2391,74 @@ module Aws::Ivs
     end
 
     # @!attribute arn
+    #   <p>ARN of the ad configuration to be updated.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Ad configuration name. The value does not need to be unique.</p>
+    #   @return [String]
+    # @!attribute media_tailor_playback_configurations
+    #   <p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html">Generate and Sign IVS Playback Tokens</a>.</p>
+    #   @return [Array<Types::MediaTailorPlaybackConfiguration>]
+    # @!attribute post_roll_configuration
+    #   <p>Configuration for the post-roll ad break to use for this ad configuration.</p>
+    #   @return [Types::PostRollConfiguration]
+    class UpdateAdConfigurationRequest < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :media_tailor_playback_configurations,
+      :post_roll_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ad_configuration
+    #   <p>Object specifying the updated ad configuration.</p>
+    #   @return [Types::AdConfiguration]
+    class UpdateAdConfigurationResponse < Struct.new(
+      nil,
+      :ad_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
     #   <p>ARN of the channel to be updated.</p>
     #   @return [String]
     # @!attribute name
     #   <p>Channel name.</p>
     #   @return [String]
     # @!attribute latency_mode
-    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to
-    #         Full HD. Use <code>LOW</code> for near-real-time interaction with viewers.</p>
+    #   <p>Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you
-    #           exceed the allowable input resolution or bitrate, the stream probably will disconnect
-    #           immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html">Channel
-    #           Types</a>.</p>
+    #   <p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href="https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html">Channel Types</a>.</p>
     #   @return [String]
     # @!attribute authorized
     #   <p>Whether the channel is private (enabled for playback authorization).</p>
     #   @return [Boolean]
     # @!attribute recording_configuration_arn
-    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording.
-    #       If this is set to an empty string, recording is disabled.</p>
+    #   <p>Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. If this is set to an empty string, recording is disabled.</p>
     #   @return [String]
     # @!attribute insecure_ingest
     #   <p>Whether the channel allows insecure RTMP and SRT ingest. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute preset
-    #   <p>Optional transcode preset for the channel. This is selectable only for
-    #           <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel
-    #         types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other
-    #         channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty
-    #         string (<code>""</code>).</p>
+    #   <p>Optional transcode preset for the channel. This is selectable only for <code>ADVANCED_HD</code> and <code>ADVANCED_SD</code> channel types. For those channel types, the default <code>preset</code> is <code>HIGHER_BANDWIDTH_DELIVERY</code>. For other channel types (<code>BASIC</code> and <code>STANDARD</code>), <code>preset</code> is the empty string (<code>""</code>).</p>
     #   @return [String]
     # @!attribute playback_restriction_policy_arn
-    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction.
-    #        If this is set to an empty string, playback restriction policy is disabled.</p>
+    #   <p>Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. If this is set to an empty string, playback restriction policy is disabled.</p>
     #   @return [String]
     # @!attribute multitrack_input_configuration
     #   <p>Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.</p>
     #   @return [Types::MultitrackInputConfiguration]
     # @!attribute container_format
     #   <p>Indicates which content-packaging format is used (MPEG-TS or fMP4). If <code>multitrackInputConfiguration</code> is specified and <code>enabled</code> is <code>true</code>, then <code>containerFormat</code> is required and must be set to <code>FRAGMENTED_MP4</code>. Otherwise, <code>containerFormat</code> may be set to <code>TS</code> or <code>FRAGMENTED_MP4</code>. Default: <code>TS</code>.</p>
+    #   @return [String]
+    # @!attribute ad_configuration_arn
+    #   <p>ARN of the ad configuration associated with the channel.</p>
     #   @return [String]
     class UpdateChannelInput < Struct.new(
       nil,
@@ -2014,6 +2473,7 @@ module Aws::Ivs
       :playback_restriction_policy_arn,
       :multitrack_input_configuration,
       :container_format,
+      :ad_configuration_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2034,18 +2494,13 @@ module Aws::Ivs
     #   <p>ARN of the playback-restriction-policy to be updated.</p>
     #   @return [String]
     # @!attribute allowed_countries
-    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the
-    #         officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1
-    #           alpha-2</a> codes. Default: All countries (an empty array).</p>
+    #   <p>A list of country codes that control geoblocking restriction. Allowed values are the officially assigned <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> codes. Default: All countries (an empty array).</p>
     #   @return [Array<String>]
     # @!attribute allowed_origins
-    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid
-    #         values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All
-    #         origins (an empty array).</p>
+    #   <p>A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin</a>. Default: All origins (an empty array).</p>
     #   @return [Array<String>]
     # @!attribute enable_strict_origin_enforcement
-    #   <p>Whether channel playback is constrained by origin site. Default:
-    #         <code>false</code>.</p>
+    #   <p>Whether channel playback is constrained by origin site. Default: <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute name
     #   <p>Playback-restriction-policy name. The value does not need to be unique.</p>
@@ -2073,29 +2528,56 @@ module Aws::Ivs
       include ::Smithy::Schema::Structure
     end
 
-    # <p/>
+    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+    # @!attribute access_control_allow_origin
+    #   <p/>
+    #   @return [String]
+    # @!attribute access_control_expose_headers
+    #   <p/>
+    #   @return [String]
+    # @!attribute cache_control
+    #   <p/>
+    #   @return [String]
+    # @!attribute content_security_policy
+    #   <p/>
+    #   @return [String]
+    # @!attribute strict_transport_security
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_content_type_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_frame_options
+    #   <p/>
+    #   @return [String]
+    # @!attribute x_amzn_error_type
+    #   <p/>
+    #   @return [String]
     # @!attribute exception_message
     #   <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     #   @return [String]
     class ValidationException < Struct.new(
       nil,
+      :access_control_allow_origin,
+      :access_control_expose_headers,
+      :cache_control,
+      :content_security_policy,
+      :strict_transport_security,
+      :x_content_type_options,
+      :x_frame_options,
+      :x_amzn_error_type,
       :exception_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Object specifying a stream’s video configuration, as set up by the broadcaster (usually in
-    #       an encoder). This is part of the <a>IngestConfigurations</a> object and the deprecated
-    #       <a>IngestConfiguration</a> object. It is used for monitoring stream health.
-    #       </p>
+    # <p>Object specifying a stream’s video configuration, as set up by the broadcaster (usually in an encoder). This is part of the <a>IngestConfigurations</a> object and the deprecated <a>IngestConfiguration</a> object. It is used for monitoring stream health. </p>
     # @!attribute avc_profile
-    #   <p>Indicates to the decoder the requirements for decoding the stream. For definitions of the
-    #         valid values, see the H.264 specification.</p>
+    #   <p>(Deprecated) Indicates to the decoder the requirements for decoding the stream. For definitions of the valid values, see the H.264 specification. This is populated only when VideoConfiguration is part of the deprecated IngestConfiguration; otherwise, this is an empty string.</p>
     #   @return [String]
     # @!attribute avc_level
-    #   <p>Indicates the degree of required decoder performance for a profile. Normally this is set
-    #         automatically by the encoder. For details, see the H.264 specification.</p>
+    #   <p>(Deprecated) Indicates the degree of required decoder performance for a profile. Normally this is set automatically by the encoder. For details, see the H.264 specification. This is populated only when VideoConfiguration is part of the deprecated IngestConfiguration; otherwise, this is an empty string.</p>
     #   @return [String]
     # @!attribute codec
     #   <p>Codec used for the video encoding.</p>
@@ -2119,7 +2601,7 @@ module Aws::Ivs
     #   <p>Indicates the degree of required decoder performance for a profile. Normally this is set automatically by the encoder. When an AVC codec is used, this field has the same value as <code>avcLevel</code>.</p>
     #   @return [String]
     # @!attribute track
-    #   <p>Name of the video track. If multitrack is not enabled, this is track0 (the sole track).</p>
+    #   <p>Name of the video track. If multitrack is not enabled, this is Track0 (the sole track).</p>
     #   @return [String]
     # @!attribute profile
     #   <p>Indicates to the decoder the requirements for decoding the stream. When an AVC codec is used, this field has the same value as <code>avcProfile</code>.</p>

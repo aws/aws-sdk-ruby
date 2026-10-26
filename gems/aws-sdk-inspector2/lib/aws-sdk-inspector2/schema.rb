@@ -20,10 +20,10 @@ module Aws::Inspector2
     AggCounts = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.inspector2#AggCounts", name: "AggCounts", traits: {"smithy.api#default" => 0})
     AggregationFindingType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#AggregationFindingType", name: "AggregationFindingType", traits: {"smithy.api#enum" => [{"value" => "NETWORK_REACHABILITY", "name" => "NETWORK_REACHABILITY"}, {"value" => "PACKAGE_VULNERABILITY", "name" => "PACKAGE_VULNERABILITY"}, {"value" => "CODE_VULNERABILITY", "name" => "CODE_VULNERABILITY"}]})
     AggregationRequest = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.inspector2#AggregationRequest", name: "AggregationRequest")
-    AggregationResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#AggregationResourceType", name: "AggregationResourceType", traits: {"smithy.api#enum" => [{"value" => "AWS_EC2_INSTANCE", "name" => "AWS_EC2_INSTANCE"}, {"value" => "AWS_ECR_CONTAINER_IMAGE", "name" => "AWS_ECR_CONTAINER_IMAGE"}, {"value" => "AWS_LAMBDA_FUNCTION", "name" => "AWS_LAMBDA_FUNCTION"}, {"value" => "CODE_REPOSITORY", "name" => "CODE_REPOSITORY"}]})
+    AggregationResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#AggregationResourceType", name: "AggregationResourceType", traits: {"smithy.api#enum" => [{"value" => "AWS_EC2_INSTANCE", "name" => "AWS_EC2_INSTANCE"}, {"value" => "AWS_ECR_CONTAINER_IMAGE", "name" => "AWS_ECR_CONTAINER_IMAGE"}, {"value" => "AWS_LAMBDA_FUNCTION", "name" => "AWS_LAMBDA_FUNCTION"}, {"value" => "CODE_REPOSITORY", "name" => "CODE_REPOSITORY"}, {"value" => "Microsoft.Compute/virtualMachines", "name" => "MICROSOFT_COMPUTE_VIRTUAL_MACHINES"}, {"value" => "Microsoft.ContainerRegistry/registry/containerImage", "name" => "MICROSOFT_CONTAINER_REGISTRY_REGISTRY_CONTAINER_IMAGE"}, {"value" => "Microsoft.Web/sites", "name" => "MICROSOFT_WEB_SITES"}]})
     AggregationResponse = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.inspector2#AggregationResponse", name: "AggregationResponse")
     AggregationResponseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#AggregationResponseList", name: "AggregationResponseList")
-    AggregationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#AggregationType", name: "AggregationType", traits: {"smithy.api#enum" => [{"value" => "FINDING_TYPE", "name" => "FINDING_TYPE"}, {"value" => "PACKAGE", "name" => "PACKAGE"}, {"value" => "TITLE", "name" => "TITLE"}, {"value" => "REPOSITORY", "name" => "REPOSITORY"}, {"value" => "AMI", "name" => "AMI"}, {"value" => "AWS_EC2_INSTANCE", "name" => "AWS_EC2_INSTANCE"}, {"value" => "AWS_ECR_CONTAINER", "name" => "AWS_ECR_CONTAINER"}, {"value" => "IMAGE_LAYER", "name" => "IMAGE_LAYER"}, {"value" => "ACCOUNT", "name" => "ACCOUNT"}, {"value" => "AWS_LAMBDA_FUNCTION", "name" => "AWS_LAMBDA_FUNCTION"}, {"value" => "LAMBDA_LAYER", "name" => "LAMBDA_LAYER"}, {"value" => "CODE_REPOSITORY", "name" => "CODE_REPOSITORY"}]})
+    AggregationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#AggregationType", name: "AggregationType", traits: {"smithy.api#enum" => [{"value" => "FINDING_TYPE", "name" => "FINDING_TYPE"}, {"value" => "PACKAGE", "name" => "PACKAGE"}, {"value" => "TITLE", "name" => "TITLE"}, {"value" => "REPOSITORY", "name" => "REPOSITORY"}, {"value" => "AMI", "name" => "AMI"}, {"value" => "AWS_EC2_INSTANCE", "name" => "AWS_EC2_INSTANCE"}, {"value" => "AWS_ECR_CONTAINER", "name" => "AWS_ECR_CONTAINER"}, {"value" => "IMAGE_LAYER", "name" => "IMAGE_LAYER"}, {"value" => "ACCOUNT", "name" => "ACCOUNT"}, {"value" => "AWS_LAMBDA_FUNCTION", "name" => "AWS_LAMBDA_FUNCTION"}, {"value" => "LAMBDA_LAYER", "name" => "LAMBDA_LAYER"}, {"value" => "CODE_REPOSITORY", "name" => "CODE_REPOSITORY"}, {"value" => "VM_INSTANCE", "name" => "VM_INSTANCE"}, {"value" => "CONTAINER_IMAGE", "name" => "CONTAINER_IMAGE"}, {"value" => "SERVERLESS_FUNCTION", "name" => "SERVERLESS_FUNCTION"}]})
     AmiAggregation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AmiAggregation", name: "AmiAggregation")
     AmiAggregationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AmiAggregationResponse", name: "AmiAggregationResponse")
     AmiId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#AmiId", name: "AmiId", traits: {"smithy.api#pattern" => "^ami-([a-z0-9]{8}|[a-z0-9]{17}|\\*)$"})
@@ -40,6 +40,11 @@ module Aws::Inspector2
     AtigData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AtigData", name: "AtigData")
     AuthorizationUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#AuthorizationUrl", name: "AuthorizationUrl", traits: {"smithy.api#sensitive" => {}})
     AutoEnable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AutoEnable", name: "AutoEnable")
+    AwsConfigConnectorArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#AwsConfigConnectorArn", name: "AwsConfigConnectorArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^arn:([^:]+):config:([^:]+):([^:]+):connector/([^/]+)/([^/]+)/([^/:\\s]+)$"})
+    AwsConfigConnectorArnComparison = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#AwsConfigConnectorArnComparison", name: "AwsConfigConnectorArnComparison")
+    AwsConfigConnectorArnFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AwsConfigConnectorArnFilter", name: "AwsConfigConnectorArnFilter")
+    AwsConfigConnectorArnFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#AwsConfigConnectorArnFilterList", name: "AwsConfigConnectorArnFilterList", traits: {"smithy.api#length" => {"max" => 1}})
+    AwsConfigConnectorArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#AwsConfigConnectorArnList", name: "AwsConfigConnectorArnList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     AwsEc2InstanceDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AwsEc2InstanceDetails", name: "AwsEc2InstanceDetails")
     AwsEcrContainerAggregation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AwsEcrContainerAggregation", name: "AwsEcrContainerAggregation")
     AwsEcrContainerAggregationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AwsEcrContainerAggregationResponse", name: "AwsEcrContainerAggregationResponse")
@@ -50,6 +55,12 @@ module Aws::Inspector2
     AwsEksWorkloadInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AwsEksWorkloadInfo", name: "AwsEksWorkloadInfo")
     AwsEksWorkloadInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#AwsEksWorkloadInfoList", name: "AwsEksWorkloadInfoList", traits: {"smithy.api#length" => {"max" => 100}})
     AwsLambdaFunctionDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AwsLambdaFunctionDetails", name: "AwsLambdaFunctionDetails")
+    AzureProviderDetailCreate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AzureProviderDetailCreate", name: "AzureProviderDetailCreate")
+    AzureProviderDetailUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AzureProviderDetailUpdate", name: "AzureProviderDetailUpdate")
+    AzureRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#AzureRegion", name: "AzureRegion", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
+    AzureRegionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#AzureRegionList", name: "AzureRegionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    AzureScopeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AzureScopeConfiguration", name: "AzureScopeConfiguration")
+    AzureScopeConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#AzureScopeConfigurationInput", name: "AzureScopeConfigurationInput")
     BadRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#BadRequestException", name: "BadRequestException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     BatchAssociateCodeSecurityScanConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#BatchAssociateCodeSecurityScanConfigurationRequest", name: "BatchAssociateCodeSecurityScanConfigurationRequest")
     BatchAssociateCodeSecurityScanConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#BatchAssociateCodeSecurityScanConfigurationResponse", name: "BatchAssociateCodeSecurityScanConfigurationResponse")
@@ -145,6 +156,9 @@ module Aws::Inspector2
     CisaDateAdded = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.inspector2#CisaDateAdded", name: "CisaDateAdded")
     CisaDateDue = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.inspector2#CisaDateDue", name: "CisaDateDue")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
+    CloudProvider = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#CloudProvider", name: "CloudProvider", traits: {"smithy.api#enum" => [{"name" => "AWS", "value" => "AWS"}, {"name" => "AZURE", "value" => "AZURE"}, {"name" => "NOT_APPLICABLE", "value" => "NOT_APPLICABLE"}]})
+    CloudSecurityGroupIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#CloudSecurityGroupIdList", name: "CloudSecurityGroupIdList", traits: {"smithy.api#length" => {"max" => 5}})
+    CloudSubnetIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#CloudSubnetIdList", name: "CloudSubnetIdList", traits: {"smithy.api#length" => {"max" => 16}})
     ClusterDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ClusterDetails", name: "ClusterDetails")
     ClusterDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ClusterDetailsList", name: "ClusterDetailsList")
     ClusterForImageFilterCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ClusterForImageFilterCriteria", name: "ClusterForImageFilterCriteria")
@@ -187,6 +201,39 @@ module Aws::Inspector2
     ComputePlatform = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ComputePlatform", name: "ComputePlatform")
     ConfigurationLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ConfigurationLevel", name: "ConfigurationLevel")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    Connector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#Connector", name: "Connector")
+    ConnectorArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ConnectorArn", name: "ConnectorArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^arn:aws(-[a-z]+)*:inspector2:[a-z0-9-]+:[0-9]{12}:connector/([a-f0-9-]+|aws-service-connector/.+/[a-f0-9-]+)$"})
+    ConnectorArnComparison = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ConnectorArnComparison", name: "ConnectorArnComparison")
+    ConnectorArnFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ConnectorArnFilter", name: "ConnectorArnFilter")
+    ConnectorArnFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ConnectorArnFilterList", name: "ConnectorArnFilterList", traits: {"smithy.api#length" => {"max" => 25}})
+    ConnectorArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ConnectorArnList", name: "ConnectorArnList")
+    ConnectorCloudProvider = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ConnectorCloudProvider", name: "ConnectorCloudProvider")
+    ConnectorContainerImageScanConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ConnectorContainerImageScanConfiguration", name: "ConnectorContainerImageScanConfiguration")
+    ConnectorDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ConnectorDescription", name: "ConnectorDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#pattern" => "^[^\\p{C}]*$"})
+    ConnectorFilterCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ConnectorFilterCriteria", name: "ConnectorFilterCriteria")
+    ConnectorHealth = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ConnectorHealth", name: "ConnectorHealth")
+    ConnectorHealthStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ConnectorHealthStatus", name: "ConnectorHealthStatus")
+    ConnectorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ConnectorList", name: "ConnectorList")
+    ConnectorName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ConnectorName", name: "ConnectorName", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[\\p{L}\\p{N}_-]+$"})
+    ConnectorNextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ConnectorNextToken", name: "ConnectorNextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#sensitive" => {}})
+    ConnectorScanConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ConnectorScanConfiguration", name: "ConnectorScanConfiguration")
+    ConnectorScanConfigurationItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ConnectorScanConfigurationItem", name: "ConnectorScanConfigurationItem")
+    ConnectorScanConfigurationItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ConnectorScanConfigurationItemList", name: "ConnectorScanConfigurationItemList")
+    ConnectorTagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ConnectorTagKey", name: "ConnectorTagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"})
+    ConnectorTagMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.inspector2#ConnectorTagMap", name: "ConnectorTagMap", traits: {"smithy.api#length" => {"max" => 50}})
+    ConnectorTagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ConnectorTagValue", name: "ConnectorTagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    ConnectorType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ConnectorType", name: "ConnectorType")
+    ConnectorTypeComparison = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ConnectorTypeComparison", name: "ConnectorTypeComparison")
+    ConnectorTypeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ConnectorTypeFilter", name: "ConnectorTypeFilter")
+    ConnectorTypeFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ConnectorTypeFilterList", name: "ConnectorTypeFilterList", traits: {"smithy.api#length" => {"max" => 1}})
+    ContainerImageAggregation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ContainerImageAggregation", name: "ContainerImageAggregation")
+    ContainerImageAggregationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ContainerImageAggregationResponse", name: "ContainerImageAggregationResponse")
+    ContainerImageMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ContainerImageMetadata", name: "ContainerImageMetadata")
+    ContainerImagePullDateRescanDuration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ContainerImagePullDateRescanDuration", name: "ContainerImagePullDateRescanDuration", traits: {"smithy.api#enum" => [{"value" => "DAYS_3", "name" => "DAYS_3"}, {"value" => "DAYS_7", "name" => "DAYS_7"}, {"value" => "DAYS_14", "name" => "DAYS_14"}, {"value" => "DAYS_30", "name" => "DAYS_30"}, {"value" => "DAYS_60", "name" => "DAYS_60"}, {"value" => "DAYS_90", "name" => "DAYS_90"}, {"value" => "DAYS_180", "name" => "DAYS_180"}]})
+    ContainerImageRescanDuration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ContainerImageRescanDuration", name: "ContainerImageRescanDuration", traits: {"smithy.api#enum" => [{"value" => "LIFETIME", "name" => "LIFETIME"}, {"value" => "DAYS_3", "name" => "DAYS_3"}, {"value" => "DAYS_7", "name" => "DAYS_7"}, {"value" => "DAYS_30", "name" => "DAYS_30"}, {"value" => "DAYS_180", "name" => "DAYS_180"}, {"value" => "DAYS_14", "name" => "DAYS_14"}, {"value" => "DAYS_60", "name" => "DAYS_60"}, {"value" => "DAYS_90", "name" => "DAYS_90"}]})
+    ContainerImageSortBy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ContainerImageSortBy", name: "ContainerImageSortBy", traits: {"smithy.api#enum" => [{"value" => "CRITICAL", "name" => "CRITICAL"}, {"value" => "HIGH", "name" => "HIGH"}, {"value" => "ALL", "name" => "ALL"}]})
+    ContainerRegistryMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ContainerRegistryMetadata", name: "ContainerRegistryMetadata")
+    ContainerRepositoryMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ContainerRepositoryMetadata", name: "ContainerRepositoryMetadata")
     ContinuousIntegrationScanConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ContinuousIntegrationScanConfiguration", name: "ContinuousIntegrationScanConfiguration")
     ContinuousIntegrationScanEvent = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ContinuousIntegrationScanEvent", name: "ContinuousIntegrationScanEvent")
     ContinuousIntegrationScanSupportedEvents = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ContinuousIntegrationScanSupportedEvents", name: "ContinuousIntegrationScanSupportedEvents", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
@@ -200,7 +247,7 @@ module Aws::Inspector2
     CoverageMapFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#CoverageMapFilterList", name: "CoverageMapFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     CoverageNumberFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CoverageNumberFilter", name: "CoverageNumberFilter")
     CoverageNumberFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#CoverageNumberFilterList", name: "CoverageNumberFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
-    CoverageResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#CoverageResourceType", name: "CoverageResourceType", traits: {"smithy.api#enum" => [{"value" => "AWS_EC2_INSTANCE", "name" => "AWS_EC2_INSTANCE"}, {"value" => "AWS_ECR_CONTAINER_IMAGE", "name" => "AWS_ECR_CONTAINER_IMAGE"}, {"value" => "AWS_ECR_REPOSITORY", "name" => "AWS_ECR_REPOSITORY"}, {"value" => "AWS_LAMBDA_FUNCTION", "name" => "AWS_LAMBDA_FUNCTION"}, {"value" => "CODE_REPOSITORY", "name" => "CODE_REPOSITORY"}]})
+    CoverageResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#CoverageResourceType", name: "CoverageResourceType", traits: {"smithy.api#enum" => [{"value" => "AWS_EC2_INSTANCE", "name" => "AWS_EC2_INSTANCE"}, {"value" => "AWS_ECR_CONTAINER_IMAGE", "name" => "AWS_ECR_CONTAINER_IMAGE"}, {"value" => "AWS_ECR_REPOSITORY", "name" => "AWS_ECR_REPOSITORY"}, {"value" => "AWS_LAMBDA_FUNCTION", "name" => "AWS_LAMBDA_FUNCTION"}, {"value" => "CODE_REPOSITORY", "name" => "CODE_REPOSITORY"}, {"value" => "Microsoft.Compute/virtualMachines", "name" => "MICROSOFT_COMPUTE_VIRTUAL_MACHINES"}, {"value" => "Microsoft.ContainerRegistry/registry/containerImage", "name" => "MICROSOFT_CONTAINER_REGISTRY_REGISTRY_CONTAINER_IMAGE"}, {"value" => "Microsoft.ContainerRegistry/registry/containerRepository", "name" => "MICROSOFT_CONTAINER_REGISTRY_REGISTRY_CONTAINER_REPOSITORY"}, {"value" => "Microsoft.Web/sites", "name" => "MICROSOFT_WEB_SITES"}, {"value" => "Microsoft.ContainerRegistry/registries", "name" => "MICROSOFT_CONTAINER_REGISTRY_REGISTRIES"}]})
     CoverageStringComparison = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#CoverageStringComparison", name: "CoverageStringComparison", traits: {"smithy.api#enum" => [{"value" => "EQUALS", "name" => "EQUALS"}, {"value" => "NOT_EQUALS", "name" => "NOT_EQUALS"}]})
     CoverageStringFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CoverageStringFilter", name: "CoverageStringFilter")
     CoverageStringFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#CoverageStringFilterList", name: "CoverageStringFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
@@ -214,6 +261,8 @@ module Aws::Inspector2
     CreateCodeSecurityIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CreateCodeSecurityIntegrationResponse", name: "CreateCodeSecurityIntegrationResponse")
     CreateCodeSecurityScanConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CreateCodeSecurityScanConfigurationRequest", name: "CreateCodeSecurityScanConfigurationRequest")
     CreateCodeSecurityScanConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CreateCodeSecurityScanConfigurationResponse", name: "CreateCodeSecurityScanConfigurationResponse")
+    CreateConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CreateConnectorRequest", name: "CreateConnectorRequest")
+    CreateConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CreateConnectorResponse", name: "CreateConnectorResponse")
     CreateFilterInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CreateFilterInput", name: "CreateFilterInput")
     CreateFilterOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CreateFilterOutput", name: "CreateFilterOutput")
     CreateFindingsReportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#CreateFindingsReportInput", name: "CreateFindingsReportInput")
@@ -252,6 +301,8 @@ module Aws::Inspector2
     DeleteCodeSecurityIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#DeleteCodeSecurityIntegrationResponse", name: "DeleteCodeSecurityIntegrationResponse")
     DeleteCodeSecurityScanConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#DeleteCodeSecurityScanConfigurationRequest", name: "DeleteCodeSecurityScanConfigurationRequest")
     DeleteCodeSecurityScanConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#DeleteCodeSecurityScanConfigurationResponse", name: "DeleteCodeSecurityScanConfigurationResponse")
+    DeleteConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#DeleteConnectorRequest", name: "DeleteConnectorRequest")
+    DeleteConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#DeleteConnectorResponse", name: "DeleteConnectorResponse")
     DeleteFilterInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#DeleteFilterInput", name: "DeleteFilterInput")
     DeleteFilterOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#DeleteFilterOutput", name: "DeleteFilterOutput")
     DescribeOrganizationConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#DescribeOrganizationConfigurationInput", name: "DescribeOrganizationConfigurationInput")
@@ -282,10 +333,10 @@ module Aws::Inspector2
     EcrConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#EcrConfiguration", name: "EcrConfiguration")
     EcrConfigurationState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#EcrConfigurationState", name: "EcrConfigurationState")
     EcrContainerImageMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#EcrContainerImageMetadata", name: "EcrContainerImageMetadata")
-    EcrPullDateRescanDuration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#EcrPullDateRescanDuration", name: "EcrPullDateRescanDuration", traits: {"smithy.api#enum" => [{"value" => "DAYS_14", "name" => "DAYS_14"}, {"value" => "DAYS_30", "name" => "DAYS_30"}, {"value" => "DAYS_60", "name" => "DAYS_60"}, {"value" => "DAYS_90", "name" => "DAYS_90"}, {"value" => "DAYS_180", "name" => "DAYS_180"}]})
+    EcrPullDateRescanDuration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#EcrPullDateRescanDuration", name: "EcrPullDateRescanDuration", traits: {"smithy.api#enum" => [{"value" => "DAYS_14", "name" => "DAYS_14"}, {"value" => "DAYS_30", "name" => "DAYS_30"}, {"value" => "DAYS_60", "name" => "DAYS_60"}, {"value" => "DAYS_90", "name" => "DAYS_90"}, {"value" => "DAYS_180", "name" => "DAYS_180"}, {"value" => "DAYS_3", "name" => "DAYS_3"}, {"value" => "DAYS_7", "name" => "DAYS_7"}]})
     EcrPullDateRescanMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#EcrPullDateRescanMode", name: "EcrPullDateRescanMode", traits: {"smithy.api#enum" => [{"value" => "LAST_PULL_DATE", "name" => "LAST_PULL_DATE"}, {"value" => "LAST_IN_USE_AT", "name" => "LAST_IN_USE_AT"}]})
     EcrRepositoryMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#EcrRepositoryMetadata", name: "EcrRepositoryMetadata")
-    EcrRescanDuration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#EcrRescanDuration", name: "EcrRescanDuration", traits: {"smithy.api#enum" => [{"value" => "LIFETIME", "name" => "LIFETIME"}, {"value" => "DAYS_30", "name" => "DAYS_30"}, {"value" => "DAYS_180", "name" => "DAYS_180"}, {"value" => "DAYS_14", "name" => "DAYS_14"}, {"value" => "DAYS_60", "name" => "DAYS_60"}, {"value" => "DAYS_90", "name" => "DAYS_90"}]})
+    EcrRescanDuration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#EcrRescanDuration", name: "EcrRescanDuration", traits: {"smithy.api#enum" => [{"value" => "LIFETIME", "name" => "LIFETIME"}, {"value" => "DAYS_30", "name" => "DAYS_30"}, {"value" => "DAYS_180", "name" => "DAYS_180"}, {"value" => "DAYS_14", "name" => "DAYS_14"}, {"value" => "DAYS_60", "name" => "DAYS_60"}, {"value" => "DAYS_90", "name" => "DAYS_90"}, {"value" => "DAYS_3", "name" => "DAYS_3"}, {"value" => "DAYS_7", "name" => "DAYS_7"}]})
     EcrRescanDurationState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#EcrRescanDurationState", name: "EcrRescanDurationState")
     EcrRescanDurationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#EcrRescanDurationStatus", name: "EcrRescanDurationStatus", traits: {"smithy.api#enum" => [{"value" => "SUCCESS", "name" => "SUCCESS"}, {"value" => "PENDING", "name" => "PENDING"}, {"value" => "FAILED", "name" => "FAILED"}]})
     EcrScanFrequency = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#EcrScanFrequency", name: "EcrScanFrequency", traits: {"smithy.api#enum" => [{"value" => "MANUAL", "name" => "MANUAL"}, {"value" => "SCAN_ON_PUSH", "name" => "SCAN_ON_PUSH"}, {"value" => "CONTINUOUS_SCAN", "name" => "CONTINUOUS_SCAN"}]})
@@ -294,11 +345,12 @@ module Aws::Inspector2
     EnableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#EnableInput", name: "EnableInput")
     EnableOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#EnableOutput", name: "EnableOutput")
     EnableResourceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#EnableResourceTypeList", name: "EnableResourceTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    EnablementStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#EnablementStatus", name: "EnablementStatus")
     Epss = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#Epss", name: "Epss")
     EpssDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#EpssDetails", name: "EpssDetails")
     EpssScore = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.inspector2#EpssScore", name: "EpssScore", traits: {"smithy.api#default" => 0})
     EpssScoreValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.inspector2#EpssScoreValue", name: "EpssScoreValue", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0.0, "max" => 1.0}})
-    ErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ErrorCode", name: "ErrorCode", traits: {"smithy.api#enum" => [{"value" => "ALREADY_ENABLED", "name" => "ALREADY_ENABLED"}, {"value" => "ENABLE_IN_PROGRESS", "name" => "ENABLE_IN_PROGRESS"}, {"value" => "DISABLE_IN_PROGRESS", "name" => "DISABLE_IN_PROGRESS"}, {"value" => "SUSPEND_IN_PROGRESS", "name" => "SUSPEND_IN_PROGRESS"}, {"value" => "RESOURCE_NOT_FOUND", "name" => "RESOURCE_NOT_FOUND"}, {"value" => "ACCESS_DENIED", "name" => "ACCESS_DENIED"}, {"value" => "INTERNAL_ERROR", "name" => "INTERNAL_ERROR"}, {"value" => "SSM_UNAVAILABLE", "name" => "SSM_UNAVAILABLE"}, {"value" => "SSM_THROTTLED", "name" => "SSM_THROTTLED"}, {"value" => "EVENTBRIDGE_UNAVAILABLE", "name" => "EVENTBRIDGE_UNAVAILABLE"}, {"value" => "EVENTBRIDGE_THROTTLED", "name" => "EVENTBRIDGE_THROTTLED"}, {"value" => "RESOURCE_SCAN_NOT_DISABLED", "name" => "RESOURCE_SCAN_NOT_DISABLED"}, {"value" => "DISASSOCIATE_ALL_MEMBERS", "name" => "DISASSOCIATE_ALL_MEMBERS"}, {"value" => "ACCOUNT_IS_ISOLATED", "name" => "ACCOUNT_IS_ISOLATED"}, {"value" => "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "name" => "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED"}, {"value" => "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED", "name" => "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"}]})
+    ErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ErrorCode", name: "ErrorCode", traits: {"smithy.api#enum" => [{"value" => "ALREADY_ENABLED", "name" => "ALREADY_ENABLED"}, {"value" => "ENABLE_IN_PROGRESS", "name" => "ENABLE_IN_PROGRESS"}, {"value" => "DISABLE_IN_PROGRESS", "name" => "DISABLE_IN_PROGRESS"}, {"value" => "SUSPEND_IN_PROGRESS", "name" => "SUSPEND_IN_PROGRESS"}, {"value" => "RESOURCE_NOT_FOUND", "name" => "RESOURCE_NOT_FOUND"}, {"value" => "ACCESS_DENIED", "name" => "ACCESS_DENIED"}, {"value" => "INTERNAL_ERROR", "name" => "INTERNAL_ERROR"}, {"value" => "SSM_UNAVAILABLE", "name" => "SSM_UNAVAILABLE"}, {"value" => "SSM_THROTTLED", "name" => "SSM_THROTTLED"}, {"value" => "EVENTBRIDGE_UNAVAILABLE", "name" => "EVENTBRIDGE_UNAVAILABLE"}, {"value" => "EVENTBRIDGE_THROTTLED", "name" => "EVENTBRIDGE_THROTTLED"}, {"value" => "RESOURCE_SCAN_NOT_DISABLED", "name" => "RESOURCE_SCAN_NOT_DISABLED"}, {"value" => "DISASSOCIATE_ALL_MEMBERS", "name" => "DISASSOCIATE_ALL_MEMBERS"}, {"value" => "ACCOUNT_IS_ISOLATED", "name" => "ACCOUNT_IS_ISOLATED"}, {"value" => "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "name" => "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED"}, {"value" => "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED", "name" => "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"}, {"value" => "BLOCKED_BY_ORGANIZATION_POLICY", "name" => "BLOCKED_BY_ORGANIZATION_POLICY"}]})
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ErrorMessage", name: "ErrorMessage")
     Evidence = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#Evidence", name: "Evidence")
     EvidenceDetail = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#EvidenceDetail", name: "EvidenceDetail", traits: {"smithy.api#length" => {"min" => 0}})
@@ -353,7 +405,7 @@ module Aws::Inspector2
     FreeTrialInfoErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#FreeTrialInfoErrorList", name: "FreeTrialInfoErrorList")
     FreeTrialInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#FreeTrialInfoList", name: "FreeTrialInfoList")
     FreeTrialStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#FreeTrialStatus", name: "FreeTrialStatus", traits: {"smithy.api#enum" => [{"name" => "ACTIVE", "value" => "ACTIVE"}, {"name" => "INACTIVE", "value" => "INACTIVE"}]})
-    FreeTrialType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#FreeTrialType", name: "FreeTrialType", traits: {"smithy.api#enum" => [{"name" => "EC2", "value" => "EC2"}, {"name" => "ECR", "value" => "ECR"}, {"name" => "LAMBDA", "value" => "LAMBDA"}, {"name" => "LAMBDA_CODE", "value" => "LAMBDA_CODE"}, {"name" => "CODE_REPOSITORY", "value" => "CODE_REPOSITORY"}]})
+    FreeTrialType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#FreeTrialType", name: "FreeTrialType", traits: {"smithy.api#enum" => [{"name" => "EC2", "value" => "EC2"}, {"name" => "ECR", "value" => "ECR"}, {"name" => "LAMBDA", "value" => "LAMBDA"}, {"name" => "LAMBDA_CODE", "value" => "LAMBDA_CODE"}, {"name" => "CODE_REPOSITORY", "value" => "CODE_REPOSITORY"}, {"name" => "VM", "value" => "VM"}, {"name" => "CONTAINER_IMAGE", "value" => "CONTAINER_IMAGE"}, {"name" => "SERVERLESS_FUNCTION", "value" => "SERVERLESS_FUNCTION"}]})
     FrequencyExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#FrequencyExpression", name: "FrequencyExpression", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     FunctionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#FunctionName", name: "FunctionName", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"})
     GetCisScanReportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#GetCisScanReportRequest", name: "GetCisScanReportRequest")
@@ -388,12 +440,14 @@ module Aws::Inspector2
     GitHubInstallationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#GitHubInstallationId", name: "GitHubInstallationId", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     GitLabAccessToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#GitLabAccessToken", name: "GitLabAccessToken", traits: {"smithy.api#sensitive" => {}})
     GitLabAuthCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#GitLabAuthCode", name: "GitLabAuthCode", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#sensitive" => {}})
-    GroupKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#GroupKey", name: "GroupKey", traits: {"smithy.api#enum" => [{"value" => "SCAN_STATUS_CODE", "name" => "SCAN_STATUS_CODE"}, {"value" => "SCAN_STATUS_REASON", "name" => "SCAN_STATUS_REASON"}, {"value" => "ACCOUNT_ID", "name" => "ACCOUNT_ID"}, {"value" => "RESOURCE_TYPE", "name" => "RESOURCE_TYPE"}, {"value" => "ECR_REPOSITORY_NAME", "name" => "ECR_REPOSITORY_NAME"}]})
+    GroupKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#GroupKey", name: "GroupKey", traits: {"smithy.api#enum" => [{"value" => "SCAN_STATUS_CODE", "name" => "SCAN_STATUS_CODE"}, {"value" => "SCAN_STATUS_REASON", "name" => "SCAN_STATUS_REASON"}, {"value" => "ACCOUNT_ID", "name" => "ACCOUNT_ID"}, {"value" => "RESOURCE_TYPE", "name" => "RESOURCE_TYPE"}, {"value" => "ECR_REPOSITORY_NAME", "name" => "ECR_REPOSITORY_NAME"}, {"value" => "PROVIDER", "name" => "PROVIDER"}, {"value" => "PROVIDER_ACCOUNT_ID", "name" => "PROVIDER_ACCOUNT_ID"}, {"value" => "PROVIDER_REGION", "name" => "PROVIDER_REGION"}, {"value" => "PROVIDER_ORG_ID", "name" => "PROVIDER_ORG_ID"}]})
+    Image = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#Image", name: "Image")
     ImageHash = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ImageHash", name: "ImageHash", traits: {"smithy.api#length" => {"min" => 71, "max" => 71}, "smithy.api#pattern" => "^sha256:[a-z0-9]{64}$"})
     ImageLayerAggregation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ImageLayerAggregation", name: "ImageLayerAggregation")
     ImageLayerAggregationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ImageLayerAggregationResponse", name: "ImageLayerAggregationResponse")
     ImageLayerSortBy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ImageLayerSortBy", name: "ImageLayerSortBy", traits: {"smithy.api#enum" => [{"value" => "CRITICAL", "name" => "CRITICAL"}, {"value" => "HIGH", "name" => "HIGH"}, {"value" => "ALL", "name" => "ALL"}]})
     ImageTagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ImageTagList", name: "ImageTagList")
+    InheritanceMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#InheritanceMode", name: "InheritanceMode", traits: {"smithy.api#enum" => [{"value" => "INHERIT_FROM_ADMIN", "name" => "INHERIT_FROM_ADMIN"}]})
     InspectorScoreDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#InspectorScoreDetails", name: "InspectorScoreDetails")
     InstanceUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#InstanceUrl", name: "InstanceUrl", traits: {"smithy.api#pattern" => "^https://[-a-zA-Z0-9()@:%_+.~#?&//=]{1,1024}$", "smithy.api#sensitive" => {}})
     IntegrationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#IntegrationName", name: "IntegrationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 60}, "smithy.api#pattern" => "^[a-zA-Z0-9-_$:.]*$"})
@@ -441,6 +495,11 @@ module Aws::Inspector2
     ListCodeSecurityScanConfigurationAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ListCodeSecurityScanConfigurationAssociationsResponse", name: "ListCodeSecurityScanConfigurationAssociationsResponse")
     ListCodeSecurityScanConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ListCodeSecurityScanConfigurationsRequest", name: "ListCodeSecurityScanConfigurationsRequest")
     ListCodeSecurityScanConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ListCodeSecurityScanConfigurationsResponse", name: "ListCodeSecurityScanConfigurationsResponse")
+    ListConnectorScanConfigurationsMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.inspector2#ListConnectorScanConfigurationsMaxResults", name: "ListConnectorScanConfigurationsMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
+    ListConnectorScanConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ListConnectorScanConfigurationsRequest", name: "ListConnectorScanConfigurationsRequest")
+    ListConnectorScanConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ListConnectorScanConfigurationsResponse", name: "ListConnectorScanConfigurationsResponse")
+    ListConnectorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ListConnectorsRequest", name: "ListConnectorsRequest")
+    ListConnectorsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ListConnectorsResponse", name: "ListConnectorsResponse")
     ListCoverageInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ListCoverageInput", name: "ListCoverageInput")
     ListCoverageMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.inspector2#ListCoverageMaxResults", name: "ListCoverageMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 200}})
     ListCoverageOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ListCoverageOutput", name: "ListCoverageOutput")
@@ -507,7 +566,7 @@ module Aws::Inspector2
     PackageType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#PackageType", name: "PackageType", traits: {"smithy.api#enum" => [{"value" => "IMAGE", "name" => "IMAGE"}, {"value" => "ZIP", "name" => "ZIP"}]})
     PackageVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#PackageVersion", name: "PackageVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     PackageVulnerabilityDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#PackageVulnerabilityDetails", name: "PackageVulnerabilityDetails")
-    Path = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Path", name: "Path", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^(?:/(?:\\.[-\\w]+|[-\\w]+(?:\\.[-\\w]+)?))+/?$"})
+    Path = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Path", name: "Path", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^(?:(?:/(?:\\.[-\\w]+|[-\\w]+(?:[. ][-\\w]+)*))+/?|[A-Za-z]:\\\\(?:[-\\w]+(?:[. ][-\\w]+)*\\\\)*[-\\w]+(?:[. ][-\\w]+)*)$"})
     PathList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#PathList", name: "PathList", traits: {"smithy.api#length" => {"max" => 5}})
     PeriodicScanConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#PeriodicScanConfiguration", name: "PeriodicScanConfiguration")
     PeriodicScanFrequency = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#PeriodicScanFrequency", name: "PeriodicScanFrequency")
@@ -528,6 +587,16 @@ module Aws::Inspector2
     ProjectPeriodicScanConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ProjectPeriodicScanConfiguration", name: "ProjectPeriodicScanConfiguration")
     ProjectPeriodicScanConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ProjectPeriodicScanConfigurationList", name: "ProjectPeriodicScanConfigurationList")
     ProjectSelectionScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ProjectSelectionScope", name: "ProjectSelectionScope")
+    Provider = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Provider", name: "Provider", traits: {"smithy.api#enum" => [{"value" => "AWS", "name" => "AWS"}, {"value" => "AZURE", "name" => "AZURE"}]})
+    ProviderAccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ProviderAccountId", name: "ProviderAccountId", traits: {"smithy.api#length" => {"min" => 12, "max" => 36}, "smithy.api#pattern" => "^(\\d{12}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"})
+    ProviderComparison = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ProviderComparison", name: "ProviderComparison")
+    ProviderDetailCreate = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.inspector2#ProviderDetailCreate", name: "ProviderDetailCreate")
+    ProviderDetailUpdate = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.inspector2#ProviderDetailUpdate", name: "ProviderDetailUpdate")
+    ProviderFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ProviderFilter", name: "ProviderFilter")
+    ProviderFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ProviderFilterList", name: "ProviderFilterList", traits: {"smithy.api#length" => {"max" => 1}})
+    ProviderOrgId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ProviderOrgId", name: "ProviderOrgId", traits: {"smithy.api#length" => {"min" => 12, "max" => 36}, "smithy.api#pattern" => "^(o-[a-z0-9]{10,32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"})
+    ProviderPartition = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ProviderPartition", name: "ProviderPartition", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^(aws(-[a-z]+)*|Azure[A-Za-z]+)$"})
+    ProviderRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ProviderRegion", name: "ProviderRegion", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^([a-z]{2}(-[a-z]+)+-\\d+|[a-z][a-z0-9]+)$"})
     Reason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Reason", name: "Reason", traits: {"smithy.api#length" => {"max" => 1024}})
     Recommendation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#Recommendation", name: "Recommendation")
     ReferenceUrls = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ReferenceUrls", name: "ReferenceUrls", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
@@ -547,7 +616,7 @@ module Aws::Inspector2
     Resource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#Resource", name: "Resource")
     ResourceDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ResourceDetails", name: "ResourceDetails")
     ResourceFilterCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ResourceFilterCriteria", name: "ResourceFilterCriteria")
-    ResourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ResourceId", name: "ResourceId", traits: {"smithy.api#length" => {"min" => 10, "max" => 341}, "smithy.api#pattern" => "(^arn:.*:ecr:.*:\\d{12}:repository\\/(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*(\\/sha256:[a-z0-9]{64})?$)|(^i-([a-z0-9]{8}|[a-z0-9]{17}|\\\\*)$|(^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$)|(^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:codesecurity-integration\\/[a-f0-9-]{36}\\/project-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$))"})
+    ResourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ResourceId", name: "ResourceId", traits: {"smithy.api#length" => {"min" => 10, "max" => 1024}, "smithy.api#pattern" => "(^arn:.*:ecr:.*:\\d{12}:repository\\/[a-zA-Z0-9._\\/-]+(\\/sha256:[a-z0-9]{64})?$)|(^i-([a-z0-9]{8}|[a-z0-9]{17}|\\\\*)$|(^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$)|(^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:codesecurity-integration\\/[a-f0-9-]{36}\\/project-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$))|(^\\/subscriptions\\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\\/resourcegroups\\/[a-z0-9_\\-\\.()]+\\/providers\\/(microsoft\\.compute\\/virtualmachines\\/[a-z0-9_\\-]+|microsoft\\.web\\/sites\\/[a-z0-9_\\-]+|microsoft\\.containerregistry\\/registries\\/[a-z0-9_\\-]+(\\/repositories\\/[a-z0-9_\\-\\/]+\\/images?\\/sha256:[a-f0-9]{64})?)$)"})
     ResourceIdFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ResourceIdFilterList", name: "ResourceIdFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ResourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ResourceList", name: "ResourceList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ResourceMapComparison = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ResourceMapComparison", name: "ResourceMapComparison", traits: {"smithy.api#enum" => [{"value" => "EQUALS", "name" => "EQUALS"}]})
@@ -563,22 +632,28 @@ module Aws::Inspector2
     ResourceStringFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ResourceStringFilterList", name: "ResourceStringFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ResourceStringInput = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ResourceStringInput", name: "ResourceStringInput", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     ResourceTagFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ResourceTagFilterList", name: "ResourceTagFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
-    ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ResourceType", name: "ResourceType", traits: {"smithy.api#enum" => [{"value" => "AWS_EC2_INSTANCE", "name" => "AWS_EC2_INSTANCE"}, {"value" => "AWS_ECR_CONTAINER_IMAGE", "name" => "AWS_ECR_CONTAINER_IMAGE"}, {"value" => "AWS_ECR_REPOSITORY", "name" => "AWS_ECR_REPOSITORY"}, {"value" => "AWS_LAMBDA_FUNCTION", "name" => "AWS_LAMBDA_FUNCTION"}, {"value" => "CODE_REPOSITORY", "name" => "CODE_REPOSITORY"}]})
+    ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ResourceType", name: "ResourceType", traits: {"smithy.api#enum" => [{"value" => "AWS_EC2_INSTANCE", "name" => "AWS_EC2_INSTANCE"}, {"value" => "AWS_ECR_CONTAINER_IMAGE", "name" => "AWS_ECR_CONTAINER_IMAGE"}, {"value" => "AWS_ECR_REPOSITORY", "name" => "AWS_ECR_REPOSITORY"}, {"value" => "AWS_LAMBDA_FUNCTION", "name" => "AWS_LAMBDA_FUNCTION"}, {"value" => "CODE_REPOSITORY", "name" => "CODE_REPOSITORY"}, {"value" => "Microsoft.Compute/virtualMachines", "name" => "MICROSOFT_COMPUTE_VIRTUAL_MACHINES"}, {"value" => "Microsoft.ContainerRegistry/registry/containerImage", "name" => "MICROSOFT_CONTAINER_REGISTRY_REGISTRY_CONTAINER_IMAGE"}, {"value" => "Microsoft.Web/sites", "name" => "MICROSOFT_WEB_SITES"}]})
     RiskScore = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.inspector2#RiskScore", name: "RiskScore")
     RuleId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#RuleId", name: "RuleId", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
     RuleSetCategories = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#RuleSetCategories", name: "RuleSetCategories", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
     RuleSetCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#RuleSetCategory", name: "RuleSetCategory")
-    Runtime = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Runtime", name: "Runtime", traits: {"smithy.api#enum" => [{"value" => "NODEJS", "name" => "NODEJS"}, {"value" => "NODEJS_12_X", "name" => "NODEJS_12_X"}, {"value" => "NODEJS_14_X", "name" => "NODEJS_14_X"}, {"value" => "NODEJS_16_X", "name" => "NODEJS_16_X"}, {"value" => "JAVA_8", "name" => "JAVA_8"}, {"value" => "JAVA_8_AL2", "name" => "JAVA_8_AL2"}, {"value" => "JAVA_11", "name" => "JAVA_11"}, {"value" => "PYTHON_3_7", "name" => "PYTHON_3_7"}, {"value" => "PYTHON_3_8", "name" => "PYTHON_3_8"}, {"value" => "PYTHON_3_9", "name" => "PYTHON_3_9"}, {"value" => "UNSUPPORTED", "name" => "UNSUPPORTED"}, {"value" => "NODEJS_18_X", "name" => "NODEJS_18_X"}, {"value" => "GO_1_X", "name" => "GO_1_X"}, {"value" => "JAVA_17", "name" => "JAVA_17"}, {"value" => "PYTHON_3_10", "name" => "PYTHON_3_10"}, {"value" => "PYTHON_3_11", "name" => "PYTHON_3_11"}, {"value" => "DOTNETCORE_3_1", "name" => "DOTNETCORE_3_1"}, {"value" => "DOTNET_6", "name" => "DOTNET_6"}, {"value" => "DOTNET_7", "name" => "DOTNET_7"}, {"value" => "RUBY_2_7", "name" => "RUBY_2_7"}, {"value" => "RUBY_3_2", "name" => "RUBY_3_2"}]})
+    Runtime = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Runtime", name: "Runtime", traits: {"smithy.api#enum" => [{"value" => "NODEJS", "name" => "NODEJS"}, {"value" => "NODEJS_12_X", "name" => "NODEJS_12_X"}, {"value" => "NODEJS_14_X", "name" => "NODEJS_14_X"}, {"value" => "NODEJS_16_X", "name" => "NODEJS_16_X"}, {"value" => "JAVA_8", "name" => "JAVA_8"}, {"value" => "JAVA_8_AL2", "name" => "JAVA_8_AL2"}, {"value" => "JAVA_11", "name" => "JAVA_11"}, {"value" => "PYTHON_3_7", "name" => "PYTHON_3_7"}, {"value" => "PYTHON_3_8", "name" => "PYTHON_3_8"}, {"value" => "PYTHON_3_9", "name" => "PYTHON_3_9"}, {"value" => "UNSUPPORTED", "name" => "UNSUPPORTED"}, {"value" => "NODEJS_18_X", "name" => "NODEJS_18_X"}, {"value" => "GO_1_X", "name" => "GO_1_X"}, {"value" => "JAVA_17", "name" => "JAVA_17"}, {"value" => "PYTHON_3_10", "name" => "PYTHON_3_10"}, {"value" => "PYTHON_3_11", "name" => "PYTHON_3_11"}, {"value" => "DOTNETCORE_3_1", "name" => "DOTNETCORE_3_1"}, {"value" => "DOTNET_6", "name" => "DOTNET_6"}, {"value" => "DOTNET_7", "name" => "DOTNET_7"}, {"value" => "RUBY_2_7", "name" => "RUBY_2_7"}, {"value" => "RUBY_3_2", "name" => "RUBY_3_2"}, {"value" => "DOTNET_10", "name" => "DOTNET_10"}, {"value" => "NODEJS_24_X", "name" => "NODEJS_24_X"}, {"value" => "NODEJS_22_X", "name" => "NODEJS_22_X"}, {"value" => "JAVA_21", "name" => "JAVA_21"}, {"value" => "JAVA_25", "name" => "JAVA_25"}, {"value" => "PYTHON_3_12", "name" => "PYTHON_3_12"}, {"value" => "PYTHON_3_13", "name" => "PYTHON_3_13"}, {"value" => "PYTHON_3_14", "name" => "PYTHON_3_14"}, {"value" => "RUBY_3_3", "name" => "RUBY_3_3"}, {"value" => "DOTNET_8", "name" => "DOTNET_8"}, {"value" => "NODEJS_20_X", "name" => "NODEJS_20_X"}]})
     SbomReportFormat = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#SbomReportFormat", name: "SbomReportFormat", traits: {"smithy.api#enum" => [{"value" => "CYCLONEDX_1_4", "name" => "CYCLONEDX_1_4"}, {"value" => "SPDX_2_3", "name" => "SPDX_2_3"}]})
     ScanConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ScanConfigurationArn", name: "ScanConfigurationArn", traits: {"smithy.api#pattern" => "^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:owner/(\\d{12}|o-[a-z0-9]{10,32})/codesecurity-configuration/[a-f0-9-]{36}$"})
     ScanConfigurationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ScanConfigurationName", name: "ScanConfigurationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 60}, "smithy.api#pattern" => "^[a-zA-Z0-9-_$:.]*$"})
-    ScanMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ScanMode", name: "ScanMode", traits: {"smithy.api#enum" => [{"value" => "EC2_SSM_AGENT_BASED", "name" => "EC2_SSM_AGENT_BASED"}, {"value" => "EC2_AGENTLESS", "name" => "EC2_AGENTLESS"}]})
+    ScanMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ScanMode", name: "ScanMode", traits: {"smithy.api#enum" => [{"value" => "EC2_SSM_AGENT_BASED", "name" => "EC2_SSM_AGENT_BASED"}, {"value" => "EC2_AGENTLESS", "name" => "EC2_AGENTLESS"}, {"value" => "EC2_INSPECTOR_AGENT_BASED", "name" => "EC2_INSPECTOR_AGENT_BASED"}, {"value" => "VM_INSPECTOR_AGENT_BASED", "name" => "VM_INSPECTOR_AGENT_BASED"}]})
     ScanStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ScanStatus", name: "ScanStatus")
     ScanStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ScanStatusCode", name: "ScanStatusCode", traits: {"smithy.api#enum" => [{"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "INACTIVE", "name" => "INACTIVE"}]})
-    ScanStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ScanStatusReason", name: "ScanStatusReason", traits: {"smithy.api#enum" => [{"value" => "PENDING_INITIAL_SCAN", "name" => "PENDING_INITIAL_SCAN"}, {"value" => "ACCESS_DENIED", "name" => "ACCESS_DENIED"}, {"value" => "INTERNAL_ERROR", "name" => "INTERNAL_ERROR"}, {"value" => "UNMANAGED_EC2_INSTANCE", "name" => "UNMANAGED_EC2_INSTANCE"}, {"value" => "UNSUPPORTED_OS", "name" => "UNSUPPORTED_OS"}, {"value" => "SCAN_ELIGIBILITY_EXPIRED", "name" => "SCAN_ELIGIBILITY_EXPIRED"}, {"value" => "RESOURCE_TERMINATED", "name" => "RESOURCE_TERMINATED"}, {"value" => "SUCCESSFUL", "name" => "SUCCESSFUL"}, {"value" => "NO_RESOURCES_FOUND", "name" => "NO_RESOURCES_FOUND"}, {"value" => "IMAGE_SIZE_EXCEEDED", "name" => "IMAGE_SIZE_EXCEEDED"}, {"value" => "SCAN_FREQUENCY_MANUAL", "name" => "SCAN_FREQUENCY_MANUAL"}, {"value" => "SCAN_FREQUENCY_SCAN_ON_PUSH", "name" => "SCAN_FREQUENCY_SCAN_ON_PUSH"}, {"value" => "EC2_INSTANCE_STOPPED", "name" => "EC2_INSTANCE_STOPPED"}, {"value" => "PENDING_DISABLE", "name" => "PENDING_DISABLE"}, {"value" => "NO_INVENTORY", "name" => "NO_INVENTORY"}, {"value" => "STALE_INVENTORY", "name" => "STALE_INVENTORY"}, {"value" => "EXCLUDED_BY_TAG", "name" => "EXCLUDED_BY_TAG"}, {"value" => "UNSUPPORTED_RUNTIME", "name" => "UNSUPPORTED_RUNTIME"}, {"value" => "UNSUPPORTED_MEDIA_TYPE", "name" => "UNSUPPORTED_MEDIA_TYPE"}, {"value" => "UNSUPPORTED_CONFIG_FILE", "name" => "UNSUPPORTED_CONFIG_FILE"}, {"value" => "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "name" => "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED"}, {"value" => "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "name" => "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"}, {"value" => "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "name" => "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"}, {"value" => "DEEP_INSPECTION_NO_INVENTORY", "name" => "DEEP_INSPECTION_NO_INVENTORY"}, {"value" => "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "name" => "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED"}, {"value" => "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "name" => "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED"}, {"value" => "PENDING_REVIVAL_SCAN", "name" => "PENDING_REVIVAL_SCAN"}, {"value" => "INTEGRATION_CONNECTION_LOST", "name" => "INTEGRATION_CONNECTION_LOST"}, {"value" => "ACCESS_DENIED_TO_ENCRYPTION_KEY", "name" => "ACCESS_DENIED_TO_ENCRYPTION_KEY"}, {"value" => "UNSUPPORTED_LANGUAGE", "name" => "UNSUPPORTED_LANGUAGE"}, {"value" => "NO_SCAN_CONFIGURATION_ASSOCIATED", "name" => "NO_SCAN_CONFIGURATION_ASSOCIATED"}, {"value" => "SCAN_IN_PROGRESS", "name" => "SCAN_IN_PROGRESS"}]})
+    ScanStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ScanStatusReason", name: "ScanStatusReason", traits: {"smithy.api#enum" => [{"value" => "PENDING_INITIAL_SCAN", "name" => "PENDING_INITIAL_SCAN"}, {"value" => "ACCESS_DENIED", "name" => "ACCESS_DENIED"}, {"value" => "INTERNAL_ERROR", "name" => "INTERNAL_ERROR"}, {"value" => "UNMANAGED_EC2_INSTANCE", "name" => "UNMANAGED_EC2_INSTANCE"}, {"value" => "UNSUPPORTED_OS", "name" => "UNSUPPORTED_OS"}, {"value" => "SCAN_ELIGIBILITY_EXPIRED", "name" => "SCAN_ELIGIBILITY_EXPIRED"}, {"value" => "RESOURCE_TERMINATED", "name" => "RESOURCE_TERMINATED"}, {"value" => "SUCCESSFUL", "name" => "SUCCESSFUL"}, {"value" => "NO_RESOURCES_FOUND", "name" => "NO_RESOURCES_FOUND"}, {"value" => "IMAGE_SIZE_EXCEEDED", "name" => "IMAGE_SIZE_EXCEEDED"}, {"value" => "SCAN_FREQUENCY_MANUAL", "name" => "SCAN_FREQUENCY_MANUAL"}, {"value" => "SCAN_FREQUENCY_SCAN_ON_PUSH", "name" => "SCAN_FREQUENCY_SCAN_ON_PUSH"}, {"value" => "EC2_INSTANCE_STOPPED", "name" => "EC2_INSTANCE_STOPPED"}, {"value" => "PENDING_DISABLE", "name" => "PENDING_DISABLE"}, {"value" => "NO_INVENTORY", "name" => "NO_INVENTORY"}, {"value" => "STALE_INVENTORY", "name" => "STALE_INVENTORY"}, {"value" => "EXCLUDED_BY_TAG", "name" => "EXCLUDED_BY_TAG"}, {"value" => "UNSUPPORTED_RUNTIME", "name" => "UNSUPPORTED_RUNTIME"}, {"value" => "UNSUPPORTED_MEDIA_TYPE", "name" => "UNSUPPORTED_MEDIA_TYPE"}, {"value" => "UNSUPPORTED_CONFIG_FILE", "name" => "UNSUPPORTED_CONFIG_FILE"}, {"value" => "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "name" => "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED"}, {"value" => "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "name" => "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"}, {"value" => "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "name" => "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"}, {"value" => "DEEP_INSPECTION_NO_INVENTORY", "name" => "DEEP_INSPECTION_NO_INVENTORY"}, {"value" => "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "name" => "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED"}, {"value" => "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "name" => "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED"}, {"value" => "PENDING_REVIVAL_SCAN", "name" => "PENDING_REVIVAL_SCAN"}, {"value" => "INTEGRATION_CONNECTION_LOST", "name" => "INTEGRATION_CONNECTION_LOST"}, {"value" => "ACCESS_DENIED_TO_ENCRYPTION_KEY", "name" => "ACCESS_DENIED_TO_ENCRYPTION_KEY"}, {"value" => "UNSUPPORTED_LANGUAGE", "name" => "UNSUPPORTED_LANGUAGE"}, {"value" => "NO_SCAN_CONFIGURATION_ASSOCIATED", "name" => "NO_SCAN_CONFIGURATION_ASSOCIATED"}, {"value" => "SCAN_IN_PROGRESS", "name" => "SCAN_IN_PROGRESS"}, {"value" => "IMAGE_ARCHIVED", "name" => "IMAGE_ARCHIVED"}, {"value" => "UNSUPPORTED_CODE_ARTIFACTS", "name" => "UNSUPPORTED_CODE_ARTIFACTS"}, {"value" => "RESOURCE_UNMANAGED", "name" => "RESOURCE_UNMANAGED"}, {"value" => "RESOURCE_STOPPED", "name" => "RESOURCE_STOPPED"}]})
     ScanType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ScanType", name: "ScanType", traits: {"smithy.api#enum" => [{"value" => "NETWORK", "name" => "NETWORK"}, {"value" => "PACKAGE", "name" => "PACKAGE"}, {"value" => "CODE", "name" => "CODE"}]})
     Schedule = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.inspector2#Schedule", name: "Schedule")
+    ScopeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ScopeConfiguration", name: "ScopeConfiguration")
+    ScopeConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ScopeConfigurationInput", name: "ScopeConfigurationInput")
     ScopeSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ScopeSettings", name: "ScopeSettings")
+    ScopeState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ScopeState", name: "ScopeState")
+    ScopeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.inspector2#ScopeType", name: "ScopeType")
+    ScopeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ScopeValue", name: "ScopeValue", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    ScopeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ScopeValueList", name: "ScopeValueList", traits: {"smithy.api#length" => {"max" => 100}})
     SearchVulnerabilitiesFilterCriteria = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#SearchVulnerabilitiesFilterCriteria", name: "SearchVulnerabilitiesFilterCriteria")
     SearchVulnerabilitiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#SearchVulnerabilitiesRequest", name: "SearchVulnerabilitiesRequest")
     SearchVulnerabilitiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#SearchVulnerabilitiesResponse", name: "SearchVulnerabilitiesResponse")
@@ -588,6 +663,13 @@ module Aws::Inspector2
     SendCisSessionHealthResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#SendCisSessionHealthResponse", name: "SendCisSessionHealthResponse")
     SendCisSessionTelemetryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#SendCisSessionTelemetryRequest", name: "SendCisSessionTelemetryRequest")
     SendCisSessionTelemetryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#SendCisSessionTelemetryResponse", name: "SendCisSessionTelemetryResponse")
+    ServerlessFunction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ServerlessFunction", name: "ServerlessFunction")
+    ServerlessFunctionAggregation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ServerlessFunctionAggregation", name: "ServerlessFunctionAggregation")
+    ServerlessFunctionAggregationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ServerlessFunctionAggregationResponse", name: "ServerlessFunctionAggregationResponse")
+    ServerlessFunctionLayerList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ServerlessFunctionLayerList", name: "ServerlessFunctionLayerList")
+    ServerlessFunctionLayerUrn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ServerlessFunctionLayerUrn", name: "ServerlessFunctionLayerUrn", traits: {"smithy.api#pattern" => "^arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+$"})
+    ServerlessFunctionMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ServerlessFunctionMetadata", name: "ServerlessFunctionMetadata")
+    ServerlessFunctionSortBy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#ServerlessFunctionSortBy", name: "ServerlessFunctionSortBy", traits: {"smithy.api#enum" => [{"value" => "CRITICAL", "name" => "CRITICAL"}, {"value" => "HIGH", "name" => "HIGH"}, {"value" => "ALL", "name" => "ALL"}]})
     Service = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Service", name: "Service", traits: {"smithy.api#enum" => [{"value" => "EC2", "name" => "EC2"}, {"value" => "ECR", "name" => "ECR"}, {"value" => "LAMBDA", "name" => "LAMBDA"}]})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     Severity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Severity", name: "Severity", traits: {"smithy.api#enum" => [{"value" => "INFORMATIONAL", "name" => "INFORMATIONAL"}, {"value" => "LOW", "name" => "LOW"}, {"value" => "MEDIUM", "name" => "MEDIUM"}, {"value" => "HIGH", "name" => "HIGH"}, {"value" => "CRITICAL", "name" => "CRITICAL"}, {"value" => "UNTRIAGED", "name" => "UNTRIAGED"}]})
@@ -662,8 +744,13 @@ module Aws::Inspector2
     UpdateCodeSecurityIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateCodeSecurityIntegrationResponse", name: "UpdateCodeSecurityIntegrationResponse")
     UpdateCodeSecurityScanConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateCodeSecurityScanConfigurationRequest", name: "UpdateCodeSecurityScanConfigurationRequest")
     UpdateCodeSecurityScanConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateCodeSecurityScanConfigurationResponse", name: "UpdateCodeSecurityScanConfigurationResponse")
+    UpdateConfigurationInheritance = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateConfigurationInheritance", name: "UpdateConfigurationInheritance")
     UpdateConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateConfigurationInput", name: "UpdateConfigurationInput")
     UpdateConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateConfigurationOutput", name: "UpdateConfigurationOutput")
+    UpdateConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateConnectorRequest", name: "UpdateConnectorRequest")
+    UpdateConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateConnectorResponse", name: "UpdateConnectorResponse")
+    UpdateConnectorScanConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateConnectorScanConfigurationRequest", name: "UpdateConnectorScanConfigurationRequest")
+    UpdateConnectorScanConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateConnectorScanConfigurationResponse", name: "UpdateConnectorScanConfigurationResponse")
     UpdateEc2DeepInspectionConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfigurationRequest", name: "UpdateEc2DeepInspectionConfigurationRequest")
     UpdateEc2DeepInspectionConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfigurationResponse", name: "UpdateEc2DeepInspectionConfigurationResponse")
     UpdateEncryptionKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UpdateEncryptionKeyRequest", name: "UpdateEncryptionKeyRequest")
@@ -683,8 +770,10 @@ module Aws::Inspector2
     UsageList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#UsageList", name: "UsageList")
     UsageTotal = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#UsageTotal", name: "UsageTotal")
     UsageTotalList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#UsageTotalList", name: "UsageTotalList")
-    UsageType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#UsageType", name: "UsageType", traits: {"smithy.api#enum" => [{"name" => "EC2_INSTANCE_HOURS", "value" => "EC2_INSTANCE_HOURS"}, {"name" => "ECR_INITIAL_SCAN", "value" => "ECR_INITIAL_SCAN"}, {"name" => "ECR_RESCAN", "value" => "ECR_RESCAN"}, {"name" => "LAMBDA_FUNCTION_HOURS", "value" => "LAMBDA_FUNCTION_HOURS"}, {"name" => "LAMBDA_FUNCTION_CODE_HOURS", "value" => "LAMBDA_FUNCTION_CODE_HOURS"}, {"name" => "CODE_REPOSITORY_SAST", "value" => "CODE_REPOSITORY_SAST"}, {"name" => "CODE_REPOSITORY_IAC", "value" => "CODE_REPOSITORY_IAC"}, {"name" => "CODE_REPOSITORY_SCA", "value" => "CODE_REPOSITORY_SCA"}, {"name" => "EC2_AGENTLESS_INSTANCE_HOURS", "value" => "EC2_AGENTLESS_INSTANCE_HOURS"}]})
+    UsageType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#UsageType", name: "UsageType", traits: {"smithy.api#enum" => [{"name" => "EC2_INSTANCE_HOURS", "value" => "EC2_INSTANCE_HOURS"}, {"name" => "ECR_INITIAL_SCAN", "value" => "ECR_INITIAL_SCAN"}, {"name" => "ECR_RESCAN", "value" => "ECR_RESCAN"}, {"name" => "LAMBDA_FUNCTION_HOURS", "value" => "LAMBDA_FUNCTION_HOURS"}, {"name" => "LAMBDA_FUNCTION_CODE_HOURS", "value" => "LAMBDA_FUNCTION_CODE_HOURS"}, {"name" => "CODE_REPOSITORY_SAST", "value" => "CODE_REPOSITORY_SAST"}, {"name" => "CODE_REPOSITORY_IAC", "value" => "CODE_REPOSITORY_IAC"}, {"name" => "CODE_REPOSITORY_SCA", "value" => "CODE_REPOSITORY_SCA"}, {"name" => "EC2_AGENTLESS_INSTANCE_HOURS", "value" => "EC2_AGENTLESS_INSTANCE_HOURS"}, {"name" => "AZURE_CONTAINER_IMAGE_INITIAL_SCAN", "value" => "AZURE_CONTAINER_IMAGE_INITIAL_SCAN"}, {"name" => "AZURE_CONTAINER_IMAGE_RESCAN", "value" => "AZURE_CONTAINER_IMAGE_RESCAN"}, {"name" => "AZURE_VM_AGENT_BASED_INSTANCE_HOURS", "value" => "AZURE_VM_AGENT_BASED_INSTANCE_HOURS"}, {"name" => "AZURE_SERVERLESS_FUNCTION_HOURS", "value" => "AZURE_SERVERLESS_FUNCTION_HOURS"}]})
     UsageValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.inspector2#UsageValue", name: "UsageValue", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
+    VMScannerState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#VMScannerState", name: "VMScannerState")
+    VMScannerStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#VMScannerStatus", name: "VMScannerStatus", traits: {"smithy.api#enum" => [{"value" => "SUCCESS", "name" => "SUCCESS"}, {"value" => "PENDING", "name" => "PENDING"}, {"value" => "FAILED", "name" => "FAILED"}]})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFields = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#ValidationExceptionFields", name: "ValidationExceptionFields")
@@ -693,7 +782,13 @@ module Aws::Inspector2
     VendorCreatedAt = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.inspector2#VendorCreatedAt", name: "VendorCreatedAt")
     VendorSeverity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#VendorSeverity", name: "VendorSeverity", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     VendorUpdatedAt = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.inspector2#VendorUpdatedAt", name: "VendorUpdatedAt")
-    Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Version", name: "Version", traits: {"smithy.api#pattern" => "^\\$LATEST|[0-9]+$"})
+    Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#Version", name: "Version", traits: {"smithy.api#pattern" => "^(\\$LATEST|[0-9]+)$"})
+    Vm = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#Vm", name: "Vm")
+    VmInstanceAggregation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#VmInstanceAggregation", name: "VmInstanceAggregation")
+    VmInstanceAggregationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#VmInstanceAggregationResponse", name: "VmInstanceAggregationResponse")
+    VmInstanceMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.inspector2#VmInstanceMetadata", name: "VmInstanceMetadata")
+    VmInstanceSortBy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#VmInstanceSortBy", name: "VmInstanceSortBy", traits: {"smithy.api#enum" => [{"value" => "CRITICAL", "name" => "CRITICAL"}, {"value" => "HIGH", "name" => "HIGH"}, {"value" => "ALL", "name" => "ALL"}, {"value" => "NETWORK_FINDINGS", "name" => "NETWORK_FINDINGS"}]})
+    VmPlatform = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#VmPlatform", name: "VmPlatform", traits: {"smithy.api#enum" => [{"value" => "WINDOWS", "name" => "WINDOWS"}, {"value" => "LINUX", "name" => "LINUX"}, {"value" => "UNKNOWN", "name" => "UNKNOWN"}]})
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#VpcId", name: "VpcId", traits: {"smithy.api#pattern" => "^vpc-([a-z0-9]{8}|[a-z0-9]{17}|\\*)$"})
     VulnId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.inspector2#VulnId", name: "VulnId", traits: {"smithy.api#pattern" => "^CVE-[12][0-9]{3}-[0-9]{1,10}$"})
     VulnIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.inspector2#VulnIdList", name: "VulnIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
@@ -747,6 +842,9 @@ module Aws::Inspector2
     AggregationRequest.add_member(:lambda_layer_aggregation, Types::AggregationRequest::LambdaLayerAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaLayerAggregation, name: "lambdaLayerAggregation"))
     AggregationRequest.add_member(:lambda_function_aggregation, Types::AggregationRequest::LambdaFunctionAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionAggregation, name: "lambdaFunctionAggregation"))
     AggregationRequest.add_member(:code_repository_aggregation, Types::AggregationRequest::CodeRepositoryAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeRepositoryAggregation, name: "codeRepositoryAggregation"))
+    AggregationRequest.add_member(:vm_instance_aggregation, Types::AggregationRequest::VmInstanceAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: VmInstanceAggregation, name: "vmInstanceAggregation"))
+    AggregationRequest.add_member(:container_image_aggregation, Types::AggregationRequest::ContainerImageAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImageAggregation, name: "containerImageAggregation"))
+    AggregationRequest.add_member(:serverless_function_aggregation, Types::AggregationRequest::ServerlessFunctionAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessFunctionAggregation, name: "serverlessFunctionAggregation"))
     AggregationRequest.add_member(:unknown, Types::AggregationRequest::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AggregationRequest.type = Types::AggregationRequest
     AggregationResponse.add_member(:account_aggregation, Types::AggregationResponse::AccountAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAggregationResponse, name: "accountAggregation"))
@@ -761,6 +859,9 @@ module Aws::Inspector2
     AggregationResponse.add_member(:lambda_layer_aggregation, Types::AggregationResponse::LambdaLayerAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaLayerAggregationResponse, name: "lambdaLayerAggregation"))
     AggregationResponse.add_member(:lambda_function_aggregation, Types::AggregationResponse::LambdaFunctionAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionAggregationResponse, name: "lambdaFunctionAggregation"))
     AggregationResponse.add_member(:code_repository_aggregation, Types::AggregationResponse::CodeRepositoryAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeRepositoryAggregationResponse, name: "codeRepositoryAggregation"))
+    AggregationResponse.add_member(:vm_instance_aggregation, Types::AggregationResponse::VmInstanceAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: VmInstanceAggregationResponse, name: "vmInstanceAggregation"))
+    AggregationResponse.add_member(:container_image_aggregation, Types::AggregationResponse::ContainerImageAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImageAggregationResponse, name: "containerImageAggregation"))
+    AggregationResponse.add_member(:serverless_function_aggregation, Types::AggregationResponse::ServerlessFunctionAggregation, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessFunctionAggregationResponse, name: "serverlessFunctionAggregation"))
     AggregationResponse.add_member(:unknown, Types::AggregationResponse::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AggregationResponse.type = Types::AggregationResponse
     AggregationResponseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationResponse, name: "member"))
@@ -770,6 +871,11 @@ module Aws::Inspector2
     AmiAggregation.type = Types::AmiAggregation
     AmiAggregationResponse.add_member(:ami, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiId, name: "ami", traits: {"smithy.api#required" => {}}))
     AmiAggregationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
+    AmiAggregationResponse.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: Provider, name: "cloudProvider"))
+    AmiAggregationResponse.add_member(:cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderPartition, name: "cloudPartition"))
+    AmiAggregationResponse.add_member(:cloud_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderRegion, name: "cloudRegion"))
+    AmiAggregationResponse.add_member(:cloud_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderOrgId, name: "cloudOrgId"))
+    AmiAggregationResponse.add_member(:cloud_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderAccountId, name: "cloudAccountId"))
     AmiAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     AmiAggregationResponse.add_member(:affected_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "affectedInstances"))
     AmiAggregationResponse.type = Types::AmiAggregationResponse
@@ -799,6 +905,12 @@ module Aws::Inspector2
     AutoEnable.add_member(:lambda_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "lambdaCode"))
     AutoEnable.add_member(:code_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "codeRepository"))
     AutoEnable.type = Types::AutoEnable
+    AwsConfigConnectorArnComparison.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
+    AwsConfigConnectorArnFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArnComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
+    AwsConfigConnectorArnFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArn, name: "value", traits: {"smithy.api#required" => {}}))
+    AwsConfigConnectorArnFilter.type = Types::AwsConfigConnectorArnFilter
+    AwsConfigConnectorArnFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArnFilter, name: "member"))
+    AwsConfigConnectorArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArn, name: "member"))
     AwsEc2InstanceDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "type"))
     AwsEc2InstanceDetails.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "imageId"))
     AwsEc2InstanceDetails.add_member(:ip_v4_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: IpV4AddressList, name: "ipV4Addresses"))
@@ -862,6 +974,24 @@ module Aws::Inspector2
     AwsLambdaFunctionDetails.add_member(:architectures, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchitectureList, name: "architectures"))
     AwsLambdaFunctionDetails.add_member(:last_modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastModifiedAt"))
     AwsLambdaFunctionDetails.type = Types::AwsLambdaFunctionDetails
+    AzureProviderDetailCreate.add_member(:aws_config_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArn, name: "awsConfigConnectorArn", traits: {"smithy.api#required" => {}}))
+    AzureProviderDetailCreate.add_member(:scope_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureScopeConfigurationInput, name: "scopeConfiguration", traits: {"smithy.api#required" => {}}))
+    AzureProviderDetailCreate.add_member(:azure_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureRegionList, name: "azureRegions", traits: {"smithy.api#required" => {}}))
+    AzureProviderDetailCreate.add_member(:auto_install_vm_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoInstallVMScanner", traits: {"smithy.api#default" => true}))
+    AzureProviderDetailCreate.type = Types::AzureProviderDetailCreate
+    AzureProviderDetailUpdate.add_member(:azure_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureRegionList, name: "azureRegions"))
+    AzureProviderDetailUpdate.add_member(:scope_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureScopeConfigurationInput, name: "scopeConfiguration"))
+    AzureProviderDetailUpdate.add_member(:auto_install_vm_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoInstallVMScanner"))
+    AzureProviderDetailUpdate.type = Types::AzureProviderDetailUpdate
+    AzureRegionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureRegion, name: "member"))
+    AzureScopeConfiguration.add_member(:vm_scanning, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeConfiguration, name: "vmScanning"))
+    AzureScopeConfiguration.add_member(:container_image_scanning, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeConfiguration, name: "containerImageScanning"))
+    AzureScopeConfiguration.add_member(:serverless_scanning, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeConfiguration, name: "serverlessScanning"))
+    AzureScopeConfiguration.type = Types::AzureScopeConfiguration
+    AzureScopeConfigurationInput.add_member(:vm_scanning, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeConfigurationInput, name: "vmScanning"))
+    AzureScopeConfigurationInput.add_member(:container_image_scanning, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeConfigurationInput, name: "containerImageScanning"))
+    AzureScopeConfigurationInput.add_member(:serverless_scanning, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeConfigurationInput, name: "serverlessScanning"))
+    AzureScopeConfigurationInput.type = Types::AzureScopeConfigurationInput
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     BadRequestException.type = Types::BadRequestException
     BatchAssociateCodeSecurityScanConfigurationRequest.add_member(:associate_configuration_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateConfigurationRequestList, name: "associateConfigurationRequests", traits: {"smithy.api#required" => {}}))
@@ -1099,13 +1229,15 @@ module Aws::Inspector2
     CisaData.add_member(:date_due, ::Smithy::Schema::Shapes::MemberShape.new(target: CisaDateDue, name: "dateDue"))
     CisaData.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: CisaAction, name: "action"))
     CisaData.type = Types::CisaData
+    CloudSecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    CloudSubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     ClusterDetails.add_member(:last_in_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastInUse", traits: {"smithy.api#required" => {}}))
     ClusterDetails.add_member(:running_unit_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "runningUnitCount"))
     ClusterDetails.add_member(:stopped_unit_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "stoppedUnitCount"))
     ClusterDetails.add_member(:cluster_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterMetadata, name: "clusterMetadata", traits: {"smithy.api#required" => {}}))
     ClusterDetails.type = Types::ClusterDetails
     ClusterDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterDetails, name: "member"))
-    ClusterForImageFilterCriteria.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#pattern" => "^arn:.*:ecr:.*:\\d{12}:repository\\/(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*(\\/sha256:[a-z0-9]{64})?$", "smithy.api#required" => {}}))
+    ClusterForImageFilterCriteria.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#pattern" => "^arn:.*:ecr:.*:\\d{12}:repository\\/[a-zA-Z0-9._\\/-]+(\\/sha256:[a-z0-9]{64})?$", "smithy.api#required" => {}}))
     ClusterForImageFilterCriteria.type = Types::ClusterForImageFilterCriteria
     ClusterInformation.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clusterArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(?:-[a-z0-9-]+)?:(?:ecs|eks):[a-z0-9-]+:[0-9]{12}:cluster/[a-zA-Z0-9_-]+$", "smithy.api#required" => {}}))
     ClusterInformation.add_member(:cluster_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterDetailsList, name: "clusterDetails", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
@@ -1165,7 +1297,6 @@ module Aws::Inspector2
     CodeSecurityIntegrationSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason", traits: {"smithy.api#required" => {}}))
     CodeSecurityIntegrationSummary.add_member(:created_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdOn", traits: {"smithy.api#required" => {}}))
     CodeSecurityIntegrationSummary.add_member(:last_update_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdateOn", traits: {"smithy.api#required" => {}}))
-    CodeSecurityIntegrationSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CodeSecurityIntegrationSummary.type = Types::CodeSecurityIntegrationSummary
     CodeSecurityResource.add_member(:project_id, Types::CodeSecurityResource::ProjectId, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectId, name: "projectId"))
     CodeSecurityResource.add_member(:unknown, Types::CodeSecurityResource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -1186,7 +1317,6 @@ module Aws::Inspector2
     CodeSecurityScanConfigurationSummary.add_member(:continuous_integration_scan_supported_events, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousIntegrationScanSupportedEvents, name: "continuousIntegrationScanSupportedEvents"))
     CodeSecurityScanConfigurationSummary.add_member(:rule_set_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleSetCategories, name: "ruleSetCategories", traits: {"smithy.api#required" => {}}))
     CodeSecurityScanConfigurationSummary.add_member(:scope_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeSettings, name: "scopeSettings"))
-    CodeSecurityScanConfigurationSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CodeSecurityScanConfigurationSummary.type = Types::CodeSecurityScanConfigurationSummary
     CodeSnippetError.add_member(:finding_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "findingArn", traits: {"smithy.api#required" => {}}))
     CodeSnippetError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSnippetErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
@@ -1219,6 +1349,108 @@ module Aws::Inspector2
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
+    Connector.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "connectorArn", traits: {"smithy.api#required" => {}}))
+    Connector.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorName, name: "name"))
+    Connector.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDescription, name: "description"))
+    Connector.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorCloudProvider, name: "provider", traits: {"smithy.api#required" => {}}))
+    Connector.add_member(:enablement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatus, name: "enablementStatus"))
+    Connector.add_member(:enablement_status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "enablementStatusReason"))
+    Connector.add_member(:health, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorHealth, name: "health"))
+    Connector.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    Connector.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    Connector.add_member(:azure_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureRegionList, name: "azureRegions"))
+    Connector.add_member(:aws_config_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArn, name: "awsConfigConnectorArn"))
+    Connector.add_member(:scope_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureScopeConfiguration, name: "scopeConfiguration"))
+    Connector.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorTagMap, name: "tags"))
+    Connector.add_member(:auto_install_vm_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "autoInstallVMScanner"))
+    Connector.type = Types::Connector
+    ConnectorArnComparison.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
+    ConnectorArnFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArnComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
+    ConnectorArnFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "value", traits: {"smithy.api#required" => {}}))
+    ConnectorArnFilter.type = Types::ConnectorArnFilter
+    ConnectorArnFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArnFilter, name: "member"))
+    ConnectorArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "member"))
+    ConnectorCloudProvider.add_member(:azure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZURE", traits: {"smithy.api#enumValue" => "AZURE"}))
+    ConnectorContainerImageScanConfiguration.add_member(:push_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImageRescanDuration, name: "pushDuration"))
+    ConnectorContainerImageScanConfiguration.add_member(:pull_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImagePullDateRescanDuration, name: "pullDuration"))
+    ConnectorContainerImageScanConfiguration.type = Types::ConnectorContainerImageScanConfiguration
+    ConnectorFilterCriteria.add_member(:connector_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArnFilterList, name: "connectorArns"))
+    ConnectorFilterCriteria.add_member(:accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "accounts"))
+    ConnectorFilterCriteria.add_member(:aws_config_connector_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArnFilterList, name: "awsConfigConnectorArns"))
+    ConnectorFilterCriteria.add_member(:connector_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorTypeFilterList, name: "connectorType"))
+    ConnectorFilterCriteria.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderFilterList, name: "provider"))
+    ConnectorFilterCriteria.type = Types::ConnectorFilterCriteria
+    ConnectorHealth.add_member(:connector_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorHealthStatus, name: "connectorStatus", traits: {"smithy.api#required" => {}}))
+    ConnectorHealth.add_member(:last_checked_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastCheckedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    ConnectorHealth.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
+    ConnectorHealth.type = Types::ConnectorHealth
+    ConnectorHealthStatus.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTED", traits: {"smithy.api#enumValue" => "CONNECTED"}))
+    ConnectorHealthStatus.add_member(:degraded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEGRADED", traits: {"smithy.api#enumValue" => "DEGRADED"}))
+    ConnectorHealthStatus.add_member(:failed_to_connect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_CONNECT", traits: {"smithy.api#enumValue" => "FAILED_TO_CONNECT"}))
+    ConnectorHealthStatus.add_member(:pending_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_AUTHORIZATION", traits: {"smithy.api#enumValue" => "PENDING_AUTHORIZATION"}))
+    ConnectorHealthStatus.add_member(:pending_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CONFIGURATION", traits: {"smithy.api#enumValue" => "PENDING_CONFIGURATION"}))
+    ConnectorHealthStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    ConnectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Connector, name: "member"))
+    ConnectorScanConfiguration.add_member(:container_image_scanning, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorContainerImageScanConfiguration, name: "containerImageScanning"))
+    ConnectorScanConfiguration.type = Types::ConnectorScanConfiguration
+    ConnectorScanConfigurationItem.add_member(:aws_config_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArn, name: "awsConfigConnectorArn", traits: {"smithy.api#required" => {}}))
+    ConnectorScanConfigurationItem.add_member(:connector_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArnList, name: "connectorArns", traits: {"smithy.api#required" => {}}))
+    ConnectorScanConfigurationItem.add_member(:scan_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorScanConfiguration, name: "scanConfiguration", traits: {"smithy.api#required" => {}}))
+    ConnectorScanConfigurationItem.type = Types::ConnectorScanConfigurationItem
+    ConnectorScanConfigurationItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorScanConfigurationItem, name: "member"))
+    ConnectorTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorTagKey, name: "key"))
+    ConnectorTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorTagValue, name: "value"))
+    ConnectorType.add_member(:customer_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_MANAGED", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED"}))
+    ConnectorType.add_member(:service_linked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_LINKED", traits: {"smithy.api#enumValue" => "SERVICE_LINKED"}))
+    ConnectorTypeComparison.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
+    ConnectorTypeFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorTypeComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
+    ConnectorTypeFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, name: "value", traits: {"smithy.api#required" => {}}))
+    ConnectorTypeFilter.type = Types::ConnectorTypeFilter
+    ConnectorTypeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorTypeFilter, name: "member"))
+    ContainerImageAggregation.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "resourceIds"))
+    ContainerImageAggregation.add_member(:image_digests, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "imageDigests"))
+    ContainerImageAggregation.add_member(:repositories, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "repositories"))
+    ContainerImageAggregation.add_member(:registries, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "registries"))
+    ContainerImageAggregation.add_member(:architectures, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "architectures"))
+    ContainerImageAggregation.add_member(:image_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "imageTags"))
+    ContainerImageAggregation.add_member(:cloud_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudProviders"))
+    ContainerImageAggregation.add_member(:cloud_partitions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudPartitions"))
+    ContainerImageAggregation.add_member(:cloud_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudRegions"))
+    ContainerImageAggregation.add_member(:cloud_org_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudOrgIds"))
+    ContainerImageAggregation.add_member(:cloud_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudAccountIds"))
+    ContainerImageAggregation.add_member(:last_in_use_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilterList, name: "lastInUseAt"))
+    ContainerImageAggregation.add_member(:in_use_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilterList, name: "inUseCount"))
+    ContainerImageAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
+    ContainerImageAggregation.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImageSortBy, name: "sortBy"))
+    ContainerImageAggregation.type = Types::ContainerImageAggregation
+    ContainerImageAggregationResponse.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ContainerImageAggregationResponse.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: Provider, name: "cloudProvider"))
+    ContainerImageAggregationResponse.add_member(:cloud_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderAccountId, name: "cloudAccountId"))
+    ContainerImageAggregationResponse.add_member(:cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderPartition, name: "cloudPartition"))
+    ContainerImageAggregationResponse.add_member(:cloud_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderRegion, name: "cloudRegion"))
+    ContainerImageAggregationResponse.add_member(:cloud_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderOrgId, name: "cloudOrgId"))
+    ContainerImageAggregationResponse.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "imageDigest"))
+    ContainerImageAggregationResponse.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "repository"))
+    ContainerImageAggregationResponse.add_member(:registry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "registry"))
+    ContainerImageAggregationResponse.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "architecture"))
+    ContainerImageAggregationResponse.add_member(:image_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "imageTags"))
+    ContainerImageAggregationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "accountId"))
+    ContainerImageAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
+    ContainerImageAggregationResponse.add_member(:last_in_use_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "lastInUseAt"))
+    ContainerImageAggregationResponse.add_member(:in_use_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "inUseCount"))
+    ContainerImageAggregationResponse.add_member(:exploit_available_active_findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "exploitAvailableActiveFindingsCount"))
+    ContainerImageAggregationResponse.add_member(:fix_available_active_findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "fixAvailableActiveFindingsCount"))
+    ContainerImageAggregationResponse.type = Types::ContainerImageAggregationResponse
+    ContainerImageMetadata.add_member(:image_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "imageTags"))
+    ContainerImageMetadata.add_member(:image_pulled_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "imagePulledAt"))
+    ContainerImageMetadata.add_member(:last_in_use_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "lastInUseAt"))
+    ContainerImageMetadata.add_member(:in_use_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "inUseCount"))
+    ContainerImageMetadata.type = Types::ContainerImageMetadata
+    ContainerRegistryMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
+    ContainerRegistryMetadata.type = Types::ContainerRegistryMetadata
+    ContainerRepositoryMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
+    ContainerRepositoryMetadata.add_member(:scan_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "scanFrequency"))
+    ContainerRepositoryMetadata.type = Types::ContainerRepositoryMetadata
     ContinuousIntegrationScanConfiguration.add_member(:supported_events, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousIntegrationScanSupportedEvents, name: "supportedEvents", traits: {"smithy.api#required" => {}}))
     ContinuousIntegrationScanConfiguration.type = Types::ContinuousIntegrationScanConfiguration
     ContinuousIntegrationScanEvent.add_member(:pull_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_REQUEST", traits: {"smithy.api#enumValue" => "PULL_REQUEST"}))
@@ -1253,6 +1485,17 @@ module Aws::Inspector2
     CoverageFilterCriteria.add_member(:code_repository_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "codeRepositoryProviderType"))
     CoverageFilterCriteria.add_member(:code_repository_provider_type_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "codeRepositoryProviderTypeVisibility"))
     CoverageFilterCriteria.add_member(:last_scanned_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "lastScannedCommitId"))
+    CoverageFilterCriteria.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "cloudProvider"))
+    CoverageFilterCriteria.add_member(:cloud_provider_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "cloudProviderAccountId"))
+    CoverageFilterCriteria.add_member(:cloud_provider_region, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "cloudProviderRegion"))
+    CoverageFilterCriteria.add_member(:cloud_vm_instance_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageMapFilterList, name: "cloudVmInstanceTags"))
+    CoverageFilterCriteria.add_member(:cloud_container_image_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "cloudContainerImageTags"))
+    CoverageFilterCriteria.add_member(:cloud_container_repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "cloudContainerRepositoryName"))
+    CoverageFilterCriteria.add_member(:cloud_container_registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "cloudContainerRegistryName"))
+    CoverageFilterCriteria.add_member(:cloud_serverless_function_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "cloudServerlessFunctionName"))
+    CoverageFilterCriteria.add_member(:cloud_serverless_function_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "cloudServerlessFunctionRuntime"))
+    CoverageFilterCriteria.add_member(:cloud_serverless_function_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageMapFilterList, name: "cloudServerlessFunctionTags"))
+    CoverageFilterCriteria.add_member(:cloud_provider_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageStringFilterList, name: "cloudProviderOrgId"))
     CoverageFilterCriteria.type = Types::CoverageFilterCriteria
     CoverageMapFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageMapComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
     CoverageMapFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key", traits: {"smithy.api#required" => {}}))
@@ -1275,6 +1518,11 @@ module Aws::Inspector2
     CoveredResource.add_member(:resource_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceScanMetadata, name: "resourceMetadata"))
     CoveredResource.add_member(:last_scanned_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "lastScannedAt"))
     CoveredResource.add_member(:scan_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanMode, name: "scanMode"))
+    CoveredResource.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: Provider, name: "provider"))
+    CoveredResource.add_member(:provider_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderAccountId, name: "providerAccountId"))
+    CoveredResource.add_member(:provider_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderOrgId, name: "providerOrgId"))
+    CoveredResource.add_member(:provider_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderRegion, name: "providerRegion"))
+    CoveredResource.add_member(:provider_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderPartition, name: "providerPartition"))
     CoveredResource.type = Types::CoveredResource
     CoveredResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoveredResource, name: "member"))
     CreateCisScanConfigurationRequest.add_member(:scan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CisScanName, name: "scanName", traits: {"smithy.api#required" => {}}))
@@ -1305,6 +1553,15 @@ module Aws::Inspector2
     CreateCodeSecurityScanConfigurationRequest.type = Types::CreateCodeSecurityScanConfigurationRequest
     CreateCodeSecurityScanConfigurationResponse.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationArn, name: "scanConfigurationArn", traits: {"smithy.api#required" => {}}))
     CreateCodeSecurityScanConfigurationResponse.type = Types::CreateCodeSecurityScanConfigurationResponse
+    CreateConnectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateConnectorRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorCloudProvider, name: "provider", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDescription, name: "description"))
+    CreateConnectorRequest.add_member(:provider_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetailCreate, name: "providerDetail", traits: {"smithy.api#required" => {}}))
+    CreateConnectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorTagMap, name: "tags"))
+    CreateConnectorRequest.type = Types::CreateConnectorRequest
+    CreateConnectorResponse.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "connectorArn", traits: {"smithy.api#required" => {}}))
+    CreateConnectorResponse.type = Types::CreateConnectorResponse
     CreateFilterInput.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterAction, name: "action", traits: {"smithy.api#required" => {}}))
     CreateFilterInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterDescription, name: "description"))
     CreateFilterInput.add_member(:filter_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCriteria, name: "filterCriteria", traits: {"smithy.api#required" => {}}))
@@ -1393,6 +1650,9 @@ module Aws::Inspector2
     DeleteCodeSecurityScanConfigurationRequest.type = Types::DeleteCodeSecurityScanConfigurationRequest
     DeleteCodeSecurityScanConfigurationResponse.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationArn, name: "scanConfigurationArn"))
     DeleteCodeSecurityScanConfigurationResponse.type = Types::DeleteCodeSecurityScanConfigurationResponse
+    DeleteConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "connectorArn", traits: {"smithy.api#required" => {}}))
+    DeleteConnectorRequest.type = Types::DeleteConnectorRequest
+    DeleteConnectorResponse.type = Types::DeleteConnectorResponse
     DeleteFilterInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterArn, name: "arn", traits: {"smithy.api#required" => {}}))
     DeleteFilterInput.type = Types::DeleteFilterInput
     DeleteFilterOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -1427,8 +1687,10 @@ module Aws::Inspector2
     DisassociateMemberOutput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     DisassociateMemberOutput.type = Types::DisassociateMemberOutput
     Ec2Configuration.add_member(:scan_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2ScanMode, name: "scanMode", traits: {"smithy.api#required" => {}}))
+    Ec2Configuration.add_member(:activate_vm_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "activateVMScanner"))
     Ec2Configuration.type = Types::Ec2Configuration
     Ec2ConfigurationState.add_member(:scan_mode_state, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2ScanModeState, name: "scanModeState"))
+    Ec2ConfigurationState.add_member(:vm_scanner_state, ::Smithy::Schema::Shapes::MemberShape.new(target: VMScannerState, name: "vmScannerState"))
     Ec2ConfigurationState.type = Types::Ec2ConfigurationState
     Ec2InstanceAggregation.add_member(:amis, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "amis"))
     Ec2InstanceAggregation.add_member(:operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "operatingSystems"))
@@ -1485,6 +1747,14 @@ module Aws::Inspector2
     EnableOutput.add_member(:failed_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedAccountList, name: "failedAccounts"))
     EnableOutput.type = Types::EnableOutput
     EnableResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceScanType, name: "member"))
+    EnablementStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    EnablementStatus.add_member(:pending_enablement, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_ENABLEMENT", traits: {"smithy.api#enumValue" => "PENDING_ENABLEMENT"}))
+    EnablementStatus.add_member(:failed_to_enable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_ENABLE", traits: {"smithy.api#enumValue" => "FAILED_TO_ENABLE"}))
+    EnablementStatus.add_member(:pending_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_UPDATE", traits: {"smithy.api#enumValue" => "PENDING_UPDATE"}))
+    EnablementStatus.add_member(:failed_to_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_UPDATE", traits: {"smithy.api#enumValue" => "FAILED_TO_UPDATE"}))
+    EnablementStatus.add_member(:pending_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_DELETION", traits: {"smithy.api#enumValue" => "PENDING_DELETION"}))
+    EnablementStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    EnablementStatus.add_member(:failed_to_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_TO_DELETE", traits: {"smithy.api#enumValue" => "FAILED_TO_DELETE"}))
     Epss.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: EpssScore, name: "score", traits: {"smithy.api#default" => 0}))
     Epss.type = Types::Epss
     EpssDetails.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: EpssScoreValue, name: "score", traits: {"smithy.api#default" => 0}))
@@ -1575,6 +1845,25 @@ module Aws::Inspector2
     FilterCriteria.add_member(:epss_score, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilterList, name: "epssScore"))
     FilterCriteria.add_member(:code_repository_project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "codeRepositoryProjectName"))
     FilterCriteria.add_member(:code_repository_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "codeRepositoryProviderType"))
+    FilterCriteria.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudProvider"))
+    FilterCriteria.add_member(:cloud_provider_region, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudProviderRegion"))
+    FilterCriteria.add_member(:cloud_provider_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudProviderAccountId"))
+    FilterCriteria.add_member(:cloud_provider_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudProviderOrgId"))
+    FilterCriteria.add_member(:cloud_vm_image_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudVmImageReference"))
+    FilterCriteria.add_member(:cloud_vm_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudVmNetworkId"))
+    FilterCriteria.add_member(:cloud_vm_subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudVmSubnetIds"))
+    FilterCriteria.add_member(:cloud_image_repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudImageRepositoryName"))
+    FilterCriteria.add_member(:cloud_image_registry, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudImageRegistry"))
+    FilterCriteria.add_member(:cloud_image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudImageDigest"))
+    FilterCriteria.add_member(:cloud_image_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudImageTags"))
+    FilterCriteria.add_member(:cloud_image_pushed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilterList, name: "cloudImagePushedAt"))
+    FilterCriteria.add_member(:cloud_image_architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudImageArchitecture"))
+    FilterCriteria.add_member(:cloud_image_last_in_use_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilterList, name: "cloudImageLastInUseAt"))
+    FilterCriteria.add_member(:cloud_image_in_use_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilterList, name: "cloudImageInUseCount"))
+    FilterCriteria.add_member(:cloud_serverless_function_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudServerlessFunctionName"))
+    FilterCriteria.add_member(:cloud_serverless_function_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudServerlessFunctionRuntime"))
+    FilterCriteria.add_member(:cloud_serverless_function_last_modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateFilterList, name: "cloudServerlessFunctionLastModifiedAt"))
+    FilterCriteria.add_member(:cloud_serverless_function_execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudServerlessFunctionExecutionRole"))
     FilterCriteria.type = Types::FilterCriteria
     FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
     Finding.add_member(:finding_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: FindingArn, name: "findingArn", traits: {"smithy.api#required" => {}}))
@@ -1628,6 +1917,11 @@ module Aws::Inspector2
     FindingTypeAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     FindingTypeAggregationResponse.add_member(:exploit_available_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "exploitAvailableCount"))
     FindingTypeAggregationResponse.add_member(:fix_available_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "fixAvailableCount"))
+    FindingTypeAggregationResponse.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudProvider"))
+    FindingTypeAggregationResponse.add_member(:cloud_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudAccountId"))
+    FindingTypeAggregationResponse.add_member(:cloud_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudOrgId"))
+    FindingTypeAggregationResponse.add_member(:cloud_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudRegion"))
+    FindingTypeAggregationResponse.add_member(:cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudPartition"))
     FindingTypeAggregationResponse.type = Types::FindingTypeAggregationResponse
     FreeTrialAccountInfo.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MeteringAccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     FreeTrialAccountInfo.add_member(:free_trial_info, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialInfoList, name: "freeTrialInfo", traits: {"smithy.api#required" => {}}))
@@ -1637,6 +1931,7 @@ module Aws::Inspector2
     FreeTrialInfo.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "start", traits: {"smithy.api#required" => {}}))
     FreeTrialInfo.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "end", traits: {"smithy.api#required" => {}}))
     FreeTrialInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    FreeTrialInfo.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudProvider, name: "cloudProvider"))
     FreeTrialInfo.type = Types::FreeTrialInfo
     FreeTrialInfoError.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MeteringAccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
     FreeTrialInfoError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTrialInfoErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
@@ -1680,8 +1975,8 @@ module Aws::Inspector2
     GetCodeSecurityIntegrationResponse.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason", traits: {"smithy.api#required" => {}}))
     GetCodeSecurityIntegrationResponse.add_member(:created_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdOn", traits: {"smithy.api#required" => {}}))
     GetCodeSecurityIntegrationResponse.add_member(:last_update_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastUpdateOn", traits: {"smithy.api#required" => {}}))
-    GetCodeSecurityIntegrationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     GetCodeSecurityIntegrationResponse.add_member(:authorization_url, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationUrl, name: "authorizationUrl"))
+    GetCodeSecurityIntegrationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     GetCodeSecurityIntegrationResponse.type = Types::GetCodeSecurityIntegrationResponse
     GetCodeSecurityScanConfigurationRequest.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationArn, name: "scanConfigurationArn", traits: {"smithy.api#required" => {}}))
     GetCodeSecurityScanConfigurationRequest.type = Types::GetCodeSecurityScanConfigurationRequest
@@ -1706,6 +2001,7 @@ module Aws::Inspector2
     GetCodeSecurityScanResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
     GetCodeSecurityScanResponse.add_member(:last_commit_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lastCommitId"))
     GetCodeSecurityScanResponse.type = Types::GetCodeSecurityScanResponse
+    GetConfigurationInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     GetConfigurationInput.type = Types::GetConfigurationInput
     GetConfigurationOutput.add_member(:ecr_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EcrConfigurationState, name: "ecrConfiguration"))
     GetConfigurationOutput.add_member(:ec2_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2ConfigurationState, name: "ec2Configuration"))
@@ -1747,9 +2043,25 @@ module Aws::Inspector2
     GetSbomExportResponse.add_member(:s3_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "s3Destination"))
     GetSbomExportResponse.add_member(:filter_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceFilterCriteria, name: "filterCriteria"))
     GetSbomExportResponse.type = Types::GetSbomExportResponse
+    Image.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "repositoryName"))
+    Image.add_member(:registry, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "registry"))
+    Image.add_member(:image_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTagList, name: "imageTags"))
+    Image.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "imageDigest"))
+    Image.add_member(:pushed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "pushedAt"))
+    Image.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "architecture"))
+    Image.add_member(:author, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "author"))
+    Image.add_member(:in_use_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "inUseCount", traits: {"smithy.api#range" => {"min" => 0}}))
+    Image.add_member(:last_in_use_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "lastInUseAt"))
+    Image.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: Platform, name: "platform"))
+    Image.type = Types::Image
     ImageLayerAggregation.add_member(:repositories, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "repositories"))
     ImageLayerAggregation.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "resourceIds"))
     ImageLayerAggregation.add_member(:layer_hashes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "layerHashes"))
+    ImageLayerAggregation.add_member(:cloud_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudProviders"))
+    ImageLayerAggregation.add_member(:cloud_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudAccountIds"))
+    ImageLayerAggregation.add_member(:cloud_org_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudOrgIds"))
+    ImageLayerAggregation.add_member(:cloud_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudRegions"))
+    ImageLayerAggregation.add_member(:cloud_partitions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudPartitions"))
     ImageLayerAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
     ImageLayerAggregation.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageLayerSortBy, name: "sortBy"))
     ImageLayerAggregation.type = Types::ImageLayerAggregation
@@ -1757,6 +2069,11 @@ module Aws::Inspector2
     ImageLayerAggregationResponse.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ImageLayerAggregationResponse.add_member(:layer_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "layerHash", traits: {"smithy.api#required" => {}}))
     ImageLayerAggregationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId", traits: {"smithy.api#required" => {}}))
+    ImageLayerAggregationResponse.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudProvider"))
+    ImageLayerAggregationResponse.add_member(:cloud_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudAccountId"))
+    ImageLayerAggregationResponse.add_member(:cloud_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudOrgId"))
+    ImageLayerAggregationResponse.add_member(:cloud_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudRegion"))
+    ImageLayerAggregationResponse.add_member(:cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "cloudPartition"))
     ImageLayerAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     ImageLayerAggregationResponse.type = Types::ImageLayerAggregationResponse
     ImageTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
@@ -1899,6 +2216,20 @@ module Aws::Inspector2
     ListCodeSecurityScanConfigurationsResponse.add_member(:configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeSecurityScanConfigurationSummaries, name: "configurations"))
     ListCodeSecurityScanConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListCodeSecurityScanConfigurationsResponse.type = Types::ListCodeSecurityScanConfigurationsResponse
+    ListConnectorScanConfigurationsRequest.add_member(:aws_config_connector_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArnList, name: "awsConfigConnectorArns"))
+    ListConnectorScanConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListConnectorScanConfigurationsMaxResults, name: "maxResults"))
+    ListConnectorScanConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorNextToken, name: "nextToken"))
+    ListConnectorScanConfigurationsRequest.type = Types::ListConnectorScanConfigurationsRequest
+    ListConnectorScanConfigurationsResponse.add_member(:scan_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorScanConfigurationItemList, name: "scanConfigurations", traits: {"smithy.api#required" => {}}))
+    ListConnectorScanConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorNextToken, name: "nextToken"))
+    ListConnectorScanConfigurationsResponse.type = Types::ListConnectorScanConfigurationsResponse
+    ListConnectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults"))
+    ListConnectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorNextToken, name: "nextToken"))
+    ListConnectorsRequest.add_member(:filter_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorFilterCriteria, name: "filterCriteria"))
+    ListConnectorsRequest.type = Types::ListConnectorsRequest
+    ListConnectorsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorList, name: "items", traits: {"smithy.api#required" => {}}))
+    ListConnectorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorNextToken, name: "nextToken"))
+    ListConnectorsResponse.type = Types::ListConnectorsResponse
     ListCoverageInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListCoverageMaxResults, name: "maxResults"))
     ListCoverageInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListCoverageInput.add_member(:filter_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: CoverageFilterCriteria, name: "filterCriteria"))
@@ -2061,6 +2392,17 @@ module Aws::Inspector2
     ProjectPeriodicScanConfiguration.type = Types::ProjectPeriodicScanConfiguration
     ProjectPeriodicScanConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectPeriodicScanConfiguration, name: "member"))
     ProjectSelectionScope.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    ProviderComparison.add_member(:equals, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUALS", traits: {"smithy.api#enumValue" => "EQUALS"}))
+    ProviderDetailCreate.add_member(:azure, Types::ProviderDetailCreate::Azure, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureProviderDetailCreate, name: "azure"))
+    ProviderDetailCreate.add_member(:unknown, Types::ProviderDetailCreate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ProviderDetailCreate.type = Types::ProviderDetailCreate
+    ProviderDetailUpdate.add_member(:azure, Types::ProviderDetailUpdate::Azure, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureProviderDetailUpdate, name: "azure"))
+    ProviderDetailUpdate.add_member(:unknown, Types::ProviderDetailUpdate::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ProviderDetailUpdate.type = Types::ProviderDetailUpdate
+    ProviderFilter.add_member(:comparison, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderComparison, name: "comparison", traits: {"smithy.api#required" => {}}))
+    ProviderFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorCloudProvider, name: "value", traits: {"smithy.api#required" => {}}))
+    ProviderFilter.type = Types::ProviderFilter
+    ProviderFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderFilter, name: "member"))
     Recommendation.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "text"))
     Recommendation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Url"))
     Recommendation.type = Types::Recommendation
@@ -2075,6 +2417,11 @@ module Aws::Inspector2
     RepositoryAggregation.type = Types::RepositoryAggregation
     RepositoryAggregationResponse.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "repository", traits: {"smithy.api#required" => {}}))
     RepositoryAggregationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
+    RepositoryAggregationResponse.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: Provider, name: "cloudProvider"))
+    RepositoryAggregationResponse.add_member(:cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderPartition, name: "cloudPartition"))
+    RepositoryAggregationResponse.add_member(:cloud_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderRegion, name: "cloudRegion"))
+    RepositoryAggregationResponse.add_member(:cloud_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderOrgId, name: "cloudOrgId"))
+    RepositoryAggregationResponse.add_member(:cloud_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderAccountId, name: "cloudAccountId"))
     RepositoryAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
     RepositoryAggregationResponse.add_member(:affected_images, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "affectedImages"))
     RepositoryAggregationResponse.type = Types::RepositoryAggregationResponse
@@ -2088,11 +2435,17 @@ module Aws::Inspector2
     Resource.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "region"))
     Resource.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     Resource.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDetails, name: "details"))
+    Resource.add_member(:provider, ::Smithy::Schema::Shapes::MemberShape.new(target: Provider, name: "provider"))
+    Resource.add_member(:provider_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderAccountId, name: "providerAccountId"))
+    Resource.add_member(:provider_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderOrgId, name: "providerOrgId"))
     Resource.type = Types::Resource
     ResourceDetails.add_member(:aws_ec2_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEc2InstanceDetails, name: "awsEc2Instance"))
     ResourceDetails.add_member(:aws_ecr_container_image, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsEcrContainerImageDetails, name: "awsEcrContainerImage"))
     ResourceDetails.add_member(:aws_lambda_function, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsLambdaFunctionDetails, name: "awsLambdaFunction"))
     ResourceDetails.add_member(:code_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeRepositoryDetails, name: "codeRepository"))
+    ResourceDetails.add_member(:vm, ::Smithy::Schema::Shapes::MemberShape.new(target: Vm, name: "vm"))
+    ResourceDetails.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "image"))
+    ResourceDetails.add_member(:serverless_function, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessFunction, name: "serverlessFunction"))
     ResourceDetails.type = Types::ResourceDetails
     ResourceFilterCriteria.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "accountId"))
     ResourceFilterCriteria.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "resourceId"))
@@ -2102,6 +2455,17 @@ module Aws::Inspector2
     ResourceFilterCriteria.add_member(:ecr_image_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "ecrImageTags"))
     ResourceFilterCriteria.add_member(:ec2_instance_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapFilterList, name: "ec2InstanceTags"))
     ResourceFilterCriteria.add_member(:lambda_function_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapFilterList, name: "lambdaFunctionTags"))
+    ResourceFilterCriteria.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "cloudProvider"))
+    ResourceFilterCriteria.add_member(:cloud_provider_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "cloudProviderAccountId"))
+    ResourceFilterCriteria.add_member(:cloud_provider_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "cloudProviderOrgId"))
+    ResourceFilterCriteria.add_member(:cloud_provider_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "cloudProviderRegion"))
+    ResourceFilterCriteria.add_member(:cloud_vm_instance_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapFilterList, name: "cloudVmInstanceTags"))
+    ResourceFilterCriteria.add_member(:cloud_container_image_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "cloudContainerImageTags"))
+    ResourceFilterCriteria.add_member(:cloud_container_repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "cloudContainerRepositoryName"))
+    ResourceFilterCriteria.add_member(:cloud_container_registry_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "cloudContainerRegistryName"))
+    ResourceFilterCriteria.add_member(:cloud_serverless_function_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "cloudServerlessFunctionName"))
+    ResourceFilterCriteria.add_member(:cloud_serverless_function_runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStringFilterList, name: "cloudServerlessFunctionRuntime"))
+    ResourceFilterCriteria.add_member(:cloud_serverless_function_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceMapFilterList, name: "cloudServerlessFunctionTags"))
     ResourceFilterCriteria.type = Types::ResourceFilterCriteria
     ResourceIdFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CisStringFilter, name: "member"))
     ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Resource, name: "member"))
@@ -2117,6 +2481,11 @@ module Aws::Inspector2
     ResourceScanMetadata.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2Metadata, name: "ec2"))
     ResourceScanMetadata.add_member(:lambda_function, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaFunctionMetadata, name: "lambdaFunction"))
     ResourceScanMetadata.add_member(:code_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: CodeRepositoryMetadata, name: "codeRepository"))
+    ResourceScanMetadata.add_member(:vm_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: VmInstanceMetadata, name: "vmInstance"))
+    ResourceScanMetadata.add_member(:container_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImageMetadata, name: "containerImage"))
+    ResourceScanMetadata.add_member(:container_repository, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerRepositoryMetadata, name: "containerRepository"))
+    ResourceScanMetadata.add_member(:container_registry, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerRegistryMetadata, name: "containerRegistry"))
+    ResourceScanMetadata.add_member(:serverless_function, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessFunctionMetadata, name: "serverlessFunction"))
     ResourceScanMetadata.type = Types::ResourceScanMetadata
     ResourceState.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "ec2", traits: {"smithy.api#required" => {}}))
     ResourceState.add_member(:ecr, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "ecr", traits: {"smithy.api#required" => {}}))
@@ -2148,8 +2517,23 @@ module Aws::Inspector2
     Schedule.add_member(:monthly, Types::Schedule::Monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlySchedule, name: "monthly"))
     Schedule.add_member(:unknown, Types::Schedule::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Schedule.type = Types::Schedule
+    ScopeConfiguration.add_member(:scope_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType, name: "scopeType", traits: {"smithy.api#required" => {}}))
+    ScopeConfiguration.add_member(:scope_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeValueList, name: "scopeValues"))
+    ScopeConfiguration.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeState, name: "state"))
+    ScopeConfiguration.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "stateReason"))
+    ScopeConfiguration.type = Types::ScopeConfiguration
+    ScopeConfigurationInput.add_member(:scope_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeType, name: "scopeType", traits: {"smithy.api#required" => {}}))
+    ScopeConfigurationInput.add_member(:scope_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeValueList, name: "scopeValues"))
+    ScopeConfigurationInput.type = Types::ScopeConfigurationInput
     ScopeSettings.add_member(:project_selection_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectSelectionScope, name: "projectSelectionScope"))
     ScopeSettings.type = Types::ScopeSettings
+    ScopeState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ScopeState.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    ScopeState.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    ScopeState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ScopeType.add_member(:tenant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TENANT", traits: {"smithy.api#enumValue" => "TENANT"}))
+    ScopeType.add_member(:subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBSCRIPTION", traits: {"smithy.api#enumValue" => "SUBSCRIPTION"}))
+    ScopeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeValue, name: "member"))
     SearchVulnerabilitiesFilterCriteria.add_member(:vulnerability_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnIdList, name: "vulnerabilityIds", traits: {"smithy.api#required" => {}}))
     SearchVulnerabilitiesFilterCriteria.type = Types::SearchVulnerabilitiesFilterCriteria
     SearchVulnerabilitiesRequest.add_member(:filter_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchVulnerabilitiesFilterCriteria, name: "filterCriteria", traits: {"smithy.api#required" => {}}))
@@ -2168,6 +2552,51 @@ module Aws::Inspector2
     SendCisSessionTelemetryRequest.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: CisSessionMessages, name: "messages", traits: {"smithy.api#required" => {}}))
     SendCisSessionTelemetryRequest.type = Types::SendCisSessionTelemetryRequest
     SendCisSessionTelemetryResponse.type = Types::SendCisSessionTelemetryResponse
+    ServerlessFunction.add_member(:serverless_function_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "serverlessFunctionName"))
+    ServerlessFunction.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "runtime"))
+    ServerlessFunction.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "version"))
+    ServerlessFunction.add_member(:code_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "codeDigest"))
+    ServerlessFunction.add_member(:last_modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "lastModifiedAt"))
+    ServerlessFunction.add_member(:network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "networkId"))
+    ServerlessFunction.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudSubnetIdList, name: "subnetIds"))
+    ServerlessFunction.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudSecurityGroupIdList, name: "securityGroupIds"))
+    ServerlessFunction.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "executionRole"))
+    ServerlessFunction.add_member(:package_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageType, name: "packageType"))
+    ServerlessFunction.add_member(:architectures, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchitectureList, name: "architectures"))
+    ServerlessFunction.add_member(:layers, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessFunctionLayerList, name: "layers"))
+    ServerlessFunction.type = Types::ServerlessFunction
+    ServerlessFunctionAggregation.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "resourceIds"))
+    ServerlessFunctionAggregation.add_member(:function_names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "functionNames"))
+    ServerlessFunctionAggregation.add_member(:runtimes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "runtimes"))
+    ServerlessFunctionAggregation.add_member(:function_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilterList, name: "functionTags"))
+    ServerlessFunctionAggregation.add_member(:cloud_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudProviders"))
+    ServerlessFunctionAggregation.add_member(:cloud_partitions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudPartitions"))
+    ServerlessFunctionAggregation.add_member(:cloud_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudRegions"))
+    ServerlessFunctionAggregation.add_member(:cloud_org_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudOrgIds"))
+    ServerlessFunctionAggregation.add_member(:cloud_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudAccountIds"))
+    ServerlessFunctionAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
+    ServerlessFunctionAggregation.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessFunctionSortBy, name: "sortBy"))
+    ServerlessFunctionAggregation.type = Types::ServerlessFunctionAggregation
+    ServerlessFunctionAggregationResponse.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "resourceId", traits: {"smithy.api#required" => {}}))
+    ServerlessFunctionAggregationResponse.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: Provider, name: "cloudProvider"))
+    ServerlessFunctionAggregationResponse.add_member(:cloud_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderAccountId, name: "cloudAccountId"))
+    ServerlessFunctionAggregationResponse.add_member(:cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderPartition, name: "cloudPartition"))
+    ServerlessFunctionAggregationResponse.add_member(:cloud_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderRegion, name: "cloudRegion"))
+    ServerlessFunctionAggregationResponse.add_member(:cloud_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderOrgId, name: "cloudOrgId"))
+    ServerlessFunctionAggregationResponse.add_member(:function_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "functionName"))
+    ServerlessFunctionAggregationResponse.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "runtime"))
+    ServerlessFunctionAggregationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    ServerlessFunctionAggregationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "accountId"))
+    ServerlessFunctionAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
+    ServerlessFunctionAggregationResponse.add_member(:last_modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "lastModifiedAt"))
+    ServerlessFunctionAggregationResponse.add_member(:exploit_available_active_findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "exploitAvailableActiveFindingsCount"))
+    ServerlessFunctionAggregationResponse.add_member(:fix_available_active_findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "fixAvailableActiveFindingsCount"))
+    ServerlessFunctionAggregationResponse.type = Types::ServerlessFunctionAggregationResponse
+    ServerlessFunctionLayerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessFunctionLayerUrn, name: "member"))
+    ServerlessFunctionMetadata.add_member(:serverless_function_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serverlessFunctionName"))
+    ServerlessFunctionMetadata.add_member(:runtime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "runtime"))
+    ServerlessFunctionMetadata.add_member(:function_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "functionTags"))
+    ServerlessFunctionMetadata.type = Types::ServerlessFunctionMetadata
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
@@ -2175,6 +2604,9 @@ module Aws::Inspector2
     SeverityCounts.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "medium"))
     SeverityCounts.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "high"))
     SeverityCounts.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "critical"))
+    SeverityCounts.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "low"))
+    SeverityCounts.add_member(:informational, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "informational"))
+    SeverityCounts.add_member(:untriaged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "untriaged"))
     SeverityCounts.type = Types::SeverityCounts
     SortCriteria.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: SortField, name: "field", traits: {"smithy.api#required" => {}}))
     SortCriteria.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder", traits: {"smithy.api#required" => {}}))
@@ -2272,9 +2704,9 @@ module Aws::Inspector2
     TitleAggregation.add_member(:titles, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "titles"))
     TitleAggregation.add_member(:vulnerability_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "vulnerabilityIds"))
     TitleAggregation.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationResourceType, name: "resourceType"))
+    TitleAggregation.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationFindingType, name: "findingType"))
     TitleAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
     TitleAggregation.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: TitleSortBy, name: "sortBy"))
-    TitleAggregation.add_member(:finding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationFindingType, name: "findingType"))
     TitleAggregation.type = Types::TitleAggregation
     TitleAggregationResponse.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "title", traits: {"smithy.api#required" => {}}))
     TitleAggregationResponse.add_member(:vulnerability_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vulnerabilityId"))
@@ -2310,10 +2742,25 @@ module Aws::Inspector2
     UpdateCodeSecurityScanConfigurationRequest.type = Types::UpdateCodeSecurityScanConfigurationRequest
     UpdateCodeSecurityScanConfigurationResponse.add_member(:scan_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanConfigurationArn, name: "scanConfigurationArn"))
     UpdateCodeSecurityScanConfigurationResponse.type = Types::UpdateCodeSecurityScanConfigurationResponse
+    UpdateConfigurationInheritance.add_member(:ec2_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritanceMode, name: "ec2Configuration"))
+    UpdateConfigurationInheritance.add_member(:ecr_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InheritanceMode, name: "ecrConfiguration"))
+    UpdateConfigurationInheritance.type = Types::UpdateConfigurationInheritance
+    UpdateConfigurationInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     UpdateConfigurationInput.add_member(:ecr_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EcrConfiguration, name: "ecrConfiguration"))
     UpdateConfigurationInput.add_member(:ec2_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: Ec2Configuration, name: "ec2Configuration"))
+    UpdateConfigurationInput.add_member(:update_configuration_inheritance, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateConfigurationInheritance, name: "updateConfigurationInheritance"))
     UpdateConfigurationInput.type = Types::UpdateConfigurationInput
     UpdateConfigurationOutput.type = Types::UpdateConfigurationOutput
+    UpdateConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "connectorArn", traits: {"smithy.api#required" => {}}))
+    UpdateConnectorRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDescription, name: "description"))
+    UpdateConnectorRequest.add_member(:provider_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderDetailUpdate, name: "providerDetail"))
+    UpdateConnectorRequest.type = Types::UpdateConnectorRequest
+    UpdateConnectorResponse.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorArn, name: "connectorArn"))
+    UpdateConnectorResponse.type = Types::UpdateConnectorResponse
+    UpdateConnectorScanConfigurationRequest.add_member(:aws_config_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsConfigConnectorArn, name: "awsConfigConnectorArn", traits: {"smithy.api#required" => {}}))
+    UpdateConnectorScanConfigurationRequest.add_member(:scan_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorScanConfiguration, name: "scanConfiguration", traits: {"smithy.api#required" => {}}))
+    UpdateConnectorScanConfigurationRequest.type = Types::UpdateConnectorScanConfigurationRequest
+    UpdateConnectorScanConfigurationResponse.type = Types::UpdateConnectorScanConfigurationResponse
     UpdateEc2DeepInspectionConfigurationRequest.add_member(:activate_deep_inspection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "activateDeepInspection"))
     UpdateEc2DeepInspectionConfigurationRequest.add_member(:package_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: PathList, name: "packagePaths"))
     UpdateEc2DeepInspectionConfigurationRequest.type = Types::UpdateEc2DeepInspectionConfigurationRequest
@@ -2356,6 +2803,7 @@ module Aws::Inspector2
     Usage.add_member(:total, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageValue, name: "total", traits: {"smithy.api#default" => 0}))
     Usage.add_member(:estimated_monthly_cost, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyCostEstimate, name: "estimatedMonthlyCost", traits: {"smithy.api#default" => 0}))
     Usage.add_member(:currency, ::Smithy::Schema::Shapes::MemberShape.new(target: Currency, name: "currency"))
+    Usage.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudProvider, name: "cloudProvider"))
     Usage.type = Types::Usage
     UsageAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageAccountId, name: "member"))
     UsageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Usage, name: "member"))
@@ -2363,6 +2811,10 @@ module Aws::Inspector2
     UsageTotal.add_member(:usage, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageList, name: "usage"))
     UsageTotal.type = Types::UsageTotal
     UsageTotalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageTotal, name: "member"))
+    VMScannerState.add_member(:activated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "activated"))
+    VMScannerState.add_member(:activated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "activatedAt"))
+    VMScannerState.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VMScannerStatus, name: "status"))
+    VMScannerState.type = Types::VMScannerState
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFields, name: "fields"))
@@ -2371,6 +2823,51 @@ module Aws::Inspector2
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
     ValidationExceptionFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    Vm.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "type"))
+    Vm.add_member(:vm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "vmName"))
+    Vm.add_member(:vm_image_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "vmImageReference"))
+    Vm.add_member(:ip_v4_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: IpV4AddressList, name: "ipV4Addresses"))
+    Vm.add_member(:ip_v6_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: IpV6AddressList, name: "ipV6Addresses"))
+    Vm.add_member(:network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "networkId"))
+    Vm.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudSubnetIdList, name: "subnetIds"))
+    Vm.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudSecurityGroupIdList, name: "securityGroupIds"))
+    Vm.add_member(:launched_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeTimestamp, name: "launchedAt"))
+    Vm.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: Platform, name: "platform"))
+    Vm.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "executionRole"))
+    Vm.add_member(:key_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "keyName"))
+    Vm.type = Types::Vm
+    VmInstanceAggregation.add_member(:resource_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "resourceIds"))
+    VmInstanceAggregation.add_member(:operating_systems, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "operatingSystems"))
+    VmInstanceAggregation.add_member(:instance_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapFilterList, name: "instanceTags"))
+    VmInstanceAggregation.add_member(:vm_image_references, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "vmImageReferences"))
+    VmInstanceAggregation.add_member(:cloud_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudProviders"))
+    VmInstanceAggregation.add_member(:cloud_partitions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudPartitions"))
+    VmInstanceAggregation.add_member(:cloud_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudRegions"))
+    VmInstanceAggregation.add_member(:cloud_org_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudOrgIds"))
+    VmInstanceAggregation.add_member(:cloud_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringFilterList, name: "cloudAccountIds"))
+    VmInstanceAggregation.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "sortOrder"))
+    VmInstanceAggregation.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: VmInstanceSortBy, name: "sortBy"))
+    VmInstanceAggregation.type = Types::VmInstanceAggregation
+    VmInstanceAggregationResponse.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "resourceId", traits: {"smithy.api#required" => {}}))
+    VmInstanceAggregationResponse.add_member(:cloud_provider, ::Smithy::Schema::Shapes::MemberShape.new(target: Provider, name: "cloudProvider"))
+    VmInstanceAggregationResponse.add_member(:cloud_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderAccountId, name: "cloudAccountId"))
+    VmInstanceAggregationResponse.add_member(:cloud_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderPartition, name: "cloudPartition"))
+    VmInstanceAggregationResponse.add_member(:cloud_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderRegion, name: "cloudRegion"))
+    VmInstanceAggregationResponse.add_member(:cloud_org_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderOrgId, name: "cloudOrgId"))
+    VmInstanceAggregationResponse.add_member(:vm_image_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vmImageReference"))
+    VmInstanceAggregationResponse.add_member(:operating_system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "operatingSystem"))
+    VmInstanceAggregationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    VmInstanceAggregationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "accountId"))
+    VmInstanceAggregationResponse.add_member(:severity_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: SeverityCounts, name: "severityCounts"))
+    VmInstanceAggregationResponse.add_member(:network_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "networkFindings"))
+    VmInstanceAggregationResponse.add_member(:exploit_available_active_findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "exploitAvailableActiveFindingsCount"))
+    VmInstanceAggregationResponse.add_member(:fix_available_active_findings_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "fixAvailableActiveFindingsCount"))
+    VmInstanceAggregationResponse.type = Types::VmInstanceAggregationResponse
+    VmInstanceMetadata.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    VmInstanceMetadata.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: VmPlatform, name: "platform"))
+    VmInstanceMetadata.add_member(:inventory_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "inventoryHash", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}}))
+    VmInstanceMetadata.add_member(:vm_image_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vmImageReference", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}}))
+    VmInstanceMetadata.type = Types::VmInstanceMetadata
     VulnIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VulnId, name: "member"))
     Vulnerabilities.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Vulnerability, name: "member"))
     Vulnerability.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "id", traits: {"smithy.api#required" => {}}))
@@ -2415,7 +2912,7 @@ module Aws::Inspector2
       service.id = "com.amazonaws.inspector2#Inspector2"
       service.name = "Inspector2"
       service.version = "2020-06-08"
-      service.traits = {"aws.api#service" => {"sdkId" => "Inspector2", "arnNamespace" => "inspector2", "cloudTrailEventSource" => "inspector2.amazon.aws", "cloudFormationName" => "Inspector2"}, "aws.auth#sigv4" => {"name" => "inspector2"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*"]}, "smithy.api#title" => "Inspector2"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Inspector2", "arnNamespace" => "inspector2", "cloudTrailEventSource" => "inspector2.amazon.aws", "cloudFormationName" => "Inspector2"}, "aws.auth#sigv4" => {"name" => "inspector2"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*"]}, "smithy.api#title" => "Inspector2", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://inspector2-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://inspector2-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://inspector2.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://inspector2.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_member, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.inspector2#AssociateMember"
         operation.name = "AssociateMember"
@@ -2582,6 +3079,19 @@ module Aws::Inspector2
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/codesecurity/scan-configuration/create"}}
       end)
+      service.add_operation(:create_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.inspector2#CreateConnector"
+        operation.name = "CreateConnector"
+        operation.input = CreateConnectorRequest
+        operation.output = CreateConnectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/connector/create"}}
+      end)
       service.add_operation(:create_filter, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.inspector2#CreateFilter"
         operation.name = "CreateFilter"
@@ -2654,6 +3164,19 @@ module Aws::Inspector2
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/codesecurity/scan-configuration/delete"}}
+      end)
+      service.add_operation(:delete_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.inspector2#DeleteConnector"
+        operation.name = "DeleteConnector"
+        operation.input = DeleteConnectorRequest
+        operation.output = DeleteConnectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/connector/delete"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_filter, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.inspector2#DeleteFilter"
@@ -2817,9 +3340,11 @@ module Aws::Inspector2
         operation.name = "GetConfiguration"
         operation.input = GetConfigurationInput
         operation.output = GetConfigurationOutput
+        operation.errors << AccessDeniedException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/configuration/get"}}
       end)
       service.add_operation(:get_delegated_admin_account, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2987,6 +3512,30 @@ module Aws::Inspector2
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/codesecurity/scan-configuration/list"}}
+      end)
+      service.add_operation(:list_connector_scan_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.inspector2#ListConnectorScanConfigurations"
+        operation.name = "ListConnectorScanConfigurations"
+        operation.input = ListConnectorScanConfigurationsRequest
+        operation.output = ListConnectorScanConfigurationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/connectorscanconfigurations/list"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListConnectorScanConfigurations.new
+      end)
+      service.add_operation(:list_connectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.inspector2#ListConnectors"
+        operation.name = "ListConnectors"
+        operation.input = ListConnectorsRequest
+        operation.output = ListConnectorsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/connector/list"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListConnectors.new
       end)
       service.add_operation(:list_coverage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.inspector2#ListCoverage"
@@ -3247,6 +3796,32 @@ module Aws::Inspector2
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/configuration/update"}}
+      end)
+      service.add_operation(:update_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.inspector2#UpdateConnector"
+        operation.name = "UpdateConnector"
+        operation.input = UpdateConnectorRequest
+        operation.output = UpdateConnectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/connector/update"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_connector_scan_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.inspector2#UpdateConnectorScanConfiguration"
+        operation.name = "UpdateConnectorScanConfiguration"
+        operation.input = UpdateConnectorScanConfigurationRequest
+        operation.output = UpdateConnectorScanConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/connectorscanconfiguration/update"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:update_ec2_deep_inspection_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfiguration"

@@ -185,6 +185,45 @@ module Aws::CustomerProfiles
       attr_accessor last_updated_at: Time?
     end
 
+    class AssociateStreamForSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?destination_arn: String,
+        ?destination_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor destination_arn: String?
+      attr_accessor destination_role_arn: String?
+    end
+
+    class AssociateStreamForSegmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociatedSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_name: String,
+        ?status: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_name: String?
+      attr_accessor status: String?
+      attr_accessor message: String?
+    end
+
     class AttributeDetails
       include Smithy::Schema::Structure
 
@@ -227,6 +266,8 @@ module Aws::CustomerProfiles
       GREATER_THAN_OR_EQUAL: String
       LESS_THAN_OR_EQUAL: String
       EQUAL: String
+      LIST_CONTAINS: String
+      LIST_CONTAINS_ALL: String
     end
 
     class AttributeItem
@@ -402,6 +443,75 @@ module Aws::CustomerProfiles
       attr_accessor profiles: Array[Types::Profile]?
     end
 
+    class BatchPutProfileObjectErrorItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?code: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor code: Integer?
+      attr_accessor message: String?
+    end
+
+    class BatchPutProfileObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?object_type_name: String,
+        ?items: Array[Types::BatchPutProfileObjectRequestItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor object_type_name: String?
+      attr_accessor items: Array[Types::BatchPutProfileObjectRequestItem]?
+    end
+
+    class BatchPutProfileObjectRequestItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor object: String?
+    end
+
+    class BatchPutProfileObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[Types::BatchPutProfileObjectResponseItem],
+        ?failed: Array[Types::BatchPutProfileObjectErrorItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[Types::BatchPutProfileObjectResponseItem]?
+      attr_accessor failed: Array[Types::BatchPutProfileObjectErrorItem]?
+    end
+
+    class BatchPutProfileObjectResponseItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?profile_object_unique_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor profile_object_unique_key: String?
+    end
+
     class CalculatedAttributeDimension
       include Smithy::Schema::Structure
 
@@ -436,6 +546,41 @@ module Aws::CustomerProfiles
       attr_accessor profile_id: String?
       attr_accessor value: String?
       attr_accessor last_object_timestamp: Time?
+    end
+
+    class CatalogItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?code: String,
+        ?type: String,
+        ?category: String,
+        ?description: String,
+        ?additional_information: String,
+        ?image_link: String,
+        ?link: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?price: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor code: String?
+      attr_accessor type: String?
+      attr_accessor category: String?
+      attr_accessor description: String?
+      attr_accessor additional_information: String?
+      attr_accessor image_link: String?
+      attr_accessor link: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor price: String?
+      attr_accessor attributes: Hash[String, String]?
     end
 
     module ComparisonOperator
@@ -555,6 +700,11 @@ module Aws::CustomerProfiles
       EMAIL_ADDRESS: String
       PERSONAL_EMAIL_ADDRESS: String
       BUSINESS_EMAIL_ADDRESS: String
+    end
+
+    module ContentType
+      STRING: String
+      NUMBER: String
     end
 
     class CreateCalculatedAttributeDefinitionRequest
@@ -685,6 +835,7 @@ module Aws::CustomerProfiles
         ?dead_letter_queue_url: String,
         ?matching: Types::MatchingRequest,
         ?rule_based_matching: Types::RuleBasedMatchingRequest,
+        ?data_store: Types::DataStoreRequest,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -695,6 +846,7 @@ module Aws::CustomerProfiles
       attr_accessor dead_letter_queue_url: String?
       attr_accessor matching: Types::MatchingRequest?
       attr_accessor rule_based_matching: Types::RuleBasedMatchingRequest?
+      attr_accessor data_store: Types::DataStoreRequest?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -708,6 +860,7 @@ module Aws::CustomerProfiles
         ?dead_letter_queue_url: String,
         ?matching: Types::MatchingResponse,
         ?rule_based_matching: Types::RuleBasedMatchingResponse,
+        ?data_store: Types::DataStoreResponse,
         ?created_at: Time,
         ?last_updated_at: Time,
         ?tags: Hash[String, String],
@@ -720,6 +873,7 @@ module Aws::CustomerProfiles
       attr_accessor dead_letter_queue_url: String?
       attr_accessor matching: Types::MatchingResponse?
       attr_accessor rule_based_matching: Types::RuleBasedMatchingResponse?
+      attr_accessor data_store: Types::DataStoreResponse?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
       attr_accessor tags: Hash[String, String]?
@@ -913,6 +1067,114 @@ module Aws::CustomerProfiles
       attr_accessor profile_id: String?
     end
 
+    class CreateRecommenderFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_filter_name: String,
+        ?recommender_filter_expression: String,
+        ?recommender_schema_name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_filter_name: String?
+      attr_accessor recommender_filter_expression: String?
+      attr_accessor recommender_schema_name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRecommenderFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_filter_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_filter_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_name: String,
+        ?recommender_recipe_name: String,
+        ?recommender_config: Types::RecommenderConfig,
+        ?description: String,
+        ?recommender_schema_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_name: String?
+      attr_accessor recommender_recipe_name: String?
+      attr_accessor recommender_config: Types::RecommenderConfig?
+      attr_accessor description: String?
+      attr_accessor recommender_schema_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRecommenderSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_schema_name: String,
+        ?fields: Hash[String, Array[Types::RecommenderSchemaField]],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_schema_name: String?
+      attr_accessor fields: Hash[String, Array[Types::RecommenderSchemaField]]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRecommenderSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_schema_arn: String,
+        ?recommender_schema_name: String,
+        ?fields: Hash[String, Array[Types::RecommenderSchemaField]],
+        ?created_at: Time,
+        ?status: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_schema_arn: String?
+      attr_accessor recommender_schema_name: String?
+      attr_accessor fields: Hash[String, Array[Types::RecommenderSchemaField]]?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class CreateSegmentDefinitionRequest
       include Smithy::Schema::Structure
 
@@ -922,6 +1184,8 @@ module Aws::CustomerProfiles
         ?display_name: String,
         ?description: String,
         ?segment_groups: Types::SegmentGroup,
+        ?segment_sql_query: String,
+        ?segment_sort: Types::SegmentSort,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -931,6 +1195,8 @@ module Aws::CustomerProfiles
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor segment_groups: Types::SegmentGroup?
+      attr_accessor segment_sql_query: String?
+      attr_accessor segment_sort: Types::SegmentSort?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -961,11 +1227,13 @@ module Aws::CustomerProfiles
       def initialize: (
         ?domain_name: String,
         ?segment_query: Types::SegmentGroupStructure,
+        ?segment_sql_query: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_name: String?
       attr_accessor segment_query: Types::SegmentGroupStructure?
+      attr_accessor segment_sql_query: String?
     end
 
     class CreateSegmentEstimateResponse
@@ -1056,6 +1324,30 @@ module Aws::CustomerProfiles
       COMPLETE: String
     end
 
+    class DataStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class DataStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?readiness: Types::Readiness,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor readiness: Types::Readiness?
+    end
+
     class DateDimension
       include Smithy::Schema::Structure
 
@@ -1121,6 +1413,28 @@ module Aws::CustomerProfiles
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class DeleteDomainObjectTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?object_type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor object_type_name: String?
+    end
+
+    class DeleteDomainObjectTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeleteDomainRequest
@@ -1319,6 +1633,74 @@ module Aws::CustomerProfiles
       attr_accessor message: String?
     end
 
+    class DeleteRecommenderFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_filter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_filter_name: String?
+    end
+
+    class DeleteRecommenderFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_name: String?
+    end
+
+    class DeleteRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRecommenderSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_schema_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_schema_name: String?
+    end
+
+    class DeleteRecommenderSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteSegmentDefinitionRequest
       include Smithy::Schema::Structure
 
@@ -1333,6 +1715,30 @@ module Aws::CustomerProfiles
     end
 
     class DeleteSegmentDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteSegmentSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?segment_definition_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor segment_definition_name: String?
+    end
+
+    class DeleteSegmentSubscriptionResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -1439,6 +1845,95 @@ module Aws::CustomerProfiles
       end
     end
 
+    class DisassociateStreamForSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class DisassociateStreamForSegmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module DiversityCapType
+      PERCENTAGE: String
+      VALUE: String
+    end
+
+    class DiversityColumn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?cap_type: String,
+        ?target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor cap_type: String?
+      attr_accessor target: String?
+    end
+
+    class DiversityConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?diversity_columns: Array[Types::DiversityColumn],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor diversity_columns: Array[Types::DiversityColumn]?
+    end
+
+    class DomainObjectTypeField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?target: String,
+        ?content_type: String,
+        ?feature_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor target: String?
+      attr_accessor content_type: String?
+      attr_accessor feature_type: String?
+    end
+
+    class DomainObjectTypesListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_type_name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_type_name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class DomainStats
       include Smithy::Schema::Structure
 
@@ -1473,6 +1968,21 @@ module Aws::CustomerProfiles
       RUNNING: String
       SUCCEEDED: String
       FAILED: String
+    end
+
+    class EventParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type: String,
+        ?event_value_threshold: Float,
+        ?event_weight: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type: String?
+      attr_accessor event_value_threshold: Float?
+      attr_accessor event_weight: Float?
     end
 
     class EventStreamDestinationDetails
@@ -1523,6 +2033,19 @@ module Aws::CustomerProfiles
       attr_accessor stopped_since: Time?
       attr_accessor destination_summary: Types::DestinationSummary?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    module EventSubscriptionSegmentStatus
+      STARTING: String
+      RUNNING: String
+      STOPPED: String
+      FAILED: String
+    end
+
+    module EventSubscriptionState
+      RUNNING: String
+      UNHEALTHY: String
+      STOPPED: String
     end
 
     class EventTriggerCondition
@@ -1589,6 +2112,17 @@ module Aws::CustomerProfiles
       attr_accessor tags: Hash[String, String]?
     end
 
+    class EventsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_parameters_list: Array[Types::EventParameters],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_parameters_list: Array[Types::EventParameters]?
+    end
+
     class ExportingConfig
       include Smithy::Schema::Structure
 
@@ -1622,6 +2156,11 @@ module Aws::CustomerProfiles
 
       attr_accessor dimension_type: String?
       attr_accessor values: Array[String]?
+    end
+
+    module FeatureType
+      TEXTUAL: String
+      CATEGORICAL: String
     end
 
     module FieldContentType
@@ -1953,6 +2492,42 @@ module Aws::CustomerProfiles
       attr_accessor tags: Hash[String, String]?
     end
 
+    class GetDomainObjectTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?object_type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor object_type_name: String?
+    end
+
+    class GetDomainObjectTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_type_name: String,
+        ?description: String,
+        ?encryption_key: String,
+        ?fields: Hash[String, Types::DomainObjectTypeField],
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_type_name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_key: String?
+      attr_accessor fields: Hash[String, Types::DomainObjectTypeField]?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class GetDomainRequest
       include Smithy::Schema::Structure
 
@@ -1975,6 +2550,7 @@ module Aws::CustomerProfiles
         ?stats: Types::DomainStats,
         ?matching: Types::MatchingResponse,
         ?rule_based_matching: Types::RuleBasedMatchingResponse,
+        ?data_store: Types::DataStoreResponse,
         ?created_at: Time,
         ?last_updated_at: Time,
         ?tags: Hash[String, String],
@@ -1988,6 +2564,7 @@ module Aws::CustomerProfiles
       attr_accessor stats: Types::DomainStats?
       attr_accessor matching: Types::MatchingResponse?
       attr_accessor rule_based_matching: Types::RuleBasedMatchingResponse?
+      attr_accessor data_store: Types::DataStoreResponse?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
       attr_accessor tags: Hash[String, String]?
@@ -2141,6 +2718,7 @@ module Aws::CustomerProfiles
         ?is_unstructured: bool,
         ?role_arn: String,
         ?event_trigger_names: Array[String],
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2155,6 +2733,7 @@ module Aws::CustomerProfiles
       attr_accessor is_unstructured: bool?
       attr_accessor role_arn: String?
       attr_accessor event_trigger_names: Array[String]?
+      attr_accessor scope: String?
     end
 
     class GetMatchesRequest
@@ -2187,6 +2766,72 @@ module Aws::CustomerProfiles
       attr_accessor match_generation_date: Time?
       attr_accessor potential_matches: Integer?
       attr_accessor matches: Array[Types::MatchItem]?
+    end
+
+    class GetObjectTypeAttributeStatisticsPercentiles
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?p5: Float,
+        ?p25: Float,
+        ?p50: Float,
+        ?p75: Float,
+        ?p95: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor p5: Float?
+      attr_accessor p25: Float?
+      attr_accessor p50: Float?
+      attr_accessor p75: Float?
+      attr_accessor p95: Float?
+    end
+
+    class GetObjectTypeAttributeStatisticsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?object_type_name: String,
+        ?attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor object_type_name: String?
+      attr_accessor attribute_name: String?
+    end
+
+    class GetObjectTypeAttributeStatisticsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statistics: Types::GetObjectTypeAttributeStatisticsStats,
+        ?calculated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statistics: Types::GetObjectTypeAttributeStatisticsStats?
+      attr_accessor calculated_at: Time?
+    end
+
+    class GetObjectTypeAttributeStatisticsStats
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum: Float,
+        ?minimum: Float,
+        ?average: Float,
+        ?standard_deviation: Float,
+        ?percentiles: Types::GetObjectTypeAttributeStatisticsPercentiles,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum: Float?
+      attr_accessor minimum: Float?
+      attr_accessor average: Float?
+      attr_accessor standard_deviation: Float?
+      attr_accessor percentiles: Types::GetObjectTypeAttributeStatisticsPercentiles?
     end
 
     class GetProfileHistoryRecordRequest
@@ -2255,6 +2900,7 @@ module Aws::CustomerProfiles
         ?source_last_updated_timestamp_format: String,
         ?max_available_profile_object_count: Integer,
         ?max_profile_object_count: Integer,
+        ?source_priority: Integer,
         ?fields: Hash[String, Types::ObjectTypeField],
         ?keys: Hash[String, Array[Types::ObjectTypeKey]],
         ?created_at: Time,
@@ -2272,6 +2918,7 @@ module Aws::CustomerProfiles
       attr_accessor source_last_updated_timestamp_format: String?
       attr_accessor max_available_profile_object_count: Integer?
       attr_accessor max_profile_object_count: Integer?
+      attr_accessor source_priority: Integer?
       attr_accessor fields: Hash[String, Types::ObjectTypeField]?
       attr_accessor keys: Hash[String, Array[Types::ObjectTypeKey]]?
       attr_accessor created_at: Time?
@@ -2313,6 +2960,164 @@ module Aws::CustomerProfiles
       attr_accessor keys: Hash[String, Array[Types::ObjectTypeKey]]?
     end
 
+    class GetProfileRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?profile_id: String,
+        ?recommender_name: String,
+        ?context: Hash[String, String],
+        ?recommender_filters: Array[Types::RecommenderFilter],
+        ?recommender_promotional_filters: Array[Types::RecommenderPromotionalFilter],
+        ?candidate_ids: Array[String],
+        ?max_results: Integer,
+        ?metadata_config: Types::MetadataConfig,
+        ?diversity_config: Types::RecommendationDiversityConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor profile_id: String?
+      attr_accessor recommender_name: String?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor recommender_filters: Array[Types::RecommenderFilter]?
+      attr_accessor recommender_promotional_filters: Array[Types::RecommenderPromotionalFilter]?
+      attr_accessor candidate_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor metadata_config: Types::MetadataConfig?
+      attr_accessor diversity_config: Types::RecommendationDiversityConfig?
+    end
+
+    class GetProfileRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendations: Array[Types::Recommendation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendations: Array[Types::Recommendation]?
+    end
+
+    class GetRecommenderFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_filter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_filter_name: String?
+    end
+
+    class GetRecommenderFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_filter_name: String,
+        ?recommender_filter_expression: String,
+        ?recommender_schema_name: String,
+        ?created_at: Time,
+        ?status: String,
+        ?description: String,
+        ?failure_reason: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_filter_name: String?
+      attr_accessor recommender_filter_expression: String?
+      attr_accessor recommender_schema_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor failure_reason: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_name: String,
+        ?training_metrics_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_name: String?
+      attr_accessor training_metrics_count: Integer?
+    end
+
+    class GetRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_name: String,
+        ?recommender_recipe_name: String,
+        ?recommender_schema_name: String,
+        ?recommender_config: Types::RecommenderConfig,
+        ?description: String,
+        ?status: String,
+        ?last_updated_at: Time,
+        ?created_at: Time,
+        ?failure_reason: String,
+        ?latest_recommender_update: Types::RecommenderUpdate,
+        ?active_recommender_version_name: String,
+        ?training_metrics: Array[Types::TrainingMetrics],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_name: String?
+      attr_accessor recommender_recipe_name: String?
+      attr_accessor recommender_schema_name: String?
+      attr_accessor recommender_config: Types::RecommenderConfig?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor latest_recommender_update: Types::RecommenderUpdate?
+      attr_accessor active_recommender_version_name: String?
+      attr_accessor training_metrics: Array[Types::TrainingMetrics]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetRecommenderSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_schema_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_schema_name: String?
+    end
+
+    class GetRecommenderSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_schema_name: String,
+        ?fields: Hash[String, Array[Types::RecommenderSchemaField]],
+        ?created_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_schema_name: String?
+      attr_accessor fields: Hash[String, Array[Types::RecommenderSchemaField]]?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+    end
+
     class GetSegmentDefinitionRequest
       include Smithy::Schema::Structure
 
@@ -2334,9 +3139,12 @@ module Aws::CustomerProfiles
         ?display_name: String,
         ?description: String,
         ?segment_groups: Types::SegmentGroup,
+        ?segment_sort: Types::SegmentSort,
         ?segment_definition_arn: String,
         ?created_at: Time,
         ?tags: Hash[String, String],
+        ?segment_sql_query: String,
+        ?segment_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2344,9 +3152,12 @@ module Aws::CustomerProfiles
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor segment_groups: Types::SegmentGroup?
+      attr_accessor segment_sort: Types::SegmentSort?
       attr_accessor segment_definition_arn: String?
       attr_accessor created_at: Time?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor segment_sql_query: String?
+      attr_accessor segment_type: String?
     end
 
     class GetSegmentEstimateRequest
@@ -2405,12 +3216,14 @@ module Aws::CustomerProfiles
         ?segment_definition_name: String,
         ?profiles: Array[Types::ProfileQueryResult],
         ?failures: Array[Types::ProfileQueryFailures],
+        ?last_computed_at: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor segment_definition_name: String?
       attr_accessor profiles: Array[Types::ProfileQueryResult]?
       attr_accessor failures: Array[Types::ProfileQueryFailures]?
+      attr_accessor last_computed_at: Time?
     end
 
     class GetSegmentSnapshotRequest
@@ -2449,6 +3262,40 @@ module Aws::CustomerProfiles
       attr_accessor encryption_key: String?
       attr_accessor role_arn: String?
       attr_accessor destination_uri: String?
+    end
+
+    class GetSegmentSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?segment_definition_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor segment_definition_name: String?
+    end
+
+    class GetSegmentSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?message: String,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?scheduled_executions: Types::ScheduledExecutions,
+        ?started_at: Time,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor scheduled_executions: Types::ScheduledExecutions?
+      attr_accessor started_at: Time?
+      attr_accessor last_updated_at: Time?
     end
 
     class GetSimilarProfilesRequest
@@ -2491,6 +3338,42 @@ module Aws::CustomerProfiles
       attr_accessor rule_level: Integer?
       attr_accessor confidence_score: Float?
       attr_accessor next_token: String?
+    end
+
+    class GetStreamForSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class GetStreamForSegmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_at: Time,
+        ?associated_segments: Array[Types::AssociatedSegment],
+        ?domain_name: String,
+        ?destination_arn: String,
+        ?destination_role_arn: String,
+        ?state: String,
+        ?disassociated_at: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_at: Time?
+      attr_accessor associated_segments: Array[Types::AssociatedSegment]?
+      attr_accessor domain_name: String?
+      attr_accessor destination_arn: String?
+      attr_accessor destination_role_arn: String?
+      attr_accessor state: String?
+      attr_accessor disassociated_at: Time?
+      attr_accessor failure_reason: String?
     end
 
     class GetUploadJobPathRequest
@@ -2708,6 +3591,17 @@ module Aws::CustomerProfiles
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor datetime_type_field_name: String?
+    end
+
+    class InferenceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_provisioned_tps: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_provisioned_tps: Integer?
     end
 
     class IntegrationConfig
@@ -2976,6 +3870,34 @@ module Aws::CustomerProfiles
       attr_accessor next_token: String?
     end
 
+    class ListDomainObjectTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainObjectTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::DomainObjectTypesListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::DomainObjectTypesListItem]?
+      attr_accessor next_token: String?
+    end
+
     class ListDomainsRequest
       include Smithy::Schema::Structure
 
@@ -3101,6 +4023,7 @@ module Aws::CustomerProfiles
         ?is_unstructured: bool,
         ?role_arn: String,
         ?event_trigger_names: Array[String],
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3115,6 +4038,7 @@ module Aws::CustomerProfiles
       attr_accessor is_unstructured: bool?
       attr_accessor role_arn: String?
       attr_accessor event_trigger_names: Array[String]?
+      attr_accessor scope: String?
     end
 
     class ListIntegrationsRequest
@@ -3158,6 +4082,51 @@ module Aws::CustomerProfiles
 
       attr_accessor attribute_name: String?
       attr_accessor last_updated_at: Time?
+    end
+
+    class ListObjectTypeAttributeValuesItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class ListObjectTypeAttributeValuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?domain_name: String,
+        ?object_type_name: String,
+        ?attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor domain_name: String?
+      attr_accessor object_type_name: String?
+      attr_accessor attribute_name: String?
+    end
+
+    class ListObjectTypeAttributeValuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ListObjectTypeAttributeValuesItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ListObjectTypeAttributeValuesItem]?
+      attr_accessor next_token: String?
     end
 
     class ListObjectTypeAttributesRequest
@@ -3236,6 +4205,7 @@ module Aws::CustomerProfiles
         ?last_updated_at: Time,
         ?max_profile_object_count: Integer,
         ?max_available_profile_object_count: Integer,
+        ?source_priority: Integer,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3246,6 +4216,7 @@ module Aws::CustomerProfiles
       attr_accessor last_updated_at: Time?
       attr_accessor max_profile_object_count: Integer?
       attr_accessor max_available_profile_object_count: Integer?
+      attr_accessor source_priority: Integer?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -3367,6 +4338,116 @@ module Aws::CustomerProfiles
       attr_accessor next_token: String?
     end
 
+    class ListRecommenderFiltersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommenderFiltersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommender_filters: Array[Types::RecommenderFilterSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommender_filters: Array[Types::RecommenderFilterSummary]?
+    end
+
+    class ListRecommenderRecipesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommenderRecipesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommender_recipes: Array[Types::RecommenderRecipe],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommender_recipes: Array[Types::RecommenderRecipe]?
+    end
+
+    class ListRecommenderSchemasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommenderSchemasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommender_schemas: Array[Types::RecommenderSchemaSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommender_schemas: Array[Types::RecommenderSchemaSummary]?
+    end
+
+    class ListRecommendersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommenders: Array[Types::RecommenderSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommenders: Array[Types::RecommenderSummary]?
+    end
+
     class ListRuleBasedMatchesRequest
       include Smithy::Schema::Structure
 
@@ -3421,6 +4502,36 @@ module Aws::CustomerProfiles
 
       attr_accessor next_token: String?
       attr_accessor items: Array[Types::SegmentDefinitionItem]?
+    end
+
+    class ListSegmentSubscriptionEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?segment_definition_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor segment_definition_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSegmentSubscriptionEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::SubscriptionEventItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::SubscriptionEventItem]?
+      attr_accessor next_token: String?
     end
 
     class ListTagsForResourceRequest
@@ -3653,6 +4764,17 @@ module Aws::CustomerProfiles
       attr_accessor message: String?
     end
 
+    class MetadataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_columns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_columns: Array[String]?
+    end
+
     class ObjectAttribute
       include Smithy::Schema::Structure
 
@@ -3759,6 +4881,7 @@ module Aws::CustomerProfiles
     end
 
     module PeriodUnit
+      MINUTES: String
       HOURS: String
       DAYS: String
       WEEKS: String
@@ -4000,6 +5123,50 @@ module Aws::CustomerProfiles
       EXCLUSIVE: String
     end
 
+    class PutDomainObjectTypeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?object_type_name: String,
+        ?description: String,
+        ?encryption_key: String,
+        ?fields: Hash[String, Types::DomainObjectTypeField],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor object_type_name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_key: String?
+      attr_accessor fields: Hash[String, Types::DomainObjectTypeField]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutDomainObjectTypeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_type_name: String,
+        ?description: String,
+        ?encryption_key: String,
+        ?fields: Hash[String, Types::DomainObjectTypeField],
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_type_name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_key: String?
+      attr_accessor fields: Hash[String, Types::DomainObjectTypeField]?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class PutIntegrationRequest
       include Smithy::Schema::Structure
 
@@ -4007,22 +5174,24 @@ module Aws::CustomerProfiles
         ?domain_name: String,
         ?uri: String,
         ?object_type_name: String,
+        ?object_type_names: Hash[String, String],
         ?tags: Hash[String, String],
         ?flow_definition: Types::FlowDefinition,
-        ?object_type_names: Hash[String, String],
         ?role_arn: String,
         ?event_trigger_names: Array[String],
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_name: String?
       attr_accessor uri: String?
       attr_accessor object_type_name: String?
+      attr_accessor object_type_names: Hash[String, String]?
       attr_accessor tags: Hash[String, String]?
       attr_accessor flow_definition: Types::FlowDefinition?
-      attr_accessor object_type_names: Hash[String, String]?
       attr_accessor role_arn: String?
       attr_accessor event_trigger_names: Array[String]?
+      attr_accessor scope: String?
     end
 
     class PutIntegrationResponse
@@ -4040,6 +5209,7 @@ module Aws::CustomerProfiles
         ?is_unstructured: bool,
         ?role_arn: String,
         ?event_trigger_names: Array[String],
+        ?scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4054,6 +5224,7 @@ module Aws::CustomerProfiles
       attr_accessor is_unstructured: bool?
       attr_accessor role_arn: String?
       attr_accessor event_trigger_names: Array[String]?
+      attr_accessor scope: String?
     end
 
     class PutProfileObjectRequest
@@ -4095,6 +5266,7 @@ module Aws::CustomerProfiles
         ?allow_profile_creation: bool,
         ?source_last_updated_timestamp_format: String,
         ?max_profile_object_count: Integer,
+        ?source_priority: Integer,
         ?fields: Hash[String, Types::ObjectTypeField],
         ?keys: Hash[String, Array[Types::ObjectTypeKey]],
         ?tags: Hash[String, String],
@@ -4110,6 +5282,7 @@ module Aws::CustomerProfiles
       attr_accessor allow_profile_creation: bool?
       attr_accessor source_last_updated_timestamp_format: String?
       attr_accessor max_profile_object_count: Integer?
+      attr_accessor source_priority: Integer?
       attr_accessor fields: Hash[String, Types::ObjectTypeField]?
       attr_accessor keys: Hash[String, Array[Types::ObjectTypeKey]]?
       attr_accessor tags: Hash[String, String]?
@@ -4128,6 +5301,7 @@ module Aws::CustomerProfiles
         ?source_last_updated_timestamp_format: String,
         ?max_profile_object_count: Integer,
         ?max_available_profile_object_count: Integer,
+        ?source_priority: Integer,
         ?fields: Hash[String, Types::ObjectTypeField],
         ?keys: Hash[String, Array[Types::ObjectTypeKey]],
         ?created_at: Time,
@@ -4145,11 +5319,42 @@ module Aws::CustomerProfiles
       attr_accessor source_last_updated_timestamp_format: String?
       attr_accessor max_profile_object_count: Integer?
       attr_accessor max_available_profile_object_count: Integer?
+      attr_accessor source_priority: Integer?
       attr_accessor fields: Hash[String, Types::ObjectTypeField]?
       attr_accessor keys: Hash[String, Array[Types::ObjectTypeKey]]?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutSegmentSubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?segment_definition_name: String,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor segment_definition_name: String?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+    end
+
+    class PutSegmentSubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?started_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor started_at: Time?
     end
 
     module QueryResult
@@ -4213,6 +5418,264 @@ module Aws::CustomerProfiles
       IN_PROGRESS: String
       COMPLETED: String
       FAILED: String
+    end
+
+    class Recommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_item: Types::CatalogItem,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_item: Types::CatalogItem?
+      attr_accessor score: Float?
+    end
+
+    class RecommendationDiversityConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?values: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor values: Hash[String, Integer]?
+    end
+
+    class RecommendationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?columns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor columns: Array[String]?
+    end
+
+    class Recommender
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?filters: Array[Types::RecommenderFilter],
+        ?promotional_filters: Array[Types::RecommenderPromotionalFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor filters: Array[Types::RecommenderFilter]?
+      attr_accessor promotional_filters: Array[Types::RecommenderPromotionalFilter]?
+    end
+
+    class RecommenderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events_config: Types::EventsConfig,
+        ?training_frequency: Integer,
+        ?inference_config: Types::InferenceConfig,
+        ?included_columns: Hash[String, Array[String]],
+        ?excluded_columns: Hash[String, Array[String]],
+        ?diversity_config: Types::DiversityConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events_config: Types::EventsConfig?
+      attr_accessor training_frequency: Integer?
+      attr_accessor inference_config: Types::InferenceConfig?
+      attr_accessor included_columns: Hash[String, Array[String]]?
+      attr_accessor excluded_columns: Hash[String, Array[String]]?
+      attr_accessor diversity_config: Types::DiversityConfig?
+    end
+
+    class RecommenderFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Hash[String, String]?
+    end
+
+    module RecommenderFilterStatus
+      ACTIVE: String
+      PENDING: String
+      IN_PROGRESS: String
+      FAILED: String
+      DELETING: String
+    end
+
+    class RecommenderFilterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_filter_name: String,
+        ?recommender_schema_name: String,
+        ?recommender_filter_expression: String,
+        ?created_at: Time,
+        ?description: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_filter_name: String?
+      attr_accessor recommender_schema_name: String?
+      attr_accessor recommender_filter_expression: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RecommenderPromotionalFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Hash[String, String],
+        ?promotion_name: String,
+        ?percent_promoted_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Hash[String, String]?
+      attr_accessor promotion_name: String?
+      attr_accessor percent_promoted_items: Integer?
+    end
+
+    class RecommenderRecipe
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    module RecommenderRecipeName
+      RECOMMENDED_FOR_YOU: String
+      SIMILAR_ITEMS: String
+      FREQUENTLY_PAIRED_ITEMS: String
+      POPULAR_ITEMS: String
+      TRENDING_NOW: String
+      PERSONALIZED_RANKING: String
+    end
+
+    class RecommenderSchemaField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_field_name: String,
+        ?content_type: String,
+        ?feature_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_field_name: String?
+      attr_accessor content_type: String?
+      attr_accessor feature_type: String?
+    end
+
+    module RecommenderSchemaStatus
+      ACTIVE: String
+      DELETING: String
+    end
+
+    class RecommenderSchemaSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_schema_name: String,
+        ?fields: Hash[String, Array[Types::RecommenderSchemaField]],
+        ?created_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_schema_name: String?
+      attr_accessor fields: Hash[String, Array[Types::RecommenderSchemaField]]?
+      attr_accessor created_at: Time?
+      attr_accessor status: String?
+    end
+
+    module RecommenderStatus
+      PENDING: String
+      IN_PROGRESS: String
+      ACTIVE: String
+      FAILED: String
+      STOPPING: String
+      INACTIVE: String
+      STARTING: String
+      DELETING: String
+    end
+
+    class RecommenderSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_name: String,
+        ?recipe_name: String,
+        ?recommender_schema_name: String,
+        ?recommender_config: Types::RecommenderConfig,
+        ?created_at: Time,
+        ?description: String,
+        ?status: String,
+        ?last_updated_at: Time,
+        ?tags: Hash[String, String],
+        ?failure_reason: String,
+        ?latest_recommender_update: Types::RecommenderUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_name: String?
+      attr_accessor recipe_name: String?
+      attr_accessor recommender_schema_name: String?
+      attr_accessor recommender_config: Types::RecommenderConfig?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor failure_reason: String?
+      attr_accessor latest_recommender_update: Types::RecommenderUpdate?
+    end
+
+    class RecommenderUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_config: Types::RecommenderConfig,
+        ?status: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?failure_reason: String,
+        ?recommender_version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_config: Types::RecommenderConfig?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor recommender_version_name: String?
     end
 
     class ResourceNotFoundException
@@ -4396,6 +5859,36 @@ module Aws::CustomerProfiles
       attr_accessor include_deleted_records: bool?
     end
 
+    class ScheduleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval: Integer,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval: Integer?
+      attr_accessor unit: String?
+    end
+
+    module ScheduleConfigurationUnit
+      HOURLY: String
+    end
+
+    class ScheduledExecutions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_executed_at: Time,
+        ?last_executed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_executed_at: Time?
+      attr_accessor last_executed_at: Time?
+    end
+
     class ScheduledTriggerProperties
       include Smithy::Schema::Structure
 
@@ -4417,6 +5910,11 @@ module Aws::CustomerProfiles
       attr_accessor timezone: String?
       attr_accessor schedule_offset: Integer?
       attr_accessor first_execution_from: Time?
+    end
+
+    module Scope
+      PROFILE: String
+      DOMAIN: String
     end
 
     class SearchProfilesRequest
@@ -4455,6 +5953,46 @@ module Aws::CustomerProfiles
       attr_accessor next_token: String?
     end
 
+    class SearchRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?key_name: String,
+        ?key_values: Array[String],
+        ?recommender: Types::Recommender,
+        ?candidate_ids: Array[String],
+        ?context: Hash[String, String],
+        ?diversity: Types::RecommendationDiversityConfig,
+        ?metadata: Types::RecommendationMetadata,
+        ?max_recommendations: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor key_name: String?
+      attr_accessor key_values: Array[String]?
+      attr_accessor recommender: Types::Recommender?
+      attr_accessor candidate_ids: Array[String]?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor diversity: Types::RecommendationDiversityConfig?
+      attr_accessor metadata: Types::RecommendationMetadata?
+      attr_accessor max_recommendations: Integer?
+    end
+
+    class SearchRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?recommendations: Array[Types::Recommendation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor recommendations: Array[Types::Recommendation]?
+    end
+
     class SegmentDefinitionItem
       include Smithy::Schema::Structure
 
@@ -4465,6 +6003,7 @@ module Aws::CustomerProfiles
         ?segment_definition_arn: String,
         ?created_at: Time,
         ?tags: Hash[String, String],
+        ?segment_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4474,6 +6013,7 @@ module Aws::CustomerProfiles
       attr_accessor segment_definition_arn: String?
       attr_accessor created_at: Time?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor segment_type: String?
     end
 
     class SegmentGroup
@@ -4506,6 +6046,40 @@ module Aws::CustomerProfiles
       COMPLETED: String
       IN_PROGRESS: String
       FAILED: String
+    end
+
+    class SegmentSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::SortAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::SortAttribute]?
+    end
+
+    module SegmentSortDataType
+      STRING: String
+      NUMBER: String
+      DATE: String
+    end
+
+    module SegmentSortOrder
+      ASC: String
+      DESC: String
+    end
+
+    module SegmentSubscriptionStatus
+      STARTING: String
+      RUNNING: String
+      STOPPED: String
+      FAILED: String
+    end
+
+    module SegmentType
+      CLASSIC: String
+      ENHANCED: String
     end
 
     module ServiceNowConnectorOperator
@@ -4541,6 +6115,28 @@ module Aws::CustomerProfiles
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor object: String?
+    end
+
+    class SortAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?data_type: String,
+        ?order: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor data_type: String?
+      attr_accessor order: String?
+      attr_accessor type: String?
+    end
+
+    module SortAttributeType
+      PROFILE: String
+      CALCULATED: String
     end
 
     class SourceConnectorProperties
@@ -4602,6 +6198,8 @@ module Aws::CustomerProfiles
       PROFILE: String
       ASSET: String
       CASE: String
+      DEVICE: String
+      WEB_ANALYTICS: String
       ORDER: String
       COMMUNICATION_RECORD: String
       AIR_PREFERENCE: String
@@ -4617,6 +6215,28 @@ module Aws::CustomerProfiles
       SECONDARY: String
       LOOKUP_ONLY: String
       NEW_ONLY: String
+    end
+
+    class StartRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_name: String?
+    end
+
+    class StartRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class StartUploadJobRequest
@@ -4650,6 +6270,7 @@ module Aws::CustomerProfiles
       MAXIMUM: String
       AVERAGE: String
       MAX_OCCURRENCE: String
+      RECENT_OCCURRENCES: String
     end
 
     module Status
@@ -4665,6 +6286,28 @@ module Aws::CustomerProfiles
     module StatusReason
       VALIDATION_FAILURE: String
       INTERNAL_FAILURE: String
+    end
+
+    class StopRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_name: String?
+    end
+
+    class StopRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class StopUploadJobRequest
@@ -4695,6 +6338,33 @@ module Aws::CustomerProfiles
       CONTAINS: String
       BEGINS_WITH: String
       ENDS_WITH: String
+    end
+
+    module SubscriptionEvent
+      JOINED: String
+      LEFT: String
+    end
+
+    class SubscriptionEventItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?updated_at: Time,
+        ?event_type: String,
+        ?event: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor updated_at: Time?
+      attr_accessor event_type: String?
+      attr_accessor event: String?
+    end
+
+    module SubscriptionEventType
+      LIVE: String
+      SCHEDULE: String
     end
 
     class TagResourceRequest
@@ -4770,6 +6440,37 @@ module Aws::CustomerProfiles
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module TrainingMetricName
+      HIT: String
+      COVERAGE: String
+      RECALL: String
+      POPULARITY: String
+      FRESHNESS: String
+      SIMILARITY: String
+      MEAN_RECIPROCAL_RANK_AT_25: String
+      NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN_AT_5: String
+      NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN_AT_10: String
+      NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN_AT_25: String
+      PRECISION_AT_5: String
+      PRECISION_AT_10: String
+      PRECISION_AT_25: String
+    end
+
+    class TrainingMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time: Time,
+        ?metrics: Hash[String, Float],
+        ?recommender_version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time: Time?
+      attr_accessor metrics: Hash[String, Float]?
+      attr_accessor recommender_version_name: String?
     end
 
     class TriggerConfig
@@ -4977,6 +6678,7 @@ module Aws::CustomerProfiles
         ?dead_letter_queue_url: String,
         ?matching: Types::MatchingRequest,
         ?rule_based_matching: Types::RuleBasedMatchingRequest,
+        ?data_store: Types::DataStoreRequest,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4987,6 +6689,7 @@ module Aws::CustomerProfiles
       attr_accessor dead_letter_queue_url: String?
       attr_accessor matching: Types::MatchingRequest?
       attr_accessor rule_based_matching: Types::RuleBasedMatchingRequest?
+      attr_accessor data_store: Types::DataStoreRequest?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -5000,6 +6703,7 @@ module Aws::CustomerProfiles
         ?dead_letter_queue_url: String,
         ?matching: Types::MatchingResponse,
         ?rule_based_matching: Types::RuleBasedMatchingResponse,
+        ?data_store: Types::DataStoreResponse,
         ?created_at: Time,
         ?last_updated_at: Time,
         ?tags: Hash[String, String],
@@ -5012,6 +6716,7 @@ module Aws::CustomerProfiles
       attr_accessor dead_letter_queue_url: String?
       attr_accessor matching: Types::MatchingResponse?
       attr_accessor rule_based_matching: Types::RuleBasedMatchingResponse?
+      attr_accessor data_store: Types::DataStoreResponse?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
       attr_accessor tags: Hash[String, String]?
@@ -5139,6 +6844,36 @@ module Aws::CustomerProfiles
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor profile_id: String?
+    end
+
+    class UpdateRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?recommender_name: String,
+        ?description: String,
+        ?recommender_config: Types::RecommenderConfig,
+        ?recommender_version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor recommender_name: String?
+      attr_accessor description: String?
+      attr_accessor recommender_config: Types::RecommenderConfig?
+      attr_accessor recommender_version_name: String?
+    end
+
+    class UpdateRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_name: String?
     end
 
     class UploadJobItem

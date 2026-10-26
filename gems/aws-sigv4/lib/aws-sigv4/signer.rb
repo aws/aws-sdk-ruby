@@ -38,42 +38,51 @@ module Aws
     #
     # ## Credentials
     #
-    # The signer requires credentials. You can configure the signer
-    # with static credentials:
+    # The signer requires credentials. You can configure it with static credentials:
+    #
+    #     require 'aws-sigv4'
     #
     #     signer = Aws::SigV4::Signer.new(
+    #       service: 's3',
+    #       region: 'us-west-2',
     #       access_key_id: 'akid',
-    #       secret_access_key: 'secret',
-    #       ...
+    #       secret_access_key: 'secret'
     #     )
     #
     # or with a credentials object:
     #
     #     signer = Aws::SigV4::Signer.new(
+    #       service: 's3',
+    #       region: 'us-west-2',
     #       credentials: Aws::SigV4::Credentials.new(
     #         access_key_id: 'akid',
     #         secret_access_key: 'secret'
-    #       ),
-    #       ...
+    #       )
     #     )
     #
-    # or you can provide refreshing credentials via the `:credentials_provider`.
-    # If you are using the AWS SDK for Ruby, you can use any of the credential
-    # provider classes:
+    # To use refreshing credentials from the AWS SDK for Ruby, require its core gem
+    # and provide a credential provider:
+    #
+    #     require 'aws-sdk-core'
     #
     #     signer = Aws::SigV4::Signer.new(
-    #       credentials_provider: Aws::Core::InstanceProfileCredentials.new,
-    #       ...
+    #       service: 's3',
+    #       region: 'us-west-2',
+    #       credentials_provider: Aws::InstanceProfileCredentialsProvider.new
     #     )
     #
-    # A credential provider is any object that responds to `#credentials` that returns an object
-    # that responds to the following methods:
+    # A credential provider must respond to:
+    #
+    # * `#set?` => Boolean, true when credentials are available
+    # * `#identity` => the credentials object
+    # * `#expiration` => Time, nil (the credentials expiration, if any)
+    #
+    # The credentials returned by `#identity` must respond to:
     #
     # * `#access_key_id` => String
     # * `#secret_access_key` => String
     # * `#session_token` => String, nil
     # * `#account_id` => String, nil
-    # * `#expiration` => Time, nil
     #
     class Signer # rubocop:disable Metrics/ClassLength
       # @option options [required, String] :service The service signing name, e.g. 's3'.
@@ -92,17 +101,17 @@ module Aws
       #   * `#secret_access_key` => String
       #   * `#session_token` => String, nil
       #   * `#account_id` => String, nil
-      #   * `#expiration` => Time, nil
+      #   * `#set?` => Boolean, true when credentials are available
       #
       #   This is an alternative to providing :access_key_id and :secret_access_key directly.
-      # @option options [#credentials] :credentials_provider An object that responds to `#credentials`,
-      #   returning an object that responds to the following methods:
+      # @option options [#identity] :credentials_provider An identity provider that responds to
+      #   `#set?`, `#identity`, and `#expiration`. Signing requires `#set?` to return true.
+      #   `#expiration` returns a Time or nil. The credentials returned by `#identity` must respond to:
       #
       #   * `#access_key_id` => String
       #   * `#secret_access_key` => String
       #   * `#session_token` => String, nil
       #   * `#account_id` => String, nil
-      #   * `#expiration` => Time, nil
       #
       #   This is an alternative to providing :access_key_id and :secret_access_key directly.
       # @option options [Array<String>] :unsigned_headers ([]) A list of headers that should not be
@@ -135,14 +144,10 @@ module Aws
       # @return [String]
       attr_reader :region
 
-      # @return [#credentials] Returns an object that responds to `#credentials`, returning an object that
-      #   responds to the following methods:
-      #
-      #   * `#access_key_id` => String
-      #   * `#secret_access_key` => String
-      #   * `#session_token` => String, nil
-      #   * `#account_id` => String, nil
-      #   * `#expiration` => Time, nil
+      # @return [#identity] The identity provider used to sign requests.
+      #   It responds to `#set?`, `#identity`, and `#expiration`.
+      #   `#identity` returns credentials with `#access_key_id`, `#secret_access_key`,
+      #   `#session_token`, and `#account_id` accessors.
       #
       attr_reader :credentials_provider
 

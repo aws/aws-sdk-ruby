@@ -36,8 +36,7 @@ module Aws::KafkaConnect
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then
-    #          retry it.</p>
+    # <p>HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it.</p>
     class BadRequestException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::BadRequestException] data
@@ -50,8 +49,7 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>HTTP Status Code 409: Conflict. A resource with this name already exists. Retry your
-    #          request with another name.</p>
+    # <p>HTTP Status Code 409: Conflict. A resource with this name already exists. Retry your request with another name.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::ConflictException] data
@@ -64,8 +62,7 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your
-    #          request.</p>
+    # <p>HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request.</p>
     class ForbiddenException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::ForbiddenException] data
@@ -78,8 +75,7 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>HTTP Status Code 500: Unexpected internal server error. Retrying your request might
-    #          resolve the issue.</p>
+    # <p>HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue.</p>
     class InternalServerErrorException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::InternalServerErrorException] data
@@ -92,8 +88,7 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>HTTP Status Code 404: Resource not found due to incorrect input. Correct your request
-    #          and then retry it.</p>
+    # <p>HTTP Status Code 404: Resource not found due to incorrect input. Correct your request and then retry it.</p>
     class NotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::NotFoundException] data
@@ -106,8 +101,7 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>HTTP Status Code 503: Service Unavailable. Retrying your request in some time might
-    #          resolve the issue.</p>
+    # <p>HTTP Status Code 503: Service Unavailable. Retrying your request in some time might resolve the issue.</p>
     class ServiceUnavailableException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::ServiceUnavailableException] data
@@ -133,8 +127,7 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be
-    #          validated.</p>
+    # <p>HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be validated.</p>
     class UnauthorizedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::KafkaConnect::Types::UnauthorizedException] data

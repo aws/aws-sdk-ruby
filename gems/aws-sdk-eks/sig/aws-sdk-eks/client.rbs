@@ -44,6 +44,17 @@ module Aws::EKS
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _ActivateCertificateAuthorityResponse
+      include Smithy::Client::_Response[Types::ActivateCertificateAuthorityResponse]
+      def update: () -> Types::Update?
+      def certificate_authority: () -> Types::CertificateAuthoritySummary?
+    end
+    def activate_certificate_authority: (
+      ?cluster_name: String,
+      ?certificate_authority_id: String,
+      ?client_request_token: String
+    ) -> _ActivateCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateCertificateAuthorityResponse
+
     interface _AssociateAccessPolicyResponse
       include Smithy::Client::_Response[Types::AssociateAccessPolicyResponse]
       def cluster_name: () -> String?
@@ -98,6 +109,16 @@ module Aws::EKS
       ?client_request_token: String
     ) -> _AssociateIdentityProviderConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateIdentityProviderConfigResponse
 
+    interface _CancelUpdateResponse
+      include Smithy::Client::_Response[Types::CancelUpdateResponse]
+      def update: () -> Types::Update?
+    end
+    def cancel_update: (
+      ?name: String,
+      ?update_id: String,
+      ?client_request_token: String
+    ) -> _CancelUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelUpdateResponse
+
     interface _CreateAccessEntryResponse
       include Smithy::Client::_Response[Types::CreateAccessEntryResponse]
       def access_entry: () -> Types::AccessEntry?
@@ -136,6 +157,58 @@ module Aws::EKS
       }
     ) -> _CreateAddonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAddonResponse
 
+    interface _CreateCapabilityResponse
+      include Smithy::Client::_Response[Types::CreateCapabilityResponse]
+      def capability: () -> Types::Capability?
+    end
+    def create_capability: (
+      ?capability_name: String,
+      ?cluster_name: String,
+      ?client_request_token: String,
+      ?type: String,
+      ?role_arn: String,
+      ?configuration: {
+        argo_cd: {
+          namespace: String,
+          aws_idc: {
+            idc_instance_arn: untyped,
+            idc_region: untyped
+          },
+          rbac_role_mappings: Array[
+            {
+              role: String,
+              identities: Array[
+                {
+                  id: untyped,
+                  type: String
+                }
+              ]
+            }
+          ],
+          network_access: {
+            vpce_ids: Array[String]
+          },
+          endpoint_prefix: String
+        },
+        ack: {
+          enable_cross_namespace: bool,
+          disabled_services: Array[String]
+        }
+      },
+      ?tags: Hash[String, String],
+      ?delete_propagation_policy: String
+    ) -> _CreateCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCapabilityResponse
+
+    interface _CreateCertificateAuthorityResponse
+      include Smithy::Client::_Response[Types::CreateCertificateAuthorityResponse]
+      def update: () -> Types::Update?
+      def certificate_authority: () -> Types::CertificateAuthoritySummary?
+    end
+    def create_certificate_authority: (
+      ?cluster_name: String,
+      ?client_request_token: String
+    ) -> _CreateCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCertificateAuthorityResponse
+
     interface _CreateClusterResponse
       include Smithy::Client::_Response[Types::CreateClusterResponse]
       def cluster: () -> Types::Cluster?
@@ -149,7 +222,8 @@ module Aws::EKS
         security_group_ids: untyped,
         endpoint_public_access: bool,
         endpoint_private_access: untyped,
-        public_access_cidrs: untyped
+        public_access_cidrs: untyped,
+        control_plane_egress_mode: String
       },
       ?kubernetes_network_config: {
         service_ipv4_cidr: String,
@@ -180,7 +254,12 @@ module Aws::EKS
         outpost_arns: Array[String],
         control_plane_instance_type: String,
         control_plane_placement: {
-          group_name: untyped
+          group_name: untyped,
+          spread_level: String
+        },
+        etcd_instance_type: untyped,
+        etcd_placement: {
+          spread_level: untyped
         }
       },
       ?access_config: {
@@ -216,7 +295,38 @@ module Aws::EKS
           enabled: bool
         }
       },
-      ?deletion_protection: bool
+      ?deletion_protection: bool,
+      ?control_plane_scaling_config: {
+        tier: String
+      },
+      ?kube_api_server_config: {
+        event_ttl: String,
+        service_node_port_range: {
+          min_port: Integer,
+          max_port: untyped
+        }
+      },
+      ?kube_scheduler_config: {
+        node_resources_fit: {
+          scoring_strategy: {
+            type: String,
+            resources: Array[
+              {
+                name: String,
+                weight: Integer
+              }
+            ]
+          }
+        }
+      },
+      ?kube_controller_manager_config: {
+        pod_gc_controller_config: {
+          terminated_pod_gc_threshold: Integer
+        },
+        horizontal_pod_autoscaler_controller_config: {
+          horizontal_pod_autoscaler_sync_period: String
+        }
+      }
     ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
 
     interface _CreateEksAnywhereSubscriptionResponse
@@ -313,7 +423,14 @@ module Aws::EKS
       },
       ?capacity_type: String,
       ?version: String,
-      ?release_version: String
+      ?release_version: String,
+      ?warm_pool_config: {
+        enabled: bool,
+        min_size: Integer,
+        max_group_prepared_capacity: Integer,
+        pool_state: String,
+        reuse_on_scale_in: untyped
+      }
     ) -> _CreateNodegroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNodegroupResponse
 
     interface _CreatePodIdentityAssociationResponse
@@ -328,7 +445,8 @@ module Aws::EKS
       ?client_request_token: String,
       ?tags: Hash[String, String],
       ?disable_session_tags: bool,
-      ?target_role_arn: String
+      ?target_role_arn: String,
+      ?policy: String
     ) -> _CreatePodIdentityAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePodIdentityAssociationResponse
 
     interface _DeleteAccessEntryResponse
@@ -348,6 +466,26 @@ module Aws::EKS
       ?addon_name: String,
       ?preserve: bool
     ) -> _DeleteAddonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAddonResponse
+
+    interface _DeleteCapabilityResponse
+      include Smithy::Client::_Response[Types::DeleteCapabilityResponse]
+      def capability: () -> Types::Capability?
+    end
+    def delete_capability: (
+      ?cluster_name: String,
+      ?capability_name: String
+    ) -> _DeleteCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCapabilityResponse
+
+    interface _DeleteCertificateAuthorityResponse
+      include Smithy::Client::_Response[Types::DeleteCertificateAuthorityResponse]
+      def update: () -> Types::Update?
+      def certificate_authority: () -> Types::CertificateAuthoritySummary?
+    end
+    def delete_certificate_authority: (
+      ?cluster_name: String,
+      ?certificate_authority_id: String,
+      ?client_request_token: String
+    ) -> _DeleteCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCertificateAuthorityResponse
 
     interface _DeleteClusterResponse
       include Smithy::Client::_Response[Types::DeleteClusterResponse]
@@ -444,6 +582,24 @@ module Aws::EKS
       ?publishers: Array[String],
       ?owners: Array[String]
     ) -> _DescribeAddonVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAddonVersionsResponse
+
+    interface _DescribeCapabilityResponse
+      include Smithy::Client::_Response[Types::DescribeCapabilityResponse]
+      def capability: () -> Types::Capability?
+    end
+    def describe_capability: (
+      ?cluster_name: String,
+      ?capability_name: String
+    ) -> _DescribeCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapabilityResponse
+
+    interface _DescribeCertificateAuthorityResponse
+      include Smithy::Client::_Response[Types::DescribeCertificateAuthorityResponse]
+      def certificate_authority: () -> Types::CertificateAuthority?
+    end
+    def describe_certificate_authority: (
+      ?cluster_name: String,
+      ?certificate_authority_id: String
+    ) -> _DescribeCertificateAuthorityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCertificateAuthorityResponse
 
     interface _DescribeClusterResponse
       include Smithy::Client::_Response[Types::DescribeClusterResponse]
@@ -544,7 +700,8 @@ module Aws::EKS
       ?name: String,
       ?update_id: String,
       ?nodegroup_name: String,
-      ?addon_name: String
+      ?addon_name: String,
+      ?capability_name: String
     ) -> _DescribeUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUpdateResponse
 
     interface _DisassociateAccessPolicyResponse
@@ -615,6 +772,28 @@ module Aws::EKS
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListAssociatedAccessPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedAccessPoliciesResponse
+
+    interface _ListCapabilitiesResponse
+      include Smithy::Client::_Response[Types::ListCapabilitiesResponse]
+      def capabilities: () -> Array[Types::CapabilitySummary]?
+      def next_token: () -> String?
+    end
+    def list_capabilities: (
+      ?cluster_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCapabilitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCapabilitiesResponse
+
+    interface _ListCertificateAuthoritiesResponse
+      include Smithy::Client::_Response[Types::ListCertificateAuthoritiesResponse]
+      def certificate_authorities: () -> Array[Types::CertificateAuthoritySummary]?
+      def next_token: () -> String?
+    end
+    def list_certificate_authorities: (
+      ?cluster_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCertificateAuthoritiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCertificateAuthoritiesResponse
 
     interface _ListClustersResponse
       include Smithy::Client::_Response[Types::ListClustersResponse]
@@ -717,6 +896,7 @@ module Aws::EKS
       ?name: String,
       ?nodegroup_name: String,
       ?addon_name: String,
+      ?capability_name: String,
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListUpdatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUpdatesResponse
@@ -792,6 +972,43 @@ module Aws::EKS
       ]
     ) -> _UpdateAddonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAddonResponse
 
+    interface _UpdateCapabilityResponse
+      include Smithy::Client::_Response[Types::UpdateCapabilityResponse]
+      def update: () -> Types::Update?
+    end
+    def update_capability: (
+      ?cluster_name: String,
+      ?capability_name: String,
+      ?role_arn: String,
+      ?configuration: {
+        argo_cd: {
+          rbac_role_mappings: {
+            add_or_update_role_mappings: Array[
+              {
+                role: String,
+                identities: Array[
+                  {
+                    id: String,
+                    type: String
+                  }
+                ]
+              }
+            ],
+            remove_role_mappings: untyped
+          },
+          network_access: {
+            vpce_ids: Array[String]
+          }
+        },
+        ack: {
+          enable_cross_namespace: bool,
+          disabled_services: Array[String]
+        }
+      },
+      ?client_request_token: String,
+      ?delete_propagation_policy: String
+    ) -> _UpdateCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCapabilityResponse
+
     interface _UpdateClusterConfigResponse
       include Smithy::Client::_Response[Types::UpdateClusterConfigResponse]
       def update: () -> Types::Update?
@@ -803,7 +1020,8 @@ module Aws::EKS
         security_group_ids: untyped,
         endpoint_public_access: bool,
         endpoint_private_access: untyped,
-        public_access_cidrs: untyped
+        public_access_cidrs: untyped,
+        control_plane_egress_mode: String
       },
       ?logging: {
         cluster_logging: Array[
@@ -852,7 +1070,38 @@ module Aws::EKS
           }
         ]
       },
-      ?deletion_protection: bool
+      ?deletion_protection: bool,
+      ?control_plane_scaling_config: {
+        tier: String
+      },
+      ?kube_api_server_config: {
+        event_ttl: String,
+        service_node_port_range: {
+          min_port: Integer,
+          max_port: untyped
+        }
+      },
+      ?kube_scheduler_config: {
+        node_resources_fit: {
+          scoring_strategy: {
+            type: String,
+            resources: Array[
+              {
+                name: String,
+                weight: Integer
+              }
+            ]
+          }
+        }
+      },
+      ?kube_controller_manager_config: {
+        pod_gc_controller_config: {
+          terminated_pod_gc_threshold: Integer
+        },
+        horizontal_pod_autoscaler_controller_config: {
+          horizontal_pod_autoscaler_sync_period: String
+        }
+      }
     ) -> _UpdateClusterConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterConfigResponse
 
     interface _UpdateClusterVersionResponse
@@ -863,7 +1112,10 @@ module Aws::EKS
       ?name: String,
       ?version: String,
       ?client_request_token: String,
-      ?force: bool
+      ?force: bool,
+      ?rollback_config: {
+        timeout_minutes: Integer
+      }
     ) -> _UpdateClusterVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterVersionResponse
 
     interface _UpdateEksAnywhereSubscriptionResponse
@@ -922,6 +1174,13 @@ module Aws::EKS
           }
         ]
       },
+      ?warm_pool_config: {
+        enabled: bool,
+        min_size: Integer,
+        max_group_prepared_capacity: Integer,
+        pool_state: String,
+        reuse_on_scale_in: untyped
+      },
       ?client_request_token: String
     ) -> _UpdateNodegroupConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNodegroupConfigResponse
 
@@ -953,7 +1212,8 @@ module Aws::EKS
       ?role_arn: String,
       ?client_request_token: String,
       ?disable_session_tags: bool,
-      ?target_role_arn: String
+      ?target_role_arn: String,
+      ?policy: String
     ) -> _UpdatePodIdentityAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePodIdentityAssociationResponse
   end
 end

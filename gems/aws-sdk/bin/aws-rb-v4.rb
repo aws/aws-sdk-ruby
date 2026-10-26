@@ -40,7 +40,7 @@ OptionParser.new do |opts| # rubocop:disable Metrics/BlockLength
     options[:debug] = false unless options[:debug_set]
   end
 
-  opts.on('-l', '--[no-]log', 'log client requets, on by default') do |value|
+  opts.on('-l', '--[no-]log', 'log client requests, on by default') do |value|
     options[:log] = value
     options[:log_set] = true
   end

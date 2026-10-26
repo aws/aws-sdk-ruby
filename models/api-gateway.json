@@ -263,6 +263,35 @@
                 "smithy.api#documentation": "<p>API stage name of the associated API stage in a usage plan.</p>"
             }
         },
+        "com.amazonaws.apigateway#ApiStatus": {
+            "type": "enum",
+            "members": {
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.apigateway#Authorizer": {
             "type": "structure",
             "members": {
@@ -771,6 +800,194 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<fullname>Amazon API Gateway</fullname>\n         <p>Amazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends. API Gateway allows developers to securely connect mobile and web applications to APIs that run on Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>",
                 "smithy.api#title": "Amazon API Gateway",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://apigateway-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://apigateway-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://apigateway.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://apigateway.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -778,27 +995,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -2656,7 +2873,13 @@
                 "securityPolicy": {
                     "target": "com.amazonaws.apigateway#SecurityPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>"
+                        "smithy.api#documentation": "<p>The Transport Layer Security (TLS) version + cipher suite for this DomainName.</p>"
+                    }
+                },
+                "endpointAccessMode": {
+                    "target": "com.amazonaws.apigateway#EndpointAccessMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe endpoint access mode of the DomainName. Only available for DomainNames that use security policies that start with <code>SecurityPolicy_</code>.\n</p>"
                     }
                 },
                 "mutualTlsAuthentication": {
@@ -3012,6 +3235,18 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default <code>execute-api</code> endpoint.\n      By default, clients can invoke your API with the default\n      <code>https://{api_id}.execute-api.{region}.amazonaws.com</code> endpoint. To require that clients use a\n      custom domain name to invoke your API, disable the default endpoint</p>"
+                    }
+                },
+                "securityPolicy": {
+                    "target": "com.amazonaws.apigateway#SecurityPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Transport Layer Security (TLS) version + cipher suite for this RestApi. \n</p>"
+                    }
+                },
+                "endpointAccessMode": {
+                    "target": "com.amazonaws.apigateway#EndpointAccessMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe endpoint access mode of the RestApi. Only available for RestApis that use security policies that start with <code>SecurityPolicy_</code>.</p>"
                     }
                 }
             },
@@ -5080,7 +5315,13 @@
                 "securityPolicy": {
                     "target": "com.amazonaws.apigateway#SecurityPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>"
+                        "smithy.api#documentation": "<p>The Transport Layer Security (TLS) version + cipher suite for this DomainName.</p>"
+                    }
+                },
+                "endpointAccessMode": {
+                    "target": "com.amazonaws.apigateway#EndpointAccessMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe endpoint access mode of the DomainName. \n</p>"
                     }
                 },
                 "tags": {
@@ -5213,6 +5454,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PENDING_OWNERSHIP_VERIFICATION"
                     }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
                 }
             }
         },
@@ -5242,6 +5489,23 @@
             "type": "double",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.apigateway#EndpointAccessMode": {
+            "type": "enum",
+            "members": {
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
+                    }
+                },
+                "STRICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRICT"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#EndpointConfiguration": {
@@ -8970,6 +9234,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the TLS configuration for an integration.</p>"
                     }
+                },
+                "responseTransferMode": {
+                    "target": "com.amazonaws.apigateway#ResponseTransferMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe response transfer mode of the integration.\n</p>"
+                    }
+                },
+                "integrationTarget": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ALB or NLB listener to send the request to. \n</p>"
+                    }
                 }
             },
             "traits": {
@@ -10006,6 +10282,18 @@
                 },
                 "tlsConfig": {
                     "target": "com.amazonaws.apigateway#TlsConfig"
+                },
+                "responseTransferMode": {
+                    "target": "com.amazonaws.apigateway#ResponseTransferMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe response transfer mode of the integration.\n</p>"
+                    }
+                },
+                "integrationTarget": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ALB or NLB listener to send the request to.\n</p>"
+                    }
                 }
             },
             "traits": {
@@ -10668,6 +10956,23 @@
                 "smithy.api#documentation": "<p>Represents a collection of Resource resources.</p>"
             }
         },
+        "com.amazonaws.apigateway#ResponseTransferMode": {
+            "type": "enum",
+            "members": {
+                "BUFFERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUFFERED"
+                    }
+                },
+                "STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STREAM"
+                    }
+                }
+            }
+        },
         "com.amazonaws.apigateway#RestApi": {
             "type": "structure",
             "members": {
@@ -10754,6 +11059,30 @@
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The API's root resource ID.</p>"
+                    }
+                },
+                "securityPolicy": {
+                    "target": "com.amazonaws.apigateway#SecurityPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Transport Layer Security (TLS) version + cipher suite for this RestApi. \n</p>"
+                    }
+                },
+                "endpointAccessMode": {
+                    "target": "com.amazonaws.apigateway#EndpointAccessMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe endpoint access mode of the RestApi.\n</p>"
+                    }
+                },
+                "apiStatus": {
+                    "target": "com.amazonaws.apigateway#ApiStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ApiStatus of the RestApi.\n</p>"
+                    }
+                },
+                "apiStatusMessage": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status message of the RestApi. When the status message is <code>UPDATING</code> you can still invoke it.  \n</p>"
                     }
                 }
             },
@@ -10935,6 +11264,78 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "TLS_1_2"
+                    }
+                },
+                "SecurityPolicy_TLS13_1_3_2025_09": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_3_2025_09"
+                    }
+                },
+                "SecurityPolicy_TLS13_1_3_FIPS_2025_09": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_3_FIPS_2025_09"
+                    }
+                },
+                "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09"
+                    }
+                },
+                "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09"
+                    }
+                },
+                "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09"
+                    }
+                },
+                "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09"
+                    }
+                },
+                "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09"
+                    }
+                },
+                "SecurityPolicy_TLS13_1_2_PQ_2025_09": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_2_PQ_2025_09"
+                    }
+                },
+                "SecurityPolicy_TLS13_1_2_2021_06": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_1_2_2021_06"
+                    }
+                },
+                "SecurityPolicy_TLS13_2025_EDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS13_2025_EDGE"
+                    }
+                },
+                "SecurityPolicy_TLS12_PFS_2025_EDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS12_PFS_2025_EDGE"
+                    }
+                },
+                "SecurityPolicy_TLS12_2018_EDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityPolicy_TLS12_2018_EDGE"
                     }
                 }
             }

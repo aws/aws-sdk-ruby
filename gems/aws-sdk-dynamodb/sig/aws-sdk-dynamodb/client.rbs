@@ -349,7 +349,29 @@ module Aws::DynamoDB
       ?on_demand_throughput: {
         max_read_request_units: Integer,
         max_write_request_units: untyped
-      }
+      },
+      ?global_table_source_arn: String,
+      ?global_table_settings_replication_mode: String,
+      ?vector_indexes: Array[
+        {
+          index_name: String,
+          vector_attribute: {
+            attribute_name: String
+          },
+          search_schema: Array[
+            {
+              attribute_name: String,
+              search_schema_element_type: String
+            }
+          ],
+          projection: {
+            projection_type: String,
+            non_key_attributes: Array[String]
+          },
+          dimensions: Integer,
+          distance_function: String
+        }
+      ]
     ) -> _CreateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTableResponse
 
     interface _DeleteBackupResponse
@@ -805,6 +827,52 @@ module Aws::DynamoDB
         export_from_time: Time,
         export_to_time: Time,
         export_view_type: String
+      },
+      ?filter_specification: {
+        filter_expression: String,
+        projection_expression: String,
+        key_condition_expression: String,
+        expression_attribute_names: Hash[String, String],
+        expression_attribute_values: Hash[String,
+          {
+            s: String,
+            n: String,
+            b: String,
+            ss: Array[String],
+            ns: Array[String],
+            bs: Array[String],
+            m: Hash[String,
+              {
+                s: untyped,
+                n: untyped,
+                b: untyped,
+                ss: untyped,
+                ns: untyped,
+                bs: untyped,
+                m: untyped,
+                l: Array[
+                  {
+                    s: untyped,
+                    n: untyped,
+                    b: untyped,
+                    ss: untyped,
+                    ns: untyped,
+                    bs: untyped,
+                    m: untyped,
+                    l: untyped,
+                    null: bool,
+                    bool: bool
+                  }
+                ],
+                null: untyped,
+                bool: untyped
+              }
+            ],
+            l: untyped,
+            null: untyped,
+            bool: untyped
+          }
+        ]
       }
     ) -> _ExportTableToPointInTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportTableToPointInTimeResponse
 
@@ -932,6 +1000,23 @@ module Aws::DynamoDB
               read_units_per_second: untyped,
               write_units_per_second: untyped
             }
+          }
+        ],
+        vector_indexes: Array[
+          {
+            index_name: untyped,
+            vector_attribute: {
+              attribute_name: String
+            },
+            search_schema: Array[
+              {
+                attribute_name: String,
+                search_schema_element_type: String
+              }
+            ],
+            projection: untyped,
+            dimensions: untyped,
+            distance_function: String
           }
         ]
       }
@@ -1437,7 +1522,27 @@ module Aws::DynamoDB
         enabled: bool,
         sse_type: String,
         kms_master_key_id: String
-      }
+      },
+      ?vector_index_override: Array[
+        {
+          index_name: String,
+          vector_attribute: {
+            attribute_name: String
+          },
+          search_schema: Array[
+            {
+              attribute_name: String,
+              search_schema_element_type: String
+            }
+          ],
+          projection: {
+            projection_type: String,
+            non_key_attributes: Array[String]
+          },
+          dimensions: Integer,
+          distance_function: String
+        }
+      ]
     ) -> _RestoreTableFromBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreTableFromBackupResponse
 
     interface _RestoreTableToPointInTimeResponse
@@ -1505,7 +1610,27 @@ module Aws::DynamoDB
         enabled: bool,
         sse_type: String,
         kms_master_key_id: String
-      }
+      },
+      ?vector_index_override: Array[
+        {
+          index_name: String,
+          vector_attribute: {
+            attribute_name: String
+          },
+          search_schema: Array[
+            {
+              attribute_name: String,
+              search_schema_element_type: String
+            }
+          ],
+          projection: {
+            projection_type: String,
+            non_key_attributes: Array[String]
+          },
+          dimensions: Integer,
+          distance_function: String
+        }
+      ]
     ) -> _RestoreTableToPointInTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreTableToPointInTimeResponse
 
     interface _ScanResponse
@@ -1656,6 +1781,101 @@ module Aws::DynamoDB
       ],
       ?consistent_read: bool
     ) -> _ScanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ScanResponse
+
+    interface _SearchVectorsResponse
+      include Smithy::Client::_Response[Types::SearchVectorsOutput]
+      def consumed_capacity: () -> Types::VectorCapacity?
+      def search_results: () -> Array[Types::SearchResultItem]?
+    end
+    def search_vectors: (
+      ?table_name: String,
+      ?index_name: String,
+      ?return_consumed_capacity: String,
+      ?expression_attribute_names: Hash[String, String],
+      ?expression_attribute_values: Hash[String,
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?projection_expression: String,
+      ?search_vector: Array[
+        {
+          s: String,
+          n: String,
+          b: String,
+          ss: Array[String],
+          ns: Array[String],
+          bs: Array[String],
+          m: Hash[String,
+            {
+              s: untyped,
+              n: untyped,
+              b: untyped,
+              ss: untyped,
+              ns: untyped,
+              bs: untyped,
+              m: untyped,
+              l: Array[
+                {
+                  s: untyped,
+                  n: untyped,
+                  b: untyped,
+                  ss: untyped,
+                  ns: untyped,
+                  bs: untyped,
+                  m: untyped,
+                  l: untyped,
+                  null: bool,
+                  bool: bool
+                }
+              ],
+              null: untyped,
+              bool: untyped
+            }
+          ],
+          l: untyped,
+          null: untyped,
+          bool: untyped
+        }
+      ],
+      ?search_condition_expression: String,
+      ?top_k: Integer
+    ) -> _SearchVectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchVectorsResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -2300,7 +2520,33 @@ module Aws::DynamoDB
       ?warm_throughput: {
         read_units_per_second: Integer,
         write_units_per_second: untyped
-      }
+      },
+      ?global_table_settings_replication_mode: String,
+      ?vector_index_updates: Array[
+        {
+          create: {
+            index_name: String,
+            vector_attribute: {
+              attribute_name: String
+            },
+            search_schema: Array[
+              {
+                attribute_name: String,
+                search_schema_element_type: String
+              }
+            ],
+            projection: {
+              projection_type: String,
+              non_key_attributes: Array[String]
+            },
+            dimensions: Integer,
+            distance_function: String
+          },
+          delete: {
+            index_name: untyped
+          }
+        }
+      ]
     ) -> _UpdateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTableResponse
 
     interface _UpdateTableReplicaAutoScalingResponse

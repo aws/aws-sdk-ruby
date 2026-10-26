@@ -67,6 +67,32 @@ module Aws::OpenSearchServerless
       attr_accessor capacity_limits: Types::CapacityLimits?
     end
 
+    class BatchGetCollectionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor names: Array[String]?
+    end
+
+    class BatchGetCollectionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_group_details: Array[Types::CollectionGroupDetail],
+        ?collection_group_error_details: Array[Types::CollectionGroupErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_group_details: Array[Types::CollectionGroupDetail]?
+      attr_accessor collection_group_error_details: Array[Types::CollectionGroupErrorDetail]?
+    end
+
     class BatchGetCollectionInput
       include Smithy::Schema::Structure
 
@@ -165,6 +191,19 @@ module Aws::OpenSearchServerless
       attr_accessor vpc_endpoint_error_details: Array[Types::VpcEndpointErrorDetail]?
     end
 
+    class CapacityDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_in_ocu: Float,
+        ?autoscaling_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_in_ocu: Float?
+      attr_accessor autoscaling_status: String?
+    end
+
     class CapacityLimits
       include Smithy::Schema::Structure
 
@@ -190,6 +229,8 @@ module Aws::OpenSearchServerless
         ?arn: String,
         ?kms_key_arn: String,
         ?standby_replicas: String,
+        ?deletion_protection: String,
+        ?vector_options: Types::VectorOptions,
         ?created_date: Integer,
         ?last_modified_date: Integer,
         ?collection_endpoint: String,
@@ -197,6 +238,7 @@ module Aws::OpenSearchServerless
         ?fips_endpoints: Types::FipsEndpoints,
         ?failure_code: String,
         ?failure_message: String,
+        ?collection_group_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -208,6 +250,8 @@ module Aws::OpenSearchServerless
       attr_accessor arn: String?
       attr_accessor kms_key_arn: String?
       attr_accessor standby_replicas: String?
+      attr_accessor deletion_protection: String?
+      attr_accessor vector_options: Types::VectorOptions?
       attr_accessor created_date: Integer?
       attr_accessor last_modified_date: Integer?
       attr_accessor collection_endpoint: String?
@@ -215,6 +259,7 @@ module Aws::OpenSearchServerless
       attr_accessor fips_endpoints: Types::FipsEndpoints?
       attr_accessor failure_code: String?
       attr_accessor failure_message: String?
+      attr_accessor collection_group_name: String?
     end
 
     class CollectionErrorDetail
@@ -240,11 +285,101 @@ module Aws::OpenSearchServerless
       def initialize: (
         ?name: String,
         ?status: String,
+        ?collection_group_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor status: String?
+      attr_accessor collection_group_name: String?
+    end
+
+    class CollectionGroupCapacityLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_indexing_capacity_in_ocu: Float,
+        ?max_search_capacity_in_ocu: Float,
+        ?min_indexing_capacity_in_ocu: Float,
+        ?min_search_capacity_in_ocu: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_indexing_capacity_in_ocu: Float?
+      attr_accessor max_search_capacity_in_ocu: Float?
+      attr_accessor min_indexing_capacity_in_ocu: Float?
+      attr_accessor min_search_capacity_in_ocu: Float?
+    end
+
+    class CollectionGroupDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?standby_replicas: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?created_date: Integer,
+        ?capacity_limits: Types::CollectionGroupCapacityLimits,
+        ?current_capacity: Types::CurrentCapacity,
+        ?number_of_collections: Integer,
+        ?generation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor standby_replicas: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_date: Integer?
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits?
+      attr_accessor current_capacity: Types::CurrentCapacity?
+      attr_accessor number_of_collections: Integer?
+      attr_accessor generation: String?
+    end
+
+    class CollectionGroupErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?error_message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+    end
+
+    class CollectionGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?number_of_collections: Integer,
+        ?created_date: Integer,
+        ?capacity_limits: Types::CollectionGroupCapacityLimits,
+        ?generation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor number_of_collections: Integer?
+      attr_accessor created_date: Integer?
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits?
+      attr_accessor generation: String?
     end
 
     class CollectionSummary
@@ -255,6 +390,8 @@ module Aws::OpenSearchServerless
         ?name: String,
         ?status: String,
         ?arn: String,
+        ?kms_key_arn: String,
+        ?collection_group_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -262,6 +399,8 @@ module Aws::OpenSearchServerless
       attr_accessor name: String?
       attr_accessor status: String?
       attr_accessor arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor collection_group_name: String?
     end
 
     class ConflictException
@@ -317,8 +456,11 @@ module Aws::OpenSearchServerless
         ?arn: String,
         ?kms_key_arn: String,
         ?standby_replicas: String,
+        ?deletion_protection: String,
+        ?vector_options: Types::VectorOptions,
         ?created_date: Integer,
         ?last_modified_date: Integer,
+        ?collection_group_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -330,8 +472,72 @@ module Aws::OpenSearchServerless
       attr_accessor arn: String?
       attr_accessor kms_key_arn: String?
       attr_accessor standby_replicas: String?
+      attr_accessor deletion_protection: String?
+      attr_accessor vector_options: Types::VectorOptions?
       attr_accessor created_date: Integer?
       attr_accessor last_modified_date: Integer?
+      attr_accessor collection_group_name: String?
+    end
+
+    class CreateCollectionGroupDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?standby_replicas: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?created_date: Integer,
+        ?capacity_limits: Types::CollectionGroupCapacityLimits,
+        ?generation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor standby_replicas: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_date: Integer?
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits?
+      attr_accessor generation: String?
+    end
+
+    class CreateCollectionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?standby_replicas: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?capacity_limits: Types::CollectionGroupCapacityLimits,
+        ?generation: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor standby_replicas: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits?
+      attr_accessor generation: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateCollectionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_collection_group_detail: Types::CreateCollectionGroupDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_collection_group_detail: Types::CreateCollectionGroupDetail?
     end
 
     class CreateCollectionInput
@@ -343,6 +549,10 @@ module Aws::OpenSearchServerless
         ?description: String,
         ?tags: Array[Types::Tag],
         ?standby_replicas: String,
+        ?vector_options: Types::VectorOptions,
+        ?collection_group_name: String,
+        ?encryption_config: Types::EncryptionConfig,
+        ?deletion_protection: String,
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -352,6 +562,10 @@ module Aws::OpenSearchServerless
       attr_accessor description: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor standby_replicas: String?
+      attr_accessor vector_options: Types::VectorOptions?
+      attr_accessor collection_group_name: String?
+      attr_accessor encryption_config: Types::EncryptionConfig?
+      attr_accessor deletion_protection: String?
       attr_accessor client_token: String?
     end
 
@@ -544,6 +758,19 @@ module Aws::OpenSearchServerless
       attr_accessor create_vpc_endpoint_detail: Types::CreateVpcEndpointDetail?
     end
 
+    class CurrentCapacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search: Types::CapacityDetails,
+        ?indexing: Types::CapacityDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search: Types::CapacityDetails?
+      attr_accessor indexing: Types::CapacityDetails?
+    end
+
     class DeleteAccessPolicyInput
       include Smithy::Schema::Structure
 
@@ -575,12 +802,36 @@ module Aws::OpenSearchServerless
         ?id: String,
         ?name: String,
         ?status: String,
+        ?deletion_protection: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor name: String?
       attr_accessor status: String?
+      attr_accessor deletion_protection: String?
+    end
+
+    class DeleteCollectionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteCollectionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeleteCollectionInput
@@ -774,6 +1025,19 @@ module Aws::OpenSearchServerless
       attr_accessor resource: String?
       attr_accessor error_message: String?
       attr_accessor error_code: String?
+    end
+
+    class EncryptionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?a_ws_owned_key: bool,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor a_ws_owned_key: bool?
+      attr_accessor kms_key_arn: String?
     end
 
     class FipsEndpoints
@@ -1101,6 +1365,32 @@ module Aws::OpenSearchServerless
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor access_policy_summaries: Array[Types::AccessPolicySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCollectionGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCollectionGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_group_summaries: Array[Types::CollectionGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_group_summaries: Array[Types::CollectionGroupSummary]?
       attr_accessor next_token: String?
     end
 
@@ -1566,9 +1856,11 @@ module Aws::OpenSearchServerless
         ?status: String,
         ?type: String,
         ?description: String,
+        ?vector_options: Types::VectorOptions,
         ?arn: String,
         ?created_date: Integer,
         ?last_modified_date: Integer,
+        ?deletion_protection: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1577,9 +1869,64 @@ module Aws::OpenSearchServerless
       attr_accessor status: String?
       attr_accessor type: String?
       attr_accessor description: String?
+      attr_accessor vector_options: Types::VectorOptions?
       attr_accessor arn: String?
       attr_accessor created_date: Integer?
       attr_accessor last_modified_date: Integer?
+      attr_accessor deletion_protection: String?
+    end
+
+    class UpdateCollectionGroupDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?capacity_limits: Types::CollectionGroupCapacityLimits,
+        ?created_date: Integer,
+        ?last_modified_date: Integer,
+        ?generation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits?
+      attr_accessor created_date: Integer?
+      attr_accessor last_modified_date: Integer?
+      attr_accessor generation: String?
+    end
+
+    class UpdateCollectionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?description: String,
+        ?capacity_limits: Types::CollectionGroupCapacityLimits,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor capacity_limits: Types::CollectionGroupCapacityLimits?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateCollectionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_collection_group_detail: Types::UpdateCollectionGroupDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_collection_group_detail: Types::UpdateCollectionGroupDetail?
     end
 
     class UpdateCollectionInput
@@ -1588,12 +1935,16 @@ module Aws::OpenSearchServerless
       def initialize: (
         ?id: String,
         ?description: String,
+        ?vector_options: Types::VectorOptions,
+        ?deletion_protection: String,
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor description: String?
+      attr_accessor vector_options: Types::VectorOptions?
+      attr_accessor deletion_protection: String?
       attr_accessor client_token: String?
     end
 
@@ -1805,6 +2156,17 @@ module Aws::OpenSearchServerless
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class VectorOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_vector_acceleration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_vector_acceleration: String?
     end
 
     class VpcEndpointDetail

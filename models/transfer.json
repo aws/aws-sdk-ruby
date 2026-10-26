@@ -124,6 +124,38 @@
                 "smithy.api#pattern": "^arn:\\S+$"
             }
         },
+        "com.amazonaws.transfer#As2AsyncMdnConnectorConfig": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.transfer#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL endpoint where asynchronous MDN responses should be sent.</p>"
+                    }
+                },
+                "ServerIds": {
+                    "target": "com.amazonaws.transfer#As2AsyncMdnServerIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of server identifiers that can handle asynchronous MDN responses. You can specify between 1 and 10 server IDs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration details for asynchronous Message Disposition Notification (MDN) responses in AS2 connectors. This configuration specifies where asynchronous MDN responses should be sent and which servers should handle them.</p>"
+            }
+        },
+        "com.amazonaws.transfer#As2AsyncMdnServerIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#ServerId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.transfer#As2ConnectorConfig": {
             "type": "structure",
             "members": {
@@ -172,7 +204,7 @@
                 "MdnResponse": {
                     "target": "com.amazonaws.transfer#MdnResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used for outbound requests (from an Transfer Family connector to a partner AS2 server) to determine whether the partner response for transfers is synchronous or asynchronous. Specify either of the following values:</p> <ul> <li> <p> <code>SYNC</code>: The system expects a synchronous MDN response, confirming that the file was transferred successfully (or not).</p> </li> <li> <p> <code>NONE</code>: Specifies that no MDN response is required.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Used for outbound requests (from an Transfer Family connector to a partner AS2 server) to determine whether the partner response for transfers is synchronous or asynchronous. Specify either of the following values:</p> <ul> <li> <p> <code>ASYNC</code>: The system expects an asynchronous MDN response, confirming that the file was transferred successfully (or not).</p> </li> <li> <p> <code>SYNC</code>: The system expects a synchronous MDN response, confirming that the file was transferred successfully (or not).</p> </li> <li> <p> <code>NONE</code>: Specifies that no MDN response is required.</p> </li> </ul>"
                     }
                 },
                 "BasicAuthSecretId": {
@@ -185,6 +217,12 @@
                     "target": "com.amazonaws.transfer#PreserveContentType",
                     "traits": {
                         "smithy.api#documentation": "<p>Allows you to use the Amazon S3 <code>Content-Type</code> that is associated with objects in S3 instead of having the content type mapped based on the file extension. This parameter is enabled by default when you create an AS2 connector from the console, but disabled by default when you create an AS2 connector by calling the API directly.</p>"
+                    }
+                },
+                "AsyncMdnConfig": {
+                    "target": "com.amazonaws.transfer#As2AsyncMdnConnectorConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for asynchronous Message Disposition Notification (MDN) responses. This allows you to configure where asynchronous MDN responses should be sent and which servers should handle them.</p>"
                     }
                 }
             },
@@ -208,7 +246,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[\\p{Print}\\s]*$"
+                "smithy.api#pattern": "^[\\u0020-\\u007E\\s]*$"
             }
         },
         "com.amazonaws.transfer#As2Transport": {
@@ -254,7 +292,7 @@
                     "min": 0,
                     "max": 48
                 },
-                "smithy.api#pattern": "^[\\p{XDigit}{2}:?]*$"
+                "smithy.api#pattern": "^[0-9a-fA-F{}:?]*$"
             }
         },
         "com.amazonaws.transfer#Certificate": {
@@ -273,7 +311,7 @@
                     "min": 1,
                     "max": 16384
                 },
-                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*$",
+                "smithy.api#pattern": "^[\\t\\n\\r\\u0020-\\u00FF]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -284,7 +322,7 @@
                     "min": 1,
                     "max": 2097152
                 },
-                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*$",
+                "smithy.api#pattern": "^[\\t\\n\\r\\u0020-\\u00FF]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -404,6 +442,23 @@
                 }
             }
         },
+        "com.amazonaws.transfer#CommunicationMode": {
+            "type": "enum",
+            "members": {
+                "CLIENT_TALK_FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIENT_TALK_FIRST"
+                    }
+                },
+                "SERVER_TALK_FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER_TALK_FIRST"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#CompressionEnum": {
             "type": "enum",
             "members": {
@@ -436,6 +491,40 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
+        },
+        "com.amazonaws.transfer#ConnectorEgressConfig": {
+            "type": "union",
+            "members": {
+                "VpcLattice": {
+                    "target": "com.amazonaws.transfer#ConnectorVpcLatticeEgressConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC_LATTICE configuration for routing connector traffic through customer VPCs. Enables private connectivity to SFTP servers without requiring public internet access or complex network configurations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration structure that defines how traffic is routed from the connector to the SFTP server. Contains VPC Lattice settings when using VPC_LATTICE egress type for private connectivity through customer VPCs.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ConnectorEgressType": {
+            "type": "enum",
+            "members": {
+                "SERVICE_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_MANAGED"
+                    }
+                },
+                "VPC_LATTICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_LATTICE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#ConnectorErrorMessage": {
+            "type": "string"
         },
         "com.amazonaws.transfer#ConnectorFileTransferResult": {
             "type": "structure",
@@ -538,6 +627,67 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^TransferSFTPConnectorSecurityPolicy-[A-Za-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.transfer#ConnectorStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ERRORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERRORED"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#ConnectorVpcLatticeEgressConfig": {
+            "type": "structure",
+            "members": {
+                "ResourceConfigurationArn": {
+                    "target": "com.amazonaws.transfer#VpcLatticeResourceConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the VPC_LATTICE Resource Configuration that defines the target SFTP server location. Must point to a valid Resource Configuration in the customer's VPC with appropriate network connectivity to the SFTP server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PortNumber": {
+                    "target": "com.amazonaws.transfer#SftpPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Port number for connecting to the SFTP server through VPC_LATTICE. Defaults to 22 if not specified. Must match the port on which the target SFTP server is listening.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>VPC_LATTICE egress configuration that specifies the Resource Configuration ARN and port for connecting to SFTP servers through customer VPCs. Requires a valid Resource Configuration with appropriate network access.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ConnectorsIpAddressType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "DUALSTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUALSTACK"
+                    }
+                }
             }
         },
         "com.amazonaws.transfer#CopyStepDetails": {
@@ -854,8 +1004,7 @@
                 "Url": {
                     "target": "com.amazonaws.transfer#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>"
                     }
                 },
                 "As2Config": {
@@ -893,6 +1042,18 @@
                     "target": "com.amazonaws.transfer#ConnectorSecurityPolicyName",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the name of the security policy for the connector.</p>"
+                    }
+                },
+                "EgressConfig": {
+                    "target": "com.amazonaws.transfer#ConnectorEgressConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the egress configuration for the connector, which determines how traffic is routed from the connector to the SFTP server. When set to VPC, enables routing through customer VPCs using VPC_LATTICE for private connectivity.</p>"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.transfer#ConnectorsIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IP address type for the connector's network connections. When set to <code>IPV4</code>, the connector uses IPv4 addresses only. When set to <code>DUALSTACK</code>, the connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when available.</p>"
                     }
                 }
             },
@@ -1133,7 +1294,7 @@
                 "ProtocolDetails": {
                     "target": "com.amazonaws.transfer#ProtocolDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations\"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To specify which ports your Transfer Family server listens to, use the <code>SftpPorts</code> parameter.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>"
                     }
                 },
                 "SecurityPolicyName": {
@@ -1157,7 +1318,7 @@
                 "StructuredLogDestinations": {
                     "target": "com.amazonaws.transfer#StructuredLogDestinations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>"
+                        "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>"
                     }
                 },
                 "S3StorageOptions": {
@@ -1170,6 +1331,12 @@
                     "target": "com.amazonaws.transfer#IpAddressType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for your Transfer Family endpoint. The default value is <code>IPV4</code>.</p> <important> <p>The <code>IpAddressType</code> parameter has the following limitations:</p> <ul> <li> <p>It cannot be changed while the server is online. You must stop the server before modifying this parameter.</p> </li> <li> <p>It cannot be updated to <code>DUALSTACK</code> if the server has <code>AddressAllocationIds</code> specified.</p> </li> </ul> </important> <note> <p>When using <code>DUALSTACK</code> as the <code>IpAddressType</code>, you cannot set the <code>AddressAllocationIds</code> parameter for the <a href=\"https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html\">EndpointDetails</a> for the server.</p> </note>"
+                    }
+                },
+                "HostKeyStorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>"
                     }
                 }
             },
@@ -1358,7 +1525,7 @@
                         "transfer:TagResource"
                     ]
                 },
-                "smithy.api#documentation": "<p>Creates a web app based on specified parameters, and returns the ID for the new web app.</p>",
+                "smithy.api#documentation": "<p>Creates a web app based on specified parameters, and returns the ID for the new web app. You can configure the web app to be publicly accessible or hosted within a VPC.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createWebApp"
@@ -1397,6 +1564,12 @@
                     "target": "com.amazonaws.transfer#WebAppEndpointPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If you are creating the web app in an Amazon Web Services GovCloud (US) Region, you can set this parameter to <code>FIPS</code>.</p>"
+                    }
+                },
+                "EndpointDetails": {
+                    "target": "com.amazonaws.transfer#WebAppEndpointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint configuration for the web app. You can specify whether the web app endpoint is publicly accessible or hosted within a VPC.</p>"
                     }
                 }
             },
@@ -1483,6 +1656,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.</p>"
                     }
+                },
+                "StructuredLogDestinations": {
+                    "target": "com.amazonaws.transfer#StructuredLogDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the log groups to which your workflow logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p>"
+                    }
                 }
             },
             "traits": {
@@ -1545,6 +1724,55 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains Amazon S3 locations for storing specific types of AS2 message files.</p>"
+            }
+        },
+        "com.amazonaws.transfer#CustomHttpHeader": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.transfer#CustomHttpHeaderKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom HTTP header.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.transfer#CustomHttpHeaderValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the custom HTTP header.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a custom HTTP header that can be included in AS2 messages. Each header consists of a key-value pair.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.transfer#CustomHttpHeaderKeyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.transfer#CustomHttpHeaderValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9 +\\-./:=@_]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.transfer#CustomHttpHeaders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#CustomHttpHeader"
             }
         },
         "com.amazonaws.transfer#CustomStepDetails": {
@@ -3023,7 +3251,7 @@
                         "transfer:DescribeWebApp"
                     ]
                 },
-                "smithy.api#documentation": "<p>Describes the web app that's identified by <code>WebAppId</code>.</p>",
+                "smithy.api#documentation": "<p>Describes the web app that's identified by <code>WebAppId</code>. The response includes endpoint configuration details such as whether the web app is publicly accessible or VPC hosted.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeWebApp"
@@ -3443,7 +3671,7 @@
                 "Url": {
                     "target": "com.amazonaws.transfer#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>"
+                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>"
                     }
                 },
                 "As2Config": {
@@ -3487,10 +3715,80 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The text name of the security policy for the specified connector.</p>"
                     }
+                },
+                "EgressConfig": {
+                    "target": "com.amazonaws.transfer#DescribedConnectorEgressConfig",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Current egress configuration of the connector, showing how traffic is routed to the SFTP server. Contains VPC Lattice settings when using VPC_LATTICE egress type.</p> <p>When using the VPC_LATTICE egress type, Transfer Family uses a managed Service Network to simplify the resource sharing process.</p>"
+                    }
+                },
+                "EgressType": {
+                    "target": "com.amazonaws.transfer#ConnectorEgressType",
+                    "traits": {
+                        "smithy.api#default": "SERVICE_MANAGED",
+                        "smithy.api#documentation": "<p>Type of egress configuration for the connector. SERVICE_MANAGED uses Transfer Family managed NAT gateways, while VPC_LATTICE routes traffic through customer VPCs using VPC Lattice.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.transfer#ConnectorErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error message providing details when the connector is in ERRORED status. Contains information to help troubleshoot connector creation or operation failures.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.transfer#ConnectorStatus",
+                    "traits": {
+                        "smithy.api#default": "ACTIVE",
+                        "smithy.api#documentation": "<p>Current status of the connector. PENDING indicates creation/update in progress, ACTIVE means ready for operations, and ERRORED indicates a failure requiring attention.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.transfer#ConnectorsIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IP address type for the connector's network connections. When set to <code>IPV4</code>, the connector uses IPv4 addresses only. When set to <code>DUALSTACK</code>, the connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when available.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the parameters for the connector, as identified by the <code>ConnectorId</code>.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribedConnectorEgressConfig": {
+            "type": "union",
+            "members": {
+                "VpcLattice": {
+                    "target": "com.amazonaws.transfer#DescribedConnectorVpcLatticeEgressConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC_LATTICE configuration details in the response, showing the current Resource Configuration ARN and port settings for VPC-based connectivity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure containing the current egress configuration details for the connector. Shows how traffic is currently routed from the connector to the SFTP server.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribedConnectorVpcLatticeEgressConfig": {
+            "type": "structure",
+            "members": {
+                "ResourceConfigurationArn": {
+                    "target": "com.amazonaws.transfer#VpcLatticeResourceConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the VPC_LATTICE Resource Configuration currently used by the connector. This Resource Configuration defines the network path to the SFTP server through the customer's VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PortNumber": {
+                    "target": "com.amazonaws.transfer#SftpPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Port number currently configured for SFTP connections through VPC_LATTICE. Shows the port on which the connector attempts to connect to the target SFTP server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>VPC_LATTICE egress configuration details in the response, containing the Resource Configuration ARN and port number currently configured for the connector.</p>"
             }
         },
         "com.amazonaws.transfer#DescribedExecution": {
@@ -3590,6 +3888,18 @@
                     "target": "com.amazonaws.transfer#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for host keys.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>).</p>"
+                    }
+                },
+                "SecretId": {
+                    "target": "com.amazonaws.transfer#SecretId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret that stores the host key material, when <code>StorageType</code> is <code>SECRETS_MANAGER</code>.</p>"
                     }
                 }
             },
@@ -3754,7 +4064,7 @@
                     "target": "com.amazonaws.transfer#ProtocolDetails",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
-                        "smithy.api#documentation": "<p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations\"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To specify which ports your Transfer Family server listens to, use the <code>SftpPorts</code> parameter.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>"
                     }
                 },
                 "Domain": {
@@ -3871,7 +4181,7 @@
                     "target": "com.amazonaws.transfer#StructuredLogDestinations",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
-                        "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>"
+                        "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>"
                     }
                 },
                 "S3StorageOptions": {
@@ -4031,6 +4341,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If your web app was created in an Amazon Web Services GovCloud (US) Region, the value of this parameter can be <code>FIPS</code>, which indicates the web app endpoint is FIPS-compliant.</p>"
                     }
+                },
+                "EndpointType": {
+                    "target": "com.amazonaws.transfer#WebAppEndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of endpoint hosting the web app. Valid values are <code>PUBLIC</code> for publicly accessible endpoints and <code>VPC</code> for VPC-hosted endpoints that provide network isolation.</p>"
+                    }
+                },
+                "DescribedEndpointDetails": {
+                    "target": "com.amazonaws.transfer#DescribedWebAppEndpointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint configuration details for the web app, including VPC settings if the endpoint is hosted within a VPC.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4082,6 +4404,20 @@
                 ]
             }
         },
+        "com.amazonaws.transfer#DescribedWebAppEndpointDetails": {
+            "type": "union",
+            "members": {
+                "Vpc": {
+                    "target": "com.amazonaws.transfer#DescribedWebAppVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration details when the web app endpoint is hosted within a VPC. This includes the VPC ID, subnet IDs, and VPC endpoint ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the endpoint configuration details for a web app, including VPC configuration when the endpoint is hosted within a VPC.</p>"
+            }
+        },
         "com.amazonaws.transfer#DescribedWebAppIdentityProviderDetails": {
             "type": "union",
             "members": {
@@ -4094,6 +4430,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returns a structure that contains the identity provider details for your web app.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribedWebAppVpcConfig": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.transfer#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of subnet IDs within the VPC where the web app endpoint is deployed. These subnets must be in the same VPC and provide network connectivity for the endpoint.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.transfer#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC where the web app endpoint is hosted.</p>"
+                    }
+                },
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.transfer#VpcEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC endpoint created for the web app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the VPC configuration details for a web app endpoint, including the VPC identifier, subnet IDs, and VPC endpoint ID used for hosting the endpoint.</p>"
             }
         },
         "com.amazonaws.transfer#DescribedWorkflow": {
@@ -4136,6 +4498,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.</p>"
                     }
+                },
+                "StructuredLogDestinations": {
+                    "target": "com.amazonaws.transfer#StructuredLogDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the log groups to which your workflow logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p>"
+                    }
                 }
             },
             "traits": {
@@ -4149,7 +4517,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^[\\p{Graph}]+$"
+                "smithy.api#pattern": "^[\\u0021-\\u007E]+$"
             }
         },
         "com.amazonaws.transfer#DirectoryId": {
@@ -4706,6 +5074,23 @@
                 "smithy.api#pattern": "^hostkey-[0-9a-f]{17}$"
             }
         },
+        "com.amazonaws.transfer#HostKeyStorageType": {
+            "type": "enum",
+            "members": {
+                "SERVICE_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_MANAGED"
+                    }
+                },
+                "SECRETS_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECRETS_MANAGER"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#HostKeyType": {
             "type": "string"
         },
@@ -4983,6 +5368,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for host keys.</p>"
                     }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>"
+                    }
+                },
+                "KmsKey": {
+                    "target": "com.amazonaws.transfer#KmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key. If you specify a customer managed key, its key policy must allow the <code>AWSServiceRoleForTransfer</code> service-linked role to decrypt the secret. If you don't specify a value, Transfer Family uses the Amazon Web Services managed key for Secrets Manager.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5185,6 +5582,16 @@
                         "smithy.api#enumValue": "DUALSTACK"
                     }
                 }
+            }
+        },
+        "com.amazonaws.transfer#KmsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:\\S+$"
             }
         },
         "com.amazonaws.transfer#ListAccesses": {
@@ -6229,7 +6636,7 @@
                         "transfer:ListWebApps"
                     ]
                 },
-                "smithy.api#documentation": "<p>Lists all web apps associated with your Amazon Web Services account for your current region.</p>",
+                "smithy.api#documentation": "<p>Lists all web apps associated with your Amazon Web Services account for your current region. The response includes the endpoint type for each web app, showing whether it is publicly accessible or VPC hosted.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listWebApps"
@@ -6532,7 +6939,7 @@
                 "Url": {
                     "target": "com.amazonaws.transfer#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>"
+                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>"
                     }
                 }
             },
@@ -6622,6 +7029,18 @@
                     "target": "com.amazonaws.transfer#DateImported",
                     "traits": {
                         "smithy.api#documentation": "<p>The date on which the host key was added to the server.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>).</p>"
+                    }
+                },
+                "SecretId": {
+                    "target": "com.amazonaws.transfer#SecretId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret that stores the host key material, when <code>StorageType</code> is <code>SECRETS_MANAGER</code>.</p>"
                     }
                 }
             },
@@ -6815,6 +7234,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>WebAppEndpoint</code> is the unique URL for your Transfer Family web app. This is the value that you use when you configure <b>Origins</b> on CloudFront.</p>"
                     }
+                },
+                "EndpointType": {
+                    "target": "com.amazonaws.transfer#WebAppEndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of endpoint hosting the web app. Valid values are <code>PUBLIC</code> for publicly accessible endpoints and <code>VPC</code> for VPC-hosted endpoints.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6950,8 +7375,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
-                    "max": 10000
+                    "min": 1
                 }
             }
         },
@@ -6977,6 +7401,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "ASYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASYNC"
                     }
                 }
             }
@@ -7032,7 +7462,8 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[\\p{Print}\\p{Blank}]+$"
+                "smithy.api#pattern": "^[\\u0020-\\u007E\\t]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.transfer#MoveId": {
@@ -7231,7 +7662,7 @@
                     "min": 1,
                     "max": 16384
                 },
-                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*$",
+                "smithy.api#pattern": "^[\\t\\n\\r\\u0020-\\u00FF]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -7334,7 +7765,7 @@
                 "PassiveIp": {
                     "target": "com.amazonaws.transfer#PassiveIp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer. For example: </p> <p> <code>aws transfer update-server --protocol-details PassiveIp=0.0.0.0</code> </p> <p>Replace <code>0.0.0.0</code> in the example above with the actual IP address you want to use.</p> <note> <p> If you change the <code>PassiveIp</code> value, you must stop and then restart your Transfer Family server for the change to take effect. For details on using passive mode (PASV) in a NAT environment, see <a href=\"http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/\">Configuring your FTPS server behind a firewall or NAT with Transfer Family</a>. </p> </note> <p> <i>Special values</i> </p> <p>The <code>AUTO</code> and <code>0.0.0.0</code> are special values for the <code>PassiveIp</code> parameter. The value <code>PassiveIp=AUTO</code> is assigned by default to FTP and FTPS type servers. In this case, the server automatically responds with one of the endpoint IPs within the PASV response. <code>PassiveIp=0.0.0.0</code> has a more unique application for its usage. For example, if you have a High Availability (HA) Network Load Balancer (NLB) environment, where you have 3 subnets, you can only specify a single IP address using the <code>PassiveIp</code> parameter. This reduces the effectiveness of having High Availability. In this case, you can specify <code>PassiveIp=0.0.0.0</code>. This tells the client to use the same IP address as the Control connection and utilize all AZs for their connections. Note, however, that not all FTP clients support the <code>PassiveIp=0.0.0.0</code> response. FileZilla and WinSCP do support it. If you are using other clients, check to see if your client supports the <code>PassiveIp=0.0.0.0</code> response.</p>"
+                        "smithy.api#documentation": "<p> Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer. For example: </p> <p> <code>aws transfer update-server --protocol-details PassiveIp=0.0.0.0</code> </p> <p>Replace <code>0.0.0.0</code> in the example above with the actual IP address you want to use.</p> <note> <p> If you change the <code>PassiveIp</code> value, you must stop and then restart your Transfer Family server for the change to take effect. For details on using passive mode (PASV) in a NAT environment, see <a href=\"http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/\">Configuring your FTPS server behind a firewall or NAT with Transfer Family</a>. </p> <p>Additionally, avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers. This configuration increases costs and can cause performance issues. When NLBs or NATs are in the communication path, Transfer Family cannot accurately recognize client IP addresses, which impacts connection sharding and limits FTPS servers to only 300 simultaneous connections instead of 10,000. If you must use an NLB, use port 21 for health checks and enable TLS session resumption by setting <code>TlsSessionResumptionMode = ENFORCED</code>. For optimal performance, migrate to VPC endpoints with Elastic IP addresses instead of using NLBs. For more details, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations\"> Avoid placing NLBs and NATs in front of Transfer Family</a>. </p> </note> <p> <i>Special values</i> </p> <p>The <code>AUTO</code> and <code>0.0.0.0</code> are special values for the <code>PassiveIp</code> parameter. The value <code>PassiveIp=AUTO</code> is assigned by default to FTP and FTPS type servers. In this case, the server automatically responds with one of the endpoint IPs within the PASV response. <code>PassiveIp=0.0.0.0</code> has a more unique application for its usage. For example, if you have a High Availability (HA) Network Load Balancer (NLB) environment, where you have 3 subnets, you can only specify a single IP address using the <code>PassiveIp</code> parameter. This reduces the effectiveness of having High Availability. In this case, you can specify <code>PassiveIp=0.0.0.0</code>. This tells the client to use the same IP address as the Control connection and utilize all AZs for their connections. Note, however, that not all FTP clients support the <code>PassiveIp=0.0.0.0</code> response. FileZilla and WinSCP do support it. If you are using other clients, check to see if your client supports the <code>PassiveIp=0.0.0.0</code> response.</p>"
                     }
                 },
                 "TlsSessionResumptionMode": {
@@ -7349,10 +7780,22 @@
                         "smithy.api#documentation": "<p>Use the <code>SetStatOption</code> to ignore the error that is generated when the client attempts to use <code>SETSTAT</code> on a file you are uploading to an S3 bucket.</p> <p>Some SFTP file transfer clients can attempt to change the attributes of remote files, including timestamp and permissions, using commands, such as <code>SETSTAT</code> when uploading the file. However, these commands are not compatible with object storage systems, such as Amazon S3. Due to this incompatibility, file uploads from these clients can result in errors even when the file is otherwise successfully uploaded.</p> <p>Set the value to <code>ENABLE_NO_OP</code> to have the Transfer Family server ignore the <code>SETSTAT</code> command, and upload files without needing to make any changes to your SFTP client. While the <code>SetStatOption</code> <code>ENABLE_NO_OP</code> setting ignores the error, it does generate a log entry in Amazon CloudWatch Logs, so you can determine when the client is making a <code>SETSTAT</code> call.</p> <note> <p>If you want to preserve the original timestamp for your file, and modify other file attributes using <code>SETSTAT</code>, you can use Amazon EFS as backend storage with Transfer Family.</p> </note>"
                     }
                 },
+                "SftpPorts": {
+                    "target": "com.amazonaws.transfer#SftpPorts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A property used with Transfer Family servers that use the SFTP protocol and have <code>PUBLIC</code> endpoints. This property accepts a list of up to three port configurations that the service opens on the server endpoint.</p> <p>Each entry in the list consists of two parameters, the <code>SftpPort</code> and the <code>CommunicationMode</code>. The <code>SftpPort</code> takes any integer from 2000 to 65535, or 22. <code>CommunicationMode</code> can be one of the following options:</p> <ul> <li> <p> <code>SERVER_TALK_FIRST</code>: The server responds to initial TCP connections first. Many older clients expect that an SFTP server responds with its server string before starting SSH negotiations.</p> </li> <li> <p> <code>CLIENT_TALK_FIRST</code>: The server responds to the initial TCP connection only after receiving a data packet. Most modern clients support this behavior and send their client string along with the initial data packets for SSH negotiation. Additionally, this mode is more resilient to TCP retransmissions that can occur during the initial TCP connection.</p> </li> </ul> <p>The following is an <code>SftpPorts</code> example for port 2222 with <code>CLIENT_TALK_FIRST</code>.</p> <p> <code>[ { \"SftpPort\": 2222, \"CommunicationMode\": \"CLIENT_TALK_FIRST\" } ]</code> </p> <p>If you don't specify any configurations during <code>CreateServer</code>, the service uses port 22 with <code>SERVER_TALK_FIRST</code> by default.</p>"
+                    }
+                },
                 "As2Transports": {
                     "target": "com.amazonaws.transfer#As2Transports",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p>"
+                    }
+                },
+                "ProxyConfig": {
+                    "target": "com.amazonaws.transfer#ProxyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for PROXY protocol version 2 (PPv2) support on the Transfer Family server. For more information, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html\">Working with Network Load Balancers</a>.</p>"
                     }
                 }
             },
@@ -7369,6 +7812,37 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 4
+                }
+            }
+        },
+        "com.amazonaws.transfer#ProxyConfig": {
+            "type": "structure",
+            "members": {
+                "SftpMode": {
+                    "target": "com.amazonaws.transfer#ProxyMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the Transfer Family server requires or ignores a PPv2 header containing the client's source IP address on incoming SFTP connections. If you don't specify a value, the default is <code>NONE</code> </p> <ul> <li> <p> <code>NONE</code>: the server reads and ignores any PPv2 header on incoming SFTP connections. This is the default value. Use this value when your SFTP server is not behind an NLB, or when you do not need to preserve the client's source IP address through an NLB.</p> </li> <li> <p> <code>PROXY_PROTOCOL_V2_ENFORCED</code>: the server requires a valid PPv2 header on every incoming SFTP connection. When a valid header is present, the server applies it and uses the source IP address from the header. If a connection arrives without a PPv2 header, the server refuses the connection and logs an error to Amazon CloudWatch Logs indicating that the expected PPv2 header was missing. Use this value when your SFTP server is behind an NLB with PPv2 enabled on the target group.</p> <important> <p>With <code>PROXY_PROTOCOL_V2_ENFORCED</code> you must restrict the server's VPC endpoint security group to allow inbound traffic only via the trusted NLB. For more information, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html\">Working with Network Load Balancers</a>.</p> </important> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration for PROXY protocol version 2 (PPv2) support on an Transfer Family server. When enabled, Transfer Family reads the added PPv2 header from incoming connections to extract the client's source IP address. This address is then available in Amazon CloudWatch Logs entries and is passed to custom identity providers during authentication, enabling IP-based access policies. For more information, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html\">Working with Network Load Balancers</a>.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ProxyMode": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "PROXY_PROTOCOL_V2_ENFORCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROXY_PROTOCOL_V2_ENFORCED"
+                    }
                 }
             }
         },
@@ -7629,6 +8103,28 @@
                     "min": 1,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.transfer#SecretVersionStage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.transfer#SecretVersionStageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#SecretVersionStage"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.transfer#SecurityGroupId": {
@@ -7964,7 +8460,7 @@
                 "TrustedHostKeys": {
                     "target": "com.amazonaws.transfer#SftpConnectorTrustedHostKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public portion of the host key, or keys, that are used to identify the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p> <note> <p> <code>TrustedHostKeys</code> is optional for <code>CreateConnector</code>. If not provided, you can use <code>TestConnection</code> to retrieve the server host key during the initial connection attempt, and subsequently update the connector with the observed host key.</p> </note> <p>The three standard SSH public key format elements are <code>&lt;key type&gt;</code>, <code>&lt;body base64&gt;</code>, and an optional <code>&lt;comment&gt;</code>, with spaces between each element. Specify only the <code>&lt;key type&gt;</code> and <code>&lt;body base64&gt;</code>: do not enter the <code>&lt;comment&gt;</code> portion of the key.</p> <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p> <ul> <li> <p>For RSA keys, the <code>&lt;key type&gt;</code> string is <code>ssh-rsa</code>.</p> </li> <li> <p>For ECDSA keys, the <code>&lt;key type&gt;</code> string is either <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p> </li> </ul> <p>Run this command to retrieve the SFTP server host key, where your SFTP server name is <code>ftp.host.com</code>.</p> <p> <code>ssh-keyscan ftp.host.com</code> </p> <p>This prints the public host key to standard output.</p> <p> <code>ftp.host.com ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key</code> </p> <p>Copy and paste this string into the <code>TrustedHostKeys</code> field for the <code>create-connector</code> command or into the <b>Trusted host keys</b> field in the console.</p>"
+                        "smithy.api#documentation": "<p>The public portion of the host key, or keys, that are used to identify the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p> <note> <p> <code>TrustedHostKeys</code> is optional for <code>CreateConnector</code>. If not provided, you can use <code>TestConnection</code> to retrieve the server host key during the initial connection attempt, and subsequently update the connector with the observed host key.</p> </note> <p>When creating connectors with egress config (VPC_LATTICE type connectors), since host name is not something we can verify, the only accepted trusted host key format is <code>key-type key-body</code> without the host name. For example: <code>ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key&gt;</code> </p> <p>The three standard SSH public key format elements are <code>&lt;key type&gt;</code>, <code>&lt;body base64&gt;</code>, and an optional <code>&lt;comment&gt;</code>, with spaces between each element. Specify only the <code>&lt;key type&gt;</code> and <code>&lt;body base64&gt;</code>: do not enter the <code>&lt;comment&gt;</code> portion of the key.</p> <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p> <ul> <li> <p>For RSA keys, the <code>&lt;key type&gt;</code> string is <code>ssh-rsa</code>.</p> </li> <li> <p>For ECDSA keys, the <code>&lt;key type&gt;</code> string is either <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p> </li> </ul> <p>Run this command to retrieve the SFTP server host key, where your SFTP server name is <code>ftp.host.com</code>.</p> <p> <code>ssh-keyscan ftp.host.com</code> </p> <p>This prints the public host key to standard output.</p> <p> <code>ftp.host.com ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key&gt;</code> </p> <p>Copy and paste this string into the <code>TrustedHostKeys</code> field for the <code>create-connector</code> command or into the <b>Trusted host keys</b> field in the console.</p> <p>For VPC Lattice type connectors (VPC_LATTICE), remove the hostname from the key and use only the <code>key-type key-body</code> format. In this example, it should be: <code>ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key&gt;</code> </p>"
                     }
                 },
                 "MaxConcurrentConnections": {
@@ -7972,6 +8468,12 @@
                     "traits": {
                         "smithy.api#default": 1,
                         "smithy.api#documentation": "<p>Specify the number of concurrent connections that your connector creates to the remote server. The default value is <code>1</code>. The maximum values is <code>5</code>.</p> <note> <p>If you are using the Amazon Web Services Management Console, the default value is <code>5</code>.</p> </note> <p>This parameter specifies the number of active connections that your connector can establish with the remote server at the same time. Increasing this value can enhance connector performance when transferring large file batches by enabling parallel operations.</p>"
+                    }
+                },
+                "OrderedUserSecretVersionStages": {
+                    "target": "com.amazonaws.transfer#SecretVersionStageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ordered list of Amazon Web Services Secrets Manager version stages (staging labels, such as <code>AWSCURRENT</code> and <code>AWSPREVIOUS</code>) for the secret identified by <code>UserSecretId</code>. When establishing a connection, the connector attempts to retrieve the SFTP user's credentials from each version stage in the order listed, and uses the first version it can successfully retrieve. This lets you rotate the user secret without interrupting connector operations.</p>"
                     }
                 }
             },
@@ -8020,6 +8522,48 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.transfer#SftpPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.transfer#SftpPortWithOptions": {
+            "type": "structure",
+            "members": {
+                "SftpPort": {
+                    "target": "com.amazonaws.transfer#SftpPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port on which the Transfer Family server listens for SFTP connections. Specify any integer from 2000 to 65535, or 22. This value is required for each entry in the <code>SftpPorts</code> list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CommunicationMode": {
+                    "target": "com.amazonaws.transfer#CommunicationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the server or the client sends data first when a client establishes an SFTP connection on this port. Valid values are <code>SERVER_TALK_FIRST</code> and <code>CLIENT_TALK_FIRST</code>. For a description of each mode, see the <code>SftpPorts</code> property. This value is optional.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for a single SFTP port on a Transfer Family server that uses the SFTP protocol and has a <code>PUBLIC</code> endpoint. Each entry in the <code>SftpPorts</code> list is an <code>SftpPortWithOptions</code> object that pairs a port number with a communication mode.</p>"
+            }
+        },
+        "com.amazonaws.transfer#SftpPorts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#SftpPortWithOptions"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
                 }
             }
         },
@@ -8168,7 +8712,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of the contents of a directory from a remote SFTP server. You specify the connector ID, the output path, and the remote directory path. You can also specify the optional <code>MaxItems</code> value to control the maximum number of items that are listed from the remote directory. This API returns a list of all files and directories in the remote directory (up to the maximum value), but does not return files or folders in sub-directories. That is, it only returns a list of files and directories one-level deep.</p> <p>After you receive the listing file, you can provide the files that you want to transfer to the <code>RetrieveFilePaths</code> parameter of the <code>StartFileTransfer</code> API call.</p> <p>The naming convention for the output file is <code> <i>connector-ID</i>-<i>listing-ID</i>.json</code>. The output file contains the following information:</p> <ul> <li> <p> <code>filePath</code>: the complete path of a remote file, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>modifiedTimestamp</code>: the last time the file was modified, in UTC time format. This field is optional. If the remote file attributes don't contain a timestamp, it is omitted from the file listing.</p> </li> <li> <p> <code>size</code>: the size of the file, in bytes. This field is optional. If the remote file attributes don't contain a file size, it is omitted from the file listing.</p> </li> <li> <p> <code>path</code>: the complete path of a remote directory, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>truncated</code>: a flag indicating whether the list output contains all of the items contained in the remote directory or not. If your <code>Truncated</code> output value is true, you can increase the value provided in the optional <code>max-items</code> input attribute to be able to list more items (up to the maximum allowed list size of 10,000 items).</p> </li> </ul>"
+                "smithy.api#documentation": "<p>Retrieves a list of the contents of a directory from a remote SFTP server. You specify the connector ID, the output path, and the remote directory path. You can also specify the optional <code>MaxItems</code> value to control the maximum number of items that are listed from the remote directory. This API returns a list of all files and directories in the remote directory (up to the maximum value), but does not return files or folders in sub-directories. That is, it only returns a list of files and directories one-level deep.</p> <p>After you receive the listing file, you can provide the files that you want to transfer to the <code>RetrieveFilePaths</code> parameter of the <code>StartFileTransfer</code> API call.</p> <p>The naming convention for the output file is <code> <i>connector-ID</i>-<i>listing-ID</i>.json</code>. The output file contains the following information:</p> <ul> <li> <p> <code>filePath</code>: the complete path of a remote file, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>modifiedTimestamp</code>: the last time the file was modified, in UTC time format. This field is optional. If the remote file attributes don't contain a timestamp, it is omitted from the file listing.</p> </li> <li> <p> <code>size</code>: the size of the file, in bytes. This field is optional. If the remote file attributes don't contain a file size, it is omitted from the file listing.</p> </li> <li> <p> <code>path</code>: the complete path of a remote directory, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>truncated</code>: a flag indicating whether the list output contains all of the items contained in the remote directory or not. If your <code>Truncated</code> output value is true, you can increase the value provided in the optional <code>max-items</code> input attribute to be able to list more items (up to the maximum allowed list size of 200,000 items).</p> </li> </ul>"
             }
         },
         "com.amazonaws.transfer#StartDirectoryListingRequest": {
@@ -8289,6 +8833,12 @@
                     "target": "com.amazonaws.transfer#FilePath",
                     "traits": {
                         "smithy.api#documentation": "<p>For an outbound transfer, the <code>RemoteDirectoryPath</code> specifies the destination for one or more files that are transferred to the partner's SFTP server. If you don't specify a <code>RemoteDirectoryPath</code>, the destination for transferred files is the SFTP user's home directory.</p>"
+                    }
+                },
+                "CustomHttpHeaders": {
+                    "target": "com.amazonaws.transfer#CustomHttpHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs that represent custom HTTP headers to include in AS2 messages. These headers are added to the AS2 message when sending files to your trading partner.</p>"
                     }
                 }
             },
@@ -9124,8 +9674,196 @@
                     "name": "transfer"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Transfer Family is a fully managed service that enables the transfer of files over the File Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH) File Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon S3) or Amazon EFS. Additionally, you can use Applicability Statement 2 (AS2) to transfer files into and out of Amazon S3. Amazon Web Services helps you seamlessly migrate your file transfer workflows to Transfer Family by integrating with existing authentication systems, and providing DNS routing with Amazon Route 53 so nothing changes for your customers and partners, or their applications. With your data in Amazon S3, you can use it with Amazon Web Services services for processing, analytics, machine learning, and archiving. Getting started with Transfer Family is easy since there is no infrastructure to buy and set up.</p>",
+                "smithy.api#documentation": "<p>Transfer Family offers fully managed support for the transfer of files over SFTP, AS2, FTPS, FTP, and web browser-based transfers directly into and out of Amazon Web Services storage services.</p> <p>File transfer protocols are used in data exchange workflows across different industries such as financial services, healthcare, advertising, and retail, among others. Transfer Family simplifies the migration of file transfer workflows to Amazon Web Services.</p> <p>To use the Transfer Family service, you instantiate a server in the Amazon Web Services Region of your choice. You can create the server, list available servers, and update and delete servers. The server is the entity that requests file operations from Transfer Family. Servers have a number of important properties. The server is a named instance as identified by a system assigned <code>ServerId</code> identifier. You can optionally assign a hostname, or even a custom hostname to a server. The service bills for any instantiated servers (even ones <code>OFFLINE</code>), and for the amount of data transferred.</p> <p>Users must be known to the server that requests file operations. A user as identified by their username is assigned to a server. Usernames are used to authenticate requests. A server can have only one authentication method: <code>AWS_DIRECTORY_SERVICE</code>, <code>SERVICE_MANAGED</code>, <code>AWS_LAMBDA</code>, or <code>API_GATEWAY</code>.</p> <p>Transfer Family also supports web applications that provide browser-based file transfer capabilities. Web applications can be configured with VPC endpoints to enable secure, private connectivity within your Virtual Private Cloud (VPC). This allows you to control network access and route traffic through your VPC infrastructure while maintaining the managed benefits of Transfer Family.</p> <p>This API interface reference for Transfer Family contains documentation for a programming interface that you can use to manage Transfer Family. The reference structure is as follows:</p> <ul> <li> <p>For the alphabetical list of API actions, see .</p> </li> <li> <p>For the alphabetical list of data types, see .</p> </li> <li> <p>For a list of common query parameters, see <a>CommonParameters</a>.</p> </li> <li> <p>For descriptions of the error codes, see <a>CommonErrors</a>.</p> </li> </ul> <note> <p>Rather than actually running a command, you can use the <code>--generate-cli-skeleton</code> parameter with any API call to generate and display a parameter template. You can then use the generated template to customize and use as input on a later command. For details, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-skeleton.html#cli-usage-skeleton-generate\">Generate and use a parameter skeleton file</a>.</p> </note>",
                 "smithy.api#title": "AWS Transfer Family",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transfer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transfer-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transfer.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transfer.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -9133,27 +9871,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -10501,6 +11239,20 @@
                 "smithy.api#documentation": "<p>Updates some of the parameters for an existing connector. Provide the <code>ConnectorId</code> for the connector that you want to update, along with the new values for the parameters to update.</p>"
             }
         },
+        "com.amazonaws.transfer#UpdateConnectorEgressConfig": {
+            "type": "union",
+            "members": {
+                "VpcLattice": {
+                    "target": "com.amazonaws.transfer#UpdateConnectorVpcLatticeEgressConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC_LATTICE configuration updates for the connector. Use this to modify the Resource Configuration ARN or port number for VPC-based connectivity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Structure for updating the egress configuration of an existing connector. Allows modification of how traffic is routed from the connector to the SFTP server, including VPC_LATTICE settings.</p>"
+            }
+        },
         "com.amazonaws.transfer#UpdateConnectorRequest": {
             "type": "structure",
             "members": {
@@ -10514,7 +11266,7 @@
                 "Url": {
                     "target": "com.amazonaws.transfer#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>"
+                        "smithy.api#documentation": "<p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>"
                     }
                 },
                 "As2Config": {
@@ -10546,6 +11298,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the name of the security policy for the connector.</p>"
                     }
+                },
+                "EgressConfig": {
+                    "target": "com.amazonaws.transfer#UpdateConnectorEgressConfig",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Updates the egress configuration for the connector, allowing you to modify how traffic is routed from the connector to the SFTP server. Changes to VPC configuration may require connector restart.</p>"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.transfer#ConnectorsIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IP address type for the connector's network connections. When set to <code>IPV4</code>, the connector uses IPv4 addresses only. When set to <code>DUALSTACK</code>, the connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when available.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10565,6 +11330,26 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.transfer#UpdateConnectorVpcLatticeEgressConfig": {
+            "type": "structure",
+            "members": {
+                "ResourceConfigurationArn": {
+                    "target": "com.amazonaws.transfer#VpcLatticeResourceConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated ARN of the VPC_LATTICE Resource Configuration. Use this to change the target SFTP server location or modify the network path through the customer's VPC infrastructure.</p>"
+                    }
+                },
+                "PortNumber": {
+                    "target": "com.amazonaws.transfer#SftpPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated port number for SFTP connections through VPC_LATTICE. Change this if the target SFTP server port has been modified or if connecting to a different server endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>VPC_LATTICE egress configuration updates for modifying how the connector routes traffic through customer VPCs. Changes to these settings may require connector restart to take effect.</p>"
             }
         },
         "com.amazonaws.transfer#UpdateHostKey": {
@@ -10593,7 +11378,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the description for the host key that's specified by the <code>ServerId</code> and <code>HostKeyId</code> parameters.</p>"
+                "smithy.api#documentation": "<p>Updates the host key that's specified by the <code>ServerId</code> and <code>HostKeyId</code> parameters. You can update the description of the host key, change where the host key is stored by specifying the <code>StorageType</code>, and specify the KMS key used to encrypt the host key when it's stored in Secrets Manager.</p> <p>To change a host key's storage type from <code>SERVICE_MANAGED</code> to <code>SECRETS_MANAGER</code>, you must have the <code>transfer:ExportHostKey</code> permission. <code>transfer:ExportHostKey</code> is a permission-only action that has no corresponding API operation.</p>"
             }
         },
         "com.amazonaws.transfer#UpdateHostKeyRequest": {
@@ -10616,8 +11401,19 @@
                 "Description": {
                     "target": "com.amazonaws.transfer#HostKeyDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>An updated description for the host key.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An updated description for the host key.</p>"
+                    }
+                },
+                "StorageType": {
+                    "target": "com.amazonaws.transfer#HostKeyStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>"
+                    }
+                },
+                "KmsKey": {
+                    "target": "com.amazonaws.transfer#KmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key. If you specify a customer managed key, its key policy must allow the <code>AWSServiceRoleForTransfer</code> service-linked role to decrypt the secret. If you don't specify a value, Transfer Family uses the Amazon Web Services managed key for Secrets Manager.</p>"
                     }
                 }
             },
@@ -10796,7 +11592,7 @@
                 "ProtocolDetails": {
                     "target": "com.amazonaws.transfer#ProtocolDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations\"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To specify which ports your Transfer Family server listens to, use the <code>SftpPorts</code> parameter.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>"
                     }
                 },
                 "EndpointDetails": {
@@ -10870,7 +11666,7 @@
                 "StructuredLogDestinations": {
                     "target": "com.amazonaws.transfer#StructuredLogDestinations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>"
+                        "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>"
                     }
                 },
                 "S3StorageOptions": {
@@ -11068,7 +11864,7 @@
                         "transfer:UpdateWebApp"
                     ]
                 },
-                "smithy.api#documentation": "<p>Assigns new properties to a web app. You can modify the access point, identity provider details, and the web app units.</p>",
+                "smithy.api#documentation": "<p>Assigns new properties to a web app. You can modify the access point, identity provider details, endpoint configuration, and the web app units.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/updateWebApp"
@@ -11174,6 +11970,20 @@
                 ]
             }
         },
+        "com.amazonaws.transfer#UpdateWebAppEndpointDetails": {
+            "type": "union",
+            "members": {
+                "Vpc": {
+                    "target": "com.amazonaws.transfer#UpdateWebAppVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration details for updating a web app endpoint hosted within a VPC. This includes the subnet IDs for endpoint deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the endpoint configuration details for updating a web app, including VPC settings for endpoints hosted within a VPC.</p>"
+            }
+        },
         "com.amazonaws.transfer#UpdateWebAppIdentityCenterConfig": {
             "type": "structure",
             "members": {
@@ -11230,6 +12040,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>"
                     }
+                },
+                "EndpointDetails": {
+                    "target": "com.amazonaws.transfer#UpdateWebAppEndpointDetails",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The updated endpoint configuration for the web app. You can modify the endpoint type and VPC configuration settings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11249,6 +12066,26 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.transfer#UpdateWebAppVpcConfig": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.transfer#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of subnet IDs within the VPC where the web app endpoint should be deployed during the update operation.</p>"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.transfer#WebAppVpcEndpointIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the web app's VPC endpoint. This determines whether the endpoint is accessible over IPv4 only, or over both IPv4 and IPv6.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the VPC configuration settings for updating a web app endpoint, including the subnet IDs where the endpoint should be deployed.</p>"
             }
         },
         "com.amazonaws.transfer#Url": {
@@ -11366,6 +12203,16 @@
         "com.amazonaws.transfer#VpcId": {
             "type": "string"
         },
+        "com.amazonaws.transfer#VpcLatticeResourceConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"
+            }
+        },
         "com.amazonaws.transfer#WebAppAccessEndpoint": {
             "type": "string",
             "traits": {
@@ -11409,6 +12256,20 @@
                 }
             }
         },
+        "com.amazonaws.transfer#WebAppEndpointDetails": {
+            "type": "union",
+            "members": {
+                "Vpc": {
+                    "target": "com.amazonaws.transfer#WebAppVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration for hosting the web app endpoint within a VPC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the endpoint configuration for a web app, including VPC settings when the endpoint is hosted within a VPC.</p>"
+            }
+        },
         "com.amazonaws.transfer#WebAppEndpointPolicy": {
             "type": "enum",
             "members": {
@@ -11422,6 +12283,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "STANDARD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#WebAppEndpointType": {
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
+                    }
+                },
+                "VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC"
                     }
                 }
             }
@@ -11536,6 +12414,55 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains an integer value that represents the value for number of concurrent connections or the user sessions on your web app.</p>"
+            }
+        },
+        "com.amazonaws.transfer#WebAppVpcConfig": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.transfer#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of subnet IDs within the VPC where the web app endpoint will be deployed. These subnets must be in the same VPC specified in the VpcId parameter.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.transfer#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC where the web app endpoint will be hosted.</p>"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.transfer#SecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of security group IDs that control access to the web app endpoint. These security groups determine which sources can access the endpoint based on IP addresses and port configurations.</p>"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.transfer#WebAppVpcEndpointIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the web app's VPC endpoint. This determines whether the endpoint is accessible over IPv4 only, or over both IPv4 and IPv6.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the VPC configuration settings for hosting a web app endpoint, including the VPC ID, subnet IDs, and security group IDs for access control.</p>"
+            }
+        },
+        "com.amazonaws.transfer#WebAppVpcEndpointIpAddressType": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
+                    }
+                },
+                "DUALSTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUALSTACK"
+                    }
+                }
             }
         },
         "com.amazonaws.transfer#WorkflowDescription": {

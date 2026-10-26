@@ -7,12 +7,14 @@ module Aws::ResourceGroupsTaggingAPI
       def initialize: (
         ?noncompliant_keys: Array[String],
         ?keys_with_noncompliant_values: Array[String],
+        ?missing_tag_keys: Array[String],
         ?compliance_status: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor noncompliant_keys: Array[String]?
       attr_accessor keys_with_noncompliant_values: Array[String]?
+      attr_accessor missing_tag_keys: Array[String]?
       attr_accessor compliance_status: bool?
     end
 
@@ -236,6 +238,32 @@ module Aws::ResourceGroupsTaggingAPI
       attr_accessor message: String?
     end
 
+    class ListRequiredTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRequiredTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?required_tags: Array[Types::RequiredTag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor required_tags: Array[Types::RequiredTag]?
+      attr_accessor next_token: String?
+    end
+
     class PaginationTokenExpiredException
       include Smithy::Schema::Structure
 
@@ -245,6 +273,21 @@ module Aws::ResourceGroupsTaggingAPI
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class RequiredTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?cloud_formation_resource_types: Array[String],
+        ?reporting_tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor cloud_formation_resource_types: Array[String]?
+      attr_accessor reporting_tag_keys: Array[String]?
     end
 
     class ResourceTagMapping

@@ -32,8 +32,7 @@ module Aws::LaunchWizard
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>An internal error has occurred. Retry your request, but if the problem persists, contact
-    #          us with details by posting a question on <a href="https://repost.aws/">re:Post</a>.</p>
+    # <p>An internal error has occurred. Retry your request, but if the problem persists, contact us with details by posting a question on <a href="https://repost.aws/">re:Post</a>.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LaunchWizard::Types::InternalServerException] data
@@ -46,8 +45,7 @@ module Aws::LaunchWizard
       end
     end
 
-    # <p>You have exceeded an Launch Wizard resource limit. For example, you might have too many
-    #          deployments in progress.</p>
+    # <p>You have exceeded an Launch Wizard resource limit. For example, you might have too many deployments in progress.</p>
     class ResourceLimitException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::LaunchWizard::Types::ResourceLimitException] data

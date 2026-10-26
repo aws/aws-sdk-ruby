@@ -139,6 +139,8 @@ module Aws::DocDB
     FailoverDBClusterResult: StructureShape
     FailoverGlobalClusterMessage: StructureShape
     FailoverGlobalClusterResult: StructureShape
+    FailoverState: StructureShape
+    FailoverStatus: EnumShape
     Filter: StructureShape
     FilterList: ListShape
     FilterValueList: ListShape
@@ -148,6 +150,7 @@ module Aws::DocDB
     GlobalClusterList: ListShape
     GlobalClusterMember: StructureShape
     GlobalClusterMemberList: ListShape
+    GlobalClusterMemberSynchronizationStatus: EnumShape
     GlobalClusterNotFoundFault: StructureShape
     GlobalClusterQuotaExceededFault: StructureShape
     GlobalClustersMessage: StructureShape
@@ -188,6 +191,8 @@ module Aws::DocDB
     ModifyEventSubscriptionResult: StructureShape
     ModifyGlobalClusterMessage: StructureShape
     ModifyGlobalClusterResult: StructureShape
+    NetworkTypeList: ListShape
+    NetworkTypeNotSupported: StructureShape
     OrderableDBInstanceOption: StructureShape
     OrderableDBInstanceOptionsList: ListShape
     OrderableDBInstanceOptionsMessage: StructureShape

@@ -24,8 +24,10 @@ module Aws::GroundStation
   #
   # * {DependencyException}
   # * {InvalidParameterException}
+  # * {ResourceInUseException}
   # * {ResourceLimitExceededException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -44,7 +46,7 @@ module Aws::GroundStation
         @data[:message]
       end
 
-      # <p/>
+      # <p>Name of the parameter that caused the exception.</p>
       def parameter_name
         @data[:parameter_name]
       end
@@ -62,9 +64,22 @@ module Aws::GroundStation
         @data[:message]
       end
 
-      # <p/>
+      # <p>Name of the invalid parameter.</p>
       def parameter_name
         @data[:parameter_name]
+      end
+    end
+
+    # <p>The specified resource is in use by non-terminal state contacts and cannot be modified or deleted.</p>
+    class ResourceInUseException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::GroundStation::Types::ResourceInUseException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
       end
     end
 
@@ -80,7 +95,7 @@ module Aws::GroundStation
         @data[:message]
       end
 
-      # <p/>
+      # <p>Name of the parameter that exceeded the resource limit.</p>
       def parameter_name
         @data[:parameter_name]
       end
@@ -96,6 +111,24 @@ module Aws::GroundStation
 
       def message
         @data[:message]
+      end
+    end
+
+    # <p>Request would cause a service quota to be exceeded.</p>
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::GroundStation::Types::ServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>Parameter name that caused the exception</p>
+      def parameter_name
+        @data[:parameter_name]
       end
     end
   end

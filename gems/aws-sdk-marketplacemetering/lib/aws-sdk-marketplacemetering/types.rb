@@ -15,6 +15,11 @@ module Aws::MarketplaceMetering
     # @!attribute product_code
     #   <p>Product code is used to uniquely identify a product in Amazon Web Services Marketplace. The product code should
     #               be the same as the one used during the publishing of a new product.</p>
+    #            <important>
+    #               <p>
+    #                  <code>ProductCode</code> is required only for legacy integrations that use <code>CustomerIdentifier</code>. For new integrations using <code>LicenseArn</code> (Concurrent Agreements), do NOT include <code>ProductCode</code> at the request level. The <code>LicenseArn</code> in each <code>UsageRecord</code> identifies both the product and the specific agreement.</p>
+    #               <p>Sending metering records with both <code>ProductCode</code> and <code>LicenseArn</code> for the same customer within the same hour will result in duplicate billing. If you are migrating from product-based metering to license-based metering, stop sending <code>ProductCode</code> before you start sending <code>LicenseArn</code>.</p>
+    #            </important>
     #   @return [String]
     class BatchMeterUsageRequest < Struct.new(
       nil,
@@ -98,6 +103,17 @@ module Aws::MarketplaceMetering
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The <code>ClientToken</code> is being used for multiple requests.</p>
+    # @!attribute message
+    #   @return [String]
+    class IdempotencyConflictException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An internal error has occurred. Retry your request. If the problem persists, post a
     #             message with details on the Amazon Web Services forums.</p>
     # @!attribute message
@@ -128,6 +144,17 @@ module Aws::MarketplaceMetering
     # @!attribute message
     #   @return [String]
     class InvalidEndpointRegionException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Ensure the <code>LicenseArn</code> is valid, matches the customer, and usage is within the license activation period.</p>
+    # @!attribute message
+    #   @return [String]
+    class InvalidLicenseException < Struct.new(
       nil,
       :message,
       keyword_init: true
@@ -217,6 +244,20 @@ module Aws::MarketplaceMetering
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Metadata associated with a resolved customer. Includes the <code>AgreementId</code> of
+    #             the Amazon Web Services Marketplace agreement the customer accepted.</p>
+    # @!attribute agreement_id
+    #   <p>The unique identifier of the Amazon Web Services Marketplace agreement the customer accepted. Use it to
+    #               call Amazon Web Services Marketplace Agreement APIs.</p>
+    #   @return [String]
+    class Metadata < Struct.new(
+      nil,
+      :agreement_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute product_code
     #   <p>Product code is used to uniquely identify a product in Amazon Web Services Marketplace. The product code
     #               should be the same as the one used during the publishing of a new product.</p>
@@ -246,6 +287,18 @@ module Aws::MarketplaceMetering
     #                   <code>UsageAllocation</code> must have a unique set of tags (include no
     #               tags).</p>
     #   @return [Array<Types::UsageAllocation>]
+    # @!attribute client_token
+    #   <p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency
+    #            of the request. This lets you safely retry the request without accidentally performing the
+    #            same operation a second time. Passing the same value to a later call to an operation
+    #            requires that you also pass the same value for all other parameters. We recommend that you
+    #            use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
+    #               value</a>.</p>
+    #            <p>If you don't provide this value, then Amazon Web Services generates a random one for
+    #            you.</p>
+    #            <p>If you retry the operation with the same <code>ClientToken</code>, but with different
+    #            parameters, the retry fails with an <code>IdempotencyConflictException</code> error.</p>
+    #   @return [String]
     class MeterUsageRequest < Struct.new(
       nil,
       :product_code,
@@ -254,6 +307,7 @@ module Aws::MarketplaceMetering
       :usage_quantity,
       :dry_run,
       :usage_allocations,
+      :client_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -321,8 +375,11 @@ module Aws::MarketplaceMetering
     # @!attribute registration_token
     #   <p>When a buyer visits your website during the registration process, the buyer submits a
     #               registration token through the browser. The registration token is resolved to obtain a
-    #                   <code>CustomerIdentifier</code> along with the <code>CustomerAWSAccountId</code> and
-    #                   <code>ProductCode</code>.</p>
+    #                   <code>CustomerIdentifier</code> along with the <code>CustomerAWSAccountId</code>,
+    #                   <code>ProductCode</code>, and <code>LicenseArn</code>.</p>
+    #            <note>
+    #               <p>For new SaaS product integrations, the <code>CustomerIdentifier</code> field is not populated. Use <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> for customer identification.</p>
+    #            </note>
     #   @return [String]
     class ResolveCustomerRequest < Struct.new(
       nil,
@@ -333,12 +390,14 @@ module Aws::MarketplaceMetering
     end
 
     # <p>The result of the <code>ResolveCustomer</code> operation. Contains the
-    #                 <code>CustomerIdentifier</code> along with the <code>CustomerAWSAccountId</code> and
-    #                 <code>ProductCode</code>.</p>
+    #                 <code>CustomerIdentifier</code> along with the <code>CustomerAWSAccountId</code>,
+    #                 <code>ProductCode</code>, <code>LicenseArn</code>, and <code>Metadata</code>.</p>
     # @!attribute customer_identifier
     #   <p>The <code>CustomerIdentifier</code> is used to identify an individual customer in your
-    #               application. Calls to <code>BatchMeterUsage</code> require
-    #                   <code>CustomerIdentifiers</code> for each <code>UsageRecord</code>.</p>
+    #               application.</p>
+    #            <important>
+    #               <p>For new SaaS product integrations, this field is not populated. Use <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> to identify customers instead.</p>
+    #            </important>
     #   @return [String]
     # @!attribute product_code
     #   <p>The product code is returned to confirm that the buyer is registering for your
@@ -347,13 +406,26 @@ module Aws::MarketplaceMetering
     #   @return [String]
     # @!attribute customer_aws_account_id
     #   <p>The <code>CustomerAWSAccountId</code> provides the Amazon Web Services account ID associated with
-    #               the <code>CustomerIdentifier</code> for the individual customer.</p>
+    #               the <code>CustomerIdentifier</code> for the individual customer. Calls to <code>BatchMeterUsage</code> require
+    #               <code>CustomerAWSAccountId</code> for each <code>UsageRecord</code>.</p>
     #   @return [String]
+    # @!attribute license_arn
+    #   <p>The <code>LicenseArn</code> is a unique identifier for a specific granted license. These are typically used for software purchased through Amazon Web Services Marketplace. Calls to <code>BatchMeterUsage</code> require <code>LicenseArn</code> for each <code>UsageRecord</code>.</p>
+    #            <note>
+    #               <p>Once you receive the <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> in the response, store that for future purposes/API calls/integrations.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>The metadata associated with the resolved customer, including the
+    #               <code>AgreementId</code> of the Amazon Web Services Marketplace agreement the customer accepted.</p>
+    #   @return [Types::Metadata]
     class ResolveCustomerResult < Struct.new(
       nil,
       :customer_identifier,
       :product_code,
       :customer_aws_account_id,
+      :license_arn,
+      :metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -429,13 +501,19 @@ module Aws::MarketplaceMetering
     #             de-duplicated to prevent double charges.</p>
     # @!attribute timestamp
     #   <p>Timestamp, in UTC, for which the usage is being reported.</p>
-    #            <p>Your application can meter usage for up to one hour in the past. Make sure the
+    #            <p>Your application can meter usage for up to 24 hours in the past. Make sure the
     #                   <code>timestamp</code> value is not before the start of the software usage.</p>
+    #            <p>At the end of each billing cycle, you have a 6-hour grace period to submit usage
+    #                   records for the previous billing month before 06:00 UTC on the first day of the next month.</p>
     #   @return [Time]
     # @!attribute customer_identifier
     #   <p>The <code>CustomerIdentifier</code> is obtained through the
     #                   <code>ResolveCustomer</code> operation and represents an individual buyer in your
     #               application.</p>
+    #            <important>
+    #               <p>
+    #                  <code>CustomerIdentifier</code> is not supported for new SaaS product integrations. Use <code>CustomerAWSAccountId</code> to identify the buyer.</p>
+    #            </important>
     #   @return [String]
     # @!attribute dimension
     #   <p>During the process of registering a product on Amazon Web Services Marketplace, dimensions are specified.
@@ -451,9 +529,16 @@ module Aws::MarketplaceMetering
     #                   <code>UsageRecord</code>.</p>
     #   @return [Array<Types::UsageAllocation>]
     # @!attribute customer_aws_account_id
-    #   <p>
-    #               The <code>CustomerAWSAccountID</code> parameter specifies the AWS account ID of the buyer.
-    #           </p>
+    #   <p>The <code>CustomerAWSAccountId</code> parameter specifies the AWS account ID of the buyer.</p>
+    #            <important>
+    #               <p>If you have an existing integration and need the <code>CustomerAWSAccountId</code> that corresponds to a <code>CustomerIdentifier</code>, contact <a href="https://aws.amazon.com/marketplace/management/contact-us/">AWS Marketplace Seller Operations</a> to obtain the mapping. Do not request the <code>CustomerAWSAccountId</code> directly from buyers. We cannot verify that a buyer-provided account ID is authentic, which can result in incorrect metering or billing.</p>
+    #            </important>
+    #   @return [String]
+    # @!attribute license_arn
+    #   <p>The <code>LicenseArn</code> is a unique identifier for a specific granted license. These are used for software purchased through Amazon Web Services Marketplace.</p>
+    #            <note>
+    #               <p>To access your <code>CustomerAWSAccountId</code> and <code>LicenseArn</code> mapping, visit <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html">Agreements Feeds</a>.</p>
+    #            </note>
     #   @return [String]
     class UsageRecord < Struct.new(
       nil,
@@ -463,6 +548,7 @@ module Aws::MarketplaceMetering
       :quantity,
       :usage_allocations,
       :customer_aws_account_id,
+      :license_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

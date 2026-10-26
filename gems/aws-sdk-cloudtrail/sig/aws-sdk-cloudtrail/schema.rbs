@@ -14,6 +14,8 @@ module Aws::CloudTrail
     AdvancedEventSelectors: ListShape
     AdvancedFieldSelector: StructureShape
     AdvancedFieldSelectors: ListShape
+    AggregationConfiguration: StructureShape
+    AggregationConfigurations: ListShape
     BillingMode: EnumShape
     Boolean: BooleanShape
     ByteBuffer: BlobShape
@@ -86,6 +88,7 @@ module Aws::CloudTrail
     ErrorMessage: StringShape
     Event: StructureShape
     EventCategory: EnumShape
+    EventCategoryAggregation: EnumShape
     EventDataStore: StructureShape
     EventDataStoreARNInvalidException: StructureShape
     EventDataStoreAlreadyExistsException: StructureShape
@@ -205,6 +208,13 @@ module Aws::CloudTrail
     ListImportsMaxResultsCount: IntegerShape
     ListImportsRequest: StructureShape
     ListImportsResponse: StructureShape
+    ListInsightsDataDimensionKey: EnumShape
+    ListInsightsDataDimensionValue: StringShape
+    ListInsightsDataDimensions: MapShape
+    ListInsightsDataMaxResultsCount: IntegerShape
+    ListInsightsDataRequest: StructureShape
+    ListInsightsDataResponse: StructureShape
+    ListInsightsDataType: EnumShape
     ListInsightsMetricDataRequest: StructureShape
     ListInsightsMetricDataResponse: StructureShape
     ListPublicKeysRequest: StructureShape
@@ -319,6 +329,8 @@ module Aws::CloudTrail
     ServiceQuotaExceededException: StructureShape
     Source: StringShape
     SourceConfig: StructureShape
+    SourceEventCategories: ListShape
+    SourceEventCategory: EnumShape
     StartDashboardRefreshRequest: StructureShape
     StartDashboardRefreshResponse: StructureShape
     StartEventDataStoreIngestionRequest: StructureShape
@@ -341,6 +353,8 @@ module Aws::CloudTrail
     TagValue: StringShape
     TagsLimitExceededException: StructureShape
     TagsList: ListShape
+    Template: EnumShape
+    Templates: ListShape
     TerminationProtectionEnabled: BooleanShape
     ThrottlingException: StructureShape
     TimeOfDay: StringShape

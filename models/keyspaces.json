@@ -17,7 +17,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>You don't have the required permissions to perform this operation. Verify your IAM permissions and try again.</p>"
                     }
                 }
             },
@@ -372,7 +372,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>The requested operation conflicts with the current state of the resource or another concurrent operation.</p>"
                     }
                 }
             },
@@ -571,6 +571,12 @@
                     "target": "com.amazonaws.keyspaces#CdcSpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>The CDC stream settings of the table.</p>"
+                    }
+                },
+                "warmThroughputSpecification": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the warm throughput settings for the table. Pre-warming a table helps you avoid capacity exceeded exceptions by pre-provisioning read and write capacity units to reduce cold start latency when your table receives traffic.</p> <p>For more information about pre-warming in Amazon Keyspaces, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html\">Pre-warm a table in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -1266,6 +1272,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CDC stream settings of the table.</p>"
                     }
+                },
+                "warmThroughputSpecification": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputSpecificationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The warm throughput settings for the table, including the current status and configured read and write capacity units.</p>"
+                    }
                 }
             }
         },
@@ -1398,7 +1410,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>An internal service error occurred. Retry your request. If the problem persists, contact Amazon Web Services Support.</p>"
                     }
                 }
             },
@@ -1562,6 +1574,219 @@
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#documentation": "<p>Amazon Keyspaces (for Apache Cassandra) is a scalable, highly available, and managed Apache Cassandra-compatible database service. Amazon Keyspaces makes it easy to migrate, run, and scale Cassandra workloads in the Amazon Web Services Cloud. With just a few clicks on the Amazon Web Services Management Console or a few lines of code, you can create keyspaces and tables in Amazon Keyspaces, without deploying any infrastructure or installing software. </p> <p>In addition to supporting Cassandra Query Language (CQL) requests via open-source Cassandra drivers, Amazon Keyspaces supports data definition language (DDL) operations to manage keyspaces and tables using the Amazon Web Services SDK and CLI, as well as infrastructure as code (IaC) services and tools such as CloudFormation and Terraform. This API reference describes the supported DDL operations in detail.</p> <p>For the list of all supported CQL APIs, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html\">Supported Cassandra APIs, operations, and data types in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>To learn how Amazon Keyspaces API actions are recorded with CloudTrail, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/logging-using-cloudtrail.html#service-name-info-in-cloudtrail\">Amazon Keyspaces information in CloudTrail</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>For more information about Amazon Web Services APIs, for example how to implement retry logic or how to sign Amazon Web Services API requests, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">Amazon Web Services APIs</a> in the <i>General Reference</i>.</p>",
                 "smithy.api#title": "Amazon Keyspaces",
+                "smithy.protocols#rpcv2Cbor": {},
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cassandra-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cassandra.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cassandra-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cassandra.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cassandra.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 14,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1569,27 +1794,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -2930,6 +3155,12 @@
                 },
                 "capacitySpecification": {
                     "target": "com.amazonaws.keyspaces#CapacitySpecificationSummary"
+                },
+                "warmThroughputSpecification": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputSpecificationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The warm throughput settings for this replica, including the current status and configured read and write capacity units.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3013,13 +3244,13 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>The specified resource was not found. Verify the resource identifier and ensure the resource exists and is in an ACTIVE state.</p>"
                     }
                 },
                 "resourceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn’t be found.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn't be found.</p>"
                     }
                 }
             },
@@ -3192,7 +3423,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>The requested operation would exceed the service quota for this resource. Review the service quotas and adjust your request accordingly.</p>"
                     }
                 }
             },
@@ -3808,6 +4039,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The CDC stream settings of the table.</p>"
                     }
+                },
+                "warmThroughputSpecification": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Modifies the warm throughput settings for the table. You can update the read and write capacity units to adjust the pre-provisioned throughput.</p>"
+                    }
                 }
             }
         },
@@ -3829,7 +4066,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                        "smithy.api#documentation": "<p>The request parameters are invalid or malformed. Review the API documentation and correct the request format.</p>"
                     }
                 }
             },
@@ -3861,6 +4098,78 @@
                     {
                         "value": "NEW_AND_OLD_IMAGES",
                         "name": "NEW_AND_OLD_IMAGES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.keyspaces#WarmThroughputSpecification": {
+            "type": "structure",
+            "members": {
+                "readUnitsPerSecond": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of read capacity units per second to pre-warm the table for read capacity throughput. The minimum value is 1.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "writeUnitsPerSecond": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of write capacity units per second to pre-warm the table for write capacity throughput. The minimum value is 1.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the warm throughput settings for a table. Pre-warming a table by specifying warm throughput pre-provisions read and write capacity units to help avoid capacity exceeded exceptions and reduce latency when your table starts receiving traffic.</p> <p>For more information about pre-warming in Amazon Keyspaces, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/warm-throughput.html\">Pre-warm a table in Amazon Keyspaces</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#WarmThroughputSpecificationSummary": {
+            "type": "structure",
+            "members": {
+                "readUnitsPerSecond": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of read capacity units per second currently configured for warm throughput.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "writeUnitsPerSecond": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of write capacity units per second currently configured for warm throughput.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.keyspaces#WarmThroughputStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the warm throughput configuration. Valid values are <code>AVAILABLE</code> when the configuration is active, and <code>UPDATING</code> when changes are being applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the current warm throughput settings for a table, including the configured capacity units and the current status of the warm throughput configuration.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#WarmThroughputStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
                     }
                 ]
             }

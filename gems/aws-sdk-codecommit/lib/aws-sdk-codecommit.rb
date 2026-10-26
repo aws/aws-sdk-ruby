@@ -12,7 +12,7 @@ Aws.const_set('CodeCommit', Module.new) unless Aws.const_defined?('CodeCommit')
 
 # @title AWS CodeCommit
 # <fullname>CodeCommit</fullname>
-#          <p>This is the <i>CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for 
+#          <p>This is the <i>CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for
 #             CodeCommit API along with usage examples.</p>
 #          <p>You can use the CodeCommit API to work with the following objects:</p>
 #          <p>Repositories, by calling the following:</p>
@@ -91,6 +91,12 @@ Aws.const_set('CodeCommit', Module.new) unless Aws.const_defined?('CodeCommit')
 #             </li>
 #             <li>
 #                <p>
+#                   <a>GetBlobDifferences</a>, which returns a structured, line-level
+#                     diff between two blob versions in a repository, with optional surrounding
+#                     context lines.</p>
+#             </li>
+#             <li>
+#                <p>
 #                   <a>GetFile</a>, which returns the base-64 encoded content of a specified file.</p>
 #             </li>
 #             <li>
@@ -118,7 +124,7 @@ Aws.const_set('CodeCommit', Module.new) unless Aws.const_defined?('CodeCommit')
 #             </li>
 #             <li>
 #                <p>
-#                   <a>GetCommit</a>, which returns information about  a commit, including commit 
+#                   <a>GetCommit</a>, which returns information about  a commit, including commit
 #                           messages and author and committer information.</p>
 #             </li>
 #             <li>
@@ -206,7 +212,7 @@ Aws.const_set('CodeCommit', Module.new) unless Aws.const_defined?('CodeCommit')
 #             </li>
 #             <li>
 #                <p>
-#                   <a>GetPullRequestOverrideState</a>, which returns information about whether approval rules have been set aside (overriden) for a 
+#                   <a>GetPullRequestOverrideState</a>, which returns information about whether approval rules have been set aside (overriden) for a
 #             pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.</p>
 #             </li>
 #             <li>
@@ -343,7 +349,7 @@ Aws.const_set('CodeCommit', Module.new) unless Aws.const_defined?('CodeCommit')
 #             </li>
 #             <li>
 #                <p>
-#                   <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers 
+#                   <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers
 #                     in a repository.</p>
 #             </li>
 #             <li>
@@ -382,17 +388,17 @@ Aws.const_set('CodeCommit', Module.new) unless Aws.const_defined?('CodeCommit')
 #          <ul>
 #             <li>
 #                <p>
-#                   <a>GetRepositoryTriggers</a>, which returns information about triggers configured 
+#                   <a>GetRepositoryTriggers</a>, which returns information about triggers configured
 #                             for a repository.</p>
 #             </li>
 #             <li>
 #                <p>
-#                   <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can 
+#                   <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can
 #                             be used to create or delete triggers.</p>
 #             </li>
 #             <li>
 #                <p>
-#                   <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger 
+#                   <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger
 #                             by sending data to the trigger target.</p>
 #             </li>
 #          </ul>

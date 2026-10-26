@@ -17,6 +17,9 @@ module Aws::MWAA
       def rest_api_status_code: () -> Integer?
       def rest_api_response: () -> Smithy::Schema::document?
     end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ValidationException < Smithy::Client::ServiceError
       def message: () -> String?
     end

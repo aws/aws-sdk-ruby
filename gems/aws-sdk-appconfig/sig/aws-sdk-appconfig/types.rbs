@@ -84,6 +84,38 @@ module Aws::AppConfig
       attr_accessor parameters: Hash[String, String]?
     end
 
+    class AttributeValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+        ?number_value: Float,
+        ?boolean_value: bool,
+        ?string_array: Array[String],
+        ?number_array: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor number_value: Float?
+      attr_accessor boolean_value: bool?
+      attr_accessor string_array: Array[String]?
+      attr_accessor number_array: Array[Float]?
+
+      class StringValue < AttributeValue
+      end
+      class NumberValue < AttributeValue
+      end
+      class BooleanValue < AttributeValue
+      end
+      class StringArray < AttributeValue
+      end
+      class NumberArray < AttributeValue
+      end
+      class Unknown < AttributeValue
+      end
+    end
+
     class BadRequestDetails
       include Smithy::Schema::Union
 
@@ -331,6 +363,80 @@ module Aws::AppConfig
       attr_accessor tags: Hash[String, String]?
     end
 
+    class CreateExperimentDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?hypothesis: String,
+        ?status: String,
+        ?configuration_profile_id: String,
+        ?environment_id: String,
+        ?flag_key: String,
+        ?audience_rule: String,
+        ?audience_description: String,
+        ?launch_criteria: String,
+        ?treatments: Array[Types::Treatment],
+        ?control: Types::Treatment,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor hypothesis: String?
+      attr_accessor status: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor flag_key: String?
+      attr_accessor audience_rule: String?
+      attr_accessor audience_description: String?
+      attr_accessor launch_criteria: String?
+      attr_accessor treatments: Array[Types::Treatment]?
+      attr_accessor control: Types::Treatment?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class CreateExperimentDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?name: String,
+        ?configuration_profile_identifier: String,
+        ?environment_identifier: String,
+        ?flag_key: String,
+        ?treatments: Array[Types::TreatmentInput],
+        ?control: Types::TreatmentInput,
+        ?audience_rule: String,
+        ?hypothesis: String,
+        ?audience_description: String,
+        ?launch_criteria: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor name: String?
+      attr_accessor configuration_profile_identifier: String?
+      attr_accessor environment_identifier: String?
+      attr_accessor flag_key: String?
+      attr_accessor treatments: Array[Types::TreatmentInput]?
+      attr_accessor control: Types::TreatmentInput?
+      attr_accessor audience_rule: String?
+      attr_accessor hypothesis: String?
+      attr_accessor audience_description: String?
+      attr_accessor launch_criteria: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class CreateExtensionAssociationOutput
       include Smithy::Schema::Structure
 
@@ -515,6 +621,21 @@ module Aws::AppConfig
       attr_accessor deletion_protection_check: String?
     end
 
+    class DeleteExperimentDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?experiment_definition_identifier: String,
+        ?delete_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor experiment_definition_identifier: String?
+      attr_accessor delete_type: String?
+    end
+
     class DeleteExtensionAssociationRequest
       include Smithy::Schema::Structure
 
@@ -552,6 +673,11 @@ module Aws::AppConfig
       attr_accessor application_id: String?
       attr_accessor configuration_profile_id: String?
       attr_accessor version_number: Integer?
+    end
+
+    module DeleteType
+      ARCHIVE: String
+      DESTROY: String
     end
 
     module DeletionProtectionCheck
@@ -602,6 +728,19 @@ module Aws::AppConfig
       REVERT_COMPLETED: String
     end
 
+    class DeploymentParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dynamic_extension_parameters: Hash[String, String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dynamic_extension_parameters: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     module DeploymentState
       BAKING: String
       VALIDATING: String
@@ -642,6 +781,7 @@ module Aws::AppConfig
 
       def initialize: (
         ?deployment_number: Integer,
+        ?configuration_profile_id: String,
         ?configuration_name: String,
         ?configuration_version: String,
         ?deployment_duration_in_minutes: Integer,
@@ -653,10 +793,12 @@ module Aws::AppConfig
         ?started_at: Time,
         ?completed_at: Time,
         ?version_label: String,
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor deployment_number: Integer?
+      attr_accessor configuration_profile_id: String?
       attr_accessor configuration_name: String?
       attr_accessor configuration_version: String?
       attr_accessor deployment_duration_in_minutes: Integer?
@@ -668,6 +810,12 @@ module Aws::AppConfig
       attr_accessor started_at: Time?
       attr_accessor completed_at: Time?
       attr_accessor version_label: String?
+      attr_accessor type: String?
+    end
+
+    module DeploymentType
+      USER: String
+      MANAGED: String
     end
 
     class Environment
@@ -697,6 +845,147 @@ module Aws::AppConfig
       ROLLING_BACK: String
       ROLLED_BACK: String
       REVERTED: String
+    end
+
+    class ExperimentDefinitionSnapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?hypothesis: String,
+        ?configuration_profile_id: String,
+        ?environment_id: String,
+        ?flag_key: String,
+        ?audience_rule: String,
+        ?audience_description: String,
+        ?launch_criteria: String,
+        ?treatments: Array[Types::Treatment],
+        ?control: Types::Treatment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor hypothesis: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor flag_key: String?
+      attr_accessor audience_rule: String?
+      attr_accessor audience_description: String?
+      attr_accessor launch_criteria: String?
+      attr_accessor treatments: Array[Types::Treatment]?
+      attr_accessor control: Types::Treatment?
+    end
+
+    module ExperimentDefinitionStatus
+      ACTIVE: String
+      IDLE: String
+      ARCHIVED: String
+    end
+
+    class ExperimentDefinitionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?hypothesis: String,
+        ?status: String,
+        ?configuration_profile_id: String,
+        ?environment_id: String,
+        ?flag_key: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor hypothesis: String?
+      attr_accessor status: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor flag_key: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ExperimentRunEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?associated_deployment: String,
+        ?event_type: String,
+        ?occurred_at: Time,
+        ?triggered_by: String,
+        ?exposure_percentage: Float,
+        ?treatment_overrides: Types::TreatmentOverrides,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor associated_deployment: String?
+      attr_accessor event_type: String?
+      attr_accessor occurred_at: Time?
+      attr_accessor triggered_by: String?
+      attr_accessor exposure_percentage: Float?
+      attr_accessor treatment_overrides: Types::TreatmentOverrides?
+    end
+
+    module ExperimentRunEventType
+      RUN_STARTED: String
+      EXPOSURE_UPDATED: String
+      OVERRIDES_UPDATED: String
+      RUN_STOPPED: String
+    end
+
+    class ExperimentRunResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?executive_summary: String,
+        ?reasons_to_launch: String,
+        ?reasons_not_to_launch: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor executive_summary: String?
+      attr_accessor reasons_to_launch: String?
+      attr_accessor reasons_not_to_launch: String?
+    end
+
+    module ExperimentRunStatus
+      RUNNING: String
+      DONE: String
+    end
+
+    class ExperimentRunSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?experiment_definition_id: String,
+        ?run: Integer,
+        ?description: String,
+        ?status: String,
+        ?started_at: Time,
+        ?updated_at: Time,
+        ?ended_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor experiment_definition_id: String?
+      attr_accessor run: Integer?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor ended_at: Time?
     end
 
     class ExtensionAssociationSummary
@@ -733,15 +1022,30 @@ module Aws::AppConfig
       attr_accessor description: String?
     end
 
+    class FlagValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?attribute_values: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor attribute_values: Hash[String, Types::AttributeValue]?
+    end
+
     class GetAccountSettingsOutput
       include Smithy::Schema::Structure
 
       def initialize: (
         ?deletion_protection: Types::DeletionProtectionSettings,
+        ?vended_metrics: Types::VendedMetricsSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor deletion_protection: Types::DeletionProtectionSettings?
+      attr_accessor vended_metrics: Types::VendedMetricsSettings?
     end
 
     class GetApplicationOutput
@@ -982,6 +1286,108 @@ module Aws::AppConfig
 
       attr_accessor application_id: String?
       attr_accessor environment_id: String?
+    end
+
+    class GetExperimentDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?hypothesis: String,
+        ?status: String,
+        ?configuration_profile_id: String,
+        ?environment_id: String,
+        ?flag_key: String,
+        ?audience_rule: String,
+        ?audience_description: String,
+        ?launch_criteria: String,
+        ?treatments: Array[Types::Treatment],
+        ?control: Types::Treatment,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor hypothesis: String?
+      attr_accessor status: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor flag_key: String?
+      attr_accessor audience_rule: String?
+      attr_accessor audience_description: String?
+      attr_accessor launch_criteria: String?
+      attr_accessor treatments: Array[Types::Treatment]?
+      attr_accessor control: Types::Treatment?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class GetExperimentDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?experiment_definition_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor experiment_definition_identifier: String?
+    end
+
+    class GetExperimentRunOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?experiment_definition_id: String,
+        ?run: Integer,
+        ?description: String,
+        ?status: String,
+        ?exposure_percentage: Float,
+        ?treatment_overrides: Types::TreatmentOverrides,
+        ?result: Types::ExperimentRunResult,
+        ?started_at: Time,
+        ?updated_at: Time,
+        ?ended_at: Time,
+        ?experiment_definition_snapshot: Types::ExperimentDefinitionSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor experiment_definition_id: String?
+      attr_accessor run: Integer?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor exposure_percentage: Float?
+      attr_accessor treatment_overrides: Types::TreatmentOverrides?
+      attr_accessor result: Types::ExperimentRunResult?
+      attr_accessor started_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor experiment_definition_snapshot: Types::ExperimentDefinitionSnapshot?
+    end
+
+    class GetExperimentRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?experiment_definition_identifier: String,
+        ?run: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor experiment_definition_identifier: String?
+      attr_accessor run: Integer?
     end
 
     class GetExtensionAssociationOutput
@@ -1290,6 +1696,104 @@ module Aws::AppConfig
       attr_accessor next_token: String?
     end
 
+    class ListExperimentDefinitionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExperimentDefinitionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExperimentDefinitionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?configuration_profile_identifier: String,
+        ?environment_identifier: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor configuration_profile_identifier: String?
+      attr_accessor environment_identifier: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentRunEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExperimentRunEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExperimentRunEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentRunEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?experiment_definition_identifier: String,
+        ?run: Integer,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor experiment_definition_identifier: String?
+      attr_accessor run: Integer?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentRunsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExperimentRunSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExperimentRunSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExperimentRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?experiment_definition_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor experiment_definition_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+    end
+
     class ListExtensionAssociationsOutput
       include Smithy::Schema::Structure
 
@@ -1544,6 +2048,7 @@ module Aws::AppConfig
         ?tags: Hash[String, String],
         ?kms_key_identifier: String,
         ?dynamic_extension_parameters: Hash[String, String],
+        ?latest_deployment_number: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1556,6 +2061,63 @@ module Aws::AppConfig
       attr_accessor tags: Hash[String, String]?
       attr_accessor kms_key_identifier: String?
       attr_accessor dynamic_extension_parameters: Hash[String, String]?
+      attr_accessor latest_deployment_number: Integer?
+    end
+
+    class StartExperimentRunOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?experiment_definition_id: String,
+        ?run: Integer,
+        ?description: String,
+        ?status: String,
+        ?exposure_percentage: Float,
+        ?treatment_overrides: Types::TreatmentOverrides,
+        ?result: Types::ExperimentRunResult,
+        ?started_at: Time,
+        ?updated_at: Time,
+        ?ended_at: Time,
+        ?experiment_definition_snapshot: Types::ExperimentDefinitionSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor experiment_definition_id: String?
+      attr_accessor run: Integer?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor exposure_percentage: Float?
+      attr_accessor treatment_overrides: Types::TreatmentOverrides?
+      attr_accessor result: Types::ExperimentRunResult?
+      attr_accessor started_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor experiment_definition_snapshot: Types::ExperimentDefinitionSnapshot?
+    end
+
+    class StartExperimentRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?experiment_definition_identifier: String,
+        ?description: String,
+        ?exposure_percentage: Float,
+        ?treatment_overrides: Types::TreatmentOverrides,
+        ?tags: Hash[String, String],
+        ?deployment_parameters: Types::DeploymentParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor experiment_definition_identifier: String?
+      attr_accessor description: String?
+      attr_accessor exposure_percentage: Float?
+      attr_accessor treatment_overrides: Types::TreatmentOverrides?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor deployment_parameters: Types::DeploymentParameters?
     end
 
     class StopDeploymentOutput
@@ -1628,6 +2190,58 @@ module Aws::AppConfig
       attr_accessor allow_revert: bool?
     end
 
+    class StopExperimentRunOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?experiment_definition_id: String,
+        ?run: Integer,
+        ?description: String,
+        ?status: String,
+        ?exposure_percentage: Float,
+        ?treatment_overrides: Types::TreatmentOverrides,
+        ?result: Types::ExperimentRunResult,
+        ?started_at: Time,
+        ?updated_at: Time,
+        ?ended_at: Time,
+        ?experiment_definition_snapshot: Types::ExperimentDefinitionSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor experiment_definition_id: String?
+      attr_accessor run: Integer?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor exposure_percentage: Float?
+      attr_accessor treatment_overrides: Types::TreatmentOverrides?
+      attr_accessor result: Types::ExperimentRunResult?
+      attr_accessor started_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor experiment_definition_snapshot: Types::ExperimentDefinitionSnapshot?
+    end
+
+    class StopExperimentRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?experiment_definition_identifier: String,
+        ?run: Integer,
+        ?result: Types::ExperimentRunResult,
+        ?deployment_parameters: Types::DeploymentParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor experiment_definition_identifier: String?
+      attr_accessor run: Integer?
+      attr_accessor result: Types::ExperimentRunResult?
+      attr_accessor deployment_parameters: Types::DeploymentParameters?
+    end
+
     class TagResourceRequest
       include Smithy::Schema::Structure
 
@@ -1639,6 +2253,54 @@ module Aws::AppConfig
 
       attr_accessor resource_arn: String?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class Treatment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?weight: Float,
+        ?description: String,
+        ?flag_value: Types::FlagValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor weight: Float?
+      attr_accessor description: String?
+      attr_accessor flag_value: Types::FlagValue?
+    end
+
+    class TreatmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?weight: Float,
+        ?description: String,
+        ?flag_value: Types::FlagValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor weight: Float?
+      attr_accessor description: String?
+      attr_accessor flag_value: Types::FlagValue?
+    end
+
+    class TreatmentOverrides
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?inline: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline: Hash[String, String]?
+
+      class Inline < TreatmentOverrides
+      end
+      class Unknown < TreatmentOverrides
+      end
     end
 
     module TriggeredBy
@@ -1666,10 +2328,12 @@ module Aws::AppConfig
 
       def initialize: (
         ?deletion_protection: Types::DeletionProtectionSettings,
+        ?vended_metrics: Types::VendedMetricsSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor deletion_protection: Types::DeletionProtectionSettings?
+      attr_accessor vended_metrics: Types::VendedMetricsSettings?
     end
 
     class UpdateAccountSettingsRequest
@@ -1677,10 +2341,12 @@ module Aws::AppConfig
 
       def initialize: (
         ?deletion_protection: Types::DeletionProtectionSettings,
+        ?vended_metrics: Types::VendedMetricsSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor deletion_protection: Types::DeletionProtectionSettings?
+      attr_accessor vended_metrics: Types::VendedMetricsSettings?
     end
 
     class UpdateApplicationOutput
@@ -1851,6 +2517,128 @@ module Aws::AppConfig
       attr_accessor monitors: Array[Types::Monitor]?
     end
 
+    class UpdateExperimentDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?hypothesis: String,
+        ?status: String,
+        ?configuration_profile_id: String,
+        ?environment_id: String,
+        ?flag_key: String,
+        ?audience_rule: String,
+        ?audience_description: String,
+        ?launch_criteria: String,
+        ?treatments: Array[Types::Treatment],
+        ?control: Types::Treatment,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor hypothesis: String?
+      attr_accessor status: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor flag_key: String?
+      attr_accessor audience_rule: String?
+      attr_accessor audience_description: String?
+      attr_accessor launch_criteria: String?
+      attr_accessor treatments: Array[Types::Treatment]?
+      attr_accessor control: Types::Treatment?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class UpdateExperimentDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?experiment_definition_identifier: String,
+        ?treatments: Array[Types::TreatmentInput],
+        ?control: Types::TreatmentInput,
+        ?hypothesis: String,
+        ?audience_rule: String,
+        ?audience_description: String,
+        ?launch_criteria: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor experiment_definition_identifier: String?
+      attr_accessor treatments: Array[Types::TreatmentInput]?
+      attr_accessor control: Types::TreatmentInput?
+      attr_accessor hypothesis: String?
+      attr_accessor audience_rule: String?
+      attr_accessor audience_description: String?
+      attr_accessor launch_criteria: String?
+    end
+
+    class UpdateExperimentRunOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?experiment_definition_id: String,
+        ?run: Integer,
+        ?description: String,
+        ?status: String,
+        ?exposure_percentage: Float,
+        ?treatment_overrides: Types::TreatmentOverrides,
+        ?result: Types::ExperimentRunResult,
+        ?started_at: Time,
+        ?updated_at: Time,
+        ?ended_at: Time,
+        ?experiment_definition_snapshot: Types::ExperimentDefinitionSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor experiment_definition_id: String?
+      attr_accessor run: Integer?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor exposure_percentage: Float?
+      attr_accessor treatment_overrides: Types::TreatmentOverrides?
+      attr_accessor result: Types::ExperimentRunResult?
+      attr_accessor started_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor experiment_definition_snapshot: Types::ExperimentDefinitionSnapshot?
+    end
+
+    class UpdateExperimentRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_identifier: String,
+        ?experiment_definition_identifier: String,
+        ?run: Integer,
+        ?description: String,
+        ?exposure_percentage: Float,
+        ?treatment_overrides: Types::TreatmentOverrides,
+        ?deployment_parameters: Types::DeploymentParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_identifier: String?
+      attr_accessor experiment_definition_identifier: String?
+      attr_accessor run: Integer?
+      attr_accessor description: String?
+      attr_accessor exposure_percentage: Float?
+      attr_accessor treatment_overrides: Types::TreatmentOverrides?
+      attr_accessor deployment_parameters: Types::DeploymentParameters?
+    end
+
     class UpdateExtensionAssociationOutput
       include Smithy::Schema::Structure
 
@@ -1958,6 +2746,17 @@ module Aws::AppConfig
     module ValidatorType
       JSON_SCHEMA: String
       LAMBDA: String
+    end
+
+    class VendedMetricsSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
     end
   end
 end

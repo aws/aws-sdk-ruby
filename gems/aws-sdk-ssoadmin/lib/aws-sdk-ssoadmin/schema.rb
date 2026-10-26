@@ -25,8 +25,10 @@ module Aws::SSOAdmin
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#AccountId", name: "AccountId", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\d{12}$"})
     AccountList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#AccountList", name: "AccountList")
     ActorPolicyDocument = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.ssoadmin#ActorPolicyDocument", name: "ActorPolicyDocument")
+    AddRegionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#AddRegionRequest", name: "AddRegionRequest")
+    AddRegionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#AddRegionResponse", name: "AddRegionResponse")
     Application = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#Application", name: "Application")
-    ApplicationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ApplicationArn", name: "ApplicationArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"})
+    ApplicationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ApplicationArn", name: "ApplicationArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"})
     ApplicationAssignment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ApplicationAssignment", name: "ApplicationAssignment")
     ApplicationAssignmentForPrincipal = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ApplicationAssignmentForPrincipal", name: "ApplicationAssignmentForPrincipal")
     ApplicationAssignmentListForPrincipal = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#ApplicationAssignmentListForPrincipal", name: "ApplicationAssignmentListForPrincipal")
@@ -34,7 +36,7 @@ module Aws::SSOAdmin
     ApplicationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#ApplicationList", name: "ApplicationList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     ApplicationNameType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ApplicationNameType", name: "ApplicationNameType", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[\\S\\s]*$"})
     ApplicationProvider = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ApplicationProvider", name: "ApplicationProvider")
-    ApplicationProviderArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ApplicationProviderArn", name: "ApplicationProviderArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::aws:applicationProvider/[a-zA-Z0-9-/]+$"})
+    ApplicationProviderArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ApplicationProviderArn", name: "ApplicationProviderArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:sso::aws:applicationProvider/[a-zA-Z0-9-/]+$"})
     ApplicationProviderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#ApplicationProviderList", name: "ApplicationProviderList")
     ApplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssoadmin#ApplicationStatus", name: "ApplicationStatus")
     ApplicationUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ApplicationUrl", name: "ApplicationUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^http(s)?:\\/\\/[-a-zA-Z0-9+&@#\\/%?=~_|!:,.;]*[-a-zA-Z0-9+&bb@#\\/%?=~_|]$"})
@@ -113,6 +115,8 @@ module Aws::SSOAdmin
     DescribePermissionSetProvisioningStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#DescribePermissionSetProvisioningStatusResponse", name: "DescribePermissionSetProvisioningStatusResponse")
     DescribePermissionSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#DescribePermissionSetRequest", name: "DescribePermissionSetRequest")
     DescribePermissionSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#DescribePermissionSetResponse", name: "DescribePermissionSetResponse")
+    DescribeRegionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#DescribeRegionRequest", name: "DescribeRegionRequest")
+    DescribeRegionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#DescribeRegionResponse", name: "DescribeRegionResponse")
     DescribeTrustedTokenIssuerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#DescribeTrustedTokenIssuerRequest", name: "DescribeTrustedTokenIssuerRequest")
     DescribeTrustedTokenIssuerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#DescribeTrustedTokenIssuerResponse", name: "DescribeTrustedTokenIssuerResponse")
     Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#Description", name: "Description", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -146,19 +150,22 @@ module Aws::SSOAdmin
     IamAuthenticationMethod = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#IamAuthenticationMethod", name: "IamAuthenticationMethod")
     IconUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#IconUrl", name: "IconUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 768}, "smithy.api#pattern" => "^(http|https):\\/\\/.*$"})
     Id = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#Id", name: "Id", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9-]*$"})
+    IdentityStoreArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#IdentityStoreArn", name: "IdentityStoreArn")
     InstanceAccessControlAttributeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#InstanceAccessControlAttributeConfiguration", name: "InstanceAccessControlAttributeConfiguration")
     InstanceAccessControlAttributeConfigurationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssoadmin#InstanceAccessControlAttributeConfigurationStatus", name: "InstanceAccessControlAttributeConfigurationStatus")
     InstanceAccessControlAttributeConfigurationStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#InstanceAccessControlAttributeConfigurationStatusReason", name: "InstanceAccessControlAttributeConfigurationStatusReason")
-    InstanceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#InstanceArn", name: "InstanceArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"})
+    InstanceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#InstanceArn", name: "InstanceArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"})
+    InstanceIdentityStoreArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#InstanceIdentityStoreArn", name: "InstanceIdentityStoreArn", traits: {"smithy.api#length" => {"min" => 62, "max" => 93}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:identitystore::\\d{12}:identitystore/(d-[0-9a-f]{10}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"})
     InstanceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#InstanceList", name: "InstanceList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     InstanceMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#InstanceMetadata", name: "InstanceMetadata")
     InstanceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssoadmin#InstanceStatus", name: "InstanceStatus")
     InternalFailureMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#InternalFailureMessage", name: "InternalFailureMessage")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    IsPrimaryRegion = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ssoadmin#IsPrimaryRegion", name: "IsPrimaryRegion", traits: {"smithy.api#default" => false})
     JMESPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#JMESPath", name: "JMESPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^\\p{L}+(?:\\.\\p{L}+){0,2}$"})
     JwksRetrievalOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssoadmin#JwksRetrievalOption", name: "JwksRetrievalOption")
     JwtBearerGrant = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#JwtBearerGrant", name: "JwtBearerGrant")
-    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-[bcd]):kms:([a-z]{2,}(-[a-z0-9]+)+){1}:[0-9]{12}:key/(mrk-[a-f0-9]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"})
+    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:kms:([a-z]{2,}(-[a-z0-9]+)+){1}:[0-9]{12}:key/(mrk-[a-f0-9]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"})
     KmsKeyStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssoadmin#KmsKeyStatus", name: "KmsKeyStatus")
     KmsKeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssoadmin#KmsKeyType", name: "KmsKeyType")
     ListAccountAssignmentCreationStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListAccountAssignmentCreationStatusRequest", name: "ListAccountAssignmentCreationStatusRequest")
@@ -200,11 +207,13 @@ module Aws::SSOAdmin
     ListPermissionSetsProvisionedToAccountResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListPermissionSetsProvisionedToAccountResponse", name: "ListPermissionSetsProvisionedToAccountResponse")
     ListPermissionSetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListPermissionSetsRequest", name: "ListPermissionSetsRequest")
     ListPermissionSetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListPermissionSetsResponse", name: "ListPermissionSetsResponse")
+    ListRegionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListRegionsRequest", name: "ListRegionsRequest")
+    ListRegionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListRegionsResponse", name: "ListRegionsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
     ListTrustedTokenIssuersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListTrustedTokenIssuersRequest", name: "ListTrustedTokenIssuersRequest")
     ListTrustedTokenIssuersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ListTrustedTokenIssuersResponse", name: "ListTrustedTokenIssuersResponse")
-    ManagedPolicyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ManagedPolicyArn", name: "ManagedPolicyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::aws:policy((/[A-Za-z0-9\\.,\\+@=_-]+)*)/([A-Za-z0-9\\.,\\+=@_-]+)$"})
+    ManagedPolicyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ManagedPolicyArn", name: "ManagedPolicyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:iam::aws:policy((/[A-Za-z0-9\\.,\\+@=_-]+)*)/([A-Za-z0-9\\.,\\+=@_-]+)$"})
     ManagedPolicyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ManagedPolicyName", name: "ManagedPolicyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
     ManagedPolicyPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ManagedPolicyPath", name: "ManagedPolicyPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^((/[A-Za-z0-9\\.,\\+@=_-]+)*)/$"})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ssoadmin#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
@@ -214,7 +223,7 @@ module Aws::SSOAdmin
     OidcJwtUpdateConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#OidcJwtUpdateConfiguration", name: "OidcJwtUpdateConfiguration")
     OperationStatusFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#OperationStatusFilter", name: "OperationStatusFilter")
     PermissionSet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#PermissionSet", name: "PermissionSet")
-    PermissionSetArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#PermissionSetArn", name: "PermissionSetArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}$"})
+    PermissionSetArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#PermissionSetArn", name: "PermissionSetArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}$"})
     PermissionSetDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#PermissionSetDescription", name: "PermissionSetDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 700}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]*$"})
     PermissionSetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#PermissionSetList", name: "PermissionSetList")
     PermissionSetName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#PermissionSetName", name: "PermissionSetName", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[\\w+=,.@-]+$"})
@@ -244,7 +253,13 @@ module Aws::SSOAdmin
     Reason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#Reason", name: "Reason", traits: {"smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*$"})
     RedirectUris = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#RedirectUris", name: "RedirectUris", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     RefreshTokenGrant = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#RefreshTokenGrant", name: "RefreshTokenGrant")
+    RegionMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#RegionMetadata", name: "RegionMetadata")
+    RegionMetadataList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#RegionMetadataList", name: "RegionMetadataList")
+    RegionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#RegionName", name: "RegionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^([a-z]+-){2,3}\\d$"})
+    RegionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssoadmin#RegionStatus", name: "RegionStatus")
     RelayState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#RelayState", name: "RelayState", traits: {"smithy.api#length" => {"min" => 1, "max" => 240}, "smithy.api#pattern" => "^[a-zA-Z0-9&$@#\\\\\\/%?=~\\-_'\"|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+$"})
+    RemoveRegionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#RemoveRegionRequest", name: "RemoveRegionRequest")
+    RemoveRegionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#RemoveRegionResponse", name: "RemoveRegionResponse")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceNotFoundExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssoadmin#ResourceNotFoundExceptionReason", name: "ResourceNotFoundExceptionReason")
     ResourceNotFoundMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ResourceNotFoundMessage", name: "ResourceNotFoundMessage")
@@ -254,7 +269,7 @@ module Aws::SSOAdmin
     ResourceServerScopes = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.ssoadmin#ResourceServerScopes", name: "ResourceServerScopes")
     Scope = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#Scope", name: "Scope", traits: {"smithy.api#pattern" => "^([A-Za-z0-9_]{1,50})(:[A-Za-z0-9_]{1,50}){0,1}(:[A-Za-z0-9_]{1,50}){0,1}$"})
     ScopeDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ScopeDetails", name: "ScopeDetails")
-    ScopeTarget = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ScopeTarget", name: "ScopeTarget", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}|:instance/(sso)?ins-[a-zA-Z0-9-.]{16})$"})
+    ScopeTarget = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#ScopeTarget", name: "ScopeTarget", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:sso::(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}|:instance/(sso)?ins-[a-zA-Z0-9-.]{16})$"})
     ScopeTargets = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#ScopeTargets", name: "ScopeTargets", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     Scopes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#Scopes", name: "Scopes", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
@@ -269,7 +284,7 @@ module Aws::SSOAdmin
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#TagResourceRequest", name: "TagResourceRequest")
     TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#TagResourceResponse", name: "TagResourceResponse")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
-    TaggableResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#TaggableResourceArn", name: "TaggableResourceArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::((:instance/(sso)?ins-[a-zA-Z0-9-.]{16})|(:permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16})|(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16})|(\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}))$"})
+    TaggableResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#TaggableResourceArn", name: "TaggableResourceArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:sso::((:instance/(sso)?ins-[a-zA-Z0-9-.]{16})|(:permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16})|(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16})|(\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}))$"})
     TargetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#TargetId", name: "TargetId", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\d{12}$"})
     TargetType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssoadmin#TargetType", name: "TargetType")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
@@ -279,7 +294,7 @@ module Aws::SSOAdmin
     TokenExchangeGrant = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#TokenExchangeGrant", name: "TokenExchangeGrant")
     TokenIssuerAudience = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#TokenIssuerAudience", name: "TokenIssuerAudience", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     TokenIssuerAudiences = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#TokenIssuerAudiences", name: "TokenIssuerAudiences", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
-    TrustedTokenIssuerArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#TrustedTokenIssuerArn", name: "TrustedTokenIssuerArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
+    TrustedTokenIssuerArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssoadmin#TrustedTokenIssuerArn", name: "TrustedTokenIssuerArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}, "smithy.api#pattern" => "^arn:aws(-[a-z]{1,5}){0,3}:sso::\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
     TrustedTokenIssuerConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.ssoadmin#TrustedTokenIssuerConfiguration", name: "TrustedTokenIssuerConfiguration")
     TrustedTokenIssuerList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssoadmin#TrustedTokenIssuerList", name: "TrustedTokenIssuerList")
     TrustedTokenIssuerMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssoadmin#TrustedTokenIssuerMetadata", name: "TrustedTokenIssuerMetadata")
@@ -346,15 +361,22 @@ module Aws::SSOAdmin
     AccountAssignmentOperationStatusMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedDate"))
     AccountAssignmentOperationStatusMetadata.type = Types::AccountAssignmentOperationStatusMetadata
     AccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
+    AddRegionRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
+    AddRegionRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName", traits: {"smithy.api#required" => {}}))
+    AddRegionRequest.type = Types::AddRegionRequest
+    AddRegionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionStatus, name: "Status"))
+    AddRegionResponse.type = Types::AddRegionResponse
     Application.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn"))
     Application.add_member(:application_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationProviderArn, name: "ApplicationProviderArn"))
     Application.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationNameType, name: "Name"))
     Application.add_member(:application_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ApplicationAccount"))
     Application.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn"))
+    Application.add_member(:identity_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStoreArn, name: "IdentityStoreArn"))
     Application.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "Status"))
     Application.add_member(:portal_options, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalOptions, name: "PortalOptions"))
     Application.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     Application.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedDate"))
+    Application.add_member(:created_from, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "CreatedFrom"))
     Application.type = Types::Application
     ApplicationAssignment.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn", traits: {"smithy.api#required" => {}}))
     ApplicationAssignment.add_member(:principal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalId, name: "PrincipalId", traits: {"smithy.api#required" => {}}))
@@ -431,6 +453,8 @@ module Aws::SSOAdmin
     CreateApplicationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateApplicationRequest.type = Types::CreateApplicationRequest
     CreateApplicationResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn"))
+    CreateApplicationResponse.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn"))
+    CreateApplicationResponse.add_member(:identity_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStoreArn, name: "IdentityStoreArn"))
     CreateApplicationResponse.type = Types::CreateApplicationResponse
     CreateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
     CreateInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_access_control_attribute_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceAccessControlAttributeConfiguration, name: "InstanceAccessControlAttributeConfiguration", traits: {"smithy.api#required" => {}}))
@@ -543,10 +567,12 @@ module Aws::SSOAdmin
     DescribeApplicationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationNameType, name: "Name"))
     DescribeApplicationResponse.add_member(:application_account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "ApplicationAccount"))
     DescribeApplicationResponse.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn"))
+    DescribeApplicationResponse.add_member(:identity_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityStoreArn, name: "IdentityStoreArn"))
     DescribeApplicationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "Status"))
     DescribeApplicationResponse.add_member(:portal_options, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalOptions, name: "PortalOptions"))
     DescribeApplicationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     DescribeApplicationResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedDate"))
+    DescribeApplicationResponse.add_member(:created_from, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "CreatedFrom"))
     DescribeApplicationResponse.type = Types::DescribeApplicationResponse
     DescribeInstanceAccessControlAttributeConfigurationRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
     DescribeInstanceAccessControlAttributeConfigurationRequest.type = Types::DescribeInstanceAccessControlAttributeConfigurationRequest
@@ -558,12 +584,16 @@ module Aws::SSOAdmin
     DescribeInstanceRequest.type = Types::DescribeInstanceRequest
     DescribeInstanceResponse.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn"))
     DescribeInstanceResponse.add_member(:identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "IdentityStoreId"))
+    DescribeInstanceResponse.add_member(:identity_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdentityStoreArn, name: "IdentityStoreArn"))
     DescribeInstanceResponse.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "OwnerAccountId"))
     DescribeInstanceResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, name: "Name"))
     DescribeInstanceResponse.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedDate"))
     DescribeInstanceResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStatus, name: "Status"))
     DescribeInstanceResponse.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "StatusReason"))
+    DescribeInstanceResponse.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "PrimaryRegion"))
+    DescribeInstanceResponse.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionMetadataList, name: "Regions"))
     DescribeInstanceResponse.add_member(:encryption_configuration_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfigurationDetails, name: "EncryptionConfigurationDetails"))
+    DescribeInstanceResponse.add_member(:permission_sets_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "PermissionSetsEnabled"))
     DescribeInstanceResponse.type = Types::DescribeInstanceResponse
     DescribePermissionSetProvisioningStatusRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
     DescribePermissionSetProvisioningStatusRequest.add_member(:provision_permission_set_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUId, name: "ProvisionPermissionSetRequestId", traits: {"smithy.api#required" => {}}))
@@ -575,6 +605,14 @@ module Aws::SSOAdmin
     DescribePermissionSetRequest.type = Types::DescribePermissionSetRequest
     DescribePermissionSetResponse.add_member(:permission_set, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionSet, name: "PermissionSet"))
     DescribePermissionSetResponse.type = Types::DescribePermissionSetResponse
+    DescribeRegionRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
+    DescribeRegionRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName", traits: {"smithy.api#required" => {}}))
+    DescribeRegionRequest.type = Types::DescribeRegionRequest
+    DescribeRegionResponse.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName"))
+    DescribeRegionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionStatus, name: "Status"))
+    DescribeRegionResponse.add_member(:added_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "AddedDate"))
+    DescribeRegionResponse.add_member(:is_primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: IsPrimaryRegion, name: "IsPrimaryRegion", traits: {"smithy.api#default" => false}))
+    DescribeRegionResponse.type = Types::DescribeRegionResponse
     DescribeTrustedTokenIssuerRequest.add_member(:trusted_token_issuer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedTokenIssuerArn, name: "TrustedTokenIssuerArn", traits: {"smithy.api#required" => {}}))
     DescribeTrustedTokenIssuerRequest.type = Types::DescribeTrustedTokenIssuerRequest
     DescribeTrustedTokenIssuerResponse.add_member(:trusted_token_issuer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedTokenIssuerArn, name: "TrustedTokenIssuerArn"))
@@ -664,11 +702,14 @@ module Aws::SSOAdmin
     InstanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceMetadata, name: "member"))
     InstanceMetadata.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn"))
     InstanceMetadata.add_member(:identity_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "IdentityStoreId"))
+    InstanceMetadata.add_member(:identity_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIdentityStoreArn, name: "IdentityStoreArn"))
     InstanceMetadata.add_member(:owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "OwnerAccountId"))
     InstanceMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, name: "Name"))
     InstanceMetadata.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "CreatedDate"))
     InstanceMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStatus, name: "Status"))
     InstanceMetadata.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: Reason, name: "StatusReason"))
+    InstanceMetadata.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "PrimaryRegion"))
+    InstanceMetadata.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionMetadataList, name: "Regions"))
     InstanceMetadata.type = Types::InstanceMetadata
     InstanceStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
     InstanceStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
@@ -831,6 +872,13 @@ module Aws::SSOAdmin
     ListPermissionSetsResponse.add_member(:permission_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionSetList, name: "PermissionSets"))
     ListPermissionSetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListPermissionSetsResponse.type = Types::ListPermissionSetsResponse
+    ListRegionsRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
+    ListRegionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListRegionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRegionsRequest.type = Types::ListRegionsRequest
+    ListRegionsResponse.add_member(:regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionMetadataList, name: "Regions"))
+    ListRegionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    ListRegionsResponse.type = Types::ListRegionsResponse
     ListTagsForResourceRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn"))
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaggableResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
@@ -927,6 +975,20 @@ module Aws::SSOAdmin
     PutPermissionsBoundaryToPermissionSetResponse.type = Types::PutPermissionsBoundaryToPermissionSetResponse
     RedirectUris.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: URI, name: "member"))
     RefreshTokenGrant.type = Types::RefreshTokenGrant
+    RegionMetadata.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName"))
+    RegionMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionStatus, name: "Status"))
+    RegionMetadata.add_member(:added_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "AddedDate"))
+    RegionMetadata.add_member(:is_primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: IsPrimaryRegion, name: "IsPrimaryRegion", traits: {"smithy.api#default" => false}))
+    RegionMetadata.type = Types::RegionMetadata
+    RegionMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionMetadata, name: "member"))
+    RegionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    RegionStatus.add_member(:adding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDING", traits: {"smithy.api#enumValue" => "ADDING"}))
+    RegionStatus.add_member(:removing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REMOVING", traits: {"smithy.api#enumValue" => "REMOVING"}))
+    RemoveRegionRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
+    RemoveRegionRequest.add_member(:region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "RegionName", traits: {"smithy.api#required" => {}}))
+    RemoveRegionRequest.type = Types::RemoveRegionRequest
+    RemoveRegionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionStatus, name: "Status"))
+    RemoveRegionResponse.type = Types::RemoveRegionResponse
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNotFoundMessage, name: "Message"))
     ResourceNotFoundException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceNotFoundExceptionReason, name: "Reason"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
@@ -1003,6 +1065,7 @@ module Aws::SSOAdmin
     UpdateInstanceRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameType, name: "Name"))
     UpdateInstanceRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
     UpdateInstanceRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
+    UpdateInstanceRequest.add_member(:permission_sets_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "PermissionSetsEnabled"))
     UpdateInstanceRequest.type = Types::UpdateInstanceRequest
     UpdateInstanceResponse.type = Types::UpdateInstanceResponse
     UpdatePermissionSetRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
@@ -1030,7 +1093,20 @@ module Aws::SSOAdmin
       service.id = "com.amazonaws.ssoadmin#SWBExternalService"
       service.name = "SWBExternalService"
       service.version = "2020-07-20"
-      service.traits = {"aws.api#service" => {"sdkId" => "SSO Admin", "arnNamespace" => "sso", "cloudFormationName" => "SSO", "cloudTrailEventSource" => "sso.amazonaws.com", "endpointPrefix" => "sso"}, "aws.auth#sigv4" => {"name" => "sso"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#suppress" => ["DeprecatedShape"], "smithy.api#title" => "AWS Single Sign-On Admin"}
+      service.traits = {"aws.api#service" => {"sdkId" => "SSO Admin", "arnNamespace" => "sso", "cloudFormationName" => "SSO", "cloudTrailEventSource" => "sso.amazonaws.com", "endpointPrefix" => "sso"}, "aws.auth#sigv4" => {"name" => "sso"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Single Sign-On Admin", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://sso-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://sso.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://sso-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://sso.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://sso.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
+      service.add_operation(:add_region, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssoadmin#AddRegion"
+        operation.name = "AddRegion"
+        operation.input = AddRegionRequest
+        operation.output = AddRegionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:attach_customer_managed_policy_reference_to_permission_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssoadmin#AttachCustomerManagedPolicyReferenceToPermissionSet"
         operation.name = "AttachCustomerManagedPolicyReferenceToPermissionSet"
@@ -1416,6 +1492,18 @@ module Aws::SSOAdmin
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:describe_region, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssoadmin#DescribeRegion"
+        operation.name = "DescribeRegion"
+        operation.input = DescribeRegionRequest
+        operation.output = DescribeRegionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:describe_trusted_token_issuer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssoadmin#DescribeTrustedTokenIssuer"
         operation.name = "DescribeTrustedTokenIssuer"
@@ -1769,6 +1857,18 @@ module Aws::SSOAdmin
         operation.traits = {}
         operation[:paginator] = Paginators::ListPermissionSetsProvisionedToAccount.new
       end)
+      service.add_operation(:list_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssoadmin#ListRegions"
+        operation.name = "ListRegions"
+        operation.input = ListRegionsRequest
+        operation.output = ListRegionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListRegions.new
+      end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssoadmin#ListTagsForResource"
         operation.name = "ListTagsForResource"
@@ -1891,6 +1991,19 @@ module Aws::SSOAdmin
         operation.name = "PutPermissionsBoundaryToPermissionSet"
         operation.input = PutPermissionsBoundaryToPermissionSetRequest
         operation.output = PutPermissionsBoundaryToPermissionSetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:remove_region, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssoadmin#RemoveRegion"
+        operation.name = "RemoveRegion"
+        operation.input = RemoveRegionRequest
+        operation.output = RemoveRegionResponse
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException

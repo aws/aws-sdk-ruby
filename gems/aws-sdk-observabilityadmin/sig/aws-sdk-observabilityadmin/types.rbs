@@ -14,6 +14,62 @@ module Aws::ObservabilityAdmin
       attr_accessor amzn_error_type: String?
     end
 
+    module Action
+      ALLOW: String
+      BLOCK: String
+      COUNT: String
+      CAPTCHA: String
+      CHALLENGE: String
+      EXCLUDED_AS_COUNT: String
+    end
+
+    class ActionCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+    end
+
+    class AdvancedEventSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?field_selectors: Array[Types::AdvancedFieldSelector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor field_selectors: Array[Types::AdvancedFieldSelector]?
+    end
+
+    class AdvancedFieldSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?equals: Array[String],
+        ?starts_with: Array[String],
+        ?ends_with: Array[String],
+        ?not_equals: Array[String],
+        ?not_starts_with: Array[String],
+        ?not_ends_with: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor equals: Array[String]?
+      attr_accessor starts_with: Array[String]?
+      attr_accessor ends_with: Array[String]?
+      attr_accessor not_equals: Array[String]?
+      attr_accessor not_starts_with: Array[String]?
+      attr_accessor not_ends_with: Array[String]?
+    end
+
     module CentralizationFailureReason
       TRUSTED_ACCESS_NOT_ENABLED: String
       DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION: String
@@ -40,12 +96,14 @@ module Aws::ObservabilityAdmin
         ?region: String,
         ?account: String,
         ?destination_logs_configuration: Types::DestinationLogsConfiguration,
+        ?destination_metrics_configuration: Types::DestinationMetricsConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor region: String?
       attr_accessor account: String?
       attr_accessor destination_logs_configuration: Types::DestinationLogsConfiguration?
+      attr_accessor destination_metrics_configuration: Types::DestinationMetricsConfiguration?
     end
 
     class CentralizationRuleSource
@@ -55,12 +113,16 @@ module Aws::ObservabilityAdmin
         ?regions: Array[String],
         ?scope: String,
         ?source_logs_configuration: Types::SourceLogsConfiguration,
+        ?source_metrics_configuration: Types::SourceMetricsConfiguration,
+        ?source_context_graph_configuration: Types::SourceContextGraphConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor regions: Array[String]?
       attr_accessor scope: String?
       attr_accessor source_logs_configuration: Types::SourceLogsConfiguration?
+      attr_accessor source_metrics_configuration: Types::SourceMetricsConfiguration?
+      attr_accessor source_context_graph_configuration: Types::SourceContextGraphConfiguration?
     end
 
     class CentralizationRuleSummary
@@ -75,6 +137,9 @@ module Aws::ObservabilityAdmin
         ?last_update_time_stamp: Integer,
         ?rule_health: String,
         ?failure_reason: String,
+        ?tag_propagation_status: String,
+        ?tag_propagation_failure_reason: String,
+        ?context_graph_status: String,
         ?destination_account_id: String,
         ?destination_region: String,
       ) -> void
@@ -88,8 +153,54 @@ module Aws::ObservabilityAdmin
       attr_accessor last_update_time_stamp: Integer?
       attr_accessor rule_health: String?
       attr_accessor failure_reason: String?
+      attr_accessor tag_propagation_status: String?
+      attr_accessor tag_propagation_failure_reason: String?
+      attr_accessor context_graph_status: String?
       attr_accessor destination_account_id: String?
       attr_accessor destination_region: String?
+    end
+
+    class CloudtrailParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?advanced_event_selectors: Array[Types::AdvancedEventSelector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor advanced_event_selectors: Array[Types::AdvancedEventSelector]?
+    end
+
+    class Condition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_condition: Types::ActionCondition,
+        ?label_name_condition: Types::LabelNameCondition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_condition: Types::ActionCondition?
+      attr_accessor label_name_condition: Types::LabelNameCondition?
+    end
+
+    class ConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::Source],
+        ?data_sources: Array[Types::DataSource],
+        ?processors: Array[String],
+        ?processor_count: Integer,
+        ?sinks: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::Source]?
+      attr_accessor data_sources: Array[Types::DataSource]?
+      attr_accessor processors: Array[String]?
+      attr_accessor processor_count: Integer?
+      attr_accessor sinks: Array[String]?
     end
 
     class ConflictException
@@ -97,10 +208,20 @@ module Aws::ObservabilityAdmin
 
       def initialize: (
         ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ContextGraphStatus
+      HEALTHY: String
+      UNHEALTHY: String
+      PROVISIONING: String
     end
 
     class CreateCentralizationRuleForOrganizationInput
@@ -127,6 +248,88 @@ module Aws::ObservabilityAdmin
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor rule_arn: String?
+    end
+
+    class CreateDatasetIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDatasetIntegrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?role_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateS3TableIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption: Types::Encryption,
+        ?role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateS3TableIntegrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CreateTelemetryPipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?configuration: Types::TelemetryPipelineConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor configuration: Types::TelemetryPipelineConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTelemetryPipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
     end
 
     class CreateTelemetryRuleForOrganizationInput
@@ -181,6 +384,36 @@ module Aws::ObservabilityAdmin
       attr_accessor rule_arn: String?
     end
 
+    class DataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class DatasetIntegrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?role_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     class DeleteCentralizationRuleForOrganizationInput
       include Smithy::Schema::Structure
 
@@ -190,6 +423,48 @@ module Aws::ObservabilityAdmin
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor rule_identifier: String?
+    end
+
+    class DeleteDatasetIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteS3TableIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteTelemetryPipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_identifier: String?
+    end
+
+    class DeleteTelemetryPipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeleteTelemetryRuleForOrganizationInput
@@ -220,15 +495,43 @@ module Aws::ObservabilityAdmin
       def initialize: (
         ?logs_encryption_configuration: Types::LogsEncryptionConfiguration,
         ?backup_configuration: Types::LogsBackupConfiguration,
+        ?log_group_name_configuration: Types::LogGroupNameConfiguration,
+        ?tag_propagation_configuration: Types::TagPropagationConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor logs_encryption_configuration: Types::LogsEncryptionConfiguration?
       attr_accessor backup_configuration: Types::LogsBackupConfiguration?
+      attr_accessor log_group_name_configuration: Types::LogGroupNameConfiguration?
+      attr_accessor tag_propagation_configuration: Types::TagPropagationConfiguration?
+    end
+
+    class DestinationMetricsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_configuration: Types::MetricsBackupConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_configuration: Types::MetricsBackupConfiguration?
     end
 
     module DestinationType
       CLOUDWATCH_LOGS: String
+    end
+
+    class ELBLoadBalancerLoggingParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_format: String,
+        ?field_delimiter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_format: String?
+      attr_accessor field_delimiter: String?
     end
 
     module EncryptedLogGroupStrategy
@@ -236,14 +539,74 @@ module Aws::ObservabilityAdmin
       SKIP: String
     end
 
+    class Encryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sse_algorithm: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sse_algorithm: String?
+      attr_accessor kms_key_arn: String?
+    end
+
     module EncryptionConflictResolutionStrategy
       ALLOW: String
       SKIP: String
     end
 
+    module EncryptionScope
+      ENCRYPTED_SOURCE_ONLY: String
+      NEW_DESTINATION_LOG_GROUPS: String
+    end
+
     module EncryptionStrategy
       CUSTOMER_MANAGED: String
       AWS_OWNED: String
+    end
+
+    class FieldToMatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?single_header: Types::SingleHeader,
+        ?uri_path: String,
+        ?query_string: String,
+        ?method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor single_header: Types::SingleHeader?
+      attr_accessor uri_path: String?
+      attr_accessor query_string: String?
+      attr_accessor method: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?behavior: String,
+        ?requirement: String,
+        ?conditions: Array[Types::Condition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor behavior: String?
+      attr_accessor requirement: String?
+      attr_accessor conditions: Array[Types::Condition]?
+    end
+
+    module FilterBehavior
+      KEEP: String
+      DROP: String
+    end
+
+    module FilterRequirement
+      MEETS_ALL: String
+      MEETS_ANY: String
     end
 
     class GetCentralizationRuleForOrganizationInput
@@ -269,6 +632,9 @@ module Aws::ObservabilityAdmin
         ?last_update_time_stamp: Integer,
         ?rule_health: String,
         ?failure_reason: String,
+        ?tag_propagation_status: String,
+        ?tag_propagation_failure_reason: String,
+        ?context_graph_status: String,
         ?centralization_rule: Types::CentralizationRule,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -281,7 +647,83 @@ module Aws::ObservabilityAdmin
       attr_accessor last_update_time_stamp: Integer?
       attr_accessor rule_health: String?
       attr_accessor failure_reason: String?
+      attr_accessor tag_propagation_status: String?
+      attr_accessor tag_propagation_failure_reason: String?
+      attr_accessor context_graph_status: String?
       attr_accessor centralization_rule: Types::CentralizationRule?
+    end
+
+    class GetDatasetIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetDatasetIntegrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?role_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetS3TableIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetS3TableIntegrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?role_arn: String,
+        ?status: String,
+        ?encryption: Types::Encryption,
+        ?destination_table_bucket_arn: String,
+        ?created_time_stamp: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor encryption: Types::Encryption?
+      attr_accessor destination_table_bucket_arn: String?
+      attr_accessor created_time_stamp: Integer?
+    end
+
+    class GetTelemetryEnrichmentStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?aws_resource_explorer_managed_view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor aws_resource_explorer_managed_view_arn: String?
     end
 
     class GetTelemetryEvaluationStatusForOrganizationOutput
@@ -290,11 +732,15 @@ module Aws::ObservabilityAdmin
       def initialize: (
         ?status: String,
         ?failure_reason: String,
+        ?home_region: String,
+        ?region_statuses: Array[Types::RegionStatus],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: String?
       attr_accessor failure_reason: String?
+      attr_accessor home_region: String?
+      attr_accessor region_statuses: Array[Types::RegionStatus]?
     end
 
     class GetTelemetryEvaluationStatusOutput
@@ -303,11 +749,37 @@ module Aws::ObservabilityAdmin
       def initialize: (
         ?status: String,
         ?failure_reason: String,
+        ?home_region: String,
+        ?region_statuses: Array[Types::RegionStatus],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: String?
       attr_accessor failure_reason: String?
+      attr_accessor home_region: String?
+      attr_accessor region_statuses: Array[Types::RegionStatus]?
+    end
+
+    class GetTelemetryPipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_identifier: String?
+    end
+
+    class GetTelemetryPipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::TelemetryPipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::TelemetryPipeline?
     end
 
     class GetTelemetryRuleForOrganizationInput
@@ -330,6 +802,9 @@ module Aws::ObservabilityAdmin
         ?created_time_stamp: Integer,
         ?last_update_time_stamp: Integer,
         ?telemetry_rule: Types::TelemetryRule,
+        ?home_region: String,
+        ?is_replicated: bool,
+        ?region_statuses: Array[Types::RegionStatus],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -338,6 +813,9 @@ module Aws::ObservabilityAdmin
       attr_accessor created_time_stamp: Integer?
       attr_accessor last_update_time_stamp: Integer?
       attr_accessor telemetry_rule: Types::TelemetryRule?
+      attr_accessor home_region: String?
+      attr_accessor is_replicated: bool?
+      attr_accessor region_statuses: Array[Types::RegionStatus]?
     end
 
     class GetTelemetryRuleInput
@@ -360,6 +838,9 @@ module Aws::ObservabilityAdmin
         ?created_time_stamp: Integer,
         ?last_update_time_stamp: Integer,
         ?telemetry_rule: Types::TelemetryRule,
+        ?home_region: String,
+        ?is_replicated: bool,
+        ?region_statuses: Array[Types::RegionStatus],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -368,6 +849,27 @@ module Aws::ObservabilityAdmin
       attr_accessor created_time_stamp: Integer?
       attr_accessor last_update_time_stamp: Integer?
       attr_accessor telemetry_rule: Types::TelemetryRule?
+      attr_accessor home_region: String?
+      attr_accessor is_replicated: bool?
+      attr_accessor region_statuses: Array[Types::RegionStatus]?
+    end
+
+    module IntegrationStatus
+      ACTIVE: String
+      DELETING: String
+    end
+
+    class IntegrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
     end
 
     class InternalServerException
@@ -376,11 +878,35 @@ module Aws::ObservabilityAdmin
       def initialize: (
         ?message: String,
         ?amzn_error_type: String,
+        ?retry_after_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
       attr_accessor amzn_error_type: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LabelNameCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label_name: String?
     end
 
     class ListCentralizationRulesForOrganizationInput
@@ -410,6 +936,32 @@ module Aws::ObservabilityAdmin
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor centralization_rule_summaries: Array[Types::CentralizationRuleSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetIntegrationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetIntegrationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_integration_summaries: Array[Types::DatasetIntegrationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_integration_summaries: Array[Types::DatasetIntegrationSummary]?
       attr_accessor next_token: String?
     end
 
@@ -483,6 +1035,32 @@ module Aws::ObservabilityAdmin
       attr_accessor next_token: String?
     end
 
+    class ListS3TableIntegrationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListS3TableIntegrationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_summaries: Array[Types::IntegrationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_summaries: Array[Types::IntegrationSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListTagsForResourceInput
       include Smithy::Schema::Structure
 
@@ -503,6 +1081,32 @@ module Aws::ObservabilityAdmin
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTelemetryPipelinesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTelemetryPipelinesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_summaries: Array[Types::TelemetryPipelineSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_summaries: Array[Types::TelemetryPipelineSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListTelemetryRulesForOrganizationInput
@@ -565,6 +1169,53 @@ module Aws::ObservabilityAdmin
       attr_accessor next_token: String?
     end
 
+    class LogDeliveryParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_types: Array[String]?
+    end
+
+    class LogGroupNameConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name_pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name_pattern: String?
+    end
+
+    module LogType
+      APPLICATION: String
+      USAGE: String
+      SECURITY_FINDING: String
+      ACCESS: String
+      CONNECTION: String
+      S3_SERVER_ACCESS: String
+      ALB_ACCESS: String
+      ALB_CONNECTION: String
+      ALB_HEALTH_CHECK: String
+    end
+
+    class LoggingFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?default_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor default_behavior: String?
+    end
+
     class LogsBackupConfiguration
       include Smithy::Schema::Structure
 
@@ -585,15 +1236,64 @@ module Aws::ObservabilityAdmin
         ?encryption_strategy: String,
         ?kms_key_arn: String,
         ?encryption_conflict_resolution_strategy: String,
+        ?encryption_scope: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor encryption_strategy: String?
       attr_accessor kms_key_arn: String?
       attr_accessor encryption_conflict_resolution_strategy: String?
+      attr_accessor encryption_scope: String?
     end
 
-    class ResourceNotFoundException
+    class MetricsBackupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+    end
+
+    module MskEnhancedMonitoringLevel
+      DEFAULT: String
+      PER_BROKER: String
+      PER_TOPIC_PER_BROKER: String
+      PER_TOPIC_PER_PARTITION: String
+    end
+
+    class MskMonitoringParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enhanced_monitoring: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enhanced_monitoring: String?
+    end
+
+    module OutputFormat
+      PLAIN: String
+      JSON: String
+    end
+
+    class PipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record: Types::Record,
+        ?error: Types::PipelineOutputError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record: Types::Record?
+      attr_accessor error: Types::PipelineOutputError?
+    end
+
+    class PipelineOutputError
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -604,10 +1304,80 @@ module Aws::ObservabilityAdmin
       attr_accessor message: String?
     end
 
+    class Record
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor type: String?
+    end
+
+    module RecordFormat
+      STRING: String
+      JSON: String
+    end
+
+    class RegionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor rule_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
     module ResourceType
       AWS_EC2_INSTANCE: String
       AWS_EC2_VPC: String
       AWS_LAMDBA_FUNCTION: String
+      AWS_CLOUDTRAIL: String
+      AWS_EKS_CLUSTER: String
+      AWS_WAF_V2_WEB_ACL: String
+      AWS_ELB_LOADBALANCER: String
+      AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT: String
+      AWS_BEDROCK_AGENTCORE_RUNTIME: String
+      AWS_BEDROCK_AGENTCORE_BROWSER: String
+      AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER: String
+      AWS_BEDROCK_AGENTCORE_GATEWAY: String
+      AWS_BEDROCK_AGENTCORE_MEMORY: String
+      AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY: String
+      AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER: String
+      AWS_SECURITY_HUB: String
+      AWS_CLOUDFRONT_DISTRIBUTION: String
+      AWS_SECURITY_HUB_HUBV2: String
+      AWS_OTEL_ENRICHMENT: String
+      AWS_MSK_CLUSTER: String
+      AWS_S3_BUCKET: String
+      AWS_BEDROCK_KNOWLEDGEBASE: String
+      AWS_XRAY_TRANSACTION_SEARCH_CONFIG: String
     end
 
     module RuleHealth
@@ -616,17 +1386,66 @@ module Aws::ObservabilityAdmin
       PROVISIONING: String
     end
 
+    module SSEAlgorithm
+      SSE_KMS: String
+      SSE_S3: String
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
       def initialize: (
         ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
         ?amzn_error_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
       attr_accessor amzn_error_type: String?
+    end
+
+    module SignalType
+      LOG: String
+      METRIC: String
+    end
+
+    class SingleHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class SourceContextGraphConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class SourceLogsConfiguration
@@ -634,12 +1453,64 @@ module Aws::ObservabilityAdmin
 
       def initialize: (
         ?log_group_selection_criteria: String,
+        ?data_source_selection_criteria: String,
         ?encrypted_log_group_strategy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor log_group_selection_criteria: String?
+      attr_accessor data_source_selection_criteria: String?
       attr_accessor encrypted_log_group_strategy: String?
+    end
+
+    class SourceMetricsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics_selection_criteria: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics_selection_criteria: String?
+    end
+
+    class StartTelemetryEnrichmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?aws_resource_explorer_managed_view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor aws_resource_explorer_managed_view_arn: String?
+    end
+
+    class StartTelemetryEvaluationForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[String],
+        ?all_regions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[String]?
+      attr_accessor all_regions: bool?
+    end
+
+    class StartTelemetryEvaluationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[String],
+        ?all_regions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[String]?
+      attr_accessor all_regions: bool?
     end
 
     module Status
@@ -650,6 +1521,46 @@ module Aws::ObservabilityAdmin
       STOPPING: String
       FAILED_STOP: String
       STOPPED: String
+    end
+
+    class StopTelemetryEnrichmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module TagConflictResolutionStrategy
+      IN_SYNC: String
+      ADD_ONLY: String
+      UPDATE_SYNC: String
+    end
+
+    class TagPropagationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_role_arn: String,
+        ?tag_conflict_resolution_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_role_arn: String?
+      attr_accessor tag_conflict_resolution_strategy: String?
+    end
+
+    module TagPropagationFailureReason
+      ROLE_NOT_ASSUMABLE: String
+      ROLE_LACKS_PERMISSIONS: String
+    end
+
+    module TagPropagationStatus
+      HEALTHY: String
+      UNHEALTHY: String
     end
 
     class TagResourceInput
@@ -675,6 +1586,7 @@ module Aws::ObservabilityAdmin
         ?resource_identifier: String,
         ?resource_tags: Hash[String, String],
         ?last_update_time_stamp: Integer,
+        ?telemetry_source_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -684,6 +1596,7 @@ module Aws::ObservabilityAdmin
       attr_accessor resource_identifier: String?
       attr_accessor resource_tags: Hash[String, String]?
       attr_accessor last_update_time_stamp: Integer?
+      attr_accessor telemetry_source_type: String?
     end
 
     class TelemetryDestinationConfiguration
@@ -694,6 +1607,12 @@ module Aws::ObservabilityAdmin
         ?destination_pattern: String,
         ?retention_in_days: Integer,
         ?vpc_flow_log_parameters: Types::VPCFlowLogParameters,
+        ?cloudtrail_parameters: Types::CloudtrailParameters,
+        ?elb_load_balancer_logging_parameters: Types::ELBLoadBalancerLoggingParameters,
+        ?waf_logging_parameters: Types::WAFLoggingParameters,
+        ?log_delivery_parameters: Types::LogDeliveryParameters,
+        ?msk_monitoring_parameters: Types::MskMonitoringParameters,
+        ?kms_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -701,6 +1620,97 @@ module Aws::ObservabilityAdmin
       attr_accessor destination_pattern: String?
       attr_accessor retention_in_days: Integer?
       attr_accessor vpc_flow_log_parameters: Types::VPCFlowLogParameters?
+      attr_accessor cloudtrail_parameters: Types::CloudtrailParameters?
+      attr_accessor elb_load_balancer_logging_parameters: Types::ELBLoadBalancerLoggingParameters?
+      attr_accessor waf_logging_parameters: Types::WAFLoggingParameters?
+      attr_accessor log_delivery_parameters: Types::LogDeliveryParameters?
+      attr_accessor msk_monitoring_parameters: Types::MskMonitoringParameters?
+      attr_accessor kms_key_arn: String?
+    end
+
+    module TelemetryEnrichmentStatus
+      RUNNING: String
+      STOPPED: String
+      IMPAIRED: String
+    end
+
+    class TelemetryPipeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_time_stamp: Integer,
+        ?last_update_time_stamp: Integer,
+        ?arn: String,
+        ?name: String,
+        ?configuration: Types::TelemetryPipelineConfiguration,
+        ?status: String,
+        ?status_reason: Types::TelemetryPipelineStatusReason,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_time_stamp: Integer?
+      attr_accessor last_update_time_stamp: Integer?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor configuration: Types::TelemetryPipelineConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_reason: Types::TelemetryPipelineStatusReason?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TelemetryPipelineConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+    end
+
+    module TelemetryPipelineStatus
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      CREATE_FAILED: String
+      UPDATE_FAILED: String
+    end
+
+    class TelemetryPipelineStatusReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+    end
+
+    class TelemetryPipelineSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_time_stamp: Integer,
+        ?last_update_time_stamp: Integer,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+        ?configuration_summary: Types::ConfigurationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_time_stamp: Integer?
+      attr_accessor last_update_time_stamp: Integer?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor configuration_summary: Types::ConfigurationSummary?
     end
 
     class TelemetryRule
@@ -709,17 +1719,25 @@ module Aws::ObservabilityAdmin
       def initialize: (
         ?resource_type: String,
         ?telemetry_type: String,
+        ?telemetry_source_types: Array[String],
         ?destination_configuration: Types::TelemetryDestinationConfiguration,
         ?scope: String,
         ?selection_criteria: String,
+        ?allow_field_updates: bool,
+        ?regions: Array[String],
+        ?all_regions: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_type: String?
       attr_accessor telemetry_type: String?
+      attr_accessor telemetry_source_types: Array[String]?
       attr_accessor destination_configuration: Types::TelemetryDestinationConfiguration?
       attr_accessor scope: String?
       attr_accessor selection_criteria: String?
+      attr_accessor allow_field_updates: bool?
+      attr_accessor regions: Array[String]?
+      attr_accessor all_regions: bool?
     end
 
     class TelemetryRuleSummary
@@ -732,6 +1750,7 @@ module Aws::ObservabilityAdmin
         ?last_update_time_stamp: Integer,
         ?resource_type: String,
         ?telemetry_type: String,
+        ?telemetry_source_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -741,6 +1760,17 @@ module Aws::ObservabilityAdmin
       attr_accessor last_update_time_stamp: Integer?
       attr_accessor resource_type: String?
       attr_accessor telemetry_type: String?
+      attr_accessor telemetry_source_types: Array[String]?
+    end
+
+    module TelemetrySourceType
+      VPC_FLOW_LOGS: String
+      ROUTE53_RESOLVER_QUERY_LOGS: String
+      EKS_AUDIT_LOGS: String
+      EKS_AUTHENTICATOR_LOGS: String
+      EKS_CONTROLLER_MANAGER_LOGS: String
+      EKS_SCHEDULER_LOGS: String
+      EKS_API_LOGS: String
     end
 
     module TelemetryState
@@ -753,6 +1783,32 @@ module Aws::ObservabilityAdmin
       LOGS: String
       METRICS: String
       TRACES: String
+    end
+
+    class TestTelemetryPipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?records: Array[Types::Record],
+        ?configuration: Types::TelemetryPipelineConfiguration,
+        ?signal_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor records: Array[Types::Record]?
+      attr_accessor configuration: Types::TelemetryPipelineConfiguration?
+      attr_accessor signal_type: String?
+    end
+
+    class TestTelemetryPipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::PipelineOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::PipelineOutput]?
     end
 
     class TooManyRequestsException
@@ -801,6 +1857,58 @@ module Aws::ObservabilityAdmin
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor rule_arn: String?
+    end
+
+    class UpdateDatasetIntegrationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class UpdateDatasetIntegrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?role_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateTelemetryPipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_identifier: String,
+        ?configuration: Types::TelemetryPipelineConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_identifier: String?
+      attr_accessor configuration: Types::TelemetryPipelineConfiguration?
+    end
+
+    class UpdateTelemetryPipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class UpdateTelemetryRuleForOrganizationInput
@@ -866,15 +1974,73 @@ module Aws::ObservabilityAdmin
       attr_accessor max_aggregation_interval: Integer?
     end
 
+    class ValidateTelemetryPipelineConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::TelemetryPipelineConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::TelemetryPipelineConfiguration?
+    end
+
+    class ValidateTelemetryPipelineConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::ValidationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::ValidationError]?
+    end
+
+    class ValidationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_map: Hash[String, String]?
+    end
+
     class ValidationException
       include Smithy::Schema::Structure
 
       def initialize: (
         ?message: String,
+        ?errors: Array[Types::ValidationError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor errors: Array[Types::ValidationError]?
+    end
+
+    module WAFLogType
+      WAF_LOGS: String
+    end
+
+    class WAFLoggingParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redacted_fields: Array[Types::FieldToMatch],
+        ?logging_filter: Types::LoggingFilter,
+        ?log_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redacted_fields: Array[Types::FieldToMatch]?
+      attr_accessor logging_filter: Types::LoggingFilter?
+      attr_accessor log_type: String?
     end
   end
 end

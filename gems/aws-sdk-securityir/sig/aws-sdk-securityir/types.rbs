@@ -12,6 +12,12 @@ module Aws::SecurityIR
       attr_accessor message: String?
     end
 
+    module ActionType
+      EVIDENCE_COLLECTION: String
+      INVESTIGATION_ANALYSIS: String
+      SUMMARIZATION: String
+    end
+
     module AwsRegion
       AF_SOUTH_1: String
       AP_EAST_1: String
@@ -26,6 +32,7 @@ module Aws::SecurityIR
       AP_SOUTHEAST_3: String
       AP_SOUTHEAST_4: String
       AP_SOUTHEAST_5: String
+      AP_SOUTHEAST_6: String
       AP_SOUTHEAST_7: String
       CA_CENTRAL_1: String
       CA_WEST_1: String
@@ -140,6 +147,19 @@ module Aws::SecurityIR
       attr_accessor message: String?
     end
 
+    class CaseMetadataEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
     module CaseStatus
       SUBMITTED: String
       ACKNOWLEDGED: String
@@ -179,6 +199,25 @@ module Aws::SecurityIR
       NOT_RESOLVED: String
       FALSE_POSITIVE: String
       DUPLICATE: String
+    end
+
+    module CommunicationType
+      CASE_CREATED: String
+      CASE_UPDATED: String
+      CASE_ACKNOWLEDGED: String
+      CASE_CLOSED: String
+      CASE_UPDATED_TO_SERVICE_MANAGED: String
+      CASE_UPDATE_CASE_STATUS: String
+      CASE_PENDING_CUSTOMER_ACTION_REMINDER: String
+      CASE_ATTACHMENT_URL_UPLOADED: String
+      CASE_COMMENT_ADDED: String
+      CASE_COMMENT_UPDATED: String
+      MEMBERSHIP_CREATED: String
+      MEMBERSHIP_UPDATED: String
+      MEMBERSHIP_CANCELLED: String
+      REGISTER_DELEGATED_ADMINISTRATOR: String
+      DEREGISTER_DELEGATED_ADMINISTRATOR: String
+      DISABLE_AWS_SERVICE_ACCESS: String
     end
 
     class ConflictException
@@ -308,6 +347,15 @@ module Aws::SecurityIR
       INVESTIGATION: String
     end
 
+    module ExecutionStatus
+      PENDING: String
+      IN_PROGRESS: String
+      WAITING: String
+      COMPLETED: String
+      FAILED: String
+      CANCELLED: String
+    end
+
     class GetCaseAttachmentDownloadUrlRequest
       include Smithy::Schema::Structure
 
@@ -394,6 +442,7 @@ module Aws::SecurityIR
         ?impacted_services: Array[String],
         ?case_attachments: Array[Types::CaseAttachmentAttributes],
         ?closed_date: Time,
+        ?case_metadata: Array[Types::CaseMetadataEntry],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -416,6 +465,53 @@ module Aws::SecurityIR
       attr_accessor impacted_services: Array[String]?
       attr_accessor case_attachments: Array[Types::CaseAttachmentAttributes]?
       attr_accessor closed_date: Time?
+      attr_accessor case_metadata: Array[Types::CaseMetadataEntry]?
+    end
+
+    class GetFindingMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_id: String,
+        ?start_date: Time,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_id: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+    end
+
+    class GetFindingMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?findings_ingested_security_hub: Integer,
+        ?findings_ingested_guard_duty: Integer,
+        ?findings_triaged: Integer,
+        ?findings_triaged_false_positive: Integer,
+        ?findings_investigated: Integer,
+        ?findings_investigated_false_positive: Integer,
+        ?findings_escalated: Integer,
+        ?findings_escalated_false_positive: Integer,
+        ?findings_true_positive: Integer,
+        ?findings_investigated_in_progress: Integer,
+        ?findings_escalated_in_progress: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor findings_ingested_security_hub: Integer?
+      attr_accessor findings_ingested_guard_duty: Integer?
+      attr_accessor findings_triaged: Integer?
+      attr_accessor findings_triaged_false_positive: Integer?
+      attr_accessor findings_investigated: Integer?
+      attr_accessor findings_investigated_false_positive: Integer?
+      attr_accessor findings_escalated: Integer?
+      attr_accessor findings_escalated_false_positive: Integer?
+      attr_accessor findings_true_positive: Integer?
+      attr_accessor findings_investigated_in_progress: Integer?
+      attr_accessor findings_escalated_in_progress: Integer?
     end
 
     class GetMembershipAccountDetailError
@@ -512,12 +608,14 @@ module Aws::SecurityIR
         ?name: String,
         ?job_title: String,
         ?email: String,
+        ?communication_preferences: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor job_title: String?
       attr_accessor email: String?
+      attr_accessor communication_preferences: Array[String]?
     end
 
     class InternalServerException
@@ -542,6 +640,44 @@ module Aws::SecurityIR
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class InvestigationAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?investigation_id: String,
+        ?action_type: String,
+        ?title: String,
+        ?content: String,
+        ?status: String,
+        ?last_updated: Time,
+        ?feedback: Types::InvestigationFeedback,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor investigation_id: String?
+      attr_accessor action_type: String?
+      attr_accessor title: String?
+      attr_accessor content: String?
+      attr_accessor status: String?
+      attr_accessor last_updated: Time?
+      attr_accessor feedback: Types::InvestigationFeedback?
+    end
+
+    class InvestigationFeedback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usefulness: String,
+        ?comment: String,
+        ?submitted_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usefulness: String?
+      attr_accessor comment: String?
+      attr_accessor submitted_at: Time?
     end
 
     class ListCaseEditsRequest
@@ -680,6 +816,34 @@ module Aws::SecurityIR
       attr_accessor next_token: String?
       attr_accessor items: Array[Types::ListCommentsItem]?
       attr_accessor total: Integer?
+    end
+
+    class ListInvestigationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor case_id: String?
+    end
+
+    class ListInvestigationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?investigation_actions: Array[Types::InvestigationAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor investigation_actions: Array[Types::InvestigationAction]?
     end
 
     class ListMembershipItem
@@ -850,6 +1014,32 @@ module Aws::SecurityIR
       POST_INCIDENT_ACTIVITIES: String
     end
 
+    class SendFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?case_id: String,
+        ?result_id: String,
+        ?usefulness: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor case_id: String?
+      attr_accessor result_id: String?
+      attr_accessor usefulness: String?
+      attr_accessor comment: String?
+    end
+
+    class SendFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -991,6 +1181,7 @@ module Aws::SecurityIR
         ?impacted_aws_regions_to_delete: Array[Types::ImpactedAwsRegion],
         ?impacted_accounts_to_add: Array[String],
         ?impacted_accounts_to_delete: Array[String],
+        ?case_metadata: Array[Types::CaseMetadataEntry],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1010,6 +1201,7 @@ module Aws::SecurityIR
       attr_accessor impacted_aws_regions_to_delete: Array[Types::ImpactedAwsRegion]?
       attr_accessor impacted_accounts_to_add: Array[String]?
       attr_accessor impacted_accounts_to_delete: Array[String]?
+      attr_accessor case_metadata: Array[Types::CaseMetadataEntry]?
     end
 
     class UpdateCaseResponse
@@ -1101,6 +1293,11 @@ module Aws::SecurityIR
       attr_accessor case_id: String?
       attr_accessor case_status: String?
       attr_accessor resolver_type: String?
+    end
+
+    module UsefulnessRating
+      USEFUL: String
+      NOT_USEFUL: String
     end
 
     class ValidationException

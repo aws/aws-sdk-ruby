@@ -246,6 +246,47 @@ module Aws::Omics
       attr_accessor errors: Array[Types::ReadSetBatchError]?
     end
 
+    class BatchListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?total_runs: Integer,
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor total_runs: Integer?
+      attr_accessor workflow_id: String?
+    end
+
+    class BatchRunSettings
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?inline_settings: Array[Types::InlineSetting],
+        ?s3_uri_settings: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_settings: Array[Types::InlineSetting]?
+      attr_accessor s3_uri_settings: String?
+
+      class InlineSettings < BatchRunSettings
+      end
+      class S3UriSettings < BatchRunSettings
+      end
+      class Unknown < BatchRunSettings
+      end
+    end
+
     class CancelAnnotationImportRequest
       include Smithy::Schema::Structure
 
@@ -258,6 +299,26 @@ module Aws::Omics
     end
 
     class CancelAnnotationImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CancelRunBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_id: String?
+    end
+
+    class CancelRunBatchResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -336,6 +397,40 @@ module Aws::Omics
       attr_accessor part_number: Integer?
       attr_accessor part_source: String?
       attr_accessor checksum: String?
+    end
+
+    class ConfigurationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?uuid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor uuid: String?
+    end
+
+    class ConfigurationListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
     end
 
     class ConflictException
@@ -452,6 +547,50 @@ module Aws::Omics
       attr_accessor name: String?
       attr_accessor status: String?
       attr_accessor creation_time: Time?
+    end
+
+    class CreateConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?run_configurations: Types::RunConfigurations,
+        ?tags: Hash[String, String],
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor run_configurations: Types::RunConfigurations?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor request_id: String?
+    end
+
+    class CreateConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?uuid: String,
+        ?name: String,
+        ?description: String,
+        ?run_configurations: Types::RunConfigurationsResponse,
+        ?status: String,
+        ?creation_time: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor uuid: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor run_configurations: Types::RunConfigurationsResponse?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateMultipartReadSetUploadRequest
@@ -900,6 +1039,61 @@ module Aws::Omics
       attr_accessor uuid: String?
     end
 
+    class DefaultRunSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?workflow_type: String,
+        ?role_arn: String,
+        ?name: String,
+        ?cache_id: String,
+        ?cache_behavior: String,
+        ?run_group_id: String,
+        ?priority: Integer,
+        ?parameters: Smithy::Schema::document,
+        ?storage_capacity: Integer,
+        ?output_uri: String,
+        ?log_level: String,
+        ?run_tags: Hash[String, String],
+        ?retention_mode: String,
+        ?storage_type: String,
+        ?workflow_owner_id: String,
+        ?output_bucket_owner_id: String,
+        ?workflow_version_name: String,
+        ?networking_mode: String,
+        ?configuration_name: String,
+        ?session_policy: String,
+        ?engine_settings: Smithy::Schema::document,
+        ?scratch_storage_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor workflow_type: String?
+      attr_accessor role_arn: String?
+      attr_accessor name: String?
+      attr_accessor cache_id: String?
+      attr_accessor cache_behavior: String?
+      attr_accessor run_group_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor parameters: Smithy::Schema::document?
+      attr_accessor storage_capacity: Integer?
+      attr_accessor output_uri: String?
+      attr_accessor log_level: String?
+      attr_accessor run_tags: Hash[String, String]?
+      attr_accessor retention_mode: String?
+      attr_accessor storage_type: String?
+      attr_accessor workflow_owner_id: String?
+      attr_accessor output_bucket_owner_id: String?
+      attr_accessor workflow_version_name: String?
+      attr_accessor networking_mode: String?
+      attr_accessor configuration_name: String?
+      attr_accessor session_policy: String?
+      attr_accessor engine_settings: Smithy::Schema::document?
+      attr_accessor scratch_storage_mode: String?
+    end
+
     class DefinitionRepository
       include Smithy::Schema::Structure
 
@@ -986,6 +1180,28 @@ module Aws::Omics
       attr_accessor errors: Array[Types::VersionDeleteError]?
     end
 
+    class DeleteBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_id: String?
+    end
+
+    class DeleteConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
     class DeleteReferenceRequest
       include Smithy::Schema::Structure
 
@@ -1020,6 +1236,26 @@ module Aws::Omics
     end
 
     class DeleteReferenceStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRunBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_id: String?
+    end
+
+    class DeleteRunBatchResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -1442,6 +1678,92 @@ module Aws::Omics
       attr_accessor version_options: Types::VersionOptions?
       attr_accessor status_message: String?
       attr_accessor version_size_bytes: Integer?
+    end
+
+    class GetBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_id: String?
+    end
+
+    class GetBatchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?uuid: String,
+        ?name: String,
+        ?status: String,
+        ?tags: Hash[String, String],
+        ?total_runs: Integer,
+        ?default_run_setting: Types::DefaultRunSetting,
+        ?submission_summary: Types::SubmissionSummary,
+        ?run_summary: Types::RunSummary,
+        ?creation_time: Time,
+        ?submitted_time: Time,
+        ?processed_time: Time,
+        ?failed_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor uuid: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor total_runs: Integer?
+      attr_accessor default_run_setting: Types::DefaultRunSetting?
+      attr_accessor submission_summary: Types::SubmissionSummary?
+      attr_accessor run_summary: Types::RunSummary?
+      attr_accessor creation_time: Time?
+      attr_accessor submitted_time: Time?
+      attr_accessor processed_time: Time?
+      attr_accessor failed_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class GetConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?uuid: String,
+        ?name: String,
+        ?description: String,
+        ?run_configurations: Types::RunConfigurationsResponse,
+        ?status: String,
+        ?creation_time: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor uuid: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor run_configurations: Types::RunConfigurationsResponse?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class GetReadSetActivationJobRequest
@@ -1893,6 +2215,7 @@ module Aws::Omics
         ?role_arn: String,
         ?name: String,
         ?run_group_id: String,
+        ?batch_id: String,
         ?priority: Integer,
         ?definition: String,
         ?digest: String,
@@ -1917,6 +2240,12 @@ module Aws::Omics
         ?workflow_owner_id: String,
         ?workflow_version_name: String,
         ?workflow_uuid: String,
+        ?networking_mode: String,
+        ?scratch_storage_mode: String,
+        ?configuration: Types::ConfigurationDetails,
+        ?vpc_config: Types::VpcConfigResponse,
+        ?engine_settings: Smithy::Schema::document,
+        ?session_policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1932,6 +2261,7 @@ module Aws::Omics
       attr_accessor role_arn: String?
       attr_accessor name: String?
       attr_accessor run_group_id: String?
+      attr_accessor batch_id: String?
       attr_accessor priority: Integer?
       attr_accessor definition: String?
       attr_accessor digest: String?
@@ -1956,6 +2286,12 @@ module Aws::Omics
       attr_accessor workflow_owner_id: String?
       attr_accessor workflow_version_name: String?
       attr_accessor workflow_uuid: String?
+      attr_accessor networking_mode: String?
+      attr_accessor scratch_storage_mode: String?
+      attr_accessor configuration: Types::ConfigurationDetails?
+      attr_accessor vpc_config: Types::VpcConfigResponse?
+      attr_accessor engine_settings: Smithy::Schema::document?
+      attr_accessor session_policy: String?
     end
 
     class GetRunTaskRequest
@@ -1991,6 +2327,7 @@ module Aws::Omics
         ?instance_type: String,
         ?failure_reason: String,
         ?image_details: Types::ImageDetails,
+        ?uuid: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2010,6 +2347,7 @@ module Aws::Omics
       attr_accessor instance_type: String?
       attr_accessor failure_reason: String?
       attr_accessor image_details: Types::ImageDetails?
+      attr_accessor uuid: String?
     end
 
     class GetS3AccessPolicyRequest
@@ -2240,6 +2578,8 @@ module Aws::Omics
         ?readme: String,
         ?definition_repository_details: Types::DefinitionRepositoryDetails,
         ?readme_path: String,
+        ?profiles: Array[String],
+        ?profile_parameter_templates: Hash[String, Hash[String, Types::WorkflowParameter]],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2266,6 +2606,8 @@ module Aws::Omics
       attr_accessor readme: String?
       attr_accessor definition_repository_details: Types::DefinitionRepositoryDetails?
       attr_accessor readme_path: String?
+      attr_accessor profiles: Array[String]?
+      attr_accessor profile_parameter_templates: Hash[String, Hash[String, Types::WorkflowParameter]]?
     end
 
     class GetWorkflowVersionRequest
@@ -2315,6 +2657,8 @@ module Aws::Omics
         ?readme: String,
         ?definition_repository_details: Types::DefinitionRepositoryDetails,
         ?readme_path: String,
+        ?profiles: Array[String],
+        ?profile_parameter_templates: Hash[String, Hash[String, Types::WorkflowParameter]],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2342,6 +2686,8 @@ module Aws::Omics
       attr_accessor readme: String?
       attr_accessor definition_repository_details: Types::DefinitionRepositoryDetails?
       attr_accessor readme_path: String?
+      attr_accessor profiles: Array[String]?
+      attr_accessor profile_parameter_templates: Hash[String, Hash[String, Types::WorkflowParameter]]?
     end
 
     class ImageDetails
@@ -2500,6 +2846,31 @@ module Aws::Omics
       attr_accessor reference_id: String?
     end
 
+    class InlineSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_setting_id: String,
+        ?name: String,
+        ?output_uri: String,
+        ?priority: Integer,
+        ?parameters: Smithy::Schema::document,
+        ?output_bucket_owner_id: String,
+        ?run_tags: Hash[String, String],
+        ?engine_settings: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_setting_id: String?
+      attr_accessor name: String?
+      attr_accessor output_uri: String?
+      attr_accessor priority: Integer?
+      attr_accessor parameters: Smithy::Schema::document?
+      attr_accessor output_bucket_owner_id: String?
+      attr_accessor run_tags: Hash[String, String]?
+      attr_accessor engine_settings: Smithy::Schema::document?
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -2633,6 +3004,64 @@ module Aws::Omics
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor annotation_stores: Array[Types::AnnotationStoreItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_items: Integer,
+        ?starting_token: String,
+        ?status: String,
+        ?name: String,
+        ?run_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_items: Integer?
+      attr_accessor starting_token: String?
+      attr_accessor status: String?
+      attr_accessor name: String?
+      attr_accessor run_group_id: String?
+    end
+
+    class ListBatchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BatchListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BatchListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?starting_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor starting_token: String?
+    end
+
+    class ListConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ConfigurationListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ConfigurationListItem]?
       attr_accessor next_token: String?
     end
 
@@ -2990,12 +3419,47 @@ module Aws::Omics
       attr_accessor next_token: String?
     end
 
+    class ListRunsInBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_id: String,
+        ?max_items: Integer,
+        ?starting_token: String,
+        ?submission_status: String,
+        ?run_setting_id: String,
+        ?run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_id: String?
+      attr_accessor max_items: Integer?
+      attr_accessor starting_token: String?
+      attr_accessor submission_status: String?
+      attr_accessor run_setting_id: String?
+      attr_accessor run_id: String?
+    end
+
+    class ListRunsInBatchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runs: Array[Types::RunBatchListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runs: Array[Types::RunBatchListItem]?
+      attr_accessor next_token: String?
+    end
+
     class ListRunsRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?name: String,
         ?run_group_id: String,
+        ?batch_id: String,
         ?starting_token: String,
         ?max_results: Integer,
         ?status: String,
@@ -3004,6 +3468,7 @@ module Aws::Omics
 
       attr_accessor name: String?
       attr_accessor run_group_id: String?
+      attr_accessor batch_id: String?
       attr_accessor starting_token: String?
       attr_accessor max_results: Integer?
       attr_accessor status: String?
@@ -3614,6 +4079,7 @@ module Aws::Omics
         ?ecr_repository_prefix: String,
         ?upstream_repository_prefix: String,
         ?ecr_account_id: String,
+        ?credential_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3621,6 +4087,7 @@ module Aws::Omics
       attr_accessor ecr_repository_prefix: String?
       attr_accessor upstream_repository_prefix: String?
       attr_accessor ecr_account_id: String?
+      attr_accessor credential_arn: String?
     end
 
     class RequestTimeoutException
@@ -3645,6 +4112,29 @@ module Aws::Omics
       attr_accessor message: String?
     end
 
+    class RunBatchListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_setting_id: String,
+        ?run_id: String,
+        ?run_internal_uuid: String,
+        ?run_arn: String,
+        ?submission_status: String,
+        ?submission_failure_reason: String,
+        ?submission_failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_setting_id: String?
+      attr_accessor run_id: String?
+      attr_accessor run_internal_uuid: String?
+      attr_accessor run_arn: String?
+      attr_accessor submission_status: String?
+      attr_accessor submission_failure_reason: String?
+      attr_accessor submission_failure_message: String?
+    end
+
     class RunCacheListItem
       include Smithy::Schema::Structure
 
@@ -3666,6 +4156,28 @@ module Aws::Omics
       attr_accessor id: String?
       attr_accessor name: String?
       attr_accessor status: String?
+    end
+
+    class RunConfigurations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_config: Types::VpcConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_config: Types::VpcConfig?
+    end
+
+    class RunConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_config: Types::VpcConfigResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_config: Types::VpcConfigResponse?
     end
 
     class RunGroupListItem
@@ -3701,6 +4213,7 @@ module Aws::Omics
         ?id: String,
         ?status: String,
         ?workflow_id: String,
+        ?batch_id: String,
         ?name: String,
         ?priority: Integer,
         ?storage_capacity: Integer,
@@ -3709,6 +4222,7 @@ module Aws::Omics
         ?stop_time: Time,
         ?storage_type: String,
         ?workflow_version_name: String,
+        ?workflow_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3716,6 +4230,7 @@ module Aws::Omics
       attr_accessor id: String?
       attr_accessor status: String?
       attr_accessor workflow_id: String?
+      attr_accessor batch_id: String?
       attr_accessor name: String?
       attr_accessor priority: Integer?
       attr_accessor storage_capacity: Integer?
@@ -3724,6 +4239,7 @@ module Aws::Omics
       attr_accessor stop_time: Time?
       attr_accessor storage_type: String?
       attr_accessor workflow_version_name: String?
+      attr_accessor workflow_name: String?
     end
 
     class RunLogLocation
@@ -3737,6 +4253,31 @@ module Aws::Omics
 
       attr_accessor engine_log_stream: String?
       attr_accessor run_log_stream: String?
+    end
+
+    class RunSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending_run_count: Integer,
+        ?starting_run_count: Integer,
+        ?running_run_count: Integer,
+        ?stopping_run_count: Integer,
+        ?completed_run_count: Integer,
+        ?deleted_run_count: Integer,
+        ?failed_run_count: Integer,
+        ?cancelled_run_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending_run_count: Integer?
+      attr_accessor starting_run_count: Integer?
+      attr_accessor running_run_count: Integer?
+      attr_accessor stopping_run_count: Integer?
+      attr_accessor completed_run_count: Integer?
+      attr_accessor deleted_run_count: Integer?
+      attr_accessor failed_run_count: Integer?
+      attr_accessor cancelled_run_count: Integer?
     end
 
     class S3AccessConfig
@@ -4144,6 +4685,44 @@ module Aws::Omics
       attr_accessor tags: Hash[String, String]?
     end
 
+    class StartRunBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_name: String,
+        ?request_id: String,
+        ?tags: Hash[String, String],
+        ?default_run_setting: Types::DefaultRunSetting,
+        ?batch_run_settings: Types::BatchRunSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_name: String?
+      attr_accessor request_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor default_run_setting: Types::DefaultRunSetting?
+      attr_accessor batch_run_settings: Types::BatchRunSettings?
+    end
+
+    class StartRunBatchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?status: String,
+        ?uuid: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor uuid: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class StartRunRequest
       include Smithy::Schema::Structure
 
@@ -4167,6 +4746,11 @@ module Aws::Omics
         ?storage_type: String,
         ?workflow_owner_id: String,
         ?workflow_version_name: String,
+        ?networking_mode: String,
+        ?scratch_storage_mode: String,
+        ?configuration_name: String,
+        ?session_policy: String,
+        ?engine_settings: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4189,6 +4773,11 @@ module Aws::Omics
       attr_accessor storage_type: String?
       attr_accessor workflow_owner_id: String?
       attr_accessor workflow_version_name: String?
+      attr_accessor networking_mode: String?
+      attr_accessor scratch_storage_mode: String?
+      attr_accessor configuration_name: String?
+      attr_accessor session_policy: String?
+      attr_accessor engine_settings: Smithy::Schema::document?
     end
 
     class StartRunResponse
@@ -4201,6 +4790,8 @@ module Aws::Omics
         ?tags: Hash[String, String],
         ?uuid: String,
         ?run_output_uri: String,
+        ?configuration: Types::ConfigurationDetails,
+        ?networking_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4210,6 +4801,8 @@ module Aws::Omics
       attr_accessor tags: Hash[String, String]?
       attr_accessor uuid: String?
       attr_accessor run_output_uri: String?
+      attr_accessor configuration: Types::ConfigurationDetails?
+      attr_accessor networking_mode: String?
     end
 
     class StartVariantImportRequest
@@ -4263,6 +4856,29 @@ module Aws::Omics
       REFERENCE_STORE: String
     end
 
+    class SubmissionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_start_submission_count: Integer,
+        ?failed_start_submission_count: Integer,
+        ?pending_start_submission_count: Integer,
+        ?successful_cancel_submission_count: Integer,
+        ?failed_cancel_submission_count: Integer,
+        ?successful_delete_submission_count: Integer,
+        ?failed_delete_submission_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_start_submission_count: Integer?
+      attr_accessor failed_start_submission_count: Integer?
+      attr_accessor pending_start_submission_count: Integer?
+      attr_accessor successful_cancel_submission_count: Integer?
+      attr_accessor failed_cancel_submission_count: Integer?
+      attr_accessor successful_delete_submission_count: Integer?
+      attr_accessor failed_delete_submission_count: Integer?
+    end
+
     class TagResourceRequest
       include Smithy::Schema::Structure
 
@@ -4301,6 +4917,7 @@ module Aws::Omics
         ?stop_time: Time,
         ?gpus: Integer,
         ?instance_type: String,
+        ?uuid: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4316,6 +4933,7 @@ module Aws::Omics
       attr_accessor stop_time: Time?
       attr_accessor gpus: Integer?
       attr_accessor instance_type: String?
+      attr_accessor uuid: String?
     end
 
     class ThrottlingException
@@ -4811,6 +5429,38 @@ module Aws::Omics
       end
       class Unknown < VersionOptions
       end
+    end
+
+    class VpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?vpc_owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor vpc_owner_account_id: String?
+    end
+
+    class VpcConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?vpc_id: String,
+        ?vpc_owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor vpc_id: String?
+      attr_accessor vpc_owner_account_id: String?
     end
 
     class WorkflowListItem

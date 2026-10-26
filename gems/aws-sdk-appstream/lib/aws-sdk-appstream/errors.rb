@@ -23,6 +23,7 @@ module Aws::AppStream
   # ## Error Classes
   #
   # * {ConcurrentModificationException}
+  # * {DryRunOperationException}
   # * {EntitlementAlreadyExistsException}
   # * {EntitlementNotFoundException}
   # * {IncompatibleImageException}
@@ -46,6 +47,19 @@ module Aws::AppStream
     class ConcurrentModificationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::ConcurrentModificationException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The exception that is thrown when a dry run operation is requested. This indicates that the validation checks have been performed successfully, but no actual resources were created or modified.</p>
+    class DryRunOperationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::AppStream::Types::DryRunOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -159,7 +173,7 @@ module Aws::AppStream
       end
     end
 
-    # <p>AppStream 2.0 can’t process the request right now because the Describe calls from your AWS account are being throttled by Amazon EC2. Try again later.</p>
+    # <p>WorkSpaces Applications can’t process the request right now because the Describe calls from your AWS account are being throttled by Amazon EC2. Try again later.</p>
     class RequestLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::AppStream::Types::RequestLimitExceededException] data

@@ -12,6 +12,9 @@ module Aws::BedrockDataAutomationRuntime
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ThrottlingException < Smithy::Client::ServiceError
       def message: () -> String?
     end

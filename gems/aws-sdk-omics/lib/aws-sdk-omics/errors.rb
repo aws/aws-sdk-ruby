@@ -171,7 +171,7 @@ module Aws::Omics
       end
     end
 
-    # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
+    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Omics::Types::ValidationException] data

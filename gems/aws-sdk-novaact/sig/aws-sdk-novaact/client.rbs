@@ -1,0 +1,261 @@
+module Aws::NovaAct
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::NovaAct::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateActResponse
+      include Smithy::Client::_Response[Types::CreateActResponse]
+      def act_id: () -> String?
+      def status: () -> String?
+    end
+    def create_act: (
+      ?workflow_definition_name: String,
+      ?workflow_run_id: String,
+      ?session_id: String,
+      ?task: String,
+      ?tool_specs: Array[
+        {
+          name: String,
+          description: String,
+          input_schema: {
+            json: Smithy::Schema::document
+          }
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateActResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateActResponse
+
+    interface _CreateSessionResponse
+      include Smithy::Client::_Response[Types::CreateSessionResponse]
+      def session_id: () -> String?
+    end
+    def create_session: (
+      ?workflow_definition_name: String,
+      ?workflow_run_id: String,
+      ?client_token: String
+    ) -> _CreateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSessionResponse
+
+    interface _CreateWorkflowDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateWorkflowDefinitionResponse]
+      def status: () -> String?
+    end
+    def create_workflow_definition: (
+      ?name: String,
+      ?description: String,
+      ?export_config: {
+        s3_bucket_name: String,
+        s3_key_prefix: String
+      },
+      ?client_token: String
+    ) -> _CreateWorkflowDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowDefinitionResponse
+
+    interface _CreateWorkflowRunResponse
+      include Smithy::Client::_Response[Types::CreateWorkflowRunResponse]
+      def workflow_run_id: () -> String?
+      def status: () -> String?
+    end
+    def create_workflow_run: (
+      ?workflow_definition_name: String,
+      ?model_id: String,
+      ?client_token: String,
+      ?log_group_name: String,
+      ?client_info: {
+        compatibility_version: Integer,
+        sdk_version: String
+      }
+    ) -> _CreateWorkflowRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowRunResponse
+
+    interface _DeleteWorkflowDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteWorkflowDefinitionResponse]
+      def status: () -> String?
+    end
+    def delete_workflow_definition: (
+      ?workflow_definition_name: String
+    ) -> _DeleteWorkflowDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowDefinitionResponse
+
+    interface _DeleteWorkflowRunResponse
+      include Smithy::Client::_Response[Types::DeleteWorkflowRunResponse]
+      def status: () -> String?
+    end
+    def delete_workflow_run: (
+      ?workflow_definition_name: String,
+      ?workflow_run_id: String
+    ) -> _DeleteWorkflowRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowRunResponse
+
+    interface _GetWorkflowDefinitionResponse
+      include Smithy::Client::_Response[Types::GetWorkflowDefinitionResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def export_config: () -> Types::WorkflowExportConfig?
+      def status: () -> String?
+    end
+    def get_workflow_definition: (
+      ?workflow_definition_name: String
+    ) -> _GetWorkflowDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowDefinitionResponse
+
+    interface _GetWorkflowRunResponse
+      include Smithy::Client::_Response[Types::GetWorkflowRunResponse]
+      def workflow_run_arn: () -> String?
+      def workflow_run_id: () -> String?
+      def status: () -> String?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+      def model_id: () -> String?
+      def log_group_name: () -> String?
+    end
+    def get_workflow_run: (
+      ?workflow_definition_name: String,
+      ?workflow_run_id: String
+    ) -> _GetWorkflowRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowRunResponse
+
+    interface _InvokeActStepResponse
+      include Smithy::Client::_Response[Types::InvokeActStepResponse]
+      def calls: () -> Array[Types::Call]?
+      def step_id: () -> String?
+    end
+    def invoke_act_step: (
+      ?workflow_definition_name: String,
+      ?workflow_run_id: String,
+      ?session_id: String,
+      ?act_id: String,
+      ?call_results: Array[
+        {
+          call_id: String,
+          content: Array[
+            {
+              text: String
+            }
+          ]
+        }
+      ],
+      ?previous_step_id: String
+    ) -> _InvokeActStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeActStepResponse
+
+    interface _ListActsResponse
+      include Smithy::Client::_Response[Types::ListActsResponse]
+      def act_summaries: () -> Array[Types::ActSummary]?
+      def next_token: () -> String?
+    end
+    def list_acts: (
+      ?workflow_definition_name: String,
+      ?workflow_run_id: String,
+      ?session_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_order: String
+    ) -> _ListActsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActsResponse
+
+    interface _ListModelsResponse
+      include Smithy::Client::_Response[Types::ListModelsResponse]
+      def model_summaries: () -> Array[Types::ModelSummary]?
+      def model_aliases: () -> Array[Types::ModelAlias]?
+      def compatibility_information: () -> Types::CompatibilityInformation?
+    end
+    def list_models: (
+      ?client_compatibility_version: Integer
+    ) -> _ListModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelsResponse
+
+    interface _ListSessionsResponse
+      include Smithy::Client::_Response[Types::ListSessionsResponse]
+      def session_summaries: () -> Array[Types::SessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_sessions: (
+      ?workflow_definition_name: String,
+      ?workflow_run_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_order: String
+    ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
+
+    interface _ListWorkflowDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowDefinitionsResponse]
+      def workflow_definition_summaries: () -> Array[Types::WorkflowDefinitionSummary]?
+      def next_token: () -> String?
+    end
+    def list_workflow_definitions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_order: String
+    ) -> _ListWorkflowDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowDefinitionsResponse
+
+    interface _ListWorkflowRunsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowRunsResponse]
+      def workflow_run_summaries: () -> Array[Types::WorkflowRunSummary]?
+      def next_token: () -> String?
+    end
+    def list_workflow_runs: (
+      ?workflow_definition_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_order: String
+    ) -> _ListWorkflowRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowRunsResponse
+
+    interface _UpdateActResponse
+      include Smithy::Client::_Response[Types::UpdateActResponse]
+    end
+    def update_act: (
+      ?workflow_definition_name: String,
+      ?workflow_run_id: String,
+      ?session_id: String,
+      ?act_id: String,
+      ?status: String,
+      ?error: {
+        message: String,
+        type: String
+      }
+    ) -> _UpdateActResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateActResponse
+
+    interface _UpdateWorkflowRunResponse
+      include Smithy::Client::_Response[Types::UpdateWorkflowRunResponse]
+    end
+    def update_workflow_run: (
+      ?workflow_definition_name: String,
+      ?workflow_run_id: String,
+      ?status: String
+    ) -> _UpdateWorkflowRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkflowRunResponse
+  end
+end

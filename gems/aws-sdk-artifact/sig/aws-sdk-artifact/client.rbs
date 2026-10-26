@@ -44,11 +44,50 @@ module Aws::Artifact
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _CreateComplianceInquiryResponse
+      include Smithy::Client::_Response[Types::CreateComplianceInquiryResponse]
+      def compliance_inquiry_summary: () -> Types::InquirySummary?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_compliance_inquiry: (
+      ?name: String,
+      ?inquiry_content: {
+        query: String,
+        file_content: {
+          file_sections: Array[String],
+          content: String
+        }
+      },
+      ?client_token: String,
+      ?support_mode: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateComplianceInquiryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComplianceInquiryResponse
+
+    interface _ExportComplianceInquiryResponse
+      include Smithy::Client::_Response[Types::ExportComplianceInquiryResponse]
+      def document_presigned_url: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def export_compliance_inquiry: (
+      ?compliance_inquiry_id: String,
+      ?query_identifiers: Array[Integer],
+      ?include_citations: bool
+    ) -> _ExportComplianceInquiryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportComplianceInquiryResponse
+
     interface _GetAccountSettingsResponse
       include Smithy::Client::_Response[Types::GetAccountSettingsResponse]
       def account_settings: () -> Types::AccountSettings?
     end
     def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
+
+    interface _GetComplianceInquiryMetadataResponse
+      include Smithy::Client::_Response[Types::GetComplianceInquiryMetadataResponse]
+      def compliance_inquiry_detail: () -> Types::InquiryDetail?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_compliance_inquiry_metadata: (
+      ?compliance_inquiry_id: String
+    ) -> _GetComplianceInquiryMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComplianceInquiryMetadataResponse
 
     interface _GetReportResponse
       include Smithy::Client::_Response[Types::GetReportResponse]
@@ -79,6 +118,27 @@ module Aws::Artifact
       ?report_version: Integer
     ) -> _GetTermForReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTermForReportResponse
 
+    interface _ListComplianceInquiriesResponse
+      include Smithy::Client::_Response[Types::ListComplianceInquiriesResponse]
+      def compliance_inquiries: () -> Array[Types::InquirySummary]?
+      def next_token: () -> String?
+    end
+    def list_compliance_inquiries: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListComplianceInquiriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComplianceInquiriesResponse
+
+    interface _ListComplianceInquiryQueriesResponse
+      include Smithy::Client::_Response[Types::ListComplianceInquiryQueriesResponse]
+      def queries: () -> Array[Types::QuerySummary]?
+      def next_token: () -> String?
+    end
+    def list_compliance_inquiry_queries: (
+      ?compliance_inquiry_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListComplianceInquiryQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComplianceInquiryQueriesResponse
+
     interface _ListCustomerAgreementsResponse
       include Smithy::Client::_Response[Types::ListCustomerAgreementsResponse]
       def customer_agreements: () -> Array[Types::CustomerAgreementSummary]?
@@ -88,6 +148,17 @@ module Aws::Artifact
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListCustomerAgreementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomerAgreementsResponse
+
+    interface _ListReportVersionsResponse
+      include Smithy::Client::_Response[Types::ListReportVersionsResponse]
+      def reports: () -> Array[Types::ReportSummary]?
+      def next_token: () -> String?
+    end
+    def list_report_versions: (
+      ?report_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListReportVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportVersionsResponse
 
     interface _ListReportsResponse
       include Smithy::Client::_Response[Types::ListReportsResponse]
@@ -99,6 +170,14 @@ module Aws::Artifact
       ?next_token: String
     ) -> _ListReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportsResponse
 
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
     interface _PutAccountSettingsResponse
       include Smithy::Client::_Response[Types::PutAccountSettingsResponse]
       def account_settings: () -> Types::AccountSettings?
@@ -106,5 +185,35 @@ module Aws::Artifact
     def put_account_settings: (
       ?notification_subscription_status: String
     ) -> _PutAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountSettingsResponse
+
+    interface _PutComplianceInquiryFeedbackResponse
+      include Smithy::Client::_Response[Types::PutComplianceInquiryFeedbackResponse]
+      def submitted_at: () -> Time?
+    end
+    def put_compliance_inquiry_feedback: (
+      ?compliance_inquiry_id: String,
+      ?query_identifier: Integer,
+      ?rating: String,
+      ?response_revision_id: Integer,
+      ?reason_codes: Array[String],
+      ?comment: String,
+      ?client_token: String
+    ) -> _PutComplianceInquiryFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutComplianceInquiryFeedbackResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
   end
 end

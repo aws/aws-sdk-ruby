@@ -53,6 +53,130 @@ module Aws::Amp
       attr_accessor workspace_arn: String?
     end
 
+    class AnomalyDetectorConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?random_cut_forest: Types::RandomCutForestConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor random_cut_forest: Types::RandomCutForestConfiguration?
+
+      class RandomCutForest < AnomalyDetectorConfiguration
+      end
+      class Unknown < AnomalyDetectorConfiguration
+      end
+    end
+
+    class AnomalyDetectorDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?anomaly_detector_id: String,
+        ?alias: String,
+        ?evaluation_interval_in_seconds: Integer,
+        ?missing_data_action: Types::AnomalyDetectorMissingDataAction,
+        ?configuration: Types::AnomalyDetectorConfiguration,
+        ?labels: Hash[String, String],
+        ?status: Types::AnomalyDetectorStatus,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor anomaly_detector_id: String?
+      attr_accessor alias: String?
+      attr_accessor evaluation_interval_in_seconds: Integer?
+      attr_accessor missing_data_action: Types::AnomalyDetectorMissingDataAction?
+      attr_accessor configuration: Types::AnomalyDetectorConfiguration?
+      attr_accessor labels: Hash[String, String]?
+      attr_accessor status: Types::AnomalyDetectorStatus?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AnomalyDetectorMissingDataAction
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?mark_as_anomaly: bool,
+        ?skip: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mark_as_anomaly: bool?
+      attr_accessor skip: bool?
+
+      class MarkAsAnomaly < AnomalyDetectorMissingDataAction
+      end
+      class Skip < AnomalyDetectorMissingDataAction
+      end
+      class Unknown < AnomalyDetectorMissingDataAction
+      end
+    end
+
+    class AnomalyDetectorStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+    end
+
+    module AnomalyDetectorStatusCode
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      CREATION_FAILED: String
+      UPDATE_FAILED: String
+      DELETION_FAILED: String
+    end
+
+    class AnomalyDetectorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?anomaly_detector_id: String,
+        ?alias: String,
+        ?status: Types::AnomalyDetectorStatus,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor anomaly_detector_id: String?
+      attr_accessor alias: String?
+      attr_accessor status: Types::AnomalyDetectorStatus?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CloudWatchConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+    end
+
     class CloudWatchLogDestination
       include Smithy::Schema::Structure
 
@@ -114,6 +238,48 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: Types::AlertManagerDefinitionStatus?
+    end
+
+    class CreateAnomalyDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?alias: String,
+        ?evaluation_interval_in_seconds: Integer,
+        ?missing_data_action: Types::AnomalyDetectorMissingDataAction,
+        ?configuration: Types::AnomalyDetectorConfiguration,
+        ?labels: Hash[String, String],
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor alias: String?
+      attr_accessor evaluation_interval_in_seconds: Integer?
+      attr_accessor missing_data_action: Types::AnomalyDetectorMissingDataAction?
+      attr_accessor configuration: Types::AnomalyDetectorConfiguration?
+      attr_accessor labels: Hash[String, String]?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAnomalyDetectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detector_id: String,
+        ?arn: String,
+        ?status: Types::AnomalyDetectorStatus,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detector_id: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::AnomalyDetectorStatus?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateLoggingConfigurationInput
@@ -215,6 +381,7 @@ module Aws::Amp
         ?role_configuration: Types::RoleConfiguration,
         ?client_token: String,
         ?tags: Hash[String, String],
+        ?exporters: Array[Types::ExporterConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -225,6 +392,7 @@ module Aws::Amp
       attr_accessor role_configuration: Types::RoleConfiguration?
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor exporters: Array[Types::ExporterConfiguration]?
     end
 
     class CreateScraperResponse
@@ -290,6 +458,21 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor workspace_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAnomalyDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?anomaly_detector_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor anomaly_detector_id: String?
       attr_accessor client_token: String?
     end
 
@@ -421,6 +604,30 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor alert_manager_definition: Types::AlertManagerDefinitionDescription?
+    end
+
+    class DescribeAnomalyDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?anomaly_detector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor anomaly_detector_id: String?
+    end
+
+    class DescribeAnomalyDetectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detector: Types::AnomalyDetectorDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detector: Types::AnomalyDetectorDescription?
     end
 
     class DescribeLoggingConfigurationInput
@@ -618,12 +825,16 @@ module Aws::Amp
 
       def initialize: (
         ?amp_configuration: Types::AmpConfiguration,
+        ?cloud_watch_configuration: Types::CloudWatchConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor amp_configuration: Types::AmpConfiguration?
+      attr_accessor cloud_watch_configuration: Types::CloudWatchConfiguration?
 
       class AmpConfiguration < Destination
+      end
+      class CloudWatchConfiguration < Destination
       end
       class Unknown < Destination
       end
@@ -644,6 +855,22 @@ module Aws::Amp
       attr_accessor subnet_ids: Array[String]?
     end
 
+    class ExporterConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?open_search_configuration: Types::OpenSearchExporterConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_search_configuration: Types::OpenSearchExporterConfiguration?
+
+      class OpenSearchConfiguration < ExporterConfiguration
+      end
+      class Unknown < ExporterConfiguration
+      end
+    end
+
     class GetDefaultScraperConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -662,6 +889,26 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor configuration: String?
+    end
+
+    class IgnoreNearExpected
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?amount: Float,
+        ?ratio: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: Float?
+      attr_accessor ratio: Float?
+
+      class Amount < IgnoreNearExpected
+      end
+      class Ratio < IgnoreNearExpected
+      end
+      class Unknown < IgnoreNearExpected
+      end
     end
 
     class InternalServerException
@@ -699,6 +946,36 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor max_series: Integer?
+    end
+
+    class ListAnomalyDetectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?alias: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor alias: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAnomalyDetectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detectors: Array[Types::AnomalyDetectorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detectors: Array[Types::AnomalyDetectorSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListRuleGroupsNamespacesInput
@@ -865,6 +1142,17 @@ module Aws::Amp
       attr_accessor qsp_threshold: Integer?
     end
 
+    class OpenSearchExporterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_arn: String?
+    end
+
     class PutAlertManagerDefinitionInput
       include Smithy::Schema::Structure
 
@@ -889,6 +1177,46 @@ module Aws::Amp
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: Types::AlertManagerDefinitionStatus?
+    end
+
+    class PutAnomalyDetectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?anomaly_detector_id: String,
+        ?evaluation_interval_in_seconds: Integer,
+        ?missing_data_action: Types::AnomalyDetectorMissingDataAction,
+        ?configuration: Types::AnomalyDetectorConfiguration,
+        ?labels: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor anomaly_detector_id: String?
+      attr_accessor evaluation_interval_in_seconds: Integer?
+      attr_accessor missing_data_action: Types::AnomalyDetectorMissingDataAction?
+      attr_accessor configuration: Types::AnomalyDetectorConfiguration?
+      attr_accessor labels: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class PutAnomalyDetectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_detector_id: String,
+        ?arn: String,
+        ?status: Types::AnomalyDetectorStatus,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_detector_id: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::AnomalyDetectorStatus?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class PutResourcePolicyRequest
@@ -985,6 +1313,25 @@ module Aws::Amp
 
       attr_accessor status_code: String?
       attr_accessor status_reason: String?
+    end
+
+    class RandomCutForestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query: String,
+        ?shingle_size: Integer,
+        ?sample_size: Integer,
+        ?ignore_near_expected_from_above: Types::IgnoreNearExpected,
+        ?ignore_near_expected_from_below: Types::IgnoreNearExpected,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query: String?
+      attr_accessor shingle_size: Integer?
+      attr_accessor sample_size: Integer?
+      attr_accessor ignore_near_expected_from_above: Types::IgnoreNearExpected?
+      attr_accessor ignore_near_expected_from_below: Types::IgnoreNearExpected?
     end
 
     class ResourceNotFoundException
@@ -1118,6 +1465,7 @@ module Aws::Amp
         ?source: Types::Source,
         ?destination: Types::Destination,
         ?role_configuration: Types::RoleConfiguration,
+        ?exporters: Array[Types::ExporterConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1134,6 +1482,7 @@ module Aws::Amp
       attr_accessor source: Types::Source?
       attr_accessor destination: Types::Destination?
       attr_accessor role_configuration: Types::RoleConfiguration?
+      attr_accessor exporters: Array[Types::ExporterConfiguration]?
     end
 
     class ScraperLoggingConfigurationStatus
@@ -1192,6 +1541,7 @@ module Aws::Amp
         ?source: Types::Source,
         ?destination: Types::Destination,
         ?role_configuration: Types::RoleConfiguration,
+        ?exporters: Array[Types::ExporterConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1207,6 +1557,7 @@ module Aws::Amp
       attr_accessor source: Types::Source?
       attr_accessor destination: Types::Destination?
       attr_accessor role_configuration: Types::RoleConfiguration?
+      attr_accessor exporters: Array[Types::ExporterConfiguration]?
     end
 
     class ServiceQuotaExceededException
@@ -1233,12 +1584,16 @@ module Aws::Amp
 
       def initialize: (
         ?eks_configuration: Types::EksConfiguration,
+        ?vpc_configuration: Types::VpcConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor eks_configuration: Types::EksConfiguration?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
 
       class EksConfiguration < Source
+      end
+      class VpcConfiguration < Source
       end
       class Unknown < Source
       end
@@ -1393,6 +1748,7 @@ module Aws::Amp
         ?destination: Types::Destination,
         ?role_configuration: Types::RoleConfiguration,
         ?client_token: String,
+        ?exporters: Array[Types::ExporterConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1402,6 +1758,7 @@ module Aws::Amp
       attr_accessor destination: Types::Destination?
       attr_accessor role_configuration: Types::RoleConfiguration?
       attr_accessor client_token: String?
+      attr_accessor exporters: Array[Types::ExporterConfiguration]?
     end
 
     class UpdateScraperResponse
@@ -1444,6 +1801,8 @@ module Aws::Amp
         ?client_token: String,
         ?limits_per_label_set: Array[Types::LimitsPerLabelSet],
         ?retention_period_in_days: Integer,
+        ?out_of_order_time_window_in_seconds: Integer,
+        ?rule_query_offset_in_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1451,6 +1810,8 @@ module Aws::Amp
       attr_accessor client_token: String?
       attr_accessor limits_per_label_set: Array[Types::LimitsPerLabelSet]?
       attr_accessor retention_period_in_days: Integer?
+      attr_accessor out_of_order_time_window_in_seconds: Integer?
+      attr_accessor rule_query_offset_in_seconds: Integer?
     end
 
     class UpdateWorkspaceConfigurationResponse
@@ -1492,6 +1853,19 @@ module Aws::Amp
       attr_accessor message: String?
     end
 
+    class VpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+    end
+
     class WorkspaceConfigurationDescription
       include Smithy::Schema::Structure
 
@@ -1499,12 +1873,16 @@ module Aws::Amp
         ?status: Types::WorkspaceConfigurationStatus,
         ?limits_per_label_set: Array[Types::LimitsPerLabelSet],
         ?retention_period_in_days: Integer,
+        ?out_of_order_time_window_in_seconds: Integer,
+        ?rule_query_offset_in_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: Types::WorkspaceConfigurationStatus?
       attr_accessor limits_per_label_set: Array[Types::LimitsPerLabelSet]?
       attr_accessor retention_period_in_days: Integer?
+      attr_accessor out_of_order_time_window_in_seconds: Integer?
+      attr_accessor rule_query_offset_in_seconds: Integer?
     end
 
     class WorkspaceConfigurationStatus

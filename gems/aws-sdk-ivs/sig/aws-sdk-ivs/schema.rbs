@@ -3,6 +3,13 @@ module Aws::Ivs
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AdBreakId: StringShape
+    AdConfiguration: StructureShape
+    AdConfigurationArn: StringShape
+    AdConfigurationList: ListShape
+    AdConfigurationName: StringShape
+    AdConfigurationSummary: StructureShape
+    AdDurationSeconds: IntegerShape
     AudioConfiguration: StructureShape
     AudioConfigurationList: ListShape
     BatchError: StructureShape
@@ -19,6 +26,7 @@ module Aws::Ivs
     BatchStartViewerSessionRevocationViewerSessionList: ListShape
     Boolean: BooleanShape
     Channel: StructureShape
+    ChannelAdConfigurationArn: StringShape
     ChannelArn: StringShape
     ChannelArnList: ListShape
     ChannelLatencyMode: StringShape
@@ -32,6 +40,8 @@ module Aws::Ivs
     Channels: ListShape
     ConflictException: StructureShape
     ContainerFormat: StringShape
+    CreateAdConfigurationRequest: StructureShape
+    CreateAdConfigurationResponse: StructureShape
     CreateChannelInput: StructureShape
     CreateChannelOutput: StructureShape
     CreatePlaybackRestrictionPolicyRequest: StructureShape
@@ -40,6 +50,7 @@ module Aws::Ivs
     CreateRecordingConfigurationOutput: StructureShape
     CreateStreamKeyInput: StructureShape
     CreateStreamKeyOutput: StructureShape
+    DeleteAdConfigurationRequest: StructureShape
     DeleteChannelInput: StructureShape
     DeletePlaybackKeyPairInput: StructureShape
     DeletePlaybackKeyPairOutput: StructureShape
@@ -47,6 +58,8 @@ module Aws::Ivs
     DeleteRecordingConfigurationInput: StructureShape
     DeleteStreamKeyInput: StructureShape
     DestinationConfiguration: StructureShape
+    GetAdConfigurationRequest: StructureShape
+    GetAdConfigurationResponse: StructureShape
     GetChannelInput: StructureShape
     GetChannelOutput: StructureShape
     GetPlaybackKeyPairInput: StructureShape
@@ -67,10 +80,14 @@ module Aws::Ivs
     IngestConfigurations: StructureShape
     IngestEndpoint: StringShape
     InsecureIngest: BooleanShape
+    InsertAdBreakRequest: StructureShape
+    InsertAdBreakResponse: StructureShape
     Integer: IntegerShape
     InternalServerException: StructureShape
     IsAuthorized: BooleanShape
     IsMultitrackInputEnabled: BooleanShape
+    ListAdConfigurationsRequest: StructureShape
+    ListAdConfigurationsResponse: StructureShape
     ListChannelsInput: StructureShape
     ListChannelsOutput: StructureShape
     ListPlaybackKeyPairsInput: StructureShape
@@ -87,12 +104,16 @@ module Aws::Ivs
     ListStreamsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
+    MaxAdConfigurationResults: IntegerShape
     MaxChannelResults: IntegerShape
     MaxPlaybackKeyPairResults: IntegerShape
     MaxPlaybackRestrictionPolicyResults: IntegerShape
     MaxRecordingConfigurationResults: IntegerShape
     MaxStreamKeyResults: IntegerShape
     MaxStreamResults: IntegerShape
+    MediaTailorPlaybackConfiguration: StructureShape
+    MediaTailorPlaybackConfigurationArn: StringShape
+    MediaTailorPlaybackConfigurationsList: ListShape
     MultitrackInputConfiguration: StructureShape
     MultitrackMaximumResolution: EnumShape
     MultitrackPolicy: EnumShape
@@ -116,6 +137,7 @@ module Aws::Ivs
     PlaybackRestrictionPolicyName: StringShape
     PlaybackRestrictionPolicySummary: StructureShape
     PlaybackURL: StringShape
+    PostRollConfiguration: StructureShape
     PutMetadataInput: StructureShape
     RecordingConfiguration: StructureShape
     RecordingConfigurationArn: StringShape
@@ -134,6 +156,7 @@ module Aws::Ivs
     S3DestinationBucketName: StringShape
     S3DestinationConfiguration: StructureShape
     ServiceQuotaExceededException: StructureShape
+    ServiceUnavailable: StructureShape
     Srt: StructureShape
     SrtEndpoint: StringShape
     SrtPassphrase: StringShape
@@ -181,6 +204,8 @@ module Aws::Ivs
     TranscodePreset: EnumShape
     UntagResourceInput: StructureShape
     UntagResourceOutput: StructureShape
+    UpdateAdConfigurationRequest: StructureShape
+    UpdateAdConfigurationResponse: StructureShape
     UpdateChannelInput: StructureShape
     UpdateChannelOutput: StructureShape
     UpdatePlaybackRestrictionPolicyRequest: StructureShape

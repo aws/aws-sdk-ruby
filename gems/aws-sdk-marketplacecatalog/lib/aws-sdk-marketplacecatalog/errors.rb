@@ -143,6 +143,13 @@ module Aws::MarketplaceCatalog
       def message
         @data[:message]
       end
+
+      # <p>A list of detailed entries describing the request fields that failed
+      #             validation. Present when the failure can be attributed to one or more specific
+      #             fields.</p>
+      def validation_exception_field_list
+        @data[:validation_exception_field_list]
+      end
     end
   end
 end

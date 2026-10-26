@@ -23,6 +23,7 @@ module Aws::KinesisVideo
     DataEndpoint: StringShape
     DataRetentionChangeInHours: IntegerShape
     DataRetentionInHours: IntegerShape
+    DefaultStorageTier: EnumShape
     DeleteAfterUpload: BooleanShape
     DeleteEdgeConfigurationInput: StructureShape
     DeleteEdgeConfigurationOutput: StructureShape
@@ -45,6 +46,8 @@ module Aws::KinesisVideo
     DescribeSignalingChannelOutput: StructureShape
     DescribeStreamInput: StructureShape
     DescribeStreamOutput: StructureShape
+    DescribeStreamStorageConfigurationInput: StructureShape
+    DescribeStreamStorageConfigurationOutput: StructureShape
     DestinationRegion: StringShape
     DestinationUri: StringShape
     DeviceName: StringShape
@@ -130,6 +133,7 @@ module Aws::KinesisVideo
     StreamInfoList: ListShape
     StreamName: StringShape
     StreamNameCondition: StructureShape
+    StreamStorageConfiguration: StructureShape
     SyncStatus: EnumShape
     Tag: StructureShape
     TagKey: StringShape
@@ -161,6 +165,8 @@ module Aws::KinesisVideo
     UpdateSignalingChannelOutput: StructureShape
     UpdateStreamInput: StructureShape
     UpdateStreamOutput: StructureShape
+    UpdateStreamStorageConfigurationInput: StructureShape
+    UpdateStreamStorageConfigurationOutput: StructureShape
     UploaderConfig: StructureShape
     UploaderStatus: EnumShape
     Version: StringShape

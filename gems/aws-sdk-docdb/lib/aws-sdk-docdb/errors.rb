@@ -66,6 +66,7 @@ module Aws::DocDB
   # * {InvalidSubnet}
   # * {InvalidVPCNetworkStateFault}
   # * {KMSKeyNotAccessibleFault}
+  # * {NetworkTypeNotSupported}
   # * {ResourceNotFoundFault}
   # * {SNSInvalidTopicFault}
   # * {SNSNoAuthorizationFault}
@@ -666,6 +667,19 @@ module Aws::DocDB
     class KMSKeyNotAccessibleFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DocDB::Types::KMSKeyNotAccessibleFault] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The network type is not supported by either <code>DBSubnetGroup</code> or the DB engine version.</p>
+    class NetworkTypeNotSupported < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::DocDB::Types::NetworkTypeNotSupported] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

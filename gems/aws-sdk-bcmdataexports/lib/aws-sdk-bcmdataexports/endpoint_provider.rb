@@ -17,31 +17,22 @@ module Aws::BCMDataExports
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
         if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
-          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws")
-            if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
-              if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports-fips.#{parameters.region}.api.aws", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports.us-east-1.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "bcm-data-exports", "signingRegion" => "us-east-1"}]})
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports.us-iso-east-1.c2s.ic.gov", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]})
           end
-          if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
-            if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
-              if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
-              end
-              raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-            end
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-b") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports.us-isob-east-1.sc2s.sgov.gov", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-e") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports.eu-isoe-west-1.cloud.adc-e.uk", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-iso-f") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports.us-isof-south-1.csp.hci.ic.gov", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]})
           end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
-            if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
-              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
-            end
-            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports-fips.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
           end
-          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://bcm-data-exports.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"

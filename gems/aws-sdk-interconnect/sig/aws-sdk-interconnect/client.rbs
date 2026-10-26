@@ -1,0 +1,198 @@
+module Aws::Interconnect
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Interconnect::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptConnectionProposalResponse
+      include Smithy::Client::_Response[Types::AcceptConnectionProposalResponse]
+      def connection: () -> Types::Connection?
+    end
+    def accept_connection_proposal: (
+      ?attach_point: {
+        direct_connect_gateway: String,
+        arn: String
+      },
+      ?activation_key: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _AcceptConnectionProposalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptConnectionProposalResponse
+
+    interface _CreateConnectionResponse
+      include Smithy::Client::_Response[Types::CreateConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def create_connection: (
+      ?description: String,
+      ?bandwidth: String,
+      ?attach_point: {
+        direct_connect_gateway: String,
+        arn: String
+      },
+      ?environment_id: String,
+      ?remote_account: {
+        identifier: String
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionResponse
+
+    interface _DeleteConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def delete_connection: (
+      ?identifier: String,
+      ?client_token: String
+    ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DescribeConnectionProposalResponse
+      include Smithy::Client::_Response[Types::DescribeConnectionProposalResponse]
+      def bandwidth: () -> String?
+      def environment_id: () -> String?
+      def provider: () -> Types::Provider?
+      def location: () -> String?
+    end
+    def describe_connection_proposal: (
+      ?activation_key: String
+    ) -> _DescribeConnectionProposalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectionProposalResponse
+
+    interface _GetConnectionResponse
+      include Smithy::Client::_Response[Types::GetConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def get_connection: (
+      ?identifier: String
+    ) -> _GetConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionResponse
+
+    interface _GetEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentResponse]
+      def environment: () -> Types::Environment?
+    end
+    def get_environment: (
+      ?id: String
+    ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
+
+    interface _ListAttachPointsResponse
+      include Smithy::Client::_Response[Types::ListAttachPointsResponse]
+      def attach_points: () -> Array[Types::AttachPointDescriptor]?
+      def next_token: () -> String?
+    end
+    def list_attach_points: (
+      ?environment_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAttachPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachPointsResponse
+
+    interface _ListConnectionsResponse
+      include Smithy::Client::_Response[Types::ListConnectionsResponse]
+      def connections: () -> Array[Types::ConnectionSummary]?
+      def next_token: () -> String?
+    end
+    def list_connections: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?state: String,
+      ?environment_id: String,
+      ?provider: {
+        cloud_service_provider: String,
+        last_mile_provider: String
+      },
+      ?attach_point: {
+        direct_connect_gateway: String,
+        arn: String
+      }
+    ) -> _ListConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectionsResponse
+
+    interface _ListEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentsResponse]
+      def environments: () -> Array[Types::Environment]?
+      def next_token: () -> String?
+    end
+    def list_environments: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?provider: {
+        cloud_service_provider: String,
+        last_mile_provider: String
+      },
+      ?location: String
+    ) -> _ListEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConnectionResponse
+      include Smithy::Client::_Response[Types::UpdateConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def update_connection: (
+      ?identifier: String,
+      ?description: String,
+      ?bandwidth: String,
+      ?client_token: String
+    ) -> _UpdateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionResponse
+  end
+end

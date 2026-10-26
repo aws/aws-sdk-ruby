@@ -65,7 +65,8 @@ module Aws::SageMakerRuntime
       ?inference_id: String,
       ?enable_explanations: String,
       ?inference_component_name: String,
-      ?session_id: String
+      ?session_id: String,
+      ?prefix_aware_id: String
     ) -> _InvokeEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeEndpointResponse
 
     interface _InvokeEndpointAsyncResponse
@@ -81,8 +82,11 @@ module Aws::SageMakerRuntime
       ?custom_attributes: String,
       ?inference_id: String,
       ?input_location: String,
+      ?s3_output_path_extension: String,
+      ?filename: String,
       ?request_ttl_seconds: Integer,
-      ?invocation_timeout_seconds: Integer
+      ?invocation_timeout_seconds: Integer,
+      ?body: String
     ) -> _InvokeEndpointAsyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeEndpointAsyncResponse
 
     interface _InvokeEndpointWithResponseStreamResponse
@@ -102,7 +106,8 @@ module Aws::SageMakerRuntime
       ?target_container_hostname: String,
       ?inference_id: String,
       ?inference_component_name: String,
-      ?session_id: String
+      ?session_id: String,
+      ?prefix_aware_id: String
     ) -> _InvokeEndpointWithResponseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeEndpointWithResponseStreamResponse
   end
 end

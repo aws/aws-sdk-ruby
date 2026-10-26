@@ -1,5 +1,0 @@
-  module Aws
-    module LookoutVision
-      VERSION: String
-    end
-  end

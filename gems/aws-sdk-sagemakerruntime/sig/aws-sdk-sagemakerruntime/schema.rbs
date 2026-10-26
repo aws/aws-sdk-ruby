@@ -2,11 +2,13 @@ module Aws::SageMakerRuntime
   module Schema
     include Smithy::Schema::Shapes
 
+    AsyncBodyBlob: BlobShape
     BodyBlob: BlobShape
     CustomAttributesHeader: StringShape
     EnableExplanationsHeader: StringShape
     EndpointName: StringShape
     ErrorCode: StringShape
+    FilenameHeader: StringShape
     Header: StringShape
     InferenceComponentHeader: StringShape
     InferenceId: StringShape
@@ -29,8 +31,10 @@ module Aws::SageMakerRuntime
     NewSessionResponseHeader: StringShape
     PartBlob: BlobShape
     PayloadPart: StructureShape
+    PrefixAwareIdHeader: StringShape
     RequestTTLSecondsHeader: IntegerShape
     ResponseStream: UnionShape
+    S3OutputPathExtensionHeader: StringShape
     ServiceUnavailable: StructureShape
     SessionIdHeader: StringShape
     SessionIdOrNewSessionConstantHeader: StringShape

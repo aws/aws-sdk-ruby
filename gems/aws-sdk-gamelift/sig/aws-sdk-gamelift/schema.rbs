@@ -63,7 +63,11 @@ module Aws::GameLift
     ContainerGroupDefinitionList: ListShape
     ContainerGroupDefinitionName: StringShape
     ContainerGroupDefinitionNameOrArn: StringShape
+    ContainerGroupDefinitionRemoveAttribute: EnumShape
+    ContainerGroupDefinitionRemoveAttributeList: ListShape
     ContainerGroupDefinitionStatus: EnumShape
+    ContainerGroupPortMapping: StructureShape
+    ContainerGroupPortMappingList: ListShape
     ContainerGroupType: EnumShape
     ContainerHealthCheck: StructureShape
     ContainerHealthCheckInterval: IntegerShape
@@ -76,9 +80,12 @@ module Aws::GameLift
     ContainerMountPoint: StructureShape
     ContainerMountPointAccessLevel: EnumShape
     ContainerMountPointList: ListShape
+    ContainerNameQueryFilter: StringShape
     ContainerOperatingSystem: EnumShape
     ContainerPathString: StringShape
     ContainerPortConfiguration: StructureShape
+    ContainerPortMapping: StructureShape
+    ContainerPortMappingList: ListShape
     ContainerPortRange: StructureShape
     ContainerPortRangeList: ListShape
     ContainerTotalMemoryLimit: IntegerShape
@@ -165,6 +172,8 @@ module Aws::GameLift
     DescribeContainerFleetOutput: StructureShape
     DescribeContainerGroupDefinitionInput: StructureShape
     DescribeContainerGroupDefinitionOutput: StructureShape
+    DescribeContainerGroupPortMappingsInput: StructureShape
+    DescribeContainerGroupPortMappingsOutput: StructureShape
     DescribeEC2InstanceLimitsInput: StructureShape
     DescribeEC2InstanceLimitsOutput: StructureShape
     DescribeFleetAttributesInput: StructureShape
@@ -290,6 +299,7 @@ module Aws::GameLift
     GameServerInstanceIds: ListShape
     GameServerInstanceStatus: EnumShape
     GameServerInstances: ListShape
+    GameServerIpProtocolSupported: EnumShape
     GameServerProtectionPolicy: EnumShape
     GameServerUtilizationStatus: EnumShape
     GameServers: ListShape
@@ -322,6 +332,8 @@ module Aws::GameLift
     GetGameSessionLogUrlOutput: StructureShape
     GetInstanceAccessInput: StructureShape
     GetInstanceAccessOutput: StructureShape
+    GetPlayerConnectionDetailsInput: StructureShape
+    GetPlayerConnectionDetailsOutput: StructureShape
     IamRoleArn: StringShape
     IdStringModel: StringShape
     IdempotentParameterMismatchException: StructureShape
@@ -355,6 +367,9 @@ module Aws::GameLift
     LaunchTemplateSpecification: StructureShape
     LaunchTemplateVersion: StringShape
     LimitExceededException: StructureShape
+    LinuxCapabilities: StructureShape
+    LinuxCapability: EnumShape
+    LinuxCapabilityList: ListShape
     ListAliasesInput: StructureShape
     ListAliasesOutput: StructureShape
     ListBuildsInput: StructureShape
@@ -405,6 +420,7 @@ module Aws::GameLift
     LogConfiguration: StructureShape
     LogDestination: EnumShape
     LogGroupArnStringModel: StringShape
+    ManagedCapacityConfiguration: StructureShape
     MatchedPlayerSession: StructureShape
     MatchedPlayerSessionList: ListShape
     MatchmakerData: StringShape
@@ -426,11 +442,13 @@ module Aws::GameLift
     MatchmakingTicket: StructureShape
     MatchmakingTicketList: ListShape
     MaxConcurrentGameSessionActivations: IntegerShape
+    MaxString: StringShape
     MaximumGameServerContainerGroupsPerInstance: IntegerShape
     MetricGroup: StringShape
     MetricGroupList: ListShape
     MetricName: EnumShape
     MinimumHealthyPercentage: IntegerShape
+    NodeJsVersion: StringShape
     NonBlankAndLengthConstraintString: StringShape
     NonEmptyString: StringShape
     NonNegativeDouble: FloatShape
@@ -451,8 +469,15 @@ module Aws::GameLift
     PlayerAttributeString: StringShape
     PlayerAttributeStringDoubleMap: MapShape
     PlayerAttributeStringList: ListShape
+    PlayerConnectionDetail: StructureShape
+    PlayerConnectionDetailList: ListShape
+    PlayerConnectionEndpoint: StructureShape
+    PlayerConnectionEndpointList: ListShape
     PlayerData: StringShape
     PlayerDataMap: MapShape
+    PlayerGatewayConfiguration: StructureShape
+    PlayerGatewayMode: EnumShape
+    PlayerGatewayStatus: EnumShape
     PlayerId: StringShape
     PlayerIdList: ListShape
     PlayerIdsForAcceptMatch: ListShape
@@ -469,7 +494,6 @@ module Aws::GameLift
     PolicyType: EnumShape
     PortNumber: IntegerShape
     PositiveInteger: IntegerShape
-    PositiveLong: IntegerShape
     PriorityConfiguration: StructureShape
     PriorityConfigurationOverride: StructureShape
     PriorityType: EnumShape
@@ -497,6 +521,7 @@ module Aws::GameLift
     RuleSetLimit: IntegerShape
     RuntimeConfiguration: StructureShape
     S3Location: StructureShape
+    ScaleInAfterInactivityMinutes: IntegerShape
     ScalingAdjustmentType: EnumShape
     ScalingPolicy: StructureShape
     ScalingPolicyList: ListShape
@@ -596,6 +621,8 @@ module Aws::GameLift
     VpcSubnets: ListShape
     WeightedCapacity: StringShape
     WholeNumber: IntegerShape
+    WholeNumberLong: IntegerShape
+    ZeroCapacityStrategy: EnumShape
     ZipBlob: BlobShape
 
     GameLift: ServiceShape

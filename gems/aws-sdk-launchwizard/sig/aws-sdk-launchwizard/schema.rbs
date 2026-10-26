@@ -2,9 +2,12 @@ module Aws::LaunchWizard
   module Schema
     include Smithy::Schema::Shapes
 
+    AccountConstraint: UnionShape
+    AccountConstraintsList: ListShape
     AllowedValues: ListShape
     CreateDeploymentInput: StructureShape
     CreateDeploymentOutput: StructureShape
+    DelegatedAdminConstraint: StructureShape
     DeleteDeploymentInput: StructureShape
     DeleteDeploymentOutput: StructureShape
     DeploymentConditionalField: StructureShape
@@ -13,20 +16,34 @@ module Aws::LaunchWizard
     DeploymentDataSummaryList: ListShape
     DeploymentEventDataSummary: StructureShape
     DeploymentEventDataSummaryList: ListShape
+    DeploymentEventMetadata: MapShape
+    DeploymentEventMetadataKey: StringShape
+    DeploymentEventMetadataValue: StringShape
     DeploymentFilter: StructureShape
     DeploymentFilterKey: EnumShape
     DeploymentFilterList: ListShape
+    DeploymentFilterValue: StringShape
     DeploymentFilterValues: ListShape
     DeploymentId: StringShape
     DeploymentName: StringShape
     DeploymentPatternName: StringShape
+    DeploymentPatternVersionDataSummary: StructureShape
+    DeploymentPatternVersionDataSummaryList: ListShape
+    DeploymentPatternVersionFilter: StructureShape
+    DeploymentPatternVersionFilterKey: EnumShape
+    DeploymentPatternVersionFilterValue: StringShape
+    DeploymentPatternVersionFilterValues: ListShape
+    DeploymentPatternVersionName: StringShape
     DeploymentSpecifications: MapShape
     DeploymentSpecificationsData: ListShape
     DeploymentSpecificationsField: StructureShape
     DeploymentStatus: EnumShape
     EventStatus: EnumShape
+    FilterList: ListShape
     GetDeploymentInput: StructureShape
     GetDeploymentOutput: StructureShape
+    GetDeploymentPatternVersionInput: StructureShape
+    GetDeploymentPatternVersionOutput: StructureShape
     GetWorkloadDeploymentPatternInput: StructureShape
     GetWorkloadDeploymentPatternOutput: StructureShape
     GetWorkloadInput: StructureShape
@@ -35,6 +52,8 @@ module Aws::LaunchWizard
     KeyString: StringShape
     ListDeploymentEventsInput: StructureShape
     ListDeploymentEventsOutput: StructureShape
+    ListDeploymentPatternVersionsInput: StructureShape
+    ListDeploymentPatternVersionsOutput: StructureShape
     ListDeploymentsInput: StructureShape
     ListDeploymentsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
@@ -43,6 +62,7 @@ module Aws::LaunchWizard
     ListWorkloadDeploymentPatternsOutput: StructureShape
     ListWorkloadsInput: StructureShape
     ListWorkloadsOutput: StructureShape
+    ManagementAccountConstraint: StructureShape
     MaxDeploymentEventResults: IntegerShape
     MaxDeploymentResults: IntegerShape
     MaxWorkloadDeploymentPatternResults: IntegerShape
@@ -50,6 +70,7 @@ module Aws::LaunchWizard
     NextToken: StringShape
     ResourceLimitException: StructureShape
     ResourceNotFoundException: StructureShape
+    ServicePrincipalType: StringShape
     SpecificationsConditionalData: ListShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -59,6 +80,8 @@ module Aws::LaunchWizard
     Tags: MapShape
     UntagResourceInput: StructureShape
     UntagResourceOutput: StructureShape
+    UpdateDeploymentInput: StructureShape
+    UpdateDeploymentOutput: StructureShape
     ValidationException: StructureShape
     ValueString: StringShape
     WorkloadData: StructureShape

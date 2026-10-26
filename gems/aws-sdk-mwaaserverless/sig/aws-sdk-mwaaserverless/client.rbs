@@ -1,0 +1,292 @@
+module Aws::MWAAServerless
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MWAAServerless::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateWorkflowResponse
+      include Smithy::Client::_Response[Types::CreateWorkflowResponse]
+      def workflow_arn: () -> String?
+      def created_at: () -> Time?
+      def revision_id: () -> String?
+      def workflow_status: () -> String?
+      def workflow_version: () -> String?
+      def is_latest_version: () -> bool?
+      def warnings: () -> Array[String]?
+    end
+    def create_workflow: (
+      ?name: String,
+      ?client_token: String,
+      ?definition_s3_location: {
+        bucket: String,
+        object_key: untyped,
+        version_id: untyped
+      },
+      ?code: {
+        s3_location: {
+          bucket: String,
+          object_key: untyped,
+          version_id: untyped
+        }
+      },
+      ?role_arn: String,
+      ?description: String,
+      ?encryption_configuration: {
+        type: String,
+        kms_key_id: String
+      },
+      ?logging_configuration: {
+        log_group_name: String
+      },
+      ?engine_version: Integer,
+      ?network_configuration: {
+        security_group_ids: Array[String],
+        subnet_ids: Array[String]
+      },
+      ?tags: Hash[String, String],
+      ?trigger_mode: String
+    ) -> _CreateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowResponse
+
+    interface _DeleteWorkflowResponse
+      include Smithy::Client::_Response[Types::DeleteWorkflowResponse]
+      def workflow_arn: () -> String?
+      def workflow_version: () -> String?
+    end
+    def delete_workflow: (
+      ?workflow_arn: String,
+      ?workflow_version: String
+    ) -> _DeleteWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowResponse
+
+    interface _GetTaskInstanceResponse
+      include Smithy::Client::_Response[Types::GetTaskInstanceResponse]
+      def workflow_arn: () -> String?
+      def run_id: () -> String?
+      def task_instance_id: () -> String?
+      def workflow_version: () -> String?
+      def status: () -> String?
+      def duration_in_seconds: () -> Integer?
+      def operator_name: () -> String?
+      def modified_at: () -> Time?
+      def ended_at: () -> Time?
+      def started_at: () -> Time?
+      def attempt_number: () -> Integer?
+      def error_message: () -> String?
+      def task_id: () -> String?
+      def log_stream: () -> String?
+      def xcom: () -> Hash[String, String]?
+    end
+    def get_task_instance: (
+      ?workflow_arn: String,
+      ?task_instance_id: String,
+      ?run_id: String
+    ) -> _GetTaskInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTaskInstanceResponse
+
+    interface _GetWorkflowResponse
+      include Smithy::Client::_Response[Types::GetWorkflowResponse]
+      def workflow_arn: () -> String?
+      def workflow_version: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+      def logging_configuration: () -> Types::LoggingConfiguration?
+      def engine_version: () -> Integer?
+      def workflow_status: () -> String?
+      def definition_s3_location: () -> Types::DefinitionS3Location?
+      def code: () -> Types::Code?
+      def code_snapshotted_at: () -> Time?
+      def schedule_configuration: () -> Types::ScheduleConfiguration?
+      def role_arn: () -> String?
+      def network_configuration: () -> Types::NetworkConfiguration?
+      def trigger_mode: () -> String?
+      def workflow_definition: () -> String?
+    end
+    def get_workflow: (
+      ?workflow_arn: String,
+      ?workflow_version: String
+    ) -> _GetWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowResponse
+
+    interface _GetWorkflowRunResponse
+      include Smithy::Client::_Response[Types::GetWorkflowRunResponse]
+      def workflow_arn: () -> String?
+      def workflow_version: () -> String?
+      def run_id: () -> String?
+      def run_type: () -> String?
+      def override_parameters: () -> Hash[String, Smithy::Schema::document]?
+      def run_detail: () -> Types::WorkflowRunDetail?
+    end
+    def get_workflow_run: (
+      ?workflow_arn: String,
+      ?run_id: String
+    ) -> _GetWorkflowRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowRunResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTaskInstancesResponse
+      include Smithy::Client::_Response[Types::ListTaskInstancesResponse]
+      def task_instances: () -> Array[Types::TaskInstanceSummary]?
+      def next_token: () -> String?
+    end
+    def list_task_instances: (
+      ?workflow_arn: String,
+      ?run_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTaskInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTaskInstancesResponse
+
+    interface _ListWorkflowRunsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowRunsResponse]
+      def workflow_runs: () -> Array[Types::WorkflowRunSummary]?
+      def next_token: () -> String?
+    end
+    def list_workflow_runs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?workflow_arn: String,
+      ?workflow_version: String
+    ) -> _ListWorkflowRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowRunsResponse
+
+    interface _ListWorkflowVersionsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowVersionsResponse]
+      def workflow_versions: () -> Array[Types::WorkflowVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_workflow_versions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?workflow_arn: String
+    ) -> _ListWorkflowVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowVersionsResponse
+
+    interface _ListWorkflowsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowsResponse]
+      def workflows: () -> Array[Types::WorkflowSummary]?
+      def next_token: () -> String?
+    end
+    def list_workflows: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWorkflowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowsResponse
+
+    interface _StartWorkflowRunResponse
+      include Smithy::Client::_Response[Types::StartWorkflowRunResponse]
+      def run_id: () -> String?
+      def status: () -> String?
+      def started_at: () -> Time?
+    end
+    def start_workflow_run: (
+      ?workflow_arn: String,
+      ?client_token: String,
+      ?override_parameters: Hash[String, Smithy::Schema::document],
+      ?workflow_version: String
+    ) -> _StartWorkflowRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWorkflowRunResponse
+
+    interface _StopWorkflowRunResponse
+      include Smithy::Client::_Response[Types::StopWorkflowRunResponse]
+      def workflow_arn: () -> String?
+      def workflow_version: () -> String?
+      def run_id: () -> String?
+      def status: () -> String?
+    end
+    def stop_workflow_run: (
+      ?workflow_arn: String,
+      ?run_id: String
+    ) -> _StopWorkflowRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopWorkflowRunResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateWorkflowResponse
+      include Smithy::Client::_Response[Types::UpdateWorkflowResponse]
+      def workflow_arn: () -> String?
+      def modified_at: () -> Time?
+      def workflow_version: () -> String?
+      def warnings: () -> Array[String]?
+    end
+    def update_workflow: (
+      ?workflow_arn: String,
+      ?definition_s3_location: {
+        bucket: String,
+        object_key: untyped,
+        version_id: untyped
+      },
+      ?code: {
+        s3_location: {
+          bucket: String,
+          object_key: untyped,
+          version_id: untyped
+        }
+      },
+      ?role_arn: String,
+      ?description: String,
+      ?logging_configuration: {
+        log_group_name: String
+      },
+      ?engine_version: Integer,
+      ?network_configuration: {
+        security_group_ids: Array[String],
+        subnet_ids: Array[String]
+      },
+      ?trigger_mode: String
+    ) -> _UpdateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkflowResponse
+  end
+end

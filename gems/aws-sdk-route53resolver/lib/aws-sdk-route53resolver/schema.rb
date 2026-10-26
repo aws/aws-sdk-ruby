@@ -19,16 +19,31 @@ module Aws::Route53Resolver
     AssociateResolverRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#AssociateResolverRuleRequest", name: "AssociateResolverRuleRequest")
     AssociateResolverRuleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#AssociateResolverRuleResponse", name: "AssociateResolverRuleResponse")
     AutodefinedReverseFlag = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#AutodefinedReverseFlag", name: "AutodefinedReverseFlag")
+    BatchCreateFirewallRuleError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#BatchCreateFirewallRuleError", name: "BatchCreateFirewallRuleError")
+    BatchCreateFirewallRuleErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#BatchCreateFirewallRuleErrors", name: "BatchCreateFirewallRuleErrors")
+    BatchCreateFirewallRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#BatchCreateFirewallRuleRequest", name: "BatchCreateFirewallRuleRequest")
+    BatchCreateFirewallRuleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#BatchCreateFirewallRuleResponse", name: "BatchCreateFirewallRuleResponse")
+    BatchDeleteFirewallRuleError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#BatchDeleteFirewallRuleError", name: "BatchDeleteFirewallRuleError")
+    BatchDeleteFirewallRuleErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#BatchDeleteFirewallRuleErrors", name: "BatchDeleteFirewallRuleErrors")
+    BatchDeleteFirewallRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#BatchDeleteFirewallRuleRequest", name: "BatchDeleteFirewallRuleRequest")
+    BatchDeleteFirewallRuleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#BatchDeleteFirewallRuleResponse", name: "BatchDeleteFirewallRuleResponse")
+    BatchUpdateFirewallRuleError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#BatchUpdateFirewallRuleError", name: "BatchUpdateFirewallRuleError")
+    BatchUpdateFirewallRuleErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#BatchUpdateFirewallRuleErrors", name: "BatchUpdateFirewallRuleErrors")
+    BatchUpdateFirewallRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#BatchUpdateFirewallRuleRequest", name: "BatchUpdateFirewallRuleRequest")
+    BatchUpdateFirewallRuleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#BatchUpdateFirewallRuleResponse", name: "BatchUpdateFirewallRuleResponse")
     BlockOverrideDnsType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#BlockOverrideDnsType", name: "BlockOverrideDnsType")
     BlockOverrideDomain = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#BlockOverrideDomain", name: "BlockOverrideDomain", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     BlockOverrideTtl = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53resolver#BlockOverrideTtl", name: "BlockOverrideTtl", traits: {"smithy.api#range" => {"min" => 0, "max" => 604800}})
     BlockResponse = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#BlockResponse", name: "BlockResponse")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.route53resolver#Boolean", name: "Boolean", traits: {"smithy.api#default" => false})
+    Category = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#Category", name: "Category", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     ConfidenceThreshold = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#ConfidenceThreshold", name: "ConfidenceThreshold")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client"})
     Count = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53resolver#Count", name: "Count", traits: {"smithy.api#default" => 0})
     CreateFirewallDomainListRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#CreateFirewallDomainListRequest", name: "CreateFirewallDomainListRequest")
     CreateFirewallDomainListResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#CreateFirewallDomainListResponse", name: "CreateFirewallDomainListResponse")
+    CreateFirewallRuleEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#CreateFirewallRuleEntries", name: "CreateFirewallRuleEntries")
+    CreateFirewallRuleEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#CreateFirewallRuleEntry", name: "CreateFirewallRuleEntry")
     CreateFirewallRuleGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#CreateFirewallRuleGroupRequest", name: "CreateFirewallRuleGroupRequest")
     CreateFirewallRuleGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#CreateFirewallRuleGroupResponse", name: "CreateFirewallRuleGroupResponse")
     CreateFirewallRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#CreateFirewallRuleRequest", name: "CreateFirewallRuleRequest")
@@ -45,6 +60,8 @@ module Aws::Route53Resolver
     DelegationRecord = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#DelegationRecord", name: "DelegationRecord", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     DeleteFirewallDomainListRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DeleteFirewallDomainListRequest", name: "DeleteFirewallDomainListRequest")
     DeleteFirewallDomainListResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DeleteFirewallDomainListResponse", name: "DeleteFirewallDomainListResponse")
+    DeleteFirewallRuleEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#DeleteFirewallRuleEntries", name: "DeleteFirewallRuleEntries")
+    DeleteFirewallRuleEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DeleteFirewallRuleEntry", name: "DeleteFirewallRuleEntry")
     DeleteFirewallRuleGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DeleteFirewallRuleGroupRequest", name: "DeleteFirewallRuleGroupRequest")
     DeleteFirewallRuleGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DeleteFirewallRuleGroupResponse", name: "DeleteFirewallRuleGroupResponse")
     DeleteFirewallRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DeleteFirewallRuleRequest", name: "DeleteFirewallRuleRequest")
@@ -66,8 +83,13 @@ module Aws::Route53Resolver
     DisassociateResolverQueryLogConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DisassociateResolverQueryLogConfigResponse", name: "DisassociateResolverQueryLogConfigResponse")
     DisassociateResolverRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DisassociateResolverRuleRequest", name: "DisassociateResolverRuleRequest")
     DisassociateResolverRuleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DisassociateResolverRuleResponse", name: "DisassociateResolverRuleResponse")
+    DisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#DisplayName", name: "DisplayName", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    Dns64Enabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.route53resolver#Dns64Enabled", name: "Dns64Enabled")
     DnsThreatProtection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#DnsThreatProtection", name: "DnsThreatProtection")
+    DnsThreatProtectionRuleTypeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#DnsThreatProtectionRuleTypeConfig", name: "DnsThreatProtectionRuleTypeConfig")
+    DnsThreatProtectionRuleTypeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#DnsThreatProtectionRuleTypeValue", name: "DnsThreatProtectionRuleTypeValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     DomainListFileUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#DomainListFileUrl", name: "DomainListFileUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    DomainListType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#DomainListType", name: "DomainListType")
     DomainName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#DomainName", name: "DomainName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     ExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#ExceptionMessage", name: "ExceptionMessage")
     Filter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#Filter", name: "Filter")
@@ -75,6 +97,10 @@ module Aws::Route53Resolver
     FilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#FilterValue", name: "FilterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 600}})
     FilterValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#FilterValues", name: "FilterValues")
     Filters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#Filters", name: "Filters")
+    FirewallAdvancedContentCategoryConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#FirewallAdvancedContentCategoryConfig", name: "FirewallAdvancedContentCategoryConfig")
+    FirewallAdvancedContentCategoryValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#FirewallAdvancedContentCategoryValue", name: "FirewallAdvancedContentCategoryValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    FirewallAdvancedThreatCategoryConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#FirewallAdvancedThreatCategoryConfig", name: "FirewallAdvancedThreatCategoryConfig")
+    FirewallAdvancedThreatCategoryValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#FirewallAdvancedThreatCategoryValue", name: "FirewallAdvancedThreatCategoryValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     FirewallConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#FirewallConfig", name: "FirewallConfig")
     FirewallConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#FirewallConfigList", name: "FirewallConfigList")
     FirewallDomainImportOperation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#FirewallDomainImportOperation", name: "FirewallDomainImportOperation")
@@ -96,6 +122,11 @@ module Aws::Route53Resolver
     FirewallRuleGroupMetadataList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#FirewallRuleGroupMetadataList", name: "FirewallRuleGroupMetadataList")
     FirewallRuleGroupPolicy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#FirewallRuleGroupPolicy", name: "FirewallRuleGroupPolicy", traits: {"smithy.api#length" => {"min" => 0, "max" => 30000}})
     FirewallRuleGroupStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#FirewallRuleGroupStatus", name: "FirewallRuleGroupStatus")
+    FirewallRuleStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#FirewallRuleStatus", name: "FirewallRuleStatus", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}})
+    FirewallRuleStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#FirewallRuleStatusMessage", name: "FirewallRuleStatusMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    FirewallRuleType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#FirewallRuleType", name: "FirewallRuleType")
+    FirewallRuleTypeDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#FirewallRuleTypeDefinition", name: "FirewallRuleTypeDefinition")
+    FirewallRuleTypeDefinitions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#FirewallRuleTypeDefinitions", name: "FirewallRuleTypeDefinitions")
     FirewallRules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#FirewallRules", name: "FirewallRules")
     GetFirewallConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#GetFirewallConfigRequest", name: "GetFirewallConfigRequest")
     GetFirewallConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#GetFirewallConfigResponse", name: "GetFirewallConfigResponse")
@@ -145,6 +176,7 @@ module Aws::Route53Resolver
     IpAddressesRequest = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#IpAddressesRequest", name: "IpAddressesRequest", traits: {"smithy.api#length" => {"min" => 2, "max" => 20}})
     IpAddressesResponse = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#IpAddressesResponse", name: "IpAddressesResponse")
     Ipv6 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#Ipv6", name: "Ipv6", traits: {"smithy.api#length" => {"min" => 7, "max" => 39}})
+    Ipv6InternetAccessEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.route53resolver#Ipv6InternetAccessEnabled", name: "Ipv6InternetAccessEnabled")
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client"})
     ListDomainMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53resolver#ListDomainMaxResults", name: "ListDomainMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 5000}})
     ListFirewallConfigsMaxResult = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53resolver#ListFirewallConfigsMaxResult", name: "ListFirewallConfigsMaxResult", traits: {"smithy.api#range" => {"min" => 5, "max" => 10}})
@@ -158,6 +190,8 @@ module Aws::Route53Resolver
     ListFirewallRuleGroupAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ListFirewallRuleGroupAssociationsResponse", name: "ListFirewallRuleGroupAssociationsResponse")
     ListFirewallRuleGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ListFirewallRuleGroupsRequest", name: "ListFirewallRuleGroupsRequest")
     ListFirewallRuleGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ListFirewallRuleGroupsResponse", name: "ListFirewallRuleGroupsResponse")
+    ListFirewallRuleTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ListFirewallRuleTypesRequest", name: "ListFirewallRuleTypesRequest")
+    ListFirewallRuleTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ListFirewallRuleTypesResponse", name: "ListFirewallRuleTypesResponse")
     ListFirewallRulesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ListFirewallRulesRequest", name: "ListFirewallRulesRequest")
     ListFirewallRulesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ListFirewallRulesResponse", name: "ListFirewallRulesResponse")
     ListOutpostResolversRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ListOutpostResolversRequest", name: "ListOutpostResolversRequest")
@@ -192,8 +226,11 @@ module Aws::Route53Resolver
     OutpostResolverName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#OutpostResolverName", name: "OutpostResolverName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
     OutpostResolverStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#OutpostResolverStatus", name: "OutpostResolverStatus")
     OutpostResolverStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#OutpostResolverStatusMessage", name: "OutpostResolverStatusMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 4096}})
+    PartnerThreatProtectionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#PartnerThreatProtectionConfig", name: "PartnerThreatProtectionConfig")
+    PartnerValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#PartnerValue", name: "PartnerValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     Port = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53resolver#Port", name: "Port", traits: {"smithy.api#range" => {"min" => 0, "max" => 65535}})
     Priority = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53resolver#Priority", name: "Priority")
+    ProductId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#ProductId", name: "ProductId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     Protocol = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#Protocol", name: "Protocol")
     ProtocolList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#ProtocolList", name: "ProtocolList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     PutFirewallRuleGroupPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#PutFirewallRuleGroupPolicyRequest", name: "PutFirewallRuleGroupPolicyRequest")
@@ -238,7 +275,11 @@ module Aws::Route53Resolver
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client"})
     ResourceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ResourceUnavailableException", name: "ResourceUnavailableException", traits: {"smithy.api#error" => "client"})
     Rfc3339TimeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#Rfc3339TimeString", name: "Rfc3339TimeString", traits: {"smithy.api#length" => {"min" => 20, "max" => 40}})
+    RniEnhancedMetricsEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.route53resolver#RniEnhancedMetricsEnabled", name: "RniEnhancedMetricsEnabled")
+    RuleTypeDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#RuleTypeDescription", name: "RuleTypeDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    RuleTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#RuleTypeName", name: "RuleTypeName", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
     RuleTypeOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#RuleTypeOption", name: "RuleTypeOption")
+    RuleTypeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#RuleTypeValue", name: "RuleTypeValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
     SecurityGroupIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#SecurityGroupIds", name: "SecurityGroupIds")
     ServerNameIndication = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#ServerNameIndication", name: "ServerNameIndication", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     ServicePrinciple = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#ServicePrinciple", name: "ServicePrinciple", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
@@ -249,6 +290,7 @@ module Aws::Route53Resolver
     StatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#StatusMessage", name: "StatusMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#String", name: "String")
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#SubnetId", name: "SubnetId", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}})
+    SubscriptionInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#SubscriptionInfo", name: "SubscriptionInfo")
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#Tag", name: "Tag")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
@@ -258,6 +300,7 @@ module Aws::Route53Resolver
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     TargetAddress = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#TargetAddress", name: "TargetAddress")
     TargetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#TargetList", name: "TargetList", traits: {"smithy.api#length" => {"min" => 1}})
+    TargetNameServerMetricsEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.route53resolver#TargetNameServerMetricsEnabled", name: "TargetNameServerMetricsEnabled")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client"})
     UnknownResourceException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#UnknownResourceException", name: "UnknownResourceException", traits: {"smithy.api#error" => "client"})
     Unsigned = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53resolver#Unsigned", name: "Unsigned")
@@ -267,6 +310,8 @@ module Aws::Route53Resolver
     UpdateFirewallConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#UpdateFirewallConfigResponse", name: "UpdateFirewallConfigResponse")
     UpdateFirewallDomainsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#UpdateFirewallDomainsRequest", name: "UpdateFirewallDomainsRequest")
     UpdateFirewallDomainsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#UpdateFirewallDomainsResponse", name: "UpdateFirewallDomainsResponse")
+    UpdateFirewallRuleEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53resolver#UpdateFirewallRuleEntries", name: "UpdateFirewallRuleEntries")
+    UpdateFirewallRuleEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#UpdateFirewallRuleEntry", name: "UpdateFirewallRuleEntry")
     UpdateFirewallRuleGroupAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#UpdateFirewallRuleGroupAssociationRequest", name: "UpdateFirewallRuleGroupAssociationRequest")
     UpdateFirewallRuleGroupAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#UpdateFirewallRuleGroupAssociationResponse", name: "UpdateFirewallRuleGroupAssociationResponse")
     UpdateFirewallRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#UpdateFirewallRuleRequest", name: "UpdateFirewallRuleRequest")
@@ -285,6 +330,7 @@ module Aws::Route53Resolver
     UpdateResolverRuleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#UpdateResolverRuleResponse", name: "UpdateResolverRuleResponse")
     Validation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53resolver#Validation", name: "Validation")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53resolver#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client"})
+    VendorName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53resolver#VendorName", name: "VendorName", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
@@ -320,6 +366,36 @@ module Aws::Route53Resolver
     AutodefinedReverseFlag.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLE", traits: {"smithy.api#enumValue" => "ENABLE"}))
     AutodefinedReverseFlag.add_member(:disable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE", traits: {"smithy.api#enumValue" => "DISABLE"}))
     AutodefinedReverseFlag.add_member(:use_local_resource_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USE_LOCAL_RESOURCE_SETTING", traits: {"smithy.api#enumValue" => "USE_LOCAL_RESOURCE_SETTING"}))
+    BatchCreateFirewallRuleError.add_member(:firewall_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFirewallRuleEntry, name: "FirewallRule"))
+    BatchCreateFirewallRuleError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
+    BatchCreateFirewallRuleError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    BatchCreateFirewallRuleError.type = Types::BatchCreateFirewallRuleError
+    BatchCreateFirewallRuleErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateFirewallRuleError, name: "member"))
+    BatchCreateFirewallRuleRequest.add_member(:create_firewall_rule_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFirewallRuleEntries, name: "CreateFirewallRuleEntries", traits: {"smithy.api#required" => {}}))
+    BatchCreateFirewallRuleRequest.type = Types::BatchCreateFirewallRuleRequest
+    BatchCreateFirewallRuleResponse.add_member(:created_firewall_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRules, name: "CreatedFirewallRules"))
+    BatchCreateFirewallRuleResponse.add_member(:create_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchCreateFirewallRuleErrors, name: "CreateErrors"))
+    BatchCreateFirewallRuleResponse.type = Types::BatchCreateFirewallRuleResponse
+    BatchDeleteFirewallRuleError.add_member(:firewall_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFirewallRuleEntry, name: "FirewallRule"))
+    BatchDeleteFirewallRuleError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
+    BatchDeleteFirewallRuleError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    BatchDeleteFirewallRuleError.type = Types::BatchDeleteFirewallRuleError
+    BatchDeleteFirewallRuleErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteFirewallRuleError, name: "member"))
+    BatchDeleteFirewallRuleRequest.add_member(:delete_firewall_rule_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFirewallRuleEntries, name: "DeleteFirewallRuleEntries", traits: {"smithy.api#required" => {}}))
+    BatchDeleteFirewallRuleRequest.type = Types::BatchDeleteFirewallRuleRequest
+    BatchDeleteFirewallRuleResponse.add_member(:deleted_firewall_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRules, name: "DeletedFirewallRules"))
+    BatchDeleteFirewallRuleResponse.add_member(:delete_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDeleteFirewallRuleErrors, name: "DeleteErrors"))
+    BatchDeleteFirewallRuleResponse.type = Types::BatchDeleteFirewallRuleResponse
+    BatchUpdateFirewallRuleError.add_member(:firewall_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFirewallRuleEntry, name: "FirewallRule"))
+    BatchUpdateFirewallRuleError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
+    BatchUpdateFirewallRuleError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    BatchUpdateFirewallRuleError.type = Types::BatchUpdateFirewallRuleError
+    BatchUpdateFirewallRuleErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateFirewallRuleError, name: "member"))
+    BatchUpdateFirewallRuleRequest.add_member(:update_firewall_rule_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFirewallRuleEntries, name: "UpdateFirewallRuleEntries", traits: {"smithy.api#required" => {}}))
+    BatchUpdateFirewallRuleRequest.type = Types::BatchUpdateFirewallRuleRequest
+    BatchUpdateFirewallRuleResponse.add_member(:updated_firewall_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRules, name: "UpdatedFirewallRules"))
+    BatchUpdateFirewallRuleResponse.add_member(:update_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUpdateFirewallRuleErrors, name: "UpdateErrors"))
+    BatchUpdateFirewallRuleResponse.type = Types::BatchUpdateFirewallRuleResponse
     BlockOverrideDnsType.add_member(:cname, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CNAME", traits: {"smithy.api#enumValue" => "CNAME"}))
     BlockResponse.add_member(:nodata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NODATA", traits: {"smithy.api#enumValue" => "NODATA"}))
     BlockResponse.add_member(:nxdomain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NXDOMAIN", traits: {"smithy.api#enumValue" => "NXDOMAIN"}))
@@ -335,6 +411,23 @@ module Aws::Route53Resolver
     CreateFirewallDomainListRequest.type = Types::CreateFirewallDomainListRequest
     CreateFirewallDomainListResponse.add_member(:firewall_domain_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallDomainList, name: "FirewallDomainList"))
     CreateFirewallDomainListResponse.type = Types::CreateFirewallDomainListResponse
+    CreateFirewallRuleEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFirewallRuleEntry, name: "member"))
+    CreateFirewallRuleEntry.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatorRequestId, name: "CreatorRequestId", traits: {"smithy.api#required" => {}}))
+    CreateFirewallRuleEntry.add_member(:firewall_rule_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallRuleGroupId", traits: {"smithy.api#required" => {}}))
+    CreateFirewallRuleEntry.add_member(:firewall_domain_list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallDomainListId"))
+    CreateFirewallRuleEntry.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "Priority", traits: {"smithy.api#required" => {}}))
+    CreateFirewallRuleEntry.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "Action", traits: {"smithy.api#required" => {}}))
+    CreateFirewallRuleEntry.add_member(:block_response, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockResponse, name: "BlockResponse"))
+    CreateFirewallRuleEntry.add_member(:block_override_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockOverrideDomain, name: "BlockOverrideDomain"))
+    CreateFirewallRuleEntry.add_member(:block_override_dns_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockOverrideDnsType, name: "BlockOverrideDnsType"))
+    CreateFirewallRuleEntry.add_member(:block_override_ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockOverrideTtl, name: "BlockOverrideTtl"))
+    CreateFirewallRuleEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateFirewallRuleEntry.add_member(:firewall_domain_redirection_action, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallDomainRedirectionAction, name: "FirewallDomainRedirectionAction"))
+    CreateFirewallRuleEntry.add_member(:qtype, ::Smithy::Schema::Shapes::MemberShape.new(target: Qtype, name: "Qtype"))
+    CreateFirewallRuleEntry.add_member(:dns_threat_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsThreatProtection, name: "DnsThreatProtection"))
+    CreateFirewallRuleEntry.add_member(:confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "ConfidenceThreshold"))
+    CreateFirewallRuleEntry.add_member(:firewall_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleType, name: "FirewallRuleType"))
+    CreateFirewallRuleEntry.type = Types::CreateFirewallRuleEntry
     CreateFirewallRuleGroupRequest.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatorRequestId, name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateFirewallRuleGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
     CreateFirewallRuleGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
@@ -355,6 +448,7 @@ module Aws::Route53Resolver
     CreateFirewallRuleRequest.add_member(:qtype, ::Smithy::Schema::Shapes::MemberShape.new(target: Qtype, name: "Qtype"))
     CreateFirewallRuleRequest.add_member(:dns_threat_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsThreatProtection, name: "DnsThreatProtection"))
     CreateFirewallRuleRequest.add_member(:confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "ConfidenceThreshold"))
+    CreateFirewallRuleRequest.add_member(:firewall_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleType, name: "FirewallRuleType"))
     CreateFirewallRuleRequest.type = Types::CreateFirewallRuleRequest
     CreateFirewallRuleResponse.add_member(:firewall_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRule, name: "FirewallRule"))
     CreateFirewallRuleResponse.type = Types::CreateFirewallRuleResponse
@@ -377,6 +471,10 @@ module Aws::Route53Resolver
     CreateResolverEndpointRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateResolverEndpointRequest.add_member(:resolver_endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolverEndpointType, name: "ResolverEndpointType"))
     CreateResolverEndpointRequest.add_member(:protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolList, name: "Protocols"))
+    CreateResolverEndpointRequest.add_member(:rni_enhanced_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RniEnhancedMetricsEnabled, name: "RniEnhancedMetricsEnabled"))
+    CreateResolverEndpointRequest.add_member(:target_name_server_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNameServerMetricsEnabled, name: "TargetNameServerMetricsEnabled"))
+    CreateResolverEndpointRequest.add_member(:dns64_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Dns64Enabled, name: "Dns64Enabled"))
+    CreateResolverEndpointRequest.add_member(:ipv6_internet_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6InternetAccessEnabled, name: "Ipv6InternetAccessEnabled"))
     CreateResolverEndpointRequest.type = Types::CreateResolverEndpointRequest
     CreateResolverEndpointResponse.add_member(:resolver_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolverEndpoint, name: "ResolverEndpoint"))
     CreateResolverEndpointResponse.type = Types::CreateResolverEndpointResponse
@@ -402,6 +500,12 @@ module Aws::Route53Resolver
     DeleteFirewallDomainListRequest.type = Types::DeleteFirewallDomainListRequest
     DeleteFirewallDomainListResponse.add_member(:firewall_domain_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallDomainList, name: "FirewallDomainList"))
     DeleteFirewallDomainListResponse.type = Types::DeleteFirewallDomainListResponse
+    DeleteFirewallRuleEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFirewallRuleEntry, name: "member"))
+    DeleteFirewallRuleEntry.add_member(:firewall_rule_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallRuleGroupId", traits: {"smithy.api#required" => {}}))
+    DeleteFirewallRuleEntry.add_member(:firewall_domain_list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallDomainListId"))
+    DeleteFirewallRuleEntry.add_member(:firewall_threat_protection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallThreatProtectionId"))
+    DeleteFirewallRuleEntry.add_member(:qtype, ::Smithy::Schema::Shapes::MemberShape.new(target: Qtype, name: "Qtype"))
+    DeleteFirewallRuleEntry.type = Types::DeleteFirewallRuleEntry
     DeleteFirewallRuleGroupRequest.add_member(:firewall_rule_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallRuleGroupId", traits: {"smithy.api#required" => {}}))
     DeleteFirewallRuleGroupRequest.type = Types::DeleteFirewallRuleGroupRequest
     DeleteFirewallRuleGroupResponse.add_member(:firewall_rule_group, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleGroup, name: "FirewallRuleGroup"))
@@ -450,11 +554,21 @@ module Aws::Route53Resolver
     DisassociateResolverRuleResponse.type = Types::DisassociateResolverRuleResponse
     DnsThreatProtection.add_member(:dga, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DGA", traits: {"smithy.api#enumValue" => "DGA"}))
     DnsThreatProtection.add_member(:dns_tunneling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DNS_TUNNELING", traits: {"smithy.api#enumValue" => "DNS_TUNNELING"}))
+    DnsThreatProtection.add_member(:dictionary_dga, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DICTIONARY_DGA", traits: {"smithy.api#enumValue" => "DICTIONARY_DGA"}))
+    DnsThreatProtectionRuleTypeConfig.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsThreatProtectionRuleTypeValue, name: "Value", traits: {"smithy.api#required" => {}}))
+    DnsThreatProtectionRuleTypeConfig.add_member(:confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "ConfidenceThreshold", traits: {"smithy.api#required" => {}}))
+    DnsThreatProtectionRuleTypeConfig.type = Types::DnsThreatProtectionRuleTypeConfig
+    DomainListType.add_member(:threat, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THREAT", traits: {"smithy.api#enumValue" => "THREAT"}))
+    DomainListType.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTENT", traits: {"smithy.api#enumValue" => "CONTENT"}))
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterName, name: "Name"))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "Values"))
     Filter.type = Types::Filter
     FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     Filters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
+    FirewallAdvancedContentCategoryConfig.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallAdvancedContentCategoryValue, name: "Category", traits: {"smithy.api#required" => {}}))
+    FirewallAdvancedContentCategoryConfig.type = Types::FirewallAdvancedContentCategoryConfig
+    FirewallAdvancedThreatCategoryConfig.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallAdvancedThreatCategoryValue, name: "Category", traits: {"smithy.api#required" => {}}))
+    FirewallAdvancedThreatCategoryConfig.type = Types::FirewallAdvancedThreatCategoryConfig
     FirewallConfig.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Id"))
     FirewallConfig.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId"))
     FirewallConfig.add_member(:owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "OwnerId"))
@@ -472,12 +586,16 @@ module Aws::Route53Resolver
     FirewallDomainList.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatorRequestId, name: "CreatorRequestId"))
     FirewallDomainList.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Rfc3339TimeString, name: "CreationTime"))
     FirewallDomainList.add_member(:modification_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Rfc3339TimeString, name: "ModificationTime"))
+    FirewallDomainList.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "Category"))
+    FirewallDomainList.add_member(:managed_list_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainListType, name: "ManagedListType"))
     FirewallDomainList.type = Types::FirewallDomainList
     FirewallDomainListMetadata.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Id"))
     FirewallDomainListMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     FirewallDomainListMetadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     FirewallDomainListMetadata.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatorRequestId, name: "CreatorRequestId"))
     FirewallDomainListMetadata.add_member(:managed_owner_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServicePrinciple, name: "ManagedOwnerName"))
+    FirewallDomainListMetadata.add_member(:managed_list_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainListType, name: "ManagedListType"))
+    FirewallDomainListMetadata.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "Category"))
     FirewallDomainListMetadata.type = Types::FirewallDomainListMetadata
     FirewallDomainListMetadataList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallDomainListMetadata, name: "member"))
     FirewallDomainListStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
@@ -511,6 +629,9 @@ module Aws::Route53Resolver
     FirewallRule.add_member(:qtype, ::Smithy::Schema::Shapes::MemberShape.new(target: Qtype, name: "Qtype"))
     FirewallRule.add_member(:dns_threat_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsThreatProtection, name: "DnsThreatProtection"))
     FirewallRule.add_member(:confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "ConfidenceThreshold"))
+    FirewallRule.add_member(:firewall_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleType, name: "FirewallRuleType"))
+    FirewallRule.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleStatus, name: "Status"))
+    FirewallRule.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleStatusMessage, name: "StatusMessage"))
     FirewallRule.type = Types::FirewallRule
     FirewallRuleGroup.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Id"))
     FirewallRuleGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
@@ -553,6 +674,18 @@ module Aws::Route53Resolver
     FirewallRuleGroupStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
     FirewallRuleGroupStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     FirewallRuleGroupStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    FirewallRuleType.add_member(:partner_threat_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerThreatProtectionConfig, name: "PartnerThreatProtection"))
+    FirewallRuleType.add_member(:firewall_advanced_content_category, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallAdvancedContentCategoryConfig, name: "FirewallAdvancedContentCategory"))
+    FirewallRuleType.add_member(:firewall_advanced_threat_category, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallAdvancedThreatCategoryConfig, name: "FirewallAdvancedThreatCategory"))
+    FirewallRuleType.add_member(:dns_threat_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsThreatProtectionRuleTypeConfig, name: "DnsThreatProtection"))
+    FirewallRuleType.type = Types::FirewallRuleType
+    FirewallRuleTypeDefinition.add_member(:rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTypeName, name: "RuleType"))
+    FirewallRuleTypeDefinition.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTypeValue, name: "Value"))
+    FirewallRuleTypeDefinition.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "DisplayName"))
+    FirewallRuleTypeDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTypeDescription, name: "Description"))
+    FirewallRuleTypeDefinition.add_member(:subscription_info, ::Smithy::Schema::Shapes::MemberShape.new(target: SubscriptionInfo, name: "SubscriptionInfo"))
+    FirewallRuleTypeDefinition.type = Types::FirewallRuleTypeDefinition
+    FirewallRuleTypeDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleTypeDefinition, name: "member"))
     FirewallRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRule, name: "member"))
     GetFirewallConfigRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     GetFirewallConfigRequest.type = Types::GetFirewallConfigRequest
@@ -651,6 +784,7 @@ module Aws::Route53Resolver
     IpAddressResponse.type = Types::IpAddressResponse
     IpAddressStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Creating", traits: {"smithy.api#enumValue" => "CREATING"}))
     IpAddressStatus.add_member(:failed_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FailedCreation", traits: {"smithy.api#enumValue" => "FAILED_CREATION"}))
+    IpAddressStatus.add_member(:failed_creation_insufficient_ec2_capacity_in_outpost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FailedCreationInsufficientEC2CapacityInOutpost", traits: {"smithy.api#enumValue" => "FAILED_CREATION_INSUFFICIENT_EC2_CAPACITY_IN_OUTPOST"}))
     IpAddressStatus.add_member(:attaching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Attaching", traits: {"smithy.api#enumValue" => "ATTACHING"}))
     IpAddressStatus.add_member(:attached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Attached", traits: {"smithy.api#enumValue" => "ATTACHED"}))
     IpAddressStatus.add_member(:remap_detaching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RemapDetaching", traits: {"smithy.api#enumValue" => "REMAP_DETACHING"}))
@@ -707,6 +841,13 @@ module Aws::Route53Resolver
     ListFirewallRuleGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListFirewallRuleGroupsResponse.add_member(:firewall_rule_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleGroupMetadataList, name: "FirewallRuleGroups"))
     ListFirewallRuleGroupsResponse.type = Types::ListFirewallRuleGroupsResponse
+    ListFirewallRuleTypesRequest.add_member(:rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTypeName, name: "RuleType"))
+    ListFirewallRuleTypesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListFirewallRuleTypesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListFirewallRuleTypesRequest.type = Types::ListFirewallRuleTypesRequest
+    ListFirewallRuleTypesResponse.add_member(:firewall_rule_types, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleTypeDefinitions, name: "FirewallRuleTypes"))
+    ListFirewallRuleTypesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListFirewallRuleTypesResponse.type = Types::ListFirewallRuleTypesResponse
     ListFirewallRulesRequest.add_member(:firewall_rule_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallRuleGroupId", traits: {"smithy.api#required" => {}}))
     ListFirewallRulesRequest.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "Priority"))
     ListFirewallRulesRequest.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "Action"))
@@ -819,6 +960,8 @@ module Aws::Route53Resolver
     OutpostResolverStatus.add_member(:action_needed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTION_NEEDED", traits: {"smithy.api#enumValue" => "ACTION_NEEDED"}))
     OutpostResolverStatus.add_member(:failed_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_CREATION", traits: {"smithy.api#enumValue" => "FAILED_CREATION"}))
     OutpostResolverStatus.add_member(:failed_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED_DELETION", traits: {"smithy.api#enumValue" => "FAILED_DELETION"}))
+    PartnerThreatProtectionConfig.add_member(:partner, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerValue, name: "Partner", traits: {"smithy.api#required" => {}}))
+    PartnerThreatProtectionConfig.type = Types::PartnerThreatProtectionConfig
     Protocol.add_member(:doh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOH", traits: {"smithy.api#enumValue" => "DoH"}))
     Protocol.add_member(:do53, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DO53", traits: {"smithy.api#enumValue" => "Do53"}))
     Protocol.add_member(:dohfips, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOHFIPS", traits: {"smithy.api#enumValue" => "DoH-FIPS"}))
@@ -878,6 +1021,10 @@ module Aws::Route53Resolver
     ResolverEndpoint.add_member(:preferred_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OutpostInstanceType, name: "PreferredInstanceType"))
     ResolverEndpoint.add_member(:resolver_endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolverEndpointType, name: "ResolverEndpointType"))
     ResolverEndpoint.add_member(:protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolList, name: "Protocols"))
+    ResolverEndpoint.add_member(:rni_enhanced_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RniEnhancedMetricsEnabled, name: "RniEnhancedMetricsEnabled"))
+    ResolverEndpoint.add_member(:target_name_server_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNameServerMetricsEnabled, name: "TargetNameServerMetricsEnabled"))
+    ResolverEndpoint.add_member(:dns64_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Dns64Enabled, name: "Dns64Enabled"))
+    ResolverEndpoint.add_member(:ipv6_internet_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6InternetAccessEnabled, name: "Ipv6InternetAccessEnabled"))
     ResolverEndpoint.type = Types::ResolverEndpoint
     ResolverEndpointDirection.add_member(:inbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Inbound", traits: {"smithy.api#enumValue" => "INBOUND"}))
     ResolverEndpointDirection.add_member(:outbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Outbound", traits: {"smithy.api#enumValue" => "OUTBOUND"}))
@@ -988,6 +1135,9 @@ module Aws::Route53Resolver
     ShareStatus.add_member(:shared_by_me, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SharedByMe", traits: {"smithy.api#enumValue" => "SHARED_BY_ME"}))
     SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ascending", traits: {"smithy.api#enumValue" => "ASCENDING"}))
     SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Descending", traits: {"smithy.api#enumValue" => "DESCENDING"}))
+    SubscriptionInfo.add_member(:vendor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VendorName, name: "VendorName"))
+    SubscriptionInfo.add_member(:product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductId, name: "ProductId"))
+    SubscriptionInfo.type = Types::SubscriptionInfo
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
@@ -1026,6 +1176,23 @@ module Aws::Route53Resolver
     UpdateFirewallDomainsResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallDomainListStatus, name: "Status"))
     UpdateFirewallDomainsResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "StatusMessage"))
     UpdateFirewallDomainsResponse.type = Types::UpdateFirewallDomainsResponse
+    UpdateFirewallRuleEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFirewallRuleEntry, name: "member"))
+    UpdateFirewallRuleEntry.add_member(:firewall_rule_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallRuleGroupId", traits: {"smithy.api#required" => {}}))
+    UpdateFirewallRuleEntry.add_member(:firewall_domain_list_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallDomainListId"))
+    UpdateFirewallRuleEntry.add_member(:firewall_threat_protection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallThreatProtectionId"))
+    UpdateFirewallRuleEntry.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "Priority"))
+    UpdateFirewallRuleEntry.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "Action"))
+    UpdateFirewallRuleEntry.add_member(:block_response, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockResponse, name: "BlockResponse"))
+    UpdateFirewallRuleEntry.add_member(:block_override_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockOverrideDomain, name: "BlockOverrideDomain"))
+    UpdateFirewallRuleEntry.add_member(:block_override_dns_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockOverrideDnsType, name: "BlockOverrideDnsType"))
+    UpdateFirewallRuleEntry.add_member(:block_override_ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockOverrideTtl, name: "BlockOverrideTtl"))
+    UpdateFirewallRuleEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    UpdateFirewallRuleEntry.add_member(:firewall_domain_redirection_action, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallDomainRedirectionAction, name: "FirewallDomainRedirectionAction"))
+    UpdateFirewallRuleEntry.add_member(:qtype, ::Smithy::Schema::Shapes::MemberShape.new(target: Qtype, name: "Qtype"))
+    UpdateFirewallRuleEntry.add_member(:dns_threat_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsThreatProtection, name: "DnsThreatProtection"))
+    UpdateFirewallRuleEntry.add_member(:confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "ConfidenceThreshold"))
+    UpdateFirewallRuleEntry.add_member(:firewall_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleType, name: "FirewallRuleType"))
+    UpdateFirewallRuleEntry.type = Types::UpdateFirewallRuleEntry
     UpdateFirewallRuleGroupAssociationRequest.add_member(:firewall_rule_group_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "FirewallRuleGroupAssociationId", traits: {"smithy.api#required" => {}}))
     UpdateFirewallRuleGroupAssociationRequest.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "Priority"))
     UpdateFirewallRuleGroupAssociationRequest.add_member(:mutation_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: MutationProtectionStatus, name: "MutationProtection"))
@@ -1047,6 +1214,7 @@ module Aws::Route53Resolver
     UpdateFirewallRuleRequest.add_member(:qtype, ::Smithy::Schema::Shapes::MemberShape.new(target: Qtype, name: "Qtype"))
     UpdateFirewallRuleRequest.add_member(:dns_threat_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsThreatProtection, name: "DnsThreatProtection"))
     UpdateFirewallRuleRequest.add_member(:confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "ConfidenceThreshold"))
+    UpdateFirewallRuleRequest.add_member(:firewall_rule_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRuleType, name: "FirewallRuleType"))
     UpdateFirewallRuleRequest.type = Types::UpdateFirewallRuleRequest
     UpdateFirewallRuleResponse.add_member(:firewall_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: FirewallRule, name: "FirewallRule"))
     UpdateFirewallRuleResponse.type = Types::UpdateFirewallRuleResponse
@@ -1076,6 +1244,10 @@ module Aws::Route53Resolver
     UpdateResolverEndpointRequest.add_member(:resolver_endpoint_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolverEndpointType, name: "ResolverEndpointType"))
     UpdateResolverEndpointRequest.add_member(:update_ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateIpAddresses, name: "UpdateIpAddresses"))
     UpdateResolverEndpointRequest.add_member(:protocols, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolList, name: "Protocols"))
+    UpdateResolverEndpointRequest.add_member(:rni_enhanced_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RniEnhancedMetricsEnabled, name: "RniEnhancedMetricsEnabled"))
+    UpdateResolverEndpointRequest.add_member(:target_name_server_metrics_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetNameServerMetricsEnabled, name: "TargetNameServerMetricsEnabled"))
+    UpdateResolverEndpointRequest.add_member(:dns64_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Dns64Enabled, name: "Dns64Enabled"))
+    UpdateResolverEndpointRequest.add_member(:ipv6_internet_access_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv6InternetAccessEnabled, name: "Ipv6InternetAccessEnabled"))
     UpdateResolverEndpointRequest.type = Types::UpdateResolverEndpointRequest
     UpdateResolverEndpointResponse.add_member(:resolver_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolverEndpoint, name: "ResolverEndpoint"))
     UpdateResolverEndpointResponse.type = Types::UpdateResolverEndpointResponse
@@ -1094,7 +1266,7 @@ module Aws::Route53Resolver
       service.id = "com.amazonaws.route53resolver#Route53Resolver"
       service.name = "Route53Resolver"
       service.version = "2018-04-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Route53Resolver", "arnNamespace" => "route53resolver", "cloudFormationName" => "Route53Resolver", "cloudTrailEventSource" => "route53resolver.amazonaws.com", "endpointPrefix" => "route53resolver"}, "aws.auth#sigv4" => {"name" => "route53resolver"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Route 53 Resolver"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Route53Resolver", "arnNamespace" => "route53resolver", "cloudFormationName" => "Route53Resolver", "cloudTrailEventSource" => "route53resolver.amazonaws.com", "endpointPrefix" => "route53resolver"}, "aws.auth#sigv4" => {"name" => "route53resolver"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Route 53 Resolver", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-east-1"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-west-1"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53resolver-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://route53resolver.us-gov-east-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53resolver.us-gov-west-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53resolver-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://route53resolver.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://route53resolver.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
       service.add_operation(:associate_firewall_rule_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53resolver#AssociateFirewallRuleGroup"
         operation.name = "AssociateFirewallRuleGroup"
@@ -1151,6 +1323,42 @@ module Aws::Route53Resolver
         operation.errors << ResourceNotFoundException
         operation.errors << ResourceUnavailableException
         operation.errors << ThrottlingException
+        operation.traits = {}
+      end)
+      service.add_operation(:batch_create_firewall_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.route53resolver#BatchCreateFirewallRule"
+        operation.name = "BatchCreateFirewallRule"
+        operation.input = BatchCreateFirewallRuleRequest
+        operation.output = BatchCreateFirewallRuleResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceErrorException
+        operation.errors << LimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:batch_delete_firewall_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.route53resolver#BatchDeleteFirewallRule"
+        operation.name = "BatchDeleteFirewallRule"
+        operation.input = BatchDeleteFirewallRuleRequest
+        operation.output = BatchDeleteFirewallRuleResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceErrorException
+        operation.errors << LimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:batch_update_firewall_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.route53resolver#BatchUpdateFirewallRule"
+        operation.name = "BatchUpdateFirewallRule"
+        operation.input = BatchUpdateFirewallRuleRequest
+        operation.output = BatchUpdateFirewallRuleResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceErrorException
+        operation.errors << LimitExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:create_firewall_domain_list, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1331,6 +1539,7 @@ module Aws::Route53Resolver
         operation.output = DeleteResolverRuleResponse
         operation.errors << InternalServiceErrorException
         operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
         operation.errors << ResourceInUseException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
@@ -1382,6 +1591,7 @@ module Aws::Route53Resolver
         operation.output = DisassociateResolverRuleResponse
         operation.errors << InternalServiceErrorException
         operation.errors << InvalidParameterException
+        operation.errors << InvalidRequestException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {}
@@ -1637,6 +1847,18 @@ module Aws::Route53Resolver
         operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::ListFirewallRuleGroups.new
+      end)
+      service.add_operation(:list_firewall_rule_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.route53resolver#ListFirewallRuleTypes"
+        operation.name = "ListFirewallRuleTypes"
+        operation.input = ListFirewallRuleTypesRequest
+        operation.output = ListFirewallRuleTypesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceErrorException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListFirewallRuleTypes.new
       end)
       service.add_operation(:list_firewall_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53resolver#ListFirewallRules"

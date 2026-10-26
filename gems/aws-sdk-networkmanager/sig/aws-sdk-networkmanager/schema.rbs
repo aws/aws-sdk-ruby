@@ -25,6 +25,8 @@ module Aws::NetworkManager
     AttachmentErrorList: ListShape
     AttachmentId: StringShape
     AttachmentList: ListShape
+    AttachmentRoutingPolicyAssociationSummary: StructureShape
+    AttachmentRoutingPolicyAssociationsList: ListShape
     AttachmentState: EnumShape
     AttachmentType: EnumShape
     Bandwidth: StructureShape
@@ -86,6 +88,8 @@ module Aws::NetworkManager
     CoreNetworkPolicyException: StructureShape
     CoreNetworkPolicyVersion: StructureShape
     CoreNetworkPolicyVersionList: ListShape
+    CoreNetworkRoutingInformation: StructureShape
+    CoreNetworkRoutingInformationList: ListShape
     CoreNetworkSegment: StructureShape
     CoreNetworkSegmentEdgeIdentifier: StructureShape
     CoreNetworkSegmentList: ListShape
@@ -98,6 +102,8 @@ module Aws::NetworkManager
     CreateConnectPeerResponse: StructureShape
     CreateConnectionRequest: StructureShape
     CreateConnectionResponse: StructureShape
+    CreateCoreNetworkPrefixListAssociationRequest: StructureShape
+    CreateCoreNetworkPrefixListAssociationResponse: StructureShape
     CreateCoreNetworkRequest: StructureShape
     CreateCoreNetworkResponse: StructureShape
     CreateDeviceRequest: StructureShape
@@ -132,6 +138,8 @@ module Aws::NetworkManager
     DeleteConnectionResponse: StructureShape
     DeleteCoreNetworkPolicyVersionRequest: StructureShape
     DeleteCoreNetworkPolicyVersionResponse: StructureShape
+    DeleteCoreNetworkPrefixListAssociationRequest: StructureShape
+    DeleteCoreNetworkPrefixListAssociationResponse: StructureShape
     DeleteCoreNetworkRequest: StructureShape
     DeleteCoreNetworkResponse: StructureShape
     DeleteDeviceRequest: StructureShape
@@ -252,12 +260,18 @@ module Aws::NetworkManager
     LinkIdList: ListShape
     LinkList: ListShape
     LinkState: EnumShape
+    ListAttachmentRoutingPolicyAssociationsRequest: StructureShape
+    ListAttachmentRoutingPolicyAssociationsResponse: StructureShape
     ListAttachmentsRequest: StructureShape
     ListAttachmentsResponse: StructureShape
     ListConnectPeersRequest: StructureShape
     ListConnectPeersResponse: StructureShape
     ListCoreNetworkPolicyVersionsRequest: StructureShape
     ListCoreNetworkPolicyVersionsResponse: StructureShape
+    ListCoreNetworkPrefixListAssociationsRequest: StructureShape
+    ListCoreNetworkPrefixListAssociationsResponse: StructureShape
+    ListCoreNetworkRoutingInformationRequest: StructureShape
+    ListCoreNetworkRoutingInformationResponse: StructureShape
     ListCoreNetworksRequest: StructureShape
     ListCoreNetworksResponse: StructureShape
     ListOrganizationServiceAccessStatusRequest: StructureShape
@@ -299,8 +313,13 @@ module Aws::NetworkManager
     PeeringState: EnumShape
     PeeringType: EnumShape
     PermissionsErrorContext: StructureShape
+    PrefixListArn: StringShape
+    PrefixListAssociation: StructureShape
+    PrefixListAssociationList: ListShape
     ProposedNetworkFunctionGroupChange: StructureShape
     ProposedSegmentChange: StructureShape
+    PutAttachmentRoutingPolicyLabelRequest: StructureShape
+    PutAttachmentRoutingPolicyLabelResponse: StructureShape
     PutCoreNetworkPolicyRequest: StructureShape
     PutCoreNetworkPolicyResponse: StructureShape
     PutResourcePolicyRequest: StructureShape
@@ -314,6 +333,8 @@ module Aws::NetworkManager
     RejectAttachmentResponse: StructureShape
     Relationship: StructureShape
     RelationshipList: ListShape
+    RemoveAttachmentRoutingPolicyLabelRequest: StructureShape
+    RemoveAttachmentRoutingPolicyLabelResponse: StructureShape
     ResourceArn: StringShape
     ResourceNotFoundException: StructureShape
     RestoreCoreNetworkPolicyVersionRequest: StructureShape
@@ -333,6 +354,10 @@ module Aws::NetworkManager
     RouteTableType: EnumShape
     RouteType: EnumShape
     RouteTypeList: ListShape
+    RoutingInformationNextHop: StructureShape
+    RoutingPolicyAssociationDetail: StructureShape
+    RoutingPolicyAssociationDetailsList: ListShape
+    RoutingPolicyDirection: EnumShape
     SLRDeploymentStatus: StringShape
     SegmentActionServiceInsertion: EnumShape
     SendViaMode: EnumShape

@@ -51,6 +51,11 @@ module Aws::BedrockDataAutomationRuntime
       LIVE: String
     end
 
+    module CustomOutputStatus
+      MATCH: String
+      NO_MATCH: String
+    end
+
     class DataAutomationConfiguration
       include Smithy::Schema::Structure
 
@@ -112,6 +117,9 @@ module Aws::BedrockDataAutomationRuntime
         ?error_type: String,
         ?error_message: String,
         ?output_configuration: Types::OutputConfiguration,
+        ?job_submission_time: Time,
+        ?job_completion_time: Time,
+        ?job_duration_in_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -119,6 +127,9 @@ module Aws::BedrockDataAutomationRuntime
       attr_accessor error_type: String?
       attr_accessor error_message: String?
       attr_accessor output_configuration: Types::OutputConfiguration?
+      attr_accessor job_submission_time: Time?
+      attr_accessor job_completion_time: Time?
+      attr_accessor job_duration_in_seconds: Integer?
     end
 
     class InputConfiguration
@@ -183,6 +194,42 @@ module Aws::BedrockDataAutomationRuntime
       attr_accessor invocation_arn: String?
     end
 
+    class InvokeDataAutomationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_configuration: Types::SyncInputConfiguration,
+        ?data_automation_configuration: Types::DataAutomationConfiguration,
+        ?blueprints: Array[Types::Blueprint],
+        ?data_automation_profile_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?output_configuration: Types::OutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_configuration: Types::SyncInputConfiguration?
+      attr_accessor data_automation_configuration: Types::DataAutomationConfiguration?
+      attr_accessor blueprints: Array[Types::Blueprint]?
+      attr_accessor data_automation_profile_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor output_configuration: Types::OutputConfiguration?
+    end
+
+    class InvokeDataAutomationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_configuration: Types::OutputConfiguration,
+        ?semantic_modality: String,
+        ?output_segments: Array[Types::OutputSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_configuration: Types::OutputConfiguration?
+      attr_accessor semantic_modality: String?
+      attr_accessor output_segments: Array[Types::OutputSegment]?
+    end
+
     class ListTagsForResourceRequest
       include Smithy::Schema::Structure
 
@@ -227,6 +274,21 @@ module Aws::BedrockDataAutomationRuntime
       attr_accessor s3_uri: String?
     end
 
+    class OutputSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_output_status: String,
+        ?custom_output: String,
+        ?standard_output: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_output_status: String?
+      attr_accessor custom_output: String?
+      attr_accessor standard_output: String?
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -238,6 +300,13 @@ module Aws::BedrockDataAutomationRuntime
       attr_accessor message: String?
     end
 
+    module SemanticModality
+      DOCUMENT: String
+      IMAGE: String
+      AUDIO: String
+      VIDEO: String
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -247,6 +316,30 @@ module Aws::BedrockDataAutomationRuntime
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SyncInputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bytes: String,
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes: String?
+      attr_accessor s3_uri: String?
     end
 
     class Tag

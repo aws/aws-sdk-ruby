@@ -47,6 +47,15 @@ module Aws::Bedrock
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _BatchDeleteAdvancedPromptOptimizationJobResponse
+      include Smithy::Client::_Response[Types::BatchDeleteAdvancedPromptOptimizationJobResponse]
+      def errors: () -> Array[Types::BatchDeleteAdvancedPromptOptimizationJobError]?
+      def advanced_prompt_optimization_jobs: () -> Array[Types::BatchDeleteAdvancedPromptOptimizationJobItem]?
+    end
+    def batch_delete_advanced_prompt_optimization_job: (
+      ?job_identifiers: Array[String]
+    ) -> _BatchDeleteAdvancedPromptOptimizationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteAdvancedPromptOptimizationJobResponse
+
     interface _BatchDeleteEvaluationJobResponse
       include Smithy::Client::_Response[Types::BatchDeleteEvaluationJobResponse]
       def errors: () -> Array[Types::BatchDeleteEvaluationJobError]?
@@ -63,6 +72,41 @@ module Aws::Bedrock
       ?policy_arn: String,
       ?build_workflow_id: String
     ) -> _CancelAutomatedReasoningPolicyBuildWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelAutomatedReasoningPolicyBuildWorkflowResponse
+
+    interface _CreateAdvancedPromptOptimizationJobResponse
+      include Smithy::Client::_Response[Types::CreateAdvancedPromptOptimizationJobResponse]
+      def job_arn: () -> String?
+    end
+    def create_advanced_prompt_optimization_job: (
+      ?job_name: String,
+      ?job_description: String,
+      ?client_token: String,
+      ?input_config: {
+        s3_uri: String
+      },
+      ?output_config: {
+        s3_uri: String
+      },
+      ?encryption_key_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?model_configurations: Array[
+        {
+          model_id: String,
+          inference_config: {
+            max_tokens: Integer,
+            temperature: Float,
+            top_p: untyped,
+            stop_sequences: Array[String]
+          },
+          additional_model_request_fields: Hash[String, Smithy::Schema::document]
+        }
+      ]
+    ) -> _CreateAdvancedPromptOptimizationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAdvancedPromptOptimizationJobResponse
 
     interface _CreateAutomatedReasoningPolicyResponse
       include Smithy::Client::_Response[Types::CreateAutomatedReasoningPolicyResponse]
@@ -107,6 +151,7 @@ module Aws::Bedrock
           }
         ]
       },
+      ?kms_key_id: String,
       ?tags: Array[
         {
           key: String,
@@ -159,6 +204,11 @@ module Aws::Bedrock
       ?model_source_config: {
         s3_data_source: {
           s3_uri: String
+        }
+      },
+      ?custom_model_data_source: {
+        model_package_arn_data_source: {
+          model_package_arn: String
         }
       },
       ?model_kms_key_arn: String,
@@ -700,6 +750,23 @@ module Aws::Bedrock
             teacher_model_identifier: String,
             max_response_length_for_inference: Integer
           }
+        },
+        rft_config: {
+          grader_config: {
+            lambda_grader: {
+              lambda_arn: String
+            }
+          },
+          hyper_parameters: {
+            epoch_count: Integer,
+            batch_size: Integer,
+            learning_rate: Float,
+            max_prompt_length: Integer,
+            training_sample_per_prompt: Integer,
+            inference_max_tokens: Integer,
+            reasoning_effort: String,
+            eval_interval: Integer
+          }
         }
       }
     ) -> _CreateModelCustomizationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelCustomizationJobResponse
@@ -770,7 +837,8 @@ module Aws::Bedrock
           key: String,
           value: String
         }
-      ]
+      ],
+      ?model_invocation_type: String
     ) -> _CreateModelInvocationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelInvocationJobResponse
 
     interface _CreatePromptRouterResponse
@@ -822,7 +890,8 @@ module Aws::Bedrock
       include Smithy::Client::_Response[Types::DeleteAutomatedReasoningPolicyResponse]
     end
     def delete_automated_reasoning_policy: (
-      ?policy_arn: String
+      ?policy_arn: String,
+      ?force: bool
     ) -> _DeleteAutomatedReasoningPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutomatedReasoningPolicyResponse
 
     interface _DeleteAutomatedReasoningPolicyBuildWorkflowResponse
@@ -856,6 +925,13 @@ module Aws::Bedrock
     def delete_custom_model_deployment: (
       ?custom_model_deployment_identifier: String
     ) -> _DeleteCustomModelDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomModelDeploymentResponse
+
+    interface _DeleteEnforcedGuardrailConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteEnforcedGuardrailConfigurationResponse]
+    end
+    def delete_enforced_guardrail_configuration: (
+      ?config_id: String
+    ) -> _DeleteEnforcedGuardrailConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnforcedGuardrailConfigurationResponse
 
     interface _DeleteFoundationModelAgreementResponse
       include Smithy::Client::_Response[Types::DeleteFoundationModelAgreementResponse]
@@ -912,6 +988,13 @@ module Aws::Bedrock
       ?provisioned_model_id: String
     ) -> _DeleteProvisionedModelThroughputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProvisionedModelThroughputResponse
 
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
     interface _DeregisterMarketplaceModelEndpointResponse
       include Smithy::Client::_Response[Types::DeregisterMarketplaceModelEndpointResponse]
     end
@@ -927,6 +1010,31 @@ module Aws::Bedrock
       ?policy_arn: String
     ) -> _ExportAutomatedReasoningPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportAutomatedReasoningPolicyVersionResponse
 
+    interface _GetAccountDataRetentionResponse
+      include Smithy::Client::_Response[Types::GetAccountDataRetentionResponse]
+      def mode: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_account_data_retention: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountDataRetentionResponse
+
+    interface _GetAdvancedPromptOptimizationJobResponse
+      include Smithy::Client::_Response[Types::GetAdvancedPromptOptimizationJobResponse]
+      def job_arn: () -> String?
+      def job_name: () -> String?
+      def job_description: () -> String?
+      def job_status: () -> String?
+      def input_config: () -> Types::AdvancedPromptOptimizationInputConfig?
+      def output_config: () -> Types::AdvancedPromptOptimizationOutputConfig?
+      def encryption_key_arn: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def failure_message: () -> String?
+      def model_configurations: () -> Array[Types::ModelConfiguration]?
+    end
+    def get_advanced_prompt_optimization_job: (
+      ?job_identifier: String
+    ) -> _GetAdvancedPromptOptimizationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdvancedPromptOptimizationJobResponse
+
     interface _GetAutomatedReasoningPolicyResponse
       include Smithy::Client::_Response[Types::GetAutomatedReasoningPolicyResponse]
       def policy_arn: () -> String?
@@ -935,6 +1043,7 @@ module Aws::Bedrock
       def policy_id: () -> String?
       def description: () -> String?
       def definition_hash: () -> String?
+      def kms_key_arn: () -> String?
       def created_at: () -> Time?
       def updated_at: () -> Time?
     end
@@ -982,7 +1091,8 @@ module Aws::Bedrock
     def get_automated_reasoning_policy_build_workflow_result_assets: (
       ?policy_arn: String,
       ?build_workflow_id: String,
-      ?asset_type: String
+      ?asset_type: String,
+      ?asset_id: String
     ) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse
 
     interface _GetAutomatedReasoningPolicyNextScenarioResponse
@@ -1047,6 +1157,7 @@ module Aws::Bedrock
       def created_at: () -> Time?
       def status: () -> String?
       def description: () -> String?
+      def update_details: () -> Types::CustomModelDeploymentUpdateDetails?
       def failure_message: () -> String?
       def last_updated_at: () -> Time?
     end
@@ -1249,6 +1360,11 @@ module Aws::Bedrock
       def vpc_config: () -> Types::VpcConfig?
       def timeout_duration_in_hours: () -> Integer?
       def job_expiration_time: () -> Time?
+      def model_invocation_type: () -> String?
+      def total_record_count: () -> Integer?
+      def processed_record_count: () -> Integer?
+      def success_record_count: () -> Integer?
+      def error_record_count: () -> Integer?
     end
     def get_model_invocation_job: (
       ?job_identifier: String
@@ -1297,11 +1413,31 @@ module Aws::Bedrock
       ?provisioned_model_id: String
     ) -> _GetProvisionedModelThroughputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProvisionedModelThroughputResponse
 
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def resource_policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
     interface _GetUseCaseForModelAccessResponse
       include Smithy::Client::_Response[Types::GetUseCaseForModelAccessResponse]
       def form_data: () -> String?
     end
     def get_use_case_for_model_access: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUseCaseForModelAccessResponse
+
+    interface _ListAdvancedPromptOptimizationJobsResponse
+      include Smithy::Client::_Response[Types::ListAdvancedPromptOptimizationJobsResponse]
+      def job_summaries: () -> Array[Types::AdvancedPromptOptimizationJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_advanced_prompt_optimization_jobs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListAdvancedPromptOptimizationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAdvancedPromptOptimizationJobsResponse
 
     interface _ListAutomatedReasoningPoliciesResponse
       include Smithy::Client::_Response[Types::ListAutomatedReasoningPoliciesResponse]
@@ -1383,6 +1519,15 @@ module Aws::Bedrock
       ?is_owned: bool,
       ?model_status: String
     ) -> _ListCustomModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomModelsResponse
+
+    interface _ListEnforcedGuardrailsConfigurationResponse
+      include Smithy::Client::_Response[Types::ListEnforcedGuardrailsConfigurationResponse]
+      def guardrails_config: () -> Array[Types::AccountEnforcedGuardrailOutputConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_enforced_guardrails_configuration: (
+      ?next_token: String
+    ) -> _ListEnforcedGuardrailsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnforcedGuardrailsConfigurationResponse
 
     interface _ListEvaluationJobsResponse
       include Smithy::Client::_Response[Types::ListEvaluationJobsResponse]
@@ -1572,6 +1717,37 @@ module Aws::Bedrock
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _PutAccountDataRetentionResponse
+      include Smithy::Client::_Response[Types::PutAccountDataRetentionResponse]
+      def mode: () -> String?
+      def updated_at: () -> Time?
+    end
+    def put_account_data_retention: (
+      ?mode: String
+    ) -> _PutAccountDataRetentionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountDataRetentionResponse
+
+    interface _PutEnforcedGuardrailConfigurationResponse
+      include Smithy::Client::_Response[Types::PutEnforcedGuardrailConfigurationResponse]
+      def config_id: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+    end
+    def put_enforced_guardrail_configuration: (
+      ?config_id: String,
+      ?guardrail_inference_config: {
+        guardrail_identifier: String,
+        guardrail_version: String,
+        selective_content_guarding: {
+          system: String,
+          messages: untyped
+        },
+        model_enforcement: {
+          included_models: Array[String],
+          excluded_models: Array[String]
+        }
+      }
+    ) -> _PutEnforcedGuardrailConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEnforcedGuardrailConfigurationResponse
+
     interface _PutModelInvocationLoggingConfigurationResponse
       include Smithy::Client::_Response[Types::PutModelInvocationLoggingConfigurationResponse]
     end
@@ -1589,9 +1765,19 @@ module Aws::Bedrock
         text_data_delivery_enabled: bool,
         image_data_delivery_enabled: untyped,
         embedding_data_delivery_enabled: untyped,
-        video_data_delivery_enabled: untyped
+        video_data_delivery_enabled: untyped,
+        audio_data_delivery_enabled: untyped
       }
     ) -> _PutModelInvocationLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutModelInvocationLoggingConfigurationResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def resource_arn: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?resource_policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
 
     interface _PutUseCaseForModelAccessResponse
       include Smithy::Client::_Response[Types::PutUseCaseForModelAccessResponse]
@@ -1729,6 +1915,27 @@ module Aws::Bedrock
                 }
               }
             ]
+          },
+          generate_fidelity_report_content: {
+            documents: Array[
+              {
+                document: untyped,
+                document_content_type: untyped,
+                document_name: untyped,
+                document_description: untyped
+              }
+            ]
+          },
+          iterative_refinement_content: {
+            documents: Array[
+              {
+                document: untyped,
+                document_content_type: untyped,
+                document_name: untyped,
+                document_description: untyped
+              }
+            ],
+            feedback: String
           }
         }
       }
@@ -1744,6 +1951,13 @@ module Aws::Bedrock
       ?test_case_ids: Array[String],
       ?client_request_token: String
     ) -> _StartAutomatedReasoningPolicyTestWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAutomatedReasoningPolicyTestWorkflowResponse
+
+    interface _StopAdvancedPromptOptimizationJobResponse
+      include Smithy::Client::_Response[Types::StopAdvancedPromptOptimizationJobResponse]
+    end
+    def stop_advanced_prompt_optimization_job: (
+      ?job_identifier: String
+    ) -> _StopAdvancedPromptOptimizationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAdvancedPromptOptimizationJobResponse
 
     interface _StopEvaluationJobResponse
       include Smithy::Client::_Response[Types::StopEvaluationJobResponse]
@@ -1933,6 +2147,15 @@ module Aws::Bedrock
       ?confidence_threshold: Float,
       ?client_request_token: String
     ) -> _UpdateAutomatedReasoningPolicyTestCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutomatedReasoningPolicyTestCaseResponse
+
+    interface _UpdateCustomModelDeploymentResponse
+      include Smithy::Client::_Response[Types::UpdateCustomModelDeploymentResponse]
+      def custom_model_deployment_arn: () -> String?
+    end
+    def update_custom_model_deployment: (
+      ?model_arn: String,
+      ?custom_model_deployment_identifier: String
+    ) -> _UpdateCustomModelDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomModelDeploymentResponse
 
     interface _UpdateGuardrailResponse
       include Smithy::Client::_Response[Types::UpdateGuardrailResponse]

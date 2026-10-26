@@ -19,12 +19,27 @@ module Aws::PinpointSMSVoiceV2
     AssociateOriginationIdentityResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#AssociateOriginationIdentityResult", name: "AssociateOriginationIdentityResult")
     AssociateProtectConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#AssociateProtectConfigurationRequest", name: "AssociateProtectConfigurationRequest")
     AssociateProtectConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#AssociateProtectConfigurationResult", name: "AssociateProtectConfigurationResult")
-    AttachmentBody = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.pinpointsmsvoicev2#AttachmentBody", name: "AttachmentBody", traits: {"smithy.api#length" => {"min" => 1, "max" => 1572864}})
+    AttachmentBody = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.pinpointsmsvoicev2#AttachmentBody", name: "AttachmentBody", traits: {"smithy.api#length" => {"min" => 1, "max" => 6990508}})
     AttachmentStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#AttachmentStatus", name: "AttachmentStatus", traits: {"smithy.api#enum" => [{"value" => "UPLOAD_IN_PROGRESS", "name" => "UPLOAD_IN_PROGRESS"}, {"value" => "UPLOAD_COMPLETE", "name" => "UPLOAD_COMPLETE"}, {"value" => "UPLOAD_FAILED", "name" => "UPLOAD_FAILED"}, {"value" => "DELETED", "name" => "DELETED"}]})
     AttachmentUploadErrorReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#AttachmentUploadErrorReason", name: "AttachmentUploadErrorReason", traits: {"smithy.api#enum" => [{"value" => "INTERNAL_ERROR", "name" => "INTERNAL_ERROR"}]})
     AttachmentUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#AttachmentUrl", name: "AttachmentUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^\\S+$"})
+    AvailablePhoneNumberList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#AvailablePhoneNumberList", name: "AvailablePhoneNumberList", traits: {"smithy.api#length" => {"max" => 10}})
+    CarrierLookupInputPhoneNumberType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CarrierLookupInputPhoneNumberType", name: "CarrierLookupInputPhoneNumberType", traits: {"smithy.api#length" => {"min" => 1, "max" => 40}, "smithy.api#pattern" => "^\\+[({\\s\\[]?[1-9][0-9(){}\\s\\[\\],.-]{1,38}$"})
+    CarrierLookupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CarrierLookupRequest", name: "CarrierLookupRequest")
+    CarrierLookupResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CarrierLookupResult", name: "CarrierLookupResult")
+    CarrierStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CarrierStatus", name: "CarrierStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "REJECTED", "name" => "REJECTED"}]})
+    CarrierStatusInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CarrierStatusInformation", name: "CarrierStatusInformation")
+    CarrierStatusInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CarrierStatusInformationList", name: "CarrierStatusInformationList")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[!-~]+$"})
     CloudWatchLogsDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CloudWatchLogsDestination", name: "CloudWatchLogsDestination")
+    ConditionOperator = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConditionOperator", name: "ConditionOperator", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9_]+$"})
+    ConditionValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConditionValue", name: "ConditionValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    ConditionValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConditionValueList", name: "ConditionValueList", traits: {"smithy.api#length" => {"max" => 20}})
+    ConditionalBehavior = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConditionalBehavior", name: "ConditionalBehavior")
+    ConditionalFieldBehavior = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConditionalFieldBehavior", name: "ConditionalFieldBehavior", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9_]+$"})
+    ConditionalRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConditionalRule", name: "ConditionalRule")
+    ConditionalRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConditionalRuleList", name: "ConditionalRuleList", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
+    ConditionalValidation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConditionalValidation", name: "ConditionalValidation")
     ConfigurationSetFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetFilter", name: "ConfigurationSetFilter")
     ConfigurationSetFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetFilterList", name: "ConfigurationSetFilterList", traits: {"smithy.api#length" => {"max" => 20}})
     ConfigurationSetFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetFilterName", name: "ConfigurationSetFilterName", traits: {"smithy.api#enum" => [{"value" => "event-destination-name", "name" => "EVENT_DESTINATION_NAME"}, {"value" => "matching-event-types", "name" => "MATCHING_EVENT_TYPES"}, {"value" => "default-message-type", "name" => "DEFAULT_MESSAGE_TYPE"}, {"value" => "default-sender-id", "name" => "DEFAULT_SENDER_ID"}, {"value" => "default-message-feedback-enabled", "name" => "DEFAULT_MESSAGE_FEEDBACK_ENABLED"}, {"value" => "protect-configuration-id", "name" => "PROTECT_CONFIGURATION_ID"}]})
@@ -34,20 +49,30 @@ module Aws::PinpointSMSVoiceV2
     ConfigurationSetNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetNameList", name: "ConfigurationSetNameList", traits: {"smithy.api#length" => {"max" => 5}})
     ConfigurationSetNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetNameOrArn", name: "ConfigurationSetNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client"})
-    ConflictExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConflictExceptionReason", name: "ConflictExceptionReason", traits: {"smithy.api#enum" => [{"value" => "CREATE_REGISTRATION_VERSION_NOT_ALLOWED", "name" => "CREATE_REGISTRATION_VERSION_NOT_ALLOWED"}, {"value" => "DELETION_PROTECTION_ENABLED", "name" => "DELETION_PROTECTION_ENABLED"}, {"value" => "DESTINATION_PHONE_NUMBER_NOT_VERIFIED", "name" => "DESTINATION_PHONE_NUMBER_NOT_VERIFIED"}, {"value" => "DESTINATION_PHONE_NUMBER_OPTED_OUT", "name" => "DESTINATION_PHONE_NUMBER_OPTED_OUT"}, {"value" => "DISASSOCIATE_REGISTRATION_NOT_ALLOWED", "name" => "DISASSOCIATE_REGISTRATION_NOT_ALLOWED"}, {"value" => "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED", "name" => "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED"}, {"value" => "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED", "name" => "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED"}, {"value" => "EVENT_DESTINATION_MISMATCH", "name" => "EVENT_DESTINATION_MISMATCH"}, {"value" => "KEYWORD_MISMATCH", "name" => "KEYWORD_MISMATCH"}, {"value" => "LAST_PHONE_NUMBER", "name" => "LAST_PHONE_NUMBER"}, {"value" => "NUMBER_CAPABILITIES_MISMATCH", "name" => "NUMBER_CAPABILITIES_MISMATCH"}, {"value" => "MESSAGE_TYPE_MISMATCH", "name" => "MESSAGE_TYPE_MISMATCH"}, {"value" => "NO_ORIGINATION_IDENTITIES_FOUND", "name" => "NO_ORIGINATION_IDENTITIES_FOUND"}, {"value" => "OPT_OUT_LIST_MISMATCH", "name" => "OPT_OUT_LIST_MISMATCH"}, {"value" => "PHONE_NUMBER_ASSOCIATED_TO_POOL", "name" => "PHONE_NUMBER_ASSOCIATED_TO_POOL"}, {"value" => "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION", "name" => "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION"}, {"value" => "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL", "name" => "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL"}, {"value" => "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION", "name" => "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION"}, {"value" => "REGISTRATION_ALREADY_SUBMITTED", "name" => "REGISTRATION_ALREADY_SUBMITTED"}, {"value" => "REGISTRATION_NOT_COMPLETE", "name" => "REGISTRATION_NOT_COMPLETE"}, {"value" => "SENDER_ID_ASSOCIATED_TO_POOL", "name" => "SENDER_ID_ASSOCIATED_TO_POOL"}, {"value" => "RESOURCE_ALREADY_EXISTS", "name" => "RESOURCE_ALREADY_EXISTS"}, {"value" => "RESOURCE_DELETION_NOT_ALLOWED", "name" => "RESOURCE_DELETION_NOT_ALLOWED"}, {"value" => "RESOURCE_MODIFICATION_NOT_ALLOWED", "name" => "RESOURCE_MODIFICATION_NOT_ALLOWED"}, {"value" => "RESOURCE_NOT_ACTIVE", "name" => "RESOURCE_NOT_ACTIVE"}, {"value" => "RESOURCE_NOT_EMPTY", "name" => "RESOURCE_NOT_EMPTY"}, {"value" => "SELF_MANAGED_OPT_OUTS_MISMATCH", "name" => "SELF_MANAGED_OPT_OUTS_MISMATCH"}, {"value" => "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED", "name" => "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED"}, {"value" => "TWO_WAY_CONFIG_MISMATCH", "name" => "TWO_WAY_CONFIG_MISMATCH"}, {"value" => "VERIFICATION_CODE_EXPIRED", "name" => "VERIFICATION_CODE_EXPIRED"}, {"value" => "VERIFICATION_ALREADY_COMPLETE", "name" => "VERIFICATION_ALREADY_COMPLETE"}, {"value" => "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT", "name" => "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT"}, {"value" => "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET", "name" => "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET"}, {"value" => "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET", "name" => "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET"}, {"value" => "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION", "name" => "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION"}, {"value" => "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE", "name" => "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE"}]})
+    ConflictExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ConflictExceptionReason", name: "ConflictExceptionReason", traits: {"smithy.api#enum" => [{"value" => "CREATE_REGISTRATION_VERSION_NOT_ALLOWED", "name" => "CREATE_REGISTRATION_VERSION_NOT_ALLOWED"}, {"value" => "DELETION_PROTECTION_ENABLED", "name" => "DELETION_PROTECTION_ENABLED"}, {"value" => "DESTINATION_PHONE_NUMBER_NOT_VERIFIED", "name" => "DESTINATION_PHONE_NUMBER_NOT_VERIFIED"}, {"value" => "DESTINATION_PHONE_NUMBER_OPTED_OUT", "name" => "DESTINATION_PHONE_NUMBER_OPTED_OUT"}, {"value" => "DISASSOCIATE_REGISTRATION_NOT_ALLOWED", "name" => "DISASSOCIATE_REGISTRATION_NOT_ALLOWED"}, {"value" => "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED", "name" => "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED"}, {"value" => "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED", "name" => "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED"}, {"value" => "EVENT_DESTINATION_MISMATCH", "name" => "EVENT_DESTINATION_MISMATCH"}, {"value" => "KEYWORD_MISMATCH", "name" => "KEYWORD_MISMATCH"}, {"value" => "LAST_PHONE_NUMBER", "name" => "LAST_PHONE_NUMBER"}, {"value" => "NUMBER_CAPABILITIES_MISMATCH", "name" => "NUMBER_CAPABILITIES_MISMATCH"}, {"value" => "MESSAGE_TYPE_MISMATCH", "name" => "MESSAGE_TYPE_MISMATCH"}, {"value" => "NO_ORIGINATION_IDENTITIES_FOUND", "name" => "NO_ORIGINATION_IDENTITIES_FOUND"}, {"value" => "OPT_OUT_LIST_MISMATCH", "name" => "OPT_OUT_LIST_MISMATCH"}, {"value" => "PHONE_NUMBER_ASSOCIATED_TO_POOL", "name" => "PHONE_NUMBER_ASSOCIATED_TO_POOL"}, {"value" => "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION", "name" => "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION"}, {"value" => "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL", "name" => "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL"}, {"value" => "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION", "name" => "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION"}, {"value" => "REGISTRATION_ALREADY_SUBMITTED", "name" => "REGISTRATION_ALREADY_SUBMITTED"}, {"value" => "REGISTRATION_NOT_COMPLETE", "name" => "REGISTRATION_NOT_COMPLETE"}, {"value" => "RESOURCE_ALREADY_ASSOCIATED", "name" => "RESOURCE_ALREADY_ASSOCIATED"}, {"value" => "SENDER_ID_ASSOCIATED_TO_POOL", "name" => "SENDER_ID_ASSOCIATED_TO_POOL"}, {"value" => "RCS_AGENT_ASSOCIATED_TO_POOL", "name" => "RCS_AGENT_ASSOCIATED_TO_POOL"}, {"value" => "POOL_ASSOCIATED_TO_NOTIFY_CONFIGURATION", "name" => "POOL_ASSOCIATED_TO_NOTIFY_CONFIGURATION"}, {"value" => "RESOURCE_ALREADY_EXISTS", "name" => "RESOURCE_ALREADY_EXISTS"}, {"value" => "RESOURCE_DELETION_NOT_ALLOWED", "name" => "RESOURCE_DELETION_NOT_ALLOWED"}, {"value" => "RESOURCE_MODIFICATION_NOT_ALLOWED", "name" => "RESOURCE_MODIFICATION_NOT_ALLOWED"}, {"value" => "RESOURCE_NOT_ACTIVE", "name" => "RESOURCE_NOT_ACTIVE"}, {"value" => "RESOURCE_NOT_EMPTY", "name" => "RESOURCE_NOT_EMPTY"}, {"value" => "SELF_MANAGED_OPT_OUTS_MISMATCH", "name" => "SELF_MANAGED_OPT_OUTS_MISMATCH"}, {"value" => "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED", "name" => "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED"}, {"value" => "TWO_WAY_CONFIG_MISMATCH", "name" => "TWO_WAY_CONFIG_MISMATCH"}, {"value" => "VERIFICATION_CODE_EXPIRED", "name" => "VERIFICATION_CODE_EXPIRED"}, {"value" => "VERIFICATION_ALREADY_COMPLETE", "name" => "VERIFICATION_ALREADY_COMPLETE"}, {"value" => "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT", "name" => "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT"}, {"value" => "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET", "name" => "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET"}, {"value" => "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET", "name" => "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET"}, {"value" => "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION", "name" => "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION"}, {"value" => "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE", "name" => "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE"}, {"value" => "RCS_AGENT_ALREADY_ASSOCIATED_TO_REGISTRATION_TYPE", "name" => "RCS_AGENT_ALREADY_ASSOCIATED_TO_REGISTRATION_TYPE"}, {"value" => "NOTIFY_CONFIGURATION_NOT_ACTIVE", "name" => "NOTIFY_CONFIGURATION_NOT_ACTIVE"}]})
     ContextKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ContextKey", name: "ContextKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^\\S+$"})
     ContextMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ContextMap", name: "ContextMap", traits: {"smithy.api#length" => {"max" => 5}})
     ContextValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ContextValue", name: "ContextValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 800}, "smithy.api#pattern" => "^(?!\\s)^[\\s\\S]+(?<!\\s)$"})
+    CountryLaunchStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatus", name: "CountryLaunchStatus", traits: {"smithy.api#enum" => [{"value" => "CREATED", "name" => "CREATED"}, {"value" => "PENDING", "name" => "PENDING"}, {"value" => "PARTIAL", "name" => "PARTIAL"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "REJECTED", "name" => "REJECTED"}]})
+    CountryLaunchStatusFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusFilter", name: "CountryLaunchStatusFilter")
+    CountryLaunchStatusFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusFilterList", name: "CountryLaunchStatusFilterList", traits: {"smithy.api#length" => {"max" => 20}})
+    CountryLaunchStatusFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusFilterName", name: "CountryLaunchStatusFilterName", traits: {"smithy.api#enum" => [{"value" => "country-launch-status", "name" => "COUNTRY_LAUNCH_STATUS"}]})
+    CountryLaunchStatusInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusInformation", name: "CountryLaunchStatusInformation")
+    CountryLaunchStatusInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusInformationList", name: "CountryLaunchStatusInformationList")
     CreateConfigurationSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateConfigurationSetRequest", name: "CreateConfigurationSetRequest")
     CreateConfigurationSetResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateConfigurationSetResult", name: "CreateConfigurationSetResult")
     CreateEventDestinationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateEventDestinationRequest", name: "CreateEventDestinationRequest")
     CreateEventDestinationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateEventDestinationResult", name: "CreateEventDestinationResult")
+    CreateNotifyConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateNotifyConfigurationRequest", name: "CreateNotifyConfigurationRequest")
+    CreateNotifyConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateNotifyConfigurationResult", name: "CreateNotifyConfigurationResult")
     CreateOptOutListRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateOptOutListRequest", name: "CreateOptOutListRequest")
     CreateOptOutListResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateOptOutListResult", name: "CreateOptOutListResult")
     CreatePoolRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreatePoolRequest", name: "CreatePoolRequest")
     CreatePoolResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreatePoolResult", name: "CreatePoolResult")
     CreateProtectConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfigurationRequest", name: "CreateProtectConfigurationRequest")
     CreateProtectConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfigurationResult", name: "CreateProtectConfigurationResult")
+    CreateRcsAgentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateRcsAgentRequest", name: "CreateRcsAgentRequest")
+    CreateRcsAgentResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateRcsAgentResult", name: "CreateRcsAgentResult")
     CreateRegistrationAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateRegistrationAssociationRequest", name: "CreateRegistrationAssociationRequest")
     CreateRegistrationAssociationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateRegistrationAssociationResult", name: "CreateRegistrationAssociationResult")
     CreateRegistrationAttachmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#CreateRegistrationAttachmentRequest", name: "CreateRegistrationAttachmentRequest")
@@ -72,6 +97,10 @@ module Aws::PinpointSMSVoiceV2
     DeleteKeywordResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteKeywordResult", name: "DeleteKeywordResult")
     DeleteMediaMessageSpendLimitOverrideRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverrideRequest", name: "DeleteMediaMessageSpendLimitOverrideRequest")
     DeleteMediaMessageSpendLimitOverrideResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverrideResult", name: "DeleteMediaMessageSpendLimitOverrideResult")
+    DeleteNotifyConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyConfigurationRequest", name: "DeleteNotifyConfigurationRequest")
+    DeleteNotifyConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyConfigurationResult", name: "DeleteNotifyConfigurationResult")
+    DeleteNotifyMessageSpendLimitOverrideRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyMessageSpendLimitOverrideRequest", name: "DeleteNotifyMessageSpendLimitOverrideRequest")
+    DeleteNotifyMessageSpendLimitOverrideResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyMessageSpendLimitOverrideResult", name: "DeleteNotifyMessageSpendLimitOverrideResult")
     DeleteOptOutListRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteOptOutListRequest", name: "DeleteOptOutListRequest")
     DeleteOptOutListResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteOptOutListResult", name: "DeleteOptOutListResult")
     DeleteOptedOutNumberRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteOptedOutNumberRequest", name: "DeleteOptedOutNumberRequest")
@@ -82,6 +111,10 @@ module Aws::PinpointSMSVoiceV2
     DeleteProtectConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfigurationResult", name: "DeleteProtectConfigurationResult")
     DeleteProtectConfigurationRuleSetNumberOverrideRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfigurationRuleSetNumberOverrideRequest", name: "DeleteProtectConfigurationRuleSetNumberOverrideRequest")
     DeleteProtectConfigurationRuleSetNumberOverrideResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfigurationRuleSetNumberOverrideResult", name: "DeleteProtectConfigurationRuleSetNumberOverrideResult")
+    DeleteRcsAgentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteRcsAgentRequest", name: "DeleteRcsAgentRequest")
+    DeleteRcsAgentResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteRcsAgentResult", name: "DeleteRcsAgentResult")
+    DeleteRcsMessageSpendLimitOverrideRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteRcsMessageSpendLimitOverrideRequest", name: "DeleteRcsMessageSpendLimitOverrideRequest")
+    DeleteRcsMessageSpendLimitOverrideResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteRcsMessageSpendLimitOverrideResult", name: "DeleteRcsMessageSpendLimitOverrideResult")
     DeleteRegistrationAttachmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteRegistrationAttachmentRequest", name: "DeleteRegistrationAttachmentRequest")
     DeleteRegistrationAttachmentResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteRegistrationAttachmentResult", name: "DeleteRegistrationAttachmentResult")
     DeleteRegistrationFieldValueRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DeleteRegistrationFieldValueRequest", name: "DeleteRegistrationFieldValueRequest")
@@ -105,6 +138,10 @@ module Aws::PinpointSMSVoiceV2
     DescribeConfigurationSetsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeConfigurationSetsResult", name: "DescribeConfigurationSetsResult")
     DescribeKeywordsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeKeywordsRequest", name: "DescribeKeywordsRequest")
     DescribeKeywordsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeKeywordsResult", name: "DescribeKeywordsResult")
+    DescribeNotifyConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyConfigurationsRequest", name: "DescribeNotifyConfigurationsRequest")
+    DescribeNotifyConfigurationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyConfigurationsResult", name: "DescribeNotifyConfigurationsResult")
+    DescribeNotifyTemplatesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyTemplatesRequest", name: "DescribeNotifyTemplatesRequest")
+    DescribeNotifyTemplatesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyTemplatesResult", name: "DescribeNotifyTemplatesResult")
     DescribeOptOutListsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeOptOutListsRequest", name: "DescribeOptOutListsRequest")
     DescribeOptOutListsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeOptOutListsResult", name: "DescribeOptOutListsResult")
     DescribeOptedOutNumbersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeOptedOutNumbersRequest", name: "DescribeOptedOutNumbersRequest")
@@ -115,6 +152,10 @@ module Aws::PinpointSMSVoiceV2
     DescribePoolsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribePoolsResult", name: "DescribePoolsResult")
     DescribeProtectConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurationsRequest", name: "DescribeProtectConfigurationsRequest")
     DescribeProtectConfigurationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurationsResult", name: "DescribeProtectConfigurationsResult")
+    DescribeRcsAgentCountryLaunchStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentCountryLaunchStatusRequest", name: "DescribeRcsAgentCountryLaunchStatusRequest")
+    DescribeRcsAgentCountryLaunchStatusResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentCountryLaunchStatusResult", name: "DescribeRcsAgentCountryLaunchStatusResult")
+    DescribeRcsAgentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentsRequest", name: "DescribeRcsAgentsRequest")
+    DescribeRcsAgentsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentsResult", name: "DescribeRcsAgentsResult")
     DescribeRegistrationAttachmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationAttachmentsRequest", name: "DescribeRegistrationAttachmentsRequest")
     DescribeRegistrationAttachmentsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationAttachmentsResult", name: "DescribeRegistrationAttachmentsResult")
     DescribeRegistrationFieldDefinitionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationFieldDefinitionsRequest", name: "DescribeRegistrationFieldDefinitionsRequest")
@@ -139,17 +180,21 @@ module Aws::PinpointSMSVoiceV2
     DestinationCountryParameterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DestinationCountryParameterValue", name: "DestinationCountryParameterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^\\S+$"})
     DestinationCountryParameters = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DestinationCountryParameters", name: "DestinationCountryParameters", traits: {"smithy.api#length" => {"max" => 10}})
     DestinationPhoneNumberList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DestinationPhoneNumberList", name: "DestinationPhoneNumberList", traits: {"smithy.api#length" => {"max" => 5}})
+    DialingCountryCodeType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DialingCountryCodeType", name: "DialingCountryCodeType", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}, "smithy.api#pattern" => "^[\\d]+$"})
     DisassociateOriginationIdentityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DisassociateOriginationIdentityRequest", name: "DisassociateOriginationIdentityRequest")
     DisassociateOriginationIdentityResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DisassociateOriginationIdentityResult", name: "DisassociateOriginationIdentityResult")
     DisassociateProtectConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DisassociateProtectConfigurationRequest", name: "DisassociateProtectConfigurationRequest")
     DisassociateProtectConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DisassociateProtectConfigurationResult", name: "DisassociateProtectConfigurationResult")
     DiscardRegistrationVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DiscardRegistrationVersionRequest", name: "DiscardRegistrationVersionRequest")
     DiscardRegistrationVersionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#DiscardRegistrationVersionResult", name: "DiscardRegistrationVersionResult")
+    E164PhoneNumberType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#E164PhoneNumberType", name: "E164PhoneNumberType", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#pattern" => "^\\+[1-9][0-9]{1,18}$"})
     EventDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#EventDestination", name: "EventDestination")
     EventDestinationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#EventDestinationList", name: "EventDestinationList")
     EventDestinationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#EventDestinationName", name: "EventDestinationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9_-]+$"})
-    EventType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#EventType", name: "EventType", traits: {"smithy.api#enum" => [{"value" => "ALL", "name" => "ALL"}, {"value" => "TEXT_ALL", "name" => "TEXT_ALL"}, {"value" => "TEXT_SENT", "name" => "TEXT_SENT"}, {"value" => "TEXT_PENDING", "name" => "TEXT_PENDING"}, {"value" => "TEXT_QUEUED", "name" => "TEXT_QUEUED"}, {"value" => "TEXT_SUCCESSFUL", "name" => "TEXT_SUCCESSFUL"}, {"value" => "TEXT_DELIVERED", "name" => "TEXT_DELIVERED"}, {"value" => "TEXT_INVALID", "name" => "TEXT_INVALID"}, {"value" => "TEXT_INVALID_MESSAGE", "name" => "TEXT_INVALID_MESSAGE"}, {"value" => "TEXT_UNREACHABLE", "name" => "TEXT_UNREACHABLE"}, {"value" => "TEXT_CARRIER_UNREACHABLE", "name" => "TEXT_CARRIER_UNREACHABLE"}, {"value" => "TEXT_BLOCKED", "name" => "TEXT_BLOCKED"}, {"value" => "TEXT_CARRIER_BLOCKED", "name" => "TEXT_CARRIER_BLOCKED"}, {"value" => "TEXT_SPAM", "name" => "TEXT_SPAM"}, {"value" => "TEXT_UNKNOWN", "name" => "TEXT_UNKNOWN"}, {"value" => "TEXT_TTL_EXPIRED", "name" => "TEXT_TTL_EXPIRED"}, {"value" => "TEXT_PROTECT_BLOCKED", "name" => "TEXT_PROTECT_BLOCKED"}, {"value" => "VOICE_ALL", "name" => "VOICE_ALL"}, {"value" => "VOICE_INITIATED", "name" => "VOICE_INITIATED"}, {"value" => "VOICE_RINGING", "name" => "VOICE_RINGING"}, {"value" => "VOICE_ANSWERED", "name" => "VOICE_ANSWERED"}, {"value" => "VOICE_COMPLETED", "name" => "VOICE_COMPLETED"}, {"value" => "VOICE_BUSY", "name" => "VOICE_BUSY"}, {"value" => "VOICE_NO_ANSWER", "name" => "VOICE_NO_ANSWER"}, {"value" => "VOICE_FAILED", "name" => "VOICE_FAILED"}, {"value" => "VOICE_TTL_EXPIRED", "name" => "VOICE_TTL_EXPIRED"}, {"value" => "MEDIA_ALL", "name" => "MEDIA_ALL"}, {"value" => "MEDIA_PENDING", "name" => "MEDIA_PENDING"}, {"value" => "MEDIA_QUEUED", "name" => "MEDIA_QUEUED"}, {"value" => "MEDIA_SUCCESSFUL", "name" => "MEDIA_SUCCESSFUL"}, {"value" => "MEDIA_DELIVERED", "name" => "MEDIA_DELIVERED"}, {"value" => "MEDIA_INVALID", "name" => "MEDIA_INVALID"}, {"value" => "MEDIA_INVALID_MESSAGE", "name" => "MEDIA_INVALID_MESSAGE"}, {"value" => "MEDIA_UNREACHABLE", "name" => "MEDIA_UNREACHABLE"}, {"value" => "MEDIA_CARRIER_UNREACHABLE", "name" => "MEDIA_CARRIER_UNREACHABLE"}, {"value" => "MEDIA_BLOCKED", "name" => "MEDIA_BLOCKED"}, {"value" => "MEDIA_CARRIER_BLOCKED", "name" => "MEDIA_CARRIER_BLOCKED"}, {"value" => "MEDIA_SPAM", "name" => "MEDIA_SPAM"}, {"value" => "MEDIA_UNKNOWN", "name" => "MEDIA_UNKNOWN"}, {"value" => "MEDIA_TTL_EXPIRED", "name" => "MEDIA_TTL_EXPIRED"}, {"value" => "MEDIA_FILE_INACCESSIBLE", "name" => "MEDIA_FILE_INACCESSIBLE"}, {"value" => "MEDIA_FILE_TYPE_UNSUPPORTED", "name" => "MEDIA_FILE_TYPE_UNSUPPORTED"}, {"value" => "MEDIA_FILE_SIZE_EXCEEDED", "name" => "MEDIA_FILE_SIZE_EXCEEDED"}]})
-    EventTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#EventTypeList", name: "EventTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 43}})
+    EventType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#EventType", name: "EventType", traits: {"smithy.api#enum" => [{"value" => "ALL", "name" => "ALL"}, {"value" => "TEXT_ALL", "name" => "TEXT_ALL"}, {"value" => "TEXT_SENT", "name" => "TEXT_SENT"}, {"value" => "TEXT_PENDING", "name" => "TEXT_PENDING"}, {"value" => "TEXT_QUEUED", "name" => "TEXT_QUEUED"}, {"value" => "TEXT_SUCCESSFUL", "name" => "TEXT_SUCCESSFUL"}, {"value" => "TEXT_DELIVERED", "name" => "TEXT_DELIVERED"}, {"value" => "TEXT_INVALID", "name" => "TEXT_INVALID"}, {"value" => "TEXT_INVALID_MESSAGE", "name" => "TEXT_INVALID_MESSAGE"}, {"value" => "TEXT_UNREACHABLE", "name" => "TEXT_UNREACHABLE"}, {"value" => "TEXT_CARRIER_UNREACHABLE", "name" => "TEXT_CARRIER_UNREACHABLE"}, {"value" => "TEXT_BLOCKED", "name" => "TEXT_BLOCKED"}, {"value" => "TEXT_CARRIER_BLOCKED", "name" => "TEXT_CARRIER_BLOCKED"}, {"value" => "TEXT_SPAM", "name" => "TEXT_SPAM"}, {"value" => "TEXT_UNKNOWN", "name" => "TEXT_UNKNOWN"}, {"value" => "TEXT_TTL_EXPIRED", "name" => "TEXT_TTL_EXPIRED"}, {"value" => "TEXT_PROTECT_BLOCKED", "name" => "TEXT_PROTECT_BLOCKED"}, {"value" => "VOICE_ALL", "name" => "VOICE_ALL"}, {"value" => "VOICE_INITIATED", "name" => "VOICE_INITIATED"}, {"value" => "VOICE_RINGING", "name" => "VOICE_RINGING"}, {"value" => "VOICE_ANSWERED", "name" => "VOICE_ANSWERED"}, {"value" => "VOICE_COMPLETED", "name" => "VOICE_COMPLETED"}, {"value" => "VOICE_BUSY", "name" => "VOICE_BUSY"}, {"value" => "VOICE_NO_ANSWER", "name" => "VOICE_NO_ANSWER"}, {"value" => "VOICE_FAILED", "name" => "VOICE_FAILED"}, {"value" => "VOICE_TTL_EXPIRED", "name" => "VOICE_TTL_EXPIRED"}, {"value" => "MEDIA_ALL", "name" => "MEDIA_ALL"}, {"value" => "MEDIA_PENDING", "name" => "MEDIA_PENDING"}, {"value" => "MEDIA_QUEUED", "name" => "MEDIA_QUEUED"}, {"value" => "MEDIA_SUCCESSFUL", "name" => "MEDIA_SUCCESSFUL"}, {"value" => "MEDIA_DELIVERED", "name" => "MEDIA_DELIVERED"}, {"value" => "MEDIA_INVALID", "name" => "MEDIA_INVALID"}, {"value" => "MEDIA_INVALID_MESSAGE", "name" => "MEDIA_INVALID_MESSAGE"}, {"value" => "MEDIA_UNREACHABLE", "name" => "MEDIA_UNREACHABLE"}, {"value" => "MEDIA_CARRIER_UNREACHABLE", "name" => "MEDIA_CARRIER_UNREACHABLE"}, {"value" => "MEDIA_BLOCKED", "name" => "MEDIA_BLOCKED"}, {"value" => "MEDIA_CARRIER_BLOCKED", "name" => "MEDIA_CARRIER_BLOCKED"}, {"value" => "MEDIA_SPAM", "name" => "MEDIA_SPAM"}, {"value" => "MEDIA_UNKNOWN", "name" => "MEDIA_UNKNOWN"}, {"value" => "MEDIA_TTL_EXPIRED", "name" => "MEDIA_TTL_EXPIRED"}, {"value" => "MEDIA_FILE_INACCESSIBLE", "name" => "MEDIA_FILE_INACCESSIBLE"}, {"value" => "MEDIA_FILE_TYPE_UNSUPPORTED", "name" => "MEDIA_FILE_TYPE_UNSUPPORTED"}, {"value" => "MEDIA_FILE_SIZE_EXCEEDED", "name" => "MEDIA_FILE_SIZE_EXCEEDED"}, {"value" => "RCS_ALL", "name" => "RCS_ALL"}, {"value" => "RCS_QUEUED", "name" => "RCS_QUEUED"}, {"value" => "RCS_SENT", "name" => "RCS_SENT"}, {"value" => "RCS_DELIVERED", "name" => "RCS_DELIVERED"}, {"value" => "RCS_READ", "name" => "RCS_READ"}, {"value" => "RCS_FAILED", "name" => "RCS_FAILED"}, {"value" => "RCS_TTL_EXPIRED", "name" => "RCS_TTL_EXPIRED"}, {"value" => "RCS_PROTECT_BLOCKED", "name" => "RCS_PROTECT_BLOCKED"}, {"value" => "RCS_FALLEN_BACK_TO_SMS", "name" => "RCS_FALLEN_BACK_TO_SMS"}]})
+    EventTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#EventTypeList", name: "EventTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 52}})
+    FieldCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#FieldCondition", name: "FieldCondition")
+    FieldConditionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#FieldConditionList", name: "FieldConditionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     FieldPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#FieldPath", name: "FieldPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9_\\.]+$"})
     FieldPathList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#FieldPathList", name: "FieldPathList", traits: {"smithy.api#length" => {"max" => 5}})
     FieldRequirement = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#FieldRequirement", name: "FieldRequirement", traits: {"smithy.api#enum" => [{"value" => "REQUIRED", "name" => "REQUIRED"}, {"value" => "CONDITIONAL", "name" => "CONDITIONAL"}, {"value" => "OPTIONAL", "name" => "OPTIONAL"}]})
@@ -161,8 +206,10 @@ module Aws::PinpointSMSVoiceV2
     GetResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicyRequest", name: "GetResourcePolicyRequest")
     GetResourcePolicyResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicyResult", name: "GetResourcePolicyResult")
     IamRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#IamRoleArn", name: "IamRoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:\\S+$"})
+    IamRoleArnOrUnset = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#IamRoleArnOrUnset", name: "IamRoleArnOrUnset", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^(arn:\\S+|UNSET_RCS_MEDIA_CONFIGURATION)$"})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#retryable" => {}})
     IsoCountryCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode", name: "IsoCountryCode", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#pattern" => "^[A-Z]{2}$"})
+    IsoCountryCodeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList", name: "IsoCountryCodeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 300}})
     Keyword = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#Keyword", name: "Keyword", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}, "smithy.api#pattern" => "^[ \\S]+$"})
     KeywordAction = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#KeywordAction", name: "KeywordAction", traits: {"smithy.api#enum" => [{"value" => "AUTOMATIC_RESPONSE", "name" => "AUTOMATIC_RESPONSE"}, {"value" => "OPT_OUT", "name" => "OPT_OUT"}, {"value" => "OPT_IN", "name" => "OPT_IN"}]})
     KeywordFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#KeywordFilter", name: "KeywordFilter")
@@ -174,6 +221,11 @@ module Aws::PinpointSMSVoiceV2
     KeywordMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#KeywordMessage", name: "KeywordMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 1600}, "smithy.api#pattern" => "^(?!\\s*$)[\\s\\S]+$"})
     KinesisFirehoseDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#KinesisFirehoseDestination", name: "KinesisFirehoseDestination")
     LanguageCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#LanguageCode", name: "LanguageCode", traits: {"smithy.api#enum" => [{"value" => "DE_DE", "name" => "DE_DE"}, {"value" => "EN_GB", "name" => "EN_GB"}, {"value" => "EN_US", "name" => "EN_US"}, {"value" => "ES_419", "name" => "ES_419"}, {"value" => "ES_ES", "name" => "ES_ES"}, {"value" => "FR_CA", "name" => "FR_CA"}, {"value" => "FR_FR", "name" => "FR_FR"}, {"value" => "IT_IT", "name" => "IT_IT"}, {"value" => "JA_JP", "name" => "JA_JP"}, {"value" => "KO_KR", "name" => "KO_KR"}, {"value" => "PT_BR", "name" => "PT_BR"}, {"value" => "ZH_CN", "name" => "ZH_CN"}, {"value" => "ZH_TW", "name" => "ZH_TW"}]})
+    ListAvailablePhoneNumbersMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbersMaxResults", name: "ListAvailablePhoneNumbersMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 10}})
+    ListAvailablePhoneNumbersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbersRequest", name: "ListAvailablePhoneNumbersRequest")
+    ListAvailablePhoneNumbersResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbersResult", name: "ListAvailablePhoneNumbersResult")
+    ListNotifyCountriesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountriesRequest", name: "ListNotifyCountriesRequest")
+    ListNotifyCountriesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountriesResult", name: "ListNotifyCountriesResult")
     ListPoolOriginationIdentitiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListPoolOriginationIdentitiesRequest", name: "ListPoolOriginationIdentitiesRequest")
     ListPoolOriginationIdentitiesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListPoolOriginationIdentitiesResult", name: "ListPoolOriginationIdentitiesResult")
     ListProtectConfigurationRuleSetNumberOverrideFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListProtectConfigurationRuleSetNumberOverrideFilter", name: "ListProtectConfigurationRuleSetNumberOverrideFilter", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
@@ -184,6 +236,9 @@ module Aws::PinpointSMSVoiceV2
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ListTagsForResourceResult", name: "ListTagsForResourceResult")
     LogGroupArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#LogGroupArn", name: "LogGroupArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:\\S+$"})
+    LongMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.pinpointsmsvoicev2#LongMap", name: "LongMap")
+    MCCType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MCCType", name: "MCCType", traits: {"smithy.api#length" => {"min" => 3, "max" => 3}, "smithy.api#pattern" => "^[\\d]+$"})
+    MNCType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MNCType", name: "MNCType", traits: {"smithy.api#length" => {"min" => 2, "max" => 3}, "smithy.api#pattern" => "^[\\d]+$"})
     MaxPrice = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MaxPrice", name: "MaxPrice", traits: {"smithy.api#length" => {"min" => 2, "max" => 8}, "smithy.api#pattern" => "^[0-9]{0,2}\\.[0-9]{1,5}$"})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MediaMessageOriginationIdentity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MediaMessageOriginationIdentity", name: "MediaMessageOriginationIdentity", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/\\+-]+$"})
@@ -193,11 +248,47 @@ module Aws::PinpointSMSVoiceV2
     MessageId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MessageId", name: "MessageId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
     MessageType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MessageType", name: "MessageType", traits: {"smithy.api#enum" => [{"value" => "TRANSACTIONAL", "name" => "TRANSACTIONAL"}, {"value" => "PROMOTIONAL", "name" => "PROMOTIONAL"}]})
     MessageTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MessageTypeList", name: "MessageTypeList", traits: {"smithy.api#length" => {"max" => 2}})
+    MessagingLimits = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MessagingLimits", name: "MessagingLimits")
     MonthlyLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pinpointsmsvoicev2#MonthlyLimit", name: "MonthlyLimit", traits: {"smithy.api#range" => {"min" => 0, "max" => 1000000000}})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^.+$"})
     NonEmptyTagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NonEmptyTagList", name: "NonEmptyTagList", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
-    NumberCapability = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberCapability", name: "NumberCapability", traits: {"smithy.api#enum" => [{"value" => "SMS", "name" => "SMS"}, {"value" => "VOICE", "name" => "VOICE"}, {"value" => "MMS", "name" => "MMS"}]})
-    NumberCapabilityList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberCapabilityList", name: "NumberCapabilityList", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
+    NotifyConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationArn", name: "NotifyConfigurationArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^arn:\\S+$"})
+    NotifyConfigurationDisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationDisplayName", name: "NotifyConfigurationDisplayName", traits: {"smithy.api#length" => {"min" => 1, "max" => 15}, "smithy.api#pattern" => "^[A-Za-z0-9_ -]+$"})
+    NotifyConfigurationFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationFilter", name: "NotifyConfigurationFilter")
+    NotifyConfigurationFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationFilterList", name: "NotifyConfigurationFilterList", traits: {"smithy.api#length" => {"max" => 20}})
+    NotifyConfigurationFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationFilterName", name: "NotifyConfigurationFilterName", traits: {"smithy.api#enum" => [{"value" => "display-name", "name" => "DISPLAY_NAME"}, {"value" => "enabled-countries", "name" => "ENABLED_COUNTRIES"}, {"value" => "enabled-channels", "name" => "ENABLED_CHANNELS"}, {"value" => "default-template", "name" => "DEFAULT_TEMPLATE"}, {"value" => "default-pool", "name" => "DEFAULT_POOL"}, {"value" => "use-case", "name" => "USE_CASE"}, {"value" => "status", "name" => "STATUS"}, {"value" => "deletion-protection-enabled", "name" => "DELETION_PROTECTION_ENABLED"}, {"value" => "tier-upgrade-status", "name" => "TIER_UPGRADE_STATUS"}]})
+    NotifyConfigurationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationId", name: "NotifyConfigurationId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9_-]+$"})
+    NotifyConfigurationIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdList", name: "NotifyConfigurationIdList", traits: {"smithy.api#length" => {"max" => 5}})
+    NotifyConfigurationIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdOrArn", name: "NotifyConfigurationIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
+    NotifyConfigurationInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationInformation", name: "NotifyConfigurationInformation")
+    NotifyConfigurationInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationInformationList", name: "NotifyConfigurationInformationList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    NotifyConfigurationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationStatus", name: "NotifyConfigurationStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "REJECTED", "name" => "REJECTED"}, {"value" => "REQUIRES_VERIFICATION", "name" => "REQUIRES_VERIFICATION"}]})
+    NotifyConfigurationTier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTier", name: "NotifyConfigurationTier", traits: {"smithy.api#enum" => [{"value" => "BASIC", "name" => "BASIC"}, {"value" => "ADVANCED", "name" => "ADVANCED"}]})
+    NotifyConfigurationTierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTierList", name: "NotifyConfigurationTierList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    NotifyConfigurationUseCase = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationUseCase", name: "NotifyConfigurationUseCase", traits: {"smithy.api#enum" => [{"value" => "CODE_VERIFICATION", "name" => "CODE_VERIFICATION"}]})
+    NotifyCountryInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyCountryInformation", name: "NotifyCountryInformation")
+    NotifyCountryInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyCountryInformationList", name: "NotifyCountryInformationList", traits: {"smithy.api#length" => {"min" => 0, "max" => 300}})
+    NotifyEnabledChannelsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList", name: "NotifyEnabledChannelsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
+    NotifyLanguageCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyLanguageCode", name: "NotifyLanguageCode", traits: {"smithy.api#length" => {"min" => 2, "max" => 5}, "smithy.api#pattern" => "^[a-z]{2}(-[A-Z]{2})?$"})
+    NotifyPoolIdOrUnset = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyPoolIdOrUnset", name: "NotifyPoolIdOrUnset", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^([A-Za-z0-9_:/-]+|UNSET_DEFAULT_POOL_FOR_NOTIFY)$"})
+    NotifyTemplateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateFilter", name: "NotifyTemplateFilter")
+    NotifyTemplateFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateFilterList", name: "NotifyTemplateFilterList", traits: {"smithy.api#length" => {"max" => 20}})
+    NotifyTemplateFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateFilterName", name: "NotifyTemplateFilterName", traits: {"smithy.api#enum" => [{"value" => "template-type", "name" => "TEMPLATE_TYPE"}, {"value" => "channels", "name" => "CHANNELS"}, {"value" => "tier-access", "name" => "TIER_ACCESS"}, {"value" => "supported-countries", "name" => "SUPPORTED_COUNTRIES"}, {"value" => "language-code", "name" => "LANGUAGE_CODE"}, {"value" => "supported-voice-ids", "name" => "SUPPORTED_VOICE_IDS"}]})
+    NotifyTemplateId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId", name: "NotifyTemplateId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([A-Za-z0-9_-]*|UNSET_DEFAULT_TEMPLATE)$"})
+    NotifyTemplateIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateIdList", name: "NotifyTemplateIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    NotifyTemplateInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateInformation", name: "NotifyTemplateInformation")
+    NotifyTemplateInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateInformationList", name: "NotifyTemplateInformationList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    NotifyTemplateStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateStatus", name: "NotifyTemplateStatus", traits: {"smithy.api#enum" => [{"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "INACTIVE", "name" => "INACTIVE"}]})
+    NotifyTemplateType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateType", name: "NotifyTemplateType", traits: {"smithy.api#enum" => [{"value" => "OTP_VERIFICATION", "name" => "OTP_VERIFICATION"}]})
+    NotifyTemplateVersion = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateVersion", name: "NotifyTemplateVersion", traits: {"smithy.api#range" => {"min" => 1}})
+    NotifyTierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyTierList", name: "NotifyTierList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    NotifyUseCaseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NotifyUseCaseList", name: "NotifyUseCaseList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
+    NumberCapability = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberCapability", name: "NumberCapability", traits: {"smithy.api#enum" => [{"value" => "SMS", "name" => "SMS"}, {"value" => "VOICE", "name" => "VOICE"}, {"value" => "MMS", "name" => "MMS"}, {"value" => "RCS", "name" => "RCS"}]})
+    NumberCapabilityList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberCapabilityList", name: "NumberCapabilityList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
+    NumberFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberFilterList", name: "NumberFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    NumberFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberFilterValue", name: "NumberFilterValue", traits: {"smithy.api#length" => {"min" => 2, "max" => 16}, "smithy.api#pattern" => "^\\+?[0-9]{1,15}$"})
+    NumberPreferenceItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberPreferenceItem", name: "NumberPreferenceItem")
+    NumberPreferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberPreferenceList", name: "NumberPreferenceList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     NumberStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberStatus", name: "NumberStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "ASSOCIATING", "name" => "ASSOCIATING"}, {"value" => "DISASSOCIATING", "name" => "DISASSOCIATING"}, {"value" => "DELETED", "name" => "DELETED"}]})
     NumberType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#NumberType", name: "NumberType", traits: {"smithy.api#enum" => [{"value" => "SHORT_CODE", "name" => "SHORT_CODE"}, {"value" => "LONG_CODE", "name" => "LONG_CODE"}, {"value" => "TOLL_FREE", "name" => "TOLL_FREE"}, {"value" => "TEN_DLC", "name" => "TEN_DLC"}, {"value" => "SIMULATOR", "name" => "SIMULATOR"}]})
     OptOutListInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#OptOutListInformation", name: "OptOutListInformation")
@@ -222,19 +313,22 @@ module Aws::PinpointSMSVoiceV2
     PhoneNumberIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PhoneNumberIdOrArn", name: "PhoneNumberIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
     PhoneNumberInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PhoneNumberInformation", name: "PhoneNumberInformation")
     PhoneNumberInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PhoneNumberInformationList", name: "PhoneNumberInformationList")
+    PhoneNumberType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PhoneNumberType", name: "PhoneNumberType", traits: {"smithy.api#enum" => [{"value" => "MOBILE", "name" => "MOBILE"}, {"value" => "LANDLINE", "name" => "LANDLINE"}, {"value" => "VOIP", "name" => "VOIP"}, {"value" => "PREPAID", "name" => "PREPAID"}, {"value" => "OTHER", "name" => "OTHER"}, {"value" => "INVALID", "name" => "INVALID"}]})
     PhoneOrPoolIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PhoneOrPoolIdOrArn", name: "PhoneOrPoolIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
     PhoneOrSenderIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PhoneOrSenderIdOrArn", name: "PhoneOrSenderIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
     PoolFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolFilter", name: "PoolFilter")
     PoolFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolFilterList", name: "PoolFilterList", traits: {"smithy.api#length" => {"max" => 20}})
     PoolFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolFilterName", name: "PoolFilterName", traits: {"smithy.api#enum" => [{"value" => "status", "name" => "STATUS"}, {"value" => "message-type", "name" => "MESSAGE_TYPE"}, {"value" => "two-way-enabled", "name" => "TWO_WAY_ENABLED"}, {"value" => "self-managed-opt-outs-enabled", "name" => "SELF_MANAGED_OPT_OUTS_ENABLED"}, {"value" => "opt-out-list-name", "name" => "OPT_OUT_LIST_NAME"}, {"value" => "shared-routes-enabled", "name" => "SHARED_ROUTES_ENABLED"}, {"value" => "deletion-protection-enabled", "name" => "DELETION_PROTECTION_ENABLED"}, {"value" => "two-way-channel-arn", "name" => "TWO_WAY_CHANNEL_ARN"}]})
     PoolIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolIdList", name: "PoolIdList", traits: {"smithy.api#length" => {"max" => 5}})
-    PoolIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolIdOrArn", name: "PoolIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
+    PoolIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolIdOrArn", name: "PoolIdOrArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]*$"})
     PoolInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolInformation", name: "PoolInformation")
     PoolInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolInformationList", name: "PoolInformationList")
     PoolOriginationIdentitiesFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolOriginationIdentitiesFilter", name: "PoolOriginationIdentitiesFilter")
     PoolOriginationIdentitiesFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolOriginationIdentitiesFilterList", name: "PoolOriginationIdentitiesFilterList", traits: {"smithy.api#length" => {"max" => 20}})
     PoolOriginationIdentitiesFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolOriginationIdentitiesFilterName", name: "PoolOriginationIdentitiesFilterName", traits: {"smithy.api#enum" => [{"value" => "iso-country-code", "name" => "ISO_COUNTRY_CODE"}, {"value" => "number-capability", "name" => "NUMBER_CAPABILITY"}]})
     PoolStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PoolStatus", name: "PoolStatus", traits: {"smithy.api#enum" => [{"value" => "CREATING", "name" => "CREATING"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "DELETING", "name" => "DELETING"}]})
+    PreferenceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PreferenceType", name: "PreferenceType", traits: {"smithy.api#enum" => [{"value" => "StartsWith", "name" => "STARTS_WITH"}, {"value" => "EndsWith", "name" => "ENDS_WITH"}, {"value" => "Contains", "name" => "CONTAINS"}, {"value" => "ExactMatch", "name" => "EXACT_MATCH"}]})
+    PreferenceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PreferenceTypeList", name: "PreferenceTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     ProtectConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn", name: "ProtectConfigurationArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^arn:\\S+$"})
     ProtectConfigurationCountryRuleSet = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSet", name: "ProtectConfigurationCountryRuleSet", traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
     ProtectConfigurationCountryRuleSetInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSetInformation", name: "ProtectConfigurationCountryRuleSetInformation")
@@ -264,6 +358,53 @@ module Aws::PinpointSMSVoiceV2
     PutRegistrationFieldValueResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PutRegistrationFieldValueResult", name: "PutRegistrationFieldValueResult")
     PutResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PutResourcePolicyRequest", name: "PutResourcePolicyRequest")
     PutResourcePolicyResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#PutResourcePolicyResult", name: "PutResourcePolicyResult")
+    RcsAgentFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsAgentFilter", name: "RcsAgentFilter")
+    RcsAgentFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsAgentFilterList", name: "RcsAgentFilterList", traits: {"smithy.api#length" => {"max" => 20}})
+    RcsAgentFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsAgentFilterName", name: "RcsAgentFilterName", traits: {"smithy.api#enum" => [{"value" => "status", "name" => "STATUS"}, {"value" => "two-way-enabled", "name" => "TWO_WAY_ENABLED"}, {"value" => "self-managed-opt-outs-enabled", "name" => "SELF_MANAGED_OPT_OUTS_ENABLED"}, {"value" => "opt-out-list-name", "name" => "OPT_OUT_LIST_NAME"}, {"value" => "deletion-protection-enabled", "name" => "DELETION_PROTECTION_ENABLED"}, {"value" => "two-way-channel-arn", "name" => "TWO_WAY_CHANNEL_ARN"}]})
+    RcsAgentIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdList", name: "RcsAgentIdList", traits: {"smithy.api#length" => {"max" => 5}})
+    RcsAgentIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdOrArn", name: "RcsAgentIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
+    RcsAgentInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsAgentInformation", name: "RcsAgentInformation")
+    RcsAgentInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsAgentInformationList", name: "RcsAgentInformationList")
+    RcsAgentStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsAgentStatus", name: "RcsAgentStatus", traits: {"smithy.api#enum" => [{"value" => "CREATED", "name" => "CREATED"}, {"value" => "PENDING", "name" => "PENDING"}, {"value" => "TESTING", "name" => "TESTING"}, {"value" => "PARTIAL", "name" => "PARTIAL"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "DELETED", "name" => "DELETED"}]})
+    RcsCalendarEventDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCalendarEventDescription", name: "RcsCalendarEventDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
+    RcsCalendarEventTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCalendarEventTitle", name: "RcsCalendarEventTitle", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    RcsCardContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCardContent", name: "RcsCardContent")
+    RcsCardDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCardDescription", name: "RcsCardDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
+    RcsCardMedia = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCardMedia", name: "RcsCardMedia")
+    RcsCardSuggestedActionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCardSuggestedActionList", name: "RcsCardSuggestedActionList", traits: {"smithy.api#length" => {"max" => 4}})
+    RcsCardTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCardTitle", name: "RcsCardTitle", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    RcsCarousel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCarousel", name: "RcsCarousel")
+    RcsCarouselCardContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCarouselCardContent", name: "RcsCarouselCardContent")
+    RcsCarouselCardContentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCarouselCardContentList", name: "RcsCarouselCardContentList", traits: {"smithy.api#length" => {"min" => 2, "max" => 10}})
+    RcsCarouselCardMedia = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCarouselCardMedia", name: "RcsCarouselCardMedia")
+    RcsContent = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsContent", name: "RcsContent")
+    RcsCreateCalendarEventAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsCreateCalendarEventAction", name: "RcsCreateCalendarEventAction")
+    RcsDialPhoneAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsDialPhoneAction", name: "RcsDialPhoneAction")
+    RcsEventType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsEventType", name: "RcsEventType", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    RcsEventTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsEventTypeList", name: "RcsEventTypeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    RcsFallbackChannel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsFallbackChannel", name: "RcsFallbackChannel", traits: {"smithy.api#enum" => [{"value" => "SMS", "name" => "SMS"}, {"value" => "MMS", "name" => "MMS"}]})
+    RcsFallbackConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsFallbackConfiguration", name: "RcsFallbackConfiguration")
+    RcsFallbackMessageBody = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsFallbackMessageBody", name: "RcsFallbackMessageBody", traits: {"smithy.api#length" => {"min" => 1, "max" => 1600}, "smithy.api#pattern" => "^(?!\\s*$)[\\s\\S]+$"})
+    RcsFallbackOriginationIdentity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsFallbackOriginationIdentity", name: "RcsFallbackOriginationIdentity", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/\\+-]+$"})
+    RcsFileMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsFileMessage", name: "RcsFileMessage")
+    RcsLocationLabel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsLocationLabel", name: "RcsLocationLabel", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    RcsMediaUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsMediaUrl", name: "RcsMediaUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}, "smithy.api#pattern" => "^(https://|s3://).+$"})
+    RcsMessageContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsMessageContent", name: "RcsMessageContent")
+    RcsMessageOriginationIdentity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsMessageOriginationIdentity", name: "RcsMessageOriginationIdentity", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/\\+-]+$"})
+    RcsMessageTrafficType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsMessageTrafficType", name: "RcsMessageTrafficType", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    RcsOpenUrlAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsOpenUrlAction", name: "RcsOpenUrlAction")
+    RcsOpenUrlValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsOpenUrlValue", name: "RcsOpenUrlValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^https://\\S+$"})
+    RcsPostbackData = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsPostbackData", name: "RcsPostbackData", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    RcsReplyAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsReplyAction", name: "RcsReplyAction")
+    RcsRequestLocationAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsRequestLocationAction", name: "RcsRequestLocationAction")
+    RcsShowLocationAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsShowLocationAction", name: "RcsShowLocationAction")
+    RcsStandaloneCard = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsStandaloneCard", name: "RcsStandaloneCard")
+    RcsSuggestedAction = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsSuggestedAction", name: "RcsSuggestedAction")
+    RcsSuggestedActionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsSuggestedActionList", name: "RcsSuggestedActionList", traits: {"smithy.api#length" => {"max" => 11}})
+    RcsSuggestedActionText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsSuggestedActionText", name: "RcsSuggestedActionText", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}})
+    RcsTextBody = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsTextBody", name: "RcsTextBody", traits: {"smithy.api#length" => {"min" => 1, "max" => 3072}, "smithy.api#pattern" => "^(?!\\s*$)[\\s\\S]+$"})
+    RcsTextMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsTextMessage", name: "RcsTextMessage")
+    RcsTimeToLive = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RcsTimeToLive", name: "RcsTimeToLive", traits: {"smithy.api#range" => {"min" => 1, "max" => 172800}})
     RegistrationAssociationBehavior = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationAssociationBehavior", name: "RegistrationAssociationBehavior", traits: {"smithy.api#enum" => [{"value" => "ASSOCIATE_BEFORE_SUBMIT", "name" => "ASSOCIATE_BEFORE_SUBMIT"}, {"value" => "ASSOCIATE_ON_APPROVAL", "name" => "ASSOCIATE_ON_APPROVAL"}, {"value" => "ASSOCIATE_AFTER_COMPLETE", "name" => "ASSOCIATE_AFTER_COMPLETE"}]})
     RegistrationAssociationFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationAssociationFilter", name: "RegistrationAssociationFilter")
     RegistrationAssociationFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationAssociationFilterList", name: "RegistrationAssociationFilterList", traits: {"smithy.api#length" => {"max" => 20}})
@@ -295,7 +436,7 @@ module Aws::PinpointSMSVoiceV2
     RegistrationSectionDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationSectionDefinition", name: "RegistrationSectionDefinition")
     RegistrationSectionDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationSectionDefinitionList", name: "RegistrationSectionDefinitionList")
     RegistrationSectionDisplayHints = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationSectionDisplayHints", name: "RegistrationSectionDisplayHints")
-    RegistrationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationStatus", name: "RegistrationStatus", traits: {"smithy.api#enum" => [{"value" => "CREATED", "name" => "CREATED"}, {"value" => "SUBMITTED", "name" => "SUBMITTED"}, {"value" => "REVIEWING", "name" => "REVIEWING"}, {"value" => "REQUIRES_AUTHENTICATION", "name" => "REQUIRES_AUTHENTICATION"}, {"value" => "PROVISIONING", "name" => "PROVISIONING"}, {"value" => "COMPLETE", "name" => "COMPLETE"}, {"value" => "REQUIRES_UPDATES", "name" => "REQUIRES_UPDATES"}, {"value" => "CLOSED", "name" => "CLOSED"}, {"value" => "DELETED", "name" => "DELETED"}]})
+    RegistrationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationStatus", name: "RegistrationStatus", traits: {"smithy.api#enum" => [{"value" => "CREATED", "name" => "CREATED"}, {"value" => "SUBMITTED", "name" => "SUBMITTED"}, {"value" => "AWS_REVIEWING", "name" => "AWS_REVIEWING"}, {"value" => "REVIEWING", "name" => "REVIEWING"}, {"value" => "REQUIRES_AUTHENTICATION", "name" => "REQUIRES_AUTHENTICATION"}, {"value" => "PROVISIONING", "name" => "PROVISIONING"}, {"value" => "COMPLETE", "name" => "COMPLETE"}, {"value" => "REQUIRES_UPDATES", "name" => "REQUIRES_UPDATES"}, {"value" => "CLOSED", "name" => "CLOSED"}, {"value" => "DELETED", "name" => "DELETED"}]})
     RegistrationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationType", name: "RegistrationType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9_]+$"})
     RegistrationTypeDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationTypeDefinition", name: "RegistrationTypeDefinition")
     RegistrationTypeDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationTypeDefinitionList", name: "RegistrationTypeDefinitionList")
@@ -311,7 +452,7 @@ module Aws::PinpointSMSVoiceV2
     RegistrationVersionInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationVersionInformationList", name: "RegistrationVersionInformationList")
     RegistrationVersionNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationVersionNumber", name: "RegistrationVersionNumber", traits: {"smithy.api#range" => {"min" => 1, "max" => 100000}})
     RegistrationVersionNumberList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationVersionNumberList", name: "RegistrationVersionNumberList", traits: {"smithy.api#length" => {"max" => 5}})
-    RegistrationVersionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationVersionStatus", name: "RegistrationVersionStatus", traits: {"smithy.api#enum" => [{"value" => "DRAFT", "name" => "DRAFT"}, {"value" => "SUBMITTED", "name" => "SUBMITTED"}, {"value" => "REVIEWING", "name" => "REVIEWING"}, {"value" => "REQUIRES_AUTHENTICATION", "name" => "REQUIRES_AUTHENTICATION"}, {"value" => "APPROVED", "name" => "APPROVED"}, {"value" => "DISCARDED", "name" => "DISCARDED"}, {"value" => "DENIED", "name" => "DENIED"}, {"value" => "REVOKED", "name" => "REVOKED"}, {"value" => "ARCHIVED", "name" => "ARCHIVED"}]})
+    RegistrationVersionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationVersionStatus", name: "RegistrationVersionStatus", traits: {"smithy.api#enum" => [{"value" => "DRAFT", "name" => "DRAFT"}, {"value" => "SUBMITTED", "name" => "SUBMITTED"}, {"value" => "AWS_REVIEWING", "name" => "AWS_REVIEWING"}, {"value" => "REVIEWING", "name" => "REVIEWING"}, {"value" => "REQUIRES_AUTHENTICATION", "name" => "REQUIRES_AUTHENTICATION"}, {"value" => "APPROVED", "name" => "APPROVED"}, {"value" => "DISCARDED", "name" => "DISCARDED"}, {"value" => "DENIED", "name" => "DENIED"}, {"value" => "REVOKED", "name" => "REVOKED"}, {"value" => "ARCHIVED", "name" => "ARCHIVED"}, {"value" => "REQUIRES_OFFLINE_REVIEW", "name" => "REQUIRES_OFFLINE_REVIEW"}]})
     RegistrationVersionStatusHistory = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#RegistrationVersionStatusHistory", name: "RegistrationVersionStatusHistory")
     ReleasePhoneNumberRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ReleasePhoneNumberRequest", name: "ReleasePhoneNumberRequest")
     ReleasePhoneNumberResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ReleasePhoneNumberResult", name: "ReleasePhoneNumberResult")
@@ -325,7 +466,8 @@ module Aws::PinpointSMSVoiceV2
     ResourceIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ResourceIdOrArn", name: "ResourceIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client"})
     ResourcePolicy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ResourcePolicy", name: "ResourcePolicy", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}})
-    ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ResourceType", name: "ResourceType", traits: {"smithy.api#enum" => [{"value" => "account", "name" => "ACCOUNT"}, {"value" => "phone-number", "name" => "PHONE_NUMBER"}, {"value" => "sender-id", "name" => "SENDER_ID"}, {"value" => "pool", "name" => "POOL"}, {"value" => "configuration-set", "name" => "CONFIGURATION_SET"}, {"value" => "opt-out-list", "name" => "OPT_OUT_LIST"}, {"value" => "event-destination", "name" => "EVENT_DESTINATION"}, {"value" => "keyword", "name" => "KEYWORD"}, {"value" => "opted-out-number", "name" => "OPTED_OUT_NUMBER"}, {"value" => "registration", "name" => "REGISTRATION"}, {"value" => "registration-attachment", "name" => "REGISTRATION_ATTACHMENT"}, {"value" => "verified-destination-number", "name" => "VERIFIED_DESTINATION_NUMBER"}, {"value" => "protect-configuration", "name" => "PROTECT_CONFIGURATION"}, {"value" => "message-template", "name" => "MESSAGE_TEMPLATE"}, {"value" => "policy", "name" => "POLICY"}, {"value" => "message", "name" => "MESSAGE"}]})
+    ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ResourceType", name: "ResourceType", traits: {"smithy.api#enum" => [{"value" => "account", "name" => "ACCOUNT"}, {"value" => "phone-number", "name" => "PHONE_NUMBER"}, {"value" => "sender-id", "name" => "SENDER_ID"}, {"value" => "pool", "name" => "POOL"}, {"value" => "configuration-set", "name" => "CONFIGURATION_SET"}, {"value" => "opt-out-list", "name" => "OPT_OUT_LIST"}, {"value" => "event-destination", "name" => "EVENT_DESTINATION"}, {"value" => "keyword", "name" => "KEYWORD"}, {"value" => "opted-out-number", "name" => "OPTED_OUT_NUMBER"}, {"value" => "registration", "name" => "REGISTRATION"}, {"value" => "registration-attachment", "name" => "REGISTRATION_ATTACHMENT"}, {"value" => "verified-destination-number", "name" => "VERIFIED_DESTINATION_NUMBER"}, {"value" => "protect-configuration", "name" => "PROTECT_CONFIGURATION"}, {"value" => "notify-configuration", "name" => "NOTIFY_CONFIGURATION"}, {"value" => "notify-template", "name" => "NOTIFY_TEMPLATE"}, {"value" => "message-template", "name" => "MESSAGE_TEMPLATE"}, {"value" => "policy", "name" => "POLICY"}, {"value" => "message", "name" => "MESSAGE"}, {"value" => "rcs-agent", "name" => "RCS_AGENT"}]})
+    SearchableNumberType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SearchableNumberType", name: "SearchableNumberType", traits: {"smithy.api#enum" => [{"value" => "TEN_DLC", "name" => "TEN_DLC"}]})
     SectionPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SectionPath", name: "SectionPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9_]+$"})
     SectionPathList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SectionPathList", name: "SectionPathList", traits: {"smithy.api#length" => {"max" => 5}})
     SelectChoice = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SelectChoice", name: "SelectChoice", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
@@ -337,6 +479,12 @@ module Aws::PinpointSMSVoiceV2
     SendDestinationNumberVerificationCodeResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendDestinationNumberVerificationCodeResult", name: "SendDestinationNumberVerificationCodeResult")
     SendMediaMessageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendMediaMessageRequest", name: "SendMediaMessageRequest")
     SendMediaMessageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendMediaMessageResult", name: "SendMediaMessageResult")
+    SendNotifyTextMessageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendNotifyTextMessageRequest", name: "SendNotifyTextMessageRequest")
+    SendNotifyTextMessageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendNotifyTextMessageResult", name: "SendNotifyTextMessageResult")
+    SendNotifyVoiceMessageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendNotifyVoiceMessageRequest", name: "SendNotifyVoiceMessageRequest")
+    SendNotifyVoiceMessageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendNotifyVoiceMessageResult", name: "SendNotifyVoiceMessageResult")
+    SendRcsMessageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendRcsMessageRequest", name: "SendRcsMessageRequest")
+    SendRcsMessageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendRcsMessageResult", name: "SendRcsMessageResult")
     SendTextMessageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendTextMessageRequest", name: "SendTextMessageRequest")
     SendTextMessageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendTextMessageResult", name: "SendTextMessageResult")
     SendVoiceMessageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SendVoiceMessageRequest", name: "SendVoiceMessageRequest")
@@ -351,7 +499,7 @@ module Aws::PinpointSMSVoiceV2
     SenderIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SenderIdList", name: "SenderIdList", traits: {"smithy.api#length" => {"max" => 5}})
     SenderIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SenderIdOrArn", name: "SenderIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client"})
-    ServiceQuotaExceededExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededExceptionReason", name: "ServiceQuotaExceededExceptionReason", traits: {"smithy.api#enum" => [{"value" => "ASSOCIATIONS_PER_REGISTRATION", "name" => "ASSOCIATIONS_PER_REGISTRATION"}, {"value" => "CONFIGURATION_SETS_PER_ACCOUNT", "name" => "CONFIGURATION_SETS_PER_ACCOUNT"}, {"value" => "DAILY_DESTINATION_CALL_LIMIT", "name" => "DAILY_DESTINATION_CALL_LIMIT"}, {"value" => "EVENT_DESTINATIONS_PER_CONFIGURATION_SET", "name" => "EVENT_DESTINATIONS_PER_CONFIGURATION_SET"}, {"value" => "KEYWORDS_PER_PHONE_NUMBER", "name" => "KEYWORDS_PER_PHONE_NUMBER"}, {"value" => "KEYWORDS_PER_POOL", "name" => "KEYWORDS_PER_POOL"}, {"value" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA", "name" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA"}, {"value" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT", "name" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT"}, {"value" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE", "name" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE"}, {"value" => "OPT_OUT_LISTS_PER_ACCOUNT", "name" => "OPT_OUT_LISTS_PER_ACCOUNT"}, {"value" => "ORIGINATION_IDENTITIES_PER_POOL", "name" => "ORIGINATION_IDENTITIES_PER_POOL"}, {"value" => "PHONE_NUMBERS_PER_ACCOUNT", "name" => "PHONE_NUMBERS_PER_ACCOUNT"}, {"value" => "PHONE_NUMBERS_PER_REGISTRATION", "name" => "PHONE_NUMBERS_PER_REGISTRATION"}, {"value" => "POOLS_PER_ACCOUNT", "name" => "POOLS_PER_ACCOUNT"}, {"value" => "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY", "name" => "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY"}, {"value" => "REGISTRATION_ATTACHMENTS_PER_ACCOUNT", "name" => "REGISTRATION_ATTACHMENTS_PER_ACCOUNT"}, {"value" => "REGISTRATION_VERSIONS_CREATED_PER_DAY", "name" => "REGISTRATION_VERSIONS_CREATED_PER_DAY"}, {"value" => "REGISTRATIONS_PER_ACCOUNT", "name" => "REGISTRATIONS_PER_ACCOUNT"}, {"value" => "SENDER_IDS_PER_ACCOUNT", "name" => "SENDER_IDS_PER_ACCOUNT"}, {"value" => "TAGS_PER_RESOURCE", "name" => "TAGS_PER_RESOURCE"}, {"value" => "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT", "name" => "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT"}, {"value" => "VERIFICATION_ATTEMPTS_PER_DAY", "name" => "VERIFICATION_ATTEMPTS_PER_DAY"}, {"value" => "PROTECT_CONFIGURATIONS_PER_ACCOUNT", "name" => "PROTECT_CONFIGURATIONS_PER_ACCOUNT"}]})
+    ServiceQuotaExceededExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededExceptionReason", name: "ServiceQuotaExceededExceptionReason", traits: {"smithy.api#enum" => [{"value" => "ASSOCIATIONS_PER_REGISTRATION", "name" => "ASSOCIATIONS_PER_REGISTRATION"}, {"value" => "CONFIGURATION_SETS_PER_ACCOUNT", "name" => "CONFIGURATION_SETS_PER_ACCOUNT"}, {"value" => "DAILY_DESTINATION_CALL_LIMIT", "name" => "DAILY_DESTINATION_CALL_LIMIT"}, {"value" => "DAILY_NOTIFY_TIER_MESSAGE_LIMIT", "name" => "DAILY_NOTIFY_TIER_MESSAGE_LIMIT"}, {"value" => "EVENT_DESTINATIONS_PER_CONFIGURATION_SET", "name" => "EVENT_DESTINATIONS_PER_CONFIGURATION_SET"}, {"value" => "KEYWORDS_PER_PHONE_NUMBER", "name" => "KEYWORDS_PER_PHONE_NUMBER"}, {"value" => "KEYWORDS_PER_POOL", "name" => "KEYWORDS_PER_POOL"}, {"value" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA", "name" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA"}, {"value" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY", "name" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY"}, {"value" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_RCS", "name" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_RCS"}, {"value" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT", "name" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT"}, {"value" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE", "name" => "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE"}, {"value" => "NOTIFY_CONFIGURATIONS_PER_ACCOUNT", "name" => "NOTIFY_CONFIGURATIONS_PER_ACCOUNT"}, {"value" => "OPT_OUT_LISTS_PER_ACCOUNT", "name" => "OPT_OUT_LISTS_PER_ACCOUNT"}, {"value" => "ORIGINATION_IDENTITIES_PER_POOL", "name" => "ORIGINATION_IDENTITIES_PER_POOL"}, {"value" => "PHONE_NUMBERS_PER_ACCOUNT", "name" => "PHONE_NUMBERS_PER_ACCOUNT"}, {"value" => "PHONE_NUMBERS_PER_REGISTRATION", "name" => "PHONE_NUMBERS_PER_REGISTRATION"}, {"value" => "POOLS_PER_ACCOUNT", "name" => "POOLS_PER_ACCOUNT"}, {"value" => "RCS_AGENTS_PER_ACCOUNT", "name" => "RCS_AGENTS_PER_ACCOUNT"}, {"value" => "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY", "name" => "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY"}, {"value" => "REGISTRATION_ATTACHMENTS_PER_ACCOUNT", "name" => "REGISTRATION_ATTACHMENTS_PER_ACCOUNT"}, {"value" => "REGISTRATION_VERSIONS_CREATED_PER_DAY", "name" => "REGISTRATION_VERSIONS_CREATED_PER_DAY"}, {"value" => "REGISTRATIONS_PER_ACCOUNT", "name" => "REGISTRATIONS_PER_ACCOUNT"}, {"value" => "SENDER_IDS_PER_ACCOUNT", "name" => "SENDER_IDS_PER_ACCOUNT"}, {"value" => "TAGS_PER_RESOURCE", "name" => "TAGS_PER_RESOURCE"}, {"value" => "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT", "name" => "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT"}, {"value" => "VERIFICATION_ATTEMPTS_PER_DAY", "name" => "VERIFICATION_ATTEMPTS_PER_DAY"}, {"value" => "PROTECT_CONFIGURATIONS_PER_ACCOUNT", "name" => "PROTECT_CONFIGURATIONS_PER_ACCOUNT"}]})
     SetAccountDefaultProtectConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetAccountDefaultProtectConfigurationRequest", name: "SetAccountDefaultProtectConfigurationRequest")
     SetAccountDefaultProtectConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetAccountDefaultProtectConfigurationResult", name: "SetAccountDefaultProtectConfigurationResult")
     SetDefaultMessageFeedbackEnabledRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetDefaultMessageFeedbackEnabledRequest", name: "SetDefaultMessageFeedbackEnabledRequest")
@@ -362,6 +510,10 @@ module Aws::PinpointSMSVoiceV2
     SetDefaultSenderIdResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetDefaultSenderIdResult", name: "SetDefaultSenderIdResult")
     SetMediaMessageSpendLimitOverrideRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverrideRequest", name: "SetMediaMessageSpendLimitOverrideRequest")
     SetMediaMessageSpendLimitOverrideResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverrideResult", name: "SetMediaMessageSpendLimitOverrideResult")
+    SetNotifyMessageSpendLimitOverrideRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetNotifyMessageSpendLimitOverrideRequest", name: "SetNotifyMessageSpendLimitOverrideRequest")
+    SetNotifyMessageSpendLimitOverrideResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetNotifyMessageSpendLimitOverrideResult", name: "SetNotifyMessageSpendLimitOverrideResult")
+    SetRcsMessageSpendLimitOverrideRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetRcsMessageSpendLimitOverrideRequest", name: "SetRcsMessageSpendLimitOverrideRequest")
+    SetRcsMessageSpendLimitOverrideResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetRcsMessageSpendLimitOverrideResult", name: "SetRcsMessageSpendLimitOverrideResult")
     SetTextMessageSpendLimitOverrideRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetTextMessageSpendLimitOverrideRequest", name: "SetTextMessageSpendLimitOverrideRequest")
     SetTextMessageSpendLimitOverrideResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetTextMessageSpendLimitOverrideResult", name: "SetTextMessageSpendLimitOverrideResult")
     SetVoiceMessageSpendLimitOverrideRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SetVoiceMessageSpendLimitOverrideRequest", name: "SetVoiceMessageSpendLimitOverrideRequest")
@@ -370,7 +522,7 @@ module Aws::PinpointSMSVoiceV2
     SnsTopicArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SnsTopicArn", name: "SnsTopicArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:\\S+$"})
     SpendLimit = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SpendLimit", name: "SpendLimit")
     SpendLimitList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SpendLimitList", name: "SpendLimitList")
-    SpendLimitName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SpendLimitName", name: "SpendLimitName", traits: {"smithy.api#enum" => [{"value" => "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT", "name" => "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT"}, {"value" => "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT", "name" => "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"}, {"value" => "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT", "name" => "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"}]})
+    SpendLimitName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SpendLimitName", name: "SpendLimitName", traits: {"smithy.api#enum" => [{"value" => "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT", "name" => "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT"}, {"value" => "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT", "name" => "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"}, {"value" => "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT", "name" => "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"}, {"value" => "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT", "name" => "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT"}, {"value" => "RCS_MESSAGE_MONTHLY_SPEND_LIMIT", "name" => "RCS_MESSAGE_MONTHLY_SPEND_LIMIT"}]})
     StringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#StringList", name: "StringList")
     StringMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.pinpointsmsvoicev2#StringMap", name: "StringMap")
     SubmitRegistrationVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#SubmitRegistrationVersionRequest", name: "SubmitRegistrationVersionRequest")
@@ -384,17 +536,33 @@ module Aws::PinpointSMSVoiceV2
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TagResourceRequest", name: "TagResourceRequest")
     TagResourceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TagResourceResult", name: "TagResourceResult")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^.*$"})
+    TemplateContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TemplateContent", name: "TemplateContent", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    TemplateVariableMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TemplateVariableMetadata", name: "TemplateVariableMetadata")
+    TemplateVariableName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TemplateVariableName", name: "TemplateVariableName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9_]+$"})
+    TemplateVariableSource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TemplateVariableSource", name: "TemplateVariableSource", traits: {"smithy.api#enum" => [{"value" => "CUSTOMER", "name" => "CUSTOMER"}, {"value" => "SYSTEM", "name" => "SYSTEM"}]})
+    TemplateVariableSubstitutionMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TemplateVariableSubstitutionMap", name: "TemplateVariableSubstitutionMap", traits: {"smithy.api#length" => {"max" => 20}})
+    TemplateVariableType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TemplateVariableType", name: "TemplateVariableType", traits: {"smithy.api#enum" => [{"value" => "STRING", "name" => "STRING"}, {"value" => "INTEGER", "name" => "INTEGER"}, {"value" => "BOOLEAN", "name" => "BOOLEAN"}]})
+    TemplateVariableValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TemplateVariableValue", name: "TemplateVariableValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    TemplateVariablesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TemplateVariablesMap", name: "TemplateVariablesMap")
+    TestingAgentInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TestingAgentInformation", name: "TestingAgentInformation")
+    TestingAgentStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TestingAgentStatus", name: "TestingAgentStatus", traits: {"smithy.api#enum" => [{"value" => "CREATED", "name" => "CREATED"}, {"value" => "PENDING", "name" => "PENDING"}, {"value" => "ACTIVE", "name" => "ACTIVE"}]})
     TextMessageBody = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TextMessageBody", name: "TextMessageBody", traits: {"smithy.api#length" => {"min" => 1, "max" => 1600}, "smithy.api#pattern" => "^(?!\\s*$)[\\s\\S]+$"})
     TextMessageOriginationIdentity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TextMessageOriginationIdentity", name: "TextMessageOriginationIdentity", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/\\+-]+$"})
     TextValidation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TextValidation", name: "TextValidation")
     TextValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TextValue", name: "TextValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#retryable" => {"throttling" => true}})
+    TierUpgradeStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TierUpgradeStatus", name: "TierUpgradeStatus", traits: {"smithy.api#enum" => [{"value" => "BASIC", "name" => "BASIC"}, {"value" => "PENDING_UPGRADE", "name" => "PENDING_UPGRADE"}, {"value" => "ADVANCED", "name" => "ADVANCED"}, {"value" => "REJECTED", "name" => "REJECTED"}]})
     TimeToLive = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TimeToLive", name: "TimeToLive", traits: {"smithy.api#range" => {"min" => 5, "max" => 259200}})
     TwoWayChannelArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TwoWayChannelArn", name: "TwoWayChannelArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^\\S+$"})
+    TwoWayMediaS3BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TwoWayMediaS3BucketName", name: "TwoWayMediaS3BucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^[a-z0-9][a-z0-9.-]*[a-z0-9]$"})
+    TwoWayMediaS3BucketNameOrUnset = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TwoWayMediaS3BucketNameOrUnset", name: "TwoWayMediaS3BucketNameOrUnset", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^([a-z0-9][a-z0-9.-]*[a-z0-9]|UNSET_RCS_MEDIA_CONFIGURATION)$"})
+    TwoWayMediaS3KeyPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#TwoWayMediaS3KeyPrefix", name: "TwoWayMediaS3KeyPrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[\\S]+$"})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UntagResourceResult", name: "UntagResourceResult")
     UpdateEventDestinationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateEventDestinationRequest", name: "UpdateEventDestinationRequest")
     UpdateEventDestinationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateEventDestinationResult", name: "UpdateEventDestinationResult")
+    UpdateNotifyConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateNotifyConfigurationRequest", name: "UpdateNotifyConfigurationRequest")
+    UpdateNotifyConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateNotifyConfigurationResult", name: "UpdateNotifyConfigurationResult")
     UpdatePhoneNumberRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdatePhoneNumberRequest", name: "UpdatePhoneNumberRequest")
     UpdatePhoneNumberResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdatePhoneNumberResult", name: "UpdatePhoneNumberResult")
     UpdatePoolRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdatePoolRequest", name: "UpdatePoolRequest")
@@ -403,19 +571,21 @@ module Aws::PinpointSMSVoiceV2
     UpdateProtectConfigurationCountryRuleSetResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationCountryRuleSetResult", name: "UpdateProtectConfigurationCountryRuleSetResult")
     UpdateProtectConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationRequest", name: "UpdateProtectConfigurationRequest")
     UpdateProtectConfigurationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationResult", name: "UpdateProtectConfigurationResult")
+    UpdateRcsAgentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateRcsAgentRequest", name: "UpdateRcsAgentRequest")
+    UpdateRcsAgentResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateRcsAgentResult", name: "UpdateRcsAgentResult")
     UpdateSenderIdRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateSenderIdRequest", name: "UpdateSenderIdRequest")
     UpdateSenderIdResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#UpdateSenderIdResult", name: "UpdateSenderIdResult")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client"})
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
-    ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"value" => "CANNOT_ADD_OPTED_OUT_NUMBER", "name" => "CANNOT_ADD_OPTED_OUT_NUMBER"}, {"value" => "CANNOT_PARSE", "name" => "CANNOT_PARSE"}, {"value" => "COUNTRY_CODE_MISMATCH", "name" => "COUNTRY_CODE_MISMATCH"}, {"value" => "DESTINATION_COUNTRY_BLOCKED", "name" => "DESTINATION_COUNTRY_BLOCKED"}, {"value" => "FIELD_VALIDATION_FAILED", "name" => "FIELD_VALIDATION_FAILED"}, {"value" => "ATTACHMENT_TYPE_NOT_SUPPORTED", "name" => "ATTACHMENT_TYPE_NOT_SUPPORTED"}, {"value" => "INTERNATIONAL_SENDING_NOT_SUPPORTED", "name" => "INTERNATIONAL_SENDING_NOT_SUPPORTED"}, {"value" => "INVALID_ARN", "name" => "INVALID_ARN"}, {"value" => "INVALID_FILTER_VALUES", "name" => "INVALID_FILTER_VALUES"}, {"value" => "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY", "name" => "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY"}, {"value" => "INVALID_NEXT_TOKEN", "name" => "INVALID_NEXT_TOKEN"}, {"value" => "INVALID_PARAMETER", "name" => "INVALID_PARAMETER"}, {"value" => "INVALID_REQUEST", "name" => "INVALID_REQUEST"}, {"value" => "INVALID_REGISTRATION_ASSOCIATION", "name" => "INVALID_REGISTRATION_ASSOCIATION"}, {"value" => "MAXIMUM_SIZE_EXCEEDED", "name" => "MAXIMUM_SIZE_EXCEEDED"}, {"value" => "MEDIA_TYPE_NOT_SUPPORTED", "name" => "MEDIA_TYPE_NOT_SUPPORTED"}, {"value" => "MISSING_PARAMETER", "name" => "MISSING_PARAMETER"}, {"value" => "PARAMETERS_CANNOT_BE_USED_TOGETHER", "name" => "PARAMETERS_CANNOT_BE_USED_TOGETHER"}, {"value" => "PHONE_NUMBER_CANNOT_BE_OPTED_IN", "name" => "PHONE_NUMBER_CANNOT_BE_OPTED_IN"}, {"value" => "PHONE_NUMBER_CANNOT_BE_RELEASED", "name" => "PHONE_NUMBER_CANNOT_BE_RELEASED"}, {"value" => "PRICE_OVER_THRESHOLD", "name" => "PRICE_OVER_THRESHOLD"}, {"value" => "RESOURCE_NOT_ACCESSIBLE", "name" => "RESOURCE_NOT_ACCESSIBLE"}, {"value" => "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT", "name" => "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT"}, {"value" => "SENDER_ID_NOT_REGISTERED", "name" => "SENDER_ID_NOT_REGISTERED"}, {"value" => "SENDER_ID_NOT_SUPPORTED", "name" => "SENDER_ID_NOT_SUPPORTED"}, {"value" => "SENDER_ID_REQUIRES_REGISTRATION", "name" => "SENDER_ID_REQUIRES_REGISTRATION"}, {"value" => "TWO_WAY_TOPIC_NOT_PRESENT", "name" => "TWO_WAY_TOPIC_NOT_PRESENT"}, {"value" => "TWO_WAY_NOT_ENABLED", "name" => "TWO_WAY_NOT_ENABLED"}, {"value" => "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY", "name" => "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY"}, {"value" => "TWO_WAY_NOT_SUPPORTED_IN_REGION", "name" => "TWO_WAY_NOT_SUPPORTED_IN_REGION"}, {"value" => "TWO_WAY_CHANNEL_NOT_PRESENT", "name" => "TWO_WAY_CHANNEL_NOT_PRESENT"}, {"value" => "UNKNOWN_REGISTRATION_FIELD", "name" => "UNKNOWN_REGISTRATION_FIELD"}, {"value" => "UNKNOWN_REGISTRATION_SECTION", "name" => "UNKNOWN_REGISTRATION_SECTION"}, {"value" => "UNKNOWN_REGISTRATION_TYPE", "name" => "UNKNOWN_REGISTRATION_TYPE"}, {"value" => "UNKNOWN_REGISTRATION_VERSION", "name" => "UNKNOWN_REGISTRATION_VERSION"}, {"value" => "UNKNOWN_OPERATION", "name" => "UNKNOWN_OPERATION"}, {"value" => "REGISTRATION_FIELD_CANNOT_BE_DELETED", "name" => "REGISTRATION_FIELD_CANNOT_BE_DELETED"}, {"value" => "VERIFICATION_CODE_MISMATCH", "name" => "VERIFICATION_CODE_MISMATCH"}, {"value" => "VOICE_CAPABILITY_NOT_AVAILABLE", "name" => "VOICE_CAPABILITY_NOT_AVAILABLE"}, {"value" => "UNSPECIFIED_PARAMETER_NOT_SUPPORTED", "name" => "UNSPECIFIED_PARAMETER_NOT_SUPPORTED"}, {"value" => "OTHER", "name" => "OTHER"}]})
+    ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"value" => "CANNOT_ADD_OPTED_OUT_NUMBER", "name" => "CANNOT_ADD_OPTED_OUT_NUMBER"}, {"value" => "CANNOT_PARSE", "name" => "CANNOT_PARSE"}, {"value" => "CHANNEL_NOT_ENABLED", "name" => "CHANNEL_NOT_ENABLED"}, {"value" => "COUNTRY_CODE_MISMATCH", "name" => "COUNTRY_CODE_MISMATCH"}, {"value" => "COUNTRY_NOT_ENABLED", "name" => "COUNTRY_NOT_ENABLED"}, {"value" => "DESTINATION_COUNTRY_BLOCKED", "name" => "DESTINATION_COUNTRY_BLOCKED"}, {"value" => "FIELD_VALIDATION_FAILED", "name" => "FIELD_VALIDATION_FAILED"}, {"value" => "ATTACHMENT_TYPE_NOT_SUPPORTED", "name" => "ATTACHMENT_TYPE_NOT_SUPPORTED"}, {"value" => "INTERNATIONAL_SENDING_NOT_SUPPORTED", "name" => "INTERNATIONAL_SENDING_NOT_SUPPORTED"}, {"value" => "INVALID_ARN", "name" => "INVALID_ARN"}, {"value" => "INVALID_FILTER_VALUES", "name" => "INVALID_FILTER_VALUES"}, {"value" => "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY", "name" => "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY"}, {"value" => "INVALID_NEXT_TOKEN", "name" => "INVALID_NEXT_TOKEN"}, {"value" => "INVALID_PARAMETER", "name" => "INVALID_PARAMETER"}, {"value" => "INVALID_REQUEST", "name" => "INVALID_REQUEST"}, {"value" => "INVALID_REGISTRATION_ASSOCIATION", "name" => "INVALID_REGISTRATION_ASSOCIATION"}, {"value" => "MAXIMUM_SIZE_EXCEEDED", "name" => "MAXIMUM_SIZE_EXCEEDED"}, {"value" => "MEDIA_TYPE_NOT_SUPPORTED", "name" => "MEDIA_TYPE_NOT_SUPPORTED"}, {"value" => "MISSING_PARAMETER", "name" => "MISSING_PARAMETER"}, {"value" => "PARAMETERS_CANNOT_BE_USED_TOGETHER", "name" => "PARAMETERS_CANNOT_BE_USED_TOGETHER"}, {"value" => "PHONE_NUMBER_CANNOT_BE_OPTED_IN", "name" => "PHONE_NUMBER_CANNOT_BE_OPTED_IN"}, {"value" => "PHONE_NUMBER_CANNOT_BE_RELEASED", "name" => "PHONE_NUMBER_CANNOT_BE_RELEASED"}, {"value" => "PRICE_OVER_THRESHOLD", "name" => "PRICE_OVER_THRESHOLD"}, {"value" => "RESOURCE_NOT_ACCESSIBLE", "name" => "RESOURCE_NOT_ACCESSIBLE"}, {"value" => "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT", "name" => "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT"}, {"value" => "SENDER_ID_NOT_REGISTERED", "name" => "SENDER_ID_NOT_REGISTERED"}, {"value" => "SENDER_ID_NOT_SUPPORTED", "name" => "SENDER_ID_NOT_SUPPORTED"}, {"value" => "SENDER_ID_REQUIRES_REGISTRATION", "name" => "SENDER_ID_REQUIRES_REGISTRATION"}, {"value" => "TWO_WAY_TOPIC_NOT_PRESENT", "name" => "TWO_WAY_TOPIC_NOT_PRESENT"}, {"value" => "TWO_WAY_NOT_ENABLED", "name" => "TWO_WAY_NOT_ENABLED"}, {"value" => "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY", "name" => "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY"}, {"value" => "TWO_WAY_NOT_SUPPORTED_IN_REGION", "name" => "TWO_WAY_NOT_SUPPORTED_IN_REGION"}, {"value" => "TWO_WAY_CHANNEL_NOT_PRESENT", "name" => "TWO_WAY_CHANNEL_NOT_PRESENT"}, {"value" => "UNKNOWN_REGISTRATION_FIELD", "name" => "UNKNOWN_REGISTRATION_FIELD"}, {"value" => "UNKNOWN_REGISTRATION_SECTION", "name" => "UNKNOWN_REGISTRATION_SECTION"}, {"value" => "UNKNOWN_REGISTRATION_TYPE", "name" => "UNKNOWN_REGISTRATION_TYPE"}, {"value" => "UNKNOWN_REGISTRATION_VERSION", "name" => "UNKNOWN_REGISTRATION_VERSION"}, {"value" => "UNKNOWN_OPERATION", "name" => "UNKNOWN_OPERATION"}, {"value" => "REGISTRATION_FIELD_CANNOT_BE_DELETED", "name" => "REGISTRATION_FIELD_CANNOT_BE_DELETED"}, {"value" => "VERIFICATION_CODE_MISMATCH", "name" => "VERIFICATION_CODE_MISMATCH"}, {"value" => "VOICE_CAPABILITY_NOT_AVAILABLE", "name" => "VOICE_CAPABILITY_NOT_AVAILABLE"}, {"value" => "UNSPECIFIED_PARAMETER_NOT_SUPPORTED", "name" => "UNSPECIFIED_PARAMETER_NOT_SUPPORTED"}, {"value" => "OTHER", "name" => "OTHER"}]})
     VerificationChannel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerificationChannel", name: "VerificationChannel", traits: {"smithy.api#enum" => [{"value" => "TEXT", "name" => "TEXT"}, {"value" => "VOICE", "name" => "VOICE"}]})
     VerificationCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerificationCode", name: "VerificationCode", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#pattern" => "^[A-Za-z0-9]+$"})
     VerificationMessageOriginationIdentity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerificationMessageOriginationIdentity", name: "VerificationMessageOriginationIdentity", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/\\+-]+$"})
-    VerificationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerificationStatus", name: "VerificationStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "VERIFIED", "name" => "VERIFIED"}]})
+    VerificationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerificationStatus", name: "VerificationStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "VERIFIED", "name" => "VERIFIED"}, {"value" => "UNSUPPORTED", "name" => "UNSUPPORTED"}]})
     VerifiedDestinationNumberFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerifiedDestinationNumberFilter", name: "VerifiedDestinationNumberFilter")
     VerifiedDestinationNumberFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerifiedDestinationNumberFilterList", name: "VerifiedDestinationNumberFilterList", traits: {"smithy.api#length" => {"max" => 20}})
-    VerifiedDestinationNumberFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerifiedDestinationNumberFilterName", name: "VerifiedDestinationNumberFilterName", traits: {"smithy.api#enum" => [{"value" => "status", "name" => "STATUS"}]})
+    VerifiedDestinationNumberFilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerifiedDestinationNumberFilterName", name: "VerifiedDestinationNumberFilterName", traits: {"smithy.api#enum" => [{"value" => "status", "name" => "STATUS"}, {"value" => "rcs-agent-id", "name" => "RCS_AGENT_ID"}]})
     VerifiedDestinationNumberIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerifiedDestinationNumberIdList", name: "VerifiedDestinationNumberIdList", traits: {"smithy.api#length" => {"max" => 5}})
     VerifiedDestinationNumberIdOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerifiedDestinationNumberIdOrArn", name: "VerifiedDestinationNumberIdOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/-]+$"})
     VerifiedDestinationNumberInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerifiedDestinationNumberInformation", name: "VerifiedDestinationNumberInformation")
@@ -423,6 +593,7 @@ module Aws::PinpointSMSVoiceV2
     VerifyDestinationNumberRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerifyDestinationNumberRequest", name: "VerifyDestinationNumberRequest")
     VerifyDestinationNumberResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VerifyDestinationNumberResult", name: "VerifyDestinationNumberResult")
     VoiceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VoiceId", name: "VoiceId", traits: {"smithy.api#enum" => [{"value" => "AMY", "name" => "AMY"}, {"value" => "ASTRID", "name" => "ASTRID"}, {"value" => "BIANCA", "name" => "BIANCA"}, {"value" => "BRIAN", "name" => "BRIAN"}, {"value" => "CAMILA", "name" => "CAMILA"}, {"value" => "CARLA", "name" => "CARLA"}, {"value" => "CARMEN", "name" => "CARMEN"}, {"value" => "CELINE", "name" => "CELINE"}, {"value" => "CHANTAL", "name" => "CHANTAL"}, {"value" => "CONCHITA", "name" => "CONCHITA"}, {"value" => "CRISTIANO", "name" => "CRISTIANO"}, {"value" => "DORA", "name" => "DORA"}, {"value" => "EMMA", "name" => "EMMA"}, {"value" => "ENRIQUE", "name" => "ENRIQUE"}, {"value" => "EWA", "name" => "EWA"}, {"value" => "FILIZ", "name" => "FILIZ"}, {"value" => "GERAINT", "name" => "GERAINT"}, {"value" => "GIORGIO", "name" => "GIORGIO"}, {"value" => "GWYNETH", "name" => "GWYNETH"}, {"value" => "HANS", "name" => "HANS"}, {"value" => "INES", "name" => "INES"}, {"value" => "IVY", "name" => "IVY"}, {"value" => "JACEK", "name" => "JACEK"}, {"value" => "JAN", "name" => "JAN"}, {"value" => "JOANNA", "name" => "JOANNA"}, {"value" => "JOEY", "name" => "JOEY"}, {"value" => "JUSTIN", "name" => "JUSTIN"}, {"value" => "KARL", "name" => "KARL"}, {"value" => "KENDRA", "name" => "KENDRA"}, {"value" => "KIMBERLY", "name" => "KIMBERLY"}, {"value" => "LEA", "name" => "LEA"}, {"value" => "LIV", "name" => "LIV"}, {"value" => "LOTTE", "name" => "LOTTE"}, {"value" => "LUCIA", "name" => "LUCIA"}, {"value" => "LUPE", "name" => "LUPE"}, {"value" => "MADS", "name" => "MADS"}, {"value" => "MAJA", "name" => "MAJA"}, {"value" => "MARLENE", "name" => "MARLENE"}, {"value" => "MATHIEU", "name" => "MATHIEU"}, {"value" => "MATTHEW", "name" => "MATTHEW"}, {"value" => "MAXIM", "name" => "MAXIM"}, {"value" => "MIA", "name" => "MIA"}, {"value" => "MIGUEL", "name" => "MIGUEL"}, {"value" => "MIZUKI", "name" => "MIZUKI"}, {"value" => "NAJA", "name" => "NAJA"}, {"value" => "NICOLE", "name" => "NICOLE"}, {"value" => "PENELOPE", "name" => "PENELOPE"}, {"value" => "RAVEENA", "name" => "RAVEENA"}, {"value" => "RICARDO", "name" => "RICARDO"}, {"value" => "RUBEN", "name" => "RUBEN"}, {"value" => "RUSSELL", "name" => "RUSSELL"}, {"value" => "SALLI", "name" => "SALLI"}, {"value" => "SEOYEON", "name" => "SEOYEON"}, {"value" => "TAKUMI", "name" => "TAKUMI"}, {"value" => "TATYANA", "name" => "TATYANA"}, {"value" => "VICKI", "name" => "VICKI"}, {"value" => "VITORIA", "name" => "VITORIA"}, {"value" => "ZEINA", "name" => "ZEINA"}, {"value" => "ZHIYU", "name" => "ZHIYU"}]})
+    VoiceIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VoiceIdList", name: "VoiceIdList", traits: {"smithy.api#length" => {"min" => 0, "max" => 60}})
     VoiceMessageBody = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VoiceMessageBody", name: "VoiceMessageBody", traits: {"smithy.api#length" => {"min" => 1, "max" => 6000}, "smithy.api#pattern" => "^(?!\\s*$)[\\s\\S]+$"})
     VoiceMessageBodyTextType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VoiceMessageBodyTextType", name: "VoiceMessageBodyTextType", traits: {"smithy.api#enum" => [{"value" => "TEXT", "name" => "TEXT"}, {"value" => "SSML", "name" => "SSML"}]})
     VoiceMessageOriginationIdentity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.pinpointsmsvoicev2#VoiceMessageOriginationIdentity", name: "VoiceMessageOriginationIdentity", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9_:/\\+-]+$"})
@@ -441,7 +612,7 @@ module Aws::PinpointSMSVoiceV2
     AccountLimitList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountLimit, name: "member"))
     AssociateOriginationIdentityRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, name: "PoolId", traits: {"smithy.api#required" => {}}))
     AssociateOriginationIdentityRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneOrSenderIdOrArn, name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    AssociateOriginationIdentityRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    AssociateOriginationIdentityRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode"))
     AssociateOriginationIdentityRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     AssociateOriginationIdentityRequest.type = Types::AssociateOriginationIdentityRequest
     AssociateOriginationIdentityResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PoolArn"))
@@ -458,9 +629,41 @@ module Aws::PinpointSMSVoiceV2
     AssociateProtectConfigurationResult.add_member(:protect_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationArn, name: "ProtectConfigurationArn", traits: {"smithy.api#required" => {}}))
     AssociateProtectConfigurationResult.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationId, name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
     AssociateProtectConfigurationResult.type = Types::AssociateProtectConfigurationResult
+    AvailablePhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member"))
+    CarrierLookupRequest.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: CarrierLookupInputPhoneNumberType, name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
+    CarrierLookupRequest.add_member(:enable_cleansing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "EnableCleansing"))
+    CarrierLookupRequest.type = Types::CarrierLookupRequest
+    CarrierLookupResult.add_member(:e164_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: E164PhoneNumberType, name: "E164PhoneNumber", traits: {"smithy.api#required" => {}}))
+    CarrierLookupResult.add_member(:dialing_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DialingCountryCodeType, name: "DialingCountryCode"))
+    CarrierLookupResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode"))
+    CarrierLookupResult.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Country"))
+    CarrierLookupResult.add_member(:mcc, ::Smithy::Schema::Shapes::MemberShape.new(target: MCCType, name: "MCC"))
+    CarrierLookupResult.add_member(:mnc, ::Smithy::Schema::Shapes::MemberShape.new(target: MNCType, name: "MNC"))
+    CarrierLookupResult.add_member(:carrier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Carrier"))
+    CarrierLookupResult.add_member(:phone_number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberType, name: "PhoneNumberType", traits: {"smithy.api#required" => {}}))
+    CarrierLookupResult.add_member(:original_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: CarrierLookupInputPhoneNumberType, name: "OriginalPhoneNumber"))
+    CarrierLookupResult.type = Types::CarrierLookupResult
+    CarrierStatusInformation.add_member(:carrier_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CarrierName", traits: {"smithy.api#required" => {}}))
+    CarrierStatusInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CarrierStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    CarrierStatusInformation.type = Types::CarrierStatusInformation
+    CarrierStatusInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CarrierStatusInformation, name: "member"))
     CloudWatchLogsDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
     CloudWatchLogsDestination.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, name: "LogGroupArn", traits: {"smithy.api#required" => {}}))
     CloudWatchLogsDestination.type = Types::CloudWatchLogsDestination
+    ConditionValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionValue, name: "member"))
+    ConditionalBehavior.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalRuleList, name: "Rules", traits: {"smithy.api#required" => {}}))
+    ConditionalBehavior.add_member(:default_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalFieldBehavior, name: "DefaultBehavior", traits: {"smithy.api#required" => {}}))
+    ConditionalBehavior.type = Types::ConditionalBehavior
+    ConditionalRule.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldConditionList, name: "Conditions", traits: {"smithy.api#required" => {}}))
+    ConditionalRule.add_member(:rule_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalFieldBehavior, name: "RuleBehavior", traits: {"smithy.api#required" => {}}))
+    ConditionalRule.add_member(:conditional_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalValidation, name: "ConditionalValidation"))
+    ConditionalRule.type = Types::ConditionalRule
+    ConditionalRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalRule, name: "member"))
+    ConditionalValidation.add_member(:min_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MinLength", traits: {"smithy.api#range" => {"min" => 0}}))
+    ConditionalValidation.add_member(:max_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxLength", traits: {"smithy.api#range" => {"min" => 0}}))
+    ConditionalValidation.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Pattern", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    ConditionalValidation.add_member(:allowed_values, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectChoiceList, name: "AllowedValues"))
+    ConditionalValidation.type = Types::ConditionalValidation
     ConfigurationSetFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
     ConfigurationSetFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     ConfigurationSetFilter.type = Types::ConfigurationSetFilter
@@ -483,6 +686,17 @@ module Aws::PinpointSMSVoiceV2
     ConflictException.type = Types::ConflictException
     ContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextKey, name: "key"))
     ContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextValue, name: "value"))
+    CountryLaunchStatusFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryLaunchStatusFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
+    CountryLaunchStatusFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
+    CountryLaunchStatusFilter.type = Types::CountryLaunchStatusFilter
+    CountryLaunchStatusFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryLaunchStatusFilter, name: "member"))
+    CountryLaunchStatusInformation.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    CountryLaunchStatusInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryLaunchStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    CountryLaunchStatusInformation.add_member(:rcs_platform_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsPlatformId"))
+    CountryLaunchStatusInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    CountryLaunchStatusInformation.add_member(:carrier_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CarrierStatusInformationList, name: "CarrierStatus", traits: {"smithy.api#required" => {}}))
+    CountryLaunchStatusInformation.type = Types::CountryLaunchStatusInformation
+    CountryLaunchStatusInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryLaunchStatusInformation, name: "member"))
     CreateConfigurationSetRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName", traits: {"smithy.api#required" => {}}))
     CreateConfigurationSetRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateConfigurationSetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -504,6 +718,32 @@ module Aws::PinpointSMSVoiceV2
     CreateEventDestinationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName"))
     CreateEventDestinationResult.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "EventDestination"))
     CreateEventDestinationResult.type = Types::CreateEventDestinationResult
+    CreateNotifyConfigurationRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationDisplayName, name: "DisplayName", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationRequest.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationUseCase, name: "UseCase", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationRequest.add_member(:default_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "DefaultTemplateId"))
+    CreateNotifyConfigurationRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, name: "PoolId"))
+    CreateNotifyConfigurationRequest.add_member(:enabled_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCodeList, name: "EnabledCountries"))
+    CreateNotifyConfigurationRequest.add_member(:enabled_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEnabledChannelsList, name: "EnabledChannels", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "DeletionProtectionEnabled"))
+    CreateNotifyConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateNotifyConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateNotifyConfigurationRequest.type = Types::CreateNotifyConfigurationRequest
+    CreateNotifyConfigurationResult.add_member(:notify_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationArn, name: "NotifyConfigurationArn", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.add_member(:notify_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationId, name: "NotifyConfigurationId", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationDisplayName, name: "DisplayName", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationUseCase, name: "UseCase", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.add_member(:default_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "DefaultTemplateId"))
+    CreateNotifyConfigurationResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PoolId"))
+    CreateNotifyConfigurationResult.add_member(:enabled_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCodeList, name: "EnabledCountries"))
+    CreateNotifyConfigurationResult.add_member(:enabled_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEnabledChannelsList, name: "EnabledChannels", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationTier, name: "Tier", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.add_member(:tier_upgrade_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TierUpgradeStatus, name: "TierUpgradeStatus", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.add_member(:rejection_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RejectionReason"))
+    CreateNotifyConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateNotifyConfigurationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    CreateNotifyConfigurationResult.type = Types::CreateNotifyConfigurationResult
     CreateOptOutListRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, name: "OptOutListName", traits: {"smithy.api#required" => {}}))
     CreateOptOutListRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateOptOutListRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -514,7 +754,7 @@ module Aws::PinpointSMSVoiceV2
     CreateOptOutListResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp"))
     CreateOptOutListResult.type = Types::CreateOptOutListResult
     CreatePoolRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneOrSenderIdOrArn, name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    CreatePoolRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    CreatePoolRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode"))
     CreatePoolRequest.add_member(:message_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "MessageType", traits: {"smithy.api#required" => {}}))
     CreatePoolRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "DeletionProtectionEnabled"))
     CreatePoolRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
@@ -545,6 +785,27 @@ module Aws::PinpointSMSVoiceV2
     CreateProtectConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     CreateProtectConfigurationResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateProtectConfigurationResult.type = Types::CreateProtectConfigurationResult
+    CreateRcsAgentRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "DeletionProtectionEnabled"))
+    CreateRcsAgentRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, name: "OptOutListName"))
+    CreateRcsAgentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateRcsAgentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateRcsAgentRequest.type = Types::CreateRcsAgentRequest
+    CreateRcsAgentResult.add_member(:rcs_agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentArn", traits: {"smithy.api#required" => {}}))
+    CreateRcsAgentResult.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentId", traits: {"smithy.api#required" => {}}))
+    CreateRcsAgentResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateRcsAgentResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    CreateRcsAgentResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, name: "OptOutListName"))
+    CreateRcsAgentResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    CreateRcsAgentResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    CreateRcsAgentResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, name: "TwoWayChannelArn"))
+    CreateRcsAgentResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "TwoWayChannelRole"))
+    CreateRcsAgentResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "TwoWayEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    CreateRcsAgentResult.add_member(:two_way_media_s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayMediaS3BucketName, name: "TwoWayMediaS3BucketName"))
+    CreateRcsAgentResult.add_member(:two_way_media_s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayMediaS3KeyPrefix, name: "TwoWayMediaS3KeyPrefix"))
+    CreateRcsAgentResult.add_member(:two_way_media_s3_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "TwoWayMediaS3Role"))
+    CreateRcsAgentResult.add_member(:two_way_rcs_events_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsEventTypeList, name: "TwoWayRcsEventsEnabled"))
+    CreateRcsAgentResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateRcsAgentResult.type = Types::CreateRcsAgentResult
     CreateRegistrationAssociationRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, name: "RegistrationId", traits: {"smithy.api#required" => {}}))
     CreateRegistrationAssociationRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdOrArn, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     CreateRegistrationAssociationRequest.type = Types::CreateRegistrationAssociationRequest
@@ -590,6 +851,7 @@ module Aws::PinpointSMSVoiceV2
     CreateRegistrationVersionResult.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatusHistory, name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
     CreateRegistrationVersionResult.type = Types::CreateRegistrationVersionResult
     CreateVerifiedDestinationNumberRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    CreateVerifiedDestinationNumberRequest.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentIdOrArn, name: "RcsAgentId"))
     CreateVerifiedDestinationNumberRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateVerifiedDestinationNumberRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateVerifiedDestinationNumberRequest.type = Types::CreateVerifiedDestinationNumberRequest
@@ -597,6 +859,7 @@ module Aws::PinpointSMSVoiceV2
     CreateVerifiedDestinationNumberResult.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
     CreateVerifiedDestinationNumberResult.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
     CreateVerifiedDestinationNumberResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateVerifiedDestinationNumberResult.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentId"))
     CreateVerifiedDestinationNumberResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateVerifiedDestinationNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     CreateVerifiedDestinationNumberResult.type = Types::CreateVerifiedDestinationNumberResult
@@ -645,6 +908,26 @@ module Aws::PinpointSMSVoiceV2
     DeleteMediaMessageSpendLimitOverrideRequest.type = Types::DeleteMediaMessageSpendLimitOverrideRequest
     DeleteMediaMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit"))
     DeleteMediaMessageSpendLimitOverrideResult.type = Types::DeleteMediaMessageSpendLimitOverrideResult
+    DeleteNotifyConfigurationRequest.add_member(:notify_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationIdOrArn, name: "NotifyConfigurationId", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationRequest.type = Types::DeleteNotifyConfigurationRequest
+    DeleteNotifyConfigurationResult.add_member(:notify_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationArn, name: "NotifyConfigurationArn", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.add_member(:notify_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationId, name: "NotifyConfigurationId", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationDisplayName, name: "DisplayName", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationUseCase, name: "UseCase", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.add_member(:default_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "DefaultTemplateId"))
+    DeleteNotifyConfigurationResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PoolId"))
+    DeleteNotifyConfigurationResult.add_member(:enabled_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCodeList, name: "EnabledCountries"))
+    DeleteNotifyConfigurationResult.add_member(:enabled_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEnabledChannelsList, name: "EnabledChannels", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationTier, name: "Tier", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.add_member(:tier_upgrade_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TierUpgradeStatus, name: "TierUpgradeStatus", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.add_member(:rejection_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RejectionReason"))
+    DeleteNotifyConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    DeleteNotifyConfigurationResult.type = Types::DeleteNotifyConfigurationResult
+    DeleteNotifyMessageSpendLimitOverrideRequest.type = Types::DeleteNotifyMessageSpendLimitOverrideRequest
+    DeleteNotifyMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit"))
+    DeleteNotifyMessageSpendLimitOverrideResult.type = Types::DeleteNotifyMessageSpendLimitOverrideResult
     DeleteOptOutListRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, name: "OptOutListName", traits: {"smithy.api#required" => {}}))
     DeleteOptOutListRequest.type = Types::DeleteOptOutListRequest
     DeleteOptOutListResult.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OptOutListArn"))
@@ -693,6 +976,23 @@ module Aws::PinpointSMSVoiceV2
     DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode"))
     DeleteProtectConfigurationRuleSetNumberOverrideResult.add_member(:expiration_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ExpirationTimestamp"))
     DeleteProtectConfigurationRuleSetNumberOverrideResult.type = Types::DeleteProtectConfigurationRuleSetNumberOverrideResult
+    DeleteRcsAgentRequest.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentIdOrArn, name: "RcsAgentId", traits: {"smithy.api#required" => {}}))
+    DeleteRcsAgentRequest.type = Types::DeleteRcsAgentRequest
+    DeleteRcsAgentResult.add_member(:rcs_agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentArn", traits: {"smithy.api#required" => {}}))
+    DeleteRcsAgentResult.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentId", traits: {"smithy.api#required" => {}}))
+    DeleteRcsAgentResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    DeleteRcsAgentResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    DeleteRcsAgentResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    DeleteRcsAgentResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, name: "OptOutListName"))
+    DeleteRcsAgentResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    DeleteRcsAgentResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, name: "TwoWayChannelArn"))
+    DeleteRcsAgentResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "TwoWayChannelRole"))
+    DeleteRcsAgentResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "TwoWayEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    DeleteRcsAgentResult.add_member(:two_way_rcs_events_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsEventTypeList, name: "TwoWayRcsEventsEnabled"))
+    DeleteRcsAgentResult.type = Types::DeleteRcsAgentResult
+    DeleteRcsMessageSpendLimitOverrideRequest.type = Types::DeleteRcsMessageSpendLimitOverrideRequest
+    DeleteRcsMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit"))
+    DeleteRcsMessageSpendLimitOverrideResult.type = Types::DeleteRcsMessageSpendLimitOverrideResult
     DeleteRegistrationAttachmentRequest.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentIdOrArn, name: "RegistrationAttachmentId", traits: {"smithy.api#required" => {}}))
     DeleteRegistrationAttachmentRequest.type = Types::DeleteRegistrationAttachmentRequest
     DeleteRegistrationAttachmentResult.add_member(:registration_attachment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RegistrationAttachmentArn", traits: {"smithy.api#required" => {}}))
@@ -774,6 +1074,22 @@ module Aws::PinpointSMSVoiceV2
     DescribeKeywordsResult.add_member(:keywords, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordInformationList, name: "Keywords"))
     DescribeKeywordsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     DescribeKeywordsResult.type = Types::DescribeKeywordsResult
+    DescribeNotifyConfigurationsRequest.add_member(:notify_configuration_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationIdList, name: "NotifyConfigurationIds"))
+    DescribeNotifyConfigurationsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationFilterList, name: "Filters"))
+    DescribeNotifyConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeNotifyConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    DescribeNotifyConfigurationsRequest.type = Types::DescribeNotifyConfigurationsRequest
+    DescribeNotifyConfigurationsResult.add_member(:notify_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationInformationList, name: "NotifyConfigurations"))
+    DescribeNotifyConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeNotifyConfigurationsResult.type = Types::DescribeNotifyConfigurationsResult
+    DescribeNotifyTemplatesRequest.add_member(:template_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateIdList, name: "TemplateIds"))
+    DescribeNotifyTemplatesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateFilterList, name: "Filters"))
+    DescribeNotifyTemplatesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeNotifyTemplatesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    DescribeNotifyTemplatesRequest.type = Types::DescribeNotifyTemplatesRequest
+    DescribeNotifyTemplatesResult.add_member(:notify_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateInformationList, name: "NotifyTemplates"))
+    DescribeNotifyTemplatesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeNotifyTemplatesResult.type = Types::DescribeNotifyTemplatesResult
     DescribeOptOutListsRequest.add_member(:opt_out_list_names, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameList, name: "OptOutListNames"))
     DescribeOptOutListsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     DescribeOptOutListsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -819,6 +1135,26 @@ module Aws::PinpointSMSVoiceV2
     DescribeProtectConfigurationsResult.add_member(:protect_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationInformationList, name: "ProtectConfigurations"))
     DescribeProtectConfigurationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     DescribeProtectConfigurationsResult.type = Types::DescribeProtectConfigurationsResult
+    DescribeRcsAgentCountryLaunchStatusRequest.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentIdOrArn, name: "RcsAgentId", traits: {"smithy.api#required" => {}}))
+    DescribeRcsAgentCountryLaunchStatusRequest.add_member(:iso_country_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCodeList, name: "IsoCountryCodes"))
+    DescribeRcsAgentCountryLaunchStatusRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryLaunchStatusFilterList, name: "Filters"))
+    DescribeRcsAgentCountryLaunchStatusRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    DescribeRcsAgentCountryLaunchStatusRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeRcsAgentCountryLaunchStatusRequest.type = Types::DescribeRcsAgentCountryLaunchStatusRequest
+    DescribeRcsAgentCountryLaunchStatusResult.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentId", traits: {"smithy.api#required" => {}}))
+    DescribeRcsAgentCountryLaunchStatusResult.add_member(:rcs_agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentArn", traits: {"smithy.api#required" => {}}))
+    DescribeRcsAgentCountryLaunchStatusResult.add_member(:country_launch_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryLaunchStatusInformationList, name: "CountryLaunchStatus"))
+    DescribeRcsAgentCountryLaunchStatusResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeRcsAgentCountryLaunchStatusResult.type = Types::DescribeRcsAgentCountryLaunchStatusResult
+    DescribeRcsAgentsRequest.add_member(:rcs_agent_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentIdList, name: "RcsAgentIds"))
+    DescribeRcsAgentsRequest.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, name: "Owner"))
+    DescribeRcsAgentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentFilterList, name: "Filters"))
+    DescribeRcsAgentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeRcsAgentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    DescribeRcsAgentsRequest.type = Types::DescribeRcsAgentsRequest
+    DescribeRcsAgentsResult.add_member(:rcs_agents, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentInformationList, name: "RcsAgents"))
+    DescribeRcsAgentsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeRcsAgentsResult.type = Types::DescribeRcsAgentsResult
     DescribeRegistrationAttachmentsRequest.add_member(:registration_attachment_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentIdList, name: "RegistrationAttachmentIds"))
     DescribeRegistrationAttachmentsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentFilterList, name: "Filters"))
     DescribeRegistrationAttachmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -915,7 +1251,7 @@ module Aws::PinpointSMSVoiceV2
     DestinationPhoneNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "member"))
     DisassociateOriginationIdentityRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, name: "PoolId", traits: {"smithy.api#required" => {}}))
     DisassociateOriginationIdentityRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneOrSenderIdOrArn, name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
-    DisassociateOriginationIdentityRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    DisassociateOriginationIdentityRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode"))
     DisassociateOriginationIdentityRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DisassociateOriginationIdentityRequest.type = Types::DisassociateOriginationIdentityRequest
     DisassociateOriginationIdentityResult.add_member(:pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PoolArn"))
@@ -949,6 +1285,11 @@ module Aws::PinpointSMSVoiceV2
     EventDestination.type = Types::EventDestination
     EventDestinationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "member"))
     EventTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "member"))
+    FieldCondition.add_member(:depends_on_field_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPath, name: "DependsOnFieldPath", traits: {"smithy.api#required" => {}}))
+    FieldCondition.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionOperator, name: "Operator", traits: {"smithy.api#required" => {}}))
+    FieldCondition.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionValueList, name: "Values"))
+    FieldCondition.type = Types::FieldCondition
+    FieldConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldCondition, name: "member"))
     FieldPathList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldPath, name: "member"))
     FilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     GetProtectConfigurationCountryRuleSetRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, name: "ProtectConfigurationId", traits: {"smithy.api#required" => {}}))
@@ -968,6 +1309,7 @@ module Aws::PinpointSMSVoiceV2
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     InternalServerException.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RequestId"))
     InternalServerException.type = Types::InternalServerException
+    IsoCountryCodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "member"))
     KeywordFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeywordFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
     KeywordFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     KeywordFilter.type = Types::KeywordFilter
@@ -981,6 +1323,26 @@ module Aws::PinpointSMSVoiceV2
     KinesisFirehoseDestination.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
     KinesisFirehoseDestination.add_member(:delivery_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryStreamArn, name: "DeliveryStreamArn", traits: {"smithy.api#required" => {}}))
     KinesisFirehoseDestination.type = Types::KinesisFirehoseDestination
+    ListAvailablePhoneNumbersRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    ListAvailablePhoneNumbersRequest.add_member(:number_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, name: "NumberCapabilities", traits: {"smithy.api#required" => {}}))
+    ListAvailablePhoneNumbersRequest.add_member(:number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchableNumberType, name: "NumberType", traits: {"smithy.api#required" => {}}))
+    ListAvailablePhoneNumbersRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, name: "RegistrationId"))
+    ListAvailablePhoneNumbersRequest.add_member(:number_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberPreferenceList, name: "NumberPreference"))
+    ListAvailablePhoneNumbersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAvailablePhoneNumbersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAvailablePhoneNumbersMaxResults, name: "MaxResults"))
+    ListAvailablePhoneNumbersRequest.type = Types::ListAvailablePhoneNumbersRequest
+    ListAvailablePhoneNumbersResult.add_member(:available_phone_numbers, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailablePhoneNumberList, name: "AvailablePhoneNumbers", traits: {"smithy.api#required" => {}}))
+    ListAvailablePhoneNumbersResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAvailablePhoneNumbersResult.type = Types::ListAvailablePhoneNumbersResult
+    ListNotifyCountriesRequest.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEnabledChannelsList, name: "Channels"))
+    ListNotifyCountriesRequest.add_member(:use_cases, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyUseCaseList, name: "UseCases"))
+    ListNotifyCountriesRequest.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationTier, name: "Tier"))
+    ListNotifyCountriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListNotifyCountriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListNotifyCountriesRequest.type = Types::ListNotifyCountriesRequest
+    ListNotifyCountriesResult.add_member(:notify_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyCountryInformationList, name: "NotifyCountries"))
+    ListNotifyCountriesResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListNotifyCountriesResult.type = Types::ListNotifyCountriesResult
     ListPoolOriginationIdentitiesRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, name: "PoolId", traits: {"smithy.api#required" => {}}))
     ListPoolOriginationIdentitiesRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolOriginationIdentitiesFilterList, name: "Filters"))
     ListPoolOriginationIdentitiesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -1018,10 +1380,72 @@ module Aws::PinpointSMSVoiceV2
     ListTagsForResourceResult.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "ResourceArn"))
     ListTagsForResourceResult.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ListTagsForResourceResult.type = Types::ListTagsForResourceResult
+    LongMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    LongMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveLong, name: "value"))
     MediaUrlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaUrlValue, name: "member"))
     MessageTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageType, name: "member"))
+    MessagingLimits.add_member(:rate_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: LongMap, name: "RateLimits"))
+    MessagingLimits.add_member(:daily_message_caps, ::Smithy::Schema::Shapes::MemberShape.new(target: LongMap, name: "DailyMessageCaps"))
+    MessagingLimits.type = Types::MessagingLimits
     NonEmptyTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    NotifyConfigurationFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationFilter.type = Types::NotifyConfigurationFilter
+    NotifyConfigurationFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationFilter, name: "member"))
+    NotifyConfigurationIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationIdOrArn, name: "member"))
+    NotifyConfigurationInformation.add_member(:notify_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationArn, name: "NotifyConfigurationArn", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationInformation.add_member(:notify_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationId, name: "NotifyConfigurationId", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationInformation.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationDisplayName, name: "DisplayName", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationInformation.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationUseCase, name: "UseCase", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationInformation.add_member(:default_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "DefaultTemplateId"))
+    NotifyConfigurationInformation.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PoolId"))
+    NotifyConfigurationInformation.add_member(:enabled_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCodeList, name: "EnabledCountries"))
+    NotifyConfigurationInformation.add_member(:enabled_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEnabledChannelsList, name: "EnabledChannels", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationInformation.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationTier, name: "Tier", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationInformation.add_member(:tier_upgrade_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TierUpgradeStatus, name: "TierUpgradeStatus", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationInformation.add_member(:rejection_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RejectionReason"))
+    NotifyConfigurationInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    NotifyConfigurationInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    NotifyConfigurationInformation.type = Types::NotifyConfigurationInformation
+    NotifyConfigurationInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationInformation, name: "member"))
+    NotifyConfigurationTierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationTier, name: "member"))
+    NotifyCountryInformation.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
+    NotifyCountryInformation.add_member(:country_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CountryName", traits: {"smithy.api#required" => {}}))
+    NotifyCountryInformation.add_member(:supported_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEnabledChannelsList, name: "SupportedChannels", traits: {"smithy.api#required" => {}}))
+    NotifyCountryInformation.add_member(:supported_use_cases, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyUseCaseList, name: "SupportedUseCases", traits: {"smithy.api#required" => {}}))
+    NotifyCountryInformation.add_member(:supported_tiers, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTierList, name: "SupportedTiers", traits: {"smithy.api#required" => {}}))
+    NotifyCountryInformation.add_member(:customer_owned_identity_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "CustomerOwnedIdentityRequired", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    NotifyCountryInformation.type = Types::NotifyCountryInformation
+    NotifyCountryInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyCountryInformation, name: "member"))
+    NotifyEnabledChannelsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability, name: "member"))
+    NotifyTemplateFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
+    NotifyTemplateFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
+    NotifyTemplateFilter.type = Types::NotifyTemplateFilter
+    NotifyTemplateFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateFilter, name: "member"))
+    NotifyTemplateIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "member"))
+    NotifyTemplateInformation.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "TemplateId", traits: {"smithy.api#required" => {}}))
+    NotifyTemplateInformation.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateVersion, name: "Version", traits: {"smithy.api#required" => {}}))
+    NotifyTemplateInformation.add_member(:template_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateType, name: "TemplateType", traits: {"smithy.api#required" => {}}))
+    NotifyTemplateInformation.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapabilityList, name: "Channels", traits: {"smithy.api#required" => {}}))
+    NotifyTemplateInformation.add_member(:tier_access, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationTierList, name: "TierAccess"))
+    NotifyTemplateInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateStatus, name: "Status"))
+    NotifyTemplateInformation.add_member(:supported_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCodeList, name: "SupportedCountries"))
+    NotifyTemplateInformation.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyLanguageCode, name: "LanguageCode"))
+    NotifyTemplateInformation.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateContent, name: "Content"))
+    NotifyTemplateInformation.add_member(:variables, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVariablesMap, name: "Variables"))
+    NotifyTemplateInformation.add_member(:supported_voice_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceIdList, name: "SupportedVoiceIds"))
+    NotifyTemplateInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    NotifyTemplateInformation.type = Types::NotifyTemplateInformation
+    NotifyTemplateInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateInformation, name: "member"))
+    NotifyTierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationTier, name: "member"))
+    NotifyUseCaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationUseCase, name: "member"))
     NumberCapabilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberCapability, name: "member"))
+    NumberFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilterValue, name: "member"))
+    NumberPreferenceItem.add_member(:preference_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferenceTypeList, name: "PreferenceType", traits: {"smithy.api#required" => {}}))
+    NumberPreferenceItem.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberFilterList, name: "Filter", traits: {"smithy.api#required" => {}}))
+    NumberPreferenceItem.type = Types::NumberPreferenceItem
+    NumberPreferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberPreferenceItem, name: "member"))
     OptOutListInformation.add_member(:opt_out_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OptOutListArn", traits: {"smithy.api#required" => {}}))
     OptOutListInformation.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, name: "OptOutListName", traits: {"smithy.api#required" => {}}))
     OptOutListInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
@@ -1068,6 +1492,8 @@ module Aws::PinpointSMSVoiceV2
     PhoneNumberInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     PhoneNumberInformation.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PoolId"))
     PhoneNumberInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RegistrationId"))
+    PhoneNumberInformation.add_member(:messaging_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: MessagingLimits, name: "MessagingLimits"))
+    PhoneNumberInformation.add_member(:pricing_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PricingTier"))
     PhoneNumberInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     PhoneNumberInformation.type = Types::PhoneNumberInformation
     PhoneNumberInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberInformation, name: "member"))
@@ -1094,6 +1520,7 @@ module Aws::PinpointSMSVoiceV2
     PoolOriginationIdentitiesFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     PoolOriginationIdentitiesFilter.type = Types::PoolOriginationIdentitiesFilter
     PoolOriginationIdentitiesFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolOriginationIdentitiesFilter, name: "member"))
+    PreferenceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferenceType, name: "member"))
     ProtectConfigurationCountryRuleSet.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "key"))
     ProtectConfigurationCountryRuleSet.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationCountryRuleSetInformation, name: "value"))
     ProtectConfigurationCountryRuleSetInformation.add_member(:protect_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectStatus, name: "ProtectStatus", traits: {"smithy.api#required" => {}}))
@@ -1181,6 +1608,115 @@ module Aws::PinpointSMSVoiceV2
     PutResourcePolicyResult.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "Policy"))
     PutResourcePolicyResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp"))
     PutResourcePolicyResult.type = Types::PutResourcePolicyResult
+    RcsAgentFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
+    RcsAgentFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
+    RcsAgentFilter.type = Types::RcsAgentFilter
+    RcsAgentFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentFilter, name: "member"))
+    RcsAgentIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentIdOrArn, name: "member"))
+    RcsAgentInformation.add_member(:rcs_agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentArn", traits: {"smithy.api#required" => {}}))
+    RcsAgentInformation.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentId", traits: {"smithy.api#required" => {}}))
+    RcsAgentInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    RcsAgentInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    RcsAgentInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    RcsAgentInformation.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, name: "OptOutListName"))
+    RcsAgentInformation.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    RcsAgentInformation.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, name: "TwoWayChannelArn"))
+    RcsAgentInformation.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "TwoWayChannelRole"))
+    RcsAgentInformation.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "TwoWayEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    RcsAgentInformation.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PoolId"))
+    RcsAgentInformation.add_member(:two_way_media_s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayMediaS3BucketName, name: "TwoWayMediaS3BucketName"))
+    RcsAgentInformation.add_member(:two_way_media_s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayMediaS3KeyPrefix, name: "TwoWayMediaS3KeyPrefix"))
+    RcsAgentInformation.add_member(:two_way_media_s3_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "TwoWayMediaS3Role"))
+    RcsAgentInformation.add_member(:two_way_rcs_events_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsEventTypeList, name: "TwoWayRcsEventsEnabled"))
+    RcsAgentInformation.add_member(:testing_agent, ::Smithy::Schema::Shapes::MemberShape.new(target: TestingAgentInformation, name: "TestingAgent"))
+    RcsAgentInformation.add_member(:messaging_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: MessagingLimits, name: "MessagingLimits"))
+    RcsAgentInformation.type = Types::RcsAgentInformation
+    RcsAgentInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentInformation, name: "member"))
+    RcsCardContent.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCardTitle, name: "Title"))
+    RcsCardContent.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCardDescription, name: "Description"))
+    RcsCardContent.add_member(:media, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCardMedia, name: "Media"))
+    RcsCardContent.add_member(:suggestions, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCardSuggestedActionList, name: "Suggestions"))
+    RcsCardContent.type = Types::RcsCardContent
+    RcsCardMedia.add_member(:file_url, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsMediaUrl, name: "FileUrl", traits: {"smithy.api#required" => {}}))
+    RcsCardMedia.add_member(:thumbnail_url, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsMediaUrl, name: "ThumbnailUrl"))
+    RcsCardMedia.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Height", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[A-Z_]+$"}))
+    RcsCardMedia.type = Types::RcsCardMedia
+    RcsCardSuggestedActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsSuggestedAction, name: "member"))
+    RcsCarousel.add_member(:card_width, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CardWidth", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[A-Z_]+$", "smithy.api#required" => {}}))
+    RcsCarousel.add_member(:card_contents, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCarouselCardContentList, name: "CardContents", traits: {"smithy.api#required" => {}}))
+    RcsCarousel.type = Types::RcsCarousel
+    RcsCarouselCardContent.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCardTitle, name: "Title"))
+    RcsCarouselCardContent.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCardDescription, name: "Description"))
+    RcsCarouselCardContent.add_member(:media, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCarouselCardMedia, name: "Media"))
+    RcsCarouselCardContent.add_member(:suggestions, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCardSuggestedActionList, name: "Suggestions"))
+    RcsCarouselCardContent.type = Types::RcsCarouselCardContent
+    RcsCarouselCardContentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCarouselCardContent, name: "member"))
+    RcsCarouselCardMedia.add_member(:file_url, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsMediaUrl, name: "FileUrl", traits: {"smithy.api#required" => {}}))
+    RcsCarouselCardMedia.add_member(:thumbnail_url, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsMediaUrl, name: "ThumbnailUrl"))
+    RcsCarouselCardMedia.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Height", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[A-Z_]+$"}))
+    RcsCarouselCardMedia.type = Types::RcsCarouselCardMedia
+    RcsContent.add_member(:text_message, Types::RcsContent::TextMessage, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsTextMessage, name: "TextMessage"))
+    RcsContent.add_member(:file_message, Types::RcsContent::FileMessage, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsFileMessage, name: "FileMessage"))
+    RcsContent.add_member(:rich_card, Types::RcsContent::RichCard, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsStandaloneCard, name: "RichCard"))
+    RcsContent.add_member(:carousel, Types::RcsContent::Carousel, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCarousel, name: "Carousel"))
+    RcsContent.add_member(:unknown, Types::RcsContent::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RcsContent.type = Types::RcsContent
+    RcsCreateCalendarEventAction.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsSuggestedActionText, name: "Text", traits: {"smithy.api#required" => {}}))
+    RcsCreateCalendarEventAction.add_member(:postback_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsPostbackData, name: "PostbackData", traits: {"smithy.api#required" => {}}))
+    RcsCreateCalendarEventAction.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCalendarEventTitle, name: "Title", traits: {"smithy.api#required" => {}}))
+    RcsCreateCalendarEventAction.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "StartTime", traits: {"smithy.api#required" => {}}))
+    RcsCreateCalendarEventAction.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "EndTime", traits: {"smithy.api#required" => {}}))
+    RcsCreateCalendarEventAction.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCalendarEventDescription, name: "Description"))
+    RcsCreateCalendarEventAction.type = Types::RcsCreateCalendarEventAction
+    RcsDialPhoneAction.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsSuggestedActionText, name: "Text", traits: {"smithy.api#required" => {}}))
+    RcsDialPhoneAction.add_member(:postback_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsPostbackData, name: "PostbackData", traits: {"smithy.api#required" => {}}))
+    RcsDialPhoneAction.add_member(:phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "PhoneNumber", traits: {"smithy.api#required" => {}}))
+    RcsDialPhoneAction.type = Types::RcsDialPhoneAction
+    RcsEventTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsEventType, name: "member"))
+    RcsFallbackConfiguration.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsFallbackChannel, name: "Channel", traits: {"smithy.api#required" => {}}))
+    RcsFallbackConfiguration.add_member(:message_body, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsFallbackMessageBody, name: "MessageBody"))
+    RcsFallbackConfiguration.add_member(:media_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaUrlList, name: "MediaUrls"))
+    RcsFallbackConfiguration.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsFallbackOriginationIdentity, name: "OriginationIdentity"))
+    RcsFallbackConfiguration.type = Types::RcsFallbackConfiguration
+    RcsFileMessage.add_member(:file_url, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsMediaUrl, name: "FileUrl", traits: {"smithy.api#required" => {}}))
+    RcsFileMessage.add_member(:thumbnail_url, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsMediaUrl, name: "ThumbnailUrl"))
+    RcsFileMessage.type = Types::RcsFileMessage
+    RcsMessageContent.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsContent, name: "Content", traits: {"smithy.api#required" => {}}))
+    RcsMessageContent.add_member(:suggestions, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsSuggestedActionList, name: "Suggestions"))
+    RcsMessageContent.type = Types::RcsMessageContent
+    RcsOpenUrlAction.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsSuggestedActionText, name: "Text", traits: {"smithy.api#required" => {}}))
+    RcsOpenUrlAction.add_member(:postback_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsPostbackData, name: "PostbackData", traits: {"smithy.api#required" => {}}))
+    RcsOpenUrlAction.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsOpenUrlValue, name: "Url", traits: {"smithy.api#required" => {}}))
+    RcsOpenUrlAction.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Application", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[A-Z_]+$"}))
+    RcsOpenUrlAction.add_member(:webview_view_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "WebviewViewMode", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[A-Z_]+$"}))
+    RcsOpenUrlAction.type = Types::RcsOpenUrlAction
+    RcsReplyAction.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsSuggestedActionText, name: "Text", traits: {"smithy.api#required" => {}}))
+    RcsReplyAction.add_member(:postback_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsPostbackData, name: "PostbackData", traits: {"smithy.api#required" => {}}))
+    RcsReplyAction.type = Types::RcsReplyAction
+    RcsRequestLocationAction.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsSuggestedActionText, name: "Text", traits: {"smithy.api#required" => {}}))
+    RcsRequestLocationAction.add_member(:postback_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsPostbackData, name: "PostbackData", traits: {"smithy.api#required" => {}}))
+    RcsRequestLocationAction.type = Types::RcsRequestLocationAction
+    RcsShowLocationAction.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsSuggestedActionText, name: "Text", traits: {"smithy.api#required" => {}}))
+    RcsShowLocationAction.add_member(:postback_data, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsPostbackData, name: "PostbackData", traits: {"smithy.api#required" => {}}))
+    RcsShowLocationAction.add_member(:latitude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Latitude", traits: {"smithy.api#range" => {"min" => -90, "max" => 90}, "smithy.api#required" => {}}))
+    RcsShowLocationAction.add_member(:longitude, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Longitude", traits: {"smithy.api#range" => {"min" => -180, "max" => 180}, "smithy.api#required" => {}}))
+    RcsShowLocationAction.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsLocationLabel, name: "Label"))
+    RcsShowLocationAction.type = Types::RcsShowLocationAction
+    RcsStandaloneCard.add_member(:card_orientation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CardOrientation", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[A-Z_]+$", "smithy.api#required" => {}}))
+    RcsStandaloneCard.add_member(:thumbnail_image_alignment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ThumbnailImageAlignment", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[A-Z_]+$"}))
+    RcsStandaloneCard.add_member(:card_content, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCardContent, name: "CardContent", traits: {"smithy.api#required" => {}}))
+    RcsStandaloneCard.type = Types::RcsStandaloneCard
+    RcsSuggestedAction.add_member(:reply, Types::RcsSuggestedAction::Reply, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsReplyAction, name: "Reply"))
+    RcsSuggestedAction.add_member(:open_url, Types::RcsSuggestedAction::OpenUrl, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsOpenUrlAction, name: "OpenUrl"))
+    RcsSuggestedAction.add_member(:dial_phone, Types::RcsSuggestedAction::DialPhone, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsDialPhoneAction, name: "DialPhone"))
+    RcsSuggestedAction.add_member(:show_location, Types::RcsSuggestedAction::ShowLocation, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsShowLocationAction, name: "ShowLocation"))
+    RcsSuggestedAction.add_member(:request_location, Types::RcsSuggestedAction::RequestLocation, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsRequestLocationAction, name: "RequestLocation"))
+    RcsSuggestedAction.add_member(:create_calendar_event, Types::RcsSuggestedAction::CreateCalendarEvent, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsCreateCalendarEventAction, name: "CreateCalendarEvent"))
+    RcsSuggestedAction.add_member(:unknown, Types::RcsSuggestedAction::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    RcsSuggestedAction.type = Types::RcsSuggestedAction
+    RcsSuggestedActionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsSuggestedAction, name: "member"))
+    RcsTextMessage.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsTextBody, name: "Body", traits: {"smithy.api#required" => {}}))
+    RcsTextMessage.type = Types::RcsTextMessage
     RegistrationAssociationFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAssociationFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
     RegistrationAssociationFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     RegistrationAssociationFilter.type = Types::RegistrationAssociationFilter
@@ -1202,6 +1738,7 @@ module Aws::PinpointSMSVoiceV2
     RegistrationAttachmentsInformation.add_member(:attachment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentStatus, name: "AttachmentStatus", traits: {"smithy.api#required" => {}}))
     RegistrationAttachmentsInformation.add_member(:attachment_upload_error_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentUploadErrorReason, name: "AttachmentUploadErrorReason"))
     RegistrationAttachmentsInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    RegistrationAttachmentsInformation.add_member(:attachment_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AttachmentUrl"))
     RegistrationAttachmentsInformation.type = Types::RegistrationAttachmentsInformation
     RegistrationAttachmentsInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentsInformation, name: "member"))
     RegistrationDeniedReasonInformation.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Reason", traits: {"smithy.api#required" => {}}))
@@ -1218,6 +1755,7 @@ module Aws::PinpointSMSVoiceV2
     RegistrationFieldDefinition.add_member(:select_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectValidation, name: "SelectValidation"))
     RegistrationFieldDefinition.add_member(:text_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: TextValidation, name: "TextValidation"))
     RegistrationFieldDefinition.add_member(:display_hints, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFieldDisplayHints, name: "DisplayHints", traits: {"smithy.api#required" => {}}))
+    RegistrationFieldDefinition.add_member(:conditional_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionalBehavior, name: "ConditionalBehavior"))
     RegistrationFieldDefinition.type = Types::RegistrationFieldDefinition
     RegistrationFieldDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFieldDefinition, name: "member"))
     RegistrationFieldDisplayHints.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Title", traits: {"smithy.api#required" => {}}))
@@ -1234,6 +1772,7 @@ module Aws::PinpointSMSVoiceV2
     RegistrationFieldValueInformation.add_member(:text_value, ::Smithy::Schema::Shapes::MemberShape.new(target: TextValue, name: "TextValue"))
     RegistrationFieldValueInformation.add_member(:registration_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationAttachmentIdOrArn, name: "RegistrationAttachmentId"))
     RegistrationFieldValueInformation.add_member(:denied_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "DeniedReason"))
+    RegistrationFieldValueInformation.add_member(:feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Feedback"))
     RegistrationFieldValueInformation.type = Types::RegistrationFieldValueInformation
     RegistrationFieldValueInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFieldValueInformation, name: "member"))
     RegistrationFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationFilterName, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -1286,11 +1825,13 @@ module Aws::PinpointSMSVoiceV2
     RegistrationVersionInformation.add_member(:registration_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatus, name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
     RegistrationVersionInformation.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatusHistory, name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
     RegistrationVersionInformation.add_member(:denied_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationDeniedReasonInformationList, name: "DeniedReasons"))
+    RegistrationVersionInformation.add_member(:feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Feedback"))
     RegistrationVersionInformation.type = Types::RegistrationVersionInformation
     RegistrationVersionInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionInformation, name: "member"))
     RegistrationVersionNumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, name: "member"))
     RegistrationVersionStatusHistory.add_member(:draft_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "DraftTimestamp", traits: {"smithy.api#required" => {}}))
     RegistrationVersionStatusHistory.add_member(:submitted_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "SubmittedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:aws_reviewing_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "AwsReviewingTimestamp"))
     RegistrationVersionStatusHistory.add_member(:reviewing_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ReviewingTimestamp"))
     RegistrationVersionStatusHistory.add_member(:requires_authentication_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "RequiresAuthenticationTimestamp"))
     RegistrationVersionStatusHistory.add_member(:approved_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ApprovedTimestamp"))
@@ -1336,6 +1877,7 @@ module Aws::PinpointSMSVoiceV2
     RequestPhoneNumberRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, name: "OptOutListName"))
     RequestPhoneNumberRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PoolIdOrArn, name: "PoolId"))
     RequestPhoneNumberRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, name: "RegistrationId"))
+    RequestPhoneNumberRequest.add_member(:number_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberPreferenceList, name: "NumberPreference"))
     RequestPhoneNumberRequest.add_member(:international_sending_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "InternationalSendingEnabled"))
     RequestPhoneNumberRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "DeletionProtectionEnabled"))
     RequestPhoneNumberRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
@@ -1417,6 +1959,50 @@ module Aws::PinpointSMSVoiceV2
     SendMediaMessageRequest.type = Types::SendMediaMessageRequest
     SendMediaMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "MessageId"))
     SendMediaMessageResult.type = Types::SendMediaMessageResult
+    SendNotifyTextMessageRequest.add_member(:notify_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationIdOrArn, name: "NotifyConfigurationId", traits: {"smithy.api#required" => {}}))
+    SendNotifyTextMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    SendNotifyTextMessageRequest.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "TemplateId"))
+    SendNotifyTextMessageRequest.add_member(:template_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVariableSubstitutionMap, name: "TemplateVariables", traits: {"smithy.api#required" => {}}))
+    SendNotifyTextMessageRequest.add_member(:time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLive, name: "TimeToLive"))
+    SendNotifyTextMessageRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextMap, name: "Context"))
+    SendNotifyTextMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, name: "ConfigurationSetName"))
+    SendNotifyTextMessageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DryRun", traits: {"smithy.api#default" => false}))
+    SendNotifyTextMessageRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "MessageFeedbackEnabled"))
+    SendNotifyTextMessageRequest.type = Types::SendNotifyTextMessageRequest
+    SendNotifyTextMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "MessageId"))
+    SendNotifyTextMessageResult.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "TemplateId"))
+    SendNotifyTextMessageResult.add_member(:resolved_message_body, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResolvedMessageBody"))
+    SendNotifyTextMessageResult.type = Types::SendNotifyTextMessageResult
+    SendNotifyVoiceMessageRequest.add_member(:notify_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationIdOrArn, name: "NotifyConfigurationId", traits: {"smithy.api#required" => {}}))
+    SendNotifyVoiceMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    SendNotifyVoiceMessageRequest.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "TemplateId"))
+    SendNotifyVoiceMessageRequest.add_member(:template_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVariableSubstitutionMap, name: "TemplateVariables", traits: {"smithy.api#required" => {}}))
+    SendNotifyVoiceMessageRequest.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceId, name: "VoiceId"))
+    SendNotifyVoiceMessageRequest.add_member(:time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeToLive, name: "TimeToLive"))
+    SendNotifyVoiceMessageRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextMap, name: "Context"))
+    SendNotifyVoiceMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, name: "ConfigurationSetName"))
+    SendNotifyVoiceMessageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DryRun", traits: {"smithy.api#default" => false}))
+    SendNotifyVoiceMessageRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "MessageFeedbackEnabled"))
+    SendNotifyVoiceMessageRequest.type = Types::SendNotifyVoiceMessageRequest
+    SendNotifyVoiceMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "MessageId"))
+    SendNotifyVoiceMessageResult.add_member(:template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "TemplateId"))
+    SendNotifyVoiceMessageResult.add_member(:resolved_message_body, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResolvedMessageBody"))
+    SendNotifyVoiceMessageResult.type = Types::SendNotifyVoiceMessageResult
+    SendRcsMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
+    SendRcsMessageRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsMessageOriginationIdentity, name: "OriginationIdentity", traits: {"smithy.api#required" => {}}))
+    SendRcsMessageRequest.add_member(:rcs_message_content, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsMessageContent, name: "RcsMessageContent"))
+    SendRcsMessageRequest.add_member(:time_to_live, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsTimeToLive, name: "TimeToLive"))
+    SendRcsMessageRequest.add_member(:message_traffic_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsMessageTrafficType, name: "MessageTrafficType"))
+    SendRcsMessageRequest.add_member(:fallback_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsFallbackConfiguration, name: "FallbackConfiguration"))
+    SendRcsMessageRequest.add_member(:protect_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtectConfigurationIdOrArn, name: "ProtectConfigurationId"))
+    SendRcsMessageRequest.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetNameOrArn, name: "ConfigurationSetName"))
+    SendRcsMessageRequest.add_member(:max_price, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPrice, name: "MaxPrice"))
+    SendRcsMessageRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DryRun", traits: {"smithy.api#default" => false}))
+    SendRcsMessageRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextMap, name: "Context"))
+    SendRcsMessageRequest.add_member(:message_feedback_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "MessageFeedbackEnabled"))
+    SendRcsMessageRequest.type = Types::SendRcsMessageRequest
+    SendRcsMessageResult.add_member(:message_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "MessageId"))
+    SendRcsMessageResult.type = Types::SendRcsMessageResult
     SendTextMessageRequest.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
     SendTextMessageRequest.add_member(:origination_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: TextMessageOriginationIdentity, name: "OriginationIdentity"))
     SendTextMessageRequest.add_member(:message_body, ::Smithy::Schema::Shapes::MemberShape.new(target: TextMessageBody, name: "MessageBody"))
@@ -1463,6 +2049,8 @@ module Aws::PinpointSMSVoiceV2
     SenderIdInformation.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     SenderIdInformation.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "Registered", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     SenderIdInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RegistrationId"))
+    SenderIdInformation.add_member(:messaging_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: MessagingLimits, name: "MessagingLimits"))
+    SenderIdInformation.add_member(:pricing_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PricingTier"))
     SenderIdInformation.type = Types::SenderIdInformation
     SenderIdInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdInformation, name: "member"))
     SenderIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdAndCountry, name: "member"))
@@ -1499,6 +2087,14 @@ module Aws::PinpointSMSVoiceV2
     SetMediaMessageSpendLimitOverrideRequest.type = Types::SetMediaMessageSpendLimitOverrideRequest
     SetMediaMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit"))
     SetMediaMessageSpendLimitOverrideResult.type = Types::SetMediaMessageSpendLimitOverrideResult
+    SetNotifyMessageSpendLimitOverrideRequest.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit", traits: {"smithy.api#required" => {}}))
+    SetNotifyMessageSpendLimitOverrideRequest.type = Types::SetNotifyMessageSpendLimitOverrideRequest
+    SetNotifyMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit"))
+    SetNotifyMessageSpendLimitOverrideResult.type = Types::SetNotifyMessageSpendLimitOverrideResult
+    SetRcsMessageSpendLimitOverrideRequest.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit", traits: {"smithy.api#required" => {}}))
+    SetRcsMessageSpendLimitOverrideRequest.type = Types::SetRcsMessageSpendLimitOverrideRequest
+    SetRcsMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit"))
+    SetRcsMessageSpendLimitOverrideResult.type = Types::SetRcsMessageSpendLimitOverrideResult
     SetTextMessageSpendLimitOverrideRequest.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit", traits: {"smithy.api#required" => {}}))
     SetTextMessageSpendLimitOverrideRequest.type = Types::SetTextMessageSpendLimitOverrideRequest
     SetTextMessageSpendLimitOverrideResult.add_member(:monthly_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: MonthlyLimit, name: "MonthlyLimit"))
@@ -1519,12 +2115,14 @@ module Aws::PinpointSMSVoiceV2
     StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     StringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     SubmitRegistrationVersionRequest.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationIdOrArn, name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    SubmitRegistrationVersionRequest.add_member(:aws_review, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "AwsReview", traits: {"smithy.api#default" => false}))
     SubmitRegistrationVersionRequest.type = Types::SubmitRegistrationVersionRequest
     SubmitRegistrationVersionResult.add_member(:registration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RegistrationArn", traits: {"smithy.api#required" => {}}))
     SubmitRegistrationVersionResult.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RegistrationId", traits: {"smithy.api#required" => {}}))
     SubmitRegistrationVersionResult.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionNumber, name: "VersionNumber", traits: {"smithy.api#required" => {}}))
     SubmitRegistrationVersionResult.add_member(:registration_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatus, name: "RegistrationVersionStatus", traits: {"smithy.api#required" => {}}))
     SubmitRegistrationVersionResult.add_member(:registration_version_status_history, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationVersionStatusHistory, name: "RegistrationVersionStatusHistory", traits: {"smithy.api#required" => {}}))
+    SubmitRegistrationVersionResult.add_member(:aws_review, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "AwsReview", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     SubmitRegistrationVersionResult.type = Types::SubmitRegistrationVersionResult
     SupportedAssociation.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
     SupportedAssociation.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode"))
@@ -1541,6 +2139,25 @@ module Aws::PinpointSMSVoiceV2
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyTagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResult.type = Types::TagResourceResult
+    TemplateVariableMetadata.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVariableType, name: "Type", traits: {"smithy.api#required" => {}}))
+    TemplateVariableMetadata.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "Required", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    TemplateVariableMetadata.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Description"))
+    TemplateVariableMetadata.add_member(:max_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxLength"))
+    TemplateVariableMetadata.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MinValue"))
+    TemplateVariableMetadata.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxValue"))
+    TemplateVariableMetadata.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "DefaultValue"))
+    TemplateVariableMetadata.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Pattern"))
+    TemplateVariableMetadata.add_member(:sample, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Sample"))
+    TemplateVariableMetadata.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVariableSource, name: "Source"))
+    TemplateVariableMetadata.type = Types::TemplateVariableMetadata
+    TemplateVariableSubstitutionMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVariableName, name: "key"))
+    TemplateVariableSubstitutionMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVariableValue, name: "value"))
+    TemplateVariablesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    TemplateVariablesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TemplateVariableMetadata, name: "value"))
+    TestingAgentInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TestingAgentStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    TestingAgentInformation.add_member(:testing_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "TestingAgentId"))
+    TestingAgentInformation.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RegistrationId", traits: {"smithy.api#required" => {}}))
+    TestingAgentInformation.type = Types::TestingAgentInformation
     TextValidation.add_member(:min_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MinLength", traits: {"smithy.api#required" => {}}))
     TextValidation.add_member(:max_length, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxLength", traits: {"smithy.api#required" => {}}))
     TextValidation.add_member(:pattern, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Pattern", traits: {"smithy.api#required" => {}}))
@@ -1563,6 +2180,28 @@ module Aws::PinpointSMSVoiceV2
     UpdateEventDestinationResult.add_member(:configuration_set_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationSetName, name: "ConfigurationSetName"))
     UpdateEventDestinationResult.add_member(:event_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDestination, name: "EventDestination"))
     UpdateEventDestinationResult.type = Types::UpdateEventDestinationResult
+    UpdateNotifyConfigurationRequest.add_member(:notify_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationIdOrArn, name: "NotifyConfigurationId", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationRequest.add_member(:default_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "DefaultTemplateId"))
+    UpdateNotifyConfigurationRequest.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyPoolIdOrUnset, name: "PoolId"))
+    UpdateNotifyConfigurationRequest.add_member(:enabled_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCodeList, name: "EnabledCountries"))
+    UpdateNotifyConfigurationRequest.add_member(:enabled_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEnabledChannelsList, name: "EnabledChannels"))
+    UpdateNotifyConfigurationRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "DeletionProtectionEnabled"))
+    UpdateNotifyConfigurationRequest.type = Types::UpdateNotifyConfigurationRequest
+    UpdateNotifyConfigurationResult.add_member(:notify_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationArn, name: "NotifyConfigurationArn", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.add_member(:notify_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationId, name: "NotifyConfigurationId", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationDisplayName, name: "DisplayName", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationUseCase, name: "UseCase", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.add_member(:default_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyTemplateId, name: "DefaultTemplateId"))
+    UpdateNotifyConfigurationResult.add_member(:pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PoolId"))
+    UpdateNotifyConfigurationResult.add_member(:enabled_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCodeList, name: "EnabledCountries"))
+    UpdateNotifyConfigurationResult.add_member(:enabled_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyEnabledChannelsList, name: "EnabledChannels", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationTier, name: "Tier", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.add_member(:tier_upgrade_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TierUpgradeStatus, name: "TierUpgradeStatus", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotifyConfigurationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.add_member(:rejection_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RejectionReason"))
+    UpdateNotifyConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    UpdateNotifyConfigurationResult.type = Types::UpdateNotifyConfigurationResult
     UpdatePhoneNumberRequest.add_member(:phone_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumberIdOrArn, name: "PhoneNumberId", traits: {"smithy.api#required" => {}}))
     UpdatePhoneNumberRequest.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "TwoWayEnabled"))
     UpdatePhoneNumberRequest.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, name: "TwoWayChannelArn"))
@@ -1631,6 +2270,33 @@ module Aws::PinpointSMSVoiceV2
     UpdateProtectConfigurationResult.add_member(:account_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "AccountDefault", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     UpdateProtectConfigurationResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     UpdateProtectConfigurationResult.type = Types::UpdateProtectConfigurationResult
+    UpdateRcsAgentRequest.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentIdOrArn, name: "RcsAgentId", traits: {"smithy.api#required" => {}}))
+    UpdateRcsAgentRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "DeletionProtectionEnabled"))
+    UpdateRcsAgentRequest.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListNameOrArn, name: "OptOutListName"))
+    UpdateRcsAgentRequest.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "SelfManagedOptOutsEnabled"))
+    UpdateRcsAgentRequest.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, name: "TwoWayChannelArn"))
+    UpdateRcsAgentRequest.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "TwoWayChannelRole"))
+    UpdateRcsAgentRequest.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "TwoWayEnabled"))
+    UpdateRcsAgentRequest.add_member(:two_way_media_s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayMediaS3BucketNameOrUnset, name: "TwoWayMediaS3BucketName"))
+    UpdateRcsAgentRequest.add_member(:two_way_media_s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayMediaS3KeyPrefix, name: "TwoWayMediaS3KeyPrefix"))
+    UpdateRcsAgentRequest.add_member(:two_way_media_s3_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArnOrUnset, name: "TwoWayMediaS3Role"))
+    UpdateRcsAgentRequest.add_member(:two_way_rcs_events_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsEventTypeList, name: "TwoWayRcsEventsEnabled"))
+    UpdateRcsAgentRequest.type = Types::UpdateRcsAgentRequest
+    UpdateRcsAgentResult.add_member(:rcs_agent_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentArn", traits: {"smithy.api#required" => {}}))
+    UpdateRcsAgentResult.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentId", traits: {"smithy.api#required" => {}}))
+    UpdateRcsAgentResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsAgentStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    UpdateRcsAgentResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
+    UpdateRcsAgentResult.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "DeletionProtectionEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    UpdateRcsAgentResult.add_member(:opt_out_list_name, ::Smithy::Schema::Shapes::MemberShape.new(target: OptOutListName, name: "OptOutListName"))
+    UpdateRcsAgentResult.add_member(:self_managed_opt_outs_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "SelfManagedOptOutsEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    UpdateRcsAgentResult.add_member(:two_way_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayChannelArn, name: "TwoWayChannelArn"))
+    UpdateRcsAgentResult.add_member(:two_way_channel_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "TwoWayChannelRole"))
+    UpdateRcsAgentResult.add_member(:two_way_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "TwoWayEnabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    UpdateRcsAgentResult.add_member(:two_way_media_s3_bucket_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayMediaS3BucketName, name: "TwoWayMediaS3BucketName"))
+    UpdateRcsAgentResult.add_member(:two_way_media_s3_key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: TwoWayMediaS3KeyPrefix, name: "TwoWayMediaS3KeyPrefix"))
+    UpdateRcsAgentResult.add_member(:two_way_media_s3_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "TwoWayMediaS3Role"))
+    UpdateRcsAgentResult.add_member(:two_way_rcs_events_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: RcsEventTypeList, name: "TwoWayRcsEventsEnabled"))
+    UpdateRcsAgentResult.type = Types::UpdateRcsAgentResult
     UpdateSenderIdRequest.add_member(:sender_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SenderIdOrArn, name: "SenderId", traits: {"smithy.api#required" => {}}))
     UpdateSenderIdRequest.add_member(:iso_country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: IsoCountryCode, name: "IsoCountryCode", traits: {"smithy.api#required" => {}}))
     UpdateSenderIdRequest.add_member(:deletion_protection_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "DeletionProtectionEnabled"))
@@ -1661,6 +2327,7 @@ module Aws::PinpointSMSVoiceV2
     VerifiedDestinationNumberInformation.add_member(:verified_destination_number_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "VerifiedDestinationNumberId", traits: {"smithy.api#required" => {}}))
     VerifiedDestinationNumberInformation.add_member(:destination_phone_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "DestinationPhoneNumber", traits: {"smithy.api#required" => {}}))
     VerifiedDestinationNumberInformation.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    VerifiedDestinationNumberInformation.add_member(:rcs_agent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RcsAgentId"))
     VerifiedDestinationNumberInformation.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     VerifiedDestinationNumberInformation.type = Types::VerifiedDestinationNumberInformation
     VerifiedDestinationNumberInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VerifiedDestinationNumberInformation, name: "member"))
@@ -1673,12 +2340,13 @@ module Aws::PinpointSMSVoiceV2
     VerifyDestinationNumberResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     VerifyDestinationNumberResult.add_member(:created_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedTimestamp", traits: {"smithy.api#required" => {}}))
     VerifyDestinationNumberResult.type = Types::VerifyDestinationNumberResult
+    VoiceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceId, name: "member"))
 
     PinpointSMSVoiceV2 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.pinpointsmsvoicev2#PinpointSMSVoiceV2"
       service.name = "PinpointSMSVoiceV2"
       service.version = "2022-03-31"
-      service.traits = {"aws.api#service" => {"sdkId" => "Pinpoint SMS Voice V2", "endpointPrefix" => "sms-voice", "arnNamespace" => "sms-voice"}, "aws.auth#sigv4" => {"name" => "sms-voice"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Amazon Pinpoint SMS Voice V2"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Pinpoint SMS Voice V2", "endpointPrefix" => "sms-voice", "arnNamespace" => "sms-voice"}, "aws.auth#sigv4" => {"name" => "sms-voice"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Amazon Pinpoint SMS Voice V2", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://sms-voice-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://sms-voice-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://sms-voice.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://sms-voice.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_origination_identity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#AssociateOriginationIdentity"
         operation.name = "AssociateOriginationIdentity"
@@ -1706,6 +2374,18 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:carrier_lookup, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#CarrierLookup"
+        operation.name = "CarrierLookup"
+        operation.input = CarrierLookupRequest
+        operation.output = CarrierLookupResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:create_configuration_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateConfigurationSet"
         operation.name = "CreateConfigurationSet"
@@ -1724,6 +2404,20 @@ module Aws::PinpointSMSVoiceV2
         operation.name = "CreateEventDestination"
         operation.input = CreateEventDestinationRequest
         operation.output = CreateEventDestinationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_notify_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateNotifyConfiguration"
+        operation.name = "CreateNotifyConfiguration"
+        operation.input = CreateNotifyConfigurationRequest
+        operation.output = CreateNotifyConfigurationResult
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
@@ -1768,6 +2462,20 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_rcs_agent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#CreateRcsAgent"
+        operation.name = "CreateRcsAgent"
+        operation.input = CreateRcsAgentRequest
+        operation.output = CreateRcsAgentResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -1835,6 +2543,7 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -1924,6 +2633,30 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:delete_notify_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyConfiguration"
+        operation.name = "DeleteNotifyConfiguration"
+        operation.input = DeleteNotifyConfigurationRequest
+        operation.output = DeleteNotifyConfigurationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_notify_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyMessageSpendLimitOverride"
+        operation.name = "DeleteNotifyMessageSpendLimitOverride"
+        operation.input = DeleteNotifyMessageSpendLimitOverrideRequest
+        operation.output = DeleteNotifyMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:delete_opt_out_list, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteOptOutList"
         operation.name = "DeleteOptOutList"
@@ -1984,6 +2717,30 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_rcs_agent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteRcsAgent"
+        operation.name = "DeleteRcsAgent"
+        operation.input = DeleteRcsAgentRequest
+        operation.output = DeleteRcsAgentResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_rcs_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#DeleteRcsMessageSpendLimitOverride"
+        operation.name = "DeleteRcsMessageSpendLimitOverride"
+        operation.input = DeleteRcsMessageSpendLimitOverrideRequest
+        operation.output = DeleteRcsMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {}
@@ -2124,6 +2881,32 @@ module Aws::PinpointSMSVoiceV2
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeKeywords.new
       end)
+      service.add_operation(:describe_notify_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyConfigurations"
+        operation.name = "DescribeNotifyConfigurations"
+        operation.input = DescribeNotifyConfigurationsRequest
+        operation.output = DescribeNotifyConfigurationsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeNotifyConfigurations.new
+      end)
+      service.add_operation(:describe_notify_templates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyTemplates"
+        operation.name = "DescribeNotifyTemplates"
+        operation.input = DescribeNotifyTemplatesRequest
+        operation.output = DescribeNotifyTemplatesResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeNotifyTemplates.new
+      end)
       service.add_operation(:describe_opt_out_lists, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeOptOutLists"
         operation.name = "DescribeOptOutLists"
@@ -2188,6 +2971,32 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeProtectConfigurations.new
+      end)
+      service.add_operation(:describe_rcs_agent_country_launch_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentCountryLaunchStatus"
+        operation.name = "DescribeRcsAgentCountryLaunchStatus"
+        operation.input = DescribeRcsAgentCountryLaunchStatusRequest
+        operation.output = DescribeRcsAgentCountryLaunchStatusResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeRcsAgentCountryLaunchStatus.new
+      end)
+      service.add_operation(:describe_rcs_agents, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgents"
+        operation.name = "DescribeRcsAgents"
+        operation.input = DescribeRcsAgentsRequest
+        operation.output = DescribeRcsAgentsResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeRcsAgents.new
       end)
       service.add_operation(:describe_registration_attachments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationAttachments"
@@ -2378,6 +3187,32 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:list_available_phone_numbers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbers"
+        operation.name = "ListAvailablePhoneNumbers"
+        operation.input = ListAvailablePhoneNumbersRequest
+        operation.output = ListAvailablePhoneNumbersResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListAvailablePhoneNumbers.new
+      end)
+      service.add_operation(:list_notify_countries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountries"
+        operation.name = "ListNotifyCountries"
+        operation.input = ListNotifyCountriesRequest
+        operation.output = ListNotifyCountriesResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListNotifyCountries.new
+      end)
       service.add_operation(:list_pool_origination_identities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#ListPoolOriginationIdentities"
         operation.name = "ListPoolOriginationIdentities"
@@ -2475,6 +3310,7 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -2586,6 +3422,48 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:send_notify_text_message, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#SendNotifyTextMessage"
+        operation.name = "SendNotifyTextMessage"
+        operation.input = SendNotifyTextMessageRequest
+        operation.output = SendNotifyTextMessageResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:send_notify_voice_message, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#SendNotifyVoiceMessage"
+        operation.name = "SendNotifyVoiceMessage"
+        operation.input = SendNotifyVoiceMessageRequest
+        operation.output = SendNotifyVoiceMessageResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:send_rcs_message, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#SendRcsMessage"
+        operation.name = "SendRcsMessage"
+        operation.input = SendRcsMessageRequest
+        operation.output = SendRcsMessageResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:send_text_message, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SendTextMessage"
         operation.name = "SendTextMessage"
@@ -2673,6 +3551,28 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:set_notify_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#SetNotifyMessageSpendLimitOverride"
+        operation.name = "SetNotifyMessageSpendLimitOverride"
+        operation.input = SetNotifyMessageSpendLimitOverrideRequest
+        operation.output = SetNotifyMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:set_rcs_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#SetRcsMessageSpendLimitOverride"
+        operation.name = "SetRcsMessageSpendLimitOverride"
+        operation.input = SetRcsMessageSpendLimitOverrideRequest
+        operation.output = SetRcsMessageSpendLimitOverrideResult
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:set_text_message_spend_limit_override, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#SetTextMessageSpendLimitOverride"
         operation.name = "SetTextMessageSpendLimitOverride"
@@ -2746,6 +3646,19 @@ module Aws::PinpointSMSVoiceV2
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:update_notify_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#UpdateNotifyConfiguration"
+        operation.name = "UpdateNotifyConfiguration"
+        operation.input = UpdateNotifyConfigurationRequest
+        operation.output = UpdateNotifyConfigurationResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:update_phone_number, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoicev2#UpdatePhoneNumber"
         operation.name = "UpdatePhoneNumber"
@@ -2790,6 +3703,19 @@ module Aws::PinpointSMSVoiceV2
         operation.input = UpdateProtectConfigurationCountryRuleSetRequest
         operation.output = UpdateProtectConfigurationCountryRuleSetResult
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_rcs_agent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.pinpointsmsvoicev2#UpdateRcsAgent"
+        operation.name = "UpdateRcsAgent"
+        operation.input = UpdateRcsAgentRequest
+        operation.output = UpdateRcsAgentResult
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException

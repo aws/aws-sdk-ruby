@@ -197,6 +197,7 @@ module Aws::IVSRealTime
         ?attributes: Hash[String, String],
         ?ingest_protocol: String,
         ?insecure_ingest: bool,
+        ?redundant_ingest: bool,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -207,6 +208,7 @@ module Aws::IVSRealTime
       attr_accessor attributes: Hash[String, String]?
       attr_accessor ingest_protocol: String?
       attr_accessor insecure_ingest: bool?
+      attr_accessor redundant_ingest: bool?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -214,10 +216,24 @@ module Aws::IVSRealTime
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
         ?ingest_configuration: Types::IngestConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
       attr_accessor ingest_configuration: Types::IngestConfiguration?
     end
 
@@ -541,6 +557,8 @@ module Aws::IVSRealTime
         ?destination_stage_arn: String,
         ?destination_session_id: String,
         ?replica: bool,
+        ?previous_token: Types::ExchangedParticipantToken,
+        ?new_token: Types::ExchangedParticipantToken,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -552,6 +570,8 @@ module Aws::IVSRealTime
       attr_accessor destination_stage_arn: String?
       attr_accessor destination_session_id: String?
       attr_accessor replica: bool?
+      attr_accessor previous_token: Types::ExchangedParticipantToken?
+      attr_accessor new_token: Types::ExchangedParticipantToken?
     end
 
     module EventErrorCode
@@ -569,6 +589,23 @@ module Aws::IVSRealTime
       B_FRAME_PRESENT: String
       INVALID_INPUT: String
       INTERNAL_SERVER_EXCEPTION: String
+    end
+
+    class ExchangedParticipantToken
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capabilities: Array[String],
+        ?attributes: Hash[String, String],
+        ?user_id: String,
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capabilities: Array[String]?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor user_id: String?
+      attr_accessor expiration_time: Time?
     end
 
     class GetCompositionRequest
@@ -812,6 +849,8 @@ module Aws::IVSRealTime
         ?participant_id: String,
         ?state: String,
         ?user_id: String,
+        ?redundant_ingest: bool,
+        ?redundant_ingest_credentials: Array[Types::RedundantIngestCredential],
         ?attributes: Hash[String, String],
         ?tags: Hash[String, String],
       ) -> void
@@ -825,6 +864,8 @@ module Aws::IVSRealTime
       attr_accessor participant_id: String?
       attr_accessor state: String?
       attr_accessor user_id: String?
+      attr_accessor redundant_ingest: bool?
+      attr_accessor redundant_ingest_credentials: Array[Types::RedundantIngestCredential]?
       attr_accessor attributes: Hash[String, String]?
       attr_accessor tags: Hash[String, String]?
     end
@@ -840,6 +881,7 @@ module Aws::IVSRealTime
         ?participant_id: String,
         ?state: String,
         ?user_id: String,
+        ?redundant_ingest: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -850,6 +892,7 @@ module Aws::IVSRealTime
       attr_accessor participant_id: String?
       attr_accessor state: String?
       attr_accessor user_id: String?
+      attr_accessor redundant_ingest: bool?
     end
 
     module IngestProtocol
@@ -1235,6 +1278,8 @@ module Aws::IVSRealTime
         ?replication_state: String,
         ?source_stage_arn: String,
         ?source_session_id: String,
+        ?redundant_ingest: bool,
+        ?ingest_configuration_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1258,6 +1303,8 @@ module Aws::IVSRealTime
       attr_accessor replication_state: String?
       attr_accessor source_stage_arn: String?
       attr_accessor source_session_id: String?
+      attr_accessor redundant_ingest: bool?
+      attr_accessor ingest_configuration_arn: String?
     end
 
     module ParticipantProtocol
@@ -1319,6 +1366,8 @@ module Aws::IVSRealTime
         ?replication_state: String,
         ?source_stage_arn: String,
         ?source_session_id: String,
+        ?redundant_ingest: bool,
+        ?ingest_configuration_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1332,6 +1381,8 @@ module Aws::IVSRealTime
       attr_accessor replication_state: String?
       attr_accessor source_stage_arn: String?
       attr_accessor source_session_id: String?
+      attr_accessor redundant_ingest: bool?
+      attr_accessor ingest_configuration_arn: String?
     end
 
     class ParticipantThumbnailConfiguration
@@ -1504,6 +1555,19 @@ module Aws::IVSRealTime
 
       attr_accessor hls_configuration: Types::CompositionRecordingHlsConfiguration?
       attr_accessor format: String?
+    end
+
+    class RedundantIngestCredential
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?participant_id: String,
+        ?stream_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor participant_id: String?
+      attr_accessor stream_key: String?
     end
 
     class ResourceNotFoundException
@@ -1908,21 +1972,37 @@ module Aws::IVSRealTime
       def initialize: (
         ?arn: String,
         ?stage_arn: String,
+        ?redundant_ingest: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
       attr_accessor stage_arn: String?
+      attr_accessor redundant_ingest: bool?
     end
 
     class UpdateIngestConfigurationResponse
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
         ?ingest_configuration: Types::IngestConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
       attr_accessor ingest_configuration: Types::IngestConfiguration?
     end
 

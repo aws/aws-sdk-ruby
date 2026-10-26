@@ -29,6 +29,7 @@ module Aws::Grafana
     CreateWorkspaceServiceAccountTokenResponse: StructureShape
     DataSourceType: StringShape
     DataSourceTypesList: ListShape
+    DegradedWorkspaceReason: StringShape
     DeleteWorkspaceApiKeyInput: StructureShape
     DeleteWorkspaceApiKeyOutput: StructureShape
     DeleteWorkspaceInput: StructureShape
@@ -50,10 +51,12 @@ module Aws::Grafana
     GrafanaToken: StringShape
     GrafanaVersion: StringShape
     GrafanaVersionList: ListShape
+    IPAddressType: StringShape
     IamRoleArn: StringShape
     IdpMetadata: UnionShape
     IdpMetadataUrl: StringShape
     InternalServerException: StructureShape
+    KmsKeyId: StringShape
     LicenseType: StringShape
     ListPermissionsInput: StructureShape
     ListPermissionsOutput: StructureShape

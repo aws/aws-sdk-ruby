@@ -144,18 +144,18 @@ module Aws::BCMDashboards
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -274,6 +274,7 @@ module Aws::BCMDashboards
     #     description: "Description",
     #     widgets: [ # required
     #       {
+    #         id: "WidgetId",
     #         title: "WidgetTitle", # required
     #         description: "Description",
     #         width: 1,
@@ -560,6 +561,63 @@ module Aws::BCMDashboards
       request.send_request(options)
     end
 
+    # <p>Creates a new scheduled report for a dashboard. A scheduled report automatically generates and delivers dashboard snapshots on a recurring schedule. Reports are delivered within 15 minutes of the scheduled delivery time.</p>
+    # @param [Hash, Types::CreateScheduledReportRequest] params
+    # @option params [Types::ScheduledReportInput] :scheduled_report
+    #   <p>The configuration for the scheduled report, including the dashboard to report on, the schedule, and the execution role that the service will use to generate the dashboard snapshot.</p>
+    # @option params [Array<Types::ResourceTag>] :resource_tags
+    #   <p>The tags to apply to the scheduled report resource for organization and management.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     scheduled_report: { # required
+    #       name: "ScheduledReportName", # required
+    #       dashboard_arn: "DashboardArn", # required
+    #       scheduled_report_execution_role_arn: "ServiceRoleArn", # required
+    #       schedule_config: { # required
+    #         schedule_expression: "GenericString",
+    #         schedule_expression_time_zone: "GenericString",
+    #         schedule_period: {
+    #           start_time: Time.now,
+    #           end_time: Time.now
+    #         },
+    #         state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #       },
+    #       description: "Description",
+    #       widget_ids: ["String"],
+    #       widget_date_range_override: {
+    #         start_time: { # required
+    #           type: "ABSOLUTE" # One of: ["ABSOLUTE", "RELATIVE"], # required
+    #           value: "GenericString", # required
+    #         },
+    #         end_time: { # required
+    #           type: "ABSOLUTE" # One of: ["ABSOLUTE", "RELATIVE"], # required
+    #           value: "GenericString", # required
+    #         }
+    #       }
+    #     },
+    #     resource_tags: [
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
+    #       }
+    #     ],
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_scheduled_report(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "ScheduledReportArn", # required
+    #   }
+    # @return [Types::CreateScheduledReportResponse]
+    def create_scheduled_report(params = {}, options = {})
+      request = build_request(:create_scheduled_report, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a specified dashboard. This action cannot be undone.</p>
     # @param [Hash, Types::DeleteDashboardRequest] params
     # @option params [String] :arn
@@ -589,6 +647,59 @@ module Aws::BCMDashboards
     # @return [Types::DeleteDashboardResponse]
     def delete_dashboard(params = {}, options = {})
       request = build_request(:delete_dashboard, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a specified scheduled report. This is an irreversible operation.</p>
+    # @param [Hash, Types::DeleteScheduledReportRequest] params
+    # @option params [String] :arn
+    #   <p>The ARN of the scheduled report to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "ScheduledReportArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_scheduled_report(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "ScheduledReportArn", # required
+    #   }
+    # @return [Types::DeleteScheduledReportResponse]
+    def delete_scheduled_report(params = {}, options = {})
+      request = build_request(:delete_scheduled_report, params)
+      request.send_request(options)
+    end
+
+    # <p>Triggers an immediate execution of a scheduled report, outside of its regular schedule. The scheduled report must be in <code>ENABLED</code> state. Calling this operation on a <code>DISABLED</code> scheduled report returns a <code>ValidationException</code>.</p> <note> <p>If a <code>clientToken</code> is provided, the service uses it for idempotency. Requests with the same client token will not trigger a new execution within the same minute.</p> </note>
+    # @param [Hash, Types::ExecuteScheduledReportRequest] params
+    # @option params [String] :arn
+    #   <p>The ARN of the scheduled report to execute.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @option params [Boolean] :dry_run
+    #   <p>When set to <code>true</code>, validates the scheduled report configuration without triggering an actual execution.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "ScheduledReportArn", # required
+    #     client_token: "ClientToken",
+    #     dry_run: false
+    #   }
+    #   options = {}
+    #   response = client.execute_scheduled_report(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     health_status: {
+    #       status_code: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"], # required
+    #       last_refreshed_at: Time.now,
+    #       status_reasons: ["DATA_SOURCE_ACCESS_DENIED" # One of: ["DATA_SOURCE_ACCESS_DENIED", "EXECUTION_ROLE_ASSUME_FAILED", "EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS", "DASHBOARD_NOT_FOUND", "DASHBOARD_ACCESS_DENIED", "INTERNAL_FAILURE", "WIDGET_ID_NOT_FOUND"]]
+    #     },
+    #     execution_triggered: false
+    #   }
+    # @return [Types::ExecuteScheduledReportResponse]
+    def execute_scheduled_report(params = {}, options = {})
+      request = build_request(:execute_scheduled_report, params)
       request.send_request(options)
     end
 
@@ -666,6 +777,7 @@ module Aws::BCMDashboards
     #     type: "CUSTOM" # One of: ["CUSTOM"], # required
     #     widgets: [ # required
     #       {
+    #         id: "WidgetId",
     #         title: "WidgetTitle", # required
     #         description: "Description",
     #         width: 1,
@@ -975,6 +1087,61 @@ module Aws::BCMDashboards
       request.send_request(options)
     end
 
+    # <p>Retrieves the configuration and metadata of a specified scheduled report.</p>
+    # @param [Hash, Types::GetScheduledReportRequest] params
+    # @option params [String] :arn
+    #   <p>The ARN of the scheduled report to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "ScheduledReportArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_scheduled_report(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     scheduled_report: { # required
+    #       arn: "ScheduledReportArn",
+    #       name: "ScheduledReportName", # required
+    #       dashboard_arn: "DashboardArn", # required
+    #       scheduled_report_execution_role_arn: "ServiceRoleArn", # required
+    #       schedule_config: { # required
+    #         schedule_expression: "GenericString",
+    #         schedule_expression_time_zone: "GenericString",
+    #         schedule_period: {
+    #           start_time: Time.now,
+    #           end_time: Time.now
+    #         },
+    #         state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #       },
+    #       description: "Description",
+    #       widget_ids: ["String"],
+    #       widget_date_range_override: {
+    #         start_time: { # required
+    #           type: "ABSOLUTE" # One of: ["ABSOLUTE", "RELATIVE"], # required
+    #           value: "GenericString", # required
+    #         },
+    #         end_time: { # required
+    #           type: "ABSOLUTE" # One of: ["ABSOLUTE", "RELATIVE"], # required
+    #           value: "GenericString", # required
+    #         }
+    #       },
+    #       created_at: Time.now,
+    #       updated_at: Time.now,
+    #       last_execution_at: Time.now,
+    #       health_status: {
+    #         status_code: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"], # required
+    #         last_refreshed_at: Time.now,
+    #         status_reasons: ["DATA_SOURCE_ACCESS_DENIED" # One of: ["DATA_SOURCE_ACCESS_DENIED", "EXECUTION_ROLE_ASSUME_FAILED", "EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS", "DASHBOARD_NOT_FOUND", "DASHBOARD_ACCESS_DENIED", "INTERNAL_FAILURE", "WIDGET_ID_NOT_FOUND"]]
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetScheduledReportResponse]
+    def get_scheduled_report(params = {}, options = {})
+      request = build_request(:get_scheduled_report, params)
+      request.send_request(options)
+    end
+
     # <p>Returns a list of all dashboards in your account.</p>
     # @param [Hash, Types::ListDashboardsRequest] params
     # @option params [Integer] :max_results
@@ -1027,6 +1194,46 @@ module Aws::BCMDashboards
       request.send_request(options)
     end
 
+    # <p>Returns a list of scheduled reports in your account.</p>
+    # @param [Hash, Types::ListScheduledReportsRequest] params
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results. Use the value returned in the previous response.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call. Valid range is 1 to 100. The default value is 50.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "NextPageToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_scheduled_reports(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     scheduled_reports: [ # required
+    #       {
+    #         arn: "ScheduledReportArn", # required
+    #         name: "ScheduledReportName", # required
+    #         dashboard_arn: "DashboardArn", # required
+    #         schedule_expression: "GenericString", # required
+    #         state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #         health_status: { # required
+    #           status_code: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"], # required
+    #           last_refreshed_at: Time.now,
+    #           status_reasons: ["DATA_SOURCE_ACCESS_DENIED" # One of: ["DATA_SOURCE_ACCESS_DENIED", "EXECUTION_ROLE_ASSUME_FAILED", "EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS", "DASHBOARD_NOT_FOUND", "DASHBOARD_ACCESS_DENIED", "INTERNAL_FAILURE", "WIDGET_ID_NOT_FOUND"]]
+    #         },
+    #         schedule_expression_time_zone: "GenericString",
+    #         widget_ids: ["String"]
+    #       }
+    #     ],
+    #     next_token: "NextPageToken"
+    #   }
+    # @return [Types::ListScheduledReportsResponse]
+    def list_scheduled_reports(params = {}, options = {})
+      request = build_request(:list_scheduled_reports, params)
+      request.send_request(options)
+    end
+
     # <p>Returns a list of all tags associated with a specified dashboard resource.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
@@ -1053,7 +1260,7 @@ module Aws::BCMDashboards
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "DashboardArn", # required
+    #     resource_arn: "ResourceArn", # required
     #   }
     #   options = {}
     #   response = client.list_tags_for_resource(params, options)
@@ -1096,7 +1303,7 @@ module Aws::BCMDashboards
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "DashboardArn", # required
+    #     resource_arn: "ResourceArn", # required
     #     resource_tags: [ # required
     #       {
     #         key: "ResourceTagKey", # required
@@ -1135,7 +1342,7 @@ module Aws::BCMDashboards
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "DashboardArn", # required
+    #     resource_arn: "ResourceArn", # required
     #     resource_tag_keys: ["ResourceTagKey"], # required
     #   }
     #   options = {}
@@ -1154,9 +1361,9 @@ module Aws::BCMDashboards
     # @option params [String] :arn
     #   <p>The ARN of the dashboard to update.</p>
     # @option params [String] :name
-    #   <p>The new name for the dashboard. If not specified, the existing name is retained.</p>
+    #   <p>The new name for the dashboard.</p>
     # @option params [String] :description
-    #   <p>The new description for the dashboard. If not specified, the existing description is retained.</p>
+    #   <p>The new description for the dashboard.</p>
     # @option params [Array<Types::Widget>] :widgets
     #   <p>The updated array of widget configurations for the dashboard. Replaces all existing widgets.</p>
     # @example Updating a dashboard
@@ -1212,10 +1419,11 @@ module Aws::BCMDashboards
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "DashboardArn", # required
-    #     name: "DashboardName",
+    #     name: "DashboardName", # required
     #     description: "Description",
     #     widgets: [
     #       {
+    #         id: "WidgetId",
     #         title: "WidgetTitle", # required
     #         description: "Description",
     #         width: 1,
@@ -1493,6 +1701,71 @@ module Aws::BCMDashboards
     # @return [Types::UpdateDashboardResponse]
     def update_dashboard(params = {}, options = {})
       request = build_request(:update_dashboard, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an existing scheduled report's properties, including its name, description, schedule configuration, and widget settings. Only the parameters included in the request are updated; all other properties remain unchanged.</p>
+    # @param [Hash, Types::UpdateScheduledReportRequest] params
+    # @option params [String] :arn
+    #   <p>The ARN of the scheduled report to update.</p>
+    # @option params [String] :name
+    #   <p>The new name for the scheduled report.</p>
+    # @option params [String] :description
+    #   <p>The new description for the scheduled report.</p>
+    # @option params [String] :dashboard_arn
+    #   <p>The ARN of the dashboard to associate with the scheduled report.</p>
+    # @option params [String] :scheduled_report_execution_role_arn
+    #   <p>The ARN of the IAM role that the scheduled report uses to execute. Amazon Web Services Billing and Cost Management Dashboards will assume this IAM role while executing the scheduled report.</p>
+    # @option params [Types::ScheduleConfig] :schedule_config
+    #   <p>The updated schedule configuration for the report.</p>
+    # @option params [Array<String>] :widget_ids
+    #   <p>The list of widget identifiers to include in the scheduled report. If not specified, all widgets in the dashboard are included.</p>
+    # @option params [Types::DateTimeRange] :widget_date_range_override
+    #   <p>The date range override to apply to widgets in the scheduled report.</p>
+    # @option params [Boolean] :clear_widget_ids
+    #   Set to true to clear existing widgetIds.
+    # @option params [Boolean] :clear_widget_date_range_override
+    #   Set to true to clear existing widgetDateRangeOverride.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "ScheduledReportArn", # required
+    #     name: "ScheduledReportName",
+    #     description: "Description",
+    #     dashboard_arn: "DashboardArn",
+    #     scheduled_report_execution_role_arn: "ServiceRoleArn",
+    #     schedule_config: {
+    #       schedule_expression: "GenericString",
+    #       schedule_expression_time_zone: "GenericString",
+    #       schedule_period: {
+    #         start_time: Time.now,
+    #         end_time: Time.now
+    #       },
+    #       state: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #     },
+    #     widget_ids: ["String"],
+    #     widget_date_range_override: {
+    #       start_time: { # required
+    #         type: "ABSOLUTE" # One of: ["ABSOLUTE", "RELATIVE"], # required
+    #         value: "GenericString", # required
+    #       },
+    #       end_time: { # required
+    #         type: "ABSOLUTE" # One of: ["ABSOLUTE", "RELATIVE"], # required
+    #         value: "GenericString", # required
+    #       }
+    #     },
+    #     clear_widget_ids: false,
+    #     clear_widget_date_range_override: false
+    #   }
+    #   options = {}
+    #   response = client.update_scheduled_report(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "ScheduledReportArn", # required
+    #   }
+    # @return [Types::UpdateScheduledReportResponse]
+    def update_scheduled_report(params = {}, options = {})
+      request = build_request(:update_scheduled_report, params)
       request.send_request(options)
     end
 

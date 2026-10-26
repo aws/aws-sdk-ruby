@@ -13,6 +13,9 @@ module Aws::OpenSearchServerless
     AccessPolicyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#AccessPolicyType", name: "AccessPolicyType", traits: {"smithy.api#enum" => [{"name" => "data", "value" => "data", "documentation" => "data policy type"}]})
     AccountSettingsDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#AccountSettingsDetail", name: "AccountSettingsDetail")
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}})
+    AutoscalingStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#AutoscalingStatus", name: "AutoscalingStatus", traits: {"smithy.api#enum" => [{"value" => "ACTION_SCALING_UP", "name" => "ACTION_SCALING_UP"}, {"value" => "ACTION_SCALING_DOWN", "name" => "ACTION_SCALING_DOWN"}, {"value" => "NO_ACTION", "name" => "NO_ACTION"}]})
+    BatchGetCollectionGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#BatchGetCollectionGroupRequest", name: "BatchGetCollectionGroupRequest")
+    BatchGetCollectionGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#BatchGetCollectionGroupResponse", name: "BatchGetCollectionGroupResponse")
     BatchGetCollectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#BatchGetCollectionInput", name: "BatchGetCollectionInput")
     BatchGetCollectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#BatchGetCollectionOutput", name: "BatchGetCollectionOutput")
     BatchGetEffectiveLifecyclePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#BatchGetEffectiveLifecyclePolicyRequest", name: "BatchGetEffectiveLifecyclePolicyRequest")
@@ -21,6 +24,7 @@ module Aws::OpenSearchServerless
     BatchGetLifecyclePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#BatchGetLifecyclePolicyResponse", name: "BatchGetLifecyclePolicyResponse")
     BatchGetVpcEndpointInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#BatchGetVpcEndpointInput", name: "BatchGetVpcEndpointInput")
     BatchGetVpcEndpointOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#BatchGetVpcEndpointOutput", name: "BatchGetVpcEndpointOutput")
+    CapacityDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CapacityDetails", name: "CapacityDetails")
     CapacityLimits = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CapacityLimits", name: "CapacityLimits")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     CollectionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CollectionDetail", name: "CollectionDetail")
@@ -28,11 +32,26 @@ module Aws::OpenSearchServerless
     CollectionErrorDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CollectionErrorDetail", name: "CollectionErrorDetail")
     CollectionErrorDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#CollectionErrorDetails", name: "CollectionErrorDetails")
     CollectionFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CollectionFilters", name: "CollectionFilters")
+    CollectionGroupCapacityLimits = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits", name: "CollectionGroupCapacityLimits")
+    CollectionGroupDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupDetail", name: "CollectionGroupDetail")
+    CollectionGroupDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupDetails", name: "CollectionGroupDetails")
+    CollectionGroupErrorDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupErrorDetail", name: "CollectionGroupErrorDetail")
+    CollectionGroupErrorDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupErrorDetails", name: "CollectionGroupErrorDetails")
+    CollectionGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupId", name: "CollectionGroupId", traits: {"smithy.api#length" => {"min" => 3, "max" => 40}, "smithy.api#pattern" => "^[a-z0-9]{3,40}$"})
+    CollectionGroupIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupIds", name: "CollectionGroupIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    CollectionGroupMaxIndexingCapacityValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupMaxIndexingCapacityValue", name: "CollectionGroupMaxIndexingCapacityValue", traits: {"smithy.api#range" => {"min" => 1}})
+    CollectionGroupMaxSearchCapacityValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupMaxSearchCapacityValue", name: "CollectionGroupMaxSearchCapacityValue", traits: {"smithy.api#range" => {"min" => 1}})
+    CollectionGroupMinIndexingCapacityValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupMinIndexingCapacityValue", name: "CollectionGroupMinIndexingCapacityValue", traits: {"smithy.api#range" => {"min" => 0}})
+    CollectionGroupMinSearchCapacityValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupMinSearchCapacityValue", name: "CollectionGroupMinSearchCapacityValue", traits: {"smithy.api#range" => {"min" => 0}})
+    CollectionGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupName", name: "CollectionGroupName", traits: {"smithy.api#length" => {"min" => 3, "max" => 32}, "smithy.api#pattern" => "^[a-z][a-z0-9-]+$"})
+    CollectionGroupNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupNames", name: "CollectionGroupNames", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    CollectionGroupSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupSummaries", name: "CollectionGroupSummaries")
+    CollectionGroupSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CollectionGroupSummary", name: "CollectionGroupSummary")
     CollectionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#CollectionId", name: "CollectionId", traits: {"smithy.api#length" => {"min" => 3, "max" => 40}, "smithy.api#pattern" => "^[a-z0-9]{3,40}$"})
     CollectionIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#CollectionIds", name: "CollectionIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    CollectionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#CollectionName", name: "CollectionName", traits: {"smithy.api#length" => {"min" => 3, "max" => 32}, "smithy.api#pattern" => "^[a-z][a-z0-9-]+$"})
+    CollectionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#CollectionName", name: "CollectionName", traits: {"smithy.api#length" => {"min" => 3, "max" => 64}, "smithy.api#pattern" => "^[a-z][a-z0-9-]+$"})
     CollectionNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#CollectionNames", name: "CollectionNames", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    CollectionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#CollectionStatus", name: "CollectionStatus", traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Creating collection resource"}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Deleting collection resource"}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Collection resource is ready to use"}, {"name" => "FAILED", "value" => "FAILED", "documentation" => "Collection resource create or delete failed"}]})
+    CollectionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#CollectionStatus", name: "CollectionStatus", traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Creating collection resource"}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Updating collection resource"}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Deleting collection resource"}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Collection resource is ready to use"}, {"name" => "FAILED", "value" => "FAILED", "documentation" => "Collection resource create or delete failed"}, {"name" => "UPDATE_FAILED", "value" => "UPDATE_FAILED", "documentation" => "Collection resource update failed"}]})
     CollectionSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#CollectionSummaries", name: "CollectionSummaries")
     CollectionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CollectionSummary", name: "CollectionSummary")
     CollectionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#CollectionType", name: "CollectionType", traits: {"smithy.api#enum" => [{"name" => "SEARCH", "value" => "SEARCH", "documentation" => "Search collection type"}, {"name" => "TIMESERIES", "value" => "TIMESERIES", "documentation" => "Timeseries collection type"}, {"name" => "VECTORSEARCH", "value" => "VECTORSEARCH", "documentation" => "Vectorsearch collection type"}]})
@@ -42,6 +61,9 @@ module Aws::OpenSearchServerless
     CreateAccessPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateAccessPolicyInput", name: "CreateAccessPolicyInput")
     CreateAccessPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateAccessPolicyOutput", name: "CreateAccessPolicyOutput")
     CreateCollectionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateCollectionDetail", name: "CreateCollectionDetail")
+    CreateCollectionGroupDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateCollectionGroupDetail", name: "CreateCollectionGroupDetail")
+    CreateCollectionGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateCollectionGroupRequest", name: "CreateCollectionGroupRequest")
+    CreateCollectionGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateCollectionGroupResponse", name: "CreateCollectionGroupResponse")
     CreateCollectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateCollectionInput", name: "CreateCollectionInput")
     CreateCollectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateCollectionOutput", name: "CreateCollectionOutput")
     CreateIamIdentityCenterConfigOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateIamIdentityCenterConfigOptions", name: "CreateIamIdentityCenterConfigOptions")
@@ -56,9 +78,12 @@ module Aws::OpenSearchServerless
     CreateVpcEndpointDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateVpcEndpointDetail", name: "CreateVpcEndpointDetail")
     CreateVpcEndpointInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateVpcEndpointInput", name: "CreateVpcEndpointInput")
     CreateVpcEndpointOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CreateVpcEndpointOutput", name: "CreateVpcEndpointOutput")
+    CurrentCapacity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#CurrentCapacity", name: "CurrentCapacity")
     DeleteAccessPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteAccessPolicyInput", name: "DeleteAccessPolicyInput")
     DeleteAccessPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteAccessPolicyOutput", name: "DeleteAccessPolicyOutput")
     DeleteCollectionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteCollectionDetail", name: "DeleteCollectionDetail")
+    DeleteCollectionGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteCollectionGroupRequest", name: "DeleteCollectionGroupRequest")
+    DeleteCollectionGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteCollectionGroupResponse", name: "DeleteCollectionGroupResponse")
     DeleteCollectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteCollectionInput", name: "DeleteCollectionInput")
     DeleteCollectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteCollectionOutput", name: "DeleteCollectionOutput")
     DeleteIndexRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteIndexRequest", name: "DeleteIndexRequest")
@@ -72,10 +97,12 @@ module Aws::OpenSearchServerless
     DeleteVpcEndpointDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteVpcEndpointDetail", name: "DeleteVpcEndpointDetail")
     DeleteVpcEndpointInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteVpcEndpointInput", name: "DeleteVpcEndpointInput")
     DeleteVpcEndpointOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#DeleteVpcEndpointOutput", name: "DeleteVpcEndpointOutput")
+    DeletionProtection = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#DeletionProtection", name: "DeletionProtection", traits: {"smithy.api#enum" => [{"name" => "ENABLED", "value" => "ENABLED", "documentation" => "Deletion protection enabled"}, {"name" => "DISABLED", "value" => "DISABLED", "documentation" => "Deletion protection disabled"}]})
     EffectiveLifecyclePolicyDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#EffectiveLifecyclePolicyDetail", name: "EffectiveLifecyclePolicyDetail")
     EffectiveLifecyclePolicyDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#EffectiveLifecyclePolicyDetails", name: "EffectiveLifecyclePolicyDetails")
     EffectiveLifecyclePolicyErrorDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#EffectiveLifecyclePolicyErrorDetail", name: "EffectiveLifecyclePolicyErrorDetail")
     EffectiveLifecyclePolicyErrorDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#EffectiveLifecyclePolicyErrorDetails", name: "EffectiveLifecyclePolicyErrorDetails")
+    EncryptionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#EncryptionConfig", name: "EncryptionConfig")
     FipsEndpoints = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#FipsEndpoints", name: "FipsEndpoints")
     GetAccessPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#GetAccessPolicyInput", name: "GetAccessPolicyInput")
     GetAccessPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#GetAccessPolicyOutput", name: "GetAccessPolicyOutput")
@@ -115,6 +142,8 @@ module Aws::OpenSearchServerless
     LifecycleResourceFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#LifecycleResourceFilter", name: "LifecycleResourceFilter")
     ListAccessPoliciesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ListAccessPoliciesInput", name: "ListAccessPoliciesInput")
     ListAccessPoliciesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ListAccessPoliciesOutput", name: "ListAccessPoliciesOutput")
+    ListCollectionGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ListCollectionGroupsRequest", name: "ListCollectionGroupsRequest")
+    ListCollectionGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ListCollectionGroupsResponse", name: "ListCollectionGroupsResponse")
     ListCollectionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ListCollectionsInput", name: "ListCollectionsInput")
     ListCollectionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ListCollectionsOutput", name: "ListCollectionsOutput")
     ListLifecyclePoliciesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ListLifecyclePoliciesRequest", name: "ListLifecyclePoliciesRequest")
@@ -134,7 +163,7 @@ module Aws::OpenSearchServerless
     PolicyVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#PolicyVersion", name: "PolicyVersion", traits: {"smithy.api#length" => {"min" => 20, "max" => 36}, "smithy.api#pattern" => "^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$"})
     Resource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#Resource", name: "Resource")
     ResourceFilter = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#ResourceFilter", name: "ResourceFilter")
-    ResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#ResourceName", name: "ResourceName", traits: {"smithy.api#pattern" => "^index/[a-z][a-z0-9-]{3,32}/([a-z;0-9&$%][+.~=\\-_a-z;0-9&$%]*)$"})
+    ResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#ResourceName", name: "ResourceName", traits: {"smithy.api#pattern" => "^index/[a-z][a-z0-9-]{3,63}/([a-z;0-9&$%][+.~=\\-_a-z;0-9&$%]*)$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#ResourceType", name: "ResourceType", traits: {"smithy.api#enum" => [{"name" => "index", "value" => "index", "documentation" => "index resource type"}]})
     SamlConfigOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#SamlConfigOptions", name: "SamlConfigOptions")
@@ -152,6 +181,8 @@ module Aws::OpenSearchServerless
     SecurityPolicySummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#SecurityPolicySummaries", name: "SecurityPolicySummaries")
     SecurityPolicySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#SecurityPolicySummary", name: "SecurityPolicySummary")
     SecurityPolicyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#SecurityPolicyType", name: "SecurityPolicyType", traits: {"smithy.api#enum" => [{"name" => "encryption", "value" => "encryption", "documentation" => "encryption policy type"}, {"name" => "network", "value" => "network", "documentation" => "network policy type"}]})
+    ServerlessGeneration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#ServerlessGeneration", name: "ServerlessGeneration", traits: {"smithy.api#enum" => [{"name" => "CLASSIC", "value" => "CLASSIC"}, {"name" => "NEXTGEN", "value" => "NEXTGEN"}]})
+    ServerlessVectorAccelerationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#ServerlessVectorAccelerationStatus", name: "ServerlessVectorAccelerationStatus", traits: {"smithy.api#enum" => [{"name" => "ENABLED", "value" => "ENABLED", "documentation" => "Serverless vector acceleration is enabled by default"}, {"name" => "DISABLED", "value" => "DISABLED", "documentation" => "Serverless vector acceleration is disabled"}, {"name" => "ALLOWED", "value" => "ALLOWED", "documentation" => "Serverless vector acceleration is allowed but not enabled by default"}]})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     StandbyReplicas = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#StandbyReplicas", name: "StandbyReplicas", traits: {"smithy.api#enum" => [{"name" => "ENABLED", "value" => "ENABLED", "documentation" => "Standby replicas enabled"}, {"name" => "DISABLED", "value" => "DISABLED", "documentation" => "Standby replicas disabled"}]})
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearchserverless#SubnetId", name: "SubnetId", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"})
@@ -170,6 +201,9 @@ module Aws::OpenSearchServerless
     UpdateAccountSettingsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateAccountSettingsInput", name: "UpdateAccountSettingsInput")
     UpdateAccountSettingsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateAccountSettingsOutput", name: "UpdateAccountSettingsOutput")
     UpdateCollectionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateCollectionDetail", name: "UpdateCollectionDetail")
+    UpdateCollectionGroupDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateCollectionGroupDetail", name: "UpdateCollectionGroupDetail")
+    UpdateCollectionGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateCollectionGroupRequest", name: "UpdateCollectionGroupRequest")
+    UpdateCollectionGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateCollectionGroupResponse", name: "UpdateCollectionGroupResponse")
     UpdateCollectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateCollectionInput", name: "UpdateCollectionInput")
     UpdateCollectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateCollectionOutput", name: "UpdateCollectionOutput")
     UpdateIamIdentityCenterConfigOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateIamIdentityCenterConfigOptions", name: "UpdateIamIdentityCenterConfigOptions")
@@ -185,6 +219,7 @@ module Aws::OpenSearchServerless
     UpdateVpcEndpointInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateVpcEndpointInput", name: "UpdateVpcEndpointInput")
     UpdateVpcEndpointOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#UpdateVpcEndpointOutput", name: "UpdateVpcEndpointOutput")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    VectorOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#VectorOptions", name: "VectorOptions")
     VpcEndpointDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#VpcEndpointDetail", name: "VpcEndpointDetail")
     VpcEndpointDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearchserverless#VpcEndpointDetails", name: "VpcEndpointDetails")
     VpcEndpointErrorDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearchserverless#VpcEndpointErrorDetail", name: "VpcEndpointErrorDetail")
@@ -224,6 +259,12 @@ module Aws::OpenSearchServerless
     AccessPolicySummary.type = Types::AccessPolicySummary
     AccountSettingsDetail.add_member(:capacity_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityLimits, name: "capacityLimits"))
     AccountSettingsDetail.type = Types::AccountSettingsDetail
+    BatchGetCollectionGroupRequest.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupIds, name: "ids"))
+    BatchGetCollectionGroupRequest.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupNames, name: "names"))
+    BatchGetCollectionGroupRequest.type = Types::BatchGetCollectionGroupRequest
+    BatchGetCollectionGroupResponse.add_member(:collection_group_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupDetails, name: "collectionGroupDetails"))
+    BatchGetCollectionGroupResponse.add_member(:collection_group_error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupErrorDetails, name: "collectionGroupErrorDetails"))
+    BatchGetCollectionGroupResponse.type = Types::BatchGetCollectionGroupResponse
     BatchGetCollectionInput.add_member(:ids, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionIds, name: "ids"))
     BatchGetCollectionInput.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionNames, name: "names"))
     BatchGetCollectionInput.type = Types::BatchGetCollectionInput
@@ -245,6 +286,9 @@ module Aws::OpenSearchServerless
     BatchGetVpcEndpointOutput.add_member(:vpc_endpoint_details, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointDetails, name: "vpcEndpointDetails"))
     BatchGetVpcEndpointOutput.add_member(:vpc_endpoint_error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointErrorDetails, name: "vpcEndpointErrorDetails"))
     BatchGetVpcEndpointOutput.type = Types::BatchGetVpcEndpointOutput
+    CapacityDetails.add_member(:capacity_in_ocu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "capacityInOcu"))
+    CapacityDetails.add_member(:autoscaling_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoscalingStatus, name: "autoscalingStatus"))
+    CapacityDetails.type = Types::CapacityDetails
     CapacityLimits.add_member(:max_indexing_capacity_in_ocu, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexingCapacityValue, name: "maxIndexingCapacityInOCU"))
     CapacityLimits.add_member(:max_search_capacity_in_ocu, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchCapacityValue, name: "maxSearchCapacityInOCU"))
     CapacityLimits.type = Types::CapacityLimits
@@ -256,6 +300,8 @@ module Aws::OpenSearchServerless
     CollectionDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
     CollectionDetail.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "kmsKeyArn"))
     CollectionDetail.add_member(:standby_replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyReplicas, name: "standbyReplicas"))
+    CollectionDetail.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtection, name: "deletionProtection"))
+    CollectionDetail.add_member(:vector_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorOptions, name: "vectorOptions"))
     CollectionDetail.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
     CollectionDetail.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "lastModifiedDate"))
     CollectionDetail.add_member(:collection_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "collectionEndpoint"))
@@ -263,6 +309,7 @@ module Aws::OpenSearchServerless
     CollectionDetail.add_member(:fips_endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: FipsEndpoints, name: "fipsEndpoints"))
     CollectionDetail.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureCode"))
     CollectionDetail.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
+    CollectionDetail.add_member(:collection_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "collectionGroupName"))
     CollectionDetail.type = Types::CollectionDetail
     CollectionDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionDetail, name: "member"))
     CollectionErrorDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "id"))
@@ -273,7 +320,43 @@ module Aws::OpenSearchServerless
     CollectionErrorDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionErrorDetail, name: "member"))
     CollectionFilters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "name"))
     CollectionFilters.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionStatus, name: "status"))
+    CollectionFilters.add_member(:collection_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "collectionGroupName"))
     CollectionFilters.type = Types::CollectionFilters
+    CollectionGroupCapacityLimits.add_member(:max_indexing_capacity_in_ocu, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupMaxIndexingCapacityValue, name: "maxIndexingCapacityInOCU"))
+    CollectionGroupCapacityLimits.add_member(:max_search_capacity_in_ocu, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupMaxSearchCapacityValue, name: "maxSearchCapacityInOCU"))
+    CollectionGroupCapacityLimits.add_member(:min_indexing_capacity_in_ocu, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupMinIndexingCapacityValue, name: "minIndexingCapacityInOCU"))
+    CollectionGroupCapacityLimits.add_member(:min_search_capacity_in_ocu, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupMinSearchCapacityValue, name: "minSearchCapacityInOCU"))
+    CollectionGroupCapacityLimits.type = Types::CollectionGroupCapacityLimits
+    CollectionGroupDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupId, name: "id"))
+    CollectionGroupDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
+    CollectionGroupDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "name"))
+    CollectionGroupDetail.add_member(:standby_replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyReplicas, name: "standbyReplicas"))
+    CollectionGroupDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    CollectionGroupDetail.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    CollectionGroupDetail.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
+    CollectionGroupDetail.add_member(:capacity_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupCapacityLimits, name: "capacityLimits"))
+    CollectionGroupDetail.add_member(:current_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrentCapacity, name: "currentCapacity"))
+    CollectionGroupDetail.add_member(:number_of_collections, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "numberOfCollections"))
+    CollectionGroupDetail.add_member(:generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessGeneration, name: "generation"))
+    CollectionGroupDetail.type = Types::CollectionGroupDetail
+    CollectionGroupDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupDetail, name: "member"))
+    CollectionGroupErrorDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupId, name: "id"))
+    CollectionGroupErrorDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "name"))
+    CollectionGroupErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage"))
+    CollectionGroupErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode"))
+    CollectionGroupErrorDetail.type = Types::CollectionGroupErrorDetail
+    CollectionGroupErrorDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupErrorDetail, name: "member"))
+    CollectionGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupId, name: "member"))
+    CollectionGroupNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "member"))
+    CollectionGroupSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupSummary, name: "member"))
+    CollectionGroupSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupId, name: "id"))
+    CollectionGroupSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
+    CollectionGroupSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "name"))
+    CollectionGroupSummary.add_member(:number_of_collections, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "numberOfCollections"))
+    CollectionGroupSummary.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
+    CollectionGroupSummary.add_member(:capacity_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupCapacityLimits, name: "capacityLimits"))
+    CollectionGroupSummary.add_member(:generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessGeneration, name: "generation"))
+    CollectionGroupSummary.type = Types::CollectionGroupSummary
     CollectionIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "member"))
     CollectionNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "member"))
     CollectionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionSummary, name: "member"))
@@ -281,6 +364,8 @@ module Aws::OpenSearchServerless
     CollectionSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "name"))
     CollectionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionStatus, name: "status"))
     CollectionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
+    CollectionSummary.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "kmsKeyArn"))
+    CollectionSummary.add_member(:collection_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "collectionGroupName"))
     CollectionSummary.type = Types::CollectionSummary
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ConflictException.type = Types::ConflictException
@@ -300,14 +385,41 @@ module Aws::OpenSearchServerless
     CreateCollectionDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
     CreateCollectionDetail.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "kmsKeyArn"))
     CreateCollectionDetail.add_member(:standby_replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyReplicas, name: "standbyReplicas"))
+    CreateCollectionDetail.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtection, name: "deletionProtection"))
+    CreateCollectionDetail.add_member(:vector_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorOptions, name: "vectorOptions"))
     CreateCollectionDetail.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
     CreateCollectionDetail.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "lastModifiedDate"))
+    CreateCollectionDetail.add_member(:collection_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "collectionGroupName"))
     CreateCollectionDetail.type = Types::CreateCollectionDetail
+    CreateCollectionGroupDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupId, name: "id"))
+    CreateCollectionGroupDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
+    CreateCollectionGroupDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "name"))
+    CreateCollectionGroupDetail.add_member(:standby_replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyReplicas, name: "standbyReplicas"))
+    CreateCollectionGroupDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    CreateCollectionGroupDetail.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    CreateCollectionGroupDetail.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
+    CreateCollectionGroupDetail.add_member(:capacity_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupCapacityLimits, name: "capacityLimits"))
+    CreateCollectionGroupDetail.add_member(:generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessGeneration, name: "generation"))
+    CreateCollectionGroupDetail.type = Types::CreateCollectionGroupDetail
+    CreateCollectionGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateCollectionGroupRequest.add_member(:standby_replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyReplicas, name: "standbyReplicas", traits: {"smithy.api#required" => {}}))
+    CreateCollectionGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description", traits: {"smithy.api#length" => {"max" => 1000}}))
+    CreateCollectionGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
+    CreateCollectionGroupRequest.add_member(:capacity_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupCapacityLimits, name: "capacityLimits"))
+    CreateCollectionGroupRequest.add_member(:generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessGeneration, name: "generation"))
+    CreateCollectionGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
+    CreateCollectionGroupRequest.type = Types::CreateCollectionGroupRequest
+    CreateCollectionGroupResponse.add_member(:create_collection_group_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateCollectionGroupDetail, name: "createCollectionGroupDetail"))
+    CreateCollectionGroupResponse.type = Types::CreateCollectionGroupResponse
     CreateCollectionInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "name", traits: {"smithy.api#required" => {}}))
     CreateCollectionInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionType, name: "type"))
     CreateCollectionInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description", traits: {"smithy.api#length" => {"max" => 1000}}))
     CreateCollectionInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     CreateCollectionInput.add_member(:standby_replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: StandbyReplicas, name: "standbyReplicas"))
+    CreateCollectionInput.add_member(:vector_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorOptions, name: "vectorOptions"))
+    CreateCollectionInput.add_member(:collection_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "collectionGroupName"))
+    CreateCollectionInput.add_member(:encryption_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfig, name: "encryptionConfig"))
+    CreateCollectionInput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtection, name: "deletionProtection"))
     CreateCollectionInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
     CreateCollectionInput.type = Types::CreateCollectionInput
     CreateCollectionOutput.add_member(:create_collection_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateCollectionDetail, name: "createCollectionDetail"))
@@ -359,6 +471,9 @@ module Aws::OpenSearchServerless
     CreateVpcEndpointInput.type = Types::CreateVpcEndpointInput
     CreateVpcEndpointOutput.add_member(:create_vpc_endpoint_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateVpcEndpointDetail, name: "createVpcEndpointDetail"))
     CreateVpcEndpointOutput.type = Types::CreateVpcEndpointOutput
+    CurrentCapacity.add_member(:search, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityDetails, name: "search"))
+    CurrentCapacity.add_member(:indexing, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityDetails, name: "indexing"))
+    CurrentCapacity.type = Types::CurrentCapacity
     DeleteAccessPolicyInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicyType, name: "type", traits: {"smithy.api#required" => {}}))
     DeleteAccessPolicyInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyName, name: "name", traits: {"smithy.api#required" => {}}))
     DeleteAccessPolicyInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
@@ -367,7 +482,12 @@ module Aws::OpenSearchServerless
     DeleteCollectionDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "id"))
     DeleteCollectionDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionName, name: "name"))
     DeleteCollectionDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionStatus, name: "status"))
+    DeleteCollectionDetail.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtection, name: "deletionProtection"))
     DeleteCollectionDetail.type = Types::DeleteCollectionDetail
+    DeleteCollectionGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupId, name: "id", traits: {"smithy.api#required" => {}}))
+    DeleteCollectionGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
+    DeleteCollectionGroupRequest.type = Types::DeleteCollectionGroupRequest
+    DeleteCollectionGroupResponse.type = Types::DeleteCollectionGroupResponse
     DeleteCollectionInput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "id", traits: {"smithy.api#required" => {}}))
     DeleteCollectionInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DeleteCollectionInput.type = Types::DeleteCollectionInput
@@ -414,6 +534,9 @@ module Aws::OpenSearchServerless
     EffectiveLifecyclePolicyErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode"))
     EffectiveLifecyclePolicyErrorDetail.type = Types::EffectiveLifecyclePolicyErrorDetail
     EffectiveLifecyclePolicyErrorDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveLifecyclePolicyErrorDetail, name: "member"))
+    EncryptionConfig.add_member(:a_ws_owned_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "aWSOwnedKey"))
+    EncryptionConfig.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "kmsKeyArn", traits: {"smithy.api#length" => {"min" => 10, "max" => 100}, "smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"}))
+    EncryptionConfig.type = Types::EncryptionConfig
     FipsEndpoints.add_member(:collection_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "collectionEndpoint"))
     FipsEndpoints.add_member(:dashboard_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "dashboardEndpoint"))
     FipsEndpoints.type = Types::FipsEndpoints
@@ -500,6 +623,12 @@ module Aws::OpenSearchServerless
     ListAccessPoliciesOutput.add_member(:access_policy_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPolicySummaries, name: "accessPolicySummaries"))
     ListAccessPoliciesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     ListAccessPoliciesOutput.type = Types::ListAccessPoliciesOutput
+    ListCollectionGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
+    ListCollectionGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListCollectionGroupsRequest.type = Types::ListCollectionGroupsRequest
+    ListCollectionGroupsResponse.add_member(:collection_group_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupSummaries, name: "collectionGroupSummaries"))
+    ListCollectionGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
+    ListCollectionGroupsResponse.type = Types::ListCollectionGroupsResponse
     ListCollectionsInput.add_member(:collection_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionFilters, name: "collectionFilters"))
     ListCollectionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     ListCollectionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
@@ -630,12 +759,32 @@ module Aws::OpenSearchServerless
     UpdateCollectionDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionStatus, name: "status"))
     UpdateCollectionDetail.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionType, name: "type"))
     UpdateCollectionDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    UpdateCollectionDetail.add_member(:vector_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorOptions, name: "vectorOptions"))
     UpdateCollectionDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
     UpdateCollectionDetail.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
     UpdateCollectionDetail.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "lastModifiedDate"))
+    UpdateCollectionDetail.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtection, name: "deletionProtection"))
     UpdateCollectionDetail.type = Types::UpdateCollectionDetail
+    UpdateCollectionGroupDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupId, name: "id"))
+    UpdateCollectionGroupDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "arn"))
+    UpdateCollectionGroupDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupName, name: "name"))
+    UpdateCollectionGroupDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    UpdateCollectionGroupDetail.add_member(:capacity_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupCapacityLimits, name: "capacityLimits"))
+    UpdateCollectionGroupDetail.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "createdDate"))
+    UpdateCollectionGroupDetail.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "lastModifiedDate"))
+    UpdateCollectionGroupDetail.add_member(:generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessGeneration, name: "generation"))
+    UpdateCollectionGroupDetail.type = Types::UpdateCollectionGroupDetail
+    UpdateCollectionGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupId, name: "id", traits: {"smithy.api#required" => {}}))
+    UpdateCollectionGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description", traits: {"smithy.api#length" => {"max" => 1000}}))
+    UpdateCollectionGroupRequest.add_member(:capacity_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionGroupCapacityLimits, name: "capacityLimits"))
+    UpdateCollectionGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
+    UpdateCollectionGroupRequest.type = Types::UpdateCollectionGroupRequest
+    UpdateCollectionGroupResponse.add_member(:update_collection_group_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateCollectionGroupDetail, name: "updateCollectionGroupDetail"))
+    UpdateCollectionGroupResponse.type = Types::UpdateCollectionGroupResponse
     UpdateCollectionInput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionId, name: "id", traits: {"smithy.api#required" => {}}))
     UpdateCollectionInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description", traits: {"smithy.api#length" => {"max" => 1000}}))
+    UpdateCollectionInput.add_member(:vector_options, ::Smithy::Schema::Shapes::MemberShape.new(target: VectorOptions, name: "vectorOptions"))
+    UpdateCollectionInput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtection, name: "deletionProtection"))
     UpdateCollectionInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
     UpdateCollectionInput.type = Types::UpdateCollectionInput
     UpdateCollectionOutput.add_member(:update_collection_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateCollectionDetail, name: "updateCollectionDetail"))
@@ -694,6 +843,8 @@ module Aws::OpenSearchServerless
     UpdateVpcEndpointOutput.type = Types::UpdateVpcEndpointOutput
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ValidationException.type = Types::ValidationException
+    VectorOptions.add_member(:serverless_vector_acceleration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessVectorAccelerationStatus, name: "ServerlessVectorAcceleration", traits: {"smithy.api#required" => {}}))
+    VectorOptions.type = Types::VectorOptions
     VpcEndpointDetail.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointId, name: "id"))
     VpcEndpointDetail.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointName, name: "name"))
     VpcEndpointDetail.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
@@ -723,12 +874,21 @@ module Aws::OpenSearchServerless
       service.id = "com.amazonaws.opensearchserverless#OpenSearchServerless"
       service.name = "OpenSearchServerless"
       service.version = "2021-11-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "OpenSearchServerless", "arnNamespace" => "aoss"}, "aws.auth#sigv4" => {"name" => "aoss"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "OpenSearch Service Serverless"}
+      service.traits = {"aws.api#service" => {"sdkId" => "OpenSearchServerless", "arnNamespace" => "aoss"}, "aws.auth#sigv4" => {"name" => "aoss"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "OpenSearch Service Serverless", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://aoss-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://aoss-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://aoss.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://aoss.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_get_collection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearchserverless#BatchGetCollection"
         operation.name = "BatchGetCollection"
         operation.input = BatchGetCollectionInput
         operation.output = BatchGetCollectionOutput
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:batch_get_collection_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearchserverless#BatchGetCollectionGroup"
+        operation.name = "BatchGetCollectionGroup"
+        operation.input = BatchGetCollectionGroupRequest
+        operation.output = BatchGetCollectionGroupResponse
         operation.errors << InternalServerException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
@@ -779,6 +939,17 @@ module Aws::OpenSearchServerless
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << OcuLimitExceededException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_collection_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearchserverless#CreateCollectionGroup"
+        operation.name = "CreateCollectionGroup"
+        operation.input = CreateCollectionGroupRequest
+        operation.output = CreateCollectionGroupResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
@@ -854,6 +1025,17 @@ module Aws::OpenSearchServerless
         operation.name = "DeleteCollection"
         operation.input = DeleteCollectionInput
         operation.output = DeleteCollectionOutput
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_collection_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearchserverless#DeleteCollectionGroup"
+        operation.name = "DeleteCollectionGroup"
+        operation.input = DeleteCollectionGroupRequest
+        operation.output = DeleteCollectionGroupResponse
         operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
@@ -981,6 +1163,16 @@ module Aws::OpenSearchServerless
         operation.traits = {"smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAccessPolicies.new
       end)
+      service.add_operation(:list_collection_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearchserverless#ListCollectionGroups"
+        operation.name = "ListCollectionGroups"
+        operation.input = ListCollectionGroupsRequest
+        operation.output = ListCollectionGroupsResponse
+        operation.errors << InternalServerException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListCollectionGroups.new
+      end)
       service.add_operation(:list_collections, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearchserverless#ListCollections"
         operation.name = "ListCollections"
@@ -1081,6 +1273,7 @@ module Aws::OpenSearchServerless
         operation.input = UpdateAccountSettingsInput
         operation.output = UpdateAccountSettingsOutput
         operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ValidationException
         operation.traits = {}
       end)
@@ -1091,6 +1284,17 @@ module Aws::OpenSearchServerless
         operation.output = UpdateCollectionOutput
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_collection_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearchserverless#UpdateCollectionGroup"
+        operation.name = "UpdateCollectionGroup"
+        operation.input = UpdateCollectionGroupRequest
+        operation.output = UpdateCollectionGroupResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)

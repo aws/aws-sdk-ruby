@@ -29,6 +29,8 @@ module Aws::NetworkManager
     AttachmentErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#AttachmentErrorList", name: "AttachmentErrorList", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     AttachmentId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.networkmanager#AttachmentId", name: "AttachmentId", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#pattern" => "^attachment-([0-9a-f]{8,17})$"})
     AttachmentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#AttachmentList", name: "AttachmentList")
+    AttachmentRoutingPolicyAssociationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#AttachmentRoutingPolicyAssociationSummary", name: "AttachmentRoutingPolicyAssociationSummary")
+    AttachmentRoutingPolicyAssociationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#AttachmentRoutingPolicyAssociationsList", name: "AttachmentRoutingPolicyAssociationsList")
     AttachmentState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#AttachmentState", name: "AttachmentState")
     AttachmentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#AttachmentType", name: "AttachmentType")
     Bandwidth = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#Bandwidth", name: "Bandwidth")
@@ -90,6 +92,8 @@ module Aws::NetworkManager
     CoreNetworkPolicyException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CoreNetworkPolicyException", name: "CoreNetworkPolicyException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     CoreNetworkPolicyVersion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CoreNetworkPolicyVersion", name: "CoreNetworkPolicyVersion")
     CoreNetworkPolicyVersionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#CoreNetworkPolicyVersionList", name: "CoreNetworkPolicyVersionList")
+    CoreNetworkRoutingInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CoreNetworkRoutingInformation", name: "CoreNetworkRoutingInformation")
+    CoreNetworkRoutingInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#CoreNetworkRoutingInformationList", name: "CoreNetworkRoutingInformationList")
     CoreNetworkSegment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CoreNetworkSegment", name: "CoreNetworkSegment")
     CoreNetworkSegmentEdgeIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CoreNetworkSegmentEdgeIdentifier", name: "CoreNetworkSegmentEdgeIdentifier")
     CoreNetworkSegmentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#CoreNetworkSegmentList", name: "CoreNetworkSegmentList")
@@ -102,6 +106,8 @@ module Aws::NetworkManager
     CreateConnectPeerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CreateConnectPeerResponse", name: "CreateConnectPeerResponse")
     CreateConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CreateConnectionRequest", name: "CreateConnectionRequest")
     CreateConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CreateConnectionResponse", name: "CreateConnectionResponse")
+    CreateCoreNetworkPrefixListAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CreateCoreNetworkPrefixListAssociationRequest", name: "CreateCoreNetworkPrefixListAssociationRequest")
+    CreateCoreNetworkPrefixListAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CreateCoreNetworkPrefixListAssociationResponse", name: "CreateCoreNetworkPrefixListAssociationResponse")
     CreateCoreNetworkRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CreateCoreNetworkRequest", name: "CreateCoreNetworkRequest")
     CreateCoreNetworkResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CreateCoreNetworkResponse", name: "CreateCoreNetworkResponse")
     CreateDeviceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#CreateDeviceRequest", name: "CreateDeviceRequest")
@@ -136,6 +142,8 @@ module Aws::NetworkManager
     DeleteConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#DeleteConnectionResponse", name: "DeleteConnectionResponse")
     DeleteCoreNetworkPolicyVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#DeleteCoreNetworkPolicyVersionRequest", name: "DeleteCoreNetworkPolicyVersionRequest")
     DeleteCoreNetworkPolicyVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#DeleteCoreNetworkPolicyVersionResponse", name: "DeleteCoreNetworkPolicyVersionResponse")
+    DeleteCoreNetworkPrefixListAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#DeleteCoreNetworkPrefixListAssociationRequest", name: "DeleteCoreNetworkPrefixListAssociationRequest")
+    DeleteCoreNetworkPrefixListAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#DeleteCoreNetworkPrefixListAssociationResponse", name: "DeleteCoreNetworkPrefixListAssociationResponse")
     DeleteCoreNetworkRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#DeleteCoreNetworkRequest", name: "DeleteCoreNetworkRequest")
     DeleteCoreNetworkResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#DeleteCoreNetworkResponse", name: "DeleteCoreNetworkResponse")
     DeleteDeviceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#DeleteDeviceRequest", name: "DeleteDeviceRequest")
@@ -256,12 +264,18 @@ module Aws::NetworkManager
     LinkIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#LinkIdList", name: "LinkIdList")
     LinkList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#LinkList", name: "LinkList")
     LinkState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#LinkState", name: "LinkState")
+    ListAttachmentRoutingPolicyAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListAttachmentRoutingPolicyAssociationsRequest", name: "ListAttachmentRoutingPolicyAssociationsRequest")
+    ListAttachmentRoutingPolicyAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListAttachmentRoutingPolicyAssociationsResponse", name: "ListAttachmentRoutingPolicyAssociationsResponse")
     ListAttachmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListAttachmentsRequest", name: "ListAttachmentsRequest")
     ListAttachmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListAttachmentsResponse", name: "ListAttachmentsResponse")
     ListConnectPeersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListConnectPeersRequest", name: "ListConnectPeersRequest")
     ListConnectPeersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListConnectPeersResponse", name: "ListConnectPeersResponse")
     ListCoreNetworkPolicyVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListCoreNetworkPolicyVersionsRequest", name: "ListCoreNetworkPolicyVersionsRequest")
     ListCoreNetworkPolicyVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListCoreNetworkPolicyVersionsResponse", name: "ListCoreNetworkPolicyVersionsResponse")
+    ListCoreNetworkPrefixListAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListCoreNetworkPrefixListAssociationsRequest", name: "ListCoreNetworkPrefixListAssociationsRequest")
+    ListCoreNetworkPrefixListAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListCoreNetworkPrefixListAssociationsResponse", name: "ListCoreNetworkPrefixListAssociationsResponse")
+    ListCoreNetworkRoutingInformationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListCoreNetworkRoutingInformationRequest", name: "ListCoreNetworkRoutingInformationRequest")
+    ListCoreNetworkRoutingInformationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListCoreNetworkRoutingInformationResponse", name: "ListCoreNetworkRoutingInformationResponse")
     ListCoreNetworksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListCoreNetworksRequest", name: "ListCoreNetworksRequest")
     ListCoreNetworksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListCoreNetworksResponse", name: "ListCoreNetworksResponse")
     ListOrganizationServiceAccessStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ListOrganizationServiceAccessStatusRequest", name: "ListOrganizationServiceAccessStatusRequest")
@@ -303,8 +317,13 @@ module Aws::NetworkManager
     PeeringState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#PeeringState", name: "PeeringState")
     PeeringType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#PeeringType", name: "PeeringType")
     PermissionsErrorContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#PermissionsErrorContext", name: "PermissionsErrorContext")
+    PrefixListArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.networkmanager#PrefixListArn", name: "PrefixListArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}, "smithy.api#pattern" => "^[\\s\\S]*$"})
+    PrefixListAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#PrefixListAssociation", name: "PrefixListAssociation")
+    PrefixListAssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#PrefixListAssociationList", name: "PrefixListAssociationList")
     ProposedNetworkFunctionGroupChange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ProposedNetworkFunctionGroupChange", name: "ProposedNetworkFunctionGroupChange")
     ProposedSegmentChange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ProposedSegmentChange", name: "ProposedSegmentChange")
+    PutAttachmentRoutingPolicyLabelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#PutAttachmentRoutingPolicyLabelRequest", name: "PutAttachmentRoutingPolicyLabelRequest")
+    PutAttachmentRoutingPolicyLabelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#PutAttachmentRoutingPolicyLabelResponse", name: "PutAttachmentRoutingPolicyLabelResponse")
     PutCoreNetworkPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#PutCoreNetworkPolicyRequest", name: "PutCoreNetworkPolicyRequest")
     PutCoreNetworkPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#PutCoreNetworkPolicyResponse", name: "PutCoreNetworkPolicyResponse")
     PutResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#PutResourcePolicyRequest", name: "PutResourcePolicyRequest")
@@ -318,6 +337,8 @@ module Aws::NetworkManager
     RejectAttachmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#RejectAttachmentResponse", name: "RejectAttachmentResponse")
     Relationship = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#Relationship", name: "Relationship")
     RelationshipList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#RelationshipList", name: "RelationshipList")
+    RemoveAttachmentRoutingPolicyLabelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#RemoveAttachmentRoutingPolicyLabelRequest", name: "RemoveAttachmentRoutingPolicyLabelRequest")
+    RemoveAttachmentRoutingPolicyLabelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#RemoveAttachmentRoutingPolicyLabelResponse", name: "RemoveAttachmentRoutingPolicyLabelResponse")
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.networkmanager#ResourceArn", name: "ResourceArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 1500}, "smithy.api#pattern" => "^[\\s\\S]*$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     RestoreCoreNetworkPolicyVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#RestoreCoreNetworkPolicyVersionRequest", name: "RestoreCoreNetworkPolicyVersionRequest")
@@ -337,6 +358,10 @@ module Aws::NetworkManager
     RouteTableType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#RouteTableType", name: "RouteTableType")
     RouteType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#RouteType", name: "RouteType")
     RouteTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#RouteTypeList", name: "RouteTypeList")
+    RoutingInformationNextHop = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#RoutingInformationNextHop", name: "RoutingInformationNextHop")
+    RoutingPolicyAssociationDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.networkmanager#RoutingPolicyAssociationDetail", name: "RoutingPolicyAssociationDetail")
+    RoutingPolicyAssociationDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.networkmanager#RoutingPolicyAssociationDetailsList", name: "RoutingPolicyAssociationDetailsList")
+    RoutingPolicyDirection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#RoutingPolicyDirection", name: "RoutingPolicyDirection")
     SLRDeploymentStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.networkmanager#SLRDeploymentStatus", name: "SLRDeploymentStatus", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     SegmentActionServiceInsertion = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#SegmentActionServiceInsertion", name: "SegmentActionServiceInsertion")
     SendViaMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.networkmanager#SendViaMode", name: "SendViaMode")
@@ -494,8 +519,16 @@ module Aws::NetworkManager
     AttachmentErrorCode.add_member(:direct_connect_gateway_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_CONNECT_GATEWAY_NOT_FOUND", traits: {"smithy.api#enumValue" => "DIRECT_CONNECT_GATEWAY_NOT_FOUND"}))
     AttachmentErrorCode.add_member(:direct_connect_gateway_existing_attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", traits: {"smithy.api#enumValue" => "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS"}))
     AttachmentErrorCode.add_member(:direct_connect_gateway_no_private_vif, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", traits: {"smithy.api#enumValue" => "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"}))
+    AttachmentErrorCode.add_member(:vpn_existing_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPN_EXISTING_ASSOCIATIONS", traits: {"smithy.api#enumValue" => "VPN_EXISTING_ASSOCIATIONS"}))
+    AttachmentErrorCode.add_member(:vpc_unsupported_features, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC_UNSUPPORTED_FEATURES", traits: {"smithy.api#enumValue" => "VPC_UNSUPPORTED_FEATURES"}))
     AttachmentErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentError, name: "member"))
     AttachmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attachment, name: "member"))
+    AttachmentRoutingPolicyAssociationSummary.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "AttachmentId"))
+    AttachmentRoutingPolicyAssociationSummary.add_member(:pending_routing_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "PendingRoutingPolicies"))
+    AttachmentRoutingPolicyAssociationSummary.add_member(:associated_routing_policies, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "AssociatedRoutingPolicies"))
+    AttachmentRoutingPolicyAssociationSummary.add_member(:routing_policy_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "RoutingPolicyLabel"))
+    AttachmentRoutingPolicyAssociationSummary.type = Types::AttachmentRoutingPolicyAssociationSummary
+    AttachmentRoutingPolicyAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentRoutingPolicyAssociationSummary, name: "member"))
     AttachmentState.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
     AttachmentState.add_member(:pending_attachment_acceptance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_ATTACHMENT_ACCEPTANCE", traits: {"smithy.api#enumValue" => "PENDING_ATTACHMENT_ACCEPTANCE"}))
     AttachmentState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -534,6 +567,10 @@ module Aws::NetworkManager
     ChangeType.add_member(:attachment_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATTACHMENT_MAPPING", traits: {"smithy.api#enumValue" => "ATTACHMENT_MAPPING"}))
     ChangeType.add_member(:attachment_route_propagation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATTACHMENT_ROUTE_PROPAGATION", traits: {"smithy.api#enumValue" => "ATTACHMENT_ROUTE_PROPAGATION"}))
     ChangeType.add_member(:attachment_route_static, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATTACHMENT_ROUTE_STATIC", traits: {"smithy.api#enumValue" => "ATTACHMENT_ROUTE_STATIC"}))
+    ChangeType.add_member(:routing_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTING_POLICY", traits: {"smithy.api#enumValue" => "ROUTING_POLICY"}))
+    ChangeType.add_member(:routing_policy_segment_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTING_POLICY_SEGMENT_ASSOCIATION", traits: {"smithy.api#enumValue" => "ROUTING_POLICY_SEGMENT_ASSOCIATION"}))
+    ChangeType.add_member(:routing_policy_edge_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTING_POLICY_EDGE_ASSOCIATION", traits: {"smithy.api#enumValue" => "ROUTING_POLICY_EDGE_ASSOCIATION"}))
+    ChangeType.add_member(:routing_policy_attachment_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROUTING_POLICY_ATTACHMENT_ASSOCIATION", traits: {"smithy.api#enumValue" => "ROUTING_POLICY_ATTACHMENT_ASSOCIATION"}))
     ChangeType.add_member(:core_network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CORE_NETWORK_CONFIGURATION", traits: {"smithy.api#enumValue" => "CORE_NETWORK_CONFIGURATION"}))
     ChangeType.add_member(:segments_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEGMENTS_CONFIGURATION", traits: {"smithy.api#enumValue" => "SEGMENTS_CONFIGURATION"}))
     ChangeType.add_member(:segment_actions_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEGMENT_ACTIONS_CONFIGURATION", traits: {"smithy.api#enumValue" => "SEGMENT_ACTIONS_CONFIGURATION"}))
@@ -663,10 +700,13 @@ module Aws::NetworkManager
     CoreNetworkChangeEvent.type = Types::CoreNetworkChangeEvent
     CoreNetworkChangeEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkChangeEvent, name: "member"))
     CoreNetworkChangeEventValues.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation"))
+    CoreNetworkChangeEventValues.add_member(:peer_edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "PeerEdgeLocation"))
+    CoreNetworkChangeEventValues.add_member(:routing_policy_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingPolicyDirection, name: "RoutingPolicyDirection"))
     CoreNetworkChangeEventValues.add_member(:segment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "SegmentName"))
     CoreNetworkChangeEventValues.add_member(:network_function_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "NetworkFunctionGroupName"))
     CoreNetworkChangeEventValues.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "AttachmentId"))
     CoreNetworkChangeEventValues.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Cidr"))
+    CoreNetworkChangeEventValues.add_member(:routing_policy_association_details, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingPolicyAssociationDetailsList, name: "RoutingPolicyAssociationDetails"))
     CoreNetworkChangeEventValues.type = Types::CoreNetworkChangeEventValues
     CoreNetworkChangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkChange, name: "member"))
     CoreNetworkChangeValues.add_member(:segment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "SegmentName"))
@@ -681,6 +721,11 @@ module Aws::NetworkManager
     CoreNetworkChangeValues.add_member(:vpn_ecmp_support, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "VpnEcmpSupport", traits: {"smithy.api#default" => false}))
     CoreNetworkChangeValues.add_member(:dns_support, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DnsSupport", traits: {"smithy.api#default" => false}))
     CoreNetworkChangeValues.add_member(:security_group_referencing_support, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "SecurityGroupReferencingSupport", traits: {"smithy.api#default" => false}))
+    CoreNetworkChangeValues.add_member(:routing_policy_direction, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingPolicyDirection, name: "RoutingPolicyDirection"))
+    CoreNetworkChangeValues.add_member(:routing_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicyDocument, name: "RoutingPolicy"))
+    CoreNetworkChangeValues.add_member(:peer_edge_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCodeList, name: "PeerEdgeLocations"))
+    CoreNetworkChangeValues.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "AttachmentId"))
+    CoreNetworkChangeValues.add_member(:routing_policy_association_details, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingPolicyAssociationDetailsList, name: "RoutingPolicyAssociationDetails"))
     CoreNetworkChangeValues.type = Types::CoreNetworkChangeValues
     CoreNetworkEdge.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation"))
     CoreNetworkEdge.add_member(:asn, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "Asn"))
@@ -723,6 +768,14 @@ module Aws::NetworkManager
     CoreNetworkPolicyVersion.add_member(:change_set_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeSetState, name: "ChangeSetState"))
     CoreNetworkPolicyVersion.type = Types::CoreNetworkPolicyVersion
     CoreNetworkPolicyVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicyVersion, name: "member"))
+    CoreNetworkRoutingInformation.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Prefix"))
+    CoreNetworkRoutingInformation.add_member(:next_hop, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingInformationNextHop, name: "NextHop"))
+    CoreNetworkRoutingInformation.add_member(:local_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "LocalPreference"))
+    CoreNetworkRoutingInformation.add_member(:med, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Med"))
+    CoreNetworkRoutingInformation.add_member(:as_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "AsPath"))
+    CoreNetworkRoutingInformation.add_member(:communities, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "Communities"))
+    CoreNetworkRoutingInformation.type = Types::CoreNetworkRoutingInformation
+    CoreNetworkRoutingInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkRoutingInformation, name: "member"))
     CoreNetworkSegment.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Name"))
     CoreNetworkSegment.add_member(:edge_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCodeList, name: "EdgeLocations"))
     CoreNetworkSegment.add_member(:shared_segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "SharedSegments"))
@@ -748,6 +801,7 @@ module Aws::NetworkManager
     CreateConnectAttachmentRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#required" => {}}))
     CreateConnectAttachmentRequest.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation", traits: {"smithy.api#required" => {}}))
     CreateConnectAttachmentRequest.add_member(:transport_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "TransportAttachmentId", traits: {"smithy.api#required" => {}}))
+    CreateConnectAttachmentRequest.add_member(:routing_policy_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "RoutingPolicyLabel"))
     CreateConnectAttachmentRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectAttachmentOptions, name: "Options", traits: {"smithy.api#required" => {}}))
     CreateConnectAttachmentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateConnectAttachmentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -775,6 +829,15 @@ module Aws::NetworkManager
     CreateConnectionRequest.type = Types::CreateConnectionRequest
     CreateConnectionResponse.add_member(:connection, ::Smithy::Schema::Shapes::MemberShape.new(target: Connection, name: "Connection"))
     CreateConnectionResponse.type = Types::CreateConnectionResponse
+    CreateCoreNetworkPrefixListAssociationRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#required" => {}}))
+    CreateCoreNetworkPrefixListAssociationRequest.add_member(:prefix_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListArn, name: "PrefixListArn", traits: {"smithy.api#required" => {}}))
+    CreateCoreNetworkPrefixListAssociationRequest.add_member(:prefix_list_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "PrefixListAlias", traits: {"smithy.api#required" => {}}))
+    CreateCoreNetworkPrefixListAssociationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateCoreNetworkPrefixListAssociationRequest.type = Types::CreateCoreNetworkPrefixListAssociationRequest
+    CreateCoreNetworkPrefixListAssociationResponse.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
+    CreateCoreNetworkPrefixListAssociationResponse.add_member(:prefix_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListArn, name: "PrefixListArn"))
+    CreateCoreNetworkPrefixListAssociationResponse.add_member(:prefix_list_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "PrefixListAlias"))
+    CreateCoreNetworkPrefixListAssociationResponse.type = Types::CreateCoreNetworkPrefixListAssociationResponse
     CreateCoreNetworkRequest.add_member(:global_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalNetworkId, name: "GlobalNetworkId", traits: {"smithy.api#required" => {}}))
     CreateCoreNetworkRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Description"))
     CreateCoreNetworkRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
@@ -798,6 +861,7 @@ module Aws::NetworkManager
     CreateDeviceResponse.type = Types::CreateDeviceResponse
     CreateDirectConnectGatewayAttachmentRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#required" => {}}))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:direct_connect_gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectConnectGatewayArn, name: "DirectConnectGatewayArn", traits: {"smithy.api#required" => {}}))
+    CreateDirectConnectGatewayAttachmentRequest.add_member(:routing_policy_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "RoutingPolicyLabel"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:edge_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCodeList, name: "EdgeLocations", traits: {"smithy.api#required" => {}}))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -828,6 +892,7 @@ module Aws::NetworkManager
     CreateSiteResponse.type = Types::CreateSiteResponse
     CreateSiteToSiteVpnAttachmentRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#required" => {}}))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:vpn_connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VpnConnectionArn, name: "VpnConnectionArn", traits: {"smithy.api#required" => {}}))
+    CreateSiteToSiteVpnAttachmentRequest.add_member(:routing_policy_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "RoutingPolicyLabel"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateSiteToSiteVpnAttachmentRequest.type = Types::CreateSiteToSiteVpnAttachmentRequest
@@ -842,6 +907,7 @@ module Aws::NetworkManager
     CreateTransitGatewayPeeringResponse.type = Types::CreateTransitGatewayPeeringResponse
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:peering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PeeringId, name: "PeeringId", traits: {"smithy.api#required" => {}}))
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:transit_gateway_route_table_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitGatewayRouteTableArn, name: "TransitGatewayRouteTableArn", traits: {"smithy.api#required" => {}}))
+    CreateTransitGatewayRouteTableAttachmentRequest.add_member(:routing_policy_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "RoutingPolicyLabel"))
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateTransitGatewayRouteTableAttachmentRequest.type = Types::CreateTransitGatewayRouteTableAttachmentRequest
@@ -851,6 +917,7 @@ module Aws::NetworkManager
     CreateVpcAttachmentRequest.add_member(:vpc_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcArn, name: "VpcArn", traits: {"smithy.api#required" => {}}))
     CreateVpcAttachmentRequest.add_member(:subnet_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetArnList, name: "SubnetArns", traits: {"smithy.api#required" => {}}))
     CreateVpcAttachmentRequest.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcOptions, name: "Options"))
+    CreateVpcAttachmentRequest.add_member(:routing_policy_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "RoutingPolicyLabel"))
     CreateVpcAttachmentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateVpcAttachmentRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateVpcAttachmentRequest.type = Types::CreateVpcAttachmentRequest
@@ -886,6 +953,12 @@ module Aws::NetworkManager
     DeleteCoreNetworkPolicyVersionRequest.type = Types::DeleteCoreNetworkPolicyVersionRequest
     DeleteCoreNetworkPolicyVersionResponse.add_member(:core_network_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicy, name: "CoreNetworkPolicy"))
     DeleteCoreNetworkPolicyVersionResponse.type = Types::DeleteCoreNetworkPolicyVersionResponse
+    DeleteCoreNetworkPrefixListAssociationRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCoreNetworkPrefixListAssociationRequest.add_member(:prefix_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListArn, name: "PrefixListArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteCoreNetworkPrefixListAssociationRequest.type = Types::DeleteCoreNetworkPrefixListAssociationRequest
+    DeleteCoreNetworkPrefixListAssociationResponse.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
+    DeleteCoreNetworkPrefixListAssociationResponse.add_member(:prefix_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListArn, name: "PrefixListArn"))
+    DeleteCoreNetworkPrefixListAssociationResponse.type = Types::DeleteCoreNetworkPrefixListAssociationResponse
     DeleteCoreNetworkRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCoreNetworkRequest.type = Types::DeleteCoreNetworkRequest
     DeleteCoreNetworkResponse.add_member(:core_network, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetwork, name: "CoreNetwork"))
@@ -1237,6 +1310,14 @@ module Aws::NetworkManager
     LinkState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "available", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     LinkState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "deleting", traits: {"smithy.api#enumValue" => "DELETING"}))
     LinkState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "updating", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    ListAttachmentRoutingPolicyAssociationsRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAttachmentRoutingPolicyAssociationsRequest.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "AttachmentId", traits: {"smithy.api#httpQuery" => "attachmentId"}))
+    ListAttachmentRoutingPolicyAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAttachmentRoutingPolicyAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAttachmentRoutingPolicyAssociationsRequest.type = Types::ListAttachmentRoutingPolicyAssociationsRequest
+    ListAttachmentRoutingPolicyAssociationsResponse.add_member(:attachment_routing_policy_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentRoutingPolicyAssociationsList, name: "AttachmentRoutingPolicyAssociations"))
+    ListAttachmentRoutingPolicyAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAttachmentRoutingPolicyAssociationsResponse.type = Types::ListAttachmentRoutingPolicyAssociationsResponse
     ListAttachmentsRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#httpQuery" => "coreNetworkId"}))
     ListAttachmentsRequest.add_member(:attachment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentType, name: "AttachmentType", traits: {"smithy.api#httpQuery" => "attachmentType"}))
     ListAttachmentsRequest.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation", traits: {"smithy.api#httpQuery" => "edgeLocation"}))
@@ -1262,6 +1343,28 @@ module Aws::NetworkManager
     ListCoreNetworkPolicyVersionsResponse.add_member(:core_network_policy_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkPolicyVersionList, name: "CoreNetworkPolicyVersions"))
     ListCoreNetworkPolicyVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListCoreNetworkPolicyVersionsResponse.type = Types::ListCoreNetworkPolicyVersionsResponse
+    ListCoreNetworkPrefixListAssociationsRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListCoreNetworkPrefixListAssociationsRequest.add_member(:prefix_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListArn, name: "PrefixListArn", traits: {"smithy.api#httpQuery" => "prefixListArn"}))
+    ListCoreNetworkPrefixListAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListCoreNetworkPrefixListAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListCoreNetworkPrefixListAssociationsRequest.type = Types::ListCoreNetworkPrefixListAssociationsRequest
+    ListCoreNetworkPrefixListAssociationsResponse.add_member(:prefix_list_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListAssociationList, name: "PrefixListAssociations"))
+    ListCoreNetworkPrefixListAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListCoreNetworkPrefixListAssociationsResponse.type = Types::ListCoreNetworkPrefixListAssociationsResponse
+    ListCoreNetworkRoutingInformationRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListCoreNetworkRoutingInformationRequest.add_member(:segment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "SegmentName", traits: {"smithy.api#required" => {}}))
+    ListCoreNetworkRoutingInformationRequest.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation", traits: {"smithy.api#required" => {}}))
+    ListCoreNetworkRoutingInformationRequest.add_member(:next_hop_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterMap, name: "NextHopFilters"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:local_preference_matches, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "LocalPreferenceMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:exact_as_path_matches, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "ExactAsPathMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:med_matches, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "MedMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:community_matches, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "CommunityMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListCoreNetworkRoutingInformationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListCoreNetworkRoutingInformationRequest.type = Types::ListCoreNetworkRoutingInformationRequest
+    ListCoreNetworkRoutingInformationResponse.add_member(:core_network_routing_information, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkRoutingInformationList, name: "CoreNetworkRoutingInformation"))
+    ListCoreNetworkRoutingInformationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListCoreNetworkRoutingInformationResponse.type = Types::ListCoreNetworkRoutingInformationResponse
     ListCoreNetworksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListCoreNetworksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListCoreNetworksRequest.type = Types::ListCoreNetworksRequest
@@ -1391,6 +1494,11 @@ module Aws::NetworkManager
     PeeringType.add_member(:transit_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSIT_GATEWAY", traits: {"smithy.api#enumValue" => "TRANSIT_GATEWAY"}))
     PermissionsErrorContext.add_member(:missing_permission, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "MissingPermission"))
     PermissionsErrorContext.type = Types::PermissionsErrorContext
+    PrefixListAssociation.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
+    PrefixListAssociation.add_member(:prefix_list_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListArn, name: "PrefixListArn"))
+    PrefixListAssociation.add_member(:prefix_list_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "PrefixListAlias"))
+    PrefixListAssociation.type = Types::PrefixListAssociation
+    PrefixListAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixListAssociation, name: "member"))
     ProposedNetworkFunctionGroupChange.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     ProposedNetworkFunctionGroupChange.add_member(:attachment_policy_rule_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AttachmentPolicyRuleNumber"))
     ProposedNetworkFunctionGroupChange.add_member(:network_function_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "NetworkFunctionGroupName"))
@@ -1399,6 +1507,15 @@ module Aws::NetworkManager
     ProposedSegmentChange.add_member(:attachment_policy_rule_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AttachmentPolicyRuleNumber"))
     ProposedSegmentChange.add_member(:segment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "SegmentName"))
     ProposedSegmentChange.type = Types::ProposedSegmentChange
+    PutAttachmentRoutingPolicyLabelRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#required" => {}}))
+    PutAttachmentRoutingPolicyLabelRequest.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "AttachmentId", traits: {"smithy.api#required" => {}}))
+    PutAttachmentRoutingPolicyLabelRequest.add_member(:routing_policy_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "RoutingPolicyLabel", traits: {"smithy.api#required" => {}}))
+    PutAttachmentRoutingPolicyLabelRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutAttachmentRoutingPolicyLabelRequest.type = Types::PutAttachmentRoutingPolicyLabelRequest
+    PutAttachmentRoutingPolicyLabelResponse.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
+    PutAttachmentRoutingPolicyLabelResponse.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "AttachmentId"))
+    PutAttachmentRoutingPolicyLabelResponse.add_member(:routing_policy_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "RoutingPolicyLabel"))
+    PutAttachmentRoutingPolicyLabelResponse.type = Types::PutAttachmentRoutingPolicyLabelResponse
     PutCoreNetworkPolicyRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutCoreNetworkPolicyRequest.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: SynthesizedJsonCoreNetworkPolicyDocument, name: "PolicyDocument", traits: {"smithy.api#required" => {}}))
     PutCoreNetworkPolicyRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "Description"))
@@ -1426,6 +1543,13 @@ module Aws::NetworkManager
     Relationship.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "To"))
     Relationship.type = Types::Relationship
     RelationshipList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Relationship, name: "member"))
+    RemoveAttachmentRoutingPolicyLabelRequest.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RemoveAttachmentRoutingPolicyLabelRequest.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "AttachmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RemoveAttachmentRoutingPolicyLabelRequest.type = Types::RemoveAttachmentRoutingPolicyLabelRequest
+    RemoveAttachmentRoutingPolicyLabelResponse.add_member(:core_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreNetworkId, name: "CoreNetworkId"))
+    RemoveAttachmentRoutingPolicyLabelResponse.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentId, name: "AttachmentId"))
+    RemoveAttachmentRoutingPolicyLabelResponse.add_member(:routing_policy_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "RoutingPolicyLabel"))
+    RemoveAttachmentRoutingPolicyLabelResponse.type = Types::RemoveAttachmentRoutingPolicyLabelResponse
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerSideString, name: "ResourceType", traits: {"smithy.api#required" => {}}))
@@ -1491,6 +1615,19 @@ module Aws::NetworkManager
     RouteType.add_member(:propagated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROPAGATED", traits: {"smithy.api#enumValue" => "PROPAGATED"}))
     RouteType.add_member(:static, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATIC", traits: {"smithy.api#enumValue" => "STATIC"}))
     RouteTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteType, name: "member"))
+    RoutingInformationNextHop.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "IpAddress"))
+    RoutingInformationNextHop.add_member(:core_network_attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "CoreNetworkAttachmentId"))
+    RoutingInformationNextHop.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "ResourceId"))
+    RoutingInformationNextHop.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "ResourceType"))
+    RoutingInformationNextHop.add_member(:segment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedString, name: "SegmentName"))
+    RoutingInformationNextHop.add_member(:edge_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalRegionCode, name: "EdgeLocation"))
+    RoutingInformationNextHop.type = Types::RoutingInformationNextHop
+    RoutingPolicyAssociationDetail.add_member(:routing_policy_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "RoutingPolicyNames"))
+    RoutingPolicyAssociationDetail.add_member(:shared_segments, ::Smithy::Schema::Shapes::MemberShape.new(target: ConstrainedStringList, name: "SharedSegments"))
+    RoutingPolicyAssociationDetail.type = Types::RoutingPolicyAssociationDetail
+    RoutingPolicyAssociationDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingPolicyAssociationDetail, name: "member"))
+    RoutingPolicyDirection.add_member(:inbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INBOUND", traits: {"smithy.api#enumValue" => "inbound"}))
+    RoutingPolicyDirection.add_member(:outbound, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTBOUND", traits: {"smithy.api#enumValue" => "outbound"}))
     SegmentActionServiceInsertion.add_member(:send_via, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_VIA", traits: {"smithy.api#enumValue" => "send-via"}))
     SegmentActionServiceInsertion.add_member(:send_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEND_TO", traits: {"smithy.api#enumValue" => "send-to"}))
     SendViaMode.add_member(:dual_hop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUAL_HOP", traits: {"smithy.api#enumValue" => "dual-hop"}))
@@ -1692,7 +1829,7 @@ module Aws::NetworkManager
       service.id = "com.amazonaws.networkmanager#NetworkManager"
       service.name = "NetworkManager"
       service.version = "2019-07-05"
-      service.traits = {"aws.api#service" => {"sdkId" => "NetworkManager", "arnNamespace" => "networkmanager", "cloudFormationName" => "NetworkManager", "cloudTrailEventSource" => "networkmanager.amazonaws.com", "endpointPrefix" => "networkmanager"}, "aws.auth#sigv4" => {"name" => "networkmanager"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Network Manager"}
+      service.traits = {"aws.api#service" => {"sdkId" => "NetworkManager", "arnNamespace" => "networkmanager", "cloudFormationName" => "NetworkManager", "cloudTrailEventSource" => "networkmanager.amazonaws.com", "endpointPrefix" => "networkmanager"}, "aws.auth#sigv4" => {"name" => "networkmanager"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Network Manager", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager.us-west-2.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-west-2"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager.us-west-2.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-west-2"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager-fips.us-west-2.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-west-2"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager-fips.us-west-2.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-west-2"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager.us-gov-west-1.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager.us-gov-west-1.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://networkmanager.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 19, "nodes" => "/////wAAAAH/////AAAAAAAAABIAAAADAAAAAQAAAAQF9eERAAAAAgAAAAUF9eERAAAAAwAAAAoAAAAGAAAABAAAAAkAAAAHAAAABQAAAAgF9eEQAAAABwX14Q4F9eEPAAAABQX14QUF9eEEAAAABAAAABEAAAALAAAABQAAAA4AAAAMAAAABgX14QgAAAANAAAACAX14QwF9eENAAAABgX14QkAAAAPAAAABwAAABAF9eELAAAACAX14QoF9eELAAAABQX14QcF9eEGAAAAAwX14QEAAAATAAAABQX14QIF9eED"}}
       service.add_operation(:accept_attachment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmanager#AcceptAttachment"
         operation.name = "AcceptAttachment"
@@ -1814,6 +1951,20 @@ module Aws::NetworkManager
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/core-networks", "code" => 200}}
+      end)
+      service.add_operation(:create_core_network_prefix_list_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.networkmanager#CreateCoreNetworkPrefixListAssociation"
+        operation.name = "CreateCoreNetworkPrefixListAssociation"
+        operation.input = CreateCoreNetworkPrefixListAssociationRequest
+        operation.output = CreateCoreNetworkPrefixListAssociationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/prefix-list", "code" => 200}}
       end)
       service.add_operation(:create_device, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmanager#CreateDevice"
@@ -1999,6 +2150,20 @@ module Aws::NetworkManager
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/core-networks/{CoreNetworkId}/core-network-policy-versions/{PolicyVersionId}", "code" => 200}}
+      end)
+      service.add_operation(:delete_core_network_prefix_list_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.networkmanager#DeleteCoreNetworkPrefixListAssociation"
+        operation.name = "DeleteCoreNetworkPrefixListAssociation"
+        operation.input = DeleteCoreNetworkPrefixListAssociationRequest
+        operation.output = DeleteCoreNetworkPrefixListAssociationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/prefix-list/{PrefixListArn}/core-network/{CoreNetworkId}", "code" => 200}}
       end)
       service.add_operation(:delete_device, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmanager#DeleteDevice"
@@ -2508,6 +2673,19 @@ module Aws::NetworkManager
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/vpc-attachments/{AttachmentId}", "code" => 200}}
       end)
+      service.add_operation(:list_attachment_routing_policy_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.networkmanager#ListAttachmentRoutingPolicyAssociations"
+        operation.name = "ListAttachmentRoutingPolicyAssociations"
+        operation.input = ListAttachmentRoutingPolicyAssociationsRequest
+        operation.output = ListAttachmentRoutingPolicyAssociationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/routing-policy-label/core-network/{CoreNetworkId}", "code" => 200}}
+        operation[:paginator] = Paginators::ListAttachmentRoutingPolicyAssociations.new
+      end)
       service.add_operation(:list_attachments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmanager#ListAttachments"
         operation.name = "ListAttachments"
@@ -2544,6 +2722,32 @@ module Aws::NetworkManager
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/core-networks/{CoreNetworkId}/core-network-policy-versions", "code" => 200}}
         operation[:paginator] = Paginators::ListCoreNetworkPolicyVersions.new
+      end)
+      service.add_operation(:list_core_network_prefix_list_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.networkmanager#ListCoreNetworkPrefixListAssociations"
+        operation.name = "ListCoreNetworkPrefixListAssociations"
+        operation.input = ListCoreNetworkPrefixListAssociationsRequest
+        operation.output = ListCoreNetworkPrefixListAssociationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/prefix-list/core-network/{CoreNetworkId}", "code" => 200}}
+        operation[:paginator] = Paginators::ListCoreNetworkPrefixListAssociations.new
+      end)
+      service.add_operation(:list_core_network_routing_information, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.networkmanager#ListCoreNetworkRoutingInformation"
+        operation.name = "ListCoreNetworkRoutingInformation"
+        operation.input = ListCoreNetworkRoutingInformationRequest
+        operation.output = ListCoreNetworkRoutingInformationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/core-networks/{CoreNetworkId}/core-network-routing-information", "code" => 200}}
+        operation[:paginator] = Paginators::ListCoreNetworkRoutingInformation.new
       end)
       service.add_operation(:list_core_networks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmanager#ListCoreNetworks"
@@ -2587,6 +2791,20 @@ module Aws::NetworkManager
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}}
+      end)
+      service.add_operation(:put_attachment_routing_policy_label, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.networkmanager#PutAttachmentRoutingPolicyLabel"
+        operation.name = "PutAttachmentRoutingPolicyLabel"
+        operation.input = PutAttachmentRoutingPolicyLabelRequest
+        operation.output = PutAttachmentRoutingPolicyLabelResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/routing-policy-label", "code" => 200}}
       end)
       service.add_operation(:put_core_network_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmanager#PutCoreNetworkPolicy"
@@ -2640,6 +2858,20 @@ module Aws::NetworkManager
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/attachments/{AttachmentId}/reject", "code" => 200}}
+      end)
+      service.add_operation(:remove_attachment_routing_policy_label, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.networkmanager#RemoveAttachmentRoutingPolicyLabel"
+        operation.name = "RemoveAttachmentRoutingPolicyLabel"
+        operation.input = RemoveAttachmentRoutingPolicyLabelRequest
+        operation.output = RemoveAttachmentRoutingPolicyLabelResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/routing-policy-label/core-network/{CoreNetworkId}/attachment/{AttachmentId}", "code" => 200}}
       end)
       service.add_operation(:restore_core_network_policy_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.networkmanager#RestoreCoreNetworkPolicyVersion"

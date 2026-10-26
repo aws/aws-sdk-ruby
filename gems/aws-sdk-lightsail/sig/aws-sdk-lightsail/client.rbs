@@ -193,7 +193,13 @@ module Aws::Lightsail
     end
     def create_contact_method: (
       ?protocol: String,
-      ?contact_endpoint: String
+      ?contact_endpoint: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
     ) -> _CreateContactMethodResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactMethodResponse
 
     interface _CreateContainerServiceResponse
@@ -363,7 +369,8 @@ module Aws::Lightsail
         name: String,
         region_name: String,
         protocol_policy: String,
-        response_timeout: Integer
+        response_timeout: Integer,
+        ip_address_type: String
       },
       ?default_cache_behavior: {
         behavior: String
@@ -402,7 +409,17 @@ module Aws::Lightsail
         }
       ],
       ?certificate_name: String,
-      ?viewer_minimum_tls_protocol_version: String
+      ?viewer_minimum_tls_protocol_version: String,
+      ?enable_private_origin_access: bool,
+      ?default_root_object: String,
+      ?custom_error_responses: Array[
+        {
+          error_code: Integer,
+          response_code: String,
+          response_page_path: untyped,
+          error_caching_min_ttl: Integer
+        }
+      ]
     ) -> _CreateDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDistributionResponse
 
     interface _CreateDomainResponse
@@ -994,7 +1011,8 @@ module Aws::Lightsail
     def get_buckets: (
       ?bucket_name: String,
       ?page_token: String,
-      ?include_connected_resources: bool
+      ?include_connected_resources: bool,
+      ?include_cors: bool
     ) -> _GetBucketsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketsResponse
 
     interface _GetBundlesResponse
@@ -1380,6 +1398,13 @@ module Aws::Lightsail
       ?page_token: String
     ) -> _GetOperationsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOperationsForResourceResponse
 
+    interface _GetProfileResponse
+      include Smithy::Client::_Response[Types::GetProfileResult]
+      def profile_type: () -> String?
+      def partner: () -> Types::PartnerInfo?
+    end
+    def get_profile: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileResponse
+
     interface _GetRegionsResponse
       include Smithy::Client::_Response[Types::GetRegionsResult]
       def regions: () -> Array[Types::Region]?
@@ -1590,7 +1615,13 @@ module Aws::Lightsail
       ?treat_missing_data: String,
       ?contact_protocols: Array[String],
       ?notification_triggers: Array[String],
-      ?notification_enabled: bool
+      ?notification_enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
     ) -> _PutAlarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAlarmResponse
 
     interface _PutInstancePublicPortsResponse
@@ -1802,6 +1833,18 @@ module Aws::Lightsail
         enabled: bool,
         destination: String,
         prefix: String
+      },
+      ?cors: {
+        rules: Array[
+          {
+            id: String,
+            allowed_methods: Array[String],
+            allowed_origins: Array[String],
+            allowed_headers: Array[String],
+            expose_headers: Array[String],
+            max_age_seconds: Integer
+          }
+        ]
       }
     ) -> _UpdateBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBucketResponse
 
@@ -1843,7 +1886,8 @@ module Aws::Lightsail
         name: String,
         region_name: String,
         protocol_policy: String,
-        response_timeout: Integer
+        response_timeout: Integer,
+        ip_address_type: String
       },
       ?default_cache_behavior: {
         behavior: String
@@ -1876,7 +1920,17 @@ module Aws::Lightsail
       ?is_enabled: bool,
       ?viewer_minimum_tls_protocol_version: String,
       ?certificate_name: String,
-      ?use_default_certificate: bool
+      ?use_default_certificate: bool,
+      ?enable_private_origin_access: bool,
+      ?default_root_object: String,
+      ?custom_error_responses: Array[
+        {
+          error_code: Integer,
+          response_code: String,
+          response_page_path: untyped,
+          error_caching_min_ttl: Integer
+        }
+      ]
     ) -> _UpdateDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDistributionResponse
 
     interface _UpdateDistributionBundleResponse

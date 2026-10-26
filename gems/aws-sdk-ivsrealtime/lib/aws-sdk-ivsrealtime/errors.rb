@@ -35,7 +35,7 @@ module Aws::IVSRealTime
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p/>
+    # <p>User does not have sufficient access to perform this action.</p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::AccessDeniedException] data
@@ -89,7 +89,7 @@ module Aws::IVSRealTime
       end
     end
 
-    # <p/>
+    # <p>Updating or deleting a resource can cause an inconsistent state.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::ConflictException] data
@@ -143,7 +143,7 @@ module Aws::IVSRealTime
       end
     end
 
-    # <p/>
+    # <p>Unexpected error during processing of request.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::InternalServerException] data
@@ -197,7 +197,7 @@ module Aws::IVSRealTime
       end
     end
 
-    # <p/>
+    # <p>Your account is pending verification.</p>
     class PendingVerification < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::PendingVerification] data
@@ -251,7 +251,7 @@ module Aws::IVSRealTime
       end
     end
 
-    # <p/>
+    # <p>Request references a resource which does not exist.</p>
     class ResourceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::ResourceNotFoundException] data
@@ -305,7 +305,7 @@ module Aws::IVSRealTime
       end
     end
 
-    # <p/>
+    # <p>Request would cause a service quota to be exceeded.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::ServiceQuotaExceededException] data
@@ -359,7 +359,7 @@ module Aws::IVSRealTime
       end
     end
 
-    # <p/>
+    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::IVSRealTime::Types::ValidationException] data

@@ -8,6 +8,8 @@ module Aws::Transfer
     AgreementId: StringShape
     AgreementStatusType: EnumShape
     Arn: StringShape
+    As2AsyncMdnConnectorConfig: StructureShape
+    As2AsyncMdnServerIds: ListShape
     As2ConnectorConfig: StructureShape
     As2ConnectorSecretId: StringShape
     As2Id: StringShape
@@ -24,12 +26,19 @@ module Aws::Transfer
     CertificateStatusType: EnumShape
     CertificateType: EnumShape
     CertificateUsageType: EnumShape
+    CommunicationMode: EnumShape
     CompressionEnum: EnumShape
     ConflictException: StructureShape
+    ConnectorEgressConfig: UnionShape
+    ConnectorEgressType: EnumShape
+    ConnectorErrorMessage: StringShape
     ConnectorFileTransferResult: StructureShape
     ConnectorFileTransferResults: ListShape
     ConnectorId: StringShape
     ConnectorSecurityPolicyName: StringShape
+    ConnectorStatus: EnumShape
+    ConnectorVpcLatticeEgressConfig: StructureShape
+    ConnectorsIpAddressType: EnumShape
     CopyStepDetails: StructureShape
     CreateAccessRequest: StructureShape
     CreateAccessResponse: StructureShape
@@ -48,6 +57,10 @@ module Aws::Transfer
     CreateWorkflowRequest: StructureShape
     CreateWorkflowResponse: StructureShape
     CustomDirectoriesType: StructureShape
+    CustomHttpHeader: StructureShape
+    CustomHttpHeaderKeyType: StringShape
+    CustomHttpHeaderValueType: StringShape
+    CustomHttpHeaders: ListShape
     CustomStepDetails: StructureShape
     CustomStepStatus: EnumShape
     CustomStepTarget: StringShape
@@ -98,6 +111,8 @@ module Aws::Transfer
     DescribedAgreement: StructureShape
     DescribedCertificate: StructureShape
     DescribedConnector: StructureShape
+    DescribedConnectorEgressConfig: UnionShape
+    DescribedConnectorVpcLatticeEgressConfig: StructureShape
     DescribedExecution: StructureShape
     DescribedHostKey: StructureShape
     DescribedIdentityCenterConfig: StructureShape
@@ -107,7 +122,9 @@ module Aws::Transfer
     DescribedUser: StructureShape
     DescribedWebApp: StructureShape
     DescribedWebAppCustomization: StructureShape
+    DescribedWebAppEndpointDetails: UnionShape
     DescribedWebAppIdentityProviderDetails: UnionShape
+    DescribedWebAppVpcConfig: StructureShape
     DescribedWorkflow: StructureShape
     Description: StringShape
     DirectoryId: StringShape
@@ -144,6 +161,7 @@ module Aws::Transfer
     HostKeyDescription: StringShape
     HostKeyFingerprint: StringShape
     HostKeyId: StringShape
+    HostKeyStorageType: EnumShape
     HostKeyType: StringShape
     IdentityCenterApplicationArn: StringShape
     IdentityCenterConfig: StructureShape
@@ -161,6 +179,7 @@ module Aws::Transfer
     InvalidNextTokenException: StructureShape
     InvalidRequestException: StructureShape
     IpAddressType: EnumShape
+    KmsKey: StringShape
     ListAccessesRequest: StructureShape
     ListAccessesResponse: StructureShape
     ListAgreementsRequest: StructureShape
@@ -245,6 +264,8 @@ module Aws::Transfer
     Protocol: EnumShape
     ProtocolDetails: StructureShape
     Protocols: ListShape
+    ProxyConfig: StructureShape
+    ProxyMode: EnumShape
     Resource: StringShape
     ResourceExistsException: StructureShape
     ResourceNotFoundException: StructureShape
@@ -265,6 +286,8 @@ module Aws::Transfer
     S3VersionId: StringShape
     SecondaryGids: ListShape
     SecretId: StringShape
+    SecretVersionStage: StringShape
+    SecretVersionStageList: ListShape
     SecurityGroupId: StringShape
     SecurityGroupIds: ListShape
     SecurityPolicyName: StringShape
@@ -290,6 +313,9 @@ module Aws::Transfer
     SftpConnectorHostKey: StringShape
     SftpConnectorTrustedHostKey: StringShape
     SftpConnectorTrustedHostKeyList: ListShape
+    SftpPort: IntegerShape
+    SftpPortWithOptions: StructureShape
+    SftpPorts: ListShape
     SigningAlg: EnumShape
     SourceFileLocation: StringShape
     SourceIp: StringShape
@@ -337,8 +363,10 @@ module Aws::Transfer
     UpdateAgreementResponse: StructureShape
     UpdateCertificateRequest: StructureShape
     UpdateCertificateResponse: StructureShape
+    UpdateConnectorEgressConfig: UnionShape
     UpdateConnectorRequest: StructureShape
     UpdateConnectorResponse: StructureShape
+    UpdateConnectorVpcLatticeEgressConfig: StructureShape
     UpdateHostKeyRequest: StructureShape
     UpdateHostKeyResponse: StructureShape
     UpdateProfileRequest: StructureShape
@@ -349,10 +377,12 @@ module Aws::Transfer
     UpdateUserResponse: StructureShape
     UpdateWebAppCustomizationRequest: StructureShape
     UpdateWebAppCustomizationResponse: StructureShape
+    UpdateWebAppEndpointDetails: UnionShape
     UpdateWebAppIdentityCenterConfig: StructureShape
     UpdateWebAppIdentityProviderDetails: UnionShape
     UpdateWebAppRequest: StructureShape
     UpdateWebAppResponse: StructureShape
+    UpdateWebAppVpcConfig: StructureShape
     Url: StringShape
     UserCount: IntegerShape
     UserDetails: StructureShape
@@ -360,9 +390,12 @@ module Aws::Transfer
     UserPassword: StringShape
     VpcEndpointId: StringShape
     VpcId: StringShape
+    VpcLatticeResourceConfigurationArn: StringShape
     WebAppAccessEndpoint: StringShape
     WebAppEndpoint: StringShape
+    WebAppEndpointDetails: UnionShape
     WebAppEndpointPolicy: EnumShape
+    WebAppEndpointType: EnumShape
     WebAppFaviconFile: BlobShape
     WebAppId: StringShape
     WebAppIdentityProviderDetails: UnionShape
@@ -370,6 +403,8 @@ module Aws::Transfer
     WebAppTitle: StringShape
     WebAppUnitCount: IntegerShape
     WebAppUnits: UnionShape
+    WebAppVpcConfig: StructureShape
+    WebAppVpcEndpointIpAddressType: EnumShape
     WorkflowDescription: StringShape
     WorkflowDetail: StructureShape
     WorkflowDetails: StructureShape

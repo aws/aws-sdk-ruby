@@ -1,0 +1,27 @@
+module Aws::Uxc
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AccountColor: EnumShape
+    GetAccountCustomizationsInput: StructureShape
+    GetAccountCustomizationsOutput: StructureShape
+    InternalServerException: StructureShape
+    ListServicesInput: StructureShape
+    ListServicesOutput: StructureShape
+    MaxResults: IntegerShape
+    NextToken: StringShape
+    Region: StringShape
+    RegionsList: ListShape
+    Service: StringShape
+    ServiceList: ListShape
+    ThrottlingException: StructureShape
+    UpdateAccountCustomizationsInput: StructureShape
+    UpdateAccountCustomizationsOutput: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFieldList: ListShape
+
+    AWSAccountUXSetting: ServiceShape
+  end
+end

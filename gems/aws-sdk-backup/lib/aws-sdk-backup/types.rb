@@ -15,13 +15,16 @@ module Aws::Backup
     #            <p>Valid values: <code>EC2</code>.</p>
     #   @return [String]
     # @!attribute backup_options
-    #   <p>Specifies the backup option for a selected resource. This option is only available for
-    #            Windows VSS backup jobs.</p>
+    #   <p>Specifies the backup option for a selected resource. This option is available for
+    #            Windows VSS backup jobs and S3 backups.</p>
     #            <p>Valid values: </p>
     #            <p>Set to <code>"WindowsVSS":"enabled"</code> to enable the <code>WindowsVSS</code> backup
     #            option and create a Windows VSS backup. </p>
     #            <p>Set to <code>"WindowsVSS":"disabled"</code> to create a regular backup. The
     #               <code>WindowsVSS</code> option is not enabled by default.</p>
+    #            <p>For S3 backups, set to <code>"BackupACLs":"disabled"</code> to exclude ACLs from the backup,
+    #            or <code>"BackupObjectTags":"disabled"</code> to exclude object tags from the backup.
+    #            By default, both ACLs and object tags are included in S3 backups.</p>
     #            <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code>
     #            exception.</p>
     #            <p>For more information about Windows VSS backups, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html">Creating a VSS-Enabled Windows
@@ -31,6 +34,26 @@ module Aws::Backup
       nil,
       :resource_type,
       :backup_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains aggregated scan results across multiple scan operations, providing a summary of scan status and findings.</p>
+    # @!attribute failed_scan
+    #   <p>A Boolean value indicating whether any of the aggregated scans failed.</p>
+    #   @return [Boolean]
+    # @!attribute findings
+    #   <p>An array of findings discovered across all aggregated scans.</p>
+    #   @return [Array<String>]
+    # @!attribute last_computed
+    #   <p>The timestamp when the aggregated scan result was last computed, in Unix format and Coordinated Universal Time (UTC).</p>
+    #   @return [Time]
+    class AggregatedScanResult < Struct.new(
+      nil,
+      :failed_scan,
+      :findings,
+      :last_computed,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -101,10 +124,35 @@ module Aws::Backup
     #   <p>An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example,
     #            <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>
     #   @return [String]
+    # @!attribute vault_type
+    #   <p>The type of backup vault where the recovery point is stored. Valid values are <code>BACKUP_VAULT</code> for standard backup vaults and <code>LOGICALLY_AIR_GAPPED_BACKUP_VAULT</code> for logically air-gapped vaults.</p>
+    #   @return [String]
+    # @!attribute vault_lock_state
+    #   <p>The lock state of the backup vault. For logically air-gapped vaults, this indicates whether the vault is locked in compliance mode. Valid values include <code>LOCKED</code> and <code>UNLOCKED</code>.</p>
+    #   @return [String]
     # @!attribute recovery_point_arn
     #   <p>An ARN that uniquely identifies a recovery point; for example,
     #               <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
+    # @!attribute recovery_point_lifecycle
+    #   <p>Specifies the time period, in days, before a recovery point transitions to cold storage
+    #            or is deleted.</p>
+    #            <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90
+    #            days. Therefore, on the console, the retention setting must be 90 days greater than the
+    #            transition to cold after days setting. The transition to cold after days setting can't
+    #            be changed after a backup has been transitioned to cold.</p>
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
+    #            availability by resource</a> table. Backup ignores this expression for
+    #            other resource types.</p>
+    #            <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely,
+    #            specify -1 for <code>MoveToColdStorageAfterDays</code> and <code>DeleteAfterDays</code>.</p>
+    #   @return [Types::Lifecycle]
+    # @!attribute encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the backup. This can be a customer-managed key or an Amazon Web Services managed key, depending on the vault configuration.</p>
+    #   @return [String]
+    # @!attribute is_encrypted
+    #   <p>A boolean value indicating whether the backup is encrypted. All backups in Backup are encrypted, but this field indicates the encryption status for transparency.</p>
+    #   @return [Boolean]
     # @!attribute resource_arn
     #   <p>An ARN that uniquely identifies a resource. The format of the ARN depends on the
     #            resource type.</p>
@@ -132,8 +180,8 @@ module Aws::Backup
     #   @return [String]
     # @!attribute backup_size_in_bytes
     #   <p>The size, in bytes, of a backup (recovery point).</p>
-    #            <p>This value can render differently depending on the resource type as Backup pulls in data information from other Amazon Web Services services. For example, the 
-    #            value returned may show a value of <code>0</code>, which may differ from the 
+    #            <p>This value can render differently depending on the resource type as Backup pulls in data information from other Amazon Web Services services. For example, the
+    #            value returned may show a value of <code>0</code>, which may differ from the
     #            anticipated value.</p>
     #            <p>The expected behavior for values by resource type are described as follows:</p>
     #            <ul>
@@ -155,6 +203,9 @@ module Aws::Backup
     #               <li>
     #                  <p>For Amazon EFS, this value refers to the delta bytes transferred during a
     #                  backup.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon EKS, this value refers to the size of your nested EKS recovery point.</p>
     #               </li>
     #               <li>
     #                  <p>Amazon FSx does not populate this value from the operation
@@ -216,33 +267,33 @@ module Aws::Backup
     #   <p>Represents the type of backup for a backup job.</p>
     #   @return [String]
     # @!attribute parent_job_id
-    #   <p>This uniquely identifies a request to Backup 
-    #            to back up a resource. The return will be the 
+    #   <p>This uniquely identifies a request to Backup
+    #            to back up a resource. The return will be the
     #            parent (composite) job ID.</p>
     #   @return [String]
     # @!attribute is_parent
-    #   <p>This is a boolean value indicating this is 
+    #   <p>This is a boolean value indicating this is
     #            a parent (composite) backup job.</p>
     #   @return [Boolean]
     # @!attribute resource_name
-    #   <p>The non-unique name of the resource that 
+    #   <p>The non-unique name of the resource that
     #            belongs to the specified backup.</p>
     #   @return [String]
     # @!attribute initiation_date
-    #   <p>The date on which the backup 
+    #   <p>The date on which the backup
     #            job was initiated.</p>
     #   @return [Time]
     # @!attribute message_category
-    #   <p>This parameter is the job count for the specified 
+    #   <p>This parameter is the job count for the specified
     #            message category.</p>
-    #            <p>Example strings may include <code>AccessDenied</code>, 
-    #         <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and 
-    #         <code>INVALIDPARAMETERS</code>. See 
-    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a> 
+    #            <p>Example strings may include <code>AccessDenied</code>,
+    #         <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and
+    #         <code>INVALIDPARAMETERS</code>. See
+    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            for a list of MessageCategory strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all message categories and returns the sum.</p>
     #   @return [String]
     class BackupJob < Struct.new(
@@ -251,7 +302,12 @@ module Aws::Backup
       :backup_job_id,
       :backup_vault_name,
       :backup_vault_arn,
+      :vault_type,
+      :vault_lock_state,
       :recovery_point_arn,
+      :recovery_point_lifecycle,
+      :encryption_key_arn,
+      :is_encrypted,
       :resource_arn,
       :creation_date,
       :completion_date,
@@ -277,15 +333,16 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
+        options[:is_encrypted] = false unless options.key?(:is_encrypted)
         options[:is_parent] = false unless options.key?(:is_parent)
         super
       end
     end
 
-    # <p>This is a summary of jobs created 
-    #          or running within the most recent 30 days.</p>
-    #          <p>The returned summary may contain the following:  
-    #          Region, Account, State, RestourceType, MessageCategory, 
+    # <p>This is a summary of jobs created
+    #          or running within the most recent 14 days.</p>
+    #          <p>The returned summary may contain the following:
+    #          Region, Account, State, RestourceType, MessageCategory,
     #          StartTime, EndTime, and Count of included jobs.</p>
     # @!attribute region
     #   <p>The Amazon Web Services Regions within the job summary.</p>
@@ -294,24 +351,24 @@ module Aws::Backup
     #   <p>The account ID that owns the jobs within the summary.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>This value is job count for jobs 
+    #   <p>This value is job count for jobs
     #            with the specified state.</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>This value is the job count for the specified resource type. 
-    #            The request <code>GetSupportedResourceTypes</code> returns 
+    #   <p>This value is the job count for the specified resource type.
+    #            The request <code>GetSupportedResourceTypes</code> returns
     #            strings for supported resource types.</p>
     #   @return [String]
     # @!attribute message_category
-    #   <p>This parameter is the job count for the specified 
+    #   <p>This parameter is the job count for the specified
     #            message category.</p>
-    #            <p>Example strings include <code>AccessDenied</code>, 
-    #            <code>Success</code>, and <code>InvalidParameters</code>. See 
-    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a> 
+    #            <p>Example strings include <code>AccessDenied</code>,
+    #            <code>Success</code>, and <code>InvalidParameters</code>. See
+    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            for a list of MessageCategory strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all message categories and returns the sum.</p>
     #   @return [String]
     # @!attribute count
@@ -356,7 +413,7 @@ module Aws::Backup
     # @!attribute backup_plan_name
     #   <p>The display name of a backup plan. Must contain only alphanumeric or '-_.'
     #            special characters.</p>
-    #            <p>If this is set in the console, it can contain 1 to 50 characters; if this 
+    #            <p>If this is set in the console, it can contain 1 to 50 characters; if this
     #         is set through CLI or API, it can contain 1 to 200 characters.</p>
     #   @return [String]
     # @!attribute rules
@@ -366,11 +423,15 @@ module Aws::Backup
     # @!attribute advanced_backup_settings
     #   <p>Contains a list of <code>BackupOptions</code> for each resource type.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
+    # @!attribute scan_settings
+    #   <p>Contains your scanning configuration for the backup plan and includes the Malware scanner, your selected resources, and scanner role.</p>
+    #   @return [Array<Types::ScanSetting>]
     class BackupPlan < Struct.new(
       nil,
       :backup_plan_name,
       :rules,
       :advanced_backup_settings,
+      :scan_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -391,11 +452,15 @@ module Aws::Backup
     #   <p>Specifies a list of <code>BackupOptions</code> for each resource type. These settings
     #            are only available for Windows Volume Shadow Copy Service (VSS) backup jobs.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
+    # @!attribute scan_settings
+    #   <p>Contains your scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental.</p>
+    #   @return [Array<Types::ScanSetting>]
     class BackupPlanInput < Struct.new(
       nil,
       :backup_plan_name,
       :rules,
       :advanced_backup_settings,
+      :scan_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -484,9 +549,16 @@ module Aws::Backup
     #            by names that are unique to the account used to create them and the Amazon Web Services
     #            Region where they are created.</p>
     #   @return [String]
+    # @!attribute target_logically_air_gapped_backup_vault_arn
+    #   <p>The ARN of a logically air-gapped vault. ARN must be in the same account and Region.
+    #            If provided, supported fully managed resources back up directly to logically air-gapped vault,
+    #            while other supported resources create a temporary (billable) snapshot in backup vault,
+    #            then copy it to logically air-gapped vault. Unsupported resources only back up to the specified
+    #            backup vault.</p>
+    #   @return [String]
     # @!attribute schedule_expression
-    #   <p>A cron expression in UTC specifying when Backup initiates a backup job. 
-    #            When no CRON expression is provided, Backup will use the default 
+    #   <p>A cron expression in UTC specifying when Backup initiates a backup job.
+    #            When no CRON expression is provided, Backup will use the default
     #            expression <code>cron(0 5 ? * * *)</code>.</p>
     #            <p>For more information about Amazon Web Services cron expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">Schedule Expressions for Rules</a> in the <i>Amazon CloudWatch Events User
     #               Guide</i>.</p>
@@ -497,14 +569,14 @@ module Aws::Backup
     #   @return [String]
     # @!attribute start_window_minutes
     #   <p>A value in minutes after a backup is scheduled before a job will be canceled if it
-    #            doesn't start successfully. This value is optional. 
+    #            doesn't start successfully. This value is optional.
     #            If this value is included, it must be at least 60 minutes to avoid errors.</p>
-    #            <p>During the start window, the backup job status remains in <code>CREATED</code> status until it 
-    #            has successfully begun or until the start window time has run out. If within the start 
-    #            window time Backup receives an error that allows the job to be retried, 
-    #            Backup will automatically retry to begin the job at least every 10 minutes 
-    #            until the backup 
-    #            successfully begins (the job status changes to <code>RUNNING</code>) or until the job status 
+    #            <p>During the start window, the backup job status remains in <code>CREATED</code> status until it
+    #            has successfully begun or until the start window time has run out. If within the start
+    #            window time Backup receives an error that allows the job to be retried,
+    #            Backup will automatically retry to begin the job at least every 10 minutes
+    #            until the backup
+    #            successfully begins (the job status changes to <code>RUNNING</code>) or until the job status
     #            changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>
     #   @return [Integer]
     # @!attribute completion_window_minutes
@@ -519,7 +591,7 @@ module Aws::Backup
     #            days. Therefore, the “retention” setting must be 90 days greater than the “transition to
     #            cold after days” setting. The “transition to cold after days” setting cannot be changed
     #            after a backup has been transitioned to cold. </p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature availability 
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature availability
     #            by resource</a> table. Backup ignores this expression for other resource types.</p>
     #   @return [Types::Lifecycle]
     # @!attribute recovery_point_tags
@@ -539,20 +611,24 @@ module Aws::Backup
     #            (or not specified) causes Backup to create snapshot backups.</p>
     #   @return [Boolean]
     # @!attribute schedule_expression_timezone
-    #   <p>The timezone in which the schedule expression is set. By default, 
+    #   <p>The timezone in which the schedule expression is set. By default,
     #            ScheduleExpressions are in UTC. You can modify this to a specified timezone.</p>
     #   @return [String]
     # @!attribute index_actions
-    #   <p>IndexActions is an array you use to specify how backup data should 
+    #   <p>IndexActions is an array you use to specify how backup data should
     #            be indexed.</p>
-    #            <p>eEach BackupRule can have 0 or 1 IndexAction, as each backup can have up 
+    #            <p>eEach BackupRule can have 0 or 1 IndexAction, as each backup can have up
     #            to one index associated with it.</p>
     #            <p>Within the array is ResourceType. Only one will be accepted for each BackupRule.</p>
     #   @return [Array<Types::IndexAction>]
+    # @!attribute scan_actions
+    #   <p>Contains your scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental.</p>
+    #   @return [Array<Types::ScanAction>]
     class BackupRule < Struct.new(
       nil,
       :rule_name,
       :target_backup_vault_name,
+      :target_logically_air_gapped_backup_vault_arn,
       :schedule_expression,
       :start_window_minutes,
       :completion_window_minutes,
@@ -563,6 +639,7 @@ module Aws::Backup
       :enable_continuous_backup,
       :schedule_expression_timezone,
       :index_actions,
+      :scan_actions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -578,22 +655,29 @@ module Aws::Backup
     #            by names that are unique to the account used to create them and the Amazon Web Services
     #            Region where they are created.</p>
     #   @return [String]
+    # @!attribute target_logically_air_gapped_backup_vault_arn
+    #   <p>The ARN of a logically air-gapped vault. ARN must be in the same account and Region.
+    #            If provided, supported fully managed resources back up directly to logically air-gapped vault,
+    #            while other supported resources create a temporary (billable) snapshot in backup vault,
+    #            then copy it to logically air-gapped vault. Unsupported resources only back up to the specified
+    #            backup vault.</p>
+    #   @return [String]
     # @!attribute schedule_expression
     #   <p>A CRON expression in UTC specifying when Backup initiates a backup
-    #            job. When no CRON expression is provided, Backup will use the default 
+    #            job. When no CRON expression is provided, Backup will use the default
     #            expression <code>cron(0 5 ? * * *)</code>.</p>
     #   @return [String]
     # @!attribute start_window_minutes
     #   <p>A value in minutes after a backup is scheduled before a job will be canceled if it
-    #            doesn't start successfully. This value is optional. 
+    #            doesn't start successfully. This value is optional.
     #            If this value is included, it must be at least 60 minutes to avoid errors.</p>
     #            <p>This parameter has a maximum value of 100 years (52,560,000 minutes).</p>
-    #            <p>During the start window, the backup job status remains in <code>CREATED</code> status until it 
-    #            has successfully begun or until the start window time has run out. If within the start 
-    #            window time Backup receives an error that allows the job to be retried, 
-    #            Backup will automatically retry to begin the job at least every 10 minutes 
-    #            until the backup 
-    #            successfully begins (the job status changes to <code>RUNNING</code>) or until the job status 
+    #            <p>During the start window, the backup job status remains in <code>CREATED</code> status until it
+    #            has successfully begun or until the start window time has run out. If within the start
+    #            window time Backup receives an error that allows the job to be retried,
+    #            Backup will automatically retry to begin the job at least every 10 minutes
+    #            until the backup
+    #            successfully begins (the job status changes to <code>RUNNING</code>) or until the job status
     #            changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>
     #   @return [Integer]
     # @!attribute completion_window_minutes
@@ -608,7 +692,7 @@ module Aws::Backup
     #            days. Therefore, the “retention” setting must be 90 days greater than the “transition to
     #            cold after days” setting. The “transition to cold after days” setting cannot be changed
     #            after a backup has been transitioned to cold storage.</p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature availability 
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature availability
     #            by resource</a> table. Backup ignores this expression for other resource types.</p>
     #            <p>This parameter has a maximum value of 100 years (36,500 days).</p>
     #   @return [Types::Lifecycle]
@@ -624,13 +708,13 @@ module Aws::Backup
     #            (or not specified) causes Backup to create snapshot backups.</p>
     #   @return [Boolean]
     # @!attribute schedule_expression_timezone
-    #   <p>The timezone in which the schedule expression is set. By default, 
+    #   <p>The timezone in which the schedule expression is set. By default,
     #            ScheduleExpressions are in UTC. You can modify this to a specified timezone.</p>
     #   @return [String]
     # @!attribute index_actions
-    #   <p>There can up to one IndexAction in each BackupRule, as each backup 
+    #   <p>There can up to one IndexAction in each BackupRule, as each backup
     #            can have 0 or 1 backup index associated with it.</p>
-    #            <p>Within the array is ResourceTypes. Only 1 resource type will 
+    #            <p>Within the array is ResourceTypes. Only 1 resource type will
     #            be accepted for each BackupRule. Valid values:</p>
     #            <ul>
     #               <li>
@@ -643,10 +727,14 @@ module Aws::Backup
     #               </li>
     #            </ul>
     #   @return [Array<Types::IndexAction>]
+    # @!attribute scan_actions
+    #   <p>Contains your scanning configuration for the backup rule and includes the malware scanner, and scan mode of either full or incremental.</p>
+    #   @return [Array<Types::ScanAction>]
     class BackupRuleInput < Struct.new(
       nil,
       :rule_name,
       :target_backup_vault_name,
+      :target_logically_air_gapped_backup_vault_arn,
       :schedule_expression,
       :start_window_minutes,
       :completion_window_minutes,
@@ -656,14 +744,15 @@ module Aws::Backup
       :enable_continuous_backup,
       :schedule_expression_timezone,
       :index_actions,
+      :scan_actions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Used to specify a set of resources to a backup plan.</p>
-    #          <p>We recommend that you specify conditions, tags, or resources to include or exclude. 
-    #          Otherwise, Backup attempts to select all supported and opted-in storage resources, which 
+    #          <p>We recommend that you specify conditions, tags, or resources to include or exclude.
+    #          Otherwise, Backup attempts to select all supported and opted-in storage resources, which
     #          could have unintended cost implications.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/assigning-resources.html#assigning-resources-json">Assigning resources programmatically</a>.</p>
     # @!attribute selection_name
@@ -681,9 +770,12 @@ module Aws::Backup
     #            selection strategy, such as assigning all resources of a resource type or refining your
     #            resource selection using tags.</p>
     #            <p>If you specify multiple ARNs, the resources much match any of the ARNs (OR logic).</p>
+    #            <note>
+    #               <p>When using wildcards in ARN patterns for backup selections, the asterisk (*) must appear at the end of the ARN string (prefix pattern). For example, <code>arn:aws:s3:::my-bucket-*</code> is valid, but <code>arn:aws:s3:::*-logs</code> is not supported.</p>
+    #            </note>
     #   @return [Array<String>]
     # @!attribute list_of_tags
-    #   <p>The conditions that you define to assign resources to your backup plans using tags. For example, 
+    #   <p>The conditions that you define to assign resources to your backup plans using tags. For example,
     #            <code>"StringEquals":  { "ConditionKey": "backup", "ConditionValue": "daily"}</code>.</p>
     #            <p>
     #               <code>ListOfTags</code> supports only <code>StringEquals</code>. Condition operators are case sensitive.</p>
@@ -697,7 +789,7 @@ module Aws::Backup
     #            resource selection using tags.</p>
     #   @return [Array<String>]
     # @!attribute conditions
-    #   <p>The conditions that you define to assign resources to your backup plans using tags. For example, 
+    #   <p>The conditions that you define to assign resources to your backup plans using tags. For example,
     #            <code>"StringEquals": { "ConditionKey": "aws:ResourceTag/backup", "ConditionValue": "daily" }</code>.</p>
     #            <p>
     #               <code>Conditions</code> supports <code>StringEquals</code>,
@@ -796,7 +888,8 @@ module Aws::Backup
     #            <p>If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>
     #   @return [String]
     # @!attribute number_of_recovery_points
-    #   <p>The number of recovery points that are stored in a backup vault.</p>
+    #   <p>The number of recovery points that are stored in a backup vault. Recovery point count
+    #            value displayed in the console can be an approximation.</p>
     #   @return [Integer]
     # @!attribute locked
     #   <p>A Boolean value that indicates whether Backup Vault Lock applies to the
@@ -835,6 +928,9 @@ module Aws::Backup
     #            milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018
     #            12:11:30.087 AM.</p>
     #   @return [Time]
+    # @!attribute encryption_key_type
+    #   <p>The type of encryption key used for the backup vault. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>
+    #   @return [String]
     class BackupVaultListMember < Struct.new(
       nil,
       :backup_vault_name,
@@ -849,6 +945,7 @@ module Aws::Backup
       :min_retention_days,
       :max_retention_days,
       :lock_date,
+      :encryption_key_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -868,7 +965,7 @@ module Aws::Backup
     #          days. Therefore, the “retention” setting must be 90 days greater than the “transition to
     #          cold after days” setting. The “transition to cold after days” setting cannot be changed
     #          after a backup has been transitioned to cold.</p>
-    #          <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature availability 
+    #          <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature availability
     #          by resource</a> table. Backup ignores this expression for other resource types.</p>
     # @!attribute move_to_cold_storage_at
     #   <p>A timestamp that specifies when to transition a recovery point to cold storage.</p>
@@ -942,7 +1039,7 @@ module Aws::Backup
 
     # <p>Includes information about tags you define to assign tagged resources to a backup
     #          plan.</p>
-    #          <p>Include the prefix <code>aws:ResourceTag</code> in your tags. 
+    #          <p>Include the prefix <code>aws:ResourceTag</code> in your tags.
     #          For example, <code>"aws:ResourceTag/TagKey1": "Value1"</code>.</p>
     # @!attribute condition_key
     #   <p>The key in a key-value pair. For example, in the tag <code>Department:
@@ -1054,8 +1151,8 @@ module Aws::Backup
     # @!attribute tags
     #   <p>The tag key-value pair applied to those Amazon Web Services resources that you want to
     #            trigger an evaluation for a rule. A maximum of one key-value pair can be provided. The tag
-    #            value is optional, but it cannot be an empty string if you are creating or editing a 
-    #            framework from the console (though the value can be an empty string when included 
+    #            value is optional, but it cannot be an empty string if you are creating or editing a
+    #            framework from the console (though the value can be an empty string when included
     #            in a CloudFormation template).</p>
     #            <p>The structure to assign a tag is:
     #               <code>[{"Key":"string","Value":"string"}]</code>.</p>
@@ -1072,16 +1169,16 @@ module Aws::Backup
 
     # <p>The details of the copy operation.</p>
     # @!attribute lifecycle
-    #   <p>Specifies the time period, in days, before a recovery point transitions to cold storage 
+    #   <p>Specifies the time period, in days, before a recovery point transitions to cold storage
     #            or is deleted.</p>
     #            <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90
     #            days. Therefore, on the console, the retention setting must be 90 days greater than the
     #            transition to cold after days setting. The transition to cold after days setting can't
     #            be changed after a backup has been transitioned to cold.</p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature 
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
     #            availability by resource</a> table. Backup ignores this expression for
     #            other resource types.</p>
-    #            <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely, 
+    #            <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely,
     #            specify -1 for <code>MoveToColdStorageAfterDays</code> and <code>DeleteAfterDays</code>.</p>
     #   @return [Types::Lifecycle]
     # @!attribute destination_backup_vault_arn
@@ -1117,10 +1214,32 @@ module Aws::Backup
     #   <p>An Amazon Resource Name (ARN) that uniquely identifies a destination copy vault; for
     #            example, <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>
     #   @return [String]
+    # @!attribute destination_vault_type
+    #   <p>The type of destination backup vault where the copied recovery point is stored. Valid values are <code>BACKUP_VAULT</code> for standard backup vaults and <code>LOGICALLY_AIR_GAPPED_BACKUP_VAULT</code> for logically air-gapped vaults.</p>
+    #   @return [String]
+    # @!attribute destination_vault_lock_state
+    #   <p>The lock state of the destination backup vault. For logically air-gapped vaults, this indicates whether the vault is locked in compliance mode. Valid values include <code>LOCKED</code> and <code>UNLOCKED</code>.</p>
+    #   @return [String]
     # @!attribute destination_recovery_point_arn
     #   <p>An ARN that uniquely identifies a destination recovery point; for example,
     #               <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
+    # @!attribute destination_encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the copied backup in the destination vault. This can be a customer-managed key or an Amazon Web Services managed key.</p>
+    #   @return [String]
+    # @!attribute destination_recovery_point_lifecycle
+    #   <p>Specifies the time period, in days, before a recovery point transitions to cold storage
+    #            or is deleted.</p>
+    #            <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90
+    #            days. Therefore, on the console, the retention setting must be 90 days greater than the
+    #            transition to cold after days setting. The transition to cold after days setting can't
+    #            be changed after a backup has been transitioned to cold.</p>
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
+    #            availability by resource</a> table. Backup ignores this expression for
+    #            other resource types.</p>
+    #            <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely,
+    #            specify -1 for <code>MoveToColdStorageAfterDays</code> and <code>DeleteAfterDays</code>.</p>
+    #   @return [Types::Lifecycle]
     # @!attribute resource_arn
     #   <p>The Amazon Web Services resource to be copied; for example, an Amazon Elastic Block Store
     #               (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
@@ -1153,22 +1272,26 @@ module Aws::Backup
     #   <p>Contains information about the backup plan and rule that Backup used to
     #            initiate the recovery point backup.</p>
     #   @return [Types::RecoveryPointCreator]
+    # @!attribute created_by_backup_job_id
+    #   <p>The backup job ID that initiated this copy job. Only applicable to scheduled copy
+    #               jobs and automatic copy jobs to logically air-gapped vault.</p>
+    #   @return [String]
     # @!attribute resource_type
     #   <p>The type of Amazon Web Services resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>
     #   @return [String]
     # @!attribute parent_job_id
-    #   <p>This uniquely identifies a request to Backup 
-    #            to copy a resource. The return will be the 
+    #   <p>This uniquely identifies a request to Backup
+    #            to copy a resource. The return will be the
     #            parent (composite) job ID.</p>
     #   @return [String]
     # @!attribute is_parent
-    #   <p>This is a boolean value indicating this is 
+    #   <p>This is a boolean value indicating this is
     #            a parent (composite) copy job.</p>
     #   @return [Boolean]
     # @!attribute composite_member_identifier
-    #   <p>The identifier of a resource within a composite group, such as 
-    #            nested (child) recovery point belonging to a composite (parent) stack. The 
-    #            ID is transferred from 
+    #   <p>The identifier of a resource within a composite group, such as
+    #            nested (child) recovery point belonging to a composite (parent) stack. The
+    #            ID is transferred from
     #            the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax">
     #               logical ID</a> within a stack.</p>
     #   @return [String]
@@ -1176,24 +1299,24 @@ module Aws::Backup
     #   <p>The number of child (nested) copy jobs.</p>
     #   @return [Integer]
     # @!attribute child_jobs_in_state
-    #   <p>This returns the statistics of the included 
+    #   <p>This returns the statistics of the included
     #            child (nested) copy jobs.</p>
     #   @return [Hash<String, Integer>]
     # @!attribute resource_name
-    #   <p>The non-unique name of the resource that 
+    #   <p>The non-unique name of the resource that
     #            belongs to the specified backup.</p>
     #   @return [String]
     # @!attribute message_category
-    #   <p>This parameter is the job count for the specified 
+    #   <p>This parameter is the job count for the specified
     #            message category.</p>
-    #            <p>Example strings may include <code>AccessDenied</code>, 
-    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and 
-    #            <code>InvalidParameters</code>. See 
-    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a> 
+    #            <p>Example strings may include <code>AccessDenied</code>,
+    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and
+    #            <code>InvalidParameters</code>. See
+    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            for a list of MessageCategory strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all message categories and returns the sum</p>
     #   @return [String]
     class CopyJob < Struct.new(
@@ -1203,7 +1326,11 @@ module Aws::Backup
       :source_backup_vault_arn,
       :source_recovery_point_arn,
       :destination_backup_vault_arn,
+      :destination_vault_type,
+      :destination_vault_lock_state,
       :destination_recovery_point_arn,
+      :destination_encryption_key_arn,
+      :destination_recovery_point_lifecycle,
       :resource_arn,
       :creation_date,
       :completion_date,
@@ -1212,6 +1339,7 @@ module Aws::Backup
       :backup_size_in_bytes,
       :iam_role_arn,
       :created_by,
+      :created_by_backup_job_id,
       :resource_type,
       :parent_job_id,
       :is_parent,
@@ -1230,10 +1358,10 @@ module Aws::Backup
       end
     end
 
-    # <p>This is a summary of copy jobs created 
-    #          or running within the most recent 30 days.</p>
-    #          <p>The returned summary may contain the following:  
-    #          Region, Account, State, RestourceType, MessageCategory, 
+    # <p>This is a summary of copy jobs created
+    #          or running within the most recent 14 days.</p>
+    #          <p>The returned summary may contain the following:
+    #          Region, Account, State, RestourceType, MessageCategory,
     #          StartTime, EndTime, and Count of included jobs.</p>
     # @!attribute region
     #   <p>The Amazon Web Services Regions within the job summary.</p>
@@ -1242,24 +1370,24 @@ module Aws::Backup
     #   <p>The account ID that owns the jobs within the summary.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>This value is job count for jobs 
+    #   <p>This value is job count for jobs
     #            with the specified state.</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>This value is the job count for the specified resource type. 
-    #            The request <code>GetSupportedResourceTypes</code> returns 
+    #   <p>This value is the job count for the specified resource type.
+    #            The request <code>GetSupportedResourceTypes</code> returns
     #            strings for supported resource types</p>
     #   @return [String]
     # @!attribute message_category
-    #   <p>This parameter is the job count for the specified 
+    #   <p>This parameter is the job count for the specified
     #            message category.</p>
-    #            <p>Example strings include <code>AccessDenied</code>, 
-    #            <code>Success</code>, and <code>InvalidParameters</code>. See 
-    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a> 
+    #            <p>Example strings include <code>AccessDenied</code>,
+    #            <code>Success</code>, and <code>InvalidParameters</code>. See
+    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            for a list of MessageCategory strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all message categories and returns the sum.</p>
     #   @return [String]
     # @!attribute count
@@ -1295,6 +1423,61 @@ module Aws::Backup
         options[:count] = 0 unless options.key?(:count)
         super
       end
+    end
+
+    # @!attribute access_point_metadata
+    #   <p>Metadata for the backup access point. For continuous (point-in-time) recovery points, you must include an
+    #            <code>AccessPointInTime</code> timestamp (in format <code>2021-11-27T03:30:27Z</code>). The access point
+    #            provides access to the content present in the backup at that specific time. You can specify any time
+    #            within the continuous backup's retention period, up to the latest restorable time. For snapshot recovery
+    #            points, do not include <code>AccessPointInTime</code>.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute access_point_policy
+    #   <p>An optional resource-based policy, in JSON format, to apply to the underlying Amazon S3 access
+    #            point. The policy controls how backup data can be accessed through the access point. If you do not specify
+    #            a policy, access is governed by the caller's IAM permissions. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html">Configuring IAM policies
+    #               for using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the backup access point. This name is shared with the Amazon S3 access point namespace.
+    #            It must be unique within your account and Region and cannot conflict with an existing Amazon S3 access
+    #            point. For more information about access point naming, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-restrictions-limitations-naming-rules.html">Access points naming rules, restrictions, and limitations</a> in the <i>Amazon S3 User
+    #            Guide</i>.</p>
+    #   @return [String]
+    # @!attribute recovery_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the recovery point for which to create the backup access point. The
+    #            recovery point must be an Amazon S3 recovery point in the <code>AVAILABLE</code>, <code>STOPPED</code>,
+    #            or <code>COMPLETED</code> state.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to assign to the backup access point.</p>
+    #   @return [Hash<String, String>]
+    class CreateBackupAccessPointRequest < Struct.new(
+      nil,
+      :access_point_metadata,
+      :access_point_policy,
+      :name,
+      :recovery_point_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute access_point_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the created backup access point.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the backup access point. A newly created backup access point begins in the
+    #            <code>CREATING</code> state and becomes usable when it reaches <code>AVAILABLE</code>.</p>
+    #   @return [String]
+    class CreateBackupAccessPointResponse < Struct.new(
+      nil,
+      :access_point_arn,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_plan
@@ -1507,16 +1690,16 @@ module Aws::Backup
     #   <p>The description of the legal hold.</p>
     #   @return [String]
     # @!attribute idempotency_token
-    #   <p>This is a user-chosen string used to distinguish between otherwise identical 
-    #            calls. Retrying a successful request with the 
+    #   <p>This is a user-chosen string used to distinguish between otherwise identical
+    #            calls. Retrying a successful request with the
     #            same idempotency token results in a success message with no action taken.</p>
     #   @return [String]
     # @!attribute recovery_point_selection
     #   <p>The criteria to assign a set of resources, such as resource types or backup vaults.</p>
     #   @return [Types::RecoveryPointSelection]
     # @!attribute tags
-    #   <p>Optional tags to include. A tag is a key-value pair you can use to manage, 
-    #            filter, and search for your resources. Allowed characters include UTF-8 letters, 
+    #   <p>Optional tags to include. A tag is a key-value pair you can use to manage,
+    #            filter, and search for your resources. Allowed characters include UTF-8 letters,
     #            numbers, spaces, and the following characters: + - = . _ : /. </p>
     #   @return [Hash<String, String>]
     class CreateLegalHoldInput < Struct.new(
@@ -1567,8 +1750,8 @@ module Aws::Backup
     end
 
     # @!attribute backup_vault_name
-    #   <p>The name of a logical container where backups are stored. Logically air-gapped 
-    #            backup vaults are identified by names that are unique to the account used to create 
+    #   <p>The name of a logical container where backups are stored. Logically air-gapped
+    #            backup vaults are identified by names that are unique to the account used to create
     #            them and the Region where they are created.</p>
     #   @return [String]
     # @!attribute backup_vault_tags
@@ -1576,7 +1759,7 @@ module Aws::Backup
     #   @return [Hash<String, String>]
     # @!attribute creator_request_id
     #   <p>The ID of the creation request.</p>
-    #            <p>This parameter is optional. If used, this parameter must contain 
+    #            <p>This parameter is optional. If used, this parameter must contain
     #            1 to 50 alphanumeric or '-_.' characters.</p>
     #   @return [String]
     # @!attribute min_retention_days
@@ -1587,6 +1770,9 @@ module Aws::Backup
     # @!attribute max_retention_days
     #   <p>The maximum retention period that the vault retains its recovery points.</p>
     #   @return [Integer]
+    # @!attribute encryption_key_arn
+    #   <p>The ARN of the customer-managed KMS key to use for encrypting the logically air-gapped backup vault. If not specified, the vault will be encrypted with an Amazon Web Services-owned key managed by Amazon Web Services Backup.</p>
+    #   @return [String]
     class CreateLogicallyAirGappedBackupVaultInput < Struct.new(
       nil,
       :backup_vault_name,
@@ -1594,14 +1780,15 @@ module Aws::Backup
       :creator_request_id,
       :min_retention_days,
       :max_retention_days,
+      :encryption_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_vault_name
-    #   <p>The name of a logical container where backups are stored. Logically air-gapped 
-    #            backup vaults are identified by names that are unique to the account used to create 
+    #   <p>The name of a logical container where backups are stored. Logically air-gapped
+    #            backup vaults are identified by names that are unique to the account used to create
     #            them and the Region where they are created.</p>
     #   @return [String]
     # @!attribute backup_vault_arn
@@ -1645,7 +1832,7 @@ module Aws::Backup
     #            template. The report templates are:</p>
     #            <p>
     #               <code>RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT |
-    #               COPY_JOB_REPORT | RESTORE_JOB_REPORT</code>
+    #               COPY_JOB_REPORT | RESTORE_JOB_REPORT | SCAN_JOB_REPORT </code>
     #            </p>
     #            <p>If the report template is <code>RESOURCE_COMPLIANCE_REPORT</code> or
     #               <code>CONTROL_COMPLIANCE_REPORT</code>, this API resource also describes the report
@@ -1746,9 +1933,9 @@ module Aws::Backup
     end
 
     # @!attribute creator_request_id
-    #   <p>This is a unique string that identifies the request and 
-    #            allows failed requests to be retriedwithout the risk of running 
-    #            the operation twice. This parameter is optional. If used, this 
+    #   <p>This is a unique string that identifies the request and
+    #            allows failed requests to be retriedwithout the risk of running
+    #            the operation twice. This parameter is optional. If used, this
     #            parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>
     #   @return [String]
     # @!attribute restore_testing_plan
@@ -1774,18 +1961,18 @@ module Aws::Backup
     end
 
     # @!attribute creation_time
-    #   <p>The date and time a restore testing plan was created, in Unix format 
-    #            and Coordinated Universal Time (UTC). The value of <code>CreationTime</code> 
-    #            is accurate to milliseconds. For example, the value 1516925490.087 represents 
+    #   <p>The date and time a restore testing plan was created, in Unix format
+    #            and Coordinated Universal Time (UTC). The value of <code>CreationTime</code>
+    #            is accurate to milliseconds. For example, the value 1516925490.087 represents
     #            Friday, January 26, 2018 12:11:30.087AM.</p>
     #   @return [Time]
     # @!attribute restore_testing_plan_arn
-    #   <p>An Amazon Resource Name (ARN) that uniquely identifies the created 
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies the created
     #            restore testing plan.</p>
     #   @return [String]
     # @!attribute restore_testing_plan_name
     #   <p>This unique string is the name of the restore testing plan.</p>
-    #            <p>The name cannot be changed after creation. The name consists of only 
+    #            <p>The name cannot be changed after creation. The name consists of only
     #            alphanumeric characters and underscores. Maximum length is 50.</p>
     #   @return [String]
     class CreateRestoreTestingPlanOutput < Struct.new(
@@ -1799,13 +1986,13 @@ module Aws::Backup
     end
 
     # @!attribute creator_request_id
-    #   <p>This is an optional unique string that identifies the request and allows 
-    #            failed requests to be retried without the risk of running the operation 
-    #            twice. If used, this parameter must contain 
+    #   <p>This is an optional unique string that identifies the request and allows
+    #            failed requests to be retried without the risk of running the operation
+    #            twice. If used, this parameter must contain
     #            1 to 50 alphanumeric or '-_.' characters.</p>
     #   @return [String]
     # @!attribute restore_testing_plan_name
-    #   <p>Input the restore testing plan name that was returned from the 
+    #   <p>Input the restore testing plan name that was returned from the
     #            related CreateRestoreTestingPlan request.</p>
     #   @return [String]
     # @!attribute restore_testing_selection
@@ -1843,16 +2030,18 @@ module Aws::Backup
     #   <p>The time that the resource testing selection was created.</p>
     #   @return [Time]
     # @!attribute restore_testing_plan_arn
-    #   <p>The ARN of the restore testing plan with which the restore 
+    #   <p>The ARN of the restore testing plan with which the restore
     #         testing selection is associated.</p>
     #   @return [String]
     # @!attribute restore_testing_plan_name
     #   <p>The name of the restore testing plan.</p>
-    #            <p>The name cannot be changed after creation. The name consists of only 
+    #            <p>The name cannot be changed after creation. The name consists of only
     #            alphanumeric characters and underscores. Maximum length is 50.</p>
     #   @return [String]
     # @!attribute restore_testing_selection_name
     #   <p>The name of the restore testing selection for the related restore testing plan.</p>
+    #            <p>The name cannot be changed after creation. The name consists of only
+    #            alphanumeric characters and underscores. Maximum length is 50.</p>
     #   @return [String]
     class CreateRestoreTestingSelectionOutput < Struct.new(
       nil,
@@ -1865,30 +2054,93 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This is a resource filter containing FromDate: DateTime 
-    #          and ToDate: DateTime. Both values are required. Future DateTime 
+    # @!attribute tiering_configuration
+    #   <p>A tiering configuration must contain a unique <code>TieringConfigurationName</code> string
+    #            you create and must contain a <code>BackupVaultName</code> and <code>ResourceSelection</code>.
+    #            You may optionally include a <code>CreatorRequestId</code> string.</p>
+    #            <p>The <code>TieringConfigurationName</code> is a unique string that is the name of the
+    #            tiering configuration. This cannot be changed after creation, and it must consist of only
+    #            alphanumeric characters and underscores.</p>
+    #   @return [Types::TieringConfigurationInputForCreate]
+    # @!attribute tiering_configuration_tags
+    #   <p>The tags to assign to the tiering configuration.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute creator_request_id
+    #   <p>This is a unique string that identifies the request and
+    #            allows failed requests to be retried without the risk of running
+    #            the operation twice. This parameter is optional. If used, this
+    #            parameter must contain 1 to 50 alphanumeric or '-_.' characters.</p>
+    #   @return [String]
+    class CreateTieringConfigurationInput < Struct.new(
+      nil,
+      :tiering_configuration,
+      :tiering_configuration_tags,
+      :creator_request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tiering_configuration_arn
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies the created
+    #            tiering configuration.</p>
+    #   @return [String]
+    # @!attribute tiering_configuration_name
+    #   <p>This unique string is the name of the tiering configuration.</p>
+    #            <p>The name cannot be changed after creation. The name consists of only
+    #            alphanumeric characters and underscores. Maximum length is 200.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time a tiering configuration was created, in Unix format
+    #            and Coordinated Universal Time (UTC). The value of <code>CreationTime</code>
+    #            is accurate to milliseconds. For example, the value 1516925490.087 represents
+    #            Friday, January 26, 2018 12:11:30.087AM.</p>
+    #   @return [Time]
+    class CreateTieringConfigurationOutput < Struct.new(
+      nil,
+      :tiering_configuration_arn,
+      :tiering_configuration_name,
+      :creation_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>This is a resource filter containing FromDate: DateTime
+    #          and ToDate: DateTime. Both values are required. Future DateTime
     #          values are not permitted.</p>
-    #          <p>The date and time are in Unix format and Coordinated 
-    #          Universal Time (UTC), and it is accurate to milliseconds 
-    #          ((milliseconds are optional). 
-    #          For example, the value 1516925490.087 represents Friday, January 
+    #          <p>The date and time are in Unix format and Coordinated
+    #          Universal Time (UTC), and it is accurate to milliseconds
+    #          ((milliseconds are optional).
+    #          For example, the value 1516925490.087 represents Friday, January
     #          26, 2018 12:11:30.087 AM.</p>
     # @!attribute from_date
     #   <p>This value is the beginning date, inclusive.</p>
-    #            <p>The date and time are in Unix format and Coordinated 
-    #            Universal Time (UTC), and it is accurate to milliseconds 
+    #            <p>The date and time are in Unix format and Coordinated
+    #            Universal Time (UTC), and it is accurate to milliseconds
     #            (milliseconds are optional).</p>
     #   @return [Time]
     # @!attribute to_date
     #   <p>This value is the end date, inclusive.</p>
-    #            <p>The date and time are in Unix format and Coordinated 
-    #            Universal Time (UTC), and it is accurate to milliseconds 
+    #            <p>The date and time are in Unix format and Coordinated
+    #            Universal Time (UTC), and it is accurate to milliseconds
     #            (milliseconds are optional).</p>
     #   @return [Time]
     class DateRange < Struct.new(
       nil,
       :from_date,
       :to_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute access_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the backup access point to delete.</p>
+    #   @return [String]
+    class DeleteBackupAccessPointInput < Struct.new(
+      nil,
+      :access_point_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2041,7 +2293,7 @@ module Aws::Backup
     end
 
     # @!attribute restore_testing_plan_name
-    #   <p>Required unique name of the restore testing plan you wish 
+    #   <p>Required unique name of the restore testing plan you wish
     #            to delete.</p>
     #   @return [String]
     class DeleteRestoreTestingPlanInput < Struct.new(
@@ -2053,17 +2305,35 @@ module Aws::Backup
     end
 
     # @!attribute restore_testing_plan_name
-    #   <p>Required unique name of the restore testing plan that contains the 
+    #   <p>Required unique name of the restore testing plan that contains the
     #            restore testing selection you wish to delete.</p>
     #   @return [String]
     # @!attribute restore_testing_selection_name
-    #   <p>Required unique name of the restore testing selection you 
+    #   <p>Required unique name of the restore testing selection you
     #            wish to delete.</p>
     #   @return [String]
     class DeleteRestoreTestingSelectionInput < Struct.new(
       nil,
       :restore_testing_plan_name,
       :restore_testing_selection_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tiering_configuration_name
+    #   <p>The unique name of a tiering configuration.</p>
+    #   @return [String]
+    class DeleteTieringConfigurationInput < Struct.new(
+      nil,
+      :tiering_configuration_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteTieringConfigurationOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2091,6 +2361,76 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute access_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the backup access point to describe.</p>
+    #   @return [String]
+    class DescribeBackupAccessPointInput < Struct.new(
+      nil,
+      :access_point_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute access_point_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the backup access point.</p>
+    #   @return [String]
+    # @!attribute access_point_metadata
+    #   <p>Metadata for the backup access point. After the backup access point reaches the <code>AVAILABLE</code>
+    #            status, this map contains <code>S3AccessPointArn</code> and <code>S3AccessPointAlias</code>, which you use with
+    #            standard Amazon S3 read APIs to access the backup data. For continuous recovery points, this map also
+    #            contains <code>AccessPointInTime</code> (in format <code>2021-11-27T03:30:27Z</code>). The access point
+    #            provides access to the content present in the backup at that specific time.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute backup_vault_arn
+    #   <p>The Amazon Resource Name (ARN) of the backup vault that contains the recovery point.</p>
+    #   @return [String]
+    # @!attribute backup_vault_name
+    #   <p>The name of the backup vault that contains the recovery point.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time that the backup access point was created, in Unix format and Coordinated Universal Time
+    #            (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value
+    #            1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>
+    #   @return [Time]
+    # @!attribute name
+    #   <p>The name of the backup access point.</p>
+    #   @return [String]
+    # @!attribute recovery_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the recovery point that the backup access point provides access to.</p>
+    #   @return [String]
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource that was backed up, such as an Amazon S3 bucket.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of Amazon Web Services resource associated with the recovery point. For example, <code>S3</code> for
+    #           Amazon Simple Storage Service.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the backup access point.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>A message that provides additional detail about the status of the backup access point, such as the reason a
+    #            creation or deletion attempt failed.</p>
+    #   @return [String]
+    class DescribeBackupAccessPointResponse < Struct.new(
+      nil,
+      :access_point_arn,
+      :access_point_metadata,
+      :backup_vault_arn,
+      :backup_vault_name,
+      :creation_time,
+      :name,
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_type,
+      :status,
+      :status_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute backup_job_id
     #   <p>Uniquely identifies a request to Backup to back up a resource.</p>
     #   @return [String]
@@ -2113,14 +2453,39 @@ module Aws::Backup
     #            by names that are unique to the account used to create them and the Amazon Web Services
     #            Region where they are created.</p>
     #   @return [String]
+    # @!attribute recovery_point_lifecycle
+    #   <p>Specifies the time period, in days, before a recovery point transitions to cold storage
+    #            or is deleted.</p>
+    #            <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90
+    #            days. Therefore, on the console, the retention setting must be 90 days greater than the
+    #            transition to cold after days setting. The transition to cold after days setting can't
+    #            be changed after a backup has been transitioned to cold.</p>
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
+    #            availability by resource</a> table. Backup ignores this expression for
+    #            other resource types.</p>
+    #            <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely,
+    #            specify -1 for <code>MoveToColdStorageAfterDays</code> and <code>DeleteAfterDays</code>.</p>
+    #   @return [Types::Lifecycle]
     # @!attribute backup_vault_arn
     #   <p>An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example,
     #            <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>
+    #   @return [String]
+    # @!attribute vault_type
+    #   <p>The type of backup vault where the recovery point is stored. Valid values are <code>BACKUP_VAULT</code> for standard backup vaults and <code>LOGICALLY_AIR_GAPPED_BACKUP_VAULT</code> for logically air-gapped vaults.</p>
+    #   @return [String]
+    # @!attribute vault_lock_state
+    #   <p>The lock state of the backup vault. For logically air-gapped vaults, this indicates whether the vault is locked in compliance mode. Valid values include <code>LOCKED</code> and <code>UNLOCKED</code>.</p>
     #   @return [String]
     # @!attribute recovery_point_arn
     #   <p>An ARN that uniquely identifies a recovery point; for example,
     #               <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
+    # @!attribute encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the backup. This can be a customer-managed key or an Amazon Web Services managed key, depending on the vault configuration.</p>
+    #   @return [String]
+    # @!attribute is_encrypted
+    #   <p>A boolean value indicating whether the backup is encrypted. All backups in Backup are encrypted, but this field indicates the encryption status for transparency.</p>
+    #   @return [Boolean]
     # @!attribute resource_arn
     #   <p>An ARN that uniquely identifies a saved resource. The format of the ARN depends on the
     #            resource type.</p>
@@ -2149,8 +2514,8 @@ module Aws::Backup
     #   @return [String]
     # @!attribute backup_size_in_bytes
     #   <p>The size, in bytes, of a backup (recovery point).</p>
-    #            <p>This value can render differently depending on the resource type as Backup pulls in data information from other Amazon Web Services services. For example, the 
-    #            value returned may show a value of <code>0</code>, which may differ from the 
+    #            <p>This value can render differently depending on the resource type as Backup pulls in data information from other Amazon Web Services services. For example, the
+    #            value returned may show a value of <code>0</code>, which may differ from the
     #            anticipated value.</p>
     #            <p>The expected behavior for values by resource type are described as follows:</p>
     #            <ul>
@@ -2172,6 +2537,9 @@ module Aws::Backup
     #               <li>
     #                  <p>For Amazon EFS, this value refers to the delta bytes transferred during a
     #                  backup.</p>
+    #               </li>
+    #               <li>
+    #                  <p>For Amazon EKS, this value refers to the size of your nested EKS recovery point.</p>
     #               </li>
     #               <li>
     #                  <p>Amazon FSx does not populate this value from the operation
@@ -2239,14 +2607,14 @@ module Aws::Backup
     #   <p>This returns the statistics of the included child (nested) backup jobs.</p>
     #   @return [Hash<String, Integer>]
     # @!attribute resource_name
-    #   <p>The non-unique name of the resource that 
+    #   <p>The non-unique name of the resource that
     #            belongs to the specified backup.</p>
     #   @return [String]
     # @!attribute initiation_date
     #   <p>The date a backup job was initiated.</p>
     #   @return [Time]
     # @!attribute message_category
-    #   <p>The job count for the specified 
+    #   <p>The job count for the specified
     #            message category.</p>
     #            <p>Example strings may include <code>AccessDenied</code>, <code>SUCCESS</code>,
     #               <code>AGGREGATE_ALL</code>, and <code>INVALIDPARAMETERS</code>. View <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
@@ -2257,8 +2625,13 @@ module Aws::Backup
       :account_id,
       :backup_job_id,
       :backup_vault_name,
+      :recovery_point_lifecycle,
       :backup_vault_arn,
+      :vault_type,
+      :vault_lock_state,
       :recovery_point_arn,
+      :encryption_key_arn,
+      :is_encrypted,
       :resource_arn,
       :creation_date,
       :completion_date,
@@ -2286,6 +2659,7 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
+        options[:is_encrypted] = false unless options.key?(:is_encrypted)
         options[:is_parent] = false unless options.key?(:is_parent)
         super
       end
@@ -2395,6 +2769,9 @@ module Aws::Backup
     # @!attribute latest_mpa_approval_team_update
     #   <p>Information about the latest update to the MPA approval team association for this backup vault.</p>
     #   @return [Types::LatestMpaApprovalTeamUpdate]
+    # @!attribute encryption_key_type
+    #   <p>The type of encryption key used for the backup vault. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>
+    #   @return [String]
     class DescribeBackupVaultOutput < Struct.new(
       nil,
       :backup_vault_name,
@@ -2413,6 +2790,7 @@ module Aws::Backup
       :mpa_approval_team_arn,
       :mpa_session_arn,
       :latest_mpa_approval_team_update,
+      :encryption_key_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2537,13 +2915,24 @@ module Aws::Backup
     end
 
     # @!attribute global_settings
-    #   <p>The status of the flag <code>isCrossAccountBackupEnabled</code>.</p>
+    #   <p>The status of the flags <code>isCrossAccountBackupEnabled</code>, <code>isMpaEnabled</code> ('Mpa' refers to multi-party approval), and <code>isDelegatedAdministratorEnabled</code>.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>isCrossAccountBackupEnabled</code>: Allow accounts in your organization to copy backups to other accounts.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>isMpaEnabled</code>: Add cross-account access to your organization with the option to assign a Multi-party approval team to a logically air-gapped vault.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>isDelegatedAdministratorEnabled</code>: Allow Backup to automatically synchronize delegated administrator permissions with Organizations.</p>
+    #               </li>
+    #            </ul>
     #   @return [Hash<String, String>]
     # @!attribute last_update_time
-    #   <p>The date and time that the flag <code>isCrossAccountBackupEnabled</code> was last
-    #            updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of
-    #               <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value
-    #            1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>
+    #   <p>The date and time that the supported flags were last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>
     #   @return [Time]
     class DescribeGlobalSettingsOutput < Struct.new(
       nil,
@@ -2584,11 +2973,11 @@ module Aws::Backup
     #   <p>The name of the resource that belongs to the specified backup.</p>
     #   @return [String]
     # @!attribute last_backup_vault_arn
-    #   <p>The ARN (Amazon Resource Name) of the backup vault 
+    #   <p>The ARN (Amazon Resource Name) of the backup vault
     #            that contains the most recent backup recovery point.</p>
     #   @return [String]
     # @!attribute last_recovery_point_arn
-    #   <p>The ARN (Amazon Resource Name) of the most recent 
+    #   <p>The ARN (Amazon Resource Name) of the most recent
     #            recovery point.</p>
     #   @return [String]
     # @!attribute latest_restore_execution_time_minutes
@@ -2676,26 +3065,26 @@ module Aws::Backup
     #               <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>A status code specifying the state of the recovery point. For more information, see 
+    #   <p>A status code specifying the state of the recovery point. For more information, see
     #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/applicationstackbackups.html#cfnrecoverypointstatus">
-    #               Recovery point status</a> in the <i>Backup Developer 
+    #               Recovery point status</a> in the <i>Backup Developer
     #                  Guide</i>.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>CREATING</code> status indicates that an Backup job has been 
-    #                  initiated for a resource. The backup process has started and is actively processing 
+    #                     <code>CREATING</code> status indicates that an Backup job has been
+    #                  initiated for a resource. The backup process has started and is actively processing
     #                  a backup job for the associated recovery point.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>AVAILABLE</code> status indicates that the backup was successfully created 
-    #                  for the recovery point. The backup process has completed without any issues, and the 
+    #                     <code>AVAILABLE</code> status indicates that the backup was successfully created
+    #                  for the recovery point. The backup process has completed without any issues, and the
     #                  recovery point is now ready for use.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PARTIAL</code> status indicates a composite recovery point has one or more 
+    #                     <code>PARTIAL</code> status indicates a composite recovery point has one or more
     #                  nested recovery points that were not in the backup.</p>
     #               </li>
     #               <li>
@@ -2760,7 +3149,7 @@ module Aws::Backup
     #            minimum of 90 days. Therefore, the “retention” setting must be 90 days greater than the
     #            “transition to cold after days” setting. The “transition to cold after days” setting cannot
     #            be changed after a backup has been transitioned to cold. </p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature 
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
     #            availability by resource</a> table. Backup ignores this expression for other resource types.</p>
     #   @return [Types::Lifecycle]
     # @!attribute encryption_key_arn
@@ -2782,12 +3171,12 @@ module Aws::Backup
     #            12:11:30.087 AM.</p>
     #   @return [Time]
     # @!attribute parent_recovery_point_arn
-    #   <p>This is an ARN that uniquely identifies a parent (composite) recovery point; for example, 
+    #   <p>This is an ARN that uniquely identifies a parent (composite) recovery point; for example,
     #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
     # @!attribute composite_member_identifier
-    #   <p>The identifier of a resource within a composite group, such as 
-    #            nested (child) recovery point belonging to a composite (parent) stack. The 
+    #   <p>The identifier of a resource within a composite group, such as
+    #            nested (child) recovery point belonging to a composite (parent) stack. The
     #            ID is transferred from the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax">
     #               logical ID</a> within a stack.</p>
     #   @return [String]
@@ -2813,6 +3202,13 @@ module Aws::Backup
     #   <p>A string in the form of a detailed message explaining the status of a backup index
     #            associated with the recovery point.</p>
     #   @return [String]
+    # @!attribute encryption_key_type
+    #   <p>The type of encryption key used for the recovery point. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>
+    #   @return [String]
+    # @!attribute scan_results
+    #   <p>Contains the latest scanning results against the recovery point and currently include <code>MalwareScanner</code>, <code>ScanJobState</code>, <code>Findings</code>, and <code>LastScanTimestamp</code>
+    #            </p>
+    #   @return [Array<Types::ScanResult>]
     class DescribeRecoveryPointOutput < Struct.new(
       nil,
       :recovery_point_arn,
@@ -2842,6 +3238,8 @@ module Aws::Backup
       :vault_type,
       :index_status,
       :index_status_message,
+      :encryption_key_type,
+      :scan_results,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2865,9 +3263,9 @@ module Aws::Backup
     #   @return [Hash<String, Boolean>]
     # @!attribute resource_type_management_preference
     #   <p>Returns whether Backup fully manages the backups for a resource type.</p>
-    #            <p>For the benefits of full Backup management, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#full-management">Full Backup 
+    #            <p>For the benefits of full Backup management, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#full-management">Full Backup
     #            management</a>.</p>
-    #            <p>For a list of resource types and whether each supports full Backup management, 
+    #            <p>For a list of resource types and whether each supports full Backup management,
     #            see the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature availability by resource</a> table.</p>
     #            <p>If <code>"DynamoDB":false</code>, you can enable full Backup management for
     #            DynamoDB backup by enabling <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli">
@@ -2953,6 +3351,12 @@ module Aws::Backup
     #   <p>An ARN that uniquely identifies a recovery point; for example,
     #               <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
+    # @!attribute source_resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the original resource that was backed up. This provides context about what resource is being restored.</p>
+    #   @return [String]
+    # @!attribute backup_vault_arn
+    #   <p>The Amazon Resource Name (ARN) of the backup vault containing the recovery point being restored. This helps identify vault access policies and permissions.</p>
+    #   @return [String]
     # @!attribute creation_date
     #   <p>The date and time that a restore job is created, in Unix format and Coordinated
     #            Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.
@@ -2988,7 +3392,7 @@ module Aws::Backup
     #            take.</p>
     #   @return [Integer]
     # @!attribute created_resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the resource that 
+    #   <p>The Amazon Resource Name (ARN) of the resource that
     #         was created by the restore job.</p>
     #            <p>The format of the ARN depends on the resource type of the backed-up
     #            resource.</p>
@@ -3003,7 +3407,7 @@ module Aws::Backup
     #   <p>Contains identifying information about the creation of a restore job.</p>
     #   @return [Types::RestoreJobCreator]
     # @!attribute validation_status
-    #   <p>The status of validation run on the indicated 
+    #   <p>The status of validation run on the indicated
     #            restore job.</p>
     #   @return [String]
     # @!attribute validation_status_message
@@ -3015,11 +3419,19 @@ module Aws::Backup
     # @!attribute deletion_status_message
     #   <p>This describes the restore job deletion status.</p>
     #   @return [String]
+    # @!attribute is_parent
+    #   <p>This is a boolean value indicating whether the restore job is a parent (composite) restore job.</p>
+    #   @return [Boolean]
+    # @!attribute parent_job_id
+    #   <p>This is the unique identifier of the parent restore job for the selected restore job.</p>
+    #   @return [String]
     class DescribeRestoreJobOutput < Struct.new(
       nil,
       :account_id,
       :restore_job_id,
       :recovery_point_arn,
+      :source_resource_arn,
+      :backup_vault_arn,
       :creation_date,
       :completion_date,
       :status,
@@ -3036,6 +3448,137 @@ module Aws::Backup
       :validation_status_message,
       :deletion_status,
       :deletion_status_message,
+      :is_parent,
+      :parent_job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:is_parent] = false unless options.key?(:is_parent)
+        super
+      end
+    end
+
+    # @!attribute scan_job_id
+    #   <p>Uniquely identifies a request to Backup to scan a resource.</p>
+    #   @return [String]
+    class DescribeScanJobInput < Struct.new(
+      nil,
+      :scan_job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute account_id
+    #   <p>Returns the account ID that owns the scan job.</p>
+    #            <p>Pattern: <code>^[0-9]{12}$</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute backup_vault_arn
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example,
+    #               <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute backup_vault_name
+    #   <p>The name of a logical container where backups are stored. Backup vaults are identified by names that are
+    #            unique to the account used to create them and the Amazon Web Services Region where they are created.</p>
+    #            <p>Pattern: <code>^[a-zA-Z0-9\-\_\.]{2,50}$</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute completion_date
+    #   <p>The date and time that a backup index finished creation, in Unix format and Coordinated
+    #            Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds.
+    #            For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087
+    #            AM.</p>
+    #   @return [Time]
+    # @!attribute continuous_scan_end_time
+    #   <p>The point in time the scan job scanned up to for a continuous backup.</p>
+    #   @return [Time]
+    # @!attribute continuous_scan_start_time
+    #   <p>The point in time the scan job started scan from for a continuous backup.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>Contains identifying information about the creation of a scan job, including the backup plan and rule that initiated the scan.</p>
+    #   @return [Types::ScanJobCreator]
+    # @!attribute creation_date
+    #   <p>The date and time that a backup index finished creation, in Unix format and Coordinated
+    #            Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.
+    #            For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087
+    #            AM.</p>
+    #   @return [Time]
+    # @!attribute iam_role_arn
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example,
+    #               <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>
+    #   @return [String]
+    # @!attribute malware_scanner
+    #   <p>The scanning engine used for the corresponding scan job. Currently only <code>GUARDUTY</code> is supported.</p>
+    #   @return [String]
+    # @!attribute recovery_point_arn
+    #   <p>An ARN that uniquely identifies the target recovery point for scanning.; for example,
+    #         <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
+    #   @return [String]
+    # @!attribute resource_arn
+    #   <p>An ARN that uniquely identifies the source resource of the corresponding recovery point ARN.</p>
+    #   @return [String]
+    # @!attribute resource_name
+    #   <p>The non-unique name of the resource that belongs to the specified backup.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of Amazon Web Services Resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume.</p>
+    #            <p>Pattern: <code>^[a-zA-Z0-9\-\_\.]{1,50}$</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute scan_base_recovery_point_arn
+    #   <p>An ARN that uniquely identifies the base recovery point for scanning. This field will only be populated when an incremental scan job has taken place.</p>
+    #   @return [String]
+    # @!attribute scan_id
+    #   <p>The scan ID generated by Amazon GuardDuty for the corresponding Scan Job ID request from Backup.</p>
+    #   @return [String]
+    # @!attribute scan_job_id
+    #   <p>The scan job ID that uniquely identified the request to Backup.</p>
+    #   @return [String]
+    # @!attribute scan_mode
+    #   <p>Specifies the scan type used for the scan job.</p>
+    #   @return [String]
+    # @!attribute scan_result
+    #   <p>
+    #         Contains the <code>ScanResultsStatus</code> for the scanning job and returns <code>THREATS_FOUND</code> or <code>NO_THREATS_FOUND</code> for completed jobs.</p>
+    #   @return [Types::ScanResultInfo]
+    # @!attribute scanner_role_arn
+    #   <p>Specifies the scanner IAM role ARN used to for the scan job.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of a scan job.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>A detailed message explaining the status of the job to back up a resource.</p>
+    #   @return [String]
+    class DescribeScanJobOutput < Struct.new(
+      nil,
+      :account_id,
+      :backup_vault_arn,
+      :backup_vault_name,
+      :completion_date,
+      :continuous_scan_end_time,
+      :continuous_scan_start_time,
+      :created_by,
+      :creation_date,
+      :iam_role_arn,
+      :malware_scanner,
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_name,
+      :resource_type,
+      :scan_base_recovery_point_arn,
+      :scan_id,
+      :scan_job_id,
+      :scan_mode,
+      :scan_result,
+      :scanner_role_arn,
+      :state,
+      :status_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3058,12 +3601,12 @@ module Aws::Backup
 
     # @!attribute backup_vault_name
     #   <p>The name of a logical container where the child (nested) recovery point
-    #            is stored. Backup vaults are identified by names that are unique to the account used 
+    #            is stored. Backup vaults are identified by names that are unique to the account used
     #            to create them and the Amazon Web Services Region where they are created.</p>
     #   @return [String]
     # @!attribute recovery_point_arn
-    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the child 
-    #            (nested) recovery point; for example, 
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the child
+    #            (nested) recovery point; for example,
     #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.</code>
     #            </p>
     #   @return [String]
@@ -3137,7 +3680,7 @@ module Aws::Backup
     #   <p>The number of controls contained by the framework.</p>
     #   @return [Integer]
     # @!attribute creation_time
-    #   <p>The date and time that a framework is created, in ISO 8601 representation. 
+    #   <p>The date and time that a framework is created, in ISO 8601 representation.
     #            The value of <code>CreationTime</code> is accurate to milliseconds. For example,
     #             2020-07-10T15:00:00.000-08:00 represents the 10th of July 2020 at 3:00 PM 8 hours behind
     #             UTC.</p>
@@ -3246,10 +3789,14 @@ module Aws::Backup
     #   <p>Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes
     #            long. Version IDs cannot be edited.</p>
     #   @return [String]
+    # @!attribute max_scheduled_runs_preview
+    #   <p>Number of future scheduled backup runs to preview. When set to 0 (default), no scheduled runs preview is included in the response. Valid range is 0-10.</p>
+    #   @return [Integer]
     class GetBackupPlanInput < Struct.new(
       nil,
       :backup_plan_id,
       :version_id,
+      :max_scheduled_runs_preview,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3296,6 +3843,9 @@ module Aws::Backup
     #   <p>Contains a list of <code>BackupOptions</code> for each resource type. The list is
     #            populated only if the advanced option is set for the backup plan.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
+    # @!attribute scheduled_runs_preview
+    #   <p>List of upcoming scheduled backup runs. Only included when <code>MaxScheduledRunsPreview</code> parameter is greater than 0. Contains up to 10 future backup executions with their scheduled times, execution types, and associated rule IDs.</p>
+    #   @return [Array<Types::ScheduledPlanExecutionMember>]
     class GetBackupPlanOutput < Struct.new(
       nil,
       :backup_plan,
@@ -3307,6 +3857,7 @@ module Aws::Backup
       :deletion_date,
       :last_execution_date,
       :advanced_backup_settings,
+      :scheduled_runs_preview,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3463,7 +4014,7 @@ module Aws::Backup
     #   <p>The ID of the legal hold.</p>
     #   @return [String]
     # @!attribute legal_hold_arn
-    #   <p>The framework ARN for the specified legal hold. The format 
+    #   <p>The framework ARN for the specified legal hold. The format
     #            of the ARN depends on the resource type.</p>
     #   @return [String]
     # @!attribute creation_date
@@ -3495,6 +4046,59 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute recovery_point_arn
+    #   <p>An ARN that uniquely identifies the target recovery point for scanning; for example,
+    #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
+    #   @return [String]
+    # @!attribute backup_vault_name
+    #   <p>The name of a logical container where backups are stored. Backup vaults are identified
+    #            by names that are unique to the account used to create them and the Amazon Web Services
+    #            Region where they are created.</p>
+    #   @return [String]
+    # @!attribute scan_end_time
+    #   <p>The point in time within the continuous backup to examine for malware scan results.</p>
+    #   @return [Time]
+    # @!attribute malware_scanner
+    #   <p>The scanning engine used for the corresponding scan job. Currently only <code>GUARDDUTY</code> is supported.</p>
+    #   @return [String]
+    class GetPITRMalwareScanResultsInput < Struct.new(
+      nil,
+      :recovery_point_arn,
+      :backup_vault_name,
+      :scan_end_time,
+      :malware_scanner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scan_end_time
+    #   <p>The point in time that was queried. This echoes back the time specified in the request.</p>
+    #   @return [Time]
+    # @!attribute scan_result
+    #   <p>Contains the <code>ScanResultStatus</code> for the scan and returns <code>THREATS_FOUND</code>, <code>NO_THREATS_FOUND</code>, or <code>UNKNOWN</code>.</p>
+    #   @return [Types::ScanResultInfo]
+    # @!attribute last_scan_job_time
+    #   <p>The completion time of the most recent scan job that covered the specified point in time.</p>
+    #   @return [Time]
+    # @!attribute scan_id
+    #   <p>The scan ID generated by Amazon GuardDuty for the corresponding Scan Job ID request from Backup.</p>
+    #   @return [String]
+    # @!attribute scan_mode
+    #   <p>Specifies the scan type used for the scan job.</p>
+    #   @return [String]
+    class GetPITRMalwareScanResultsOutput < Struct.new(
+      nil,
+      :scan_end_time,
+      :scan_result,
+      :last_scan_job_time,
+      :scan_id,
+      :scan_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute backup_vault_name
     #   <p>The name of a logical container where backups are stored. Backup vaults are identified
     #            by names that are unique to the account used to create them and the Region where they are
@@ -3519,13 +4123,13 @@ module Aws::Backup
     #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
     # @!attribute backup_vault_arn
-    #   <p>An ARN that uniquely identifies the backup vault where the recovery 
+    #   <p>An ARN that uniquely identifies the backup vault where the recovery
     #            point index is stored.</p>
     #            <p>For example,
     #            <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>
     #   @return [String]
     # @!attribute source_resource_arn
-    #   <p>A string of the  Amazon Resource Name (ARN) that uniquely identifies 
+    #   <p>A string of the  Amazon Resource Name (ARN) that uniquely identifies
     #            the source resource.</p>
     #   @return [String]
     # @!attribute index_creation_date
@@ -3547,19 +4151,19 @@ module Aws::Backup
     #            AM.</p>
     #   @return [Time]
     # @!attribute index_status
-    #   <p>This is the current status for the backup index associated 
+    #   <p>This is the current status for the backup index associated
     #            with the specified recovery point.</p>
     #            <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>
     #            </p>
-    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code> 
+    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code>
     #            can be included in a search.</p>
     #   @return [String]
     # @!attribute index_status_message
-    #   <p>A detailed message explaining the status of a backup index associated 
+    #   <p>A detailed message explaining the status of a backup index associated
     #            with the recovery point.</p>
     #   @return [String]
     # @!attribute total_items_indexed
-    #   <p>Count of items within the backup index associated with the 
+    #   <p>Count of items within the backup index associated with the
     #            recovery point.</p>
     #   @return [Integer]
     class GetRecoveryPointIndexDetailsOutput < Struct.new(
@@ -3657,13 +4261,13 @@ module Aws::Backup
     #   <p>The account ID of the specified backup vault.</p>
     #   @return [String]
     # @!attribute backup_vault_name
-    #   <p>The name of a logical container where backups are stored. Backup 
-    #            vaults are identified by names that are unique to the account used to 
-    #            create them and the Amazon Web ServicesRegion where they are created. 
+    #   <p>The name of a logical container where backups are stored. Backup
+    #            vaults are identified by names that are unique to the account used to
+    #            create them and the Amazon Web ServicesRegion where they are created.
     #            They consist of letters, numbers, and hyphens.</p>
     #   @return [String]
     # @!attribute recovery_point_arn
-    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a recovery 
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a recovery
     #            point; for example,
     #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.
     #         </p>
@@ -3701,7 +4305,7 @@ module Aws::Backup
     end
 
     # @!attribute restore_testing_plan
-    #   <p>Specifies the body of a restore testing plan. Includes 
+    #   <p>Specifies the body of a restore testing plan. Includes
     #            <code>RestoreTestingPlanName</code>.</p>
     #   @return [Types::RestoreTestingPlanForGet]
     class GetRestoreTestingPlanOutput < Struct.new(
@@ -3771,6 +4375,10 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
+    #                     <code>EKS</code> for Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
     #                     <code>FSx</code> for Amazon FSx</p>
     #               </li>
     #               <li>
@@ -3791,7 +4399,7 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases 
+    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases
     #               on Amazon Elastic Compute Cloud instances</p>
     #               </li>
     #               <li>
@@ -3811,6 +4419,28 @@ module Aws::Backup
     class GetSupportedResourceTypesOutput < Struct.new(
       nil,
       :resource_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tiering_configuration_name
+    #   <p>The unique name of a tiering configuration.</p>
+    #   @return [String]
+    class GetTieringConfigurationInput < Struct.new(
+      nil,
+      :tiering_configuration_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tiering_configuration
+    #   <p>Specifies the body of a tiering configuration. Includes <code>TieringConfigurationName</code>.</p>
+    #   @return [Types::TieringConfiguration]
+    class GetTieringConfigurationOutput < Struct.new(
+      nil,
+      :tiering_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3841,7 +4471,7 @@ module Aws::Backup
     end
 
     # <p>This is a recovery point that has an associated backup index.</p>
-    #          <p>Only recovery points with a backup index can be 
+    #          <p>Only recovery points with a backup index can be
     #          included in a search.</p>
     # @!attribute recovery_point_arn
     #   <p>An ARN that uniquely identifies a recovery point; for example,
@@ -3849,7 +4479,7 @@ module Aws::Backup
     #            </p>
     #   @return [String]
     # @!attribute source_resource_arn
-    #   <p>A string of the  Amazon Resource Name (ARN) that uniquely identifies 
+    #   <p>A string of the  Amazon Resource Name (ARN) that uniquely identifies
     #            the source resource.</p>
     #   @return [String]
     # @!attribute iam_role_arn
@@ -3882,19 +4512,19 @@ module Aws::Backup
     #            AM.</p>
     #   @return [Time]
     # @!attribute index_status
-    #   <p>This is the current status for the backup index associated 
+    #   <p>This is the current status for the backup index associated
     #            with the specified recovery point.</p>
     #            <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>
     #            </p>
-    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code> 
+    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code>
     #            can be included in a search.</p>
     #   @return [String]
     # @!attribute index_status_message
-    #   <p>A string in the form of a detailed message explaining the status of a backup index associated 
+    #   <p>A string in the form of a detailed message explaining the status of a backup index associated
     #            with the recovery point.</p>
     #   @return [String]
     # @!attribute backup_vault_arn
-    #   <p>An ARN that uniquely identifies the backup vault where the recovery 
+    #   <p>An ARN that uniquely identifies the backup vault where the recovery
     #            point index is stored.</p>
     #            <p>For example,
     #            <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>
@@ -3984,15 +4614,15 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Pair of two related strings. Allowed characters 
-    #          are letters, white space, and numbers that can be 
-    #          represented in UTF-8 and the following characters: 
+    # <p>Pair of two related strings. Allowed characters
+    #          are letters, white space, and numbers that can be
+    #          represented in UTF-8 and the following characters:
     #          <code> + - = . _ : /</code>
     #          </p>
     # @!attribute key
-    #   <p>The tag key (String). The key can't start with 
+    #   <p>The tag key (String). The key can't start with
     #            <code>aws:</code>.</p>
-    #            <p>Length Constraints: Minimum length of 1. Maximum 
+    #            <p>Length Constraints: Minimum length of 1. Maximum
     #            length of 128.</p>
     #            <p>Pattern: <code>^(?![aA]{1}[wW]{1}[sS]{1}:)([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$</code>
     #            </p>
@@ -4068,13 +4698,13 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A legal hold is an administrative tool that helps prevent backups 
-    #          from being deleted while under a hold. While the hold is in place, 
-    #          backups under a hold cannot be deleted and lifecycle policies that 
-    #          would alter the backup status (such as transition to cold storage) are 
-    #          delayed until the legal hold is removed. A backup can have more than 
-    #          one legal hold. Legal holds are applied to one or more backups 
-    #          (also known as recovery points). These backups can be filtered by resource 
+    # <p>A legal hold is an administrative tool that helps prevent backups
+    #          from being deleted while under a hold. While the hold is in place,
+    #          backups under a hold cannot be deleted and lifecycle policies that
+    #          would alter the backup status (such as transition to cold storage) are
+    #          delayed until the legal hold is removed. A backup can have more than
+    #          one legal hold. Legal holds are applied to one or more backups
+    #          (also known as recovery points). These backups can be filtered by resource
     #          types and by resource IDs.</p>
     # @!attribute title
     #   <p>The title of a legal hold.</p>
@@ -4089,7 +4719,7 @@ module Aws::Backup
     #   <p>The ID of the legal hold.</p>
     #   @return [String]
     # @!attribute legal_hold_arn
-    #   <p>The Amazon Resource Name (ARN) of the legal hold; for example, 
+    #   <p>The Amazon Resource Name (ARN) of the legal hold; for example,
     #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
     # @!attribute creation_date
@@ -4112,16 +4742,16 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the time period, in days, before a recovery point transitions to cold storage 
+    # <p>Specifies the time period, in days, before a recovery point transitions to cold storage
     #          or is deleted.</p>
     #          <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90
     #          days. Therefore, on the console, the retention setting must be 90 days greater than the
     #          transition to cold after days setting. The transition to cold after days setting can't
     #          be changed after a backup has been transitioned to cold.</p>
-    #          <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature 
+    #          <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
     #          availability by resource</a> table. Backup ignores this expression for
     #          other resource types.</p>
-    #          <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely, 
+    #          <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely,
     #          specify -1 for <code>MoveToColdStorageAfterDays</code> and <code>DeleteAfterDays</code>.</p>
     # @!attribute move_to_cold_storage_after_days
     #   <p>The number of days after creation that a recovery point is moved to cold
@@ -4132,14 +4762,20 @@ module Aws::Backup
     #            at least 90 days after the number of days specified in <code>MoveToColdStorageAfterDays</code>.</p>
     #   @return [Integer]
     # @!attribute opt_in_to_archive_for_supported_resources
-    #   <p>If the value is true, your backup plan transitions supported resources to 
+    #   <p>If the value is true, your backup plan transitions supported resources to
     #            archive (cold) storage tier in accordance with your lifecycle settings.</p>
     #   @return [Boolean]
+    # @!attribute delete_after_event
+    #   <p>The event after which a recovery point is deleted. A recovery point with both
+    #               <code>DeleteAfterDays</code> and <code>DeleteAfterEvent</code> will delete after
+    #               whichever condition is satisfied first. Not valid as an input.</p>
+    #   @return [String]
     class Lifecycle < Struct.new(
       nil,
       :move_to_cold_storage_after_days,
       :delete_after_days,
       :opt_in_to_archive_for_supported_resources,
+      :delete_after_event,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4168,17 +4804,190 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains metadata about a backup access point.</p>
+    # @!attribute access_point_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the backup access point.</p>
+    #   @return [String]
+    # @!attribute access_point_metadata
+    #   <p>Metadata for the backup access point. After the backup access point reaches the <code>AVAILABLE</code>
+    #            status, this map contains <code>S3AccessPointArn</code> and <code>S3AccessPointAlias</code>, which you use with
+    #            standard Amazon S3 read APIs to access the backup data. For continuous recovery points, this map also
+    #            contains <code>AccessPointInTime</code> (in format <code>2021-11-27T03:30:27Z</code>). The access point
+    #            provides access to the content present in the backup at that specific time.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute backup_vault_arn
+    #   <p>The Amazon Resource Name (ARN) of the backup vault that contains the recovery point.</p>
+    #   @return [String]
+    # @!attribute backup_vault_name
+    #   <p>The name of the backup vault that contains the recovery point.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time that the backup access point was created, in Unix format and Coordinated Universal Time
+    #            (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For example, the value
+    #            1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>
+    #   @return [Time]
+    # @!attribute name
+    #   <p>The name of the backup access point.</p>
+    #   @return [String]
+    # @!attribute recovery_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the recovery point that the backup access point provides access to.</p>
+    #   @return [String]
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource that was backed up, such as an Amazon S3 bucket.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of Amazon Web Services resource associated with the recovery point. For example, <code>S3</code> for
+    #           Amazon Simple Storage Service.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the backup access point.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>A message that provides additional detail about the status of the backup access point, such as the reason a
+    #            creation or deletion attempt failed.</p>
+    #   @return [String]
+    class ListAccessPointsMember < Struct.new(
+      nil,
+      :access_point_arn,
+      :access_point_metadata,
+      :backup_vault_arn,
+      :backup_vault_name,
+      :creation_time,
+      :name,
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_type,
+      :status,
+      :status_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to be returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to return
+    #            <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list
+    #            starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    # @!attribute recovery_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the recovery point whose backup access points you want to list.</p>
+    #   @return [String]
+    class ListBackupAccessPointsByRecoveryPointRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :recovery_point_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute backup_access_points
+    #   <p>A list of backup access points, each containing metadata such as its name, ARN, status, and associated
+    #            recovery point.</p>
+    #   @return [Array<Types::ListAccessPointsMember>]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to return
+    #            <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list
+    #            starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    class ListBackupAccessPointsByRecoveryPointResponse < Struct.new(
+      nil,
+      :backup_access_points,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to be returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to return
+    #            <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list
+    #            starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource whose backup access points you want to list.</p>
+    #   @return [String]
+    class ListBackupAccessPointsByResourceRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute backup_access_points
+    #   <p>A list of backup access points, each containing metadata such as its name, ARN, status, and associated
+    #            recovery point.</p>
+    #   @return [Array<Types::ListAccessPointsMember>]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to return
+    #            <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list
+    #            starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    class ListBackupAccessPointsByResourceResponse < Struct.new(
+      nil,
+      :backup_access_points,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to be returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to return
+    #            <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list
+    #            starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    class ListBackupAccessPointsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute backup_access_points
+    #   <p>A list of backup access points, each containing metadata such as its name, ARN, status, and associated
+    #            recovery point.</p>
+    #   @return [Array<Types::ListAccessPointsMember>]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to return
+    #            <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items in your list
+    #            starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    class ListBackupAccessPointsResponse < Struct.new(
+      nil,
+      :backup_access_points,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute account_id
     #   <p>Returns the job count for the specified account.</p>
-    #            <p>If the request is sent from a member account or an account 
-    #            not part of Amazon Web Services Organizations, jobs within requestor's account 
+    #            <p>If the request is sent from a member account or an account
+    #            not part of Amazon Web Services Organizations, jobs within requestor's account
     #            will be returned.</p>
-    #            <p>Root, admin, and delegated administrator accounts can use 
-    #            the value ANY to return job counts from every account in the 
+    #            <p>Root, admin, and delegated administrator accounts can use
+    #            the value ANY to return job counts from every account in the
     #            organization.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
-    #            from all accounts within the authenticated organization, 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #            from all accounts within the authenticated organization,
     #            then returns the sum.</p>
     #   @return [String]
     # @!attribute state
@@ -4200,25 +5009,25 @@ module Aws::Backup
     #            /audit/backup-job-summaries?AggregationPeriod=FOURTEEN_DAYS&MessageCategory=SUCCESS&State=COMPLETED</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>Returns the job count for the specified resource type. 
-    #            Use request <code>GetSupportedResourceTypes</code> to obtain 
+    #   <p>Returns the job count for the specified resource type.
+    #            Use request <code>GetSupportedResourceTypes</code> to obtain
     #            strings for supported resource types.</p>
     #            <p>The the value ANY returns count of all resource types.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all resource types and returns the sum.</p>
     #            <p>The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>
     #   @return [String]
     # @!attribute message_category
-    #   <p>This parameter returns the job count for the specified 
+    #   <p>This parameter returns the job count for the specified
     #            message category.</p>
-    #            <p>Example accepted strings include <code>AccessDenied</code>, 
-    #            <code>Success</code>, and <code>InvalidParameters</code>. See 
-    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a> 
+    #            <p>Example accepted strings include <code>AccessDenied</code>,
+    #            <code>Success</code>, and <code>InvalidParameters</code>. See
+    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            for a list of accepted MessageCategory strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all message categories and returns the sum.</p>
     #   @return [String]
     # @!attribute aggregation_period
@@ -4240,7 +5049,7 @@ module Aws::Backup
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of items to be returned.</p>
-    #            <p>The value is an integer. Range of accepted values is from 
+    #            <p>The value is an integer. Range of accepted values is from
     #            1 to 500.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -4300,7 +5109,7 @@ module Aws::Backup
     end
 
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned items. For example, if a request is 
+    #   <p>The next item following a partial list of returned items. For example, if a request is
     #            made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you
     #            to return more items in your list starting at the location pointed to by the next
     #            token.</p>
@@ -4369,6 +5178,10 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
+    #                     <code>EKS</code> for Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
     #                     <code>FSx</code> for Amazon FSx</p>
     #               </li>
     #               <li>
@@ -4389,7 +5202,7 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases 
+    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases
     #               on Amazon Elastic Compute Cloud instances</p>
     #               </li>
     #               <li>
@@ -4424,17 +5237,17 @@ module Aws::Backup
     #   <p>This is a filter to list child (nested) jobs based on parent job ID.</p>
     #   @return [String]
     # @!attribute by_message_category
-    #   <p>This is an optional parameter that can be used to 
-    #            filter out jobs with a MessageCategory which matches the 
+    #   <p>This is an optional parameter that can be used to
+    #            filter out jobs with a MessageCategory which matches the
     #            value you input.</p>
-    #            <p>Example strings may include <code>AccessDenied</code>, 
-    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and 
+    #            <p>Example strings may include <code>AccessDenied</code>,
+    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and
     #            <code>InvalidParameters</code>.</p>
     #            <p>View <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            </p>
     #            <p>The wildcard () returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #               for all message categories and returns the sum.</p>
     #   @return [String]
     class ListBackupJobsInput < Struct.new(
@@ -4462,7 +5275,7 @@ module Aws::Backup
     #            format.</p>
     #   @return [Array<Types::BackupJob>]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned items. For example, if a request is  
+    #   <p>The next item following a partial list of returned items. For example, if a request is
     #            made to return <code>MaxResults</code> number of items, <code>NextToken</code> allows you
     #            to return more items in your list starting at the location pointed to by the next
     #            token.</p>
@@ -4682,45 +5495,45 @@ module Aws::Backup
 
     # @!attribute account_id
     #   <p>Returns the job count for the specified account.</p>
-    #            <p>If the request is sent from a member account or an account 
-    #            not part of Amazon Web Services Organizations, jobs within requestor's account 
+    #            <p>If the request is sent from a member account or an account
+    #            not part of Amazon Web Services Organizations, jobs within requestor's account
     #            will be returned.</p>
-    #            <p>Root, admin, and delegated administrator accounts can use 
-    #            the value ANY to return job counts from every account in the 
+    #            <p>Root, admin, and delegated administrator accounts can use
+    #            the value ANY to return job counts from every account in the
     #            organization.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
-    #            from all accounts within the authenticated organization, 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #            from all accounts within the authenticated organization,
     #            then returns the sum.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>This parameter returns the job count for jobs 
+    #   <p>This parameter returns the job count for jobs
     #            with the specified state.</p>
     #            <p>The the value ANY returns count of all states.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all states and returns the sum.</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>Returns the job count for the specified resource type. 
-    #            Use request <code>GetSupportedResourceTypes</code> to obtain 
+    #   <p>Returns the job count for the specified resource type.
+    #            Use request <code>GetSupportedResourceTypes</code> to obtain
     #            strings for supported resource types.</p>
     #            <p>The the value ANY returns count of all resource types.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all resource types and returns the sum.</p>
     #            <p>The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>
     #   @return [String]
     # @!attribute message_category
-    #   <p>This parameter returns the job count for the specified 
+    #   <p>This parameter returns the job count for the specified
     #            message category.</p>
-    #            <p>Example accepted strings include <code>AccessDenied</code>, 
-    #            <code>Success</code>, and <code>InvalidParameters</code>. See 
-    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a> 
+    #            <p>Example accepted strings include <code>AccessDenied</code>,
+    #            <code>Success</code>, and <code>InvalidParameters</code>. See
+    #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            for a list of accepted MessageCategory strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all message categories and returns the sum.</p>
     #   @return [String]
     # @!attribute aggregation_period
@@ -4741,9 +5554,9 @@ module Aws::Backup
     #            </ul>
     #   @return [String]
     # @!attribute max_results
-    #   <p>This parameter sets the maximum number of items 
+    #   <p>This parameter sets the maximum number of items
     #            to be returned.</p>
-    #            <p>The value is an integer. Range of accepted values is from 
+    #            <p>The value is an integer. Range of accepted values is from
     #            1 to 500.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -4767,8 +5580,8 @@ module Aws::Backup
     end
 
     # @!attribute copy_job_summaries
-    #   <p>This return shows a summary that contains 
-    #            Region, Account, State, ResourceType, MessageCategory, 
+    #   <p>This return shows a summary that contains
+    #            Region, Account, State, ResourceType, MessageCategory,
     #            StartTime, EndTime, and Count of included jobs.</p>
     #   @return [Array<Types::CopyJobSummary>]
     # @!attribute aggregation_period
@@ -4858,6 +5671,10 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
+    #                     <code>EKS</code> for Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
     #                     <code>FSx</code> for Amazon FSx</p>
     #               </li>
     #               <li>
@@ -4878,7 +5695,7 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases 
+    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases
     #               on Amazon Elastic Compute Cloud instances</p>
     #               </li>
     #               <li>
@@ -4916,19 +5733,22 @@ module Aws::Backup
     #   <p>This is a filter to list child (nested) jobs based on parent job ID.</p>
     #   @return [String]
     # @!attribute by_message_category
-    #   <p>This is an optional parameter that can be used to 
-    #            filter out jobs with a MessageCategory which matches the 
+    #   <p>This is an optional parameter that can be used to
+    #            filter out jobs with a MessageCategory which matches the
     #            value you input.</p>
-    #            <p>Example strings may include <code>AccessDenied</code>, 
-    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and 
+    #            <p>Example strings may include <code>AccessDenied</code>,
+    #            <code>SUCCESS</code>, <code>AGGREGATE_ALL</code>, and
     #            <code>INVALIDPARAMETERS</code>.</p>
-    #            <p>View 
+    #            <p>View
     #            <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring</a>
     #            for a list of accepted strings.</p>
     #            <p>The the value ANY returns count of all message categories.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #               for all message categories and returns the sum.</p>
+    #   @return [String]
+    # @!attribute by_source_recovery_point_arn
+    #   <p>Filters copy jobs by the specified source recovery point ARN.</p>
     #   @return [String]
     class ListCopyJobsInput < Struct.new(
       nil,
@@ -4945,6 +5765,7 @@ module Aws::Backup
       :by_complete_after,
       :by_parent_job_id,
       :by_message_category,
+      :by_source_recovery_point_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5014,19 +5835,19 @@ module Aws::Backup
     #   <p>The maximum number of resource list items to be returned.</p>
     #   @return [Integer]
     # @!attribute source_resource_arn
-    #   <p>A string of the  Amazon Resource Name (ARN) that uniquely identifies 
+    #   <p>A string of the  Amazon Resource Name (ARN) that uniquely identifies
     #            the source resource.</p>
     #   @return [String]
     # @!attribute created_before
-    #   <p>Returns only indexed recovery points that were created before the 
+    #   <p>Returns only indexed recovery points that were created before the
     #            specified date.</p>
     #   @return [Time]
     # @!attribute created_after
-    #   <p>Returns only indexed recovery points that were created after the 
+    #   <p>Returns only indexed recovery points that were created after the
     #            specified date.</p>
     #   @return [Time]
     # @!attribute resource_type
-    #   <p>Returns a list of indexed recovery points for the specified 
+    #   <p>Returns a list of indexed recovery points for the specified
     #            resource type(s).</p>
     #            <p>Accepted values include:</p>
     #            <ul>
@@ -5041,11 +5862,11 @@ module Aws::Backup
     #            </ul>
     #   @return [String]
     # @!attribute index_status
-    #   <p>Include this parameter to filter the returned list by 
+    #   <p>Include this parameter to filter the returned list by
     #            the indicated statuses.</p>
     #            <p>Accepted values: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>
     #            </p>
-    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code> 
+    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code>
     #            can be included in a search.</p>
     #   @return [String]
     class ListIndexedRecoveryPointsInput < Struct.new(
@@ -5063,7 +5884,7 @@ module Aws::Backup
     end
 
     # @!attribute indexed_recovery_points
-    #   <p>This is a list of recovery points that have an 
+    #   <p>This is a list of recovery points that have an
     #            associated index, belonging to the specified account.</p>
     #   @return [Array<Types::IndexedRecoveryPoint>]
     # @!attribute next_token
@@ -5258,6 +6079,10 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
+    #                     <code>EKS</code> for Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
     #                     <code>FSx</code> for Amazon FSx</p>
     #               </li>
     #               <li>
@@ -5278,7 +6103,7 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases 
+    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases
     #               on Amazon Elastic Compute Cloud instances</p>
     #               </li>
     #               <li>
@@ -5399,11 +6224,12 @@ module Aws::Backup
     #   @return [Integer]
     # @!attribute managed_by_aws_backup_only
     #   <p>This attribute filters recovery points based on ownership.</p>
-    #            <p>If this is 
-    #            set to <code>TRUE</code>, the response will contain recovery points associated 
+    #            <p>If this is
+    #            set to <code>TRUE</code>, the response will contain recovery points associated
     #            with the selected resources that are managed by Backup.</p>
-    #            <p>If this is set to <code>FALSE</code>, the response will contain all 
-    #            recovery points associated with the selected resource.</p>
+    #            <p>If this is set to <code>FALSE</code>, the response will contain all
+    #            recovery points associated with the selected resource, except for EBS
+    #            snapshots copied within the same Region and account.</p>
     #            <p>Type: Boolean</p>
     #   @return [Boolean]
     class ListRecoveryPointsByResourceInput < Struct.new(
@@ -5456,8 +6282,11 @@ module Aws::Backup
     # @!attribute by_status
     #   <p>Returns only report jobs that are in the specified status. The statuses are:</p>
     #            <p>
-    #               <code>CREATED | RUNNING | COMPLETED | FAILED</code>
+    #               <code>CREATED | RUNNING | COMPLETED | FAILED | COMPLETED_WITH_ISSUES</code>
     #            </p>
+    #            <p> Please note that only scanning jobs finish with state completed with issues.
+    #               For backup jobs this is a console interpretation of a job that finishes in
+    #               completed state and has a status message.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The number of desired results from 1 to 1000. Optional. If unspecified, the query will
@@ -5568,32 +6397,32 @@ module Aws::Backup
 
     # @!attribute account_id
     #   <p>Returns the job count for the specified account.</p>
-    #            <p>If the request is sent from a member account or an account 
-    #            not part of Amazon Web Services Organizations, jobs within requestor's account 
+    #            <p>If the request is sent from a member account or an account
+    #            not part of Amazon Web Services Organizations, jobs within requestor's account
     #            will be returned.</p>
-    #            <p>Root, admin, and delegated administrator accounts can use 
-    #            the value ANY to return job counts from every account in the 
+    #            <p>Root, admin, and delegated administrator accounts can use
+    #            the value ANY to return job counts from every account in the
     #            organization.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
-    #            from all accounts within the authenticated organization, 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
+    #            from all accounts within the authenticated organization,
     #            then returns the sum.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>This parameter returns the job count for jobs 
+    #   <p>This parameter returns the job count for jobs
     #            with the specified state.</p>
     #            <p>The the value ANY returns count of all states.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all states and returns the sum.</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>Returns the job count for the specified resource type. 
-    #            Use request <code>GetSupportedResourceTypes</code> to obtain 
+    #   <p>Returns the job count for the specified resource type.
+    #            Use request <code>GetSupportedResourceTypes</code> to obtain
     #            strings for supported resource types.</p>
     #            <p>The the value ANY returns count of all resource types.</p>
     #            <p>
-    #               <code>AGGREGATE_ALL</code> aggregates job counts 
+    #               <code>AGGREGATE_ALL</code> aggregates job counts
     #            for all resource types and returns the sum.</p>
     #            <p>The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>
     #   @return [String]
@@ -5615,9 +6444,9 @@ module Aws::Backup
     #            </ul>
     #   @return [String]
     # @!attribute max_results
-    #   <p>This parameter sets the maximum number of items 
+    #   <p>This parameter sets the maximum number of items
     #            to be returned.</p>
-    #            <p>The value is an integer. Range of accepted values is from 
+    #            <p>The value is an integer. Range of accepted values is from
     #            1 to 500.</p>
     #   @return [Integer]
     # @!attribute next_token
@@ -5640,8 +6469,8 @@ module Aws::Backup
     end
 
     # @!attribute restore_job_summaries
-    #   <p>This return contains a summary that contains 
-    #            Region, Account, State, ResourceType, MessageCategory, 
+    #   <p>This return contains a summary that contains
+    #            Region, Account, State, ResourceType, MessageCategory,
     #            StartTime, EndTime, and Count of included jobs.</p>
     #   @return [Array<Types::RestoreJobSummary>]
     # @!attribute aggregation_period
@@ -5678,7 +6507,7 @@ module Aws::Backup
     end
 
     # @!attribute resource_arn
-    #   <p>Returns only restore jobs that match the specified resource 
+    #   <p>Returns only restore jobs that match the specified resource
     #            Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute by_status
@@ -5691,9 +6520,9 @@ module Aws::Backup
     #   <p>Returns only restore jobs of recovery points that were created before the specified date.</p>
     #   @return [Time]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned items. For example, 
-    #            if a request ismade to return <code>MaxResults</code> number of items, 
-    #            <code>NextToken</code> allows you to return more items in your list 
+    #   <p>The next item following a partial list of returned items. For example,
+    #            if a request ismade to return <code>MaxResults</code> number of items,
+    #            <code>NextToken</code> allows you to return more items in your list
     #            starting at the location pointed to by the next token.</p>
     #   @return [String]
     # @!attribute max_results
@@ -5713,13 +6542,13 @@ module Aws::Backup
     end
 
     # @!attribute restore_jobs
-    #   <p>An array of objects that contain detailed information about 
+    #   <p>An array of objects that contain detailed information about
     #            jobs to restore saved resources.></p>
     #   @return [Array<Types::RestoreJobsListMember>]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned items. For example, 
-    #            if a request is made to return <code>MaxResults</code> number of items, 
-    #            <code>NextToken</code> allows youto return more items in your list starting 
+    #   <p>The next item following a partial list of returned items. For example,
+    #            if a request is made to return <code>MaxResults</code> number of items,
+    #            <code>NextToken</code> allows youto return more items in your list starting
     #            at the location pointed to by the next token</p>
     #   @return [String]
     class ListRestoreJobsByProtectedResourceOutput < Struct.new(
@@ -5777,6 +6606,10 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
+    #                     <code>EKS</code> for Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
     #                     <code>FSx</code> for Amazon FSx</p>
     #               </li>
     #               <li>
@@ -5797,7 +6630,7 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases 
+    #                     <code>SAP HANA on Amazon EC2</code> for SAP HANA databases
     #               on Amazon Elastic Compute Cloud instances</p>
     #               </li>
     #               <li>
@@ -5832,8 +6665,11 @@ module Aws::Backup
     #            Universal Time (UTC).</p>
     #   @return [Time]
     # @!attribute by_restore_testing_plan_arn
-    #   <p>This returns only restore testing jobs that match the 
+    #   <p>This returns only restore testing jobs that match the
     #            specified resource Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute by_parent_job_id
+    #   <p>This is a filter to list child (nested) restore jobs based on parent restore job ID.</p>
     #   @return [String]
     class ListRestoreJobsInput < Struct.new(
       nil,
@@ -5847,6 +6683,7 @@ module Aws::Backup
       :by_complete_before,
       :by_complete_after,
       :by_restore_testing_plan_arn,
+      :by_parent_job_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5875,9 +6712,9 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned items. 
-    #            For example, if a request is made to return <code>MaxResults</code> 
-    #            number of items, <code>NextToken</code> allows you to return more items 
+    #   <p>The next item following a partial list of returned items.
+    #            For example, if a request is made to return <code>MaxResults</code>
+    #            number of items, <code>NextToken</code> allows you to return more items
     #            in your list starting at the location pointed to by the nexttoken.</p>
     #   @return [String]
     class ListRestoreTestingPlansInput < Struct.new(
@@ -5890,9 +6727,9 @@ module Aws::Backup
     end
 
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned items. 
-    #            For example, if a request is made to return <code>MaxResults</code> 
-    #            number of items, <code>NextToken</code> allows you to return more items 
+    #   <p>The next item following a partial list of returned items.
+    #            For example, if a request is made to return <code>MaxResults</code>
+    #            number of items, <code>NextToken</code> allows you to return more items
     #            in your list starting at the location pointed to by the nexttoken.</p>
     #   @return [String]
     # @!attribute restore_testing_plans
@@ -5911,13 +6748,13 @@ module Aws::Backup
     #   <p>The maximum number of items to be returned.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned items. 
-    #            For example, if a request is made to return <code>MaxResults</code> 
-    #            number of items, <code>NextToken</code> allows you to return more items 
+    #   <p>The next item following a partial list of returned items.
+    #            For example, if a request is made to return <code>MaxResults</code>
+    #            number of items, <code>NextToken</code> allows you to return more items
     #            in your list starting at the location pointed to by the nexttoken.</p>
     #   @return [String]
     # @!attribute restore_testing_plan_name
-    #   <p>Returns restore testing selections by the specified restore testing 
+    #   <p>Returns restore testing selections by the specified restore testing
     #            plan name.</p>
     #   @return [String]
     class ListRestoreTestingSelectionsInput < Struct.new(
@@ -5931,19 +6768,232 @@ module Aws::Backup
     end
 
     # @!attribute next_token
-    #   <p>The next item following a partial list of returned items. For example, 
-    #            if a request is made to return <code>MaxResults</code> number of items, 
-    #            <code>NextToken</code> allows you to return more items in your list 
+    #   <p>The next item following a partial list of returned items. For example,
+    #            if a request is made to return <code>MaxResults</code> number of items,
+    #            <code>NextToken</code> allows you to return more items in your list
     #            starting at the location pointed to by the nexttoken.</p>
     #   @return [String]
     # @!attribute restore_testing_selections
-    #   <p>The returned restore testing selections associated with the 
+    #   <p>The returned restore testing selections associated with the
     #            restore testing plan.</p>
     #   @return [Array<Types::RestoreTestingSelectionForList>]
     class ListRestoreTestingSelectionsOutput < Struct.new(
       nil,
       :next_token,
       :restore_testing_selections,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute account_id
+    #   <p>Returns the job count for the specified account.</p>
+    #            <p>If the request is sent from a member account or an account not part of Amazon Web Services Organizations, jobs within requestor's account will be returned.</p>
+    #            <p>Root, admin, and delegated administrator accounts can use the value <code>ANY</code> to return job counts from every account in the organization.</p>
+    #            <p>
+    #               <code>AGGREGATE_ALL</code> aggregates job counts from all accounts within the authenticated organization, then returns the sum.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>Returns the job count for the specified resource type. Use request
+    #            <code>GetSupportedResourceTypes</code> to obtain strings for supported resource types.</p>
+    #            <p>The the value <code>ANY</code> returns count of all resource types.</p>
+    #            <p>
+    #               <code>AGGREGATE_ALL</code> aggregates job counts for all resource types and returns the sum.</p>
+    #   @return [String]
+    # @!attribute malware_scanner
+    #   <p>Returns only the scan jobs for the specified malware scanner.
+    #            Currently the only MalwareScanner is <code>GUARDDUTY</code>. But the field also supports <code>ANY</code>, and <code>AGGREGATE_ALL</code>.</p>
+    #   @return [String]
+    # @!attribute scan_result_status
+    #   <p>Returns only the scan jobs for the specified scan results.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>Returns only the scan jobs for the specified scanning job state.</p>
+    #   @return [String]
+    # @!attribute aggregation_period
+    #   <p>The period for the returned results.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ONE_DAY</code>The daily job count for the prior 1 day.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SEVEN_DAYS</code>The daily job count for the prior 7 days.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FOURTEEN_DAYS</code>The daily job count for the prior 14 days.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of items to be returned.</p>
+    #            <p>The value is an integer. Range of accepted values is from 1 to 500.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to
+    #            return <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items
+    #            in your list starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    class ListScanJobSummariesInput < Struct.new(
+      nil,
+      :account_id,
+      :resource_type,
+      :malware_scanner,
+      :scan_result_status,
+      :state,
+      :aggregation_period,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scan_job_summaries
+    #   <p>The summary information.</p>
+    #   @return [Array<Types::ScanJobSummary>]
+    # @!attribute aggregation_period
+    #   <p>The period for the returned results.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ONE_DAY</code>The daily job count for the prior 1 day.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SEVEN_DAYS</code>The daily job count for the prior 7 days.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FOURTEEN_DAYS</code>The daily job count for the prior 14 days.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Valid Values: <code>'ONE_DAY'</code> | <code>'SEVEN_DAYS'</code> | <code>'FOURTEEN_DAYS'</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to
+    #            return <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items
+    #            in your list starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    class ListScanJobSummariesOutput < Struct.new(
+      nil,
+      :scan_job_summaries,
+      :aggregation_period,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute by_account_id
+    #   <p>The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID.</p>
+    #            <p>If used from an Amazon Web Services Organizations management account, passing <code>*</code> returns all jobs across the organization.</p>
+    #            <p>Pattern: <code>^[0-9]{12}$</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute by_backup_vault_name
+    #   <p>Returns only scan jobs that will be stored in the specified backup vault.
+    #            Backup vaults are identified by names that are unique to the account
+    #            used to create them and the Amazon Web Services Region where they are created.</p>
+    #            <p>Pattern: <code>^[a-zA-Z0-9\-\_\.]{2,50}$</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute by_complete_after
+    #   <p>Returns only scan jobs completed after a date expressed in Unix format and Coordinated Universal Time (UTC).</p>
+    #   @return [Time]
+    # @!attribute by_complete_before
+    #   <p>Returns only backup jobs completed before a date expressed in Unix format and Coordinated Universal Time (UTC).</p>
+    #   @return [Time]
+    # @!attribute by_malware_scanner
+    #   <p>Returns only the scan jobs for the specified malware scanner. Currently only supports <code>GUARDDUTY</code>.</p>
+    #   @return [String]
+    # @!attribute by_recovery_point_arn
+    #   <p>Returns only the scan jobs that are ran against the specified recovery point.</p>
+    #   @return [String]
+    # @!attribute by_resource_arn
+    #   <p>Returns only scan jobs that match the specified resource Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute by_resource_type
+    #   <p>Returns restore testing selections by the specified restore testing
+    #            plan name.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>EBS</code>for Amazon Elastic Block Store</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EC2</code>for Amazon Elastic Compute Cloud</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>S3</code>for Amazon Simple Storage Service (Amazon S3)</p>
+    #               </li>
+    #            </ul>
+    #            <p>Pattern: <code>^[a-zA-Z0-9\-\_\.]{1,50}$</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute by_scan_result_status
+    #   <p>Returns only the scan jobs for the specified scan results:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>THREATS_FOUND</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NO_THREATS_FOUND</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute by_state
+    #   <p>Returns only the scan jobs for the specified scanning job state.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of items to be returned.</p>
+    #            <p>Valid Range: Minimum value of 1. Maximum value of 1000.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to
+    #            return <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items
+    #            in your list starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    class ListScanJobsInput < Struct.new(
+      nil,
+      :by_account_id,
+      :by_backup_vault_name,
+      :by_complete_after,
+      :by_complete_before,
+      :by_malware_scanner,
+      :by_recovery_point_arn,
+      :by_resource_arn,
+      :by_resource_type,
+      :by_scan_result_status,
+      :by_state,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request is made to
+    #            return <code>MaxResults</code> number of items, <code>NextToken</code> allows you to return more items
+    #            in your list starting at the location pointed to by the next token.</p>
+    #   @return [String]
+    # @!attribute scan_jobs
+    #   <p>An array of structures containing metadata about your scan jobs returned in JSON format.</p>
+    #   @return [Array<Types::ScanJob>]
+    class ListScanJobsOutput < Struct.new(
+      nil,
+      :next_token,
+      :scan_jobs,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5991,6 +7041,42 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute max_results
+    #   <p>The maximum number of items to be returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request
+    #            is made to return <code>MaxResults</code> number of items, <code>NextToken</code>
+    #            allows you to return more items in your list starting at the location pointed to by the
+    #            next token.</p>
+    #   @return [String]
+    class ListTieringConfigurationsInput < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tiering_configurations
+    #   <p>An array of tiering configurations returned by the <code>ListTieringConfigurations</code> call.</p>
+    #   @return [Array<Types::TieringConfigurationsListMember>]
+    # @!attribute next_token
+    #   <p>The next item following a partial list of returned items. For example, if a request
+    #            is made to return <code>MaxResults</code> number of items, <code>NextToken</code>
+    #            allows you to return more items in your list starting at the location pointed to by the
+    #            next token.</p>
+    #   @return [String]
+    class ListTieringConfigurationsOutput < Struct.new(
+      nil,
+      :tiering_configurations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Indicates that a required parameter is missing.</p>
     # @!attribute code
     #   @return [String]
@@ -6030,15 +7116,15 @@ module Aws::Backup
     #            AM.</p>
     #   @return [Time]
     # @!attribute resource_name
-    #   <p>The non-unique name of the resource that 
+    #   <p>The non-unique name of the resource that
     #            belongs to the specified backup.</p>
     #   @return [String]
     # @!attribute last_backup_vault_arn
-    #   <p>The ARN (Amazon Resource Name) of the backup vault 
+    #   <p>The ARN (Amazon Resource Name) of the backup vault
     #            that contains the most recent backup recovery point.</p>
     #   @return [String]
     # @!attribute last_recovery_point_arn
-    #   <p>The ARN (Amazon Resource Name) of the most 
+    #   <p>The ARN (Amazon Resource Name) of the most
     #            recent recovery point.</p>
     #   @return [String]
     class ProtectedResource < Struct.new(
@@ -6054,16 +7140,16 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The conditions that you define for resources in 
+    # <p>The conditions that you define for resources in
     #          your restore testing plan using tags.</p>
     # @!attribute string_equals
-    #   <p>Filters the values of your tagged resources for only 
-    #            those resources that you tagged  with the same value. 
+    #   <p>Filters the values of your tagged resources for only
+    #            those resources that you tagged  with the same value.
     #            Also called "exact matching."</p>
     #   @return [Array<Types::KeyValue>]
     # @!attribute string_not_equals
-    #   <p>Filters the values of your tagged resources for only 
-    #            those resources that you tagged  that do not have the same value. 
+    #   <p>Filters the values of your tagged resources for only
+    #            those resources that you tagged  that do not have the same value.
     #            Also called "negated matching."</p>
     #   @return [Array<Types::KeyValue>]
     class ProtectedResourceConditions < Struct.new(
@@ -6136,6 +7222,7 @@ module Aws::Backup
     #            <p>Backup enforces a 72-hour cooling-off period before Vault Lock takes effect
     #            and becomes immutable. Therefore, you must set <code>ChangeableForDays</code> to 3 or
     #            greater.</p>
+    #            <p>The maximum value you can specify is 36,500 days (approximately 100 years).</p>
     #            <p>Before the lock date, you can delete Vault Lock from the vault using
     #               <code>DeleteBackupVaultLockConfiguration</code> or change the Vault Lock configuration
     #            using <code>PutBackupVaultLockConfiguration</code>. On and after the lock date, the Vault
@@ -6186,7 +7273,7 @@ module Aws::Backup
     #   <p>The status of your restore validation.</p>
     #   @return [String]
     # @!attribute validation_status_message
-    #   <p>This is an optional message string you can input to 
+    #   <p>This is an optional message string you can input to
     #            describe the validation status for the restore test validation.</p>
     #   @return [String]
     class PutRestoreValidationResultInput < Struct.new(
@@ -6272,7 +7359,7 @@ module Aws::Backup
     #            days. Therefore, the “retention” setting must be 90 days greater than the “transition to
     #            cold after days” setting. The “transition to cold after days” setting cannot be changed
     #            after a backup has been transitioned to cold. </p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature 
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
     #            availability by resource</a> table. Backup ignores this expression for
     #            other resource types.</p>
     #   @return [Types::Lifecycle]
@@ -6291,40 +7378,47 @@ module Aws::Backup
     #            12:11:30.087 AM.</p>
     #   @return [Time]
     # @!attribute parent_recovery_point_arn
-    #   <p>The Amazon Resource Name (ARN) of the parent (composite) 
+    #   <p>The Amazon Resource Name (ARN) of the parent (composite)
     #            recovery point.</p>
     #   @return [String]
     # @!attribute composite_member_identifier
-    #   <p>The identifier of a resource within a composite group, such as 
-    #            nested (child) recovery point belonging to a composite (parent) stack. The 
-    #            ID is transferred from 
+    #   <p>The identifier of a resource within a composite group, such as
+    #            nested (child) recovery point belonging to a composite (parent) stack. The
+    #            ID is transferred from
     #            the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax">
     #               logical ID</a> within a stack.</p>
     #   @return [String]
     # @!attribute is_parent
-    #   <p>This is a boolean value indicating this is 
+    #   <p>This is a boolean value indicating this is
     #            a parent (composite) recovery point.</p>
     #   @return [Boolean]
     # @!attribute resource_name
-    #   <p>The non-unique name of the resource that 
+    #   <p>The non-unique name of the resource that
     #            belongs to the specified backup.</p>
     #   @return [String]
     # @!attribute vault_type
     #   <p>The type of vault in which the described recovery point is stored.</p>
     #   @return [String]
     # @!attribute index_status
-    #   <p>This is the current status for the backup index associated 
+    #   <p>This is the current status for the backup index associated
     #            with the specified recovery point.</p>
     #            <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> |
     #            <code>DELETING</code>
     #            </p>
-    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code> 
+    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code>
     #            can be included in a search.</p>
     #   @return [String]
     # @!attribute index_status_message
-    #   <p>A string in the form of a detailed message explaining the status of a backup index associated 
+    #   <p>A string in the form of a detailed message explaining the status of a backup index associated
     #            with the recovery point.</p>
     #   @return [String]
+    # @!attribute encryption_key_type
+    #   <p>The type of encryption key used for the recovery point. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>
+    #   @return [String]
+    # @!attribute aggregated_scan_result
+    #   <p>Contains the latest scanning results against the recovery point and currently include
+    #         <code>FailedScan</code>, <code>Findings</code>, <code>LastComputed</code>.</p>
+    #   @return [Types::AggregatedScanResult]
     class RecoveryPointByBackupVault < Struct.new(
       nil,
       :recovery_point_arn,
@@ -6353,6 +7447,8 @@ module Aws::Backup
       :vault_type,
       :index_status,
       :index_status_message,
+      :encryption_key_type,
+      :aggregated_scan_result,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6394,33 +7490,40 @@ module Aws::Backup
     #            Region where they are created.</p>
     #   @return [String]
     # @!attribute is_parent
-    #   <p>This is a boolean value indicating this is 
+    #   <p>This is a boolean value indicating this is
     #            a parent (composite) recovery point.</p>
     #   @return [Boolean]
     # @!attribute parent_recovery_point_arn
-    #   <p>The Amazon Resource Name (ARN) of the parent (composite) 
+    #   <p>The Amazon Resource Name (ARN) of the parent (composite)
     #            recovery point.</p>
     #   @return [String]
     # @!attribute resource_name
-    #   <p>The non-unique name of the resource that 
+    #   <p>The non-unique name of the resource that
     #            belongs to the specified backup.</p>
     #   @return [String]
     # @!attribute vault_type
-    #   <p>The type of vault in which the described recovery point is 
+    #   <p>The type of vault in which the described recovery point is
     #            stored.</p>
     #   @return [String]
     # @!attribute index_status
-    #   <p>This is the current status for the backup index associated 
+    #   <p>This is the current status for the backup index associated
     #            with the specified recovery point.</p>
     #            <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>
     #            </p>
-    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code> 
+    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code>
     #            can be included in a search.</p>
     #   @return [String]
     # @!attribute index_status_message
     #   <p>A string in the form of a detailed message explaining the status of a backup index
     #            associated with the recovery point.</p>
     #   @return [String]
+    # @!attribute encryption_key_type
+    #   <p>The type of encryption key used for the recovery point. Valid values are CUSTOMER_MANAGED_KMS_KEY for customer-managed keys or Amazon Web Services_OWNED_KMS_KEY for Amazon Web Services-owned keys.</p>
+    #   @return [String]
+    # @!attribute aggregated_scan_result
+    #   <p>Contains the latest scanning results against the recovery point and currently include
+    #         <code>FailedScan</code>, <code>Findings</code>, <code>LastComputed</code>.</p>
+    #   @return [Types::AggregatedScanResult]
     class RecoveryPointByResource < Struct.new(
       nil,
       :recovery_point_arn,
@@ -6436,6 +7539,8 @@ module Aws::Backup
       :vault_type,
       :index_status,
       :index_status_message,
+      :encryption_key_type,
+      :aggregated_scan_result,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6455,6 +7560,9 @@ module Aws::Backup
     #   <p>An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example,
     #               <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.</p>
     #   @return [String]
+    # @!attribute backup_plan_name
+    #   <p>The name of the backup plan that created this recovery point. This provides human-readable context about which backup plan was responsible for the backup job.</p>
+    #   @return [String]
     # @!attribute backup_plan_version
     #   <p>Version IDs are unique, randomly generated, Unicode, UTF-8 encoded strings that are at
     #            most 1,024 bytes long. They cannot be edited.</p>
@@ -6463,35 +7571,48 @@ module Aws::Backup
     #   <p>Uniquely identifies a rule used to schedule the backup of a selection of
     #            resources.</p>
     #   @return [String]
+    # @!attribute backup_rule_name
+    #   <p>The name of the backup rule within the backup plan that created this recovery point. This helps identify which specific rule triggered the backup job.</p>
+    #   @return [String]
+    # @!attribute backup_rule_cron
+    #   <p>The cron expression that defines the schedule for the backup rule. This shows the frequency and timing of when backups are automatically triggered.</p>
+    #   @return [String]
+    # @!attribute backup_rule_timezone
+    #   <p>The timezone used for the backup rule schedule. This provides context for when backups are scheduled to run in the specified timezone.</p>
+    #   @return [String]
     class RecoveryPointCreator < Struct.new(
       nil,
       :backup_plan_id,
       :backup_plan_arn,
+      :backup_plan_name,
       :backup_plan_version,
       :backup_rule_id,
+      :backup_rule_name,
+      :backup_rule_cron,
+      :backup_rule_timezone,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This is a recovery point which is a child (nested) recovery point 
-    #          of a parent (composite) recovery point. These recovery points 
-    #          can be disassociated from their parent (composite) recovery 
+    # <p>This is a recovery point which is a child (nested) recovery point
+    #          of a parent (composite) recovery point. These recovery points
+    #          can be disassociated from their parent (composite) recovery
     #          point, in which case they will no longer be a member.</p>
     # @!attribute recovery_point_arn
-    #   <p>The Amazon Resource Name (ARN) of the parent (composite) 
+    #   <p>The Amazon Resource Name (ARN) of the parent (composite)
     #            recovery point.</p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) that uniquely identifies 
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies
     #            a saved resource.</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>The Amazon Web Services resource type that is saved as 
+    #   <p>The Amazon Web Services resource type that is saved as
     #         a recovery point.</p>
     #   @return [String]
     # @!attribute backup_vault_name
-    #   <p>The name of the backup vault 
+    #   <p>The name of the backup vault
     #            (the logical container in which backups are stored).</p>
     #   @return [String]
     class RecoveryPointMember < Struct.new(
@@ -6505,24 +7626,24 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This specifies criteria to assign 
+    # <p>This specifies criteria to assign
     #          a set of resources, such as resource types or backup vaults.</p>
     # @!attribute vault_names
-    #   <p>These are the names of the vaults in which the selected 
+    #   <p>These are the names of the vaults in which the selected
     #            recovery points are contained.</p>
     #   @return [Array<String>]
     # @!attribute resource_identifiers
-    #   <p>These are the resources included in the resource selection 
+    #   <p>These are the resources included in the resource selection
     #            (including type of resources and vaults).</p>
     #   @return [Array<String>]
     # @!attribute date_range
-    #   <p>This is a resource filter containing FromDate: DateTime 
-    #            and ToDate: DateTime. Both values are required. Future DateTime 
+    #   <p>This is a resource filter containing FromDate: DateTime
+    #            and ToDate: DateTime. Both values are required. Future DateTime
     #            values are not permitted.</p>
-    #            <p>The date and time are in Unix format and Coordinated 
-    #            Universal Time (UTC), and it is accurate to milliseconds 
-    #            ((milliseconds are optional). 
-    #            For example, the value 1516925490.087 represents Friday, January 
+    #            <p>The date and time are in Unix format and Coordinated
+    #            Universal Time (UTC), and it is accurate to milliseconds
+    #            ((milliseconds are optional).
+    #            For example, the value 1516925490.087 represents Friday, January
     #            26, 2018 12:11:30.087 AM.</p>
     #   @return [Types::DateRange]
     class RecoveryPointSelection < Struct.new(
@@ -6713,7 +7834,7 @@ module Aws::Backup
     #            template. The report templates are:</p>
     #            <p>
     #               <code>RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT |
-    #               COPY_JOB_REPORT | RESTORE_JOB_REPORT</code>
+    #               COPY_JOB_REPORT | RESTORE_JOB_REPORT | SCAN_JOB_REPORT</code>
     #            </p>
     #   @return [String]
     # @!attribute framework_arns
@@ -6773,6 +7894,32 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
+    # <p>This contains metadata about resource selection for tiering configurations.</p>
+    #          <p>You can specify up to 5 different resource selections per tiering configuration.
+    #          Data moved to lower-cost tier remains there until deletion (one-way transition).</p>
+    # @!attribute resources
+    #   <p>An array of strings that either contains ARNs of the associated resources
+    #            or contains a wildcard <code>*</code> to specify all resources.
+    #            You can specify up to 100 specific resources per tiering configuration.</p>
+    #   @return [Array<String>]
+    # @!attribute tiering_down_settings_in_days
+    #   <p>The number of days after creation within a backup vault that an object can transition to the low cost warm storage tier.
+    #            Must be a positive integer between 60 and 36500 days.</p>
+    #   @return [Integer]
+    # @!attribute resource_type
+    #   <p>The type of Amazon Web Services resource; for example, <code>S3</code> for Amazon S3.
+    #            For tiering configurations, this is currently limited to <code>S3</code>.</p>
+    #   @return [String]
+    class ResourceSelection < Struct.new(
+      nil,
+      :resources,
+      :tiering_down_settings_in_days,
+      :resource_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about a restore access backup vault.</p>
     # @!attribute restore_access_backup_vault_arn
     #   <p>The ARN of the restore access backup vault.</p>
@@ -6801,10 +7948,10 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the restore testing plan that 
+    # <p>Contains information about the restore testing plan that
     #          Backup used to initiate the restore job.</p>
     # @!attribute restore_testing_plan_arn
-    #   <p>An Amazon Resource Name (ARN) that uniquely identifies 
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies
     #            a restore testing plan.</p>
     #   @return [String]
     class RestoreJobCreator < Struct.new(
@@ -6815,10 +7962,10 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This is a summary of restore jobs created 
-    #          or running within the most recent 30 days.</p>
-    #          <p>The returned summary may contain the following:  
-    #          Region, Account, State, ResourceType, MessageCategory, 
+    # <p>This is a summary of restore jobs created
+    #          or running within the most recent 14 days.</p>
+    #          <p>The returned summary may contain the following:
+    #          Region, Account, State, ResourceType, MessageCategory,
     #          StartTime, EndTime, and Count of included jobs.</p>
     # @!attribute region
     #   <p>The Amazon Web Services Regions within the job summary.</p>
@@ -6827,12 +7974,12 @@ module Aws::Backup
     #   <p>The account ID that owns the jobs within the summary.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>This value is job count for jobs 
+    #   <p>This value is job count for jobs
     #            with the specified state.</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>This value is the job count for the specified resource type. 
-    #            The request <code>GetSupportedResourceTypes</code> returns 
+    #   <p>This value is the job count for the specified resource type.
+    #            The request <code>GetSupportedResourceTypes</code> returns
     #            strings for supported resource types.</p>
     #   @return [String]
     # @!attribute count
@@ -6879,6 +8026,12 @@ module Aws::Backup
     # @!attribute recovery_point_arn
     #   <p>An ARN that uniquely identifies a recovery point; for example,
     #               <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
+    #   @return [String]
+    # @!attribute source_resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the original resource that was backed up. This provides context about what resource is being restored.</p>
+    #   @return [String]
+    # @!attribute backup_vault_arn
+    #   <p>The Amazon Resource Name (ARN) of the backup vault containing the recovery point being restored. This helps identify vault access policies and permissions.</p>
     #   @return [String]
     # @!attribute creation_date
     #   <p>The date and time a restore job is created, in Unix format and Coordinated Universal
@@ -6927,21 +8080,27 @@ module Aws::Backup
     # @!attribute recovery_point_creation_date
     #   <p>The date on which a recovery point was created.</p>
     #   @return [Time]
+    # @!attribute is_parent
+    #   <p>This is a boolean value indicating whether the restore job is a parent (composite) restore job.</p>
+    #   @return [Boolean]
+    # @!attribute parent_job_id
+    #   <p>This is the unique identifier of the parent restore job for the selected restore job.</p>
+    #   @return [String]
     # @!attribute created_by
-    #   <p>Contains identifying information about the creation 
+    #   <p>Contains identifying information about the creation
     #            of a restore job.</p>
     #   @return [Types::RestoreJobCreator]
     # @!attribute validation_status
-    #   <p>The status of validation run on the indicated 
+    #   <p>The status of validation run on the indicated
     #            restore job.</p>
     #   @return [String]
     # @!attribute validation_status_message
-    #   <p>This describes the status of validation run on the 
+    #   <p>This describes the status of validation run on the
     #            indicated restore job.</p>
     #   @return [String]
     # @!attribute deletion_status
-    #   <p>This notes the status of the data generated by the restore 
-    #            test. The status may be <code>Deleting</code>, <code>Failed</code>, 
+    #   <p>This notes the status of the data generated by the restore
+    #            test. The status may be <code>Deleting</code>, <code>Failed</code>,
     #            or <code>Successful</code>.</p>
     #   @return [String]
     # @!attribute deletion_status_message
@@ -6952,6 +8111,8 @@ module Aws::Backup
       :account_id,
       :restore_job_id,
       :recovery_point_arn,
+      :source_resource_arn,
+      :backup_vault_arn,
       :creation_date,
       :completion_date,
       :status,
@@ -6963,6 +8124,8 @@ module Aws::Backup
       :created_resource_arn,
       :resource_type,
       :recovery_point_creation_date,
+      :is_parent,
+      :parent_job_id,
       :created_by,
       :validation_status,
       :validation_status_message,
@@ -6971,6 +8134,11 @@ module Aws::Backup
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:is_parent] = false unless options.key?(:is_parent)
+        super
+      end
     end
 
     # <p>This contains metadata about a restore testing plan.</p>
@@ -7006,26 +8174,26 @@ module Aws::Backup
     #            not included, it defaults to empty list.</p>
     #   @return [Types::RestoreTestingRecoveryPointSelection]
     # @!attribute restore_testing_plan_name
-    #   <p>The RestoreTestingPlanName is a unique string that is the name 
-    #            of the restore testing plan. This cannot be changed after creation, 
+    #   <p>The RestoreTestingPlanName is a unique string that is the name
+    #            of the restore testing plan. This cannot be changed after creation,
     #            and it must consist of only alphanumeric characters and underscores.</p>
     #   @return [String]
     # @!attribute schedule_expression
-    #   <p>A CRON expression in specified timezone when a restore 
-    #            testing plan is executed. When no CRON expression is provided, Backup will use the default 
+    #   <p>A CRON expression in specified timezone when a restore
+    #            testing plan is executed. When no CRON expression is provided, Backup will use the default
     #            expression <code>cron(0 5 ? * * *)</code>.</p>
     #   @return [String]
     # @!attribute schedule_expression_timezone
-    #   <p>Optional. This is the timezone in which the schedule 
-    #            expression is set. By default, ScheduleExpressions are in UTC. 
+    #   <p>Optional. This is the timezone in which the schedule
+    #            expression is set. By default, ScheduleExpressions are in UTC.
     #            You can modify this to a specified timezone.</p>
     #   @return [String]
     # @!attribute start_window_hours
     #   <p>Defaults to 24 hours.</p>
-    #            <p>A value in hours after a 
-    #            restore test is scheduled before a job will be canceled if it 
-    #            doesn't start successfully. This value is optional. If this value 
-    #            is included, this parameter has a maximum value of 168 hours 
+    #            <p>A value in hours after a
+    #            restore test is scheduled before a job will be canceled if it
+    #            doesn't start successfully. This value is optional. If this value
+    #            is included, this parameter has a maximum value of 168 hours
     #            (one week).</p>
     #   @return [Integer]
     class RestoreTestingPlanForCreate < Struct.new(
@@ -7047,63 +8215,63 @@ module Aws::Backup
 
     # <p>This contains metadata about a restore testing plan.</p>
     # @!attribute creation_time
-    #   <p>The date and time that a restore testing plan was created, 
-    #            in Unix format and Coordinated Universal Time (UTC). The value of 
-    #            <code>CreationTime</code> is accurate to milliseconds. For example, 
-    #            the value 1516925490.087 represents Friday, January 26, 2018 
+    #   <p>The date and time that a restore testing plan was created,
+    #            in Unix format and Coordinated Universal Time (UTC). The value of
+    #            <code>CreationTime</code> is accurate to milliseconds. For example,
+    #            the value 1516925490.087 represents Friday, January 26, 2018
     #            12:11:30.087  AM.</p>
     #   @return [Time]
     # @!attribute creator_request_id
-    #   <p>This identifies the request and allows failed requests to 
-    #            be retried without the risk of running the operation twice. 
-    #            If the request includes a <code>CreatorRequestId</code> that 
-    #            matches an existing backup plan, that plan is returned. This 
+    #   <p>This identifies the request and allows failed requests to
+    #            be retried without the risk of running the operation twice.
+    #            If the request includes a <code>CreatorRequestId</code> that
+    #            matches an existing backup plan, that plan is returned. This
     #            parameter is optional.</p>
-    #            <p>If used, this parameter must 
+    #            <p>If used, this parameter must
     #               contain 1 to 50 alphanumeric or '-_.' characters.</p>
     #   @return [String]
     # @!attribute last_execution_time
-    #   <p>The last time a restore test was run with the specified 
-    #            restore testing plan. A date and time, in Unix format and 
-    #            Coordinated Universal Time (UTC). The value of 
-    #            <code>LastExecutionDate</code> is accurate to milliseconds. 
-    #            For example, the value  1516925490.087 represents Friday, 
+    #   <p>The last time a restore test was run with the specified
+    #            restore testing plan. A date and time, in Unix format and
+    #            Coordinated Universal Time (UTC). The value of
+    #            <code>LastExecutionDate</code> is accurate to milliseconds.
+    #            For example, the value  1516925490.087 represents Friday,
     #            January 26, 2018 12:11:30.087 AM.</p>
     #   @return [Time]
     # @!attribute last_update_time
-    #   <p>The date and time that the restore testing plan was updated. 
-    #            This update is in Unix format and Coordinated Universal Time (UTC). 
-    #            The value of <code>LastUpdateTime</code> is accurate to milliseconds. 
-    #            For example, the value  1516925490.087 represents Friday, 
+    #   <p>The date and time that the restore testing plan was updated.
+    #            This update is in Unix format and Coordinated Universal Time (UTC).
+    #            The value of <code>LastUpdateTime</code> is accurate to milliseconds.
+    #            For example, the value  1516925490.087 represents Friday,
     #            January 26, 2018 12:11:30.087 AM.</p>
     #   @return [Time]
     # @!attribute recovery_point_selection
-    #   <p>The specified criteria to assign a set of resources, such as 
+    #   <p>The specified criteria to assign a set of resources, such as
     #            recovery point types or backup vaults.</p>
     #   @return [Types::RestoreTestingRecoveryPointSelection]
     # @!attribute restore_testing_plan_arn
-    #   <p>An Amazon Resource Name (ARN) that uniquely identifies 
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies
     #            a restore testing plan.</p>
     #   @return [String]
     # @!attribute restore_testing_plan_name
     #   <p>The restore testing plan name.</p>
     #   @return [String]
     # @!attribute schedule_expression
-    #   <p>A CRON expression in specified timezone when a restore 
-    #            testing plan is executed. When no CRON expression is provided, Backup will use the default 
+    #   <p>A CRON expression in specified timezone when a restore
+    #            testing plan is executed. When no CRON expression is provided, Backup will use the default
     #            expression <code>cron(0 5 ? * * *)</code>.</p>
     #   @return [String]
     # @!attribute schedule_expression_timezone
-    #   <p>Optional. This is the timezone in which the schedule 
-    #            expression is set. By default, ScheduleExpressions are in UTC. 
+    #   <p>Optional. This is the timezone in which the schedule
+    #            expression is set. By default, ScheduleExpressions are in UTC.
     #            You can modify this to a specified timezone.</p>
     #   @return [String]
     # @!attribute start_window_hours
     #   <p>Defaults to 24 hours.</p>
-    #            <p>A value in hours after a 
-    #            restore test is scheduled before a job will be canceled if it 
-    #            doesn't start successfully. This value is optional. If this value 
-    #            is included, this parameter has a maximum value of 168 hours 
+    #            <p>A value in hours after a
+    #            restore test is scheduled before a job will be canceled if it
+    #            doesn't start successfully. This value is optional. If this value
+    #            is included, this parameter has a maximum value of 168 hours
     #            (one week).</p>
     #   @return [Integer]
     class RestoreTestingPlanForGet < Struct.new(
@@ -7130,29 +8298,29 @@ module Aws::Backup
 
     # <p>This contains metadata about a restore testing plan.</p>
     # @!attribute creation_time
-    #   <p>The date and time that a restore testing plan was created, 
-    #            in Unix format and Coordinated Universal Time (UTC). The value 
-    #            of <code>CreationTime</code> is accurate to milliseconds. For 
-    #            example, the value 1516925490.087 represents Friday, January 26, 
+    #   <p>The date and time that a restore testing plan was created,
+    #            in Unix format and Coordinated Universal Time (UTC). The value
+    #            of <code>CreationTime</code> is accurate to milliseconds. For
+    #            example, the value 1516925490.087 represents Friday, January 26,
     #            2018 12:11:30.087 AM.</p>
     #   @return [Time]
     # @!attribute last_execution_time
-    #   <p>The last time a restore test was run with the specified 
-    #            restore testing plan. A date and time, in Unix format and 
-    #            Coordinated Universal Time (UTC). The value of 
-    #            <code>LastExecutionDate</code> is accurate to milliseconds. 
-    #            For example, the value 1516925490.087 represents Friday, 
+    #   <p>The last time a restore test was run with the specified
+    #            restore testing plan. A date and time, in Unix format and
+    #            Coordinated Universal Time (UTC). The value of
+    #            <code>LastExecutionDate</code> is accurate to milliseconds.
+    #            For example, the value 1516925490.087 represents Friday,
     #            January 26, 2018 12:11:30.087 AM.</p>
     #   @return [Time]
     # @!attribute last_update_time
-    #   <p>The date and time that the restore testing plan was updated. 
-    #            This update is in Unix format and Coordinated Universal Time (UTC). 
-    #            The value of <code>LastUpdateTime</code> is accurate to 
-    #            milliseconds. For example, the value 1516925490.087 represents 
+    #   <p>The date and time that the restore testing plan was updated.
+    #            This update is in Unix format and Coordinated Universal Time (UTC).
+    #            The value of <code>LastUpdateTime</code> is accurate to
+    #            milliseconds. For example, the value 1516925490.087 represents
     #            Friday, January 26, 2018 12:11:30.087 AM.</p>
     #   @return [Time]
     # @!attribute restore_testing_plan_arn
-    #   <p>An Amazon Resource Name (ARN) that uniquely identifiesa 
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifiesa
     #            restore testing plan.</p>
     #   @return [String]
     # @!attribute restore_testing_plan_name
@@ -7164,15 +8332,15 @@ module Aws::Backup
     #               <code>cron(0 5 ? * * *)</code>.</p>
     #   @return [String]
     # @!attribute schedule_expression_timezone
-    #   <p>Optional. This is the timezone in which the schedule 
-    #            expression is set. By default, ScheduleExpressions are in UTC. 
+    #   <p>Optional. This is the timezone in which the schedule
+    #            expression is set. By default, ScheduleExpressions are in UTC.
     #            You can modify this to a specified timezone.</p>
     #   @return [String]
     # @!attribute start_window_hours
     #   <p>Defaults to 24 hours.</p>
-    #            <p>A value in hours after a restore test is scheduled before 
-    #               a job will be canceled if it doesn't start successfully. This 
-    #               value is optional. If this value is included, this parameter 
+    #            <p>A value in hours after a restore test is scheduled before
+    #               a job will be canceled if it doesn't start successfully. This
+    #               value is optional. If this value is included, this parameter
     #               has a maximum value of 168 hours (one week).</p>
     #   @return [Integer]
     class RestoreTestingPlanForList < Struct.new(
@@ -7197,10 +8365,10 @@ module Aws::Backup
 
     # <p>This contains metadata about a restore testing plan.</p>
     # @!attribute recovery_point_selection
-    #   <p>Required: <code>Algorithm</code>; <code>RecoveryPointTypes</code>; 
+    #   <p>Required: <code>Algorithm</code>; <code>RecoveryPointTypes</code>;
     #            <code>IncludeVaults</code> (<i>one or more</i>).</p>
-    #            <p>Optional: <i>SelectionWindowDays</i> (<i>'30' if 
-    #            not specified</i>); <code>ExcludeVaults</code> (defaults to empty 
+    #            <p>Optional: <i>SelectionWindowDays</i> (<i>'30' if
+    #            not specified</i>); <code>ExcludeVaults</code> (defaults to empty
     #            list if not listed).</p>
     #   @return [Types::RestoreTestingRecoveryPointSelection]
     # @!attribute schedule_expression
@@ -7209,15 +8377,15 @@ module Aws::Backup
     #               <code>cron(0 5 ? * * *)</code>.</p>
     #   @return [String]
     # @!attribute schedule_expression_timezone
-    #   <p>Optional. This is the timezone in which the schedule 
-    #            expression is set. By default, ScheduleExpressions are in UTC. 
+    #   <p>Optional. This is the timezone in which the schedule
+    #            expression is set. By default, ScheduleExpressions are in UTC.
     #            You can modify this to a specified timezone.</p>
     #   @return [String]
     # @!attribute start_window_hours
     #   <p>Defaults to 24 hours.</p>
-    #            <p>A value in hours after a restore test is scheduled before a 
-    #            job will be canceled if it doesn't start successfully. This value 
-    #            is optional. If this value is included, this parameter has a 
+    #            <p>A value in hours after a restore test is scheduled before a
+    #            job will be canceled if it doesn't start successfully. This value
+    #            is optional. If this value is included, this parameter has a
     #            maximum value of 168 hours (one week).</p>
     #   @return [Integer]
     class RestoreTestingPlanForUpdate < Struct.new(
@@ -7266,17 +8434,17 @@ module Aws::Backup
     #          eligibility. Or, you can include a list of selectors. If this parameter and its value are
     #          not included, it defaults to empty list.</p>
     # @!attribute algorithm
-    #   <p>Acceptable values include "LATEST_WITHIN_WINDOW" or 
+    #   <p>Acceptable values include "LATEST_WITHIN_WINDOW" or
     #            "RANDOM_WITHIN_WINDOW"</p>
     #   @return [String]
     # @!attribute exclude_vaults
-    #   <p>Accepted values include specific ARNs or list of selectors. 
+    #   <p>Accepted values include specific ARNs or list of selectors.
     #            Defaults to empty list if not listed.</p>
     #   @return [Array<String>]
     # @!attribute include_vaults
-    #   <p>Accepted values include wildcard ["*"] or by specific ARNs or 
-    #            ARN wilcard replacement 
-    #            ["arn:aws:backup:us-west-2:123456789012:backup-vault:asdf", ...] 
+    #   <p>Accepted values include wildcard ["*"] or by specific ARNs or
+    #            ARN wilcard replacement
+    #            ["arn:aws:backup:us-west-2:123456789012:backup-vault:asdf", ...]
     #            ["arn:aws:backup:*:*:backup-vault:asdf-*", ...]</p>
     #   @return [Array<String>]
     # @!attribute recovery_point_types
@@ -7288,7 +8456,9 @@ module Aws::Backup
     #            for <code>Algorithm</code>.</p>
     #   @return [Array<String>]
     # @!attribute selection_window_days
-    #   <p>Accepted values are integers from 1 to 365.</p>
+    #   <p>Accepted values are integers from 1 to 365. If not included, the value defaults to 30.
+    #            The selection window is calculated from the actual job execution time, not the plan's
+    #            scheduled start time.</p>
     #   @return [Integer]
     class RestoreTestingRecoveryPointSelection < Struct.new(
       nil,
@@ -7308,7 +8478,7 @@ module Aws::Backup
     end
 
     # <p>This contains metadata about a specific restore testing selection.</p>
-    #          <p>ProtectedResourceType is required, such as Amazon EBS or 
+    #          <p>ProtectedResourceType is required, such as Amazon EBS or
     #          Amazon EC2.</p>
     #          <p>This consists of <code>RestoreTestingSelectionName</code>,
     #          <code>ProtectedResourceType</code>, and one of the following:</p>
@@ -7330,29 +8500,29 @@ module Aws::Backup
     #          Alternatively, you can include up to 30 specific protected resource ARNs in
     #          <code>ProtectedResourceArns</code>.</p>
     #          <p>
-    #             <code>ProtectedResourceConditions</code> examples include as <code>StringEquals</code> 
+    #             <code>ProtectedResourceConditions</code> examples include as <code>StringEquals</code>
     #          and <code>StringNotEquals</code>.</p>
     # @!attribute iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role that 
-    #            Backup uses to create the target resource; 
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that
+    #            Backup uses to create the target resource;
     #            for example: <code>arn:aws:iam::123456789012:role/S3Access</code>.
     #         </p>
     #   @return [String]
     # @!attribute protected_resource_arns
-    #   <p>Each protected resource can be filtered by its specific ARNs, such as 
-    #            <code>ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]</code> 
-    #            or by a wildcard: <code>ProtectedResourceArns: ["*"]</code>, 
+    #   <p>Each protected resource can be filtered by its specific ARNs, such as
+    #            <code>ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]</code>
+    #            or by a wildcard: <code>ProtectedResourceArns: ["*"]</code>,
     #            but not both.</p>
     #   @return [Array<String>]
     # @!attribute protected_resource_conditions
-    #   <p>If you have included the wildcard in ProtectedResourceArns, 
-    #            you can include resource conditions, such as 
-    #            <code>ProtectedResourceConditions: {    StringEquals: [{ key: "XXXX", 
+    #   <p>If you have included the wildcard in ProtectedResourceArns,
+    #            you can include resource conditions, such as
+    #            <code>ProtectedResourceConditions: {    StringEquals: [{ key: "XXXX",
     #               value: "YYYY" }]</code>.</p>
     #   @return [Types::ProtectedResourceConditions]
     # @!attribute protected_resource_type
-    #   <p>The type of Amazon Web Services resource included in a restore 
-    #            testing selection; for example, an Amazon EBS volume or 
+    #   <p>The type of Amazon Web Services resource included in a restore
+    #            testing selection; for example, an Amazon EBS volume or
     #            an Amazon RDS database.</p>
     #            <p>Supported resource types accepted include:</p>
     #            <ul>
@@ -7406,8 +8576,10 @@ module Aws::Backup
     #               inferred metadata</a>.</p>
     #   @return [Hash<String, String>]
     # @!attribute restore_testing_selection_name
-    #   <p>The unique name of the restore testing selection 
+    #   <p>The unique name of the restore testing selection
     #            that belongs to the related restore testing plan.</p>
+    #            <p>The name consists of only alphanumeric characters and underscores.
+    #            Maximum length is 50.</p>
     #   @return [String]
     # @!attribute validation_window_hours
     #   <p>This is amount of hours (0 to 168) available to run a validation script on the data. The
@@ -7435,41 +8607,41 @@ module Aws::Backup
 
     # <p>This contains metadata about a restore testing selection.</p>
     # @!attribute creation_time
-    #   <p>The date and time that a restore testing selection was created, 
-    #            in Unix format and Coordinated Universal Time (UTC). The value of 
-    #            <code>CreationTime</code> is accurate to milliseconds. For example, 
-    #            the value 1516925490.087 represents Friday, January 26, 
+    #   <p>The date and time that a restore testing selection was created,
+    #            in Unix format and Coordinated Universal Time (UTC). The value of
+    #            <code>CreationTime</code> is accurate to milliseconds. For example,
+    #            the value 1516925490.087 represents Friday, January 26,
     #            201812:11:30.087  AM.</p>
     #   @return [Time]
     # @!attribute creator_request_id
-    #   <p>This identifies the request and allows failed requests to 
-    #            be retried without the risk of running the operation twice. 
-    #            If the request includes a <code>CreatorRequestId</code> that 
-    #            matches an existing backup plan, that plan is returned. This 
+    #   <p>This identifies the request and allows failed requests to
+    #            be retried without the risk of running the operation twice.
+    #            If the request includes a <code>CreatorRequestId</code> that
+    #            matches an existing backup plan, that plan is returned. This
     #            parameter is optional.</p>
-    #            <p>If used, this parameter must contain 1 to 50 alphanumeric 
+    #            <p>If used, this parameter must contain 1 to 50 alphanumeric
     #            or '-_.' characters.</p>
     #   @return [String]
     # @!attribute iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role that 
-    #            Backup uses to create the target resource; for 
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that
+    #            Backup uses to create the target resource; for
     #            example:<code>arn:aws:iam::123456789012:role/S3Access</code>.</p>
     #   @return [String]
     # @!attribute protected_resource_arns
-    #   <p>You can include specific ARNs, such as 
-    #            <code>ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]</code> 
-    #            or you can include a wildcard: <code>ProtectedResourceArns: ["*"]</code>, 
+    #   <p>You can include specific ARNs, such as
+    #            <code>ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]</code>
+    #            or you can include a wildcard: <code>ProtectedResourceArns: ["*"]</code>,
     #            but not both.</p>
     #   @return [Array<String>]
     # @!attribute protected_resource_conditions
-    #   <p>In a resource testing selection, this parameter filters by 
-    #            specific conditions such as <code>StringEquals</code> or 
+    #   <p>In a resource testing selection, this parameter filters by
+    #            specific conditions such as <code>StringEquals</code> or
     #            <code>StringNotEquals</code>.</p>
     #   @return [Types::ProtectedResourceConditions]
     # @!attribute protected_resource_type
-    #   <p>The type of Amazon Web Services resource included in a resource 
-    #            testing selection; 
-    #            for example, an Amazon EBS volume 
+    #   <p>The type of Amazon Web Services resource included in a resource
+    #            testing selection;
+    #            for example, an Amazon EBS volume
     #            or an Amazon RDS database.</p>
     #   @return [String]
     # @!attribute restore_metadata_overrides
@@ -7480,12 +8652,14 @@ module Aws::Backup
     #            inferred metadata</a>.</p>
     #   @return [Hash<String, String>]
     # @!attribute restore_testing_plan_name
-    #   <p>The RestoreTestingPlanName is a unique string that is the name 
+    #   <p>The RestoreTestingPlanName is a unique string that is the name
     #            of the restore testing plan.</p>
     #   @return [String]
     # @!attribute restore_testing_selection_name
-    #   <p>The unique name of the restore testing selection that 
+    #   <p>The unique name of the restore testing selection that
     #            belongs to the related restore testing plan.</p>
+    #            <p>The name consists of only alphanumeric characters and underscores.
+    #            Maximum length is 50.</p>
     #   @return [String]
     # @!attribute validation_window_hours
     #   <p>This is amount of hours (1 to 168) available to run a validation script on the data. The
@@ -7516,36 +8690,38 @@ module Aws::Backup
 
     # <p>This contains metadata about a restore testing selection.</p>
     # @!attribute creation_time
-    #   <p>The date and time that a restore testing selection 
-    #            was created, in Unix format and Coordinated Universal Time (UTC). 
-    #            The value of <code>CreationTime</code> is accurate to milliseconds. 
-    #            For example, the value 1516925490.087 represents Friday, 
+    #   <p>The date and time that a restore testing selection
+    #            was created, in Unix format and Coordinated Universal Time (UTC).
+    #            The value of <code>CreationTime</code> is accurate to milliseconds.
+    #            For example, the value 1516925490.087 represents Friday,
     #            January 26,2018 12:11:30.087 AM.</p>
     #   @return [Time]
     # @!attribute iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role that 
-    #            Backup uses to create the target resource; for example: 
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that
+    #            Backup uses to create the target resource; for example:
     #            <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>
     #   @return [String]
     # @!attribute protected_resource_type
-    #   <p>The type of Amazon Web Services resource included in a restore 
-    #            testing selection; for example, an 
+    #   <p>The type of Amazon Web Services resource included in a restore
+    #            testing selection; for example, an
     #            Amazon EBS volume or an
     #            Amazon RDS database.</p>
     #   @return [String]
     # @!attribute restore_testing_plan_name
     #   <p>Unique string that is the name of the restore testing plan.</p>
-    #            <p>The name cannot be changed after creation. The name must 
-    #            consist of only alphanumeric characters and underscores. 
+    #            <p>The name cannot be changed after creation. The name must
+    #            consist of only alphanumeric characters and underscores.
     #            Maximum length is 50.</p>
     #   @return [String]
     # @!attribute restore_testing_selection_name
     #   <p>Unique name of a restore testing selection.</p>
+    #            <p>The name consists of only alphanumeric characters and underscores.
+    #            Maximum length is 50.</p>
     #   @return [String]
     # @!attribute validation_window_hours
-    #   <p>This value represents the time, in hours, data is retained after 
+    #   <p>This value represents the time, in hours, data is retained after
     #            a restore test so that optional validation can be completed.</p>
-    #            <p>Accepted value is an integer between 
+    #            <p>Accepted value is an integer between
     #            0 and 168 (the hourly equivalent of seven days).</p>
     #   @return [Integer]
     class RestoreTestingSelectionForList < Struct.new(
@@ -7568,18 +8744,18 @@ module Aws::Backup
 
     # <p>This contains metadata about a restore testing selection.</p>
     # @!attribute iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role that 
-    #            Backup uses to create the target resource; for example: 
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that
+    #            Backup uses to create the target resource; for example:
     #            <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>
     #   @return [String]
     # @!attribute protected_resource_arns
-    #   <p>You can include a list of specific ARNs, such as 
-    #            <code>ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]</code> 
-    #            or you can include a wildcard: <code>ProtectedResourceArns: ["*"]</code>, 
+    #   <p>You can include a list of specific ARNs, such as
+    #            <code>ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]</code>
+    #            or you can include a wildcard: <code>ProtectedResourceArns: ["*"]</code>,
     #            but not both.</p>
     #   @return [Array<String>]
     # @!attribute protected_resource_conditions
-    #   <p>The conditions that you define for resources in 
+    #   <p>The conditions that you define for resources in
     #            your restore testing plan using tags.</p>
     #   @return [Types::ProtectedResourceConditions]
     # @!attribute restore_metadata_overrides
@@ -7590,9 +8766,9 @@ module Aws::Backup
     #            inferred metadata</a>.</p>
     #   @return [Hash<String, String>]
     # @!attribute validation_window_hours
-    #   <p>This value represents the time, in hours, data is retained after 
+    #   <p>This value represents the time, in hours, data is retained after
     #            a restore test so that optional validation can be completed.</p>
-    #            <p>Accepted value is an integer between 
+    #            <p>Accepted value is an integer between
     #            0 and 168 (the hourly equivalent of seven days).</p>
     #   @return [Integer]
     class RestoreTestingSelectionForUpdate < Struct.new(
@@ -7631,6 +8807,302 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines a scanning action that specifies the malware scanner and scan mode to use.</p>
+    # @!attribute malware_scanner
+    #   <p>The malware scanner to use for the scan action. Currently only <code>GUARDDUTY</code> is supported.</p>
+    #   @return [String]
+    # @!attribute scan_mode
+    #   <p>The scanning mode to use for the scan action.</p>
+    #            <p>Valid values: <code>FULL_SCAN</code> | <code>INCREMENTAL_SCAN</code>.</p>
+    #   @return [String]
+    class ScanAction < Struct.new(
+      nil,
+      :malware_scanner,
+      :scan_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata about a scan job, including information about the scanning process, results, and associated resources.</p>
+    # @!attribute account_id
+    #   <p>The account ID that owns the scan job.</p>
+    #   @return [String]
+    # @!attribute backup_vault_arn
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example,
+    #            <code>arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault</code>.</p>
+    #   @return [String]
+    # @!attribute backup_vault_name
+    #   <p>The name of a logical container where backups are stored. Backup vaults are identified
+    #            by names that are unique to the account used to create them and the Amazon Web Services
+    #            Region where they are created.</p>
+    #   @return [String]
+    # @!attribute completion_date
+    #   <p>The date and time that a scan job is completed, in Unix format and Coordinated
+    #            Universal Time (UTC). The value of <code>CompletionDate</code> is accurate to milliseconds.
+    #            For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087
+    #            AM.</p>
+    #   @return [Time]
+    # @!attribute continuous_scan_end_time
+    #   <p>The point in time the scan job scanned up to for a continuous backup.</p>
+    #   @return [Time]
+    # @!attribute continuous_scan_start_time
+    #   <p>The point in time the scan job started scan from for a continuous backup.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>Contains identifying information about the creation of a scan job.</p>
+    #   @return [Types::ScanJobCreator]
+    # @!attribute creation_date
+    #   <p>The date and time that a scan job is created, in Unix format and Coordinated
+    #            Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds.
+    #            For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087
+    #            AM.</p>
+    #   @return [Time]
+    # @!attribute iam_role_arn
+    #   <p>Specifies the IAM role ARN used to create the scan job; for example,
+    #            <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>
+    #   @return [String]
+    # @!attribute malware_scanner
+    #   <p>The scanning engine used for the scan job. Currently only <code>GUARDDUTY</code> is supported.</p>
+    #   @return [String]
+    # @!attribute recovery_point_arn
+    #   <p>An ARN that uniquely identifies the recovery point being scanned; for example,
+    #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
+    #   @return [String]
+    # @!attribute resource_arn
+    #   <p>An ARN that uniquely identifies the source resource of the recovery point being scanned.</p>
+    #   @return [String]
+    # @!attribute resource_name
+    #   <p>The non-unique name of the resource that belongs to the specified backup.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of Amazon Web Services resource being scanned; for example, an Amazon Elastic Block Store
+    #            (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>
+    #   @return [String]
+    # @!attribute scan_base_recovery_point_arn
+    #   <p>An ARN that uniquely identifies the base recovery point for scanning. This field is populated
+    #            when an incremental scan job has taken place.</p>
+    #   @return [String]
+    # @!attribute scan_id
+    #   <p>The scan ID generated by the malware scanner for the corresponding scan job.</p>
+    #   @return [String]
+    # @!attribute scan_job_id
+    #   <p>The unique identifier that identifies the scan job request to Backup.</p>
+    #   @return [String]
+    # @!attribute scan_mode
+    #   <p>Specifies the scan type use for the scan job.</p>
+    #            <p>Includes:</p>
+    #            <p>
+    #               <code>FULL_SCAN</code> will scan the entire data lineage within the backup.</p>
+    #            <p>
+    #               <code>INCREMENTAL_SCAN</code> will scan the data difference between the target recovery point and base recovery point ARN.</p>
+    #   @return [String]
+    # @!attribute scan_result
+    #   <p>Contains the scan results information, including the status of threats found during scanning.</p>
+    #   @return [Types::ScanResultInfo]
+    # @!attribute scanner_role_arn
+    #   <p>Specifies the scanner IAM role ARN used for the scan job.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the scan job.</p>
+    #            <p>Valid values: <code>CREATED</code> | <code>RUNNING</code> | <code>COMPLETED</code> |
+    #            <code>COMPLETED_WITH_ISSUES</code> | <code>FAILED</code> | <code>CANCELED</code>.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>A detailed message explaining the status of the scan job.</p>
+    #   @return [String]
+    class ScanJob < Struct.new(
+      nil,
+      :account_id,
+      :backup_vault_arn,
+      :backup_vault_name,
+      :completion_date,
+      :continuous_scan_end_time,
+      :continuous_scan_start_time,
+      :created_by,
+      :creation_date,
+      :iam_role_arn,
+      :malware_scanner,
+      :recovery_point_arn,
+      :resource_arn,
+      :resource_name,
+      :resource_type,
+      :scan_base_recovery_point_arn,
+      :scan_id,
+      :scan_job_id,
+      :scan_mode,
+      :scan_result,
+      :scanner_role_arn,
+      :state,
+      :status_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains identifying information about the creation of a scan job, including the backup plan and rule that initiated the scan.</p>
+    # @!attribute backup_plan_arn
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for example,
+    #            <code>arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50</code>.</p>
+    #   @return [String]
+    # @!attribute backup_plan_id
+    #   <p>The ID of the backup plan.</p>
+    #   @return [String]
+    # @!attribute backup_plan_version
+    #   <p>Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes
+    #            long. Version IDs cannot be edited.</p>
+    #   @return [String]
+    # @!attribute backup_rule_id
+    #   <p>Uniquely identifies the backup rule that initiated the scan job.</p>
+    #   @return [String]
+    class ScanJobCreator < Struct.new(
+      nil,
+      :backup_plan_arn,
+      :backup_plan_id,
+      :backup_plan_version,
+      :backup_rule_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about scan jobs, including counts and metadata for a specific time period and criteria.</p>
+    # @!attribute region
+    #   <p>The Amazon Web Services Region where the scan jobs were executed.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The account ID that owns the scan jobs included in this summary.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the scan jobs included in this summary.</p>
+    #            <p>Valid values: <code>CREATED</code> | <code>RUNNING</code> | <code>COMPLETED</code> |
+    #            <code>COMPLETED_WITH_ISSUES</code> | <code>FAILED</code> | <code>CANCELED</code>.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of Amazon Web Services resource for the scan jobs included in this summary.</p>
+    #   @return [String]
+    # @!attribute count
+    #   <p>The number of scan jobs that match the specified criteria.</p>
+    #   @return [Integer]
+    # @!attribute start_time
+    #   <p>The value of time in number format of a job start time.</p>
+    #            <p>This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to
+    #            milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018
+    #            12:11:30.087 AM.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The value of time in number format of a job end time.</p>
+    #            <p>This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to
+    #            milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018
+    #            12:11:30.087 AM.</p>
+    #   @return [Time]
+    # @!attribute malware_scanner
+    #   <p>Specifies the malware scanner used during the scan job. Currently only supports <code>GUARDDUTY</code>.</p>
+    #   @return [String]
+    # @!attribute scan_result_status
+    #   <p>The scan result status for the scan jobs included in this summary.</p>
+    #            <p>Valid values: <code>THREATS_FOUND</code> | <code>NO_THREATS_FOUND</code>.</p>
+    #   @return [String]
+    class ScanJobSummary < Struct.new(
+      nil,
+      :region,
+      :account_id,
+      :state,
+      :resource_type,
+      :count,
+      :start_time,
+      :end_time,
+      :malware_scanner,
+      :scan_result_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:count] = 0 unless options.key?(:count)
+        super
+      end
+    end
+
+    # <p>Contains the results of a security scan, including scanner information, scan state, and any findings discovered.</p>
+    # @!attribute malware_scanner
+    #   <p>The malware scanner used to perform the scan. Currently only <code>GUARDDUTY</code> is supported.</p>
+    #   @return [String]
+    # @!attribute scan_job_state
+    #   <p>The final state of the scan job.</p>
+    #            <p>Valid values: <code>COMPLETED</code> | <code>FAILED</code> | <code>CANCELED</code>.</p>
+    #   @return [String]
+    # @!attribute last_scan_timestamp
+    #   <p>The timestamp of when the last scan was performed, in Unix format and Coordinated Universal Time (UTC).</p>
+    #   @return [Time]
+    # @!attribute findings
+    #   <p>An array of findings discovered during the scan.</p>
+    #   @return [Array<String>]
+    class ScanResult < Struct.new(
+      nil,
+      :malware_scanner,
+      :scan_job_state,
+      :last_scan_timestamp,
+      :findings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the results of a scan job.</p>
+    # @!attribute scan_result_status
+    #   <p>The status of the scan results.</p>
+    #            <p>Valid values: <code>THREATS_FOUND</code> | <code>NO_THREATS_FOUND</code> | <code>UNKNOWN</code>.</p>
+    #   @return [String]
+    class ScanResultInfo < Struct.new(
+      nil,
+      :scan_result_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains configuration settings for malware scanning, including the scanner type, target resource types, and scanner role.</p>
+    # @!attribute malware_scanner
+    #   <p>The malware scanner to use for scanning. Currently only <code>GUARDDUTY</code> is supported.</p>
+    #   @return [String]
+    # @!attribute resource_types
+    #   <p>An array of resource types to be scanned for malware.</p>
+    #   @return [Array<String>]
+    # @!attribute scanner_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that the scanner uses to access resources; for example,
+    #            <code>arn:aws:iam::123456789012:role/ScannerRole</code>.</p>
+    #   @return [String]
+    class ScanSetting < Struct.new(
+      nil,
+      :malware_scanner,
+      :resource_types,
+      :scanner_role_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a scheduled backup plan execution, including the execution time, rule type, and associated rule identifier.</p>
+    # @!attribute execution_time
+    #   <p>The timestamp when the backup is scheduled to run, in Unix format and Coordinated Universal Time (UTC). The value is accurate to milliseconds.</p>
+    #   @return [Time]
+    # @!attribute rule_id
+    #   <p>The unique identifier of the backup rule that will execute at the scheduled time.</p>
+    #   @return [String]
+    # @!attribute rule_execution_type
+    #   <p>The type of backup rule execution. Valid values are <code>CONTINUOUS</code> (point-in-time recovery), <code>SNAPSHOTS</code> (snapshot backups), or <code>CONTINUOUS_AND_SNAPSHOTS</code> (both types combined).</p>
+    #   @return [String]
+    class ScheduledPlanExecutionMember < Struct.new(
+      nil,
+      :execution_time,
+      :rule_id,
+      :rule_execution_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request failed due to a temporary failure of the server.</p>
     # @!attribute code
     #   @return [String]
@@ -7658,6 +9130,13 @@ module Aws::Backup
     #            by names that are unique to the account used to create them and the Amazon Web Services
     #            Region where they are created.</p>
     #   @return [String]
+    # @!attribute logically_air_gapped_backup_vault_arn
+    #   <p>The ARN of a logically air-gapped vault. ARN must be in the same account and Region.
+    #            If provided, supported fully managed resources back up directly to logically air-gapped vault,
+    #            while other supported resources create a temporary (billable) snapshot in backup vault,
+    #            then copy it to logically air-gapped vault. Unsupported resources only back up to the specified
+    #            backup vault.</p>
+    #   @return [String]
     # @!attribute resource_arn
     #   <p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN
     #            depends on the resource type.</p>
@@ -7673,15 +9152,15 @@ module Aws::Backup
     #   @return [String]
     # @!attribute start_window_minutes
     #   <p>A value in minutes after a backup is scheduled before a job will be canceled if it
-    #            doesn't start successfully. This value is optional, and the default is 8 hours. 
+    #            doesn't start successfully. This value is optional, and the default is 8 hours.
     #            If this value is included, it must be at least 60 minutes to avoid errors.</p>
     #            <p>This parameter has a maximum value of 100 years (52,560,000 minutes).</p>
-    #            <p>During the start window, the backup job status remains in <code>CREATED</code> status until it 
-    #            has successfully begun or until the start window time has run out. If within the start 
-    #            window time Backup receives an error that allows the job to be retried, 
-    #            Backup will automatically retry to begin the job at least every 10 minutes 
-    #            until the backup 
-    #            successfully begins (the job status changes to <code>RUNNING</code>) or until the job status 
+    #            <p>During the start window, the backup job status remains in <code>CREATED</code> status until it
+    #            has successfully begun or until the start window time has run out. If within the start
+    #            window time Backup receives an error that allows the job to be retried,
+    #            Backup will automatically retry to begin the job at least every 10 minutes
+    #            until the backup
+    #            successfully begins (the job status changes to <code>RUNNING</code>) or until the job status
     #            changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>
     #   @return [Integer]
     # @!attribute complete_window_minutes
@@ -7689,7 +9168,7 @@ module Aws::Backup
     #               Backup will cancel the job. This value is optional. This value begins
     #            counting down from when the backup was scheduled. It does not add additional time for
     #               <code>StartWindowMinutes</code>, or if the backup started later than scheduled.</p>
-    #            <p>Like <code>StartWindowMinutes</code>, this parameter has a maximum value of 
+    #            <p>Like <code>StartWindowMinutes</code>, this parameter has a maximum value of
     #            100 years (52,560,000 minutes).</p>
     #   @return [Integer]
     # @!attribute lifecycle
@@ -7700,7 +9179,7 @@ module Aws::Backup
     #            days. Therefore, the “retention” setting must be 90 days greater than the “transition to
     #            cold after days” setting. The “transition to cold after days” setting cannot be changed
     #            after a backup has been transitioned to cold. </p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature 
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
     #            availability by resource</a> table. Backup ignores this expression for
     #            other resource types.</p>
     #            <p>This parameter has a maximum value of 100 years (36,500 days).</p>
@@ -7717,7 +9196,7 @@ module Aws::Backup
     #            <code>WindowsVSS</code> option is not enabled by default.</p>
     #   @return [Hash<String, String>]
     # @!attribute index
-    #   <p>Include this parameter to enable index creation if your backup 
+    #   <p>Include this parameter to enable index creation if your backup
     #            job has a resource type that supports backup indexes.</p>
     #            <p>Resource types that support backup indexes include:</p>
     #            <ul>
@@ -7730,15 +9209,16 @@ module Aws::Backup
     #                     <code>S3</code> for Amazon Simple Storage Service (Amazon S3)</p>
     #               </li>
     #            </ul>
-    #            <p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or 
+    #            <p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or
     #            <code>DISABLED</code>.</p>
-    #            <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point 
+    #            <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point
     #            that does not yet have a backup index, set value to <code>ENABLED</code>.</p>
     #            <p>To delete a backup index, set value to <code>DISABLED</code>.</p>
     #   @return [String]
     class StartBackupJobInput < Struct.new(
       nil,
       :backup_vault_name,
+      :logically_air_gapped_backup_vault_arn,
       :resource_arn,
       :iam_role_arn,
       :idempotency_token,
@@ -7758,7 +9238,7 @@ module Aws::Backup
     #   @return [String]
     # @!attribute recovery_point_arn
     #   <p>
-    #               <i>Note: This field is only returned for Amazon EFS and Advanced DynamoDB 
+    #               <i>Note: This field is only returned for Amazon EFS and Advanced DynamoDB
     #            resources.</i>
     #            </p>
     #            <p>An ARN that uniquely identifies a recovery point; for example,
@@ -7771,7 +9251,7 @@ module Aws::Backup
     #            AM.</p>
     #   @return [Time]
     # @!attribute is_parent
-    #   <p>This is a returned boolean value indicating this is a parent (composite) 
+    #   <p>This is a returned boolean value indicating this is a parent (composite)
     #            backup job.</p>
     #   @return [Boolean]
     class StartBackupJobOutput < Struct.new(
@@ -7814,16 +9294,16 @@ module Aws::Backup
     #            token results in a success message with no action taken.</p>
     #   @return [String]
     # @!attribute lifecycle
-    #   <p>Specifies the time period, in days, before a recovery point transitions to cold storage 
+    #   <p>Specifies the time period, in days, before a recovery point transitions to cold storage
     #            or is deleted.</p>
     #            <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90
     #            days. Therefore, on the console, the retention setting must be 90 days greater than the
     #            transition to cold after days setting. The transition to cold after days setting can't
     #            be changed after a backup has been transitioned to cold.</p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature 
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature
     #            availability by resource</a> table. Backup ignores this expression for
     #            other resource types.</p>
-    #            <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely, 
+    #            <p>To remove the existing lifecycle and retention periods and keep your recovery points indefinitely,
     #            specify -1 for <code>MoveToColdStorageAfterDays</code> and <code>DeleteAfterDays</code>.</p>
     #   @return [Types::Lifecycle]
     class StartCopyJobInput < Struct.new(
@@ -7849,7 +9329,7 @@ module Aws::Backup
     #            AM.</p>
     #   @return [Time]
     # @!attribute is_parent
-    #   <p>This is a returned boolean value indicating this is a parent (composite) 
+    #   <p>This is a returned boolean value indicating this is a parent (composite)
     #            copy job.</p>
     #   @return [Boolean]
     class StartCopyJobOutput < Struct.new(
@@ -7947,6 +9427,11 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
+    #                     <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-eks.html#eks-restore-backup-section">Metadata for Amazon EKS</a>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
     #                     <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-fsx.html#fsx-restore-cli">Metadata for Amazon FSx</a>
     #                  </p>
     #               </li>
@@ -8030,6 +9515,10 @@ module Aws::Backup
     #               </li>
     #               <li>
     #                  <p>
+    #                     <code>EKS</code> - Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
     #                     <code>FSx</code> - Amazon FSx</p>
     #               </li>
     #               <li>
@@ -8091,6 +9580,85 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute backup_vault_name
+    #   <p>The name of a logical container where backups are stored. Backup vaults are identified by names that
+    #             are unique to the account used to create them and the Amazon Web Services Region where they are created.</p>
+    #            <p>Pattern: <code>^[a-zA-Z0-9\-\_]{2,50}$</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute continuous_scan_end_time
+    #   <p>The point in time the scan job will scan up to for a continuous backup.</p>
+    #   @return [Time]
+    # @!attribute iam_role_arn
+    #   <p>Specifies the IAM role ARN used to create the target recovery point; for example,
+    #               <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>
+    #   @return [String]
+    # @!attribute idempotency_token
+    #   <p>A customer-chosen string that you can use to distinguish between otherwise identical
+    #            calls to <code>StartScanJob</code>. Retrying a successful request with the same idempotency
+    #            token results in a success message with no action taken.</p>
+    #   @return [String]
+    # @!attribute malware_scanner
+    #   <p>Specifies the malware scanner used during the scan job. Currently only supports <code>GUARDDUTY</code>.</p>
+    #   @return [String]
+    # @!attribute recovery_point_arn
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies a recovery point. This is your target recovery point for a full scan.
+    #            If you are running an incremental scan, this will be your a recovery point which has been created after your base recovery point selection.</p>
+    #   @return [String]
+    # @!attribute scan_base_recovery_point_arn
+    #   <p>An ARN that uniquely identifies the base recovery point to be used for incremental scanning.</p>
+    #   @return [String]
+    # @!attribute scan_mode
+    #   <p>Specifies the scan type use for the scan job.</p>
+    #            <p>Includes:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>FULL_SCAN</code> will scan the entire data lineage within the backup.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>INCREMENTAL_SCAN</code> will scan the data difference between the target recovery point and base recovery point ARN.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute scanner_role_arn
+    #   <p>Specified the IAM scanner role ARN.</p>
+    #   @return [String]
+    class StartScanJobInput < Struct.new(
+      nil,
+      :backup_vault_name,
+      :continuous_scan_end_time,
+      :iam_role_arn,
+      :idempotency_token,
+      :malware_scanner,
+      :recovery_point_arn,
+      :scan_base_recovery_point_arn,
+      :scan_mode,
+      :scanner_role_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute creation_date
+    #   <p>The date and time that a backup job is created, in Unix format and Coordinated Universal
+    #            Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For
+    #            example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087
+    #            AM.</p>
+    #   @return [Time]
+    # @!attribute scan_job_id
+    #   <p>Uniquely identifies a request to Backup to back up a resource.</p>
+    #   @return [String]
+    class StartScanJobOutput < Struct.new(
+      nil,
+      :creation_date,
+      :scan_job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute backup_job_id
     #   <p>Uniquely identifies a request to Backup to back up a resource.</p>
     #   @return [String]
@@ -8119,13 +9687,138 @@ module Aws::Backup
       include ::Smithy::Schema::Structure
     end
 
+    # <p>This contains metadata about a tiering configuration.</p>
+    # @!attribute tiering_configuration_name
+    #   <p>The unique name of the tiering configuration. This cannot be changed
+    #            after creation, and it must consist of only alphanumeric characters and underscores.</p>
+    #   @return [String]
+    # @!attribute tiering_configuration_arn
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies the
+    #            tiering configuration.</p>
+    #   @return [String]
+    # @!attribute backup_vault_name
+    #   <p>The name of the backup vault where the tiering configuration applies.
+    #            Use <code>*</code> to apply to all backup vaults.</p>
+    #   @return [String]
+    # @!attribute resource_selection
+    #   <p>An array of resource selection objects that specify which resources
+    #            are included in the tiering configuration and their tiering settings.</p>
+    #   @return [Array<Types::ResourceSelection>]
+    # @!attribute creator_request_id
+    #   <p>This is a unique string that identifies the request and
+    #            allows failed requests to be retried without the risk of running
+    #            the operation twice.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time a tiering configuration was created, in Unix format
+    #            and Coordinated Universal Time (UTC). The value of <code>CreationTime</code>
+    #            is accurate to milliseconds. For example, the value 1516925490.087 represents
+    #            Friday, January 26, 2018 12:11:30.087AM.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The date and time a tiering configuration was updated, in Unix format
+    #            and Coordinated Universal Time (UTC). The value of <code>LastUpdatedTime</code>
+    #            is accurate to milliseconds. For example, the value 1516925490.087 represents
+    #            Friday, January 26, 2018 12:11:30.087AM.</p>
+    #   @return [Time]
+    class TieringConfiguration < Struct.new(
+      nil,
+      :tiering_configuration_name,
+      :tiering_configuration_arn,
+      :backup_vault_name,
+      :resource_selection,
+      :creator_request_id,
+      :creation_time,
+      :last_updated_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>This contains metadata about a tiering configuration for create operations.</p>
+    # @!attribute tiering_configuration_name
+    #   <p>The unique name of the tiering configuration. This cannot be changed
+    #            after creation, and it must consist of only alphanumeric characters and underscores.</p>
+    #   @return [String]
+    # @!attribute backup_vault_name
+    #   <p>The name of the backup vault where the tiering configuration applies.
+    #            Use <code>*</code> to apply to all backup vaults.</p>
+    #   @return [String]
+    # @!attribute resource_selection
+    #   <p>An array of resource selection objects that specify which resources
+    #            are included in the tiering configuration and their tiering settings.</p>
+    #   @return [Array<Types::ResourceSelection>]
+    class TieringConfigurationInputForCreate < Struct.new(
+      nil,
+      :tiering_configuration_name,
+      :backup_vault_name,
+      :resource_selection,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>This contains metadata about a tiering configuration for update operations.</p>
+    # @!attribute resource_selection
+    #   <p>An array of resource selection objects that specify which resources
+    #            are included in the tiering configuration and their tiering settings.</p>
+    #   @return [Array<Types::ResourceSelection>]
+    # @!attribute backup_vault_name
+    #   <p>The name of the backup vault where the tiering configuration applies.
+    #            Use <code>*</code> to apply to all backup vaults.</p>
+    #   @return [String]
+    class TieringConfigurationInputForUpdate < Struct.new(
+      nil,
+      :resource_selection,
+      :backup_vault_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>This contains metadata about a tiering configuration returned in a list.</p>
+    # @!attribute tiering_configuration_arn
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies the
+    #            tiering configuration.</p>
+    #   @return [String]
+    # @!attribute tiering_configuration_name
+    #   <p>The unique name of the tiering configuration.</p>
+    #   @return [String]
+    # @!attribute backup_vault_name
+    #   <p>The name of the backup vault where the tiering configuration applies.
+    #            Use <code>*</code> to apply to all backup vaults.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time a tiering configuration was created, in Unix format
+    #            and Coordinated Universal Time (UTC). The value of <code>CreationTime</code>
+    #            is accurate to milliseconds. For example, the value 1516925490.087 represents
+    #            Friday, January 26, 2018 12:11:30.087AM.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The date and time a tiering configuration was updated, in Unix format
+    #            and Coordinated Universal Time (UTC). The value of <code>LastUpdatedTime</code>
+    #            is accurate to milliseconds. For example, the value 1516925490.087 represents
+    #            Friday, January 26, 2018 12:11:30.087AM.</p>
+    #   @return [Time]
+    class TieringConfigurationsListMember < Struct.new(
+      nil,
+      :tiering_configuration_arn,
+      :tiering_configuration_name,
+      :backup_vault_name,
+      :creation_time,
+      :last_updated_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>An ARN that uniquely identifies a resource. The format of the ARN depends on the type of
     #            the tagged resource.</p>
-    #            <p>ARNs that do not include <code>backup</code> are incompatible with tagging. 
-    #            <code>TagResource</code> and <code>UntagResource</code> with invalid ARNs will 
-    #            result in an error. Acceptable ARN content can include 
-    #            <code>arn:aws:backup:us-east</code>. Invalid ARN content may look like 
+    #            <p>ARNs that do not include <code>backup</code> are incompatible with tagging.
+    #            <code>TagResource</code> and <code>UntagResource</code> with invalid ARNs will
+    #            result in an error. Acceptable ARN content can include
+    #            <code>arn:aws:backup:us-east</code>. Invalid ARN content may look like
     #            <code>arn:aws:ec2:us-east</code>.</p>
     #   @return [String]
     # @!attribute tag_key_list
@@ -8176,6 +9869,9 @@ module Aws::Backup
     # @!attribute advanced_backup_settings
     #   <p>Contains a list of <code>BackupOptions</code> for each resource type.</p>
     #   @return [Array<Types::AdvancedBackupSetting>]
+    # @!attribute scan_settings
+    #   <p>Contains your scanning configuration for the backup plan and includes the Malware scanner, your selected resources, and scanner role.</p>
+    #   @return [Array<Types::ScanSetting>]
     class UpdateBackupPlanOutput < Struct.new(
       nil,
       :backup_plan_id,
@@ -8183,6 +9879,7 @@ module Aws::Backup
       :creation_date,
       :version_id,
       :advanced_backup_settings,
+      :scan_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8239,9 +9936,15 @@ module Aws::Backup
     end
 
     # @!attribute global_settings
-    #   <p>A value for <code>isCrossAccountBackupEnabled</code> and a Region. Example:
-    #               <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false
-    #               --region us-west-2</code>.</p>
+    #   <p>Inputs can include:</p>
+    #            <p>A value for <code>isCrossAccountBackupEnabled</code>. Values can be true or false. Example:
+    #               <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false</code>.</p>
+    #            <p>A value for Multi-party approval, styled as <code>isMpaEnabled</code>. Values can
+    #            be true or false. Example:
+    #            <code>update-global-settings --global-settings isMpaEnabled=false</code>.</p>
+    #            <p>A value for Backup Service-Linked Role creation, styled as <code>isDelegatedAdministratorEnabled</code>.
+    #            Values can be true or false. Example:
+    #            <code>update-global-settings --global-settings isDelegatedAdministratorEnabled=false</code>.</p>
     #   @return [Hash<String, String>]
     class UpdateGlobalSettingsInput < Struct.new(
       nil,
@@ -8266,9 +9969,9 @@ module Aws::Backup
     #            <p>For example, arn:aws:iam::123456789012:role/S3Access</p>
     #   @return [String]
     # @!attribute index
-    #   <p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or 
+    #   <p>Index can have 1 of 2 possible values, either <code>ENABLED</code> or
     #            <code>DISABLED</code>.</p>
-    #            <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point 
+    #            <p>To create a backup index for an eligible <code>ACTIVE</code> recovery point
     #            that does not yet have a backup index, set value to <code>ENABLED</code>.</p>
     #            <p>To delete a backup index, set value to <code>DISABLED</code>.</p>
     #   @return [String]
@@ -8293,11 +9996,11 @@ module Aws::Backup
     #            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>
     #   @return [String]
     # @!attribute index_status
-    #   <p>This is the current status for the backup index associated 
+    #   <p>This is the current status for the backup index associated
     #            with the specified recovery point.</p>
     #            <p>Statuses are: <code>PENDING</code> | <code>ACTIVE</code> | <code>FAILED</code> | <code>DELETING</code>
     #            </p>
-    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code> 
+    #            <p>A recovery point with an index that has the status of <code>ACTIVE</code>
     #            can be included in a search.</p>
     #   @return [String]
     # @!attribute index
@@ -8362,7 +10065,7 @@ module Aws::Backup
     #            days. Therefore, the “retention” setting must be 90 days greater than the “transition to
     #            cold after days” setting. The “transition to cold after days” setting cannot be changed
     #            after a backup has been transitioned to cold.</p>
-    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature availability 
+    #            <p>Resource types that can transition to cold storage are listed in the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource">Feature availability
     #            by resource</a> table. Backup ignores this expression for other resource types.</p>
     #   @return [Types::Lifecycle]
     # @!attribute calculated_lifecycle
@@ -8382,12 +10085,12 @@ module Aws::Backup
 
     # @!attribute resource_type_opt_in_preference
     #   <p>Updates the list of services along with the opt-in preferences for the Region.</p>
-    #            <p>If resource assignments are only based on tags, then service opt-in settings are applied. 
-    #            If a resource type is explicitly assigned to a backup plan, such as Amazon S3, 
-    #            Amazon EC2, or Amazon RDS, it will be included in the 
-    #            backup even if the opt-in is not enabled for that particular service. 
-    #            If both a resource type and tags are specified in a resource assignment, 
-    #            the resource type specified in the backup plan takes priority over the 
+    #            <p>If resource assignments are only based on tags, then service opt-in settings are applied.
+    #            If a resource type is explicitly assigned to a backup plan, such as Amazon S3,
+    #            Amazon EC2, or Amazon RDS, it will be included in the
+    #            backup even if the opt-in is not enabled for that particular service.
+    #            If both a resource type and tags are specified in a resource assignment,
+    #            the resource type specified in the backup plan takes priority over the
     #            tag condition. Service opt-in settings are disregarded in this situation.</p>
     #   @return [Hash<String, Boolean>]
     # @!attribute resource_type_management_preference
@@ -8484,18 +10187,18 @@ module Aws::Backup
     end
 
     # @!attribute creation_time
-    #   <p>The time the resource testing plan was 
+    #   <p>The time the resource testing plan was
     #            created.</p>
     #   @return [Time]
     # @!attribute restore_testing_plan_arn
     #   <p>Unique ARN (Amazon Resource Name) of the restore testing plan.</p>
     #   @return [String]
     # @!attribute restore_testing_plan_name
-    #   <p>The name cannot be changed after creation. The name consists of 
+    #   <p>The name cannot be changed after creation. The name consists of
     #            only alphanumeric characters and underscores. Maximum length is 50.</p>
     #   @return [String]
     # @!attribute update_time
-    #   <p>The time the update completed for the restore 
+    #   <p>The time the update completed for the restore
     #            testing plan.</p>
     #   @return [Time]
     class UpdateRestoreTestingPlanOutput < Struct.new(
@@ -8510,18 +10213,18 @@ module Aws::Backup
     end
 
     # @!attribute restore_testing_plan_name
-    #   <p>The restore testing plan name is required to update the 
+    #   <p>The restore testing plan name is required to update the
     #            indicated testing plan.</p>
     #   @return [String]
     # @!attribute restore_testing_selection
-    #   <p>To update your restore testing selection, you can use either 
-    #            protected resource ARNs or conditions, but not both. That is, if your 
-    #            selection has <code>ProtectedResourceArns</code>, requesting an update 
-    #            with the parameter <code>ProtectedResourceConditions</code> will be 
+    #   <p>To update your restore testing selection, you can use either
+    #            protected resource ARNs or conditions, but not both. That is, if your
+    #            selection has <code>ProtectedResourceArns</code>, requesting an update
+    #            with the parameter <code>ProtectedResourceConditions</code> will be
     #            unsuccessful.</p>
     #   @return [Types::RestoreTestingSelectionForUpdate]
     # @!attribute restore_testing_selection_name
-    #   <p>The required restore testing selection name of the restore 
+    #   <p>The required restore testing selection name of the restore
     #            testing selection you wish to update.</p>
     #   @return [String]
     class UpdateRestoreTestingSelectionInput < Struct.new(
@@ -8535,21 +10238,21 @@ module Aws::Backup
     end
 
     # @!attribute creation_time
-    #   <p>The time the resource testing selection was 
+    #   <p>The time the resource testing selection was
     #            updated successfully.</p>
     #   @return [Time]
     # @!attribute restore_testing_plan_arn
     #   <p>Unique string that is the name of the restore testing plan.</p>
     #   @return [String]
     # @!attribute restore_testing_plan_name
-    #   <p>The restore testing plan with which the updated restore 
+    #   <p>The restore testing plan with which the updated restore
     #            testing selection is associated.</p>
     #   @return [String]
     # @!attribute restore_testing_selection_name
     #   <p>The returned restore testing selection name.</p>
     #   @return [String]
     # @!attribute update_time
-    #   <p>The time the update completed for the restore 
+    #   <p>The time the update completed for the restore
     #            testing selection.</p>
     #   @return [Time]
     class UpdateRestoreTestingSelectionOutput < Struct.new(
@@ -8559,6 +10262,51 @@ module Aws::Backup
       :restore_testing_plan_name,
       :restore_testing_selection_name,
       :update_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tiering_configuration_name
+    #   <p>The name of a tiering configuration to update.</p>
+    #   @return [String]
+    # @!attribute tiering_configuration
+    #   <p>Specifies the body of a tiering configuration.</p>
+    #   @return [Types::TieringConfigurationInputForUpdate]
+    class UpdateTieringConfigurationInput < Struct.new(
+      nil,
+      :tiering_configuration_name,
+      :tiering_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tiering_configuration_arn
+    #   <p>An Amazon Resource Name (ARN) that uniquely identifies the updated
+    #            tiering configuration.</p>
+    #   @return [String]
+    # @!attribute tiering_configuration_name
+    #   <p>This unique string is the name of the tiering configuration.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The date and time a tiering configuration was created, in Unix format
+    #            and Coordinated Universal Time (UTC). The value of <code>CreationTime</code>
+    #            is accurate to milliseconds. For example, the value 1516925490.087 represents
+    #            Friday, January 26, 2018 12:11:30.087AM.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The date and time a tiering configuration was updated, in Unix format
+    #            and Coordinated Universal Time (UTC). The value of <code>LastUpdatedTime</code>
+    #            is accurate to milliseconds. For example, the value 1516925490.087 represents
+    #            Friday, January 26, 2018 12:11:30.087AM.</p>
+    #   @return [Time]
+    class UpdateTieringConfigurationOutput < Struct.new(
+      nil,
+      :tiering_configuration_arn,
+      :tiering_configuration_name,
+      :creation_time,
+      :last_updated_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

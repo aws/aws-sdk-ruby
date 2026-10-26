@@ -11,6 +11,9 @@ module Aws::PaymentCryptographyData
     AmexCardSecurityCodeVersion1 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#AmexCardSecurityCodeVersion1", name: "AmexCardSecurityCodeVersion1")
     AmexCardSecurityCodeVersion2 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#AmexCardSecurityCodeVersion2", name: "AmexCardSecurityCodeVersion2")
     ApplicationCryptogramType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#ApplicationCryptogramType", name: "ApplicationCryptogramType", traits: {"smithy.api#length" => {"min" => 16, "max" => 16}, "smithy.api#pattern" => "^[0-9a-fA-F]+$", "smithy.api#sensitive" => {}})
+    As2805KekValidationType = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.paymentcryptographydata#As2805KekValidationType", name: "As2805KekValidationType")
+    As2805PekDerivationAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#As2805PekDerivationAttributes", name: "As2805PekDerivationAttributes")
+    As2805RandomKeyMaterial = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#As2805RandomKeyMaterial", name: "As2805RandomKeyMaterial", traits: {"smithy.api#length" => {"min" => 16, "max" => 48}, "smithy.api#pattern" => "^(?:[0-9a-fA-F]{16}|[0-9a-fA-F]{32}|[0-9a-fA-F]{48})$", "smithy.api#sensitive" => {}})
     AsymmetricEncryptionAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#AsymmetricEncryptionAttributes", name: "AsymmetricEncryptionAttributes")
     AuthRequestCryptogramType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#AuthRequestCryptogramType", name: "AuthRequestCryptogramType", traits: {"smithy.api#length" => {"min" => 16, "max" => 16}, "smithy.api#pattern" => "^[0-9a-fA-F]+$", "smithy.api#sensitive" => {}})
     AuthResponseValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#AuthResponseValueType", name: "AuthResponseValueType", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}, "smithy.api#pattern" => "^[0-9a-fA-F]+$", "smithy.api#sensitive" => {}})
@@ -52,6 +55,10 @@ module Aws::PaymentCryptographyData
     EncryptedPinBlockType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#EncryptedPinBlockType", name: "EncryptedPinBlockType", traits: {"smithy.api#length" => {"min" => 16, "max" => 32}, "smithy.api#pattern" => "^[0-9a-fA-F]+$", "smithy.api#sensitive" => {}})
     EncryptionDecryptionAttributes = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.paymentcryptographydata#EncryptionDecryptionAttributes", name: "EncryptionDecryptionAttributes")
     EncryptionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptographydata#EncryptionMode", name: "EncryptionMode")
+    GenerateAs2805KekValidationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#GenerateAs2805KekValidationInput", name: "GenerateAs2805KekValidationInput")
+    GenerateAs2805KekValidationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#GenerateAs2805KekValidationOutput", name: "GenerateAs2805KekValidationOutput")
+    GenerateAuthRequestCryptogramInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#GenerateAuthRequestCryptogramInput", name: "GenerateAuthRequestCryptogramInput")
+    GenerateAuthRequestCryptogramOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#GenerateAuthRequestCryptogramOutput", name: "GenerateAuthRequestCryptogramOutput")
     GenerateCardValidationDataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#GenerateCardValidationDataInput", name: "GenerateCardValidationDataInput")
     GenerateCardValidationDataOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#GenerateCardValidationDataOutput", name: "GenerateCardValidationDataOutput")
     GenerateMacEmvPinChangeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#GenerateMacEmvPinChangeInput", name: "GenerateMacEmvPinChangeInput")
@@ -78,15 +85,17 @@ module Aws::PaymentCryptographyData
     IntegerRangeBetween0And6 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.paymentcryptographydata#IntegerRangeBetween0And6", name: "IntegerRangeBetween0And6", traits: {"smithy.api#range" => {"min" => 0, "max" => 6}})
     IntegerRangeBetween3And5Type = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.paymentcryptographydata#IntegerRangeBetween3And5Type", name: "IntegerRangeBetween3And5Type", traits: {"smithy.api#range" => {"min" => 3, "max" => 5}})
     IntegerRangeBetween4And12 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.paymentcryptographydata#IntegerRangeBetween4And12", name: "IntegerRangeBetween4And12", traits: {"smithy.api#range" => {"min" => 4, "max" => 12}})
-    IntegerRangeBetween4And16 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.paymentcryptographydata#IntegerRangeBetween4And16", name: "IntegerRangeBetween4And16", traits: {"smithy.api#range" => {"min" => 4, "max" => 16}})
+    IntegerRangeBetween4And32 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.paymentcryptographydata#IntegerRangeBetween4And32", name: "IntegerRangeBetween4And32", traits: {"smithy.api#range" => {"min" => 4, "max" => 32}})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    KekValidationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#KekValidationRequest", name: "KekValidationRequest")
+    KekValidationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#KekValidationResponse", name: "KekValidationResponse")
     KeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#KeyArn", name: "KeyArn", traits: {"smithy.api#length" => {"min" => 70, "max" => 150}, "smithy.api#pattern" => "^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:key/[0-9a-zA-Z]{16,64}$"})
     KeyArnOrKeyAliasType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#KeyArnOrKeyAliasType", name: "KeyArnOrKeyAliasType", traits: {"smithy.api#length" => {"min" => 7, "max" => 322}, "smithy.api#pattern" => "^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:(key/[0-9a-zA-Z]{16,64}|alias/[a-zA-Z0-9/_-]+)$|^alias/[a-zA-Z0-9/_-]+$"})
     KeyCheckValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#KeyCheckValue", name: "KeyCheckValue", traits: {"smithy.api#length" => {"min" => 4, "max" => 16}, "smithy.api#pattern" => "^[0-9a-fA-F]+$"})
     KeyCheckValueAlgorithm = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#KeyCheckValueAlgorithm", name: "KeyCheckValueAlgorithm", traits: {"smithy.api#enum" => [{"value" => "CMAC", "name" => "CMAC"}, {"value" => "ANSI_X9_24", "name" => "ANSI_X9_24"}, {"value" => "HMAC", "name" => "HMAC"}, {"value" => "SHA_1", "name" => "SHA_1"}]})
     KeyDerivationFunction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptographydata#KeyDerivationFunction", name: "KeyDerivationFunction")
     KeyDerivationHashAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptographydata#KeyDerivationHashAlgorithm", name: "KeyDerivationHashAlgorithm")
-    KeyMaterial = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#KeyMaterial", name: "KeyMaterial", traits: {"smithy.api#length" => {"min" => 48, "max" => 16384}, "smithy.api#sensitive" => {}})
+    KeyMaterial = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#KeyMaterial", name: "KeyMaterial", traits: {"smithy.api#length" => {"min" => 32, "max" => 16384}, "smithy.api#sensitive" => {}})
     MacAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptographydata#MacAlgorithm", name: "MacAlgorithm")
     MacAlgorithmDukpt = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#MacAlgorithmDukpt", name: "MacAlgorithmDukpt")
     MacAlgorithmEmv = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#MacAlgorithmEmv", name: "MacAlgorithmEmv")
@@ -115,6 +124,8 @@ module Aws::PaymentCryptographyData
     PlainTextType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#PlainTextType", name: "PlainTextType", traits: {"smithy.api#length" => {"min" => 2, "max" => 4096}, "smithy.api#pattern" => "^(?:[0-9a-fA-F][0-9a-fA-F])+$", "smithy.api#sensitive" => {}})
     PrimaryAccountNumberType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType", name: "PrimaryAccountNumberType", traits: {"smithy.api#length" => {"min" => 12, "max" => 19}, "smithy.api#pattern" => "^[0-9]+$", "smithy.api#sensitive" => {}})
     ProprietaryAuthenticationDataType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#ProprietaryAuthenticationDataType", name: "ProprietaryAuthenticationDataType", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}, "smithy.api#pattern" => "^[0-9a-fA-F]+$", "smithy.api#sensitive" => {}})
+    RandomKeyMaxLength = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptographydata#RandomKeyMaxLength", name: "RandomKeyMaxLength")
+    RandomKeySendVariantMask = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptographydata#RandomKeySendVariantMask", name: "RandomKeySendVariantMask")
     ReEncryptDataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#ReEncryptDataInput", name: "ReEncryptDataInput")
     ReEncryptDataOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#ReEncryptDataOutput", name: "ReEncryptDataOutput")
     ReEncryptionAttributes = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.paymentcryptographydata#ReEncryptionAttributes", name: "ReEncryptionAttributes")
@@ -128,19 +139,23 @@ module Aws::PaymentCryptographyData
     SessionKeyEmv2000 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#SessionKeyEmv2000", name: "SessionKeyEmv2000")
     SessionKeyEmvCommon = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#SessionKeyEmvCommon", name: "SessionKeyEmvCommon")
     SessionKeyMastercard = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#SessionKeyMastercard", name: "SessionKeyMastercard")
+    SessionKeyUnionPay = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#SessionKeyUnionPay", name: "SessionKeyUnionPay")
     SessionKeyVisa = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#SessionKeyVisa", name: "SessionKeyVisa")
     SharedInformation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#SharedInformation", name: "SharedInformation", traits: {"smithy.api#length" => {"min" => 2, "max" => 2048}, "smithy.api#pattern" => "^(?:[0-9a-fA-F][0-9a-fA-F])+$"})
     SymmetricEncryptionAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#SymmetricEncryptionAttributes", name: "SymmetricEncryptionAttributes")
     SymmetricKeyAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptographydata#SymmetricKeyAlgorithm", name: "SymmetricKeyAlgorithm")
+    SystemTraceAuditNumberType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#SystemTraceAuditNumberType", name: "SystemTraceAuditNumberType", traits: {"smithy.api#length" => {"min" => 6, "max" => 6}, "smithy.api#pattern" => "^[0-9]+$"})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     Tr31WrappedKeyBlock = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#Tr31WrappedKeyBlock", name: "Tr31WrappedKeyBlock", traits: {"smithy.api#length" => {"min" => 56, "max" => 9984}, "smithy.api#pattern" => "^[0-9a-zA-Z]+$", "smithy.api#sensitive" => {}})
     TrackDataType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#TrackDataType", name: "TrackDataType", traits: {"smithy.api#length" => {"min" => 2, "max" => 160}, "smithy.api#pattern" => "^[0-9a-fA-F]+$", "smithy.api#sensitive" => {}})
+    TransactionAmountType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#TransactionAmountType", name: "TransactionAmountType", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^[0-9]+$"})
     TransactionDataType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#TransactionDataType", name: "TransactionDataType", traits: {"smithy.api#length" => {"min" => 2, "max" => 1024}, "smithy.api#pattern" => "^[0-9a-fA-F]+$", "smithy.api#sensitive" => {}})
     TranslateKeyMaterialInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#TranslateKeyMaterialInput", name: "TranslateKeyMaterialInput")
     TranslateKeyMaterialOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#TranslateKeyMaterialOutput", name: "TranslateKeyMaterialOutput")
     TranslatePinDataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#TranslatePinDataInput", name: "TranslatePinDataInput")
     TranslatePinDataOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#TranslatePinDataOutput", name: "TranslatePinDataOutput")
     TranslationIsoFormats = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.paymentcryptographydata#TranslationIsoFormats", name: "TranslationIsoFormats")
+    TranslationPinDataAs2805Format0 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#TranslationPinDataAs2805Format0", name: "TranslationPinDataAs2805Format0")
     TranslationPinDataIsoFormat034 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#TranslationPinDataIsoFormat034", name: "TranslationPinDataIsoFormat034")
     TranslationPinDataIsoFormat1 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptographydata#TranslationPinDataIsoFormat1", name: "TranslationPinDataIsoFormat1")
     ValidationDataType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptographydata#ValidationDataType", name: "ValidationDataType", traits: {"smithy.api#length" => {"min" => 3, "max" => 5}, "smithy.api#pattern" => "^[0-9]+$", "smithy.api#sensitive" => {}})
@@ -182,6 +197,13 @@ module Aws::PaymentCryptographyData
     AmexCardSecurityCodeVersion2.add_member(:card_expiry_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CardExpiryDateType, name: "CardExpiryDate", traits: {"smithy.api#required" => {}}))
     AmexCardSecurityCodeVersion2.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCodeType, name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     AmexCardSecurityCodeVersion2.type = Types::AmexCardSecurityCodeVersion2
+    As2805KekValidationType.add_member(:kek_validation_request, Types::As2805KekValidationType::KekValidationRequest, ::Smithy::Schema::Shapes::MemberShape.new(target: KekValidationRequest, name: "KekValidationRequest"))
+    As2805KekValidationType.add_member(:kek_validation_response, Types::As2805KekValidationType::KekValidationResponse, ::Smithy::Schema::Shapes::MemberShape.new(target: KekValidationResponse, name: "KekValidationResponse"))
+    As2805KekValidationType.add_member(:unknown, Types::As2805KekValidationType::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    As2805KekValidationType.type = Types::As2805KekValidationType
+    As2805PekDerivationAttributes.add_member(:system_trace_audit_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemTraceAuditNumberType, name: "SystemTraceAuditNumber", traits: {"smithy.api#required" => {}}))
+    As2805PekDerivationAttributes.add_member(:transaction_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionAmountType, name: "TransactionAmount", traits: {"smithy.api#required" => {}}))
+    As2805PekDerivationAttributes.type = Types::As2805PekDerivationAttributes
     AsymmetricEncryptionAttributes.add_member(:padding_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PaddingType, name: "PaddingType"))
     AsymmetricEncryptionAttributes.type = Types::AsymmetricEncryptionAttributes
     CardGenerationAttributes.add_member(:amex_card_security_code_version1, Types::CardGenerationAttributes::AmexCardSecurityCodeVersion1, ::Smithy::Schema::Shapes::MemberShape.new(target: AmexCardSecurityCodeVersion1, name: "AmexCardSecurityCodeVersion1"))
@@ -334,6 +356,24 @@ module Aws::PaymentCryptographyData
     EncryptionMode.add_member(:cfb64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CFB64", traits: {"smithy.api#enumValue" => "CFB64"}))
     EncryptionMode.add_member(:cfb128, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CFB128", traits: {"smithy.api#enumValue" => "CFB128"}))
     EncryptionMode.add_member(:ofb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFB", traits: {"smithy.api#enumValue" => "OFB"}))
+    GenerateAs2805KekValidationInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GenerateAs2805KekValidationInput.add_member(:kek_validation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: As2805KekValidationType, name: "KekValidationType", traits: {"smithy.api#required" => {}}))
+    GenerateAs2805KekValidationInput.add_member(:random_key_send_variant_mask, ::Smithy::Schema::Shapes::MemberShape.new(target: RandomKeySendVariantMask, name: "RandomKeySendVariantMask", traits: {"smithy.api#required" => {}}))
+    GenerateAs2805KekValidationInput.type = Types::GenerateAs2805KekValidationInput
+    GenerateAs2805KekValidationOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    GenerateAs2805KekValidationOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    GenerateAs2805KekValidationOutput.add_member(:random_key_send, ::Smithy::Schema::Shapes::MemberShape.new(target: As2805RandomKeyMaterial, name: "RandomKeySend", traits: {"smithy.api#required" => {}}))
+    GenerateAs2805KekValidationOutput.add_member(:random_key_receive, ::Smithy::Schema::Shapes::MemberShape.new(target: As2805RandomKeyMaterial, name: "RandomKeyReceive", traits: {"smithy.api#required" => {}}))
+    GenerateAs2805KekValidationOutput.type = Types::GenerateAs2805KekValidationOutput
+    GenerateAuthRequestCryptogramInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
+    GenerateAuthRequestCryptogramInput.add_member(:transaction_data, ::Smithy::Schema::Shapes::MemberShape.new(target: TransactionDataType, name: "TransactionData", traits: {"smithy.api#required" => {}}))
+    GenerateAuthRequestCryptogramInput.add_member(:major_key_derivation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorKeyDerivationMode, name: "MajorKeyDerivationMode", traits: {"smithy.api#required" => {}}))
+    GenerateAuthRequestCryptogramInput.add_member(:session_key_derivation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyDerivation, name: "SessionKeyDerivationAttributes", traits: {"smithy.api#required" => {}}))
+    GenerateAuthRequestCryptogramInput.type = Types::GenerateAuthRequestCryptogramInput
+    GenerateAuthRequestCryptogramOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "KeyArn", traits: {"smithy.api#required" => {}}))
+    GenerateAuthRequestCryptogramOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
+    GenerateAuthRequestCryptogramOutput.add_member(:auth_request_cryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthRequestCryptogramType, name: "AuthRequestCryptogram", traits: {"smithy.api#required" => {}}))
+    GenerateAuthRequestCryptogramOutput.type = Types::GenerateAuthRequestCryptogramOutput
     GenerateCardValidationDataInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
     GenerateCardValidationDataInput.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
     GenerateCardValidationDataInput.add_member(:generation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CardGenerationAttributes, name: "GenerationAttributes", traits: {"smithy.api#required" => {}}))
@@ -364,7 +404,7 @@ module Aws::PaymentCryptographyData
     GenerateMacInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
     GenerateMacInput.add_member(:message_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageDataType, name: "MessageData", traits: {"smithy.api#required" => {}}))
     GenerateMacInput.add_member(:generation_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAttributes, name: "GenerationAttributes", traits: {"smithy.api#required" => {}}))
-    GenerateMacInput.add_member(:mac_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween4And16, name: "MacLength"))
+    GenerateMacInput.add_member(:mac_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween4And32, name: "MacLength"))
     GenerateMacInput.type = Types::GenerateMacInput
     GenerateMacOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "KeyArn", traits: {"smithy.api#required" => {}}))
     GenerateMacOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
@@ -422,6 +462,11 @@ module Aws::PaymentCryptographyData
     IncomingKeyMaterial.type = Types::IncomingKeyMaterial
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     InternalServerException.type = Types::InternalServerException
+    KekValidationRequest.add_member(:derive_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: SymmetricKeyAlgorithm, name: "DeriveKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    KekValidationRequest.add_member(:random_key_max_length, ::Smithy::Schema::Shapes::MemberShape.new(target: RandomKeyMaxLength, name: "RandomKeyMaxLength"))
+    KekValidationRequest.type = Types::KekValidationRequest
+    KekValidationResponse.add_member(:random_key_send, ::Smithy::Schema::Shapes::MemberShape.new(target: As2805RandomKeyMaterial, name: "RandomKeySend", traits: {"smithy.api#required" => {}}))
+    KekValidationResponse.type = Types::KekValidationResponse
     KeyDerivationFunction.add_member(:nist_sp800, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NIST_SP800", traits: {"smithy.api#enumValue" => "NIST_SP800"}))
     KeyDerivationFunction.add_member(:ansi_x963, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANSI_X963", traits: {"smithy.api#enumValue" => "ANSI_X963"}))
     KeyDerivationHashAlgorithm.add_member(:sha_256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHA_256", traits: {"smithy.api#enumValue" => "SHA_256"}))
@@ -435,6 +480,7 @@ module Aws::PaymentCryptographyData
     MacAlgorithm.add_member(:hmac_sha256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HMAC_SHA256", traits: {"smithy.api#enumValue" => "HMAC_SHA256"}))
     MacAlgorithm.add_member(:hmac_sha384, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HMAC_SHA384", traits: {"smithy.api#enumValue" => "HMAC_SHA384"}))
     MacAlgorithm.add_member(:hmac_sha512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HMAC_SHA512", traits: {"smithy.api#enumValue" => "HMAC_SHA512"}))
+    MacAlgorithm.add_member(:as2805_4_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AS2805_4_1", traits: {"smithy.api#enumValue" => "AS2805_4_1"}))
     MacAlgorithmDukpt.add_member(:key_serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLength16Or20Or24, name: "KeySerialNumber", traits: {"smithy.api#required" => {}}))
     MacAlgorithmDukpt.add_member(:dukpt_key_variant, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptKeyVariant, name: "DukptKeyVariant", traits: {"smithy.api#required" => {}}))
     MacAlgorithmDukpt.add_member(:dukpt_derivation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptDerivationType, name: "DukptDerivationType"))
@@ -495,6 +541,11 @@ module Aws::PaymentCryptographyData
     PinVerificationAttributes.add_member(:ibm3624_pin, Types::PinVerificationAttributes::Ibm3624Pin, ::Smithy::Schema::Shapes::MemberShape.new(target: Ibm3624PinVerification, name: "Ibm3624Pin"))
     PinVerificationAttributes.add_member(:unknown, Types::PinVerificationAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PinVerificationAttributes.type = Types::PinVerificationAttributes
+    RandomKeyMaxLength.add_member(:bytes_8, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYTES_8", traits: {"smithy.api#enumValue" => "BYTES_8"}))
+    RandomKeyMaxLength.add_member(:bytes_16, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYTES_16", traits: {"smithy.api#enumValue" => "BYTES_16"}))
+    RandomKeyMaxLength.add_member(:bytes_24, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYTES_24", traits: {"smithy.api#enumValue" => "BYTES_24"}))
+    RandomKeySendVariantMask.add_member(:variant_mask_82_c0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VARIANT_MASK_82C0", traits: {"smithy.api#enumValue" => "VARIANT_MASK_82C0"}))
+    RandomKeySendVariantMask.add_member(:variant_mask_82, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VARIANT_MASK_82", traits: {"smithy.api#enumValue" => "VARIANT_MASK_82"}))
     ReEncryptDataInput.add_member(:incoming_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "IncomingKeyIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ReEncryptDataInput.add_member(:outgoing_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "OutgoingKeyIdentifier", traits: {"smithy.api#required" => {}}))
     ReEncryptDataInput.add_member(:cipher_text, ::Smithy::Schema::Shapes::MemberShape.new(target: CipherTextType, name: "CipherText", traits: {"smithy.api#required" => {}}))
@@ -508,6 +559,7 @@ module Aws::PaymentCryptographyData
     ReEncryptDataOutput.add_member(:cipher_text, ::Smithy::Schema::Shapes::MemberShape.new(target: CipherTextType, name: "CipherText", traits: {"smithy.api#required" => {}}))
     ReEncryptDataOutput.type = Types::ReEncryptDataOutput
     ReEncryptionAttributes.add_member(:symmetric, Types::ReEncryptionAttributes::Symmetric, ::Smithy::Schema::Shapes::MemberShape.new(target: SymmetricEncryptionAttributes, name: "Symmetric"))
+    ReEncryptionAttributes.add_member(:asymmetric, Types::ReEncryptionAttributes::Asymmetric, ::Smithy::Schema::Shapes::MemberShape.new(target: AsymmetricEncryptionAttributes, name: "Asymmetric"))
     ReEncryptionAttributes.add_member(:dukpt, Types::ReEncryptionAttributes::Dukpt, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptEncryptionAttributes, name: "Dukpt"))
     ReEncryptionAttributes.add_member(:unknown, Types::ReEncryptionAttributes::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ReEncryptionAttributes.type = Types::ReEncryptionAttributes
@@ -521,6 +573,7 @@ module Aws::PaymentCryptographyData
     SessionKeyDerivation.add_member(:emv2000, Types::SessionKeyDerivation::Emv2000, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyEmv2000, name: "Emv2000"))
     SessionKeyDerivation.add_member(:amex, Types::SessionKeyDerivation::Amex, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyAmex, name: "Amex"))
     SessionKeyDerivation.add_member(:visa, Types::SessionKeyDerivation::Visa, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyVisa, name: "Visa"))
+    SessionKeyDerivation.add_member(:union_pay, Types::SessionKeyDerivation::UnionPay, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionKeyUnionPay, name: "UnionPay"))
     SessionKeyDerivation.add_member(:unknown, Types::SessionKeyDerivation::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SessionKeyDerivation.type = Types::SessionKeyDerivation
     SessionKeyDerivationMode.add_member(:emv_common_session_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMV_COMMON_SESSION_KEY", traits: {"smithy.api#enumValue" => "EMV_COMMON_SESSION_KEY"}))
@@ -528,6 +581,7 @@ module Aws::PaymentCryptographyData
     SessionKeyDerivationMode.add_member(:amex, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMEX", traits: {"smithy.api#enumValue" => "AMEX"}))
     SessionKeyDerivationMode.add_member(:mastercard_session_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MASTERCARD_SESSION_KEY", traits: {"smithy.api#enumValue" => "MASTERCARD_SESSION_KEY"}))
     SessionKeyDerivationMode.add_member(:visa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VISA", traits: {"smithy.api#enumValue" => "VISA"}))
+    SessionKeyDerivationMode.add_member(:union_pay, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNION_PAY", traits: {"smithy.api#enumValue" => "UNION_PAY"}))
     SessionKeyDerivationValue.add_member(:application_cryptogram, Types::SessionKeyDerivationValue::ApplicationCryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationCryptogramType, name: "ApplicationCryptogram"))
     SessionKeyDerivationValue.add_member(:application_transaction_counter, Types::SessionKeyDerivationValue::ApplicationTransactionCounter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, name: "ApplicationTransactionCounter"))
     SessionKeyDerivationValue.add_member(:unknown, Types::SessionKeyDerivationValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -543,8 +597,12 @@ module Aws::PaymentCryptographyData
     SessionKeyMastercard.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
     SessionKeyMastercard.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
     SessionKeyMastercard.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
-    SessionKeyMastercard.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthBetween2And8, name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyMastercard.add_member(:unpredictable_number, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals8, name: "UnpredictableNumber", traits: {"smithy.api#required" => {}}))
     SessionKeyMastercard.type = Types::SessionKeyMastercard
+    SessionKeyUnionPay.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyUnionPay.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
+    SessionKeyUnionPay.add_member(:application_transaction_counter, ::Smithy::Schema::Shapes::MemberShape.new(target: HexLengthEquals4, name: "ApplicationTransactionCounter", traits: {"smithy.api#required" => {}}))
+    SessionKeyUnionPay.type = Types::SessionKeyUnionPay
     SessionKeyVisa.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
     SessionKeyVisa.add_member(:pan_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberLengthEquals2, name: "PanSequenceNumber", traits: {"smithy.api#required" => {}}))
     SessionKeyVisa.type = Types::SessionKeyVisa
@@ -578,6 +636,7 @@ module Aws::PaymentCryptographyData
     TranslatePinDataInput.add_member(:outgoing_dukpt_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: DukptDerivationAttributes, name: "OutgoingDukptAttributes"))
     TranslatePinDataInput.add_member(:incoming_wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, name: "IncomingWrappedKey"))
     TranslatePinDataInput.add_member(:outgoing_wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, name: "OutgoingWrappedKey"))
+    TranslatePinDataInput.add_member(:incoming_as2805_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: As2805PekDerivationAttributes, name: "IncomingAs2805Attributes"))
     TranslatePinDataInput.type = Types::TranslatePinDataInput
     TranslatePinDataOutput.add_member(:pin_block, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptedPinBlockType, name: "PinBlock", traits: {"smithy.api#required" => {}}))
     TranslatePinDataOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "KeyArn", traits: {"smithy.api#required" => {}}))
@@ -587,8 +646,11 @@ module Aws::PaymentCryptographyData
     TranslationIsoFormats.add_member(:iso_format1, Types::TranslationIsoFormats::IsoFormat1, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationPinDataIsoFormat1, name: "IsoFormat1"))
     TranslationIsoFormats.add_member(:iso_format3, Types::TranslationIsoFormats::IsoFormat3, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationPinDataIsoFormat034, name: "IsoFormat3"))
     TranslationIsoFormats.add_member(:iso_format4, Types::TranslationIsoFormats::IsoFormat4, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationPinDataIsoFormat034, name: "IsoFormat4"))
+    TranslationIsoFormats.add_member(:as2805_format0, Types::TranslationIsoFormats::As2805Format0, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationPinDataAs2805Format0, name: "As2805Format0"))
     TranslationIsoFormats.add_member(:unknown, Types::TranslationIsoFormats::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     TranslationIsoFormats.type = Types::TranslationIsoFormats
+    TranslationPinDataAs2805Format0.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
+    TranslationPinDataAs2805Format0.type = Types::TranslationPinDataAs2805Format0
     TranslationPinDataIsoFormat034.add_member(:primary_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountNumberType, name: "PrimaryAccountNumber", traits: {"smithy.api#required" => {}}))
     TranslationPinDataIsoFormat034.type = Types::TranslationPinDataIsoFormat034
     TranslationPinDataIsoFormat1.type = Types::TranslationPinDataIsoFormat1
@@ -625,7 +687,7 @@ module Aws::PaymentCryptographyData
     VerifyMacInput.add_member(:message_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MessageDataType, name: "MessageData", traits: {"smithy.api#required" => {}}))
     VerifyMacInput.add_member(:mac, ::Smithy::Schema::Shapes::MemberShape.new(target: MacType, name: "Mac", traits: {"smithy.api#required" => {}}))
     VerifyMacInput.add_member(:verification_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: MacAttributes, name: "VerificationAttributes", traits: {"smithy.api#required" => {}}))
-    VerifyMacInput.add_member(:mac_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween4And16, name: "MacLength"))
+    VerifyMacInput.add_member(:mac_length, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerRangeBetween4And32, name: "MacLength"))
     VerifyMacInput.type = Types::VerifyMacInput
     VerifyMacOutput.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "KeyArn", traits: {"smithy.api#required" => {}}))
     VerifyMacOutput.add_member(:key_check_value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValue, name: "KeyCheckValue", traits: {"smithy.api#required" => {}}))
@@ -681,7 +743,7 @@ module Aws::PaymentCryptographyData
       service.id = "com.amazonaws.paymentcryptographydata#PaymentCryptographyDataPlane"
       service.name = "PaymentCryptographyDataPlane"
       service.version = "2022-02-03"
-      service.traits = {"aws.api#dataPlane" => {}, "aws.api#service" => {"sdkId" => "Payment Cryptography Data", "endpointPrefix" => "dataplane.payment-cryptography"}, "aws.auth#sigv4" => {"name" => "payment-cryptography"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Payment Cryptography Data Plane"}
+      service.traits = {"aws.api#dataPlane" => {}, "aws.api#service" => {"sdkId" => "Payment Cryptography Data", "endpointPrefix" => "dataplane.payment-cryptography"}, "aws.auth#sigv4" => {"name" => "payment-cryptography"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Payment Cryptography Data Plane", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://dataplane.payment-cryptography-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://dataplane.payment-cryptography-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://dataplane.payment-cryptography.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://dataplane.payment-cryptography.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:decrypt_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#DecryptData"
         operation.name = "DecryptData"
@@ -705,6 +767,30 @@ module Aws::PaymentCryptographyData
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/keys/{KeyIdentifier}/encrypt", "code" => 200}}
+      end)
+      service.add_operation(:generate_as2805_kek_validation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.paymentcryptographydata#GenerateAs2805KekValidation"
+        operation.name = "GenerateAs2805KekValidation"
+        operation.input = GenerateAs2805KekValidationInput
+        operation.output = GenerateAs2805KekValidationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/as2805kekvalidation/generate", "code" => 200}}
+      end)
+      service.add_operation(:generate_auth_request_cryptogram, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.paymentcryptographydata#GenerateAuthRequestCryptogram"
+        operation.name = "GenerateAuthRequestCryptogram"
+        operation.input = GenerateAuthRequestCryptogramInput
+        operation.output = GenerateAuthRequestCryptogramOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/cryptogram/generate", "code" => 200}}
       end)
       service.add_operation(:generate_card_validation_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptographydata#GenerateCardValidationData"

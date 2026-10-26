@@ -32,6 +32,31 @@ module Aws::CloudFront
     end
 
     # @api private
+    class ListConnectionFunctions
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.connection_functions
+      end
+    end
+
+    # @api private
     class ListConnectionGroups
       def next_tokens(data)
         next_token = data.next_marker
@@ -132,7 +157,57 @@ module Aws::CloudFront
     end
 
     # @api private
+    class ListDistributionsByConnectionFunction
+      def next_tokens(data)
+        next_token = data.distribution_list.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.distribution_list.items
+      end
+    end
+
+    # @api private
     class ListDistributionsByConnectionMode
+      def next_tokens(data)
+        next_token = data.distribution_list.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.distribution_list.items
+      end
+    end
+
+    # @api private
+    class ListDistributionsByTrustStore
       def next_tokens(data)
         next_token = data.distribution_list.next_marker
         return {} if next_token.nil? || next_token.empty?
@@ -328,6 +403,31 @@ module Aws::CloudFront
 
       def items(data)
         data.streaming_distribution_list.items
+      end
+    end
+
+    # @api private
+    class ListTrustStores
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.trust_store_list
       end
     end
 

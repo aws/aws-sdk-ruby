@@ -257,7 +257,7 @@ module Aws::Macie2
     #   <p>The Amazon Web Services account ID for the account that the request applied to.</p>
     #   @return [String]
     # @!attribute error_code
-    #   <p>The error code for the error that caused the request to fail for the account (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn’t exist or you're not the Amazon Macie administrator for the account; and, ACCOUNT_PAUSED, Macie isn’t enabled for the account in the current Amazon Web Services Region.</p>
+    #   <p>The error code for the error that caused the request to fail for the account (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn't exist or you're not the Amazon Macie administrator for the account; and, ACCOUNT_PAUSED, Macie isn't enabled for the account in the current Amazon Web Services Region.</p>
     #   @return [String]
     class AutomatedDiscoveryAccountUpdateError < Struct.new(
       nil,
@@ -366,7 +366,7 @@ module Aws::Macie2
     end
 
     # @!attribute errors
-    #   <p>An array of objects, one for each account whose status wasn’t changed. Each object identifies the account and explains why the status of automated sensitive data discovery wasn’t changed for the account. This value is null if the request succeeded for all specified accounts.</p>
+    #   <p>An array of objects, one for each account whose status wasn't changed. Each object identifies the account and explains why the status of automated sensitive data discovery wasn't changed for the account. This value is null if the request succeeded for all specified accounts.</p>
     #   @return [Array<Types::AutomatedDiscoveryAccountUpdateError>]
     class BatchUpdateAutomatedDiscoveryAccountsResponse < Struct.new(
       nil,
@@ -4272,9 +4272,12 @@ module Aws::Macie2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.</p>
+    # <p>Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket. The bucket must be an existing general purpose bucket. It can be a bucket in your own account or a bucket that another account owns. If another account owns the bucket, you must specify both the unique identifier for the account and the name of the bucket.</p>
     # @!attribute bucket_name
     #   <p>The name of the bucket. This must be the name of an existing general purpose bucket.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>The unique identifier (ID) for the Amazon Web Services account that owns the bucket. This must be the ID for the account that owns the specified bucket.</p>
     #   @return [String]
     # @!attribute key_prefix
     #   <p>The path prefix to use in the path to the location in the bucket. This prefix specifies where to store classification results in the bucket.</p>
@@ -4285,6 +4288,7 @@ module Aws::Macie2
     class S3Destination < Struct.new(
       nil,
       :bucket_name,
+      :expected_bucket_owner,
       :key_prefix,
       :kms_key_arn,
       keyword_init: true

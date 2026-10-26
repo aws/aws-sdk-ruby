@@ -125,10 +125,14 @@ module Aws::EMR
     #            consist of a required key string with a maximum of 128 characters, and an optional value
     #            string with a maximum of 256 characters.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster that scopes the tag operation. Required when the resource being tagged is a session-scoped resource.</p>
+    #   @return [String]
     class AddTagsInput < Struct.new(
       nil,
       :resource_id,
       :tags,
+      :cluster_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -474,6 +478,34 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Holds CloudWatch log configuration settings and metadata that specify settings like log files to monitor and where to send them.</p>
+    # @!attribute enabled
+    #   <p>Specifies if CloudWatch logging is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute log_group_name
+    #   <p>The name of the CloudWatch log group where logs are published.</p>
+    #   @return [String]
+    # @!attribute log_stream_name_prefix
+    #   <p>The prefix of the log stream name.</p>
+    #   @return [String]
+    # @!attribute encryption_key_arn
+    #   <p>The ARN of the encryption key used to encrypt the logs.</p>
+    #   @return [String]
+    # @!attribute log_types
+    #   <p>A map of log types to file names for publishing logs to the standard output or standard error streams for CloudWatch. Valid log types include STEP_LOGS, SPARK_DRIVER, and SPARK_EXECUTOR. Valid file names for each type include STDOUT and STDERR.</p>
+    #   @return [Hash<String, Array<String>>]
+    class CloudWatchLogConfiguration < Struct.new(
+      nil,
+      :enabled,
+      :log_group_name,
+      :log_stream_name_prefix,
+      :encryption_key_arn,
+      :log_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The detailed description of the cluster.</p>
     # @!attribute id
     #   <p>The unique identifier for the cluster.</p>
@@ -636,6 +668,12 @@ module Aws::EMR
     # @!attribute extended_support
     #   <p>Reserved.</p>
     #   @return [Boolean]
+    # @!attribute monitoring_configuration
+    #   <p>Contains Cloudwatch log configuration metadata and settings.</p>
+    #   @return [Types::MonitoringConfiguration]
+    # @!attribute session_enabled
+    #   <p>Indicates whether Spark Connect sessions are enabled on the cluster.</p>
+    #   @return [Boolean]
     class Cluster < Struct.new(
       nil,
       :id,
@@ -673,6 +711,8 @@ module Aws::EMR
       :ebs_root_volume_iops,
       :ebs_root_volume_throughput,
       :extended_support,
+      :monitoring_configuration,
+      :session_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -897,7 +937,7 @@ module Aws::EMR
     #   <p>The persistent application user interface identifier.</p>
     #   @return [String]
     # @!attribute runtime_role_enabled_cluster
-    #   <p>Represents if the EMR on EC2 cluster that the persisent application user interface is created for is a runtime role 
+    #   <p>Represents if the EMR on EC2 cluster that the persisent application user interface is created for is a runtime role
     #            enabled cluster or not.</p>
     #   @return [Boolean]
     class CreatePersistentAppUIOutput < Struct.new(
@@ -1457,7 +1497,7 @@ module Aws::EMR
     #            instance.</p>
     #   @return [Array<Types::EbsBlockDeviceConfig>]
     # @!attribute ebs_optimized
-    #   <p>Indicates whether an Amazon EBS volume is EBS-optimized. The default is false. You should explicitly set this value to true to enable the Amazon EBS-optimized setting 
+    #   <p>Indicates whether an Amazon EBS volume is EBS-optimized. The default is false. You should explicitly set this value to true to enable the Amazon EBS-optimized setting
     #            for an EC2 instance.</p>
     #   @return [Boolean]
     class EbsConfiguration < Struct.new(
@@ -1777,7 +1817,7 @@ module Aws::EMR
     #   <p>Determines if the user interface presigned URL is for a dry run.</p>
     #   @return [Boolean]
     # @!attribute execution_role_arn
-    #   <p>The execution role ARN associated with the cluster's application user interface 
+    #   <p>The execution role ARN associated with the cluster's application user interface
     #            presigned URL.</p>
     #   @return [String]
     class GetOnClusterAppUIPresignedURLInput < Struct.new(
@@ -1844,6 +1884,74 @@ module Aws::EMR
       nil,
       :presigned_url_ready,
       :presigned_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input to the <code>GetSessionEndpoint</code> operation.</p>
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster that the session belongs to.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The ID of the session.</p>
+    #   @return [String]
+    class GetSessionEndpointInput < Struct.new(
+      nil,
+      :cluster_id,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output of the <code>GetSessionEndpoint</code> operation.</p>
+    # @!attribute endpoint
+    #   <p>The Spark Connect endpoint URL to use in the PySpark client.</p>
+    #   @return [String]
+    # @!attribute auth_token
+    #   <p>A time-limited authentication token used to connect to the Spark Connect endpoint.</p>
+    #   @return [String]
+    # @!attribute auth_token_expiration_time
+    #   <p>The time at which the authentication token expires. After this time, call <code>GetSessionEndpoint</code> again to obtain a new token.</p>
+    #   @return [Time]
+    # @!attribute credentials
+    #   <p>Username and password used to authenticate with the Spark Connect server when connecting directly over VPC peering.</p>
+    #   @return [Types::Credentials]
+    class GetSessionEndpointOutput < Struct.new(
+      nil,
+      :endpoint,
+      :auth_token,
+      :auth_token_expiration_time,
+      :credentials,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input to the <code>GetSession</code> operation.</p>
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster that the session belongs to.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The ID of the session.</p>
+    #   @return [String]
+    class GetSessionInput < Struct.new(
+      nil,
+      :cluster_id,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output of the <code>GetSession</code> operation.</p>
+    # @!attribute session
+    #   <p>The output displays information about the session.</p>
+    #   @return [Types::Session]
+    class GetSessionOutput < Struct.new(
+      nil,
+      :session,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2393,9 +2501,10 @@ module Aws::EMR
     #   <p>The type of the instance group. Valid values are MASTER, CORE or TASK.</p>
     #   @return [String]
     # @!attribute bid_price
-    #   <p>If specified, indicates that the instance group uses Spot Instances. This is the maximum
-    #            price you are willing to pay for Spot Instances. Specify <code>OnDemandPrice</code> to set
-    #            the amount equal to the On-Demand price, or specify an amount in USD.</p>
+    #   <p>The bid price for each Amazon EC2 Spot Instance type as defined by
+    #            <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor
+    #            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,
+    #            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>
     #   @return [String]
     # @!attribute instance_type
     #   <p>The Amazon EC2 instance type for all instances in the instance group.</p>
@@ -2484,9 +2593,10 @@ module Aws::EMR
     #   <p>The role of the instance group in the cluster.</p>
     #   @return [String]
     # @!attribute bid_price
-    #   <p>If specified, indicates that the instance group uses Spot Instances. This is the maximum
-    #            price you are willing to pay for Spot Instances. Specify <code>OnDemandPrice</code> to set
-    #            the amount equal to the On-Demand price, or specify an amount in USD.</p>
+    #   <p>The bid price for each Amazon EC2 Spot Instance type as defined by
+    #            <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor
+    #            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,
+    #            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>
     #   @return [String]
     # @!attribute instance_type
     #   <p>The Amazon EC2 instance type for all instances in the instance group.</p>
@@ -2546,9 +2656,10 @@ module Aws::EMR
     #   <p>Instance group role in the cluster</p>
     #   @return [String]
     # @!attribute bid_price
-    #   <p>If specified, indicates that the instance group uses Spot Instances. This is the maximum
-    #            price you are willing to pay for Spot Instances. Specify <code>OnDemandPrice</code> to set
-    #            the amount equal to the On-Demand price, or specify an amount in USD.</p>
+    #   <p>The bid price for each Amazon EC2 Spot Instance type as defined by
+    #            <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor
+    #            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,
+    #            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>
     #   @return [String]
     # @!attribute instance_type
     #   <p>Amazon EC2 instance type.</p>
@@ -2815,7 +2926,7 @@ module Aws::EMR
     #   <p>The custom AMI ID to use for the instance type.</p>
     #   @return [String]
     # @!attribute priority
-    #   <p>The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type. 
+    #   <p>The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type.
     #            Priority starts at 0, which is the highest priority. Amazon EMR considers the highest priority first.</p>
     #   @return [Float]
     class InstanceTypeConfig < Struct.new(
@@ -2849,7 +2960,9 @@ module Aws::EMR
     #   @return [Integer]
     # @!attribute bid_price
     #   <p>The bid price for each Amazon EC2 Spot Instance type as defined by
-    #               <code>InstanceType</code>. Expressed in USD.</p>
+    #            <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor
+    #            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,
+    #            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>
     #   @return [String]
     # @!attribute bid_price_as_percentage_of_on_demand_price
     #   <p>The bid price, as a percentage of On-Demand price, for each Amazon EC2 Spot
@@ -2872,7 +2985,7 @@ module Aws::EMR
     #   <p>The custom AMI ID to use for the instance type.</p>
     #   @return [String]
     # @!attribute priority
-    #   <p>The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type. 
+    #   <p>The priority at which Amazon EMR launches the Amazon EC2 instances with this instance type.
     #            Priority starts at 0, which is the highest priority. Amazon EMR considers the highest priority first.</p>
     #   @return [Float]
     class InstanceTypeSpecification < Struct.new(
@@ -3661,6 +3774,46 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Input to the <code>ListSessions</code> operation.</p>
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster to list sessions for.</p>
+    #   @return [String]
+    # @!attribute session_states
+    #   <p>An optional filter that limits the results to sessions in the specified states.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The pagination token returned by a previous <code>ListSessions</code> call. Use it to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of sessions to return in each page of results.</p>
+    #   @return [Integer]
+    class ListSessionsInput < Struct.new(
+      nil,
+      :cluster_id,
+      :session_states,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output of the <code>ListSessions</code> operation.</p>
+    # @!attribute sessions
+    #   <p>The sessions that match the request.</p>
+    #   @return [Array<Types::Session>]
+    # @!attribute next_token
+    #   <p>The pagination token to use in a subsequent <code>ListSessions</code> call to retrieve the next page of results. This field is absent when there are no more results.</p>
+    #   @return [String]
+    class ListSessionsOutput < Struct.new(
+      nil,
+      :sessions,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This input determines which steps to list.</p>
     # @!attribute cluster_id
     #   <p>The identifier of the cluster for which to list the steps.</p>
@@ -3821,7 +3974,7 @@ module Aws::EMR
     #            configuration.</p>
     #   @return [Types::ComputeLimits]
     # @!attribute utilization_performance_index
-    #   <p>An integer value that represents an advanced scaling strategy. Setting a higher value optimizes for performance. Setting a lower value optimizes for resource conservation. Setting the value 
+    #   <p>An integer value that represents an advanced scaling strategy. Setting a higher value optimizes for performance. Setting a lower value optimizes for resource conservation. Setting the value
     #            to 50 balances performance and resource conservation. Possible values are 1, 25, 50, 75, and 100.</p>
     #   @return [Integer]
     # @!attribute scaling_strategy
@@ -3920,6 +4073,22 @@ module Aws::EMR
       nil,
       :cluster_id,
       :instance_groups,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains CloudWatch log configuration and S3 logging configuration metadata and settings.</p>
+    # @!attribute cloud_watch_log_configuration
+    #   <p>CloudWatch log configuration settings and metadata that specify settings like log files to monitor and where to send them.</p>
+    #   @return [Types::CloudWatchLogConfiguration]
+    # @!attribute s3_logging_configuration
+    #   <p>S3 logging configuration that controls how different types of logs (system logs, application logs, and persistent UI logs) are uploaded to S3. Each log type can be configured with a specific upload policy.</p>
+    #   @return [Types::S3LoggingConfiguration]
+    class MonitoringConfiguration < Struct.new(
+      nil,
+      :cloud_watch_log_configuration,
+      :s3_logging_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4334,13 +4503,13 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Holds persistent application user interface information. Applications installed on the Amazon EMR cluster publish user interfaces as 
+    # <p>Holds persistent application user interface information. Applications installed on the Amazon EMR cluster publish user interfaces as
     #          web sites to monitor cluster activity.</p>
     # @!attribute persistent_app_ui_id
     #   <p>The identifier for the persistent application user interface object.</p>
     #   @return [String]
     # @!attribute persistent_app_ui_type_list
-    #   <p>The type list for the persistent application user interface object. Valid values 
+    #   <p>The type list for the persistent application user interface object. Valid values
     #            include SHS, YTS, or TEZ.</p>
     #   @return [Array<String>]
     # @!attribute persistent_app_ui_status
@@ -4653,10 +4822,14 @@ module Aws::EMR
     # @!attribute tag_keys
     #   <p>A list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster that scopes the tag operation. Required when the resource being untagged is a session-scoped resource.</p>
+    #   @return [String]
     class RemoveTagsInput < Struct.new(
       nil,
       :resource_id,
       :tag_keys,
+      :cluster_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4705,6 +4878,16 @@ module Aws::EMR
     # @!attribute steps
     #   <p>A list of steps to run.</p>
     #   @return [Array<Types::StepConfig>]
+    # @!attribute step_execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the runtime role for steps specified in the
+    #            RunJobFlow request. The runtime role can be a cross-account IAM role.
+    #            The runtime role ARN is a combination of account ID, role name, and role type using the
+    #            following format: <code>arn:partition:iam::account-id:role/role-name</code>.</p>
+    #            <p>For example, <code>arn:aws:iam::1234567890:role/ReadOnly</code> is a correctly formatted
+    #            runtime role ARN.</p>
+    #            <p>This parameter applies only to steps included in the <code>Steps</code> parameter of this
+    #            RunJobFlow request. It does not apply to steps added later to the cluster.</p>
+    #   @return [String]
     # @!attribute bootstrap_actions
     #   <p>A list of bootstrap actions to run before Hadoop starts on the cluster nodes.</p>
     #   @return [Array<Types::BootstrapActionConfig>]
@@ -4885,6 +5068,12 @@ module Aws::EMR
     # @!attribute extended_support
     #   <p>Reserved.</p>
     #   @return [Boolean]
+    # @!attribute monitoring_configuration
+    #   <p>Contains CloudWatch log configuration metadata and settings.</p>
+    #   @return [Types::MonitoringConfiguration]
+    # @!attribute session_enabled
+    #   <p>Indicates whether Spark Connect sessions are enabled on the cluster. When set to <code>true</code>, you can start Spark Connect sessions using the <code>StartSession</code> operation.</p>
+    #   @return [Boolean]
     class RunJobFlowInput < Struct.new(
       nil,
       :name,
@@ -4895,6 +5084,7 @@ module Aws::EMR
       :release_label,
       :instances,
       :steps,
+      :step_execution_role_arn,
       :bootstrap_actions,
       :supported_products,
       :new_supported_products,
@@ -4919,6 +5109,8 @@ module Aws::EMR
       :ebs_root_volume_iops,
       :ebs_root_volume_throughput,
       :extended_support,
+      :monitoring_configuration,
+      :session_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4935,6 +5127,72 @@ module Aws::EMR
       nil,
       :job_flow_id,
       :cluster_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for S3 logging behavior in EMR clusters. Defines how different types of logs are uploaded to S3 based on the specified upload policies for each log type.</p>
+    # @!attribute log_type_upload_policy
+    #   <p>A map that specifies the upload policy for each log type. The key is the log type, and the value is the upload policy.</p>
+    #            <p>Valid log types:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>system-logs</code>: EMR Daemon logs.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>application-logs</code>: Framework logs from Hadoop, Spark, Hive and other applications running on the cluster.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>persistent-ui-logs</code>: Logs required for persistent application UIs such as Spark History Server and Tez UI.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Valid upload policies:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>emr-managed</code>: Standard behavior. Logs are uploaded to S3 bucket as configured in your
+    #                   LogUri, with certain logs retained by the service for operational
+    #                   support and troubleshooting purposes.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>on-customer-s3only</code>: Logs are uploaded only to the customer-specified S3 bucket. This requires you to specify a LogUri
+    #                   when creating the cluster. Persistent-ui-logs cannot have
+    #                   on-customer-s3only policy. Allowed policies for persistent-ui-logs
+    #                   are emr-managed and disabled.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>disabled</code>: No S3 upload for this log type.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Hash<String, String>]
+    class S3LoggingConfiguration < Struct.new(
+      nil,
+      :log_type_upload_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon S3 configuration for monitoring log publishing. You can configure your step to send log information
+    #          to Amazon S3. When it's specified, it takes precedence over the cluster's logging configuration. If you don't specify this
+    #          configuration entirely, or omit individual fields, EMR falls back to cluster-level
+    #          logging behavior.</p>
+    # @!attribute log_uri
+    #   <p>The Amazon S3 destination URI for log publishing.</p>
+    #   @return [String]
+    # @!attribute encryption_key_arn
+    #   <p>The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.</p>
+    #   @return [String]
+    class S3MonitoringConfiguration < Struct.new(
+      nil,
+      :log_uri,
+      :encryption_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5055,6 +5313,134 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Detailed information about a Spark Connect session.</p>
+    # @!attribute id
+    #   <p>The ID of the session.</p>
+    #   @return [String]
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster that the session belongs to.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the session, if one was provided at creation time.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the session.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the session. Valid values are <code>SUBMITTED</code>, <code>STARTING</code>, <code>STARTED</code>, <code>IDLE</code>, <code>BUSY</code>, <code>TERMINATING</code>, <code>TERMINATED</code>, and <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute state_change_reason
+    #   <p>A human-readable message describing the most recent state change.</p>
+    #   @return [String]
+    # @!attribute release_label
+    #   <p>The Amazon EMR release label of the cluster that the session is running on.</p>
+    #   @return [String]
+    # @!attribute execution_role_arn
+    #   <p>The execution role ARN for the session. Amazon EMR uses this role to access Amazon Web Services resources on your behalf during session execution.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The Amazon Web Services account ID that owns the session.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the session was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the session was last updated.</p>
+    #   @return [Time]
+    # @!attribute started_at
+    #   <p>The date and time that the session entered the <code>STARTED</code> state.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The date and time that the session was terminated or failed.</p>
+    #   @return [Time]
+    # @!attribute idle_since
+    #   <p>The date and time that the session last entered the <code>IDLE</code> state.</p>
+    #   @return [Time]
+    # @!attribute engine_configurations
+    #   <p>The configuration overrides for the session. Only runtime configuration overrides are supported.</p>
+    #   @return [Array<Types::Configuration>]
+    # @!attribute monitoring_configuration
+    #   <p>The monitoring configuration for the session.</p>
+    #   @return [Types::SessionMonitoringConfiguration]
+    # @!attribute session_idle_timeout_in_minutes
+    #   <p>The idle timeout, in minutes. If the session is idle for this duration, Amazon EMR automatically terminates it.</p>
+    #   @return [Integer]
+    # @!attribute server_url
+    #   <p>The Spark Connect server URL for the session. Use this URL with the <code>Credentials</code> returned by <code>GetSessionEndpoint</code> to connect directly to the session over VPC peering.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags associated with the session.</p>
+    #   @return [Array<Types::Tag>]
+    class Session < Struct.new(
+      nil,
+      :id,
+      :cluster_id,
+      :name,
+      :arn,
+      :state,
+      :state_change_reason,
+      :release_label,
+      :execution_role_arn,
+      :account_id,
+      :created_at,
+      :updated_at,
+      :started_at,
+      :ended_at,
+      :idle_since,
+      :engine_configurations,
+      :monitoring_configuration,
+      :session_idle_timeout_in_minutes,
+      :server_url,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The CloudWatch Logs configuration for a session.</p>
+    # @!attribute enabled
+    #   <p>Whether CloudWatch Logs is enabled for the session.</p>
+    #   @return [Boolean]
+    # @!attribute log_group
+    #   <p>The name of the log group where session logs are published.</p>
+    #   @return [String]
+    # @!attribute log_stream_name_prefix
+    #   <p>The prefix applied to the log stream name where session logs are published.</p>
+    #   @return [String]
+    # @!attribute encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the logs published to CloudWatch Logs.</p>
+    #   @return [String]
+    # @!attribute log_types
+    #   <p>A map of log component names (for example, <code>SPARK_DRIVER</code>, <code>SPARK_EXECUTOR</code>) to the list of log types to publish for that component (for example, <code>stdout</code>, <code>stderr</code>).</p>
+    #   @return [Hash<String, Array<String>>]
+    class SessionCloudWatchLoggingConfiguration < Struct.new(
+      nil,
+      :enabled,
+      :log_group,
+      :log_stream_name_prefix,
+      :encryption_key_arn,
+      :log_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon EMR-managed logging configuration for a session.</p>
+    # @!attribute enabled
+    #   <p>Whether Amazon EMR-managed logging is enabled for the session.</p>
+    #   @return [Boolean]
+    # @!attribute encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the managed logs.</p>
+    #   @return [String]
+    class SessionManagedLoggingConfiguration < Struct.new(
+      nil,
+      :enabled,
+      :encryption_key_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details for an Amazon EMR Studio session mapping including creation time, user
     #          or group ID, Studio ID, and so on.</p>
     # @!attribute studio_id
@@ -5132,9 +5518,53 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The monitoring configuration for a session. Controls where session logs are published.</p>
+    # @!attribute cloud_watch_logging_configuration
+    #   <p>The CloudWatch Logs configuration for the session.</p>
+    #   @return [Types::SessionCloudWatchLoggingConfiguration]
+    # @!attribute managed_logging_configuration
+    #   <p>The Amazon EMR-managed logging configuration for the session.</p>
+    #   @return [Types::SessionManagedLoggingConfiguration]
+    # @!attribute s3_logging_configuration
+    #   <p>The Amazon S3 logging configuration for the session.</p>
+    #   @return [Types::SessionS3LoggingConfiguration]
+    class SessionMonitoringConfiguration < Struct.new(
+      nil,
+      :cloud_watch_logging_configuration,
+      :managed_logging_configuration,
+      :s3_logging_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon S3 logging configuration for a session.</p>
+    # @!attribute enabled
+    #   <p>Whether Amazon S3 logging is enabled for the session.</p>
+    #   @return [Boolean]
+    # @!attribute log_uri
+    #   <p>The Amazon S3 destination URI where session logs are published.</p>
+    #   @return [String]
+    # @!attribute encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt logs published to Amazon S3.</p>
+    #   @return [String]
+    # @!attribute log_types
+    #   <p>A map of log component names (for example, <code>SPARK_DRIVER</code>, <code>SPARK_EXECUTOR</code>) to the list of log types to publish for that component (for example, <code>stdout</code>, <code>stderr</code>).</p>
+    #   @return [Hash<String, Array<String>>]
+    class SessionS3LoggingConfiguration < Struct.new(
+      nil,
+      :enabled,
+      :log_uri,
+      :encryption_key_arn,
+      :log_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute job_flow_ids
-    #   <p>A list of strings that uniquely identify the clusters to protect. This identifier is returned by 
-    #            <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html">RunJobFlow</a> and can also 
+    #   <p>A list of strings that uniquely identify the clusters to protect. This identifier is returned by
+    #            <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html">RunJobFlow</a> and can also
     #            be obtained from <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html">DescribeJobFlows</a>.</p>
     #   @return [Array<String>]
     # @!attribute keep_job_flow_alive_when_no_steps
@@ -5168,8 +5598,8 @@ module Aws::EMR
     end
 
     # @!attribute job_flow_ids
-    #   <p>The list of strings that uniquely identify the clusters for which to turn on 
-    #            unhealthy node replacement. You can get these identifiers by running the 
+    #   <p>The list of strings that uniquely identify the clusters for which to turn on
+    #            unhealthy node replacement. You can get these identifiers by running the
     #            <a>RunJobFlow</a> or the <a>DescribeJobFlows</a> operations.</p>
     #   @return [Array<String>]
     # @!attribute unhealthy_node_replacement
@@ -5323,8 +5753,8 @@ module Aws::EMR
     #            </note>
     #   @return [Integer]
     # @!attribute allocation_strategy
-    #   <p>Specifies one of the following strategies to launch Spot Instance fleets: 
-    #            <code>capacity-optimized</code>, <code>price-capacity-optimized</code>, <code>lowest-price</code>, or  
+    #   <p>Specifies one of the following strategies to launch Spot Instance fleets:
+    #            <code>capacity-optimized</code>, <code>price-capacity-optimized</code>, <code>lowest-price</code>, or
     #            <code>diversified</code>, and <code>capacity-optimized-prioritized</code>. For more information on the provisioning strategies, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html">Allocation strategies for Spot Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
     #            <note>
     #               <p>When you launch a Spot Instance fleet with the old console, it automatically launches with the <code>capacity-optimized</code> strategy. You can't change the allocation strategy from the old console.</p>
@@ -5444,6 +5874,74 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Input to the <code>StartSession</code> operation.</p>
+    # @!attribute name
+    #   <p>An optional name for the session.</p>
+    #   @return [String]
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster on which to start the session.</p>
+    #   @return [String]
+    # @!attribute execution_role_arn
+    #   <p>The execution role ARN for the session. Amazon EMR uses this role to access Amazon Web Services resources on your behalf during session execution.</p>
+    #   @return [String]
+    # @!attribute engine_configurations
+    #   <p>The configuration overrides for the session. Only runtime configuration overrides are supported.</p>
+    #   @return [Array<Types::Configuration>]
+    # @!attribute monitoring_configuration
+    #   <p>The monitoring configuration that controls where session logs are published, such as Amazon S3, CloudWatch, or managed logging.</p>
+    #   @return [Types::SessionMonitoringConfiguration]
+    # @!attribute session_idle_timeout_in_minutes
+    #   <p>The idle timeout, in minutes. If the session is idle for this duration, Amazon EMR EC2 automatically terminates it.</p>
+    #   @return [Integer]
+    # @!attribute client_request_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client request token, the service returns the original response without performing the operation again.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to assign to the session.</p>
+    #   @return [Array<Types::Tag>]
+    class StartSessionInput < Struct.new(
+      nil,
+      :name,
+      :cluster_id,
+      :execution_role_arn,
+      :engine_configurations,
+      :monitoring_configuration,
+      :session_idle_timeout_in_minutes,
+      :client_request_token,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output of the <code>StartSession</code> operation.</p>
+    # @!attribute id
+    #   <p>The output contains the ID of the session.</p>
+    #   @return [String]
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster that the session was started on.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The output contains the ARN of the session.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The Amazon Web Services account ID that owns the session.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the session at the time the request returned. When a session is first created, it enters the <code>SUBMITTED</code> state.</p>
+    #   @return [String]
+    class StartSessionOutput < Struct.new(
+      nil,
+      :id,
+      :cluster_id,
+      :arn,
+      :account_id,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This represents a step in a cluster.</p>
     # @!attribute id
     #   <p>The identifier of the cluster step.</p>
@@ -5482,6 +5980,13 @@ module Aws::EMR
     #            <p>For example, <code>arn:aws:IAM::1234567890:role/ReadOnly</code> is a correctly formatted
     #            runtime role ARN.</p>
     #   @return [String]
+    # @!attribute log_uri
+    #   <p>The Amazon S3 destination URI for log publishing.</p>
+    #   @return [String]
+    # @!attribute encryption_key_arn
+    #   <p>The KMS key ARN to encrypt the logs published to the given Amazon S3
+    #            destination.</p>
+    #   @return [String]
     class Step < Struct.new(
       nil,
       :id,
@@ -5490,6 +5995,8 @@ module Aws::EMR
       :action_on_failure,
       :status,
       :execution_role_arn,
+      :log_uri,
+      :encryption_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5537,11 +6044,15 @@ module Aws::EMR
     # @!attribute hadoop_jar_step
     #   <p>The JAR file used for the step.</p>
     #   @return [Types::HadoopJarStepConfig]
+    # @!attribute step_monitoring_configuration
+    #   <p>Object that holds configuration properties for logging.</p>
+    #   @return [Types::StepMonitoringConfiguration]
     class StepConfig < Struct.new(
       nil,
       :name,
       :action_on_failure,
       :hadoop_jar_step,
+      :step_monitoring_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5586,6 +6097,21 @@ module Aws::EMR
       :start_date_time,
       :end_date_time,
       :last_state_change_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Object that holds configuration properties for logging.</p>
+    # @!attribute s3_monitoring_configuration
+    #   <p>The Amazon S3 configuration for monitoring log publishing. You can configure your step to send log information
+    #            to Amazon S3. When it's specified, it takes precedence over the cluster's logging configuration. If you don't specify this
+    #            configuration entirely, or omit individual fields, EMR falls back to cluster-level logging behavior.
+    #         </p>
+    #   @return [Types::S3MonitoringConfiguration]
+    class StepMonitoringConfiguration < Struct.new(
+      nil,
+      :s3_monitoring_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5651,6 +6177,13 @@ module Aws::EMR
     # @!attribute status
     #   <p>The current execution status details of the cluster step.</p>
     #   @return [Types::StepStatus]
+    # @!attribute log_uri
+    #   <p>The Amazon S3 destination URI for log publishing.</p>
+    #   @return [String]
+    # @!attribute encryption_key_arn
+    #   <p>The KMS key ARN to encrypt the logs published to the given Amazon S3
+    #            destination.</p>
+    #   @return [String]
     class StepSummary < Struct.new(
       nil,
       :id,
@@ -5658,6 +6191,8 @@ module Aws::EMR
       :config,
       :action_on_failure,
       :status,
+      :log_uri,
+      :encryption_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5800,7 +6335,7 @@ module Aws::EMR
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. To fetch additional details such as subnets, IAM roles, 
+    # <p>Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. To fetch additional details such as subnets, IAM roles,
     #          security groups, and tags for the Studio, use the <a>DescribeStudio</a> API.</p>
     # @!attribute studio_id
     #   <p>The ID of the Amazon EMR Studio.</p>
@@ -5944,6 +6479,42 @@ module Aws::EMR
     class TerminateJobFlowsInput < Struct.new(
       nil,
       :job_flow_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input to the <code>TerminateSession</code> operation.</p>
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster that the session belongs to.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The ID of the session to terminate.</p>
+    #   @return [String]
+    class TerminateSessionInput < Struct.new(
+      nil,
+      :cluster_id,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output of the <code>TerminateSession</code> operation.</p>
+    # @!attribute cluster_id
+    #   <p>The ID of the cluster that the session belonged to.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The ID of the terminated session.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the session after the terminate request has been accepted.</p>
+    #   @return [String]
+    class TerminateSessionOutput < Struct.new(
+      nil,
+      :cluster_id,
+      :session_id,
+      :state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

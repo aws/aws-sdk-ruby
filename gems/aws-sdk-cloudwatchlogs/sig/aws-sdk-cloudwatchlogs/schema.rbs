@@ -9,10 +9,13 @@ module Aws::CloudWatchLogs
     AccountPolicies: ListShape
     AccountPolicy: StructureShape
     AccountPolicyDocument: StringShape
+    ActionStatus: EnumShape
     AddKeyEntries: ListShape
     AddKeyEntry: StructureShape
     AddKeyValue: StringShape
     AddKeys: StructureShape
+    AggregateLogGroupSummaries: ListShape
+    AggregateLogGroupSummary: StructureShape
     AllowedActionForAllowVendedLogsDeliveryForResource: StringShape
     AllowedFieldDelimiters: ListShape
     AllowedFields: ListShape
@@ -28,10 +31,17 @@ module Aws::CloudWatchLogs
     ApplyOnTransformedLogs: BooleanShape
     Arn: StringShape
     AssociateKmsKeyRequest: StructureShape
+    AssociateSourceToS3TableIntegrationRequest: StructureShape
+    AssociateSourceToS3TableIntegrationResponse: StructureShape
     Baseline: BooleanShape
+    BatchId: StringShape
+    BearerTokenAuthenticationEnabled: BooleanShape
     Boolean: BooleanShape
+    BytesScannedValue: FloatShape
     CSV: StructureShape
     CancelExportTaskRequest: StructureShape
+    CancelImportTaskRequest: StructureShape
+    CancelImportTaskResponse: StructureShape
     ClientToken: StringShape
     CollectionRetentionDays: IntegerShape
     Column: StringShape
@@ -48,15 +58,27 @@ module Aws::CloudWatchLogs
     CreateDeliveryResponse: StructureShape
     CreateExportTaskRequest: StructureShape
     CreateExportTaskResponse: StructureShape
+    CreateImportTaskRequest: StructureShape
+    CreateImportTaskResponse: StructureShape
     CreateLogAnomalyDetectorRequest: StructureShape
     CreateLogAnomalyDetectorResponse: StructureShape
     CreateLogGroupRequest: StructureShape
     CreateLogStreamRequest: StructureShape
+    CreateLookupTableRequest: StructureShape
+    CreateLookupTableResponse: StructureShape
+    CreateScheduledQueryRequest: StructureShape
+    CreateScheduledQueryResponse: StructureShape
     DashboardViewerPrincipals: ListShape
     Data: BlobShape
     DataAlreadyAcceptedException: StructureShape
     DataProtectionPolicyDocument: StringShape
     DataProtectionStatus: EnumShape
+    DataSource: StructureShape
+    DataSourceFilter: StructureShape
+    DataSourceFilters: ListShape
+    DataSourceName: StringShape
+    DataSourceType: StringShape
+    DataType: StringShape
     DateTimeConverter: StructureShape
     Days: IntegerShape
     DefaultValue: FloatShape
@@ -75,14 +97,19 @@ module Aws::CloudWatchLogs
     DeleteLogAnomalyDetectorRequest: StructureShape
     DeleteLogGroupRequest: StructureShape
     DeleteLogStreamRequest: StructureShape
+    DeleteLookupTableRequest: StructureShape
     DeleteMetricFilterRequest: StructureShape
     DeleteQueryDefinitionRequest: StructureShape
     DeleteQueryDefinitionResponse: StructureShape
     DeleteResourcePolicyRequest: StructureShape
     DeleteRetentionPolicyRequest: StructureShape
+    DeleteScheduledQueryRequest: StructureShape
+    DeleteScheduledQueryResponse: StructureShape
     DeleteSubscriptionFilterRequest: StructureShape
+    DeleteSyslogConfigurationRequest: StructureShape
     DeleteTransformerRequest: StructureShape
     DeleteWithKeys: ListShape
+    DeletionProtectionEnabled: BooleanShape
     Delimiter: StringShape
     Deliveries: ListShape
     Delivery: StructureShape
@@ -95,7 +122,18 @@ module Aws::CloudWatchLogs
     DeliveryDestinations: ListShape
     DeliveryId: StringShape
     DeliverySource: StructureShape
+    DeliverySourceConfiguration: MapShape
+    DeliverySourceConfigurationKey: StringShape
+    DeliverySourceConfigurationNumericValue: FloatShape
+    DeliverySourceConfigurationSchema: StructureShape
+    DeliverySourceConfigurationSchemaField: StringShape
+    DeliverySourceConfigurationSchemaValueType: EnumShape
+    DeliverySourceConfigurationSchemas: ListShape
+    DeliverySourceConfigurationSupportedValues: ListShape
+    DeliverySourceConfigurationValue: StringShape
     DeliverySourceName: StringShape
+    DeliverySourceStatus: EnumShape
+    DeliverySourceStatusReason: EnumShape
     DeliverySources: ListShape
     DeliverySuffixPath: StringShape
     Descending: BooleanShape
@@ -116,6 +154,10 @@ module Aws::CloudWatchLogs
     DescribeFieldIndexesLogGroupIdentifiers: ListShape
     DescribeFieldIndexesRequest: StructureShape
     DescribeFieldIndexesResponse: StructureShape
+    DescribeImportTaskBatchesRequest: StructureShape
+    DescribeImportTaskBatchesResponse: StructureShape
+    DescribeImportTasksRequest: StructureShape
+    DescribeImportTasksResponse: StructureShape
     DescribeIndexPoliciesLogGroupIdentifiers: ListShape
     DescribeIndexPoliciesRequest: StructureShape
     DescribeIndexPoliciesResponse: StructureShape
@@ -125,6 +167,9 @@ module Aws::CloudWatchLogs
     DescribeLogGroupsResponse: StructureShape
     DescribeLogStreamsRequest: StructureShape
     DescribeLogStreamsResponse: StructureShape
+    DescribeLookupTablesMaxResults: IntegerShape
+    DescribeLookupTablesRequest: StructureShape
+    DescribeLookupTablesResponse: StructureShape
     DescribeMetricFiltersRequest: StructureShape
     DescribeMetricFiltersResponse: StructureShape
     DescribeQueriesMaxResults: IntegerShape
@@ -139,6 +184,7 @@ module Aws::CloudWatchLogs
     Description: StringShape
     Destination: StructureShape
     DestinationArn: StringShape
+    DestinationConfiguration: StructureShape
     DestinationField: StringShape
     DestinationName: StringShape
     Destinations: ListShape
@@ -148,10 +194,13 @@ module Aws::CloudWatchLogs
     DimensionsKey: StringShape
     DimensionsValue: StringShape
     DisassociateKmsKeyRequest: StructureShape
+    DisassociateSourceFromS3TableIntegrationRequest: StructureShape
+    DisassociateSourceFromS3TableIntegrationResponse: StructureShape
     Distribution: EnumShape
     DynamicTokenPosition: IntegerShape
     EmitSystemFields: ListShape
     EncryptionKey: StringShape
+    EndTimeOffset: IntegerShape
     Entity: StructureShape
     EntityAttributes: MapShape
     EntityAttributesKey: StringShape
@@ -162,12 +211,16 @@ module Aws::CloudWatchLogs
     EntityRejectionErrorType: EnumShape
     Enumerations: MapShape
     EpochMillis: IntegerShape
+    ErrorMessage: StringShape
     EvaluationFrequency: EnumShape
     EventId: StringShape
     EventMessage: StringShape
     EventNumber: IntegerShape
     EventSource: EnumShape
     EventsLimit: IntegerShape
+    EventsLimitStartQuery: IntegerShape
+    ExecutionStatus: EnumShape
+    ExecutionStatusList: ListShape
     ExpectedRevisionId: StringShape
     ExportDestinationBucket: StringShape
     ExportDestinationPrefix: StringShape
@@ -185,6 +238,7 @@ module Aws::CloudWatchLogs
     FieldHeader: StringShape
     FieldIndex: StructureShape
     FieldIndexName: StringShape
+    FieldIndexNames: ListShape
     FieldIndexes: ListShape
     FieldSelectionCriteria: StringShape
     FieldsData: StructureShape
@@ -216,6 +270,8 @@ module Aws::CloudWatchLogs
     GetLogAnomalyDetectorResponse: StructureShape
     GetLogEventsRequest: StructureShape
     GetLogEventsResponse: StructureShape
+    GetLogFieldsRequest: StructureShape
+    GetLogFieldsResponse: StructureShape
     GetLogGroupFieldsRequest: StructureShape
     GetLogGroupFieldsResponse: StructureShape
     GetLogObjectRequest: StructureShape
@@ -223,17 +279,44 @@ module Aws::CloudWatchLogs
     GetLogObjectResponseStream: UnionShape
     GetLogRecordRequest: StructureShape
     GetLogRecordResponse: StructureShape
+    GetLookupTableRequest: StructureShape
+    GetLookupTableResponse: StructureShape
+    GetQueryResultsMaxItems: IntegerShape
+    GetQueryResultsNextToken: StringShape
     GetQueryResultsRequest: StructureShape
     GetQueryResultsResponse: StructureShape
+    GetScheduledQueryHistoryMaxResults: IntegerShape
+    GetScheduledQueryHistoryRequest: StructureShape
+    GetScheduledQueryHistoryResponse: StructureShape
+    GetScheduledQueryRequest: StructureShape
+    GetScheduledQueryResponse: StructureShape
+    GetStorageTierPolicyRequest: StructureShape
+    GetStorageTierPolicyResponse: StructureShape
     GetTransformerRequest: StructureShape
     GetTransformerResponse: StructureShape
     Grok: StructureShape
     GrokMatch: StringShape
+    GroupingIdentifier: StructureShape
+    GroupingIdentifierKey: StringShape
+    GroupingIdentifierValue: StringShape
+    GroupingIdentifiers: ListShape
     Histogram: MapShape
+    Import: StructureShape
+    ImportBatch: StructureShape
+    ImportBatchList: ListShape
+    ImportFilter: StructureShape
+    ImportId: StringShape
+    ImportList: ListShape
+    ImportStatistics: StructureShape
+    ImportStatus: EnumShape
+    ImportStatusList: ListShape
     IncludeLinkedAccounts: BooleanShape
+    IndexCategories: ListShape
+    IndexCategory: EnumShape
     IndexPolicies: ListShape
     IndexPolicy: StructureShape
     IndexSource: EnumShape
+    IndexType: EnumShape
     InferredTokenName: StringShape
     InheritedProperties: ListShape
     InheritedProperty: EnumShape
@@ -250,6 +333,7 @@ module Aws::CloudWatchLogs
     IntegrationSummary: StructureShape
     IntegrationType: EnumShape
     Interleaved: BooleanShape
+    InternalServerException: StructureShape
     InternalStreamingException: StructureShape
     InvalidOperationException: StructureShape
     InvalidParameterException: StructureShape
@@ -260,6 +344,9 @@ module Aws::CloudWatchLogs
     KeyValueDelimiter: StringShape
     KmsKeyId: StringShape
     LimitExceededException: StructureShape
+    ListAggregateLogGroupSummariesGroupBy: EnumShape
+    ListAggregateLogGroupSummariesRequest: StructureShape
+    ListAggregateLogGroupSummariesResponse: StructureShape
     ListAnomaliesLimit: IntegerShape
     ListAnomaliesRequest: StructureShape
     ListAnomaliesResponse: StructureShape
@@ -273,7 +360,17 @@ module Aws::CloudWatchLogs
     ListLogGroupsForQueryRequest: StructureShape
     ListLogGroupsForQueryResponse: StructureShape
     ListLogGroupsRequest: StructureShape
+    ListLogGroupsRequestLimit: IntegerShape
     ListLogGroupsResponse: StructureShape
+    ListScheduledQueriesMaxResults: IntegerShape
+    ListScheduledQueriesRequest: StructureShape
+    ListScheduledQueriesResponse: StructureShape
+    ListSourcesForS3TableIntegrationMaxResults: IntegerShape
+    ListSourcesForS3TableIntegrationRequest: StructureShape
+    ListSourcesForS3TableIntegrationResponse: StructureShape
+    ListSyslogConfigurationsMaxResults: IntegerShape
+    ListSyslogConfigurationsRequest: StructureShape
+    ListSyslogConfigurationsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     ListTagsLogGroupRequest: StructureShape
@@ -287,10 +384,15 @@ module Aws::CloudWatchLogs
     Locale: StringShape
     LogEvent: StructureShape
     LogEventIndex: IntegerShape
+    LogFieldName: StringShape
+    LogFieldType: StructureShape
+    LogFieldsList: ListShape
+    LogFieldsListItem: StructureShape
     LogGroup: StructureShape
     LogGroupArn: StringShape
     LogGroupArnList: ListShape
     LogGroupClass: EnumShape
+    LogGroupCount: IntegerShape
     LogGroupField: StructureShape
     LogGroupFieldList: ListShape
     LogGroupIdentifier: StringShape
@@ -312,9 +414,15 @@ module Aws::CloudWatchLogs
     LogStreams: ListShape
     LogType: StringShape
     LogTypes: ListShape
+    LookupTable: StructureShape
+    LookupTableConfiguration: StructureShape
+    LookupTableDescription: StringShape
+    LookupTableName: StringShape
+    LookupTables: ListShape
     LowerCaseString: StructureShape
     LowerCaseStringWithKeys: ListShape
     MalformedQueryException: StructureShape
+    MappingVersion: StringShape
     MatchPattern: StringShape
     MatchPatterns: ListShape
     Message: StringShape
@@ -383,6 +491,7 @@ module Aws::CloudWatchLogs
     Processors: ListShape
     PutAccountPolicyRequest: StructureShape
     PutAccountPolicyResponse: StructureShape
+    PutBearerTokenAuthenticationRequest: StructureShape
     PutDataProtectionPolicyRequest: StructureShape
     PutDataProtectionPolicyResponse: StructureShape
     PutDeliveryDestinationPolicyRequest: StructureShape
@@ -400,13 +509,17 @@ module Aws::CloudWatchLogs
     PutIntegrationResponse: StructureShape
     PutLogEventsRequest: StructureShape
     PutLogEventsResponse: StructureShape
+    PutLogGroupDeletionProtectionRequest: StructureShape
     PutMetricFilterRequest: StructureShape
     PutQueryDefinitionRequest: StructureShape
     PutQueryDefinitionResponse: StructureShape
     PutResourcePolicyRequest: StructureShape
     PutResourcePolicyResponse: StructureShape
     PutRetentionPolicyRequest: StructureShape
+    PutStorageTierPolicyRequest: StructureShape
+    PutStorageTierPolicyResponse: StructureShape
     PutSubscriptionFilterRequest: StructureShape
+    PutSyslogConfigurationRequest: StructureShape
     PutTransformerRequest: StructureShape
     QueryCharOffset: IntegerShape
     QueryCompileError: StructureShape
@@ -415,11 +528,17 @@ module Aws::CloudWatchLogs
     QueryDefinitionList: ListShape
     QueryDefinitionName: StringShape
     QueryDefinitionString: StringShape
+    QueryDuration: IntegerShape
     QueryId: StringShape
     QueryInfo: StructureShape
     QueryInfoList: ListShape
     QueryLanguage: EnumShape
     QueryListMaxResults: IntegerShape
+    QueryParameter: StructureShape
+    QueryParameterDefaultValue: StringShape
+    QueryParameterDescription: StringShape
+    QueryParameterList: ListShape
+    QueryParameterName: StringShape
     QueryResults: ListShape
     QueryStatistics: StructureShape
     QueryStatus: EnumShape
@@ -427,6 +546,7 @@ module Aws::CloudWatchLogs
     QuoteCharacter: StringShape
     RecordField: StructureShape
     RecordFields: ListShape
+    RecordsCount: IntegerShape
     RejectedEntityInfo: StructureShape
     RejectedLogEventsInfo: StructureShape
     RenameKeyEntries: ListShape
@@ -446,7 +566,30 @@ module Aws::CloudWatchLogs
     ResultField: StructureShape
     ResultRows: ListShape
     RoleArn: StringShape
+    S3Configuration: StructureShape
     S3DeliveryConfiguration: StructureShape
+    S3TableIntegrationSource: StructureShape
+    S3TableIntegrationSourceIdentifier: StringShape
+    S3TableIntegrationSourceStatus: EnumShape
+    S3TableIntegrationSourceStatusReason: StringShape
+    S3TableIntegrationSources: ListShape
+    S3TablesDatasourceName: StringShape
+    S3TablesDatasourceType: StringShape
+    S3TablesIntegration: StructureShape
+    S3Uri: StringShape
+    ScheduleExpression: StringShape
+    ScheduleTimezone: StringShape
+    ScheduleType: EnumShape
+    ScheduledQueryDescription: StringShape
+    ScheduledQueryDestination: StructureShape
+    ScheduledQueryDestinationList: ListShape
+    ScheduledQueryDestinationType: EnumShape
+    ScheduledQueryIdentifier: StringShape
+    ScheduledQueryLogGroupIdentifiers: ListShape
+    ScheduledQueryName: StringShape
+    ScheduledQueryState: EnumShape
+    ScheduledQuerySummary: StructureShape
+    ScheduledQuerySummaryList: ListShape
     Scope: EnumShape
     SearchedLogStream: StructureShape
     SearchedLogStreams: ListShape
@@ -472,11 +615,14 @@ module Aws::CloudWatchLogs
     StartLiveTailResponseStream: UnionShape
     StartQueryRequest: StructureShape
     StartQueryResponse: StructureShape
+    StartTimeOffset: IntegerShape
     State: EnumShape
     StatsValue: FloatShape
     StopQueryRequest: StructureShape
     StopQueryResponse: StructureShape
+    StorageTier: EnumShape
     StoredBytes: IntegerShape
+    String: StringShape
     SubscriptionFilter: StructureShape
     SubscriptionFilters: ListShape
     SubstituteString: StructureShape
@@ -487,7 +633,17 @@ module Aws::CloudWatchLogs
     SuppressionState: EnumShape
     SuppressionType: EnumShape
     SuppressionUnit: EnumShape
+    SyslogConfiguration: StructureShape
+    SyslogConfigurations: ListShape
+    SyslogSourceType: EnumShape
     SystemField: StringShape
+    TableBody: StringShape
+    TableFields: ListShape
+    TagFilter: StructureShape
+    TagFilterKey: StringShape
+    TagFilterValue: StringShape
+    TagFilterValues: ListShape
+    TagFilters: ListShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagList: ListShape
@@ -515,6 +671,8 @@ module Aws::CloudWatchLogs
     TransformedEventMessage: StringShape
     TransformedLogRecord: StructureShape
     TransformedLogs: ListShape
+    TriggerHistoryRecord: StructureShape
+    TriggerHistoryRecordList: ListShape
     TrimString: StructureShape
     TrimStringWithKeys: ListShape
     Type: EnumShape
@@ -529,11 +687,17 @@ module Aws::CloudWatchLogs
     UpdateDeliveryConfigurationRequest: StructureShape
     UpdateDeliveryConfigurationResponse: StructureShape
     UpdateLogAnomalyDetectorRequest: StructureShape
+    UpdateLookupTableRequest: StructureShape
+    UpdateLookupTableResponse: StructureShape
+    UpdateScheduledQueryRequest: StructureShape
+    UpdateScheduledQueryResponse: StructureShape
     UpperCaseString: StructureShape
     UpperCaseStringWithKeys: ListShape
+    UserIdentity: StringShape
     ValidationException: StructureShape
     Value: StringShape
     ValueKey: StringShape
+    VpcEndpointId: StringShape
     WithKey: StringShape
 
     Logs20140328: ServiceShape

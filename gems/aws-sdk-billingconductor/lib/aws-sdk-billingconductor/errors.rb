@@ -35,8 +35,7 @@ module Aws::Billingconductor
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>You do not have sufficient access to perform this action.
-    #     </p>
+    # <p>You do not have sufficient access to perform this action. </p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::AccessDeniedException] data
@@ -49,8 +48,7 @@ module Aws::Billingconductor
       end
     end
 
-    # <p>You can cause an inconsistent state by updating or deleting a resource.
-    #     </p>
+    # <p>You can cause an inconsistent state by updating or deleting a resource. </p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ConflictException] data
@@ -62,27 +60,23 @@ module Aws::Billingconductor
         @data[:message]
       end
 
-      # <p>Identifier of the resource in use.
-      #     </p>
+      # <p>Identifier of the resource in use. </p>
       def resource_id
         @data[:resource_id]
       end
 
-      # <p>Type of the resource in use.
-      #     </p>
+      # <p>Type of the resource in use. </p>
       def resource_type
         @data[:resource_type]
       end
 
-      # <p>Reason for the inconsistent state.
-      #     </p>
+      # <p>Reason for the inconsistent state. </p>
       def reason
         @data[:reason]
       end
     end
 
-    # <p>An unexpected error occurred while processing a request.
-    #     </p>
+    # <p>An unexpected error occurred while processing a request. </p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::InternalServerException] data
@@ -94,15 +88,13 @@ module Aws::Billingconductor
         @data[:message]
       end
 
-      # <p>Number of seconds you can retry after the call.
-      #     </p>
+      # <p>Number of seconds you can retry after the call. </p>
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
     end
 
-    # <p>The request references a resource that doesn't exist.
-    #     </p>
+    # <p>The request references a resource that doesn't exist. </p>
     class ResourceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ResourceNotFoundException] data
@@ -114,21 +106,18 @@ module Aws::Billingconductor
         @data[:message]
       end
 
-      # <p>Resource identifier that was not found.
-      #     </p>
+      # <p>Resource identifier that was not found. </p>
       def resource_id
         @data[:resource_id]
       end
 
-      # <p>Resource type that was not found.
-      #     </p>
+      # <p>Resource type that was not found. </p>
       def resource_type
         @data[:resource_type]
       end
     end
 
-    # <p>The request would cause a service limit to exceed.
-    #     </p>
+    # <p>The request would cause a service limit to exceed. </p>
     class ServiceLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ServiceLimitExceededException] data
@@ -140,33 +129,28 @@ module Aws::Billingconductor
         @data[:message]
       end
 
-      # <p>Identifier of the resource affected.
-      #     </p>
+      # <p>Identifier of the resource affected. </p>
       def resource_id
         @data[:resource_id]
       end
 
-      # <p>Type of the resource affected.
-      #     </p>
+      # <p>Type of the resource affected. </p>
       def resource_type
         @data[:resource_type]
       end
 
-      # <p>The unique code identifier of the service limit that is being exceeded.
-      #     </p>
+      # <p>The unique code identifier of the service limit that is being exceeded. </p>
       def limit_code
         @data[:limit_code]
       end
 
-      # <p>The unique code for the service of the limit that is being exceeded.
-      #     </p>
+      # <p>The unique code for the service of the limit that is being exceeded. </p>
       def service_code
         @data[:service_code]
       end
     end
 
-    # <p>The request was denied due to request throttling.
-    #     </p>
+    # <p>The request was denied due to request throttling. </p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ThrottlingException] data
@@ -178,14 +162,13 @@ module Aws::Billingconductor
         @data[:message]
       end
 
-      # <p>Number of seconds you can safely retry after the call.
-      #     </p>
+      # <p>Number of seconds you can safely retry after the call. </p>
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
     end
 
-    # <p>The input doesn't match with the constraints specified by Amazon Web Services.</p>
+    # <p>The input doesn't match with the constraints specified by Amazon Web Services services.</p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billingconductor::Types::ValidationException] data
@@ -197,14 +180,12 @@ module Aws::Billingconductor
         @data[:message]
       end
 
-      # <p>The reason the request's validation failed.
-      #     </p>
+      # <p>The reason the request's validation failed. </p>
       def reason
         @data[:reason]
       end
 
-      # <p>The fields that caused the error, if applicable.
-      #     </p>
+      # <p>The fields that caused the error, if applicable. </p>
       def fields
         @data[:fields]
       end

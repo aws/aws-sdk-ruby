@@ -57,7 +57,57 @@ module Aws::Lambda
     end
 
     # @api private
+    class CheckpointDurableExecution
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class CreateAlias
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class CreateCapacityProvider
       def next_tokens(data)
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
@@ -183,6 +233,31 @@ module Aws::Lambda
 
     # @api private
     class DeleteAlias
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class DeleteCapacityProvider
       def next_tokens(data)
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
@@ -432,6 +507,31 @@ module Aws::Lambda
     end
 
     # @api private
+    class DeleteResourcePolicy
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class GetAccountSettings
       def next_tokens(data)
         next_token = data.next_marker
@@ -482,6 +582,31 @@ module Aws::Lambda
     end
 
     # @api private
+    class GetCapacityProvider
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class GetCodeSigningConfig
       def next_tokens(data)
         next_token = data.next_marker
@@ -503,6 +628,81 @@ module Aws::Lambda
 
       def items(data)
         raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class GetDurableExecution
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class GetDurableExecutionHistory
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.events
+      end
+    end
+
+    # @api private
+    class GetDurableExecutionState
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.operations
       end
     end
 
@@ -682,6 +882,31 @@ module Aws::Lambda
     end
 
     # @api private
+    class GetFunctionScalingConfig
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class GetFunctionUrlConfig
       def next_tokens(data)
         next_token = data.next_marker
@@ -832,6 +1057,31 @@ module Aws::Lambda
     end
 
     # @api private
+    class GetResourcePolicy
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class GetRuntimeManagementConfig
       def next_tokens(data)
         next_token = data.next_marker
@@ -957,6 +1207,31 @@ module Aws::Lambda
     end
 
     # @api private
+    class ListCapacityProviders
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.capacity_providers
+      end
+    end
+
+    # @api private
     class ListCodeSigningConfigs
       def next_tokens(data)
         next_token = data.next_marker
@@ -978,6 +1253,31 @@ module Aws::Lambda
 
       def items(data)
         data.code_signing_configs
+      end
+    end
+
+    # @api private
+    class ListDurableExecutionsByFunction
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.durable_executions
       end
     end
 
@@ -1053,6 +1353,31 @@ module Aws::Lambda
 
       def items(data)
         data.function_url_configs
+      end
+    end
+
+    # @api private
+    class ListFunctionVersionsByCapacityProvider
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.function_versions
       end
     end
 
@@ -1382,7 +1707,57 @@ module Aws::Lambda
     end
 
     # @api private
+    class PutFunctionScalingConfig
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class PutProvisionedConcurrencyConfig
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class PutResourcePolicy
       def next_tokens(data)
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
@@ -1482,6 +1857,106 @@ module Aws::Lambda
     end
 
     # @api private
+    class SendDurableExecutionCallbackFailure
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class SendDurableExecutionCallbackHeartbeat
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class SendDurableExecutionCallbackSuccess
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class StopDurableExecution
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class TagResource
       def next_tokens(data)
         next_token = data.next_marker
@@ -1533,6 +2008,31 @@ module Aws::Lambda
 
     # @api private
     class UpdateAlias
+      def next_tokens(data)
+        next_token = data.next_marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class UpdateCapacityProvider
       def next_tokens(data)
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?

@@ -20,6 +20,7 @@ module Aws::ConnectCases
     BatchGetCaseRuleList: ListShape
     BatchGetCaseRuleRequest: StructureShape
     BatchGetCaseRuleResponse: StructureShape
+    BatchGetCaseRuleUnprocessedList: ListShape
     BatchGetFieldErrorList: ListShape
     BatchGetFieldIdentifierList: ListShape
     BatchGetFieldInput: StructureShape
@@ -53,6 +54,8 @@ module Aws::ConnectCases
     CommentBodyTextType: StringShape
     CommentContent: StructureShape
     CommentFilter: StructureShape
+    CommentUpdateContent: StructureShape
+    CompoundCondition: StructureShape
     ConflictException: StructureShape
     ConnectCaseContent: StructureShape
     ConnectCaseFilter: StructureShape
@@ -83,6 +86,7 @@ module Aws::ConnectCases
     CustomFieldsFilterList: ListShape
     CustomFilter: StructureShape
     CustomInputContent: StructureShape
+    CustomUpdateContent: StructureShape
     DeleteCaseRequest: StructureShape
     DeleteCaseResponse: StructureShape
     DeleteCaseRuleRequest: StructureShape
@@ -109,6 +113,7 @@ module Aws::ConnectCases
     EventBridgeConfiguration: StructureShape
     EventIncludedData: StructureShape
     FieldArn: StringShape
+    FieldAttributes: UnionShape
     FieldDescription: StringShape
     FieldError: StructureShape
     FieldFilter: UnionShape
@@ -125,6 +130,7 @@ module Aws::ConnectCases
     FieldOptionErrorList: ListShape
     FieldOptionName: StringShape
     FieldOptionValue: StringShape
+    FieldOptionsCaseRule: StructureShape
     FieldOptionsList: ListShape
     FieldSummary: StructureShape
     FieldSummaryList: ListShape
@@ -149,6 +155,7 @@ module Aws::ConnectCases
     GetLayoutOutput: StructureShape
     GetTemplateInput: StructureShape
     GetTemplateOutput: StructureShape
+    HiddenCaseRule: StructureShape
     IamPrincipalArn: StringShape
     InternalServerException: StructureShape
     LastModifiedTime: TimestampShape
@@ -177,10 +184,16 @@ module Aws::ConnectCases
     ListTemplatesInput: StructureShape
     ListTemplatesOutput: StructureShape
     MaxResults: IntegerShape
+    MutableTagKey: StringShape
+    MutableTags: MapShape
     NextToken: StringShape
     OperandOne: UnionShape
     OperandTwo: UnionShape
     Order: StringShape
+    ParentChildFieldOptionValue: StringShape
+    ParentChildFieldOptionValueList: ListShape
+    ParentChildFieldOptionsMapping: StructureShape
+    ParentChildFieldOptionsMappingList: ListShape
     PutCaseEventConfigurationInput: StructureShape
     PutCaseEventConfigurationOutput: StructureShape
     RelatedItemArn: StringShape
@@ -191,6 +204,7 @@ module Aws::ConnectCases
     RelatedItemInputContent: UnionShape
     RelatedItemType: StringShape
     RelatedItemTypeFilter: UnionShape
+    RelatedItemUpdateContent: UnionShape
     RequiredCaseRule: StructureShape
     RequiredField: StructureShape
     RequiredFieldList: ListShape
@@ -211,6 +225,7 @@ module Aws::ConnectCases
     SearchRelatedItemsOutput: StructureShape
     SearchRelatedItemsResponseItem: StructureShape
     SearchRelatedItemsResponseItemList: ListShape
+    SearchTagKey: StringShape
     Section: UnionShape
     SectionsList: ListShape
     ServiceQuotaExceededException: StructureShape
@@ -227,9 +242,15 @@ module Aws::ConnectCases
     SlaType: StringShape
     Sort: StructureShape
     SortList: ListShape
+    TagFilter: UnionShape
     TagKey: StringShape
     TagKeyList: ListShape
+    TagPropagationConfiguration: StructureShape
+    TagPropagationConfigurationList: ListShape
+    TagPropagationResourceType: StringShape
     TagResourceInput: StructureShape
+    TagValue: StructureShape
+    TagValueString: StringShape
     Tags: MapShape
     TargetSlaMinutes: IntegerShape
     TemplateArn: StringShape
@@ -242,7 +263,9 @@ module Aws::ConnectCases
     TemplateStatusFilters: ListShape
     TemplateSummary: StructureShape
     TemplateSummaryList: ListShape
+    TextAttributes: StructureShape
     ThrottlingException: StructureShape
+    TotalCount: IntegerShape
     UntagResourceInput: StructureShape
     UpdateCaseInput: StructureShape
     UpdateCaseOutput: StructureShape
@@ -252,6 +275,8 @@ module Aws::ConnectCases
     UpdateFieldOutput: StructureShape
     UpdateLayoutInput: StructureShape
     UpdateLayoutOutput: StructureShape
+    UpdateRelatedItemRequest: StructureShape
+    UpdateRelatedItemResponse: StructureShape
     UpdateTemplateInput: StructureShape
     UpdateTemplateOutput: StructureShape
     UserArn: StringShape

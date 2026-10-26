@@ -1,0 +1,2692 @@
+module Aws::NetworkSecurityManager
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?include_all: Smithy::Schema::EmptyStructure,
+        ?include: Types::AccountSet,
+        ?exclude: Types::AccountSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_all: Smithy::Schema::EmptyStructure?
+      attr_accessor include: Types::AccountSet?
+      attr_accessor exclude: Types::AccountSet?
+
+      class IncludeAll < AccountFilter
+      end
+      class Include < AccountFilter
+      end
+      class Exclude < AccountFilter
+      end
+      class Unknown < AccountFilter
+      end
+    end
+
+    class AccountReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?name: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor name: String?
+      attr_accessor email: String?
+    end
+
+    class AccountSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?organizational_units: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor organizational_units: Array[String]?
+    end
+
+    class AdminAccountDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?admin_account: String,
+        ?priority: Integer,
+        ?admin_scope: Types::AdminScope,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor admin_account: String?
+      attr_accessor priority: Integer?
+      attr_accessor admin_scope: Types::AdminScope?
+      attr_accessor status: String?
+    end
+
+    module AdminAccountStatus
+      ONBOARDED: String
+      OFFBOARDED: String
+    end
+
+    class AdminAccountSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?priority: Integer,
+        ?name: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor name: String?
+      attr_accessor email: String?
+    end
+
+    class AdminFirewallTypeScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all_firewall_types_enabled: bool,
+        ?firewall_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_firewall_types_enabled: bool?
+      attr_accessor firewall_types: Array[String]?
+    end
+
+    class AdminScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_filter: Types::AdminScopeFilter,
+        ?firewall_type_scope: Types::AdminFirewallTypeScope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_filter: Types::AdminScopeFilter?
+      attr_accessor firewall_type_scope: Types::AdminFirewallTypeScope?
+    end
+
+    class AdminScopeFilter
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?include_all: Smithy::Schema::EmptyStructure,
+        ?include_only: Types::AdminScopeSelection,
+        ?exclude_only: Types::AdminScopeSelection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_all: Smithy::Schema::EmptyStructure?
+      attr_accessor include_only: Types::AdminScopeSelection?
+      attr_accessor exclude_only: Types::AdminScopeSelection?
+
+      class IncludeAll < AdminScopeFilter
+      end
+      class IncludeOnly < AdminScopeFilter
+      end
+      class ExcludeOnly < AdminScopeFilter
+      end
+      class Unknown < AdminScopeFilter
+      end
+    end
+
+    class AdminScopeFilterInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?include_all: Smithy::Schema::EmptyStructure,
+        ?include_only: Types::AdminScopeSelectionInput,
+        ?exclude_only: Types::AdminScopeSelectionInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_all: Smithy::Schema::EmptyStructure?
+      attr_accessor include_only: Types::AdminScopeSelectionInput?
+      attr_accessor exclude_only: Types::AdminScopeSelectionInput?
+
+      class IncludeAll < AdminScopeFilterInput
+      end
+      class IncludeOnly < AdminScopeFilterInput
+      end
+      class ExcludeOnly < AdminScopeFilterInput
+      end
+      class Unknown < AdminScopeFilterInput
+      end
+    end
+
+    class AdminScopeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_filter: Types::AdminScopeFilterInput,
+        ?firewall_type_scope: Types::AdminFirewallTypeScope,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_filter: Types::AdminScopeFilterInput?
+      attr_accessor firewall_type_scope: Types::AdminFirewallTypeScope?
+    end
+
+    class AdminScopeSelection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[Types::AccountReference],
+        ?organizational_units: Array[Types::OrganizationalUnitReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[Types::AccountReference]?
+      attr_accessor organizational_units: Array[Types::OrganizationalUnitReference]?
+    end
+
+    class AdminScopeSelectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[String],
+        ?organizational_units: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[String]?
+      attr_accessor organizational_units: Array[String]?
+    end
+
+    class AlbConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheme: String,
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheme: String?
+      attr_accessor ip_address_type: String?
+    end
+
+    class AssociatedPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_arn: String?
+    end
+
+    class AssociatedRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+    end
+
+    class AssociatedScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_arn: String?
+    end
+
+    class AssociatedTemplateOrRule
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?template_arn: String,
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_arn: String?
+      attr_accessor rule_arn: String?
+
+      class TemplateArn < AssociatedTemplateOrRule
+      end
+      class RuleArn < AssociatedTemplateOrRule
+      end
+      class Unknown < AssociatedTemplateOrRule
+      end
+    end
+
+    class ConfigurationIssue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_name: String,
+        ?expected_value: String,
+        ?actual_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_name: String?
+      attr_accessor expected_value: String?
+      attr_accessor actual_value: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?deployment_name: String,
+        ?deployment_description: String,
+        ?deployment_configuration: Types::DeploymentConfiguration,
+        ?associated_policy_list: Array[Types::PolicyReference],
+        ?associated_scope_list: Array[Types::ScopeReference],
+        ?is_published: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor deployment_name: String?
+      attr_accessor deployment_description: String?
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration?
+      attr_accessor associated_policy_list: Array[Types::PolicyReference]?
+      attr_accessor associated_scope_list: Array[Types::ScopeReference]?
+      attr_accessor is_published: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?deployment_arn: String,
+        ?deployment_name: String,
+        ?deployment_description: String,
+        ?status: String,
+        ?deployment_configuration: Types::DeploymentConfiguration,
+        ?associated_policy_list: Array[Types::AssociatedPolicy],
+        ?associated_scope_list: Array[Types::AssociatedScope],
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?deployment_coverage: Array[Types::DeploymentCoverageEntry],
+        ?warnings: Array[Types::DeploymentWarningEntry],
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_arn: String?
+      attr_accessor deployment_name: String?
+      attr_accessor deployment_description: String?
+      attr_accessor status: String?
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration?
+      attr_accessor associated_policy_list: Array[Types::AssociatedPolicy]?
+      attr_accessor associated_scope_list: Array[Types::AssociatedScope]?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor deployment_coverage: Array[Types::DeploymentCoverageEntry]?
+      attr_accessor warnings: Array[Types::DeploymentWarningEntry]?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateDeploymentSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_identifier: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDeploymentSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?deployment_arn: String,
+        ?deployment_name: String,
+        ?deployment_description: String,
+        ?status: String,
+        ?deployment_configuration: Types::DeploymentConfiguration,
+        ?associated_policy_list: Array[Types::AssociatedPolicy],
+        ?associated_scope_list: Array[Types::AssociatedScope],
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_arn: String?
+      attr_accessor deployment_name: String?
+      attr_accessor deployment_description: String?
+      attr_accessor status: String?
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration?
+      attr_accessor associated_policy_list: Array[Types::AssociatedPolicy]?
+      attr_accessor associated_scope_list: Array[Types::AssociatedScope]?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreatePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?policy_name: String,
+        ?policy_description: String,
+        ?priority: Integer,
+        ?associated_template_and_rule_list: Array[Types::TemplateOrRuleReference],
+        ?firewall_type: String,
+        ?policy_configuration: Types::PolicyConfiguration,
+        ?is_published: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_description: String?
+      attr_accessor priority: Integer?
+      attr_accessor associated_template_and_rule_list: Array[Types::TemplateOrRuleReference]?
+      attr_accessor firewall_type: String?
+      attr_accessor policy_configuration: Types::PolicyConfiguration?
+      attr_accessor is_published: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?policy_arn: String,
+        ?policy_name: String,
+        ?policy_description: String,
+        ?status: String,
+        ?priority: Integer,
+        ?associated_template_and_rule_list: Array[Types::AssociatedTemplateOrRule],
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?policy_configuration: Types::PolicyConfiguration,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor policy_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_description: String?
+      attr_accessor status: String?
+      attr_accessor priority: Integer?
+      attr_accessor associated_template_and_rule_list: Array[Types::AssociatedTemplateOrRule]?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor policy_configuration: Types::PolicyConfiguration?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreatePolicySnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_identifier: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePolicySnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?policy_arn: String,
+        ?policy_name: String,
+        ?policy_description: String,
+        ?status: String,
+        ?priority: Integer,
+        ?associated_template_and_rule_list: Array[Types::AssociatedTemplateOrRule],
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?policy_configuration: Types::PolicyConfiguration,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor policy_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_description: String?
+      attr_accessor status: String?
+      attr_accessor priority: Integer?
+      attr_accessor associated_template_and_rule_list: Array[Types::AssociatedTemplateOrRule]?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor policy_configuration: Types::PolicyConfiguration?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?rule_name: String,
+        ?firewall_type: String,
+        ?rule_type: String,
+        ?rule_description: String,
+        ?configuration: Smithy::Schema::document,
+        ?is_published: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor rule_name: String?
+      attr_accessor firewall_type: String?
+      attr_accessor rule_type: String?
+      attr_accessor rule_description: String?
+      attr_accessor configuration: Smithy::Schema::document?
+      attr_accessor is_published: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?rule_arn: String,
+        ?rule_name: String,
+        ?firewall_type: String,
+        ?rule_type: String,
+        ?rule_description: String,
+        ?configuration: Smithy::Schema::document,
+        ?status: String,
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor rule_arn: String?
+      attr_accessor rule_name: String?
+      attr_accessor firewall_type: String?
+      attr_accessor rule_type: String?
+      attr_accessor rule_description: String?
+      attr_accessor configuration: Smithy::Schema::document?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateRuleSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRuleSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?rule_arn: String,
+        ?rule_name: String,
+        ?firewall_type: String,
+        ?rule_type: String,
+        ?rule_description: String,
+        ?configuration: Smithy::Schema::document,
+        ?status: String,
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor rule_arn: String?
+      attr_accessor rule_name: String?
+      attr_accessor firewall_type: String?
+      attr_accessor rule_type: String?
+      attr_accessor rule_description: String?
+      attr_accessor configuration: Smithy::Schema::document?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateScopeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?scope_name: String,
+        ?scope_description: String,
+        ?scope_configuration: Types::ScopeConfiguration,
+        ?is_published: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor scope_name: String?
+      attr_accessor scope_description: String?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
+      attr_accessor is_published: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateScopeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?scope_arn: String,
+        ?scope_name: String,
+        ?scope_description: String,
+        ?scope_configuration: Types::ScopeConfiguration,
+        ?status: String,
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor scope_arn: String?
+      attr_accessor scope_name: String?
+      attr_accessor scope_description: String?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateScopeSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_identifier: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateScopeSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?scope_arn: String,
+        ?scope_name: String,
+        ?scope_description: String,
+        ?scope_configuration: Types::ScopeConfiguration,
+        ?status: String,
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor scope_arn: String?
+      attr_accessor scope_name: String?
+      attr_accessor scope_description: String?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?template_name: String,
+        ?template_description: String,
+        ?associated_rule_list: Array[Types::RuleReference],
+        ?firewall_type: String,
+        ?is_published: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor template_name: String?
+      attr_accessor template_description: String?
+      attr_accessor associated_rule_list: Array[Types::RuleReference]?
+      attr_accessor firewall_type: String?
+      attr_accessor is_published: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+        ?template_name: String,
+        ?template_description: String,
+        ?status: String,
+        ?version: String,
+        ?associated_rule_list: Array[Types::AssociatedRule],
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor template_description: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor associated_rule_list: Array[Types::AssociatedRule]?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateTemplateSnapshotInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_identifier: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTemplateSnapshotOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+        ?template_name: String,
+        ?template_description: String,
+        ?status: String,
+        ?version: String,
+        ?associated_rule_list: Array[Types::AssociatedRule],
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor template_description: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor associated_rule_list: Array[Types::AssociatedRule]?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class DeleteAdminAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class DeleteDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_identifier: String?
+    end
+
+    class DeletePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_identifier: String?
+    end
+
+    class DeleteRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+    end
+
+    class DeleteScopeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_identifier: String?
+    end
+
+    class DeleteTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_identifier: String?
+    end
+
+    class DeploymentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_cross_account_visibility: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_cross_account_visibility: bool?
+    end
+
+    class DeploymentCoverageEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_type: String,
+        ?policy_arns: Array[String],
+        ?in_scope_resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_type: String?
+      attr_accessor policy_arns: Array[String]?
+      attr_accessor in_scope_resource_types: Array[String]?
+    end
+
+    class DeploymentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?deployment_arn: String,
+        ?deployment_name: String,
+        ?status: String,
+        ?version: String,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_arn: String?
+      attr_accessor deployment_name: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class DeploymentWarningEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?policy_arn: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor policy_arn: String?
+      attr_accessor message: String?
+    end
+
+    module EntityStatus
+      DRAFT: String
+      ACTIVE: String
+      DISABLED: String
+    end
+
+    module EntityStatusFilter
+      ACTIVE: String
+      DRAFT: String
+      DISABLED: String
+    end
+
+    module ExistingCustomerWebACLResolution
+      RETROFIT: String
+      OVERRIDE_ASSOCIATION: String
+      NO_REMEDIATION: String
+    end
+
+    class FirewallSyncReason
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?missing_firewall: String,
+        ?invalid_firewall: Types::InvalidFirewallReasons,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor missing_firewall: String?
+      attr_accessor invalid_firewall: Types::InvalidFirewallReasons?
+
+      class MissingFirewall < FirewallSyncReason
+      end
+      class InvalidFirewall < FirewallSyncReason
+      end
+      class Unknown < FirewallSyncReason
+      end
+    end
+
+    class GenerateRuleConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prompt: String,
+        ?rule_firewall_type: String,
+        ?rule_type: String,
+        ?waf_config_data_type: String,
+        ?current_configuration: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prompt: String?
+      attr_accessor rule_firewall_type: String?
+      attr_accessor rule_type: String?
+      attr_accessor waf_config_data_type: String?
+      attr_accessor current_configuration: String?
+      attr_accessor client_token: String?
+    end
+
+    class GenerateRuleConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: String?
+      attr_accessor description: String?
+    end
+
+    class GetAdminAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetAdminAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?admin_account_details: Types::AdminAccountDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor admin_account_details: Types::AdminAccountDetails?
+    end
+
+    class GetDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_identifier: String?
+    end
+
+    class GetDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?deployment_arn: String,
+        ?deployment_name: String,
+        ?deployment_description: String,
+        ?status: String,
+        ?deployment_configuration: Types::DeploymentConfiguration,
+        ?associated_policy_list: Array[Types::AssociatedPolicy],
+        ?associated_scope_list: Array[Types::AssociatedScope],
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+        ?deployment_coverage: Array[Types::DeploymentCoverageEntry],
+        ?warnings: Array[Types::DeploymentWarningEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_arn: String?
+      attr_accessor deployment_name: String?
+      attr_accessor deployment_description: String?
+      attr_accessor status: String?
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration?
+      attr_accessor associated_policy_list: Array[Types::AssociatedPolicy]?
+      attr_accessor associated_scope_list: Array[Types::AssociatedScope]?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+      attr_accessor deployment_coverage: Array[Types::DeploymentCoverageEntry]?
+      attr_accessor warnings: Array[Types::DeploymentWarningEntry]?
+    end
+
+    class GetPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_identifier: String?
+    end
+
+    class GetPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?policy_arn: String,
+        ?policy_name: String,
+        ?policy_description: String,
+        ?status: String,
+        ?priority: Integer,
+        ?associated_template_and_rule_list: Array[Types::AssociatedTemplateOrRule],
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?policy_configuration: Types::PolicyConfiguration,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor policy_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_description: String?
+      attr_accessor status: String?
+      attr_accessor priority: Integer?
+      attr_accessor associated_template_and_rule_list: Array[Types::AssociatedTemplateOrRule]?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor policy_configuration: Types::PolicyConfiguration?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+    end
+
+    class GetRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?rule_arn: String,
+        ?rule_name: String,
+        ?firewall_type: String,
+        ?rule_type: String,
+        ?rule_description: String,
+        ?configuration: Smithy::Schema::document,
+        ?status: String,
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor rule_arn: String?
+      attr_accessor rule_name: String?
+      attr_accessor firewall_type: String?
+      attr_accessor rule_type: String?
+      attr_accessor rule_description: String?
+      attr_accessor configuration: Smithy::Schema::document?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetScopeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_identifier: String?
+    end
+
+    class GetScopeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?scope_arn: String,
+        ?scope_name: String,
+        ?scope_description: String,
+        ?scope_configuration: Types::ScopeConfiguration,
+        ?status: String,
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor scope_arn: String?
+      attr_accessor scope_name: String?
+      attr_accessor scope_description: String?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_identifier: String?
+    end
+
+    class GetTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+        ?template_name: String,
+        ?template_description: String,
+        ?status: String,
+        ?version: String,
+        ?associated_rule_list: Array[Types::AssociatedRule],
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor template_description: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor associated_rule_list: Array[Types::AssociatedRule]?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidFirewallReasons
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?incorrect_single_value_configurations: Array[Types::ConfigurationIssue],
+        ?missing_appendable_configuration_values: Array[Types::ConfigurationIssue],
+        ?unexpected_appendable_configuration_values: Array[Types::ConfigurationIssue],
+        ?incorrect_appendable_configuration_order: Array[Types::ConfigurationIssue],
+        ?missing_mergeable_configuration_values: Array[Types::ConfigurationIssue],
+        ?unexpected_mergeable_configuration_values: Array[Types::ConfigurationIssue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor incorrect_single_value_configurations: Array[Types::ConfigurationIssue]?
+      attr_accessor missing_appendable_configuration_values: Array[Types::ConfigurationIssue]?
+      attr_accessor unexpected_appendable_configuration_values: Array[Types::ConfigurationIssue]?
+      attr_accessor incorrect_appendable_configuration_order: Array[Types::ConfigurationIssue]?
+      attr_accessor missing_mergeable_configuration_values: Array[Types::ConfigurationIssue]?
+      attr_accessor unexpected_mergeable_configuration_values: Array[Types::ConfigurationIssue]?
+    end
+
+    module IpAddressType
+      IPV4: String
+      DUALSTACK: String
+      DUALSTACK_WITHOUT_PUBLIC_IPV4: String
+    end
+
+    class ListAdminAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAdminAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?admin_accounts: Array[Types::AdminAccountSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor admin_accounts: Array[Types::AdminAccountSummary]?
+    end
+
+    class ListAggregateResourceSynchronizationStatusesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?synchronization_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor synchronization_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAggregateResourceSynchronizationStatusesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?resource_synchronization_statuses: Array[Types::ResourceSynchronizationStatusSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor resource_synchronization_statuses: Array[Types::ResourceSynchronizationStatusSummary]?
+    end
+
+    class ListDeploymentSnapshotsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentSnapshotsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?snapshots: Array[Types::DeploymentSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor snapshots: Array[Types::DeploymentSummary]?
+    end
+
+    class ListDeploymentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+    end
+
+    class ListDeploymentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?deployments: Array[Types::DeploymentSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor deployments: Array[Types::DeploymentSummary]?
+    end
+
+    class ListPoliciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+    end
+
+    class ListPoliciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?policies: Array[Types::PolicySummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor policies: Array[Types::PolicySummary]?
+    end
+
+    class ListPolicySnapshotsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPolicySnapshotsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?snapshots: Array[Types::PolicySummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor snapshots: Array[Types::PolicySummary]?
+    end
+
+    class ListResourceAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?resource_associations: Array[Types::ResourceAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor resource_associations: Array[Types::ResourceAssociation]?
+    end
+
+    class ListResourceSynchronizationStatusesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_identifier: String,
+        ?synchronization_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_identifier: String?
+      attr_accessor synchronization_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceSynchronizationStatusesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?resource_synchronization_statuses: Array[Types::ResourceSynchronizationStatusSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor resource_synchronization_statuses: Array[Types::ResourceSynchronizationStatusSummary]?
+    end
+
+    class ListRuleSnapshotsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRuleSnapshotsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?snapshots: Array[Types::RuleSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor snapshots: Array[Types::RuleSummary]?
+    end
+
+    class ListRulesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+    end
+
+    class ListRulesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?rules: Array[Types::RuleSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor rules: Array[Types::RuleSummary]?
+    end
+
+    class ListScopeSnapshotsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListScopeSnapshotsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?snapshots: Array[Types::ScopeSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor snapshots: Array[Types::ScopeSummary]?
+    end
+
+    class ListScopesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+    end
+
+    class ListScopesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?scopes: Array[Types::ScopeSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor scopes: Array[Types::ScopeSummary]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTemplateSnapshotsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_identifier: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_identifier: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTemplateSnapshotsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?snapshots: Array[Types::TemplateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor snapshots: Array[Types::TemplateSummary]?
+    end
+
+    class ListTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+    end
+
+    class ListTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?templates: Array[Types::TemplateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor templates: Array[Types::TemplateSummary]?
+    end
+
+    class NotVisibleMarker
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+    end
+
+    class OrganizationalUnitReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ou_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ou_id: String?
+      attr_accessor name: String?
+    end
+
+    class OutOfSyncReasonsView
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?reasons: Hash[String, Types::FirewallSyncReason],
+        ?not_visible: Types::NotVisibleMarker,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reasons: Hash[String, Types::FirewallSyncReason]?
+      attr_accessor not_visible: Types::NotVisibleMarker?
+
+      class Reasons < OutOfSyncReasonsView
+      end
+      class NotVisible < OutOfSyncReasonsView
+      end
+      class Unknown < OutOfSyncReasonsView
+      end
+    end
+
+    class PolicyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remediation_enabled: bool,
+        ?resources_clean_up: bool,
+        ?waf_config: Types::WafConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remediation_enabled: bool?
+      attr_accessor resources_clean_up: bool?
+      attr_accessor waf_config: Types::WafConfig?
+    end
+
+    module PolicyFirewallType
+      WAF: String
+      SHIELD_ADVANCED: String
+    end
+
+    class PolicyReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_identifier: String?
+    end
+
+    class PolicySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?policy_arn: String,
+        ?policy_name: String,
+        ?status: String,
+        ?version: String,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?priority: Integer,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor policy_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor priority: Integer?
+      attr_accessor updated_at: Time?
+    end
+
+    class PutAdminAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?priority: Integer,
+        ?admin_scope: Types::AdminScopeInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor admin_scope: Types::AdminScopeInput?
+    end
+
+    class PutAdminAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?admin_account_details: Types::AdminAccountDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor admin_account_details: Types::AdminAccountDetails?
+    end
+
+    class RemediationIssueDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issue_type: String,
+        ?message: String,
+        ?corrective_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issue_type: String?
+      attr_accessor message: String?
+      attr_accessor corrective_action: String?
+    end
+
+    class RemediationIssuesView
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?issues: Hash[String, Types::RemediationIssueDetails],
+        ?not_visible: Types::NotVisibleMarker,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issues: Hash[String, Types::RemediationIssueDetails]?
+      attr_accessor not_visible: Types::NotVisibleMarker?
+
+      class Issues < RemediationIssuesView
+      end
+      class NotVisible < RemediationIssuesView
+      end
+      class Unknown < RemediationIssuesView
+      end
+    end
+
+    class ResourceAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourceCriteria
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tags: Hash[String, String],
+        ?alb_config: Types::AlbConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor alb_config: Types::AlbConfiguration?
+
+      class Tags < ResourceCriteria
+      end
+      class AlbConfig < ResourceCriteria
+      end
+      class Unknown < ResourceCriteria
+      end
+    end
+
+    class ResourceLogicalExpression
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?criteria: Types::ResourceCriteria,
+        ?and: Array[Types::ResourceLogicalExpression],
+        ?or: Array[Types::ResourceLogicalExpression],
+        ?not: Types::ResourceLogicalExpression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor criteria: Types::ResourceCriteria?
+      attr_accessor and: Array[Types::ResourceLogicalExpression]?
+      attr_accessor or: Array[Types::ResourceLogicalExpression]?
+      attr_accessor not: Types::ResourceLogicalExpression?
+
+      class Criteria < ResourceLogicalExpression
+      end
+      class And < ResourceLogicalExpression
+      end
+      class Or < ResourceLogicalExpression
+      end
+      class Not < ResourceLogicalExpression
+      end
+      class Unknown < ResourceLogicalExpression
+      end
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourceScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_all: bool,
+        ?include: Types::ResourceSet,
+        ?exclude: Types::ResourceSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_all: bool?
+      attr_accessor include: Types::ResourceSet?
+      attr_accessor exclude: Types::ResourceSet?
+    end
+
+    class ResourceSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?explicit_arns: Array[String],
+        ?expression: Types::ResourceLogicalExpression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor explicit_arns: Array[String]?
+      attr_accessor expression: Types::ResourceLogicalExpression?
+    end
+
+    class ResourceSynchronizationStatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?synchronization_status: String,
+        ?account_id: String,
+        ?resource_arn: String,
+        ?deployment_arn: String,
+        ?resource_type: String,
+        ?updated_at: Time,
+        ?out_of_sync_reasons: Types::OutOfSyncReasonsView,
+        ?remediation_issues: Types::RemediationIssuesView,
+        ?evaluated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor synchronization_status: String?
+      attr_accessor account_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor deployment_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor updated_at: Time?
+      attr_accessor out_of_sync_reasons: Types::OutOfSyncReasonsView?
+      attr_accessor remediation_issues: Types::RemediationIssuesView?
+      attr_accessor evaluated_at: Time?
+    end
+
+    module ResourceType
+      APIGW: String
+      CFD: String
+      EIP: String
+      ALB: String
+      CLB: String
+      WAF_V2_WEBACL: String
+      SHIELD_PROTECTION: String
+      SHIELDREGIONAL_PROTECTION: String
+    end
+
+    module RuleFirewallType
+      WAF: String
+    end
+
+    class RuleReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+    end
+
+    class RuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?rule_arn: String,
+        ?rule_name: String,
+        ?firewall_type: String,
+        ?rule_type: String,
+        ?status: String,
+        ?version: String,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor rule_arn: String?
+      attr_accessor rule_name: String?
+      attr_accessor firewall_type: String?
+      attr_accessor rule_type: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    module RuleType
+      CONFIGURATION: String
+      INSPECTION: String
+    end
+
+    module Scheme
+      INTERNET_FACING: String
+      INTERNAL: String
+    end
+
+    class ScopeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_filter: Types::AccountFilter,
+        ?resource_scopes: Hash[String, Types::ResourceScope],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_filter: Types::AccountFilter?
+      attr_accessor resource_scopes: Hash[String, Types::ResourceScope]?
+    end
+
+    class ScopeReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_identifier: String?
+    end
+
+    module ScopeResourceType
+      APIGW: String
+      CFD: String
+      EIP: String
+      ALB: String
+      CLB: String
+    end
+
+    class ScopeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?scope_arn: String,
+        ?scope_name: String,
+        ?status: String,
+        ?version: String,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor scope_arn: String?
+      attr_accessor scope_name: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ServiceResourceType
+      RULE: String
+      TEMPLATE: String
+      POLICY: String
+      DEPLOYMENT: String
+      SCOPE: String
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    module SynchronizationStatus
+      IN_SYNC: String
+      OUT_OF_SYNC: String
+      NOT_APPLICABLE: String
+    end
+
+    class TagPolicyViolationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TemplateFirewallType
+      WAF: String
+    end
+
+    class TemplateOrRuleReference
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?template_identifier: String,
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_identifier: String?
+      attr_accessor rule_identifier: String?
+
+      class TemplateIdentifier < TemplateOrRuleReference
+      end
+      class RuleIdentifier < TemplateOrRuleReference
+      end
+      class Unknown < TemplateOrRuleReference
+      end
+    end
+
+    class TemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+        ?template_name: String,
+        ?status: String,
+        ?version: String,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_identifier: String,
+        ?update_token: String,
+        ?deployment_description: String,
+        ?deployment_configuration: Types::DeploymentConfiguration,
+        ?associated_policy_list: Array[Types::PolicyReference],
+        ?associated_scope_list: Array[Types::ScopeReference],
+        ?is_published: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_identifier: String?
+      attr_accessor update_token: String?
+      attr_accessor deployment_description: String?
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration?
+      attr_accessor associated_policy_list: Array[Types::PolicyReference]?
+      attr_accessor associated_scope_list: Array[Types::ScopeReference]?
+      attr_accessor is_published: bool?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?deployment_arn: String,
+        ?deployment_name: String,
+        ?deployment_description: String,
+        ?status: String,
+        ?deployment_configuration: Types::DeploymentConfiguration,
+        ?associated_policy_list: Array[Types::AssociatedPolicy],
+        ?associated_scope_list: Array[Types::AssociatedScope],
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?deployment_coverage: Array[Types::DeploymentCoverageEntry],
+        ?warnings: Array[Types::DeploymentWarningEntry],
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_arn: String?
+      attr_accessor deployment_name: String?
+      attr_accessor deployment_description: String?
+      attr_accessor status: String?
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration?
+      attr_accessor associated_policy_list: Array[Types::AssociatedPolicy]?
+      attr_accessor associated_scope_list: Array[Types::AssociatedScope]?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor deployment_coverage: Array[Types::DeploymentCoverageEntry]?
+      attr_accessor warnings: Array[Types::DeploymentWarningEntry]?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdatePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_identifier: String,
+        ?update_token: String,
+        ?policy_description: String,
+        ?priority: Integer,
+        ?associated_template_and_rule_list: Array[Types::TemplateOrRuleReference],
+        ?policy_configuration: Types::PolicyConfiguration,
+        ?is_published: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_identifier: String?
+      attr_accessor update_token: String?
+      attr_accessor policy_description: String?
+      attr_accessor priority: Integer?
+      attr_accessor associated_template_and_rule_list: Array[Types::TemplateOrRuleReference]?
+      attr_accessor policy_configuration: Types::PolicyConfiguration?
+      attr_accessor is_published: bool?
+      attr_accessor client_token: String?
+    end
+
+    class UpdatePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?policy_arn: String,
+        ?policy_name: String,
+        ?policy_description: String,
+        ?status: String,
+        ?priority: Integer,
+        ?associated_template_and_rule_list: Array[Types::AssociatedTemplateOrRule],
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?policy_configuration: Types::PolicyConfiguration,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor policy_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy_description: String?
+      attr_accessor status: String?
+      attr_accessor priority: Integer?
+      attr_accessor associated_template_and_rule_list: Array[Types::AssociatedTemplateOrRule]?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor policy_configuration: Types::PolicyConfiguration?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+        ?update_token: String,
+        ?rule_type: String,
+        ?rule_description: String,
+        ?configuration: Smithy::Schema::document,
+        ?is_published: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+      attr_accessor update_token: String?
+      attr_accessor rule_type: String?
+      attr_accessor rule_description: String?
+      attr_accessor configuration: Smithy::Schema::document?
+      attr_accessor is_published: bool?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?rule_arn: String,
+        ?rule_name: String,
+        ?firewall_type: String,
+        ?rule_type: String,
+        ?rule_description: String,
+        ?configuration: Smithy::Schema::document,
+        ?status: String,
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor rule_arn: String?
+      attr_accessor rule_name: String?
+      attr_accessor firewall_type: String?
+      attr_accessor rule_type: String?
+      attr_accessor rule_description: String?
+      attr_accessor configuration: Smithy::Schema::document?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateScopeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_identifier: String,
+        ?update_token: String,
+        ?scope_description: String,
+        ?scope_configuration: Types::ScopeConfiguration,
+        ?is_published: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_identifier: String?
+      attr_accessor update_token: String?
+      attr_accessor scope_description: String?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
+      attr_accessor is_published: bool?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateScopeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_id: String,
+        ?scope_arn: String,
+        ?scope_name: String,
+        ?scope_description: String,
+        ?scope_configuration: Types::ScopeConfiguration,
+        ?status: String,
+        ?version: String,
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_id: String?
+      attr_accessor scope_arn: String?
+      attr_accessor scope_name: String?
+      attr_accessor scope_description: String?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_identifier: String,
+        ?update_token: String,
+        ?template_description: String,
+        ?associated_rule_list: Array[Types::RuleReference],
+        ?is_published: bool,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_identifier: String?
+      attr_accessor update_token: String?
+      attr_accessor template_description: String?
+      attr_accessor associated_rule_list: Array[Types::RuleReference]?
+      attr_accessor is_published: bool?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?template_arn: String,
+        ?template_name: String,
+        ?template_description: String,
+        ?status: String,
+        ?version: String,
+        ?associated_rule_list: Array[Types::AssociatedRule],
+        ?update_token: String,
+        ?is_snapshot: bool,
+        ?has_published_version: bool,
+        ?firewall_type: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor template_arn: String?
+      attr_accessor template_name: String?
+      attr_accessor template_description: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor associated_rule_list: Array[Types::AssociatedRule]?
+      attr_accessor update_token: String?
+      attr_accessor is_snapshot: bool?
+      attr_accessor has_published_version: bool?
+      attr_accessor firewall_type: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      ACCOUNT_NOT_ONBOARDED: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    module WAFConfigDataType
+      DEFAULT_ACTION: String
+      VISIBILITY_CONFIG: String
+      CAPTCHA_CONFIG: String
+      CHALLENGE_CONFIG: String
+      CUSTOM_RESPONSE_BODIES: String
+      LOGGING_CONFIGURATION: String
+      DATA_PROTECTION_CONFIG: String
+      ASSOCIATION_CONFIG: String
+      ON_SOURCE_DDOS_PROTECTION_CONFIG: String
+      TOKEN_DOMAINS: String
+    end
+
+    module WAFConflictResolutionOptions
+      MERGE_WHERE_APPLICABLE: String
+    end
+
+    class WafConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?existing_customer_web_acl_resolution: String,
+        ?conflict_resolution: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor existing_customer_web_acl_resolution: String?
+      attr_accessor conflict_resolution: String?
+    end
+  end
+end

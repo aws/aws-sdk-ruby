@@ -1,0 +1,874 @@
+module Aws::Route53GlobalResolver
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Route53GlobalResolver::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateHostedZoneResponse
+      include Smithy::Client::_Response[Types::AssociateHostedZoneOutput]
+      def id: () -> String?
+      def resource_arn: () -> String?
+      def hosted_zone_id: () -> String?
+      def hosted_zone_name: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def associate_hosted_zone: (
+      ?hosted_zone_id: String,
+      ?resource_arn: String,
+      ?name: String
+    ) -> _AssociateHostedZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateHostedZoneResponse
+
+    interface _BatchCreateFirewallRuleResponse
+      include Smithy::Client::_Response[Types::BatchCreateFirewallRuleOutput]
+      def failures: () -> Array[Types::BatchCreateFirewallRuleOutputItem]?
+      def successes: () -> Array[Types::BatchCreateFirewallRuleOutputItem]?
+    end
+    def batch_create_firewall_rule: (
+      ?firewall_rules: Array[
+        {
+          action: String,
+          block_override_dns_type: String,
+          block_override_domain: String,
+          block_override_ttl: Integer,
+          block_response: String,
+          client_token: String,
+          confidence_threshold: String,
+          description: String,
+          dns_advanced_protection: String,
+          firewall_domain_list_id: String,
+          name: String,
+          priority: Integer,
+          dns_view_id: untyped,
+          q_type: String
+        }
+      ]
+    ) -> _BatchCreateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateFirewallRuleResponse
+
+    interface _BatchDeleteFirewallRuleResponse
+      include Smithy::Client::_Response[Types::BatchDeleteFirewallRuleOutput]
+      def failures: () -> Array[Types::BatchDeleteFirewallRuleOutputItem]?
+      def successes: () -> Array[Types::BatchDeleteFirewallRuleOutputItem]?
+    end
+    def batch_delete_firewall_rule: (
+      ?firewall_rules: Array[
+        {
+          firewall_rule_id: String
+        }
+      ]
+    ) -> _BatchDeleteFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteFirewallRuleResponse
+
+    interface _BatchUpdateFirewallRuleResponse
+      include Smithy::Client::_Response[Types::BatchUpdateFirewallRuleOutput]
+      def failures: () -> Array[Types::BatchUpdateFirewallRuleOutputItem]?
+      def successes: () -> Array[Types::BatchUpdateFirewallRuleOutputItem]?
+    end
+    def batch_update_firewall_rule: (
+      ?firewall_rules: Array[
+        {
+          action: String,
+          block_override_dns_type: String,
+          block_override_domain: String,
+          block_override_ttl: Integer,
+          block_response: String,
+          confidence_threshold: String,
+          description: String,
+          dns_advanced_protection: String,
+          firewall_rule_id: String,
+          name: String,
+          priority: Integer
+        }
+      ]
+    ) -> _BatchUpdateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateFirewallRuleResponse
+
+    interface _CreateAccessSourceResponse
+      include Smithy::Client::_Response[Types::CreateAccessSourceOutput]
+      def arn: () -> String?
+      def cidr: () -> String?
+      def created_at: () -> Time?
+      def id: () -> String?
+      def ip_address_type: () -> String?
+      def name: () -> String?
+      def dns_view_id: () -> String?
+      def protocol: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def create_access_source: (
+      ?cidr: String,
+      ?client_token: String,
+      ?ip_address_type: String,
+      ?name: String,
+      ?dns_view_id: String,
+      ?protocol: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAccessSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessSourceResponse
+
+    interface _CreateAccessTokenResponse
+      include Smithy::Client::_Response[Types::CreateAccessTokenOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def created_at: () -> Time?
+      def dns_view_id: () -> String?
+      def expires_at: () -> Time?
+      def name: () -> String?
+      def status: () -> String?
+      def value: () -> String?
+    end
+    def create_access_token: (
+      ?client_token: String,
+      ?dns_view_id: String,
+      ?expires_at: Time,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessTokenResponse
+
+    interface _CreateDNSViewResponse
+      include Smithy::Client::_Response[Types::CreateDNSViewOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def dnssec_validation: () -> String?
+      def edns_client_subnet: () -> String?
+      def firewall_rules_fail_open: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def global_resolver_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def create_dns_view: (
+      ?global_resolver_id: String,
+      ?client_token: String,
+      ?name: String,
+      ?dnssec_validation: String,
+      ?edns_client_subnet: String,
+      ?firewall_rules_fail_open: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDNSViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDNSViewResponse
+
+    interface _CreateFirewallDomainListResponse
+      include Smithy::Client::_Response[Types::CreateFirewallDomainListOutput]
+      def arn: () -> String?
+      def global_resolver_id: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def domain_count: () -> Integer?
+      def id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def create_firewall_domain_list: (
+      ?client_token: String,
+      ?global_resolver_id: String,
+      ?description: String,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateFirewallDomainListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallDomainListResponse
+
+    interface _CreateFirewallRuleResponse
+      include Smithy::Client::_Response[Types::CreateFirewallRuleOutput]
+      def action: () -> String?
+      def block_override_dns_type: () -> String?
+      def block_override_domain: () -> String?
+      def block_override_ttl: () -> Integer?
+      def block_response: () -> String?
+      def confidence_threshold: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def dns_advanced_protection: () -> String?
+      def firewall_domain_list_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def priority: () -> Integer?
+      def dns_view_id: () -> String?
+      def query_type: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def create_firewall_rule: (
+      ?action: String,
+      ?block_override_dns_type: String,
+      ?block_override_domain: String,
+      ?block_override_ttl: Integer,
+      ?block_response: String,
+      ?client_token: String,
+      ?confidence_threshold: String,
+      ?description: String,
+      ?dns_advanced_protection: String,
+      ?firewall_domain_list_id: String,
+      ?name: String,
+      ?priority: Integer,
+      ?dns_view_id: String,
+      ?q_type: String
+    ) -> _CreateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallRuleResponse
+
+    interface _CreateGlobalResolverResponse
+      include Smithy::Client::_Response[Types::CreateGlobalResolverOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def dns_name: () -> String?
+      def ip_address_type: () -> String?
+      def ipv4_addresses: () -> Array[String]?
+      def ipv6_addresses: () -> Array[String]?
+      def name: () -> String?
+      def observability_region: () -> String?
+      def regions: () -> Array[String]?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def create_global_resolver: (
+      ?client_token: String,
+      ?description: String,
+      ?ip_address_type: String,
+      ?name: String,
+      ?observability_region: String,
+      ?regions: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateGlobalResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlobalResolverResponse
+
+    interface _DeleteAccessSourceResponse
+      include Smithy::Client::_Response[Types::DeleteAccessSourceOutput]
+      def arn: () -> String?
+      def cidr: () -> String?
+      def created_at: () -> Time?
+      def id: () -> String?
+      def ip_address_type: () -> String?
+      def name: () -> String?
+      def dns_view_id: () -> String?
+      def protocol: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def delete_access_source: (
+      ?access_source_id: String
+    ) -> _DeleteAccessSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessSourceResponse
+
+    interface _DeleteAccessTokenResponse
+      include Smithy::Client::_Response[Types::DeleteAccessTokenOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def deleted_at: () -> Time?
+    end
+    def delete_access_token: (
+      ?access_token_id: String
+    ) -> _DeleteAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessTokenResponse
+
+    interface _DeleteDNSViewResponse
+      include Smithy::Client::_Response[Types::DeleteDNSViewOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def dnssec_validation: () -> String?
+      def edns_client_subnet: () -> String?
+      def firewall_rules_fail_open: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def global_resolver_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def delete_dns_view: (
+      ?dns_view_id: String
+    ) -> _DeleteDNSViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDNSViewResponse
+
+    interface _DeleteFirewallDomainListResponse
+      include Smithy::Client::_Response[Types::DeleteFirewallDomainListOutput]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def delete_firewall_domain_list: (
+      ?firewall_domain_list_id: String
+    ) -> _DeleteFirewallDomainListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFirewallDomainListResponse
+
+    interface _DeleteFirewallRuleResponse
+      include Smithy::Client::_Response[Types::DeleteFirewallRuleOutput]
+      def action: () -> String?
+      def block_override_dns_type: () -> String?
+      def block_override_domain: () -> String?
+      def block_override_ttl: () -> Integer?
+      def block_response: () -> String?
+      def confidence_threshold: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def dns_advanced_protection: () -> String?
+      def firewall_domain_list_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def priority: () -> Integer?
+      def dns_view_id: () -> String?
+      def query_type: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def delete_firewall_rule: (
+      ?firewall_rule_id: String
+    ) -> _DeleteFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFirewallRuleResponse
+
+    interface _DeleteGlobalResolverResponse
+      include Smithy::Client::_Response[Types::DeleteGlobalResolverOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def dns_name: () -> String?
+      def observability_region: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def regions: () -> Array[String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def ipv4_addresses: () -> Array[String]?
+      def ipv6_addresses: () -> Array[String]?
+      def ip_address_type: () -> String?
+    end
+    def delete_global_resolver: (
+      ?global_resolver_id: String
+    ) -> _DeleteGlobalResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGlobalResolverResponse
+
+    interface _DisableDNSViewResponse
+      include Smithy::Client::_Response[Types::DisableDNSViewOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def dnssec_validation: () -> String?
+      def edns_client_subnet: () -> String?
+      def firewall_rules_fail_open: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def global_resolver_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def disable_dns_view: (
+      ?dns_view_id: String
+    ) -> _DisableDNSViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableDNSViewResponse
+
+    interface _DisassociateHostedZoneResponse
+      include Smithy::Client::_Response[Types::DisassociateHostedZoneOutput]
+      def id: () -> String?
+      def resource_arn: () -> String?
+      def hosted_zone_id: () -> String?
+      def hosted_zone_name: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def disassociate_hosted_zone: (
+      ?hosted_zone_id: String,
+      ?resource_arn: String
+    ) -> _DisassociateHostedZoneResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateHostedZoneResponse
+
+    interface _EnableDNSViewResponse
+      include Smithy::Client::_Response[Types::EnableDNSViewOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def dnssec_validation: () -> String?
+      def edns_client_subnet: () -> String?
+      def firewall_rules_fail_open: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def global_resolver_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def enable_dns_view: (
+      ?dns_view_id: String
+    ) -> _EnableDNSViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableDNSViewResponse
+
+    interface _GetAccessSourceResponse
+      include Smithy::Client::_Response[Types::GetAccessSourceOutput]
+      def arn: () -> String?
+      def cidr: () -> String?
+      def created_at: () -> Time?
+      def id: () -> String?
+      def ip_address_type: () -> String?
+      def name: () -> String?
+      def dns_view_id: () -> String?
+      def protocol: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_access_source: (
+      ?access_source_id: String
+    ) -> _GetAccessSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessSourceResponse
+
+    interface _GetAccessTokenResponse
+      include Smithy::Client::_Response[Types::GetAccessTokenOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def created_at: () -> Time?
+      def dns_view_id: () -> String?
+      def expires_at: () -> Time?
+      def global_resolver_id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+      def value: () -> String?
+    end
+    def get_access_token: (
+      ?access_token_id: String
+    ) -> _GetAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessTokenResponse
+
+    interface _GetDNSViewResponse
+      include Smithy::Client::_Response[Types::GetDNSViewOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def dnssec_validation: () -> String?
+      def edns_client_subnet: () -> String?
+      def firewall_rules_fail_open: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def global_resolver_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def get_dns_view: (
+      ?dns_view_id: String
+    ) -> _GetDNSViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDNSViewResponse
+
+    interface _GetFirewallDomainListResponse
+      include Smithy::Client::_Response[Types::GetFirewallDomainListOutput]
+      def arn: () -> String?
+      def global_resolver_id: () -> String?
+      def client_token: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def domain_count: () -> Integer?
+      def id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_firewall_domain_list: (
+      ?firewall_domain_list_id: String
+    ) -> _GetFirewallDomainListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFirewallDomainListResponse
+
+    interface _GetFirewallRuleResponse
+      include Smithy::Client::_Response[Types::GetFirewallRuleOutput]
+      def action: () -> String?
+      def block_override_dns_type: () -> String?
+      def block_override_domain: () -> String?
+      def block_override_ttl: () -> Integer?
+      def block_response: () -> String?
+      def confidence_threshold: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def dns_advanced_protection: () -> String?
+      def firewall_domain_list_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def priority: () -> Integer?
+      def dns_view_id: () -> String?
+      def query_type: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_firewall_rule: (
+      ?firewall_rule_id: String
+    ) -> _GetFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFirewallRuleResponse
+
+    interface _GetGlobalResolverResponse
+      include Smithy::Client::_Response[Types::GetGlobalResolverOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def dns_name: () -> String?
+      def observability_region: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def regions: () -> Array[String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def ipv4_addresses: () -> Array[String]?
+      def ipv6_addresses: () -> Array[String]?
+      def ip_address_type: () -> String?
+    end
+    def get_global_resolver: (
+      ?global_resolver_id: String
+    ) -> _GetGlobalResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlobalResolverResponse
+
+    interface _GetHostedZoneAssociationResponse
+      include Smithy::Client::_Response[Types::GetHostedZoneAssociationOutput]
+      def id: () -> String?
+      def resource_arn: () -> String?
+      def hosted_zone_id: () -> String?
+      def hosted_zone_name: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def get_hosted_zone_association: (
+      ?hosted_zone_association_id: String
+    ) -> _GetHostedZoneAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHostedZoneAssociationResponse
+
+    interface _GetManagedFirewallDomainListResponse
+      include Smithy::Client::_Response[Types::GetManagedFirewallDomainListOutput]
+      def description: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def managed_list_type: () -> String?
+    end
+    def get_managed_firewall_domain_list: (
+      ?managed_firewall_domain_list_id: String
+    ) -> _GetManagedFirewallDomainListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedFirewallDomainListResponse
+
+    interface _ImportFirewallDomainsResponse
+      include Smithy::Client::_Response[Types::ImportFirewallDomainsOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def import_firewall_domains: (
+      ?domain_file_url: String,
+      ?firewall_domain_list_id: String,
+      ?operation: String
+    ) -> _ImportFirewallDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportFirewallDomainsResponse
+
+    interface _ListAccessSourcesResponse
+      include Smithy::Client::_Response[Types::ListAccessSourcesOutput]
+      def next_token: () -> String?
+      def access_sources: () -> Array[Types::AccessSourcesItem]?
+    end
+    def list_access_sources: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Hash[String,
+        Array[String]
+      ]
+    ) -> _ListAccessSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessSourcesResponse
+
+    interface _ListAccessTokensResponse
+      include Smithy::Client::_Response[Types::ListAccessTokensOutput]
+      def next_token: () -> String?
+      def access_tokens: () -> Array[Types::AccessTokenItem]?
+    end
+    def list_access_tokens: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dns_view_id: String,
+      ?filters: Hash[String,
+        Array[String]
+      ]
+    ) -> _ListAccessTokensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessTokensResponse
+
+    interface _ListDNSViewsResponse
+      include Smithy::Client::_Response[Types::ListDNSViewsOutput]
+      def next_token: () -> String?
+      def dns_views: () -> Array[Types::DNSViewSummary]?
+    end
+    def list_dns_views: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?global_resolver_id: String
+    ) -> _ListDNSViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDNSViewsResponse
+
+    interface _ListFirewallDomainListsResponse
+      include Smithy::Client::_Response[Types::ListFirewallDomainListsOutput]
+      def next_token: () -> String?
+      def firewall_domain_lists: () -> Array[Types::FirewallDomainListsItem]?
+    end
+    def list_firewall_domain_lists: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?global_resolver_id: String
+    ) -> _ListFirewallDomainListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallDomainListsResponse
+
+    interface _ListFirewallDomainsResponse
+      include Smithy::Client::_Response[Types::ListFirewallDomainsOutput]
+      def next_token: () -> String?
+      def domains: () -> Array[String]?
+    end
+    def list_firewall_domains: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?firewall_domain_list_id: String
+    ) -> _ListFirewallDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallDomainsResponse
+
+    interface _ListFirewallRulesResponse
+      include Smithy::Client::_Response[Types::ListFirewallRulesOutput]
+      def next_token: () -> String?
+      def firewall_rules: () -> Array[Types::FirewallRulesItem]?
+    end
+    def list_firewall_rules: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dns_view_id: String,
+      ?filters: Hash[String,
+        Array[String]
+      ]
+    ) -> _ListFirewallRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallRulesResponse
+
+    interface _ListGlobalResolversResponse
+      include Smithy::Client::_Response[Types::ListGlobalResolversOutput]
+      def next_token: () -> String?
+      def global_resolvers: () -> Array[Types::GlobalResolversItem]?
+    end
+    def list_global_resolvers: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGlobalResolversResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGlobalResolversResponse
+
+    interface _ListHostedZoneAssociationsResponse
+      include Smithy::Client::_Response[Types::ListHostedZoneAssociationsOutput]
+      def next_token: () -> String?
+      def hosted_zone_associations: () -> Array[Types::HostedZoneAssociationSummary]?
+    end
+    def list_hosted_zone_associations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?resource_arn: String
+    ) -> _ListHostedZoneAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHostedZoneAssociationsResponse
+
+    interface _ListManagedFirewallDomainListsResponse
+      include Smithy::Client::_Response[Types::ListManagedFirewallDomainListsOutput]
+      def next_token: () -> String?
+      def managed_firewall_domain_lists: () -> Array[Types::ManagedFirewallDomainListsItem]?
+    end
+    def list_managed_firewall_domain_lists: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?managed_firewall_domain_list_type: String
+    ) -> _ListManagedFirewallDomainListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedFirewallDomainListsResponse
+
+    interface _ListSharedDNSViewsResponse
+      include Smithy::Client::_Response[Types::ListSharedDNSViewsOutput]
+      def next_token: () -> String?
+      def dns_views: () -> Array[Types::SharedDNSViewSummary]?
+    end
+    def list_shared_dns_views: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSharedDNSViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSharedDNSViewsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccessSourceResponse
+      include Smithy::Client::_Response[Types::UpdateAccessSourceOutput]
+      def arn: () -> String?
+      def cidr: () -> String?
+      def created_at: () -> Time?
+      def id: () -> String?
+      def ip_address_type: () -> String?
+      def name: () -> String?
+      def dns_view_id: () -> String?
+      def protocol: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_access_source: (
+      ?access_source_id: String,
+      ?cidr: String,
+      ?ip_address_type: String,
+      ?name: String,
+      ?protocol: String
+    ) -> _UpdateAccessSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessSourceResponse
+
+    interface _UpdateAccessTokenResponse
+      include Smithy::Client::_Response[Types::UpdateAccessTokenOutput]
+      def id: () -> String?
+      def name: () -> String?
+    end
+    def update_access_token: (
+      ?access_token_id: String,
+      ?name: String
+    ) -> _UpdateAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessTokenResponse
+
+    interface _UpdateDNSViewResponse
+      include Smithy::Client::_Response[Types::UpdateDNSViewOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def dnssec_validation: () -> String?
+      def edns_client_subnet: () -> String?
+      def firewall_rules_fail_open: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def global_resolver_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def update_dns_view: (
+      ?dns_view_id: String,
+      ?name: String,
+      ?description: String,
+      ?dnssec_validation: String,
+      ?edns_client_subnet: String,
+      ?firewall_rules_fail_open: String
+    ) -> _UpdateDNSViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDNSViewResponse
+
+    interface _UpdateFirewallDomainsResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallDomainsOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def update_firewall_domains: (
+      ?domains: Array[String],
+      ?firewall_domain_list_id: String,
+      ?operation: String
+    ) -> _UpdateFirewallDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallDomainsResponse
+
+    interface _UpdateFirewallRuleResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallRuleOutput]
+      def action: () -> String?
+      def block_override_dns_type: () -> String?
+      def block_override_domain: () -> String?
+      def block_override_ttl: () -> Integer?
+      def block_response: () -> String?
+      def confidence_threshold: () -> String?
+      def created_at: () -> Time?
+      def description: () -> String?
+      def dns_advanced_protection: () -> String?
+      def firewall_domain_list_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def priority: () -> Integer?
+      def dns_view_id: () -> String?
+      def query_type: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_firewall_rule: (
+      ?action: String,
+      ?block_override_dns_type: String,
+      ?block_override_domain: String,
+      ?block_override_ttl: Integer,
+      ?block_response: String,
+      ?client_token: String,
+      ?confidence_threshold: String,
+      ?description: String,
+      ?dns_advanced_protection: String,
+      ?firewall_rule_id: String,
+      ?name: String,
+      ?priority: Integer
+    ) -> _UpdateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallRuleResponse
+
+    interface _UpdateGlobalResolverResponse
+      include Smithy::Client::_Response[Types::UpdateGlobalResolverOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def client_token: () -> String?
+      def dns_name: () -> String?
+      def observability_region: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def regions: () -> Array[String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+      def ipv4_addresses: () -> Array[String]?
+      def ipv6_addresses: () -> Array[String]?
+      def ip_address_type: () -> String?
+    end
+    def update_global_resolver: (
+      ?global_resolver_id: String,
+      ?name: String,
+      ?observability_region: String,
+      ?description: String,
+      ?ip_address_type: String,
+      ?regions: Array[String]
+    ) -> _UpdateGlobalResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlobalResolverResponse
+
+    interface _UpdateHostedZoneAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateHostedZoneAssociationOutput]
+      def id: () -> String?
+      def resource_arn: () -> String?
+      def hosted_zone_id: () -> String?
+      def hosted_zone_name: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status: () -> String?
+    end
+    def update_hosted_zone_association: (
+      ?hosted_zone_association_id: String,
+      ?name: String
+    ) -> _UpdateHostedZoneAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHostedZoneAssociationResponse
+  end
+end

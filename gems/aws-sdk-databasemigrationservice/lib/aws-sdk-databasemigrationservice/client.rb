@@ -144,18 +144,18 @@ module Aws::DatabaseMigrationService
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -369,6 +369,142 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
+    # <p>Cancels a single metadata model conversion operation that was started with <code>StartMetadataModelConversion</code>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:CancelMetadataModelConversion</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+    # @param [Hash, Types::CancelMetadataModelConversionMessage] params
+    # @option params [String] :migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # @option params [String] :request_identifier
+    #   <p>The identifier for the metadata model conversion operation to cancel. This operation was initiated by StartMetadataModelConversion.</p>
+    # @example Cancel a metadata model conversion
+    #   # The following example cancels a metadata model conversion operation.
+    #   params = {
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+    #   }
+    #   options = {}
+    #   response = client.cancel_metadata_model_conversion(params, options)
+    #   response.to_h #=>
+    #   {
+    #     request: {
+    #       status: "CANCELING",
+    #       request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #       migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
+    #     request_identifier: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.cancel_metadata_model_conversion(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     request: {
+    #       status: "String",
+    #       request_identifier: "String",
+    #       migration_project_arn: "String",
+    #       error: {
+    #         # One of:
+    #         default_error_details: {
+    #           message: "String"
+    #         }
+    #       },
+    #       export_sql_details: {
+    #         s3_object_key: "String",
+    #         object_url: "String"
+    #       },
+    #       progress: {
+    #         progress_percent: 1.0,
+    #         total_objects: 1,
+    #         progress_step: "String",
+    #         processed_object: {
+    #           name: "String",
+    #           type: "String",
+    #           endpoint_type: "String"
+    #         }
+    #       }
+    #     }
+    #   }
+    # @return [Types::CancelMetadataModelConversionResponse]
+    def cancel_metadata_model_conversion(params = {}, options = {})
+      request = build_request(:cancel_metadata_model_conversion, params)
+      request.send_request(options)
+    end
+
+    # <p>Cancels a single metadata model creation operation that was started with <code>StartMetadataModelCreation</code>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:CancelMetadataModelCreation</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+    # @param [Hash, Types::CancelMetadataModelCreationMessage] params
+    # @option params [String] :migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # @option params [String] :request_identifier
+    #   <p>The identifier for the metadata model creation operation to cancel. This operation was initiated by <code>StartMetadataModelCreation</code>.</p>
+    # @example Cancel a metadata model creation
+    #   # The following example cancels a metadata model creation operation.
+    #   params = {
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+    #   }
+    #   options = {}
+    #   response = client.cancel_metadata_model_creation(params, options)
+    #   response.to_h #=>
+    #   {
+    #     request: {
+    #       status: "CANCELING",
+    #       request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #       migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
+    #     request_identifier: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.cancel_metadata_model_creation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     request: {
+    #       status: "String",
+    #       request_identifier: "String",
+    #       migration_project_arn: "String",
+    #       error: {
+    #         # One of:
+    #         default_error_details: {
+    #           message: "String"
+    #         }
+    #       },
+    #       export_sql_details: {
+    #         s3_object_key: "String",
+    #         object_url: "String"
+    #       },
+    #       progress: {
+    #         progress_percent: 1.0,
+    #         total_objects: 1,
+    #         progress_step: "String",
+    #         processed_object: {
+    #           name: "String",
+    #           type: "String",
+    #           endpoint_type: "String"
+    #         }
+    #       }
+    #     }
+    #   }
+    # @return [Types::CancelMetadataModelCreationResponse]
+    def cancel_metadata_model_creation(params = {}, options = {})
+      request = build_request(:cancel_metadata_model_creation, params)
+      request.send_request(options)
+    end
+
     # <p>Cancels a single premigration assessment run.</p>
     #          <p>This operation prevents any individual assessments from running if they haven't started
     #          running. It also attempts to cancel any individual assessments that are currently
@@ -545,59 +681,63 @@ module Aws::DatabaseMigrationService
 
     # <p>Creates a data provider using the provided settings. A data provider stores a data store
     #          type and location information about your database. </p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:CreateDataProvider</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::CreateDataProviderMessage] params
     # @option params [String] :data_provider_name
     #   <p>A user-friendly name for the data provider.</p>
     # @option params [String] :description
     #   <p>A user-friendly description of the data provider.</p>
     # @option params [String] :engine
-    #   <p>The type of database engine for the data provider. Valid values include <code>"aurora"</code>, 
-    #            <code>"aurora-postgresql"</code>, <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, 
-    #            <code>"sqlserver"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>"aurora"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>
+    #   <p>The type of database engine for the data provider.</p>
+    #            <p>Valid values: <code>aurora</code>, <code>aurora-postgresql</code>, <code>db2</code>,
+    #            <code>db2-zos</code>, <code>docdb</code>, <code>mariadb</code>, <code>mongodb</code>,
+    #            <code>mysql</code>, <code>oracle</code>, <code>postgres</code>, <code>redshift</code>,
+    #            <code>sqlserver</code>, and <code>sybase</code>. A value of <code>aurora</code> represents
+    #            Amazon Aurora MySQL-Compatible Edition.</p>
     # @option params [Boolean] :virtual
     #   <p>Indicates whether the data provider is virtual.</p>
     # @option params [Types::DataProviderSettings] :settings
     #   <p>The settings in JSON format for a data provider.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>One or more tags to be assigned to the data provider.</p>
-    # @example Create Data Provider
-    #   # Creates the data provider with the specified parameters.
+    # @example Create a Microsoft SQL Server data provider
+    #   # The following example creates a Microsoft SQL Server data provider.
     #   params = {
-    #     data_provider_name: "sqlServer-dev",
+    #     data_provider_name: "example-data-provider",
     #     engine: "sqlserver",
-    #     description: "description",
+    #     description: "Example data provider for documentation",
     #     settings: {
     #     "MicrosoftSqlServerSettings" => {
-    #       "ServerName" => ServerName2,
-    #       "Port" => 11112,
-    #       "DatabaseName" => DatabaseName,
-    #       "SslMode" => none
+    #       "ServerName" => example-source-server.us-east-1.rds.amazonaws.com,
+    #       "Port" => 1433,
+    #       "DatabaseName" => ExampleDatabase,
+    #       "SslMode" => verify-full,
+    #       "CertificateArn" => arn:aws:dms:us-east-1:111122223333:cert:EXAMPLEABCDEFGHIJKLMNOPQRS
     #     }
-    #   },
-    #     tags: [
-    #       {
-    #         key: "access",
-    #         value: "authorizedusers"
-    #       }
-    #     ]
+    #   }
     #   }
     #   options = {}
     #   response = client.create_data_provider(params, options)
     #   response.to_h #=>
     #   {
     #     data_provider: {
-    #       engine: "postgres",
+    #       data_provider_name: "example-data-provider",
+    #       data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       data_provider_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
+    #       description: "Example data provider for documentation",
+    #       engine: "sqlserver",
     #       settings: {
-    #     "PostgreSqlSettings" => {
-    #       "SslMode" => none,
-    #       "ServerName" => postrgesql.a1b2c3d4e5f6.us-east-1.rds.amazonaws.com,
-    #       "Port" => 5432,
-    #       "DatabaseName" => target
+    #     "MicrosoftSqlServerSettings" => {
+    #       "ServerName" => example-source-server.us-east-1.rds.amazonaws.com,
+    #       "Port" => 1433,
+    #       "DatabaseName" => ExampleDatabase,
+    #       "SslMode" => verify-full,
+    #       "CertificateArn" => arn:aws:dms:us-east-1:111122223333:cert:EXAMPLEABCDEFGHIJKLMNOPQRS
     #     }
-    #   },
-    #       data_provider_creation_time: Time.parse("2023-05-12T10:50:41.988561Z"),
-    #       data_provider_name: "my-target-dataprovider",
-    #       data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-dataprovider"
+    #   }
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -646,6 +786,14 @@ module Aws::DatabaseMigrationService
     #         s3_path: "String",
     #         s3_access_role_arn: "String"
     #       },
+    #       sybase_ase_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
+    #         encrypt_password: false,
+    #         certificate_arn: "String"
+    #       },
     #       microsoft_sql_server_settings: {
     #         server_name: "String",
     #         port: 1,
@@ -676,6 +824,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
     #         certificate_arn: "String",
+    #         encryption_algorithm: 1,
+    #         security_mechanism: 1,
     #         s3_path: "String",
     #         s3_access_role_arn: "String"
     #       },
@@ -759,6 +909,14 @@ module Aws::DatabaseMigrationService
     #           s3_path: "String",
     #           s3_access_role_arn: "String"
     #         },
+    #         sybase_ase_settings: {
+    #           server_name: "String",
+    #           port: 1,
+    #           database_name: "String",
+    #           ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
+    #           encrypt_password: false,
+    #           certificate_arn: "String"
+    #         },
     #         microsoft_sql_server_settings: {
     #           server_name: "String",
     #           port: 1,
@@ -789,6 +947,8 @@ module Aws::DatabaseMigrationService
     #           database_name: "String",
     #           ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
     #           certificate_arn: "String",
+    #           encryption_algorithm: 1,
+    #           security_mechanism: 1,
     #           s3_path: "String",
     #           s3_access_role_arn: "String"
     #         },
@@ -1427,6 +1587,7 @@ module Aws::DatabaseMigrationService
     #       service_access_role_arn: "String",
     #       external_table_definition: "String",
     #       external_id: "String",
+    #       is_read_only: false,
     #       dynamo_db_settings: {
     #         service_access_role_arn: "String", # required
     #       },
@@ -1765,6 +1926,9 @@ module Aws::DatabaseMigrationService
     #         magnetic_duration: 1, # required
     #         cdc_inserts_and_updates: false,
     #         enable_magnetic_store_writes: false
+    #       },
+    #       lakehouse_settings: {
+    #         arn: "String", # required
     #       }
     #     }
     #   }
@@ -1898,13 +2062,17 @@ module Aws::DatabaseMigrationService
     end
 
     # <p>Creates the instance profile using the specified parameters.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:CreateInstanceProfile</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::CreateInstanceProfileMessage] params
     # @option params [String] :availability_zone
     #   <p>The Availability Zone where the instance profile will be created. The default
-    #            value is a random, system-chosen Availability Zone in the Amazon Web Services Region where your 
+    #            value is a random, system-chosen Availability Zone in the Amazon Web Services Region where your
     #            data provider is created, for examplem <code>us-east-1d</code>.</p>
     # @option params [String] :kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
+    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
     #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
@@ -1916,10 +2084,10 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::Tag>] :tags
     #   <p>One or more tags to be assigned to the instance profile.</p>
     # @option params [String] :network_type
-    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code> 
-    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing. 
-    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type 
-    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance 
+    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code>
+    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing.
+    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type
+    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance
     #            profile with dual network type that supports IPv4 and IPv6 addressing.</p>
     # @option params [String] :instance_profile_name
     #   <p>A user-friendly name for the instance profile.</p>
@@ -1928,38 +2096,37 @@ module Aws::DatabaseMigrationService
     # @option params [String] :subnet_group_identifier
     #   <p>A subnet group to associate with the instance profile.</p>
     # @option params [Array<String>] :vpc_security_groups
-    #   <p>Specifies the VPC security group names to be used with the instance profile. 
+    #   <p>Specifies the VPC security group names to be used with the instance profile.
     #            The VPC security group must work with the VPC containing the instance profile.</p>
-    # @example Create Instance Profile
-    #   # Creates the instance profile using the specified parameters.
+    # @example Create an instance profile
+    #   # The following example creates an instance profile.
     #   params = {
-    #     subnet_group_identifier: "my-subnet-group",
-    #     publicly_accessible: true,
-    #     kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
-    #     instance_profile_name: "my-instance-profile",
-    #     description: "Description",
-    #     network_type: "DUAL",
-    #     tags: [
-    #       {
-    #         key: "access",
-    #         value: "authorizedusers"
-    #       }
-    #     ]
+    #     instance_profile_name: "example-instance-profile",
+    #     description: "Example instance profile for documentation",
+    #     subnet_group_identifier: "example-replication-subnet-group",
+    #     vpc_security_groups: [
+    #       "sg-0123456789abcdef0"
+    #     ],
+    #     kms_key_arn: "arn:aws:kms:us-east-1:111122223333:key/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #     network_type: "IPV4",
+    #     publicly_accessible: false
     #   }
     #   options = {}
     #   response = client.create_instance_profile(params, options)
     #   response.to_h #=>
     #   {
     #     instance_profile: {
-    #       subnet_group_identifier: "public-subnets",
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       kms_key_arn: "arn:aws:kms:us-east-1:111122223333:key/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #       publicly_accessible: false,
+    #       network_type: "IPV4",
+    #       instance_profile_name: "example-instance-profile",
+    #       description: "Example instance profile for documentation",
+    #       instance_profile_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
+    #       subnet_group_identifier: "example-replication-subnet-group",
     #       vpc_security_groups: [
-    #         "sg-0123456"
-    #       ],
-    #       publicly_accessible: true,
-    #       kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
-    #       instance_profile_creation_time: Time.parse("2022-12-16T09:44:43.543246Z"),
-    #       instance_profile_name: "my-instance-profile",
-    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile"
+    #         "sg-0123456789abcdef0"
+    #       ]
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -2007,6 +2174,10 @@ module Aws::DatabaseMigrationService
     # <p>Creates the migration project using the specified parameters.</p>
     #          <p>You can run this action only after you create an instance profile and data providers
     #          using <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html">CreateInstanceProfile</a> and <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html">CreateDataProvider</a>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:CreateMigrationProject</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::CreateMigrationProjectMessage] params
     # @option params [String] :migration_project_name
     #   <p>A user-friendly name for the migration project.</p>
@@ -2015,81 +2186,82 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::DataProviderDescriptorDefinition>] :target_data_provider_descriptors
     #   <p>Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.</p>
     # @option params [String] :instance_profile_identifier
-    #   <p>The identifier of the associated instance profile. Identifiers must begin with a letter 
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
+    #   <p>The identifier of the associated instance profile. Identifiers must begin with a letter
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
     #            a hyphen, or contain two consecutive hyphens.</p>
     # @option params [String] :transformation_rules
-    #   <p>The settings in JSON format for migration rules. Migration rules make it possible for you to change 
-    #            the object names according to the rules that you specify. For example, you can change an object name 
-    #            to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.</p>
+    #   <p>A JSON string that specifies the transformation rules for the migration project.
+    #            Transformation rules let you customize how DMS Schema Conversion converts your source
+    #            database objects, including renaming, adding prefixes or suffixes, and changing data types.
+    #            For the transformation rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-transformation-rules.html">Transformation rules in DMS
+    #               Schema Conversion</a>.</p>
+    #            <note>
+    #               <p>Homogeneous data migrations do not support transformation rules.</p>
+    #            </note>
     # @option params [String] :description
     #   <p>A user-friendly description of the migration project.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>One or more tags to be assigned to the migration project.</p>
     # @option params [Types::SCApplicationAttributes] :schema_conversion_application_attributes
     #   <p>The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.</p>
-    # @example Create Migration Project
-    #   # Creates the migration project with the specified parameters.
+    # @example Create a migration project
+    #   # The following example creates a migration project.
     #   params = {
-    #     migration_project_name: "my-migration-project",
+    #     migration_project_name: "example-migration-project",
+    #     description: "Example migration project for documentation",
     #     source_data_provider_descriptors: [
     #       {
-    #         data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
-    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/example1/ALL.SOURCE.ORACLE_12-A1B2C3",
-    #         secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/myuser-admin-access"
+    #         data_provider_identifier: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-source-secret-A1B2C3",
+    #         secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role"
     #       }
     #     ],
     #     target_data_provider_descriptors: [
     #       {
-    #         data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
-    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/example1/TARGET.postgresql-A1B2C3",
-    #         secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/myuser-admin-access"
+    #         data_provider_identifier: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-target-secret-A1B2C3",
+    #         secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role"
     #       }
     #     ],
-    #     instance_profile_identifier: "ip-au-17",
+    #     instance_profile_identifier: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     transformation_rules: "{\"rules\":[{\"rule-type\":\"transformation\",\"rule-id\":\"1\",\"rule-name\":\"1\",\"rule-target\":\"schema\",\"rule-action\":\"rename\",\"object-locator\":{\"schema-name\":\"ExampleSchema\"},\"value\":\"TargetSchema\"}]}",
     #     schema_conversion_application_attributes: {
-    #       s3_bucket_path: "arn:aws:s3:::mylogin-bucket",
-    #       s3_bucket_role_arn: "arn:aws:iam::012345678901:role/Admin"
-    #     },
-    #     tags: [
-    #       {
-    #         key: "access",
-    #         value: "authorizedusers"
-    #       }
-    #     ],
-    #     description: "description",
-    #     transformation_rules: "{\"key0\":\"value0\",\"key1\":\"value1\",\"key2\":\"value2\"}"
+    #       s3_bucket_path: "s3://amzn-s3-demo-bucket",
+    #       s3_bucket_role_arn: "arn:aws:iam::111122223333:role/example-s3-access-role"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_migration_project(params, options)
     #   response.to_h #=>
     #   {
     #     migration_project: {
-    #       schema_conversion_application_attributes: {
-    #         s3_bucket_path: "my-s3-bucket/my_folder",
-    #         s3_bucket_role_arn: "arn:aws:iam::012345678901:role/my-s3role"
-    #       },
+    #       migration_project_name: "example-migration-project",
+    #       migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       migration_project_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
     #       source_data_provider_descriptors: [
     #         {
-    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role",
-    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/ALL.SOURCE.ORACLE_12-0123456",
-    #           data_provider_name: "source-oracle-12",
-    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-source-secret-A1B2C3",
+    #           secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role",
+    #           data_provider_name: "example-data-provider",
+    #           data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #         }
     #       ],
-    #       migration_project_creation_time: Time.parse("2023-04-19T11:45:15.805253Z"),
-    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #       migration_project_name: "my-migration-project",
-    #       migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #       instance_profile_name: "my-instance-profile",
     #       target_data_provider_descriptors: [
     #         {
-    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/dmytbon-admin-access",
-    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/TARGET.postgresql-0123456",
-    #           data_provider_name: "target-dataprovider-3",
-    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-target-secret-A1B2C3",
+    #           secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role",
+    #           data_provider_name: "example-data-provider",
+    #           data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #         }
-    #       ]
+    #       ],
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       instance_profile_name: "example-instance-profile",
+    #       transformation_rules: "{\"rules\":[{\"rule-type\":\"transformation\",\"rule-id\":\"1\",\"rule-name\":\"1\",\"rule-target\":\"schema\",\"rule-action\":\"rename\",\"object-locator\":{\"schema-name\":\"ExampleSchema\"},\"value\":\"TargetSchema\"}]}",
+    #       description: "Example migration project for documentation",
+    #       schema_conversion_application_attributes: {
+    #         s3_bucket_path: "s3://amzn-s3-demo-bucket",
+    #         s3_bucket_role_arn: "arn:aws:iam::111122223333:role/example-s3-access-role"
+    #       }
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -2279,7 +2451,8 @@ module Aws::DatabaseMigrationService
     #       supplemental_settings: "String",
     #       table_mappings: "String",
     #       replication_config_create_time: Time.now,
-    #       replication_config_update_time: Time.now
+    #       replication_config_update_time: Time.now,
+    #       is_read_only: false
     #     }
     #   }
     # @return [Types::CreateReplicationConfigResponse]
@@ -2536,7 +2709,8 @@ module Aws::DatabaseMigrationService
     #             subnet_status: "String"
     #           }
     #         ],
-    #         supported_network_types: ["String"]
+    #         supported_network_types: ["String"],
+    #         is_read_only: false
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -2654,7 +2828,8 @@ module Aws::DatabaseMigrationService
     #           subnet_status: "String"
     #         }
     #       ],
-    #       supported_network_types: ["String"]
+    #       supported_network_types: ["String"],
+    #       is_read_only: false
     #     }
     #   }
     # @return [Types::CreateReplicationSubnetGroupResponse]
@@ -2879,7 +3054,8 @@ module Aws::DatabaseMigrationService
     #       valid_from_date: Time.now,
     #       valid_to_date: Time.now,
     #       signing_algorithm: "String",
-    #       key_length: 1
+    #       key_length: 1,
+    #       kms_key_id: "String"
     #     }
     #   }
     # @return [Types::DeleteCertificateResponse]
@@ -2997,6 +3173,10 @@ module Aws::DatabaseMigrationService
     end
 
     # <p>Deletes the specified data provider.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:DeleteDataProvider</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     #          <note>
     #             <p>All migration projects associated with the data provider must be deleted or modified
     #             before you can delete the data provider.</p>
@@ -3004,28 +3184,30 @@ module Aws::DatabaseMigrationService
     # @param [Hash, Types::DeleteDataProviderMessage] params
     # @option params [String] :data_provider_identifier
     #   <p>The identifier of the data provider to delete.</p>
-    # @example Delete Data Provider
-    #   # Deletes the specified data provider.
+    # @example Delete a data provider
+    #   # The following example deletes a data provider identified by its ARN.
     #   params = {
-    #     data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    #     data_provider_identifier: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #   }
     #   options = {}
     #   response = client.delete_data_provider(params, options)
     #   response.to_h #=>
     #   {
     #     data_provider: {
-    #       engine: "postgres",
+    #       data_provider_name: "example-data-provider",
+    #       data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       data_provider_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
+    #       description: "Example data provider for documentation",
+    #       engine: "sqlserver",
     #       settings: {
-    #     "PostgreSqlSettings" => {
-    #       "SslMode" => none,
-    #       "ServerName" => postrgesql.0a1b2c3d4e5f.us-east-1.rds.amazonaws.com,
-    #       "Port" => 5432,
-    #       "DatabaseName" => target
+    #     "MicrosoftSqlServerSettings" => {
+    #       "ServerName" => example-source-server.us-east-1.rds.amazonaws.com,
+    #       "Port" => 1433,
+    #       "DatabaseName" => ExampleDatabase,
+    #       "SslMode" => verify-full,
+    #       "CertificateArn" => arn:aws:dms:us-east-1:111122223333:cert:EXAMPLEABCDEFGHIJKLMNOPQRS
     #     }
-    #   },
-    #       data_provider_creation_time: Time.parse("2023-05-12T10:50:41.988561Z"),
-    #       data_provider_name: "my-target-data-provider",
-    #       data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-data-provider"
+    #   }
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -3084,6 +3266,14 @@ module Aws::DatabaseMigrationService
     #           s3_path: "String",
     #           s3_access_role_arn: "String"
     #         },
+    #         sybase_ase_settings: {
+    #           server_name: "String",
+    #           port: 1,
+    #           database_name: "String",
+    #           ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
+    #           encrypt_password: false,
+    #           certificate_arn: "String"
+    #         },
     #         microsoft_sql_server_settings: {
     #           server_name: "String",
     #           port: 1,
@@ -3114,6 +3304,8 @@ module Aws::DatabaseMigrationService
     #           database_name: "String",
     #           ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
     #           certificate_arn: "String",
+    #           encryption_algorithm: 1,
+    #           security_mechanism: 1,
     #           s3_path: "String",
     #           s3_access_role_arn: "String"
     #         },
@@ -3202,6 +3394,7 @@ module Aws::DatabaseMigrationService
     #       service_access_role_arn: "String",
     #       external_table_definition: "String",
     #       external_id: "String",
+    #       is_read_only: false,
     #       dynamo_db_settings: {
     #         service_access_role_arn: "String", # required
     #       },
@@ -3540,6 +3733,9 @@ module Aws::DatabaseMigrationService
     #         magnetic_duration: 1, # required
     #         cdc_inserts_and_updates: false,
     #         enable_magnetic_store_writes: false
+    #       },
+    #       lakehouse_settings: {
+    #         arn: "String", # required
     #       }
     #     }
     #   }
@@ -3631,6 +3827,10 @@ module Aws::DatabaseMigrationService
     end
 
     # <p>Deletes the specified instance profile.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:DeleteInstanceProfile</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     #          <note>
     #             <p>All migration projects associated with the instance profile must be deleted or
     #             modified before you can delete the instance profile.</p>
@@ -3638,25 +3838,27 @@ module Aws::DatabaseMigrationService
     # @param [Hash, Types::DeleteInstanceProfileMessage] params
     # @option params [String] :instance_profile_identifier
     #   <p>The identifier of the instance profile to delete.</p>
-    # @example Delete Instance Profile
-    #   # Deletes the specified instance profile.
+    # @example Delete an instance profile
+    #   # The following example deletes an instance profile identified by its ARN.
     #   params = {
-    #     instance_profile_identifier: "arn:aws:dms:us-east-1:012345678901:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    #     instance_profile_identifier: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #   }
     #   options = {}
     #   response = client.delete_instance_profile(params, options)
     #   response.to_h #=>
     #   {
     #     instance_profile: {
-    #       subnet_group_identifier: "public-subnets",
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       kms_key_arn: "arn:aws:kms:us-east-1:111122223333:key/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #       publicly_accessible: false,
+    #       network_type: "IPV4",
+    #       instance_profile_name: "example-instance-profile",
+    #       description: "Example instance profile for documentation",
+    #       instance_profile_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
+    #       subnet_group_identifier: "example-replication-subnet-group",
     #       vpc_security_groups: [
-    #         "sg-0123456"
-    #       ],
-    #       publicly_accessible: true,
-    #       kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
-    #       instance_profile_creation_time: Time.parse("2022-12-16T09:44:43.543246Z"),
-    #       instance_profile_name: "my-instance-profile",
-    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile"
+    #         "sg-0123456789abcdef0"
+    #       ]
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -3688,47 +3890,53 @@ module Aws::DatabaseMigrationService
     end
 
     # <p>Deletes the specified migration project.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:DeleteMigrationProject</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     #          <note>
     #             <p>The migration project must be closed before you can delete it.</p>
     #          </note>
     # @param [Hash, Types::DeleteMigrationProjectMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The name or Amazon Resource Name (ARN) of the migration project to delete.</p>
-    # @example Delete Migration Project
-    #   # Deletes the specified migration project.
+    # @example Delete a migration project
+    #   # The following example deletes a migration project identified by its ARN.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #   }
     #   options = {}
     #   response = client.delete_migration_project(params, options)
     #   response.to_h #=>
     #   {
     #     migration_project: {
-    #       schema_conversion_application_attributes: {
-    #         s3_bucket_path: "my-s3-bucket/my_folder",
-    #         s3_bucket_role_arn: "arn:aws:iam::012345678901:role/my-s3role"
-    #       },
+    #       migration_project_name: "example-migration-project",
+    #       migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       migration_project_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
     #       source_data_provider_descriptors: [
     #         {
-    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role",
-    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/ALL.SOURCE.ORACLE_12-0123456",
-    #           data_provider_name: "all-source-oracle-12",
-    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-source-secret-A1B2C3",
+    #           secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role",
+    #           data_provider_name: "example-data-provider",
+    #           data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #         }
     #       ],
-    #       migration_project_creation_time: Time.parse("2023-04-19T11:45:15.805253Z"),
-    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #       migration_project_name: "my-migration-project",
-    #       migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #       instance_profile_name: "my-instance-profile",
     #       target_data_provider_descriptors: [
     #         {
-    #           secrets_manager_access_role_arn: "arn:aws:iam::437223687239:role/dmytbon-admin-access",
-    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myuser/TARGET.postgresql-0123456",
-    #           data_provider_name: "sde-obilyns-dataprovider-3",
-    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-target-secret-A1B2C3",
+    #           secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role",
+    #           data_provider_name: "example-data-provider",
+    #           data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #         }
-    #       ]
+    #       ],
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       instance_profile_name: "example-instance-profile",
+    #       transformation_rules: "{\"rules\":[{\"rule-type\":\"transformation\",\"rule-id\":\"1\",\"rule-name\":\"1\",\"rule-target\":\"schema\",\"rule-action\":\"rename\",\"object-locator\":{\"schema-name\":\"ExampleSchema\"},\"value\":\"TargetSchema\"}]}",
+    #       description: "Example migration project for documentation",
+    #       schema_conversion_application_attributes: {
+    #         s3_bucket_path: "s3://amzn-s3-demo-bucket",
+    #         s3_bucket_role_arn: "arn:aws:iam::111122223333:role/example-s3-access-role"
+    #       }
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -3813,7 +4021,8 @@ module Aws::DatabaseMigrationService
     #       supplemental_settings: "String",
     #       table_mappings: "String",
     #       replication_config_create_time: Time.now,
-    #       replication_config_update_time: Time.now
+    #       replication_config_update_time: Time.now,
+    #       is_read_only: false
     #     }
     #   }
     # @return [Types::DeleteReplicationConfigResponse]
@@ -3927,7 +4136,8 @@ module Aws::DatabaseMigrationService
     #             subnet_status: "String"
     #           }
     #         ],
-    #         supported_network_types: ["String"]
+    #         supported_network_types: ["String"],
+    #         is_read_only: false
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -4304,7 +4514,8 @@ module Aws::DatabaseMigrationService
     #         valid_from_date: Time.now,
     #         valid_to_date: Time.now,
     #         signing_algorithm: "String",
-    #         key_length: 1
+    #         key_length: 1,
+    #         kms_key_id: "String"
     #       }
     #     ]
     #   }
@@ -4395,20 +4606,24 @@ module Aws::DatabaseMigrationService
     end
 
     # <p>Returns configuration parameters for a schema conversion project.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:DescribeConversionConfiguration</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::DescribeConversionConfigurationMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The name or Amazon Resource Name (ARN) for the schema conversion project to describe.</p>
-    # @example Describe Conversion Configuration
-    #   # Returns configuration parameters for a schema conversion project.
+    # @example Retrieving conversion configuration for a migration project
+    #   # The following example retrieves the conversion configuration for a migration project.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #   }
     #   options = {}
     #   response = client.describe_conversion_configuration(params, options)
     #   response.to_h #=>
     #   {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #     conversion_configuration: "{\"Common project settings\":{\"ShowSeverityLevelInSql\":\"CRITICAL\"},\"ORACLE_TO_POSTGRESQL\" : {\"ToTimeZone\":false,\"LastDayBuiltinFunctionOracle\":false,   \"NextDayBuiltinFunctionOracle\":false,\"ConvertProceduresToFunction\":false,\"NvlBuiltinFunctionOracle\":false,\"DbmsAssertBuiltinFunctionOracle\":false}}"
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     conversion_configuration: "{\"Common project settings\":{\"ShowSeverityLevelInSql\":\"CRITICAL\",\"EnableGenAiConversion\":false},\"MSSQL_TO_AURORA_POSTGRESQL\":{\"ConvertProceduresToFunction\":true,\"UniqueIndexGeneration\":true,\"CaseSensitivityNames\":false},\"Conversion version\":{\"MSSQL_TO_AURORA_POSTGRESQL_target_engine_version\":\"15\"}}"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
@@ -4522,52 +4737,61 @@ module Aws::DatabaseMigrationService
 
     # <p>Returns a paginated list of data providers for your account in the current
     #          region.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:ListDataProviders</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::DescribeDataProvidersMessage] params
     # @option params [Array<Types::Filter>] :filters
-    #   <p>Filters applied to the data providers described in the form of key-value pairs.</p>
-    #            <p>Valid filter names and values: data-provider-identifier, data provider arn or name</p>
+    #   <p>The filters to apply to the data providers.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>data-provider-identifier</code> – The data provider name or ARN.</p>
+    #               </li>
+    #            </ul>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
-    # @example Describe Data Providers
-    #   
+    # @example Describe data providers with a filter
+    #   # The following example retrieves the details of a data provider identified by its ARN.
     #   params = {
     #     filters: [
     #       {
     #         name: "data-provider-identifier",
     #         values: [
-    #           "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    #           "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #         ]
     #       }
-    #     ],
-    #     max_records: 20,
-    #     marker: "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    #     ]
     #   }
     #   options = {}
     #   response = client.describe_data_providers(params, options)
     #   response.to_h #=>
     #   {
-    #     marker: "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
     #     data_providers: [
     #       {
-    #         engine: "postgres",
-    #         data_provider_creation_time: Time.parse("2023-05-12T10:50:41.988561Z"),
-    #         data_provider_name: "my-target-data-provider",
-    #         data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-data-provider",
+    #         data_provider_name: "example-data-provider",
+    #         data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         data_provider_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
+    #         description: "Example data provider for documentation",
+    #         engine: "sqlserver",
     #         settings: {
-    #     "PostgreSqlSettings" => {
-    #       "SslMode" => none,
-    #       "ServerName" => postrgesql.0a1b2c3d4e5f.us-east-1.rds.amazonaws.com,
-    #       "Port" => 5432,
-    #       "DatabaseName" => target
+    #     "MicrosoftSqlServerSettings" => {
+    #       "ServerName" => example-source-server.us-east-1.rds.amazonaws.com,
+    #       "Port" => 1433,
+    #       "DatabaseName" => ExampleDatabase,
+    #       "SslMode" => verify-full,
+    #       "CertificateArn" => arn:aws:dms:us-east-1:111122223333:cert:EXAMPLEABCDEFGHIJKLMNOPQRS
     #     }
     #   }
     #       }
@@ -4638,6 +4862,14 @@ module Aws::DatabaseMigrationService
     #             s3_path: "String",
     #             s3_access_role_arn: "String"
     #           },
+    #           sybase_ase_settings: {
+    #             server_name: "String",
+    #             port: 1,
+    #             database_name: "String",
+    #             ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
+    #             encrypt_password: false,
+    #             certificate_arn: "String"
+    #           },
     #           microsoft_sql_server_settings: {
     #             server_name: "String",
     #             port: 1,
@@ -4668,6 +4900,8 @@ module Aws::DatabaseMigrationService
     #             database_name: "String",
     #             ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
     #             certificate_arn: "String",
+    #             encryption_algorithm: 1,
+    #             security_mechanism: 1,
     #             s3_path: "String",
     #             s3_access_role_arn: "String"
     #           },
@@ -4890,6 +5124,7 @@ module Aws::DatabaseMigrationService
     #         service_access_role_arn: "String",
     #         external_table_definition: "String",
     #         external_id: "String",
+    #         is_read_only: false,
     #         dynamo_db_settings: {
     #           service_access_role_arn: "String", # required
     #         },
@@ -5228,6 +5463,9 @@ module Aws::DatabaseMigrationService
     #           magnetic_duration: 1, # required
     #           cdc_inserts_and_updates: false,
     #           enable_magnetic_store_writes: false
+    #         },
+    #         lakehouse_settings: {
+    #           arn: "String", # required
     #         }
     #       }
     #     ]
@@ -5447,50 +5685,83 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Returns a paginated list of extension pack associations for the specified migration
-    #          project. An extension pack is an add-on module that emulates functions present in a source
-    #          database that are required when converting objects to the target database.</p>
+    # <p>Returns a paginated list of extension pack installation requests for a migration
+    #          project, initiated by
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartExtensionPackAssociation.html">StartExtensionPackAssociation</a>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:ListExtensionPacks</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::DescribeExtensionPackAssociationsMessage] params
     # @option params [String] :migration_project_identifier
-    #   <p>The name or Amazon Resource Name (ARN) for the migration project.</p>
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>Filters applied to the extension pack associations described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the extension pack installation requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
-    # @example Describe Extension Pack Associations
-    #   # Returns a paginated list of extension pack associations for the specified migration project.
+    # @example Retrieve the status of extension pack associations
+    #   # The following example retrieves the status of operations that apply an extension pack to the target database, identified by their request IDs.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
     #     filters: [
     #       {
-    #         name: "instance-profile-identifier",
+    #         name: "request-id",
     #         values: [
-    #           "arn:aws:dms:us-east-1:012345678901:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333"
     #         ]
     #       }
-    #     ],
-    #     marker: "0123456789abcdefghijklmnopqrs",
-    #     max_records: 20
+    #     ]
     #   }
     #   options = {}
     #   response = client.describe_extension_pack_associations(params, options)
     #   response.to_h #=>
     #   {
-    #     marker: "0123456789abcdefghijklmnopqrs",
     #     requests: [
     #       {
     #         status: "SUCCESS",
-    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef",
-    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
+    #       },
+    #       {
+    #         status: "IN_PROGRESS",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         progress: {
+    #           progress_percent: 50.0,
+    #           progress_step: "IN_PROGRESS"
+    #         }
+    #       },
+    #       {
+    #         status: "FAILED",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         error: {
+    #     "defaultErrorDetails" => {
+    #       "Message" => The database user in your target secret does not have sufficient privileges. Grant the required privileges and try again.
+    #     }
+    #   }
     #       }
     #     ]
     #   }
@@ -5526,6 +5797,16 @@ module Aws::DatabaseMigrationService
     #         export_sql_details: {
     #           s3_object_key: "String",
     #           object_url: "String"
+    #         },
+    #         progress: {
+    #           progress_percent: 1.0,
+    #           total_objects: 1,
+    #           progress_step: "String",
+    #           processed_object: {
+    #             name: "String",
+    #             type: "String",
+    #             endpoint_type: "String"
+    #           }
     #         }
     #       }
     #     ]
@@ -5939,48 +6220,60 @@ module Aws::DatabaseMigrationService
 
     # <p>Returns a paginated list of instance profiles for your account in the current
     #          region.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:ListInstanceProfiles</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::DescribeInstanceProfilesMessage] params
     # @option params [Array<Types::Filter>] :filters
-    #   <p>Filters applied to the instance profiles described in the form of key-value pairs.</p>
-    #            <p>Valid filter names and values: instance-profile-identifier, instance profile arn or name</p>
+    #   <p>The filters to apply to the instance profiles.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>instance-profile-identifier</code> – The instance profile name or ARN.</p>
+    #               </li>
+    #            </ul>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
-    # @example Describe Instance Profiles
-    #   # Returns a paginated list of instance profiles for your account in the current region.
+    # @example Describe instance profiles with a filter
+    #   # The following example retrieves the details of an instance profile identified by its ARN.
     #   params = {
     #     filters: [
     #       {
     #         name: "instance-profile-identifier",
     #         values: [
-    #           "arn:aws:dms:us-east-1:012345678901:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345"
+    #           "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #         ]
     #       }
-    #     ],
-    #     max_records: 20,
-    #     marker: "0123456789abcdefghijklmnopqrs"
+    #     ]
     #   }
     #   options = {}
     #   response = client.describe_instance_profiles(params, options)
     #   response.to_h #=>
     #   {
-    #     marker: "0123456789abcdefghijklmnopqrs",
     #     instance_profiles: [
     #       {
-    #         subnet_group_identifier: "public-subnets",
-    #         publicly_accessible: true,
-    #         kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
-    #         instance_profile_creation_time: Time.parse("2022-12-16T09:44:43.543246Z"),
-    #         instance_profile_name: "my-instance-profile",
-    #         instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile"
+    #         instance_profile_arn: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         kms_key_arn: "arn:aws:kms:us-east-1:111122223333:key/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         publicly_accessible: false,
+    #         network_type: "IPV4",
+    #         instance_profile_name: "example-instance-profile",
+    #         description: "Example instance profile for documentation",
+    #         instance_profile_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
+    #         subnet_group_identifier: "example-replication-subnet-group",
+    #         vpc_security_groups: [
+    #           "sg-0123456789abcdef0"
+    #         ]
     #       }
     #     ]
     #   }
@@ -6022,49 +6315,161 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Returns a paginated list of metadata model assessments for your account in the current
-    #          region.</p>
-    # @param [Hash, Types::DescribeMetadataModelAssessmentsMessage] params
+    # <p>Gets detailed information about the specified metadata model, including its definition and corresponding converted objects in the target database if applicable.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:DescribeMetadataModel</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+    # @param [Hash, Types::DescribeMetadataModelMessage] params
+    # @option params [String] :selection_rules
+    #   <p>A JSON string that identifies the metadata model to retrieve. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts source or target selection rules depending on the <code>Origin</code> parameter. The <code>server-name</code> in the object locator must match the corresponding data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Exactly one rule is allowed.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :migration_project_identifier
-    #   <p>The name or Amazon Resource Name (ARN) of the migration project.</p>
-    # @option params [Array<Types::Filter>] :filters
-    #   <p>Filters applied to the metadata model assessments described in the form of key-value pairs.</p>
-    # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
-    #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #               The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
-    #               make the call again using the returned token and keeping all other arguments unchanged.</p>
-    # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
-    #            in the response so that you can retrieve the remaining results.</p>
-    # @example Describe Metadata Model Assessments
-    #   # Returns a paginated list of metadata model assessments for your account in the current region.
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # @option params [String] :origin
+    #   <p>Specifies whether to retrieve metadata from the source or target tree. Valid values: SOURCE | TARGET</p>
+    # @example Retrieve a source table metadata model
+    #   # The following example retrieves detailed information about the ExampleTable table in the ExampleSchema schema from the source metadata tree, including its SQL definition and references to the corresponding converted metadata models in the target database.
     #   params = {
-    #     migration_project_identifier: "",
-    #     filters: [
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"1\", \"rule-name\": \"1\", \"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\", \"table-name\": \"ExampleTable\"}, \"rule-action\": \"explicit\"}]}",
+    #     origin: SOURCE
+    #   }
+    #   options = {}
+    #   response = client.describe_metadata_model(params, options)
+    #   response.to_h #=>
+    #   {
+    #     metadata_model_name: "ExampleTable",
+    #     metadata_model_type: "table",
+    #     target_metadata_models: [
     #       {
-    #         name: "my-migration-project",
-    #         values: [
-    #           "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
-    #         ]
+    #         metadata_model_name: "exampletable",
+    #         selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"1\", \"rule-name\": \"1\", \"object-locator\": {\"server-name\": \"example-target-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"exampleschema\", \"table-name\": \"exampletable\"}, \"rule-action\": \"explicit\"}]}"
     #       }
     #     ],
-    #     marker: "0123456789abcdefghijklmnopqrs",
-    #     max_records: 20
+    #     definition: "CREATE TABLE ExampleTable (ExampleColumn INTEGER NOT NULL);"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     selection_rules: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
+    #     origin: "SOURCE" # One of: ["SOURCE", "TARGET"], # required
+    #   }
+    #   options = {}
+    #   response = client.describe_metadata_model(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     metadata_model_name: "String",
+    #     metadata_model_type: "String",
+    #     target_metadata_models: [
+    #       {
+    #         metadata_model_name: "String",
+    #         selection_rules: "String"
+    #       }
+    #     ],
+    #     definition: "String"
+    #   }
+    # @return [Types::DescribeMetadataModelResponse]
+    def describe_metadata_model(params = {}, options = {})
+      request = build_request(:describe_metadata_model, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a paginated list of metadata model assessment requests for a migration
+    #          project, initiated by
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelAssessment.html">StartMetadataModelAssessment</a>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:ListMetadataModelAssessments</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+    # @param [Hash, Types::DescribeMetadataModelAssessmentsMessage] params
+    # @option params [String] :migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # @option params [Array<Types::Filter>] :filters
+    #   <p>The filters to apply to the metadata model assessment requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
+    # @option params [String] :marker
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #            value specified by <code>MaxRecords</code>.</p>
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            make the call again using the returned token and keeping all other arguments unchanged.</p>
+    # @option params [Integer] :max_records
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #            in the response so that you can retrieve the remaining results.</p>
+    # @example Retrieve the status of metadata model assessments
+    #   # The following example retrieves the status of metadata model assessment operations identified by their request IDs.
+    #   params = {
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     filters: [
+    #       {
+    #         name: "request-id",
+    #         values: [
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333"
+    #         ]
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.describe_metadata_model_assessments(params, options)
     #   response.to_h #=>
     #   {
-    #     marker: "ASDLKJASDJKHDFHGDNBGDASKJHGFK",
     #     requests: [
     #       {
     #         status: "SUCCESS",
-    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef",
-    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
+    #       },
+    #       {
+    #         status: "IN_PROGRESS",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         progress: {
+    #           progress_percent: 50.0,
+    #           total_objects: 100,
+    #           progress_step: "ANALYZING",
+    #           processed_object: {
+    #             name: "ExampleTable",
+    #             type: "table",
+    #             endpoint_type: "SOURCE"
+    #           }
+    #         }
+    #       },
+    #       {
+    #         status: "FAILED",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         error: {
+    #     "defaultErrorDetails" => {
+    #       "Message" => No objects were found according to the specified selection rules. Please review your selection rules and try again.
+    #     }
+    #   }
     #       }
     #     ]
     #   }
@@ -6100,6 +6505,16 @@ module Aws::DatabaseMigrationService
     #         export_sql_details: {
     #           s3_object_key: "String",
     #           object_url: "String"
+    #         },
+    #         progress: {
+    #           progress_percent: 1.0,
+    #           total_objects: 1,
+    #           progress_step: "String",
+    #           processed_object: {
+    #             name: "String",
+    #             type: "String",
+    #             endpoint_type: "String"
+    #           }
     #         }
     #       }
     #     ]
@@ -6110,48 +6525,176 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Returns a paginated list of metadata model conversions for a migration project.</p>
+    # <p>Gets a list of child metadata models for the specified metadata model in the database hierarchy.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:DescribeMetadataModelChildren</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+    # @param [Hash, Types::DescribeMetadataModelChildrenMessage] params
+    # @option params [String] :selection_rules
+    #   <p>A JSON string that identifies the metadata model whose children to retrieve. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts source or target selection rules depending on the <code>Origin</code> parameter. The <code>server-name</code> in the object locator must match the corresponding data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Exactly one rule is allowed.</p>
+    #               </li>
+    #            </ul>
+    # @option params [String] :migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # @option params [String] :origin
+    #   <p>Specifies whether to retrieve metadata from the source or target tree. Valid values: SOURCE | TARGET</p>
+    # @option params [String] :marker
+    #   <p>Specifies the unique pagination token that indicates where the next page should start. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>
+    # @option params [Integer] :max_records
+    #   <p>The maximum number of metadata model children to include in the response. If more items exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.</p>
+    # @example Retrieve children of a schema
+    #   # The following example retrieves the child metadata models of the ExampleSchema schema from the source metadata tree.
+    #   params = {
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"1\", \"rule-name\": \"1\", \"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\"}, \"rule-action\": \"explicit\"}]}",
+    #     origin: SOURCE
+    #   }
+    #   options = {}
+    #   response = client.describe_metadata_model_children(params, options)
+    #   response.to_h #=>
+    #   {
+    #     metadata_model_children: [
+    #       {
+    #         metadata_model_name: "Tables",
+    #         selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"1\", \"rule-name\": \"1\", \"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\", \"category-name\": \"Tables\"}, \"rule-action\": \"explicit\"}]}"
+    #       },
+    #       {
+    #         metadata_model_name: "Views",
+    #         selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"2\", \"rule-name\": \"2\", \"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\", \"category-name\": \"Views\"}, \"rule-action\": \"explicit\"}]}"
+    #       },
+    #       {
+    #         metadata_model_name: "Functions",
+    #         selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"3\", \"rule-name\": \"3\", \"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\", \"category-name\": \"Functions\"}, \"rule-action\": \"explicit\"}]}"
+    #       },
+    #       {
+    #         metadata_model_name: "Sequences",
+    #         selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"4\", \"rule-name\": \"4\", \"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\", \"category-name\": \"Sequences\"}, \"rule-action\": \"explicit\"}]}"
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     selection_rules: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
+    #     origin: "SOURCE" # One of: ["SOURCE", "TARGET"], # required
+    #     marker: "String",
+    #     max_records: 1
+    #   }
+    #   options = {}
+    #   response = client.describe_metadata_model_children(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     marker: "String",
+    #     metadata_model_children: [
+    #       {
+    #         metadata_model_name: "String",
+    #         selection_rules: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::DescribeMetadataModelChildrenResponse]
+    def describe_metadata_model_children(params = {}, options = {})
+      request = build_request(:describe_metadata_model_children, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a paginated list of metadata model conversion requests for a migration
+    #          project, initiated by
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html">StartMetadataModelConversion</a>.</p>
+    #          <p>To cancel a queued or in-progress request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelConversion.html">CancelMetadataModelConversion</a>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:ListMetadataModelConversions</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::DescribeMetadataModelConversionsMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>Filters applied to the metadata model conversions described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the metadata model conversion requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>, <code>CANCELING</code>, <code>CANCELED</code>.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
-    # @example Describe Metadata Model Conversions
-    #   # Returns a paginated list of metadata model conversions for a migration project.
+    # @example Retrieve the status of metadata model conversions
+    #   # The following example retrieves the status of metadata model conversion operations identified by their request IDs.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
     #     filters: [
     #       {
     #         name: "request-id",
     #         values: [
-    #           "01234567-89ab-cdef-0123-456789abcdef"
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333"
     #         ]
     #       }
-    #     ],
-    #     marker: "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ123456",
-    #     max_records: 123
+    #     ]
     #   }
     #   options = {}
     #   response = client.describe_metadata_model_conversions(params, options)
     #   response.to_h #=>
     #   {
-    #     marker: "0123456789abcdefghijklmnopqrs",
     #     requests: [
     #       {
     #         status: "SUCCESS",
-    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef",
-    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
+    #       },
+    #       {
+    #         status: "IN_PROGRESS",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         progress: {
+    #           progress_percent: 50.0,
+    #           total_objects: 100,
+    #           progress_step: "CONVERTING",
+    #           processed_object: {
+    #             name: "ExampleTable",
+    #             type: "table",
+    #             endpoint_type: "SOURCE"
+    #           }
+    #         }
+    #       },
+    #       {
+    #         status: "FAILED",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         error: {
+    #     "defaultErrorDetails" => {
+    #       "Message" => No objects were found according to the specified selection rules. Please review your selection rules and try again.
+    #     }
+    #   }
     #       }
     #     ]
     #   }
@@ -6187,6 +6730,16 @@ module Aws::DatabaseMigrationService
     #         export_sql_details: {
     #           s3_object_key: "String",
     #           object_url: "String"
+    #         },
+    #         progress: {
+    #           progress_percent: 1.0,
+    #           total_objects: 1,
+    #           progress_step: "String",
+    #           processed_object: {
+    #             name: "String",
+    #             type: "String",
+    #             endpoint_type: "String"
+    #           }
     #         }
     #       }
     #     ]
@@ -6197,48 +6750,221 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Returns a paginated list of metadata model exports.</p>
-    # @param [Hash, Types::DescribeMetadataModelExportsAsScriptMessage] params
-    # @option params [String] :migration_project_identifier
-    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # <p>Returns a paginated list of metadata model creation requests for a migration
+    #          project, initiated by
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelCreation.html">StartMetadataModelCreation</a>.</p>
+    #          <p>To cancel a queued or in-progress request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelCreation.html">CancelMetadataModelCreation</a>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:DescribeMetadataModelCreations</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+    # @param [Hash, Types::DescribeMetadataModelCreationsMessage] params
     # @option params [Array<Types::Filter>] :filters
-    #   <p>Filters applied to the metadata model exports described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the metadata model creation requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>, <code>CANCELING</code>, <code>CANCELED</code>.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
-    # @example Describe Metadata Model Exports As Script
-    #   # Returns a paginated list of metadata model exports.
+    # @option params [String] :migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # @example Retrieve the status of metadata model creations
+    #   # The following example retrieves the status of metadata model creation operations identified by their request IDs.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
     #     filters: [
     #       {
     #         name: "request-id",
     #         values: [
-    #           "01234567-89ab-cdef-0123-456789abcdef"
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333"
     #         ]
     #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.describe_metadata_model_creations(params, options)
+    #   response.to_h #=>
+    #   {
+    #     requests: [
+    #       {
+    #         status: "SUCCESS",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
+    #       },
+    #       {
+    #         status: "IN_PROGRESS",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
+    #       },
+    #       {
+    #         status: "FAILED",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         error: {
+    #     "defaultErrorDetails" => {
+    #       "Message" => No objects were found according to the specified selection rules. Please review your selection rules and try again.
+    #     }
+    #   }
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       }
     #     ],
-    #     marker: "0123456789abcdefghijklmnopqrs",
-    #     max_records: 20
+    #     marker: "String",
+    #     max_records: 1,
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_metadata_model_creations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     marker: "String",
+    #     requests: [
+    #       {
+    #         status: "String",
+    #         request_identifier: "String",
+    #         migration_project_arn: "String",
+    #         error: {
+    #           # One of:
+    #           default_error_details: {
+    #             message: "String"
+    #           }
+    #         },
+    #         export_sql_details: {
+    #           s3_object_key: "String",
+    #           object_url: "String"
+    #         },
+    #         progress: {
+    #           progress_percent: 1.0,
+    #           total_objects: 1,
+    #           progress_step: "String",
+    #           processed_object: {
+    #             name: "String",
+    #             type: "String",
+    #             endpoint_type: "String"
+    #           }
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @return [Types::DescribeMetadataModelCreationsResponse]
+    def describe_metadata_model_creations(params = {}, options = {})
+      request = build_request(:describe_metadata_model_creations, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a paginated list of metadata model export requests for a migration
+    #          project, initiated by
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportAsScript.html">StartMetadataModelExportAsScript</a>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:ListMetadataModelExports</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+    # @param [Hash, Types::DescribeMetadataModelExportsAsScriptMessage] params
+    # @option params [String] :migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # @option params [Array<Types::Filter>] :filters
+    #   <p>The filters to apply to the metadata model export requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
+    # @option params [String] :marker
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #            value specified by <code>MaxRecords</code>.</p>
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            make the call again using the returned token and keeping all other arguments unchanged.</p>
+    # @option params [Integer] :max_records
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #            in the response so that you can retrieve the remaining results.</p>
+    # @example Retrieve the status of metadata model exports as script
+    #   # The following example retrieves the status of operations that export metadata models as data definition language (DDL) scripts, identified by their request IDs.
+    #   params = {
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     filters: [
+    #       {
+    #         name: "request-id",
+    #         values: [
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333"
+    #         ]
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.describe_metadata_model_exports_as_script(params, options)
     #   response.to_h #=>
     #   {
-    #     marker: "0123456789abcdefghijklmnopqrs",
     #     requests: [
     #       {
     #         status: "SUCCESS",
-    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef",
-    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         export_sql_details: {
+    #           s3_object_key: "s3://amzn-s3-demo-bucket/example-migration-project/ExampleScript.zip",
+    #           object_url: "https://amzn-s3-demo-bucket.s3.us-east-1.amazonaws.com/example-migration-project/ExampleScript.zip"
+    #         }
+    #       },
+    #       {
+    #         status: "IN_PROGRESS",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         progress: {
+    #           progress_percent: 50.0,
+    #           total_objects: 100,
+    #           progress_step: "IN_PROGRESS",
+    #           processed_object: {
+    #             endpoint_type: "TARGET"
+    #           }
+    #         }
+    #       },
+    #       {
+    #         status: "FAILED",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         error: {
+    #     "defaultErrorDetails" => {
+    #       "Message" => No objects were found according to the specified selection rules. Please review your selection rules and try again.
+    #     }
+    #   }
     #       }
     #     ]
     #   }
@@ -6274,6 +7000,16 @@ module Aws::DatabaseMigrationService
     #         export_sql_details: {
     #           s3_object_key: "String",
     #           object_url: "String"
+    #         },
+    #         progress: {
+    #           progress_percent: 1.0,
+    #           total_objects: 1,
+    #           progress_step: "String",
+    #           processed_object: {
+    #             name: "String",
+    #             type: "String",
+    #             endpoint_type: "String"
+    #           }
     #         }
     #       }
     #     ]
@@ -6284,48 +7020,87 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Returns a paginated list of metadata model exports.</p>
+    # <p>Returns a paginated list of metadata model export requests for a migration
+    #          project, initiated by
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportToTarget.html">StartMetadataModelExportToTarget</a>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:ListMetadataModelExports</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::DescribeMetadataModelExportsToTargetMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>Filters applied to the metadata model exports described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the metadata model export requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
-    # @example Describe Metadata Model Exports To Target
-    #   # Returns a paginated list of metadata model exports.
+    # @example Retrieve the status of metadata model exports to target
+    #   # The following example retrieves the status of operations that export converted metadata models to the target database, identified by their request IDs.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
     #     filters: [
     #       {
     #         name: "request-id",
     #         values: [
-    #           "01234567-89ab-cdef-0123-456789abcdef"
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333"
     #         ]
     #       }
-    #     ],
-    #     marker: "0123456789abcdefghijklmnopqrs",
-    #     max_records: 20
+    #     ]
     #   }
     #   options = {}
     #   response = client.describe_metadata_model_exports_to_target(params, options)
     #   response.to_h #=>
     #   {
-    #     marker: "0123456789abcdefghijklmnopqrs",
     #     requests: [
     #       {
     #         status: "SUCCESS",
-    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef",
-    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
+    #       },
+    #       {
+    #         status: "IN_PROGRESS",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         progress: {
+    #           progress_percent: 50.0,
+    #           total_objects: 100,
+    #           progress_step: "APPLYING",
+    #           processed_object: {
+    #             endpoint_type: "TARGET"
+    #           }
+    #         }
+    #       },
+    #       {
+    #         status: "FAILED",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         error: {
+    #     "defaultErrorDetails" => {
+    #       "Message" => No objects were found according to the specified selection rules. Please review your selection rules and try again.
+    #     }
+    #   }
     #       }
     #     ]
     #   }
@@ -6361,6 +7136,16 @@ module Aws::DatabaseMigrationService
     #         export_sql_details: {
     #           s3_object_key: "String",
     #           object_url: "String"
+    #         },
+    #         progress: {
+    #           progress_percent: 1.0,
+    #           total_objects: 1,
+    #           progress_step: "String",
+    #           processed_object: {
+    #             name: "String",
+    #             type: "String",
+    #             endpoint_type: "String"
+    #           }
     #         }
     #       }
     #     ]
@@ -6371,46 +7156,87 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Returns a paginated list of metadata model imports.</p>
+    # <p>Returns a paginated list of metadata model import requests for a migration
+    #          project, initiated by
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html">StartMetadataModelImport</a>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:DescribeMetadataModelImports</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::DescribeMetadataModelImportsMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>Filters applied to the metadata model imports described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the metadata model import requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     # @option params [Integer] :max_records
-    #   <p>A paginated list of metadata model imports.</p>
-    # @example Describe Metadata Model Imports
-    #   # Returns a paginated list of metadata model imports.
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #            in the response so that you can retrieve the remaining results.</p>
+    # @example Retrieve the status of metadata model imports
+    #   # The following example retrieves the status of metadata import operations identified by their request IDs.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
     #     filters: [
     #       {
     #         name: "request-id",
     #         values: [
-    #           "01234567-89ab-cdef-0123-456789abcdef"
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #           "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333"
     #         ]
     #       }
-    #     ],
-    #     marker: "0123456789abcdefghijklmnopqrs",
-    #     max_records: 20
+    #     ]
     #   }
     #   options = {}
     #   response = client.describe_metadata_model_imports(params, options)
     #   response.to_h #=>
     #   {
-    #     marker: "0123456789abcdefghijklmnopqrs",
     #     requests: [
     #       {
     #         status: "SUCCESS",
-    #         request_identifier: "01234567-89ab-cdef-0123-456789abcdef",
-    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
+    #       },
+    #       {
+    #         status: "IN_PROGRESS",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE22222",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         progress: {
+    #           progress_percent: 50.0,
+    #           total_objects: 100,
+    #           progress_step: "IN_PROGRESS",
+    #           processed_object: {
+    #             endpoint_type: "SOURCE"
+    #           }
+    #         }
+    #       },
+    #       {
+    #         status: "FAILED",
+    #         request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE33333",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         error: {
+    #     "defaultErrorDetails" => {
+    #       "Message" => No objects were found according to the specified selection rules. Please review your selection rules and try again.
+    #     }
+    #   }
     #       }
     #     ]
     #   }
@@ -6446,6 +7272,16 @@ module Aws::DatabaseMigrationService
     #         export_sql_details: {
     #           s3_object_key: "String",
     #           object_url: "String"
+    #         },
+    #         progress: {
+    #           progress_percent: 1.0,
+    #           total_objects: 1,
+    #           progress_step: "String",
+    #           processed_object: {
+    #             name: "String",
+    #             type: "String",
+    #             endpoint_type: "String"
+    #           }
     #         }
     #       }
     #     ]
@@ -6458,78 +7294,92 @@ module Aws::DatabaseMigrationService
 
     # <p>Returns a paginated list of migration projects for your account in the current
     #          region.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:ListMigrationProjects</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::DescribeMigrationProjectsMessage] params
     # @option params [Array<Types::Filter>] :filters
-    #   <p>Filters applied to the migration projects described in the form of key-value pairs.</p>
-    #            <p>Valid filter names and values:</p>
+    #   <p>The filters to apply to the migration projects.</p>
+    #            <p>The following filter names are supported:</p>
     #            <ul>
     #               <li>
-    #                  <p>instance-profile-identifier, instance profile arn or name</p>
+    #                  <p>
+    #                     <code>migration-project-identifier</code> – The migration project name or ARN.</p>
     #               </li>
     #               <li>
-    #                  <p>data-provider-identifier, data provider arn or name</p>
+    #                  <p>
+    #                     <code>instance-profile-identifier</code> – The instance profile name or ARN.</p>
     #               </li>
     #               <li>
-    #                  <p>migration-project-identifier, migration project arn or name</p>
+    #                  <p>
+    #                     <code>data-provider-identifier</code> – The source or target data provider name or ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>source-data-provider-identifier</code> – The source data provider name or ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>target-data-provider-identifier</code> – The target data provider name or ARN.</p>
     #               </li>
     #            </ul>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
-    # @example Describe Migration Projects
-    #   # Returns a paginated list of migration projects for your account in the current region.
+    # @example Describe migration projects with a filter
+    #   # The following example retrieves the details of a migration project identified by its ARN.
     #   params = {
     #     filters: [
     #       {
     #         name: "migration-project-identifier",
     #         values: [
-    #           "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901"
+    #           "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #         ]
     #       }
-    #     ],
-    #     max_records: 20,
-    #     marker: "EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ123456"
+    #     ]
     #   }
     #   options = {}
     #   response = client.describe_migration_projects(params, options)
     #   response.to_h #=>
     #   {
-    #     marker: "0123456789abcdefghijklmnopqrs",
     #     migration_projects: [
     #       {
-    #         schema_conversion_application_attributes: {
-    #           s3_bucket_path: "my-s3-bucket/my_folder",
-    #           s3_bucket_role_arn: "arn:aws:iam::012345678901:role/my-s3role"
-    #         },
+    #         migration_project_name: "example-migration-project",
+    #         migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         migration_project_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
     #         source_data_provider_descriptors: [
     #           {
-    #             secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role",
-    #             secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/ALL.SOURCE.ORACLE_12-012345",
-    #             data_provider_name: "all-source-oracle-12",
-    #             data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #             secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-source-secret-A1B2C3",
+    #             secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role",
+    #             data_provider_name: "example-data-provider",
+    #             data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #           }
     #         ],
-    #         migration_project_creation_time: Time.parse("2023-04-19T11:45:15.805253Z"),
-    #         instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #         migration_project_name: "my-migration-project",
-    #         migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #         instance_profile_name: "my-instance-profile",
     #         target_data_provider_descriptors: [
     #           {
-    #             secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/dmytbon-admin-access",
-    #             secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/TARGET.postgresql-012345",
-    #             data_provider_name: "my-data-provider",
-    #             data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #             secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-target-secret-A1B2C3",
+    #             secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role",
+    #             data_provider_name: "example-data-provider",
+    #             data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #           }
-    #         ]
+    #         ],
+    #         instance_profile_arn: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #         instance_profile_name: "example-instance-profile",
+    #         transformation_rules: "{\"rules\":[{\"rule-type\":\"transformation\",\"rule-id\":\"1\",\"rule-name\":\"1\",\"rule-target\":\"schema\",\"rule-action\":\"rename\",\"object-locator\":{\"schema-name\":\"ExampleSchema\"},\"value\":\"TargetSchema\"}]}",
+    #         description: "Example migration project for documentation",
+    #         schema_conversion_application_attributes: {
+    #           s3_bucket_path: "s3://amzn-s3-demo-bucket",
+    #           s3_bucket_role_arn: "arn:aws:iam::111122223333:role/example-s3-access-role"
+    #         }
     #       }
     #     ]
     #   }
@@ -6938,7 +7788,8 @@ module Aws::DatabaseMigrationService
     #         supplemental_settings: "String",
     #         table_mappings: "String",
     #         replication_config_create_time: Time.now,
-    #         replication_config_update_time: Time.now
+    #         replication_config_update_time: Time.now,
+    #         is_read_only: false
     #       }
     #     ]
     #   }
@@ -7074,7 +7925,8 @@ module Aws::DatabaseMigrationService
     #               subnet_status: "String"
     #             }
     #           ],
-    #           supported_network_types: ["String"]
+    #           supported_network_types: ["String"],
+    #           is_read_only: false
     #         },
     #         preferred_maintenance_window: "String",
     #         pending_modified_values: {
@@ -7183,7 +8035,8 @@ module Aws::DatabaseMigrationService
     #             subnet_status: "String"
     #           }
     #         ],
-    #         supported_network_types: ["String"]
+    #         supported_network_types: ["String"],
+    #         is_read_only: false
     #       }
     #     ]
     #   }
@@ -7644,7 +8497,8 @@ module Aws::DatabaseMigrationService
     #         replication_create_time: Time.now,
     #         replication_update_time: Time.now,
     #         replication_last_stop_time: Time.now,
-    #         replication_deprovision_time: Time.now
+    #         replication_deprovision_time: Time.now,
+    #         is_read_only: false
     #       }
     #     ]
     #   }
@@ -7803,23 +8657,37 @@ module Aws::DatabaseMigrationService
 
     # <p>Saves a copy of a database migration assessment report to your Amazon S3 bucket. DMS can
     #          save your assessment report as a comma-separated value (CSV) or a PDF file. </p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:ExportMetadataModelAssessment</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::ExportMetadataModelAssessmentMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [String] :selection_rules
-    #   <p>A value that specifies the database objects to assess.</p>
+    #   <p>A JSON string that identifies the metadata models to export a conversion assessment report for. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :file_name
     #   <p>The name of the assessment file to create in your Amazon S3 bucket.</p>
     # @option params [Array<String>] :assessment_report_types
     #   <p>The file format of the assessment file.</p>
-    # @example Export Metadata Model Assessment
-    #   # Saves a copy of a database migration assessment report to your S3 bucket. DMS can save your assessment report as a comma-separated value (CSV) or a PDF file.
+    # @example Export a conversion assessment report
+    #   # The following example exports a conversion assessment report for all objects in the ExampleSchema schema.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-a1b2c3d4e5f6.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}",
-    #     file_name: "file",
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"1\", \"rule-name\": \"1\", \"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\"}, \"rule-action\": \"explicit\"}]}",
+    #     file_name: "example-assessment-report",
     #     assessment_report_types: [
-    #       pdf
+    #       pdf,
+    #       csv
     #     ]
     #   }
     #   options = {}
@@ -7827,12 +8695,12 @@ module Aws::DatabaseMigrationService
     #   response.to_h #=>
     #   {
     #     pdf_report: {
-    #       s3_object_key: "object-name",
-    #       object_url: "url"
+    #       s3_object_key: "example-migration-project/example-assessment-report.pdf",
+    #       object_url: "https://amzn-s3-demo-bucket.s3.amazonaws.com/example-migration-project/example-assessment-report.pdf"
     #     },
     #     csv_report: {
-    #       s3_object_key: "object-name",
-    #       object_url: "url"
+    #       s3_object_key: "example-migration-project/example-assessment-report.zip",
+    #       object_url: "https://amzn-s3-demo-bucket.s3.amazonaws.com/example-migration-project/example-assessment-report.zip"
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -7862,6 +8730,61 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
+    # <p>Converts source selection rules into their target counterparts for schema conversion operations.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:GetTargetSelectionRules</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+    # @param [Hash, Types::GetTargetSelectionRulesMessage] params
+    # @option params [String] :migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # @option params [String] :selection_rules
+    #   <p>A JSON string that contains the source selection rules to convert into their target counterparts. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Does not support <code>category-name</code> in the object locator.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Up to 10 rules are allowed.</p>
+    #               </li>
+    #            </ul>
+    # @example Convert source selection rules to target selection rules
+    #   # The following example converts source selection rules that select the ExampleTable table in the ExampleSchema schema into target selection rules that reference its converted counterpart.
+    #   params = {
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"1\", \"rule-name\": \"1\", \"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"database-name\": \"ExampleDatabase\", \"schema-name\": \"ExampleSchema\", \"table-name\": \"ExampleTable\"}, \"rule-action\": \"explicit\"}]}"
+    #   }
+    #   options = {}
+    #   response = client.get_target_selection_rules(params, options)
+    #   response.to_h #=>
+    #   {
+    #     target_selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"1\", \"rule-name\": \"1\", \"object-locator\": {\"server-name\": \"example-target-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"exampledatabase_exampleschema\", \"table-name\": \"exampletable\"}, \"rule-action\": \"explicit\"}]}"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
+    #     selection_rules: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.get_target_selection_rules(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     target_selection_rules: "String"
+    #   }
+    # @return [Types::GetTargetSelectionRulesResponse]
+    def get_target_selection_rules(params = {}, options = {})
+      request = build_request(:get_target_selection_rules, params)
+      request.send_request(options)
+    end
+
     # <p>Uploads the specified certificate.</p>
     # @param [Hash, Types::ImportCertificateMessage] params
     # @option params [String] :certificate_identifier
@@ -7878,6 +8801,12 @@ module Aws::DatabaseMigrationService
     #            </p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags associated with the certificate.</p>
+    # @option params [String] :kms_key_id
+    #   <p>An KMS key identifier that is used to encrypt the certificate.</p>
+    #            <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses
+    #            your default encryption key.</p>
+    #            <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has
+    #            a different default encryption key for each Amazon Web Services Region.</p>
     # @example Import certificate
     #   # Uploads the specified certificate.
     #   params = {
@@ -7902,7 +8831,8 @@ module Aws::DatabaseMigrationService
     #         value: "String",
     #         resource_arn: "String"
     #       }
-    #     ]
+    #     ],
+    #     kms_key_id: "String"
     #   }
     #   options = {}
     #   response = client.import_certificate(params, options)
@@ -7919,7 +8849,8 @@ module Aws::DatabaseMigrationService
     #       valid_from_date: Time.now,
     #       valid_to_date: Time.now,
     #       signing_algorithm: "String",
-    #       key_length: 1
+    #       key_length: 1,
+    #       kms_key_id: "String"
     #     }
     #   }
     # @return [Types::ImportCertificateResponse]
@@ -7980,22 +8911,36 @@ module Aws::DatabaseMigrationService
     end
 
     # <p>Modifies the specified schema conversion configuration using the provided parameters. </p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:UpdateConversionConfiguration</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::ModifyConversionConfigurationMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [String] :conversion_configuration
-    #   <p>The new conversion configuration.</p>
-    # @example Modify Conversion Configuration
-    #   # Modifies the specified schema conversion configuration using the provided parameters.
+    #   <p>A JSON string that contains the schema conversion settings to update.
+    #            For the format and available settings, see
+    #            <a href="https://docs.aws.amazon.com/dms/latest/userguide/schema-conversion-settings.html">Specifying schema conversion
+    #               settings for migration projects</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Include only the sections and keys to change. The operation merges supplied
+    #               values with the existing configuration.</p>
+    #               </li>
+    #            </ul>
+    # @example Modifying conversion configuration for a migration project
+    #   # The following example enables generative AI assisted conversion and updates a conversion pair setting for a migration project.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #     conversion_configuration: "{\"Common project settings\":{\"ShowSeverityLevelInSql\":\"CRITICAL\"},\"ORACLE_TO_POSTGRESQL\" : {\"ToTimeZone\":false,\"LastDayBuiltinFunctionOracle\":false,   \"NextDayBuiltinFunctionOracle\":false,\"ConvertProceduresToFunction\":false,\"NvlBuiltinFunctionOracle\":false,\"DbmsAssertBuiltinFunctionOracle\":false}}"
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     conversion_configuration: "{\"Common project settings\":{\"EnableGenAiConversion\":true},\"MSSQL_TO_AURORA_POSTGRESQL\":{\"ConvertProceduresToFunction\":false}}"
     #   }
     #   options = {}
     #   response = client.modify_conversion_configuration(params, options)
     #   response.to_h #=>
     #   {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
@@ -8117,23 +9062,30 @@ module Aws::DatabaseMigrationService
     end
 
     # <p>Modifies the specified data provider using the provided settings.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:UpdateDataProvider</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     #          <note>
     #             <p>You must remove the data provider from all migration projects before you can modify
     #             it.</p>
     #          </note>
     # @param [Hash, Types::ModifyDataProviderMessage] params
     # @option params [String] :data_provider_identifier
-    #   <p>The identifier of the data provider. Identifiers must begin with a letter 
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
+    #   <p>The identifier of the data provider. Identifiers must begin with a letter
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
     #            a hyphen, or contain two consecutive hyphens.</p>
     # @option params [String] :data_provider_name
     #   <p>The name of the data provider.</p>
     # @option params [String] :description
     #   <p>A user-friendly description of the data provider.</p>
     # @option params [String] :engine
-    #   <p>The type of database engine for the data provider. Valid values include <code>"aurora"</code>, 
-    #            <code>"aurora-postgresql"</code>, <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, 
-    #            <code>"sqlserver"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>"aurora"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>
+    #   <p>The type of database engine for the data provider.</p>
+    #            <p>Valid values: <code>aurora</code>, <code>aurora-postgresql</code>, <code>db2</code>,
+    #            <code>db2-zos</code>, <code>docdb</code>, <code>mariadb</code>, <code>mongodb</code>,
+    #            <code>mysql</code>, <code>oracle</code>, <code>postgres</code>, <code>redshift</code>,
+    #            <code>sqlserver</code>, and <code>sybase</code>. A value of <code>aurora</code> represents
+    #            Amazon Aurora MySQL-Compatible Edition.</p>
     # @option params [Boolean] :virtual
     #   <p>Indicates whether the data provider is virtual.</p>
     # @option params [Boolean] :exact_settings
@@ -8142,29 +9094,25 @@ module Aws::DatabaseMigrationService
     #            attribute is N, the current call to <code>ModifyDataProvider</code> does two things: </p>
     #            <ul>
     #               <li>
-    #                  <p>It replaces any data provider settings that already exist with new values, 
+    #                  <p>It replaces any data provider settings that already exist with new values,
     #               for settings with the same names.</p>
     #               </li>
     #               <li>
-    #                  <p>It creates new data provider settings that you specify in the call, 
+    #                  <p>It creates new data provider settings that you specify in the call,
     #               for settings with different names. </p>
     #               </li>
     #            </ul>
     # @option params [Types::DataProviderSettings] :settings
     #   <p>The settings in JSON format for a data provider.</p>
-    # @example Modify Data Provider
-    #   # Modifies the specified data provider using the provided settings.
+    # @example Modify a data provider
+    #   # The following example updates the description and server name of a data provider.
     #   params = {
-    #     data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
-    #     data_provider_name: "new-name",
+    #     data_provider_identifier: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     description: "Updated data provider description",
     #     engine: "sqlserver",
-    #     description: "description",
     #     settings: {
     #     "MicrosoftSqlServerSettings" => {
-    #       "ServerName" => ServerName2,
-    #       "Port" => 11112,
-    #       "DatabaseName" => DatabaseName,
-    #       "SslMode" => none
+    #       "ServerName" => new-source-server.us-east-1.rds.amazonaws.com
     #     }
     #   }
     #   }
@@ -8173,18 +9121,20 @@ module Aws::DatabaseMigrationService
     #   response.to_h #=>
     #   {
     #     data_provider: {
-    #       engine: "postgres",
+    #       data_provider_name: "example-data-provider",
+    #       data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       data_provider_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
+    #       description: "Updated data provider description",
+    #       engine: "sqlserver",
     #       settings: {
-    #     "PostgreSqlSettings" => {
-    #       "SslMode" => none,
-    #       "ServerName" => postrgesql.0a1b2c3d4e5f.us-east-1.rds.amazonaws.com,
-    #       "Port" => 5432,
-    #       "DatabaseName" => target
+    #     "MicrosoftSqlServerSettings" => {
+    #       "ServerName" => new-source-server.us-east-1.rds.amazonaws.com,
+    #       "Port" => 1433,
+    #       "DatabaseName" => ExampleDatabase,
+    #       "SslMode" => verify-full,
+    #       "CertificateArn" => arn:aws:dms:us-east-1:111122223333:cert:EXAMPLEABCDEFGHIJKLMNOPQRS
     #     }
-    #   },
-    #       data_provider_creation_time: Time.parse("2023-05-12T10:50:41.988561Z"),
-    #       data_provider_name: "my-target-data-provider",
-    #       data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:my-target-data-provider"
+    #   }
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -8235,6 +9185,14 @@ module Aws::DatabaseMigrationService
     #         s3_path: "String",
     #         s3_access_role_arn: "String"
     #       },
+    #       sybase_ase_settings: {
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
+    #         encrypt_password: false,
+    #         certificate_arn: "String"
+    #       },
     #       microsoft_sql_server_settings: {
     #         server_name: "String",
     #         port: 1,
@@ -8265,6 +9223,8 @@ module Aws::DatabaseMigrationService
     #         database_name: "String",
     #         ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
     #         certificate_arn: "String",
+    #         encryption_algorithm: 1,
+    #         security_mechanism: 1,
     #         s3_path: "String",
     #         s3_access_role_arn: "String"
     #       },
@@ -8341,6 +9301,14 @@ module Aws::DatabaseMigrationService
     #           s3_path: "String",
     #           s3_access_role_arn: "String"
     #         },
+    #         sybase_ase_settings: {
+    #           server_name: "String",
+    #           port: 1,
+    #           database_name: "String",
+    #           ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
+    #           encrypt_password: false,
+    #           certificate_arn: "String"
+    #         },
     #         microsoft_sql_server_settings: {
     #           server_name: "String",
     #           port: 1,
@@ -8371,6 +9339,8 @@ module Aws::DatabaseMigrationService
     #           database_name: "String",
     #           ssl_mode: "none" # One of: ["none", "require", "verify-ca", "verify-full"],
     #           certificate_arn: "String",
+    #           encryption_algorithm: 1,
+    #           security_mechanism: 1,
     #           s3_path: "String",
     #           s3_access_role_arn: "String"
     #         },
@@ -8984,6 +9954,7 @@ module Aws::DatabaseMigrationService
     #       service_access_role_arn: "String",
     #       external_table_definition: "String",
     #       external_id: "String",
+    #       is_read_only: false,
     #       dynamo_db_settings: {
     #         service_access_role_arn: "String", # required
     #       },
@@ -9322,6 +10293,9 @@ module Aws::DatabaseMigrationService
     #         magnetic_duration: 1, # required
     #         cdc_inserts_and_updates: false,
     #         enable_magnetic_store_writes: false
+    #       },
+    #       lakehouse_settings: {
+    #         arn: "String", # required
     #       }
     #     }
     #   }
@@ -9379,19 +10353,23 @@ module Aws::DatabaseMigrationService
     end
 
     # <p>Modifies the specified instance profile using the provided parameters.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:UpdateInstanceProfile</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     #          <note>
     #             <p>All migration projects associated with the instance profile must be deleted or
     #             modified before you can modify the instance profile.</p>
     #          </note>
     # @param [Hash, Types::ModifyInstanceProfileMessage] params
     # @option params [String] :instance_profile_identifier
-    #   <p>The identifier of the instance profile. Identifiers must begin with a letter and must contain 
-    #            only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive 
+    #   <p>The identifier of the instance profile. Identifiers must begin with a letter and must contain
+    #            only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive
     #            hyphens.</p>
     # @option params [String] :availability_zone
     #   <p>The Availability Zone where the instance profile runs.</p>
     # @option params [String] :kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
+    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
     #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
@@ -9401,10 +10379,10 @@ module Aws::DatabaseMigrationService
     #            <code>false</code> represents an instance profile with a private IP address. The default value
     #            is <code>true</code>.</p>
     # @option params [String] :network_type
-    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code> 
-    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing. 
-    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type 
-    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance 
+    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code>
+    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing.
+    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type
+    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance
     #            profile with dual network type that supports IPv4 and IPv6 addressing.</p>
     # @option params [String] :instance_profile_name
     #   <p>A user-friendly name for the instance profile.</p>
@@ -9413,36 +10391,31 @@ module Aws::DatabaseMigrationService
     # @option params [String] :subnet_group_identifier
     #   <p>A subnet group to associate with the instance profile.</p>
     # @option params [Array<String>] :vpc_security_groups
-    #   <p>Specifies the VPC security groups to be used with the instance profile. 
+    #   <p>Specifies the VPC security groups to be used with the instance profile.
     #            The VPC security group must work with the VPC containing the instance profile.</p>
-    # @example Modify Instance Profile
-    #   # Modifies the specified instance profile using the provided parameters.
+    # @example Modify an instance profile
+    #   # The following example updates the description and network type of an instance profile.
     #   params = {
-    #     instance_profile_identifier: "",
-    #     availability_zone: "",
-    #     kms_key_arn: "",
-    #     publicly_accessible: true,
-    #     network_type: "",
-    #     instance_profile_name: "",
-    #     description: "",
-    #     subnet_group_identifier: "",
-    #     vpc_security_groups: [
-    #     ]
+    #     instance_profile_identifier: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     description: "Updated instance profile description",
+    #     network_type: "DUAL"
     #   }
     #   options = {}
     #   response = client.modify_instance_profile(params, options)
     #   response.to_h #=>
     #   {
     #     instance_profile: {
-    #       subnet_group_identifier: "public-subnets",
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       kms_key_arn: "arn:aws:kms:us-east-1:111122223333:key/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+    #       publicly_accessible: false,
+    #       network_type: "DUAL",
+    #       instance_profile_name: "example-instance-profile",
+    #       description: "Updated instance profile description",
+    #       instance_profile_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
+    #       subnet_group_identifier: "example-replication-subnet-group",
     #       vpc_security_groups: [
-    #         "sg-0123456"
-    #       ],
-    #       publicly_accessible: true,
-    #       kms_key_arn: "arn:aws:kms:us-east-1:012345678901:key/01234567-89ab-cdef-0123-456789abcdef",
-    #       instance_profile_creation_time: Time.parse("2022-12-16T09:44:43.543246Z"),
-    #       instance_profile_name: "my-instance-profile",
-    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:my-instance-profile"
+    #         "sg-0123456789abcdef0"
+    #       ]
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -9482,13 +10455,17 @@ module Aws::DatabaseMigrationService
     end
 
     # <p>Modifies the specified migration project using the provided parameters.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:UpdateMigrationProject</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     #          <note>
     #             <p>The migration project must be closed before you can modify it.</p>
     #          </note>
     # @param [Hash, Types::ModifyMigrationProjectMessage] params
     # @option params [String] :migration_project_identifier
-    #   <p>The identifier of the migration project. Identifiers must begin with a letter 
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
+    #   <p>The identifier of the migration project. Identifiers must begin with a letter
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
     #            a hyphen, or contain two consecutive hyphens.</p>
     # @option params [String] :migration_project_name
     #   <p>A user-friendly name for the migration project.</p>
@@ -9499,69 +10476,61 @@ module Aws::DatabaseMigrationService
     # @option params [String] :instance_profile_identifier
     #   <p>The name or Amazon Resource Name (ARN) for the instance profile.</p>
     # @option params [String] :transformation_rules
-    #   <p>The settings in JSON format for migration rules. Migration rules make it possible for you to change 
-    #            the object names according to the rules that you specify. For example, you can change an object name 
-    #            to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.</p>
+    #   <p>A JSON string that specifies the transformation rules for the migration project.
+    #            Transformation rules let you customize how DMS Schema Conversion converts your source
+    #            database objects, including renaming, adding prefixes or suffixes, and changing data types.
+    #            For the transformation rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-transformation-rules.html">Transformation rules in DMS
+    #               Schema Conversion</a>.</p>
+    #            <note>
+    #               <p>Homogeneous data migrations do not support transformation rules.</p>
+    #            </note>
     # @option params [String] :description
     #   <p>A user-friendly description of the migration project.</p>
     # @option params [Types::SCApplicationAttributes] :schema_conversion_application_attributes
     #   <p>The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.</p>
-    # @example Modify Migration Project
-    #   # Modifies the specified migration project using the provided parameters.
+    # @example Modify a migration project
+    #   # The following example updates the source data provider and description of a migration project.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
-    #     migration_project_name: "new-name",
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     description: "Updated migration project description",
     #     source_data_provider_descriptors: [
     #       {
-    #         data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
-    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/myuser/ALL.SOURCE.ORACLE_12-A1B2C3",
-    #         secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/myuser-admin-access"
+    #         data_provider_identifier: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #       }
-    #     ],
-    #     target_data_provider_descriptors: [
-    #       {
-    #         data_provider_identifier: "arn:aws:dms:us-east-1:012345678901:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
-    #         secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:myorg/myuser/TARGET.postgresql-A1B2C3",
-    #         secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/myuser-admin-access"
-    #       }
-    #     ],
-    #     instance_profile_identifier: "my-instance-profile",
-    #     schema_conversion_application_attributes: {
-    #       s3_bucket_path: "arn:aws:s3:::myuser-bucket",
-    #       s3_bucket_role_arn: "arn:aws:iam::012345678901:role/Admin"
-    #     },
-    #     description: "description"
+    #     ]
     #   }
     #   options = {}
     #   response = client.modify_migration_project(params, options)
     #   response.to_h #=>
     #   {
     #     migration_project: {
-    #       schema_conversion_application_attributes: {
-    #         s3_bucket_path: "my-s3-bucket/my_folder",
-    #         s3_bucket_role_arn: "arn:aws:iam::012345678901:role/my-s3role"
-    #       },
+    #       migration_project_name: "example-migration-project",
+    #       migration_project_arn: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       migration_project_creation_time: Time.parse("2026-01-09T12:30:00.000000Z"),
     #       source_data_provider_descriptors: [
     #         {
-    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role",
-    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/ALL.SOURCE.ORACLE_12-TP5rA9",
-    #           data_provider_name: "all-source-oracle-12",
-    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-source-secret-A1B2C3",
+    #           secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role",
+    #           data_provider_name: "example-data-provider",
+    #           data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #         }
     #       ],
-    #       migration_project_creation_time: Time.parse("2023-04-19T11:45:15.805253Z"),
-    #       instance_profile_arn: "arn:aws:dms:us-east-1:012345678901:instance-profile:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #       migration_project_name: "my-migration-project",
-    #       migration_project_arn: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #       instance_profile_name: "my-instance-profile",
     #       target_data_provider_descriptors: [
     #         {
-    #           secrets_manager_access_role_arn: "arn:aws:iam::012345678901:role/my-access-role",
-    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:012345678901:secret:mygroup/myalias/TARGET.postgresql-mysecret",
-    #           data_provider_name: "my-dataprovider",
-    #           data_provider_arn: "arn:aws:dms:us-east-1:012345678901:data-provider:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #           secrets_manager_secret_id: "arn:aws:secretsmanager:us-east-1:111122223333:secret:example-target-secret-A1B2C3",
+    #           secrets_manager_access_role_arn: "arn:aws:iam::111122223333:role/example-secrets-manager-role",
+    #           data_provider_name: "example-data-provider",
+    #           data_provider_arn: "arn:aws:dms:us-east-1:111122223333:data-provider:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #         }
-    #       ]
+    #       ],
+    #       instance_profile_arn: "arn:aws:dms:us-east-1:111122223333:instance-profile:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #       instance_profile_name: "example-instance-profile",
+    #       transformation_rules: "{\"rules\":[{\"rule-type\":\"transformation\",\"rule-id\":\"1\",\"rule-name\":\"1\",\"rule-target\":\"schema\",\"rule-action\":\"rename\",\"object-locator\":{\"schema-name\":\"ExampleSchema\"},\"value\":\"TargetSchema\"}]}",
+    #       description: "Updated migration project description",
+    #       schema_conversion_application_attributes: {
+    #         s3_bucket_path: "s3://amzn-s3-demo-bucket",
+    #         s3_bucket_role_arn: "arn:aws:iam::111122223333:role/example-s3-access-role"
+    #       }
     #     }
     #   }
     # @example Request syntax with placeholder values
@@ -9708,7 +10677,8 @@ module Aws::DatabaseMigrationService
     #       supplemental_settings: "String",
     #       table_mappings: "String",
     #       replication_config_create_time: Time.now,
-    #       replication_config_update_time: Time.now
+    #       replication_config_update_time: Time.now,
+    #       is_read_only: false
     #     }
     #   }
     # @return [Types::ModifyReplicationConfigResponse]
@@ -9914,7 +10884,8 @@ module Aws::DatabaseMigrationService
     #             subnet_status: "String"
     #           }
     #         ],
-    #         supported_network_types: ["String"]
+    #         supported_network_types: ["String"],
+    #         is_read_only: false
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -10000,7 +10971,8 @@ module Aws::DatabaseMigrationService
     #           subnet_status: "String"
     #         }
     #       ],
-    #       supported_network_types: ["String"]
+    #       supported_network_types: ["String"],
+    #       is_read_only: false
     #     }
     #   }
     # @return [Types::ModifyReplicationSubnetGroupResponse]
@@ -10241,7 +11213,8 @@ module Aws::DatabaseMigrationService
     #             subnet_status: "String"
     #           }
     #         ],
-    #         supported_network_types: ["String"]
+    #         supported_network_types: ["String"],
+    #         is_read_only: false
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -10529,22 +11502,33 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Applies the extension pack to your target database. An extension pack is an add-on
-    #          module that emulates functions present in a source database that are required when
-    #          converting objects to the target database. </p>
+    # <p>Queues the installation of the extension pack on your target database. If other
+    #          requests created by <code>Start*</code> operations are already in the migration project's
+    #          queue, the installation begins after they complete.</p>
+    #          <p>This operation requires a non-virtual target data provider.</p>
+    #          <p>If the extension pack already exists, the operation reinstalls it. To ensure
+    #          compatibility, reconvert your database objects if the version has changed since your last
+    #          conversion. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/extension-pack.html">Using extension packs in DMS Schema Conversion</a>.</p>
+    #          <p>To check the status of the request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeExtensionPackAssociations.html">DescribeExtensionPackAssociations</a> using the returned
+    #          <code>RequestIdentifier</code> as a filter.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:AssociateExtensionPack</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::StartExtensionPackAssociationMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
-    # @example Start Extension Pack Association
-    #   # Applies the extension pack to your target database.
+    # @example Install the extension pack on the target database
+    #   # The following example queues the installation of the extension pack on the target database.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012"
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS"
     #   }
     #   options = {}
     #   response = client.start_extension_pack_association(params, options)
     #   response.to_h #=>
     #   {
-    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef"
+    #     request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
@@ -10563,27 +11547,48 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Creates a database migration assessment report by assessing the migration complexity for
-    #          your source database. A database migration assessment report summarizes all of the schema
-    #          conversion tasks. It also details the action items for database objects that can't be
-    #          converted to the database engine of your target database instance. </p>
+    # <p>Queues an assessment of the selected source metadata models (database objects such as
+    #          tables, views, and procedures) to evaluate conversion complexity to the target database
+    #          format. If other requests created by <code>Start*</code> operations are already in the
+    #          migration project's queue, the assessment begins after they complete.</p>
+    #          <p>The assessment request loads metadata models that are not yet in the metadata tree, but
+    #          does not reload metadata models that are already present. If your source database has
+    #          changed since the metadata was loaded, refresh the affected metadata models with
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html">StartMetadataModelImport</a> before calling this operation.</p>
+    #          <p>To check the status of the assessment request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelAssessments.html">DescribeMetadataModelAssessments</a> using the returned
+    #          <code>RequestIdentifier</code> as a filter.</p>
+    #          <p>To export the conversion assessment report after the request completes successfully,
+    #          call <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_ExportMetadataModelAssessment.html">ExportMetadataModelAssessment</a>.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:StartMetadataModelAssessment</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::StartMetadataModelAssessmentMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [String] :selection_rules
-    #   <p>A value that specifies the database objects to assess.</p>
-    # @example Start Metadata Model Assessment
-    #   # Creates a database migration assessment report by assessing the migration complexity for 
-    # #          your source database.
+    #   <p>A JSON string that identifies the metadata models to assess. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
+    # @example Assess all objects in a schema
+    #   # The following example queues an assessment of the conversion complexity for all objects in the ExampleSchema schema.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}"
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\"},\"rule-action\": \"explicit\"}]}"
     #   }
     #   options = {}
     #   response = client.start_metadata_model_assessment(params, options)
     #   response.to_h #=>
     #   {
-    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef"
+    #     request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
@@ -10603,23 +11608,82 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Converts your source database objects to a format compatible with the target database. </p>
+    # <p>Queues a conversion of the selected source metadata models (database objects such as
+    #          tables, views, and procedures) to the target database format. If other requests created
+    #          by <code>Start*</code> operations are already in the migration project's queue, the
+    #          conversion begins after they complete.</p>
+    #          <p>The conversion request loads metadata models that are not yet in the metadata tree, but
+    #          does not reload metadata models that are already present. If your source database has
+    #          changed since the metadata was loaded, refresh the affected metadata models with
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html">StartMetadataModelImport</a> before calling this operation.</p>
+    #          <note>
+    #             <p>If converted objects already exist in the target metadata tree, the conversion
+    #             overwrites them, including any manual edits.</p>
+    #          </note>
+    #          <p>To check the status of the conversion request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelConversions.html">DescribeMetadataModelConversions</a> using the returned
+    #          <code>RequestIdentifier</code> as a filter.</p>
+    #          <p>To cancel a queued or in-progress request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelConversion.html">CancelMetadataModelConversion</a> with the returned
+    #          <code>RequestIdentifier</code>.</p>
+    #          <p>After the conversion completes successfully:</p>
+    #          <ul>
+    #             <li>
+    #                <p>To export a post-conversion assessment report, call
+    #             <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_ExportMetadataModelAssessment.html">ExportMetadataModelAssessment</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>To retrieve converted code, use any of the following
+    #             options:</p>
+    #                <ul>
+    #                   <li>
+    #                      <p>
+    #                         <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModel.html">DescribeMetadataModel</a> and
+    #                   <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelChildren.html">DescribeMetadataModelChildren</a> – navigate the target metadata
+    #                   tree and retrieve converted definitions.</p>
+    #                   </li>
+    #                   <li>
+    #                      <p>
+    #                         <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportAsScript.html">StartMetadataModelExportAsScript</a> – export as data definition
+    #                   language (DDL) scripts to your Amazon S3 bucket.</p>
+    #                   </li>
+    #                   <li>
+    #                      <p>
+    #                         <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportToTarget.html">StartMetadataModelExportToTarget</a> – apply directly to your
+    #                   target database.</p>
+    #                   </li>
+    #                </ul>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:StartMetadataModelConversion</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::StartMetadataModelConversionMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [String] :selection_rules
-    #   <p>A value that specifies the database objects to convert.</p>
-    # @example Start Metadata Model Conversion
-    #   # Converts your source database objects to a format compatible with the target database. 
+    #   <p>A JSON string that identifies the metadata models to convert. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
+    # @example Convert all objects in a schema
+    #   # The following example queues a conversion of all objects in the ExampleSchema schema to the target database format.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}"
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\"},\"rule-action\": \"explicit\"}]}"
     #   }
     #   options = {}
     #   response = client.start_metadata_model_conversion(params, options)
     #   response.to_h #=>
     #   {
-    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef"
+    #     request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
@@ -10639,30 +11703,153 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Saves your converted code to a file as a SQL script, and stores this file on your Amazon S3
-    #          bucket.</p>
+    # <p>Queues the creation of a metadata model in the source metadata tree. If other requests
+    #          created by <code>Start*</code> operations are already in the migration project's queue, the
+    #          creation begins after they complete.</p>
+    #          <note>
+    #             <p>This operation supports only Microsoft SQL Server to Aurora PostgreSQL and
+    #          Microsoft SQL Server to Amazon RDS for PostgreSQL conversion paths.</p>
+    #          </note>
+    #          <p>To check the status of the creation request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelCreations.html">DescribeMetadataModelCreations</a> using the returned
+    #          <code>RequestIdentifier</code> as a filter.</p>
+    #          <p>To cancel a queued or in-progress request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelCreation.html">CancelMetadataModelCreation</a> with the returned
+    #          <code>RequestIdentifier</code>.</p>
+    #          <important>
+    #             <p>Calling
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html">StartMetadataModelImport</a> with <code>Refresh</code> deletes metadata models
+    #          created by this operation.</p>
+    #          </important>
+    #          <p>After the creation completes successfully:</p>
+    #          <ul>
+    #             <li>
+    #                <p>To evaluate conversion complexity, call
+    #             <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelAssessment.html">StartMetadataModelAssessment</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>To convert to the target database format, call
+    #             <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html">StartMetadataModelConversion</a>.</p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:StartMetadataModelCreation</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
+    # @param [Hash, Types::StartMetadataModelCreationMessage] params
+    # @option params [String] :migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    # @option params [String] :selection_rules
+    #   <p>A JSON string that identifies the source schema for the metadata model. For the
+    #            selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema
+    #               Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the
+    #               object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Exactly one rule is allowed.</p>
+    #               </li>
+    #            </ul>
+    # @option params [String] :metadata_model_name
+    #   <p>The name for the metadata model to use in subsequent operations.</p>
+    # @option params [Types::MetadataModelProperties] :properties
+    #   <p>The properties of the metadata model.</p>
+    # @example Create a metadata model for a SQL statement
+    #   # The following example queues the creation of a metadata model for a SQL statement. The selection rule specifies the schema where the metadata model is placed, and MetadataModelName provides a unique identifier for use in subsequent operations.
+    #   params = {
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\", \"rule-id\": \"1\", \"rule-name\": \"1\", \"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"database-name\": \"ExampleDatabase\", \"schema-name\": \"ExampleSchema\"}, \"rule-action\": \"explicit\"}]}",
+    #     metadata_model_name: "ExampleStatement",
+    #     properties: {
+    #     "StatementProperties" => {
+    #       "Definition" => SELECT * FROM ExampleTable;
+    #     }
+    #   }
+    #   }
+    #   options = {}
+    #   response = client.start_metadata_model_creation(params, options)
+    #   response.to_h #=>
+    #   {
+    #     request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
+    #     selection_rules: "String", # required
+    #     metadata_model_name: "String", # required
+    #     properties: { # required
+    #       # One of:
+    #       statement_properties: {
+    #         definition: "String", # required
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.start_metadata_model_creation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     request_identifier: "String"
+    #   }
+    # @return [Types::StartMetadataModelCreationResponse]
+    def start_metadata_model_creation(params = {}, options = {})
+      request = build_request(:start_metadata_model_creation, params)
+      request.send_request(options)
+    end
+
+    # <p>Queues an export of metadata models (database objects such as tables, views, and
+    #          procedures) as a data definition language (DDL) script. The script is stored as a ZIP
+    #          archive in the Amazon S3 bucket associated with the migration project. If other requests
+    #          created by <code>Start*</code> operations are already in the migration project's queue,
+    #          the export begins after they complete.</p>
+    #          <p>When exporting from the target metadata tree, the export applies only to metadata
+    #          models created by conversion. Metadata models imported from the database are
+    #          skipped.</p>
+    #          <p>To check the status of the export request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelExportsAsScript.html">DescribeMetadataModelExportsAsScript</a> using the returned
+    #          <code>RequestIdentifier</code> as a filter.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:StartMetadataModelExportAsScripts</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::StartMetadataModelExportAsScriptMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [String] :selection_rules
-    #   <p>A value that specifies the database objects to export.</p>
+    #   <p>A JSON string that identifies the metadata models to export as a SQL script. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts source or target selection rules depending on the <code>Origin</code> parameter. The <code>server-name</code> in the object locator must match the corresponding data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :origin
-    #   <p>Whether to export the metadata model from the source or the target.</p>
+    #   <p>Specifies the metadata tree to export from.</p>
     # @option params [String] :file_name
-    #   <p>The name of the model file to create in the Amazon S3 bucket.</p>
-    # @example Start Metadata Model Export As Script
-    #   # Saves your converted code to a file as a SQL script, and stores this file on your S3 bucket.
+    #   <p>The name for the exported file. When you omit this parameter, the service generates
+    #            a name from the data provider engine name and an export timestamp.</p>
+    # @example Export converted metadata models as DDL scripts
+    #   # The following example queues an export of converted metadata models for all objects in the ExampleSchema schema as data definition language (DDL) scripts to the S3 bucket associated with the migration project.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}",
-    #     origin: SOURCE,
-    #     file_name: "FILE"
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"example-target-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\"},\"rule-action\": \"explicit\"}]}",
+    #     origin: TARGET,
+    #     file_name: "ExampleScript"
     #   }
     #   options = {}
     #   response = client.start_metadata_model_export_as_script(params, options)
     #   response.to_h #=>
     #   {
-    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef"
+    #     request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
@@ -10684,28 +11871,55 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Applies converted database objects to your target database. </p>
+    # <p>Queues an export of the selected converted metadata models (database objects such as
+    #          tables, views, and procedures) to your target database. If other requests created by
+    #          <code>Start*</code> operations are already in the migration project's queue, the export
+    #          begins after they complete.</p>
+    #          <p>This operation requires a non-virtual target data provider.</p>
+    #          <p>The export applies only metadata models created by conversion. Metadata models
+    #          imported from the database are skipped.</p>
+    #          <note>
+    #             <p>If objects with the same name already exist on the target database, the export
+    #             overwrites them.</p>
+    #          </note>
+    #          <p>The operation installs the extension pack on the target database. For more
+    #          information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/extension-pack.html">Using extension packs in DMS Schema Conversion</a>.</p>
+    #          <p>To check the status of the export request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelExportsToTarget.html">DescribeMetadataModelExportsToTarget</a> using the returned
+    #          <code>RequestIdentifier</code> as a filter.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:StartMetadataModelExportToTarget</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::StartMetadataModelExportToTargetMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [String] :selection_rules
-    #   <p>A value that specifies the database objects to export.</p>
+    #   <p>A JSON string that identifies the metadata models to export to the target database. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only target selection rules, where <code>server-name</code> in the object locator matches the target data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     # @option params [Boolean] :overwrite_extension_pack
-    #   <p>Whether to overwrite the migration project extension pack. An extension pack is an add-on module 
-    #            that emulates functions present in a source database that are required when converting objects 
-    #            to the target database.</p>
-    # @example Start Metadata Model Export To Target
-    #   # Applies converted database objects to your target database.
+    #   <p>Specifies whether to overwrite the extension pack if one already exists on the
+    #            target database. The default value is <code>true</code>.</p>
+    # @example Export converted metadata models to the target database
+    #   # The following example queues an export of converted metadata models for all objects in the ExampleSchema schema to the target database.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRSTUVWXYZ012345",
-    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-a1b2c3d4e5f6.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}",
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"example-target-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\"},\"rule-action\": \"explicit\"}]}",
     #     overwrite_extension_pack: true
     #   }
     #   options = {}
     #   response = client.start_metadata_model_export_to_target(params, options)
     #   response.to_h #=>
     #   {
-    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef"
+    #     request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
@@ -10726,23 +11940,48 @@ module Aws::DatabaseMigrationService
       request.send_request(options)
     end
 
-    # <p>Loads the metadata for all the dependent database objects of the parent object.</p>
-    #          <p>This operation uses your project's Amazon S3 bucket as a metadata cache to improve
-    #          performance.</p>
+    # <p>Queues an import of metadata models (database objects such as tables, views, and
+    #          procedures) from your data provider into the metadata tree. If other requests created
+    #          by <code>Start*</code> operations are already in the migration project's queue, the
+    #          import begins after they complete.</p>
+    #          <p>To check the status of the import request, call
+    #          <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelImports.html">DescribeMetadataModelImports</a> using the returned
+    #          <code>RequestIdentifier</code> as a filter.</p>
+    #          <p>
+    #             <b>Required permissions:</b>
+    #             <code>dms:StartMetadataModelImport</code>. For more information, see
+    #          <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html">Actions, resources, and condition keys for Database Migration Service</a>.</p>
     # @param [Hash, Types::StartMetadataModelImportMessage] params
     # @option params [String] :migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     # @option params [String] :selection_rules
-    #   <p>A value that specifies the database objects to import.</p>
+    #   <p>A JSON string that identifies the metadata models to import from the data provider. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts source or target selection rules depending on the <code>Origin</code> parameter. The <code>server-name</code> in the object locator must match the corresponding data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :origin
-    #   <p>Whether to load metadata to the source or target database.</p>
+    #   <p>Specifies the metadata tree to import into.</p>
+    #            <note>
+    #               <p>You cannot import from a virtual target data provider.</p>
+    #            </note>
     # @option params [Boolean] :refresh
-    #   <p>If <code>true</code>, DMS loads metadata for the specified objects from the source database.</p>
-    # @example Start Metadata Model Import
-    #   # Loads the metadata for all the dependent database objects of the parent object.
+    #   <p>Specifies whether to refresh the selected metadata models from the data
+    #            provider.</p>
+    #            <p>When <code>true</code>, the import reloads the selected metadata models with
+    #            current definitions and removes their existing subtree.</p>
+    #            <p>When <code>false</code> (default), the import loads the full subtree that has not
+    #            yet been loaded into the metadata tree.</p>
+    # @example Import metadata from the source database
+    #   # The following example queues a metadata import for all objects in the ExampleSchema schema from the source database.
     #   params = {
-    #     migration_project_identifier: "arn:aws:dms:us-east-1:012345678901:migration-project:0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ012",
-    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"aurora-pg.cluster-0a1b2c3d4e5f.us-east-1.rds.amazonaws.com\", \"schema-name\": \"schema1\", \"table-name\": \"Cities\"},\"rule-action\": \"explicit\"} ]}",
+    #     migration_project_identifier: "arn:aws:dms:us-east-1:111122223333:migration-project:EXAMPLEABCDEFGHIJKLMNOPQRS",
+    #     selection_rules: "{\"rules\": [{\"rule-type\": \"selection\",\"rule-id\": \"1\",\"rule-name\": \"1\",\"object-locator\": {\"server-name\": \"example-source-server.us-east-1.rds.amazonaws.com\", \"schema-name\": \"ExampleSchema\"},\"rule-action\": \"explicit\"}]}",
     #     origin: SOURCE,
     #     refresh: false
     #   }
@@ -10750,7 +11989,7 @@ module Aws::DatabaseMigrationService
     #   response = client.start_metadata_model_import(params, options)
     #   response.to_h #=>
     #   {
-    #     request_identifier: "01234567-89ab-cdef-0123-456789abcdef"
+    #     request_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
@@ -10963,7 +12202,8 @@ module Aws::DatabaseMigrationService
     #       replication_create_time: Time.now,
     #       replication_update_time: Time.now,
     #       replication_last_stop_time: Time.now,
-    #       replication_deprovision_time: Time.now
+    #       replication_deprovision_time: Time.now,
+    #       is_read_only: false
     #     }
     #   }
     # @return [Types::StartReplicationResponse]
@@ -11432,7 +12672,8 @@ module Aws::DatabaseMigrationService
     #       replication_create_time: Time.now,
     #       replication_update_time: Time.now,
     #       replication_last_stop_time: Time.now,
-    #       replication_deprovision_time: Time.now
+    #       replication_deprovision_time: Time.now,
+    #       is_read_only: false
     #     }
     #   }
     # @return [Types::StopReplicationResponse]
@@ -11678,6 +12919,15 @@ module Aws::DatabaseMigrationService
     def waiters
       {
         endpoint_deleted: Waiters::EndpointDeleted,
+        extension_pack_associated: Waiters::ExtensionPackAssociated,
+        metadata_model_assessed: Waiters::MetadataModelAssessed,
+        metadata_model_conversion_cancelled: Waiters::MetadataModelConversionCancelled,
+        metadata_model_converted: Waiters::MetadataModelConverted,
+        metadata_model_created: Waiters::MetadataModelCreated,
+        metadata_model_creation_cancelled: Waiters::MetadataModelCreationCancelled,
+        metadata_model_exported_as_script: Waiters::MetadataModelExportedAsScript,
+        metadata_model_exported_to_target: Waiters::MetadataModelExportedToTarget,
+        metadata_model_imported: Waiters::MetadataModelImported,
         replication_instance_available: Waiters::ReplicationInstanceAvailable,
         replication_instance_deleted: Waiters::ReplicationInstanceDeleted,
         replication_task_deleted: Waiters::ReplicationTaskDeleted,

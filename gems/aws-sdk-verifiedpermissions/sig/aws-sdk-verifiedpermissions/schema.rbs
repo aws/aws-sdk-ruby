@@ -7,6 +7,8 @@ module Aws::VerifiedPermissions
     ActionIdentifier: StructureShape
     ActionIdentifierList: ListShape
     ActionType: StringShape
+    Alias: StringShape
+    AliasState: EnumShape
     AmazonResourceName: StringShape
     AttributeValue: UnionShape
     Audience: StringShape
@@ -34,6 +36,9 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedWithTokenOutputList: ListShape
     BooleanAttribute: BooleanShape
     CedarJson: StringShape
+    CedarTagRecordAttribute: MapShape
+    CedarTagSetAttribute: ListShape
+    CedarTagValue: UnionShape
     CedarVersion: EnumShape
     Claim: StringShape
     ClientId: StringShape
@@ -54,6 +59,8 @@ module Aws::VerifiedPermissions
     CreateIdentitySourceOutput: StructureShape
     CreatePolicyInput: StructureShape
     CreatePolicyOutput: StructureShape
+    CreatePolicyStoreAliasInput: StructureShape
+    CreatePolicyStoreAliasOutput: StructureShape
     CreatePolicyStoreInput: StructureShape
     CreatePolicyStoreOutput: StructureShape
     CreatePolicyTemplateInput: StructureShape
@@ -65,17 +72,26 @@ module Aws::VerifiedPermissions
     DeleteIdentitySourceOutput: StructureShape
     DeletePolicyInput: StructureShape
     DeletePolicyOutput: StructureShape
+    DeletePolicyStoreAliasInput: StructureShape
+    DeletePolicyStoreAliasOutput: StructureShape
     DeletePolicyStoreInput: StructureShape
     DeletePolicyStoreOutput: StructureShape
     DeletePolicyTemplateInput: StructureShape
     DeletePolicyTemplateOutput: StructureShape
+    DeletionMode: EnumShape
     DeletionProtection: EnumShape
     DeterminingPolicyItem: StructureShape
     DeterminingPolicyList: ListShape
     DiscoveryUrl: StringShape
     Duration: StringShape
+    EncryptionContext: MapShape
+    EncryptionContextKey: StringShape
+    EncryptionContextValue: StringShape
+    EncryptionSettings: UnionShape
+    EncryptionState: UnionShape
     EntitiesDefinition: UnionShape
     EntityAttributes: MapShape
+    EntityCedarTags: MapShape
     EntityId: StringShape
     EntityIdPrefix: StringShape
     EntityIdentifier: StructureShape
@@ -89,6 +105,8 @@ module Aws::VerifiedPermissions
     GetIdentitySourceOutput: StructureShape
     GetPolicyInput: StructureShape
     GetPolicyOutput: StructureShape
+    GetPolicyStoreAliasInput: StructureShape
+    GetPolicyStoreAliasOutput: StructureShape
     GetPolicyStoreInput: StructureShape
     GetPolicyStoreOutput: StructureShape
     GetPolicyTemplateInput: StructureShape
@@ -112,11 +130,16 @@ module Aws::VerifiedPermissions
     IsAuthorizedWithTokenInput: StructureShape
     IsAuthorizedWithTokenOutput: StructureShape
     Issuer: StringShape
+    KmsEncryptionSettings: StructureShape
+    KmsEncryptionState: StructureShape
+    KmsKey: StringShape
     ListIdentitySourcesInput: StructureShape
     ListIdentitySourcesMaxResults: IntegerShape
     ListIdentitySourcesOutput: StructureShape
     ListPoliciesInput: StructureShape
     ListPoliciesOutput: StructureShape
+    ListPolicyStoreAliasesInput: StructureShape
+    ListPolicyStoreAliasesOutput: StructureShape
     ListPolicyStoresInput: StructureShape
     ListPolicyStoresOutput: StructureShape
     ListPolicyTemplatesInput: StructureShape
@@ -153,7 +176,11 @@ module Aws::VerifiedPermissions
     PolicyId: StringShape
     PolicyItem: StructureShape
     PolicyList: ListShape
+    PolicyName: StringShape
     PolicyStatement: StringShape
+    PolicyStoreAliasFilter: StructureShape
+    PolicyStoreAliasItem: StructureShape
+    PolicyStoreAliasList: ListShape
     PolicyStoreDescription: StringShape
     PolicyStoreId: StringShape
     PolicyStoreItem: StructureShape
@@ -161,6 +188,7 @@ module Aws::VerifiedPermissions
     PolicyTemplateDescription: StringShape
     PolicyTemplateId: StringShape
     PolicyTemplateItem: StructureShape
+    PolicyTemplateName: StringShape
     PolicyTemplatesList: ListShape
     PolicyType: EnumShape
     PrincipalEntityType: StringShape

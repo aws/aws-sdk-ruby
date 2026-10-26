@@ -153,18 +153,18 @@ module Aws::DynamoDB
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -374,6 +374,12 @@ module Aws::DynamoDB
     #             read_capacity_units: 1.0,
     #             write_capacity_units: 1.0,
     #             capacity_units: 1.0
+    #           }
+    #         },
+    #         vector_indexes: {
+    #           "IndexName" => {
+    #             vector_search_request_bytes: 1.0,
+    #             vector_write_request_bytes: 1.0
     #           }
     #         }
     #       }
@@ -747,6 +753,12 @@ module Aws::DynamoDB
     #             write_capacity_units: 1.0,
     #             capacity_units: 1.0
     #           }
+    #         },
+    #         vector_indexes: {
+    #           "IndexName" => {
+    #             vector_search_request_bytes: 1.0,
+    #             vector_write_request_bytes: 1.0
+    #           }
     #         }
     #       }
     #     ]
@@ -779,13 +791,12 @@ module Aws::DynamoDB
     #                 <code>BatchWriteItem</code> in a loop. Each iteration would check for unprocessed
     #             items and submit a new <code>BatchWriteItem</code> request with those unprocessed items
     #             until all items have been processed.</p>
-    #          <p>For tables and indexes with provisioned capacity, if none of the items can be
-    #             processed due to insufficient provisioned throughput on all of the tables in the
-    #             request, then <code>BatchWriteItem</code> returns a
-    #                 <code>ProvisionedThroughputExceededException</code>. For all tables and indexes, if
-    #             none of the items can be processed due to other throttling scenarios (such as exceeding
-    #             partition level limits), then <code>BatchWriteItem</code> returns a
-    #                 <code>ThrottlingException</code>.</p>
+    #          <p>If <code>BatchWriteItem</code> cannot process any items due to throttling (for
+    #             example, insufficient provisioned throughput on the tables in the request, or
+    #             partition-level or account-level limits), it returns a
+    #                 <code>ProvisionedThroughputExceededException</code> or a
+    #                 <code>ThrottlingException</code>. Both indicate that the request was throttled;
+    #             check the <code>ThrottlingReason</code> field in the returned exception for details.</p>
     #          <important>
     #             <p>If DynamoDB returns any unprocessed items, you should retry the batch operation on
     #                 those items. However, <i>we strongly recommend that you use an exponential
@@ -1146,6 +1157,12 @@ module Aws::DynamoDB
     #             write_capacity_units: 1.0,
     #             capacity_units: 1.0
     #           }
+    #         },
+    #         vector_indexes: {
+    #           "IndexName" => {
+    #             vector_search_request_bytes: 1.0,
+    #             vector_write_request_bytes: 1.0
+    #           }
     #         }
     #       }
     #     ]
@@ -1297,6 +1314,7 @@ module Aws::DynamoDB
     #         {
     #           region_name: "RegionName",
     #           replica_status: "CREATING" # One of: ["CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"],
+    #           replica_arn: "String",
     #           replica_status_description: "ReplicaStatusDescription",
     #           replica_status_percent_progress: "ReplicaStatusPercentProgress",
     #           kms_master_key_id: "KMSMasterKeyId",
@@ -1331,7 +1349,8 @@ module Aws::DynamoDB
     #           replica_table_class_summary: {
     #             table_class: "STANDARD" # One of: ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
     #             last_update_date_time: Time.now
-    #           }
+    #           },
+    #           global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"]
     #         }
     #       ],
     #       global_table_arn: "GlobalTableArnString",
@@ -1485,7 +1504,7 @@ module Aws::DynamoDB
     #               <li>
     #                  <p>
     #                     <code>KeySchema</code> - Specifies the key schema for the global secondary
-    #                       index.</p>
+    #                       index. Each global secondary index supports up to 4 partition keys and up to 4 sort keys.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -1633,16 +1652,65 @@ module Aws::DynamoDB
     #   <p>Sets the maximum number of read and write units for the specified table in on-demand
     #               capacity mode. If you use this parameter, you must specify
     #                   <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>
+    # @option params [String] :global_table_source_arn
+    #   <p>The Amazon Resource Name (ARN) of the source table used for the creation
+    #               of a multi-account global table.</p>
+    # @option params [String] :global_table_settings_replication_mode
+    #   <p>Controls the settings synchronization mode for the global table. For multi-account global tables,
+    #               this parameter is required and the only supported value is ENABLED. For same-account global tables,
+    #               this parameter is set to ENABLED_WITH_OVERRIDES.
+    #           </p>
+    # @option params [Array<Types::VectorIndex>] :vector_indexes
+    #   <p>One or more vector indexes to be created on the table. Each vector index enables
+    #               similarity search on a vector attribute. Each element in the list consists of:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IndexName</code> - The name of the vector index. Must be unique
+    #                       within the table.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>VectorAttribute</code> - The attribute that contains vector
+    #                       embeddings. If multiple vector indexes reference the same attribute, they
+    #                       must all use the same number of dimensions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Dimensions</code> - The number of dimensions in each vector.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DistanceFunction</code> - The distance function used to calculate
+    #                       similarity. Valid values: <code>COSINE</code>, <code>EUCLIDEAN</code>,
+    #                       <code>DOT_PRODUCT</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Projection</code> - Specifies attributes that are copied (projected)
+    #                       from the table into the vector index. The total number of projected
+    #                       non-key attributes is shared across the vector attribute (counts as 1)
+    #                       and <code>INLINE_FILTER</code> search schema elements (each counts as 1).
+    #                       <code>HASH</code> search schema elements do not count toward this
+    #                       limit.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SearchSchema</code> - (Optional) Defines the partition key
+    #                       (<code>HASH</code>) and inline filter (<code>INLINE_FILTER</code>) attributes
+    #                       for the vector index.</p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
-    #     attribute_definitions: [ # required
+    #     attribute_definitions: [
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
     #         attribute_type: "S" # One of: ["S", "N", "B"], # required
     #       }
     #     ],
     #     table_name: "TableArn", # required
-    #     key_schema: [ # required
+    #     key_schema: [
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
     #         key_type: "HASH" # One of: ["HASH", "RANGE"], # required
@@ -1720,7 +1788,29 @@ module Aws::DynamoDB
     #     on_demand_throughput: {
     #       max_read_request_units: 1,
     #       max_write_request_units: 1
-    #     }
+    #     },
+    #     global_table_source_arn: "TableArn",
+    #     global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"],
+    #     vector_indexes: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         vector_attribute: { # required
+    #           attribute_name: "VectorAttributeName", # required
+    #         },
+    #         search_schema: [
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #           }
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #           non_key_attributes: ["NonKeyAttributeName"]
+    #         },
+    #         dimensions: 1, # required
+    #         distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"], # required
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.create_table(params, options)
@@ -1823,6 +1913,7 @@ module Aws::DynamoDB
     #         {
     #           region_name: "RegionName",
     #           replica_status: "CREATING" # One of: ["CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"],
+    #           replica_arn: "String",
     #           replica_status_description: "ReplicaStatusDescription",
     #           replica_status_percent_progress: "ReplicaStatusPercentProgress",
     #           kms_master_key_id: "KMSMasterKeyId",
@@ -1857,7 +1948,8 @@ module Aws::DynamoDB
     #           replica_table_class_summary: {
     #             table_class: "STANDARD" # One of: ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
     #             last_update_date_time: Time.now
-    #           }
+    #           },
+    #           global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"]
     #         }
     #       ],
     #       global_table_witnesses: [
@@ -1866,6 +1958,7 @@ module Aws::DynamoDB
     #           witness_status: "CREATING" # One of: ["CREATING", "DELETING", "ACTIVE"]
     #         }
     #       ],
+    #       global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"],
     #       restore_summary: {
     #         source_backup_arn: "BackupArn",
     #         source_table_arn: "TableArn",
@@ -1897,7 +1990,32 @@ module Aws::DynamoDB
     #         write_units_per_second: 1,
     #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"]
     #       },
-    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"]
+    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"],
+    #       vector_indexes: [
+    #         {
+    #           index_name: "IndexName",
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #             }
+    #           ],
+    #           projection: {
+    #             projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #             non_key_attributes: ["NonKeyAttributeName"]
+    #           },
+    #           vector_attribute: {
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           dimensions: 1,
+    #           distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"],
+    #           index_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE"],
+    #           backfilling: false,
+    #           index_size_bytes: 1,
+    #           item_count: 1,
+    #           index_arn: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::CreateTableOutput]
@@ -2006,7 +2124,27 @@ module Aws::DynamoDB
     #           sse_type: "AES256" # One of: ["AES256", "KMS"],
     #           kms_master_key_arn: "KMSMasterKeyArn",
     #           inaccessible_encryption_date_time: Time.now
-    #         }
+    #         },
+    #         vector_indexes: [
+    #           {
+    #             index_name: "IndexName",
+    #             vector_attribute: {
+    #               attribute_name: "VectorAttributeName", # required
+    #             },
+    #             search_schema: [
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #               }
+    #             ],
+    #             projection: {
+    #               projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #               non_key_attributes: ["NonKeyAttributeName"]
+    #             },
+    #             dimensions: 1,
+    #             distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"]
+    #           }
+    #         ]
     #       }
     #     }
     #   }
@@ -2372,6 +2510,12 @@ module Aws::DynamoDB
     #           write_capacity_units: 1.0,
     #           capacity_units: 1.0
     #         }
+    #       },
+    #       vector_indexes: {
+    #         "IndexName" => {
+    #           vector_search_request_bytes: 1.0,
+    #           vector_write_request_bytes: 1.0
+    #         }
     #       }
     #     },
     #     item_collection_metrics: {
@@ -2606,6 +2750,7 @@ module Aws::DynamoDB
     #         {
     #           region_name: "RegionName",
     #           replica_status: "CREATING" # One of: ["CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"],
+    #           replica_arn: "String",
     #           replica_status_description: "ReplicaStatusDescription",
     #           replica_status_percent_progress: "ReplicaStatusPercentProgress",
     #           kms_master_key_id: "KMSMasterKeyId",
@@ -2640,7 +2785,8 @@ module Aws::DynamoDB
     #           replica_table_class_summary: {
     #             table_class: "STANDARD" # One of: ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
     #             last_update_date_time: Time.now
-    #           }
+    #           },
+    #           global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"]
     #         }
     #       ],
     #       global_table_witnesses: [
@@ -2649,6 +2795,7 @@ module Aws::DynamoDB
     #           witness_status: "CREATING" # One of: ["CREATING", "DELETING", "ACTIVE"]
     #         }
     #       ],
+    #       global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"],
     #       restore_summary: {
     #         source_backup_arn: "BackupArn",
     #         source_table_arn: "TableArn",
@@ -2680,7 +2827,32 @@ module Aws::DynamoDB
     #         write_units_per_second: 1,
     #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"]
     #       },
-    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"]
+    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"],
+    #       vector_indexes: [
+    #         {
+    #           index_name: "IndexName",
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #             }
+    #           ],
+    #           projection: {
+    #             projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #             non_key_attributes: ["NonKeyAttributeName"]
+    #           },
+    #           vector_attribute: {
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           dimensions: 1,
+    #           distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"],
+    #           index_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE"],
+    #           backfilling: false,
+    #           index_size_bytes: 1,
+    #           item_count: 1,
+    #           index_arn: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::DeleteTableOutput]
@@ -2789,7 +2961,27 @@ module Aws::DynamoDB
     #           sse_type: "AES256" # One of: ["AES256", "KMS"],
     #           kms_master_key_arn: "KMSMasterKeyArn",
     #           inaccessible_encryption_date_time: Time.now
-    #         }
+    #         },
+    #         vector_indexes: [
+    #           {
+    #             index_name: "IndexName",
+    #             vector_attribute: {
+    #               attribute_name: "VectorAttributeName", # required
+    #             },
+    #             search_schema: [
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #               }
+    #             ],
+    #             projection: {
+    #               projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #               non_key_attributes: ["NonKeyAttributeName"]
+    #             },
+    #             dimensions: 1,
+    #             distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"]
+    #           }
+    #         ]
     #       }
     #     }
     #   }
@@ -2938,6 +3130,35 @@ module Aws::DynamoDB
     #         export_from_time: Time.now,
     #         export_to_time: Time.now,
     #         export_view_type: "NEW_IMAGE" # One of: ["NEW_IMAGE", "NEW_AND_OLD_IMAGES"]
+    #       },
+    #       filter_specification: {
+    #         filter_expression: "ConditionExpression",
+    #         projection_expression: "ProjectionExpression",
+    #         key_condition_expression: "KeyExpression",
+    #         expression_attribute_names: {
+    #           "ExpressionAttributeNameVariable" => "AttributeName"
+    #         },
+    #         expression_attribute_values: {
+    #           "ExpressionAttributeValueVariable" => {
+    #             # One of:
+    #             s: "StringAttributeValue",
+    #             n: "NumberAttributeValue",
+    #             b: "data",
+    #             ss: ["StringAttributeValue"],
+    #             ns: ["NumberAttributeValue"],
+    #             bs: ["data"],
+    #             m: {
+    #               "AttributeName" => {
+    #                 # recursive AttributeValue
+    #               }
+    #             },
+    #             l: [{
+    #               # recursive AttributeValue
+    #             }],
+    #             null: false,
+    #             bool: false
+    #           }
+    #         }
     #       }
     #     }
     #   }
@@ -2969,6 +3190,7 @@ module Aws::DynamoDB
     #         {
     #           region_name: "RegionName",
     #           replica_status: "CREATING" # One of: ["CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"],
+    #           replica_arn: "String",
     #           replica_status_description: "ReplicaStatusDescription",
     #           replica_status_percent_progress: "ReplicaStatusPercentProgress",
     #           kms_master_key_id: "KMSMasterKeyId",
@@ -3003,7 +3225,8 @@ module Aws::DynamoDB
     #           replica_table_class_summary: {
     #             table_class: "STANDARD" # One of: ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
     #             last_update_date_time: Time.now
-    #           }
+    #           },
+    #           global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"]
     #         }
     #       ],
     #       global_table_arn: "GlobalTableArnString",
@@ -3222,6 +3445,26 @@ module Aws::DynamoDB
     #               read_units_per_second: 1,
     #               write_units_per_second: 1
     #             }
+    #           }
+    #         ],
+    #         vector_indexes: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             vector_attribute: { # required
+    #               attribute_name: "VectorAttributeName", # required
+    #             },
+    #             search_schema: [
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #               }
+    #             ],
+    #             projection: { # required
+    #               projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #               non_key_attributes: ["NonKeyAttributeName"]
+    #             },
+    #             dimensions: 1, # required
+    #             distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"], # required
     #           }
     #         ]
     #       },
@@ -3490,6 +3733,7 @@ module Aws::DynamoDB
     #         {
     #           region_name: "RegionName",
     #           replica_status: "CREATING" # One of: ["CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"],
+    #           replica_arn: "String",
     #           replica_status_description: "ReplicaStatusDescription",
     #           replica_status_percent_progress: "ReplicaStatusPercentProgress",
     #           kms_master_key_id: "KMSMasterKeyId",
@@ -3524,7 +3768,8 @@ module Aws::DynamoDB
     #           replica_table_class_summary: {
     #             table_class: "STANDARD" # One of: ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
     #             last_update_date_time: Time.now
-    #           }
+    #           },
+    #           global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"]
     #         }
     #       ],
     #       global_table_witnesses: [
@@ -3533,6 +3778,7 @@ module Aws::DynamoDB
     #           witness_status: "CREATING" # One of: ["CREATING", "DELETING", "ACTIVE"]
     #         }
     #       ],
+    #       global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"],
     #       restore_summary: {
     #         source_backup_arn: "BackupArn",
     #         source_table_arn: "TableArn",
@@ -3564,7 +3810,32 @@ module Aws::DynamoDB
     #         write_units_per_second: 1,
     #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"]
     #       },
-    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"]
+    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"],
+    #       vector_indexes: [
+    #         {
+    #           index_name: "IndexName",
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #             }
+    #           ],
+    #           projection: {
+    #             projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #             non_key_attributes: ["NonKeyAttributeName"]
+    #           },
+    #           vector_attribute: {
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           dimensions: 1,
+    #           distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"],
+    #           index_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE"],
+    #           backfilling: false,
+    #           index_size_bytes: 1,
+    #           item_count: 1,
+    #           index_arn: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::DescribeTableOutput]
@@ -3922,6 +4193,12 @@ module Aws::DynamoDB
     #           write_capacity_units: 1.0,
     #           capacity_units: 1.0
     #         }
+    #       },
+    #       vector_indexes: {
+    #         "IndexName" => {
+    #           vector_search_request_bytes: 1.0,
+    #           vector_write_request_bytes: 1.0
+    #         }
     #       }
     #     },
     #     last_evaluated_key: {
@@ -4053,6 +4330,12 @@ module Aws::DynamoDB
     #             write_capacity_units: 1.0,
     #             capacity_units: 1.0
     #           }
+    #         },
+    #         vector_indexes: {
+    #           "IndexName" => {
+    #             vector_search_request_bytes: 1.0,
+    #             vector_write_request_bytes: 1.0
+    #           }
     #         }
     #       }
     #     ]
@@ -4083,7 +4366,7 @@ module Aws::DynamoDB
     #               result might not be idempotent.</p>
     #            <p>If you submit a request with the same client token but a change in other parameters
     #               within the 8-hour idempotency window, DynamoDB returns an
-    #                   <code>ImportConflictException</code>.</p>
+    #                   <code>ExportConflictException</code>.</p>
     # @option params [String] :s3_bucket
     #   <p>The name of the Amazon S3 bucket to export the snapshot to.</p>
     # @option params [String] :s3_bucket_owner
@@ -4124,6 +4407,10 @@ module Aws::DynamoDB
     #               used.</p>
     # @option params [Types::IncrementalExportSpecification] :incremental_export_specification
     #   <p>Optional object containing the parameters specific to an incremental export.</p>
+    # @option params [Types::FilterSpecification] :filter_specification
+    #   <p>The criteria used to filter which items are included in the point-in-time export.
+    #               When you specify this parameter, only items that match the key conditions and filter
+    #               expressions are exported.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     table_arn: "TableArn", # required
@@ -4140,6 +4427,35 @@ module Aws::DynamoDB
     #       export_from_time: Time.now,
     #       export_to_time: Time.now,
     #       export_view_type: "NEW_IMAGE" # One of: ["NEW_IMAGE", "NEW_AND_OLD_IMAGES"]
+    #     },
+    #     filter_specification: {
+    #       filter_expression: "ConditionExpression",
+    #       projection_expression: "ProjectionExpression",
+    #       key_condition_expression: "KeyExpression",
+    #       expression_attribute_names: {
+    #         "ExpressionAttributeNameVariable" => "AttributeName"
+    #       },
+    #       expression_attribute_values: {
+    #         "ExpressionAttributeValueVariable" => {
+    #           # One of:
+    #           s: "StringAttributeValue",
+    #           n: "NumberAttributeValue",
+    #           b: "data",
+    #           ss: ["StringAttributeValue"],
+    #           ns: ["NumberAttributeValue"],
+    #           bs: ["data"],
+    #           m: {
+    #             "AttributeName" => {
+    #               # recursive AttributeValue
+    #             }
+    #           },
+    #           l: [{
+    #             # recursive AttributeValue
+    #           }],
+    #           null: false,
+    #           bool: false
+    #         }
+    #       }
     #     }
     #   }
     #   options = {}
@@ -4172,6 +4488,35 @@ module Aws::DynamoDB
     #         export_from_time: Time.now,
     #         export_to_time: Time.now,
     #         export_view_type: "NEW_IMAGE" # One of: ["NEW_IMAGE", "NEW_AND_OLD_IMAGES"]
+    #       },
+    #       filter_specification: {
+    #         filter_expression: "ConditionExpression",
+    #         projection_expression: "ProjectionExpression",
+    #         key_condition_expression: "KeyExpression",
+    #         expression_attribute_names: {
+    #           "ExpressionAttributeNameVariable" => "AttributeName"
+    #         },
+    #         expression_attribute_values: {
+    #           "ExpressionAttributeValueVariable" => {
+    #             # One of:
+    #             s: "StringAttributeValue",
+    #             n: "NumberAttributeValue",
+    #             b: "data",
+    #             ss: ["StringAttributeValue"],
+    #             ns: ["NumberAttributeValue"],
+    #             bs: ["data"],
+    #             m: {
+    #               "AttributeName" => {
+    #                 # recursive AttributeValue
+    #               }
+    #             },
+    #             l: [{
+    #               # recursive AttributeValue
+    #             }],
+    #             null: false,
+    #             bool: false
+    #           }
+    #         }
     #       }
     #     }
     #   }
@@ -4404,6 +4749,12 @@ module Aws::DynamoDB
     #           write_capacity_units: 1.0,
     #           capacity_units: 1.0
     #         }
+    #       },
+    #       vector_indexes: {
+    #         "IndexName" => {
+    #           vector_search_request_bytes: 1.0,
+    #           vector_write_request_bytes: 1.0
+    #         }
     #       }
     #     }
     #   }
@@ -4565,6 +4916,26 @@ module Aws::DynamoDB
     #             write_units_per_second: 1
     #           }
     #         }
+    #       ],
+    #       vector_indexes: [
+    #         {
+    #           index_name: "IndexName", # required
+    #           vector_attribute: { # required
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #             }
+    #           ],
+    #           projection: { # required
+    #             projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #             non_key_attributes: ["NonKeyAttributeName"]
+    #           },
+    #           dimensions: 1, # required
+    #           distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"], # required
+    #         }
     #       ]
     #     }
     #   }
@@ -4647,6 +5018,26 @@ module Aws::DynamoDB
     #               read_units_per_second: 1,
     #               write_units_per_second: 1
     #             }
+    #           }
+    #         ],
+    #         vector_indexes: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             vector_attribute: { # required
+    #               attribute_name: "VectorAttributeName", # required
+    #             },
+    #             search_schema: [
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #               }
+    #             ],
+    #             projection: { # required
+    #               projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #               non_key_attributes: ["NonKeyAttributeName"]
+    #             },
+    #             dimensions: 1, # required
+    #             distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"], # required
     #           }
     #         ]
     #       },
@@ -4787,7 +5178,7 @@ module Aws::DynamoDB
       request.send_request(options)
     end
 
-    # <p>Lists completed exports within the past 90 days.</p>
+    # <p>Lists completed exports within the past 90 days, in reverse alphanumeric order of <code>ExportArn</code>.</p>
     # @param [Hash, Types::ListExportsInput] params
     # @option params [String] :table_arn
     #   <p>The Amazon Resource Name (ARN) associated with the exported table.</p>
@@ -5014,6 +5405,11 @@ module Aws::DynamoDB
     #                 record must contain that attribute, the <code>attribute_not_exists</code> function
     #                 will only succeed if no matching item exists.</p>
     #          </note>
+    #          <note>
+    #             <p>To determine whether <code>PutItem</code> overwrote an existing item, use
+    #                 <code>ReturnValues</code> set to <code>ALL_OLD</code>. If the response includes
+    #                 the <code>Attributes</code> element, an existing item was overwritten.</p>
+    #          </note>
     #          <p>For more information about <code>PutItem</code>, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html">Working with
     #                 Items</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
     # @param [Hash, Types::PutItemInput] params
@@ -5031,6 +5427,23 @@ module Aws::DynamoDB
     #            <p>If you specify any attributes that are part of an index key, then the data types for
     #               those attributes must match those of the schema in the table's attribute
     #               definition.</p>
+    #            <p>If the table has vector indexes, the following validations apply to write
+    #               operations. A violation of any of these constraints results in a
+    #               <code>ValidationException</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The vector attribute must be a list of numbers with dimensions matching the
+    #                       index configuration.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Vector values must fit in 32-bit IEEE-754 floating point format
+    #                       (f32).</p>
+    #               </li>
+    #               <li>
+    #                  <p>Partition key and inline filter attributes defined in the search schema
+    #                       must have data types matching the index schema definition.</p>
+    #               </li>
+    #            </ul>
     #            <p>Empty String and Binary attribute values are allowed. Attribute values of type String
     #               and Binary must have a length greater than zero if the attribute is used as a key
     #               attribute for a table or index.</p>
@@ -5378,6 +5791,12 @@ module Aws::DynamoDB
     #           read_capacity_units: 1.0,
     #           write_capacity_units: 1.0,
     #           capacity_units: 1.0
+    #         }
+    #       },
+    #       vector_indexes: {
+    #         "IndexName" => {
+    #           vector_search_request_bytes: 1.0,
+    #           vector_write_request_bytes: 1.0
     #         }
     #       }
     #     },
@@ -6100,6 +6519,12 @@ module Aws::DynamoDB
     #           write_capacity_units: 1.0,
     #           capacity_units: 1.0
     #         }
+    #       },
+    #       vector_indexes: {
+    #         "IndexName" => {
+    #           vector_search_request_bytes: 1.0,
+    #           vector_write_request_bytes: 1.0
+    #         }
     #       }
     #     }
     #   }
@@ -6157,6 +6582,11 @@ module Aws::DynamoDB
     #                   <code>MaxWriteRequestUnits</code>, or both.</p>
     # @option params [Types::SSESpecification] :sse_specification_override
     #   <p>The new server-side encryption settings for the restored table.</p>
+    # @option params [Array<Types::VectorIndex>] :vector_index_override
+    #   <p>The vector indexes for the restored table. If not specified, all vector indexes
+    #               from the backup are restored. The indexes provided must match existing vector
+    #               indexes from the backup. You can choose to exclude some or all of the vector
+    #               indexes at the time of restore.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     target_table_name: "TableName", # required
@@ -6216,7 +6646,27 @@ module Aws::DynamoDB
     #       enabled: false,
     #       sse_type: "AES256" # One of: ["AES256", "KMS"],
     #       kms_master_key_id: "KMSMasterKeyId"
-    #     }
+    #     },
+    #     vector_index_override: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         vector_attribute: { # required
+    #           attribute_name: "VectorAttributeName", # required
+    #         },
+    #         search_schema: [
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #           }
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #           non_key_attributes: ["NonKeyAttributeName"]
+    #         },
+    #         dimensions: 1, # required
+    #         distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"], # required
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.restore_table_from_backup(params, options)
@@ -6319,6 +6769,7 @@ module Aws::DynamoDB
     #         {
     #           region_name: "RegionName",
     #           replica_status: "CREATING" # One of: ["CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"],
+    #           replica_arn: "String",
     #           replica_status_description: "ReplicaStatusDescription",
     #           replica_status_percent_progress: "ReplicaStatusPercentProgress",
     #           kms_master_key_id: "KMSMasterKeyId",
@@ -6353,7 +6804,8 @@ module Aws::DynamoDB
     #           replica_table_class_summary: {
     #             table_class: "STANDARD" # One of: ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
     #             last_update_date_time: Time.now
-    #           }
+    #           },
+    #           global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"]
     #         }
     #       ],
     #       global_table_witnesses: [
@@ -6362,6 +6814,7 @@ module Aws::DynamoDB
     #           witness_status: "CREATING" # One of: ["CREATING", "DELETING", "ACTIVE"]
     #         }
     #       ],
+    #       global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"],
     #       restore_summary: {
     #         source_backup_arn: "BackupArn",
     #         source_table_arn: "TableArn",
@@ -6393,7 +6846,32 @@ module Aws::DynamoDB
     #         write_units_per_second: 1,
     #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"]
     #       },
-    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"]
+    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"],
+    #       vector_indexes: [
+    #         {
+    #           index_name: "IndexName",
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #             }
+    #           ],
+    #           projection: {
+    #             projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #             non_key_attributes: ["NonKeyAttributeName"]
+    #           },
+    #           vector_attribute: {
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           dimensions: 1,
+    #           distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"],
+    #           index_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE"],
+    #           backfilling: false,
+    #           index_size_bytes: 1,
+    #           item_count: 1,
+    #           index_arn: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::RestoreTableFromBackupOutput]
@@ -6472,6 +6950,11 @@ module Aws::DynamoDB
     #   <p>List of global secondary indexes for the restored table. The indexes provided should
     #               match existing secondary indexes. You can choose to exclude some or all of the indexes
     #               at the time of restore.</p>
+    #            <p>The <code>WarmThroughput</code> setting is not supported on global secondary indexes
+    #               when you use <code>RestoreTableToPointInTime</code>. Although <code>WarmThroughput</code>
+    #               appears in the shared index definition, including it in a
+    #               <code>GlobalSecondaryIndexOverride</code> entry causes the request to fail with a
+    #               validation error.</p>
     # @option params [Array<Types::LocalSecondaryIndex>] :local_secondary_index_override
     #   <p>List of local secondary indexes for the restored table. The indexes provided should
     #               match existing secondary indexes. You can choose to exclude some or all of the indexes
@@ -6484,6 +6967,11 @@ module Aws::DynamoDB
     #                   <code>MaxWriteRequestUnits</code>, or both.</p>
     # @option params [Types::SSESpecification] :sse_specification_override
     #   <p>The new server-side encryption settings for the restored table.</p>
+    # @option params [Array<Types::VectorIndex>] :vector_index_override
+    #   <p>The vector indexes for the restored table. If not specified, all vector indexes
+    #               from the source table are restored. The indexes provided must match existing
+    #               vector indexes from the source table. You can choose to exclude some or all of
+    #               the vector indexes at the time of restore.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_table_arn: "TableArn",
@@ -6546,7 +7034,27 @@ module Aws::DynamoDB
     #       enabled: false,
     #       sse_type: "AES256" # One of: ["AES256", "KMS"],
     #       kms_master_key_id: "KMSMasterKeyId"
-    #     }
+    #     },
+    #     vector_index_override: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         vector_attribute: { # required
+    #           attribute_name: "VectorAttributeName", # required
+    #         },
+    #         search_schema: [
+    #           {
+    #             attribute_name: "AttributeName", # required
+    #             search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #           }
+    #         ],
+    #         projection: { # required
+    #           projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #           non_key_attributes: ["NonKeyAttributeName"]
+    #         },
+    #         dimensions: 1, # required
+    #         distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"], # required
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.restore_table_to_point_in_time(params, options)
@@ -6649,6 +7157,7 @@ module Aws::DynamoDB
     #         {
     #           region_name: "RegionName",
     #           replica_status: "CREATING" # One of: ["CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"],
+    #           replica_arn: "String",
     #           replica_status_description: "ReplicaStatusDescription",
     #           replica_status_percent_progress: "ReplicaStatusPercentProgress",
     #           kms_master_key_id: "KMSMasterKeyId",
@@ -6683,7 +7192,8 @@ module Aws::DynamoDB
     #           replica_table_class_summary: {
     #             table_class: "STANDARD" # One of: ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
     #             last_update_date_time: Time.now
-    #           }
+    #           },
+    #           global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"]
     #         }
     #       ],
     #       global_table_witnesses: [
@@ -6692,6 +7202,7 @@ module Aws::DynamoDB
     #           witness_status: "CREATING" # One of: ["CREATING", "DELETING", "ACTIVE"]
     #         }
     #       ],
+    #       global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"],
     #       restore_summary: {
     #         source_backup_arn: "BackupArn",
     #         source_table_arn: "TableArn",
@@ -6723,7 +7234,32 @@ module Aws::DynamoDB
     #         write_units_per_second: 1,
     #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"]
     #       },
-    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"]
+    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"],
+    #       vector_indexes: [
+    #         {
+    #           index_name: "IndexName",
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #             }
+    #           ],
+    #           projection: {
+    #             projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #             non_key_attributes: ["NonKeyAttributeName"]
+    #           },
+    #           vector_attribute: {
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           dimensions: 1,
+    #           distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"],
+    #           index_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE"],
+    #           backfilling: false,
+    #           index_size_bytes: 1,
+    #           item_count: 1,
+    #           index_arn: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::RestoreTableToPointInTimeOutput]
@@ -7234,12 +7770,265 @@ module Aws::DynamoDB
     #           write_capacity_units: 1.0,
     #           capacity_units: 1.0
     #         }
+    #       },
+    #       vector_indexes: {
+    #         "IndexName" => {
+    #           vector_search_request_bytes: 1.0,
+    #           vector_write_request_bytes: 1.0
+    #         }
     #       }
     #     }
     #   }
     # @return [Types::ScanOutput]
     def scan(params = {}, options = {})
       request = build_request(:scan, params)
+      request.send_request(options)
+    end
+
+    # <p>Performs a vector similarity search on a vector index associated with an Amazon
+    #             DynamoDB table, and returns the most similar items sorted by similarity score
+    #             based on the distance function configured for the index.</p>
+    #          <p>Score interpretation depends on the distance function:</p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <code>COSINE</code> - Returns the items with the <i>k
+    #                     smallest</i> scores. Scores range from 0 (identical) to 2 (opposite).
+    #                     Lower scores indicate higher similarity.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>EUCLIDEAN</code> - Returns the items with the <i>k
+    #                     smallest</i> scores. Scores represent the Euclidean distance between
+    #                     vectors. Lower scores indicate higher similarity.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>DOT_PRODUCT</code> - Returns the items with the <i>k
+    #                     highest</i> scores. Higher scores indicate higher similarity.</p>
+    #             </li>
+    #          </ul>
+    # @param [Hash, Types::SearchVectorsInput] params
+    # @option params [String] :table_name
+    #   <p>The name or Amazon Resource Name (ARN) of the table containing the vector index.</p>
+    # @option params [String] :index_name
+    #   <p>The name of the vector index to search. The index must be in the
+    #               <code>ACTIVE</code> state.</p>
+    # @option params [String] :return_consumed_capacity
+    #   <p>Determines the level of detail about either provisioned or on-demand throughput
+    #               consumption that is returned in the response:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>INDEXES</code> - The response includes the aggregate
+    #                           <code>ConsumedCapacity</code> for the operation, together with
+    #                           <code>ConsumedCapacity</code> for each table and secondary index that was
+    #                       accessed.</p>
+    #                  <p>Note that some operations, such as <code>GetItem</code> and
+    #                           <code>BatchGetItem</code>, do not access any indexes at all. In these cases,
+    #                       specifying <code>INDEXES</code> will only return <code>ConsumedCapacity</code>
+    #                       information for table(s).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>TOTAL</code> - The response includes only the aggregate
+    #                           <code>ConsumedCapacity</code> for the operation.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code> - No <code>ConsumedCapacity</code> details are included in the
+    #                       response.</p>
+    #               </li>
+    #            </ul>
+    # @option params [Hash<String, String>] :expression_attribute_names
+    #   <p>One or more substitution tokens for attribute names in an expression. Use the
+    #               <code>#</code> character in an expression to dereference an attribute name.</p>
+    # @option params [Hash<String, Types::AttributeValue>] :expression_attribute_values
+    #   <p>One or more values that can be substituted in an expression. Use the
+    #               <code>:</code> character in an expression to dereference an attribute value.</p>
+    # @option params [String] :projection_expression
+    #   <p>A string that identifies one or more attributes to retrieve from the index.
+    #               Separate attribute names with commas. If not specified, the operation returns all
+    #               attributes projected into the vector index.</p>
+    #            <p>Only attributes projected into the vector index can be retrieved.</p>
+    # @option params [Array<Types::AttributeValue>] :search_vector
+    #   <p>The search vector to compare against the indexed vectors. Each element is a 32-bit
+    #               IEEE-754 floating point number, provided in DynamoDB list format.</p>
+    #            <p>The number of dimensions must match the number of dimensions configured for the
+    #               vector index.</p>
+    # @option params [String] :search_condition_expression
+    #   <p>A condition expression used to filter the vector search results. The expression can
+    #               reference attributes defined in the vector index search schema, including
+    #               <code>HASH</code> and <code>INLINE_FILTER</code> key elements.</p>
+    #            <p>Only the equality operator (<code>=</code>) is supported for <code>HASH</code>
+    #               attributes. Comparison and range operators are supported for
+    #               <code>INLINE_FILTER</code> attributes. Only top-level attributes from the search
+    #               schema can be referenced.</p>
+    # @option params [Integer] :top_k
+    #   <p>The number of most similar results to return.</p>
+    # @example To search for similar vectors
+    #   # This example searches the Products table for the top 3 items most similar to a provided vector, using the 'cosine-product-idx' vector index. The SearchConditionExpression filters results to the 'Electronics' category. The operation returns only the ProductName and Price attributes.
+    #   params = {
+    #     table_name: "Products",
+    #     index_name: "cosine-product-idx",
+    #     search_vector: [
+    #       {
+    #     "N" => 0.12
+    #   },
+    #       {
+    #     "N" => 0.85
+    #   },
+    #       {
+    #     "N" => 0.44
+    #   },
+    #       {
+    #     "N" => 0.67
+    #   }
+    #     ],
+    #     top_k: 3,
+    #     search_condition_expression: "Category = :cat",
+    #     projection_expression: "ProductName, Price",
+    #     expression_attribute_values: {
+    #       ":cat" => {
+    #     "S" => Electronics
+    #   }
+    #     },
+    #     return_consumed_capacity: INDEXES
+    #   }
+    #   options = {}
+    #   response = client.search_vectors(params, options)
+    #   response.to_h #=>
+    #   {
+    #     search_results: [
+    #       {
+    #         item: {
+    #           "ProductName" => {
+    #     "S" => Wireless Headphones
+    #   },
+    #           "Price" => {
+    #     "N" => 79.99
+    #   }
+    #         },
+    #         score: 0.95
+    #       },
+    #       {
+    #         item: {
+    #           "ProductName" => {
+    #     "S" => Bluetooth Speaker
+    #   },
+    #           "Price" => {
+    #     "N" => 49.99
+    #   }
+    #         },
+    #         score: 0.87
+    #       },
+    #       {
+    #         item: {
+    #           "ProductName" => {
+    #     "S" => USB-C Hub
+    #   },
+    #           "Price" => {
+    #     "N" => 34.99
+    #   }
+    #         },
+    #         score: 0.82
+    #       }
+    #     ],
+    #     consumed_capacity: {
+    #       vector_search_request_bytes: 1024
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_name: "TableArn", # required
+    #     index_name: "IndexName", # required
+    #     return_consumed_capacity: "INDEXES" # One of: ["INDEXES", "TOTAL", "NONE"],
+    #     expression_attribute_names: {
+    #       "ExpressionAttributeNameVariable" => "AttributeName"
+    #     },
+    #     expression_attribute_values: {
+    #       "ExpressionAttributeValueVariable" => {
+    #         # One of:
+    #         s: "StringAttributeValue",
+    #         n: "NumberAttributeValue",
+    #         b: "data",
+    #         ss: ["StringAttributeValue"],
+    #         ns: ["NumberAttributeValue"],
+    #         bs: ["data"],
+    #         m: {
+    #           "AttributeName" => {
+    #             # recursive AttributeValue
+    #           }
+    #         },
+    #         l: [{
+    #           # recursive AttributeValue
+    #         }],
+    #         null: false,
+    #         bool: false
+    #       }
+    #     },
+    #     projection_expression: "ProjectionExpression",
+    #     search_vector: [{ # required
+    #       # One of:
+    #       s: "StringAttributeValue",
+    #       n: "NumberAttributeValue",
+    #       b: "data",
+    #       ss: ["StringAttributeValue"],
+    #       ns: ["NumberAttributeValue"],
+    #       bs: ["data"],
+    #       m: {
+    #         "AttributeName" => {
+    #           # recursive AttributeValue
+    #         }
+    #       },
+    #       l: [{
+    #         # recursive AttributeValue
+    #       }],
+    #       null: false,
+    #       bool: false
+    #     }],
+    #     search_condition_expression: "String",
+    #     top_k: 1, # required
+    #   }
+    #   options = {}
+    #   response = client.search_vectors(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     consumed_capacity: {
+    #       vector_search_request_bytes: 1.0,
+    #       vector_write_request_bytes: 1.0
+    #     },
+    #     search_results: [
+    #       {
+    #         item: {
+    #           "AttributeName" => {
+    #             # One of:
+    #             s: "StringAttributeValue",
+    #             n: "NumberAttributeValue",
+    #             b: "data",
+    #             ss: ["StringAttributeValue"],
+    #             ns: ["NumberAttributeValue"],
+    #             bs: ["data"],
+    #             m: {
+    #               "AttributeName" => {
+    #                 # recursive AttributeValue
+    #               }
+    #             },
+    #             l: [{
+    #               # recursive AttributeValue
+    #             }],
+    #             null: false,
+    #             bool: false
+    #           }
+    #         },
+    #         score: 1.0
+    #       }
+    #     ]
+    #   }
+    # @return [Types::SearchVectorsOutput]
+    def search_vectors(params = {}, options = {})
+      request = build_request(:search_vectors, params)
       request.send_request(options)
     end
 
@@ -7393,6 +8182,12 @@ module Aws::DynamoDB
     #             read_capacity_units: 1.0,
     #             write_capacity_units: 1.0,
     #             capacity_units: 1.0
+    #           }
+    #         },
+    #         vector_indexes: {
+    #           "IndexName" => {
+    #             vector_search_request_bytes: 1.0,
+    #             vector_write_request_bytes: 1.0
     #           }
     #         }
     #       }
@@ -7798,6 +8593,12 @@ module Aws::DynamoDB
     #             write_capacity_units: 1.0,
     #             capacity_units: 1.0
     #           }
+    #         },
+    #         vector_indexes: {
+    #           "IndexName" => {
+    #             vector_search_request_bytes: 1.0,
+    #             vector_write_request_bytes: 1.0
+    #           }
     #         }
     #       }
     #     ],
@@ -8029,6 +8830,7 @@ module Aws::DynamoDB
     #         {
     #           region_name: "RegionName",
     #           replica_status: "CREATING" # One of: ["CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"],
+    #           replica_arn: "String",
     #           replica_status_description: "ReplicaStatusDescription",
     #           replica_status_percent_progress: "ReplicaStatusPercentProgress",
     #           kms_master_key_id: "KMSMasterKeyId",
@@ -8063,7 +8865,8 @@ module Aws::DynamoDB
     #           replica_table_class_summary: {
     #             table_class: "STANDARD" # One of: ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
     #             last_update_date_time: Time.now
-    #           }
+    #           },
+    #           global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"]
     #         }
     #       ],
     #       global_table_arn: "GlobalTableArnString",
@@ -8480,9 +9283,7 @@ module Aws::DynamoDB
     #                     </li>
     #                  </ul>
     #                  <important>
-    #                     <p>The <code>ADD</code> action only supports Number and set data types. In
-    #                           addition, <code>ADD</code> can only be used on top-level attributes, not
-    #                           nested attributes.</p>
+    #                     <p>The <code>ADD</code> action only supports Number and set data types.</p>
     #                  </important>
     #               </li>
     #               <li>
@@ -8493,9 +9294,7 @@ module Aws::DynamoDB
     #                       the <code>DELETE</code> action specifies <code>[a,c]</code>, then the final
     #                       attribute value is <code>[b]</code>. Specifying an empty set is an error.</p>
     #                  <important>
-    #                     <p>The <code>DELETE</code> action only supports set data types. In addition,
-    #                               <code>DELETE</code> can only be used on top-level attributes, not nested
-    #                           attributes.</p>
+    #                     <p>The <code>DELETE</code> action only supports set data types.</p>
     #                  </important>
     #               </li>
     #            </ul>
@@ -8826,6 +9625,12 @@ module Aws::DynamoDB
     #           write_capacity_units: 1.0,
     #           capacity_units: 1.0
     #         }
+    #       },
+    #       vector_indexes: {
+    #         "IndexName" => {
+    #           vector_search_request_bytes: 1.0,
+    #           vector_write_request_bytes: 1.0
+    #         }
     #       }
     #     },
     #     item_collection_metrics: {
@@ -9033,6 +9838,29 @@ module Aws::DynamoDB
     # @option params [Types::WarmThroughput] :warm_throughput
     #   <p>Represents the warm throughput (in read units per second and write units per second)
     #               for updating a table.</p>
+    # @option params [String] :global_table_settings_replication_mode
+    #   <p>Controls the settings replication mode for a global table replica. This attribute can be defined
+    #               using UpdateTable operation only on a regional table with values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED</code>: Defines settings replication on a regional table to be used as a
+    #                       source table for creating Multi-Account Global Table.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLED</code>: Remove settings replication on a regional table. Settings replication needs
+    #                       to be defined to ENABLED again in order to create a Multi-Account Global Table using this table.
+    #                   </p>
+    #               </li>
+    #            </ul>
+    # @option params [Array<Types::VectorIndexUpdate>] :vector_index_updates
+    #   <p>A list of vector indexes to be added to or removed from the table. You can add or
+    #               remove one vector index for each <code>UpdateTable</code> operation.</p>
+    #            <p>To add a vector index, specify <code>IndexName</code>,
+    #               <code>VectorAttribute</code>, <code>Dimensions</code>,
+    #               <code>DistanceFunction</code>, and <code>Projection</code>. To remove a vector
+    #               index, specify only the <code>IndexName</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     attribute_definitions: [
@@ -9174,7 +10002,33 @@ module Aws::DynamoDB
     #     warm_throughput: {
     #       read_units_per_second: 1,
     #       write_units_per_second: 1
-    #     }
+    #     },
+    #     global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"],
+    #     vector_index_updates: [
+    #       {
+    #         create: {
+    #           index_name: "IndexName", # required
+    #           vector_attribute: { # required
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #             }
+    #           ],
+    #           projection: { # required
+    #             projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #             non_key_attributes: ["NonKeyAttributeName"]
+    #           },
+    #           dimensions: 1, # required
+    #           distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"], # required
+    #         },
+    #         delete: {
+    #           index_name: "IndexName", # required
+    #         }
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.update_table(params, options)
@@ -9277,6 +10131,7 @@ module Aws::DynamoDB
     #         {
     #           region_name: "RegionName",
     #           replica_status: "CREATING" # One of: ["CREATING", "CREATION_FAILED", "UPDATING", "DELETING", "ACTIVE", "REGION_DISABLED", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"],
+    #           replica_arn: "String",
     #           replica_status_description: "ReplicaStatusDescription",
     #           replica_status_percent_progress: "ReplicaStatusPercentProgress",
     #           kms_master_key_id: "KMSMasterKeyId",
@@ -9311,7 +10166,8 @@ module Aws::DynamoDB
     #           replica_table_class_summary: {
     #             table_class: "STANDARD" # One of: ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
     #             last_update_date_time: Time.now
-    #           }
+    #           },
+    #           global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"]
     #         }
     #       ],
     #       global_table_witnesses: [
@@ -9320,6 +10176,7 @@ module Aws::DynamoDB
     #           witness_status: "CREATING" # One of: ["CREATING", "DELETING", "ACTIVE"]
     #         }
     #       ],
+    #       global_table_settings_replication_mode: "ENABLED" # One of: ["ENABLED", "DISABLED", "ENABLED_WITH_OVERRIDES"],
     #       restore_summary: {
     #         source_backup_arn: "BackupArn",
     #         source_table_arn: "TableArn",
@@ -9351,7 +10208,32 @@ module Aws::DynamoDB
     #         write_units_per_second: 1,
     #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED", "REPLICATION_NOT_AUTHORIZED"]
     #       },
-    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"]
+    #       multi_region_consistency: "EVENTUAL" # One of: ["EVENTUAL", "STRONG"],
+    #       vector_indexes: [
+    #         {
+    #           index_name: "IndexName",
+    #           search_schema: [
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               search_schema_element_type: "HASH" # One of: ["HASH", "INLINE_FILTER"], # required
+    #             }
+    #           ],
+    #           projection: {
+    #             projection_type: "ALL" # One of: ["ALL", "KEYS_ONLY", "INCLUDE"],
+    #             non_key_attributes: ["NonKeyAttributeName"]
+    #           },
+    #           vector_attribute: {
+    #             attribute_name: "VectorAttributeName", # required
+    #           },
+    #           dimensions: 1,
+    #           distance_function: "COSINE" # One of: ["COSINE", "DOT_PRODUCT", "EUCLIDEAN"],
+    #           index_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "ACTIVE"],
+    #           backfilling: false,
+    #           index_size_bytes: 1,
+    #           item_count: 1,
+    #           index_arn: "String"
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::UpdateTableOutput]
@@ -9689,6 +10571,10 @@ module Aws::DynamoDB
 
     def waiters
       {
+        contributor_insights_enabled: Waiters::ContributorInsightsEnabled,
+        export_completed: Waiters::ExportCompleted,
+        import_completed: Waiters::ImportCompleted,
+        kinesis_streaming_destination_active: Waiters::KinesisStreamingDestinationActive,
         table_exists: Waiters::TableExists,
         table_not_exists: Waiters::TableNotExists
       }

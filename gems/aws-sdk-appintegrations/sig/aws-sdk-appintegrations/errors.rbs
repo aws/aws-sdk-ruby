@@ -3,6 +3,9 @@ module Aws::AppIntegrations
     class AccessDeniedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class DuplicateResourceException < Smithy::Client::ServiceError
       def message: () -> String?
     end

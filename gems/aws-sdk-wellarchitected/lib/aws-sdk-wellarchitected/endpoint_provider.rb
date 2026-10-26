@@ -18,6 +18,27 @@ module Aws::WellArchitected
         end
         return Smithy::Client::EndpointRules::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
       end
+      if Smithy::Client::EndpointRules.set?(parameters.sub_service_type) && Smithy::Client::EndpointRules.string_equals?(parameters.sub_service_type, "AGENT") && Smithy::Client::EndpointRules.set?(parameters.region) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
+        if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+          if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true) && Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"), true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://wellarchitected-agent-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "wellarchitected", "signingRegion" => "#{parameters.region}"}]})
+          end
+          raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
+        end
+        if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+          if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://wellarchitected-agent-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "wellarchitected", "signingRegion" => "#{parameters.region}"}]})
+          end
+          raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+        end
+        if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+          if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"), true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://wellarchitected-agent.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "wellarchitected", "signingRegion" => "#{parameters.region}"}]})
+          end
+          raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+        end
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://wellarchitected-agent.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "wellarchitected", "signingRegion" => "#{parameters.region}"}]})
+      end
       if Smithy::Client::EndpointRules.set?(parameters.region)
         if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
@@ -26,13 +47,13 @@ module Aws::WellArchitected
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
-          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
+          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
             if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://wellarchitected-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
-          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://wellarchitected.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end

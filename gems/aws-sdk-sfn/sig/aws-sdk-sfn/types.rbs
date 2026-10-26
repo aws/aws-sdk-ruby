@@ -1101,6 +1101,14 @@ module Aws::SFN
         ?request: Types::InspectionDataRequest,
         ?response: Types::InspectionDataResponse,
         ?variables: String,
+        ?error_details: Types::InspectionErrorDetails,
+        ?after_items_path: String,
+        ?after_item_selector: String,
+        ?after_item_batcher: String,
+        ?after_items_pointer: String,
+        ?tolerated_failure_count: Integer,
+        ?tolerated_failure_percentage: Float,
+        ?max_concurrency: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1114,6 +1122,14 @@ module Aws::SFN
       attr_accessor request: Types::InspectionDataRequest?
       attr_accessor response: Types::InspectionDataResponse?
       attr_accessor variables: String?
+      attr_accessor error_details: Types::InspectionErrorDetails?
+      attr_accessor after_items_path: String?
+      attr_accessor after_item_selector: String?
+      attr_accessor after_item_batcher: String?
+      attr_accessor after_items_pointer: String?
+      attr_accessor tolerated_failure_count: Integer?
+      attr_accessor tolerated_failure_percentage: Float?
+      attr_accessor max_concurrency: Integer?
     end
 
     class InspectionDataRequest
@@ -1152,6 +1168,21 @@ module Aws::SFN
       attr_accessor status_message: String?
       attr_accessor headers: String?
       attr_accessor body: String?
+    end
+
+    class InspectionErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catch_index: Integer,
+        ?retry_index: Integer,
+        ?retry_backoff_interval_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catch_index: Integer?
+      attr_accessor retry_index: Integer?
+      attr_accessor retry_backoff_interval_seconds: Integer?
     end
 
     module InspectionLevel
@@ -1765,6 +1796,40 @@ module Aws::SFN
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class MockErrorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor cause: String?
+    end
+
+    class MockInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+        ?error_output: Types::MockErrorOutput,
+        ?field_validation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+      attr_accessor error_output: Types::MockErrorOutput?
+      attr_accessor field_validation_mode: String?
+    end
+
+    module MockResponseValidationMode
+      STRICT: String
+      PRESENT: String
+      NONE: String
     end
 
     class PublishStateMachineVersionInput
@@ -2395,6 +2460,23 @@ module Aws::SFN
       CAUGHT_ERROR: String
     end
 
+    class TestStateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrier_retry_count: Integer,
+        ?error_caused_by_state: String,
+        ?map_iteration_failure_count: Integer,
+        ?map_item_reader_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrier_retry_count: Integer?
+      attr_accessor error_caused_by_state: String?
+      attr_accessor map_iteration_failure_count: Integer?
+      attr_accessor map_item_reader_data: String?
+    end
+
     class TestStateInput
       include Smithy::Schema::Structure
 
@@ -2405,6 +2487,10 @@ module Aws::SFN
         ?inspection_level: String,
         ?reveal_secrets: bool,
         ?variables: String,
+        ?state_name: String,
+        ?mock: Types::MockInput,
+        ?context: String,
+        ?state_configuration: Types::TestStateConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2414,6 +2500,10 @@ module Aws::SFN
       attr_accessor inspection_level: String?
       attr_accessor reveal_secrets: bool?
       attr_accessor variables: String?
+      attr_accessor state_name: String?
+      attr_accessor mock: Types::MockInput?
+      attr_accessor context: String?
+      attr_accessor state_configuration: Types::TestStateConfiguration?
     end
 
     class TestStateOutput

@@ -78,6 +78,8 @@ module Aws::Organizations
     DescribePolicyRequest: StructureShape
     DescribePolicyResponse: StructureShape
     DescribeResourcePolicyResponse: StructureShape
+    DescribeResponsibilityTransferRequest: StructureShape
+    DescribeResponsibilityTransferResponse: StructureShape
     DestinationParentNotFoundException: StructureShape
     DetachPolicyRequest: StructureShape
     DisableAWSServiceAccessRequest: StructureShape
@@ -130,8 +132,11 @@ module Aws::Organizations
     InvalidHandshakeTransitionException: StructureShape
     InvalidInputException: StructureShape
     InvalidInputExceptionReason: EnumShape
+    InvalidResponsibilityTransferTransitionException: StructureShape
     InviteAccountToOrganizationRequest: StructureShape
     InviteAccountToOrganizationResponse: StructureShape
+    InviteOrganizationToTransferResponsibilityRequest: StructureShape
+    InviteOrganizationToTransferResponsibilityResponse: StructureShape
     ListAWSServiceAccessForOrganizationRequest: StructureShape
     ListAWSServiceAccessForOrganizationResponse: StructureShape
     ListAccountsForParentRequest: StructureShape
@@ -154,8 +159,12 @@ module Aws::Organizations
     ListHandshakesForAccountResponse: StructureShape
     ListHandshakesForOrganizationRequest: StructureShape
     ListHandshakesForOrganizationResponse: StructureShape
+    ListInboundResponsibilityTransfersRequest: StructureShape
+    ListInboundResponsibilityTransfersResponse: StructureShape
     ListOrganizationalUnitsForParentRequest: StructureShape
     ListOrganizationalUnitsForParentResponse: StructureShape
+    ListOutboundResponsibilityTransfersRequest: StructureShape
+    ListOutboundResponsibilityTransfersResponse: StructureShape
     ListParentsRequest: StructureShape
     ListParentsResponse: StructureShape
     ListPoliciesForTargetRequest: StructureShape
@@ -192,6 +201,7 @@ module Aws::Organizations
     Parents: ListShape
     Path: StringShape
     PathToError: StringShape
+    Paths: ListShape
     Policies: ListShape
     Policy: StructureShape
     PolicyArn: StringShape
@@ -225,6 +235,15 @@ module Aws::Organizations
     ResourcePolicyId: StringShape
     ResourcePolicyNotFoundException: StructureShape
     ResourcePolicySummary: StructureShape
+    ResponsibilityTransfer: StructureShape
+    ResponsibilityTransferAlreadyInStatusException: StructureShape
+    ResponsibilityTransferArn: StringShape
+    ResponsibilityTransferId: StringShape
+    ResponsibilityTransferName: StringShape
+    ResponsibilityTransferNotFoundException: StructureShape
+    ResponsibilityTransferStatus: EnumShape
+    ResponsibilityTransferType: EnumShape
+    ResponsibilityTransfers: ListShape
     RoleName: StringShape
     Root: StructureShape
     RootArn: StringShape
@@ -245,14 +264,19 @@ module Aws::Organizations
     TargetName: StringShape
     TargetNotFoundException: StructureShape
     TargetType: EnumShape
+    TerminateResponsibilityTransferRequest: StructureShape
+    TerminateResponsibilityTransferResponse: StructureShape
     Timestamp: TimestampShape
     TooManyRequestsException: StructureShape
+    TransferParticipant: StructureShape
     UnsupportedAPIEndpointException: StructureShape
     UntagResourceRequest: StructureShape
     UpdateOrganizationalUnitRequest: StructureShape
     UpdateOrganizationalUnitResponse: StructureShape
     UpdatePolicyRequest: StructureShape
     UpdatePolicyResponse: StructureShape
+    UpdateResponsibilityTransferRequest: StructureShape
+    UpdateResponsibilityTransferResponse: StructureShape
 
     AWSOrganizationsV20161128: ServiceShape
   end

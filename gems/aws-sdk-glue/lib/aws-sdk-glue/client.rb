@@ -144,18 +144,18 @@ module Aws::Glue
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -207,6 +207,42 @@ module Aws::Glue
     #  When `true`, request parameters are validated before sending the request.
     def initialize(*options)
       super
+    end
+
+    # <p>Associates one or more glossary terms with an asset in Glue Data Catalog.</p>
+    # @param [Hash, Types::AssociateGlossaryTermsRequest] params
+    # @option params [String] :asset_identifier
+    #   <p>The unique identifier of the asset to associate glossary terms with.</p>
+    # @option params [String] :iterable_form_name
+    #   <p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the glossary terms are associated with an item within the iterable form rather than the asset itself.</p>
+    # @option params [String] :item_identifier
+    #   <p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>
+    # @option params [Array<String>] :glossary_term_identifiers
+    #   <p>The list of glossary term identifiers to associate with the asset.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     asset_identifier: "AssetId", # required
+    #     iterable_form_name: "IterableFormName",
+    #     item_identifier: "ItemIdentifier",
+    #     glossary_term_identifiers: ["GlossaryTermId"], # required
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.associate_glossary_terms(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     asset_identifier: "AssetId",
+    #     iterable_form_name: "IterableFormName",
+    #     item_identifier: "ItemIdentifier",
+    #     glossary_terms: ["GlossaryTermId"]
+    #   }
+    # @return [Types::AssociateGlossaryTermsResponse]
+    def associate_glossary_terms(params = {}, options = {})
+      request = build_request(:associate_glossary_terms, params)
+      request.send_request(options)
     end
 
     # <p>Creates one or more partitions in a batch operation.</p>
@@ -446,7 +482,7 @@ module Aws::Glue
     #   <p>The database in the catalog in which the table resides. For Hive
     #         compatibility, this name is entirely lowercase.</p>
     # @option params [String] :table_name
-    #   <p>The name of the table. For Hive compatibility, 
+    #   <p>The name of the table. For Hive compatibility,
     #         this name is entirely lowercase.</p>
     # @option params [Array<String>] :version_ids
     #   <p>A list of the IDs of versions to be deleted. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.</p>
@@ -647,7 +683,8 @@ module Aws::Glue
     #         lake_formation_configuration: {
     #           use_lake_formation_credentials: false,
     #           account_id: "AccountId"
-    #         }
+    #         },
+    #         catalog_id: "CatalogIdString"
     #       }
     #     ],
     #     crawlers_not_found: ["NameString"]
@@ -744,6 +781,9 @@ module Aws::Glue
     #             evaluated_rule: "DataQualityRuleResultDescription",
     #             rule_metrics: {
     #               "NameString" => 1.0
+    #             },
+    #             labels: {
+    #               "NameString" => "NameString"
     #             }
     #           }
     #         ],
@@ -754,6 +794,13 @@ module Aws::Glue
     #             evaluation_message: "DataQualityRuleResultDescription",
     #             evaluated_metrics: {
     #               "NameString" => 1.0
+    #             },
+    #             evaluated_distributions: {
+    #               "NameString" => {
+    #                 bin_edges: ["GenericString"],
+    #                 count: [1],
+    #                 data_type: "NameString"
+    #               }
     #             }
     #           }
     #         ],
@@ -788,6 +835,262 @@ module Aws::Glue
     # @return [Types::BatchGetDataQualityResultResponse]
     def batch_get_data_quality_result(params = {}, options = {})
       request = build_request(:batch_get_data_quality_result, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a list of data quality results for the specified result IDs. You can specify up to 100 result IDs in a single request.</p>
+    # @param [Hash, Types::BatchGetDataQualityResultV2Request] params
+    # @option params [Array<String>] :result_ids
+    #   <p>A list of unique result IDs for the data quality results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     result_ids: ["HashString"], # required
+    #   }
+    #   options = {}
+    #   response = client.batch_get_data_quality_result_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     results: [ # required
+    #       {
+    #         result_id: "HashString", # required
+    #         data_source: {
+    #           glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             }
+    #           },
+    #           data_quality_glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             },
+    #             pre_processing_query: "PreProcessingQueryString"
+    #           }
+    #         },
+    #         dimensions: {
+    #           "NameString" => "NameString"
+    #         },
+    #         tags: {
+    #           "NameString" => "NameString"
+    #         },
+    #         execution_started_on: Time.now,
+    #         execution_completed_on: Time.now,
+    #         result_published_on: Time.now,
+    #         score: 1.0,
+    #         rule_results: [
+    #           {
+    #             name: "NameString",
+    #             description: "DataQualityRuleResultDescription",
+    #             evaluation_message: "DataQualityRuleResultDescription",
+    #             result: "PASS" # One of: ["PASS", "FAIL", "ERROR"],
+    #             evaluated_metrics: {
+    #               "NameString" => 1.0
+    #             },
+    #             evaluated_rule: "DataQualityRuleResultDescription",
+    #             rule_metrics: {
+    #               "NameString" => 1.0
+    #             },
+    #             labels: {
+    #               "NameString" => "NameString"
+    #             }
+    #           }
+    #         ],
+    #         analyzer_results: [
+    #           {
+    #             name: "NameString",
+    #             description: "DataQualityRuleResultDescription",
+    #             evaluation_message: "DataQualityRuleResultDescription",
+    #             evaluated_metrics: {
+    #               "NameString" => 1.0
+    #             },
+    #             evaluated_distributions: {
+    #               "NameString" => {
+    #                 bin_edges: ["GenericString"],
+    #                 count: [1],
+    #                 data_type: "NameString"
+    #               }
+    #             }
+    #           }
+    #         ],
+    #         observations: [
+    #           {
+    #             description: "DataQualityObservationDescription",
+    #             metric_based_observation: {
+    #               metric_name: "NameString",
+    #               statistic_id: "HashString",
+    #               metric_values: {
+    #                 actual_value: 1.0,
+    #                 expected_value: 1.0,
+    #                 lower_limit: 1.0,
+    #                 upper_limit: 1.0
+    #               },
+    #               new_rules: ["NameString"]
+    #             }
+    #           }
+    #         ],
+    #         evaluation_context: "NameString",
+    #         descriptors: {
+    #           "NameString" => "NameString"
+    #         },
+    #         aggregated_metrics: {
+    #           total_rows_processed: 1.0,
+    #           total_rows_passed: 1.0,
+    #           total_rows_failed: 1.0,
+    #           total_rules_processed: 1.0,
+    #           total_rules_passed: 1.0,
+    #           total_rules_failed: 1.0
+    #         },
+    #         ruleset_name: "NameString"
+    #       }
+    #     ],
+    #     results_not_found: ["HashString"]
+    #   }
+    # @return [Types::BatchGetDataQualityResultV2Response]
+    def batch_get_data_quality_result_v2(params = {}, options = {})
+      request = build_request(:batch_get_data_quality_result_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the details of multiple evaluation runs in a single request.</p>
+    # @param [Hash, Types::BatchGetDataQualityRulesetEvaluationRunRequest] params
+    # @option params [Array<String>] :run_ids
+    #   <p>A list of unique run identifiers for the evaluation runs to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     run_ids: ["HashString"], # required
+    #   }
+    #   options = {}
+    #   response = client.batch_get_data_quality_ruleset_evaluation_run(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     runs: [
+    #       {
+    #         run_id: "HashString",
+    #         data_source: {
+    #           glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             }
+    #           },
+    #           data_quality_glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             },
+    #             pre_processing_query: "PreProcessingQueryString"
+    #           }
+    #         },
+    #         role: "RoleString",
+    #         number_of_workers: 1,
+    #         timeout: 1,
+    #         additional_run_options: {
+    #           cloud_watch_metrics_enabled: false,
+    #           results_s3_prefix: "UriString",
+    #           composite_rule_evaluation_method: "COLUMN" # One of: ["COLUMN", "ROW"],
+    #           custom_log_group_prefix: "GenericString",
+    #           row_level_results: {
+    #             max_rows_to_write: 1,
+    #             result_type: "ALL" # One of: ["ALL", "PASSED_ONLY", "FAILED_ONLY"],
+    #             catalog_table_config: {
+    #               database_name: "NameString",
+    #               table_name: "NameString",
+    #               s3_location: "UriString",
+    #               catalog_id: "NameString"
+    #             }
+    #           },
+    #           profiling_results: {
+    #             write_profiling_results_enabled: false,
+    #             catalog_table_config: {
+    #               database_name: "NameString",
+    #               table_name: "NameString",
+    #               s3_location: "UriString",
+    #               catalog_id: "NameString"
+    #             },
+    #             distribution_results: {
+    #               write_distribution_results_enabled: false,
+    #               catalog_table_config: {
+    #                 database_name: "NameString",
+    #                 table_name: "NameString",
+    #                 s3_location: "UriString",
+    #                 catalog_id: "NameString"
+    #               }
+    #             }
+    #           },
+    #           observation_scope: "ALL" # One of: ["ALL", "NONE"],
+    #           observation_mode: "SCHEDULED" # One of: ["SCHEDULED", "FIXED"],
+    #           data_quality_rule_results: {
+    #             write_data_quality_rule_results_enabled: false,
+    #             catalog_table_config: {
+    #               database_name: "NameString",
+    #               table_name: "NameString",
+    #               s3_location: "UriString",
+    #               catalog_id: "NameString"
+    #             }
+    #           },
+    #           observation_results: {
+    #             write_observation_results_enabled: false,
+    #             catalog_table_config: {
+    #               database_name: "NameString",
+    #               table_name: "NameString",
+    #               s3_location: "UriString",
+    #               catalog_id: "NameString"
+    #             }
+    #           }
+    #         },
+    #         status: "STARTING" # One of: ["STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"],
+    #         error_string: "GenericString",
+    #         started_on: Time.now,
+    #         last_modified_on: Time.now,
+    #         completed_on: Time.now,
+    #         execution_time: 1,
+    #         ruleset_names: ["NameString"],
+    #         result_ids: ["HashString"],
+    #         additional_data_sources: {
+    #           "NameString" => {
+    #             glue_table: {
+    #               database_name: "NameString", # required
+    #               table_name: "NameString", # required
+    #               catalog_id: "NameString",
+    #               connection_name: "NameString",
+    #               additional_options: {
+    #                 "NameString" => "DescriptionString"
+    #               }
+    #             },
+    #             data_quality_glue_table: {
+    #               database_name: "NameString", # required
+    #               table_name: "NameString", # required
+    #               catalog_id: "NameString",
+    #               connection_name: "NameString",
+    #               additional_options: {
+    #                 "NameString" => "DescriptionString"
+    #               },
+    #               pre_processing_query: "PreProcessingQueryString"
+    #             }
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     runs_not_found: ["HashString"]
+    #   }
+    # @return [Types::BatchGetDataQualityRulesetEvaluationRunResponse]
+    def batch_get_data_quality_ruleset_evaluation_run(params = {}, options = {})
+      request = build_request(:batch_get_data_quality_ruleset_evaluation_run, params)
       request.send_request(options)
     end
 
@@ -847,7 +1150,59 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Returns a list of resource metadata for a given list of job names. After calling the <code>ListJobs</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. 
+    # <p>Retrieves multiple items from an iterable form on an asset in Glue Data Catalog in a single request.</p>
+    # @param [Hash, Types::BatchGetIterableFormsRequest] params
+    # @option params [String] :asset_identifier
+    #   <p>The unique identifier of the asset.</p>
+    # @option params [String] :iterable_form_name
+    #   <p>The name of the iterable form to retrieve items from.</p>
+    # @option params [Array<String>] :item_identifiers
+    #   <p>The list of item identifiers to retrieve. Each identifier can be an item ID or item name.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     asset_identifier: "AssetId", # required
+    #     iterable_form_name: "IterableFormName", # required
+    #     item_identifiers: ["ItemIdentifier"], # required
+    #   }
+    #   options = {}
+    #   response = client.batch_get_iterable_forms(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         item_id: "ItemId",
+    #         item_name: "ItemName",
+    #         glossary_terms: ["GlossaryTermId"],
+    #         forms: {
+    #           "AssetFormKey" => {
+    #             form_type_id: "FormTypeId",
+    #             content: "FormContent"
+    #           }
+    #         },
+    #         attachments: {
+    #           "AssetFormKey" => {
+    #             form_type_id: "FormTypeId",
+    #             content: "FormContent"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     errors: [
+    #       {
+    #         item_identifier: "ItemIdentifier",
+    #         code: "ItemErrorCode",
+    #         message: "ItemErrorMessage"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetIterableFormsResponse]
+    def batch_get_iterable_forms(params = {}, options = {})
+      request = build_request(:batch_get_iterable_forms, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of resource metadata for a given list of job names. After calling the <code>ListJobs</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
     # </p>
     # @param [Hash, Types::BatchGetJobsRequest] params
     # @option params [Array<String>] :job_names
@@ -2502,6 +2857,12 @@ module Aws::Glue
     #   <p>The name of the partitions' table.</p>
     # @option params [Array<Types::PartitionValueList>] :partitions_to_get
     #   <p>A list of partition values identifying the partitions to retrieve.</p>
+    # @option params [Types::AuditContext] :audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
+    #            <p>For more information about how to utilize QuerySessionContext, see
+    #             <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html">Lake Formation workflow for application integration API operations</a> in the developer guide.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog_id: "CatalogIdString",
@@ -2511,7 +2872,21 @@ module Aws::Glue
     #       {
     #         values: ["ValueString"], # required
     #       }
-    #     ]
+    #     ],
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false
+    #     },
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue"
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.batch_get_partition(params, options)
@@ -3464,7 +3839,8 @@ module Aws::Glue
     #           permissions: ["ALL" # One of: ["ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"]]
     #         }
     #       ],
-    #       allow_full_table_external_data_access: "True" # One of: ["True", "False"]
+    #       allow_full_table_external_data_access: "True" # One of: ["True", "False"],
+    #       overwrite_child_resource_permissions_with_default: "Accept" # One of: ["Accept", "Deny"]
     #     },
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -3566,7 +3942,7 @@ module Aws::Glue
     #     schedule: "CronExpression",
     #     column_name_list: ["NameString"],
     #     sample_size: 1.0,
-    #     catalog_id: "NameString",
+    #     catalog_id: "CatalogIdString",
     #     security_configuration: "NameString",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -3622,7 +3998,7 @@ module Aws::Glue
     #       authentication_configuration: {
     #         authentication_type: "BASIC" # One of: ["BASIC", "OAUTH2", "CUSTOM", "IAM"],
     #         o_auth2_properties: {
-    #           o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"],
+    #           o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER", "REFRESH_TOKEN"],
     #           o_auth2_client_application: {
     #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
     #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference"
@@ -3717,6 +4093,8 @@ module Aws::Glue
     #   <p>The tags to use with this crawler request. You may use tags to limit access to the
     #               crawler. For more information about tags in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a> in the developer
     #               guide.</p>
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog in which to store the crawler's output. If none is supplied, the Amazon Web Services account ID is used by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "NameString", # required
@@ -3811,7 +4189,8 @@ module Aws::Glue
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
     #     tags: {
     #       "TagKey" => "TagValue"
-    #     }
+    #     },
+    #     catalog_id: "CatalogIdString"
     #   }
     #   options = {}
     #   response = client.create_crawler(params, options)
@@ -4082,17 +4461,86 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Creates a new Glue Identity Center configuration to enable integration between Glue and Amazon Web Services IAM 
+    # <p>Creates a business glossary in Glue Data Catalog. A glossary is a container for glossary terms that define business concepts.</p>
+    # @param [Hash, Types::CreateGlossaryRequest] params
+    # @option params [String] :name
+    #   <p>The name of the glossary.</p>
+    # @option params [String] :description
+    #   <p>The description of the glossary.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "GlossaryName", # required
+    #     description: "MetadataDescription",
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.create_glossary(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "GlossaryId",
+    #     name: "GlossaryName",
+    #     description: "MetadataDescription"
+    #   }
+    # @return [Types::CreateGlossaryResponse]
+    def create_glossary(params = {}, options = {})
+      request = build_request(:create_glossary, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a glossary term within a business glossary in Glue Data Catalog.</p>
+    # @param [Hash, Types::CreateGlossaryTermRequest] params
+    # @option params [String] :glossary_identifier
+    #   <p>The unique identifier of the glossary in which to create the term.</p>
+    # @option params [String] :name
+    #   <p>The name of the glossary term.</p>
+    # @option params [String] :short_description
+    #   <p>A short description of the glossary term.</p>
+    # @option params [String] :long_description
+    #   <p>A long description of the glossary term.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     glossary_identifier: "GlossaryId", # required
+    #     name: "GlossaryTermName", # required
+    #     short_description: "GlossaryShortDescription",
+    #     long_description: "GlossaryLongDescription",
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.create_glossary_term(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "GlossaryTermId",
+    #     glossary_id: "GlossaryId",
+    #     name: "GlossaryTermName",
+    #     short_description: "GlossaryShortDescription",
+    #     long_description: "GlossaryLongDescription"
+    #   }
+    # @return [Types::CreateGlossaryTermResponse]
+    def create_glossary_term(params = {}, options = {})
+      request = build_request(:create_glossary_term, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new Glue Identity Center configuration to enable integration between Glue and Amazon Web Services IAM
     #       Identity Center for authentication and authorization.</p>
     # @param [Hash, Types::CreateGlueIdentityCenterConfigurationRequest] params
     # @option params [String] :instance_arn
     #   <p>The Amazon Resource Name (ARN) of the Identity Center instance to be associated with the Glue configuration.</p>
     # @option params [Array<String>] :scopes
     #   <p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>
+    # @option params [Boolean] :user_background_sessions_enabled
+    #   <p>Specifies whether users can run background sessions when using Identity Center authentication with Glue services.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     instance_arn: "IdentityCenterInstanceArn", # required
-    #     scopes: ["IdentityCenterScope"]
+    #     scopes: ["IdentityCenterScope"],
+    #     user_background_sessions_enabled: false
     #   }
     #   options = {}
     #   response = client.create_glue_identity_center_configuration(params, options)
@@ -4130,8 +4578,8 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #   params = {
     #     integration_name: "String128", # required
-    #     source_arn: "String128", # required
-    #     target_arn: "String128", # required
+    #     source_arn: "String512", # required
+    #     target_arn: "String512", # required
     #     description: "IntegrationDescription",
     #     data_filter: "String2048",
     #     kms_key_id: "String2048",
@@ -4149,7 +4597,8 @@ module Aws::Glue
     #       source_properties: {
     #         "IntegrationString" => "IntegrationString"
     #       },
-    #       continuous_sync: false
+    #       continuous_sync: false,
+    #       target_namespace: "TargetNamespace"
     #     }
     #   }
     #   options = {}
@@ -4157,8 +4606,8 @@ module Aws::Glue
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     source_arn: "String128", # required
-    #     target_arn: "String128", # required
+    #     source_arn: "String512", # required
+    #     target_arn: "String512", # required
     #     integration_name: "String128", # required
     #     description: "IntegrationDescription",
     #     integration_arn: "String128", # required
@@ -4186,7 +4635,8 @@ module Aws::Glue
     #       source_properties: {
     #         "IntegrationString" => "IntegrationString"
     #       },
-    #       continuous_sync: false
+    #       continuous_sync: false,
+    #       target_namespace: "TargetNamespace"
     #     }
     #   }
     # @return [Types::CreateIntegrationResponse]
@@ -4203,9 +4653,11 @@ module Aws::Glue
     #   <p>The resource properties associated with the integration source.</p>
     # @option params [Types::TargetProcessingProperties] :target_processing_properties
     #   <p>The resource properties associated with the integration target.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>Metadata assigned to the resource consisting of a list of key-value pairs.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     source_processing_properties: {
     #       role_arn: "String128"
     #     },
@@ -4214,14 +4666,21 @@ module Aws::Glue
     #       kms_arn: "String2048",
     #       connection_name: "String128",
     #       event_bus_arn: "String2048"
-    #     }
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue"
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.create_integration_resource_property(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
+    #     resource_property_arn: "String512",
     #     source_processing_properties: {
     #       role_arn: "String128"
     #     },
@@ -4241,8 +4700,8 @@ module Aws::Glue
     # <p>This API is used to provide optional override properties for the the tables that need to be replicated. These properties can include properties for filtering and partitioning for the source and target tables. To set both source and target properties the same API need to be invoked with the Glue connection ARN as <code>ResourceArn</code> with <code>SourceTableConfig</code>, and the Glue database ARN as <code>ResourceArn</code> with <code>TargetTableConfig</code> respectively.</p>
     # @param [Hash, Types::CreateIntegrationTablePropertiesRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating 
-    #         integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for 
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating
+    #         integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for
     #         creating integration table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     # @option params [String] :table_name
@@ -4253,7 +4712,7 @@ module Aws::Glue
     #   <p>A structure for the target table configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #     source_table_config: {
     #       fields: ["String128"],
@@ -4270,7 +4729,8 @@ module Aws::Glue
     #           conversion_spec: "String128"
     #         }
     #       ],
-    #       target_table_name: "String128"
+    #       target_table_name: "String128",
+    #       integration_arn: "String128"
     #     }
     #   }
     #   options = {}
@@ -4352,7 +4812,7 @@ module Aws::Glue
     #         can consume resources before it is terminated and enters <code>TIMEOUT</code>
     #         status.</p>
     #            <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>
-    #            <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>
+    #            <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>
     #            <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>
     #            <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>
     # @option params [Float] :max_capacity
@@ -4373,8 +4833,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -4395,7 +4855,7 @@ module Aws::Glue
     #            <p>For more information about the available Glue versions and corresponding
     #         Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
     #         guide.</p>
-    #            <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>
+    #            <p>Jobs that are created without specifying a Glue version default to Glue 5.1.</p>
     # @option params [Integer] :number_of_workers
     #   <p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p>
     # @option params [String] :worker_type
@@ -6586,7 +7046,7 @@ module Aws::Glue
     # @option params [Types::ConnectionsList] :connections
     #   <p>The number of connections to use for the session. </p>
     # @option params [Float] :max_capacity
-    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs. 
+    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs.
     #         A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>
     # @option params [Integer] :number_of_workers
     #   <p>The number of workers of a defined <code>WorkerType</code> to use for the session. </p>
@@ -6613,12 +7073,14 @@ module Aws::Glue
     # @option params [String] :security_configuration
     #   <p>The name of the SecurityConfiguration structure to be used with the session </p>
     # @option params [String] :glue_version
-    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports. 
+    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports.
     #         The GlueVersion must be greater than 2.0. </p>
     # @option params [Hash<String, String>] :tags
     #   <p>The map of key value pairs (tags) belonging to the session.</p>
     # @option params [String] :request_origin
     #   <p>The origin of the request. </p>
+    # @option params [String] :session_type
+    #   <p>The type of session to create.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "NameString", # required
@@ -6644,7 +7106,8 @@ module Aws::Glue
     #     tags: {
     #       "TagKey" => "TagValue"
     #     },
-    #     request_origin: "OrchestrationNameString"
+    #     request_origin: "OrchestrationNameString",
+    #     session_type: "LIVY" # One of: ["LIVY", "SPARK_CONNECT"]
     #   }
     #   options = {}
     #   response = client.create_session(params, options)
@@ -6678,7 +7141,8 @@ module Aws::Glue
     #       execution_time: 1.0,
     #       dpu_seconds: 1.0,
     #       idle_timeout: 1,
-    #       profile_name: "NameString"
+    #       profile_name: "NameString",
+    #       session_type: "LIVY" # One of: ["LIVY", "SPARK_CONNECT"]
     #     }
     #   }
     # @return [Types::CreateSessionResponse]
@@ -6696,7 +7160,7 @@ module Aws::Glue
     #   <p>The catalog database in which to create the new table. For Hive
     #         compatibility, this name is entirely lowercase.</p>
     # @option params [String] :name
-    #   <p>The unique identifier for the table within the specified database that will be 
+    #   <p>The unique identifier for the table within the specified database that will be
     #         created in the Glue Data Catalog.</p>
     # @option params [Types::TableInput] :table_input
     #   <p>The <code>TableInput</code> object that defines the metadata table
@@ -6793,8 +7257,15 @@ module Aws::Glue
     #         name: "NameString",
     #         region: "NameString"
     #       },
+    #       federated_table: {
+    #         identifier: "FederationIdentifier",
+    #         database_identifier: "FederationIdentifier",
+    #         connection_name: "NameString",
+    #         connection_type: "NameString"
+    #       },
     #       view_definition: {
     #         is_protected: false,
+    #         is_managed: false,
     #         definer: "ArnString",
     #         representations: [
     #           {
@@ -6805,7 +7276,24 @@ module Aws::Glue
     #             view_expanded_text: "ViewTextString"
     #           }
     #         ],
-    #         sub_objects: ["ArnString"]
+    #         view_version_id: 1,
+    #         view_version_token: "VersionString",
+    #         refresh_seconds: 1,
+    #         last_refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
+    #         sub_objects: ["ArnString"],
+    #         sub_object_version_ids: [1],
+    #         sub_objects_statistics: [
+    #           {
+    #             source_type: "HIVE_PARQUET" # One of: ["HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"],
+    #             glue_version_id: "NullableString",
+    #             partition_count: 1,
+    #             file_count: 1,
+    #             total_file_bytes: 1
+    #           }
+    #         ],
+    #         spark_pipeline_info: {
+    #           "SparkPipelineInfoKey" => "SparkPipelineInfoValue"
+    #         }
     #       }
     #     },
     #     partition_indexes: [
@@ -6831,7 +7319,9 @@ module Aws::Glue
     #                 name: "ColumnNameString", # required
     #                 type: ""null"", # required
     #                 required: false, # required
-    #                 doc: "CommentString"
+    #                 doc: "CommentString",
+    #                 initial_default: ""null"",
+    #                 write_default: ""null""
     #               }
     #             ]
     #           },
@@ -7088,6 +7578,7 @@ module Aws::Glue
     #       function_name: "NameString",
     #       class_name: "NameString",
     #       owner_name: "NameString",
+    #       function_type: "REGULAR_FUNCTION" # One of: ["REGULAR_FUNCTION", "AGGREGATE_FUNCTION", "STORED_PROCEDURE"],
     #       owner_type: "USER" # One of: ["USER", "ROLE", "GROUP"],
     #       resource_uris: [
     #         {
@@ -7143,6 +7634,76 @@ module Aws::Glue
     # @return [Types::CreateWorkflowResponse]
     def create_workflow(params = {}, options = {})
       request = build_request(:create_workflow, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an asset from Glue Data Catalog.</p>
+    # @param [Hash, Types::DeleteAssetRequest] params
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the asset to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "AssetId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_asset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteAssetResponse]
+    def delete_asset(params = {}, options = {})
+      request = build_request(:delete_asset, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an asset type from Glue Data Catalog.</p>
+    # @param [Hash, Types::DeleteAssetTypeRequest] params
+    # @option params [String] :identifier
+    #   <p>The identifier of the asset type to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "AssetTypeId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_asset_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteAssetTypeResponse]
+    def delete_asset_type(params = {}, options = {})
+      request = build_request(:delete_asset_type, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a form attachment from an asset in Glue Data Catalog.</p>
+    # @param [Hash, Types::DeleteAttachmentRequest] params
+    # @option params [String] :asset_identifier
+    #   <p>The unique identifier of the asset from which to delete the attachment.</p>
+    # @option params [String] :iterable_form_name
+    #   <p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the attachment is deleted from an item within the iterable form rather than from the asset itself.</p>
+    # @option params [String] :item_identifier
+    #   <p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>
+    # @option params [String] :attachment_name
+    #   <p>The name of the attachment to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     asset_identifier: "AssetId", # required
+    #     iterable_form_name: "IterableFormName",
+    #     item_identifier: "ItemIdentifier",
+    #     attachment_name: "AttachmentName", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_attachment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     asset_identifier: "AssetId",
+    #     iterable_form_name: "IterableFormName",
+    #     item_identifier: "ItemIdentifier"
+    #   }
+    # @return [Types::DeleteAttachmentResponse]
+    def delete_attachment(params = {}, options = {})
+      request = build_request(:delete_attachment, params)
       request.send_request(options)
     end
 
@@ -7276,10 +7837,13 @@ module Aws::Glue
     #   <p>The name of the database where the table resides.</p>
     # @option params [String] :table_name
     #   <p>The name of the table for which to delete column statistics.</p>
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString"
     #   }
     #   options = {}
     #   response = client.delete_column_statistics_task_settings(params, options)
@@ -7312,6 +7876,26 @@ module Aws::Glue
     # @return [Types::DeleteConnectionResponse]
     def delete_connection(params = {}, options = {})
       request = build_request(:delete_connection, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a custom connection type in Glue.</p>
+    #          <p>The connection type must exist and be registered before it can be deleted. This operation supports cleanup of connection type resources and helps maintain proper lifecycle management of custom connection types.</p>
+    # @param [Hash, Types::DeleteConnectionTypeRequest] params
+    # @option params [String] :connection_type
+    #   <p>The name of the connection type to delete. Must reference an existing registered connection type.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connection_type: "NameString", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_connection_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteConnectionTypeResponse]
+    def delete_connection_type(params = {}, options = {})
+      request = build_request(:delete_connection_type, params)
       request.send_request(options)
     end
 
@@ -7430,7 +8014,64 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Deletes the existing Glue Identity Center configuration, removing the integration between Glue and 
+    # <p>Deletes a form type from Glue Data Catalog. A form type cannot be deleted if it is still referenced by an asset type.</p>
+    # @param [Hash, Types::DeleteFormTypeRequest] params
+    # @option params [String] :identifier
+    #   <p>The identifier of the form type to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "FormTypeId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_form_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteFormTypeResponse]
+    def delete_form_type(params = {}, options = {})
+      request = build_request(:delete_form_type, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a business glossary from Glue Data Catalog. A glossary cannot be deleted if it still contains glossary terms.</p>
+    # @param [Hash, Types::DeleteGlossaryRequest] params
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the glossary to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "GlossaryId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_glossary(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteGlossaryResponse]
+    def delete_glossary(params = {}, options = {})
+      request = build_request(:delete_glossary, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a glossary term from Glue Data Catalog.</p>
+    # @param [Hash, Types::DeleteGlossaryTermRequest] params
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the glossary term to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "GlossaryTermId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_glossary_term(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteGlossaryTermResponse]
+    def delete_glossary_term(params = {}, options = {})
+      request = build_request(:delete_glossary_term, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the existing Glue Identity Center configuration, removing the integration between Glue and
     #       Amazon Web Services IAM Identity Center.</p>
     # @param [Hash, Types::DeleteGlueIdentityCenterConfigurationRequest] params
     # @example Request syntax with placeholder values
@@ -7459,8 +8100,8 @@ module Aws::Glue
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     source_arn: "String128", # required
-    #     target_arn: "String128", # required
+    #     source_arn: "String512", # required
+    #     target_arn: "String512", # required
     #     integration_name: "String128", # required
     #     description: "IntegrationDescription",
     #     integration_arn: "String128", # required
@@ -7490,6 +8131,25 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>This API is used for deleting the <code>ResourceProperty</code> of the Glue connection (for the source) or Glue database ARN (for the target).</p>
+    # @param [Hash, Types::DeleteIntegrationResourcePropertyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The connection ARN of the source, or the database ARN of the target.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "String512", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_integration_resource_property(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteIntegrationResourcePropertyResponse]
+    def delete_integration_resource_property(params = {}, options = {})
+      request = build_request(:delete_integration_resource_property, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the table properties that have been created for the tables that need to be replicated.</p>
     # @param [Hash, Types::DeleteIntegrationTablePropertiesRequest] params
     # @option params [String] :resource_arn
@@ -7498,7 +8158,7 @@ module Aws::Glue
     #   <p>The name of the table to be replicated.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #   }
     #   options = {}
@@ -7861,7 +8521,7 @@ module Aws::Glue
     #   <p>The database in the catalog in which the table resides. For Hive
     #         compatibility, this name is entirely lowercase.</p>
     # @option params [String] :table_name
-    #   <p>The name of the table. For Hive compatibility, 
+    #   <p>The name of the table. For Hive compatibility,
     #         this name is entirely lowercase.</p>
     # @option params [String] :version_id
     #   <p>The ID of the table version to be deleted. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1.</p>
@@ -7971,7 +8631,9 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>The <code>DescribeConnectionType</code> API provides full details of the supported options for a given connection type in Glue.</p>
+    # <p>The <code>DescribeConnectionType</code> API provides full details of the supported options for a given connection type in Glue. The response includes authentication configuration details that show supported authentication types and properties, and RestConfiguration for custom REST-based connection types registered via <code>RegisterConnectionType</code>.</p>
+    #          <p>See also: <code>ListConnectionTypes</code>, <code>RegisterConnectionType</code>, <code>DeleteConnectionType</code>
+    #          </p>
     # @param [Hash, Types::DescribeConnectionTypeRequest] params
     # @option params [String] :connection_type
     #   <p>The name of the connection type to be described.</p>
@@ -8004,7 +8666,9 @@ module Aws::Glue
     #             value: "AllowedValueValueString", # required
     #           }
     #         ],
-    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #         key_override: "String",
+    #         property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #       }
     #     },
     #     connection_options: {
@@ -8020,7 +8684,9 @@ module Aws::Glue
     #             value: "AllowedValueValueString", # required
     #           }
     #         ],
-    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #         key_override: "String",
+    #         property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #       }
     #     },
     #     authentication_configuration: {
@@ -8036,7 +8702,9 @@ module Aws::Glue
     #             value: "AllowedValueValueString", # required
     #           }
     #         ],
-    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #         key_override: "String",
+    #         property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #       },
     #       secret_arn: {
     #         name: "PropertyName", # required
@@ -8050,7 +8718,9 @@ module Aws::Glue
     #             value: "AllowedValueValueString", # required
     #           }
     #         ],
-    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #         key_override: "String",
+    #         property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #       },
     #       o_auth2_properties: {
     #         "PropertyName" => {
@@ -8065,7 +8735,9 @@ module Aws::Glue
     #               value: "AllowedValueValueString", # required
     #             }
     #           ],
-    #           data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #           data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #           key_override: "String",
+    #           property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #         }
     #       },
     #       basic_authentication_properties: {
@@ -8081,7 +8753,9 @@ module Aws::Glue
     #               value: "AllowedValueValueString", # required
     #             }
     #           ],
-    #           data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #           data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #           key_override: "String",
+    #           property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #         }
     #       },
     #       custom_authentication_properties: {
@@ -8097,7 +8771,9 @@ module Aws::Glue
     #               value: "AllowedValueValueString", # required
     #             }
     #           ],
-    #           data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #           data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #           key_override: "String",
+    #           property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #         }
     #       }
     #     },
@@ -8120,7 +8796,9 @@ module Aws::Glue
     #                 value: "AllowedValueValueString", # required
     #               }
     #             ],
-    #             data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #             data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #             key_override: "String",
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #           }
     #         },
     #         connection_property_name_overrides: { # required
@@ -8146,7 +8824,9 @@ module Aws::Glue
     #             value: "AllowedValueValueString", # required
     #           }
     #         ],
-    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #         key_override: "String",
+    #         property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #       }
     #     },
     #     athena_connection_properties: {
@@ -8162,7 +8842,9 @@ module Aws::Glue
     #             value: "AllowedValueValueString", # required
     #           }
     #         ],
-    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #         key_override: "String",
+    #         property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #       }
     #     },
     #     python_connection_properties: {
@@ -8178,7 +8860,9 @@ module Aws::Glue
     #             value: "AllowedValueValueString", # required
     #           }
     #         ],
-    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #         key_override: "String",
+    #         property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
     #       }
     #     },
     #     spark_connection_properties: {
@@ -8194,7 +8878,278 @@ module Aws::Glue
     #             value: "AllowedValueValueString", # required
     #           }
     #         ],
-    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]]
+    #         data_operation_scopes: ["READ" # One of: ["READ", "WRITE"]],
+    #         key_override: "String",
+    #         property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"]
+    #       }
+    #     },
+    #     rest_configuration: {
+    #       global_source_configuration: {
+    #         request_method: "GET" # One of: ["GET", "POST"],
+    #         request_path: "PathString",
+    #         request_parameters: [
+    #           {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           }
+    #         ],
+    #         response_configuration: {
+    #           result_path: "JsonPathString", # required
+    #           error_path: "JsonPathString"
+    #         },
+    #         pagination_configuration: {
+    #           cursor_configuration: {
+    #             next_page: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             },
+    #             limit_parameter: {
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             }
+    #           },
+    #           offset_configuration: {
+    #             offset_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             },
+    #             limit_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             }
+    #           }
+    #         },
+    #         filter_configuration: {
+    #           filter_mode: "QUERY_PARAMS" # One of: ["QUERY_PARAMS", "FILTER_STRING"], # required
+    #           operator_mappings: {
+    #             "String" => "String"
+    #           },
+    #           date_time_format: "String",
+    #           strip_quotes: false,
+    #           between_configuration: {
+    #             low_bound_key: "String",
+    #             high_bound_key: "String",
+    #             template: "String"
+    #           },
+    #           filter_string_configuration: {
+    #             query_parameter_name: "String", # required
+    #             quote_string_values: false,
+    #             quote_character: "String"
+    #           }
+    #         }
+    #       },
+    #       validation_endpoint_configuration: {
+    #         request_method: "GET" # One of: ["GET", "POST"],
+    #         request_path: "PathString",
+    #         request_parameters: [
+    #           {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           }
+    #         ],
+    #         response_configuration: {
+    #           result_path: "JsonPathString", # required
+    #           error_path: "JsonPathString"
+    #         },
+    #         pagination_configuration: {
+    #           cursor_configuration: {
+    #             next_page: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             },
+    #             limit_parameter: {
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             }
+    #           },
+    #           offset_configuration: {
+    #             offset_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             },
+    #             limit_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             }
+    #           }
+    #         },
+    #         filter_configuration: {
+    #           filter_mode: "QUERY_PARAMS" # One of: ["QUERY_PARAMS", "FILTER_STRING"], # required
+    #           operator_mappings: {
+    #             "String" => "String"
+    #           },
+    #           date_time_format: "String",
+    #           strip_quotes: false,
+    #           between_configuration: {
+    #             low_bound_key: "String",
+    #             high_bound_key: "String",
+    #             template: "String"
+    #           },
+    #           filter_string_configuration: {
+    #             query_parameter_name: "String", # required
+    #             quote_string_values: false,
+    #             quote_character: "String"
+    #           }
+    #         }
+    #       },
+    #       entity_configurations: {
+    #         "EntityConfigurationMapKeyString" => {
+    #           source_configuration: {
+    #             request_method: "GET" # One of: ["GET", "POST"],
+    #             request_path: "PathString",
+    #             request_parameters: [
+    #               {
+    #                 name: "PropertyName", # required
+    #                 key_override: "ConnectorPropertyKey",
+    #                 required: false, # required
+    #                 default_value: "String",
+    #                 allowed_values: ["String"],
+    #                 property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                 property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #                 format: "String"
+    #               }
+    #             ],
+    #             response_configuration: {
+    #               result_path: "JsonPathString", # required
+    #               error_path: "JsonPathString"
+    #             },
+    #             pagination_configuration: {
+    #               cursor_configuration: {
+    #                 next_page: { # required
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey"
+    #                   }
+    #                 },
+    #                 limit_parameter: {
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey"
+    #                   }
+    #                 }
+    #               },
+    #               offset_configuration: {
+    #                 offset_parameter: { # required
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey"
+    #                   }
+    #                 },
+    #                 limit_parameter: { # required
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey"
+    #                   }
+    #                 }
+    #               }
+    #             },
+    #             filter_configuration: {
+    #               filter_mode: "QUERY_PARAMS" # One of: ["QUERY_PARAMS", "FILTER_STRING"], # required
+    #               operator_mappings: {
+    #                 "String" => "String"
+    #               },
+    #               date_time_format: "String",
+    #               strip_quotes: false,
+    #               between_configuration: {
+    #                 low_bound_key: "String",
+    #                 high_bound_key: "String",
+    #                 template: "String"
+    #               },
+    #               filter_string_configuration: {
+    #                 query_parameter_name: "String", # required
+    #                 quote_string_values: false,
+    #                 quote_character: "String"
+    #               }
+    #             }
+    #           },
+    #           schema: {
+    #             "FieldDefinitionMapKeyString" => {
+    #               name: "String", # required
+    #               field_data_type: "INT" # One of: ["INT", "SMALLINT", "BIGINT", "FLOAT", "LONG", "DATE", "BOOLEAN", "MAP", "ARRAY", "STRING", "TIMESTAMP", "DECIMAL", "BYTE", "SHORT", "DOUBLE", "STRUCT", "BINARY", "UNION"], # required
+    #               response_date_format: "String",
+    #               is_partitionable: false,
+    #               is_nullable: false,
+    #               is_queryable: false,
+    #               is_orderable: false,
+    #               filter_overrides: {
+    #                 field_name: "String",
+    #                 operator_mappings: {
+    #                   "String" => "String"
+    #                 },
+    #                 between_configuration: {
+    #                   low_bound_key: "String",
+    #                   high_bound_key: "String",
+    #                   template: "String"
+    #                 },
+    #                 date_time_format: "String"
+    #               }
+    #             }
+    #           }
+    #         }
     #       }
     #     }
     #   }
@@ -8235,7 +9190,7 @@ module Aws::Glue
     #         field_name: "EntityFieldName",
     #         label: "FieldLabel",
     #         description: "FieldDescription",
-    #         field_type: "INT" # One of: ["INT", "SMALLINT", "BIGINT", "FLOAT", "LONG", "DATE", "BOOLEAN", "MAP", "ARRAY", "STRING", "TIMESTAMP", "DECIMAL", "BYTE", "SHORT", "DOUBLE", "STRUCT"],
+    #         field_type: "INT" # One of: ["INT", "SMALLINT", "BIGINT", "FLOAT", "LONG", "DATE", "BOOLEAN", "MAP", "ARRAY", "STRING", "TIMESTAMP", "DECIMAL", "BYTE", "SHORT", "DOUBLE", "STRUCT", "BINARY", "UNION"],
     #         is_primary_key: false,
     #         is_nullable: false,
     #         is_retrievable: false,
@@ -8277,7 +9232,7 @@ module Aws::Glue
     #     integration_arn: "String128",
     #     marker: "String128",
     #     max_records: 1,
-    #     target_arn: "String128"
+    #     target_arn: "String512"
     #   }
     #   options = {}
     #   response = client.describe_inbound_integrations(params, options)
@@ -8286,8 +9241,8 @@ module Aws::Glue
     #   {
     #     inbound_integrations: [
     #       {
-    #         source_arn: "String128", # required
-    #         target_arn: "String128", # required
+    #         source_arn: "String512", # required
+    #         target_arn: "String512", # required
     #         integration_arn: "String128", # required
     #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "MODIFYING", "FAILED", "DELETING", "SYNCING", "NEEDS_ATTENTION"], # required
     #         create_time: Time.now, # required
@@ -8296,7 +9251,8 @@ module Aws::Glue
     #           source_properties: {
     #             "IntegrationString" => "IntegrationString"
     #           },
-    #           continuous_sync: false
+    #           continuous_sync: false,
+    #           target_namespace: "TargetNamespace"
     #         },
     #         errors: [
     #           {
@@ -8343,8 +9299,8 @@ module Aws::Glue
     #   {
     #     integrations: [
     #       {
-    #         source_arn: "String128", # required
-    #         target_arn: "String128", # required
+    #         source_arn: "String512", # required
+    #         target_arn: "String512", # required
     #         description: "IntegrationDescription",
     #         integration_name: "String128", # required
     #         integration_arn: "String128", # required
@@ -8365,7 +9321,8 @@ module Aws::Glue
     #           source_properties: {
     #             "IntegrationString" => "IntegrationString"
     #           },
-    #           continuous_sync: false
+    #           continuous_sync: false,
+    #           target_namespace: "TargetNamespace"
     #         },
     #         errors: [
     #           {
@@ -8381,6 +9338,113 @@ module Aws::Glue
     # @return [Types::DescribeIntegrationsResponse]
     def describe_integrations(params = {}, options = {})
       request = build_request(:describe_integrations, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes the association of one or more glossary terms from an asset in Glue Data Catalog.</p>
+    # @param [Hash, Types::DisassociateGlossaryTermsRequest] params
+    # @option params [String] :asset_identifier
+    #   <p>The unique identifier of the asset to disassociate glossary terms from.</p>
+    # @option params [String] :iterable_form_name
+    #   <p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the glossary terms are disassociated from an item within the iterable form rather than the asset itself.</p>
+    # @option params [String] :item_identifier
+    #   <p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>
+    # @option params [Array<String>] :glossary_term_identifiers
+    #   <p>The list of glossary term identifiers to disassociate from the asset.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     asset_identifier: "AssetId", # required
+    #     iterable_form_name: "IterableFormName",
+    #     item_identifier: "ItemIdentifier",
+    #     glossary_term_identifiers: ["GlossaryTermId"], # required
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.disassociate_glossary_terms(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     asset_identifier: "AssetId",
+    #     iterable_form_name: "IterableFormName",
+    #     item_identifier: "ItemIdentifier",
+    #     glossary_terms: ["GlossaryTermId"]
+    #   }
+    # @return [Types::DisassociateGlossaryTermsResponse]
+    def disassociate_glossary_terms(params = {}, options = {})
+      request = build_request(:disassociate_glossary_terms, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the metadata for an asset in Glue Data Catalog, including its forms, additional attachments, and associated glossary terms.</p>
+    # @param [Hash, Types::GetAssetInput] params
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the asset to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "AssetId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_asset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "AssetId", # required
+    #     name: "AssetName",
+    #     description: "AssetDescription",
+    #     created_at: Time.now,
+    #     updated_at: Time.now,
+    #     asset_type_id: "AssetTypeId", # required
+    #     glossary_terms: ["GlossaryTermId"],
+    #     forms: {
+    #       "AssetFormKey" => {
+    #         form_type_id: "FormTypeId",
+    #         content: "FormContent"
+    #       }
+    #     },
+    #     attachments: {
+    #       "AssetFormKey" => {
+    #         form_type_id: "FormTypeId",
+    #         content: "FormContent"
+    #       }
+    #     },
+    #     iterable_forms: {
+    #       "IterableFormKey" => {
+    #         form_type_id: "FormTypeId"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetAssetOutput]
+    def get_asset(params = {}, options = {})
+      request = build_request(:get_asset, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves an asset type in Glue Data Catalog by its identifier.</p>
+    # @param [Hash, Types::GetAssetTypeRequest] params
+    # @option params [String] :identifier
+    #   <p>The identifier of the asset type to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "AssetTypeId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_asset_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "AssetTypeId",
+    #     name: "AssetTypeName",
+    #     forms: {
+    #       "AssetTypeFormKey" => {
+    #         form_type_identifier: "FormTypeId", # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetAssetTypeResponse]
+    def get_asset_type(params = {}, options = {})
+      request = build_request(:get_asset_type, params)
       request.send_request(options)
     end
 
@@ -8626,13 +9690,16 @@ module Aws::Glue
     # @option params [Boolean] :include_root
     #   <p>Whether to list the default catalog in the account and region in the response. Defaults to <code>false</code>. When <code>true</code> and <code>ParentCatalogId = NULL | Amazon Web Services Account ID</code>, all catalogs and the default catalog are enumerated in the response.</p>
     #            <p>When the <code>ParentCatalogId</code> is not equal to null, and this attribute is passed as <code>false</code> or <code>true</code>, an <code>InvalidInputException</code> is thrown.</p>
+    # @option params [Boolean] :has_databases
+    #   <p>When <code>true</code>, the response only includes catalogs that can contain databases. Some catalogs are organizational containers that hold only other catalogs, not databases. When this parameter is set to <code>true</code>, those container-only catalogs are excluded, and only catalogs capable of containing databases are returned. Defaults to <code>false</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     parent_catalog_id: "CatalogIdString",
     #     next_token: "Token",
     #     max_results: 1,
     #     recursive: false,
-    #     include_root: false
+    #     include_root: false,
+    #     has_databases: false
     #   }
     #   options = {}
     #   response = client.get_catalogs(params, options)
@@ -9087,12 +10154,15 @@ module Aws::Glue
     #   <p>The maximum size of the response.</p>
     # @option params [String] :next_token
     #   <p>A continuation token, if this is a continuation call.</p>
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     database_name: "DatabaseName", # required
     #     table_name: "NameString", # required
     #     max_results: 1,
-    #     next_token: "Token"
+    #     next_token: "Token",
+    #     catalog_id: "CatalogIdString"
     #   }
     #   options = {}
     #   response = client.get_column_statistics_task_runs(params, options)
@@ -9136,10 +10206,13 @@ module Aws::Glue
     #   <p>The name of the database where the table resides.</p>
     # @option params [String] :table_name
     #   <p>The name of the table for which to retrieve column statistics.</p>
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString"
     #   }
     #   options = {}
     #   response = client.get_column_statistics_task_settings(params, options)
@@ -9234,7 +10307,7 @@ module Aws::Glue
     #         secret_arn: "SecretArn",
     #         kms_key_arn: "KmsKeyArn",
     #         o_auth2_properties: {
-    #           o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"],
+    #           o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER", "REFRESH_TOKEN"],
     #           o_auth2_client_application: {
     #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
     #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference"
@@ -9323,7 +10396,7 @@ module Aws::Glue
     #           secret_arn: "SecretArn",
     #           kms_key_arn: "KmsKeyArn",
     #           o_auth2_properties: {
-    #             o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"],
+    #             o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER", "REFRESH_TOKEN"],
     #             o_auth2_client_application: {
     #               user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
     #               aws_managed_client_application_reference: "AWSManagedClientApplicationReference"
@@ -9465,7 +10538,8 @@ module Aws::Glue
     #       lake_formation_configuration: {
     #         use_lake_formation_credentials: false,
     #         account_id: "AccountId"
-    #       }
+    #       },
+    #       catalog_id: "CatalogIdString"
     #     }
     #   }
     # @return [Types::GetCrawlerResponse]
@@ -9637,7 +10711,8 @@ module Aws::Glue
     #         lake_formation_configuration: {
     #           use_lake_formation_credentials: false,
     #           account_id: "AccountId"
-    #         }
+    #         },
+    #         catalog_id: "CatalogIdString"
     #       }
     #     ],
     #     next_token: "Token"
@@ -9671,6 +10746,33 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Retrieves the URL for the Spark monitoring dashboard for a Glue resource.</p>
+    # @param [Hash, Types::GetDashboardUrlRequest] params
+    # @option params [String] :resource_id
+    #   <p>The unique identifier of the resource for which to retrieve the dashboard URL.</p>
+    # @option params [String] :resource_type
+    #   <p>The type of the resource. Valid values are <code>SESSION</code> and <code>JOB</code>.</p>
+    # @option params [String] :request_origin
+    #   <p>The origin of the request. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_id: "NameString", # required
+    #     resource_type: "JOB" # One of: ["JOB", "SESSION"], # required
+    #     request_origin: "OrchestrationNameString"
+    #   }
+    #   options = {}
+    #   response = client.get_dashboard_url(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     url: "SensitiveUrl", # required
+    #   }
+    # @return [Types::GetDashboardUrlResponse]
+    def get_dashboard_url(params = {}, options = {})
+      request = build_request(:get_dashboard_url, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves the security configuration for a specified catalog.</p>
     # @param [Hash, Types::GetDataCatalogEncryptionSettingsRequest] params
     # @option params [String] :catalog_id
@@ -9700,6 +10802,31 @@ module Aws::Glue
     # @return [Types::GetDataCatalogEncryptionSettingsResponse]
     def get_data_catalog_encryption_settings(params = {}, options = {})
       request = build_request(:get_data_catalog_encryption_settings, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the current export configuration for the Glue Data Catalog. The export configuration controls whether catalog metadata is exported to S3 Tables.</p>
+    # @param [Hash, Types::GetDataCatalogExportConfigurationInput] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.get_data_catalog_export_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     export_setting: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     status: "ENABLING" # One of: ["ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"],
+    #     encryption_configuration: {
+    #       sse_algorithm: "SseAlgorithm",
+    #       kms_key_arn: "KmsKeyArnString"
+    #     },
+    #     s3_table_bucket_arn: "S3TableBucketArn",
+    #     created_at: Time.now,
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::GetDataCatalogExportConfigurationOutput]
+    def get_data_catalog_export_configuration(params = {}, options = {})
+      request = build_request(:get_data_catalog_export_configuration, params)
       request.send_request(options)
     end
 
@@ -9820,6 +10947,9 @@ module Aws::Glue
     #         evaluated_rule: "DataQualityRuleResultDescription",
     #         rule_metrics: {
     #           "NameString" => 1.0
+    #         },
+    #         labels: {
+    #           "NameString" => "NameString"
     #         }
     #       }
     #     ],
@@ -9830,6 +10960,13 @@ module Aws::Glue
     #         evaluation_message: "DataQualityRuleResultDescription",
     #         evaluated_metrics: {
     #           "NameString" => 1.0
+    #         },
+    #         evaluated_distributions: {
+    #           "NameString" => {
+    #             bin_edges: ["GenericString"],
+    #             count: [1],
+    #             data_type: "NameString"
+    #           }
     #         }
     #       }
     #     ],
@@ -9861,6 +10998,123 @@ module Aws::Glue
     # @return [Types::GetDataQualityResultResponse]
     def get_data_quality_result(params = {}, options = {})
       request = build_request(:get_data_quality_result, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the result of a data quality rule evaluation published from any supported data platform.</p>
+    # @param [Hash, Types::GetDataQualityResultV2Request] params
+    # @option params [String] :result_id
+    #   <p>A unique result ID for the data quality result.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     result_id: "HashString", # required
+    #   }
+    #   options = {}
+    #   response = client.get_data_quality_result_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     result_id: "HashString",
+    #     data_source: {
+    #       glue_table: {
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString"
+    #         }
+    #       },
+    #       data_quality_glue_table: {
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         catalog_id: "NameString",
+    #         connection_name: "NameString",
+    #         additional_options: {
+    #           "NameString" => "DescriptionString"
+    #         },
+    #         pre_processing_query: "PreProcessingQueryString"
+    #       }
+    #     },
+    #     profile_id: "HashString",
+    #     dimensions: {
+    #       "NameString" => "NameString"
+    #     },
+    #     tags: {
+    #       "NameString" => "NameString"
+    #     },
+    #     execution_started_on: Time.now,
+    #     execution_completed_on: Time.now,
+    #     result_published_on: Time.now,
+    #     score: 1.0,
+    #     rule_results: [
+    #       {
+    #         name: "NameString",
+    #         description: "DataQualityRuleResultDescription",
+    #         evaluation_message: "DataQualityRuleResultDescription",
+    #         result: "PASS" # One of: ["PASS", "FAIL", "ERROR"],
+    #         evaluated_metrics: {
+    #           "NameString" => 1.0
+    #         },
+    #         evaluated_rule: "DataQualityRuleResultDescription",
+    #         rule_metrics: {
+    #           "NameString" => 1.0
+    #         },
+    #         labels: {
+    #           "NameString" => "NameString"
+    #         }
+    #       }
+    #     ],
+    #     analyzer_results: [
+    #       {
+    #         name: "NameString",
+    #         description: "DataQualityRuleResultDescription",
+    #         evaluation_message: "DataQualityRuleResultDescription",
+    #         evaluated_metrics: {
+    #           "NameString" => 1.0
+    #         },
+    #         evaluated_distributions: {
+    #           "NameString" => {
+    #             bin_edges: ["GenericString"],
+    #             count: [1],
+    #             data_type: "NameString"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     observations: [
+    #       {
+    #         description: "DataQualityObservationDescription",
+    #         metric_based_observation: {
+    #           metric_name: "NameString",
+    #           statistic_id: "HashString",
+    #           metric_values: {
+    #             actual_value: 1.0,
+    #             expected_value: 1.0,
+    #             lower_limit: 1.0,
+    #             upper_limit: 1.0
+    #           },
+    #           new_rules: ["NameString"]
+    #         }
+    #       }
+    #     ],
+    #     evaluation_context: "NameString",
+    #     descriptors: {
+    #       "NameString" => "NameString"
+    #     },
+    #     aggregated_metrics: {
+    #       total_rows_processed: 1.0,
+    #       total_rows_passed: 1.0,
+    #       total_rows_failed: 1.0,
+    #       total_rules_processed: 1.0,
+    #       total_rules_passed: 1.0,
+    #       total_rules_failed: 1.0
+    #     },
+    #     ruleset_name: "NameString"
+    #   }
+    # @return [Types::GetDataQualityResultV2Response]
+    def get_data_quality_result_v2(params = {}, options = {})
+      request = build_request(:get_data_quality_result_v2, params)
       request.send_request(options)
     end
 
@@ -9910,7 +11164,11 @@ module Aws::Glue
     #     execution_time: 1,
     #     recommended_ruleset: "DataQualityRulesetString",
     #     created_ruleset_name: "NameString",
-    #     data_quality_security_configuration: "NameString"
+    #     data_quality_security_configuration: "NameString",
+    #     additional_run_options: {
+    #       custom_log_group_prefix: "GenericString"
+    #     },
+    #     recommendation_mode: "BASIC" # One of: ["BASIC", "ADVANCED"]
     #   }
     # @return [Types::GetDataQualityRuleRecommendationRunResponse]
     def get_data_quality_rule_recommendation_run(params = {}, options = {})
@@ -9991,7 +11249,56 @@ module Aws::Glue
     #     additional_run_options: {
     #       cloud_watch_metrics_enabled: false,
     #       results_s3_prefix: "UriString",
-    #       composite_rule_evaluation_method: "COLUMN" # One of: ["COLUMN", "ROW"]
+    #       composite_rule_evaluation_method: "COLUMN" # One of: ["COLUMN", "ROW"],
+    #       custom_log_group_prefix: "GenericString",
+    #       row_level_results: {
+    #         max_rows_to_write: 1,
+    #         result_type: "ALL" # One of: ["ALL", "PASSED_ONLY", "FAILED_ONLY"],
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString"
+    #         }
+    #       },
+    #       profiling_results: {
+    #         write_profiling_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString"
+    #         },
+    #         distribution_results: {
+    #           write_distribution_results_enabled: false,
+    #           catalog_table_config: {
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             s3_location: "UriString",
+    #             catalog_id: "NameString"
+    #           }
+    #         }
+    #       },
+    #       observation_scope: "ALL" # One of: ["ALL", "NONE"],
+    #       observation_mode: "SCHEDULED" # One of: ["SCHEDULED", "FIXED"],
+    #       data_quality_rule_results: {
+    #         write_data_quality_rule_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString"
+    #         }
+    #       },
+    #       observation_results: {
+    #         write_observation_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString"
+    #         }
+    #       }
     #     },
     #     status: "STARTING" # One of: ["STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"],
     #     error_string: "GenericString",
@@ -10037,7 +11344,7 @@ module Aws::Glue
     #   <p>The ID of the Data Catalog in which the database resides. If none is provided, the Amazon Web Services
     #         account ID is used by default.</p>
     # @option params [String] :name
-    #   <p>The name of the database to retrieve. For Hive compatibility, this 
+    #   <p>The name of the database to retrieve. For Hive compatibility, this
     #         should be all lowercase.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -10367,7 +11674,78 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Retrieves the current Glue Identity Center configuration details, including the associated Identity Center instance and 
+    # <p>Retrieves a form type in Glue Data Catalog by its identifier.</p>
+    # @param [Hash, Types::GetFormTypeRequest] params
+    # @option params [String] :identifier
+    #   <p>The identifier of the form type to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "FormTypeId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_form_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "FormTypeId",
+    #     name: "FormTypeName",
+    #     schema: "FormTypeSchema"
+    #   }
+    # @return [Types::GetFormTypeResponse]
+    def get_form_type(params = {}, options = {})
+      request = build_request(:get_form_type, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a business glossary in Glue Data Catalog by its identifier.</p>
+    # @param [Hash, Types::GetGlossaryRequest] params
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the glossary to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "GlossaryId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_glossary(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "GlossaryId",
+    #     name: "GlossaryName",
+    #     description: "MetadataDescription"
+    #   }
+    # @return [Types::GetGlossaryResponse]
+    def get_glossary(params = {}, options = {})
+      request = build_request(:get_glossary, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a glossary term in Glue Data Catalog by its identifier.</p>
+    # @param [Hash, Types::GetGlossaryTermRequest] params
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the glossary term to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "GlossaryTermId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_glossary_term(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "GlossaryTermId",
+    #     glossary_id: "GlossaryId",
+    #     name: "GlossaryTermName",
+    #     short_description: "GlossaryShortDescription",
+    #     long_description: "GlossaryLongDescription"
+    #   }
+    # @return [Types::GetGlossaryTermResponse]
+    def get_glossary_term(params = {}, options = {})
+      request = build_request(:get_glossary_term, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the current Glue Identity Center configuration details, including the associated Identity Center instance and
     #       application information.</p>
     # @param [Hash, Types::GetGlueIdentityCenterConfigurationRequest] params
     # @example Request syntax with placeholder values
@@ -10379,7 +11757,8 @@ module Aws::Glue
     #   {
     #     application_arn: "ApplicationArn",
     #     instance_arn: "IdentityCenterInstanceArn",
-    #     scopes: ["GenericString"]
+    #     scopes: ["GenericString"],
+    #     user_background_sessions_enabled: false
     #   }
     # @return [Types::GetGlueIdentityCenterConfigurationResponse]
     def get_glue_identity_center_configuration(params = {}, options = {})
@@ -10393,14 +11772,15 @@ module Aws::Glue
     #   <p>The connection ARN of the source, or the database ARN of the target.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #   }
     #   options = {}
     #   response = client.get_integration_resource_property(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     resource_arn: "String128",
+    #     resource_arn: "String512",
+    #     resource_property_arn: "String512",
     #     source_processing_properties: {
     #       role_arn: "String128"
     #     },
@@ -10420,15 +11800,15 @@ module Aws::Glue
     # <p>This API is used to retrieve optional override properties for the tables that need to be replicated. These properties can include properties for filtering and partition for source and target tables.</p>
     # @param [Hash, Types::GetIntegrationTablePropertiesRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving 
-    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration 
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving
+    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration
     #         table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     # @option params [String] :table_name
     #   <p>The name of the table to be replicated.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #   }
     #   options = {}
@@ -10436,7 +11816,7 @@ module Aws::Glue
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     resource_arn: "String128",
+    #     resource_arn: "String512",
     #     table_name: "String128",
     #     source_table_config: {
     #       fields: ["String128"],
@@ -10453,7 +11833,8 @@ module Aws::Glue
     #           conversion_spec: "String128"
     #         }
     #       ],
-    #       target_table_name: "String128"
+    #       target_table_name: "String128",
+    #       integration_arn: "String128"
     #     }
     #   }
     # @return [Types::GetIntegrationTablePropertiesResponse]
@@ -14349,6 +15730,46 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Get the associated metadata/information for a task run, given a task run ID.</p>
+    # @param [Hash, Types::GetMaterializedViewRefreshTaskRunRequest] params
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>
+    # @option params [String] :materialized_view_refresh_task_run_id
+    #   <p>The identifier for the particular materialized view refresh task run.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog_id: "CatalogIdString", # required
+    #     materialized_view_refresh_task_run_id: "UUIDv4", # required
+    #   }
+    #   options = {}
+    #   response = client.get_materialized_view_refresh_task_run(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     materialized_view_refresh_task_run: {
+    #       customer_id: "AccountId",
+    #       materialized_view_refresh_task_run_id: "UUIDv4",
+    #       database_name: "DatabaseName",
+    #       table_name: "TableName",
+    #       catalog_id: "CatalogIdString",
+    #       role: "Role",
+    #       status: "STARTING" # One of: ["STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"],
+    #       creation_time: Time.now,
+    #       last_updated: Time.now,
+    #       start_time: Time.now,
+    #       end_time: Time.now,
+    #       error_message: "DescriptionString",
+    #       dpu_seconds: 1.0,
+    #       refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
+    #       processed_bytes: 1
+    #     }
+    #   }
+    # @return [Types::GetMaterializedViewRefreshTaskRunResponse]
+    def get_materialized_view_refresh_task_run(params = {}, options = {})
+      request = build_request(:get_materialized_view_refresh_task_run, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves information about a specified partition.</p>
     # @param [Hash, Types::GetPartitionRequest] params
     # @option params [String] :catalog_id
@@ -14360,12 +15781,19 @@ module Aws::Glue
     #   <p>The name of the partition's table.</p>
     # @option params [Array<String>] :partition_values
     #   <p>The values that define the partition.</p>
+    # @option params [Types::AuditContext] :audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
     #     partition_values: ["ValueString"], # required
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false
+    #     }
     #   }
     #   options = {}
     #   response = client.get_partition(params, options)
@@ -14623,6 +16051,8 @@ module Aws::Glue
     #   <p>The transaction ID at which to read the partition contents.</p>
     # @option params [Time] :query_as_of_time
     #   <p>The time as of when to read the partition contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>
+    # @option params [Types::AuditContext] :audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog_id: "CatalogIdString",
@@ -14637,7 +16067,12 @@ module Aws::Glue
     #     max_results: 1,
     #     exclude_column_schema: false,
     #     transaction_id: "TransactionIdString",
-    #     query_as_of_time: Time.now
+    #     query_as_of_time: Time.now,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false
+    #     }
     #   }
     #   options = {}
     #   response = client.get_partitions(params, options)
@@ -15218,12 +16653,38 @@ module Aws::Glue
     #       execution_time: 1.0,
     #       dpu_seconds: 1.0,
     #       idle_timeout: 1,
-    #       profile_name: "NameString"
+    #       profile_name: "NameString",
+    #       session_type: "LIVY" # One of: ["LIVY", "SPARK_CONNECT"]
     #     }
     #   }
     # @return [Types::GetSessionResponse]
     def get_session(params = {}, options = {})
       request = build_request(:get_session, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the Spark Connect endpoint URL and authentication token for an interactive session.</p>
+    # @param [Hash, Types::GetSessionEndpointRequest] params
+    # @option params [String] :session_id
+    #   <p>The unique identifier of the interactive session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     session_id: "NameString", # required
+    #   }
+    #   options = {}
+    #   response = client.get_session_endpoint(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     spark_connect: { # required
+    #       url: "SparkConnectEndpointUrl", # required
+    #       auth_token: "SensitiveString", # required
+    #       auth_token_expiration_time: Time.now, # required
+    #     }
+    #   }
+    # @return [Types::GetSessionEndpointResponse]
+    def get_session_endpoint(params = {}, options = {})
+      request = build_request(:get_session_endpoint, params)
       request.send_request(options)
     end
 
@@ -15271,6 +16732,51 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Retrieves the system logs for a job run.</p>
+    # @param [Hash, Types::GetSystemLogsForJobRunRequest] params
+    # @option params [String] :job_name
+    #   <p>The name of the job.</p>
+    # @option params [String] :run_id
+    #   <p>The ID of the job run.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     job_name: "NameString", # required
+    #     run_id: "IdString", # required
+    #   }
+    #   options = {}
+    #   response = client.get_system_logs_for_job_run(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     system_logs_url: "Url"
+    #   }
+    # @return [Types::GetSystemLogsForJobRunResponse]
+    def get_system_logs_for_job_run(params = {}, options = {})
+      request = build_request(:get_system_logs_for_job_run, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the system logs for an interactive session.</p>
+    # @param [Hash, Types::GetSystemLogsForSessionRequest] params
+    # @option params [String] :id
+    #   <p>The ID of the session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "NameString", # required
+    #   }
+    #   options = {}
+    #   response = client.get_system_logs_for_session(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     system_logs_url: "Url"
+    #   }
+    # @return [Types::GetSystemLogsForSessionResponse]
+    def get_system_logs_for_session(params = {}, options = {})
+      request = build_request(:get_system_logs_for_session, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves the <code>Table</code> definition in a Data Catalog for
     #       a specified table.</p>
     # @param [Hash, Types::GetTableRequest] params
@@ -15287,8 +16793,27 @@ module Aws::Glue
     #   <p>The transaction ID at which to read the table contents. </p>
     # @option params [Time] :query_as_of_time
     #   <p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>
+    # @option params [Types::AuditContext] :audit_context
+    #   <p>A structure containing the Lake Formation <a href="https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html">audit context</a>.</p>
     # @option params [Boolean] :include_status_details
     #   <p>Specifies whether to include status details related to a request to create or update an Glue Data Catalog view.</p>
+    # @option params [Array<String>] :attributes_to_get
+    #   <p>Specifies the table fields returned by the <code>GetTable</code> call. This parameter doesn't accept an empty list.</p>
+    #            <p>The following are the valid combinations of values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DEFAULT</code> - Returns the Hive-style table definition only.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>LATEST_ICEBERG_METADATA</code> - Returns only the latest Apache Iceberg table metadata.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DEFAULT</code>, <code>LATEST_ICEBERG_METADATA</code> - Returns both the Hive-style table definition and the latest Apache Iceberg table metadata.</p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog_id: "CatalogIdString",
@@ -15296,7 +16821,13 @@ module Aws::Glue
     #     name: "NameString", # required
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
-    #     include_status_details: false
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false
+    #     },
+    #     include_status_details: false,
+    #     attributes_to_get: ["NAME" # One of: ["NAME", "TABLE_TYPE", "DEFAULT", "LATEST_ICEBERG_METADATA"]]
     #   }
     #   options = {}
     #   response = client.get_table(params, options)
@@ -15399,8 +16930,23 @@ module Aws::Glue
     #       },
     #       view_definition: {
     #         is_protected: false,
+    #         is_managed: false,
     #         definer: "ArnString",
+    #         view_version_id: 1,
+    #         view_version_token: "HashString",
+    #         refresh_seconds: 1,
+    #         last_refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
     #         sub_objects: ["ArnString"],
+    #         sub_object_version_ids: [1],
+    #         sub_objects_statistics: [
+    #           {
+    #             source_type: "HIVE_PARQUET" # One of: ["HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"],
+    #             glue_version_id: "NullableString",
+    #             partition_count: 1,
+    #             file_count: 1,
+    #             total_file_bytes: 1
+    #           }
+    #         ],
     #         representations: [
     #           {
     #             dialect: "REDSHIFT" # One of: ["REDSHIFT", "ATHENA", "SPARK"],
@@ -15410,9 +16956,70 @@ module Aws::Glue
     #             validation_connection: "NameString",
     #             is_stale: false
     #           }
-    #         ]
+    #         ],
+    #         spark_pipeline_info: {
+    #           "SparkPipelineInfoKey" => "SparkPipelineInfoValue"
+    #         }
     #       },
     #       is_multi_dialect_view: false,
+    #       is_materialized_view: false,
+    #       iceberg_table_metadata: {
+    #         format_version: "VersionString",
+    #         table_uuid: "TableIdString",
+    #         location: "LocationString",
+    #         properties: {
+    #           "NullableString" => "NullableString"
+    #         },
+    #         schemas: [
+    #           {
+    #             schema_id: 1,
+    #             identifier_field_ids: [1],
+    #             type: "struct" # One of: ["struct"],
+    #             fields: [ # required
+    #               {
+    #                 id: 1, # required
+    #                 name: "ColumnNameString", # required
+    #                 type: ""null"", # required
+    #                 required: false, # required
+    #                 doc: "CommentString",
+    #                 initial_default: ""null"",
+    #                 write_default: ""null""
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         current_schema_id: 1,
+    #         last_column_id: 1,
+    #         partition_specs: [
+    #           {
+    #             fields: [ # required
+    #               {
+    #                 source_id: 1, # required
+    #                 transform: "IcebergTransformString", # required
+    #                 name: "ColumnNameString", # required
+    #                 field_id: 1
+    #               }
+    #             ],
+    #             spec_id: 1
+    #           }
+    #         ],
+    #         default_spec_id: 1,
+    #         last_partition_id: 1,
+    #         sort_orders: [
+    #           {
+    #             order_id: 1, # required
+    #             fields: [ # required
+    #               {
+    #                 source_id: 1, # required
+    #                 transform: "IcebergTransformString", # required
+    #                 direction: "asc" # One of: ["asc", "desc"], # required
+    #                 null_order: "nulls-first" # One of: ["nulls-first", "nulls-last"], # required
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         default_sort_order_id: 1
+    #       },
     #       status: {
     #         requested_by: "NameString",
     #         updated_by: "NameString",
@@ -15442,6 +17049,9 @@ module Aws::Glue
     #             }
     #           ]
     #         }
+    #       },
+    #       rls_properties: {
+    #         default_rls_policy: "NameString"
     #       }
     #     }
     #   }
@@ -15570,12 +17180,19 @@ module Aws::Glue
     #         this name is entirely lowercase.</p>
     # @option params [String] :version_id
     #   <p>The ID value of the table version to be retrieved. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1. </p>
+    # @option params [Types::AuditContext] :audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
-    #     version_id: "VersionString"
+    #     version_id: "VersionString",
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false
+    #     }
     #   }
     #   options = {}
     #   response = client.get_table_version(params, options)
@@ -15679,8 +17296,23 @@ module Aws::Glue
     #         },
     #         view_definition: {
     #           is_protected: false,
+    #           is_managed: false,
     #           definer: "ArnString",
+    #           view_version_id: 1,
+    #           view_version_token: "HashString",
+    #           refresh_seconds: 1,
+    #           last_refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
     #           sub_objects: ["ArnString"],
+    #           sub_object_version_ids: [1],
+    #           sub_objects_statistics: [
+    #             {
+    #               source_type: "HIVE_PARQUET" # One of: ["HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"],
+    #               glue_version_id: "NullableString",
+    #               partition_count: 1,
+    #               file_count: 1,
+    #               total_file_bytes: 1
+    #             }
+    #           ],
     #           representations: [
     #             {
     #               dialect: "REDSHIFT" # One of: ["REDSHIFT", "ATHENA", "SPARK"],
@@ -15690,9 +17322,70 @@ module Aws::Glue
     #               validation_connection: "NameString",
     #               is_stale: false
     #             }
-    #           ]
+    #           ],
+    #           spark_pipeline_info: {
+    #             "SparkPipelineInfoKey" => "SparkPipelineInfoValue"
+    #           }
     #         },
     #         is_multi_dialect_view: false,
+    #         is_materialized_view: false,
+    #         iceberg_table_metadata: {
+    #           format_version: "VersionString",
+    #           table_uuid: "TableIdString",
+    #           location: "LocationString",
+    #           properties: {
+    #             "NullableString" => "NullableString"
+    #           },
+    #           schemas: [
+    #             {
+    #               schema_id: 1,
+    #               identifier_field_ids: [1],
+    #               type: "struct" # One of: ["struct"],
+    #               fields: [ # required
+    #                 {
+    #                   id: 1, # required
+    #                   name: "ColumnNameString", # required
+    #                   type: ""null"", # required
+    #                   required: false, # required
+    #                   doc: "CommentString",
+    #                   initial_default: ""null"",
+    #                   write_default: ""null""
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           current_schema_id: 1,
+    #           last_column_id: 1,
+    #           partition_specs: [
+    #             {
+    #               fields: [ # required
+    #                 {
+    #                   source_id: 1, # required
+    #                   transform: "IcebergTransformString", # required
+    #                   name: "ColumnNameString", # required
+    #                   field_id: 1
+    #                 }
+    #               ],
+    #               spec_id: 1
+    #             }
+    #           ],
+    #           default_spec_id: 1,
+    #           last_partition_id: 1,
+    #           sort_orders: [
+    #             {
+    #               order_id: 1, # required
+    #               fields: [ # required
+    #                 {
+    #                   source_id: 1, # required
+    #                   transform: "IcebergTransformString", # required
+    #                   direction: "asc" # One of: ["asc", "desc"], # required
+    #                   null_order: "nulls-first" # One of: ["nulls-first", "nulls-last"], # required
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           default_sort_order_id: 1
+    #         },
     #         status: {
     #           requested_by: "NameString",
     #           updated_by: "NameString",
@@ -15722,6 +17415,9 @@ module Aws::Glue
     #               }
     #             ]
     #           }
+    #         },
+    #         rls_properties: {
+    #           default_rls_policy: "NameString"
     #         }
     #       },
     #       version_id: "VersionString"
@@ -15749,13 +17445,20 @@ module Aws::Glue
     #   <p>A continuation token, if this is not the first call.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of table versions to return in one response.</p>
+    # @option params [Types::AuditContext] :audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
     #     next_token: "Token",
-    #     max_results: 1
+    #     max_results: 1,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false
+    #     }
     #   }
     #   options = {}
     #   response = client.get_table_versions(params, options)
@@ -15860,8 +17563,23 @@ module Aws::Glue
     #           },
     #           view_definition: {
     #             is_protected: false,
+    #             is_managed: false,
     #             definer: "ArnString",
+    #             view_version_id: 1,
+    #             view_version_token: "HashString",
+    #             refresh_seconds: 1,
+    #             last_refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
     #             sub_objects: ["ArnString"],
+    #             sub_object_version_ids: [1],
+    #             sub_objects_statistics: [
+    #               {
+    #                 source_type: "HIVE_PARQUET" # One of: ["HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"],
+    #                 glue_version_id: "NullableString",
+    #                 partition_count: 1,
+    #                 file_count: 1,
+    #                 total_file_bytes: 1
+    #               }
+    #             ],
     #             representations: [
     #               {
     #                 dialect: "REDSHIFT" # One of: ["REDSHIFT", "ATHENA", "SPARK"],
@@ -15871,9 +17589,70 @@ module Aws::Glue
     #                 validation_connection: "NameString",
     #                 is_stale: false
     #               }
-    #             ]
+    #             ],
+    #             spark_pipeline_info: {
+    #               "SparkPipelineInfoKey" => "SparkPipelineInfoValue"
+    #             }
     #           },
     #           is_multi_dialect_view: false,
+    #           is_materialized_view: false,
+    #           iceberg_table_metadata: {
+    #             format_version: "VersionString",
+    #             table_uuid: "TableIdString",
+    #             location: "LocationString",
+    #             properties: {
+    #               "NullableString" => "NullableString"
+    #             },
+    #             schemas: [
+    #               {
+    #                 schema_id: 1,
+    #                 identifier_field_ids: [1],
+    #                 type: "struct" # One of: ["struct"],
+    #                 fields: [ # required
+    #                   {
+    #                     id: 1, # required
+    #                     name: "ColumnNameString", # required
+    #                     type: ""null"", # required
+    #                     required: false, # required
+    #                     doc: "CommentString",
+    #                     initial_default: ""null"",
+    #                     write_default: ""null""
+    #                   }
+    #                 ]
+    #               }
+    #             ],
+    #             current_schema_id: 1,
+    #             last_column_id: 1,
+    #             partition_specs: [
+    #               {
+    #                 fields: [ # required
+    #                   {
+    #                     source_id: 1, # required
+    #                     transform: "IcebergTransformString", # required
+    #                     name: "ColumnNameString", # required
+    #                     field_id: 1
+    #                   }
+    #                 ],
+    #                 spec_id: 1
+    #               }
+    #             ],
+    #             default_spec_id: 1,
+    #             last_partition_id: 1,
+    #             sort_orders: [
+    #               {
+    #                 order_id: 1, # required
+    #                 fields: [ # required
+    #                   {
+    #                     source_id: 1, # required
+    #                     transform: "IcebergTransformString", # required
+    #                     direction: "asc" # One of: ["asc", "desc"], # required
+    #                     null_order: "nulls-first" # One of: ["nulls-first", "nulls-last"], # required
+    #                   }
+    #                 ]
+    #               }
+    #             ],
+    #             default_sort_order_id: 1
+    #           },
     #           status: {
     #             requested_by: "NameString",
     #             updated_by: "NameString",
@@ -15903,6 +17682,9 @@ module Aws::Glue
     #                 }
     #               ]
     #             }
+    #           },
+    #           rls_properties: {
+    #             default_rls_policy: "NameString"
     #           }
     #         },
     #         version_id: "VersionString"
@@ -15936,6 +17718,18 @@ module Aws::Glue
     #   <p>The transaction ID at which to read the table contents.</p>
     # @option params [Time] :query_as_of_time
     #   <p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>
+    # @option params [Types::AuditContext] :audit_context
+    #   <p>A structure containing the Lake Formation <a href="https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html">audit context</a>.</p>
+    # @option params [String] :resource_share_type
+    #   <p>Specifies which tables the <code>GetTables</code> call returns. The allowable values are <code>FEDERATED</code> or <code>ALL</code>. </p>
+    #            <ul>
+    #               <li>
+    #                  <p>If set to <code>FEDERATED</code>, returns only federated tables, which reference an entity outside the Glue Data Catalog.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If set to <code>ALL</code>, returns all tables in the database, both federated and non-federated. </p>
+    #               </li>
+    #            </ul>
     # @option params [Boolean] :include_status_details
     #   <p>Specifies whether to include status details related to a request to create or update an Glue Data Catalog view.</p>
     # @option params [Array<String>] :attributes_to_get
@@ -15960,8 +17754,14 @@ module Aws::Glue
     #     max_results: 1,
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false
+    #     },
+    #     resource_share_type: "FEDERATED" # One of: ["FEDERATED", "ALL"],
     #     include_status_details: false,
-    #     attributes_to_get: ["NAME" # One of: ["NAME", "TABLE_TYPE"]]
+    #     attributes_to_get: ["NAME" # One of: ["NAME", "TABLE_TYPE", "DEFAULT", "LATEST_ICEBERG_METADATA"]]
     #   }
     #   options = {}
     #   response = client.get_tables(params, options)
@@ -16065,8 +17865,23 @@ module Aws::Glue
     #         },
     #         view_definition: {
     #           is_protected: false,
+    #           is_managed: false,
     #           definer: "ArnString",
+    #           view_version_id: 1,
+    #           view_version_token: "HashString",
+    #           refresh_seconds: 1,
+    #           last_refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
     #           sub_objects: ["ArnString"],
+    #           sub_object_version_ids: [1],
+    #           sub_objects_statistics: [
+    #             {
+    #               source_type: "HIVE_PARQUET" # One of: ["HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"],
+    #               glue_version_id: "NullableString",
+    #               partition_count: 1,
+    #               file_count: 1,
+    #               total_file_bytes: 1
+    #             }
+    #           ],
     #           representations: [
     #             {
     #               dialect: "REDSHIFT" # One of: ["REDSHIFT", "ATHENA", "SPARK"],
@@ -16076,9 +17891,70 @@ module Aws::Glue
     #               validation_connection: "NameString",
     #               is_stale: false
     #             }
-    #           ]
+    #           ],
+    #           spark_pipeline_info: {
+    #             "SparkPipelineInfoKey" => "SparkPipelineInfoValue"
+    #           }
     #         },
     #         is_multi_dialect_view: false,
+    #         is_materialized_view: false,
+    #         iceberg_table_metadata: {
+    #           format_version: "VersionString",
+    #           table_uuid: "TableIdString",
+    #           location: "LocationString",
+    #           properties: {
+    #             "NullableString" => "NullableString"
+    #           },
+    #           schemas: [
+    #             {
+    #               schema_id: 1,
+    #               identifier_field_ids: [1],
+    #               type: "struct" # One of: ["struct"],
+    #               fields: [ # required
+    #                 {
+    #                   id: 1, # required
+    #                   name: "ColumnNameString", # required
+    #                   type: ""null"", # required
+    #                   required: false, # required
+    #                   doc: "CommentString",
+    #                   initial_default: ""null"",
+    #                   write_default: ""null""
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           current_schema_id: 1,
+    #           last_column_id: 1,
+    #           partition_specs: [
+    #             {
+    #               fields: [ # required
+    #                 {
+    #                   source_id: 1, # required
+    #                   transform: "IcebergTransformString", # required
+    #                   name: "ColumnNameString", # required
+    #                   field_id: 1
+    #                 }
+    #               ],
+    #               spec_id: 1
+    #             }
+    #           ],
+    #           default_spec_id: 1,
+    #           last_partition_id: 1,
+    #           sort_orders: [
+    #             {
+    #               order_id: 1, # required
+    #               fields: [ # required
+    #                 {
+    #                   source_id: 1, # required
+    #                   transform: "IcebergTransformString", # required
+    #                   direction: "asc" # One of: ["asc", "desc"], # required
+    #                   null_order: "nulls-first" # One of: ["nulls-first", "nulls-last"], # required
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           default_sort_order_id: 1
+    #         },
     #         status: {
     #           requested_by: "NameString",
     #           updated_by: "NameString",
@@ -16108,6 +17984,9 @@ module Aws::Glue
     #               }
     #             ]
     #           }
+    #         },
+    #         rls_properties: {
+    #           default_rls_policy: "NameString"
     #         }
     #       }
     #     ],
@@ -16270,7 +18149,7 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Retrieves partition metadata from the Data Catalog that contains unfiltered 
+    # <p>Retrieves partition metadata from the Data Catalog that contains unfiltered
     #           metadata.</p>
     #          <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetPartition</code>.</p>
     # @param [Hash, Types::GetUnfilteredPartitionMetadataRequest] params
@@ -16391,14 +18270,14 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Retrieves partition metadata from the Data Catalog that contains unfiltered 
+    # <p>Retrieves partition metadata from the Data Catalog that contains unfiltered
     #           metadata.</p>
     #          <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetPartitions</code>.</p>
     # @param [Hash, Types::GetUnfilteredPartitionsMetadataRequest] params
     # @option params [String] :region
     #   <p>Specified only if the base tables belong to a different Amazon Web Services Region.</p>
     # @option params [String] :catalog_id
-    #   <p>The ID of the Data Catalog where the partitions in question reside. If none is provided, 
+    #   <p>The ID of the Data Catalog where the partitions in question reside. If none is provided,
     #             the AWS account ID is used by default. </p>
     # @option params [String] :database_name
     #   <p>The name of the catalog database where the partitions reside.</p>
@@ -16805,8 +18684,23 @@ module Aws::Glue
     #       },
     #       view_definition: {
     #         is_protected: false,
+    #         is_managed: false,
     #         definer: "ArnString",
+    #         view_version_id: 1,
+    #         view_version_token: "HashString",
+    #         refresh_seconds: 1,
+    #         last_refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
     #         sub_objects: ["ArnString"],
+    #         sub_object_version_ids: [1],
+    #         sub_objects_statistics: [
+    #           {
+    #             source_type: "HIVE_PARQUET" # One of: ["HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"],
+    #             glue_version_id: "NullableString",
+    #             partition_count: 1,
+    #             file_count: 1,
+    #             total_file_bytes: 1
+    #           }
+    #         ],
     #         representations: [
     #           {
     #             dialect: "REDSHIFT" # One of: ["REDSHIFT", "ATHENA", "SPARK"],
@@ -16816,9 +18710,70 @@ module Aws::Glue
     #             validation_connection: "NameString",
     #             is_stale: false
     #           }
-    #         ]
+    #         ],
+    #         spark_pipeline_info: {
+    #           "SparkPipelineInfoKey" => "SparkPipelineInfoValue"
+    #         }
     #       },
     #       is_multi_dialect_view: false,
+    #       is_materialized_view: false,
+    #       iceberg_table_metadata: {
+    #         format_version: "VersionString",
+    #         table_uuid: "TableIdString",
+    #         location: "LocationString",
+    #         properties: {
+    #           "NullableString" => "NullableString"
+    #         },
+    #         schemas: [
+    #           {
+    #             schema_id: 1,
+    #             identifier_field_ids: [1],
+    #             type: "struct" # One of: ["struct"],
+    #             fields: [ # required
+    #               {
+    #                 id: 1, # required
+    #                 name: "ColumnNameString", # required
+    #                 type: ""null"", # required
+    #                 required: false, # required
+    #                 doc: "CommentString",
+    #                 initial_default: ""null"",
+    #                 write_default: ""null""
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         current_schema_id: 1,
+    #         last_column_id: 1,
+    #         partition_specs: [
+    #           {
+    #             fields: [ # required
+    #               {
+    #                 source_id: 1, # required
+    #                 transform: "IcebergTransformString", # required
+    #                 name: "ColumnNameString", # required
+    #                 field_id: 1
+    #               }
+    #             ],
+    #             spec_id: 1
+    #           }
+    #         ],
+    #         default_spec_id: 1,
+    #         last_partition_id: 1,
+    #         sort_orders: [
+    #           {
+    #             order_id: 1, # required
+    #             fields: [ # required
+    #               {
+    #                 source_id: 1, # required
+    #                 transform: "IcebergTransformString", # required
+    #                 direction: "asc" # One of: ["asc", "desc"], # required
+    #                 null_order: "nulls-first" # One of: ["nulls-first", "nulls-last"], # required
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         default_sort_order_id: 1
+    #       },
     #       status: {
     #         requested_by: "NameString",
     #         updated_by: "NameString",
@@ -16848,6 +18803,9 @@ module Aws::Glue
     #             }
     #           ]
     #         }
+    #       },
+    #       rls_properties: {
+    #         default_rls_policy: "NameString"
     #       }
     #     },
     #     authorized_columns: ["NameString"],
@@ -16860,6 +18818,7 @@ module Aws::Glue
     #     ],
     #     query_authorization_id: "HashString",
     #     is_multi_dialect_view: false,
+    #     is_materialized_view: false,
     #     resource_arn: "ArnString",
     #     is_protected: false,
     #     permissions: ["ALL" # One of: ["ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"]],
@@ -16938,6 +18897,7 @@ module Aws::Glue
     #       database_name: "NameString",
     #       class_name: "NameString",
     #       owner_name: "NameString",
+    #       function_type: "REGULAR_FUNCTION" # One of: ["REGULAR_FUNCTION", "AGGREGATE_FUNCTION", "STORED_PROCEDURE"],
     #       owner_type: "USER" # One of: ["USER", "ROLE", "GROUP"],
     #       create_time: Time.now,
     #       resource_uris: [
@@ -16966,6 +18926,13 @@ module Aws::Glue
     # @option params [String] :pattern
     #   <p>An optional function-name pattern string that filters the function
     #         definitions returned.</p>
+    # @option params [String] :function_type
+    #   <p>An optional function-type pattern string that filters the function
+    #         definitions returned from Amazon Redshift Federated Permissions Catalog.</p>
+    #            <p>Specify a value of <code>REGULAR_FUNCTION</code> or <code>STORED_PROCEDURE</code>.
+    #         The <code>STORED_PROCEDURE</code> function type is only compatible with
+    #         Amazon Redshift Federated Permissions Catalog.
+    #       </p>
     # @option params [String] :next_token
     #   <p>A continuation token, if this is a continuation call.</p>
     # @option params [Integer] :max_results
@@ -16975,6 +18942,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString",
     #     pattern: "NameString", # required
+    #     function_type: "REGULAR_FUNCTION" # One of: ["REGULAR_FUNCTION", "AGGREGATE_FUNCTION", "STORED_PROCEDURE"],
     #     next_token: "Token",
     #     max_results: 1
     #   }
@@ -16989,6 +18957,7 @@ module Aws::Glue
     #         database_name: "NameString",
     #         class_name: "NameString",
     #         owner_name: "NameString",
+    #         function_type: "REGULAR_FUNCTION" # One of: ["REGULAR_FUNCTION", "AGGREGATE_FUNCTION", "STORED_PROCEDURE"],
     #         owner_type: "USER" # One of: ["USER", "ROLE", "GROUP"],
     #         create_time: Time.now,
     #         resource_uris: [
@@ -17678,6 +19647,36 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Lists the asset types defined in Glue Data Catalog.</p>
+    # @param [Hash, Types::ListAssetTypesRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_asset_types(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         id: "AssetTypeId",
+    #         name: "AssetTypeName"
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListAssetTypesResponse]
+    def list_asset_types(params = {}, options = {})
+      request = build_request(:list_asset_types, params)
+      request.send_request(options)
+    end
+
     # <p>Lists all the blueprint names in an account.</p>
     # @param [Hash, Types::ListBlueprintsRequest] params
     # @option params [String] :next_token
@@ -17733,7 +19732,9 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>The <code>ListConnectionTypes</code> API provides a discovery mechanism to learn available connection types in Glue. The response contains a list of connection types with high-level details of what is supported for each connection type. The connection types listed are the set of supported options for the <code>ConnectionType</code> value in the <code>CreateConnection</code> API.</p>
+    # <p>The <code>ListConnectionTypes</code> API provides a discovery mechanism to learn available connection types in Glue. The response contains a list of connection types with high-level details of what is supported for each connection type, including both built-in connection types and custom connection types registered via <code>RegisterConnectionType</code>. The connection types listed are the set of supported options for the <code>ConnectionType</code> value in the <code>CreateConnection</code> API.</p>
+    #          <p>See also: <code>DescribeConnectionType</code>, <code>RegisterConnectionType</code>, <code>DeleteConnectionType</code>
+    #          </p>
     # @param [Hash, Types::ListConnectionTypesRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
@@ -17998,6 +19999,95 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Returns a paginated list of data quality execution results for your account, filtered by the specified criteria. Use the <code>NextToken</code> parameter to retrieve additional results.</p>
+    # @param [Hash, Types::ListDataQualityResultsV2Request] params
+    # @option params [Types::DataQualityResultsV2FilterCriteria] :filter
+    #   <p>The filter criteria.</p>
+    # @option params [String] :next_token
+    #   <p>A pagination token to retrieve the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return. If you don't specify a value, the operation uses the default number of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filter: {
+    #       data_source: {
+    #         glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString"
+    #           }
+    #         },
+    #         data_quality_glue_table: {
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           catalog_id: "NameString",
+    #           connection_name: "NameString",
+    #           additional_options: {
+    #             "NameString" => "DescriptionString"
+    #           },
+    #           pre_processing_query: "PreProcessingQueryString"
+    #         }
+    #       },
+    #       published_after: Time.now,
+    #       published_before: Time.now,
+    #       dimensions: {
+    #         "NameString" => "NameString"
+    #       },
+    #       evaluation_context: "NameString"
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_data_quality_results_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     results: [ # required
+    #       {
+    #         result_id: "HashString",
+    #         data_source: {
+    #           glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             }
+    #           },
+    #           data_quality_glue_table: {
+    #             database_name: "NameString", # required
+    #             table_name: "NameString", # required
+    #             catalog_id: "NameString",
+    #             connection_name: "NameString",
+    #             additional_options: {
+    #               "NameString" => "DescriptionString"
+    #             },
+    #             pre_processing_query: "PreProcessingQueryString"
+    #           }
+    #         },
+    #         result_published_on: Time.now,
+    #         dimensions: {
+    #           "NameString" => "NameString"
+    #         },
+    #         evaluation_context: "NameString",
+    #         descriptors: {
+    #           "NameString" => "NameString"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListDataQualityResultsV2Response]
+    def list_data_quality_results_v2(params = {}, options = {})
+      request = build_request(:list_data_quality_results_v2, params)
+      request.send_request(options)
+    end
+
     # <p>Lists the recommendation runs meeting the filter criteria.</p>
     # @param [Hash, Types::ListDataQualityRuleRecommendationRunsRequest] params
     # @option params [Types::DataQualityRuleRecommendationRunFilter] :filter
@@ -18006,6 +20096,8 @@ module Aws::Glue
     #   <p>A paginated token to offset the results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A list of key-value pair tags to filter recommendation runs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     filter: {
@@ -18034,7 +20126,10 @@ module Aws::Glue
     #       started_after: Time.now
     #     },
     #     next_token: "PaginationToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
     #   }
     #   options = {}
     #   response = client.list_data_quality_rule_recommendation_runs(params, options)
@@ -18066,7 +20161,9 @@ module Aws::Glue
     #             },
     #             pre_processing_query: "PreProcessingQueryString"
     #           }
-    #         }
+    #         },
+    #         created_ruleset_name: "NameString",
+    #         recommendation_mode: "BASIC" # One of: ["BASIC", "ADVANCED"]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -18110,7 +20207,8 @@ module Aws::Glue
     #         }
     #       },
     #       started_before: Time.now,
-    #       started_after: Time.now
+    #       started_after: Time.now,
+    #       ruleset_name: "NameString"
     #     },
     #     next_token: "PaginationToken",
     #     max_results: 1
@@ -18300,6 +20398,11 @@ module Aws::Glue
     #         },
     #         statistic_name: "StatisticNameString",
     #         double_value: 1.0,
+    #         distribution_value: {
+    #           bin_edges: ["GenericString"],
+    #           count: [1],
+    #           data_type: "NameString"
+    #         },
     #         evaluation_level: "Dataset" # One of: ["Dataset", "Column", "Multicolumn"],
     #         columns_referenced: ["NameString"],
     #         referenced_datasets: ["NameString"],
@@ -18401,6 +20504,242 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Lists the form types defined in Glue Data Catalog.</p>
+    # @param [Hash, Types::ListFormTypesRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_form_types(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         id: "FormTypeId",
+    #         name: "FormTypeName"
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListFormTypesResponse]
+    def list_form_types(params = {}, options = {})
+      request = build_request(:list_form_types, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists business glossaries in Glue Data Catalog.</p>
+    # @param [Hash, Types::ListGlossariesRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_glossaries(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         id: "GlossaryId",
+    #         name: "GlossaryName",
+    #         description: "MetadataDescription"
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListGlossariesResponse]
+    def list_glossaries(params = {}, options = {})
+      request = build_request(:list_glossaries, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists glossary terms within a business glossary in Glue Data Catalog.</p>
+    # @param [Hash, Types::ListGlossaryTermsRequest] params
+    # @option params [String] :glossary_identifier
+    #   <p>The unique identifier of the glossary whose terms to list.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     glossary_identifier: "GlossaryId", # required
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_glossary_terms(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         id: "GlossaryTermId",
+    #         name: "GlossaryTermName",
+    #         short_description: "GlossaryShortDescription"
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListGlossaryTermsResponse]
+    def list_glossary_terms(params = {}, options = {})
+      request = build_request(:list_glossary_terms, params)
+      request.send_request(options)
+    end
+
+    # <p>List integration resource properties for a single customer. It supports the filters, maxRecords and markers.</p>
+    # @param [Hash, Types::ListIntegrationResourcePropertiesRequest] params
+    # @option params [String] :marker
+    #   <p>This is the pagination token for next page, initial value is <code>null</code>.</p>
+    # @option params [Array<Types::IntegrationResourcePropertyFilter>] :filters
+    #   <p>A list of filters, supported filter Key is <code>SourceArn</code> and <code>TargetArn</code>.</p>
+    # @option params [Integer] :max_records
+    #   <p>This is total number of items to be evaluated.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     marker: "String4096",
+    #     filters: [
+    #       {
+    #         name: "String128",
+    #         values: ["String128"]
+    #       }
+    #     ],
+    #     max_records: 1
+    #   }
+    #   options = {}
+    #   response = client.list_integration_resource_properties(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     integration_resource_property_list: [
+    #       {
+    #         resource_arn: "String512", # required
+    #         resource_property_arn: "String512",
+    #         source_processing_properties: {
+    #           role_arn: "String128"
+    #         },
+    #         target_processing_properties: {
+    #           role_arn: "String128",
+    #           kms_arn: "String2048",
+    #           connection_name: "String128",
+    #           event_bus_arn: "String2048"
+    #         }
+    #       }
+    #     ],
+    #     marker: "String4096"
+    #   }
+    # @return [Types::ListIntegrationResourcePropertiesResponse]
+    def list_integration_resource_properties(params = {}, options = {})
+      request = build_request(:list_integration_resource_properties, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the integration table properties in your account. This operation supports filtering and pagination.</p>
+    # @param [Hash, Types::ListIntegrationTablePropertiesRequest] params
+    # @option params [String] :marker
+    #   <p>The pagination token for the next page of results. The initial value is <code>null</code>.</p>
+    # @option params [Array<Types::IntegrationTablePropertiesFilter>] :filters
+    #   <p>A list of filters. Supported filter keys are <code>SourceArn</code>, <code>TargetArn</code>, <code>SourceTableName</code>, and <code>TargetTableName</code>.</p>
+    # @option params [Integer] :max_records
+    #   <p>The maximum number of records to return in the response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     marker: "String4096",
+    #     filters: [
+    #       {
+    #         name: "String128",
+    #         values: ["String128"]
+    #       }
+    #     ],
+    #     max_records: 1
+    #   }
+    #   options = {}
+    #   response = client.list_integration_table_properties(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     integration_table_properties_list: [
+    #       {
+    #         resource_arn: "String512", # required
+    #         table_name: "String128", # required
+    #         source_table_config: {
+    #           fields: ["String128"],
+    #           filter_predicate: "String128",
+    #           primary_key: ["String128"],
+    #           record_update_field: "String128"
+    #         },
+    #         target_table_config: {
+    #           unnest_spec: "TOPLEVEL" # One of: ["TOPLEVEL", "FULL", "NOUNNEST"],
+    #           partition_spec: [
+    #             {
+    #               field_name: "String128",
+    #               function_spec: "String128",
+    #               conversion_spec: "String128"
+    #             }
+    #           ],
+    #           target_table_name: "String128",
+    #           integration_arn: "String128"
+    #         }
+    #       }
+    #     ],
+    #     marker: "String4096"
+    #   }
+    # @return [Types::ListIntegrationTablePropertiesResponse]
+    def list_integration_table_properties(params = {}, options = {})
+      request = build_request(:list_integration_table_properties, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the items in an iterable form on an asset in Glue Data Catalog. For example, lists the columns of a table asset.</p>
+    # @param [Hash, Types::ListIterableFormsRequest] params
+    # @option params [String] :asset_identifier
+    #   <p>The unique identifier of the asset.</p>
+    # @option params [String] :iterable_form_name
+    #   <p>The name of the iterable form to list items from.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     asset_identifier: "AssetId", # required
+    #     iterable_form_name: "IterableFormName", # required
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_iterable_forms(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         item_id: "ItemId",
+    #         item_name: "ItemName",
+    #         description: "ItemDescription",
+    #         glossary_terms: ["GlossaryTermId"]
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListIterableFormsResponse]
+    def list_iterable_forms(params = {}, options = {})
+      request = build_request(:list_iterable_forms, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves the names of all job resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p>
     #          <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on
     #       the response so that tagged resources can be retrieved as a group. If you choose to use tags
@@ -18489,6 +20828,58 @@ module Aws::Glue
     # @return [Types::ListMLTransformsResponse]
     def list_ml_transforms(params = {}, options = {})
       request = build_request(:list_ml_transforms, params)
+      request.send_request(options)
+    end
+
+    # <p>List all task runs for a particular account.</p>
+    # @param [Hash, Types::ListMaterializedViewRefreshTaskRunsRequest] params
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>
+    # @option params [String] :database_name
+    #   <p>The database where the table resides.</p>
+    # @option params [String] :table_name
+    #   <p>The name of the materialized view.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum size of the response.</p>
+    # @option params [String] :next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString",
+    #     table_name: "NameString",
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_materialized_view_refresh_task_runs(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     materialized_view_refresh_task_runs: [
+    #       {
+    #         customer_id: "AccountId",
+    #         materialized_view_refresh_task_run_id: "UUIDv4",
+    #         database_name: "DatabaseName",
+    #         table_name: "TableName",
+    #         catalog_id: "CatalogIdString",
+    #         role: "Role",
+    #         status: "STARTING" # One of: ["STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"],
+    #         creation_time: Time.now,
+    #         last_updated: Time.now,
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         error_message: "DescriptionString",
+    #         dpu_seconds: 1.0,
+    #         refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
+    #         processed_bytes: 1
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListMaterializedViewRefreshTaskRunsResponse]
+    def list_materialized_view_refresh_task_runs(params = {}, options = {})
+      request = build_request(:list_materialized_view_refresh_task_runs, params)
       request.send_request(options)
     end
 
@@ -18669,7 +21060,8 @@ module Aws::Glue
     #         execution_time: 1.0,
     #         dpu_seconds: 1.0,
     #         idle_timeout: 1,
-    #         profile_name: "NameString"
+    #         profile_name: "NameString",
+    #         session_type: "LIVY" # One of: ["LIVY", "SPARK_CONNECT"]
     #       }
     #     ],
     #     next_token: "OrchestrationToken"
@@ -18911,7 +21303,7 @@ module Aws::Glue
     # @option params [String] :data_filter
     #   <p>Selects source tables for the integration using Maxwell filter syntax.</p>
     # @option params [Types::IntegrationConfig] :integration_config
-    #   <p>Properties associated with the integration.</p>
+    #   <p>The configuration settings for the integration. Currently, only the RefreshInterval can be modified. </p>
     # @option params [String] :integration_name
     #   <p>A unique name for an integration in Glue.</p>
     # @example Request syntax with placeholder values
@@ -18924,7 +21316,8 @@ module Aws::Glue
     #       source_properties: {
     #         "IntegrationString" => "IntegrationString"
     #       },
-    #       continuous_sync: false
+    #       continuous_sync: false,
+    #       target_namespace: "TargetNamespace"
     #     },
     #     integration_name: "String128"
     #   }
@@ -18933,8 +21326,8 @@ module Aws::Glue
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     source_arn: "String128", # required
-    #     target_arn: "String128", # required
+    #     source_arn: "String512", # required
+    #     target_arn: "String512", # required
     #     integration_name: "String128", # required
     #     description: "IntegrationDescription",
     #     integration_arn: "String128", # required
@@ -18962,12 +21355,314 @@ module Aws::Glue
     #       source_properties: {
     #         "IntegrationString" => "IntegrationString"
     #       },
-    #       continuous_sync: false
+    #       continuous_sync: false,
+    #       target_namespace: "TargetNamespace"
     #     }
     #   }
     # @return [Types::ModifyIntegrationResponse]
     def modify_integration(params = {}, options = {})
       request = build_request(:modify_integration, params)
+      request.send_request(options)
+    end
+
+    # <note>
+    #             <p>This operation is intended for internal use. Do not call it directly.</p>
+    #          </note>
+    #          <p>AWS Glue Data Quality uses this operation to publish a data quality result.</p>
+    # @param [Hash, Types::PublishDataQualityResultV2Request] params
+    # @option params [Hash<String, String>] :dimensions
+    #   <p>The dimensions for the result.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags for the result.</p>
+    # @option params [Time] :execution_started_on
+    #   <p>The time execution started for the result.</p>
+    # @option params [Time] :execution_completed_on
+    #   <p>The time execution completed for the result.</p>
+    # @option params [Float] :score
+    #   <p>The score for the result.</p>
+    # @option params [Array<Types::DataQualityRuleResult>] :rule_results
+    #   <p>The rule level results.</p>
+    # @option params [Array<Types::DataQualityAnalyzerResult>] :analyzer_results
+    #   <p>The analyzer level results.</p>
+    # @option params [Array<Types::DataQualityObservation>] :observations
+    #   <p>The observations for the result.</p>
+    # @option params [Types::DataQualityAggregatedMetrics] :aggregated_metrics
+    #   <p>The aggregated metrics for the result.</p>
+    # @option params [Array<Types::StatisticSummary>] :statistics
+    #   <p>The statistics for the result.</p>
+    # @option params [Types::DataQualityConfigurationV2] :run_configuration
+    #   <p>The run configuration for the result.</p>
+    # @option params [String] :client_token
+    #   <p>The client token for the request.</p>
+    # @option params [String] :evaluation_context
+    #   <p>The evaluation context for the result.</p>
+    # @option params [Hash<String, String>] :descriptors
+    #   <p>The descriptors for the result.</p>
+    # @option params [String] :ruleset_name
+    #   <p>The ruleset name for the result.</p>
+    # @option params [String] :data_quality_security_configuration
+    #   <p>The security configuration for the result.</p>
+    # @option params [Types::DataQualityTelemetry] :telemetry
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     dimensions: { # required
+    #       "NameString" => "NameString"
+    #     },
+    #     tags: {
+    #       "NameString" => "NameString"
+    #     },
+    #     execution_started_on: Time.now,
+    #     execution_completed_on: Time.now,
+    #     score: 1.0, # required
+    #     rule_results: [ # required
+    #       {
+    #         name: "NameString",
+    #         description: "DataQualityRuleResultDescription",
+    #         evaluation_message: "DataQualityRuleResultDescription",
+    #         result: "PASS" # One of: ["PASS", "FAIL", "ERROR"],
+    #         evaluated_metrics: {
+    #           "NameString" => 1.0
+    #         },
+    #         evaluated_rule: "DataQualityRuleResultDescription",
+    #         rule_metrics: {
+    #           "NameString" => 1.0
+    #         },
+    #         labels: {
+    #           "NameString" => "NameString"
+    #         }
+    #       }
+    #     ],
+    #     analyzer_results: [
+    #       {
+    #         name: "NameString",
+    #         description: "DataQualityRuleResultDescription",
+    #         evaluation_message: "DataQualityRuleResultDescription",
+    #         evaluated_metrics: {
+    #           "NameString" => 1.0
+    #         },
+    #         evaluated_distributions: {
+    #           "NameString" => {
+    #             bin_edges: ["GenericString"],
+    #             count: [1],
+    #             data_type: "NameString"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     observations: [
+    #       {
+    #         description: "DataQualityObservationDescription",
+    #         metric_based_observation: {
+    #           metric_name: "NameString",
+    #           statistic_id: "HashString",
+    #           metric_values: {
+    #             actual_value: 1.0,
+    #             expected_value: 1.0,
+    #             lower_limit: 1.0,
+    #             upper_limit: 1.0
+    #           },
+    #           new_rules: ["NameString"]
+    #         }
+    #       }
+    #     ],
+    #     aggregated_metrics: {
+    #       total_rows_processed: 1.0,
+    #       total_rows_passed: 1.0,
+    #       total_rows_failed: 1.0,
+    #       total_rules_processed: 1.0,
+    #       total_rules_passed: 1.0,
+    #       total_rules_failed: 1.0
+    #     },
+    #     statistics: [
+    #       {
+    #         statistic_id: "HashString",
+    #         profile_id: "HashString",
+    #         run_identifier: {
+    #           run_id: "HashString",
+    #           job_run_id: "HashString"
+    #         },
+    #         statistic_name: "StatisticNameString",
+    #         double_value: 1.0,
+    #         distribution_value: {
+    #           bin_edges: ["GenericString"],
+    #           count: [1],
+    #           data_type: "NameString"
+    #         },
+    #         evaluation_level: "Dataset" # One of: ["Dataset", "Column", "Multicolumn"],
+    #         columns_referenced: ["NameString"],
+    #         referenced_datasets: ["NameString"],
+    #         statistic_properties: {
+    #           "NameString" => "DescriptionString"
+    #         },
+    #         recorded_on: Time.now,
+    #         inclusion_annotation: {
+    #           value: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #           last_modified_on: Time.now
+    #         }
+    #       }
+    #     ],
+    #     run_configuration: {
+    #       observations_enabled: "ALL" # One of: ["ALL", "NONE"],
+    #       observation_mode: "SCHEDULED" # One of: ["SCHEDULED", "FIXED"]
+    #     },
+    #     client_token: "ClientTokenString",
+    #     evaluation_context: "NameString", # required
+    #     descriptors: {
+    #       "NameString" => "NameString"
+    #     },
+    #     ruleset_name: "HashString",
+    #     data_quality_security_configuration: "NameString",
+    #     telemetry: {
+    #       vcpu_hours: 1.0,
+    #       flags_enabled: {
+    #         "NameString" => "NameString"
+    #       },
+    #       library_version: "NameString",
+    #       spark_version: "NameString",
+    #       host_runtime_version: "NameString",
+    #       engine: "SPARK" # One of: ["SPARK", "PYTHON"]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.publish_data_quality_result_v2(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     result_id: "HashString", # required
+    #   }
+    # @return [Types::PublishDataQualityResultV2Response]
+    def publish_data_quality_result_v2(params = {}, options = {})
+      request = build_request(:publish_data_quality_result_v2, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates or updates an asset in Glue Data Catalog. If the asset already exists, this operation updates it; otherwise, a new asset is created.</p>
+    # @param [Hash, Types::PutAssetRequest] params
+    # @option params [String] :asset_type_id
+    #   <p>The identifier of the asset type for the asset.</p>
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the asset. If an asset with this identifier already exists, it is updated.</p>
+    # @option params [String] :name
+    #   <p>The name of the asset.</p>
+    # @option params [String] :description
+    #   <p>The description of the asset.</p>
+    # @option params [Hash<String, Types::AssetFormEntry>] :forms
+    #   <p>The forms to set on the asset, keyed by form name. Each entry specifies the form type and its JSON content.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     asset_type_id: "AssetTypeId", # required
+    #     identifier: "AssetId", # required
+    #     name: "AssetName", # required
+    #     description: "AssetDescription",
+    #     forms: { # required
+    #       "AssetFormKey" => {
+    #         form_type_id: "FormTypeId",
+    #         content: "FormContent"
+    #       }
+    #     },
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.put_asset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "AssetId", # required
+    #     name: "AssetName", # required
+    #     description: "AssetDescription",
+    #     created_at: Time.now,
+    #     forms: {
+    #       "AssetFormKey" => {
+    #         form_type_id: "FormTypeId",
+    #         content: "FormContent"
+    #       }
+    #     }
+    #   }
+    # @return [Types::PutAssetResponse]
+    def put_asset(params = {}, options = {})
+      request = build_request(:put_asset, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates or updates an asset type in Glue Data Catalog. An asset type defines the structure of assets by specifying which forms they include. If an asset type with the given name already exists, it is updated.</p>
+    # @param [Hash, Types::PutAssetTypeRequest] params
+    # @option params [String] :name
+    #   <p>The name of the asset type.</p>
+    # @option params [Hash<String, Types::AssetTypeFormReference>] :forms
+    #   <p>The forms that make up the asset type, keyed by form name. Each entry references the form type that defines the form's schema.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "AssetTypeName", # required
+    #     forms: { # required
+    #       "AssetTypeFormKey" => {
+    #         form_type_identifier: "FormTypeId", # required
+    #       }
+    #     },
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.put_asset_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "AssetTypeId",
+    #     name: "AssetTypeName",
+    #     forms: {
+    #       "AssetTypeFormKey" => {
+    #         form_type_identifier: "FormTypeId", # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::PutAssetTypeResponse]
+    def put_asset_type(params = {}, options = {})
+      request = build_request(:put_asset_type, params)
+      request.send_request(options)
+    end
+
+    # <p>Attaches a form to an asset or an iterable form item in Glue Data Catalog. If an attachment with the same name already exists, it is overwritten.</p>
+    # @param [Hash, Types::PutAttachmentRequest] params
+    # @option params [String] :asset_identifier
+    #   <p>The unique identifier of the asset to attach the form to.</p>
+    # @option params [String] :iterable_form_name
+    #   <p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the attachment targets an item within the iterable form rather than the asset itself.</p>
+    # @option params [String] :item_identifier
+    #   <p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>
+    # @option params [String] :attachment_name
+    #   <p>The name of the attachment.</p>
+    # @option params [String] :content
+    #   <p>The JSON content of the form, conforming to the schema of the specified form type.</p>
+    # @option params [String] :form_type_id
+    #   <p>The identifier of the form type for this attachment.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     asset_identifier: "AssetId", # required
+    #     iterable_form_name: "IterableFormName",
+    #     item_identifier: "ItemIdentifier",
+    #     attachment_name: "AttachmentName", # required
+    #     content: "FormContent", # required
+    #     form_type_id: "FormTypeId", # required
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.put_attachment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     asset_identifier: "AssetId",
+    #     iterable_form_name: "IterableFormName",
+    #     item_identifier: "ItemIdentifier",
+    #     attachment_name: "AttachmentName",
+    #     form_type_id: "FormTypeId"
+    #   }
+    # @return [Types::PutAttachmentResponse]
+    def put_attachment(params = {}, options = {})
+      request = build_request(:put_attachment, params)
       request.send_request(options)
     end
 
@@ -19005,6 +21700,40 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Creates or updates the export configuration for the Glue Data Catalog. Use this operation to enable or disable the export of catalog metadata to S3 Tables.</p>
+    # @param [Hash, Types::PutDataCatalogExportConfigurationInput] params
+    # @option params [String] :export_setting
+    #   <p>The export setting for the data catalog. Specify <code>ENABLED</code> to start exporting catalog metadata to S3 Tables, or <code>DISABLED</code> to stop exporting. This field is required.</p>
+    # @option params [Types::ExportEncryptionConfiguration] :encryption_configuration
+    #   <p>The encryption configuration for the exported data. If not specified, the default encryption settings are used.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     export_setting: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #     encryption_configuration: {
+    #       sse_algorithm: "SseAlgorithm",
+    #       kms_key_arn: "KmsKeyArnString"
+    #     },
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.put_data_catalog_export_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     export_setting: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     encryption_configuration: {
+    #       sse_algorithm: "SseAlgorithm",
+    #       kms_key_arn: "KmsKeyArnString"
+    #     }
+    #   }
+    # @return [Types::PutDataCatalogExportConfigurationOutput]
+    def put_data_catalog_export_configuration(params = {}, options = {})
+      request = build_request(:put_data_catalog_export_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Annotate all datapoints for a Profile.</p>
     # @param [Hash, Types::PutDataQualityProfileAnnotationRequest] params
     # @option params [String] :profile_id
@@ -19024,6 +21753,35 @@ module Aws::Glue
     # @return [Types::PutDataQualityProfileAnnotationResponse]
     def put_data_quality_profile_annotation(params = {}, options = {})
       request = build_request(:put_data_quality_profile_annotation, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates or updates a form type in Glue Data Catalog. A form type defines the schema for structured metadata that can be attached to assets.</p>
+    # @param [Hash, Types::PutFormTypeRequest] params
+    # @option params [String] :name
+    #   <p>The name of the form type. Must start with an uppercase letter.</p>
+    # @option params [String] :schema
+    #   <p>The Smithy IDL schema definition for the form type.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "FormTypeName", # required
+    #     schema: "FormTypeSchema", # required
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.put_form_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "FormTypeId",
+    #     name: "FormTypeName",
+    #     schema: "FormTypeSchema"
+    #   }
+    # @return [Types::PutFormTypeResponse]
+    def put_form_type(params = {}, options = {})
+      request = build_request(:put_form_type, params)
       request.send_request(options)
     end
 
@@ -19209,6 +21967,569 @@ module Aws::Glue
     # @return [Types::QuerySchemaVersionMetadataResponse]
     def query_schema_version_metadata(params = {}, options = {})
       request = build_request(:query_schema_version_metadata, params)
+      request.send_request(options)
+    end
+
+    # <p>Registers a custom connection type in Glue based on the configuration provided. This operation enables customers to configure custom connectors for any data source with REST-based APIs, eliminating the need for building custom Lambda connectors.</p>
+    #          <p>The registered connection type stores details about how requests and responses are interpreted by REST sources, including connection properties, authentication configuration, and REST configuration with entity definitions. Once registered, customers can create connections using this connection type and work with them the same way as natively supported Glue connectors.</p>
+    #          <p>Supports multiple authentication types including Basic, OAuth2 (Client Credentials, JWT Bearer, Authorization Code), and Custom Auth configurations.</p>
+    # @param [Hash, Types::RegisterConnectionTypeRequest] params
+    # @option params [String] :connection_type
+    #   <p>The name of the connection type. Must be between 1 and 255 characters and must be prefixed with "REST-" to indicate it is a REST-based connector.</p>
+    # @option params [String] :integration_type
+    #   <p>The integration type for the connection. Currently only "REST" protocol is supported.</p>
+    # @option params [String] :description
+    #   <p>A description of the connection type. Can be up to 2048 characters and provides details about the purpose and functionality of the connection type.</p>
+    # @option params [Types::ConnectionPropertiesConfiguration] :connection_properties
+    #   <p>Defines the base URL and additional request parameters needed during connection creation for this connection type.</p>
+    # @option params [Types::ConnectorAuthenticationConfiguration] :connector_authentication_configuration
+    #   <p>Defines the supported authentication types and required properties for this connection type, including Basic, OAuth2, and Custom authentication methods.</p>
+    # @option params [Types::RestConfiguration] :rest_configuration
+    #   <p>Defines the HTTP request and response configuration, validation endpoint, and entity configurations for REST API interactions.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags you assign to the connection type.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connection_type: "NameString", # required
+    #     integration_type: "REST" # One of: ["REST"], # required
+    #     description: "Description",
+    #     connection_properties: { # required
+    #       url: {
+    #         name: "PropertyName", # required
+    #         key_override: "ConnectorPropertyKey",
+    #         required: false, # required
+    #         default_value: "String",
+    #         allowed_values: ["String"],
+    #         property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #         property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #         format: "String"
+    #       },
+    #       additional_request_parameters: [
+    #         {
+    #           name: "PropertyName", # required
+    #           key_override: "ConnectorPropertyKey",
+    #           required: false, # required
+    #           default_value: "String",
+    #           allowed_values: ["String"],
+    #           property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #           property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #           format: "String"
+    #         }
+    #       ]
+    #     },
+    #     connector_authentication_configuration: { # required
+    #       authentication_types: ["BASIC" # One of: ["BASIC", "OAUTH2", "CUSTOM", "IAM"]], # required
+    #       o_auth2_properties: {
+    #         o_auth2_grant_type: "CLIENT_CREDENTIALS" # One of: ["CLIENT_CREDENTIALS", "JWT_BEARER", "AUTHORIZATION_CODE"], # required
+    #         client_credentials_properties: {
+    #           token_url: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           request_method: "GET" # One of: ["GET", "POST"],
+    #           content_type: "APPLICATION_JSON" # One of: ["APPLICATION_JSON", "URL_ENCODED"],
+    #           client_id: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           client_secret: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           scope: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           token_url_parameters: [
+    #             {
+    #               name: "PropertyName", # required
+    #               key_override: "ConnectorPropertyKey",
+    #               required: false, # required
+    #               default_value: "String",
+    #               allowed_values: ["String"],
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #               format: "String"
+    #             }
+    #           ]
+    #         },
+    #         jwt_bearer_properties: {
+    #           token_url: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           request_method: "GET" # One of: ["GET", "POST"],
+    #           content_type: "APPLICATION_JSON" # One of: ["APPLICATION_JSON", "URL_ENCODED"],
+    #           jwt_token: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           token_url_parameters: [
+    #             {
+    #               name: "PropertyName", # required
+    #               key_override: "ConnectorPropertyKey",
+    #               required: false, # required
+    #               default_value: "String",
+    #               allowed_values: ["String"],
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #               format: "String"
+    #             }
+    #           ]
+    #         },
+    #         authorization_code_properties: {
+    #           authorization_code_url: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           authorization_code: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           redirect_uri: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           token_url: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           request_method: "GET" # One of: ["GET", "POST"],
+    #           content_type: "APPLICATION_JSON" # One of: ["APPLICATION_JSON", "URL_ENCODED"],
+    #           client_id: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           client_secret: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           scope: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           prompt: {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           },
+    #           token_url_parameters: [
+    #             {
+    #               name: "PropertyName", # required
+    #               key_override: "ConnectorPropertyKey",
+    #               required: false, # required
+    #               default_value: "String",
+    #               allowed_values: ["String"],
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #               format: "String"
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       basic_authentication_properties: {
+    #         username: {
+    #           name: "PropertyName", # required
+    #           key_override: "ConnectorPropertyKey",
+    #           required: false, # required
+    #           default_value: "String",
+    #           allowed_values: ["String"],
+    #           property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #           property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #           format: "String"
+    #         },
+    #         password: {
+    #           name: "PropertyName", # required
+    #           key_override: "ConnectorPropertyKey",
+    #           required: false, # required
+    #           default_value: "String",
+    #           allowed_values: ["String"],
+    #           property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #           property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #           format: "String"
+    #         }
+    #       },
+    #       custom_authentication_properties: {
+    #         authentication_parameters: [ # required
+    #           {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     rest_configuration: { # required
+    #       global_source_configuration: {
+    #         request_method: "GET" # One of: ["GET", "POST"],
+    #         request_path: "PathString",
+    #         request_parameters: [
+    #           {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           }
+    #         ],
+    #         response_configuration: {
+    #           result_path: "JsonPathString", # required
+    #           error_path: "JsonPathString"
+    #         },
+    #         pagination_configuration: {
+    #           cursor_configuration: {
+    #             next_page: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             },
+    #             limit_parameter: {
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             }
+    #           },
+    #           offset_configuration: {
+    #             offset_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             },
+    #             limit_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             }
+    #           }
+    #         },
+    #         filter_configuration: {
+    #           filter_mode: "QUERY_PARAMS" # One of: ["QUERY_PARAMS", "FILTER_STRING"], # required
+    #           operator_mappings: {
+    #             "String" => "String"
+    #           },
+    #           date_time_format: "String",
+    #           strip_quotes: false,
+    #           between_configuration: {
+    #             low_bound_key: "String",
+    #             high_bound_key: "String",
+    #             template: "String"
+    #           },
+    #           filter_string_configuration: {
+    #             query_parameter_name: "String", # required
+    #             quote_string_values: false,
+    #             quote_character: "String"
+    #           }
+    #         }
+    #       },
+    #       validation_endpoint_configuration: {
+    #         request_method: "GET" # One of: ["GET", "POST"],
+    #         request_path: "PathString",
+    #         request_parameters: [
+    #           {
+    #             name: "PropertyName", # required
+    #             key_override: "ConnectorPropertyKey",
+    #             required: false, # required
+    #             default_value: "String",
+    #             allowed_values: ["String"],
+    #             property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #             property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #             format: "String"
+    #           }
+    #         ],
+    #         response_configuration: {
+    #           result_path: "JsonPathString", # required
+    #           error_path: "JsonPathString"
+    #         },
+    #         pagination_configuration: {
+    #           cursor_configuration: {
+    #             next_page: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             },
+    #             limit_parameter: {
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             }
+    #           },
+    #           offset_configuration: {
+    #             offset_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             },
+    #             limit_parameter: { # required
+    #               key: "ConnectorPropertyKey",
+    #               default_value: "DefaultValue",
+    #               property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #               value: {
+    #                 content_path: "JsonPathString",
+    #                 header_key: "ConnectorPropertyKey"
+    #               }
+    #             }
+    #           }
+    #         },
+    #         filter_configuration: {
+    #           filter_mode: "QUERY_PARAMS" # One of: ["QUERY_PARAMS", "FILTER_STRING"], # required
+    #           operator_mappings: {
+    #             "String" => "String"
+    #           },
+    #           date_time_format: "String",
+    #           strip_quotes: false,
+    #           between_configuration: {
+    #             low_bound_key: "String",
+    #             high_bound_key: "String",
+    #             template: "String"
+    #           },
+    #           filter_string_configuration: {
+    #             query_parameter_name: "String", # required
+    #             quote_string_values: false,
+    #             quote_character: "String"
+    #           }
+    #         }
+    #       },
+    #       entity_configurations: {
+    #         "EntityConfigurationMapKeyString" => {
+    #           source_configuration: {
+    #             request_method: "GET" # One of: ["GET", "POST"],
+    #             request_path: "PathString",
+    #             request_parameters: [
+    #               {
+    #                 name: "PropertyName", # required
+    #                 key_override: "ConnectorPropertyKey",
+    #                 required: false, # required
+    #                 default_value: "String",
+    #                 allowed_values: ["String"],
+    #                 property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                 property_type: "USER_INPUT" # One of: ["USER_INPUT", "SECRET", "READ_ONLY", "UNUSED", "SECRET_OR_USER_INPUT"], # required
+    #                 format: "String"
+    #               }
+    #             ],
+    #             response_configuration: {
+    #               result_path: "JsonPathString", # required
+    #               error_path: "JsonPathString"
+    #             },
+    #             pagination_configuration: {
+    #               cursor_configuration: {
+    #                 next_page: { # required
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey"
+    #                   }
+    #                 },
+    #                 limit_parameter: {
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey"
+    #                   }
+    #                 }
+    #               },
+    #               offset_configuration: {
+    #                 offset_parameter: { # required
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey"
+    #                   }
+    #                 },
+    #                 limit_parameter: { # required
+    #                   key: "ConnectorPropertyKey",
+    #                   default_value: "DefaultValue",
+    #                   property_location: "HEADER" # One of: ["HEADER", "BODY", "QUERY_PARAM", "PATH"],
+    #                   value: {
+    #                     content_path: "JsonPathString",
+    #                     header_key: "ConnectorPropertyKey"
+    #                   }
+    #                 }
+    #               }
+    #             },
+    #             filter_configuration: {
+    #               filter_mode: "QUERY_PARAMS" # One of: ["QUERY_PARAMS", "FILTER_STRING"], # required
+    #               operator_mappings: {
+    #                 "String" => "String"
+    #               },
+    #               date_time_format: "String",
+    #               strip_quotes: false,
+    #               between_configuration: {
+    #                 low_bound_key: "String",
+    #                 high_bound_key: "String",
+    #                 template: "String"
+    #               },
+    #               filter_string_configuration: {
+    #                 query_parameter_name: "String", # required
+    #                 quote_string_values: false,
+    #                 quote_character: "String"
+    #               }
+    #             }
+    #           },
+    #           schema: {
+    #             "FieldDefinitionMapKeyString" => {
+    #               name: "String", # required
+    #               field_data_type: "INT" # One of: ["INT", "SMALLINT", "BIGINT", "FLOAT", "LONG", "DATE", "BOOLEAN", "MAP", "ARRAY", "STRING", "TIMESTAMP", "DECIMAL", "BYTE", "SHORT", "DOUBLE", "STRUCT", "BINARY", "UNION"], # required
+    #               response_date_format: "String",
+    #               is_partitionable: false,
+    #               is_nullable: false,
+    #               is_queryable: false,
+    #               is_orderable: false,
+    #               filter_overrides: {
+    #                 field_name: "String",
+    #                 operator_mappings: {
+    #                   "String" => "String"
+    #                 },
+    #                 between_configuration: {
+    #                   low_bound_key: "String",
+    #                   high_bound_key: "String",
+    #                   template: "String"
+    #                 },
+    #                 date_time_format: "String"
+    #               }
+    #             }
+    #           }
+    #         }
+    #       }
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.register_connection_type(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connection_type_arn: "GlueResourceArn"
+    #   }
+    # @return [Types::RegisterConnectionTypeResponse]
+    def register_connection_type(params = {}, options = {})
+      request = build_request(:register_connection_type, params)
       request.send_request(options)
     end
 
@@ -19404,6 +22725,76 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Searches for assets in Glue Data Catalog using full-text search, filters, sorting, and aggregations. Returns matching assets with relevance-ranked results.</p>
+    # @param [Hash, Types::SearchAssetsInput] params
+    # @option params [String] :search_text
+    #   <p>The text to search for. At least one of <code>searchText</code> or <code>filterClause</code> must be provided.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    # @option params [Types::SearchSort] :sort
+    #   <p>The sort criteria for the search results.</p>
+    # @option params [Types::SearchFilterClause] :filter_clause
+    #   <p>The filter clause to apply to the search. Supports nested AND/OR logic with attribute-level and map-level filters.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     search_text: "SearchText",
+    #     max_results: 1,
+    #     next_token: "SearchNextToken",
+    #     sort: {
+    #       attribute: "SearchAttribute", # required
+    #       order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
+    #     },
+    #     filter_clause: {
+    #       # One of:
+    #       and_all_filters: [{
+    #         # recursive SearchFilterClause
+    #       }],
+    #       or_any_filters: [{
+    #         # recursive SearchFilterClause
+    #       }],
+    #       attribute_filter: {
+    #         attribute: "SearchAttribute", # required
+    #         operator: "equals" # One of: ["equals", "greaterThan", "greaterThanOrEquals", "lessThan", "lessThanOrEquals", "notExists"], # required
+    #         value: {
+    #           # One of:
+    #           string_value: "SearchFilterStringValue",
+    #           long_value: 1
+    #         }
+    #       },
+    #       map_filter: {
+    #         attribute: "SearchAttribute", # required
+    #         key: "SearchMapKey", # required
+    #         value: { # required
+    #           # One of:
+    #           string_value: "SearchFilterStringValue"
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.search_assets(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         id: "AssetId",
+    #         asset_name: "SearchResultName",
+    #         asset_description: "AssetDescription",
+    #         updated_at: Time.now,
+    #         asset_type_id: "AssetTypeId"
+    #       }
+    #     ],
+    #     next_token: "SearchNextToken"
+    #   }
+    # @return [Types::SearchAssetsOutput]
+    def search_assets(params = {}, options = {})
+      request = build_request(:search_assets, params)
+      request.send_request(options)
+    end
+
     # <p>Searches a set of tables based on properties in the table metadata as well as on the parent database. You can search against text or filter conditions. </p>
     #          <p>You can only get tables that you have access to based on the security policies defined in Lake Formation. You need at least a read-only access to the table for it to be returned. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search. </p>
     # @param [Hash, Types::SearchTablesRequest] params
@@ -19560,8 +22951,23 @@ module Aws::Glue
     #         },
     #         view_definition: {
     #           is_protected: false,
+    #           is_managed: false,
     #           definer: "ArnString",
+    #           view_version_id: 1,
+    #           view_version_token: "HashString",
+    #           refresh_seconds: 1,
+    #           last_refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
     #           sub_objects: ["ArnString"],
+    #           sub_object_version_ids: [1],
+    #           sub_objects_statistics: [
+    #             {
+    #               source_type: "HIVE_PARQUET" # One of: ["HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"],
+    #               glue_version_id: "NullableString",
+    #               partition_count: 1,
+    #               file_count: 1,
+    #               total_file_bytes: 1
+    #             }
+    #           ],
     #           representations: [
     #             {
     #               dialect: "REDSHIFT" # One of: ["REDSHIFT", "ATHENA", "SPARK"],
@@ -19571,9 +22977,70 @@ module Aws::Glue
     #               validation_connection: "NameString",
     #               is_stale: false
     #             }
-    #           ]
+    #           ],
+    #           spark_pipeline_info: {
+    #             "SparkPipelineInfoKey" => "SparkPipelineInfoValue"
+    #           }
     #         },
     #         is_multi_dialect_view: false,
+    #         is_materialized_view: false,
+    #         iceberg_table_metadata: {
+    #           format_version: "VersionString",
+    #           table_uuid: "TableIdString",
+    #           location: "LocationString",
+    #           properties: {
+    #             "NullableString" => "NullableString"
+    #           },
+    #           schemas: [
+    #             {
+    #               schema_id: 1,
+    #               identifier_field_ids: [1],
+    #               type: "struct" # One of: ["struct"],
+    #               fields: [ # required
+    #                 {
+    #                   id: 1, # required
+    #                   name: "ColumnNameString", # required
+    #                   type: ""null"", # required
+    #                   required: false, # required
+    #                   doc: "CommentString",
+    #                   initial_default: ""null"",
+    #                   write_default: ""null""
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           current_schema_id: 1,
+    #           last_column_id: 1,
+    #           partition_specs: [
+    #             {
+    #               fields: [ # required
+    #                 {
+    #                   source_id: 1, # required
+    #                   transform: "IcebergTransformString", # required
+    #                   name: "ColumnNameString", # required
+    #                   field_id: 1
+    #                 }
+    #               ],
+    #               spec_id: 1
+    #             }
+    #           ],
+    #           default_spec_id: 1,
+    #           last_partition_id: 1,
+    #           sort_orders: [
+    #             {
+    #               order_id: 1, # required
+    #               fields: [ # required
+    #                 {
+    #                   source_id: 1, # required
+    #                   transform: "IcebergTransformString", # required
+    #                   direction: "asc" # One of: ["asc", "desc"], # required
+    #                   null_order: "nulls-first" # One of: ["nulls-first", "nulls-last"], # required
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           default_sort_order_id: 1
+    #         },
     #         status: {
     #           requested_by: "NameString",
     #           updated_by: "NameString",
@@ -19603,6 +23070,9 @@ module Aws::Glue
     #               }
     #             ]
     #           }
+    #         },
+    #         rls_properties: {
+    #           default_rls_policy: "NameString"
     #         }
     #       }
     #     ]
@@ -19663,7 +23133,7 @@ module Aws::Glue
     #     column_name_list: ["NameString"],
     #     role: "NameString", # required
     #     sample_size: 1.0,
-    #     catalog_id: "NameString",
+    #     catalog_id: "CatalogIdString",
     #     security_configuration: "NameString"
     #   }
     #   options = {}
@@ -19685,10 +23155,13 @@ module Aws::Glue
     #   <p>The name of the database where the table resides.</p>
     # @option params [String] :table_name
     #   <p>The name of the table for which to start a column statistic task run schedule.</p>
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString"
     #   }
     #   options = {}
     #   response = client.start_column_statistics_task_run_schedule(params, options)
@@ -19749,7 +23222,8 @@ module Aws::Glue
     # @option params [Types::DataSource] :data_source
     #   <p>The data source (Glue table) associated with this run.</p>
     # @option params [String] :role
-    #   <p>An IAM role supplied to encrypt the results of the run.</p>
+    #   <p>The IAM role that Glue assumes to access resources for the run.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html">Configure IAM permissions for Glue Data Quality</a>.</p>
     # @option params [Integer] :number_of_workers
     #   <p>The number of <code>G.1X</code> workers to be used in the run. The default is 5.</p>
     # @option params [Integer] :timeout
@@ -19760,6 +23234,11 @@ module Aws::Glue
     #   <p>The name of the security configuration created with the data quality encryption option.</p>
     # @option params [String] :client_token
     #   <p>Used for idempotency and is recommended to be set to a random ID (such as a UUID) to avoid creating or starting multiple instances of the same resource.</p>
+    # @option params [Types::DataQualityRuleRecommendationRunAdditionalRunOptions] :additional_run_options
+    #   <p>Additional run options you can specify for a recommendation run.</p>
+    # @option params [String] :recommendation_mode
+    #   <p>The mode that Glue Data Quality uses to recommend rules.</p>
+    #            <p>The default is <code>BASIC</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     data_source: { # required
@@ -19788,7 +23267,11 @@ module Aws::Glue
     #     timeout: 1,
     #     created_ruleset_name: "NameString",
     #     data_quality_security_configuration: "NameString",
-    #     client_token: "HashString"
+    #     client_token: "HashString",
+    #     additional_run_options: {
+    #       custom_log_group_prefix: "GenericString"
+    #     },
+    #     recommendation_mode: "BASIC" # One of: ["BASIC", "ADVANCED"]
     #   }
     #   options = {}
     #   response = client.start_data_quality_rule_recommendation_run(params, options)
@@ -19851,7 +23334,56 @@ module Aws::Glue
     #     additional_run_options: {
     #       cloud_watch_metrics_enabled: false,
     #       results_s3_prefix: "UriString",
-    #       composite_rule_evaluation_method: "COLUMN" # One of: ["COLUMN", "ROW"]
+    #       composite_rule_evaluation_method: "COLUMN" # One of: ["COLUMN", "ROW"],
+    #       custom_log_group_prefix: "GenericString",
+    #       row_level_results: {
+    #         max_rows_to_write: 1,
+    #         result_type: "ALL" # One of: ["ALL", "PASSED_ONLY", "FAILED_ONLY"],
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString"
+    #         }
+    #       },
+    #       profiling_results: {
+    #         write_profiling_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString"
+    #         },
+    #         distribution_results: {
+    #           write_distribution_results_enabled: false,
+    #           catalog_table_config: {
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             s3_location: "UriString",
+    #             catalog_id: "NameString"
+    #           }
+    #         }
+    #       },
+    #       observation_scope: "ALL" # One of: ["ALL", "NONE"],
+    #       observation_mode: "SCHEDULED" # One of: ["SCHEDULED", "FIXED"],
+    #       data_quality_rule_results: {
+    #         write_data_quality_rule_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString"
+    #         }
+    #       },
+    #       observation_results: {
+    #         write_observation_results_enabled: false,
+    #         catalog_table_config: {
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           s3_location: "UriString",
+    #           catalog_id: "NameString"
+    #         }
+    #       }
     #     },
     #     ruleset_names: ["NameString"], # required
     #     additional_data_sources: {
@@ -20006,7 +23538,7 @@ module Aws::Glue
     #   <p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can
     #         consume resources before it is terminated and enters <code>TIMEOUT</code> status. This value overrides the timeout value set in the parent job. </p>
     #            <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>
-    #            <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>
+    #            <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>
     #            <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>
     #            <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>
     # @option params [Float] :max_capacity
@@ -20027,8 +23559,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -20165,6 +23697,36 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Starts a materialized view refresh task run for a specified materialized view.</p>
+    # @param [Hash, Types::StartMaterializedViewRefreshTaskRunRequest] params
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>
+    # @option params [String] :database_name
+    #   <p>The name of the database where the table resides.</p>
+    # @option params [String] :table_name
+    #   <p>The name of the materialized view to run the refresh task for.</p>
+    # @option params [Boolean] :full_refresh
+    #   <p>Specifies whether this is a full refresh of the task run.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     full_refresh: false
+    #   }
+    #   options = {}
+    #   response = client.start_materialized_view_refresh_task_run(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     materialized_view_refresh_task_run_id: "UUIDv4"
+    #   }
+    # @return [Types::StartMaterializedViewRefreshTaskRunResponse]
+    def start_materialized_view_refresh_task_run(params = {}, options = {})
+      request = build_request(:start_materialized_view_refresh_task_run, params)
+      request.send_request(options)
+    end
+
     # <p>Starts an existing trigger. See <a href="https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html">Triggering
     #       Jobs</a> for information about how different types of trigger are
     #       started.</p>
@@ -20221,10 +23783,13 @@ module Aws::Glue
     #   <p>The name of the database where the table resides.</p>
     # @option params [String] :table_name
     #   <p>The name of the table.</p>
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     database_name: "DatabaseName", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString"
     #   }
     #   options = {}
     #   response = client.stop_column_statistics_task_run(params, options)
@@ -20243,10 +23808,13 @@ module Aws::Glue
     #   <p>The name of the database where the table resides.</p>
     # @option params [String] :table_name
     #   <p>The name of the table for which to stop a column statistic task run schedule.</p>
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     catalog_id: "CatalogIdString"
     #   }
     #   options = {}
     #   response = client.stop_column_statistics_task_run_schedule(params, options)
@@ -20296,6 +23864,31 @@ module Aws::Glue
     # @return [Types::StopCrawlerScheduleResponse]
     def stop_crawler_schedule(params = {}, options = {})
       request = build_request(:stop_crawler_schedule, params)
+      request.send_request(options)
+    end
+
+    # <p>Stops a materialized view refresh task run for a specified materialized view.</p>
+    # @param [Hash, Types::StopMaterializedViewRefreshTaskRunRequest] params
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>
+    # @option params [String] :database_name
+    #   <p>The name of the database where the table resides.</p>
+    # @option params [String] :table_name
+    #   <p>The name of the materialized view.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #   }
+    #   options = {}
+    #   response = client.stop_materialized_view_refresh_task_run(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::StopMaterializedViewRefreshTaskRunResponse]
+    def stop_materialized_view_refresh_task_run(params = {}, options = {})
+      request = build_request(:stop_materialized_view_refresh_task_run, params)
       request.send_request(options)
     end
 
@@ -20415,7 +24008,7 @@ module Aws::Glue
     #       authentication_configuration: {
     #         authentication_type: "BASIC" # One of: ["BASIC", "OAUTH2", "CUSTOM", "IAM"],
     #         o_auth2_properties: {
-    #           o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"],
+    #           o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER", "REFRESH_TOKEN"],
     #           o_auth2_client_application: {
     #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
     #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference"
@@ -20477,6 +24070,39 @@ module Aws::Glue
     # @return [Types::UntagResourceResponse]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the name and description of an existing asset in Glue Data Catalog. Only the fields that you provide are updated.</p>
+    # @param [Hash, Types::UpdateAssetRequest] params
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the asset to update.</p>
+    # @option params [String] :name
+    #   <p>The new name of the asset.</p>
+    # @option params [String] :description
+    #   <p>The new description of the asset.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "AssetId", # required
+    #     name: "AssetName",
+    #     description: "AssetDescription",
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.update_asset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "AssetId", # required
+    #     name: "AssetName",
+    #     description: "AssetDescription",
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::UpdateAssetResponse]
+    def update_asset(params = {}, options = {})
+      request = build_request(:update_asset, params)
       request.send_request(options)
     end
 
@@ -20568,7 +24194,8 @@ module Aws::Glue
     #           permissions: ["ALL" # One of: ["ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"]]
     #         }
     #       ],
-    #       allow_full_table_external_data_access: "True" # One of: ["True", "False"]
+    #       allow_full_table_external_data_access: "True" # One of: ["True", "False"],
+    #       overwrite_child_resource_permissions_with_default: "Accept" # One of: ["Accept", "Deny"]
     #     }
     #   }
     #   options = {}
@@ -20960,7 +24587,7 @@ module Aws::Glue
     #     schedule: "CronExpression",
     #     column_name_list: ["NameString"],
     #     sample_size: 1.0,
-    #     catalog_id: "NameString",
+    #     catalog_id: "CatalogIdString",
     #     security_configuration: "NameString"
     #   }
     #   options = {}
@@ -21013,7 +24640,7 @@ module Aws::Glue
     #       authentication_configuration: {
     #         authentication_type: "BASIC" # One of: ["BASIC", "OAUTH2", "CUSTOM", "IAM"],
     #         o_auth2_properties: {
-    #           o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"],
+    #           o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER", "REFRESH_TOKEN"],
     #           o_auth2_client_application: {
     #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
     #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference"
@@ -21100,6 +24727,8 @@ module Aws::Glue
     # @option params [String] :crawler_security_configuration
     #   <p>The name of the <code>SecurityConfiguration</code> structure to be used by this
     #         crawler.</p>
+    # @option params [String] :catalog_id
+    #   <p>The ID of the Data Catalog in which to store the crawler's output. If you omit this value, the existing value on the crawler is preserved.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "NameString", # required
@@ -21191,7 +24820,8 @@ module Aws::Glue
     #       account_id: "AccountId"
     #     },
     #     configuration: "CrawlerConfiguration",
-    #     crawler_security_configuration: "CrawlerSecurityConfiguration"
+    #     crawler_security_configuration: "CrawlerSecurityConfiguration",
+    #     catalog_id: "CatalogIdString"
     #   }
     #   options = {}
     #   response = client.update_crawler(params, options)
@@ -21368,13 +24998,85 @@ module Aws::Glue
       request.send_request(options)
     end
 
+    # <p>Updates a business glossary in Glue Data Catalog.</p>
+    # @param [Hash, Types::UpdateGlossaryRequest] params
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the glossary to update.</p>
+    # @option params [String] :name
+    #   <p>The updated name of the glossary.</p>
+    # @option params [String] :description
+    #   <p>The updated description of the glossary.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "GlossaryId", # required
+    #     name: "GlossaryName",
+    #     description: "MetadataDescription",
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.update_glossary(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "GlossaryId",
+    #     name: "GlossaryName",
+    #     description: "MetadataDescription"
+    #   }
+    # @return [Types::UpdateGlossaryResponse]
+    def update_glossary(params = {}, options = {})
+      request = build_request(:update_glossary, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a glossary term in Glue Data Catalog.</p>
+    # @param [Hash, Types::UpdateGlossaryTermRequest] params
+    # @option params [String] :identifier
+    #   <p>The unique identifier of the glossary term to update.</p>
+    # @option params [String] :name
+    #   <p>The updated name of the glossary term.</p>
+    # @option params [String] :short_description
+    #   <p>The updated short description of the glossary term.</p>
+    # @option params [String] :long_description
+    #   <p>The updated long description of the glossary term.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "GlossaryTermId", # required
+    #     name: "GlossaryTermName",
+    #     short_description: "GlossaryShortDescription",
+    #     long_description: "GlossaryLongDescription",
+    #     client_token: "HashString"
+    #   }
+    #   options = {}
+    #   response = client.update_glossary_term(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "GlossaryTermId",
+    #     glossary_id: "GlossaryId",
+    #     name: "GlossaryTermName",
+    #     short_description: "GlossaryShortDescription",
+    #     long_description: "GlossaryLongDescription"
+    #   }
+    # @return [Types::UpdateGlossaryTermResponse]
+    def update_glossary_term(params = {}, options = {})
+      request = build_request(:update_glossary_term, params)
+      request.send_request(options)
+    end
+
     # <p>Updates the existing Glue Identity Center configuration, allowing modification of scopes and permissions for the integration.</p>
     # @param [Hash, Types::UpdateGlueIdentityCenterConfigurationRequest] params
     # @option params [Array<String>] :scopes
     #   <p>A list of Identity Center scopes that define the updated permissions and access levels for the Glue configuration.</p>
+    # @option params [Boolean] :user_background_sessions_enabled
+    #   <p>Specifies whether users can run background sessions when using Identity Center authentication with Glue services.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     scopes: ["IdentityCenterScope"]
+    #     scopes: ["IdentityCenterScope"],
+    #     user_background_sessions_enabled: false
     #   }
     #   options = {}
     #   response = client.update_glue_identity_center_configuration(params, options)
@@ -21397,7 +25099,7 @@ module Aws::Glue
     #   <p>The resource properties associated with the integration target.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     source_processing_properties: {
     #       role_arn: "String128"
     #     },
@@ -21413,7 +25115,8 @@ module Aws::Glue
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     resource_arn: "String128",
+    #     resource_arn: "String512",
+    #     resource_property_arn: "String512",
     #     source_processing_properties: {
     #       role_arn: "String128"
     #     },
@@ -21443,7 +25146,7 @@ module Aws::Glue
     #   <p>A structure for the target table configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #     source_table_config: {
     #       fields: ["String128"],
@@ -21460,7 +25163,8 @@ module Aws::Glue
     #           conversion_spec: "String128"
     #         }
     #       ],
-    #       target_table_name: "String128"
+    #       target_table_name: "String128",
+    #       integration_arn: "String128"
     #     }
     #   }
     #   options = {}
@@ -23122,9 +26826,9 @@ module Aws::Glue
     #         The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET.
     #       </p>
     # @option params [String] :repository_name
-    #   <p>The name of the remote repository that contains the job artifacts. 
+    #   <p>The name of the remote repository that contains the job artifacts.
     #         For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.
-    #         Use the format <code><WorkspaceName>/<RepositoryName></code>. 
+    #         Use the format <code><WorkspaceName>/<RepositoryName></code>.
     #       </p>
     # @option params [String] :repository_owner
     #   <p>The owner of the remote repository that contains the job artifacts.</p>
@@ -23423,9 +27127,9 @@ module Aws::Glue
     #         The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET.
     #       </p>
     # @option params [String] :repository_name
-    #   <p>The name of the remote repository that contains the job artifacts. 
+    #   <p>The name of the remote repository that contains the job artifacts.
     #         For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.
-    #         Use the format <code><WorkspaceName>/<RepositoryName></code>. 
+    #         Use the format <code><WorkspaceName>/<RepositoryName></code>.
     #       </p>
     # @option params [String] :repository_owner
     #   <p>The owner of the remote repository that contains the job artifacts.</p>
@@ -23473,7 +27177,7 @@ module Aws::Glue
     #   <p>The name of the catalog database in which the table resides. For Hive
     #         compatibility, this name is entirely lowercase.</p>
     # @option params [String] :name
-    #   <p>The unique identifier for the table within the specified database that will be 
+    #   <p>The unique identifier for the table within the specified database that will be
     #         created in the Glue Data Catalog.</p>
     # @option params [Types::TableInput] :table_input
     #   <p>An updated <code>TableInput</code> object to define the metadata table
@@ -23491,8 +27195,7 @@ module Aws::Glue
     # @option params [Boolean] :force
     #   <p>A flag that can be set to true to ignore matching storage descriptor and subobject matching requirements.</p>
     # @option params [Types::UpdateOpenTableFormatInput] :update_open_table_format_input
-    #   <p>Input parameters for updating open table format tables in GlueData Catalog, 
-    #         serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>
+    #   <p>Input parameters for updating open table format tables in GlueData Catalog, serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog_id: "CatalogIdString",
@@ -23579,8 +27282,15 @@ module Aws::Glue
     #         name: "NameString",
     #         region: "NameString"
     #       },
+    #       federated_table: {
+    #         identifier: "FederationIdentifier",
+    #         database_identifier: "FederationIdentifier",
+    #         connection_name: "NameString",
+    #         connection_type: "NameString"
+    #       },
     #       view_definition: {
     #         is_protected: false,
+    #         is_managed: false,
     #         definer: "ArnString",
     #         representations: [
     #           {
@@ -23591,7 +27301,24 @@ module Aws::Glue
     #             view_expanded_text: "ViewTextString"
     #           }
     #         ],
-    #         sub_objects: ["ArnString"]
+    #         view_version_id: 1,
+    #         view_version_token: "VersionString",
+    #         refresh_seconds: 1,
+    #         last_refresh_type: "FULL" # One of: ["FULL", "INCREMENTAL"],
+    #         sub_objects: ["ArnString"],
+    #         sub_object_version_ids: [1],
+    #         sub_objects_statistics: [
+    #           {
+    #             source_type: "HIVE_PARQUET" # One of: ["HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"],
+    #             glue_version_id: "NullableString",
+    #             partition_count: 1,
+    #             file_count: 1,
+    #             total_file_bytes: 1
+    #           }
+    #         ],
+    #         spark_pipeline_info: {
+    #           "SparkPipelineInfoKey" => "SparkPipelineInfoValue"
+    #         }
     #       }
     #     },
     #     skip_archive: false,
@@ -23614,7 +27341,9 @@ module Aws::Glue
     #                     name: "ColumnNameString", # required
     #                     type: ""null"", # required
     #                     required: false, # required
-    #                     doc: "CommentString"
+    #                     doc: "CommentString",
+    #                     initial_default: ""null"",
+    #                     write_default: ""null""
     #                   }
     #                 ]
     #               },
@@ -23643,7 +27372,17 @@ module Aws::Glue
     #               location: "LocationString", # required
     #               properties: {
     #                 "NullableString" => "NullableString"
-    #               }
+    #               },
+    #               action: "add-schema" # One of: ["add-schema", "set-current-schema", "add-spec", "set-default-spec", "add-sort-order", "set-default-sort-order", "set-location", "set-properties", "remove-properties", "add-encryption-key", "remove-encryption-key"],
+    #               encryption_key: {
+    #                 key_id: "EncryptionKeyIdString", # required
+    #                 encrypted_key_metadata: "EncryptedKeyMetadataString", # required
+    #                 encrypted_by_id: "EncryptionKeyIdString",
+    #                 properties: {
+    #                   "NullableString" => "NullableString"
+    #                 }
+    #               },
+    #               key_id: "EncryptionKeyIdString"
     #             }
     #           ]
     #         }
@@ -23884,6 +27623,7 @@ module Aws::Glue
     #       function_name: "NameString",
     #       class_name: "NameString",
     #       owner_name: "NameString",
+    #       function_type: "REGULAR_FUNCTION" # One of: ["REGULAR_FUNCTION", "AGGREGATE_FUNCTION", "STORED_PROCEDURE"],
     #       owner_type: "USER" # One of: ["USER", "ROLE", "GROUP"],
     #       resource_uris: [
     #         {

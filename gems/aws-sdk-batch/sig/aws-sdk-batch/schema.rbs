@@ -22,8 +22,13 @@ module Aws::Batch
     CRUpdateAllocationStrategy: EnumShape
     CancelJobRequest: StructureShape
     CancelJobResponse: StructureShape
+    CancelJobsErrorDetail: StructureShape
+    CancelJobsErrorDetailList: ListShape
+    CancelJobsRequest: StructureShape
+    CancelJobsResponse: StructureShape
     CapacityLimit: StructureShape
     CapacityLimits: ListShape
+    CapacityReservationRequest: StructureShape
     ClientException: StructureShape
     ClientRequestToken: StringShape
     ComputeEnvironmentDetail: StructureShape
@@ -32,12 +37,14 @@ module Aws::Batch
     ComputeEnvironmentOrders: ListShape
     ComputeResource: StructureShape
     ComputeResourceUpdate: StructureShape
+    ComputeScalingPolicy: StructureShape
     ConsumableResourceList: ListShape
     ConsumableResourceProperties: StructureShape
     ConsumableResourceRequirement: StructureShape
     ConsumableResourceSummary: StructureShape
     ConsumableResourceSummaryList: ListShape
     ContainerDetail: StructureShape
+    ContainerInsights: EnumShape
     ContainerOverrides: StructureShape
     ContainerProperties: StructureShape
     ContainerSummary: StructureShape
@@ -47,6 +54,8 @@ module Aws::Batch
     CreateConsumableResourceResponse: StructureShape
     CreateJobQueueRequest: StructureShape
     CreateJobQueueResponse: StructureShape
+    CreateQuotaShareRequest: StructureShape
+    CreateQuotaShareResponse: StructureShape
     CreateSchedulingPolicyRequest: StructureShape
     CreateSchedulingPolicyResponse: StructureShape
     CreateServiceEnvironmentRequest: StructureShape
@@ -57,6 +66,8 @@ module Aws::Batch
     DeleteConsumableResourceResponse: StructureShape
     DeleteJobQueueRequest: StructureShape
     DeleteJobQueueResponse: StructureShape
+    DeleteQuotaShareRequest: StructureShape
+    DeleteQuotaShareResponse: StructureShape
     DeleteSchedulingPolicyRequest: StructureShape
     DeleteSchedulingPolicyResponse: StructureShape
     DeleteServiceEnvironmentRequest: StructureShape
@@ -73,6 +84,8 @@ module Aws::Batch
     DescribeJobQueuesResponse: StructureShape
     DescribeJobsRequest: StructureShape
     DescribeJobsResponse: StructureShape
+    DescribeQuotaShareRequest: StructureShape
+    DescribeQuotaShareResponse: StructureShape
     DescribeSchedulingPoliciesRequest: StructureShape
     DescribeSchedulingPoliciesResponse: StructureShape
     DescribeServiceEnvironmentsRequest: StructureShape
@@ -83,6 +96,7 @@ module Aws::Batch
     DeviceCgroupPermission: EnumShape
     DeviceCgroupPermissions: ListShape
     DevicesList: ListShape
+    Double: FloatShape
     EFSAuthorizationConfig: StructureShape
     EFSAuthorizationConfigIAM: EnumShape
     EFSTransitEncryption: EnumShape
@@ -92,14 +106,19 @@ module Aws::Batch
     EcsProperties: StructureShape
     EcsPropertiesDetail: StructureShape
     EcsPropertiesOverride: StructureShape
+    EcsSettings: StructureShape
     EcsTaskDetails: StructureShape
     EcsTaskProperties: StructureShape
+    EksAccessEntry: StructureShape
+    EksAccessEntryDesiredState: EnumShape
+    EksAccessEntryStatus: EnumShape
     EksAnnotationsMap: MapShape
     EksAttemptContainerDetail: StructureShape
     EksAttemptContainerDetails: ListShape
     EksAttemptDetail: StructureShape
     EksAttemptDetails: ListShape
     EksConfiguration: StructureShape
+    EksConfigurationUpdate: StructureShape
     EksContainer: StructureShape
     EksContainerDetail: StructureShape
     EksContainerDetails: ListShape
@@ -132,7 +151,12 @@ module Aws::Batch
     EphemeralStorage: StructureShape
     EvaluateOnExit: StructureShape
     EvaluateOnExitList: ListShape
+    FairshareCapacityUsage: StructureShape
+    FairshareCapacityUsageList: ListShape
+    FairshareCapacityUtilization: StructureShape
+    FairshareCapacityUtilizationList: ListShape
     FairsharePolicy: StructureShape
+    FairshareUtilizationDetail: StructureShape
     FargatePlatformConfiguration: StructureShape
     FirelensConfiguration: StructureShape
     FirelensConfigurationOptionsMap: MapShape
@@ -141,6 +165,10 @@ module Aws::Batch
     FrontOfQueueDetail: StructureShape
     FrontOfQueueJobSummary: StructureShape
     FrontOfQueueJobSummaryList: ListShape
+    FrontOfQuotaShareJobSummary: StructureShape
+    FrontOfQuotaShareJobSummaryList: ListShape
+    FrontOfQuotaSharesDetail: StructureShape
+    FrontOfQuotaSharesJobSummaryMap: MapShape
     GetJobQueueSnapshotRequest: StructureShape
     GetJobQueueSnapshotResponse: StructureShape
     Host: StructureShape
@@ -148,9 +176,15 @@ module Aws::Batch
     ImagePullSecret: StructureShape
     ImagePullSecrets: ListShape
     ImageType: StringShape
+    InfrastructureOptimization: StructureShape
+    InstanceLaunchTemplate: StructureShape
+    InstanceLaunchTemplateUpdate: StructureShape
+    InstanceRequirementsRequest: StructureShape
     Integer: IntegerShape
     JQState: EnumShape
     JQStatus: EnumShape
+    JobCapacityUsageSummary: StructureShape
+    JobCapacityUsageSummaryList: ListShape
     JobDefinition: StructureShape
     JobDefinitionList: ListShape
     JobDefinitionType: EnumShape
@@ -193,6 +227,8 @@ module Aws::Batch
     ListJobsFilterList: ListShape
     ListJobsRequest: StructureShape
     ListJobsResponse: StructureShape
+    ListQuotaSharesRequest: StructureShape
+    ListQuotaSharesResponse: StructureShape
     ListSchedulingPoliciesRequest: StructureShape
     ListSchedulingPoliciesResponse: StructureShape
     ListServiceJobsRequest: StructureShape
@@ -207,6 +243,10 @@ module Aws::Batch
     LogConfigurationOptionsMap: MapShape
     LogDriver: EnumShape
     Long: IntegerShape
+    ManagedInstancesLocalStorageConfiguration: StructureShape
+    ManagedInstancesNetworkConfiguration: StructureShape
+    ManagedInstancesProvider: StructureShape
+    ManagedInstancesStorageConfiguration: StructureShape
     MountPoint: StructureShape
     MountPoints: ListShape
     NetworkConfiguration: StructureShape
@@ -225,6 +265,26 @@ module Aws::Batch
     PlatformCapability: EnumShape
     PlatformCapabilityList: ListShape
     Quantity: StringShape
+    QueueSnapshotCapacityUsage: StructureShape
+    QueueSnapshotCapacityUsageList: ListShape
+    QueueSnapshotUtilizationDetail: StructureShape
+    QuotaShareCapacityLimit: StructureShape
+    QuotaShareCapacityLimits: ListShape
+    QuotaShareCapacityUsage: StructureShape
+    QuotaShareCapacityUsageList: ListShape
+    QuotaShareCapacityUtilization: StructureShape
+    QuotaShareCapacityUtilizationList: ListShape
+    QuotaShareDetail: StructureShape
+    QuotaShareIdleResourceAssignmentStrategy: EnumShape
+    QuotaShareInSharePreemptionState: EnumShape
+    QuotaShareList: ListShape
+    QuotaSharePolicy: StructureShape
+    QuotaSharePreemptionConfiguration: StructureShape
+    QuotaShareResourceSharingConfiguration: StructureShape
+    QuotaShareResourceSharingStrategy: EnumShape
+    QuotaShareState: EnumShape
+    QuotaShareStatus: EnumShape
+    QuotaShareUtilizationDetail: StructureShape
     RegisterJobDefinitionRequest: StructureShape
     RegisterJobDefinitionResponse: StructureShape
     RepositoryCredentials: StructureShape
@@ -234,6 +294,7 @@ module Aws::Batch
     RetryAction: EnumShape
     RetryStrategy: StructureShape
     RuntimePlatform: StructureShape
+    S3FilesVolumeConfiguration: StructureShape
     SchedulingPolicyDetail: StructureShape
     SchedulingPolicyDetailList: ListShape
     SchedulingPolicyListingDetail: StructureShape
@@ -250,8 +311,16 @@ module Aws::Batch
     ServiceEnvironmentType: EnumShape
     ServiceJobAttemptDetail: StructureShape
     ServiceJobAttemptDetails: ListShape
+    ServiceJobCapacityUsageDetail: StructureShape
+    ServiceJobCapacityUsageDetailList: ListShape
+    ServiceJobCapacityUsageSummary: StructureShape
+    ServiceJobCapacityUsageSummaryList: ListShape
     ServiceJobEvaluateOnExit: StructureShape
     ServiceJobEvaluateOnExitList: ListShape
+    ServiceJobPreemptedAttempt: StructureShape
+    ServiceJobPreemptionConfiguration: StructureShape
+    ServiceJobPreemptionSummary: StructureShape
+    ServiceJobRecentPreemptedAttemptList: ListShape
     ServiceJobRetryAction: EnumShape
     ServiceJobRetryStrategy: StructureShape
     ServiceJobStatus: EnumShape
@@ -284,8 +353,16 @@ module Aws::Batch
     TaskPropertiesOverride: StructureShape
     TerminateJobRequest: StructureShape
     TerminateJobResponse: StructureShape
+    TerminateJobsErrorDetail: StructureShape
+    TerminateJobsErrorDetailList: ListShape
+    TerminateJobsRequest: StructureShape
+    TerminateJobsResponse: StructureShape
     TerminateServiceJobRequest: StructureShape
     TerminateServiceJobResponse: StructureShape
+    TerminateServiceJobsErrorDetail: StructureShape
+    TerminateServiceJobsErrorDetailList: ListShape
+    TerminateServiceJobsRequest: StructureShape
+    TerminateServiceJobsResponse: StructureShape
     Tmpfs: StructureShape
     TmpfsList: ListShape
     Ulimit: StructureShape
@@ -298,11 +375,16 @@ module Aws::Batch
     UpdateConsumableResourceResponse: StructureShape
     UpdateJobQueueRequest: StructureShape
     UpdateJobQueueResponse: StructureShape
+    UpdateManagedInstancesProviderConfiguration: StructureShape
     UpdatePolicy: StructureShape
+    UpdateQuotaShareRequest: StructureShape
+    UpdateQuotaShareResponse: StructureShape
     UpdateSchedulingPolicyRequest: StructureShape
     UpdateSchedulingPolicyResponse: StructureShape
     UpdateServiceEnvironmentRequest: StructureShape
     UpdateServiceEnvironmentResponse: StructureShape
+    UpdateServiceJobRequest: StructureShape
+    UpdateServiceJobResponse: StructureShape
     UserdataType: EnumShape
     Volume: StructureShape
     Volumes: ListShape

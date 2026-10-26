@@ -198,6 +198,38 @@ module Aws::BedrockAgent
       ?description: String,
       ?data_source_configuration: {
         type: String,
+        managed_knowledge_base_connector_configuration: {
+          deletion_protection_configuration: {
+            deletion_protection_status: String,
+            deletion_protection_threshold: Integer
+          },
+          media_extraction_configuration: {
+            image_extraction_configuration: {
+              image_extraction_status: untyped
+            },
+            audio_extraction_configuration: {
+              audio_extraction_status: untyped
+            },
+            video_extraction_configuration: {
+              video_extraction_status: untyped
+            }
+          },
+          connector_parameters: Smithy::Schema::document,
+          sync_schedule: {
+            daily: {
+            },
+            weekly: {
+              day_of_week: String
+            },
+            monthly: {
+              day_of_month: {
+                day_number: Integer,
+                last_day_of_month: {
+                }
+              }
+            }
+          }
+        },
         s3_configuration: {
           bucket_arn: String,
           inclusion_prefixes: Array[String],
@@ -215,7 +247,7 @@ module Aws::BedrockAgent
           },
           crawler_configuration: {
             crawler_limits: {
-              rate_limit: Integer,
+              rate_limit: untyped,
               max_pages: untyped
             },
             inclusion_filters: Array[String],
@@ -474,7 +506,8 @@ module Aws::BedrockAgent
                                 description: untyped,
                                 input_schema: {
                                   json: Smithy::Schema::document
-                                }
+                                },
+                                strict: bool
                               },
                               cache_point: untyped
                             }
@@ -641,7 +674,22 @@ module Aws::BedrockAgent
           embedding_model_configuration: {
             bedrock_embedding_model_configuration: {
               dimensions: Integer,
-              embedding_data_type: String
+              embedding_data_type: String,
+              audio: Array[
+                {
+                  segmentation_configuration: {
+                    fixed_length_duration: Integer
+                  }
+                }
+              ],
+              video: Array[
+                {
+                  segmentation_configuration: {
+                    fixed_length_duration: untyped
+                  }
+                }
+              ],
+              model_configuration: Smithy::Schema::document
             }
           },
           supplemental_data_storage_configuration: {
@@ -654,6 +702,15 @@ module Aws::BedrockAgent
               }
             ]
           }
+        },
+        managed_knowledge_base_configuration: {
+          embedding_model_type: String,
+          embedding_model_arn: untyped,
+          embedding_model_configuration: untyped,
+          server_side_encryption_configuration: {
+            kms_key_arn: String
+          },
+          supplemental_data_storage_configuration: untyped
         },
         kendra_knowledge_base_configuration: {
           kendra_index_arn: String
@@ -862,7 +919,8 @@ module Aws::BedrockAgent
                       description: untyped,
                       input_schema: {
                         json: Smithy::Schema::document
-                      }
+                      },
+                      strict: bool
                     },
                     cache_point: untyped
                   }
@@ -925,6 +983,26 @@ module Aws::BedrockAgent
       ?client_token: String,
       ?tags: Hash[String, String]
     ) -> _CreatePromptVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePromptVersionResponse
+
+    interface _CreateVpcConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateVpcConfigurationResponse]
+      def vpc_configuration_id: () -> String?
+      def status: () -> String?
+    end
+    def create_vpc_configuration: (
+      ?knowledge_base_id: String,
+      ?client_token: String,
+      ?vpc_id: String,
+      ?subnet_ids: Array[String],
+      ?resource_target: String,
+      ?port: Integer,
+      ?protocol: String,
+      ?resolution_mode: String,
+      ?host_header: String,
+      ?tls_server_name: String,
+      ?name: String,
+      ?description: String
+    ) -> _CreateVpcConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcConfigurationResponse
 
     interface _DeleteAgentResponse
       include Smithy::Client::_Response[Types::DeleteAgentResponse]
@@ -1050,6 +1128,26 @@ module Aws::BedrockAgent
       ?prompt_version: String
     ) -> _DeletePromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePromptResponse
 
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def revision_id: () -> String?
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String,
+      ?expected_revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteVpcConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteVpcConfigurationResponse]
+      def vpc_configuration_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_vpc_configuration: (
+      ?knowledge_base_id: String,
+      ?vpc_configuration_id: String
+    ) -> _DeleteVpcConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcConfigurationResponse
+
     interface _DisassociateAgentCollaboratorResponse
       include Smithy::Client::_Response[Types::DisassociateAgentCollaboratorResponse]
     end
@@ -1149,7 +1247,8 @@ module Aws::BedrockAgent
       def validations: () -> Array[Types::FlowValidation]?
     end
     def get_flow: (
-      ?flow_identifier: String
+      ?flow_identifier: String,
+      ?included_data: String
     ) -> _GetFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFlowResponse
 
     interface _GetFlowAliasResponse
@@ -1184,7 +1283,8 @@ module Aws::BedrockAgent
     end
     def get_flow_version: (
       ?flow_identifier: String,
-      ?flow_version: String
+      ?flow_version: String,
+      ?included_data: String
     ) -> _GetFlowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFlowVersionResponse
 
     interface _GetIngestionJobResponse
@@ -1240,8 +1340,28 @@ module Aws::BedrockAgent
     end
     def get_prompt: (
       ?prompt_identifier: String,
-      ?prompt_version: String
+      ?prompt_version: String,
+      ?included_data: String
     ) -> _GetPromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPromptResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _GetVpcConfigurationResponse
+      include Smithy::Client::_Response[Types::GetVpcConfigurationResponse]
+      def vpc_configuration: () -> Types::VpcConfiguration?
+    end
+    def get_vpc_configuration: (
+      ?knowledge_base_id: String,
+      ?vpc_configuration_id: String
+    ) -> _GetVpcConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVpcConfigurationResponse
 
     interface _IngestKnowledgeBaseDocumentsResponse
       include Smithy::Client::_Response[Types::IngestKnowledgeBaseDocumentsResponse]
@@ -1270,13 +1390,20 @@ module Aws::BedrockAgent
             s3_location: {
               uri: String,
               bucket_owner_account_id: String
-            }
+            },
+            access_control_list: Array[
+              {
+                name: String,
+                type: String,
+                access: String
+              }
+            ]
           },
           content: {
             data_source_type: String,
             custom: {
               custom_document_identifier: {
-                id: String
+                id: untyped
               },
               source_type: String,
               s3_location: untyped,
@@ -1476,6 +1603,18 @@ module Aws::BedrockAgent
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _ListVpcConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListVpcConfigurationsResponse]
+      def items: () -> Array[Types::VpcConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_vpc_configurations: (
+      ?knowledge_base_id: String,
+      ?status_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListVpcConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcConfigurationsResponse
+
     interface _PrepareAgentResponse
       include Smithy::Client::_Response[Types::PrepareAgentResponse]
       def agent_id: () -> String?
@@ -1495,6 +1634,17 @@ module Aws::BedrockAgent
     def prepare_flow: (
       ?flow_identifier: String
     ) -> _PrepareFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PrepareFlowResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String,
+      ?expected_revision_id: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
 
     interface _StartIngestionJobResponse
       include Smithy::Client::_Response[Types::StartIngestionJobResponse]
@@ -1686,6 +1836,38 @@ module Aws::BedrockAgent
       ?description: String,
       ?data_source_configuration: {
         type: String,
+        managed_knowledge_base_connector_configuration: {
+          deletion_protection_configuration: {
+            deletion_protection_status: String,
+            deletion_protection_threshold: Integer
+          },
+          media_extraction_configuration: {
+            image_extraction_configuration: {
+              image_extraction_status: untyped
+            },
+            audio_extraction_configuration: {
+              audio_extraction_status: untyped
+            },
+            video_extraction_configuration: {
+              video_extraction_status: untyped
+            }
+          },
+          connector_parameters: Smithy::Schema::document,
+          sync_schedule: {
+            daily: {
+            },
+            weekly: {
+              day_of_week: String
+            },
+            monthly: {
+              day_of_month: {
+                day_number: Integer,
+                last_day_of_month: {
+                }
+              }
+            }
+          }
+        },
         s3_configuration: {
           bucket_arn: String,
           inclusion_prefixes: Array[String],
@@ -1703,7 +1885,7 @@ module Aws::BedrockAgent
           },
           crawler_configuration: {
             crawler_limits: {
-              rate_limit: Integer,
+              rate_limit: untyped,
               max_pages: untyped
             },
             inclusion_filters: Array[String],
@@ -1962,7 +2144,8 @@ module Aws::BedrockAgent
                                 description: untyped,
                                 input_schema: {
                                   json: Smithy::Schema::document
-                                }
+                                },
+                                strict: bool
                               },
                               cache_point: untyped
                             }
@@ -2108,7 +2291,22 @@ module Aws::BedrockAgent
           embedding_model_configuration: {
             bedrock_embedding_model_configuration: {
               dimensions: Integer,
-              embedding_data_type: String
+              embedding_data_type: String,
+              audio: Array[
+                {
+                  segmentation_configuration: {
+                    fixed_length_duration: Integer
+                  }
+                }
+              ],
+              video: Array[
+                {
+                  segmentation_configuration: {
+                    fixed_length_duration: untyped
+                  }
+                }
+              ],
+              model_configuration: Smithy::Schema::document
             }
           },
           supplemental_data_storage_configuration: {
@@ -2121,6 +2319,15 @@ module Aws::BedrockAgent
               }
             ]
           }
+        },
+        managed_knowledge_base_configuration: {
+          embedding_model_type: String,
+          embedding_model_arn: untyped,
+          embedding_model_configuration: untyped,
+          server_side_encryption_configuration: {
+            kms_key_arn: String
+          },
+          supplemental_data_storage_configuration: untyped
         },
         kendra_knowledge_base_configuration: {
           kendra_index_arn: String
@@ -2328,7 +2535,8 @@ module Aws::BedrockAgent
                       description: untyped,
                       input_schema: {
                         json: Smithy::Schema::document
-                      }
+                      },
+                      strict: bool
                     },
                     cache_point: untyped
                   }
@@ -2493,7 +2701,8 @@ module Aws::BedrockAgent
                                 description: untyped,
                                 input_schema: {
                                   json: Smithy::Schema::document
-                                }
+                                },
+                                strict: bool
                               },
                               cache_point: untyped
                             }

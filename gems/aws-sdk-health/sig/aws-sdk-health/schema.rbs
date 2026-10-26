@@ -35,6 +35,8 @@ module Aws::Health
     DescribeEventsRequest: StructureShape
     DescribeEventsResponse: StructureShape
     DescribeHealthServiceStatusForOrganizationResponse: StructureShape
+    DescribeServiceLifecycleRequest: StructureShape
+    DescribeServiceLifecycleResponse: StructureShape
     EntityAccountFilter: StructureShape
     EntityAggregate: StructureShape
     EntityAggregateList: ListShape
@@ -42,6 +44,8 @@ module Aws::Health
     EntityList: ListShape
     Event: StructureShape
     EventAccountFilter: StructureShape
+    EventActionability: EnumShape
+    EventActionabilityList: ListShape
     EventAggregate: StructureShape
     EventAggregateList: ListShape
     EventArnsList: ListShape
@@ -51,13 +55,23 @@ module Aws::Health
     EventDetailsErrorItem: StructureShape
     EventFilter: StructureShape
     EventList: ListShape
+    EventPersona: EnumShape
+    EventPersonaList: ListShape
     EventType: StructureShape
     EventType2: StringShape
+    EventTypeActionability: EnumShape
+    EventTypeActionabilityList: ListShape
     EventTypeCategoryList: ListShape
     EventTypeCodeList: ListShape
     EventTypeFilter: StructureShape
     EventTypeList: ListShape
+    EventTypePersona: EnumShape
+    EventTypePersonaList: ListShape
+    ImpactRiskList: ListShape
     InvalidPaginationToken: StructureShape
+    LifecycleEvent: StructureShape
+    LifecycleEventList: ListShape
+    LifecycleMaxResults: IntegerShape
     OrganizationAccountIdsList: ListShape
     OrganizationAffectedEntitiesErrorItem: StructureShape
     OrganizationEntityAccountFiltersList: ListShape
@@ -71,6 +85,9 @@ module Aws::Health
     OrganizationEventDetailsErrorItem: StructureShape
     OrganizationEventFilter: StructureShape
     OrganizationEventList: ListShape
+    ServiceLifecycle: StructureShape
+    ServiceLifecycleFilter: StructureShape
+    ServiceLifecycleList: ListShape
     UnsupportedLocale: StructureShape
     AccountId: StringShape
     AffectedAccountsList: ListShape

@@ -24,6 +24,7 @@ module Aws::S3Control
     ActivityMetrics: StructureShape
     AdvancedCostOptimizationMetrics: StructureShape
     AdvancedDataProtectionMetrics: StructureShape
+    AdvancedPerformanceMetrics: StructureShape
     Alias: StringShape
     AssociateAccessGrantsIdentityCenterRequest: StructureShape
     AsyncCreationTimestamp: TimestampShape
@@ -34,6 +35,7 @@ module Aws::S3Control
     AsyncRequestStatus: StringShape
     AsyncRequestTokenARN: StringShape
     AsyncResponseDetails: StructureShape
+    AuditContext: StringShape
     AwsLambdaTransformation: StructureShape
     AwsLambdaTransformationPayload: StringShape
     AwsOrgArn: StringShape
@@ -329,6 +331,7 @@ module Aws::S3Control
     NotSSEFilter: StructureShape
     ObjectAgeValue: IntegerShape
     ObjectCreationTime: TimestampShape
+    ObjectEncryption: StructureShape
     ObjectEncryptionFilter: UnionShape
     ObjectEncryptionFilterList: ListShape
     ObjectLambdaAccessPoint: StructureShape
@@ -420,6 +423,7 @@ module Aws::S3Control
     S3AccessControlList: StructureShape
     S3AccessControlPolicy: StructureShape
     S3AccessPointArn: StringShape
+    S3AnnotationDirective: EnumShape
     S3BucketArnString: StringShape
     S3BucketDestination: StructureShape
     S3CannedAccessControlList: EnumShape
@@ -440,9 +444,17 @@ module Aws::S3Control
     S3KeyArnString: StringShape
     S3ManifestOutputLocation: StructureShape
     S3MetadataDirective: EnumShape
+    S3ObjectLockEventHold: EnumShape
+    S3ObjectLockEventHoldDuration: StructureShape
+    S3ObjectLockEventHoldDurationDays: IntegerShape
+    S3ObjectLockEventHoldDurationYears: IntegerShape
     S3ObjectLockLegalHold: StructureShape
     S3ObjectLockLegalHoldStatus: EnumShape
     S3ObjectLockMode: EnumShape
+    S3ObjectLockRetentionEventHold: EnumShape
+    S3ObjectLockRetentionEventHoldDuration: StructureShape
+    S3ObjectLockRetentionEventHoldDurationDays: IntegerShape
+    S3ObjectLockRetentionEventHoldDurationYears: IntegerShape
     S3ObjectLockRetentionMode: EnumShape
     S3ObjectMetadata: StructureShape
     S3ObjectOwner: StructureShape
@@ -463,6 +475,8 @@ module Aws::S3Control
     S3StorageClass: EnumShape
     S3Tag: StructureShape
     S3TagSet: ListShape
+    S3UpdateObjectEncryptionOperation: StructureShape
+    S3UpdateObjectEncryptionSSEKMS: StructureShape
     S3UserMetadata: MapShape
     SSECFilter: StructureShape
     SSEKMS: StructureShape
@@ -489,6 +503,7 @@ module Aws::S3Control
     StorageLensConfigurationList: ListShape
     StorageLensDataExport: StructureShape
     StorageLensDataExportEncryption: StructureShape
+    StorageLensExpandedPrefixesDataExport: StructureShape
     StorageLensGroup: StructureShape
     StorageLensGroupAndOperator: StructureShape
     StorageLensGroupArn: StringShape
@@ -502,6 +517,7 @@ module Aws::S3Control
     StorageLensGroupOrOperator: StructureShape
     StorageLensPrefixLevelDelimiter: StringShape
     StorageLensPrefixLevelMaxDepth: IntegerShape
+    StorageLensTableDestination: StructureShape
     StorageLensTag: StructureShape
     StorageLensTags: ListShape
     StringForNextToken: StringShape

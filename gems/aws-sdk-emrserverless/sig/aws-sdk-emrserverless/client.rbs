@@ -96,12 +96,14 @@ module Aws::EMRServerless
       },
       ?architecture: String,
       ?image_configuration: {
-        image_uri: String
+        image_uri: String,
+        application_level_digest_resolution: bool
       },
       ?worker_type_specifications: Hash[String,
         {
           image_configuration: {
-            image_uri: String
+            image_uri: String,
+            application_level_digest_resolution: bool
           }
         }
       ],
@@ -134,16 +136,25 @@ module Aws::EMRServerless
           remote_write_url: String
         }
       },
+      ?disk_encryption_configuration: {
+        encryption_context: Hash[String, String],
+        encryption_key_arn: String
+      },
       ?interactive_configuration: {
         studio_enabled: bool,
-        livy_endpoint_enabled: untyped
+        livy_endpoint_enabled: untyped,
+        session_enabled: untyped
       },
       ?scheduler_configuration: {
         queue_timeout_minutes: Integer,
         max_concurrent_runs: untyped
       },
       ?identity_center_configuration: {
-        identity_center_instance_arn: String
+        identity_center_instance_arn: String,
+        user_background_sessions_enabled: bool
+      },
+      ?job_level_cost_allocation_configuration: {
+        enabled: bool
       }
     ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
 
@@ -183,6 +194,39 @@ module Aws::EMRServerless
       ?attempt: Integer
     ) -> _GetJobRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobRunResponse
 
+    interface _GetResourceDashboardResponse
+      include Smithy::Client::_Response[Types::GetResourceDashboardResponse]
+      def url: () -> String?
+    end
+    def get_resource_dashboard: (
+      ?application_id: String,
+      ?resource_id: String,
+      ?resource_type: String,
+      ?access_system_profile_logs: bool
+    ) -> _GetResourceDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceDashboardResponse
+
+    interface _GetSessionResponse
+      include Smithy::Client::_Response[Types::GetSessionResponse]
+      def session: () -> Types::Session?
+    end
+    def get_session: (
+      ?application_id: String,
+      ?session_id: String
+    ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
+
+    interface _GetSessionEndpointResponse
+      include Smithy::Client::_Response[Types::GetSessionEndpointResponse]
+      def application_id: () -> String?
+      def session_id: () -> String?
+      def endpoint: () -> String?
+      def auth_token: () -> String?
+      def auth_token_expires_at: () -> Time?
+    end
+    def get_session_endpoint: (
+      ?application_id: String,
+      ?session_id: String
+    ) -> _GetSessionEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionEndpointResponse
+
     interface _ListApplicationsResponse
       include Smithy::Client::_Response[Types::ListApplicationsOutput]
       def applications: () -> Array[Types::ApplicationSummary]?
@@ -220,6 +264,20 @@ module Aws::EMRServerless
       ?states: Array[String],
       ?mode: String
     ) -> _ListJobRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobRunsResponse
+
+    interface _ListSessionsResponse
+      include Smithy::Client::_Response[Types::ListSessionsResponse]
+      def sessions: () -> Array[Types::SessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_sessions: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?states: Array[String],
+      ?created_at_after: Time,
+      ?created_at_before: Time
+    ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
@@ -291,6 +349,10 @@ module Aws::EMRServerless
           prometheus_monitoring_configuration: {
             remote_write_url: String
           }
+        },
+        disk_encryption_configuration: {
+          encryption_context: Hash[String, String],
+          encryption_key_arn: untyped
         }
       },
       ?tags: Hash[String, String],
@@ -302,6 +364,30 @@ module Aws::EMRServerless
         max_failed_attempts_per_hour: Integer
       }
     ) -> _StartJobRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartJobRunResponse
+
+    interface _StartSessionResponse
+      include Smithy::Client::_Response[Types::StartSessionResponse]
+      def application_id: () -> String?
+      def session_id: () -> String?
+      def arn: () -> String?
+    end
+    def start_session: (
+      ?application_id: String,
+      ?client_token: String,
+      ?execution_role_arn: String,
+      ?configuration_overrides: {
+        runtime_configuration: Array[
+          {
+            classification: String,
+            properties: Hash[String, String],
+            configurations: untyped
+          }
+        ]
+      },
+      ?tags: Hash[String, String],
+      ?idle_timeout_minutes: Integer,
+      ?name: String
+    ) -> _StartSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSessionResponse
 
     interface _StopApplicationResponse
       include Smithy::Client::_Response[Types::StopApplicationOutput]
@@ -317,6 +403,16 @@ module Aws::EMRServerless
       ?resource_arn: String,
       ?tags: Hash[String, String]
     ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateSessionResponse
+      include Smithy::Client::_Response[Types::TerminateSessionResponse]
+      def application_id: () -> String?
+      def session_id: () -> String?
+    end
+    def terminate_session: (
+      ?application_id: String,
+      ?session_id: String
+    ) -> _TerminateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateSessionResponse
 
     interface _UntagResourceResponse
       include Smithy::Client::_Response[Types::UntagResourceOutput]
@@ -362,18 +458,21 @@ module Aws::EMRServerless
       },
       ?architecture: String,
       ?image_configuration: {
-        image_uri: String
+        image_uri: String,
+        application_level_digest_resolution: bool
       },
       ?worker_type_specifications: Hash[String,
         {
           image_configuration: {
-            image_uri: String
+            image_uri: String,
+            application_level_digest_resolution: bool
           }
         }
       ],
       ?interactive_configuration: {
         studio_enabled: bool,
-        livy_endpoint_enabled: untyped
+        livy_endpoint_enabled: untyped,
+        session_enabled: untyped
       },
       ?release_label: String,
       ?runtime_configuration: Array[
@@ -405,12 +504,20 @@ module Aws::EMRServerless
           remote_write_url: String
         }
       },
+      ?disk_encryption_configuration: {
+        encryption_context: Hash[String, String],
+        encryption_key_arn: String
+      },
       ?scheduler_configuration: {
         queue_timeout_minutes: Integer,
         max_concurrent_runs: untyped
       },
       ?identity_center_configuration: {
-        identity_center_instance_arn: String
+        identity_center_instance_arn: String,
+        user_background_sessions_enabled: bool
+      },
+      ?job_level_cost_allocation_configuration: {
+        enabled: bool
       }
     ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
   end

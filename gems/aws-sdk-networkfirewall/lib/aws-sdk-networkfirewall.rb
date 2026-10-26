@@ -38,9 +38,9 @@ Aws.const_set('NetworkFirewall', Module.new) unless Aws.const_defined?('NetworkF
 #          perimeter of your VPC. This includes filtering traffic going to and coming from an internet
 #          gateway, NAT gateway, or over VPN or Direct Connect. Network Firewall uses rules that are compatible
 #       with Suricata, a free, open source network analysis and threat detection engine.
-#       Network Firewall supports Suricata version 7.0.3. For information about Suricata,
-#           see the <a href="https://suricata.io/">Suricata website</a> and the 
-#           <a href="https://suricata.readthedocs.io/en/suricata-7.0.3/">Suricata User Guide</a>. </p>
+#       Network Firewall supports Suricata version 7.0.8. For information about Suricata,
+#           see the <a href="https://suricata.io/">Suricata website</a> and the
+#           <a href="https://suricata.readthedocs.io/en/suricata-7.0.8/">Suricata User Guide</a>. </p>
 #          <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.
 #          The following are just a few examples: </p>
 #          <ul>
@@ -95,8 +95,8 @@ Aws.const_set('NetworkFirewall', Module.new) unless Aws.const_defined?('NetworkF
 #                endpoints.</p>
 #             </li>
 #          </ol>
-#          <p>After your firewall is established, you can add firewall endpoints for new Availability Zones by following the prior steps for the Amazon VPC setup and 
-#       firewall subnet definitions. You can also add endpoints to Availability Zones that you're using in the firewall, either for the same VPC 
+#          <p>After your firewall is established, you can add firewall endpoints for new Availability Zones by following the prior steps for the Amazon VPC setup and
+#       firewall subnet definitions. You can also add endpoints to Availability Zones that you're using in the firewall, either for the same VPC
 #           or for another VPC, by following the prior steps for the Amazon VPC setup, and defining the new VPC subnets as VPC endpoint associations. </p>
 module Aws::NetworkFirewall
   VERSION = '2.0.0.pre0'

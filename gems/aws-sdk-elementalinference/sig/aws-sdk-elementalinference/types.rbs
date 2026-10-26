@@ -1,0 +1,1035 @@
+module Aws::ElementalInference
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AspectRatio
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?width: Integer,
+        ?height: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor width: Integer?
+      attr_accessor height: Integer?
+    end
+
+    class AssociateFeedRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?associated_resource_name: String,
+        ?outputs: Array[Types::CreateOutput],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor associated_resource_name: String?
+      attr_accessor outputs: Array[Types::CreateOutput]?
+      attr_accessor dry_run: bool?
+    end
+
+    class AssociateFeedResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class ClippingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?callback_metadata: String,
+        ?data_source_configuration: Types::DataSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor callback_metadata: String?
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration?
+    end
+
+    class Competitor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?is_home: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor is_home: bool?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ContextualMetadataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary_generation: String,
+        ?extended_analysis: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary_generation: String?
+      attr_accessor extended_analysis: String?
+    end
+
+    class CreateDictionaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?language: String,
+        ?entries: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor language: String?
+      attr_accessor entries: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDictionaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?language: String,
+        ?status: String,
+        ?references: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor language: String?
+      attr_accessor status: String?
+      attr_accessor references: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateFeedRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?access_role_arn: String,
+        ?outputs: Array[Types::CreateOutput],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor access_role_arn: String?
+      attr_accessor outputs: Array[Types::CreateOutput]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateFeedResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?data_endpoints: Array[String],
+        ?outputs: Array[Types::GetOutput],
+        ?access_role_arn: String,
+        ?status: String,
+        ?association: Types::FeedAssociation,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor data_endpoints: Array[String]?
+      attr_accessor outputs: Array[Types::GetOutput]?
+      attr_accessor access_role_arn: String?
+      attr_accessor status: String?
+      attr_accessor association: Types::FeedAssociation?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?output_config: Types::OutputConfig,
+        ?status: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor status: String?
+      attr_accessor description: String?
+    end
+
+    class CroppingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_groups: Array[Types::TemplateGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_groups: Array[Types::TemplateGroup]?
+    end
+
+    class DataSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fixture_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixture_id: String?
+    end
+
+    module DataSourceSport
+      BASKETBALL: String
+      AMERICAN_FOOTBALL: String
+    end
+
+    class DeleteDictionaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteDictionaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteFeedPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteFeedRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteFeedResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor status: String?
+    end
+
+    module DictionaryLanguage
+      ENG: String
+      FRA: String
+      ITA: String
+      DEU: String
+      SPA: String
+      POR: String
+    end
+
+    module DictionaryStatus
+      CREATING: String
+      AVAILABLE: String
+      REFERENCED: String
+      DELETING: String
+      DELETED: String
+    end
+
+    class DictionarySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?language: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor language: String?
+      attr_accessor status: String?
+    end
+
+    class DisassociateFeedRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?associated_resource_name: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor associated_resource_name: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class DisassociateFeedResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
+    class ExportDictionaryEntriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ExportDictionaryEntriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: String?
+    end
+
+    module ExtendedAnalysisMode
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class FeedAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_resource_name: String?
+    end
+
+    module FeedStatus
+      CREATING: String
+      AVAILABLE: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      DELETED: String
+      ARCHIVED: String
+    end
+
+    class FeedSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?association: Types::FeedAssociation,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor association: Types::FeedAssociation?
+      attr_accessor status: String?
+    end
+
+    module FilterName
+      COMPETITOR: String
+    end
+
+    class FixtureSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fixture_id: String,
+        ?name: String,
+        ?fixture_group: String,
+        ?scheduled_start: Time,
+        ?status: String,
+        ?competitors: Array[Types::Competitor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixture_id: String?
+      attr_accessor name: String?
+      attr_accessor fixture_group: String?
+      attr_accessor scheduled_start: Time?
+      attr_accessor status: String?
+      attr_accessor competitors: Array[Types::Competitor]?
+    end
+
+    class GatewayTimedOutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetDictionaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetDictionaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?language: String,
+        ?status: String,
+        ?references: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor language: String?
+      attr_accessor status: String?
+      attr_accessor references: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetFeedPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetFeedPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GetFeedRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetFeedResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?data_endpoints: Array[String],
+        ?outputs: Array[Types::GetOutput],
+        ?access_role_arn: String,
+        ?status: String,
+        ?association: Types::FeedAssociation,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor data_endpoints: Array[String]?
+      attr_accessor outputs: Array[Types::GetOutput]?
+      attr_accessor access_role_arn: String?
+      attr_accessor status: String?
+      attr_accessor association: Types::FeedAssociation?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetFixtureRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fixture_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixture_id: String?
+    end
+
+    class GetFixtureResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fixture_id: String,
+        ?name: String,
+        ?fixture_group: String,
+        ?scheduled_start: Time,
+        ?status: String,
+        ?competitors: Array[Types::Competitor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixture_id: String?
+      attr_accessor name: String?
+      attr_accessor fixture_group: String?
+      attr_accessor scheduled_start: Time?
+      attr_accessor status: String?
+      attr_accessor competitors: Array[Types::Competitor]?
+    end
+
+    class GetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?output_config: Types::OutputConfig,
+        ?status: String,
+        ?description: String,
+        ?from_association: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor from_association: bool?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDictionariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDictionariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dictionaries: Array[Types::DictionarySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dictionaries: Array[Types::DictionarySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFeedsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFeedsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feeds: Array[Types::FeedSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feeds: Array[Types::FeedSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class OutputConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cropping: Types::CroppingConfig,
+        ?clipping: Types::ClippingConfig,
+        ?subtitling: Types::SubtitlingConfig,
+        ?contextual_metadata: Types::ContextualMetadataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cropping: Types::CroppingConfig?
+      attr_accessor clipping: Types::ClippingConfig?
+      attr_accessor subtitling: Types::SubtitlingConfig?
+      attr_accessor contextual_metadata: Types::ContextualMetadataConfig?
+
+      class Cropping < OutputConfig
+      end
+      class Clipping < OutputConfig
+      end
+      class Subtitling < OutputConfig
+      end
+      class ContextualMetadata < OutputConfig
+      end
+      class Unknown < OutputConfig
+      end
+    end
+
+    module OutputStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module ProfanityFilterMode
+      DISABLED: String
+      CENSOR: String
+      DROP: String
+    end
+
+    class PutFeedPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor policy: String?
+    end
+
+    class PutFeedPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SearchFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class SearchFixturesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sport: String,
+        ?start_date: String,
+        ?end_date: String,
+        ?filters: Array[Types::SearchFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sport: String?
+      attr_accessor start_date: String?
+      attr_accessor end_date: String?
+      attr_accessor filters: Array[Types::SearchFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SearchFixturesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fixtures: Array[Types::FixtureSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixtures: Array[Types::FixtureSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SubtitlingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+        ?aspect_ratio: Types::AspectRatio,
+        ?dictionary: String,
+        ?profanity_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+      attr_accessor aspect_ratio: Types::AspectRatio?
+      attr_accessor dictionary: String?
+      attr_accessor profanity_filter: String?
+    end
+
+    module SummaryGenerationMode
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TemplateGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?template_uris: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor template_uris: Array[String]?
+    end
+
+    class TooManyRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TranscriptionLanguage
+      ENG: String
+      ENG_AU: String
+      ENG_GB: String
+      ENG_US: String
+      FRA: String
+      ITA: String
+      DEU: String
+      SPA: String
+      POR: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateDictionaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?language: String,
+        ?entries: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor language: String?
+      attr_accessor entries: String?
+    end
+
+    class UpdateDictionaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?id: String,
+        ?language: String,
+        ?status: String,
+        ?references: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor language: String?
+      attr_accessor status: String?
+      attr_accessor references: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateFeedRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?access_role_arn: String,
+        ?id: String,
+        ?outputs: Array[Types::UpdateOutput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor access_role_arn: String?
+      attr_accessor id: String?
+      attr_accessor outputs: Array[Types::UpdateOutput]?
+    end
+
+    class UpdateFeedResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?data_endpoints: Array[String],
+        ?outputs: Array[Types::GetOutput],
+        ?access_role_arn: String,
+        ?status: String,
+        ?association: Types::FeedAssociation,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor data_endpoints: Array[String]?
+      attr_accessor outputs: Array[Types::GetOutput]?
+      attr_accessor access_role_arn: String?
+      attr_accessor status: String?
+      attr_accessor association: Types::FeedAssociation?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?output_config: Types::OutputConfig,
+        ?status: String,
+        ?description: String,
+        ?from_association: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor from_association: bool?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

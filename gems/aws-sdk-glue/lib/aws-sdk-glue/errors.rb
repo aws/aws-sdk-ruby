@@ -53,6 +53,9 @@ module Aws::Glue
   # * {InvalidStateException}
   # * {KMSKeyNotAccessibleFault}
   # * {MLTransformNotReadyException}
+  # * {MaterializedViewRefreshTaskNotRunningException}
+  # * {MaterializedViewRefreshTaskRunningException}
+  # * {MaterializedViewRefreshTaskStoppingException}
   # * {NoScheduleException}
   # * {OperationNotSupportedException}
   # * {OperationTimeoutException}
@@ -63,6 +66,7 @@ module Aws::Glue
   # * {SchedulerNotRunningException}
   # * {SchedulerRunningException}
   # * {SchedulerTransitioningException}
+  # * {SessionBusyException}
   # * {TargetResourceNotFound}
   # * {ThrottlingException}
   # * {ValidationException}
@@ -527,6 +531,48 @@ module Aws::Glue
       end
     end
 
+    # <p>Exception thrown when stopping a task that is not in running state.</p>
+    class MaterializedViewRefreshTaskNotRunningException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Glue::Types::MaterializedViewRefreshTaskNotRunningException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>A message describing the problem.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>Exception thrown when a task is already in running state.</p>
+    class MaterializedViewRefreshTaskRunningException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Glue::Types::MaterializedViewRefreshTaskRunningException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>A message describing the problem.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>Exception thrown when a task is already in stopping state.</p>
+    class MaterializedViewRefreshTaskStoppingException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Glue::Types::MaterializedViewRefreshTaskStoppingException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>A message describing the problem.</p>
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>There is no applicable schedule.</p>
     class NoScheduleException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -658,6 +704,20 @@ module Aws::Glue
     class SchedulerTransitioningException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Glue::Types::SchedulerTransitioningException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>A message describing the problem.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The session is currently busy processing another request and cannot accept new operations.</p>
+    class SessionBusyException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Glue::Types::SessionBusyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

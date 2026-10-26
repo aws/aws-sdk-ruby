@@ -14,7 +14,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "af-south-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "af-south-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -28,7 +28,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-east-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "ap-east-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -42,7 +42,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-northeast-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "ap-northeast-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -56,7 +56,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-northeast-2", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "ap-northeast-2", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -70,7 +70,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-northeast-3", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "ap-northeast-3", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -84,7 +84,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-south-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "ap-south-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -98,7 +98,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-southeast-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "ap-southeast-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -112,7 +112,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-southeast-2", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "ap-southeast-2", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -126,7 +126,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ap-southeast-3", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "ap-southeast-3", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -140,21 +140,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ca-central-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region ca-central-1 with FIPS enabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://acm-fips.ca-central-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "ca-central-1", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "ca-central-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -168,7 +154,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-central-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "eu-central-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -182,7 +168,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-north-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "eu-north-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -196,7 +182,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-south-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "eu-south-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -210,7 +196,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-west-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "eu-west-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -224,7 +210,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-west-2", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "eu-west-2", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -238,7 +224,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "eu-west-3", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "eu-west-3", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -252,7 +238,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "me-south-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "me-south-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -266,7 +252,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "sa-east-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "sa-east-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -280,21 +266,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-east-1 with FIPS enabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://acm-fips.us-east-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -308,21 +280,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-2", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-east-2 with FIPS enabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://acm-fips.us-east-2.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-2", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "us-east-2", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -336,21 +294,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-west-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-west-1 with FIPS enabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://acm-fips.us-west-1.amazonaws.com"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-west-1", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "us-west-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -364,7 +308,63 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, service_type: "ACM"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region ca-central-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://acm-fips.ca-central-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "ca-central-1", use_fips: true, use_dual_stack: false, service_type: "ACM"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-east-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://acm-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, service_type: "ACM"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-east-2 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://acm-fips.us-east-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-2", use_fips: true, use_dual_stack: false, service_type: "ACM"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "For region us-west-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://acm-fips.us-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-1", use_fips: true, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -378,7 +378,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -392,7 +392,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -406,7 +406,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -420,7 +420,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -434,7 +434,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -448,7 +448,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true, use_dual_stack: true, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -462,7 +462,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: true, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -476,7 +476,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: true, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -490,7 +490,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -504,7 +504,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -518,7 +518,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: true, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -532,7 +532,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: false, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -546,7 +546,7 @@ module Aws::ACM
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false, use_dual_stack: true, service_type: "ACM"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -554,69 +554,13 @@ module Aws::ACM
       end
     end
 
-    context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://acm-fips.us-iso-east-1.c2s.ic.gov"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false})
-        endpoint = subject.resolve(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-iso-east-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://acm.us-iso-east-1.c2s.ic.gov"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://acm-fips.us-isob-east-1.sc2s.sgov.gov"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: true, use_dual_stack: false})
-        endpoint = subject.resolve(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-isob-east-1 with FIPS disabled and DualStack disabled" do
-      let(:expected) do
-        {"endpoint" => {"url" => "https://acm.us-isob-east-1.sc2s.sgov.gov"}}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: false, use_dual_stack: false})
-        endpoint = subject.resolve(params)
-        expect(endpoint.url).to eq(expected['endpoint']['url'])
-        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
-        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For custom endpoint with region set and fips disabled and dualstack disabled" do
+    context "For custom endpoint with region set and fips disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"url" => "https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, endpoint: "https://example.com"})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, service_type: "ACM", endpoint: "https://example.com"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -624,13 +568,13 @@ module Aws::ACM
       end
     end
 
-    context "For custom endpoint with region not set and fips disabled and dualstack disabled" do
+    context "For custom endpoint with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"url" => "https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, endpoint: "https://example.com"})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, service_type: "ACM", endpoint: "https://example.com"})
         endpoint = subject.resolve(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -638,39 +582,81 @@ module Aws::ACM
       end
     end
 
-    context "For custom endpoint with fips enabled and dualstack disabled" do
+    context "For custom endpoint with FIPS disabled and dualstack enabled" do
       let(:expected) do
-        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+        {"endpoint" => {"url" => "https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, endpoint: "https://example.com"})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, service_type: "ACM", endpoint: "https://example.com"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ACM-ACME standard endpoint for us-east-1" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://acm-acme.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, service_type: "ACM-ACME"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ACM-ACME FIPS returns error" do
+      let(:expected) do
+        {"error" => "FIPS endpoints are not available for ACME operations"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: true, use_dual_stack: false, service_type: "ACM-ACME"})
         expect do
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context "For custom endpoint with fips disabled and dualstack enabled" do
+    context "ACM-ACME custom endpoint" do
       let(:expected) do
-        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
+        {"endpoint" => {"url" => "https://custom.example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, endpoint: "https://example.com"})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, service_type: "ACM-ACME", endpoint: "https://custom.example.com"})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ACM-ACME in us-gov-west-1 returns partition error" do
+      let(:expected) do
+        {"error" => "ACME operations are only available in commercial AWS partitions"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: false, service_type: "ACM-ACME"})
         expect do
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context "Missing region" do
+    context "ACM-ACME in cn-north-1 returns partition error" do
       let(:expected) do
-        {"error" => "Invalid Configuration: Missing Region"}
+        {"error" => "ACME operations are only available in commercial AWS partitions"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{})
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: false, service_type: "ACM-ACME"})
         expect do
           subject.resolve(params)
         end.to raise_error(ArgumentError, expected['error'])

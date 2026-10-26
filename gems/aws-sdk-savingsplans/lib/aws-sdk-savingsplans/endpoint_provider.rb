@@ -9,6 +9,20 @@ module Aws::Savingsplans
     # @return [Smithy::Client::EndpointRules::Endpoint]
     # @raise [ArgumentError]
     def resolve(parameters)
+      if Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.endpoint)) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+        if Smithy::Client::EndpointRules.set?(parameters.region) && (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws")
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://savingsplans.global.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "savingsplans", "signingRegion" => "us-east-1"}]})
+          end
+          if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"), true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://savingsplans.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+        end
+        if Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.set?(parameters.region))
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://savingsplans.global.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "savingsplans", "signingRegion" => "us-east-1"}]})
+        end
+      end
       if Smithy::Client::EndpointRules.set?(parameters.endpoint)
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
           raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"

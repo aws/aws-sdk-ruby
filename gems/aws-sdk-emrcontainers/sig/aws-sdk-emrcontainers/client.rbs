@@ -142,7 +142,8 @@ module Aws::EMRcontainers
             log_stream_name_prefix: String
           },
           s3_monitoring_configuration: {
-            log_uri: String
+            log_uri: String,
+            encryption_key_arn: untyped
           },
           container_log_rotation_configuration: {
             rotation_size: String,
@@ -151,7 +152,8 @@ module Aws::EMRcontainers
         }
       },
       ?client_token: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?session_idle_timeout_in_minutes: Integer
     ) -> _CreateManagedEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateManagedEndpointResponse
 
     interface _CreateSecurityConfigurationResponse
@@ -192,6 +194,17 @@ module Aws::EMRcontainers
               }
             }
           }
+        },
+        authentication_configuration: {
+          identity_center_configuration: {
+            enable_identity_center: bool,
+            identity_center_application_assignment_required: untyped,
+            identity_center_instance_arn: String,
+            emr_identity_center_application_arn: String
+          },
+          iam_configuration: {
+            system_role: untyped
+          }
         }
       },
       ?tags: Hash[String, String]
@@ -217,7 +230,12 @@ module Aws::EMRcontainers
       },
       ?client_token: String,
       ?tags: Hash[String, String],
-      ?security_configuration_id: String
+      ?security_configuration_id: String,
+      ?session_enabled: bool,
+      ?scheduler_configuration: {
+        max_in_queue_job_runs: Integer,
+        max_concurrent_job_runs: Integer
+      }
     ) -> _CreateVirtualClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVirtualClusterResponse
 
     interface _DeleteJobTemplateResponse
@@ -237,6 +255,14 @@ module Aws::EMRcontainers
       ?id: String,
       ?virtual_cluster_id: String
     ) -> _DeleteManagedEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteManagedEndpointResponse
+
+    interface _DeleteSecurityConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteSecurityConfigurationResponse]
+      def id: () -> String?
+    end
+    def delete_security_configuration: (
+      ?id: String
+    ) -> _DeleteSecurityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecurityConfigurationResponse
 
     interface _DeleteVirtualClusterResponse
       include Smithy::Client::_Response[Types::DeleteVirtualClusterResponse]
@@ -292,6 +318,7 @@ module Aws::EMRcontainers
       include Smithy::Client::_Response[Types::GetManagedEndpointSessionCredentialsResponse]
       def id: () -> String?
       def credentials: () -> Types::Credentials?
+      def endpoint_credentials: () -> Types::Credentials?
       def expires_at: () -> Time?
     end
     def get_managed_endpoint_session_credentials: (
@@ -425,7 +452,8 @@ module Aws::EMRcontainers
             log_stream_name_prefix: String
           },
           s3_monitoring_configuration: {
-            log_uri: String
+            log_uri: String,
+            encryption_key_arn: untyped
           },
           container_log_rotation_configuration: {
             rotation_size: String,
@@ -456,5 +484,18 @@ module Aws::EMRcontainers
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateVirtualClusterResponse
+      include Smithy::Client::_Response[Types::UpdateVirtualClusterResponse]
+      def virtual_cluster: () -> Types::VirtualCluster?
+    end
+    def update_virtual_cluster: (
+      ?id: String,
+      ?scheduler_configuration: {
+        max_in_queue_job_runs: Integer,
+        max_concurrent_job_runs: Integer
+      },
+      ?client_token: String
+    ) -> _UpdateVirtualClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVirtualClusterResponse
   end
 end

@@ -21,10 +21,17 @@ module Aws::Support
     #               base64-encoded string. The value for <code>fileName</code> is the name of the
     #               attachment, such as <code>troubleshoot-screenshot.png</code>.</p>
     #   @return [Array<Types::Attachment>]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually adding the attachments. When set
+    #            to <code>true</code>, the request is validated but no attachments are stored, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
+    #   @return [Boolean]
     class AddAttachmentsToSetRequest < Struct.new(
       nil,
       :attachment_set_id,
       :attachments,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -52,7 +59,7 @@ module Aws::Support
     # @!attribute case_id
     #   <p>The support case ID requested or returned in the call. The case ID is an alphanumeric
     #               string formatted as shown in this example:
-    #                   case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>
+    #                   case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>
     #            </p>
     #   @return [String]
     # @!attribute communication_body
@@ -63,15 +70,31 @@ module Aws::Support
     #   @return [Array<String>]
     # @!attribute attachment_set_id
     #   <p>The ID of a set of one or more attachments for the communication to add to the case.
-    #               Create the set by calling <a>AddAttachmentsToSet</a>
-    #            </p>
+    #               Create the set by calling <a>AddAttachmentsToSet</a>. Each attachment in the
+    #               set must be 5 MB or smaller. To attach files larger than 5 MB, use <code>uploadIds</code>.</p>
     #   @return [String]
+    # @!attribute upload_ids
+    #   <p>A list of upload IDs that identify attachments to add to the case. Each
+    #               <code>uploadId</code> is returned by the <a>GetAttachmentUploadLinks</a>
+    #            operation. The upload must reach the <code>attachment-ready</code> state by calling <a>CompleteAttachmentUpload</a> before it can be passed here.
+    #            Use
+    #               <code>uploadIds</code> to attach files of any supported size, including files larger than
+    #            5 MB.</p>
+    #   @return [Array<String>]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually adding the communication to the
+    #            case. When set to <code>true</code>, the request is validated but the communication isn't
+    #            added, and the operation returns a <code>DryRunOperationException</code>. When omitted or set
+    #            to <code>false</code>, the request runs normally.</p>
+    #   @return [Boolean]
     class AddCommunicationToCaseRequest < Struct.new(
       nil,
       :case_id,
       :communication_body,
       :cc_email_addresses,
       :attachment_set_id,
+      :upload_ids,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -216,7 +239,7 @@ module Aws::Support
     #                   <b>caseId</b> - The support case ID requested
     #                     or returned in the call. The case ID is an alphanumeric string formatted as
     #                     shown in this example:
-    #                         case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</p>
+    #                         case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>.</p>
     #             </li>
     #             <li>
     #                <p>
@@ -232,7 +255,7 @@ module Aws::Support
     #             <li>
     #                <p>
     #                   <b>language</b> - The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    # currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    # currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     # code for the <code>language</code> parameter if you want support in that language.</p>
     #             </li>
     #             <li>
@@ -324,7 +347,7 @@ module Aws::Support
     # @!attribute case_id
     #   <p>The support case ID requested or returned in the call. The case ID is an alphanumeric
     #               string formatted as shown in this example:
-    #                   case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>
+    #                   case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>
     #            </p>
     #   @return [String]
     # @!attribute display_id
@@ -406,7 +429,7 @@ module Aws::Support
     #   @return [Array<String>]
     # @!attribute language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     #   @return [String]
     class CaseDetails < Struct.new(
@@ -464,7 +487,7 @@ module Aws::Support
     # @!attribute case_id
     #   <p>The support case ID requested or returned in the call. The case ID is an alphanumeric
     #               string formatted as shown in this example:
-    #                   case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>
+    #                   case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>
     #            </p>
     #   @return [String]
     # @!attribute body
@@ -480,8 +503,15 @@ module Aws::Support
     # @!attribute time_created
     #   <p>The time the communication was created.</p>
     #   @return [String]
+    # @!attribute attachments
+    #   <p>Information about all attachments on the case communication. This includes attachments added through <code>AddAttachmentsToSet</code> and attachments uploaded through <code>GetAttachmentUploadLinks</code>.</p>
+    #            <p>Use this field to enumerate every attachment on the communication. To download an attachment listed in this field, use <a>GetAttachmentDownloadLink</a>. <code>GetAttachmentDownloadLink</code> returns a presigned URL that works for attachments of any size. </p>
+    #   @return [Array<Types::AttachmentDetails>]
     # @!attribute attachment_set
-    #   <p>Information about the attachments to the case communication.</p>
+    #   <p>Information about the attachments to the case communication that are 5 MB or smaller.
+    #               This field doesn't include attachments larger than 5 MB. To enumerate every attachment on
+    #               the communication, including attachments larger than 5 MB, use the
+    #                   <code>attachments</code> field instead.</p>
     #   @return [Array<Types::AttachmentDetails>]
     class Communication < Struct.new(
       nil,
@@ -489,6 +519,7 @@ module Aws::Support
       :body,
       :submitted_by,
       :time_created,
+      :attachments,
       :attachment_set,
       keyword_init: true
     )
@@ -500,23 +531,23 @@ module Aws::Support
     #          <ul>
     #             <li>
     #                <p>
-    #                   <b>datesWithoutSupport</b> - 
-    #                     A JSON-formatted list containing date and time ranges for periods 
+    #                   <b>datesWithoutSupport</b> -
+    #                     A JSON-formatted list containing date and time ranges for periods
     #                     without support in UTC time. Date and time format is RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
     #                     </p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>supportedHours</b> - 
-    #                     A JSON-formatted list containing time ranges when support are available. 
+    #                   <b>supportedHours</b> -
+    #                     A JSON-formatted list containing time ranges when support are available.
     #                     Time format is RFC 3339 : 'HH:mm:ss.SSS'.
     #                     </p>
     #             </li>
     #             <li>
     #                <p>
-    #                   <b>type</b> - 
+    #                   <b>type</b> -
     #                    A string value indicating the communication type that the aforementioned rules apply to. At the moment
-    #                    the type value can assume one of 3 values at the moment <code>chat</code>, <code>web</code> and 
+    #                    the type value can assume one of 3 values at the moment <code>chat</code>, <code>web</code> and
     #                    <code>call</code>.
     #                     </p>
     #             </li>
@@ -541,6 +572,59 @@ module Aws::Support
       :type,
       :supported_hours,
       :dates_without_support,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute upload_id
+    #   <p>The identifier associated with the upload to complete.</p>
+    #   @return [String]
+    # @!attribute completed_uploads
+    #   <p>The list of parts being reported as completed in this call. Each entry must contain the <code>partIndex</code> of an uploaded part and the <code>ETag</code> returned by Amazon S3 when that part was uploaded.</p>
+    #   @return [Array<Types::CompletedUpload>]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually completing the upload. When set
+    #            to <code>true</code>, the request is validated but the upload isn't finalized, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
+    #   @return [Boolean]
+    class CompleteAttachmentUploadRequest < Struct.new(
+      nil,
+      :upload_id,
+      :completed_uploads,
+      :dry_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute upload_status
+    #   <p>The status of the multipart upload after the operation finalizes the
+    #            attachment. Valid values: <code>attachment-ready</code>, <code>attachment-not-ready</code>,
+    #            and <code>failed</code>.</p>
+    #   @return [String]
+    class CompleteAttachmentUploadResponse < Struct.new(
+      nil,
+      :upload_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies a single uploaded part of a multipart attachment upload. Pass a list of
+    #             <code>CompletedUpload</code> objects to <a>CompleteAttachmentUpload</a> to
+    #          finalize the upload.</p>
+    # @!attribute part_index
+    #   <p>The index of the uploaded part. This is the same <code>partIndex</code> value returned for the corresponding entry in the <code>uploadUrls</code> field of the <code>GetAttachmentUploadLinks</code> response.</p>
+    #   @return [Integer]
+    # @!attribute e_tag
+    #   <p>The ETag returned in the response headers when the part was uploaded to Amazon S3. The <code>ETag</code> value identifies the part contents.</p>
+    #   @return [String]
+    class CompletedUpload < Struct.new(
+      nil,
+      :part_index,
+      :e_tag,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -580,7 +664,7 @@ module Aws::Support
     #   @return [Array<String>]
     # @!attribute language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     #   @return [String]
     # @!attribute issue_type
@@ -590,8 +674,23 @@ module Aws::Support
     #   @return [String]
     # @!attribute attachment_set_id
     #   <p>The ID of a set of one or more attachments for the case. Create the set by using the
-    #                   <a>AddAttachmentsToSet</a> operation.</p>
+    #                   <a>AddAttachmentsToSet</a> operation. Each attachment in the set must be 5
+    #               MB or smaller. To attach files larger than 5 MB, use <code>uploadIds</code>.</p>
     #   @return [String]
+    # @!attribute upload_ids
+    #   <p>A list of upload IDs that identify attachments to add to the case. Each
+    #               <code>uploadId</code> is returned by the <a>GetAttachmentUploadLinks</a>
+    #            operation. The upload must reach the <code>attachment-ready</code> state by calling <a>CompleteAttachmentUpload</a> before it can be passed here.
+    #            Use
+    #               <code>uploadIds</code> to attach files of any supported size, including files larger than
+    #            5 MB.</p>
+    #   @return [Array<String>]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually creating the case. When set to
+    #               <code>true</code>, the request is validated but no case is created, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
+    #   @return [Boolean]
     class CreateCaseRequest < Struct.new(
       nil,
       :subject,
@@ -603,6 +702,8 @@ module Aws::Support
       :language,
       :issue_type,
       :attachment_set_id,
+      :upload_ids,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -612,7 +713,7 @@ module Aws::Support
     # @!attribute case_id
     #   <p>The support case ID requested or returned in the call. The case ID is an alphanumeric
     #               string in the following format:
-    #                   case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>
+    #                   case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>
     #            </p>
     #   @return [String]
     class CreateCaseResponse < Struct.new(
@@ -659,10 +760,20 @@ module Aws::Support
 
     # @!attribute attachment_id
     #   <p>The ID of the attachment to return. Attachment IDs are returned by the <a>DescribeCommunications</a> operation.</p>
+    #            <p>If the specified attachment is larger than 5 MB, this operation returns
+    #                   <code>InvalidParameterValueException</code>. To download attachments larger than 5
+    #               MB, use <a>GetAttachmentDownloadLink</a>.</p>
     #   @return [String]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually retrieving the attachment. When
+    #            set to <code>true</code>, the request is validated but no attachment content is returned, and
+    #            the operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
+    #   @return [Boolean]
     class DescribeAttachmentRequest < Struct.new(
       nil,
       :attachment_id,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -684,6 +795,46 @@ module Aws::Support
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute upload_id
+    #   <p>The unique identifier for the upload. The <code>uploadId</code> is returned by
+    #               <a>GetAttachmentUploadLinks</a> when you initiate the upload.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually returning upload status. When
+    #            set to <code>true</code>, the request is validated but no status is returned, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
+    #   @return [Boolean]
+    class DescribeAttachmentUploadStatusRequest < Struct.new(
+      nil,
+      :upload_id,
+      :dry_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute upload_status
+    #   <p>The current status of the multipart upload. Valid values: <code>attachment-ready</code>,
+    #               <code>attachment-not-ready</code>, and <code>failed</code>.</p>
+    #   @return [String]
+    # @!attribute file_name
+    #   <p>The name of the file being uploaded, including the file extension.</p>
+    #   @return [String]
+    # @!attribute upload_progress
+    #   <p>The progress of the multipart upload, including the total number of parts and the number
+    #            of parts that have been successfully uploaded.</p>
+    #   @return [Types::UploadProgress]
+    class DescribeAttachmentUploadStatusResponse < Struct.new(
+      nil,
+      :upload_status,
+      :file_name,
+      :upload_progress,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute case_id_list
     #   <p>A list of ID numbers of the support cases you want returned. The maximum number of
     #               cases is 100.</p>
@@ -693,11 +844,11 @@ module Aws::Support
     #   @return [String]
     # @!attribute after_time
     #   <p>The start date for a filtered date search on support case communications. Case
-    #               communications are available for 12 months after creation.</p>
+    #               communications are available for 24 months after creation.</p>
     #   @return [String]
     # @!attribute before_time
     #   <p>The end date for a filtered date search on support case communications. Case
-    #               communications are available for 12 months after creation.</p>
+    #               communications are available for 24 months after creation.</p>
     #   @return [String]
     # @!attribute include_resolved_cases
     #   <p>Specifies whether to include resolved support cases in the <code>DescribeCases</code>
@@ -711,12 +862,18 @@ module Aws::Support
     #   @return [Integer]
     # @!attribute language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     #   @return [String]
     # @!attribute include_communications
     #   <p>Specifies whether to include communications in the <code>DescribeCases</code>
     #               response. By default, communications are included.</p>
+    #   @return [Boolean]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually returning case data. When set
+    #            to <code>true</code>, the request is validated but no cases are returned, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
     #   @return [Boolean]
     class DescribeCasesRequest < Struct.new(
       nil,
@@ -729,6 +886,7 @@ module Aws::Support
       :max_results,
       :language,
       :include_communications,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -755,16 +913,16 @@ module Aws::Support
     # @!attribute case_id
     #   <p>The support case ID requested or returned in the call. The case ID is an alphanumeric
     #               string formatted as shown in this example:
-    #                   case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>
+    #                   case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>
     #            </p>
     #   @return [String]
     # @!attribute before_time
     #   <p>The end date for a filtered date search on support case communications. Case
-    #               communications are available for 12 months after creation.</p>
+    #               communications are available for 24 months after creation.</p>
     #   @return [String]
     # @!attribute after_time
     #   <p>The start date for a filtered date search on support case communications. Case
-    #               communications are available for 12 months after creation.</p>
+    #               communications are available for 24 months after creation.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>A resumption point for pagination.</p>
@@ -772,6 +930,12 @@ module Aws::Support
     # @!attribute max_results
     #   <p>The maximum number of results to return before paginating.</p>
     #   @return [Integer]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually returning communications. When
+    #            set to <code>true</code>, the request is validated but no communications are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
+    #   @return [Boolean]
     class DescribeCommunicationsRequest < Struct.new(
       nil,
       :case_id,
@@ -779,6 +943,7 @@ module Aws::Support
       :after_time,
       :next_token,
       :max_results,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -812,19 +977,26 @@ module Aws::Support
     #   @return [String]
     # @!attribute language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     #   @return [String]
     # @!attribute category_code
     #   <p>The category of problem for the support case. You also use the <a>DescribeServices</a> operation to get the category code for a service. Each
     #               Amazon Web Services service defines its own set of category codes.</p>
     #   @return [String]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually returning case option data.
+    #            When set to <code>true</code>, the request is validated but no options are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
+    #   @return [Boolean]
     class DescribeCreateCaseOptionsRequest < Struct.new(
       nil,
       :issue_type,
       :service_code,
       :language,
       :category_code,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -852,7 +1024,7 @@ module Aws::Support
     #   @return [String]
     # @!attribute communication_types
     #   <p>
-    #           A JSON-formatted array that contains the available communication type options, along with the available support 
+    #           A JSON-formatted array that contains the available communication type options, along with the available support
     #           timeframes for the given inputs.
     #           </p>
     #   @return [Array<Types::CommunicationTypeOptions>]
@@ -870,13 +1042,20 @@ module Aws::Support
     #   @return [Array<String>]
     # @!attribute language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     #   @return [String]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually returning the list of services.
+    #            When set to <code>true</code>, the request is validated but no services are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
+    #   @return [Boolean]
     class DescribeServicesRequest < Struct.new(
       nil,
       :service_code_list,
       :language,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -897,12 +1076,19 @@ module Aws::Support
 
     # @!attribute language
     #   <p>The language in which Amazon Web Services Support handles the case. Amazon Web Services Support
-    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1
+    #   currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
     #   code for the <code>language</code> parameter if you want support in that language.</p>
     #   @return [String]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually returning severity levels. When
+    #            set to <code>true</code>, the request is validated but no severity levels are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
+    #   @return [Boolean]
     class DescribeSeverityLevelsRequest < Struct.new(
       nil,
       :language,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -934,11 +1120,18 @@ module Aws::Support
     #   <p>The category of problem for the support case. You also use the <a>DescribeServices</a> operation to get the category code for a service. Each
     #               Amazon Web Services service defines its own set of category codes.</p>
     #   @return [String]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually returning supported languages.
+    #            When set to <code>true</code>, the request is validated but no languages are returned, and the
+    #            operation returns a <code>DryRunOperationException</code>. When omitted or set to
+    #               <code>false</code>, the request runs normally.</p>
+    #   @return [Boolean]
     class DescribeSupportedLanguagesRequest < Struct.new(
       nil,
       :issue_type,
       :service_code,
       :category_code,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1153,6 +1346,158 @@ module Aws::Support
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A presigned URL for downloading an attachment, along with the date and time the URL
+    #          expires. Returned by <a>GetAttachmentDownloadLink</a>.</p>
+    # @!attribute url
+    #   <p>The presigned HTTPS URL that you can use to download the attachment. Download URLs are
+    #            served from <code>downloadv1.attachments.support.{region}.amazonaws.com</code>. The
+    #               <code>downloadv1</code> prefix is subject to change.</p>
+    #   @return [String]
+    # @!attribute expiry_date
+    #   <p>The date and time, in ISO-8601 format, when the presigned URL expires. Download the
+    #            attachment before this time.</p>
+    #   @return [String]
+    class DownloadUrl < Struct.new(
+      nil,
+      :url,
+      :expiry_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request was valid, but the operation wasn't performed because <code>dryRun</code> was
+    #          set to <code>true</code>.</p>
+    # @!attribute message
+    #   @return [String]
+    class DryRunOperationException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute attachment_id
+    #   <p>The unique identifier of the attachment for which to retrieve a download link. Attachment
+    #            IDs are returned in the <code>AttachmentDetails</code> objects in the <code>attachments</code>
+    #            field of a <a>Communication</a> returned by <a>DescribeCommunications</a>
+    #            or <a>DescribeCases</a>.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually returning a download link. When
+    #            set to <code>true</code>, the request is validated but no URL is returned, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
+    #   @return [Boolean]
+    class GetAttachmentDownloadLinkRequest < Struct.new(
+      nil,
+      :attachment_id,
+      :dry_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute file_name
+    #   <p>The name of the attachment file, including the file extension.</p>
+    #   @return [String]
+    # @!attribute download_url
+    #   <p>The presigned download URL and the date and time the URL expires.</p>
+    #   @return [Types::DownloadUrl]
+    class GetAttachmentDownloadLinkResponse < Struct.new(
+      nil,
+      :file_name,
+      :download_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute file_name
+    #   <p>The name of the file to upload, including the file extension. This value is required when
+    #            you initiate a new upload.</p>
+    #   @return [String]
+    # @!attribute file_size_bytes
+    #   <p>The total size of the file in bytes. The service uses this value to calculate the total
+    #            number of parts and the size of each part. Required when you initiate a new upload (when
+    #               <code>uploadId</code> isn't provided). Valid range: 1 to 157,286,400 bytes (approximately
+    #            150 MB).</p>
+    #   @return [Integer]
+    # @!attribute upload_id
+    #   <p>The unique identifier of an in-progress multipart upload, returned by a previous call to
+    #               <code>GetAttachmentUploadLinks</code>. Specify <code>uploadId</code> to retrieve additional
+    #            presigned upload URLs for an upload that has already been initiated. Required when
+    #               <code>fileSizeBytes</code> isn't provided. Length: 1 to 2,048 characters.</p>
+    #   @return [String]
+    # @!attribute upload_range
+    #   <p>The range of part indexes for which to return presigned upload URLs. Use this parameter
+    #            to page through the upload URLs for a large file across multiple calls. If you omit this
+    #            parameter, the service determines the range to return.</p>
+    #   @return [Types::UploadRange]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually generating upload URLs. When
+    #            set to <code>true</code>, the request is validated but no URLs are returned, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
+    #   @return [Boolean]
+    class GetAttachmentUploadLinksRequest < Struct.new(
+      nil,
+      :file_name,
+      :file_size_bytes,
+      :upload_id,
+      :upload_range,
+      :dry_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute upload_id
+    #   <p>The unique identifier for the multipart upload. Use this value in subsequent calls to
+    #               <code>GetAttachmentUploadLinks</code>, <a>DescribeAttachmentUploadStatus</a>,
+    #            and <a>CompleteAttachmentUpload</a>, and to attach the upload to a case through the
+    #               <code>uploadIds</code> parameter on <a>CreateCase</a> or <a>AddCommunicationToCase</a>.</p>
+    #   @return [String]
+    # @!attribute part_size_bytes
+    #   <p>The size, in bytes, of each part. Split the file into parts of this size before you upload
+    #            them to the presigned URLs. For an upload with <code>n</code> total parts, parts 1 through
+    #               <code>n</code> - 1 are exactly this size; the last part may be smaller. Maximum:
+    #            104,857,600 bytes (approximately 100 MB).</p>
+    #   @return [Integer]
+    # @!attribute total_parts
+    #   <p>The total number of parts that the file is split into. Upload one part to each presigned
+    #            URL.</p>
+    #   @return [Integer]
+    # @!attribute next_index
+    #   <p>The next part index to request presigned URLs for. If all upload URLs for the file have
+    #            been returned, this field is <code>null</code>. Use this value as the <code>startIndex</code> in
+    #               <code>uploadRange</code> on a subsequent call to <code>GetAttachmentUploadLinks</code> to
+    #            retrieve the next batch of upload URLs.</p>
+    #   @return [Integer]
+    # @!attribute upload_urls
+    #   <p>The list of presigned upload URLs for the requested range of parts. The list contains at
+    #            most 10 URLs per call. Upload each part to its corresponding URL by using HTTP
+    #               <code>PUT</code> before the URL expires.</p>
+    #   @return [Array<Types::UploadUrl>]
+    class GetAttachmentUploadLinksResponse < Struct.new(
+      nil,
+      :upload_id,
+      :part_size_bytes,
+      :total_parts,
+      :next_index,
+      :upload_urls,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:total_parts] = 0 unless options.key?(:total_parts)
+        options[:next_index] = 0 unless options.key?(:next_index)
+        super
+      end
+    end
+
     # <p>An internal server error occurred.</p>
     # @!attribute message
     #   <p>An internal server error occurred.</p>
@@ -1213,12 +1558,19 @@ module Aws::Support
     # @!attribute case_id
     #   <p>The support case ID requested or returned in the call. The case ID is an alphanumeric
     #               string formatted as shown in this example:
-    #                   case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>
+    #                   case-<i>12345678910-exen-2025-c4c1d2bf33c5cf47</i>
     #            </p>
     #   @return [String]
+    # @!attribute dry_run
+    #   <p>Specifies whether to validate the request without actually resolving the case. When set
+    #            to <code>true</code>, the request is validated but the case isn't resolved, and the operation
+    #            returns a <code>DryRunOperationException</code>. When omitted or set to <code>false</code>, the
+    #            request runs normally.</p>
+    #   @return [Boolean]
     class ResolveCaseRequest < Struct.new(
       nil,
       :case_id,
+      :dry_run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1373,9 +1725,29 @@ module Aws::Support
     #         </p>
     # @!attribute message
     #   @return [String]
+    # @!attribute throttling_reasons
+    #   <p>A list of one or more reasons that the request was throttled.</p>
+    #   @return [Array<Types::ThrottlingReason>]
     class ThrottlingException < Struct.new(
       nil,
       :message,
+      :throttling_reasons,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about why a request was throttled.</p>
+    # @!attribute reason
+    #   <p>The reason that the request was throttled.</p>
+    #   @return [String]
+    # @!attribute resource
+    #   <p>The resource that caused the request to be throttled.</p>
+    #   @return [String]
+    class ThrottlingReason < Struct.new(
+      nil,
+      :reason,
+      :resource,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1646,6 +2018,84 @@ module Aws::Support
         options[:resources_flagged] = 0 unless options.key?(:resources_flagged)
         options[:resources_ignored] = 0 unless options.key?(:resources_ignored)
         options[:resources_suppressed] = 0 unless options.key?(:resources_suppressed)
+        super
+      end
+    end
+
+    # <p>The specified <code>uploadId</code> couldn't be located.</p>
+    # @!attribute message
+    #   @return [String]
+    class UploadIdNotFound < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The progress of a multipart attachment upload, returned by <a>DescribeAttachmentUploadStatus</a>.</p>
+    # @!attribute total_parts
+    #   <p>The total number of parts that the file is split into.</p>
+    #   @return [Integer]
+    # @!attribute completed_parts_count
+    #   <p>The number of parts that have been successfully uploaded.</p>
+    #   @return [Integer]
+    class UploadProgress < Struct.new(
+      nil,
+      :total_parts,
+      :completed_parts_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The range of part indexes for which to return presigned upload URLs from <a>GetAttachmentUploadLinks</a>.</p>
+    # @!attribute start_index
+    #   <p>The starting part index of the range, inclusive. Part indexes start at 1.</p>
+    #   @return [Integer]
+    # @!attribute end_index
+    #   <p>The ending part index of the range, exclusive. The range is half-open:
+    #               <code>startIndex</code> is inclusive and <code>endIndex</code> is exclusive. For example,
+    #            a range with <code>startIndex</code> of 1 and <code>endIndex</code> of 4 requests URLs for
+    #            parts 1, 2, and 3. The range size (<code>endIndex</code> - <code>startIndex</code>)
+    #            must not exceed 10. If you omit <code>endIndex</code>, the service defaults to
+    #               <code>startIndex</code> + 10, capped by the total number of parts.</p>
+    #   @return [Integer]
+    class UploadRange < Struct.new(
+      nil,
+      :start_index,
+      :end_index,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A presigned URL for uploading a single part of a multipart attachment upload, along with
+    #          the part index and the date and time the URL expires. Returned by <a>GetAttachmentUploadLinks</a>.</p>
+    # @!attribute url
+    #   <p>The presigned HTTPS URL that you use to upload a single part with HTTP
+    #               <code>PUT</code>. Upload URLs are served from
+    #               <code>uploadv1.attachments.support.{region}.amazonaws.com</code>. The
+    #               <code>uploadv1</code> prefix is subject to change.</p>
+    #   @return [String]
+    # @!attribute part_index
+    #   <p>The index of the part that this URL uploads.</p>
+    #   @return [Integer]
+    # @!attribute expiry_date
+    #   <p>The date and time, in ISO-8601 format, when the presigned URL expires. Upload the part
+    #            before this time.</p>
+    #   @return [String]
+    class UploadUrl < Struct.new(
+      nil,
+      :url,
+      :part_index,
+      :expiry_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:part_index] = 0 unless options.key?(:part_index)
         super
       end
     end

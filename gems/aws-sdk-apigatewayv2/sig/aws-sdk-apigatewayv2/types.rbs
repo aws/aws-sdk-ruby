@@ -1,6 +1,19 @@
 module Aws::ApiGatewayV2
   module Types
 
+    class ACMManaged
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor domain_name: String?
+    end
+
     class AccessDeniedException
       include Smithy::Schema::Structure
 
@@ -85,6 +98,19 @@ module Aws::ApiGatewayV2
       attr_accessor stage: String?
     end
 
+    class Authorization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cognito_config: Types::CognitoConfig,
+        ?none: Types::None,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cognito_config: Types::CognitoConfig?
+      attr_accessor none: Types::None?
+    end
+
     module AuthorizationType
       NONE: String
       AWS_IAM: String
@@ -137,6 +163,21 @@ module Aws::ApiGatewayV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class CognitoConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_client_id: String,
+        ?user_pool_arn: String,
+        ?user_pool_domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_client_id: String?
+      attr_accessor user_pool_arn: String?
+      attr_accessor user_pool_domain: String?
     end
 
     class ConflictException
@@ -611,6 +652,174 @@ module Aws::ApiGatewayV2
       attr_accessor schema: String?
     end
 
+    class CreatePortalProductRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?display_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePortalProductResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?display_name: String,
+        ?display_order: Types::DisplayOrder,
+        ?last_modified: Time,
+        ?portal_product_arn: String,
+        ?portal_product_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor display_order: Types::DisplayOrder?
+      attr_accessor last_modified: Time?
+      attr_accessor portal_product_arn: String?
+      attr_accessor portal_product_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: Types::Authorization,
+        ?endpoint_configuration: Types::EndpointConfigurationRequest,
+        ?included_portal_product_arns: Array[String],
+        ?logo_uri: String,
+        ?portal_content: Types::PortalContent,
+        ?rum_app_monitor_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationRequest?
+      attr_accessor included_portal_product_arns: Array[String]?
+      attr_accessor logo_uri: String?
+      attr_accessor portal_content: Types::PortalContent?
+      attr_accessor rum_app_monitor_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: Types::Authorization,
+        ?endpoint_configuration: Types::EndpointConfigurationResponse,
+        ?included_portal_product_arns: Array[String],
+        ?last_modified: Time,
+        ?last_published: Time,
+        ?last_published_description: String,
+        ?portal_arn: String,
+        ?portal_content: Types::PortalContent,
+        ?portal_id: String,
+        ?publish_status: String,
+        ?rum_app_monitor_name: String,
+        ?status_exception: Types::StatusException,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse?
+      attr_accessor included_portal_product_arns: Array[String]?
+      attr_accessor last_modified: Time?
+      attr_accessor last_published: Time?
+      attr_accessor last_published_description: String?
+      attr_accessor portal_arn: String?
+      attr_accessor portal_content: Types::PortalContent?
+      attr_accessor portal_id: String?
+      attr_accessor publish_status: String?
+      attr_accessor rum_app_monitor_name: String?
+      attr_accessor status_exception: Types::StatusException?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateProductPageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::DisplayContent,
+        ?portal_product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::DisplayContent?
+      attr_accessor portal_product_id: String?
+    end
+
+    class CreateProductPageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::DisplayContent,
+        ?last_modified: Time,
+        ?product_page_arn: String,
+        ?product_page_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::DisplayContent?
+      attr_accessor last_modified: Time?
+      attr_accessor product_page_arn: String?
+      attr_accessor product_page_id: String?
+    end
+
+    class CreateProductRestEndpointPageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::EndpointDisplayContent,
+        ?portal_product_id: String,
+        ?rest_endpoint_identifier: Types::RestEndpointIdentifier,
+        ?try_it_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::EndpointDisplayContent?
+      attr_accessor portal_product_id: String?
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier?
+      attr_accessor try_it_state: String?
+    end
+
+    class CreateProductRestEndpointPageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::EndpointDisplayContentResponse,
+        ?last_modified: Time,
+        ?product_rest_endpoint_page_arn: String,
+        ?product_rest_endpoint_page_id: String,
+        ?rest_endpoint_identifier: Types::RestEndpointIdentifier,
+        ?status: String,
+        ?status_exception: Types::StatusException,
+        ?try_it_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::EndpointDisplayContentResponse?
+      attr_accessor last_modified: Time?
+      attr_accessor product_rest_endpoint_page_arn: String?
+      attr_accessor product_rest_endpoint_page_id: String?
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier?
+      attr_accessor status: String?
+      attr_accessor status_exception: Types::StatusException?
+      attr_accessor try_it_state: String?
+    end
+
     class CreateRouteRequest
       include Smithy::Schema::Structure
 
@@ -869,6 +1078,27 @@ module Aws::ApiGatewayV2
       attr_accessor vpc_link_version: String?
     end
 
+    class CustomColors
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accent_color: String,
+        ?background_color: String,
+        ?error_validation_color: String,
+        ?header_color: String,
+        ?navigation_color: String,
+        ?text_color: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accent_color: String?
+      attr_accessor background_color: String?
+      attr_accessor error_validation_color: String?
+      attr_accessor header_color: String?
+      attr_accessor navigation_color: String?
+      attr_accessor text_color: String?
+    end
+
     class DeleteAccessLogSettingsRequest
       include Smithy::Schema::Structure
 
@@ -993,6 +1223,65 @@ module Aws::ApiGatewayV2
 
       attr_accessor api_id: String?
       attr_accessor model_id: String?
+    end
+
+    class DeletePortalProductRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_product_id: String?
+    end
+
+    class DeletePortalProductSharingPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_product_id: String?
+    end
+
+    class DeletePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+    end
+
+    class DeleteProductPageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_product_id: String,
+        ?product_page_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_product_id: String?
+      attr_accessor product_page_id: String?
+    end
+
+    class DeleteProductRestEndpointPageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_product_id: String,
+        ?product_rest_endpoint_page_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_product_id: String?
+      attr_accessor product_rest_endpoint_page_id: String?
     end
 
     class DeleteRouteRequest
@@ -1128,6 +1417,60 @@ module Aws::ApiGatewayV2
       DEPLOYED: String
     end
 
+    class DisablePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+    end
+
+    class DisplayContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor title: String?
+    end
+
+    class DisplayContentOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?endpoint: String,
+        ?operation_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor endpoint: String?
+      attr_accessor operation_name: String?
+    end
+
+    class DisplayOrder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contents: Array[Types::Section],
+        ?overview_page_arn: String,
+        ?product_page_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contents: Array[Types::Section]?
+      attr_accessor overview_page_arn: String?
+      attr_accessor product_page_arns: Array[String]?
+    end
+
     class DomainName
       include Smithy::Schema::Structure
 
@@ -1187,6 +1530,64 @@ module Aws::ApiGatewayV2
       UPDATING: String
       PENDING_CERTIFICATE_REIMPORT: String
       PENDING_OWNERSHIP_VERIFICATION: String
+    end
+
+    class EndpointConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acm_managed: Types::ACMManaged,
+        ?none: Types::None,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acm_managed: Types::ACMManaged?
+      attr_accessor none: Types::None?
+    end
+
+    class EndpointConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?domain_name: String,
+        ?portal_default_domain_name: String,
+        ?portal_domain_hosted_zone_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor portal_default_domain_name: String?
+      attr_accessor portal_domain_hosted_zone_id: String?
+    end
+
+    class EndpointDisplayContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?none: Types::None,
+        ?overrides: Types::DisplayContentOverrides,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor none: Types::None?
+      attr_accessor overrides: Types::DisplayContentOverrides?
+    end
+
+    class EndpointDisplayContentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?endpoint: String,
+        ?operation_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor endpoint: String?
+      attr_accessor operation_name: String?
     end
 
     module EndpointType
@@ -1798,6 +2199,190 @@ module Aws::ApiGatewayV2
       attr_accessor next_token: String?
     end
 
+    class GetPortalProductRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_product_id: String,
+        ?resource_owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_product_id: String?
+      attr_accessor resource_owner_account_id: String?
+    end
+
+    class GetPortalProductResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?display_name: String,
+        ?display_order: Types::DisplayOrder,
+        ?last_modified: Time,
+        ?portal_product_arn: String,
+        ?portal_product_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor display_order: Types::DisplayOrder?
+      attr_accessor last_modified: Time?
+      attr_accessor portal_product_arn: String?
+      attr_accessor portal_product_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetPortalProductSharingPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_product_id: String?
+    end
+
+    class GetPortalProductSharingPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_document: String,
+        ?portal_product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_document: String?
+      attr_accessor portal_product_id: String?
+    end
+
+    class GetPortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+    end
+
+    class GetPortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: Types::Authorization,
+        ?endpoint_configuration: Types::EndpointConfigurationResponse,
+        ?included_portal_product_arns: Array[String],
+        ?last_modified: Time,
+        ?last_published: Time,
+        ?last_published_description: String,
+        ?portal_arn: String,
+        ?portal_content: Types::PortalContent,
+        ?portal_id: String,
+        ?preview: Types::Preview,
+        ?publish_status: String,
+        ?rum_app_monitor_name: String,
+        ?status_exception: Types::StatusException,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse?
+      attr_accessor included_portal_product_arns: Array[String]?
+      attr_accessor last_modified: Time?
+      attr_accessor last_published: Time?
+      attr_accessor last_published_description: String?
+      attr_accessor portal_arn: String?
+      attr_accessor portal_content: Types::PortalContent?
+      attr_accessor portal_id: String?
+      attr_accessor preview: Types::Preview?
+      attr_accessor publish_status: String?
+      attr_accessor rum_app_monitor_name: String?
+      attr_accessor status_exception: Types::StatusException?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetProductPageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_product_id: String,
+        ?product_page_id: String,
+        ?resource_owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_product_id: String?
+      attr_accessor product_page_id: String?
+      attr_accessor resource_owner_account_id: String?
+    end
+
+    class GetProductPageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::DisplayContent,
+        ?last_modified: Time,
+        ?product_page_arn: String,
+        ?product_page_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::DisplayContent?
+      attr_accessor last_modified: Time?
+      attr_accessor product_page_arn: String?
+      attr_accessor product_page_id: String?
+    end
+
+    class GetProductRestEndpointPageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_raw_display_content: String,
+        ?portal_product_id: String,
+        ?product_rest_endpoint_page_id: String,
+        ?resource_owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_raw_display_content: String?
+      attr_accessor portal_product_id: String?
+      attr_accessor product_rest_endpoint_page_id: String?
+      attr_accessor resource_owner_account_id: String?
+    end
+
+    class GetProductRestEndpointPageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::EndpointDisplayContentResponse,
+        ?last_modified: Time,
+        ?product_rest_endpoint_page_arn: String,
+        ?product_rest_endpoint_page_id: String,
+        ?raw_display_content: String,
+        ?rest_endpoint_identifier: Types::RestEndpointIdentifier,
+        ?status: String,
+        ?status_exception: Types::StatusException,
+        ?try_it_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::EndpointDisplayContentResponse?
+      attr_accessor last_modified: Time?
+      attr_accessor product_rest_endpoint_page_arn: String?
+      attr_accessor product_rest_endpoint_page_id: String?
+      attr_accessor raw_display_content: String?
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier?
+      attr_accessor status: String?
+      attr_accessor status_exception: Types::StatusException?
+      attr_accessor try_it_state: String?
+    end
+
     class GetRouteRequest
       include Smithy::Schema::Structure
 
@@ -2136,6 +2721,23 @@ module Aws::ApiGatewayV2
       attr_accessor next_token: String?
     end
 
+    class IdentifierParts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?method: String,
+        ?path: String,
+        ?rest_api_id: String,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor method: String?
+      attr_accessor path: String?
+      attr_accessor rest_api_id: String?
+      attr_accessor stage: String?
+    end
+
     class ImportApiRequest
       include Smithy::Schema::Structure
 
@@ -2290,6 +2892,120 @@ module Aws::ApiGatewayV2
       attr_accessor issuer: String?
     end
 
+    class ListPortalProductsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+        ?resource_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+      attr_accessor resource_owner: String?
+    end
+
+    class ListPortalProductsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::PortalProductSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::PortalProductSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPortalsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListPortalsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::PortalSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::PortalSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProductPagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+        ?portal_product_id: String,
+        ?resource_owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+      attr_accessor portal_product_id: String?
+      attr_accessor resource_owner_account_id: String?
+    end
+
+    class ListProductPagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ProductPageSummaryNoBody],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ProductPageSummaryNoBody]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProductRestEndpointPagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: String,
+        ?next_token: String,
+        ?portal_product_id: String,
+        ?resource_owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: String?
+      attr_accessor next_token: String?
+      attr_accessor portal_product_id: String?
+      attr_accessor resource_owner_account_id: String?
+    end
+
+    class ListProductRestEndpointPagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ProductRestEndpointPageSummaryNoBody],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ProductRestEndpointPageSummaryNoBody]?
+      attr_accessor next_token: String?
+    end
+
     class ListRoutingRulesRequest
       include Smithy::Schema::Structure
 
@@ -2373,6 +3089,15 @@ module Aws::ApiGatewayV2
       attr_accessor truststore_version: String?
     end
 
+    class None
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class NotFoundException
       include Smithy::Schema::Structure
 
@@ -2403,9 +3128,233 @@ module Aws::ApiGatewayV2
       WHEN_NO_TEMPLATES: String
     end
 
+    class PortalContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?display_name: String,
+        ?theme: Types::PortalTheme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor theme: Types::PortalTheme?
+    end
+
+    class PortalProductSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?display_name: String,
+        ?last_modified: Time,
+        ?portal_product_arn: String,
+        ?portal_product_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor last_modified: Time?
+      attr_accessor portal_product_arn: String?
+      attr_accessor portal_product_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PortalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: Types::Authorization,
+        ?endpoint_configuration: Types::EndpointConfigurationResponse,
+        ?included_portal_product_arns: Array[String],
+        ?last_modified: Time,
+        ?last_published: Time,
+        ?last_published_description: String,
+        ?portal_arn: String,
+        ?portal_content: Types::PortalContent,
+        ?portal_id: String,
+        ?preview: Types::Preview,
+        ?publish_status: String,
+        ?rum_app_monitor_name: String,
+        ?status_exception: Types::StatusException,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse?
+      attr_accessor included_portal_product_arns: Array[String]?
+      attr_accessor last_modified: Time?
+      attr_accessor last_published: Time?
+      attr_accessor last_published_description: String?
+      attr_accessor portal_arn: String?
+      attr_accessor portal_content: Types::PortalContent?
+      attr_accessor portal_id: String?
+      attr_accessor preview: Types::Preview?
+      attr_accessor publish_status: String?
+      attr_accessor rum_app_monitor_name: String?
+      attr_accessor status_exception: Types::StatusException?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PortalTheme
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_colors: Types::CustomColors,
+        ?logo_last_uploaded: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_colors: Types::CustomColors?
+      attr_accessor logo_last_uploaded: Time?
+    end
+
+    class Preview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preview_status: String,
+        ?preview_url: String,
+        ?status_exception: Types::StatusException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preview_status: String?
+      attr_accessor preview_url: String?
+      attr_accessor status_exception: Types::StatusException?
+    end
+
+    class PreviewPortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?portal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor portal_id: String?
+    end
+
+    class PreviewPortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module PreviewStatus
+      PREVIEW_IN_PROGRESS: String
+      PREVIEW_FAILED: String
+      PREVIEW_READY: String
+    end
+
+    class ProductPageSummaryNoBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_modified: Time,
+        ?page_title: String,
+        ?product_page_arn: String,
+        ?product_page_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_modified: Time?
+      attr_accessor page_title: String?
+      attr_accessor product_page_arn: String?
+      attr_accessor product_page_id: String?
+    end
+
+    class ProductRestEndpointPageSummaryNoBody
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?last_modified: Time,
+        ?operation_name: String,
+        ?product_rest_endpoint_page_arn: String,
+        ?product_rest_endpoint_page_id: String,
+        ?rest_endpoint_identifier: Types::RestEndpointIdentifier,
+        ?status: String,
+        ?status_exception: Types::StatusException,
+        ?try_it_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor last_modified: Time?
+      attr_accessor operation_name: String?
+      attr_accessor product_rest_endpoint_page_arn: String?
+      attr_accessor product_rest_endpoint_page_id: String?
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier?
+      attr_accessor status: String?
+      attr_accessor status_exception: Types::StatusException?
+      attr_accessor try_it_state: String?
+    end
+
     module ProtocolType
       WEBSOCKET: String
       HTTP: String
+    end
+
+    class PublishPortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?portal_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor portal_id: String?
+    end
+
+    class PublishPortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module PublishStatus
+      PUBLISHED: String
+      PUBLISH_IN_PROGRESS: String
+      PUBLISH_FAILED: String
+      DISABLE_IN_PROGRESS: String
+      DISABLE_FAILED: String
+      DISABLED: String
+    end
+
+    class PutPortalProductSharingPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_document: String,
+        ?portal_product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_document: String?
+      attr_accessor portal_product_id: String?
+    end
+
+    class PutPortalProductSharingPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class PutRoutingRuleRequest
@@ -2519,6 +3468,17 @@ module Aws::ApiGatewayV2
 
       attr_accessor api_id: String?
       attr_accessor stage_name: String?
+    end
+
+    class RestEndpointIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier_parts: Types::IdentifierParts,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier_parts: Types::IdentifierParts?
     end
 
     class Route
@@ -2693,6 +3653,19 @@ module Aws::ApiGatewayV2
       attr_accessor any_of: Array[Types::RoutingRuleMatchHeaderValue]?
     end
 
+    class Section
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_rest_endpoint_page_arns: Array[String],
+        ?section_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_rest_endpoint_page_arns: Array[String]?
+      attr_accessor section_name: String?
+    end
+
     module SecurityPolicy
       TLS_1_0: String
       TLS_1_2: String
@@ -2733,6 +3706,25 @@ module Aws::ApiGatewayV2
       attr_accessor stage_name: String?
       attr_accessor stage_variables: Hash[String, String]?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    module Status
+      AVAILABLE: String
+      IN_PROGRESS: String
+      FAILED: String
+    end
+
+    class StatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exception: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exception: String?
+      attr_accessor message: String?
     end
 
     class TagResourceRequest
@@ -2790,6 +3782,11 @@ module Aws::ApiGatewayV2
 
       attr_accessor limit_type: String?
       attr_accessor message: String?
+    end
+
+    module TryItState
+      ENABLED: String
+      DISABLED: String
     end
 
     class UntagResourceRequest
@@ -3239,6 +4236,180 @@ module Aws::ApiGatewayV2
       attr_accessor model_id: String?
       attr_accessor name: String?
       attr_accessor schema: String?
+    end
+
+    class UpdatePortalProductRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?display_name: String,
+        ?display_order: Types::DisplayOrder,
+        ?portal_product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor display_order: Types::DisplayOrder?
+      attr_accessor portal_product_id: String?
+    end
+
+    class UpdatePortalProductResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?display_name: String,
+        ?display_order: Types::DisplayOrder,
+        ?last_modified: Time,
+        ?portal_product_arn: String,
+        ?portal_product_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor display_name: String?
+      attr_accessor display_order: Types::DisplayOrder?
+      attr_accessor last_modified: Time?
+      attr_accessor portal_product_arn: String?
+      attr_accessor portal_product_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdatePortalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: Types::Authorization,
+        ?endpoint_configuration: Types::EndpointConfigurationRequest,
+        ?included_portal_product_arns: Array[String],
+        ?logo_uri: String,
+        ?portal_content: Types::PortalContent,
+        ?portal_id: String,
+        ?rum_app_monitor_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationRequest?
+      attr_accessor included_portal_product_arns: Array[String]?
+      attr_accessor logo_uri: String?
+      attr_accessor portal_content: Types::PortalContent?
+      attr_accessor portal_id: String?
+      attr_accessor rum_app_monitor_name: String?
+    end
+
+    class UpdatePortalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: Types::Authorization,
+        ?endpoint_configuration: Types::EndpointConfigurationResponse,
+        ?included_portal_product_arns: Array[String],
+        ?last_modified: Time,
+        ?last_published: Time,
+        ?last_published_description: String,
+        ?portal_arn: String,
+        ?portal_content: Types::PortalContent,
+        ?portal_id: String,
+        ?preview: Types::Preview,
+        ?publish_status: String,
+        ?rum_app_monitor_name: String,
+        ?status_exception: Types::StatusException,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse?
+      attr_accessor included_portal_product_arns: Array[String]?
+      attr_accessor last_modified: Time?
+      attr_accessor last_published: Time?
+      attr_accessor last_published_description: String?
+      attr_accessor portal_arn: String?
+      attr_accessor portal_content: Types::PortalContent?
+      attr_accessor portal_id: String?
+      attr_accessor preview: Types::Preview?
+      attr_accessor publish_status: String?
+      attr_accessor rum_app_monitor_name: String?
+      attr_accessor status_exception: Types::StatusException?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateProductPageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::DisplayContent,
+        ?portal_product_id: String,
+        ?product_page_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::DisplayContent?
+      attr_accessor portal_product_id: String?
+      attr_accessor product_page_id: String?
+    end
+
+    class UpdateProductPageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::DisplayContent,
+        ?last_modified: Time,
+        ?product_page_arn: String,
+        ?product_page_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::DisplayContent?
+      attr_accessor last_modified: Time?
+      attr_accessor product_page_arn: String?
+      attr_accessor product_page_id: String?
+    end
+
+    class UpdateProductRestEndpointPageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::EndpointDisplayContent,
+        ?portal_product_id: String,
+        ?product_rest_endpoint_page_id: String,
+        ?try_it_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::EndpointDisplayContent?
+      attr_accessor portal_product_id: String?
+      attr_accessor product_rest_endpoint_page_id: String?
+      attr_accessor try_it_state: String?
+    end
+
+    class UpdateProductRestEndpointPageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_content: Types::EndpointDisplayContentResponse,
+        ?last_modified: Time,
+        ?product_rest_endpoint_page_arn: String,
+        ?product_rest_endpoint_page_id: String,
+        ?rest_endpoint_identifier: Types::RestEndpointIdentifier,
+        ?status: String,
+        ?status_exception: Types::StatusException,
+        ?try_it_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_content: Types::EndpointDisplayContentResponse?
+      attr_accessor last_modified: Time?
+      attr_accessor product_rest_endpoint_page_arn: String?
+      attr_accessor product_rest_endpoint_page_id: String?
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier?
+      attr_accessor status: String?
+      attr_accessor status_exception: Types::StatusException?
+      attr_accessor try_it_state: String?
     end
 
     class UpdateRouteRequest

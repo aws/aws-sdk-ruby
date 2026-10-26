@@ -1,0 +1,193 @@
+module Aws::SupportAuthZ
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SupportAuthZ::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateSupportPermitResponse
+      include Smithy::Client::_Response[Types::CreateSupportPermitOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def permit: () -> Types::Permit?
+      def status: () -> String?
+      def signing_key_info: () -> Types::SigningKeyInfo?
+      def created_at: () -> Time?
+      def support_case_display_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_support_permit: (
+      ?permit: {
+        actions: {
+          all_actions: {
+          },
+          actions: Array[String]
+        },
+        resources: {
+          all_resources_in_region: untyped,
+          resources: Array[String]
+        },
+        conditions: Array[
+          {
+            allow_after: Time,
+            allow_before: untyped
+          }
+        ]
+      },
+      ?name: String,
+      ?description: String,
+      ?signing_key_info: {
+        kms_key: String
+      },
+      ?support_case_display_id: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateSupportPermitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSupportPermitResponse
+
+    interface _DeleteSupportPermitResponse
+      include Smithy::Client::_Response[Types::DeleteSupportPermitOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def permit: () -> Types::Permit?
+      def status: () -> String?
+      def signing_key_info: () -> Types::SigningKeyInfo?
+      def created_at: () -> Time?
+      def support_case_display_id: () -> String?
+    end
+    def delete_support_permit: (
+      ?support_permit_identifier: String
+    ) -> _DeleteSupportPermitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSupportPermitResponse
+
+    interface _GetActionResponse
+      include Smithy::Client::_Response[Types::GetActionOutput]
+      def action: () -> String?
+      def service: () -> String?
+      def description: () -> String?
+    end
+    def get_action: (
+      ?action: String
+    ) -> _GetActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetActionResponse
+
+    interface _GetSupportPermitResponse
+      include Smithy::Client::_Response[Types::GetSupportPermitOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def permit: () -> Types::Permit?
+      def status: () -> String?
+      def signing_key_info: () -> Types::SigningKeyInfo?
+      def created_at: () -> Time?
+      def support_case_display_id: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_support_permit: (
+      ?support_permit_identifier: String
+    ) -> _GetSupportPermitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSupportPermitResponse
+
+    interface _ListActionsResponse
+      include Smithy::Client::_Response[Types::ListActionsOutput]
+      def action_summaries: () -> Array[Types::ActionSummary]?
+      def next_token: () -> String?
+    end
+    def list_actions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?service: String
+    ) -> _ListActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActionsResponse
+
+    interface _ListSupportPermitRequestsResponse
+      include Smithy::Client::_Response[Types::ListSupportPermitRequestsOutput]
+      def support_permit_requests: () -> Array[Types::SupportPermitRequest]?
+      def next_token: () -> String?
+    end
+    def list_support_permit_requests: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?support_case_display_id: String
+    ) -> _ListSupportPermitRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSupportPermitRequestsResponse
+
+    interface _ListSupportPermitsResponse
+      include Smithy::Client::_Response[Types::ListSupportPermitsOutput]
+      def support_permits: () -> Array[Types::SupportPermitSummary]?
+      def next_token: () -> String?
+    end
+    def list_support_permits: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?support_permit_statuses: Array[String]
+    ) -> _ListSupportPermitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSupportPermitsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RejectSupportPermitRequestResponse
+      include Smithy::Client::_Response[Types::RejectSupportPermitRequestOutput]
+      def request_arn: () -> String?
+    end
+    def reject_support_permit_request: (
+      ?request_arn: String
+    ) -> _RejectSupportPermitRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectSupportPermitRequestResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

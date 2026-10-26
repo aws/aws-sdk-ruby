@@ -55,6 +55,9 @@ module Aws::RedshiftData
       def secret_arn: () -> String?
       def workgroup_name: () -> String?
       def session_id: () -> String?
+      def status: () -> String?
+      def redshift_pid: () -> Integer?
+      def has_result_set: () -> bool?
     end
     def batch_execute_statement: (
       ?sqls: Array[String],
@@ -64,11 +67,19 @@ module Aws::RedshiftData
       ?database: String,
       ?with_event: bool,
       ?statement_name: String,
+      ?parameters: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
       ?workgroup_name: String,
       ?client_token: String,
+      ?result_format: String,
       ?session_keep_alive_seconds: Integer,
       ?session_id: String,
-      ?result_format: String
+      ?execution_mode: String,
+      ?wait_time_seconds: Integer
     ) -> _BatchExecuteStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchExecuteStatementResponse
 
     interface _CancelStatementResponse
@@ -100,11 +111,13 @@ module Aws::RedshiftData
       def query_parameters: () -> Array[Types::SqlParameter]?
       def sub_statements: () -> Array[Types::SubStatementData]?
       def workgroup_name: () -> String?
-      def session_id: () -> String?
       def result_format: () -> String?
+      def session_id: () -> String?
+      def execution_mode: () -> String?
     end
     def describe_statement: (
-      ?id: String
+      ?id: String,
+      ?wait_time_seconds: Integer
     ) -> _DescribeStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStatementResponse
 
     interface _DescribeTableResponse
@@ -137,6 +150,9 @@ module Aws::RedshiftData
       def secret_arn: () -> String?
       def workgroup_name: () -> String?
       def session_id: () -> String?
+      def status: () -> String?
+      def redshift_pid: () -> Integer?
+      def has_result_set: () -> bool?
     end
     def execute_statement: (
       ?sql: String,
@@ -154,9 +170,10 @@ module Aws::RedshiftData
       ],
       ?workgroup_name: String,
       ?client_token: String,
+      ?result_format: String,
       ?session_keep_alive_seconds: Integer,
       ?session_id: String,
-      ?result_format: String
+      ?wait_time_seconds: Integer
     ) -> _ExecuteStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteStatementResponse
 
     interface _GetStatementResultResponse
@@ -168,7 +185,8 @@ module Aws::RedshiftData
     end
     def get_statement_result: (
       ?id: String,
-      ?next_token: String
+      ?next_token: String,
+      ?wait_time_seconds: Integer
     ) -> _GetStatementResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStatementResultResponse
 
     interface _GetStatementResultV2Response
@@ -181,7 +199,8 @@ module Aws::RedshiftData
     end
     def get_statement_result_v2: (
       ?id: String,
-      ?next_token: String
+      ?next_token: String,
+      ?wait_time_seconds: Integer
     ) -> _GetStatementResultV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStatementResultV2Response
 
     interface _ListDatabasesResponse
@@ -215,6 +234,22 @@ module Aws::RedshiftData
       ?max_results: Integer,
       ?workgroup_name: String
     ) -> _ListSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchemasResponse
+
+    interface _ListSessionsResponse
+      include Smithy::Client::_Response[Types::ListSessionsResponse]
+      def sessions: () -> Array[Types::SessionData]?
+      def next_token: () -> String?
+    end
+    def list_sessions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?session_id: String,
+      ?status: String,
+      ?role_level: bool,
+      ?cluster_identifier: String,
+      ?workgroup_name: String,
+      ?database: String
+    ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
 
     interface _ListStatementsResponse
       include Smithy::Client::_Response[Types::ListStatementsResponse]

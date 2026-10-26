@@ -79,6 +79,19 @@ module Aws::SageMaker
       ?trial_name: String
     ) -> _AssociateTrialComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateTrialComponentResponse
 
+    interface _AttachClusterNodeNetworkInterfaceResponse
+      include Smithy::Client::_Response[Types::AttachClusterNodeNetworkInterfaceResponse]
+      def cluster_arn: () -> String?
+      def node_id: () -> String?
+      def network_interface_id: () -> String?
+      def attachment_id: () -> String?
+    end
+    def attach_cluster_node_network_interface: (
+      ?cluster_name: String,
+      ?node_id: String,
+      ?network_interface_id: String
+    ) -> _AttachClusterNodeNetworkInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachClusterNodeNetworkInterfaceResponse
+
     interface _AttachClusterNodeVolumeResponse
       include Smithy::Client::_Response[Types::AttachClusterNodeVolumeResponse]
       def cluster_arn: () -> String?
@@ -105,7 +118,9 @@ module Aws::SageMaker
       ?nodes_to_add: Array[
         {
           instance_group_name: String,
-          increment_target_count_by: Integer
+          increment_target_count_by: Integer,
+          availability_zones: Array[String],
+          instance_types: Array[String]
         }
       ]
     ) -> _BatchAddClusterNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAddClusterNodesResponse
@@ -131,6 +146,166 @@ module Aws::SageMaker
     def batch_describe_model_package: (
       ?model_package_arn_list: Array[String]
     ) -> _BatchDescribeModelPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDescribeModelPackageResponse
+
+    interface _BatchRebootClusterNodesResponse
+      include Smithy::Client::_Response[Types::BatchRebootClusterNodesResponse]
+      def successful: () -> Array[String]?
+      def failed: () -> Array[Types::BatchRebootClusterNodesError]?
+      def failed_node_logical_ids: () -> Array[Types::BatchRebootClusterNodeLogicalIdsError]?
+      def successful_node_logical_ids: () -> Array[String]?
+    end
+    def batch_reboot_cluster_nodes: (
+      ?cluster_name: String,
+      ?node_ids: Array[String],
+      ?node_logical_ids: Array[String]
+    ) -> _BatchRebootClusterNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchRebootClusterNodesResponse
+
+    interface _BatchReplaceClusterNodesResponse
+      include Smithy::Client::_Response[Types::BatchReplaceClusterNodesResponse]
+      def successful: () -> Array[String]?
+      def failed: () -> Array[Types::BatchReplaceClusterNodesError]?
+      def failed_node_logical_ids: () -> Array[Types::BatchReplaceClusterNodeLogicalIdsError]?
+      def successful_node_logical_ids: () -> Array[String]?
+    end
+    def batch_replace_cluster_nodes: (
+      ?cluster_name: String,
+      ?node_ids: Array[String],
+      ?node_logical_ids: Array[String]
+    ) -> _BatchReplaceClusterNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchReplaceClusterNodesResponse
+
+    interface _CreateAIBenchmarkJobResponse
+      include Smithy::Client::_Response[Types::CreateAIBenchmarkJobResponse]
+      def ai_benchmark_job_arn: () -> String?
+    end
+    def create_ai_benchmark_job: (
+      ?ai_benchmark_job_name: String,
+      ?benchmark_target: {
+        endpoint: {
+          identifier: String,
+          target_container_hostname: String,
+          inference_components: Array[
+            {
+              identifier: untyped
+            }
+          ]
+        }
+      },
+      ?output_config: {
+        s3_output_location: String,
+        mlflow_config: {
+          mlflow_resource_arn: String,
+          mlflow_experiment_name: String,
+          mlflow_run_name: String
+        }
+      },
+      ?ai_workload_config_identifier: String,
+      ?role_arn: String,
+      ?network_config: {
+        vpc_config: {
+          security_group_ids: Array[String],
+          subnets: Array[String]
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAIBenchmarkJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAIBenchmarkJobResponse
+
+    interface _CreateAIRecommendationJobResponse
+      include Smithy::Client::_Response[Types::CreateAIRecommendationJobResponse]
+      def ai_recommendation_job_arn: () -> String?
+    end
+    def create_ai_recommendation_job: (
+      ?ai_recommendation_job_name: String,
+      ?model_source: {
+        s3: {
+          s3_uri: String
+        }
+      },
+      ?output_config: {
+        s3_output_location: String,
+        model_package_group_identifier: String,
+        mlflow_config: {
+          mlflow_resource_arn: String,
+          mlflow_experiment_name: String,
+          mlflow_run_name: String
+        }
+      },
+      ?ai_workload_config_identifier: String,
+      ?performance_target: {
+        constraints: Array[
+          {
+            metric: String
+          }
+        ]
+      },
+      ?role_arn: String,
+      ?inference_specification: {
+        framework: String
+      },
+      ?optimize_model: bool,
+      ?compute_spec: {
+        instance_types: Array[String],
+        capacity_reservation_config: {
+          capacity_reservation_preference: String,
+          ml_reservation_arns: Array[String]
+        }
+      },
+      ?adapter_source: {
+        model_package_arns: Array[
+          {
+            adapter_id: String,
+            model_package_arn: String
+          }
+        ],
+        s3_uris: Array[
+          {
+            adapter_id: untyped,
+            s3_uri: String
+          }
+        ]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAIRecommendationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAIRecommendationJobResponse
+
+    interface _CreateAIWorkloadConfigResponse
+      include Smithy::Client::_Response[Types::CreateAIWorkloadConfigResponse]
+      def ai_workload_config_arn: () -> String?
+    end
+    def create_ai_workload_config: (
+      ?ai_workload_config_name: String,
+      ?dataset_config: {
+        input_data_config: Array[
+          {
+            channel_name: String,
+            data_source: {
+              s3_data_source: {
+                s3_uri: String
+              }
+            }
+          }
+        ]
+      },
+      ?ai_workload_configs: {
+        workload_spec: {
+          inline: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAIWorkloadConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAIWorkloadConfigResponse
 
     interface _CreateActionResponse
       include Smithy::Client::_Response[Types::CreateActionResponse]
@@ -256,13 +431,25 @@ module Aws::SageMaker
             framework: untyped,
             framework_version: String,
             nearest_model_name: untyped,
+            additional_model_data_sources: Array[
+              {
+                channel_name: String,
+                s3_data_source: untyped
+              }
+            ],
             additional_s3_data_source: {
               s3_data_type: String,
               s3_uri: String,
               compression_type: String,
               e_tag: untyped
             },
-            model_data_e_tag: untyped
+            model_data_e_tag: untyped,
+            is_checkpoint: bool,
+            base_model: {
+              hub_content_name: String,
+              hub_content_version: String,
+              recipe_name: String
+            }
           }
         ],
         supported_transform_instance_types: Array[String],
@@ -300,6 +487,9 @@ module Aws::SageMaker
                       file_system_access_mode: String,
                       file_system_type: String,
                       directory_path: String
+                    },
+                    dataset_source: {
+                      dataset_arn: String
                     }
                   },
                   content_type: String,
@@ -338,7 +528,16 @@ module Aws::SageMaker
                       instance_count: untyped
                     }
                   ]
-                }
+                },
+                instance_preferences: Array[
+                  {
+                    instance_type: untyped,
+                    instance_count: untyped,
+                    training_plan_arns: Array[String]
+                  }
+                ],
+                selected_instance_type: untyped,
+                selected_instance_count: untyped
               },
               stopping_condition: {
                 max_runtime_in_seconds: Integer,
@@ -408,7 +607,8 @@ module Aws::SageMaker
         sage_maker_image_version_arn: String,
         sage_maker_image_version_alias: String,
         instance_type: String,
-        lifecycle_config_arn: String
+        lifecycle_config_arn: String,
+        training_plan_arn: String
       },
       ?recovery_mode: bool
     ) -> _CreateAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppResponse
@@ -692,11 +892,16 @@ module Aws::SageMaker
       ?instance_groups: Array[
         {
           instance_count: Integer,
+          min_instance_count: untyped,
           instance_group_name: String,
           instance_type: String,
+          instance_requirements: {
+            instance_types: Array[String]
+          },
           life_cycle_config: {
             source_s3_uri: String,
-            on_create: String
+            on_create: String,
+            on_init_complete: untyped
           },
           execution_role: String,
           threads_per_core: Integer,
@@ -706,6 +911,15 @@ module Aws::SageMaker
                 volume_size_in_gb: Integer,
                 volume_kms_key_id: String,
                 root_volume: bool
+              },
+              fsx_lustre_config: {
+                dns_name: String,
+                mount_name: String,
+                mount_path: String
+              },
+              fsx_open_zfs_config: {
+                dns_name: untyped,
+                mount_path: untyped
               }
             }
           ],
@@ -733,7 +947,38 @@ module Aws::SageMaker
               ]
             }
           },
-          image_id: String
+          image_id: String,
+          auto_patch_config: {
+            patching_strategy: String,
+            patch_schedule: {
+              next_patch_date: Time
+            },
+            deployment_config: untyped
+          },
+          image_release_version: String,
+          kubernetes_config: {
+            labels: Hash[String, String],
+            taints: Array[
+              {
+                key: String,
+                value: String,
+                effect: String
+              }
+            ]
+          },
+          slurm_config: {
+            node_type: String,
+            partition_names: Array[String]
+          },
+          capacity_requirements: {
+            spot: {
+            },
+            on_demand: {
+            }
+          },
+          network_interface: {
+            interface_type: String
+          }
         }
       ],
       ?restricted_instance_groups: Array[
@@ -749,6 +994,15 @@ module Aws::SageMaker
                 volume_size_in_gb: Integer,
                 volume_kms_key_id: String,
                 root_volume: bool
+              },
+              fsx_lustre_config: {
+                dns_name: String,
+                mount_name: String,
+                mount_path: String
+              },
+              fsx_open_zfs_config: {
+                dns_name: untyped,
+                mount_path: untyped
               }
             }
           ],
@@ -784,6 +1038,15 @@ module Aws::SageMaker
           }
         }
       ],
+      ?restricted_instance_groups_config: {
+        shared_environment_config: {
+          f_sx_lustre_deletion_policy: String,
+          f_sx_lustre_config: {
+            size_in_gi_b: Integer,
+            per_unit_storage_throughput: Integer
+          }
+        }
+      },
       ?vpc_config: {
         security_group_ids: Array[String],
         subnets: Array[String]
@@ -797,6 +1060,15 @@ module Aws::SageMaker
       ?orchestrator: {
         eks: {
           cluster_arn: String
+        },
+        slurm: {
+          slurm_config_strategy: String,
+          accounting_database: {
+            endpoint: String,
+            port: Integer,
+            name: String,
+            secret_arn: String
+          }
         }
       },
       ?node_recovery: String,
@@ -827,7 +1099,8 @@ module Aws::SageMaker
             weight: Integer
           }
         ],
-        fair_share: String
+        fair_share: String,
+        idle_resource_sharing: String
       },
       ?description: String,
       ?tags: Array[
@@ -915,12 +1188,26 @@ module Aws::SageMaker
             count: Integer,
             accelerators: Integer,
             v_cpu: Float,
-            memory_in_gi_b: Float
+            memory_in_gi_b: Float,
+            accelerator_partition: {
+              type: String,
+              count: Integer
+            }
           }
         ],
         resource_sharing_config: {
           strategy: String,
-          borrow_limit: Integer
+          borrow_limit: Integer,
+          absolute_borrow_limits: Array[
+            {
+              instance_type: untyped,
+              count: untyped,
+              accelerators: untyped,
+              v_cpu: untyped,
+              memory_in_gi_b: untyped,
+              accelerator_partition: untyped
+            }
+          ]
         },
         preempt_team_tasks: String
       },
@@ -1105,7 +1392,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           },
           lifecycle_config_arns: Array[String],
           code_repositories: Array[
@@ -1233,7 +1521,8 @@ module Aws::SageMaker
               sage_maker_image_name: String,
               version_aliases: Array[String]
             }
-          ]
+          ],
+          execution_role_session_name_mode: String
         },
         auto_mount_home_efs: String
       },
@@ -1248,7 +1537,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           }
         },
         execution_role_identity_config: String,
@@ -1288,6 +1578,7 @@ module Aws::SageMaker
       ?home_efs_file_system_kms_key_id: String,
       ?kms_key_id: String,
       ?app_security_group_management: String,
+      ?home_efs_file_system_creation: String,
       ?tag_propagation: String,
       ?default_space_settings: {
         execution_role: String,
@@ -1298,7 +1589,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           },
           lifecycle_config_arns: Array[String],
           code_repositories: Array[
@@ -1501,6 +1793,14 @@ module Aws::SageMaker
           model_name: String,
           initial_instance_count: Integer,
           instance_type: String,
+          instance_pools: Array[
+            {
+              instance_type: untyped,
+              model_name_override: untyped,
+              priority: Integer
+            }
+          ],
+          variant_instance_provision_timeout_in_seconds: Integer,
           initial_variant_weight: Float,
           accelerator_type: String,
           core_dump_config: {
@@ -1519,10 +1819,19 @@ module Aws::SageMaker
           managed_instance_scaling: {
             status: String,
             min_instance_count: Integer,
-            max_instance_count: Integer
+            max_instance_count: Integer,
+            scale_in_policy: {
+              strategy: String,
+              maximum_step_size: Integer,
+              cooldown_in_minutes: Integer
+            }
           },
           routing_config: {
-            routing_strategy: String
+            routing_strategy: String,
+            prefix_aware_routing_config: {
+              prefix_length: Integer,
+              concurrency_threshold: Integer
+            }
           },
           inference_ami_version: String,
           capacity_reservation_config: {
@@ -1606,6 +1915,14 @@ module Aws::SageMaker
           model_name: String,
           initial_instance_count: Integer,
           instance_type: String,
+          instance_pools: Array[
+            {
+              instance_type: untyped,
+              model_name_override: untyped,
+              priority: Integer
+            }
+          ],
+          variant_instance_provision_timeout_in_seconds: Integer,
           initial_variant_weight: Float,
           accelerator_type: String,
           core_dump_config: {
@@ -1624,10 +1941,19 @@ module Aws::SageMaker
           managed_instance_scaling: {
             status: String,
             min_instance_count: Integer,
-            max_instance_count: Integer
+            max_instance_count: Integer,
+            scale_in_policy: {
+              strategy: String,
+              maximum_step_size: Integer,
+              cooldown_in_minutes: Integer
+            }
           },
           routing_config: {
-            routing_strategy: String
+            routing_strategy: String,
+            prefix_aware_routing_config: {
+              prefix_length: Integer,
+              concurrency_threshold: Integer
+            }
           },
           inference_ami_version: String,
           capacity_reservation_config: {
@@ -1641,7 +1967,12 @@ module Aws::SageMaker
         security_group_ids: Array[String],
         subnets: Array[String]
       },
-      ?enable_network_isolation: bool
+      ?enable_network_isolation: bool,
+      ?metrics_config: {
+        enable_enhanced_metrics: bool,
+        enable_detailed_observability: bool,
+        metric_publish_frequency_in_seconds: Integer
+      }
     ) -> _CreateEndpointConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEndpointConfigResponse
 
     interface _CreateExperimentResponse
@@ -1973,6 +2304,9 @@ module Aws::SageMaker
                 file_system_access_mode: String,
                 file_system_type: String,
                 directory_path: String
+              },
+              dataset_source: {
+                dataset_arn: String
               }
             },
             content_type: String,
@@ -2015,19 +2349,28 @@ module Aws::SageMaker
                 instance_count: untyped
               }
             ]
-          }
+          },
+          instance_preferences: Array[
+            {
+              instance_type: untyped,
+              instance_count: untyped,
+              training_plan_arns: Array[String]
+            }
+          ],
+          selected_instance_type: untyped,
+          selected_instance_count: untyped
         },
         hyper_parameter_tuning_resource_config: {
           instance_type: untyped,
           instance_count: untyped,
-          volume_size_in_gb: Integer,
+          volume_size_in_gb: untyped,
           volume_kms_key_id: untyped,
           allocation_strategy: String,
           instance_configs: Array[
             {
               instance_type: untyped,
               instance_count: untyped,
-              volume_size_in_gb: untyped
+              volume_size_in_gb: Integer
             }
           ]
         },
@@ -2120,6 +2463,9 @@ module Aws::SageMaker
                   file_system_access_mode: String,
                   file_system_type: String,
                   directory_path: String
+                },
+                dataset_source: {
+                  dataset_arn: String
                 }
               },
               content_type: String,
@@ -2162,19 +2508,28 @@ module Aws::SageMaker
                   instance_count: untyped
                 }
               ]
-            }
+            },
+            instance_preferences: Array[
+              {
+                instance_type: untyped,
+                instance_count: untyped,
+                training_plan_arns: Array[String]
+              }
+            ],
+            selected_instance_type: untyped,
+            selected_instance_count: untyped
           },
           hyper_parameter_tuning_resource_config: {
             instance_type: untyped,
             instance_count: untyped,
-            volume_size_in_gb: Integer,
+            volume_size_in_gb: untyped,
             volume_kms_key_id: untyped,
             allocation_strategy: String,
             instance_configs: Array[
               {
                 instance_type: untyped,
                 instance_count: untyped,
-                volume_size_in_gb: untyped
+                volume_size_in_gb: Integer
               }
             ]
           },
@@ -2259,11 +2614,20 @@ module Aws::SageMaker
       ?endpoint_name: String,
       ?variant_name: String,
       ?specification: {
+        instance_type: String,
         model_name: String,
         container: {
           image: String,
           artifact_url: String,
-          environment: Hash[String, String]
+          environment: Hash[String, String],
+          container_metrics_config: {
+            metrics_endpoints: Array[
+              {
+                metrics_endpoint_path: String,
+                metric_publish_frequency_in_seconds: Integer
+              }
+            ]
+          }
         },
         startup_parameters: {
           model_data_download_timeout_in_seconds: Integer,
@@ -2275,8 +2639,58 @@ module Aws::SageMaker
           min_memory_required_in_mb: Integer,
           max_memory_required_in_mb: untyped
         },
-        base_inference_component_name: String
+        base_inference_component_name: String,
+        data_cache_config: {
+          enable_caching: bool
+        },
+        scheduling_config: {
+          placement_strategy: String,
+          availability_zone_balance: {
+            enforcement_mode: String,
+            max_imbalance: Integer
+          }
+        }
       },
+      ?specifications: Array[
+        {
+          instance_type: String,
+          model_name: String,
+          container: {
+            image: String,
+            artifact_url: String,
+            environment: Hash[String, String],
+            container_metrics_config: {
+              metrics_endpoints: Array[
+                {
+                  metrics_endpoint_path: String,
+                  metric_publish_frequency_in_seconds: Integer
+                }
+              ]
+            }
+          },
+          startup_parameters: {
+            model_data_download_timeout_in_seconds: Integer,
+            container_startup_health_check_timeout_in_seconds: Integer
+          },
+          compute_resource_requirements: {
+            number_of_cpu_cores_required: Float,
+            number_of_accelerator_devices_required: Float,
+            min_memory_required_in_mb: Integer,
+            max_memory_required_in_mb: untyped
+          },
+          base_inference_component_name: String,
+          data_cache_config: {
+            enable_caching: bool
+          },
+          scheduling_config: {
+            placement_strategy: String,
+            availability_zone_balance: {
+              enforcement_mode: String,
+              max_imbalance: Integer
+            }
+          }
+        }
+      ],
       ?runtime_config: {
         copy_count: Integer
       },
@@ -2442,6 +2856,24 @@ module Aws::SageMaker
       ]
     ) -> _CreateInferenceRecommendationsJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInferenceRecommendationsJobResponse
 
+    interface _CreateJobResponse
+      include Smithy::Client::_Response[Types::CreateJobResponse]
+      def job_arn: () -> String?
+    end
+    def create_job: (
+      ?job_name: String,
+      ?role_arn: String,
+      ?job_category: String,
+      ?job_config_schema_version: String,
+      ?job_config_document: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJobResponse
+
     interface _CreateLabelingJobResponse
       include Smithy::Client::_Response[Types::CreateLabelingJobResponse]
       def labeling_job_arn: () -> String?
@@ -2517,6 +2949,27 @@ module Aws::SageMaker
       ]
     ) -> _CreateLabelingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLabelingJobResponse
 
+    interface _CreateMlflowAppResponse
+      include Smithy::Client::_Response[Types::CreateMlflowAppResponse]
+      def arn: () -> String?
+    end
+    def create_mlflow_app: (
+      ?name: String,
+      ?artifact_store_uri: String,
+      ?role_arn: String,
+      ?kms_key_id: String,
+      ?model_registration_mode: String,
+      ?weekly_maintenance_window_start: String,
+      ?account_default_status: String,
+      ?default_domain_id_list: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMlflowAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMlflowAppResponse
+
     interface _CreateMlflowTrackingServerResponse
       include Smithy::Client::_Response[Types::CreateMlflowTrackingServerResponse]
       def tracking_server_arn: () -> String?
@@ -2534,7 +2987,9 @@ module Aws::SageMaker
           key: String,
           value: String
         }
-      ]
+      ],
+      ?s3_bucket_owner_account_id: String,
+      ?s3_bucket_owner_verification: bool
     ) -> _CreateMlflowTrackingServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMlflowTrackingServerResponse
 
     interface _CreateModelResponse
@@ -2581,6 +3036,14 @@ module Aws::SageMaker
         inference_specification_name: String,
         multi_model_config: {
           model_cache_setting: String
+        },
+        container_metrics_config: {
+          metrics_endpoints: Array[
+            {
+              metrics_endpoint_path: String,
+              metric_publish_frequency_in_seconds: Integer
+            }
+          ]
         }
       },
       ?containers: Array[
@@ -2622,6 +3085,14 @@ module Aws::SageMaker
           inference_specification_name: String,
           multi_model_config: {
             model_cache_setting: String
+          },
+          container_metrics_config: {
+            metrics_endpoints: Array[
+              {
+                metrics_endpoint_path: String,
+                metric_publish_frequency_in_seconds: Integer
+              }
+            ]
           }
         }
       ],
@@ -2875,6 +3346,7 @@ module Aws::SageMaker
       ?model_package_name: String,
       ?model_package_group_name: String,
       ?model_package_description: String,
+      ?model_package_registration_type: String,
       ?inference_specification: {
         containers: Array[
           {
@@ -2906,13 +3378,25 @@ module Aws::SageMaker
             framework: untyped,
             framework_version: String,
             nearest_model_name: untyped,
+            additional_model_data_sources: Array[
+              {
+                channel_name: String,
+                s3_data_source: untyped
+              }
+            ],
             additional_s3_data_source: {
               s3_data_type: String,
               s3_uri: String,
               compression_type: String,
               e_tag: untyped
             },
-            model_data_e_tag: untyped
+            model_data_e_tag: untyped,
+            is_checkpoint: bool,
+            base_model: {
+              hub_content_name: String,
+              hub_content_version: String,
+              recipe_name: String
+            }
           }
         ],
         supported_transform_instance_types: Array[String],
@@ -3084,13 +3568,25 @@ module Aws::SageMaker
               framework: untyped,
               framework_version: String,
               nearest_model_name: untyped,
+              additional_model_data_sources: Array[
+                {
+                  channel_name: String,
+                  s3_data_source: untyped
+                }
+              ],
               additional_s3_data_source: {
                 s3_data_type: String,
                 s3_uri: String,
                 compression_type: String,
                 e_tag: untyped
               },
-              model_data_e_tag: untyped
+              model_data_e_tag: untyped,
+              is_checkpoint: bool,
+              base_model: {
+                hub_content_name: String,
+                hub_content_version: String,
+                recipe_name: String
+              }
             }
           ],
           supported_transform_instance_types: Array[String],
@@ -3112,7 +3608,8 @@ module Aws::SageMaker
         stage: String,
         stage_status: untyped,
         stage_description: String
-      }
+      },
+      ?managed_storage_type: String
     ) -> _CreateModelPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelPackageResponse
 
     interface _CreateModelPackageGroupResponse
@@ -3127,7 +3624,10 @@ module Aws::SageMaker
           key: String,
           value: String
         }
-      ]
+      ],
+      ?managed_configuration: {
+        managed_storage_type: String
+      }
     ) -> _CreateModelPackageGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelPackageGroupResponse
 
     interface _CreateModelQualityJobDefinitionResponse
@@ -3414,9 +3914,13 @@ module Aws::SageMaker
           model_access_config: {
             accept_eula: bool
           }
+        },
+        sage_maker_model: {
+          model_name: String
         }
       },
       ?deployment_instance_type: String,
+      ?max_instance_count: Integer,
       ?optimization_environment: Hash[String, String],
       ?optimization_configs: Array[
         {
@@ -3431,12 +3935,22 @@ module Aws::SageMaker
           model_sharding_config: {
             image: untyped,
             override_environment: untyped
+          },
+          model_speculative_decoding_config: {
+            technique: String,
+            training_data_source: {
+              s3_uri: String,
+              s3_data_type: String
+            }
           }
         }
       ],
       ?output_config: {
         kms_key_id: String,
-        s3_output_location: String
+        s3_output_location: String,
+        sage_maker_model: {
+          model_name: String
+        }
       },
       ?stopping_condition: {
         max_runtime_in_seconds: Integer,
@@ -3452,7 +3966,8 @@ module Aws::SageMaker
       ?vpc_config: {
         security_group_ids: Array[String],
         subnets: Array[String]
-      }
+      },
+      ?training_plan_arns: Array[String]
     ) -> _CreateOptimizationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOptimizationJobResponse
 
     interface _CreatePartnerAppResponse
@@ -3470,10 +3985,21 @@ module Aws::SageMaker
       ?tier: String,
       ?application_config: {
         admin_users: Array[String],
-        arguments: Hash[String, String]
+        arguments: Hash[String, String],
+        assigned_group_patterns: Array[String],
+        role_group_assignments: Array[
+          {
+            role_name: String,
+            group_patterns: Array[String]
+          }
+        ]
+      },
+      ?idc_config: {
+        instance_arn: String
       },
       ?auth_type: String,
       ?enable_iam_session_based_identity: bool,
+      ?enable_auto_minor_version_upgrade: bool,
       ?client_token: String,
       ?tags: Array[
         {
@@ -3532,6 +4058,16 @@ module Aws::SageMaker
       ?space_name: String,
       ?landing_uri: String
     ) -> _CreatePresignedDomainUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePresignedDomainUrlResponse
+
+    interface _CreatePresignedMlflowAppUrlResponse
+      include Smithy::Client::_Response[Types::CreatePresignedMlflowAppUrlResponse]
+      def authorized_url: () -> String?
+    end
+    def create_presigned_mlflow_app_url: (
+      ?arn: String,
+      ?expires_in_seconds: Integer,
+      ?session_expiration_duration_in_seconds: Integer
+    ) -> _CreatePresignedMlflowAppUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePresignedMlflowAppUrlResponse
 
     interface _CreatePresignedMlflowTrackingServerUrlResponse
       include Smithy::Client::_Response[Types::CreatePresignedMlflowTrackingServerUrlResponse]
@@ -3620,7 +4156,15 @@ module Aws::SageMaker
           instance_count: Integer,
           instance_type: String,
           volume_size_in_gb: Integer,
-          volume_kms_key_id: String
+          volume_kms_key_id: String,
+          instance_preferences: Array[
+            {
+              instance_type: untyped,
+              instance_count: untyped
+            }
+          ],
+          selected_instance_type: untyped,
+          selected_instance_count: untyped
         }
       },
       ?stopping_condition: {
@@ -3717,7 +4261,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           },
           lifecycle_config_arns: Array[String],
           code_repositories: Array[
@@ -3847,6 +4392,9 @@ module Aws::SageMaker
               file_system_access_mode: String,
               file_system_type: String,
               directory_path: String
+            },
+            dataset_source: {
+              dataset_arn: String
             }
           },
           content_type: String,
@@ -3885,7 +4433,16 @@ module Aws::SageMaker
               instance_count: untyped
             }
           ]
-        }
+        },
+        instance_preferences: Array[
+          {
+            instance_type: untyped,
+            instance_count: untyped,
+            training_plan_arns: Array[String]
+          }
+        ],
+        selected_instance_type: untyped,
+        selected_instance_count: untyped
       },
       ?vpc_config: {
         security_group_ids: Array[String],
@@ -3970,6 +4527,25 @@ module Aws::SageMaker
       },
       ?session_chaining_config: {
         enable_session_tag_chaining: bool
+      },
+      ?serverless_job_config: {
+        base_model_arn: String,
+        accept_eula: bool,
+        job_type: String,
+        customization_technique: String,
+        peft: String,
+        evaluation_type: String,
+        evaluator_arn: String,
+        sequence_length: String
+      },
+      ?mlflow_config: {
+        mlflow_resource_arn: String,
+        mlflow_experiment_name: String,
+        mlflow_run_name: String
+      },
+      ?model_package_config: {
+        model_package_group_arn: String,
+        source_model_package_arn: String
       }
     ) -> _CreateTrainingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrainingJobResponse
 
@@ -3988,6 +4564,40 @@ module Aws::SageMaker
         }
       ]
     ) -> _CreateTrainingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrainingPlanResponse
+
+    interface _CreateTrainingSessionResponse
+      include Smithy::Client::_Response[Types::CreateTrainingSessionResponse]
+      def training_session_arn: () -> String?
+    end
+    def create_training_session: (
+      ?training_session_name: String,
+      ?model_package_group_arn: String,
+      ?lora_config: {
+        rank: Integer,
+        alpha: Integer
+      },
+      ?role_arn: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnets: Array[String]
+      },
+      ?model_config: {
+        base_model_arn: String,
+        accept_eula: bool
+      },
+      ?output_config: {
+        s3_location: {
+          path: String,
+          kms_key_arn: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateTrainingSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrainingSessionResponse
 
     interface _CreateTransformJobResponse
       include Smithy::Client::_Response[Types::CreateTransformJobResponse]
@@ -4147,7 +4757,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           },
           lifecycle_config_arns: Array[String],
           code_repositories: Array[
@@ -4275,7 +4886,8 @@ module Aws::SageMaker
               sage_maker_image_name: String,
               version_aliases: Array[String]
             }
-          ]
+          ],
+          execution_role_session_name_mode: String
         },
         auto_mount_home_efs: String
       }
@@ -4358,6 +4970,30 @@ module Aws::SageMaker
         }
       ]
     ) -> _CreateWorkteamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkteamResponse
+
+    interface _DeleteAIBenchmarkJobResponse
+      include Smithy::Client::_Response[Types::DeleteAIBenchmarkJobResponse]
+      def ai_benchmark_job_arn: () -> String?
+    end
+    def delete_ai_benchmark_job: (
+      ?ai_benchmark_job_name: String
+    ) -> _DeleteAIBenchmarkJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAIBenchmarkJobResponse
+
+    interface _DeleteAIRecommendationJobResponse
+      include Smithy::Client::_Response[Types::DeleteAIRecommendationJobResponse]
+      def ai_recommendation_job_arn: () -> String?
+    end
+    def delete_ai_recommendation_job: (
+      ?ai_recommendation_job_name: String
+    ) -> _DeleteAIRecommendationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAIRecommendationJobResponse
+
+    interface _DeleteAIWorkloadConfigResponse
+      include Smithy::Client::_Response[Types::DeleteAIWorkloadConfigResponse]
+      def ai_workload_config_arn: () -> String?
+    end
+    def delete_ai_workload_config: (
+      ?ai_workload_config_name: String
+    ) -> _DeleteAIWorkloadConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAIWorkloadConfigResponse
 
     interface _DeleteActionResponse
       include Smithy::Client::_Response[Types::DeleteActionResponse]
@@ -4609,6 +5245,22 @@ module Aws::SageMaker
       ?name: String
     ) -> _DeleteInferenceExperimentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInferenceExperimentResponse
 
+    interface _DeleteJobResponse
+      include Smithy::Client::_Response[Types::DeleteJobResponse]
+    end
+    def delete_job: (
+      ?job_name: String,
+      ?job_category: String
+    ) -> _DeleteJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteJobResponse
+
+    interface _DeleteMlflowAppResponse
+      include Smithy::Client::_Response[Types::DeleteMlflowAppResponse]
+      def arn: () -> String?
+    end
+    def delete_mlflow_app: (
+      ?arn: String
+    ) -> _DeleteMlflowAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMlflowAppResponse
+
     interface _DeleteMlflowTrackingServerResponse
       include Smithy::Client::_Response[Types::DeleteMlflowTrackingServerResponse]
       def tracking_server_arn: () -> String?
@@ -4719,6 +5371,13 @@ module Aws::SageMaker
       ?client_request_token: String
     ) -> _DeletePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipelineResponse
 
+    interface _DeleteProcessingJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_processing_job: (
+      ?processing_job_name: String
+    ) -> _DeleteProcessingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProcessingJobResponse
+
     interface _DeleteProjectResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -4748,6 +5407,20 @@ module Aws::SageMaker
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _DeleteTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTagsResponse
+
+    interface _DeleteTrainingJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_training_job: (
+      ?training_job_name: String
+    ) -> _DeleteTrainingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrainingJobResponse
+
+    interface _DeleteTrainingSessionResponse
+      include Smithy::Client::_Response[Types::DeleteTrainingSessionResponse]
+    end
+    def delete_training_session: (
+      ?training_session_name: String
+    ) -> _DeleteTrainingSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrainingSessionResponse
 
     interface _DeleteTrialResponse
       include Smithy::Client::_Response[Types::DeleteTrialResponse]
@@ -4795,6 +5468,64 @@ module Aws::SageMaker
       ?device_fleet_name: String,
       ?device_names: Array[String]
     ) -> _DeregisterDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterDevicesResponse
+
+    interface _DescribeAIBenchmarkJobResponse
+      include Smithy::Client::_Response[Types::DescribeAIBenchmarkJobResponse]
+      def ai_benchmark_job_name: () -> String?
+      def ai_benchmark_job_arn: () -> String?
+      def ai_benchmark_job_status: () -> String?
+      def failure_reason: () -> String?
+      def benchmark_target: () -> Types::AIBenchmarkTarget?
+      def output_config: () -> Types::AIBenchmarkOutputResult?
+      def ai_workload_config_identifier: () -> String?
+      def role_arn: () -> String?
+      def network_config: () -> Types::AIBenchmarkNetworkConfig?
+      def creation_time: () -> Time?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def describe_ai_benchmark_job: (
+      ?ai_benchmark_job_name: String
+    ) -> _DescribeAIBenchmarkJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAIBenchmarkJobResponse
+
+    interface _DescribeAIRecommendationJobResponse
+      include Smithy::Client::_Response[Types::DescribeAIRecommendationJobResponse]
+      def ai_recommendation_job_name: () -> String?
+      def ai_recommendation_job_arn: () -> String?
+      def ai_recommendation_job_status: () -> String?
+      def failure_reason: () -> String?
+      def model_source: () -> Types::AIModelSource?
+      def output_config: () -> Types::AIRecommendationOutputResult?
+      def inference_specification: () -> Types::AIRecommendationInferenceSpecification?
+      def ai_workload_config_identifier: () -> String?
+      def optimize_model: () -> bool?
+      def performance_target: () -> Types::AIRecommendationPerformanceTarget?
+      def recommendations: () -> Array[Types::AIRecommendation]?
+      def role_arn: () -> String?
+      def compute_spec: () -> Types::AIRecommendationComputeSpec?
+      def adapter_source: () -> Types::AIAdapterSource?
+      def creation_time: () -> Time?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def describe_ai_recommendation_job: (
+      ?ai_recommendation_job_name: String
+    ) -> _DescribeAIRecommendationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAIRecommendationJobResponse
+
+    interface _DescribeAIWorkloadConfigResponse
+      include Smithy::Client::_Response[Types::DescribeAIWorkloadConfigResponse]
+      def ai_workload_config_name: () -> String?
+      def ai_workload_config_arn: () -> String?
+      def dataset_config: () -> Types::AIDatasetConfig?
+      def ai_workload_configs: () -> Types::AIWorkloadConfigs?
+      def tags: () -> Array[Types::Tag]?
+      def creation_time: () -> Time?
+    end
+    def describe_ai_workload_config: (
+      ?ai_workload_config_name: String
+    ) -> _DescribeAIWorkloadConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAIWorkloadConfigResponse
 
     interface _DescribeActionResponse
       include Smithy::Client::_Response[Types::DescribeActionResponse]
@@ -4959,6 +5690,7 @@ module Aws::SageMaker
       def failure_message: () -> String?
       def instance_groups: () -> Array[Types::ClusterInstanceGroupDetails]?
       def restricted_instance_groups: () -> Array[Types::ClusterRestrictedInstanceGroupDetails]?
+      def restricted_instance_groups_config: () -> Types::ClusterRestrictedInstanceGroupsConfigOutput?
       def vpc_config: () -> Types::VpcConfig?
       def orchestrator: () -> Types::ClusterOrchestrator?
       def tiered_storage_config: () -> Types::ClusterTieredStorageConfig?
@@ -4998,6 +5730,7 @@ module Aws::SageMaker
       def cluster_scheduler_config_version: () -> Integer?
       def status: () -> String?
       def failure_reason: () -> String?
+      def status_details: () -> Hash[String, String]?
       def cluster_arn: () -> String?
       def scheduler_config: () -> Types::SchedulerConfig?
       def description: () -> String?
@@ -5165,6 +5898,7 @@ module Aws::SageMaker
       def vpc_id: () -> String?
       def kms_key_id: () -> String?
       def app_security_group_management: () -> String?
+      def home_efs_file_system_creation: () -> String?
       def tag_propagation: () -> String?
       def default_space_settings: () -> Types::DefaultSpaceSettings?
     end
@@ -5230,6 +5964,7 @@ module Aws::SageMaker
       def pending_deployment_summary: () -> Types::PendingDeploymentSummary?
       def explainer_config: () -> Types::ExplainerConfig?
       def shadow_production_variants: () -> Array[Types::ProductionVariantSummary]?
+      def metrics_config: () -> Types::MetricsConfig?
     end
     def describe_endpoint: (
       ?endpoint_name: String
@@ -5249,6 +5984,7 @@ module Aws::SageMaker
       def execution_role_arn: () -> String?
       def vpc_config: () -> Types::VpcConfig?
       def enable_network_isolation: () -> bool?
+      def metrics_config: () -> Types::MetricsConfig?
     end
     def describe_endpoint_config: (
       ?endpoint_config_name: String
@@ -5463,6 +6199,7 @@ module Aws::SageMaker
       def variant_name: () -> String?
       def failure_reason: () -> String?
       def specification: () -> Types::InferenceComponentSpecificationSummary?
+      def specifications: () -> Array[Types::InferenceComponentSpecificationSummary]?
       def runtime_config: () -> Types::InferenceComponentRuntimeConfigSummary?
       def creation_time: () -> Time?
       def last_modified_time: () -> Time?
@@ -5517,6 +6254,39 @@ module Aws::SageMaker
       ?job_name: String
     ) -> _DescribeInferenceRecommendationsJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInferenceRecommendationsJobResponse
 
+    interface _DescribeJobResponse
+      include Smithy::Client::_Response[Types::DescribeJobResponse]
+      def job_name: () -> String?
+      def job_arn: () -> String?
+      def role_arn: () -> String?
+      def job_category: () -> String?
+      def job_config_schema_version: () -> String?
+      def job_config_document: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def end_time: () -> Time?
+      def job_status: () -> String?
+      def secondary_status: () -> String?
+      def secondary_status_transitions: () -> Array[Types::JobSecondaryStatusTransition]?
+      def failure_reason: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def describe_job: (
+      ?job_name: String,
+      ?job_category: String
+    ) -> _DescribeJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobResponse
+
+    interface _DescribeJobSchemaVersionResponse
+      include Smithy::Client::_Response[Types::DescribeJobSchemaVersionResponse]
+      def job_category: () -> String?
+      def job_config_schema_version: () -> String?
+      def job_config_schema: () -> String?
+    end
+    def describe_job_schema_version: (
+      ?job_category: String,
+      ?job_config_schema_version: String
+    ) -> _DescribeJobSchemaVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobSchemaVersionResponse
+
     interface _DescribeLabelingJobResponse
       include Smithy::Client::_Response[Types::DescribeLabelingJobResponse]
       def labeling_job_status: () -> String?
@@ -5557,6 +6327,29 @@ module Aws::SageMaker
       ?lineage_group_name: String
     ) -> _DescribeLineageGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLineageGroupResponse
 
+    interface _DescribeMlflowAppResponse
+      include Smithy::Client::_Response[Types::DescribeMlflowAppResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def artifact_store_uri: () -> String?
+      def mlflow_version: () -> String?
+      def role_arn: () -> String?
+      def kms_key_id: () -> String?
+      def status: () -> String?
+      def model_registration_mode: () -> String?
+      def account_default_status: () -> String?
+      def default_domain_id_list: () -> Array[String]?
+      def creation_time: () -> Time?
+      def created_by: () -> Types::UserContext?
+      def last_modified_time: () -> Time?
+      def last_modified_by: () -> Types::UserContext?
+      def weekly_maintenance_window_start: () -> String?
+      def maintenance_status: () -> String?
+    end
+    def describe_mlflow_app: (
+      ?arn: String
+    ) -> _DescribeMlflowAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMlflowAppResponse
+
     interface _DescribeMlflowTrackingServerResponse
       include Smithy::Client::_Response[Types::DescribeMlflowTrackingServerResponse]
       def tracking_server_arn: () -> String?
@@ -5575,6 +6368,8 @@ module Aws::SageMaker
       def created_by: () -> Types::UserContext?
       def last_modified_time: () -> Time?
       def last_modified_by: () -> Types::UserContext?
+      def s3_bucket_owner_account_id: () -> String?
+      def s3_bucket_owner_verification: () -> bool?
     end
     def describe_mlflow_tracking_server: (
       ?tracking_server_name: String
@@ -5631,7 +6426,8 @@ module Aws::SageMaker
     end
     def describe_model_card: (
       ?model_card_name: String,
-      ?model_card_version: Integer
+      ?model_card_version: Integer,
+      ?included_data: String
     ) -> _DescribeModelCardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeModelCardResponse
 
     interface _DescribeModelCardExportJobResponse
@@ -5674,6 +6470,7 @@ module Aws::SageMaker
       def model_package_name: () -> String?
       def model_package_group_name: () -> String?
       def model_package_version: () -> Integer?
+      def model_package_registration_type: () -> String?
       def model_package_arn: () -> String?
       def model_package_description: () -> String?
       def creation_time: () -> Time?
@@ -5701,9 +6498,11 @@ module Aws::SageMaker
       def security_config: () -> Types::ModelPackageSecurityConfig?
       def model_card: () -> Types::ModelPackageModelCard?
       def model_life_cycle: () -> Types::ModelLifeCycle?
+      def managed_storage_type: () -> String?
     end
     def describe_model_package: (
-      ?model_package_name: String
+      ?model_package_name: String,
+      ?included_data: String
     ) -> _DescribeModelPackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeModelPackageResponse
 
     interface _DescribeModelPackageGroupResponse
@@ -5714,6 +6513,7 @@ module Aws::SageMaker
       def creation_time: () -> Time?
       def created_by: () -> Types::UserContext?
       def model_package_group_status: () -> String?
+      def managed_configuration: () -> Types::ManagedConfiguration?
     end
     def describe_model_package_group: (
       ?model_package_group_name: String
@@ -5810,12 +6610,14 @@ module Aws::SageMaker
       def model_source: () -> Types::OptimizationJobModelSource?
       def optimization_environment: () -> Hash[String, String]?
       def deployment_instance_type: () -> String?
+      def max_instance_count: () -> Integer?
       def optimization_configs: () -> Array[Types::OptimizationConfig]?
       def output_config: () -> Types::OptimizationJobOutputConfig?
       def optimization_output: () -> Types::OptimizationOutput?
       def role_arn: () -> String?
       def stopping_condition: () -> Types::StoppingCondition?
       def vpc_config: () -> Types::OptimizationVpcConfig?
+      def training_plan_arns: () -> Array[String]?
     end
     def describe_optimization_job: (
       ?optimization_job_name: String
@@ -5839,9 +6641,14 @@ module Aws::SageMaker
       def auth_type: () -> String?
       def enable_iam_session_based_identity: () -> bool?
       def error: () -> Types::ErrorInfo?
+      def enable_auto_minor_version_upgrade: () -> bool?
+      def current_version_eol_date: () -> Time?
+      def available_upgrade: () -> Types::AvailableUpgrade?
+      def idc_config: () -> Types::IdcConfigOutput?
     end
     def describe_partner_app: (
-      ?arn: String
+      ?arn: String,
+      ?include_available_upgrade: bool
     ) -> _DescribePartnerAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePartnerAppResponse
 
     interface _DescribePipelineResponse
@@ -5892,6 +6699,7 @@ module Aws::SageMaker
       def parallelism_configuration: () -> Types::ParallelismConfiguration?
       def selective_execution_config: () -> Types::SelectiveExecutionConfig?
       def pipeline_version_id: () -> Integer?
+      def m_lflow_config: () -> Types::MLflowConfiguration?
     end
     def describe_pipeline_execution: (
       ?pipeline_execution_arn: String
@@ -6038,6 +6846,7 @@ module Aws::SageMaker
       def checkpoint_config: () -> Types::CheckpointConfig?
       def training_time_in_seconds: () -> Integer?
       def billable_time_in_seconds: () -> Integer?
+      def billable_token_count: () -> Integer?
       def debug_hook_config: () -> Types::DebugHookConfig?
       def experiment_config: () -> Types::ExperimentConfig?
       def debug_rule_configurations: () -> Array[Types::DebugRuleConfiguration]?
@@ -6051,6 +6860,12 @@ module Aws::SageMaker
       def retry_strategy: () -> Types::RetryStrategy?
       def remote_debug_config: () -> Types::RemoteDebugConfig?
       def infra_check_config: () -> Types::InfraCheckConfig?
+      def serverless_job_config: () -> Types::ServerlessJobConfig?
+      def mlflow_config: () -> Types::MlflowConfig?
+      def model_package_config: () -> Types::ModelPackageConfig?
+      def mlflow_details: () -> Types::MlflowDetails?
+      def progress_info: () -> Types::TrainingProgressInfo?
+      def output_model_package_arn: () -> String?
     end
     def describe_training_job: (
       ?training_job_name: String
@@ -6080,6 +6895,25 @@ module Aws::SageMaker
     def describe_training_plan: (
       ?training_plan_name: String
     ) -> _DescribeTrainingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrainingPlanResponse
+
+    interface _DescribeTrainingPlanExtensionHistoryResponse
+      include Smithy::Client::_Response[Types::DescribeTrainingPlanExtensionHistoryResponse]
+      def training_plan_extensions: () -> Array[Types::TrainingPlanExtension]?
+      def next_token: () -> String?
+    end
+    def describe_training_plan_extension_history: (
+      ?training_plan_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeTrainingPlanExtensionHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrainingPlanExtensionHistoryResponse
+
+    interface _DescribeTrainingSessionResponse
+      include Smithy::Client::_Response[Types::DescribeTrainingSessionResponse]
+      def training_session_detail: () -> Types::TrainingSessionDetail?
+    end
+    def describe_training_session: (
+      ?training_session_name: String
+    ) -> _DescribeTrainingSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrainingSessionResponse
 
     interface _DescribeTransformJobResponse
       include Smithy::Client::_Response[Types::DescribeTransformJobResponse]
@@ -6221,6 +7055,14 @@ module Aws::SageMaker
     end
     def enable_sagemaker_servicecatalog_portfolio: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableSagemakerServicecatalogPortfolioResponse
 
+    interface _ExtendTrainingPlanResponse
+      include Smithy::Client::_Response[Types::ExtendTrainingPlanResponse]
+      def training_plan_extensions: () -> Array[Types::TrainingPlanExtension]?
+    end
+    def extend_training_plan: (
+      ?training_plan_extension_offering_id: String
+    ) -> _ExtendTrainingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExtendTrainingPlanResponse
+
     interface _GetDeviceFleetReportResponse
       include Smithy::Client::_Response[Types::GetDeviceFleetReportResponse]
       def device_fleet_arn: () -> String?
@@ -6317,6 +7159,53 @@ module Aws::SageMaker
         }
       ]
     ) -> _ImportHubContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportHubContentResponse
+
+    interface _ListAIBenchmarkJobsResponse
+      include Smithy::Client::_Response[Types::ListAIBenchmarkJobsResponse]
+      def ai_benchmark_jobs: () -> Array[Types::AIBenchmarkJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_ai_benchmark_jobs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name_contains: String,
+      ?status_equals: String,
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListAIBenchmarkJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAIBenchmarkJobsResponse
+
+    interface _ListAIRecommendationJobsResponse
+      include Smithy::Client::_Response[Types::ListAIRecommendationJobsResponse]
+      def ai_recommendation_jobs: () -> Array[Types::AIRecommendationJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_ai_recommendation_jobs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name_contains: String,
+      ?status_equals: String,
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListAIRecommendationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAIRecommendationJobsResponse
+
+    interface _ListAIWorkloadConfigsResponse
+      include Smithy::Client::_Response[Types::ListAIWorkloadConfigsResponse]
+      def ai_workload_configs: () -> Array[Types::AIWorkloadConfigSummary]?
+      def next_token: () -> String?
+    end
+    def list_ai_workload_configs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name_contains: String,
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListAIWorkloadConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAIWorkloadConfigsResponse
 
     interface _ListActionsResponse
       include Smithy::Client::_Response[Types::ListActionsResponse]
@@ -6959,6 +7848,36 @@ module Aws::SageMaker
       ?model_package_version_arn_equals: String
     ) -> _ListInferenceRecommendationsJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInferenceRecommendationsJobsResponse
 
+    interface _ListJobSchemaVersionsResponse
+      include Smithy::Client::_Response[Types::ListJobSchemaVersionsResponse]
+      def next_token: () -> String?
+      def job_config_schemas: () -> Array[Types::JobConfigSchemaVersionSummary]?
+    end
+    def list_job_schema_versions: (
+      ?job_category: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListJobSchemaVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobSchemaVersionsResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsResponse]
+      def next_token: () -> String?
+      def job_summaries: () -> Array[Types::JobSummary]?
+    end
+    def list_jobs: (
+      ?job_category: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?last_modified_time_after: Time,
+      ?last_modified_time_before: Time,
+      ?name_contains: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?status_equals: String
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
+
     interface _ListLabelingJobsResponse
       include Smithy::Client::_Response[Types::ListLabelingJobsResponse]
       def labeling_job_summary_list: () -> Array[Types::LabelingJobSummary]?
@@ -7006,6 +7925,24 @@ module Aws::SageMaker
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListLineageGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLineageGroupsResponse
+
+    interface _ListMlflowAppsResponse
+      include Smithy::Client::_Response[Types::ListMlflowAppsResponse]
+      def summaries: () -> Array[Types::MlflowAppSummary]?
+      def next_token: () -> String?
+    end
+    def list_mlflow_apps: (
+      ?created_after: Time,
+      ?created_before: Time,
+      ?status: String,
+      ?mlflow_version: String,
+      ?default_for_domain_id: String,
+      ?account_default_status: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMlflowAppsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMlflowAppsResponse
 
     interface _ListMlflowTrackingServersResponse
       include Smithy::Client::_Response[Types::ListMlflowTrackingServersResponse]
@@ -7563,6 +8500,20 @@ module Aws::SageMaker
       ]
     ) -> _ListTrainingPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrainingPlansResponse
 
+    interface _ListTrainingSessionsResponse
+      include Smithy::Client::_Response[Types::ListTrainingSessionsResponse]
+      def next_token: () -> String?
+      def training_session_summaries: () -> Array[Types::TrainingSessionSummary]?
+    end
+    def list_training_sessions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?name_contains: String,
+      ?status_equals: String
+    ) -> _ListTrainingSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrainingSessionsResponse
+
     interface _ListTransformJobsResponse
       include Smithy::Client::_Response[Types::ListTransformJobsResponse]
       def transform_job_summaries: () -> Array[Types::TransformJobSummary]?
@@ -7794,6 +8745,7 @@ module Aws::SageMaker
     interface _SearchTrainingPlanOfferingsResponse
       include Smithy::Client::_Response[Types::SearchTrainingPlanOfferingsResponse]
       def training_plan_offerings: () -> Array[Types::TrainingPlanOffering]?
+      def training_plan_extension_offerings: () -> Array[Types::TrainingPlanExtensionOffering]?
     end
     def search_training_plan_offerings: (
       ?instance_type: String,
@@ -7803,7 +8755,8 @@ module Aws::SageMaker
       ?start_time_after: Time,
       ?end_time_before: Time,
       ?duration_hours: Integer,
-      ?target_resources: Array[String]
+      ?target_resources: Array[String],
+      ?training_plan_arn: String
     ) -> _SearchTrainingPlanOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchTrainingPlanOfferingsResponse
 
     interface _SendPipelineExecutionStepFailureResponse
@@ -7830,6 +8783,21 @@ module Aws::SageMaker
       ],
       ?client_request_token: String
     ) -> _SendPipelineExecutionStepSuccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendPipelineExecutionStepSuccessResponse
+
+    interface _StartClusterHealthCheckResponse
+      include Smithy::Client::_Response[Types::StartClusterHealthCheckResponse]
+      def cluster_arn: () -> String?
+    end
+    def start_cluster_health_check: (
+      ?cluster_name: String,
+      ?deep_health_check_configurations: Array[
+        {
+          instance_group_name: String,
+          instance_ids: Array[String],
+          deep_health_checks: Array[String]
+        }
+      ]
+    ) -> _StartClusterHealthCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartClusterHealthCheckResponse
 
     interface _StartEdgeDeploymentStageResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -7895,7 +8863,8 @@ module Aws::SageMaker
           }
         ]
       },
-      ?pipeline_version_id: Integer
+      ?pipeline_version_id: Integer,
+      ?mlflow_experiment_name: String
     ) -> _StartPipelineExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPipelineExecutionResponse
 
     interface _StartSessionResponse
@@ -7907,6 +8876,22 @@ module Aws::SageMaker
     def start_session: (
       ?resource_identifier: String
     ) -> _StartSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSessionResponse
+
+    interface _StopAIBenchmarkJobResponse
+      include Smithy::Client::_Response[Types::StopAIBenchmarkJobResponse]
+      def ai_benchmark_job_arn: () -> String?
+    end
+    def stop_ai_benchmark_job: (
+      ?ai_benchmark_job_name: String
+    ) -> _StopAIBenchmarkJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAIBenchmarkJobResponse
+
+    interface _StopAIRecommendationJobResponse
+      include Smithy::Client::_Response[Types::StopAIRecommendationJobResponse]
+      def ai_recommendation_job_arn: () -> String?
+    end
+    def stop_ai_recommendation_job: (
+      ?ai_recommendation_job_name: String
+    ) -> _StopAIRecommendationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAIRecommendationJobResponse
 
     interface _StopAutoMLJobResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -7975,6 +8960,14 @@ module Aws::SageMaker
       ?job_name: String
     ) -> _StopInferenceRecommendationsJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopInferenceRecommendationsJobResponse
 
+    interface _StopJobResponse
+      include Smithy::Client::_Response[Types::StopJobResponse]
+    end
+    def stop_job: (
+      ?job_name: String,
+      ?job_category: String
+    ) -> _StopJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopJobResponse
+
     interface _StopLabelingJobResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -8033,6 +9026,13 @@ module Aws::SageMaker
     def stop_training_job: (
       ?training_job_name: String
     ) -> _StopTrainingJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTrainingJobResponse
+
+    interface _StopTrainingSessionResponse
+      include Smithy::Client::_Response[Types::StopTrainingSessionResponse]
+    end
+    def stop_training_session: (
+      ?training_session_name: String
+    ) -> _StopTrainingSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTrainingSessionResponse
 
     interface _StopTransformJobResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -8118,11 +9118,16 @@ module Aws::SageMaker
       ?instance_groups: Array[
         {
           instance_count: Integer,
+          min_instance_count: untyped,
           instance_group_name: String,
           instance_type: String,
+          instance_requirements: {
+            instance_types: Array[String]
+          },
           life_cycle_config: {
             source_s3_uri: String,
-            on_create: String
+            on_create: String,
+            on_init_complete: untyped
           },
           execution_role: String,
           threads_per_core: Integer,
@@ -8132,6 +9137,15 @@ module Aws::SageMaker
                 volume_size_in_gb: Integer,
                 volume_kms_key_id: String,
                 root_volume: bool
+              },
+              fsx_lustre_config: {
+                dns_name: String,
+                mount_name: String,
+                mount_path: String
+              },
+              fsx_open_zfs_config: {
+                dns_name: untyped,
+                mount_path: untyped
               }
             }
           ],
@@ -8159,7 +9173,38 @@ module Aws::SageMaker
               ]
             }
           },
-          image_id: String
+          image_id: String,
+          auto_patch_config: {
+            patching_strategy: String,
+            patch_schedule: {
+              next_patch_date: Time
+            },
+            deployment_config: untyped
+          },
+          image_release_version: String,
+          kubernetes_config: {
+            labels: Hash[String, String],
+            taints: Array[
+              {
+                key: String,
+                value: String,
+                effect: String
+              }
+            ]
+          },
+          slurm_config: {
+            node_type: String,
+            partition_names: Array[String]
+          },
+          capacity_requirements: {
+            spot: {
+            },
+            on_demand: {
+            }
+          },
+          network_interface: {
+            interface_type: String
+          }
         }
       ],
       ?restricted_instance_groups: Array[
@@ -8175,6 +9220,15 @@ module Aws::SageMaker
                 volume_size_in_gb: Integer,
                 volume_kms_key_id: String,
                 root_volume: bool
+              },
+              fsx_lustre_config: {
+                dns_name: String,
+                mount_name: String,
+                mount_path: String
+              },
+              fsx_open_zfs_config: {
+                dns_name: untyped,
+                mount_path: untyped
               }
             }
           ],
@@ -8210,16 +9264,40 @@ module Aws::SageMaker
           }
         }
       ],
+      ?restricted_instance_groups_config: {
+        shared_environment_config: {
+          f_sx_lustre_deletion_policy: String,
+          f_sx_lustre_config: {
+            size_in_gi_b: Integer,
+            per_unit_storage_throughput: Integer
+          }
+        }
+      },
       ?tiered_storage_config: {
         mode: String,
         instance_memory_allocation_percentage: Integer
       },
       ?node_recovery: String,
       ?instance_groups_to_delete: Array[String],
+      ?node_provisioning_mode: String,
       ?cluster_role: String,
       ?auto_scaling: {
         mode: String,
         auto_scaler_type: String
+      },
+      ?orchestrator: {
+        eks: {
+          cluster_arn: String
+        },
+        slurm: {
+          slurm_config_strategy: String,
+          accounting_database: {
+            endpoint: String,
+            port: Integer,
+            name: String,
+            secret_arn: String
+          }
+        }
       }
     ) -> _UpdateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterResponse
 
@@ -8238,7 +9316,8 @@ module Aws::SageMaker
             weight: Integer
           }
         ],
-        fair_share: String
+        fair_share: String,
+        idle_resource_sharing: String
       },
       ?description: String
     ) -> _UpdateClusterSchedulerConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterSchedulerConfigResponse
@@ -8251,7 +9330,8 @@ module Aws::SageMaker
       ?cluster_name: String,
       ?instance_groups: Array[
         {
-          instance_group_name: String
+          instance_group_name: String,
+          image_release_version: String
         }
       ],
       ?deployment_config: {
@@ -8298,12 +9378,26 @@ module Aws::SageMaker
             count: Integer,
             accelerators: Integer,
             v_cpu: Float,
-            memory_in_gi_b: Float
+            memory_in_gi_b: Float,
+            accelerator_partition: {
+              type: String,
+              count: Integer
+            }
           }
         ],
         resource_sharing_config: {
           strategy: String,
-          borrow_limit: Integer
+          borrow_limit: Integer,
+          absolute_borrow_limits: Array[
+            {
+              instance_type: untyped,
+              count: untyped,
+              accelerators: untyped,
+              v_cpu: untyped,
+              memory_in_gi_b: untyped,
+              accelerator_partition: untyped
+            }
+          ]
         },
         preempt_team_tasks: String
       },
@@ -8376,7 +9470,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           },
           lifecycle_config_arns: Array[String],
           code_repositories: Array[
@@ -8504,7 +9599,8 @@ module Aws::SageMaker
               sage_maker_image_name: String,
               version_aliases: Array[String]
             }
-          ]
+          ],
+          execution_role_session_name_mode: String
         },
         auto_mount_home_efs: String
       },
@@ -8516,7 +9612,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           },
           r_studio_connect_url: String,
           r_studio_package_manager_url: untyped
@@ -8557,7 +9654,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           },
           lifecycle_config_arns: Array[String],
           code_repositories: Array[
@@ -8625,7 +9723,9 @@ module Aws::SageMaker
       },
       ?subnet_ids: Array[String],
       ?app_network_access_type: String,
-      ?tag_propagation: String
+      ?tag_propagation: String,
+      ?home_efs_file_system_creation: String,
+      ?vpc_id: String
     ) -> _UpdateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainResponse
 
     interface _UpdateEndpointResponse
@@ -8723,7 +9823,8 @@ module Aws::SageMaker
         ttl_duration: {
           unit: String,
           value: Integer
-        }
+        },
+        storage_type: String
       },
       ?throughput_config: {
         throughput_mode: String,
@@ -8826,11 +9927,20 @@ module Aws::SageMaker
     def update_inference_component: (
       ?inference_component_name: String,
       ?specification: {
+        instance_type: String,
         model_name: String,
         container: {
           image: String,
           artifact_url: String,
-          environment: Hash[String, String]
+          environment: Hash[String, String],
+          container_metrics_config: {
+            metrics_endpoints: Array[
+              {
+                metrics_endpoint_path: String,
+                metric_publish_frequency_in_seconds: Integer
+              }
+            ]
+          }
         },
         startup_parameters: {
           model_data_download_timeout_in_seconds: Integer,
@@ -8842,8 +9952,58 @@ module Aws::SageMaker
           min_memory_required_in_mb: Integer,
           max_memory_required_in_mb: untyped
         },
-        base_inference_component_name: String
+        base_inference_component_name: String,
+        data_cache_config: {
+          enable_caching: bool
+        },
+        scheduling_config: {
+          placement_strategy: String,
+          availability_zone_balance: {
+            enforcement_mode: String,
+            max_imbalance: Integer
+          }
+        }
       },
+      ?specifications: Array[
+        {
+          instance_type: String,
+          model_name: String,
+          container: {
+            image: String,
+            artifact_url: String,
+            environment: Hash[String, String],
+            container_metrics_config: {
+              metrics_endpoints: Array[
+                {
+                  metrics_endpoint_path: String,
+                  metric_publish_frequency_in_seconds: Integer
+                }
+              ]
+            }
+          },
+          startup_parameters: {
+            model_data_download_timeout_in_seconds: Integer,
+            container_startup_health_check_timeout_in_seconds: Integer
+          },
+          compute_resource_requirements: {
+            number_of_cpu_cores_required: Float,
+            number_of_accelerator_devices_required: Float,
+            min_memory_required_in_mb: Integer,
+            max_memory_required_in_mb: untyped
+          },
+          base_inference_component_name: String,
+          data_cache_config: {
+            enable_caching: bool
+          },
+          scheduling_config: {
+            placement_strategy: String,
+            availability_zone_balance: {
+              enforcement_mode: String,
+              max_imbalance: Integer
+            }
+          }
+        }
+      ],
       ?runtime_config: {
         copy_count: Integer
       },
@@ -8921,6 +10081,20 @@ module Aws::SageMaker
       }
     ) -> _UpdateInferenceExperimentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInferenceExperimentResponse
 
+    interface _UpdateMlflowAppResponse
+      include Smithy::Client::_Response[Types::UpdateMlflowAppResponse]
+      def arn: () -> String?
+    end
+    def update_mlflow_app: (
+      ?arn: String,
+      ?name: String,
+      ?artifact_store_uri: String,
+      ?model_registration_mode: String,
+      ?weekly_maintenance_window_start: String,
+      ?default_domain_id_list: Array[String],
+      ?account_default_status: String
+    ) -> _UpdateMlflowAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMlflowAppResponse
+
     interface _UpdateMlflowTrackingServerResponse
       include Smithy::Client::_Response[Types::UpdateMlflowTrackingServerResponse]
       def tracking_server_arn: () -> String?
@@ -8930,7 +10104,9 @@ module Aws::SageMaker
       ?artifact_store_uri: String,
       ?tracking_server_size: String,
       ?automatic_model_registration: bool,
-      ?weekly_maintenance_window_start: String
+      ?weekly_maintenance_window_start: String,
+      ?s3_bucket_owner_account_id: String,
+      ?s3_bucket_owner_verification: bool
     ) -> _UpdateMlflowTrackingServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMlflowTrackingServerResponse
 
     interface _UpdateModelCardResponse
@@ -8950,6 +10126,7 @@ module Aws::SageMaker
     def update_model_package: (
       ?model_package_arn: String,
       ?model_approval_status: String,
+      ?model_package_registration_type: String,
       ?approval_description: String,
       ?customer_metadata_properties: Hash[String, String],
       ?customer_metadata_properties_to_remove: Array[String],
@@ -8987,13 +10164,25 @@ module Aws::SageMaker
               framework: untyped,
               framework_version: String,
               nearest_model_name: untyped,
+              additional_model_data_sources: Array[
+                {
+                  channel_name: String,
+                  s3_data_source: untyped
+                }
+              ],
               additional_s3_data_source: {
                 s3_data_type: String,
                 s3_uri: String,
                 compression_type: String,
                 e_tag: untyped
               },
-              model_data_e_tag: untyped
+              model_data_e_tag: untyped,
+              is_checkpoint: bool,
+              base_model: {
+                hub_content_name: String,
+                hub_content_version: String,
+                recipe_name: String
+              }
             }
           ],
           supported_transform_instance_types: Array[String],
@@ -9033,13 +10222,25 @@ module Aws::SageMaker
             framework: untyped,
             framework_version: String,
             nearest_model_name: untyped,
+            additional_model_data_sources: Array[
+              {
+                channel_name: String,
+                s3_data_source: untyped
+              }
+            ],
             additional_s3_data_source: {
               s3_data_type: String,
               s3_uri: String,
               compression_type: String,
               e_tag: untyped
             },
-            model_data_e_tag: untyped
+            model_data_e_tag: untyped,
+            is_checkpoint: bool,
+            base_model: {
+              hub_content_name: String,
+              hub_content_version: String,
+              recipe_name: String
+            }
           }
         ],
         supported_transform_instance_types: Array[String],
@@ -9187,6 +10388,7 @@ module Aws::SageMaker
       ?notebook_instance_name: String,
       ?instance_type: String,
       ?ip_address_type: String,
+      ?platform_identifier: String,
       ?role_arn: String,
       ?lifecycle_config_name: String,
       ?disassociate_lifecycle_config: bool,
@@ -9232,9 +10434,22 @@ module Aws::SageMaker
       ?tier: String,
       ?application_config: {
         admin_users: Array[String],
-        arguments: Hash[String, String]
+        arguments: Hash[String, String],
+        assigned_group_patterns: Array[String],
+        role_group_assignments: Array[
+          {
+            role_name: String,
+            group_patterns: Array[String]
+          }
+        ]
       },
+      ?idc_config: {
+        instance_arn: String
+      },
+      ?auth_type: String,
       ?enable_iam_session_based_identity: bool,
+      ?enable_auto_minor_version_upgrade: bool,
+      ?app_version: String,
       ?client_token: String,
       ?tags: Array[
         {
@@ -9342,7 +10557,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           },
           lifecycle_config_arns: Array[String],
           code_repositories: Array[
@@ -9497,7 +10713,8 @@ module Aws::SageMaker
             sage_maker_image_version_arn: String,
             sage_maker_image_version_alias: String,
             instance_type: String,
-            lifecycle_config_arn: String
+            lifecycle_config_arn: String,
+            training_plan_arn: String
           },
           lifecycle_config_arns: Array[String],
           code_repositories: Array[
@@ -9625,7 +10842,8 @@ module Aws::SageMaker
               sage_maker_image_name: String,
               version_aliases: Array[String]
             }
-          ]
+          ],
+          execution_role_session_name_mode: String
         },
         auto_mount_home_efs: String
       }

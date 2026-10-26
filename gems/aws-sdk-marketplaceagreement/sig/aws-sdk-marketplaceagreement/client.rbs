@@ -44,6 +44,153 @@ module Aws::MarketplaceAgreement
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AcceptAgreementCancellationRequestResponse
+      include Smithy::Client::_Response[Types::AcceptAgreementCancellationRequestOutput]
+      def agreement_id: () -> String?
+      def agreement_cancellation_request_id: () -> String?
+      def status: () -> String?
+      def reason_code: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def accept_agreement_cancellation_request: (
+      ?agreement_id: String,
+      ?agreement_cancellation_request_id: String
+    ) -> _AcceptAgreementCancellationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptAgreementCancellationRequestResponse
+
+    interface _AcceptAgreementPaymentRequestResponse
+      include Smithy::Client::_Response[Types::AcceptAgreementPaymentRequestOutput]
+      def payment_request_id: () -> String?
+      def agreement_id: () -> String?
+      def status: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def charge_amount: () -> String?
+      def currency_code: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def accept_agreement_payment_request: (
+      ?payment_request_id: String,
+      ?agreement_id: String,
+      ?purchase_order_reference: String
+    ) -> _AcceptAgreementPaymentRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptAgreementPaymentRequestResponse
+
+    interface _AcceptAgreementRequestResponse
+      include Smithy::Client::_Response[Types::AcceptAgreementRequestOutput]
+      def agreement_id: () -> String?
+    end
+    def accept_agreement_request: (
+      ?agreement_request_id: String,
+      ?purchase_orders: Array[
+        {
+          charge_id: String,
+          charge_revision: Integer,
+          agreement_id: untyped,
+          purchase_order_reference: String
+        }
+      ]
+    ) -> _AcceptAgreementRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptAgreementRequestResponse
+
+    interface _BatchCreateBillingAdjustmentRequestResponse
+      include Smithy::Client::_Response[Types::BatchCreateBillingAdjustmentRequestOutput]
+      def items: () -> Array[Types::BatchCreateBillingAdjustmentItem]?
+      def errors: () -> Array[Types::BatchCreateBillingAdjustmentError]?
+    end
+    def batch_create_billing_adjustment_request: (
+      ?billing_adjustment_request_entries: Array[
+        {
+          agreement_id: String,
+          original_invoice_id: String,
+          adjustment_amount: String,
+          currency_code: String,
+          adjustment_reason_code: String,
+          description: String,
+          client_token: String
+        }
+      ]
+    ) -> _BatchCreateBillingAdjustmentRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateBillingAdjustmentRequestResponse
+
+    interface _CancelAgreementResponse
+      include Smithy::Client::_Response[Types::CancelAgreementOutput]
+    end
+    def cancel_agreement: (
+      ?agreement_id: String
+    ) -> _CancelAgreementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelAgreementResponse
+
+    interface _CancelAgreementCancellationRequestResponse
+      include Smithy::Client::_Response[Types::CancelAgreementCancellationRequestOutput]
+      def agreement_cancellation_request_id: () -> String?
+      def agreement_id: () -> String?
+      def reason_code: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def cancel_agreement_cancellation_request: (
+      ?agreement_id: String,
+      ?agreement_cancellation_request_id: String,
+      ?cancellation_reason: String
+    ) -> _CancelAgreementCancellationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelAgreementCancellationRequestResponse
+
+    interface _CancelAgreementPaymentRequestResponse
+      include Smithy::Client::_Response[Types::CancelAgreementPaymentRequestOutput]
+      def payment_request_id: () -> String?
+      def agreement_id: () -> String?
+      def status: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def charge_amount: () -> String?
+      def currency_code: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def cancel_agreement_payment_request: (
+      ?payment_request_id: String,
+      ?agreement_id: String
+    ) -> _CancelAgreementPaymentRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelAgreementPaymentRequestResponse
+
+    interface _CreateAgreementRequestResponse
+      include Smithy::Client::_Response[Types::CreateAgreementRequestOutput]
+      def agreement_request_id: () -> String?
+      def charge_summary: () -> Types::ChargeSummary?
+    end
+    def create_agreement_request: (
+      ?client_token: String,
+      ?intent: String,
+      ?requested_terms: Array[
+        {
+          id: String,
+          configuration: {
+            configurable_upfront_pricing_term_configuration: {
+              selector_value: String,
+              dimensions: Array[
+                {
+                  dimension_key: untyped,
+                  dimension_value: Integer
+                }
+              ]
+            },
+            renewal_term_configuration: {
+              enable_auto_renew: bool
+            },
+            variable_payment_term_configuration: {
+              payment_request_approval_strategy: String,
+              expiration_duration: String
+            }
+          }
+        }
+      ],
+      ?source_agreement_identifier: String,
+      ?agreement_proposal_identifier: String,
+      ?tax_configuration: {
+        tax_estimation: String
+      }
+    ) -> _CreateAgreementRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgreementRequestResponse
+
     interface _DescribeAgreementResponse
       include Smithy::Client::_Response[Types::DescribeAgreementOutput]
       def agreement_id: () -> String?
@@ -56,10 +203,58 @@ module Aws::MarketplaceAgreement
       def estimated_charges: () -> Types::EstimatedCharges?
       def proposal_summary: () -> Types::ProposalSummary?
       def status: () -> String?
+      def initial_agreement_id: () -> String?
+      def end_time_behavior: () -> Types::EndTimeBehavior?
     end
     def describe_agreement: (
       ?agreement_id: String
     ) -> _DescribeAgreementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAgreementResponse
+
+    interface _GetAgreementCancellationRequestResponse
+      include Smithy::Client::_Response[Types::GetAgreementCancellationRequestOutput]
+      def agreement_cancellation_request_id: () -> String?
+      def agreement_id: () -> String?
+      def reason_code: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_agreement_cancellation_request: (
+      ?agreement_cancellation_request_id: String,
+      ?agreement_id: String
+    ) -> _GetAgreementCancellationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgreementCancellationRequestResponse
+
+    interface _GetAgreementEntitlementsResponse
+      include Smithy::Client::_Response[Types::GetAgreementEntitlementsOutput]
+      def agreement_entitlements: () -> Array[Types::AgreementEntitlement]?
+      def next_token: () -> String?
+    end
+    def get_agreement_entitlements: (
+      ?agreement_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetAgreementEntitlementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgreementEntitlementsResponse
+
+    interface _GetAgreementPaymentRequestResponse
+      include Smithy::Client::_Response[Types::GetAgreementPaymentRequestOutput]
+      def payment_request_id: () -> String?
+      def agreement_id: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def charge_id: () -> String?
+      def charge_amount: () -> String?
+      def currency_code: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_agreement_payment_request: (
+      ?payment_request_id: String,
+      ?agreement_id: String
+    ) -> _GetAgreementPaymentRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgreementPaymentRequestResponse
 
     interface _GetAgreementTermsResponse
       include Smithy::Client::_Response[Types::GetAgreementTermsOutput]
@@ -71,6 +266,140 @@ module Aws::MarketplaceAgreement
       ?max_results: Integer,
       ?next_token: String
     ) -> _GetAgreementTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgreementTermsResponse
+
+    interface _GetBillingAdjustmentRequestResponse
+      include Smithy::Client::_Response[Types::GetBillingAdjustmentRequestOutput]
+      def billing_adjustment_request_id: () -> String?
+      def agreement_id: () -> String?
+      def adjustment_reason_code: () -> String?
+      def description: () -> String?
+      def original_invoice_id: () -> String?
+      def adjustment_amount: () -> String?
+      def currency_code: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_billing_adjustment_request: (
+      ?agreement_id: String,
+      ?billing_adjustment_request_id: String
+    ) -> _GetBillingAdjustmentRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBillingAdjustmentRequestResponse
+
+    interface _ListAgreementCancellationRequestsResponse
+      include Smithy::Client::_Response[Types::ListAgreementCancellationRequestsOutput]
+      def next_token: () -> String?
+      def items: () -> Array[Types::AgreementCancellationRequestSummary]?
+    end
+    def list_agreement_cancellation_requests: (
+      ?party_type: String,
+      ?agreement_id: String,
+      ?status: String,
+      ?agreement_type: String,
+      ?catalog: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgreementCancellationRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgreementCancellationRequestsResponse
+
+    interface _ListAgreementChargesResponse
+      include Smithy::Client::_Response[Types::ListAgreementChargesOutput]
+      def items: () -> Array[Types::Charge]?
+      def next_token: () -> String?
+    end
+    def list_agreement_charges: (
+      ?catalog: String,
+      ?agreement_id: String,
+      ?agreement_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgreementChargesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgreementChargesResponse
+
+    interface _ListAgreementInvoiceLineItemsResponse
+      include Smithy::Client::_Response[Types::ListAgreementInvoiceLineItemsOutput]
+      def agreement_invoice_line_item_group_summaries: () -> Array[Types::AgreementInvoiceLineItemGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_agreement_invoice_line_items: (
+      ?agreement_id: String,
+      ?group_by: String,
+      ?invoice_id: String,
+      ?invoice_type: String,
+      ?invoice_billing_period: {
+        month: Integer,
+        year: untyped
+      },
+      ?before_issued_time: Time,
+      ?after_issued_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgreementInvoiceLineItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgreementInvoiceLineItemsResponse
+
+    interface _ListAgreementPaymentRequestsResponse
+      include Smithy::Client::_Response[Types::ListAgreementPaymentRequestsOutput]
+      def next_token: () -> String?
+      def items: () -> Array[Types::PaymentRequestSummary]?
+    end
+    def list_agreement_payment_requests: (
+      ?party_type: String,
+      ?agreement_type: String,
+      ?catalog: String,
+      ?agreement_id: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgreementPaymentRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgreementPaymentRequestsResponse
+
+    interface _ListBillingAdjustmentRequestsResponse
+      include Smithy::Client::_Response[Types::ListBillingAdjustmentRequestsOutput]
+      def next_token: () -> String?
+      def items: () -> Array[Types::BillingAdjustmentSummary]?
+    end
+    def list_billing_adjustment_requests: (
+      ?agreement_id: String,
+      ?status: String,
+      ?created_after: Time,
+      ?created_before: Time,
+      ?max_results: Integer,
+      ?catalog: String,
+      ?agreement_type: String,
+      ?next_token: String
+    ) -> _ListBillingAdjustmentRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBillingAdjustmentRequestsResponse
+
+    interface _RejectAgreementCancellationRequestResponse
+      include Smithy::Client::_Response[Types::RejectAgreementCancellationRequestOutput]
+      def agreement_id: () -> String?
+      def agreement_cancellation_request_id: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def reason_code: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def reject_agreement_cancellation_request: (
+      ?agreement_id: String,
+      ?agreement_cancellation_request_id: String,
+      ?rejection_reason: String
+    ) -> _RejectAgreementCancellationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectAgreementCancellationRequestResponse
+
+    interface _RejectAgreementPaymentRequestResponse
+      include Smithy::Client::_Response[Types::RejectAgreementPaymentRequestOutput]
+      def payment_request_id: () -> String?
+      def agreement_id: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def charge_amount: () -> String?
+      def currency_code: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def reject_agreement_payment_request: (
+      ?payment_request_id: String,
+      ?agreement_id: String,
+      ?rejection_reason: String
+    ) -> _RejectAgreementPaymentRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectAgreementPaymentRequestResponse
 
     interface _SearchAgreementsResponse
       include Smithy::Client::_Response[Types::SearchAgreementsOutput]
@@ -92,5 +421,56 @@ module Aws::MarketplaceAgreement
       ?max_results: Integer,
       ?next_token: String
     ) -> _SearchAgreementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAgreementsResponse
+
+    interface _SendAgreementCancellationRequestResponse
+      include Smithy::Client::_Response[Types::SendAgreementCancellationRequestOutput]
+      def agreement_id: () -> String?
+      def agreement_cancellation_request_id: () -> String?
+      def status: () -> String?
+      def reason_code: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def send_agreement_cancellation_request: (
+      ?agreement_id: String,
+      ?reason_code: String,
+      ?client_token: String,
+      ?description: String
+    ) -> _SendAgreementCancellationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendAgreementCancellationRequestResponse
+
+    interface _SendAgreementPaymentRequestResponse
+      include Smithy::Client::_Response[Types::SendAgreementPaymentRequestOutput]
+      def payment_request_id: () -> String?
+      def agreement_id: () -> String?
+      def status: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def charge_amount: () -> String?
+      def currency_code: () -> String?
+      def created_at: () -> Time?
+    end
+    def send_agreement_payment_request: (
+      ?client_token: String,
+      ?agreement_id: String,
+      ?term_id: String,
+      ?name: String,
+      ?charge_amount: String,
+      ?description: String
+    ) -> _SendAgreementPaymentRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendAgreementPaymentRequestResponse
+
+    interface _UpdatePurchaseOrdersResponse
+      include Smithy::Client::_Response[Types::UpdatePurchaseOrdersOutput]
+    end
+    def update_purchase_orders: (
+      ?purchase_orders: Array[
+        {
+          charge_id: String,
+          charge_revision: Integer,
+          agreement_id: untyped,
+          purchase_order_reference: String
+        }
+      ]
+    ) -> _UpdatePurchaseOrdersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePurchaseOrdersResponse
   end
 end

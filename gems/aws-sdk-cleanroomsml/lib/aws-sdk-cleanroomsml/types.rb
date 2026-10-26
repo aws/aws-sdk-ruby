@@ -386,6 +386,9 @@ module Aws::CleanRoomsML
     # @!attribute description
     #   <p>The description of the ML input channel.</p>
     #   @return [String]
+    # @!attribute payer_configuration
+    #   <p>The payer configuration for the ML input channel.</p>
+    #   @return [Types::PayerConfiguration]
     class CollaborationMLInputChannelSummary < Struct.new(
       nil,
       :create_time,
@@ -398,6 +401,7 @@ module Aws::CleanRoomsML
       :status,
       :creator_account_id,
       :description,
+      :payer_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -502,6 +506,9 @@ module Aws::CleanRoomsML
     # @!attribute logs_status_details
     #   <p>Details about the logs status for the trained model inference job.</p>
     #   @return [String]
+    # @!attribute ml_model_inference_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model inference costs.</p>
+    #   @return [String]
     # @!attribute create_time
     #   <p>The time at which the trained model inference job was created.</p>
     #   @return [Time]
@@ -527,6 +534,7 @@ module Aws::CleanRoomsML
       :metrics_status_details,
       :logs_status,
       :logs_status_details,
+      :ml_model_inference_payer_account_id,
       :create_time,
       :update_time,
       :creator_account_id,
@@ -572,6 +580,9 @@ module Aws::CleanRoomsML
     # @!attribute creator_account_id
     #   <p>The account ID of the member that created the trained model.</p>
     #   @return [String]
+    # @!attribute ml_model_training_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model training costs.</p>
+    #   @return [String]
     class CollaborationTrainedModelSummary < Struct.new(
       nil,
       :create_time,
@@ -586,6 +597,19 @@ module Aws::CleanRoomsML
       :status,
       :configured_model_algorithm_association_arn,
       :creator_account_id,
+      :ml_model_training_payer_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains classification information for data columns, including mappings that specify how columns should be handled during synthetic data generation and privacy analysis.</p>
+    # @!attribute column_mapping
+    #   <p>A mapping that defines the classification of data columns for synthetic data generation and specifies how each column should be handled during the privacy-preserving data synthesis process.</p>
+    #   @return [Array<Types::SyntheticDataColumnProperties>]
+    class ColumnClassificationDetails < Struct.new(
+      nil,
+      :column_mapping,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -993,6 +1017,9 @@ module Aws::CleanRoomsML
     # @!attribute tags
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
+    # @!attribute payer_configuration
+    #   <p>The payer configuration for the ML input channel. Determines which member account pays for compute and synthetic data costs.</p>
+    #   @return [Types::PayerConfiguration]
     class CreateMLInputChannelRequest < Struct.new(
       nil,
       :membership_identifier,
@@ -1003,6 +1030,7 @@ module Aws::CleanRoomsML
       :description,
       :kms_key_arn,
       :tags,
+      :payer_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1058,6 +1086,9 @@ module Aws::CleanRoomsML
     # @!attribute tags
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
+    # @!attribute ml_model_training_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model training costs.</p>
+    #   @return [String]
     class CreateTrainedModelRequest < Struct.new(
       nil,
       :membership_identifier,
@@ -1073,6 +1104,7 @@ module Aws::CleanRoomsML
       :description,
       :kms_key_arn,
       :tags,
+      :ml_model_training_payer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1138,6 +1170,18 @@ module Aws::CleanRoomsML
     class CustomEntityConfig < Struct.new(
       nil,
       :custom_data_identifiers,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Privacy evaluation scores that measure the privacy characteristics of the generated synthetic data, including assessments of potential privacy risks such as membership inference attacks.</p>
+    # @!attribute membership_inference_attack_scores
+    #   <p>Scores that evaluate the vulnerability of the synthetic data to membership inference attacks, which attempt to determine whether a specific individual was a member of the original dataset.</p>
+    #   @return [Array<Types::MembershipInferenceAttackScore>]
+    class DataPrivacyScores < Struct.new(
+      nil,
+      :membership_inference_attack_scores,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1579,6 +1623,12 @@ module Aws::CleanRoomsML
     # @!attribute description
     #   <p>The description of the ML input channel.</p>
     #   @return [String]
+    # @!attribute synthetic_data_configuration
+    #   <p>The synthetic data configuration for this ML input channel, including parameters for generating privacy-preserving synthetic data and evaluation scores for measuring the privacy of the generated data.</p>
+    #   @return [Types::SyntheticDataConfiguration]
+    # @!attribute payer_configuration
+    #   <p>The payer configuration for the ML input channel.</p>
+    #   @return [Types::PayerConfiguration]
     # @!attribute create_time
     #   <p>The time at which the ML input channel was created.</p>
     #   @return [Time]
@@ -1601,6 +1651,8 @@ module Aws::CleanRoomsML
       :number_of_records,
       :privacy_budgets,
       :description,
+      :synthetic_data_configuration,
+      :payer_configuration,
       :create_time,
       :update_time,
       :creator_account_id,
@@ -1682,6 +1734,9 @@ module Aws::CleanRoomsML
     # @!attribute training_container_image_digest
     #   <p>Information about the training container image.</p>
     #   @return [String]
+    # @!attribute ml_model_training_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model training costs.</p>
+    #   @return [String]
     # @!attribute create_time
     #   <p>The time at which the trained model was created.</p>
     #   @return [Time]
@@ -1711,6 +1766,7 @@ module Aws::CleanRoomsML
       :logs_status,
       :logs_status_details,
       :training_container_image_digest,
+      :ml_model_training_payer_account_id,
       :create_time,
       :update_time,
       :creator_account_id,
@@ -2021,6 +2077,12 @@ module Aws::CleanRoomsML
     # @!attribute description
     #   <p>The description of the ML input channel.</p>
     #   @return [String]
+    # @!attribute synthetic_data_configuration
+    #   <p>The synthetic data configuration for this ML input channel, including parameters for generating privacy-preserving synthetic data and evaluation scores for measuring the privacy of the generated data.</p>
+    #   @return [Types::SyntheticDataConfiguration]
+    # @!attribute payer_configuration
+    #   <p>The payer configuration for the ML input channel.</p>
+    #   @return [Types::PayerConfiguration]
     # @!attribute create_time
     #   <p>The time at which the ML input channel was created.</p>
     #   @return [Time]
@@ -2058,6 +2120,8 @@ module Aws::CleanRoomsML
       :number_of_records,
       :privacy_budgets,
       :description,
+      :synthetic_data_configuration,
+      :payer_configuration,
       :create_time,
       :update_time,
       :input_channel,
@@ -2155,6 +2219,9 @@ module Aws::CleanRoomsML
     # @!attribute tags
     #   <p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
+    # @!attribute ml_model_inference_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model inference costs.</p>
+    #   @return [String]
     class GetTrainedModelInferenceJobResponse < Struct.new(
       nil,
       :create_time,
@@ -2180,6 +2247,7 @@ module Aws::CleanRoomsML
       :logs_status,
       :logs_status_details,
       :tags,
+      :ml_model_inference_payer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2258,6 +2326,9 @@ module Aws::CleanRoomsML
     # @!attribute training_container_image_digest
     #   <p>Information about the training image container.</p>
     #   @return [String]
+    # @!attribute ml_model_training_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model training costs.</p>
+    #   @return [String]
     # @!attribute create_time
     #   <p>The time at which the trained model was created.</p>
     #   @return [Time]
@@ -2299,6 +2370,7 @@ module Aws::CleanRoomsML
       :logs_status,
       :logs_status_details,
       :training_container_image_digest,
+      :ml_model_training_payer_account_id,
       :create_time,
       :update_time,
       :hyperparameters,
@@ -3207,6 +3279,9 @@ module Aws::CleanRoomsML
     # @!attribute description
     #   <p>The description of the ML input channel.</p>
     #   @return [String]
+    # @!attribute payer_configuration
+    #   <p>The payer configuration for the ML input channel.</p>
+    #   @return [Types::PayerConfiguration]
     class MLInputChannelSummary < Struct.new(
       nil,
       :create_time,
@@ -3219,6 +3294,7 @@ module Aws::CleanRoomsML
       :ml_input_channel_arn,
       :status,
       :description,
+      :payer_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3235,6 +3311,42 @@ module Aws::CleanRoomsML
       nil,
       :destination,
       :role_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Parameters that control the generation of synthetic data for custom model training, including privacy settings and column classification details.</p>
+    # @!attribute epsilon
+    #   <p>The epsilon value for differential privacy, which controls the privacy-utility tradeoff in synthetic data generation. Lower values provide stronger privacy guarantees but may reduce data utility.</p>
+    #   @return [Float]
+    # @!attribute max_membership_inference_attack_score
+    #   <p>The maximum acceptable score for membership inference attack vulnerability. Synthetic data generation fails if the score for the resulting data exceeds this threshold.</p>
+    #   @return [Float]
+    # @!attribute column_classification
+    #   <p>Classification details for data columns that specify how each column should be treated during synthetic data generation.</p>
+    #   @return [Types::ColumnClassificationDetails]
+    class MLSyntheticDataParameters < Struct.new(
+      nil,
+      :epsilon,
+      :max_membership_inference_attack_score,
+      :column_classification,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A score that measures the vulnerability of synthetic data to membership inference attacks and provides both the numerical score and the version of the attack methodology used for evaluation.</p>
+    # @!attribute attack_version
+    #   <p>The version of the membership inference attack, which consists of the attack type and its version number, used to generate this privacy score.</p>
+    #   @return [String]
+    # @!attribute score
+    #   <p>The numerical score representing the vulnerability to membership inference attacks.</p>
+    #   @return [Float]
+    class MembershipInferenceAttackScore < Struct.new(
+      nil,
+      :attack_version,
+      :score,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3303,6 +3415,22 @@ module Aws::CleanRoomsML
         options[:s3_data_distribution_type] = 'FullyReplicated' unless options.key?(:s3_data_distribution_type)
         super
       end
+    end
+
+    # <p>Specifies which member accounts are responsible for paying for compute and synthetic data generation costs in a Clean Rooms ML collaboration.</p>
+    # @!attribute compute_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying compute costs.</p>
+    #   @return [String]
+    # @!attribute synthetic_data_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying synthetic data generation costs.</p>
+    #   @return [String]
+    class PayerConfiguration < Struct.new(
+      nil,
+      :compute_payer_account_id,
+      :synthetic_data_payer_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The privacy budget information that controls access to Clean Rooms ML input channels.</p>
@@ -3475,7 +3603,7 @@ module Aws::CleanRoomsML
     #   <p>The instance type that is used to train the model.</p>
     #   @return [String]
     # @!attribute volume_size_in_gb
-    #   <p>The maximum size of the instance that is used to train the model.</p>
+    #   <p>The volume size of the instance that is used to train the model. Please see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-volumes.html">EC2 volume limit</a> for volume size limitations on different instance types.</p>
     #   @return [Integer]
     class ResourceConfig < Struct.new(
       nil,
@@ -3673,6 +3801,9 @@ module Aws::CleanRoomsML
     # @!attribute tags
     #   <p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
+    # @!attribute ml_model_inference_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model inference costs.</p>
+    #   @return [String]
     class StartTrainedModelInferenceJobRequest < Struct.new(
       nil,
       :membership_identifier,
@@ -3688,6 +3819,7 @@ module Aws::CleanRoomsML
       :environment,
       :kms_key_arn,
       :tags,
+      :ml_model_inference_payer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3735,6 +3867,54 @@ module Aws::CleanRoomsML
         options[:max_runtime_in_seconds] = 86400 unless options.key?(:max_runtime_in_seconds)
         super
       end
+    end
+
+    # <p>Properties that define how a specific data column should be handled during synthetic data generation, including its name, type, and role in predictive modeling.</p>
+    # @!attribute column_name
+    #   <p>The name of the data column as it appears in the dataset.</p>
+    #   @return [String]
+    # @!attribute column_type
+    #   <p>The data type of the column, which determines how the synthetic data generation algorithm processes and synthesizes values for this column.</p>
+    #   @return [String]
+    # @!attribute is_predictive_value
+    #   <p>Indicates if this column contains predictive values that should be treated as target variables in machine learning models. This affects how the synthetic data generation preserves statistical relationships.</p>
+    #   @return [Boolean]
+    class SyntheticDataColumnProperties < Struct.new(
+      nil,
+      :column_name,
+      :column_type,
+      :is_predictive_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for synthetic data generation, including the parameters that control data synthesis and the evaluation scores that measure the quality and privacy characteristics of the generated synthetic data.</p>
+    # @!attribute synthetic_data_parameters
+    #   <p>The parameters that control how synthetic data is generated, including privacy settings, column classifications, and other configuration options that affect the data synthesis process.</p>
+    #   @return [Types::MLSyntheticDataParameters]
+    # @!attribute synthetic_data_evaluation_scores
+    #   <p>Evaluation scores that assess the quality and privacy characteristics of the generated synthetic data, providing metrics on data utility and privacy preservation.</p>
+    #   @return [Types::SyntheticDataEvaluationScores]
+    class SyntheticDataConfiguration < Struct.new(
+      nil,
+      :synthetic_data_parameters,
+      :synthetic_data_evaluation_scores,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Comprehensive evaluation metrics for synthetic data that assess both the utility of the generated data for machine learning tasks and its privacy preservation characteristics.</p>
+    # @!attribute data_privacy_scores
+    #   <p>Privacy-specific evaluation scores that measure how well the synthetic data protects individual privacy, including assessments of potential privacy risks such as membership inference attacks.</p>
+    #   @return [Types::DataPrivacyScores]
+    class SyntheticDataEvaluationScores < Struct.new(
+      nil,
+      :data_privacy_scores,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3885,6 +4065,9 @@ module Aws::CleanRoomsML
     # @!attribute logs_status_details
     #   <p>Details about the log status for the trained model inference job.</p>
     #   @return [String]
+    # @!attribute ml_model_inference_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model inference costs.</p>
+    #   @return [String]
     # @!attribute create_time
     #   <p>The time at which the trained model inference job was created.</p>
     #   @return [Time]
@@ -3907,6 +4090,7 @@ module Aws::CleanRoomsML
       :metrics_status_details,
       :logs_status,
       :logs_status_details,
+      :ml_model_inference_payer_account_id,
       :create_time,
       :update_time,
       keyword_init: true
@@ -3980,6 +4164,9 @@ module Aws::CleanRoomsML
     # @!attribute configured_model_algorithm_association_arn
     #   <p>The Amazon Resource Name (ARN) of the configured model algorithm association that was used to create this trained model.</p>
     #   @return [String]
+    # @!attribute ml_model_training_payer_account_id
+    #   <p>The account ID of the member that is responsible for paying for model training costs.</p>
+    #   @return [String]
     class TrainedModelSummary < Struct.new(
       nil,
       :create_time,
@@ -3993,6 +4180,7 @@ module Aws::CleanRoomsML
       :collaboration_identifier,
       :status,
       :configured_model_algorithm_association_arn,
+      :ml_model_training_payer_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4136,10 +4324,14 @@ module Aws::CleanRoomsML
     # @!attribute number
     #   <p>The number of compute workers that are used.</p>
     #   @return [Integer]
+    # @!attribute properties
+    #   <p>The configuration properties for the worker compute environment. These properties allow you to customize the compute settings for your Clean Rooms workloads.</p>
+    #   @return [Types::WorkerComputeConfigurationProperties]
     class WorkerComputeConfiguration < Struct.new(
       nil,
       :type,
       :number,
+      :properties,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4149,6 +4341,21 @@ module Aws::CleanRoomsML
         options[:number] = 16 unless options.key?(:number)
         super
       end
+    end
+
+    # <p>The configuration properties for the worker compute environment. These properties allow you to customize the compute settings for your Clean Rooms workloads.</p>
+    # @!attribute spark
+    #   <p>The Spark configuration properties for SQL workloads. This map contains key-value pairs that configure Apache Spark settings to optimize performance for your data processing jobs. You can specify up to 50 Spark properties, with each key being 1-200 characters and each value being 0-500 characters. These properties allow you to adjust compute capacity for large datasets and complex workloads.</p>
+    #   @return [Hash<String, String>]
+    class WorkerComputeConfigurationProperties < Struct.new(
+      :spark,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Spark < WorkerComputeConfigurationProperties; end
+      class Unknown < WorkerComputeConfigurationProperties; end
     end
 
   end

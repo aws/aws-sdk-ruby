@@ -232,6 +232,7 @@ module Aws::Neptune
     ModifyEventSubscriptionResult: StructureShape
     ModifyGlobalClusterMessage: StructureShape
     ModifyGlobalClusterResult: StructureShape
+    NetworkTypeNotSupportedFault: StructureShape
     OptionGroupMembership: StructureShape
     OptionGroupMembershipList: ListShape
     OptionGroupNotFoundFault: StructureShape

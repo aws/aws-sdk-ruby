@@ -144,18 +144,18 @@ module Aws::CleanRooms
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -294,6 +294,22 @@ module Aws::CleanRooms
     #         ],
     #         error_message_configuration: {
     #           type: "DETAILED" # One of: ["DETAILED"], # required
+    #         },
+    #         synthetic_data_parameters: {
+    #           # One of:
+    #           ml_synthetic_data_parameters: {
+    #             epsilon: 1.0, # required
+    #             max_membership_inference_attack_score: 1.0, # required
+    #             column_classification: { # required
+    #               column_mapping: [ # required
+    #                 {
+    #                   column_name: "SyntheticDataColumnName", # required
+    #                   column_type: "CATEGORICAL" # One of: ["CATEGORICAL", "NUMERICAL"], # required
+    #                   is_predictive_value: false, # required
+    #                 }
+    #               ]
+    #             }
+    #           }
     #         }
     #       }
     #     ],
@@ -351,13 +367,13 @@ module Aws::CleanRooms
     #         description: "TableDescription", # required
     #         create_time: Time.now, # required
     #         update_time: Time.now, # required
-    #         type: "TABLE" # One of: ["TABLE", "ID_MAPPING_TABLE"], # required
+    #         type: "TABLE" # One of: ["TABLE", "ID_MAPPING_TABLE", "INTERMEDIATE_TABLE"], # required
     #         schema_status_details: [ # required
     #           {
     #             status: "READY" # One of: ["READY", "NOT_READY"], # required
     #             reasons: [
     #               {
-    #                 code: "ANALYSIS_RULE_MISSING" # One of: ["ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED", "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_CONFIGURED", "RESULT_RECEIVERS_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_ALLOWED", "RESULT_RECEIVERS_NOT_ALLOWED", "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"], # required
+    #                 code: "ANALYSIS_RULE_MISSING" # One of: ["ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED", "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_CONFIGURED", "RESULT_RECEIVERS_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_ALLOWED", "RESULT_RECEIVERS_NOT_ALLOWED", "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE", "INTERMEDIATE_TABLE_NOT_POPULATED", "INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING", "INTERMEDIATE_TABLE_BASE_TABLE_REMOVED", "INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED", "INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER", "INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED"], # required
     #                 message: "String", # required
     #               }
     #             ],
@@ -375,7 +391,14 @@ module Aws::CleanRooms
     #                 id_namespace_association_id: "String", # required
     #                 type: "SOURCE" # One of: ["SOURCE", "TARGET"], # required
     #               }
-    #             ]
+    #             ],
+    #             id_mapping_table_id: "UUID"
+    #           },
+    #           intermediate_table: {
+    #             intermediate_table_id: "UUID", # required
+    #           },
+    #           configured_table_association: {
+    #             configured_table_association_id: "UUID", # required
     #           }
     #         }
     #       }
@@ -461,10 +484,30 @@ module Aws::CleanRooms
     #               differential_privacy: {
     #                 columns: [ # required
     #                   {
-    #                     name: "String", # required
+    #                     name: "ColumnName", # required
     #                   }
     #                 ]
-    #               }
+    #               },
+    #               aggregation_thresholds: [
+    #                 {
+    #                   identity_columns: ["AnalysisRuleColumnName"], # required
+    #                   minimum_identity_count: 1, # required
+    #                   type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                   output_column_thresholds: [
+    #                     {
+    #                       output_column_name: "AnalysisRuleColumnName", # required
+    #                       minimum_identity_count: 1, # required
+    #                     }
+    #                   ],
+    #                   allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #                 }
+    #               ],
+    #               comparison_controls: {
+    #                 allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #                 allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #               },
+    #               allowed_result_receivers: ["AccountId"],
+    #               allowed_additional_analyses: ["AdditionalAnalysesResourceArn"]
     #             },
     #             id_mapping_table: {
     #               join_columns: ["AnalysisRuleColumnName"], # required
@@ -539,9 +582,27 @@ module Aws::CleanRooms
     #               differential_privacy: {
     #                 columns: [ # required
     #                   {
-    #                     name: "String", # required
+    #                     name: "ColumnName", # required
     #                   }
     #                 ]
+    #               },
+    #               aggregation_thresholds: [
+    #                 {
+    #                   identity_columns: ["AnalysisRuleColumnName"], # required
+    #                   minimum_identity_count: 1, # required
+    #                   type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                   output_column_thresholds: [
+    #                     {
+    #                       output_column_name: "AnalysisRuleColumnName", # required
+    #                       minimum_identity_count: 1, # required
+    #                     }
+    #                   ],
+    #                   allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #                 }
+    #               ],
+    #               comparison_controls: {
+    #                 allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #                 allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
     #               },
     #               allowed_result_receivers: ["AccountId"],
     #               allowed_additional_analyses: ["AdditionalAnalysesResourceArn"]
@@ -585,6 +646,8 @@ module Aws::CleanRooms
     #   <p>A relation within an analysis.</p>
     # @option params [Types::ErrorMessageConfiguration] :error_message_configuration
     #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
+    # @option params [Types::SyntheticDataParameters] :synthetic_data_parameters
+    #   <p>The parameters for generating synthetic data when running the analysis template.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     description: "ResourceDescription",
@@ -627,6 +690,22 @@ module Aws::CleanRooms
     #     },
     #     error_message_configuration: {
     #       type: "DETAILED" # One of: ["DETAILED"], # required
+    #     },
+    #     synthetic_data_parameters: {
+    #       # One of:
+    #       ml_synthetic_data_parameters: {
+    #         epsilon: 1.0, # required
+    #         max_membership_inference_attack_score: 1.0, # required
+    #         column_classification: { # required
+    #           column_mapping: [ # required
+    #             {
+    #               column_name: "SyntheticDataColumnName", # required
+    #               column_type: "CATEGORICAL" # One of: ["CATEGORICAL", "NUMERICAL"], # required
+    #               is_predictive_value: false, # required
+    #             }
+    #           ]
+    #         }
+    #       }
     #     }
     #   }
     #   options = {}
@@ -703,6 +782,22 @@ module Aws::CleanRooms
     #       ],
     #       error_message_configuration: {
     #         type: "DETAILED" # One of: ["DETAILED"], # required
+    #       },
+    #       synthetic_data_parameters: {
+    #         # One of:
+    #         ml_synthetic_data_parameters: {
+    #           epsilon: 1.0, # required
+    #           max_membership_inference_attack_score: 1.0, # required
+    #           column_classification: { # required
+    #             column_mapping: [ # required
+    #               {
+    #                 column_name: "SyntheticDataColumnName", # required
+    #                 column_type: "CATEGORICAL" # One of: ["CATEGORICAL", "NUMERICAL"], # required
+    #                 is_predictive_value: false, # required
+    #               }
+    #             ]
+    #           }
+    #         }
     #       }
     #     }
     #   }
@@ -742,12 +837,14 @@ module Aws::CleanRooms
     #   <p>The types of change requests that are automatically approved for this collaboration.</p>
     # @option params [Array<String>] :allowed_result_regions
     #   <p>The Amazon Web Services Regions where collaboration query results can be stored. When specified, results can only be written to these Regions. This parameter enables you to meet your compliance and data governance requirements, and implement regional data governance policies.</p>
+    # @option params [Boolean] :is_metrics_enabled
+    #   <p>An indicator as to whether metrics have been enabled or disabled for the collaboration.</p> <p>When <code>true</code>, collaboration members can opt in to Amazon CloudWatch metrics for their membership queries. The default value is <code>false</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     members: [ # required
     #       {
     #         account_id: "AccountId", # required
-    #         member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #         member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
     #         ml_member_abilities: {
     #           custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
     #         },
@@ -762,6 +859,9 @@ module Aws::CleanRooms
     #             },
     #             model_inference: {
     #               is_responsible: false, # required
+    #             },
+    #             synthetic_data_generation: {
+    #               is_responsible: false, # required
     #             }
     #           },
     #           job_compute: {
@@ -771,8 +871,8 @@ module Aws::CleanRooms
     #       }
     #     ],
     #     name: "CollaborationName", # required
-    #     description: "CollaborationDescription", # required
-    #     creator_member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #     description: "CollaborationDescription",
+    #     creator_member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
     #     creator_ml_member_abilities: {
     #       custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
     #     },
@@ -798,6 +898,9 @@ module Aws::CleanRooms
     #         },
     #         model_inference: {
     #           is_responsible: false, # required
+    #         },
+    #         synthetic_data_generation: {
+    #           is_responsible: false, # required
     #         }
     #       },
     #       job_compute: {
@@ -805,8 +908,9 @@ module Aws::CleanRooms
     #       }
     #     },
     #     analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
-    #     auto_approved_change_request_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]],
-    #     allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]]
+    #     auto_approved_change_request_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]],
+    #     allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]],
+    #     is_metrics_enabled: false
     #   }
     #   options = {}
     #   response = client.create_collaboration(params, options)
@@ -834,8 +938,9 @@ module Aws::CleanRooms
     #       query_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       job_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
-    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]],
-    #       allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]]
+    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]],
+    #       allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]],
+    #       is_metrics_enabled: false
     #     }
     #   }
     # @return [Types::CreateCollaborationOperationOutput]
@@ -855,13 +960,38 @@ module Aws::CleanRooms
     #     collaboration_identifier: "CollaborationIdentifier", # required
     #     changes: [ # required
     #       {
-    #         specification_type: "MEMBER" # One of: ["MEMBER"], # required
+    #         specification_type: "MEMBER" # One of: ["MEMBER", "COLLABORATION"], # required
     #         specification: { # required
     #           # One of:
     #           member: {
     #             account_id: "AccountId", # required
-    #             member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #             member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
+    #             ml_member_abilities: {
+    #               custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
+    #             },
+    #             payment_configuration: {
+    #               query_compute: { # required
+    #                 is_responsible: false, # required
+    #               },
+    #               machine_learning: {
+    #                 model_training: {
+    #                   is_responsible: false, # required
+    #                 },
+    #                 model_inference: {
+    #                   is_responsible: false, # required
+    #                 },
+    #                 synthetic_data_generation: {
+    #                   is_responsible: false, # required
+    #                 }
+    #               },
+    #               job_compute: {
+    #                 is_responsible: false, # required
+    #               }
+    #             },
     #             display_name: "DisplayName"
+    #           },
+    #           collaboration: {
+    #             auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]]
     #           }
     #         }
     #       }
@@ -881,18 +1011,48 @@ module Aws::CleanRooms
     #       is_auto_approved: false, # required
     #       changes: [ # required
     #         {
-    #           specification_type: "MEMBER" # One of: ["MEMBER"], # required
+    #           specification_type: "MEMBER" # One of: ["MEMBER", "COLLABORATION"], # required
     #           specification: { # required
     #             # One of:
     #             member: {
     #               account_id: "AccountId", # required
-    #               member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #               member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
+    #               ml_member_abilities: {
+    #                 custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
+    #               },
+    #               payment_configuration: {
+    #                 query_compute: { # required
+    #                   is_responsible: false, # required
+    #                 },
+    #                 machine_learning: {
+    #                   model_training: {
+    #                     is_responsible: false, # required
+    #                   },
+    #                   model_inference: {
+    #                     is_responsible: false, # required
+    #                   },
+    #                   synthetic_data_generation: {
+    #                     is_responsible: false, # required
+    #                   }
+    #                 },
+    #                 job_compute: {
+    #                   is_responsible: false, # required
+    #                 }
+    #               },
     #               display_name: "DisplayName"
+    #             },
+    #             collaboration: {
+    #               auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]]
     #             }
     #           },
-    #           types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]], # required
+    #           types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]], # required
     #         }
-    #       ]
+    #       ],
+    #       approvals: {
+    #         "AccountId" => {
+    #           status: "APPROVED" # One of: ["APPROVED", "DENIED", "PENDING"], # required
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::CreateCollaborationChangeRequestOutput]
@@ -1001,6 +1161,7 @@ module Aws::CleanRooms
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
     #         table_name: "AthenaTableName", # required
+    #         catalog_name: "AthenaCatalogName"
     #       }
     #     },
     #     allowed_columns: ["ColumnName"], # required
@@ -1049,6 +1210,7 @@ module Aws::CleanRooms
     #           output_location: "AthenaOutputLocation",
     #           database_name: "AthenaDatabaseName", # required
     #           table_name: "AthenaTableName", # required
+    #           catalog_name: "AthenaCatalogName"
     #         }
     #       },
     #       create_time: Time.now, # required
@@ -1116,10 +1278,30 @@ module Aws::CleanRooms
     #           differential_privacy: {
     #             columns: [ # required
     #               {
-    #                 name: "String", # required
+    #                 name: "ColumnName", # required
     #               }
     #             ]
-    #           }
+    #           },
+    #           aggregation_thresholds: [
+    #             {
+    #               identity_columns: ["AnalysisRuleColumnName"], # required
+    #               minimum_identity_count: 1, # required
+    #               type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #               output_column_thresholds: [
+    #                 {
+    #                   output_column_name: "AnalysisRuleColumnName", # required
+    #                   minimum_identity_count: 1, # required
+    #                 }
+    #               ],
+    #               allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #             }
+    #           ],
+    #           comparison_controls: {
+    #             allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #           },
+    #           allowed_result_receivers: ["AccountId"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"]
     #         }
     #       }
     #     }
@@ -1171,10 +1353,30 @@ module Aws::CleanRooms
     #             differential_privacy: {
     #               columns: [ # required
     #                 {
-    #                   name: "String", # required
+    #                   name: "ColumnName", # required
     #                 }
     #               ]
-    #             }
+    #             },
+    #             aggregation_thresholds: [
+    #               {
+    #                 identity_columns: ["AnalysisRuleColumnName"], # required
+    #                 minimum_identity_count: 1, # required
+    #                 type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                 output_column_thresholds: [
+    #                   {
+    #                     output_column_name: "AnalysisRuleColumnName", # required
+    #                     minimum_identity_count: 1, # required
+    #                   }
+    #                 ],
+    #                 allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #               }
+    #             ],
+    #             comparison_controls: {
+    #               allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #               allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             },
+    #             allowed_result_receivers: ["AccountId"],
+    #             allowed_additional_analyses: ["AdditionalAnalysesResourceArn"]
     #           }
     #         }
     #       },
@@ -1232,6 +1434,15 @@ module Aws::CleanRooms
     #       analysis_rule_types: ["AGGREGATION" # One of: ["AGGREGATION", "LIST", "CUSTOM"]],
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
+    #       child_resources: [
+    #         {
+    #           resource_id: "UUID",
+    #           resource_type: "INTERMEDIATE_TABLE" # One of: ["INTERMEDIATE_TABLE"], # required
+    #           resource_name: "DisplayName", # required
+    #           owner_account_id: "AccountId", # required
+    #           resource_status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"]
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::CreateConfiguredTableAssociationOperationOutput]
@@ -1368,7 +1579,16 @@ module Aws::CleanRooms
     #           }
     #         ]
     #       },
-    #       kms_key_arn: "KMSKeyArn"
+    #       kms_key_arn: "KMSKeyArn",
+    #       child_resources: [
+    #         {
+    #           resource_id: "UUID",
+    #           resource_type: "INTERMEDIATE_TABLE" # One of: ["INTERMEDIATE_TABLE"], # required
+    #           resource_name: "DisplayName", # required
+    #           owner_account_id: "AccountId", # required
+    #           resource_status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"]
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::CreateIdMappingTableOutput]
@@ -1442,6 +1662,276 @@ module Aws::CleanRooms
       request.send_request(options)
     end
 
+    # <p>Creates an intermediate table in a membership. The intermediate table is owned by the member with the CAN_QUERY ability. To populate the table with results, use <code>PopulateIntermediateTable</code>.</p>
+    # @param [Hash, Types::CreateIntermediateTableInput] params
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership where the intermediate table is created.</p>
+    # @option params [String] :name
+    #   <p>The display name for the intermediate table.</p>
+    # @option params [String] :description
+    #   <p>A description of the intermediate table.</p>
+    # @option params [Types::PopulationAnalysisConfiguration] :population_analysis_configuration
+    #   <p>The configuration that defines the analysis used to populate the intermediate table.</p>
+    # @option params [String] :kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the customer-managed KMS key used to encrypt the intermediate table data.</p>
+    # @option params [Integer] :retention_in_days
+    #   <p>The number of days to retain populated data versions.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     name: "DisplayName", # required
+    #     description: "ResourceDescription",
+    #     population_analysis_configuration: { # required
+    #       # One of:
+    #       sql_parameters: {
+    #         query_string: "String",
+    #         analysis_template_arn: "AnalysisTemplateArn"
+    #       }
+    #     },
+    #     kms_key_arn: "KMSKeyArn",
+    #     retention_in_days: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_intermediate_table(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     intermediate_table: { # required
+    #       id: "UUID", # required
+    #       arn: "IntermediateTableArn", # required
+    #       name: "DisplayName", # required
+    #       description: "ResourceDescription",
+    #       membership_arn: "MembershipArn", # required
+    #       membership_id: "UUID", # required
+    #       collaboration_arn: "CollaborationArn", # required
+    #       collaboration_id: "UUID", # required
+    #       child_resources: [
+    #         {
+    #           resource_id: "UUID",
+    #           resource_type: "INTERMEDIATE_TABLE" # One of: ["INTERMEDIATE_TABLE"], # required
+    #           resource_name: "DisplayName", # required
+    #           owner_account_id: "AccountId", # required
+    #           resource_status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"]
+    #         }
+    #       ],
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #       status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"], # required
+    #       status_reason: "String",
+    #       kms_key_arn: "KMSKeyArn",
+    #       population_analysis_configuration: { # required
+    #         # One of:
+    #         sql_parameters: {
+    #           query_string: "String",
+    #           analysis_template_arn: "AnalysisTemplateArn"
+    #         }
+    #       },
+    #       retention_in_days: 1,
+    #       table_dependencies: [
+    #         {
+    #           id: "UUID", # required
+    #           name: "DisplayName", # required
+    #           type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #           parent_type: "DIRECT" # One of: ["DIRECT", "INDIRECT"], # required
+    #           creator_account_id: "AccountId", # required
+    #         }
+    #       ],
+    #       intermediate_table_version: {
+    #         version_id: "UUID", # required
+    #         analysis_id: "AnalysisIdentifier", # required
+    #         analysis_type: "QUERY" # One of: ["QUERY"], # required
+    #         kms_key_arn: "KMSKeyArn",
+    #         parameters: {
+    #           "ParameterName" => "ParameterValue"
+    #         },
+    #         inherited_constraints: { # required
+    #           additional_analyses: {
+    #             value: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"], # required
+    #             sources: [ # required
+    #               {
+    #                 name: "DisplayName", # required
+    #                 id: "UUID", # required
+    #                 type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 value: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           },
+    #           allowed_additional_analyses: {
+    #             value: ["AdditionalAnalysesResourceArn"], # required
+    #             sources: [ # required
+    #               {
+    #                 name: "DisplayName", # required
+    #                 id: "UUID", # required
+    #                 type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 value: ["AdditionalAnalysesResourceArn"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           },
+    #           allowed_result_receivers: {
+    #             value: ["AccountId"], # required
+    #             sources: [ # required
+    #               {
+    #                 name: "DisplayName", # required
+    #                 id: "UUID", # required
+    #                 type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 value: ["AccountId"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           },
+    #           disallowed_output_columns: {
+    #             value: ["AnalysisRuleColumnName"], # required
+    #             column_lineage: [ # required
+    #               {
+    #                 column: "AnalysisRuleColumnName", # required
+    #                 source_column: "AnalysisRuleColumnName", # required
+    #                 source_name: "DisplayName", # required
+    #                 source_id: "UUID", # required
+    #                 source_type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         expiration_time: Time.now
+    #       },
+    #       analysis_rule_types: ["CUSTOM" # One of: ["CUSTOM"]],
+    #       schema: {
+    #         columns: [ # required
+    #           {
+    #             name: "ColumnName", # required
+    #             type: "ColumnTypeString", # required
+    #           }
+    #         ]
+    #       }
+    #     }
+    #   }
+    # @return [Types::CreateIntermediateTableOutput]
+    def create_intermediate_table(params = {}, options = {})
+      request = build_request(:create_intermediate_table, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates an analysis rule for an intermediate table. Only the CUSTOM analysis rule type is supported. Only the intermediate table owner can call this operation.</p>
+    # @param [Hash, Types::CreateIntermediateTableAnalysisRuleInput] params
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    # @option params [String] :intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table for which to create the analysis rule.</p>
+    # @option params [String] :analysis_rule_type
+    #   <p>The type of analysis rule to create. Currently, only <code>CUSTOM</code> is supported.</p>
+    # @option params [Types::IntermediateTableAnalysisRulePolicy] :analysis_rule_policy
+    #   <p>The analysis rule policy to apply to the intermediate table.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     intermediate_table_identifier: "IntermediateTableIdentifier", # required
+    #     analysis_rule_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #     analysis_rule_policy: { # required
+    #       # One of:
+    #       v1: {
+    #         # One of:
+    #         custom: {
+    #           allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"],
+    #           additional_analyses: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #           allowed_analysis_providers: ["AccountId"],
+    #           allowed_result_receivers: ["AccountId"],
+    #           differential_privacy: {
+    #             columns: [ # required
+    #               {
+    #                 name: "ColumnName", # required
+    #               }
+    #             ]
+    #           },
+    #           disallowed_output_columns: ["AnalysisRuleColumnName"],
+    #           aggregation_thresholds: [
+    #             {
+    #               identity_columns: ["AnalysisRuleColumnName"], # required
+    #               minimum_identity_count: 1, # required
+    #               type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #               output_column_thresholds: [
+    #                 {
+    #                   output_column_name: "AnalysisRuleColumnName", # required
+    #                   minimum_identity_count: 1, # required
+    #                 }
+    #               ],
+    #               allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #             }
+    #           ],
+    #           comparison_controls: {
+    #             allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #           }
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_intermediate_table_analysis_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     analysis_rule: { # required
+    #       intermediate_table_identifier: "UUID", # required
+    #       intermediate_table_arn: "IntermediateTableArn", # required
+    #       analysis_rule_policy: { # required
+    #         # One of:
+    #         v1: {
+    #           # One of:
+    #           custom: {
+    #             allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"],
+    #             additional_analyses: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"],
+    #             allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #             allowed_analysis_providers: ["AccountId"],
+    #             allowed_result_receivers: ["AccountId"],
+    #             differential_privacy: {
+    #               columns: [ # required
+    #                 {
+    #                   name: "ColumnName", # required
+    #                 }
+    #               ]
+    #             },
+    #             disallowed_output_columns: ["AnalysisRuleColumnName"],
+    #             aggregation_thresholds: [
+    #               {
+    #                 identity_columns: ["AnalysisRuleColumnName"], # required
+    #                 minimum_identity_count: 1, # required
+    #                 type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                 output_column_thresholds: [
+    #                   {
+    #                     output_column_name: "AnalysisRuleColumnName", # required
+    #                     minimum_identity_count: 1, # required
+    #                   }
+    #                 ],
+    #                 allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #               }
+    #             ],
+    #             comparison_controls: {
+    #               allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #               allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             }
+    #           }
+    #         }
+    #       },
+    #       analysis_rule_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #     }
+    #   }
+    # @return [Types::CreateIntermediateTableAnalysisRuleOutput]
+    def create_intermediate_table_analysis_rule(params = {}, options = {})
+      request = build_request(:create_intermediate_table_analysis_rule, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a membership for a specific collaboration identifier and joins the collaboration.</p>
     # @param [Hash, Types::CreateMembershipOperationInput] params
     # @option params [String] :collaboration_identifier
@@ -1458,6 +1948,8 @@ module Aws::CleanRooms
     #   <p>The default job result configuration that determines how job results are protected and managed within this membership. This configuration applies to all jobs.</p>
     # @option params [Types::MembershipPaymentConfiguration] :payment_configuration
     #   <p>The payment responsibilities accepted by the collaboration member.</p> <p>Not required if the collaboration member has the member ability to run queries. </p> <p>Required if the collaboration member doesn't have the member ability to run queries but is configured as a payer by the collaboration creator. </p>
+    # @option params [Boolean] :is_metrics_enabled
+    #   <p>An indicator as to whether Amazon CloudWatch metrics have been enabled or disabled for the membership.</p> <p>Amazon CloudWatch metrics are only available when the collaboration has metrics enabled. This option can be set by collaboration members who have the ability to run queries (analysis runners) or by members who are configured as payers.</p> <p>When <code>true</code>, metrics about query execution are collected in Amazon CloudWatch. The default value is <code>false</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     collaboration_identifier: "CollaborationIdentifier", # required
@@ -1470,7 +1962,7 @@ module Aws::CleanRooms
     #       output_configuration: { # required
     #         # One of:
     #         s3: {
-    #           result_format: "ResultFormat", # required
+    #           result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #           bucket: "String", # required
     #           key_prefix: "KeyPrefix",
     #           single_file_output: false
@@ -1498,12 +1990,16 @@ module Aws::CleanRooms
     #         },
     #         model_inference: {
     #           is_responsible: false, # required
+    #         },
+    #         synthetic_data_generation: {
+    #           is_responsible: false, # required
     #         }
     #       },
     #       job_compute: {
     #         is_responsible: false, # required
     #       }
-    #     }
+    #     },
+    #     is_metrics_enabled: false
     #   }
     #   options = {}
     #   response = client.create_membership(params, options)
@@ -1521,7 +2017,7 @@ module Aws::CleanRooms
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
     #       status: "MembershipStatus", # required
-    #       member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #       member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
     #       ml_member_abilities: {
     #         custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
     #       },
@@ -1531,7 +2027,7 @@ module Aws::CleanRooms
     #         output_configuration: { # required
     #           # One of:
     #           s3: {
-    #             result_format: "ResultFormat", # required
+    #             result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #             bucket: "String", # required
     #             key_prefix: "KeyPrefix",
     #             single_file_output: false
@@ -1559,12 +2055,16 @@ module Aws::CleanRooms
     #           },
     #           model_inference: {
     #             is_responsible: false, # required
+    #           },
+    #           synthetic_data_generation: {
+    #             is_responsible: false, # required
     #           }
     #         },
     #         job_compute: {
     #           is_responsible: false, # required
     #         }
-    #       }
+    #       },
+    #       is_metrics_enabled: false
     #     }
     #   }
     # @return [Types::CreateMembershipOperationOutput]
@@ -1847,6 +2347,53 @@ module Aws::CleanRooms
       request.send_request(options)
     end
 
+    # <p>Deletes an intermediate table. The delete is idempotent. Only the intermediate table owner can call this operation.</p>
+    # @param [Hash, Types::DeleteIntermediateTableInput] params
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    # @option params [String] :intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     intermediate_table_identifier: "IntermediateTableIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_intermediate_table(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteIntermediateTableOutput]
+    def delete_intermediate_table(params = {}, options = {})
+      request = build_request(:delete_intermediate_table, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an analysis rule from an intermediate table. After the analysis rule is deleted, the intermediate table becomes unqueryable until a new analysis rule is attached. Only the intermediate table owner can call this operation.</p>
+    # @param [Hash, Types::DeleteIntermediateTableAnalysisRuleInput] params
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    # @option params [String] :intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table from which to delete the analysis rule.</p>
+    # @option params [String] :analysis_rule_type
+    #   <p>The type of analysis rule to delete. Currently, only <code>CUSTOM</code> is supported.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     intermediate_table_identifier: "IntermediateTableIdentifier", # required
+    #     analysis_rule_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #   }
+    #   options = {}
+    #   response = client.delete_intermediate_table_analysis_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteIntermediateTableAnalysisRuleOutput]
+    def delete_intermediate_table_analysis_rule(params = {}, options = {})
+      request = build_request(:delete_intermediate_table_analysis_rule, params)
+      request.send_request(options)
+    end
+
     # <p>Removes the specified member from a collaboration. The removed member is placed in the Removed status and can't interact with the collaboration. The removed member's data is inaccessible to active members of the collaboration.</p>
     # @param [Hash, Types::DeleteMemberOperationInput] params
     # @option params [String] :collaboration_identifier
@@ -1907,6 +2454,75 @@ module Aws::CleanRooms
     # @return [Types::DeletePrivacyBudgetTemplateOutput]
     def delete_privacy_budget_template(params = {}, options = {})
       request = build_request(:delete_privacy_budget_template, params)
+      request.send_request(options)
+    end
+
+    # <p>Marks an intermediate table as invalid when it references the caller's base table. The data provider (base table owner) calls this operation, not the intermediate table owner. By default, the operation also marks all descendant intermediate tables as invalid.</p>
+    # @param [Hash, Types::DisallowIntermediateTableInput] params
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table to disallow.</p>
+    # @option params [String] :intermediate_table_name
+    #   <p>The name of the intermediate table to disallow.</p>
+    # @option params [Boolean] :include_descendants
+    #   <p>Specifies whether to cascade the disallow action to descendant intermediate tables. Default is <code>true</code>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     intermediate_table_name: "DisplayName", # required
+    #     include_descendants: false
+    #   }
+    #   options = {}
+    #   response = client.disallow_intermediate_table(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DisallowIntermediateTableOutput]
+    def disallow_intermediate_table(params = {}, options = {})
+      request = build_request(:disallow_intermediate_table, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns information about an analysis log export, including its current status and, if the export failed, the reason for the failure.</p> <p>Poll this operation until the <code>status</code> is <code>SUCCESS</code> or <code>FAILED</code>. An export can't be canceled after it starts.</p>
+    # @param [Hash, Types::GetAnalysisLogExportInput] params
+    # @option params [String] :membership_identifier
+    #   <p>A unique identifier for the membership that the analysis log export belongs to. Currently accepts the membership ID.</p>
+    # @option params [String] :analysis_log_export_identifier
+    #   <p>The unique identifier of the analysis log export to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     analysis_log_export_identifier: "AnalysisLogExportIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.get_analysis_log_export(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     analysis_log_export: { # required
+    #       analysis_log_export_id: "AnalysisLogExportIdentifier", # required
+    #       analysis_id: "UUID", # required
+    #       analysis_type: "PROTECTED_QUERY" # One of: ["PROTECTED_QUERY"], # required
+    #       membership_id: "UUID", # required
+    #       status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "SUCCESS", "FAILED"], # required
+    #       result_configuration: { # required
+    #         output_configuration: { # required
+    #           s3: { # required
+    #             bucket: "String", # required
+    #             key_prefix: "KeyPrefix"
+    #           }
+    #         }
+    #       },
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #       error: {
+    #         code: "String", # required
+    #         message: "String", # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetAnalysisLogExportOutput]
+    def get_analysis_log_export(params = {}, options = {})
+      request = build_request(:get_analysis_log_export, params)
       request.send_request(options)
     end
 
@@ -1995,6 +2611,22 @@ module Aws::CleanRooms
     #       ],
     #       error_message_configuration: {
     #         type: "DETAILED" # One of: ["DETAILED"], # required
+    #       },
+    #       synthetic_data_parameters: {
+    #         # One of:
+    #         ml_synthetic_data_parameters: {
+    #           epsilon: 1.0, # required
+    #           max_membership_inference_attack_score: 1.0, # required
+    #           column_classification: { # required
+    #             column_mapping: [ # required
+    #               {
+    #                 column_name: "SyntheticDataColumnName", # required
+    #                 column_type: "CATEGORICAL" # One of: ["CATEGORICAL", "NUMERICAL"], # required
+    #                 is_predictive_value: false, # required
+    #               }
+    #             ]
+    #           }
+    #         }
     #       }
     #     }
     #   }
@@ -2038,8 +2670,9 @@ module Aws::CleanRooms
     #       query_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       job_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
-    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]],
-    #       allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]]
+    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]],
+    #       allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]],
+    #       is_metrics_enabled: false
     #     }
     #   }
     # @return [Types::GetCollaborationOperationOutput]
@@ -2132,6 +2765,22 @@ module Aws::CleanRooms
     #       ],
     #       error_message_configuration: {
     #         type: "DETAILED" # One of: ["DETAILED"], # required
+    #       },
+    #       synthetic_data_parameters: {
+    #         # One of:
+    #         ml_synthetic_data_parameters: {
+    #           epsilon: 1.0, # required
+    #           max_membership_inference_attack_score: 1.0, # required
+    #           column_classification: { # required
+    #             column_mapping: [ # required
+    #               {
+    #                 column_name: "SyntheticDataColumnName", # required
+    #                 column_type: "CATEGORICAL" # One of: ["CATEGORICAL", "NUMERICAL"], # required
+    #                 is_predictive_value: false, # required
+    #               }
+    #             ]
+    #           }
+    #         }
     #       }
     #     }
     #   }
@@ -2166,18 +2815,48 @@ module Aws::CleanRooms
     #       is_auto_approved: false, # required
     #       changes: [ # required
     #         {
-    #           specification_type: "MEMBER" # One of: ["MEMBER"], # required
+    #           specification_type: "MEMBER" # One of: ["MEMBER", "COLLABORATION"], # required
     #           specification: { # required
     #             # One of:
     #             member: {
     #               account_id: "AccountId", # required
-    #               member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #               member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
+    #               ml_member_abilities: {
+    #                 custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
+    #               },
+    #               payment_configuration: {
+    #                 query_compute: { # required
+    #                   is_responsible: false, # required
+    #                 },
+    #                 machine_learning: {
+    #                   model_training: {
+    #                     is_responsible: false, # required
+    #                   },
+    #                   model_inference: {
+    #                     is_responsible: false, # required
+    #                   },
+    #                   synthetic_data_generation: {
+    #                     is_responsible: false, # required
+    #                   }
+    #                 },
+    #                 job_compute: {
+    #                   is_responsible: false, # required
+    #                 }
+    #               },
     #               display_name: "DisplayName"
+    #             },
+    #             collaboration: {
+    #               auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]]
     #             }
     #           },
-    #           types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]], # required
+    #           types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]], # required
     #         }
-    #       ]
+    #       ],
+    #       approvals: {
+    #         "AccountId" => {
+    #           status: "APPROVED" # One of: ["APPROVED", "DENIED", "PENDING"], # required
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::GetCollaborationChangeRequestOutput]
@@ -2401,6 +3080,7 @@ module Aws::CleanRooms
     #           output_location: "AthenaOutputLocation",
     #           database_name: "AthenaDatabaseName", # required
     #           table_name: "AthenaTableName", # required
+    #           catalog_name: "AthenaCatalogName"
     #         }
     #       },
     #       create_time: Time.now, # required
@@ -2475,10 +3155,30 @@ module Aws::CleanRooms
     #             differential_privacy: {
     #               columns: [ # required
     #                 {
-    #                   name: "String", # required
+    #                   name: "ColumnName", # required
     #                 }
     #               ]
-    #             }
+    #             },
+    #             aggregation_thresholds: [
+    #               {
+    #                 identity_columns: ["AnalysisRuleColumnName"], # required
+    #                 minimum_identity_count: 1, # required
+    #                 type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                 output_column_thresholds: [
+    #                   {
+    #                     output_column_name: "AnalysisRuleColumnName", # required
+    #                     minimum_identity_count: 1, # required
+    #                   }
+    #                 ],
+    #                 allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #               }
+    #             ],
+    #             comparison_controls: {
+    #               allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #               allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             },
+    #             allowed_result_receivers: ["AccountId"],
+    #             allowed_additional_analyses: ["AdditionalAnalysesResourceArn"]
     #           }
     #         }
     #       },
@@ -2522,6 +3222,15 @@ module Aws::CleanRooms
     #       analysis_rule_types: ["AGGREGATION" # One of: ["AGGREGATION", "LIST", "CUSTOM"]],
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
+    #       child_resources: [
+    #         {
+    #           resource_id: "UUID",
+    #           resource_type: "INTERMEDIATE_TABLE" # One of: ["INTERMEDIATE_TABLE"], # required
+    #           resource_name: "DisplayName", # required
+    #           owner_account_id: "AccountId", # required
+    #           resource_status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"]
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::GetConfiguredTableAssociationOperationOutput]
@@ -2621,7 +3330,16 @@ module Aws::CleanRooms
     #           }
     #         ]
     #       },
-    #       kms_key_arn: "KMSKeyArn"
+    #       kms_key_arn: "KMSKeyArn",
+    #       child_resources: [
+    #         {
+    #           resource_id: "UUID",
+    #           resource_type: "INTERMEDIATE_TABLE" # One of: ["INTERMEDIATE_TABLE"], # required
+    #           resource_name: "DisplayName", # required
+    #           owner_account_id: "AccountId", # required
+    #           resource_status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"]
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::GetIdMappingTableOutput]
@@ -2676,6 +3394,212 @@ module Aws::CleanRooms
       request.send_request(options)
     end
 
+    # <p>Retrieves an intermediate table. Returns the full details of the intermediate table, including schema, table dependencies, inherited constraints, child resources, and status. Only the intermediate table owner can call this operation.</p>
+    # @param [Hash, Types::GetIntermediateTableInput] params
+    # @option params [String] :intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table to retrieve.</p>
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     intermediate_table_identifier: "IntermediateTableIdentifier", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.get_intermediate_table(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     intermediate_table: { # required
+    #       id: "UUID", # required
+    #       arn: "IntermediateTableArn", # required
+    #       name: "DisplayName", # required
+    #       description: "ResourceDescription",
+    #       membership_arn: "MembershipArn", # required
+    #       membership_id: "UUID", # required
+    #       collaboration_arn: "CollaborationArn", # required
+    #       collaboration_id: "UUID", # required
+    #       child_resources: [
+    #         {
+    #           resource_id: "UUID",
+    #           resource_type: "INTERMEDIATE_TABLE" # One of: ["INTERMEDIATE_TABLE"], # required
+    #           resource_name: "DisplayName", # required
+    #           owner_account_id: "AccountId", # required
+    #           resource_status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"]
+    #         }
+    #       ],
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #       status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"], # required
+    #       status_reason: "String",
+    #       kms_key_arn: "KMSKeyArn",
+    #       population_analysis_configuration: { # required
+    #         # One of:
+    #         sql_parameters: {
+    #           query_string: "String",
+    #           analysis_template_arn: "AnalysisTemplateArn"
+    #         }
+    #       },
+    #       retention_in_days: 1,
+    #       table_dependencies: [
+    #         {
+    #           id: "UUID", # required
+    #           name: "DisplayName", # required
+    #           type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #           parent_type: "DIRECT" # One of: ["DIRECT", "INDIRECT"], # required
+    #           creator_account_id: "AccountId", # required
+    #         }
+    #       ],
+    #       intermediate_table_version: {
+    #         version_id: "UUID", # required
+    #         analysis_id: "AnalysisIdentifier", # required
+    #         analysis_type: "QUERY" # One of: ["QUERY"], # required
+    #         kms_key_arn: "KMSKeyArn",
+    #         parameters: {
+    #           "ParameterName" => "ParameterValue"
+    #         },
+    #         inherited_constraints: { # required
+    #           additional_analyses: {
+    #             value: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"], # required
+    #             sources: [ # required
+    #               {
+    #                 name: "DisplayName", # required
+    #                 id: "UUID", # required
+    #                 type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 value: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           },
+    #           allowed_additional_analyses: {
+    #             value: ["AdditionalAnalysesResourceArn"], # required
+    #             sources: [ # required
+    #               {
+    #                 name: "DisplayName", # required
+    #                 id: "UUID", # required
+    #                 type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 value: ["AdditionalAnalysesResourceArn"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           },
+    #           allowed_result_receivers: {
+    #             value: ["AccountId"], # required
+    #             sources: [ # required
+    #               {
+    #                 name: "DisplayName", # required
+    #                 id: "UUID", # required
+    #                 type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 value: ["AccountId"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           },
+    #           disallowed_output_columns: {
+    #             value: ["AnalysisRuleColumnName"], # required
+    #             column_lineage: [ # required
+    #               {
+    #                 column: "AnalysisRuleColumnName", # required
+    #                 source_column: "AnalysisRuleColumnName", # required
+    #                 source_name: "DisplayName", # required
+    #                 source_id: "UUID", # required
+    #                 source_type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         expiration_time: Time.now
+    #       },
+    #       analysis_rule_types: ["CUSTOM" # One of: ["CUSTOM"]],
+    #       schema: {
+    #         columns: [ # required
+    #           {
+    #             name: "ColumnName", # required
+    #             type: "ColumnTypeString", # required
+    #           }
+    #         ]
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetIntermediateTableOutput]
+    def get_intermediate_table(params = {}, options = {})
+      request = build_request(:get_intermediate_table, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the analysis rule for an intermediate table.</p>
+    # @param [Hash, Types::GetIntermediateTableAnalysisRuleInput] params
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    # @option params [String] :intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table for which to retrieve the analysis rule.</p>
+    # @option params [String] :analysis_rule_type
+    #   <p>The type of analysis rule to retrieve. Currently, only <code>CUSTOM</code> is supported.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     intermediate_table_identifier: "IntermediateTableIdentifier", # required
+    #     analysis_rule_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #   }
+    #   options = {}
+    #   response = client.get_intermediate_table_analysis_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     analysis_rule: { # required
+    #       intermediate_table_identifier: "UUID", # required
+    #       intermediate_table_arn: "IntermediateTableArn", # required
+    #       analysis_rule_policy: { # required
+    #         # One of:
+    #         v1: {
+    #           # One of:
+    #           custom: {
+    #             allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"],
+    #             additional_analyses: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"],
+    #             allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #             allowed_analysis_providers: ["AccountId"],
+    #             allowed_result_receivers: ["AccountId"],
+    #             differential_privacy: {
+    #               columns: [ # required
+    #                 {
+    #                   name: "ColumnName", # required
+    #                 }
+    #               ]
+    #             },
+    #             disallowed_output_columns: ["AnalysisRuleColumnName"],
+    #             aggregation_thresholds: [
+    #               {
+    #                 identity_columns: ["AnalysisRuleColumnName"], # required
+    #                 minimum_identity_count: 1, # required
+    #                 type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                 output_column_thresholds: [
+    #                   {
+    #                     output_column_name: "AnalysisRuleColumnName", # required
+    #                     minimum_identity_count: 1, # required
+    #                   }
+    #                 ],
+    #                 allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #               }
+    #             ],
+    #             comparison_controls: {
+    #               allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #               allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             }
+    #           }
+    #         }
+    #       },
+    #       analysis_rule_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #     }
+    #   }
+    # @return [Types::GetIntermediateTableAnalysisRuleOutput]
+    def get_intermediate_table_analysis_rule(params = {}, options = {})
+      request = build_request(:get_intermediate_table_analysis_rule, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves a specified membership for an identifier.</p>
     # @param [Hash, Types::GetMembershipOperationInput] params
     # @option params [String] :membership_identifier
@@ -2700,7 +3624,7 @@ module Aws::CleanRooms
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
     #       status: "MembershipStatus", # required
-    #       member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #       member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
     #       ml_member_abilities: {
     #         custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
     #       },
@@ -2710,7 +3634,7 @@ module Aws::CleanRooms
     #         output_configuration: { # required
     #           # One of:
     #           s3: {
-    #             result_format: "ResultFormat", # required
+    #             result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #             bucket: "String", # required
     #             key_prefix: "KeyPrefix",
     #             single_file_output: false
@@ -2738,12 +3662,16 @@ module Aws::CleanRooms
     #           },
     #           model_inference: {
     #             is_responsible: false, # required
+    #           },
+    #           synthetic_data_generation: {
+    #             is_responsible: false, # required
     #           }
     #         },
     #         job_compute: {
     #           is_responsible: false, # required
     #         }
-    #       }
+    #       },
+    #       is_metrics_enabled: false
     #     }
     #   }
     # @return [Types::GetMembershipOperationOutput]
@@ -2826,7 +3754,10 @@ module Aws::CleanRooms
     #       membership_arn: "MembershipArn", # required
     #       create_time: Time.now, # required
     #       job_parameters: {
-    #         analysis_template_arn: "AnalysisTemplateArn"
+    #         analysis_template_arn: "AnalysisTemplateArn", # required
+    #         parameters: {
+    #           "JobParameterName" => "JobParameterValue"
+    #         }
     #       },
     #       status: "SUBMITTED" # One of: ["SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"], # required
     #       result_configuration: {
@@ -2869,8 +3800,15 @@ module Aws::CleanRooms
     #         worker: {
     #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"], # required
     #           number: 1, # required
+    #           properties: {
+    #             # One of:
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue"
+    #             }
+    #           }
     #         }
-    #       }
+    #       },
+    #       job_compute_payer_account_id: "AccountId"
     #     }
     #   }
     # @return [Types::GetProtectedJobOutput]
@@ -2912,7 +3850,7 @@ module Aws::CleanRooms
     #         output_configuration: { # required
     #           # One of:
     #           s3: {
-    #             result_format: "ResultFormat", # required
+    #             result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #             bucket: "String", # required
     #             key_prefix: "KeyPrefix",
     #             single_file_output: false
@@ -2924,7 +3862,7 @@ module Aws::CleanRooms
     #             locations: [{ # required
     #               # One of:
     #               s3: {
-    #                 result_format: "ResultFormat", # required
+    #                 result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #                 bucket: "String", # required
     #                 key_prefix: "KeyPrefix",
     #                 single_file_output: false
@@ -2933,6 +3871,11 @@ module Aws::CleanRooms
     #                 account_id: "AccountId", # required
     #               }
     #             }]
+    #           },
+    #           intermediate_table: {
+    #             id: "UUID", # required
+    #             arn: "IntermediateTableArn", # required
+    #             name: "DisplayName", # required
     #           }
     #         }
     #       },
@@ -2983,10 +3926,17 @@ module Aws::CleanRooms
     #       compute_configuration: {
     #         # One of:
     #         worker: {
-    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"],
-    #           number: 1
+    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X", "CR.8X"],
+    #           number: 1,
+    #           properties: {
+    #             # One of:
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue"
+    #             }
+    #           }
     #         }
-    #       }
+    #       },
+    #       query_compute_payer_account_id: "AccountId"
     #     }
     #   }
     # @return [Types::GetProtectedQueryOperationOutput]
@@ -3034,13 +3984,13 @@ module Aws::CleanRooms
     #       description: "TableDescription", # required
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
-    #       type: "TABLE" # One of: ["TABLE", "ID_MAPPING_TABLE"], # required
+    #       type: "TABLE" # One of: ["TABLE", "ID_MAPPING_TABLE", "INTERMEDIATE_TABLE"], # required
     #       schema_status_details: [ # required
     #         {
     #           status: "READY" # One of: ["READY", "NOT_READY"], # required
     #           reasons: [
     #             {
-    #               code: "ANALYSIS_RULE_MISSING" # One of: ["ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED", "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_CONFIGURED", "RESULT_RECEIVERS_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_ALLOWED", "RESULT_RECEIVERS_NOT_ALLOWED", "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"], # required
+    #               code: "ANALYSIS_RULE_MISSING" # One of: ["ANALYSIS_RULE_MISSING", "ANALYSIS_TEMPLATES_NOT_CONFIGURED", "ANALYSIS_PROVIDERS_NOT_CONFIGURED", "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED", "ID_MAPPING_TABLE_NOT_POPULATED", "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_CONFIGURED", "RESULT_RECEIVERS_NOT_CONFIGURED", "ADDITIONAL_ANALYSES_NOT_ALLOWED", "RESULT_RECEIVERS_NOT_ALLOWED", "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE", "INTERMEDIATE_TABLE_NOT_POPULATED", "INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING", "INTERMEDIATE_TABLE_BASE_TABLE_REMOVED", "INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED", "INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER", "INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED"], # required
     #               message: "String", # required
     #             }
     #           ],
@@ -3058,7 +4008,14 @@ module Aws::CleanRooms
     #               id_namespace_association_id: "String", # required
     #               type: "SOURCE" # One of: ["SOURCE", "TARGET"], # required
     #             }
-    #           ]
+    #           ],
+    #           id_mapping_table_id: "UUID"
+    #         },
+    #         intermediate_table: {
+    #           intermediate_table_id: "UUID", # required
+    #         },
+    #         configured_table_association: {
+    #           configured_table_association_id: "UUID", # required
     #         }
     #       }
     #     }
@@ -3133,10 +4090,30 @@ module Aws::CleanRooms
     #             differential_privacy: {
     #               columns: [ # required
     #                 {
-    #                   name: "String", # required
+    #                   name: "ColumnName", # required
     #                 }
     #               ]
-    #             }
+    #             },
+    #             aggregation_thresholds: [
+    #               {
+    #                 identity_columns: ["AnalysisRuleColumnName"], # required
+    #                 minimum_identity_count: 1, # required
+    #                 type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                 output_column_thresholds: [
+    #                   {
+    #                     output_column_name: "AnalysisRuleColumnName", # required
+    #                     minimum_identity_count: 1, # required
+    #                   }
+    #                 ],
+    #                 allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #               }
+    #             ],
+    #             comparison_controls: {
+    #               allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #               allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             },
+    #             allowed_result_receivers: ["AccountId"],
+    #             allowed_additional_analyses: ["AdditionalAnalysesResourceArn"]
     #           },
     #           id_mapping_table: {
     #             join_columns: ["AnalysisRuleColumnName"], # required
@@ -3211,9 +4188,27 @@ module Aws::CleanRooms
     #             differential_privacy: {
     #               columns: [ # required
     #                 {
-    #                   name: "String", # required
+    #                   name: "ColumnName", # required
     #                 }
     #               ]
+    #             },
+    #             aggregation_thresholds: [
+    #               {
+    #                 identity_columns: ["AnalysisRuleColumnName"], # required
+    #                 minimum_identity_count: 1, # required
+    #                 type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                 output_column_thresholds: [
+    #                   {
+    #                     output_column_name: "AnalysisRuleColumnName", # required
+    #                     minimum_identity_count: 1, # required
+    #                   }
+    #                 ],
+    #                 allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #               }
+    #             ],
+    #             comparison_controls: {
+    #               allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #               allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
     #             },
     #             allowed_result_receivers: ["AccountId"],
     #             allowed_additional_analyses: ["AdditionalAnalysesResourceArn"]
@@ -3225,6 +4220,48 @@ module Aws::CleanRooms
     # @return [Types::GetSchemaAnalysisRuleOperationOutput]
     def get_schema_analysis_rule(params = {}, options = {})
       request = build_request(:get_schema_analysis_rule, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists analysis log exports, sorted by the most recent export. Results are paginated. Use the <code>nextToken</code> parameter to retrieve additional results.</p>
+    # @param [Hash, Types::ListAnalysisLogExportsInput] params
+    # @option params [String] :membership_identifier
+    #   <p>A unique identifier for the membership to list analysis log exports for. Currently accepts the membership ID.</p>
+    # @option params [String] :analysis_identifier
+    #   <p>A filter on the unique identifier of the protected query that the analysis logs were exported for.</p>
+    # @option params [String] :status
+    #   <p>A filter on the status of the analysis log export.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a <code>nextToken</code> even if the <code>maxResults</code> value has not been met.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     analysis_identifier: "UUID",
+    #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "SUCCESS", "FAILED"],
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_analysis_log_exports(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "PaginationToken",
+    #     analysis_log_exports: [ # required
+    #       {
+    #         analysis_log_export_id: "AnalysisLogExportIdentifier", # required
+    #         analysis_id: "UUID", # required
+    #         analysis_type: "PROTECTED_QUERY" # One of: ["PROTECTED_QUERY"], # required
+    #         status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "SUCCESS", "FAILED"], # required
+    #         create_time: Time.now, # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListAnalysisLogExportsOutput]
+    def list_analysis_log_exports(params = {}, options = {})
+      request = build_request(:list_analysis_log_exports, params)
       request.send_request(options)
     end
 
@@ -3259,7 +4296,8 @@ module Aws::CleanRooms
     #         membership_id: "UUID", # required
     #         collaboration_arn: "CollaborationArn", # required
     #         collaboration_id: "UUID", # required
-    #         description: "ResourceDescription"
+    #         description: "ResourceDescription",
+    #         is_synthetic_data: false
     #       }
     #     ]
     #   }
@@ -3299,7 +4337,8 @@ module Aws::CleanRooms
     #         collaboration_arn: "CollaborationArn", # required
     #         collaboration_id: "UUID", # required
     #         creator_account_id: "AccountId", # required
-    #         description: "ResourceDescription"
+    #         description: "ResourceDescription",
+    #         is_synthetic_data: false
     #       }
     #     ]
     #   }
@@ -3341,18 +4380,48 @@ module Aws::CleanRooms
     #         is_auto_approved: false, # required
     #         changes: [ # required
     #           {
-    #             specification_type: "MEMBER" # One of: ["MEMBER"], # required
+    #             specification_type: "MEMBER" # One of: ["MEMBER", "COLLABORATION"], # required
     #             specification: { # required
     #               # One of:
     #               member: {
     #                 account_id: "AccountId", # required
-    #                 member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #                 member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
+    #                 ml_member_abilities: {
+    #                   custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
+    #                 },
+    #                 payment_configuration: {
+    #                   query_compute: { # required
+    #                     is_responsible: false, # required
+    #                   },
+    #                   machine_learning: {
+    #                     model_training: {
+    #                       is_responsible: false, # required
+    #                     },
+    #                     model_inference: {
+    #                       is_responsible: false, # required
+    #                     },
+    #                     synthetic_data_generation: {
+    #                       is_responsible: false, # required
+    #                     }
+    #                   },
+    #                   job_compute: {
+    #                     is_responsible: false, # required
+    #                   }
+    #                 },
     #                 display_name: "DisplayName"
+    #               },
+    #               collaboration: {
+    #                 auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]]
     #               }
     #             },
-    #             types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]], # required
+    #             types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]], # required
     #           }
-    #         ]
+    #         ],
+    #         approvals: {
+    #           "AccountId" => {
+    #             status: "APPROVED" # One of: ["APPROVED", "DENIED", "PENDING"], # required
+    #           }
+    #         }
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -3815,6 +4884,92 @@ module Aws::CleanRooms
       request.send_request(options)
     end
 
+    # <p>Lists the version history of an intermediate table. Each call to <code>PopulateIntermediateTable</code> creates a new version. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>
+    # @param [Hash, Types::ListIntermediateTableVersionsInput] params
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    # @option params [String] :intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table for which to list versions.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a <code>nextToken</code> even if the <code>maxResults</code> value has not been met.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     intermediate_table_identifier: "IntermediateTableIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_intermediate_table_versions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     intermediate_table_version_summaries: [ # required
+    #       {
+    #         version_id: "UUID", # required
+    #         table_id: "IntermediateTableIdentifier", # required
+    #         create_time: Time.now, # required
+    #         analysis_id: "AnalysisIdentifier", # required
+    #         status: "POPULATE_STARTED" # One of: ["POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "RETENTION_PERIOD_EXPIRED"], # required
+    #         analysis_type: "QUERY" # One of: ["QUERY"], # required
+    #         kms_key_arn: "KMSKeyArn",
+    #         expiration_time: Time.now
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListIntermediateTableVersionsOutput]
+    def list_intermediate_table_versions(params = {}, options = {})
+      request = build_request(:list_intermediate_table_versions, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists intermediate tables owned by the caller in a membership. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>
+    # @param [Hash, Types::ListIntermediateTablesInput] params
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership for which to list intermediate tables.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results that are returned for an API request call. The service chooses a default number if you don't set one. The service might return a <code>nextToken</code> even if the <code>maxResults</code> value has not been met.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_intermediate_tables(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     intermediate_table_summaries: [ # required
+    #       {
+    #         id: "UUID", # required
+    #         arn: "IntermediateTableArn", # required
+    #         name: "DisplayName", # required
+    #         description: "ResourceDescription",
+    #         membership_arn: "MembershipArn", # required
+    #         membership_id: "UUID", # required
+    #         collaboration_arn: "CollaborationArn", # required
+    #         collaboration_id: "UUID", # required
+    #         create_time: Time.now, # required
+    #         update_time: Time.now, # required
+    #         status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"], # required
+    #         retention_in_days: 1,
+    #         analysis_rule_types: ["CUSTOM" # One of: ["CUSTOM"]]
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListIntermediateTablesOutput]
+    def list_intermediate_tables(params = {}, options = {})
+      request = build_request(:list_intermediate_tables, params)
+      request.send_request(options)
+    end
+
     # <p>Lists all members within a collaboration.</p>
     # @param [Hash, Types::ListMembersOperationInput] params
     # @option params [String] :collaboration_identifier
@@ -3840,7 +4995,7 @@ module Aws::CleanRooms
     #         account_id: "AccountId", # required
     #         status: "MemberStatus", # required
     #         display_name: "DisplayName", # required
-    #         abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #         abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
     #         ml_abilities: {
     #           custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
     #         },
@@ -3857,6 +5012,9 @@ module Aws::CleanRooms
     #               is_responsible: false, # required
     #             },
     #             model_inference: {
+    #               is_responsible: false, # required
+    #             },
+    #             synthetic_data_generation: {
     #               is_responsible: false, # required
     #             }
     #           },
@@ -3905,7 +5063,7 @@ module Aws::CleanRooms
     #         create_time: Time.now, # required
     #         update_time: Time.now, # required
     #         status: "MembershipStatus", # required
-    #         member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #         member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
     #         ml_member_abilities: {
     #           custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
     #         },
@@ -3918,6 +5076,9 @@ module Aws::CleanRooms
     #               is_responsible: false, # required
     #             },
     #             model_inference: {
+    #               is_responsible: false, # required
+    #             },
+    #             synthetic_data_generation: {
     #               is_responsible: false, # required
     #             }
     #           },
@@ -4088,7 +5249,8 @@ module Aws::CleanRooms
     #               }
     #             }
     #           }
-    #         ]
+    #         ],
+    #         job_compute_payer_account_id: "AccountId"
     #       }
     #     ]
     #   }
@@ -4138,7 +5300,13 @@ module Aws::CleanRooms
     #               }
     #             }
     #           }
-    #         ]
+    #         ],
+    #         query_compute_payer_account_id: "AccountId",
+    #         intermediate_table_configuration: {
+    #           id: "UUID", # required
+    #           arn: "IntermediateTableArn", # required
+    #           name: "DisplayName", # required
+    #         }
     #       }
     #     ]
     #   }
@@ -4161,7 +5329,7 @@ module Aws::CleanRooms
     # @example Request syntax with placeholder values
     #   params = {
     #     collaboration_identifier: "CollaborationIdentifier", # required
-    #     schema_type: "TABLE" # One of: ["TABLE", "ID_MAPPING_TABLE"],
+    #     schema_type: "TABLE" # One of: ["TABLE", "ID_MAPPING_TABLE", "INTERMEDIATE_TABLE"],
     #     next_token: "PaginationToken",
     #     max_results: 1
     #   }
@@ -4173,7 +5341,7 @@ module Aws::CleanRooms
     #     schema_summaries: [ # required
     #       {
     #         name: "TableAlias", # required
-    #         type: "TABLE" # One of: ["TABLE", "ID_MAPPING_TABLE"], # required
+    #         type: "TABLE" # One of: ["TABLE", "ID_MAPPING_TABLE", "INTERMEDIATE_TABLE"], # required
     #         creator_account_id: "AccountId", # required
     #         create_time: Time.now, # required
     #         update_time: Time.now, # required
@@ -4243,6 +5411,55 @@ module Aws::CleanRooms
       request.send_request(options)
     end
 
+    # <p>Runs the stored query of an intermediate table and makes the results available for querying. Each call creates a new version. Use <code>GetProtectedQuery</code> with the returned analysis ID to track progress. Only the intermediate table owner can call this operation.</p>
+    # @param [Hash, Types::PopulateIntermediateTableInput] params
+    # @option params [String] :intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table to populate.</p>
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    # @option params [Hash<String, String>] :parameters
+    #   <p>The runtime parameter values that override the defaults in the stored query.</p>
+    # @option params [Types::IntermediateTableComputeConfiguration] :compute_configuration
+    #   <p>The compute configuration for the population query execution.</p>
+    # @option params [String] :analysis_payer_account_id
+    #   <p>The account ID of the member that pays for the analysis compute costs.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     intermediate_table_identifier: "IntermediateTableIdentifier", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     parameters: {
+    #       "ParameterName" => "ParameterValue"
+    #     },
+    #     compute_configuration: {
+    #       # One of:
+    #       query_compute_configuration: {
+    #         type: "CR.1X" # One of: ["CR.1X", "CR.4X", "CR.8X"],
+    #         number: 1,
+    #         properties: {
+    #           # One of:
+    #           spark: {
+    #             "SparkPropertyKey" => "SparkPropertyValue"
+    #           }
+    #         }
+    #       }
+    #     },
+    #     analysis_payer_account_id: "AccountId"
+    #   }
+    #   options = {}
+    #   response = client.populate_intermediate_table(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     analysis_id: "AnalysisIdentifier", # required
+    #     analysis_type: "QUERY" # One of: ["QUERY"], # required
+    #     version_id: "UUID", # required
+    #   }
+    # @return [Types::PopulateIntermediateTableOutput]
+    def populate_intermediate_table(params = {}, options = {})
+      request = build_request(:populate_intermediate_table, params)
+      request.send_request(options)
+    end
+
     # <p>An estimate of the number of aggregation functions that the member who can query can run given epsilon and noise parameters.</p>
     # @param [Hash, Types::PreviewPrivacyImpactInput] params
     # @option params [String] :membership_identifier
@@ -4283,6 +5500,63 @@ module Aws::CleanRooms
       request.send_request(options)
     end
 
+    # <p>Starts an export of the Apache Spark logs for a protected query to an Amazon S3 bucket that you own. Use the exported logs to diagnose a query that failed or that ran more slowly than you expected.</p> <p>Clean Rooms exports a redacted copy of the Spark logs instead of the raw logs. Analyze the exported logs with the tooling of your choice, such as Spark History Server. For details about what the exported logs contain, see <a href="https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs-contents.html">https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs-contents.html</a>.</p> <p>The export runs asynchronously and returns with a <code>status</code> of <code>IN_PROGRESS</code>. Call <code>GetAnalysisLogExport</code> to poll for the final status.</p> <important> <p>To use this operation, you must have the <code>CAN_EXPORT_QUERY_ANALYSIS_LOG</code> ability for your membership. You must also be the query runner or the query payer. Having the ability alone is not sufficient.</p> <p>The query must have reached a terminal state, and it must have reached the execution stage. A query that failed validation or that was canceled before it started produces no Spark logs.</p> <p>Log export isn't supported for queries that use differential privacy, and isn't supported for PySpark jobs.</p> <p>The destination bucket must be in the same Amazon Web Services Region as the collaboration. Cross-Region export isn't supported.</p> </important> <p>For more information, see <a href="https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs.html">https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs.html</a>.</p>
+    # @param [Hash, Types::StartAnalysisLogExportInput] params
+    # @option params [String] :membership_identifier
+    #   <p>A unique identifier for the membership to export the analysis logs for. Currently accepts a membership ID.</p>
+    # @option params [String] :analysis_id
+    #   <p>The unique identifier of the protected query that you want to export the analysis logs for.</p>
+    # @option params [String] :analysis_type
+    #   <p>The type of analysis that the logs are exported for. Currently, only <code>PROTECTED_QUERY</code> is supported.</p>
+    # @option params [Types::AnalysisLogExportResultConfiguration] :result_configuration
+    #   <p>The details needed to write the exported analysis logs.</p> <p>You don't need to create an IAM role for log export. Clean Rooms writes the exported logs using your own identity, so Clean Rooms writes the exported logs only where your existing permissions allow.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     analysis_id: "UUID", # required
+    #     analysis_type: "PROTECTED_QUERY" # One of: ["PROTECTED_QUERY"], # required
+    #     result_configuration: { # required
+    #       output_configuration: { # required
+    #         s3: { # required
+    #           bucket: "String", # required
+    #           key_prefix: "KeyPrefix"
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.start_analysis_log_export(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     analysis_log_export: { # required
+    #       analysis_log_export_id: "AnalysisLogExportIdentifier", # required
+    #       analysis_id: "UUID", # required
+    #       analysis_type: "PROTECTED_QUERY" # One of: ["PROTECTED_QUERY"], # required
+    #       membership_id: "UUID", # required
+    #       status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "SUCCESS", "FAILED"], # required
+    #       result_configuration: { # required
+    #         output_configuration: { # required
+    #           s3: { # required
+    #             bucket: "String", # required
+    #             key_prefix: "KeyPrefix"
+    #           }
+    #         }
+    #       },
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #       error: {
+    #         code: "String", # required
+    #         message: "String", # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::StartAnalysisLogExportOutput]
+    def start_analysis_log_export(params = {}, options = {})
+      request = build_request(:start_analysis_log_export, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a protected job that is started by Clean Rooms.</p>
     # @param [Hash, Types::StartProtectedJobInput] params
     # @option params [String] :type
@@ -4295,12 +5569,17 @@ module Aws::CleanRooms
     #   <p>The details needed to write the job results.</p>
     # @option params [Types::ProtectedJobComputeConfiguration] :compute_configuration
     #   <p>The compute configuration for the protected job.</p>
+    # @option params [String] :job_compute_payer_account_id
+    #   <p>The account ID of the member that pays for the job compute costs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     type: "PYSPARK" # One of: ["PYSPARK"], # required
     #     membership_identifier: "MembershipIdentifier", # required
     #     job_parameters: { # required
-    #       analysis_template_arn: "AnalysisTemplateArn"
+    #       analysis_template_arn: "AnalysisTemplateArn", # required
+    #       parameters: {
+    #         "JobParameterName" => "JobParameterValue"
+    #       }
     #     },
     #     result_configuration: {
     #       output_configuration: { # required
@@ -4315,8 +5594,15 @@ module Aws::CleanRooms
     #       worker: {
     #         type: "CR.1X" # One of: ["CR.1X", "CR.4X"], # required
     #         number: 1, # required
+    #         properties: {
+    #           # One of:
+    #           spark: {
+    #             "SparkPropertyKey" => "SparkPropertyValue"
+    #           }
+    #         }
     #       }
-    #     }
+    #     },
+    #     job_compute_payer_account_id: "AccountId"
     #   }
     #   options = {}
     #   response = client.start_protected_job(params, options)
@@ -4329,7 +5615,10 @@ module Aws::CleanRooms
     #       membership_arn: "MembershipArn", # required
     #       create_time: Time.now, # required
     #       job_parameters: {
-    #         analysis_template_arn: "AnalysisTemplateArn"
+    #         analysis_template_arn: "AnalysisTemplateArn", # required
+    #         parameters: {
+    #           "JobParameterName" => "JobParameterValue"
+    #         }
     #       },
     #       status: "SUBMITTED" # One of: ["SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"], # required
     #       result_configuration: {
@@ -4372,8 +5661,15 @@ module Aws::CleanRooms
     #         worker: {
     #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"], # required
     #           number: 1, # required
+    #           properties: {
+    #             # One of:
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue"
+    #             }
+    #           }
     #         }
-    #       }
+    #       },
+    #       job_compute_payer_account_id: "AccountId"
     #     }
     #   }
     # @return [Types::StartProtectedJobOutput]
@@ -4394,6 +5690,8 @@ module Aws::CleanRooms
     #   <p>The details needed to write the query results.</p>
     # @option params [Types::ComputeConfiguration] :compute_configuration
     #   <p> The compute configuration for the protected query.</p>
+    # @option params [String] :query_compute_payer_account_id
+    #   <p>The account ID of the member that pays for the query compute costs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     type: "ProtectedQueryType", # required
@@ -4409,7 +5707,7 @@ module Aws::CleanRooms
     #       output_configuration: { # required
     #         # One of:
     #         s3: {
-    #           result_format: "ResultFormat", # required
+    #           result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #           bucket: "String", # required
     #           key_prefix: "KeyPrefix",
     #           single_file_output: false
@@ -4421,7 +5719,7 @@ module Aws::CleanRooms
     #           locations: [{ # required
     #             # One of:
     #             s3: {
-    #               result_format: "ResultFormat", # required
+    #               result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #               bucket: "String", # required
     #               key_prefix: "KeyPrefix",
     #               single_file_output: false
@@ -4430,16 +5728,28 @@ module Aws::CleanRooms
     #               account_id: "AccountId", # required
     #             }
     #           }]
+    #         },
+    #         intermediate_table: {
+    #           id: "UUID", # required
+    #           arn: "IntermediateTableArn", # required
+    #           name: "DisplayName", # required
     #         }
     #       }
     #     },
     #     compute_configuration: {
     #       # One of:
     #       worker: {
-    #         type: "CR.1X" # One of: ["CR.1X", "CR.4X"],
-    #         number: 1
+    #         type: "CR.1X" # One of: ["CR.1X", "CR.4X", "CR.8X"],
+    #         number: 1,
+    #         properties: {
+    #           # One of:
+    #           spark: {
+    #             "SparkPropertyKey" => "SparkPropertyValue"
+    #           }
+    #         }
     #       }
-    #     }
+    #     },
+    #     query_compute_payer_account_id: "AccountId"
     #   }
     #   options = {}
     #   response = client.start_protected_query(params, options)
@@ -4463,7 +5773,7 @@ module Aws::CleanRooms
     #         output_configuration: { # required
     #           # One of:
     #           s3: {
-    #             result_format: "ResultFormat", # required
+    #             result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #             bucket: "String", # required
     #             key_prefix: "KeyPrefix",
     #             single_file_output: false
@@ -4475,7 +5785,7 @@ module Aws::CleanRooms
     #             locations: [{ # required
     #               # One of:
     #               s3: {
-    #                 result_format: "ResultFormat", # required
+    #                 result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #                 bucket: "String", # required
     #                 key_prefix: "KeyPrefix",
     #                 single_file_output: false
@@ -4484,6 +5794,11 @@ module Aws::CleanRooms
     #                 account_id: "AccountId", # required
     #               }
     #             }]
+    #           },
+    #           intermediate_table: {
+    #             id: "UUID", # required
+    #             arn: "IntermediateTableArn", # required
+    #             name: "DisplayName", # required
     #           }
     #         }
     #       },
@@ -4534,10 +5849,17 @@ module Aws::CleanRooms
     #       compute_configuration: {
     #         # One of:
     #         worker: {
-    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"],
-    #           number: 1
+    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X", "CR.8X"],
+    #           number: 1,
+    #           properties: {
+    #             # One of:
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue"
+    #             }
+    #           }
     #         }
-    #       }
+    #       },
+    #       query_compute_payer_account_id: "AccountId"
     #     }
     #   }
     # @return [Types::StartProtectedQueryOperationOutput]
@@ -4680,6 +6002,22 @@ module Aws::CleanRooms
     #       ],
     #       error_message_configuration: {
     #         type: "DETAILED" # One of: ["DETAILED"], # required
+    #       },
+    #       synthetic_data_parameters: {
+    #         # One of:
+    #         ml_synthetic_data_parameters: {
+    #           epsilon: 1.0, # required
+    #           max_membership_inference_attack_score: 1.0, # required
+    #           column_classification: { # required
+    #             column_mapping: [ # required
+    #               {
+    #                 column_name: "SyntheticDataColumnName", # required
+    #                 column_type: "CATEGORICAL" # One of: ["CATEGORICAL", "NUMERICAL"], # required
+    #                 is_predictive_value: false, # required
+    #               }
+    #             ]
+    #           }
+    #         }
     #       }
     #     }
     #   }
@@ -4732,13 +6070,92 @@ module Aws::CleanRooms
     #       query_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       job_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
-    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]],
-    #       allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]]
+    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]],
+    #       allowed_result_regions: ["us-west-1" # One of: ["us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"]],
+    #       is_metrics_enabled: false
     #     }
     #   }
     # @return [Types::UpdateCollaborationOperationOutput]
     def update_collaboration(params = {}, options = {})
       request = build_request(:update_collaboration, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an existing collaboration change request. This operation allows approval actions for pending change requests in collaborations (APPROVE, DENY, CANCEL, COMMIT).</p> <p>For change requests without automatic approval, a member in the collaboration can manually APPROVE or DENY a change request. The collaboration owner can manually CANCEL or COMMIT a change request.</p>
+    # @param [Hash, Types::UpdateCollaborationChangeRequestInput] params
+    # @option params [String] :collaboration_identifier
+    #   <p>The unique identifier of the collaboration that contains the change request to be updated.</p>
+    # @option params [String] :change_request_identifier
+    #   <p>The unique identifier of the specific change request to be updated within the collaboration.</p>
+    # @option params [String] :action
+    #   <p>The action to perform on the change request. Valid values include APPROVE (approve the change), DENY (reject the change), CANCEL (cancel the request), and COMMIT (commit after the request is approved).</p> <p>For change requests without automatic approval, a member in the collaboration can manually APPROVE or DENY a change request. The collaboration owner can manually CANCEL or COMMIT a change request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     change_request_identifier: "CollaborationChangeRequestIdentifier", # required
+    #     action: "APPROVE" # One of: ["APPROVE", "DENY", "CANCEL", "COMMIT"], # required
+    #   }
+    #   options = {}
+    #   response = client.update_collaboration_change_request(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     collaboration_change_request: { # required
+    #       id: "UUID", # required
+    #       collaboration_id: "UUID", # required
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #       status: "PENDING" # One of: ["PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"], # required
+    #       is_auto_approved: false, # required
+    #       changes: [ # required
+    #         {
+    #           specification_type: "MEMBER" # One of: ["MEMBER", "COLLABORATION"], # required
+    #           specification: { # required
+    #             # One of:
+    #             member: {
+    #               account_id: "AccountId", # required
+    #               member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
+    #               ml_member_abilities: {
+    #                 custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
+    #               },
+    #               payment_configuration: {
+    #                 query_compute: { # required
+    #                   is_responsible: false, # required
+    #                 },
+    #                 machine_learning: {
+    #                   model_training: {
+    #                     is_responsible: false, # required
+    #                   },
+    #                   model_inference: {
+    #                     is_responsible: false, # required
+    #                   },
+    #                   synthetic_data_generation: {
+    #                     is_responsible: false, # required
+    #                   }
+    #                 },
+    #                 job_compute: {
+    #                   is_responsible: false, # required
+    #                 }
+    #               },
+    #               display_name: "DisplayName"
+    #             },
+    #             collaboration: {
+    #               auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]]
+    #             }
+    #           },
+    #           types: ["ADD_MEMBER" # One of: ["ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES", "ADD_PAYER_CANDIDATE", "REMOVE_PAYER_CANDIDATE", "GRANT_CAN_RECEIVE_MODEL_OUTPUT", "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT", "REVOKE_CAN_RECEIVE_MODEL_OUTPUT", "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT", "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY", "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"]], # required
+    #         }
+    #       ],
+    #       approvals: {
+    #         "AccountId" => {
+    #           status: "APPROVED" # One of: ["APPROVED", "DENIED", "PENDING"], # required
+    #         }
+    #       }
+    #     }
+    #   }
+    # @return [Types::UpdateCollaborationChangeRequestOutput]
+    def update_collaboration_change_request(params = {}, options = {})
+      request = build_request(:update_collaboration_change_request, params)
       request.send_request(options)
     end
 
@@ -4835,6 +6252,7 @@ module Aws::CleanRooms
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
     #         table_name: "AthenaTableName", # required
+    #         catalog_name: "AthenaCatalogName"
     #       }
     #     },
     #     allowed_columns: ["ColumnName"],
@@ -4880,6 +6298,7 @@ module Aws::CleanRooms
     #           output_location: "AthenaOutputLocation",
     #           database_name: "AthenaDatabaseName", # required
     #           table_name: "AthenaTableName", # required
+    #           catalog_name: "AthenaCatalogName"
     #         }
     #       },
     #       create_time: Time.now, # required
@@ -4947,10 +6366,30 @@ module Aws::CleanRooms
     #           differential_privacy: {
     #             columns: [ # required
     #               {
-    #                 name: "String", # required
+    #                 name: "ColumnName", # required
     #               }
     #             ]
-    #           }
+    #           },
+    #           aggregation_thresholds: [
+    #             {
+    #               identity_columns: ["AnalysisRuleColumnName"], # required
+    #               minimum_identity_count: 1, # required
+    #               type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #               output_column_thresholds: [
+    #                 {
+    #                   output_column_name: "AnalysisRuleColumnName", # required
+    #                   minimum_identity_count: 1, # required
+    #                 }
+    #               ],
+    #               allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #             }
+    #           ],
+    #           comparison_controls: {
+    #             allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #           },
+    #           allowed_result_receivers: ["AccountId"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"]
     #         }
     #       }
     #     }
@@ -5002,10 +6441,30 @@ module Aws::CleanRooms
     #             differential_privacy: {
     #               columns: [ # required
     #                 {
-    #                   name: "String", # required
+    #                   name: "ColumnName", # required
     #                 }
     #               ]
-    #             }
+    #             },
+    #             aggregation_thresholds: [
+    #               {
+    #                 identity_columns: ["AnalysisRuleColumnName"], # required
+    #                 minimum_identity_count: 1, # required
+    #                 type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                 output_column_thresholds: [
+    #                   {
+    #                     output_column_name: "AnalysisRuleColumnName", # required
+    #                     minimum_identity_count: 1, # required
+    #                   }
+    #                 ],
+    #                 allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #               }
+    #             ],
+    #             comparison_controls: {
+    #               allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #               allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             },
+    #             allowed_result_receivers: ["AccountId"],
+    #             allowed_additional_analyses: ["AdditionalAnalysesResourceArn"]
     #           }
     #         }
     #       },
@@ -5055,6 +6514,15 @@ module Aws::CleanRooms
     #       analysis_rule_types: ["AGGREGATION" # One of: ["AGGREGATION", "LIST", "CUSTOM"]],
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
+    #       child_resources: [
+    #         {
+    #           resource_id: "UUID",
+    #           resource_type: "INTERMEDIATE_TABLE" # One of: ["INTERMEDIATE_TABLE"], # required
+    #           resource_name: "DisplayName", # required
+    #           owner_account_id: "AccountId", # required
+    #           resource_status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"]
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::UpdateConfiguredTableAssociationOperationOutput]
@@ -5180,7 +6648,16 @@ module Aws::CleanRooms
     #           }
     #         ]
     #       },
-    #       kms_key_arn: "KMSKeyArn"
+    #       kms_key_arn: "KMSKeyArn",
+    #       child_resources: [
+    #         {
+    #           resource_id: "UUID",
+    #           resource_type: "INTERMEDIATE_TABLE" # One of: ["INTERMEDIATE_TABLE"], # required
+    #           resource_name: "DisplayName", # required
+    #           owner_account_id: "AccountId", # required
+    #           resource_status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"]
+    #         }
+    #       ]
     #     }
     #   }
     # @return [Types::UpdateIdMappingTableOutput]
@@ -5246,6 +6723,267 @@ module Aws::CleanRooms
       request.send_request(options)
     end
 
+    # <p>Updates an intermediate table. You can update the description, KMS key ARN, and column types of existing columns. Only the intermediate table owner can call this operation.</p>
+    # @param [Hash, Types::UpdateIntermediateTableInput] params
+    # @option params [String] :intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table to update.</p>
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    # @option params [String] :description
+    #   <p>A new description for the intermediate table.</p>
+    # @option params [String] :kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the customer-managed KMS key to use for encrypting future population data.</p>
+    # @option params [Array<Types::IntermediateTableColumn>] :columns
+    #   <p>The list of columns with updated type definitions. Only the type of existing columns can be updated.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     intermediate_table_identifier: "IntermediateTableIdentifier", # required
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     description: "ResourceDescription",
+    #     kms_key_arn: "KMSKeyArn",
+    #     columns: [
+    #       {
+    #         name: "ColumnName", # required
+    #         type: "IntermediateTableColumnTypeString", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.update_intermediate_table(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     intermediate_table: { # required
+    #       id: "UUID", # required
+    #       arn: "IntermediateTableArn", # required
+    #       name: "DisplayName", # required
+    #       description: "ResourceDescription",
+    #       membership_arn: "MembershipArn", # required
+    #       membership_id: "UUID", # required
+    #       collaboration_arn: "CollaborationArn", # required
+    #       collaboration_id: "UUID", # required
+    #       child_resources: [
+    #         {
+    #           resource_id: "UUID",
+    #           resource_type: "INTERMEDIATE_TABLE" # One of: ["INTERMEDIATE_TABLE"], # required
+    #           resource_name: "DisplayName", # required
+    #           owner_account_id: "AccountId", # required
+    #           resource_status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"]
+    #         }
+    #       ],
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #       status: "CREATED" # One of: ["CREATED", "POPULATE_STARTED", "POPULATE_SUCCESS", "POPULATE_FAILED", "DISALLOWED_BY_DATA_PROVIDER", "BASE_TABLE_REMOVED", "RETENTION_PERIOD_EXPIRED"], # required
+    #       status_reason: "String",
+    #       kms_key_arn: "KMSKeyArn",
+    #       population_analysis_configuration: { # required
+    #         # One of:
+    #         sql_parameters: {
+    #           query_string: "String",
+    #           analysis_template_arn: "AnalysisTemplateArn"
+    #         }
+    #       },
+    #       retention_in_days: 1,
+    #       table_dependencies: [
+    #         {
+    #           id: "UUID", # required
+    #           name: "DisplayName", # required
+    #           type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #           parent_type: "DIRECT" # One of: ["DIRECT", "INDIRECT"], # required
+    #           creator_account_id: "AccountId", # required
+    #         }
+    #       ],
+    #       intermediate_table_version: {
+    #         version_id: "UUID", # required
+    #         analysis_id: "AnalysisIdentifier", # required
+    #         analysis_type: "QUERY" # One of: ["QUERY"], # required
+    #         kms_key_arn: "KMSKeyArn",
+    #         parameters: {
+    #           "ParameterName" => "ParameterValue"
+    #         },
+    #         inherited_constraints: { # required
+    #           additional_analyses: {
+    #             value: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"], # required
+    #             sources: [ # required
+    #               {
+    #                 name: "DisplayName", # required
+    #                 id: "UUID", # required
+    #                 type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 value: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           },
+    #           allowed_additional_analyses: {
+    #             value: ["AdditionalAnalysesResourceArn"], # required
+    #             sources: [ # required
+    #               {
+    #                 name: "DisplayName", # required
+    #                 id: "UUID", # required
+    #                 type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 value: ["AdditionalAnalysesResourceArn"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           },
+    #           allowed_result_receivers: {
+    #             value: ["AccountId"], # required
+    #             sources: [ # required
+    #               {
+    #                 name: "DisplayName", # required
+    #                 id: "UUID", # required
+    #                 type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 value: ["AccountId"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           },
+    #           disallowed_output_columns: {
+    #             value: ["AnalysisRuleColumnName"], # required
+    #             column_lineage: [ # required
+    #               {
+    #                 column: "AnalysisRuleColumnName", # required
+    #                 source_column: "AnalysisRuleColumnName", # required
+    #                 source_name: "DisplayName", # required
+    #                 source_id: "UUID", # required
+    #                 source_type: "TABLE" # One of: ["TABLE", "INTERMEDIATE_TABLE", "ID_MAPPING_TABLE"], # required
+    #                 source_account_id: "AccountId", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         expiration_time: Time.now
+    #       },
+    #       analysis_rule_types: ["CUSTOM" # One of: ["CUSTOM"]],
+    #       schema: {
+    #         columns: [ # required
+    #           {
+    #             name: "ColumnName", # required
+    #             type: "ColumnTypeString", # required
+    #           }
+    #         ]
+    #       }
+    #     }
+    #   }
+    # @return [Types::UpdateIntermediateTableOutput]
+    def update_intermediate_table(params = {}, options = {})
+      request = build_request(:update_intermediate_table, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the analysis rule policy for an intermediate table. Only the intermediate table owner can call this operation.</p>
+    # @param [Hash, Types::UpdateIntermediateTableAnalysisRuleInput] params
+    # @option params [String] :membership_identifier
+    #   <p>The unique identifier of the membership that contains the intermediate table.</p>
+    # @option params [String] :intermediate_table_identifier
+    #   <p>The unique identifier of the intermediate table for which to update the analysis rule.</p>
+    # @option params [String] :analysis_rule_type
+    #   <p>The type of analysis rule to update. Currently, only <code>CUSTOM</code> is supported.</p>
+    # @option params [Types::IntermediateTableAnalysisRulePolicy] :analysis_rule_policy
+    #   <p>The updated analysis rule policy for the intermediate table.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     membership_identifier: "MembershipIdentifier", # required
+    #     intermediate_table_identifier: "IntermediateTableIdentifier", # required
+    #     analysis_rule_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #     analysis_rule_policy: { # required
+    #       # One of:
+    #       v1: {
+    #         # One of:
+    #         custom: {
+    #           allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"],
+    #           additional_analyses: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"],
+    #           allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #           allowed_analysis_providers: ["AccountId"],
+    #           allowed_result_receivers: ["AccountId"],
+    #           differential_privacy: {
+    #             columns: [ # required
+    #               {
+    #                 name: "ColumnName", # required
+    #               }
+    #             ]
+    #           },
+    #           disallowed_output_columns: ["AnalysisRuleColumnName"],
+    #           aggregation_thresholds: [
+    #             {
+    #               identity_columns: ["AnalysisRuleColumnName"], # required
+    #               minimum_identity_count: 1, # required
+    #               type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #               output_column_thresholds: [
+    #                 {
+    #                   output_column_name: "AnalysisRuleColumnName", # required
+    #                   minimum_identity_count: 1, # required
+    #                 }
+    #               ],
+    #               allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #             }
+    #           ],
+    #           comparison_controls: {
+    #             allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #           }
+    #         }
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_intermediate_table_analysis_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     analysis_rule: { # required
+    #       intermediate_table_identifier: "UUID", # required
+    #       intermediate_table_arn: "IntermediateTableArn", # required
+    #       analysis_rule_policy: { # required
+    #         # One of:
+    #         v1: {
+    #           # One of:
+    #           custom: {
+    #             allowed_analyses: ["AnalysisTemplateArnOrQueryWildcard"],
+    #             additional_analyses: "ALLOWED" # One of: ["ALLOWED", "REQUIRED", "NOT_ALLOWED"],
+    #             allowed_additional_analyses: ["AdditionalAnalysesResourceArn"],
+    #             allowed_analysis_providers: ["AccountId"],
+    #             allowed_result_receivers: ["AccountId"],
+    #             differential_privacy: {
+    #               columns: [ # required
+    #                 {
+    #                   name: "ColumnName", # required
+    #                 }
+    #               ]
+    #             },
+    #             disallowed_output_columns: ["AnalysisRuleColumnName"],
+    #             aggregation_thresholds: [
+    #               {
+    #                 identity_columns: ["AnalysisRuleColumnName"], # required
+    #                 minimum_identity_count: 1, # required
+    #                 type: "COUNT_DISTINCT" # One of: ["COUNT_DISTINCT"], # required
+    #                 output_column_thresholds: [
+    #                   {
+    #                     output_column_name: "AnalysisRuleColumnName", # required
+    #                     minimum_identity_count: 1, # required
+    #                   }
+    #                 ],
+    #                 allowed_aggregate_expression_type: "COLUMNS_ONLY" # One of: ["COLUMNS_ONLY", "ANY_EXPRESSION"], # required
+    #               }
+    #             ],
+    #             comparison_controls: {
+    #               allowed_literal_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #               allowed_column_comparison_columns: ["AnalysisRuleColumnName"], # required
+    #             }
+    #           }
+    #         }
+    #       },
+    #       analysis_rule_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #     }
+    #   }
+    # @return [Types::UpdateIntermediateTableAnalysisRuleOutput]
+    def update_intermediate_table_analysis_rule(params = {}, options = {})
+      request = build_request(:update_intermediate_table_analysis_rule, params)
+      request.send_request(options)
+    end
+
     # <p>Updates a membership.</p>
     # @param [Hash, Types::UpdateMembershipOperationInput] params
     # @option params [String] :membership_identifier
@@ -5258,6 +6996,8 @@ module Aws::CleanRooms
     #   <p>The default protected query result configuration as specified by the member who can receive results.</p>
     # @option params [Types::MembershipProtectedJobResultConfiguration] :default_job_result_configuration
     #   <p> The default job result configuration.</p>
+    # @option params [Types::UpdateMembershipPaymentConfiguration] :membership_payment_configuration
+    #   <p>The payment configuration to update for the membership.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     membership_identifier: "MembershipIdentifier", # required
@@ -5267,7 +7007,7 @@ module Aws::CleanRooms
     #       output_configuration: { # required
     #         # One of:
     #         s3: {
-    #           result_format: "ResultFormat", # required
+    #           result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #           bucket: "String", # required
     #           key_prefix: "KeyPrefix",
     #           single_file_output: false
@@ -5284,6 +7024,25 @@ module Aws::CleanRooms
     #         }
     #       },
     #       role_arn: "RoleArn", # required
+    #     },
+    #     membership_payment_configuration: {
+    #       query_compute: {
+    #         is_responsible: false, # required
+    #       },
+    #       machine_learning: {
+    #         model_training: {
+    #           is_responsible: false, # required
+    #         },
+    #         model_inference: {
+    #           is_responsible: false, # required
+    #         },
+    #         synthetic_data_generation: {
+    #           is_responsible: false, # required
+    #         }
+    #       },
+    #       job_compute: {
+    #         is_responsible: false, # required
+    #       }
     #     }
     #   }
     #   options = {}
@@ -5302,7 +7061,7 @@ module Aws::CleanRooms
     #       create_time: Time.now, # required
     #       update_time: Time.now, # required
     #       status: "MembershipStatus", # required
-    #       member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #       member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB", "CAN_EXPORT_QUERY_ANALYSIS_LOG"]], # required
     #       ml_member_abilities: {
     #         custom_ml_member_abilities: ["CAN_RECEIVE_MODEL_OUTPUT" # One of: ["CAN_RECEIVE_MODEL_OUTPUT", "CAN_RECEIVE_INFERENCE_OUTPUT"]], # required
     #       },
@@ -5312,7 +7071,7 @@ module Aws::CleanRooms
     #         output_configuration: { # required
     #           # One of:
     #           s3: {
-    #             result_format: "ResultFormat", # required
+    #             result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #             bucket: "String", # required
     #             key_prefix: "KeyPrefix",
     #             single_file_output: false
@@ -5340,12 +7099,16 @@ module Aws::CleanRooms
     #           },
     #           model_inference: {
     #             is_responsible: false, # required
+    #           },
+    #           synthetic_data_generation: {
+    #             is_responsible: false, # required
     #           }
     #         },
     #         job_compute: {
     #           is_responsible: false, # required
     #         }
-    #       }
+    #       },
+    #       is_metrics_enabled: false
     #     }
     #   }
     # @return [Types::UpdateMembershipOperationOutput]
@@ -5452,7 +7215,10 @@ module Aws::CleanRooms
     #       membership_arn: "MembershipArn", # required
     #       create_time: Time.now, # required
     #       job_parameters: {
-    #         analysis_template_arn: "AnalysisTemplateArn"
+    #         analysis_template_arn: "AnalysisTemplateArn", # required
+    #         parameters: {
+    #           "JobParameterName" => "JobParameterValue"
+    #         }
     #       },
     #       status: "SUBMITTED" # One of: ["SUBMITTED", "STARTED", "CANCELLED", "CANCELLING", "FAILED", "SUCCESS"], # required
     #       result_configuration: {
@@ -5495,8 +7261,15 @@ module Aws::CleanRooms
     #         worker: {
     #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"], # required
     #           number: 1, # required
+    #           properties: {
+    #             # One of:
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue"
+    #             }
+    #           }
     #         }
-    #       }
+    #       },
+    #       job_compute_payer_account_id: "AccountId"
     #     }
     #   }
     # @return [Types::UpdateProtectedJobOutput]
@@ -5541,7 +7314,7 @@ module Aws::CleanRooms
     #         output_configuration: { # required
     #           # One of:
     #           s3: {
-    #             result_format: "ResultFormat", # required
+    #             result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #             bucket: "String", # required
     #             key_prefix: "KeyPrefix",
     #             single_file_output: false
@@ -5553,7 +7326,7 @@ module Aws::CleanRooms
     #             locations: [{ # required
     #               # One of:
     #               s3: {
-    #                 result_format: "ResultFormat", # required
+    #                 result_format: "CSV" # One of: ["CSV", "PARQUET"], # required
     #                 bucket: "String", # required
     #                 key_prefix: "KeyPrefix",
     #                 single_file_output: false
@@ -5562,6 +7335,11 @@ module Aws::CleanRooms
     #                 account_id: "AccountId", # required
     #               }
     #             }]
+    #           },
+    #           intermediate_table: {
+    #             id: "UUID", # required
+    #             arn: "IntermediateTableArn", # required
+    #             name: "DisplayName", # required
     #           }
     #         }
     #       },
@@ -5612,10 +7390,17 @@ module Aws::CleanRooms
     #       compute_configuration: {
     #         # One of:
     #         worker: {
-    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"],
-    #           number: 1
+    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X", "CR.8X"],
+    #           number: 1,
+    #           properties: {
+    #             # One of:
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue"
+    #             }
+    #           }
     #         }
-    #       }
+    #       },
+    #       query_compute_payer_account_id: "AccountId"
     #     }
     #   }
     # @return [Types::UpdateProtectedQueryOperationOutput]

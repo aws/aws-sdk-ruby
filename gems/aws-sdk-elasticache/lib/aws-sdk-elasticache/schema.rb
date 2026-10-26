@@ -83,6 +83,7 @@ module Aws::ElastiCache
     CompleteMigrationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#CompleteMigrationMessage", name: "CompleteMigrationMessage")
     CompleteMigrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#CompleteMigrationResponse", name: "CompleteMigrationResponse")
     ConfigureShard = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#ConfigureShard", name: "ConfigureShard")
+    ConnectionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticache#ConnectionType", name: "ConnectionType")
     CopyServerlessCacheSnapshotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#CopyServerlessCacheSnapshotRequest", name: "CopyServerlessCacheSnapshotRequest")
     CopyServerlessCacheSnapshotResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#CopyServerlessCacheSnapshotResponse", name: "CopyServerlessCacheSnapshotResponse")
     CopySnapshotMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#CopySnapshotMessage", name: "CopySnapshotMessage")
@@ -172,9 +173,11 @@ module Aws::ElastiCache
     DisassociateGlobalReplicationGroupResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#DisassociateGlobalReplicationGroupResult", name: "DisassociateGlobalReplicationGroupResult")
     Double = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.elasticache#Double", name: "Double")
     DuplicateUserNameFault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#DuplicateUserNameFault", name: "DuplicateUserNameFault", traits: {"aws.protocols#awsQueryError" => {"code" => "DuplicateUserName", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    Durability = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticache#Durability", name: "Durability")
     EC2SecurityGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#EC2SecurityGroup", name: "EC2SecurityGroup")
     EC2SecurityGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticache#EC2SecurityGroupList", name: "EC2SecurityGroupList")
     ECPUPerSecond = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#ECPUPerSecond", name: "ECPUPerSecond")
+    EffectiveDurability = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticache#EffectiveDurability", name: "EffectiveDurability")
     Endpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#Endpoint", name: "Endpoint")
     EngineDefaults = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#EngineDefaults", name: "EngineDefaults")
     EngineType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticache#EngineType", name: "EngineType", traits: {"smithy.api#pattern" => "^[a-zA-Z]*$"})
@@ -375,6 +378,7 @@ module Aws::ElastiCache
     SourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticache#SourceType", name: "SourceType")
     StartMigrationMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#StartMigrationMessage", name: "StartMigrationMessage")
     StartMigrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#StartMigrationResponse", name: "StartMigrationResponse")
+    StorageEncryptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticache#StorageEncryptionType", name: "StorageEncryptionType")
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticache#String", name: "String")
     Subnet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticache#Subnet", name: "Subnet")
     SubnetIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticache#SubnetIdentifierList", name: "SubnetIdentifierList")
@@ -655,6 +659,8 @@ module Aws::ElastiCache
     ConfigureShard.add_member(:preferred_availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferredAvailabilityZoneList, name: "PreferredAvailabilityZones"))
     ConfigureShard.add_member(:preferred_outpost_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferredOutpostArnList, name: "PreferredOutpostArns"))
     ConfigureShard.type = Types::ConfigureShard
+    ConnectionType.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC", traits: {"smithy.api#enumValue" => "vpc"}))
+    ConnectionType.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLIC", traits: {"smithy.api#enumValue" => "public"}))
     CopyServerlessCacheSnapshotRequest.add_member(:source_serverless_cache_snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceServerlessCacheSnapshotName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CopyServerlessCacheSnapshotRequest.add_member(:target_serverless_cache_snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetServerlessCacheSnapshotName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CopyServerlessCacheSnapshotRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
@@ -726,6 +732,7 @@ module Aws::ElastiCache
     CreateGlobalReplicationGroupMessage.add_member(:global_replication_group_id_suffix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalReplicationGroupIdSuffix", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateGlobalReplicationGroupMessage.add_member(:global_replication_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GlobalReplicationGroupDescription"))
     CreateGlobalReplicationGroupMessage.add_member(:primary_replication_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrimaryReplicationGroupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateGlobalReplicationGroupMessage.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateGlobalReplicationGroupMessage.type = Types::CreateGlobalReplicationGroupMessage
     CreateGlobalReplicationGroupResult.add_member(:global_replication_group, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalReplicationGroup, name: "GlobalReplicationGroup"))
     CreateGlobalReplicationGroupResult.type = Types::CreateGlobalReplicationGroupResult
@@ -768,6 +775,7 @@ module Aws::ElastiCache
     CreateReplicationGroupMessage.add_member(:transit_encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitEncryptionMode, name: "TransitEncryptionMode"))
     CreateReplicationGroupMessage.add_member(:cluster_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterMode, name: "ClusterMode"))
     CreateReplicationGroupMessage.add_member(:serverless_cache_snapshot_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServerlessCacheSnapshotName"))
+    CreateReplicationGroupMessage.add_member(:durability, ::Smithy::Schema::Shapes::MemberShape.new(target: Durability, name: "Durability"))
     CreateReplicationGroupMessage.type = Types::CreateReplicationGroupMessage
     CreateReplicationGroupResult.add_member(:replication_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroup, name: "ReplicationGroup"))
     CreateReplicationGroupResult.type = Types::CreateReplicationGroupResult
@@ -784,6 +792,8 @@ module Aws::ElastiCache
     CreateServerlessCacheRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdsList, name: "SubnetIds"))
     CreateServerlessCacheRequest.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "SnapshotRetentionLimit"))
     CreateServerlessCacheRequest.add_member(:daily_snapshot_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DailySnapshotTime"))
+    CreateServerlessCacheRequest.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "NetworkType"))
+    CreateServerlessCacheRequest.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "ConnectionType"))
     CreateServerlessCacheRequest.type = Types::CreateServerlessCacheRequest
     CreateServerlessCacheResponse.add_member(:serverless_cache, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessCache, name: "ServerlessCache"))
     CreateServerlessCacheResponse.type = Types::CreateServerlessCacheResponse
@@ -1075,6 +1085,10 @@ module Aws::ElastiCache
     DisassociateGlobalReplicationGroupResult.type = Types::DisassociateGlobalReplicationGroupResult
     DuplicateUserNameFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     DuplicateUserNameFault.type = Types::DuplicateUserNameFault
+    Durability.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
+    Durability.add_member(:async, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASYNC", traits: {"smithy.api#enumValue" => "async"}))
+    Durability.add_member(:sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNC", traits: {"smithy.api#enumValue" => "sync"}))
+    Durability.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
     EC2SecurityGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     EC2SecurityGroup.add_member(:ec2_security_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EC2SecurityGroupName"))
     EC2SecurityGroup.add_member(:ec2_security_group_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EC2SecurityGroupOwnerId"))
@@ -1083,6 +1097,9 @@ module Aws::ElastiCache
     ECPUPerSecond.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Maximum"))
     ECPUPerSecond.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "Minimum"))
     ECPUPerSecond.type = Types::ECPUPerSecond
+    EffectiveDurability.add_member(:async, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASYNC", traits: {"smithy.api#enumValue" => "async"}))
+    EffectiveDurability.add_member(:sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNC", traits: {"smithy.api#enumValue" => "sync"}))
+    EffectiveDurability.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "disabled"}))
     Endpoint.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Address"))
     Endpoint.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Port"))
     Endpoint.type = Types::Endpoint
@@ -1317,6 +1334,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:transit_encryption_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "TransitEncryptionEnabled"))
     ModifyReplicationGroupMessage.add_member(:transit_encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitEncryptionMode, name: "TransitEncryptionMode"))
     ModifyReplicationGroupMessage.add_member(:cluster_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterMode, name: "ClusterMode"))
+    ModifyReplicationGroupMessage.add_member(:durability, ::Smithy::Schema::Shapes::MemberShape.new(target: Durability, name: "Durability"))
     ModifyReplicationGroupMessage.type = Types::ModifyReplicationGroupMessage
     ModifyReplicationGroupResult.add_member(:replication_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroup, name: "ReplicationGroup"))
     ModifyReplicationGroupResult.type = Types::ModifyReplicationGroupResult
@@ -1553,6 +1571,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:at_rest_encryption_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: BooleanOptional, name: "AtRestEncryptionEnabled"))
     ReplicationGroup.add_member(:member_clusters_outpost_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroupOutpostArnList, name: "MemberClustersOutpostArns"))
     ReplicationGroup.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
+    ReplicationGroup.add_member(:storage_encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageEncryptionType, name: "StorageEncryptionType"))
     ReplicationGroup.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ARN"))
     ReplicationGroup.add_member(:user_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: UserGroupIdList, name: "UserGroupIds"))
     ReplicationGroup.add_member(:log_delivery_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryConfigurationList, name: "LogDeliveryConfigurations"))
@@ -1564,6 +1583,8 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:transit_encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitEncryptionMode, name: "TransitEncryptionMode"))
     ReplicationGroup.add_member(:cluster_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterMode, name: "ClusterMode"))
     ReplicationGroup.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Engine"))
+    ReplicationGroup.add_member(:durability, ::Smithy::Schema::Shapes::MemberShape.new(target: Durability, name: "Durability"))
+    ReplicationGroup.add_member(:effective_durability, ::Smithy::Schema::Shapes::MemberShape.new(target: EffectiveDurability, name: "EffectiveDurability"))
     ReplicationGroup.type = Types::ReplicationGroup
     ReplicationGroupAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReplicationGroupAlreadyExistsFault.type = Types::ReplicationGroupAlreadyExistsFault
@@ -1663,6 +1684,7 @@ module Aws::ElastiCache
     ServerlessCache.add_member(:full_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FullEngineVersion"))
     ServerlessCache.add_member(:cache_usage_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheUsageLimits, name: "CacheUsageLimits"))
     ServerlessCache.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
+    ServerlessCache.add_member(:storage_encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageEncryptionType, name: "StorageEncryptionType"))
     ServerlessCache.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIdsList, name: "SecurityGroupIds"))
     ServerlessCache.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "Endpoint"))
     ServerlessCache.add_member(:reader_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Endpoint, name: "ReaderEndpoint"))
@@ -1671,6 +1693,8 @@ module Aws::ElastiCache
     ServerlessCache.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIdsList, name: "SubnetIds"))
     ServerlessCache.add_member(:snapshot_retention_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerOptional, name: "SnapshotRetentionLimit"))
     ServerlessCache.add_member(:daily_snapshot_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DailySnapshotTime"))
+    ServerlessCache.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "NetworkType"))
+    ServerlessCache.add_member(:connection_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionType, name: "ConnectionType"))
     ServerlessCache.type = Types::ServerlessCache
     ServerlessCacheAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ServerlessCacheAlreadyExistsFault.type = Types::ServerlessCacheAlreadyExistsFault
@@ -1763,6 +1787,7 @@ module Aws::ElastiCache
     Snapshot.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KmsKeyId"))
     Snapshot.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ARN"))
     Snapshot.add_member(:data_tiering, ::Smithy::Schema::Shapes::MemberShape.new(target: DataTieringStatus, name: "DataTiering"))
+    Snapshot.add_member(:durability, ::Smithy::Schema::Shapes::MemberShape.new(target: Durability, name: "Durability"))
     Snapshot.type = Types::Snapshot
     SnapshotAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     SnapshotAlreadyExistsFault.type = Types::SnapshotAlreadyExistsFault
@@ -1788,6 +1813,9 @@ module Aws::ElastiCache
     StartMigrationMessage.type = Types::StartMigrationMessage
     StartMigrationResponse.add_member(:replication_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationGroup, name: "ReplicationGroup"))
     StartMigrationResponse.type = Types::StartMigrationResponse
+    StorageEncryptionType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "none"}))
+    StorageEncryptionType.add_member(:sse_elasticache, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSE_ELASTICACHE", traits: {"smithy.api#enumValue" => "sse-elasticache"}))
+    StorageEncryptionType.add_member(:sse_kms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSE_KMS", traits: {"smithy.api#enumValue" => "sse-kms"}))
     Subnet.add_member(:subnet_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "SubnetAvailabilityZone"))
     Subnet.add_member(:subnet_outpost, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetOutpost, name: "SubnetOutpost"))
@@ -1917,7 +1945,7 @@ module Aws::ElastiCache
       service.id = "com.amazonaws.elasticache#AmazonElastiCacheV9"
       service.name = "AmazonElastiCacheV9"
       service.version = "2015-02-02"
-      service.traits = {"aws.api#service" => {"sdkId" => "ElastiCache", "arnNamespace" => "elasticache", "cloudFormationName" => "ElastiCache", "cloudTrailEventSource" => "elasticache.amazonaws.com", "endpointPrefix" => "elasticache"}, "aws.auth#sigv4" => {"name" => "elasticache"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon ElastiCache", "smithy.api#xmlNamespace" => {"uri" => "http://elasticache.amazonaws.com/doc/2015-02-02/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "ElastiCache", "arnNamespace" => "elasticache", "cloudFormationName" => "ElastiCache", "cloudTrailEventSource" => "elasticache.amazonaws.com", "endpointPrefix" => "elasticache"}, "aws.auth#sigv4" => {"name" => "elasticache"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Amazon ElastiCache", "smithy.api#xmlNamespace" => {"uri" => "http://elasticache.amazonaws.com/doc/2015-02-02/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticache-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticache.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticache-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticache.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticache.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:add_tags_to_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elasticache#AddTagsToResource"
         operation.name = "AddTagsToResource"
@@ -1927,7 +1955,9 @@ module Aws::ElastiCache
         operation.errors << CacheParameterGroupNotFoundFault
         operation.errors << CacheSecurityGroupNotFoundFault
         operation.errors << CacheSubnetGroupNotFoundFault
+        operation.errors << GlobalReplicationGroupNotFoundFault
         operation.errors << InvalidARNFault
+        operation.errors << InvalidParameterValueException
         operation.errors << InvalidReplicationGroupStateFault
         operation.errors << InvalidServerlessCacheSnapshotStateFault
         operation.errors << InvalidServerlessCacheStateFault
@@ -2079,6 +2109,7 @@ module Aws::ElastiCache
         operation.errors << InvalidReplicationGroupStateFault
         operation.errors << ReplicationGroupNotFoundFault
         operation.errors << ServiceLinkedRoleNotFoundFault
+        operation.errors << TagQuotaPerResourceExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_replication_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -2629,7 +2660,9 @@ module Aws::ElastiCache
         operation.errors << CacheParameterGroupNotFoundFault
         operation.errors << CacheSecurityGroupNotFoundFault
         operation.errors << CacheSubnetGroupNotFoundFault
+        operation.errors << GlobalReplicationGroupNotFoundFault
         operation.errors << InvalidARNFault
+        operation.errors << InvalidParameterValueException
         operation.errors << InvalidReplicationGroupStateFault
         operation.errors << InvalidServerlessCacheSnapshotStateFault
         operation.errors << InvalidServerlessCacheStateFault
@@ -2817,7 +2850,9 @@ module Aws::ElastiCache
         operation.errors << CacheParameterGroupNotFoundFault
         operation.errors << CacheSecurityGroupNotFoundFault
         operation.errors << CacheSubnetGroupNotFoundFault
+        operation.errors << GlobalReplicationGroupNotFoundFault
         operation.errors << InvalidARNFault
+        operation.errors << InvalidParameterValueException
         operation.errors << InvalidReplicationGroupStateFault
         operation.errors << InvalidServerlessCacheSnapshotStateFault
         operation.errors << InvalidServerlessCacheStateFault

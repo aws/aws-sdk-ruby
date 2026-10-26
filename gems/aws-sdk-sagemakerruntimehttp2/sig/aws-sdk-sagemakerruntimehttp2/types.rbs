@@ -1,0 +1,192 @@
+module Aws::SageMakerRuntimeHTTP2
+  module Types
+
+    class InputValidationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    class InternalStreamFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvokeEndpointWithBidirectionalStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?body: Types::RequestStreamEvent,
+        ?target_variant: String,
+        ?model_invocation_path: String,
+        ?model_query_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor body: Types::RequestStreamEvent?
+      attr_accessor target_variant: String?
+      attr_accessor model_invocation_path: String?
+      attr_accessor model_query_string: String?
+    end
+
+    class InvokeEndpointWithBidirectionalStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: Types::ResponseStreamEvent,
+        ?invoked_production_variant: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: Types::ResponseStreamEvent?
+      attr_accessor invoked_production_variant: String?
+    end
+
+    class ModelError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?original_status_code: Integer,
+        ?original_message: String,
+        ?log_stream_arn: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor original_status_code: Integer?
+      attr_accessor original_message: String?
+      attr_accessor log_stream_arn: String?
+      attr_accessor error_code: String?
+    end
+
+    class ModelStreamError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    class RequestPayloadPart
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bytes: String,
+        ?data_type: String,
+        ?completion_state: String,
+        ?p: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes: String?
+      attr_accessor data_type: String?
+      attr_accessor completion_state: String?
+      attr_accessor p: String?
+    end
+
+    class RequestStreamEvent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?payload_part: Types::RequestPayloadPart,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload_part: Types::RequestPayloadPart?
+
+      class PayloadPart < RequestStreamEvent
+      end
+      class Unknown < RequestStreamEvent
+      end
+    end
+
+    class ResponsePayloadPart
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bytes: String,
+        ?data_type: String,
+        ?completion_state: String,
+        ?p: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes: String?
+      attr_accessor data_type: String?
+      attr_accessor completion_state: String?
+      attr_accessor p: String?
+    end
+
+    class ResponseStreamEvent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?payload_part: Types::ResponsePayloadPart,
+        ?model_stream_error: Types::ModelStreamError,
+        ?internal_stream_failure: Types::InternalStreamFailure,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload_part: Types::ResponsePayloadPart?
+      attr_accessor model_stream_error: Types::ModelStreamError?
+      attr_accessor internal_stream_failure: Types::InternalStreamFailure?
+
+      class PayloadPart < ResponseStreamEvent
+      end
+      class ModelStreamError < ResponseStreamEvent
+      end
+      class InternalStreamFailure < ResponseStreamEvent
+      end
+      class Unknown < ResponseStreamEvent
+      end
+    end
+
+    class ServiceUnavailableError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+  end
+end

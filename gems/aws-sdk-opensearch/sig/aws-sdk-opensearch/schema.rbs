@@ -2,15 +2,18 @@ module Aws::OpenSearch
   module Schema
     include Smithy::Schema::Shapes
 
+    AIConfig: StructureShape
     AIMLOptionsInput: StructureShape
     AIMLOptionsOutput: StructureShape
     AIMLOptionsStatus: StructureShape
+    AMPWorkspaceArn: StringShape
     ARN: StringShape
     AWSAccount: StringShape
     AWSDomainInformation: StructureShape
     AWSServicePrincipal: EnumShape
     AcceptInboundConnectionRequest: StructureShape
     AcceptInboundConnectionResponse: StructureShape
+    AcceptedWarningsList: ListShape
     AccessDeniedException: StructureShape
     AccessPoliciesStatus: StructureShape
     ActionSeverity: EnumShape
@@ -32,6 +35,7 @@ module Aws::OpenSearch
     AppConfigType: EnumShape
     AppConfigValue: StringShape
     AppConfigs: ListShape
+    ApplicationId: StringShape
     ApplicationName: StringShape
     ApplicationStatus: EnumShape
     ApplicationStatuses: ListShape
@@ -41,6 +45,8 @@ module Aws::OpenSearch
     AssociatePackageResponse: StructureShape
     AssociatePackagesRequest: StructureShape
     AssociatePackagesResponse: StructureShape
+    AttachDataSourceRequest: StructureShape
+    AttachDataSourceResponse: StructureShape
     AuthorizeVpcEndpointAccessRequest: StructureShape
     AuthorizeVpcEndpointAccessResponse: StructureShape
     AuthorizedPrincipal: StructureShape
@@ -59,6 +65,9 @@ module Aws::OpenSearch
     AutoTuneState: EnumShape
     AutoTuneStatus: StructureShape
     AutoTuneType: EnumShape
+    AutomatedSnapshotPauseOptions: StructureShape
+    AutomatedSnapshotPauseOptionsStatus: StructureShape
+    AutomatedSnapshotPauseRequestOptions: StructureShape
     AvailabilityZone: StringShape
     AvailabilityZoneInfo: StructureShape
     AvailabilityZoneInfoList: ListShape
@@ -72,6 +81,15 @@ module Aws::OpenSearch
     CancelServiceSoftwareUpdateResponse: StructureShape
     CancelledChangeProperty: StructureShape
     CancelledChangePropertyList: ListShape
+    CapabilityBaseRequestConfig: UnionShape
+    CapabilityBaseResponseConfig: UnionShape
+    CapabilityExtendedResponseConfig: UnionShape
+    CapabilityFailure: StructureShape
+    CapabilityFailureDetails: StringShape
+    CapabilityFailureReason: EnumShape
+    CapabilityFailures: ListShape
+    CapabilityName: StringShape
+    CapabilityStatus: EnumShape
     ChangeProgressDetails: StructureShape
     ChangeProgressStage: StructureShape
     ChangeProgressStageList: ListShape
@@ -100,6 +118,8 @@ module Aws::OpenSearch
     CreateApplicationResponse: StructureShape
     CreateDomainRequest: StructureShape
     CreateDomainResponse: StructureShape
+    CreateIndexRequest: StructureShape
+    CreateIndexResponse: StructureShape
     CreateOutboundConnectionRequest: StructureShape
     CreateOutboundConnectionResponse: StructureShape
     CreatePackageRequest: StructureShape
@@ -109,6 +129,9 @@ module Aws::OpenSearch
     CreatedAt: TimestampShape
     CrossClusterSearchConnectionProperties: StructureShape
     DataSource: StructureShape
+    DataSourceAttachmentStatus: EnumShape
+    DataSourceAttachmentSummary: StructureShape
+    DataSourceAttachmentSummaryList: ListShape
     DataSourceDescription: StringShape
     DataSourceDetails: StructureShape
     DataSourceList: ListShape
@@ -125,6 +148,8 @@ module Aws::OpenSearch
     DeleteDomainResponse: StructureShape
     DeleteInboundConnectionRequest: StructureShape
     DeleteInboundConnectionResponse: StructureShape
+    DeleteIndexRequest: StructureShape
+    DeleteIndexResponse: StructureShape
     DeleteOutboundConnectionRequest: StructureShape
     DeleteOutboundConnectionResponse: StructureShape
     DeletePackageRequest: StructureShape
@@ -134,7 +159,14 @@ module Aws::OpenSearch
     DependencyFailureException: StructureShape
     DeploymentCloseDateTimeStamp: TimestampShape
     DeploymentStatus: EnumShape
+    DeploymentStrategy: EnumShape
+    DeploymentStrategyOptions: StructureShape
+    DeploymentStrategyOptionsStatus: StructureShape
     DeploymentType: StringShape
+    DeregisterCapabilityRequest: StructureShape
+    DeregisterCapabilityResponse: StructureShape
+    DescribeDataSourceAttachmentRequest: StructureShape
+    DescribeDataSourceAttachmentResponse: StructureShape
     DescribeDomainAutoTunesRequest: StructureShape
     DescribeDomainAutoTunesResponse: StructureShape
     DescribeDomainChangeProgressRequest: StructureShape
@@ -153,6 +185,8 @@ module Aws::OpenSearch
     DescribeDryRunProgressResponse: StructureShape
     DescribeInboundConnectionsRequest: StructureShape
     DescribeInboundConnectionsResponse: StructureShape
+    DescribeInsightDetailsRequest: StructureShape
+    DescribeInsightDetailsResponse: StructureShape
     DescribeInstanceTypeLimitsRequest: StructureShape
     DescribeInstanceTypeLimitsResponse: StructureShape
     DescribeOutboundConnectionsRequest: StructureShape
@@ -171,6 +205,8 @@ module Aws::OpenSearch
     DescribeVpcEndpointsRequest: StructureShape
     DescribeVpcEndpointsResponse: StructureShape
     Description: StringShape
+    DetachDataSourceRequest: StructureShape
+    DetachDataSourceResponse: StructureShape
     DirectQueryDataSource: StructureShape
     DirectQueryDataSourceDescription: StringShape
     DirectQueryDataSourceList: ListShape
@@ -207,6 +243,7 @@ module Aws::OpenSearch
     DomainState: EnumShape
     DomainStatus: StructureShape
     DomainStatusList: ListShape
+    DomainUseCase: EnumShape
     Double: FloatShape
     DryRun: BooleanShape
     DryRunMode: EnumShape
@@ -218,8 +255,11 @@ module Aws::OpenSearch
     EBSOptionsStatus: StructureShape
     EncryptionAtRestOptions: StructureShape
     EncryptionAtRestOptionsStatus: StructureShape
+    EncryptionMode: EnumShape
     Endpoint: StringShape
     EndpointsMap: MapShape
+    EngineMode: EnumShape
+    EngineModeStatus: StructureShape
     EngineType: EnumShape
     EngineVersion: StringShape
     EnvironmentInfo: StructureShape
@@ -227,20 +267,29 @@ module Aws::OpenSearch
     ErrorDetails: StructureShape
     ErrorMessage: StringShape
     ErrorType: StringShape
+    ExportOptions: StructureShape
     Filter: StructureShape
     FilterList: ListShape
     GUID: StringShape
     GUIDList: ListShape
     GetApplicationRequest: StructureShape
     GetApplicationResponse: StructureShape
+    GetCapabilityRequest: StructureShape
+    GetCapabilityResponse: StructureShape
     GetCompatibleVersionsRequest: StructureShape
     GetCompatibleVersionsResponse: StructureShape
     GetDataSourceRequest: StructureShape
     GetDataSourceResponse: StructureShape
+    GetDefaultApplicationSettingRequest: StructureShape
+    GetDefaultApplicationSettingResponse: StructureShape
     GetDirectQueryDataSourceRequest: StructureShape
     GetDirectQueryDataSourceResponse: StructureShape
     GetDomainMaintenanceStatusRequest: StructureShape
     GetDomainMaintenanceStatusResponse: StructureShape
+    GetIndexRequest: StructureShape
+    GetIndexResponse: StructureShape
+    GetMigrationRequest: StructureShape
+    GetMigrationResponse: StructureShape
     GetPackageVersionHistoryRequest: StructureShape
     GetPackageVersionHistoryResponse: StructureShape
     GetUpgradeHistoryRequest: StructureShape
@@ -268,7 +317,31 @@ module Aws::OpenSearch
     InboundConnectionStatus: StructureShape
     InboundConnectionStatusCode: EnumShape
     InboundConnections: ListShape
+    IndexName: StringShape
+    IndexSchema: DocumentShape
+    IndexStatus: EnumShape
     InitiatedBy: EnumShape
+    Insight: StructureShape
+    InsightEntity: StructureShape
+    InsightEntityType: EnumShape
+    InsightEntityValue: StringShape
+    InsightFeedbackEntity: StructureShape
+    InsightFeedbackEntityType: EnumShape
+    InsightFeedbackRequest: StructureShape
+    InsightFeedbackResponse: StructureShape
+    InsightFeedbackText: StringShape
+    InsightFeedbackThumbs: EnumShape
+    InsightField: StructureShape
+    InsightFieldList: ListShape
+    InsightFieldType: EnumShape
+    InsightList: ListShape
+    InsightPageSize: IntegerShape
+    InsightPriorityLevel: EnumShape
+    InsightResponseStatus: EnumShape
+    InsightSortOrder: EnumShape
+    InsightStatus: EnumShape
+    InsightTimeRange: StructureShape
+    InsightType: EnumShape
     InstanceCount: IntegerShape
     InstanceCountLimits: StructureShape
     InstanceLimits: StructureShape
@@ -286,7 +359,9 @@ module Aws::OpenSearch
     Issues: ListShape
     JWTOptionsInput: StructureShape
     JWTOptionsOutput: StructureShape
+    JwksUrl: StringShape
     KeyStoreAccessOption: StructureShape
+    KmsKeyArn: StringShape
     KmsKeyId: StringShape
     LastUpdated: TimestampShape
     LicenseFilepath: StringShape
@@ -298,6 +373,8 @@ module Aws::OpenSearch
     LimitsByRole: MapShape
     ListApplicationsRequest: StructureShape
     ListApplicationsResponse: StructureShape
+    ListDataSourceAttachmentsRequest: StructureShape
+    ListDataSourceAttachmentsResponse: StructureShape
     ListDataSourcesRequest: StructureShape
     ListDataSourcesResponse: StructureShape
     ListDirectQueryDataSourcesRequest: StructureShape
@@ -308,8 +385,12 @@ module Aws::OpenSearch
     ListDomainNamesResponse: StructureShape
     ListDomainsForPackageRequest: StructureShape
     ListDomainsForPackageResponse: StructureShape
+    ListInsightsRequest: StructureShape
+    ListInsightsResponse: StructureShape
     ListInstanceTypeDetailsRequest: StructureShape
     ListInstanceTypeDetailsResponse: StructureShape
+    ListMigrationsRequest: StructureShape
+    ListMigrationsResponse: StructureShape
     ListPackagesForDomainRequest: StructureShape
     ListPackagesForDomainResponse: StructureShape
     ListScheduledActionsRequest: StructureShape
@@ -337,6 +418,12 @@ module Aws::OpenSearch
     MaxResults: IntegerShape
     MaximumInstanceCount: IntegerShape
     Message: StringShape
+    MigrationError: StructureShape
+    MigrationOptions: StructureShape
+    MigrationSource: StructureShape
+    MigrationSummary: StructureShape
+    MigrationSummaryList: ListShape
+    MigrationWorkspace: StructureShape
     MinimumInstanceCount: IntegerShape
     ModifyingProperties: StructureShape
     ModifyingPropertiesList: ListShape
@@ -394,6 +481,7 @@ module Aws::OpenSearch
     PackageVersionHistory: StructureShape
     PackageVersionHistoryList: ListShape
     Password: StringShape
+    PauseState: EnumShape
     PluginClassName: StringShape
     PluginDescription: StringShape
     PluginName: StringShape
@@ -401,13 +489,19 @@ module Aws::OpenSearch
     PluginVersion: StringShape
     PolicyDocument: StringShape
     PrincipalType: EnumShape
+    PrometheusDirectQueryDataSource: StructureShape
     PropertyValueType: EnumShape
     PurchaseReservedInstanceOfferingRequest: StructureShape
     PurchaseReservedInstanceOfferingResponse: StructureShape
+    PutDefaultApplicationSettingRequest: StructureShape
+    PutDefaultApplicationSettingResponse: StructureShape
     RecurringCharge: StructureShape
     RecurringChargeList: ListShape
     ReferencePath: StringShape
     Region: StringShape
+    RegionsList: ListShape
+    RegisterCapabilityRequest: StructureShape
+    RegisterCapabilityResponse: StructureShape
     RejectInboundConnectionRequest: StructureShape
     RejectInboundConnectionResponse: StructureShape
     RemoveTagsRequest: StructureShape
@@ -427,6 +521,9 @@ module Aws::OpenSearch
     RolesKey: StringShape
     RolesKeyIdCOption: EnumShape
     RollbackOnDisable: EnumShape
+    RollbackServiceSoftwareOptions: StructureShape
+    RollbackServiceSoftwareUpdateRequest: StructureShape
+    RollbackServiceSoftwareUpdateResponse: StructureShape
     S3BucketName: StringShape
     S3GlueDataCatalog: StructureShape
     S3Key: StringShape
@@ -436,6 +533,8 @@ module Aws::OpenSearch
     SAMLMetadata: StringShape
     SAMLOptionsInput: StructureShape
     SAMLOptionsOutput: StructureShape
+    SavedObjectIdentifier: StructureShape
+    SavedObjectIdentifierList: ListShape
     ScheduleAt: EnumShape
     ScheduledAction: StructureShape
     ScheduledActionsList: ListShape
@@ -445,6 +544,9 @@ module Aws::OpenSearch
     ScheduledAutoTuneSeverityType: EnumShape
     ScheduledBy: EnumShape
     SecurityLakeDirectQueryDataSource: StructureShape
+    ServerlessVectorAcceleration: StructureShape
+    ServiceOptions: StructureShape
+    ServiceQuotaExceededException: StructureShape
     ServiceSoftwareOptions: StructureShape
     ServiceUrl: StringShape
     SkipUnavailableStatus: EnumShape
@@ -457,6 +559,8 @@ module Aws::OpenSearch
     StartAt: TimestampShape
     StartDomainMaintenanceRequest: StructureShape
     StartDomainMaintenanceResponse: StructureShape
+    StartMigrationRequest: StructureShape
+    StartMigrationResponse: StructureShape
     StartServiceSoftwareUpdateRequest: StructureShape
     StartServiceSoftwareUpdateResponse: StructureShape
     StartTimeHours: IntegerShape
@@ -477,6 +581,7 @@ module Aws::OpenSearch
     TagKey: StringShape
     TagList: ListShape
     TagValue: StringShape
+    ThrottlingException: StructureShape
     TimeUnit: EnumShape
     Timestamp: TimestampShape
     TotalNumberOfStages: IntegerShape
@@ -490,6 +595,8 @@ module Aws::OpenSearch
     UpdateDirectQueryDataSourceResponse: StructureShape
     UpdateDomainConfigRequest: StructureShape
     UpdateDomainConfigResponse: StructureShape
+    UpdateIndexRequest: StructureShape
+    UpdateIndexResponse: StructureShape
     UpdatePackageRequest: StructureShape
     UpdatePackageResponse: StructureShape
     UpdatePackageScopeRequest: StructureShape
@@ -508,6 +615,7 @@ module Aws::OpenSearch
     UpgradeStep: EnumShape
     UpgradeStepItem: StructureShape
     UpgradeStepsList: ListShape
+    UseCaseStatus: StructureShape
     UserPoolId: StringShape
     Username: StringShape
     VPCDerivedInfo: StructureShape
@@ -515,6 +623,7 @@ module Aws::OpenSearch
     VPCOptions: StructureShape
     ValidationException: StructureShape
     ValidationFailure: StructureShape
+    ValidationFailureSeverity: EnumShape
     ValidationFailures: ListShape
     ValueStringList: ListShape
     VersionList: ListShape
@@ -533,6 +642,7 @@ module Aws::OpenSearch
     VpcEndpointSummaryList: ListShape
     VpcEndpoints: ListShape
     WindowStartTime: StructureShape
+    WorkspaceConfigurationInput: StructureShape
     ZoneAwarenessConfig: StructureShape
     ZoneStatus: EnumShape
 

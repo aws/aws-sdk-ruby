@@ -769,6 +769,9 @@ module Aws::ACMPCA
       EC_prime256v1: String
       EC_secp384r1: String
       EC_secp521r1: String
+      ML_DSA_44: String
+      ML_DSA_65: String
+      ML_DSA_87: String
       SM2: String
     end
 
@@ -1156,7 +1159,13 @@ module Aws::ACMPCA
       SHA256WITHRSA: String
       SHA384WITHRSA: String
       SHA512WITHRSA: String
+      SHA256WITHRSA_PSS: String
+      SHA384WITHRSA_PSS: String
+      SHA512WITHRSA_PSS: String
       SM3WITHSM2: String
+      ML_DSA_44: String
+      ML_DSA_65: String
+      ML_DSA_87: String
     end
 
     class Tag

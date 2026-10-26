@@ -230,6 +230,7 @@ module Aws::S3Control
             }
           ],
           metadata_directive: String,
+          annotation_directive: String,
           modified_since_constraint: Time,
           new_object_metadata: {
             cache_control: untyped,
@@ -260,7 +261,12 @@ module Aws::S3Control
           object_lock_mode: String,
           object_lock_retain_until_date: untyped,
           bucket_key_enabled: untyped,
-          checksum_algorithm: String
+          checksum_algorithm: String,
+          object_lock_event_hold: String,
+          object_lock_event_hold_duration: {
+            days: Integer,
+            years: Integer
+          }
         },
         s3_put_object_acl: {
           access_control_policy: {
@@ -292,7 +298,12 @@ module Aws::S3Control
           bypass_governance_retention: untyped,
           retention: {
             retain_until_date: untyped,
-            mode: String
+            mode: String,
+            event_hold: String,
+            event_hold_duration: {
+              days: Integer,
+              years: Integer
+            }
           }
         },
         s3_replicate_object: {
@@ -300,6 +311,14 @@ module Aws::S3Control
         s3_compute_object_checksum: {
           checksum_algorithm: String,
           checksum_type: String
+        },
+        s3_update_object_encryption: {
+          object_encryption: {
+            ssekms: {
+              kms_key_arn: String,
+              bucket_key_enabled: untyped
+            }
+          }
         }
       },
       ?report: {
@@ -861,7 +880,8 @@ module Aws::S3Control
       ?permission: String,
       ?duration_seconds: Integer,
       ?privilege: String,
-      ?target_type: String
+      ?target_type: String,
+      ?audit_context: String
     ) -> _GetDataAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataAccessResponse
 
     interface _GetJobTaggingResponse
@@ -1407,11 +1427,15 @@ module Aws::S3Control
             },
             detailed_status_codes_metrics: {
               is_enabled: untyped
+            },
+            advanced_performance_metrics: {
+              is_enabled: untyped
             }
           },
           advanced_cost_optimization_metrics: untyped,
           advanced_data_protection_metrics: untyped,
           detailed_status_codes_metrics: untyped,
+          advanced_performance_metrics: untyped,
           storage_lens_group_level: {
             selection_criteria: {
               include: Array[String],
@@ -1444,13 +1468,22 @@ module Aws::S3Control
           },
           cloud_watch_metrics: {
             is_enabled: untyped
+          },
+          storage_lens_table_destination: {
+            is_enabled: untyped,
+            encryption: untyped
           }
+        },
+        expanded_prefixes_data_export: {
+          s3_bucket_destination: untyped,
+          storage_lens_table_destination: untyped
         },
         is_enabled: untyped,
         aws_org: {
           arn: String
         },
-        storage_lens_arn: String
+        storage_lens_arn: String,
+        prefix_delimiter: untyped
       },
       ?tags: Array[
         {

@@ -7,11 +7,17 @@ module Aws::Identitystore
       def initialize: (
         ?message: String,
         ?request_id: String,
+        ?reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
       attr_accessor request_id: String?
+      attr_accessor reason: String?
+    end
+
+    module AccessDeniedExceptionReason
+      KMS_ACCESS_DENIED: String
     end
 
     class Address
@@ -87,22 +93,12 @@ module Aws::Identitystore
       attr_accessor reason: String?
     end
 
-    class CreateGroupInput
-      include Smithy::Schema::Structure
-
-      def initialize: (
-        ?identity_store_id: String,
-        ?display_name: String,
-        ?description: String,
-      ) -> void
-      | (?Hash[Symbol, untyped]) -> void
-
-      attr_accessor identity_store_id: String?
-      attr_accessor display_name: String?
-      attr_accessor description: String?
+    module ConflictExceptionReason
+      UNIQUENESS_CONSTRAINT_VIOLATION: String
+      CONCURRENT_MODIFICATION: String
     end
 
-    class CreateGroupMembershipInput
+    class CreateGroupMembershipRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -117,33 +113,54 @@ module Aws::Identitystore
       attr_accessor member_id: Types::MemberId?
     end
 
-    class CreateGroupMembershipOutput
+    class CreateGroupMembershipResponse
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?identity_store_id: String,
         ?membership_id: String,
-        ?identity_store_id: String,
+        ?membership_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor membership_id: String?
       attr_accessor identity_store_id: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
     end
 
-    class CreateGroupOutput
+    class CreateGroupRequest
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?group_id: String,
         ?identity_store_id: String,
+        ?display_name: String,
+        ?description: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor group_id: String?
       attr_accessor identity_store_id: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
     end
 
-    class CreateUserInput
+    class CreateGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_store_id: String,
+        ?group_id: String,
+        ?group_arn: String,
+        ?revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_store_id: String?
+      attr_accessor group_id: String?
+      attr_accessor group_arn: String?
+      attr_accessor revision: String?
+    end
+
+    class CreateUserRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -161,6 +178,11 @@ module Aws::Identitystore
         ?preferred_language: String,
         ?locale: String,
         ?timezone: String,
+        ?photos: Array[Types::Photo],
+        ?website: String,
+        ?birthdate: String,
+        ?roles: Array[Types::Role],
+        ?extensions: Hash[String, Smithy::Schema::document],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -178,35 +200,31 @@ module Aws::Identitystore
       attr_accessor preferred_language: String?
       attr_accessor locale: String?
       attr_accessor timezone: String?
+      attr_accessor photos: Array[Types::Photo]?
+      attr_accessor website: String?
+      attr_accessor birthdate: String?
+      attr_accessor roles: Array[Types::Role]?
+      attr_accessor extensions: Hash[String, Smithy::Schema::document]?
     end
 
-    class CreateUserOutput
+    class CreateUserResponse
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?identity_store_id: String,
         ?user_id: String,
-        ?identity_store_id: String,
+        ?user_arn: String,
+        ?revision: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor identity_store_id: String?
       attr_accessor user_id: String?
-      attr_accessor identity_store_id: String?
+      attr_accessor user_arn: String?
+      attr_accessor revision: String?
     end
 
-    class DeleteGroupInput
-      include Smithy::Schema::Structure
-
-      def initialize: (
-        ?identity_store_id: String,
-        ?group_id: String,
-      ) -> void
-      | (?Hash[Symbol, untyped]) -> void
-
-      attr_accessor identity_store_id: String?
-      attr_accessor group_id: String?
-    end
-
-    class DeleteGroupMembershipInput
+    class DeleteGroupMembershipRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -219,7 +237,7 @@ module Aws::Identitystore
       attr_accessor membership_id: String?
     end
 
-    class DeleteGroupMembershipOutput
+    class DeleteGroupMembershipResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -228,51 +246,55 @@ module Aws::Identitystore
 
     end
 
-    class DeleteGroupOutput
-      include Smithy::Schema::Structure
-
-      def initialize: (
-      ) -> void
-      | (?Hash[Symbol, untyped]) -> void
-
-    end
-
-    class DeleteUserInput
-      include Smithy::Schema::Structure
-
-      def initialize: (
-        ?identity_store_id: String,
-        ?user_id: String,
-      ) -> void
-      | (?Hash[Symbol, untyped]) -> void
-
-      attr_accessor identity_store_id: String?
-      attr_accessor user_id: String?
-    end
-
-    class DeleteUserOutput
-      include Smithy::Schema::Structure
-
-      def initialize: (
-      ) -> void
-      | (?Hash[Symbol, untyped]) -> void
-
-    end
-
-    class DescribeGroupInput
+    class DeleteGroupRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?identity_store_id: String,
         ?group_id: String,
+        ?revision: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identity_store_id: String?
       attr_accessor group_id: String?
+      attr_accessor revision: String?
     end
 
-    class DescribeGroupMembershipInput
+    class DeleteGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_store_id: String,
+        ?user_id: String,
+        ?revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_store_id: String?
+      attr_accessor user_id: String?
+      attr_accessor revision: String?
+    end
+
+    class DeleteUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeGroupMembershipRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -285,61 +307,127 @@ module Aws::Identitystore
       attr_accessor membership_id: String?
     end
 
-    class DescribeGroupMembershipOutput
+    class DescribeGroupMembershipResponse
       include Smithy::Schema::Structure
 
       def initialize: (
         ?identity_store_id: String,
         ?membership_id: String,
+        ?membership_arn: String,
         ?group_id: String,
         ?member_id: Types::MemberId,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?created_by: String,
+        ?updated_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identity_store_id: String?
       attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
       attr_accessor group_id: String?
       attr_accessor member_id: Types::MemberId?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_by: String?
     end
 
-    class DescribeGroupOutput
+    class DescribeGroupRequest
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?identity_store_id: String,
         ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_store_id: String?
+      attr_accessor group_id: String?
+    end
+
+    class DescribeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_store_id: String,
+        ?group_id: String,
+        ?group_arn: String,
+        ?revision: String,
         ?display_name: String,
         ?external_ids: Array[Types::ExternalId],
         ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?created_by: String,
+        ?updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_store_id: String?
+      attr_accessor group_id: String?
+      attr_accessor group_arn: String?
+      attr_accessor revision: String?
+      attr_accessor display_name: String?
+      attr_accessor external_ids: Array[Types::ExternalId]?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_by: String?
+    end
+
+    class DescribeIdentityStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
         ?identity_store_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor group_id: String?
-      attr_accessor display_name: String?
-      attr_accessor external_ids: Array[Types::ExternalId]?
-      attr_accessor description: String?
       attr_accessor identity_store_id: String?
     end
 
-    class DescribeUserInput
+    class DescribeIdentityStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_store_id: String,
+        ?identity_store_arn: String,
+        ?network_configuration: Types::NetworkConfigurationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_store_id: String?
+      attr_accessor identity_store_arn: String?
+      attr_accessor network_configuration: Types::NetworkConfigurationDetails?
+    end
+
+    class DescribeUserRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?identity_store_id: String,
         ?user_id: String,
+        ?extensions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identity_store_id: String?
       attr_accessor user_id: String?
+      attr_accessor extensions: Array[String]?
     end
 
-    class DescribeUserOutput
+    class DescribeUserResponse
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?user_name: String,
+        ?identity_store_id: String,
         ?user_id: String,
+        ?user_arn: String,
+        ?revision: String,
+        ?user_name: String,
         ?external_ids: Array[Types::ExternalId],
         ?name: Types::Name,
         ?display_name: String,
@@ -353,12 +441,24 @@ module Aws::Identitystore
         ?preferred_language: String,
         ?locale: String,
         ?timezone: String,
-        ?identity_store_id: String,
+        ?user_status: String,
+        ?photos: Array[Types::Photo],
+        ?website: String,
+        ?birthdate: String,
+        ?roles: Array[Types::Role],
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?extensions: Hash[String, Smithy::Schema::document],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor user_name: String?
+      attr_accessor identity_store_id: String?
       attr_accessor user_id: String?
+      attr_accessor user_arn: String?
+      attr_accessor revision: String?
+      attr_accessor user_name: String?
       attr_accessor external_ids: Array[Types::ExternalId]?
       attr_accessor name: Types::Name?
       attr_accessor display_name: String?
@@ -372,7 +472,16 @@ module Aws::Identitystore
       attr_accessor preferred_language: String?
       attr_accessor locale: String?
       attr_accessor timezone: String?
-      attr_accessor identity_store_id: String?
+      attr_accessor user_status: String?
+      attr_accessor photos: Array[Types::Photo]?
+      attr_accessor website: String?
+      attr_accessor birthdate: String?
+      attr_accessor roles: Array[Types::Role]?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor extensions: Hash[String, Smithy::Schema::document]?
     end
 
     class Email
@@ -416,7 +525,7 @@ module Aws::Identitystore
       attr_accessor attribute_value: String?
     end
 
-    class GetGroupIdInput
+    class GetGroupIdRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -429,20 +538,22 @@ module Aws::Identitystore
       attr_accessor alternate_identifier: Types::AlternateIdentifier?
     end
 
-    class GetGroupIdOutput
+    class GetGroupIdResponse
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?group_id: String,
         ?identity_store_id: String,
+        ?group_id: String,
+        ?group_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor group_id: String?
       attr_accessor identity_store_id: String?
+      attr_accessor group_id: String?
+      attr_accessor group_arn: String?
     end
 
-    class GetGroupMembershipIdInput
+    class GetGroupMembershipIdRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -457,20 +568,22 @@ module Aws::Identitystore
       attr_accessor member_id: Types::MemberId?
     end
 
-    class GetGroupMembershipIdOutput
+    class GetGroupMembershipIdResponse
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?membership_id: String,
         ?identity_store_id: String,
+        ?membership_id: String,
+        ?membership_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor membership_id: String?
       attr_accessor identity_store_id: String?
+      attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
     end
 
-    class GetUserIdInput
+    class GetUserIdRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -483,36 +596,50 @@ module Aws::Identitystore
       attr_accessor alternate_identifier: Types::AlternateIdentifier?
     end
 
-    class GetUserIdOutput
+    class GetUserIdResponse
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?user_id: String,
         ?identity_store_id: String,
+        ?user_id: String,
+        ?user_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor user_id: String?
       attr_accessor identity_store_id: String?
+      attr_accessor user_id: String?
+      attr_accessor user_arn: String?
     end
 
     class Group
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?identity_store_id: String,
         ?group_id: String,
+        ?group_arn: String,
+        ?revision: String,
         ?display_name: String,
         ?external_ids: Array[Types::ExternalId],
         ?description: String,
-        ?identity_store_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?created_by: String,
+        ?updated_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor identity_store_id: String?
       attr_accessor group_id: String?
+      attr_accessor group_arn: String?
+      attr_accessor revision: String?
       attr_accessor display_name: String?
       attr_accessor external_ids: Array[Types::ExternalId]?
       attr_accessor description: String?
-      attr_accessor identity_store_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_by: String?
     end
 
     class GroupMembership
@@ -521,15 +648,25 @@ module Aws::Identitystore
       def initialize: (
         ?identity_store_id: String,
         ?membership_id: String,
+        ?membership_arn: String,
         ?group_id: String,
         ?member_id: Types::MemberId,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?created_by: String,
+        ?updated_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identity_store_id: String?
       attr_accessor membership_id: String?
+      attr_accessor membership_arn: String?
       attr_accessor group_id: String?
       attr_accessor member_id: Types::MemberId?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_by: String?
     end
 
     class GroupMembershipExistenceResult
@@ -547,6 +684,19 @@ module Aws::Identitystore
       attr_accessor membership_exists: bool?
     end
 
+    class IdentityStore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_store_id: String,
+        ?identity_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_store_id: String?
+      attr_accessor identity_store_arn: String?
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -562,7 +712,7 @@ module Aws::Identitystore
       attr_accessor retry_after_seconds: Integer?
     end
 
-    class IsMemberInGroupsInput
+    class IsMemberInGroupsRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -577,7 +727,7 @@ module Aws::Identitystore
       attr_accessor group_ids: Array[String]?
     end
 
-    class IsMemberInGroupsOutput
+    class IsMemberInGroupsResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -588,7 +738,7 @@ module Aws::Identitystore
       attr_accessor results: Array[Types::GroupMembershipExistenceResult]?
     end
 
-    class ListGroupMembershipsForMemberInput
+    class ListGroupMembershipsForMemberRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -605,7 +755,7 @@ module Aws::Identitystore
       attr_accessor next_token: String?
     end
 
-    class ListGroupMembershipsForMemberOutput
+    class ListGroupMembershipsForMemberResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -618,7 +768,7 @@ module Aws::Identitystore
       attr_accessor next_token: String?
     end
 
-    class ListGroupMembershipsInput
+    class ListGroupMembershipsRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -635,7 +785,7 @@ module Aws::Identitystore
       attr_accessor next_token: String?
     end
 
-    class ListGroupMembershipsOutput
+    class ListGroupMembershipsResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -648,7 +798,7 @@ module Aws::Identitystore
       attr_accessor next_token: String?
     end
 
-    class ListGroupsInput
+    class ListGroupsRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -665,7 +815,7 @@ module Aws::Identitystore
       attr_accessor filters: Array[Types::Filter]?
     end
 
-    class ListGroupsOutput
+    class ListGroupsResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -678,11 +828,38 @@ module Aws::Identitystore
       attr_accessor next_token: String?
     end
 
-    class ListUsersInput
+    class ListIdentityStoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListIdentityStoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_stores: Array[Types::IdentityStore],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_stores: Array[Types::IdentityStore]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUsersRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?identity_store_id: String,
+        ?extensions: Array[String],
         ?max_results: Integer,
         ?next_token: String,
         ?filters: Array[Types::Filter],
@@ -690,12 +867,13 @@ module Aws::Identitystore
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identity_store_id: String?
+      attr_accessor extensions: Array[String]?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
       attr_accessor filters: Array[Types::Filter]?
     end
 
-    class ListUsersOutput
+    class ListUsersResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -745,6 +923,40 @@ module Aws::Identitystore
       attr_accessor honorific_suffix: String?
     end
 
+    class NetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpce_access_required: bool,
+        ?api_restrict_source_vpcs: Array[String],
+        ?api_allow_source_ips: Array[String],
+        ?scim_allow_source_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpce_access_required: bool?
+      attr_accessor api_restrict_source_vpcs: Array[String]?
+      attr_accessor api_allow_source_ips: Array[String]?
+      attr_accessor scim_allow_source_ips: Array[String]?
+    end
+
+    class NetworkConfigurationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpce_access_required: bool,
+        ?api_restrict_source_vpcs: Array[String],
+        ?api_allow_source_ips: Array[String],
+        ?scim_allow_source_ips: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpce_access_required: bool?
+      attr_accessor api_restrict_source_vpcs: Array[String]?
+      attr_accessor api_allow_source_ips: Array[String]?
+      attr_accessor scim_allow_source_ips: Array[String]?
+    end
+
     class PhoneNumber
       include Smithy::Schema::Structure
 
@@ -760,12 +972,30 @@ module Aws::Identitystore
       attr_accessor primary: bool?
     end
 
+    class Photo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?type: String,
+        ?display: String,
+        ?primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor type: String?
+      attr_accessor display: String?
+      attr_accessor primary: bool?
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
       def initialize: (
         ?resource_type: String,
         ?resource_id: String,
+        ?reason: String,
         ?message: String,
         ?request_id: String,
       ) -> void
@@ -773,8 +1003,36 @@ module Aws::Identitystore
 
       attr_accessor resource_type: String?
       attr_accessor resource_id: String?
+      attr_accessor reason: String?
       attr_accessor message: String?
       attr_accessor request_id: String?
+    end
+
+    module ResourceNotFoundExceptionReason
+      KMS_KEY_NOT_FOUND: String
+    end
+
+    module ResourceType
+      GROUP: String
+      USER: String
+      IDENTITY_STORE: String
+      GROUP_MEMBERSHIP: String
+      RESOURCE_POLICY: String
+    end
+
+    class Role
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?type: String,
+        ?primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor type: String?
+      attr_accessor primary: bool?
     end
 
     class ServiceQuotaExceededException
@@ -797,12 +1055,18 @@ module Aws::Identitystore
         ?message: String,
         ?request_id: String,
         ?retry_after_seconds: Integer,
+        ?reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
       attr_accessor request_id: String?
       attr_accessor retry_after_seconds: Integer?
+      attr_accessor reason: String?
+    end
+
+    module ThrottlingExceptionReason
+      KMS_THROTTLING: String
     end
 
     class UniqueAttribute
@@ -818,60 +1082,109 @@ module Aws::Identitystore
       attr_accessor attribute_value: Smithy::Schema::document?
     end
 
-    class UpdateGroupInput
+    class UpdateGroupRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?identity_store_id: String,
         ?group_id: String,
         ?operations: Array[Types::AttributeOperation],
+        ?revision: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identity_store_id: String?
       attr_accessor group_id: String?
       attr_accessor operations: Array[Types::AttributeOperation]?
+      attr_accessor revision: String?
     end
 
-    class UpdateGroupOutput
+    class UpdateGroupResponse
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?identity_store_id: String,
+        ?group_id: String,
+        ?group_arn: String,
+        ?revision: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor identity_store_id: String?
+      attr_accessor group_id: String?
+      attr_accessor group_arn: String?
+      attr_accessor revision: String?
     end
 
-    class UpdateUserInput
+    class UpdateIdentityStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_store_id: String,
+        ?network_configuration: Types::NetworkConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_store_id: String?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+    end
+
+    class UpdateIdentityStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_store_id: String,
+        ?identity_store_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_store_id: String?
+      attr_accessor identity_store_arn: String?
+    end
+
+    class UpdateUserRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?identity_store_id: String,
         ?user_id: String,
         ?operations: Array[Types::AttributeOperation],
+        ?revision: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identity_store_id: String?
       attr_accessor user_id: String?
       attr_accessor operations: Array[Types::AttributeOperation]?
+      attr_accessor revision: String?
     end
 
-    class UpdateUserOutput
+    class UpdateUserResponse
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?identity_store_id: String,
+        ?user_id: String,
+        ?user_arn: String,
+        ?revision: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor identity_store_id: String?
+      attr_accessor user_id: String?
+      attr_accessor user_arn: String?
+      attr_accessor revision: String?
     end
 
     class User
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?user_name: String,
+        ?identity_store_id: String,
         ?user_id: String,
+        ?user_arn: String,
+        ?revision: String,
+        ?user_name: String,
         ?external_ids: Array[Types::ExternalId],
         ?name: Types::Name,
         ?display_name: String,
@@ -885,12 +1198,24 @@ module Aws::Identitystore
         ?preferred_language: String,
         ?locale: String,
         ?timezone: String,
-        ?identity_store_id: String,
+        ?user_status: String,
+        ?photos: Array[Types::Photo],
+        ?website: String,
+        ?birthdate: String,
+        ?roles: Array[Types::Role],
+        ?created_at: Time,
+        ?created_by: String,
+        ?updated_at: Time,
+        ?updated_by: String,
+        ?extensions: Hash[String, Smithy::Schema::document],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor user_name: String?
+      attr_accessor identity_store_id: String?
       attr_accessor user_id: String?
+      attr_accessor user_arn: String?
+      attr_accessor revision: String?
+      attr_accessor user_name: String?
       attr_accessor external_ids: Array[Types::ExternalId]?
       attr_accessor name: Types::Name?
       attr_accessor display_name: String?
@@ -904,7 +1229,21 @@ module Aws::Identitystore
       attr_accessor preferred_language: String?
       attr_accessor locale: String?
       attr_accessor timezone: String?
-      attr_accessor identity_store_id: String?
+      attr_accessor user_status: String?
+      attr_accessor photos: Array[Types::Photo]?
+      attr_accessor website: String?
+      attr_accessor birthdate: String?
+      attr_accessor roles: Array[Types::Role]?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor updated_at: Time?
+      attr_accessor updated_by: String?
+      attr_accessor extensions: Hash[String, Smithy::Schema::document]?
+    end
+
+    module UserStatus
+      ENABLED: String
+      DISABLED: String
     end
 
     class ValidationException
@@ -913,11 +1252,20 @@ module Aws::Identitystore
       def initialize: (
         ?message: String,
         ?request_id: String,
+        ?reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
       attr_accessor request_id: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      KMS_INVALID_ARN: String
+      KMS_INVALID_KEY_USAGE: String
+      KMS_INVALID_STATE: String
+      KMS_DISABLED: String
     end
   end
 end

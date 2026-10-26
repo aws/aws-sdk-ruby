@@ -814,6 +814,42 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings for processing audio content in multimodal knowledge bases.</p>
+    # @!attribute segmentation_configuration
+    #   <p>Configuration for segmenting audio content during processing.</p>
+    #   @return [Types::AudioSegmentationConfiguration]
+    class AudioConfiguration < Struct.new(
+      nil,
+      :segmentation_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for audio extraction.</p>
+    # @!attribute audio_extraction_status
+    #   <p>Whether audio extraction is enabled or disabled.</p>
+    #   @return [String]
+    class AudioExtractionConfiguration < Struct.new(
+      nil,
+      :audio_extraction_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for segmenting audio content during multimodal knowledge base ingestion. Determines how audio files are divided into chunks for processing.</p>
+    # @!attribute fixed_length_duration
+    #   <p>The duration in seconds for each audio segment. Audio files will be divided into chunks of this length for processing.</p>
+    #   @return [Integer]
+    class AudioSegmentationConfiguration < Struct.new(
+      nil,
+      :fixed_length_duration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines tools. The model automatically decides whether to call a tool or to generate text instead. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Use a tool to complete an Amazon Bedrock model response</a>.</p>
     class AutoToolChoice < Struct.new(
       nil,
@@ -841,10 +877,28 @@ module Aws::BedrockAgent
     # @!attribute embedding_data_type
     #   <p>The data type for the vectors when using a model to convert text into vector embeddings. The model must support the specified data type for vector embeddings. Floating-point (float32) is the default data type, and is supported by most models for vector embeddings. See <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html">Supported embeddings models</a> for information on the available models and their vector data types.</p>
     #   @return [String]
+    # @!attribute audio
+    #   <p>Configuration settings for processing audio content in multimodal knowledge bases.</p> <important> <p>This field is deprecated. Use <code>modelConfiguration</code> instead.</p> </important>
+    #   @deprecated
+    #     Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html
+    #     Since: 2026-09-01
+    #   @return [Array<Types::AudioConfiguration>]
+    # @!attribute video
+    #   <p>Configuration settings for processing video content in multimodal knowledge bases.</p> <important> <p>This field is deprecated. Use <code>modelConfiguration</code> instead.</p> </important>
+    #   @deprecated
+    #     Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html
+    #     Since: 2026-09-01
+    #   @return [Array<Types::VideoConfiguration>]
+    # @!attribute model_configuration
+    #   <p>Model-specific configuration for the embedding model, provided as a JSON object. Use this field to specify settings that apply to the embedding model that you selected, such as how audio and video files are divided into segments.</p> <p>The fields that this object accepts depend on the embedding model. For the settings that each model accepts, see the documentation for that model.</p> <p>For an example of a <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html">CreateKnowledgeBase</a> request that uses this field to configure a multimodal embedding model, see the <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html#API_agent_CreateKnowledgeBase_Examples">Examples</a> section of <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateKnowledgeBase.html">CreateKnowledgeBase</a>.</p>
+    #   @return [JSON]
     class BedrockEmbeddingModelConfiguration < Struct.new(
       nil,
       :dimensions,
       :embedding_data_type,
+      :audio,
+      :video,
+      :model_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1006,7 +1060,7 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration information to connect to Confluence as your data source.</p>
+    # <p>The configuration information to connect to Confluence as your data source for self-managed knowledge bases.</p>
     # @!attribute source_configuration
     #   <p>The endpoint information to connect to your Confluence data source.</p>
     #   @return [Types::ConfluenceSourceConfiguration]
@@ -1297,7 +1351,7 @@ module Aws::BedrockAgent
     #   <p>The connection configuration for the data source.</p>
     #   @return [Types::DataSourceConfiguration]
     # @!attribute data_deletion_policy
-    #   <p>The data deletion policy for the data source.</p> <p>You can set the data deletion policy to:</p> <ul> <li> <p>DELETE: Deletes all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b>, only the data. This flag is ignored if an Amazon Web Services account is deleted.</p> </li> <li> <p>RETAIN: Retains all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b> if you delete a knowledge base or data source resource.</p> </li> </ul>
+    #   <p>The data deletion policy for the data source.</p> <p>You can set the data deletion policy to:</p> <ul> <li> <p>DELETE: Deletes all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b>, only the data. This flag is ignored if an Amazon Web Services account is deleted.</p> </li> <li> <p>RETAIN: Retains all data from your data source that’s converted into vector embeddings upon deletion of a knowledge base or data source resource. Note that the <b>vector store itself is not deleted</b> if you delete a knowledge base or data source resource.</p> </li> </ul> <note> <p>For managed knowledge bases, the only supported option is <code>DELETE</code>, which is also the default.</p> </note>
     #   @return [String]
     # @!attribute server_side_encryption_configuration
     #   <p>Contains details about the server-side encryption for the data source.</p>
@@ -1759,6 +1813,76 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the knowledge base to associate this VPC configuration with.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request but does not return an error.</p>
+    #   @return [String]
+    # @!attribute vpc_id
+    #   <p>The identifier of the VPC that the knowledge base connects through to reach the resource.</p>
+    #   @return [String]
+    # @!attribute subnet_ids
+    #   <p>The subnets, in the VPC identified by <code>vpcId</code>, that the knowledge base uses to connect to the resource.</p>
+    #   @return [Array<String>]
+    # @!attribute resource_target
+    #   <p>The private IPv4 address or DNS name of the resource you want the knowledge base to reach. The target must be privately reachable from inside your VPC, such as an internal load balancer or a private IP. The following are not supported:</p> <ul> <li> <p>Internet-facing endpoints</p> </li> <li> <p>Loopback addresses</p> </li> <li> <p>Link-local addresses</p> </li> <li> <p>Wildcard addresses</p> </li> <li> <p>Multicast addresses</p> </li> <li> <p>IPv6 literals</p> </li> </ul>
+    #   @return [String]
+    # @!attribute port
+    #   <p>The port on which to reach the resource.</p>
+    #   @return [Integer]
+    # @!attribute protocol
+    #   <p>The protocol used to connect to the resource. Specify <code>HTTP</code> for plaintext or <code>HTTPS</code> for TLS. When you specify <code>HTTPS</code>, you must also provide <code>tlsServerName</code>.</p>
+    #   @return [String]
+    # @!attribute resolution_mode
+    #   <p>Controls how a domain-name <code>resourceTarget</code> is resolved. This applies only when the target is a domain name; it has no effect for IP-address targets, which have no name to resolve. In all cases the resolved address must be reachable from inside your VPC. Valid values:</p> <ul> <li> <p> <code>IN_VPC</code> (default, recommended) – The target domain name is resolved privately, using the DNS resolvers of the VPC, such as private Route 53 hosted zones or on-premises DNS reachable from the VPC. Use this for targets that are private to your VPC, such as internal load balancers, private hosted-zone names, or on-premises hosts.</p> </li> <li> <p> <code>PUBLIC</code> – The target domain name is resolved against public DNS resolvers. Select this only when the target's domain name must be resolved through public DNS and the resulting address is still reachable from the VPC, an uncommon split-horizon configuration. If you are unsure, use <code>IN_VPC</code>.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute host_header
+    #   <p>An optional HTTP <code>Host</code> header value to send when invoking the resource. Set this only if your resource (or an upstream router or ingress) routes by the <code>Host</code> header and that host differs from the target. This setting is independent of <code>tlsServerName</code>.</p>
+    #   @return [String]
+    # @!attribute tls_server_name
+    #   <p>The expected TLS server name. The service matches this value against the Subject Alternative Names on your resource's TLS certificate during invocation. This field is required when <code>protocol</code> is <code>HTTPS</code>. Set it to a hostname on your certificate, such as <code>app.internal.example.com</code>. You can use a single leftmost wildcard, such as <code>*.example.com</code>. The value must be a hostname without a port.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>An optional human-readable name for the VPC configuration. If you don't specify a name, the VPC configuration has no name.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>An optional description of the VPC configuration. If you don't specify a description, the VPC configuration has no description.</p>
+    #   @return [String]
+    class CreateVpcConfigurationRequest < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :client_token,
+      :vpc_id,
+      :subnet_ids,
+      :resource_target,
+      :port,
+      :protocol,
+      :resolution_mode,
+      :host_header,
+      :tls_server_name,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute vpc_configuration_id
+    #   <p>The unique identifier of the VPC configuration that was created.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the VPC configuration. Immediately after creation this is <code>CREATING</code>.</p>
+    #   @return [String]
+    class CreateVpcConfigurationResponse < Struct.new(
+      nil,
+      :vpc_configuration_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains configurations for a query, each of which defines information about example queries to help the query engine generate appropriate SQL queries.</p>
     # @!attribute natural_language
     #   <p>An example natural language query.</p>
@@ -1867,6 +1991,14 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A daily sync. The run time is system-chosen (off-peak) and not configurable.</p>
+    class DailySchedule < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains details about a data source.</p>
     # @!attribute knowledge_base_id
     #   <p>The unique identifier of the knowledge base to which the data source belongs.</p>
@@ -1927,24 +2059,28 @@ module Aws::BedrockAgent
     # @!attribute type
     #   <p>The type of data source.</p>
     #   @return [String]
+    # @!attribute managed_knowledge_base_connector_configuration
+    #   <p>Contains the configuration for a data source that connects a managed knowledge base to a supported data source connector. Specify this object when the data source type is <code>MANAGED_KNOWLEDGE_BASE_CONNECTOR</code>.</p>
+    #   @return [Types::ManagedKnowledgeBaseConnectorConfiguration]
     # @!attribute s3_configuration
-    #   <p>The configuration information to connect to Amazon S3 as your data source.</p>
+    #   <p>The configuration information to connect to Amazon S3 as your data source for self-managed knowledge bases. To configure this data source for managed knowledge bases, use <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html">managedKnowledgeBaseConnectorConfiguration</a>.</p>
     #   @return [Types::S3DataSourceConfiguration]
     # @!attribute web_configuration
-    #   <p>The configuration of web URLs to crawl for your data source. You should be authorized to crawl the URLs.</p> <note> <p>Crawling web URLs as your data source is in preview release and is subject to change.</p> </note>
+    #   <p>The configuration of web URLs to crawl for your data source. You should be authorized to crawl the URLs.</p> <note> <p>To configure this data source for managed knowledge bases, use <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html">managedKnowledgeBaseConnectorConfiguration</a>. Web crawler data source connector for self-managed knowledge bases is in preview release and is subject to change.</p> </note>
     #   @return [Types::WebDataSourceConfiguration]
     # @!attribute confluence_configuration
-    #   <p>The configuration information to connect to Confluence as your data source.</p> <note> <p>Confluence data source connector is in preview release and is subject to change.</p> </note>
+    #   <p>The configuration information to connect to Confluence as your data source for self-managed knowledge bases.</p> <note> <p>To configure this data source for managed knowledge bases, use <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html">managedKnowledgeBaseConnectorConfiguration</a>. Confluence data source connector for self-managed knowledge bases is in preview release and is subject to change.</p> </note>
     #   @return [Types::ConfluenceDataSourceConfiguration]
     # @!attribute salesforce_configuration
-    #   <p>The configuration information to connect to Salesforce as your data source.</p> <note> <p>Salesforce data source connector is in preview release and is subject to change.</p> </note>
+    #   <p>The configuration information to connect to Salesforce as your data source.</p> <note> <p>Salesforce data source connector for self-managed knowledge bases is in preview release and is subject to change.</p> </note>
     #   @return [Types::SalesforceDataSourceConfiguration]
     # @!attribute share_point_configuration
-    #   <p>The configuration information to connect to SharePoint as your data source.</p> <note> <p>SharePoint data source connector is in preview release and is subject to change.</p> </note>
+    #   <p>The configuration information to connect to SharePoint as your data source for self-managed knowledge bases.</p> <note> <p>To configure this data source for managed knowledge bases, use <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html">managedKnowledgeBaseConnectorConfiguration</a>. SharePoint data source connector for self-managed knowledge bases is in preview release and is subject to change.</p> </note>
     #   @return [Types::SharePointDataSourceConfiguration]
     class DataSourceConfiguration < Struct.new(
       nil,
       :type,
+      :managed_knowledge_base_connector_configuration,
       :s3_configuration,
       :web_configuration,
       :confluence_configuration,
@@ -1985,6 +2121,26 @@ module Aws::BedrockAgent
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The day of the month on which a monthly sync runs. Specify exactly one of <code>dayNumber</code> or <code>lastDayOfMonth</code>.</p>
+    # @!attribute day_number
+    #   <p>A specific day of the month, from 1 to 28. Values are capped at 28, so a monthly sync runs in every month, including February.</p>
+    #   @return [Integer]
+    # @!attribute last_day_of_month
+    #   <p>Set this option to run the monthly sync on the last calendar day of each month.</p>
+    #   @return [Types::LastDayOfMonth]
+    class DayOfMonth < Struct.new(
+      :day_number,
+      :last_day_of_month,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DayNumber < DayOfMonth; end
+      class LastDayOfMonth < DayOfMonth; end
+      class Unknown < DayOfMonth; end
     end
 
     # @!attribute agent_id
@@ -2333,6 +2489,87 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base to remove the resource policy from.</p>
+    #   @return [String]
+    # @!attribute expected_revision_id
+    #   <p>The expected revision identifier of the resource policy. Use this to prevent conflicts when multiple users update the same policy concurrently.</p>
+    #   @return [String]
+    class DeleteResourcePolicyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :expected_revision_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The ARN of the knowledge base that the resource policy was removed from.</p>
+    #   @return [String]
+    # @!attribute revision_id
+    #   <p>The revision identifier after the resource policy was deleted.</p>
+    #   @return [String]
+    class DeleteResourcePolicyResponse < Struct.new(
+      nil,
+      :resource_arn,
+      :revision_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the knowledge base that owns the VPC configuration.</p>
+    #   @return [String]
+    # @!attribute vpc_configuration_id
+    #   <p>The unique identifier of the VPC configuration to delete.</p>
+    #   @return [String]
+    class DeleteVpcConfigurationRequest < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :vpc_configuration_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute vpc_configuration_id
+    #   <p>The unique identifier of the VPC configuration being deleted.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the VPC configuration. Immediately after a delete request this is <code>DELETING</code>.</p>
+    #   @return [String]
+    class DeleteVpcConfigurationResponse < Struct.new(
+      nil,
+      :vpc_configuration_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for deletion protection.</p>
+    # @!attribute deletion_protection_status
+    #   <p>Enable or disable deletion protection for the connector.</p>
+    #   @return [String]
+    # @!attribute deletion_protection_threshold
+    #   <p>The threshold is the maximum percentage of documents that a sync job can delete from your index. If a sync would delete more than this percentage, the sync skips its delete phase, leaving your indexed documents in place. Not supported for the Custom connector.</p>
+    #   @return [Integer]
+    class DeletionProtectionConfiguration < Struct.new(
+      nil,
+      :deletion_protection_status,
+      :deletion_protection_threshold,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:deletion_protection_threshold] = 15 unless options.key?(:deletion_protection_threshold)
+        super
+      end
+    end
+
     # @!attribute agent_id
     #   <p>An agent ID.</p>
     #   @return [String]
@@ -2380,6 +2617,27 @@ module Aws::BedrockAgent
 
     class DisassociateAgentKnowledgeBaseResponse < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An access control entry specifying a principal and their access level.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute name
+    #   <p>The user identifier.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of principal.</p>
+    #   @return [String]
+    # @!attribute access
+    #   <p>Whether to allow or deny access.</p>
+    #   @return [String]
+    class DocumentAccessControlEntry < Struct.new(
+      nil,
+      :name,
+      :type,
+      :access,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2435,11 +2693,15 @@ module Aws::BedrockAgent
     # @!attribute s3_location
     #   <p>The Amazon S3 location of the file containing metadata to associate with the content to ingest.</p>
     #   @return [Types::CustomS3Location]
+    # @!attribute access_control_list
+    #   <p>Access control list for the document. Used when metadata type is IN_LINE_ATTRIBUTE.</p>
+    #   @return [Array<Types::DocumentAccessControlEntry>]
     class DocumentMetadata < Struct.new(
       nil,
       :type,
       :inline_attributes,
       :s3_location,
+      :access_control_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3425,9 +3687,13 @@ module Aws::BedrockAgent
     # @!attribute flow_identifier
     #   <p>The unique identifier of the flow.</p>
     #   @return [String]
+    # @!attribute included_data
+    #   <p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>
+    #   @return [String]
     class GetFlowRequest < Struct.new(
       nil,
       :flow_identifier,
+      :included_data,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3494,10 +3760,14 @@ module Aws::BedrockAgent
     # @!attribute flow_version
     #   <p>The version of the flow for which to get information.</p>
     #   @return [String]
+    # @!attribute included_data
+    #   <p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>
+    #   @return [String]
     class GetFlowVersionRequest < Struct.new(
       nil,
       :flow_identifier,
       :flow_version,
+      :included_data,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3638,10 +3908,14 @@ module Aws::BedrockAgent
     # @!attribute prompt_version
     #   <p>The version of the prompt about which you want to retrieve information. Omit this field to return information about the working draft of the prompt.</p>
     #   @return [String]
+    # @!attribute included_data
+    #   <p>Controls the scope of data returned. Set to <code>METADATA_ONLY</code> to return only resource metadata. Set to <code>ALL_DATA</code> or omit this field to return the full response.</p>
+    #   @return [String]
     class GetPromptRequest < Struct.new(
       nil,
       :prompt_identifier,
       :prompt_version,
+      :included_data,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3694,6 +3968,62 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base to retrieve the resource policy for.</p>
+    #   @return [String]
+    class GetResourcePolicyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The ARN of the knowledge base that the resource policy is associated with.</p>
+    #   @return [String]
+    # @!attribute policy
+    #   <p>The JSON-formatted resource policy associated with the knowledge base.</p>
+    #   @return [String]
+    # @!attribute revision_id
+    #   <p>The revision identifier of the resource policy.</p>
+    #   @return [String]
+    class GetResourcePolicyResponse < Struct.new(
+      nil,
+      :resource_arn,
+      :policy,
+      :revision_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the knowledge base that owns the VPC configuration.</p>
+    #   @return [String]
+    # @!attribute vpc_configuration_id
+    #   <p>The unique identifier of the VPC configuration to retrieve.</p>
+    #   @return [String]
+    class GetVpcConfigurationRequest < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :vpc_configuration_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute vpc_configuration
+    #   <p>The VPC configuration, including its connection settings, resolution mode, and current lifecycle status.</p>
+    #   @return [Types::VpcConfiguration]
+    class GetVpcConfigurationResponse < Struct.new(
+      nil,
+      :vpc_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details about a guardrail associated with a resource.</p>
     # @!attribute guardrail_identifier
     #   <p>The unique identifier of the guardrail.</p>
@@ -3733,6 +4063,18 @@ module Aws::BedrockAgent
     class HierarchicalChunkingLevelConfiguration < Struct.new(
       nil,
       :max_tokens,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for image extraction.</p>
+    # @!attribute image_extraction_status
+    #   <p>Whether image extraction is enabled or disabled.</p>
+    #   @return [String]
+    class ImageExtractionConfiguration < Struct.new(
+      nil,
+      :image_extraction_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3840,6 +4182,9 @@ module Aws::BedrockAgent
     # @!attribute updated_at
     #   <p>The time the data ingestion job was last updated.</p> <p>If you stop a data ingestion job, the <code>updatedAt</code> time is the time the job was stopped.</p>
     #   @return [Time]
+    # @!attribute text_ready_at
+    #   <p>The time at which all text content in the data ingestion job finished extraction and became available to query.</p> <p>This time isn't returned until text extraction is complete for all the documents in the job.</p>
+    #   @return [Time]
     class IngestionJob < Struct.new(
       nil,
       :knowledge_base_id,
@@ -3851,6 +4196,7 @@ module Aws::BedrockAgent
       :failure_reasons,
       :started_at,
       :updated_at,
+      :text_ready_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3914,6 +4260,9 @@ module Aws::BedrockAgent
     # @!attribute number_of_documents_failed
     #   <p>The number of source documents that failed to be ingested.</p>
     #   @return [Integer]
+    # @!attribute number_of_documents_skipped
+    #   <p>The number of source documents that were skipped during ingestion.</p>
+    #   @return [Integer]
     class IngestionJobStatistics < Struct.new(
       nil,
       :number_of_documents_scanned,
@@ -3923,6 +4272,7 @@ module Aws::BedrockAgent
       :number_of_metadata_documents_modified,
       :number_of_documents_deleted,
       :number_of_documents_failed,
+      :number_of_documents_skipped,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3935,6 +4285,7 @@ module Aws::BedrockAgent
         options[:number_of_metadata_documents_modified] = 0 unless options.key?(:number_of_metadata_documents_modified)
         options[:number_of_documents_deleted] = 0 unless options.key?(:number_of_documents_deleted)
         options[:number_of_documents_failed] = 0 unless options.key?(:number_of_documents_failed)
+        options[:number_of_documents_skipped] = 0 unless options.key?(:number_of_documents_skipped)
         super
       end
     end
@@ -3961,6 +4312,9 @@ module Aws::BedrockAgent
     # @!attribute updated_at
     #   <p>The time the data ingestion job was last updated.</p>
     #   @return [Time]
+    # @!attribute text_ready_at
+    #   <p>The time at which all text content in the data ingestion job finished extraction and became available to query.</p> <p>This time isn't returned until text extraction is complete for all the documents in the job.</p>
+    #   @return [Time]
     # @!attribute statistics
     #   <p>Contains statistics for the data ingestion job.</p>
     #   @return [Types::IngestionJobStatistics]
@@ -3973,6 +4327,7 @@ module Aws::BedrockAgent
       :status,
       :started_at,
       :updated_at,
+      :text_ready_at,
       :statistics,
       keyword_init: true
     )
@@ -4146,11 +4501,14 @@ module Aws::BedrockAgent
 
     # <p>Contains details about the vector embeddings configuration of the knowledge base.</p>
     # @!attribute type
-    #   <p>The type of data that the data source is converted into for the knowledge base.</p>
+    #   <p>The type of data that the data source is converted into for the knowledge base. Choose <code>MANAGED</code> to create a managed knowledge base.</p>
     #   @return [String]
     # @!attribute vector_knowledge_base_configuration
     #   <p>Contains details about the model that's used to convert the data source into vector embeddings.</p>
     #   @return [Types::VectorKnowledgeBaseConfiguration]
+    # @!attribute managed_knowledge_base_configuration
+    #   <p>Contains configuration details for a knowledge base that uses a vector store fully managed by Amazon Bedrock. Specify this object when the knowledge base type is MANAGED.</p>
+    #   @return [Types::ManagedKnowledgeBaseConfiguration]
     # @!attribute kendra_knowledge_base_configuration
     #   <p>Settings for an Amazon Kendra knowledge base.</p>
     #   @return [Types::KendraKnowledgeBaseConfiguration]
@@ -4161,6 +4519,7 @@ module Aws::BedrockAgent
       nil,
       :type,
       :vector_knowledge_base_configuration,
+      :managed_knowledge_base_configuration,
       :kendra_knowledge_base_configuration,
       :sql_knowledge_base_configuration,
       keyword_init: true
@@ -4192,7 +4551,7 @@ module Aws::BedrockAgent
     #   <p>The identifier of the data source connected to the knowledge base that the document was ingested into or deleted from.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The ingestion status of the document. The following statuses are possible:</p> <ul> <li> <p>STARTED – You submitted the ingestion job containing the document.</p> </li> <li> <p>PENDING – The document is waiting to be ingested.</p> </li> <li> <p>IN_PROGRESS – The document is being ingested.</p> </li> <li> <p>INDEXED – The document was successfully indexed.</p> </li> <li> <p>PARTIALLY_INDEXED – The document was partially indexed.</p> </li> <li> <p>METADATA_PARTIALLY_INDEXED – You submitted metadata for an existing document and it was partially indexed.</p> </li> <li> <p>METADATA_UPDATE_FAILED – You submitted a metadata update for an existing document but it failed.</p> </li> <li> <p>FAILED – The document failed to be ingested.</p> </li> <li> <p>NOT_FOUND – The document wasn't found.</p> </li> <li> <p>IGNORED – The document was ignored during ingestion.</p> </li> <li> <p>DELETING – You submitted the delete job containing the document.</p> </li> <li> <p>DELETE_IN_PROGRESS – The document is being deleted.</p> </li> </ul>
+    #   <p>The ingestion status of the document. The following statuses are possible:</p> <ul> <li> <p>STARTING – You submitted the ingestion job containing the document.</p> </li> <li> <p>PENDING – The document is waiting to be ingested.</p> </li> <li> <p>IN_PROGRESS – The document is being ingested.</p> </li> <li> <p>INDEXED – The document was successfully indexed.</p> </li> <li> <p>PARTIALLY_INDEXED – The document was partially indexed.</p> </li> <li> <p>METADATA_PARTIALLY_INDEXED – You submitted metadata for an existing document and it was partially indexed.</p> </li> <li> <p>METADATA_UPDATE_FAILED – You submitted a metadata update for an existing document but it failed.</p> </li> <li> <p>FAILED – The document failed to be ingested.</p> </li> <li> <p>NOT_FOUND – The document wasn't found.</p> </li> <li> <p>IGNORED – The document was ignored during ingestion.</p> </li> <li> <p>DELETING – You submitted the delete job containing the document.</p> </li> <li> <p>DELETE_IN_PROGRESS – The document is being deleted.</p> </li> </ul>
     #   @return [String]
     # @!attribute identifier
     #   <p>Contains information that identifies the document.</p>
@@ -4340,6 +4699,14 @@ module Aws::BedrockAgent
         options[:lambda_arn] = '' unless options.key?(:lambda_arn)
         super
       end
+    end
+
+    # <p>The option to run the monthly sync on the last calendar day of each month.</p>
+    class LastDayOfMonth < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a Lex node in the flow. You specify a Amazon Lex bot to invoke. This node takes an utterance as the input and returns as the output the intent identified by the Amazon Lex bot. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
@@ -4878,6 +5245,44 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the knowledge base whose VPC configurations you want to list.</p>
+    #   @return [String]
+    # @!attribute status_filter
+    #   <p>The status to filter the results by. Only VPC configurations with the specified status are returned.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response. If more results are available, the response returns a <code>nextToken</code>.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next page of results, returned in a previous response when more results are available.</p>
+    #   @return [String]
+    class ListVpcConfigurationsRequest < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :status_filter,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of VPC configuration summaries.</p>
+    #   @return [Array<Types::VpcConfigurationSummary>]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next page of results, present when the total number of results exceeds the maximum number of results.</p>
+    #   @return [String]
+    class ListVpcConfigurationsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains configurations for the controller node of a DoWhile loop in the flow.</p>
     # @!attribute continue_condition
     #   <p>Specifies the condition that determines when the flow exits the DoWhile loop. The loop executes until this condition evaluates to true.</p>
@@ -4974,6 +5379,78 @@ module Aws::BedrockAgent
       :node,
       :input,
       :cause,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configurations for a managed knowledge base.</p>
+    # @!attribute embedding_model_type
+    #   <p>Choose CUSTOM to provide your own Bedrock embedding model ARN. Choose MANAGED to use a service-managed embedding model.</p>
+    #   @return [String]
+    # @!attribute embedding_model_arn
+    #   <p>The ARN for the embeddings model.</p>
+    #   @return [String]
+    # @!attribute embedding_model_configuration
+    #   <p>The configuration details for the embeddings model. Not required when choosing the MANAGED embeddingModelType.</p>
+    #   @return [Types::EmbeddingModelConfiguration]
+    # @!attribute server_side_encryption_configuration
+    #   <p>Contains the configuration for server-side encryption for your managed knowledge base.</p>
+    #   @return [Types::ServerSideEncryptionConfiguration]
+    # @!attribute supplemental_data_storage_configuration
+    #   <p>Use this object to specify the Amazon S3 location that the knowledge base uses to process and ingest multimodal content. This field is required when you use a native multimodal embedding model.</p>
+    #   @return [Types::SupplementalDataStorageConfiguration]
+    class ManagedKnowledgeBaseConfiguration < Struct.new(
+      nil,
+      :embedding_model_type,
+      :embedding_model_arn,
+      :embedding_model_configuration,
+      :server_side_encryption_configuration,
+      :supplemental_data_storage_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for managed knowledge base connector data sources.</p>
+    # @!attribute deletion_protection_configuration
+    #   <p>A safeguard against accidental bulk deletion of indexed content.</p>
+    #   @return [Types::DeletionProtectionConfiguration]
+    # @!attribute media_extraction_configuration
+    #   <p>Configuration for extracting media (images, audio, video) from data source files.</p>
+    #   @return [Types::MediaExtractionConfiguration]
+    # @!attribute connector_parameters
+    #   <p>Connector-specific parameters. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-connect-ds.html">Connect a data source</a>.</p>
+    #   @return [JSON]
+    # @!attribute sync_schedule
+    #   <p>The recurring schedule on which the connector automatically syncs this data source. If not specified, the data source is not synced automatically and you start each sync yourself. Not supported for the Custom connector.</p>
+    #   @return [Types::SyncSchedule]
+    class ManagedKnowledgeBaseConnectorConfiguration < Struct.new(
+      nil,
+      :deletion_protection_configuration,
+      :media_extraction_configuration,
+      :connector_parameters,
+      :sync_schedule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for media extraction settings.</p>
+    # @!attribute image_extraction_configuration
+    #   <p>Configuration for image extraction.</p>
+    #   @return [Types::ImageExtractionConfiguration]
+    # @!attribute audio_extraction_configuration
+    #   <p>Configuration for audio extraction.</p>
+    #   @return [Types::AudioExtractionConfiguration]
+    # @!attribute video_extraction_configuration
+    #   <p>Configuration for video extraction.</p>
+    #   @return [Types::VideoExtractionConfiguration]
+    class MediaExtractionConfiguration < Struct.new(
+      nil,
+      :image_extraction_configuration,
+      :audio_extraction_configuration,
+      :video_extraction_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5288,6 +5765,18 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A monthly sync on a specified day of the month.</p>
+    # @!attribute day_of_month
+    #   <p>The day of the month on which the monthly sync runs.</p>
+    #   @return [Types::DayOfMonth]
+    class MonthlySchedule < Struct.new(
+      nil,
+      :day_of_month,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details about a flow that contains multiple <code>LoopController</code> nodes in a DoWhile loop.</p>
     # @!attribute loop_node
     #   <p>The DoWhile loop in a flow that contains multiple <code>LoopController</code> nodes.</p>
@@ -5489,7 +5978,7 @@ module Aws::BedrockAgent
 
     # <p>Settings for parsing document contents. If you exclude this field, the default parser converts the contents of each document into text before splitting it into chunks. Specify the parsing strategy to use in the <code>parsingStrategy</code> field and include the relevant configuration, or omit it to use the Amazon Bedrock default parser. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-advanced-parsing.html">Parsing options for your data source</a>.</p> <note> <p>If you specify <code>BEDROCK_DATA_AUTOMATION</code> or <code>BEDROCK_FOUNDATION_MODEL</code> and it fails to parse a file, the Amazon Bedrock default parser will be used instead.</p> </note>
     # @!attribute parsing_strategy
-    #   <p>The parsing strategy for the data source.</p>
+    #   <p>The parsing strategy for the data source.</p> <p>For managed knowledge bases, the strategy that you can select depends on the embedding model that your knowledge base uses:</p> <ul> <li> <p>If your knowledge base uses a native multimodal embedding model, specify <code>MULTI_MODAL_EMBEDDINGS</code>. With this strategy, files are sent directly to the embedding model instead of being parsed into text. This is the only strategy that is supported for these knowledge bases.</p> </li> <li> <p>Otherwise, specify <code>SMART_PARSING</code>.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-customize-ingestion.html">Customize ingestion for managed knowledge bases</a>.</p>
     #   @return [String]
     # @!attribute bedrock_foundation_model_configuration
     #   <p>If you specify <code>BEDROCK_FOUNDATION_MODEL</code> as the parsing strategy for ingesting your data source, use this object to modify configurations for using a foundation model to parse documents.</p>
@@ -6006,6 +6495,40 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base to attach the resource policy to.</p>
+    #   @return [String]
+    # @!attribute policy
+    #   <p>The JSON-formatted resource policy to associate with the knowledge base.</p>
+    #   @return [String]
+    # @!attribute expected_revision_id
+    #   <p>The expected revision identifier of the resource policy. Use this to prevent conflicts when multiple users update the same policy concurrently. Specify the <code>revisionId</code> from the most recent <code>GetResourcePolicy</code> or <code>PutResourcePolicy</code> response.</p>
+    #   @return [String]
+    class PutResourcePolicyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :policy,
+      :expected_revision_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The ARN of the knowledge base that the resource policy was attached to.</p>
+    #   @return [String]
+    # @!attribute revision_id
+    #   <p>The revision identifier of the resource policy. Use this value in the <code>expectedRevisionId</code> field of a subsequent <code>PutResourcePolicy</code> or <code>DeleteResourcePolicy</code> request.</p>
+    #   @return [String]
+    class PutResourcePolicyResponse < Struct.new(
+      nil,
+      :resource_arn,
+      :revision_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about a column in the current table for the query engine to consider.</p>
     # @!attribute name
     #   <p>The name of the column for which the other fields in this object apply.</p>
@@ -6422,7 +6945,7 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration information to connect to Amazon S3 as your data source.</p>
+    # <p>The configuration information to connect to Amazon S3 as your data source for self-managed knowledge bases. To configure this data source for managed knowledge bases, use <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html">managedKnowledgeBaseConnectorConfiguration</a>.</p>
     # @!attribute bucket_arn
     #   <p>The Amazon Resource Name (ARN) of the S3 bucket that contains your data.</p>
     #   @return [String]
@@ -6570,7 +7093,7 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains the configuration for server-side encryption.</p>
+    # <p>Contains the configuration for server-side encryption for your managed knowledge base.</p>
     # @!attribute kms_key_arn
     #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.</p>
     #   @return [String]
@@ -6622,7 +7145,7 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration information to connect to SharePoint as your data source.</p>
+    # <p>The configuration information to connect to SharePoint as your data source for self-managed knowledge bases.</p>
     # @!attribute source_configuration
     #   <p>The endpoint information to connect to your SharePoint data source.</p>
     #   @return [Types::SharePointSourceConfiguration]
@@ -6850,9 +7373,9 @@ module Aws::BedrockAgent
       class Unknown < StorageFlowNodeServiceConfiguration; end
     end
 
-    # <p>Specifies configurations for the storage location of the images extracted from multimodal documents in your data source. These images can be retrieved and returned to the end user.</p>
+    # <p>Specifies configurations for the storage location of multimedia content (images, audio, and video) extracted from multimodal documents in your data source. This content can be retrieved and returned to the end user with timestamp references for audio and video segments.</p>
     # @!attribute storage_locations
-    #   <p>A list of objects specifying storage locations for images extracted from multimodal documents in your data source.</p>
+    #   <p>A list of objects specifying storage locations for multimedia content (images, audio, and video) extracted from multimodal documents in your data source.</p>
     #   @return [Array<Types::SupplementalDataStorageLocation>]
     class SupplementalDataStorageConfiguration < Struct.new(
       nil,
@@ -6862,12 +7385,12 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about a storage location for images extracted from multimodal documents in your data source.</p>
+    # <p>Contains information about a storage location for multimedia content (images, audio, and video) extracted from multimodal documents in your data source.</p>
     # @!attribute type
     #   <p>Specifies the storage service used for this location.</p>
     #   @return [String]
     # @!attribute s3_location
-    #   <p>Contains information about the Amazon S3 location for the extracted images.</p>
+    #   <p>Contains information about the Amazon S3 location for the extracted multimedia content.</p>
     #   @return [Types::S3Location]
     class SupplementalDataStorageLocation < Struct.new(
       nil,
@@ -6876,6 +7399,31 @@ module Aws::BedrockAgent
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The recurring schedule on which a managed knowledge base connector automatically syncs its data source. Specify exactly one of <code>daily</code>, <code>weekly</code>, or <code>monthly</code>.</p>
+    # @!attribute daily
+    #   <p>A daily sync that runs once a day at a system-chosen off-peak time. The run time is not configurable.</p>
+    #   @return [Types::DailySchedule]
+    # @!attribute weekly
+    #   <p>A weekly sync that runs once a week on the specified day of the week.</p>
+    #   @return [Types::WeeklySchedule]
+    # @!attribute monthly
+    #   <p>A monthly sync that runs once a month on the specified day of the month.</p>
+    #   @return [Types::MonthlySchedule]
+    class SyncSchedule < Struct.new(
+      :daily,
+      :weekly,
+      :monthly,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Daily < SyncSchedule; end
+      class Weekly < SyncSchedule; end
+      class Monthly < SyncSchedule; end
+      class Unknown < SyncSchedule; end
     end
 
     # <p>Contains a system prompt to provide context to the model or to describe how it should behave. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html">Create a prompt using Prompt management</a>.</p>
@@ -7052,11 +7600,15 @@ module Aws::BedrockAgent
     # @!attribute input_schema
     #   <p>The input schema for the tool.</p>
     #   @return [Types::ToolInputSchema]
+    # @!attribute strict
+    #   <p>Whether the tool schema is strictly enforced.</p>
+    #   @return [Boolean]
     class ToolSpecification < Struct.new(
       nil,
       :name,
       :description,
       :input_schema,
+      :strict,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8013,6 +8565,170 @@ module Aws::BedrockAgent
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings for processing video content in multimodal knowledge bases.</p>
+    # @!attribute segmentation_configuration
+    #   <p>Configuration for segmenting video content during processing.</p>
+    #   @return [Types::VideoSegmentationConfiguration]
+    class VideoConfiguration < Struct.new(
+      nil,
+      :segmentation_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for video extraction.</p>
+    # @!attribute video_extraction_status
+    #   <p>Whether video extraction is enabled or disabled.</p>
+    #   @return [String]
+    class VideoExtractionConfiguration < Struct.new(
+      nil,
+      :video_extraction_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for segmenting video content during multimodal knowledge base ingestion. Determines how video files are divided into chunks for processing.</p>
+    # @!attribute fixed_length_duration
+    #   <p>The duration in seconds for each video segment. Video files will be divided into chunks of this length for processing.</p>
+    #   @return [Integer]
+    class VideoSegmentationConfiguration < Struct.new(
+      nil,
+      :fixed_length_duration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the details of a VPC configuration, including its connection settings, resolution mode, and current lifecycle status.</p>
+    # @!attribute vpc_configuration_id
+    #   <p>The unique identifier of the VPC configuration.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle status of the VPC configuration.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>Additional detail about the current status, such as the cause of a <code>CREATE_FAILED</code> or <code>DELETE_FAILED</code> status.</p>
+    #   @return [String]
+    # @!attribute vpc_id
+    #   <p>The identifier of the VPC that the knowledge base connects through to reach the resource.</p>
+    #   @return [String]
+    # @!attribute subnet_ids
+    #   <p>The subnets that the knowledge base uses to connect to the resource.</p>
+    #   @return [Array<String>]
+    # @!attribute resource_target
+    #   <p>The private IPv4 address or DNS name of the resource.</p>
+    #   @return [String]
+    # @!attribute port
+    #   <p>The port on which the resource is reached.</p>
+    #   @return [Integer]
+    # @!attribute protocol
+    #   <p>The protocol used to connect to the resource.</p>
+    #   @return [String]
+    # @!attribute resolution_mode
+    #   <p>Specifies how the resource target is resolved.</p>
+    #   @return [String]
+    # @!attribute host_header
+    #   <p>The HTTP <code>Host</code> header value sent when invoking the resource, if configured.</p>
+    #   @return [String]
+    # @!attribute tls_server_name
+    #   <p>The expected TLS server name that the service matches against the Subject Alternative Names on the resource's TLS certificate. Present when <code>protocol</code> is <code>HTTPS</code>.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The human-readable name of the VPC configuration, if provided.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the VPC configuration, if provided.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The time at which the VPC configuration was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time at which the VPC configuration was last updated.</p>
+    #   @return [Time]
+    class VpcConfiguration < Struct.new(
+      nil,
+      :vpc_configuration_id,
+      :status,
+      :status_message,
+      :vpc_id,
+      :subnet_ids,
+      :resource_target,
+      :port,
+      :protocol,
+      :resolution_mode,
+      :host_header,
+      :tls_server_name,
+      :name,
+      :description,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a VPC configuration returned by <code>ListVpcConfigurations</code>.</p>
+    # @!attribute vpc_configuration_id
+    #   <p>The unique identifier of the VPC configuration.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle status of the VPC configuration.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>Additional detail about the current status, such as the cause of a failure.</p>
+    #   @return [String]
+    # @!attribute vpc_id
+    #   <p>The identifier of the VPC that the knowledge base connects through to reach the resource.</p>
+    #   @return [String]
+    # @!attribute resource_target
+    #   <p>The private IPv4 address or DNS name of the resource.</p>
+    #   @return [String]
+    # @!attribute port
+    #   <p>The port on which the resource is reached.</p>
+    #   @return [Integer]
+    # @!attribute protocol
+    #   <p>The protocol used to connect to the resource.</p>
+    #   @return [String]
+    # @!attribute resolution_mode
+    #   <p>Specifies how the resource target is resolved.</p>
+    #   @return [String]
+    # @!attribute host_header
+    #   <p>The HTTP <code>Host</code> header value sent when invoking the resource, if configured.</p>
+    #   @return [String]
+    # @!attribute tls_server_name
+    #   <p>The expected TLS server name that the service matches against the Subject Alternative Names on the resource's TLS certificate. Present when <code>protocol</code> is <code>HTTPS</code>.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The human-readable name of the VPC configuration, if provided.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the VPC configuration, if provided.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The time at which the VPC configuration was created.</p>
+    #   @return [Time]
+    class VpcConfigurationSummary < Struct.new(
+      nil,
+      :vpc_configuration_id,
+      :status,
+      :status_message,
+      :vpc_id,
+      :resource_target,
+      :port,
+      :protocol,
+      :resolution_mode,
+      :host_header,
+      :tls_server_name,
+      :name,
+      :description,
+      :created_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration of web URLs that you want to crawl. You should be authorized to crawl the URLs.</p>
     # @!attribute crawler_limits
     #   <p>The configuration of crawl limits for the web URLs.</p>
@@ -8084,6 +8800,18 @@ module Aws::BedrockAgent
     class WebSourceConfiguration < Struct.new(
       nil,
       :url_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A weekly sync on a specified day of the week.</p>
+    # @!attribute day_of_week
+    #   <p>The day of the week on which the weekly sync runs.</p>
+    #   @return [String]
+    class WeeklySchedule < Struct.new(
+      nil,
+      :day_of_week,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -225,6 +225,10 @@ module Aws::S3
             bucket: params[:bucket],
             key: params[:key],
           }
+        when :delete_object_annotation
+          {
+            bucket: params[:bucket],
+          }
         when :delete_object_tagging
           {
             bucket: params[:bucket],
@@ -237,6 +241,10 @@ module Aws::S3
           {
             bucket: params[:bucket],
             use_s3_express_control_endpoint: true,
+          }
+        when :get_bucket_abac
+          {
+            bucket: params[:bucket],
           }
         when :get_bucket_accelerate_configuration
           {
@@ -358,6 +366,11 @@ module Aws::S3
             bucket: params[:bucket],
             key: params[:key],
           }
+        when :get_object_annotation
+          {
+            bucket: params[:bucket],
+            key: params[:key],
+          }
         when :get_object_attributes
           {
             bucket: params[:bucket],
@@ -414,6 +427,7 @@ module Aws::S3
         when :list_bucket_metrics_configurations
           {
             bucket: params[:bucket],
+            use_s3_express_control_endpoint: true,
           }
         when :list_directory_buckets
           {
@@ -423,6 +437,10 @@ module Aws::S3
           {
             bucket: params[:bucket],
             prefix: params[:prefix],
+          }
+        when :list_object_annotations
+          {
+            bucket: params[:bucket],
           }
         when :list_object_versions
           {
@@ -443,6 +461,10 @@ module Aws::S3
           {
             bucket: params[:bucket],
             key: params[:key],
+          }
+        when :put_bucket_abac
+          {
+            bucket: params[:bucket],
           }
         when :put_bucket_accelerate_configuration
           {
@@ -544,6 +566,11 @@ module Aws::S3
             bucket: params[:bucket],
             key: params[:key],
           }
+        when :put_object_annotation
+          {
+            bucket: params[:bucket],
+            key: params[:key],
+          }
         when :put_object_legal_hold
           {
             bucket: params[:bucket],
@@ -578,6 +605,11 @@ module Aws::S3
           {
             bucket: params[:bucket],
           }
+        when :update_bucket_metadata_annotation_table_configuration
+          {
+            bucket: params[:bucket],
+            use_s3_express_control_endpoint: true,
+          }
         when :update_bucket_metadata_inventory_table_configuration
           {
             bucket: params[:bucket],
@@ -587,6 +619,10 @@ module Aws::S3
           {
             bucket: params[:bucket],
             use_s3_express_control_endpoint: true,
+          }
+        when :update_object_encryption
+          {
+            bucket: params[:bucket],
           }
         when :upload_part
           {

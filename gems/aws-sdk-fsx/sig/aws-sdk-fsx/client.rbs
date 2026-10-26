@@ -114,6 +114,18 @@ module Aws::FSx
           }
         }
       },
+      ?ontap_configuration: {
+        volume_id: String,
+        file_system_identity: {
+          type: String,
+          unix_user: {
+            name: String
+          },
+          windows_user: {
+            name: untyped
+          }
+        }
+      },
       ?s3_access_point: {
         vpc_configuration: {
           vpc_id: String
@@ -261,7 +273,8 @@ module Aws::FSx
           file_system_administrators_group: String,
           user_name: String,
           password: String,
-          dns_ips: Array[String]
+          dns_ips: Array[String],
+          domain_join_service_account_secret: String
         },
         deployment_type: String,
         preferred_subnet_id: String,
@@ -279,6 +292,10 @@ module Aws::FSx
         disk_iops_configuration: {
           mode: String,
           iops: Integer
+        },
+        fsrm_configuration: {
+          fsrm_service_enabled: untyped,
+          event_log_destination: untyped
         }
       },
       ?lustre_configuration: {
@@ -402,7 +419,8 @@ module Aws::FSx
           file_system_administrators_group: String,
           user_name: String,
           password: String,
-          dns_ips: Array[String]
+          dns_ips: Array[String],
+          domain_join_service_account_secret: String
         },
         deployment_type: String,
         preferred_subnet_id: String,
@@ -420,6 +438,10 @@ module Aws::FSx
         disk_iops_configuration: {
           mode: String,
           iops: Integer
+        },
+        fsrm_configuration: {
+          fsrm_service_enabled: untyped,
+          event_log_destination: untyped
         }
       },
       ?lustre_configuration: {
@@ -534,7 +556,8 @@ module Aws::FSx
           file_system_administrators_group: String,
           user_name: String,
           password: String,
-          dns_ips: Array[String]
+          dns_ips: Array[String],
+          domain_join_service_account_secret: String
         }
       },
       ?client_request_token: String,
@@ -1097,7 +1120,8 @@ module Aws::FSx
           dns_ips: Array[String],
           domain_name: String,
           organizational_unit_distinguished_name: String,
-          file_system_administrators_group: String
+          file_system_administrators_group: String,
+          domain_join_service_account_secret: String
         },
         audit_log_configuration: {
           file_access_audit_log_level: String,
@@ -1107,6 +1131,10 @@ module Aws::FSx
         disk_iops_configuration: {
           mode: String,
           iops: Integer
+        },
+        fsrm_configuration: {
+          fsrm_service_enabled: bool,
+          event_log_destination: untyped
         }
       },
       ?lustre_configuration: {
@@ -1205,7 +1233,8 @@ module Aws::FSx
           dns_ips: Array[String],
           domain_name: String,
           organizational_unit_distinguished_name: String,
-          file_system_administrators_group: String
+          file_system_administrators_group: String,
+          domain_join_service_account_secret: String
         },
         net_bios_name: String
       },

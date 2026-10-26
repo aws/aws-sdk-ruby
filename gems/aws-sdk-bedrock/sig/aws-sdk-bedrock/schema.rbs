@@ -4,11 +4,26 @@ module Aws::Bedrock
 
     AcceptEula: BooleanShape
     AccessDeniedException: StructureShape
+    AccountEnforcedGuardrailConfigurationId: StringShape
+    AccountEnforcedGuardrailInferenceInputConfiguration: StructureShape
+    AccountEnforcedGuardrailOutputConfiguration: StructureShape
+    AccountEnforcedGuardrailsOutputConfiguration: ListShape
     AccountId: StringShape
     AcknowledgementFormDataBody: BlobShape
     AdditionalModelRequestFields: MapShape
     AdditionalModelRequestFieldsKey: StringShape
     AdditionalModelRequestFieldsValue: DocumentShape
+    AdvancedPromptOptimizationInputConfig: StructureShape
+    AdvancedPromptOptimizationJobArn: StringShape
+    AdvancedPromptOptimizationJobDescription: StringShape
+    AdvancedPromptOptimizationJobIdentifier: StringShape
+    AdvancedPromptOptimizationJobIdentifiers: ListShape
+    AdvancedPromptOptimizationJobName: StringShape
+    AdvancedPromptOptimizationJobStatus: EnumShape
+    AdvancedPromptOptimizationJobSummaries: ListShape
+    AdvancedPromptOptimizationJobSummary: StructureShape
+    AdvancedPromptOptimizationModelIdentifier: StringShape
+    AdvancedPromptOptimizationOutputConfig: StructureShape
     AgreementAvailability: StructureShape
     AgreementStatus: EnumShape
     ApplicationType: EnumShape
@@ -47,6 +62,7 @@ module Aws::Bedrock
     AutomatedReasoningLogicStatementContent: StringShape
     AutomatedReasoningLogicStatementList: ListShape
     AutomatedReasoningNaturalLanguageStatementContent: StringShape
+    AutomatedReasoningPolicyAccuracyScore: FloatShape
     AutomatedReasoningPolicyAddRuleAnnotation: StructureShape
     AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation: StructureShape
     AutomatedReasoningPolicyAddRuleMutation: StructureShape
@@ -55,6 +71,11 @@ module Aws::Bedrock
     AutomatedReasoningPolicyAddTypeValue: StructureShape
     AutomatedReasoningPolicyAddVariableAnnotation: StructureShape
     AutomatedReasoningPolicyAddVariableMutation: StructureShape
+    AutomatedReasoningPolicyAnnotatedChunk: StructureShape
+    AutomatedReasoningPolicyAnnotatedChunkList: ListShape
+    AutomatedReasoningPolicyAnnotatedContent: UnionShape
+    AutomatedReasoningPolicyAnnotatedContentList: ListShape
+    AutomatedReasoningPolicyAnnotatedLine: StructureShape
     AutomatedReasoningPolicyAnnotation: UnionShape
     AutomatedReasoningPolicyAnnotationFeedbackNaturalLanguage: StringShape
     AutomatedReasoningPolicyAnnotationIngestContent: StringShape
@@ -63,14 +84,22 @@ module Aws::Bedrock
     AutomatedReasoningPolicyAnnotationStatus: EnumShape
     AutomatedReasoningPolicyArn: StringShape
     AutomatedReasoningPolicyArnList: ListShape
+    AutomatedReasoningPolicyAtomicStatement: StructureShape
+    AutomatedReasoningPolicyAtomicStatementList: ListShape
     AutomatedReasoningPolicyBuildDocumentBlob: BlobShape
     AutomatedReasoningPolicyBuildDocumentContentType: EnumShape
     AutomatedReasoningPolicyBuildDocumentDescription: StringShape
     AutomatedReasoningPolicyBuildDocumentName: StringShape
+    AutomatedReasoningPolicyBuildFeedback: StringShape
     AutomatedReasoningPolicyBuildLog: StructureShape
     AutomatedReasoningPolicyBuildLogEntry: StructureShape
     AutomatedReasoningPolicyBuildLogEntryList: ListShape
     AutomatedReasoningPolicyBuildMessageType: EnumShape
+    AutomatedReasoningPolicyBuildResultAssetId: StringShape
+    AutomatedReasoningPolicyBuildResultAssetManifest: StructureShape
+    AutomatedReasoningPolicyBuildResultAssetManifestEntry: StructureShape
+    AutomatedReasoningPolicyBuildResultAssetManifestList: ListShape
+    AutomatedReasoningPolicyBuildResultAssetName: StringShape
     AutomatedReasoningPolicyBuildResultAssetType: EnumShape
     AutomatedReasoningPolicyBuildResultAssets: UnionShape
     AutomatedReasoningPolicyBuildStep: StructureShape
@@ -88,6 +117,7 @@ module Aws::Bedrock
     AutomatedReasoningPolicyBuildWorkflowSummary: StructureShape
     AutomatedReasoningPolicyBuildWorkflowType: EnumShape
     AutomatedReasoningPolicyConflictedRuleIdList: ListShape
+    AutomatedReasoningPolicyCoverageScore: FloatShape
     AutomatedReasoningPolicyDefinition: StructureShape
     AutomatedReasoningPolicyDefinitionElement: UnionShape
     AutomatedReasoningPolicyDefinitionQualityReport: StructureShape
@@ -124,16 +154,42 @@ module Aws::Bedrock
     AutomatedReasoningPolicyDisjointRuleSet: StructureShape
     AutomatedReasoningPolicyDisjointRuleSetList: ListShape
     AutomatedReasoningPolicyDisjointedRuleIdList: ListShape
+    AutomatedReasoningPolicyDocumentId: StringShape
+    AutomatedReasoningPolicyDocumentSha256: StringShape
+    AutomatedReasoningPolicyFidelityReport: StructureShape
     AutomatedReasoningPolicyFormatVersion: StringShape
+    AutomatedReasoningPolicyGenerateFidelityReportContent: UnionShape
+    AutomatedReasoningPolicyGenerateFidelityReportDocumentList: ListShape
+    AutomatedReasoningPolicyGeneratedTestCase: StructureShape
+    AutomatedReasoningPolicyGeneratedTestCaseList: ListShape
+    AutomatedReasoningPolicyGeneratedTestCases: StructureShape
     AutomatedReasoningPolicyHash: StringShape
     AutomatedReasoningPolicyId: StringShape
     AutomatedReasoningPolicyIngestContentAnnotation: StructureShape
+    AutomatedReasoningPolicyIterativeRefinementContent: StructureShape
+    AutomatedReasoningPolicyIterativeRefinementDocumentList: ListShape
+    AutomatedReasoningPolicyJustificationList: ListShape
+    AutomatedReasoningPolicyJustificationText: StringShape
+    AutomatedReasoningPolicyLineNumberList: ListShape
+    AutomatedReasoningPolicyLineText: StringShape
     AutomatedReasoningPolicyMutation: UnionShape
     AutomatedReasoningPolicyName: StringShape
     AutomatedReasoningPolicyPlanning: StructureShape
+    AutomatedReasoningPolicyReportSourceDocument: StructureShape
+    AutomatedReasoningPolicyReportSourceDocumentList: ListShape
+    AutomatedReasoningPolicyRuleReport: StructureShape
+    AutomatedReasoningPolicyRuleReportMap: MapShape
     AutomatedReasoningPolicyScenario: StructureShape
     AutomatedReasoningPolicyScenarioAlternateExpression: StringShape
     AutomatedReasoningPolicyScenarioExpression: StringShape
+    AutomatedReasoningPolicyScenarioList: ListShape
+    AutomatedReasoningPolicyScenarios: StructureShape
+    AutomatedReasoningPolicySourceDocument: StructureShape
+    AutomatedReasoningPolicyStatementId: StringShape
+    AutomatedReasoningPolicyStatementLocation: StructureShape
+    AutomatedReasoningPolicyStatementReference: StructureShape
+    AutomatedReasoningPolicyStatementReferenceList: ListShape
+    AutomatedReasoningPolicyStatementText: StringShape
     AutomatedReasoningPolicySummaries: ListShape
     AutomatedReasoningPolicySummary: StructureShape
     AutomatedReasoningPolicyTestCase: StructureShape
@@ -157,9 +213,17 @@ module Aws::Bedrock
     AutomatedReasoningPolicyUpdateTypeValue: StructureShape
     AutomatedReasoningPolicyUpdateVariableAnnotation: StructureShape
     AutomatedReasoningPolicyUpdateVariableMutation: StructureShape
+    AutomatedReasoningPolicyVariableReport: StructureShape
+    AutomatedReasoningPolicyVariableReportMap: MapShape
     AutomatedReasoningPolicyVersion: StringShape
     AutomatedReasoningPolicyWorkflowTypeContent: UnionShape
     BaseModelIdentifier: StringShape
+    BatchDeleteAdvancedPromptOptimizationJobError: StructureShape
+    BatchDeleteAdvancedPromptOptimizationJobErrors: ListShape
+    BatchDeleteAdvancedPromptOptimizationJobItem: StructureShape
+    BatchDeleteAdvancedPromptOptimizationJobItems: ListShape
+    BatchDeleteAdvancedPromptOptimizationJobRequest: StructureShape
+    BatchDeleteAdvancedPromptOptimizationJobResponse: StructureShape
     BatchDeleteEvaluationJobError: StructureShape
     BatchDeleteEvaluationJobErrors: ListShape
     BatchDeleteEvaluationJobItem: StructureShape
@@ -179,8 +243,11 @@ module Aws::Bedrock
     CancelAutomatedReasoningPolicyBuildWorkflowResponse: StructureShape
     CloudWatchConfig: StructureShape
     CommitmentDuration: EnumShape
+    ConfigurationOwner: StringShape
     ConflictException: StructureShape
     ContentType: StringShape
+    CreateAdvancedPromptOptimizationJobRequest: StructureShape
+    CreateAdvancedPromptOptimizationJobResponse: StructureShape
     CreateAutomatedReasoningPolicyRequest: StructureShape
     CreateAutomatedReasoningPolicyResponse: StructureShape
     CreateAutomatedReasoningPolicyTestCaseRequest: StructureShape
@@ -221,12 +288,15 @@ module Aws::Bedrock
     CustomMetricEvaluatorModelConfig: StructureShape
     CustomMetricInstructions: StringShape
     CustomModelArn: StringShape
+    CustomModelDataSource: UnionShape
     CustomModelDeploymentArn: StringShape
     CustomModelDeploymentDescription: StringShape
     CustomModelDeploymentIdentifier: StringShape
     CustomModelDeploymentStatus: EnumShape
     CustomModelDeploymentSummary: StructureShape
     CustomModelDeploymentSummaryList: ListShape
+    CustomModelDeploymentUpdateDetails: StructureShape
+    CustomModelDeploymentUpdateStatus: EnumShape
     CustomModelName: StringShape
     CustomModelSummary: StructureShape
     CustomModelSummaryList: ListShape
@@ -235,6 +305,7 @@ module Aws::Bedrock
     CustomizationConfig: UnionShape
     CustomizationType: EnumShape
     DataProcessingDetails: StructureShape
+    DataRetentionMode: EnumShape
     DeleteAutomatedReasoningPolicyBuildWorkflowRequest: StructureShape
     DeleteAutomatedReasoningPolicyBuildWorkflowResponse: StructureShape
     DeleteAutomatedReasoningPolicyRequest: StructureShape
@@ -245,6 +316,8 @@ module Aws::Bedrock
     DeleteCustomModelDeploymentResponse: StructureShape
     DeleteCustomModelRequest: StructureShape
     DeleteCustomModelResponse: StructureShape
+    DeleteEnforcedGuardrailConfigurationRequest: StructureShape
+    DeleteEnforcedGuardrailConfigurationResponse: StructureShape
     DeleteFoundationModelAgreementRequest: StructureShape
     DeleteFoundationModelAgreementResponse: StructureShape
     DeleteGuardrailRequest: StructureShape
@@ -261,6 +334,8 @@ module Aws::Bedrock
     DeletePromptRouterResponse: StructureShape
     DeleteProvisionedModelThroughputRequest: StructureShape
     DeleteProvisionedModelThroughputResponse: StructureShape
+    DeleteResourcePolicyRequest: StructureShape
+    DeleteResourcePolicyResponse: StructureShape
     DeregisterMarketplaceModelEndpointRequest: StructureShape
     DeregisterMarketplaceModelEndpointResponse: StructureShape
     DimensionalPriceRate: StructureShape
@@ -268,6 +343,7 @@ module Aws::Bedrock
     EndpointConfig: UnionShape
     EndpointName: StringShape
     EntitlementAvailability: EnumShape
+    EpochCount: IntegerShape
     ErrorMessage: StringShape
     ErrorMessages: ListShape
     EvaluationBedrockKnowledgeBaseIdentifiers: ListShape
@@ -314,6 +390,8 @@ module Aws::Bedrock
     EvaluatorModelConfig: UnionShape
     EvaluatorModelIdentifier: StringShape
     EvaluatorModelIdentifiers: ListShape
+    ExcludedModelId: StringShape
+    ExcludedModelsList: ListShape
     ExportAutomatedReasoningPolicyVersionRequest: StructureShape
     ExportAutomatedReasoningPolicyVersionResponse: StructureShape
     ExternalSource: StructureShape
@@ -334,6 +412,10 @@ module Aws::Bedrock
     FoundationModelSummary: StructureShape
     FoundationModelSummaryList: ListShape
     GenerationConfiguration: StructureShape
+    GetAccountDataRetentionRequest: StructureShape
+    GetAccountDataRetentionResponse: StructureShape
+    GetAdvancedPromptOptimizationJobRequest: StructureShape
+    GetAdvancedPromptOptimizationJobResponse: StructureShape
     GetAutomatedReasoningPolicyAnnotationsRequest: StructureShape
     GetAutomatedReasoningPolicyAnnotationsResponse: StructureShape
     GetAutomatedReasoningPolicyBuildWorkflowRequest: StructureShape
@@ -381,8 +463,11 @@ module Aws::Bedrock
     GetPromptRouterResponse: StructureShape
     GetProvisionedModelThroughputRequest: StructureShape
     GetProvisionedModelThroughputResponse: StructureShape
+    GetResourcePolicyRequest: StructureShape
+    GetResourcePolicyResponse: StructureShape
     GetUseCaseForModelAccessRequest: StructureShape
     GetUseCaseForModelAccessResponse: StructureShape
+    GraderConfig: UnionShape
     GuardrailArn: StringShape
     GuardrailAutomatedReasoningPolicy: StructureShape
     GuardrailAutomatedReasoningPolicyConfig: StructureShape
@@ -481,6 +566,9 @@ module Aws::Bedrock
     ImportedModelName: StringShape
     ImportedModelSummary: StructureShape
     ImportedModelSummaryList: ListShape
+    IncludedModelId: StringShape
+    IncludedModelsList: ListShape
+    InferenceConfiguration: StructureShape
     InferenceProfileArn: StringShape
     InferenceProfileDescription: StringShape
     InferenceProfileId: StringShape
@@ -496,6 +584,7 @@ module Aws::Bedrock
     InferenceProfileType: EnumShape
     InferenceType: EnumShape
     InferenceTypeList: ListShape
+    InputTags: EnumShape
     InstanceCount: IntegerShape
     InstanceType: StringShape
     InstructSupported: BooleanShape
@@ -513,7 +602,11 @@ module Aws::Bedrock
     KnowledgeBaseRetrievalConfiguration: StructureShape
     KnowledgeBaseRetrieveAndGenerateConfiguration: StructureShape
     KnowledgeBaseVectorSearchConfiguration: StructureShape
+    LambdaArn: StringShape
+    LambdaGraderConfig: StructureShape
     LegalTerm: StructureShape
+    ListAdvancedPromptOptimizationJobsRequest: StructureShape
+    ListAdvancedPromptOptimizationJobsResponse: StructureShape
     ListAutomatedReasoningPoliciesRequest: StructureShape
     ListAutomatedReasoningPoliciesResponse: StructureShape
     ListAutomatedReasoningPolicyBuildWorkflowsRequest: StructureShape
@@ -526,6 +619,8 @@ module Aws::Bedrock
     ListCustomModelDeploymentsResponse: StructureShape
     ListCustomModelsRequest: StructureShape
     ListCustomModelsResponse: StructureShape
+    ListEnforcedGuardrailsConfigurationRequest: StructureShape
+    ListEnforcedGuardrailsConfigurationResponse: StructureShape
     ListEvaluationJobsRequest: StructureShape
     ListEvaluationJobsResponse: StructureShape
     ListFoundationModelAgreementOffersRequest: StructureShape
@@ -569,6 +664,8 @@ module Aws::Bedrock
     MetricName: StringShape
     ModelArchitecture: StringShape
     ModelArn: StringShape
+    ModelConfiguration: StructureShape
+    ModelConfigurations: ListShape
     ModelCopyJobArn: StringShape
     ModelCopyJobStatus: EnumShape
     ModelCopyJobSummaries: ListShape
@@ -583,6 +680,7 @@ module Aws::Bedrock
     ModelCustomizationList: ListShape
     ModelDataSource: UnionShape
     ModelDeploymentName: StringShape
+    ModelEnforcement: StructureShape
     ModelId: StringShape
     ModelIdentifier: StringShape
     ModelImportJobArn: StringShape
@@ -602,12 +700,17 @@ module Aws::Bedrock
     ModelInvocationJobSummaries: ListShape
     ModelInvocationJobSummary: StructureShape
     ModelInvocationJobTimeoutDurationInHours: IntegerShape
+    ModelInvocationType: EnumShape
     ModelModality: EnumShape
     ModelModalityList: ListShape
     ModelName: StringShape
+    ModelPackageArn: StringShape
+    ModelPackageArnDataSource: StructureShape
     ModelSourceIdentifier: StringShape
     ModelStatus: EnumShape
     NonBlankString: StringShape
+    NonEmptyStringList: ListShape
+    NonNegativeLong: IntegerShape
     Offer: StructureShape
     OfferId: StringShape
     OfferToken: StringShape
@@ -638,20 +741,35 @@ module Aws::Bedrock
     ProvisionedModelStatus: EnumShape
     ProvisionedModelSummaries: ListShape
     ProvisionedModelSummary: StructureShape
+    PutAccountDataRetentionRequest: StructureShape
+    PutAccountDataRetentionResponse: StructureShape
+    PutEnforcedGuardrailConfigurationRequest: StructureShape
+    PutEnforcedGuardrailConfigurationResponse: StructureShape
     PutModelInvocationLoggingConfigurationRequest: StructureShape
     PutModelInvocationLoggingConfigurationResponse: StructureShape
+    PutResourcePolicyRequest: StructureShape
+    PutResourcePolicyResponse: StructureShape
     PutUseCaseForModelAccessRequest: StructureShape
     PutUseCaseForModelAccessResponse: StructureShape
     QueryTransformationConfiguration: StructureShape
     QueryTransformationType: EnumShape
     RAGConfig: UnionShape
     RAGStopSequences: ListShape
+    RFTBatchSize: IntegerShape
+    RFTConfig: StructureShape
+    RFTEvalInterval: IntegerShape
+    RFTHyperParameters: StructureShape
+    RFTInferenceMaxTokens: IntegerShape
+    RFTLearningRate: FloatShape
+    RFTMaxPromptLength: IntegerShape
+    RFTTrainingSamplePerPrompt: IntegerShape
     RagConfigs: ListShape
     RateCard: ListShape
     RatingScale: ListShape
     RatingScaleItem: StructureShape
     RatingScaleItemDefinition: StringShape
     RatingScaleItemValue: UnionShape
+    ReasoningEffort: EnumShape
     RegionAvailability: EnumShape
     RegisterMarketplaceModelEndpointRequest: StructureShape
     RegisterMarketplaceModelEndpointResponse: StructureShape
@@ -663,6 +781,8 @@ module Aws::Bedrock
     RerankingMetadataSelectiveModeConfiguration: UnionShape
     ResourceInUseException: StructureShape
     ResourceNotFoundException: StructureShape
+    ResourcePolicyDocument: StringShape
+    ResourcePolicyResourceArn: StringShape
     RetrievalFilter: UnionShape
     RetrievalFilterList: ListShape
     RetrieveAndGenerateConfiguration: StructureShape
@@ -675,11 +795,14 @@ module Aws::Bedrock
     S3InputFormat: EnumShape
     S3ObjectDoc: StructureShape
     S3Uri: StringShape
+    S3UriFolder: StringShape
     SageMakerEndpoint: StructureShape
     SageMakerFlowDefinitionArn: StringShape
     SearchType: EnumShape
     SecurityGroupId: StringShape
     SecurityGroupIds: ListShape
+    SelectiveContentGuarding: StructureShape
+    SelectiveGuardingMode: EnumShape
     ServiceQuotaExceededException: StructureShape
     ServiceUnavailableException: StructureShape
     SortByProvisionedModels: EnumShape
@@ -692,6 +815,8 @@ module Aws::Bedrock
     StartAutomatedReasoningPolicyTestWorkflowResponse: StructureShape
     Status: EnumShape
     StatusDetails: StructureShape
+    StopAdvancedPromptOptimizationJobRequest: StructureShape
+    StopAdvancedPromptOptimizationJobResponse: StructureShape
     StopEvaluationJobRequest: StructureShape
     StopEvaluationJobResponse: StructureShape
     StopModelCustomizationJobRequest: StructureShape
@@ -730,6 +855,8 @@ module Aws::Bedrock
     UpdateAutomatedReasoningPolicyResponse: StructureShape
     UpdateAutomatedReasoningPolicyTestCaseRequest: StructureShape
     UpdateAutomatedReasoningPolicyTestCaseResponse: StructureShape
+    UpdateCustomModelDeploymentRequest: StructureShape
+    UpdateCustomModelDeploymentResponse: StructureShape
     UpdateGuardrailRequest: StructureShape
     UpdateGuardrailResponse: StructureShape
     UpdateMarketplaceModelEndpointRequest: StructureShape

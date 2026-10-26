@@ -55,6 +55,30 @@ module Aws::SESv2
       attr_accessor archive_arn: String?
     end
 
+    class AssociateEmailIdentityCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?from_address: String,
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor from_address: String?
+      attr_accessor certificate_arn: String?
+    end
+
+    class AssociateEmailIdentityCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class Attachment
       include Smithy::Schema::Structure
 
@@ -329,6 +353,21 @@ module Aws::SESv2
       attr_accessor message: String?
     end
 
+    class ConfigurationOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracking: Types::TrackingConfigurationOverrides,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracking: Types::TrackingConfigurationOverrides?
+    end
+
+    module ConfigurationSetFilterKey
+      CONFIGURATION_SET_NAME_CONTAINS: String
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -445,6 +484,7 @@ module Aws::SESv2
         ?suppression_options: Types::SuppressionOptions,
         ?vdm_options: Types::VdmOptions,
         ?archiving_options: Types::ArchivingOptions,
+        ?message_security_options: Types::MessageSecurityOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -457,6 +497,7 @@ module Aws::SESv2
       attr_accessor suppression_options: Types::SuppressionOptions?
       attr_accessor vdm_options: Types::VdmOptions?
       attr_accessor archiving_options: Types::ArchivingOptions?
+      attr_accessor message_security_options: Types::MessageSecurityOptions?
     end
 
     class CreateConfigurationSetResponse
@@ -530,6 +571,7 @@ module Aws::SESv2
         ?from_email_address: String,
         ?template_subject: String,
         ?template_content: String,
+        ?tags: Array[Types::Tag],
         ?success_redirection_url: String,
         ?failure_redirection_url: String,
       ) -> void
@@ -539,6 +581,7 @@ module Aws::SESv2
       attr_accessor from_email_address: String?
       attr_accessor template_subject: String?
       attr_accessor template_content: String?
+      attr_accessor tags: Array[Types::Tag]?
       attr_accessor success_redirection_url: String?
       attr_accessor failure_redirection_url: String?
     end
@@ -668,11 +711,13 @@ module Aws::SESv2
       def initialize: (
         ?template_name: String,
         ?template_content: Types::EmailTemplateContent,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor template_name: String?
       attr_accessor template_content: Types::EmailTemplateContent?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class CreateEmailTemplateResponse
@@ -766,11 +811,13 @@ module Aws::SESv2
       def initialize: (
         ?tenant_name: String,
         ?tags: Array[Types::Tag],
+        ?suppression_attributes: Types::TenantSuppressionAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tenant_name: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor suppression_attributes: Types::TenantSuppressionAttributes?
     end
 
     class CreateTenantResourceAssociationRequest
@@ -805,6 +852,7 @@ module Aws::SESv2
         ?created_timestamp: Time,
         ?tags: Array[Types::Tag],
         ?sending_status: String,
+        ?suppression_attributes: Types::TenantSuppressionAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -814,6 +862,7 @@ module Aws::SESv2
       attr_accessor created_timestamp: Time?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor sending_status: String?
+      attr_accessor suppression_attributes: Types::TenantSuppressionAttributes?
     end
 
     class CustomVerificationEmailTemplateMetadata
@@ -905,6 +954,15 @@ module Aws::SESv2
 
       attr_accessor pool_name: String?
       attr_accessor scaling_mode: String?
+    end
+
+    class DefaultSigningScheme
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeleteConfigurationSetEventDestinationRequest
@@ -1120,10 +1178,12 @@ module Aws::SESv2
 
       def initialize: (
         ?email_address: String,
+        ?tenant_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor email_address: String?
+      attr_accessor tenant_name: String?
     end
 
     class DeleteSuppressedDestinationResponse
@@ -1265,6 +1325,28 @@ module Aws::SESv2
       LINK_TAG: String
     end
 
+    class DisassociateEmailIdentityCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?from_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor from_address: String?
+    end
+
+    class DisassociateEmailIdentityCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DkimAttributes
       include Smithy::Schema::Structure
 
@@ -1272,6 +1354,7 @@ module Aws::SESv2
         ?signing_enabled: bool,
         ?status: String,
         ?tokens: Array[String],
+        ?signing_hosted_zone: String,
         ?signing_attributes_origin: String,
         ?next_signing_key_length: String,
         ?current_signing_key_length: String,
@@ -1282,6 +1365,7 @@ module Aws::SESv2
       attr_accessor signing_enabled: bool?
       attr_accessor status: String?
       attr_accessor tokens: Array[String]?
+      attr_accessor signing_hosted_zone: String?
       attr_accessor signing_attributes_origin: String?
       attr_accessor next_signing_key_length: String?
       attr_accessor current_signing_key_length: String?
@@ -1333,6 +1417,10 @@ module Aws::SESv2
       AWS_SES_ME_CENTRAL_1: String
       AWS_SES_AP_SOUTH_2: String
       AWS_SES_EU_CENTRAL_2: String
+      AWS_SES_AP_SOUTHEAST_5: String
+      AWS_SES_CA_WEST_1: String
+      AWS_SES_US_GOV_EAST_1: String
+      AWS_SES_US_GOV_WEST_1: String
     end
 
     module DkimSigningKeyLength
@@ -1417,6 +1505,44 @@ module Aws::SESv2
       attr_accessor spam_raw_count: Integer?
       attr_accessor inbox_percentage: Float?
       attr_accessor spam_percentage: Float?
+    end
+
+    module EmailAddressInsightsConfidenceVerdict
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class EmailAddressInsightsMailboxEvaluations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?has_valid_syntax: Types::EmailAddressInsightsVerdict,
+        ?has_valid_dns_records: Types::EmailAddressInsightsVerdict,
+        ?mailbox_exists: Types::EmailAddressInsightsVerdict,
+        ?is_role_address: Types::EmailAddressInsightsVerdict,
+        ?is_disposable: Types::EmailAddressInsightsVerdict,
+        ?is_random_input: Types::EmailAddressInsightsVerdict,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor has_valid_syntax: Types::EmailAddressInsightsVerdict?
+      attr_accessor has_valid_dns_records: Types::EmailAddressInsightsVerdict?
+      attr_accessor mailbox_exists: Types::EmailAddressInsightsVerdict?
+      attr_accessor is_role_address: Types::EmailAddressInsightsVerdict?
+      attr_accessor is_disposable: Types::EmailAddressInsightsVerdict?
+      attr_accessor is_random_input: Types::EmailAddressInsightsVerdict?
+    end
+
+    class EmailAddressInsightsVerdict
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?confidence_verdict: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor confidence_verdict: String?
     end
 
     class EmailContent
@@ -1682,6 +1808,7 @@ module Aws::SESv2
         ?suppression_attributes: Types::SuppressionAttributes,
         ?details: Types::AccountDetails,
         ?vdm_attributes: Types::VdmAttributes,
+        ?pricing_attributes: Types::PricingAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1693,6 +1820,7 @@ module Aws::SESv2
       attr_accessor suppression_attributes: Types::SuppressionAttributes?
       attr_accessor details: Types::AccountDetails?
       attr_accessor vdm_attributes: Types::VdmAttributes?
+      attr_accessor pricing_attributes: Types::PricingAttributes?
     end
 
     class GetBlacklistReportsRequest
@@ -1763,6 +1891,7 @@ module Aws::SESv2
         ?suppression_options: Types::SuppressionOptions,
         ?vdm_options: Types::VdmOptions,
         ?archiving_options: Types::ArchivingOptions,
+        ?message_security_options: Types::MessageSecurityOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1775,6 +1904,7 @@ module Aws::SESv2
       attr_accessor suppression_options: Types::SuppressionOptions?
       attr_accessor vdm_options: Types::VdmOptions?
       attr_accessor archiving_options: Types::ArchivingOptions?
+      attr_accessor message_security_options: Types::MessageSecurityOptions?
     end
 
     class GetContactListRequest
@@ -1866,6 +1996,7 @@ module Aws::SESv2
         ?from_email_address: String,
         ?template_subject: String,
         ?template_content: String,
+        ?tags: Array[Types::Tag],
         ?success_redirection_url: String,
         ?failure_redirection_url: String,
       ) -> void
@@ -1875,6 +2006,7 @@ module Aws::SESv2
       attr_accessor from_email_address: String?
       attr_accessor template_subject: String?
       attr_accessor template_content: String?
+      attr_accessor tags: Array[Types::Tag]?
       attr_accessor success_redirection_url: String?
       attr_accessor failure_redirection_url: String?
     end
@@ -2059,6 +2191,28 @@ module Aws::SESv2
       attr_accessor daily_volumes: Array[Types::DailyVolume]?
     end
 
+    class GetEmailAddressInsightsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+    end
+
+    class GetEmailAddressInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mailbox_validation: Types::MailboxValidation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mailbox_validation: Types::MailboxValidation?
+    end
+
     class GetEmailIdentityPoliciesRequest
       include Smithy::Schema::Structure
 
@@ -2138,11 +2292,13 @@ module Aws::SESv2
       def initialize: (
         ?template_name: String,
         ?template_content: Types::EmailTemplateContent,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor template_name: String?
       attr_accessor template_content: Types::EmailTemplateContent?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class GetExportJobRequest
@@ -2312,10 +2468,12 @@ module Aws::SESv2
 
       def initialize: (
         ?email_address: String,
+        ?tenant_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor email_address: String?
+      attr_accessor tenant_name: String?
     end
 
     class GetSuppressedDestinationResponse
@@ -2377,6 +2535,37 @@ module Aws::SESv2
       REQUIRE: String
       REQUIRE_OPEN_ONLY: String
       OPTIONAL: String
+    end
+
+    class IdentityCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_address: String,
+        ?status: String,
+        ?certificate_arn: String,
+        ?certificate_expiry_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_address: String?
+      attr_accessor status: String?
+      attr_accessor certificate_arn: String?
+      attr_accessor certificate_expiry_time: Time?
+    end
+
+    module IdentityCertificateStatus
+      PROVISIONING: String
+      INACTIVE: String
+      DEPROVISIONING: String
+      ACTIVE: String
+      FAILED: String
+    end
+
+    module IdentityFilterKey
+      IDENTITY_NAME_CONTAINS: String
+      IDENTITY_TYPE: String
+      VERIFICATION_STATUS: String
     end
 
     class IdentityInfo
@@ -2553,11 +2742,13 @@ module Aws::SESv2
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?filter: Hash[String, String],
         ?next_token: String,
         ?page_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor filter: Hash[String, String]?
       attr_accessor next_token: String?
       attr_accessor page_size: Integer?
     end
@@ -2758,11 +2949,13 @@ module Aws::SESv2
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?filter: Hash[String, String],
         ?next_token: String,
         ?page_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor filter: Hash[String, String]?
       attr_accessor next_token: String?
       attr_accessor page_size: Integer?
     end
@@ -2777,6 +2970,34 @@ module Aws::SESv2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor email_identities: Array[Types::IdentityInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEmailIdentityCertificatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_identity: String,
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_identity: String?
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListEmailIdentityCertificatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificates: Array[Types::IdentityCertificate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificates: Array[Types::IdentityCertificate]?
       attr_accessor next_token: String?
     end
 
@@ -2998,6 +3219,7 @@ module Aws::SESv2
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?tenant_name: String,
         ?reasons: Array[String],
         ?start_date: Time,
         ?end_date: Time,
@@ -3006,6 +3228,7 @@ module Aws::SESv2
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor tenant_name: String?
       attr_accessor reasons: Array[String]?
       attr_accessor start_date: Time?
       attr_accessor end_date: Time?
@@ -3082,15 +3305,22 @@ module Aws::SESv2
       attr_accessor next_token: String?
     end
 
+    module ListTenantsFilterKey
+      TENANT_NAME_CONTAINS: String
+      SENDING_STATUS: String
+    end
+
     class ListTenantsRequest
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?filter: Hash[String, String],
         ?next_token: String,
         ?page_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor filter: Hash[String, String]?
       attr_accessor next_token: String?
       attr_accessor page_size: Integer?
     end
@@ -3144,6 +3374,19 @@ module Aws::SESv2
     module MailType
       MARKETING: String
       TRANSACTIONAL: String
+    end
+
+    class MailboxValidation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_valid: Types::EmailAddressInsightsVerdict,
+        ?evaluations: Types::EmailAddressInsightsMailboxEvaluations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_valid: Types::EmailAddressInsightsVerdict?
+      attr_accessor evaluations: Types::EmailAddressInsightsMailboxEvaluations?
     end
 
     class Message
@@ -3203,6 +3446,7 @@ module Aws::SESv2
         ?destination: Array[String],
         ?subject: Array[String],
         ?isp: Array[String],
+        ?tenant_name: Array[String],
         ?last_delivery_event: Array[String],
         ?last_engagement_event: Array[String],
       ) -> void
@@ -3212,6 +3456,7 @@ module Aws::SESv2
       attr_accessor destination: Array[String]?
       attr_accessor subject: Array[String]?
       attr_accessor isp: Array[String]?
+      attr_accessor tenant_name: Array[String]?
       attr_accessor last_delivery_event: Array[String]?
       attr_accessor last_engagement_event: Array[String]?
     end
@@ -3225,6 +3470,17 @@ module Aws::SESv2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class MessageSecurityOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_scheme: Types::SigningScheme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_scheme: Types::SigningScheme?
     end
 
     class MessageTag
@@ -3292,6 +3548,7 @@ module Aws::SESv2
       EMAIL_IDENTITY: String
       CONFIGURATION_SET: String
       ISP: String
+      TENANT_NAME: String
     end
 
     module MetricNamespace
@@ -3394,6 +3651,26 @@ module Aws::SESv2
       attr_accessor dkim_percentage: Float?
     end
 
+    class PricingAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_plan: String,
+        ?next_plan: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_plan: String?
+      attr_accessor next_plan: String?
+    end
+
+    module PricingPlan
+      NONE: String
+      ESSENTIALS: String
+      PRO: String
+      ENTERPRISE: String
+    end
+
     class PutAccountDedicatedIpWarmupAttributesRequest
       include Smithy::Schema::Structure
 
@@ -3444,6 +3721,26 @@ module Aws::SESv2
 
     end
 
+    class PutAccountPricingAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan: String?
+    end
+
+    class PutAccountPricingAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class PutAccountSendingAttributesRequest
       include Smithy::Schema::Structure
 
@@ -3469,10 +3766,12 @@ module Aws::SESv2
 
       def initialize: (
         ?suppressed_reasons: Array[String],
+        ?validation_attributes: Types::SuppressionValidationAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor suppressed_reasons: Array[String]?
+      attr_accessor validation_attributes: Types::SuppressionValidationAttributes?
     end
 
     class PutAccountSuppressionAttributesResponse
@@ -3601,12 +3900,16 @@ module Aws::SESv2
 
       def initialize: (
         ?configuration_set_name: String,
+        ?suppression_scope: String,
         ?suppressed_reasons: Array[String],
+        ?validation_options: Types::SuppressionValidationOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor configuration_set_name: String?
+      attr_accessor suppression_scope: String?
       attr_accessor suppressed_reasons: Array[String]?
+      attr_accessor validation_options: Types::SuppressionValidationOptions?
     end
 
     class PutConfigurationSetSuppressionOptionsResponse
@@ -3817,11 +4120,13 @@ module Aws::SESv2
       def initialize: (
         ?dkim_status: String,
         ?dkim_tokens: Array[String],
+        ?signing_hosted_zone: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dkim_status: String?
       attr_accessor dkim_tokens: Array[String]?
+      attr_accessor signing_hosted_zone: String?
     end
 
     class PutEmailIdentityFeedbackAttributesRequest
@@ -3876,14 +4181,40 @@ module Aws::SESv2
       def initialize: (
         ?email_address: String,
         ?reason: String,
+        ?tenant_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor email_address: String?
       attr_accessor reason: String?
+      attr_accessor tenant_name: String?
     end
 
     class PutSuppressedDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutTenantSuppressionAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_name: String,
+        ?suppressed_reasons: Array[String],
+        ?suppression_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_name: String?
+      attr_accessor suppressed_reasons: Array[String]?
+      attr_accessor suppression_scope: String?
+    end
+
+    class PutTenantSuppressionAttributesResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -4121,6 +4452,7 @@ module Aws::SESv2
         ?configuration_set_name: String,
         ?endpoint_id: String,
         ?tenant_name: String,
+        ?configuration_overrides: Types::ConfigurationOverrides,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4135,6 +4467,7 @@ module Aws::SESv2
       attr_accessor configuration_set_name: String?
       attr_accessor endpoint_id: String?
       attr_accessor tenant_name: String?
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides?
     end
 
     class SendBulkEmailResponse
@@ -4190,6 +4523,7 @@ module Aws::SESv2
         ?endpoint_id: String,
         ?tenant_name: String,
         ?list_management_options: Types::ListManagementOptions,
+        ?configuration_overrides: Types::ConfigurationOverrides,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4205,6 +4539,7 @@ module Aws::SESv2
       attr_accessor endpoint_id: String?
       attr_accessor tenant_name: String?
       attr_accessor list_management_options: Types::ListManagementOptions?
+      attr_accessor configuration_overrides: Types::ConfigurationOverrides?
     end
 
     class SendEmailResponse
@@ -4261,6 +4596,41 @@ module Aws::SESv2
       DISABLED: String
     end
 
+    module SignatureFormat
+      DETACHED: String
+    end
+
+    class SigningScheme
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?default_scheme: Types::DefaultSigningScheme,
+        ?smime_scheme: Types::SmimeSigningScheme,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_scheme: Types::DefaultSigningScheme?
+      attr_accessor smime_scheme: Types::SmimeSigningScheme?
+
+      class DefaultScheme < SigningScheme
+      end
+      class SmimeScheme < SigningScheme
+      end
+      class Unknown < SigningScheme
+      end
+    end
+
+    class SmimeSigningScheme
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signature_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signature_format: String?
+    end
+
     class SnsDestination
       include Smithy::Schema::Structure
 
@@ -4307,6 +4677,7 @@ module Aws::SESv2
         ?reason: String,
         ?last_update_time: Time,
         ?attributes: Types::SuppressedDestinationAttributes,
+        ?tenant_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4314,6 +4685,7 @@ module Aws::SESv2
       attr_accessor reason: String?
       attr_accessor last_update_time: Time?
       attr_accessor attributes: Types::SuppressedDestinationAttributes?
+      attr_accessor tenant_name: String?
     end
 
     class SuppressedDestinationAttributes
@@ -4349,10 +4721,42 @@ module Aws::SESv2
 
       def initialize: (
         ?suppressed_reasons: Array[String],
+        ?validation_attributes: Types::SuppressionValidationAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor suppressed_reasons: Array[String]?
+      attr_accessor validation_attributes: Types::SuppressionValidationAttributes?
+    end
+
+    class SuppressionConditionThreshold
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_threshold_enabled: String,
+        ?overall_confidence_threshold: Types::SuppressionConfidenceThreshold,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_threshold_enabled: String?
+      attr_accessor overall_confidence_threshold: Types::SuppressionConfidenceThreshold?
+    end
+
+    class SuppressionConfidenceThreshold
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?confidence_verdict_threshold: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor confidence_verdict_threshold: String?
+    end
+
+    module SuppressionConfidenceVerdictThreshold
+      MEDIUM: String
+      HIGH: String
+      MANAGED: String
     end
 
     class SuppressionListDestination
@@ -4376,15 +4780,46 @@ module Aws::SESv2
       COMPLAINT: String
     end
 
+    module SuppressionListScope
+      ACCOUNT: String
+      TENANT: String
+    end
+
     class SuppressionOptions
       include Smithy::Schema::Structure
 
       def initialize: (
         ?suppressed_reasons: Array[String],
+        ?suppression_scope: String,
+        ?validation_options: Types::SuppressionValidationOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor suppressed_reasons: Array[String]?
+      attr_accessor suppression_scope: String?
+      attr_accessor validation_options: Types::SuppressionValidationOptions?
+    end
+
+    class SuppressionValidationAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_threshold: Types::SuppressionConditionThreshold,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_threshold: Types::SuppressionConditionThreshold?
+    end
+
+    class SuppressionValidationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_threshold: Types::SuppressionConditionThreshold,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_threshold: Types::SuppressionConditionThreshold?
     end
 
     class Tag
@@ -4453,6 +4888,7 @@ module Aws::SESv2
         ?created_timestamp: Time,
         ?tags: Array[Types::Tag],
         ?sending_status: String,
+        ?suppression_attributes: Types::TenantSuppressionAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4462,6 +4898,7 @@ module Aws::SESv2
       attr_accessor created_timestamp: Time?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor sending_status: String?
+      attr_accessor suppression_attributes: Types::TenantSuppressionAttributes?
     end
 
     class TenantInfo
@@ -4472,6 +4909,7 @@ module Aws::SESv2
         ?tenant_id: String,
         ?tenant_arn: String,
         ?created_timestamp: Time,
+        ?sending_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4479,6 +4917,7 @@ module Aws::SESv2
       attr_accessor tenant_id: String?
       attr_accessor tenant_arn: String?
       attr_accessor created_timestamp: Time?
+      attr_accessor sending_status: String?
     end
 
     class TenantResource
@@ -4492,6 +4931,19 @@ module Aws::SESv2
 
       attr_accessor resource_type: String?
       attr_accessor resource_arn: String?
+    end
+
+    class TenantSuppressionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?suppressed_reasons: Array[String],
+        ?suppression_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor suppressed_reasons: Array[String]?
+      attr_accessor suppression_scope: String?
     end
 
     class TestRenderEmailTemplateRequest
@@ -4577,6 +5029,19 @@ module Aws::SESv2
       attr_accessor subscription_status: String?
     end
 
+    class TrackingConfigurationOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_tracking_enabled: String,
+        ?click_tracking_enabled: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_tracking_enabled: String?
+      attr_accessor click_tracking_enabled: String?
+    end
+
     class TrackingOptions
       include Smithy::Schema::Structure
 
@@ -4628,6 +5093,28 @@ module Aws::SESv2
     end
 
     class UpdateConfigurationSetEventDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConfigurationSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_set_name: String,
+        ?message_security_options: Types::MessageSecurityOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_set_name: String?
+      attr_accessor message_security_options: Types::MessageSecurityOptions?
+    end
+
+    class UpdateConfigurationSetResponse
       include Smithy::Schema::Structure
 
       def initialize: (

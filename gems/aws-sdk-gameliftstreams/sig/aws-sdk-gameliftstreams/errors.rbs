@@ -16,6 +16,10 @@ module Aws::GameLiftStreams
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class StreamSessionAccessNotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
     class ThrottlingException < Smithy::Client::ServiceError
       def message: () -> String?
       def retryable?: () -> true

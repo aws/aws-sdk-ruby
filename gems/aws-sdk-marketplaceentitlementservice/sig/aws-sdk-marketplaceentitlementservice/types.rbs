@@ -11,6 +11,7 @@ module Aws::MarketplaceEntitlementService
         ?customer_aws_account_id: String,
         ?value: Types::EntitlementValue,
         ?expiration_date: Time,
+        ?license_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -20,6 +21,7 @@ module Aws::MarketplaceEntitlementService
       attr_accessor customer_aws_account_id: String?
       attr_accessor value: Types::EntitlementValue?
       attr_accessor expiration_date: Time?
+      attr_accessor license_arn: String?
     end
 
     class EntitlementValue
@@ -43,6 +45,7 @@ module Aws::MarketplaceEntitlementService
       CUSTOMER_IDENTIFIER: String
       DIMENSION: String
       CUSTOMER_AWS_ACCOUNT_ID: String
+      LICENSE_ARN: String
     end
 
     class GetEntitlementsRequest

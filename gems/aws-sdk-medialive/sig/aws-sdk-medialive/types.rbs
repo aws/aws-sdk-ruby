@@ -69,6 +69,35 @@ module Aws::MediaLive
       MEDIUM_LOW: String
     end
 
+    module AbWatermarkerIdLength
+      ID_2048: String
+      ID_512: String
+    end
+
+    class AbWatermarkingCustomProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?embedding_frequency: Float,
+        ?scene_cut: Float,
+        ?target_psnr: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor embedding_frequency: Float?
+      attr_accessor scene_cut: Float?
+      attr_accessor target_psnr: Float?
+    end
+
+    module AbWatermarkingProfile
+      CAMCORDING: String
+      CUSTOM: String
+      DEFAULT: String
+      HQ: String
+      MEZZANINE: String
+      ROBUST: String
+    end
+
     module Ac3AttenuationControl
       ATTENUATE_3_DB: String
       NONE: String
@@ -394,6 +423,19 @@ module Aws::MediaLive
       attr_accessor program_selection: String?
     end
 
+    class AudioFeedInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_selector_name: String,
+        ?feed_input: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_selector_name: String?
+      attr_accessor feed_input: String?
+    end
+
     class AudioHlsRenditionSelection
       include Smithy::Schema::Structure
 
@@ -428,10 +470,17 @@ module Aws::MediaLive
     module AudioNormalizationAlgorithm
       ITU_1770_1: String
       ITU_1770_2: String
+      ITU_1770_3: String
+      ITU_1770_4: String
     end
 
     module AudioNormalizationAlgorithmControl
       CORRECT_AUDIO: String
+    end
+
+    module AudioNormalizationPeakCalculation
+      NONE: String
+      TRUE_PEAK: String
     end
 
     class AudioNormalizationSettings
@@ -441,12 +490,16 @@ module Aws::MediaLive
         ?algorithm: String,
         ?algorithm_control: String,
         ?target_lkfs: Float,
+        ?peak_calculation: String,
+        ?peak_limiter_threshold: Float,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor algorithm: String?
       attr_accessor algorithm_control: String?
       attr_accessor target_lkfs: Float?
+      attr_accessor peak_calculation: String?
+      attr_accessor peak_limiter_threshold: Float?
     end
 
     module AudioOnlyHlsSegmentType
@@ -478,15 +531,49 @@ module Aws::MediaLive
       AUDIO_ONLY_VARIANT_STREAM: String
     end
 
+    class AudioPid
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dolby_e_decode: Types::AudioDolbyEDecode,
+        ?pid: Integer,
+        ?premix_settings: Types::AudioPreMixerSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dolby_e_decode: Types::AudioDolbyEDecode?
+      attr_accessor pid: Integer?
+      attr_accessor premix_settings: Types::AudioPreMixerSettings?
+    end
+
     class AudioPidSelection
       include Smithy::Schema::Structure
 
       def initialize: (
         ?pid: Integer,
+        ?pids: Array[Types::AudioPid],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor pid: Integer?
+      attr_accessor pids: Array[Types::AudioPid]?
+    end
+
+    class AudioPreMixerSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_normalization_settings: Types::AudioNormalizationSettings,
+        ?channels: Integer,
+        ?gain_db: Float,
+        ?remix_settings: Types::RemixSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_normalization_settings: Types::AudioNormalizationSettings?
+      attr_accessor channels: Integer?
+      attr_accessor gain_db: Float?
+      attr_accessor remix_settings: Types::RemixSettings?
     end
 
     class AudioSelector
@@ -537,10 +624,12 @@ module Aws::MediaLive
 
       def initialize: (
         ?track: Integer,
+        ?premix_settings: Types::AudioPreMixerSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor track: Integer?
+      attr_accessor premix_settings: Types::AudioPreMixerSettings?
     end
 
     class AudioTrackSelection
@@ -596,6 +685,11 @@ module Aws::MediaLive
       attr_accessor secondary_input_id: String?
     end
 
+    module Av1BitDepth
+      DEPTH_10: String
+      DEPTH_8: String
+    end
+
     class Av1ColorSpaceSettings
       include Smithy::Schema::Structure
 
@@ -604,6 +698,7 @@ module Aws::MediaLive
         ?hdr10_settings: Types::Hdr10Settings,
         ?rec601_settings: Types::Rec601Settings,
         ?rec709_settings: Types::Rec709Settings,
+        ?hlg2020_settings: Types::Hlg2020Settings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -611,6 +706,7 @@ module Aws::MediaLive
       attr_accessor hdr10_settings: Types::Hdr10Settings?
       attr_accessor rec601_settings: Types::Rec601Settings?
       attr_accessor rec709_settings: Types::Rec709Settings?
+      attr_accessor hlg2020_settings: Types::Hlg2020Settings?
     end
 
     module Av1GopSizeUnits
@@ -676,6 +772,10 @@ module Aws::MediaLive
         ?bitrate: Integer,
         ?rate_control_mode: String,
         ?min_bitrate: Integer,
+        ?spatial_aq: String,
+        ?temporal_aq: String,
+        ?timecode_insertion: String,
+        ?bit_depth: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -699,6 +799,25 @@ module Aws::MediaLive
       attr_accessor bitrate: Integer?
       attr_accessor rate_control_mode: String?
       attr_accessor min_bitrate: Integer?
+      attr_accessor spatial_aq: String?
+      attr_accessor temporal_aq: String?
+      attr_accessor timecode_insertion: String?
+      attr_accessor bit_depth: String?
+    end
+
+    module Av1SpatialAq
+      DISABLED: String
+      ENABLED: String
+    end
+
+    module Av1TemporalAq
+      DISABLED: String
+      ENABLED: String
+    end
+
+    module Av1TimecodeInsertionBehavior
+      DISABLED: String
+      METADATA_OBU: String
     end
 
     class AvailBlanking
@@ -1242,6 +1361,7 @@ module Aws::MediaLive
         ?scte20_source_settings: Types::Scte20SourceSettings,
         ?scte27_source_settings: Types::Scte27SourceSettings,
         ?teletext_source_settings: Types::TeletextSourceSettings,
+        ?smart_subtitle_source_settings: Types::SmartSubtitleSourceSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1252,6 +1372,12 @@ module Aws::MediaLive
       attr_accessor scte20_source_settings: Types::Scte20SourceSettings?
       attr_accessor scte27_source_settings: Types::Scte27SourceSettings?
       attr_accessor teletext_source_settings: Types::TeletextSourceSettings?
+      attr_accessor smart_subtitle_source_settings: Types::SmartSubtitleSourceSettings?
+    end
+
+    module CaptionSynchronizationMode
+      NO_VIDEO_DELAY: String
+      VIDEO_ALIGNED_CAPTIONS: String
     end
 
     module CdiInputResolution
@@ -1296,6 +1422,9 @@ module Aws::MediaLive
         ?vpc: Types::VpcOutputSettingsDescription,
         ?anywhere_settings: Types::DescribeAnywhereSettings,
         ?channel_engine_version: Types::ChannelEngineVersionResponse,
+        ?linked_channel_settings: Types::DescribeLinkedChannelSettings,
+        ?channel_security_groups: Array[String],
+        ?inference_settings: Types::DescribeInferenceSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1319,6 +1448,37 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription?
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings?
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse?
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings?
+      attr_accessor channel_security_groups: Array[String]?
+      attr_accessor inference_settings: Types::DescribeInferenceSettings?
+    end
+
+    class ChannelAlert
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alert_type: String,
+        ?cleared_timestamp: Time,
+        ?id: String,
+        ?message: String,
+        ?pipeline_id: String,
+        ?set_timestamp: Time,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alert_type: String?
+      attr_accessor cleared_timestamp: Time?
+      attr_accessor id: String?
+      attr_accessor message: String?
+      attr_accessor pipeline_id: String?
+      attr_accessor set_timestamp: Time?
+      attr_accessor state: String?
+    end
+
+    module ChannelAlertState
+      SET: String
+      CLEARED: String
     end
 
     module ChannelClass
@@ -1413,6 +1573,9 @@ module Aws::MediaLive
         ?anywhere_settings: Types::DescribeAnywhereSettings,
         ?channel_engine_version: Types::ChannelEngineVersionResponse,
         ?used_channel_engine_versions: Array[Types::ChannelEngineVersionResponse],
+        ?linked_channel_settings: Types::DescribeLinkedChannelSettings,
+        ?channel_security_groups: Array[String],
+        ?inference_settings: Types::DescribeInferenceSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1435,6 +1598,9 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings?
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse?
       attr_accessor used_channel_engine_versions: Array[Types::ChannelEngineVersionResponse]?
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings?
+      attr_accessor channel_security_groups: Array[String]?
+      attr_accessor inference_settings: Types::DescribeInferenceSettings?
     end
 
     class ClaimDeviceRequest
@@ -1550,6 +1716,7 @@ module Aws::MediaLive
       MEDIACONNECT_FLOW: String
       S3_BUCKET: String
       MEDIATAILOR_PLAYBACK_CONFIGURATION: String
+      ELEMENTAL_INFERENCE_FEED: String
     end
 
     module CloudWatchAlarmTemplateTreatMissingData
@@ -1557,6 +1724,36 @@ module Aws::MediaLive
       breaching: String
       ignore: String
       missing: String
+    end
+
+    class ClusterAlert
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alert_type: String,
+        ?channel_id: String,
+        ?cleared_timestamp: Time,
+        ?id: String,
+        ?message: String,
+        ?node_id: String,
+        ?set_timestamp: Time,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alert_type: String?
+      attr_accessor channel_id: String?
+      attr_accessor cleared_timestamp: Time?
+      attr_accessor id: String?
+      attr_accessor message: String?
+      attr_accessor node_id: String?
+      attr_accessor set_timestamp: Time?
+      attr_accessor state: String?
+    end
+
+    module ClusterAlertState
+      SET: String
+      CLEARED: String
     end
 
     class ClusterNetworkSettings
@@ -1616,6 +1813,31 @@ module Aws::MediaLive
       ENABLED: String
     end
 
+    class CmafIngestAbWatermarkerIrdetoSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?additional_destinations_alternate_destinations: Array[Types::OutputLocationRef],
+        ?alternate_destination: Types::OutputLocationRef,
+        ?custom_profile: Types::AbWatermarkingCustomProfile,
+        ?license: String,
+        ?operator_id: Integer,
+        ?poly_period: Integer,
+        ?profile: String,
+        ?watermark_id_length: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor additional_destinations_alternate_destinations: Array[Types::OutputLocationRef]?
+      attr_accessor alternate_destination: Types::OutputLocationRef?
+      attr_accessor custom_profile: Types::AbWatermarkingCustomProfile?
+      attr_accessor license: String?
+      attr_accessor operator_id: Integer?
+      attr_accessor poly_period: Integer?
+      attr_accessor profile: String?
+      attr_accessor watermark_id_length: String?
+    end
+
     class CmafIngestCaptionLanguageMapping
       include Smithy::Schema::Structure
 
@@ -1650,6 +1872,7 @@ module Aws::MediaLive
         ?timed_metadata_id3_period: Integer,
         ?timed_metadata_passthrough: String,
         ?additional_destinations: Array[Types::AdditionalDestinations],
+        ?watermarking_settings: Types::CmafIngestWatermarkingSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1670,6 +1893,7 @@ module Aws::MediaLive
       attr_accessor timed_metadata_id3_period: Integer?
       attr_accessor timed_metadata_passthrough: String?
       attr_accessor additional_destinations: Array[Types::AdditionalDestinations]?
+      attr_accessor watermarking_settings: Types::CmafIngestWatermarkingSettings?
     end
 
     class CmafIngestOutputSettings
@@ -1686,6 +1910,17 @@ module Aws::MediaLive
     module CmafIngestSegmentLengthUnits
       MILLISECONDS: String
       SECONDS: String
+    end
+
+    class CmafIngestWatermarkingSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cmaf_ingest_ab_watermarker_irdeto_settings: Types::CmafIngestAbWatermarkerIrdetoSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cmaf_ingest_ab_watermarker_irdeto_settings: Types::CmafIngestAbWatermarkerIrdetoSettings?
     end
 
     module CmafKLVBehavior
@@ -1762,6 +1997,11 @@ module Aws::MediaLive
       attr_accessor message: String?
     end
 
+    module ConnectionMode
+      CALLER: String
+      LISTENER: String
+    end
+
     module ContentType
       image_jpeg: String
     end
@@ -1829,6 +2069,9 @@ module Aws::MediaLive
         ?anywhere_settings: Types::AnywhereSettings,
         ?channel_engine_version: Types::ChannelEngineVersionRequest,
         ?dry_run: bool,
+        ?linked_channel_settings: Types::LinkedChannelSettings,
+        ?channel_security_groups: Array[String],
+        ?inference_settings: Types::InferenceSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1849,6 +2092,9 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::AnywhereSettings?
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest?
       attr_accessor dry_run: bool?
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings?
+      attr_accessor channel_security_groups: Array[String]?
+      attr_accessor inference_settings: Types::InferenceSettings?
     end
 
     class CreateChannelResponse
@@ -2140,6 +2386,7 @@ module Aws::MediaLive
         ?multicast_settings: Types::MulticastSettingsCreateRequest,
         ?smpte2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings,
         ?sdi_sources: Array[String],
+        ?router_settings: Types::RouterSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2159,6 +2406,7 @@ module Aws::MediaLive
       attr_accessor multicast_settings: Types::MulticastSettingsCreateRequest?
       attr_accessor smpte2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings?
       attr_accessor sdi_sources: Array[String]?
+      attr_accessor router_settings: Types::RouterSettings?
     end
 
     class CreateInputResponse
@@ -2616,6 +2864,9 @@ module Aws::MediaLive
         ?vpc: Types::VpcOutputSettingsDescription,
         ?anywhere_settings: Types::DescribeAnywhereSettings,
         ?channel_engine_version: Types::ChannelEngineVersionResponse,
+        ?linked_channel_settings: Types::DescribeLinkedChannelSettings,
+        ?channel_security_groups: Array[String],
+        ?inference_settings: Types::DescribeInferenceSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2639,6 +2890,9 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription?
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings?
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse?
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings?
+      attr_accessor channel_security_groups: Array[String]?
+      attr_accessor inference_settings: Types::DescribeInferenceSettings?
     end
 
     class DeleteCloudWatchAlarmTemplateGroupRequest
@@ -3162,6 +3416,9 @@ module Aws::MediaLive
         ?vpc: Types::VpcOutputSettingsDescription,
         ?anywhere_settings: Types::DescribeAnywhereSettings,
         ?channel_engine_version: Types::ChannelEngineVersionResponse,
+        ?linked_channel_settings: Types::DescribeLinkedChannelSettings,
+        ?channel_security_groups: Array[String],
+        ?inference_settings: Types::DescribeInferenceSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3185,6 +3442,9 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription?
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings?
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse?
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings?
+      attr_accessor channel_security_groups: Array[String]?
+      attr_accessor inference_settings: Types::DescribeInferenceSettings?
     end
 
     class DescribeClusterRequest
@@ -3246,6 +3506,34 @@ module Aws::MediaLive
       attr_accessor name: String?
       attr_accessor network_settings: Types::ClusterNetworkSettings?
       attr_accessor state: String?
+    end
+
+    class DescribeFollowerChannelSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linked_channel_type: String,
+        ?primary_channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linked_channel_type: String?
+      attr_accessor primary_channel_arn: String?
+    end
+
+    class DescribeInferenceSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feed_arn: String,
+        ?audio_feed_inputs: Array[Types::AudioFeedInput],
+        ?enrichment_methods: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feed_arn: String?
+      attr_accessor audio_feed_inputs: Array[Types::AudioFeedInput]?
+      attr_accessor enrichment_methods: Array[String]?
     end
 
     class DescribeInputDeviceRequest
@@ -3368,6 +3656,7 @@ module Aws::MediaLive
         ?multicast_settings: Types::MulticastSettings,
         ?smpte2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings,
         ?sdi_sources: Array[String],
+        ?router_settings: Types::RouterInputSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3392,6 +3681,7 @@ module Aws::MediaLive
       attr_accessor multicast_settings: Types::MulticastSettings?
       attr_accessor smpte2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings?
       attr_accessor sdi_sources: Array[String]?
+      attr_accessor router_settings: Types::RouterInputSettings?
     end
 
     class DescribeInputSecurityGroupRequest
@@ -3415,6 +3705,7 @@ module Aws::MediaLive
         ?state: String,
         ?tags: Hash[String, String],
         ?whitelist_rules: Array[Types::InputWhitelistRule],
+        ?channels: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3424,6 +3715,20 @@ module Aws::MediaLive
       attr_accessor state: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor whitelist_rules: Array[Types::InputWhitelistRule]?
+      attr_accessor channels: Array[String]?
+    end
+
+    class DescribeLinkedChannelSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?follower_channel_settings: Types::DescribeFollowerChannelSettings,
+        ?primary_channel_settings: Types::DescribePrimaryChannelSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor follower_channel_settings: Types::DescribeFollowerChannelSettings?
+      attr_accessor primary_channel_settings: Types::DescribePrimaryChannelSettings?
     end
 
     class DescribeMultiplexProgramRequest
@@ -3674,6 +3979,19 @@ module Aws::MediaLive
       attr_accessor usage_price: Float?
     end
 
+    class DescribePrimaryChannelSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?following_channel_arns: Array[String],
+        ?linked_channel_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor following_channel_arns: Array[String]?
+      attr_accessor linked_channel_type: String?
+    end
+
     class DescribeReservationRequest
       include Smithy::Schema::Structure
 
@@ -3817,6 +4135,17 @@ module Aws::MediaLive
       UP_TO_DATE: String
       NOT_UP_TO_DATE: String
       UPDATING: String
+    end
+
+    class DisabledLockingSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_epoch: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_epoch: String?
     end
 
     module DolbyEProgramSelection
@@ -4227,6 +4556,17 @@ module Aws::MediaLive
       ENABLED: String
     end
 
+    class EmbeddedCaptionPositionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?y_position_line: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor y_position_line: Integer?
+    end
+
     module EmbeddedConvert608To708
       DISABLED: String
       UPCONVERT: String
@@ -4236,9 +4576,18 @@ module Aws::MediaLive
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?position: Types::EmbeddedCaptionPositionSettings,
+        ?style_control: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor position: Types::EmbeddedCaptionPositionSettings?
+      attr_accessor style_control: String?
+    end
+
+    module EmbeddedDestinationStyleControl
+      MANUAL: String
+      PASSTHROUGH: String
     end
 
     class EmbeddedPlusScte20DestinationSettings
@@ -4307,6 +4656,10 @@ module Aws::MediaLive
       attr_accessor video_descriptions: Array[Types::VideoDescription]?
       attr_accessor thumbnail_configuration: Types::ThumbnailConfiguration?
       attr_accessor color_correction_settings: Types::ColorCorrectionSettings?
+    end
+
+    module EnrichmentMethod
+      SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS: String
     end
 
     class EpochLockingSettings
@@ -4559,6 +4912,19 @@ module Aws::MediaLive
     module FollowPoint
       END: String
       START: String
+    end
+
+    class FollowerChannelSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linked_channel_type: String,
+        ?primary_channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linked_channel_type: String?
+      attr_accessor primary_channel_arn: String?
     end
 
     class ForbiddenException
@@ -5206,6 +5572,7 @@ module Aws::MediaLive
         ?hdr10_settings: Types::Hdr10Settings,
         ?rec601_settings: Types::Rec601Settings,
         ?rec709_settings: Types::Rec709Settings,
+        ?hlg2020_settings: Types::Hlg2020Settings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5214,6 +5581,7 @@ module Aws::MediaLive
       attr_accessor hdr10_settings: Types::Hdr10Settings?
       attr_accessor rec601_settings: Types::Rec601Settings?
       attr_accessor rec709_settings: Types::Rec709Settings?
+      attr_accessor hlg2020_settings: Types::Hlg2020Settings?
     end
 
     module H265Deblocking
@@ -5432,6 +5800,15 @@ module Aws::MediaLive
 
       attr_accessor max_cll: Integer?
       attr_accessor max_fall: Integer?
+    end
+
+    class Hlg2020Settings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     module HlsAdMarkers
@@ -5906,6 +6283,21 @@ module Aws::MediaLive
       INCLUDE: String
     end
 
+    class InferenceSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feed_arn: String,
+        ?audio_feed_inputs: Array[Types::AudioFeedInput],
+        ?enrichment_methods: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feed_arn: String?
+      attr_accessor audio_feed_inputs: Array[Types::AudioFeedInput]?
+      attr_accessor enrichment_methods: Array[String]?
+    end
+
     class Input
       include Smithy::Schema::Structure
 
@@ -5931,6 +6323,7 @@ module Aws::MediaLive
         ?multicast_settings: Types::MulticastSettings,
         ?smpte2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings,
         ?sdi_sources: Array[String],
+        ?router_settings: Types::RouterInputSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5955,6 +6348,7 @@ module Aws::MediaLive
       attr_accessor multicast_settings: Types::MulticastSettings?
       attr_accessor smpte2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings?
       attr_accessor sdi_sources: Array[String]?
+      attr_accessor router_settings: Types::RouterInputSettings?
     end
 
     class InputAttachment
@@ -6540,6 +6934,7 @@ module Aws::MediaLive
         ?state: String,
         ?tags: Hash[String, String],
         ?whitelist_rules: Array[Types::InputWhitelistRule],
+        ?channels: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -6549,6 +6944,7 @@ module Aws::MediaLive
       attr_accessor state: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor whitelist_rules: Array[Types::InputWhitelistRule]?
+      attr_accessor channels: Array[String]?
     end
 
     module InputSecurityGroupState
@@ -6687,6 +7083,8 @@ module Aws::MediaLive
       MULTICAST: String
       SMPTE_2110_RECEIVER_GROUP: String
       SDI: String
+      MEDIACONNECT_ROUTER: String
+      SRT_LISTENER: String
     end
 
     class InputVpcRequest
@@ -6823,6 +7221,54 @@ module Aws::MediaLive
       INCLUDE_LAST_FRAME: String
     end
 
+    class LinkedChannelSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?follower_channel_settings: Types::FollowerChannelSettings,
+        ?primary_channel_settings: Types::PrimaryChannelSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor follower_channel_settings: Types::FollowerChannelSettings?
+      attr_accessor primary_channel_settings: Types::PrimaryChannelSettings?
+    end
+
+    module LinkedChannelType
+      FOLLOWING_CHANNEL: String
+      PRIMARY_CHANNEL: String
+    end
+
+    class ListAlertsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?state_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor state_filter: String?
+    end
+
+    class ListAlertsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alerts: Array[Types::ChannelAlert],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alerts: Array[Types::ChannelAlert]?
+      attr_accessor next_token: String?
+    end
+
     class ListChannelPlacementGroupsRequest
       include Smithy::Schema::Structure
 
@@ -6936,6 +7382,36 @@ module Aws::MediaLive
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cloud_watch_alarm_templates: Array[Types::CloudWatchAlarmTemplateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListClusterAlertsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?state_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor state_filter: String?
+    end
+
+    class ListClusterAlertsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alerts: Array[Types::ClusterAlert],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alerts: Array[Types::ClusterAlert]?
       attr_accessor next_token: String?
     end
 
@@ -7126,6 +7602,36 @@ module Aws::MediaLive
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor inputs: Array[Types::Input]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMultiplexAlertsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?multiplex_id: String,
+        ?next_token: String,
+        ?state_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor multiplex_id: String?
+      attr_accessor next_token: String?
+      attr_accessor state_filter: String?
+    end
+
+    class ListMultiplexAlertsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alerts: Array[Types::MultiplexAlert],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alerts: Array[Types::MultiplexAlert]?
       attr_accessor next_token: String?
     end
 
@@ -7509,6 +8015,7 @@ module Aws::MediaLive
     module M2tsScte35Control
       NONE: String
       PASSTHROUGH: String
+      SCTE_35_WITHOUT_IDR: String
     end
 
     module M2tsSegmentationMarkers
@@ -7784,6 +8291,96 @@ module Aws::MediaLive
       attr_accessor flow_arn: String?
     end
 
+    class MediaConnectRouterContainerSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?m2ts_settings: Types::M2tsSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor m2ts_settings: Types::M2tsSettings?
+    end
+
+    class MediaConnectRouterGroupSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zones: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zones: Array[String]?
+    end
+
+    class MediaConnectRouterOutputConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_input_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_input_arn: String?
+    end
+
+    class MediaConnectRouterOutputConnectionMap
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline0: String,
+        ?pipeline1: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline0: String?
+      attr_accessor pipeline1: String?
+    end
+
+    class MediaConnectRouterOutputDestinationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor secret_arn: String?
+    end
+
+    module MediaConnectRouterOutputEncryptionType
+      AUTOMATIC: String
+      SECRETS_MANAGER: String
+    end
+
+    class MediaConnectRouterOutputSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connected_router_inputs: Types::MediaConnectRouterOutputConnectionMap,
+        ?container_settings: Types::MediaConnectRouterContainerSettings,
+        ?destination: Types::OutputLocationRef,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connected_router_inputs: Types::MediaConnectRouterOutputConnectionMap?
+      attr_accessor container_settings: Types::MediaConnectRouterContainerSettings?
+      attr_accessor destination: Types::OutputLocationRef?
+    end
+
+    class MediaPackageAdditionalDestinations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: Types::OutputLocationRef,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: Types::OutputLocationRef?
+    end
+
     class MediaPackageGroupSettings
       include Smithy::Schema::Structure
 
@@ -7804,12 +8401,16 @@ module Aws::MediaLive
         ?channel_id: String,
         ?channel_group: String,
         ?channel_name: String,
+        ?channel_endpoint_id: String,
+        ?media_package_region_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor channel_id: String?
       attr_accessor channel_group: String?
       attr_accessor channel_name: String?
+      attr_accessor channel_endpoint_id: String?
+      attr_accessor media_package_region_name: String?
     end
 
     class MediaPackageOutputSettings
@@ -7823,6 +8424,31 @@ module Aws::MediaLive
       attr_accessor media_package_v2_destination_settings: Types::MediaPackageV2DestinationSettings?
     end
 
+    class MediaPackageV2AbWatermarkerIrdetoSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?additional_destinations_alternate_destinations: Array[Types::OutputLocationRef],
+        ?alternate_destination: Types::OutputLocationRef,
+        ?custom_profile: Types::AbWatermarkingCustomProfile,
+        ?license: String,
+        ?operator_id: Integer,
+        ?poly_period: Integer,
+        ?profile: String,
+        ?watermark_id_length: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor additional_destinations_alternate_destinations: Array[Types::OutputLocationRef]?
+      attr_accessor alternate_destination: Types::OutputLocationRef?
+      attr_accessor custom_profile: Types::AbWatermarkingCustomProfile?
+      attr_accessor license: String?
+      attr_accessor operator_id: Integer?
+      attr_accessor poly_period: Integer?
+      attr_accessor profile: String?
+      attr_accessor watermark_id_length: String?
+    end
+
     class MediaPackageV2DestinationSettings
       include Smithy::Schema::Structure
 
@@ -7831,6 +8457,7 @@ module Aws::MediaLive
         ?audio_rendition_sets: String,
         ?hls_auto_select: String,
         ?hls_default: String,
+        ?output_usage: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7838,6 +8465,7 @@ module Aws::MediaLive
       attr_accessor audio_rendition_sets: String?
       attr_accessor hls_auto_select: String?
       attr_accessor hls_default: String?
+      attr_accessor output_usage: Array[String]?
     end
 
     class MediaPackageV2GroupSettings
@@ -7854,6 +8482,8 @@ module Aws::MediaLive
         ?timed_metadata_id3_frame: String,
         ?timed_metadata_id3_period: Integer,
         ?timed_metadata_passthrough: String,
+        ?additional_destinations: Array[Types::MediaPackageAdditionalDestinations],
+        ?watermarking_settings: Types::MediaPackageV2WatermarkingSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7867,6 +8497,19 @@ module Aws::MediaLive
       attr_accessor timed_metadata_id3_frame: String?
       attr_accessor timed_metadata_id3_period: Integer?
       attr_accessor timed_metadata_passthrough: String?
+      attr_accessor additional_destinations: Array[Types::MediaPackageAdditionalDestinations]?
+      attr_accessor watermarking_settings: Types::MediaPackageV2WatermarkingSettings?
+    end
+
+    class MediaPackageV2WatermarkingSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_package_v2_ab_watermarker_irdeto_settings: Types::MediaPackageV2AbWatermarkerIrdetoSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_package_v2_ab_watermarker_irdeto_settings: Types::MediaPackageV2AbWatermarkerIrdetoSettings?
     end
 
     class MediaResource
@@ -8259,6 +8902,34 @@ module Aws::MediaLive
       attr_accessor program_count: Integer?
       attr_accessor state: String?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class MultiplexAlert
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alert_type: String,
+        ?cleared_timestamp: Time,
+        ?id: String,
+        ?message: String,
+        ?pipeline_id: String,
+        ?set_timestamp: Time,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alert_type: String?
+      attr_accessor cleared_timestamp: Time?
+      attr_accessor id: String?
+      attr_accessor message: String?
+      attr_accessor pipeline_id: String?
+      attr_accessor set_timestamp: Time?
+      attr_accessor state: String?
+    end
+
+    module MultiplexAlertState
+      SET: String
+      CLEARED: String
     end
 
     class MultiplexContainerSettings
@@ -8659,6 +9330,21 @@ module Aws::MediaLive
       attr_accessor timezone: String?
     end
 
+    class NielsenNwOnly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_digit_string: String,
+        ?sid: Float,
+        ?timezone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_digit_string: String?
+      attr_accessor sid: Float?
+      attr_accessor timezone: String?
+    end
+
     module NielsenPcmToId3TaggingState
       DISABLED: String
       ENABLED: String
@@ -8694,12 +9380,14 @@ module Aws::MediaLive
         ?nielsen_cbet_settings: Types::NielsenCBET,
         ?nielsen_distribution_type: String,
         ?nielsen_naes_ii_nw_settings: Types::NielsenNaesIiNw,
+        ?nielsen_nw_only_settings: Types::NielsenNwOnly,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor nielsen_cbet_settings: Types::NielsenCBET?
       attr_accessor nielsen_distribution_type: String?
       attr_accessor nielsen_naes_ii_nw_settings: Types::NielsenNaesIiNw?
+      attr_accessor nielsen_nw_only_settings: Types::NielsenNwOnly?
     end
 
     module NodeConnectionState
@@ -8714,12 +9402,14 @@ module Aws::MediaLive
         ?logical_interface_name: String,
         ?network_interface_mode: String,
         ?physical_interface_name: String,
+        ?physical_interface_ip_addresses: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor logical_interface_name: String?
       attr_accessor network_interface_mode: String?
       attr_accessor physical_interface_name: String?
+      attr_accessor physical_interface_ip_addresses: Array[String]?
     end
 
     class NodeInterfaceMappingCreateRequest
@@ -8836,6 +9526,7 @@ module Aws::MediaLive
         ?settings: Array[Types::OutputDestinationSettings],
         ?srt_settings: Array[Types::SrtOutputDestinationSettings],
         ?logical_interface_names: Array[String],
+        ?media_connect_router_settings: Array[Types::MediaConnectRouterOutputDestinationSettings],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8845,6 +9536,7 @@ module Aws::MediaLive
       attr_accessor settings: Array[Types::OutputDestinationSettings]?
       attr_accessor srt_settings: Array[Types::SrtOutputDestinationSettings]?
       attr_accessor logical_interface_names: Array[String]?
+      attr_accessor media_connect_router_settings: Array[Types::MediaConnectRouterOutputDestinationSettings]?
     end
 
     class OutputDestinationSettings
@@ -8855,6 +9547,7 @@ module Aws::MediaLive
         ?stream_name: String,
         ?url: String,
         ?username: String,
+        ?virtual_source_address: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8862,6 +9555,7 @@ module Aws::MediaLive
       attr_accessor stream_name: String?
       attr_accessor url: String?
       attr_accessor username: String?
+      attr_accessor virtual_source_address: String?
     end
 
     class OutputGroup
@@ -8893,6 +9587,7 @@ module Aws::MediaLive
         ?udp_group_settings: Types::UdpGroupSettings,
         ?cmaf_ingest_group_settings: Types::CmafIngestGroupSettings,
         ?srt_group_settings: Types::SrtGroupSettings,
+        ?media_connect_router_group_settings: Types::MediaConnectRouterGroupSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8906,6 +9601,7 @@ module Aws::MediaLive
       attr_accessor udp_group_settings: Types::UdpGroupSettings?
       attr_accessor cmaf_ingest_group_settings: Types::CmafIngestGroupSettings?
       attr_accessor srt_group_settings: Types::SrtGroupSettings?
+      attr_accessor media_connect_router_group_settings: Types::MediaConnectRouterGroupSettings?
     end
 
     class OutputLocationRef
@@ -8925,11 +9621,13 @@ module Aws::MediaLive
       def initialize: (
         ?epoch_locking_settings: Types::EpochLockingSettings,
         ?pipeline_locking_settings: Types::PipelineLockingSettings,
+        ?disabled_locking_settings: Types::DisabledLockingSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor epoch_locking_settings: Types::EpochLockingSettings?
       attr_accessor pipeline_locking_settings: Types::PipelineLockingSettings?
+      attr_accessor disabled_locking_settings: Types::DisabledLockingSettings?
     end
 
     class OutputSettings
@@ -8946,6 +9644,7 @@ module Aws::MediaLive
         ?udp_output_settings: Types::UdpOutputSettings,
         ?cmaf_ingest_output_settings: Types::CmafIngestOutputSettings,
         ?srt_output_settings: Types::SrtOutputSettings,
+        ?media_connect_router_output_settings: Types::MediaConnectRouterOutputSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8959,6 +9658,13 @@ module Aws::MediaLive
       attr_accessor udp_output_settings: Types::UdpOutputSettings?
       attr_accessor cmaf_ingest_output_settings: Types::CmafIngestOutputSettings?
       attr_accessor srt_output_settings: Types::SrtOutputSettings?
+      attr_accessor media_connect_router_output_settings: Types::MediaConnectRouterOutputSettings?
+    end
+
+    module OutputUsage
+      MULTIVIEW_EQUAL_SIZE_VIEW: String
+      MULTIVIEW_PRIMARY_VIEW: String
+      MULTIVIEW_SECONDARY_VIEW: String
     end
 
     class PassThroughSettings
@@ -8991,6 +9697,7 @@ module Aws::MediaLive
         ?active_motion_graphics_uri: String,
         ?pipeline_id: String,
         ?channel_engine_version: Types::ChannelEngineVersionResponse,
+        ?media_connect_router_output_connection_map: Hash[String, Types::MediaConnectRouterOutputConnection],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9000,6 +9707,7 @@ module Aws::MediaLive
       attr_accessor active_motion_graphics_uri: String?
       attr_accessor pipeline_id: String?
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse?
+      attr_accessor media_connect_router_output_connection_map: Hash[String, Types::MediaConnectRouterOutputConnection]?
     end
 
     module PipelineId
@@ -9007,13 +9715,22 @@ module Aws::MediaLive
       PIPELINE_1: String
     end
 
+    module PipelineLockingMethod
+      SOURCE_TIMECODE: String
+      VIDEO_ALIGNMENT: String
+    end
+
     class PipelineLockingSettings
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?pipeline_locking_method: String,
+        ?custom_epoch: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor pipeline_locking_method: String?
+      attr_accessor custom_epoch: String?
     end
 
     class PipelinePauseStateSettings
@@ -9031,6 +9748,17 @@ module Aws::MediaLive
       CURRENTLY_ACTIVE: String
       PIPELINE_0: String
       PIPELINE_1: String
+    end
+
+    class PrimaryChannelSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linked_channel_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linked_channel_type: String?
     end
 
     class PurchaseOfferingRequest
@@ -9339,6 +10067,9 @@ module Aws::MediaLive
         ?vpc: Types::VpcOutputSettingsDescription,
         ?anywhere_settings: Types::DescribeAnywhereSettings,
         ?channel_engine_version: Types::ChannelEngineVersionResponse,
+        ?linked_channel_settings: Types::DescribeLinkedChannelSettings,
+        ?channel_security_groups: Array[String],
+        ?inference_settings: Types::DescribeInferenceSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9363,6 +10094,9 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription?
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings?
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse?
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings?
+      attr_accessor channel_security_groups: Array[String]?
+      attr_accessor inference_settings: Types::DescribeInferenceSettings?
     end
 
     class Route
@@ -9402,6 +10136,65 @@ module Aws::MediaLive
 
       attr_accessor cidr: String?
       attr_accessor gateway: String?
+    end
+
+    class RouterDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone_name: String,
+        ?router_output_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone_name: String?
+      attr_accessor router_output_arn: String?
+    end
+
+    class RouterDestinationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone_name: String?
+    end
+
+    module RouterEncryptionType
+      AUTOMATIC: String
+      SECRETS_MANAGER: String
+    end
+
+    class RouterInputSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destinations: Array[Types::RouterDestination],
+        ?encryption_type: String,
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destinations: Array[Types::RouterDestination]?
+      attr_accessor encryption_type: String?
+      attr_accessor secret_arn: String?
+    end
+
+    class RouterSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destinations: Array[Types::RouterDestinationSettings],
+        ?encryption_type: String,
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destinations: Array[Types::RouterDestinationSettings]?
+      attr_accessor encryption_type: String?
+      attr_accessor secret_arn: String?
     end
 
     module RtmpAdMarkers
@@ -9816,6 +10609,7 @@ module Aws::MediaLive
     module Scte35Type
       NONE: String
       SCTE_35_WITHOUT_SEGMENTATION: String
+      SCTE_35_WITHOUT_IDR: String
     end
 
     module Scte35WebDeliveryAllowedFlag
@@ -9967,6 +10761,19 @@ module Aws::MediaLive
       attr_accessor tags: Hash[String, String]?
     end
 
+    class SmartSubtitleSourceSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?caption_synchronization_mode: String,
+        ?inference_feed_output: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor caption_synchronization_mode: String?
+      attr_accessor inference_feed_output: String?
+    end
+
     module SmoothGroupAudioOnlyTimecodeControl
       PASSTHROUGH: String
       USE_CONFIGURED_CLOCK: String
@@ -10060,6 +10867,17 @@ module Aws::MediaLive
 
     end
 
+    class SpecialRouterSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?router_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor router_arn: String?
+    end
+
     class SrtCallerDecryption
       include Smithy::Schema::Structure
 
@@ -10141,6 +10959,62 @@ module Aws::MediaLive
       attr_accessor input_loss_action: String?
     end
 
+    class SrtListenerDecryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: String,
+        ?passphrase_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: String?
+      attr_accessor passphrase_secret_arn: String?
+    end
+
+    class SrtListenerDecryptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: String,
+        ?passphrase_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: String?
+      attr_accessor passphrase_secret_arn: String?
+    end
+
+    class SrtListenerSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decryption: Types::SrtListenerDecryption,
+        ?minimum_latency: Integer,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decryption: Types::SrtListenerDecryption?
+      attr_accessor minimum_latency: Integer?
+      attr_accessor stream_id: String?
+    end
+
+    class SrtListenerSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decryption: Types::SrtListenerDecryptionRequest,
+        ?minimum_latency: Integer,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decryption: Types::SrtListenerDecryptionRequest?
+      attr_accessor minimum_latency: Integer?
+      attr_accessor stream_id: String?
+    end
+
     class SrtOutputDestinationSettings
       include Smithy::Schema::Structure
 
@@ -10148,12 +11022,16 @@ module Aws::MediaLive
         ?encryption_passphrase_secret_arn: String,
         ?stream_id: String,
         ?url: String,
+        ?connection_mode: String,
+        ?listener_port: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor encryption_passphrase_secret_arn: String?
       attr_accessor stream_id: String?
       attr_accessor url: String?
+      attr_accessor connection_mode: String?
+      attr_accessor listener_port: Integer?
     end
 
     class SrtOutputSettings
@@ -10180,10 +11058,12 @@ module Aws::MediaLive
 
       def initialize: (
         ?srt_caller_sources: Array[Types::SrtCallerSource],
+        ?srt_listener_settings: Types::SrtListenerSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor srt_caller_sources: Array[Types::SrtCallerSource]?
+      attr_accessor srt_listener_settings: Types::SrtListenerSettings?
     end
 
     class SrtSettingsRequest
@@ -10191,10 +11071,12 @@ module Aws::MediaLive
 
       def initialize: (
         ?srt_caller_sources: Array[Types::SrtCallerSourceRequest],
+        ?srt_listener_settings: Types::SrtListenerSettingsRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor srt_caller_sources: Array[Types::SrtCallerSourceRequest]?
+      attr_accessor srt_listener_settings: Types::SrtListenerSettingsRequest?
     end
 
     class StandardHlsSettings
@@ -10245,6 +11127,9 @@ module Aws::MediaLive
         ?vpc: Types::VpcOutputSettingsDescription,
         ?anywhere_settings: Types::DescribeAnywhereSettings,
         ?channel_engine_version: Types::ChannelEngineVersionResponse,
+        ?linked_channel_settings: Types::DescribeLinkedChannelSettings,
+        ?channel_security_groups: Array[String],
+        ?inference_settings: Types::DescribeInferenceSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10268,6 +11153,9 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription?
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings?
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse?
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings?
+      attr_accessor channel_security_groups: Array[String]?
+      attr_accessor inference_settings: Types::DescribeInferenceSettings?
     end
 
     class StartDeleteMonitorDeploymentRequest
@@ -10679,6 +11567,9 @@ module Aws::MediaLive
         ?vpc: Types::VpcOutputSettingsDescription,
         ?anywhere_settings: Types::DescribeAnywhereSettings,
         ?channel_engine_version: Types::ChannelEngineVersionResponse,
+        ?linked_channel_settings: Types::DescribeLinkedChannelSettings,
+        ?channel_security_groups: Array[String],
+        ?inference_settings: Types::DescribeInferenceSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10702,6 +11593,9 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription?
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings?
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse?
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings?
+      attr_accessor channel_security_groups: Array[String]?
+      attr_accessor inference_settings: Types::DescribeInferenceSettings?
     end
 
     class StopInputDeviceRequest
@@ -10849,6 +11743,17 @@ module Aws::MediaLive
       STRENGTH_14: String
       STRENGTH_15: String
       STRENGTH_16: String
+    end
+
+    class TextCaptionPositionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?y_position_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor y_position_percentage: Integer?
     end
 
     class Thumbnail
@@ -11025,15 +11930,18 @@ module Aws::MediaLive
 
       def initialize: (
         ?style_control: String,
+        ?position: Types::TextCaptionPositionSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor style_control: String?
+      attr_accessor position: Types::TextCaptionPositionSettings?
     end
 
     module TtmlDestinationStyleControl
       PASSTHROUGH: String
       USE_CONFIGURED: String
+      MANUAL: String
     end
 
     class UdpContainerSettings
@@ -11203,6 +12111,10 @@ module Aws::MediaLive
         ?channel_engine_version: Types::ChannelEngineVersionRequest,
         ?dry_run: bool,
         ?anywhere_settings: Types::AnywhereSettings,
+        ?linked_channel_settings: Types::LinkedChannelSettings,
+        ?channel_security_groups: Array[String],
+        ?inference_settings: Types::InferenceSettings,
+        ?special_router_settings: Types::SpecialRouterSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11219,6 +12131,10 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest?
       attr_accessor dry_run: bool?
       attr_accessor anywhere_settings: Types::AnywhereSettings?
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings?
+      attr_accessor channel_security_groups: Array[String]?
+      attr_accessor inference_settings: Types::InferenceSettings?
+      attr_accessor special_router_settings: Types::SpecialRouterSettings?
     end
 
     class UpdateChannelResponse
@@ -11546,6 +12462,7 @@ module Aws::MediaLive
         ?multicast_settings: Types::MulticastSettingsUpdateRequest,
         ?smpte2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings,
         ?sdi_sources: Array[String],
+        ?special_router_settings: Types::SpecialRouterSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11561,6 +12478,7 @@ module Aws::MediaLive
       attr_accessor multicast_settings: Types::MulticastSettingsUpdateRequest?
       attr_accessor smpte2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings?
       attr_accessor sdi_sources: Array[String]?
+      attr_accessor special_router_settings: Types::SpecialRouterSettings?
     end
 
     class UpdateInputResponse
@@ -11905,6 +12823,9 @@ module Aws::MediaLive
         ?scaling_behavior: String,
         ?sharpness: Integer,
         ?width: Integer,
+        ?crop_rectangle: Types::VideoPositionRectangle,
+        ?output_position_rectangle: Types::VideoPositionRectangle,
+        ?border: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11915,6 +12836,9 @@ module Aws::MediaLive
       attr_accessor scaling_behavior: String?
       attr_accessor sharpness: Integer?
       attr_accessor width: Integer?
+      attr_accessor crop_rectangle: Types::VideoPositionRectangle?
+      attr_accessor output_position_rectangle: Types::VideoPositionRectangle?
+      attr_accessor border: Integer?
     end
 
     module VideoDescriptionRespondToAfd
@@ -11926,6 +12850,24 @@ module Aws::MediaLive
     module VideoDescriptionScalingBehavior
       DEFAULT: String
       STRETCH_TO_OUTPUT: String
+      SMART_CROP: String
+    end
+
+    class VideoPositionRectangle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?height: Integer,
+        ?width: Integer,
+        ?x: Integer,
+        ?y: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor height: Integer?
+      attr_accessor width: Integer?
+      attr_accessor x: Integer?
+      attr_accessor y: Integer?
     end
 
     class VideoSelector
@@ -12063,15 +13005,18 @@ module Aws::MediaLive
 
       def initialize: (
         ?style_control: String,
+        ?position: Types::TextCaptionPositionSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor style_control: String?
+      attr_accessor position: Types::TextCaptionPositionSettings?
     end
 
     module WebvttDestinationStyleControl
       NO_STYLE_DATA: String
       PASSTHROUGH: String
+      MANUAL: String
     end
   end
 end

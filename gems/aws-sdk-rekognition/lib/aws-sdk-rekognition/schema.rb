@@ -193,6 +193,10 @@ module Aws::Rekognition
     FaceRecordList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rekognition#FaceRecordList", name: "FaceRecordList")
     FaceSearchSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#FaceSearchSettings", name: "FaceSearchSettings")
     FaceSearchSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rekognition#FaceSearchSortBy", name: "FaceSearchSortBy")
+    FeedbackCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rekognition#FeedbackCode", name: "FeedbackCode")
+    FeedbackItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#FeedbackItem", name: "FeedbackItem")
+    FeedbackList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rekognition#FeedbackList", name: "FeedbackList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    FeedbackMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rekognition#FeedbackMessage", name: "FeedbackMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     Float = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.rekognition#Float", name: "Float")
     FlowDefinitionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rekognition#FlowDefinitionArn", name: "FlowDefinitionArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     Gender = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#Gender", name: "Gender")
@@ -408,6 +412,7 @@ module Aws::Rekognition
     S3Object = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#S3Object", name: "S3Object")
     S3ObjectName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rekognition#S3ObjectName", name: "S3ObjectName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     S3ObjectVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rekognition#S3ObjectVersion", name: "S3ObjectVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    SDKTypeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rekognition#SDKTypeString", name: "SDKTypeString", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     SNSTopicArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rekognition#SNSTopicArn", name: "SNSTopicArn", traits: {"smithy.api#pattern" => "^(^arn:aws:sns:.*:\\w{12}:.+$)$"})
     SearchFacesByImageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#SearchFacesByImageRequest", name: "SearchFacesByImageRequest")
     SearchFacesByImageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#SearchFacesByImageResponse", name: "SearchFacesByImageResponse")
@@ -428,6 +433,7 @@ module Aws::Rekognition
     SegmentTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rekognition#SegmentTypes", name: "SegmentTypes", traits: {"smithy.api#length" => {"min" => 1}})
     SegmentTypesInfo = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rekognition#SegmentTypesInfo", name: "SegmentTypesInfo")
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client"})
+    SessionMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#SessionMetadata", name: "SessionMetadata")
     SessionNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#SessionNotFoundException", name: "SessionNotFoundException", traits: {"smithy.api#error" => "client"})
     ShotSegment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#ShotSegment", name: "ShotSegment")
     Smile = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rekognition#Smile", name: "Smile")
@@ -1105,6 +1111,17 @@ module Aws::Rekognition
     FaceSearchSettings.type = Types::FaceSearchSettings
     FaceSearchSortBy.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INDEX", traits: {"smithy.api#enumValue" => "INDEX"}))
     FaceSearchSortBy.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
+    FeedbackCode.add_member(:face_not_visible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_NOT_VISIBLE", traits: {"smithy.api#enumValue" => "FACE_NOT_VISIBLE"}))
+    FeedbackCode.add_member(:face_obstruction_detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_OBSTRUCTION_DETECTED", traits: {"smithy.api#enumValue" => "FACE_OBSTRUCTION_DETECTED"}))
+    FeedbackCode.add_member(:low_video_quality_detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW_VIDEO_QUALITY_DETECTED", traits: {"smithy.api#enumValue" => "LOW_VIDEO_QUALITY_DETECTED"}))
+    FeedbackCode.add_member(:face_not_aligned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACE_NOT_ALIGNED", traits: {"smithy.api#enumValue" => "FACE_NOT_ALIGNED"}))
+    FeedbackCode.add_member(:eyes_closed_detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EYES_CLOSED_DETECTED", traits: {"smithy.api#enumValue" => "EYES_CLOSED_DETECTED"}))
+    FeedbackCode.add_member(:low_lighting_detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW_LIGHTING_DETECTED", traits: {"smithy.api#enumValue" => "LOW_LIGHTING_DETECTED"}))
+    FeedbackCode.add_member(:high_lighting_detected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH_LIGHTING_DETECTED", traits: {"smithy.api#enumValue" => "HIGH_LIGHTING_DETECTED"}))
+    FeedbackItem.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackCode, name: "Code", traits: {"smithy.api#required" => {}}))
+    FeedbackItem.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackMessage, name: "Message", traits: {"smithy.api#required" => {}}))
+    FeedbackItem.type = Types::FeedbackItem
+    FeedbackList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackItem, name: "member"))
     Gender.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GenderType, name: "Value"))
     Gender.add_member(:confidence, ::Smithy::Schema::Shapes::MemberShape.new(target: Percent, name: "Confidence"))
     Gender.type = Types::Gender
@@ -1180,6 +1197,8 @@ module Aws::Rekognition
     GetFaceLivenessSessionResultsResponse.add_member(:reference_image, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditImage, name: "ReferenceImage"))
     GetFaceLivenessSessionResultsResponse.add_member(:audit_images, ::Smithy::Schema::Shapes::MemberShape.new(target: AuditImages, name: "AuditImages"))
     GetFaceLivenessSessionResultsResponse.add_member(:challenge, ::Smithy::Schema::Shapes::MemberShape.new(target: Challenge, name: "Challenge"))
+    GetFaceLivenessSessionResultsResponse.add_member(:feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: FeedbackList, name: "Feedback"))
+    GetFaceLivenessSessionResultsResponse.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionMetadata, name: "Metadata"))
     GetFaceLivenessSessionResultsResponse.type = Types::GetFaceLivenessSessionResultsResponse
     GetFaceSearchRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "JobId", traits: {"smithy.api#required" => {}}))
     GetFaceSearchRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
@@ -1818,6 +1837,8 @@ module Aws::Rekognition
     ServiceQuotaExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ServiceQuotaExceededException.add_member(:logref, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Logref"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    SessionMetadata.add_member(:sdk_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SDKTypeString, name: "SDKType", traits: {"smithy.api#required" => {}}))
+    SessionMetadata.type = Types::SessionMetadata
     SessionNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     SessionNotFoundException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     SessionNotFoundException.add_member(:logref, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Logref"))
@@ -2120,7 +2141,7 @@ module Aws::Rekognition
       service.id = "com.amazonaws.rekognition#RekognitionService"
       service.name = "RekognitionService"
       service.version = "2016-06-27"
-      service.traits = {"aws.api#service" => {"sdkId" => "Rekognition", "arnNamespace" => "rekognition", "cloudFormationName" => "Rekognition", "cloudTrailEventSource" => "rekognition.amazonaws.com", "endpointPrefix" => "rekognition"}, "aws.auth#sigv4" => {"name" => "rekognition"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Rekognition"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Rekognition", "arnNamespace" => "rekognition", "cloudFormationName" => "Rekognition", "cloudTrailEventSource" => "rekognition.amazonaws.com", "endpointPrefix" => "rekognition"}, "aws.auth#sigv4" => {"name" => "rekognition"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Rekognition", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://rekognition-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rekognition-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rekognition.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rekognition.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_faces, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rekognition#AssociateFaces"
         operation.name = "AssociateFaces"

@@ -9,24 +9,39 @@ module Aws::MediaTailor
     AdBreakOpportunities: ListShape
     AdBreakOpportunity: StructureShape
     AdConditioningConfiguration: StructureShape
+    AdDecisionServerConfiguration: StructureShape
     AdMarkerPassthrough: StructureShape
     AdMarkupType: EnumShape
+    AdSequencingMode: EnumShape
     AdsInteractionExcludeEventType: EnumShape
     AdsInteractionLog: StructureShape
     AdsInteractionPublishOptInEventType: EnumShape
+    AdsPersonalizationConcurrency: StructureShape
+    AdsPersonalizationTimeouts: StructureShape
     Alert: StructureShape
     AlertCategory: EnumShape
     AlternateMedia: StructureShape
+    ApsPublisherId: StringShape
+    ApsRegion: EnumShape
     AudienceMedia: StructureShape
     Audiences: ListShape
     AvailMatchingCriteria: StructureShape
     AvailSuppression: StructureShape
+    AwsServiceRequestConfiguration: StructureShape
+    AwsTargetService: StringShape
     BadRequestException: StructureShape
+    BeaconEventType: EnumShape
+    BeaconEventTypeList: ListShape
+    BeaconingConfiguration: StructureShape
     Bumper: StructureShape
     CdnConfiguration: StructureShape
     Channel: StructureShape
     ChannelState: EnumShape
+    ClientSideBeaconingConfiguration: StructureShape
+    ClientSideBeaconingMode: EnumShape
     ClipRange: StructureShape
+    CompressionMethod: EnumShape
+    ConcurrentExecutorConfiguration: StructureShape
     ConfigurationAliasesRequest: MapShape
     ConfigurationAliasesResponse: MapShape
     ConfigureLogsForChannelInput: StructureShape
@@ -45,6 +60,7 @@ module Aws::MediaTailor
     CreateSourceLocationOutput: StructureShape
     CreateVodSourceInput: StructureShape
     CreateVodSourceOutput: StructureShape
+    CustomOutputConfiguration: StructureShape
     DashConfiguration: StructureShape
     DashConfigurationForPut: StructureShape
     DashPlaylistSettings: StructureShape
@@ -53,6 +69,8 @@ module Aws::MediaTailor
     DeleteChannelOutput: StructureShape
     DeleteChannelPolicyInput: StructureShape
     DeleteChannelPolicyOutput: StructureShape
+    DeleteFunctionRequest: StructureShape
+    DeleteFunctionResponse: StructureShape
     DeleteLiveSourceInput: StructureShape
     DeleteLiveSourceOutput: StructureShape
     DeletePlaybackConfigurationInput: StructureShape
@@ -75,11 +93,18 @@ module Aws::MediaTailor
     DescribeSourceLocationOutput: StructureShape
     DescribeVodSourceInput: StructureShape
     DescribeVodSourceOutput: StructureShape
+    EventName: EnumShape
     FillPolicy: EnumShape
+    Function: StructureShape
+    FunctionMapping: MapShape
+    FunctionRef: StructureShape
+    FunctionType: EnumShape
     GetChannelPolicyInput: StructureShape
     GetChannelPolicyOutput: StructureShape
     GetChannelScheduleInput: StructureShape
     GetChannelScheduleOutput: StructureShape
+    GetFunctionRequest: StructureShape
+    GetFunctionResponse: StructureShape
     GetPlaybackConfigurationInput: StructureShape
     GetPlaybackConfigurationOutput: StructureShape
     GetPrefetchScheduleInput: StructureShape
@@ -89,12 +114,17 @@ module Aws::MediaTailor
     HttpConfiguration: StructureShape
     HttpPackageConfiguration: StructureShape
     HttpPackageConfigurations: ListShape
+    HttpRequest: StructureShape
+    HttpRequestCacheConfiguration: StructureShape
+    HttpRequestConfiguration: StructureShape
     InsertionMode: EnumShape
     KeyValuePair: StructureShape
     ListAlertsInput: StructureShape
     ListAlertsOutput: StructureShape
     ListChannelsInput: StructureShape
     ListChannelsOutput: StructureShape
+    ListFunctionsRequest: StructureShape
+    ListFunctionsResponse: StructureShape
     ListLiveSourcesInput: StructureShape
     ListLiveSourcesOutput: StructureShape
     ListPlaybackConfigurationsInput: StructureShape
@@ -118,19 +148,29 @@ module Aws::MediaTailor
     ManifestProcessingRules: StructureShape
     ManifestServiceExcludeEventType: EnumShape
     ManifestServiceInteractionLog: StructureShape
+    ManifestServicePublishOptInEventType: EnumShape
     MaxResults: IntegerShape
     MessageType: EnumShape
+    Method: EnumShape
+    MethodType: EnumShape
+    MinimumUnfilledDurationSeconds: IntegerShape
     Mode: EnumShape
+    OpenRtbTemplateString: StringShape
     Operator: EnumShape
     OriginManifestType: EnumShape
     PlaybackConfiguration: StructureShape
     PlaybackMode: EnumShape
+    PreRollAdDecisionServerConfiguration: StructureShape
+    PreRollAdSequencingMode: EnumShape
+    PreRollVastResponse: StructureShape
     PrefetchConsumption: StructureShape
     PrefetchRetrieval: StructureShape
     PrefetchSchedule: StructureShape
     PrefetchScheduleType: EnumShape
     PutChannelPolicyInput: StructureShape
     PutChannelPolicyOutput: StructureShape
+    PutFunctionRequest: StructureShape
+    PutFunctionResponse: StructureShape
     PutPlaybackConfigurationInput: StructureShape
     PutPlaybackConfigurationOutput: StructureShape
     RecurringConsumption: StructureShape
@@ -141,6 +181,7 @@ module Aws::MediaTailor
     RequestOutputs: ListShape
     ResponseOutputItem: StructureShape
     ResponseOutputs: ListShape
+    RuntimeType: EnumShape
     ScheduleAdBreak: StructureShape
     ScheduleConfiguration: StructureShape
     ScheduleEntry: StructureShape
@@ -149,6 +190,7 @@ module Aws::MediaTailor
     SegmentDeliveryConfiguration: StructureShape
     SegmentationDescriptor: StructureShape
     SegmentationDescriptorList: ListShape
+    SequentialExecutorConfiguration: StructureShape
     SlateSource: StructureShape
     SourceLocation: StructureShape
     SpliceInsertMessage: StructureShape
@@ -157,6 +199,7 @@ module Aws::MediaTailor
     StopChannelInput: StructureShape
     StopChannelOutput: StructureShape
     StreamingMediaFileConditioning: EnumShape
+    StringMap: MapShape
     TagResourceInput: StructureShape
     Tier: EnumShape
     TimeShiftConfiguration: StructureShape
@@ -179,7 +222,10 @@ module Aws::MediaTailor
     UpdateSourceLocationOutput: StructureShape
     UpdateVodSourceInput: StructureShape
     UpdateVodSourceOutput: StructureShape
+    VastRequestConfiguration: StructureShape
+    VastResponse: StructureShape
     VodSource: StructureShape
+    YieldOptimizationConfiguration: StructureShape
     Adsinteractionexcludeeventtypeslist: ListShape
     Adsinteractionpublishoptineventtypeslist: ListShape
     Boolean: BooleanShape
@@ -192,6 +238,8 @@ module Aws::MediaTailor
     Listofaudiencemedia: ListShape
     Listofavailmatchingcriteria: ListShape
     Listofchannel: ListShape
+    Listoffunctionsref: ListShape
+    Listoffunctionsresponse: ListShape
     Listoflivesource: ListShape
     Listofloggingstrategies: ListShape
     Listofplaybackconfiguration: ListShape
@@ -204,6 +252,7 @@ module Aws::MediaTailor
     ListofString: ListShape
     Long: IntegerShape
     Manifestserviceexcludeeventtypeslist: ListShape
+    Manifestservicepublishoptineventtypeslist: ListShape
     MapofString: MapShape
     String: StringShape
     Timestampunix: TimestampShape

@@ -3,6 +3,7 @@ module Aws::WellArchitected
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AccountId: StringShape
     AccountJiraConfigurationInput: StructureShape
     AccountJiraConfigurationOutput: StructureShape
     AccountJiraIssueManagementStatus: EnumShape
@@ -10,11 +11,26 @@ module Aws::WellArchitected
     AdditionalResourceType: EnumShape
     AdditionalResources: StructureShape
     AdditionalResourcesList: ListShape
+    AgentProfileArn: StringShape
+    AgentProfileSummaries: ListShape
+    AgentProfileSummary: StructureShape
+    AgentRecommendationArn: StringShape
+    AgentRecommendationGenerationSummaries: ListShape
+    AgentRecommendationGenerationSummary: StructureShape
+    AgentRecommendationItemSummaries: ListShape
+    AgentRecommendationItemSummary: StructureShape
+    AgentRecommendationRemediation: StructureShape
+    AgentRecommendationRemediations: ListShape
+    AgentRecommendationSummaries: ListShape
+    AgentRecommendationSummary: StructureShape
+    AggregationConfiguration: StructureShape
+    AggregationConfigurations: ListShape
     Answer: StructureShape
     AnswerReason: EnumShape
     AnswerSummaries: ListShape
     AnswerSummary: StructureShape
     ApplicationArn: StringShape
+    ApplicationType: EnumShape
     AssociateLensesInput: StructureShape
     AssociateProfilesInput: StructureShape
     AwsAccountId: StringShape
@@ -56,7 +72,23 @@ module Aws::WellArchitected
     ConflictException: StructureShape
     ConsolidatedReportMetric: StructureShape
     ConsolidatedReportMetrics: ListShape
+    ContextAccountIdList: ListShape
+    ContextAwsServiceList: ListShape
+    ContextContent: StructureShape
+    ContextRegionList: ListShape
+    ContextResourceTag: StructureShape
+    ContextResourceTagList: ListShape
+    ContextResourceTypeList: ListShape
+    ContextSummaries: ListShape
+    ContextSummary: StructureShape
+    ContextType: EnumShape
     Count: IntegerShape
+    CreateAgentContextRequest: StructureShape
+    CreateAgentContextResponse: StructureShape
+    CreateAgentGoalRequest: StructureShape
+    CreateAgentGoalResponse: StructureShape
+    CreateAgentProfileRequest: StructureShape
+    CreateAgentProfileResponse: StructureShape
     CreateLensShareInput: StructureShape
     CreateLensShareOutput: StructureShape
     CreateLensVersionInput: StructureShape
@@ -75,7 +107,16 @@ module Aws::WellArchitected
     CreateWorkloadOutput: StructureShape
     CreateWorkloadShareInput: StructureShape
     CreateWorkloadShareOutput: StructureShape
+    Criticality: EnumShape
+    CrossPillarBenefit: StructureShape
+    CrossPillarBenefits: ListShape
     DefinitionType: EnumShape
+    DeleteAgentContextRequest: StructureShape
+    DeleteAgentContextResponse: StructureShape
+    DeleteAgentGoalRequest: StructureShape
+    DeleteAgentGoalResponse: StructureShape
+    DeleteAgentProfileRequest: StructureShape
+    DeleteAgentProfileResponse: StructureShape
     DeleteLensInput: StructureShape
     DeleteLensShareInput: StructureShape
     DeleteProfileInput: StructureShape
@@ -89,16 +130,32 @@ module Aws::WellArchitected
     DisassociateProfilesInput: StructureShape
     DiscoveryIntegrationStatus: EnumShape
     DisplayText: StringShape
+    Effort: EnumShape
+    ErrorDetails: StructureShape
     ExceptionMessage: StringShape
     ExceptionResourceId: StringShape
     ExceptionResourceType: StringShape
     ExportLensInput: StructureShape
     ExportLensOutput: StructureShape
+    FeedbackCategory: EnumShape
+    FieldErrorMessage: StringShape
+    FieldErrorPath: StringShape
+    FieldErrors: MapShape
     FlaggedResources: IntegerShape
+    GenerationStatus: EnumShape
+    GetAgentContextRequest: StructureShape
+    GetAgentContextResponse: StructureShape
+    GetAgentGoalRequest: StructureShape
+    GetAgentGoalResponse: StructureShape
+    GetAgentProfileRequest: StructureShape
+    GetAgentProfileResponse: StructureShape
+    GetAgentRecommendationGenerationRequest: StructureShape
+    GetAgentRecommendationGenerationResponse: StructureShape
+    GetAgentRecommendationRequest: StructureShape
+    GetAgentRecommendationResponse: StructureShape
     GetAnswerInput: StructureShape
     GetAnswerOutput: StructureShape
     GetConsolidatedReportInput: StructureShape
-    GetConsolidatedReportMaxResults: IntegerShape
     GetConsolidatedReportOutput: StructureShape
     GetGlobalSettingsOutput: StructureShape
     GetLensInput: StructureShape
@@ -123,7 +180,15 @@ module Aws::WellArchitected
     GetReviewTemplateOutput: StructureShape
     GetWorkloadInput: StructureShape
     GetWorkloadOutput: StructureShape
+    GoalIdList: ListShape
+    GoalSummaries: ListShape
+    GoalSummary: StructureShape
     HelpfulResourceUrl: StringShape
+    Highlight: StringShape
+    Highlights: ListShape
+    ImpactCategory: EnumShape
+    ImpactDetail: StringShape
+    ImpactDetails: ListShape
     ImportLensInput: StructureShape
     ImportLensOutput: StructureShape
     ImportLensStatus: EnumShape
@@ -131,6 +196,8 @@ module Aws::WellArchitected
     ImprovementSummaries: ListShape
     ImprovementSummary: StructureShape
     IncludeSharedResources: BooleanShape
+    Insight: StructureShape
+    InsightList: ListShape
     IntegratingService: EnumShape
     IntegrationStatus: EnumShape
     IntegrationStatusInput: EnumShape
@@ -139,6 +206,8 @@ module Aws::WellArchitected
     IsMajorVersion: BooleanShape
     IsReviewOwnerUpdateAcknowledged: BooleanShape
     IssueManagementType: EnumShape
+    ItemId: StringShape
+    ItemIds: ListShape
     JiraConfiguration: StructureShape
     JiraIssueUrl: StringShape
     JiraProjectKey: StringShape
@@ -168,15 +237,25 @@ module Aws::WellArchitected
     LensUpgradeSummary: StructureShape
     LensVersion: StringShape
     LensesAppliedCount: IntegerShape
+    ListAgentContextsRequest: StructureShape
+    ListAgentContextsResponse: StructureShape
+    ListAgentGoalsRequest: StructureShape
+    ListAgentGoalsResponse: StructureShape
+    ListAgentProfilesRequest: StructureShape
+    ListAgentProfilesResponse: StructureShape
+    ListAgentRecommendationGenerationsRequest: StructureShape
+    ListAgentRecommendationGenerationsResponse: StructureShape
+    ListAgentRecommendationItemsRequest: StructureShape
+    ListAgentRecommendationItemsResponse: StructureShape
+    ListAgentRecommendationsRequest: StructureShape
+    ListAgentRecommendationsResponse: StructureShape
     ListAnswersInput: StructureShape
-    ListAnswersMaxResults: IntegerShape
     ListAnswersOutput: StructureShape
     ListCheckDetailsInput: StructureShape
     ListCheckDetailsOutput: StructureShape
     ListCheckSummariesInput: StructureShape
     ListCheckSummariesOutput: StructureShape
     ListLensReviewImprovementsInput: StructureShape
-    ListLensReviewImprovementsMaxResults: IntegerShape
     ListLensReviewImprovementsOutput: StructureShape
     ListLensReviewsInput: StructureShape
     ListLensReviewsOutput: StructureShape
@@ -187,33 +266,26 @@ module Aws::WellArchitected
     ListMilestonesInput: StructureShape
     ListMilestonesOutput: StructureShape
     ListNotificationsInput: StructureShape
-    ListNotificationsMaxResults: IntegerShape
     ListNotificationsOutput: StructureShape
     ListProfileNotificationsInput: StructureShape
     ListProfileNotificationsOutput: StructureShape
     ListProfileSharesInput: StructureShape
-    ListProfileSharesMaxResults: IntegerShape
     ListProfileSharesOutput: StructureShape
     ListProfilesInput: StructureShape
     ListProfilesOutput: StructureShape
     ListReviewTemplateAnswersInput: StructureShape
-    ListReviewTemplateAnswersMaxResults: IntegerShape
     ListReviewTemplateAnswersOutput: StructureShape
     ListReviewTemplatesInput: StructureShape
     ListReviewTemplatesOutput: StructureShape
     ListShareInvitationsInput: StructureShape
-    ListShareInvitationsMaxResults: IntegerShape
     ListShareInvitationsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
     ListTemplateSharesInput: StructureShape
-    ListTemplateSharesMaxResults: IntegerShape
     ListTemplateSharesOutput: StructureShape
     ListWorkloadSharesInput: StructureShape
-    ListWorkloadSharesMaxResults: IntegerShape
     ListWorkloadSharesOutput: StructureShape
     ListWorkloadsInput: StructureShape
-    ListWorkloadsMaxResults: IntegerShape
     ListWorkloadsOutput: StructureShape
     MaxResults: IntegerShape
     MaxSelectedProfileChoices: IntegerShape
@@ -231,15 +303,20 @@ module Aws::WellArchitected
     NotificationType: EnumShape
     OrganizationSharingStatus: EnumShape
     PermissionType: EnumShape
+    Pillar: EnumShape
     PillarDifference: StructureShape
     PillarDifferences: ListShape
     PillarId: StringShape
+    PillarItem: StructureShape
+    PillarItems: ListShape
     PillarMetric: StructureShape
     PillarMetrics: ListShape
     PillarName: StringShape
     PillarNotes: MapShape
     PillarReviewSummaries: ListShape
     PillarReviewSummary: StructureShape
+    Pillars: ListShape
+    Priority: EnumShape
     Profile: StructureShape
     ProfileArn: StringShape
     ProfileArns: ListShape
@@ -265,6 +342,9 @@ module Aws::WellArchitected
     ProfileTemplateQuestion: StructureShape
     ProfileTemplateQuestionChoices: ListShape
     ProfileVersion: StringShape
+    Progress: StructureShape
+    PutAgentRecommendationFeedbackRequest: StructureShape
+    PutAgentRecommendationFeedbackResponse: StructureShape
     Question: EnumShape
     QuestionCounts: MapShape
     QuestionDescription: StringShape
@@ -277,8 +357,29 @@ module Aws::WellArchitected
     QuestionTitle: StringShape
     QuestionType: EnumShape
     QuotaCode: StringShape
+    RecommendationArn: StringShape
+    RecommendationFeedbackType: EnumShape
+    RecommendationGoal: StructureShape
+    RecommendationGoals: ListShape
+    RecommendationItemType: EnumShape
+    RecommendationSource: EnumShape
+    RecommendationSourceList: ListShape
+    RecommendationState: EnumShape
+    RecommendationStatus: EnumShape
+    RecommendationType: EnumShape
+    RecommendationTypes: ListShape
+    RecommendedFixStep: StringShape
+    RecommendedFixSteps: ListShape
+    Region: StringShape
+    Regions: ListShape
+    RemediationStep: StructureShape
+    RemediationSteps: ListShape
+    RemediationSummary: StructureShape
+    RemediationType: EnumShape
     ReportFormat: EnumShape
     ResourceArn: StringShape
+    ResourceLink: StructureShape
+    ResourceLinks: ListShape
     ResourceNotFoundException: StructureShape
     ReviewTemplate: StructureShape
     ReviewTemplateAnswer: StructureShape
@@ -296,6 +397,10 @@ module Aws::WellArchitected
     ReviewTemplates: ListShape
     Risk: EnumShape
     RiskCounts: MapShape
+    RiskRating: EnumShape
+    Roi: StructureShape
+    RoleArn: StringShape
+    Scope: StructureShape
     SelectedChoiceIds: ListShape
     SelectedChoices: ListShape
     SelectedPillar: StructureShape
@@ -303,6 +408,7 @@ module Aws::WellArchitected
     SelectedProfileChoiceIds: ListShape
     SelectedQuestionId: StringShape
     SelectedQuestionIds: ListShape
+    SensitiveString: StringShape
     ServiceCode: StringShape
     ServiceQuotaExceededException: StructureShape
     ShareId: StringShape
@@ -315,14 +421,19 @@ module Aws::WellArchitected
     ShareStatus: EnumShape
     SharedWith: StringShape
     SharedWithPrefix: StringShape
+    StartAgentRecommendationGenerationRequest: StructureShape
+    StartAgentRecommendationGenerationResponse: StructureShape
     StatusMessage: StringShape
+    StringList: ListShape
     Subdomain: StringShape
+    Tag: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagMap: MapShape
     TagResourceInput: StructureShape
     TagResourceOutput: StructureShape
     TagValue: StringShape
+    Tags: ListShape
     TemplateArn: StringShape
     TemplateDescription: StringShape
     TemplateName: StringShape
@@ -331,10 +442,20 @@ module Aws::WellArchitected
     TemplateShareSummaries: ListShape
     TemplateShareSummary: StructureShape
     ThrottlingException: StructureShape
-    Timestamp: TimestampShape
+    TradeOff: StructureShape
+    TradeOffs: ListShape
     TrustedAdvisorIntegrationStatus: EnumShape
+    UUID: StringShape
     UntagResourceInput: StructureShape
     UntagResourceOutput: StructureShape
+    UpdateAgentContextRequest: StructureShape
+    UpdateAgentContextResponse: StructureShape
+    UpdateAgentGoalRequest: StructureShape
+    UpdateAgentGoalResponse: StructureShape
+    UpdateAgentProfileRequest: StructureShape
+    UpdateAgentProfileResponse: StructureShape
+    UpdateAgentRecommendationStatusRequest: StructureShape
+    UpdateAgentRecommendationStatusResponse: StructureShape
     UpdateAnswerInput: StructureShape
     UpdateAnswerOutput: StructureShape
     UpdateGlobalSettingsInput: StructureShape

@@ -46,6 +46,8 @@ module Aws::CleanRoomsML
     CollaborationTrainedModelInferenceJobSummary: StructureShape
     CollaborationTrainedModelList: ListShape
     CollaborationTrainedModelSummary: StructureShape
+    ColumnClassificationDetails: StructureShape
+    ColumnMappingList: ListShape
     ColumnName: StringShape
     ColumnSchema: StructureShape
     ColumnType: EnumShape
@@ -86,6 +88,7 @@ module Aws::CleanRoomsML
     CustomDataIdentifier: StringShape
     CustomDataIdentifierList: ListShape
     CustomEntityConfig: StructureShape
+    DataPrivacyScores: StructureShape
     DataSource: StructureShape
     Dataset: StructureShape
     DatasetInputConfig: StructureShape
@@ -201,7 +204,11 @@ module Aws::CleanRoomsML
     MLInputChannelSummary: StructureShape
     MLInputChannelsList: ListShape
     MLOutputConfiguration: StructureShape
+    MLSyntheticDataParameters: StructureShape
     MaxResults: IntegerShape
+    MembershipInferenceAttackScore: StructureShape
+    MembershipInferenceAttackScoreList: ListShape
+    MembershipInferenceAttackVersion: EnumShape
     MetricDefinition: StructureShape
     MetricDefinitionList: ListShape
     MetricName: StringShape
@@ -217,9 +224,10 @@ module Aws::CleanRoomsML
     NameString: StringShape
     NextToken: StringShape
     NoiseLevelType: EnumShape
-    ParameterKey: StringShape
     ParameterMap: MapShape
+    ParameterName: StringShape
     ParameterValue: StringShape
+    PayerConfiguration: StructureShape
     PolicyExistenceCondition: EnumShape
     PrivacyBudgets: UnionShape
     PrivacyConfiguration: StructureShape
@@ -241,6 +249,9 @@ module Aws::CleanRoomsML
     S3Path: StringShape
     ServiceQuotaExceededException: StructureShape
     SharedAudienceMetrics: EnumShape
+    SparkProperties: MapShape
+    SparkPropertyKey: StringShape
+    SparkPropertyValue: StringShape
     StartAudienceExportJobRequest: StructureShape
     StartAudienceGenerationJobRequest: StructureShape
     StartAudienceGenerationJobResponse: StructureShape
@@ -249,6 +260,11 @@ module Aws::CleanRoomsML
     StartTrainedModelInferenceJobResponse: StructureShape
     StatusDetails: StructureShape
     StoppingCondition: StructureShape
+    SyntheticDataColumnName: StringShape
+    SyntheticDataColumnProperties: StructureShape
+    SyntheticDataColumnType: EnumShape
+    SyntheticDataConfiguration: StructureShape
+    SyntheticDataEvaluationScores: StructureShape
     TagKey: StringShape
     TagKeys: ListShape
     TagMap: MapShape
@@ -296,6 +312,7 @@ module Aws::CleanRoomsML
     UpdateConfiguredAudienceModelResponse: StructureShape
     ValidationException: StructureShape
     WorkerComputeConfiguration: StructureShape
+    WorkerComputeConfigurationProperties: UnionShape
     WorkerComputeType: EnumShape
 
     AWSStarkControlService: ServiceShape

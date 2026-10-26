@@ -1,0 +1,613 @@
+module Aws::PartnerCentralAccount
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PartnerCentralAccount::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptConnectionInvitationResponse
+      include Smithy::Client::_Response[Types::AcceptConnectionInvitationResponse]
+      def connection: () -> Types::Connection?
+    end
+    def accept_connection_invitation: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String
+    ) -> _AcceptConnectionInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptConnectionInvitationResponse
+
+    interface _AssociateAwsTrainingCertificationEmailDomainResponse
+      include Smithy::Client::_Response[Types::AssociateAwsTrainingCertificationEmailDomainResponse]
+    end
+    def associate_aws_training_certification_email_domain: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String,
+      ?email: String,
+      ?email_verification_code: String
+    ) -> _AssociateAwsTrainingCertificationEmailDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAwsTrainingCertificationEmailDomainResponse
+
+    interface _CancelConnectionResponse
+      include Smithy::Client::_Response[Types::CancelConnectionResponse]
+      def catalog: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def other_participant_account_id: () -> String?
+      def updated_at: () -> Time?
+      def connection_types: () -> Hash[String, Types::ConnectionTypeDetail]?
+    end
+    def cancel_connection: (
+      ?catalog: String,
+      ?identifier: String,
+      ?connection_type: String,
+      ?reason: String,
+      ?client_token: String
+    ) -> _CancelConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelConnectionResponse
+
+    interface _CancelConnectionInvitationResponse
+      include Smithy::Client::_Response[Types::CancelConnectionInvitationResponse]
+      def catalog: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def connection_id: () -> String?
+      def connection_type: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def expires_at: () -> Time?
+      def other_participant_identifier: () -> String?
+      def participant_type: () -> String?
+      def status: () -> String?
+      def invitation_message: () -> String?
+      def inviter_email: () -> String?
+      def inviter_name: () -> String?
+    end
+    def cancel_connection_invitation: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String
+    ) -> _CancelConnectionInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelConnectionInvitationResponse
+
+    interface _CancelProfileUpdateTaskResponse
+      include Smithy::Client::_Response[Types::CancelProfileUpdateTaskResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def task_id: () -> String?
+      def task_details: () -> Types::TaskDetails?
+      def started_at: () -> Time?
+      def status: () -> String?
+      def ended_at: () -> Time?
+      def error_detail_list: () -> Array[Types::ErrorDetail]?
+    end
+    def cancel_profile_update_task: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String,
+      ?task_id: String
+    ) -> _CancelProfileUpdateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelProfileUpdateTaskResponse
+
+    interface _CreateConnectionInvitationResponse
+      include Smithy::Client::_Response[Types::CreateConnectionInvitationResponse]
+      def catalog: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def connection_id: () -> String?
+      def connection_type: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def expires_at: () -> Time?
+      def other_participant_identifier: () -> String?
+      def participant_type: () -> String?
+      def status: () -> String?
+      def invitation_message: () -> String?
+      def inviter_email: () -> String?
+      def inviter_name: () -> String?
+    end
+    def create_connection_invitation: (
+      ?catalog: String,
+      ?client_token: String,
+      ?connection_type: String,
+      ?email: String,
+      ?message: String,
+      ?name: String,
+      ?receiver_identifier: String
+    ) -> _CreateConnectionInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionInvitationResponse
+
+    interface _CreatePartnerResponse
+      include Smithy::Client::_Response[Types::CreatePartnerResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def legal_name: () -> String?
+      def created_at: () -> Time?
+      def profile: () -> Types::PartnerProfile?
+      def aws_training_certification_email_domains: () -> Array[Types::PartnerDomain]?
+      def alliance_lead_contact: () -> Types::AllianceLeadContact?
+    end
+    def create_partner: (
+      ?catalog: String,
+      ?client_token: String,
+      ?legal_name: String,
+      ?primary_solution_type: String,
+      ?alliance_lead_contact: {
+        first_name: String,
+        last_name: untyped,
+        email: String,
+        business_title: untyped
+      },
+      ?email_verification_code: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePartnerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePartnerResponse
+
+    interface _DisassociateAwsTrainingCertificationEmailDomainResponse
+      include Smithy::Client::_Response[Types::DisassociateAwsTrainingCertificationEmailDomainResponse]
+    end
+    def disassociate_aws_training_certification_email_domain: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String,
+      ?domain_name: String
+    ) -> _DisassociateAwsTrainingCertificationEmailDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAwsTrainingCertificationEmailDomainResponse
+
+    interface _GetAllianceLeadContactResponse
+      include Smithy::Client::_Response[Types::GetAllianceLeadContactResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def alliance_lead_contact: () -> Types::AllianceLeadContact?
+    end
+    def get_alliance_lead_contact: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetAllianceLeadContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAllianceLeadContactResponse
+
+    interface _GetConnectionResponse
+      include Smithy::Client::_Response[Types::GetConnectionResponse]
+      def catalog: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def other_participant_account_id: () -> String?
+      def updated_at: () -> Time?
+      def connection_types: () -> Hash[String, Types::ConnectionTypeDetail]?
+    end
+    def get_connection: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionResponse
+
+    interface _GetConnectionInvitationResponse
+      include Smithy::Client::_Response[Types::GetConnectionInvitationResponse]
+      def catalog: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def connection_id: () -> String?
+      def connection_type: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def expires_at: () -> Time?
+      def other_participant_identifier: () -> String?
+      def participant_type: () -> String?
+      def status: () -> String?
+      def invitation_message: () -> String?
+      def inviter_email: () -> String?
+      def inviter_name: () -> String?
+    end
+    def get_connection_invitation: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetConnectionInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionInvitationResponse
+
+    interface _GetConnectionPreferencesResponse
+      include Smithy::Client::_Response[Types::GetConnectionPreferencesResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def access_type: () -> String?
+      def excluded_participant_ids: () -> Array[String]?
+      def updated_at: () -> Time?
+      def revision: () -> Integer?
+    end
+    def get_connection_preferences: (
+      ?catalog: String
+    ) -> _GetConnectionPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionPreferencesResponse
+
+    interface _GetPartnerResponse
+      include Smithy::Client::_Response[Types::GetPartnerResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def legal_name: () -> String?
+      def created_at: () -> Time?
+      def profile: () -> Types::PartnerProfile?
+      def aws_training_certification_email_domains: () -> Array[Types::PartnerDomain]?
+    end
+    def get_partner: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetPartnerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPartnerResponse
+
+    interface _GetProfileUpdateTaskResponse
+      include Smithy::Client::_Response[Types::GetProfileUpdateTaskResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def task_id: () -> String?
+      def task_details: () -> Types::TaskDetails?
+      def started_at: () -> Time?
+      def status: () -> String?
+      def ended_at: () -> Time?
+      def error_detail_list: () -> Array[Types::ErrorDetail]?
+    end
+    def get_profile_update_task: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetProfileUpdateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileUpdateTaskResponse
+
+    interface _GetProfileVisibilityResponse
+      include Smithy::Client::_Response[Types::GetProfileVisibilityResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def visibility: () -> String?
+      def profile_id: () -> String?
+    end
+    def get_profile_visibility: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetProfileVisibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileVisibilityResponse
+
+    interface _GetQualificationsAssociationDetailsResponse
+      include Smithy::Client::_Response[Types::GetQualificationsAssociationDetailsResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def status: () -> String?
+      def primary_partner: () -> Types::QualificationsAssociationPartner?
+      def associated_partners: () -> Array[Types::QualificationsAssociationPartner]?
+      def updated_at: () -> Time?
+    end
+    def get_qualifications_association_details: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetQualificationsAssociationDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQualificationsAssociationDetailsResponse
+
+    interface _GetQualificationsAssociationTaskResponse
+      include Smithy::Client::_Response[Types::GetQualificationsAssociationTaskResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def task_id: () -> String?
+      def status: () -> String?
+      def primary_partner: () -> Types::QualificationsAssociationPartner?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+    end
+    def get_qualifications_association_task: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetQualificationsAssociationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQualificationsAssociationTaskResponse
+
+    interface _GetQualificationsDisassociationTaskResponse
+      include Smithy::Client::_Response[Types::GetQualificationsDisassociationTaskResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def task_id: () -> String?
+      def status: () -> String?
+      def associated_partner: () -> Types::QualificationsAssociationPartner?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+    end
+    def get_qualifications_disassociation_task: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetQualificationsDisassociationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQualificationsDisassociationTaskResponse
+
+    interface _GetVerificationResponse
+      include Smithy::Client::_Response[Types::GetVerificationResponse]
+      def verification_type: () -> String?
+      def verification_status: () -> String?
+      def verification_status_reason: () -> String?
+      def verification_response_details: () -> Types::VerificationResponseDetails?
+      def started_at: () -> Time?
+      def completed_at: () -> Time?
+    end
+    def get_verification: (
+      ?verification_type: String
+    ) -> _GetVerificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVerificationResponse
+
+    interface _ListConnectionInvitationsResponse
+      include Smithy::Client::_Response[Types::ListConnectionInvitationsResponse]
+      def connection_invitation_summaries: () -> Array[Types::ConnectionInvitationSummary]?
+      def next_token: () -> String?
+    end
+    def list_connection_invitations: (
+      ?catalog: String,
+      ?next_token: String,
+      ?connection_type: String,
+      ?max_results: Integer,
+      ?other_participant_identifiers: Array[String],
+      ?participant_type: String,
+      ?status: String
+    ) -> _ListConnectionInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectionInvitationsResponse
+
+    interface _ListConnectionsResponse
+      include Smithy::Client::_Response[Types::ListConnectionsResponse]
+      def connection_summaries: () -> Array[Types::ConnectionSummary]?
+      def next_token: () -> String?
+    end
+    def list_connections: (
+      ?catalog: String,
+      ?next_token: String,
+      ?connection_type: String,
+      ?max_results: Integer,
+      ?other_participant_identifiers: Array[String]
+    ) -> _ListConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectionsResponse
+
+    interface _ListPartnersResponse
+      include Smithy::Client::_Response[Types::ListPartnersResponse]
+      def partner_summary_list: () -> Array[Types::PartnerSummary]?
+      def next_token: () -> String?
+    end
+    def list_partners: (
+      ?catalog: String,
+      ?next_token: String
+    ) -> _ListPartnersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPartnersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def resource_arn: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutAllianceLeadContactResponse
+      include Smithy::Client::_Response[Types::PutAllianceLeadContactResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def alliance_lead_contact: () -> Types::AllianceLeadContact?
+    end
+    def put_alliance_lead_contact: (
+      ?catalog: String,
+      ?identifier: String,
+      ?alliance_lead_contact: {
+        first_name: String,
+        last_name: untyped,
+        email: String,
+        business_title: untyped
+      },
+      ?email_verification_code: String
+    ) -> _PutAllianceLeadContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAllianceLeadContactResponse
+
+    interface _PutProfileVisibilityResponse
+      include Smithy::Client::_Response[Types::PutProfileVisibilityResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def visibility: () -> String?
+      def profile_id: () -> String?
+    end
+    def put_profile_visibility: (
+      ?catalog: String,
+      ?identifier: String,
+      ?visibility: String
+    ) -> _PutProfileVisibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProfileVisibilityResponse
+
+    interface _RejectConnectionInvitationResponse
+      include Smithy::Client::_Response[Types::RejectConnectionInvitationResponse]
+      def catalog: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def connection_id: () -> String?
+      def connection_type: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def expires_at: () -> Time?
+      def other_participant_identifier: () -> String?
+      def participant_type: () -> String?
+      def status: () -> String?
+      def invitation_message: () -> String?
+      def inviter_email: () -> String?
+      def inviter_name: () -> String?
+    end
+    def reject_connection_invitation: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String,
+      ?reason: String
+    ) -> _RejectConnectionInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectConnectionInvitationResponse
+
+    interface _SendEmailVerificationCodeResponse
+      include Smithy::Client::_Response[Types::SendEmailVerificationCodeResponse]
+    end
+    def send_email_verification_code: (
+      ?catalog: String,
+      ?email: String
+    ) -> _SendEmailVerificationCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendEmailVerificationCodeResponse
+
+    interface _StartProfileUpdateTaskResponse
+      include Smithy::Client::_Response[Types::StartProfileUpdateTaskResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def task_id: () -> String?
+      def task_details: () -> Types::TaskDetails?
+      def started_at: () -> Time?
+      def status: () -> String?
+      def ended_at: () -> Time?
+      def error_detail_list: () -> Array[Types::ErrorDetail]?
+    end
+    def start_profile_update_task: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String,
+      ?task_details: {
+        display_name: String,
+        description: untyped,
+        website_url: String,
+        logo_url: untyped,
+        primary_solution_type: String,
+        industry_segments: Array[String],
+        translation_source_locale: String,
+        localized_contents: Array[
+          {
+            display_name: untyped,
+            description: untyped,
+            website_url: untyped,
+            logo_url: untyped,
+            locale: untyped
+          }
+        ],
+        headquarters: {
+          country_code: String,
+          subdivision_code: String
+        }
+      }
+    ) -> _StartProfileUpdateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartProfileUpdateTaskResponse
+
+    interface _StartQualificationsAssociationTaskResponse
+      include Smithy::Client::_Response[Types::StartQualificationsAssociationTaskResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def task_id: () -> String?
+      def status: () -> String?
+      def primary_partner: () -> Types::QualificationsAssociationPartner?
+      def started_at: () -> Time?
+    end
+    def start_qualifications_association_task: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String,
+      ?primary_partner: {
+        profile_id: String,
+        account_id: String
+      }
+    ) -> _StartQualificationsAssociationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQualificationsAssociationTaskResponse
+
+    interface _StartQualificationsDisassociationTaskResponse
+      include Smithy::Client::_Response[Types::StartQualificationsDisassociationTaskResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+      def task_id: () -> String?
+      def status: () -> String?
+      def associated_partner: () -> Types::QualificationsAssociationPartner?
+      def started_at: () -> Time?
+    end
+    def start_qualifications_disassociation_task: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String,
+      ?associated_partner: {
+        profile_id: String,
+        account_id: String
+      }
+    ) -> _StartQualificationsDisassociationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQualificationsDisassociationTaskResponse
+
+    interface _StartVerificationResponse
+      include Smithy::Client::_Response[Types::StartVerificationResponse]
+      def verification_type: () -> String?
+      def verification_status: () -> String?
+      def verification_status_reason: () -> String?
+      def verification_response_details: () -> Types::VerificationResponseDetails?
+      def started_at: () -> Time?
+      def completed_at: () -> Time?
+    end
+    def start_verification: (
+      ?client_token: String,
+      ?verification_details: {
+        business_verification_details: {
+          legal_name: String,
+          registration_id: String,
+          country_code: String,
+          jurisdiction_of_incorporation: String
+        },
+        registrant_verification_details: {
+        }
+      }
+    ) -> _StartVerificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartVerificationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConnectionPreferencesResponse
+      include Smithy::Client::_Response[Types::UpdateConnectionPreferencesResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def access_type: () -> String?
+      def excluded_participant_ids: () -> Array[String]?
+      def updated_at: () -> Time?
+      def revision: () -> Integer?
+    end
+    def update_connection_preferences: (
+      ?catalog: String,
+      ?revision: Integer,
+      ?access_type: String,
+      ?excluded_participant_identifiers: Array[String]
+    ) -> _UpdateConnectionPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionPreferencesResponse
+  end
+end

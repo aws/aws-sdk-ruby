@@ -184,10 +184,10 @@ module Aws::GuardDuty
         ?network_connection_action: Types::NetworkConnectionAction,
         ?port_probe_action: Types::PortProbeAction,
         ?kubernetes_api_call_action: Types::KubernetesApiCallAction,
-        ?rds_login_attempt_action: Types::RdsLoginAttemptAction,
         ?kubernetes_permission_checked_details: Types::KubernetesPermissionCheckedDetails,
         ?kubernetes_role_binding_details: Types::KubernetesRoleBindingDetails,
         ?kubernetes_role_details: Types::KubernetesRoleDetails,
+        ?rds_login_attempt_action: Types::RdsLoginAttemptAction,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -197,10 +197,27 @@ module Aws::GuardDuty
       attr_accessor network_connection_action: Types::NetworkConnectionAction?
       attr_accessor port_probe_action: Types::PortProbeAction?
       attr_accessor kubernetes_api_call_action: Types::KubernetesApiCallAction?
-      attr_accessor rds_login_attempt_action: Types::RdsLoginAttemptAction?
       attr_accessor kubernetes_permission_checked_details: Types::KubernetesPermissionCheckedDetails?
       attr_accessor kubernetes_role_binding_details: Types::KubernetesRoleBindingDetails?
       attr_accessor kubernetes_role_details: Types::KubernetesRoleDetails?
+      attr_accessor rds_login_attempt_action: Types::RdsLoginAttemptAction?
+    end
+
+    class Activity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?api: Types::ApiCall,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor api: Types::ApiCall?
+    end
+
+    module ActivityType
+      API_CALL: String
     end
 
     class Actor
@@ -233,6 +250,19 @@ module Aws::GuardDuty
       attr_accessor name: String?
       attr_accessor path: String?
       attr_accessor sha256: String?
+    end
+
+    class AdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_id: String,
+        ?device_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_id: String?
+      attr_accessor device_name: String?
     end
 
     class AddonDetails
@@ -333,6 +363,23 @@ module Aws::GuardDuty
       attr_accessor behavior: Hash[String, Hash[String, Types::AnomalyObject]]?
     end
 
+    class ApiCall
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation: String,
+        ?service: String,
+        ?error: String,
+        ?user_agent: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation: String?
+      attr_accessor service: String?
+      attr_accessor error: String?
+      attr_accessor user_agent: String?
+    end
+
     class ArchiveFindingsRequest
       include Smithy::Schema::Structure
 
@@ -355,6 +402,59 @@ module Aws::GuardDuty
 
     end
 
+    class AssociationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?arn: String,
+        ?rule_id: String,
+        ?account_id: String,
+        ?mode: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor arn: String?
+      attr_accessor rule_id: String?
+      attr_accessor account_id: String?
+      attr_accessor mode: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    module AssociationMode
+      LIVE: String
+      DRY_RUN: String
+    end
+
+    class AssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_id: String,
+        ?arn: String,
+        ?rule_id: String,
+        ?mode: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_id: String?
+      attr_accessor arn: String?
+      attr_accessor rule_id: String?
+      attr_accessor mode: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
     module AutoEnableMembers
       NEW: String
       ALL: String
@@ -372,6 +472,17 @@ module Aws::GuardDuty
 
       attr_accessor name: String?
       attr_accessor number: Integer?
+    end
+
+    class AutoscalingAutoScalingGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_uids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_uids: Array[String]?
     end
 
     class AwsApiCallAction
@@ -412,6 +523,55 @@ module Aws::GuardDuty
 
       attr_accessor message: String?
       attr_accessor type: String?
+    end
+
+    class BedrockGuardrail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor version: String?
+    end
+
+    class BedrockGuardrailDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?guardrail_arn: String,
+        ?guardrail_version: String,
+        ?guardrails: Array[Types::BedrockGuardrail],
+        ?guardrail_action: String,
+        ?guardrail_source: String,
+        ?content_policy_filters: Array[Types::ContentPolicyFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor guardrail_arn: String?
+      attr_accessor guardrail_version: String?
+      attr_accessor guardrails: Array[Types::BedrockGuardrail]?
+      attr_accessor guardrail_action: String?
+      attr_accessor guardrail_source: String?
+      attr_accessor content_policy_filters: Array[Types::ContentPolicyFilter]?
+    end
+
+    class BedrockGuardrailResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?guardrail_action: String,
+        ?guardrail_source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor guardrail_action: String?
+      attr_accessor guardrail_source: String?
     end
 
     class BlockPublicAccess
@@ -470,6 +630,25 @@ module Aws::GuardDuty
       attr_accessor city_name: String?
     end
 
+    class CloudDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?region: String,
+        ?account: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor region: String?
+      attr_accessor account: String?
+    end
+
+    module CloudProvider
+      AWS: String
+    end
+
     class CloudTrailConfigurationResult
       include Smithy::Schema::Structure
 
@@ -479,6 +658,17 @@ module Aws::GuardDuty
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: String?
+    end
+
+    class CloudformationStack
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_uids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_uids: Array[String]?
     end
 
     module ClusterStatus
@@ -506,6 +696,8 @@ module Aws::GuardDuty
         ?greater_than_or_equal: Integer,
         ?less_than: Integer,
         ?less_than_or_equal: Integer,
+        ?matches: Array[String],
+        ?not_matches: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -521,6 +713,22 @@ module Aws::GuardDuty
       attr_accessor greater_than_or_equal: Integer?
       attr_accessor less_than: Integer?
       attr_accessor less_than_or_equal: Integer?
+      attr_accessor matches: Array[String]?
+      attr_accessor not_matches: Array[String]?
+    end
+
+    module Confidence
+      UNKNOWN: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    module ConfidenceLevel
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+      NONE: String
     end
 
     class ConflictException
@@ -583,6 +791,49 @@ module Aws::GuardDuty
 
       attr_accessor covered_container_instances: Integer?
       attr_accessor compatible_container_instances: Integer?
+    end
+
+    class ContentPolicyFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?confidence: String,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor confidence: String?
+      attr_accessor action: String?
+    end
+
+    module ContentPolicyFilterAction
+      BLOCKED: String
+      NONE: String
+    end
+
+    module ContentPolicyFilterType
+      PROMPT_ATTACK: String
+      JAILBREAK: String
+      HATE: String
+      INSULTS: String
+      SEXUAL: String
+      VIOLENCE: String
+      MISCONDUCT: String
+    end
+
+    class ContinuousScanDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
     end
 
     class Country
@@ -690,13 +941,13 @@ module Aws::GuardDuty
 
     module CoverageFilterCriterionKey
       ACCOUNT_ID: String
-      CLUSTER_NAME: String
       RESOURCE_TYPE: String
       COVERAGE_STATUS: String
       ADDON_VERSION: String
+      CLUSTER_NAME: String
+      ECS_CLUSTER_NAME: String
       MANAGEMENT_TYPE: String
       EKS_CLUSTER_NAME: String
-      ECS_CLUSTER_NAME: String
       AGENT_VERSION: String
       INSTANCE_ID: String
       CLUSTER_ARN: String
@@ -730,16 +981,16 @@ module Aws::GuardDuty
 
       def initialize: (
         ?eks_cluster_details: Types::CoverageEksClusterDetails,
-        ?resource_type: String,
         ?ecs_cluster_details: Types::CoverageEcsClusterDetails,
         ?ec2_instance_details: Types::CoverageEc2InstanceDetails,
+        ?resource_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor eks_cluster_details: Types::CoverageEksClusterDetails?
-      attr_accessor resource_type: String?
       attr_accessor ecs_cluster_details: Types::CoverageEcsClusterDetails?
       attr_accessor ec2_instance_details: Types::CoverageEc2InstanceDetails?
+      attr_accessor resource_type: String?
     end
 
     class CoverageSortCriteria
@@ -757,11 +1008,11 @@ module Aws::GuardDuty
 
     module CoverageSortKey
       ACCOUNT_ID: String
-      CLUSTER_NAME: String
       COVERAGE_STATUS: String
       ISSUE: String
       ADDON_VERSION: String
       UPDATED_AT: String
+      CLUSTER_NAME: String
       EKS_CLUSTER_NAME: String
       ECS_CLUSTER_NAME: String
       INSTANCE_ID: String
@@ -788,6 +1039,62 @@ module Aws::GuardDuty
     module CoverageStatus
       HEALTHY: String
       UNHEALTHY: String
+    end
+
+    class CreateCustomDetectionRuleAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?mode: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor mode: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateCustomDetectionRuleAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_association: Types::AssociationDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_association: Types::AssociationDetail?
+    end
+
+    class CreateCustomDetectionRuleOrgConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?mode: String,
+        ?include_account_ids: Array[String],
+        ?exclude_account_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor mode: String?
+      attr_accessor include_account_ids: Array[String]?
+      attr_accessor exclude_account_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateCustomDetectionRuleOrgConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class CreateDetectorRequest
@@ -896,6 +1203,32 @@ module Aws::GuardDuty
       attr_accessor ip_set_id: String?
     end
 
+    class CreateInvestigationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?trigger_prompt: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor trigger_prompt: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateInvestigationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?investigation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor investigation_id: String?
+    end
+
     class CreateMalwareProtectionPlanRequest
       include Smithy::Schema::Structure
 
@@ -969,6 +1302,7 @@ module Aws::GuardDuty
         ?destination_type: String,
         ?destination_properties: Types::DestinationProperties,
         ?client_token: String,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -976,6 +1310,7 @@ module Aws::GuardDuty
       attr_accessor destination_type: String?
       attr_accessor destination_properties: Types::DestinationProperties?
       attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreatePublishingDestinationResponse
@@ -1287,6 +1622,50 @@ module Aws::GuardDuty
       attr_accessor kms_master_key_arn: String?
     end
 
+    class DeleteCustomDetectionRuleAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor association_id: String?
+    end
+
+    class DeleteCustomDetectionRuleAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCustomDetectionRuleOrgConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor mode: String?
+    end
+
+    class DeleteCustomDetectionRuleOrgConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteDetectorRequest
       include Smithy::Schema::Structure
 
@@ -1586,6 +1965,7 @@ module Aws::GuardDuty
         ?status: String,
         ?publishing_failure_start_timestamp: Integer,
         ?destination_properties: Types::DestinationProperties,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1594,6 +1974,7 @@ module Aws::GuardDuty
       attr_accessor status: String?
       attr_accessor publishing_failure_start_timestamp: Integer?
       attr_accessor destination_properties: Types::DestinationProperties?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class Destination
@@ -1641,6 +2022,158 @@ module Aws::GuardDuty
       attr_accessor sequence: Types::Sequence?
     end
 
+    module DetectionRuleConfigurationStatus
+      ACTIVE: String
+      PROCESSING: String
+      FAILED: String
+    end
+
+    module DetectionRuleDataSource
+      CLOUDTRAIL_MANAGEMENT_EVENT: String
+      RUNTIME_MONITORING: String
+    end
+
+    class DetectionRuleEc2Requirements
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_agent_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_agent_version: String?
+    end
+
+    class DetectionRuleEcsFargateRequirements
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_agent_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_agent_version: String?
+    end
+
+    class DetectionRuleEksRequirements
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_agent_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_agent_version: String?
+    end
+
+    class DetectionRuleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor condition: String?
+    end
+
+    module DetectionRuleFilterCondition
+      EQUALS: String
+      CONTAINS: String
+    end
+
+    class DetectionRuleOrgConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?mode: String,
+        ?status: String,
+        ?status_reason: String,
+        ?include_account_ids: Array[String],
+        ?exclude_account_ids: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor mode: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor include_account_ids: Array[String]?
+      attr_accessor exclude_account_ids: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    class DetectionRuleOrgConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?mode: String,
+        ?status: String,
+        ?status_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor mode: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    class DetectionRuleRuntimeMonitoringDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platforms: Types::DetectionRuleRuntimePlatforms,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platforms: Types::DetectionRuleRuntimePlatforms?
+    end
+
+    class DetectionRuleRuntimePlatforms
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?eks: Types::DetectionRuleEksRequirements,
+        ?ec2: Types::DetectionRuleEc2Requirements,
+        ?ecs_fargate: Types::DetectionRuleEcsFargateRequirements,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eks: Types::DetectionRuleEksRequirements?
+      attr_accessor ec2: Types::DetectionRuleEc2Requirements?
+      attr_accessor ecs_fargate: Types::DetectionRuleEcsFargateRequirements?
+    end
+
+    module DetectionRuleSeverity
+      CRITICAL: String
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+    end
+
+    module DetectionSource
+      AMAZON: String
+      BITDEFENDER: String
+    end
+
     class DetectorAdditionalConfiguration
       include Smithy::Schema::Structure
 
@@ -1661,12 +2194,14 @@ module Aws::GuardDuty
         ?name: String,
         ?status: String,
         ?updated_at: Time,
+        ?managed_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor status: String?
       attr_accessor updated_at: Time?
+      attr_accessor managed_by: String?
     end
 
     module DetectorFeature
@@ -1674,9 +2209,11 @@ module Aws::GuardDuty
       EKS_AUDIT_LOGS: String
       EBS_MALWARE_PROTECTION: String
       RDS_LOGIN_EVENTS: String
-      EKS_RUNTIME_MONITORING: String
       LAMBDA_NETWORK_LOGS: String
+      EKS_RUNTIME_MONITORING: String
       RUNTIME_MONITORING: String
+      AI_PROTECTION: String
+      AI_ANALYST: String
     end
 
     class DetectorFeatureConfiguration
@@ -1702,6 +2239,7 @@ module Aws::GuardDuty
         ?status: String,
         ?updated_at: Time,
         ?additional_configuration: Array[Types::DetectorAdditionalConfigurationResult],
+        ?managed_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1709,6 +2247,7 @@ module Aws::GuardDuty
       attr_accessor status: String?
       attr_accessor updated_at: Time?
       attr_accessor additional_configuration: Array[Types::DetectorAdditionalConfigurationResult]?
+      attr_accessor managed_by: String?
     end
 
     module DetectorFeatureResult
@@ -1719,9 +2258,11 @@ module Aws::GuardDuty
       EKS_AUDIT_LOGS: String
       EBS_MALWARE_PROTECTION: String
       RDS_LOGIN_EVENTS: String
-      EKS_RUNTIME_MONITORING: String
       LAMBDA_NETWORK_LOGS: String
+      EKS_RUNTIME_MONITORING: String
       RUNTIME_MONITORING: String
+      AI_PROTECTION: String
+      AI_ANALYST: String
     end
 
     module DetectorStatus
@@ -1843,6 +2384,28 @@ module Aws::GuardDuty
       attr_accessor domain: String?
     end
 
+    class EbsSnapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+    end
+
+    class EbsSnapshotDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_arn: String?
+    end
+
     module EbsSnapshotPreservation
       NO_RETENTION: String
       RETENTION_WITH_FINDING: String
@@ -1897,6 +2460,28 @@ module Aws::GuardDuty
       attr_accessor reason: String?
     end
 
+    class Ec2Image
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_uids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_uids: Array[String]?
+    end
+
+    class Ec2ImageDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_arn: String?
+    end
+
     class Ec2Instance
       include Smithy::Schema::Structure
 
@@ -1924,6 +2509,19 @@ module Aws::GuardDuty
       attr_accessor ec2_network_interface_uids: Array[String]?
     end
 
+    class Ec2LaunchTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_uids: Array[String],
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_uids: Array[String]?
+      attr_accessor version: String?
+    end
+
     class Ec2NetworkInterface
       include Smithy::Schema::Structure
 
@@ -1943,6 +2541,30 @@ module Aws::GuardDuty
       attr_accessor security_groups: Array[Types::SecurityGroup]?
       attr_accessor sub_net_id: String?
       attr_accessor vpc_id: String?
+    end
+
+    class Ec2Vpc
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_uids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_uids: Array[String]?
+    end
+
+    class EcsCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?ec2_instance_uids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor ec2_instance_uids: Array[String]?
     end
 
     class EcsClusterDetails
@@ -1968,6 +2590,36 @@ module Aws::GuardDuty
       attr_accessor running_tasks_count: Integer?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor task_details: Types::EcsTaskDetails?
+    end
+
+    module EcsClusterStatus
+      ACTIVE: String
+      PROVISIONING: String
+      DEPROVISIONING: String
+      FAILED: String
+      INACTIVE: String
+    end
+
+    module EcsLaunchType
+      FARGATE: String
+      EC2: String
+    end
+
+    class EcsTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?task_definition_arn: String,
+        ?launch_type: String,
+        ?container_uids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor task_definition_arn: String?
+      attr_accessor launch_type: String?
+      attr_accessor container_uids: Array[String]?
     end
 
     class EcsTaskDetails
@@ -2089,6 +2741,7 @@ module Aws::GuardDuty
       EKS_ADDON_MANAGEMENT: String
       ECS_FARGATE_AGENT_MANAGEMENT: String
       EC2_AGENT_MANAGEMENT: String
+      RDS_DATA_RISK: String
     end
 
     module FeatureStatus
@@ -2145,6 +2798,16 @@ module Aws::GuardDuty
       attr_accessor filter_condition: Types::FilterCondition?
     end
 
+    module FilterFieldName
+      NAME: String
+      DESCRIPTION: String
+      DATA_SOURCE: String
+      SEVERITY: String
+      TACTIC: String
+      TECHNIQUE: String
+      SERVICE: String
+    end
+
     class Finding
       include Smithy::Schema::Structure
 
@@ -2165,6 +2828,7 @@ module Aws::GuardDuty
         ?type: String,
         ?updated_at: String,
         ?associated_attack_sequence_arn: String,
+        ?custom_detection_rule_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2184,6 +2848,7 @@ module Aws::GuardDuty
       attr_accessor type: String?
       attr_accessor updated_at: String?
       attr_accessor associated_attack_sequence_arn: String?
+      attr_accessor custom_detection_rule_name: String?
     end
 
     class FindingCriteria
@@ -2212,6 +2877,24 @@ module Aws::GuardDuty
       EKS_CLUSTER: String
       KUBERNETES_WORKLOAD: String
       CONTAINER: String
+      ECS_CLUSTER: String
+      ECS_TASK: String
+      AUTOSCALING_AUTO_SCALING_GROUP: String
+      IAM_INSTANCE_PROFILE: String
+      CLOUDFORMATION_STACK: String
+      EC2_LAUNCH_TEMPLATE: String
+      EC2_VPC: String
+      EC2_IMAGE: String
+      BEDROCK_CUSTOM_MODEL: String
+      BEDROCK_IMPORTED_MODEL: String
+      BEDROCK_PROVISIONED_MODEL: String
+      BEDROCK_CUSTOM_MODEL_DEPLOYMENT: String
+      BEDROCK_INFERENCE_PROFILE: String
+      BEDROCK_APPLICATION_INFERENCE_PROFILE: String
+      BEDROCK_PROMPT: String
+      BEDROCK_PROMPT_ROUTER: String
+      BEDROCK_GUARDRAIL: String
+      SAGEMAKER_ENDPOINT: String
     end
 
     module FindingStatisticType
@@ -2286,10 +2969,11 @@ module Aws::GuardDuty
       EKS_AUDIT_LOGS: String
       EBS_MALWARE_PROTECTION: String
       RDS_LOGIN_EVENTS: String
-      EKS_RUNTIME_MONITORING: String
       LAMBDA_NETWORK_LOGS: String
-      FARGATE_RUNTIME_MONITORING: String
+      EKS_RUNTIME_MONITORING: String
       EC2_RUNTIME_MONITORING: String
+      FARGATE_RUNTIME_MONITORING: String
+      AI_PROTECTION: String
     end
 
     class GeoLocation
@@ -2353,6 +3037,78 @@ module Aws::GuardDuty
       attr_accessor coverage_statistics: Types::CoverageStatistics?
     end
 
+    class GetCustomDetectionRuleAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor association_id: String?
+    end
+
+    class GetCustomDetectionRuleAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_association: Types::AssociationDetail,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_association: Types::AssociationDetail?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetCustomDetectionRuleOrgConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor mode: String?
+    end
+
+    class GetCustomDetectionRuleOrgConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::DetectionRuleOrgConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::DetectionRuleOrgConfiguration?
+    end
+
+    class GetCustomDetectionRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+    end
+
+    class GetCustomDetectionRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule: Types::RuleDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule: Types::RuleDetail?
+    end
+
     class GetDetectorRequest
       include Smithy::Schema::Structure
 
@@ -2412,6 +3168,9 @@ module Aws::GuardDuty
         ?rank: Integer,
         ?finding_criteria: Types::FindingCriteria,
         ?tags: Hash[String, String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?version: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2421,6 +3180,9 @@ module Aws::GuardDuty
       attr_accessor rank: Integer?
       attr_accessor finding_criteria: Types::FindingCriteria?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor version: Integer?
     end
 
     class GetFindingsRequest
@@ -2517,6 +3279,30 @@ module Aws::GuardDuty
       attr_accessor expected_bucket_owner: String?
     end
 
+    class GetInvestigationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?investigation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor investigation_id: String?
+    end
+
+    class GetInvestigationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?investigation: Types::Investigation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor investigation: Types::Investigation?
+    end
+
     class GetInvitationsCountRequest
       include Smithy::Schema::Structure
 
@@ -2571,6 +3357,85 @@ module Aws::GuardDuty
       attr_accessor status: String?
       attr_accessor status_reasons: Array[Types::MalwareProtectionPlanStatusReason]?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetMalwareScanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scan_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scan_id: String?
+    end
+
+    class GetMalwareScanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scan_id: String,
+        ?detector_id: String,
+        ?admin_detector_id: String,
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?scanned_resources_count: Integer,
+        ?skipped_resources_count: Integer,
+        ?failed_resources_count: Integer,
+        ?scanned_resources: Array[Types::ScannedResource],
+        ?scan_configuration: Types::ScanConfiguration,
+        ?scan_category: String,
+        ?scan_status: String,
+        ?scan_status_reason: String,
+        ?scan_type: String,
+        ?scan_started_at: Time,
+        ?scan_completed_at: Time,
+        ?scan_result_details: Types::GetMalwareScanResultDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scan_id: String?
+      attr_accessor detector_id: String?
+      attr_accessor admin_detector_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor scanned_resources_count: Integer?
+      attr_accessor skipped_resources_count: Integer?
+      attr_accessor failed_resources_count: Integer?
+      attr_accessor scanned_resources: Array[Types::ScannedResource]?
+      attr_accessor scan_configuration: Types::ScanConfiguration?
+      attr_accessor scan_category: String?
+      attr_accessor scan_status: String?
+      attr_accessor scan_status_reason: String?
+      attr_accessor scan_type: String?
+      attr_accessor scan_started_at: Time?
+      attr_accessor scan_completed_at: Time?
+      attr_accessor scan_result_details: Types::GetMalwareScanResultDetails?
+    end
+
+    class GetMalwareScanResultDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scan_result_status: String,
+        ?skipped_file_count: Integer,
+        ?failed_file_count: Integer,
+        ?threat_found_file_count: Integer,
+        ?total_file_count: Integer,
+        ?total_bytes: Integer,
+        ?unique_threat_count: Integer,
+        ?threats: Array[Types::ScanResultThreat],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scan_result_status: String?
+      attr_accessor skipped_file_count: Integer?
+      attr_accessor failed_file_count: Integer?
+      attr_accessor threat_found_file_count: Integer?
+      attr_accessor total_file_count: Integer?
+      attr_accessor total_bytes: Integer?
+      attr_accessor unique_threat_count: Integer?
+      attr_accessor threats: Array[Types::ScanResultThreat]?
     end
 
     class GetMalwareScanSettingsRequest
@@ -2864,6 +3729,16 @@ module Aws::GuardDuty
       SEVERITY: String
     end
 
+    module GuardrailAction
+      GUARDRAIL_INTERVENED: String
+      NONE: String
+    end
+
+    module GuardrailSource
+      INPUT: String
+      OUTPUT: String
+    end
+
     class HighestSeverityThreatDetails
       include Smithy::Schema::Structure
 
@@ -2903,6 +3778,17 @@ module Aws::GuardDuty
       attr_accessor id: String?
     end
 
+    class IamInstanceProfileV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_uids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_uids: Array[String]?
+    end
+
     class ImpersonatedUser
       include Smithy::Schema::Structure
 
@@ -2914,6 +3800,17 @@ module Aws::GuardDuty
 
       attr_accessor username: String?
       attr_accessor groups: Array[String]?
+    end
+
+    class IncrementalScanDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baseline_resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baseline_resource_arn: String?
     end
 
     class Indicator
@@ -2948,6 +3845,12 @@ module Aws::GuardDuty
       CRYPTOMINING_IP: String
       CRYPTOMINING_DOMAIN: String
       CRYPTOMINING_PROCESS: String
+      MALICIOUS_FILE: String
+      VULNERABILITY: String
+      MALICIOUS_PACKAGE: String
+      MISCONFIGURATION: String
+      REACHABILITY: String
+      SENSITIVE_DATA: String
     end
 
     class InstanceDetails
@@ -2996,6 +3899,108 @@ module Aws::GuardDuty
 
       attr_accessor message: String?
       attr_accessor type: String?
+    end
+
+    class Investigation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?investigation_id: String,
+        ?status: String,
+        ?trigger_prompt: String,
+        ?triggered_by: String,
+        ?metadata: Types::InvestigationMetadata,
+        ?cloud: Types::CloudDetails,
+        ?risk_level: String,
+        ?risk: String,
+        ?confidence: String,
+        ?summary: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor investigation_id: String?
+      attr_accessor status: String?
+      attr_accessor trigger_prompt: String?
+      attr_accessor triggered_by: String?
+      attr_accessor metadata: Types::InvestigationMetadata?
+      attr_accessor cloud: Types::CloudDetails?
+      attr_accessor risk_level: String?
+      attr_accessor risk: String?
+      attr_accessor confidence: String?
+      attr_accessor summary: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor error: String?
+    end
+
+    class InvestigationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?product: Types::Product,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor product: Types::Product?
+    end
+
+    class InvestigationSortCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?order_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor order_by: String?
+    end
+
+    module InvestigationSortField
+      START_TIME: String
+      END_TIME: String
+      STATUS: String
+      RISK_LEVEL: String
+      CONFIDENCE: String
+    end
+
+    module InvestigationStatus
+      RUNNING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class InvestigationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?investigation_id: String,
+        ?status: String,
+        ?trigger_prompt: String,
+        ?risk_level: String,
+        ?confidence: String,
+        ?title: String,
+        ?account_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor investigation_id: String?
+      attr_accessor status: String?
+      attr_accessor trigger_prompt: String?
+      attr_accessor risk_level: String?
+      attr_accessor confidence: String?
+      attr_accessor title: String?
+      attr_accessor account_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
     end
 
     class Invitation
@@ -3062,6 +4067,23 @@ module Aws::GuardDuty
       DELETED: String
     end
 
+    class ItemDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?item_path: String,
+        ?hash: String,
+        ?additional_info: Types::AdditionalInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor item_path: String?
+      attr_accessor hash: String?
+      attr_accessor additional_info: Types::AdditionalInfo?
+    end
+
     class ItemPath
       include Smithy::Schema::Structure
 
@@ -3081,29 +4103,29 @@ module Aws::GuardDuty
       def initialize: (
         ?request_uri: String,
         ?verb: String,
+        ?resource: String,
+        ?subresource: String,
+        ?namespace: String,
+        ?resource_name: String,
         ?source_ips: Array[String],
         ?user_agent: String,
         ?remote_ip_details: Types::RemoteIpDetails,
         ?status_code: Integer,
         ?parameters: String,
-        ?resource: String,
-        ?subresource: String,
-        ?namespace: String,
-        ?resource_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor request_uri: String?
       attr_accessor verb: String?
+      attr_accessor resource: String?
+      attr_accessor subresource: String?
+      attr_accessor namespace: String?
+      attr_accessor resource_name: String?
       attr_accessor source_ips: Array[String]?
       attr_accessor user_agent: String?
       attr_accessor remote_ip_details: Types::RemoteIpDetails?
       attr_accessor status_code: Integer?
       attr_accessor parameters: String?
-      attr_accessor resource: String?
-      attr_accessor subresource: String?
-      attr_accessor namespace: String?
-      attr_accessor resource_name: String?
     end
 
     class KubernetesAuditLogsConfiguration
@@ -3279,9 +4301,9 @@ module Aws::GuardDuty
         ?uid: String,
         ?namespace: String,
         ?host_network: bool,
+        ?service_account_name: String,
         ?containers: Array[Types::Container],
         ?volumes: Array[Types::Volume],
-        ?service_account_name: String,
         ?host_ipc: bool,
         ?host_pid: bool,
       ) -> void
@@ -3292,9 +4314,9 @@ module Aws::GuardDuty
       attr_accessor uid: String?
       attr_accessor namespace: String?
       attr_accessor host_network: bool?
+      attr_accessor service_account_name: String?
       attr_accessor containers: Array[Types::Container]?
       attr_accessor volumes: Array[Types::Volume]?
-      attr_accessor service_account_name: String?
       attr_accessor host_ipc: bool?
       attr_accessor host_pid: bool?
     end
@@ -3382,6 +4404,92 @@ module Aws::GuardDuty
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resources: Array[Types::CoverageResource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomDetectionRuleAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?rule_id: String,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor rule_id: String?
+      attr_accessor mode: String?
+    end
+
+    class ListCustomDetectionRuleAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_associations: Array[Types::AssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_associations: Array[Types::AssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomDetectionRuleOrgConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
+    end
+
+    class ListCustomDetectionRuleOrgConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configurations: Array[Types::DetectionRuleOrgConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configurations: Array[Types::DetectionRuleOrgConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomDetectionRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::DetectionRuleFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::DetectionRuleFilter]?
+    end
+
+    class ListCustomDetectionRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::RuleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::RuleSummary]?
       attr_accessor next_token: String?
     end
 
@@ -3499,6 +4607,36 @@ module Aws::GuardDuty
       attr_accessor next_token: String?
     end
 
+    class ListInvestigationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_id: String,
+        ?sort_criteria: Types::InvestigationSortCriteria,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_id: String?
+      attr_accessor sort_criteria: Types::InvestigationSortCriteria?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListInvestigationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?investigations: Array[Types::InvestigationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor investigations: Array[Types::InvestigationSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListInvitationsRequest
       include Smithy::Schema::Structure
 
@@ -3546,6 +4684,71 @@ module Aws::GuardDuty
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor malware_protection_plans: Array[Types::MalwareProtectionPlanSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module ListMalwareScansCriterionKey
+      RESOURCE_ARN: String
+      SCAN_ID: String
+      ACCOUNT_ID: String
+      GUARDDUTY_FINDING_ID: String
+      RESOURCE_TYPE: String
+      SCAN_START_TIME: String
+      SCAN_STATUS: String
+      SCAN_TYPE: String
+    end
+
+    class ListMalwareScansFilterCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?list_malware_scans_filter_criterion: Array[Types::ListMalwareScansFilterCriterion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list_malware_scans_filter_criterion: Array[Types::ListMalwareScansFilterCriterion]?
+    end
+
+    class ListMalwareScansFilterCriterion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?list_malware_scans_criterion_key: String,
+        ?filter_condition: Types::FilterCondition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list_malware_scans_criterion_key: String?
+      attr_accessor filter_condition: Types::FilterCondition?
+    end
+
+    class ListMalwareScansRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter_criteria: Types::ListMalwareScansFilterCriteria,
+        ?sort_criteria: Types::SortCriteria,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter_criteria: Types::ListMalwareScansFilterCriteria?
+      attr_accessor sort_criteria: Types::SortCriteria?
+    end
+
+    class ListMalwareScansResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scans: Array[Types::MalwareScan],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scans: Array[Types::MalwareScan]?
       attr_accessor next_token: String?
     end
 
@@ -3817,6 +5020,19 @@ module Aws::GuardDuty
       attr_accessor scan_ec2_instance_with_findings: Types::DataSourceFreeTrial?
     end
 
+    class MalwareProtectionFindingsScanConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trigger_type: String,
+        ?incremental_scan_details: Types::IncrementalScanDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trigger_type: String?
+      attr_accessor incremental_scan_details: Types::IncrementalScanDetails?
+    end
+
     class MalwareProtectionPlanActions
       include Smithy::Schema::Structure
 
@@ -3874,15 +5090,80 @@ module Aws::GuardDuty
       DISABLED: String
     end
 
+    module MalwareProtectionResourceType
+      EBS_RECOVERY_POINT: String
+      EBS_SNAPSHOT: String
+      EBS_VOLUME: String
+      EC2_AMI: String
+      EC2_INSTANCE: String
+      EC2_RECOVERY_POINT: String
+      S3_RECOVERY_POINT: String
+      S3_BUCKET: String
+      S3_POINT_IN_TIME_RECOVERY: String
+    end
+
+    module MalwareProtectionScanStatus
+      RUNNING: String
+      COMPLETED: String
+      COMPLETED_WITH_ISSUES: String
+      FAILED: String
+      SKIPPED: String
+    end
+
+    module MalwareProtectionScanType
+      BACKUP_INITIATED: String
+      ON_DEMAND: String
+      GUARDDUTY_INITIATED: String
+    end
+
+    class MalwareScan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?scan_id: String,
+        ?scan_status: String,
+        ?scan_result_status: String,
+        ?scan_type: String,
+        ?scan_started_at: Time,
+        ?scan_completed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor scan_id: String?
+      attr_accessor scan_status: String?
+      attr_accessor scan_result_status: String?
+      attr_accessor scan_type: String?
+      attr_accessor scan_started_at: Time?
+      attr_accessor scan_completed_at: Time?
+    end
+
     class MalwareScanDetails
       include Smithy::Schema::Structure
 
       def initialize: (
         ?threats: Array[Types::Threat],
+        ?scan_id: String,
+        ?scan_type: String,
+        ?scan_category: String,
+        ?scan_configuration: Types::MalwareProtectionFindingsScanConfiguration,
+        ?unique_threat_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor threats: Array[Types::Threat]?
+      attr_accessor scan_id: String?
+      attr_accessor scan_type: String?
+      attr_accessor scan_category: String?
+      attr_accessor scan_configuration: Types::MalwareProtectionFindingsScanConfiguration?
+      attr_accessor unique_threat_count: Integer?
+    end
+
+    module ManagedBy
+      GUARDDUTY_POLICY: String
     end
 
     module ManagementType
@@ -3953,12 +5234,14 @@ module Aws::GuardDuty
         ?name: String,
         ?status: String,
         ?updated_at: Time,
+        ?managed_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor status: String?
       attr_accessor updated_at: Time?
+      attr_accessor managed_by: String?
     end
 
     class MemberDataSourceConfiguration
@@ -3999,6 +5282,7 @@ module Aws::GuardDuty
         ?status: String,
         ?updated_at: Time,
         ?additional_configuration: Array[Types::MemberAdditionalConfigurationResult],
+        ?managed_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4006,11 +5290,23 @@ module Aws::GuardDuty
       attr_accessor status: String?
       attr_accessor updated_at: Time?
       attr_accessor additional_configuration: Array[Types::MemberAdditionalConfigurationResult]?
+      attr_accessor managed_by: String?
     end
 
     module MfaStatus
       ENABLED: String
       DISABLED: String
+    end
+
+    class ModelDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
     end
 
     class NetworkConnection
@@ -4128,10 +5424,12 @@ module Aws::GuardDuty
 
       def initialize: (
         ?text: Array[String],
+        ?number: Array[Integer],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor text: Array[String]?
+      attr_accessor number: Array[Integer]?
     end
 
     module OrderBy
@@ -4144,15 +5442,17 @@ module Aws::GuardDuty
       EKS_AUDIT_LOGS: String
       EBS_MALWARE_PROTECTION: String
       RDS_LOGIN_EVENTS: String
-      EKS_RUNTIME_MONITORING: String
       LAMBDA_NETWORK_LOGS: String
+      EKS_RUNTIME_MONITORING: String
       RUNTIME_MONITORING: String
+      AI_PROTECTION: String
     end
 
     module OrgFeatureAdditionalConfiguration
       EKS_ADDON_MANAGEMENT: String
       ECS_FARGATE_AGENT_MANAGEMENT: String
       EC2_AGENT_MANAGEMENT: String
+      RDS_DATA_RISK: String
     end
 
     module OrgFeatureStatus
@@ -4556,6 +5856,19 @@ module Aws::GuardDuty
       attr_accessor lineage: Array[Types::LineageObject]?
     end
 
+    class Product
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?feature: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor feature: String?
+    end
+
     class ProductCode
       include Smithy::Schema::Structure
 
@@ -4574,10 +5887,13 @@ module Aws::GuardDuty
       INFREQUENT: String
       UNSEEN: String
       RARE: String
+      COUNT: String
+      AVERAGE: String
     end
 
     module ProfileType
       FREQUENCY: String
+      VOLUME: String
     end
 
     class PublicAccess
@@ -4641,6 +5957,7 @@ module Aws::GuardDuty
         ?engine_version: String,
         ?db_cluster_identifier: String,
         ?db_instance_arn: String,
+        ?dbi_resource_id: String,
         ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4650,6 +5967,7 @@ module Aws::GuardDuty
       attr_accessor engine_version: String?
       attr_accessor db_cluster_identifier: String?
       attr_accessor db_instance_arn: String?
+      attr_accessor dbi_resource_id: String?
       attr_accessor tags: Array[Types::Tag]?
     end
 
@@ -4708,17 +6026,47 @@ module Aws::GuardDuty
       attr_accessor login_attributes: Array[Types::LoginAttribute]?
     end
 
+    class RecoveryPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?continuous_scan_details: Types::ContinuousScanDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor continuous_scan_details: Types::ContinuousScanDetails?
+    end
+
+    class RecoveryPointDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?backup_vault_name: String,
+        ?continuous_scan_details: Types::ScanConfigurationContinuousScanDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor continuous_scan_details: Types::ScanConfigurationContinuousScanDetails?
+    end
+
     class RemoteAccountDetails
       include Smithy::Schema::Structure
 
       def initialize: (
         ?account_id: String,
         ?affiliated: bool,
+        ?aws_service_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor account_id: String?
       attr_accessor affiliated: bool?
+      attr_accessor aws_service_name: String?
     end
 
     class RemoteIpDetails
@@ -4768,10 +6116,15 @@ module Aws::GuardDuty
         ?ebs_volume_details: Types::EbsVolumeDetails,
         ?ecs_cluster_details: Types::EcsClusterDetails,
         ?container_details: Types::Container,
+        ?lambda_details: Types::LambdaDetails,
         ?rds_db_instance_details: Types::RdsDbInstanceDetails,
         ?rds_limitless_db_details: Types::RdsLimitlessDbDetails,
         ?rds_db_user_details: Types::RdsDbUserDetails,
-        ?lambda_details: Types::LambdaDetails,
+        ?ebs_snapshot_details: Types::EbsSnapshotDetails,
+        ?ec2_image_details: Types::Ec2ImageDetails,
+        ?recovery_point_details: Types::RecoveryPointDetails,
+        ?bedrock_guardrail_details: Types::BedrockGuardrailDetails,
+        ?model_details: Array[Types::ModelDetail],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4784,10 +6137,15 @@ module Aws::GuardDuty
       attr_accessor ebs_volume_details: Types::EbsVolumeDetails?
       attr_accessor ecs_cluster_details: Types::EcsClusterDetails?
       attr_accessor container_details: Types::Container?
+      attr_accessor lambda_details: Types::LambdaDetails?
       attr_accessor rds_db_instance_details: Types::RdsDbInstanceDetails?
       attr_accessor rds_limitless_db_details: Types::RdsLimitlessDbDetails?
       attr_accessor rds_db_user_details: Types::RdsDbUserDetails?
-      attr_accessor lambda_details: Types::LambdaDetails?
+      attr_accessor ebs_snapshot_details: Types::EbsSnapshotDetails?
+      attr_accessor ec2_image_details: Types::Ec2ImageDetails?
+      attr_accessor recovery_point_details: Types::RecoveryPointDetails?
+      attr_accessor bedrock_guardrail_details: Types::BedrockGuardrailDetails?
+      attr_accessor model_details: Array[Types::ModelDetail]?
     end
 
     class ResourceData
@@ -4802,6 +6160,15 @@ module Aws::GuardDuty
         ?eks_cluster: Types::EksCluster,
         ?kubernetes_workload: Types::KubernetesWorkload,
         ?container: Types::ContainerFindingResource,
+        ?ecs_cluster: Types::EcsCluster,
+        ?ecs_task: Types::EcsTask,
+        ?iam_instance_profile: Types::IamInstanceProfileV2,
+        ?autoscaling_auto_scaling_group: Types::AutoscalingAutoScalingGroup,
+        ?ec2_launch_template: Types::Ec2LaunchTemplate,
+        ?ec2_vpc: Types::Ec2Vpc,
+        ?ec2_image: Types::Ec2Image,
+        ?cloudformation_stack: Types::CloudformationStack,
+        ?bedrock_guardrail: Types::BedrockGuardrailResource,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4813,6 +6180,15 @@ module Aws::GuardDuty
       attr_accessor eks_cluster: Types::EksCluster?
       attr_accessor kubernetes_workload: Types::KubernetesWorkload?
       attr_accessor container: Types::ContainerFindingResource?
+      attr_accessor ecs_cluster: Types::EcsCluster?
+      attr_accessor ecs_task: Types::EcsTask?
+      attr_accessor iam_instance_profile: Types::IamInstanceProfileV2?
+      attr_accessor autoscaling_auto_scaling_group: Types::AutoscalingAutoScalingGroup?
+      attr_accessor ec2_launch_template: Types::Ec2LaunchTemplate?
+      attr_accessor ec2_vpc: Types::Ec2Vpc?
+      attr_accessor ec2_image: Types::Ec2Image?
+      attr_accessor cloudformation_stack: Types::CloudformationStack?
+      attr_accessor bedrock_guardrail: Types::BedrockGuardrailResource?
     end
 
     class ResourceDetails
@@ -4891,6 +6267,107 @@ module Aws::GuardDuty
       attr_accessor data: Types::ResourceData?
     end
 
+    module RiskLevel
+      INFO: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+      CRITICAL: String
+    end
+
+    class RuleDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+    end
+
+    class RuleDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?severity: String,
+        ?data_source: String,
+        ?tactic: String,
+        ?technique: String,
+        ?service: String,
+        ?definition: Types::RuleDefinition,
+        ?language: String,
+        ?schema: String,
+        ?runtime_monitoring_details: Types::DetectionRuleRuntimeMonitoringDetails,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor severity: String?
+      attr_accessor data_source: String?
+      attr_accessor tactic: String?
+      attr_accessor technique: String?
+      attr_accessor service: String?
+      attr_accessor definition: Types::RuleDefinition?
+      attr_accessor language: String?
+      attr_accessor schema: String?
+      attr_accessor runtime_monitoring_details: Types::DetectionRuleRuntimeMonitoringDetails?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module RuleLanguage
+      SQL: String
+    end
+
+    module RuleSchema
+      CLOUD_TRAIL: String
+    end
+
+    class RuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?severity: String,
+        ?data_source: String,
+        ?tactic: String,
+        ?technique: String,
+        ?service: String,
+        ?language: String,
+        ?schema: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor severity: String?
+      attr_accessor data_source: String?
+      attr_accessor tactic: String?
+      attr_accessor technique: String?
+      attr_accessor service: String?
+      attr_accessor language: String?
+      attr_accessor schema: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     class RuntimeContext
       include Smithy::Schema::Structure
 
@@ -4920,6 +6397,9 @@ module Aws::GuardDuty
         ?service_name: String,
         ?command_line_example: String,
         ?threat_file_path: String,
+        ?file_operation: String,
+        ?file_path: String,
+        ?related_file_paths: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4948,6 +6428,9 @@ module Aws::GuardDuty
       attr_accessor service_name: String?
       attr_accessor command_line_example: String?
       attr_accessor threat_file_path: String?
+      attr_accessor file_operation: String?
+      attr_accessor file_path: String?
+      attr_accessor related_file_paths: Array[String]?
     end
 
     class RuntimeDetails
@@ -5075,6 +6558,21 @@ module Aws::GuardDuty
       attr_accessor version_id: String?
     end
 
+    class S3ObjectForSendObjectMalwareScan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+    end
+
     class Scan
       include Smithy::Schema::Structure
 
@@ -5114,6 +6612,11 @@ module Aws::GuardDuty
       attr_accessor scan_type: String?
     end
 
+    module ScanCategory
+      FULL_SCAN: String
+      INCREMENTAL_SCAN: String
+    end
+
     class ScanCondition
       include Smithy::Schema::Structure
 
@@ -5136,6 +6639,49 @@ module Aws::GuardDuty
 
       attr_accessor key: String?
       attr_accessor value: String?
+    end
+
+    class ScanConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?trigger_details: Types::TriggerDetails,
+        ?incremental_scan_details: Types::IncrementalScanDetails,
+        ?recovery_point: Types::ScanConfigurationRecoveryPoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor trigger_details: Types::TriggerDetails?
+      attr_accessor incremental_scan_details: Types::IncrementalScanDetails?
+      attr_accessor recovery_point: Types::ScanConfigurationRecoveryPoint?
+    end
+
+    class ScanConfigurationContinuousScanDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class ScanConfigurationRecoveryPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?continuous_scan_details: Types::ScanConfigurationContinuousScanDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor continuous_scan_details: Types::ScanConfigurationContinuousScanDetails?
     end
 
     module ScanCriterionKey
@@ -5227,11 +6773,55 @@ module Aws::GuardDuty
       attr_accessor scan_result: String?
     end
 
+    module ScanResultStatus
+      NO_THREATS_FOUND: String
+      THREATS_FOUND: String
+    end
+
+    class ScanResultThreat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?source: String,
+        ?count: Integer,
+        ?hash: String,
+        ?item_details: Array[Types::ItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor source: String?
+      attr_accessor count: Integer?
+      attr_accessor hash: String?
+      attr_accessor item_details: Array[Types::ItemDetails]?
+    end
+
     module ScanStatus
       RUNNING: String
       COMPLETED: String
       FAILED: String
       SKIPPED: String
+    end
+
+    module ScanStatusReason
+      ACCESS_DENIED: String
+      RESOURCE_NOT_FOUND: String
+      SNAPSHOT_SIZE_LIMIT_EXCEEDED: String
+      RESOURCE_UNAVAILABLE: String
+      INCONSISTENT_SOURCE: String
+      INCREMENTAL_NO_DIFFERENCE: String
+      NO_EBS_VOLUMES_FOUND: String
+      UNSUPPORTED_PRODUCT_CODE_TYPE: String
+      AMI_SNAPSHOT_LIMIT_EXCEEDED: String
+      UNRELATED_RESOURCES: String
+      BASE_RESOURCE_NOT_SCANNED: String
+      BASE_CREATED_AFTER_TARGET: String
+      UNSUPPORTED_FOR_INCREMENTAL: String
+      UNSUPPORTED_AMI: String
+      UNSUPPORTED_SNAPSHOT: String
+      UNSUPPORTED_COMPOSITE_RECOVERY_POINT: String
+      ALL_FILES_SKIPPED_OR_FAILED: String
     end
 
     class ScanThreatName
@@ -5271,6 +6861,38 @@ module Aws::GuardDuty
       attr_accessor volumes: Integer?
     end
 
+    class ScannedResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scanned_resource_arn: String,
+        ?scanned_resource_type: String,
+        ?scanned_resource_status: String,
+        ?scan_status_reason: String,
+        ?resource_details: Types::ScannedResourceDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scanned_resource_arn: String?
+      attr_accessor scanned_resource_type: String?
+      attr_accessor scanned_resource_status: String?
+      attr_accessor scan_status_reason: String?
+      attr_accessor resource_details: Types::ScannedResourceDetails?
+    end
+
+    class ScannedResourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ebs_volume: Types::VolumeDetail,
+        ?ebs_snapshot: Types::EbsSnapshot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ebs_volume: Types::VolumeDetail?
+      attr_accessor ebs_snapshot: Types::EbsSnapshot?
+    end
+
     class SecurityContext
       include Smithy::Schema::Structure
 
@@ -5295,6 +6917,26 @@ module Aws::GuardDuty
 
       attr_accessor group_id: String?
       attr_accessor group_name: String?
+    end
+
+    class SendObjectMalwareScanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_object: Types::S3ObjectForSendObjectMalwareScan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_object: Types::S3ObjectForSendObjectMalwareScan?
+    end
+
+    class SendObjectMalwareScanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class Sequence
@@ -5426,6 +7068,7 @@ module Aws::GuardDuty
         ?actor_ids: Array[String],
         ?endpoint_ids: Array[String],
         ?signal_indicators: Array[Types::Indicator],
+        ?activities: Array[Types::Activity],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5443,6 +7086,7 @@ module Aws::GuardDuty
       attr_accessor actor_ids: Array[String]?
       attr_accessor endpoint_ids: Array[String]?
       attr_accessor signal_indicators: Array[Types::Indicator]?
+      attr_accessor activities: Array[Types::Activity]?
     end
 
     module SignalType
@@ -5468,15 +7112,34 @@ module Aws::GuardDuty
       attr_accessor order_by: String?
     end
 
+    class StartMalwareScanConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?incremental_scan_details: Types::IncrementalScanDetails,
+        ?recovery_point: Types::RecoveryPoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor incremental_scan_details: Types::IncrementalScanDetails?
+      attr_accessor recovery_point: Types::RecoveryPoint?
+    end
+
     class StartMalwareScanRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?resource_arn: String,
+        ?client_token: String,
+        ?scan_configuration: Types::StartMalwareScanConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor scan_configuration: Types::StartMalwareScanConfiguration?
     end
 
     class StartMalwareScanResponse
@@ -5580,12 +7243,18 @@ module Aws::GuardDuty
         ?name: String,
         ?source: String,
         ?item_paths: Array[Types::ItemPath],
+        ?count: Integer,
+        ?hash: String,
+        ?item_details: Array[Types::ItemDetails],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor source: String?
       attr_accessor item_paths: Array[Types::ItemPath]?
+      attr_accessor count: Integer?
+      attr_accessor hash: String?
+      attr_accessor item_details: Array[Types::ItemDetails]?
     end
 
     class ThreatDetectedByName
@@ -5688,11 +7357,18 @@ module Aws::GuardDuty
       def initialize: (
         ?guard_duty_finding_id: String,
         ?description: String,
+        ?trigger_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor guard_duty_finding_id: String?
       attr_accessor description: String?
+      attr_accessor trigger_type: String?
+    end
+
+    module TriggerType
+      BACKUP: String
+      GUARDDUTY: String
     end
 
     module TrustedEntitySetFormat
@@ -5774,6 +7450,56 @@ module Aws::GuardDuty
     end
 
     class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCustomDetectionRuleAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?association_id: String,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor association_id: String?
+      attr_accessor mode: String?
+    end
+
+    class UpdateCustomDetectionRuleAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCustomDetectionRuleOrgConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?mode: String,
+        ?include_account_ids: Array[String],
+        ?exclude_account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor mode: String?
+      attr_accessor include_account_ids: Array[String]?
+      attr_accessor exclude_account_ids: Array[String]?
+    end
+
+    class UpdateCustomDetectionRuleOrgConfigurationResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -6184,10 +7910,15 @@ module Aws::GuardDuty
       RDS_LOGIN_EVENTS: String
       LAMBDA_NETWORK_LOGS: String
       EKS_RUNTIME_MONITORING: String
-      FARGATE_RUNTIME_MONITORING: String
       EC2_RUNTIME_MONITORING: String
+      FARGATE_RUNTIME_MONITORING: String
       RDS_DBI_PROTECTION_PROVISIONED: String
       RDS_DBI_PROTECTION_SERVERLESS: String
+      RDS_DBI_PROTECTION_LIMITLESS: String
+      RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED: String
+      RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS: String
+      RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS: String
+      AI_PROTECTION: String
     end
 
     class UsageFeatureResult

@@ -144,18 +144,18 @@ module Aws::BCMRecommendedActions
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -239,7 +239,7 @@ module Aws::BCMRecommendedActions
     #     recommended_actions: [ # required
     #       {
     #         id: "String",
-    #         type: "ADD_ALTERNATE_BILLING_CONTACT" # One of: ["ADD_ALTERNATE_BILLING_CONTACT", "CREATE_ANOMALY_MONITOR", "CREATE_BUDGET", "ENABLE_COST_OPTIMIZATION_HUB", "MIGRATE_TO_GRANULAR_PERMISSIONS", "PAYMENTS_DUE", "PAYMENTS_PAST_DUE", "REVIEW_ANOMALIES", "REVIEW_BUDGET_ALERTS", "REVIEW_BUDGETS_EXCEEDED", "REVIEW_EXPIRING_RI", "REVIEW_EXPIRING_SP", "REVIEW_FREETIER_USAGE_ALERTS", "REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS", "UPDATE_EXPIRED_PAYMENT_METHOD", "UPDATE_INVALID_PAYMENT_METHOD", "UPDATE_TAX_EXEMPTION_CERTIFICATE", "UPDATE_TAX_REGISTRATION_NUMBER"],
+    #         type: "ADD_ALTERNATE_BILLING_CONTACT" # One of: ["ADD_ALTERNATE_BILLING_CONTACT", "CREATE_ANOMALY_MONITOR", "CREATE_BUDGET", "ENABLE_COST_OPTIMIZATION_HUB", "MIGRATE_TO_GRANULAR_PERMISSIONS", "PAYMENTS_DUE", "PAYMENTS_PAST_DUE", "REVIEW_ANOMALIES", "REVIEW_BUDGET_ALERTS", "REVIEW_BUDGETS_EXCEEDED", "REVIEW_EXPIRING_RI", "REVIEW_EXPIRING_SP", "REVIEW_FREETIER_USAGE_ALERTS", "REVIEW_FREETIER_CREDITS_REMAINING", "REVIEW_FREETIER_DAYS_REMAINING", "REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS", "UPDATE_EXPIRED_PAYMENT_METHOD", "UPDATE_INVALID_PAYMENT_METHOD", "UPDATE_TAX_EXEMPTION_CERTIFICATE", "UPDATE_TAX_REGISTRATION_NUMBER"],
     #         account_id: "AccountId",
     #         severity: "INFO" # One of: ["INFO", "WARNING", "CRITICAL"],
     #         feature: "ACCOUNT" # One of: ["ACCOUNT", "BUDGETS", "COST_ANOMALY_DETECTION", "COST_OPTIMIZATION_HUB", "FREE_TIER", "IAM", "PAYMENTS", "RESERVATIONS", "SAVINGS_PLANS", "TAX_SETTINGS"],

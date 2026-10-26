@@ -7,6 +7,31 @@ module Aws::Bedrock
   module Paginators
 
     # @api private
+    class ListAdvancedPromptOptimizationJobs
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.job_summaries
+      end
+    end
+
+    # @api private
     class ListAutomatedReasoningPolicies
       def next_tokens(data)
         next_token = data.next_token
@@ -153,6 +178,31 @@ module Aws::Bedrock
 
       def items(data)
         data.model_summaries
+      end
+    end
+
+    # @api private
+    class ListEnforcedGuardrailsConfiguration
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.guardrails_config
       end
     end
 

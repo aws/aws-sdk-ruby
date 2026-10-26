@@ -1,0 +1,226 @@
+module Aws::SimpleDBv2
+  module Types
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ExportStatus
+      PENDING: String
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class ExportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_arn: String,
+        ?export_status: String,
+        ?requested_at: Time,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_arn: String?
+      attr_accessor export_status: String?
+      attr_accessor requested_at: Time?
+      attr_accessor domain_name: String?
+    end
+
+    class GetExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_arn: String?
+    end
+
+    class GetExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_arn: String,
+        ?client_token: String,
+        ?export_status: String,
+        ?domain_name: String,
+        ?requested_at: Time,
+        ?s3_bucket: String,
+        ?s3_key_prefix: String,
+        ?s3_sse_algorithm: String,
+        ?s3_sse_kms_key_id: String,
+        ?s3_bucket_owner: String,
+        ?failure_code: String,
+        ?failure_message: String,
+        ?export_manifest: String,
+        ?items_count: Integer,
+        ?export_data_cutoff_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor export_status: String?
+      attr_accessor domain_name: String?
+      attr_accessor requested_at: Time?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key_prefix: String?
+      attr_accessor s3_sse_algorithm: String?
+      attr_accessor s3_sse_kms_key_id: String?
+      attr_accessor s3_bucket_owner: String?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+      attr_accessor export_manifest: String?
+      attr_accessor items_count: Integer?
+      attr_accessor export_data_cutoff_time: Time?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterCombinationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListExportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_summaries: Array[Types::ExportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_summaries: Array[Types::ExportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class NoSuchDomainException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NoSuchExportException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NumberExportsLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module S3SseAlgorithm
+      AES256: String
+      KMS: String
+    end
+
+    class StartDomainExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?domain_name: String,
+        ?s3_bucket: String,
+        ?s3_key_prefix: String,
+        ?s3_sse_algorithm: String,
+        ?s3_sse_kms_key_id: String,
+        ?s3_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor domain_name: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key_prefix: String?
+      attr_accessor s3_sse_algorithm: String?
+      attr_accessor s3_sse_kms_key_id: String?
+      attr_accessor s3_bucket_owner: String?
+    end
+
+    class StartDomainExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?export_arn: String,
+        ?requested_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor export_arn: String?
+      attr_accessor requested_at: Time?
+    end
+  end
+end

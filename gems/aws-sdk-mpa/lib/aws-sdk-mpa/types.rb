@@ -107,7 +107,7 @@ module Aws::MPA
     #   <p>Description for the team.</p>
     #   @return [String]
     # @!attribute policies
-    #   <p>An array of <code>PolicyReference</code> objects. Contains a list of policies that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    #   <p>An array of <code>PolicyReference</code> objects. Contains a list of policies that define the permissions for team resources.</p>
     #   @return [Array<Types::PolicyReference>]
     # @!attribute name
     #   <p>Name of the team.</p>
@@ -291,7 +291,7 @@ module Aws::MPA
     #   <p>Version ID for the team.</p>
     #   @return [String]
     # @!attribute policies
-    #   <p>An array of <code>PolicyReference</code> objects. Contains a list of policies that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    #   <p>An array of <code>PolicyReference</code> objects. Contains a list of policies that define the permissions for team resources.</p>
     #   @return [Array<Types::PolicyReference>]
     # @!attribute last_update_time
     #   <p>Timestamp when the team was last updated.</p>
@@ -337,6 +337,18 @@ module Aws::MPA
     # @!attribute primary_identity_status
     #   <p>Status for the identity source. For example, if an approver has accepted a team invitation with a user authentication method managed by the identity source.</p>
     #   @return [String]
+    # @!attribute last_activity
+    #   <p>Last Activity performed by the approver.</p>
+    #   @return [String]
+    # @!attribute last_activity_time
+    #   <p>Timestamp when the approver last responded to an operation or invitation request.</p>
+    #   @return [Time]
+    # @!attribute pending_baseline_session_arn
+    #   <p>Amazon Resource Name (ARN) for the pending baseline session.</p>
+    #   @return [String]
+    # @!attribute mfa_methods
+    #   <p>Multi-factor authentication configuration for the approver</p>
+    #   @return [Array<Types::MfaMethod>]
     class GetApprovalTeamResponseApprover < Struct.new(
       nil,
       :approver_id,
@@ -344,6 +356,10 @@ module Aws::MPA
       :primary_identity_id,
       :primary_identity_source_arn,
       :primary_identity_status,
+      :last_activity,
+      :last_activity_time,
+      :pending_baseline_session_arn,
+      :mfa_methods,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -407,7 +423,7 @@ module Aws::MPA
     end
 
     # @!attribute policy_version
-    #   <p>A <code>PolicyVersion</code> object. Contains details for the version of the policy. Policies define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    #   <p>A <code>PolicyVersion</code> object. Contains details for the version of the policy. Policies define the permissions for team resources.</p>
     #   @return [Types::PolicyVersion]
     class GetPolicyVersionResponse < Struct.new(
       nil,
@@ -543,6 +559,9 @@ module Aws::MPA
     # @!attribute approver_responses
     #   <p>An array of <code>GetSessionResponseApproverResponse</code> objects. Contains details for approver responses in the session.</p>
     #   @return [Array<Types::GetSessionResponseApproverResponse>]
+    # @!attribute additional_security_requirements
+    #   <p>A list of <code>AdditionalSecurityRequirement</code> applied to the session.</p>
+    #   @return [Array<String>]
     class GetSessionResponse < Struct.new(
       nil,
       :session_arn,
@@ -568,6 +587,7 @@ module Aws::MPA
       :requester_comment,
       :action_completion_strategy,
       :approver_responses,
+      :additional_security_requirements,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -882,7 +902,7 @@ module Aws::MPA
     #   <p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a next call to the operation to get more output. You can repeat this until the <code>NextToken</code> response element returns <code>null</code>.</p>
     #   @return [String]
     # @!attribute policies
-    #   <p>An array of <code>Policy</code> objects. Contains a list of policies that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    #   <p>An array of <code>Policy</code> objects. Contains a list of policies that define the permissions for team resources.</p>
     #   @return [Array<Types::Policy>]
     class ListPoliciesResponse < Struct.new(
       nil,
@@ -916,7 +936,7 @@ module Aws::MPA
     #   <p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a next call to the operation to get more output. You can repeat this until the <code>NextToken</code> response element returns <code>null</code>.</p>
     #   @return [String]
     # @!attribute policy_versions
-    #   <p>An array of <code>PolicyVersionSummary</code> objects. Contains details for the version of the policies that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    #   <p>An array of <code>PolicyVersionSummary</code> objects. Contains details for the version of the policies that define the permissions for team resources.</p>
     #   @return [Array<Types::PolicyVersionSummary>]
     class ListPolicyVersionsResponse < Struct.new(
       nil,
@@ -1071,6 +1091,9 @@ module Aws::MPA
     # @!attribute action_completion_strategy
     #   <p>Strategy for executing the protected operation. <code>AUTO_COMPLETION_UPON_APPROVAL</code> means the operation is executed automatically using the requester's permissions, if approved.</p>
     #   @return [String]
+    # @!attribute additional_security_requirements
+    #   <p>A list of <code>AdditionalSecurityRequirement</code> applied to the session.</p>
+    #   @return [Array<String>]
     class ListSessionsResponseSession < Struct.new(
       nil,
       :session_arn,
@@ -1090,6 +1113,7 @@ module Aws::MPA
       :status_code,
       :status_message,
       :action_completion_strategy,
+      :additional_security_requirements,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1112,6 +1136,22 @@ module Aws::MPA
     class ListTagsForResourceResponse < Struct.new(
       nil,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>MFA configuration and sycnronization status for an approver</p>
+    # @!attribute type
+    #   <p>The type of MFA configuration used by the approver</p>
+    #   @return [String]
+    # @!attribute sync_status
+    #   <p>Indicates if the approver's MFA device is in-sync with the Identity Source</p>
+    #   @return [String]
+    class MfaMethod < Struct.new(
+      nil,
+      :type,
+      :sync_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1173,7 +1213,7 @@ module Aws::MPA
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains details for a policy. Policies define what operations a team that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    # <p>Contains details for a policy. Policies define what operations a team that define the permissions for team resources.</p>
     # @!attribute arn
     #   <p>Amazon Resource Name (ARN) for the policy.</p>
     #   @return [String]
@@ -1197,7 +1237,7 @@ module Aws::MPA
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains the Amazon Resource Name (ARN) for a policy. Policies define what operations a team that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    # <p>Contains the Amazon Resource Name (ARN) for a policy. Policies define what operations a team that define the permissions for team resources.</p>
     # @!attribute policy_arn
     #   <p>Amazon Resource Name (ARN) for the policy.</p>
     #   @return [String]
@@ -1209,7 +1249,7 @@ module Aws::MPA
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains details for the version of a policy. Policies define what operations a team that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    # <p>Contains details for the version of a policy. Policies define what operations a team that define the permissions for team resources.</p>
     # @!attribute arn
     #   <p>Amazon Resource Name (ARN) for the team.</p>
     #   @return [String]
@@ -1229,7 +1269,7 @@ module Aws::MPA
     #   <p>Name of the policy.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>Status for the policy. For example, if the policy is <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_attach-policy.html">attachable</a> or <a href="https://docs.aws.amazon.com/access_policies_managed-deprecated.html">deprecated</a>.</p>
+    #   <p>Status for the policy. For example, if the policy is <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_attach-policy.html">attachable</a> or <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-deprecated.html">deprecated</a>.</p>
     #   @return [String]
     # @!attribute creation_time
     #   <p>Timestamp when the policy was created.</p>
@@ -1257,7 +1297,7 @@ module Aws::MPA
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains details for the version of a policy. Policies define what operations a team that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    # <p>Contains details for the version of a policy. Policies define what operations a team that define the permissions for team resources.</p>
     # @!attribute arn
     #   <p>Amazon Resource Name (ARN) for the team.</p>
     #   @return [String]
@@ -1277,7 +1317,7 @@ module Aws::MPA
     #   <p>Name of the policy</p>
     #   @return [String]
     # @!attribute status
-    #   <p>Status for the policy. For example, if the policy is <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_attach-policy.html">attachable</a> or <a href="https://docs.aws.amazon.com/access_policies_managed-deprecated.html">deprecated</a>.</p>
+    #   <p>Status for the policy. For example, if the policy is <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_attach-policy.html">attachable</a> or <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-deprecated.html">deprecated</a>.</p>
     #   @return [String]
     # @!attribute creation_time
     #   <p>Timestamp when the policy was created.</p>
@@ -1350,6 +1390,32 @@ module Aws::MPA
       nil,
       :deletion_completion_time,
       :deletion_start_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>Amazon Resource Name (ARN) for the approval team.</p>
+    #   @return [String]
+    # @!attribute approver_ids
+    #   <p>Array of approver IDs.</p>
+    #   @return [Array<String>]
+    class StartApprovalTeamBaselineRequest < Struct.new(
+      nil,
+      :arn,
+      :approver_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute baseline_session_arn
+    #   <p>Amazon Resource Name (ARN) for the session.</p>
+    #   @return [String]
+    class StartApprovalTeamBaselineResponse < Struct.new(
+      nil,
+      :baseline_session_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1439,12 +1505,16 @@ module Aws::MPA
     # @!attribute arn
     #   <p>Amazon Resource Name (ARN) for the team.</p>
     #   @return [String]
+    # @!attribute update_actions
+    #   <p>A list of <code>UpdateAction</code> to perform when updating the team.</p>
+    #   @return [Array<String>]
     class UpdateApprovalTeamRequest < Struct.new(
       nil,
       :approval_strategy,
       :approvers,
       :description,
       :arn,
+      :update_actions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

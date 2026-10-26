@@ -220,7 +220,8 @@ module Aws::RedshiftServerless
         level: Integer
       },
       ?ip_address_type: String,
-      ?track_name: String
+      ?track_name: String,
+      ?extra_compute_for_automatic_optimization: bool
     ) -> _CreateWorkgroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkgroupResponse
 
     interface _DeleteCustomDomainAssociationResponse
@@ -329,6 +330,15 @@ module Aws::RedshiftServerless
     def get_endpoint_access: (
       ?endpoint_name: String
     ) -> _GetEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEndpointAccessResponse
+
+    interface _GetIdentityCenterAuthTokenResponse
+      include Smithy::Client::_Response[Types::GetIdentityCenterAuthTokenResponse]
+      def token: () -> String?
+      def expiration_time: () -> Time?
+    end
+    def get_identity_center_auth_token: (
+      ?workgroup_names: Array[String]
+    ) -> _GetIdentityCenterAuthTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityCenterAuthTokenResponse
 
     interface _GetNamespaceResponse
       include Smithy::Client::_Response[Types::GetNamespaceResponse]
@@ -607,7 +617,8 @@ module Aws::RedshiftServerless
     def restore_from_recovery_point: (
       ?recovery_point_id: String,
       ?namespace_name: String,
-      ?workgroup_name: String
+      ?workgroup_name: String,
+      ?maintain_integration: bool
     ) -> _RestoreFromRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreFromRecoveryPointResponse
 
     interface _RestoreFromSnapshotResponse
@@ -623,7 +634,8 @@ module Aws::RedshiftServerless
       ?snapshot_arn: String,
       ?owner_account: String,
       ?manage_admin_password: bool,
-      ?admin_password_secret_kms_key_id: String
+      ?admin_password_secret_kms_key_id: String,
+      ?maintain_integration: bool
     ) -> _RestoreFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreFromSnapshotResponse
 
     interface _RestoreTableFromRecoveryPointResponse
@@ -703,6 +715,22 @@ module Aws::RedshiftServerless
       ?vpc_security_group_ids: Array[String]
     ) -> _UpdateEndpointAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEndpointAccessResponse
 
+    interface _UpdateLakehouseConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateLakehouseConfigurationResponse]
+      def namespace_name: () -> String?
+      def lakehouse_idc_application_arn: () -> String?
+      def lakehouse_registration_status: () -> String?
+      def catalog_arn: () -> String?
+    end
+    def update_lakehouse_configuration: (
+      ?namespace_name: String,
+      ?lakehouse_registration: String,
+      ?catalog_name: String,
+      ?lakehouse_idc_registration: String,
+      ?lakehouse_idc_application_arn: String,
+      ?dry_run: bool
+    ) -> _UpdateLakehouseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLakehouseConfigurationResponse
+
     interface _UpdateNamespaceResponse
       include Smithy::Client::_Response[Types::UpdateNamespaceResponse]
       def namespace: () -> Types::Namespace?
@@ -716,7 +744,12 @@ module Aws::RedshiftServerless
       ?iam_roles: Array[String],
       ?log_exports: Array[String],
       ?manage_admin_password: bool,
-      ?admin_password_secret_kms_key_id: String
+      ?admin_password_secret_kms_key_id: String,
+      ?log_destination_type: String,
+      ?s3_table_action: String,
+      ?s3_table_names: Array[String],
+      ?s3_table_kms_key_id: String,
+      ?s3_table_granularity: String
     ) -> _UpdateNamespaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNamespaceResponse
 
     interface _UpdateScheduledActionResponse
@@ -801,7 +834,8 @@ module Aws::RedshiftServerless
         status: String,
         level: Integer
       },
-      ?track_name: String
+      ?track_name: String,
+      ?extra_compute_for_automatic_optimization: bool
     ) -> _UpdateWorkgroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkgroupResponse
   end
 end

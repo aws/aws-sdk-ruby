@@ -44,6 +44,144 @@ module Aws::BedrockAgentCore
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _BatchCreateMemoryRecordsResponse
+      include Smithy::Client::_Response[Types::BatchCreateMemoryRecordsOutput]
+      def successful_records: () -> Array[Types::MemoryRecordOutput]?
+      def failed_records: () -> Array[Types::MemoryRecordOutput]?
+    end
+    def batch_create_memory_records: (
+      ?memory_id: String,
+      ?records: Array[
+        {
+          request_identifier: String,
+          namespaces: Array[String],
+          content: {
+            text: String
+          },
+          timestamp: Time,
+          memory_strategy_id: String,
+          metadata: Hash[String,
+            {
+              string_value: String,
+              string_list_value: Array[String],
+              number_value: Float,
+              date_time_value: untyped
+            }
+          ]
+        }
+      ],
+      ?client_token: String,
+      ?record_expiry_specification: {
+        record_expiry_duration_days: Integer,
+        action: String
+      }
+    ) -> _BatchCreateMemoryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateMemoryRecordsResponse
+
+    interface _BatchDeleteMemoryRecordsResponse
+      include Smithy::Client::_Response[Types::BatchDeleteMemoryRecordsOutput]
+      def successful_records: () -> Array[Types::MemoryRecordOutput]?
+      def failed_records: () -> Array[Types::MemoryRecordOutput]?
+    end
+    def batch_delete_memory_records: (
+      ?memory_id: String,
+      ?records: Array[
+        {
+          memory_record_id: String,
+          namespace: String
+        }
+      ]
+    ) -> _BatchDeleteMemoryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteMemoryRecordsResponse
+
+    interface _BatchUpdateMemoryRecordsResponse
+      include Smithy::Client::_Response[Types::BatchUpdateMemoryRecordsOutput]
+      def successful_records: () -> Array[Types::MemoryRecordOutput]?
+      def failed_records: () -> Array[Types::MemoryRecordOutput]?
+    end
+    def batch_update_memory_records: (
+      ?memory_id: String,
+      ?records: Array[
+        {
+          memory_record_id: String,
+          timestamp: Time,
+          content: {
+            text: String
+          },
+          namespaces: Array[String],
+          source_namespaces: untyped,
+          memory_strategy_id: String,
+          metadata: Hash[String,
+            {
+              string_value: String,
+              string_list_value: Array[String],
+              number_value: Float,
+              date_time_value: untyped
+            }
+          ]
+        }
+      ],
+      ?record_expiry_specification: {
+        record_expiry_duration_days: Integer,
+        action: String
+      }
+    ) -> _BatchUpdateMemoryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateMemoryRecordsResponse
+
+    interface _CompleteResourceTokenAuthResponse
+      include Smithy::Client::_Response[Types::CompleteResourceTokenAuthResponse]
+    end
+    def complete_resource_token_auth: (
+      ?user_identifier: {
+        user_token: String,
+        user_id: String
+      },
+      ?session_uri: String
+    ) -> _CompleteResourceTokenAuthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteResourceTokenAuthResponse
+
+    interface _CreateABTestResponse
+      include Smithy::Client::_Response[Types::CreateABTestResponse]
+      def ab_test_id: () -> String?
+      def ab_test_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def execution_status: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_ab_test: (
+      ?name: String,
+      ?description: String,
+      ?gateway_arn: String,
+      ?variants: Array[
+        {
+          name: String,
+          weight: Integer,
+          variant_configuration: {
+            configuration_bundle: {
+              bundle_arn: String,
+              bundle_version: String
+            },
+            target: {
+              name: String
+            }
+          }
+        }
+      ],
+      ?gateway_filter: {
+        target_paths: Array[String]
+      },
+      ?evaluation_config: {
+        online_evaluation_config_arn: String,
+        per_variant_online_evaluation_config: Array[
+          {
+            name: String,
+            online_evaluation_config_arn: untyped
+          }
+        ]
+      },
+      ?role_arn: String,
+      ?enable_on_create: bool,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateABTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateABTestResponse
+
     interface _CreateEventResponse
       include Smithy::Client::_Response[Types::CreateEventOutput]
       def event: () -> Types::Event?
@@ -61,15 +199,122 @@ module Aws::BedrockAgentCore
             },
             role: String
           },
-          blob: Smithy::Schema::document
+          blob: Smithy::Schema::document,
+          json: {
+            content: Smithy::Schema::document
+          }
         }
       ],
       ?branch: {
         root_event_id: String,
         name: String
       },
-      ?client_token: String
+      ?client_token: String,
+      ?metadata: Hash[String,
+        {
+          string_value: String
+        }
+      ],
+      ?extraction_mode: String,
+      ?extraction_config: {
+        namespace_variables: Hash[String, String]
+      }
     ) -> _CreateEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventResponse
+
+    interface _CreatePaymentInstrumentResponse
+      include Smithy::Client::_Response[Types::CreatePaymentInstrumentResponse]
+      def payment_instrument: () -> Types::PaymentInstrument?
+    end
+    def create_payment_instrument: (
+      ?user_id: String,
+      ?agent_name: String,
+      ?payment_manager_arn: String,
+      ?payment_connector_id: String,
+      ?payment_instrument_type: String,
+      ?payment_instrument_details: {
+        embedded_crypto_wallet: {
+          network: String,
+          linked_accounts: Array[
+            {
+              email: {
+                email_address: String
+              },
+              sms: {
+                phone_number: String
+              },
+              developer_jwt: {
+                kid: String,
+                sub: String
+              },
+              o_auth2: {
+                google: {
+                  sub: untyped,
+                  email_address: untyped,
+                  name: untyped,
+                  username: untyped
+                },
+                apple: untyped,
+                x: untyped,
+                telegram: untyped,
+                github: untyped
+              }
+            }
+          ],
+          wallet_address: untyped,
+          redirect_url: untyped
+        }
+      },
+      ?client_token: String
+    ) -> _CreatePaymentInstrumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePaymentInstrumentResponse
+
+    interface _CreatePaymentSessionResponse
+      include Smithy::Client::_Response[Types::CreatePaymentSessionResponse]
+      def payment_session: () -> Types::PaymentSession?
+    end
+    def create_payment_session: (
+      ?user_id: String,
+      ?agent_name: String,
+      ?payment_manager_arn: String,
+      ?limits: {
+        max_spend_amount: {
+          value: String,
+          currency: String
+        }
+      },
+      ?expiry_time_in_minutes: Integer,
+      ?client_token: String
+    ) -> _CreatePaymentSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePaymentSessionResponse
+
+    interface _DeleteABTestResponse
+      include Smithy::Client::_Response[Types::DeleteABTestResponse]
+      def ab_test_id: () -> String?
+      def ab_test_arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_ab_test: (
+      ?ab_test_id: String
+    ) -> _DeleteABTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteABTestResponse
+
+    interface _DeleteBatchEvaluationResponse
+      include Smithy::Client::_Response[Types::DeleteBatchEvaluationResponse]
+      def batch_evaluation_id: () -> String?
+      def batch_evaluation_arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_batch_evaluation: (
+      ?batch_evaluation_id: String
+    ) -> _DeleteBatchEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBatchEvaluationResponse
+
+    interface _DeleteCapacityProviderSessionResponse
+      include Smithy::Client::_Response[Types::DeleteCapacityProviderSessionResponse]
+      def capacity_provider_arn: () -> String?
+      def session_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_capacity_provider_session: (
+      ?capacity_provider_id: String,
+      ?session_id: String
+    ) -> _DeleteCapacityProviderSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCapacityProviderSessionResponse
 
     interface _DeleteEventResponse
       include Smithy::Client::_Response[Types::DeleteEventOutput]
@@ -88,8 +333,138 @@ module Aws::BedrockAgentCore
     end
     def delete_memory_record: (
       ?memory_id: String,
-      ?memory_record_id: String
+      ?memory_record_id: String,
+      ?namespace: String
     ) -> _DeleteMemoryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMemoryRecordResponse
+
+    interface _DeletePaymentInstrumentResponse
+      include Smithy::Client::_Response[Types::DeletePaymentInstrumentResponse]
+      def status: () -> String?
+    end
+    def delete_payment_instrument: (
+      ?user_id: String,
+      ?payment_manager_arn: String,
+      ?payment_connector_id: String,
+      ?payment_instrument_id: String
+    ) -> _DeletePaymentInstrumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePaymentInstrumentResponse
+
+    interface _DeletePaymentSessionResponse
+      include Smithy::Client::_Response[Types::DeletePaymentSessionResponse]
+      def status: () -> String?
+    end
+    def delete_payment_session: (
+      ?user_id: String,
+      ?payment_manager_arn: String,
+      ?payment_session_id: String
+    ) -> _DeletePaymentSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePaymentSessionResponse
+
+    interface _DeleteRecommendationResponse
+      include Smithy::Client::_Response[Types::DeleteRecommendationResponse]
+      def recommendation_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_recommendation: (
+      ?recommendation_id: String
+    ) -> _DeleteRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecommendationResponse
+
+    interface _EvaluateResponse
+      include Smithy::Client::_Response[Types::EvaluateResponse]
+      def evaluation_results: () -> Array[Types::EvaluationResultContent]?
+    end
+    def evaluate: (
+      ?evaluator_id: String,
+      ?evaluation_input: {
+        session_spans: Array[Smithy::Schema::document]
+      },
+      ?evaluation_target: {
+        span_ids: Array[String],
+        trace_ids: Array[String]
+      },
+      ?evaluation_reference_inputs: Array[
+        {
+          context: {
+            span_context: {
+              session_id: String,
+              trace_id: untyped,
+              span_id: untyped
+            }
+          },
+          expected_response: {
+            text: untyped
+          },
+          assertions: Array[
+            {
+              text: untyped
+            }
+          ],
+          expected_trajectory: {
+            tool_names: Array[String]
+          }
+        }
+      ]
+    ) -> _EvaluateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EvaluateResponse
+
+    interface _GetABTestResponse
+      include Smithy::Client::_Response[Types::GetABTestResponse]
+      def ab_test_id: () -> String?
+      def ab_test_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def execution_status: () -> String?
+      def gateway_arn: () -> String?
+      def variants: () -> Array[Types::Variant]?
+      def gateway_filter: () -> Types::GatewayFilter?
+      def evaluation_config: () -> Types::ABTestEvaluationConfig?
+      def role_arn: () -> String?
+      def current_run_id: () -> String?
+      def error_details: () -> Array[String]?
+      def started_at: () -> Time?
+      def stopped_at: () -> Time?
+      def max_duration_expires_at: () -> Time?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def results: () -> Types::ABTestResults?
+    end
+    def get_ab_test: (
+      ?ab_test_id: String
+    ) -> _GetABTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetABTestResponse
+
+    interface _GetAgentCardResponse
+      include Smithy::Client::_Response[Types::GetAgentCardResponse]
+      def runtime_session_id: () -> String?
+      def agent_card: () -> Smithy::Schema::document?
+      def status_code: () -> Integer?
+    end
+    def get_agent_card: (
+      ?runtime_session_id: String,
+      ?agent_runtime_arn: String,
+      ?qualifier: String
+    ) -> _GetAgentCardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentCardResponse
+
+    interface _GetBatchEvaluationResponse
+      include Smithy::Client::_Response[Types::GetBatchEvaluationResponse]
+      def batch_evaluation_id: () -> String?
+      def batch_evaluation_arn: () -> String?
+      def batch_evaluation_name: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def evaluators: () -> Array[Types::Evaluator]?
+      def insights: () -> Array[Types::Insight]?
+      def data_source_config: () -> Types::DataSourceConfig?
+      def output_config: () -> Types::OutputConfig?
+      def evaluation_results: () -> Types::EvaluationJobResults?
+      def failure_analysis_result: () -> Types::FailureAnalysisResultContent?
+      def user_intent_result: () -> Types::UserIntentClusteringResultContent?
+      def execution_summary_result: () -> Types::ExecutionSummaryClusteringResultContent?
+      def error_details: () -> Array[String]?
+      def description: () -> String?
+      def updated_at: () -> Time?
+      def kms_key_arn: () -> String?
+    end
+    def get_batch_evaluation: (
+      ?batch_evaluation_id: String
+    ) -> _GetBatchEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBatchEvaluationResponse
 
     interface _GetBrowserSessionResponse
       include Smithy::Client::_Response[Types::GetBrowserSessionResponse]
@@ -98,9 +473,15 @@ module Aws::BedrockAgentCore
       def name: () -> String?
       def created_at: () -> Time?
       def view_port: () -> Types::ViewPort?
+      def extensions: () -> Array[Types::BrowserExtension]?
+      def enterprise_policies: () -> Array[Types::BrowserEnterprisePolicy]?
+      def profile_configuration: () -> Types::BrowserProfileConfiguration?
       def session_timeout_seconds: () -> Integer?
       def status: () -> String?
       def streams: () -> Types::BrowserSessionStream?
+      def proxy_configuration: () -> Types::ProxyConfiguration?
+      def certificates: () -> Array[Types::Certificate]?
+      def filesystem_configurations: () -> Array[Types::ToolsFileSystemConfiguration]?
       def session_replay_artifact: () -> String?
       def last_updated_at: () -> Time?
     end
@@ -117,6 +498,8 @@ module Aws::BedrockAgentCore
       def created_at: () -> Time?
       def session_timeout_seconds: () -> Integer?
       def status: () -> String?
+      def certificates: () -> Array[Types::Certificate]?
+      def filesystem_configurations: () -> Array[Types::ToolsFileSystemConfiguration]?
     end
     def get_code_interpreter_session: (
       ?code_interpreter_identifier: String,
@@ -140,8 +523,65 @@ module Aws::BedrockAgentCore
     end
     def get_memory_record: (
       ?memory_id: String,
-      ?memory_record_id: String
+      ?memory_record_id: String,
+      ?namespace: String
     ) -> _GetMemoryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMemoryRecordResponse
+
+    interface _GetPaymentInstrumentResponse
+      include Smithy::Client::_Response[Types::GetPaymentInstrumentResponse]
+      def payment_instrument: () -> Types::PaymentInstrument?
+    end
+    def get_payment_instrument: (
+      ?user_id: String,
+      ?agent_name: String,
+      ?payment_manager_arn: String,
+      ?payment_connector_id: String,
+      ?payment_instrument_id: String
+    ) -> _GetPaymentInstrumentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPaymentInstrumentResponse
+
+    interface _GetPaymentInstrumentBalanceResponse
+      include Smithy::Client::_Response[Types::GetPaymentInstrumentBalanceResponse]
+      def payment_instrument_id: () -> String?
+      def token_balance: () -> Types::TokenBalance?
+    end
+    def get_payment_instrument_balance: (
+      ?user_id: String,
+      ?agent_name: String,
+      ?payment_manager_arn: String,
+      ?payment_connector_id: String,
+      ?payment_instrument_id: String,
+      ?chain: String,
+      ?token: String
+    ) -> _GetPaymentInstrumentBalanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPaymentInstrumentBalanceResponse
+
+    interface _GetPaymentSessionResponse
+      include Smithy::Client::_Response[Types::GetPaymentSessionResponse]
+      def payment_session: () -> Types::PaymentSession?
+    end
+    def get_payment_session: (
+      ?user_id: String,
+      ?agent_name: String,
+      ?payment_manager_arn: String,
+      ?payment_session_id: String
+    ) -> _GetPaymentSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPaymentSessionResponse
+
+    interface _GetRecommendationResponse
+      include Smithy::Client::_Response[Types::GetRecommendationResponse]
+      def recommendation_id: () -> String?
+      def recommendation_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def recommendation_config: () -> Types::RecommendationConfig?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def recommendation_result: () -> Types::RecommendationResult?
+      def kms_key_arn: () -> String?
+    end
+    def get_recommendation: (
+      ?recommendation_id: String
+    ) -> _GetRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationResponse
 
     interface _GetResourceApiKeyResponse
       include Smithy::Client::_Response[Types::GetResourceApiKeyResponse]
@@ -156,16 +596,46 @@ module Aws::BedrockAgentCore
       include Smithy::Client::_Response[Types::GetResourceOauth2TokenResponse]
       def authorization_url: () -> String?
       def access_token: () -> String?
+      def session_uri: () -> String?
+      def session_status: () -> String?
     end
     def get_resource_oauth2_token: (
       ?workload_identity_token: String,
       ?resource_credential_provider_name: String,
       ?scopes: Array[String],
       ?oauth2_flow: String,
+      ?session_uri: String,
       ?resource_oauth2_return_url: String,
       ?force_authentication: bool,
-      ?custom_parameters: Hash[String, String]
+      ?custom_parameters: Hash[String, String],
+      ?custom_state: String,
+      ?resources: Array[String],
+      ?audiences: Array[String]
     ) -> _GetResourceOauth2TokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceOauth2TokenResponse
+
+    interface _GetResourcePaymentTokenResponse
+      include Smithy::Client::_Response[Types::GetResourcePaymentTokenResponse]
+      def payment_token_response: () -> Types::PaymentTokenResponseOutput?
+    end
+    def get_resource_payment_token: (
+      ?workload_identity_token: String,
+      ?resource_credential_provider_name: String,
+      ?payment_token_request: {
+        coinbase_cdp_token_request: {
+          request_method: String,
+          request_host: String,
+          request_path: String,
+          include_wallet_auth_token: bool,
+          request_body: String
+        },
+        stripe_privy_token_request: {
+          request_host: String,
+          request_path: String,
+          request_body: String,
+          include_authorization_signature: untyped
+        }
+      }
+    ) -> _GetResourcePaymentTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePaymentTokenResponse
 
     interface _GetWorkloadAccessTokenResponse
       include Smithy::Client::_Response[Types::GetWorkloadAccessTokenResponse]
@@ -193,6 +663,43 @@ module Aws::BedrockAgentCore
       ?user_id: String
     ) -> _GetWorkloadAccessTokenForUserIdResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkloadAccessTokenForUserIdResponse
 
+    interface _IngestDataResponse
+      include Smithy::Client::_Response[Types::IngestDataOutput]
+      def session_id: () -> String?
+    end
+    def ingest_data: (
+      ?memory_id: String,
+      ?source: {
+        inline: {
+          payload: Array[
+            {
+              conversational: {
+                content: {
+                  text: String
+                },
+                role: String
+              },
+              json: {
+                content: Smithy::Schema::document
+              }
+            }
+          ]
+        }
+      },
+      ?content_timestamp: Time,
+      ?actor_id: String,
+      ?session_id: String,
+      ?extraction_config: {
+        namespace_variables: Hash[String, String]
+      },
+      ?metadata: Hash[String,
+        {
+          string_value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _IngestDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IngestDataResponse
+
     interface _InvokeAgentRuntimeResponse
       include Smithy::Client::_Response[Types::InvokeAgentRuntimeResponse]
       def runtime_session_id: () -> String?
@@ -212,6 +719,8 @@ module Aws::BedrockAgentCore
       ?mcp_session_id: String,
       ?runtime_session_id: String,
       ?mcp_protocol_version: String,
+      ?mcp_method: String,
+      ?mcp_name: String,
       ?runtime_user_id: String,
       ?trace_id: String,
       ?trace_parent: String,
@@ -219,8 +728,85 @@ module Aws::BedrockAgentCore
       ?baggage: String,
       ?agent_runtime_arn: String,
       ?qualifier: String,
+      ?account_id: String,
       ?payload: String
     ) -> _InvokeAgentRuntimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeAgentRuntimeResponse
+
+    interface _InvokeAgentRuntimeCommandResponse
+      include Smithy::Client::_Response[Types::InvokeAgentRuntimeCommandResponse]
+      def runtime_session_id: () -> String?
+      def trace_id: () -> String?
+      def trace_parent: () -> String?
+      def trace_state: () -> String?
+      def baggage: () -> String?
+      def content_type: () -> String?
+      def status_code: () -> Integer?
+      def stream: () -> Types::InvokeAgentRuntimeCommandStreamOutput?
+    end
+    def invoke_agent_runtime_command: (
+      ?content_type: String,
+      ?accept: String,
+      ?runtime_session_id: String,
+      ?trace_id: String,
+      ?trace_parent: String,
+      ?trace_state: String,
+      ?baggage: String,
+      ?agent_runtime_arn: String,
+      ?qualifier: String,
+      ?account_id: String,
+      ?body: {
+        command: String,
+        timeout: Integer
+      }
+    ) -> _InvokeAgentRuntimeCommandResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeAgentRuntimeCommandResponse
+
+    interface _InvokeBrowserResponse
+      include Smithy::Client::_Response[Types::InvokeBrowserResponse]
+      def result: () -> Types::BrowserActionResult?
+      def session_id: () -> String?
+    end
+    def invoke_browser: (
+      ?browser_identifier: String,
+      ?session_id: String,
+      ?action: {
+        mouse_click: {
+          x: Integer,
+          y: untyped,
+          button: String,
+          click_count: untyped
+        },
+        mouse_move: {
+          x: untyped,
+          y: untyped
+        },
+        mouse_drag: {
+          end_x: untyped,
+          end_y: untyped,
+          start_x: untyped,
+          start_y: untyped,
+          button: untyped
+        },
+        mouse_scroll: {
+          x: untyped,
+          y: untyped,
+          delta_x: untyped,
+          delta_y: untyped
+        },
+        key_type: {
+          text: String
+        },
+        key_press: {
+          key: untyped,
+          presses: untyped
+        },
+        key_shortcut: {
+          keys: Array[String]
+        },
+        screenshot: {
+          format: String
+        }
+      }
+    ) -> _InvokeBrowserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeBrowserResponse
 
     interface _InvokeCodeInterpreterResponse
       include Smithy::Client::_Response[Types::InvokeCodeInterpreterResponse]
@@ -230,6 +816,8 @@ module Aws::BedrockAgentCore
     def invoke_code_interpreter: (
       ?code_interpreter_identifier: String,
       ?session_id: String,
+      ?trace_id: String,
+      ?trace_parent: String,
       ?name: String,
       ?arguments: {
         code: String,
@@ -246,9 +834,174 @@ module Aws::BedrockAgentCore
           }
         ],
         directory_path: untyped,
-        task_id: untyped
+        task_id: untyped,
+        runtime: String
       }
     ) -> _InvokeCodeInterpreterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeCodeInterpreterResponse
+
+    interface _InvokeHarnessResponse
+      include Smithy::Client::_Response[Types::InvokeHarnessResponse]
+      def stream: () -> Types::InvokeHarnessStreamOutput?
+    end
+    def invoke_harness: (
+      ?harness_arn: String,
+      ?qualifier: String,
+      ?runtime_session_id: String,
+      ?runtime_user_id: String,
+      ?trace_parent: String,
+      ?trace_state: String,
+      ?trace_id: String,
+      ?baggage: String,
+      ?messages: Array[
+        {
+          role: String,
+          content: Array[
+            {
+              text: String,
+              tool_use: {
+                name: String,
+                tool_use_id: String,
+                input: Smithy::Schema::document,
+                type: String,
+                server_name: String
+              },
+              tool_result: {
+                tool_use_id: untyped,
+                content: Array[
+                  {
+                    text: untyped,
+                    json: untyped
+                  }
+                ],
+                status: String,
+                type: untyped
+              },
+              reasoning_content: {
+                reasoning_text: {
+                  text: untyped,
+                  signature: untyped
+                },
+                redacted_content: String
+              }
+            }
+          ]
+        }
+      ],
+      ?model: {
+        bedrock_model_config: {
+          model_id: String,
+          max_tokens: Integer,
+          temperature: Float,
+          top_p: Float,
+          api_format: String,
+          additional_params: Smithy::Schema::document
+        },
+        open_ai_model_config: {
+          model_id: untyped,
+          api_key_arn: String,
+          api_base: String,
+          max_tokens: untyped,
+          temperature: untyped,
+          top_p: untyped,
+          api_format: String,
+          additional_params: untyped
+        },
+        gemini_model_config: {
+          model_id: untyped,
+          api_key_arn: untyped,
+          max_tokens: untyped,
+          temperature: untyped,
+          top_p: untyped,
+          top_k: Integer,
+          additional_params: untyped
+        },
+        lite_llm_model_config: {
+          model_id: untyped,
+          api_key_arn: untyped,
+          api_base: String,
+          max_tokens: untyped,
+          temperature: untyped,
+          top_p: untyped,
+          additional_params: untyped
+        }
+      },
+      ?system_prompt: Array[
+        {
+          text: String
+        }
+      ],
+      ?tools: Array[
+        {
+          type: String,
+          name: String,
+          config: {
+            remote_mcp: {
+              url: String,
+              headers: Hash[String, String]
+            },
+            agent_core_browser: {
+              browser_arn: String
+            },
+            agent_core_gateway: {
+              gateway_arn: String,
+              outbound_auth: {
+                aws_iam: {
+                },
+                none: untyped,
+                oauth: {
+                  provider_arn: String,
+                  scopes: Array[String],
+                  custom_parameters: Hash[String, String],
+                  grant_type: String,
+                  default_return_url: String
+                }
+              }
+            },
+            inline_function: {
+              description: String,
+              input_schema: Smithy::Schema::document
+            },
+            agent_core_code_interpreter: {
+              code_interpreter_arn: String
+            }
+          }
+        }
+      ],
+      ?skills: Array[
+        {
+          path: String,
+          s3: {
+            uri: String
+          },
+          git: {
+            url: String,
+            path: String,
+            auth: {
+              credential_arn: String,
+              username: untyped
+            }
+          },
+          aws_skills: {
+            paths: Array[String]
+          }
+        }
+      ],
+      ?allowed_tools: Array[String],
+      ?max_iterations: Integer,
+      ?max_tokens: Integer,
+      ?timeout_seconds: Integer,
+      ?actor_id: String
+    ) -> _InvokeHarnessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeHarnessResponse
+
+    interface _ListABTestsResponse
+      include Smithy::Client::_Response[Types::ListABTestsResponse]
+      def ab_tests: () -> Array[Types::ABTestSummary]?
+      def next_token: () -> String?
+    end
+    def list_ab_tests: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListABTestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListABTestsResponse
 
     interface _ListActorsResponse
       include Smithy::Client::_Response[Types::ListActorsOutput]
@@ -260,6 +1013,16 @@ module Aws::BedrockAgentCore
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListActorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActorsResponse
+
+    interface _ListBatchEvaluationsResponse
+      include Smithy::Client::_Response[Types::ListBatchEvaluationsResponse]
+      def batch_evaluations: () -> Array[Types::BatchEvaluationSummary]?
+      def next_token: () -> String?
+    end
+    def list_batch_evaluations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBatchEvaluationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBatchEvaluationsResponse
 
     interface _ListBrowserSessionsResponse
       include Smithy::Client::_Response[Types::ListBrowserSessionsResponse]
@@ -299,11 +1062,41 @@ module Aws::BedrockAgentCore
         branch: {
           name: String,
           include_parent_branches: bool
-        }
+        },
+        event_metadata: Array[
+          {
+            left: {
+              metadata_key: String
+            },
+            operator: String,
+            right: {
+              metadata_value: {
+                string_value: String
+              }
+            }
+          }
+        ]
       },
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventsResponse
+
+    interface _ListMemoryExtractionJobsResponse
+      include Smithy::Client::_Response[Types::ListMemoryExtractionJobsOutput]
+      def jobs: () -> Array[Types::ExtractionJobMetadata]?
+      def next_token: () -> String?
+    end
+    def list_memory_extraction_jobs: (
+      ?memory_id: String,
+      ?max_results: Integer,
+      ?filter: {
+        strategy_id: String,
+        session_id: untyped,
+        actor_id: untyped,
+        status: String
+      },
+      ?next_token: String
+    ) -> _ListMemoryExtractionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMemoryExtractionJobsResponse
 
     interface _ListMemoryRecordsResponse
       include Smithy::Client::_Response[Types::ListMemoryRecordsOutput]
@@ -313,10 +1106,65 @@ module Aws::BedrockAgentCore
     def list_memory_records: (
       ?memory_id: String,
       ?namespace: String,
+      ?namespace_path: String,
       ?memory_strategy_id: String,
       ?max_results: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?metadata_filters: Array[
+        {
+          left: {
+            metadata_key: String
+          },
+          operator: String,
+          right: {
+            metadata_value: {
+              string_value: String,
+              string_list_value: Array[String],
+              number_value: Float,
+              date_time_value: Time
+            }
+          }
+        }
+      ]
     ) -> _ListMemoryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMemoryRecordsResponse
+
+    interface _ListPaymentInstrumentsResponse
+      include Smithy::Client::_Response[Types::ListPaymentInstrumentsResponse]
+      def payment_instruments: () -> Array[Types::PaymentInstrumentSummary]?
+      def next_token: () -> String?
+    end
+    def list_payment_instruments: (
+      ?user_id: String,
+      ?agent_name: String,
+      ?payment_manager_arn: String,
+      ?payment_connector_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPaymentInstrumentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPaymentInstrumentsResponse
+
+    interface _ListPaymentSessionsResponse
+      include Smithy::Client::_Response[Types::ListPaymentSessionsResponse]
+      def payment_sessions: () -> Array[Types::PaymentSessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_payment_sessions: (
+      ?user_id: String,
+      ?agent_name: String,
+      ?payment_manager_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPaymentSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPaymentSessionsResponse
+
+    interface _ListRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListRecommendationsResponse]
+      def recommendation_summaries: () -> Array[Types::RecommendationSummary]?
+      def next_token: () -> String?
+    end
+    def list_recommendations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status_filter: String
+    ) -> _ListRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationsResponse
 
     interface _ListSessionsResponse
       include Smithy::Client::_Response[Types::ListSessionsOutput]
@@ -327,8 +1175,45 @@ module Aws::BedrockAgentCore
       ?memory_id: String,
       ?actor_id: String,
       ?max_results: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?filter: {
+        event_filter: String
+      }
     ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
+
+    interface _ProcessPaymentResponse
+      include Smithy::Client::_Response[Types::ProcessPaymentResponse]
+      def process_payment_id: () -> String?
+      def payment_manager_arn: () -> String?
+      def payment_session_id: () -> String?
+      def payment_instrument_id: () -> String?
+      def payment_type: () -> String?
+      def status: () -> String?
+      def payment_output: () -> Types::PaymentOutput?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def process_payment: (
+      ?user_id: String,
+      ?agent_name: String,
+      ?payment_manager_arn: String,
+      ?payment_session_id: String,
+      ?payment_instrument_id: String,
+      ?payment_type: String,
+      ?payment_input: {
+        crypto_x402: {
+          version: String,
+          payload: Smithy::Schema::document,
+          permit2_allowance_limit: String
+        },
+        mpp: {
+          version: String,
+          www_authenticate_headers: Array[String],
+          buyer_pays_gas_fees: bool
+        }
+      },
+      ?client_token: String
+    ) -> _ProcessPaymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ProcessPaymentResponse
 
     interface _RetrieveMemoryRecordsResponse
       include Smithy::Client::_Response[Types::RetrieveMemoryRecordsOutput]
@@ -338,14 +1223,153 @@ module Aws::BedrockAgentCore
     def retrieve_memory_records: (
       ?memory_id: String,
       ?namespace: String,
+      ?namespace_path: String,
       ?search_criteria: {
         search_query: String,
         memory_strategy_id: String,
-        top_k: Integer
+        top_k: Integer,
+        metadata_filters: Array[
+          {
+            left: {
+              metadata_key: String
+            },
+            operator: String,
+            right: {
+              metadata_value: {
+                string_value: String,
+                string_list_value: Array[String],
+                number_value: Float,
+                date_time_value: Time
+              }
+            }
+          }
+        ]
       },
       ?next_token: String,
       ?max_results: Integer
     ) -> _RetrieveMemoryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveMemoryRecordsResponse
+
+    interface _SaveBrowserSessionProfileResponse
+      include Smithy::Client::_Response[Types::SaveBrowserSessionProfileResponse]
+      def profile_identifier: () -> String?
+      def browser_identifier: () -> String?
+      def session_id: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def save_browser_session_profile: (
+      ?trace_id: String,
+      ?trace_parent: String,
+      ?profile_identifier: String,
+      ?browser_identifier: String,
+      ?session_id: String,
+      ?client_token: String
+    ) -> _SaveBrowserSessionProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SaveBrowserSessionProfileResponse
+
+    interface _SearchRegistryRecordsResponse
+      include Smithy::Client::_Response[Types::SearchRegistryRecordsResponse]
+      def registry_records: () -> Array[Types::RegistryRecordSummary]?
+    end
+    def search_registry_records: (
+      ?search_query: String,
+      ?registry_ids: Array[String],
+      ?max_results: Integer,
+      ?filters: Smithy::Schema::document
+    ) -> _SearchRegistryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchRegistryRecordsResponse
+
+    interface _StartBatchEvaluationResponse
+      include Smithy::Client::_Response[Types::StartBatchEvaluationResponse]
+      def batch_evaluation_id: () -> String?
+      def batch_evaluation_arn: () -> String?
+      def batch_evaluation_name: () -> String?
+      def evaluators: () -> Array[Types::Evaluator]?
+      def insights: () -> Array[Types::Insight]?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def output_config: () -> Types::OutputConfig?
+      def tags: () -> Hash[String, String]?
+      def kms_key_arn: () -> String?
+      def description: () -> String?
+    end
+    def start_batch_evaluation: (
+      ?batch_evaluation_name: String,
+      ?evaluators: Array[
+        {
+          evaluator_id: String
+        }
+      ],
+      ?insights: Array[
+        {
+          insight_id: String
+        }
+      ],
+      ?data_source_config: {
+        cloud_watch_logs: {
+          service_names: Array[String],
+          log_group_names: Array[String],
+          log_group_name_prefixes: Array[String],
+          filter_config: {
+            session_ids: untyped,
+            time_range: {
+              start_time: Time,
+              end_time: untyped
+            },
+            session_trace_ids: Array[
+              {
+                session_id: String,
+                trace_ids: Array[String]
+              }
+            ]
+          }
+        },
+        online_evaluation_config_source: {
+          online_evaluation_config_arn: String,
+          time_range: untyped
+        }
+      },
+      ?client_token: String,
+      ?evaluation_metadata: {
+        session_metadata: Array[
+          {
+            session_id: String,
+            test_scenario_id: untyped,
+            ground_truth: {
+              inline: {
+                assertions: Array[
+                  {
+                    text: untyped
+                  }
+                ],
+                expected_trajectory: {
+                  tool_names: Array[String]
+                },
+                turns: Array[
+                  {
+                    input: {
+                      prompt: untyped
+                    },
+                    expected_response: {
+                      text: untyped
+                    }
+                  }
+                ]
+              }
+            },
+            metadata: Hash[String, String]
+          }
+        ]
+      },
+      ?tags: Hash[String, String],
+      ?kms_key_arn: String,
+      ?description: String,
+      ?output_config: {
+        cloud_watch_config: {
+          log_group_name: String,
+          log_stream_name: String,
+          metrics_namespace: String,
+          result_destination: String
+        }
+      }
+    ) -> _StartBatchEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBatchEvaluationResponse
 
     interface _StartBrowserSessionResponse
       include Smithy::Client::_Response[Types::StartBrowserSessionResponse]
@@ -355,6 +1379,8 @@ module Aws::BedrockAgentCore
       def streams: () -> Types::BrowserSessionStream?
     end
     def start_browser_session: (
+      ?trace_id: String,
+      ?trace_parent: String,
       ?browser_identifier: String,
       ?name: String,
       ?session_timeout_seconds: Integer,
@@ -362,6 +1388,74 @@ module Aws::BedrockAgentCore
         width: Integer,
         height: Integer
       },
+      ?extensions: Array[
+        {
+          location: {
+            s3: {
+              bucket: String,
+              prefix: untyped,
+              version_id: untyped
+            }
+          }
+        }
+      ],
+      ?profile_configuration: {
+        profile_identifier: String
+      },
+      ?proxy_configuration: {
+        proxies: Array[
+          {
+            external_proxy: {
+              server: String,
+              port: Integer,
+              domain_patterns: Array[String],
+              credentials: {
+                basic_auth: {
+                  secret_arn: String
+                }
+              }
+            }
+          }
+        ],
+        bypass: {
+          domain_patterns: untyped
+        }
+      },
+      ?enterprise_policies: Array[
+        {
+          location: {
+            s3: {
+              bucket: String,
+              prefix: untyped,
+              version_id: untyped
+            }
+          },
+          type: String
+        }
+      ],
+      ?certificates: Array[
+        {
+          location: {
+            secrets_manager: {
+              secret_arn: String
+            }
+          }
+        }
+      ],
+      ?filesystem_configurations: Array[
+        {
+          s3_files_configuration: {
+            access_point_arn: String,
+            mount_path: String,
+            file_system_arn: String
+          },
+          efs_configuration: {
+            access_point_arn: String,
+            mount_path: untyped,
+            file_system_arn: String
+          }
+        }
+      ],
       ?client_token: String
     ) -> _StartBrowserSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBrowserSessionResponse
 
@@ -372,11 +1466,154 @@ module Aws::BedrockAgentCore
       def created_at: () -> Time?
     end
     def start_code_interpreter_session: (
+      ?trace_id: String,
+      ?trace_parent: String,
       ?code_interpreter_identifier: String,
       ?name: String,
       ?session_timeout_seconds: Integer,
+      ?certificates: Array[
+        {
+          location: {
+            secrets_manager: {
+              secret_arn: String
+            }
+          }
+        }
+      ],
+      ?filesystem_configurations: Array[
+        {
+          s3_files_configuration: {
+            access_point_arn: String,
+            mount_path: String,
+            file_system_arn: String
+          },
+          efs_configuration: {
+            access_point_arn: String,
+            mount_path: untyped,
+            file_system_arn: String
+          }
+        }
+      ],
       ?client_token: String
     ) -> _StartCodeInterpreterSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCodeInterpreterSessionResponse
+
+    interface _StartMemoryExtractionJobResponse
+      include Smithy::Client::_Response[Types::StartMemoryExtractionJobOutput]
+      def job_id: () -> String?
+    end
+    def start_memory_extraction_job: (
+      ?memory_id: String,
+      ?extraction_job: {
+        job_id: String
+      },
+      ?client_token: String
+    ) -> _StartMemoryExtractionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMemoryExtractionJobResponse
+
+    interface _StartRecommendationResponse
+      include Smithy::Client::_Response[Types::StartRecommendationResponse]
+      def recommendation_id: () -> String?
+      def recommendation_arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def recommendation_config: () -> Types::RecommendationConfig?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def start_recommendation: (
+      ?name: String,
+      ?description: String,
+      ?type: String,
+      ?recommendation_config: {
+        system_prompt_recommendation_config: {
+          system_prompt: {
+            text: String,
+            configuration_bundle: {
+              bundle_arn: String,
+              version_id: String,
+              system_prompt_json_path: String
+            }
+          },
+          agent_traces: {
+            session_spans: Array[Smithy::Schema::document],
+            cloudwatch_logs: {
+              log_group_arns: Array[String],
+              service_names: Array[String],
+              start_time: Time,
+              end_time: untyped,
+              rule: {
+                filters: Array[
+                  {
+                    key: untyped,
+                    operator: String,
+                    value: {
+                      string_value: String,
+                      double_value: Float,
+                      boolean_value: bool
+                    }
+                  }
+                ]
+              }
+            },
+            batch_evaluation: {
+              batch_evaluation_arn: String
+            },
+            online_evaluation: {
+              online_evaluation_config_arn: String,
+              start_time: untyped,
+              end_time: untyped
+            }
+          },
+          evaluation_config: {
+            evaluators: Array[
+              {
+                evaluator_arn: String
+              }
+            ]
+          }
+        },
+        tool_description_recommendation_config: {
+          tool_description: {
+            tool_description_text: {
+              tools: Array[
+                {
+                  tool_name: String,
+                  tool_description: {
+                    text: String
+                  }
+                }
+              ]
+            },
+            configuration_bundle: {
+              bundle_arn: untyped,
+              version_id: untyped,
+              tools: Array[
+                {
+                  tool_name: untyped,
+                  tool_description_json_path: untyped
+                }
+              ]
+            }
+          },
+          agent_traces: untyped
+        }
+      },
+      ?kms_key_arn: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _StartRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRecommendationResponse
+
+    interface _StopBatchEvaluationResponse
+      include Smithy::Client::_Response[Types::StopBatchEvaluationResponse]
+      def batch_evaluation_id: () -> String?
+      def batch_evaluation_arn: () -> String?
+      def status: () -> String?
+      def description: () -> String?
+    end
+    def stop_batch_evaluation: (
+      ?batch_evaluation_id: String
+    ) -> _StopBatchEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopBatchEvaluationResponse
 
     interface _StopBrowserSessionResponse
       include Smithy::Client::_Response[Types::StopBrowserSessionResponse]
@@ -385,6 +1622,8 @@ module Aws::BedrockAgentCore
       def last_updated_at: () -> Time?
     end
     def stop_browser_session: (
+      ?trace_id: String,
+      ?trace_parent: String,
       ?browser_identifier: String,
       ?session_id: String,
       ?client_token: String
@@ -397,10 +1636,68 @@ module Aws::BedrockAgentCore
       def last_updated_at: () -> Time?
     end
     def stop_code_interpreter_session: (
+      ?trace_id: String,
+      ?trace_parent: String,
       ?code_interpreter_identifier: String,
       ?session_id: String,
       ?client_token: String
     ) -> _StopCodeInterpreterSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopCodeInterpreterSessionResponse
+
+    interface _StopRuntimeSessionResponse
+      include Smithy::Client::_Response[Types::StopRuntimeSessionResponse]
+      def runtime_session_id: () -> String?
+      def status_code: () -> Integer?
+    end
+    def stop_runtime_session: (
+      ?runtime_session_id: String,
+      ?agent_runtime_arn: String,
+      ?qualifier: String,
+      ?client_token: String
+    ) -> _StopRuntimeSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopRuntimeSessionResponse
+
+    interface _UpdateABTestResponse
+      include Smithy::Client::_Response[Types::UpdateABTestResponse]
+      def ab_test_id: () -> String?
+      def ab_test_arn: () -> String?
+      def status: () -> String?
+      def execution_status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_ab_test: (
+      ?ab_test_id: String,
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?variants: Array[
+        {
+          name: String,
+          weight: Integer,
+          variant_configuration: {
+            configuration_bundle: {
+              bundle_arn: String,
+              bundle_version: String
+            },
+            target: {
+              name: String
+            }
+          }
+        }
+      ],
+      ?gateway_filter: {
+        target_paths: Array[String]
+      },
+      ?evaluation_config: {
+        online_evaluation_config_arn: String,
+        per_variant_online_evaluation_config: Array[
+          {
+            name: String,
+            online_evaluation_config_arn: untyped
+          }
+        ]
+      },
+      ?role_arn: String,
+      ?execution_status: String
+    ) -> _UpdateABTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateABTestResponse
 
     interface _UpdateBrowserStreamResponse
       include Smithy::Client::_Response[Types::UpdateBrowserStreamResponse]

@@ -62,6 +62,28 @@ module Aws::Drs
       attr_accessor model_name: String?
     end
 
+    class CancelRecoveryPlanExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_arn: String?
+    end
+
+    class CancelRecoveryPlanExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution: Types::RecoveryPlanExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution: Types::RecoveryPlanExecution?
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -137,6 +159,7 @@ module Aws::Drs
         ?export_bucket_arn: String,
         ?post_launch_enabled: bool,
         ?launch_into_source_instance: bool,
+        ?recovery_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -149,6 +172,7 @@ module Aws::Drs
       attr_accessor export_bucket_arn: String?
       attr_accessor post_launch_enabled: bool?
       attr_accessor launch_into_source_instance: bool?
+      attr_accessor recovery_mode: String?
     end
 
     class CreateLaunchConfigurationTemplateOutput
@@ -162,43 +186,62 @@ module Aws::Drs
       attr_accessor launch_configuration_template: Types::LaunchConfigurationTemplate?
     end
 
-    class CreateReplicationConfigurationTemplateInput
+    class CreateRecoveryPlanRequest
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?staging_area_subnet_id: String,
-        ?associate_default_security_group: bool,
-        ?replication_servers_security_groups_i_ds: Array[String],
-        ?replication_server_instance_type: String,
-        ?use_dedicated_replication_server: bool,
-        ?default_large_staging_disk_type: String,
-        ?ebs_encryption: String,
-        ?ebs_encryption_key_arn: String,
-        ?bandwidth_throttling: Integer,
-        ?data_plane_routing: String,
-        ?create_public_ip: bool,
-        ?staging_area_tags: Hash[String, String],
-        ?pit_policy: Array[Types::PITPolicyRule],
+        ?name: String,
+        ?description: String,
+        ?client_token: String,
         ?tags: Hash[String, String],
-        ?auto_replicate_new_disks: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor staging_area_subnet_id: String?
-      attr_accessor associate_default_security_group: bool?
-      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
-      attr_accessor replication_server_instance_type: String?
-      attr_accessor use_dedicated_replication_server: bool?
-      attr_accessor default_large_staging_disk_type: String?
-      attr_accessor ebs_encryption: String?
-      attr_accessor ebs_encryption_key_arn: String?
-      attr_accessor bandwidth_throttling: Integer?
-      attr_accessor data_plane_routing: String?
-      attr_accessor create_public_ip: bool?
-      attr_accessor staging_area_tags: Hash[String, String]?
-      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
-      attr_accessor auto_replicate_new_disks: bool?
+    end
+
+    class CreateRecoveryPlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan: Types::RecoveryPlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan: Types::RecoveryPlan?
+    end
+
+    class CreateRecoveryPlanStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+        ?step_name: String,
+        ?step_order: Integer,
+        ?configuration: Types::RecoveryPlanStepConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor step_name: String?
+      attr_accessor step_order: Integer?
+      attr_accessor configuration: Types::RecoveryPlanStepConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRecoveryPlanStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_step: Types::RecoveryPlanStep,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_step: Types::RecoveryPlanStep?
     end
 
     class CreateReplicationConfigurationTemplateOutput
@@ -222,6 +265,7 @@ module Aws::Drs
         ?tags: Hash[String, String],
         ?pit_policy: Array[Types::PITPolicyRule],
         ?auto_replicate_new_disks: bool,
+        ?internet_protocol: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -242,6 +286,48 @@ module Aws::Drs
       attr_accessor tags: Hash[String, String]?
       attr_accessor pit_policy: Array[Types::PITPolicyRule]?
       attr_accessor auto_replicate_new_disks: bool?
+      attr_accessor internet_protocol: String?
+    end
+
+    class CreateReplicationConfigurationTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?pit_policy: Array[Types::PITPolicyRule],
+        ?tags: Hash[String, String],
+        ?auto_replicate_new_disks: bool,
+        ?internet_protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor auto_replicate_new_disks: bool?
+      attr_accessor internet_protocol: String?
     end
 
     class CreateSourceNetworkRequest
@@ -430,6 +516,72 @@ module Aws::Drs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor recovery_instance_id: String?
+    end
+
+    class DeleteRecoveryPlanExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_arn: String?
+    end
+
+    class DeleteRecoveryPlanExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_arn: String?
+    end
+
+    class DeleteRecoveryPlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+    end
+
+    class DeleteRecoveryPlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+    end
+
+    class DeleteRecoveryPlanStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_step_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_step_arn: String?
+    end
+
+    class DeleteRecoveryPlanStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_step_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_step_arn: String?
     end
 
     class DeleteReplicationConfigurationTemplateInput
@@ -863,6 +1015,19 @@ module Aws::Drs
       attr_accessor bytes: Integer?
     end
 
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
     class EventResourceData
       include Smithy::Schema::Union
 
@@ -877,6 +1042,17 @@ module Aws::Drs
       end
       class Unknown < EventResourceData
       end
+    end
+
+    class ExecutionServerStepConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?servers: Array[Types::RecoveryPlanExecutionServer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor servers: Array[Types::RecoveryPlanExecutionServer]?
     end
 
     class ExportSourceNetworkCfnTemplateRequest
@@ -920,6 +1096,7 @@ module Aws::Drs
         ?name: String,
         ?bandwidth_throttling: Integer,
         ?use_private_ip: bool,
+        ?internet_protocol: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -927,6 +1104,7 @@ module Aws::Drs
       attr_accessor name: String?
       attr_accessor bandwidth_throttling: Integer?
       attr_accessor use_private_ip: bool?
+      attr_accessor internet_protocol: String?
     end
 
     class GetLaunchConfigurationInput
@@ -954,6 +1132,7 @@ module Aws::Drs
         ?licensing: Types::Licensing,
         ?post_launch_enabled: bool,
         ?launch_into_instance_properties: Types::LaunchIntoInstanceProperties,
+        ?recovery_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -967,6 +1146,95 @@ module Aws::Drs
       attr_accessor licensing: Types::Licensing?
       attr_accessor post_launch_enabled: bool?
       attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties?
+      attr_accessor recovery_mode: String?
+    end
+
+    class GetRecoveryPlanExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_arn: String?
+    end
+
+    class GetRecoveryPlanExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution: Types::RecoveryPlanExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution: Types::RecoveryPlanExecution?
+    end
+
+    class GetRecoveryPlanExecutionStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_step_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_step_arn: String?
+    end
+
+    class GetRecoveryPlanExecutionStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_step: Types::RecoveryPlanExecutionStep,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_step: Types::RecoveryPlanExecutionStep?
+    end
+
+    class GetRecoveryPlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+    end
+
+    class GetRecoveryPlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan: Types::RecoveryPlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan: Types::RecoveryPlan?
+    end
+
+    class GetRecoveryPlanStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_step_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_step_arn: String?
+    end
+
+    class GetRecoveryPlanStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_step: Types::RecoveryPlanStep,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_step: Types::RecoveryPlanStep?
     end
 
     class GetReplicationConfigurationInput
@@ -1001,6 +1269,7 @@ module Aws::Drs
         ?staging_area_tags: Hash[String, String],
         ?pit_policy: Array[Types::PITPolicyRule],
         ?auto_replicate_new_disks: bool,
+        ?internet_protocol: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1021,6 +1290,7 @@ module Aws::Drs
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor pit_policy: Array[Types::PITPolicyRule]?
       attr_accessor auto_replicate_new_disks: bool?
+      attr_accessor internet_protocol: String?
     end
 
     class IdentificationHints
@@ -1125,6 +1395,8 @@ module Aws::Drs
         ?raw_error: String,
         ?conversion_properties: Types::ConversionProperties,
         ?event_resource_data: Types::EventResourceData,
+        ?attempt_count: Integer,
+        ?max_attempts_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1134,6 +1406,8 @@ module Aws::Drs
       attr_accessor raw_error: String?
       attr_accessor conversion_properties: Types::ConversionProperties?
       attr_accessor event_resource_data: Types::EventResourceData?
+      attr_accessor attempt_count: Integer?
+      attr_accessor max_attempts_count: Integer?
     end
 
     class LaunchAction
@@ -1236,6 +1510,7 @@ module Aws::Drs
         ?export_bucket_arn: String,
         ?post_launch_enabled: bool,
         ?launch_into_source_instance: bool,
+        ?recovery_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1250,6 +1525,7 @@ module Aws::Drs
       attr_accessor export_bucket_arn: String?
       attr_accessor post_launch_enabled: bool?
       attr_accessor launch_into_source_instance: bool?
+      attr_accessor recovery_mode: String?
     end
 
     class LaunchIntoInstanceProperties
@@ -1376,6 +1652,131 @@ module Aws::Drs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor items: Array[Types::LaunchAction]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPlanExecutionStepsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class ListRecoveryPlanExecutionStepsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_arn: String,
+        ?filter: Types::ListRecoveryPlanExecutionStepsFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_arn: String?
+      attr_accessor filter: Types::ListRecoveryPlanExecutionStepsFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPlanExecutionStepsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_steps: Array[Types::RecoveryPlanExecutionStepSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_steps: Array[Types::RecoveryPlanExecutionStepSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPlanExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPlanExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_executions: Array[Types::RecoveryPlanExecutionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_executions: Array[Types::RecoveryPlanExecutionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPlanStepsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPlanStepsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_steps: Array[Types::RecoveryPlanStep],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_steps: Array[Types::RecoveryPlanStep]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPlansRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecoveryPlansResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plans: Array[Types::RecoveryPlanSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plans: Array[Types::RecoveryPlanSummary]?
       attr_accessor next_token: String?
     end
 
@@ -1801,6 +2202,244 @@ module Aws::Drs
       attr_accessor last_recovery_result: String?
     end
 
+    class RecoveryPlan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?created_at: String,
+        ?updated_at: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor created_at: String?
+      attr_accessor updated_at: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RecoveryPlanExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_arn: String,
+        ?recovery_plan_arn: String,
+        ?mode: String,
+        ?status: String,
+        ?started_at: String,
+        ?completed_at: String,
+        ?error_detail: Types::ErrorDetail,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_arn: String?
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor mode: String?
+      attr_accessor status: String?
+      attr_accessor started_at: String?
+      attr_accessor completed_at: String?
+      attr_accessor error_detail: Types::ErrorDetail?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RecoveryPlanExecutionServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_arn: String,
+        ?impact_level: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_arn: String?
+      attr_accessor impact_level: String?
+      attr_accessor job_id: String?
+    end
+
+    class RecoveryPlanExecutionSourceServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?recovery_snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor recovery_snapshot_id: String?
+    end
+
+    class RecoveryPlanExecutionStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_step_arn: String,
+        ?step_index: Integer,
+        ?status: String,
+        ?step_name: String,
+        ?configuration: Types::RecoveryPlanExecutionStepConfiguration,
+        ?error_detail: Types::ErrorDetail,
+        ?attempt: Integer,
+        ?created_at: String,
+        ?updated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_step_arn: String?
+      attr_accessor step_index: Integer?
+      attr_accessor status: String?
+      attr_accessor step_name: String?
+      attr_accessor configuration: Types::RecoveryPlanExecutionStepConfiguration?
+      attr_accessor error_detail: Types::ErrorDetail?
+      attr_accessor attempt: Integer?
+      attr_accessor created_at: String?
+      attr_accessor updated_at: String?
+    end
+
+    class RecoveryPlanExecutionStepConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?execution_server_step_configuration: Types::ExecutionServerStepConfiguration,
+        ?wait_step_configuration: Types::WaitStepConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_server_step_configuration: Types::ExecutionServerStepConfiguration?
+      attr_accessor wait_step_configuration: Types::WaitStepConfiguration?
+
+      class ExecutionServerStepConfiguration < RecoveryPlanExecutionStepConfiguration
+      end
+      class WaitStepConfiguration < RecoveryPlanExecutionStepConfiguration
+      end
+      class Unknown < RecoveryPlanExecutionStepConfiguration
+      end
+    end
+
+    class RecoveryPlanExecutionStepSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_step_arn: String,
+        ?step_name: String,
+        ?step_index: Integer,
+        ?status: String,
+        ?configuration: Types::RecoveryPlanExecutionStepConfiguration,
+        ?error_detail: Types::ErrorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_step_arn: String?
+      attr_accessor step_name: String?
+      attr_accessor step_index: Integer?
+      attr_accessor status: String?
+      attr_accessor configuration: Types::RecoveryPlanExecutionStepConfiguration?
+      attr_accessor error_detail: Types::ErrorDetail?
+    end
+
+    class RecoveryPlanExecutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_arn: String,
+        ?recovery_plan_arn: String,
+        ?mode: String,
+        ?status: String,
+        ?started_at: String,
+        ?error_detail: Types::ErrorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_arn: String?
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor mode: String?
+      attr_accessor status: String?
+      attr_accessor started_at: String?
+      attr_accessor error_detail: Types::ErrorDetail?
+    end
+
+    class RecoveryPlanServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_arn: String,
+        ?impact_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_arn: String?
+      attr_accessor impact_level: String?
+    end
+
+    class RecoveryPlanStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_step_arn: String,
+        ?step_order: Integer,
+        ?step_name: String,
+        ?configuration: Types::RecoveryPlanStepConfiguration,
+        ?created_at: String,
+        ?updated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_step_arn: String?
+      attr_accessor step_order: Integer?
+      attr_accessor step_name: String?
+      attr_accessor configuration: Types::RecoveryPlanStepConfiguration?
+      attr_accessor created_at: String?
+      attr_accessor updated_at: String?
+    end
+
+    class RecoveryPlanStepConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?server_step_configuration: Types::ServerStepConfiguration,
+        ?wait_step_configuration: Types::WaitStepConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_step_configuration: Types::ServerStepConfiguration?
+      attr_accessor wait_step_configuration: Types::WaitStepConfiguration?
+
+      class ServerStepConfiguration < RecoveryPlanStepConfiguration
+      end
+      class WaitStepConfiguration < RecoveryPlanStepConfiguration
+      end
+      class Unknown < RecoveryPlanStepConfiguration
+      end
+    end
+
+    class RecoveryPlanSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: String,
+        ?updated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: String?
+      attr_accessor updated_at: String?
+    end
+
     class RecoverySnapshot
       include Smithy::Schema::Structure
 
@@ -1818,6 +2457,30 @@ module Aws::Drs
       attr_accessor expected_timestamp: String?
       attr_accessor timestamp: String?
       attr_accessor ebs_snapshots: Array[String]?
+    end
+
+    class ReorderRecoveryPlanStepsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+        ?ordered_step_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor ordered_step_arns: Array[String]?
+    end
+
+    class ReorderRecoveryPlanStepsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_steps: Array[Types::RecoveryPlanStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_steps: Array[Types::RecoveryPlanStep]?
     end
 
     class ReplicationConfigurationReplicatedDisk
@@ -1862,6 +2525,7 @@ module Aws::Drs
         ?tags: Hash[String, String],
         ?pit_policy: Array[Types::PITPolicyRule],
         ?auto_replicate_new_disks: bool,
+        ?internet_protocol: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1882,6 +2546,7 @@ module Aws::Drs
       attr_accessor tags: Hash[String, String]?
       attr_accessor pit_policy: Array[Types::PITPolicyRule]?
       attr_accessor auto_replicate_new_disks: bool?
+      attr_accessor internet_protocol: String?
     end
 
     class ResourceNotFoundException
@@ -1949,6 +2614,28 @@ module Aws::Drs
       attr_accessor agent_version: String?
     end
 
+    class RetryRecoveryPlanExecutionStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_step_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_step_arn: String?
+    end
+
+    class RetryRecoveryPlanExecutionStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_step: Types::RecoveryPlanExecutionStep,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_step: Types::RecoveryPlanExecutionStep?
+    end
+
     class ReverseReplicationInput
       include Smithy::Schema::Structure
 
@@ -1969,6 +2656,17 @@ module Aws::Drs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor reversed_direction_source_server_arn: String?
+    end
+
+    class ServerStepConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?servers: Array[Types::RecoveryPlanServer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor servers: Array[Types::RecoveryPlanServer]?
     end
 
     class ServiceQuotaExceededException
@@ -2070,6 +2768,7 @@ module Aws::Drs
         ?ram_bytes: Integer,
         ?os: Types::OS,
         ?supports_nitro_instances: bool,
+        ?architecture: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2082,6 +2781,7 @@ module Aws::Drs
       attr_accessor ram_bytes: Integer?
       attr_accessor os: Types::OS?
       attr_accessor supports_nitro_instances: bool?
+      attr_accessor architecture: String?
     end
 
     class SourceServer
@@ -2201,6 +2901,36 @@ module Aws::Drs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor job: Types::Job?
+    end
+
+    class StartRecoveryPlanExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+        ?mode: String,
+        ?client_token: String,
+        ?source_servers: Array[Types::RecoveryPlanExecutionSourceServer],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor mode: String?
+      attr_accessor client_token: String?
+      attr_accessor source_servers: Array[Types::RecoveryPlanExecutionSourceServer]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartRecoveryPlanExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution: Types::RecoveryPlanExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution: Types::RecoveryPlanExecution?
     end
 
     class StartRecoveryRequestSourceServer
@@ -2440,6 +3170,7 @@ module Aws::Drs
         ?name: String,
         ?bandwidth_throttling: Integer,
         ?use_private_ip: bool,
+        ?internet_protocol: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2447,6 +3178,7 @@ module Aws::Drs
       attr_accessor name: String?
       attr_accessor bandwidth_throttling: Integer?
       attr_accessor use_private_ip: bool?
+      attr_accessor internet_protocol: String?
     end
 
     class UpdateLaunchConfigurationInput
@@ -2462,6 +3194,7 @@ module Aws::Drs
         ?licensing: Types::Licensing,
         ?post_launch_enabled: bool,
         ?launch_into_instance_properties: Types::LaunchIntoInstanceProperties,
+        ?recovery_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2474,6 +3207,7 @@ module Aws::Drs
       attr_accessor licensing: Types::Licensing?
       attr_accessor post_launch_enabled: bool?
       attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties?
+      attr_accessor recovery_mode: String?
     end
 
     class UpdateLaunchConfigurationOutput
@@ -2490,6 +3224,7 @@ module Aws::Drs
         ?licensing: Types::Licensing,
         ?post_launch_enabled: bool,
         ?launch_into_instance_properties: Types::LaunchIntoInstanceProperties,
+        ?recovery_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2503,6 +3238,7 @@ module Aws::Drs
       attr_accessor licensing: Types::Licensing?
       attr_accessor post_launch_enabled: bool?
       attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties?
+      attr_accessor recovery_mode: String?
     end
 
     class UpdateLaunchConfigurationTemplateInput
@@ -2518,6 +3254,7 @@ module Aws::Drs
         ?export_bucket_arn: String,
         ?post_launch_enabled: bool,
         ?launch_into_source_instance: bool,
+        ?recovery_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2530,6 +3267,7 @@ module Aws::Drs
       attr_accessor export_bucket_arn: String?
       attr_accessor post_launch_enabled: bool?
       attr_accessor launch_into_source_instance: bool?
+      attr_accessor recovery_mode: String?
     end
 
     class UpdateLaunchConfigurationTemplateOutput
@@ -2541,6 +3279,86 @@ module Aws::Drs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor launch_configuration_template: Types::LaunchConfigurationTemplate?
+    end
+
+    class UpdateRecoveryPlanExecutionStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_step_arn: String,
+        ?status: String,
+        ?servers: Array[Types::RecoveryPlanServer],
+        ?wait_duration_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_step_arn: String?
+      attr_accessor status: String?
+      attr_accessor servers: Array[Types::RecoveryPlanServer]?
+      attr_accessor wait_duration_minutes: Integer?
+    end
+
+    class UpdateRecoveryPlanExecutionStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_execution_step: Types::RecoveryPlanExecutionStep,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_execution_step: Types::RecoveryPlanExecutionStep?
+    end
+
+    class UpdateRecoveryPlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_arn: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateRecoveryPlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan: Types::RecoveryPlan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan: Types::RecoveryPlan?
+    end
+
+    class UpdateRecoveryPlanStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_step_arn: String,
+        ?step_name: String,
+        ?configuration: Types::RecoveryPlanStepConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_step_arn: String?
+      attr_accessor step_name: String?
+      attr_accessor configuration: Types::RecoveryPlanStepConfiguration?
+    end
+
+    class UpdateRecoveryPlanStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_plan_step: Types::RecoveryPlanStep,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_plan_step: Types::RecoveryPlanStep?
     end
 
     class UpdateReplicationConfigurationInput
@@ -2564,6 +3382,7 @@ module Aws::Drs
         ?staging_area_tags: Hash[String, String],
         ?pit_policy: Array[Types::PITPolicyRule],
         ?auto_replicate_new_disks: bool,
+        ?internet_protocol: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2584,6 +3403,7 @@ module Aws::Drs
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor pit_policy: Array[Types::PITPolicyRule]?
       attr_accessor auto_replicate_new_disks: bool?
+      attr_accessor internet_protocol: String?
     end
 
     class UpdateReplicationConfigurationOutput
@@ -2607,6 +3427,7 @@ module Aws::Drs
         ?staging_area_tags: Hash[String, String],
         ?pit_policy: Array[Types::PITPolicyRule],
         ?auto_replicate_new_disks: bool,
+        ?internet_protocol: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2627,6 +3448,7 @@ module Aws::Drs
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor pit_policy: Array[Types::PITPolicyRule]?
       attr_accessor auto_replicate_new_disks: bool?
+      attr_accessor internet_protocol: String?
     end
 
     class UpdateReplicationConfigurationTemplateInput
@@ -2649,6 +3471,7 @@ module Aws::Drs
         ?staging_area_tags: Hash[String, String],
         ?pit_policy: Array[Types::PITPolicyRule],
         ?auto_replicate_new_disks: bool,
+        ?internet_protocol: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2668,6 +3491,7 @@ module Aws::Drs
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor pit_policy: Array[Types::PITPolicyRule]?
       attr_accessor auto_replicate_new_disks: bool?
+      attr_accessor internet_protocol: String?
     end
 
     class UpdateReplicationConfigurationTemplateOutput
@@ -2691,6 +3515,7 @@ module Aws::Drs
         ?tags: Hash[String, String],
         ?pit_policy: Array[Types::PITPolicyRule],
         ?auto_replicate_new_disks: bool,
+        ?internet_protocol: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2711,6 +3536,7 @@ module Aws::Drs
       attr_accessor tags: Hash[String, String]?
       attr_accessor pit_policy: Array[Types::PITPolicyRule]?
       attr_accessor auto_replicate_new_disks: bool?
+      attr_accessor internet_protocol: String?
     end
 
     class ValidationException
@@ -2741,6 +3567,17 @@ module Aws::Drs
 
       attr_accessor name: String?
       attr_accessor message: String?
+    end
+
+    class WaitStepConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wait_duration_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wait_duration_minutes: Integer?
     end
   end
 end

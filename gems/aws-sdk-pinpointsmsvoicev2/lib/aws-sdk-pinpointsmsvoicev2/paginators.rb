@@ -57,6 +57,31 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @api private
+    class CarrierLookup
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class CreateConfigurationSet
       def next_tokens(data)
         next_token = data.next_token
@@ -83,6 +108,31 @@ module Aws::PinpointSMSVoiceV2
 
     # @api private
     class CreateEventDestination
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class CreateNotifyConfiguration
       def next_tokens(data)
         next_token = data.next_token
         return {} if next_token.nil? || next_token.empty?
@@ -158,6 +208,31 @@ module Aws::PinpointSMSVoiceV2
 
     # @api private
     class CreateProtectConfiguration
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class CreateRcsAgent
       def next_tokens(data)
         next_token = data.next_token
         return {} if next_token.nil? || next_token.empty?
@@ -482,6 +557,56 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @api private
+    class DeleteNotifyConfiguration
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class DeleteNotifyMessageSpendLimitOverride
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class DeleteOptOutList
       def next_tokens(data)
         next_token = data.next_token
@@ -583,6 +708,56 @@ module Aws::PinpointSMSVoiceV2
 
     # @api private
     class DeleteProtectConfigurationRuleSetNumberOverride
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class DeleteRcsAgent
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class DeleteRcsMessageSpendLimitOverride
       def next_tokens(data)
         next_token = data.next_token
         return {} if next_token.nil? || next_token.empty?
@@ -882,6 +1057,56 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @api private
+    class DescribeNotifyConfigurations
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.notify_configurations
+      end
+    end
+
+    # @api private
+    class DescribeNotifyTemplates
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.notify_templates
+      end
+    end
+
+    # @api private
     class DescribeOptOutLists
       def next_tokens(data)
         next_token = data.next_token
@@ -1003,6 +1228,56 @@ module Aws::PinpointSMSVoiceV2
 
       def items(data)
         data.protect_configurations
+      end
+    end
+
+    # @api private
+    class DescribeRcsAgentCountryLaunchStatus
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.country_launch_status
+      end
+    end
+
+    # @api private
+    class DescribeRcsAgents
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.rcs_agents
       end
     end
 
@@ -1378,6 +1653,56 @@ module Aws::PinpointSMSVoiceV2
 
       def items(data)
         raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class ListAvailablePhoneNumbers
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.available_phone_numbers
+      end
+    end
+
+    # @api private
+    class ListNotifyCountries
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.notify_countries
       end
     end
 
@@ -1782,6 +2107,81 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @api private
+    class SendNotifyTextMessage
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class SendNotifyVoiceMessage
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class SendRcsMessage
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class SendTextMessage
       def next_tokens(data)
         next_token = data.next_token
@@ -1957,6 +2357,56 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @api private
+    class SetNotifyMessageSpendLimitOverride
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class SetRcsMessageSpendLimitOverride
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class SetTextMessageSpendLimitOverride
       def next_tokens(data)
         next_token = data.next_token
@@ -2107,6 +2557,31 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # @api private
+    class UpdateNotifyConfiguration
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
     class UpdatePhoneNumber
       def next_tokens(data)
         next_token = data.next_token
@@ -2183,6 +2658,31 @@ module Aws::PinpointSMSVoiceV2
 
     # @api private
     class UpdateProtectConfigurationCountryRuleSet
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        raise NotImplementedError, 'item iteration is not implemented for this operation'
+      end
+    end
+
+    # @api private
+    class UpdateRcsAgent
       def next_tokens(data)
         next_token = data.next_token
         return {} if next_token.nil? || next_token.empty?

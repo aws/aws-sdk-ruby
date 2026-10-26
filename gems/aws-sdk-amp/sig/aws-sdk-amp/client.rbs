@@ -54,6 +54,38 @@ module Aws::Amp
       ?client_token: String
     ) -> _CreateAlertManagerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAlertManagerDefinitionResponse
 
+    interface _CreateAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::CreateAnomalyDetectorResponse]
+      def anomaly_detector_id: () -> String?
+      def arn: () -> String?
+      def status: () -> Types::AnomalyDetectorStatus?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_anomaly_detector: (
+      ?workspace_id: String,
+      ?alias: String,
+      ?evaluation_interval_in_seconds: Integer,
+      ?missing_data_action: {
+        mark_as_anomaly: bool,
+        skip: untyped
+      },
+      ?configuration: {
+        random_cut_forest: {
+          query: String,
+          shingle_size: Integer,
+          sample_size: untyped,
+          ignore_near_expected_from_above: {
+            amount: Float,
+            ratio: untyped
+          },
+          ignore_near_expected_from_below: untyped
+        }
+      },
+      ?labels: Hash[String, String],
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnomalyDetectorResponse
+
     interface _CreateLoggingConfigurationResponse
       include Smithy::Client::_Response[Types::CreateLoggingConfigurationOutput]
       def status: () -> Types::LoggingConfigurationStatus?
@@ -115,11 +147,18 @@ module Aws::Amp
           cluster_arn: String,
           security_group_ids: Array[String],
           subnet_ids: Array[String]
+        },
+        vpc_configuration: {
+          security_group_ids: untyped,
+          subnet_ids: untyped
         }
       },
       ?destination: {
         amp_configuration: {
           workspace_arn: String
+        },
+        cloud_watch_configuration: {
+          dataset_arn: String
         }
       },
       ?role_configuration: {
@@ -127,7 +166,14 @@ module Aws::Amp
         target_role_arn: untyped
       },
       ?client_token: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?exporters: Array[
+        {
+          open_search_configuration: {
+            domain_arn: String
+          }
+        }
+      ]
     ) -> _CreateScraperResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScraperResponse
 
     interface _CreateWorkspaceResponse
@@ -152,6 +198,15 @@ module Aws::Amp
       ?workspace_id: String,
       ?client_token: String
     ) -> _DeleteAlertManagerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAlertManagerDefinitionResponse
+
+    interface _DeleteAnomalyDetectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_anomaly_detector: (
+      ?workspace_id: String,
+      ?anomaly_detector_id: String,
+      ?client_token: String
+    ) -> _DeleteAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnomalyDetectorResponse
 
     interface _DeleteLoggingConfigurationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -220,6 +275,15 @@ module Aws::Amp
     def describe_alert_manager_definition: (
       ?workspace_id: String
     ) -> _DescribeAlertManagerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAlertManagerDefinitionResponse
+
+    interface _DescribeAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::DescribeAnomalyDetectorResponse]
+      def anomaly_detector: () -> Types::AnomalyDetectorDescription?
+    end
+    def describe_anomaly_detector: (
+      ?workspace_id: String,
+      ?anomaly_detector_id: String
+    ) -> _DescribeAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAnomalyDetectorResponse
 
     interface _DescribeLoggingConfigurationResponse
       include Smithy::Client::_Response[Types::DescribeLoggingConfigurationOutput]
@@ -298,6 +362,18 @@ module Aws::Amp
     end
     def get_default_scraper_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDefaultScraperConfigurationResponse
 
+    interface _ListAnomalyDetectorsResponse
+      include Smithy::Client::_Response[Types::ListAnomalyDetectorsResponse]
+      def anomaly_detectors: () -> Array[Types::AnomalyDetectorSummary]?
+      def next_token: () -> String?
+    end
+    def list_anomaly_detectors: (
+      ?workspace_id: String,
+      ?alias: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAnomalyDetectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnomalyDetectorsResponse
+
     interface _ListRuleGroupsNamespacesResponse
       include Smithy::Client::_Response[Types::ListRuleGroupsNamespacesOutput]
       def rule_groups_namespaces: () -> Array[Types::RuleGroupsNamespaceSummary]?
@@ -351,6 +427,37 @@ module Aws::Amp
       ?data: String,
       ?client_token: String
     ) -> _PutAlertManagerDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAlertManagerDefinitionResponse
+
+    interface _PutAnomalyDetectorResponse
+      include Smithy::Client::_Response[Types::PutAnomalyDetectorResponse]
+      def anomaly_detector_id: () -> String?
+      def arn: () -> String?
+      def status: () -> Types::AnomalyDetectorStatus?
+      def tags: () -> Hash[String, String]?
+    end
+    def put_anomaly_detector: (
+      ?workspace_id: String,
+      ?anomaly_detector_id: String,
+      ?evaluation_interval_in_seconds: Integer,
+      ?missing_data_action: {
+        mark_as_anomaly: bool,
+        skip: untyped
+      },
+      ?configuration: {
+        random_cut_forest: {
+          query: String,
+          shingle_size: Integer,
+          sample_size: untyped,
+          ignore_near_expected_from_above: {
+            amount: Float,
+            ratio: untyped
+          },
+          ignore_near_expected_from_below: untyped
+        }
+      },
+      ?labels: Hash[String, String],
+      ?client_token: String
+    ) -> _PutAnomalyDetectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAnomalyDetectorResponse
 
     interface _PutResourcePolicyResponse
       include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
@@ -439,13 +546,23 @@ module Aws::Amp
       ?destination: {
         amp_configuration: {
           workspace_arn: String
+        },
+        cloud_watch_configuration: {
+          dataset_arn: String
         }
       },
       ?role_configuration: {
         source_role_arn: String,
         target_role_arn: untyped
       },
-      ?client_token: String
+      ?client_token: String,
+      ?exporters: Array[
+        {
+          open_search_configuration: {
+            domain_arn: String
+          }
+        }
+      ]
     ) -> _UpdateScraperResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScraperResponse
 
     interface _UpdateScraperLoggingConfigurationResponse
@@ -493,7 +610,9 @@ module Aws::Amp
           label_set: Hash[String, String]
         }
       ],
-      ?retention_period_in_days: Integer
+      ?retention_period_in_days: Integer,
+      ?out_of_order_time_window_in_seconds: Integer,
+      ?rule_query_offset_in_seconds: Integer
     ) -> _UpdateWorkspaceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceConfigurationResponse
   end
 end

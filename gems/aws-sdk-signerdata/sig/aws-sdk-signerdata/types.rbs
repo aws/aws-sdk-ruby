@@ -1,0 +1,86 @@
+module Aws::SignerData
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class GetRevocationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signature_timestamp: Time,
+        ?platform_id: String,
+        ?profile_version_arn: String,
+        ?job_arn: String,
+        ?certificate_hashes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signature_timestamp: Time?
+      attr_accessor platform_id: String?
+      attr_accessor profile_version_arn: String?
+      attr_accessor job_arn: String?
+      attr_accessor certificate_hashes: Array[String]?
+    end
+
+    class GetRevocationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revoked_entities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revoked_entities: Array[String]?
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+  end
+end

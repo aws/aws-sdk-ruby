@@ -62,23 +62,101 @@ module Aws::Invoicing
       ?description: String,
       ?tax_inheritance_disabled: bool,
       ?rule: {
-        linked_accounts: Array[String]
+        linked_accounts: Array[String],
+        bill_source_accounts: untyped
       },
       ?resource_tags: Array[
         {
           key: String,
           value: String
         }
-      ]
+      ],
+      ?client_token: String
     ) -> _CreateInvoiceUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInvoiceUnitResponse
+
+    interface _CreateProcurementPortalPreferenceResponse
+      include Smithy::Client::_Response[Types::CreateProcurementPortalPreferenceResponse]
+      def procurement_portal_preference_arn: () -> String?
+    end
+    def create_procurement_portal_preference: (
+      ?procurement_portal_name: String,
+      ?buyer_domain: String,
+      ?buyer_identifier: String,
+      ?supplier_domain: String,
+      ?supplier_identifier: String,
+      ?selector: {
+        invoice_unit_arns: Array[String],
+        seller_of_records: Array[String]
+      },
+      ?procurement_portal_shared_secret: String,
+      ?procurement_portal_instance_endpoint: String,
+      ?test_env_preference: {
+        buyer_domain: String,
+        buyer_identifier: String,
+        supplier_domain: String,
+        supplier_identifier: untyped,
+        procurement_portal_shared_secret: untyped,
+        procurement_portal_instance_endpoint: untyped
+      },
+      ?einvoice_delivery_enabled: bool,
+      ?einvoice_delivery_preference: {
+        einvoice_delivery_document_types: Array[String],
+        einvoice_delivery_attachment_types: Array[String],
+        protocol: String,
+        purchase_order_data_sources: Array[
+          {
+            einvoice_delivery_document_type: String,
+            purchase_order_data_source_type: String
+          }
+        ],
+        connection_testing_method: String,
+        einvoice_delivery_activation_date: Time
+      },
+      ?purchase_order_retrieval_enabled: bool,
+      ?marketplace_punch_out_enabled: bool,
+      ?marketplace_punch_out_preference: {
+        approval_request_redirect_url: String
+      },
+      ?contacts: Array[
+        {
+          name: String,
+          email: String
+        }
+      ],
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateProcurementPortalPreferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProcurementPortalPreferenceResponse
 
     interface _DeleteInvoiceUnitResponse
       include Smithy::Client::_Response[Types::DeleteInvoiceUnitResponse]
       def invoice_unit_arn: () -> String?
     end
     def delete_invoice_unit: (
-      ?invoice_unit_arn: String
+      ?invoice_unit_arn: String,
+      ?client_token: String
     ) -> _DeleteInvoiceUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInvoiceUnitResponse
+
+    interface _DeleteProcurementPortalPreferenceResponse
+      include Smithy::Client::_Response[Types::DeleteProcurementPortalPreferenceResponse]
+      def procurement_portal_preference_arn: () -> String?
+    end
+    def delete_procurement_portal_preference: (
+      ?procurement_portal_preference_arn: String,
+      ?client_token: String
+    ) -> _DeleteProcurementPortalPreferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProcurementPortalPreferenceResponse
+
+    interface _GetInvoicePDFResponse
+      include Smithy::Client::_Response[Types::GetInvoicePDFResponse]
+      def invoice_pdf: () -> Types::InvoicePDF?
+    end
+    def get_invoice_pdf: (
+      ?invoice_id: String
+    ) -> _GetInvoicePDFResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvoicePDFResponse
 
     interface _GetInvoiceUnitResponse
       include Smithy::Client::_Response[Types::GetInvoiceUnitResponse]
@@ -94,6 +172,14 @@ module Aws::Invoicing
       ?invoice_unit_arn: String,
       ?as_of: Time
     ) -> _GetInvoiceUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInvoiceUnitResponse
+
+    interface _GetProcurementPortalPreferenceResponse
+      include Smithy::Client::_Response[Types::GetProcurementPortalPreferenceResponse]
+      def procurement_portal_preference: () -> Types::ProcurementPortalPreference?
+    end
+    def get_procurement_portal_preference: (
+      ?procurement_portal_preference_arn: String
+    ) -> _GetProcurementPortalPreferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProcurementPortalPreferenceResponse
 
     interface _ListInvoiceSummariesResponse
       include Smithy::Client::_Response[Types::ListInvoiceSummariesResponse]
@@ -114,7 +200,8 @@ module Aws::Invoicing
           month: Integer,
           year: Integer
         },
-        invoicing_entity: String
+        invoicing_entity: String,
+        receiver_role: String
       },
       ?next_token: String,
       ?max_results: Integer
@@ -129,12 +216,44 @@ module Aws::Invoicing
       ?filters: {
         names: Array[String],
         invoice_receivers: Array[String],
-        accounts: untyped
+        accounts: untyped,
+        bill_source_accounts: untyped
       },
       ?next_token: String,
       ?max_results: Integer,
       ?as_of: Time
     ) -> _ListInvoiceUnitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvoiceUnitsResponse
+
+    interface _ListProcurementPortalPreferencesResponse
+      include Smithy::Client::_Response[Types::ListProcurementPortalPreferencesResponse]
+      def procurement_portal_preferences: () -> Array[Types::ProcurementPortalPreferenceSummary]?
+      def next_token: () -> String?
+    end
+    def list_procurement_portal_preferences: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProcurementPortalPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProcurementPortalPreferencesResponse
+
+    interface _ListProcurementPortalSuppliersResponse
+      include Smithy::Client::_Response[Types::ListProcurementPortalSuppliersResponse]
+      def procurement_portal_suppliers: () -> Array[Types::ProcurementPortalSupplier]?
+      def next_token: () -> String?
+    end
+    def list_procurement_portal_suppliers: (
+      ?portal_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProcurementPortalSuppliersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProcurementPortalSuppliersResponse
+
+    interface _ListProcurementPortalsResponse
+      include Smithy::Client::_Response[Types::ListProcurementPortalsResponse]
+      def procurement_portals: () -> Array[Types::ProcurementPortal]?
+      def next_token: () -> String?
+    end
+    def list_procurement_portals: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProcurementPortalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProcurementPortalsResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
@@ -143,6 +262,63 @@ module Aws::Invoicing
     def list_tags_for_resource: (
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutProcurementPortalPreferenceResponse
+      include Smithy::Client::_Response[Types::PutProcurementPortalPreferenceResponse]
+      def procurement_portal_preference_arn: () -> String?
+    end
+    def put_procurement_portal_preference: (
+      ?procurement_portal_preference_arn: String,
+      ?selector: {
+        invoice_unit_arns: Array[String],
+        seller_of_records: Array[String]
+      },
+      ?procurement_portal_shared_secret: String,
+      ?procurement_portal_instance_endpoint: String,
+      ?test_env_preference: {
+        buyer_domain: String,
+        buyer_identifier: String,
+        supplier_domain: String,
+        supplier_identifier: untyped,
+        procurement_portal_shared_secret: untyped,
+        procurement_portal_instance_endpoint: untyped
+      },
+      ?einvoice_delivery_enabled: bool,
+      ?einvoice_delivery_preference: {
+        einvoice_delivery_document_types: Array[String],
+        einvoice_delivery_attachment_types: Array[String],
+        protocol: String,
+        purchase_order_data_sources: Array[
+          {
+            einvoice_delivery_document_type: String,
+            purchase_order_data_source_type: String
+          }
+        ],
+        connection_testing_method: String,
+        einvoice_delivery_activation_date: Time
+      },
+      ?purchase_order_retrieval_enabled: bool,
+      ?marketplace_punch_out_enabled: bool,
+      ?marketplace_punch_out_preference: {
+        approval_request_redirect_url: String
+      },
+      ?contacts: Array[
+        {
+          name: String,
+          email: String
+        }
+      ],
+      ?client_token: String
+    ) -> _PutProcurementPortalPreferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProcurementPortalPreferenceResponse
+
+    interface _SendProcurementPortalValidationResponse
+      include Smithy::Client::_Response[Types::SendProcurementPortalValidationResponse]
+      def procurement_portal_preference_arn: () -> String?
+    end
+    def send_procurement_portal_validation: (
+      ?procurement_portal_preference_arn: String,
+      ?client_token: String
+    ) -> _SendProcurementPortalValidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendProcurementPortalValidationResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
@@ -174,8 +350,33 @@ module Aws::Invoicing
       ?description: String,
       ?tax_inheritance_disabled: bool,
       ?rule: {
-        linked_accounts: Array[String]
-      }
+        linked_accounts: Array[String],
+        bill_source_accounts: untyped
+      },
+      ?client_token: String
     ) -> _UpdateInvoiceUnitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInvoiceUnitResponse
+
+    interface _UpdateProcurementPortalPreferenceStatusResponse
+      include Smithy::Client::_Response[Types::UpdateProcurementPortalPreferenceStatusResponse]
+      def procurement_portal_preference_arn: () -> String?
+    end
+    def update_procurement_portal_preference_status: (
+      ?procurement_portal_preference_arn: String,
+      ?einvoice_delivery_preference_status: String,
+      ?einvoice_delivery_preference_status_reason: String,
+      ?purchase_order_retrieval_preference_status: String,
+      ?purchase_order_retrieval_preference_status_reason: String,
+      ?client_token: String
+    ) -> _UpdateProcurementPortalPreferenceStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProcurementPortalPreferenceStatusResponse
+
+    interface _VerifyProcurementPortalValidationResponse
+      include Smithy::Client::_Response[Types::VerifyProcurementPortalValidationResponse]
+      def procurement_portal_preference_arn: () -> String?
+    end
+    def verify_procurement_portal_validation: (
+      ?procurement_portal_preference_arn: String,
+      ?code: String,
+      ?client_token: String
+    ) -> _VerifyProcurementPortalValidationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyProcurementPortalValidationResponse
   end
 end

@@ -144,18 +144,18 @@ module Aws::BedrockDataAutomationRuntime
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -227,11 +227,79 @@ module Aws::BedrockDataAutomationRuntime
     #     error_message: "String",
     #     output_configuration: {
     #       s3_uri: "S3Uri", # required
-    #     }
+    #     },
+    #     job_submission_time: Time.now,
+    #     job_completion_time: Time.now,
+    #     job_duration_in_seconds: 1
     #   }
     # @return [Types::GetDataAutomationStatusResponse]
     def get_data_automation_status(params = {}, options = {})
       request = build_request(:get_data_automation_status, params)
+      request.send_request(options)
+    end
+
+    # Sync API: Invoke data automation.
+    # @param [Hash, Types::InvokeDataAutomationRequest] params
+    # @option params [Types::SyncInputConfiguration] :input_configuration
+    #   Input configuration.
+    # @option params [Types::DataAutomationConfiguration] :data_automation_configuration
+    #   Data automation configuration.
+    # @option params [Array<Types::Blueprint>] :blueprints
+    #   Blueprint list.
+    # @option params [String] :data_automation_profile_arn
+    #   Data automation profile ARN
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Encryption configuration.
+    # @option params [Types::OutputConfiguration] :output_configuration
+    #   Output configuration.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     input_configuration: { # required
+    #       bytes: "data",
+    #       s3_uri: "S3Uri"
+    #     },
+    #     data_automation_configuration: {
+    #       data_automation_project_arn: "DataAutomationArn", # required
+    #       stage: "LIVE" # One of: ["LIVE", "DEVELOPMENT"]
+    #     },
+    #     blueprints: [
+    #       {
+    #         blueprint_arn: "BlueprintArn", # required
+    #         version: "BlueprintVersion",
+    #         stage: "DEVELOPMENT" # One of: ["DEVELOPMENT", "LIVE"]
+    #       }
+    #     ],
+    #     data_automation_profile_arn: "DataAutomationProfileArn", # required
+    #     encryption_configuration: {
+    #       kms_key_id: "KMSKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue"
+    #       }
+    #     },
+    #     output_configuration: {
+    #       s3_uri: "S3Uri", # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.invoke_data_automation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     output_configuration: {
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     semantic_modality: "DOCUMENT" # One of: ["DOCUMENT", "IMAGE", "AUDIO", "VIDEO"], # required
+    #     output_segments: [
+    #       {
+    #         custom_output_status: "MATCH" # One of: ["MATCH", "NO_MATCH"],
+    #         custom_output: "String",
+    #         standard_output: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::InvokeDataAutomationResponse]
+    def invoke_data_automation(params = {}, options = {})
+      request = build_request(:invoke_data_automation, params)
       request.send_request(options)
     end
 

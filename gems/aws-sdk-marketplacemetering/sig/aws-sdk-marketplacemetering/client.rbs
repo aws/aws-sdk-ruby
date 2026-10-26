@@ -67,7 +67,8 @@ module Aws::MarketplaceMetering
               ]
             }
           ],
-          customer_aws_account_id: String
+          customer_aws_account_id: String,
+          license_arn: String
         }
       ],
       ?product_code: String
@@ -93,7 +94,8 @@ module Aws::MarketplaceMetering
             }
           ]
         }
-      ]
+      ],
+      ?client_token: String
     ) -> _MeterUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MeterUsageResponse
 
     interface _RegisterUsageResponse
@@ -112,6 +114,8 @@ module Aws::MarketplaceMetering
       def customer_identifier: () -> String?
       def product_code: () -> String?
       def customer_aws_account_id: () -> String?
+      def license_arn: () -> String?
+      def metadata: () -> Types::Metadata?
     end
     def resolve_customer: (
       ?registration_token: String

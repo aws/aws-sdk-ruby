@@ -44,6 +44,39 @@ module Aws::HealthLake
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _CreateDataTransformationProfileResponse
+      include Smithy::Client::_Response[Types::CreateDataTransformationProfileResponse]
+      def profile_id: () -> String?
+      def version: () -> Integer?
+      def source_format: () -> String?
+      def target_format: () -> String?
+      def profile_name: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def create_data_transformation_profile: (
+      ?source_format: String,
+      ?source: {
+        starter_profile: {
+          starter_profile_name: String
+        },
+        existing_versioned_profile_id: {
+          profile_id: untyped,
+          version: Integer
+        },
+        profile_mapping: {
+          profile_mapping: Hash[String, String]
+        },
+        sample_data: {
+          s3_uri: String
+        }
+      },
+      ?kms_key_id: String,
+      ?profile_description: String,
+      ?profile_name: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateDataTransformationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataTransformationProfileResponse
+
     interface _CreateFHIRDatastoreResponse
       include Smithy::Client::_Response[Types::CreateFHIRDatastoreResponse]
       def datastore_id: () -> String?
@@ -75,8 +108,33 @@ module Aws::HealthLake
         fine_grained_authorization_enabled: bool,
         metadata: String,
         idp_lambda_arn: String
+      },
+      ?analytics_configuration: {
+        status: String
+      },
+      ?nlp_configuration: {
+        status: String
+      },
+      ?profile_configuration: {
+        default_profiles: Array[String]
+      },
+      ?backup_configuration: {
+        status: String,
+        backup_type: String,
+        retention_period_in_days: Integer,
+        backup_tags_enabled: bool
       }
     ) -> _CreateFHIRDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFHIRDatastoreResponse
+
+    interface _DeleteDataTransformationProfileResponse
+      include Smithy::Client::_Response[Types::DeleteDataTransformationProfileResponse]
+      def profile_id: () -> String?
+      def profile_name: () -> String?
+      def deletion_time: () -> Time?
+    end
+    def delete_data_transformation_profile: (
+      ?profile_id: String
+    ) -> _DeleteDataTransformationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataTransformationProfileResponse
 
     interface _DeleteFHIRDatastoreResponse
       include Smithy::Client::_Response[Types::DeleteFHIRDatastoreResponse]
@@ -88,6 +146,14 @@ module Aws::HealthLake
     def delete_fhir_datastore: (
       ?datastore_id: String
     ) -> _DeleteFHIRDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFHIRDatastoreResponse
+
+    interface _DescribeDataTransformationJobResponse
+      include Smithy::Client::_Response[Types::DescribeDataTransformationJobResponse]
+      def transformation_job_properties: () -> Types::TransformationJobProperties?
+    end
+    def describe_data_transformation_job: (
+      ?job_id: String
+    ) -> _DescribeDataTransformationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataTransformationJobResponse
 
     interface _DescribeFHIRDatastoreResponse
       include Smithy::Client::_Response[Types::DescribeFHIRDatastoreResponse]
@@ -114,6 +180,59 @@ module Aws::HealthLake
       ?datastore_id: String,
       ?job_id: String
     ) -> _DescribeFHIRImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFHIRImportJobResponse
+
+    interface _GetDataTransformationProfileResponse
+      include Smithy::Client::_Response[Types::GetDataTransformationProfileResponse]
+      def profile_id: () -> String?
+      def version: () -> Integer?
+      def source_format: () -> String?
+      def target_format: () -> String?
+      def profile_mapping: () -> Hash[String, String]?
+      def profile_name: () -> String?
+      def profile_description: () -> String?
+      def change_description: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def get_data_transformation_profile: (
+      ?profile_id: String,
+      ?profile_version: Integer
+    ) -> _GetDataTransformationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataTransformationProfileResponse
+
+    interface _ListDataTransformationJobsResponse
+      include Smithy::Client::_Response[Types::ListDataTransformationJobsResponse]
+      def items: () -> Array[Types::TransformationJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_transformation_jobs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?job_status: String,
+      ?job_name: String,
+      ?submitted_after: Time,
+      ?submitted_before: Time
+    ) -> _ListDataTransformationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataTransformationJobsResponse
+
+    interface _ListDataTransformationProfileVersionsResponse
+      include Smithy::Client::_Response[Types::ListDataTransformationProfileVersionsResponse]
+      def items: () -> Array[Types::DataTransformationProfileVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_transformation_profile_versions: (
+      ?profile_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataTransformationProfileVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataTransformationProfileVersionsResponse
+
+    interface _ListDataTransformationProfilesResponse
+      include Smithy::Client::_Response[Types::ListDataTransformationProfilesResponse]
+      def items: () -> Array[Types::DataTransformationProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_transformation_profiles: (
+      ?source_format: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataTransformationProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataTransformationProfilesResponse
 
     interface _ListFHIRDatastoresResponse
       include Smithy::Client::_Response[Types::ListFHIRDatastoresResponse]
@@ -169,6 +288,91 @@ module Aws::HealthLake
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _PublishDataTransformationProfileResponse
+      include Smithy::Client::_Response[Types::PublishDataTransformationProfileResponse]
+      def profile_id: () -> String?
+      def version: () -> Integer?
+      def source_format: () -> String?
+      def target_format: () -> String?
+      def profile_name: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def publish_data_transformation_profile: (
+      ?profile_id: String,
+      ?source_format: String,
+      ?from_existing_version: Integer,
+      ?change_description: String
+    ) -> _PublishDataTransformationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishDataTransformationProfileResponse
+
+    interface _RestoreFHIRDatastoreResponse
+      include Smithy::Client::_Response[Types::RestoreFHIRDatastoreResponse]
+      def datastore_id: () -> String?
+      def datastore_arn: () -> String?
+      def datastore_status: () -> String?
+      def datastore_endpoint: () -> String?
+    end
+    def restore_fhir_datastore: (
+      ?source_datastore_id: String,
+      ?restore_configuration: {
+        continuous_backup_restore_configuration: {
+          restore_point_time: Time
+        }
+      },
+      ?datastore_name: String,
+      ?sse_configuration: {
+        kms_encryption_config: {
+          cmk_type: String,
+          kms_key_id: String
+        }
+      },
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?identity_provider_configuration: {
+        authorization_strategy: String,
+        fine_grained_authorization_enabled: bool,
+        metadata: String,
+        idp_lambda_arn: String
+      },
+      ?analytics_configuration: {
+        status: String
+      },
+      ?nlp_configuration: {
+        status: String
+      },
+      ?profile_configuration: {
+        default_profiles: Array[String]
+      }
+    ) -> _RestoreFHIRDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreFHIRDatastoreResponse
+
+    interface _StartDataTransformationJobResponse
+      include Smithy::Client::_Response[Types::StartDataTransformationJobResponse]
+      def job_id: () -> String?
+      def job_status: () -> String?
+    end
+    def start_data_transformation_job: (
+      ?input_data_config: {
+        s3_uri: String,
+        source_format: String
+      },
+      ?output_data_config: {
+        s3_configuration: {
+          s3_uri: String,
+          kms_key_id: String
+        }
+      },
+      ?data_access_role_arn: String,
+      ?client_token: String,
+      ?job_name: String,
+      ?profile_id: String,
+      ?drift_detection_enabled: bool,
+      ?provenance_enabled: bool
+    ) -> _StartDataTransformationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDataTransformationJobResponse
+
     interface _StartFHIRExportJobResponse
       include Smithy::Client::_Response[Types::StartFHIRExportJobResponse]
       def job_id: () -> String?
@@ -208,7 +412,11 @@ module Aws::HealthLake
       ?datastore_id: String,
       ?data_access_role_arn: String,
       ?client_token: String,
-      ?validation_level: String
+      ?validation_level: String,
+      ?profile_id: String,
+      ?input_format: String,
+      ?drift_detection_enabled: bool,
+      ?provenance_enabled: bool
     ) -> _StartFHIRImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFHIRImportJobResponse
 
     interface _TagResourceResponse
@@ -231,5 +439,64 @@ module Aws::HealthLake
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDataTransformationProfileResponse
+      include Smithy::Client::_Response[Types::UpdateDataTransformationProfileResponse]
+      def profile_id: () -> String?
+      def source_format: () -> String?
+      def target_format: () -> String?
+      def profile_name: () -> String?
+      def last_updated_at: () -> Time?
+    end
+    def update_data_transformation_profile: (
+      ?profile_id: String,
+      ?profile_mapping: Hash[String, String],
+      ?change_description: String
+    ) -> _UpdateDataTransformationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataTransformationProfileResponse
+
+    interface _UpdateFHIRDatastoreResponse
+      include Smithy::Client::_Response[Types::UpdateFHIRDatastoreResponse]
+      def datastore_properties: () -> Types::DatastoreProperties?
+    end
+    def update_fhir_datastore: (
+      ?datastore_id: String,
+      ?datastore_name: String,
+      ?analytics_configuration: {
+        status: String
+      },
+      ?nlp_configuration: {
+        status: String
+      },
+      ?profile_configuration: {
+        default_profiles: Array[String]
+      },
+      ?identity_provider_configuration: {
+        authorization_strategy: String,
+        fine_grained_authorization_enabled: bool,
+        metadata: String,
+        idp_lambda_arn: String
+      },
+      ?backup_configuration: {
+        status: String,
+        backup_type: String,
+        retention_period_in_days: Integer,
+        backup_tags_enabled: bool
+      }
+    ) -> _UpdateFHIRDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFHIRDatastoreResponse
+
+    interface _UpdateProfileWithAgentResponse
+      include Smithy::Client::_Response[Types::UpdateProfileWithAgentResponse]
+      def agent_response: () -> Types::AgentOutputMessage?
+      def conversation_id: () -> String?
+    end
+    def update_profile_with_agent: (
+      ?profile_id: String,
+      ?source_format: String,
+      ?input_message: {
+        body: String,
+        type: String
+      },
+      ?conversation_id: String
+    ) -> _UpdateProfileWithAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProfileWithAgentResponse
   end
 end

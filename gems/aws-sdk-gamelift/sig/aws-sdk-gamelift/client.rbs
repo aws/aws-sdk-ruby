@@ -156,7 +156,8 @@ module Aws::GameLift
           key: String,
           value: String
         }
-      ]
+      ],
+      ?player_gateway_mode: String
     ) -> _CreateContainerFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContainerFleetResponse
 
     interface _CreateContainerGroupDefinitionResponse
@@ -199,7 +200,11 @@ module Aws::GameLift
             }
           ]
         },
-        server_sdk_version: String
+        server_sdk_version: String,
+        linux_capabilities: {
+          include: Array[String]
+        },
+        vcpu: Float
       },
       ?support_container_definitions: Array[
         {
@@ -242,7 +247,10 @@ module Aws::GameLift
               }
             ]
           },
-          vcpu: Float
+          vcpu: Float,
+          linux_capabilities: {
+            include: Array[String]
+          }
         }
       ],
       ?operating_system: String,
@@ -316,7 +324,11 @@ module Aws::GameLift
       ?anywhere_configuration: {
         cost: String
       },
-      ?instance_role_credentials_provider: String
+      ?instance_role_credentials_provider: String,
+      ?player_gateway_mode: String,
+      ?player_gateway_configuration: {
+        game_server_ip_protocol_supported: String
+      }
     ) -> _CreateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetResponse
 
     interface _CreateFleetLocationsResponse
@@ -528,7 +540,8 @@ module Aws::GameLift
           key: String,
           value: String
         }
-      ]
+      ],
+      ?node_js_version: String
     ) -> _CreateScriptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScriptResponse
 
     interface _CreateVpcPeeringAuthorizationResponse
@@ -722,6 +735,25 @@ module Aws::GameLift
       ?name: String,
       ?version_number: Integer
     ) -> _DescribeContainerGroupDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContainerGroupDefinitionResponse
+
+    interface _DescribeContainerGroupPortMappingsResponse
+      include Smithy::Client::_Response[Types::DescribeContainerGroupPortMappingsOutput]
+      def fleet_id: () -> String?
+      def fleet_arn: () -> String?
+      def location: () -> String?
+      def container_group_definition_arn: () -> String?
+      def container_group_type: () -> String?
+      def compute_name: () -> String?
+      def instance_id: () -> String?
+      def container_group_port_mappings: () -> Array[Types::ContainerGroupPortMapping]?
+    end
+    def describe_container_group_port_mappings: (
+      ?fleet_id: String,
+      ?container_group_type: String,
+      ?compute_name: String,
+      ?instance_id: String,
+      ?container_name: String
+    ) -> _DescribeContainerGroupPortMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContainerGroupPortMappingsResponse
 
     interface _DescribeEC2InstanceLimitsResponse
       include Smithy::Client::_Response[Types::DescribeEC2InstanceLimitsOutput]
@@ -1057,6 +1089,16 @@ module Aws::GameLift
       ?fleet_id: String,
       ?instance_id: String
     ) -> _GetInstanceAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceAccessResponse
+
+    interface _GetPlayerConnectionDetailsResponse
+      include Smithy::Client::_Response[Types::GetPlayerConnectionDetailsOutput]
+      def game_session_id: () -> String?
+      def player_connection_details: () -> Array[Types::PlayerConnectionDetail]?
+    end
+    def get_player_connection_details: (
+      ?game_session_id: String,
+      ?player_ids: Array[String]
+    ) -> _GetPlayerConnectionDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPlayerConnectionDetailsResponse
 
     interface _ListAliasesResponse
       include Smithy::Client::_Response[Types::ListAliasesOutput]
@@ -1559,7 +1601,11 @@ module Aws::GameLift
             }
           ]
         },
-        server_sdk_version: String
+        server_sdk_version: String,
+        linux_capabilities: {
+          include: Array[String]
+        },
+        vcpu: Float
       },
       ?support_container_definitions: Array[
         {
@@ -1602,14 +1648,18 @@ module Aws::GameLift
               }
             ]
           },
-          vcpu: Float
+          vcpu: Float,
+          linux_capabilities: {
+            include: Array[String]
+          }
         }
       ],
       ?total_memory_limit_mebibytes: Integer,
       ?total_vcpu_limit: Float,
       ?version_description: String,
       ?source_version_number: Integer,
-      ?operating_system: String
+      ?operating_system: String,
+      ?remove_attributes: Array[String]
     ) -> _UpdateContainerGroupDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContainerGroupDefinitionResponse
 
     interface _UpdateFleetAttributesResponse
@@ -1637,13 +1687,18 @@ module Aws::GameLift
       def fleet_id: () -> String?
       def fleet_arn: () -> String?
       def location: () -> String?
+      def managed_capacity_configuration: () -> Types::ManagedCapacityConfiguration?
     end
     def update_fleet_capacity: (
       ?fleet_id: String,
       ?desired_instances: Integer,
       ?min_size: Integer,
       ?max_size: Integer,
-      ?location: String
+      ?location: String,
+      ?managed_capacity_configuration: {
+        zero_capacity_strategy: String,
+        scale_in_after_inactivity_minutes: Integer
+      }
     ) -> _UpdateFleetCapacityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFleetCapacityResponse
 
     interface _UpdateFleetPortSettingsResponse

@@ -483,6 +483,10 @@ module Aws::Lightsail
     # @!attribute notification_enabled
     #   <p>Indicates whether the alarm is enabled.</p>
     #   @return [Boolean]
+    # @!attribute tags
+    #   <p>The tag keys and optional values for the resource. For more information about tags in
+    #         Lightsail, see the <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags">Amazon Lightsail Developer Guide</a>.</p>
+    #   @return [Array<Types::Tag>]
     class Alarm < Struct.new(
       nil,
       :name,
@@ -505,6 +509,7 @@ module Aws::Lightsail
       :contact_protocols,
       :notification_triggers,
       :notification_enabled,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -973,6 +978,9 @@ module Aws::Lightsail
     # @!attribute access_log_config
     #   <p>An object that describes the access log configuration for the bucket.</p>
     #   @return [Types::BucketAccessLogConfig]
+    # @!attribute cors
+    #   <p>An array of cross-origin resource sharing (CORS) rules that identify origins and the HTTP methods that can be executed on your bucket. This field is only included in the response when CORS configuration is requested or when updating CORS configuration. For more information, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html">Configuring cross-origin resource sharing (CORS)</a>.</p>
+    #   @return [Types::BucketCorsConfig]
     class Bucket < Struct.new(
       nil,
       :resource_type,
@@ -991,6 +999,7 @@ module Aws::Lightsail
       :resources_receiving_access,
       :state,
       :access_log_config,
+      :cors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1064,6 +1073,74 @@ module Aws::Lightsail
       :storage_per_month_in_gb,
       :transfer_per_month_in_gb,
       :is_active,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes the cross-origin resource sharing (CORS) configuration for a Lightsail bucket. CORS defines a way for client web applications that are loaded in one domain to interact with resources in a different domain.
+    #         For more information, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html">Configuring cross-origin resource sharing (CORS)</a>.</p>
+    # @!attribute rules
+    #   <p>A set of origins and methods (cross-origin access that you want to allow). You can add up to 20 rules to the configuration. The total size is limited to 64 KB.</p>
+    #   @return [Array<Types::BucketCorsRule>]
+    class BucketCorsConfig < Struct.new(
+      nil,
+      :rules,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes a cross-origin resource sharing (CORS) rule for a Lightsail bucket. CORS rules specify which origins are allowed to access the bucket, which HTTP methods are allowed, and other access control information. For more information, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html">Configuring cross-origin resource sharing (CORS)</a>.</p>
+    # @!attribute id
+    #   <p>A unique identifier for the CORS rule. The ID value can be up to 255 characters long. The IDs help you find a rule in the configuration.</p>
+    #   @return [String]
+    # @!attribute allowed_methods
+    #   <p>The HTTP methods that are allowed when accessing the bucket from the specified origin. Each CORS rule must identify at least one origin and one method.</p>
+    #            <p>You can use the following HTTP methods:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>GET</code> - Retrieves data from the server, such as downloading files or viewing content.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PUT</code> - Uploads or replaces data on the server, such as uploading new files.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>POST</code> - Sends data to the server for processing, such as submitting forms or creating new resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DELETE</code> - Removes data from the server, such as deleting files or resources.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HEAD</code> - Retrieves only the headers from the server without the actual content, useful for checking if a resource exists.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    # @!attribute allowed_origins
+    #   <p>One or more origins you want customers to be able to access the bucket from. Each CORS rule must identify at least one origin and one method.</p>
+    #   @return [Array<String>]
+    # @!attribute allowed_headers
+    #   <p>Headers that are specified in the <code>Access-Control-Request-Headers</code> header. These headers are allowed in a preflight <code>OPTIONS</code> request. In response to any preflight <code>OPTIONS</code> request, Amazon S3 returns any requested headers that are allowed.</p>
+    #   @return [Array<String>]
+    # @!attribute expose_headers
+    #   <p>One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p>
+    #   @return [Array<String>]
+    # @!attribute max_age_seconds
+    #   <p>The time in seconds that your browser is to cache the preflight response for the specified resource. A CORS rule can have only one <code>maxAgeSeconds</code> element.</p>
+    #   @return [Integer]
+    class BucketCorsRule < Struct.new(
+      nil,
+      :id,
+      :allowed_methods,
+      :allowed_origins,
+      :allowed_headers,
+      :expose_headers,
+      :max_age_seconds,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1732,6 +1809,10 @@ module Aws::Lightsail
     #         your Lightsail contact method. This code enables our support team to look up your
     #         Lightsail information more easily.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>The tag keys and optional values for the resource. For more information about tags in
+    #         Lightsail, see the <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags">Amazon Lightsail Developer Guide</a>.</p>
+    #   @return [Array<Types::Tag>]
     class ContactMethod < Struct.new(
       nil,
       :contact_endpoint,
@@ -1743,6 +1824,7 @@ module Aws::Lightsail
       :location,
       :resource_type,
       :support_code,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2622,10 +2704,15 @@ module Aws::Lightsail
     #         and the country code. For example, a U.S. phone number in E.164 format would be specified as
     #         +1XXX5550100. For more information, see <a href="https://en.wikipedia.org/wiki/E.164">E.164</a> on <i>Wikipedia</i>.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>The tag keys and optional values to add to the contact method during create.</p>
+    #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
+    #   @return [Array<Types::Tag>]
     class CreateContactMethodRequest < Struct.new(
       nil,
       :protocol,
       :contact_endpoint,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3043,6 +3130,28 @@ module Aws::Lightsail
     # @!attribute viewer_minimum_tls_protocol_version
     #   <p>The minimum TLS protocol version for the SSL/TLS certificate.</p>
     #   @return [String]
+    # @!attribute enable_private_origin_access
+    #   <p>Specifies whether to enable private origin access for the distribution. With private
+    #         origin access, the distribution can serve objects that aren't publicly accessible from a
+    #         Lightsail bucket.</p>
+    #            <p>Lightsail grants the distribution permission to read the bucket's objects. Enabling
+    #         private origin access doesn't change the bucket's access settings, and you can still
+    #         retrieve publicly accessible objects directly from the bucket's endpoint.</p>
+    #            <note>
+    #               <p>You can enable private origin access only when the distribution's origin is a
+    #           Lightsail bucket. If the origin is another resource type, the request fails.</p>
+    #            </note>
+    #   @return [Boolean]
+    # @!attribute default_root_object
+    #   <p>The object (for example, <code>index.html</code>) that the distribution returns when a
+    #         viewer requests the root URL of the distribution (<code>/</code>) instead of a specific
+    #         object. The object that you specify must be available from the origin.</p>
+    #   @return [String]
+    # @!attribute custom_error_responses
+    #   <p>An array of objects that describe the custom error responses for the distribution. With a
+    #         custom error response, you can specify the page to return when the origin responds with a
+    #         given HTTP error code. You can also specify the HTTP status code to send to the viewer.</p>
+    #   @return [Array<Types::DistributionCustomErrorResponse>]
     class CreateDistributionRequest < Struct.new(
       nil,
       :distribution_name,
@@ -3055,6 +3164,9 @@ module Aws::Lightsail
       :tags,
       :certificate_name,
       :viewer_minimum_tls_protocol_version,
+      :enable_private_origin_access,
+      :default_root_object,
+      :custom_error_responses,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4949,6 +5061,38 @@ module Aws::Lightsail
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes a custom error response for a Lightsail distribution. A custom error response
+    #       specifies the page that the distribution returns to the viewer. It also specifies the HTTP
+    #       status code that the distribution sends when the origin responds with a given HTTP error code.</p>
+    # @!attribute error_code
+    #   <p>The HTTP error code from the origin that triggers the custom error response (for example,
+    #         <code>403</code> or <code>404</code>).</p>
+    #   @return [Integer]
+    # @!attribute response_code
+    #   <p>The HTTP status code that the distribution returns to the viewer for the custom error
+    #         response.</p>
+    #   @return [String]
+    # @!attribute response_page_path
+    #   <p>The path to the custom error page that the distribution returns to the viewer (for
+    #         example, <code>/404.html</code>). The path must begin with a forward slash (<code>/</code>)
+    #         and reference an object that is available from the origin.</p>
+    #   @return [String]
+    # @!attribute error_caching_min_ttl
+    #   <p>The minimum time, in seconds, that the distribution caches the custom error response
+    #         before requesting the object again from the origin. If you don't specify a value, the default
+    #         is <code>10</code> seconds.</p>
+    #   @return [Integer]
+    class DistributionCustomErrorResponse < Struct.new(
+      nil,
+      :error_code,
+      :response_code,
+      :response_page_path,
+      :error_caching_min_ttl,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes the creation state of the canonical name (CNAME) records that are automatically
     #       added by Amazon Lightsail to the DNS of a domain to validate domain ownership for
     #       an SSL/TLS certificate.</p>
@@ -5700,11 +5844,18 @@ module Aws::Lightsail
     #         access to the bucket using the <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html">SetResourceAccessForBucket</a>
     #         action.</p>
     #   @return [Boolean]
+    # @!attribute include_cors
+    #   <p>A Boolean value that indicates whether to include Lightsail bucket CORS configuration in the response. For more information, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html">Configuring cross-origin resource sharing (CORS)</a>.</p>
+    #            <note>
+    #               <p>This parameter is only supported when getting a single bucket with <code>bucketName</code> specified. The default value for this parameter is <code>False</code>.</p>
+    #            </note>
+    #   @return [Boolean]
     class GetBucketsRequest < Struct.new(
       nil,
       :bucket_name,
       :page_token,
       :include_connected_resources,
+      :include_cors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7631,6 +7782,44 @@ module Aws::Lightsail
       include ::Smithy::Schema::Structure
     end
 
+    class GetProfileRequest < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute profile_type
+    #   <p>The type of the profile.</p>
+    #            <p>The following profile types are possible:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>Lightsailor</code> – The account is not enrolled in the Lightsail partner
+    #             program.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>LightsailPartner</code> – The account is enrolled in the Lightsail partner
+    #             program.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute partner
+    #   <p>An object that describes the partner membership of the account, such as the tier of the
+    #         membership, its status, and when the account was enrolled.</p>
+    #            <p>This parameter is returned only for accounts that have a <code>profileType</code> of
+    #           <code>LightsailPartner</code>.</p>
+    #   @return [Types::PartnerInfo]
+    class GetProfileResult < Struct.new(
+      nil,
+      :profile_type,
+      :partner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute include_availability_zones
     #   <p>A Boolean value indicating whether to also include Availability Zones in your get regions
     #         request. Availability Zones are indicated with a letter: <code>us-east-2a</code>.</p>
@@ -8503,12 +8692,18 @@ module Aws::Lightsail
     #         forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60
     #         seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>
     #   @return [Integer]
+    # @!attribute ip_address_type
+    #   <p>The IP address type that the distribution uses when connecting to the origin.</p>
+    #            <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,
+    #         and <code>dualstack</code> for IPv4 and IPv6.</p>
+    #   @return [String]
     class InputOrigin < Struct.new(
       nil,
       :name,
       :region_name,
       :protocol_policy,
       :response_timeout,
+      :ip_address_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9581,6 +9776,15 @@ module Aws::Lightsail
     #   <p>The minimum TLS protocol version that the distribution can use to communicate with
     #         viewers.</p>
     #   @return [String]
+    # @!attribute default_root_object
+    #   <p>The object (for example, <code>index.html</code>) that the distribution returns when a
+    #         viewer requests the root URL of the distribution (<code>/</code>) instead of a specific
+    #         object.</p>
+    #   @return [String]
+    # @!attribute custom_error_responses
+    #   <p>An array of objects that describe the custom error responses configured for the
+    #         distribution.</p>
+    #   @return [Array<Types::DistributionCustomErrorResponse>]
     class LightsailDistribution < Struct.new(
       nil,
       :name,
@@ -9604,6 +9808,8 @@ module Aws::Lightsail
       :ip_address_type,
       :tags,
       :viewer_minimum_tls_protocol_version,
+      :default_root_object,
+      :custom_error_responses,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10466,6 +10672,19 @@ module Aws::Lightsail
     #         forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60
     #         seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>
     #   @return [Integer]
+    # @!attribute ip_address_type
+    #   <p>The IP address type that the distribution uses when connecting to the origin.</p>
+    #            <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,
+    #         and <code>dualstack</code> for IPv4 and IPv6.</p>
+    #   @return [String]
+    # @!attribute is_private_origin_access_enabled
+    #   <p>Specifies whether private origin access is enabled for the distribution's origin. With
+    #         private origin access, the distribution can serve objects that aren't publicly accessible
+    #         from a Lightsail bucket.</p>
+    #            <p>This applies when you set the bucket's <code>getObject</code> access rule to
+    #         <code>private</code>. It also applies when you set <code>getObject</code> to <code>public</code>
+    #         but set individual objects to private.</p>
+    #   @return [Boolean]
     class Origin < Struct.new(
       nil,
       :name,
@@ -10473,6 +10692,42 @@ module Aws::Lightsail
       :region_name,
       :protocol_policy,
       :response_timeout,
+      :ip_address_type,
+      :is_private_origin_access_enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that contains information about the Lightsail partner program membership of an
+    #         Amazon Lightsail account.</p>
+    # @!attribute enrolled_at
+    #   <p>The timestamp when the account was enrolled in the Lightsail partner program.</p>
+    #   @return [Time]
+    # @!attribute tier_name
+    #   <p>The tier of the partner membership.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the partner membership.</p>
+    #            <p>The following statuses are possible:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>Active</code> – The membership is active, and the benefits of the current tier
+    #             are available to the account.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Suspended</code> – The membership is suspended, and the benefits of the tier are
+    #             not available to the account.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class PartnerInfo < Struct.new(
+      nil,
+      :enrolled_at,
+      :tier_name,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10894,6 +11149,10 @@ module Aws::Lightsail
     #   <p>Indicates whether the alarm is enabled.</p>
     #            <p>Notifications are enabled by default if you don't specify this parameter.</p>
     #   @return [Boolean]
+    # @!attribute tags
+    #   <p>The tag keys and optional values to add to the alarm during create.</p>
+    #            <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
+    #   @return [Array<Types::Tag>]
     class PutAlarmRequest < Struct.new(
       nil,
       :alarm_name,
@@ -10907,6 +11166,7 @@ module Aws::Lightsail
       :contact_protocols,
       :notification_triggers,
       :notification_enabled,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12573,6 +12833,12 @@ module Aws::Lightsail
     # @!attribute access_log_config
     #   <p>An object that describes the access log configuration for the bucket.</p>
     #   @return [Types::BucketAccessLogConfig]
+    # @!attribute cors
+    #   <p>Sets the cross-origin resource sharing (CORS) configuration for your bucket. If a CORS configuration exists, it is replaced with the specified configuration. For AWS CLI operations, this parameter can also be passed as a file. For more information, see <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/configure-cors.html">Configuring cross-origin resource sharing (CORS)</a>.</p>
+    #            <note>
+    #               <p>CORS information is only returned in a response when you update the CORS policy.</p>
+    #            </note>
+    #   @return [Types::BucketCorsConfig]
     class UpdateBucketRequest < Struct.new(
       nil,
       :bucket_name,
@@ -12580,6 +12846,7 @@ module Aws::Lightsail
       :versioning,
       :readonly_access_accounts,
       :access_log_config,
+      :cors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12747,6 +13014,30 @@ module Aws::Lightsail
     #            <p> Set this value to <code>false</code> to attach a new certificate to the
     #         distribution.</p>
     #   @return [Boolean]
+    # @!attribute enable_private_origin_access
+    #   <p>Specifies whether to enable private origin access for the distribution. With private
+    #         origin access, the distribution can serve objects that aren't publicly accessible from a
+    #         Lightsail bucket.</p>
+    #            <p>Lightsail grants the distribution permission to read the bucket's objects. Enabling
+    #         private origin access doesn't change the bucket's access settings, and you can still
+    #         retrieve publicly accessible objects directly from the bucket's endpoint.</p>
+    #            <note>
+    #               <p>When you include this parameter, you must also include the <code>origin</code> parameter
+    #           with the resource name, even if the origin is not changing.</p>
+    #               <p>You can enable private origin access only when the distribution's origin is a
+    #           Lightsail bucket. If the origin is another resource type, the request fails.</p>
+    #            </note>
+    #   @return [Boolean]
+    # @!attribute default_root_object
+    #   <p>The object (for example, <code>index.html</code>) that the distribution returns when a
+    #         viewer requests the root URL of the distribution (<code>/</code>) instead of a specific
+    #         object. The object that you specify must be available from the origin.</p>
+    #   @return [String]
+    # @!attribute custom_error_responses
+    #   <p>An array of objects that describe the custom error responses for the distribution. With a
+    #         custom error response, you can specify the page to return when the origin responds with a
+    #         given HTTP error code. You can also specify the HTTP status code to send to the viewer.</p>
+    #   @return [Array<Types::DistributionCustomErrorResponse>]
     class UpdateDistributionRequest < Struct.new(
       nil,
       :distribution_name,
@@ -12758,6 +13049,9 @@ module Aws::Lightsail
       :viewer_minimum_tls_protocol_version,
       :certificate_name,
       :use_default_certificate,
+      :enable_private_origin_access,
+      :default_root_object,
+      :custom_error_responses,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

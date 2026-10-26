@@ -7,12 +7,21 @@ module Aws::Backup
   module Schema
 
     ARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#ARN", name: "ARN")
+    AccessPointArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#AccessPointArn", name: "AccessPointArn", traits: {"smithy.api#pattern" => "^(arn:aws[a-z-]*:backup:[a-z-\\d]+:\\d{12}:accesspoint/)[\\da-z]{1}[\\da-z-]{1,48}[\\da-z]{1}(?<!-s3alias)(?<!-ext-s3alias)$"})
+    AccessPointMetadataMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.backup#AccessPointMetadataMap", name: "AccessPointMetadataMap", traits: {"smithy.api#sensitive" => {}})
+    AccessPointMetadataMapKeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#AccessPointMetadataMapKeyString", name: "AccessPointMetadataMapKeyString", traits: {"smithy.api#length" => {"min" => 1}})
+    AccessPointMetadataMapValueString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#AccessPointMetadataMapValueString", name: "AccessPointMetadataMapValueString", traits: {"smithy.api#length" => {"min" => 1}})
+    AccessPointName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#AccessPointName", name: "AccessPointName", traits: {"smithy.api#length" => {"min" => 3, "max" => 50}, "smithy.api#pattern" => "^[\\da-z]{1}[\\da-z-]{1,48}[\\da-z]{1}(?<!-s3alias)(?<!-ext-s3alias)$"})
+    AccessPointPolicy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#AccessPointPolicy", name: "AccessPointPolicy", traits: {"smithy.api#length" => {"min" => 1, "max" => 200000}})
+    AccessPointStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#AccessPointStatus", name: "AccessPointStatus")
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#AccountId", name: "AccountId", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     AdvancedBackupSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#AdvancedBackupSetting", name: "AdvancedBackupSetting")
     AdvancedBackupSettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#AdvancedBackupSettings", name: "AdvancedBackupSettings")
+    AggregatedScanResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#AggregatedScanResult", name: "AggregatedScanResult")
     AggregationPeriod = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#AggregationPeriod", name: "AggregationPeriod")
     AlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#AlreadyExistsException", name: "AlreadyExistsException", traits: {"smithy.api#error" => "client"})
     AssociateBackupVaultMpaApprovalTeamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#AssociateBackupVaultMpaApprovalTeamInput", name: "AssociateBackupVaultMpaApprovalTeamInput")
+    BackupAccessPoints = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#BackupAccessPoints", name: "BackupAccessPoints")
     BackupJob = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#BackupJob", name: "BackupJob")
     BackupJobChildJobsInState = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.backup#BackupJobChildJobsInState", name: "BackupJobChildJobsInState")
     BackupJobState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#BackupJobState", name: "BackupJobState")
@@ -40,11 +49,13 @@ module Aws::Backup
     BackupSelectionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#BackupSelectionName", name: "BackupSelectionName", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9\\-\\_\\.]{1,50}$"})
     BackupSelectionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#BackupSelectionsList", name: "BackupSelectionsList")
     BackupSelectionsListMember = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#BackupSelectionsListMember", name: "BackupSelectionsListMember")
+    BackupVaultArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#BackupVaultArn", name: "BackupVaultArn")
     BackupVaultEvent = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#BackupVaultEvent", name: "BackupVaultEvent")
     BackupVaultEvents = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#BackupVaultEvents", name: "BackupVaultEvents")
     BackupVaultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#BackupVaultList", name: "BackupVaultList")
     BackupVaultListMember = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#BackupVaultListMember", name: "BackupVaultListMember")
     BackupVaultName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#BackupVaultName", name: "BackupVaultName", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9\\-\\_]{2,50}$"})
+    BackupVaultNameOrWildcard = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#BackupVaultNameOrWildcard", name: "BackupVaultNameOrWildcard", traits: {"smithy.api#pattern" => "^(\\*|[a-zA-Z0-9\\-\\_]{2,50})$"})
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.backup#Boolean", name: "Boolean")
     Boolean2 = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.backup#Boolean2", name: "Boolean2", traits: {"smithy.api#default" => false})
     CalculatedLifecycle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CalculatedLifecycle", name: "CalculatedLifecycle")
@@ -72,6 +83,8 @@ module Aws::Backup
     CopyJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CopyJobSummary", name: "CopyJobSummary")
     CopyJobSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#CopyJobSummaryList", name: "CopyJobSummaryList")
     CopyJobsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#CopyJobsList", name: "CopyJobsList")
+    CreateBackupAccessPointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateBackupAccessPointRequest", name: "CreateBackupAccessPointRequest")
+    CreateBackupAccessPointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateBackupAccessPointResponse", name: "CreateBackupAccessPointResponse")
     CreateBackupPlanInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateBackupPlanInput", name: "CreateBackupPlanInput")
     CreateBackupPlanOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateBackupPlanOutput", name: "CreateBackupPlanOutput")
     CreateBackupSelectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateBackupSelectionInput", name: "CreateBackupSelectionInput")
@@ -92,8 +105,12 @@ module Aws::Backup
     CreateRestoreTestingPlanOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateRestoreTestingPlanOutput", name: "CreateRestoreTestingPlanOutput")
     CreateRestoreTestingSelectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateRestoreTestingSelectionInput", name: "CreateRestoreTestingSelectionInput")
     CreateRestoreTestingSelectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateRestoreTestingSelectionOutput", name: "CreateRestoreTestingSelectionOutput")
+    CreateTieringConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateTieringConfigurationInput", name: "CreateTieringConfigurationInput")
+    CreateTieringConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#CreateTieringConfigurationOutput", name: "CreateTieringConfigurationOutput")
+    CreatorRequestId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#CreatorRequestId", name: "CreatorRequestId")
     CronExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#CronExpression", name: "CronExpression")
     DateRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DateRange", name: "DateRange")
+    DeleteBackupAccessPointInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DeleteBackupAccessPointInput", name: "DeleteBackupAccessPointInput")
     DeleteBackupPlanInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DeleteBackupPlanInput", name: "DeleteBackupPlanInput")
     DeleteBackupPlanOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DeleteBackupPlanOutput", name: "DeleteBackupPlanOutput")
     DeleteBackupSelectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DeleteBackupSelectionInput", name: "DeleteBackupSelectionInput")
@@ -106,7 +123,11 @@ module Aws::Backup
     DeleteReportPlanInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DeleteReportPlanInput", name: "DeleteReportPlanInput")
     DeleteRestoreTestingPlanInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DeleteRestoreTestingPlanInput", name: "DeleteRestoreTestingPlanInput")
     DeleteRestoreTestingSelectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DeleteRestoreTestingSelectionInput", name: "DeleteRestoreTestingSelectionInput")
+    DeleteTieringConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DeleteTieringConfigurationInput", name: "DeleteTieringConfigurationInput")
+    DeleteTieringConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DeleteTieringConfigurationOutput", name: "DeleteTieringConfigurationOutput")
     DependencyFailureException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DependencyFailureException", name: "DependencyFailureException", traits: {"smithy.api#error" => "server"})
+    DescribeBackupAccessPointInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeBackupAccessPointInput", name: "DescribeBackupAccessPointInput")
+    DescribeBackupAccessPointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeBackupAccessPointResponse", name: "DescribeBackupAccessPointResponse")
     DescribeBackupJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeBackupJobInput", name: "DescribeBackupJobInput")
     DescribeBackupJobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeBackupJobOutput", name: "DescribeBackupJobOutput")
     DescribeBackupVaultInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeBackupVaultInput", name: "DescribeBackupVaultInput")
@@ -129,9 +150,12 @@ module Aws::Backup
     DescribeReportPlanOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeReportPlanOutput", name: "DescribeReportPlanOutput")
     DescribeRestoreJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeRestoreJobInput", name: "DescribeRestoreJobInput")
     DescribeRestoreJobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeRestoreJobOutput", name: "DescribeRestoreJobOutput")
+    DescribeScanJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeScanJobInput", name: "DescribeScanJobInput")
+    DescribeScanJobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DescribeScanJobOutput", name: "DescribeScanJobOutput")
     DisassociateBackupVaultMpaApprovalTeamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DisassociateBackupVaultMpaApprovalTeamInput", name: "DisassociateBackupVaultMpaApprovalTeamInput")
     DisassociateRecoveryPointFromParentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DisassociateRecoveryPointFromParentInput", name: "DisassociateRecoveryPointFromParentInput")
     DisassociateRecoveryPointInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#DisassociateRecoveryPointInput", name: "DisassociateRecoveryPointInput")
+    EncryptionKeyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#EncryptionKeyType", name: "EncryptionKeyType")
     ExportBackupPlanTemplateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ExportBackupPlanTemplateInput", name: "ExportBackupPlanTemplateInput")
     ExportBackupPlanTemplateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ExportBackupPlanTemplateOutput", name: "ExportBackupPlanTemplateOutput")
     FormatList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#FormatList", name: "FormatList")
@@ -155,6 +179,8 @@ module Aws::Backup
     GetBackupVaultNotificationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetBackupVaultNotificationsOutput", name: "GetBackupVaultNotificationsOutput")
     GetLegalHoldInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetLegalHoldInput", name: "GetLegalHoldInput")
     GetLegalHoldOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetLegalHoldOutput", name: "GetLegalHoldOutput")
+    GetPITRMalwareScanResultsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetPITRMalwareScanResultsInput", name: "GetPITRMalwareScanResultsInput")
+    GetPITRMalwareScanResultsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetPITRMalwareScanResultsOutput", name: "GetPITRMalwareScanResultsOutput")
     GetRecoveryPointIndexDetailsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetRecoveryPointIndexDetailsInput", name: "GetRecoveryPointIndexDetailsInput")
     GetRecoveryPointIndexDetailsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetRecoveryPointIndexDetailsOutput", name: "GetRecoveryPointIndexDetailsOutput")
     GetRecoveryPointRestoreMetadataInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetRecoveryPointRestoreMetadataInput", name: "GetRecoveryPointRestoreMetadataInput")
@@ -168,6 +194,8 @@ module Aws::Backup
     GetRestoreTestingSelectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetRestoreTestingSelectionInput", name: "GetRestoreTestingSelectionInput")
     GetRestoreTestingSelectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetRestoreTestingSelectionOutput", name: "GetRestoreTestingSelectionOutput")
     GetSupportedResourceTypesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetSupportedResourceTypesOutput", name: "GetSupportedResourceTypesOutput")
+    GetTieringConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetTieringConfigurationInput", name: "GetTieringConfigurationInput")
+    GetTieringConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#GetTieringConfigurationOutput", name: "GetTieringConfigurationOutput")
     GlobalSettings = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.backup#GlobalSettings", name: "GlobalSettings")
     GlobalSettingsName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#GlobalSettingsName", name: "GlobalSettingsName")
     GlobalSettingsValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#GlobalSettingsValue", name: "GlobalSettingsValue")
@@ -191,7 +219,18 @@ module Aws::Backup
     LegalHoldStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#LegalHoldStatus", name: "LegalHoldStatus")
     LegalHoldsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#LegalHoldsList", name: "LegalHoldsList")
     Lifecycle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#Lifecycle", name: "Lifecycle")
+    LifecycleDeleteAfterEvent = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#LifecycleDeleteAfterEvent", name: "LifecycleDeleteAfterEvent")
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client"})
+    ListAccessPointsMember = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListAccessPointsMember", name: "ListAccessPointsMember")
+    ListBackupAccessPointsByRecoveryPointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPointRequest", name: "ListBackupAccessPointsByRecoveryPointRequest")
+    ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger", name: "ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    ListBackupAccessPointsByRecoveryPointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPointResponse", name: "ListBackupAccessPointsByRecoveryPointResponse")
+    ListBackupAccessPointsByResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListBackupAccessPointsByResourceRequest", name: "ListBackupAccessPointsByResourceRequest")
+    ListBackupAccessPointsByResourceRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#ListBackupAccessPointsByResourceRequestMaxResultsInteger", name: "ListBackupAccessPointsByResourceRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    ListBackupAccessPointsByResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListBackupAccessPointsByResourceResponse", name: "ListBackupAccessPointsByResourceResponse")
+    ListBackupAccessPointsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListBackupAccessPointsRequest", name: "ListBackupAccessPointsRequest")
+    ListBackupAccessPointsRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#ListBackupAccessPointsRequestMaxResultsInteger", name: "ListBackupAccessPointsRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    ListBackupAccessPointsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListBackupAccessPointsResponse", name: "ListBackupAccessPointsResponse")
     ListBackupJobSummariesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListBackupJobSummariesInput", name: "ListBackupJobSummariesInput")
     ListBackupJobSummariesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListBackupJobSummariesOutput", name: "ListBackupJobSummariesOutput")
     ListBackupJobsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListBackupJobsInput", name: "ListBackupJobsInput")
@@ -245,12 +284,21 @@ module Aws::Backup
     ListRestoreTestingSelectionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListRestoreTestingSelectionsInput", name: "ListRestoreTestingSelectionsInput")
     ListRestoreTestingSelectionsInputMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#ListRestoreTestingSelectionsInputMaxResultsInteger", name: "ListRestoreTestingSelectionsInputMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     ListRestoreTestingSelectionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListRestoreTestingSelectionsOutput", name: "ListRestoreTestingSelectionsOutput")
+    ListScanJobSummariesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListScanJobSummariesInput", name: "ListScanJobSummariesInput")
+    ListScanJobSummariesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListScanJobSummariesOutput", name: "ListScanJobSummariesOutput")
+    ListScanJobsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListScanJobsInput", name: "ListScanJobsInput")
+    ListScanJobsInputMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#ListScanJobsInputMaxResultsInteger", name: "ListScanJobsInputMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    ListScanJobsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListScanJobsOutput", name: "ListScanJobsOutput")
     ListTagsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListTagsInput", name: "ListTagsInput")
     ListTagsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListTagsOutput", name: "ListTagsOutput")
+    ListTieringConfigurationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListTieringConfigurationsInput", name: "ListTieringConfigurationsInput")
+    ListTieringConfigurationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ListTieringConfigurationsOutput", name: "ListTieringConfigurationsOutput")
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#Long", name: "Long")
     Long2 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#Long2", name: "Long2", traits: {"smithy.api#default" => 0})
+    MalwareScanner = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#MalwareScanner", name: "MalwareScanner")
     MaxFrameworkInputs = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#MaxFrameworkInputs", name: "MaxFrameworkInputs", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    MaxScheduledRunsPreview = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#MaxScheduledRunsPreview", name: "MaxScheduledRunsPreview", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 10}})
     MessageCategory = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#MessageCategory", name: "MessageCategory")
     Metadata = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.backup#Metadata", name: "Metadata", traits: {"smithy.api#sensitive" => {}})
     MetadataKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#MetadataKey", name: "MetadataKey")
@@ -267,6 +315,7 @@ module Aws::Backup
     PutBackupVaultLockConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#PutBackupVaultLockConfigurationInput", name: "PutBackupVaultLockConfigurationInput")
     PutBackupVaultNotificationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#PutBackupVaultNotificationsInput", name: "PutBackupVaultNotificationsInput")
     PutRestoreValidationResultInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#PutRestoreValidationResultInput", name: "PutRestoreValidationResultInput")
+    RecoveryPointArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#RecoveryPointArn", name: "RecoveryPointArn", traits: {"smithy.api#pattern" => "^(arn:aws[a-z-]*:[a-z-\\d]+:[a-z-\\d]+:).+$"})
     RecoveryPointByBackupVault = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#RecoveryPointByBackupVault", name: "RecoveryPointByBackupVault")
     RecoveryPointByBackupVaultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#RecoveryPointByBackupVaultList", name: "RecoveryPointByBackupVaultList")
     RecoveryPointByResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#RecoveryPointByResource", name: "RecoveryPointByResource")
@@ -288,9 +337,12 @@ module Aws::Backup
     ReportPlanName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#ReportPlanName", name: "ReportPlanName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z][_a-zA-Z0-9]*$"})
     ReportSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ReportSetting", name: "ReportSetting")
     RequesterComment = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#RequesterComment", name: "RequesterComment", traits: {"smithy.api#sensitive" => {}})
+    ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#ResourceArn", name: "ResourceArn", traits: {"smithy.api#pattern" => "^(arn:aws[a-z-]*:[a-z-\\d]+:).+$"})
     ResourceArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ResourceArns", name: "ResourceArns")
     ResourceIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ResourceIdentifiers", name: "ResourceIdentifiers")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client"})
+    ResourceSelection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ResourceSelection", name: "ResourceSelection")
+    ResourceSelections = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ResourceSelections", name: "ResourceSelections")
     ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#ResourceType", name: "ResourceType", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9\\-\\_\\.]{1,50}$"})
     ResourceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ResourceTypeList", name: "ResourceTypeList")
     ResourceTypeManagementPreference = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.backup#ResourceTypeManagementPreference", name: "ResourceTypeManagementPreference")
@@ -323,6 +375,29 @@ module Aws::Backup
     RestoreTestingSelections = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#RestoreTestingSelections", name: "RestoreTestingSelections")
     RestoreValidationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#RestoreValidationStatus", name: "RestoreValidationStatus")
     RevokeRestoreAccessBackupVaultInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#RevokeRestoreAccessBackupVaultInput", name: "RevokeRestoreAccessBackupVaultInput")
+    RuleExecutionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#RuleExecutionType", name: "RuleExecutionType")
+    ScanAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ScanAction", name: "ScanAction")
+    ScanActions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ScanActions", name: "ScanActions")
+    ScanFinding = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#ScanFinding", name: "ScanFinding")
+    ScanFindings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ScanFindings", name: "ScanFindings")
+    ScanJob = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ScanJob", name: "ScanJob")
+    ScanJobCreator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ScanJobCreator", name: "ScanJobCreator")
+    ScanJobState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#ScanJobState", name: "ScanJobState")
+    ScanJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#ScanJobStatus", name: "ScanJobStatus")
+    ScanJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ScanJobSummary", name: "ScanJobSummary")
+    ScanJobSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ScanJobSummaryList", name: "ScanJobSummaryList")
+    ScanJobs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ScanJobs", name: "ScanJobs")
+    ScanMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#ScanMode", name: "ScanMode")
+    ScanResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#ScanResourceType", name: "ScanResourceType")
+    ScanResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ScanResult", name: "ScanResult")
+    ScanResultInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ScanResultInfo", name: "ScanResultInfo")
+    ScanResultStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#ScanResultStatus", name: "ScanResultStatus")
+    ScanResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ScanResults", name: "ScanResults", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    ScanSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ScanSetting", name: "ScanSetting")
+    ScanSettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ScanSettings", name: "ScanSettings")
+    ScanState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#ScanState", name: "ScanState")
+    ScheduledPlanExecutionMember = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ScheduledPlanExecutionMember", name: "ScheduledPlanExecutionMember")
+    ScheduledRunsPreview = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#ScheduledRunsPreview", name: "ScheduledRunsPreview")
     SensitiveStringMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.backup#SensitiveStringMap", name: "SensitiveStringMap", traits: {"smithy.api#sensitive" => {}})
     ServiceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#ServiceUnavailableException", name: "ServiceUnavailableException", traits: {"smithy.api#error" => "server"})
     StartBackupJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#StartBackupJobInput", name: "StartBackupJobInput")
@@ -333,13 +408,25 @@ module Aws::Backup
     StartReportJobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#StartReportJobOutput", name: "StartReportJobOutput")
     StartRestoreJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#StartRestoreJobInput", name: "StartRestoreJobInput")
     StartRestoreJobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#StartRestoreJobOutput", name: "StartRestoreJobOutput")
+    StartScanJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#StartScanJobInput", name: "StartScanJobInput")
+    StartScanJobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#StartScanJobOutput", name: "StartScanJobOutput")
     StopBackupJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#StopBackupJobInput", name: "StopBackupJobInput")
     StorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#StorageClass", name: "StorageClass")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#TagKey", name: "TagKey")
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#TagKeyList", name: "TagKeyList", traits: {"smithy.api#sensitive" => {}})
+    TagMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.backup#TagMap", name: "TagMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#sensitive" => {}})
+    TagMapKeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#TagMapKeyString", name: "TagMapKeyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    TagMapValueString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#TagMapValueString", name: "TagMapValueString", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     TagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#TagResourceInput", name: "TagResourceInput")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#TagValue", name: "TagValue")
     Tags = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.backup#Tags", name: "Tags", traits: {"smithy.api#sensitive" => {}})
+    TieringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#TieringConfiguration", name: "TieringConfiguration")
+    TieringConfigurationInputForCreate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#TieringConfigurationInputForCreate", name: "TieringConfigurationInputForCreate")
+    TieringConfigurationInputForUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#TieringConfigurationInputForUpdate", name: "TieringConfigurationInputForUpdate")
+    TieringConfigurationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#TieringConfigurationName", name: "TieringConfigurationName", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_]{1,200}$"})
+    TieringConfigurationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#TieringConfigurationsList", name: "TieringConfigurationsList")
+    TieringConfigurationsListMember = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#TieringConfigurationsListMember", name: "TieringConfigurationsListMember")
+    TieringDownSettingsInDays = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.backup#TieringDownSettingsInDays", name: "TieringDownSettingsInDays", traits: {"smithy.api#range" => {"min" => 60, "max" => 36500}})
     Timezone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.backup#Timezone", name: "Timezone")
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#UntagResourceInput", name: "UntagResourceInput")
     UpdateBackupPlanInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#UpdateBackupPlanInput", name: "UpdateBackupPlanInput")
@@ -358,6 +445,8 @@ module Aws::Backup
     UpdateRestoreTestingPlanOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#UpdateRestoreTestingPlanOutput", name: "UpdateRestoreTestingPlanOutput")
     UpdateRestoreTestingSelectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#UpdateRestoreTestingSelectionInput", name: "UpdateRestoreTestingSelectionInput")
     UpdateRestoreTestingSelectionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#UpdateRestoreTestingSelectionOutput", name: "UpdateRestoreTestingSelectionOutput")
+    UpdateTieringConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#UpdateTieringConfigurationInput", name: "UpdateTieringConfigurationInput")
+    UpdateTieringConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.backup#UpdateTieringConfigurationOutput", name: "UpdateTieringConfigurationOutput")
     VaultNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.backup#VaultNames", name: "VaultNames")
     VaultState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#VaultState", name: "VaultState")
     VaultType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.backup#VaultType", name: "VaultType")
@@ -368,10 +457,23 @@ module Aws::Backup
     StringMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.backup#stringMap", name: "StringMap")
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.backup#timestamp", name: "Timestamp")
 
+    AccessPointMetadataMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointMetadataMapKeyString, name: "key"))
+    AccessPointMetadataMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointMetadataMapValueString, name: "value"))
+    AccessPointStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    AccessPointStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    AccessPointStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    AccessPointStatus.add_member(:disassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISASSOCIATED", traits: {"smithy.api#enumValue" => "DISASSOCIATED"}))
+    AccessPointStatus.add_member(:disassociating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISASSOCIATING", traits: {"smithy.api#enumValue" => "DISASSOCIATING"}))
+    AccessPointStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
+    AccessPointStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     AdvancedBackupSetting.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     AdvancedBackupSetting.add_member(:backup_options, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupOptions, name: "BackupOptions"))
     AdvancedBackupSetting.type = Types::AdvancedBackupSetting
     AdvancedBackupSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedBackupSetting, name: "member"))
+    AggregatedScanResult.add_member(:failed_scan, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "FailedScan"))
+    AggregatedScanResult.add_member(:findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanFindings, name: "Findings"))
+    AggregatedScanResult.add_member(:last_computed, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastComputed"))
+    AggregatedScanResult.type = Types::AggregatedScanResult
     AggregationPeriod.add_member(:one_day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_DAY", traits: {"smithy.api#enumValue" => "ONE_DAY"}))
     AggregationPeriod.add_member(:seven_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEVEN_DAYS", traits: {"smithy.api#enumValue" => "SEVEN_DAYS"}))
     AggregationPeriod.add_member(:fourteen_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOURTEEN_DAYS", traits: {"smithy.api#enumValue" => "FOURTEEN_DAYS"}))
@@ -386,11 +488,17 @@ module Aws::Backup
     AssociateBackupVaultMpaApprovalTeamInput.add_member(:mpa_approval_team_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "MpaApprovalTeamArn", traits: {"smithy.api#required" => {}}))
     AssociateBackupVaultMpaApprovalTeamInput.add_member(:requester_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: RequesterComment, name: "RequesterComment"))
     AssociateBackupVaultMpaApprovalTeamInput.type = Types::AssociateBackupVaultMpaApprovalTeamInput
+    BackupAccessPoints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAccessPointsMember, name: "member"))
     BackupJob.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     BackupJob.add_member(:backup_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupJobId"))
     BackupJob.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName"))
     BackupJob.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupVaultArn"))
+    BackupJob.add_member(:vault_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VaultType"))
+    BackupJob.add_member(:vault_lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VaultLockState"))
     BackupJob.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn"))
+    BackupJob.add_member(:recovery_point_lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: Lifecycle, name: "RecoveryPointLifecycle"))
+    BackupJob.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "EncryptionKeyArn"))
+    BackupJob.add_member(:is_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, name: "IsEncrypted", traits: {"smithy.api#default" => false}))
     BackupJob.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn"))
     BackupJob.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     BackupJob.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CompletionDate"))
@@ -450,10 +558,12 @@ module Aws::Backup
     BackupPlan.add_member(:backup_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlanName, name: "BackupPlanName", traits: {"smithy.api#required" => {}}))
     BackupPlan.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRules, name: "Rules", traits: {"smithy.api#required" => {}}))
     BackupPlan.add_member(:advanced_backup_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedBackupSettings, name: "AdvancedBackupSettings"))
+    BackupPlan.add_member(:scan_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanSettings, name: "ScanSettings"))
     BackupPlan.type = Types::BackupPlan
     BackupPlanInput.add_member(:backup_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlanName, name: "BackupPlanName", traits: {"smithy.api#required" => {}}))
     BackupPlanInput.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRulesInput, name: "Rules", traits: {"smithy.api#required" => {}}))
     BackupPlanInput.add_member(:advanced_backup_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedBackupSettings, name: "AdvancedBackupSettings"))
+    BackupPlanInput.add_member(:scan_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanSettings, name: "ScanSettings"))
     BackupPlanInput.type = Types::BackupPlanInput
     BackupPlanTemplatesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlanTemplatesListMember, name: "member"))
     BackupPlanTemplatesListMember.add_member(:backup_plan_template_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanTemplateId"))
@@ -473,6 +583,7 @@ module Aws::Backup
     BackupPlansListMember.type = Types::BackupPlansListMember
     BackupRule.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRuleName, name: "RuleName", traits: {"smithy.api#required" => {}}))
     BackupRule.add_member(:target_backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "TargetBackupVaultName", traits: {"smithy.api#required" => {}}))
+    BackupRule.add_member(:target_logically_air_gapped_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "TargetLogicallyAirGappedBackupVaultArn"))
     BackupRule.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: CronExpression, name: "ScheduleExpression"))
     BackupRule.add_member(:start_window_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowMinutes, name: "StartWindowMinutes"))
     BackupRule.add_member(:completion_window_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowMinutes, name: "CompletionWindowMinutes"))
@@ -483,9 +594,11 @@ module Aws::Backup
     BackupRule.add_member(:enable_continuous_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableContinuousBackup"))
     BackupRule.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: Timezone, name: "ScheduleExpressionTimezone"))
     BackupRule.add_member(:index_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexActions, name: "IndexActions"))
+    BackupRule.add_member(:scan_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanActions, name: "ScanActions"))
     BackupRule.type = Types::BackupRule
     BackupRuleInput.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRuleName, name: "RuleName", traits: {"smithy.api#required" => {}}))
     BackupRuleInput.add_member(:target_backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "TargetBackupVaultName", traits: {"smithy.api#required" => {}}))
+    BackupRuleInput.add_member(:target_logically_air_gapped_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "TargetLogicallyAirGappedBackupVaultArn"))
     BackupRuleInput.add_member(:schedule_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: CronExpression, name: "ScheduleExpression"))
     BackupRuleInput.add_member(:start_window_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowMinutes, name: "StartWindowMinutes"))
     BackupRuleInput.add_member(:completion_window_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowMinutes, name: "CompletionWindowMinutes"))
@@ -495,6 +608,7 @@ module Aws::Backup
     BackupRuleInput.add_member(:enable_continuous_backup, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableContinuousBackup"))
     BackupRuleInput.add_member(:schedule_expression_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: Timezone, name: "ScheduleExpressionTimezone"))
     BackupRuleInput.add_member(:index_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexActions, name: "IndexActions"))
+    BackupRuleInput.add_member(:scan_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanActions, name: "ScanActions"))
     BackupRuleInput.type = Types::BackupRuleInput
     BackupRules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRule, name: "member"))
     BackupRulesInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupRuleInput, name: "member"))
@@ -534,6 +648,15 @@ module Aws::Backup
     BackupVaultEvent.add_member(:recovery_point_index_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECOVERY_POINT_INDEX_COMPLETED", traits: {"smithy.api#enumValue" => "RECOVERY_POINT_INDEX_COMPLETED"}))
     BackupVaultEvent.add_member(:recovery_point_index_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECOVERY_POINT_INDEX_DELETED", traits: {"smithy.api#enumValue" => "RECOVERY_POINT_INDEX_DELETED"}))
     BackupVaultEvent.add_member(:recovery_point_indexing_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECOVERY_POINT_INDEXING_FAILED", traits: {"smithy.api#enumValue" => "RECOVERY_POINT_INDEXING_FAILED"}))
+    BackupVaultEvent.add_member(:eks_restore_object_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS_RESTORE_OBJECT_FAILED", traits: {"smithy.api#enumValue" => "EKS_RESTORE_OBJECT_FAILED"}))
+    BackupVaultEvent.add_member(:eks_restore_object_skipped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS_RESTORE_OBJECT_SKIPPED", traits: {"smithy.api#enumValue" => "EKS_RESTORE_OBJECT_SKIPPED"}))
+    BackupVaultEvent.add_member(:eks_backup_object_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EKS_BACKUP_OBJECT_FAILED", traits: {"smithy.api#enumValue" => "EKS_BACKUP_OBJECT_FAILED"}))
+    BackupVaultEvent.add_member(:access_point_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_POINT_AVAILABLE", traits: {"smithy.api#enumValue" => "ACCESS_POINT_AVAILABLE"}))
+    BackupVaultEvent.add_member(:access_point_creation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_POINT_CREATION_FAILED", traits: {"smithy.api#enumValue" => "ACCESS_POINT_CREATION_FAILED"}))
+    BackupVaultEvent.add_member(:access_point_deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_POINT_DELETED", traits: {"smithy.api#enumValue" => "ACCESS_POINT_DELETED"}))
+    BackupVaultEvent.add_member(:access_point_deletion_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_POINT_DELETION_FAILED", traits: {"smithy.api#enumValue" => "ACCESS_POINT_DELETION_FAILED"}))
+    BackupVaultEvent.add_member(:access_point_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_POINT_EXPIRED", traits: {"smithy.api#enumValue" => "ACCESS_POINT_EXPIRED"}))
+    BackupVaultEvent.add_member(:access_point_disassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS_POINT_DISASSOCIATED", traits: {"smithy.api#enumValue" => "ACCESS_POINT_DISASSOCIATED"}))
     BackupVaultEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultEvent, name: "member"))
     BackupVaultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultListMember, name: "member"))
     BackupVaultListMember.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName"))
@@ -548,6 +671,7 @@ module Aws::Backup
     BackupVaultListMember.add_member(:min_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MinRetentionDays"))
     BackupVaultListMember.add_member(:max_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MaxRetentionDays"))
     BackupVaultListMember.add_member(:lock_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LockDate"))
+    BackupVaultListMember.add_member(:encryption_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyType, name: "EncryptionKeyType"))
     BackupVaultListMember.type = Types::BackupVaultListMember
     CalculatedLifecycle.add_member(:move_to_cold_storage_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "MoveToColdStorageAt"))
     CalculatedLifecycle.add_member(:delete_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DeleteAt"))
@@ -594,7 +718,11 @@ module Aws::Backup
     CopyJob.add_member(:source_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "SourceBackupVaultArn"))
     CopyJob.add_member(:source_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "SourceRecoveryPointArn"))
     CopyJob.add_member(:destination_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "DestinationBackupVaultArn"))
+    CopyJob.add_member(:destination_vault_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DestinationVaultType"))
+    CopyJob.add_member(:destination_vault_lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DestinationVaultLockState"))
     CopyJob.add_member(:destination_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "DestinationRecoveryPointArn"))
+    CopyJob.add_member(:destination_encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "DestinationEncryptionKeyArn"))
+    CopyJob.add_member(:destination_recovery_point_lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: Lifecycle, name: "DestinationRecoveryPointLifecycle"))
     CopyJob.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn"))
     CopyJob.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     CopyJob.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CompletionDate"))
@@ -603,6 +731,7 @@ module Aws::Backup
     CopyJob.add_member(:backup_size_in_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "BackupSizeInBytes"))
     CopyJob.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "IamRoleArn"))
     CopyJob.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointCreator, name: "CreatedBy"))
+    CopyJob.add_member(:created_by_backup_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CreatedByBackupJobId"))
     CopyJob.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     CopyJob.add_member(:parent_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParentJobId"))
     CopyJob.add_member(:is_parent, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, name: "IsParent", traits: {"smithy.api#default" => false}))
@@ -641,6 +770,15 @@ module Aws::Backup
     CopyJobSummary.type = Types::CopyJobSummary
     CopyJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyJobSummary, name: "member"))
     CopyJobsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyJob, name: "member"))
+    CreateBackupAccessPointRequest.add_member(:access_point_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointMetadataMap, name: "AccessPointMetadata"))
+    CreateBackupAccessPointRequest.add_member(:access_point_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointPolicy, name: "AccessPointPolicy"))
+    CreateBackupAccessPointRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateBackupAccessPointRequest.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointArn, name: "RecoveryPointArn", traits: {"smithy.api#required" => {}}))
+    CreateBackupAccessPointRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    CreateBackupAccessPointRequest.type = Types::CreateBackupAccessPointRequest
+    CreateBackupAccessPointResponse.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointArn, name: "AccessPointArn", traits: {"smithy.api#required" => {}}))
+    CreateBackupAccessPointResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateBackupAccessPointResponse.type = Types::CreateBackupAccessPointResponse
     CreateBackupPlanInput.add_member(:backup_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlanInput, name: "BackupPlan", traits: {"smithy.api#required" => {}}))
     CreateBackupPlanInput.add_member(:backup_plan_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "BackupPlanTags"))
     CreateBackupPlanInput.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -696,6 +834,7 @@ module Aws::Backup
     CreateLogicallyAirGappedBackupVaultInput.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateLogicallyAirGappedBackupVaultInput.add_member(:min_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MinRetentionDays", traits: {"smithy.api#required" => {}}))
     CreateLogicallyAirGappedBackupVaultInput.add_member(:max_retention_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MaxRetentionDays", traits: {"smithy.api#required" => {}}))
+    CreateLogicallyAirGappedBackupVaultInput.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "EncryptionKeyArn"))
     CreateLogicallyAirGappedBackupVaultInput.type = Types::CreateLogicallyAirGappedBackupVaultInput
     CreateLogicallyAirGappedBackupVaultOutput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName"))
     CreateLogicallyAirGappedBackupVaultOutput.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupVaultArn"))
@@ -741,9 +880,19 @@ module Aws::Backup
     CreateRestoreTestingSelectionOutput.add_member(:restore_testing_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RestoreTestingPlanName", traits: {"smithy.api#required" => {}}))
     CreateRestoreTestingSelectionOutput.add_member(:restore_testing_selection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RestoreTestingSelectionName", traits: {"smithy.api#required" => {}}))
     CreateRestoreTestingSelectionOutput.type = Types::CreateRestoreTestingSelectionOutput
+    CreateTieringConfigurationInput.add_member(:tiering_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationInputForCreate, name: "TieringConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateTieringConfigurationInput.add_member(:tiering_configuration_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "TieringConfigurationTags"))
+    CreateTieringConfigurationInput.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatorRequestId, name: "CreatorRequestId", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateTieringConfigurationInput.type = Types::CreateTieringConfigurationInput
+    CreateTieringConfigurationOutput.add_member(:tiering_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "TieringConfigurationArn"))
+    CreateTieringConfigurationOutput.add_member(:tiering_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TieringConfigurationName"))
+    CreateTieringConfigurationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
+    CreateTieringConfigurationOutput.type = Types::CreateTieringConfigurationOutput
     DateRange.add_member(:from_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "FromDate", traits: {"smithy.api#required" => {}}))
     DateRange.add_member(:to_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ToDate", traits: {"smithy.api#required" => {}}))
     DateRange.type = Types::DateRange
+    DeleteBackupAccessPointInput.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointArn, name: "AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBackupAccessPointInput.type = Types::DeleteBackupAccessPointInput
     DeleteBackupPlanInput.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteBackupPlanInput.type = Types::DeleteBackupPlanInput
     DeleteBackupPlanOutput.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId"))
@@ -774,18 +923,40 @@ module Aws::Backup
     DeleteRestoreTestingSelectionInput.add_member(:restore_testing_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RestoreTestingPlanName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRestoreTestingSelectionInput.add_member(:restore_testing_selection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RestoreTestingSelectionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRestoreTestingSelectionInput.type = Types::DeleteRestoreTestingSelectionInput
+    DeleteTieringConfigurationInput.add_member(:tiering_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationName, name: "TieringConfigurationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteTieringConfigurationInput.type = Types::DeleteTieringConfigurationInput
+    DeleteTieringConfigurationOutput.type = Types::DeleteTieringConfigurationOutput
     DependencyFailureException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     DependencyFailureException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     DependencyFailureException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     DependencyFailureException.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Context"))
     DependencyFailureException.type = Types::DependencyFailureException
+    DescribeBackupAccessPointInput.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointArn, name: "AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeBackupAccessPointInput.type = Types::DescribeBackupAccessPointInput
+    DescribeBackupAccessPointResponse.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointArn, name: "AccessPointArn", traits: {"smithy.api#required" => {}}))
+    DescribeBackupAccessPointResponse.add_member(:access_point_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointMetadataMap, name: "AccessPointMetadata"))
+    DescribeBackupAccessPointResponse.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultArn, name: "BackupVaultArn"))
+    DescribeBackupAccessPointResponse.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName", traits: {"smithy.api#required" => {}}))
+    DescribeBackupAccessPointResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreationTime", traits: {"smithy.api#required" => {}}))
+    DescribeBackupAccessPointResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "Name", traits: {"smithy.api#required" => {}}))
+    DescribeBackupAccessPointResponse.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointArn, name: "RecoveryPointArn", traits: {"smithy.api#required" => {}}))
+    DescribeBackupAccessPointResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    DescribeBackupAccessPointResponse.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    DescribeBackupAccessPointResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    DescribeBackupAccessPointResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "StatusMessage"))
+    DescribeBackupAccessPointResponse.type = Types::DescribeBackupAccessPointResponse
     DescribeBackupJobInput.add_member(:backup_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupJobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeBackupJobInput.type = Types::DescribeBackupJobInput
     DescribeBackupJobOutput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     DescribeBackupJobOutput.add_member(:backup_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupJobId"))
     DescribeBackupJobOutput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName"))
+    DescribeBackupJobOutput.add_member(:recovery_point_lifecycle, ::Smithy::Schema::Shapes::MemberShape.new(target: Lifecycle, name: "RecoveryPointLifecycle"))
     DescribeBackupJobOutput.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupVaultArn"))
+    DescribeBackupJobOutput.add_member(:vault_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VaultType"))
+    DescribeBackupJobOutput.add_member(:vault_lock_state, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VaultLockState"))
     DescribeBackupJobOutput.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn"))
+    DescribeBackupJobOutput.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "EncryptionKeyArn"))
+    DescribeBackupJobOutput.add_member(:is_encrypted, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, name: "IsEncrypted", traits: {"smithy.api#default" => false}))
     DescribeBackupJobOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn"))
     DescribeBackupJobOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     DescribeBackupJobOutput.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CompletionDate"))
@@ -828,6 +999,7 @@ module Aws::Backup
     DescribeBackupVaultOutput.add_member(:mpa_approval_team_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "MpaApprovalTeamArn"))
     DescribeBackupVaultOutput.add_member(:mpa_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "MpaSessionArn"))
     DescribeBackupVaultOutput.add_member(:latest_mpa_approval_team_update, ::Smithy::Schema::Shapes::MemberShape.new(target: LatestMpaApprovalTeamUpdate, name: "LatestMpaApprovalTeamUpdate"))
+    DescribeBackupVaultOutput.add_member(:encryption_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyType, name: "EncryptionKeyType"))
     DescribeBackupVaultOutput.type = Types::DescribeBackupVaultOutput
     DescribeCopyJobInput.add_member(:copy_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CopyJobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeCopyJobInput.type = Types::DescribeCopyJobInput
@@ -891,6 +1063,8 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:vault_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultType, name: "VaultType"))
     DescribeRecoveryPointOutput.add_member(:index_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "IndexStatus"))
     DescribeRecoveryPointOutput.add_member(:index_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IndexStatusMessage"))
+    DescribeRecoveryPointOutput.add_member(:encryption_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyType, name: "EncryptionKeyType"))
+    DescribeRecoveryPointOutput.add_member(:scan_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResults, name: "ScanResults"))
     DescribeRecoveryPointOutput.type = Types::DescribeRecoveryPointOutput
     DescribeRegionSettingsInput.type = Types::DescribeRegionSettingsInput
     DescribeRegionSettingsOutput.add_member(:resource_type_opt_in_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypeOptInPreference, name: "ResourceTypeOptInPreference"))
@@ -909,6 +1083,8 @@ module Aws::Backup
     DescribeRestoreJobOutput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     DescribeRestoreJobOutput.add_member(:restore_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RestoreJobId"))
     DescribeRestoreJobOutput.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn"))
+    DescribeRestoreJobOutput.add_member(:source_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "SourceResourceArn"))
+    DescribeRestoreJobOutput.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupVaultArn"))
     DescribeRestoreJobOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     DescribeRestoreJobOutput.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CompletionDate"))
     DescribeRestoreJobOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreJobStatus, name: "Status"))
@@ -925,7 +1101,34 @@ module Aws::Backup
     DescribeRestoreJobOutput.add_member(:validation_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ValidationStatusMessage"))
     DescribeRestoreJobOutput.add_member(:deletion_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreDeletionStatus, name: "DeletionStatus"))
     DescribeRestoreJobOutput.add_member(:deletion_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DeletionStatusMessage"))
+    DescribeRestoreJobOutput.add_member(:is_parent, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, name: "IsParent", traits: {"smithy.api#default" => false}))
+    DescribeRestoreJobOutput.add_member(:parent_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParentJobId"))
     DescribeRestoreJobOutput.type = Types::DescribeRestoreJobOutput
+    DescribeScanJobInput.add_member(:scan_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanJobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeScanJobInput.type = Types::DescribeScanJobInput
+    DescribeScanJobOutput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AccountId", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupVaultArn", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupVaultName", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CompletionDate"))
+    DescribeScanJobOutput.add_member(:continuous_scan_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ContinuousScanEndTime"))
+    DescribeScanJobOutput.add_member(:continuous_scan_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ContinuousScanStartTime"))
+    DescribeScanJobOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanJobCreator, name: "CreatedBy", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreationDate", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "MalwareScanner", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RecoveryPointArn", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceName", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResourceType, name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:scan_base_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanBaseRecoveryPointArn"))
+    DescribeScanJobOutput.add_member(:scan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanId"))
+    DescribeScanJobOutput.add_member(:scan_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanJobId", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:scan_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanMode, name: "ScanMode", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:scan_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResultInfo, name: "ScanResult"))
+    DescribeScanJobOutput.add_member(:scanner_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScannerRoleArn", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanState, name: "State", traits: {"smithy.api#required" => {}}))
+    DescribeScanJobOutput.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "StatusMessage"))
+    DescribeScanJobOutput.type = Types::DescribeScanJobOutput
     DisassociateBackupVaultMpaApprovalTeamInput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateBackupVaultMpaApprovalTeamInput.add_member(:requester_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: RequesterComment, name: "RequesterComment"))
     DisassociateBackupVaultMpaApprovalTeamInput.type = Types::DisassociateBackupVaultMpaApprovalTeamInput
@@ -935,6 +1138,8 @@ module Aws::Backup
     DisassociateRecoveryPointInput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateRecoveryPointInput.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateRecoveryPointInput.type = Types::DisassociateRecoveryPointInput
+    EncryptionKeyType.add_member(:aws_owned_kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_OWNED_KMS_KEY", traits: {"smithy.api#enumValue" => "AWS_OWNED_KMS_KEY"}))
+    EncryptionKeyType.add_member(:customer_managed_kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_MANAGED_KMS_KEY", traits: {"smithy.api#enumValue" => "CUSTOMER_MANAGED_KMS_KEY"}))
     ExportBackupPlanTemplateInput.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ExportBackupPlanTemplateInput.type = Types::ExportBackupPlanTemplateInput
     ExportBackupPlanTemplateOutput.add_member(:backup_plan_template_json, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanTemplateJson"))
@@ -963,6 +1168,7 @@ module Aws::Backup
     GetBackupPlanFromTemplateOutput.type = Types::GetBackupPlanFromTemplateOutput
     GetBackupPlanInput.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetBackupPlanInput.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VersionId", traits: {"smithy.api#httpQuery" => "versionId"}))
+    GetBackupPlanInput.add_member(:max_scheduled_runs_preview, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxScheduledRunsPreview, name: "MaxScheduledRunsPreview", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "MaxScheduledRunsPreview"}))
     GetBackupPlanInput.type = Types::GetBackupPlanInput
     GetBackupPlanOutput.add_member(:backup_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupPlan, name: "BackupPlan"))
     GetBackupPlanOutput.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId"))
@@ -973,6 +1179,7 @@ module Aws::Backup
     GetBackupPlanOutput.add_member(:deletion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "DeletionDate"))
     GetBackupPlanOutput.add_member(:last_execution_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastExecutionDate"))
     GetBackupPlanOutput.add_member(:advanced_backup_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedBackupSettings, name: "AdvancedBackupSettings"))
+    GetBackupPlanOutput.add_member(:scheduled_runs_preview, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledRunsPreview, name: "ScheduledRunsPreview"))
     GetBackupPlanOutput.type = Types::GetBackupPlanOutput
     GetBackupSelectionInput.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetBackupSelectionInput.add_member(:selection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SelectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1009,6 +1216,17 @@ module Aws::Backup
     GetLegalHoldOutput.add_member(:retain_record_until, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "RetainRecordUntil"))
     GetLegalHoldOutput.add_member(:recovery_point_selection, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointSelection, name: "RecoveryPointSelection"))
     GetLegalHoldOutput.type = Types::GetLegalHoldOutput
+    GetPITRMalwareScanResultsInput.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RecoveryPointArn", traits: {"smithy.api#httpQuery" => "RecoveryPointArn", "smithy.api#required" => {}}))
+    GetPITRMalwareScanResultsInput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupVaultName", traits: {"smithy.api#httpQuery" => "BackupVaultName", "smithy.api#required" => {}}))
+    GetPITRMalwareScanResultsInput.add_member(:scan_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ScanEndTime", traits: {"smithy.api#httpQuery" => "ScanEndTime", "smithy.api#required" => {}}))
+    GetPITRMalwareScanResultsInput.add_member(:malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "MalwareScanner", traits: {"smithy.api#httpQuery" => "MalwareScanner", "smithy.api#required" => {}}))
+    GetPITRMalwareScanResultsInput.type = Types::GetPITRMalwareScanResultsInput
+    GetPITRMalwareScanResultsOutput.add_member(:scan_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ScanEndTime", traits: {"smithy.api#required" => {}}))
+    GetPITRMalwareScanResultsOutput.add_member(:scan_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResultInfo, name: "ScanResult", traits: {"smithy.api#required" => {}}))
+    GetPITRMalwareScanResultsOutput.add_member(:last_scan_job_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastScanJobTime"))
+    GetPITRMalwareScanResultsOutput.add_member(:scan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanId"))
+    GetPITRMalwareScanResultsOutput.add_member(:scan_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanMode, name: "ScanMode"))
+    GetPITRMalwareScanResultsOutput.type = Types::GetPITRMalwareScanResultsOutput
     GetRecoveryPointIndexDetailsInput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRecoveryPointIndexDetailsInput.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRecoveryPointIndexDetailsInput.type = Types::GetRecoveryPointIndexDetailsInput
@@ -1053,6 +1271,10 @@ module Aws::Backup
     GetRestoreTestingSelectionOutput.type = Types::GetRestoreTestingSelectionOutput
     GetSupportedResourceTypesOutput.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypes, name: "ResourceTypes"))
     GetSupportedResourceTypesOutput.type = Types::GetSupportedResourceTypesOutput
+    GetTieringConfigurationInput.add_member(:tiering_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationName, name: "TieringConfigurationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetTieringConfigurationInput.type = Types::GetTieringConfigurationInput
+    GetTieringConfigurationOutput.add_member(:tiering_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfiguration, name: "TieringConfiguration"))
+    GetTieringConfigurationOutput.type = Types::GetTieringConfigurationOutput
     GlobalSettings.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSettingsName, name: "key"))
     GlobalSettings.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalSettingsValue, name: "value"))
     Index.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
@@ -1122,12 +1344,46 @@ module Aws::Backup
     Lifecycle.add_member(:move_to_cold_storage_after_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "MoveToColdStorageAfterDays"))
     Lifecycle.add_member(:delete_after_days, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "DeleteAfterDays"))
     Lifecycle.add_member(:opt_in_to_archive_for_supported_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "OptInToArchiveForSupportedResources"))
+    Lifecycle.add_member(:delete_after_event, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleDeleteAfterEvent, name: "DeleteAfterEvent"))
     Lifecycle.type = Types::Lifecycle
+    LifecycleDeleteAfterEvent.add_member(:delete_after_copy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_AFTER_COPY", traits: {"smithy.api#enumValue" => "DELETE_AFTER_COPY"}))
     LimitExceededException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     LimitExceededException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     LimitExceededException.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Context"))
     LimitExceededException.type = Types::LimitExceededException
+    ListAccessPointsMember.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointArn, name: "AccessPointArn", traits: {"smithy.api#required" => {}}))
+    ListAccessPointsMember.add_member(:access_point_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointMetadataMap, name: "AccessPointMetadata", traits: {"smithy.api#required" => {}}))
+    ListAccessPointsMember.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultArn, name: "BackupVaultArn"))
+    ListAccessPointsMember.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName", traits: {"smithy.api#required" => {}}))
+    ListAccessPointsMember.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreationTime", traits: {"smithy.api#required" => {}}))
+    ListAccessPointsMember.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointName, name: "Name", traits: {"smithy.api#required" => {}}))
+    ListAccessPointsMember.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointArn, name: "RecoveryPointArn", traits: {"smithy.api#required" => {}}))
+    ListAccessPointsMember.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ListAccessPointsMember.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ListAccessPointsMember.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    ListAccessPointsMember.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "StatusMessage"))
+    ListAccessPointsMember.type = Types::ListAccessPointsMember
+    ListBackupAccessPointsByRecoveryPointRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger, name: "MaxResults", traits: {"smithy.api#default" => 100, "smithy.api#httpQuery" => "MaxResults"}))
+    ListBackupAccessPointsByRecoveryPointRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListBackupAccessPointsByRecoveryPointRequest.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointArn, name: "RecoveryPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListBackupAccessPointsByRecoveryPointRequest.type = Types::ListBackupAccessPointsByRecoveryPointRequest
+    ListBackupAccessPointsByRecoveryPointResponse.add_member(:backup_access_points, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupAccessPoints, name: "BackupAccessPoints", traits: {"smithy.api#required" => {}}))
+    ListBackupAccessPointsByRecoveryPointResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
+    ListBackupAccessPointsByRecoveryPointResponse.type = Types::ListBackupAccessPointsByRecoveryPointResponse
+    ListBackupAccessPointsByResourceRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBackupAccessPointsByResourceRequestMaxResultsInteger, name: "MaxResults", traits: {"smithy.api#default" => 100, "smithy.api#httpQuery" => "MaxResults"}))
+    ListBackupAccessPointsByResourceRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListBackupAccessPointsByResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListBackupAccessPointsByResourceRequest.type = Types::ListBackupAccessPointsByResourceRequest
+    ListBackupAccessPointsByResourceResponse.add_member(:backup_access_points, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupAccessPoints, name: "BackupAccessPoints", traits: {"smithy.api#required" => {}}))
+    ListBackupAccessPointsByResourceResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
+    ListBackupAccessPointsByResourceResponse.type = Types::ListBackupAccessPointsByResourceResponse
+    ListBackupAccessPointsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBackupAccessPointsRequestMaxResultsInteger, name: "MaxResults", traits: {"smithy.api#default" => 100, "smithy.api#httpQuery" => "MaxResults"}))
+    ListBackupAccessPointsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListBackupAccessPointsRequest.type = Types::ListBackupAccessPointsRequest
+    ListBackupAccessPointsResponse.add_member(:backup_access_points, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupAccessPoints, name: "BackupAccessPoints", traits: {"smithy.api#required" => {}}))
+    ListBackupAccessPointsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
+    ListBackupAccessPointsResponse.type = Types::ListBackupAccessPointsResponse
     ListBackupJobSummariesInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#httpQuery" => "AccountId"}))
     ListBackupJobSummariesInput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupJobStatus, name: "State", traits: {"smithy.api#httpQuery" => "State"}))
     ListBackupJobSummariesInput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#httpQuery" => "ResourceType"}))
@@ -1217,6 +1473,7 @@ module Aws::Backup
     ListCopyJobsInput.add_member(:by_complete_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ByCompleteAfter", traits: {"smithy.api#httpQuery" => "completeAfter"}))
     ListCopyJobsInput.add_member(:by_parent_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ByParentJobId", traits: {"smithy.api#httpQuery" => "parentJobId"}))
     ListCopyJobsInput.add_member(:by_message_category, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ByMessageCategory", traits: {"smithy.api#httpQuery" => "messageCategory"}))
+    ListCopyJobsInput.add_member(:by_source_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BySourceRecoveryPointArn", traits: {"smithy.api#httpQuery" => "sourceRecoveryPointArn"}))
     ListCopyJobsInput.type = Types::ListCopyJobsInput
     ListCopyJobsOutput.add_member(:copy_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: CopyJobsList, name: "CopyJobs"))
     ListCopyJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -1342,6 +1599,7 @@ module Aws::Backup
     ListRestoreJobsInput.add_member(:by_complete_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ByCompleteBefore", traits: {"smithy.api#httpQuery" => "completeBefore"}))
     ListRestoreJobsInput.add_member(:by_complete_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ByCompleteAfter", traits: {"smithy.api#httpQuery" => "completeAfter"}))
     ListRestoreJobsInput.add_member(:by_restore_testing_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ByRestoreTestingPlanArn", traits: {"smithy.api#httpQuery" => "restoreTestingPlanArn"}))
+    ListRestoreJobsInput.add_member(:by_parent_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ByParentJobId", traits: {"smithy.api#httpQuery" => "parentJobId"}))
     ListRestoreJobsInput.type = Types::ListRestoreJobsInput
     ListRestoreJobsOutput.add_member(:restore_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreJobsList, name: "RestoreJobs"))
     ListRestoreJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -1359,6 +1617,35 @@ module Aws::Backup
     ListRestoreTestingSelectionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
     ListRestoreTestingSelectionsOutput.add_member(:restore_testing_selections, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreTestingSelections, name: "RestoreTestingSelections", traits: {"smithy.api#required" => {}}))
     ListRestoreTestingSelectionsOutput.type = Types::ListRestoreTestingSelectionsOutput
+    ListScanJobSummariesInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId", traits: {"smithy.api#httpQuery" => "AccountId"}))
+    ListScanJobSummariesInput.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#httpQuery" => "ResourceType"}))
+    ListScanJobSummariesInput.add_member(:malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "MalwareScanner", traits: {"smithy.api#httpQuery" => "MalwareScanner"}))
+    ListScanJobSummariesInput.add_member(:scan_result_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResultStatus, name: "ScanResultStatus", traits: {"smithy.api#httpQuery" => "ScanResultStatus"}))
+    ListScanJobSummariesInput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanJobStatus, name: "State", traits: {"smithy.api#httpQuery" => "State"}))
+    ListScanJobSummariesInput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregationPeriod, name: "AggregationPeriod", traits: {"smithy.api#httpQuery" => "AggregationPeriod"}))
+    ListScanJobSummariesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListScanJobSummariesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListScanJobSummariesInput.type = Types::ListScanJobSummariesInput
+    ListScanJobSummariesOutput.add_member(:scan_job_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanJobSummaryList, name: "ScanJobSummaries"))
+    ListScanJobSummariesOutput.add_member(:aggregation_period, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AggregationPeriod"))
+    ListScanJobSummariesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListScanJobSummariesOutput.type = Types::ListScanJobSummariesOutput
+    ListScanJobsInput.add_member(:by_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ByAccountId", traits: {"smithy.api#httpQuery" => "ByAccountId"}))
+    ListScanJobsInput.add_member(:by_backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ByBackupVaultName", traits: {"smithy.api#httpQuery" => "ByBackupVaultName"}))
+    ListScanJobsInput.add_member(:by_complete_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ByCompleteAfter", traits: {"smithy.api#httpQuery" => "ByCompleteAfter"}))
+    ListScanJobsInput.add_member(:by_complete_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ByCompleteBefore", traits: {"smithy.api#httpQuery" => "ByCompleteBefore"}))
+    ListScanJobsInput.add_member(:by_malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "ByMalwareScanner", traits: {"smithy.api#httpQuery" => "ByMalwareScanner"}))
+    ListScanJobsInput.add_member(:by_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ByRecoveryPointArn", traits: {"smithy.api#httpQuery" => "ByRecoveryPointArn"}))
+    ListScanJobsInput.add_member(:by_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ByResourceArn", traits: {"smithy.api#httpQuery" => "ByResourceArn"}))
+    ListScanJobsInput.add_member(:by_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResourceType, name: "ByResourceType", traits: {"smithy.api#httpQuery" => "ByResourceType"}))
+    ListScanJobsInput.add_member(:by_scan_result_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResultStatus, name: "ByScanResultStatus", traits: {"smithy.api#httpQuery" => "ByScanResultStatus"}))
+    ListScanJobsInput.add_member(:by_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanState, name: "ByState", traits: {"smithy.api#httpQuery" => "ByState"}))
+    ListScanJobsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListScanJobsInputMaxResultsInteger, name: "MaxResults", traits: {"smithy.api#httpQuery" => "MaxResults"}))
+    ListScanJobsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#httpQuery" => "NextToken"}))
+    ListScanJobsInput.type = Types::ListScanJobsInput
+    ListScanJobsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
+    ListScanJobsOutput.add_member(:scan_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanJobs, name: "ScanJobs", traits: {"smithy.api#required" => {}}))
+    ListScanJobsOutput.type = Types::ListScanJobsOutput
     ListTagsInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListTagsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -1366,6 +1653,13 @@ module Aws::Backup
     ListTagsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListTagsOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     ListTagsOutput.type = Types::ListTagsOutput
+    ListTieringConfigurationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListTieringConfigurationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListTieringConfigurationsInput.type = Types::ListTieringConfigurationsInput
+    ListTieringConfigurationsOutput.add_member(:tiering_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationsList, name: "TieringConfigurations"))
+    ListTieringConfigurationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListTieringConfigurationsOutput.type = Types::ListTieringConfigurationsOutput
+    MalwareScanner.add_member(:guardduty, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GUARDDUTY", traits: {"smithy.api#enumValue" => "GUARDDUTY"}))
     Metadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey, name: "key"))
     Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataValue, name: "value"))
     MissingParameterValueException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
@@ -1431,6 +1725,8 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:vault_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultType, name: "VaultType"))
     RecoveryPointByBackupVault.add_member(:index_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "IndexStatus"))
     RecoveryPointByBackupVault.add_member(:index_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IndexStatusMessage"))
+    RecoveryPointByBackupVault.add_member(:encryption_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyType, name: "EncryptionKeyType"))
+    RecoveryPointByBackupVault.add_member(:aggregated_scan_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedScanResult, name: "AggregatedScanResult"))
     RecoveryPointByBackupVault.type = Types::RecoveryPointByBackupVault
     RecoveryPointByBackupVaultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointByBackupVault, name: "member"))
     RecoveryPointByResource.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn"))
@@ -1446,12 +1742,18 @@ module Aws::Backup
     RecoveryPointByResource.add_member(:vault_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VaultType, name: "VaultType"))
     RecoveryPointByResource.add_member(:index_status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "IndexStatus"))
     RecoveryPointByResource.add_member(:index_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IndexStatusMessage"))
+    RecoveryPointByResource.add_member(:encryption_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyType, name: "EncryptionKeyType"))
+    RecoveryPointByResource.add_member(:aggregated_scan_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AggregatedScanResult, name: "AggregatedScanResult"))
     RecoveryPointByResource.type = Types::RecoveryPointByResource
     RecoveryPointByResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecoveryPointByResource, name: "member"))
     RecoveryPointCreator.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanId"))
     RecoveryPointCreator.add_member(:backup_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupPlanArn"))
+    RecoveryPointCreator.add_member(:backup_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanName"))
     RecoveryPointCreator.add_member(:backup_plan_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupPlanVersion"))
     RecoveryPointCreator.add_member(:backup_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupRuleId"))
+    RecoveryPointCreator.add_member(:backup_rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupRuleName"))
+    RecoveryPointCreator.add_member(:backup_rule_cron, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupRuleCron"))
+    RecoveryPointCreator.add_member(:backup_rule_timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupRuleTimezone"))
     RecoveryPointCreator.type = Types::RecoveryPointCreator
     RecoveryPointMember.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn"))
     RecoveryPointMember.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn"))
@@ -1512,6 +1814,11 @@ module Aws::Backup
     ResourceNotFoundException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Type"))
     ResourceNotFoundException.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Context"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    ResourceSelection.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArns, name: "Resources", traits: {"smithy.api#required" => {}}))
+    ResourceSelection.add_member(:tiering_down_settings_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringDownSettingsInDays, name: "TieringDownSettingsInDays", traits: {"smithy.api#required" => {}}))
+    ResourceSelection.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ResourceSelection.type = Types::ResourceSelection
+    ResourceSelections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSelection, name: "member"))
     ResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member"))
     ResourceTypeManagementPreference.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key"))
     ResourceTypeManagementPreference.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IsEnabled, name: "value"))
@@ -1556,6 +1863,8 @@ module Aws::Backup
     RestoreJobsListMember.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
     RestoreJobsListMember.add_member(:restore_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RestoreJobId"))
     RestoreJobsListMember.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RecoveryPointArn"))
+    RestoreJobsListMember.add_member(:source_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "SourceResourceArn"))
+    RestoreJobsListMember.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "BackupVaultArn"))
     RestoreJobsListMember.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     RestoreJobsListMember.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CompletionDate"))
     RestoreJobsListMember.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreJobStatus, name: "Status"))
@@ -1567,6 +1876,8 @@ module Aws::Backup
     RestoreJobsListMember.add_member(:created_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "CreatedResourceArn"))
     RestoreJobsListMember.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
     RestoreJobsListMember.add_member(:recovery_point_creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "RecoveryPointCreationDate"))
+    RestoreJobsListMember.add_member(:is_parent, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean2, name: "IsParent", traits: {"smithy.api#default" => false}))
+    RestoreJobsListMember.add_member(:parent_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ParentJobId"))
     RestoreJobsListMember.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreJobCreator, name: "CreatedBy"))
     RestoreJobsListMember.add_member(:validation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreValidationStatus, name: "ValidationStatus"))
     RestoreJobsListMember.add_member(:validation_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ValidationStatusMessage"))
@@ -1657,6 +1968,99 @@ module Aws::Backup
     RevokeRestoreAccessBackupVaultInput.add_member(:restore_access_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "RestoreAccessBackupVaultArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RevokeRestoreAccessBackupVaultInput.add_member(:requester_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: RequesterComment, name: "RequesterComment", traits: {"smithy.api#httpQuery" => "requesterComment"}))
     RevokeRestoreAccessBackupVaultInput.type = Types::RevokeRestoreAccessBackupVaultInput
+    RuleExecutionType.add_member(:continuous, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUOUS", traits: {"smithy.api#enumValue" => "CONTINUOUS"}))
+    RuleExecutionType.add_member(:snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SNAPSHOTS", traits: {"smithy.api#enumValue" => "SNAPSHOTS"}))
+    RuleExecutionType.add_member(:continuous_and_snapshots, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTINUOUS_AND_SNAPSHOTS", traits: {"smithy.api#enumValue" => "CONTINUOUS_AND_SNAPSHOTS"}))
+    ScanAction.add_member(:malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "MalwareScanner"))
+    ScanAction.add_member(:scan_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanMode, name: "ScanMode"))
+    ScanAction.type = Types::ScanAction
+    ScanActions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanAction, name: "member"))
+    ScanFinding.add_member(:malware, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MALWARE", traits: {"smithy.api#enumValue" => "MALWARE"}))
+    ScanFindings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanFinding, name: "member"))
+    ScanJob.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AccountId", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupVaultArn", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupVaultName", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CompletionDate"))
+    ScanJob.add_member(:continuous_scan_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ContinuousScanEndTime"))
+    ScanJob.add_member(:continuous_scan_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ContinuousScanStartTime"))
+    ScanJob.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanJobCreator, name: "CreatedBy", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreationDate", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "MalwareScanner", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RecoveryPointArn", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ResourceName", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResourceType, name: "ResourceType", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:scan_base_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanBaseRecoveryPointArn"))
+    ScanJob.add_member(:scan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanId"))
+    ScanJob.add_member(:scan_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanJobId", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:scan_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanMode, name: "ScanMode", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:scan_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResultInfo, name: "ScanResult"))
+    ScanJob.add_member(:scanner_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScannerRoleArn", traits: {"smithy.api#required" => {}}))
+    ScanJob.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanState, name: "State"))
+    ScanJob.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "StatusMessage"))
+    ScanJob.type = Types::ScanJob
+    ScanJobCreator.add_member(:backup_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupPlanArn", traits: {"smithy.api#required" => {}}))
+    ScanJobCreator.add_member(:backup_plan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupPlanId", traits: {"smithy.api#required" => {}}))
+    ScanJobCreator.add_member(:backup_plan_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupPlanVersion", traits: {"smithy.api#required" => {}}))
+    ScanJobCreator.add_member(:backup_rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupRuleId", traits: {"smithy.api#required" => {}}))
+    ScanJobCreator.type = Types::ScanJobCreator
+    ScanJobState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    ScanJobState.add_member(:completed_with_issues, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_WITH_ISSUES", traits: {"smithy.api#enumValue" => "COMPLETED_WITH_ISSUES"}))
+    ScanJobState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ScanJobState.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
+    ScanJobStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    ScanJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    ScanJobStatus.add_member(:completed_with_issues, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_WITH_ISSUES", traits: {"smithy.api#enumValue" => "COMPLETED_WITH_ISSUES"}))
+    ScanJobStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    ScanJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ScanJobStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
+    ScanJobStatus.add_member(:aggregate_all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGGREGATE_ALL", traits: {"smithy.api#enumValue" => "AGGREGATE_ALL"}))
+    ScanJobStatus.add_member(:any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY", traits: {"smithy.api#enumValue" => "ANY"}))
+    ScanJobSummary.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "Region"))
+    ScanJobSummary.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
+    ScanJobSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanJobStatus, name: "State"))
+    ScanJobSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
+    ScanJobSummary.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count", traits: {"smithy.api#default" => 0}))
+    ScanJobSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
+    ScanJobSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    ScanJobSummary.add_member(:malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "MalwareScanner"))
+    ScanJobSummary.add_member(:scan_result_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResultStatus, name: "ScanResultStatus"))
+    ScanJobSummary.type = Types::ScanJobSummary
+    ScanJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanJobSummary, name: "member"))
+    ScanJobs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanJob, name: "member"))
+    ScanMode.add_member(:full_scan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL_SCAN", traits: {"smithy.api#enumValue" => "FULL_SCAN"}))
+    ScanMode.add_member(:incremental_scan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL_SCAN", traits: {"smithy.api#enumValue" => "INCREMENTAL_SCAN"}))
+    ScanResourceType.add_member(:ebs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EBS", traits: {"smithy.api#enumValue" => "EBS"}))
+    ScanResourceType.add_member(:ec2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2", traits: {"smithy.api#enumValue" => "EC2"}))
+    ScanResourceType.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3", traits: {"smithy.api#enumValue" => "S3"}))
+    ScanResult.add_member(:malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "MalwareScanner"))
+    ScanResult.add_member(:scan_job_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanJobState, name: "ScanJobState"))
+    ScanResult.add_member(:last_scan_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastScanTimestamp"))
+    ScanResult.add_member(:findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanFindings, name: "Findings"))
+    ScanResult.type = Types::ScanResult
+    ScanResultInfo.add_member(:scan_result_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResultStatus, name: "ScanResultStatus", traits: {"smithy.api#required" => {}}))
+    ScanResultInfo.type = Types::ScanResultInfo
+    ScanResultStatus.add_member(:no_threats_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_THREATS_FOUND", traits: {"smithy.api#enumValue" => "NO_THREATS_FOUND"}))
+    ScanResultStatus.add_member(:threats_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THREATS_FOUND", traits: {"smithy.api#enumValue" => "THREATS_FOUND"}))
+    ScanResultStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    ScanResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanResult, name: "member"))
+    ScanSetting.add_member(:malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "MalwareScanner"))
+    ScanSetting.add_member(:resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypes, name: "ResourceTypes"))
+    ScanSetting.add_member(:scanner_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "ScannerRoleArn"))
+    ScanSetting.type = Types::ScanSetting
+    ScanSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanSetting, name: "member"))
+    ScanState.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
+    ScanState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    ScanState.add_member(:completed_with_issues, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_WITH_ISSUES", traits: {"smithy.api#enumValue" => "COMPLETED_WITH_ISSUES"}))
+    ScanState.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    ScanState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ScanState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    ScheduledPlanExecutionMember.add_member(:execution_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExecutionTime"))
+    ScheduledPlanExecutionMember.add_member(:rule_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RuleId"))
+    ScheduledPlanExecutionMember.add_member(:rule_execution_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleExecutionType, name: "RuleExecutionType"))
+    ScheduledPlanExecutionMember.type = Types::ScheduledPlanExecutionMember
+    ScheduledRunsPreview.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledPlanExecutionMember, name: "member"))
     SensitiveStringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
     SensitiveStringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ServiceUnavailableException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
@@ -1665,6 +2069,7 @@ module Aws::Backup
     ServiceUnavailableException.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Context"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
     StartBackupJobInput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultName, name: "BackupVaultName", traits: {"smithy.api#required" => {}}))
+    StartBackupJobInput.add_member(:logically_air_gapped_backup_vault_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "LogicallyAirGappedBackupVaultArn"))
     StartBackupJobInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     StartBackupJobInput.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
     StartBackupJobInput.add_member(:idempotency_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IdempotencyToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -1705,17 +2110,54 @@ module Aws::Backup
     StartRestoreJobInput.type = Types::StartRestoreJobInput
     StartRestoreJobOutput.add_member(:restore_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RestoreJobId, name: "RestoreJobId"))
     StartRestoreJobOutput.type = Types::StartRestoreJobOutput
+    StartScanJobInput.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "BackupVaultName", traits: {"smithy.api#required" => {}}))
+    StartScanJobInput.add_member(:continuous_scan_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "ContinuousScanEndTime"))
+    StartScanJobInput.add_member(:iam_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "IamRoleArn", traits: {"smithy.api#required" => {}}))
+    StartScanJobInput.add_member(:idempotency_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "IdempotencyToken"))
+    StartScanJobInput.add_member(:malware_scanner, ::Smithy::Schema::Shapes::MemberShape.new(target: MalwareScanner, name: "MalwareScanner", traits: {"smithy.api#required" => {}}))
+    StartScanJobInput.add_member(:recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RecoveryPointArn", traits: {"smithy.api#required" => {}}))
+    StartScanJobInput.add_member(:scan_base_recovery_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanBaseRecoveryPointArn"))
+    StartScanJobInput.add_member(:scan_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanMode, name: "ScanMode", traits: {"smithy.api#required" => {}}))
+    StartScanJobInput.add_member(:scanner_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScannerRoleArn", traits: {"smithy.api#required" => {}}))
+    StartScanJobInput.type = Types::StartScanJobInput
+    StartScanJobOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreationDate", traits: {"smithy.api#required" => {}}))
+    StartScanJobOutput.add_member(:scan_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ScanJobId", traits: {"smithy.api#required" => {}}))
+    StartScanJobOutput.type = Types::StartScanJobOutput
     StopBackupJobInput.add_member(:backup_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BackupJobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopBackupJobInput.type = Types::StopBackupJobInput
     StorageClass.add_member(:warm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARM", traits: {"smithy.api#enumValue" => "WARM"}))
     StorageClass.add_member(:cold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COLD", traits: {"smithy.api#enumValue" => "COLD"}))
     StorageClass.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapKeyString, name: "key"))
+    TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMapValueString, name: "value"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
+    TieringConfiguration.add_member(:tiering_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationName, name: "TieringConfigurationName", traits: {"smithy.api#required" => {}}))
+    TieringConfiguration.add_member(:tiering_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "TieringConfigurationArn"))
+    TieringConfiguration.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultNameOrWildcard, name: "BackupVaultName", traits: {"smithy.api#required" => {}}))
+    TieringConfiguration.add_member(:resource_selection, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSelections, name: "ResourceSelection", traits: {"smithy.api#required" => {}}))
+    TieringConfiguration.add_member(:creator_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatorRequestId, name: "CreatorRequestId"))
+    TieringConfiguration.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
+    TieringConfiguration.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
+    TieringConfiguration.type = Types::TieringConfiguration
+    TieringConfigurationInputForCreate.add_member(:tiering_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationName, name: "TieringConfigurationName", traits: {"smithy.api#required" => {}}))
+    TieringConfigurationInputForCreate.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultNameOrWildcard, name: "BackupVaultName", traits: {"smithy.api#required" => {}}))
+    TieringConfigurationInputForCreate.add_member(:resource_selection, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSelections, name: "ResourceSelection", traits: {"smithy.api#required" => {}}))
+    TieringConfigurationInputForCreate.type = Types::TieringConfigurationInputForCreate
+    TieringConfigurationInputForUpdate.add_member(:resource_selection, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSelections, name: "ResourceSelection", traits: {"smithy.api#required" => {}}))
+    TieringConfigurationInputForUpdate.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultNameOrWildcard, name: "BackupVaultName", traits: {"smithy.api#required" => {}}))
+    TieringConfigurationInputForUpdate.type = Types::TieringConfigurationInputForUpdate
+    TieringConfigurationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationsListMember, name: "member"))
+    TieringConfigurationsListMember.add_member(:tiering_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "TieringConfigurationArn"))
+    TieringConfigurationsListMember.add_member(:tiering_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationName, name: "TieringConfigurationName"))
+    TieringConfigurationsListMember.add_member(:backup_vault_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BackupVaultNameOrWildcard, name: "BackupVaultName"))
+    TieringConfigurationsListMember.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
+    TieringConfigurationsListMember.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
+    TieringConfigurationsListMember.type = Types::TieringConfigurationsListMember
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_key_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeyList", traits: {"smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -1727,6 +2169,7 @@ module Aws::Backup
     UpdateBackupPlanOutput.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationDate"))
     UpdateBackupPlanOutput.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VersionId"))
     UpdateBackupPlanOutput.add_member(:advanced_backup_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AdvancedBackupSettings, name: "AdvancedBackupSettings"))
+    UpdateBackupPlanOutput.add_member(:scan_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanSettings, name: "ScanSettings"))
     UpdateBackupPlanOutput.type = Types::UpdateBackupPlanOutput
     UpdateFrameworkInput.add_member(:framework_name, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkName, name: "FrameworkName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateFrameworkInput.add_member(:framework_description, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkDescription, name: "FrameworkDescription"))
@@ -1789,6 +2232,14 @@ module Aws::Backup
     UpdateRestoreTestingSelectionOutput.add_member(:restore_testing_selection_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RestoreTestingSelectionName", traits: {"smithy.api#required" => {}}))
     UpdateRestoreTestingSelectionOutput.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "UpdateTime", traits: {"smithy.api#required" => {}}))
     UpdateRestoreTestingSelectionOutput.type = Types::UpdateRestoreTestingSelectionOutput
+    UpdateTieringConfigurationInput.add_member(:tiering_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationName, name: "TieringConfigurationName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateTieringConfigurationInput.add_member(:tiering_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationInputForUpdate, name: "TieringConfiguration", traits: {"smithy.api#required" => {}}))
+    UpdateTieringConfigurationInput.type = Types::UpdateTieringConfigurationInput
+    UpdateTieringConfigurationOutput.add_member(:tiering_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "TieringConfigurationArn"))
+    UpdateTieringConfigurationOutput.add_member(:tiering_configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TieringConfigurationName, name: "TieringConfigurationName"))
+    UpdateTieringConfigurationOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
+    UpdateTieringConfigurationOutput.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastUpdatedTime"))
+    UpdateTieringConfigurationOutput.type = Types::UpdateTieringConfigurationOutput
     VaultNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     VaultState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     VaultState.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
@@ -1804,7 +2255,7 @@ module Aws::Backup
       service.id = "com.amazonaws.backup#CryoControllerUserManager"
       service.name = "CryoControllerUserManager"
       service.version = "2018-11-15"
-      service.traits = {"aws.api#service" => {"sdkId" => "Backup", "arnNamespace" => "backup", "cloudFormationName" => "Backup", "cloudTrailEventSource" => "backup.amazonaws.com", "endpointPrefix" => "backup"}, "aws.auth#sigv4" => {"name" => "backup"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Backup"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Backup", "arnNamespace" => "backup", "cloudFormationName" => "Backup", "cloudTrailEventSource" => "backup.amazonaws.com", "endpointPrefix" => "backup"}, "aws.auth#sigv4" => {"name" => "backup"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Backup", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://backup-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://backup-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://backup.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://backup.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_backup_vault_mpa_approval_team, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#AssociateBackupVaultMpaApprovalTeam"
         operation.name = "AssociateBackupVaultMpaApprovalTeam"
@@ -1828,6 +2279,21 @@ module Aws::Backup
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/legal-holds/{LegalHoldId}", "code" => 201}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_backup_access_point, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#CreateBackupAccessPoint"
+        operation.name = "CreateBackupAccessPoint"
+        operation.input = CreateBackupAccessPointRequest
+        operation.output = CreateBackupAccessPointResponse
+        operation.errors << AlreadyExistsException
+        operation.errors << ConflictException
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/backup-access-point/create", "code" => 201}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_backup_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#CreateBackupPlan"
@@ -1953,6 +2419,31 @@ module Aws::Backup
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/restore-testing/plans/{RestoreTestingPlanName}/selections", "code" => 201}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:create_tiering_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#CreateTieringConfiguration"
+        operation.name = "CreateTieringConfiguration"
+        operation.input = CreateTieringConfigurationInput
+        operation.output = CreateTieringConfigurationOutput
+        operation.errors << AlreadyExistsException
+        operation.errors << ConflictException
+        operation.errors << InvalidParameterValueException
+        operation.errors << LimitExceededException
+        operation.errors << MissingParameterValueException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/tiering-configurations", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_backup_access_point, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#DeleteBackupAccessPoint"
+        operation.name = "DeleteBackupAccessPoint"
+        operation.input = DeleteBackupAccessPointInput
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidRequestException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/backup-access-point/delete/{AccessPointArn}", "code" => 204}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_backup_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#DeleteBackupPlan"
         operation.name = "DeleteBackupPlan"
@@ -2077,6 +2568,29 @@ module Aws::Backup
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_tiering_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#DeleteTieringConfiguration"
+        operation.name = "DeleteTieringConfiguration"
+        operation.input = DeleteTieringConfigurationInput
+        operation.output = DeleteTieringConfigurationOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tiering-configurations/{TieringConfigurationName}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:describe_backup_access_point, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#DescribeBackupAccessPoint"
+        operation.name = "DescribeBackupAccessPoint"
+        operation.input = DescribeBackupAccessPointInput
+        operation.output = DescribeBackupAccessPointResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidRequestException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/backup-access-point/{AccessPointArn}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:describe_backup_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#DescribeBackupJob"
         operation.name = "DescribeBackupJob"
@@ -2193,6 +2707,17 @@ module Aws::Backup
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/restore-jobs/{RestoreJobId}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:describe_scan_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#DescribeScanJob"
+        operation.name = "DescribeScanJob"
+        operation.input = DescribeScanJobInput
+        operation.output = DescribeScanJobOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/scan/jobs/{ScanJobId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:disassociate_backup_vault_mpa_approval_team, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#DisassociateBackupVaultMpaApprovalTeam"
@@ -2320,6 +2845,17 @@ module Aws::Backup
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/legal-holds/{LegalHoldId}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:get_pitr_malware_scan_results, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#GetPITRMalwareScanResults"
+        operation.name = "GetPITRMalwareScanResults"
+        operation.input = GetPITRMalwareScanResultsInput
+        operation.output = GetPITRMalwareScanResultsOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/scan/pitr-malware-scan-results", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:get_recovery_point_index_details, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#GetRecoveryPointIndexDetails"
         operation.name = "GetRecoveryPointIndexDetails"
@@ -2389,6 +2925,47 @@ module Aws::Backup
         operation.output = GetSupportedResourceTypesOutput
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/supported-resource-types", "code" => 200}}
+      end)
+      service.add_operation(:get_tiering_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#GetTieringConfiguration"
+        operation.name = "GetTieringConfiguration"
+        operation.input = GetTieringConfigurationInput
+        operation.output = GetTieringConfigurationOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tiering-configurations/{TieringConfigurationName}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:list_backup_access_points, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#ListBackupAccessPoints"
+        operation.name = "ListBackupAccessPoints"
+        operation.input = ListBackupAccessPointsRequest
+        operation.output = ListBackupAccessPointsResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/backup-access-point", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListBackupAccessPoints.new
+      end)
+      service.add_operation(:list_backup_access_points_by_recovery_point, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#ListBackupAccessPointsByRecoveryPoint"
+        operation.name = "ListBackupAccessPointsByRecoveryPoint"
+        operation.input = ListBackupAccessPointsByRecoveryPointRequest
+        operation.output = ListBackupAccessPointsByRecoveryPointResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/backup-access-point/recovery-point/{RecoveryPointArn}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListBackupAccessPointsByRecoveryPoint.new
+      end)
+      service.add_operation(:list_backup_access_points_by_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#ListBackupAccessPointsByResource"
+        operation.name = "ListBackupAccessPointsByResource"
+        operation.input = ListBackupAccessPointsByResourceRequest
+        operation.output = ListBackupAccessPointsByResourceResponse
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/backup-access-point/resource/{ResourceArn}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListBackupAccessPointsByResource.new
       end)
       service.add_operation(:list_backup_job_summaries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#ListBackupJobSummaries"
@@ -2665,6 +3242,26 @@ module Aws::Backup
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/restore-testing/plans/{RestoreTestingPlanName}/selections", "code" => 200}}
         operation[:paginator] = Paginators::ListRestoreTestingSelections.new
       end)
+      service.add_operation(:list_scan_job_summaries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#ListScanJobSummaries"
+        operation.name = "ListScanJobSummaries"
+        operation.input = ListScanJobSummariesInput
+        operation.output = ListScanJobSummariesOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/audit/scan-job-summaries", "code" => 200}}
+        operation[:paginator] = Paginators::ListScanJobSummaries.new
+      end)
+      service.add_operation(:list_scan_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#ListScanJobs"
+        operation.name = "ListScanJobs"
+        operation.input = ListScanJobsInput
+        operation.output = ListScanJobsOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/scan/jobs", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::ListScanJobs.new
+      end)
       service.add_operation(:list_tags, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#ListTags"
         operation.name = "ListTags"
@@ -2676,6 +3273,16 @@ module Aws::Backup
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{ResourceArn}", "code" => 200}, "smithy.api#idempotent" => {}}
         operation[:paginator] = Paginators::ListTags.new
+      end)
+      service.add_operation(:list_tiering_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#ListTieringConfigurations"
+        operation.name = "ListTieringConfigurations"
+        operation.input = ListTieringConfigurationsInput
+        operation.output = ListTieringConfigurationsOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tiering-configurations", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation[:paginator] = Paginators::ListTieringConfigurations.new
       end)
       service.add_operation(:put_backup_vault_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#PutBackupVaultAccessPolicy"
@@ -2783,6 +3390,19 @@ module Aws::Backup
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/restore-jobs", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_scan_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#StartScanJob"
+        operation.name = "StartScanJob"
+        operation.input = StartScanJobInput
+        operation.output = StartScanJobOutput
+        operation.errors << InvalidParameterValueException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/scan/job", "code" => 201}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:stop_backup_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.backup#StopBackupJob"
@@ -2924,6 +3544,20 @@ module Aws::Backup
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_tiering_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.backup#UpdateTieringConfiguration"
+        operation.name = "UpdateTieringConfiguration"
+        operation.input = UpdateTieringConfigurationInput
+        operation.output = UpdateTieringConfigurationOutput
+        operation.errors << AlreadyExistsException
+        operation.errors << ConflictException
+        operation.errors << InvalidParameterValueException
+        operation.errors << LimitExceededException
+        operation.errors << MissingParameterValueException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/tiering-configurations/{TieringConfigurationName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
     end
 

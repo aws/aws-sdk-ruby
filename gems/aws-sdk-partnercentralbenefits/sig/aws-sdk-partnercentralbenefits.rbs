@@ -1,0 +1,5 @@
+  module Aws
+    module PartnerCentralBenefits
+      VERSION: String
+    end
+  end

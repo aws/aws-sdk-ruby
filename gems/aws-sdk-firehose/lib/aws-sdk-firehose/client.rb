@@ -144,18 +144,18 @@ module Aws::Firehose
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -357,7 +357,7 @@ module Aws::Firehose
     #         </p>
     # @option params [Types::DatabaseSourceConfiguration] :database_source_configuration
     #   <p>
-    #               The top level object for configuring streams with database as a source. 
+    #               The top level object for configuring streams with database as a source.
     #            </p>
     #            <p>Amazon Data Firehose is in preview release and is subject to change.</p>
     # @example Request syntax with placeholder values
@@ -372,7 +372,7 @@ module Aws::Firehose
     #       role_arn: "RoleARN", # required
     #     },
     #     delivery_stream_encryption_configuration_input: {
-    #       key_arn: "AWSKMSKeyARN",
+    #       key_arn: "AWSKMSKeyARNForSSE",
     #       key_type: "AWS_OWNED_CMK" # One of: ["AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"], # required
     #     },
     #     s3_destination_configuration: {
@@ -1132,13 +1132,13 @@ module Aws::Firehose
     #             <code>ACTIVE</code>, <code>DELETING</code>, <code>CREATING_FAILED</code>, or
     #             <code>DELETING_FAILED</code>. You can't delete a Firehose stream that is in the
     #          <code>CREATING</code> state. To check the state of a Firehose stream, use <a>DescribeDeliveryStream</a>. </p>
-    #          <p>DeleteDeliveryStream is an asynchronous API. When an API request to DeleteDeliveryStream succeeds, the Firehose stream is marked for deletion, and it goes into the 
+    #          <p>DeleteDeliveryStream is an asynchronous API. When an API request to DeleteDeliveryStream succeeds, the Firehose stream is marked for deletion, and it goes into the
     #          <code>DELETING</code> state.While the Firehose stream is in the <code>DELETING</code> state, the service might
     #          continue to accept records, but it doesn't make any guarantees with respect to delivering
     #          the data. Therefore, as a best practice, first stop any applications that are sending
     #          records before you delete a Firehose stream.</p>
-    #          <p>Removal of a Firehose stream that is in the <code>DELETING</code> state is a low priority operation for the service. A stream may remain in the 
-    #          <code>DELETING</code> state for several minutes. Therefore, as a best practice, applications should not wait for streams in the <code>DELETING</code> state 
+    #          <p>Removal of a Firehose stream that is in the <code>DELETING</code> state is a low priority operation for the service. A stream may remain in the
+    #          <code>DELETING</code> state for several minutes. Therefore, as a best practice, applications should not wait for streams in the <code>DELETING</code> state
     #          to be removed. </p>
     # @param [Hash, Types::DeleteDeliveryStreamInput] params
     # @option params [String] :delivery_stream_name
@@ -1203,7 +1203,7 @@ module Aws::Firehose
     #         details: "NonEmptyString", # required
     #       },
     #       delivery_stream_encryption_configuration: {
-    #         key_arn: "AWSKMSKeyARN",
+    #         key_arn: "AWSKMSKeyARNForSSE",
     #         key_type: "AWS_OWNED_CMK" # One of: ["AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"],
     #         status: "ENABLED" # One of: ["ENABLED", "ENABLING", "ENABLING_FAILED", "DISABLED", "DISABLING", "DISABLING_FAILED"],
     #         failure_description: {
@@ -2285,7 +2285,7 @@ module Aws::Firehose
     #   params = {
     #     delivery_stream_name: "DeliveryStreamName", # required
     #     delivery_stream_encryption_configuration_input: {
-    #       key_arn: "AWSKMSKeyARN",
+    #       key_arn: "AWSKMSKeyARNForSSE",
     #       key_type: "AWS_OWNED_CMK" # One of: ["AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"], # required
     #     }
     #   }

@@ -175,7 +175,7 @@ module Aws::GameLift
       end
     end
 
-    # <p>The requested resources was not found. The resource was either not created yet or deleted.</p>
+    # <p>The requested resource was not found. The resource was either not created yet or deleted.</p>
     class NotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::GameLift::Types::NotFoundException] data

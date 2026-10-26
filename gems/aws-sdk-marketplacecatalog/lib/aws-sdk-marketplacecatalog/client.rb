@@ -144,18 +144,18 @@ module Aws::MarketplaceCatalog
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -300,6 +300,84 @@ module Aws::MarketplaceCatalog
       request.send_request(options)
     end
 
+    # <p>Returns the metadata and detailed results of a single assessment, including the
+    #             framework that was evaluated, the overall assessment result, and a paginated list of
+    #             individual control evaluation results.</p>
+    #          <p>To list available assessments before describing one, use the
+    #             <code>ListAssessments</code> action.</p>
+    # @param [Hash, Types::DescribeAssessmentRequest] params
+    # @option params [String] :catalog
+    #   <p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code>
+    #            </p>
+    # @option params [String] :assessment_identifier
+    #   <p>The unique identifier of the assessment to describe. You can provide either
+    #               the assessment ID (for example, <code>assessment-12345</code>) or the full
+    #               assessment ARN (for example,
+    #               <code>arn:aws:aws-marketplace:us-east-1::AWSMarketplace/Assessment/assessment-12345</code>).</p>
+    # @option params [Integer] :max_results
+    #   <p>Specifies the upper limit of <code>ControlAssessment</code> elements returned on a
+    #               single page. If a value isn't provided, the default value is 50. Valid values range
+    #               from 1 to 100.</p>
+    # @option params [String] :next_token
+    #   <p>The value of the next token, if it exists. <code>null</code> if there are no more
+    #               results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog: "Catalog", # required
+    #     assessment_identifier: "AssessmentIdentifier", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.describe_assessment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     assessment_arn: "ARN",
+    #     assessment_id: "ResourceId",
+    #     framework_id: "VersionedFrameworkId",
+    #     assessment_target_summary: {
+    #       entity_id: "ResourceId",
+    #       change_set_id: "ResourceId"
+    #     },
+    #     framework_summary: {
+    #       # One of:
+    #       ami_security_summary: {
+    #         delivery_option_id: "ResourceId"
+    #       },
+    #       container_security_summary: {
+    #         delivery_option_id: "ResourceId"
+    #       }
+    #     },
+    #     assessment_result: "PASS" # One of: ["PASS", "FAIL"],
+    #     created_at: "DateTimeISO8601",
+    #     expires_at: "DateTimeISO8601",
+    #     control_assessments: [
+    #       {
+    #         control_id: "ResourceId",
+    #         control_assessment_result: "PASS" # One of: ["PASS", "FAIL", "NOT_EXECUTED", "EXEMPTION_PASS"],
+    #         errors: [
+    #           {
+    #             code: "ErrorCode",
+    #             message: "ErrorMessage",
+    #             scope: [
+    #               {
+    #                 name: "ScopeName",
+    #                 value: "ScopeValue"
+    #               }
+    #             ]
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::DescribeAssessmentResponse]
+    def describe_assessment(params = {}, options = {})
+      request = build_request(:describe_assessment, params)
+      request.send_request(options)
+    end
+
     # <p>Provides information about a given change set.</p>
     # @param [Hash, Types::DescribeChangeSetRequest] params
     # @option params [String] :catalog
@@ -407,6 +485,90 @@ module Aws::MarketplaceCatalog
       request.send_request(options)
     end
 
+    # <p>Returns a paginated list of assessments associated with an entity or change set in
+    #             AWS Marketplace. An <i>assessment</i> is the result of evaluating a
+    #             product or change set against a framework, such as AMI Security or Container
+    #             Security.</p>
+    #          <p>Use the <code>AssessmentTargetFilter</code> to scope results to a specific entity or
+    #             change set, and use <code>FrameworkFilters</code> to scope results to a single
+    #             framework. To retrieve detailed control-level results for an individual assessment, use
+    #             the <code>DescribeAssessment</code> action.</p>
+    #          <p>Results are sorted by assessment creation time in descending order.</p>
+    # @param [Hash, Types::ListAssessmentsRequest] params
+    # @option params [String] :catalog
+    #   <p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code>
+    #            </p>
+    # @option params [String] :framework_id
+    #   <p>The unique identifier of a framework. When specified, only assessments performed
+    #               against this framework are returned. For example, <code>AMISecurity</code>.</p>
+    # @option params [Types::AssessmentTargetFilter] :assessment_target_filter
+    #   <p>Filters the list of assessments to those performed against a specific entity or
+    #               change set.</p>
+    # @option params [Types::FrameworkFilters] :framework_filters
+    #   <p>Framework-specific filters. Set exactly one member to filter results to assessments
+    #               performed against that framework.</p>
+    # @option params [Integer] :max_results
+    #   <p>Specifies the upper limit of the elements on a single page. If a value isn't provided,
+    #               the default value is 20. Valid values range from 1 to 100.</p>
+    # @option params [String] :next_token
+    #   <p>The value of the next token, if it exists. <code>null</code> if there are no more
+    #               results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     catalog: "Catalog", # required
+    #     framework_id: "FrameworkId",
+    #     assessment_target_filter: {
+    #       entity_id: "ResourceId",
+    #       change_set_id: "ResourceId"
+    #     },
+    #     framework_filters: {
+    #       # One of:
+    #       ami_security_filters: {
+    #         delivery_option_id: "ResourceId"
+    #       },
+    #       container_security_filters: {
+    #         delivery_option_id: "ResourceId"
+    #       }
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_assessments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     assessment_summary_list: [
+    #       {
+    #         assessment_arn: "ARN",
+    #         assessment_id: "ResourceId",
+    #         framework_id: "VersionedFrameworkId",
+    #         assessment_target_summary: {
+    #           entity_id: "ResourceId",
+    #           change_set_id: "ResourceId"
+    #         },
+    #         framework_summary: {
+    #           # One of:
+    #           ami_security_summary: {
+    #             delivery_option_id: "ResourceId"
+    #           },
+    #           container_security_summary: {
+    #             delivery_option_id: "ResourceId"
+    #           }
+    #         },
+    #         assessment_result: "PASS" # One of: ["PASS", "FAIL"],
+    #         created_at: "DateTimeISO8601",
+    #         expires_at: "DateTimeISO8601"
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAssessmentsResponse]
+    def list_assessments(params = {}, options = {})
+      request = build_request(:list_assessments, params)
+      request.send_request(options)
+    end
+
     # <p>Returns the list of change sets owned by the account being used to make the call. You
     #             can filter this list by providing any combination of <code>entityId</code>,
     #                 <code>ChangeSetName</code>, and status. If you provide more than one filter, the API
@@ -481,8 +643,8 @@ module Aws::MarketplaceCatalog
     #               values are: <code>AmiProduct</code>, <code>ContainerProduct</code>,
     #                   <code>DataProduct</code>, <code>SaaSProduct</code>, <code>ProcurementPolicy</code>,
     #                   <code>Experience</code>, <code>Audience</code>, <code>BrandingSettings</code>,
-    #                   <code>Offer</code>, <code>Seller</code>,
-    #               <code>ResaleAuthorization</code>.</p>
+    #                   <code>Offer</code>, <code>OfferSet</code>, <code>Seller</code>,
+    #               <code>ResaleAuthorization</code>, <code>Solution</code>.</p>
     # @option params [Array<Types::Filter>] :filter_list
     #   <p>An array of filter objects. Each filter object contains two attributes,
     #                   <code>filterName</code> and <code>filterValues</code>.</p>
@@ -622,6 +784,18 @@ module Aws::MarketplaceCatalog
     #             after_value: "DateTimeISO8601",
     #             before_value: "DateTimeISO8601"
     #           }
+    #         },
+    #         offer_set_id: {
+    #           value_list: ["OfferSetIdString"]
+    #         },
+    #         target_agreement_id: {
+    #           value_list: ["OfferTargetAgreementIdString"]
+    #         },
+    #         target_agreement_intent: {
+    #           value_list: ["Renew" # One of: ["Renew"]]
+    #         },
+    #         created_by_source: {
+    #           value_list: ["Seller" # One of: ["Seller", "AwsMarketplace"]]
     #         }
     #       },
     #       container_product_filters: {
@@ -699,6 +873,15 @@ module Aws::MarketplaceCatalog
     #             after_value: "DateTimeISO8601",
     #             before_value: "DateTimeISO8601"
     #           }
+    #         },
+    #         reseller_role: {
+    #           value_list: ["ChannelPartner" # One of: ["ChannelPartner", "Distributor"]]
+    #         },
+    #         source_authorization: {
+    #           value_list: ["ResaleAuthorizationSourceAuthorizationString"]
+    #         },
+    #         issuer_account_id: {
+    #           value_list: ["ResaleAuthorizationIssuerAccountIdString"]
     #         }
     #       },
     #       machine_learning_product_filters: {
@@ -718,6 +901,35 @@ module Aws::MarketplaceCatalog
     #         visibility: {
     #           value_list: ["Limited" # One of: ["Limited", "Public", "Restricted", "Draft"]]
     #         }
+    #       },
+    #       offer_set_filters: {
+    #         entity_id: {
+    #           value_list: ["OfferSetEntityIdString"]
+    #         },
+    #         name: {
+    #           value_list: ["OfferSetNameString"]
+    #         },
+    #         state: {
+    #           value_list: ["Draft" # One of: ["Draft", "Released"]]
+    #         },
+    #         release_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601"
+    #           }
+    #         },
+    #         associated_offer_ids: {
+    #           value_list: ["OfferSetAssociatedOfferIdsString"]
+    #         },
+    #         solution_id: {
+    #           value_list: ["OfferSetSolutionIdString"]
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601"
+    #           }
+    #         }
     #       }
     #     },
     #     entity_type_sort: {
@@ -727,7 +939,7 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
     #       },
     #       saa_s_product_sort: {
-    #         sort_by: "EntityId" # One of: ["EntityId", "ProductTitle", "Visibility", "LastModifiedDate"],
+    #         sort_by: "EntityId" # One of: ["EntityId", "ProductTitle", "Visibility", "LastModifiedDate", "DeliveryOptionTypes"],
     #         sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
     #       },
     #       ami_product_sort: {
@@ -735,19 +947,23 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
     #       },
     #       offer_sort: {
-    #         sort_by: "EntityId" # One of: ["EntityId", "Name", "ProductId", "ResaleAuthorizationId", "ReleaseDate", "AvailabilityEndDate", "BuyerAccounts", "State", "Targeting", "LastModifiedDate"],
+    #         sort_by: "EntityId" # One of: ["EntityId", "Name", "ProductId", "ResaleAuthorizationId", "ReleaseDate", "AvailabilityEndDate", "BuyerAccounts", "State", "Targeting", "LastModifiedDate", "OfferSetId", "TargetAgreementId", "TargetAgreementIntent", "CreatedBySource"],
     #         sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
     #       },
     #       container_product_sort: {
-    #         sort_by: "EntityId" # One of: ["EntityId", "LastModifiedDate", "ProductTitle", "Visibility"],
+    #         sort_by: "EntityId" # One of: ["EntityId", "LastModifiedDate", "ProductTitle", "Visibility", "CompatibleAWSServices"],
     #         sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
     #       },
     #       resale_authorization_sort: {
-    #         sort_by: "EntityId" # One of: ["EntityId", "Name", "ProductId", "ProductName", "ManufacturerAccountId", "ManufacturerLegalName", "ResellerAccountID", "ResellerLegalName", "Status", "OfferExtendedStatus", "CreatedDate", "AvailabilityEndDate", "LastModifiedDate"],
+    #         sort_by: "EntityId" # One of: ["EntityId", "Name", "ProductId", "ProductName", "ManufacturerAccountId", "ManufacturerLegalName", "ResellerAccountID", "ResellerLegalName", "Status", "OfferExtendedStatus", "CreatedDate", "AvailabilityEndDate", "LastModifiedDate", "ResellerRole", "SourceAuthorization", "IssuerAccountId"],
     #         sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
     #       },
     #       machine_learning_product_sort: {
     #         sort_by: "EntityId" # One of: ["EntityId", "LastModifiedDate", "ProductTitle", "Visibility"],
+    #         sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
+    #       },
+    #       offer_set_sort: {
+    #         sort_by: "Name" # One of: ["Name", "State", "ReleaseDate", "SolutionId", "EntityId", "LastModifiedDate"],
     #         sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
     #       }
     #     }
@@ -789,7 +1005,11 @@ module Aws::MarketplaceCatalog
     #           availability_end_date: "DateTimeISO8601",
     #           buyer_accounts: ["OfferBuyerAccountsString"],
     #           state: "Draft" # One of: ["Draft", "Released"],
-    #           targeting: ["BuyerAccounts" # One of: ["BuyerAccounts", "ParticipatingPrograms", "CountryCodes", "None"]]
+    #           targeting: ["BuyerAccounts" # One of: ["BuyerAccounts", "ParticipatingPrograms", "CountryCodes", "None"]],
+    #           offer_set_id: "OfferSetIdString",
+    #           target_agreement_id: "OfferTargetAgreementIdString",
+    #           target_agreement_intent: "Renew" # One of: ["Renew"],
+    #           created_by_source: "Seller" # One of: ["Seller", "AwsMarketplace"]
     #         },
     #         resale_authorization_summary: {
     #           name: "ResaleAuthorizationNameString",
@@ -802,11 +1022,21 @@ module Aws::MarketplaceCatalog
     #           status: "Draft" # One of: ["Draft", "Active", "Restricted"],
     #           offer_extended_status: "ResaleAuthorizationOfferExtendedStatusString",
     #           created_date: "DateTimeISO8601",
-    #           availability_end_date: "DateTimeISO8601"
+    #           availability_end_date: "DateTimeISO8601",
+    #           reseller_role: "ChannelPartner" # One of: ["ChannelPartner", "Distributor"],
+    #           source_authorization: "ResaleAuthorizationSourceAuthorizationString",
+    #           issuer_account_id: "ResaleAuthorizationIssuerAccountIdString"
     #         },
     #         machine_learning_product_summary: {
     #           product_title: "MachineLearningProductTitleString",
     #           visibility: "Limited" # One of: ["Limited", "Public", "Restricted", "Draft"]
+    #         },
+    #         offer_set_summary: {
+    #           name: "OfferSetNameString",
+    #           state: "Draft" # One of: ["Draft", "Released"],
+    #           release_date: "DateTimeISO8601",
+    #           associated_offer_ids: ["OfferSetAssociatedOfferIdsString"],
+    #           solution_id: "OfferSetSolutionIdString"
     #         }
     #       }
     #     ],
@@ -883,7 +1113,7 @@ module Aws::MarketplaceCatalog
     #          <p>For more information about working with change sets, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets"> Working with change sets</a>. For information about change types for
     #             single-AMI products, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products">Working with single-AMI products</a>. Also, for more information about change
     #             types available for container-based products, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products">Working with container products</a>.</p>
-    #          <p>To download "DetailsDocument" shapes, see <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a> 
+    #          <p>To download "DetailsDocument" shapes, see <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python">Python</a>
     #             and <a href="https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main">Java</a> shapes on GitHub.</p>
     # @param [Hash, Types::StartChangeSetRequest] params
     # @option params [String] :catalog

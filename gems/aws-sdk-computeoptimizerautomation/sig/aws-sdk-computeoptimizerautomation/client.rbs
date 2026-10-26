@@ -1,0 +1,533 @@
+module Aws::ComputeOptimizerAutomation
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ComputeOptimizerAutomation::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAccountsResponse
+      include Smithy::Client::_Response[Types::AssociateAccountsResponse]
+      def account_ids: () -> Array[String]?
+      def errors: () -> Array[String]?
+    end
+    def associate_accounts: (
+      ?account_ids: Array[String],
+      ?client_token: String
+    ) -> _AssociateAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAccountsResponse
+
+    interface _CreateAutomationRuleResponse
+      include Smithy::Client::_Response[Types::CreateAutomationRuleResponse]
+      def rule_arn: () -> String?
+      def rule_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def rule_type: () -> String?
+      def rule_revision: () -> Integer?
+      def organization_configuration: () -> Types::OrganizationConfiguration?
+      def priority: () -> String?
+      def recommended_action_types: () -> Array[String]?
+      def criteria: () -> Types::Criteria?
+      def schedule: () -> Types::Schedule?
+      def status: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+    end
+    def create_automation_rule: (
+      ?name: String,
+      ?description: String,
+      ?rule_type: String,
+      ?organization_configuration: {
+        rule_apply_order: String,
+        account_ids: Array[String]
+      },
+      ?priority: String,
+      ?recommended_action_types: Array[String],
+      ?criteria: {
+        region: Array[
+          {
+            comparison: String,
+            values: Array[String]
+          }
+        ],
+        resource_arn: untyped,
+        ebs_volume_type: untyped,
+        ebs_volume_size_in_gib: Array[
+          {
+            comparison: untyped,
+            values: Array[Integer]
+          }
+        ],
+        estimated_monthly_savings: Array[
+          {
+            comparison: untyped,
+            values: Array[Float]
+          }
+        ],
+        resource_tag: Array[
+          {
+            comparison: untyped,
+            key: String,
+            values: untyped
+          }
+        ],
+        look_back_period_in_days: untyped,
+        restart_needed: untyped
+      },
+      ?schedule: {
+        schedule_expression: String,
+        schedule_expression_timezone: untyped,
+        execution_window_in_minutes: Integer
+      },
+      ?status: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateAutomationRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutomationRuleResponse
+
+    interface _DeleteAutomationRuleResponse
+      include Smithy::Client::_Response[Types::DeleteAutomationRuleResponse]
+    end
+    def delete_automation_rule: (
+      ?rule_arn: String,
+      ?rule_revision: Integer,
+      ?client_token: String
+    ) -> _DeleteAutomationRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutomationRuleResponse
+
+    interface _DisassociateAccountsResponse
+      include Smithy::Client::_Response[Types::DisassociateAccountsResponse]
+      def account_ids: () -> Array[String]?
+      def errors: () -> Array[String]?
+    end
+    def disassociate_accounts: (
+      ?account_ids: Array[String],
+      ?client_token: String
+    ) -> _DisassociateAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAccountsResponse
+
+    interface _GetAutomationEventResponse
+      include Smithy::Client::_Response[Types::GetAutomationEventResponse]
+      def event_id: () -> String?
+      def event_description: () -> String?
+      def event_type: () -> String?
+      def event_status: () -> String?
+      def event_status_reason: () -> String?
+      def resource_arn: () -> String?
+      def resource_id: () -> String?
+      def recommended_action_id: () -> String?
+      def account_id: () -> String?
+      def region: () -> String?
+      def rule_id: () -> String?
+      def resource_type: () -> String?
+      def created_timestamp: () -> Time?
+      def completed_timestamp: () -> Time?
+      def estimated_monthly_savings: () -> Types::EstimatedMonthlySavings?
+    end
+    def get_automation_event: (
+      ?event_id: String
+    ) -> _GetAutomationEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomationEventResponse
+
+    interface _GetAutomationRuleResponse
+      include Smithy::Client::_Response[Types::GetAutomationRuleResponse]
+      def rule_arn: () -> String?
+      def rule_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def rule_type: () -> String?
+      def rule_revision: () -> Integer?
+      def account_id: () -> String?
+      def organization_configuration: () -> Types::OrganizationConfiguration?
+      def priority: () -> String?
+      def recommended_action_types: () -> Array[String]?
+      def criteria: () -> Types::Criteria?
+      def schedule: () -> Types::Schedule?
+      def status: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def created_timestamp: () -> Time?
+      def last_updated_timestamp: () -> Time?
+    end
+    def get_automation_rule: (
+      ?rule_arn: String
+    ) -> _GetAutomationRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutomationRuleResponse
+
+    interface _GetEnrollmentConfigurationResponse
+      include Smithy::Client::_Response[Types::GetEnrollmentConfigurationResponse]
+      def status: () -> String?
+      def status_reason: () -> String?
+      def organization_rule_mode: () -> String?
+      def last_updated_timestamp: () -> Time?
+    end
+    def get_enrollment_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnrollmentConfigurationResponse
+
+    interface _ListAccountsResponse
+      include Smithy::Client::_Response[Types::ListAccountsResponse]
+      def accounts: () -> Array[Types::AccountInfo]?
+      def next_token: () -> String?
+    end
+    def list_accounts: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountsResponse
+
+    interface _ListAutomationEventStepsResponse
+      include Smithy::Client::_Response[Types::ListAutomationEventStepsResponse]
+      def automation_event_steps: () -> Array[Types::AutomationEventStep]?
+      def next_token: () -> String?
+    end
+    def list_automation_event_steps: (
+      ?event_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAutomationEventStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomationEventStepsResponse
+
+    interface _ListAutomationEventSummariesResponse
+      include Smithy::Client::_Response[Types::ListAutomationEventSummariesResponse]
+      def automation_event_summaries: () -> Array[Types::AutomationEventSummary]?
+      def next_token: () -> String?
+    end
+    def list_automation_event_summaries: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?start_date_inclusive: String,
+      ?end_date_exclusive: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAutomationEventSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomationEventSummariesResponse
+
+    interface _ListAutomationEventsResponse
+      include Smithy::Client::_Response[Types::ListAutomationEventsResponse]
+      def automation_events: () -> Array[Types::AutomationEvent]?
+      def next_token: () -> String?
+    end
+    def list_automation_events: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?start_time_inclusive: Time,
+      ?end_time_exclusive: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAutomationEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomationEventsResponse
+
+    interface _ListAutomationRulePreviewResponse
+      include Smithy::Client::_Response[Types::ListAutomationRulePreviewResponse]
+      def preview_results: () -> Array[Types::PreviewResult]?
+      def next_token: () -> String?
+    end
+    def list_automation_rule_preview: (
+      ?rule_type: String,
+      ?organization_scope: {
+        account_ids: Array[String]
+      },
+      ?recommended_action_types: Array[String],
+      ?criteria: {
+        region: Array[
+          {
+            comparison: String,
+            values: Array[String]
+          }
+        ],
+        resource_arn: untyped,
+        ebs_volume_type: untyped,
+        ebs_volume_size_in_gib: Array[
+          {
+            comparison: untyped,
+            values: Array[Integer]
+          }
+        ],
+        estimated_monthly_savings: Array[
+          {
+            comparison: untyped,
+            values: Array[Float]
+          }
+        ],
+        resource_tag: Array[
+          {
+            comparison: untyped,
+            key: String,
+            values: untyped
+          }
+        ],
+        look_back_period_in_days: untyped,
+        restart_needed: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAutomationRulePreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomationRulePreviewResponse
+
+    interface _ListAutomationRulePreviewSummariesResponse
+      include Smithy::Client::_Response[Types::ListAutomationRulePreviewSummariesResponse]
+      def preview_result_summaries: () -> Array[Types::PreviewResultSummary]?
+      def next_token: () -> String?
+    end
+    def list_automation_rule_preview_summaries: (
+      ?rule_type: String,
+      ?organization_scope: {
+        account_ids: Array[String]
+      },
+      ?recommended_action_types: Array[String],
+      ?criteria: {
+        region: Array[
+          {
+            comparison: String,
+            values: Array[String]
+          }
+        ],
+        resource_arn: untyped,
+        ebs_volume_type: untyped,
+        ebs_volume_size_in_gib: Array[
+          {
+            comparison: untyped,
+            values: Array[Integer]
+          }
+        ],
+        estimated_monthly_savings: Array[
+          {
+            comparison: untyped,
+            values: Array[Float]
+          }
+        ],
+        resource_tag: Array[
+          {
+            comparison: untyped,
+            key: String,
+            values: untyped
+          }
+        ],
+        look_back_period_in_days: untyped,
+        restart_needed: untyped
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAutomationRulePreviewSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomationRulePreviewSummariesResponse
+
+    interface _ListAutomationRulesResponse
+      include Smithy::Client::_Response[Types::ListAutomationRulesResponse]
+      def automation_rules: () -> Array[Types::AutomationRule]?
+      def next_token: () -> String?
+    end
+    def list_automation_rules: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAutomationRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutomationRulesResponse
+
+    interface _ListRecommendedActionSummariesResponse
+      include Smithy::Client::_Response[Types::ListRecommendedActionSummariesResponse]
+      def recommended_action_summaries: () -> Array[Types::RecommendedActionSummary]?
+      def next_token: () -> String?
+    end
+    def list_recommended_action_summaries: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRecommendedActionSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendedActionSummariesResponse
+
+    interface _ListRecommendedActionsResponse
+      include Smithy::Client::_Response[Types::ListRecommendedActionsResponse]
+      def recommended_actions: () -> Array[Types::RecommendedAction]?
+      def next_token: () -> String?
+    end
+    def list_recommended_actions: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRecommendedActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendedActionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RollbackAutomationEventResponse
+      include Smithy::Client::_Response[Types::RollbackAutomationEventResponse]
+      def event_id: () -> String?
+      def event_status: () -> String?
+    end
+    def rollback_automation_event: (
+      ?event_id: String,
+      ?client_token: String
+    ) -> _RollbackAutomationEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RollbackAutomationEventResponse
+
+    interface _StartAutomationEventResponse
+      include Smithy::Client::_Response[Types::StartAutomationEventResponse]
+      def recommended_action_id: () -> String?
+      def event_id: () -> String?
+      def event_status: () -> String?
+    end
+    def start_automation_event: (
+      ?recommended_action_id: String,
+      ?client_token: String
+    ) -> _StartAutomationEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAutomationEventResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?rule_revision: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?rule_revision: Integer,
+      ?tag_keys: Array[String],
+      ?client_token: String
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAutomationRuleResponse
+      include Smithy::Client::_Response[Types::UpdateAutomationRuleResponse]
+      def rule_arn: () -> String?
+      def rule_revision: () -> Integer?
+      def name: () -> String?
+      def description: () -> String?
+      def rule_type: () -> String?
+      def organization_configuration: () -> Types::OrganizationConfiguration?
+      def priority: () -> String?
+      def recommended_action_types: () -> Array[String]?
+      def criteria: () -> Types::Criteria?
+      def schedule: () -> Types::Schedule?
+      def status: () -> String?
+      def created_timestamp: () -> Time?
+      def last_updated_timestamp: () -> Time?
+    end
+    def update_automation_rule: (
+      ?rule_arn: String,
+      ?rule_revision: Integer,
+      ?name: String,
+      ?description: String,
+      ?rule_type: String,
+      ?organization_configuration: {
+        rule_apply_order: String,
+        account_ids: Array[String]
+      },
+      ?priority: String,
+      ?recommended_action_types: Array[String],
+      ?criteria: {
+        region: Array[
+          {
+            comparison: String,
+            values: Array[String]
+          }
+        ],
+        resource_arn: untyped,
+        ebs_volume_type: untyped,
+        ebs_volume_size_in_gib: Array[
+          {
+            comparison: untyped,
+            values: Array[Integer]
+          }
+        ],
+        estimated_monthly_savings: Array[
+          {
+            comparison: untyped,
+            values: Array[Float]
+          }
+        ],
+        resource_tag: Array[
+          {
+            comparison: untyped,
+            key: String,
+            values: untyped
+          }
+        ],
+        look_back_period_in_days: untyped,
+        restart_needed: untyped
+      },
+      ?schedule: {
+        schedule_expression: String,
+        schedule_expression_timezone: untyped,
+        execution_window_in_minutes: Integer
+      },
+      ?status: String,
+      ?client_token: String
+    ) -> _UpdateAutomationRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutomationRuleResponse
+
+    interface _UpdateEnrollmentConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateEnrollmentConfigurationResponse]
+      def status: () -> String?
+      def status_reason: () -> String?
+      def last_updated_timestamp: () -> Time?
+    end
+    def update_enrollment_configuration: (
+      ?status: String,
+      ?client_token: String
+    ) -> _UpdateEnrollmentConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnrollmentConfigurationResponse
+  end
+end

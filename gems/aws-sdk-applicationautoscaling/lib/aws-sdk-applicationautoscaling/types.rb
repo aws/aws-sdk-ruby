@@ -129,11 +129,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -145,11 +145,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -172,15 +172,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -203,7 +203,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -339,11 +339,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -355,11 +355,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -382,15 +382,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -413,7 +413,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -546,11 +546,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -562,11 +562,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -589,15 +589,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -620,7 +620,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -753,11 +753,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -769,11 +769,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -796,15 +796,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -827,7 +827,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -983,11 +983,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -999,11 +999,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -1026,15 +1026,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -1057,7 +1057,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -1223,11 +1223,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -1239,11 +1239,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -1266,15 +1266,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -1297,7 +1297,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -1457,11 +1457,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -1473,11 +1473,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -1500,15 +1500,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -1531,7 +1531,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -1696,7 +1696,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute service_namespace
     #   <p>
     #            The namespace of the Amazon Web Services service that provides the resource. For a resource provided
-    #            by your own application or service, use <code>custom-resource</code> instead. 
+    #            by your own application or service, use <code>custom-resource</code> instead.
     #         </p>
     #   @return [String]
     # @!attribute resource_id
@@ -1721,7 +1721,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute end_time
     #   <p>
     #            The exclusive end time of the time range for the forecast data to get. The maximum
-    #            time duration between the start and end time is 30 days. 
+    #            time duration between the start and end time is 30 days.
     #         </p>
     #   @return [Time]
     class GetPredictiveScalingForecastRequest < Struct.new(
@@ -1932,8 +1932,30 @@ module Aws::ApplicationAutoScaling
     #          <p>For more information, <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html#predefined-metrics">Predefined metrics for target tracking scaling policies</a> in the
     #             <i>Application Auto Scaling User Guide</i>.</p>
     # @!attribute predefined_metric_type
-    #   <p>The metric type. The <code>ALBRequestCountPerTarget</code> metric type applies only to
-    #            Spot Fleets and ECS services.</p>
+    #   <p>The metric type. The following are notes about specific metric types:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ALBRequestCountPerTarget</code> - This metric type applies only to
+    #                  Spot Fleets and ECS services.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ECSServiceAverageCPUUtilizationHighResolution</code> - The high-resolution
+    #                  version of <code>ECSServiceAverageCPUUtilization</code> that uses 20-second CloudWatch
+    #                  metrics. Use this metric for target tracking scaling policies that evaluate metrics
+    #                  every 20 seconds. You must enable high-resolution metrics in Amazon ECS before creating
+    #                  a scaling policy with this metric type.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ECSServiceAverageMemoryUtilizationHighResolution</code> - The high-resolution
+    #                  version of <code>ECSServiceAverageMemoryUtilization</code> that uses 20-second CloudWatch
+    #                  metrics. Use this metric for target tracking scaling policies that evaluate metrics
+    #                  every 20 seconds. You must enable high-resolution metrics in Amazon ECS before creating
+    #                  a scaling policy with this metric type.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute resource_label
     #   <p>Identifies the resource associated with the metric type. You can't specify a resource
@@ -2160,7 +2182,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute metric
     #   <p>
     #            The CloudWatch metric to return, including the metric name, namespace, and dimensions. To
-    #            get the exact metric name, namespace, and dimensions, inspect the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html">Metric</a> object that is returned by a call to <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html">ListMetrics</a>.    
+    #            get the exact metric name, namespace, and dimensions, inspect the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html">Metric</a> object that is returned by a call to <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html">ListMetrics</a>.
     #         </p>
     #   @return [Types::PredictiveScalingMetric]
     # @!attribute stat
@@ -2174,7 +2196,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute unit
     #   <p>
     #            The unit to use for the returned data points. For a complete list of the units that
-    #            CloudWatch supports, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">MetricDatum</a> 
+    #            CloudWatch supports, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html">MetricDatum</a>
     #            data type in the <i>Amazon CloudWatch API Reference</i>.
     #         </p>
     #   @return [String]
@@ -2448,7 +2470,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute resource_label
     #   <p>
     #            A label that uniquely identifies a specific target group from which to determine
-    #            the average request count. 
+    #            the average request count.
     #         </p>
     #   @return [String]
     class PredictiveScalingPredefinedScalingMetricSpecification < Struct.new(
@@ -2474,11 +2496,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -2490,11 +2512,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -2517,15 +2539,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -2548,7 +2570,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -2666,7 +2688,7 @@ module Aws::ApplicationAutoScaling
     #            <p>
     #               <code>PredictiveScaling</code>—Only supported for Amazon ECS.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html">Target
-    #           tracking scaling policies</a>, <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html">Step scaling policies</a>, and <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/aas-create-predictive-scaling-policy.html">Predictive scaling policies</a> 
+    #           tracking scaling policies</a>, <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html">Step scaling policies</a>, and <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/aas-create-predictive-scaling-policy.html">Predictive scaling policies</a>
     #           in the <i>Application Auto Scaling User Guide</i>.</p>
     #   @return [String]
     # @!attribute step_scaling_policy_configuration
@@ -2733,13 +2755,13 @@ module Aws::ApplicationAutoScaling
     #                  <p>Cron expressions - "<code>cron(<i>fields</i>)</code>"</p>
     #               </li>
     #            </ul>
-    #            <p>At expressions are useful for one-time schedules. Cron expressions are useful for 
-    #            scheduled actions that run periodically at a specified date and time, and rate expressions 
+    #            <p>At expressions are useful for one-time schedules. Cron expressions are useful for
+    #            scheduled actions that run periodically at a specified date and time, and rate expressions
     #            are useful for scheduled actions that run at a regular interval.</p>
     #            <p>At and cron expressions use Universal Coordinated Time (UTC) by
     #            default.</p>
     #            <p>The cron format consists of six fields separated by white spaces: [Minutes] [Hours] [Day_of_Month] [Month] [Day_of_Week] [Year].</p>
-    #            <p>For rate expressions, <i>value</i> is a positive integer and <i>unit</i> is 
+    #            <p>For rate expressions, <i>value</i> is a positive integer and <i>unit</i> is
     #            <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-using-cron-expressions.html">Schedule recurring scaling actions using cron expressions</a> in the <i>Application Auto Scaling User Guide</i>.</p>
     #   @return [String]
@@ -2758,11 +2780,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -2774,11 +2796,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -2801,15 +2823,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -2832,7 +2854,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -2982,11 +3004,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -2998,11 +3020,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -3025,15 +3047,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -3056,7 +3078,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -3311,11 +3333,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -3327,11 +3349,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -3354,15 +3376,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -3385,7 +3407,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -3572,11 +3594,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -3588,11 +3610,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -3615,15 +3637,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -3646,7 +3668,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -3816,11 +3838,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -3832,11 +3854,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -3859,15 +3881,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -3890,7 +3912,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>
@@ -4067,13 +4089,13 @@ module Aws::ApplicationAutoScaling
     #                  <p>Cron expressions - "<code>cron(<i>fields</i>)</code>"</p>
     #               </li>
     #            </ul>
-    #            <p>At expressions are useful for one-time schedules. Cron expressions are useful for 
-    #            scheduled actions that run periodically at a specified date and time, and rate expressions 
+    #            <p>At expressions are useful for one-time schedules. Cron expressions are useful for
+    #            scheduled actions that run periodically at a specified date and time, and rate expressions
     #            are useful for scheduled actions that run at a regular interval.</p>
     #            <p>At and cron expressions use Universal Coordinated Time (UTC) by
     #            default.</p>
     #            <p>The cron format consists of six fields separated by white spaces: [Minutes] [Hours] [Day_of_Month] [Month] [Day_of_Week] [Year].</p>
-    #            <p>For rate expressions, <i>value</i> is a positive integer and <i>unit</i> is 
+    #            <p>For rate expressions, <i>value</i> is a positive integer and <i>unit</i> is
     #            <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-using-cron-expressions.html">Schedule recurring scaling actions using cron expressions</a> in the <i>Application Auto Scaling User Guide</i>.</p>
     #   @return [String]
@@ -4086,11 +4108,11 @@ module Aws::ApplicationAutoScaling
     #         This string consists of the resource type and unique identifier.</p>
     #            <ul>
     #               <li>
-    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  
+    #                  <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name
     #                  and service name. Example: <code>service/my-cluster/my-service</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the 
+    #                  <p>Spot Fleet - The resource type is <code>spot-fleet-request</code> and the unique identifier is the
     #                  Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>
     #               </li>
     #               <li>
@@ -4102,11 +4124,11 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>fleet/sample-fleet</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>table/my-table</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name. 
+    #                  <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the index name.
     #                  Example: <code>table/my-table/index/my-table-index</code>.</p>
     #               </li>
     #               <li>
@@ -4129,15 +4151,15 @@ module Aws::ApplicationAutoScaling
     #                  <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: <code>arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>. 
+    #                  <p>Lambda provisioned concurrency - The resource type is <code>function</code> and the unique identifier is the function name with a function version or alias name suffix that is not <code>$LATEST</code>.
     #                  Example: <code>function:my-function:prod</code> or <code>function:my-function:1</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name. 
+    #                  <p>Amazon Keyspaces table - The resource type is <code>table</code> and the unique identifier is the table name.
     #                  Example: <code>keyspace/mykeyspace/table/mytable</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. 
+    #                  <p>Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN.
     #                  Example: <code>arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.</p>
     #               </li>
     #               <li>
@@ -4160,7 +4182,7 @@ module Aws::ApplicationAutoScaling
     #                  Example: <code>inference-component/my-inference-component</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID. 
+    #                  <p>Pool of WorkSpaces - The resource type is <code>workspacespool</code> and the unique identifier is the pool ID.
     #                  Example: <code>workspacespool/wspool-123456</code>.</p>
     #               </li>
     #            </ul>

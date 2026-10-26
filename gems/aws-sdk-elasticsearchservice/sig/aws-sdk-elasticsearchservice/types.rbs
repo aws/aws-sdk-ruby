@@ -333,6 +333,51 @@ module Aws::ElasticsearchService
       SCHEDULED_ACTION: String
     end
 
+    class AutomatedSnapshotPauseOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor state: String?
+    end
+
+    class AutomatedSnapshotPauseOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::AutomatedSnapshotPauseOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::AutomatedSnapshotPauseOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class AutomatedSnapshotPauseRequestOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
     class BaseException
       include Smithy::Schema::Structure
 
@@ -572,6 +617,10 @@ module Aws::ElasticsearchService
         ?advanced_security_options: Types::AdvancedSecurityOptionsInput,
         ?auto_tune_options: Types::AutoTuneOptionsInput,
         ?tag_list: Array[Types::Tag],
+        ?deployment_strategy_options: Types::DeploymentStrategyOptions,
+        ?automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions,
+        ?use_case: String,
+        ?engine_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -591,6 +640,10 @@ module Aws::ElasticsearchService
       attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsInput?
       attr_accessor auto_tune_options: Types::AutoTuneOptionsInput?
       attr_accessor tag_list: Array[Types::Tag]?
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions?
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions?
+      attr_accessor use_case: String?
+      attr_accessor engine_mode: String?
     end
 
     class CreateElasticsearchDomainResponse
@@ -808,6 +861,35 @@ module Aws::ElasticsearchService
       COMPLETED: String
       NOT_ELIGIBLE: String
       ELIGIBLE: String
+    end
+
+    module DeploymentStrategy
+      DEFAULT: String
+      CAPACITY_OPTIMIZED: String
+    end
+
+    class DeploymentStrategyOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_strategy: String?
+    end
+
+    class DeploymentStrategyOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::DeploymentStrategyOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::DeploymentStrategyOptions?
+      attr_accessor status: Types::OptionStatus?
     end
 
     class DescribeDomainAutoTunesRequest
@@ -1204,6 +1286,11 @@ module Aws::ElasticsearchService
       attr_accessor status: Types::OptionStatus?
     end
 
+    module DomainEngineMode
+      GENERAL: String
+      OPTIMIZED: String
+    end
+
     class DomainInfo
       include Smithy::Schema::Structure
 
@@ -1275,6 +1362,13 @@ module Aws::ElasticsearchService
       UPDATING: String
       ISOLATED: String
       DELETING: String
+    end
+
+    module DomainUseCase
+      SEARCH: String
+      VECTOR: String
+      OBSERVABILITY: String
+      MIXED: String
     end
 
     class DryRunResults
@@ -1465,6 +1559,10 @@ module Aws::ElasticsearchService
         ?auto_tune_options: Types::AutoTuneOptionsStatus,
         ?change_progress_details: Types::ChangeProgressDetails,
         ?modifying_properties: Array[Types::ModifyingProperties],
+        ?deployment_strategy_options: Types::DeploymentStrategyOptionsStatus,
+        ?automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptionsStatus,
+        ?use_case: Types::UseCaseStatus,
+        ?engine_mode: Types::EngineModeStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1484,6 +1582,10 @@ module Aws::ElasticsearchService
       attr_accessor auto_tune_options: Types::AutoTuneOptionsStatus?
       attr_accessor change_progress_details: Types::ChangeProgressDetails?
       attr_accessor modifying_properties: Array[Types::ModifyingProperties]?
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptionsStatus?
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptionsStatus?
+      attr_accessor use_case: Types::UseCaseStatus?
+      attr_accessor engine_mode: Types::EngineModeStatus?
     end
 
     class ElasticsearchDomainStatus
@@ -1517,6 +1619,10 @@ module Aws::ElasticsearchService
         ?change_progress_details: Types::ChangeProgressDetails,
         ?domain_processing_status: String,
         ?modifying_properties: Array[Types::ModifyingProperties],
+        ?deployment_strategy_options: Types::DeploymentStrategyOptions,
+        ?automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptions,
+        ?use_case: String,
+        ?engine_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1547,6 +1653,10 @@ module Aws::ElasticsearchService
       attr_accessor change_progress_details: Types::ChangeProgressDetails?
       attr_accessor domain_processing_status: String?
       attr_accessor modifying_properties: Array[Types::ModifyingProperties]?
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions?
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptions?
+      attr_accessor use_case: String?
+      attr_accessor engine_mode: String?
     end
 
     class ElasticsearchVersionStatus
@@ -1585,6 +1695,19 @@ module Aws::ElasticsearchService
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor options: Types::EncryptionAtRestOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class EngineModeStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: String,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: String?
       attr_accessor status: Types::OptionStatus?
     end
 
@@ -2318,6 +2441,13 @@ module Aws::ElasticsearchService
       attr_accessor created_at: Time?
     end
 
+    module PauseState
+      ACTIVE: String
+      COMPLETED: String
+      SCHEDULED: String
+      DISABLED: String
+    end
+
     module PrincipalType
       AWS_ACCOUNT: String
       AWS_SERVICE: String
@@ -2705,6 +2835,7 @@ module Aws::ElasticsearchService
       POLICY_MIN_TLS_1_0_2019_07: String
       POLICY_MIN_TLS_1_2_2019_07: String
       POLICY_MIN_TLS_1_2_PFS_2023_10: String
+      POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08: String
     end
 
     class Tag
@@ -2743,6 +2874,10 @@ module Aws::ElasticsearchService
         ?encryption_at_rest_options: Types::EncryptionAtRestOptions,
         ?auto_tune_options: Types::AutoTuneOptions,
         ?dry_run: bool,
+        ?deployment_strategy_options: Types::DeploymentStrategyOptions,
+        ?automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions,
+        ?use_case: String,
+        ?engine_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2761,6 +2896,10 @@ module Aws::ElasticsearchService
       attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions?
       attr_accessor auto_tune_options: Types::AutoTuneOptions?
       attr_accessor dry_run: bool?
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions?
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions?
+      attr_accessor use_case: String?
+      attr_accessor engine_mode: String?
     end
 
     class UpdateElasticsearchDomainConfigResponse
@@ -2905,6 +3044,19 @@ module Aws::ElasticsearchService
       attr_accessor upgrade_step_status: String?
       attr_accessor issues: Array[String]?
       attr_accessor progress_percent: Float?
+    end
+
+    class UseCaseStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: String,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: String?
+      attr_accessor status: Types::OptionStatus?
     end
 
     class VPCDerivedInfo

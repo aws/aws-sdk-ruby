@@ -54,9 +54,11 @@ module Aws::ControlCatalog
       def severity: () -> String?
       def region_configuration: () -> Types::RegionConfiguration?
       def implementation: () -> Types::ImplementationDetails?
+      def parameter_requirement_summary: () -> String?
       def parameters: () -> Array[Types::ControlParameter]?
       def create_time: () -> Time?
       def governed_resources: () -> Array[String]?
+      def governed_providers: () -> Array[String]?
     end
     def get_control: (
       ?control_arn: String
@@ -106,7 +108,8 @@ module Aws::ControlCatalog
         implementations: {
           types: Array[String],
           identifiers: Array[String]
-        }
+        },
+        governed_providers: Array[String]
       }
     ) -> _ListControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListControlsResponse
 

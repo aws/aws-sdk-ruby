@@ -144,18 +144,18 @@ module Aws::DLM
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -230,7 +230,7 @@ module Aws::DLM
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/policy-differences.html">
     # 			Default policies vs custom policies</a>.</p>
     #          <important>
-    #             <p>If you create a default policy, you can specify the request parameters either in  
+    #             <p>If you create a default policy, you can specify the request parameters either in
     # 				the request body, or in the PolicyDetails request structure, but not both.</p>
     #          </important>
     # @param [Hash, Types::CreateLifecyclePolicyRequest] params
@@ -245,7 +245,7 @@ module Aws::DLM
     # @option params [Types::PolicyDetails] :policy_details
     #   <p>The configuration details of the lifecycle policy.</p>
     #            <important>
-    #               <p>If you create a default policy, you can specify the request parameters either in  
+    #               <p>If you create a default policy, you can specify the request parameters either in
     #   				the request body, or in the PolicyDetails request structure, but not both.</p>
     #            </important>
     # @option params [Hash<String, String>] :tags
@@ -259,62 +259,62 @@ module Aws::DLM
     #   					Region that do not have recent backups, specify <code>VOLUME</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>To create a default policy for EBS-backed AMIs, that creates EBS-backed 
-    #   					AMIs from all instances in the Region that do not have recent backups, specify 
+    #                  <p>To create a default policy for EBS-backed AMIs, that creates EBS-backed
+    #   					AMIs from all instances in the Region that do not have recent backups, specify
     #   					<code>INSTANCE</code>.</p>
     #               </li>
     #            </ul>
     # @option params [Integer] :create_interval
     #   <p>
-    #               <b>[Default policies only]</b> Specifies how often the policy should run and create snapshots or AMIs. 
-    #   			The creation frequency can range from 1 to 7 days. If you do not specify a value, the 
+    #               <b>[Default policies only]</b> Specifies how often the policy should run and create snapshots or AMIs.
+    #   			The creation frequency can range from 1 to 7 days. If you do not specify a value, the
     #   			default is 1.</p>
     #            <p>Default: 1</p>
     # @option params [Integer] :retain_interval
     #   <p>
-    #               <b>[Default policies only]</b> Specifies how long the policy should retain snapshots or AMIs before 
-    #   			deleting them. The retention period can range from 2 to 14 days, but it must be greater 
-    #   			than the creation frequency to ensure that the policy retains at least 1 snapshot or 
+    #               <b>[Default policies only]</b> Specifies how long the policy should retain snapshots or AMIs before
+    #   			deleting them. The retention period can range from 2 to 14 days, but it must be greater
+    #   			than the creation frequency to ensure that the policy retains at least 1 snapshot or
     #   			AMI at any given time. If you do not specify a value, the default is 7.</p>
     #            <p>Default: 7</p>
     # @option params [Boolean] :copy_tags
     #   <p>
-    #               <b>[Default policies only]</b> Indicates whether the policy should copy tags from the source resource 
+    #               <b>[Default policies only]</b> Indicates whether the policy should copy tags from the source resource
     #   			to the snapshot or AMI. If you do not specify a value, the default is <code>false</code>.</p>
     #            <p>Default: false</p>
     # @option params [Boolean] :extend_deletion
     #   <p>
-    #               <b>[Default policies only]</b> Defines the snapshot or AMI retention behavior for the policy if the 
-    #   			source volume or instance is deleted, or if the policy enters the error, disabled, or 
+    #               <b>[Default policies only]</b> Defines the snapshot or AMI retention behavior for the policy if the
+    #   			source volume or instance is deleted, or if the policy enters the error, disabled, or
     #   			deleted state.</p>
     #            <p>By default (<b>ExtendDeletion=false</b>):</p>
     #            <ul>
     #               <li>
-    #                  <p>If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously 
-    #   				created snapshots or AMIs, up to but not including the last one, based on the 
-    #   				specified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs, 
+    #                  <p>If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously
+    #   				created snapshots or AMIs, up to but not including the last one, based on the
+    #   				specified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs,
     #   				including the last one, specify <code>true</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting 
-    #   					snapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs, 
-    #   					including the last one, if the policy enters one of these states, specify 
+    #                  <p>If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting
+    #   					snapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs,
+    #   					including the last one, if the policy enters one of these states, specify
     #   					<code>true</code>.</p>
     #               </li>
     #            </ul>
-    #            <p>If you enable extended deletion (<b>ExtendDeletion=true</b>), 
+    #            <p>If you enable extended deletion (<b>ExtendDeletion=true</b>),
     #   			you override both default behaviors simultaneously.</p>
     #            <p>If you do not specify a value, the default is <code>false</code>.</p>
     #            <p>Default: false</p>
     # @option params [Array<Types::CrossRegionCopyTarget>] :cross_region_copy_targets
     #   <p>
-    #               <b>[Default policies only]</b> Specifies destination Regions for snapshot or AMI copies. You can specify 
-    #   			up to 3 destination Regions. If you do not want to create cross-Region copies, omit this 
+    #               <b>[Default policies only]</b> Specifies destination Regions for snapshot or AMI copies. You can specify
+    #   			up to 3 destination Regions. If you do not want to create cross-Region copies, omit this
     #   			parameter.</p>
     # @option params [Types::Exclusions] :exclusions
     #   <p>
-    #               <b>[Default policies only]</b> Specifies exclusion parameters for volumes or instances for which you 
-    #   			do not want to create snapshots or AMIs. The policy will not create snapshots or AMIs 
+    #               <b>[Default policies only]</b> Specifies exclusion parameters for volumes or instances for which you
+    #   			do not want to create snapshots or AMIs. The policy will not create snapshots or AMIs
     #   			for target resources that match any of the specified exclusion parameters.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -373,7 +373,8 @@ module Aws::DLM
     #             count: 1,
     #             interval: 1,
     #             interval_unit: "DAYS" # One of: ["DAYS", "WEEKS", "MONTHS", "YEARS"],
-    #             availability_zones: ["AvailabilityZone"], # required
+    #             availability_zones: ["AvailabilityZone"],
+    #             availability_zone_ids: ["AvailabilityZoneId"]
     #           },
     #           cross_region_copy_rules: [
     #             {
@@ -512,7 +513,7 @@ module Aws::DLM
 
     # <p>Deletes the specified lifecycle policy and halts the automated operations that the
     # 			policy specified.</p>
-    #          <p>For more information about deleting a policy, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#delete">Delete lifecycle 
+    #          <p>For more information about deleting a policy, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#delete">Delete lifecycle
     # 			policies</a>.</p>
     # @param [Hash, Types::DeleteLifecyclePolicyRequest] params
     # @option params [String] :policy_id
@@ -671,7 +672,8 @@ module Aws::DLM
     #               count: 1,
     #               interval: 1,
     #               interval_unit: "DAYS" # One of: ["DAYS", "WEEKS", "MONTHS", "YEARS"],
-    #               availability_zones: ["AvailabilityZone"], # required
+    #               availability_zones: ["AvailabilityZone"],
+    #               availability_zone_ids: ["AvailabilityZoneId"]
     #             },
     #             cross_region_copy_rules: [
     #               {
@@ -854,7 +856,7 @@ module Aws::DLM
     end
 
     # <p>Updates the specified lifecycle policy.</p>
-    #          <p>For more information about updating a policy, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify">Modify lifecycle 
+    #          <p>For more information about updating a policy, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify">Modify lifecycle
     # 			policies</a>.</p>
     # @param [Hash, Types::UpdateLifecyclePolicyRequest] params
     # @option params [String] :policy_id
@@ -871,50 +873,50 @@ module Aws::DLM
     #   			resource type.</p>
     # @option params [Integer] :create_interval
     #   <p>
-    #               <b>[Default policies only]</b> Specifies how often the policy should run and create snapshots or AMIs. 
+    #               <b>[Default policies only]</b> Specifies how often the policy should run and create snapshots or AMIs.
     #   			The creation frequency can range from 1 to 7 days.</p>
     # @option params [Integer] :retain_interval
     #   <p>
-    #               <b>[Default policies only]</b> Specifies how long the policy should retain snapshots or AMIs before 
-    #   			deleting them. The retention period can range from 2 to 14 days, but it must be greater 
-    #   			than the creation frequency to ensure that the policy retains at least 1 snapshot or 
+    #               <b>[Default policies only]</b> Specifies how long the policy should retain snapshots or AMIs before
+    #   			deleting them. The retention period can range from 2 to 14 days, but it must be greater
+    #   			than the creation frequency to ensure that the policy retains at least 1 snapshot or
     #   			AMI at any given time.</p>
     # @option params [Boolean] :copy_tags
     #   <p>
-    #               <b>[Default policies only]</b> Indicates whether the policy should copy tags from the source resource 
+    #               <b>[Default policies only]</b> Indicates whether the policy should copy tags from the source resource
     #   			to the snapshot or AMI.</p>
     # @option params [Boolean] :extend_deletion
     #   <p>
-    #               <b>[Default policies only]</b> Defines the snapshot or AMI retention behavior for the policy if the 
-    #   			source volume or instance is deleted, or if the policy enters the error, disabled, or 
+    #               <b>[Default policies only]</b> Defines the snapshot or AMI retention behavior for the policy if the
+    #   			source volume or instance is deleted, or if the policy enters the error, disabled, or
     #   			deleted state.</p>
     #            <p>By default (<b>ExtendDeletion=false</b>):</p>
     #            <ul>
     #               <li>
-    #                  <p>If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously 
-    #   					created snapshots or AMIs, up to but not including the last one, based on the 
-    #   					specified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs, 
+    #                  <p>If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously
+    #   					created snapshots or AMIs, up to but not including the last one, based on the
+    #   					specified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs,
     #   					including the last one, specify <code>true</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting 
-    #   					snapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs, 
-    #   					including the last one, if the policy enters one of these states, specify 
+    #                  <p>If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting
+    #   					snapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs,
+    #   					including the last one, if the policy enters one of these states, specify
     #   					<code>true</code>.</p>
     #               </li>
     #            </ul>
-    #            <p>If you enable extended deletion (<b>ExtendDeletion=true</b>), 
+    #            <p>If you enable extended deletion (<b>ExtendDeletion=true</b>),
     #   			you override both default behaviors simultaneously.</p>
     #            <p>Default: false</p>
     # @option params [Array<Types::CrossRegionCopyTarget>] :cross_region_copy_targets
     #   <p>
-    #               <b>[Default policies only]</b> Specifies destination Regions for snapshot or AMI copies. You can specify 
-    #   			up to 3 destination Regions. If you do not want to create cross-Region copies, omit this 
+    #               <b>[Default policies only]</b> Specifies destination Regions for snapshot or AMI copies. You can specify
+    #   			up to 3 destination Regions. If you do not want to create cross-Region copies, omit this
     #   			parameter.</p>
     # @option params [Types::Exclusions] :exclusions
     #   <p>
-    #               <b>[Default policies only]</b> Specifies exclusion parameters for volumes or instances for which you 
-    #   			do not want to create snapshots or AMIs. The policy will not create snapshots or AMIs 
+    #               <b>[Default policies only]</b> Specifies exclusion parameters for volumes or instances for which you
+    #   			do not want to create snapshots or AMIs. The policy will not create snapshots or AMIs
     #   			for target resources that match any of the specified exclusion parameters.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -974,7 +976,8 @@ module Aws::DLM
     #             count: 1,
     #             interval: 1,
     #             interval_unit: "DAYS" # One of: ["DAYS", "WEEKS", "MONTHS", "YEARS"],
-    #             availability_zones: ["AvailabilityZone"], # required
+    #             availability_zones: ["AvailabilityZone"],
+    #             availability_zone_ids: ["AvailabilityZoneId"]
     #           },
     #           cross_region_copy_rules: [
     #             {

@@ -19,7 +19,7 @@ module Aws::CodeDeploy
     ApplicationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codedeploy#ApplicationId", name: "ApplicationId")
     ApplicationInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#ApplicationInfo", name: "ApplicationInfo")
     ApplicationLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#ApplicationLimitExceededException", name: "ApplicationLimitExceededException", traits: {"smithy.api#error" => "client"})
-    ApplicationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codedeploy#ApplicationName", name: "ApplicationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    ApplicationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codedeploy#ApplicationName", name: "ApplicationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9+=,.@_-]*$"})
     ApplicationNameRequiredException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#ApplicationNameRequiredException", name: "ApplicationNameRequiredException", traits: {"smithy.api#error" => "client"})
     ApplicationRevisionSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.codedeploy#ApplicationRevisionSortBy", name: "ApplicationRevisionSortBy")
     ApplicationsInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.codedeploy#ApplicationsInfoList", name: "ApplicationsInfoList")
@@ -82,7 +82,7 @@ module Aws::CodeDeploy
     DeploymentConfigInUseException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentConfigInUseException", name: "DeploymentConfigInUseException", traits: {"smithy.api#error" => "client"})
     DeploymentConfigInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentConfigInfo", name: "DeploymentConfigInfo")
     DeploymentConfigLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentConfigLimitExceededException", name: "DeploymentConfigLimitExceededException", traits: {"smithy.api#error" => "client"})
-    DeploymentConfigName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codedeploy#DeploymentConfigName", name: "DeploymentConfigName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    DeploymentConfigName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codedeploy#DeploymentConfigName", name: "DeploymentConfigName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9+=,.@_-]*$"})
     DeploymentConfigNameRequiredException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentConfigNameRequiredException", name: "DeploymentConfigNameRequiredException", traits: {"smithy.api#error" => "client"})
     DeploymentConfigsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.codedeploy#DeploymentConfigsList", name: "DeploymentConfigsList")
     DeploymentCreator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.codedeploy#DeploymentCreator", name: "DeploymentCreator")
@@ -93,7 +93,7 @@ module Aws::CodeDeploy
     DeploymentGroupInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentGroupInfo", name: "DeploymentGroupInfo")
     DeploymentGroupInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.codedeploy#DeploymentGroupInfoList", name: "DeploymentGroupInfoList")
     DeploymentGroupLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentGroupLimitExceededException", name: "DeploymentGroupLimitExceededException", traits: {"smithy.api#error" => "client"})
-    DeploymentGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codedeploy#DeploymentGroupName", name: "DeploymentGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    DeploymentGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codedeploy#DeploymentGroupName", name: "DeploymentGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9+=,.@_-]*$"})
     DeploymentGroupNameRequiredException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentGroupNameRequiredException", name: "DeploymentGroupNameRequiredException", traits: {"smithy.api#error" => "client"})
     DeploymentGroupsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.codedeploy#DeploymentGroupsList", name: "DeploymentGroupsList")
     DeploymentId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.codedeploy#DeploymentId", name: "DeploymentId")
@@ -101,6 +101,7 @@ module Aws::CodeDeploy
     DeploymentInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentInfo", name: "DeploymentInfo")
     DeploymentIsNotInReadyStateException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentIsNotInReadyStateException", name: "DeploymentIsNotInReadyStateException", traits: {"smithy.api#error" => "client"})
     DeploymentLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentLimitExceededException", name: "DeploymentLimitExceededException", traits: {"smithy.api#error" => "client"})
+    DeploymentMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.codedeploy#DeploymentMode", name: "DeploymentMode")
     DeploymentNotStartedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentNotStartedException", name: "DeploymentNotStartedException", traits: {"smithy.api#error" => "client"})
     DeploymentOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.codedeploy#DeploymentOption", name: "DeploymentOption")
     DeploymentOverview = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.codedeploy#DeploymentOverview", name: "DeploymentOverview")
@@ -562,6 +563,7 @@ module Aws::CodeDeploy
     CreateDeploymentInput.add_member(:auto_rollback_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRollbackConfiguration, name: "autoRollbackConfiguration"))
     CreateDeploymentInput.add_member(:update_outdated_instances_only, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "updateOutdatedInstancesOnly", traits: {"smithy.api#default" => false}))
     CreateDeploymentInput.add_member(:file_exists_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: FileExistsBehavior, name: "fileExistsBehavior"))
+    CreateDeploymentInput.add_member(:deployment_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentMode, name: "deploymentMode"))
     CreateDeploymentInput.add_member(:override_alarm_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmConfiguration, name: "overrideAlarmConfiguration"))
     CreateDeploymentInput.type = Types::CreateDeploymentInput
     CreateDeploymentOutput.add_member(:deployment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentId, name: "deploymentId"))
@@ -674,6 +676,7 @@ module Aws::CodeDeploy
     DeploymentInfo.add_member(:load_balancer_info, ::Smithy::Schema::Shapes::MemberShape.new(target: LoadBalancerInfo, name: "loadBalancerInfo"))
     DeploymentInfo.add_member(:additional_deployment_status_info, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalDeploymentStatusInfo, name: "additionalDeploymentStatusInfo"))
     DeploymentInfo.add_member(:file_exists_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: FileExistsBehavior, name: "fileExistsBehavior"))
+    DeploymentInfo.add_member(:deployment_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentMode, name: "deploymentMode"))
     DeploymentInfo.add_member(:deployment_status_messages, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStatusMessageList, name: "deploymentStatusMessages"))
     DeploymentInfo.add_member(:compute_platform, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputePlatform, name: "computePlatform"))
     DeploymentInfo.add_member(:external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "externalId"))
@@ -684,6 +687,8 @@ module Aws::CodeDeploy
     DeploymentIsNotInReadyStateException.type = Types::DeploymentIsNotInReadyStateException
     DeploymentLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DeploymentLimitExceededException.type = Types::DeploymentLimitExceededException
+    DeploymentMode.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    DeploymentMode.add_member(:restart, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTART", traits: {"smithy.api#enumValue" => "RESTART"}))
     DeploymentNotStartedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
     DeploymentNotStartedException.type = Types::DeploymentNotStartedException
     DeploymentOption.add_member(:with_traffic_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WITH_TRAFFIC_CONTROL", traits: {"smithy.api#enumValue" => "WITH_TRAFFIC_CONTROL"}))
@@ -1389,7 +1394,7 @@ module Aws::CodeDeploy
       service.id = "com.amazonaws.codedeploy#CodeDeploy_20141006"
       service.name = "CodeDeploy20141006"
       service.version = "2014-10-06"
-      service.traits = {"aws.api#service" => {"sdkId" => "CodeDeploy", "arnNamespace" => "codedeploy", "cloudFormationName" => "CodeDeploy", "cloudTrailEventSource" => "codedeploy.amazonaws.com", "endpointPrefix" => "codedeploy"}, "aws.auth#sigv4" => {"name" => "codedeploy"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS CodeDeploy", "smithy.api#xmlNamespace" => {"uri" => "http://codedeploy.amazonaws.com/doc/2014-10-06/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "CodeDeploy", "arnNamespace" => "codedeploy", "cloudFormationName" => "CodeDeploy", "cloudTrailEventSource" => "codedeploy.amazonaws.com", "endpointPrefix" => "codedeploy"}, "aws.auth#sigv4" => {"name" => "codedeploy"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS CodeDeploy", "smithy.api#xmlNamespace" => {"uri" => "http://codedeploy.amazonaws.com/doc/2014-10-06/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://codedeploy-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://codedeploy-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://codedeploy.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://codedeploy.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:add_tags_to_on_premises_instances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.codedeploy#AddTagsToOnPremisesInstances"
         operation.name = "AddTagsToOnPremisesInstances"
@@ -1518,6 +1523,7 @@ module Aws::CodeDeploy
         operation.errors << InvalidApplicationNameException
         operation.errors << InvalidComputePlatformException
         operation.errors << InvalidTagsToAddException
+        operation.errors << ThrottlingException
         operation.traits = {}
       end)
       service.add_operation(:create_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1537,11 +1543,14 @@ module Aws::CodeDeploy
         operation.errors << InvalidApplicationNameException
         operation.errors << InvalidAutoRollbackConfigException
         operation.errors << InvalidAutoScalingGroupException
+        operation.errors << InvalidComputePlatformException
         operation.errors << InvalidDeploymentConfigNameException
         operation.errors << InvalidDeploymentGroupNameException
+        operation.errors << InvalidECSServiceException
         operation.errors << InvalidFileExistsBehaviorException
         operation.errors << InvalidGitHubAccountTokenException
         operation.errors << InvalidIgnoreApplicationStopFailuresValueException
+        operation.errors << InvalidInputException
         operation.errors << InvalidLoadBalancerInfoException
         operation.errors << InvalidRevisionException
         operation.errors << InvalidRoleException
@@ -1819,7 +1828,9 @@ module Aws::CodeDeploy
         operation.name = "ListDeploymentInstances"
         operation.input = ListDeploymentInstancesInput
         operation.output = ListDeploymentInstancesOutput
+        operation.errors << ApplicationDoesNotExistException
         operation.errors << DeploymentDoesNotExistException
+        operation.errors << DeploymentGroupDoesNotExistException
         operation.errors << DeploymentIdRequiredException
         operation.errors << DeploymentNotStartedException
         operation.errors << InvalidComputePlatformException
@@ -1837,7 +1848,9 @@ module Aws::CodeDeploy
         operation.name = "ListDeploymentTargets"
         operation.input = ListDeploymentTargetsInput
         operation.output = ListDeploymentTargetsOutput
+        operation.errors << ApplicationDoesNotExistException
         operation.errors << DeploymentDoesNotExistException
+        operation.errors << DeploymentGroupDoesNotExistException
         operation.errors << DeploymentIdRequiredException
         operation.errors << DeploymentNotStartedException
         operation.errors << InvalidDeploymentIdException

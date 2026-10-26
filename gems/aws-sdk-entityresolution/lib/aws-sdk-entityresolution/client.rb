@@ -144,18 +144,18 @@ module Aws::EntityResolution
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -317,8 +317,8 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [
     #       {
+    #         kms_arn: "KMSArn",
     #         output_s3_path: "S3Path", # required
-    #         kms_arn: "KMSArn"
     #       }
     #     ],
     #     id_mapping_techniques: { # required
@@ -367,8 +367,8 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [
     #       {
+    #         kms_arn: "KMSArn",
     #         output_s3_path: "S3Path", # required
-    #         kms_arn: "KMSArn"
     #       }
     #     ],
     #     id_mapping_techniques: { # required
@@ -503,7 +503,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Creates a matching workflow that defines the configuration for a data processing job. The workflow name must be unique. To modify an existing workflow, use <code>UpdateMatchingWorkflow</code>. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
+    # <p>Creates a matching workflow that defines the configuration for a data processing job. The workflow name must be unique. To modify an existing workflow, use <code>UpdateMatchingWorkflow</code>. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     # @param [Hash, Types::CreateMatchingWorkflowInput] params
     # @option params [String] :workflow_name
     #   <p>The name of the workflow. There can't be multiple <code>MatchingWorkflows</code> with the same name.</p>
@@ -516,7 +516,7 @@ module Aws::EntityResolution
     # @option params [Types::ResolutionTechniques] :resolution_techniques
     #   <p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>.</p>
     # @option params [Types::IncrementalRunConfig] :incremental_run_config
-    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
+    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
     # @option params [Hash<String, String>] :tags
@@ -534,15 +534,19 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [ # required
     #       {
-    #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn",
+    #         output_s3_path: "OptionalS3Path",
     #         output: [ # required
     #           {
     #             name: "AttributeName", # required
     #             hashed: false
     #           }
     #         ],
-    #         apply_normalization: false
+    #         apply_normalization: false,
+    #         customer_profiles_integration_config: {
+    #           domain_arn: "CustomerProfilesDomainArn", # required
+    #           object_type_arn: "CustomerProfilesObjectTypeArn", # required
+    #         }
     #       }
     #     ],
     #     resolution_techniques: { # required
@@ -563,8 +567,12 @@ module Aws::EntityResolution
     #             rule_name: "String", # required
     #             condition: "String", # required
     #           }
-    #         ]
+    #         ],
+    #         matching_config: {
+    #           enable_transitive_matching: false
+    #         }
     #       },
+    #       enable_real_time_matching: false,
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
     #         provider_configuration: ""null"",
@@ -598,15 +606,19 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [ # required
     #       {
-    #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn",
+    #         output_s3_path: "OptionalS3Path",
     #         output: [ # required
     #           {
     #             name: "AttributeName", # required
     #             hashed: false
     #           }
     #         ],
-    #         apply_normalization: false
+    #         apply_normalization: false,
+    #         customer_profiles_integration_config: {
+    #           domain_arn: "CustomerProfilesDomainArn", # required
+    #           object_type_arn: "CustomerProfilesObjectTypeArn", # required
+    #         }
     #       }
     #     ],
     #     resolution_techniques: { # required
@@ -627,8 +639,12 @@ module Aws::EntityResolution
     #             rule_name: "String", # required
     #             condition: "String", # required
     #           }
-    #         ]
+    #         ],
+    #         matching_config: {
+    #           enable_transitive_matching: false
+    #         }
     #       },
+    #       enable_real_time_matching: false,
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
     #         provider_configuration: ""null"",
@@ -701,7 +717,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Deletes the <code>IdMappingWorkflow</code> with a given name. This operation will succeed even if a workflow with the given name does not exist.</p>
+    # <p>Deletes the <code>IdMappingWorkflow</code> with a given name. This operation returns a <code>ResourceNotFoundException</code> if a workflow with the given name does not exist.</p>
     # @param [Hash, Types::DeleteIdMappingWorkflowInput] params
     # @option params [String] :workflow_name
     #   <p>The name of the workflow to be deleted.</p>
@@ -722,7 +738,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Deletes the <code>IdNamespace</code> with a given name.</p>
+    # <p>Deletes the <code>IdNamespace</code> with a given name. This operation returns a <code>ResourceNotFoundException</code> if an ID namespace with the given name does not exist.</p>
     # @param [Hash, Types::DeleteIdNamespaceInput] params
     # @option params [String] :id_namespace_name
     #   <p>The name of the ID namespace.</p>
@@ -743,7 +759,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Deletes the <code>MatchingWorkflow</code> with a given name. This operation will succeed even if a workflow with the given name does not exist.</p>
+    # <p>Deletes the <code>MatchingWorkflow</code> with a given name. This operation returns a <code>ResourceNotFoundException</code> if a workflow with the given name does not exist.</p>
     # @param [Hash, Types::DeleteMatchingWorkflowInput] params
     # @option params [String] :workflow_name
     #   <p>The name of the workflow to be retrieved.</p>
@@ -790,7 +806,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Deletes the <code>SchemaMapping</code> with a given name. This operation will succeed even if a schema with the given name does not exist. This operation will fail if there is a <code>MatchingWorkflow</code> object that references the <code>SchemaMapping</code> in the workflow's <code>InputSourceConfig</code>.</p>
+    # <p>Deletes the <code>SchemaMapping</code> with a given name. This operation returns a <code>ResourceNotFoundException</code> if a schema with the given name does not exist. This operation will fail if there is a <code>MatchingWorkflow</code> object that references the <code>SchemaMapping</code> in the workflow's <code>InputSourceConfig</code>.</p>
     # @param [Hash, Types::DeleteSchemaMappingInput] params
     # @option params [String] :schema_name
     #   <p>The name of the schema to delete.</p>
@@ -818,7 +834,7 @@ module Aws::EntityResolution
     # @option params [Array<Types::Record>] :records
     #   <p> The records to match.</p>
     # @option params [String] :processing_type
-    #   <p>The processing mode that determines how Match IDs are generated and results are saved. Each mode provides different levels of accuracy, response time, and completeness of results.</p> <p>If not specified, defaults to <code>CONSISTENT</code>.</p> <p> <code>CONSISTENT</code>: Performs immediate lookup and matching against all existing records, with results saved synchronously. Provides highest accuracy but slower response time.</p> <p> <code>EVENTUAL</code> (shown as <i>Background</i> in the console): Performs initial match ID lookup or generation immediately, with record updates processed asynchronously in the background. Offers faster initial response time, with complete matching results available later in S3. </p> <p> <code>EVENTUAL_NO_LOOKUP</code> (shown as <i>Quick ID generation</i> in the console): Generates new match IDs without checking existing matches, with updates processed asynchronously. Provides fastest response time but should only be used for records known to be unique. </p>
+    #   <p>The processing mode that determines how Match IDs are generated and results are saved. Each mode provides different levels of accuracy, response time, and completeness of results.</p> <p>If not specified, defaults to <code>CONSISTENT</code>.</p> <p> <code>CONSISTENT</code>: Performs immediate lookup and matching against all existing records, with results saved synchronously. Provides highest accuracy but slower response time.</p> <p> <code>EVENTUAL</code> (shown as <i>Background</i> in the console): Performs initial match ID lookup or generation immediately, with record updates processed asynchronously in the background. Offers faster initial response time, with complete matching results available later in S3. </p> <p> <code>EVENTUAL_NO_LOOKUP</code> (shown as <i>Quick ID generation</i> in the console): Generates new match IDs without checking existing matches, with updates processed asynchronously. Provides fastest response time but should only be used for records known to be unique. </p> <note> <p>Advanced matching workflows don't support the <code>processingType</code> field.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     workflow_name: "EntityName", # required
@@ -944,8 +960,8 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [
     #       {
+    #         kms_arn: "KMSArn",
     #         output_s3_path: "S3Path", # required
-    #         kms_arn: "KMSArn"
     #       }
     #     ],
     #     id_mapping_techniques: { # required
@@ -1140,15 +1156,19 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [ # required
     #       {
-    #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn",
+    #         output_s3_path: "OptionalS3Path",
     #         output: [ # required
     #           {
     #             name: "AttributeName", # required
     #             hashed: false
     #           }
     #         ],
-    #         apply_normalization: false
+    #         apply_normalization: false,
+    #         customer_profiles_integration_config: {
+    #           domain_arn: "CustomerProfilesDomainArn", # required
+    #           object_type_arn: "CustomerProfilesObjectTypeArn", # required
+    #         }
     #       }
     #     ],
     #     resolution_techniques: { # required
@@ -1169,8 +1189,12 @@ module Aws::EntityResolution
     #             rule_name: "String", # required
     #             condition: "String", # required
     #           }
-    #         ]
+    #         ],
+    #         matching_config: {
+    #           enable_transitive_matching: false
+    #         }
     #       },
+    #       enable_real_time_matching: false,
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
     #         provider_configuration: ""null"",
@@ -1752,8 +1776,8 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [
     #       {
+    #         kms_arn: "KMSArn",
     #         output_s3_path: "S3Path", # required
-    #         kms_arn: "KMSArn"
     #       }
     #     ],
     #     id_mapping_techniques: { # required
@@ -1799,8 +1823,8 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [
     #       {
+    #         kms_arn: "KMSArn",
     #         output_s3_path: "S3Path", # required
-    #         kms_arn: "KMSArn"
     #       }
     #     ],
     #     id_mapping_techniques: { # required
@@ -1924,7 +1948,7 @@ module Aws::EntityResolution
       request.send_request(options)
     end
 
-    # <p>Updates an existing matching workflow. The workflow must already exist for this operation to succeed.</p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
+    # <p>Updates an existing matching workflow. The workflow must already exist for this operation to succeed.</p> <important> <p>For workflows where <code>resolutionType</code> is <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     # @param [Hash, Types::UpdateMatchingWorkflowInput] params
     # @option params [String] :workflow_name
     #   <p>The name of the workflow to be retrieved.</p>
@@ -1937,7 +1961,7 @@ module Aws::EntityResolution
     # @option params [Types::ResolutionTechniques] :resolution_techniques
     #   <p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>.</p>
     # @option params [Types::IncrementalRunConfig] :incremental_run_config
-    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code> or <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
+    #   <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>PROVIDER</code>, incremental processing is not supported. </p> </important>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.</p>
     # @example Request syntax with placeholder values
@@ -1953,15 +1977,19 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [ # required
     #       {
-    #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn",
+    #         output_s3_path: "OptionalS3Path",
     #         output: [ # required
     #           {
     #             name: "AttributeName", # required
     #             hashed: false
     #           }
     #         ],
-    #         apply_normalization: false
+    #         apply_normalization: false,
+    #         customer_profiles_integration_config: {
+    #           domain_arn: "CustomerProfilesDomainArn", # required
+    #           object_type_arn: "CustomerProfilesObjectTypeArn", # required
+    #         }
     #       }
     #     ],
     #     resolution_techniques: { # required
@@ -1982,8 +2010,12 @@ module Aws::EntityResolution
     #             rule_name: "String", # required
     #             condition: "String", # required
     #           }
-    #         ]
+    #         ],
+    #         matching_config: {
+    #           enable_transitive_matching: false
+    #         }
     #       },
+    #       enable_real_time_matching: false,
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
     #         provider_configuration: ""null"",
@@ -2013,15 +2045,19 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [ # required
     #       {
-    #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn",
+    #         output_s3_path: "OptionalS3Path",
     #         output: [ # required
     #           {
     #             name: "AttributeName", # required
     #             hashed: false
     #           }
     #         ],
-    #         apply_normalization: false
+    #         apply_normalization: false,
+    #         customer_profiles_integration_config: {
+    #           domain_arn: "CustomerProfilesDomainArn", # required
+    #           object_type_arn: "CustomerProfilesObjectTypeArn", # required
+    #         }
     #       }
     #     ],
     #     resolution_techniques: { # required
@@ -2042,8 +2078,12 @@ module Aws::EntityResolution
     #             rule_name: "String", # required
     #             condition: "String", # required
     #           }
-    #         ]
+    #         ],
+    #         matching_config: {
+    #           enable_transitive_matching: false
+    #         }
     #       },
+    #       enable_real_time_matching: false,
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
     #         provider_configuration: ""null"",

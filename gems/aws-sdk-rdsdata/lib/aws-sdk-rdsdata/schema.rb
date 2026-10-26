@@ -7,8 +7,8 @@ module Aws::RDSData
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
-    Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 11, "max" => 100}})
-    ArrayOfArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#ArrayOfArray", name: "ArrayOfArray")
+    Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 11, "max" => 570}})
+    ArrayOfArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#ArrayOfArray", name: "ArrayOfArray", traits: {"smithy.api#sparse" => {}})
     ArrayValue = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.rdsdata#ArrayValue", name: "ArrayValue")
     ArrayValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#ArrayValueList", name: "ArrayValueList")
     BadRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#BadRequestException", name: "BadRequestException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -18,7 +18,7 @@ module Aws::RDSData
     BeginTransactionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#BeginTransactionOutput", name: "BeginTransactionOutput")
     Blob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.rdsdata#Blob", name: "Blob")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.rdsdata#Boolean", name: "Boolean", traits: {"smithy.api#default" => false})
-    BooleanArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#BooleanArray", name: "BooleanArray")
+    BooleanArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#BooleanArray", name: "BooleanArray", traits: {"smithy.api#sparse" => {}})
     BoxedBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.rdsdata#BoxedBoolean", name: "BoxedBoolean")
     BoxedDouble = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.rdsdata#BoxedDouble", name: "BoxedDouble")
     BoxedFloat = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.rdsdata#BoxedFloat", name: "BoxedFloat")
@@ -32,8 +32,8 @@ module Aws::RDSData
     DatabaseResumingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#DatabaseResumingException", name: "DatabaseResumingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     DatabaseUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#DatabaseUnavailableException", name: "DatabaseUnavailableException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 504})
     DbName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#DbName", name: "DbName", traits: {"smithy.api#length" => {"max" => 64}})
-    DecimalReturnType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#DecimalReturnType", name: "DecimalReturnType", traits: {"smithy.api#enum" => [{"value" => "STRING", "name" => "STRING"}, {"value" => "DOUBLE_OR_LONG", "name" => "DOUBLE_OR_LONG"}]})
-    DoubleArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#DoubleArray", name: "DoubleArray")
+    DecimalReturnType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rdsdata#DecimalReturnType", name: "DecimalReturnType")
+    DoubleArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#DoubleArray", name: "DoubleArray", traits: {"smithy.api#sparse" => {}})
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#ErrorMessage", name: "ErrorMessage")
     ExecuteSqlInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#ExecuteSqlInput", name: "ExecuteSqlInput")
     ExecuteSqlOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#ExecuteSqlOutput", name: "ExecuteSqlOutput")
@@ -50,14 +50,14 @@ module Aws::RDSData
     InvalidResourceStateException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#InvalidResourceStateException", name: "InvalidResourceStateException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidSecretException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#InvalidSecretException", name: "InvalidSecretException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.rdsdata#Long", name: "Long", traits: {"smithy.api#default" => 0})
-    LongArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#LongArray", name: "LongArray")
-    LongReturnType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#LongReturnType", name: "LongReturnType", traits: {"smithy.api#enum" => [{"value" => "STRING", "name" => "STRING"}, {"value" => "LONG", "name" => "LONG"}]})
+    LongArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#LongArray", name: "LongArray", traits: {"smithy.api#sparse" => {}})
+    LongReturnType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rdsdata#LongReturnType", name: "LongReturnType")
     Metadata = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#Metadata", name: "Metadata")
     NotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#NotFoundException", name: "NotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#ParameterName", name: "ParameterName")
     Record = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#Record", name: "Record")
     Records = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#Records", name: "Records")
-    RecordsFormatType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#RecordsFormatType", name: "RecordsFormatType", traits: {"smithy.api#enum" => [{"value" => "NONE", "name" => "NONE"}, {"value" => "JSON", "name" => "JSON"}]})
+    RecordsFormatType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rdsdata#RecordsFormatType", name: "RecordsFormatType")
     RecordsUpdated = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.rdsdata#RecordsUpdated", name: "RecordsUpdated", traits: {"smithy.api#default" => 0})
     ResultFrame = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#ResultFrame", name: "ResultFrame")
     ResultSetMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#ResultSetMetadata", name: "ResultSetMetadata")
@@ -76,11 +76,11 @@ module Aws::RDSData
     SqlStatementResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#SqlStatementResults", name: "SqlStatementResults")
     StatementTimeoutException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#StatementTimeoutException", name: "StatementTimeoutException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#String", name: "String")
-    StringArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#StringArray", name: "StringArray")
+    StringArray = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#StringArray", name: "StringArray", traits: {"smithy.api#sparse" => {}})
     StructValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#StructValue", name: "StructValue")
     TransactionNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#TransactionNotFoundException", name: "TransactionNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     TransactionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#TransactionStatus", name: "TransactionStatus", traits: {"smithy.api#length" => {"max" => 128}})
-    TypeHint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.rdsdata#TypeHint", name: "TypeHint", traits: {"smithy.api#enum" => [{"value" => "JSON", "name" => "JSON"}, {"value" => "UUID", "name" => "UUID"}, {"value" => "TIMESTAMP", "name" => "TIMESTAMP"}, {"value" => "DATE", "name" => "DATE"}, {"value" => "TIME", "name" => "TIME"}, {"value" => "DECIMAL", "name" => "DECIMAL"}]})
+    TypeHint = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.rdsdata#TypeHint", name: "TypeHint")
     UnsupportedResultException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#UnsupportedResultException", name: "UnsupportedResultException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     UpdateResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.rdsdata#UpdateResult", name: "UpdateResult")
     UpdateResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.rdsdata#UpdateResults", name: "UpdateResults")
@@ -145,6 +145,8 @@ module Aws::RDSData
     DatabaseResumingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     DatabaseResumingException.type = Types::DatabaseResumingException
     DatabaseUnavailableException.type = Types::DatabaseUnavailableException
+    DecimalReturnType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
+    DecimalReturnType.add_member(:double_or_long, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE_OR_LONG", traits: {"smithy.api#enumValue" => "DOUBLE_OR_LONG"}))
     DoubleArray.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedDouble, name: "member"))
     ExecuteSqlInput.add_member(:db_cluster_or_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "dbClusterOrInstanceArn", traits: {"smithy.api#required" => {}}))
     ExecuteSqlInput.add_member(:aws_secret_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "awsSecretStoreArn", traits: {"smithy.api#required" => {}}))
@@ -192,12 +194,16 @@ module Aws::RDSData
     InvalidSecretException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     InvalidSecretException.type = Types::InvalidSecretException
     LongArray.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedLong, name: "member"))
+    LongReturnType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
+    LongReturnType.add_member(:long, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LONG", traits: {"smithy.api#enumValue" => "LONG"}))
     Metadata.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadata, name: "member"))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     NotFoundException.type = Types::NotFoundException
     Record.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "values"))
     Record.type = Types::Record
     Records.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Record, name: "member"))
+    RecordsFormatType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    RecordsFormatType.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
     ResultFrame.add_member(:result_set_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultSetMetadata, name: "resultSetMetadata"))
     ResultFrame.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: Records, name: "records"))
     ResultFrame.type = Types::ResultFrame
@@ -236,6 +242,12 @@ module Aws::RDSData
     StructValue.type = Types::StructValue
     TransactionNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TransactionNotFoundException.type = Types::TransactionNotFoundException
+    TypeHint.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
+    TypeHint.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UUID", traits: {"smithy.api#enumValue" => "UUID"}))
+    TypeHint.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
+    TypeHint.add_member(:date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATE", traits: {"smithy.api#enumValue" => "DATE"}))
+    TypeHint.add_member(:time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME", traits: {"smithy.api#enumValue" => "TIME"}))
+    TypeHint.add_member(:decimal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DECIMAL", traits: {"smithy.api#enumValue" => "DECIMAL"}))
     UnsupportedResultException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     UnsupportedResultException.type = Types::UnsupportedResultException
     UpdateResult.add_member(:generated_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldList, name: "generatedFields"))
@@ -258,7 +270,7 @@ module Aws::RDSData
       service.id = "com.amazonaws.rdsdata#RdsDataService"
       service.name = "RdsDataService"
       service.version = "2018-08-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "RDS Data", "arnNamespace" => "rds-data"}, "aws.auth#sigv4" => {"name" => "rds-data"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "AWS RDS DataService"}
+      service.traits = {"aws.api#service" => {"sdkId" => "RDS Data", "arnNamespace" => "rds-data"}, "aws.auth#sigv4" => {"name" => "rds-data"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "AWS RDS DataService", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-data-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-data-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-data.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://rds-data.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_execute_statement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.rdsdata#BatchExecuteStatement"
         operation.name = "BatchExecuteStatement"

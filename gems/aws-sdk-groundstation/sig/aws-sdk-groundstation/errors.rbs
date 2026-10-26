@@ -8,12 +8,19 @@ module Aws::GroundStation
       def message: () -> String?
       def parameter_name: () -> String?
     end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ResourceLimitExceededException < Smithy::Client::ServiceError
       def message: () -> String?
       def parameter_name: () -> String?
     end
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def parameter_name: () -> String?
     end
   end
 end

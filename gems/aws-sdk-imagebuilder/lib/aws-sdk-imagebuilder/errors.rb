@@ -22,8 +22,10 @@ module Aws::Imagebuilder
   #
   # ## Error Classes
   #
+  # * {AccessDeniedException}
   # * {CallRateLimitExceededException}
   # * {ClientException}
+  # * {DryRunOperationException}
   # * {ForbiddenException}
   # * {IdempotentParameterMismatchException}
   # * {InvalidPaginationTokenException}
@@ -39,13 +41,29 @@ module Aws::Imagebuilder
   # * {ServiceException}
   # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
+  # * {TooManyRequestsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>You have exceeded the permitted request rate for the specific operation.</p>
+    # <p>You do not have permissions to perform the requested operation.</p>
+    class AccessDeniedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Imagebuilder::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>You have exceeded the permitted request rate for the Amazon EC2 APIs that Image Builder
+    # 			calls on your behalf. Retry with an increasing or variable delay between
+    # 			requests.</p>
     class CallRateLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::CallRateLimitExceededException] data
@@ -58,12 +76,25 @@ module Aws::Imagebuilder
       end
     end
 
-    # <p>These errors are usually caused by a client action, such as using an action or
-    # 			resource on behalf of a user that doesn't have permissions to use the action or
-    # 			resource, or specifying an invalid resource identifier.</p>
+    # <p>A generic client error. This error usually indicates that the request
+    # 			failed a validation check, such as when a downstream service rejects a
+    # 			configured value.</p>
     class ClientException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ClientException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The dry run operation of the resource was successful, and no resources or mutations were actually performed due to the dry run flag in the request.</p>
+    class DryRunOperationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Imagebuilder::Types::DryRunOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -113,8 +144,9 @@ module Aws::Imagebuilder
       end
     end
 
-    # <p>You have specified two or more mutually exclusive parameters. Review the error message
-    # 			for details.</p>
+    # <p>You have specified a combination of parameters that isn't valid. For
+    # 			example, two mutually exclusive parameters, or a parameter without its
+    # 			required companion parameter. Review the error message for details.</p>
     class InvalidParameterCombinationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::InvalidParameterCombinationException] data
@@ -154,7 +186,8 @@ module Aws::Imagebuilder
       end
     end
 
-    # <p>You have requested an action that that the service doesn't support.</p>
+    # <p>The request is malformed or otherwise invalid. Verify the request and try
+    # 			again.</p>
     class InvalidRequestException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::InvalidRequestException] data
@@ -234,8 +267,8 @@ module Aws::Imagebuilder
       end
     end
 
-    # <p>This exception is thrown when the service encounters an unrecoverable
-    # 			exception.</p>
+    # <p>An internal server error occurred while Image Builder processed the request.
+    # 			Retrying the request may succeed.</p>
     class ServiceException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ServiceException] data
@@ -267,6 +300,19 @@ module Aws::Imagebuilder
     class ServiceUnavailableException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Imagebuilder::Types::ServiceUnavailableException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>You have attempted too many requests for the specific operation.</p>
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Imagebuilder::Types::TooManyRequestsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

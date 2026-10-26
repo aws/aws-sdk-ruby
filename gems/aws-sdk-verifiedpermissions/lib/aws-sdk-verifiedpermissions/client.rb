@@ -144,18 +144,18 @@ module Aws::VerifiedPermissions
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -240,6 +240,7 @@ module Aws::VerifiedPermissions
     #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC",
     #         policy_id: "PWv5M6d5HePx3gVVLKY1nK",
     #         policy_type: STATIC,
+    #         name: "name/example-policy",
     #         definition: {
     #     "static" => {
     #       "description" => Users can manage account resources in any account they own,
@@ -253,6 +254,7 @@ module Aws::VerifiedPermissions
     #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC",
     #         policy_id: "LzFn6KgLWvv4Mbegus35jn",
     #         policy_type: STATIC,
+    #         name: "name/example-policy-2",
     #         definition: {
     #     "static" => {
     #       "description" => User alice can't delete any photos.,
@@ -274,6 +276,57 @@ module Aws::VerifiedPermissions
     #   },
     #         created_date: Time.parse("2024-10-18T18:57:48.005343Z"),
     #         last_updated_date: Time.parse("2024-10-18T18:57:48.005343Z")
+    #       }
+    #     ],
+    #     errors: [
+    #     ]
+    #   }
+    # @example To retrieve policies by name
+    #   # The following example retrieves information about policies using their names instead of their IDs.
+    #   params = {
+    #     requests: [
+    #       {
+    #         policy_id: "name/example-policy",
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC"
+    #       },
+    #       {
+    #         policy_id: "name/example-policy-2",
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_get_policy(params, options)
+    #   response.to_h #=>
+    #   {
+    #     results: [
+    #       {
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC",
+    #         policy_id: "PWv5M6d5HePx3gVVLKY1nK",
+    #         policy_type: STATIC,
+    #         name: "name/example-policy",
+    #         definition: {
+    #     "static" => {
+    #       "description" => Users can manage account resources in any account they own,
+    #       "statement" => permit (principal, action in PhotoFlash::Action::"ManageAccount",resource) when { resource in principal.Account };
+    #     }
+    #   },
+    #         created_date: Time.parse("2024-10-18T18:53:39.258153Z"),
+    #         last_updated_date: Time.parse("2024-10-18T18:53:39.258153Z")
+    #       },
+    #       {
+    #         policy_store_id: "ERZeDpRc34dkYZeb6FZRVC",
+    #         policy_id: "LzFn6KgLWvv4Mbegus35jn",
+    #         policy_type: STATIC,
+    #         name: "name/example-policy-2",
+    #         definition: {
+    #     "static" => {
+    #       "description" => User alice can't delete any photos.,
+    #       "statement" => forbid (principal == PhotoFlash::User::"alice", action in [PhotoFlash::Action::"DeletePhoto"], resource);
+    #     }
+    #   },
+    #         created_date: Time.parse("2024-10-18T18:57:03.305027Z"),
+    #         last_updated_date: Time.parse("2024-10-18T18:57:03.305027Z")
     #       }
     #     ],
     #     errors: [
@@ -318,11 +371,12 @@ module Aws::VerifiedPermissions
     #         },
     #         created_date: Time.now, # required
     #         last_updated_date: Time.now, # required
+    #         name: "PolicyName"
     #       }
     #     ],
     #     errors: [ # required
     #       {
-    #         code: "POLICY_STORE_NOT_FOUND" # One of: ["POLICY_STORE_NOT_FOUND", "POLICY_NOT_FOUND"], # required
+    #         code: "POLICY_STORE_NOT_FOUND" # One of: ["POLICY_STORE_NOT_FOUND", "POLICY_NOT_FOUND", "POLICY_STORE_ALIAS_NOT_FOUND"], # required
     #         policy_store_id: "String", # required
     #         policy_id: "String", # required
     #         message: "String", # required
@@ -338,7 +392,7 @@ module Aws::VerifiedPermissions
     # <p>Makes a series of decisions about multiple authorization requests for one principal or resource. Each request contains the equivalent content of an <code>IsAuthorized</code> request: principal, action, resource, and context. Either the <code>principal</code> or the <code>resource</code> parameter must be identical across all requests. For example, Verified Permissions won't evaluate a pair of requests where <code>bob</code> views <code>photo1</code> and <code>alice</code> views <code>photo2</code>. Authorization of <code>bob</code> to view <code>photo1</code> and <code>photo2</code>, or <code>bob</code> and <code>alice</code> to view <code>photo1</code>, are valid batches. </p> <p>The request is evaluated against all policies in the specified policy store that match the entities that you declare. The result of the decisions is a series of <code>Allow</code> or <code>Deny</code> responses, along with the IDs of the policies that produced each decision.</p> <p>The <code>entities</code> of a <code>BatchIsAuthorized</code> API request can contain up to 100 principals and up to 100 resources. The <code>requests</code> of a <code>BatchIsAuthorized</code> API request can contain up to 30 requests.</p> <note> <p>The <code>BatchIsAuthorized</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>verifiedpermissions:IsAuthorized</code> in their IAM policies.</p> </note>
     # @param [Hash, Types::BatchIsAuthorizedInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make the authorization decisions for the input.</p>
+    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make the authorization decisions for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [Types::EntitiesDefinition] :entities
     #   <p>(Optional) Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies. These additional entities and their attributes can be referenced and checked by conditional elements in the policies in the specified policy store.</p> <note> <p>You can include only principal and resource entities in this parameter; you can't include actions. You must specify actions in the schema.</p> </note>
     # @option params [Array<Types::BatchIsAuthorizedInputItem>] :requests
@@ -391,7 +445,7 @@ module Aws::VerifiedPermissions
     #             }
     #           },
     #           "Email" => {
-    #             "string" => 
+    #             "string" =>
     #           }
     #         },
     #         "parents" => []
@@ -409,7 +463,7 @@ module Aws::VerifiedPermissions
     #             }
     #           },
     #           "Email" => {
-    #             "string" => 
+    #             "string" =>
     #           }
     #         },
     #         "parents" => []
@@ -424,7 +478,7 @@ module Aws::VerifiedPermissions
     #             "boolean" => false
     #           },
     #           "Name" => {
-    #             "string" => 
+    #             "string" =>
     #           }
     #         },
     #         "parents" => [{
@@ -439,7 +493,7 @@ module Aws::VerifiedPermissions
     #         },
     #         "attributes" => {
     #           "Name" => {
-    #             "string" => 
+    #             "string" =>
     #           }
     #         },
     #         "parents" => []
@@ -540,7 +594,31 @@ module Aws::VerifiedPermissions
     #               entity_type: "EntityType", # required
     #               entity_id: "EntityId", # required
     #             }
-    #           ]
+    #           ],
+    #           tags: {
+    #             "String" => {
+    #               # One of:
+    #               boolean: false,
+    #               entity_identifier: {
+    #                 entity_type: "EntityType", # required
+    #                 entity_id: "EntityId", # required
+    #               },
+    #               long: 1,
+    #               string: "StringAttribute",
+    #               set: [{
+    #                 # recursive CedarTagValue
+    #               }],
+    #               record: {
+    #                 "String" => {
+    #                   # recursive CedarTagValue
+    #                 }
+    #               },
+    #               ipaddr: "IpAddr",
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
+    #             }
+    #           }
     #         }
     #       ],
     #       cedar_json: "CedarJson"
@@ -662,7 +740,7 @@ module Aws::VerifiedPermissions
     # <p>Makes a series of decisions about multiple authorization requests for one token. The principal in this request comes from an external identity source in the form of an identity or access token, formatted as a <a href="https://wikipedia.org/wiki/JSON_Web_Token">JSON web token (JWT)</a>. The information in the parameters can also define additional context that Verified Permissions can include in the evaluations.</p> <p>The request is evaluated against all policies in the specified policy store that match the entities that you provide in the entities declaration and in the token. The result of the decisions is a series of <code>Allow</code> or <code>Deny</code> responses, along with the IDs of the policies that produced each decision.</p> <p>The <code>entities</code> of a <code>BatchIsAuthorizedWithToken</code> API request can contain up to 100 resources and up to 99 user groups. The <code>requests</code> of a <code>BatchIsAuthorizedWithToken</code> API request can contain up to 30 requests.</p> <note> <p>The <code>BatchIsAuthorizedWithToken</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>verifiedpermissions:IsAuthorizedWithToken</code> in their IAM policies.</p> </note>
     # @param [Hash, Types::BatchIsAuthorizedWithTokenInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p>
+    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :identity_token
     #   <p>Specifies an identity (ID) token for the principal that you want to authorize in each request. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an <code>accessToken</code>, an <code>identityToken</code>, or both.</p> <p>Must be an ID token. Verified Permissions returns an error if the <code>token_use</code> claim in the submitted token isn't <code>id</code>.</p>
     # @option params [String] :access_token
@@ -843,7 +921,31 @@ module Aws::VerifiedPermissions
     #               entity_type: "EntityType", # required
     #               entity_id: "EntityId", # required
     #             }
-    #           ]
+    #           ],
+    #           tags: {
+    #             "String" => {
+    #               # One of:
+    #               boolean: false,
+    #               entity_identifier: {
+    #                 entity_type: "EntityType", # required
+    #                 entity_id: "EntityId", # required
+    #               },
+    #               long: 1,
+    #               string: "StringAttribute",
+    #               set: [{
+    #                 # recursive CedarTagValue
+    #               }],
+    #               record: {
+    #                 "String" => {
+    #                   # recursive CedarTagValue
+    #                 }
+    #               },
+    #               ipaddr: "IpAddr",
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
+    #             }
+    #           }
     #         }
     #       ],
     #       cedar_json: "CedarJson"
@@ -963,13 +1065,13 @@ module Aws::VerifiedPermissions
     # @option params [String] :client_token
     #   <p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>ConflictException</code> error.</p> <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of <code>ClientToken</code>.</p>
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store in which you want to store this identity source. Only policies and requests made using this policy store can reference identities from the identity provider configured in the new identity source.</p>
+    #   <p>Specifies the ID of the policy store in which you want to store this identity source. Only policies and requests made using this policy store can reference identities from the identity provider configured in the new identity source.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [Types::Configuration] :configuration
     #   <p>Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.</p>
     # @option params [String] :principal_entity_type
     #   <p>Specifies the namespace and data type of the principals generated for identities authenticated by the new identity source.</p>
     # @example To create an identity source
-    #   # The following ``create-identity-source`` example creates an identity source that lets you reference identities stored in the specified Amazon Cognito user pool. Those identities are available in Verified Permissions as entities of type ``User``. 
+    #   # The following ``create-identity-source`` example creates an identity source that lets you reference identities stored in the specified Amazon Cognito user pool. Those identities are available in Verified Permissions as entities of type ``User``.
     #   params = {
     #     configuration: {
     #     "cognitoUserPoolConfiguration" => {
@@ -1046,9 +1148,11 @@ module Aws::VerifiedPermissions
     # @option params [String] :client_token
     #   <p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>ConflictException</code> error.</p> <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of <code>ClientToken</code>.</p>
     # @option params [String] :policy_store_id
-    #   <p>Specifies the <code>PolicyStoreId</code> of the policy store you want to store the policy in.</p>
+    #   <p>Specifies the <code>PolicyStoreId</code> of the policy store you want to store the policy in.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [Types::PolicyDefinition] :definition
     #   <p>A structure that specifies the policy type and content to use for the new policy. You must include either a static or a templateLinked element. The policy content must be written in the Cedar policy language.</p>
+    # @option params [String] :name
+    #   <p>Specifies a name for the policy that is unique among all policies within the policy store. You can use the name in place of the policy ID in API operations that reference the policy. The name must be prefixed with <code>name/</code>.</p> <p>If you specify a name that is already associated with another policy in the policy store, you receive a <code>ConflictException</code> error.</p>
     # @example To create a static policy
     #   # The following example request creates a static policy with a policy scope that specifies both a principal and a resource. The response includes both the Principal and Resource elements because both were specified in the request policy scope.
     #   params = {
@@ -1059,37 +1163,8 @@ module Aws::VerifiedPermissions
     #     }
     #   },
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
-    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
-    #   }
-    #   options = {}
-    #   response = client.create_policy(params, options)
-    #   response.to_h #=>
-    #   {
-    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
-    #     policy_id: "9wYxMpljbbZQb5fcZHyJhY",
-    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"),
-    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"),
-    #     policy_type: STATIC,
-    #     principal: {
-    #       entity_id: "janeFriends",
-    #       entity_type: "UserGroup"
-    #     },
-    #     resource: {
-    #       entity_id: "vacationFolder",
-    #       entity_type: "Album"
-    #     }
-    #   }
-    # @example To create a static policy
-    #   # The following example request creates a static policy with a policy scope that specifies both a principal and a resource. The response includes both the Principal and Resource elements because both were specified in the request policy scope.
-    #   params = {
-    #     definition: {
-    #     "static" => {
-    #       "description" => Grant members of janeFriends UserGroup access to the vacationFolder Album,
-    #       "statement" => permit( principal in UserGroup::"janeFriends", action, resource in Album::"vacationFolder" );
-    #     }
-    #   },
-    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
-    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111",
+    #     name: "name/example-policy"
     #   }
     #   options = {}
     #   response = client.create_policy(params, options)
@@ -1122,7 +1197,8 @@ module Aws::VerifiedPermissions
     #     }
     #   },
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
-    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111",
+    #     name: "name/example-template-linked-policy"
     #   }
     #   options = {}
     #   response = client.create_policy(params, options)
@@ -1163,7 +1239,8 @@ module Aws::VerifiedPermissions
     #           entity_id: "EntityId", # required
     #         }
     #       }
-    #     }
+    #     },
+    #     name: "PolicyName"
     #   }
     #   options = {}
     #   response = client.create_policy(params, options)
@@ -1197,7 +1274,7 @@ module Aws::VerifiedPermissions
       request.send_request(options)
     end
 
-    # <p>Creates a policy store. A policy store is a container for policy resources.</p> <note> <p>Although <a href="https://docs.cedarpolicy.com/schema/schema.html#namespace">Cedar supports multiple namespaces</a>, Verified Permissions currently supports only one namespace per policy store.</p> </note> <note> <p>Verified Permissions is <i> <a href="https://wikipedia.org/wiki/Eventual_consistency">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>
+    # <p>Creates a policy store. A policy store is a container for policy resources.</p> <note> <p>As of May 2026, Verified Permissions has aligned with Cedar and now supports multiple namespaces.</p> </note> <note> <p>Verified Permissions is <i> <a href="https://wikipedia.org/wiki/Eventual_consistency">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>
     # @param [Hash, Types::CreatePolicyStoreInput] params
     # @option params [String] :client_token
     #   <p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>ConflictException</code> error.</p> <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of <code>ClientToken</code>.</p>
@@ -1207,6 +1284,8 @@ module Aws::VerifiedPermissions
     #   <p>Descriptive text that you can provide to help with identification of the current policy store.</p>
     # @option params [String] :deletion_protection
     #   <p>Specifies whether the policy store can be deleted. If enabled, the policy store can't be deleted.</p> <p>The default state is <code>DISABLED</code>.</p>
+    # @option params [Types::EncryptionSettings] :encryption_settings
+    #   <p>Specifies the encryption settings used to encrypt the policy store and their child resources. Allows for the ability to use a customer owned KMS key for encryption of data.</p> <p>This is an optional field to be used when providing a customer-managed KMS key for encryption.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The list of key-value pairs to associate with the policy store.</p>
     # @example To create policy store
@@ -1226,6 +1305,31 @@ module Aws::VerifiedPermissions
     #     created_date: Time.parse("2024-08-12T18:20:50.99Z"),
     #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z")
     #   }
+    # @example To create an encrypted policy store
+    #   # The following example creates a new policy store with encryption settings based on a provided KMS key.
+    #   params = {
+    #     validation_settings: {
+    #       mode: STRICT
+    #     },
+    #     encryption_settings: {
+    #     "kmsEncryptionSettings" => {
+    #       "key" => arn:aws:kms:us-east-1:123456789012:key/abcdefgh-ijkl-mnop-qrst-uvwxyz123456,
+    #       "encryptionContext" => {
+    #         "policy_store_owner" => Tim
+    #       }
+    #     }
+    #   },
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
+    #   }
+    #   options = {}
+    #   response = client.create_policy_store(params, options)
+    #   response.to_h #=>
+    #   {
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #     arn: "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a",
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"),
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z")
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "IdempotencyToken",
@@ -1234,6 +1338,17 @@ module Aws::VerifiedPermissions
     #     },
     #     description: "PolicyStoreDescription",
     #     deletion_protection: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     encryption_settings: {
+    #       # One of:
+    #       kms_encryption_settings: {
+    #         key: "KmsKey", # required
+    #         encryption_context: {
+    #           "EncryptionContextKey" => "EncryptionContextValue"
+    #         }
+    #       },
+    #       default: {
+    #       }
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue"
     #     }
@@ -1254,23 +1369,68 @@ module Aws::VerifiedPermissions
       request.send_request(options)
     end
 
+    # <p>Creates a policy store alias for the specified policy store. A policy store alias is an alternative identifier that you can use to reference a policy store in API operations.</p> <p>This operation is idempotent. If multiple CreatePolicyStoreAlias requests are made where the <code>aliasName</code> and <code>policyStoreId</code> fields are the same between the requests, subsequent requests will be ignored. For each duplicate CreatePolicyStoreAlias request, a Success response will be returned and a new policy store alias will not be created.</p> <note> <p>Verified Permissions is <i> <a href="https://wikipedia.org/wiki/Eventual_consistency">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>
+    # @param [Hash, Types::CreatePolicyStoreAliasInput] params
+    # @option params [String] :alias_name
+    #   <p>Specifies the name of the policy store alias to create. The name must be unique within your Amazon Web Services account and Amazon Web Services Region.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>
+    # @option params [String] :policy_store_id
+    #   <p>Specifies the ID of the policy store to associate with the alias.</p> <note> <p>The associated policy store must be specified using its ID. The alias name cannot be used.</p> </note>
+    # @example CreatePolicyStoreAlias
+    #   # The following example creates a new policy store alias.
+    #   params = {
+    #     alias_name: "policy-store-alias/example-policy-store",
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a"
+    #   }
+    #   options = {}
+    #   response = client.create_policy_store_alias(params, options)
+    #   response.to_h #=>
+    #   {
+    #     alias_name: "policy-store-alias/example-policy-store",
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #     alias_arn: "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store",
+    #     created_at: Time.parse("2024-01-15T12:30:00.52Z")
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     alias_name: "Alias", # required
+    #     policy_store_id: "PolicyStoreId", # required
+    #   }
+    #   options = {}
+    #   response = client.create_policy_store_alias(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     alias_name: "Alias", # required
+    #     policy_store_id: "PolicyStoreId", # required
+    #     alias_arn: "ResourceArn", # required
+    #     created_at: Time.now, # required
+    #   }
+    # @return [Types::CreatePolicyStoreAliasOutput]
+    def create_policy_store_alias(params = {}, options = {})
+      request = build_request(:create_policy_store_alias, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a policy template. A template can use placeholders for the principal and resource. A template must be instantiated into a policy by associating it with specific principals and resources to use for the placeholders. That instantiated policy can then be considered in authorization decisions. The instantiated policy works identically to any other policy, except that it is dynamically linked to the template. If the template changes, then any policies that are linked to that template are immediately updated as well.</p> <note> <p>Verified Permissions is <i> <a href="https://wikipedia.org/wiki/Eventual_consistency">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>
     # @param [Hash, Types::CreatePolicyTemplateInput] params
     # @option params [String] :client_token
     #   <p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don't provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>ConflictException</code> error.</p> <p>Verified Permissions recognizes a <code>ClientToken</code> for eight hours. After eight hours, the next request with the same parameters performs the operation again regardless of the value of <code>ClientToken</code>.</p>
     # @option params [String] :policy_store_id
-    #   <p>The ID of the policy store in which to create the policy template.</p>
+    #   <p>The ID of the policy store in which to create the policy template.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :description
     #   <p>Specifies a description for the policy template.</p>
     # @option params [String] :statement
     #   <p>Specifies the content that you want to use for the new policy template, written in the Cedar policy language.</p>
+    # @option params [String] :name
+    #   <p>Specifies a name for the policy template that is unique among all policy templates within the policy store. You can use the name in place of the policy template ID in API operations that reference the policy template. The name must be prefixed with <code>name/</code>.</p> <p>If you specify a name that is already associated with another policy template in the policy store, you receive a <code>ConflictException</code> error.</p>
     # @example To create a policy template
     #   # The following example creates a policy template that has a placeholder for the principal.
     #   params = {
     #     description: "Template for research dept",
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
     #     statement: "\"AccessVacation\"\npermit(\n    principal in ?principal,\n    action == Action::\"view\",\n    resource == Photo::\"VacationPhoto94.jpg\"\n)\nwhen {\n    principal has department && principal.department == \"research\"\n};",
-    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111"
+    #     client_token: "a1b2c3d4-e5f6-a1b2-c3d4-TOKEN1111111",
+    #     name: "name/example-policy-template"
     #   }
     #   options = {}
     #   response = client.create_policy_template(params, options)
@@ -1287,6 +1447,7 @@ module Aws::VerifiedPermissions
     #     policy_store_id: "PolicyStoreId", # required
     #     description: "PolicyTemplateDescription",
     #     statement: "PolicyStatement", # required
+    #     name: "PolicyTemplateName"
     #   }
     #   options = {}
     #   response = client.create_policy_template(params, options)
@@ -1307,7 +1468,7 @@ module Aws::VerifiedPermissions
     # <p>Deletes an identity source that references an identity provider (IdP) such as Amazon Cognito. After you delete the identity source, you can no longer use tokens for identities from that identity source to represent principals in authorization queries made using <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a>. operations.</p>
     # @param [Hash, Types::DeleteIdentitySourceInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the identity source that you want to delete.</p>
+    #   <p>Specifies the ID of the policy store that contains the identity source that you want to delete.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :identity_source_id
     #   <p>Specifies the ID of the identity source that you want to delete.</p>
     # @example To delete an identity source
@@ -1339,9 +1500,9 @@ module Aws::VerifiedPermissions
     # <p>Deletes the specified policy from the policy store.</p> <p>This operation is idempotent; if you specify a policy that doesn't exist, the request response returns a successful <code>HTTP 200</code> status code.</p>
     # @param [Hash, Types::DeletePolicyInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy that you want to delete.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy that you want to delete.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :policy_id
-    #   <p>Specifies the ID of the policy that you want to delete.</p>
+    #   <p>Specifies the ID of the policy that you want to delete.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>
     # @example To delete a policy
     #   # The following example deletes the specified policy from its policy store.
     #   params = {
@@ -1371,7 +1532,7 @@ module Aws::VerifiedPermissions
     # <p>Deletes the specified policy store.</p> <p>This operation is idempotent. If you specify a policy store that does not exist, the request response will still return a successful HTTP 200 status code.</p>
     # @param [Hash, Types::DeletePolicyStoreInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that you want to delete.</p>
+    #   <p>Specifies the ID of the policy store that you want to delete.</p> <note> <p>To specify a policy store, the alias name cannot be used. Only the ID can be used.</p> </note>
     # @example To delete a policy store
     #   # The following example deletes the specified policy store.
     #   params = {
@@ -1396,12 +1557,53 @@ module Aws::VerifiedPermissions
       request.send_request(options)
     end
 
+    # <p>Deletes the specified policy store alias.</p> <p>This operation is idempotent. If you specify a policy store alias that does not exist, the request response will still return a successful HTTP 200 status code.</p> <p>By default, when a policy store alias is deleted, it enters the <code>PendingDeletion</code> state. When a policy store alias is in the <code>PendingDeletion</code> state, new policy store aliases cannot be created with the same name. If the policy store alias is used in an API that has a <code>policyStoreId</code> field, the operation will fail with a <code>ResourceNotFound</code> exception.</p> <p>To immediately delete a policy store alias and bypass the <code>PendingDeletion</code> state, set the <code>deletionMode</code> parameter to <code>HardDelete</code>.</p> <important> <p>Verified Permissions is eventually consistent. If you hard delete a policy store alias and then immediately recreate it to be associated with a different policy store, requests that reference this alias may continue to be evaluated against the previously associated policy store for a short period of time.</p> </important>
+    # @param [Hash, Types::DeletePolicyStoreAliasInput] params
+    # @option params [String] :alias_name
+    #   <p>Specifies the name of the policy store alias that you want to delete.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>
+    # @option params [String] :deletion_mode
+    #   <p>Specifies the deletion mode for the policy store alias. The valid values are:</p> <ul> <li> <p> <b>SoftDelete</b> – The policy store alias enters the <code>PendingDeletion</code> state. This is the default behavior when no <code>deletionMode</code> is specified.</p> </li> <li> <p> <b>HardDelete</b> – The policy store alias is immediately deleted, bypassing the <code>PendingDeletion</code> state.</p> </li> </ul>
+    # @example Soft delete a policy store alias
+    #   # The following example soft deletes the policy store alias with name example-policy-store. The alias enters the PendingDeletion state.
+    #   params = {
+    #     alias_name: "policy-store-alias/example-policy-store"
+    #   }
+    #   options = {}
+    #   response = client.delete_policy_store_alias(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Hard delete a policy store alias
+    #   # The following example hard deletes the policy store alias with name example-policy-store. The alias is immediately deleted, bypassing the PendingDeletion state.
+    #   params = {
+    #     alias_name: "policy-store-alias/example-policy-store",
+    #     deletion_mode: HardDelete
+    #   }
+    #   options = {}
+    #   response = client.delete_policy_store_alias(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     alias_name: "Alias", # required
+    #     deletion_mode: "SoftDelete" # One of: ["SoftDelete", "HardDelete"]
+    #   }
+    #   options = {}
+    #   response = client.delete_policy_store_alias(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeletePolicyStoreAliasOutput]
+    def delete_policy_store_alias(params = {}, options = {})
+      request = build_request(:delete_policy_store_alias, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the specified policy template from the policy store.</p> <important> <p>This operation also deletes any policies that were created from the specified policy template. Those policies are immediately removed from all future API responses, and are asynchronously deleted from the policy store.</p> </important>
     # @param [Hash, Types::DeletePolicyTemplateInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy template that you want to delete.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy template that you want to delete.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :policy_template_id
-    #   <p>Specifies the ID of the policy template that you want to delete.</p>
+    #   <p>Specifies the ID of the policy template that you want to delete.</p> <p>You can use the policy template name in place of the policy template ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>PTEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy-template</code> </p> </li> </ul>
     # @example To delete a policy template
     #   # The following example deletes a policy template. Before you can perform this operation, you must first delete any template-linked policies that were instantiated from this policy template. To delete them, use DeletePolicy.
     #   params = {
@@ -1431,7 +1633,7 @@ module Aws::VerifiedPermissions
     # <p>Retrieves the details about the specified identity source.</p>
     # @param [Hash, Types::GetIdentitySourceInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the identity source you want information about.</p>
+    #   <p>Specifies the ID of the policy store that contains the identity source you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :identity_source_id
     #   <p>Specifies the ID of the identity source you want information about.</p>
     # @example To retrieve details about an identity source
@@ -1519,9 +1721,9 @@ module Aws::VerifiedPermissions
     # <p>Retrieves information about the specified policy.</p>
     # @param [Hash, Types::GetPolicyInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy that you want information about.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy that you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :policy_id
-    #   <p>Specifies the ID of the policy you want information about.</p>
+    #   <p>Specifies the ID of the policy you want information about.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>
     # @example To retrieve details about a policy
     #   # The following example retrieves information about the specified policy contained in the specified policy store. In this example, the requested policy is a template-linked policy, so it returns the ID of the policy template, and the specific principal and resource used by this policy.
     #   params = {
@@ -1535,6 +1737,33 @@ module Aws::VerifiedPermissions
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
     #     policy_id: "9wYxMpljbbZQb5fcZHyJhY",
     #     policy_type: STATIC,
+    #     resource: {
+    #       entity_id: "publicFolder",
+    #       entity_type: "Album"
+    #     },
+    #     definition: {
+    #     "static" => {
+    #       "description" => Grant everyone of janeFriends UserGroup access to the vacationFolder Album,
+    #       "statement" => permit(principal, action, resource in Album::"publicFolder");
+    #     }
+    #   },
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"),
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z")
+    #   }
+    # @example To retrieve a policy by name
+    #   # The following example retrieves information about a policy using its name instead of its ID.
+    #   params = {
+    #     policy_id: "name/example-policy",
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a"
+    #   }
+    #   options = {}
+    #   response = client.get_policy(params, options)
+    #   response.to_h #=>
+    #   {
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #     policy_id: "9wYxMpljbbZQb5fcZHyJhY",
+    #     policy_type: STATIC,
+    #     name: "name/example-policy",
     #     resource: {
     #       entity_id: "publicFolder",
     #       entity_type: "Album"
@@ -1595,7 +1824,8 @@ module Aws::VerifiedPermissions
     #     },
     #     created_date: Time.now, # required
     #     last_updated_date: Time.now, # required
-    #     effect: "Permit" # One of: ["Permit", "Forbid"]
+    #     effect: "Permit" # One of: ["Permit", "Forbid"],
+    #     name: "PolicyName"
     #   }
     # @return [Types::GetPolicyOutput]
     def get_policy(params = {}, options = {})
@@ -1606,7 +1836,7 @@ module Aws::VerifiedPermissions
     # <p>Retrieves details about a policy store.</p>
     # @param [Hash, Types::GetPolicyStoreInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that you want information about.</p>
+    #   <p>Specifies the policy store that you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [Boolean] :tags
     #   <p>Specifies whether to return the tags that are attached to the policy store. If this parameter is included in the API call, the tags are returned, otherwise they are not returned.</p> <note> <p>If this parameter is included in the API call but there are no tags attached to the policy store, the <code>tags</code> response parameter is omitted from the response.</p> </note>
     # @example GetPolicyStore
@@ -1624,7 +1854,35 @@ module Aws::VerifiedPermissions
     #       mode: STRICT
     #     },
     #     created_date: Time.parse("2024-08-12T18:20:50.99Z"),
-    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z")
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"),
+    #     encryption_state: {
+    #     "default" => {}
+    #   }
+    #   }
+    # @example GetPolicyStore that is encrypted
+    #   # The following example retrieves details about the specified encrypted policy store.
+    #   params = {
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a"
+    #   }
+    #   options = {}
+    #   response = client.get_policy_store(params, options)
+    #   response.to_h #=>
+    #   {
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #     arn: "arn:aws:verifiedpermissions::123456789012:policy-store/C7v5xMplfFH3i3e4Jrzb1a",
+    #     validation_settings: {
+    #       mode: STRICT
+    #     },
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"),
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"),
+    #     encryption_state: {
+    #     "kmsEncryptionState" => {
+    #       "key" => arn:aws:kms:us-east-1:123456789012:key/abcdefgh-ijkl-mnop-qrst-uvwxyz123456,
+    #       "encryptionContext" => {
+    #         "policy_store_owner" => Tim
+    #       }
+    #     }
+    #   }
     #   }
     # @example Request syntax with placeholder values
     #   params = {
@@ -1645,6 +1903,17 @@ module Aws::VerifiedPermissions
     #     last_updated_date: Time.now, # required
     #     description: "PolicyStoreDescription",
     #     deletion_protection: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     encryption_state: {
+    #       # One of:
+    #       kms_encryption_state: {
+    #         key: "KmsKey", # required
+    #         encryption_context: { # required
+    #           "EncryptionContextKey" => "EncryptionContextValue"
+    #         }
+    #       },
+    #       default: {
+    #       }
+    #     },
     #     cedar_version: "CEDAR_2" # One of: ["CEDAR_2", "CEDAR_4"],
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -1656,12 +1925,52 @@ module Aws::VerifiedPermissions
       request.send_request(options)
     end
 
+    # <p>Retrieves details about the specified policy store alias.</p>
+    # @param [Hash, Types::GetPolicyStoreAliasInput] params
+    # @option params [String] :alias_name
+    #   <p>Specifies the name of the policy store alias that you want information about.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>
+    # @example GetPolicyStoreAlias
+    #   # The following example retrieves details about the policy store alias with name example-policy-store.
+    #   params = {
+    #     alias_name: "policy-store-alias/example-policy-store"
+    #   }
+    #   options = {}
+    #   response = client.get_policy_store_alias(params, options)
+    #   response.to_h #=>
+    #   {
+    #     alias_name: "policy-store-alias/example-policy-store",
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #     alias_arn: "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store",
+    #     created_at: Time.parse("2024-01-15T12:30:00.52Z"),
+    #     state: Active
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     alias_name: "Alias", # required
+    #   }
+    #   options = {}
+    #   response = client.get_policy_store_alias(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     alias_name: "Alias", # required
+    #     policy_store_id: "PolicyStoreId", # required
+    #     alias_arn: "ResourceArn", # required
+    #     created_at: Time.now, # required
+    #     state: "Active" # One of: ["Active", "PendingDeletion"], # required
+    #   }
+    # @return [Types::GetPolicyStoreAliasOutput]
+    def get_policy_store_alias(params = {}, options = {})
+      request = build_request(:get_policy_store_alias, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieve the details for the specified policy template in the specified policy store.</p>
     # @param [Hash, Types::GetPolicyTemplateInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy template that you want information about.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy template that you want information about.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :policy_template_id
-    #   <p>Specifies the ID of the policy template that you want information about.</p>
+    #   <p>Specifies the ID of the policy template that you want information about.</p> <p>You can use the policy template name in place of the policy template ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>PTEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy-template</code> </p> </li> </ul>
     # @example GetPolicyTemplate
     #   # The following example displays the details of the specified policy template.
     #   params = {
@@ -1674,6 +1983,24 @@ module Aws::VerifiedPermissions
     #   {
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
     #     policy_template_id: "PTEXAMPLEabcdefg111111",
+    #     description: "Template for research dept",
+    #     statement: "permit(\n  principal ?principal,\n  action == Action::\"view\",\n  resource in ?resource\n) when {\n  principal has department && principal.department == \"research\" \n};",
+    #     created_date: Time.parse("2024-08-12T18:20:50.99Z"),
+    #     last_updated_date: Time.parse("2024-08-12T18:20:50.99Z")
+    #   }
+    # @example To retrieve a policy template by name
+    #   # The following example retrieves the details of a policy template using its name instead of its ID.
+    #   params = {
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #     policy_template_id: "name/example-policy-template"
+    #   }
+    #   options = {}
+    #   response = client.get_policy_template(params, options)
+    #   response.to_h #=>
+    #   {
+    #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #     policy_template_id: "PTEXAMPLEabcdefg111111",
+    #     name: "name/example-policy-template",
     #     description: "Template for research dept",
     #     statement: "permit(\n  principal ?principal,\n  action == Action::\"view\",\n  resource in ?resource\n) when {\n  principal has department && principal.department == \"research\" \n};",
     #     created_date: Time.parse("2024-08-12T18:20:50.99Z"),
@@ -1695,6 +2022,7 @@ module Aws::VerifiedPermissions
     #     statement: "PolicyStatement", # required
     #     created_date: Time.now, # required
     #     last_updated_date: Time.now, # required
+    #     name: "PolicyTemplateName"
     #   }
     # @return [Types::GetPolicyTemplateOutput]
     def get_policy_template(params = {}, options = {})
@@ -1705,13 +2033,13 @@ module Aws::VerifiedPermissions
     # <p>Retrieve the details for the specified schema in the specified policy store.</p>
     # @param [Hash, Types::GetSchemaInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the schema.</p>
+    #   <p>Specifies the ID of the policy store that contains the schema.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @example GetSchema
     #   # The following example retrieves the current schema stored in the specified policy store.
-    # # 
+    # #
     # # Note
     # # The JSON in the parameters of this operation are strings that can contain embedded quotation marks (") within the outermost quotation mark pair. This requires that you stringify the JSON object by preceding all embedded quotation marks with a backslash character ( \" ) and combining all lines into a single text line with no line breaks.
-    # # 
+    # #
     # # Example strings might be displayed wrapped across multiple lines here for readability, but the operation requires the parameters be submitted as single line strings.
     #   params = {
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a"
@@ -1749,7 +2077,7 @@ module Aws::VerifiedPermissions
     # <p>Makes an authorization decision about a service request described in the parameters. The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either <code>Allow</code> or <code>Deny</code>, along with a list of the policies that resulted in the decision.</p>
     # @param [Hash, Types::IsAuthorizedInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p>
+    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [Types::EntityIdentifier] :principal
     #   <p>Specifies the principal for which the authorization decision is to be made.</p>
     # @option params [Types::ActionIdentifier] :action
@@ -1762,7 +2090,7 @@ module Aws::VerifiedPermissions
     #   <p>(Optional) Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies. These additional entities and their attributes can be referenced and checked by conditional elements in the policies in the specified policy store.</p> <note> <p>You can include only principal and resource entities in this parameter; you can't include actions. You must specify actions in the schema.</p> </note>
     # @example IsAuthorized - Example 1
     #   # The following example requests an authorization decision for a principal of type User named Alice, who wants to perform the updatePhoto operation, on a resource of type Photo named VacationPhoto94.jpg.
-    # # 
+    # #
     # # The response shows that the request was allowed by one policy.
     #   params = {
     #     principal: {
@@ -1771,7 +2099,7 @@ module Aws::VerifiedPermissions
     #     },
     #     action: {
     #       action_type: "Action",
-    #       action_id: "view"
+    #       action_id: "updatePhoto"
     #     },
     #     resource: {
     #       entity_type: "Photo",
@@ -1899,7 +2227,31 @@ module Aws::VerifiedPermissions
     #               entity_type: "EntityType", # required
     #               entity_id: "EntityId", # required
     #             }
-    #           ]
+    #           ],
+    #           tags: {
+    #             "String" => {
+    #               # One of:
+    #               boolean: false,
+    #               entity_identifier: {
+    #                 entity_type: "EntityType", # required
+    #                 entity_id: "EntityId", # required
+    #               },
+    #               long: 1,
+    #               string: "StringAttribute",
+    #               set: [{
+    #                 # recursive CedarTagValue
+    #               }],
+    #               record: {
+    #                 "String" => {
+    #                   # recursive CedarTagValue
+    #                 }
+    #               },
+    #               ipaddr: "IpAddr",
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
+    #             }
+    #           }
     #         }
     #       ],
     #       cedar_json: "CedarJson"
@@ -1931,7 +2283,7 @@ module Aws::VerifiedPermissions
     # <p>Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source in the form of an identity token formatted as a <a href="https://wikipedia.org/wiki/JSON_Web_Token">JSON web token (JWT)</a>. The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either <code>Allow</code> or <code>Deny</code>, along with a list of the policies that resulted in the decision.</p> <p>Verified Permissions validates each token that is specified in a request by checking its expiration date and its signature.</p> <important> <p>Tokens from an identity source user continue to be usable until they expire. Token revocation and resource deletion have no effect on the validity of a token in your policy store</p> </important>
     # @param [Hash, Types::IsAuthorizedWithTokenInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p>
+    #   <p>Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :identity_token
     #   <p>Specifies an identity token for the principal to be authorized. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an <code>accessToken</code>, an <code>identityToken</code>, or both.</p> <p>Must be an ID token. Verified Permissions returns an error if the <code>token_use</code> claim in the submitted token isn't <code>id</code>.</p>
     # @option params [String] :access_token
@@ -1946,7 +2298,7 @@ module Aws::VerifiedPermissions
     #   <p>(Optional) Specifies the list of resources and their associated attributes that Verified Permissions can examine when evaluating the policies. These additional entities and their attributes can be referenced and checked by conditional elements in the policies in the specified policy store.</p> <important> <p>You can't include principals in this parameter, only resource and action entities. This parameter can't include any entities of a type that matches the user or group entity types that you defined in your identity source.</p> <ul> <li> <p>The <code>IsAuthorizedWithToken</code> operation takes principal attributes from <b> <i>only</i> </b> the <code>identityToken</code> or <code>accessToken</code> passed to the operation.</p> </li> <li> <p>For action entities, you can include only their <code>Identifier</code> and <code>EntityType</code>. </p> </li> </ul> </important>
     # @example IsAuthorizedWithToken - Example 1
     #   # The following example requests an authorization decision for a user who was authenticated by Amazon Cognito. The request uses the identity token provided by Amazon Cognito instead of the access token. In this example, the specified information store is configured to return principals as entities of type CognitoUser. The policy store contains a policy with the following statement.
-    # # 
+    # #
     # # permit(
     # #     principal == CognitoUser::"us-east-1_1a2b3c4d5|a1b2c3d4e5f6g7h8i9j0kalbmc",
     # #     action,
@@ -2055,7 +2407,31 @@ module Aws::VerifiedPermissions
     #               entity_type: "EntityType", # required
     #               entity_id: "EntityId", # required
     #             }
-    #           ]
+    #           ],
+    #           tags: {
+    #             "String" => {
+    #               # One of:
+    #               boolean: false,
+    #               entity_identifier: {
+    #                 entity_type: "EntityType", # required
+    #                 entity_id: "EntityId", # required
+    #               },
+    #               long: 1,
+    #               string: "StringAttribute",
+    #               set: [{
+    #                 # recursive CedarTagValue
+    #               }],
+    #               record: {
+    #                 "String" => {
+    #                   # recursive CedarTagValue
+    #                 }
+    #               },
+    #               ipaddr: "IpAddr",
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
+    #             }
+    #           }
     #         }
     #       ],
     #       cedar_json: "CedarJson"
@@ -2091,7 +2467,7 @@ module Aws::VerifiedPermissions
     # <p>Returns a paginated list of all of the identity sources defined in the specified policy store.</p>
     # @param [Hash, Types::ListIdentitySourcesInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the identity sources that you want to list.</p>
+    #   <p>Specifies the ID of the policy store that contains the identity sources that you want to list.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :next_token
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     # @option params [Integer] :max_results
@@ -2197,7 +2573,7 @@ module Aws::VerifiedPermissions
     # <p>Returns a paginated list of all policies stored in the specified policy store.</p>
     # @param [Hash, Types::ListPoliciesInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store you want to list policies from.</p>
+    #   <p>Specifies the ID of the policy store you want to list policies from.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :next_token
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     # @option params [Integer] :max_results
@@ -2225,6 +2601,7 @@ module Aws::VerifiedPermissions
     #         policy_id: "9wYxMpljbbZQb5fcZHyJhY",
     #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
     #         policy_type: STATIC,
+    #         name: "name/example-policy",
     #         principal: {
     #           entity_id: "janeFriends",
     #           entity_type: "UserGroup"
@@ -2245,6 +2622,7 @@ module Aws::VerifiedPermissions
     #         policy_id: "Et9KxMplyaDdyurDw8TeFa",
     #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
     #         policy_type: STATIC,
+    #         name: "name/example-policy-2",
     #         resource: {
     #           entity_id: "publicFolder",
     #           entity_type: "Album"
@@ -2423,13 +2801,111 @@ module Aws::VerifiedPermissions
     #         },
     #         created_date: Time.now, # required
     #         last_updated_date: Time.now, # required
-    #         effect: "Permit" # One of: ["Permit", "Forbid"]
+    #         effect: "Permit" # One of: ["Permit", "Forbid"],
+    #         name: "PolicyName"
     #       }
     #     ]
     #   }
     # @return [Types::ListPoliciesOutput]
     def list_policies(params = {}, options = {})
       request = build_request(:list_policies, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a paginated list of all policy store aliases in the calling Amazon Web Services account.</p>
+    # @param [Hash, Types::ListPolicyStoreAliasesInput] params
+    # @option params [String] :next_token
+    #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>Specifies the total number of results that you want included in each response. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next set of results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p> <p>If you do not specify this parameter, the operation defaults to 5 policy store aliases per response. You can specify a maximum of 50 policy store aliases per response.</p>
+    # @option params [Types::PolicyStoreAliasFilter] :filter
+    #   <p>Specifies a filter to narrow the results. You can filter by <code>policyStoreId</code> to list only the policy store aliases associated with a specific policy store.</p>
+    # @example ListPolicyStoreAliases - Example 1
+    #   # The following example lists all policy store aliases in the AWS account in the AWS Region in which you call the operation.
+    #   params = {}
+    #   options = {}
+    #   response = client.list_policy_store_aliases(params, options)
+    #   response.to_h #=>
+    #   {
+    #     policy_store_aliases: [
+    #       {
+    #         alias_name: "policy-store-alias/example-policy-store",
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #         alias_arn: "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store",
+    #         created_at: Time.parse("2024-01-15T12:30:00.52Z"),
+    #         state: Active
+    #       },
+    #       {
+    #         alias_name: "policy-store-alias/example-policy-store-2",
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #         alias_arn: "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store-2",
+    #         created_at: Time.parse("2024-01-16T09:15:00.52Z"),
+    #         state: Active
+    #       },
+    #       {
+    #         alias_name: "policy-store-alias/example-policy-store-3",
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #         alias_arn: "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store-3",
+    #         created_at: Time.parse("2024-01-17T14:45:00.52Z"),
+    #         state: Active
+    #       }
+    #     ]
+    #   }
+    # @example ListPolicyStoreAliases - Example 2
+    #   # The following example lists all policy store aliases associated with the policy store with ID C7v5xMplfFH3i3e4Jrzb1a
+    #   params = {
+    #     filter: {
+    #       policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.list_policy_store_aliases(params, options)
+    #   response.to_h #=>
+    #   {
+    #     policy_store_aliases: [
+    #       {
+    #         alias_name: "policy-store-alias/example-policy-store",
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #         alias_arn: "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store",
+    #         created_at: Time.parse("2024-01-15T12:30:00.52Z"),
+    #         state: Active
+    #       },
+    #       {
+    #         alias_name: "policy-store-alias/example-policy-store-2",
+    #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
+    #         alias_arn: "arn:aws:verifiedpermissions:us-east-1:123456789012:policy-store-alias/example-policy-store-2",
+    #         created_at: Time.parse("2024-01-16T09:15:00.52Z"),
+    #         state: Active
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filter: {
+    #       policy_store_id: "PolicyStoreId"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.list_policy_store_aliases(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "NextToken",
+    #     policy_store_aliases: [ # required
+    #       {
+    #         alias_name: "Alias", # required
+    #         policy_store_id: "PolicyStoreId", # required
+    #         alias_arn: "ResourceArn", # required
+    #         created_at: Time.now, # required
+    #         state: "Active" # One of: ["Active", "PendingDeletion"], # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListPolicyStoreAliasesOutput]
+    def list_policy_store_aliases(params = {}, options = {})
+      request = build_request(:list_policy_store_aliases, params)
       request.send_request(options)
     end
 
@@ -2489,7 +2965,7 @@ module Aws::VerifiedPermissions
     # <p>Returns a paginated list of all policy templates in the specified policy store.</p>
     # @param [Hash, Types::ListPolicyTemplatesInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy templates you want to list.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy templates you want to list.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :next_token
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>NextToken</code> response to request the next page of results.</p>
     # @option params [Integer] :max_results
@@ -2508,6 +2984,7 @@ module Aws::VerifiedPermissions
     #         created_date: Time.parse("2024-08-12T18:20:50.99Z"),
     #         description: "Generic template",
     #         last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"),
+    #         name: "name/example-policy-template",
     #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
     #         policy_template_id: "PTEXAMPLEabcdefg111111"
     #       },
@@ -2515,6 +2992,7 @@ module Aws::VerifiedPermissions
     #         created_date: Time.parse("2024-08-12T18:20:50.99Z"),
     #         description: "Template for research dept",
     #         last_updated_date: Time.parse("2024-08-12T18:20:50.99Z"),
+    #         name: "name/example-policy-template-2",
     #         policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
     #         policy_template_id: "PTEXAMPLEabcdefg222222"
     #       }
@@ -2539,6 +3017,7 @@ module Aws::VerifiedPermissions
     #         description: "PolicyTemplateDescription",
     #         created_date: Time.now, # required
     #         last_updated_date: Time.now, # required
+    #         name: "PolicyTemplateName"
     #       }
     #     ]
     #   }
@@ -2588,15 +3067,15 @@ module Aws::VerifiedPermissions
     # <p>Creates or updates the policy schema in the specified policy store. The schema is used to validate any Cedar policies and policy templates submitted to the policy store. Any changes to the schema validate only policies and templates submitted after the schema change. Existing policies and templates are not re-evaluated against the changed schema. If you later update a policy, then it is evaluated against the new schema at that time.</p> <note> <p>Verified Permissions is <i> <a href="https://wikipedia.org/wiki/Eventual_consistency">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>
     # @param [Hash, Types::PutSchemaInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store in which to place the schema.</p>
+    #   <p>Specifies the ID of the policy store in which to place the schema.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [Types::SchemaDefinition] :definition
     #   <p>Specifies the definition of the schema to be stored. The schema definition must be written in Cedar schema JSON.</p>
     # @example PutSchema
     #   # The following example creates a new schema, or updates an existing schema, in the specified policy store. Note that the schema text is shown line wrapped for readability. You should submit the entire schema text as a single line of text.
-    # # 
+    # #
     # # Note
     # # The JSON in the parameters of this operation are strings that can contain embedded quotation marks (") within the outermost quotation mark pair. This requires that you stringify the JSON object by preceding all embedded quotation marks with a backslash character ( \" ) and combining all lines into a single text line with no line breaks.
-    # # 
+    # #
     # # Example strings might be displayed wrapped across multiple lines here for readability, but the operation requires the parameters be submitted as single line strings.
     #   params = {
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
@@ -2714,7 +3193,7 @@ module Aws::VerifiedPermissions
     # <p>Updates the specified identity source to use a new identity provider (IdP), or to change the mapping of identities from the IdP to a different principal entity type.</p> <note> <p>Verified Permissions is <i> <a href="https://wikipedia.org/wiki/Eventual_consistency">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>
     # @param [Hash, Types::UpdateIdentitySourceInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the identity source that you want to update.</p>
+    #   <p>Specifies the ID of the policy store that contains the identity source that you want to update.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :identity_source_id
     #   <p>Specifies the ID of the identity source that you want to update.</p>
     # @option params [Types::UpdateConfiguration] :update_configuration
@@ -2796,11 +3275,13 @@ module Aws::VerifiedPermissions
     # <p>Modifies a Cedar static policy in the specified policy store. You can change only certain elements of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyInput.html#amazonverifiedpermissions-UpdatePolicy-request-UpdatePolicyDefinition">UpdatePolicyDefinition</a> parameter. You can directly update only static policies. To change a template-linked policy, you must update the template instead, using <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html">UpdatePolicyTemplate</a>.</p> <note> <ul> <li> <p>If policy validation is enabled in the policy store, then updating a static policy causes Verified Permissions to validate the policy against the schema in the policy store. If the updated static policy doesn't pass validation, the operation fails and the update isn't stored.</p> </li> <li> <p>When you edit a static policy, you can change only certain elements of a static policy:</p> <ul> <li> <p>The action referenced by the policy. </p> </li> <li> <p>A condition clause, such as when and unless. </p> </li> </ul> <p>You can't change these elements of a static policy: </p> <ul> <li> <p>Changing a policy from a static policy to a template-linked policy. </p> </li> <li> <p>Changing the effect of a static policy from permit or forbid. </p> </li> <li> <p>The principal referenced by a static policy. </p> </li> <li> <p>The resource referenced by a static policy. </p> </li> </ul> </li> <li> <p>To update a template-linked policy, you must update the template instead. </p> </li> </ul> </note> <note> <p>Verified Permissions is <i> <a href="https://wikipedia.org/wiki/Eventual_consistency">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>
     # @param [Hash, Types::UpdatePolicyInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy that you want to update.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy that you want to update.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :policy_id
-    #   <p>Specifies the ID of the policy that you want to update. To find this value, you can use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a>.</p>
+    #   <p>Specifies the ID of the policy that you want to update. To find this value, you can use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a>.</p> <p>You can use the policy name in place of the policy ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>SPEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy</code> </p> </li> </ul>
     # @option params [Types::UpdatePolicyDefinition] :definition
-    #   <p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>
+    #   <p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>If you don't specify this parameter, the existing policy definition remains unchanged.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>
+    # @option params [String] :name
+    #   <p>Specifies a name for the policy that is unique among all policies within the policy store. You can use the name in place of the policy ID in API operations that reference the policy. The name must be prefixed with <code>name/</code>.</p> <note> <p>If you don't include the name in an update request, the existing name is unchanged. To remove a name, set it to an empty string (<code>""</code>).</p> </note> <p>If you specify a name that is already associated with another policy in the policy store, you receive a <code>ConflictException</code> error.</p>
     # @example UpdatePolicy
     #   # The following example replaces the definition of the specified static policy with a new one.
     #   params = {
@@ -2810,7 +3291,8 @@ module Aws::VerifiedPermissions
     #     "static" => {
     #       "statement" => permit(principal, action, resource in Album::"public_folder");
     #     }
-    #   }
+    #   },
+    #     name: "name/example-policy-2"
     #   }
     #   options = {}
     #   response = client.update_policy(params, options)
@@ -2830,13 +3312,14 @@ module Aws::VerifiedPermissions
     #   params = {
     #     policy_store_id: "PolicyStoreId", # required
     #     policy_id: "PolicyId", # required
-    #     definition: { # required
+    #     definition: {
     #       # One of:
     #       static: {
     #         description: "StaticPolicyDescription",
     #         statement: "PolicyStatement", # required
     #       }
-    #     }
+    #     },
+    #     name: "PolicyName"
     #   }
     #   options = {}
     #   response = client.update_policy(params, options)
@@ -2873,7 +3356,7 @@ module Aws::VerifiedPermissions
     # <p>Modifies the validation setting for a policy store.</p> <note> <p>Verified Permissions is <i> <a href="https://wikipedia.org/wiki/Eventual_consistency">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>
     # @param [Hash, Types::UpdatePolicyStoreInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that you want to update</p>
+    #   <p>Specifies the ID of the policy store that you want to update</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [Types::ValidationSettings] :validation_settings
     #   <p>A structure that defines the validation settings that want to enable for the policy store.</p>
     # @option params [String] :deletion_protection
@@ -2925,25 +3408,28 @@ module Aws::VerifiedPermissions
     # <p>Updates the specified policy template. You can update only the description and the some elements of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html#amazonverifiedpermissions-UpdatePolicyTemplate-request-policyBody">policyBody</a>. </p> <important> <p>Changes you make to the policy template content are immediately (within the constraints of eventual consistency) reflected in authorization decisions that involve all template-linked policies instantiated from this template.</p> </important> <note> <p>Verified Permissions is <i> <a href="https://wikipedia.org/wiki/Eventual_consistency">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>
     # @param [Hash, Types::UpdatePolicyTemplateInput] params
     # @option params [String] :policy_store_id
-    #   <p>Specifies the ID of the policy store that contains the policy template that you want to update.</p>
+    #   <p>Specifies the ID of the policy store that contains the policy template that you want to update.</p> <p>To specify a policy store, use its ID or alias name. When using an alias name, prefix it with <code>policy-store-alias/</code>. For example:</p> <ul> <li> <p>ID: <code>PSEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Alias name: <code>policy-store-alias/example-policy-store</code> </p> </li> </ul> <p>To view aliases, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html">ListPolicyStoreAliases</a>.</p>
     # @option params [String] :policy_template_id
-    #   <p>Specifies the ID of the policy template that you want to update.</p>
+    #   <p>Specifies the ID of the policy template that you want to update.</p> <p>You can use the policy template name in place of the policy template ID. When using a name, prefix it with <code>name/</code>. For example:</p> <ul> <li> <p>ID: <code>PTEXAMPLEabcdefg111111</code> </p> </li> <li> <p>Name: <code>name/example-policy-template</code> </p> </li> </ul>
     # @option params [String] :description
     #   <p>Specifies a new description to apply to the policy template.</p>
     # @option params [String] :statement
     #   <p>Specifies new statement content written in Cedar policy language to replace the current body of the policy template.</p> <p>You can change only the following elements of the policy body:</p> <ul> <li> <p>The <code>action</code> referenced by the policy template.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can't</b> change the following elements:</p> <ul> <li> <p>The effect (<code>permit</code> or <code>forbid</code>) of the policy template.</p> </li> <li> <p>The <code>principal</code> referenced by the policy template.</p> </li> <li> <p>The <code>resource</code> referenced by the policy template.</p> </li> </ul>
+    # @option params [String] :name
+    #   <p>Specifies a name for the policy template that is unique among all policy templates within the policy store. You can use the name in place of the policy template ID in API operations that reference the policy template. The name must be prefixed with <code>name/</code>.</p> <note> <p>If you don't include the name in an update request, the existing name is unchanged. To remove a name, set it to an empty string (<code>""</code>).</p> </note> <p>If you specify a name that is already associated with another policy template in the policy store, you receive a <code>ConflictException</code> error.</p>
     # @example UpdatePolicyTemplate
     #   # The following example updates a policy template with both a new description and a new policy body. The effect, principal, and resource are the same as the original policy template. Only the action in the head, and the when and unless clauses can be different.
-    # # 
+    # #
     # # Note
     # # The JSON in the parameters of this operation are strings that can contain embedded quotation marks (") within the outermost quotation mark pair. This requires that you stringify the JSON object by preceding all embedded quotation marks with a backslash character ( \" ) and combining all lines into a single text line with no line breaks.
-    # # 
+    # #
     # # Example strings might be displayed wrapped across multiple lines here for readability, but the operation requires the parameters be submitted as single line strings.
     #   params = {
     #     description: "My updated template description",
     #     policy_store_id: "C7v5xMplfFH3i3e4Jrzb1a",
     #     policy_template_id: "PTEXAMPLEabcdefg111111",
-    #     statement: "\"ResearchAccess\"\npermit(\nprincipal in ?principal,\naction == Action::\"view\",\nresource in ?resource\"\n)\nwhen {\nprincipal has department && principal.department == \"research\"\n};"
+    #     statement: "\"ResearchAccess\"\npermit(\nprincipal in ?principal,\naction == Action::\"view\",\nresource in ?resource\"\n)\nwhen {\nprincipal has department && principal.department == \"research\"\n};",
+    #     name: "name/example-policy-template-2"
     #   }
     #   options = {}
     #   response = client.update_policy_template(params, options)
@@ -2960,6 +3446,7 @@ module Aws::VerifiedPermissions
     #     policy_template_id: "PolicyTemplateId", # required
     #     description: "PolicyTemplateDescription",
     #     statement: "PolicyStatement", # required
+    #     name: "PolicyTemplateName"
     #   }
     #   options = {}
     #   response = client.update_policy_template(params, options)

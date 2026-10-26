@@ -1,33 +1,124 @@
 module Aws::Ivs
   module Errors
     class AccessDeniedException < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
     class ChannelNotBroadcasting < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
     class ConflictException < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
     class InternalServerException < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
     class PendingVerification < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
     class ResourceNotFoundException < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
+      def exception_message: () -> String?
+    end
+    class ServiceUnavailable < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
     class StreamUnavailable < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
     class ThrottlingException < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
     class ValidationException < Smithy::Client::ServiceError
+      def access_control_allow_origin: () -> String?
+      def access_control_expose_headers: () -> String?
+      def cache_control: () -> String?
+      def content_security_policy: () -> String?
+      def strict_transport_security: () -> String?
+      def x_content_type_options: () -> String?
+      def x_frame_options: () -> String?
+      def x_amzn_error_type: () -> String?
       def exception_message: () -> String?
     end
   end

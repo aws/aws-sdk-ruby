@@ -16,6 +16,10 @@ module Aws::Route53Domains
     class OperationLimitExceeded < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class TLDInMaintenance < Smithy::Client::ServiceError
+      def message: () -> String?
+      def tld: () -> String?
+    end
     class TLDRulesViolation < Smithy::Client::ServiceError
       def message: () -> String?
     end

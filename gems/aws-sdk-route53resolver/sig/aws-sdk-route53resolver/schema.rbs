@@ -15,16 +15,31 @@ module Aws::Route53Resolver
     AssociateResolverRuleRequest: StructureShape
     AssociateResolverRuleResponse: StructureShape
     AutodefinedReverseFlag: EnumShape
+    BatchCreateFirewallRuleError: StructureShape
+    BatchCreateFirewallRuleErrors: ListShape
+    BatchCreateFirewallRuleRequest: StructureShape
+    BatchCreateFirewallRuleResponse: StructureShape
+    BatchDeleteFirewallRuleError: StructureShape
+    BatchDeleteFirewallRuleErrors: ListShape
+    BatchDeleteFirewallRuleRequest: StructureShape
+    BatchDeleteFirewallRuleResponse: StructureShape
+    BatchUpdateFirewallRuleError: StructureShape
+    BatchUpdateFirewallRuleErrors: ListShape
+    BatchUpdateFirewallRuleRequest: StructureShape
+    BatchUpdateFirewallRuleResponse: StructureShape
     BlockOverrideDnsType: EnumShape
     BlockOverrideDomain: StringShape
     BlockOverrideTtl: IntegerShape
     BlockResponse: EnumShape
     Boolean: BooleanShape
+    Category: StringShape
     ConfidenceThreshold: EnumShape
     ConflictException: StructureShape
     Count: IntegerShape
     CreateFirewallDomainListRequest: StructureShape
     CreateFirewallDomainListResponse: StructureShape
+    CreateFirewallRuleEntries: ListShape
+    CreateFirewallRuleEntry: StructureShape
     CreateFirewallRuleGroupRequest: StructureShape
     CreateFirewallRuleGroupResponse: StructureShape
     CreateFirewallRuleRequest: StructureShape
@@ -41,6 +56,8 @@ module Aws::Route53Resolver
     DelegationRecord: StringShape
     DeleteFirewallDomainListRequest: StructureShape
     DeleteFirewallDomainListResponse: StructureShape
+    DeleteFirewallRuleEntries: ListShape
+    DeleteFirewallRuleEntry: StructureShape
     DeleteFirewallRuleGroupRequest: StructureShape
     DeleteFirewallRuleGroupResponse: StructureShape
     DeleteFirewallRuleRequest: StructureShape
@@ -62,8 +79,13 @@ module Aws::Route53Resolver
     DisassociateResolverQueryLogConfigResponse: StructureShape
     DisassociateResolverRuleRequest: StructureShape
     DisassociateResolverRuleResponse: StructureShape
+    DisplayName: StringShape
+    Dns64Enabled: BooleanShape
     DnsThreatProtection: EnumShape
+    DnsThreatProtectionRuleTypeConfig: StructureShape
+    DnsThreatProtectionRuleTypeValue: StringShape
     DomainListFileUrl: StringShape
+    DomainListType: EnumShape
     DomainName: StringShape
     ExceptionMessage: StringShape
     Filter: StructureShape
@@ -71,6 +93,10 @@ module Aws::Route53Resolver
     FilterValue: StringShape
     FilterValues: ListShape
     Filters: ListShape
+    FirewallAdvancedContentCategoryConfig: StructureShape
+    FirewallAdvancedContentCategoryValue: StringShape
+    FirewallAdvancedThreatCategoryConfig: StructureShape
+    FirewallAdvancedThreatCategoryValue: StringShape
     FirewallConfig: StructureShape
     FirewallConfigList: ListShape
     FirewallDomainImportOperation: EnumShape
@@ -92,6 +118,11 @@ module Aws::Route53Resolver
     FirewallRuleGroupMetadataList: ListShape
     FirewallRuleGroupPolicy: StringShape
     FirewallRuleGroupStatus: EnumShape
+    FirewallRuleStatus: StringShape
+    FirewallRuleStatusMessage: StringShape
+    FirewallRuleType: StructureShape
+    FirewallRuleTypeDefinition: StructureShape
+    FirewallRuleTypeDefinitions: ListShape
     FirewallRules: ListShape
     GetFirewallConfigRequest: StructureShape
     GetFirewallConfigResponse: StructureShape
@@ -141,6 +172,7 @@ module Aws::Route53Resolver
     IpAddressesRequest: ListShape
     IpAddressesResponse: ListShape
     Ipv6: StringShape
+    Ipv6InternetAccessEnabled: BooleanShape
     LimitExceededException: StructureShape
     ListDomainMaxResults: IntegerShape
     ListFirewallConfigsMaxResult: IntegerShape
@@ -154,6 +186,8 @@ module Aws::Route53Resolver
     ListFirewallRuleGroupAssociationsResponse: StructureShape
     ListFirewallRuleGroupsRequest: StructureShape
     ListFirewallRuleGroupsResponse: StructureShape
+    ListFirewallRuleTypesRequest: StructureShape
+    ListFirewallRuleTypesResponse: StructureShape
     ListFirewallRulesRequest: StructureShape
     ListFirewallRulesResponse: StructureShape
     ListOutpostResolversRequest: StructureShape
@@ -188,8 +222,11 @@ module Aws::Route53Resolver
     OutpostResolverName: StringShape
     OutpostResolverStatus: EnumShape
     OutpostResolverStatusMessage: StringShape
+    PartnerThreatProtectionConfig: StructureShape
+    PartnerValue: StringShape
     Port: IntegerShape
     Priority: IntegerShape
+    ProductId: StringShape
     Protocol: EnumShape
     ProtocolList: ListShape
     PutFirewallRuleGroupPolicyRequest: StructureShape
@@ -234,7 +271,11 @@ module Aws::Route53Resolver
     ResourceNotFoundException: StructureShape
     ResourceUnavailableException: StructureShape
     Rfc3339TimeString: StringShape
+    RniEnhancedMetricsEnabled: BooleanShape
+    RuleTypeDescription: StringShape
+    RuleTypeName: StringShape
     RuleTypeOption: EnumShape
+    RuleTypeValue: StringShape
     SecurityGroupIds: ListShape
     ServerNameIndication: StringShape
     ServicePrinciple: StringShape
@@ -245,6 +286,7 @@ module Aws::Route53Resolver
     StatusMessage: StringShape
     String: StringShape
     SubnetId: StringShape
+    SubscriptionInfo: StructureShape
     Tag: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -254,6 +296,7 @@ module Aws::Route53Resolver
     TagValue: StringShape
     TargetAddress: StructureShape
     TargetList: ListShape
+    TargetNameServerMetricsEnabled: BooleanShape
     ThrottlingException: StructureShape
     UnknownResourceException: StructureShape
     Unsigned: IntegerShape
@@ -263,6 +306,8 @@ module Aws::Route53Resolver
     UpdateFirewallConfigResponse: StructureShape
     UpdateFirewallDomainsRequest: StructureShape
     UpdateFirewallDomainsResponse: StructureShape
+    UpdateFirewallRuleEntries: ListShape
+    UpdateFirewallRuleEntry: StructureShape
     UpdateFirewallRuleGroupAssociationRequest: StructureShape
     UpdateFirewallRuleGroupAssociationResponse: StructureShape
     UpdateFirewallRuleRequest: StructureShape
@@ -281,6 +326,7 @@ module Aws::Route53Resolver
     UpdateResolverRuleResponse: StructureShape
     Validation: EnumShape
     ValidationException: StructureShape
+    VendorName: StringShape
 
     Route53Resolver: ServiceShape
   end

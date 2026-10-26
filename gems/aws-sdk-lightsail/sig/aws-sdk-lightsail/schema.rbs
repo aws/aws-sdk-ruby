@@ -57,6 +57,15 @@ module Aws::Lightsail
     BucketAccessLogPrefix: StringShape
     BucketBundle: StructureShape
     BucketBundleList: ListShape
+    BucketCorsAllowedHeaders: ListShape
+    BucketCorsAllowedMethod: StringShape
+    BucketCorsAllowedMethods: ListShape
+    BucketCorsAllowedOrigins: ListShape
+    BucketCorsConfig: StructureShape
+    BucketCorsExposeHeaders: ListShape
+    BucketCorsRule: StructureShape
+    BucketCorsRuleId: StringShape
+    BucketCorsRules: ListShape
     BucketList: ListShape
     BucketMetricName: EnumShape
     BucketName: StringShape
@@ -243,6 +252,8 @@ module Aws::Lightsail
     DiskState: EnumShape
     DistributionBundle: StructureShape
     DistributionBundleList: ListShape
+    DistributionCustomErrorResponse: StructureShape
+    DistributionCustomErrorResponseList: ListShape
     DistributionList: ListShape
     DistributionMetricName: EnumShape
     DnsRecordCreationState: StructureShape
@@ -372,6 +383,8 @@ module Aws::Lightsail
     GetOperationsForResourceResult: StructureShape
     GetOperationsRequest: StructureShape
     GetOperationsResult: StructureShape
+    GetProfileRequest: StructureShape
+    GetProfileResult: StructureShape
     GetRegionsRequest: StructureShape
     GetRegionsResult: StructureShape
     GetRelationalDatabaseBlueprintsRequest: StructureShape
@@ -507,8 +520,11 @@ module Aws::Lightsail
     OperationStatus: EnumShape
     OperationType: EnumShape
     Origin: StructureShape
+    OriginIpAddressTypeEnum: EnumShape
     OriginProtocolPolicyEnum: EnumShape
     PartnerIdList: ListShape
+    PartnerInfo: StructureShape
+    PartnerStatus: EnumShape
     PasswordData: StructureShape
     PeerVpcRequest: StructureShape
     PeerVpcResult: StructureShape
@@ -526,6 +542,7 @@ module Aws::Lightsail
     PricingUnit: EnumShape
     PrivateRegistryAccess: StructureShape
     PrivateRegistryAccessRequest: StructureShape
+    ProfileType: EnumShape
     PutAlarmRequest: StructureShape
     PutAlarmResult: StructureShape
     PutInstancePublicPortsRequest: StructureShape
@@ -633,6 +650,7 @@ module Aws::Lightsail
     TagValue: StringShape
     TestAlarmRequest: StructureShape
     TestAlarmResult: StructureShape
+    TierName: EnumShape
     TimeOfDay: StringShape
     TimePeriod: StructureShape
     TreatMissingData: EnumShape

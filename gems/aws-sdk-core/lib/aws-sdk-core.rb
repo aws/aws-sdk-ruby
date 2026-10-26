@@ -56,32 +56,36 @@ module Aws
     #
     # You can specify global configuration defaults via `Aws.config`
     #
+    #     require 'aws-sdk-ec2'
+    #     require 'aws-sdk-s3'
+    #
     #     Aws.config[:region] = 'us-west-2'
     #
-    # Options applied to `Aws.config` are merged with constructed service interfaces.
+    # Options applied to `Aws.config` are merged with constructed service clients.
     #
     #     # uses the global configuration
-    #     Aws::EC2.new.config.region #=> 'us-west-2'
+    #     Aws::EC2::Client.new.config.region #=> 'us-west-2'
     #
     #     # constructor args have priority over global configuration
-    #     Aws::EC2.new(region: 'us-east-1').config.region #=> 'us-east-1'
+    #     Aws::EC2::Client.new(region: 'us-east-1').config.region #=> 'us-east-1'
     #
     # ## Service Specific Global Configuration
     #
     # Some services have very specific configuration options that are not
     # shared by other services.
     #
-    #     # oops, this option is only recognized by Aws::S3
-    #     Aws.config[:force_path_style] = true
-    #     Aws::EC2.new
-    #     #=> raises ArgumentError: invalid configuration option `:force_path_style'
+    #     # oops, this option is only recognized by Aws::S3::Client
+    #     Aws.config[:s3_force_path_style] = true
+    #     Aws::EC2::Client.new
+    #     #=> raises ArgumentError: invalid configuration option `:s3_force_path_style'
     #
-    # To avoid this issue, you can nest service specific options
+    # To avoid this issue, remove the global option and nest service specific options
     #
-    #     Aws.config[:s3] = { force_path_style: true }
+    #     Aws.config.delete(:s3_force_path_style)
+    #     Aws.config[:s3] = { s3_force_path_style: true }
     #
-    #     Aws::EC2.new # no error this time
-    #     Aws::S3.new.config.force_path_style #=> true
+    #     Aws::EC2::Client.new # no error this time
+    #     Aws::S3::Client.new.config.s3_force_path_style #=> true
     # @return [Hash]
     attr_reader :config
 

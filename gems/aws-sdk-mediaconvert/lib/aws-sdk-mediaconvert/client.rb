@@ -144,18 +144,18 @@ module Aws::MediaConvert
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -258,7 +258,7 @@ module Aws::MediaConvert
     # @option params [Array<Types::HopDestination>] :hop_destinations
     #   Optional. Use queue hopping to avoid overly long waits in the backlog of the queue that you submit your job to. Specify an alternate queue and the maximum time that your job will wait in the initial queue before hopping. For more information about this feature, see the AWS Elemental MediaConvert User Guide.
     # @option params [String] :job_engine_version
-    #   Use Job engine versions to run jobs for your production workflow on one version, while you test and validate the latest version. To specify a Job engine version: Enter a date in a YYYY-MM-DD format. For a list of valid Job engine versions, submit a ListVersions request. To not specify a Job engine version: Leave blank.
+    #   Use Job engine versions to run jobs for your production workflow on one version, while you test and validate the latest version. Job engine versions represent periodically grouped MediaConvert releases with new features, updates, improvements, and fixes. Job engine versions are in a YYYY-MM-DD format. Note that the Job engine version feature is not publicly available at this time. To request access, contact AWS support.
     # @option params [String] :job_template
     #   Optional. When you create a job, you can either specify a job template or specify the transcoding settings individually.
     # @option params [Integer] :priority
@@ -274,9 +274,9 @@ module Aws::MediaConvert
     # @option params [String] :status_update_interval
     #   Optional. Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
     # @option params [Hash<String, String>] :tags
-    #   Optional. The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.  Use standard AWS tags on your job for automatic integration with AWS services and for custom integrations and workflows.
+    #   Optional. The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key. Use standard AWS tags on your job for automatic integration with AWS services and for custom integrations and workflows.
     # @option params [Hash<String, String>] :user_metadata
-    #   Optional. User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.  Use only for existing integrations or workflows that rely on job metadata tags. Otherwise, we recommend that you use standard AWS tags.
+    #   Optional. User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs. Use only for existing integrations or workflows that rely on job metadata tags. Otherwise, we recommend that you use standard AWS tags.
     # @example Request syntax with placeholder values
     #   params = {
     #     acceleration_settings: {
@@ -365,7 +365,9 @@ module Aws::MediaConvert
     #                 channels_in: 1,
     #                 channels_out: 1
     #               },
-    #               selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #               selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #               smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               streams: [1],
     #               tracks: [1]
     #             }
     #           },
@@ -401,11 +403,12 @@ module Aws::MediaConvert
     #                   time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                   upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                 },
-    #                 source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                 source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                 },
     #                 track_source_settings: {
+    #                   stream_number: 1,
     #                   track_number: 1
     #                 },
     #                 webvtt_hls_source_settings: {
@@ -468,6 +471,13 @@ module Aws::MediaConvert
     #             }
     #           ],
     #           input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #           multi_view_settings: [
+    #             {
+    #               input: {
+    #                 file_input: "__stringPatternS3Https"
+    #               }
+    #             }
+    #           ],
     #           position: {
     #             height: 1,
     #             width: 1,
@@ -490,7 +500,10 @@ module Aws::MediaConvert
     #             duration: 1,
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
-    #             sample_rate: 1
+    #             height: 1,
+    #             image_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
+    #             sample_rate: 1,
+    #             width: 1
     #           },
     #           video_overlays: [
     #             {
@@ -504,12 +517,48 @@ module Aws::MediaConvert
     #               end_timecode: "__stringPattern010920405090509092",
     #               initial_position: {
     #                 height: 1,
+    #                 opacity: 1,
     #                 unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                 width: 1,
     #                 x_position: 1,
     #                 y_position: 1
     #               },
     #               input: {
+    #                 audio_selectors: {
+    #                   "__string" => {
+    #                     audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                     custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                     default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                     external_audio_file_input: "__stringPatternS3Https",
+    #                     hls_rendition_group_settings: {
+    #                       rendition_group_id: "__string",
+    #                       rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       rendition_name: "__string"
+    #                     },
+    #                     language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                     offset: 1,
+    #                     pids: [1],
+    #                     program_selection: 1,
+    #                     remix_settings: {
+    #                       audio_description_audio_channel: 1,
+    #                       audio_description_data_channel: 1,
+    #                       channel_mapping: {
+    #                         output_channels: [
+    #                           {
+    #                             input_channels: [1],
+    #                             input_channels_fine_tune: [1.0]
+    #                           }
+    #                         ]
+    #                       },
+    #                       channels_in: 1,
+    #                       channels_out: 1
+    #                     },
+    #                     selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                     smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                     streams: [1],
+    #                     tracks: [1]
+    #                   }
+    #                 },
     #                 file_input: "__stringPatternS3Https",
     #                 input_clippings: [
     #                   {
@@ -526,6 +575,7 @@ module Aws::MediaConvert
     #                 {
     #                   end_position: {
     #                     height: 1,
+    #                     opacity: 1,
     #                     unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                     width: 1,
     #                     x_position: 1,
@@ -573,7 +623,7 @@ module Aws::MediaConvert
     #         credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #         file_offset: 1.0,
     #         kantar_license_id: 1,
-    #         kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #         kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #         log_destination: "__stringPatternS3",
     #         metadata3: "__stringMin1Max50",
     #         metadata4: "__stringMin1Max50",
@@ -596,6 +646,22 @@ module Aws::MediaConvert
     #         playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #         start_time: "__stringMin11Max11Pattern01D20305D205D"
     #       },
+    #       motion_image_inserters: [
+    #         {
+    #           framerate: {
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1
+    #           },
+    #           input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #           insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #           offset: {
+    #             image_x: 1,
+    #             image_y: 1
+    #           },
+    #           playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #           start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #         }
+    #       ],
     #       nielsen_configuration: {
     #         breakout_code: 1,
     #         distributor_id: "__string"
@@ -663,7 +729,7 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #               dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
@@ -675,10 +741,11 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               encryption: {
+    #                 clear_lead_segments: 1,
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                 initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -702,15 +769,25 @@ module Aws::MediaConvert
     #                 type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #               },
     #               fragment_length: 1,
-    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #               image_based_trick_play_settings: {
-    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                 thumbnail_height: 1,
     #                 thumbnail_interval: 1.0,
     #                 thumbnail_width: 1,
     #                 tile_height: 1,
     #                 tile_width: 1
     #               },
+    #               image_based_trick_play_variants: [
+    #                 {
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1
+    #                 }
+    #               ],
     #               manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #               manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #               min_buffer_time: 1,
@@ -738,7 +815,7 @@ module Aws::MediaConvert
     #               audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #               base_url: "__string",
     #               dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
@@ -750,11 +827,11 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               encryption: {
-    #                 playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                 playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   encryption_contract_configuration: {
@@ -768,15 +845,25 @@ module Aws::MediaConvert
     #               },
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #               image_based_trick_play_settings: {
-    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                 thumbnail_height: 1,
     #                 thumbnail_interval: 1.0,
     #                 thumbnail_width: 1,
     #                 tile_height: 1,
     #                 tile_width: 1
     #               },
+    #               image_based_trick_play_variants: [
+    #                 {
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1
+    #                 }
+    #               ],
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -800,7 +887,7 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               }
     #             },
@@ -837,7 +924,7 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -864,15 +951,25 @@ module Aws::MediaConvert
     #                 },
     #                 type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #               },
-    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #               image_based_trick_play_settings: {
-    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                 thumbnail_height: 1,
     #                 thumbnail_interval: 1.0,
     #                 thumbnail_width: 1,
     #                 tile_height: 1,
     #                 tile_width: 1
     #               },
+    #               image_based_trick_play_variants: [
+    #                 {
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1
+    #                 }
+    #               ],
     #               manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #               manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #               min_final_segment_length: 1.0,
@@ -910,7 +1007,7 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               encryption: {
@@ -929,7 +1026,7 @@ module Aws::MediaConvert
     #               fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #               manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #             },
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #           },
     #           outputs: [
@@ -949,6 +1046,9 @@ module Aws::MediaConvert
     #                     target_lkfs: 1.0,
     #                     true_peak_limiter_threshold: 1.0
     #                   },
+    #                   audio_pitch_correction_settings: {
+    #                     slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                   },
     #                   audio_source_name: "__stringMax2048",
     #                   audio_type: 1,
     #                   audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -957,8 +1057,9 @@ module Aws::MediaConvert
     #                       audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                       bitrate: 1,
     #                       codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                       coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                       coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                       loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                       passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                       rap_interval: 1,
     #                       rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -970,7 +1071,7 @@ module Aws::MediaConvert
     #                     ac3_settings: {
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                       dialnorm: 1,
     #                       dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                       dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -979,12 +1080,27 @@ module Aws::MediaConvert
     #                       metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                       sample_rate: 1
     #                     },
+    #                     ac4_settings: {
+    #                       bitrate: 1,
+    #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                       coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                       dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       lo_ro_center_mix_level: 1.0,
+    #                       lo_ro_surround_mix_level: 1.0,
+    #                       lt_rt_center_mix_level: 1.0,
+    #                       lt_rt_surround_mix_level: 1.0,
+    #                       sample_rate: 1,
+    #                       stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                     },
     #                     aiff_settings: {
     #                       bit_depth: 1,
     #                       channels: 1,
     #                       sample_rate: 1
     #                     },
-    #                     codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                     codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                     eac3_atmos_settings: {
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -1008,7 +1124,7 @@ module Aws::MediaConvert
     #                       attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                       dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       dialnorm: 1,
     #                       dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -1168,7 +1284,15 @@ module Aws::MediaConvert
     #                       page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                     },
     #                     ttml_destination_settings: {
-    #                       style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                       background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                       background_opacity: 1,
+    #                       font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                       font_opacity: 1,
+    #                       font_size: 1,
+    #                       font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                       font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                       style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                     },
     #                     webvtt_destination_settings: {
     #                       accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -1185,12 +1309,15 @@ module Aws::MediaConvert
     #                   audio_group_id: "__string",
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                   c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                   descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                   i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                   scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                   signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                   timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                   timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -1250,7 +1377,7 @@ module Aws::MediaConvert
     #                     scte35_esam_pid: 1
     #                   },
     #                   scte35_pid: 1,
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                   segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                   segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                   segmentation_time: 1.0,
@@ -1276,13 +1403,14 @@ module Aws::MediaConvert
     #                   pts_offset: 1,
     #                   pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                   scte35_pid: 1,
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                   timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   timed_metadata_pid: 1,
     #                   transport_stream_id: 1,
     #                   video_pid: 1
     #                 },
     #                 mov_settings: {
+    #                   audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                   clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -1303,11 +1431,14 @@ module Aws::MediaConvert
     #                 mpd_settings: {
     #                   accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                   c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                   certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                   klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                   manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                   scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                   signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                   timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                   timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -1316,6 +1447,7 @@ module Aws::MediaConvert
     #                 mxf_settings: {
     #                   afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                   profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                   uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                   xavc_profile_settings: {
     #                     duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                     max_anc_data_size: 1
@@ -1352,7 +1484,7 @@ module Aws::MediaConvert
     #                     gop_size: 1.0,
     #                     max_bitrate: 1,
     #                     number_b_frames_between_reference_frames: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     qvbr_settings: {
     #                       qvbr_quality_level: 1,
     #                       qvbr_quality_level_fine_tune: 1.0
@@ -1371,7 +1503,7 @@ module Aws::MediaConvert
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
     #                     interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                     slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -1401,6 +1533,7 @@ module Aws::MediaConvert
     #                     dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                     end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                     entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                     explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                     flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -1422,7 +1555,7 @@ module Aws::MediaConvert
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
@@ -1472,12 +1605,14 @@ module Aws::MediaConvert
     #                     interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                     max_bitrate: 1,
     #                     min_i_interval: 1,
+    #                     mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                     mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     number_b_frames_between_reference_frames: 1,
     #                     number_reference_frames: 1,
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
@@ -1494,7 +1629,11 @@ module Aws::MediaConvert
     #                     telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                     temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                     tile_height: 1,
+    #                     tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                     tile_width: 1,
     #                     tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                     tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                     unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                   },
@@ -1522,7 +1661,7 @@ module Aws::MediaConvert
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                     rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                     scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -1533,6 +1672,12 @@ module Aws::MediaConvert
     #                     syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                     telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                     temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                   },
+    #                   passthrough_settings: {
+    #                     frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                     gops_per_segment: 1,
+    #                     segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                     video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                   },
     #                   prores_settings: {
     #                     chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -1545,7 +1690,7 @@ module Aws::MediaConvert
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                     slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -1609,7 +1754,7 @@ module Aws::MediaConvert
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                     slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     softness: 1,
@@ -1632,6 +1777,7 @@ module Aws::MediaConvert
     #                       slices: 1
     #                     },
     #                     xavc_hd_intra_cbg_profile_settings: {
+    #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                       xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                     },
     #                     xavc_hd_profile_settings: {
@@ -1664,7 +1810,7 @@ module Aws::MediaConvert
     #                   y: 1
     #                 },
     #                 respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                 scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                 scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                 sharpness: 1,
     #                 timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                 timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -1706,6 +1852,7 @@ module Aws::MediaConvert
     #                     mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                   },
     #                   dolby_vision: {
+    #                     compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                     l6_metadata: {
     #                       max_cll: 1,
     #                       max_fall: 1
@@ -1713,6 +1860,11 @@ module Aws::MediaConvert
     #                     l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                     mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                     profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                   },
+    #                   duration_control: {
+    #                     integer_duration_maximum_compression_denominator: 1,
+    #                     integer_duration_maximum_compression_numerator: 1,
+    #                     integer_duration_trim_threshold_milliseconds: 1
     #                   },
     #                   hdr10_plus: {
     #                     mastering_monitor_nits: 1,
@@ -1813,6 +1965,15 @@ module Aws::MediaConvert
     #       client_request_token: "__string",
     #       created_at: Time.now,
     #       current_phase: "PROBING" # One of: ["PROBING", "TRANSCODING", "UPLOADING"],
+    #       elemental_inference_configuration: {
+    #         features: ["SMART_CROP" # One of: ["SMART_CROP"]],
+    #         feeds: [
+    #           {
+    #             arn: "__string",
+    #             feed_management_state: "CREATED" # One of: ["CREATED", "ASSOCIATED", "PENDING_DELETION", "DELETED"]
+    #           }
+    #         ]
+    #       },
     #       error_code: 1,
     #       error_message: "__string",
     #       hop_destinations: [
@@ -1925,7 +2086,9 @@ module Aws::MediaConvert
     #                   channels_in: 1,
     #                   channels_out: 1
     #                 },
-    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                 smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 streams: [1],
     #                 tracks: [1]
     #               }
     #             },
@@ -1961,11 +2124,12 @@ module Aws::MediaConvert
     #                     time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                     upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                   },
-    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                   teletext_source_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                   },
     #                   track_source_settings: {
+    #                     stream_number: 1,
     #                     track_number: 1
     #                   },
     #                   webvtt_hls_source_settings: {
@@ -2028,6 +2192,13 @@ module Aws::MediaConvert
     #               }
     #             ],
     #             input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #             multi_view_settings: [
+    #               {
+    #                 input: {
+    #                   file_input: "__stringPatternS3Https"
+    #                 }
+    #               }
+    #             ],
     #             position: {
     #               height: 1,
     #               width: 1,
@@ -2050,7 +2221,10 @@ module Aws::MediaConvert
     #               duration: 1,
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
-    #               sample_rate: 1
+    #               height: 1,
+    #               image_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
+    #               sample_rate: 1,
+    #               width: 1
     #             },
     #             video_overlays: [
     #               {
@@ -2064,12 +2238,48 @@ module Aws::MediaConvert
     #                 end_timecode: "__stringPattern010920405090509092",
     #                 initial_position: {
     #                   height: 1,
+    #                   opacity: 1,
     #                   unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1
     #                 },
     #                 input: {
+    #                   audio_selectors: {
+    #                     "__string" => {
+    #                       audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                       external_audio_file_input: "__stringPatternS3Https",
+    #                       hls_rendition_group_settings: {
+    #                         rendition_group_id: "__string",
+    #                         rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                         rendition_name: "__string"
+    #                       },
+    #                       language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       offset: 1,
+    #                       pids: [1],
+    #                       program_selection: 1,
+    #                       remix_settings: {
+    #                         audio_description_audio_channel: 1,
+    #                         audio_description_data_channel: 1,
+    #                         channel_mapping: {
+    #                           output_channels: [
+    #                             {
+    #                               input_channels: [1],
+    #                               input_channels_fine_tune: [1.0]
+    #                             }
+    #                           ]
+    #                         },
+    #                         channels_in: 1,
+    #                         channels_out: 1
+    #                       },
+    #                       selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                       smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       streams: [1],
+    #                       tracks: [1]
+    #                     }
+    #                   },
     #                   file_input: "__stringPatternS3Https",
     #                   input_clippings: [
     #                     {
@@ -2086,6 +2296,7 @@ module Aws::MediaConvert
     #                   {
     #                     end_position: {
     #                       height: 1,
+    #                       opacity: 1,
     #                       unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                       width: 1,
     #                       x_position: 1,
@@ -2133,7 +2344,7 @@ module Aws::MediaConvert
     #           credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           file_offset: 1.0,
     #           kantar_license_id: 1,
-    #           kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #           kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #           log_destination: "__stringPatternS3",
     #           metadata3: "__stringMin1Max50",
     #           metadata4: "__stringMin1Max50",
@@ -2156,6 +2367,22 @@ module Aws::MediaConvert
     #           playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #           start_time: "__stringMin11Max11Pattern01D20305D205D"
     #         },
+    #         motion_image_inserters: [
+    #           {
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1
+    #             },
+    #             input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #             insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #             offset: {
+    #               image_x: 1,
+    #               image_y: 1
+    #             },
+    #             playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #             start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #           }
+    #         ],
     #         nielsen_configuration: {
     #           breakout_code: 1,
     #           distributor_id: "__string"
@@ -2223,7 +2450,7 @@ module Aws::MediaConvert
     #                 client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -2235,10 +2462,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
+    #                   clear_lead_segments: 1,
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                   initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -2262,15 +2490,25 @@ module Aws::MediaConvert
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
     #                 fragment_length: 1,
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_buffer_time: 1,
@@ -2298,7 +2536,7 @@ module Aws::MediaConvert
     #                 audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #                 base_url: "__string",
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -2310,11 +2548,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
-    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                     encryption_contract_configuration: {
@@ -2328,15 +2566,25 @@ module Aws::MediaConvert
     #                 },
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -2360,7 +2608,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 }
     #               },
@@ -2397,7 +2645,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -2424,15 +2672,25 @@ module Aws::MediaConvert
     #                   },
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_final_segment_length: 1.0,
@@ -2470,7 +2728,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
@@ -2489,7 +2747,7 @@ module Aws::MediaConvert
     #                 fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #                 manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #               },
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #             },
     #             outputs: [
@@ -2509,6 +2767,9 @@ module Aws::MediaConvert
     #                       target_lkfs: 1.0,
     #                       true_peak_limiter_threshold: 1.0
     #                     },
+    #                     audio_pitch_correction_settings: {
+    #                       slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
     #                     audio_source_name: "__stringMax2048",
     #                     audio_type: 1,
     #                     audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -2517,8 +2778,9 @@ module Aws::MediaConvert
     #                         audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                         bitrate: 1,
     #                         codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                         loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                         passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                         rap_interval: 1,
     #                         rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -2530,7 +2792,7 @@ module Aws::MediaConvert
     #                       ac3_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                         dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -2539,12 +2801,27 @@ module Aws::MediaConvert
     #                         metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                         sample_rate: 1
     #                       },
+    #                       ac4_settings: {
+    #                         bitrate: 1,
+    #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                         coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                         dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         lo_ro_center_mix_level: 1.0,
+    #                         lo_ro_surround_mix_level: 1.0,
+    #                         lt_rt_center_mix_level: 1.0,
+    #                         lt_rt_surround_mix_level: 1.0,
+    #                         sample_rate: 1,
+    #                         stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                       },
     #                       aiff_settings: {
     #                         bit_depth: 1,
     #                         channels: 1,
     #                         sample_rate: 1
     #                       },
-    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                       eac3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -2568,7 +2845,7 @@ module Aws::MediaConvert
     #                         attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                         dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -2728,7 +3005,15 @@ module Aws::MediaConvert
     #                         page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                       },
     #                       ttml_destination_settings: {
-    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                         background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                         background_opacity: 1,
+    #                         font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                         font_opacity: 1,
+    #                         font_size: 1,
+    #                         font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                         font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                       },
     #                       webvtt_destination_settings: {
     #                         accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -2745,12 +3030,15 @@ module Aws::MediaConvert
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -2810,7 +3098,7 @@ module Aws::MediaConvert
     #                       scte35_esam_pid: 1
     #                     },
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                     segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                     segmentation_time: 1.0,
@@ -2836,13 +3124,14 @@ module Aws::MediaConvert
     #                     pts_offset: 1,
     #                     pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_pid: 1,
     #                     transport_stream_id: 1,
     #                     video_pid: 1
     #                   },
     #                   mov_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                     clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -2863,11 +3152,14 @@ module Aws::MediaConvert
     #                   mpd_settings: {
     #                     accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -2876,6 +3168,7 @@ module Aws::MediaConvert
     #                   mxf_settings: {
     #                     afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                     profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                     uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                     xavc_profile_settings: {
     #                       duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                       max_anc_data_size: 1
@@ -2912,7 +3205,7 @@ module Aws::MediaConvert
     #                       gop_size: 1.0,
     #                       max_bitrate: 1,
     #                       number_b_frames_between_reference_frames: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       qvbr_settings: {
     #                         qvbr_quality_level: 1,
     #                         qvbr_quality_level_fine_tune: 1.0
@@ -2931,7 +3224,7 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -2961,6 +3254,7 @@ module Aws::MediaConvert
     #                       dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                       end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                       entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                       explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                       flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -2982,7 +3276,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -3032,12 +3326,14 @@ module Aws::MediaConvert
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                       max_bitrate: 1,
     #                       min_i_interval: 1,
+    #                       mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       number_b_frames_between_reference_frames: 1,
     #                       number_reference_frames: 1,
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -3054,7 +3350,11 @@ module Aws::MediaConvert
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tile_height: 1,
+    #                       tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                       tile_width: 1,
     #                       tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                       unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                     },
@@ -3082,7 +3382,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                       rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -3093,6 +3393,12 @@ module Aws::MediaConvert
     #                       syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
+    #                     passthrough_settings: {
+    #                       frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                       gops_per_segment: 1,
+    #                       segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                       video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                     },
     #                     prores_settings: {
     #                       chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -3105,7 +3411,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -3169,7 +3475,7 @@ module Aws::MediaConvert
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       softness: 1,
@@ -3192,6 +3498,7 @@ module Aws::MediaConvert
     #                         slices: 1
     #                       },
     #                       xavc_hd_intra_cbg_profile_settings: {
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                         xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                       },
     #                       xavc_hd_profile_settings: {
@@ -3224,7 +3531,7 @@ module Aws::MediaConvert
     #                     y: 1
     #                   },
     #                   respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                   sharpness: 1,
     #                   timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                   timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -3266,6 +3573,7 @@ module Aws::MediaConvert
     #                       mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                     },
     #                     dolby_vision: {
+    #                       compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                       l6_metadata: {
     #                         max_cll: 1,
     #                         max_fall: 1
@@ -3273,6 +3581,11 @@ module Aws::MediaConvert
     #                       l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                       mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                       profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                     },
+    #                     duration_control: {
+    #                       integer_duration_maximum_compression_denominator: 1,
+    #                       integer_duration_maximum_compression_numerator: 1,
+    #                       integer_duration_trim_threshold_milliseconds: 1
     #                     },
     #                     hdr10_plus: {
     #                       mastering_monitor_nits: 1,
@@ -3483,7 +3796,9 @@ module Aws::MediaConvert
     #                 channels_in: 1,
     #                 channels_out: 1
     #               },
-    #               selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #               selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #               smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               streams: [1],
     #               tracks: [1]
     #             }
     #           },
@@ -3519,11 +3834,12 @@ module Aws::MediaConvert
     #                   time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                   upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                 },
-    #                 source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                 source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                 },
     #                 track_source_settings: {
+    #                   stream_number: 1,
     #                   track_number: 1
     #                 },
     #                 webvtt_hls_source_settings: {
@@ -3579,6 +3895,13 @@ module Aws::MediaConvert
     #             }
     #           ],
     #           input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #           multi_view_settings: [
+    #             {
+    #               input: {
+    #                 file_input: "__stringPatternS3Https"
+    #               }
+    #             }
+    #           ],
     #           position: {
     #             height: 1,
     #             width: 1,
@@ -3601,12 +3924,48 @@ module Aws::MediaConvert
     #               end_timecode: "__stringPattern010920405090509092",
     #               initial_position: {
     #                 height: 1,
+    #                 opacity: 1,
     #                 unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                 width: 1,
     #                 x_position: 1,
     #                 y_position: 1
     #               },
     #               input: {
+    #                 audio_selectors: {
+    #                   "__string" => {
+    #                     audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                     custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                     default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                     external_audio_file_input: "__stringPatternS3Https",
+    #                     hls_rendition_group_settings: {
+    #                       rendition_group_id: "__string",
+    #                       rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       rendition_name: "__string"
+    #                     },
+    #                     language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                     offset: 1,
+    #                     pids: [1],
+    #                     program_selection: 1,
+    #                     remix_settings: {
+    #                       audio_description_audio_channel: 1,
+    #                       audio_description_data_channel: 1,
+    #                       channel_mapping: {
+    #                         output_channels: [
+    #                           {
+    #                             input_channels: [1],
+    #                             input_channels_fine_tune: [1.0]
+    #                           }
+    #                         ]
+    #                       },
+    #                       channels_in: 1,
+    #                       channels_out: 1
+    #                     },
+    #                     selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                     smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                     streams: [1],
+    #                     tracks: [1]
+    #                   }
+    #                 },
     #                 file_input: "__stringPatternS3Https",
     #                 input_clippings: [
     #                   {
@@ -3623,6 +3982,7 @@ module Aws::MediaConvert
     #                 {
     #                   end_position: {
     #                     height: 1,
+    #                     opacity: 1,
     #                     unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                     width: 1,
     #                     x_position: 1,
@@ -3670,7 +4030,7 @@ module Aws::MediaConvert
     #         credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #         file_offset: 1.0,
     #         kantar_license_id: 1,
-    #         kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #         kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #         log_destination: "__stringPatternS3",
     #         metadata3: "__stringMin1Max50",
     #         metadata4: "__stringMin1Max50",
@@ -3693,6 +4053,22 @@ module Aws::MediaConvert
     #         playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #         start_time: "__stringMin11Max11Pattern01D20305D205D"
     #       },
+    #       motion_image_inserters: [
+    #         {
+    #           framerate: {
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1
+    #           },
+    #           input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #           insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #           offset: {
+    #             image_x: 1,
+    #             image_y: 1
+    #           },
+    #           playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #           start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #         }
+    #       ],
     #       nielsen_configuration: {
     #         breakout_code: 1,
     #         distributor_id: "__string"
@@ -3760,7 +4136,7 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #               dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
@@ -3772,10 +4148,11 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               encryption: {
+    #                 clear_lead_segments: 1,
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                 initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -3799,15 +4176,25 @@ module Aws::MediaConvert
     #                 type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #               },
     #               fragment_length: 1,
-    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #               image_based_trick_play_settings: {
-    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                 thumbnail_height: 1,
     #                 thumbnail_interval: 1.0,
     #                 thumbnail_width: 1,
     #                 tile_height: 1,
     #                 tile_width: 1
     #               },
+    #               image_based_trick_play_variants: [
+    #                 {
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1
+    #                 }
+    #               ],
     #               manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #               manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #               min_buffer_time: 1,
@@ -3835,7 +4222,7 @@ module Aws::MediaConvert
     #               audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #               base_url: "__string",
     #               dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
@@ -3847,11 +4234,11 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               encryption: {
-    #                 playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                 playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   encryption_contract_configuration: {
@@ -3865,15 +4252,25 @@ module Aws::MediaConvert
     #               },
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #               image_based_trick_play_settings: {
-    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                 thumbnail_height: 1,
     #                 thumbnail_interval: 1.0,
     #                 thumbnail_width: 1,
     #                 tile_height: 1,
     #                 tile_width: 1
     #               },
+    #               image_based_trick_play_variants: [
+    #                 {
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1
+    #                 }
+    #               ],
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -3897,7 +4294,7 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               }
     #             },
@@ -3934,7 +4331,7 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -3961,15 +4358,25 @@ module Aws::MediaConvert
     #                 },
     #                 type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #               },
-    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #               image_based_trick_play_settings: {
-    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                 thumbnail_height: 1,
     #                 thumbnail_interval: 1.0,
     #                 thumbnail_width: 1,
     #                 tile_height: 1,
     #                 tile_width: 1
     #               },
+    #               image_based_trick_play_variants: [
+    #                 {
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1
+    #                 }
+    #               ],
     #               manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #               manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #               min_final_segment_length: 1.0,
@@ -4007,7 +4414,7 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               encryption: {
@@ -4026,7 +4433,7 @@ module Aws::MediaConvert
     #               fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #               manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #             },
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #           },
     #           outputs: [
@@ -4046,6 +4453,9 @@ module Aws::MediaConvert
     #                     target_lkfs: 1.0,
     #                     true_peak_limiter_threshold: 1.0
     #                   },
+    #                   audio_pitch_correction_settings: {
+    #                     slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                   },
     #                   audio_source_name: "__stringMax2048",
     #                   audio_type: 1,
     #                   audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -4054,8 +4464,9 @@ module Aws::MediaConvert
     #                       audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                       bitrate: 1,
     #                       codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                       coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                       coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                       loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                       passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                       rap_interval: 1,
     #                       rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -4067,7 +4478,7 @@ module Aws::MediaConvert
     #                     ac3_settings: {
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                       dialnorm: 1,
     #                       dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                       dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -4076,12 +4487,27 @@ module Aws::MediaConvert
     #                       metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                       sample_rate: 1
     #                     },
+    #                     ac4_settings: {
+    #                       bitrate: 1,
+    #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                       coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                       dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       lo_ro_center_mix_level: 1.0,
+    #                       lo_ro_surround_mix_level: 1.0,
+    #                       lt_rt_center_mix_level: 1.0,
+    #                       lt_rt_surround_mix_level: 1.0,
+    #                       sample_rate: 1,
+    #                       stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                     },
     #                     aiff_settings: {
     #                       bit_depth: 1,
     #                       channels: 1,
     #                       sample_rate: 1
     #                     },
-    #                     codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                     codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                     eac3_atmos_settings: {
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -4105,7 +4531,7 @@ module Aws::MediaConvert
     #                       attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                       dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       dialnorm: 1,
     #                       dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -4265,7 +4691,15 @@ module Aws::MediaConvert
     #                       page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                     },
     #                     ttml_destination_settings: {
-    #                       style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                       background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                       background_opacity: 1,
+    #                       font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                       font_opacity: 1,
+    #                       font_size: 1,
+    #                       font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                       font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                       style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                     },
     #                     webvtt_destination_settings: {
     #                       accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -4282,12 +4716,15 @@ module Aws::MediaConvert
     #                   audio_group_id: "__string",
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                   c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                   descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                   i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                   scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                   signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                   timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                   timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -4347,7 +4784,7 @@ module Aws::MediaConvert
     #                     scte35_esam_pid: 1
     #                   },
     #                   scte35_pid: 1,
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                   segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                   segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                   segmentation_time: 1.0,
@@ -4373,13 +4810,14 @@ module Aws::MediaConvert
     #                   pts_offset: 1,
     #                   pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                   scte35_pid: 1,
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                   timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   timed_metadata_pid: 1,
     #                   transport_stream_id: 1,
     #                   video_pid: 1
     #                 },
     #                 mov_settings: {
+    #                   audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                   clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -4400,11 +4838,14 @@ module Aws::MediaConvert
     #                 mpd_settings: {
     #                   accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                   c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                   certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                   klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                   manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                   scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                   signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                   timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                   timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -4413,6 +4854,7 @@ module Aws::MediaConvert
     #                 mxf_settings: {
     #                   afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                   profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                   uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                   xavc_profile_settings: {
     #                     duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                     max_anc_data_size: 1
@@ -4449,7 +4891,7 @@ module Aws::MediaConvert
     #                     gop_size: 1.0,
     #                     max_bitrate: 1,
     #                     number_b_frames_between_reference_frames: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     qvbr_settings: {
     #                       qvbr_quality_level: 1,
     #                       qvbr_quality_level_fine_tune: 1.0
@@ -4468,7 +4910,7 @@ module Aws::MediaConvert
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
     #                     interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                     slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -4498,6 +4940,7 @@ module Aws::MediaConvert
     #                     dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                     end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                     entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                     explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                     flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -4519,7 +4962,7 @@ module Aws::MediaConvert
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
@@ -4569,12 +5012,14 @@ module Aws::MediaConvert
     #                     interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                     max_bitrate: 1,
     #                     min_i_interval: 1,
+    #                     mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                     mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     number_b_frames_between_reference_frames: 1,
     #                     number_reference_frames: 1,
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
@@ -4591,7 +5036,11 @@ module Aws::MediaConvert
     #                     telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                     temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                     tile_height: 1,
+    #                     tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                     tile_width: 1,
     #                     tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                     tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                     unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                   },
@@ -4619,7 +5068,7 @@ module Aws::MediaConvert
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                     rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                     scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -4630,6 +5079,12 @@ module Aws::MediaConvert
     #                     syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                     telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                     temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                   },
+    #                   passthrough_settings: {
+    #                     frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                     gops_per_segment: 1,
+    #                     segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                     video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                   },
     #                   prores_settings: {
     #                     chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -4642,7 +5097,7 @@ module Aws::MediaConvert
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                     slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -4706,7 +5161,7 @@ module Aws::MediaConvert
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                     slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     softness: 1,
@@ -4729,6 +5184,7 @@ module Aws::MediaConvert
     #                       slices: 1
     #                     },
     #                     xavc_hd_intra_cbg_profile_settings: {
+    #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                       xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                     },
     #                     xavc_hd_profile_settings: {
@@ -4761,7 +5217,7 @@ module Aws::MediaConvert
     #                   y: 1
     #                 },
     #                 respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                 scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                 scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                 sharpness: 1,
     #                 timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                 timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -4803,6 +5259,7 @@ module Aws::MediaConvert
     #                     mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                   },
     #                   dolby_vision: {
+    #                     compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                     l6_metadata: {
     #                       max_cll: 1,
     #                       max_fall: 1
@@ -4810,6 +5267,11 @@ module Aws::MediaConvert
     #                     l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                     mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                     profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                   },
+    #                   duration_control: {
+    #                     integer_duration_maximum_compression_denominator: 1,
+    #                     integer_duration_maximum_compression_numerator: 1,
+    #                     integer_duration_trim_threshold_milliseconds: 1
     #                   },
     #                   hdr10_plus: {
     #                     mastering_monitor_nits: 1,
@@ -4984,7 +5446,9 @@ module Aws::MediaConvert
     #                   channels_in: 1,
     #                   channels_out: 1
     #                 },
-    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                 smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 streams: [1],
     #                 tracks: [1]
     #               }
     #             },
@@ -5020,11 +5484,12 @@ module Aws::MediaConvert
     #                     time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                     upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                   },
-    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                   teletext_source_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                   },
     #                   track_source_settings: {
+    #                     stream_number: 1,
     #                     track_number: 1
     #                   },
     #                   webvtt_hls_source_settings: {
@@ -5080,6 +5545,13 @@ module Aws::MediaConvert
     #               }
     #             ],
     #             input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #             multi_view_settings: [
+    #               {
+    #                 input: {
+    #                   file_input: "__stringPatternS3Https"
+    #                 }
+    #               }
+    #             ],
     #             position: {
     #               height: 1,
     #               width: 1,
@@ -5102,12 +5574,48 @@ module Aws::MediaConvert
     #                 end_timecode: "__stringPattern010920405090509092",
     #                 initial_position: {
     #                   height: 1,
+    #                   opacity: 1,
     #                   unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1
     #                 },
     #                 input: {
+    #                   audio_selectors: {
+    #                     "__string" => {
+    #                       audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                       external_audio_file_input: "__stringPatternS3Https",
+    #                       hls_rendition_group_settings: {
+    #                         rendition_group_id: "__string",
+    #                         rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                         rendition_name: "__string"
+    #                       },
+    #                       language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       offset: 1,
+    #                       pids: [1],
+    #                       program_selection: 1,
+    #                       remix_settings: {
+    #                         audio_description_audio_channel: 1,
+    #                         audio_description_data_channel: 1,
+    #                         channel_mapping: {
+    #                           output_channels: [
+    #                             {
+    #                               input_channels: [1],
+    #                               input_channels_fine_tune: [1.0]
+    #                             }
+    #                           ]
+    #                         },
+    #                         channels_in: 1,
+    #                         channels_out: 1
+    #                       },
+    #                       selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                       smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       streams: [1],
+    #                       tracks: [1]
+    #                     }
+    #                   },
     #                   file_input: "__stringPatternS3Https",
     #                   input_clippings: [
     #                     {
@@ -5124,6 +5632,7 @@ module Aws::MediaConvert
     #                   {
     #                     end_position: {
     #                       height: 1,
+    #                       opacity: 1,
     #                       unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                       width: 1,
     #                       x_position: 1,
@@ -5171,7 +5680,7 @@ module Aws::MediaConvert
     #           credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           file_offset: 1.0,
     #           kantar_license_id: 1,
-    #           kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #           kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #           log_destination: "__stringPatternS3",
     #           metadata3: "__stringMin1Max50",
     #           metadata4: "__stringMin1Max50",
@@ -5194,6 +5703,22 @@ module Aws::MediaConvert
     #           playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #           start_time: "__stringMin11Max11Pattern01D20305D205D"
     #         },
+    #         motion_image_inserters: [
+    #           {
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1
+    #             },
+    #             input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #             insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #             offset: {
+    #               image_x: 1,
+    #               image_y: 1
+    #             },
+    #             playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #             start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #           }
+    #         ],
     #         nielsen_configuration: {
     #           breakout_code: 1,
     #           distributor_id: "__string"
@@ -5261,7 +5786,7 @@ module Aws::MediaConvert
     #                 client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -5273,10 +5798,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
+    #                   clear_lead_segments: 1,
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                   initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -5300,15 +5826,25 @@ module Aws::MediaConvert
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
     #                 fragment_length: 1,
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_buffer_time: 1,
@@ -5336,7 +5872,7 @@ module Aws::MediaConvert
     #                 audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #                 base_url: "__string",
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -5348,11 +5884,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
-    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                     encryption_contract_configuration: {
@@ -5366,15 +5902,25 @@ module Aws::MediaConvert
     #                 },
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -5398,7 +5944,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 }
     #               },
@@ -5435,7 +5981,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -5462,15 +6008,25 @@ module Aws::MediaConvert
     #                   },
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_final_segment_length: 1.0,
@@ -5508,7 +6064,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
@@ -5527,7 +6083,7 @@ module Aws::MediaConvert
     #                 fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #                 manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #               },
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #             },
     #             outputs: [
@@ -5547,6 +6103,9 @@ module Aws::MediaConvert
     #                       target_lkfs: 1.0,
     #                       true_peak_limiter_threshold: 1.0
     #                     },
+    #                     audio_pitch_correction_settings: {
+    #                       slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
     #                     audio_source_name: "__stringMax2048",
     #                     audio_type: 1,
     #                     audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -5555,8 +6114,9 @@ module Aws::MediaConvert
     #                         audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                         bitrate: 1,
     #                         codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                         loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                         passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                         rap_interval: 1,
     #                         rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -5568,7 +6128,7 @@ module Aws::MediaConvert
     #                       ac3_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                         dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -5577,12 +6137,27 @@ module Aws::MediaConvert
     #                         metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                         sample_rate: 1
     #                       },
+    #                       ac4_settings: {
+    #                         bitrate: 1,
+    #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                         coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                         dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         lo_ro_center_mix_level: 1.0,
+    #                         lo_ro_surround_mix_level: 1.0,
+    #                         lt_rt_center_mix_level: 1.0,
+    #                         lt_rt_surround_mix_level: 1.0,
+    #                         sample_rate: 1,
+    #                         stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                       },
     #                       aiff_settings: {
     #                         bit_depth: 1,
     #                         channels: 1,
     #                         sample_rate: 1
     #                       },
-    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                       eac3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -5606,7 +6181,7 @@ module Aws::MediaConvert
     #                         attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                         dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -5766,7 +6341,15 @@ module Aws::MediaConvert
     #                         page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                       },
     #                       ttml_destination_settings: {
-    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                         background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                         background_opacity: 1,
+    #                         font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                         font_opacity: 1,
+    #                         font_size: 1,
+    #                         font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                         font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                       },
     #                       webvtt_destination_settings: {
     #                         accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -5783,12 +6366,15 @@ module Aws::MediaConvert
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -5848,7 +6434,7 @@ module Aws::MediaConvert
     #                       scte35_esam_pid: 1
     #                     },
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                     segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                     segmentation_time: 1.0,
@@ -5874,13 +6460,14 @@ module Aws::MediaConvert
     #                     pts_offset: 1,
     #                     pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_pid: 1,
     #                     transport_stream_id: 1,
     #                     video_pid: 1
     #                   },
     #                   mov_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                     clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -5901,11 +6488,14 @@ module Aws::MediaConvert
     #                   mpd_settings: {
     #                     accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -5914,6 +6504,7 @@ module Aws::MediaConvert
     #                   mxf_settings: {
     #                     afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                     profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                     uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                     xavc_profile_settings: {
     #                       duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                       max_anc_data_size: 1
@@ -5950,7 +6541,7 @@ module Aws::MediaConvert
     #                       gop_size: 1.0,
     #                       max_bitrate: 1,
     #                       number_b_frames_between_reference_frames: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       qvbr_settings: {
     #                         qvbr_quality_level: 1,
     #                         qvbr_quality_level_fine_tune: 1.0
@@ -5969,7 +6560,7 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -5999,6 +6590,7 @@ module Aws::MediaConvert
     #                       dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                       end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                       entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                       explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                       flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -6020,7 +6612,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -6070,12 +6662,14 @@ module Aws::MediaConvert
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                       max_bitrate: 1,
     #                       min_i_interval: 1,
+    #                       mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       number_b_frames_between_reference_frames: 1,
     #                       number_reference_frames: 1,
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -6092,7 +6686,11 @@ module Aws::MediaConvert
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tile_height: 1,
+    #                       tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                       tile_width: 1,
     #                       tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                       unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                     },
@@ -6120,7 +6718,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                       rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -6131,6 +6729,12 @@ module Aws::MediaConvert
     #                       syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
+    #                     passthrough_settings: {
+    #                       frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                       gops_per_segment: 1,
+    #                       segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                       video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                     },
     #                     prores_settings: {
     #                       chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -6143,7 +6747,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -6207,7 +6811,7 @@ module Aws::MediaConvert
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       softness: 1,
@@ -6230,6 +6834,7 @@ module Aws::MediaConvert
     #                         slices: 1
     #                       },
     #                       xavc_hd_intra_cbg_profile_settings: {
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                         xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                       },
     #                       xavc_hd_profile_settings: {
@@ -6262,7 +6867,7 @@ module Aws::MediaConvert
     #                     y: 1
     #                   },
     #                   respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                   sharpness: 1,
     #                   timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                   timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -6304,6 +6909,7 @@ module Aws::MediaConvert
     #                       mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                     },
     #                     dolby_vision: {
+    #                       compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                       l6_metadata: {
     #                         max_cll: 1,
     #                         max_fall: 1
@@ -6311,6 +6917,11 @@ module Aws::MediaConvert
     #                       l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                       mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                       profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                     },
+    #                     duration_control: {
+    #                       integer_duration_maximum_compression_denominator: 1,
+    #                       integer_duration_maximum_compression_numerator: 1,
+    #                       integer_duration_trim_threshold_milliseconds: 1
     #                     },
     #                     hdr10_plus: {
     #                       mastering_monitor_nits: 1,
@@ -6430,6 +7041,9 @@ module Aws::MediaConvert
     #             target_lkfs: 1.0,
     #             true_peak_limiter_threshold: 1.0
     #           },
+    #           audio_pitch_correction_settings: {
+    #             slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #           },
     #           audio_source_name: "__stringMax2048",
     #           audio_type: 1,
     #           audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -6438,8 +7052,9 @@ module Aws::MediaConvert
     #               audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #               bitrate: 1,
     #               codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #               coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #               coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #               loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #               passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #               rap_interval: 1,
     #               rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #               raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -6451,7 +7066,7 @@ module Aws::MediaConvert
     #             ac3_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #               coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #               coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #               dialnorm: 1,
     #               dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #               dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -6460,12 +7075,27 @@ module Aws::MediaConvert
     #               metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #               sample_rate: 1
     #             },
+    #             ac4_settings: {
+    #               bitrate: 1,
+    #               bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #               coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #               dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #               dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #               dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #               dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #               lo_ro_center_mix_level: 1.0,
+    #               lo_ro_surround_mix_level: 1.0,
+    #               lt_rt_center_mix_level: 1.0,
+    #               lt_rt_surround_mix_level: 1.0,
+    #               sample_rate: 1,
+    #               stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #             },
     #             aiff_settings: {
     #               bit_depth: 1,
     #               channels: 1,
     #               sample_rate: 1
     #             },
-    #             codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #             codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #             eac3_atmos_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -6489,7 +7119,7 @@ module Aws::MediaConvert
     #               attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #               coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #               coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #               dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #               dialnorm: 1,
     #               dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -6648,7 +7278,15 @@ module Aws::MediaConvert
     #               page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #             },
     #             ttml_destination_settings: {
-    #               style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #               background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #               background_opacity: 1,
+    #               font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #               font_opacity: 1,
+    #               font_size: 1,
+    #               font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #               font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #               style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #             },
     #             webvtt_destination_settings: {
     #               accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -6665,12 +7303,15 @@ module Aws::MediaConvert
     #           audio_group_id: "__string",
     #           audio_rendition_sets: "__string",
     #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #           c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #           certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #           i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #           manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #           scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #           timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #           timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #           timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -6730,7 +7371,7 @@ module Aws::MediaConvert
     #             scte35_esam_pid: 1
     #           },
     #           scte35_pid: 1,
-    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #           segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #           segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #           segmentation_time: 1.0,
@@ -6756,13 +7397,14 @@ module Aws::MediaConvert
     #           pts_offset: 1,
     #           pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #           scte35_pid: 1,
-    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #           timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #           timed_metadata_pid: 1,
     #           transport_stream_id: 1,
     #           video_pid: 1
     #         },
     #         mov_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #           clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -6783,11 +7425,14 @@ module Aws::MediaConvert
     #         mpd_settings: {
     #           accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #           c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #           certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #           manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #           scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #           timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #           timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #           timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -6796,6 +7441,7 @@ module Aws::MediaConvert
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #           profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #           uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #           xavc_profile_settings: {
     #             duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #             max_anc_data_size: 1
@@ -6818,7 +7464,7 @@ module Aws::MediaConvert
     #             gop_size: 1.0,
     #             max_bitrate: 1,
     #             number_b_frames_between_reference_frames: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             qvbr_settings: {
     #               qvbr_quality_level: 1,
     #               qvbr_quality_level_fine_tune: 1.0
@@ -6837,7 +7483,7 @@ module Aws::MediaConvert
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #             slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -6867,6 +7513,7 @@ module Aws::MediaConvert
     #             dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #             end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #             entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #             explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #             flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -6888,7 +7535,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #             par_denominator: 1,
     #             par_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
@@ -6938,12 +7585,14 @@ module Aws::MediaConvert
     #             interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #             max_bitrate: 1,
     #             min_i_interval: 1,
+    #             mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #             mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #             number_b_frames_between_reference_frames: 1,
     #             number_reference_frames: 1,
     #             par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #             par_denominator: 1,
     #             par_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
@@ -6960,7 +7609,11 @@ module Aws::MediaConvert
     #             telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #             temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #             tile_height: 1,
+    #             tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #             tile_width: 1,
     #             tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #             tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #             unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #           },
@@ -6988,7 +7641,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #             par_denominator: 1,
     #             par_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #             rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #             scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -6999,6 +7652,12 @@ module Aws::MediaConvert
     #             syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #             telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #             temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #           },
+    #           passthrough_settings: {
+    #             frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #             gops_per_segment: 1,
+    #             segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #             video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #           },
     #           prores_settings: {
     #             chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -7011,7 +7670,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #             par_denominator: 1,
     #             par_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #             slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -7075,7 +7734,7 @@ module Aws::MediaConvert
     #             framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #             slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             softness: 1,
@@ -7098,6 +7757,7 @@ module Aws::MediaConvert
     #               slices: 1
     #             },
     #             xavc_hd_intra_cbg_profile_settings: {
+    #               interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #               xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #             },
     #             xavc_hd_profile_settings: {
@@ -7130,7 +7790,7 @@ module Aws::MediaConvert
     #           y: 1
     #         },
     #         respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #         scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #         scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #         sharpness: 1,
     #         timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #         timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -7172,6 +7832,7 @@ module Aws::MediaConvert
     #             mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #           },
     #           dolby_vision: {
+    #             compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #             l6_metadata: {
     #               max_cll: 1,
     #               max_fall: 1
@@ -7179,6 +7840,11 @@ module Aws::MediaConvert
     #             l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #             mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #             profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #           },
+    #           duration_control: {
+    #             integer_duration_maximum_compression_denominator: 1,
+    #             integer_duration_maximum_compression_numerator: 1,
+    #             integer_duration_trim_threshold_milliseconds: 1
     #           },
     #           hdr10_plus: {
     #             mastering_monitor_nits: 1,
@@ -7269,6 +7935,9 @@ module Aws::MediaConvert
     #               target_lkfs: 1.0,
     #               true_peak_limiter_threshold: 1.0
     #             },
+    #             audio_pitch_correction_settings: {
+    #               slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #             },
     #             audio_source_name: "__stringMax2048",
     #             audio_type: 1,
     #             audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -7277,8 +7946,9 @@ module Aws::MediaConvert
     #                 audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                 bitrate: 1,
     #                 codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                 coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                 coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                 loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                 passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                 rap_interval: 1,
     #                 rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                 raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -7290,7 +7960,7 @@ module Aws::MediaConvert
     #               ac3_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                 dialnorm: 1,
     #                 dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                 dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -7299,12 +7969,27 @@ module Aws::MediaConvert
     #                 metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                 sample_rate: 1
     #               },
+    #               ac4_settings: {
+    #                 bitrate: 1,
+    #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                 coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                 dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 lo_ro_center_mix_level: 1.0,
+    #                 lo_ro_surround_mix_level: 1.0,
+    #                 lt_rt_center_mix_level: 1.0,
+    #                 lt_rt_surround_mix_level: 1.0,
+    #                 sample_rate: 1,
+    #                 stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #               },
     #               aiff_settings: {
     #                 bit_depth: 1,
     #                 channels: 1,
     #                 sample_rate: 1
     #               },
-    #               codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #               codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #               eac3_atmos_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -7328,7 +8013,7 @@ module Aws::MediaConvert
     #                 attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                 dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                 dialnorm: 1,
     #                 dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -7487,7 +8172,15 @@ module Aws::MediaConvert
     #                 page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #               },
     #               ttml_destination_settings: {
-    #                 style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                 background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                 background_opacity: 1,
+    #                 font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                 font_opacity: 1,
+    #                 font_size: 1,
+    #                 font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                 font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                 style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #               },
     #               webvtt_destination_settings: {
     #                 accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -7504,12 +8197,15 @@ module Aws::MediaConvert
     #             audio_group_id: "__string",
     #             audio_rendition_sets: "__string",
     #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #             c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #             certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #             descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #             i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #             scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #             signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #             timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #             timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -7569,7 +8265,7 @@ module Aws::MediaConvert
     #               scte35_esam_pid: 1
     #             },
     #             scte35_pid: 1,
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #             segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #             segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #             segmentation_time: 1.0,
@@ -7595,13 +8291,14 @@ module Aws::MediaConvert
     #             pts_offset: 1,
     #             pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #             scte35_pid: 1,
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #             timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             timed_metadata_pid: 1,
     #             transport_stream_id: 1,
     #             video_pid: 1
     #           },
     #           mov_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #             clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -7622,11 +8319,14 @@ module Aws::MediaConvert
     #           mpd_settings: {
     #             accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #             c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #             certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #             klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #             manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #             scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #             signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #             timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #             timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -7635,6 +8335,7 @@ module Aws::MediaConvert
     #           mxf_settings: {
     #             afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #             profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #             uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #             xavc_profile_settings: {
     #               duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #               max_anc_data_size: 1
@@ -7657,7 +8358,7 @@ module Aws::MediaConvert
     #               gop_size: 1.0,
     #               max_bitrate: 1,
     #               number_b_frames_between_reference_frames: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               qvbr_settings: {
     #                 qvbr_quality_level: 1,
     #                 qvbr_quality_level_fine_tune: 1.0
@@ -7676,7 +8377,7 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #               slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -7706,6 +8407,7 @@ module Aws::MediaConvert
     #               dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #               end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #               entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #               explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #               flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -7727,7 +8429,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #               qvbr_settings: {
     #                 max_average_bitrate: 1,
@@ -7777,12 +8479,14 @@ module Aws::MediaConvert
     #               interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #               max_bitrate: 1,
     #               min_i_interval: 1,
+    #               mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #               number_b_frames_between_reference_frames: 1,
     #               number_reference_frames: 1,
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #               qvbr_settings: {
     #                 max_average_bitrate: 1,
@@ -7799,7 +8503,11 @@ module Aws::MediaConvert
     #               telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #               temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               tile_height: 1,
+    #               tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #               tile_width: 1,
     #               tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #             },
@@ -7827,7 +8535,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #               rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #               scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -7838,6 +8546,12 @@ module Aws::MediaConvert
     #               syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #               telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #               temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #             },
+    #             passthrough_settings: {
+    #               frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #               gops_per_segment: 1,
+    #               segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #               video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #             },
     #             prores_settings: {
     #               chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -7850,7 +8564,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #               slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -7914,7 +8628,7 @@ module Aws::MediaConvert
     #               framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #               slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               softness: 1,
@@ -7937,6 +8651,7 @@ module Aws::MediaConvert
     #                 slices: 1
     #               },
     #               xavc_hd_intra_cbg_profile_settings: {
+    #                 interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                 xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #               },
     #               xavc_hd_profile_settings: {
@@ -7969,7 +8684,7 @@ module Aws::MediaConvert
     #             y: 1
     #           },
     #           respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #           sharpness: 1,
     #           timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #           timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -8011,6 +8726,7 @@ module Aws::MediaConvert
     #               mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #             },
     #             dolby_vision: {
+    #               compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #               l6_metadata: {
     #                 max_cll: 1,
     #                 max_fall: 1
@@ -8018,6 +8734,11 @@ module Aws::MediaConvert
     #               l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #               mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #               profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #             },
+    #             duration_control: {
+    #               integer_duration_maximum_compression_denominator: 1,
+    #               integer_duration_maximum_compression_numerator: 1,
+    #               integer_duration_trim_threshold_milliseconds: 1
     #             },
     #             hdr10_plus: {
     #               mastering_monitor_nits: 1,
@@ -8091,6 +8812,8 @@ module Aws::MediaConvert
     #   Specify the maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, specify the number of jobs you can process concurrently in your reservation plan instead.
     # @option params [String] :description
     #   Optional. A description of the queue that you are creating.
+    # @option params [Integer] :maximum_concurrent_feeds
+    #   Specify the maximum number of Elemental Inference feeds MediaConvert can process concurrently.
     # @option params [String] :name
     #   The name of the queue that you are creating.
     # @option params [String] :pricing_plan
@@ -8105,6 +8828,7 @@ module Aws::MediaConvert
     #   params = {
     #     concurrent_jobs: 1,
     #     description: "__string",
+    #     maximum_concurrent_feeds: 1,
     #     name: "__string", # required
     #     pricing_plan: "ON_DEMAND" # One of: ["ON_DEMAND", "RESERVED"],
     #     reservation_plan_settings: {
@@ -8128,6 +8852,7 @@ module Aws::MediaConvert
     #       created_at: Time.now,
     #       description: "__string",
     #       last_updated: Time.now,
+    #       maximum_concurrent_feeds: 1,
     #       name: "__string", # required
     #       pricing_plan: "ON_DEMAND" # One of: ["ON_DEMAND", "RESERVED"],
     #       progressing_jobs_count: 1,
@@ -8328,6 +9053,15 @@ module Aws::MediaConvert
     #       client_request_token: "__string",
     #       created_at: Time.now,
     #       current_phase: "PROBING" # One of: ["PROBING", "TRANSCODING", "UPLOADING"],
+    #       elemental_inference_configuration: {
+    #         features: ["SMART_CROP" # One of: ["SMART_CROP"]],
+    #         feeds: [
+    #           {
+    #             arn: "__string",
+    #             feed_management_state: "CREATED" # One of: ["CREATED", "ASSOCIATED", "PENDING_DELETION", "DELETED"]
+    #           }
+    #         ]
+    #       },
     #       error_code: 1,
     #       error_message: "__string",
     #       hop_destinations: [
@@ -8440,7 +9174,9 @@ module Aws::MediaConvert
     #                   channels_in: 1,
     #                   channels_out: 1
     #                 },
-    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                 smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 streams: [1],
     #                 tracks: [1]
     #               }
     #             },
@@ -8476,11 +9212,12 @@ module Aws::MediaConvert
     #                     time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                     upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                   },
-    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                   teletext_source_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                   },
     #                   track_source_settings: {
+    #                     stream_number: 1,
     #                     track_number: 1
     #                   },
     #                   webvtt_hls_source_settings: {
@@ -8543,6 +9280,13 @@ module Aws::MediaConvert
     #               }
     #             ],
     #             input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #             multi_view_settings: [
+    #               {
+    #                 input: {
+    #                   file_input: "__stringPatternS3Https"
+    #                 }
+    #               }
+    #             ],
     #             position: {
     #               height: 1,
     #               width: 1,
@@ -8565,7 +9309,10 @@ module Aws::MediaConvert
     #               duration: 1,
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
-    #               sample_rate: 1
+    #               height: 1,
+    #               image_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
+    #               sample_rate: 1,
+    #               width: 1
     #             },
     #             video_overlays: [
     #               {
@@ -8579,12 +9326,48 @@ module Aws::MediaConvert
     #                 end_timecode: "__stringPattern010920405090509092",
     #                 initial_position: {
     #                   height: 1,
+    #                   opacity: 1,
     #                   unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1
     #                 },
     #                 input: {
+    #                   audio_selectors: {
+    #                     "__string" => {
+    #                       audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                       external_audio_file_input: "__stringPatternS3Https",
+    #                       hls_rendition_group_settings: {
+    #                         rendition_group_id: "__string",
+    #                         rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                         rendition_name: "__string"
+    #                       },
+    #                       language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       offset: 1,
+    #                       pids: [1],
+    #                       program_selection: 1,
+    #                       remix_settings: {
+    #                         audio_description_audio_channel: 1,
+    #                         audio_description_data_channel: 1,
+    #                         channel_mapping: {
+    #                           output_channels: [
+    #                             {
+    #                               input_channels: [1],
+    #                               input_channels_fine_tune: [1.0]
+    #                             }
+    #                           ]
+    #                         },
+    #                         channels_in: 1,
+    #                         channels_out: 1
+    #                       },
+    #                       selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                       smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       streams: [1],
+    #                       tracks: [1]
+    #                     }
+    #                   },
     #                   file_input: "__stringPatternS3Https",
     #                   input_clippings: [
     #                     {
@@ -8601,6 +9384,7 @@ module Aws::MediaConvert
     #                   {
     #                     end_position: {
     #                       height: 1,
+    #                       opacity: 1,
     #                       unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                       width: 1,
     #                       x_position: 1,
@@ -8648,7 +9432,7 @@ module Aws::MediaConvert
     #           credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           file_offset: 1.0,
     #           kantar_license_id: 1,
-    #           kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #           kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #           log_destination: "__stringPatternS3",
     #           metadata3: "__stringMin1Max50",
     #           metadata4: "__stringMin1Max50",
@@ -8671,6 +9455,22 @@ module Aws::MediaConvert
     #           playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #           start_time: "__stringMin11Max11Pattern01D20305D205D"
     #         },
+    #         motion_image_inserters: [
+    #           {
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1
+    #             },
+    #             input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #             insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #             offset: {
+    #               image_x: 1,
+    #               image_y: 1
+    #             },
+    #             playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #             start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #           }
+    #         ],
     #         nielsen_configuration: {
     #           breakout_code: 1,
     #           distributor_id: "__string"
@@ -8738,7 +9538,7 @@ module Aws::MediaConvert
     #                 client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -8750,10 +9550,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
+    #                   clear_lead_segments: 1,
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                   initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -8777,15 +9578,25 @@ module Aws::MediaConvert
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
     #                 fragment_length: 1,
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_buffer_time: 1,
@@ -8813,7 +9624,7 @@ module Aws::MediaConvert
     #                 audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #                 base_url: "__string",
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -8825,11 +9636,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
-    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                     encryption_contract_configuration: {
@@ -8843,15 +9654,25 @@ module Aws::MediaConvert
     #                 },
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -8875,7 +9696,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 }
     #               },
@@ -8912,7 +9733,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -8939,15 +9760,25 @@ module Aws::MediaConvert
     #                   },
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_final_segment_length: 1.0,
@@ -8985,7 +9816,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
@@ -9004,7 +9835,7 @@ module Aws::MediaConvert
     #                 fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #                 manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #               },
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #             },
     #             outputs: [
@@ -9024,6 +9855,9 @@ module Aws::MediaConvert
     #                       target_lkfs: 1.0,
     #                       true_peak_limiter_threshold: 1.0
     #                     },
+    #                     audio_pitch_correction_settings: {
+    #                       slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
     #                     audio_source_name: "__stringMax2048",
     #                     audio_type: 1,
     #                     audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -9032,8 +9866,9 @@ module Aws::MediaConvert
     #                         audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                         bitrate: 1,
     #                         codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                         loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                         passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                         rap_interval: 1,
     #                         rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -9045,7 +9880,7 @@ module Aws::MediaConvert
     #                       ac3_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                         dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -9054,12 +9889,27 @@ module Aws::MediaConvert
     #                         metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                         sample_rate: 1
     #                       },
+    #                       ac4_settings: {
+    #                         bitrate: 1,
+    #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                         coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                         dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         lo_ro_center_mix_level: 1.0,
+    #                         lo_ro_surround_mix_level: 1.0,
+    #                         lt_rt_center_mix_level: 1.0,
+    #                         lt_rt_surround_mix_level: 1.0,
+    #                         sample_rate: 1,
+    #                         stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                       },
     #                       aiff_settings: {
     #                         bit_depth: 1,
     #                         channels: 1,
     #                         sample_rate: 1
     #                       },
-    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                       eac3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -9083,7 +9933,7 @@ module Aws::MediaConvert
     #                         attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                         dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -9243,7 +10093,15 @@ module Aws::MediaConvert
     #                         page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                       },
     #                       ttml_destination_settings: {
-    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                         background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                         background_opacity: 1,
+    #                         font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                         font_opacity: 1,
+    #                         font_size: 1,
+    #                         font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                         font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                       },
     #                       webvtt_destination_settings: {
     #                         accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -9260,12 +10118,15 @@ module Aws::MediaConvert
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -9325,7 +10186,7 @@ module Aws::MediaConvert
     #                       scte35_esam_pid: 1
     #                     },
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                     segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                     segmentation_time: 1.0,
@@ -9351,13 +10212,14 @@ module Aws::MediaConvert
     #                     pts_offset: 1,
     #                     pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_pid: 1,
     #                     transport_stream_id: 1,
     #                     video_pid: 1
     #                   },
     #                   mov_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                     clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -9378,11 +10240,14 @@ module Aws::MediaConvert
     #                   mpd_settings: {
     #                     accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -9391,6 +10256,7 @@ module Aws::MediaConvert
     #                   mxf_settings: {
     #                     afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                     profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                     uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                     xavc_profile_settings: {
     #                       duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                       max_anc_data_size: 1
@@ -9427,7 +10293,7 @@ module Aws::MediaConvert
     #                       gop_size: 1.0,
     #                       max_bitrate: 1,
     #                       number_b_frames_between_reference_frames: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       qvbr_settings: {
     #                         qvbr_quality_level: 1,
     #                         qvbr_quality_level_fine_tune: 1.0
@@ -9446,7 +10312,7 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -9476,6 +10342,7 @@ module Aws::MediaConvert
     #                       dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                       end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                       entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                       explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                       flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -9497,7 +10364,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -9547,12 +10414,14 @@ module Aws::MediaConvert
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                       max_bitrate: 1,
     #                       min_i_interval: 1,
+    #                       mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       number_b_frames_between_reference_frames: 1,
     #                       number_reference_frames: 1,
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -9569,7 +10438,11 @@ module Aws::MediaConvert
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tile_height: 1,
+    #                       tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                       tile_width: 1,
     #                       tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                       unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                     },
@@ -9597,7 +10470,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                       rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -9608,6 +10481,12 @@ module Aws::MediaConvert
     #                       syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
+    #                     passthrough_settings: {
+    #                       frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                       gops_per_segment: 1,
+    #                       segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                       video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                     },
     #                     prores_settings: {
     #                       chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -9620,7 +10499,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -9684,7 +10563,7 @@ module Aws::MediaConvert
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       softness: 1,
@@ -9707,6 +10586,7 @@ module Aws::MediaConvert
     #                         slices: 1
     #                       },
     #                       xavc_hd_intra_cbg_profile_settings: {
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                         xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                       },
     #                       xavc_hd_profile_settings: {
@@ -9739,7 +10619,7 @@ module Aws::MediaConvert
     #                     y: 1
     #                   },
     #                   respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                   sharpness: 1,
     #                   timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                   timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -9781,6 +10661,7 @@ module Aws::MediaConvert
     #                       mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                     },
     #                     dolby_vision: {
+    #                       compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                       l6_metadata: {
     #                         max_cll: 1,
     #                         max_fall: 1
@@ -9788,6 +10669,11 @@ module Aws::MediaConvert
     #                       l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                       mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                       profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                     },
+    #                     duration_control: {
+    #                       integer_duration_maximum_compression_denominator: 1,
+    #                       integer_duration_maximum_compression_numerator: 1,
+    #                       integer_duration_trim_threshold_milliseconds: 1
     #                     },
     #                     hdr10_plus: {
     #                       mastering_monitor_nits: 1,
@@ -9991,7 +10877,9 @@ module Aws::MediaConvert
     #                   channels_in: 1,
     #                   channels_out: 1
     #                 },
-    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                 smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 streams: [1],
     #                 tracks: [1]
     #               }
     #             },
@@ -10027,11 +10915,12 @@ module Aws::MediaConvert
     #                     time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                     upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                   },
-    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                   teletext_source_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                   },
     #                   track_source_settings: {
+    #                     stream_number: 1,
     #                     track_number: 1
     #                   },
     #                   webvtt_hls_source_settings: {
@@ -10087,6 +10976,13 @@ module Aws::MediaConvert
     #               }
     #             ],
     #             input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #             multi_view_settings: [
+    #               {
+    #                 input: {
+    #                   file_input: "__stringPatternS3Https"
+    #                 }
+    #               }
+    #             ],
     #             position: {
     #               height: 1,
     #               width: 1,
@@ -10109,12 +11005,48 @@ module Aws::MediaConvert
     #                 end_timecode: "__stringPattern010920405090509092",
     #                 initial_position: {
     #                   height: 1,
+    #                   opacity: 1,
     #                   unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1
     #                 },
     #                 input: {
+    #                   audio_selectors: {
+    #                     "__string" => {
+    #                       audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                       external_audio_file_input: "__stringPatternS3Https",
+    #                       hls_rendition_group_settings: {
+    #                         rendition_group_id: "__string",
+    #                         rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                         rendition_name: "__string"
+    #                       },
+    #                       language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       offset: 1,
+    #                       pids: [1],
+    #                       program_selection: 1,
+    #                       remix_settings: {
+    #                         audio_description_audio_channel: 1,
+    #                         audio_description_data_channel: 1,
+    #                         channel_mapping: {
+    #                           output_channels: [
+    #                             {
+    #                               input_channels: [1],
+    #                               input_channels_fine_tune: [1.0]
+    #                             }
+    #                           ]
+    #                         },
+    #                         channels_in: 1,
+    #                         channels_out: 1
+    #                       },
+    #                       selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                       smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       streams: [1],
+    #                       tracks: [1]
+    #                     }
+    #                   },
     #                   file_input: "__stringPatternS3Https",
     #                   input_clippings: [
     #                     {
@@ -10131,6 +11063,7 @@ module Aws::MediaConvert
     #                   {
     #                     end_position: {
     #                       height: 1,
+    #                       opacity: 1,
     #                       unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                       width: 1,
     #                       x_position: 1,
@@ -10178,7 +11111,7 @@ module Aws::MediaConvert
     #           credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           file_offset: 1.0,
     #           kantar_license_id: 1,
-    #           kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #           kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #           log_destination: "__stringPatternS3",
     #           metadata3: "__stringMin1Max50",
     #           metadata4: "__stringMin1Max50",
@@ -10201,6 +11134,22 @@ module Aws::MediaConvert
     #           playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #           start_time: "__stringMin11Max11Pattern01D20305D205D"
     #         },
+    #         motion_image_inserters: [
+    #           {
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1
+    #             },
+    #             input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #             insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #             offset: {
+    #               image_x: 1,
+    #               image_y: 1
+    #             },
+    #             playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #             start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #           }
+    #         ],
     #         nielsen_configuration: {
     #           breakout_code: 1,
     #           distributor_id: "__string"
@@ -10268,7 +11217,7 @@ module Aws::MediaConvert
     #                 client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -10280,10 +11229,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
+    #                   clear_lead_segments: 1,
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                   initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -10307,15 +11257,25 @@ module Aws::MediaConvert
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
     #                 fragment_length: 1,
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_buffer_time: 1,
@@ -10343,7 +11303,7 @@ module Aws::MediaConvert
     #                 audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #                 base_url: "__string",
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -10355,11 +11315,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
-    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                     encryption_contract_configuration: {
@@ -10373,15 +11333,25 @@ module Aws::MediaConvert
     #                 },
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -10405,7 +11375,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 }
     #               },
@@ -10442,7 +11412,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -10469,15 +11439,25 @@ module Aws::MediaConvert
     #                   },
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_final_segment_length: 1.0,
@@ -10515,7 +11495,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
@@ -10534,7 +11514,7 @@ module Aws::MediaConvert
     #                 fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #                 manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #               },
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #             },
     #             outputs: [
@@ -10554,6 +11534,9 @@ module Aws::MediaConvert
     #                       target_lkfs: 1.0,
     #                       true_peak_limiter_threshold: 1.0
     #                     },
+    #                     audio_pitch_correction_settings: {
+    #                       slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
     #                     audio_source_name: "__stringMax2048",
     #                     audio_type: 1,
     #                     audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -10562,8 +11545,9 @@ module Aws::MediaConvert
     #                         audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                         bitrate: 1,
     #                         codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                         loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                         passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                         rap_interval: 1,
     #                         rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -10575,7 +11559,7 @@ module Aws::MediaConvert
     #                       ac3_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                         dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -10584,12 +11568,27 @@ module Aws::MediaConvert
     #                         metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                         sample_rate: 1
     #                       },
+    #                       ac4_settings: {
+    #                         bitrate: 1,
+    #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                         coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                         dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         lo_ro_center_mix_level: 1.0,
+    #                         lo_ro_surround_mix_level: 1.0,
+    #                         lt_rt_center_mix_level: 1.0,
+    #                         lt_rt_surround_mix_level: 1.0,
+    #                         sample_rate: 1,
+    #                         stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                       },
     #                       aiff_settings: {
     #                         bit_depth: 1,
     #                         channels: 1,
     #                         sample_rate: 1
     #                       },
-    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                       eac3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -10613,7 +11612,7 @@ module Aws::MediaConvert
     #                         attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                         dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -10773,7 +11772,15 @@ module Aws::MediaConvert
     #                         page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                       },
     #                       ttml_destination_settings: {
-    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                         background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                         background_opacity: 1,
+    #                         font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                         font_opacity: 1,
+    #                         font_size: 1,
+    #                         font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                         font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                       },
     #                       webvtt_destination_settings: {
     #                         accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -10790,12 +11797,15 @@ module Aws::MediaConvert
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -10855,7 +11865,7 @@ module Aws::MediaConvert
     #                       scte35_esam_pid: 1
     #                     },
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                     segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                     segmentation_time: 1.0,
@@ -10881,13 +11891,14 @@ module Aws::MediaConvert
     #                     pts_offset: 1,
     #                     pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_pid: 1,
     #                     transport_stream_id: 1,
     #                     video_pid: 1
     #                   },
     #                   mov_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                     clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -10908,11 +11919,14 @@ module Aws::MediaConvert
     #                   mpd_settings: {
     #                     accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -10921,6 +11935,7 @@ module Aws::MediaConvert
     #                   mxf_settings: {
     #                     afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                     profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                     uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                     xavc_profile_settings: {
     #                       duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                       max_anc_data_size: 1
@@ -10957,7 +11972,7 @@ module Aws::MediaConvert
     #                       gop_size: 1.0,
     #                       max_bitrate: 1,
     #                       number_b_frames_between_reference_frames: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       qvbr_settings: {
     #                         qvbr_quality_level: 1,
     #                         qvbr_quality_level_fine_tune: 1.0
@@ -10976,7 +11991,7 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -11006,6 +12021,7 @@ module Aws::MediaConvert
     #                       dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                       end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                       entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                       explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                       flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -11027,7 +12043,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -11077,12 +12093,14 @@ module Aws::MediaConvert
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                       max_bitrate: 1,
     #                       min_i_interval: 1,
+    #                       mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       number_b_frames_between_reference_frames: 1,
     #                       number_reference_frames: 1,
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -11099,7 +12117,11 @@ module Aws::MediaConvert
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tile_height: 1,
+    #                       tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                       tile_width: 1,
     #                       tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                       unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                     },
@@ -11127,7 +12149,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                       rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -11138,6 +12160,12 @@ module Aws::MediaConvert
     #                       syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
+    #                     passthrough_settings: {
+    #                       frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                       gops_per_segment: 1,
+    #                       segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                       video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                     },
     #                     prores_settings: {
     #                       chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -11150,7 +12178,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -11214,7 +12242,7 @@ module Aws::MediaConvert
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       softness: 1,
@@ -11237,6 +12265,7 @@ module Aws::MediaConvert
     #                         slices: 1
     #                       },
     #                       xavc_hd_intra_cbg_profile_settings: {
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                         xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                       },
     #                       xavc_hd_profile_settings: {
@@ -11269,7 +12298,7 @@ module Aws::MediaConvert
     #                     y: 1
     #                   },
     #                   respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                   sharpness: 1,
     #                   timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                   timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -11311,6 +12340,7 @@ module Aws::MediaConvert
     #                       mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                     },
     #                     dolby_vision: {
+    #                       compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                       l6_metadata: {
     #                         max_cll: 1,
     #                         max_fall: 1
@@ -11318,6 +12348,11 @@ module Aws::MediaConvert
     #                       l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                       mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                       profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                     },
+    #                     duration_control: {
+    #                       integer_duration_maximum_compression_denominator: 1,
+    #                       integer_duration_maximum_compression_numerator: 1,
+    #                       integer_duration_trim_threshold_milliseconds: 1
     #                     },
     #                     hdr10_plus: {
     #                       mastering_monitor_nits: 1,
@@ -11404,6 +12439,1756 @@ module Aws::MediaConvert
       request.send_request(options)
     end
 
+    # Retrieve a JSON array of up to twenty of your most recent jobs matched by a jobs query.
+    # @param [Hash, Types::GetJobsQueryResultsRequest] params
+    # @option params [String] :id
+    #   The ID of the jobs query.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "__string", # required
+    #   }
+    #   options = {}
+    #   response = client.get_jobs_query_results(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     jobs: [
+    #       {
+    #         acceleration_settings: {
+    #           mode: "DISABLED" # One of: ["DISABLED", "ENABLED", "PREFERRED"], # required
+    #         },
+    #         acceleration_status: "NOT_APPLICABLE" # One of: ["NOT_APPLICABLE", "IN_PROGRESS", "ACCELERATED", "NOT_ACCELERATED"],
+    #         arn: "__string",
+    #         billing_tags_source: "QUEUE" # One of: ["QUEUE", "PRESET", "JOB_TEMPLATE", "JOB"],
+    #         client_request_token: "__string",
+    #         created_at: Time.now,
+    #         current_phase: "PROBING" # One of: ["PROBING", "TRANSCODING", "UPLOADING"],
+    #         elemental_inference_configuration: {
+    #           features: ["SMART_CROP" # One of: ["SMART_CROP"]],
+    #           feeds: [
+    #             {
+    #               arn: "__string",
+    #               feed_management_state: "CREATED" # One of: ["CREATED", "ASSOCIATED", "PENDING_DELETION", "DELETED"]
+    #             }
+    #           ]
+    #         },
+    #         error_code: 1,
+    #         error_message: "__string",
+    #         hop_destinations: [
+    #           {
+    #             priority: 1,
+    #             queue: "__string",
+    #             wait_minutes: 1
+    #           }
+    #         ],
+    #         id: "__string",
+    #         job_engine_version_requested: "__string",
+    #         job_engine_version_used: "__string",
+    #         job_percent_complete: 1,
+    #         job_template: "__string",
+    #         last_share_details: "__string",
+    #         messages: {
+    #           info: ["__string"],
+    #           warning: ["__string"]
+    #         },
+    #         output_group_details: [
+    #           {
+    #             output_details: [
+    #               {
+    #                 duration_in_ms: 1,
+    #                 video_details: {
+    #                   height_in_px: 1,
+    #                   width_in_px: 1
+    #                 }
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         priority: 1,
+    #         queue: "__string",
+    #         queue_transitions: [
+    #           {
+    #             destination_queue: "__string",
+    #             source_queue: "__string",
+    #             timestamp: Time.now
+    #           }
+    #         ],
+    #         retry_count: 1,
+    #         role: "__string", # required
+    #         settings: { # required
+    #           ad_avail_offset: 1,
+    #           avail_blanking: {
+    #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG"
+    #           },
+    #           color_conversion3_dlut_settings: [
+    #             {
+    #               file_input: "__stringMin14PatternS3CubeCUBEHttpsCubeCUBE",
+    #               input_color_space: "FOLLOW" # One of: ["FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"],
+    #               input_mastering_luminance: 1,
+    #               output_color_space: "FOLLOW" # One of: ["FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"],
+    #               output_mastering_luminance: 1
+    #             }
+    #           ],
+    #           esam: {
+    #             manifest_confirm_condition_notification: {
+    #               mcc_xml: "__stringPatternSNManifestConfirmConditionNotificationNS"
+    #             },
+    #             response_signal_preroll: 1,
+    #             signal_processing_notification: {
+    #               scc_xml: "__stringPatternSNSignalProcessingNotificationNS"
+    #             }
+    #           },
+    #           extended_data_services: {
+    #             copy_protection_action: "PASSTHROUGH" # One of: ["PASSTHROUGH", "STRIP"],
+    #             vchip_action: "PASSTHROUGH" # One of: ["PASSTHROUGH", "STRIP"]
+    #           },
+    #           follow_source: 1,
+    #           inputs: [
+    #             {
+    #               advanced_input_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               advanced_input_filter_settings: {
+    #                 add_texture: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 sharpening: "OFF" # One of: ["OFF", "LOW", "HIGH"]
+    #               },
+    #               audio_selector_groups: {
+    #                 "__string" => {
+    #                   audio_selector_names: ["__stringMin1"]
+    #                 }
+    #               },
+    #               audio_selectors: {
+    #                 "__string" => {
+    #                   audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                   external_audio_file_input: "__stringPatternS3Https",
+    #                   hls_rendition_group_settings: {
+    #                     rendition_group_id: "__string",
+    #                     rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                     rendition_name: "__string"
+    #                   },
+    #                   language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                   offset: 1,
+    #                   pids: [1],
+    #                   program_selection: 1,
+    #                   remix_settings: {
+    #                     audio_description_audio_channel: 1,
+    #                     audio_description_data_channel: 1,
+    #                     channel_mapping: {
+    #                       output_channels: [
+    #                         {
+    #                           input_channels: [1],
+    #                           input_channels_fine_tune: [1.0]
+    #                         }
+    #                       ]
+    #                     },
+    #                     channels_in: 1,
+    #                     channels_out: 1
+    #                   },
+    #                   selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                   smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                   streams: [1],
+    #                   tracks: [1]
+    #                 }
+    #               },
+    #               caption_selectors: {
+    #                 "__string" => {
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                   language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                   source_settings: {
+    #                     ancillary_source_settings: {
+    #                       convert608_to708: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"],
+    #                       source_ancillary_channel_number: 1,
+    #                       terminate_captions: "END_OF_INPUT" # One of: ["END_OF_INPUT", "DISABLED"]
+    #                     },
+    #                     dvb_sub_source_settings: {
+    #                       pid: 1
+    #                     },
+    #                     embedded_source_settings: {
+    #                       convert608_to708: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"],
+    #                       source608_channel_number: 1,
+    #                       source608_track_number: 1,
+    #                       terminate_captions: "END_OF_INPUT" # One of: ["END_OF_INPUT", "DISABLED"]
+    #                     },
+    #                     file_source_settings: {
+    #                       byte_rate_limit: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       convert608_to708: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"],
+    #                       convert_paint_to_pop: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       framerate: {
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1
+    #                       },
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
+    #                       time_delta: 1,
+    #                       time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
+    #                       upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
+    #                     },
+    #                     source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
+    #                     teletext_source_settings: {
+    #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
+    #                     },
+    #                     track_source_settings: {
+    #                       stream_number: 1,
+    #                       track_number: 1
+    #                     },
+    #                     webvtt_hls_source_settings: {
+    #                       rendition_group_id: "__string",
+    #                       rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       rendition_name: "__string"
+    #                     }
+    #                   }
+    #                 }
+    #               },
+    #               crop: {
+    #                 height: 1,
+    #                 width: 1,
+    #                 x: 1,
+    #                 y: 1
+    #               },
+    #               deblock_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               decryption_settings: {
+    #                 decryption_mode: "AES_CTR" # One of: ["AES_CTR", "AES_CBC", "AES_GCM"],
+    #                 encrypted_decryption_key: "__stringMin24Max512PatternAZaZ0902",
+    #                 initialization_vector: "__stringMin16Max24PatternAZaZ0922AZaZ0916",
+    #                 kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912"
+    #               },
+    #               denoise_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               dolby_vision_metadata_xml: "__stringMin14PatternS3XmlXMLHttpsXmlXML",
+    #               dynamic_audio_selectors: {
+    #                 "__string" => {
+    #                   audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                   external_audio_file_input: "__stringPatternS3Https",
+    #                   language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                   offset: 1,
+    #                   selector_type: "ALL_TRACKS" # One of: ["ALL_TRACKS", "LANGUAGE_CODE"]
+    #                 }
+    #               },
+    #               file_input: "__stringMax2048PatternS3Https",
+    #               filter_enable: "AUTO" # One of: ["AUTO", "DISABLE", "FORCE"],
+    #               filter_strength: 1,
+    #               image_inserter: {
+    #                 insertable_images: [
+    #                   {
+    #                     duration: 1,
+    #                     fade_in: 1,
+    #                     fade_out: 1,
+    #                     height: 1,
+    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
+    #                     image_x: 1,
+    #                     image_y: 1,
+    #                     layer: 1,
+    #                     opacity: 1,
+    #                     start_time: "__stringPattern01D20305D205D",
+    #                     width: 1
+    #                   }
+    #                 ],
+    #                 sdr_reference_white_level: 1
+    #               },
+    #               input_clippings: [
+    #                 {
+    #                   end_timecode: "__stringPattern010920405090509092090909",
+    #                   start_timecode: "__stringPattern010920405090509092090909"
+    #                 }
+    #               ],
+    #               input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #               multi_view_settings: [
+    #                 {
+    #                   input: {
+    #                     file_input: "__stringPatternS3Https"
+    #                   }
+    #                 }
+    #               ],
+    #               position: {
+    #                 height: 1,
+    #                 width: 1,
+    #                 x: 1,
+    #                 y: 1
+    #               },
+    #               program_number: 1,
+    #               psi_control: "IGNORE_PSI" # One of: ["IGNORE_PSI", "USE_PSI"],
+    #               supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
+    #               tams_settings: {
+    #                 auth_connection_arn: "__stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936",
+    #                 gap_handling: "SKIP_GAPS" # One of: ["SKIP_GAPS", "FILL_WITH_BLACK", "HOLD_LAST_FRAME"],
+    #                 source_id: "__string",
+    #                 timerange: "__stringPattern019090190908019090190908"
+    #               },
+    #               timecode_source: "EMBEDDED" # One of: ["EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"],
+    #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
+    #               video_generator: {
+    #                 channels: 1,
+    #                 duration: 1,
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 height: 1,
+    #                 image_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
+    #                 sample_rate: 1,
+    #                 width: 1
+    #               },
+    #               video_overlays: [
+    #                 {
+    #                   crop: {
+    #                     height: 1,
+    #                     unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
+    #                     width: 1,
+    #                     x: 1,
+    #                     y: 1
+    #                   },
+    #                   end_timecode: "__stringPattern010920405090509092",
+    #                   initial_position: {
+    #                     height: 1,
+    #                     opacity: 1,
+    #                     unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
+    #                     width: 1,
+    #                     x_position: 1,
+    #                     y_position: 1
+    #                   },
+    #                   input: {
+    #                     audio_selectors: {
+    #                       "__string" => {
+    #                         audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                         custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                         default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                         external_audio_file_input: "__stringPatternS3Https",
+    #                         hls_rendition_group_settings: {
+    #                           rendition_group_id: "__string",
+    #                           rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                           rendition_name: "__string"
+    #                         },
+    #                         language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                         offset: 1,
+    #                         pids: [1],
+    #                         program_selection: 1,
+    #                         remix_settings: {
+    #                           audio_description_audio_channel: 1,
+    #                           audio_description_data_channel: 1,
+    #                           channel_mapping: {
+    #                             output_channels: [
+    #                               {
+    #                                 input_channels: [1],
+    #                                 input_channels_fine_tune: [1.0]
+    #                               }
+    #                             ]
+    #                           },
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         },
+    #                         selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                         smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         streams: [1],
+    #                         tracks: [1]
+    #                       }
+    #                     },
+    #                     file_input: "__stringPatternS3Https",
+    #                     input_clippings: [
+    #                       {
+    #                         end_timecode: "__stringPattern010920405090509092090909",
+    #                         start_timecode: "__stringPattern010920405090509092090909"
+    #                       }
+    #                     ],
+    #                     timecode_source: "EMBEDDED" # One of: ["EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"],
+    #                     timecode_start: "__stringMin11Max11Pattern01D20305D205D"
+    #                   },
+    #                   playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #                   start_timecode: "__stringPattern010920405090509092",
+    #                   transitions: [
+    #                     {
+    #                       end_position: {
+    #                         height: 1,
+    #                         opacity: 1,
+    #                         unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
+    #                         width: 1,
+    #                         x_position: 1,
+    #                         y_position: 1
+    #                       },
+    #                       end_timecode: "__stringPattern010920405090509092",
+    #                       start_timecode: "__stringPattern010920405090509092"
+    #                     }
+    #                   ]
+    #                 }
+    #               ],
+    #               video_selector: {
+    #                 alpha_behavior: "DISCARD" # One of: ["DISCARD", "REMAP_TO_LUMA"],
+    #                 color_space: "FOLLOW" # One of: ["FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020", "P3DCI", "P3D65_SDR", "P3D65_HDR"],
+    #                 color_space_usage: "FORCE" # One of: ["FORCE", "FALLBACK"],
+    #                 embedded_timecode_override: "NONE" # One of: ["NONE", "USE_MDPM"],
+    #                 hdr10_metadata: {
+    #                   blue_primary_x: 1,
+    #                   blue_primary_y: 1,
+    #                   green_primary_x: 1,
+    #                   green_primary_y: 1,
+    #                   max_content_light_level: 1,
+    #                   max_frame_average_light_level: 1,
+    #                   max_luminance: 1,
+    #                   min_luminance: 1,
+    #                   red_primary_x: 1,
+    #                   red_primary_y: 1,
+    #                   white_point_x: 1,
+    #                   white_point_y: 1
+    #                 },
+    #                 max_luminance: 1,
+    #                 pad_video: "DISABLED" # One of: ["DISABLED", "BLACK"],
+    #                 pid: 1,
+    #                 program_number: 1,
+    #                 rotate: "DEGREE_0" # One of: ["DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"],
+    #                 sample_range: "FOLLOW" # One of: ["FOLLOW", "FULL_RANGE", "LIMITED_RANGE"],
+    #                 selector_type: "AUTO" # One of: ["AUTO", "STREAM"],
+    #                 streams: [1]
+    #               }
+    #             }
+    #           ],
+    #           kantar_watermark: {
+    #             channel_name: "__stringMin1Max20",
+    #             content_reference: "__stringMin1Max50PatternAZAZ09",
+    #             credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
+    #             file_offset: 1.0,
+    #             kantar_license_id: 1,
+    #             kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
+    #             log_destination: "__stringPatternS3",
+    #             metadata3: "__stringMin1Max50",
+    #             metadata4: "__stringMin1Max50",
+    #             metadata5: "__stringMin1Max50",
+    #             metadata6: "__stringMin1Max50",
+    #             metadata7: "__stringMin1Max50",
+    #             metadata8: "__stringMin1Max50"
+    #           },
+    #           motion_image_inserter: {
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1
+    #             },
+    #             input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #             insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #             offset: {
+    #               image_x: 1,
+    #               image_y: 1
+    #             },
+    #             playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #             start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #           },
+    #           motion_image_inserters: [
+    #             {
+    #               framerate: {
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1
+    #               },
+    #               input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #               insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #               offset: {
+    #                 image_x: 1,
+    #                 image_y: 1
+    #               },
+    #               playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #               start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #             }
+    #           ],
+    #           nielsen_configuration: {
+    #             breakout_code: 1,
+    #             distributor_id: "__string"
+    #           },
+    #           nielsen_non_linear_watermark: {
+    #             active_watermark_process: "NAES2_AND_NW" # One of: ["NAES2_AND_NW", "CBET", "NAES2_AND_NW_AND_CBET"],
+    #             adi_filename: "__stringPatternS3",
+    #             asset_id: "__stringMin1Max20",
+    #             asset_name: "__stringMin1Max50",
+    #             cbet_source_id: "__stringPattern0xAFaF0908190908",
+    #             episode_id: "__stringMin1Max20",
+    #             metadata_destination: "__stringPatternS3",
+    #             source_id: 1,
+    #             source_watermark_status: "CLEAN" # One of: ["CLEAN", "WATERMARKED"],
+    #             tic_server_url: "__stringPatternHttps",
+    #             unique_tic_per_audio_track: "RESERVE_UNIQUE_TICS_PER_TRACK" # One of: ["RESERVE_UNIQUE_TICS_PER_TRACK", "SAME_TICS_PER_TRACK"]
+    #           },
+    #           output_groups: [
+    #             {
+    #               automated_encoding_settings: {
+    #                 abr_settings: {
+    #                   max_abr_bitrate: 1,
+    #                   max_quality_level: 1.0,
+    #                   max_renditions: 1,
+    #                   min_abr_bitrate: 1,
+    #                   rules: [
+    #                     {
+    #                       allowed_renditions: [
+    #                         {
+    #                           height: 1,
+    #                           required: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           width: 1
+    #                         }
+    #                       ],
+    #                       force_include_renditions: [
+    #                         {
+    #                           height: 1,
+    #                           width: 1
+    #                         }
+    #                       ],
+    #                       min_bottom_rendition_size: {
+    #                         height: 1,
+    #                         width: 1
+    #                       },
+    #                       min_top_rendition_size: {
+    #                         height: 1,
+    #                         width: 1
+    #                       },
+    #                       type: "MIN_TOP_RENDITION_SIZE" # One of: ["MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"]
+    #                     }
+    #                   ]
+    #                 }
+    #               },
+    #               custom_name: "__string",
+    #               name: "__stringMax2048",
+    #               output_group_settings: {
+    #                 cmaf_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"]
+    #                     }
+    #                   ],
+    #                   base_url: "__string",
+    #                   client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                   codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
+    #                   dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
+    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
+    #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ" # One of: ["PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"]
+    #                       },
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3" # One of: ["SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"],
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
+    #                       },
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
+    #                     }
+    #                   },
+    #                   encryption: {
+    #                     clear_lead_segments: 1,
+    #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #                     encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
+    #                     initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
+    #                       dash_signaled_system_ids: ["__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                       encryption_contract_configuration: {
+    #                         speke_audio_preset: "PRESET_AUDIO_1" # One of: ["PRESET_AUDIO_1", "PRESET_AUDIO_2", "PRESET_AUDIO_3", "SHARED", "UNENCRYPTED"],
+    #                         speke_video_preset: "PRESET_VIDEO_1" # One of: ["PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"]
+    #                       },
+    #                       hls_signaled_system_ids: ["__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                       resource_id: "__stringPatternW",
+    #                       url: "__stringPatternHttpsD"
+    #                     },
+    #                     static_key_provider: {
+    #                       key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                       key_format_versions: "__stringPatternDD",
+    #                       static_key_value: "__stringPatternAZaZ0932",
+    #                       url: "__string"
+    #                     },
+    #                     type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
+    #                   },
+    #                   fragment_length: 1,
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
+    #                   manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
+    #                   manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
+    #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
+    #                   mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
+    #                   mpd_profile: "MAIN_PROFILE" # One of: ["MAIN_PROFILE", "ON_DEMAND_PROFILE"],
+    #                   pts_offset_handling_for_b_frames: "ZERO_BASED" # One of: ["ZERO_BASED", "MATCH_INITIAL_PTS"],
+    #                   segment_control: "SINGLE_FILE" # One of: ["SINGLE_FILE", "SEGMENTED_FILES"],
+    #                   segment_length: 1,
+    #                   segment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE", "MATCH"],
+    #                   stream_inf_resolution: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   target_duration_compatibility_mode: "LEGACY" # One of: ["LEGACY", "SPEC_COMPLIANT"],
+    #                   video_composition_offsets: "SIGNED" # One of: ["SIGNED", "UNSIGNED"],
+    #                   write_dash_manifest: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                   write_hls_manifest: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                   write_segment_timeline_in_representation: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                 },
+    #                 dash_iso_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"]
+    #                     }
+    #                   ],
+    #                   audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
+    #                   base_url: "__string",
+    #                   dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
+    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
+    #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ" # One of: ["PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"]
+    #                       },
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3" # One of: ["SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"],
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
+    #                       },
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
+    #                     }
+    #                   },
+    #                   encryption: {
+    #                     playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
+    #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
+    #                       encryption_contract_configuration: {
+    #                         speke_audio_preset: "PRESET_AUDIO_1" # One of: ["PRESET_AUDIO_1", "PRESET_AUDIO_2", "PRESET_AUDIO_3", "SHARED", "UNENCRYPTED"],
+    #                         speke_video_preset: "PRESET_VIDEO_1" # One of: ["PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"]
+    #                       },
+    #                       resource_id: "__string",
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                       url: "__stringPatternHttpsD"
+    #                     }
+    #                   },
+    #                   fragment_length: 1,
+    #                   hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
+    #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
+    #                   mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
+    #                   mpd_profile: "MAIN_PROFILE" # One of: ["MAIN_PROFILE", "ON_DEMAND_PROFILE"],
+    #                   pts_offset_handling_for_b_frames: "ZERO_BASED" # One of: ["ZERO_BASED", "MATCH_INITIAL_PTS"],
+    #                   segment_control: "SINGLE_FILE" # One of: ["SINGLE_FILE", "SEGMENTED_FILES"],
+    #                   segment_length: 1,
+    #                   segment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE", "MATCH"],
+    #                   video_composition_offsets: "SIGNED" # One of: ["SIGNED", "UNSIGNED"],
+    #                   write_segment_timeline_in_representation: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                 },
+    #                 file_group_settings: {
+    #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ" # One of: ["PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"]
+    #                       },
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3" # One of: ["SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"],
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
+    #                       },
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
+    #                     }
+    #                   }
+    #                 },
+    #                 hls_group_settings: {
+    #                   ad_markers: ["ELEMENTAL" # One of: ["ELEMENTAL", "ELEMENTAL_SCTE35"]],
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"]
+    #                     }
+    #                   ],
+    #                   audio_only_header: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   base_url: "__string",
+    #                   caption_language_mappings: [
+    #                     {
+    #                       caption_channel: 1,
+    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       language_description: "__string"
+    #                     }
+    #                   ],
+    #                   caption_language_setting: "INSERT" # One of: ["INSERT", "OMIT", "NONE"],
+    #                   caption_segment_length_control: "LARGE_SEGMENTS" # One of: ["LARGE_SEGMENTS", "MATCH_VIDEO"],
+    #                   client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                   codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
+    #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ" # One of: ["PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"]
+    #                       },
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3" # One of: ["SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"],
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
+    #                       },
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
+    #                     }
+    #                   },
+    #                   directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
+    #                   encryption: {
+    #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #                     encryption_method: "AES128" # One of: ["AES128", "SAMPLE_AES"],
+    #                     initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     offline_encrypted: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
+    #                       encryption_contract_configuration: {
+    #                         speke_audio_preset: "PRESET_AUDIO_1" # One of: ["PRESET_AUDIO_1", "PRESET_AUDIO_2", "PRESET_AUDIO_3", "SHARED", "UNENCRYPTED"],
+    #                         speke_video_preset: "PRESET_VIDEO_1" # One of: ["PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"]
+    #                       },
+    #                       resource_id: "__string",
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                       url: "__stringPatternHttpsD"
+    #                     },
+    #                     static_key_provider: {
+    #                       key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                       key_format_versions: "__stringPatternDD",
+    #                       static_key_value: "__stringPatternAZaZ0932",
+    #                       url: "__string"
+    #                     },
+    #                     type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
+    #                   },
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
+    #                   manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
+    #                   manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
+    #                   min_final_segment_length: 1.0,
+    #                   min_segment_length: 1,
+    #                   output_selection: "MANIFESTS_AND_SEGMENTS" # One of: ["MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY"],
+    #                   program_date_time: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   program_date_time_period: 1,
+    #                   progressive_write_hls_manifest: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                   segment_control: "SINGLE_FILE" # One of: ["SINGLE_FILE", "SEGMENTED_FILES"],
+    #                   segment_length: 1,
+    #                   segment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE", "MATCH"],
+    #                   segments_per_subdirectory: 1,
+    #                   stream_inf_resolution: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   target_duration_compatibility_mode: "LEGACY" # One of: ["LEGACY", "SPEC_COMPLIANT"],
+    #                   timed_metadata_id3_frame: "NONE" # One of: ["NONE", "PRIV", "TDRL"],
+    #                   timed_metadata_id3_period: 1,
+    #                   timestamp_delta_milliseconds: 1
+    #                 },
+    #                 ms_smooth_group_settings: {
+    #                   additional_manifests: [
+    #                     {
+    #                       manifest_name_modifier: "__stringMin1",
+    #                       selected_outputs: ["__stringMin1"]
+    #                     }
+    #                   ],
+    #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS" # One of: ["COMBINE_DUPLICATE_STREAMS", "NONE"],
+    #                   destination: "__stringPatternS3",
+    #                   destination_settings: {
+    #                     s3_settings: {
+    #                       access_control: {
+    #                         canned_acl: "PUBLIC_READ" # One of: ["PUBLIC_READ", "AUTHENTICATED_READ", "BUCKET_OWNER_READ", "BUCKET_OWNER_FULL_CONTROL"]
+    #                       },
+    #                       encryption: {
+    #                         encryption_type: "SERVER_SIDE_ENCRYPTION_S3" # One of: ["SERVER_SIDE_ENCRYPTION_S3", "SERVER_SIDE_ENCRYPTION_KMS"],
+    #                         kms_encryption_context: "__stringPatternAZaZ0902",
+    #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
+    #                       },
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
+    #                     }
+    #                   },
+    #                   encryption: {
+    #                     speke_key_provider: {
+    #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
+    #                       encryption_contract_configuration: {
+    #                         speke_audio_preset: "PRESET_AUDIO_1" # One of: ["PRESET_AUDIO_1", "PRESET_AUDIO_2", "PRESET_AUDIO_3", "SHARED", "UNENCRYPTED"],
+    #                         speke_video_preset: "PRESET_VIDEO_1" # One of: ["PRESET_VIDEO_1", "PRESET_VIDEO_2", "PRESET_VIDEO_3", "PRESET_VIDEO_4", "PRESET_VIDEO_5", "PRESET_VIDEO_6", "PRESET_VIDEO_7", "PRESET_VIDEO_8", "SHARED", "UNENCRYPTED"]
+    #                       },
+    #                       resource_id: "__string",
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"],
+    #                       url: "__stringPatternHttpsD"
+    #                     }
+    #                   },
+    #                   fragment_length: 1,
+    #                   fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
+    #                   manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
+    #                 },
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
+    #                 type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
+    #               },
+    #               outputs: [
+    #                 {
+    #                   audio_descriptions: [
+    #                     {
+    #                       audio_channel_tagging_settings: {
+    #                         channel_tag: "L" # One of: ["L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"],
+    #                         channel_tags: ["L" # One of: ["L", "R", "C", "LFE", "LS", "RS", "LC", "RC", "CS", "LSD", "RSD", "TCS", "VHL", "VHC", "VHR", "TBL", "TBC", "TBR", "RSL", "RSR", "LW", "RW", "LFE2", "LT", "RT", "HI", "NAR", "M"]]
+    #                       },
+    #                       audio_normalization_settings: {
+    #                         algorithm: "ITU_BS_1770_1" # One of: ["ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"],
+    #                         algorithm_control: "CORRECT_AUDIO" # One of: ["CORRECT_AUDIO", "MEASURE_ONLY"],
+    #                         correction_gate_level: 1,
+    #                         loudness_logging: "LOG" # One of: ["LOG", "DONT_LOG"],
+    #                         peak_calculation: "TRUE_PEAK" # One of: ["TRUE_PEAK", "NONE"],
+    #                         target_lkfs: 1.0,
+    #                         true_peak_limiter_threshold: 1.0
+    #                       },
+    #                       audio_pitch_correction_settings: {
+    #                         slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                       },
+    #                       audio_source_name: "__stringMax2048",
+    #                       audio_type: 1,
+    #                       audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
+    #                       codec_settings: {
+    #                         aac_settings: {
+    #                           audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
+    #                           bitrate: 1,
+    #                           codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
+    #                           coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
+    #                           loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                           passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
+    #                           rap_interval: 1,
+    #                           rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                           raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
+    #                           sample_rate: 1,
+    #                           specification: "MPEG2" # One of: ["MPEG2", "MPEG4"],
+    #                           target_loudness_range: 1,
+    #                           vbr_quality: "LOW" # One of: ["LOW", "MEDIUM_LOW", "MEDIUM_HIGH", "HIGH"]
+    #                         },
+    #                         ac3_settings: {
+    #                           bitrate: 1,
+    #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
+    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
+    #                           dialnorm: 1,
+    #                           dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
+    #                           dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
+    #                           dynamic_range_compression_rf: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
+    #                           lfe_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
+    #                           sample_rate: 1
+    #                         },
+    #                         ac4_settings: {
+    #                           bitrate: 1,
+    #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                           coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                           dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           lo_ro_center_mix_level: 1.0,
+    #                           lo_ro_surround_mix_level: 1.0,
+    #                           lt_rt_center_mix_level: 1.0,
+    #                           lt_rt_surround_mix_level: 1.0,
+    #                           sample_rate: 1,
+    #                           stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                         },
+    #                         aiff_settings: {
+    #                           bit_depth: 1,
+    #                           channels: 1,
+    #                           sample_rate: 1
+    #                         },
+    #                         codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                         eac3_atmos_settings: {
+    #                           bitrate: 1,
+    #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
+    #                           coding_mode: "CODING_MODE_AUTO" # One of: ["CODING_MODE_AUTO", "CODING_MODE_5_1_4", "CODING_MODE_7_1_4", "CODING_MODE_9_1_6"],
+    #                           dialogue_intelligence: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           downmix_control: "SPECIFIED" # One of: ["SPECIFIED", "INITIALIZE_FROM_SOURCE"],
+    #                           dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_rf: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_control: "SPECIFIED" # One of: ["SPECIFIED", "INITIALIZE_FROM_SOURCE"],
+    #                           lo_ro_center_mix_level: 1.0,
+    #                           lo_ro_surround_mix_level: 1.0,
+    #                           lt_rt_center_mix_level: 1.0,
+    #                           lt_rt_surround_mix_level: 1.0,
+    #                           metering_mode: "LEQ_A" # One of: ["LEQ_A", "ITU_BS_1770_1", "ITU_BS_1770_2", "ITU_BS_1770_3", "ITU_BS_1770_4"],
+    #                           sample_rate: 1,
+    #                           speech_threshold: 1,
+    #                           stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "STEREO", "SURROUND", "DPL2"],
+    #                           surround_ex_mode: "NOT_INDICATED" # One of: ["NOT_INDICATED", "ENABLED", "DISABLED"]
+    #                         },
+    #                         eac3_settings: {
+    #                           attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
+    #                           bitrate: 1,
+    #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
+    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
+    #                           dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           dialnorm: 1,
+    #                           dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_rf: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           lfe_control: "LFE" # One of: ["LFE", "NO_LFE"],
+    #                           lfe_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           lo_ro_center_mix_level: 1.0,
+    #                           lo_ro_surround_mix_level: 1.0,
+    #                           lt_rt_center_mix_level: 1.0,
+    #                           lt_rt_surround_mix_level: 1.0,
+    #                           metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
+    #                           passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
+    #                           phase_control: "SHIFT_90_DEGREES" # One of: ["SHIFT_90_DEGREES", "NO_SHIFT"],
+    #                           sample_rate: 1,
+    #                           stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"],
+    #                           surround_ex_mode: "NOT_INDICATED" # One of: ["NOT_INDICATED", "ENABLED", "DISABLED"],
+    #                           surround_mode: "NOT_INDICATED" # One of: ["NOT_INDICATED", "ENABLED", "DISABLED"]
+    #                         },
+    #                         flac_settings: {
+    #                           bit_depth: 1,
+    #                           channels: 1,
+    #                           sample_rate: 1
+    #                         },
+    #                         mp2_settings: {
+    #                           audio_description_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NONE"],
+    #                           bitrate: 1,
+    #                           channels: 1,
+    #                           sample_rate: 1
+    #                         },
+    #                         mp3_settings: {
+    #                           bitrate: 1,
+    #                           channels: 1,
+    #                           rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
+    #                           sample_rate: 1,
+    #                           vbr_quality: 1
+    #                         },
+    #                         opus_settings: {
+    #                           bitrate: 1,
+    #                           channels: 1,
+    #                           sample_rate: 1
+    #                         },
+    #                         vorbis_settings: {
+    #                           channels: 1,
+    #                           sample_rate: 1,
+    #                           vbr_quality: 1
+    #                         },
+    #                         wav_settings: {
+    #                           bit_depth: 1,
+    #                           channels: 1,
+    #                           format: "RIFF" # One of: ["RIFF", "RF64", "EXTENSIBLE"],
+    #                           sample_rate: 1
+    #                         }
+    #                       },
+    #                       custom_language_code: "__stringPatternAZaZ23AZaZ09",
+    #                       language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       language_code_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
+    #                       remix_settings: {
+    #                         audio_description_audio_channel: 1,
+    #                         audio_description_data_channel: 1,
+    #                         channel_mapping: {
+    #                           output_channels: [
+    #                             {
+    #                               input_channels: [1],
+    #                               input_channels_fine_tune: [1.0]
+    #                             }
+    #                           ]
+    #                         },
+    #                         channels_in: 1,
+    #                         channels_out: 1
+    #                       },
+    #                       stream_name: "__stringPatternWS"
+    #                     }
+    #                   ],
+    #                   caption_descriptions: [
+    #                     {
+    #                       caption_selector_name: "__stringMin1",
+    #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
+    #                       destination_settings: {
+    #                         burnin_destination_settings: {
+    #                           alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "AUTO"],
+    #                           apply_font_color: "WHITE_TEXT_ONLY" # One of: ["WHITE_TEXT_ONLY", "ALL_TEXT"],
+    #                           background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                           background_opacity: 1,
+    #                           fallback_font: "BEST_MATCH" # One of: ["BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"],
+    #                           font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"],
+    #                           font_file_bold: "__stringPatternS3TtfHttpsTtf",
+    #                           font_file_bold_italic: "__string",
+    #                           font_file_italic: "__stringPatternS3TtfHttpsTtf",
+    #                           font_file_regular: "__stringPatternS3TtfHttpsTtf",
+    #                           font_opacity: 1,
+    #                           font_resolution: 1,
+    #                           font_script: "AUTOMATIC" # One of: ["AUTOMATIC", "HANS", "HANT"],
+    #                           font_size: 1,
+    #                           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                           outline_color: "BLACK" # One of: ["BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                           outline_size: 1,
+    #                           remove_ruby_reserve_attributes: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                           shadow_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                           shadow_opacity: 1,
+    #                           shadow_x_offset: 1,
+    #                           shadow_y_offset: 1,
+    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           teletext_spacing: "FIXED_GRID" # One of: ["FIXED_GRID", "PROPORTIONAL", "AUTO"],
+    #                           x_position: 1,
+    #                           y_position: 1
+    #                         },
+    #                         destination_type: "BURN_IN" # One of: ["BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"],
+    #                         dvb_sub_destination_settings: {
+    #                           alignment: "CENTERED" # One of: ["CENTERED", "LEFT", "AUTO"],
+    #                           apply_font_color: "WHITE_TEXT_ONLY" # One of: ["WHITE_TEXT_ONLY", "ALL_TEXT"],
+    #                           background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                           background_opacity: 1,
+    #                           dds_handling: "NONE" # One of: ["NONE", "SPECIFIED", "NO_DISPLAY_WINDOW", "SPECIFIED_OPTIMAL"],
+    #                           dds_x_coordinate: 1,
+    #                           dds_y_coordinate: 1,
+    #                           fallback_font: "BEST_MATCH" # One of: ["BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"],
+    #                           font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"],
+    #                           font_file_bold: "__stringPatternS3TtfHttpsTtf",
+    #                           font_file_bold_italic: "__stringPatternS3TtfHttpsTtf",
+    #                           font_file_italic: "__stringPatternS3TtfHttpsTtf",
+    #                           font_file_regular: "__stringPatternS3TtfHttpsTtf",
+    #                           font_opacity: 1,
+    #                           font_resolution: 1,
+    #                           font_script: "AUTOMATIC" # One of: ["AUTOMATIC", "HANS", "HANT"],
+    #                           font_size: 1,
+    #                           height: 1,
+    #                           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                           outline_color: "BLACK" # One of: ["BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                           outline_size: 1,
+    #                           shadow_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                           shadow_opacity: 1,
+    #                           shadow_x_offset: 1,
+    #                           shadow_y_offset: 1,
+    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           subtitling_type: "HEARING_IMPAIRED" # One of: ["HEARING_IMPAIRED", "STANDARD"],
+    #                           teletext_spacing: "FIXED_GRID" # One of: ["FIXED_GRID", "PROPORTIONAL", "AUTO"],
+    #                           width: 1,
+    #                           x_position: 1,
+    #                           y_position: 1
+    #                         },
+    #                         embedded_destination_settings: {
+    #                           destination608_channel_number: 1,
+    #                           destination708_service_number: 1
+    #                         },
+    #                         imsc_destination_settings: {
+    #                           accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                         },
+    #                         scc_destination_settings: {
+    #                           framerate: "FRAMERATE_23_97" # One of: ["FRAMERATE_23_97", "FRAMERATE_24", "FRAMERATE_25", "FRAMERATE_29_97_DROPFRAME", "FRAMERATE_29_97_NON_DROPFRAME"]
+    #                         },
+    #                         srt_destination_settings: {
+    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                         },
+    #                         teletext_destination_settings: {
+    #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
+    #                           page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
+    #                         },
+    #                         ttml_destination_settings: {
+    #                           background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                           background_opacity: 1,
+    #                           font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                           font_opacity: 1,
+    #                           font_size: 1,
+    #                           font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                           font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
+    #                         },
+    #                         webvtt_destination_settings: {
+    #                           accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED", "STRICT", "MERGE"]
+    #                         }
+    #                       },
+    #                       language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       language_description: "__string"
+    #                     }
+    #                   ],
+    #                   container_settings: {
+    #                     cmfc_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                       audio_group_id: "__string",
+    #                       audio_rendition_sets: "__string",
+    #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                       c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
+    #                       descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
+    #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
+    #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
+    #                       timed_metadata_scheme_id_uri: "__stringMax1000",
+    #                       timed_metadata_value: "__stringMax1000"
+    #                     },
+    #                     container: "F4V" # One of: ["F4V", "GIF", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "OGG", "WEBM", "RAW", "Y4M"],
+    #                     f4v_settings: {
+    #                       moov_placement: "PROGRESSIVE_DOWNLOAD" # One of: ["PROGRESSIVE_DOWNLOAD", "NORMAL"]
+    #                     },
+    #                     m2ts_settings: {
+    #                       audio_buffer_model: "DVB" # One of: ["DVB", "ATSC"],
+    #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                       audio_frames_per_pes: 1,
+    #                       audio_pids: [1],
+    #                       audio_pts_offset_delta: 1,
+    #                       bitrate: 1,
+    #                       buffer_model: "MULTIPLEX" # One of: ["MULTIPLEX", "NONE"],
+    #                       data_pts_control: "AUTO" # One of: ["AUTO", "ALIGN_TO_VIDEO"],
+    #                       dvb_nit_settings: {
+    #                         network_id: 1,
+    #                         network_name: "__stringMin1Max256",
+    #                         nit_interval: 1
+    #                       },
+    #                       dvb_sdt_settings: {
+    #                         output_sdt: "SDT_FOLLOW" # One of: ["SDT_FOLLOW", "SDT_FOLLOW_IF_PRESENT", "SDT_MANUAL", "SDT_NONE"],
+    #                         sdt_interval: 1,
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256"
+    #                       },
+    #                       dvb_sub_pids: [1],
+    #                       dvb_tdt_settings: {
+    #                         tdt_interval: 1
+    #                       },
+    #                       dvb_teletext_pid: 1,
+    #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS" # One of: ["VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL"],
+    #                       ebp_placement: "VIDEO_AND_AUDIO_PIDS" # One of: ["VIDEO_AND_AUDIO_PIDS", "VIDEO_PID"],
+    #                       es_rate_in_pes: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       force_ts_video_ebp_order: "FORCE" # One of: ["FORCE", "DEFAULT"],
+    #                       fragment_time: 1.0,
+    #                       klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       max_pcr_interval: 1,
+    #                       min_ebp_interval: 1,
+    #                       nielsen_id3: "INSERT" # One of: ["INSERT", "NONE"],
+    #                       null_packet_bitrate: 1.0,
+    #                       pat_interval: 1,
+    #                       pcr_control: "PCR_EVERY_PES_PACKET" # One of: ["PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"],
+    #                       pcr_pid: 1,
+    #                       pmt_interval: 1,
+    #                       pmt_pid: 1,
+    #                       prevent_buffer_underflow: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       private_metadata_pid: 1,
+    #                       program_number: 1,
+    #                       pts_offset: 1,
+    #                       pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
+    #                       rate_mode: "VBR" # One of: ["VBR", "CBR"],
+    #                       scte35_esam: {
+    #                         scte35_esam_pid: 1
+    #                       },
+    #                       scte35_pid: 1,
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
+    #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
+    #                       segmentation_time: 1.0,
+    #                       timed_metadata_pid: 1,
+    #                       transport_stream_id: 1,
+    #                       video_pid: 1
+    #                     },
+    #                     m3u8_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                       audio_frames_per_pes: 1,
+    #                       audio_pids: [1],
+    #                       audio_pts_offset_delta: 1,
+    #                       data_pts_control: "AUTO" # One of: ["AUTO", "ALIGN_TO_VIDEO"],
+    #                       max_pcr_interval: 1,
+    #                       nielsen_id3: "INSERT" # One of: ["INSERT", "NONE"],
+    #                       pat_interval: 1,
+    #                       pcr_control: "PCR_EVERY_PES_PACKET" # One of: ["PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"],
+    #                       pcr_pid: 1,
+    #                       pmt_interval: 1,
+    #                       pmt_pid: 1,
+    #                       private_metadata_pid: 1,
+    #                       program_number: 1,
+    #                       pts_offset: 1,
+    #                       pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
+    #                       scte35_pid: 1,
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       timed_metadata_pid: 1,
+    #                       transport_stream_id: 1,
+    #                       video_pid: 1
+    #                     },
+    #                     mov_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                       clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
+    #                       padding_control: "OMNEON" # One of: ["OMNEON", "NONE"],
+    #                       reference: "SELF_CONTAINED" # One of: ["SELF_CONTAINED", "EXTERNAL"]
+    #                     },
+    #                     mp4_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                       c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
+    #                       cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       ctts_version: 1,
+    #                       free_space_box: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       moov_placement: "PROGRESSIVE_DOWNLOAD" # One of: ["PROGRESSIVE_DOWNLOAD", "NORMAL"],
+    #                       mp4_major_brand: "__string",
+    #                       signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
+    #                     },
+    #                     mpd_settings: {
+    #                       accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                       c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                       certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
+    #                       klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
+    #                       manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
+    #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
+    #                       timed_metadata_scheme_id_uri: "__stringMax1000",
+    #                       timed_metadata_value: "__stringMax1000"
+    #                     },
+    #                     mxf_settings: {
+    #                       afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
+    #                       profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                       uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
+    #                       xavc_profile_settings: {
+    #                         duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
+    #                         max_anc_data_size: 1
+    #                       }
+    #                     }
+    #                   },
+    #                   extension: "__stringMax256",
+    #                   name_modifier: "__stringMin1Max256",
+    #                   output_settings: {
+    #                     hls_settings: {
+    #                       audio_group_id: "__string",
+    #                       audio_only_container: "AUTOMATIC" # One of: ["AUTOMATIC", "M2TS"],
+    #                       audio_rendition_sets: "__string",
+    #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                       descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
+    #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "INCLUDE_AS_TS", "EXCLUDE"],
+    #                       segment_modifier: "__string"
+    #                     }
+    #                   },
+    #                   preset: "__stringMin0",
+    #                   video_description: {
+    #                     afd_signaling: "NONE" # One of: ["NONE", "AUTO", "FIXED"],
+    #                     anti_alias: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                     chroma_position_mode: "AUTO" # One of: ["AUTO", "FORCE_CENTER", "FORCE_TOP_LEFT"],
+    #                     codec_settings: {
+    #                       av1_settings: {
+    #                         adaptive_quantization: "OFF" # One of: ["OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"],
+    #                         bit_depth: "BIT_8" # One of: ["BIT_8", "BIT_10"],
+    #                         film_grain_synthesis: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         max_bitrate: 1,
+    #                         number_b_frames_between_reference_frames: 1,
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
+    #                         qvbr_settings: {
+    #                           qvbr_quality_level: 1,
+    #                           qvbr_quality_level_fine_tune: 1.0
+    #                         },
+    #                         rate_control_mode: "QVBR" # One of: ["QVBR"],
+    #                         slices: 1,
+    #                         spatial_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                       },
+    #                       avc_intra_settings: {
+    #                         avc_intra_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200", "CLASS_4K_2K"],
+    #                         avc_intra_uhd_settings: {
+    #                           quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"]
+    #                         },
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
+    #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
+    #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         telecine: "NONE" # One of: ["NONE", "HARD"]
+    #                       },
+    #                       codec: "AV1" # One of: ["AV1", "AVC_INTRA", "FRAME_CAPTURE", "GIF", "H_264", "H_265", "MPEG2", "PASSTHROUGH", "PRORES", "UNCOMPRESSED", "VC3", "VP8", "VP9", "XAVC"],
+    #                       frame_capture_settings: {
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         max_captures: 1,
+    #                         quality: 1
+    #                       },
+    #                       gif_settings: {
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1
+    #                       },
+    #                       h264_settings: {
+    #                         adaptive_quantization: "OFF" # One of: ["OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"],
+    #                         bandwidth_reduction_filter: {
+    #                           sharpening: "LOW" # One of: ["LOW", "MEDIUM", "HIGH", "OFF"],
+    #                           strength: "LOW" # One of: ["LOW", "MEDIUM", "HIGH", "AUTO", "OFF"]
+    #                         },
+    #                         bitrate: 1,
+    #                         codec_level: "AUTO" # One of: ["AUTO", "LEVEL_1", "LEVEL_1_1", "LEVEL_1_2", "LEVEL_1_3", "LEVEL_2", "LEVEL_2_1", "LEVEL_2_2", "LEVEL_3", "LEVEL_3_1", "LEVEL_3_2", "LEVEL_4", "LEVEL_4_1", "LEVEL_4_2", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2"],
+    #                         codec_profile: "BASELINE" # One of: ["BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"],
+    #                         dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
+    #                         end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
+    #                         entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                         explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
+    #                         flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         gop_closed_cadence: 1,
+    #                         gop_size: 1.0,
+    #                         gop_size_units: "FRAMES" # One of: ["FRAMES", "SECONDS", "AUTO"],
+    #                         hrd_buffer_final_fill_percentage: 1,
+    #                         hrd_buffer_initial_fill_percentage: 1,
+    #                         hrd_buffer_size: 1,
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
+    #                         max_bitrate: 1,
+    #                         min_i_interval: 1,
+    #                         number_b_frames_between_reference_frames: 1,
+    #                         number_reference_frames: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
+    #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
+    #                         qvbr_settings: {
+    #                           max_average_bitrate: 1,
+    #                           qvbr_quality_level: 1,
+    #                           qvbr_quality_level_fine_tune: 1.0
+    #                         },
+    #                         rate_control_mode: "VBR" # One of: ["VBR", "CBR", "QVBR"],
+    #                         repeat_pps: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         saliency_aware_encoding: "DISABLED" # One of: ["DISABLED", "PREFERRED"],
+    #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
+    #                         scene_change_detect: "DISABLED" # One of: ["DISABLED", "ENABLED", "TRANSITION_DETECTION"],
+    #                         slices: 1,
+    #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         softness: 1,
+    #                         spatial_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         syntax: "DEFAULT" # One of: ["DEFAULT", "RP2027"],
+    #                         telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
+    #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         write_mp4_packaging_type: "AVC1" # One of: ["AVC1", "AVC3"]
+    #                       },
+    #                       h265_settings: {
+    #                         adaptive_quantization: "OFF" # One of: ["OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX", "AUTO"],
+    #                         alternate_transfer_function_sei: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         bandwidth_reduction_filter: {
+    #                           sharpening: "LOW" # One of: ["LOW", "MEDIUM", "HIGH", "OFF"],
+    #                           strength: "LOW" # One of: ["LOW", "MEDIUM", "HIGH", "AUTO", "OFF"]
+    #                         },
+    #                         bitrate: 1,
+    #                         codec_level: "AUTO" # One of: ["AUTO", "LEVEL_1", "LEVEL_2", "LEVEL_2_1", "LEVEL_3", "LEVEL_3_1", "LEVEL_4", "LEVEL_4_1", "LEVEL_5", "LEVEL_5_1", "LEVEL_5_2", "LEVEL_6", "LEVEL_6_1", "LEVEL_6_2"],
+    #                         codec_profile: "MAIN_MAIN" # One of: ["MAIN_MAIN", "MAIN_HIGH", "MAIN10_MAIN", "MAIN10_HIGH", "MAIN_422_8BIT_MAIN", "MAIN_422_8BIT_HIGH", "MAIN_422_10BIT_MAIN", "MAIN_422_10BIT_HIGH"],
+    #                         deblocking: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
+    #                         end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
+    #                         flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         gop_closed_cadence: 1,
+    #                         gop_size: 1.0,
+    #                         gop_size_units: "FRAMES" # One of: ["FRAMES", "SECONDS", "AUTO"],
+    #                         hrd_buffer_final_fill_percentage: 1,
+    #                         hrd_buffer_initial_fill_percentage: 1,
+    #                         hrd_buffer_size: 1,
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
+    #                         max_bitrate: 1,
+    #                         min_i_interval: 1,
+    #                         mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         number_b_frames_between_reference_frames: 1,
+    #                         number_reference_frames: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
+    #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
+    #                         qvbr_settings: {
+    #                           max_average_bitrate: 1,
+    #                           qvbr_quality_level: 1,
+    #                           qvbr_quality_level_fine_tune: 1.0
+    #                         },
+    #                         rate_control_mode: "VBR" # One of: ["VBR", "CBR", "QVBR"],
+    #                         sample_adaptive_offset_filter_mode: "DEFAULT" # One of: ["DEFAULT", "ADAPTIVE", "OFF"],
+    #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
+    #                         scene_change_detect: "DISABLED" # One of: ["DISABLED", "ENABLED", "TRANSITION_DETECTION"],
+    #                         slices: 1,
+    #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         spatial_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
+    #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         tile_height: 1,
+    #                         tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                         tile_width: 1,
+    #                         tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
+    #                         unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
+    #                       },
+    #                       mpeg2_settings: {
+    #                         adaptive_quantization: "OFF" # One of: ["OFF", "LOW", "MEDIUM", "HIGH"],
+    #                         bitrate: 1,
+    #                         codec_level: "AUTO" # One of: ["AUTO", "LOW", "MAIN", "HIGH1440", "HIGH"],
+    #                         codec_profile: "MAIN" # One of: ["MAIN", "PROFILE_422"],
+    #                         dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_closed_cadence: 1,
+    #                         gop_size: 1.0,
+    #                         gop_size_units: "FRAMES" # One of: ["FRAMES", "SECONDS"],
+    #                         hrd_buffer_final_fill_percentage: 1,
+    #                         hrd_buffer_initial_fill_percentage: 1,
+    #                         hrd_buffer_size: 1,
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
+    #                         intra_dc_precision: "AUTO" # One of: ["AUTO", "INTRA_DC_PRECISION_8", "INTRA_DC_PRECISION_9", "INTRA_DC_PRECISION_10", "INTRA_DC_PRECISION_11"],
+    #                         max_bitrate: 1,
+    #                         min_i_interval: 1,
+    #                         number_b_frames_between_reference_frames: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
+    #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
+    #                         rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
+    #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
+    #                         scene_change_detect: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         softness: 1,
+    #                         spatial_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
+    #                         telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
+    #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                       },
+    #                       passthrough_settings: {
+    #                         frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                         gops_per_segment: 1,
+    #                         segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                         video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
+    #                       },
+    #                       prores_settings: {
+    #                         chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
+    #                         codec_profile: "APPLE_PRORES_422" # One of: ["APPLE_PRORES_422", "APPLE_PRORES_422_HQ", "APPLE_PRORES_422_LT", "APPLE_PRORES_422_PROXY", "APPLE_PRORES_4444", "APPLE_PRORES_4444_XQ"],
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
+    #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
+    #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
+    #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         telecine: "NONE" # One of: ["NONE", "HARD"]
+    #                       },
+    #                       uncompressed_settings: {
+    #                         fourcc: "I420" # One of: ["I420", "I422", "I444"],
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "INTERLACED" # One of: ["INTERLACED", "PROGRESSIVE"],
+    #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
+    #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         telecine: "NONE" # One of: ["NONE", "HARD"]
+    #                       },
+    #                       vc3_settings: {
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "INTERLACED" # One of: ["INTERLACED", "PROGRESSIVE"],
+    #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
+    #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         telecine: "NONE" # One of: ["NONE", "HARD"],
+    #                         vc3_class: "CLASS_145_8BIT" # One of: ["CLASS_145_8BIT", "CLASS_220_8BIT", "CLASS_220_10BIT"]
+    #                       },
+    #                       vp8_settings: {
+    #                         bitrate: 1,
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         hrd_buffer_size: 1,
+    #                         max_bitrate: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         quality_tuning_level: "MULTI_PASS" # One of: ["MULTI_PASS", "MULTI_PASS_HQ"],
+    #                         rate_control_mode: "VBR" # One of: ["VBR"]
+    #                       },
+    #                       vp9_settings: {
+    #                         bitrate: 1,
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         hrd_buffer_size: 1,
+    #                         max_bitrate: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         quality_tuning_level: "MULTI_PASS" # One of: ["MULTI_PASS", "MULTI_PASS_HQ"],
+    #                         rate_control_mode: "VBR" # One of: ["VBR"]
+    #                       },
+    #                       xavc_settings: {
+    #                         adaptive_quantization: "OFF" # One of: ["OFF", "AUTO", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"],
+    #                         entropy_encoding: "AUTO" # One of: ["AUTO", "CABAC", "CAVLC"],
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
+    #                         profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
+    #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         softness: 1,
+    #                         spatial_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         xavc4k_intra_cbg_profile_settings: {
+    #                           xavc_class: "CLASS_100" # One of: ["CLASS_100", "CLASS_300", "CLASS_480"]
+    #                         },
+    #                         xavc4k_intra_vbr_profile_settings: {
+    #                           xavc_class: "CLASS_100" # One of: ["CLASS_100", "CLASS_300", "CLASS_480"]
+    #                         },
+    #                         xavc4k_profile_settings: {
+    #                           bitrate_class: "BITRATE_CLASS_100" # One of: ["BITRATE_CLASS_100", "BITRATE_CLASS_140", "BITRATE_CLASS_200"],
+    #                           codec_profile: "HIGH" # One of: ["HIGH", "HIGH_422"],
+    #                           flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                           gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                           gop_closed_cadence: 1,
+    #                           hrd_buffer_size: 1,
+    #                           quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
+    #                           slices: 1
+    #                         },
+    #                         xavc_hd_intra_cbg_profile_settings: {
+    #                           interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
+    #                           xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
+    #                         },
+    #                         xavc_hd_profile_settings: {
+    #                           bitrate_class: "BITRATE_CLASS_25" # One of: ["BITRATE_CLASS_25", "BITRATE_CLASS_35", "BITRATE_CLASS_50"],
+    #                           flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                           gop_b_reference: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                           gop_closed_cadence: 1,
+    #                           hrd_buffer_size: 1,
+    #                           interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
+    #                           quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
+    #                           slices: 1,
+    #                           telecine: "NONE" # One of: ["NONE", "HARD"]
+    #                         }
+    #                       }
+    #                     },
+    #                     color_metadata: "IGNORE" # One of: ["IGNORE", "INSERT"],
+    #                     crop: {
+    #                       height: 1,
+    #                       width: 1,
+    #                       x: 1,
+    #                       y: 1
+    #                     },
+    #                     drop_frame_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                     fixed_afd: 1,
+    #                     height: 1,
+    #                     position: {
+    #                       height: 1,
+    #                       width: 1,
+    #                       x: 1,
+    #                       y: 1
+    #                     },
+    #                     respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
+    #                     scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
+    #                     sharpness: 1,
+    #                     timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
+    #                     timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                     video_preprocessors: {
+    #                       color_corrector: {
+    #                         brightness: 1,
+    #                         clip_limits: {
+    #                           maximum_rgb_tolerance: 1,
+    #                           maximum_yuv: 1,
+    #                           minimum_rgb_tolerance: 1,
+    #                           minimum_yuv: 1
+    #                         },
+    #                         color_space_conversion: "NONE" # One of: ["NONE", "FORCE_601", "FORCE_709", "FORCE_HDR10", "FORCE_HLG_2020", "FORCE_P3DCI", "FORCE_P3D65_SDR", "FORCE_P3D65_HDR"],
+    #                         contrast: 1,
+    #                         hdr10_metadata: {
+    #                           blue_primary_x: 1,
+    #                           blue_primary_y: 1,
+    #                           green_primary_x: 1,
+    #                           green_primary_y: 1,
+    #                           max_content_light_level: 1,
+    #                           max_frame_average_light_level: 1,
+    #                           max_luminance: 1,
+    #                           min_luminance: 1,
+    #                           red_primary_x: 1,
+    #                           red_primary_y: 1,
+    #                           white_point_x: 1,
+    #                           white_point_y: 1
+    #                         },
+    #                         hdr_to_sdr_tone_mapper: "PRESERVE_DETAILS" # One of: ["PRESERVE_DETAILS", "VIBRANT"],
+    #                         hue: 1,
+    #                         max_luminance: 1,
+    #                         sample_range_conversion: "LIMITED_RANGE_SQUEEZE" # One of: ["LIMITED_RANGE_SQUEEZE", "NONE", "LIMITED_RANGE_CLIP"],
+    #                         saturation: 1,
+    #                         sdr_reference_white_level: 1
+    #                       },
+    #                       deinterlacer: {
+    #                         algorithm: "INTERPOLATE" # One of: ["INTERPOLATE", "INTERPOLATE_TICKER", "BLEND", "BLEND_TICKER", "LINEAR_INTERPOLATION"],
+    #                         control: "FORCE_ALL_FRAMES" # One of: ["FORCE_ALL_FRAMES", "NORMAL"],
+    #                         mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
+    #                       },
+    #                       dolby_vision: {
+    #                         compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
+    #                         l6_metadata: {
+    #                           max_cll: 1,
+    #                           max_fall: 1
+    #                         },
+    #                         l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
+    #                         mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
+    #                         profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                       },
+    #                       duration_control: {
+    #                         integer_duration_maximum_compression_denominator: 1,
+    #                         integer_duration_maximum_compression_numerator: 1,
+    #                         integer_duration_trim_threshold_milliseconds: 1
+    #                       },
+    #                       hdr10_plus: {
+    #                         mastering_monitor_nits: 1,
+    #                         target_monitor_nits: 1
+    #                       },
+    #                       image_inserter: {
+    #                         insertable_images: [
+    #                           {
+    #                             duration: 1,
+    #                             fade_in: 1,
+    #                             fade_out: 1,
+    #                             height: 1,
+    #                             image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
+    #                             image_x: 1,
+    #                             image_y: 1,
+    #                             layer: 1,
+    #                             opacity: 1,
+    #                             start_time: "__stringPattern01D20305D205D",
+    #                             width: 1
+    #                           }
+    #                         ],
+    #                         sdr_reference_white_level: 1
+    #                       },
+    #                       noise_reducer: {
+    #                         filter: "BILATERAL" # One of: ["BILATERAL", "MEAN", "GAUSSIAN", "LANCZOS", "SHARPEN", "CONSERVE", "SPATIAL", "TEMPORAL"],
+    #                         filter_settings: {
+    #                           strength: 1
+    #                         },
+    #                         spatial_filter_settings: {
+    #                           post_filter_sharpen_strength: 1,
+    #                           speed: 1,
+    #                           strength: 1
+    #                         },
+    #                         temporal_filter_settings: {
+    #                           aggressive_mode: 1,
+    #                           post_temporal_sharpening: "DISABLED" # One of: ["DISABLED", "ENABLED", "AUTO"],
+    #                           post_temporal_sharpening_strength: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #                           speed: 1,
+    #                           strength: 1
+    #                         }
+    #                       },
+    #                       partner_watermarking: {
+    #                         nexguard_file_marker_settings: {
+    #                           license: "__stringMin1Max100000",
+    #                           payload: 1,
+    #                           preset: "__stringMin1Max256",
+    #                           strength: "LIGHTEST" # One of: ["LIGHTEST", "LIGHTER", "DEFAULT", "STRONGER", "STRONGEST"]
+    #                         }
+    #                       },
+    #                       timecode_burnin: {
+    #                         font_size: 1,
+    #                         position: "TOP_CENTER" # One of: ["TOP_CENTER", "TOP_LEFT", "TOP_RIGHT", "MIDDLE_LEFT", "MIDDLE_CENTER", "MIDDLE_RIGHT", "BOTTOM_LEFT", "BOTTOM_CENTER", "BOTTOM_RIGHT"],
+    #                         prefix: "__stringPattern"
+    #                       }
+    #                     },
+    #                     width: 1
+    #                   }
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           timecode_config: {
+    #             anchor: "__stringPattern010920405090509092",
+    #             source: "EMBEDDED" # One of: ["EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"],
+    #             start: "__stringPattern010920405090509092",
+    #             timestamp_offset: "__stringPattern0940191020191209301"
+    #           },
+    #           timed_metadata_insertion: {
+    #             id3_insertions: [
+    #               {
+    #                 id3: "__stringPatternAZaZ0902",
+    #                 timecode: "__stringPattern010920405090509092"
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         share_status: "NOT_SHARED" # One of: ["NOT_SHARED", "INITIATED", "SHARED"],
+    #         simulate_reserved_queue: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #         status: "SUBMITTED" # One of: ["SUBMITTED", "PROGRESSING", "COMPLETE", "CANCELED", "ERROR"],
+    #         status_update_interval: "SECONDS_10" # One of: ["SECONDS_10", "SECONDS_12", "SECONDS_15", "SECONDS_20", "SECONDS_30", "SECONDS_60", "SECONDS_120", "SECONDS_180", "SECONDS_240", "SECONDS_300", "SECONDS_360", "SECONDS_420", "SECONDS_480", "SECONDS_540", "SECONDS_600"],
+    #         timing: {
+    #           finish_time: Time.now,
+    #           start_time: Time.now,
+    #           submit_time: Time.now
+    #         },
+    #         user_metadata: {
+    #           "__string" => "__string"
+    #         },
+    #         warnings: [
+    #           {
+    #             code: 1, # required
+    #             count: 1, # required
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "__string",
+    #     status: "SUBMITTED" # One of: ["SUBMITTED", "PROGRESSING", "COMPLETE", "ERROR"]
+    #   }
+    # @return [Types::GetJobsQueryResultsResponse]
+    def get_jobs_query_results(params = {}, options = {})
+      request = build_request(:get_jobs_query_results, params)
+      request.send_request(options)
+    end
+
     # Retrieve the JSON for your policy.
     # @param [Hash, Types::GetPolicyRequest] params
     # @example Request syntax with placeholder values
@@ -11461,6 +14246,9 @@ module Aws::MediaConvert
     #               target_lkfs: 1.0,
     #               true_peak_limiter_threshold: 1.0
     #             },
+    #             audio_pitch_correction_settings: {
+    #               slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #             },
     #             audio_source_name: "__stringMax2048",
     #             audio_type: 1,
     #             audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -11469,8 +14257,9 @@ module Aws::MediaConvert
     #                 audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                 bitrate: 1,
     #                 codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                 coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                 coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                 loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                 passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                 rap_interval: 1,
     #                 rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                 raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -11482,7 +14271,7 @@ module Aws::MediaConvert
     #               ac3_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                 dialnorm: 1,
     #                 dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                 dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -11491,12 +14280,27 @@ module Aws::MediaConvert
     #                 metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                 sample_rate: 1
     #               },
+    #               ac4_settings: {
+    #                 bitrate: 1,
+    #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                 coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                 dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 lo_ro_center_mix_level: 1.0,
+    #                 lo_ro_surround_mix_level: 1.0,
+    #                 lt_rt_center_mix_level: 1.0,
+    #                 lt_rt_surround_mix_level: 1.0,
+    #                 sample_rate: 1,
+    #                 stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #               },
     #               aiff_settings: {
     #                 bit_depth: 1,
     #                 channels: 1,
     #                 sample_rate: 1
     #               },
-    #               codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #               codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #               eac3_atmos_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -11520,7 +14324,7 @@ module Aws::MediaConvert
     #                 attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                 dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                 dialnorm: 1,
     #                 dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -11679,7 +14483,15 @@ module Aws::MediaConvert
     #                 page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #               },
     #               ttml_destination_settings: {
-    #                 style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                 background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                 background_opacity: 1,
+    #                 font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                 font_opacity: 1,
+    #                 font_size: 1,
+    #                 font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                 font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                 style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #               },
     #               webvtt_destination_settings: {
     #                 accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -11696,12 +14508,15 @@ module Aws::MediaConvert
     #             audio_group_id: "__string",
     #             audio_rendition_sets: "__string",
     #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #             c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #             certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #             descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #             i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #             scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #             signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #             timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #             timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -11761,7 +14576,7 @@ module Aws::MediaConvert
     #               scte35_esam_pid: 1
     #             },
     #             scte35_pid: 1,
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #             segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #             segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #             segmentation_time: 1.0,
@@ -11787,13 +14602,14 @@ module Aws::MediaConvert
     #             pts_offset: 1,
     #             pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #             scte35_pid: 1,
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #             timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             timed_metadata_pid: 1,
     #             transport_stream_id: 1,
     #             video_pid: 1
     #           },
     #           mov_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #             clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -11814,11 +14630,14 @@ module Aws::MediaConvert
     #           mpd_settings: {
     #             accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #             c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #             certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #             klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #             manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #             scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #             signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #             timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #             timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -11827,6 +14646,7 @@ module Aws::MediaConvert
     #           mxf_settings: {
     #             afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #             profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #             uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #             xavc_profile_settings: {
     #               duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #               max_anc_data_size: 1
@@ -11849,7 +14669,7 @@ module Aws::MediaConvert
     #               gop_size: 1.0,
     #               max_bitrate: 1,
     #               number_b_frames_between_reference_frames: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               qvbr_settings: {
     #                 qvbr_quality_level: 1,
     #                 qvbr_quality_level_fine_tune: 1.0
@@ -11868,7 +14688,7 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #               slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -11898,6 +14718,7 @@ module Aws::MediaConvert
     #               dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #               end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #               entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #               explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #               flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -11919,7 +14740,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #               qvbr_settings: {
     #                 max_average_bitrate: 1,
@@ -11969,12 +14790,14 @@ module Aws::MediaConvert
     #               interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #               max_bitrate: 1,
     #               min_i_interval: 1,
+    #               mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #               number_b_frames_between_reference_frames: 1,
     #               number_reference_frames: 1,
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #               qvbr_settings: {
     #                 max_average_bitrate: 1,
@@ -11991,7 +14814,11 @@ module Aws::MediaConvert
     #               telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #               temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               tile_height: 1,
+    #               tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #               tile_width: 1,
     #               tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #             },
@@ -12019,7 +14846,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #               rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #               scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -12030,6 +14857,12 @@ module Aws::MediaConvert
     #               syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #               telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #               temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #             },
+    #             passthrough_settings: {
+    #               frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #               gops_per_segment: 1,
+    #               segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #               video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #             },
     #             prores_settings: {
     #               chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -12042,7 +14875,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #               slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -12106,7 +14939,7 @@ module Aws::MediaConvert
     #               framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #               slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               softness: 1,
@@ -12129,6 +14962,7 @@ module Aws::MediaConvert
     #                 slices: 1
     #               },
     #               xavc_hd_intra_cbg_profile_settings: {
+    #                 interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                 xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #               },
     #               xavc_hd_profile_settings: {
@@ -12161,7 +14995,7 @@ module Aws::MediaConvert
     #             y: 1
     #           },
     #           respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #           sharpness: 1,
     #           timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #           timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -12203,6 +15037,7 @@ module Aws::MediaConvert
     #               mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #             },
     #             dolby_vision: {
+    #               compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #               l6_metadata: {
     #                 max_cll: 1,
     #                 max_fall: 1
@@ -12210,6 +15045,11 @@ module Aws::MediaConvert
     #               l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #               mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #               profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #             },
+    #             duration_control: {
+    #               integer_duration_maximum_compression_denominator: 1,
+    #               integer_duration_maximum_compression_numerator: 1,
+    #               integer_duration_trim_threshold_milliseconds: 1
     #             },
     #             hdr10_plus: {
     #               mastering_monitor_nits: 1,
@@ -12296,6 +15136,7 @@ module Aws::MediaConvert
     #       created_at: Time.now,
     #       description: "__string",
     #       last_updated: Time.now,
+    #       maximum_concurrent_feeds: 1,
     #       name: "__string", # required
     #       pricing_plan: "ON_DEMAND" # One of: ["ON_DEMAND", "RESERVED"],
     #       progressing_jobs_count: 1,
@@ -12440,7 +15281,9 @@ module Aws::MediaConvert
     #                     channels_in: 1,
     #                     channels_out: 1
     #                   },
-    #                   selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #                   selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                   smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                   streams: [1],
     #                   tracks: [1]
     #                 }
     #               },
@@ -12476,11 +15319,12 @@ module Aws::MediaConvert
     #                       time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                       upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                     },
-    #                     source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                     source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                     teletext_source_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                     },
     #                     track_source_settings: {
+    #                       stream_number: 1,
     #                       track_number: 1
     #                     },
     #                     webvtt_hls_source_settings: {
@@ -12536,6 +15380,13 @@ module Aws::MediaConvert
     #                 }
     #               ],
     #               input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #               multi_view_settings: [
+    #                 {
+    #                   input: {
+    #                     file_input: "__stringPatternS3Https"
+    #                   }
+    #                 }
+    #               ],
     #               position: {
     #                 height: 1,
     #                 width: 1,
@@ -12558,12 +15409,48 @@ module Aws::MediaConvert
     #                   end_timecode: "__stringPattern010920405090509092",
     #                   initial_position: {
     #                     height: 1,
+    #                     opacity: 1,
     #                     unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                     width: 1,
     #                     x_position: 1,
     #                     y_position: 1
     #                   },
     #                   input: {
+    #                     audio_selectors: {
+    #                       "__string" => {
+    #                         audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                         custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                         default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                         external_audio_file_input: "__stringPatternS3Https",
+    #                         hls_rendition_group_settings: {
+    #                           rendition_group_id: "__string",
+    #                           rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                           rendition_name: "__string"
+    #                         },
+    #                         language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                         offset: 1,
+    #                         pids: [1],
+    #                         program_selection: 1,
+    #                         remix_settings: {
+    #                           audio_description_audio_channel: 1,
+    #                           audio_description_data_channel: 1,
+    #                           channel_mapping: {
+    #                             output_channels: [
+    #                               {
+    #                                 input_channels: [1],
+    #                                 input_channels_fine_tune: [1.0]
+    #                               }
+    #                             ]
+    #                           },
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         },
+    #                         selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                         smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         streams: [1],
+    #                         tracks: [1]
+    #                       }
+    #                     },
     #                     file_input: "__stringPatternS3Https",
     #                     input_clippings: [
     #                       {
@@ -12580,6 +15467,7 @@ module Aws::MediaConvert
     #                     {
     #                       end_position: {
     #                         height: 1,
+    #                         opacity: 1,
     #                         unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                         width: 1,
     #                         x_position: 1,
@@ -12627,7 +15515,7 @@ module Aws::MediaConvert
     #             credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #             file_offset: 1.0,
     #             kantar_license_id: 1,
-    #             kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #             kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #             log_destination: "__stringPatternS3",
     #             metadata3: "__stringMin1Max50",
     #             metadata4: "__stringMin1Max50",
@@ -12650,6 +15538,22 @@ module Aws::MediaConvert
     #             playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #             start_time: "__stringMin11Max11Pattern01D20305D205D"
     #           },
+    #           motion_image_inserters: [
+    #             {
+    #               framerate: {
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1
+    #               },
+    #               input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #               insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #               offset: {
+    #                 image_x: 1,
+    #                 image_y: 1
+    #               },
+    #               playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #               start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #             }
+    #           ],
     #           nielsen_configuration: {
     #             breakout_code: 1,
     #             distributor_id: "__string"
@@ -12717,7 +15621,7 @@ module Aws::MediaConvert
     #                   client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                   codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #                   dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
@@ -12729,10 +15633,11 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   encryption: {
+    #                     clear_lead_segments: 1,
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                     initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -12756,15 +15661,25 @@ module Aws::MediaConvert
     #                     type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                   },
     #                   fragment_length: 1,
-    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                   image_based_trick_play_settings: {
-    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                     thumbnail_height: 1,
     #                     thumbnail_interval: 1.0,
     #                     thumbnail_width: 1,
     #                     tile_height: 1,
     #                     tile_width: 1
     #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
     #                   manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                   manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                   min_buffer_time: 1,
@@ -12792,7 +15707,7 @@ module Aws::MediaConvert
     #                   audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #                   base_url: "__string",
     #                   dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
@@ -12804,11 +15719,11 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   encryption: {
-    #                     playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                     playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                       encryption_contract_configuration: {
@@ -12822,15 +15737,25 @@ module Aws::MediaConvert
     #                   },
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                   image_based_trick_play_settings: {
-    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                     thumbnail_height: 1,
     #                     thumbnail_interval: 1.0,
     #                     thumbnail_width: 1,
     #                     tile_height: 1,
     #                     tile_width: 1
     #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -12854,7 +15779,7 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   }
     #                 },
@@ -12891,7 +15816,7 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -12918,15 +15843,25 @@ module Aws::MediaConvert
     #                     },
     #                     type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                   },
-    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                   image_based_trick_play_settings: {
-    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                     thumbnail_height: 1,
     #                     thumbnail_interval: 1.0,
     #                     thumbnail_width: 1,
     #                     tile_height: 1,
     #                     tile_width: 1
     #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
     #                   manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                   manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                   min_final_segment_length: 1.0,
@@ -12964,7 +15899,7 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   encryption: {
@@ -12983,7 +15918,7 @@ module Aws::MediaConvert
     #                   fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #                   manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #                 },
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #               },
     #               outputs: [
@@ -13003,6 +15938,9 @@ module Aws::MediaConvert
     #                         target_lkfs: 1.0,
     #                         true_peak_limiter_threshold: 1.0
     #                       },
+    #                       audio_pitch_correction_settings: {
+    #                         slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                       },
     #                       audio_source_name: "__stringMax2048",
     #                       audio_type: 1,
     #                       audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -13011,8 +15949,9 @@ module Aws::MediaConvert
     #                           audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                           bitrate: 1,
     #                           codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                           coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                           coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                           loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                           passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                           rap_interval: 1,
     #                           rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                           raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -13024,7 +15963,7 @@ module Aws::MediaConvert
     #                         ac3_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                           dialnorm: 1,
     #                           dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                           dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -13033,12 +15972,27 @@ module Aws::MediaConvert
     #                           metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                           sample_rate: 1
     #                         },
+    #                         ac4_settings: {
+    #                           bitrate: 1,
+    #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                           coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                           dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           lo_ro_center_mix_level: 1.0,
+    #                           lo_ro_surround_mix_level: 1.0,
+    #                           lt_rt_center_mix_level: 1.0,
+    #                           lt_rt_surround_mix_level: 1.0,
+    #                           sample_rate: 1,
+    #                           stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                         },
     #                         aiff_settings: {
     #                           bit_depth: 1,
     #                           channels: 1,
     #                           sample_rate: 1
     #                         },
-    #                         codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                         codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                         eac3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -13062,7 +16016,7 @@ module Aws::MediaConvert
     #                           attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                           dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                           dialnorm: 1,
     #                           dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -13222,7 +16176,15 @@ module Aws::MediaConvert
     #                           page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                         },
     #                         ttml_destination_settings: {
-    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                           background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                           background_opacity: 1,
+    #                           font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                           font_opacity: 1,
+    #                           font_size: 1,
+    #                           font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                           font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                         },
     #                         webvtt_destination_settings: {
     #                           accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -13239,12 +16201,15 @@ module Aws::MediaConvert
     #                       audio_group_id: "__string",
     #                       audio_rendition_sets: "__string",
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                       c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                       descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                       timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -13304,7 +16269,7 @@ module Aws::MediaConvert
     #                         scte35_esam_pid: 1
     #                       },
     #                       scte35_pid: 1,
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                       segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                       segmentation_time: 1.0,
@@ -13330,13 +16295,14 @@ module Aws::MediaConvert
     #                       pts_offset: 1,
     #                       pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                       scte35_pid: 1,
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       timed_metadata_pid: 1,
     #                       transport_stream_id: 1,
     #                       video_pid: 1
     #                     },
     #                     mov_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                       clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -13357,11 +16323,14 @@ module Aws::MediaConvert
     #                     mpd_settings: {
     #                       accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                       c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                       certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                       klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                       manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                       timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -13370,6 +16339,7 @@ module Aws::MediaConvert
     #                     mxf_settings: {
     #                       afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                       profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                       uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                       xavc_profile_settings: {
     #                         duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                         max_anc_data_size: 1
@@ -13406,7 +16376,7 @@ module Aws::MediaConvert
     #                         gop_size: 1.0,
     #                         max_bitrate: 1,
     #                         number_b_frames_between_reference_frames: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         qvbr_settings: {
     #                           qvbr_quality_level: 1,
     #                           qvbr_quality_level_fine_tune: 1.0
@@ -13425,7 +16395,7 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -13455,6 +16425,7 @@ module Aws::MediaConvert
     #                         dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                         end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                         entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                         explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                         flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -13476,7 +16447,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                         qvbr_settings: {
     #                           max_average_bitrate: 1,
@@ -13526,12 +16497,14 @@ module Aws::MediaConvert
     #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                         max_bitrate: 1,
     #                         min_i_interval: 1,
+    #                         mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                         number_b_frames_between_reference_frames: 1,
     #                         number_reference_frames: 1,
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                         qvbr_settings: {
     #                           max_average_bitrate: 1,
@@ -13548,7 +16521,11 @@ module Aws::MediaConvert
     #                         telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         tile_height: 1,
+    #                         tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                         tile_width: 1,
     #                         tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                         unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                       },
@@ -13576,7 +16553,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                         rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -13587,6 +16564,12 @@ module Aws::MediaConvert
     #                         syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                         telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                       },
+    #                       passthrough_settings: {
+    #                         frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                         gops_per_segment: 1,
+    #                         segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                         video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                       },
     #                       prores_settings: {
     #                         chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -13599,7 +16582,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -13663,7 +16646,7 @@ module Aws::MediaConvert
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         softness: 1,
@@ -13686,6 +16669,7 @@ module Aws::MediaConvert
     #                           slices: 1
     #                         },
     #                         xavc_hd_intra_cbg_profile_settings: {
+    #                           interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                           xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                         },
     #                         xavc_hd_profile_settings: {
@@ -13718,7 +16702,7 @@ module Aws::MediaConvert
     #                       y: 1
     #                     },
     #                     respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                     scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                     scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                     sharpness: 1,
     #                     timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                     timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -13760,6 +16744,7 @@ module Aws::MediaConvert
     #                         mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                       },
     #                       dolby_vision: {
+    #                         compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                         l6_metadata: {
     #                           max_cll: 1,
     #                           max_fall: 1
@@ -13767,6 +16752,11 @@ module Aws::MediaConvert
     #                         l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                         mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                         profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                       },
+    #                       duration_control: {
+    #                         integer_duration_maximum_compression_denominator: 1,
+    #                         integer_duration_maximum_compression_numerator: 1,
+    #                         integer_duration_trim_threshold_milliseconds: 1
     #                       },
     #                       hdr10_plus: {
     #                         mastering_monitor_nits: 1,
@@ -13891,6 +16881,15 @@ module Aws::MediaConvert
     #         client_request_token: "__string",
     #         created_at: Time.now,
     #         current_phase: "PROBING" # One of: ["PROBING", "TRANSCODING", "UPLOADING"],
+    #         elemental_inference_configuration: {
+    #           features: ["SMART_CROP" # One of: ["SMART_CROP"]],
+    #           feeds: [
+    #             {
+    #               arn: "__string",
+    #               feed_management_state: "CREATED" # One of: ["CREATED", "ASSOCIATED", "PENDING_DELETION", "DELETED"]
+    #             }
+    #           ]
+    #         },
     #         error_code: 1,
     #         error_message: "__string",
     #         hop_destinations: [
@@ -14003,7 +17002,9 @@ module Aws::MediaConvert
     #                     channels_in: 1,
     #                     channels_out: 1
     #                   },
-    #                   selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #                   selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                   smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                   streams: [1],
     #                   tracks: [1]
     #                 }
     #               },
@@ -14039,11 +17040,12 @@ module Aws::MediaConvert
     #                       time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                       upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                     },
-    #                     source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                     source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                     teletext_source_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                     },
     #                     track_source_settings: {
+    #                       stream_number: 1,
     #                       track_number: 1
     #                     },
     #                     webvtt_hls_source_settings: {
@@ -14106,6 +17108,13 @@ module Aws::MediaConvert
     #                 }
     #               ],
     #               input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #               multi_view_settings: [
+    #                 {
+    #                   input: {
+    #                     file_input: "__stringPatternS3Https"
+    #                   }
+    #                 }
+    #               ],
     #               position: {
     #                 height: 1,
     #                 width: 1,
@@ -14128,7 +17137,10 @@ module Aws::MediaConvert
     #                 duration: 1,
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
-    #                 sample_rate: 1
+    #                 height: 1,
+    #                 image_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
+    #                 sample_rate: 1,
+    #                 width: 1
     #               },
     #               video_overlays: [
     #                 {
@@ -14142,12 +17154,48 @@ module Aws::MediaConvert
     #                   end_timecode: "__stringPattern010920405090509092",
     #                   initial_position: {
     #                     height: 1,
+    #                     opacity: 1,
     #                     unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                     width: 1,
     #                     x_position: 1,
     #                     y_position: 1
     #                   },
     #                   input: {
+    #                     audio_selectors: {
+    #                       "__string" => {
+    #                         audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                         custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                         default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                         external_audio_file_input: "__stringPatternS3Https",
+    #                         hls_rendition_group_settings: {
+    #                           rendition_group_id: "__string",
+    #                           rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                           rendition_name: "__string"
+    #                         },
+    #                         language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                         offset: 1,
+    #                         pids: [1],
+    #                         program_selection: 1,
+    #                         remix_settings: {
+    #                           audio_description_audio_channel: 1,
+    #                           audio_description_data_channel: 1,
+    #                           channel_mapping: {
+    #                             output_channels: [
+    #                               {
+    #                                 input_channels: [1],
+    #                                 input_channels_fine_tune: [1.0]
+    #                               }
+    #                             ]
+    #                           },
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         },
+    #                         selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                         smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         streams: [1],
+    #                         tracks: [1]
+    #                       }
+    #                     },
     #                     file_input: "__stringPatternS3Https",
     #                     input_clippings: [
     #                       {
@@ -14164,6 +17212,7 @@ module Aws::MediaConvert
     #                     {
     #                       end_position: {
     #                         height: 1,
+    #                         opacity: 1,
     #                         unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                         width: 1,
     #                         x_position: 1,
@@ -14211,7 +17260,7 @@ module Aws::MediaConvert
     #             credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #             file_offset: 1.0,
     #             kantar_license_id: 1,
-    #             kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #             kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #             log_destination: "__stringPatternS3",
     #             metadata3: "__stringMin1Max50",
     #             metadata4: "__stringMin1Max50",
@@ -14234,6 +17283,22 @@ module Aws::MediaConvert
     #             playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #             start_time: "__stringMin11Max11Pattern01D20305D205D"
     #           },
+    #           motion_image_inserters: [
+    #             {
+    #               framerate: {
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1
+    #               },
+    #               input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #               insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #               offset: {
+    #                 image_x: 1,
+    #                 image_y: 1
+    #               },
+    #               playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #               start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #             }
+    #           ],
     #           nielsen_configuration: {
     #             breakout_code: 1,
     #             distributor_id: "__string"
@@ -14301,7 +17366,7 @@ module Aws::MediaConvert
     #                   client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                   codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #                   dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
@@ -14313,10 +17378,11 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   encryption: {
+    #                     clear_lead_segments: 1,
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                     initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -14340,15 +17406,25 @@ module Aws::MediaConvert
     #                     type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                   },
     #                   fragment_length: 1,
-    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                   image_based_trick_play_settings: {
-    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                     thumbnail_height: 1,
     #                     thumbnail_interval: 1.0,
     #                     thumbnail_width: 1,
     #                     tile_height: 1,
     #                     tile_width: 1
     #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
     #                   manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                   manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                   min_buffer_time: 1,
@@ -14376,7 +17452,7 @@ module Aws::MediaConvert
     #                   audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #                   base_url: "__string",
     #                   dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
@@ -14388,11 +17464,11 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   encryption: {
-    #                     playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                     playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                       encryption_contract_configuration: {
@@ -14406,15 +17482,25 @@ module Aws::MediaConvert
     #                   },
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                   image_based_trick_play_settings: {
-    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                     thumbnail_height: 1,
     #                     thumbnail_interval: 1.0,
     #                     thumbnail_width: 1,
     #                     tile_height: 1,
     #                     tile_width: 1
     #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -14438,7 +17524,7 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   }
     #                 },
@@ -14475,7 +17561,7 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -14502,15 +17588,25 @@ module Aws::MediaConvert
     #                     },
     #                     type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                   },
-    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                   image_based_trick_play_settings: {
-    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                     thumbnail_height: 1,
     #                     thumbnail_interval: 1.0,
     #                     thumbnail_width: 1,
     #                     tile_height: 1,
     #                     tile_width: 1
     #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
     #                   manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                   manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                   min_final_segment_length: 1.0,
@@ -14548,7 +17644,7 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   encryption: {
@@ -14567,7 +17663,7 @@ module Aws::MediaConvert
     #                   fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #                   manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #                 },
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #               },
     #               outputs: [
@@ -14587,6 +17683,9 @@ module Aws::MediaConvert
     #                         target_lkfs: 1.0,
     #                         true_peak_limiter_threshold: 1.0
     #                       },
+    #                       audio_pitch_correction_settings: {
+    #                         slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                       },
     #                       audio_source_name: "__stringMax2048",
     #                       audio_type: 1,
     #                       audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -14595,8 +17694,9 @@ module Aws::MediaConvert
     #                           audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                           bitrate: 1,
     #                           codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                           coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                           coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                           loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                           passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                           rap_interval: 1,
     #                           rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                           raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -14608,7 +17708,7 @@ module Aws::MediaConvert
     #                         ac3_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                           dialnorm: 1,
     #                           dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                           dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -14617,12 +17717,27 @@ module Aws::MediaConvert
     #                           metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                           sample_rate: 1
     #                         },
+    #                         ac4_settings: {
+    #                           bitrate: 1,
+    #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                           coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                           dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           lo_ro_center_mix_level: 1.0,
+    #                           lo_ro_surround_mix_level: 1.0,
+    #                           lt_rt_center_mix_level: 1.0,
+    #                           lt_rt_surround_mix_level: 1.0,
+    #                           sample_rate: 1,
+    #                           stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                         },
     #                         aiff_settings: {
     #                           bit_depth: 1,
     #                           channels: 1,
     #                           sample_rate: 1
     #                         },
-    #                         codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                         codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                         eac3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -14646,7 +17761,7 @@ module Aws::MediaConvert
     #                           attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                           dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                           dialnorm: 1,
     #                           dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -14806,7 +17921,15 @@ module Aws::MediaConvert
     #                           page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                         },
     #                         ttml_destination_settings: {
-    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                           background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                           background_opacity: 1,
+    #                           font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                           font_opacity: 1,
+    #                           font_size: 1,
+    #                           font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                           font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                         },
     #                         webvtt_destination_settings: {
     #                           accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -14823,12 +17946,15 @@ module Aws::MediaConvert
     #                       audio_group_id: "__string",
     #                       audio_rendition_sets: "__string",
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                       c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                       descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                       timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -14888,7 +18014,7 @@ module Aws::MediaConvert
     #                         scte35_esam_pid: 1
     #                       },
     #                       scte35_pid: 1,
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                       segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                       segmentation_time: 1.0,
@@ -14914,13 +18040,14 @@ module Aws::MediaConvert
     #                       pts_offset: 1,
     #                       pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                       scte35_pid: 1,
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       timed_metadata_pid: 1,
     #                       transport_stream_id: 1,
     #                       video_pid: 1
     #                     },
     #                     mov_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                       clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -14941,11 +18068,14 @@ module Aws::MediaConvert
     #                     mpd_settings: {
     #                       accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                       c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                       certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                       klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                       manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                       timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -14954,6 +18084,7 @@ module Aws::MediaConvert
     #                     mxf_settings: {
     #                       afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                       profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                       uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                       xavc_profile_settings: {
     #                         duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                         max_anc_data_size: 1
@@ -14990,7 +18121,7 @@ module Aws::MediaConvert
     #                         gop_size: 1.0,
     #                         max_bitrate: 1,
     #                         number_b_frames_between_reference_frames: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         qvbr_settings: {
     #                           qvbr_quality_level: 1,
     #                           qvbr_quality_level_fine_tune: 1.0
@@ -15009,7 +18140,7 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -15039,6 +18170,7 @@ module Aws::MediaConvert
     #                         dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                         end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                         entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                         explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                         flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -15060,7 +18192,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                         qvbr_settings: {
     #                           max_average_bitrate: 1,
@@ -15110,12 +18242,14 @@ module Aws::MediaConvert
     #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                         max_bitrate: 1,
     #                         min_i_interval: 1,
+    #                         mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                         number_b_frames_between_reference_frames: 1,
     #                         number_reference_frames: 1,
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                         qvbr_settings: {
     #                           max_average_bitrate: 1,
@@ -15132,7 +18266,11 @@ module Aws::MediaConvert
     #                         telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         tile_height: 1,
+    #                         tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                         tile_width: 1,
     #                         tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                         unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                       },
@@ -15160,7 +18298,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                         rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -15171,6 +18309,12 @@ module Aws::MediaConvert
     #                         syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                         telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                       },
+    #                       passthrough_settings: {
+    #                         frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                         gops_per_segment: 1,
+    #                         segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                         video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                       },
     #                       prores_settings: {
     #                         chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -15183,7 +18327,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -15247,7 +18391,7 @@ module Aws::MediaConvert
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         softness: 1,
@@ -15270,6 +18414,7 @@ module Aws::MediaConvert
     #                           slices: 1
     #                         },
     #                         xavc_hd_intra_cbg_profile_settings: {
+    #                           interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                           xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                         },
     #                         xavc_hd_profile_settings: {
@@ -15302,7 +18447,7 @@ module Aws::MediaConvert
     #                       y: 1
     #                     },
     #                     respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                     scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                     scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                     sharpness: 1,
     #                     timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                     timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -15344,6 +18489,7 @@ module Aws::MediaConvert
     #                         mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                       },
     #                       dolby_vision: {
+    #                         compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                         l6_metadata: {
     #                           max_cll: 1,
     #                           max_fall: 1
@@ -15351,6 +18497,11 @@ module Aws::MediaConvert
     #                         l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                         mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                         profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                       },
+    #                       duration_control: {
+    #                         integer_duration_maximum_compression_denominator: 1,
+    #                         integer_duration_maximum_compression_numerator: 1,
+    #                         integer_duration_trim_threshold_milliseconds: 1
     #                       },
     #                       hdr10_plus: {
     #                         mastering_monitor_nits: 1,
@@ -15505,6 +18656,9 @@ module Aws::MediaConvert
     #                 target_lkfs: 1.0,
     #                 true_peak_limiter_threshold: 1.0
     #               },
+    #               audio_pitch_correction_settings: {
+    #                 slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               },
     #               audio_source_name: "__stringMax2048",
     #               audio_type: 1,
     #               audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -15513,8 +18667,9 @@ module Aws::MediaConvert
     #                   audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                   bitrate: 1,
     #                   codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                   coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                   coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                   loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                   passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                   rap_interval: 1,
     #                   rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                   raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -15526,7 +18681,7 @@ module Aws::MediaConvert
     #                 ac3_settings: {
     #                   bitrate: 1,
     #                   bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                   coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                   coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                   dialnorm: 1,
     #                   dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                   dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -15535,12 +18690,27 @@ module Aws::MediaConvert
     #                   metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                   sample_rate: 1
     #                 },
+    #                 ac4_settings: {
+    #                   bitrate: 1,
+    #                   bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                   coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                   dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                   dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                   dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                   dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                   lo_ro_center_mix_level: 1.0,
+    #                   lo_ro_surround_mix_level: 1.0,
+    #                   lt_rt_center_mix_level: 1.0,
+    #                   lt_rt_surround_mix_level: 1.0,
+    #                   sample_rate: 1,
+    #                   stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                 },
     #                 aiff_settings: {
     #                   bit_depth: 1,
     #                   channels: 1,
     #                   sample_rate: 1
     #                 },
-    #                 codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                 codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                 eac3_atmos_settings: {
     #                   bitrate: 1,
     #                   bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -15564,7 +18734,7 @@ module Aws::MediaConvert
     #                   attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                   bitrate: 1,
     #                   bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                   coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                   coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                   dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                   dialnorm: 1,
     #                   dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -15723,7 +18893,15 @@ module Aws::MediaConvert
     #                   page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                 },
     #                 ttml_destination_settings: {
-    #                   style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                   background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                   background_opacity: 1,
+    #                   font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                   font_opacity: 1,
+    #                   font_size: 1,
+    #                   font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                   font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                   style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                   text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                 },
     #                 webvtt_destination_settings: {
     #                   accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -15740,12 +18918,15 @@ module Aws::MediaConvert
     #               audio_group_id: "__string",
     #               audio_rendition_sets: "__string",
     #               audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #               c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #               certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #               descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #               i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #               klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #               manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #               scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #               scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #               scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #               signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #               timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #               timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #               timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -15805,7 +18986,7 @@ module Aws::MediaConvert
     #                 scte35_esam_pid: 1
     #               },
     #               scte35_pid: 1,
-    #               scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #               scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #               segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #               segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #               segmentation_time: 1.0,
@@ -15831,13 +19012,14 @@ module Aws::MediaConvert
     #               pts_offset: 1,
     #               pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #               scte35_pid: 1,
-    #               scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #               scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #               timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #               timed_metadata_pid: 1,
     #               transport_stream_id: 1,
     #               video_pid: 1
     #             },
     #             mov_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #               clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #               cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #               mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -15858,11 +19040,14 @@ module Aws::MediaConvert
     #             mpd_settings: {
     #               accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #               audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #               c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #               caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #               certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #               klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #               manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #               scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #               scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #               scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #               signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #               timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #               timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #               timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -15871,6 +19056,7 @@ module Aws::MediaConvert
     #             mxf_settings: {
     #               afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #               profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #               uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #               xavc_profile_settings: {
     #                 duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                 max_anc_data_size: 1
@@ -15893,7 +19079,7 @@ module Aws::MediaConvert
     #                 gop_size: 1.0,
     #                 max_bitrate: 1,
     #                 number_b_frames_between_reference_frames: 1,
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 qvbr_settings: {
     #                   qvbr_quality_level: 1,
     #                   qvbr_quality_level_fine_tune: 1.0
@@ -15912,7 +19098,7 @@ module Aws::MediaConvert
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                 slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -15942,6 +19128,7 @@ module Aws::MediaConvert
     #                 dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                 end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                 entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                 explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                 flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -15963,7 +19150,7 @@ module Aws::MediaConvert
     #                 par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                 par_denominator: 1,
     #                 par_numerator: 1,
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                 qvbr_settings: {
     #                   max_average_bitrate: 1,
@@ -16013,12 +19200,14 @@ module Aws::MediaConvert
     #                 interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                 max_bitrate: 1,
     #                 min_i_interval: 1,
+    #                 mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                 number_b_frames_between_reference_frames: 1,
     #                 number_reference_frames: 1,
     #                 par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                 par_denominator: 1,
     #                 par_numerator: 1,
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                 qvbr_settings: {
     #                   max_average_bitrate: 1,
@@ -16035,7 +19224,11 @@ module Aws::MediaConvert
     #                 telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                 temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 tile_height: 1,
+    #                 tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                 tile_width: 1,
     #                 tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                 tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                 unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #               },
@@ -16063,7 +19256,7 @@ module Aws::MediaConvert
     #                 par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                 par_denominator: 1,
     #                 par_numerator: 1,
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                 rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                 scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -16074,6 +19267,12 @@ module Aws::MediaConvert
     #                 syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                 telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                 temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #               },
+    #               passthrough_settings: {
+    #                 frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                 gops_per_segment: 1,
+    #                 segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                 video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #               },
     #               prores_settings: {
     #                 chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -16086,7 +19285,7 @@ module Aws::MediaConvert
     #                 par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                 par_denominator: 1,
     #                 par_numerator: 1,
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                 slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -16150,7 +19349,7 @@ module Aws::MediaConvert
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                 slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 softness: 1,
@@ -16173,6 +19372,7 @@ module Aws::MediaConvert
     #                   slices: 1
     #                 },
     #                 xavc_hd_intra_cbg_profile_settings: {
+    #                   interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                   xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                 },
     #                 xavc_hd_profile_settings: {
@@ -16205,7 +19405,7 @@ module Aws::MediaConvert
     #               y: 1
     #             },
     #             respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #             scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #             scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #             sharpness: 1,
     #             timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #             timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -16247,6 +19447,7 @@ module Aws::MediaConvert
     #                 mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #               },
     #               dolby_vision: {
+    #                 compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                 l6_metadata: {
     #                   max_cll: 1,
     #                   max_fall: 1
@@ -16254,6 +19455,11 @@ module Aws::MediaConvert
     #                 l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                 mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                 profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #               },
+    #               duration_control: {
+    #                 integer_duration_maximum_compression_denominator: 1,
+    #                 integer_duration_maximum_compression_numerator: 1,
+    #                 integer_duration_trim_threshold_milliseconds: 1
     #               },
     #               hdr10_plus: {
     #                 mastering_monitor_nits: 1,
@@ -16352,6 +19558,7 @@ module Aws::MediaConvert
     #         created_at: Time.now,
     #         description: "__string",
     #         last_updated: Time.now,
+    #         maximum_concurrent_feeds: 1,
     #         name: "__string", # required
     #         pricing_plan: "ON_DEMAND" # One of: ["ON_DEMAND", "RESERVED"],
     #         progressing_jobs_count: 1,
@@ -16441,7 +19648,7 @@ module Aws::MediaConvert
       request.send_request(options)
     end
 
-    # Use Probe to obtain detailed information about your input media files. Probe returns a JSON that includes container, codec, frame rate, resolution, track count, audio layout, captions, and more. You can use this information to learn more about your media files, or to help make decisions while automating your transcoding workflow.
+    # Use Probe to obtain detailed information about your input media files. Probe returns a JSON that includes container, codec, frame rate, resolution, track count, audio layout, captions, and more. You can use this information to learn more about your media files, or to help make decisions while automating your transcoding workflow. Probe supports the following input container formats: MP4, QuickTime (MOV), 3GP, 3G2, Matroska (MKV), WebM, MXF, MPEG-TS, MPEG-PS, AVI, WAV, MP3, FLAC, Ogg, and ASF (Windows Media / WMA). The fields that Probe returns vary by container and codec. A field isn't returned when the source doesn't contain it, or when it isn't available for that container and codec.
     # @param [Hash, Types::ProbeRequest] params
     # @option params [Array<Types::ProbeInputFile>] :input_files
     #   Specify a media file to probe.
@@ -16461,22 +19668,26 @@ module Aws::MediaConvert
     #     probe_results: [
     #       {
     #         container: {
+    #           bit_rate: 1,
     #           duration: 1.0,
-    #           format: "mp4" # One of: ["mp4", "quicktime", "matroska", "webm", "mxf"],
+    #           format: "mp4" # One of: ["mp4", "quicktime", "matroska", "webm", "mxf", "wave", "avi", "mpegts", "mpegps", "mp3", "flac", "asf", "ogg", "three_gp", "three_g2", "aac", "ac3", "eac3"],
+    #           start_timecode: "__string",
     #           tracks: [
     #             {
     #               audio_properties: {
     #                 bit_depth: 1,
     #                 bit_rate: 1,
+    #                 channel_layout: "__string",
     #                 channels: 1,
     #                 frame_rate: {
     #                   denominator: 1,
     #                   numerator: 1
     #                 },
     #                 language_code: "__string",
+    #                 object_count: 1,
     #                 sample_rate: 1
     #               },
-    #               codec: "UNKNOWN" # One of: ["UNKNOWN", "AAC", "AC3", "EAC3", "FLAC", "MP3", "OPUS", "PCM", "VORBIS", "AV1", "AVC", "HEVC", "JPEG2000", "MJPEG", "MP4V", "MPEG2", "PRORES", "THEORA", "VP8", "VP9", "C608", "C708", "WEBVTT"],
+    #               codec: "UNKNOWN" # One of: ["UNKNOWN", "AAC", "AC3", "AMR", "EAC3", "FLAC", "MP2", "MP3", "OPUS", "PCM", "VORBIS", "WMA", "WMA2", "WMAPRO", "AV1", "AVC", "DV", "H263", "HEVC", "JPEG2000", "MJPEG", "MPEG1", "MP4V", "MPEG2", "PRORES", "QTRLE", "THEORA", "UNCOMPRESSED", "VC1", "VC3", "VFW", "VP8", "VP9", "C608", "C708", "WEBVTT"],
     #               data_properties: {
     #                 language_code: "__string"
     #               },
@@ -16486,13 +19697,78 @@ module Aws::MediaConvert
     #               video_properties: {
     #                 bit_depth: 1,
     #                 bit_rate: 1,
+    #                 codec_metadata: {
+    #                   bit_depth: 1,
+    #                   chroma_subsampling: "__string",
+    #                   coded_frame_rate: {
+    #                     denominator: 1,
+    #                     numerator: 1
+    #                   },
+    #                   color_primaries: "ITU_709" # One of: ["ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "GENERIC_FILM", "ITU_2020", "SMPTE_428_1", "SMPTE_431_2", "SMPTE_EG_432_1", "IPT", "SMPTE_2067XYZ", "EBU_3213_E", "LAST"],
+    #                   content_light_level: {
+    #                     max_content_light_level: 1,
+    #                     max_frame_average_light_level: 1
+    #                   },
+    #                   display_aspect_ratio: {
+    #                     denominator: 1,
+    #                     numerator: 1
+    #                   },
+    #                   dolby_vision: {
+    #                     base_layer: "PRESENT" # One of: ["PRESENT", "ABSENT"],
+    #                     enhancement_layer: "PRESENT" # One of: ["PRESENT", "ABSENT"],
+    #                     level: 1,
+    #                     profile: 1,
+    #                     rpu: "PRESENT" # One of: ["PRESENT", "ABSENT"]
+    #                   },
+    #                   field_order: "__string",
+    #                   hdr10_plus_presence: "PRESENT" # One of: ["PRESENT"],
+    #                   height: 1,
+    #                   level: "__string",
+    #                   matrix_coefficients: "RGB" # One of: ["RGB", "ITU_709", "UNSPECIFIED", "RESERVED", "FCC", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "YCgCo", "ITU_2020_NCL", "ITU_2020_CL", "SMPTE_2085", "CD_NCL", "CD_CL", "ITU_2100ICtCp", "IPT", "EBU3213", "LAST"],
+    #                   profile: "__string",
+    #                   rotation: 1,
+    #                   sample_aspect_ratio: {
+    #                     denominator: 1,
+    #                     numerator: 1
+    #                   },
+    #                   scan_type: "__string",
+    #                   transfer_characteristics: "ITU_709" # One of: ["ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "LINEAR", "LOG10_2", "LOC10_2_5", "IEC_61966_2_4", "ITU_1361", "IEC_61966_2_1", "ITU_2020_10bit", "ITU_2020_12bit", "SMPTE_2084", "SMPTE_428_1", "ARIB_B67", "LAST"],
+    #                   width: 1
+    #                 },
     #                 color_primaries: "ITU_709" # One of: ["ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "GENERIC_FILM", "ITU_2020", "SMPTE_428_1", "SMPTE_431_2", "SMPTE_EG_432_1", "IPT", "SMPTE_2067XYZ", "EBU_3213_E", "LAST"],
+    #                 display_aspect_ratio: {
+    #                   denominator: 1,
+    #                   numerator: 1
+    #                 },
     #                 frame_rate: {
     #                   denominator: 1,
     #                   numerator: 1
     #                 },
+    #                 hdr_metadata: {
+    #                   content_light_level: {
+    #                     max_content_light_level: 1,
+    #                     max_frame_average_light_level: 1
+    #                   },
+    #                   mastering_display_color_volume: {
+    #                     blue_primary_x: 1,
+    #                     blue_primary_y: 1,
+    #                     green_primary_x: 1,
+    #                     green_primary_y: 1,
+    #                     max_luminance: 1,
+    #                     min_luminance: 1,
+    #                     red_primary_x: 1,
+    #                     red_primary_y: 1,
+    #                     white_point_x: 1,
+    #                     white_point_y: 1
+    #                   }
+    #                 },
     #                 height: 1,
     #                 matrix_coefficients: "RGB" # One of: ["RGB", "ITU_709", "UNSPECIFIED", "RESERVED", "FCC", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "YCgCo", "ITU_2020_NCL", "ITU_2020_CL", "SMPTE_2085", "CD_NCL", "CD_CL", "ITU_2100ICtCp", "IPT", "EBU3213", "LAST"],
+    #                 rotation: 1,
+    #                 sample_aspect_ratio: {
+    #                   denominator: 1,
+    #                   numerator: 1
+    #                 },
     #                 transfer_characteristics: "ITU_709" # One of: ["ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "LINEAR", "LOG10_2", "LOC10_2_5", "IEC_61966_2_4", "ITU_1361", "IEC_61966_2_1", "ITU_2020_10bit", "ITU_2020_12bit", "SMPTE_2084", "SMPTE_428_1", "ARIB_B67", "LAST"],
     #                 width: 1
     #               }
@@ -16589,6 +19865,15 @@ module Aws::MediaConvert
     #         client_request_token: "__string",
     #         created_at: Time.now,
     #         current_phase: "PROBING" # One of: ["PROBING", "TRANSCODING", "UPLOADING"],
+    #         elemental_inference_configuration: {
+    #           features: ["SMART_CROP" # One of: ["SMART_CROP"]],
+    #           feeds: [
+    #             {
+    #               arn: "__string",
+    #               feed_management_state: "CREATED" # One of: ["CREATED", "ASSOCIATED", "PENDING_DELETION", "DELETED"]
+    #             }
+    #           ]
+    #         },
     #         error_code: 1,
     #         error_message: "__string",
     #         hop_destinations: [
@@ -16701,7 +19986,9 @@ module Aws::MediaConvert
     #                     channels_in: 1,
     #                     channels_out: 1
     #                   },
-    #                   selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #                   selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                   smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                   streams: [1],
     #                   tracks: [1]
     #                 }
     #               },
@@ -16737,11 +20024,12 @@ module Aws::MediaConvert
     #                       time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                       upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                     },
-    #                     source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                     source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                     teletext_source_settings: {
     #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                     },
     #                     track_source_settings: {
+    #                       stream_number: 1,
     #                       track_number: 1
     #                     },
     #                     webvtt_hls_source_settings: {
@@ -16804,6 +20092,13 @@ module Aws::MediaConvert
     #                 }
     #               ],
     #               input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #               multi_view_settings: [
+    #                 {
+    #                   input: {
+    #                     file_input: "__stringPatternS3Https"
+    #                   }
+    #                 }
+    #               ],
     #               position: {
     #                 height: 1,
     #                 width: 1,
@@ -16826,7 +20121,10 @@ module Aws::MediaConvert
     #                 duration: 1,
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
-    #                 sample_rate: 1
+    #                 height: 1,
+    #                 image_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
+    #                 sample_rate: 1,
+    #                 width: 1
     #               },
     #               video_overlays: [
     #                 {
@@ -16840,12 +20138,48 @@ module Aws::MediaConvert
     #                   end_timecode: "__stringPattern010920405090509092",
     #                   initial_position: {
     #                     height: 1,
+    #                     opacity: 1,
     #                     unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                     width: 1,
     #                     x_position: 1,
     #                     y_position: 1
     #                   },
     #                   input: {
+    #                     audio_selectors: {
+    #                       "__string" => {
+    #                         audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                         custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                         default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                         external_audio_file_input: "__stringPatternS3Https",
+    #                         hls_rendition_group_settings: {
+    #                           rendition_group_id: "__string",
+    #                           rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                           rendition_name: "__string"
+    #                         },
+    #                         language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                         offset: 1,
+    #                         pids: [1],
+    #                         program_selection: 1,
+    #                         remix_settings: {
+    #                           audio_description_audio_channel: 1,
+    #                           audio_description_data_channel: 1,
+    #                           channel_mapping: {
+    #                             output_channels: [
+    #                               {
+    #                                 input_channels: [1],
+    #                                 input_channels_fine_tune: [1.0]
+    #                               }
+    #                             ]
+    #                           },
+    #                           channels_in: 1,
+    #                           channels_out: 1
+    #                         },
+    #                         selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                         smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         streams: [1],
+    #                         tracks: [1]
+    #                       }
+    #                     },
     #                     file_input: "__stringPatternS3Https",
     #                     input_clippings: [
     #                       {
@@ -16862,6 +20196,7 @@ module Aws::MediaConvert
     #                     {
     #                       end_position: {
     #                         height: 1,
+    #                         opacity: 1,
     #                         unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                         width: 1,
     #                         x_position: 1,
@@ -16909,7 +20244,7 @@ module Aws::MediaConvert
     #             credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #             file_offset: 1.0,
     #             kantar_license_id: 1,
-    #             kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #             kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #             log_destination: "__stringPatternS3",
     #             metadata3: "__stringMin1Max50",
     #             metadata4: "__stringMin1Max50",
@@ -16932,6 +20267,22 @@ module Aws::MediaConvert
     #             playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #             start_time: "__stringMin11Max11Pattern01D20305D205D"
     #           },
+    #           motion_image_inserters: [
+    #             {
+    #               framerate: {
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1
+    #               },
+    #               input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #               insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #               offset: {
+    #                 image_x: 1,
+    #                 image_y: 1
+    #               },
+    #               playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #               start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #             }
+    #           ],
     #           nielsen_configuration: {
     #             breakout_code: 1,
     #             distributor_id: "__string"
@@ -16999,7 +20350,7 @@ module Aws::MediaConvert
     #                   client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                   codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #                   dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
@@ -17011,10 +20362,11 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   encryption: {
+    #                     clear_lead_segments: 1,
     #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                     initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -17038,15 +20390,25 @@ module Aws::MediaConvert
     #                     type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                   },
     #                   fragment_length: 1,
-    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                   image_based_trick_play_settings: {
-    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                     thumbnail_height: 1,
     #                     thumbnail_interval: 1.0,
     #                     thumbnail_width: 1,
     #                     tile_height: 1,
     #                     tile_width: 1
     #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
     #                   manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                   manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                   min_buffer_time: 1,
@@ -17074,7 +20436,7 @@ module Aws::MediaConvert
     #                   audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #                   base_url: "__string",
     #                   dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                   dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                   destination: "__stringPatternS3",
     #                   destination_settings: {
     #                     s3_settings: {
@@ -17086,11 +20448,11 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   encryption: {
-    #                     playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                     playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                     speke_key_provider: {
     #                       certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                       encryption_contract_configuration: {
@@ -17104,15 +20466,25 @@ module Aws::MediaConvert
     #                   },
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                   image_based_trick_play_settings: {
-    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                     thumbnail_height: 1,
     #                     thumbnail_interval: 1.0,
     #                     thumbnail_width: 1,
     #                     tile_height: 1,
     #                     tile_width: 1
     #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -17136,7 +20508,7 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   }
     #                 },
@@ -17173,7 +20545,7 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -17200,15 +20572,25 @@ module Aws::MediaConvert
     #                     },
     #                     type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                   },
-    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                   image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                   image_based_trick_play_settings: {
-    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                     thumbnail_height: 1,
     #                     thumbnail_interval: 1.0,
     #                     thumbnail_width: 1,
     #                     tile_height: 1,
     #                     tile_width: 1
     #                   },
+    #                   image_based_trick_play_variants: [
+    #                     {
+    #                       interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                       thumbnail_height: 1,
+    #                       thumbnail_interval: 1.0,
+    #                       thumbnail_width: 1,
+    #                       tile_height: 1,
+    #                       tile_width: 1
+    #                     }
+    #                   ],
     #                   manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                   manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                   min_final_segment_length: 1.0,
@@ -17246,7 +20628,7 @@ module Aws::MediaConvert
     #                         kms_encryption_context: "__stringPatternAZaZ0902",
     #                         kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                       },
-    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                       storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                     }
     #                   },
     #                   encryption: {
@@ -17265,7 +20647,7 @@ module Aws::MediaConvert
     #                   fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #                   manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #                 },
-    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                 per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                 type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #               },
     #               outputs: [
@@ -17285,6 +20667,9 @@ module Aws::MediaConvert
     #                         target_lkfs: 1.0,
     #                         true_peak_limiter_threshold: 1.0
     #                       },
+    #                       audio_pitch_correction_settings: {
+    #                         slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                       },
     #                       audio_source_name: "__stringMax2048",
     #                       audio_type: 1,
     #                       audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -17293,8 +20678,9 @@ module Aws::MediaConvert
     #                           audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                           bitrate: 1,
     #                           codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                           coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                           coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                           loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                           passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                           rap_interval: 1,
     #                           rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                           raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -17306,7 +20692,7 @@ module Aws::MediaConvert
     #                         ac3_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                           dialnorm: 1,
     #                           dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                           dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -17315,12 +20701,27 @@ module Aws::MediaConvert
     #                           metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                           sample_rate: 1
     #                         },
+    #                         ac4_settings: {
+    #                           bitrate: 1,
+    #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                           coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                           dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                           lo_ro_center_mix_level: 1.0,
+    #                           lo_ro_surround_mix_level: 1.0,
+    #                           lt_rt_center_mix_level: 1.0,
+    #                           lt_rt_surround_mix_level: 1.0,
+    #                           sample_rate: 1,
+    #                           stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                         },
     #                         aiff_settings: {
     #                           bit_depth: 1,
     #                           channels: 1,
     #                           sample_rate: 1
     #                         },
-    #                         codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                         codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                         eac3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -17344,7 +20745,7 @@ module Aws::MediaConvert
     #                           attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                           coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                           dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                           dialnorm: 1,
     #                           dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -17504,7 +20905,15 @@ module Aws::MediaConvert
     #                           page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                         },
     #                         ttml_destination_settings: {
-    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                           background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                           background_opacity: 1,
+    #                           font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                           font_opacity: 1,
+    #                           font_size: 1,
+    #                           font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                           font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                           style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                           text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                         },
     #                         webvtt_destination_settings: {
     #                           accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -17521,12 +20930,15 @@ module Aws::MediaConvert
     #                       audio_group_id: "__string",
     #                       audio_rendition_sets: "__string",
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                       c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                       certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                       descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                       i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                       timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -17586,7 +20998,7 @@ module Aws::MediaConvert
     #                         scte35_esam_pid: 1
     #                       },
     #                       scte35_pid: 1,
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                       segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                       segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                       segmentation_time: 1.0,
@@ -17612,13 +21024,14 @@ module Aws::MediaConvert
     #                       pts_offset: 1,
     #                       pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                       scte35_pid: 1,
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       timed_metadata_pid: 1,
     #                       transport_stream_id: 1,
     #                       video_pid: 1
     #                     },
     #                     mov_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                       clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -17639,11 +21052,14 @@ module Aws::MediaConvert
     #                     mpd_settings: {
     #                       accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                       c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                       caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                       certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                       klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                       manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                       scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                       signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                       timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                       timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                       timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -17652,6 +21068,7 @@ module Aws::MediaConvert
     #                     mxf_settings: {
     #                       afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                       profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                       uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                       xavc_profile_settings: {
     #                         duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                         max_anc_data_size: 1
@@ -17688,7 +21105,7 @@ module Aws::MediaConvert
     #                         gop_size: 1.0,
     #                         max_bitrate: 1,
     #                         number_b_frames_between_reference_frames: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         qvbr_settings: {
     #                           qvbr_quality_level: 1,
     #                           qvbr_quality_level_fine_tune: 1.0
@@ -17707,7 +21124,7 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -17737,6 +21154,7 @@ module Aws::MediaConvert
     #                         dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                         end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                         entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                         explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                         flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -17758,7 +21176,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                         qvbr_settings: {
     #                           max_average_bitrate: 1,
@@ -17808,12 +21226,14 @@ module Aws::MediaConvert
     #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                         max_bitrate: 1,
     #                         min_i_interval: 1,
+    #                         mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                         number_b_frames_between_reference_frames: 1,
     #                         number_reference_frames: 1,
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                         qvbr_settings: {
     #                           max_average_bitrate: 1,
@@ -17830,7 +21250,11 @@ module Aws::MediaConvert
     #                         telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         tile_height: 1,
+    #                         tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                         tile_width: 1,
     #                         tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                         tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                         unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                       },
@@ -17858,7 +21282,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                         rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -17869,6 +21293,12 @@ module Aws::MediaConvert
     #                         syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                         telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                         temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                       },
+    #                       passthrough_settings: {
+    #                         frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                         gops_per_segment: 1,
+    #                         segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                         video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                       },
     #                       prores_settings: {
     #                         chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -17881,7 +21311,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                         par_denominator: 1,
     #                         par_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -17945,7 +21375,7 @@ module Aws::MediaConvert
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
-    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                         per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                         profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                         slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                         softness: 1,
@@ -17968,6 +21398,7 @@ module Aws::MediaConvert
     #                           slices: 1
     #                         },
     #                         xavc_hd_intra_cbg_profile_settings: {
+    #                           interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                           xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                         },
     #                         xavc_hd_profile_settings: {
@@ -18000,7 +21431,7 @@ module Aws::MediaConvert
     #                       y: 1
     #                     },
     #                     respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                     scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                     scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                     sharpness: 1,
     #                     timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                     timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -18042,6 +21473,7 @@ module Aws::MediaConvert
     #                         mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                       },
     #                       dolby_vision: {
+    #                         compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                         l6_metadata: {
     #                           max_cll: 1,
     #                           max_fall: 1
@@ -18049,6 +21481,11 @@ module Aws::MediaConvert
     #                         l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                         mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                         profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                       },
+    #                       duration_control: {
+    #                         integer_duration_maximum_compression_denominator: 1,
+    #                         integer_duration_maximum_compression_numerator: 1,
+    #                         integer_duration_trim_threshold_milliseconds: 1
     #                       },
     #                       hdr10_plus: {
     #                         mastering_monitor_nits: 1,
@@ -18153,7 +21590,42 @@ module Aws::MediaConvert
       request.send_request(options)
     end
 
-    # Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
+    # Start an asynchronous jobs query using the provided filters. To receive the list of jobs that match your query, call the GetJobsQueryResults API using the query ID returned by this API.
+    # @param [Hash, Types::StartJobsQueryRequest] params
+    # @option params [Array<Types::JobsQueryFilter>] :filter_list
+    #   Optional. Provide an array of JobsQueryFilters for your StartJobsQuery request.
+    # @option params [Integer] :max_results
+    #   Optional. Number of jobs, up to twenty, that will be included in the jobs query.
+    # @option params [String] :next_token
+    #   Use this string to request the next batch of jobs matched by a jobs query.
+    # @option params [String] :order
+    #   Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filter_list: [
+    #       {
+    #         key: "queue" # One of: ["queue", "status", "fileInput", "jobEngineVersionRequested", "jobEngineVersionUsed", "audioCodec", "videoCodec", "errorCode"],
+    #         values: ["__stringMax100"]
+    #       }
+    #     ],
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"]
+    #   }
+    #   options = {}
+    #   response = client.start_jobs_query(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "__string"
+    #   }
+    # @return [Types::StartJobsQueryResponse]
+    def start_jobs_query(params = {}, options = {})
+      request = build_request(:start_jobs_query, params)
+      request.send_request(options)
+    end
+
+    # Add tags to a MediaConvert queue, preset, job, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-mediaconvert-resources.html.
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :arn
     #   The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.
@@ -18177,7 +21649,7 @@ module Aws::MediaConvert
       request.send_request(options)
     end
 
-    # Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
+    # Remove tags from a MediaConvert queue, preset, job, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-mediaconvert-resources.html.
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :arn
     #   The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name.
@@ -18305,7 +21777,9 @@ module Aws::MediaConvert
     #                 channels_in: 1,
     #                 channels_out: 1
     #               },
-    #               selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #               selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #               smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               streams: [1],
     #               tracks: [1]
     #             }
     #           },
@@ -18341,11 +21815,12 @@ module Aws::MediaConvert
     #                   time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                   upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                 },
-    #                 source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                 source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                 teletext_source_settings: {
     #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                 },
     #                 track_source_settings: {
+    #                   stream_number: 1,
     #                   track_number: 1
     #                 },
     #                 webvtt_hls_source_settings: {
@@ -18401,6 +21876,13 @@ module Aws::MediaConvert
     #             }
     #           ],
     #           input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #           multi_view_settings: [
+    #             {
+    #               input: {
+    #                 file_input: "__stringPatternS3Https"
+    #               }
+    #             }
+    #           ],
     #           position: {
     #             height: 1,
     #             width: 1,
@@ -18423,12 +21905,48 @@ module Aws::MediaConvert
     #               end_timecode: "__stringPattern010920405090509092",
     #               initial_position: {
     #                 height: 1,
+    #                 opacity: 1,
     #                 unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                 width: 1,
     #                 x_position: 1,
     #                 y_position: 1
     #               },
     #               input: {
+    #                 audio_selectors: {
+    #                   "__string" => {
+    #                     audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                     custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                     default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                     external_audio_file_input: "__stringPatternS3Https",
+    #                     hls_rendition_group_settings: {
+    #                       rendition_group_id: "__string",
+    #                       rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       rendition_name: "__string"
+    #                     },
+    #                     language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                     offset: 1,
+    #                     pids: [1],
+    #                     program_selection: 1,
+    #                     remix_settings: {
+    #                       audio_description_audio_channel: 1,
+    #                       audio_description_data_channel: 1,
+    #                       channel_mapping: {
+    #                         output_channels: [
+    #                           {
+    #                             input_channels: [1],
+    #                             input_channels_fine_tune: [1.0]
+    #                           }
+    #                         ]
+    #                       },
+    #                       channels_in: 1,
+    #                       channels_out: 1
+    #                     },
+    #                     selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                     smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                     streams: [1],
+    #                     tracks: [1]
+    #                   }
+    #                 },
     #                 file_input: "__stringPatternS3Https",
     #                 input_clippings: [
     #                   {
@@ -18445,6 +21963,7 @@ module Aws::MediaConvert
     #                 {
     #                   end_position: {
     #                     height: 1,
+    #                     opacity: 1,
     #                     unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                     width: 1,
     #                     x_position: 1,
@@ -18492,7 +22011,7 @@ module Aws::MediaConvert
     #         credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #         file_offset: 1.0,
     #         kantar_license_id: 1,
-    #         kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #         kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #         log_destination: "__stringPatternS3",
     #         metadata3: "__stringMin1Max50",
     #         metadata4: "__stringMin1Max50",
@@ -18515,6 +22034,22 @@ module Aws::MediaConvert
     #         playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #         start_time: "__stringMin11Max11Pattern01D20305D205D"
     #       },
+    #       motion_image_inserters: [
+    #         {
+    #           framerate: {
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1
+    #           },
+    #           input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #           insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #           offset: {
+    #             image_x: 1,
+    #             image_y: 1
+    #           },
+    #           playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #           start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #         }
+    #       ],
     #       nielsen_configuration: {
     #         breakout_code: 1,
     #         distributor_id: "__string"
@@ -18582,7 +22117,7 @@ module Aws::MediaConvert
     #               client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #               dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
@@ -18594,10 +22129,11 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               encryption: {
+    #                 clear_lead_segments: 1,
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                 initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -18621,15 +22157,25 @@ module Aws::MediaConvert
     #                 type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #               },
     #               fragment_length: 1,
-    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #               image_based_trick_play_settings: {
-    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                 thumbnail_height: 1,
     #                 thumbnail_interval: 1.0,
     #                 thumbnail_width: 1,
     #                 tile_height: 1,
     #                 tile_width: 1
     #               },
+    #               image_based_trick_play_variants: [
+    #                 {
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1
+    #                 }
+    #               ],
     #               manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #               manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #               min_buffer_time: 1,
@@ -18657,7 +22203,7 @@ module Aws::MediaConvert
     #               audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #               base_url: "__string",
     #               dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #               dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #               destination: "__stringPatternS3",
     #               destination_settings: {
     #                 s3_settings: {
@@ -18669,11 +22215,11 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               encryption: {
-    #                 playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                 playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                 speke_key_provider: {
     #                   certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                   encryption_contract_configuration: {
@@ -18687,15 +22233,25 @@ module Aws::MediaConvert
     #               },
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #               image_based_trick_play_settings: {
-    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                 thumbnail_height: 1,
     #                 thumbnail_interval: 1.0,
     #                 thumbnail_width: 1,
     #                 tile_height: 1,
     #                 tile_width: 1
     #               },
+    #               image_based_trick_play_variants: [
+    #                 {
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1
+    #                 }
+    #               ],
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -18719,7 +22275,7 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               }
     #             },
@@ -18756,7 +22312,7 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -18783,15 +22339,25 @@ module Aws::MediaConvert
     #                 },
     #                 type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #               },
-    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #               image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #               image_based_trick_play_settings: {
-    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                 interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                 thumbnail_height: 1,
     #                 thumbnail_interval: 1.0,
     #                 thumbnail_width: 1,
     #                 tile_height: 1,
     #                 tile_width: 1
     #               },
+    #               image_based_trick_play_variants: [
+    #                 {
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1
+    #                 }
+    #               ],
     #               manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #               manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #               min_final_segment_length: 1.0,
@@ -18829,7 +22395,7 @@ module Aws::MediaConvert
     #                     kms_encryption_context: "__stringPatternAZaZ0902",
     #                     kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                   },
-    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                   storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                 }
     #               },
     #               encryption: {
@@ -18848,7 +22414,7 @@ module Aws::MediaConvert
     #               fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #               manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #             },
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #           },
     #           outputs: [
@@ -18868,6 +22434,9 @@ module Aws::MediaConvert
     #                     target_lkfs: 1.0,
     #                     true_peak_limiter_threshold: 1.0
     #                   },
+    #                   audio_pitch_correction_settings: {
+    #                     slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                   },
     #                   audio_source_name: "__stringMax2048",
     #                   audio_type: 1,
     #                   audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -18876,8 +22445,9 @@ module Aws::MediaConvert
     #                       audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                       bitrate: 1,
     #                       codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                       coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                       coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                       loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                       passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                       rap_interval: 1,
     #                       rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                       raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -18889,7 +22459,7 @@ module Aws::MediaConvert
     #                     ac3_settings: {
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                       dialnorm: 1,
     #                       dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                       dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -18898,12 +22468,27 @@ module Aws::MediaConvert
     #                       metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                       sample_rate: 1
     #                     },
+    #                     ac4_settings: {
+    #                       bitrate: 1,
+    #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                       coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                       dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                       lo_ro_center_mix_level: 1.0,
+    #                       lo_ro_surround_mix_level: 1.0,
+    #                       lt_rt_center_mix_level: 1.0,
+    #                       lt_rt_surround_mix_level: 1.0,
+    #                       sample_rate: 1,
+    #                       stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                     },
     #                     aiff_settings: {
     #                       bit_depth: 1,
     #                       channels: 1,
     #                       sample_rate: 1
     #                     },
-    #                     codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                     codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                     eac3_atmos_settings: {
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -18927,7 +22512,7 @@ module Aws::MediaConvert
     #                       attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                       coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                       dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       dialnorm: 1,
     #                       dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -19087,7 +22672,15 @@ module Aws::MediaConvert
     #                       page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                     },
     #                     ttml_destination_settings: {
-    #                       style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                       background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                       background_opacity: 1,
+    #                       font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                       font_opacity: 1,
+    #                       font_size: 1,
+    #                       font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                       font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                       style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                     },
     #                     webvtt_destination_settings: {
     #                       accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -19104,12 +22697,15 @@ module Aws::MediaConvert
     #                   audio_group_id: "__string",
     #                   audio_rendition_sets: "__string",
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                   c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                   certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                   descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                   i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                   scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                   signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                   timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                   timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -19169,7 +22765,7 @@ module Aws::MediaConvert
     #                     scte35_esam_pid: 1
     #                   },
     #                   scte35_pid: 1,
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                   segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                   segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                   segmentation_time: 1.0,
@@ -19195,13 +22791,14 @@ module Aws::MediaConvert
     #                   pts_offset: 1,
     #                   pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                   scte35_pid: 1,
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                   timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   timed_metadata_pid: 1,
     #                   transport_stream_id: 1,
     #                   video_pid: 1
     #                 },
     #                 mov_settings: {
+    #                   audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                   clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -19222,11 +22819,14 @@ module Aws::MediaConvert
     #                 mpd_settings: {
     #                   accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                   c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                   caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                   certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                   klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                   manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                   scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                   scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                   signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                   timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                   timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                   timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -19235,6 +22835,7 @@ module Aws::MediaConvert
     #                 mxf_settings: {
     #                   afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                   profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                   uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                   xavc_profile_settings: {
     #                     duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                     max_anc_data_size: 1
@@ -19271,7 +22872,7 @@ module Aws::MediaConvert
     #                     gop_size: 1.0,
     #                     max_bitrate: 1,
     #                     number_b_frames_between_reference_frames: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     qvbr_settings: {
     #                       qvbr_quality_level: 1,
     #                       qvbr_quality_level_fine_tune: 1.0
@@ -19290,7 +22891,7 @@ module Aws::MediaConvert
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
     #                     interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                     slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -19320,6 +22921,7 @@ module Aws::MediaConvert
     #                     dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                     end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                     entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                     explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                     flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -19341,7 +22943,7 @@ module Aws::MediaConvert
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
@@ -19391,12 +22993,14 @@ module Aws::MediaConvert
     #                     interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                     max_bitrate: 1,
     #                     min_i_interval: 1,
+    #                     mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                     mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     number_b_frames_between_reference_frames: 1,
     #                     number_reference_frames: 1,
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
@@ -19413,7 +23017,11 @@ module Aws::MediaConvert
     #                     telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                     temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                     tile_height: 1,
+    #                     tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                     tile_width: 1,
     #                     tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                     tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                     unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                   },
@@ -19441,7 +23049,7 @@ module Aws::MediaConvert
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                     rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                     scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -19452,6 +23060,12 @@ module Aws::MediaConvert
     #                     syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                     telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                     temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                   },
+    #                   passthrough_settings: {
+    #                     frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                     gops_per_segment: 1,
+    #                     segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                     video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                   },
     #                   prores_settings: {
     #                     chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -19464,7 +23078,7 @@ module Aws::MediaConvert
     #                     par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                     par_denominator: 1,
     #                     par_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                     slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -19528,7 +23142,7 @@ module Aws::MediaConvert
     #                     framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
-    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                     per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                     profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                     slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                     softness: 1,
@@ -19551,6 +23165,7 @@ module Aws::MediaConvert
     #                       slices: 1
     #                     },
     #                     xavc_hd_intra_cbg_profile_settings: {
+    #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                       xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                     },
     #                     xavc_hd_profile_settings: {
@@ -19583,7 +23198,7 @@ module Aws::MediaConvert
     #                   y: 1
     #                 },
     #                 respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                 scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                 scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                 sharpness: 1,
     #                 timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                 timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -19625,6 +23240,7 @@ module Aws::MediaConvert
     #                     mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                   },
     #                   dolby_vision: {
+    #                     compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                     l6_metadata: {
     #                       max_cll: 1,
     #                       max_fall: 1
@@ -19632,6 +23248,11 @@ module Aws::MediaConvert
     #                     l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                     mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                     profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                   },
+    #                   duration_control: {
+    #                     integer_duration_maximum_compression_denominator: 1,
+    #                     integer_duration_maximum_compression_numerator: 1,
+    #                     integer_duration_trim_threshold_milliseconds: 1
     #                   },
     #                   hdr10_plus: {
     #                     mastering_monitor_nits: 1,
@@ -19803,7 +23424,9 @@ module Aws::MediaConvert
     #                   channels_in: 1,
     #                   channels_out: 1
     #                 },
-    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM"],
+    #                 selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                 smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 streams: [1],
     #                 tracks: [1]
     #               }
     #             },
@@ -19839,11 +23462,12 @@ module Aws::MediaConvert
     #                     time_delta_units: "SECONDS" # One of: ["SECONDS", "MILLISECONDS"],
     #                     upconvert_stl_to_teletext: "UPCONVERT" # One of: ["UPCONVERT", "DISABLED"]
     #                   },
-    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"],
+    #                   source_type: "ANCILLARY" # One of: ["ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT", "TT_3GPP"],
     #                   teletext_source_settings: {
     #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE"
     #                   },
     #                   track_source_settings: {
+    #                     stream_number: 1,
     #                     track_number: 1
     #                   },
     #                   webvtt_hls_source_settings: {
@@ -19899,6 +23523,13 @@ module Aws::MediaConvert
     #               }
     #             ],
     #             input_scan_type: "AUTO" # One of: ["AUTO", "PSF"],
+    #             multi_view_settings: [
+    #               {
+    #                 input: {
+    #                   file_input: "__stringPatternS3Https"
+    #                 }
+    #               }
+    #             ],
     #             position: {
     #               height: 1,
     #               width: 1,
@@ -19921,12 +23552,48 @@ module Aws::MediaConvert
     #                 end_timecode: "__stringPattern010920405090509092",
     #                 initial_position: {
     #                   height: 1,
+    #                   opacity: 1,
     #                   unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1
     #                 },
     #                 input: {
+    #                   audio_selectors: {
+    #                     "__string" => {
+    #                       audio_duration_correction: "DISABLED" # One of: ["DISABLED", "AUTO", "TRACK", "FRAME", "FORCE"],
+    #                       custom_language_code: "__stringMin3Max3PatternAZaZ3",
+    #                       default_selection: "DEFAULT" # One of: ["DEFAULT", "NOT_DEFAULT"],
+    #                       external_audio_file_input: "__stringPatternS3Https",
+    #                       hls_rendition_group_settings: {
+    #                         rendition_group_id: "__string",
+    #                         rendition_language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                         rendition_name: "__string"
+    #                       },
+    #                       language_code: "ENG" # One of: ["ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"],
+    #                       offset: 1,
+    #                       pids: [1],
+    #                       program_selection: 1,
+    #                       remix_settings: {
+    #                         audio_description_audio_channel: 1,
+    #                         audio_description_data_channel: 1,
+    #                         channel_mapping: {
+    #                           output_channels: [
+    #                             {
+    #                               input_channels: [1],
+    #                               input_channels_fine_tune: [1.0]
+    #                             }
+    #                           ]
+    #                         },
+    #                         channels_in: 1,
+    #                         channels_out: 1
+    #                       },
+    #                       selector_type: "PID" # One of: ["PID", "TRACK", "LANGUAGE_CODE", "HLS_RENDITION_GROUP", "ALL_PCM", "STREAM"],
+    #                       smpte337_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       streams: [1],
+    #                       tracks: [1]
+    #                     }
+    #                   },
     #                   file_input: "__stringPatternS3Https",
     #                   input_clippings: [
     #                     {
@@ -19943,6 +23610,7 @@ module Aws::MediaConvert
     #                   {
     #                     end_position: {
     #                       height: 1,
+    #                       opacity: 1,
     #                       unit: "PIXELS" # One of: ["PIXELS", "PERCENTAGE"],
     #                       width: 1,
     #                       x_position: 1,
@@ -19990,7 +23658,7 @@ module Aws::MediaConvert
     #           credentials_secret_name: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           file_offset: 1.0,
     #           kantar_license_id: 1,
-    #           kantar_server_url: "__stringPatternHttpsKantarmedia",
+    #           kantar_server_url: "__stringPatternHttpsKantarmedia55Prod",
     #           log_destination: "__stringPatternS3",
     #           metadata3: "__stringMin1Max50",
     #           metadata4: "__stringMin1Max50",
@@ -20013,6 +23681,22 @@ module Aws::MediaConvert
     #           playback: "ONCE" # One of: ["ONCE", "REPEAT"],
     #           start_time: "__stringMin11Max11Pattern01D20305D205D"
     #         },
+    #         motion_image_inserters: [
+    #           {
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1
+    #             },
+    #             input: "__stringMin14PatternS3Mov09PngHttpsMov09Png",
+    #             insertion_mode: "MOV" # One of: ["MOV", "PNG"],
+    #             offset: {
+    #               image_x: 1,
+    #               image_y: 1
+    #             },
+    #             playback: "ONCE" # One of: ["ONCE", "REPEAT"],
+    #             start_time: "__stringMin11Max11Pattern01D20305D205D"
+    #           }
+    #         ],
     #         nielsen_configuration: {
     #           breakout_code: 1,
     #           distributor_id: "__string"
@@ -20080,7 +23764,7 @@ module Aws::MediaConvert
     #                 client_cache: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                 codec_specification: "RFC_6381" # One of: ["RFC_6381", "RFC_4281"],
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -20092,10 +23776,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
+    #                   clear_lead_segments: 1,
     #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "SAMPLE_AES" # One of: ["SAMPLE_AES", "AES_CTR"],
     #                   initialization_vector_in_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
@@ -20119,15 +23804,25 @@ module Aws::MediaConvert
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
     #                 fragment_length: 1,
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_buffer_time: 1,
@@ -20155,7 +23850,7 @@ module Aws::MediaConvert
     #                 audio_channel_config_scheme_id_uri: "MPEG_CHANNEL_CONFIGURATION" # One of: ["MPEG_CHANNEL_CONFIGURATION", "DOLBY_CHANNEL_CONFIGURATION"],
     #                 base_url: "__string",
     #                 dash_i_frame_trick_play_name_modifier: "__stringMin1Max256",
-    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT"],
+    #                 dash_manifest_style: "BASIC" # One of: ["BASIC", "COMPACT", "DISTINCT", "FULL"],
     #                 destination: "__stringPatternS3",
     #                 destination_settings: {
     #                   s3_settings: {
@@ -20167,11 +23862,11 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
-    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI"],
+    #                   playback_device_compatibility: "CENC_V1" # One of: ["CENC_V1", "UNENCRYPTED_SEI", "CENC_V1_UNENCRYPTED_HEADERS"],
     #                   speke_key_provider: {
     #                     certificate_arn: "__stringPatternArnAwsUsGovAcm",
     #                     encryption_contract_configuration: {
@@ -20185,15 +23880,25 @@ module Aws::MediaConvert
     #                 },
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5" # One of: ["HBBTV_1_5", "NONE"],
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_manifest_bandwidth_type: "AVERAGE" # One of: ["AVERAGE", "MAX"],
@@ -20217,7 +23922,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 }
     #               },
@@ -20254,7 +23959,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 directory_structure: "SINGLE_DIRECTORY" # One of: ["SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM"],
@@ -20281,15 +23986,25 @@ module Aws::MediaConvert
     #                   },
     #                   type: "SPEKE" # One of: ["SPEKE", "STATIC_KEY"]
     #                 },
-    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"],
+    #                 image_based_trick_play: "NONE" # One of: ["NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED", "VARIANTS"],
     #                 image_based_trick_play_settings: {
-    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM"],
+    #                   interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
     #                   thumbnail_height: 1,
     #                   thumbnail_interval: 1.0,
     #                   thumbnail_width: 1,
     #                   tile_height: 1,
     #                   tile_width: 1
     #                 },
+    #                 image_based_trick_play_variants: [
+    #                   {
+    #                     interval_cadence: "FOLLOW_IFRAME" # One of: ["FOLLOW_IFRAME", "FOLLOW_CUSTOM", "FOLLOW_SEGMENTATION"],
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1
+    #                   }
+    #                 ],
     #                 manifest_compression: "GZIP" # One of: ["GZIP", "NONE"],
     #                 manifest_duration_format: "FLOATING_POINT" # One of: ["FLOATING_POINT", "INTEGER"],
     #                 min_final_segment_length: 1.0,
@@ -20327,7 +24042,7 @@ module Aws::MediaConvert
     #                       kms_encryption_context: "__stringPatternAZaZ0902",
     #                       kms_key_arn: "__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932"
     #                     },
-    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"]
+    #                     storage_class: "STANDARD" # One of: ["STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "GLACIER_IR"]
     #                   }
     #                 },
     #                 encryption: {
@@ -20346,7 +24061,7 @@ module Aws::MediaConvert
     #                 fragment_length_control: "EXACT" # One of: ["EXACT", "GOP_MULTIPLE"],
     #                 manifest_encoding: "UTF8" # One of: ["UTF8", "UTF16"]
     #               },
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               type: "HLS_GROUP_SETTINGS" # One of: ["HLS_GROUP_SETTINGS", "DASH_ISO_GROUP_SETTINGS", "FILE_GROUP_SETTINGS", "MS_SMOOTH_GROUP_SETTINGS", "CMAF_GROUP_SETTINGS"]
     #             },
     #             outputs: [
@@ -20366,6 +24081,9 @@ module Aws::MediaConvert
     #                       target_lkfs: 1.0,
     #                       true_peak_limiter_threshold: 1.0
     #                     },
+    #                     audio_pitch_correction_settings: {
+    #                       slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
     #                     audio_source_name: "__stringMax2048",
     #                     audio_type: 1,
     #                     audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -20374,8 +24092,9 @@ module Aws::MediaConvert
     #                         audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                         bitrate: 1,
     #                         codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                         coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                         loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                         passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                         rap_interval: 1,
     #                         rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                         raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -20387,7 +24106,7 @@ module Aws::MediaConvert
     #                       ac3_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                         dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -20396,12 +24115,27 @@ module Aws::MediaConvert
     #                         metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                         sample_rate: 1
     #                       },
+    #                       ac4_settings: {
+    #                         bitrate: 1,
+    #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                         coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                         dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                         lo_ro_center_mix_level: 1.0,
+    #                         lo_ro_surround_mix_level: 1.0,
+    #                         lt_rt_center_mix_level: 1.0,
+    #                         lt_rt_surround_mix_level: 1.0,
+    #                         sample_rate: 1,
+    #                         stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #                       },
     #                       aiff_settings: {
     #                         bit_depth: 1,
     #                         channels: 1,
     #                         sample_rate: 1
     #                       },
-    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #                       codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #                       eac3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -20425,7 +24159,7 @@ module Aws::MediaConvert
     #                         attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                         coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                         dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                         dialnorm: 1,
     #                         dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -20585,7 +24319,15 @@ module Aws::MediaConvert
     #                         page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #                       },
     #                       ttml_destination_settings: {
-    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                         background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                         background_opacity: 1,
+    #                         font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                         font_opacity: 1,
+    #                         font_size: 1,
+    #                         font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                         font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                         style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                         text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #                       },
     #                       webvtt_destination_settings: {
     #                         accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -20602,12 +24344,15 @@ module Aws::MediaConvert
     #                     audio_group_id: "__string",
     #                     audio_rendition_sets: "__string",
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #                     i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -20667,7 +24412,7 @@ module Aws::MediaConvert
     #                       scte35_esam_pid: 1
     #                     },
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #                     segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #                     segmentation_time: 1.0,
@@ -20693,13 +24438,14 @@ module Aws::MediaConvert
     #                     pts_offset: 1,
     #                     pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #                     scte35_pid: 1,
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_pid: 1,
     #                     transport_stream_id: 1,
     #                     video_pid: 1
     #                   },
     #                   mov_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #                     clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -20720,11 +24466,14 @@ module Aws::MediaConvert
     #                   mpd_settings: {
     #                     accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #                     c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #                     caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #                     certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #                     klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #                     manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                     scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #                     scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #                     signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #                     timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #                     timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #                     timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -20733,6 +24482,7 @@ module Aws::MediaConvert
     #                   mxf_settings: {
     #                     afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #                     profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #                     uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #                     xavc_profile_settings: {
     #                       duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #                       max_anc_data_size: 1
@@ -20769,7 +24519,7 @@ module Aws::MediaConvert
     #                       gop_size: 1.0,
     #                       max_bitrate: 1,
     #                       number_b_frames_between_reference_frames: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       qvbr_settings: {
     #                         qvbr_quality_level: 1,
     #                         qvbr_quality_level_fine_tune: 1.0
@@ -20788,7 +24538,7 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -20818,6 +24568,7 @@ module Aws::MediaConvert
     #                       dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #                       end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #                       entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #                       explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #                       flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -20839,7 +24590,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -20889,12 +24640,14 @@ module Aws::MediaConvert
     #                       interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                       max_bitrate: 1,
     #                       min_i_interval: 1,
+    #                       mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                       mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                       number_b_frames_between_reference_frames: 1,
     #                       number_reference_frames: 1,
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #                       qvbr_settings: {
     #                         max_average_bitrate: 1,
@@ -20911,7 +24664,11 @@ module Aws::MediaConvert
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tile_height: 1,
+    #                       tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #                       tile_width: 1,
     #                       tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #                       tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #                       unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #                     },
@@ -20939,7 +24696,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #                       rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -20950,6 +24707,12 @@ module Aws::MediaConvert
     #                       syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #                       telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #                       temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #                     },
+    #                     passthrough_settings: {
+    #                       frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #                       gops_per_segment: 1,
+    #                       segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #                       video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #                     },
     #                     prores_settings: {
     #                       chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -20962,7 +24725,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #                       par_denominator: 1,
     #                       par_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -21026,7 +24789,7 @@ module Aws::MediaConvert
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
-    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #                       per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #                       profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #                       slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #                       softness: 1,
@@ -21049,6 +24812,7 @@ module Aws::MediaConvert
     #                         slices: 1
     #                       },
     #                       xavc_hd_intra_cbg_profile_settings: {
+    #                         interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                         xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #                       },
     #                       xavc_hd_profile_settings: {
@@ -21081,7 +24845,7 @@ module Aws::MediaConvert
     #                     y: 1
     #                   },
     #                   respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #                   scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #                   sharpness: 1,
     #                   timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #                   timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -21123,6 +24887,7 @@ module Aws::MediaConvert
     #                       mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #                     },
     #                     dolby_vision: {
+    #                       compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #                       l6_metadata: {
     #                         max_cll: 1,
     #                         max_fall: 1
@@ -21130,6 +24895,11 @@ module Aws::MediaConvert
     #                       l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #                       mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #                       profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #                     },
+    #                     duration_control: {
+    #                       integer_duration_maximum_compression_denominator: 1,
+    #                       integer_duration_maximum_compression_numerator: 1,
+    #                       integer_duration_trim_threshold_milliseconds: 1
     #                     },
     #                     hdr10_plus: {
     #                       mastering_monitor_nits: 1,
@@ -21247,6 +25017,9 @@ module Aws::MediaConvert
     #             target_lkfs: 1.0,
     #             true_peak_limiter_threshold: 1.0
     #           },
+    #           audio_pitch_correction_settings: {
+    #             slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #           },
     #           audio_source_name: "__stringMax2048",
     #           audio_type: 1,
     #           audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -21255,8 +25028,9 @@ module Aws::MediaConvert
     #               audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #               bitrate: 1,
     #               codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #               coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #               coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #               loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #               passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #               rap_interval: 1,
     #               rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #               raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -21268,7 +25042,7 @@ module Aws::MediaConvert
     #             ac3_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #               coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #               coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #               dialnorm: 1,
     #               dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #               dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -21277,12 +25051,27 @@ module Aws::MediaConvert
     #               metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #               sample_rate: 1
     #             },
+    #             ac4_settings: {
+    #               bitrate: 1,
+    #               bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #               coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #               dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #               dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #               dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #               dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #               lo_ro_center_mix_level: 1.0,
+    #               lo_ro_surround_mix_level: 1.0,
+    #               lt_rt_center_mix_level: 1.0,
+    #               lt_rt_surround_mix_level: 1.0,
+    #               sample_rate: 1,
+    #               stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #             },
     #             aiff_settings: {
     #               bit_depth: 1,
     #               channels: 1,
     #               sample_rate: 1
     #             },
-    #             codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #             codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #             eac3_atmos_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -21306,7 +25095,7 @@ module Aws::MediaConvert
     #               attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #               coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #               coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #               dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #               dialnorm: 1,
     #               dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -21465,7 +25254,15 @@ module Aws::MediaConvert
     #               page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #             },
     #             ttml_destination_settings: {
-    #               style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #               background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #               background_opacity: 1,
+    #               font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #               font_opacity: 1,
+    #               font_size: 1,
+    #               font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #               font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #               style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #             },
     #             webvtt_destination_settings: {
     #               accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -21482,12 +25279,15 @@ module Aws::MediaConvert
     #           audio_group_id: "__string",
     #           audio_rendition_sets: "__string",
     #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #           c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #           certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #           i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #           manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #           scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #           timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #           timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #           timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -21547,7 +25347,7 @@ module Aws::MediaConvert
     #             scte35_esam_pid: 1
     #           },
     #           scte35_pid: 1,
-    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #           segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #           segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #           segmentation_time: 1.0,
@@ -21573,13 +25373,14 @@ module Aws::MediaConvert
     #           pts_offset: 1,
     #           pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #           scte35_pid: 1,
-    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #           timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #           timed_metadata_pid: 1,
     #           transport_stream_id: 1,
     #           video_pid: 1
     #         },
     #         mov_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #           clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -21600,11 +25401,14 @@ module Aws::MediaConvert
     #         mpd_settings: {
     #           accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #           c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #           caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #           certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #           manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #           scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #           scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #           timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #           timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #           timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -21613,6 +25417,7 @@ module Aws::MediaConvert
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #           profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #           uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #           xavc_profile_settings: {
     #             duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #             max_anc_data_size: 1
@@ -21635,7 +25440,7 @@ module Aws::MediaConvert
     #             gop_size: 1.0,
     #             max_bitrate: 1,
     #             number_b_frames_between_reference_frames: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             qvbr_settings: {
     #               qvbr_quality_level: 1,
     #               qvbr_quality_level_fine_tune: 1.0
@@ -21654,7 +25459,7 @@ module Aws::MediaConvert
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #             slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -21684,6 +25489,7 @@ module Aws::MediaConvert
     #             dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #             end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #             entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #             explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #             flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -21705,7 +25511,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #             par_denominator: 1,
     #             par_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
@@ -21755,12 +25561,14 @@ module Aws::MediaConvert
     #             interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #             max_bitrate: 1,
     #             min_i_interval: 1,
+    #             mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #             mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #             number_b_frames_between_reference_frames: 1,
     #             number_reference_frames: 1,
     #             par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #             par_denominator: 1,
     #             par_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
@@ -21777,7 +25585,11 @@ module Aws::MediaConvert
     #             telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #             temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #             tile_height: 1,
+    #             tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #             tile_width: 1,
     #             tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #             tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #             unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #           },
@@ -21805,7 +25617,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #             par_denominator: 1,
     #             par_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #             rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #             scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -21816,6 +25628,12 @@ module Aws::MediaConvert
     #             syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #             telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #             temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #           },
+    #           passthrough_settings: {
+    #             frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #             gops_per_segment: 1,
+    #             segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #             video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #           },
     #           prores_settings: {
     #             chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -21828,7 +25646,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #             par_denominator: 1,
     #             par_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #             slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -21892,7 +25710,7 @@ module Aws::MediaConvert
     #             framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
-    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #             per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #             profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #             slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #             softness: 1,
@@ -21915,6 +25733,7 @@ module Aws::MediaConvert
     #               slices: 1
     #             },
     #             xavc_hd_intra_cbg_profile_settings: {
+    #               interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #               xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #             },
     #             xavc_hd_profile_settings: {
@@ -21947,7 +25766,7 @@ module Aws::MediaConvert
     #           y: 1
     #         },
     #         respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #         scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #         scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #         sharpness: 1,
     #         timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #         timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -21989,6 +25808,7 @@ module Aws::MediaConvert
     #             mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #           },
     #           dolby_vision: {
+    #             compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #             l6_metadata: {
     #               max_cll: 1,
     #               max_fall: 1
@@ -21996,6 +25816,11 @@ module Aws::MediaConvert
     #             l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #             mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #             profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #           },
+    #           duration_control: {
+    #             integer_duration_maximum_compression_denominator: 1,
+    #             integer_duration_maximum_compression_numerator: 1,
+    #             integer_duration_trim_threshold_milliseconds: 1
     #           },
     #           hdr10_plus: {
     #             mastering_monitor_nits: 1,
@@ -22083,6 +25908,9 @@ module Aws::MediaConvert
     #               target_lkfs: 1.0,
     #               true_peak_limiter_threshold: 1.0
     #             },
+    #             audio_pitch_correction_settings: {
+    #               slow_pal_pitch_correction: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #             },
     #             audio_source_name: "__stringMax2048",
     #             audio_type: 1,
     #             audio_type_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
@@ -22091,8 +25919,9 @@ module Aws::MediaConvert
     #                 audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD" # One of: ["BROADCASTER_MIXED_AD", "NORMAL"],
     #                 bitrate: 1,
     #                 codec_profile: "LC" # One of: ["LC", "HEV1", "HEV2", "XHE"],
-    #                 coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1"],
+    #                 coding_mode: "AD_RECEIVER_MIX" # One of: ["AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"],
     #                 loudness_measurement_mode: "PROGRAM" # One of: ["PROGRAM", "ANCHOR"],
+    #                 passthrough_control: "WHEN_POSSIBLE" # One of: ["WHEN_POSSIBLE", "NO_PASSTHROUGH"],
     #                 rap_interval: 1,
     #                 rate_control_mode: "CBR" # One of: ["CBR", "VBR"],
     #                 raw_format: "LATM_LOAS" # One of: ["LATM_LOAS", "NONE"],
@@ -22104,7 +25933,7 @@ module Aws::MediaConvert
     #               ac3_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "DIALOGUE", "EMERGENCY", "HEARING_IMPAIRED", "MUSIC_AND_EFFECTS", "VISUALLY_IMPAIRED", "VOICE_OVER"],
-    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE"],
+    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_AUTO"],
     #                 dialnorm: 1,
     #                 dynamic_range_compression_line: "FILM_STANDARD" # One of: ["FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH", "NONE"],
     #                 dynamic_range_compression_profile: "FILM_STANDARD" # One of: ["FILM_STANDARD", "NONE"],
@@ -22113,12 +25942,27 @@ module Aws::MediaConvert
     #                 metadata_control: "FOLLOW_INPUT" # One of: ["FOLLOW_INPUT", "USE_CONFIGURED"],
     #                 sample_rate: 1
     #               },
+    #               ac4_settings: {
+    #                 bitrate: 1,
+    #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "EMERGENCY"],
+    #                 coding_mode: "CODING_MODE_2_0" # One of: ["CODING_MODE_2_0", "CODING_MODE_3_2_LFE", "CODING_MODE_5_1_4"],
+    #                 dynamic_range_compression_flat_panel_tv: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 dynamic_range_compression_home_theater: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 dynamic_range_compression_portable_headphones: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 dynamic_range_compression_portable_speakers: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
+    #                 lo_ro_center_mix_level: 1.0,
+    #                 lo_ro_surround_mix_level: 1.0,
+    #                 lt_rt_center_mix_level: 1.0,
+    #                 lt_rt_surround_mix_level: 1.0,
+    #                 sample_rate: 1,
+    #                 stereo_downmix: "NOT_INDICATED" # One of: ["NOT_INDICATED", "LO_RO", "LT_RT", "DPL2"]
+    #               },
     #               aiff_settings: {
     #                 bit_depth: 1,
     #                 channels: 1,
     #                 sample_rate: 1
     #               },
-    #               codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
+    #               codec: "AAC" # One of: ["AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "AC4", "EAC3", "EAC3_ATMOS", "VORBIS", "OPUS", "PASSTHROUGH", "FLAC"],
     #               eac3_atmos_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN"],
@@ -22142,7 +25986,7 @@ module Aws::MediaConvert
     #                 attenuation_control: "ATTENUATE_3_DB" # One of: ["ATTENUATE_3_DB", "NONE"],
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN" # One of: ["COMPLETE_MAIN", "COMMENTARY", "EMERGENCY", "HEARING_IMPAIRED", "VISUALLY_IMPAIRED"],
-    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2"],
+    #                 coding_mode: "CODING_MODE_1_0" # One of: ["CODING_MODE_1_0", "CODING_MODE_2_0", "CODING_MODE_3_2", "CODING_MODE_AUTO"],
     #                 dc_filter: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #                 dialnorm: 1,
     #                 dynamic_range_compression_line: "NONE" # One of: ["NONE", "FILM_STANDARD", "FILM_LIGHT", "MUSIC_STANDARD", "MUSIC_LIGHT", "SPEECH"],
@@ -22301,7 +26145,15 @@ module Aws::MediaConvert
     #                 page_types: ["PAGE_TYPE_INITIAL" # One of: ["PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"]]
     #               },
     #               ttml_destination_settings: {
-    #                 style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #                 background_color: "NONE" # One of: ["NONE", "BLACK", "WHITE", "AUTO"],
+    #                 background_opacity: 1,
+    #                 font_color: "WHITE" # One of: ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"],
+    #                 font_opacity: 1,
+    #                 font_size: 1,
+    #                 font_style: "NORMAL" # One of: ["NORMAL", "ITALIC"],
+    #                 font_weight: "NORMAL" # One of: ["NORMAL", "BOLD"],
+    #                 style_passthrough: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #                 text_decoration: "NONE" # One of: ["NONE", "UNDERLINE"]
     #               },
     #               webvtt_destination_settings: {
     #                 accessibility: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -22318,12 +26170,15 @@ module Aws::MediaConvert
     #             audio_group_id: "__string",
     #             audio_rendition_sets: "__string",
     #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" # One of: ["ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"],
+    #             c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
+    #             certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #             descriptive_video_service_flag: "DONT_FLAG" # One of: ["DONT_FLAG", "FLAG"],
     #             i_frame_only_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             klv_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #             scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #             signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #             timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #             timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -22383,7 +26238,7 @@ module Aws::MediaConvert
     #               scte35_esam_pid: 1
     #             },
     #             scte35_pid: 1,
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #             segmentation_markers: "NONE" # One of: ["NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"],
     #             segmentation_style: "MAINTAIN_CADENCE" # One of: ["MAINTAIN_CADENCE", "RESET_CADENCE"],
     #             segmentation_time: 1.0,
@@ -22409,13 +26264,14 @@ module Aws::MediaConvert
     #             pts_offset: 1,
     #             pts_offset_mode: "AUTO" # One of: ["AUTO", "SECONDS", "MILLISECONDS"],
     #             scte35_pid: 1,
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
     #             timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             timed_metadata_pid: 1,
     #             transport_stream_id: 1,
     #             video_pid: 1
     #           },
     #           mov_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
     #             clap_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             cslg_atom: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             mpeg2_four_cc_control: "XDCAM" # One of: ["XDCAM", "MPEG"],
@@ -22436,11 +26292,14 @@ module Aws::MediaConvert
     #           mpd_settings: {
     #             accessibility_caption_hints: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             audio_duration: "DEFAULT_CODEC_DURATION" # One of: ["DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"],
+    #             c2pa_manifest: "INCLUDE" # One of: ["INCLUDE", "EXCLUDE"],
     #             caption_container_type: "RAW" # One of: ["RAW", "FRAGMENTED_MP4"],
+    #             certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #             klv_metadata: "NONE" # One of: ["NONE", "PASSTHROUGH"],
     #             manifest_metadata_signaling: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #             scte35_esam: "INSERT" # One of: ["INSERT", "NONE"],
-    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
+    #             scte35_source: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE", "MANIFEST_CUES"],
+    #             signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #             timed_metadata: "PASSTHROUGH" # One of: ["PASSTHROUGH", "NONE"],
     #             timed_metadata_box_version: "VERSION_0" # One of: ["VERSION_0", "VERSION_1"],
     #             timed_metadata_scheme_id_uri: "__stringMax1000",
@@ -22449,6 +26308,7 @@ module Aws::MediaConvert
     #           mxf_settings: {
     #             afd_signaling: "NO_COPY" # One of: ["NO_COPY", "COPY_FROM_VIDEO"],
     #             profile: "D_10" # One of: ["D_10", "XDCAM", "OP1A", "XAVC", "XDCAM_RDD9"],
+    #             uncompressed_audio_wrapping: "AUTO" # One of: ["AUTO", "AES3"],
     #             xavc_profile_settings: {
     #               duration_mode: "ALLOW_ANY_DURATION" # One of: ["ALLOW_ANY_DURATION", "DROP_FRAMES_FOR_COMPLIANCE"],
     #               max_anc_data_size: 1
@@ -22471,7 +26331,7 @@ module Aws::MediaConvert
     #               gop_size: 1.0,
     #               max_bitrate: 1,
     #               number_b_frames_between_reference_frames: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               qvbr_settings: {
     #                 qvbr_quality_level: 1,
     #                 qvbr_quality_level_fine_tune: 1.0
@@ -22490,7 +26350,7 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #               slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -22520,6 +26380,7 @@ module Aws::MediaConvert
     #               dynamic_sub_gop: "ADAPTIVE" # One of: ["ADAPTIVE", "STATIC"],
     #               end_of_stream_markers: "INCLUDE" # One of: ["INCLUDE", "SUPPRESS"],
     #               entropy_encoding: "CABAC" # One of: ["CABAC", "CAVLC"],
+    #               explicit_weighted_prediction: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               field_encoding: "PAFF" # One of: ["PAFF", "FORCE_FIELD", "MBAFF"],
     #               flicker_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               framerate_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
@@ -22541,7 +26402,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #               qvbr_settings: {
     #                 max_average_bitrate: 1,
@@ -22591,12 +26452,14 @@ module Aws::MediaConvert
     #               interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #               max_bitrate: 1,
     #               min_i_interval: 1,
+    #               mv_over_picture_boundaries: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #               mv_temporal_predictor: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #               number_b_frames_between_reference_frames: 1,
     #               number_reference_frames: 1,
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"],
     #               qvbr_settings: {
     #                 max_average_bitrate: 1,
@@ -22613,7 +26476,11 @@ module Aws::MediaConvert
     #               telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #               temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               temporal_ids: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               tile_height: 1,
+    #               tile_padding: "NONE" # One of: ["NONE", "PADDED"],
+    #               tile_width: 1,
     #               tiles: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #               tree_block_size: "AUTO" # One of: ["AUTO", "TREE_SIZE_32X32"],
     #               unregistered_sei_timecode: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               write_mp4_packaging_type: "HVC1" # One of: ["HVC1", "HEV1"]
     #             },
@@ -22641,7 +26508,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               quality_tuning_level: "SINGLE_PASS" # One of: ["SINGLE_PASS", "MULTI_PASS"],
     #               rate_control_mode: "VBR" # One of: ["VBR", "CBR"],
     #               scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
@@ -22652,6 +26519,12 @@ module Aws::MediaConvert
     #               syntax: "DEFAULT" # One of: ["DEFAULT", "D_10"],
     #               telecine: "NONE" # One of: ["NONE", "SOFT", "HARD"],
     #               temporal_adaptive_quantization: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #             },
+    #             passthrough_settings: {
+    #               frame_control: "NEAREST_IDRFRAME" # One of: ["NEAREST_IDRFRAME", "NEAREST_IFRAME"],
+    #               gops_per_segment: 1,
+    #               segmentation_mode: "AUTO" # One of: ["AUTO", "DURATION_BASED", "GOP_COUNT"],
+    #               video_selector_mode: "AUTO" # One of: ["AUTO", "REMUX_ALL"]
     #             },
     #             prores_settings: {
     #               chroma_sampling: "PRESERVE_444_SAMPLING" # One of: ["PRESERVE_444_SAMPLING", "SUBSAMPLE_TO_422"],
@@ -22664,7 +26537,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE" # One of: ["INITIALIZE_FROM_SOURCE", "SPECIFIED"],
     #               par_denominator: 1,
     #               par_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               scan_type_conversion_mode: "INTERLACED" # One of: ["INTERLACED", "INTERLACED_OPTIMIZE"],
     #               slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               telecine: "NONE" # One of: ["NONE", "HARD"]
@@ -22728,7 +26601,7 @@ module Aws::MediaConvert
     #               framerate_conversion_algorithm: "DUPLICATE_DROP" # One of: ["DUPLICATE_DROP", "INTERPOLATE", "FRAMEFORMER", "MAINTAIN_FRAME_COUNT"],
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
-    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR"]],
+    #               per_frame_metrics: ["PSNR" # One of: ["PSNR", "SSIM", "MS_SSIM", "PSNR_HVS", "VMAF", "QVBR", "SHOT_CHANGE"]],
     #               profile: "XAVC_HD_INTRA_CBG" # One of: ["XAVC_HD_INTRA_CBG", "XAVC_4K_INTRA_CBG", "XAVC_4K_INTRA_VBR", "XAVC_HD", "XAVC_4K"],
     #               slow_pal: "DISABLED" # One of: ["DISABLED", "ENABLED"],
     #               softness: 1,
@@ -22751,6 +26624,7 @@ module Aws::MediaConvert
     #                 slices: 1
     #               },
     #               xavc_hd_intra_cbg_profile_settings: {
+    #                 interlace_mode: "PROGRESSIVE" # One of: ["PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"],
     #                 xavc_class: "CLASS_50" # One of: ["CLASS_50", "CLASS_100", "CLASS_200"]
     #               },
     #               xavc_hd_profile_settings: {
@@ -22783,7 +26657,7 @@ module Aws::MediaConvert
     #             y: 1
     #           },
     #           respond_to_afd: "NONE" # One of: ["NONE", "RESPOND", "PASSTHROUGH"],
-    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL"],
+    #           scaling_behavior: "DEFAULT" # One of: ["DEFAULT", "STRETCH_TO_OUTPUT", "FIT", "FIT_NO_UPSCALE", "FILL", "SMART_CROP"],
     #           sharpness: 1,
     #           timecode_insertion: "DISABLED" # One of: ["DISABLED", "PIC_TIMING_SEI"],
     #           timecode_track: "DISABLED" # One of: ["DISABLED", "ENABLED"],
@@ -22825,6 +26699,7 @@ module Aws::MediaConvert
     #               mode: "DEINTERLACE" # One of: ["DEINTERLACE", "INVERSE_TELECINE", "ADAPTIVE"]
     #             },
     #             dolby_vision: {
+    #               compatibility: "DUPLICATE_STREAM" # One of: ["DUPLICATE_STREAM", "SUPPLEMENTAL_CODECS"],
     #               l6_metadata: {
     #                 max_cll: 1,
     #                 max_fall: 1
@@ -22832,6 +26707,11 @@ module Aws::MediaConvert
     #               l6_mode: "PASSTHROUGH" # One of: ["PASSTHROUGH", "RECALCULATE", "SPECIFY"],
     #               mapping: "HDR10_NOMAP" # One of: ["HDR10_NOMAP", "HDR10_1000"],
     #               profile: "PROFILE_5" # One of: ["PROFILE_5", "PROFILE_8_1"]
+    #             },
+    #             duration_control: {
+    #               integer_duration_maximum_compression_denominator: 1,
+    #               integer_duration_maximum_compression_numerator: 1,
+    #               integer_duration_trim_threshold_milliseconds: 1
     #             },
     #             hdr10_plus: {
     #               mastering_monitor_nits: 1,
@@ -22905,6 +26785,8 @@ module Aws::MediaConvert
     #   Specify the maximum number of jobs your queue can process concurrently. For on-demand queues, the value you enter is constrained by your service quotas for Maximum concurrent jobs, per on-demand queue and Maximum concurrent jobs, per account. For reserved queues, update your reservation plan instead in order to increase your yearly commitment.
     # @option params [String] :description
     #   The new description for the queue, if you are changing it.
+    # @option params [Integer] :maximum_concurrent_feeds
+    #   Specify the maximum number of Elemental Inference feeds MediaConvert can process concurrently.
     # @option params [String] :name
     #   The name of the queue that you are modifying.
     # @option params [Types::ReservationPlanSettings] :reservation_plan_settings
@@ -22915,6 +26797,7 @@ module Aws::MediaConvert
     #   params = {
     #     concurrent_jobs: 1,
     #     description: "__string",
+    #     maximum_concurrent_feeds: 1,
     #     name: "__string", # required
     #     reservation_plan_settings: {
     #       commitment: "ONE_YEAR" # One of: ["ONE_YEAR"], # required
@@ -22934,6 +26817,7 @@ module Aws::MediaConvert
     #       created_at: Time.now,
     #       description: "__string",
     #       last_updated: Time.now,
+    #       maximum_concurrent_feeds: 1,
     #       name: "__string", # required
     #       pricing_plan: "ON_DEMAND" # One of: ["ON_DEMAND", "RESERVED"],
     #       progressing_jobs_count: 1,

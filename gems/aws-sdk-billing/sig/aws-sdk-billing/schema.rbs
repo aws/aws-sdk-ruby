@@ -4,9 +4,28 @@ module Aws::Billing
 
     AccessDeniedException: StructureShape
     AccountId: StringShape
+    AccountName: StringShape
     ActiveTimeRange: StructureShape
+    AdditionalCharge: StructureShape
+    AdditionalChargeList: ListShape
+    Amount: StructureShape
+    ApplicationType: EnumShape
     AssociateSourceViewsRequest: StructureShape
     AssociateSourceViewsResponse: StructureShape
+    BillingDomain: EnumShape
+    BillingFeature: EnumShape
+    BillingFeatureFilter: StructureShape
+    BillingFeatureFilterName: EnumShape
+    BillingFeatureFilterValue: StringShape
+    BillingFeatureFilterValues: ListShape
+    BillingFeatureFilters: ListShape
+    BillingFeatures: ListShape
+    BillingMonth: StringShape
+    BillingPeriod: StructureShape
+    BillingPreferenceForKey: StructureShape
+    BillingPreferenceSummary: StructureShape
+    BillingPreferences: ListShape
+    BillingPreferencesPerKey: ListShape
     BillingViewArn: StringShape
     BillingViewArnList: ListShape
     BillingViewDescription: StringShape
@@ -16,6 +35,9 @@ module Aws::Billing
     BillingViewList: ListShape
     BillingViewListElement: StructureShape
     BillingViewName: StringShape
+    BillingViewSegmentTimeRange: StructureShape
+    BillingViewSegmentsList: ListShape
+    BillingViewSegmentsListElement: StructureShape
     BillingViewSourceViewsList: ListShape
     BillingViewStatus: EnumShape
     BillingViewStatusReason: EnumShape
@@ -23,33 +45,96 @@ module Aws::Billing
     BillingViewType: EnumShape
     BillingViewTypeList: ListShape
     BillingViewsMaxResults: IntegerShape
+    BillingYear: IntegerShape
+    BusinessSupportAccountCharge: StructureShape
+    BusinessSupportAccountChargeList: ListShape
+    BusinessSupportBillingMonth: StringShape
+    BusinessSupportDiscount: StructureShape
+    BusinessSupportServiceSpend: StructureShape
+    BusinessSupportServiceSpendList: ListShape
+    BusinessSupportSubscriptionContract: StructureShape
+    BusinessSupportSubscriptionContractList: ListShape
+    BusinessSupportTierCharge: StructureShape
+    BusinessSupportTierChargeList: ListShape
+    ChargeAccount: StructureShape
+    ChargeAccountList: ListShape
     ClientToken: StringShape
     ConflictException: StructureShape
+    ContractAccount: StructureShape
+    ContractAccountList: ListShape
+    CostCategoryName: StringShape
+    CostCategoryValues: StructureShape
     CreateBillingViewRequest: StructureShape
     CreateBillingViewResponse: StructureShape
+    CreditAllocationHistoryEntry: StructureShape
+    CreditAllocationHistoryList: ListShape
+    CreditData: StructureShape
+    CreditDataList: ListShape
+    CreditId: StringShape
+    CreditSharingType: EnumShape
+    CreditStatus: EnumShape
+    CurrencyAmount: StringShape
+    CurrencyCode: StringShape
     DeleteBillingViewRequest: StructureShape
     DeleteBillingViewResponse: StructureShape
     Dimension: EnumShape
     DimensionValues: StructureShape
     DisassociateSourceViewsRequest: StructureShape
     DisassociateSourceViewsResponse: StructureShape
+    EnterpriseSupportBillingMonth: StringShape
+    EnterpriseSupportTimePeriod: StructureShape
     ErrorMessage: StringShape
     Expression: StructureShape
+    FailedMonthsList: ListShape
     FieldName: StringShape
+    GetBillingPreferencesRequest: StructureShape
+    GetBillingPreferencesResponse: StructureShape
     GetBillingViewRequest: StructureShape
     GetBillingViewResponse: StructureShape
+    GetCreditAllocationHistoryRequest: StructureShape
+    GetCreditAllocationHistoryResponse: StructureShape
+    GetCreditsRequest: StructureShape
+    GetCreditsResponse: StructureShape
+    GetEnterpriseSupportChargeSummaryRequest: StructureShape
+    GetEnterpriseSupportChargeSummaryResponse: StructureShape
+    GetEnterpriseSupportContractDetailsRequest: StructureShape
+    GetEnterpriseSupportContractDetailsResponse: StructureShape
     GetResourcePolicyRequest: StructureShape
     GetResourcePolicyResponse: StructureShape
     InternalServerException: StructureShape
+    LinkedAccountCharge: StructureShape
+    LinkedAccountChargeList: ListShape
+    ListBillingViewSegmentsRequest: StructureShape
+    ListBillingViewSegmentsResponse: StructureShape
     ListBillingViewsRequest: StructureShape
     ListBillingViewsResponse: StructureShape
+    ListBusinessSupportAccountChargesRequest: StructureShape
+    ListBusinessSupportAccountChargesResponse: StructureShape
+    ListBusinessSupportSubscriptionHistoryRequest: StructureShape
+    ListBusinessSupportSubscriptionHistoryResponse: StructureShape
+    ListEnterpriseSupportLinkedAccountChargesRequest: StructureShape
+    ListEnterpriseSupportLinkedAccountChargesResponse: StructureShape
     ListSourceViewsForBillingViewRequest: StructureShape
     ListSourceViewsForBillingViewResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    Month: IntegerShape
     PageToken: StringShape
     PolicyDocument: StringShape
+    PreferenceKey: StringShape
+    PreferenceValue: EnumShape
+    PricingPlan: StructureShape
+    PricingPlanList: ListShape
+    PricingPlanTier: StructureShape
+    PricingPlanTierList: ListShape
+    ProductName: StringShape
+    ProductNames: ListShape
+    PromoCode: StringShape
+    PurchaseType: StringShape
+    PurchaseTypeApplications: ListShape
     QuotaCode: StringShape
+    RedeemCreditsRequest: StructureShape
+    RedeemCreditsResponse: StructureShape
     ResourceArn: StringShape
     ResourceId: StringShape
     ResourceNotFoundException: StructureShape
@@ -59,16 +144,26 @@ module Aws::Billing
     ResourceTagList: ListShape
     ResourceTagValue: StringShape
     ResourceType: StringShape
+    SearchOption: EnumShape
+    SearchValue: StringShape
     ServiceCode: StringShape
+    ServiceLevelAccountUsage: StructureShape
+    ServiceLevelAccountUsageList: ListShape
     ServiceQuotaExceededException: StructureShape
+    ShareableAccountIds: ListShape
+    StringSearch: StructureShape
+    StringSearches: ListShape
     TagKey: StringShape
     TagResourceRequest: StructureShape
     TagResourceResponse: StructureShape
     TagValues: StructureShape
     ThrottlingException: StructureShape
+    TimePeriodList: ListShape
     TimeRange: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateBillingPreferencesRequest: StructureShape
+    UpdateBillingPreferencesResponse: StructureShape
     UpdateBillingViewRequest: StructureShape
     UpdateBillingViewResponse: StructureShape
     ValidationException: StructureShape

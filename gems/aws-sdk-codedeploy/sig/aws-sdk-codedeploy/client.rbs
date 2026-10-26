@@ -226,6 +226,7 @@ module Aws::CodeDeploy
       },
       ?update_outdated_instances_only: bool,
       ?file_exists_behavior: String,
+      ?deployment_mode: String,
       ?override_alarm_configuration: {
         enabled: bool,
         ignore_poll_alarm_failure: untyped,

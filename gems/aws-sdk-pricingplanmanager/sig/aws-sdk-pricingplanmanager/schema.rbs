@@ -1,0 +1,43 @@
+module Aws::PricingPlanManager
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    ApprovalMode: EnumShape
+    ApprovePaidSubscriptionInput: StructureShape
+    ApprovePaidSubscriptionOutput: StructureShape
+    AssociateResourcesToSubscriptionInput: StructureShape
+    AssociateResourcesToSubscriptionOutput: StructureShape
+    CancelSubscriptionChangeInput: StructureShape
+    CancelSubscriptionChangeOutput: StructureShape
+    CancelSubscriptionInput: StructureShape
+    CancelSubscriptionOutput: StructureShape
+    ConflictException: StructureShape
+    CreateSubscriptionInput: StructureShape
+    CreateSubscriptionOutput: StructureShape
+    DisassociateResourcesFromSubscriptionInput: StructureShape
+    DisassociateResourcesFromSubscriptionOutput: StructureShape
+    GetSubscriptionInput: StructureShape
+    GetSubscriptionOutput: StructureShape
+    IdempotencyToken: StringShape
+    InternalServerException: StructureShape
+    ListSubscriptionsInput: StructureShape
+    ListSubscriptionsOutput: StructureShape
+    ResourceArns: ListShape
+    ResourceNotFoundException: StructureShape
+    ScheduledChange: StructureShape
+    ScheduledChangeType: EnumShape
+    ServiceQuotaExceededException: StructureShape
+    Status: EnumShape
+    Subscription: StructureShape
+    SubscriptionArn: StringShape
+    SubscriptionSummary: StructureShape
+    SubscriptionSummaryList: ListShape
+    ThrottlingException: StructureShape
+    UpdateSubscriptionInput: StructureShape
+    UpdateSubscriptionOutput: StructureShape
+    ValidationException: StructureShape
+
+    AWSPricingPlanManager: ServiceShape
+  end
+end

@@ -60,12 +60,15 @@ module Aws::ControlTower
     EnabledBaselineTargetIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controltower#EnabledBaselineTargetIdentifiers", name: "EnabledBaselineTargetIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     EnabledBaselines = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controltower#EnabledBaselines", name: "EnabledBaselines")
     EnabledControlDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#EnabledControlDetails", name: "EnabledControlDetails")
+    EnabledControlDriftTypes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#EnabledControlDriftTypes", name: "EnabledControlDriftTypes")
     EnabledControlFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#EnabledControlFilter", name: "EnabledControlFilter")
     EnabledControlIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controltower#EnabledControlIdentifiers", name: "EnabledControlIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    EnabledControlInheritanceDrift = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#EnabledControlInheritanceDrift", name: "EnabledControlInheritanceDrift")
     EnabledControlParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#EnabledControlParameter", name: "EnabledControlParameter")
     EnabledControlParameterSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controltower#EnabledControlParameterSummaries", name: "EnabledControlParameterSummaries")
     EnabledControlParameterSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#EnabledControlParameterSummary", name: "EnabledControlParameterSummary")
     EnabledControlParameters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controltower#EnabledControlParameters", name: "EnabledControlParameters")
+    EnabledControlResourceDrift = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#EnabledControlResourceDrift", name: "EnabledControlResourceDrift")
     EnabledControlSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#EnabledControlSummary", name: "EnabledControlSummary")
     EnabledControls = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controltower#EnabledControls", name: "EnabledControls")
     EnablementStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.controltower#EnablementStatus", name: "EnablementStatus")
@@ -125,8 +128,12 @@ module Aws::ControlTower
     Manifest = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.controltower#Manifest", name: "Manifest")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.controltower#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 200}})
     OperationIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.controltower#OperationIdentifier", name: "OperationIdentifier", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
+    ParentIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.controltower#ParentIdentifier", name: "ParentIdentifier", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[0-9a-zA-Z_\\-:\\/]+$"})
+    ParentIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controltower#ParentIdentifiers", name: "ParentIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     Region = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#Region", name: "Region")
     RegionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.controltower#RegionName", name: "RegionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    RemediationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.controltower#RemediationType", name: "RemediationType")
+    RemediationTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controltower#RemediationTypes", name: "RemediationTypes", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     ResetEnabledBaselineInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#ResetEnabledBaselineInput", name: "ResetEnabledBaselineInput")
     ResetEnabledBaselineOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#ResetEnabledBaselineOutput", name: "ResetEnabledBaselineOutput")
     ResetEnabledControlInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controltower#ResetEnabledControlInput", name: "ResetEnabledControlInput")
@@ -217,8 +224,9 @@ module Aws::ControlTower
     ControlOperationTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlOperationType, name: "member"))
     ControlOperations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlOperationSummary, name: "member"))
     CreateLandingZoneInput.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: LandingZoneVersion, name: "version", traits: {"smithy.api#required" => {}}))
-    CreateLandingZoneInput.add_member(:manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: Manifest, name: "manifest", traits: {"smithy.api#required" => {}}))
+    CreateLandingZoneInput.add_member(:remediation_types, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationTypes, name: "remediationTypes"))
     CreateLandingZoneInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"aws.cloudformation#cfnMutability" => "write"}))
+    CreateLandingZoneInput.add_member(:manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: Manifest, name: "manifest"))
     CreateLandingZoneInput.type = Types::CreateLandingZoneInput
     CreateLandingZoneOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn", traits: {"smithy.api#required" => {}}))
     CreateLandingZoneOutput.add_member(:operation_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationIdentifier, name: "operationIdentifier", traits: {"smithy.api#required" => {}}))
@@ -231,8 +239,9 @@ module Aws::ControlTower
     DisableBaselineInput.type = Types::DisableBaselineInput
     DisableBaselineOutput.add_member(:operation_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationIdentifier, name: "operationIdentifier", traits: {"smithy.api#required" => {}}))
     DisableBaselineOutput.type = Types::DisableBaselineOutput
-    DisableControlInput.add_member(:control_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlIdentifier, name: "controlIdentifier", traits: {"smithy.api#required" => {}}))
-    DisableControlInput.add_member(:target_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetIdentifier, name: "targetIdentifier", traits: {"smithy.api#required" => {}}))
+    DisableControlInput.add_member(:control_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlIdentifier, name: "controlIdentifier"))
+    DisableControlInput.add_member(:target_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetIdentifier, name: "targetIdentifier"))
+    DisableControlInput.add_member(:enabled_control_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "enabledControlIdentifier"))
     DisableControlInput.type = Types::DisableControlInput
     DisableControlOutput.add_member(:operation_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationIdentifier, name: "operationIdentifier", traits: {"smithy.api#required" => {}}))
     DisableControlOutput.type = Types::DisableControlOutput
@@ -241,6 +250,7 @@ module Aws::ControlTower
     DriftStatus.add_member(:not_checking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_CHECKING", traits: {"smithy.api#enumValue" => "NOT_CHECKING"}))
     DriftStatus.add_member(:unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN", traits: {"smithy.api#enumValue" => "UNKNOWN"}))
     DriftStatusSummary.add_member(:drift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatus, name: "driftStatus"))
+    DriftStatusSummary.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledControlDriftTypes, name: "types"))
     DriftStatusSummary.type = Types::DriftStatusSummary
     DriftStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatus, name: "member"))
     EnableBaselineInput.add_member(:baseline_version, ::Smithy::Schema::Shapes::MemberShape.new(target: BaselineVersion, name: "baselineVersion", traits: {"smithy.api#required" => {}}))
@@ -308,16 +318,25 @@ module Aws::ControlTower
     EnabledControlDetails.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     EnabledControlDetails.add_member(:control_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlIdentifier, name: "controlIdentifier"))
     EnabledControlDetails.add_member(:target_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetIdentifier, name: "targetIdentifier"))
-    EnabledControlDetails.add_member(:target_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetRegions, name: "targetRegions"))
     EnabledControlDetails.add_member(:status_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatusSummary, name: "statusSummary"))
     EnabledControlDetails.add_member(:drift_status_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatusSummary, name: "driftStatusSummary"))
+    EnabledControlDetails.add_member(:parent_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentIdentifier, name: "parentIdentifier"))
+    EnabledControlDetails.add_member(:target_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetRegions, name: "targetRegions"))
     EnabledControlDetails.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledControlParameterSummaries, name: "parameters"))
     EnabledControlDetails.type = Types::EnabledControlDetails
+    EnabledControlDriftTypes.add_member(:inheritance, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledControlInheritanceDrift, name: "inheritance"))
+    EnabledControlDriftTypes.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledControlResourceDrift, name: "resource"))
+    EnabledControlDriftTypes.type = Types::EnabledControlDriftTypes
     EnabledControlFilter.add_member(:control_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlIdentifiers, name: "controlIdentifiers"))
     EnabledControlFilter.add_member(:statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatuses, name: "statuses"))
     EnabledControlFilter.add_member(:drift_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatuses, name: "driftStatuses"))
+    EnabledControlFilter.add_member(:parent_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentIdentifiers, name: "parentIdentifiers"))
+    EnabledControlFilter.add_member(:inheritance_drift_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatuses, name: "inheritanceDriftStatuses"))
+    EnabledControlFilter.add_member(:resource_drift_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatuses, name: "resourceDriftStatuses"))
     EnabledControlFilter.type = Types::EnabledControlFilter
     EnabledControlIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    EnabledControlInheritanceDrift.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatus, name: "status"))
+    EnabledControlInheritanceDrift.type = Types::EnabledControlInheritanceDrift
     EnabledControlParameter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#required" => {}}))
     EnabledControlParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "value", traits: {"smithy.api#required" => {}}))
     EnabledControlParameter.type = Types::EnabledControlParameter
@@ -326,11 +345,14 @@ module Aws::ControlTower
     EnabledControlParameterSummary.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "value", traits: {"smithy.api#required" => {}}))
     EnabledControlParameterSummary.type = Types::EnabledControlParameterSummary
     EnabledControlParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledControlParameter, name: "member"))
-    EnabledControlSummary.add_member(:control_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlIdentifier, name: "controlIdentifier"))
+    EnabledControlResourceDrift.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatus, name: "status"))
+    EnabledControlResourceDrift.type = Types::EnabledControlResourceDrift
     EnabledControlSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
+    EnabledControlSummary.add_member(:control_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlIdentifier, name: "controlIdentifier"))
     EnabledControlSummary.add_member(:target_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetIdentifier, name: "targetIdentifier"))
     EnabledControlSummary.add_member(:status_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablementStatusSummary, name: "statusSummary"))
     EnabledControlSummary.add_member(:drift_status_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: DriftStatusSummary, name: "driftStatusSummary"))
+    EnabledControlSummary.add_member(:parent_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentIdentifier, name: "parentIdentifier"))
     EnabledControlSummary.type = Types::EnabledControlSummary
     EnabledControls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledControlSummary, name: "member"))
     EnablementStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
@@ -373,11 +395,12 @@ module Aws::ControlTower
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     LandingZoneDetail.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: LandingZoneVersion, name: "version", traits: {"smithy.api#required" => {}}))
-    LandingZoneDetail.add_member(:manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: Manifest, name: "manifest", traits: {"smithy.api#required" => {}}))
+    LandingZoneDetail.add_member(:remediation_types, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationTypes, name: "remediationTypes"))
     LandingZoneDetail.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "arn"))
     LandingZoneDetail.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LandingZoneStatus, name: "status"))
     LandingZoneDetail.add_member(:latest_available_version, ::Smithy::Schema::Shapes::MemberShape.new(target: LandingZoneVersion, name: "latestAvailableVersion"))
     LandingZoneDetail.add_member(:drift_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LandingZoneDriftStatusSummary, name: "driftStatus"))
+    LandingZoneDetail.add_member(:manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: Manifest, name: "manifest", traits: {"smithy.api#required" => {}}))
     LandingZoneDetail.type = Types::LandingZoneDetail
     LandingZoneDriftStatus.add_member(:drifted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRIFTED", traits: {"smithy.api#enumValue" => "DRIFTED"}))
     LandingZoneDriftStatus.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_SYNC", traits: {"smithy.api#enumValue" => "IN_SYNC"}))
@@ -438,6 +461,7 @@ module Aws::ControlTower
     ListEnabledControlsInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     ListEnabledControlsInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
     ListEnabledControlsInput.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledControlFilter, name: "filter"))
+    ListEnabledControlsInput.add_member(:include_children, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeChildren", traits: {"smithy.api#default" => false}))
     ListEnabledControlsInput.type = Types::ListEnabledControlsInput
     ListEnabledControlsOutput.add_member(:enabled_controls, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledControls, name: "enabledControls", traits: {"smithy.api#required" => {}}))
     ListEnabledControlsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
@@ -459,8 +483,11 @@ module Aws::ControlTower
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
+    ParentIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentIdentifier, name: "member"))
     Region.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionName, name: "name"))
     Region.type = Types::Region
+    RemediationType.add_member(:inheritance_drift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INHERITANCE_DRIFT", traits: {"smithy.api#enumValue" => "INHERITANCE_DRIFT"}))
+    RemediationTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationType, name: "member"))
     ResetEnabledBaselineInput.add_member(:enabled_baseline_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "enabledBaselineIdentifier", traits: {"smithy.api#required" => {}}))
     ResetEnabledBaselineInput.type = Types::ResetEnabledBaselineInput
     ResetEnabledBaselineOutput.add_member(:operation_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationIdentifier, name: "operationIdentifier", traits: {"smithy.api#required" => {}}))
@@ -507,8 +534,9 @@ module Aws::ControlTower
     UpdateEnabledControlOutput.add_member(:operation_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationIdentifier, name: "operationIdentifier", traits: {"smithy.api#required" => {}}))
     UpdateEnabledControlOutput.type = Types::UpdateEnabledControlOutput
     UpdateLandingZoneInput.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: LandingZoneVersion, name: "version", traits: {"smithy.api#required" => {}}))
-    UpdateLandingZoneInput.add_member(:manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: Manifest, name: "manifest", traits: {"smithy.api#required" => {}}))
+    UpdateLandingZoneInput.add_member(:remediation_types, ::Smithy::Schema::Shapes::MemberShape.new(target: RemediationTypes, name: "remediationTypes"))
     UpdateLandingZoneInput.add_member(:landing_zone_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "landingZoneIdentifier", traits: {"smithy.api#required" => {}}))
+    UpdateLandingZoneInput.add_member(:manifest, ::Smithy::Schema::Shapes::MemberShape.new(target: Manifest, name: "manifest"))
     UpdateLandingZoneInput.type = Types::UpdateLandingZoneInput
     UpdateLandingZoneOutput.add_member(:operation_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationIdentifier, name: "operationIdentifier", traits: {"smithy.api#required" => {}}))
     UpdateLandingZoneOutput.type = Types::UpdateLandingZoneOutput
@@ -519,7 +547,7 @@ module Aws::ControlTower
       service.id = "com.amazonaws.controltower#AWSControlTowerApis"
       service.name = "AWSControlTowerApis"
       service.version = "2018-05-10"
-      service.traits = {"aws.api#service" => {"sdkId" => "ControlTower", "cloudFormationName" => "ControlTower", "arnNamespace" => "controltower", "endpointPrefix" => "controltower", "cloudTrailEventSource" => "controltower.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "controltower"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id", "content-length", "x-api-key", "authorization", "x-amz-date", "x-amz-security-token"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"]}, "smithy.api#title" => "AWS Control Tower"}
+      service.traits = {"aws.api#service" => {"sdkId" => "ControlTower", "cloudFormationName" => "ControlTower", "arnNamespace" => "controltower", "endpointPrefix" => "controltower", "cloudTrailEventSource" => "controltower.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "controltower"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id", "content-length", "x-api-key", "authorization", "x-amz-date", "x-amz-security-token"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"]}, "smithy.api#title" => "AWS Control Tower", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://controltower-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://controltower-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://controltower.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://controltower.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_landing_zone, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.controltower#CreateLandingZone"
         operation.name = "CreateLandingZone"

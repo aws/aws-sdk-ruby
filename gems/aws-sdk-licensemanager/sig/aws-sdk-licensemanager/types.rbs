@@ -53,6 +53,32 @@ module Aws::LicenseManager
       CREATE_TOKEN: String
     end
 
+    class AndRuleStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?matching_rule_statements: Array[Types::MatchingRuleStatement],
+        ?script_rule_statements: Array[Types::ScriptRuleStatement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor matching_rule_statements: Array[Types::MatchingRuleStatement]?
+      attr_accessor script_rule_statements: Array[Types::ScriptRuleStatement]?
+    end
+
+    class Asset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_arn: String,
+        ?latest_asset_discovery_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_arn: String?
+      attr_accessor latest_asset_discovery_time: Time?
+    end
+
     class AuthorizationException
       include Smithy::Schema::Structure
 
@@ -326,6 +352,72 @@ module Aws::LicenseManager
       attr_accessor version: String?
     end
 
+    class CreateLicenseAssetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?license_asset_group_configurations: Array[Types::LicenseAssetGroupConfiguration],
+        ?associated_license_asset_ruleset_ar_ns: Array[String],
+        ?properties: Array[Types::LicenseAssetGroupProperty],
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor license_asset_group_configurations: Array[Types::LicenseAssetGroupConfiguration]?
+      attr_accessor associated_license_asset_ruleset_ar_ns: Array[String]?
+      attr_accessor properties: Array[Types::LicenseAssetGroupProperty]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateLicenseAssetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_group_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_group_arn: String?
+      attr_accessor status: String?
+    end
+
+    class CreateLicenseAssetRulesetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?rules: Array[Types::LicenseAssetRule],
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::LicenseAssetRule]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateLicenseAssetRulesetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_ruleset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_ruleset_arn: String?
+    end
+
     class CreateLicenseConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -339,6 +431,7 @@ module Aws::LicenseManager
         ?tags: Array[Types::Tag],
         ?disassociate_when_not_found: bool,
         ?product_information_list: Array[Types::ProductInformation],
+        ?license_expiry: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -351,6 +444,7 @@ module Aws::LicenseManager
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor disassociate_when_not_found: bool?
       attr_accessor product_information_list: Array[Types::ProductInformation]?
+      attr_accessor license_expiry: Integer?
     end
 
     class CreateLicenseConfigurationResponse
@@ -488,6 +582,7 @@ module Aws::LicenseManager
         ?status: String,
         ?client_token: String,
         ?source_version: String,
+        ?reset_usage: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -503,6 +598,7 @@ module Aws::LicenseManager
       attr_accessor status: String?
       attr_accessor client_token: String?
       attr_accessor source_version: String?
+      attr_accessor reset_usage: bool?
     end
 
     class CreateLicenseVersionResponse
@@ -554,6 +650,28 @@ module Aws::LicenseManager
       attr_accessor token: String?
     end
 
+    class CrossAccountDiscoveryServiceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CrossRegionDiscoveryStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: Hash[String, Types::RegionStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: Hash[String, Types::RegionStatus]?
+    end
+
     class DatetimeRange
       include Smithy::Schema::Structure
 
@@ -595,6 +713,48 @@ module Aws::LicenseManager
       attr_accessor grant_arn: String?
       attr_accessor status: String?
       attr_accessor version: String?
+    end
+
+    class DeleteLicenseAssetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_group_arn: String?
+    end
+
+    class DeleteLicenseAssetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DeleteLicenseAssetRulesetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_ruleset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_ruleset_arn: String?
+    end
+
+    class DeleteLicenseAssetRulesetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeleteLicenseConfigurationRequest
@@ -922,6 +1082,50 @@ module Aws::LicenseManager
       attr_accessor grant: Types::Grant?
     end
 
+    class GetLicenseAssetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_group_arn: String?
+    end
+
+    class GetLicenseAssetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_group: Types::LicenseAssetGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_group: Types::LicenseAssetGroup?
+    end
+
+    class GetLicenseAssetRulesetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_ruleset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_ruleset_arn: String?
+    end
+
+    class GetLicenseAssetRulesetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_ruleset: Types::LicenseAssetRuleset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_ruleset: Types::LicenseAssetRuleset?
+    end
+
     class GetLicenseConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -954,6 +1158,7 @@ module Aws::LicenseManager
         ?product_information_list: Array[Types::ProductInformation],
         ?automated_discovery_information: Types::AutomatedDiscoveryInformation,
         ?disassociate_when_not_found: bool,
+        ?license_expiry: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -974,6 +1179,7 @@ module Aws::LicenseManager
       attr_accessor product_information_list: Array[Types::ProductInformation]?
       attr_accessor automated_discovery_information: Types::AutomatedDiscoveryInformation?
       attr_accessor disassociate_when_not_found: bool?
+      attr_accessor license_expiry: Integer?
     end
 
     class GetLicenseConversionTaskRequest
@@ -1100,6 +1306,9 @@ module Aws::LicenseManager
         ?organization_configuration: Types::OrganizationConfiguration,
         ?enable_cross_accounts_discovery: bool,
         ?license_manager_resource_share_arn: String,
+        ?cross_region_discovery_home_region: String,
+        ?cross_region_discovery_source_regions: Array[String],
+        ?service_status: Types::ServiceStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1108,6 +1317,9 @@ module Aws::LicenseManager
       attr_accessor organization_configuration: Types::OrganizationConfiguration?
       attr_accessor enable_cross_accounts_discovery: bool?
       attr_accessor license_manager_resource_share_arn: String?
+      attr_accessor cross_region_discovery_home_region: String?
+      attr_accessor cross_region_discovery_source_regions: Array[String]?
+      attr_accessor service_status: Types::ServiceStatus?
     end
 
     class Grant
@@ -1190,6 +1402,23 @@ module Aws::LicenseManager
       attr_accessor create_time: String?
       attr_accessor version: String?
       attr_accessor received_metadata: Types::ReceivedMetadata?
+    end
+
+    class InstanceRuleStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?and_rule_statement: Types::AndRuleStatement,
+        ?or_rule_statement: Types::OrRuleStatement,
+        ?matching_rule_statement: Types::MatchingRuleStatement,
+        ?script_rule_statement: Types::ScriptRuleStatement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor and_rule_statement: Types::AndRuleStatement?
+      attr_accessor or_rule_statement: Types::OrRuleStatement?
+      attr_accessor matching_rule_statement: Types::MatchingRuleStatement?
+      attr_accessor script_rule_statement: Types::ScriptRuleStatement?
     end
 
     class InvalidParameterValueException
@@ -1301,6 +1530,93 @@ module Aws::LicenseManager
       attr_accessor version: String?
     end
 
+    class LicenseAssetGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?license_asset_group_configurations: Array[Types::LicenseAssetGroupConfiguration],
+        ?associated_license_asset_ruleset_ar_ns: Array[String],
+        ?properties: Array[Types::LicenseAssetGroupProperty],
+        ?license_asset_group_arn: String,
+        ?status: String,
+        ?status_message: String,
+        ?latest_usage_analysis_time: Time,
+        ?latest_resource_discovery_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor license_asset_group_configurations: Array[Types::LicenseAssetGroupConfiguration]?
+      attr_accessor associated_license_asset_ruleset_ar_ns: Array[String]?
+      attr_accessor properties: Array[Types::LicenseAssetGroupProperty]?
+      attr_accessor license_asset_group_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor latest_usage_analysis_time: Time?
+      attr_accessor latest_resource_discovery_time: Time?
+    end
+
+    class LicenseAssetGroupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage_dimension: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage_dimension: String?
+    end
+
+    class LicenseAssetGroupProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module LicenseAssetGroupStatus
+      ACTIVE: String
+      DISABLED: String
+      DELETED: String
+    end
+
+    class LicenseAssetRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_statement: Types::RuleStatement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_statement: Types::RuleStatement?
+    end
+
+    class LicenseAssetRuleset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?rules: Array[Types::LicenseAssetRule],
+        ?license_asset_ruleset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::LicenseAssetRule]?
+      attr_accessor license_asset_ruleset_arn: String?
+    end
+
     class LicenseConfiguration
       include Smithy::Schema::Structure
 
@@ -1321,6 +1637,7 @@ module Aws::LicenseManager
         ?managed_resource_summary_list: Array[Types::ManagedResourceSummary],
         ?product_information_list: Array[Types::ProductInformation],
         ?automated_discovery_information: Types::AutomatedDiscoveryInformation,
+        ?license_expiry: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1340,6 +1657,7 @@ module Aws::LicenseManager
       attr_accessor managed_resource_summary_list: Array[Types::ManagedResourceSummary]?
       attr_accessor product_information_list: Array[Types::ProductInformation]?
       attr_accessor automated_discovery_information: Types::AutomatedDiscoveryInformation?
+      attr_accessor license_expiry: Integer?
     end
 
     class LicenseConfigurationAssociation
@@ -1359,6 +1677,21 @@ module Aws::LicenseManager
       attr_accessor resource_owner_id: String?
       attr_accessor association_time: Time?
       attr_accessor ami_association_scope: String?
+    end
+
+    class LicenseConfigurationRuleStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?and_rule_statement: Types::AndRuleStatement,
+        ?or_rule_statement: Types::OrRuleStatement,
+        ?matching_rule_statement: Types::MatchingRuleStatement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor and_rule_statement: Types::AndRuleStatement?
+      attr_accessor or_rule_statement: Types::OrRuleStatement?
+      attr_accessor matching_rule_statement: Types::MatchingRuleStatement?
     end
 
     module LicenseConfigurationStatus
@@ -1470,6 +1803,21 @@ module Aws::LicenseManager
       attr_accessor metadata_list: Array[Types::Metadata]?
     end
 
+    class LicenseRuleStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?and_rule_statement: Types::AndRuleStatement,
+        ?or_rule_statement: Types::OrRuleStatement,
+        ?matching_rule_statement: Types::MatchingRuleStatement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor and_rule_statement: Types::AndRuleStatement?
+      attr_accessor or_rule_statement: Types::OrRuleStatement?
+      attr_accessor matching_rule_statement: Types::MatchingRuleStatement?
+    end
+
     class LicenseSpecification
       include Smithy::Schema::Structure
 
@@ -1513,6 +1861,36 @@ module Aws::LicenseManager
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ListAssetsForLicenseAssetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_group_arn: String,
+        ?asset_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_group_arn: String?
+      attr_accessor asset_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssetsForLicenseAssetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assets: Array[Types::Asset],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assets: Array[Types::Asset]?
+      attr_accessor next_token: String?
     end
 
     class ListAssociationsForLicenseConfigurationRequest
@@ -1598,6 +1976,94 @@ module Aws::LicenseManager
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor license_operation_failure_list: Array[Types::LicenseOperationFailure]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseAssetGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseAssetGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_groups: Array[Types::LicenseAssetGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_groups: Array[Types::LicenseAssetGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseAssetRulesetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?show_aws_managed_license_asset_rulesets: bool,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor show_aws_managed_license_asset_rulesets: bool?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseAssetRulesetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_rulesets: Array[Types::LicenseAssetRuleset],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_rulesets: Array[Types::LicenseAssetRuleset]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLicenseConfigurationsForOrganizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_arns: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_arns: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    class ListLicenseConfigurationsForOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configurations: Array[Types::LicenseConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configurations: Array[Types::LicenseConfiguration]?
       attr_accessor next_token: String?
     end
 
@@ -2014,6 +2480,21 @@ module Aws::LicenseManager
       attr_accessor association_count: Integer?
     end
 
+    class MatchingRuleStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_to_match: String,
+        ?constraint: String,
+        ?value_to_match: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_to_match: String?
+      attr_accessor constraint: String?
+      attr_accessor value_to_match: Array[String]?
+    end
+
     class Metadata
       include Smithy::Schema::Structure
 
@@ -2047,6 +2528,19 @@ module Aws::LicenseManager
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor activation_override_behavior: String?
+    end
+
+    class OrRuleStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?matching_rule_statements: Array[Types::MatchingRuleStatement],
+        ?script_rule_statements: Array[Types::ScriptRuleStatement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor matching_rule_statements: Array[Types::MatchingRuleStatement]?
+      attr_accessor script_rule_statements: Array[Types::ScriptRuleStatement]?
     end
 
     class OrganizationConfiguration
@@ -2166,6 +2660,17 @@ module Aws::LicenseManager
       attr_accessor message: String?
     end
 
+    class RegionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
     class RejectGrantRequest
       include Smithy::Schema::Structure
 
@@ -2203,10 +2708,16 @@ module Aws::LicenseManager
 
       def initialize: (
         ?license_configuration_arns: Array[String],
+        ?license_asset_group_arns: Array[String],
+        ?report_start_date: Time,
+        ?report_end_date: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor license_configuration_arns: Array[String]?
+      attr_accessor license_asset_group_arns: Array[String]?
+      attr_accessor report_start_date: Time?
+      attr_accessor report_end_date: Time?
     end
 
     class ReportFrequency
@@ -2226,6 +2737,7 @@ module Aws::LicenseManager
       DAY: String
       WEEK: String
       MONTH: String
+      ONE_TIME: String
     end
 
     class ReportGenerator
@@ -2266,6 +2778,7 @@ module Aws::LicenseManager
     module ReportType
       LICENSE_CONFIGURATION_SUMMARY_REPORT: String
       LICENSE_CONFIGURATION_USAGE_REPORT: String
+      LICENSE_ASSET_GROUP_USAGE_REPORT: String
     end
 
     class ResourceInventory
@@ -2278,6 +2791,12 @@ module Aws::LicenseManager
         ?platform: String,
         ?platform_version: String,
         ?resource_owning_account_id: String,
+        ?marketplace_product_codes: Array[String],
+        ?usage_operation: String,
+        ?ami_id: String,
+        ?host_id: String,
+        ?region: String,
+        ?instance_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2287,6 +2806,12 @@ module Aws::LicenseManager
       attr_accessor platform: String?
       attr_accessor platform_version: String?
       attr_accessor resource_owning_account_id: String?
+      attr_accessor marketplace_product_codes: Array[String]?
+      attr_accessor usage_operation: String?
+      attr_accessor ami_id: String?
+      attr_accessor host_id: String?
+      attr_accessor region: String?
+      attr_accessor instance_type: String?
     end
 
     class ResourceLimitExceededException
@@ -2319,6 +2844,21 @@ module Aws::LicenseManager
       SYSTEMS_MANAGER_MANAGED_INSTANCE: String
     end
 
+    class RuleStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_configuration_rule_statement: Types::LicenseConfigurationRuleStatement,
+        ?license_rule_statement: Types::LicenseRuleStatement,
+        ?instance_rule_statement: Types::InstanceRuleStatement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_configuration_rule_statement: Types::LicenseConfigurationRuleStatement?
+      attr_accessor license_rule_statement: Types::LicenseRuleStatement?
+      attr_accessor instance_rule_statement: Types::InstanceRuleStatement?
+    end
+
     class S3Location
       include Smithy::Schema::Structure
 
@@ -2332,6 +2872,19 @@ module Aws::LicenseManager
       attr_accessor key_prefix: String?
     end
 
+    class ScriptRuleStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_to_match: String,
+        ?script: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_to_match: String?
+      attr_accessor script: String?
+    end
+
     class ServerInternalException
       include Smithy::Schema::Structure
 
@@ -2341,6 +2894,19 @@ module Aws::LicenseManager
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ServiceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_discovery: Types::CrossAccountDiscoveryServiceStatus,
+        ?cross_region_discovery: Types::CrossRegionDiscoveryStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_discovery: Types::CrossAccountDiscoveryServiceStatus?
+      attr_accessor cross_region_discovery: Types::CrossRegionDiscoveryStatus?
     end
 
     class Tag
@@ -2438,6 +3004,74 @@ module Aws::LicenseManager
 
     end
 
+    class UpdateLicenseAssetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?license_asset_group_configurations: Array[Types::LicenseAssetGroupConfiguration],
+        ?associated_license_asset_ruleset_ar_ns: Array[String],
+        ?properties: Array[Types::LicenseAssetGroupProperty],
+        ?license_asset_group_arn: String,
+        ?status: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor license_asset_group_configurations: Array[Types::LicenseAssetGroupConfiguration]?
+      attr_accessor associated_license_asset_ruleset_ar_ns: Array[String]?
+      attr_accessor properties: Array[Types::LicenseAssetGroupProperty]?
+      attr_accessor license_asset_group_arn: String?
+      attr_accessor status: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateLicenseAssetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_group_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_group_arn: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateLicenseAssetRulesetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?rules: Array[Types::LicenseAssetRule],
+        ?license_asset_ruleset_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rules: Array[Types::LicenseAssetRule]?
+      attr_accessor license_asset_ruleset_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateLicenseAssetRulesetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?license_asset_ruleset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor license_asset_ruleset_arn: String?
+    end
+
     class UpdateLicenseConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -2451,6 +3085,7 @@ module Aws::LicenseManager
         ?description: String,
         ?product_information_list: Array[Types::ProductInformation],
         ?disassociate_when_not_found: bool,
+        ?license_expiry: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2463,6 +3098,7 @@ module Aws::LicenseManager
       attr_accessor description: String?
       attr_accessor product_information_list: Array[Types::ProductInformation]?
       attr_accessor disassociate_when_not_found: bool?
+      attr_accessor license_expiry: Integer?
     end
 
     class UpdateLicenseConfigurationResponse
@@ -2538,6 +3174,7 @@ module Aws::LicenseManager
         ?sns_topic_arn: String,
         ?organization_configuration: Types::OrganizationConfiguration,
         ?enable_cross_accounts_discovery: bool,
+        ?enabled_discovery_source_regions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2545,6 +3182,7 @@ module Aws::LicenseManager
       attr_accessor sns_topic_arn: String?
       attr_accessor organization_configuration: Types::OrganizationConfiguration?
       attr_accessor enable_cross_accounts_discovery: bool?
+      attr_accessor enabled_discovery_source_regions: Array[String]?
     end
 
     class UpdateServiceSettingsResponse

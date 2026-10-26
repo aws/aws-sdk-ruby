@@ -144,18 +144,18 @@ module Aws::GeoRoutes
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,44 +209,44 @@ module Aws::GeoRoutes
       super
     end
 
-    # <p>Use the <code>CalculateIsolines</code> action to find service areas that can be reached in a given threshold of time, distance.</p>
+    # <p>Calculates areas that can be reached within specified time or distance thresholds from a given point. For example, you can use this operation to determine the area within a 30-minute drive of a store location, find neighborhoods within walking distance of a school, or identify delivery zones based on drive time.</p> <p>Isolines (also known as isochrones for time-based calculations) are useful for various applications including:</p> <ul> <li> <p>Service area visualization - Show customers the area you can serve within promised delivery times</p> </li> <li> <p>Site selection - Analyze potential business locations based on population within travel distance</p> </li> <li> <p>Site selection - Determine areas that can be reached within specified response times</p> </li> </ul> <note> <p>Route preferences such as avoiding toll roads or ferries are treated as preferences rather than absolute restrictions. If a viable route cannot be calculated while honoring all preferences, some may be ignored.</p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-isolines.html">Calculate isolines</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @param [Hash, Types::CalculateIsolinesRequest] params
     # @option params [Types::IsolineAllowOptions] :allow
-    #   <p>Features that are allowed while calculating an isoline.</p>
+    #   <p>Enables special road types or features that should be considered for routing even if they might be restricted by default for the selected travel mode. These include high-occupancy vehicle and toll lanes.</p>
     # @option params [String] :arrival_time
-    #   <p>Time of arrival at the destination.</p> <p>Time format: <code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
+    #   <p>Determine areas from which <code>Destination</code> can be reached by this time, taking into account predicted traffic conditions and working backward to account for congestion patterns. This attribute cannot be used together with <code>DepartureTime</code> or <code>DepartNow</code>. Specified as an ISO-8601 timestamp with timezone offset.</p> <p>Time format: <code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Types::IsolineAvoidanceOptions] :avoid
-    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
+    #   <p>Specifies road types, features, or areas to avoid (if possible) when calculating reachable areas. These are treated as preferences rather than strict constraints—if a route cannot be calculated without using an avoided feature, that avoidance preference may be ignored.</p>
     # @option params [Boolean] :depart_now
-    #   <p>Uses the current time as the time of departure.</p>
+    #   <p>When true, uses the current time as the departure time and takes current traffic conditions into account. This attribute cannot be used together with <code>DepartureTime</code> or <code>ArrivalTime</code>.</p>
     # @option params [String] :departure_time
-    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
+    #   <p>Determine areas that can be reached when departing at this time, taking into account predicted traffic conditions. This attribute cannot be used together with <code>ArrivalTime</code> or <code>DepartNow</code>. Specified as an ISO-8601 timestamp with timezone offset.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Array<Float>] :destination
-    #   <p>The final position for the route. In the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>
+    #   <p>An optional destination point, specified as <code>[longitude, latitude]</code> coordinates. When provided, the service calculates areas from which this destination can be reached within the specified thresholds. This reverses the usual isoline calculation to show areas that could reach your location, rather than areas you could reach from your location. Either <code>Origin</code> or <code>Destination</code> must be provided.</p>
     # @option params [Types::IsolineDestinationOptions] :destination_options
-    #   <p>Destination related options.</p>
+    #   <p>Options that control how the destination point is matched to the road network and how routes can approach it. These options help improve travel time accuracy by accounting for real-world access to the destination.</p>
     # @option params [String] :isoline_geometry_format
-    #   <p>The format of the returned IsolineGeometry. </p> <p>Default Value:<code>FlexiblePolyline</code> </p>
+    #   <p>The format of the returned IsolineGeometry. </p> <p>Default value:<code>FlexiblePolyline</code> </p>
     # @option params [Types::IsolineGranularityOptions] :isoline_granularity
-    #   <p>Defines the granularity of the returned Isoline.</p>
+    #   <p>Controls the detail level of the generated isolines. Higher granularity produces smoother shapes but requires more processing time and results in larger responses.</p>
     # @option params [String] :key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
+    #   <p>An Amazon Location Service API Key with access to this action. If omitted, the request must be signed using Signature Version 4.</p>
     # @option params [String] :optimize_isoline_for
-    #   <p>Specifies the optimization criteria for when calculating an isoline. AccurateCalculation generates an isoline of higher granularity that is more precise. FastCalculation generates an isoline faster by reducing the granularity, and in turn the quality of the isoline. BalancedCalculation generates an isoline by balancing between quality and performance. </p> <p>Default Value: <code>BalancedCalculation</code> </p>
+    #   <p>Controls the trade-off between calculation speed and isoline precision. Choose <code> FastCalculation</code> for quicker results with less detail, <code>AccurateCalculation</code> for more precise results, or <code>BalancedCalculation</code> for a middle ground.</p> <p>Default value: <code>BalancedCalculation</code> </p>
     # @option params [String] :optimize_routing_for
-    #   <p>Specifies the optimization criteria for calculating a route.</p> <p>Default Value: <code>FastestRoute</code> </p>
+    #   <p>Determines whether routes prioritize shortest travel time (<code>FastestRoute</code>) or shortest physical distance (<code>ShortestRoute</code>) when calculating reachable areas.</p> <p>Default value: <code>FastestRoute</code> </p>
     # @option params [Array<Float>] :origin
-    #   <p>The start position for the route.</p>
+    #   <p>The starting point for isoline calculations, specified as <code>[longitude, latitude]</code> coordinates. For example, this could be a store location, service center, or any point from which you want to calculate reachable areas. Either <code>Origin</code> or <code>Destination</code> must be provided.</p>
     # @option params [Types::IsolineOriginOptions] :origin_options
-    #   <p>Origin related options.</p>
+    #   <p>Options that control how the origin point is matched to the road network and how routes can depart from it. These options help improve travel time accuracy by accounting for real-world access from the origin.</p>
     # @option params [Types::IsolineThresholds] :thresholds
-    #   <p>Threshold to be used for the isoline calculation. Up to 3 thresholds per provided type can be requested.</p> <p> You incur a calculation charge for each threshold. Using a large amount of thresholds in a request can lead you to incur unexpected charges. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`"> Amazon Location's pricing page</a> for more information.</p>
+    #   <p>The distance or time thresholds used to determine reachable areas. You can specify up to five thresholds (which all must be the same type) to calculate multiple isolines in a single request. For example, to determine the areas that are reachable within 10 and 20 minutes of the origin, specify time thresholds of 600 and 1200 seconds.</p> <p>You incur a calculation charge for each threshold. Using a large number of thresholds in a request can lead to unexpected charges. For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html">Routes pricing</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @option params [Types::IsolineTrafficOptions] :traffic
-    #   <p>Traffic related options.</p>
+    #   <p>Configures how real-time and historical traffic data affects isoline calculations. Traffic patterns can significantly impact reachable areas, especially during peak hours.</p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <note> <p> The mode <code>Scooter</code> also applies to motorcycles, set to <code>Scooter</code> when wanted to calculate options for motorcycles.</p> </note> <p>Default Value: <code>Car</code> </p>
+    #   <p>The mode of transportation to use for calculations. This affects which road types or features can be used, estimated speed, and the traffic levels that are applied.</p> <ul> <li> <p> <code>Car</code>—Standard passenger vehicle routing using roads accessible to cars</p> </li> <li> <p> <code>Pedestrian</code>—Walking routes using pedestrian paths, sidewalks, and crossings</p> </li> <li> <p> <code>Scooter</code>—Light two-wheeled vehicle routing using roads and paths accessible to scooters</p> </li> <li> <p> <code>Truck</code>—Commercial truck routing considering vehicle dimensions, weight restrictions, and hazardous material regulations</p> </li> </ul> <note> <p>The mode <code>Scooter</code> also applies to motorcycles; set this to <code>Scooter</code> when calculating isolines for motorcycles.</p> </note> <p>Default value: <code>Car</code> </p>
     # @option params [Types::IsolineTravelModeOptions] :travel_mode_options
-    #   <p>Travel mode related options for the provided travel mode.</p>
+    #   <p>Additional attributes that refine how reachable areas are calculated based on specific vehicle characteristics. These options help produce more accurate results by accounting for real-world constraints and capabilities.</p> <p>For example:</p> <ul> <li> <p>For trucks (<code>Truck</code>), specify dimensions, weight limits, and hazardous cargo restrictions to ensure isolines only include roads that can physically and legally accommodate the vehicle</p> </li> <li> <p>For cars (<code>Car</code>), set maximum speed capabilities or indicate high-occupancy vehicle eligibility to better estimate reachable areas</p> </li> <li> <p>For scooters (<code>Scooter</code>), specify engine type and speed limitations to more accurately model their travel capabilities</p> </li> </ul> <p>Without these options, calculations use default assumptions that may not match your specific use case.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     allow: {
@@ -311,7 +311,7 @@ module Aws::GeoRoutes
     #       u_turns: false,
     #       zone_categories: [
     #         {
-    #           category: "IsolineZoneCategory"
+    #           category: "CongestionPricing" # One of: ["CongestionPricing", "Environmental", "Vignette"]
     #         }
     #       ]
     #     },
@@ -325,21 +325,21 @@ module Aws::GeoRoutes
     #         name_hint: "SensitiveString",
     #         on_road_threshold: 1,
     #         radius: 1,
-    #         strategy: "MatchingStrategy"
+    #         strategy: "MatchAny" # One of: ["MatchAny", "MatchMostSignificantRoad"]
     #       },
     #       side_of_street: {
     #         position: [1.0], # required
-    #         use_with: "SideOfStreetMatchingStrategy"
+    #         use_with: "AnyStreet" # One of: ["AnyStreet", "DividedStreetOnly"]
     #       }
     #     },
-    #     isoline_geometry_format: "GeometryFormat",
+    #     isoline_geometry_format: "FlexiblePolyline" # One of: ["FlexiblePolyline", "Simple"],
     #     isoline_granularity: {
     #       max_points: 1,
     #       max_resolution: 1
     #     },
     #     key: "ApiKey",
-    #     optimize_isoline_for: "IsolineOptimizationObjective",
-    #     optimize_routing_for: "RoutingObjective",
+    #     optimize_isoline_for: "AccurateCalculation" # One of: ["AccurateCalculation", "BalancedCalculation", "FastCalculation"],
+    #     optimize_routing_for: "FastestRoute" # One of: ["FastestRoute", "ShortestRoute"],
     #     origin: [1.0],
     #     origin_options: {
     #       avoid_actions_for_distance: 1,
@@ -348,11 +348,11 @@ module Aws::GeoRoutes
     #         name_hint: "SensitiveString",
     #         on_road_threshold: 1,
     #         radius: 1,
-    #         strategy: "MatchingStrategy"
+    #         strategy: "MatchAny" # One of: ["MatchAny", "MatchMostSignificantRoad"]
     #       },
     #       side_of_street: {
     #         position: [1.0], # required
-    #         use_with: "SideOfStreetMatchingStrategy"
+    #         use_with: "AnyStreet" # One of: ["AnyStreet", "DividedStreetOnly"]
     #       }
     #     },
     #     thresholds: { # required
@@ -361,12 +361,12 @@ module Aws::GeoRoutes
     #     },
     #     traffic: {
     #       flow_event_threshold_override: 1,
-    #       usage: "TrafficUsage"
+    #       usage: "IgnoreTrafficData" # One of: ["IgnoreTrafficData", "UseTrafficData"]
     #     },
-    #     travel_mode: "IsolineTravelMode",
+    #     travel_mode: "Car" # One of: ["Car", "Pedestrian", "Scooter", "Truck"],
     #     travel_mode_options: {
     #       car: {
-    #         engine_type: "IsolineEngineType",
+    #         engine_type: "Electric" # One of: ["Electric", "InternalCombustion", "PluginHybrid"],
     #         license_plate: {
     #           last_character: "String"
     #         },
@@ -374,7 +374,7 @@ module Aws::GeoRoutes
     #         occupancy: 1
     #       },
     #       scooter: {
-    #         engine_type: "IsolineEngineType",
+    #         engine_type: "Electric" # One of: ["Electric", "InternalCombustion", "PluginHybrid"],
     #         license_plate: {
     #           last_character: "String"
     #         },
@@ -383,9 +383,9 @@ module Aws::GeoRoutes
     #       },
     #       truck: {
     #         axle_count: 1,
-    #         engine_type: "IsolineEngineType",
+    #         engine_type: "Electric" # One of: ["Electric", "InternalCombustion", "PluginHybrid"],
     #         gross_weight: 1,
-    #         hazardous_cargos: ["IsolineHazardousCargoType"],
+    #         hazardous_cargos: ["Combustible" # One of: ["Combustible", "Corrosive", "Explosive", "Flammable", "Gas", "HarmfulToWater", "Organic", "Other", "Poison", "PoisonousInhalation", "Radioactive"]],
     #         height: 1,
     #         height_above_first_axle: 1,
     #         kpra_length: 1,
@@ -401,7 +401,7 @@ module Aws::GeoRoutes
     #           axle_count: 1,
     #           trailer_count: 1
     #         },
-    #         truck_type: "IsolineTruckType",
+    #         truck_type: "LightTruck" # One of: ["LightTruck", "StraightTruck", "Tractor"],
     #         tunnel_restriction_code: "TunnelRestrictionCode",
     #         weight_per_axle: 1,
     #         weight_per_axle_group: {
@@ -422,7 +422,7 @@ module Aws::GeoRoutes
     #   {
     #     arrival_time: "TimestampWithTimezoneOffset",
     #     departure_time: "TimestampWithTimezoneOffset",
-    #     isoline_geometry_format: "GeometryFormat", # required
+    #     isoline_geometry_format: "FlexiblePolyline" # One of: ["FlexiblePolyline", "Simple"], # required
     #     isolines: [ # required
     #       {
     #         connections: [ # required
@@ -461,34 +461,34 @@ module Aws::GeoRoutes
       request.send_request(options)
     end
 
-    # <p> Use <code>CalculateRouteMatrix</code> to compute results for all pairs of Origins to Destinations. Each row corresponds to one entry in Origins. Each entry in the row corresponds to the route from that entry in Origins to an entry in Destinations positions.</p>
+    # <p> Use <code>CalculateRouteMatrix</code> to compute results for all pairs of Origins to Destinations. Each row corresponds to one entry in Origins. Each entry in the row corresponds to the route from that entry in Origins to an entry in Destinations positions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html">Calculate route matrix</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @param [Hash, Types::CalculateRouteMatrixRequest] params
     # @option params [Types::RouteMatrixAllowOptions] :allow
     #   <p>Features that are allowed while calculating a route.</p>
     # @option params [Types::RouteMatrixAvoidanceOptions] :avoid
-    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
+    #   <p> Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only <code>TollRoads</code>, <code>Ferries</code>, and <code>ControlledAccessHighways</code>. </p>
     # @option params [Boolean] :depart_now
     #   <p>Uses the current time as the time of departure.</p>
     # @option params [String] :departure_time
-    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
+    #   <p>Time of departure from the origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Array<Types::RouteMatrixDestination>] :destinations
-    #   <p>List of destinations for the route.</p> <note> <p>Route calculations are billed for each origin and destination pair. If you use a large matrix of origins and destinations, your costs will increase accordingly. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`"> Amazon Location's pricing page</a> for more information.</p> </note>
+    #   <p>List of destinations for the route in World Geodetic System (WGS 84) format: [longitude, latitude].</p> <note> <p>Route calculations are billed for each origin and destination pair. If you use a large matrix of origins and destinations, your costs will increase accordingly. For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html">Routes pricing</a> in the <i>Amazon Location Service Developer Guide</i>.</p> </note> <p>The maximum number of destinations depends on the routing boundary configuration:</p> <ul> <li> <p>With <code>RoutingBoundary.Geometry</code> set: maximum 500 destinations</p> </li> <li> <p>With <code>RoutingBoundary.Unbounded</code> set to <code>true</code>: maximum 100 destinations</p> </li> <li> <p>For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers in <code>ap-southeast-1</code> and <code>ap-southeast-5</code>: maximum 350 destinations</p> </li> </ul> <p>The total matrix size (origins × destinations) must not exceed:</p> <ul> <li> <p>With <code>RoutingBoundary.Geometry</code>: 160,000</p> </li> <li> <p>With <code>RoutingBoundary.Unbounded</code>: 100</p> </li> <li> <p>For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers in <code>ap-southeast-1</code> and <code>ap-southeast-5</code>: 122,500</p> </li> </ul>
     # @option params [Types::RouteMatrixExclusionOptions] :exclude
-    #   <p>Features to be strictly excluded while calculating the route.</p>
+    #   <p> Features to be strictly excluded while calculating the route. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [String] :key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     # @option params [String] :optimize_routing_for
-    #   <p>Specifies the optimization criteria for calculating a route.</p> <p>Default Value: <code>FastestRoute</code> </p>
+    #   <p>Controls the trade-off between finding the shortest travel time (<code>FastestRoute</code>) and the shortest distance (<code>ShortestRoute</code>) when calculating reachable areas.</p> <p>Default value: <code>FastestRoute</code> </p>
     # @option params [Array<Types::RouteMatrixOrigin>] :origins
-    #   <p>The position in longitude and latitude for the origin.</p> <note> <p>Route calculations are billed for each origin and destination pair. Using a large amount of Origins in a request can lead you to incur unexpected charges. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`"> Amazon Location's pricing page</a> for more information.</p> </note>
+    #   <p>List of origins for the route in World Geodetic System (WGS 84) format: [longitude, latitude].</p> <note> <p>Route calculations are billed for each origin and destination pair. Using a large amount of Origins in a request can lead you to incur unexpected charges. For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html">Routes pricing</a> in the <i>Amazon Location Service Developer Guide</i>.</p> </note> <p>The maximum number of origins depends on the routing boundary configuration:</p> <ul> <li> <p>With <code>RoutingBoundary.Geometry</code> set: maximum 500 origins</p> </li> <li> <p>With <code>RoutingBoundary.Unbounded</code> set to <code>true</code>: maximum 15 origins</p> </li> <li> <p>For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers in <code>ap-southeast-1</code> and <code>ap-southeast-5</code>: maximum 350 origins</p> </li> </ul> <p>The total matrix size (origins × destinations) must not exceed:</p> <ul> <li> <p>With <code>RoutingBoundary.Geometry</code>: 160,000</p> </li> <li> <p>With <code>RoutingBoundary.Unbounded</code>: 100</p> </li> <li> <p>For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers in <code>ap-southeast-1</code> and <code>ap-southeast-5</code>: 122,500</p> </li> </ul>
     # @option params [Types::RouteMatrixBoundary] :routing_boundary
-    #   <p>Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid.</p> <note> <p>When request routing boundary was set as AutoCircle, the response routing boundary will return Circle derived from the AutoCircle settings.</p> </note>
+    #   <p> Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only <code>Unbounded</code> set to <code>true</code>. </p> <p>Default value: <code>Unbounded set to true</code> </p> <note> <p>When <code>AutoCircle</code> is set in the request, the response routing boundary will return <code>Circle</code> derived from the <code>AutoCircle</code> settings.</p> </note>
     # @option params [Types::RouteMatrixTrafficOptions] :traffic
-    #   <p>Traffic related options.</p>
+    #   <p> Traffic related options. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
+    #   <p> Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only <code>Car</code>, <code>Pedestrian</code>, and <code>Scooter</code>. </p> <p>Default value: <code>Car</code> </p>
     # @option params [Types::RouteMatrixTravelModeOptions] :travel_mode_options
-    #   <p>Travel mode related options for the provided travel mode.</p>
+    #   <p> Travel mode related options for the provided travel mode. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     allow: {
@@ -520,7 +520,7 @@ module Aws::GeoRoutes
     #       u_turns: false,
     #       zone_categories: [
     #         {
-    #           category: "RouteMatrixZoneCategory"
+    #           category: "CongestionPricing" # One of: ["CongestionPricing", "Environmental", "Vignette"]
     #         }
     #       ]
     #     },
@@ -535,11 +535,11 @@ module Aws::GeoRoutes
     #             name_hint: "SensitiveString",
     #             on_road_threshold: 1,
     #             radius: 1,
-    #             strategy: "MatchingStrategy"
+    #             strategy: "MatchAny" # One of: ["MatchAny", "MatchMostSignificantRoad"]
     #           },
     #           side_of_street: {
     #             position: [1.0], # required
-    #             use_with: "SideOfStreetMatchingStrategy"
+    #             use_with: "AnyStreet" # One of: ["AnyStreet", "DividedStreetOnly"]
     #           }
     #         },
     #         position: [1.0], # required
@@ -549,7 +549,7 @@ module Aws::GeoRoutes
     #       countries: ["CountryCode"], # required
     #     },
     #     key: "ApiKey",
-    #     optimize_routing_for: "RoutingObjective",
+    #     optimize_routing_for: "FastestRoute" # One of: ["FastestRoute", "ShortestRoute"],
     #     origins: [ # required
     #       {
     #         options: {
@@ -559,17 +559,17 @@ module Aws::GeoRoutes
     #             name_hint: "SensitiveString",
     #             on_road_threshold: 1,
     #             radius: 1,
-    #             strategy: "MatchingStrategy"
+    #             strategy: "MatchAny" # One of: ["MatchAny", "MatchMostSignificantRoad"]
     #           },
     #           side_of_street: {
     #             position: [1.0], # required
-    #             use_with: "SideOfStreetMatchingStrategy"
+    #             use_with: "AnyStreet" # One of: ["AnyStreet", "DividedStreetOnly"]
     #           }
     #         },
     #         position: [1.0], # required
     #       }
     #     ],
-    #     routing_boundary: { # required
+    #     routing_boundary: {
     #       geometry: {
     #         auto_circle: {
     #           margin: 1,
@@ -590,9 +590,9 @@ module Aws::GeoRoutes
     #     },
     #     traffic: {
     #       flow_event_threshold_override: 1,
-    #       usage: "TrafficUsage"
+    #       usage: "IgnoreTrafficData" # One of: ["IgnoreTrafficData", "UseTrafficData"]
     #     },
-    #     travel_mode: "RouteMatrixTravelMode",
+    #     travel_mode: "Car" # One of: ["Car", "Pedestrian", "Scooter", "Truck"],
     #     travel_mode_options: {
     #       car: {
     #         license_plate: {
@@ -611,7 +611,7 @@ module Aws::GeoRoutes
     #       truck: {
     #         axle_count: 1,
     #         gross_weight: 1,
-    #         hazardous_cargos: ["RouteMatrixHazardousCargoType"],
+    #         hazardous_cargos: ["Combustible" # One of: ["Combustible", "Corrosive", "Explosive", "Flammable", "Gas", "HarmfulToWater", "Organic", "Other", "Poison", "PoisonousInhalation", "Radioactive"]],
     #         height: 1,
     #         kpra_length: 1,
     #         length: 1,
@@ -624,7 +624,7 @@ module Aws::GeoRoutes
     #         trailer: {
     #           trailer_count: 1
     #         },
-    #         truck_type: "RouteMatrixTruckType",
+    #         truck_type: "LightTruck" # One of: ["LightTruck", "StraightTruck", "Tractor"],
     #         tunnel_restriction_code: "TunnelRestrictionCode",
     #         weight_per_axle: 1,
     #         weight_per_axle_group: {
@@ -650,7 +650,7 @@ module Aws::GeoRoutes
     #         {
     #           distance: 1, # required
     #           duration: 1, # required
-    #           error: "RouteMatrixErrorCode"
+    #           error: "NoMatch" # One of: ["NoMatch", "NoMatchDestination", "NoMatchOrigin", "NoRoute", "OutOfBounds", "OutOfBoundsDestination", "OutOfBoundsOrigin", "Other", "Violation"]
     #         }
     #       ]
     #     ],
@@ -680,58 +680,58 @@ module Aws::GeoRoutes
       request.send_request(options)
     end
 
-    # <p> <code>CalculateRoutes</code> computes routes given the following required parameters: <code>Origin</code> and <code>Destination</code>.</p>
+    # <p> <code>CalculateRoutes</code> computes routes given the following required parameters: <code>Origin</code> and <code>Destination</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-routes.html">Calculate routes</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @param [Hash, Types::CalculateRoutesRequest] params
     # @option params [Types::RouteAllowOptions] :allow
-    #   <p>Features that are allowed while calculating a route.</p>
+    #   <p> Features that are allowed while calculating a route. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [String] :arrival_time
-    #   <p>Time of arrival at the destination.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
+    #   <p> Time of arrival at the destination. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Types::RouteAvoidanceOptions] :avoid
-    #   <p>Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.</p>
+    #   <p> Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only <code>ControlledAccessHighways</code>, <code>Ferries</code>, and <code>TollRoads</code> </p>
     # @option params [Boolean] :depart_now
     #   <p>Uses the current time as the time of departure.</p>
     # @option params [String] :departure_time
-    #   <p>Time of departure from thr origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
+    #   <p>Time of departure from the origin.</p> <p>Time format:<code>YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm</code> </p> <p>Examples:</p> <p> <code>2020-04-22T17:57:24Z</code> </p> <p> <code>2020-04-22T17:57:24+02:00</code> </p>
     # @option params [Array<Float>] :destination
     #   <p>The final position for the route. In the World Geodetic System (WGS 84) format: <code>[longitude, latitude]</code>.</p>
     # @option params [Types::RouteDestinationOptions] :destination_options
-    #   <p>Destination related options.</p>
+    #   <p> Destination related options. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [Types::RouteDriverOptions] :driver
-    #   <p>Driver related options.</p>
+    #   <p> Driver related options. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [Types::RouteExclusionOptions] :exclude
-    #   <p>Features to be strictly excluded while calculating the route.</p>
+    #   <p> Features to be strictly excluded while calculating the route. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [String] :instructions_measurement_system
     #   <p>Measurement system to be used for instructions within steps in the response.</p>
     # @option params [String] :key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     # @option params [Array<String>] :languages
-    #   <p>List of languages for instructions within steps in the response.</p> <note> <p>Instructions in the requested language are returned only if they are available.</p> </note>
+    #   <p> List of languages for instructions within steps in the response. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>Instructions in the requested language are returned only if they are available.</p> </note>
     # @option params [Array<String>] :leg_additional_features
-    #   <p>A list of optional additional parameters such as timezone that can be requested for each result.</p> <ul> <li> <p> <code>Elevation</code>: Retrieves the elevation information for each location.</p> </li> <li> <p> <code>Incidents</code>: Provides information on traffic incidents along the route.</p> </li> <li> <p> <code>PassThroughWaypoints</code>: Indicates waypoints that are passed through without stopping.</p> </li> <li> <p> <code>Summary</code>: Returns a summary of the route, including distance and duration.</p> </li> <li> <p> <code>Tolls</code>: Supplies toll cost information along the route.</p> </li> <li> <p> <code>TravelStepInstructions</code>: Provides step-by-step instructions for travel along the route.</p> </li> <li> <p> <code>TruckRoadTypes</code>: Returns information about road types suitable for trucks.</p> </li> <li> <p> <code>TypicalDuration</code>: Gives typical travel duration based on historical data.</p> </li> <li> <p> <code>Zones</code>: Specifies the time zone information for each waypoint.</p> </li> </ul>
+    #   <p> A list of optional additional parameters such as timezone that can be requested for each result. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only <code>PassThroughWaypoints</code>, <code>Summary</code>, and <code>TravelStepInstructions</code> </p> <ul> <li> <p> <code>Elevation</code>: Retrieves the elevation information for each location.</p> </li> <li> <p> <code>Incidents</code>: Provides information on traffic incidents along the route.</p> </li> <li> <p> <code>PassThroughWaypoints</code>: Indicates waypoints that are passed through without stopping.</p> </li> <li> <p> <code>Summary</code>: Returns a summary of the route, including distance and duration.</p> </li> <li> <p> <code>Tolls</code>: Supplies toll cost information along the route.</p> </li> <li> <p> <code>TravelStepInstructions</code>: Provides step-by-step instructions for travel along the route.</p> </li> <li> <p> <code>TruckRoadTypes</code>: Returns information about road types suitable for trucks.</p> </li> <li> <p> <code>TypicalDuration</code>: Gives typical travel duration based on historical data.</p> </li> <li> <p> <code>Zones</code>: Specifies the time zone information for each waypoint.</p> </li> </ul>
     # @option params [String] :leg_geometry_format
-    #   <p>Specifies the format of the geometry returned for each leg of the route. You can choose between two different geometry encoding formats.</p> <p> <code>FlexiblePolyline</code>: A compact and precise encoding format for the leg geometry. For more information on the format, see the GitHub repository for <a href="https://github.com/heremaps/flexible-polyline"> <code>FlexiblePolyline</code> </a>.</p> <p> <code>Simple</code>: A less compact encoding, which is easier to decode but may be less precise and result in larger payloads.</p>
+    #   <p>Specifies the format of the geometry returned for each leg of the route. You can choose between two different geometry encoding formats.</p> <p> <code>FlexiblePolyline</code>: A compact and precise encoding format for the leg geometry. For more information on the format, see the GitHub repository for <a href="https://github.com/aws-geospatial/polyline">https://github.com/aws-geospatial/polyline</a>.</p> <p> <code>Simple</code>: A less compact encoding, which is easier to decode but may be less precise and result in larger payloads.</p>
     # @option params [Integer] :max_alternatives
-    #   <p>Maximum number of alternative routes to be provided in the response, if available.</p>
+    #   <p>Maximum number of alternative routes to be provided in the response, if available. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only up to 3 alternative routes. </p>
     # @option params [String] :optimize_routing_for
-    #   <p>Specifies the optimization criteria for calculating a route.</p> <p>Default Value: <code>FastestRoute</code> </p>
+    #   <p>Controls the trade-off between achieving the shortest travel time (<code>FastestRoute</code>) and achieving the shortest physical distance ((<code>ShortestRoute</code>) when calculating each route in the matrix.</p> <p>Default value: <code>FastestRoute</code> </p>
     # @option params [Array<Float>] :origin
-    #   <p>The start position for the route.</p>
+    #   <p>The start position for the route in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     # @option params [Types::RouteOriginOptions] :origin_options
-    #   <p>Origin related options.</p>
+    #   <p> Specifies how the origin point should be matched to the road network and any routing constraints that apply when the traveler is departing the origin. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [Array<String>] :span_additional_features
-    #   <p>A list of optional features such as SpeedLimit that can be requested for a Span. A span is a section of a Leg for which the requested features have the same values.</p>
+    #   <p> A list of optional features such as <code>SpeedLimit</code> that can be requested for a Span. A span is a section of a Leg for which the requested features have the same values. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [Types::RouteTollOptions] :tolls
-    #   <p>Toll related options.</p>
+    #   <p> Toll related options. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [Types::RouteTrafficOptions] :traffic
-    #   <p>Traffic related options.</p>
+    #   <p> Traffic related options. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
+    #   <p> Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only <code>Car</code>, <code>Pedestrian</code>, and <code>Scooter</code> values. </p> <p>Default value: <code>Car</code> </p>
     # @option params [Types::RouteTravelModeOptions] :travel_mode_options
-    #   <p>Travel mode related options for the provided travel mode.</p>
+    #   <p> Travel mode related options for the provided travel mode. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only <code>Car</code> and <code>Pedestrian</code> travel mode options. </p>
     # @option params [String] :travel_step_type
-    #   <p>Type of step returned by the response. Default provides basic steps intended for web based applications. TurnByTurn provides detailed instructions with more granularity intended for a turn based navigation system.</p>
+    #   <p>Type of step returned by the response. <code>Default</code> provides basic steps intended for web based applications. <code>TurnByTurn</code> provides detailed instructions with more granularity intended for a turn based navigation system. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions <code>Default</code> does not return any steps. </p>
     # @option params [Array<Types::RouteWaypoint>] :waypoints
-    #   <p>List of waypoints between the Origin and Destination.</p>
+    #   <p> List of waypoints between the Origin and Destination. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions max length is <code>100</code>. </p> <p>Max length: <code>23</code> </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     allow: {
@@ -796,7 +796,7 @@ module Aws::GeoRoutes
     #       u_turns: false,
     #       zone_categories: [
     #         {
-    #           category: "RouteZoneCategory", # required
+    #           category: "CongestionPricing" # One of: ["CongestionPricing", "Environmental", "Vignette"], # required
     #         }
     #       ]
     #     },
@@ -811,11 +811,11 @@ module Aws::GeoRoutes
     #         name_hint: "SensitiveString",
     #         on_road_threshold: 1,
     #         radius: 1,
-    #         strategy: "MatchingStrategy"
+    #         strategy: "MatchAny" # One of: ["MatchAny", "MatchMostSignificantRoad"]
     #       },
     #       side_of_street: {
     #         position: [1.0], # required
-    #         use_with: "SideOfStreetMatchingStrategy"
+    #         use_with: "AnyStreet" # One of: ["AnyStreet", "DividedStreetOnly"]
     #       },
     #       stop_duration: 1
     #     },
@@ -830,13 +830,13 @@ module Aws::GeoRoutes
     #     exclude: {
     #       countries: ["CountryCode"], # required
     #     },
-    #     instructions_measurement_system: "MeasurementSystem",
+    #     instructions_measurement_system: "Metric" # One of: ["Metric", "Imperial"],
     #     key: "ApiKey",
     #     languages: ["LanguageTag"],
-    #     leg_additional_features: ["RouteLegAdditionalFeature"],
-    #     leg_geometry_format: "GeometryFormat",
+    #     leg_additional_features: ["Elevation" # One of: ["Elevation", "Incidents", "PassThroughWaypoints", "Summary", "Tolls", "TravelStepInstructions", "TruckRoadTypes", "TypicalDuration", "Zones", "Bookings", "IntermediateStops", "NextDepartures"]],
+    #     leg_geometry_format: "FlexiblePolyline" # One of: ["FlexiblePolyline", "Simple"],
     #     max_alternatives: 1,
-    #     optimize_routing_for: "RoutingObjective",
+    #     optimize_routing_for: "FastestRoute" # One of: ["FastestRoute", "ShortestRoute"],
     #     origin: [1.0], # required
     #     origin_options: {
     #       avoid_actions_for_distance: 1,
@@ -846,14 +846,14 @@ module Aws::GeoRoutes
     #         name_hint: "SensitiveString",
     #         on_road_threshold: 1,
     #         radius: 1,
-    #         strategy: "MatchingStrategy"
+    #         strategy: "MatchAny" # One of: ["MatchAny", "MatchMostSignificantRoad"]
     #       },
     #       side_of_street: {
     #         position: [1.0], # required
-    #         use_with: "SideOfStreetMatchingStrategy"
+    #         use_with: "AnyStreet" # One of: ["AnyStreet", "DividedStreetOnly"]
     #       }
     #     },
-    #     span_additional_features: ["RouteSpanAdditionalFeature"],
+    #     span_additional_features: ["BestCaseDuration" # One of: ["BestCaseDuration", "CarAccess", "Country", "Distance", "Duration", "DynamicSpeed", "FunctionalClassification", "Gates", "Incidents", "Names", "Notices", "PedestrianAccess", "RailwayCrossings", "Region", "RoadAttributes", "RouteNumbers", "ScooterAccess", "SpeedLimit", "TollSystems", "TruckAccess", "TruckRoadTypes", "TypicalDuration", "Zones", "Consumption"]],
     #     tolls: {
     #       all_transponders: false,
     #       all_vignettes: false,
@@ -862,16 +862,16 @@ module Aws::GeoRoutes
     #         co2_emission_class: "SensitiveString",
     #         type: "SensitiveString", # required
     #       },
-    #       vehicle_category: "RouteTollVehicleCategory"
+    #       vehicle_category: "Minibus" # One of: ["Minibus"]
     #     },
     #     traffic: {
     #       flow_event_threshold_override: 1,
-    #       usage: "TrafficUsage"
+    #       usage: "IgnoreTrafficData" # One of: ["IgnoreTrafficData", "UseTrafficData"]
     #     },
-    #     travel_mode: "RouteTravelMode",
+    #     travel_mode: "Car" # One of: ["Car", "Pedestrian", "Scooter", "Truck", "Intermodal", "Transit"],
     #     travel_mode_options: {
     #       car: {
-    #         engine_type: "RouteEngineType",
+    #         engine_type: "Electric" # One of: ["Electric", "InternalCombustion", "PluginHybrid"],
     #         license_plate: {
     #           last_character: "SensitiveString"
     #         },
@@ -882,7 +882,7 @@ module Aws::GeoRoutes
     #         speed: 1.0
     #       },
     #       scooter: {
-    #         engine_type: "RouteEngineType",
+    #         engine_type: "Electric" # One of: ["Electric", "InternalCombustion", "PluginHybrid"],
     #         license_plate: {
     #           last_character: "SensitiveString"
     #         },
@@ -891,9 +891,9 @@ module Aws::GeoRoutes
     #       },
     #       truck: {
     #         axle_count: 1,
-    #         engine_type: "RouteEngineType",
+    #         engine_type: "Electric" # One of: ["Electric", "InternalCombustion", "PluginHybrid"],
     #         gross_weight: 1,
-    #         hazardous_cargos: ["RouteHazardousCargoType"],
+    #         hazardous_cargos: ["Combustible" # One of: ["Combustible", "Corrosive", "Explosive", "Flammable", "Gas", "HarmfulToWater", "Organic", "Other", "Poison", "PoisonousInhalation", "Radioactive"]],
     #         height: 1,
     #         height_above_first_axle: 1,
     #         kpra_length: 1,
@@ -909,7 +909,7 @@ module Aws::GeoRoutes
     #           axle_count: 1,
     #           trailer_count: 1
     #         },
-    #         truck_type: "RouteTruckType",
+    #         truck_type: "LightTruck" # One of: ["LightTruck", "StraightTruck", "Tractor"],
     #         tunnel_restriction_code: "TunnelRestrictionCode",
     #         weight_per_axle: 1,
     #         weight_per_axle_group: {
@@ -920,9 +920,47 @@ module Aws::GeoRoutes
     #           quint: 1
     #         },
     #         width: 1
+    #       },
+    #       intermodal: {
+    #         accessibility_attributes: ["Wheelchair" # One of: ["Wheelchair"]],
+    #         max_transfers: 1,
+    #         pedestrian: {
+    #           max_distance: 1,
+    #           speed: 1.0
+    #         },
+    #         rental: {
+    #           allowed_modes: ["All" # One of: ["All", "Car"]],
+    #           enabled_for: ["FirstLeg" # One of: ["FirstLeg", "LastLeg", "EntireRoute", "None"]],
+    #           excluded_modes: ["All" # One of: ["All", "Car"]]
+    #         },
+    #         taxi: {
+    #           allowed_modes: ["All" # One of: ["All", "Car"]],
+    #           enabled_for: ["FirstLeg" # One of: ["FirstLeg", "LastLeg", "EntireRoute", "None"]],
+    #           excluded_modes: ["All" # One of: ["All", "Car"]]
+    #         },
+    #         transit: {
+    #           allowed_modes: ["AerialTramway" # One of: ["AerialTramway", "Airplane", "All", "Bus", "BusRapidTransit", "CityTrain", "Ferry", "FunicularRailway", "HighSpeedTrain", "IntercityTrain", "InterregionalTrain", "LightRail", "Monorail", "PrivateBus", "RegionalTrain", "Subway"]],
+    #           enabled_for: ["FirstLeg" # One of: ["FirstLeg", "LastLeg", "EntireRoute", "None"]],
+    #           excluded_modes: ["AerialTramway" # One of: ["AerialTramway", "Airplane", "All", "Bus", "BusRapidTransit", "CityTrain", "Ferry", "FunicularRailway", "HighSpeedTrain", "IntercityTrain", "InterregionalTrain", "LightRail", "Monorail", "PrivateBus", "RegionalTrain", "Subway"]]
+    #         },
+    #         vehicle: {
+    #           allowed_modes: ["All" # One of: ["All", "Car"]],
+    #           enabled_for: ["FirstLeg" # One of: ["FirstLeg", "LastLeg", "EntireRoute", "None"]],
+    #           excluded_modes: ["All" # One of: ["All", "Car"]]
+    #         }
+    #       },
+    #       transit: {
+    #         accessibility_attributes: ["Wheelchair" # One of: ["Wheelchair"]],
+    #         allowed_modes: ["AerialTramway" # One of: ["AerialTramway", "Airplane", "All", "Bus", "BusRapidTransit", "CityTrain", "Ferry", "FunicularRailway", "HighSpeedTrain", "IntercityTrain", "InterregionalTrain", "LightRail", "Monorail", "PrivateBus", "RegionalTrain", "Subway"]],
+    #         excluded_modes: ["AerialTramway" # One of: ["AerialTramway", "Airplane", "All", "Bus", "BusRapidTransit", "CityTrain", "Ferry", "FunicularRailway", "HighSpeedTrain", "IntercityTrain", "InterregionalTrain", "LightRail", "Monorail", "PrivateBus", "RegionalTrain", "Subway"]],
+    #         max_transfers: 1,
+    #         pedestrian: {
+    #           max_distance: 1,
+    #           speed: 1.0
+    #         }
     #       }
     #     },
-    #     travel_step_type: "RouteTravelStepType",
+    #     travel_step_type: "Default" # One of: ["Default", "TurnByTurn"],
     #     waypoints: [
     #       {
     #         avoid_actions_for_distance: 1,
@@ -932,13 +970,13 @@ module Aws::GeoRoutes
     #           name_hint: "SensitiveString",
     #           on_road_threshold: 1,
     #           radius: 1,
-    #           strategy: "MatchingStrategy"
+    #           strategy: "MatchAny" # One of: ["MatchAny", "MatchMostSignificantRoad"]
     #         },
     #         pass_through: false,
     #         position: [1.0], # required
     #         side_of_street: {
     #           position: [1.0], # required
-    #           use_with: "SideOfStreetMatchingStrategy"
+    #           use_with: "AnyStreet" # One of: ["AnyStreet", "DividedStreetOnly"]
     #         },
     #         stop_duration: 1
     #       }
@@ -949,11 +987,11 @@ module Aws::GeoRoutes
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     leg_geometry_format: "GeometryFormat", # required
+    #     leg_geometry_format: "FlexiblePolyline" # One of: ["FlexiblePolyline", "Simple"], # required
     #     notices: [ # required
     #       {
-    #         code: "RouteResponseNoticeCode", # required
-    #         impact: "RouteNoticeImpact"
+    #         code: "MainLanguageNotFound" # One of: ["MainLanguageNotFound", "Other", "TravelTimeExceedsDriverWorkHours", "TransitDataUnavailable", "TransitRouteUnavailable", "NoTransitStationsFound"], # required
+    #         impact: "High" # One of: ["High", "Low"]
     #       }
     #     ],
     #     pricing_bucket: "String", # required
@@ -966,7 +1004,7 @@ module Aws::GeoRoutes
     #                 {
     #                   duration: 1, # required
     #                   instruction: "SensitiveString",
-    #                   type: "RouteFerryAfterTravelStepType", # required
+    #                   type: "Deboard" # One of: ["Deboard"], # required
     #                 }
     #               ],
     #               arrival: { # required
@@ -982,7 +1020,7 @@ module Aws::GeoRoutes
     #                 {
     #                   duration: 1, # required
     #                   instruction: "SensitiveString",
-    #                   type: "RouteFerryBeforeTravelStepType", # required
+    #                   type: "Board" # One of: ["Board"], # required
     #                 }
     #               ],
     #               departure: { # required
@@ -996,8 +1034,8 @@ module Aws::GeoRoutes
     #               },
     #               notices: [ # required
     #                 {
-    #                   code: "RouteFerryNoticeCode", # required
-    #                   impact: "RouteNoticeImpact"
+    #                   code: "AccuratePolylineUnavailable" # One of: ["AccuratePolylineUnavailable", "NoSchedule", "Other", "ViolatedAvoidFerry", "ViolatedAvoidRailFerry", "SeasonalClosure", "PotentialViolatedVehicleRestrictionUsage", "ViolatedAvoidAreas", "ViolatedVehicleRestriction"], # required
+    #                   impact: "High" # One of: ["High", "Low"]
     #                 }
     #               ],
     #               pass_through_waypoints: [ # required
@@ -1041,7 +1079,7 @@ module Aws::GeoRoutes
     #                   duration: 1, # required
     #                   geometry_offset: 1,
     #                   instruction: "SensitiveString",
-    #                   type: "RouteFerryTravelStepType", # required
+    #                   type: "Depart" # One of: ["Depart", "Continue", "Arrive"], # required
     #                 }
     #               ]
     #             },
@@ -1053,30 +1091,63 @@ module Aws::GeoRoutes
     #             },
     #             language: "LanguageTag",
     #             pedestrian_leg_details: {
+    #               after_travel_steps: [ # required
+    #                 {
+    #                   duration: 1, # required
+    #                   instruction: "SensitiveString",
+    #                   type: "Wait" # One of: ["Wait"], # required
+    #                 }
+    #               ],
     #               arrival: { # required
     #                 place: { # required
+    #                   access_point_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     }
+    #                   },
     #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
-    #                   side_of_street: "RouteSideOfStreet",
+    #                   side_of_street: "Left" # One of: ["Left", "Right"],
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "AccessPoint" # One of: ["AccessPoint", "DockingStation", "ParkingLot", "Station"],
     #                   waypoint_index: 1
     #                 },
     #                 time: "TimestampWithTimezoneOffset"
     #               },
     #               departure: { # required
     #                 place: { # required
+    #                   access_point_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     }
+    #                   },
     #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
-    #                   side_of_street: "RouteSideOfStreet",
+    #                   side_of_street: "Left" # One of: ["Left", "Right"],
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "AccessPoint" # One of: ["AccessPoint", "DockingStation", "ParkingLot", "Station"],
     #                   waypoint_index: 1
     #                 },
     #                 time: "TimestampWithTimezoneOffset"
     #               },
     #               notices: [ # required
     #                 {
-    #                   code: "RoutePedestrianNoticeCode", # required
-    #                   impact: "RouteNoticeImpact"
+    #                   code: "AccuratePolylineUnavailable" # One of: ["AccuratePolylineUnavailable", "Other", "ViolatedAvoidDirtRoad", "ViolatedAvoidTunnel", "ViolatedPedestrianOption", "ViolatedAvoidAreas"], # required
+    #                   impact: "High" # One of: ["High", "Low"]
     #                 }
     #               ],
     #               pass_through_waypoints: [ # required
@@ -1109,12 +1180,12 @@ module Aws::GeoRoutes
     #                       value: "SensitiveString", # required
     #                     }
     #                   ],
-    #                   pedestrian_access: ["RouteSpanPedestrianAccessAttribute"],
+    #                   pedestrian_access: ["Allowed" # One of: ["Allowed", "Indoors", "NoThroughTraffic", "Park", "Stairs", "TollRoad"]],
     #                   region: "SensitiveString",
-    #                   road_attributes: ["RouteSpanRoadAttribute"],
+    #                   road_attributes: ["Bridge" # One of: ["Bridge", "BuiltUpArea", "ControlledAccessHighway", "DirtRoad", "DividedRoad", "Motorway", "PrivateRoad", "Ramp", "RightHandTraffic", "Roundabout", "Tunnel", "UnderConstruction"]],
     #                   route_numbers: [
     #                     {
-    #                       direction: "RouteDirection",
+    #                       direction: "East" # One of: ["East", "North", "South", "West"],
     #                       language: "LanguageTag",
     #                       value: "SensitiveString", # required
     #                     }
@@ -1154,7 +1225,7 @@ module Aws::GeoRoutes
     #                     ],
     #                     route_number: [ # required
     #                       {
-    #                         direction: "RouteDirection",
+    #                         direction: "East" # One of: ["East", "North", "South", "West"],
     #                         language: "LanguageTag",
     #                         value: "SensitiveString", # required
     #                       }
@@ -1165,7 +1236,7 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     type: "RouteRoadType"
+    #                     type: "Highway" # One of: ["Highway", "Rural", "Urban"]
     #                   },
     #                   distance: 1,
     #                   duration: 1, # required
@@ -1184,9 +1255,9 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   next_road: {
     #                     road_name: [ # required
@@ -1197,7 +1268,7 @@ module Aws::GeoRoutes
     #                     ],
     #                     route_number: [ # required
     #                       {
-    #                         direction: "RouteDirection",
+    #                         direction: "East" # One of: ["East", "North", "South", "West"],
     #                         language: "LanguageTag",
     #                         value: "SensitiveString", # required
     #                       }
@@ -1208,7 +1279,7 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     type: "RouteRoadType"
+    #                     type: "Highway" # One of: ["Highway", "Rural", "Urban"]
     #                   },
     #                   roundabout_enter_step_details: {
     #                     intersection: [ # required
@@ -1217,9 +1288,9 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   roundabout_exit_step_details: {
     #                     intersection: [ # required
@@ -1230,7 +1301,7 @@ module Aws::GeoRoutes
     #                     ],
     #                     relative_exit: 1,
     #                     roundabout_angle: 1.0,
-    #                     steering_direction: "RouteSteeringDirection"
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"]
     #                   },
     #                   roundabout_pass_step_details: {
     #                     intersection: [ # required
@@ -1239,15 +1310,15 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   signpost: {
     #                     labels: [ # required
     #                       {
     #                         route_number: {
-    #                           direction: "RouteDirection",
+    #                           direction: "East" # One of: ["East", "North", "South", "West"],
     #                           language: "LanguageTag",
     #                           value: "SensitiveString", # required
     #                         },
@@ -1265,24 +1336,49 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
-    #                   type: "RoutePedestrianTravelStepType", # required
+    #                   type: "Arrive" # One of: ["Arrive", "Continue", "Depart", "Keep", "RoundaboutEnter", "RoundaboutExit", "RoundaboutPass", "Turn"], # required
     #                 }
     #               ]
     #             },
-    #             travel_mode: "RouteLegTravelMode", # required
-    #             type: "RouteLegType", # required
+    #             travel_mode: "Car" # One of: ["Car", "Ferry", "Pedestrian", "Scooter", "Truck", "CarShuttleTrain", "AerialTramway", "Airplane", "Bus", "BusRapidTransit", "CityTrain", "FunicularRailway", "HighSpeedTrain", "IntercityTrain", "InterregionalTrain", "LightRail", "Monorail", "PrivateBus", "RegionalTrain", "Subway"], # required
+    #             type: "Ferry" # One of: ["Ferry", "Pedestrian", "Vehicle", "Rental", "Taxi", "Transit"], # required
     #             vehicle_leg_details: {
+    #               after_travel_steps: [ # required
+    #                 {
+    #                   charge_step_details: {
+    #                     arrival_charge: 1.0,
+    #                     consumable_power: 1.0,
+    #                     desired_charge: 1.0
+    #                   },
+    #                   duration: 1, # required
+    #                   instruction: "SensitiveString",
+    #                   type: "Park" # One of: ["Park"], # required
+    #                 }
+    #               ],
     #               arrival: { # required
     #                 place: { # required
     #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
-    #                   side_of_street: "RouteSideOfStreet",
-    #                   waypoint_index: 1
+    #                   side_of_street: "Left" # One of: ["Left", "Right"],
+    #                   waypoint_index: 1,
+    #                   access_point_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     }
+    #                   },
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "AccessPoint" # One of: ["AccessPoint", "DockingStation", "ParkingLot", "Station"]
     #                 },
     #                 time: "TimestampWithTimezoneOffset"
     #               },
@@ -1291,8 +1387,21 @@ module Aws::GeoRoutes
     #                   name: "SensitiveString",
     #                   original_position: [1.0],
     #                   position: [1.0], # required
-    #                   side_of_street: "RouteSideOfStreet",
-    #                   waypoint_index: 1
+    #                   side_of_street: "Left" # One of: ["Left", "Right"],
+    #                   waypoint_index: 1,
+    #                   access_point_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     }
+    #                   },
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "AccessPoint" # One of: ["AccessPoint", "DockingStation", "ParkingLot", "Station"]
     #                 },
     #                 time: "TimestampWithTimezoneOffset"
     #               },
@@ -1300,14 +1409,14 @@ module Aws::GeoRoutes
     #                 {
     #                   description: "SensitiveString",
     #                   end_time: "TimestampWithTimezoneOffset",
-    #                   severity: "RouteVehicleIncidentSeverity",
+    #                   severity: "Critical" # One of: ["Critical", "High", "Medium", "Low"],
     #                   start_time: "TimestampWithTimezoneOffset",
-    #                   type: "RouteVehicleIncidentType"
+    #                   type: "Accident" # One of: ["Accident", "Congestion", "Construction", "DisabledVehicle", "LaneRestriction", "MassTransit", "Other", "PlannedEvent", "RoadClosure", "RoadHazard", "Weather"]
     #                 }
     #               ],
     #               notices: [ # required
     #                 {
-    #                   code: "RouteVehicleNoticeCode", # required
+    #                   code: "AccuratePolylineUnavailable" # One of: ["AccuratePolylineUnavailable", "Other", "PotentialViolatedAvoidTollRoadUsage", "PotentialViolatedCarpoolUsage", "PotentialViolatedTurnRestrictionUsage", "PotentialViolatedVehicleRestrictionUsage", "PotentialViolatedZoneRestrictionUsage", "SeasonalClosure", "TollsDataTemporarilyUnavailable", "TollsDataUnavailable", "TollTransponder", "ViolatedAvoidControlledAccessHighway", "ViolatedAvoidDifficultTurns", "ViolatedAvoidDirtRoad", "ViolatedAvoidSeasonalClosure", "ViolatedAvoidTollRoad", "ViolatedAvoidTollTransponder", "ViolatedAvoidTruckRoadType", "ViolatedAvoidTunnel", "ViolatedAvoidUTurns", "ViolatedBlockedRoad", "ViolatedCarpool", "ViolatedEmergencyGate", "ViolatedStartDirection", "ViolatedTurnRestriction", "ViolatedVehicleRestriction", "ViolatedZoneRestriction", "TravelTimeExceedsDriverWorkHours"], # required
     #                   details: [ # required
     #                     {
     #                       title: "SensitiveString",
@@ -1317,13 +1426,13 @@ module Aws::GeoRoutes
     #                           min: 1,
     #                           max: 1
     #                         },
-    #                         hazardous_cargos: ["RouteHazardousCargoType"], # required
+    #                         hazardous_cargos: ["Combustible" # One of: ["Combustible", "Corrosive", "Explosive", "Flammable", "Gas", "HarmfulToWater", "Organic", "Other", "Poison", "PoisonousInhalation", "Radioactive"]], # required
     #                         max_height: 1,
     #                         max_kpra_length: 1,
     #                         max_length: 1,
     #                         max_payload_capacity: 1,
     #                         max_weight: {
-    #                           type: "RouteWeightConstraintType", # required
+    #                           type: "Current" # One of: ["Current", "Gross", "Unknown"], # required
     #                           value: 1, # required
     #                         },
     #                         max_weight_per_axle: 1,
@@ -1347,12 +1456,12 @@ module Aws::GeoRoutes
     #                         },
     #                         travel_mode: false,
     #                         truck_road_type: "String",
-    #                         truck_type: "RouteTruckType",
+    #                         truck_type: "LightTruck" # One of: ["LightTruck", "StraightTruck", "Tractor"],
     #                         tunnel_restriction_code: "TunnelRestrictionCode"
     #                       }
     #                     }
     #                   ],
-    #                   impact: "RouteNoticeImpact"
+    #                   impact: "High" # One of: ["High", "Low"]
     #                 }
     #               ],
     #               pass_through_waypoints: [ # required
@@ -1368,7 +1477,7 @@ module Aws::GeoRoutes
     #               spans: [ # required
     #                 {
     #                   best_case_duration: 1,
-    #                   car_access: ["RouteSpanCarAccessAttribute"],
+    #                   car_access: ["Allowed" # One of: ["Allowed", "NoThroughTraffic", "TollRoad"]],
     #                   country: "CountryCode3",
     #                   distance: 1,
     #                   duration: 1,
@@ -1378,7 +1487,7 @@ module Aws::GeoRoutes
     #                     typical_speed: 1.0
     #                   },
     #                   functional_classification: 1,
-    #                   gate: "RouteSpanGateAttribute",
+    #                   gate: "Emergency" # One of: ["Emergency", "KeyAccess", "PermissionRequired"],
     #                   geometry_offset: 1,
     #                   incidents: [1],
     #                   names: [
@@ -1388,23 +1497,23 @@ module Aws::GeoRoutes
     #                     }
     #                   ],
     #                   notices: [1],
-    #                   railway_crossing: "RouteSpanRailwayCrossingAttribute",
+    #                   railway_crossing: "Protected" # One of: ["Protected", "Unprotected"],
     #                   region: "SensitiveString",
-    #                   road_attributes: ["RouteSpanRoadAttribute"],
+    #                   road_attributes: ["Bridge" # One of: ["Bridge", "BuiltUpArea", "ControlledAccessHighway", "DirtRoad", "DividedRoad", "Motorway", "PrivateRoad", "Ramp", "RightHandTraffic", "Roundabout", "Tunnel", "UnderConstruction"]],
     #                   route_numbers: [
     #                     {
-    #                       direction: "RouteDirection",
+    #                       direction: "East" # One of: ["East", "North", "South", "West"],
     #                       language: "LanguageTag",
     #                       value: "SensitiveString", # required
     #                     }
     #                   ],
-    #                   scooter_access: ["RouteSpanScooterAccessAttribute"],
+    #                   scooter_access: ["Allowed" # One of: ["Allowed", "NoThroughTraffic", "TollRoad"]],
     #                   speed_limit: {
     #                     max_speed: 1.0,
     #                     unlimited: false
     #                   },
     #                   toll_systems: [1],
-    #                   truck_access: ["RouteSpanTruckAccessAttribute"],
+    #                   truck_access: ["Allowed" # One of: ["Allowed", "NoThroughTraffic", "TollRoad"]],
     #                   truck_road_types: [1],
     #                   typical_duration: 1,
     #                   zones: [1]
@@ -1465,11 +1574,11 @@ module Aws::GeoRoutes
     #                         transfer_count: 1,
     #                         trip_count: 1,
     #                         validity_period: {
-    #                           period: "RouteTollPassValidityPeriodType", # required
+    #                           period: "Annual" # One of: ["Annual", "Days", "ExtendedAnnual", "Minutes", "Months"], # required
     #                           period_count: 1
     #                         }
     #                       },
-    #                       payment_methods: ["RouteTollPaymentMethod"], # required
+    #                       payment_methods: ["BankCard" # One of: ["BankCard", "Cash", "CashExact", "CreditCard", "PassSubscription", "TravelCard", "Transponder", "VideoToll"]], # required
     #                       transponders: [ # required
     #                         {
     #                           system_name: "SensitiveString"
@@ -1494,9 +1603,9 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   continue_step_details: {
     #                     intersection: [ # required
@@ -1515,7 +1624,7 @@ module Aws::GeoRoutes
     #                     ],
     #                     route_number: [ # required
     #                       {
-    #                         direction: "RouteDirection",
+    #                         direction: "East" # One of: ["East", "North", "South", "West"],
     #                         language: "LanguageTag",
     #                         value: "SensitiveString", # required
     #                       }
@@ -1526,7 +1635,7 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     type: "RouteRoadType"
+    #                     type: "Highway" # One of: ["Highway", "Rural", "Urban"]
     #                   },
     #                   distance: 1,
     #                   duration: 1, # required
@@ -1537,9 +1646,9 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   exit_number: [
     #                     {
@@ -1555,9 +1664,9 @@ module Aws::GeoRoutes
     #                       }
     #                     ],
     #                     relative_exit: 1,
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   geometry_offset: 1,
     #                   instruction: "SensitiveString",
@@ -1568,9 +1677,9 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   next_road: {
     #                     road_name: [ # required
@@ -1581,7 +1690,7 @@ module Aws::GeoRoutes
     #                     ],
     #                     route_number: [ # required
     #                       {
-    #                         direction: "RouteDirection",
+    #                         direction: "East" # One of: ["East", "North", "South", "West"],
     #                         language: "LanguageTag",
     #                         value: "SensitiveString", # required
     #                       }
@@ -1592,7 +1701,7 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     type: "RouteRoadType"
+    #                     type: "Highway" # One of: ["Highway", "Rural", "Urban"]
     #                   },
     #                   ramp_step_details: {
     #                     intersection: [ # required
@@ -1601,9 +1710,9 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   roundabout_enter_step_details: {
     #                     intersection: [ # required
@@ -1612,9 +1721,9 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   roundabout_exit_step_details: {
     #                     intersection: [ # required
@@ -1625,7 +1734,7 @@ module Aws::GeoRoutes
     #                     ],
     #                     relative_exit: 1,
     #                     roundabout_angle: 1.0,
-    #                     steering_direction: "RouteSteeringDirection"
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"]
     #                   },
     #                   roundabout_pass_step_details: {
     #                     intersection: [ # required
@@ -1634,15 +1743,15 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
     #                   signpost: {
     #                     labels: [ # required
     #                       {
     #                         route_number: {
-    #                           direction: "RouteDirection",
+    #                           direction: "East" # One of: ["East", "North", "South", "West"],
     #                           language: "LanguageTag",
     #                           value: "SensitiveString", # required
     #                         },
@@ -1660,11 +1769,11 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   },
-    #                   type: "RouteVehicleTravelStepType", # required
+    #                   type: "Arrive" # One of: ["Arrive", "Continue", "ContinueHighway", "Depart", "EnterHighway", "Exit", "Keep", "Ramp", "RoundaboutEnter", "RoundaboutExit", "RoundaboutPass", "Turn", "UTurn"], # required
     #                   u_turn_step_details: {
     #                     intersection: [ # required
     #                       {
@@ -1672,17 +1781,647 @@ module Aws::GeoRoutes
     #                         value: "SensitiveString", # required
     #                       }
     #                     ],
-    #                     steering_direction: "RouteSteeringDirection",
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
     #                     turn_angle: 1.0,
-    #                     turn_intensity: "RouteTurnIntensity"
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
     #                   }
     #                 }
     #               ],
     #               truck_road_types: ["TruckRoadType"], # required
     #               zones: [ # required
     #                 {
-    #                   category: "RouteZoneCategory",
+    #                   category: "CongestionPricing" # One of: ["CongestionPricing", "Environmental", "Vignette"],
     #                   name: "SensitiveString"
+    #                 }
+    #               ]
+    #             },
+    #             rental_leg_details: {
+    #               after_travel_steps: [ # required
+    #                 {
+    #                   duration: 1, # required
+    #                   instruction: "SensitiveString",
+    #                   type: "Park" # One of: ["Park"], # required
+    #                 }
+    #               ],
+    #               agency: { # required
+    #                 name: "SensitiveString", # required
+    #                 url: "SensitiveString"
+    #               },
+    #               arrival: { # required
+    #                 place: { # required
+    #                   access_point_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     }
+    #                   },
+    #                   name: "SensitiveString",
+    #                   original_position: [1.0],
+    #                   position: [1.0], # required
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "AccessPoint" # One of: ["AccessPoint", "DockingStation", "ParkingLot", "Station"],
+    #                   waypoint_index: 1
+    #                 },
+    #                 time: "TimestampWithTimezoneOffset"
+    #               },
+    #               attributions: [ # required
+    #                 {
+    #                   attribution_type: "Disclaimer" # One of: ["Disclaimer", "Tariff"],
+    #                   web_link: { # required
+    #                     anchor_text: "SensitiveString",
+    #                     description: "SensitiveString", # required
+    #                     device_type: "Android" # One of: ["Android", "Ios", "Web"],
+    #                     url: "SensitiveString"
+    #                   }
+    #                 }
+    #               ],
+    #               before_travel_steps: [ # required
+    #                 {
+    #                   duration: 1, # required
+    #                   instruction: "SensitiveString",
+    #                   type: "Setup" # One of: ["Setup"], # required
+    #                 }
+    #               ],
+    #               booking_web_links: [ # required
+    #                 {
+    #                   anchor_text: "SensitiveString",
+    #                   description: "SensitiveString", # required
+    #                   device_type: "Android" # One of: ["Android", "Ios", "Web"],
+    #                   url: "SensitiveString"
+    #                 }
+    #               ],
+    #               departure: { # required
+    #                 place: { # required
+    #                   access_point_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     }
+    #                   },
+    #                   name: "SensitiveString",
+    #                   original_position: [1.0],
+    #                   position: [1.0], # required
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "AccessPoint" # One of: ["AccessPoint", "DockingStation", "ParkingLot", "Station"],
+    #                   waypoint_index: 1
+    #                 },
+    #                 time: "TimestampWithTimezoneOffset"
+    #               },
+    #               summary: {
+    #                 overview: {
+    #                   duration: 1, # required
+    #                   distance: 1, # required
+    #                 },
+    #                 travel_only: {
+    #                   duration: 1, # required
+    #                 }
+    #               },
+    #               transport: { # required
+    #                 available_seats: 1,
+    #                 category: "SensitiveString",
+    #                 color: "SensitiveString",
+    #                 engine: "Electric" # One of: ["Electric", "InternalCombustion", "PluginHybrid"],
+    #                 license_plate: "SensitiveString",
+    #                 mode: "All" # One of: ["All", "Car"], # required
+    #                 model: "SensitiveString",
+    #                 name: "SensitiveString",
+    #                 text_color: "SensitiveString"
+    #               },
+    #               travel_steps: [ # required
+    #                 {
+    #                   continue_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ]
+    #                   },
+    #                   distance: 1,
+    #                   duration: 1, # required
+    #                   exit_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     relative_exit: 1,
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   geometry_offset: 1,
+    #                   instruction: "SensitiveString",
+    #                   keep_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   ramp_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   roundabout_enter_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   roundabout_exit_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     relative_exit: 1,
+    #                     roundabout_angle: 1.0,
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"]
+    #                   },
+    #                   roundabout_pass_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   turn_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   type: "Arrive" # One of: ["Arrive", "Continue", "Depart", "Exit", "Keep", "Ramp", "RoundaboutEnter", "RoundaboutExit", "RoundaboutPass", "Turn", "UTurn"], # required
+    #                   u_turn_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   }
+    #                 }
+    #               ]
+    #             },
+    #             taxi_leg_details: {
+    #               after_travel_steps: [ # required
+    #                 {
+    #                   duration: 1, # required
+    #                   instruction: "SensitiveString",
+    #                   type: "Park" # One of: ["Park"], # required
+    #                 }
+    #               ],
+    #               agency: { # required
+    #                 name: "SensitiveString", # required
+    #                 url: "SensitiveString"
+    #               },
+    #               arrival: { # required
+    #                 place: { # required
+    #                   access_point_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     }
+    #                   },
+    #                   name: "SensitiveString",
+    #                   original_position: [1.0],
+    #                   position: [1.0], # required
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "AccessPoint" # One of: ["AccessPoint", "Station"],
+    #                   waypoint_index: 1
+    #                 },
+    #                 time: "TimestampWithTimezoneOffset"
+    #               },
+    #               attributions: [ # required
+    #                 {
+    #                   attribution_type: "Disclaimer" # One of: ["Disclaimer", "Tariff"],
+    #                   web_link: { # required
+    #                     anchor_text: "SensitiveString",
+    #                     description: "SensitiveString", # required
+    #                     device_type: "Android" # One of: ["Android", "Ios", "Web"],
+    #                     url: "SensitiveString"
+    #                   }
+    #                 }
+    #               ],
+    #               before_travel_steps: [ # required
+    #                 {
+    #                   duration: 1, # required
+    #                   instruction: "SensitiveString",
+    #                   type: "Wait" # One of: ["Wait"], # required
+    #                 }
+    #               ],
+    #               booking_web_links: [ # required
+    #                 {
+    #                   anchor_text: "SensitiveString",
+    #                   description: "SensitiveString", # required
+    #                   device_type: "Android" # One of: ["Android", "Ios", "Web"],
+    #                   url: "SensitiveString"
+    #                 }
+    #               ],
+    #               departure: { # required
+    #                 place: { # required
+    #                   access_point_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     }
+    #                   },
+    #                   name: "SensitiveString",
+    #                   original_position: [1.0],
+    #                   position: [1.0], # required
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "AccessPoint" # One of: ["AccessPoint", "Station"],
+    #                   waypoint_index: 1
+    #                 },
+    #                 time: "TimestampWithTimezoneOffset"
+    #               },
+    #               notices: [ # required
+    #                 {
+    #                   code: "AccuratePolylineUnavailable" # One of: ["AccuratePolylineUnavailable", "Other"], # required
+    #                   impact: "High" # One of: ["High", "Low"]
+    #                 }
+    #               ],
+    #               summary: {
+    #                 overview: {
+    #                   duration: 1, # required
+    #                   distance: 1, # required
+    #                 },
+    #                 travel_only: {
+    #                   duration: 1, # required
+    #                 }
+    #               },
+    #               transport: { # required
+    #                 available_seats: 1,
+    #                 category: "SensitiveString",
+    #                 color: "SensitiveString",
+    #                 engine: "Electric" # One of: ["Electric", "InternalCombustion", "PluginHybrid"],
+    #                 license_plate: "SensitiveString",
+    #                 mode: "All" # One of: ["All", "Car"], # required
+    #                 model: "SensitiveString",
+    #                 name: "SensitiveString",
+    #                 text_color: "SensitiveString"
+    #               },
+    #               travel_steps: [ # required
+    #                 {
+    #                   continue_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ]
+    #                   },
+    #                   distance: 1,
+    #                   duration: 1, # required
+    #                   exit_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     relative_exit: 1,
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   geometry_offset: 1,
+    #                   instruction: "SensitiveString",
+    #                   keep_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   ramp_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   roundabout_enter_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   roundabout_exit_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     relative_exit: 1,
+    #                     roundabout_angle: 1.0,
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"]
+    #                   },
+    #                   roundabout_pass_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   turn_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   },
+    #                   type: "Arrive" # One of: ["Arrive", "Continue", "Depart", "Exit", "Keep", "Ramp", "RoundaboutEnter", "RoundaboutExit", "RoundaboutPass", "Turn", "UTurn"], # required
+    #                   u_turn_step_details: {
+    #                     intersection: [ # required
+    #                       {
+    #                         language: "LanguageTag",
+    #                         value: "SensitiveString", # required
+    #                       }
+    #                     ],
+    #                     steering_direction: "Left" # One of: ["Left", "Right", "Straight"],
+    #                     turn_angle: 1.0,
+    #                     turn_intensity: "Sharp" # One of: ["Sharp", "Slight", "Typical"]
+    #                   }
+    #                 }
+    #               ]
+    #             },
+    #             transit_leg_details: {
+    #               after_travel_steps: [ # required
+    #                 {
+    #                   duration: 1, # required
+    #                   instruction: "SensitiveString",
+    #                   type: "Deboard" # One of: ["Deboard"], # required
+    #                 }
+    #               ],
+    #               agency: {
+    #                 name: "SensitiveString", # required
+    #                 url: "SensitiveString"
+    #               },
+    #               arrival: { # required
+    #                 delay: 1,
+    #                 place: { # required
+    #                   name: "SensitiveString",
+    #                   original_position: [1.0],
+    #                   position: [1.0], # required
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "Station" # One of: ["Station"],
+    #                   waypoint_index: 1
+    #                 },
+    #                 status: "Added" # One of: ["Added", "Cancelled", "Replaced", "Scheduled"],
+    #                 time: "TimestampWithTimezoneOffset"
+    #               },
+    #               attributions: [ # required
+    #                 {
+    #                   attribution_type: "Disclaimer" # One of: ["Disclaimer", "Tariff"],
+    #                   web_link: { # required
+    #                     anchor_text: "SensitiveString",
+    #                     description: "SensitiveString", # required
+    #                     device_type: "Android" # One of: ["Android", "Ios", "Web"],
+    #                     url: "SensitiveString"
+    #                   }
+    #                 }
+    #               ],
+    #               before_travel_steps: [ # required
+    #                 {
+    #                   duration: 1, # required
+    #                   instruction: "SensitiveString",
+    #                   type: "Board" # One of: ["Board"], # required
+    #                 }
+    #               ],
+    #               booking_web_links: [ # required
+    #                 {
+    #                   anchor_text: "SensitiveString",
+    #                   description: "SensitiveString", # required
+    #                   device_type: "Android" # One of: ["Android", "Ios", "Web"],
+    #                   url: "SensitiveString"
+    #                 }
+    #               ],
+    #               departure: { # required
+    #                 delay: 1,
+    #                 place: { # required
+    #                   name: "SensitiveString",
+    #                   original_position: [1.0],
+    #                   position: [1.0], # required
+    #                   station_details: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     platform_name: "SensitiveString",
+    #                     short_name: "SensitiveString"
+    #                   },
+    #                   type: "Station" # One of: ["Station"],
+    #                   waypoint_index: 1
+    #                 },
+    #                 status: "Added" # One of: ["Added", "Cancelled", "Replaced", "Scheduled"],
+    #                 time: "TimestampWithTimezoneOffset"
+    #               },
+    #               incidents: [ # required
+    #                 {
+    #                   description: "SensitiveString",
+    #                   effect: "Delayed" # One of: ["Delayed", "Detoured", "Other", "ServiceAdded", "ServiceCancelled", "ServiceModified", "ServiceReduced", "StopMoved"], # required
+    #                   end_time: "TimestampWithTimezoneOffset",
+    #                   start_time: "TimestampWithTimezoneOffset",
+    #                   type: "Accident" # One of: ["Accident", "Construction", "Demonstration", "Holiday", "Maintenance", "MedicalEmergency", "Other", "PoliceActivity", "Strike", "TechnicalProblem", "Weather"], # required
+    #                   url: "SensitiveString"
+    #                 }
+    #               ],
+    #               intermediate_stops: [ # required
+    #                 {
+    #                   attributes: ["NoEntry" # One of: ["NoEntry", "NoExit"]],
+    #                   departure: { # required
+    #                     delay: 1,
+    #                     place: { # required
+    #                       name: "SensitiveString",
+    #                       original_position: [1.0],
+    #                       position: [1.0], # required
+    #                       station_details: {
+    #                         accessibility: {
+    #                           wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                         },
+    #                         platform_name: "SensitiveString",
+    #                         short_name: "SensitiveString"
+    #                       },
+    #                       type: "Station" # One of: ["Station"],
+    #                       waypoint_index: 1
+    #                     },
+    #                     status: "Added" # One of: ["Added", "Cancelled", "Replaced", "Scheduled"],
+    #                     time: "TimestampWithTimezoneOffset"
+    #                   },
+    #                   duration: 1, # required
+    #                   geometry_offset: 1,
+    #                   transport: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     color: "HexColor",
+    #                     headsign: "SensitiveString",
+    #                     long_route_name: "SensitiveString",
+    #                     mode: "AerialTramway" # One of: ["AerialTramway", "Airplane", "All", "Bus", "BusRapidTransit", "CityTrain", "Ferry", "FunicularRailway", "HighSpeedTrain", "IntercityTrain", "InterregionalTrain", "LightRail", "Monorail", "PrivateBus", "RegionalTrain", "Subway"], # required
+    #                     route_name: "SensitiveString",
+    #                     short_route_name: "SensitiveString",
+    #                     text_color: "HexColor"
+    #                   }
+    #                 }
+    #               ],
+    #               next_departures: [ # required
+    #                 {
+    #                   delay: 1,
+    #                   platform_name: "SensitiveString",
+    #                   status: "Added" # One of: ["Added", "Cancelled", "Replaced", "Scheduled"],
+    #                   time: "TimestampWithTimezoneOffset", # required
+    #                   transport: {
+    #                     accessibility: {
+    #                       wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                     },
+    #                     color: "HexColor",
+    #                     headsign: "SensitiveString",
+    #                     long_route_name: "SensitiveString",
+    #                     mode: "AerialTramway" # One of: ["AerialTramway", "Airplane", "All", "Bus", "BusRapidTransit", "CityTrain", "Ferry", "FunicularRailway", "HighSpeedTrain", "IntercityTrain", "InterregionalTrain", "LightRail", "Monorail", "PrivateBus", "RegionalTrain", "Subway"], # required
+    #                     route_name: "SensitiveString",
+    #                     short_route_name: "SensitiveString",
+    #                     text_color: "HexColor"
+    #                   }
+    #                 }
+    #               ],
+    #               notices: [ # required
+    #                 {
+    #                   code: "AccuratePolylineUnavailable" # One of: ["AccuratePolylineUnavailable", "IntermediateStopsUnavailable", "NoSchedule", "Other", "PotentialViolatedVehicleRestrictionUsage", "ScheduledTimes", "SeasonalClosure", "ViolatedAvoidFerry", "ViolatedAvoidRailFerry", "ViolatedExcludedTransitMode", "ViolatedVehicleRestriction", "ViolatedAvoidAreas"], # required
+    #                   impact: "High" # One of: ["High", "Low"]
+    #                 }
+    #               ],
+    #               pass_through_waypoints: [ # required
+    #                 {
+    #                   geometry_offset: 1,
+    #                   place: { # required
+    #                     original_position: [1.0],
+    #                     position: [1.0], # required
+    #                     waypoint_index: 1
+    #                   }
+    #                 }
+    #               ],
+    #               spans: [ # required
+    #                 {
+    #                   country: "CountryCode3",
+    #                   distance: 1,
+    #                   duration: 1,
+    #                   geometry_offset: 1,
+    #                   names: [
+    #                     {
+    #                       language: "LanguageTag",
+    #                       value: "SensitiveString", # required
+    #                     }
+    #                   ],
+    #                   region: "SensitiveString"
+    #                 }
+    #               ],
+    #               summary: {
+    #                 overview: {
+    #                   distance: 1, # required
+    #                   duration: 1, # required
+    #                 },
+    #                 travel_only: {
+    #                   duration: 1, # required
+    #                 }
+    #               },
+    #               transport: { # required
+    #                 accessibility: {
+    #                   wheelchair: "Available" # One of: ["Available", "Limited", "Unavailable", "Unknown"]
+    #                 },
+    #                 color: "HexColor",
+    #                 headsign: "SensitiveString",
+    #                 long_route_name: "SensitiveString",
+    #                 mode: "AerialTramway" # One of: ["AerialTramway", "Airplane", "All", "Bus", "BusRapidTransit", "CityTrain", "Ferry", "FunicularRailway", "HighSpeedTrain", "IntercityTrain", "InterregionalTrain", "LightRail", "Monorail", "PrivateBus", "RegionalTrain", "Subway"], # required
+    #                 route_name: "SensitiveString",
+    #                 short_route_name: "SensitiveString",
+    #                 text_color: "HexColor"
+    #               },
+    #               travel_steps: [ # required
+    #                 {
+    #                   distance: 1,
+    #                   duration: 1, # required
+    #                   geometry_offset: 1,
+    #                   instruction: "SensitiveString",
+    #                   type: "Depart" # One of: ["Depart"], # required
     #                 }
     #               ]
     #             }
@@ -1695,7 +2434,7 @@ module Aws::GeoRoutes
     #               value: "SensitiveString", # required
     #             },
     #             route_number: {
-    #               direction: "RouteDirection",
+    #               direction: "East" # One of: ["East", "North", "South", "West"],
     #               language: "LanguageTag",
     #               value: "SensitiveString", # required
     #             }
@@ -1726,7 +2465,7 @@ module Aws::GeoRoutes
       request.send_request(options)
     end
 
-    # <p> <code>OptimizeWaypoints</code> calculates the optimal order to travel between a set of waypoints to minimize either the travel time or the distance travelled during the journey, based on road network restrictions and the traffic pattern data.</p>
+    # <p> <code>OptimizeWaypoints</code> calculates the optimal order to travel between a set of waypoints to minimize either the travel time or the distance travelled during the journey, based on road network restrictions and the traffic pattern data.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/actions-optimize-waypoints.html">Optimize waypoints</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @param [Hash, Types::OptimizeWaypointsRequest] params
     # @option params [Types::WaypointOptimizationAvoidanceOptions] :avoid
     #   <p>Features that are avoided. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, this setting is ignored.</p>
@@ -1745,19 +2484,19 @@ module Aws::GeoRoutes
     # @option params [String] :key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     # @option params [String] :optimize_sequencing_for
-    #   <p>Specifies the optimization criteria for the calculated sequence.</p> <p>Default Value: <code>FastestRoute</code>.</p>
+    #   <p>Specifies the optimization criteria for the calculated sequence.</p> <p>Default value: <code>FastestRoute</code>.</p>
     # @option params [Array<Float>] :origin
-    #   <p>The start position for the route.</p>
+    #   <p>The start position for the route in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     # @option params [Types::WaypointOptimizationOriginOptions] :origin_options
     #   <p>Origin related options.</p>
     # @option params [Types::WaypointOptimizationTrafficOptions] :traffic
     #   <p>Traffic-related options.</p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default value: <code>Car</code> </p>
     # @option params [Types::WaypointOptimizationTravelModeOptions] :travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
     # @option params [Array<Types::WaypointOptimizationWaypoint>] :waypoints
-    #   <p>List of waypoints between the <code>Origin</code> and <code>Destination</code>.</p>
+    #   <p>List of waypoints between the <code>Origin</code> and <code>Destination</code>, in World Geodetic System (WGS 84) format: [longitude, latitude].</p> <p>The maximum number of waypoints allowed per request:</p> <ul> <li> <p>Maximum 50 waypoints per request</p> </li> <li> <p>Maximum 20 waypoints when using constraints (<code>AccessHours</code>, <code>AppointmentTime</code>, <code>ServiceDuration</code>, <code>Heading</code>, <code>SideOfStreet</code>, <code>Before</code>)</p> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     avoid: {
@@ -1777,7 +2516,7 @@ module Aws::GeoRoutes
     #       u_turns: false
     #     },
     #     clustering: {
-    #       algorithm: "WaypointOptimizationClusteringAlgorithm", # required
+    #       algorithm: "DrivingDistance" # One of: ["DrivingDistance", "TopologySegment"], # required
     #       driving_distance_options: {
     #         driving_distance: 1, # required
     #       }
@@ -1787,11 +2526,11 @@ module Aws::GeoRoutes
     #     destination_options: {
     #       access_hours: {
     #         from: { # required
-    #           day_of_week: "DayOfWeek", # required
+    #           day_of_week: "Monday" # One of: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], # required
     #           time_of_day: "TimeOfDay", # required
     #         },
     #         to: { # required
-    #           day_of_week: "DayOfWeek", # required
+    #           day_of_week: "Monday" # One of: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], # required
     #           time_of_day: "TimeOfDay", # required
     #         }
     #       },
@@ -1801,7 +2540,7 @@ module Aws::GeoRoutes
     #       service_duration: 1,
     #       side_of_street: {
     #         position: [1.0], # required
-    #         use_with: "SideOfStreetMatchingStrategy"
+    #         use_with: "AnyStreet" # One of: ["AnyStreet", "DividedStreetOnly"]
     #       }
     #     },
     #     driver: {
@@ -1818,34 +2557,34 @@ module Aws::GeoRoutes
     #       rest_profile: {
     #         profile: "SensitiveString", # required
     #       },
-    #       treat_service_time_as: "WaypointOptimizationServiceTimeTreatment"
+    #       treat_service_time_as: "Rest" # One of: ["Rest", "Work"]
     #     },
     #     exclude: {
     #       countries: ["CountryCode"], # required
     #     },
     #     key: "ApiKey",
-    #     optimize_sequencing_for: "WaypointOptimizationSequencingObjective",
+    #     optimize_sequencing_for: "FastestRoute" # One of: ["FastestRoute", "ShortestRoute"],
     #     origin: [1.0], # required
     #     origin_options: {
     #       id: "WaypointId"
     #     },
     #     traffic: {
-    #       usage: "TrafficUsage"
+    #       usage: "IgnoreTrafficData" # One of: ["IgnoreTrafficData", "UseTrafficData"]
     #     },
-    #     travel_mode: "WaypointOptimizationTravelMode",
+    #     travel_mode: "Car" # One of: ["Car", "Pedestrian", "Scooter", "Truck"],
     #     travel_mode_options: {
     #       pedestrian: {
     #         speed: 1.0
     #       },
     #       truck: {
     #         gross_weight: 1,
-    #         hazardous_cargos: ["WaypointOptimizationHazardousCargoType"],
+    #         hazardous_cargos: ["Combustible" # One of: ["Combustible", "Corrosive", "Explosive", "Flammable", "Gas", "HarmfulToWater", "Organic", "Other", "Poison", "PoisonousInhalation", "Radioactive"]],
     #         height: 1,
     #         length: 1,
     #         trailer: {
     #           trailer_count: 1
     #         },
-    #         truck_type: "WaypointOptimizationTruckType",
+    #         truck_type: "StraightTruck" # One of: ["StraightTruck", "Tractor"],
     #         tunnel_restriction_code: "TunnelRestrictionCode",
     #         weight_per_axle: 1,
     #         width: 1
@@ -1855,11 +2594,11 @@ module Aws::GeoRoutes
     #       {
     #         access_hours: {
     #           from: { # required
-    #             day_of_week: "DayOfWeek", # required
+    #             day_of_week: "Monday" # One of: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], # required
     #             time_of_day: "TimeOfDay", # required
     #           },
     #           to: { # required
-    #             day_of_week: "DayOfWeek", # required
+    #             day_of_week: "Monday" # One of: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], # required
     #             time_of_day: "TimeOfDay", # required
     #           }
     #         },
@@ -1871,7 +2610,7 @@ module Aws::GeoRoutes
     #         service_duration: 1,
     #         side_of_street: {
     #           position: [1.0], # required
-    #           use_with: "SideOfStreetMatchingStrategy"
+    #           use_with: "AnyStreet" # One of: ["AnyStreet", "DividedStreetOnly"]
     #         }
     #       }
     #     ]
@@ -1897,7 +2636,7 @@ module Aws::GeoRoutes
     #       {
     #         failed_constraints: [ # required
     #           {
-    #             constraint: "WaypointOptimizationConstraint",
+    #             constraint: "AccessHours" # One of: ["AccessHours", "AppointmentTime", "Before", "Heading", "ServiceDuration", "SideOfStreet"],
     #             reason: "SensitiveString"
     #           }
     #         ],
@@ -1928,24 +2667,24 @@ module Aws::GeoRoutes
       request.send_request(options)
     end
 
-    # <p> <code>SnapToRoads</code> matches GPS trace to roads most likely traveled on.</p>
+    # <p> <code>SnapToRoads</code> matches GPS trace to roads most likely traveled on.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/snap-to-roads.html">Snap to Roads</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @param [Hash, Types::SnapToRoadsRequest] params
     # @option params [String] :key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request. </p>
     # @option params [String] :snapped_geometry_format
-    #   <p>Chooses what the returned SnappedGeometry format should be.</p> <p>Default Value: <code>FlexiblePolyline</code> </p>
+    #   <p>Chooses what the returned SnappedGeometry format should be.</p> <p>Default value: <code>FlexiblePolyline</code> </p>
     # @option params [Integer] :snap_radius
     #   <p>The radius around the provided tracepoint that is considered for snapping.</p> <p> <b>Unit</b>: <code>meters</code> </p> <p>Default value: <code>300</code> </p>
     # @option params [Array<Types::RoadSnapTracePoint>] :trace_points
     #   <p>List of trace points to be snapped onto the road network.</p>
     # @option params [String] :travel_mode
-    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default Value: <code>Car</code> </p>
+    #   <p>Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.</p> <p>Default value: <code>Car</code> </p>
     # @option params [Types::RoadSnapTravelModeOptions] :travel_mode_options
     #   <p>Travel mode related options for the provided travel mode.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     key: "ApiKey",
-    #     snapped_geometry_format: "GeometryFormat",
+    #     snapped_geometry_format: "FlexiblePolyline" # One of: ["FlexiblePolyline", "Simple"],
     #     snap_radius: 1,
     #     trace_points: [ # required
     #       {
@@ -1955,11 +2694,11 @@ module Aws::GeoRoutes
     #         timestamp: "TimestampWithTimezoneOffset"
     #       }
     #     ],
-    #     travel_mode: "RoadSnapTravelMode",
+    #     travel_mode: "Car" # One of: ["Car", "Pedestrian", "Scooter", "Truck"],
     #     travel_mode_options: {
     #       truck: {
     #         gross_weight: 1,
-    #         hazardous_cargos: ["RoadSnapHazardousCargoType"],
+    #         hazardous_cargos: ["Combustible" # One of: ["Combustible", "Corrosive", "Explosive", "Flammable", "Gas", "HarmfulToWater", "Organic", "Other", "Poison", "PoisonousInhalation", "Radioactive"]],
     #         height: 1,
     #         length: 1,
     #         trailer: {
@@ -1977,7 +2716,7 @@ module Aws::GeoRoutes
     #   {
     #     notices: [ # required
     #       {
-    #         code: "RoadSnapNoticeCode", # required
+    #         code: "TracePointsHeadingIgnored" # One of: ["TracePointsHeadingIgnored", "TracePointsIgnored", "TracePointsMovedByLargeDistance", "TracePointsNotMatched", "TracePointsOutOfSequence", "TracePointsSpeedEstimated", "TracePointsSpeedIgnored"], # required
     #         title: "SensitiveString", # required
     #         trace_point_indexes: [1], # required
     #       }
@@ -1989,7 +2728,7 @@ module Aws::GeoRoutes
     #       ],
     #       polyline: "Polyline"
     #     },
-    #     snapped_geometry_format: "GeometryFormat", # required
+    #     snapped_geometry_format: "FlexiblePolyline" # One of: ["FlexiblePolyline", "Simple"], # required
     #     snapped_trace_points: [ # required
     #       {
     #         confidence: 1.0, # required

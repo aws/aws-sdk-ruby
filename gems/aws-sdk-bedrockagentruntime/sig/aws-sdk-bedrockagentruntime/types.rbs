@@ -195,6 +195,664 @@ module Aws::BedrockAgentRuntime
       attr_accessor return_control_payload: Types::ReturnControlPayload?
     end
 
+    class AgenticRetrieveAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retrieve: Types::AgenticRetrieveActionDetails,
+        ?full_document_expansion: Types::AgenticRetrieveFullDocExpansionDetails,
+        ?memory_retrieve: Types::AgenticRetrieveMemoryRetrieveDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retrieve: Types::AgenticRetrieveActionDetails?
+      attr_accessor full_document_expansion: Types::AgenticRetrieveFullDocExpansionDetails?
+      attr_accessor memory_retrieve: Types::AgenticRetrieveMemoryRetrieveDetails?
+    end
+
+    class AgenticRetrieveActionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_query: Types::AgenticRetrieveMessageContent,
+        ?source_retrievers: Array[Types::AgenticRetrieveSourceRetriever],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_query: Types::AgenticRetrieveMessageContent?
+      attr_accessor source_retrievers: Array[Types::AgenticRetrieveSourceRetriever]?
+    end
+
+    class AgenticRetrieveBedrockGuardrailConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?guardrail_id: String,
+        ?guardrail_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor guardrail_id: String?
+      attr_accessor guardrail_version: String?
+    end
+
+    class AgenticRetrieveBedrockRerankingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_configuration: Types::AgenticRetrieveBedrockRerankingModelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_configuration: Types::AgenticRetrieveBedrockRerankingModelConfiguration?
+    end
+
+    class AgenticRetrieveBedrockRerankingModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+    end
+
+    class AgenticRetrieveCitation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_index: Integer,
+        ?end_index: Integer,
+        ?references: Array[Types::AgenticRetrieveCitationReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_index: Integer?
+      attr_accessor end_index: Integer?
+      attr_accessor references: Array[Types::AgenticRetrieveCitationReference]?
+    end
+
+    class AgenticRetrieveCitationReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_index: Integer?
+    end
+
+    class AgenticRetrieveConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?foundation_model_type: String,
+        ?foundation_model_configuration: Types::FoundationModelConfiguration,
+        ?reranking_model_type: String,
+        ?reranking_configuration: Types::AgenticRetrieveRerankingConfiguration,
+        ?max_agent_iteration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor foundation_model_type: String?
+      attr_accessor foundation_model_configuration: Types::FoundationModelConfiguration?
+      attr_accessor reranking_model_type: String?
+      attr_accessor reranking_configuration: Types::AgenticRetrieveRerankingConfiguration?
+      attr_accessor max_agent_iteration: Integer?
+    end
+
+    class AgenticRetrieveFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AgenticRetrieveFullDocExpansionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_id: String,
+        ?source_retriever: Types::AgenticRetrieveSourceRetriever,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_id: String?
+      attr_accessor source_retriever: Types::AgenticRetrieveSourceRetriever?
+    end
+
+    class AgenticRetrieveGeneratedResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?answer: String,
+        ?citations: Array[Types::AgenticRetrieveCitation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor answer: String?
+      attr_accessor citations: Array[Types::AgenticRetrieveCitation]?
+    end
+
+    class AgenticRetrieveGuardrailWarning
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?version: String,
+        ?action: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor version: String?
+      attr_accessor action: String?
+      attr_accessor message: String?
+    end
+
+    class AgenticRetrieveMemoryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memory_id: String,
+        ?session_binding: Types::AgenticRetrieveMemorySessionBinding,
+        ?retrieval_configs: Array[Types::AgenticRetrieveMemoryRetrievalConfig],
+        ?persistence_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memory_id: String?
+      attr_accessor session_binding: Types::AgenticRetrieveMemorySessionBinding?
+      attr_accessor retrieval_configs: Array[Types::AgenticRetrieveMemoryRetrievalConfig]?
+      attr_accessor persistence_mode: String?
+    end
+
+    class AgenticRetrieveMemoryMetadataFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?left: Types::AgenticRetrieveMemoryMetadataFilterLeft,
+        ?operator: String,
+        ?right: Types::AgenticRetrieveMemoryMetadataFilterRight,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor left: Types::AgenticRetrieveMemoryMetadataFilterLeft?
+      attr_accessor operator: String?
+      attr_accessor right: Types::AgenticRetrieveMemoryMetadataFilterRight?
+    end
+
+    class AgenticRetrieveMemoryMetadataFilterLeft
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?metadata_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_key: String?
+
+      class MetadataKey < AgenticRetrieveMemoryMetadataFilterLeft
+      end
+      class Unknown < AgenticRetrieveMemoryMetadataFilterLeft
+      end
+    end
+
+    module AgenticRetrieveMemoryMetadataFilterOperator
+      EQUALS_TO: String
+      EXISTS: String
+      NOT_EXISTS: String
+      BEFORE: String
+      AFTER: String
+      CONTAINS: String
+      GREATER_THAN: String
+      GREATER_THAN_OR_EQUALS: String
+      LESS_THAN: String
+      LESS_THAN_OR_EQUALS: String
+    end
+
+    class AgenticRetrieveMemoryMetadataFilterRight
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?metadata_value: Types::AgenticRetrieveMemoryMetadataValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_value: Types::AgenticRetrieveMemoryMetadataValue?
+
+      class MetadataValue < AgenticRetrieveMemoryMetadataFilterRight
+      end
+      class Unknown < AgenticRetrieveMemoryMetadataFilterRight
+      end
+    end
+
+    class AgenticRetrieveMemoryMetadataValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+        ?number_value: Float,
+        ?string_list_value: Array[String],
+        ?date_time_value: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor number_value: Float?
+      attr_accessor string_list_value: Array[String]?
+      attr_accessor date_time_value: Time?
+
+      class StringValue < AgenticRetrieveMemoryMetadataValue
+      end
+      class NumberValue < AgenticRetrieveMemoryMetadataValue
+      end
+      class StringListValue < AgenticRetrieveMemoryMetadataValue
+      end
+      class DateTimeValue < AgenticRetrieveMemoryMetadataValue
+      end
+      class Unknown < AgenticRetrieveMemoryMetadataValue
+      end
+    end
+
+    module AgenticRetrieveMemoryPersistenceMode
+      DEFAULT: String
+      NONE: String
+    end
+
+    class AgenticRetrieveMemoryRetrievalConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?namespace_path: String,
+        ?strategy_id: String,
+        ?metadata_filters: Array[Types::AgenticRetrieveMemoryMetadataFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor namespace_path: String?
+      attr_accessor strategy_id: String?
+      attr_accessor metadata_filters: Array[Types::AgenticRetrieveMemoryMetadataFilter]?
+    end
+
+    class AgenticRetrieveMemoryRetrieveDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_query: Types::AgenticRetrieveMessageContent,
+        ?memory_id: String,
+        ?namespace: String,
+        ?namespace_path: String,
+        ?strategy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_query: Types::AgenticRetrieveMessageContent?
+      attr_accessor memory_id: String?
+      attr_accessor namespace: String?
+      attr_accessor namespace_path: String?
+      attr_accessor strategy_id: String?
+    end
+
+    class AgenticRetrieveMemorySessionBinding
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actor_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actor_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class AgenticRetrieveMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::AgenticRetrieveMessageContent,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::AgenticRetrieveMessageContent?
+      attr_accessor role: String?
+    end
+
+    class AgenticRetrieveMessageContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class AgenticRetrievePolicyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bedrock_guardrail_configuration: Types::AgenticRetrieveBedrockGuardrailConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bedrock_guardrail_configuration: Types::AgenticRetrieveBedrockGuardrailConfiguration?
+    end
+
+    class AgenticRetrieveRerankingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?bedrock_reranking_configuration: Types::AgenticRetrieveBedrockRerankingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor bedrock_reranking_configuration: Types::AgenticRetrieveBedrockRerankingConfiguration?
+    end
+
+    module AgenticRetrieveRerankingConfigurationType
+      BEDROCK_RERANKING_MODEL: String
+    end
+
+    module AgenticRetrieveRerankingModelType
+      CUSTOM: String
+      MANAGED: String
+      NONE: String
+    end
+
+    class AgenticRetrieveResponseEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class AgenticRetrieveResultEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::AgenticRetrieveResultItem],
+        ?generated_response: Types::AgenticRetrieveGeneratedResponse,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::AgenticRetrieveResultItem]?
+      attr_accessor generated_response: Types::AgenticRetrieveGeneratedResponse?
+      attr_accessor next_token: String?
+    end
+
+    class AgenticRetrieveResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::RetrievalContent,
+        ?metadata: Hash[String, Smithy::Schema::document],
+        ?source_retriever: Types::AgenticRetrieveSourceRetriever,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::RetrievalContent?
+      attr_accessor metadata: Hash[String, Smithy::Schema::document]?
+      attr_accessor source_retriever: Types::AgenticRetrieveSourceRetriever?
+    end
+
+    class AgenticRetrieveSourceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?retrieval_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor retrieval_type: String?
+    end
+
+    class AgenticRetrieveSourceRetriever
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    module AgenticRetrieveStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    module AgenticRetrieveStep
+      PLANNING: String
+      RETRIEVAL: String
+      SPECULATIVE_RETRIEVAL: String
+      FULL_DOCUMENT_EXPANSION: String
+      SESSION_HISTORY_LOAD: String
+    end
+
+    class AgenticRetrieveStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::AgenticRetrieveMessage],
+        ?retrievers: Array[Types::AgenticRetriever],
+        ?agentic_retrieve_configuration: Types::AgenticRetrieveConfiguration,
+        ?policy_configuration: Types::AgenticRetrievePolicyConfiguration,
+        ?next_token: String,
+        ?user_context: Types::UserContext,
+        ?memory_configuration: Types::AgenticRetrieveMemoryConfiguration,
+        ?generate_response: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::AgenticRetrieveMessage]?
+      attr_accessor retrievers: Array[Types::AgenticRetriever]?
+      attr_accessor agentic_retrieve_configuration: Types::AgenticRetrieveConfiguration?
+      attr_accessor policy_configuration: Types::AgenticRetrievePolicyConfiguration?
+      attr_accessor next_token: String?
+      attr_accessor user_context: Types::UserContext?
+      attr_accessor memory_configuration: Types::AgenticRetrieveMemoryConfiguration?
+      attr_accessor generate_response: bool?
+    end
+
+    class AgenticRetrieveStreamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream: Types::AgenticRetrieveStreamResponseOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream: Types::AgenticRetrieveStreamResponseOutput?
+    end
+
+    class AgenticRetrieveStreamResponseOutput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?result: Types::AgenticRetrieveResultEvent,
+        ?trace_event: Types::AgenticRetrieveTraceEvent,
+        ?response_event: Types::AgenticRetrieveResponseEvent,
+        ?internal_server_exception: Types::InternalServerException,
+        ?validation_exception: Types::ValidationException,
+        ?resource_not_found_exception: Types::ResourceNotFoundException,
+        ?service_quota_exceeded_exception: Types::ServiceQuotaExceededException,
+        ?throttling_exception: Types::ThrottlingException,
+        ?access_denied_exception: Types::AccessDeniedException,
+        ?conflict_exception: Types::ConflictException,
+        ?dependency_failed_exception: Types::DependencyFailedException,
+        ?bad_gateway_exception: Types::BadGatewayException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: Types::AgenticRetrieveResultEvent?
+      attr_accessor trace_event: Types::AgenticRetrieveTraceEvent?
+      attr_accessor response_event: Types::AgenticRetrieveResponseEvent?
+      attr_accessor internal_server_exception: Types::InternalServerException?
+      attr_accessor validation_exception: Types::ValidationException?
+      attr_accessor resource_not_found_exception: Types::ResourceNotFoundException?
+      attr_accessor service_quota_exceeded_exception: Types::ServiceQuotaExceededException?
+      attr_accessor throttling_exception: Types::ThrottlingException?
+      attr_accessor access_denied_exception: Types::AccessDeniedException?
+      attr_accessor conflict_exception: Types::ConflictException?
+      attr_accessor dependency_failed_exception: Types::DependencyFailedException?
+      attr_accessor bad_gateway_exception: Types::BadGatewayException?
+
+      class Result < AgenticRetrieveStreamResponseOutput
+      end
+      class TraceEvent < AgenticRetrieveStreamResponseOutput
+      end
+      class ResponseEvent < AgenticRetrieveStreamResponseOutput
+      end
+      class InternalServerException < AgenticRetrieveStreamResponseOutput
+      end
+      class ValidationException < AgenticRetrieveStreamResponseOutput
+      end
+      class ResourceNotFoundException < AgenticRetrieveStreamResponseOutput
+      end
+      class ServiceQuotaExceededException < AgenticRetrieveStreamResponseOutput
+      end
+      class ThrottlingException < AgenticRetrieveStreamResponseOutput
+      end
+      class AccessDeniedException < AgenticRetrieveStreamResponseOutput
+      end
+      class ConflictException < AgenticRetrieveStreamResponseOutput
+      end
+      class DependencyFailedException < AgenticRetrieveStreamResponseOutput
+      end
+      class BadGatewayException < AgenticRetrieveStreamResponseOutput
+      end
+      class Unknown < AgenticRetrieveStreamResponseOutput
+      end
+    end
+
+    class AgenticRetrieveTraceEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?timestamp: Integer,
+        ?attributes: Types::AgenticRetrieveTraceEventAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor timestamp: Integer?
+      attr_accessor attributes: Types::AgenticRetrieveTraceEventAttributes?
+    end
+
+    class AgenticRetrieveTraceEventAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step: String,
+        ?status: String,
+        ?message: String,
+        ?actions: Array[Types::AgenticRetrieveAction],
+        ?warnings: Array[Types::AgenticRetrieveWarning],
+        ?failures: Array[Types::AgenticRetrieveFailure],
+        ?retrieval_metadata: Array[Types::AgenticRetrieveSourceMetadata],
+        ?retrieval_response: Array[Types::AgenticRetrieveTraceResultItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step: String?
+      attr_accessor status: String?
+      attr_accessor message: String?
+      attr_accessor actions: Array[Types::AgenticRetrieveAction]?
+      attr_accessor warnings: Array[Types::AgenticRetrieveWarning]?
+      attr_accessor failures: Array[Types::AgenticRetrieveFailure]?
+      attr_accessor retrieval_metadata: Array[Types::AgenticRetrieveSourceMetadata]?
+      attr_accessor retrieval_response: Array[Types::AgenticRetrieveTraceResultItem]?
+    end
+
+    class AgenticRetrieveTraceResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::RetrievalContent,
+        ?metadata: Hash[String, Smithy::Schema::document],
+        ?source_retriever: Types::AgenticRetrieveSourceRetriever,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::RetrievalContent?
+      attr_accessor metadata: Hash[String, Smithy::Schema::document]?
+      attr_accessor source_retriever: Types::AgenticRetrieveSourceRetriever?
+    end
+
+    module AgenticRetrieveType
+      BEDROCK_KNOWLEDGE_BASE: String
+      BEDROCK_AGENT_CORE_MEMORY: String
+    end
+
+    class AgenticRetrieveWarning
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?message: Types::AgenticRetrieveWarningMessage,
+        ?guardrail: Types::AgenticRetrieveGuardrailWarning,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: Types::AgenticRetrieveWarningMessage?
+      attr_accessor guardrail: Types::AgenticRetrieveGuardrailWarning?
+
+      class Message < AgenticRetrieveWarning
+      end
+      class Guardrail < AgenticRetrieveWarning
+      end
+      class Unknown < AgenticRetrieveWarning
+      end
+    end
+
+    class AgenticRetrieveWarningMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AgenticRetriever
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?configuration: Types::RetrieverConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor configuration: Types::RetrieverConfiguration?
+    end
+
     class AnalyzePromptEvent
       include Smithy::Schema::Structure
 
@@ -300,6 +958,19 @@ module Aws::BedrockAgentRuntime
       attr_accessor citations: Array[Types::Citation]?
     end
 
+    class AudioSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?transcription: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor transcription: String?
+    end
+
     class BadGatewayException
       include Smithy::Schema::Structure
 
@@ -311,6 +982,28 @@ module Aws::BedrockAgentRuntime
 
       attr_accessor message: String?
       attr_accessor resource_name: String?
+    end
+
+    class BedrockFoundationModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_configuration: Types::BedrockFoundationModelModelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_configuration: Types::BedrockFoundationModelModelConfiguration?
+    end
+
+    class BedrockFoundationModelModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
     end
 
     class BedrockModelConfigurations
@@ -412,6 +1105,34 @@ module Aws::BedrockAgentRuntime
       end
       class Unknown < Caller
       end
+    end
+
+    class CheckIngestedDocumentAclRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?data_source_id: String,
+        ?document_id: String,
+        ?user_context: Types::UserContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor document_id: String?
+      attr_accessor user_context: Types::UserContext?
+    end
+
+    class CheckIngestedDocumentAclResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?has_access: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor has_access: bool?
     end
 
     class Citation
@@ -761,6 +1482,88 @@ module Aws::BedrockAgentRuntime
 
       attr_accessor message: String?
       attr_accessor resource_name: String?
+    end
+
+    class DocumentAcl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_list: Types::DocumentAclMembership,
+        ?deny_list: Types::DocumentAclMembership,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_list: Types::DocumentAclMembership?
+      attr_accessor deny_list: Types::DocumentAclMembership?
+    end
+
+    class DocumentAclCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?condition_operator: String,
+        ?users: Array[Types::DocumentAclUser],
+        ?groups: Array[Types::DocumentAclGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor condition_operator: String?
+      attr_accessor users: Array[Types::DocumentAclUser]?
+      attr_accessor groups: Array[Types::DocumentAclGroup]?
+    end
+
+    class DocumentAclGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    module DocumentAclMemberRelation
+      AND: String
+      OR: String
+    end
+
+    class DocumentAclMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_relation: String,
+        ?conditions: Array[Types::DocumentAclCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_relation: String?
+      attr_accessor conditions: Array[Types::DocumentAclCondition]?
+    end
+
+    module DocumentAclMembershipType
+      KNOWLEDGE_BASE: String
+      DATA_SOURCE: String
+    end
+
+    class DocumentAclUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    module DocumentOutputFormat
+      RAW: String
+      EXTRACTED: String
     end
 
     class EndSessionRequest
@@ -1578,6 +2381,31 @@ module Aws::BedrockAgentRuntime
       attr_accessor input_field_name: String?
     end
 
+    class FoundationModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?bedrock_foundation_model_configuration: Types::BedrockFoundationModelConfiguration,
+        ?mantle_foundation_model_configuration: Types::MantleFoundationModelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor bedrock_foundation_model_configuration: Types::BedrockFoundationModelConfiguration?
+      attr_accessor mantle_foundation_model_configuration: Types::MantleFoundationModelConfiguration?
+    end
+
+    module FoundationModelConfigurationType
+      BEDROCK_FOUNDATION_MODEL: String
+      MANTLE_FOUNDATION_MODEL: String
+    end
+
+    module FoundationModelType
+      CUSTOM: String
+      MANAGED: String
+    end
+
     class FunctionDefinition
       include Smithy::Schema::Structure
 
@@ -1773,6 +2601,40 @@ module Aws::BedrockAgentRuntime
       attr_accessor memory_contents: Array[Types::Memory]?
     end
 
+    class GetDocumentContentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?data_source_id: String,
+        ?document_id: String,
+        ?output_format: String,
+        ?user_context: Types::UserContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor document_id: String?
+      attr_accessor output_format: String?
+      attr_accessor user_context: Types::UserContext?
+    end
+
+    class GetDocumentContentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mime_type: String,
+        ?presigned_url: String,
+        ?document_content_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mime_type: String?
+      attr_accessor presigned_url: String?
+      attr_accessor document_content_length: Integer?
+    end
+
     class GetExecutionFlowSnapshotRequest
       include Smithy::Schema::Structure
 
@@ -1847,6 +2709,32 @@ module Aws::BedrockAgentRuntime
       attr_accessor flow_alias_identifier: String?
       attr_accessor flow_identifier: String?
       attr_accessor flow_version: String?
+    end
+
+    class GetIngestedDocumentAclRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?data_source_id: String,
+        ?document_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor data_source_id: String?
+      attr_accessor document_id: String?
+    end
+
+    class GetIngestedDocumentAclResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_acl: Types::DocumentAcl,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_acl: Types::DocumentAcl?
     end
 
     class GetInvocationStepRequest
@@ -2491,6 +3379,26 @@ module Aws::BedrockAgentRuntime
       attr_accessor use_case: String?
     end
 
+    class InputImage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?inline_content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor inline_content: String?
+    end
+
+    module InputImageFormat
+      png: String
+      jpeg: String
+      gif: String
+      webp: String
+    end
+
     class InputPrompt
       include Smithy::Schema::Union
 
@@ -2870,11 +3778,20 @@ module Aws::BedrockAgentRuntime
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?type: String,
         ?text: String,
+        ?image: Types::InputImage,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor type: String?
       attr_accessor text: String?
+      attr_accessor image: Types::InputImage?
+    end
+
+    module KnowledgeBaseQueryType
+      TEXT: String
+      IMAGE: String
     end
 
     class KnowledgeBaseRetrievalConfiguration
@@ -2882,10 +3799,12 @@ module Aws::BedrockAgentRuntime
 
       def initialize: (
         ?vector_search_configuration: Types::KnowledgeBaseVectorSearchConfiguration,
+        ?managed_search_configuration: Types::ManagedSearchConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor vector_search_configuration: Types::KnowledgeBaseVectorSearchConfiguration?
+      attr_accessor managed_search_configuration: Types::ManagedSearchConfiguration?
     end
 
     class KnowledgeBaseRetrievalResult
@@ -2896,6 +3815,7 @@ module Aws::BedrockAgentRuntime
         ?location: Types::RetrievalResultLocation,
         ?score: Float,
         ?metadata: Hash[String, Smithy::Schema::document],
+        ?document_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2903,6 +3823,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor location: Types::RetrievalResultLocation?
       attr_accessor score: Float?
       attr_accessor metadata: Hash[String, Smithy::Schema::document]?
+      attr_accessor document_id: String?
     end
 
     class KnowledgeBaseRetrieveAndGenerateConfiguration
@@ -2922,6 +3843,19 @@ module Aws::BedrockAgentRuntime
       attr_accessor retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration?
       attr_accessor generation_configuration: Types::GenerationConfiguration?
       attr_accessor orchestration_configuration: Types::OrchestrationConfiguration?
+    end
+
+    class KnowledgeBaseRetrieverConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?retrieval_overrides: Types::RetrievalOverrides,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor retrieval_overrides: Types::RetrievalOverrides?
     end
 
     class KnowledgeBaseVectorSearchConfiguration
@@ -3111,6 +4045,92 @@ module Aws::BedrockAgentRuntime
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class ManagedSearchBedrockRerankingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_configuration: Types::ManagedSearchBedrockRerankingModelConfiguration,
+        ?number_of_reranked_results: Integer,
+        ?metadata_configuration: Types::MetadataConfigurationForReranking,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_configuration: Types::ManagedSearchBedrockRerankingModelConfiguration?
+      attr_accessor number_of_reranked_results: Integer?
+      attr_accessor metadata_configuration: Types::MetadataConfigurationForReranking?
+    end
+
+    class ManagedSearchBedrockRerankingModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?additional_model_request_fields: Hash[String, Smithy::Schema::document],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor additional_model_request_fields: Hash[String, Smithy::Schema::document]?
+    end
+
+    class ManagedSearchConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_results: Integer,
+        ?filter: Types::RetrievalFilter,
+        ?reranking_model_type: String,
+        ?reranking_configuration: Types::ManagedSearchRerankingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_results: Integer?
+      attr_accessor filter: Types::RetrievalFilter?
+      attr_accessor reranking_model_type: String?
+      attr_accessor reranking_configuration: Types::ManagedSearchRerankingConfiguration?
+    end
+
+    class ManagedSearchRerankingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?bedrock_reranking_configuration: Types::ManagedSearchBedrockRerankingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor bedrock_reranking_configuration: Types::ManagedSearchBedrockRerankingConfiguration?
+    end
+
+    module ManagedSearchRerankingConfigurationType
+      BEDROCK_RERANKING_MODEL: String
+    end
+
+    class MantleFoundationModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_configuration: Types::MantleFoundationModelModelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_configuration: Types::MantleFoundationModelModelConfiguration?
+    end
+
+    class MantleFoundationModelModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_arn: String,
+        ?project_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_arn: String?
+      attr_accessor project_id: String?
     end
 
     class Memory
@@ -4265,6 +5285,12 @@ module Aws::BedrockAgentRuntime
       end
     end
 
+    module RerankingModelType
+      CUSTOM: String
+      MANAGED: String
+      NONE: String
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -4349,6 +5375,21 @@ module Aws::BedrockAgentRuntime
       end
     end
 
+    class RetrievalContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?byte_content: String,
+        ?text: String,
+        ?mime_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor byte_content: String?
+      attr_accessor text: String?
+      attr_accessor mime_type: String?
+    end
+
     class RetrievalFilter
       include Smithy::Schema::Union
 
@@ -4413,6 +5454,19 @@ module Aws::BedrockAgentRuntime
       end
     end
 
+    class RetrievalOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::RetrievalFilter,
+        ?max_number_of_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::RetrievalFilter?
+      attr_accessor max_number_of_results: Integer?
+    end
+
     class RetrievalResultConfluenceLocation
       include Smithy::Schema::Structure
 
@@ -4431,6 +5485,8 @@ module Aws::BedrockAgentRuntime
         ?type: String,
         ?text: String,
         ?byte_content: String,
+        ?video: Types::VideoSegment,
+        ?audio: Types::AudioSegment,
         ?row: Array[Types::RetrievalResultContentColumn],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4438,6 +5494,8 @@ module Aws::BedrockAgentRuntime
       attr_accessor type: String?
       attr_accessor text: String?
       attr_accessor byte_content: String?
+      attr_accessor video: Types::VideoSegment?
+      attr_accessor audio: Types::AudioSegment?
       attr_accessor row: Array[Types::RetrievalResultContentColumn]?
     end
 
@@ -4469,6 +5527,8 @@ module Aws::BedrockAgentRuntime
       TEXT: String
       IMAGE: String
       ROW: String
+      AUDIO: String
+      VIDEO: String
     end
 
     class RetrievalResultCustomDocumentLocation
@@ -4480,6 +5540,17 @@ module Aws::BedrockAgentRuntime
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
+    end
+
+    class RetrievalResultGoogleDriveLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
     end
 
     class RetrievalResultKendraDocumentLocation
@@ -4506,6 +5577,8 @@ module Aws::BedrockAgentRuntime
         ?custom_document_location: Types::RetrievalResultCustomDocumentLocation,
         ?kendra_document_location: Types::RetrievalResultKendraDocumentLocation,
         ?sql_location: Types::RetrievalResultSqlLocation,
+        ?one_drive_location: Types::RetrievalResultOneDriveLocation,
+        ?google_drive_location: Types::RetrievalResultGoogleDriveLocation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4518,6 +5591,8 @@ module Aws::BedrockAgentRuntime
       attr_accessor custom_document_location: Types::RetrievalResultCustomDocumentLocation?
       attr_accessor kendra_document_location: Types::RetrievalResultKendraDocumentLocation?
       attr_accessor sql_location: Types::RetrievalResultSqlLocation?
+      attr_accessor one_drive_location: Types::RetrievalResultOneDriveLocation?
+      attr_accessor google_drive_location: Types::RetrievalResultGoogleDriveLocation?
     end
 
     module RetrievalResultLocationType
@@ -4529,6 +5604,19 @@ module Aws::BedrockAgentRuntime
       CUSTOM: String
       KENDRA: String
       SQL: String
+      ONEDRIVE: String
+      GOOGLEDRIVE: String
+    end
+
+    class RetrievalResultOneDriveLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
     end
 
     class RetrievalResultS3Location
@@ -4642,6 +5730,7 @@ module Aws::BedrockAgentRuntime
         ?input: Types::RetrieveAndGenerateInput,
         ?retrieve_and_generate_configuration: Types::RetrieveAndGenerateConfiguration,
         ?session_configuration: Types::RetrieveAndGenerateSessionConfiguration,
+        ?user_context: Types::UserContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4649,6 +5738,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor input: Types::RetrieveAndGenerateInput?
       attr_accessor retrieve_and_generate_configuration: Types::RetrieveAndGenerateConfiguration?
       attr_accessor session_configuration: Types::RetrieveAndGenerateSessionConfiguration?
+      attr_accessor user_context: Types::UserContext?
     end
 
     class RetrieveAndGenerateResponse
@@ -4687,6 +5777,7 @@ module Aws::BedrockAgentRuntime
         ?input: Types::RetrieveAndGenerateInput,
         ?retrieve_and_generate_configuration: Types::RetrieveAndGenerateConfiguration,
         ?session_configuration: Types::RetrieveAndGenerateSessionConfiguration,
+        ?user_context: Types::UserContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4694,6 +5785,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor input: Types::RetrieveAndGenerateInput?
       attr_accessor retrieve_and_generate_configuration: Types::RetrieveAndGenerateConfiguration?
       attr_accessor session_configuration: Types::RetrieveAndGenerateSessionConfiguration?
+      attr_accessor user_context: Types::UserContext?
     end
 
     class RetrieveAndGenerateStreamResponse
@@ -4783,6 +5875,7 @@ module Aws::BedrockAgentRuntime
         ?retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration,
         ?guardrail_configuration: Types::GuardrailConfiguration,
         ?next_token: String,
+        ?user_context: Types::UserContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4791,6 +5884,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration?
       attr_accessor guardrail_configuration: Types::GuardrailConfiguration?
       attr_accessor next_token: String?
+      attr_accessor user_context: Types::UserContext?
     end
 
     class RetrieveResponse
@@ -4821,6 +5915,22 @@ module Aws::BedrockAgentRuntime
       attr_accessor content: Types::RetrievalResultContent?
       attr_accessor location: Types::RetrievalResultLocation?
       attr_accessor metadata: Hash[String, Smithy::Schema::document]?
+    end
+
+    class RetrieverConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?knowledge_base: Types::KnowledgeBaseRetrieverConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base: Types::KnowledgeBaseRetrieverConfiguration?
+
+      class KnowledgeBase < RetrieverConfiguration
+      end
+      class Unknown < RetrieverConfiguration
+      end
     end
 
     class ReturnControlPayload
@@ -5375,6 +6485,17 @@ module Aws::BedrockAgentRuntime
       attr_accessor output_tokens: Integer?
     end
 
+    class UserContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
     class ValidationException
       include Smithy::Schema::Structure
 
@@ -5429,6 +6550,19 @@ module Aws::BedrockAgentRuntime
 
     module VectorSearchRerankingConfigurationType
       BEDROCK_RERANKING_MODEL: String
+    end
+
+    class VideoSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?summary: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor summary: String?
     end
   end
 end

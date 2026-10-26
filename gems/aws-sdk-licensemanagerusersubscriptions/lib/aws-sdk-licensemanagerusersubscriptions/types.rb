@@ -48,6 +48,9 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute domain_ipv4_list
     #   <p>A list of domain IPv4 addresses that are used for the Active Directory.</p>
     #   @return [Array<String>]
+    # @!attribute domain_ipv6_list
+    #   <p>A list of domain IPv6 addresses that are used for the Active Directory.</p>
+    #   @return [Array<String>]
     # @!attribute domain_credentials_provider
     #   <p>Points to the <code>CredentialsProvider</code> resource that contains information about the credential provider for user administration.</p>
     #   @return [Types::CredentialsProvider]
@@ -58,6 +61,7 @@ module Aws::LicenseManagerUserSubscriptions
       nil,
       :domain_name,
       :domain_ipv4_list,
+      :domain_ipv6_list,
       :domain_credentials_provider,
       :domain_network_settings,
       keyword_init: true
@@ -193,7 +197,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>An object that specifies details for the Active Directory identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute identity_provider_arn
     #   <p>The Amazon Resource Name (ARN) that identifies the identity provider to deregister.</p>
@@ -441,11 +445,15 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute ipv4_address
     #   <p>A list of domain IPv4 addresses that are used for the RDS license server.</p>
     #   @return [String]
+    # @!attribute ipv6_address
+    #   <p>A list of domain IPv6 addresses that are used for the RDS license server.</p>
+    #   @return [String]
     class LicenseServer < Struct.new(
       nil,
       :provisioning_status,
       :health_status,
       :ipv4_address,
+      :ipv6_address,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -614,7 +622,7 @@ module Aws::LicenseManagerUserSubscriptions
     end
 
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute identity_provider
     #   <p>An object that specifies details for the identity provider.</p>
@@ -747,6 +755,9 @@ module Aws::LicenseManagerUserSubscriptions
     # @!attribute subscription_end_date
     #   <p>The end date of a subscription.</p>
     #   @return [String]
+    # @!attribute license_expiration_date
+    #   <p>The expiration date of the license associated with this subscription, in ISO 8601 UTC format (for example, <code>2025-03-15T00:00:00Z</code>).</p> <p>This field applies only to subscriptions that use license server endpoints, such as Remote Desktop Services (RDS) Subscriber Access License (SAL). It returns <code>null</code> for products that don't use license-based subscriptions.</p>
+    #   @return [String]
     class ProductUserSummary < Struct.new(
       nil,
       :username,
@@ -758,6 +769,7 @@ module Aws::LicenseManagerUserSubscriptions
       :domain,
       :subscription_start_date,
       :subscription_end_date,
+      :license_expiration_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -779,7 +791,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>An object that specifies details for the identity provider to register.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute settings
     #   <p>The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.</p>
@@ -893,7 +905,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>An object that specifies details for the identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute domain
     #   <p>The domain name of the Active Directory that contains the user for whom to start the product subscription.</p>
@@ -931,7 +943,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>An object that specifies details for the identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute product_user_arn
     #   <p>The Amazon Resource Name (ARN) of the product user.</p>
@@ -1021,7 +1033,7 @@ module Aws::LicenseManagerUserSubscriptions
     #   <p>Refers to an identity provider.</p>
     #   @return [Types::IdentityProvider]
     # @!attribute product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     #   @return [String]
     # @!attribute identity_provider_arn
     #   <p>The Amazon Resource Name (ARN) of the identity provider to update.</p>

@@ -35,12 +35,17 @@ module Aws::EMRServerless
     Date = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.emrserverless#Date", name: "Date")
     DeleteApplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#DeleteApplicationInput", name: "DeleteApplicationInput")
     DeleteApplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#DeleteApplicationOutput", name: "DeleteApplicationOutput")
+    DiskEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#DiskEncryptionConfiguration", name: "DiskEncryptionConfiguration")
     DiskSize = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#DiskSize", name: "DiskSize", traits: {"smithy.api#length" => {"min" => 1, "max" => 15}, "smithy.api#pattern" => "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)$"})
     DiskType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#DiskType", name: "DiskType", traits: {"smithy.api#pattern" => "^(SHUFFLE_OPTIMIZED|[Ss]huffle_[Oo]ptimized|STANDARD|[Ss]tandard)$"})
     Duration = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emrserverless#Duration", name: "Duration", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 1000000}})
+    EncryptionContext = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.emrserverless#EncryptionContext", name: "EncryptionContext", traits: {"smithy.api#length" => {"max" => 8}})
+    EncryptionContextKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#EncryptionContextKey", name: "EncryptionContextKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    EncryptionContextValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#EncryptionContextValue", name: "EncryptionContextValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 384}})
     EncryptionKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#EncryptionKeyArn", name: "EncryptionKeyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):kms:[a-zA-Z0-9\\-]*:([0-9]{12}):key\\/[a-zA-Z0-9-]+$"})
+    EndpointUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#EndpointUrl", name: "EndpointUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     EngineType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#EngineType", name: "EngineType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
-    EntryPointArgument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#EntryPointArgument", name: "EntryPointArgument", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => ".*\\S.*", "smithy.api#sensitive" => {}})
+    EntryPointArgument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#EntryPointArgument", name: "EntryPointArgument", traits: {"smithy.api#length" => {"min" => 0}, "smithy.api#sensitive" => {}})
     EntryPointArguments = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emrserverless#EntryPointArguments", name: "EntryPointArguments", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     EntryPointPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#EntryPointPath", name: "EntryPointPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}, "smithy.api#pattern" => ".*\\S.*", "smithy.api#sensitive" => {}})
     GetApplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetApplicationInput", name: "GetApplicationInput")
@@ -49,6 +54,12 @@ module Aws::EMRServerless
     GetDashboardForJobRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetDashboardForJobRunOutput", name: "GetDashboardForJobRunOutput")
     GetJobRunInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetJobRunInput", name: "GetJobRunInput")
     GetJobRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetJobRunOutput", name: "GetJobRunOutput")
+    GetResourceDashboardRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetResourceDashboardRequest", name: "GetResourceDashboardRequest")
+    GetResourceDashboardResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetResourceDashboardResponse", name: "GetResourceDashboardResponse")
+    GetSessionEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetSessionEndpointRequest", name: "GetSessionEndpointRequest")
+    GetSessionEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetSessionEndpointResponse", name: "GetSessionEndpointResponse")
+    GetSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetSessionRequest", name: "GetSessionRequest")
+    GetSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#GetSessionResponse", name: "GetSessionResponse")
     Hive = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#Hive", name: "Hive")
     HiveCliParameters = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#HiveCliParameters", name: "HiveCliParameters", traits: {"smithy.api#length" => {"min" => 1, "max" => 102400}, "smithy.api#pattern" => ".*\\S.*", "smithy.api#sensitive" => {}})
     IAMRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#IAMRoleArn", name: "IAMRoleArn", traits: {"aws.api#arnReference" => {"type" => "AWS::IAM::Role"}, "smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):iam::([0-9]{12}):(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$"})
@@ -67,6 +78,7 @@ module Aws::EMRServerless
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     JobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#JobArn", name: "JobArn", traits: {"smithy.api#length" => {"min" => 60, "max" => 1024}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\\d{12}):\\/applications\\/[0-9a-zA-Z]+\\/jobruns\\/[0-9a-zA-Z]+$"})
     JobDriver = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.emrserverless#JobDriver", name: "JobDriver")
+    JobLevelCostAllocationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#JobLevelCostAllocationConfiguration", name: "JobLevelCostAllocationConfiguration")
     JobRun = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#JobRun", name: "JobRun")
     JobRunAttemptSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#JobRunAttemptSummary", name: "JobRunAttemptSummary")
     JobRunAttempts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emrserverless#JobRunAttempts", name: "JobRunAttempts")
@@ -84,6 +96,8 @@ module Aws::EMRServerless
     ListJobRunAttemptsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ListJobRunAttemptsResponse", name: "ListJobRunAttemptsResponse")
     ListJobRunsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ListJobRunsInput", name: "ListJobRunsInput")
     ListJobRunsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ListJobRunsOutput", name: "ListJobRunsOutput")
+    ListSessionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ListSessionsRequest", name: "ListSessionsRequest")
+    ListSessionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ListSessionsResponse", name: "ListSessionsResponse")
     ListTagsForResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ListTagsForResourceInput", name: "ListTagsForResourceInput")
     ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ListTagsForResourceOutput", name: "ListTagsForResourceOutput")
     LogGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#LogGroupName", name: "LogGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[\\.\\-_/#A-Za-z0-9]+$"})
@@ -104,8 +118,10 @@ module Aws::EMRServerless
     Query = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#Query", name: "Query", traits: {"smithy.api#length" => {"min" => 1, "max" => 10280}, "smithy.api#pattern" => ".*\\S.*", "smithy.api#sensitive" => {}})
     ReleaseLabel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#ReleaseLabel", name: "ReleaseLabel", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9._/-]+$"})
     RequestIdentityUserArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#RequestIdentityUserArn", name: "RequestIdentityUserArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):(iam|sts)::(\\d{12})?:[\\w/+=,.@-]+$"})
-    ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#ResourceArn", name: "ResourceArn", traits: {"smithy.api#length" => {"min" => 60, "max" => 1024}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\\d{12}):\\/applications\\/[0-9a-zA-Z]+(\\/jobruns\\/[0-9a-zA-Z]+)?$"})
+    ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#ResourceArn", name: "ResourceArn", traits: {"smithy.api#length" => {"min" => 60, "max" => 1024}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\\d{12}):\\/applications\\/[0-9a-zA-Z]+(\\/jobruns\\/[0-9a-zA-Z]+|\\/sessions\\/[0-9a-zA-Z]+)?$"})
+    ResourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#ResourceId", name: "ResourceId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[0-9a-z]+$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#ResourceType", name: "ResourceType", traits: {"smithy.api#enum" => [{"value" => "SESSION", "name" => "SESSION"}]})
     ResourceUtilization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ResourceUtilization", name: "ResourceUtilization")
     RetryPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#RetryPolicy", name: "RetryPolicy")
     S3MonitoringConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#S3MonitoringConfiguration", name: "S3MonitoringConfiguration")
@@ -114,6 +130,15 @@ module Aws::EMRServerless
     SecurityGroupString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#SecurityGroupString", name: "SecurityGroupString", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[-0-9a-zA-Z]+"})
     SensitivePropertiesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.emrserverless#SensitivePropertiesMap", name: "SensitivePropertiesMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}, "smithy.api#sensitive" => {}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    Session = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#Session", name: "Session")
+    SessionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#SessionArn", name: "SessionArn", traits: {"smithy.api#length" => {"min" => 60, "max" => 1024}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\\d{12}):\\/applications\\/[0-9a-zA-Z]+\\/sessions\\/[0-9a-zA-Z]+$"})
+    SessionAuthToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#SessionAuthToken", name: "SessionAuthToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 8000}, "smithy.api#sensitive" => {}})
+    SessionConfigurationOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#SessionConfigurationOverrides", name: "SessionConfigurationOverrides")
+    SessionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#SessionId", name: "SessionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[0-9a-z]+$"})
+    SessionState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#SessionState", name: "SessionState", traits: {"smithy.api#enum" => [{"value" => "SUBMITTED", "name" => "SUBMITTED"}, {"value" => "STARTING", "name" => "STARTING"}, {"value" => "STARTED", "name" => "STARTED"}, {"value" => "IDLE", "name" => "IDLE"}, {"value" => "BUSY", "name" => "BUSY"}, {"value" => "FAILED", "name" => "FAILED"}, {"value" => "TERMINATING", "name" => "TERMINATING"}, {"value" => "TERMINATED", "name" => "TERMINATED"}]})
+    SessionStateSet = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emrserverless#SessionStateSet", name: "SessionStateSet", traits: {"smithy.api#length" => {"min" => 1, "max" => 8}, "smithy.api#uniqueItems" => {}})
+    SessionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#SessionSummary", name: "SessionSummary")
+    Sessions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.emrserverless#Sessions", name: "Sessions")
     ShutdownGracePeriodInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.emrserverless#ShutdownGracePeriodInSeconds", name: "ShutdownGracePeriodInSeconds")
     SparkSubmit = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#SparkSubmit", name: "SparkSubmit")
     SparkSubmitParameters = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#SparkSubmitParameters", name: "SparkSubmitParameters", traits: {"smithy.api#length" => {"min" => 1, "max" => 102400}, "smithy.api#pattern" => ".*\\S.*", "smithy.api#sensitive" => {}})
@@ -121,6 +146,8 @@ module Aws::EMRServerless
     StartApplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#StartApplicationOutput", name: "StartApplicationOutput")
     StartJobRunInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#StartJobRunInput", name: "StartJobRunInput")
     StartJobRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#StartJobRunOutput", name: "StartJobRunOutput")
+    StartSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#StartSessionRequest", name: "StartSessionRequest")
+    StartSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#StartSessionResponse", name: "StartSessionResponse")
     StopApplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#StopApplicationInput", name: "StopApplicationInput")
     StopApplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#StopApplicationOutput", name: "StopApplicationOutput")
     String1024 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#String1024", name: "String1024", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => ".*\\S.*"})
@@ -133,6 +160,8 @@ module Aws::EMRServerless
     TagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#TagResourceInput", name: "TagResourceInput")
     TagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#TagResourceOutput", name: "TagResourceOutput")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.emrserverless#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9 /_.:=+@-]*$"})
+    TerminateSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#TerminateSessionRequest", name: "TerminateSessionRequest")
+    TerminateSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#TerminateSessionResponse", name: "TerminateSessionResponse")
     TotalResourceUtilization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#TotalResourceUtilization", name: "TotalResourceUtilization")
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#UntagResourceInput", name: "UntagResourceInput")
     UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.emrserverless#UntagResourceOutput", name: "UntagResourceOutput")
@@ -169,9 +198,11 @@ module Aws::EMRServerless
     Application.add_member(:worker_type_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecificationMap, name: "workerTypeSpecifications"))
     Application.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "runtimeConfiguration"))
     Application.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "monitoringConfiguration"))
+    Application.add_member(:disk_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskEncryptionConfiguration, name: "diskEncryptionConfiguration"))
     Application.add_member(:interactive_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InteractiveConfiguration, name: "interactiveConfiguration"))
     Application.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, name: "schedulerConfiguration"))
     Application.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfiguration, name: "identityCenterConfiguration"))
+    Application.add_member(:job_level_cost_allocation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JobLevelCostAllocationConfiguration, name: "jobLevelCostAllocationConfiguration"))
     Application.type = Types::Application
     ApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
     ApplicationStateSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationState, name: "member"))
@@ -211,6 +242,7 @@ module Aws::EMRServerless
     ConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Configuration, name: "member"))
     ConfigurationOverrides.add_member(:application_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "applicationConfiguration"))
     ConfigurationOverrides.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "monitoringConfiguration"))
+    ConfigurationOverrides.add_member(:disk_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskEncryptionConfiguration, name: "diskEncryptionConfiguration"))
     ConfigurationOverrides.type = Types::ConfigurationOverrides
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
@@ -229,9 +261,11 @@ module Aws::EMRServerless
     CreateApplicationInput.add_member(:worker_type_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecificationInputMap, name: "workerTypeSpecifications"))
     CreateApplicationInput.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "runtimeConfiguration"))
     CreateApplicationInput.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "monitoringConfiguration"))
+    CreateApplicationInput.add_member(:disk_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskEncryptionConfiguration, name: "diskEncryptionConfiguration"))
     CreateApplicationInput.add_member(:interactive_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: InteractiveConfiguration, name: "interactiveConfiguration"))
     CreateApplicationInput.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, name: "schedulerConfiguration"))
     CreateApplicationInput.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfigurationInput, name: "identityCenterConfiguration"))
+    CreateApplicationInput.add_member(:job_level_cost_allocation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JobLevelCostAllocationConfiguration, name: "jobLevelCostAllocationConfiguration"))
     CreateApplicationInput.type = Types::CreateApplicationInput
     CreateApplicationOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     CreateApplicationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name"))
@@ -240,6 +274,11 @@ module Aws::EMRServerless
     DeleteApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     DeleteApplicationInput.type = Types::DeleteApplicationInput
     DeleteApplicationOutput.type = Types::DeleteApplicationOutput
+    DiskEncryptionConfiguration.add_member(:encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContext, name: "encryptionContext"))
+    DiskEncryptionConfiguration.add_member(:encryption_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionKeyArn, name: "encryptionKeyArn"))
+    DiskEncryptionConfiguration.type = Types::DiskEncryptionConfiguration
+    EncryptionContext.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextKey, name: "key"))
+    EncryptionContext.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextValue, name: "value"))
     EntryPointArguments.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArgument, name: "member"))
     GetApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     GetApplicationInput.type = Types::GetApplicationInput
@@ -258,19 +297,44 @@ module Aws::EMRServerless
     GetJobRunInput.type = Types::GetJobRunInput
     GetJobRunOutput.add_member(:job_run, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRun, name: "jobRun", traits: {"smithy.api#required" => {}}))
     GetJobRunOutput.type = Types::GetJobRunOutput
+    GetResourceDashboardRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    GetResourceDashboardRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#httpQuery" => "resourceId", "smithy.api#required" => {}}))
+    GetResourceDashboardRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType", traits: {"smithy.api#httpQuery" => "resourceType", "smithy.api#required" => {}}))
+    GetResourceDashboardRequest.add_member(:access_system_profile_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "accessSystemProfileLogs", traits: {"smithy.api#httpQuery" => "accessSystemProfileLogs"}))
+    GetResourceDashboardRequest.type = Types::GetResourceDashboardRequest
+    GetResourceDashboardResponse.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "url"))
+    GetResourceDashboardResponse.type = Types::GetResourceDashboardResponse
+    GetSessionEndpointRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    GetSessionEndpointRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sessionId"}))
+    GetSessionEndpointRequest.type = Types::GetSessionEndpointRequest
+    GetSessionEndpointResponse.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    GetSessionEndpointResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sessionId"}))
+    GetSessionEndpointResponse.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointUrl, name: "endpoint", traits: {"smithy.api#required" => {}}))
+    GetSessionEndpointResponse.add_member(:auth_token, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionAuthToken, name: "authToken", traits: {"smithy.api#required" => {}}))
+    GetSessionEndpointResponse.add_member(:auth_token_expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "authTokenExpiresAt", traits: {"smithy.api#required" => {}}))
+    GetSessionEndpointResponse.type = Types::GetSessionEndpointResponse
+    GetSessionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    GetSessionRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sessionId"}))
+    GetSessionRequest.type = Types::GetSessionRequest
+    GetSessionResponse.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: Session, name: "session", traits: {"smithy.api#required" => {}}))
+    GetSessionResponse.type = Types::GetSessionResponse
     Hive.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: Query, name: "query", traits: {"smithy.api#required" => {}}))
     Hive.add_member(:init_query_file, ::Smithy::Schema::Shapes::MemberShape.new(target: InitScriptPath, name: "initQueryFile"))
     Hive.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HiveCliParameters, name: "parameters"))
     Hive.type = Types::Hive
     IdentityCenterConfiguration.add_member(:identity_center_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, name: "identityCenterInstanceArn"))
     IdentityCenterConfiguration.add_member(:identity_center_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterApplicationArn, name: "identityCenterApplicationArn"))
+    IdentityCenterConfiguration.add_member(:user_background_sessions_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "userBackgroundSessionsEnabled"))
     IdentityCenterConfiguration.type = Types::IdentityCenterConfiguration
     IdentityCenterConfigurationInput.add_member(:identity_center_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceArn, name: "identityCenterInstanceArn"))
+    IdentityCenterConfigurationInput.add_member(:user_background_sessions_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "userBackgroundSessionsEnabled"))
     IdentityCenterConfigurationInput.type = Types::IdentityCenterConfigurationInput
     ImageConfiguration.add_member(:image_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageUri, name: "imageUri", traits: {"smithy.api#required" => {}}))
     ImageConfiguration.add_member(:resolved_image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "resolvedImageDigest"))
+    ImageConfiguration.add_member(:application_level_digest_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "applicationLevelDigestResolution"))
     ImageConfiguration.type = Types::ImageConfiguration
     ImageConfigurationInput.add_member(:image_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageUri, name: "imageUri"))
+    ImageConfigurationInput.add_member(:application_level_digest_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "applicationLevelDigestResolution"))
     ImageConfigurationInput.type = Types::ImageConfigurationInput
     InitialCapacityConfig.add_member(:worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerCounts, name: "workerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     InitialCapacityConfig.add_member(:worker_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerResourceConfig, name: "workerConfiguration", traits: {"smithy.api#recommended" => {}}))
@@ -279,6 +343,7 @@ module Aws::EMRServerless
     InitialCapacityConfigMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: InitialCapacityConfig, name: "value"))
     InteractiveConfiguration.add_member(:studio_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "studioEnabled"))
     InteractiveConfiguration.add_member(:livy_endpoint_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "livyEndpointEnabled"))
+    InteractiveConfiguration.add_member(:session_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "sessionEnabled"))
     InteractiveConfiguration.type = Types::InteractiveConfiguration
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
@@ -286,6 +351,8 @@ module Aws::EMRServerless
     JobDriver.add_member(:hive, Types::JobDriver::Hive, ::Smithy::Schema::Shapes::MemberShape.new(target: Hive, name: "hive"))
     JobDriver.add_member(:unknown, Types::JobDriver::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     JobDriver.type = Types::JobDriver
+    JobLevelCostAllocationConfiguration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled"))
+    JobLevelCostAllocationConfiguration.type = Types::JobLevelCostAllocationConfiguration
     JobRun.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     JobRun.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, name: "jobRunId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
     JobRun.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "name"))
@@ -314,6 +381,8 @@ module Aws::EMRServerless
     JobRun.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "startedAt"))
     JobRun.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "endedAt"))
     JobRun.add_member(:queued_duration_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "queuedDurationMilliseconds"))
+    JobRun.add_member(:image_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageConfiguration, name: "imageConfiguration"))
+    JobRun.add_member(:worker_type_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerTypeSpecificationMap, name: "workerTypeSpecifications"))
     JobRun.type = Types::JobRun
     JobRunAttemptSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     JobRunAttemptSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, name: "id", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
@@ -380,6 +449,16 @@ module Aws::EMRServerless
     ListJobRunsOutput.add_member(:job_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRuns, name: "jobRuns", traits: {"smithy.api#required" => {}}))
     ListJobRunsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListJobRunsOutput.type = Types::ListJobRunsOutput
+    ListSessionsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    ListSessionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListSessionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 50}}))
+    ListSessionsRequest.add_member(:states, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStateSet, name: "states", traits: {"smithy.api#httpQuery" => "states"}))
+    ListSessionsRequest.add_member(:created_at_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAtAfter", traits: {"smithy.api#httpQuery" => "createdAtAfter"}))
+    ListSessionsRequest.add_member(:created_at_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAtBefore", traits: {"smithy.api#httpQuery" => "createdAtBefore"}))
+    ListSessionsRequest.type = Types::ListSessionsRequest
+    ListSessionsResponse.add_member(:sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: Sessions, name: "sessions", traits: {"smithy.api#required" => {}}))
+    ListSessionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListSessionsResponse.type = Types::ListSessionsResponse
     ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
@@ -425,6 +504,44 @@ module Aws::EMRServerless
     SensitivePropertiesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationPropertyValue, name: "value"))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    Session.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    Session.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sessionId"}))
+    Session.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    Session.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "name"))
+    Session.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionState, name: "state", traits: {"smithy.api#required" => {}}))
+    Session.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "stateDetails", traits: {"smithy.api#required" => {}}))
+    Session.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    Session.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
+    Session.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentityUserArn, name: "createdBy", traits: {"smithy.api#required" => {}}))
+    Session.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    Session.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    Session.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "startedAt"))
+    Session.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "endedAt"))
+    Session.add_member(:idle_since, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "idleSince"))
+    Session.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionConfigurationOverrides, name: "configurationOverrides"))
+    Session.add_member(:network_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkConfiguration, name: "networkConfiguration"))
+    Session.add_member(:idle_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "idleTimeoutMinutes", traits: {"smithy.api#default" => nil}))
+    Session.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    Session.add_member(:total_resource_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalResourceUtilization, name: "totalResourceUtilization"))
+    Session.add_member(:billed_resource_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceUtilization, name: "billedResourceUtilization"))
+    Session.add_member(:total_execution_duration_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "totalExecutionDurationSeconds"))
+    Session.type = Types::Session
+    SessionConfigurationOverrides.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "runtimeConfiguration"))
+    SessionConfigurationOverrides.type = Types::SessionConfigurationOverrides
+    SessionStateSet.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionState, name: "member"))
+    SessionSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    SessionSummary.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sessionId"}))
+    SessionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    SessionSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "name"))
+    SessionSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionState, name: "state", traits: {"smithy.api#required" => {}}))
+    SessionSummary.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "stateDetails", traits: {"smithy.api#required" => {}}))
+    SessionSummary.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, name: "releaseLabel", traits: {"smithy.api#required" => {}}))
+    SessionSummary.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
+    SessionSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestIdentityUserArn, name: "createdBy", traits: {"smithy.api#required" => {}}))
+    SessionSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    SessionSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    SessionSummary.type = Types::SessionSummary
+    Sessions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionSummary, name: "member"))
     SparkSubmit.add_member(:entry_point, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointPath, name: "entryPoint", traits: {"smithy.api#required" => {}}))
     SparkSubmit.add_member(:entry_point_arguments, ::Smithy::Schema::Shapes::MemberShape.new(target: EntryPointArguments, name: "entryPointArguments"))
     SparkSubmit.add_member(:spark_submit_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkSubmitParameters, name: "sparkSubmitParameters"))
@@ -448,6 +565,18 @@ module Aws::EMRServerless
     StartJobRunOutput.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobRunId, name: "jobRunId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "jobRunId"}))
     StartJobRunOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, name: "arn", traits: {"smithy.api#required" => {}}))
     StartJobRunOutput.type = Types::StartJobRunOutput
+    StartSessionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    StartSessionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartSessionRequest.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IAMRoleArn, name: "executionRoleArn", traits: {"smithy.api#required" => {}}))
+    StartSessionRequest.add_member(:configuration_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionConfigurationOverrides, name: "configurationOverrides"))
+    StartSessionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    StartSessionRequest.add_member(:idle_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "idleTimeoutMinutes", traits: {"smithy.api#default" => nil}))
+    StartSessionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "name"))
+    StartSessionRequest.type = Types::StartSessionRequest
+    StartSessionResponse.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    StartSessionResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sessionId"}))
+    StartSessionResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    StartSessionResponse.type = Types::StartSessionResponse
     StopApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
     StopApplicationInput.type = Types::StopApplicationInput
     StopApplicationOutput.type = Types::StopApplicationOutput
@@ -459,6 +588,12 @@ module Aws::EMRServerless
     TagResourceInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     TagResourceInput.type = Types::TagResourceInput
     TagResourceOutput.type = Types::TagResourceOutput
+    TerminateSessionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    TerminateSessionRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sessionId"}))
+    TerminateSessionRequest.type = Types::TerminateSessionRequest
+    TerminateSessionResponse.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "applicationId"}))
+    TerminateSessionResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionId, name: "sessionId", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "sessionId"}))
+    TerminateSessionResponse.type = Types::TerminateSessionResponse
     TotalResourceUtilization.add_member(:v_cpu_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "vCPUHour"))
     TotalResourceUtilization.add_member(:memory_gb_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "memoryGBHour"))
     TotalResourceUtilization.add_member(:storage_gb_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "storageGBHour"))
@@ -481,8 +616,10 @@ module Aws::EMRServerless
     UpdateApplicationInput.add_member(:release_label, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseLabel, name: "releaseLabel"))
     UpdateApplicationInput.add_member(:runtime_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "runtimeConfiguration"))
     UpdateApplicationInput.add_member(:monitoring_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringConfiguration, name: "monitoringConfiguration"))
+    UpdateApplicationInput.add_member(:disk_encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DiskEncryptionConfiguration, name: "diskEncryptionConfiguration"))
     UpdateApplicationInput.add_member(:scheduler_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfiguration, name: "schedulerConfiguration"))
     UpdateApplicationInput.add_member(:identity_center_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterConfigurationInput, name: "identityCenterConfiguration"))
+    UpdateApplicationInput.add_member(:job_level_cost_allocation_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JobLevelCostAllocationConfiguration, name: "jobLevelCostAllocationConfiguration"))
     UpdateApplicationInput.type = Types::UpdateApplicationInput
     UpdateApplicationOutput.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: Application, name: "application", traits: {"smithy.api#required" => {}}))
     UpdateApplicationOutput.type = Types::UpdateApplicationOutput
@@ -506,7 +643,7 @@ module Aws::EMRServerless
       service.id = "com.amazonaws.emrserverless#AwsToledoWebService"
       service.name = "AwsToledoWebService"
       service.version = "2021-07-13"
-      service.traits = {"aws.api#service" => {"sdkId" => "EMR Serverless", "arnNamespace" => "emr-serverless", "cloudFormationName" => "EMRServerless"}, "aws.auth#sigv4" => {"name" => "emr-serverless"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id", "x-amz-apigw-id"]}, "smithy.api#title" => "EMR Serverless"}
+      service.traits = {"aws.api#service" => {"sdkId" => "EMR Serverless", "arnNamespace" => "emr-serverless", "cloudFormationName" => "EMRServerless"}, "aws.auth#sigv4" => {"name" => "emr-serverless"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id", "x-amz-apigw-id"]}, "smithy.api#title" => "EMR Serverless", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-serverless-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-serverless-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-serverless.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://emr-serverless.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:cancel_job_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#CancelJobRun"
         operation.name = "CancelJobRun"
@@ -568,6 +705,36 @@ module Aws::EMRServerless
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/jobruns/{jobRunId}"}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_resource_dashboard, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emrserverless#GetResourceDashboard"
+        operation.name = "GetResourceDashboard"
+        operation.input = GetResourceDashboardRequest
+        operation.output = GetResourceDashboardResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/dashboard"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emrserverless#GetSession"
+        operation.name = "GetSession"
+        operation.input = GetSessionRequest
+        operation.output = GetSessionResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/sessions/{sessionId}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_session_endpoint, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emrserverless#GetSessionEndpoint"
+        operation.name = "GetSessionEndpoint"
+        operation.input = GetSessionEndpointRequest
+        operation.output = GetSessionEndpointResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/sessions/{sessionId}/endpoint"}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:list_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#ListApplications"
         operation.name = "ListApplications"
@@ -598,6 +765,17 @@ module Aws::EMRServerless
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/jobruns"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListJobRuns.new
+      end)
+      service.add_operation(:list_sessions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emrserverless#ListSessions"
+        operation.name = "ListSessions"
+        operation.input = ListSessionsRequest
+        operation.output = ListSessionsResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{applicationId}/sessions"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListSessions.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#ListTagsForResource"
@@ -631,6 +809,18 @@ module Aws::EMRServerless
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{applicationId}/jobruns"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:start_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emrserverless#StartSession"
+        operation.name = "StartSession"
+        operation.input = StartSessionRequest
+        operation.output = StartSessionResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{applicationId}/sessions"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:stop_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#StopApplication"
         operation.name = "StopApplication"
@@ -650,6 +840,16 @@ module Aws::EMRServerless
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}"}}
+      end)
+      service.add_operation(:terminate_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.emrserverless#TerminateSession"
+        operation.name = "TerminateSession"
+        operation.input = TerminateSessionRequest
+        operation.output = TerminateSessionResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/applications/{applicationId}/sessions/{sessionId}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.emrserverless#UntagResource"

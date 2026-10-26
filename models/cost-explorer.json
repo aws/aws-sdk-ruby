@@ -136,6 +136,9 @@
                     "target": "com.amazonaws.costexplorer#ListCostCategoryDefinitions"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#ListCostCategoryResourceAssociations"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGeneration"
                 },
                 {
@@ -187,6 +190,439 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>You can use the Cost Explorer API to programmatically query your cost and usage data.\n      You can query for aggregated data such as total monthly costs or total daily usage. You can\n      also query for granular data. This might include the number of daily write operations for\n      Amazon DynamoDB database tables in your production environment. </p>\n         <p>Service Endpoint</p>\n         <p>The Cost Explorer API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>https://ce.us-east-1.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <p>For information about the costs that are associated with the Cost Explorer API, see\n        <a href=\"http://aws.amazon.com/aws-cost-management/pricing/\">Amazon Web Services Cost\n        Management Pricing</a>.</p>",
                 "smithy.api#title": "AWS Cost Explorer Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-iso"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-iso-b"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-iso-e"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-cn"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-iso-f"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-eusc"
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce.us-east-1.api.aws",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce.cn-northwest-1.api.amazonwebservices.com.cn",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "cn-northwest-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce.us-iso-east-1.c2s.ic.gov",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-iso-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce.us-isob-east-1.sc2s.sgov.gov",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-isob-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce.eu-isoe-west-1.cloud.adc-e.uk",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "eu-isoe-west-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce.us-isof-south-1.csp.hci.ic.gov",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "us-isof-south-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce.eusc-de-east-1.api.amazonwebservices.eu",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "eusc-de-east-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://ce.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 21,
+                    "nodes": "/////wAAAAH/////AAAAAAAAABQAAAADAAAAAQAAAAQF9eESAAAAAgAAAAUF9eESAAAAAwAAABAAAAAGAAAABQAAAAwAAAAHAAAABgX14QYAAAAIAAAABwX14QcAAAAJAAAACAX14QgAAAAKAAAACwX14QkAAAALAAAADAX14QoF9eERAAAACQX14QQAAAANAAAACgX14QUAAAAOAAAADAX14QoAAAAPAAAADQX14Q8F9eEQAAAABAAAABIAAAARAAAABQX14QwF9eEOAAAABQAAABMF9eENAAAADQX14QsF9eEMAAAAAwX14QEAAAAVAAAABQX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -195,26 +631,26 @@
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         },
                         "Region": {
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -641,6 +1077,56 @@
                                                                     "ref": "UseDualStack"
                                                                 },
                                                                 true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://ce.eusc-de-east-1.api.amazonwebservices.eu",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "eusc-de-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-eusc"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
                                                             ]
                                                         }
                                                     ],
@@ -1113,85 +1599,43 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://ce-fips.us-gov-west-1.api.aws"
+                                    "url": "https://ce-fips.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://ce-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://ce.us-gov-west-1.api.aws"
+                                    "url": "https://ce.eusc-de-east-1.api.amazonwebservices.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://ce.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -1365,43 +1809,85 @@
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://ce-fips.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://ce-fips.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://ce-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://ce.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://ce.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://ce.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -1449,6 +1935,16 @@
         },
         "com.amazonaws.costexplorer#AmortizedUpfrontFee": {
             "type": "string"
+        },
+        "com.amazonaws.costexplorer#AnalysesPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 600
+                }
+            }
         },
         "com.amazonaws.costexplorer#AnalysisDetails": {
             "type": "structure",
@@ -1591,6 +2087,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CUSTOM_COMMITMENT"
+                    }
+                },
+                "TARGET_AVERAGE_COVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_AVERAGE_COVERAGE"
                     }
                 }
             }
@@ -1748,18 +2250,21 @@
                 "MonitorType": {
                     "target": "com.amazonaws.costexplorer#MonitorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The possible type values. </p>",
+                        "smithy.api#documentation": "<p>The type of the monitor. </p>\n         <p>Set this to <code>DIMENSIONAL</code> for an Amazon Web Services managed monitor.\n            Amazon Web Services managed monitors automatically track up to the top 5,000 values by\n            cost within a dimension of your choosing. Each dimension value is evaluated\n            independently. If you start incurring cost in a new value of your chosen dimension, it\n            will automatically be analyzed by an Amazon Web Services managed monitor.</p>\n         <p>Set this to <code>CUSTOM</code> for a customer managed monitor. Customer managed\n            monitors let you select specific dimension values that get monitored in aggregate.\n        </p>\n         <p>For more information about monitor types, see <a href=\"https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html#monitor-type-def\">Monitor\n            types</a> in the <i>Billing and Cost Management User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MonitorDimension": {
                     "target": "com.amazonaws.costexplorer#MonitorDimension",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dimensions to evaluate. </p>"
+                        "smithy.api#documentation": "<p>For customer managed monitors, do not specify this field.</p>\n         <p>For Amazon Web Services managed monitors, this field controls which cost dimension is\n            automatically analyzed by the monitor. For <code>TAG</code> and <code>COST_CATEGORY\n            </code> dimensions, you must also specify MonitorSpecification to configure the specific\n            tag or cost category key to analyze.</p>"
                     }
                 },
                 "MonitorSpecification": {
-                    "target": "com.amazonaws.costexplorer#Expression"
+                    "target": "com.amazonaws.costexplorer#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to control what costs the monitor analyzes for anomalies.</p>\n         <p>For Amazon Web Services managed monitors:</p>\n         <ul>\n            <li>\n               <p>If MonitorDimension is <code>SERVICE</code> or <code>LINKED_ACCOUNT</code>, do\n                    not specify this field</p>\n            </li>\n            <li>\n               <p>If MonitorDimension is <code>TAG</code>, set this field to <code>{ \"Tags\": {\n                        \"Key\": \"your tag key\" } }</code>\n               </p>\n            </li>\n            <li>\n               <p>If MonitorDimension is <code>COST_CATEGORY</code>, set this field to <code>{\n                        \"CostCategories\": { \"Key\": \"your cost category key\" } }</code>\n               </p>\n            </li>\n         </ul>\n         <p>For customer managed monitors:</p>\n         <ul>\n            <li>\n               <p>To track linked accounts, set this field to <code>{ \"Dimensions\": { \"Key\":\n                        \"LINKED_ACCOUNT\", \"Values\": [ \"your list of up to 10 account IDs\" ] } }\n                        </code>\n               </p>\n            </li>\n            <li>\n               <p>To track cost allocation tags, set this field to <code>{ \"Tags\": { \"Key\":\n                        \"your tag key\", \"Values\": [ \"your list of up to 10 tag values\" ] } }\n                        </code>\n               </p>\n            </li>\n            <li>\n               <p>To track cost categories, set this field to<code>{ \"CostCategories\": { \"Key\":\n                        \"your cost category key\", \"Values\": [ \"your cost category value\" ] } }\n                        </code>\n               </p>\n            </li>\n         </ul>"
+                    }
                 },
                 "DimensionalValueCount": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
@@ -2324,21 +2829,21 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective start date of your Cost Category.</p>",
+                        "smithy.api#documentation": "<p>The effective start date of your cost category.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EffectiveEnd": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective end date of your Cost Category.</p>"
+                        "smithy.api#documentation": "<p>The effective end date of your cost category.</p>"
                     }
                 },
                 "Name": {
@@ -2356,14 +2861,14 @@
                 "Rules": {
                     "target": "com.amazonaws.costexplorer#CostCategoryRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The rules are processed in order. If there are multiple rules that match the line\n            item, then the first rule to match is used to determine that Cost Category value.\n        </p>",
+                        "smithy.api#documentation": "<p>The rules are processed in order. If there are multiple rules that match the line\n            item, then the first rule to match is used to determine that cost category value.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SplitChargeRules": {
                     "target": "com.amazonaws.costexplorer#CostCategorySplitChargeRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The split charge rules that are used to allocate your charges between your Cost\n            Category values. </p>"
+                        "smithy.api#documentation": "<p> The split charge rules that are used to allocate your charges between your cost category values. </p>"
                     }
                 },
                 "ProcessingStatus": {
@@ -2429,7 +2934,7 @@
         "com.amazonaws.costexplorer#CostCategoryName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The unique name of the Cost Category.</p>",
+                "smithy.api#documentation": "<p>The unique name of the cost category.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
@@ -2475,7 +2980,7 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>"
                     }
                 },
                 "Name": {
@@ -2484,20 +2989,20 @@
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date.</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date.</p>"
                     }
                 },
                 "EffectiveEnd": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective end date.</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective end date.</p>"
                     }
                 },
                 "NumberOfRules": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of rules that are associated with a specific Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The number of rules that are associated with a specific cost category. </p>"
                     }
                 },
                 "ProcessingStatus": {
@@ -2514,16 +3019,51 @@
                 },
                 "DefaultValue": {
                     "target": "com.amazonaws.costexplorer#CostCategoryValue"
+                },
+                "SupportedResourceTypes": {
+                    "target": "com.amazonaws.costexplorer#ResourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The resource types supported by a specific cost category.\n        </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A reference to a Cost Category containing only enough information to identify the Cost\n            Category.</p>\n         <p>You can use this information to retrieve the full Cost Category information using\n                <code>DescribeCostCategory</code>.</p>"
+                "smithy.api#documentation": "<p>A reference to a cost category containing only enough information to identify the Cost\n            Category.</p>\n         <p>You can use this information to retrieve the full cost category information using\n                <code>DescribeCostCategory</code>.</p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryReferencesList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.costexplorer#CostCategoryReference"
+            }
+        },
+        "com.amazonaws.costexplorer#CostCategoryResourceAssociation": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.costexplorer#GenericArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The unique identifier for an associated resource.\n        </p>"
+                    }
+                },
+                "CostCategoryName": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryName"
+                },
+                "CostCategoryArn": {
+                    "target": "com.amazonaws.costexplorer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a cost category association that contains information on an associated resource.\n        </p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostCategoryResourceAssociations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#CostCategoryResourceAssociation"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRule": {
@@ -2535,7 +3075,7 @@
                 "Rule": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n\n            <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n\n            <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for cost category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User\n                Guide</i>.</p>"
                     }
                 },
                 "InheritedValue": {
@@ -2552,7 +3092,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Rules are processed in order. If there are multiple rules that match the line item,\n            then the first rule to match is used to determine that Cost Category value.</p>"
+                "smithy.api#documentation": "<p>Rules are processed in order. If there are multiple rules that match the line item,\n            then the first rule to match is used to determine that cost category value.</p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRuleType": {
@@ -2583,7 +3123,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The rule schema version in this particular Cost Category.</p>"
+                "smithy.api#documentation": "<p>The rule schema version in this particular cost category.</p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRulesList": {
@@ -2627,14 +3167,14 @@
                 "Source": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category value that you want to split. That value can't be used as a source\n            or a target in other split charge rules. To indicate uncategorized costs, you can use an\n            empty string as the source.</p>",
+                        "smithy.api#documentation": "<p>The cost category value that you want to split. That value can't be used as a source\n            or a target in other split charge rules. To indicate uncategorized costs, you can use an\n            empty string as the source.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Targets": {
                     "target": "com.amazonaws.costexplorer#CostCategorySplitChargeRuleTargetsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category values that you want to split costs across. These values can't be\n            used as a source in other split charge rules. </p>",
+                        "smithy.api#documentation": "<p>The cost category values that you want to split costs across. These values can't be\n            used as a source in other split charge rules. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2653,7 +3193,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use the split charge rule to split the cost of one Cost Category value across several\n            other target values. </p>"
+                "smithy.api#documentation": "<p>Use the split charge rule to split the cost of one cost category value across several\n            other target values. </p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategorySplitChargeRuleParameter": {
@@ -2785,7 +3325,7 @@
                 "Values": {
                     "target": "com.amazonaws.costexplorer#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific value of the Cost Category.</p>"
+                        "smithy.api#documentation": "<p>The specific value of the cost category.</p>"
                     }
                 },
                 "MatchOptions": {
@@ -3143,7 +3683,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Cost Category with the requested name and rules.</p>"
+                "smithy.api#documentation": "<p>Creates a new cost category with the requested name and rules.</p>"
             }
         },
         "com.amazonaws.costexplorer#CreateCostCategoryDefinitionRequest": {
@@ -3158,7 +3698,7 @@
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
                     }
                 },
                 "RuleVersion": {
@@ -3170,7 +3710,7 @@
                 "Rules": {
                     "target": "com.amazonaws.costexplorer#CostCategoryRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category rules used to categorize costs. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>",
+                        "smithy.api#documentation": "<p>The cost category rules used to categorize costs. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3180,7 +3720,7 @@
                 "SplitChargeRules": {
                     "target": "com.amazonaws.costexplorer#CostCategorySplitChargeRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The split charge rules used to allocate your charges between your Cost Category values.\n    </p>"
+                        "smithy.api#documentation": "<p> The split charge rules used to allocate your charges between your cost category values.\n    </p>"
                     }
                 },
                 "ResourceTags": {
@@ -3200,13 +3740,13 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your newly created Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for your newly created cost category. </p>"
                     }
                 },
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date. It can only be a billing start date (first day of the month).</p>"
                     }
                 }
             },
@@ -3423,7 +3963,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Cost Category. Expenses from this month going forward will no longer be\n      categorized with this Cost Category.</p>"
+                "smithy.api#documentation": "<p>Deletes a cost category. Expenses from this month going forward will no longer be\n      categorized with this cost category.</p>"
             }
         },
         "com.amazonaws.costexplorer#DeleteCostCategoryDefinitionRequest": {
@@ -3432,7 +3972,7 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3447,13 +3987,13 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>"
                     }
                 },
                 "EffectiveEnd": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective end date of the Cost Category as a result of deleting it. No costs after\n      this date is categorized by the deleted Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The effective end date of the cost category as a result of deleting it. No costs after\n      this date is categorized by the deleted cost category. </p>"
                     }
                 }
             },
@@ -3478,7 +4018,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the name, Amazon Resource Name (ARN), rules, definition, and effective dates of a\n      Cost Category that's defined in the account.</p>\n         <p>You have the option to use <code>EffectiveOn</code> to return a Cost Category that's\n      active on a specific date. If there's no <code>EffectiveOn</code> specified, you see a Cost\n      Category that's effective on the current date. If Cost Category is still effective,\n        <code>EffectiveEnd</code> is omitted in the response. </p>"
+                "smithy.api#documentation": "<p>Returns the name, Amazon Resource Name (ARN), rules, definition, and effective dates of a\n      cost category that's defined in the account.</p>\n         <p>You have the option to use <code>EffectiveOn</code> to return a cost category that's\n      active on a specific date. If there's no <code>EffectiveOn</code> specified, you see a Cost\n      Category that's effective on the current date. If cost category is still effective,\n        <code>EffectiveEnd</code> is omitted in the response. </p>"
             }
         },
         "com.amazonaws.costexplorer#DescribeCostCategoryDefinitionRequest": {
@@ -3487,14 +4027,14 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EffectiveOn": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the Cost Category was effective. </p>"
+                        "smithy.api#documentation": "<p>The date when the cost category was effective. </p>"
                     }
                 }
             },
@@ -3725,7 +4265,23 @@
                     "traits": {
                         "smithy.api#enumValue": "ANOMALY_TOTAL_IMPACT_PERCENTAGE"
                     }
+                },
+                "PRODUCT_ATTRIBUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRODUCT_ATTRIBUTE"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.costexplorer#DimensionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
             }
         },
         "com.amazonaws.costexplorer#DimensionValues": {
@@ -3734,7 +4290,7 @@
                 "Key": {
                     "target": "com.amazonaws.costexplorer#Dimension",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the metadata types that you can use to filter and group your results. For\n            example, <code>AZ</code> returns a list of Availability Zones.</p>\n         <p>Not all dimensions are supported in each API. Refer to the documentation for each\n            specific API to see what is supported.</p>\n         <p>\n            <code>LINKED_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in\n                <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>\n         <p>\n            <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and\n                <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code> can only be used in <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html\">AnomalySubscriptions</a>.</p>"
+                        "smithy.api#documentation": "<p>The names of the metadata types that you can use to filter and group your results. For\n            example, <code>AZ</code> returns a list of Availability Zones.</p>\n         <p>Not all dimensions are supported in each API. Refer to the documentation for each\n            specific API to see what is supported.</p>\n         <p>\n            <code>LINKED_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in\n                <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>\n         <p>\n            <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and\n                <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code> can only be used in <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html\">AnomalySubscriptions</a>.</p>\n         <p>Use <code>PRODUCT_ATTRIBUTE</code> only as the <code>Dimension</code> in\n                <code>GetDimensionValues</code>. To filter or group by product attributes, use the\n                <code>ProductAttributes</code> field of <code>Expression</code> or the\n                <code>PRODUCT_ATTRIBUTE</code> group type.</p>"
                     }
                 },
                 "Values": {
@@ -3746,7 +4302,7 @@
                 "MatchOptions": {
                     "target": "com.amazonaws.costexplorer#MatchOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The match options that you can use to filter your results.</p>\n         <p>\n            <code>MatchOptions</code> is only applicable for actions related to Cost Category and\n            Anomaly Subscriptions. Refer to the documentation for each specific API to see what is\n            supported.</p>\n         <p>The default values for <code>MatchOptions</code> are <code>EQUALS</code> and\n                <code>CASE_SENSITIVE</code>.</p>"
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results.</p>\n         <p>\n            <code>MatchOptions</code> is only applicable for actions related to cost category and\n            Anomaly Subscriptions. Refer to the documentation for each specific API to see what is\n            supported.</p>\n         <p>The default values for <code>MatchOptions</code> are <code>EQUALS</code> and\n                <code>CASE_SENSITIVE</code>.</p>"
                     }
                 }
             },
@@ -4213,10 +4769,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The filter that's based on <code>CostCategory</code> values.</p>"
                     }
+                },
+                "ProductAttributes": {
+                    "target": "com.amazonaws.costexplorer#ProductAttributeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter that's based on <code>ProductAttributeValues</code>. Use it to filter the\n            costs of supported services, such as Amazon Bedrock, by product attributes. The following\n            operations support this filter: <code>GetCostAndUsage</code>,\n                <code>GetCostAndUsageWithResources</code>, <code>GetDimensionValues</code> (in the\n                <code>COST_AND_USAGE</code> context), <code>GetTags</code>, and\n                <code>GetCostCategories</code>. For the supported services and keys, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html\">\n               <code>ProductAttributeValues</code>\n            </a>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p>\n         <p>Not all <code>Expression</code> types are supported in each API. Refer to the\n            documentation for each specific API to see what is supported.</p>\n         <p>There are two patterns:</p>\n         <ul>\n            <li>\n               <p>Simple dimension values.</p>\n               <ul>\n                  <li>\n                     <p>There are three types of simple dimension values:\n                                <code>CostCategories</code>, <code>Tags</code>, and\n                                <code>Dimensions</code>.</p>\n                     <ul>\n                        <li>\n                           <p>Specify the <code>CostCategories</code> field to define a\n                                    filter that acts on Cost Categories.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Tags</code> field to define a filter that\n                                    acts on Cost Allocation Tags.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Dimensions</code> field to define a filter\n                                    that acts on the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html\">\n                                 <code>DimensionValues</code>\n                              </a>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>For each filter type, you can set the dimension name and values for\n                            the filters that you plan to use.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for <code>REGION==us-east-1 OR\n                                        REGION==us-west-1</code>. For\n                                        <code>GetRightsizingRecommendation</code>, the Region is a\n                                    full name (for example, <code>REGION==US East (N.\n                                        Virginia)</code>.</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [\n                                        \"us-east-1\", \"us-west-1\" ] } }</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>As shown in the previous example, lists of dimension values\n                                    are combined with <code>OR</code> when applying the\n                                    filter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>You can also set different match options to further control how the\n                            filter behaves. Not all APIs support match options. Refer to the\n                            documentation for each specific API to see what is supported.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for linked account names that\n                                    start with \"a\".</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\":\n                                        \"LINKED_ACCOUNT_NAME\", \"MatchOptions\": [ \"STARTS_WITH\" ],\n                                        \"Values\": [ \"a\" ] } }</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Compound <code>Expression</code> types with logical operations.</p>\n               <ul>\n                  <li>\n                     <p>You can use multiple <code>Expression</code> types and the logical\n                            operators <code>AND/OR/NOT</code> to create a list of one or more\n                                <code>Expression</code> objects. By doing this, you can filter by\n                            more advanced options.</p>\n                  </li>\n                  <li>\n                     <p>For example, you can filter by <code>((REGION == us-east-1 OR REGION\n                                == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=\n                                DataTransfer)</code>.</p>\n                  </li>\n                  <li>\n                     <p>The corresponding <code>Expression</code> for this example is as\n                            follows: <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\",\n                                \"Values\": [ \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\":\n                                \"TagName\", \"Values\": [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": {\n                                \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"] }}} ] }\n                            </code>\n                     </p>\n                  </li>\n               </ul>\n               <note>\n                  <p>Because each <code>Expression</code> can have only one operator, the\n                        service returns an error if more than one is specified. The following\n                        example shows an <code>Expression</code> object that creates an error:\n                            <code> { \"And\": [ ... ], \"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\":\n                            [ \"DataTransfer\" ] } } </code>\n                  </p>\n                  <p>The following is an example of the corresponding error message:\n                            <code>\"Expression has more than one roots. Only one root operator is\n                            allowed for each expression: And, Or, Not, Dimensions, Tags,\n                            CostCategories\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>\n         <note>\n            <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and\n                NOT isn't supported. OR isn't supported between different dimensions, or dimensions\n                and tags. NOT operators aren't supported. Dimensions are also limited to\n                    <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or\n                    <code>RIGHTSIZING_TYPE</code>.</p>\n            <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is\n                supported. AND and OR aren't supported. Dimensions are limited to\n                    <code>LINKED_ACCOUNT</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p>\n         <p>Not all <code>Expression</code> types are supported in each API. Refer to the\n            documentation for each specific API to see what is supported.</p>\n         <p>There are two patterns:</p>\n         <ul>\n            <li>\n               <p>Simple dimension values.</p>\n               <ul>\n                  <li>\n                     <p>There are four types of simple dimension values:\n                                <code>CostCategories</code>, <code>Tags</code>,\n                                <code>Dimensions</code>, and\n                            <code>ProductAttributes</code>.</p>\n                     <ul>\n                        <li>\n                           <p>Specify the <code>CostCategories</code> field to define a\n                                    filter that acts on Cost Categories.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Tags</code> field to define a filter that\n                                    acts on Cost Allocation Tags.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Dimensions</code> field to define a filter\n                                    that acts on the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html\">\n                                 <code>DimensionValues</code>\n                              </a>.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>ProductAttributes</code> field to define a\n                                    filter that acts on the product attributes of supported\n                                    services, such as Amazon Bedrock. Only\n                                        <code>GetCostAndUsage</code>,\n                                        <code>GetCostAndUsageWithResources</code>,\n                                        <code>GetDimensionValues</code> (in the\n                                        <code>COST_AND_USAGE</code> context),\n                                        <code>GetTags</code>, and <code>GetCostCategories</code>\n                                    support <code>ProductAttributes</code>. For the supported\n                                    services, keys and <code>SERVICE</code> filter rules, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html\">\n                                 <code>ProductAttributeValues</code>\n                              </a>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>For each filter type, you can set the dimension name and values for\n                            the filters that you plan to use.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for <code>REGION==us-east-1 OR\n                                        REGION==us-west-1</code>. For\n                                        <code>GetRightsizingRecommendation</code>, the Region is a\n                                    full name (for example, <code>REGION==US East (N.\n                                        Virginia)</code>.</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [\n                                        \"us-east-1\", \"us-west-1\" ] } }</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>As shown in the previous example, lists of dimension values\n                                    are combined with <code>OR</code> when applying the\n                                    filter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>You can also set different match options to further control how the\n                            filter behaves. Not all APIs support match options. Refer to the\n                            documentation for each specific API to see what is supported.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for linked account names that\n                                    start with \"a\".</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\":\n                                        \"LINKED_ACCOUNT_NAME\", \"MatchOptions\": [ \"STARTS_WITH\" ],\n                                        \"Values\": [ \"a\" ] } }</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Compound <code>Expression</code> types with logical operations.</p>\n               <ul>\n                  <li>\n                     <p>You can use multiple <code>Expression</code> types and the logical\n                            operators <code>AND/OR/NOT</code> to create a list of one or more\n                                <code>Expression</code> objects. By doing this, you can filter by\n                            more advanced options.</p>\n                  </li>\n                  <li>\n                     <p>For example, you can filter by <code>((REGION == us-east-1 OR REGION\n                                == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=\n                                DataTransfer)</code>.</p>\n                  </li>\n                  <li>\n                     <p>The corresponding <code>Expression</code> for this example is as\n                            follows: <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\",\n                                \"Values\": [ \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\":\n                                \"TagName\", \"Values\": [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": {\n                                \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"] }}} ] }\n                            </code>\n                     </p>\n                  </li>\n               </ul>\n               <note>\n                  <p>Because each <code>Expression</code> can have only one operator, the\n                        service returns an error if more than one is specified. The following\n                        example shows an <code>Expression</code> object that creates an error:\n                            <code> { \"And\": [ ... ], \"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\":\n                            [ \"DataTransfer\" ] } } </code>\n                  </p>\n                  <p>The following is an example of the corresponding error message:\n                            <code>\"Expression has more than one roots. Only one root operator is\n                            allowed for each expression: And, Or, Not, Dimensions, Tags,\n                            CostCategories\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>\n         <note>\n            <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and\n                NOT isn't supported. OR isn't supported between different dimensions, or dimensions\n                and tags. NOT operators aren't supported. Dimensions are also limited to\n                    <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or\n                    <code>RIGHTSIZING_TYPE</code>.</p>\n            <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is\n                supported. AND and OR aren't supported. Dimensions are limited to\n                    <code>LINKED_ACCOUNT</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.costexplorer#Expressions": {
@@ -4448,6 +5010,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.costexplorer#GenerationSummary"
+            }
+        },
+        "com.amazonaws.costexplorer#GenericArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
             }
         },
         "com.amazonaws.costexplorer#GenericBoolean": {
@@ -5068,7 +5640,7 @@
                 "Filter": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify\n        <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated\n      with that account's usage of that service. You can nest <code>Expression</code> objects to\n      define any combination of dimension filters. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. </p>\n         <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are\n        <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>\n         <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and\n        <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and\n        <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and\n        <code>CASE_SENSITIVE</code>.</p>"
+                        "smithy.api#documentation": "<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify\n        <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated\n      with that account's usage of that service. You can nest <code>Expression</code> objects to\n      define any combination of dimension filters. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. </p>\n         <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are\n        <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>\n         <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code>,\n        <code>Tags</code>, and <code>ProductAttributes</code> are <code>EQUALS</code>,\n        <code>ABSENT</code>, and <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code>\n      and <code>CASE_SENSITIVE</code>.</p>\n         <p>You can filter by product attributes with or without grouping by them. If you filter or\n      group by product attributes, the results include only the costs of supported services, and a\n        <code>SERVICE</code> filter is optional. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html\">ProductAttributeValues</a>.</p>\n         <p>If you include a <code>SERVICE</code> filter, it must apply to the whole request: combine it with other filters by using <code>And</code>, and include it in every branch of an <code>Or</code>. A <code>SERVICE</code> filter inside <code>Not</code> doesn't meet this requirement, and the request fails with a <code>ValidationException</code>.</p>"
                     }
                 },
                 "Metrics": {
@@ -5081,7 +5653,7 @@
                 "GroupBy": {
                     "target": "com.amazonaws.costexplorer#GroupDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can group Amazon Web Services costs using up to two different groups, either\n      dimensions, tag keys, cost categories, or any two group by types.</p>\n         <p>Valid values for the <code>DIMENSION</code> type are <code>AZ</code>,\n        <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>INVOICING_ENTITY</code>,\n        <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>,\n        <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TENANCY</code>,\n        <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>When you group by the <code>TAG</code> type and include a valid tag key, you get all\n      tag values, including empty strings.</p>"
+                        "smithy.api#documentation": "<p>You can group Amazon Web Services costs using up to two different groups, either\n      dimensions, tag keys, cost categories, product attributes, or any two group by\n      types.</p>\n         <p>Valid values for the <code>DIMENSION</code> type are <code>AZ</code>,\n        <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>INVOICING_ENTITY</code>,\n        <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>,\n        <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TENANCY</code>,\n        <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>\n         <p>When you group by the <code>TAG</code> type and include a valid tag key, you get all\n      tag values, including empty strings.</p>\n         <p>To group by the <code>PRODUCT_ATTRIBUTE</code> type, set <code>Key</code> to a\n      product attribute key, such as <code>model</code>. For the keys of each supported service, see\n      <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html\">ProductAttributeValues</a>. The results include only the costs of supported services, and if you have no\n      such costs, the response contains no groups.</p>\n         <p>In the response, each group key has the format <code>key$value</code>, for example,\n        <code>model$Claude Sonnet 5</code>. Costs that have no value for the key are in the group\n        <code>key$</code>, for example, <code>model$</code>. Remove the <code>key$</code> prefix\n      before you use a value in a <code>ProductAttributes</code> filter. Keys are case-sensitive: if\n      you group by a key that doesn't exist, such as <code>Model</code>, all of your costs of\n      supported services are in the group <code>Model$</code>.</p>"
                     }
                 },
                 "BillingViewArn": {
@@ -5188,7 +5760,7 @@
                 "Filter": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify\n        <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated\n      with that account's usage of that service. You can nest <code>Expression</code> objects to\n      define any combination of dimension filters. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. </p>\n         <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are\n        <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>\n         <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and\n        <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and\n        <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and\n        <code>CASE_SENSITIVE</code>.</p>",
+                        "smithy.api#documentation": "<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify\n        <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated\n      with that account's usage of that service. You can nest <code>Expression</code> objects to\n      define any combination of dimension filters. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. </p>\n         <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group\n      by or filter by a <code>ResourceId</code>. It requires the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            <code>\"SERVICE = Amazon Elastic Compute Cloud - Compute\"</code> in the filter.</p>\n         <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are\n        <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>\n         <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code>,\n        <code>Tags</code>, and <code>ProductAttributes</code> are <code>EQUALS</code>,\n        <code>ABSENT</code>, and <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code>\n      and <code>CASE_SENSITIVE</code>.</p>\n         <p>If you filter or group by product attributes, the <code>SERVICE</code> filter rules are\n      the same as for <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html\">GetCostAndUsage</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5201,7 +5773,7 @@
                 "GroupBy": {
                     "target": "com.amazonaws.costexplorer#GroupDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can group Amazon Web Services costs using up to two different groups:\n        <code>DIMENSION</code>, <code>TAG</code>, <code>COST_CATEGORY</code>.</p>"
+                        "smithy.api#documentation": "<p>You can group Amazon Web Services costs using up to two different groups:\n        <code>DIMENSION</code>, <code>TAG</code>, <code>COST_CATEGORY</code>, and\n        <code>PRODUCT_ATTRIBUTE</code>.</p>\n         <p>\n            <code>PRODUCT_ATTRIBUTE</code> groups work the same way as in <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html\">GetCostAndUsage</a>. A\n        <code>PRODUCT_ATTRIBUTE</code> group or a <code>ProductAttributes</code> filter doesn't meet\n      the requirement to group by or filter by a <code>ResourceId</code>.</p>"
                     }
                 },
                 "BillingViewArn": {
@@ -5285,7 +5857,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves an array of Cost Category names and values incurred cost.</p>\n         <note>\n            <p>If some Cost Category names and values are not associated with any cost, they will not\n        be returned by this API.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves an array of cost category names and values incurred cost.</p>\n         <note>\n            <p>If some cost category names and values are not associated with any cost, they will not\n        be returned by this API.</p>\n         </note>"
             }
         },
         "com.amazonaws.costexplorer#GetCostCategoriesRequest": {
@@ -5294,7 +5866,7 @@
                 "SearchString": {
                     "target": "com.amazonaws.costexplorer#SearchString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that you want to search the filter values for.</p>\n         <p>If you don't specify a <code>CostCategoryName</code>, <code>SearchString</code> is used to\n      filter Cost Category names that match the <code>SearchString</code> pattern. If you specify a\n        <code>CostCategoryName</code>, <code>SearchString</code> is used to filter Cost Category\n      values that match the <code>SearchString</code> pattern.</p>"
+                        "smithy.api#documentation": "<p>The value that you want to search the filter values for.</p>\n         <p>If you don't specify a <code>CostCategoryName</code>, <code>SearchString</code> is used to\n      filter cost category names that match the <code>SearchString</code> pattern. If you specify a\n        <code>CostCategoryName</code>, <code>SearchString</code> is used to filter cost category\n      values that match the <code>SearchString</code> pattern.</p>"
                     }
                 },
                 "TimePeriod": {
@@ -5350,13 +5922,13 @@
                 "CostCategoryNames": {
                     "target": "com.amazonaws.costexplorer#CostCategoryNamesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the Cost Categories.</p>"
+                        "smithy.api#documentation": "<p>The names of the cost categories.</p>"
                     }
                 },
                 "CostCategoryValues": {
                     "target": "com.amazonaws.costexplorer#CostCategoryValuesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category values.</p>\n         <p>If the <code>CostCategoryName</code> key isn't specified in the request, the\n        <code>CostCategoryValues</code> fields aren't returned. </p>"
+                        "smithy.api#documentation": "<p>The cost category values.</p>\n         <p>If the <code>CostCategoryName</code> key isn't specified in the request, the\n        <code>CostCategoryValues</code> fields aren't returned. </p>"
                     }
                 },
                 "ReturnSize": {
@@ -5535,7 +6107,7 @@
                 "Granularity": {
                     "target": "com.amazonaws.costexplorer#Granularity",
                     "traits": {
-                        "smithy.api#documentation": "<p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>\n      forecasts or 12 months of <code>MONTHLY</code> forecasts.</p>\n         <p>The <code>GetCostForecast</code> operation supports only <code>DAILY</code> and\n        <code>MONTHLY</code> granularities.</p>",
+                        "smithy.api#documentation": "<p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>\n      forecasts or 18 months of <code>MONTHLY</code> forecasts.</p>\n         <p>The <code>GetCostForecast</code> operation supports only <code>DAILY</code> and\n        <code>MONTHLY</code> granularities.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5636,14 +6208,20 @@
                 "Dimension": {
                     "target": "com.amazonaws.costexplorer#Dimension",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dimension. Each <code>Dimension</code> is available for a different\n        <code>Context</code>. For more information, see <code>Context</code>.\n        <code>LINK_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html\">CostCategoryRule</a>. </p>",
+                        "smithy.api#documentation": "<p>The name of the dimension. Each <code>Dimension</code> is available for a different\n        <code>Context</code>. For more information, see <code>Context</code>.\n        <code>LINK_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html\">CostCategoryRule</a>. </p>\n         <p>\n            <code>PRODUCT_ATTRIBUTE</code> returns the product attribute keys that are available for\n      your costs of supported services, or the values of the key that you specify in\n        <code>DimensionKey</code>. <code>PRODUCT_ATTRIBUTE</code> is supported only in the\n        <code>COST_AND_USAGE</code> context.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DimensionKey": {
+                    "target": "com.amazonaws.costexplorer#DimensionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product attribute key to return values for, such as <code>model</code>. If you omit\n        <code>DimensionKey</code> or set it to an empty string, the response lists the product\n      attribute keys that are available for your costs of supported services instead. For the\n      supported services, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html\">ProductAttributeValues</a>.</p>\n         <p>If you specify a key, the response lists the values of that key. If some of your costs\n      have no value for the key, the response includes an empty-string value. Keys are\n      case-sensitive, and a key that doesn't exist returns no values other than an empty\n      string.</p>\n         <p>You can specify <code>DimensionKey</code> only when <code>Dimension</code> is\n        <code>PRODUCT_ATTRIBUTE</code>. If you also specify <code>SortBy</code>,\n        <code>DimensionKey</code> is required. As a result, you can't list product attribute keys when\n      you use <code>SortBy</code>.</p>"
                     }
                 },
                 "Context": {
                     "target": "com.amazonaws.costexplorer#Context",
                     "traits": {
-                        "smithy.api#documentation": "<p>The context for the call to <code>GetDimensionValues</code>. This can be\n        <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is\n        <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the\n      resulting dimension values can be used in the <code>GetReservationUtilization</code>\n      operation. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension\n      values can be used in the <code>GetCostAndUsage</code> operation.</p>\n         <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>BILLING_ENTITY - The Amazon Web Services seller that your account is with. Possible\n          values are the following:</p>\n               <p>- Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web Services services.</p>\n               <p>- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that's an acting\n          reseller for Amazon Web Services services in India.</p>\n               <p>- Amazon Web Services Marketplace: The entity that supports the sale of solutions that are built on\n            Amazon Web Services by third-party software providers.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.\n          Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are\n          Aurora or MySQL.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is\n            <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - A family of instance types optimized to fit different use\n          cases. Examples are <code>Compute Optimized</code> (for example, <code>C4</code>,\n            <code>C5</code>, <code>C6g</code>, and <code>C7g</code>), <code>Memory\n            Optimization</code> (for example, <code>R4</code>, <code>R5n</code>, <code>R5b</code>,\n          and <code>R6g</code>).</p>\n            </li>\n            <li>\n               <p>INVOICING_ENTITY - The name of the entity that issues the Amazon Web Services\n          invoice.</p>\n            </li>\n            <li>\n               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services\n          services, such as Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and\n            <code>CreateBucket</code>.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>PURCHASE_TYPE - The reservation type of the purchase that this usage is related to.\n          Examples include On-Demand Instances and Standard Reserved Instances.</p>\n            </li>\n            <li>\n               <p>RESERVATION_ID - The unique identifier for an Amazon Web Services Reservation\n          Instance.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute).</p>\n            </li>\n            <li>\n               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response\n          for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples\n          include GB and Hrs.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2:\n          CloudWatch – Alarms. The response for this operation includes a unit attribute.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>RECORD_TYPE - The different types of charges such as Reserved Instance (RI) fees,\n          usage costs, tax refunds, and credits.</p>\n            </li>\n            <li>\n               <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in\n          feature only available for last 14 days for EC2-Compute Service.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>RESERVATIONS</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.\n          Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is\n            <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are\n          regional or a single Availability Zone.</p>\n            </li>\n            <li>\n               <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance\n          (RI).</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p>\n            </li>\n            <li>\n               <p>PAYMENT_OPTION - The payment option for the given Savings Plans (for example, All\n          Upfront)</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - The family of instances (For example,\n          <code>m5</code>)</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The context for the call to <code>GetDimensionValues</code>. This can be\n        <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is\n        <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the\n      resulting dimension values can be used in the <code>GetReservationUtilization</code>\n      operation. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension\n      values can be used in the <code>GetCostAndUsage</code> operation.</p>\n         <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>BILLING_ENTITY - The Amazon Web Services seller that your account is with. Possible\n          values are the following:</p>\n               <p>- Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web Services services.</p>\n               <p>- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that's an acting\n          reseller for Amazon Web Services services in India.</p>\n               <p>- Amazon Web Services Marketplace: The entity that supports the sale of solutions that are built on\n            Amazon Web Services by third-party software providers.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.\n          Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are\n          Aurora or MySQL.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is\n            <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - A family of instance types optimized to fit different use\n          cases. Examples are <code>Compute Optimized</code> (for example, <code>C4</code>,\n            <code>C5</code>, <code>C6g</code>, and <code>C7g</code>), <code>Memory\n            Optimization</code> (for example, <code>R4</code>, <code>R5n</code>, <code>R5b</code>,\n          and <code>R6g</code>).</p>\n            </li>\n            <li>\n               <p>INVOICING_ENTITY - The name of the entity that issues the Amazon Web Services\n          invoice.</p>\n            </li>\n            <li>\n               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services\n          services, such as Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and\n            <code>CreateBucket</code>.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>PRODUCT_ATTRIBUTE - The product attributes of supported services, such as the model\n          provider or the model for Amazon Bedrock.</p>\n            </li>\n            <li>\n               <p>PURCHASE_TYPE - The reservation type of the purchase that this usage is related to.\n          Examples include On-Demand Instances and Standard Reserved Instances.</p>\n            </li>\n            <li>\n               <p>RESERVATION_ID - The unique identifier for an Amazon Web Services Reservation\n          Instance.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute).</p>\n            </li>\n            <li>\n               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response\n          for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples\n          include GB and Hrs.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2:\n          CloudWatch – Alarms. The response for this operation includes a unit attribute.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>RECORD_TYPE - The different types of charges such as Reserved Instance (RI) fees,\n          usage costs, tax refunds, and credits.</p>\n            </li>\n            <li>\n               <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in\n          feature only available for last 14 days for EC2-Compute Service.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>RESERVATIONS</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.\n          Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is\n            <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or\n          Linux.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are\n          regional or a single Availability Zone.</p>\n            </li>\n            <li>\n               <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance\n          (RI).</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following\n      dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p>\n            </li>\n            <li>\n               <p>PAYMENT_OPTION - The payment option for the given Savings Plans (for example, All\n          Upfront)</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - The family of instances (For example,\n          <code>m5</code>)</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name\n          of the member account. The value field contains the Amazon Web Services ID of the member\n          account.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Filter": {
@@ -5733,7 +6311,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the reservation coverage for your account, which you can use to see how much\n      of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service,\n      or Amazon Redshift usage is covered by a reservation. An organization's management account can\n      see the coverage of the associated member accounts. This supports dimensions, Cost Categories,\n      and nested expressions. For any time period, you can filter data about reservation usage by\n      the following dimensions:</p>\n         <ul>\n            <li>\n               <p>AZ</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM</p>\n            </li>\n            <li>\n               <p>PLATFORM</p>\n            </li>\n            <li>\n               <p>REGION</p>\n            </li>\n            <li>\n               <p>SERVICE</p>\n            </li>\n            <li>\n               <p>TAG</p>\n            </li>\n            <li>\n               <p>TENANCY</p>\n            </li>\n         </ul>\n         <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code>\n      operation. </p>"
+                "smithy.api#documentation": "<p>Retrieves the reservation coverage for your account, which you can use to see how much\n      of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service,\n      or Amazon Redshift usage is covered by a reservation. An organization's management account can\n      see the coverage of the associated member accounts. This supports dimensions, cost categories,\n      and nested expressions. For any time period, you can filter data about reservation usage by\n      the following dimensions:</p>\n         <ul>\n            <li>\n               <p>AZ</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM</p>\n            </li>\n            <li>\n               <p>PLATFORM</p>\n            </li>\n            <li>\n               <p>REGION</p>\n            </li>\n            <li>\n               <p>SERVICE</p>\n            </li>\n            <li>\n               <p>TAG</p>\n            </li>\n            <li>\n               <p>TENANCY</p>\n            </li>\n         </ul>\n         <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code>\n      operation. </p>"
             }
         },
         "com.amazonaws.costexplorer#GetReservationCoverageRequest": {
@@ -5841,7 +6419,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets recommendations for reservation purchases. These recommendations might help you to\n      reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to\n      On-Demand pricing.</p>\n         <p>Amazon Web Services generates your recommendations by identifying your On-Demand usage\n      during a specific time period and collecting your usage into categories that are eligible for\n      a reservation. After Amazon Web Services has these categories, it simulates every combination\n      of reservations in each category of usage to identify the best number of each type of Reserved\n      Instance (RI) to purchase to maximize your estimated savings. </p>\n         <p>For example, Amazon Web Services automatically aggregates your Amazon EC2 Linux, shared\n      tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy\n      size-flexible regional reservations to apply to the c4 family usage. Amazon Web Services\n      recommends the smallest size instance in an instance family. This makes it easier to purchase\n      a size-flexible Reserved Instance (RI). Amazon Web Services also shows the equal number of\n      normalized units. This way, you can purchase any instance size that you want. For this\n      example, your RI recommendation is for <code>c4.large</code> because that is the smallest size\n      instance in the c4 instance family.</p>"
+                "smithy.api#documentation": "<p>Gets recommendations for reservation purchases. These recommendations might help you to\n      reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to\n      On-Demand pricing.</p>\n         <p>Amazon Web Services generates your recommendations by identifying your On-Demand usage\n      during a specific time period and collecting your usage into categories that are eligible for\n      a reservation. After Amazon Web Services has these categories, it simulates every combination\n      of reservations in each category of usage to identify the best number of each type of Reserved\n      Instance (RI) to purchase to maximize your estimated savings. </p>\n         <p>For example, Amazon Web Services automatically aggregates your Amazon EC2 Linux, shared\n      tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy\n      size-flexible regional reservations to apply to the c4 family usage. Amazon Web Services\n      recommends the smallest size instance in an instance family. This makes it easier to purchase\n      a size-flexible Reserved Instance (RI). Amazon Web Services also shows the equal number of\n      normalized units. This way, you can purchase any instance size that you want. For this\n      example, your RI recommendation is for <code>c4.large</code> because that is the smallest size\n      instance in the c4 instance family.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "Recommendations",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.costexplorer#GetReservationPurchaseRecommendationRequest": {
@@ -5894,7 +6478,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#RecommendationsPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response\n      object.</p>"
@@ -6055,7 +6639,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates recommendations that help you save cost by identifying idle and underutilized\n      Amazon EC2 instances.</p>\n         <p>Recommendations are generated to either downsize or terminate instances, along with\n      providing savings detail and metrics. For more information about calculation and function, see\n        <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html\">Optimizing Your Cost with Rightsizing Recommendations</a> in the <i>Billing and Cost Management User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates recommendations that help you save cost by identifying idle and underutilized\n      Amazon EC2 instances.</p>\n         <p>Recommendations are generated to either downsize or terminate instances, along with\n      providing savings detail and metrics. For more information about calculation and function, see\n        <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html\">Optimizing Your Cost with Rightsizing Recommendations</a> in the <i>Billing and Cost Management User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "RightsizingRecommendations",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.costexplorer#GetRightsizingRecommendationRequest": {
@@ -6078,7 +6668,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#RecommendationsPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response object.</p>"
@@ -6208,7 +6798,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the Savings Plans covered for your account. This enables you to see how much of\n      your cost is covered by a Savings Plan. An organization’s management account can see the\n      coverage of the associated member accounts. This supports dimensions, Cost Categories, and\n      nested expressions. For any time period, you can filter data for Savings Plans usage with the\n      following dimensions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_FAMILY</code>\n               </p>\n            </li>\n         </ul>\n         <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code>\n      operation.</p>",
+                "smithy.api#documentation": "<p>Retrieves the Savings Plans covered for your account. This enables you to see how much of\n      your cost is covered by a Savings Plan. An organization’s management account can see the\n      coverage of the associated member accounts. This supports dimensions, cost categories, and\n      nested expressions. For any time period, you can filter data for Savings Plans usage with the\n      following dimensions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_FAMILY</code>\n               </p>\n            </li>\n         </ul>\n         <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code>\n      operation.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -6351,7 +6941,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#RecommendationsPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response object.</p>"
@@ -6754,7 +7344,7 @@
                 "Granularity": {
                     "target": "com.amazonaws.costexplorer#Granularity",
                     "traits": {
-                        "smithy.api#documentation": "<p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>\n      forecasts or 12 months of <code>MONTHLY</code> forecasts.</p>\n         <p>The <code>GetUsageForecast</code> operation supports only <code>DAILY</code> and\n        <code>MONTHLY</code> granularities.</p>",
+                        "smithy.api#documentation": "<p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>\n      forecasts or 18 months of <code>MONTHLY</code> forecasts.</p>\n         <p>The <code>GetUsageForecast</code> operation supports only <code>DAILY</code> and\n        <code>MONTHLY</code> granularities.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6893,6 +7483,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "COST_CATEGORY"
+                    }
+                },
+                "PRODUCT_ATTRIBUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRODUCT_ATTRIBUTE"
                     }
                 }
             }
@@ -7047,7 +7643,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the commitment purchase analyses for your account.</p>"
+                "smithy.api#documentation": "<p>Lists the commitment purchase analyses for your account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "AnalysisSummaryList",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.costexplorer#ListCommitmentPurchaseAnalysesRequest": {
@@ -7066,7 +7668,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#AnalysesPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of analyses that you want returned in a single response object.</p>"
@@ -7124,6 +7726,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "BackfillRequests",
                     "pageSize": "MaxResults"
                 }
             }
@@ -7189,6 +7792,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CostAllocationTags",
                     "pageSize": "MaxResults"
                 }
             }
@@ -7265,10 +7869,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the name, Amazon Resource Name (ARN), <code>NumberOfRules</code> and effective\n      dates of all Cost Categories defined in the account. You have the option to use\n        <code>EffectiveOn</code> to return a list of Cost Categories that were active on a specific\n      date. If there is no <code>EffectiveOn</code> specified, you’ll see Cost Categories that are\n      effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code>\n      is omitted in the response. <code>ListCostCategoryDefinitions</code> supports pagination. The\n      request can have a <code>MaxResults</code> range up to 100.</p>",
+                "smithy.api#documentation": "<p>Returns the name, Amazon Resource Name (ARN), <code>NumberOfRules</code> and effective\n      dates of all cost categories defined in the account. You have the option to use\n      <code>EffectiveOn</code> and <code>SupportedResourceTypes</code> to return a list of cost categories that were active on a specific\n      date. If there is no <code>EffectiveOn</code> specified, you’ll see cost categories that are\n      effective on the current date. If cost category is still effective, <code>EffectiveEnd</code>\n      is omitted in the response. <code>ListCostCategoryDefinitions</code> supports pagination. The\n      request can have a <code>MaxResults</code> range up to 100.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CostCategoryReferences",
                     "pageSize": "MaxResults"
                 }
             }
@@ -7279,7 +7884,7 @@
                 "EffectiveOn": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the Cost Category was effective. </p>"
+                        "smithy.api#documentation": "<p>The date when the cost category was effective. </p>"
                     }
                 },
                 "NextToken": {
@@ -7293,6 +7898,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of entries a paginated response contains. </p>"
                     }
+                },
+                "SupportedResourceTypes": {
+                    "target": "com.amazonaws.costexplorer#ResourceTypesFilterInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Filter cost category definitions that are supported by given resource types based on the latest version. If the filter is present, the result only includes Cost Categories that supports input resource type. If the filter isn't provided, no filtering is applied. The valid values are <code>billing:rispgroupsharing</code>, <code>billing:billingview</code>, and <code>billing:creditsharing</code>.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -7305,13 +7916,85 @@
                 "CostCategoryReferences": {
                     "target": "com.amazonaws.costexplorer#CostCategoryReferencesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to a Cost Category that contains enough information to identify the Cost\n      Category. </p>"
+                        "smithy.api#documentation": "<p>A reference to a cost category that contains enough information to identify the Cost\n      Category. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.costexplorer#NextPageToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when\n      the response from a previous call has more results than the maximum page size. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostCategoryResourceAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns resource associations of all cost categories defined in the account. You have the option to use <code>CostCategoryArn</code> to get the association for a specific cost category. <code>ListCostCategoryResourceAssociations</code> supports pagination. The request can have a <code>MaxResults</code> range up to 100.\n    </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CostCategoryResourceAssociations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "CostCategoryArn": {
+                    "target": "com.amazonaws.costexplorer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.\n    </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number of entries a paginated response contains.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "CostCategoryResourceAssociations": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryResourceAssociations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A reference to a cost category association that contains information on an associated resource.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results.  Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.\n    </p>"
                     }
                 }
             },
@@ -7339,7 +8022,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of your historical recommendation generations within the past 30\n      days.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of your historical recommendation generations within the past 30\n      days.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextPageToken",
+                    "outputToken": "NextPageToken",
+                    "items": "GenerationSummaryList",
+                    "pageSize": "PageSize"
+                }
             }
         },
         "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGenerationRequest": {
@@ -7358,7 +8047,7 @@
                     }
                 },
                 "PageSize": {
-                    "target": "com.amazonaws.costexplorer#NonNegativeInteger",
+                    "target": "com.amazonaws.costexplorer#RecommendationsPageSize",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response object.</p>"
@@ -7706,6 +8395,24 @@
                     "traits": {
                         "smithy.api#enumValue": "SERVICE"
                     }
+                },
+                "LINKED_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED_ACCOUNT"
+                    }
+                },
+                "TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAG"
+                    }
+                },
+                "COST_CATEGORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COST_CATEGORY"
+                    }
                 }
             }
         },
@@ -7961,6 +8668,55 @@
                 }
             }
         },
+        "com.amazonaws.costexplorer#ProductAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^([a-zA-Z][a-zA-Z0-9]*)?$"
+            }
+        },
+        "com.amazonaws.costexplorer#ProductAttributeValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#Value"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6000
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#ProductAttributeValues": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.costexplorer#ProductAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the product attribute, such as <code>model</code>. The keys that are\n            available depend on the service. For the keys of each supported service, see\n                <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html\">\n               <code>ProductAttributeValues</code>\n            </a>.</p>\n         <p>Keys are case-sensitive. A key that doesn't exist doesn't return an error:\n                <code>EQUALS</code> matches no costs, and <code>ABSENT</code> matches all costs of\n            supported services.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.costexplorer#ProductAttributeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific values of the product attribute, such as <code>Claude Sonnet 5</code> for\n            the <code>model</code> key. Values are matched exactly, including case. To list the values\n            of a key, use <code>GetDimensionValues</code> with <code>Dimension</code> set to\n                <code>PRODUCT_ATTRIBUTE</code> and <code>DimensionKey</code> set to the key.</p>\n         <p>To match costs that have no value for the key, set <code>MatchOptions</code> to\n                <code>ABSENT</code> and omit <code>Values</code>. Otherwise, <code>Values</code> is\n            required.</p>"
+                    }
+                },
+                "MatchOptions": {
+                    "target": "com.amazonaws.costexplorer#MatchOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EQUALS</code> - Matches the values that you specify.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ABSENT</code> - Matches costs that have no value for the key. Omit\n                        <code>Values</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CASE_SENSITIVE</code> - Use only with <code>EQUALS</code>. Values are\n                    always matched case-sensitively.</p>\n            </li>\n         </ul>\n         <p>Default values are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The product attribute values that you can use to filter the costs of supported services.\n            Currently, Amazon Bedrock is the only supported service.</p>\n         <p>The following product attribute keys are available for each supported service:</p>\n         <ul>\n            <li>\n               <p>Amazon Bedrock</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>provider</code> - The model provider, such as\n                                <code>Anthropic</code>, <code>Cohere</code>, or\n                            <code>OpenAI</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>model</code> - The model, such as <code>Claude Sonnet 5</code> or\n                                <code>Claude Haiku 4.5</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>inferenceType</code> - The type of inference usage, such as\n                                <code>Input tokens</code> or <code>Output tokens</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>feature</code> - The feature that was used, such as\n                                <code>On-demand Inference</code> or <code>Reranker</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>The following operations support product attributes: <code>GetCostAndUsage</code>,\n                <code>GetCostAndUsageWithResources</code>, <code>GetDimensionValues</code> (in the\n                <code>COST_AND_USAGE</code> context), <code>GetTags</code>, and\n                <code>GetCostCategories</code>.</p>\n         <p>Product attribute data is available for time periods that start on or after September 1,\n            2026. Requests for earlier time periods that use product attributes fail with a\n                <code>DataUnavailableException</code>.</p>\n         <p>The <code>SERVICE</code> filter rules for product attributes depend on the\n            operation:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GetCostAndUsage</code> and <code>GetCostAndUsageWithResources</code> -\n                    Optional.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetDimensionValues</code> - Required when the filter includes\n                        <code>ProductAttributes</code>, for any <code>Dimension</code>. Otherwise,\n                    optional.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTags</code> and <code>GetCostCategories</code> - Required when the\n                    filter includes <code>ProductAttributes</code>.</p>\n            </li>\n         </ul>\n         <p>A <code>SERVICE</code> filter must contain only supported services, or the request\n            fails with a <code>ValidationException</code>. Service names are matched exactly. To list\n            them, use <code>GetDimensionValues</code> with <code>Dimension</code> set to\n                <code>SERVICE</code> and the same <code>TimePeriod</code>, for example with\n                <code>SearchString</code> set to <code>Bedrock</code>.</p>\n         <p>The costs of a supported service can appear under multiple service names. When the\n                <code>SERVICE</code> filter is optional, omit it so that your results include all of\n            those costs.</p>\n         <p>For example, the following <code>Expression</code> filters for the costs of one\n            model: <code>{ \"ProductAttributes\": { \"Key\": \"model\", \"Values\": [\n                \"Claude Sonnet 5\" ], \"MatchOptions\": [ \"EQUALS\" ] } }</code>\n         </p>"
+            }
+        },
         "com.amazonaws.costexplorer#ProvideAnomalyFeedback": {
             "type": "operation",
             "input": {
@@ -8078,6 +8834,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommended reservation is size flexible.</p>"
+                    }
+                },
+                "DeploymentModel": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the recommendation is for a reservation for RDS Custom.</p>"
                     }
                 }
             },
@@ -8342,6 +9104,16 @@
                     "traits": {
                         "smithy.api#enumValue": "CROSS_INSTANCE_FAMILY"
                     }
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#RecommendationsPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 6000
                 }
             }
         },
@@ -8959,6 +9731,30 @@
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
         },
+        "com.amazonaws.costexplorer#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[-a-zA-Z0-9/_]+:[-a-zA-Z0-9/_]+$"
+            }
+        },
+        "com.amazonaws.costexplorer#ResourceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#ResourceType"
+            }
+        },
+        "com.amazonaws.costexplorer#ResourceTypesFilterInput": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#ResourceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.costexplorer#ResourceUtilization": {
             "type": "structure",
             "members": {
@@ -9493,6 +10289,12 @@
                         "smithy.api#documentation": "<p>The time period associated with the analysis.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SavingsPlansTargetCoverage": {
+                    "target": "com.amazonaws.costexplorer#SavingsPlansTargetCoverage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target Savings Plans coverage as a percentage from <code>10</code> to\n            <code>100</code>. This field is required when <code>AnalysisType</code> is\n            <code>TARGET_AVERAGE_COVERAGE</code>. It defines the target average hourly coverage\n            that the recommended Savings Plans commitment should achieve over the lookback\n            period.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9923,6 +10725,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The amount of savings that you're accumulating, against the public On-Demand rate of\n            the usage accrued in an account.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#SavingsPlansTargetCoverage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 10,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.costexplorer#SavingsPlansToAdd": {
@@ -10456,6 +11267,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SAGEMAKER_SP"
                     }
+                },
+                "DATABASE_SP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATABASE_SP"
+                    }
                 }
             }
         },
@@ -10545,7 +11362,7 @@
                 "MatchOptions": {
                     "target": "com.amazonaws.costexplorer#MatchOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. <code>MatchOptions</code>\n            is only applicable for actions related to Cost Category. The default values for\n                <code>MatchOptions</code> are <code>EQUALS</code> and\n            <code>CASE_SENSITIVE</code>.</p>"
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. <code>MatchOptions</code>\n            is only applicable for actions related to cost category. The default values for\n                <code>MatchOptions</code> are <code>EQUALS</code> and\n            <code>CASE_SENSITIVE</code>.</p>"
                     }
                 }
             },
@@ -11065,7 +11882,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing Cost Category. Changes made to the Cost Category rules will be used to\n      categorize the current month’s expenses and future expenses. This won’t change categorization\n      for the previous months.</p>"
+                "smithy.api#documentation": "<p>Updates an existing cost category. Changes made to the cost category rules will be used to\n      categorize the current month’s expenses and future expenses. This won’t change categorization\n      for the previous months.</p>"
             }
         },
         "com.amazonaws.costexplorer#UpdateCostCategoryDefinitionRequest": {
@@ -11074,14 +11891,14 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
                     }
                 },
                 "RuleVersion": {
@@ -11103,7 +11920,7 @@
                 "SplitChargeRules": {
                     "target": "com.amazonaws.costexplorer#CostCategorySplitChargeRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The split charge rules used to allocate your charges between your Cost Category values.\n    </p>"
+                        "smithy.api#documentation": "<p> The split charge rules used to allocate your charges between your cost category values.\n    </p>"
                     }
                 }
             },
@@ -11117,13 +11934,13 @@
                 "CostCategoryArn": {
                     "target": "com.amazonaws.costexplorer#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for your Cost Category. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for your cost category. </p>"
                     }
                 },
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>"
+                        "smithy.api#documentation": "<p>The cost category's effective start date. It can only be a billing start date (first day of the month).</p>"
                     }
                 }
             },

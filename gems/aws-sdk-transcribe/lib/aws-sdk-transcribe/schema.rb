@@ -57,6 +57,7 @@ module Aws::Transcribe
     DescribeLanguageModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#DescribeLanguageModelRequest", name: "DescribeLanguageModelRequest")
     DescribeLanguageModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#DescribeLanguageModelResponse", name: "DescribeLanguageModelResponse")
     DurationInSeconds = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.transcribe#DurationInSeconds", name: "DurationInSeconds")
+    EncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#EncryptionConfiguration", name: "EncryptionConfiguration")
     FailureReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transcribe#FailureReason", name: "FailureReason")
     GetCallAnalyticsCategoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#GetCallAnalyticsCategoryRequest", name: "GetCallAnalyticsCategoryRequest")
     GetCallAnalyticsCategoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#GetCallAnalyticsCategoryResponse", name: "GetCallAnalyticsCategoryResponse")
@@ -153,7 +154,8 @@ module Aws::Transcribe
     Phrase = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transcribe#Phrase", name: "Phrase", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^.+$"})
     Phrases = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transcribe#Phrases", name: "Phrases")
     PiiEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transcribe#PiiEntityType", name: "PiiEntityType")
-    PiiEntityTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transcribe#PiiEntityTypes", name: "PiiEntityTypes", traits: {"smithy.api#length" => {"min" => 0, "max" => 11}})
+    PiiEntityTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.transcribe#PiiEntityTypes", name: "PiiEntityTypes", traits: {"smithy.api#length" => {"min" => 0, "max" => 29}})
+    PrintableNonEmptyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.transcribe#PrintableNonEmptyString", name: "PrintableNonEmptyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}, "smithy.api#pattern" => "^[\\x20-\\x7E]+$"})
     Pronouns = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transcribe#Pronouns", name: "Pronouns", traits: {"smithy.api#sensitive" => {}})
     RedactionOutput = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transcribe#RedactionOutput", name: "RedactionOutput")
     RedactionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.transcribe#RedactionType", name: "RedactionType")
@@ -208,6 +210,8 @@ module Aws::Transcribe
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#UntagResourceResponse", name: "UntagResourceResponse")
     UpdateCallAnalyticsCategoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryRequest", name: "UpdateCallAnalyticsCategoryRequest")
     UpdateCallAnalyticsCategoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryResponse", name: "UpdateCallAnalyticsCategoryResponse")
+    UpdateLanguageModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#UpdateLanguageModelRequest", name: "UpdateLanguageModelRequest")
+    UpdateLanguageModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#UpdateLanguageModelResponse", name: "UpdateLanguageModelResponse")
     UpdateMedicalVocabularyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#UpdateMedicalVocabularyRequest", name: "UpdateMedicalVocabularyRequest")
     UpdateMedicalVocabularyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#UpdateMedicalVocabularyResponse", name: "UpdateMedicalVocabularyResponse")
     UpdateVocabularyFilterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.transcribe#UpdateVocabularyFilterRequest", name: "UpdateVocabularyFilterRequest")
@@ -324,6 +328,7 @@ module Aws::Transcribe
     CreateLanguageModelRequest.add_member(:base_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseModelName, name: "BaseModelName", traits: {"smithy.api#required" => {}}))
     CreateLanguageModelRequest.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateLanguageModelRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, name: "InputDataConfig", traits: {"smithy.api#required" => {}}))
+    CreateLanguageModelRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
     CreateLanguageModelRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateLanguageModelRequest.type = Types::CreateLanguageModelRequest
     CreateLanguageModelResponse.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CLMLanguageCode, name: "LanguageCode"))
@@ -349,6 +354,7 @@ module Aws::Transcribe
     CreateVocabularyFilterRequest.add_member(:vocabulary_filter_file_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "VocabularyFilterFileUri"))
     CreateVocabularyFilterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateVocabularyFilterRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessRoleArn, name: "DataAccessRoleArn"))
+    CreateVocabularyFilterRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
     CreateVocabularyFilterRequest.type = Types::CreateVocabularyFilterRequest
     CreateVocabularyFilterResponse.add_member(:vocabulary_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyFilterName, name: "VocabularyFilterName"))
     CreateVocabularyFilterResponse.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
@@ -360,6 +366,7 @@ module Aws::Transcribe
     CreateVocabularyRequest.add_member(:vocabulary_file_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "VocabularyFileUri"))
     CreateVocabularyRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateVocabularyRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessRoleArn, name: "DataAccessRoleArn"))
+    CreateVocabularyRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
     CreateVocabularyRequest.type = Types::CreateVocabularyRequest
     CreateVocabularyResponse.add_member(:vocabulary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "VocabularyName"))
     CreateVocabularyResponse.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
@@ -391,6 +398,9 @@ module Aws::Transcribe
     DescribeLanguageModelRequest.type = Types::DescribeLanguageModelRequest
     DescribeLanguageModelResponse.add_member(:language_model, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageModel, name: "LanguageModel"))
     DescribeLanguageModelResponse.type = Types::DescribeLanguageModelResponse
+    EncryptionConfiguration.add_member(:kms_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSEncryptionContextMap, name: "KMSEncryptionContext"))
+    EncryptionConfiguration.add_member(:kms_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSKeyId, name: "KMSKey", traits: {"smithy.api#required" => {}}))
+    EncryptionConfiguration.type = Types::EncryptionConfiguration
     GetCallAnalyticsCategoryRequest.add_member(:category_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "CategoryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetCallAnalyticsCategoryRequest.type = Types::GetCallAnalyticsCategoryRequest
     GetCallAnalyticsCategoryResponse.add_member(:category_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryProperties, name: "CategoryProperties"))
@@ -426,6 +436,8 @@ module Aws::Transcribe
     GetVocabularyFilterResponse.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
     GetVocabularyFilterResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastModifiedTime"))
     GetVocabularyFilterResponse.add_member(:download_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "DownloadUri"))
+    GetVocabularyFilterResponse.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessRoleArn, name: "DataAccessRoleArn"))
+    GetVocabularyFilterResponse.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
     GetVocabularyFilterResponse.type = Types::GetVocabularyFilterResponse
     GetVocabularyRequest.add_member(:vocabulary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "VocabularyName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetVocabularyRequest.type = Types::GetVocabularyRequest
@@ -435,6 +447,8 @@ module Aws::Transcribe
     GetVocabularyResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastModifiedTime"))
     GetVocabularyResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
     GetVocabularyResponse.add_member(:download_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "DownloadUri"))
+    GetVocabularyResponse.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessRoleArn, name: "DataAccessRoleArn"))
+    GetVocabularyResponse.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
     GetVocabularyResponse.type = Types::GetVocabularyResponse
     InputDataConfig.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "S3Uri", traits: {"smithy.api#required" => {}}))
     InputDataConfig.add_member(:tuning_data_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "TuningDataS3Uri"))
@@ -453,11 +467,13 @@ module Aws::Transcribe
     JobExecutionSettings.add_member(:allow_deferred_execution, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowDeferredExecution"))
     JobExecutionSettings.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessRoleArn, name: "DataAccessRoleArn"))
     JobExecutionSettings.type = Types::JobExecutionSettings
-    KMSEncryptionContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "key"))
-    KMSEncryptionContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "value"))
+    KMSEncryptionContextMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PrintableNonEmptyString, name: "key"))
+    KMSEncryptionContextMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PrintableNonEmptyString, name: "value"))
     LanguageCode.add_member(:af_za, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AF_ZA", traits: {"smithy.api#enumValue" => "af-ZA"}))
     LanguageCode.add_member(:ar_ae, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AR_AE", traits: {"smithy.api#enumValue" => "ar-AE"}))
     LanguageCode.add_member(:ar_sa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AR_SA", traits: {"smithy.api#enumValue" => "ar-SA"}))
+    LanguageCode.add_member(:am_et, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AM_ET", traits: {"smithy.api#enumValue" => "am-ET"}))
+    LanguageCode.add_member(:cy_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CY_GB", traits: {"smithy.api#enumValue" => "cy-GB"}))
     LanguageCode.add_member(:da_dk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DA_DK", traits: {"smithy.api#enumValue" => "da-DK"}))
     LanguageCode.add_member(:de_ch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DE_CH", traits: {"smithy.api#enumValue" => "de-CH"}))
     LanguageCode.add_member(:de_de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DE_DE", traits: {"smithy.api#enumValue" => "de-DE"}))
@@ -469,16 +485,24 @@ module Aws::Transcribe
     LanguageCode.add_member(:en_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN_US", traits: {"smithy.api#enumValue" => "en-US"}))
     LanguageCode.add_member(:en_wl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN_WL", traits: {"smithy.api#enumValue" => "en-WL"}))
     LanguageCode.add_member(:es_es, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ES_ES", traits: {"smithy.api#enumValue" => "es-ES"}))
+    LanguageCode.add_member(:es_mx, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ES_MX", traits: {"smithy.api#enumValue" => "es-MX"}))
     LanguageCode.add_member(:es_us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ES_US", traits: {"smithy.api#enumValue" => "es-US"}))
+    LanguageCode.add_member(:fa_af, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FA_AF", traits: {"smithy.api#enumValue" => "fa-AF"}))
     LanguageCode.add_member(:fa_ir, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FA_IR", traits: {"smithy.api#enumValue" => "fa-IR"}))
     LanguageCode.add_member(:fr_ca, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FR_CA", traits: {"smithy.api#enumValue" => "fr-CA"}))
     LanguageCode.add_member(:fr_fr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FR_FR", traits: {"smithy.api#enumValue" => "fr-FR"}))
+    LanguageCode.add_member(:ga_ie, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GA_IE", traits: {"smithy.api#enumValue" => "ga-IE"}))
+    LanguageCode.add_member(:gd_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GD_GB", traits: {"smithy.api#enumValue" => "gd-GB"}))
     LanguageCode.add_member(:he_il, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HE_IL", traits: {"smithy.api#enumValue" => "he-IL"}))
     LanguageCode.add_member(:hi_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HI_IN", traits: {"smithy.api#enumValue" => "hi-IN"}))
+    LanguageCode.add_member(:ht_ht, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HT_HT", traits: {"smithy.api#enumValue" => "ht-HT"}))
     LanguageCode.add_member(:id_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ID_ID", traits: {"smithy.api#enumValue" => "id-ID"}))
     LanguageCode.add_member(:it_it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IT_IT", traits: {"smithy.api#enumValue" => "it-IT"}))
     LanguageCode.add_member(:ja_jp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JA_JP", traits: {"smithy.api#enumValue" => "ja-JP"}))
+    LanguageCode.add_member(:jv_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JV_ID", traits: {"smithy.api#enumValue" => "jv-ID"}))
+    LanguageCode.add_member(:km_kh, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KM_KH", traits: {"smithy.api#enumValue" => "km-KH"}))
     LanguageCode.add_member(:ko_kr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KO_KR", traits: {"smithy.api#enumValue" => "ko-KR"}))
+    LanguageCode.add_member(:my_mm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MY_MM", traits: {"smithy.api#enumValue" => "my-MM"}))
     LanguageCode.add_member(:ms_my, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MS_MY", traits: {"smithy.api#enumValue" => "ms-MY"}))
     LanguageCode.add_member(:nl_nl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NL_NL", traits: {"smithy.api#enumValue" => "nl-NL"}))
     LanguageCode.add_member(:pt_br, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PT_BR", traits: {"smithy.api#enumValue" => "pt-BR"}))
@@ -535,6 +559,7 @@ module Aws::Transcribe
     LanguageCode.add_member(:mr_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MR_IN", traits: {"smithy.api#enumValue" => "mr-IN"}))
     LanguageCode.add_member(:mt_mt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MT_MT", traits: {"smithy.api#enumValue" => "mt-MT"}))
     LanguageCode.add_member(:no_no, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_NO", traits: {"smithy.api#enumValue" => "no-NO"}))
+    LanguageCode.add_member(:ne_np, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NE_NP", traits: {"smithy.api#enumValue" => "ne-NP"}))
     LanguageCode.add_member(:or_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OR_IN", traits: {"smithy.api#enumValue" => "or-IN"}))
     LanguageCode.add_member(:pa_in, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PA_IN", traits: {"smithy.api#enumValue" => "pa-IN"}))
     LanguageCode.add_member(:pl_pl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PL_PL", traits: {"smithy.api#enumValue" => "pl-PL"}))
@@ -545,6 +570,7 @@ module Aws::Transcribe
     LanguageCode.add_member(:sk_sk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SK_SK", traits: {"smithy.api#enumValue" => "sk-SK"}))
     LanguageCode.add_member(:sl_si, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SL_SI", traits: {"smithy.api#enumValue" => "sl-SI"}))
     LanguageCode.add_member(:so_so, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SO_SO", traits: {"smithy.api#enumValue" => "so-SO"}))
+    LanguageCode.add_member(:sq_al, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SQ_AL", traits: {"smithy.api#enumValue" => "sq-AL"}))
     LanguageCode.add_member(:sr_rs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SR_RS", traits: {"smithy.api#enumValue" => "sr-RS"}))
     LanguageCode.add_member(:su_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SU_ID", traits: {"smithy.api#enumValue" => "su-ID"}))
     LanguageCode.add_member(:sw_bi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SW_BI", traits: {"smithy.api#enumValue" => "sw-BI"}))
@@ -579,6 +605,7 @@ module Aws::Transcribe
     LanguageModel.add_member(:upgrade_availability, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "UpgradeAvailability"))
     LanguageModel.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
     LanguageModel.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, name: "InputDataConfig"))
+    LanguageModel.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
     LanguageModel.type = Types::LanguageModel
     LanguageOptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "member"))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -800,6 +827,24 @@ module Aws::Transcribe
     PiiEntityType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
     PiiEntityType.add_member(:phone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE", traits: {"smithy.api#enumValue" => "PHONE"}))
     PiiEntityType.add_member(:ssn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSN", traits: {"smithy.api#enumValue" => "SSN"}))
+    PiiEntityType.add_member(:date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATE_TIME", traits: {"smithy.api#enumValue" => "DATE_TIME"}))
+    PiiEntityType.add_member(:passport_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSPORT_NUMBER", traits: {"smithy.api#enumValue" => "PASSPORT_NUMBER"}))
+    PiiEntityType.add_member(:driver_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRIVER_ID", traits: {"smithy.api#enumValue" => "DRIVER_ID"}))
+    PiiEntityType.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL", traits: {"smithy.api#enumValue" => "URL"}))
+    PiiEntityType.add_member(:age, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGE", traits: {"smithy.api#enumValue" => "AGE"}))
+    PiiEntityType.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USERNAME", traits: {"smithy.api#enumValue" => "USERNAME"}))
+    PiiEntityType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
+    PiiEntityType.add_member(:aws_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_ACCESS_KEY", traits: {"smithy.api#enumValue" => "AWS_ACCESS_KEY"}))
+    PiiEntityType.add_member(:aws_secret_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SECRET_KEY", traits: {"smithy.api#enumValue" => "AWS_SECRET_KEY"}))
+    PiiEntityType.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IP_ADDRESS", traits: {"smithy.api#enumValue" => "IP_ADDRESS"}))
+    PiiEntityType.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAC_ADDRESS", traits: {"smithy.api#enumValue" => "MAC_ADDRESS"}))
+    PiiEntityType.add_member(:license_plate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LICENSE_PLATE", traits: {"smithy.api#enumValue" => "LICENSE_PLATE"}))
+    PiiEntityType.add_member(:vehicle_identification_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VEHICLE_IDENTIFICATION_NUMBER", traits: {"smithy.api#enumValue" => "VEHICLE_IDENTIFICATION_NUMBER"}))
+    PiiEntityType.add_member(:us_individual_tax_identification_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", traits: {"smithy.api#enumValue" => "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"}))
+    PiiEntityType.add_member(:ca_health_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CA_HEALTH_NUMBER", traits: {"smithy.api#enumValue" => "CA_HEALTH_NUMBER"}))
+    PiiEntityType.add_member(:ca_social_insurance_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CA_SOCIAL_INSURANCE_NUMBER", traits: {"smithy.api#enumValue" => "CA_SOCIAL_INSURANCE_NUMBER"}))
+    PiiEntityType.add_member(:international_bank_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNATIONAL_BANK_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "INTERNATIONAL_BANK_ACCOUNT_NUMBER"}))
+    PiiEntityType.add_member(:swift_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SWIFT_CODE", traits: {"smithy.api#enumValue" => "SWIFT_CODE"}))
     PiiEntityType.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     PiiEntityTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiEntityType, name: "member"))
     Pronouns.add_member(:he_him, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HE_HIM", traits: {"smithy.api#enumValue" => "HE_HIM"}))
@@ -993,7 +1038,7 @@ module Aws::Transcribe
     Type.add_member(:conversation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONVERSATION", traits: {"smithy.api#enumValue" => "CONVERSATION"}))
     Type.add_member(:dictation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DICTATION", traits: {"smithy.api#enumValue" => "DICTATION"}))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TranscribeArn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
+    UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
     UpdateCallAnalyticsCategoryRequest.add_member(:category_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryName, name: "CategoryName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1002,6 +1047,14 @@ module Aws::Transcribe
     UpdateCallAnalyticsCategoryRequest.type = Types::UpdateCallAnalyticsCategoryRequest
     UpdateCallAnalyticsCategoryResponse.add_member(:category_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryProperties, name: "CategoryProperties"))
     UpdateCallAnalyticsCategoryResponse.type = Types::UpdateCallAnalyticsCategoryResponse
+    UpdateLanguageModelRequest.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateLanguageModelRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessRoleArn, name: "DataAccessRoleArn"))
+    UpdateLanguageModelRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
+    UpdateLanguageModelRequest.type = Types::UpdateLanguageModelRequest
+    UpdateLanguageModelResponse.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName"))
+    UpdateLanguageModelResponse.add_member(:model_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelStatus, name: "ModelStatus"))
+    UpdateLanguageModelResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastModifiedTime"))
+    UpdateLanguageModelResponse.type = Types::UpdateLanguageModelResponse
     UpdateMedicalVocabularyRequest.add_member(:vocabulary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "VocabularyName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateMedicalVocabularyRequest.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode", traits: {"smithy.api#required" => {}}))
     UpdateMedicalVocabularyRequest.add_member(:vocabulary_file_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "VocabularyFileUri", traits: {"smithy.api#required" => {}}))
@@ -1015,6 +1068,7 @@ module Aws::Transcribe
     UpdateVocabularyFilterRequest.add_member(:words, ::Smithy::Schema::Shapes::MemberShape.new(target: Words, name: "Words"))
     UpdateVocabularyFilterRequest.add_member(:vocabulary_filter_file_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "VocabularyFilterFileUri"))
     UpdateVocabularyFilterRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessRoleArn, name: "DataAccessRoleArn"))
+    UpdateVocabularyFilterRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
     UpdateVocabularyFilterRequest.type = Types::UpdateVocabularyFilterRequest
     UpdateVocabularyFilterResponse.add_member(:vocabulary_filter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyFilterName, name: "VocabularyFilterName"))
     UpdateVocabularyFilterResponse.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
@@ -1025,6 +1079,7 @@ module Aws::Transcribe
     UpdateVocabularyRequest.add_member(:phrases, ::Smithy::Schema::Shapes::MemberShape.new(target: Phrases, name: "Phrases"))
     UpdateVocabularyRequest.add_member(:vocabulary_file_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "VocabularyFileUri"))
     UpdateVocabularyRequest.add_member(:data_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DataAccessRoleArn, name: "DataAccessRoleArn"))
+    UpdateVocabularyRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionConfiguration, name: "EncryptionConfiguration"))
     UpdateVocabularyRequest.type = Types::UpdateVocabularyRequest
     UpdateVocabularyResponse.add_member(:vocabulary_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VocabularyName, name: "VocabularyName"))
     UpdateVocabularyResponse.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageCode, name: "LanguageCode"))
@@ -1054,7 +1109,7 @@ module Aws::Transcribe
       service.id = "com.amazonaws.transcribe#Transcribe"
       service.name = "Transcribe"
       service.version = "2017-10-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "Transcribe", "arnNamespace" => "transcribe", "cloudFormationName" => "Transcribe", "cloudTrailEventSource" => "transcribe.amazonaws.com", "endpointPrefix" => "transcribe"}, "aws.auth#sigv4" => {"name" => "transcribe"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Transcribe Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Transcribe", "arnNamespace" => "transcribe", "cloudFormationName" => "Transcribe", "cloudTrailEventSource" => "transcribe.amazonaws.com", "endpointPrefix" => "transcribe"}, "aws.auth#sigv4" => {"name" => "transcribe"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Transcribe Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "cn-north-1"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "cn-northwest-1"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://transcribe-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://fips.transcribe.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://transcribe-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://transcribe.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cn.transcribe.cn-north-1.amazonaws.com.cn", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cn.transcribe.cn-northwest-1.amazonaws.com.cn", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://transcribe.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 17, "nodes" => "/////wAAAAH/////AAAAAAAAABAAAAADAAAAAQAAAAQF9eEOAAAAAgAAAAUF9eEOAAAAAwAAAAoAAAAGAAAABQAAAAkAAAAHAAAABwX14QsAAAAIAAAACAX14QwF9eENAAAABgX14QkF9eEKAAAABAAAAAwAAAALAAAABQX14QUF9eEIAAAABQAAAA8AAAANAAAACQX14QYAAAAOAAAACgX14QYF9eEHAAAABgX14QQF9eEFAAAAAwX14QEAAAARAAAABQX14QIF9eED"}}
       service.add_operation(:create_call_analytics_category, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.transcribe#CreateCallAnalyticsCategory"
         operation.name = "CreateCallAnalyticsCategory"
@@ -1493,6 +1548,18 @@ module Aws::Transcribe
         operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/callanalyticscategories/{CategoryName}", "code" => 200}}
       end)
+      service.add_operation(:update_language_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.transcribe#UpdateLanguageModel"
+        operation.name = "UpdateLanguageModel"
+        operation.input = UpdateLanguageModelRequest
+        operation.output = UpdateLanguageModelResponse
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalFailureException
+        operation.errors << LimitExceededException
+        operation.errors << NotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/languagemodels/{ModelName}", "code" => 200}}
+      end)
       service.add_operation(:update_medical_vocabulary, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.transcribe#UpdateMedicalVocabulary"
         operation.name = "UpdateMedicalVocabulary"
@@ -1523,6 +1590,7 @@ module Aws::Transcribe
         operation.input = UpdateVocabularyFilterRequest
         operation.output = UpdateVocabularyFilterResponse
         operation.errors << BadRequestException
+        operation.errors << ConflictException
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException

@@ -12,6 +12,19 @@ module Aws::Location
       attr_accessor message: String?
     end
 
+    class AndroidApp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package: String,
+        ?certificate_fingerprint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package: String?
+      attr_accessor certificate_fingerprint: String?
+    end
+
     class ApiKeyFilter
       include Smithy::Schema::Structure
 
@@ -30,12 +43,27 @@ module Aws::Location
         ?allow_actions: Array[String],
         ?allow_resources: Array[String],
         ?allow_referers: Array[String],
+        ?allow_android_apps: Array[Types::AndroidApp],
+        ?allow_apple_apps: Array[Types::AppleApp],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor allow_actions: Array[String]?
       attr_accessor allow_resources: Array[String]?
       attr_accessor allow_referers: Array[String]?
+      attr_accessor allow_android_apps: Array[Types::AndroidApp]?
+      attr_accessor allow_apple_apps: Array[Types::AppleApp]?
+    end
+
+    class AppleApp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bundle_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bundle_id: String?
     end
 
     class AssociateTrackerConsumerInput
@@ -493,6 +521,32 @@ module Aws::Location
       attr_accessor avoid_tolls: bool?
       attr_accessor dimensions: Types::TruckDimensions?
       attr_accessor weight: Types::TruckWeight?
+    end
+
+    class CancelJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CancelJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_id: String?
+      attr_accessor status: String?
     end
 
     class CellSignals
@@ -1397,6 +1451,54 @@ module Aws::Location
       attr_accessor geofence_properties: Hash[String, String]?
     end
 
+    class GetJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?action_options: Types::JobActionOptions,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?error: Types::JobError,
+        ?execution_role_arn: String,
+        ?input_options: Types::JobInputOptions,
+        ?job_arn: String,
+        ?job_id: String,
+        ?name: String,
+        ?output_options: Types::JobOutputOptions,
+        ?status: String,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor action_options: Types::JobActionOptions?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor error: Types::JobError?
+      attr_accessor execution_role_arn: String?
+      attr_accessor input_options: Types::JobInputOptions?
+      attr_accessor job_arn: String?
+      attr_accessor job_id: String?
+      attr_accessor name: String?
+      attr_accessor output_options: Types::JobOutputOptions?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class GetMapGlyphsInput
       include Smithy::Schema::Structure
 
@@ -1577,6 +1679,67 @@ module Aws::Location
       attr_accessor message: String?
     end
 
+    class JobActionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?validate_address: Types::ValidateAddressActionOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor validate_address: Types::ValidateAddressActionOptions?
+    end
+
+    class JobError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?messages: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor messages: Array[String]?
+    end
+
+    class JobInputOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location: String,
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location: String?
+      attr_accessor format: String?
+    end
+
+    class JobOutputOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor location: String?
+    end
+
+    class JobsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_status: String?
+    end
+
     class Leg
       include Smithy::Schema::Structure
 
@@ -1752,6 +1915,69 @@ module Aws::Location
 
       attr_accessor entries: Array[Types::ListGeofenceResponseEntry]?
       attr_accessor next_token: String?
+    end
+
+    class ListJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::JobsFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::JobsFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::ListJobsResponseEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::ListJobsResponseEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?action_options: Types::JobActionOptions,
+        ?created_at: Time,
+        ?execution_role_arn: String,
+        ?ended_at: Time,
+        ?error: Types::JobError,
+        ?input_options: Types::JobInputOptions,
+        ?job_id: String,
+        ?job_arn: String,
+        ?name: String,
+        ?output_options: Types::JobOutputOptions,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor action_options: Types::JobActionOptions?
+      attr_accessor created_at: Time?
+      attr_accessor execution_role_arn: String?
+      attr_accessor ended_at: Time?
+      attr_accessor error: Types::JobError?
+      attr_accessor input_options: Types::JobInputOptions?
+      attr_accessor job_id: String?
+      attr_accessor job_arn: String?
+      attr_accessor name: String?
+      attr_accessor output_options: Types::JobOutputOptions?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
     end
 
     class ListKeysInput
@@ -2507,6 +2733,48 @@ module Aws::Location
       attr_accessor message: String?
     end
 
+    class StartJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?action: String,
+        ?action_options: Types::JobActionOptions,
+        ?execution_role_arn: String,
+        ?input_options: Types::JobInputOptions,
+        ?name: String,
+        ?output_options: Types::JobOutputOptions,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor action: String?
+      attr_accessor action_options: Types::JobActionOptions?
+      attr_accessor execution_role_arn: String?
+      attr_accessor input_options: Types::JobInputOptions?
+      attr_accessor name: String?
+      attr_accessor output_options: Types::JobOutputOptions?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at: Time,
+        ?job_arn: String,
+        ?job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at: Time?
+      attr_accessor job_arn: String?
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+    end
+
     class Step
       include Smithy::Schema::Structure
 
@@ -2833,6 +3101,17 @@ module Aws::Location
       attr_accessor tracker_name: String?
       attr_accessor tracker_arn: String?
       attr_accessor update_time: Time?
+    end
+
+    class ValidateAddressActionOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?additional_features: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor additional_features: Array[String]?
     end
 
     class ValidationException

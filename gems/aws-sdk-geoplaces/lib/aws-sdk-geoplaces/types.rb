@@ -19,11 +19,23 @@ module Aws::GeoPlaces
 
     # <p>Position of the access point represented by longitude and latitude for a vehicle.</p>
     # @!attribute position
-    #   <p>The position, in longitude and latitude.</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
+    # @!attribute type
+    #   <p>The type of access point, indicating its intended use. Only applies to results of type place.</p>
+    #   @return [String]
+    # @!attribute primary
+    #   <p>Set to <code>true</code> for the primary access position when the place has more than one access point.</p>
+    #   @return [Boolean]
+    # @!attribute label
+    #   <p>A short textual description of the access point, such as <code>"North Entrance"</code>.</p>
+    #   @return [String]
     class AccessPoint < Struct.new(
       nil,
       :position,
+      :type,
+      :primary,
+      :label,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -71,28 +83,28 @@ module Aws::GeoPlaces
     #   <p>An alphanumeric string included in a postal address to facilitate mail sorting, such as post code, postcode, or ZIP code, for which the result should possess. </p>
     #   @return [String]
     # @!attribute block
-    #   <p>Name of the block. </p> <p>Example: <code>Sunny Mansion 203 block: 2 Chome</code> </p>
+    #   <p> Name of the block. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <p>Example: <code>Sunny Mansion 203 block: 2 Chome</code> </p>
     #   @return [String]
     # @!attribute sub_block
-    #   <p>Name of sub-block. </p> <p>Example: <code>Sunny Mansion 203 sub-block: 4</code> </p>
+    #   <p> Name of sub-block. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <p>Example: <code>Sunny Mansion 203 sub-block: 4</code> </p>
     #   @return [String]
     # @!attribute intersection
-    #   <p>Name of the streets in the intersection. </p> <p>Example: <code>["Friedrichstraße","Unter den Linden"]</code> </p>
+    #   <p> Name of the streets in the intersection. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <p>Example: <code>["Friedrichstraße","Unter den Linden"]</code> </p>
     #   @return [Array<String>]
     # @!attribute street
     #   <p>The name of the street results should be present in.</p>
     #   @return [String]
     # @!attribute street_components
-    #   <p>Components of the street. </p> <p>Example: Younge from the "Younge street".</p>
+    #   <p> Components of the street. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <p>Example: Yonge from "Yonge street".</p>
     #   @return [Array<Types::StreetComponents>]
     # @!attribute address_number
     #   <p>The number that identifies an address within a street.</p>
     #   @return [String]
     # @!attribute building
-    #   <p>The name of the building at the address.</p>
+    #   <p> The name of the building at the address. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [String]
     # @!attribute secondary_address_components
-    #   <p>Components that correspond to secondary identifiers on an Address. Secondary address components include information such as Suite or Unit Number, Building, or Floor.</p>
+    #   <p> Components that correspond to secondary identifiers on an Address. Secondary address components include information such as Suite or Unit Number, Building, or Floor. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>Coverage for <code>Address.SecondaryAddressComponents</code> is available in the following countries:</p> <p>AUS, CAN, NZL, USA, PRI</p> </note>
     #   @return [Array<Types::SecondaryAddressComponent>]
     class Address < Struct.new(
       nil,
@@ -155,7 +167,7 @@ module Aws::GeoPlaces
     #   <p>The name of the building at the address.</p>
     #   @return [Float]
     # @!attribute secondary_address_components
-    #   <p>Match scores for the secondary address components in the result.</p>
+    #   <p>Match scores for the secondary address components in the result.</p> <note> <p>Coverage for this functionality is available in the following countries: AUS, AUT, BRA, CAN, ESP, FRA, GBR, IDN, IND, NZL, TUR, TWN, USA.</p> </note>
     #   @return [Array<Types::SecondaryAddressComponentMatchScore>]
     class AddressComponentMatchScores < Struct.new(
       nil,
@@ -231,6 +243,22 @@ module Aws::GeoPlaces
       :block,
       :sub_block,
       :street,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The official administrative names for an address component, returned when <code>AddressNamesMode</code> is set to <code>Administrative</code>.</p>
+    # @!attribute names
+    #   <p>A list of translation names for the administrative address component, including name variants and translations in available languages.</p>
+    #   @return [Array<Types::TranslationName>]
+    # @!attribute preference
+    #   <p>Indicates the preference level of the administrative name. Valid values are <code>Primary</code> and <code>Alternative</code>.</p>
+    #   @return [String]
+    class AdminNames < Struct.new(
+      nil,
+      :names,
+      :preference,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -344,28 +372,28 @@ module Aws::GeoPlaces
     #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional limit for the number of results returned in a single call. </p>
+    #   <p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 5</p>
     #   @return [Integer]
     # @!attribute bias_position
-    #   <p>The position in longitude and latitude that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
+    #   <p>The position in longitude and latitude that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
     #   @return [Array<Float>]
     # @!attribute filter
     #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
     #   @return [Types::AutocompleteFilter]
     # @!attribute postal_code_mode
-    #   <p>The <code>PostalCodeMode</code> affects how postal code results are returned. If a postal code spans multiple localities and this value is empty, partial district or locality information may be returned under a single postal code result entry. If it's populated with the value <code>EnumerateSpannedLocalities</code>, all cities in that postal code are returned.</p>
+    #   <p>The <code>PostalCodeMode</code> affects how postal code results are returned. If a postal code spans multiple localities and this value is empty, partial district or locality information may be returned under a single postal code result entry. If it's populated with the value <code>EnumerateSpannedLocalities</code>, all cities in that postal code are returned. If it's populated with the value <code>EnumerateSpannedDistricts</code>, all combinations of the postal code with the corresponding district and city names are returned.</p>
     #   @return [String]
     # @!attribute additional_features
     #   <p>A list of optional additional parameters that can be requested for each result.</p>
     #   @return [Array<String>]
     # @!attribute language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
     #   @return [String]
     # @!attribute political_view
     #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p> <p>The following political views are currently supported:</p> <ul> <li> <p> <code>ARG</code>: Argentina's view on the Southern Patagonian Ice Field and Tierra Del Fuego, including the Falkland Islands, South Georgia, and South Sandwich Islands</p> </li> <li> <p> <code>EGY</code>: Egypt's view on Bir Tawil</p> </li> <li> <p> <code>IND</code>: India's view on Gilgit-Baltistan</p> </li> <li> <p> <code>KEN</code>: Kenya's view on the Ilemi Triangle</p> </li> <li> <p> <code>MAR</code>: Morocco's view on Western Sahara</p> </li> <li> <p> <code>RUS</code>: Russia's view on Crimea</p> </li> <li> <p> <code>SDN</code>: Sudan's view on the Halaib Triangle</p> </li> <li> <p> <code>SRB</code>: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands</p> </li> <li> <p> <code>SUR</code>: Suriname's view on the Courantyne Headwaters and Lawa Headwaters</p> </li> <li> <p> <code>SYR</code>: Syria's view on the Golan Heights</p> </li> <li> <p> <code>TUR</code>: Turkey's view on Cyprus and Northern Cyprus</p> </li> <li> <p> <code>TZA</code>: Tanzania's view on Lake Malawi</p> </li> <li> <p> <code>URY</code>: Uruguay's view on Rincon de Artigas</p> </li> <li> <p> <code>VNM</code>: Vietnam's view on the Paracel Islands and Spratly Islands</p> </li> </ul>
     #   @return [String]
     # @!attribute intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Currently, <code>Autocomplete</code> does not support storage of results. </p>
     #   @return [String]
     # @!attribute key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
@@ -419,7 +447,7 @@ module Aws::GeoPlaces
     #   <p>The distance in meters between the center of the search area and this result. Useful to evaluate how far away from the original bias position the result is.</p>
     #   @return [Integer]
     # @!attribute language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
     #   @return [String]
     # @!attribute political_view
     #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
@@ -427,6 +455,9 @@ module Aws::GeoPlaces
     # @!attribute highlights
     #   <p>Indicates the starting and ending index of the place in the text query that match the found title. </p>
     #   @return [Types::AutocompleteHighlights]
+    # @!attribute estimated_point_address
+    #   <p>If <code>true</code>, indicates that the coordinates of the position and access points of the point address are estimated.</p>
+    #   @return [Boolean]
     class AutocompleteResultItem < Struct.new(
       nil,
       :place_id,
@@ -437,6 +468,7 @@ module Aws::GeoPlaces
       :language,
       :political_view,
       :highlights,
+      :estimated_point_address,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -588,13 +620,33 @@ module Aws::GeoPlaces
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A reference to a third-party supplier's identifier for a place, enabling correlation of places across external systems.</p>
+    # @!attribute source
+    #   <p>The name of the third-party data supplier (for example, <code>Yelp</code> or <code>TripAdvisor</code>).</p>
+    #   @return [String]
+    # @!attribute source_place_id
+    #   <p>The place identifier assigned by the third-party supplier.</p>
+    #   @return [String]
+    # @!attribute source_categories
+    #   <p>The list of place category identifiers this supplier reference relates to.</p>
+    #   @return [Array<Types::Category>]
+    class CrossReference < Struct.new(
+      nil,
+      :source,
+      :source_place_id,
+      :source_categories,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The <code>Circle</code> that all results must be in. </p>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute center
-    #   <p>The center position, in longitude and latitude, of the <code>FilterCircle</code>.</p>
+    #   <p>The center position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
     # @!attribute radius
-    #   <p>The radius, in meters, of the <code>FilterCircle</code>.</p>
+    #   <p> The radius, in meters, of the <code>FilterCircle</code>. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers,<code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only up to a maximum value of 300,000. </p>
     #   @return [Integer]
     class FilterCircle < Struct.new(
       nil,
@@ -700,8 +752,11 @@ module Aws::GeoPlaces
     #   <p>The name of the building at the address.</p>
     #   @return [Array<Types::ParsedQueryComponent>]
     # @!attribute secondary_address_components
-    #   <p>Parsed secondary address components from the provided query text.</p>
+    #   <p>Parsed secondary address components from the provided query text.</p> <note> <p>Coverage for <code>ParsedQuery.Address.SecondaryAddressComponents</code> is available in the following countries:</p> <p>AUS, AUT, BRA, CAN, ESP, FRA, GBR, HKG, IDN, IND, NZL, TUR, TWN, USA</p> </note>
     #   @return [Array<Types::ParsedQuerySecondaryAddressComponent>]
+    # @!attribute other_components
+    #   <p>Additional information extracted from the query that does not correspond to standard address components.</p>
+    #   @return [Array<Types::ParsedQueryComponent>]
     class GeocodeParsedQueryAddressComponents < Struct.new(
       nil,
       :country,
@@ -717,6 +772,7 @@ module Aws::GeoPlaces
       :address_number,
       :building,
       :secondary_address_components,
+      :other_components,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -763,16 +819,16 @@ module Aws::GeoPlaces
     end
 
     # @!attribute query_text
-    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
+    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p>
     #   @return [String]
     # @!attribute query_components
     #   <p>A structured free text query allows you to search for places by the name or text representation of specific properties of the place. </p>
     #   @return [Types::GeocodeQueryComponents]
     # @!attribute max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
+    #   <p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>
     #   @return [Integer]
     # @!attribute bias_position
-    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
+    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p>
     #   @return [Array<Float>]
     # @!attribute filter
     #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
@@ -781,16 +837,25 @@ module Aws::GeoPlaces
     #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>
     #   @return [Array<String>]
     # @!attribute language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
     #   @return [String]
     # @!attribute political_view
     #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
     #   @return [String]
     # @!attribute intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an Geocode query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>When storing <code>Geocode</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
     #   @return [String]
     # @!attribute key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
+    #   @return [String]
+    # @!attribute postal_code_mode
+    #   <p>The <code>PostalCodeMode</code> affects how postal code results are returned. If a postal code spans multiple localities and this value is empty, partial district or locality information may be returned under a single postal code result entry. If it's populated with the value <code>EnumerateSpannedLocalities</code>, all cities in that postal code are returned. If it's populated with the value <code>EnumerateSpannedDistricts</code>, all combinations of the postal code with the corresponding district and city names are returned.</p>
+    #   @return [String]
+    # @!attribute address_translations
+    #   <p>Specifies which address components to include translations for. Translations include all name variants and alternative names for the requested fields in all available languages. Valid values are <code>District</code>, <code>Locality</code>, <code>Region</code>, and <code>SubRegion</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute address_names_mode
+    #   <p>Specifies how address names are returned. If not set, the service returns normalized (official) names by default. When set to <code>Matched</code>, address names in the response are based on the input query rather than official names. When set to <code>Administrative</code>, the service returns the official administrative names for address components. <code>Administrative</code> currently applies only to addresses in the United States.</p>
     #   @return [String]
     class GeocodeRequest < Struct.new(
       nil,
@@ -804,13 +869,16 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key,
+      :postal_code_mode,
+      :address_translations,
+      :address_names_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute pricing_bucket
-    #   <p>The pricing bucket for which the query is charged at.</p> <p>For more information on pricing, please visit <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service Pricing</a>.</p>
+    #   <p>The pricing bucket for which the query is charged at, or the maximum pricing bucket when the query is charged per item within the query.</p> <p>For more information on pricing, please visit <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service Pricing</a>.</p>
     #   @return [String]
     # @!attribute result_items
     #   <p>List of places or results returned for a query. </p>
@@ -844,7 +912,7 @@ module Aws::GeoPlaces
     #   <p>Contains details about the postal code of the place/result. </p>
     #   @return [Array<Types::PostalCodeDetails>]
     # @!attribute position
-    #   <p>The position in longitude and latitude.</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
     # @!attribute distance
     #   <p>The distance in meters from the QueryPosition.</p>
@@ -859,7 +927,7 @@ module Aws::GeoPlaces
     #   <p>List of food types offered by this result.</p>
     #   @return [Array<Types::FoodType>]
     # @!attribute access_points
-    #   <p>Position of the access point represented by longitude and latitude.</p>
+    #   <p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Types::AccessPoint>]
     # @!attribute time_zone
     #   <p>The time zone in which the place is located.</p>
@@ -880,8 +948,14 @@ module Aws::GeoPlaces
     #   <p>The main address corresponding to a place of type Secondary Address.</p>
     #   @return [Types::RelatedPlace]
     # @!attribute secondary_addresses
-    #   <p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p>
+    #   <p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p> <note> <p>Coverage for this functionality is available in the following countries: AUS, CAN, NZL, USA, PRI.</p> </note>
     #   @return [Array<Types::RelatedPlace>]
+    # @!attribute translations
+    #   <p>All name translations and alternative names for the requested address fields in all available languages.</p>
+    #   @return [Types::TranslationDetails]
+    # @!attribute estimated_point_address
+    #   <p>If <code>true</code>, indicates that the coordinates of the position and access points of the point address are estimated.</p>
+    #   @return [Boolean]
     class GeocodeResultItem < Struct.new(
       nil,
       :place_id,
@@ -903,6 +977,8 @@ module Aws::GeoPlaces
       :intersections,
       :main_address,
       :secondary_addresses,
+      :translations,
+      :estimated_point_address,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -917,19 +993,22 @@ module Aws::GeoPlaces
     #   <p>The <code>PlaceId</code> of the place you wish to receive the information for.</p>
     #   @return [String]
     # @!attribute additional_features
-    #   <p>A list of optional additional parameters such as time zone that can be requested for each result.</p>
+    #   <p> A list of optional additional parameters such as time zone that can be requested for each result. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>TimeZone</code> value. </p>
     #   @return [Array<String>]
     # @!attribute language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p> A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>
     #   @return [String]
     # @!attribute political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    #   <p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [String]
     # @!attribute intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an GetPlace query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>When storing <code>GetPlace</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
     #   @return [String]
     # @!attribute key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
+    #   @return [String]
+    # @!attribute address_names_mode
+    #   <p>Specifies how address names are returned. When set to <code>Administrative</code>, the service returns the official administrative names for address components. <code>Administrative</code> currently applies only to addresses in the United States.</p>
     #   @return [String]
     class GetPlaceRequest < Struct.new(
       nil,
@@ -939,6 +1018,7 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key,
+      :address_names_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -960,13 +1040,13 @@ module Aws::GeoPlaces
     #   <p>The place's address.</p>
     #   @return [Types::Address]
     # @!attribute address_number_corrected
-    #   <p>Boolean indicating if the address provided has been corrected.</p>
+    #   <p> Boolean indicating if the address provided has been corrected. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Boolean]
     # @!attribute postal_code_details
-    #   <p>Contains details about the postal code of the place/result. </p>
+    #   <p> Contains details about the postal code of the place/result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::PostalCodeDetails>]
     # @!attribute position
-    #   <p>The position, in longitude and latitude.</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
     # @!attribute map_view
     #   <p>The bounding box enclosing the geometric shape (area or line) that an individual result covers.</p> <p>The bounding box formed is defined as a set of four coordinates: <code>[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]</code> </p>
@@ -975,38 +1055,47 @@ module Aws::GeoPlaces
     #   <p>Categories of results that results must belong to.</p>
     #   @return [Array<Types::Category>]
     # @!attribute food_types
-    #   <p>List of food types offered by this result.</p>
+    #   <p> List of food types offered by this result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::FoodType>]
     # @!attribute business_chains
     #   <p>The Business Chains associated with the place.</p>
     #   @return [Array<Types::BusinessChain>]
     # @!attribute contacts
-    #   <p>List of potential contact methods for the result/place.</p>
+    #   <p> List of potential contact methods for the result/place. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Types::Contacts]
     # @!attribute opening_hours
-    #   <p>List of opening hours objects.</p>
+    #   <p> List of opening hours objects. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::OpeningHours>]
     # @!attribute access_points
-    #   <p>Position of the access point in <code>(lng,lat)</code>.</p>
+    #   <p> Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude]. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::AccessPoint>]
     # @!attribute access_restrictions
-    #   <p>Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction.</p>
+    #   <p> Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::AccessRestriction>]
     # @!attribute time_zone
     #   <p>The time zone in which the place is located.</p>
     #   @return [Types::TimeZone]
     # @!attribute political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    #   <p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [String]
     # @!attribute phonemes
-    #   <p>How the various components of the result's address are pronounced in various languages.</p>
+    #   <p> How the various components of the result's address are pronounced in various languages. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Types::PhonemeDetails]
     # @!attribute main_address
-    #   <p>The main address corresponding to a place of type Secondary Address.</p>
+    #   <p> The main address corresponding to a place of type Secondary Address. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Types::RelatedPlace]
     # @!attribute secondary_addresses
-    #   <p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p>
+    #   <p> All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>Coverage for this functionality is available in the following countries: AUS, CAN, NZL, USA, PRI.</p> </note>
     #   @return [Array<Types::RelatedPlace>]
+    # @!attribute place_attributes
+    #   <p>A list of place attributes for the result, such as whether the business offers drive-through service.</p>
+    #   @return [Array<String>]
+    # @!attribute estimated_point_address
+    #   <p>If <code>true</code>, indicates that the coordinates of the position and access points of the point address are estimated.</p>
+    #   @return [Boolean]
+    # @!attribute cross_references
+    #   <p>The list of supplier references available for this place. Requires the <code>CrossReferences</code> additional feature to be enabled.</p>
+    #   @return [Array<Types::CrossReference>]
     class GetPlaceResponse < Struct.new(
       nil,
       :place_id,
@@ -1030,6 +1119,9 @@ module Aws::GeoPlaces
       :phonemes,
       :main_address,
       :secondary_addresses,
+      :place_attributes,
+      :estimated_point_address,
+      :cross_references,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1077,7 +1169,7 @@ module Aws::GeoPlaces
     #   <p>The place address.</p>
     #   @return [Types::Address]
     # @!attribute position
-    #   <p>The position, in longitude and latitude.</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
     # @!attribute distance
     #   <p>The distance in meters from the QueryPosition.</p>
@@ -1089,7 +1181,7 @@ module Aws::GeoPlaces
     #   <p>The bounding box enclosing the geometric shape (area or line) that an individual result covers.</p> <p>The bounding box formed is defined as a set of four coordinates: <code>[{westward lng}, {southern lat}, {eastward lng}, {northern lat}]</code> </p>
     #   @return [Array<Float>]
     # @!attribute access_points
-    #   <p>Position of the access point represented by longitude and latitude.</p>
+    #   <p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Types::AccessPoint>]
     class Intersection < Struct.new(
       nil,
@@ -1250,7 +1342,7 @@ module Aws::GeoPlaces
     #   <p>Value which indicates how to pronounce the value.</p>
     #   @return [String]
     # @!attribute language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
     #   @return [String]
     # @!attribute preferred
     #   <p>Boolean which indicates if it the preferred pronunciation.</p>
@@ -1319,7 +1411,7 @@ module Aws::GeoPlaces
 
     # <p>The region or state results should be to be present in. </p> <p>Example: <code>North Rhine-Westphalia</code>. </p>
     # @!attribute code
-    #   <p>Abbreviated code for a the state, province or region of the country. </p> <p>Example: <code>BC</code>.</p>
+    #   <p> Abbreviated code for a the state, province or region of the country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <p>Example: <code>BC</code>.</p>
     #   @return [String]
     # @!attribute name
     #   <p>Name for a the state, province, or region of the country. </p> <p>Example: <code>British Columbia</code>. </p>
@@ -1363,10 +1455,10 @@ module Aws::GeoPlaces
     #   <p>The place address.</p>
     #   @return [Types::Address]
     # @!attribute position
-    #   <p>The position, in longitude and latitude.</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
     # @!attribute access_points
-    #   <p>Position of the access point represented by longitude and latitude.</p>
+    #   <p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Types::AccessPoint>]
     class RelatedPlace < Struct.new(
       nil,
@@ -1383,7 +1475,7 @@ module Aws::GeoPlaces
 
     # <p>The included place types.</p>
     # @!attribute include_place_types
-    #   <p>The included place types.</p>
+    #   <p> The included place types. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only <code>Street</code> and <code>PointAddress</code> values. </p>
     #   @return [Array<String>]
     class ReverseGeocodeFilter < Struct.new(
       nil,
@@ -1394,31 +1486,37 @@ module Aws::GeoPlaces
     end
 
     # @!attribute query_position
-    #   <p>The position, in <code>[lng, lat]</code> for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude] for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>
     #   @return [Array<Float>]
     # @!attribute query_radius
-    #   <p>The maximum distance in meters from the QueryPosition from which a result will be returned.</p>
+    #   <p> The maximum distance in meters from the QueryPosition from which a result will be returned. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only up to a maximum value of 100,000. </p>
     #   @return [Integer]
     # @!attribute max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
+    #   <p> An optional limit for the number of results returned in a single call.</p> <p>Default value: 1</p>
     #   @return [Integer]
     # @!attribute filter
     #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
     #   @return [Types::ReverseGeocodeFilter]
     # @!attribute additional_features
-    #   <p>A list of optional additional parameters, such as time zone that can be requested for each result.</p>
+    #   <p> A list of optional additional parameters, such as time zone that can be requested for each result. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>TimeZone</code> value. </p>
     #   @return [Array<String>]
     # @!attribute language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p> A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>
     #   @return [String]
     # @!attribute political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    #   <p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [String]
     # @!attribute intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an ReverseGeocode query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). </p> <note> <p>When storing <code>ReverseGeocode</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
     #   @return [String]
     # @!attribute key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
+    #   @return [String]
+    # @!attribute heading
+    #   <p>The heading in degrees from true north in a navigation context. The heading is measured as the angle clockwise from the North direction.</p> <p>Example: North is <code>0</code> degrees, East is <code>90</code> degrees, South is <code>180</code> degrees, and West is <code>270</code> degrees.</p>
+    #   @return [Float]
+    # @!attribute address_names_mode
+    #   <p>Specifies how address names are returned. When set to <code>Administrative</code>, the service returns the official administrative names for address components. <code>Administrative</code> currently applies only to addresses in the United States.</p>
     #   @return [String]
     class ReverseGeocodeRequest < Struct.new(
       nil,
@@ -1431,6 +1529,8 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :key,
+      :heading,
+      :address_names_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1465,13 +1565,13 @@ module Aws::GeoPlaces
     #   <p>The place's address.</p>
     #   @return [Types::Address]
     # @!attribute address_number_corrected
-    #   <p>Boolean indicating if the address provided has been corrected.</p>
+    #   <p> Boolean indicating if the address provided has been corrected. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Boolean]
     # @!attribute postal_code_details
-    #   <p>Contains details about the postal code of the place/result. </p>
+    #   <p> Contains details about the postal code of the place/result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::PostalCodeDetails>]
     # @!attribute position
-    #   <p>The position in longitude and latitude.</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
     # @!attribute distance
     #   <p>The distance in meters from the QueryPosition.</p>
@@ -1483,20 +1583,26 @@ module Aws::GeoPlaces
     #   <p>Categories of results that results must belong to.</p>
     #   @return [Array<Types::Category>]
     # @!attribute food_types
-    #   <p>List of food types offered by this result.</p>
+    #   <p> List of food types offered by this result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::FoodType>]
     # @!attribute access_points
-    #   <p>Position of the access point represented by longitude and latitude.</p>
+    #   <p> Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude]. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::AccessPoint>]
     # @!attribute time_zone
     #   <p>The time zone in which the place is located.</p>
     #   @return [Types::TimeZone]
     # @!attribute political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    #   <p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [String]
     # @!attribute intersections
-    #   <p>All Intersections that are near the provided address.</p>
+    #   <p> All Intersections that are near the provided address. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::Intersection>]
+    # @!attribute main_address
+    #   <p>The main address corresponding to a place of type Secondary Address.</p>
+    #   @return [Types::RelatedPlace]
+    # @!attribute estimated_point_address
+    #   <p>If <code>true</code>, indicates that the coordinates of the position and access points of the point address are estimated.</p>
+    #   @return [Boolean]
     class ReverseGeocodeResultItem < Struct.new(
       nil,
       :place_id,
@@ -1514,6 +1620,8 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :intersections,
+      :main_address,
+      :estimated_point_address,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1565,13 +1673,13 @@ module Aws::GeoPlaces
     end
 
     # @!attribute query_position
-    #   <p>The position, in <code>[lng, lat]</code> for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude] for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>
     #   @return [Array<Float>]
     # @!attribute query_radius
     #   <p>The maximum distance in meters from the QueryPosition from which a result will be returned.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
     #   @return [Integer]
     # @!attribute max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
+    #   <p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>
     #   @return [Integer]
     # @!attribute filter
     #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
@@ -1580,13 +1688,13 @@ module Aws::GeoPlaces
     #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>
     #   @return [Array<String>]
     # @!attribute language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
     #   @return [String]
     # @!attribute political_view
     #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
     #   @return [String]
     # @!attribute intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an SearchNearby query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>When storing <code>SearchNearby</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
     #   @return [String]
     # @!attribute next_token
     #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. </p>
@@ -1647,7 +1755,7 @@ module Aws::GeoPlaces
     #   <p>Boolean indicating if the address provided has been corrected.</p>
     #   @return [Boolean]
     # @!attribute position
-    #   <p>The position in longitude and latitude.</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
     # @!attribute distance
     #   <p>The distance in meters from the QueryPosition.</p>
@@ -1671,7 +1779,7 @@ module Aws::GeoPlaces
     #   <p>List of opening hours objects.</p>
     #   @return [Array<Types::OpeningHours>]
     # @!attribute access_points
-    #   <p>Position of the access point represent by longitude and latitude.</p>
+    #   <p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Types::AccessPoint>]
     # @!attribute access_restrictions
     #   <p>Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction.</p>
@@ -1685,6 +1793,12 @@ module Aws::GeoPlaces
     # @!attribute phonemes
     #   <p>How the various components of the result's address are pronounced in various languages.</p>
     #   @return [Types::PhonemeDetails]
+    # @!attribute place_attributes
+    #   <p>A list of place attributes for the result, such as whether the business offers drive-through service.</p>
+    #   @return [Array<String>]
+    # @!attribute cross_references
+    #   <p>The list of supplier references available for this place. Requires the <code>CrossReferences</code> additional feature to be enabled.</p>
+    #   @return [Array<Types::CrossReference>]
     class SearchNearbyResultItem < Struct.new(
       nil,
       :place_id,
@@ -1705,6 +1819,8 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :phonemes,
+      :place_attributes,
+      :cross_references,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1736,34 +1852,37 @@ module Aws::GeoPlaces
     end
 
     # @!attribute query_text
-    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
+    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>Exactly one of the following fields must be set: <code>QueryText</code> or <code>QueryId</code>.</p> </note>
     #   @return [String]
     # @!attribute query_id
-    #   <p>The query Id returned by the suggest API. If passed in the request, the SearchText API will preform a SearchText query with the improved query terms for the original query made to the suggest API.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
+    #   <p>The query Id returned by the suggest API. If passed in the request, the SearchText API will preform a SearchText query with the improved query terms for the original query made to the suggest API. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers.</p> <note> <p>Exactly one of the following fields must be set: <code>QueryText</code> or <code>QueryId</code>.</p> </note>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
+    #   <p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>
     #   @return [Integer]
     # @!attribute bias_position
-    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
+    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p> <note> <p>Exactly one of the following fields must be set: <code>BiasPosition</code>, <code>Filter.BoundingBox</code>, or <code>Filter.Circle</code>.</p> </note>
     #   @return [Array<Float>]
     # @!attribute filter
     #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
     #   @return [Types::SearchTextFilter]
     # @!attribute additional_features
-    #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>
+    #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>TimeZone</code> value.</p>
     #   @return [Array<String>]
     # @!attribute language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>
     #   @return [String]
     # @!attribute political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers.</p>
     #   @return [String]
     # @!attribute intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an SearchText query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). </p> <note> <p>When storing <code>SearchText</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
     #   @return [String]
     # @!attribute next_token
     #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. </p>
+    #   @return [String]
+    # @!attribute travel_mode
+    #   <p>Indicates the mode of mobility used by the end user. This is used to improve the relevance of search results. Valid values are <code>Car</code>, <code>Scooter</code>, and <code>Truck</code>.</p>
     #   @return [String]
     # @!attribute key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
@@ -1780,6 +1899,7 @@ module Aws::GeoPlaces
       :political_view,
       :intended_use,
       :next_token,
+      :travel_mode,
       :key,
       keyword_init: true
     )
@@ -1822,7 +1942,7 @@ module Aws::GeoPlaces
     #   <p>Boolean indicating if the address provided has been corrected.</p>
     #   @return [Boolean]
     # @!attribute position
-    #   <p>The position, in longitude and latitude.</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
     # @!attribute distance
     #   <p>The distance in meters from the QueryPosition.</p>
@@ -1843,10 +1963,10 @@ module Aws::GeoPlaces
     #   <p>List of potential contact methods for the result/place.</p>
     #   @return [Types::Contacts]
     # @!attribute opening_hours
-    #   <p>List of opening hours objects.</p>
+    #   <p> List of opening hours objects. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::OpeningHours>]
     # @!attribute access_points
-    #   <p>Position of the access point represent by longitude and latitude.</p>
+    #   <p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Types::AccessPoint>]
     # @!attribute access_restrictions
     #   <p>Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction.</p>
@@ -1860,6 +1980,12 @@ module Aws::GeoPlaces
     # @!attribute phonemes
     #   <p>How the various components of the result's address are pronounced in various languages.</p>
     #   @return [Types::PhonemeDetails]
+    # @!attribute place_attributes
+    #   <p>A list of place attributes for the result, such as whether the business offers drive-through service.</p>
+    #   @return [Array<String>]
+    # @!attribute cross_references
+    #   <p>The list of supplier references available for this place. Requires the <code>CrossReferences</code> additional feature to be enabled.</p>
+    #   @return [Array<Types::CrossReference>]
     class SearchTextResultItem < Struct.new(
       nil,
       :place_id,
@@ -1880,6 +2006,8 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :phonemes,
+      :place_attributes,
+      :cross_references,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1894,9 +2022,13 @@ module Aws::GeoPlaces
     # @!attribute number
     #   <p>Number that uniquely identifies a secondary address.</p>
     #   @return [String]
+    # @!attribute designator
+    #   <p>The designator of the secondary address component.</p> <p>Example: <code>Apt</code>.</p>
+    #   @return [String]
     class SecondaryAddressComponent < Struct.new(
       nil,
       :number,
+      :designator,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1942,7 +2074,7 @@ module Aws::GeoPlaces
     #   <p>Indicates the official directional identifiers assigned to highways.</p>
     #   @return [String]
     # @!attribute language
-    #   <p>A <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p>A <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
     #   @return [String]
     class StreetComponents < Struct.new(
       nil,
@@ -1961,7 +2093,7 @@ module Aws::GeoPlaces
 
     # <p>The sub-region.</p>
     # @!attribute code
-    #   <p>Abbreviated code for the county or sub-region.</p>
+    #   <p> Abbreviated code for the county or sub-region. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [String]
     # @!attribute name
     #   <p>Name for the county or sub-region.</p>
@@ -2050,7 +2182,7 @@ module Aws::GeoPlaces
     #   <p>The place's address.</p>
     #   @return [Types::Address]
     # @!attribute position
-    #   <p>The position, in longitude and latitude.</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>
     #   @return [Array<Float>]
     # @!attribute distance
     #   <p>The distance in meters from the QueryPosition.</p>
@@ -2062,26 +2194,32 @@ module Aws::GeoPlaces
     #   <p>Categories of results that results must belong to.</p>
     #   @return [Array<Types::Category>]
     # @!attribute food_types
-    #   <p>List of food types offered by this result.</p>
+    #   <p> List of food types offered by this result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::FoodType>]
     # @!attribute business_chains
-    #   <p>The Business Chains associated with the place.</p>
+    #   <p> The Business Chains associated with the place. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::BusinessChain>]
     # @!attribute access_points
-    #   <p>Position of the access point represent by longitude and latitude.</p>
+    #   <p> Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude]. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::AccessPoint>]
     # @!attribute access_restrictions
-    #   <p>Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction.</p>
+    #   <p> Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::AccessRestriction>]
     # @!attribute time_zone
     #   <p>The time zone in which the place is located.</p>
     #   @return [Types::TimeZone]
     # @!attribute political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    #   <p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [String]
     # @!attribute phonemes
-    #   <p>How the various components of the result's address are pronounced in various languages.</p>
+    #   <p> How the various components of the result's address are pronounced in various languages. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Types::PhonemeDetails]
+    # @!attribute place_attributes
+    #   <p>A list of place attributes for the result, such as whether the business offers drive-through service.</p>
+    #   @return [Array<String>]
+    # @!attribute cross_references
+    #   <p>The list of supplier references available for this place. Requires the <code>CrossReferences</code> additional feature to be enabled.</p>
+    #   @return [Array<Types::CrossReference>]
     class SuggestPlaceResult < Struct.new(
       nil,
       :place_id,
@@ -2098,6 +2236,8 @@ module Aws::GeoPlaces
       :time_zone,
       :political_view,
       :phonemes,
+      :place_attributes,
+      :cross_references,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2110,10 +2250,10 @@ module Aws::GeoPlaces
 
     # <p>The suggested query results.</p>
     # @!attribute query_id
-    #   <p>QueryId can be used to complete a follow up query through the SearchText API. The QueryId retains context from the original Suggest request such as filters, political view and language. See the SearchText API documentation for more details <a href="https://docs.aws.amazon.com/latest/APIReference/API_geoplaces_SearchText.html">SearchText API docs</a>.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
+    #   <p>QueryId can be used to complete a follow up query through the SearchText API. The QueryId retains context from the original Suggest request such as filters, political view and language. See the SearchText API documentation for more details <a href="https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html">SearchText API docs</a>. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
     #   @return [String]
     # @!attribute query_type
-    #   <p>The query type. Category queries will search for places which have an entry matching the given category, for example "doctor office". BusinessChain queries will search for instances of a given business.</p>
+    #   <p> The query type. Category queries will search for places which have an entry matching the given category, for example "doctor office". BusinessChain queries will search for instances of a given business. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [String]
     class SuggestQueryResult < Struct.new(
       nil,
@@ -2125,31 +2265,34 @@ module Aws::GeoPlaces
     end
 
     # @!attribute query_text
-    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
+    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code> and <code>QueryID</code> are mutually exclusive.</p> </note>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
+    #   <p> An optional limit for the number of results returned in a single call. </p> <p>Default value: 20</p>
     #   @return [Integer]
     # @!attribute max_query_refinements
-    #   <p>Maximum number of query terms to be returned for use with a search text query.</p>
+    #   <p> Maximum number of query terms to be returned for use with a search text query. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Integer]
     # @!attribute bias_position
-    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
+    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
     #   @return [Array<Float>]
     # @!attribute filter
     #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
     #   @return [Types::SuggestFilter]
     # @!attribute additional_features
-    #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>
+    #   <p> A list of optional additional parameters, such as time zone, that can be requested for each result. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>Core</code> and <code>TimeZone</code> values. </p>
     #   @return [Array<String>]
     # @!attribute language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p> A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>
     #   @return [String]
     # @!attribute political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    #   <p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [String]
     # @!attribute intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Currently, <code>Suggest</code> does not support storage of results. </p>
+    #   @return [String]
+    # @!attribute travel_mode
+    #   <p>Indicates the mode of mobility used by the end user. This is used to improve the relevance of search results. Valid values are <code>Car</code>, <code>Scooter</code>, and <code>Truck</code>.</p>
     #   @return [String]
     # @!attribute key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
@@ -2165,6 +2308,7 @@ module Aws::GeoPlaces
       :language,
       :political_view,
       :intended_use,
+      :travel_mode,
       :key,
       keyword_init: true
     )
@@ -2178,7 +2322,7 @@ module Aws::GeoPlaces
     #   <p>List of places or results returned for a query. </p>
     #   @return [Array<Types::SuggestResultItem>]
     # @!attribute query_refinements
-    #   <p>Maximum number of query terms to be returned for use with a search text query.</p>
+    #   <p> Maximum number of query terms to be returned for use with a search text query. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     #   @return [Array<Types::QueryRefinement>]
     class SuggestResponse < Struct.new(
       nil,
@@ -2252,6 +2396,58 @@ module Aws::GeoPlaces
         options[:offset_seconds] = 0 unless options.key?(:offset_seconds)
         super
       end
+    end
+
+    # <p>Translation details for the address, including alternative names and translations in available languages.</p>
+    # @!attribute locality
+    #   <p>A list of administrative names and translations for the locality address component.</p>
+    #   @return [Array<Types::AdminNames>]
+    # @!attribute region
+    #   <p>A list of administrative names and translations for the region address component.</p>
+    #   @return [Array<Types::AdminNames>]
+    # @!attribute district
+    #   <p>A list of administrative names and translations for the district address component.</p>
+    #   @return [Array<Types::AdminNames>]
+    # @!attribute sub_region
+    #   <p>A list of administrative names and translations for the sub-region address component.</p>
+    #   @return [Array<Types::AdminNames>]
+    class TranslationDetails < Struct.new(
+      nil,
+      :locality,
+      :region,
+      :district,
+      :sub_region,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A translation or alternative name for an address component.</p>
+    # @!attribute value
+    #   <p>The translated or alternative name value.</p>
+    #   @return [String]
+    # @!attribute language
+    #   <p>A <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language code for the translation name.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of translation name. Valid values are <code>Abbreviation</code>, <code>AreaCode</code>, <code>BaseName</code>, <code>Exonym</code>, <code>Shortened</code>, and <code>Synonym</code>.</p>
+    #   @return [String]
+    # @!attribute primary
+    #   <p>If <code>true</code>, indicates this is the primary name variant for the given language.</p>
+    #   @return [Boolean]
+    # @!attribute transliterated
+    #   <p>If <code>true</code>, indicates this name is a transliterated version rather than a native script translation.</p>
+    #   @return [Boolean]
+    class TranslationName < Struct.new(
+      nil,
+      :value,
+      :language,
+      :type,
+      :primary,
+      :transliterated,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The USPS zip code.</p>

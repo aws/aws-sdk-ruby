@@ -333,10 +333,12 @@ module Aws::ComputeOptimizer
 
       def initialize: (
         ?savings_estimation_mode: Types::EBSSavingsEstimationMode,
+        ?look_back_period: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor savings_estimation_mode: Types::EBSSavingsEstimationMode?
+      attr_accessor look_back_period: String?
     end
 
     class EBSEstimatedMonthlySavings
@@ -379,6 +381,8 @@ module Aws::ComputeOptimizer
       VOLUME_WRITE_OPS_PER_SECOND: String
       VOLUME_READ_BYTES_PER_SECOND: String
       VOLUME_WRITE_BYTES_PER_SECOND: String
+      VOLUME_IOPS_EXCEEDED: String
+      VOLUME_THROUGHPUT_EXCEEDED: String
     end
 
     class EBSSavingsEstimationMode
@@ -431,10 +435,12 @@ module Aws::ComputeOptimizer
 
       def initialize: (
         ?savings_estimation_mode: Types::ECSSavingsEstimationMode,
+        ?look_back_period: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor savings_estimation_mode: Types::ECSSavingsEstimationMode?
+      attr_accessor look_back_period: String?
     end
 
     class ECSEstimatedMonthlySavings
@@ -1117,6 +1123,7 @@ module Aws::ComputeOptimizer
       RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE: String
       RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS: String
       RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD: String
     end
 
     module ExportableIdleField
@@ -1137,6 +1144,25 @@ module Aws::ComputeOptimizer
       UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM: String
       UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM: String
       UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_ACTIVE_CONNECTION_COUNT_MAXIMUM: String
+      UTILIZATION_METRICS_PACKETS_IN_FROM_SOURCE_MAXIMUM: String
+      UTILIZATION_METRICS_PACKETS_IN_FROM_DESTINATION_MAXIMUM: String
+      UTILIZATION_METRICS_CONSUMED_READ_CAPACITY_UNITS_SUM: String
+      UTILIZATION_METRICS_CONSUMED_WRITE_CAPACITY_UNITS_SUM: String
+      UTILIZATION_METRICS_NEW_CONNECTIONS_SUM: String
+      UTILIZATION_METRICS_ENGINE_CPU_UTILIZATION_MAXIMUM: String
+      UTILIZATION_METRICS_CACHE_HITS_SUM: String
+      UTILIZATION_METRICS_CACHE_MISSES_SUM: String
+      UTILIZATION_METRICS_KEYSPACE_HITS_SUM: String
+      UTILIZATION_METRICS_KEYSPACE_MISSES_SUM: String
+      UTILIZATION_METRICS_IS_IDLE_MINIMUM: String
+      UTILIZATION_METRICS_USER_CONNECTED_SUM: String
+      UTILIZATION_METRICS_INVOCATIONS_SUM: String
+      UTILIZATION_METRICS_GET_TYPE_CMDS_SUM: String
+      UTILIZATION_METRICS_SET_TYPE_CMDS_SUM: String
+      UTILIZATION_METRICS_ELASTI_CACHE_PROCESSING_UNITS_SUM: String
+      UTILIZATION_METRICS_CURR_CONNECTIONS_SUM: String
+      UTILIZATION_METRICS_DATABASE_CONNECTIONS_SUM: String
       FINDING: String
       FINDING_DESCRIPTION: String
       TAGS: String
@@ -1367,6 +1393,8 @@ module Aws::ComputeOptimizer
       UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM: String
       UTILIZATION_METRICS_VOLUME_READ_BYTES_PER_SECOND_MAXIMUM: String
       UTILIZATION_METRICS_VOLUME_WRITE_BYTES_PER_SECOND_MAXIMUM: String
+      UTILIZATION_METRICS_VOLUME_IOPS_EXCEEDED_MAXIMUM: String
+      UTILIZATION_METRICS_VOLUME_THROUGHPUT_EXCEEDED_MAXIMUM: String
       LOOKBACK_PERIOD_IN_DAYS: String
       CURRENT_CONFIGURATION_VOLUME_TYPE: String
       CURRENT_CONFIGURATION_VOLUME_BASELINE_IOPS: String
@@ -1395,6 +1423,7 @@ module Aws::ComputeOptimizer
       RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE: String
       RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS: String
       RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS: String
+      EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD: String
     end
 
     class ExternalMetricStatus
@@ -2037,6 +2066,19 @@ module Aws::ComputeOptimizer
       FALSE: String
     end
 
+    class IdleDimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+    end
+
     class IdleEstimatedMonthlySavings
       include Smithy::Schema::Structure
 
@@ -2053,6 +2095,7 @@ module Aws::ComputeOptimizer
     module IdleFinding
       IDLE: String
       UNATTACHED: String
+      UNUSED: String
     end
 
     module IdleMetricName
@@ -2065,6 +2108,25 @@ module Aws::ComputeOptimizer
       EBS_VOLUME_WRITE_IOPS: String
       VOLUME_READ_OPS_PER_SECOND: String
       VOLUME_WRITE_OPS_PER_SECOND: String
+      ACTIVE_CONNECTION_COUNT: String
+      PACKETS_IN_FROM_SOURCE: String
+      PACKETS_IN_FROM_DESTINATION: String
+      CONSUMED_READ_CAPACITY_UNITS: String
+      CONSUMED_WRITE_CAPACITY_UNITS: String
+      CONSUMED_CHANGE_DATA_CAPTURE_UNITS: String
+      NEW_CONNECTIONS: String
+      ENGINE_CPU_UTILIZATION: String
+      CACHE_HITS: String
+      CACHE_MISSES: String
+      KEYSPACE_HITS: String
+      KEYSPACE_MISSES: String
+      IS_IDLE: String
+      USER_CONNECTED: String
+      INVOCATIONS: String
+      GET_TYPE_CMDS: String
+      SET_TYPE_CMDS: String
+      ELASTI_CACHE_PROCESSING_UNITS: String
+      CURR_CONNECTIONS: String
     end
 
     class IdleRecommendation
@@ -2141,6 +2203,13 @@ module Aws::ComputeOptimizer
       EBS_VOLUME: String
       ECS_SERVICE: String
       RDS_DB_INSTANCE: String
+      NAT_GATEWAY: String
+      DYNAMO_DB_TABLE: String
+      ELASTI_CACHE_CLUSTER: String
+      MEMORY_DB_CLUSTER: String
+      DOCUMENT_DB_CLUSTER: String
+      WORKSPACES: String
+      SAGE_MAKER_ENDPOINT: String
     end
 
     class IdleSavingsOpportunity
@@ -2189,12 +2258,14 @@ module Aws::ComputeOptimizer
         ?name: String,
         ?statistic: String,
         ?value: Float,
+        ?dimensions: Array[Types::IdleDimension],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor statistic: String?
       attr_accessor value: Float?
+      attr_accessor dimensions: Array[Types::IdleDimension]?
     end
 
     class InferredWorkloadSaving
@@ -3370,6 +3441,13 @@ module Aws::ComputeOptimizer
       RDS_DB_INSTANCE: String
       RDS_DB_INSTANCE_STORAGE: String
       AURORA_DB_CLUSTER_STORAGE: String
+      NAT_GATEWAY: String
+      DYNAMO_DB_TABLE: String
+      ELASTI_CACHE_CLUSTER: String
+      MEMORY_DB_CLUSTER: String
+      DOCUMENT_DB_CLUSTER: String
+      WORKSPACES: String
+      SAGE_MAKER_ENDPOINT: String
     end
 
     class RecommendationSummary

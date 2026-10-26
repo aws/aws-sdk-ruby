@@ -243,7 +243,13 @@ module Aws::ElastiCache
     def create_global_replication_group: (
       ?global_replication_group_id_suffix: String,
       ?global_replication_group_description: String,
-      ?primary_replication_group_id: String
+      ?primary_replication_group_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
     ) -> _CreateGlobalReplicationGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlobalReplicationGroupResponse
 
     interface _CreateReplicationGroupResponse
@@ -319,7 +325,8 @@ module Aws::ElastiCache
       ?ip_discovery: String,
       ?transit_encryption_mode: String,
       ?cluster_mode: String,
-      ?serverless_cache_snapshot_name: String
+      ?serverless_cache_snapshot_name: String,
+      ?durability: String
     ) -> _CreateReplicationGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationGroupResponse
 
     interface _CreateServerlessCacheResponse
@@ -354,7 +361,9 @@ module Aws::ElastiCache
       ?user_group_id: String,
       ?subnet_ids: Array[String],
       ?snapshot_retention_limit: Integer,
-      ?daily_snapshot_time: String
+      ?daily_snapshot_time: String,
+      ?network_type: String,
+      ?connection_type: String
     ) -> _CreateServerlessCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServerlessCacheResponse
 
     interface _CreateServerlessCacheSnapshotResponse
@@ -1058,7 +1067,8 @@ module Aws::ElastiCache
       ?ip_discovery: String,
       ?transit_encryption_enabled: bool,
       ?transit_encryption_mode: String,
-      ?cluster_mode: String
+      ?cluster_mode: String,
+      ?durability: String
     ) -> _ModifyReplicationGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyReplicationGroupResponse
 
     interface _ModifyReplicationGroupShardConfigurationResponse

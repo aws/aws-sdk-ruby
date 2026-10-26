@@ -1,0 +1,221 @@
+module Aws::MarketplaceDiscovery
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MarketplaceDiscovery::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetListingResponse
+      include Smithy::Client::_Response[Types::GetListingOutput]
+      def locale: () -> String?
+      def associated_entities: () -> Array[Types::ListingAssociatedEntity]?
+      def badges: () -> Array[Types::ListingBadge]?
+      def catalog: () -> String?
+      def categories: () -> Array[Types::Category]?
+      def fulfillment_option_summaries: () -> Array[Types::FulfillmentOptionSummary]?
+      def highlights: () -> Array[String]?
+      def integration_guide: () -> String?
+      def listing_id: () -> String?
+      def listing_name: () -> String?
+      def logo_thumbnail_url: () -> String?
+      def long_description: () -> String?
+      def pricing_models: () -> Array[Types::PricingModel]?
+      def pricing_units: () -> Array[Types::PricingUnit]?
+      def promotional_media: () -> Array[Types::PromotionalMedia]?
+      def publisher: () -> Types::SellerInformation?
+      def resources: () -> Array[Types::Resource]?
+      def review_summary: () -> Types::ReviewSummary?
+      def seller_engagements: () -> Array[Types::SellerEngagement]?
+      def short_description: () -> String?
+      def use_cases: () -> Array[Types::UseCaseEntry]?
+    end
+    def get_listing: (
+      ?locale: String,
+      ?listing_id: String
+    ) -> _GetListingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetListingResponse
+
+    interface _GetOfferResponse
+      include Smithy::Client::_Response[Types::GetOfferOutput]
+      def locale: () -> String?
+      def offer_id: () -> String?
+      def catalog: () -> String?
+      def offer_name: () -> String?
+      def expiration_time: () -> Time?
+      def available_from_time: () -> Time?
+      def seller_of_record: () -> Types::SellerInformation?
+      def associated_entities: () -> Array[Types::OfferAssociatedEntity]?
+      def agreement_proposal_id: () -> String?
+      def replacement_agreement_id: () -> String?
+      def pricing_model: () -> Types::PricingModel?
+      def badges: () -> Array[Types::PurchaseOptionBadge]?
+    end
+    def get_offer: (
+      ?locale: String,
+      ?offer_id: String
+    ) -> _GetOfferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOfferResponse
+
+    interface _GetOfferSetResponse
+      include Smithy::Client::_Response[Types::GetOfferSetOutput]
+      def locale: () -> String?
+      def offer_set_id: () -> String?
+      def catalog: () -> String?
+      def offer_set_name: () -> String?
+      def available_from_time: () -> Time?
+      def expiration_time: () -> Time?
+      def buyer_notes: () -> String?
+      def seller_of_record: () -> Types::SellerInformation?
+      def badges: () -> Array[Types::PurchaseOptionBadge]?
+      def associated_entities: () -> Array[Types::OfferSetAssociatedEntity]?
+    end
+    def get_offer_set: (
+      ?locale: String,
+      ?offer_set_id: String
+    ) -> _GetOfferSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOfferSetResponse
+
+    interface _GetOfferTermsResponse
+      include Smithy::Client::_Response[Types::GetOfferTermsOutput]
+      def locale: () -> String?
+      def offer_terms: () -> Array[Types::OfferTerm]?
+      def next_token: () -> String?
+    end
+    def get_offer_terms: (
+      ?locale: String,
+      ?offer_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetOfferTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOfferTermsResponse
+
+    interface _GetProductResponse
+      include Smithy::Client::_Response[Types::GetProductOutput]
+      def locale: () -> String?
+      def product_id: () -> String?
+      def catalog: () -> String?
+      def product_name: () -> String?
+      def manufacturer: () -> Types::SellerInformation?
+      def deployed_on_aws: () -> String?
+      def short_description: () -> String?
+      def long_description: () -> String?
+      def logo_thumbnail_url: () -> String?
+      def fulfillment_option_summaries: () -> Array[Types::FulfillmentOptionSummary]?
+      def categories: () -> Array[Types::Category]?
+      def highlights: () -> Array[String]?
+      def promotional_media: () -> Array[Types::PromotionalMedia]?
+      def resources: () -> Array[Types::Resource]?
+      def seller_engagements: () -> Array[Types::SellerEngagement]?
+      def listing_id: () -> String?
+    end
+    def get_product: (
+      ?locale: String,
+      ?product_id: String
+    ) -> _GetProductResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProductResponse
+
+    interface _ListFulfillmentOptionsResponse
+      include Smithy::Client::_Response[Types::ListFulfillmentOptionsOutput]
+      def locale: () -> String?
+      def fulfillment_options: () -> Array[Types::FulfillmentOption]?
+      def next_token: () -> String?
+    end
+    def list_fulfillment_options: (
+      ?locale: String,
+      ?product_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFulfillmentOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFulfillmentOptionsResponse
+
+    interface _ListPurchaseOptionsResponse
+      include Smithy::Client::_Response[Types::ListPurchaseOptionsOutput]
+      def purchase_options: () -> Array[Types::PurchaseOptionSummary]?
+      def next_token: () -> String?
+    end
+    def list_purchase_options: (
+      ?locale: String,
+      ?filters: Array[
+        {
+          filter_type: String,
+          filter_values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPurchaseOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPurchaseOptionsResponse
+
+    interface _SearchFacetsResponse
+      include Smithy::Client::_Response[Types::SearchFacetsOutput]
+      def total_results: () -> Integer?
+      def listing_facets: () -> Hash[String, Array[Types::ListingFacet]]?
+      def next_token: () -> String?
+    end
+    def search_facets: (
+      ?locale: String,
+      ?search_text: String,
+      ?filters: Array[
+        {
+          filter_type: String,
+          filter_values: Array[String]
+        }
+      ],
+      ?facet_types: Array[String],
+      ?next_token: String
+    ) -> _SearchFacetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchFacetsResponse
+
+    interface _SearchListingsResponse
+      include Smithy::Client::_Response[Types::SearchListingsOutput]
+      def total_results: () -> Integer?
+      def listing_summaries: () -> Array[Types::ListingSummary]?
+      def next_token: () -> String?
+    end
+    def search_listings: (
+      ?locale: String,
+      ?search_text: String,
+      ?filters: Array[
+        {
+          filter_type: String,
+          filter_values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _SearchListingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchListingsResponse
+  end
+end

@@ -1,0 +1,30 @@
+module Aws::SageMakerRuntimeHTTP2
+  module Errors
+    class InputValidationError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class InternalStreamFailure < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ModelError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def original_status_code: () -> Integer?
+      def original_message: () -> String?
+      def log_stream_arn: () -> String?
+      def error_code: () -> String?
+    end
+    class ModelStreamError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class ServiceUnavailableError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+  end
+end

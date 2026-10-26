@@ -68,8 +68,23 @@ module Aws::PCS
             parameter_value: untyped
           }
         ],
+        slurmdbd_custom_settings: Array[
+          {
+            parameter_name: untyped,
+            parameter_value: untyped
+          }
+        ],
+        cgroup_custom_settings: Array[
+          {
+            parameter_name: untyped,
+            parameter_value: untyped
+          }
+        ],
         accounting: {
           default_purge_time_in_days: untyped,
+          mode: String
+        },
+        slurm_rest: {
           mode: String
         }
       },
@@ -105,12 +120,35 @@ module Aws::PCS
         allocation_strategy: String
       },
       ?slurm_configuration: {
+        scale_down_idle_time_in_seconds: Integer,
         slurm_custom_settings: Array[
           {
             parameter_name: String,
             parameter_value: untyped
           }
+        ],
+        gres_custom_settings: Array[
+          Hash[String, String]
         ]
+      },
+      ?node_lifecycle_actions: {
+        stages: {
+          node_bootstrapped: Array[
+            {
+              name: String,
+              script_source: {
+                script_location: untyped,
+                s3_version_id: untyped,
+                checksum: untyped
+              },
+              arguments: Array[String],
+              on_error: String,
+              execution_policy: String
+            }
+          ],
+          node_ready: untyped
+        },
+        script_caching_policy: String
       },
       ?client_token: String,
       ?tags: Hash[String, String]
@@ -237,6 +275,11 @@ module Aws::PCS
       def node_id: () -> String?
       def shared_secret: () -> String?
       def endpoints: () -> Array[Types::Endpoint]?
+      def cluster_name: () -> String?
+      def compute_node_group_id: () -> String?
+      def compute_node_group_name: () -> String?
+      def node_lifecycle_actions: () -> Types::NodeLifecycleActions?
+      def scheduler_version: () -> String?
     end
     def register_compute_node_group_instance: (
       ?cluster_identifier: String,
@@ -244,7 +287,7 @@ module Aws::PCS
     ) -> _RegisterComputeNodeGroupInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterComputeNodeGroupInstanceResponse
 
     interface _TagResourceResponse
-      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Types::TagResourceResponse]
     end
     def tag_resource: (
       ?resource_arn: String,
@@ -252,7 +295,7 @@ module Aws::PCS
     ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
 
     interface _UntagResourceResponse
-      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
     end
     def untag_resource: (
       ?resource_arn: String,
@@ -274,10 +317,28 @@ module Aws::PCS
             parameter_value: untyped
           }
         ],
+        slurmdbd_custom_settings: Array[
+          {
+            parameter_name: untyped,
+            parameter_value: untyped
+          }
+        ],
+        cgroup_custom_settings: Array[
+          {
+            parameter_name: untyped,
+            parameter_value: untyped
+          }
+        ],
         accounting: {
           default_purge_time_in_days: untyped,
           mode: String
+        },
+        slurm_rest: {
+          mode: String
         }
+      },
+      ?scheduler: {
+        version: String
       }
     ) -> _UpdateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterResponse
 
@@ -304,12 +365,35 @@ module Aws::PCS
       },
       ?iam_instance_profile_arn: String,
       ?slurm_configuration: {
+        scale_down_idle_time_in_seconds: Integer,
         slurm_custom_settings: Array[
           {
             parameter_name: String,
             parameter_value: untyped
           }
+        ],
+        gres_custom_settings: Array[
+          Hash[String, String]
         ]
+      },
+      ?node_lifecycle_actions: {
+        stages: {
+          node_bootstrapped: Array[
+            {
+              name: String,
+              script_source: {
+                script_location: untyped,
+                s3_version_id: untyped,
+                checksum: untyped
+              },
+              arguments: Array[String],
+              on_error: String,
+              execution_policy: String
+            }
+          ],
+          node_ready: untyped
+        },
+        script_caching_policy: String
       },
       ?client_token: String
     ) -> _UpdateComputeNodeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComputeNodeGroupResponse

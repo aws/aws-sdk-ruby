@@ -6,6 +6,9 @@ module Aws::RedshiftData
     class ActiveStatementsExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ActiveWaitingRequestsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class BatchExecuteStatementException < Smithy::Client::ServiceError
       def message: () -> String?
       def statement_id: () -> String?

@@ -8,6 +8,7 @@ module Aws::TrustedAdvisor
     AccountRecommendationIdentifier: StringShape
     AccountRecommendationLifecycleSummary: StructureShape
     AccountRecommendationLifecycleSummaryList: ListShape
+    AwsResourceArn: StringShape
     BatchUpdateRecommendationResourceExclusionRequest: StructureShape
     BatchUpdateRecommendationResourceExclusionResponse: StructureShape
     CheckArn: StringShape
@@ -31,6 +32,8 @@ module Aws::TrustedAdvisor
     ListOrganizationRecommendationsResponse: StructureShape
     ListRecommendationResourcesRequest: StructureShape
     ListRecommendationResourcesResponse: StructureShape
+    ListRecommendationsForResourceRequest: StructureShape
+    ListRecommendationsForResourceResponse: StructureShape
     ListRecommendationsRequest: StructureShape
     ListRecommendationsResponse: StructureShape
     OrganizationRecommendation: StructureShape
@@ -44,6 +47,8 @@ module Aws::TrustedAdvisor
     RecommendationAwsService: StringShape
     RecommendationAwsServiceList: ListShape
     RecommendationCostOptimizingAggregates: StructureShape
+    RecommendationForResourceSummary: StructureShape
+    RecommendationForResourceSummaryList: ListShape
     RecommendationLanguage: EnumShape
     RecommendationLifecycleStage: EnumShape
     RecommendationPillar: EnumShape
@@ -64,6 +69,8 @@ module Aws::TrustedAdvisor
     RecommendationUpdateReason: StringShape
     ResourceNotFoundException: StructureShape
     ResourceStatus: EnumShape
+    StatusReason: EnumShape
+    StringList: ListShape
     StringMap: MapShape
     ThrottlingException: StructureShape
     UpdateOrganizationRecommendationLifecycleRequest: StructureShape

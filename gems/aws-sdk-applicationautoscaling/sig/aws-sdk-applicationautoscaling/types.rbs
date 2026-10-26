@@ -449,6 +449,8 @@ module Aws::ApplicationAutoScaling
       WorkSpacesAverageUserSessionsCapacityUtilization: String
       SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution: String
       SageMakerVariantConcurrentRequestsPerModelHighResolution: String
+      ECSServiceAverageCPUUtilizationHighResolution: String
+      ECSServiceAverageMemoryUtilizationHighResolution: String
     end
 
     class NotScaledReason

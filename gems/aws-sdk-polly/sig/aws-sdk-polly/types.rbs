@@ -1,6 +1,26 @@
 module Aws::Polly
   module Types
 
+    class AudioEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_chunk: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_chunk: String?
+    end
+
+    class CloseStreamEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteLexiconInput
       include Smithy::Schema::Structure
 
@@ -67,6 +87,17 @@ module Aws::Polly
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class FlushStreamConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor force: bool?
     end
 
     module Gender
@@ -424,6 +455,8 @@ module Aws::Polly
       OGG_OPUS: String
       OGG_VORBIS: String
       PCM: String
+      MULAW: String
+      ALAW: String
     end
 
     class PutLexiconInput
@@ -448,6 +481,15 @@ module Aws::Polly
 
     end
 
+    module QuotaCode
+      INPUT_STREAM_INBOUND_EVENT_TIMEOUT: String
+      INPUT_STREAM_TIMEOUT: String
+    end
+
+    module ServiceCode
+      POLLY: String
+    end
+
     class ServiceFailureException
       include Smithy::Schema::Structure
 
@@ -457,6 +499,21 @@ module Aws::Polly
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
     end
 
     module SpeechMarkType
@@ -475,6 +532,96 @@ module Aws::Polly
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class StartSpeechSynthesisStreamActionStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text_event: Types::TextEvent,
+        ?close_stream_event: Types::CloseStreamEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_event: Types::TextEvent?
+      attr_accessor close_stream_event: Types::CloseStreamEvent?
+
+      class TextEvent < StartSpeechSynthesisStreamActionStream
+      end
+      class CloseStreamEvent < StartSpeechSynthesisStreamActionStream
+      end
+      class Unknown < StartSpeechSynthesisStreamActionStream
+      end
+    end
+
+    class StartSpeechSynthesisStreamEventStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?audio_event: Types::AudioEvent,
+        ?stream_closed_event: Types::StreamClosedEvent,
+        ?validation_exception: Types::ValidationException,
+        ?service_quota_exceeded_exception: Types::ServiceQuotaExceededException,
+        ?service_failure_exception: Types::ServiceFailureException,
+        ?throttling_exception: Types::ThrottlingException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_event: Types::AudioEvent?
+      attr_accessor stream_closed_event: Types::StreamClosedEvent?
+      attr_accessor validation_exception: Types::ValidationException?
+      attr_accessor service_quota_exceeded_exception: Types::ServiceQuotaExceededException?
+      attr_accessor service_failure_exception: Types::ServiceFailureException?
+      attr_accessor throttling_exception: Types::ThrottlingException?
+
+      class AudioEvent < StartSpeechSynthesisStreamEventStream
+      end
+      class StreamClosedEvent < StartSpeechSynthesisStreamEventStream
+      end
+      class ValidationException < StartSpeechSynthesisStreamEventStream
+      end
+      class ServiceQuotaExceededException < StartSpeechSynthesisStreamEventStream
+      end
+      class ServiceFailureException < StartSpeechSynthesisStreamEventStream
+      end
+      class ThrottlingException < StartSpeechSynthesisStreamEventStream
+      end
+      class Unknown < StartSpeechSynthesisStreamEventStream
+      end
+    end
+
+    class StartSpeechSynthesisStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engine: String,
+        ?language_code: String,
+        ?lexicon_names: Array[String],
+        ?output_format: String,
+        ?sample_rate: String,
+        ?voice_id: String,
+        ?action_stream: Types::StartSpeechSynthesisStreamActionStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engine: String?
+      attr_accessor language_code: String?
+      attr_accessor lexicon_names: Array[String]?
+      attr_accessor output_format: String?
+      attr_accessor sample_rate: String?
+      attr_accessor voice_id: String?
+      attr_accessor action_stream: Types::StartSpeechSynthesisStreamActionStream?
+    end
+
+    class StartSpeechSynthesisStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_stream: Types::StartSpeechSynthesisStreamEventStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_stream: Types::StartSpeechSynthesisStreamEventStream?
     end
 
     class StartSpeechSynthesisTaskInput
@@ -519,6 +666,17 @@ module Aws::Polly
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor synthesis_task: Types::SynthesisTask?
+    end
+
+    class StreamClosedEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_characters: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_characters: Integer?
     end
 
     class SynthesisTask
@@ -620,6 +778,21 @@ module Aws::Polly
       FAILED: String
     end
 
+    class TextEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?text_type: String,
+        ?flush_stream_configuration: Types::FlushStreamConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor text_type: String?
+      attr_accessor flush_stream_configuration: Types::FlushStreamConfiguration?
+    end
+
     class TextLengthExceededException
       include Smithy::Schema::Structure
 
@@ -634,6 +807,32 @@ module Aws::Polly
     module TextType
       SSML: String
       TEXT: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?throttling_reasons: Array[Types::ThrottlingReason],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor throttling_reasons: Array[Types::ThrottlingReason]?
+    end
+
+    class ThrottlingReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor resource: String?
     end
 
     class UnsupportedPlsAlphabetException
@@ -656,6 +855,41 @@ module Aws::Polly
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNSUPPORTED_OPERATION: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+      INVALID_INBOUND_EVENT: String
     end
 
     class Voice
@@ -782,6 +1016,12 @@ module Aws::Polly
       Sabrina: String
       Jasmine: String
       Jihye: String
+      Ambre: String
+      Beatrice: String
+      Florian: String
+      Lennart: String
+      Lorenzo: String
+      Tiffany: String
     end
   end
 end

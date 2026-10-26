@@ -7,6 +7,31 @@ module Aws::BedrockAgentCore
   module Paginators
 
     # @api private
+    class ListABTests
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.ab_tests
+      end
+    end
+
+    # @api private
     class ListActors
       def next_tokens(data)
         next_token = data.next_token
@@ -28,6 +53,31 @@ module Aws::BedrockAgentCore
 
       def items(data)
         data.actor_summaries
+      end
+    end
+
+    # @api private
+    class ListBatchEvaluations
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.batch_evaluations
       end
     end
 
@@ -57,6 +107,31 @@ module Aws::BedrockAgentCore
     end
 
     # @api private
+    class ListMemoryExtractionJobs
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.jobs
+      end
+    end
+
+    # @api private
     class ListMemoryRecords
       def next_tokens(data)
         next_token = data.next_token
@@ -78,6 +153,81 @@ module Aws::BedrockAgentCore
 
       def items(data)
         data.memory_record_summaries
+      end
+    end
+
+    # @api private
+    class ListPaymentInstruments
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.payment_instruments
+      end
+    end
+
+    # @api private
+    class ListPaymentSessions
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.payment_sessions
+      end
+    end
+
+    # @api private
+    class ListRecommendations
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.recommendation_summaries
       end
     end
 

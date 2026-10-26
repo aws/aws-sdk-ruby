@@ -144,18 +144,18 @@ module Aws::S3Tables
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -234,7 +234,7 @@ module Aws::S3Tables
       request.send_request(options)
     end
 
-    # <p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>metadata</code> request parameter you must have the <code>s3tables:PutTableData</code> permission. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> request parameter you must have the <code>s3tables:PutTableEncryption</code> permission. </p> </li> </ul> <note> <p>Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html">Permissions requirements for S3 Tables SSE-KMS encryption</a>. </p> </note> </dd> </dl>
+    # <p>Creates a new table associated with the given namespace in a table bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html">Creating an Amazon S3 table</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTable</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>metadata</code> request parameter you must have the <code>s3tables:PutTableData</code> permission. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> request parameter you must have the <code>s3tables:PutTableEncryption</code> permission. </p> </li> <li> <p>If you use this operation with the <code>storageClassConfiguration</code> request parameter, you must have the <code>s3tables:PutTableStorageClass</code> permission.</p> </li> <li> <p>To create a table with tags, you must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTable</code> permission.</p> </li> </ul> <note> <p>Additionally, If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html">Permissions requirements for S3 Tables SSE-KMS encryption</a>. </p> </note> </dd> </dl>
     # @param [Hash, Types::CreateTableRequest] params
     # @option params [String] :table_bucket_arn
     #   <p>The Amazon Resource Name (ARN) of the table bucket to create the table in.</p>
@@ -248,6 +248,10 @@ module Aws::S3Tables
     #   <p>The metadata for the table.</p>
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   <p>The encryption configuration to use for the table. This configuration specifies the encryption algorithm and, if using SSE-KMS, the KMS key to use for encrypting the table. </p> <note> <p>If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html">Permissions requirements for S3 Tables SSE-KMS encryption</a>.</p> </note>
+    # @option params [Types::StorageClassConfiguration] :storage_class_configuration
+    #   <p>The storage class configuration for the table. If not specified, the table inherits the storage class configuration from its table bucket. Specify this parameter to override the bucket's default storage class for this table.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A map of user-defined tags that you would like to apply to the table that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize, track costs for, and control access to resources. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTable</code> permission to create a table with tags.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     table_bucket_arn: "TableBucketARN", # required
@@ -257,20 +261,66 @@ module Aws::S3Tables
     #     metadata: {
     #       # One of:
     #       iceberg: {
-    #         schema: { # required
+    #         schema: {
     #           fields: [ # required
     #             {
+    #               id: 1,
     #               name: "String", # required
     #               type: "String", # required
     #               required: false
     #             }
     #           ]
+    #         },
+    #         schema_v2: {
+    #           type: "struct" # One of: ["struct"], # required
+    #           fields: [ # required
+    #             {
+    #               id: 1, # required
+    #               name: "String", # required
+    #               type: ""null"", # required
+    #               required: false, # required
+    #               doc: "String"
+    #             }
+    #           ],
+    #           schema_id: 1,
+    #           identifier_field_ids: [1]
+    #         },
+    #         partition_spec: {
+    #           fields: [ # required
+    #             {
+    #               source_id: 1, # required
+    #               transform: "String", # required
+    #               name: "String", # required
+    #               field_id: 1
+    #             }
+    #           ],
+    #           spec_id: 1
+    #         },
+    #         write_order: {
+    #           order_id: 1, # required
+    #           fields: [ # required
+    #             {
+    #               source_id: 1, # required
+    #               transform: "String", # required
+    #               direction: "asc" # One of: ["asc", "desc"], # required
+    #               null_order: "nulls-first" # One of: ["nulls-first", "nulls-last"], # required
+    #             }
+    #           ]
+    #         },
+    #         properties: {
+    #           "String" => "String"
     #         }
     #       }
     #     },
     #     encryption_configuration: {
     #       sse_algorithm: "AES256" # One of: ["AES256", "aws:kms"], # required
     #       kms_key_arn: "String"
+    #     },
+    #     storage_class_configuration: {
+    #       storage_class: "STANDARD" # One of: ["STANDARD", "INTELLIGENT_TIERING"], # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
     #     }
     #   }
     #   options = {}
@@ -287,18 +337,28 @@ module Aws::S3Tables
       request.send_request(options)
     end
 
-    # <p>Creates a table bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> parameter you must have the <code>s3tables:PutTableBucketEncryption</code> permission.</p> </li> </ul> </dd> </dl>
+    # <p>Creates a table bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-buckets-create.html">Creating a table bucket</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:CreateTableBucket</code> permission to use this operation. </p> </li> <li> <p>If you use this operation with the optional <code>encryptionConfiguration</code> parameter you must have the <code>s3tables:PutTableBucketEncryption</code> permission.</p> </li> <li> <p>If you use this operation with the <code>storageClassConfiguration</code> request parameter, you must have the <code>s3tables:PutTableBucketStorageClass</code> permission.</p> </li> <li> <p>To create a table bucket with tags, you must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTableBucket</code> permission.</p> </li> </ul> </dd> </dl>
     # @param [Hash, Types::CreateTableBucketRequest] params
     # @option params [String] :name
     #   <p>The name for the table bucket.</p>
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   <p>The encryption configuration to use for the table bucket. This configuration specifies the default encryption settings that will be applied to all tables created in this bucket unless overridden at the table level. The configuration includes the encryption algorithm and, if using SSE-KMS, the KMS key to use.</p>
+    # @option params [Types::StorageClassConfiguration] :storage_class_configuration
+    #   <p>The default storage class configuration for the table bucket. This configuration will be applied to all new tables created in this bucket unless overridden at the table level. If not specified, the service default storage class will be used.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A map of user-defined tags that you would like to apply to the table bucket that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize and control access to resources. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3tables:TagResource</code> permission in addition to <code>s3tables:CreateTableBucket</code> permisson to create a table bucket with tags.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "TableBucketName", # required
     #     encryption_configuration: {
     #       sse_algorithm: "AES256" # One of: ["AES256", "aws:kms"], # required
     #       kms_key_arn: "String"
+    #     },
+    #     storage_class_configuration: {
+    #       storage_class: "STANDARD" # One of: ["STANDARD", "INTELLIGENT_TIERING"], # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
     #     }
     #   }
     #   options = {}
@@ -402,6 +462,25 @@ module Aws::S3Tables
       request.send_request(options)
     end
 
+    # <p>Deletes the metrics configuration for a table bucket.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:DeleteTableBucketMetricsConfiguration</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::DeleteTableBucketMetricsConfigurationRequest] params
+    # @option params [String] :table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_table_bucket_metrics_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_table_bucket_metrics_configuration(params = {}, options = {})
+      request = build_request(:delete_table_bucket_metrics_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a table bucket policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-delete">Deleting a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:DeleteTableBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::DeleteTableBucketPolicyRequest] params
     # @option params [String] :table_bucket_arn
@@ -418,6 +497,28 @@ module Aws::S3Tables
     # @return [Smithy::Schema::EmptyStructure]
     def delete_table_bucket_policy(params = {}, options = {})
       request = build_request(:delete_table_bucket_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the replication configuration for a table bucket. After deletion, new table updates will no longer be replicated to destination buckets, though existing replicated tables will remain in destination buckets.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:DeleteTableBucketReplication</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::DeleteTableBucketReplicationRequest] params
+    # @option params [String] :table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
+    # @option params [String] :version_token
+    #   <p>A version token from a previous GetTableBucketReplication call. Use this token to ensure you're deleting the expected version of the configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #     version_token: "VersionToken"
+    #   }
+    #   options = {}
+    #   response = client.delete_table_bucket_replication(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_table_bucket_replication(params = {}, options = {})
+      request = build_request(:delete_table_bucket_replication, params)
       request.send_request(options)
     end
 
@@ -443,6 +544,28 @@ module Aws::S3Tables
     # @return [Smithy::Schema::EmptyStructure]
     def delete_table_policy(params = {}, options = {})
       request = build_request(:delete_table_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the replication configuration for a specific table. After deletion, new updates to this table will no longer be replicated to destination tables, though existing replicated copies will remain in destination buckets.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:DeleteTableReplication</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::DeleteTableReplicationRequest] params
+    # @option params [String] :table_arn
+    #   <p>The Amazon Resource Name (ARN) of the table.</p>
+    # @option params [String] :version_token
+    #   <p>A version token from a previous GetTableReplication call. Use this token to ensure you're deleting the expected version of the configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_arn: "TableARN", # required
+    #     version_token: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_table_replication(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_table_replication(params = {}, options = {})
+      request = build_request(:delete_table_replication, params)
       request.send_request(options)
     end
 
@@ -512,7 +635,12 @@ module Aws::S3Tables
     #     modified_by: "AccountId", # required
     #     owner_account_id: "AccountId", # required
     #     format: "ICEBERG" # One of: ["ICEBERG"], # required
-    #     table_bucket_id: "TableBucketId"
+    #     table_bucket_id: "TableBucketId",
+    #     managed_table_information: {
+    #       replication_information: {
+    #         source_table_arn: "TableARN", # required
+    #       }
+    #     }
     #   }
     # @return [Types::GetTableResponse]
     def get_table(params = {}, options = {})
@@ -603,6 +731,28 @@ module Aws::S3Tables
       request.send_request(options)
     end
 
+    # <p>Gets the metrics configuration for a table bucket.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketMetricsConfiguration</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::GetTableBucketMetricsConfigurationRequest] params
+    # @option params [String] :table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_table_bucket_metrics_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #     id: "String"
+    #   }
+    # @return [Types::GetTableBucketMetricsConfigurationResponse]
+    def get_table_bucket_metrics_configuration(params = {}, options = {})
+      request = build_request(:get_table_bucket_metrics_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Gets details about a table bucket policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-get">Viewing a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::GetTableBucketPolicyRequest] params
     # @option params [String] :table_bucket_arn
@@ -621,6 +771,62 @@ module Aws::S3Tables
     # @return [Types::GetTableBucketPolicyResponse]
     def get_table_bucket_policy(params = {}, options = {})
       request = build_request(:get_table_bucket_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the replication configuration for a table bucket.This operation returns the IAM role, <code>versionToken</code>, and replication rules that define how tables in this bucket are replicated to other buckets.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketReplication</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::GetTableBucketReplicationRequest] params
+    # @option params [String] :table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_table_bucket_replication(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     version_token: "VersionToken", # required
+    #     configuration: { # required
+    #       role: "IAMRole", # required
+    #       rules: [ # required
+    #         {
+    #           destinations: [ # required
+    #             {
+    #               destination_table_bucket_arn: "TableBucketARN", # required
+    #             }
+    #           ]
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetTableBucketReplicationResponse]
+    def get_table_bucket_replication(params = {}, options = {})
+      request = build_request(:get_table_bucket_replication, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the storage class configuration for a specific table. This allows you to view the storage class settings that apply to an individual table, which may differ from the table bucket's default configuration.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableBucketStorageClass</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::GetTableBucketStorageClassRequest] params
+    # @option params [String] :table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_table_bucket_storage_class(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     storage_class_configuration: { # required
+    #       storage_class: "STANDARD" # One of: ["STANDARD", "INTELLIGENT_TIERING"], # required
+    #     }
+    #   }
+    # @return [Types::GetTableBucketStorageClassResponse]
+    def get_table_bucket_storage_class(params = {}, options = {})
+      request = build_request(:get_table_bucket_storage_class, params)
       request.send_request(options)
     end
 
@@ -704,7 +910,7 @@ module Aws::S3Tables
     # @option params [String] :namespace
     #   <p>The name of the namespace the table is associated with. </p>
     # @option params [String] :name
-    #   <p>The name of the maintenance job.</p>
+    #   <p>The name of the table containing the maintenance job status you want to check.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     table_bucket_arn: "TableBucketARN", # required
@@ -784,6 +990,155 @@ module Aws::S3Tables
     # @return [Types::GetTablePolicyResponse]
     def get_table_policy(params = {}, options = {})
       request = build_request(:get_table_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the expiration configuration settings for records in a table, and the status of the configuration. If the status of the configuration is <code>enabled</code>, records expire and are automatically removed from the table after the specified number of days.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableRecordExpirationConfiguration</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::GetTableRecordExpirationConfigurationRequest] params
+    # @option params [String] :table_arn
+    #   <p>The Amazon Resource Name (ARN) of the table.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_arn: "TableARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_table_record_expiration_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     configuration: { # required
+    #       status: "enabled" # One of: ["enabled", "disabled"],
+    #       settings: {
+    #         days: 1
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetTableRecordExpirationConfigurationResponse]
+    def get_table_record_expiration_configuration(params = {}, options = {})
+      request = build_request(:get_table_record_expiration_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the status, metrics, and details of the latest record expiration job for a table. This includes when the job ran, and whether it succeeded or failed. If the job ran successfully, this also includes statistics about the records that were removed.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableRecordExpirationJobStatus</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::GetTableRecordExpirationJobStatusRequest] params
+    # @option params [String] :table_arn
+    #   <p>The Amazon Resource Name (ARN) of the table.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_arn: "TableARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_table_record_expiration_job_status(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: "NotYetRun" # One of: ["NotYetRun", "Successful", "Failed", "Disabled"], # required
+    #     last_run_timestamp: Time.now,
+    #     failure_message: "String",
+    #     metrics: {
+    #       deleted_data_files: 1,
+    #       deleted_records: 1,
+    #       removed_files_size: 1
+    #     }
+    #   }
+    # @return [Types::GetTableRecordExpirationJobStatusResponse]
+    def get_table_record_expiration_job_status(params = {}, options = {})
+      request = build_request(:get_table_record_expiration_job_status, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the replication configuration for a specific table.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableReplication</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::GetTableReplicationRequest] params
+    # @option params [String] :table_arn
+    #   <p>The Amazon Resource Name (ARN) of the table.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_arn: "TableARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_table_replication(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     version_token: "String", # required
+    #     configuration: { # required
+    #       role: "IAMRole", # required
+    #       rules: [ # required
+    #         {
+    #           destinations: [ # required
+    #             {
+    #               destination_table_bucket_arn: "TableBucketARN", # required
+    #             }
+    #           ]
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetTableReplicationResponse]
+    def get_table_replication(params = {}, options = {})
+      request = build_request(:get_table_replication, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the replication status for a table, including the status of replication to each destination. This operation provides visibility into replication health and progress.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableReplicationStatus</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::GetTableReplicationStatusRequest] params
+    # @option params [String] :table_arn
+    #   <p>The Amazon Resource Name (ARN) of the table.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_arn: "TableARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_table_replication_status(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     source_table_arn: "TableARN", # required
+    #     destinations: [ # required
+    #       {
+    #         replication_status: "pending" # One of: ["pending", "completed", "failed"], # required
+    #         destination_table_bucket_arn: "TableBucketARN", # required
+    #         destination_table_arn: "TableARN",
+    #         last_successful_replicated_update: {
+    #           metadata_location: "MetadataLocation", # required
+    #           timestamp: Time.now, # required
+    #         },
+    #         failure_message: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetTableReplicationStatusResponse]
+    def get_table_replication_status(params = {}, options = {})
+      request = build_request(:get_table_replication_status, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the storage class configuration for a specific table. This allows you to view the storage class settings that apply to an individual table, which may differ from the table bucket's default configuration.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:GetTableStorageClass</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::GetTableStorageClassRequest] params
+    # @option params [String] :table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the table bucket that contains the table.</p>
+    # @option params [String] :namespace
+    #   <p>The namespace associated with the table.</p>
+    # @option params [String] :name
+    #   <p>The name of the table.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #     namespace: "NamespaceName", # required
+    #     name: "TableName", # required
+    #   }
+    #   options = {}
+    #   response = client.get_table_storage_class(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     storage_class_configuration: { # required
+    #       storage_class: "STANDARD" # One of: ["STANDARD", "INTELLIGENT_TIERING"], # required
+    #     }
+    #   }
+    # @return [Types::GetTableStorageClassResponse]
+    def get_table_storage_class(params = {}, options = {})
+      request = build_request(:get_table_storage_class, params)
       request.send_request(options)
     end
 
@@ -900,6 +1255,7 @@ module Aws::S3Tables
     #         table_arn: "TableARN", # required
     #         created_at: Time.now, # required
     #         modified_at: Time.now, # required
+    #         managed_by_service: "String",
     #         namespace_id: "NamespaceId",
     #         table_bucket_id: "TableBucketId"
     #       }
@@ -909,6 +1265,29 @@ module Aws::S3Tables
     # @return [Types::ListTablesResponse]
     def list_tables(params = {}, options = {})
       request = build_request(:list_tables, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all of the tags applied to a specified Amazon S3 Tables resource. Each tag is a label consisting of a key and value pair. Tags can help you organize, track costs for, and control access to resources. </p> <note> <p>For a list of S3 resources that support tagging, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For tables and table buckets, you must have the <code>s3tables:ListTagsForResource</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::ListTagsForResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 Tables resource that you want to list tags for. The tagged resource can be a table bucket or a table. For a list of all S3 resources that support tagging, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags">Managing tags for Amazon S3 resources</a>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #   }
+    #   options = {}
+    #   response = client.list_tags_for_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::ListTagsForResourceResponse]
+    def list_tags_for_resource(params = {}, options = {})
+      request = build_request(:list_tags_for_resource, params)
       request.send_request(options)
     end
 
@@ -971,7 +1350,26 @@ module Aws::S3Tables
       request.send_request(options)
     end
 
-    # <p>Creates a new maintenance configuration or replaces an existing table bucket policy for a table bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-add">Adding a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Sets the metrics configuration for a table bucket.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketMetricsConfiguration</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::PutTableBucketMetricsConfigurationRequest] params
+    # @option params [String] :table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #   }
+    #   options = {}
+    #   response = client.put_table_bucket_metrics_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def put_table_bucket_metrics_configuration(params = {}, options = {})
+      request = build_request(:put_table_bucket_metrics_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new table bucket policy or replaces an existing table bucket policy for a table bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-bucket-policy.html#table-bucket-policy-add">Adding a table bucket policy</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::PutTableBucketPolicyRequest] params
     # @option params [String] :table_bucket_arn
     #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
@@ -993,6 +1391,69 @@ module Aws::S3Tables
       request.send_request(options)
     end
 
+    # <p>Creates or updates the replication configuration for a table bucket. This operation defines how tables in the source bucket are replicated to destination buckets. Replication helps ensure data availability and disaster recovery across regions or accounts.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:PutTableBucketReplication</code> permission to use this operation. The IAM role specified in the configuration must have permissions to read from the source bucket and write permissions to all destination buckets.</p> </li> <li> <p>You must also have the following permissions:</p> <ul> <li> <p> <code>s3tables:GetTable</code> permission on the source table.</p> </li> <li> <p> <code>s3tables:ListTables</code> permission on the bucket containing the table.</p> </li> <li> <p> <code>s3tables:CreateTable</code> permission for the destination.</p> </li> <li> <p> <code>s3tables:CreateNamespace</code> permission for the destination.</p> </li> <li> <p> <code>s3tables:GetTableMaintenanceConfig</code> permission for the source bucket.</p> </li> <li> <p> <code>s3tables:PutTableMaintenanceConfig</code> permission for the destination bucket.</p> </li> </ul> </li> <li> <p>You must have <code>iam:PassRole</code> permission with condition allowing roles to be passed to <code>replication.s3tables.amazonaws.com</code>.</p> </li> </ul> </dd> </dl>
+    # @param [Hash, Types::PutTableBucketReplicationRequest] params
+    # @option params [String] :table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the source table bucket.</p>
+    # @option params [String] :version_token
+    #   <p>A version token from a previous GetTableBucketReplication call. Use this token to ensure you're updating the expected version of the configuration.</p>
+    # @option params [Types::TableBucketReplicationConfiguration] :configuration
+    #   <p>The replication configuration to apply, including the IAM role and replication rules.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #     version_token: "VersionToken",
+    #     configuration: { # required
+    #       role: "IAMRole", # required
+    #       rules: [ # required
+    #         {
+    #           destinations: [ # required
+    #             {
+    #               destination_table_bucket_arn: "TableBucketARN", # required
+    #             }
+    #           ]
+    #         }
+    #       ]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.put_table_bucket_replication(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     version_token: "VersionToken", # required
+    #     status: "String", # required
+    #   }
+    # @return [Types::PutTableBucketReplicationResponse]
+    def put_table_bucket_replication(params = {}, options = {})
+      request = build_request(:put_table_bucket_replication, params)
+      request.send_request(options)
+    end
+
+    # <p>Sets or updates the storage class configuration for a table bucket. This configuration serves as the default storage class for all new tables created in the bucket, allowing you to optimize storage costs at the bucket level.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableBucketStorageClass</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::PutTableBucketStorageClassRequest] params
+    # @option params [String] :table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the table bucket.</p>
+    # @option params [Types::StorageClassConfiguration] :storage_class_configuration
+    #   <p>The storage class configuration to apply to the table bucket. This configuration will serve as the default for new tables created in this bucket.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_bucket_arn: "TableBucketARN", # required
+    #     storage_class_configuration: { # required
+    #       storage_class: "STANDARD" # One of: ["STANDARD", "INTELLIGENT_TIERING"], # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.put_table_bucket_storage_class(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def put_table_bucket_storage_class(params = {}, options = {})
+      request = build_request(:put_table_bucket_storage_class, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a new maintenance configuration or replaces an existing maintenance configuration for a table. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-maintenance.html">S3 Tables maintenance</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableMaintenanceConfiguration</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::PutTableMaintenanceConfigurationRequest] params
     # @option params [String] :table_bucket_arn
@@ -1000,7 +1461,7 @@ module Aws::S3Tables
     # @option params [String] :namespace
     #   <p>The namespace of the table.</p>
     # @option params [String] :name
-    #   <p>The name of the maintenance configuration.</p>
+    #   <p>The name of the table.</p>
     # @option params [String] :type
     #   <p>The type of the maintenance configuration.</p>
     # @option params [Types::TableMaintenanceConfigurationValue] :value
@@ -1037,7 +1498,7 @@ module Aws::S3Tables
       request.send_request(options)
     end
 
-    # <p>Creates a new maintenance configuration or replaces an existing table policy for a table. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-add">Adding a table policy</a> in the <i>Amazon Simple Storage Service User Guide</i>. </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTablePolicy</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Creates a new table policy or replaces an existing table policy for a table. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-table-policy.html#table-policy-add">Adding a table policy</a> in the <i>Amazon Simple Storage Service User Guide</i>. </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTablePolicy</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::PutTablePolicyRequest] params
     # @option params [String] :table_bucket_arn
     #   <p>The Amazon Resource Name (ARN) of the table bucket that contains the table.</p>
@@ -1062,6 +1523,72 @@ module Aws::S3Tables
     # @return [Smithy::Schema::EmptyStructure]
     def put_table_policy(params = {}, options = {})
       request = build_request(:put_table_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates or updates the expiration configuration settings for records in a table, including the status of the configuration. If you enable record expiration for a table, records expire and are automatically removed from the table after the number of days that you specify.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3tables:PutTableRecordExpirationConfiguration</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::PutTableRecordExpirationConfigurationRequest] params
+    # @option params [String] :table_arn
+    #   <p>The Amazon Resource Name (ARN) of the table.</p>
+    # @option params [Types::TableRecordExpirationConfigurationValue] :value
+    #   <p>The record expiration configuration to apply to the table, including the status (<code>enabled</code> or <code>disabled</code>) and retention period in days.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_arn: "TableARN", # required
+    #     value: { # required
+    #       status: "enabled" # One of: ["enabled", "disabled"],
+    #       settings: {
+    #         days: 1
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.put_table_record_expiration_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def put_table_record_expiration_configuration(params = {}, options = {})
+      request = build_request(:put_table_record_expiration_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates or updates the replication configuration for a specific table. This operation allows you to define table-level replication independently of bucket-level replication, providing granular control over which tables are replicated and where.</p> <dl> <dt>Permissions</dt> <dd> <ul> <li> <p>You must have the <code>s3tables:PutTableReplication</code> permission to use this operation. The IAM role specified in the configuration must have permissions to read from the source table and write to all destination tables.</p> </li> <li> <p>You must also have the following permissions:</p> <ul> <li> <p> <code>s3tables:GetTable</code> permission on the source table being replicated.</p> </li> <li> <p> <code>s3tables:CreateTable</code> permission for the destination.</p> </li> <li> <p> <code>s3tables:CreateNamespace</code> permission for the destination.</p> </li> <li> <p> <code>s3tables:GetTableMaintenanceConfig</code> permission for the source table.</p> </li> <li> <p> <code>s3tables:PutTableMaintenanceConfig</code> permission for the destination table.</p> </li> </ul> </li> <li> <p>You must have <code>iam:PassRole</code> permission with condition allowing roles to be passed to <code>replication.s3tables.amazonaws.com</code>.</p> </li> </ul> </dd> </dl>
+    # @param [Hash, Types::PutTableReplicationRequest] params
+    # @option params [String] :table_arn
+    #   <p>The Amazon Resource Name (ARN) of the source table.</p>
+    # @option params [String] :version_token
+    #   <p>A version token from a previous GetTableReplication call. Use this token to ensure you're updating the expected version of the configuration.</p>
+    # @option params [Types::TableReplicationConfiguration] :configuration
+    #   <p>The replication configuration to apply to the table, including the IAM role and replication rules.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     table_arn: "TableARN", # required
+    #     version_token: "String",
+    #     configuration: { # required
+    #       role: "IAMRole", # required
+    #       rules: [ # required
+    #         {
+    #           destinations: [ # required
+    #             {
+    #               destination_table_bucket_arn: "TableBucketARN", # required
+    #             }
+    #           ]
+    #         }
+    #       ]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.put_table_replication(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     version_token: "String", # required
+    #     status: "String", # required
+    #   }
+    # @return [Types::PutTableReplicationResponse]
+    def put_table_replication(params = {}, options = {})
+      request = build_request(:put_table_replication, params)
       request.send_request(options)
     end
 
@@ -1096,6 +1623,52 @@ module Aws::S3Tables
     # @return [Smithy::Schema::EmptyStructure]
     def rename_table(params = {}, options = {})
       request = build_request(:rename_table, params)
+      request.send_request(options)
+    end
+
+    # <p>Applies one or more user-defined tags to an Amazon S3 Tables resource or updates existing tags. Each tag is a label consisting of a key and value pair. Tags can help you organize, track costs for, and control access to your resources. You can add up to 50 tags for each S3 resource. </p> <note> <p>For a list of S3 resources that support tagging, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For tables and table buckets, you must have the <code>s3tables:TagResource</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::TagResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 Tables resource that you're applying tags to. The tagged resource can be a table bucket or a table. For a list of all S3 resources that support tagging, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags">Managing tags for Amazon S3 resources</a>.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The user-defined tag that you want to add to the specified S3 Tables resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.tag_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::TagResourceResponse]
+    def tag_resource(params = {}, options = {})
+      request = build_request(:tag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes the specified user-defined tags from an Amazon S3 Tables resource. You can pass one or more tag keys. </p> <note> <p>For a list of S3 resources that support tagging, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For tables and table buckets, you must have the <code>s3tables:UntagResource</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::UntagResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 Tables resource that you're removing tags from. The tagged resource can be a table bucket or a table. For a list of all S3 resources that support tagging, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags">Managing tags for Amazon S3 resources</a>.</p>
+    # @option params [Array<String>] :tag_keys
+    #   <p>The array of tag keys that you're removing from the S3 Tables resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   }
+    #   options = {}
+    #   response = client.untag_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UntagResourceResponse]
+    def untag_resource(params = {}, options = {})
+      request = build_request(:untag_resource, params)
       request.send_request(options)
     end
 

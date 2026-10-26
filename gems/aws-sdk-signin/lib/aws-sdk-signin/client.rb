@@ -144,18 +144,18 @@ module Aws::Signin
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -210,31 +210,31 @@ module Aws::Signin
     end
 
     # CreateOAuth2Token API
-    # 
+    #
     # Path: /v1/token
     # Request Method: POST
     # Content-Type: application/json or application/x-www-form-urlencoded
-    # 
+    #
     # This API implements OAuth 2.0 flows for AWS Sign-In CLI clients, supporting both:
     # 1. Authorization code redemption (grant_type=authorization_code) - NOT idempotent
     # 2. Token refresh (grant_type=refresh_token) - Idempotent within token validity window
-    # 
+    #
     # The operation behavior is determined by the grant_type parameter in the request body:
-    # 
+    #
     # **Authorization Code Flow (NOT Idempotent):**
     # - JSON or form-encoded body with client_id, grant_type=authorization_code, code, redirect_uri, code_verifier
     # - Returns access_token, token_type, expires_in, refresh_token, and id_token
     # - Each authorization code can only be used ONCE for security (prevents replay attacks)
-    # 
+    #
     # **Token Refresh Flow (Idempotent):**
     # - JSON or form-encoded body with client_id, grant_type=refresh_token, refresh_token
     # - Returns access_token, token_type, expires_in, and refresh_token (no id_token)
     # - Multiple calls with same refresh_token return consistent results within validity window
-    # 
+    #
     # Authentication and authorization:
     # - Confidential clients: sigv4 signing required with signin:ExchangeToken permissions
     # - CLI clients (public): authn/authz skipped based on client_id & grant_type
-    # 
+    #
     # Note: This operation cannot be marked as @idempotent because it handles both idempotent
     # (token refresh) and non-idempotent (auth code redemption) flows in a single endpoint.
     # @param [Hash, Types::CreateOAuth2TokenRequest] params
@@ -272,6 +272,312 @@ module Aws::Signin
     # @return [Types::CreateOAuth2TokenResponse]
     def create_o_auth2_token(params = {}, options = {})
       request = build_request(:create_o_auth2_token, params)
+      request.send_request(options)
+    end
+
+    # Grants permission to exchange client credentials for an OAuth 2.0 access token
+    # scoped to a resource that can be used to access AWS services from applications
+    # @param [Hash, Types::CreateOAuth2TokenWithIAMRequest] params
+    # @option params [String] :grant_type
+    #   OAuth 2.0 grant type. Must be "client_credentials".
+    # @option params [String] :resource
+    #   The OAuth resource for which the access token is requested.
+    #   Example: "aws-mcp.amazonaws.com".
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     grant_type: "ClientCredentialsGrantType", # required
+    #     resource: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.create_o_auth2_token_with_iam(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     access_token: "OAuthAccessToken", # required
+    #     token_type: "BearerTokenType", # required
+    #     expires_in: 1, # required
+    #   }
+    # @return [Types::CreateOAuth2TokenWithIAMResponse]
+    def create_o_auth2_token_with_iam(params = {}, options = {})
+      request = build_request(:create_o_auth2_token_with_iam, params)
+      request.send_request(options)
+    end
+
+    # Delete console authorization configuration with automatic scope detection
+    # @param [Hash, Types::DeleteConsoleAuthorizationConfigurationInput] params
+    # @option params [String] :target_id
+    #   Target account identifier
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     target_id: "TargetId"
+    #   }
+    #   options = {}
+    #   response = client.delete_console_authorization_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     target_id: "TargetId", # required
+    #     scope: "String", # required
+    #     console_authorization_enabled: false, # required
+    #   }
+    # @return [Types::DeleteConsoleAuthorizationConfigurationOutput]
+    def delete_console_authorization_configuration(params = {}, options = {})
+      request = build_request(:delete_console_authorization_configuration, params)
+      request.send_request(options)
+    end
+
+    # Remove a permission statement from the account's SignIn resource-based policy
+    # @param [Hash, Types::DeleteResourcePermissionStatementInput] params
+    # @option params [String] :statement_id
+    #   Unique identifier of the permission statement to delete
+    # @option params [String] :client_token
+    #   Idempotency token for the request
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     statement_id: "StatementId", # required
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.delete_resource_permission_statement(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteResourcePermissionStatementOutput]
+    def delete_resource_permission_statement(params = {}, options = {})
+      request = build_request(:delete_resource_permission_statement, params)
+      request.send_request(options)
+    end
+
+    # Get console authorization configuration with automatic scope detection
+    # @param [Hash, Types::GetConsoleAuthorizationConfigurationInput] params
+    # @option params [String] :target_id
+    #   Target account identifier
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     target_id: "TargetId"
+    #   }
+    #   options = {}
+    #   response = client.get_console_authorization_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     target_id: "TargetId", # required
+    #     scope: "String", # required
+    #     console_authorization_enabled: false, # required
+    #   }
+    # @return [Types::GetConsoleAuthorizationConfigurationOutput]
+    def get_console_authorization_configuration(params = {}, options = {})
+      request = build_request(:get_console_authorization_configuration, params)
+      request.send_request(options)
+    end
+
+    # Retrieve the account's consolidated SignIn resource-based policy
+    # @param [Hash, Types::GetResourcePolicyInput] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.get_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     signin_resource_based_policy: { # required
+    #       version: "String",
+    #       statement: [
+    #         {
+    #           effect: "String",
+    #           principal: {
+    #             "String" => "String"
+    #           },
+    #           action: ["String"],
+    #           resource: "String",
+    #           condition: {
+    #             "ConditionType" => {
+    #               "String" => ["String"]
+    #             }
+    #           }
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetResourcePolicyOutput]
+    def get_resource_policy(params = {}, options = {})
+      request = build_request(:get_resource_policy, params)
+      request.send_request(options)
+    end
+
+    # Grants permission to inspect the metadata and state of an OAuth 2.0
+    # access token or refresh token
+    #
+    # Implements RFC 7662 OAuth 2.0 Token Introspection over a SigV4-authenticated
+    # endpoint. Inspects the metadata of an access_token or refresh_token issued
+    # by AWS Sign-In and returns the claims associated with it.
+    #
+    # Inactive token semantics (RFC 7662 §2.2): when the supplied token is
+    # unknown, expired, revoked, malformed, or owned by a different account,
+    # the response body is exactly { "active": false } with all other claims
+    # omitted.
+    # @param [Hash, Types::IntrospectOAuth2TokenWithIAMRequest] params
+    # @option params [String] :token
+    #   The string value of the token to introspect.
+    #   May be either an access_token or a refresh_token issued by AWS Sign-In.
+    # @option params [String] :token_type_hint
+    #   Optional hint about the type of the token submitted for introspection.
+    #   The server uses this hint to optimize lookup, but still falls back to
+    #   the other token type on miss. Allowed values: access_token, refresh_token.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     token: "IntrospectionToken", # required
+    #     token_type_hint: "TokenTypeHint"
+    #   }
+    #   options = {}
+    #   response = client.introspect_o_auth2_token_with_iam(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     active: false, # required
+    #     client_id: "String",
+    #     user_id: "String",
+    #     token_type: "IntrospectedTokenType",
+    #     exp: 1,
+    #     iat: 1,
+    #     nbf: 1,
+    #     sub: "String",
+    #     aud: "String",
+    #     iss: "String",
+    #     jti: "String",
+    #     account_id: "AccountId",
+    #     signin_session: "String",
+    #     resource: "String"
+    #   }
+    # @return [Types::IntrospectOAuth2TokenWithIAMResponse]
+    def introspect_o_auth2_token_with_iam(params = {}, options = {})
+      request = build_request(:introspect_o_auth2_token_with_iam, params)
+      request.send_request(options)
+    end
+
+    # Retrieve all permission statements in the account's SignIn resource-based policy
+    # @param [Hash, Types::ListResourcePermissionStatementsInput] params
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return
+    # @option params [String] :next_token
+    #   Token for pagination
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_resource_permission_statements(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     permission_statements: [ # required
+    #       {
+    #         sid: "StatementId", # required
+    #         condition: {
+    #           "ConditionType" => {
+    #             "String" => ["String"]
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListResourcePermissionStatementsOutput]
+    def list_resource_permission_statements(params = {}, options = {})
+      request = build_request(:list_resource_permission_statements, params)
+      request.send_request(options)
+    end
+
+    # Enable console authorization configuration with automatic scope detection
+    # @param [Hash, Types::PutConsoleAuthorizationConfigurationInput] params
+    # @option params [String] :target_id
+    #   Target account identifier
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     target_id: "TargetId"
+    #   }
+    #   options = {}
+    #   response = client.put_console_authorization_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     target_id: "TargetId", # required
+    #     scope: "String", # required
+    #     console_authorization_enabled: false, # required
+    #   }
+    # @return [Types::PutConsoleAuthorizationConfigurationOutput]
+    def put_console_authorization_configuration(params = {}, options = {})
+      request = build_request(:put_console_authorization_configuration, params)
+      request.send_request(options)
+    end
+
+    # Create a permission statement in the account's SignIn resource-based policy
+    # @param [Hash, Types::PutResourcePermissionStatementInput] params
+    # @option params [String] :source_vpc
+    #   VPC identifier to restrict console access
+    # @option params [String] :signin_source_vpce
+    #   SignIn VPC endpoint identifier
+    # @option params [String] :console_source_vpce
+    #   Console VPC endpoint identifier
+    # @option params [String] :vpc_source_ip
+    #   Source IP address within VPC
+    # @option params [String] :source_ip
+    #   Source IP address
+    # @option params [String] :requested_region
+    #   AWS region where the VPC and VPC endpoint reside
+    #   Required when sourceVpc or signinSourceVpce/consoleSourceVpce is provided
+    # @option params [String] :excluded_principal
+    #   Principal to exclude from the permission statement
+    # @option params [String] :client_token
+    #   Idempotency token for the request
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     source_vpc: "SourceVpc",
+    #     signin_source_vpce: "SourceVpce",
+    #     console_source_vpce: "SourceVpce",
+    #     vpc_source_ip: "VpcSourceIp",
+    #     source_ip: "SourceIp",
+    #     requested_region: "RequestedRegion",
+    #     excluded_principal: "ExcludedPrincipal",
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.put_resource_permission_statement(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     statement_id: "StatementId", # required
+    #   }
+    # @return [Types::PutResourcePermissionStatementOutput]
+    def put_resource_permission_statement(params = {}, options = {})
+      request = build_request(:put_resource_permission_statement, params)
+      request.send_request(options)
+    end
+
+    # Grants permission to revoke an OAuth 2.0 refresh token and its associated refresh tokens
+    #
+    # Revokes a refresh_token issued by AWS Sign-In, invalidating the entire token
+    # chain so that the refresh_token can no longer be used to mint new access_tokens.
+    #
+    # Idempotency: revoking an already-revoked, expired, or otherwise invalid token
+    # still returns 200 OK with an empty body. Only the refresh_token type is accepted.
+    # @param [Hash, Types::RevokeOAuth2TokenWithIAMRequest] params
+    # @option params [String] :token
+    #   The refresh_token to revoke. Must be a refresh_token issued by AWS
+    #   Sign-In (prefix "ASOR"); access_tokens are not accepted for revocation.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     token: "RevocationToken", # required
+    #   }
+    #   options = {}
+    #   response = client.revoke_o_auth2_token_with_iam(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::RevokeOAuth2TokenWithIAMResponse]
+    def revoke_o_auth2_token_with_iam(params = {}, options = {})
+      request = build_request(:revoke_o_auth2_token_with_iam, params)
       request.send_request(options)
     end
 

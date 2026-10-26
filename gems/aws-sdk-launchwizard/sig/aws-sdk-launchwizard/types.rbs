@@ -1,6 +1,26 @@
 module Aws::LaunchWizard
   module Types
 
+    class AccountConstraint
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?management_account: Types::ManagementAccountConstraint,
+        ?delegated_admin: Types::DelegatedAdminConstraint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor management_account: Types::ManagementAccountConstraint?
+      attr_accessor delegated_admin: Types::DelegatedAdminConstraint?
+
+      class ManagementAccount < AccountConstraint
+      end
+      class DelegatedAdmin < AccountConstraint
+      end
+      class Unknown < AccountConstraint
+      end
+    end
+
     class CreateDeploymentInput
       include Smithy::Schema::Structure
 
@@ -31,6 +51,17 @@ module Aws::LaunchWizard
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor deployment_id: String?
+    end
+
+    class DelegatedAdminConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
     end
 
     class DeleteDeploymentInput
@@ -82,6 +113,7 @@ module Aws::LaunchWizard
         ?pattern_name: String,
         ?status: String,
         ?created_at: Time,
+        ?modified_at: Time,
         ?specifications: Hash[String, String],
         ?resource_group: String,
         ?deleted_at: Time,
@@ -96,6 +128,7 @@ module Aws::LaunchWizard
       attr_accessor pattern_name: String?
       attr_accessor status: String?
       attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
       attr_accessor specifications: Hash[String, String]?
       attr_accessor resource_group: String?
       attr_accessor deleted_at: Time?
@@ -113,6 +146,7 @@ module Aws::LaunchWizard
         ?pattern_name: String,
         ?status: String,
         ?created_at: Time,
+        ?modified_at: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -122,6 +156,7 @@ module Aws::LaunchWizard
       attr_accessor pattern_name: String?
       attr_accessor status: String?
       attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
     end
 
     class DeploymentEventDataSummary
@@ -133,6 +168,7 @@ module Aws::LaunchWizard
         ?status: String,
         ?status_reason: String,
         ?timestamp: Time,
+        ?metadata: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -141,6 +177,7 @@ module Aws::LaunchWizard
       attr_accessor status: String?
       attr_accessor status_reason: String?
       attr_accessor timestamp: Time?
+      attr_accessor metadata: Hash[String, String]?
     end
 
     class DeploymentFilter
@@ -159,6 +196,42 @@ module Aws::LaunchWizard
     module DeploymentFilterKey
       WORKLOAD_NAME: String
       DEPLOYMENT_STATUS: String
+    end
+
+    class DeploymentPatternVersionDataSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_pattern_version_name: String,
+        ?description: String,
+        ?documentation_url: String,
+        ?workload_name: String,
+        ?deployment_pattern_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_pattern_version_name: String?
+      attr_accessor description: String?
+      attr_accessor documentation_url: String?
+      attr_accessor workload_name: String?
+      attr_accessor deployment_pattern_name: String?
+    end
+
+    class DeploymentPatternVersionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module DeploymentPatternVersionFilterKey
+      DEPLOYMENT_PATTERN_VERSION_NAME: String
     end
 
     class DeploymentSpecificationsField
@@ -190,6 +263,11 @@ module Aws::LaunchWizard
       FAILED: String
       IN_PROGRESS: String
       VALIDATING: String
+      UPDATE_IN_PROGRESS: String
+      UPDATE_COMPLETED: String
+      UPDATE_FAILED: String
+      UPDATE_ROLLBACK_COMPLETED: String
+      UPDATE_ROLLBACK_FAILED: String
     end
 
     module EventStatus
@@ -223,6 +301,32 @@ module Aws::LaunchWizard
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor deployment: Types::DeploymentData?
+    end
+
+    class GetDeploymentPatternVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?deployment_pattern_name: String,
+        ?deployment_pattern_version_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor deployment_pattern_name: String?
+      attr_accessor deployment_pattern_version_name: String?
+    end
+
+    class GetDeploymentPatternVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_pattern_version: Types::DeploymentPatternVersionDataSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_pattern_version: Types::DeploymentPatternVersionDataSummary?
     end
 
     class GetWorkloadDeploymentPatternInput
@@ -307,6 +411,38 @@ module Aws::LaunchWizard
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor deployment_events: Array[Types::DeploymentEventDataSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentPatternVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?deployment_pattern_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::DeploymentPatternVersionFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor deployment_pattern_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::DeploymentPatternVersionFilter]?
+    end
+
+    class ListDeploymentPatternVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_pattern_versions: Array[Types::DeploymentPatternVersionDataSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_pattern_versions: Array[Types::DeploymentPatternVersionDataSummary]?
       attr_accessor next_token: String?
     end
 
@@ -414,6 +550,15 @@ module Aws::LaunchWizard
       attr_accessor next_token: String?
     end
 
+    class ManagementAccountConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class ResourceLimitException
       include Smithy::Schema::Structure
 
@@ -480,6 +625,38 @@ module Aws::LaunchWizard
 
     end
 
+    class UpdateDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?specifications: Hash[String, String],
+        ?workload_version_name: String,
+        ?deployment_pattern_version_name: String,
+        ?dry_run: bool,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor specifications: Hash[String, String]?
+      attr_accessor workload_version_name: String?
+      attr_accessor deployment_pattern_version_name: String?
+      attr_accessor dry_run: bool?
+      attr_accessor force: bool?
+    end
+
+    class UpdateDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment: Types::DeploymentDataSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment: Types::DeploymentDataSummary?
+    end
+
     class ValidationException
       include Smithy::Schema::Structure
 
@@ -497,20 +674,22 @@ module Aws::LaunchWizard
       def initialize: (
         ?workload_name: String,
         ?display_name: String,
+        ?status: String,
+        ?account_constraints: Array[Types::AccountConstraint],
         ?description: String,
         ?documentation_url: String,
         ?icon_url: String,
-        ?status: String,
         ?status_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor workload_name: String?
       attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor account_constraints: Array[Types::AccountConstraint]?
       attr_accessor description: String?
       attr_accessor documentation_url: String?
       attr_accessor icon_url: String?
-      attr_accessor status: String?
       attr_accessor status_message: String?
     end
 
@@ -520,11 +699,15 @@ module Aws::LaunchWizard
       def initialize: (
         ?workload_name: String,
         ?display_name: String,
+        ?status: String,
+        ?account_constraints: Array[Types::AccountConstraint],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor workload_name: String?
       attr_accessor display_name: String?
+      attr_accessor status: String?
+      attr_accessor account_constraints: Array[Types::AccountConstraint]?
     end
 
     class WorkloadDeploymentPatternData
@@ -534,10 +717,12 @@ module Aws::LaunchWizard
         ?workload_name: String,
         ?deployment_pattern_name: String,
         ?workload_version_name: String,
+        ?deployment_pattern_version_name: String,
         ?display_name: String,
         ?description: String,
         ?status: String,
         ?status_message: String,
+        ?account_constraints: Array[Types::AccountConstraint],
         ?specifications: Array[Types::DeploymentSpecificationsField],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -545,10 +730,12 @@ module Aws::LaunchWizard
       attr_accessor workload_name: String?
       attr_accessor deployment_pattern_name: String?
       attr_accessor workload_version_name: String?
+      attr_accessor deployment_pattern_version_name: String?
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor status: String?
       attr_accessor status_message: String?
+      attr_accessor account_constraints: Array[Types::AccountConstraint]?
       attr_accessor specifications: Array[Types::DeploymentSpecificationsField]?
     end
 
@@ -559,20 +746,24 @@ module Aws::LaunchWizard
         ?workload_name: String,
         ?deployment_pattern_name: String,
         ?workload_version_name: String,
+        ?deployment_pattern_version_name: String,
         ?display_name: String,
         ?description: String,
         ?status: String,
         ?status_message: String,
+        ?account_constraints: Array[Types::AccountConstraint],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor workload_name: String?
       attr_accessor deployment_pattern_name: String?
       attr_accessor workload_version_name: String?
+      attr_accessor deployment_pattern_version_name: String?
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor status: String?
       attr_accessor status_message: String?
+      attr_accessor account_constraints: Array[Types::AccountConstraint]?
     end
 
     module WorkloadDeploymentPatternStatus

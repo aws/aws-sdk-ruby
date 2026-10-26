@@ -72,7 +72,10 @@ module Aws::KinesisVideo
       ?media_type: String,
       ?kms_key_id: String,
       ?data_retention_in_hours: Integer,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?stream_storage_configuration: {
+        default_storage_tier: String
+      }
     ) -> _CreateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStreamResponse
 
     interface _DeleteEdgeConfigurationResponse
@@ -171,6 +174,17 @@ module Aws::KinesisVideo
       ?stream_name: String,
       ?stream_arn: String
     ) -> _DescribeStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamResponse
+
+    interface _DescribeStreamStorageConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeStreamStorageConfigurationOutput]
+      def stream_name: () -> String?
+      def stream_arn: () -> String?
+      def stream_storage_configuration: () -> Types::StreamStorageConfiguration?
+    end
+    def describe_stream_storage_configuration: (
+      ?stream_name: String,
+      ?stream_arn: String
+    ) -> _DescribeStreamStorageConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStreamStorageConfigurationResponse
 
     interface _GetDataEndpointResponse
       include Smithy::Client::_Response[Types::GetDataEndpointOutput]
@@ -410,5 +424,17 @@ module Aws::KinesisVideo
       ?device_name: String,
       ?media_type: String
     ) -> _UpdateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamResponse
+
+    interface _UpdateStreamStorageConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateStreamStorageConfigurationOutput]
+    end
+    def update_stream_storage_configuration: (
+      ?stream_name: String,
+      ?stream_arn: String,
+      ?current_version: String,
+      ?stream_storage_configuration: {
+        default_storage_tier: String
+      }
+    ) -> _UpdateStreamStorageConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamStorageConfigurationResponse
   end
 end

@@ -6,15 +6,19 @@ module Aws::CloudWatch
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>Represents an individual contributor to a multi-timeseries alarm, containing information about a specific time series and its contribution to the alarm's state.</p>
+    # <p>Represents an individual contributor to a multi-timeseries alarm, containing
+    #             information about a specific time series and its contribution to the alarm's
+    #             state.</p>
     # @!attribute contributor_id
     #   <p>The unique identifier for this alarm contributor.</p>
     #   @return [String]
     # @!attribute contributor_attributes
-    #   <p>A map of attributes that describe the contributor, such as metric dimensions and other identifying characteristics.</p>
+    #   <p>A map of attributes that describe the contributor, such as metric dimensions and other
+    #               identifying characteristics.</p>
     #   @return [Hash<String, String>]
     # @!attribute state_reason
-    #   <p>An explanation for the contributor's current state, providing context about why it is in its current condition.</p>
+    #   <p>An explanation for the contributor's current state, providing context about why it is
+    #               in its current condition.</p>
     #   @return [String]
     # @!attribute state_transitioned_timestamp
     #   <p>The timestamp when the contributor last transitioned to its current state.</p>
@@ -35,7 +39,8 @@ module Aws::CloudWatch
     #   <p>The descriptive name for the alarm.</p>
     #   @return [String]
     # @!attribute alarm_contributor_id
-    #   <p>The unique identifier of the alarm contributor associated with this history item, if applicable.</p>
+    #   <p>The unique identifier of the alarm contributor associated with this history item, if
+    #               applicable.</p>
     #   @return [String]
     # @!attribute alarm_type
     #   <p>The type of alarm, either metric alarm or composite alarm.</p>
@@ -53,7 +58,9 @@ module Aws::CloudWatch
     #   <p>Data about the alarm, in JSON format.</p>
     #   @return [String]
     # @!attribute alarm_contributor_attributes
-    #   <p>A map of attributes that describe the alarm contributor associated with this history item, providing context about the contributor's characteristics at the time of the event.</p>
+    #   <p>A map of attributes that describe the alarm contributor associated with this history
+    #               item, providing context about the contributor's characteristics at the time of the
+    #               event.</p>
     #   @return [Hash<String, String>]
     class AlarmHistoryItem < Struct.new(
       nil,
@@ -70,11 +77,76 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Summary information about an alarm mute rule, including its name, status, and
+    #             configuration details.</p>
+    # @!attribute alarm_mute_rule_arn
+    #   <p>The Amazon Resource Name (ARN) of the alarm mute rule.</p>
+    #   @return [String]
+    # @!attribute expire_date
+    #   <p>The date and time when the mute rule expires and is no longer evaluated. This field
+    #               is only present if an expiration date was configured.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the alarm mute rule. Valid values are <code>SCHEDULED</code>,
+    #                   <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>
+    #   @return [String]
+    # @!attribute mute_type
+    #   <p>Indicates whether the mute rule is one-time or recurring. Valid values are
+    #                   <code>ONE_TIME</code> or <code>RECURRING</code>.</p>
+    #   @return [String]
+    # @!attribute last_updated_timestamp
+    #   <p>The date and time when the mute rule was last updated.</p>
+    #   @return [Time]
+    class AlarmMuteRuleSummary < Struct.new(
+      nil,
+      :alarm_mute_rule_arn,
+      :expire_date,
+      :status,
+      :mute_type,
+      :last_updated_timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration that determines how a PromQL alarm evaluates its
+    #             contributors, including the query to run and the durations that define when contributors
+    #             transition between states.</p>
+    # @!attribute query
+    #   <p>The PromQL query that the alarm evaluates. The query must return a result of vector
+    #               type. Each entry in the vector result represents an alarm contributor.</p>
+    #   @return [String]
+    # @!attribute pending_period
+    #   <p>The duration, in seconds, that a contributor must be continuously breaching before
+    #               it transitions to the <code>ALARM</code> state.</p>
+    #   @return [Integer]
+    # @!attribute recovery_period
+    #   <p>The duration, in seconds, that a contributor must continuously not be breaching
+    #               before it transitions back to the <code>OK</code> state.</p>
+    #   @return [Integer]
+    class AlarmPromQLCriteria < Struct.new(
+      nil,
+      :query,
+      :pending_period,
+      :recovery_period,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An anomaly detection model associated with a particular CloudWatch metric, statistic,
     #             or metric math expression. You can use the model to display a band of expected, normal
     #             values when the metric is graphed.</p>
     #          <p>If you have enabled unified cross-account observability, and this account is a
     #             monitoring account, the metric can be in the same account or a source account.</p>
+    # @!attribute anomaly_detector_id
+    #   <p>The unique identifier of the anomaly detector.</p>
+    #            <note>
+    #               <p>The identifier does not restrict access to a specific anomaly detector in an IAM
+    #                   policy. Permissions for anomaly detector operations apply to all anomaly detectors
+    #                   in the account.</p>
+    #            </note>
+    #   @return [String]
     # @!attribute namespace
     #   <p>The namespace of the metric associated with the anomaly detection model.</p>
     #   @deprecated
@@ -116,6 +188,7 @@ module Aws::CloudWatch
     #   @return [Types::MetricMathAnomalyDetector]
     class AnomalyDetector < Struct.new(
       nil,
+      :anomaly_detector_id,
       :namespace,
       :metric_name,
       :dimensions,
@@ -149,6 +222,41 @@ module Aws::CloudWatch
       nil,
       :excluded_time_ranges,
       :metric_timezone,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dataset_identifier
+    #   <p>Specifies the identifier of the dataset that you want to associate the KMS key
+    #               with. For the <code>default</code> dataset, you can specify either
+    #               <code>default</code> or the full dataset Amazon Resource Name (ARN) in the format
+    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>Specifies the Amazon Resource Name (ARN) of the customer managed KMS key to
+    #               associate with the dataset. The key must be a symmetric encryption KMS key
+    #               (<code>SYMMETRIC_DEFAULT</code>) in the same Amazon Web Services Region as the
+    #               dataset.</p>
+    #            <p>The ARN must be in the format
+    #               <code>arn:aws:kms:<i>Region</i>:<i>account-id</i>:key/<i>key-id</i>
+    #               </code>.
+    #               Key IDs, aliases, and alias ARNs are not accepted.</p>
+    #            <p>For more information about KMS key ARNs, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key ARN</a> in
+    #               the <i>Amazon Web Services Key Management Service Developer
+    #                   Guide</i>.</p>
+    #   @return [String]
+    class AssociateDatasetKmsKeyInput < Struct.new(
+      nil,
+      :dataset_identifier,
+      :kms_key_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class AssociateDatasetKmsKeyOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -205,14 +313,14 @@ module Aws::CloudWatch
     # @!attribute actions_suppressed_by
     #   <p> When the value is <code>ALARM</code>, it means that the actions are suppressed
     #               because the suppressor alarm is in <code>ALARM</code> When the value is
-    #               <code>WaitPeriod</code>, it means that the actions are suppressed because the
+    #                   <code>WaitPeriod</code>, it means that the actions are suppressed because the
     #               composite alarm is waiting for the suppressor alarm to go into into the
-    #               <code>ALARM</code> state. The maximum waiting time is as specified in
-    #               <code>ActionsSuppressorWaitPeriod</code>. After this time, the composite alarm
+    #                   <code>ALARM</code> state. The maximum waiting time is as specified in
+    #                   <code>ActionsSuppressorWaitPeriod</code>. After this time, the composite alarm
     #               performs its actions. When the value is <code>ExtensionPeriod</code>, it means that the
     #               actions are suppressed because the composite alarm is waiting after the suppressor alarm
     #               went out of the <code>ALARM</code> state. The maximum waiting time is as specified in
-    #               <code>ActionsSuppressorExtensionPeriod</code>. After this time, the composite alarm
+    #                   <code>ActionsSuppressorExtensionPeriod</code>. After this time, the composite alarm
     #               performs its actions. </p>
     #   @return [String]
     # @!attribute actions_suppressed_reason
@@ -286,6 +394,38 @@ module Aws::CloudWatch
     class ConflictException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the resource ARN and optional metric selections for a
+    #             <code>CreateResourceMetricsConfiguration</code> request.</p>
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to enable detailed
+    #               monitoring for.</p>
+    #   @return [String]
+    # @!attribute metric_selections
+    #   <p>Specifies which metrics Amazon CloudWatch collects for the resource. If you omit
+    #               this parameter, Amazon CloudWatch collects all available detailed metrics for the
+    #               resource.</p>
+    #   @return [Array<Types::ResourceMetricSelection>]
+    class CreateResourceMetricsConfigurationInput < Struct.new(
+      nil,
+      :resource_arn,
+      :metric_selections,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns the newly created resource metrics configuration.</p>
+    # @!attribute resource_metrics_configuration
+    #   <p>The resource metrics configuration that was created by this operation.</p>
+    #   @return [Types::ResourceMetricsConfiguration]
+    class CreateResourceMetricsConfigurationOutput < Struct.new(
+      nil,
+      :resource_metrics_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -400,6 +540,17 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute alarm_mute_rule_name
+    #   <p>The name of the alarm mute rule to delete.</p>
+    #   @return [String]
+    class DeleteAlarmMuteRuleInput < Struct.new(
+      nil,
+      :alarm_mute_rule_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute alarm_names
     #   <p>The alarms to be deleted. Do not enclose the alarm names in quote marks.</p>
     #   @return [Array<String>]
@@ -411,6 +562,10 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute anomaly_detector_id
+    #   <p>Specifies the unique identifier of the anomaly detector to delete. If you specify
+    #               this parameter, you do not need to specify a metric to identify the detector.</p>
+    #   @return [String]
     # @!attribute namespace
     #   <p>The namespace associated with the anomaly detection model to delete.</p>
     #   @deprecated
@@ -457,12 +612,12 @@ module Aws::CloudWatch
     #               </li>
     #               <li>
     #                  <p>the <code>MetricMathAnomalyDetector</code> parameters of
-    #                       <code>DeleteAnomalyDetectorInput</code>
+    #                           <code>DeleteAnomalyDetectorInput</code>
     #                  </p>
     #               </li>
     #            </ul>
     #            <p>Instead, specify the single metric anomaly detector attributes as part of the
-    #               <code>SingleMetricAnomalyDetector</code> property.</p>
+    #                   <code>SingleMetricAnomalyDetector</code> property.</p>
     #   @return [Types::SingleMetricAnomalyDetector]
     # @!attribute metric_math_anomaly_detector
     #   <p>The metric math anomaly detector to be deleted.</p>
@@ -490,15 +645,16 @@ module Aws::CloudWatch
     #               </li>
     #               <li>
     #                  <p>the <code>SingleMetricAnomalyDetector</code> parameters of
-    #                       <code>DeleteAnomalyDetectorInput</code>
+    #                           <code>DeleteAnomalyDetectorInput</code>
     #                  </p>
     #               </li>
     #            </ul>
     #            <p>Instead, specify the metric math anomaly detector attributes as part of the
-    #               <code>MetricMathAnomalyDetector</code> property.</p>
+    #                   <code>MetricMathAnomalyDetector</code> property.</p>
     #   @return [Types::MetricMathAnomalyDetector]
     class DeleteAnomalyDetectorInput < Struct.new(
       nil,
+      :anomaly_detector_id,
       :namespace,
       :metric_name,
       :dimensions,
@@ -577,11 +733,34 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies the resource ARN for a <code>DeleteResourceMetricsConfiguration</code>
+    #             request.</p>
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to delete the
+    #               resource metrics configuration for.</p>
+    #   @return [String]
+    class DeleteResourceMetricsConfigurationInput < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>No data is returned.</p>
+    class DeleteResourceMetricsConfigurationOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute alarm_name
     #   <p>The name of the alarm for which to retrieve contributor information.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token returned by a previous call to indicate that there is more data available.</p>
+    #   <p>The token returned by a previous call to indicate that there is more data
+    #               available.</p>
     #   @return [String]
     class DescribeAlarmContributorsInput < Struct.new(
       nil,
@@ -593,7 +772,8 @@ module Aws::CloudWatch
     end
 
     # @!attribute alarm_contributors
-    #   <p>A list of alarm contributors that provide details about the individual time series contributing to the alarm's state.</p>
+    #   <p>A list of alarm contributors that provide details about the individual time series
+    #               contributing to the alarm's state.</p>
     #   @return [Array<Types::AlarmContributor>]
     # @!attribute next_token
     #   <p>The token that marks the start of the next batch of returned results.</p>
@@ -611,11 +791,13 @@ module Aws::CloudWatch
     #   <p>The name of the alarm.</p>
     #   @return [String]
     # @!attribute alarm_contributor_id
-    #   <p>The unique identifier of a specific alarm contributor to filter the alarm history results.</p>
+    #   <p>The unique identifier of a specific alarm contributor to filter the alarm history
+    #               results.</p>
     #   @return [String]
     # @!attribute alarm_types
-    #   <p>Use this parameter to specify whether you want the operation to return metric alarms
-    #               or composite alarms. If you omit this parameter, only metric alarms are returned.</p>
+    #   <p>Use this parameter to specify whether you want the operation to return metric alarms,
+    #               composite alarms, or log alarms. If you omit this parameter, only metric alarms are
+    #               returned.</p>
     #   @return [Array<String>]
     # @!attribute history_item_type
     #   <p>The type of alarm histories to retrieve.</p>
@@ -635,7 +817,7 @@ module Aws::CloudWatch
     #   @return [String]
     # @!attribute scan_by
     #   <p>Specified whether to return the newest or oldest alarm history first. Specify
-    #               <code>TimestampDescending</code> to have the newest event history returned first,
+    #                   <code>TimestampDescending</code> to have the newest event history returned first,
     #               and specify <code>TimestampAscending</code> to have the oldest history returned
     #               first.</p>
     #   @return [String]
@@ -729,14 +911,16 @@ module Aws::CloudWatch
     #               <code>AlarmNames</code>.</p>
     #   @return [String]
     # @!attribute alarm_types
-    #   <p>Use this parameter to specify whether you want the operation to return metric alarms
-    #               or composite alarms. If you omit this parameter, only metric alarms are returned, even
-    #               if composite alarms exist in the account.</p>
+    #   <p>Use this parameter to specify whether you want the operation to return metric alarms,
+    #               composite alarms, or log alarms. If you omit this parameter, only metric alarms are
+    #               returned, even if composite alarms or log alarms exist in the account.</p>
     #            <p>For example, if you omit this parameter or specify <code>MetricAlarms</code>, the
-    #               operation returns only a list of metric alarms. It does not return any composite alarms,
-    #               even if composite alarms exist in the account.</p>
+    #               operation returns only a list of metric alarms. It does not return any composite alarms
+    #               or log alarms, even if they exist in the account.</p>
     #            <p>If you specify <code>CompositeAlarms</code>, the operation returns only a list of
-    #               composite alarms, and does not return any metric alarms.</p>
+    #               composite alarms, and does not return any metric alarms or log alarms.</p>
+    #            <p>If you specify <code>LogAlarms</code>, the operation returns only a list of log
+    #               alarms, and does not return any metric alarms or composite alarms.</p>
     #   @return [Array<String>]
     # @!attribute children_of_alarm_name
     #   <p>If you use this parameter and specify the name of a composite alarm, the operation
@@ -768,8 +952,8 @@ module Aws::CloudWatch
     #            <note>
     #               <p>Only the Alarm Name and ARN are returned by this operation when you use this
     #                   parameter. To get complete information about these alarms, perform another
-    #                   <code>DescribeAlarms</code> operation and specify the parent alarm names in the
-    #                   <code>AlarmNames</code> parameter.</p>
+    #                       <code>DescribeAlarms</code> operation and specify the parent alarm names in the
+    #                       <code>AlarmNames</code> parameter.</p>
     #            </note>
     #   @return [String]
     # @!attribute state_value
@@ -810,6 +994,9 @@ module Aws::CloudWatch
     # @!attribute metric_alarms
     #   <p>The information about any metric alarms returned by the operation.</p>
     #   @return [Array<Types::MetricAlarm>]
+    # @!attribute log_alarms
+    #   <p>The information about any log alarms returned by the operation.</p>
+    #   @return [Array<Types::LogAlarm>]
     # @!attribute next_token
     #   <p>The token that marks the start of the next batch of returned results.</p>
     #   @return [String]
@@ -817,12 +1004,19 @@ module Aws::CloudWatch
       nil,
       :composite_alarms,
       :metric_alarms,
+      :log_alarms,
       :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute anomaly_detector_ids
+    #   <p>Specifies the unique identifiers of the anomaly detectors to describe. You can specify
+    #               up to 50 identifiers. If you specify this parameter, you cannot also specify the
+    #               <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>, or
+    #               <code>AnomalyDetectorTypes</code> metric filters.</p>
+    #   @return [Array<String>]
     # @!attribute next_token
     #   <p>Use the token returned by the previous operation to request the next page of
     #               results.</p>
@@ -831,7 +1025,7 @@ module Aws::CloudWatch
     #   <p>The maximum number of results to return in one operation. The maximum value that you
     #               can specify is 100.</p>
     #            <p>To retrieve the remaining results, make another call with the returned
-    #               <code>NextToken</code> value. </p>
+    #                   <code>NextToken</code> value. </p>
     #   @return [Integer]
     # @!attribute namespace
     #   <p>Limits the results to only the anomaly detection models that are associated with the
@@ -849,11 +1043,12 @@ module Aws::CloudWatch
     #   @return [Array<Types::Dimension>]
     # @!attribute anomaly_detector_types
     #   <p>The anomaly detector types to request when using
-    #               <code>DescribeAnomalyDetectorsInput</code>. If empty, defaults to
-    #               <code>SINGLE_METRIC</code>.</p>
+    #                   <code>DescribeAnomalyDetectorsInput</code>. If empty, defaults to
+    #                   <code>SINGLE_METRIC</code>.</p>
     #   @return [Array<String>]
     class DescribeAnomalyDetectorsInput < Struct.new(
       nil,
+      :anomaly_detector_ids,
       :next_token,
       :max_results,
       :namespace,
@@ -923,7 +1118,7 @@ module Aws::CloudWatch
     # @!attribute name
     #   <p>The name of the dimension. Dimension names must contain only ASCII characters, must
     #               include at least one non-whitespace character, and cannot start with a colon
-    #               (<code>:</code>). ASCII control characters are not supported as part of dimension
+    #                   (<code>:</code>). ASCII control characters are not supported as part of dimension
     #               names.</p>
     #   @return [String]
     # @!attribute value
@@ -991,6 +1186,27 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute dataset_identifier
+    #   <p>Specifies the identifier of the dataset from which to remove the KMS key
+    #               association. For the <code>default</code> dataset, you can specify either
+    #               <code>default</code> or the full dataset Amazon Resource Name (ARN) in the format
+    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>
+    #   @return [String]
+    class DisassociateDatasetKmsKeyInput < Struct.new(
+      nil,
+      :dataset_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DisassociateDatasetKmsKeyOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute alarm_names
     #   <p>The names of the alarms.</p>
     #   @return [Array<String>]
@@ -1028,28 +1244,27 @@ module Aws::CloudWatch
 
     # <p>An entity associated with metrics, to allow for finding related telemetry. An entity
     #             is typically a resource or service within your system. For example, metrics from an
-    #             Amazon EC2 instance could be associated with that instance as the entity. 
-    #             Similarly, metrics from a service that you own could be associated with that service as 
+    #                 Amazon EC2 instance could be associated with that instance as the entity.
+    #             Similarly, metrics from a service that you own could be associated with that service as
     #             the entity.</p>
     # @!attribute key_attributes
-    #   <p>The attributes of the entity which identify the specific entity, as a list of 
+    #   <p>The attributes of the entity which identify the specific entity, as a list of
     #               key-value pairs. Entities with the same <code>KeyAttributes</code> are considered to be
     #               the same entity. For an entity to be valid, the <code>KeyAttributes</code> must exist
     #               and be formatted correctly.</p>
     #            <p>There are five allowed attributes (key names): <code>Type</code>,
-    #               <code>ResourceType</code>, <code>Identifier</code>, <code>Name</code>, and
-    #               <code>Environment</code>.</p>
-    #            <p>For details about how to use the key attributes to specify an entity, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How 
-    #               to add related 
-    #               information to telemetry</a> in the <i>CloudWatch User 
-    #               Guide</i>.</p>
+    #                   <code>ResourceType</code>, <code>Identifier</code>, <code>Name</code>, and
+    #                   <code>Environment</code>.</p>
+    #            <p>For details about how to use the key attributes to specify an entity, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How
+    #                   to add related information to telemetry</a> in the <i>CloudWatch
+    #                   User Guide</i>.</p>
     #   @return [Hash<String, String>]
     # @!attribute attributes
     #   <p>Additional attributes of the entity that are not used to specify the identity of the
     #               entity. A list of key-value pairs.</p>
-    #            <p>For details about how to use the attributes, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How 
-    #               to add related information to 
-    #               telemetry</a> in the <i>CloudWatch User Guide</i>.</p>
+    #            <p>For details about how to use the attributes, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How
+    #                   to add related information to telemetry</a> in the <i>CloudWatch
+    #                   User Guide</i>.</p>
     #   @return [Hash<String, String>]
     class Entity < Struct.new(
       nil,
@@ -1060,8 +1275,8 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A set of metrics that are associated with an entity, such as a specific service
-    #             or resource. Contains the entity and the list of metric data associated with it.</p>
+    # <p>A set of metrics that are associated with an entity, such as a specific service or
+    #             resource. Contains the entity and the list of metric data associated with it.</p>
     # @!attribute entity
     #   <p>The entity associated with the metrics.</p>
     #   @return [Types::Entity]
@@ -1072,6 +1287,113 @@ module Aws::CloudWatch
       nil,
       :entity,
       :metric_data,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The evaluation criteria for an alarm. This is a union type that currently supports
+    #                 <code>PromQLCriteria</code>.</p>
+    # @!attribute prom_ql_criteria
+    #   <p>The PromQL criteria for the alarm evaluation.</p>
+    #   @return [Types::AlarmPromQLCriteria]
+    class EvaluationCriteria < Struct.new(
+      :prom_ql_criteria,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class PromQLCriteria < EvaluationCriteria; end
+      class Unknown < EvaluationCriteria; end
+    end
+
+    # <p>The evaluation window that an alarm uses to select the range of metric data that it
+    #             evaluates each time it runs. This is a union type. Set exactly one of its members,
+    #             <code>SlidingWindow</code> or <code>WallClockWindow</code>. If you don't set
+    #             <code>EvaluationWindow</code>, the alarm uses a <code>SlidingWindow</code> by
+    #             default.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html">Alarm
+    #                 evaluation windows</a> in the <i>CloudWatch User
+    #             Guide</i>.</p>
+    # @!attribute wall_clock_window
+    #   <p>A wall clock window, which aligns the evaluated range to fixed clock boundaries that
+    #               match the alarm's period, such as the top of the hour, midnight, or the start of the
+    #               calendar week.</p>
+    #   @return [Types::WallClockWindow]
+    # @!attribute sliding_window
+    #   <p>A sliding window, which advances each time the alarm is evaluated, forming a rolling
+    #               time window. This is the default evaluation window.</p>
+    #   @return [Types::SlidingWindow]
+    class EvaluationWindow < Struct.new(
+      :wall_clock_window,
+      :sliding_window,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class WallClockWindow < EvaluationWindow; end
+      class SlidingWindow < EvaluationWindow; end
+      class Unknown < EvaluationWindow; end
+    end
+
+    # @!attribute alarm_mute_rule_name
+    #   <p>The name of the alarm mute rule to retrieve.</p>
+    #   @return [String]
+    class GetAlarmMuteRuleInput < Struct.new(
+      nil,
+      :alarm_mute_rule_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the alarm mute rule.</p>
+    #   @return [String]
+    # @!attribute alarm_mute_rule_arn
+    #   <p>The Amazon Resource Name (ARN) of the alarm mute rule.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the alarm mute rule.</p>
+    #   @return [String]
+    # @!attribute rule
+    #   <p>The configuration that defines when and how long alarms are muted.</p>
+    #   @return [Types::Rule]
+    # @!attribute mute_targets
+    #   <p>Specifies which alarms this rule applies to.</p>
+    #   @return [Types::MuteTargets]
+    # @!attribute start_date
+    #   <p>The date and time when the mute rule becomes active. If not set, the rule is active
+    #               immediately.</p>
+    #   @return [Time]
+    # @!attribute expire_date
+    #   <p>The date and time when the mute rule expires and is no longer evaluated.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the alarm mute rule. Valid values are <code>SCHEDULED</code>,
+    #                   <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>
+    #   @return [String]
+    # @!attribute last_updated_timestamp
+    #   <p>The date and time when the mute rule was last updated.</p>
+    #   @return [Time]
+    # @!attribute mute_type
+    #   <p>Indicates whether the mute rule is one-time or recurring. Valid values are
+    #                   <code>ONE_TIME</code> or <code>RECURRING</code>.</p>
+    #   @return [String]
+    class GetAlarmMuteRuleOutput < Struct.new(
+      nil,
+      :name,
+      :alarm_mute_rule_arn,
+      :description,
+      :rule,
+      :mute_targets,
+      :start_date,
+      :expire_date,
+      :status,
+      :last_updated_timestamp,
+      :mute_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1094,7 +1416,7 @@ module Aws::CloudWatch
     # @!attribute dashboard_body
     #   <p>The detailed information about the dashboard, including what widgets are included
     #               and their location on the dashboard. For more information about the
-    #               <code>DashboardBody</code> syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>. </p>
+    #                   <code>DashboardBody</code> syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>. </p>
     #   @return [String]
     # @!attribute dashboard_name
     #   <p>The name of the dashboard.</p>
@@ -1109,22 +1431,61 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute dataset_identifier
+    #   <p>Specifies the identifier of the dataset to retrieve. For the <code>default</code>
+    #               dataset, you can specify either <code>default</code> or the full dataset Amazon
+    #               Resource Name (ARN) in the format
+    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>
+    #   @return [String]
+    class GetDatasetInput < Struct.new(
+      nil,
+      :dataset_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dataset_id
+    #   <p>Returns the identifier of the dataset.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>Returns the Amazon Resource Name (ARN) of the dataset, in the format
+    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/<i>dataset-id</i>
+    #               </code>.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>Returns the Amazon Resource Name (ARN) of the customer managed Amazon Web Services
+    #               KMS key that is currently associated with the dataset, if any. If the dataset is not
+    #               associated with a customer managed KMS key, this field is not included in the
+    #               response and the dataset is encrypted at rest using an Amazon Web Services owned
+    #               key.</p>
+    #   @return [String]
+    class GetDatasetOutput < Struct.new(
+      nil,
+      :dataset_id,
+      :arn,
+      :kms_key_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute rule_name
     #   <p>The name of the rule that you want to see data from.</p>
     #   @return [String]
     # @!attribute start_time
     #   <p>The start time of the data to use in the report. When used in a raw HTTP Query API, it
     #               is formatted as <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
-    #               <code>2019-07-01T23:59:59</code>.</p>
+    #                   <code>2019-07-01T23:59:59</code>.</p>
     #   @return [Time]
     # @!attribute end_time
     #   <p>The end time of the data to use in the report. When used in a raw HTTP Query API, it
     #               is formatted as <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
-    #               <code>2019-07-01T23:59:59</code>.</p>
+    #                   <code>2019-07-01T23:59:59</code>.</p>
     #   @return [Time]
     # @!attribute period
     #   <p>The period, in seconds, to use for the statistics in the
-    #               <code>InsightRuleMetricDatapoint</code> results.</p>
+    #                   <code>InsightRuleMetricDatapoint</code> results.</p>
     #   @return [Integer]
     # @!attribute max_contributor_count
     #   <p>The maximum number of contributors to include in the report. The range is 1 to 100. If
@@ -1178,7 +1539,7 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     # @!attribute order_by
     #   <p>Determines what statistic to use to rank the contributors. Valid values are
-    #               <code>Sum</code> and <code>Maximum</code>.</p>
+    #                   <code>Sum</code> and <code>Maximum</code>.</p>
     #   @return [String]
     class GetInsightRuleReportInput < Struct.new(
       nil,
@@ -1256,8 +1617,8 @@ module Aws::CloudWatch
     #                       clock interval. For example, 12:32:34 is rounded down to 12:00:00.</p>
     #               </li>
     #            </ul>
-    #            <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request is
-    #               rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
+    #            <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request
+    #               is rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
     #               divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the
     #               previous 10-second period, the start time of your request is rounded down and you
     #               receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous
@@ -1352,7 +1713,7 @@ module Aws::CloudWatch
     #               separate metric. If a specific combination of dimensions was not published, you can't
     #               retrieve statistics for it. You must specify the same dimensions that were used when the
     #               metrics were created. For an example, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations">Dimension Combinations</a> in the <i>Amazon CloudWatch User
-    #               Guide</i>. For more information about specifying dimensions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User
+    #                   Guide</i>. For more information about specifying dimensions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User
     #               Guide</i>.</p>
     #   @return [Array<Types::Dimension>]
     # @!attribute start_time
@@ -1376,8 +1737,8 @@ module Aws::CloudWatch
     #                       clock interval. For example, 12:32:34 is rounded down to 12:00:00.</p>
     #               </li>
     #            </ul>
-    #            <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request is
-    #               rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
+    #            <p>If you set <code>Period</code> to 5, 10, 20, or 30, the start time of your request
+    #               is rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or 30-second
     #               divisions of a minute. For example, if you make a query at (HH:mm:ss) 01:05:23 for the
     #               previous 10-second period, the start time of your request is rounded down and you
     #               receive data from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the previous
@@ -1396,7 +1757,7 @@ module Aws::CloudWatch
     #               of 60. For high-resolution metrics that are collected at intervals of less than one
     #               minute, the period can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution
     #               metrics are those metrics stored by a <code>PutMetricData</code> call that includes a
-    #               <code>StorageResolution</code> of 1 second.</p>
+    #                   <code>StorageResolution</code> of 1 second.</p>
     #            <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than
     #               3 hours ago, you must specify the period as follows or no data points in that time range
     #               is returned:</p>
@@ -1417,14 +1778,14 @@ module Aws::CloudWatch
     #   @return [Integer]
     # @!attribute statistics
     #   <p>The metric statistics, other than percentile. For percentile statistics, use
-    #               <code>ExtendedStatistics</code>. When calling <code>GetMetricStatistics</code>, you
+    #                   <code>ExtendedStatistics</code>. When calling <code>GetMetricStatistics</code>, you
     #               must specify either <code>Statistics</code> or <code>ExtendedStatistics</code>, but not
     #               both.</p>
     #   @return [Array<String>]
     # @!attribute extended_statistics
     #   <p>The percentile statistics. Specify values between p0.0 and p100. When calling
-    #               <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or
-    #               <code>ExtendedStatistics</code>, but not both. Percentile statistics are not
+    #                   <code>GetMetricStatistics</code>, you must specify either <code>Statistics</code> or
+    #                   <code>ExtendedStatistics</code>, but not both. Percentile statistics are not
     #               available for metrics when any of the metric values are negative numbers.</p>
     #   @return [Array<String>]
     # @!attribute unit
@@ -1501,7 +1862,7 @@ module Aws::CloudWatch
     #   @return [String]
     # @!attribute state
     #   <p>The state of the metric stream. The possible values are <code>running</code> and
-    #               <code>stopped</code>.</p>
+    #                   <code>stopped</code>.</p>
     #   @return [String]
     # @!attribute creation_date
     #   <p>The date that the metric stream was created.</p>
@@ -1511,13 +1872,13 @@ module Aws::CloudWatch
     #   @return [Time]
     # @!attribute output_format
     #   <p>The output format for the stream. Valid values are <code>json</code>,
-    #               <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more
+    #                   <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more
     #               information about metric stream output formats, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html">Metric streams output formats</a>.</p>
     #   @return [String]
     # @!attribute statistics_configurations
     #   <p>Each entry in this array displays information about one or more metrics that include
     #               additional statistics in the metric stream. For more information about the additional
-    #               statistics, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html">
+    #               statistics, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">
     #                   CloudWatch statistics definitions</a>. </p>
     #   @return [Array<Types::MetricStreamStatisticsConfiguration>]
     # @!attribute include_linked_accounts_metrics
@@ -1548,8 +1909,8 @@ module Aws::CloudWatch
     #   <p>A JSON string that defines the bitmap graph to be retrieved. The string includes
     #               the metrics to include in the graph, statistics, annotations, title, axis limits, and so
     #               on. You can include only one <code>MetricWidget</code> parameter in each
-    #               <code>GetMetricWidgetImage</code> call.</p>
-    #            <p>For more information about the syntax of <code>MetricWidget</code> see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html">GetMetricWidgetImage: Metric Widget Structure and Syntax</a>.</p>
+    #                   <code>GetMetricWidgetImage</code> call.</p>
+    #            <p>For more information about the syntax of <code>MetricWidget</code> see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Widget-Structure.html">GetMetricWidgetImage: Metric Widget Structure and Syntax</a>.</p>
     #            <p>If any metric on the graph could not load all the requested data points, an orange
     #               triangle with an exclamation point appears next to the graph legend.</p>
     #   @return [String]
@@ -1591,8 +1952,8 @@ module Aws::CloudWatch
     #            </p>
     #            <p>The <code>image/png</code> setting is intended only for custom HTTP requests. For
     #               most use cases, and all actions using an Amazon Web Services SDK, you should use
-    #               <code>png</code>. If you specify <code>image/png</code>, the HTTP response has a
-    #               content-type set to <code>image/png</code>, and the body of the response is a PNG 
+    #                   <code>png</code>. If you specify <code>image/png</code>, the HTTP response has a
+    #               content-type set to <code>image/png</code>, and the body of the response is a PNG
     #               image.</p>
     #   @return [String]
     class GetMetricWidgetImageInput < Struct.new(
@@ -1616,9 +1977,77 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    class GetOTelEnrichmentInput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The status of OTel enrichment for the account. Valid values are
+    #                   <code>Running</code> (enrichment is enabled) and <code>Stopped</code> (enrichment is
+    #               disabled).</p>
+    #   @return [String]
+    # @!attribute include_filters
+    #   <p>The metric namespaces, and the metric names, that are enriched. This parameter is
+    #               omitted when enrichment is stopped, and when enrichment is running with no include
+    #               filters, which means that every supported namespace is in scope.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    # @!attribute exclude_filters
+    #   <p>The metric namespaces, and the metric names, that are left unenriched. This
+    #               parameter is omitted when enrichment is stopped, and when enrichment is running with no
+    #               exclude filters, which means that nothing is excluded.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    # @!attribute created_at
+    #   <p>The date and time that enrichment started for the account. This parameter is
+    #               omitted when enrichment is stopped.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the enrichment configuration for the account was last
+    #               stored.</p>
+    #   @return [Time]
+    class GetOTelEnrichmentOutput < Struct.new(
+      nil,
+      :status,
+      :include_filters,
+      :exclude_filters,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the resource ARN for a <code>GetResourceMetricsConfiguration</code>
+    #             request.</p>
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to retrieve the
+    #               resource metrics configuration for.</p>
+    #   @return [String]
+    class GetResourceMetricsConfigurationInput < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns the current resource metrics configuration for the specified resource.</p>
+    # @!attribute resource_metrics_configuration
+    #   <p>The resource metrics configuration for the specified resource.</p>
+    #   @return [Types::ResourceMetricsConfiguration]
+    class GetResourceMetricsConfigurationOutput < Struct.new(
+      nil,
+      :resource_metrics_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This structure contains the definition for a Contributor Insights rule. For more
     #             information about this rule, see<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html"> Using Constributor Insights to analyze high-cardinality data</a> in the
-    #             <i>Amazon CloudWatch User Guide</i>.</p>
+    #                     <i>Amazon CloudWatch User Guide</i>.</p>
     # @!attribute name
     #   <p>The name of the rule.</p>
     #   @return [String]
@@ -1627,7 +2056,7 @@ module Aws::CloudWatch
     #   @return [String]
     # @!attribute schema
     #   <p>For rules that you create, this is always <code>{"Name": "CloudWatchLogRule",
-    #               "Version": 1}</code>. For managed rules, this is <code>{"Name": "ServiceLogRule",
+    #                   "Version": 1}</code>. For managed rules, this is <code>{"Name": "ServiceLogRule",
     #                   "Version": 1}</code>
     #            </p>
     #   @return [String]
@@ -1640,8 +2069,10 @@ module Aws::CloudWatch
     #   <p> An optional built-in rule that Amazon Web Services manages. </p>
     #   @return [Boolean]
     # @!attribute apply_on_transformed_logs
-    #   <p>Displays whether the rule is evaluated on the transformed versions of logs, for log groups
-    #               that have <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log transformation</a> enabled. If this is <code>false</code>, log events are evaluated before they are transformed.</p>
+    #   <p>Displays whether the rule is evaluated on the transformed versions of logs, for log
+    #               groups that have <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log
+    #                   transformation</a> enabled. If this is <code>false</code>, log events are
+    #               evaluated before they are transformed.</p>
     #   @return [Boolean]
     class InsightRule < Struct.new(
       nil,
@@ -1823,16 +2254,61 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The operation was denied because either the calling principal lacks the required
+    #             Amazon Web Services Key Management Service (Amazon Web Services KMS) permission on the
+    #             key, or the key policy does not grant Amazon CloudWatch the permissions it needs
+    #             to use the key. Verify that the caller has <code>kms:Decrypt</code> permission on the
+    #             key, and that the key policy grants the CloudWatch service principal the
+    #             <code>kms:DescribeKey</code>, <code>kms:GenerateDataKey</code>,
+    #             <code>kms:Encrypt</code>, <code>kms:Decrypt</code>, and <code>kms:ReEncrypt*</code>
+    #             permissions described in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_AssociateDatasetKmsKey.html">AssociateDatasetKmsKey</a>.</p>
+    # @!attribute message
+    #   @return [String]
+    class KmsAccessDeniedException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The specified Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+    #             is disabled or pending deletion. Re-enable the key (or restore it, if it is pending
+    #             deletion) and retry the operation.</p>
+    # @!attribute message
+    #   @return [String]
+    class KmsKeyDisabledException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The specified Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+    #             could not be found. Verify that the key Amazon Resource Name (ARN) is correct, that
+    #             the key exists, and that it is in the same Amazon Web Services Region as the
+    #             resource.</p>
+    # @!attribute message
+    #   @return [String]
+    class KmsKeyNotFoundException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This structure includes the <code>Timezone</code> parameter, which you can use to
     #             specify your time zone so that the labels that are associated with returned metrics
     #             display the correct time for your time zone. </p>
     #          <p>The <code>Timezone</code> value affects a label only if you have a time-based dynamic
     #             expression in the label. For more information about dynamic expressions in labels, see
-    #             <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html">Using Dynamic
-    #             Labels</a>.</p>
+    #                 <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html">Using Dynamic
+    #                 Labels</a>.</p>
     # @!attribute timezone
     #   <p>The time zone to use for metric data return in this operation. The format is
-    #               <code>+</code> or <code>-</code> followed by four digits. The first two digits
+    #                   <code>+</code> or <code>-</code> followed by four digits. The first two digits
     #               indicate the number of hours ahead or behind of UTC, and the final two digits are the
     #               number of minutes. For example, +0130 indicates a time zone that is 1 hour and 30
     #               minutes ahead of UTC. The default is +0000. </p>
@@ -1863,6 +2339,49 @@ module Aws::CloudWatch
     class LimitExceededFault < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute alarm_name
+    #   <p>Filter results to show only mute rules that target the specified alarm
+    #               name.</p>
+    #   @return [String]
+    # @!attribute statuses
+    #   <p>Filter results to show only mute rules with the specified statuses. Valid values
+    #               are <code>SCHEDULED</code>, <code>ACTIVE</code>, or <code>EXPIRED</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute max_records
+    #   <p>The maximum number of mute rules to return in one call. The default is
+    #               50.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous call to indicate where to continue retrieving
+    #               results.</p>
+    #   @return [String]
+    class ListAlarmMuteRulesInput < Struct.new(
+      nil,
+      :alarm_name,
+      :statuses,
+      :max_records,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute alarm_mute_rule_summaries
+    #   <p>A list of alarm mute rule summaries.</p>
+    #   @return [Array<Types::AlarmMuteRuleSummary>]
+    # @!attribute next_token
+    #   <p>The token to use when requesting the next set of results. If this field is absent,
+    #               there are no more results to retrieve.</p>
+    #   @return [String]
+    class ListAlarmMuteRulesOutput < Struct.new(
+      nil,
+      :alarm_mute_rule_summaries,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1981,8 +2500,9 @@ module Aws::CloudWatch
     #               exactly will be returned.</p>
     #   @return [String]
     # @!attribute dimensions
-    #   <p>The dimensions to filter against. Only the dimension with names that match exactly will be
-    #               returned. If you specify one dimension name and a metric has that dimension and also other dimensions, it will be returned.</p>
+    #   <p>The dimensions to filter against. Only the dimension with names that match exactly
+    #               will be returned. If you specify one dimension name and a metric has that dimension and
+    #               also other dimensions, it will be returned.</p>
     #   @return [Array<Types::DimensionFilter>]
     # @!attribute next_token
     #   <p>The token returned by a previous call to indicate that there is more data
@@ -2046,11 +2566,19 @@ module Aws::CloudWatch
     # @!attribute resource_arn
     #   <p>The ARN of the CloudWatch resource that you want to view tags for.</p>
     #            <p>The ARN format of an alarm is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
     #               </code>
     #            </p>
     #            <p>The ARN format of a Contributor Insights rule is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a dashboard is
+    #                       <code>arn:aws:cloudwatch::<i>account-id</i>:dashboard/<i>dashboard-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a metric stream is
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:metric-stream/<i>metric-stream-name</i>
     #               </code>
     #            </p>
     #            <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web
@@ -2075,13 +2603,119 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The details about a log alarm.</p>
+    # @!attribute alarm_name
+    #   <p>The name of the alarm.</p>
+    #   @return [String]
+    # @!attribute alarm_arn
+    #   <p>The Amazon Resource Name (ARN) of the alarm.</p>
+    #   @return [String]
+    # @!attribute alarm_description
+    #   <p>The description of the alarm.</p>
+    #   @return [String]
+    # @!attribute alarm_configuration_updated_timestamp
+    #   <p>The time stamp of the last update to the alarm configuration.</p>
+    #   @return [Time]
+    # @!attribute actions_enabled
+    #   <p>Indicates whether actions should be executed during any changes to the alarm state.</p>
+    #   @return [Boolean]
+    # @!attribute ok_actions
+    #   <p>The actions to execute when this alarm transitions to the <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+    #   @return [Array<String>]
+    # @!attribute alarm_actions
+    #   <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+    #   @return [Array<String>]
+    # @!attribute insufficient_data_actions
+    #   <p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+    #   @return [Array<String>]
+    # @!attribute state_value
+    #   <p>The state value for the alarm.</p>
+    #   @return [String]
+    # @!attribute state_reason
+    #   <p>An explanation for the alarm state, in text format.</p>
+    #   @return [String]
+    # @!attribute state_reason_data
+    #   <p>An explanation for the alarm state, in JSON format.</p>
+    #   @return [String]
+    # @!attribute state_updated_timestamp
+    #   <p>The time stamp of the last update to the value of either the <code>StateValue</code> or <code>EvaluationState</code> parameters.</p>
+    #   @return [Time]
+    # @!attribute scheduled_query_configuration
+    #   <p>The configuration of the underlying CloudWatch Logs scheduled query, including the query string, log groups, schedule, aggregation expression, and the ARN of the managed scheduled query.</p>
+    #   @return [Types::ScheduledQueryConfiguration]
+    # @!attribute query_results_to_evaluate
+    #   <p>The number of most recent scheduled query results that the alarm evaluates against the threshold (the N in M-of-N evaluation).</p>
+    #   @return [Integer]
+    # @!attribute query_results_to_alarm
+    #   <p>The number of query results, out of the most recent <code>QueryResultsToEvaluate</code> results, that must breach the threshold to trigger the alarm to transition to <code>ALARM</code> (the M in M-of-N evaluation).</p>
+    #   @return [Integer]
+    # @!attribute threshold
+    #   <p>The value to compare with the aggregated query result.</p>
+    #   @return [Float]
+    # @!attribute comparison_operator
+    #   <p>The arithmetic operation to use when comparing the aggregated query result and the threshold. The aggregated query result is used as the first operand.</p>
+    #   @return [String]
+    # @!attribute treat_missing_data
+    #   <p>How this alarm handles missing data points. Valid values are <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and <code>missing</code>.</p>
+    #   @return [String]
+    # @!attribute state_transitioned_timestamp
+    #   <p>The date and time that the alarm's <code>StateValue</code> most recently changed.</p>
+    #   @return [Time]
+    # @!attribute evaluation_state
+    #   <p>If the value of this field is <code>EVALUATION_ERROR</code>, it indicates configuration errors in the alarm setup that require review and correction. Refer to the <code>StateReason</code> field of the alarm for more details.</p>
+    #            <p>If the value of this field is <code>EVALUATION_FAILURE</code>, it indicates temporary CloudWatch issues. We recommend manual monitoring until the issue is resolved.</p>
+    #            <p>If the value of this field is <code>PARTIAL_DATA</code>, it indicates that the query returned the maximum 500 contributor groups but more matched. The alarm evaluates the available contributors, but results might be incomplete.</p>
+    #   @return [String]
+    # @!attribute action_log_line_count
+    #   <p>The number of log lines from the most recent scheduled query execution that are included in alarm action notifications. Valid range is 0 through 50. A value of 0 means no log lines are included.</p>
+    #   @return [Integer]
+    # @!attribute action_log_line_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that CloudWatch assumes to retrieve log events for inclusion in alarm action notifications. Set when <code>ActionLogLineCount</code> is greater than 0.</p>
+    #   @return [String]
+    # @!attribute warm_up_configuration
+    #   <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+    #               after you create or update the alarm. During the warm-up period, the alarm stays in
+    #                   <code>INSUFFICIENT_DATA</code> and does not perform alarm actions.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+    #                   periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+    #   @return [Types::WarmUpConfiguration]
+    class LogAlarm < Struct.new(
+      nil,
+      :alarm_name,
+      :alarm_arn,
+      :alarm_description,
+      :alarm_configuration_updated_timestamp,
+      :actions_enabled,
+      :ok_actions,
+      :alarm_actions,
+      :insufficient_data_actions,
+      :state_value,
+      :state_reason,
+      :state_reason_data,
+      :state_updated_timestamp,
+      :scheduled_query_configuration,
+      :query_results_to_evaluate,
+      :query_results_to_alarm,
+      :threshold,
+      :comparison_operator,
+      :treat_missing_data,
+      :state_transitioned_timestamp,
+      :evaluation_state,
+      :action_log_line_count,
+      :action_log_line_role_arn,
+      :warm_up_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> Contains the information that's required to enable a managed Contributor Insights
     #             rule for an Amazon Web Services resource.
-    #             
+    #
     #         </p>
     # @!attribute template_name
     #   <p> The template name for the managed Contributor Insights rule, as returned by
-    #               <code>ListManagedInsightRules</code>. </p>
+    #                   <code>ListManagedInsightRules</code>. </p>
     #   @return [String]
     # @!attribute resource_arn
     #   <p> The ARN of an Amazon Web Services resource that has managed Contributor Insights
@@ -2096,7 +2730,7 @@ module Aws::CloudWatch
     #               permission in addition to the <code>cloudwatch:PutInsightRule</code> permission. If you
     #               are using this operation to update an existing Contributor Insights rule, any tags that
     #               you specify in this parameter are ignored. To change the tags of an existing rule, use
-    #               <code>TagResource</code>. </p>
+    #                   <code>TagResource</code>. </p>
     #   @return [Array<Types::Tag>]
     class ManagedRule < Struct.new(
       nil,
@@ -2109,11 +2743,11 @@ module Aws::CloudWatch
     end
 
     # <p> Contains information about managed Contributor Insights rules, as returned by
-    #             <code>ListManagedInsightRules</code>. 
+    #                 <code>ListManagedInsightRules</code>.
     #         </p>
     # @!attribute template_name
     #   <p> The template name for the managed rule. Used to enable managed rules using
-    #               <code>PutManagedInsightRules</code>. </p>
+    #                   <code>PutManagedInsightRules</code>. </p>
     #   @return [String]
     # @!attribute resource_arn
     #   <p> If a managed rule is enabled, this is the ARN for the related Amazon Web Services
@@ -2137,7 +2771,7 @@ module Aws::CloudWatch
     # <p> The status of a managed Contributor Insights rule. </p>
     # @!attribute rule_name
     #   <p> The name of the Contributor Insights rule that contains data for the specified
-    #               Amazon Web Services resource. </p>
+    #                   Amazon Web Services resource. </p>
     #   @return [String]
     # @!attribute state
     #   <p> Indicates whether the rule is enabled or disabled. </p>
@@ -2154,9 +2788,9 @@ module Aws::CloudWatch
     # <p>A message returned by the <code>GetMetricData</code>API, including a code and a
     #             description.</p>
     #          <p>If a cross-Region <code>GetMetricData</code> operation fails with a code of
-    #             <code>Forbidden</code> and a value of <code>Authentication too complex to retrieve
+    #                 <code>Forbidden</code> and a value of <code>Authentication too complex to retrieve
     #                 cross region data</code>, you can correct the problem by running the
-    #             <code>GetMetricData</code> operation in the same Region where the metric data
+    #                 <code>GetMetricData</code> operation in the same Region where the metric data
     #             is.</p>
     # @!attribute code
     #   <p>The error code or status code associated with the message.</p>
@@ -2222,7 +2856,7 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     # @!attribute insufficient_data_actions
     #   <p>The actions to execute when this alarm transitions to the
-    #               <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
+    #                   <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
     #               as an Amazon Resource Name (ARN).</p>
     #   @return [Array<String>]
     # @!attribute state_value
@@ -2236,7 +2870,7 @@ module Aws::CloudWatch
     #   @return [String]
     # @!attribute state_updated_timestamp
     #   <p>The time stamp of the last update to the value of either the
-    #               <code>StateValue</code> or <code>EvaluationState</code> parameters.</p>
+    #                   <code>StateValue</code> or <code>EvaluationState</code> parameters.</p>
     #   @return [Time]
     # @!attribute metric_name
     #   <p>The name of the metric associated with the alarm, if this is an alarm based on a
@@ -2278,10 +2912,13 @@ module Aws::CloudWatch
     #   @return [String]
     # @!attribute treat_missing_data
     #   <p>Sets how this alarm is to handle missing data points. The valid values are
-    #               <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and
-    #               <code>missing</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring how CloudWatch alarms treat missing data</a>.</p>
+    #                   <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and
+    #                   <code>missing</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring how CloudWatch alarms treat missing data</a>.</p>
     #            <p>If this parameter is omitted, the default behavior of <code>missing</code> is
     #               used.</p>
+    #            <note>
+    #               <p>This parameter is not applicable to PromQL alarms.</p>
+    #            </note>
     #   @return [String]
     # @!attribute evaluate_low_sample_count_percentile
     #   <p>Used only for alarms based on percentiles. If <code>ignore</code>, the alarm state
@@ -2297,19 +2934,44 @@ module Aws::CloudWatch
     #   @return [Array<Types::MetricDataQuery>]
     # @!attribute threshold_metric_id
     #   <p>In an alarm based on an anomaly detection model, this is the ID of the
-    #               <code>ANOMALY_DETECTION_BAND</code> function used as the threshold for the
+    #                   <code>ANOMALY_DETECTION_BAND</code> function used as the threshold for the
     #               alarm.</p>
     #   @return [String]
     # @!attribute evaluation_state
-    #   <p>If the value of this field is <code>PARTIAL_DATA</code>, the alarm is being evaluated
-    #               based on only partial data. This happens if the query used for the alarm returns more
-    #               than 10,000 metrics. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html">Create
+    #   <p>If the value of this field is <code>PARTIAL_DATA</code>, it indicates that not all the
+    #               available data was able to be retrieved due to quota limitations. For more information,
+    #               see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html">Create
     #                   alarms on Metrics Insights queries</a>.</p>
+    #            <p>If the value of this field is <code>EVALUATION_ERROR</code>, it indicates
+    #               configuration errors in alarm setup that require review and correction. Refer to
+    #               StateReason field of the alarm for more details.</p>
+    #            <p>If the value of this field is <code>EVALUATION_FAILURE</code>, it indicates temporary
+    #               CloudWatch issues. We recommend manual monitoring until the issue is resolved </p>
     #   @return [String]
     # @!attribute state_transitioned_timestamp
     #   <p>The date and time that the alarm's <code>StateValue</code> most recently
     #               changed.</p>
     #   @return [Time]
+    # @!attribute evaluation_window
+    #   <p>The evaluation window that the alarm uses to select the range of metric data that it
+    #               evaluates. This is either a sliding window or a wall clock window. For more information,
+    #               see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html">Alarm
+    #                   evaluation windows</a> in the <i>CloudWatch User
+    #               Guide</i>.</p>
+    #   @return [Types::EvaluationWindow]
+    # @!attribute warm_up_configuration
+    #   <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+    #               after you create or update the alarm. During the warm-up period, the alarm stays in
+    #                   <code>INSUFFICIENT_DATA</code> and does not perform alarm actions.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+    #                   periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+    #   @return [Types::WarmUpConfiguration]
+    # @!attribute evaluation_criteria
+    #   <p>The evaluation criteria for the alarm.</p>
+    #   @return [Types::EvaluationCriteria]
+    # @!attribute evaluation_interval
+    #   <p>The frequency, in seconds, at which the alarm is evaluated.</p>
+    #   @return [Integer]
     class MetricAlarm < Struct.new(
       nil,
       :alarm_name,
@@ -2341,6 +3003,10 @@ module Aws::CloudWatch
       :threshold_metric_id,
       :evaluation_state,
       :state_transitioned_timestamp,
+      :evaluation_window,
+      :warm_up_configuration,
+      :evaluation_criteria,
+      :evaluation_interval,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2363,29 +3029,29 @@ module Aws::CloudWatch
     end
 
     # <p>This structure is used in both <code>GetMetricData</code> and
-    #             <code>PutMetricAlarm</code>. The supported use of this structure is different for
+    #                 <code>PutMetricAlarm</code>. The supported use of this structure is different for
     #             those two operations.</p>
     #          <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and
     #             whether this call is just retrieving a batch set of data for one metric, or is
     #             performing a Metrics Insights query or a math expression. A single
-    #             <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code>
+    #                 <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code>
     #             structures.</p>
     #          <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a
     #             metric math expression. Each <code>MetricDataQuery</code> in the array specifies either
     #             a metric to retrieve, or a math expression to be performed on retrieved metrics. A
     #             single <code>PutMetricAlarm</code> call can include up to 20
-    #             <code>MetricDataQuery</code> structures in the array. The 20 structures can include
+    #                 <code>MetricDataQuery</code> structures in the array. The 20 structures can include
     #             as many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a
     #             metric, and as many as 10 structures that contain the <code>Expression</code> parameter
     #             to perform a math expression. Of those <code>Expression</code> structures, one must have
-    #             <code>true</code> as the value for <code>ReturnData</code>. The result of this
+    #                 <code>true</code> as the value for <code>ReturnData</code>. The result of this
     #             expression is the value the alarm watches.</p>
     #          <p>Any expression used in a <code>PutMetricAlarm</code> operation must return a single
     #             time series. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User
-    #                     Guide</i>.</p>
+    #                 Guide</i>.</p>
     #          <p>Some of the parameters of this structure also have different uses whether you are
     #             using this structure in a <code>GetMetricData</code> operation or a
-    #             <code>PutMetricAlarm</code> operation. These differences are explained in the
+    #                 <code>PutMetricAlarm</code> operation. These differences are explained in the
     #             following parameter list.</p>
     # @!attribute id
     #   <p>A short name used to tie this object to the results in the response. This name must be
@@ -2399,20 +3065,20 @@ module Aws::CloudWatch
     #               parameter only if this object is retrieving a metric and not performing a math
     #               expression on returned data.</p>
     #            <p>Within one MetricDataQuery object, you must specify either <code>Expression</code> or
-    #               <code>MetricStat</code> but not both.</p>
+    #                   <code>MetricStat</code> but not both.</p>
     #   @return [Types::MetricStat]
     # @!attribute expression
     #   <p>This field can contain either a Metrics Insights query, or a metric math expression to
     #               be performed on the returned data. For more information about Metrics Insights queries,
     #               see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-metrics-insights-querylanguage">Metrics Insights query components and syntax</a> in the <i>Amazon
-    #                       CloudWatch User Guide</i>.</p>
+    #                   CloudWatch User Guide</i>.</p>
     #            <p>A math expression can use the <code>Id</code> of the other metrics or queries to refer
     #               to those metrics, and can also use the <code>Id</code> of other expressions to use the
     #               result of those expressions. For more information about metric math expressions, see
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User
-    #                       Guide</i>.</p>
+    #                   <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User
+    #                   Guide</i>.</p>
     #            <p>Within each MetricDataQuery object, you must specify either <code>Expression</code> or
-    #               <code>MetricStat</code> but not both.</p>
+    #                   <code>MetricStat</code> but not both.</p>
     #   @return [String]
     # @!attribute label
     #   <p>A human-readable label for this metric or expression. This is especially useful if
@@ -2427,11 +3093,11 @@ module Aws::CloudWatch
     #   <p>When used in <code>GetMetricData</code>, this option indicates whether to return the
     #               timestamps and raw data values of this metric. If you are performing this call just to
     #               do math expressions and do not also need the raw data returned, you can specify
-    #               <code>false</code>. If you omit this, the default of <code>true</code> is
+    #                   <code>false</code>. If you omit this, the default of <code>true</code> is
     #               used.</p>
     #            <p>When used in <code>PutMetricAlarm</code>, specify <code>true</code> for the one
     #               expression result to use as the alarm. For all other metrics and expressions in the same
-    #               <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as
+    #                   <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as
     #               False.</p>
     #   @return [Boolean]
     # @!attribute period
@@ -2487,8 +3153,8 @@ module Aws::CloudWatch
     #               in the requested time range were returned. <code>PartialData</code> means that an
     #               incomplete set of data points were returned. You can use the <code>NextToken</code>
     #               value that was returned and repeat your request to get more data points.
-    #               <code>NextToken</code> is not returned if you are performing a math expression.
-    #               <code>InternalError</code> indicates that an error occurred. Retry your request
+    #                   <code>NextToken</code> is not returned if you are performing a math expression.
+    #                   <code>InternalError</code> indicates that an error occurred. Retry your request
     #               using <code>NextToken</code>, if present.</p>
     #   @return [String]
     # @!attribute messages
@@ -2532,7 +3198,7 @@ module Aws::CloudWatch
     # @!attribute values
     #   <p>Array of numbers representing the values for the metric during the period. Each unique
     #               value is listed just once in this array, and the corresponding number in the
-    #               <code>Counts</code> array specifies the number of times that value occurred during
+    #                   <code>Counts</code> array specifies the number of times that value occurred during
     #               the period. You can include up to 150 unique values in each <code>PutMetricData</code>
     #               action that specifies a <code>Values</code> array.</p>
     #            <p>Although the <code>Values</code> array accepts numbers of type <code>Double</code>,
@@ -2543,7 +3209,7 @@ module Aws::CloudWatch
     # @!attribute counts
     #   <p>Array of numbers that is used along with the <code>Values</code> array. Each number in
     #               the <code>Count</code> array is the number of times the corresponding value in the
-    #               <code>Values</code> array occurred during the period. </p>
+    #                   <code>Values</code> array occurred during the period. </p>
     #            <p>If you omit the <code>Counts</code> array, the default of 1 is used as the value for
     #               each count. If you include a <code>Counts</code> array, it must include the same amount
     #               of values as the <code>Values</code> array.</p>
@@ -2561,7 +3227,7 @@ module Aws::CloudWatch
     #               metric, which CloudWatch stores at 1-minute resolution. Currently, high resolution is
     #               available only for custom metrics. For more information about high-resolution metrics,
     #               see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics">High-Resolution Metrics</a> in the <i>Amazon CloudWatch User
-    #                       Guide</i>. </p>
+    #                   Guide</i>. </p>
     #            <p>This field is optional, if you do not specify it the default of 60 is
     #               used.</p>
     #   @return [Integer]
@@ -2587,10 +3253,10 @@ module Aws::CloudWatch
     # @!attribute metric_data_queries
     #   <p>An array of metric data query structures that enables you to create an anomaly
     #               detector based on the result of a metric math expression. Each item in
-    #               <code>MetricDataQueries</code> gets a metric or performs a math expression. One item
+    #                   <code>MetricDataQueries</code> gets a metric or performs a math expression. One item
     #               in <code>MetricDataQueries</code> is the expression that provides the time series that
     #               the anomaly detector uses as input. Designate the expression by setting
-    #               <code>ReturnData</code> to <code>true</code> for this object in the array. For all
+    #                   <code>ReturnData</code> to <code>true</code> for this object in the array. For all
     #               other expressions and metrics, set <code>ReturnData</code> to <code>false</code>. The
     #               designated expression must return a single time series.</p>
     #   @return [Array<Types::MetricDataQuery>]
@@ -2613,7 +3279,7 @@ module Aws::CloudWatch
     #               of 60. For high-resolution metrics that are collected at intervals of less than one
     #               minute, the period can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution
     #               metrics are those metrics stored by a <code>PutMetricData</code> call that includes a
-    #               <code>StorageResolution</code> of 1 second.</p>
+    #                   <code>StorageResolution</code> of 1 second.</p>
     #            <p>If the <code>StartTime</code> parameter specifies a time stamp that is greater than
     #               3 hours ago, you must specify the period as follows or no data points in that time range
     #               is returned:</p>
@@ -2677,11 +3343,11 @@ module Aws::CloudWatch
     #   @return [String]
     # @!attribute state
     #   <p>The current state of this stream. Valid values are <code>running</code> and
-    #               <code>stopped</code>.</p>
+    #                   <code>stopped</code>.</p>
     #   @return [String]
     # @!attribute output_format
     #   <p>The output format of this metric stream. Valid values are <code>json</code>,
-    #               <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>.</p>
+    #                   <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>.</p>
     #   @return [String]
     class MetricStreamEntry < Struct.new(
       nil,
@@ -2726,11 +3392,11 @@ module Aws::CloudWatch
     end
 
     # <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>,
-    #             <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
+    #                 <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
     #             streamed. This structure contains information for one metric that includes additional
     #             statistics in the stream. For more information about statistics, see CloudWatch,
-    #             listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html">
-    #             CloudWatch statistics definitions</a>.</p>
+    #             listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">
+    #                 CloudWatch statistics definitions</a>.</p>
     # @!attribute include_metrics
     #   <p>An array of metric name and namespace pairs that stream the additional statistics
     #               listed in the value of the <code>AdditionalStatistics</code> parameter. There can be as
@@ -2743,14 +3409,14 @@ module Aws::CloudWatch
     #               the <code>IncludeMetrics</code> array in this structure. This list can include as many
     #               as 20 statistics.</p>
     #            <p>If the <code>OutputFormat</code> for the stream is <code>opentelemetry1.0</code> or
-    #               <code>opentelemetry0.7</code>, the only valid values are
-    #               <code>p<i>??</i>
+    #                   <code>opentelemetry0.7</code>, the only valid values are
+    #                       <code>p<i>??</i>
     #               </code> percentile statistics such as
-    #               <code>p90</code>, <code>p99</code> and so on.</p>
+    #                   <code>p90</code>, <code>p99</code> and so on.</p>
     #            <p>If the <code>OutputFormat</code> for the stream is <code>json</code>, the valid values
-    #               include the abbreviations for all of the statistics listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html">
+    #               include the abbreviations for all of the statistics listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">
     #                   CloudWatch statistics definitions</a>. For example, this includes
-    #               <code>tm98, </code>
+    #                   <code>tm98, </code>
     #               <code>wm90</code>, <code>PR(:300)</code>, and so on.</p>
     #   @return [Array<String>]
     class MetricStreamStatisticsConfiguration < Struct.new(
@@ -2791,6 +3457,47 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies which alarms an alarm mute rule applies to.</p>
+    #          <p>You can target up to 100 specific alarms by name. When a mute rule is active, the
+    #             targeted alarms continue to evaluate metrics and transition between states, but their
+    #             configured actions are muted.</p>
+    # @!attribute alarm_names
+    #   <p>The list of alarm names that this mute rule targets. You can specify up to 100 alarm
+    #               names.</p>
+    #            <p>Each alarm name must be between 1 and 255 characters in length. The alarm names must
+    #               match existing alarms in your Amazon Web Services account and region.</p>
+    #   @return [Array<String>]
+    class MuteTargets < Struct.new(
+      nil,
+      :alarm_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Selects the metrics in one namespace, for use in the <code>IncludeFilters</code> or
+    #                 <code>ExcludeFilters</code> parameter of <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html">StartOTelEnrichment</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html">UpdateOTelEnrichment</a>.</p>
+    #          <p>A maximum of 100 selectors is allowed across <code>IncludeFilters</code> and
+    #                 <code>ExcludeFilters</code> combined.</p>
+    # @!attribute namespace
+    #   <p>The namespace of the metrics to select. Namespaces are matched exactly and are
+    #               case-sensitive.</p>
+    #   @return [String]
+    # @!attribute metric_names
+    #   <p>The names of the metrics to select within the namespace. Metric names are matched
+    #               exactly and are case-sensitive. If this parameter is omitted, every metric in the
+    #               namespace is selected.</p>
+    #            <p>A maximum of 100 metric names is allowed for each selector.</p>
+    #   @return [Array<String>]
+    class OTelEnrichmentMetricSelector < Struct.new(
+      nil,
+      :namespace,
+      :metric_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This array is empty if the API operation was successful for all the rules specified in
     #             the request. If the operation could not process one of the rules, the following data is
     #             returned for each of those rules.</p>
@@ -2812,6 +3519,48 @@ module Aws::CloudWatch
       :exception_type,
       :failure_code,
       :failure_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the alarm mute rule. This name must be unique within your Amazon Web Services account and region.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the alarm mute rule that helps you identify its purpose.</p>
+    #   @return [String]
+    # @!attribute rule
+    #   <p>The configuration that defines when and how long alarms should be muted.</p>
+    #   @return [Types::Rule]
+    # @!attribute mute_targets
+    #   <p>Specifies which alarms this rule applies to.</p>
+    #   @return [Types::MuteTargets]
+    # @!attribute tags
+    #   <p>A list of key-value pairs to associate with the alarm mute rule. You can use tags
+    #               to categorize and manage your mute rules.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute start_date
+    #   <p>The date and time after which the mute rule takes effect, specified as a timestamp
+    #               in ISO 8601 format (for example, <code>2026-04-15T08:00:00Z</code>). If not specified,
+    #               the mute rule takes effect immediately upon creation and the mutes are applied as per
+    #               the schedule expression.</p>
+    #   @return [Time]
+    # @!attribute expire_date
+    #   <p>The date and time when the mute rule expires and is no longer evaluated, specified
+    #               as a timestamp in ISO 8601 format (for example, <code>2026-12-31T23:59:59Z</code>).
+    #               After this time, the rule status becomes EXPIRED and will no longer mute the targeted
+    #               alarms.</p>
+    #   @return [Time]
+    class PutAlarmMuteRuleInput < Struct.new(
+      nil,
+      :name,
+      :description,
+      :rule,
+      :mute_targets,
+      :tags,
+      :start_date,
+      :expire_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2845,7 +3594,7 @@ module Aws::CloudWatch
     #   @return [Types::AnomalyDetectorConfiguration]
     # @!attribute metric_characteristics
     #   <p>Use this object to include parameters to provide information about your metric to
-    #               CloudWatch to help it build more accurate anomaly detection models.
+    #                   CloudWatch to help it build more accurate anomaly detection models.
     #               Currently, it includes the <code>PeriodicSpikes</code> parameter.</p>
     #   @return [Types::MetricCharacteristics]
     # @!attribute single_metric_anomaly_detector
@@ -2875,12 +3624,12 @@ module Aws::CloudWatch
     #               </li>
     #               <li>
     #                  <p>the <code>MetricMathAnomalyDetector</code> parameters of
-    #                       <code>PutAnomalyDetectorInput</code>
+    #                           <code>PutAnomalyDetectorInput</code>
     #                  </p>
     #               </li>
     #            </ul>
     #            <p>Instead, specify the single metric anomaly detector attributes as part of the property
-    #               <code>SingleMetricAnomalyDetector</code>.</p>
+    #                   <code>SingleMetricAnomalyDetector</code>.</p>
     #   @return [Types::SingleMetricAnomalyDetector]
     # @!attribute metric_math_anomaly_detector
     #   <p>The metric math anomaly detector to be created.</p>
@@ -2909,12 +3658,12 @@ module Aws::CloudWatch
     #               </li>
     #               <li>
     #                  <p>the <code>SingleMetricAnomalyDetector</code> parameters of
-    #                       <code>PutAnomalyDetectorInput</code>
+    #                           <code>PutAnomalyDetectorInput</code>
     #                  </p>
     #               </li>
     #            </ul>
     #            <p>Instead, specify the metric math anomaly detector attributes as part of the property
-    #               <code>MetricMathAnomalyDetector</code>.</p>
+    #                   <code>MetricMathAnomalyDetector</code>.</p>
     #   @return [Types::MetricMathAnomalyDetector]
     class PutAnomalyDetectorInput < Struct.new(
       nil,
@@ -2931,8 +3680,12 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute anomaly_detector_id
+    #   <p>The unique identifier of the anomaly detector that you created or updated.</p>
+    #   @return [String]
     class PutAnomalyDetectorOutput < Struct.new(
       nil,
+      :anomaly_detector_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2960,19 +3713,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -2985,7 +3738,8 @@ module Aws::CloudWatch
     #               </code>
     #            </p>
     #            <p>
-    #               <b>Start a Amazon Q Developer operational investigation</b>
+    #               <b>Start a Amazon Q Developer operational
+    #                   investigation</b>
     #            </p>
     #            <p>
     #               <code>arn:aws:aiops:<i>region</i>:<i>account-id</i>:investigation-group:<i>investigation-group-id</i>
@@ -3013,19 +3767,19 @@ module Aws::CloudWatch
     #               <li>
     #                  <p>
     #                     <code>ALARM("<i>alarm-name</i> or
-    #                       <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
+    #                           <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
     #                       ALARM state.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>OK("<i>alarm-name</i> or
-    #                       <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in OK
+    #                           <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in OK
     #                       state.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>INSUFFICIENT_DATA("<i>alarm-name</i> or
-    #                       <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
+    #                               <i>alarm-ARN</i>")</code> is TRUE if the named alarm is in
     #                       INSUFFICIENT_DATA state.</p>
     #               </li>
     #               <li>
@@ -3059,7 +3813,7 @@ module Aws::CloudWatch
     #               <li>
     #                  <p>
     #                     <code>(ALARM(CPUUtilizationTooHigh) OR ALARM(DiskReadOpsTooHigh)) AND
-    #                       OK(NetworkOutTooHigh)</code> goes into ALARM state if CPUUtilizationTooHigh
+    #                           OK(NetworkOutTooHigh)</code> goes into ALARM state if CPUUtilizationTooHigh
     #                       OR DiskReadOpsTooHigh is in ALARM state, and if NetworkOutTooHigh is in OK
     #                       state. This provides another example of using a composite alarm to prevent
     #                       noise. This rule ensures that you are not notified with an alarm action on high
@@ -3067,12 +3821,12 @@ module Aws::CloudWatch
     #               </li>
     #            </ul>
     #            <p>The <code>AlarmRule</code> can specify as many as 100 "children" alarms. The
-    #               <code>AlarmRule</code> expression can have as many as 500 elements. Elements are
+    #                   <code>AlarmRule</code> expression can have as many as 500 elements. Elements are
     #               child alarms, TRUE or FALSE statements, and parentheses.</p>
     #   @return [String]
     # @!attribute insufficient_data_actions
     #   <p>The actions to execute when this alarm transitions to the
-    #               <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
+    #                   <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
     #               as an Amazon Resource Name (ARN).</p>
     #            <p>Valid Values: ]</p>
     #            <p>
@@ -3088,19 +3842,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -3123,19 +3877,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -3203,12 +3957,24 @@ module Aws::CloudWatch
     # @!attribute dashboard_body
     #   <p>The detailed information about the dashboard in JSON format, including the widgets
     #               to include and their location on the dashboard. This parameter is required.</p>
-    #            <p>For more information about the syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>.</p>
+    #            <p>For more information about the syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html">Dashboard Body Structure and Syntax</a>.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>A list of key-value pairs to associate with the dashboard. You can associate as many
+    #               as 50 tags with a dashboard.</p>
+    #            <p>Tags can help you organize and categorize your dashboards. You can also use them to
+    #               scope user permissions by granting a user permission to access or change only dashboards
+    #               with certain tag values.</p>
+    #            <p>You can use this parameter only when creating a new dashboard. If you specify
+    #                   <code>Tags</code> when updating an existing dashboard, the tag updates are ignored.
+    #               To add or update tags on an existing dashboard, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.
+    #               To remove tags, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
+    #   @return [Array<Types::Tag>]
     class PutDashboardInput < Struct.new(
       nil,
       :dashboard_name,
       :dashboard_body,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3239,7 +4005,7 @@ module Aws::CloudWatch
     #   @return [String]
     # @!attribute rule_definition
     #   <p>The definition of the rule, as a JSON object. For details on the valid syntax, see
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html">Contributor Insights Rule Syntax</a>.</p>
+    #                   <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html">Contributor Insights Rule Syntax</a>.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>A list of key-value pairs to associate with the Contributor Insights rule. You can
@@ -3248,23 +4014,25 @@ module Aws::CloudWatch
     #               scope user permissions, by granting a user permission to access or change only the
     #               resources that have certain tag values.</p>
     #            <p>To be able to associate tags with a rule, you must have the
-    #               <code>cloudwatch:TagResource</code> permission in addition to the
-    #               <code>cloudwatch:PutInsightRule</code> permission.</p>
+    #                   <code>cloudwatch:TagResource</code> permission in addition to the
+    #                   <code>cloudwatch:PutInsightRule</code> permission.</p>
     #            <p>If you are using this operation to update an existing Contributor Insights rule, any
     #               tags you specify in this parameter are ignored. To change the tags of an existing rule,
     #               use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute apply_on_transformed_logs
-    #   <p>Specify <code>true</code> to have this rule evaluate log events after they have been transformed by  
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log transformation</a>. If you specify <code>true</code>, then the log events in log groups that have transformers will 
-    #          be evaluated by Contributor Insights after being transformed. Log groups that don't have
-    #           transformers will still have their original log events evaluated by Contributor Insights.</p>
+    #   <p>Specify <code>true</code> to have this rule evaluate log events after they have been
+    #               transformed by <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html">Log
+    #                   transformation</a>. If you specify <code>true</code>, then the log events in log
+    #               groups that have transformers will be evaluated by Contributor Insights after being
+    #               transformed. Log groups that don't have transformers will still have their original log
+    #               events evaluated by Contributor Insights.</p>
     #            <p>The default is <code>false</code>
     #            </p>
     #            <note>
-    #               <p>If a log group has a transformer, and transformation fails for some log events, those log events won't be evaluated by
-    #           Contributor Insights. For information about investigating log transformation failures, see
-    #               <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Transformation-Errors-Metrics.html">Transformation metrics and errors</a>.</p>
+    #               <p>If a log group has a transformer, and transformation fails for some log events,
+    #                   those log events won't be evaluated by Contributor Insights. For information about
+    #                   investigating log transformation failures, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Transformation-Errors-Metrics.html">Transformation metrics and errors</a>.</p>
     #            </note>
     #   @return [Boolean]
     class PutInsightRuleInput < Struct.new(
@@ -3281,6 +4049,184 @@ module Aws::CloudWatch
 
     class PutInsightRuleOutput < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute alarm_name
+    #   <p>The name for the alarm. This name must be unique within the Amazon Web Services account and Region.</p>
+    #   @return [String]
+    # @!attribute alarm_description
+    #   <p>The description for the alarm.</p>
+    #   @return [String]
+    # @!attribute scheduled_query_configuration
+    #   <p>The configuration of the underlying CloudWatch Logs scheduled query that this alarm evaluates, including the query string, log groups, schedule, and aggregation expression.</p>
+    #   @return [Types::ScheduledQueryConfiguration]
+    # @!attribute action_log_line_count
+    #   <p>The number of log lines from the most recent scheduled query execution to include in alarm action notifications. Valid range is 0 through 50. The default is 0, which means no log lines are included.</p>
+    #   @return [Integer]
+    # @!attribute action_log_line_role_arn
+    #   <p>The Amazon Resource Name (ARN) of an IAM role that CloudWatch assumes to retrieve log events for inclusion in alarm action notifications. Required when <code>ActionLogLineCount</code> is greater than 0.</p>
+    #   @return [String]
+    # @!attribute actions_enabled
+    #   <p>Indicates whether actions should be executed during any changes to the alarm state. The default is <code>true</code>.</p>
+    #   @return [Boolean]
+    # @!attribute ok_actions
+    #   <p>The actions to execute when this alarm transitions to the <code>OK</code> state
+    #               from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+    #            <p>Valid Values:</p>
+    #            <p>
+    #               <b>Amazon SNS actions:</b>
+    #            </p>
+    #            <p>
+    #               <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+    #               </code>
+    #            </p>
+    #            <p>
+    #               <b>Lambda actions:</b>
+    #            </p>
+    #            <ul>
+    #               <li>
+    #                  <p>Invoke the latest version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a specific version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a function by using an alias Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    # @!attribute alarm_actions
+    #   <p>The actions to execute when this alarm transitions to the <code>ALARM</code> state
+    #               from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+    #            <p>Valid Values:</p>
+    #            <p>
+    #               <b>Amazon SNS actions:</b>
+    #            </p>
+    #            <p>
+    #               <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+    #               </code>
+    #            </p>
+    #            <p>
+    #               <b>Lambda actions:</b>
+    #            </p>
+    #            <ul>
+    #               <li>
+    #                  <p>Invoke the latest version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a specific version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a function by using an alias Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #            <p>
+    #               <b>Systems Manager actions:</b>
+    #            </p>
+    #            <p>
+    #               <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>
+    #               </code>
+    #            </p>
+    #   @return [Array<String>]
+    # @!attribute insufficient_data_actions
+    #   <p>The actions to execute when this alarm transitions to the <code>INSUFFICIENT_DATA</code> state
+    #               from any other state. Each action is specified as an Amazon Resource Name (ARN).</p>
+    #            <p>Valid Values:</p>
+    #            <p>
+    #               <b>Amazon SNS actions:</b>
+    #            </p>
+    #            <p>
+    #               <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i>
+    #               </code>
+    #            </p>
+    #            <p>
+    #               <b>Lambda actions:</b>
+    #            </p>
+    #            <ul>
+    #               <li>
+    #                  <p>Invoke the latest version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a specific version of a Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Invoke a function by using an alias Lambda function:
+    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                     </code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    # @!attribute query_results_to_evaluate
+    #   <p>The number of most recent scheduled query results to evaluate against the threshold (the N in M-of-N evaluation). Valid range is 1 through 100.</p>
+    #   @return [Integer]
+    # @!attribute query_results_to_alarm
+    #   <p>The number of query results, out of the most recent <code>QueryResultsToEvaluate</code> results, that must breach the threshold to trigger the alarm to transition to <code>ALARM</code> (the M in M-of-N evaluation). Must be less than or equal to <code>QueryResultsToEvaluate</code>.</p>
+    #   @return [Integer]
+    # @!attribute threshold
+    #   <p>The value to compare with the aggregated query result.</p>
+    #   @return [Float]
+    # @!attribute comparison_operator
+    #   <p>The arithmetic operation to use when comparing the aggregated query result and the threshold. The aggregated query result is used as the first operand. Valid values are <code>GreaterThanThreshold</code>, <code>GreaterThanOrEqualToThreshold</code>, <code>LessThanThreshold</code>, and <code>LessThanOrEqualToThreshold</code>.</p>
+    #   @return [String]
+    # @!attribute treat_missing_data
+    #   <p>Sets how this alarm is to handle missing data points. Valid values are <code>breaching</code>, <code>notBreaching</code>, <code>ignore</code>, and <code>missing</code>. If this parameter is omitted, the default behavior of <code>missing</code> is used.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A list of key-value pairs to associate with the alarm. You can use tags to categorize and manage your alarms.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute warm_up_configuration
+    #   <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+    #               after you create or update the alarm. The warm-up period reduces alarm noise from
+    #               missing data while a new resource or service starts publishing data.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+    #                   periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+    #   @return [Types::WarmUpConfiguration]
+    class PutLogAlarmInput < Struct.new(
+      nil,
+      :alarm_name,
+      :alarm_description,
+      :scheduled_query_configuration,
+      :action_log_line_count,
+      :action_log_line_role_arn,
+      :actions_enabled,
+      :ok_actions,
+      :alarm_actions,
+      :insufficient_data_actions,
+      :query_results_to_evaluate,
+      :query_results_to_alarm,
+      :threshold,
+      :comparison_operator,
+      :treat_missing_data,
+      :tags,
+      :warm_up_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3386,19 +4332,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -3498,19 +4444,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -3544,7 +4490,8 @@ module Aws::CloudWatch
     #               </li>
     #            </ul>
     #            <p>
-    #               <b>Start a Amazon Q Developer operational investigation</b>
+    #               <b>Start a Amazon Q Developer operational
+    #                   investigation</b>
     #            </p>
     #            <p>
     #               <code>arn:aws:aiops:<i>region</i>:<i>account-id</i>:investigation-group:<i>investigation-group-id</i>
@@ -3553,7 +4500,7 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     # @!attribute insufficient_data_actions
     #   <p>The actions to execute when this alarm transitions to the
-    #               <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
+    #                   <code>INSUFFICIENT_DATA</code> state from any other state. Each action is specified
     #               as an Amazon Resource Name (ARN). Valid values:</p>
     #            <p>
     #               <b>EC2 actions:</b>
@@ -3617,19 +4564,19 @@ module Aws::CloudWatch
     #            <ul>
     #               <li>
     #                  <p>Invoke the latest version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a specific version of a Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>version-number</i>
     #                     </code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>Invoke a function by using an alias Lambda function:
-    #                       <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
+    #                               <code>arn:aws:lambda:<i>region</i>:<i>account-id</i>:function:<i>function-name</i>:<i>alias-name</i>
     #                     </code>
     #                  </p>
     #               </li>
@@ -3665,12 +4612,13 @@ module Aws::CloudWatch
     #   @return [Array<String>]
     # @!attribute metric_name
     #   <p>The name for the metric associated with the alarm. For each
-    #               <code>PutMetricAlarm</code> operation, you must specify either
-    #               <code>MetricName</code> or a <code>Metrics</code> array.</p>
+    #                   <code>PutMetricAlarm</code> operation, you must specify either
+    #                   <code>MetricName</code>, a <code>Metrics</code> array, or an
+    #                   <code>EvaluationCriteria</code>.</p>
     #            <p>If you are creating an alarm based on a math expression, you cannot specify this
     #               parameter, or any of the <code>Namespace</code>, <code>Dimensions</code>,
-    #               <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
-    #               <code>ExtendedStatistic</code> parameters. Instead, you specify all this information
+    #                   <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
+    #                   <code>ExtendedStatistic</code> parameters. Instead, you specify all this information
     #               in the <code>Metrics</code> array.</p>
     #   @return [String]
     # @!attribute namespace
@@ -3680,7 +4628,7 @@ module Aws::CloudWatch
     # @!attribute statistic
     #   <p>The statistic for the metric specified in <code>MetricName</code>, other than
     #               percentile. For percentile statistics, use <code>ExtendedStatistic</code>. When you call
-    #               <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must specify
+    #                   <code>PutMetricAlarm</code> and specify a <code>MetricName</code>, you must specify
     #               either <code>Statistic</code> or <code>ExtendedStatistic,</code> but not both.</p>
     #   @return [String]
     # @!attribute extended_statistic
@@ -3753,24 +4701,25 @@ module Aws::CloudWatch
     #   @return [Array<Types::Dimension>]
     # @!attribute period
     #   <p>The length, in seconds, used each time the metric specified in
-    #               <code>MetricName</code> is evaluated. Valid values are 10, 20, 30, and any multiple of
-    #               60.</p>
+    #                   <code>MetricName</code> is evaluated. Valid values are 10, 20, 30, and any multiple
+    #               of 60.</p>
     #            <p>
     #               <code>Period</code> is required for alarms based on static thresholds. If you are
     #               creating an alarm based on a metric math expression, you specify the period for each
     #               metric within the objects in the <code>Metrics</code> array.</p>
     #            <p>Be sure to specify 10, 20, or 30 only for metrics that are stored by a
-    #               <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you
-    #               specify a period of 10, 20, or 30 for a metric that does not have sub-minute resolution, the
-    #               alarm still attempts to gather data at the period rate that you specify. In this case,
-    #               it does not receive data for the attempts that do not correspond to a one-minute data
-    #               resolution, and the alarm might often lapse into INSUFFICENT_DATA status. Specifying 10, 20,
-    #               or 30 also sets this alarm as a high-resolution alarm, which has a higher charge than
-    #               other alarms. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
-    #                   Pricing</a>.</p>
+    #                   <code>PutMetricData</code> call with a <code>StorageResolution</code> of 1. If you
+    #               specify a period of 10, 20, or 30 for a metric that does not have sub-minute resolution,
+    #               the alarm still attempts to gather data at the period rate that you specify. In this
+    #               case, it does not receive data for the attempts that do not correspond to a one-minute
+    #               data resolution, and the alarm might often lapse into INSUFFICENT_DATA status.
+    #               Specifying 10, 20, or 30 also sets this alarm as a high-resolution alarm, which has a
+    #               higher charge than other alarms. For more information about pricing, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch
+    #               Pricing</a>.</p>
     #            <p>An alarm's total current evaluation period can be no longer than seven days, so
-    #               <code>Period</code> multiplied by <code>EvaluationPeriods</code> can't be more than
-    #               604,800 seconds. For alarms with a period of less than one hour (3,600 seconds), the total evaluation period can't be longer than one day (86,400 seconds).</p>
+    #                   <code>Period</code> multiplied by <code>EvaluationPeriods</code> can't be more than
+    #               604,800 seconds. For alarms with a period of less than one hour (3,600 seconds), the
+    #               total evaluation period can't be longer than one day (86,400 seconds).</p>
     #   @return [Integer]
     # @!attribute unit
     #   <p>The unit of measure for the statistic. For example, the units for the Amazon EC2
@@ -3800,7 +4749,7 @@ module Aws::CloudWatch
     #   <p>The number of data points that must be breaching to trigger the alarm. This is used
     #               only if you are setting an "M out of N" alarm. In that case, this value is the M. For
     #               more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation">Evaluating an Alarm</a> in the <i>Amazon CloudWatch User
-    #               Guide</i>.</p>
+    #                   Guide</i>.</p>
     #   @return [Integer]
     # @!attribute threshold
     #   <p>The value against which the specified statistic is compared.</p>
@@ -3811,20 +4760,23 @@ module Aws::CloudWatch
     #   <p> The arithmetic operation to use when comparing the specified statistic and
     #               threshold. The specified statistic value is used as the first operand.</p>
     #            <p>The values <code>LessThanLowerOrGreaterThanUpperThreshold</code>,
-    #               <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are
+    #                   <code>LessThanLowerThreshold</code>, and <code>GreaterThanUpperThreshold</code> are
     #               used only for alarms based on anomaly detection models.</p>
     #   @return [String]
     # @!attribute treat_missing_data
     #   <p> Sets how this alarm is to handle missing data points. If
-    #               <code>TreatMissingData</code> is omitted, the default behavior of
-    #               <code>missing</code> is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p>
+    #                   <code>TreatMissingData</code> is omitted, the default behavior of
+    #                   <code>missing</code> is used. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data">Configuring How CloudWatch Alarms Treats Missing Data</a>.</p>
     #            <p>Valid Values: <code>breaching | notBreaching | ignore | missing</code>
     #            </p>
     #            <note>
     #               <p>Alarms that evaluate metrics in the <code>AWS/DynamoDB</code> namespace always
-    #                   <code>ignore</code> missing data even if you choose a different option for
-    #                   <code>TreatMissingData</code>. When an <code>AWS/DynamoDB</code> metric has
+    #                       <code>ignore</code> missing data even if you choose a different option for
+    #                       <code>TreatMissingData</code>. When an <code>AWS/DynamoDB</code> metric has
     #                   missing data, alarms that evaluate that metric remain in their current state.</p>
+    #            </note>
+    #            <note>
+    #               <p>This parameter is not applicable to PromQL alarms.</p>
     #            </note>
     #   @return [String]
     # @!attribute evaluate_low_sample_count_percentile
@@ -3839,17 +4791,17 @@ module Aws::CloudWatch
     # @!attribute metrics
     #   <p>An array of <code>MetricDataQuery</code> structures that enable you to create an alarm
     #               based on the result of a metric math expression. For each <code>PutMetricAlarm</code>
-    #               operation, you must specify either <code>MetricName</code> or a <code>Metrics</code>
-    #               array.</p>
+    #               operation, you must specify either <code>MetricName</code>, a <code>Metrics</code>
+    #               array, or an <code>EvaluationCriteria</code>.</p>
     #            <p>Each item in the <code>Metrics</code> array either retrieves a metric or performs a
     #               math expression.</p>
     #            <p>One item in the <code>Metrics</code> array is the expression that the alarm watches.
     #               You designate this expression by setting <code>ReturnData</code> to true for this object
     #               in the array. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html">MetricDataQuery</a>.</p>
     #            <p>If you use the <code>Metrics</code> parameter, you cannot include the
-    #               <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,
-    #               <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
-    #               <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same
+    #                   <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,
+    #                   <code>Period</code>, <code>Unit</code>, <code>Statistic</code>, or
+    #                   <code>ExtendedStatistic</code> parameters of <code>PutMetricAlarm</code> in the same
     #               operation. Instead, you retrieve the metrics you are using in your math expression as
     #               part of the <code>Metrics</code> array.</p>
     #   @return [Array<Types::MetricDataQuery>]
@@ -3864,15 +4816,57 @@ module Aws::CloudWatch
     #               this parameter are ignored. To change the tags of an existing alarm, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>
     #            <p>To use this field to set tags for an alarm when you create it, you must be signed on
     #               with both the <code>cloudwatch:PutMetricAlarm</code> and
-    #               <code>cloudwatch:TagResource</code> permissions.</p>
+    #                   <code>cloudwatch:TagResource</code> permissions.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute threshold_metric_id
     #   <p>If this is an alarm based on an anomaly detection model, make this value match the ID
     #               of the <code>ANOMALY_DETECTION_BAND</code> function.</p>
     #            <p>For an example of how to use this parameter, see the <b>Anomaly
-    #               Detection Model Alarm</b> example on this page.</p>
+    #                   Detection Model Alarm</b> example on this page.</p>
     #            <p>If your alarm uses this parameter, it cannot have Auto Scaling actions.</p>
     #   @return [String]
+    # @!attribute evaluation_window
+    #   <p>The evaluation window that the alarm uses to select the range of metric data that it
+    #               evaluates. Specify either a sliding window or a wall clock window. If you omit this
+    #               parameter, the alarm uses a sliding window.</p>
+    #            <p>A sliding window advances each time the alarm is evaluated, forming a rolling time
+    #               window. A wall clock window aligns the evaluated range to fixed clock boundaries, such
+    #               as the top of the hour or the start of the day.</p>
+    #            <p>You can use <code>EvaluationWindow</code> with any type of metric alarm except alarms
+    #               that are based on a PromQL query.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html">Alarm
+    #                   evaluation windows</a> in the <i>CloudWatch User
+    #               Guide</i>.</p>
+    #   @return [Types::EvaluationWindow]
+    # @!attribute warm_up_configuration
+    #   <p>The warm-up configuration for the alarm. A warm-up period delays alarm evaluation
+    #               after you create or update the alarm. The warm-up period reduces alarm noise from
+    #               missing data while a new resource or service starts publishing metrics.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html">Alarm warm-up
+    #                   periods</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+    #   @return [Types::WarmUpConfiguration]
+    # @!attribute evaluation_criteria
+    #   <p>The evaluation criteria for the alarm. For each <code>PutMetricAlarm</code>
+    #               operation, you must specify either <code>MetricName</code>, a <code>Metrics</code>
+    #               array, or an <code>EvaluationCriteria</code>.</p>
+    #            <p>If you use the <code>EvaluationCriteria</code> parameter, you cannot include the
+    #                   <code>Namespace</code>, <code>MetricName</code>, <code>Dimensions</code>,
+    #                   <code>Period</code>, <code>Unit</code>, <code>Statistic</code>,
+    #                   <code>ExtendedStatistic</code>, <code>Metrics</code>, <code>Threshold</code>,
+    #                   <code>ComparisonOperator</code>, <code>ThresholdMetricId</code>,
+    #                   <code>EvaluationPeriods</code>, or <code>DatapointsToAlarm</code> parameters of
+    #                   <code>PutMetricAlarm</code> in the same operation. Instead, all evaluation
+    #               parameters are defined within this structure.</p>
+    #            <p>For an example of how to use this parameter, see the <b>PromQL
+    #                   alarm</b> example on this page.</p>
+    #   @return [Types::EvaluationCriteria]
+    # @!attribute evaluation_interval
+    #   <p>The frequency, in seconds, at which the alarm is evaluated. Valid values are 10,
+    #               20, 30, and any multiple of 60.</p>
+    #            <p>This parameter is required for alarms that use <code>EvaluationCriteria</code>, and
+    #               cannot be specified for alarms configured with <code>MetricName</code> or
+    #                   <code>Metrics</code>.</p>
+    #   @return [Integer]
     class PutMetricAlarmInput < Struct.new(
       nil,
       :alarm_name,
@@ -3897,6 +4891,10 @@ module Aws::CloudWatch
       :metrics,
       :tags,
       :threshold_metric_id,
+      :evaluation_window,
+      :warm_up_configuration,
+      :evaluation_criteria,
+      :evaluation_interval,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3912,34 +4910,33 @@ module Aws::CloudWatch
     # @!attribute metric_data
     #   <p>The data for the metrics. Use this parameter if your metrics do not contain
     #               associated entities. The array can include no more than 1000 metrics per call.</p>
-    #            <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code> 
+    #            <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code>
     #               and <code>MetricData</code> metrics.</p>
     #   @return [Array<Types::MetricDatum>]
     # @!attribute entity_metric_data
-    #   <p>Data for metrics that contain associated entity information. You can include up to 
-    #               two <code>EntityMetricData</code> objects, each of which can contain a single 
-    #               <code>Entity</code> and associated metrics.</p>
-    #            <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code> 
+    #   <p>Data for metrics that contain associated entity information. You can include up to two
+    #                   <code>EntityMetricData</code> objects, each of which can contain a single
+    #                   <code>Entity</code> and associated metrics.</p>
+    #            <p>The limit of metrics allowed, 1000, is the sum of both <code>EntityMetricData</code>
     #               and <code>MetricData</code> metrics.</p>
     #   @return [Array<Types::EntityMetricData>]
     # @!attribute strict_entity_validation
     #   <p>Whether to accept valid metric data when an invalid entity is sent.</p>
     #            <ul>
     #               <li>
-    #                  <p>When set to <code>true</code>: Any validation error (for entity or metric 
-    #                       data) will fail the entire request, and no data will be ingested. The failed 
+    #                  <p>When set to <code>true</code>: Any validation error (for entity or metric
+    #                       data) will fail the entire request, and no data will be ingested. The failed
     #                       operation will return a 400 result with the error.</p>
     #               </li>
     #               <li>
-    #                  <p>When set to <code>false</code>: Validation errors in the entity will not 
-    #                       associate the metric with the entity, but the metric data will still be 
-    #                       accepted and ingested. Validation errors in the metric data will fail the 
-    #                       entire request, and no data will be ingested.</p>
-    #                  <p>In the case of an invalid entity, the operation will return a 
-    #                       <code>200</code> status, but an additional response header will contain 
-    #                       information about the validation errors. The new header, 
-    #                       <code>X-Amzn-Failure-Message</code> is an enumeration of the following 
-    #                       values:</p>
+    #                  <p>When set to <code>false</code>: Validation errors in the entity will not
+    #                       associate the metric with the entity, but the metric data will still be accepted
+    #                       and ingested. Validation errors in the metric data will fail the entire request,
+    #                       and no data will be ingested.</p>
+    #                  <p>In the case of an invalid entity, the operation will return a <code>200</code>
+    #                       status, but an additional response header will contain information about the
+    #                       validation errors. The new header, <code>X-Amzn-Failure-Message</code> is an
+    #                       enumeration of the following values:</p>
     #                  <ul>
     #                     <li>
     #                        <p>
@@ -3948,7 +4945,7 @@ module Aws::CloudWatch
     #                     <li>
     #                        <p>
     #                           <code>InvalidKeyAttributes</code> - The provided
-    #                               <code>KeyAttributes</code> of an entity is invalid.</p>
+    #                                   <code>KeyAttributes</code> of an entity is invalid.</p>
     #                     </li>
     #                     <li>
     #                        <p>
@@ -3958,24 +4955,22 @@ module Aws::CloudWatch
     #                     <li>
     #                        <p>
     #                           <code>InvalidTypeValue</code> - The provided <code>Type</code> in the
-    #                               <code>KeyAttributes</code> of an entity is invalid.</p>
+    #                                   <code>KeyAttributes</code> of an entity is invalid.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <code>EntitySizeTooLarge</code> - The number of 
-    #                               <code>EntityMetricData</code> objects allowed is 2.</p>
+    #                           <code>EntitySizeTooLarge</code> - The number of
+    #                                   <code>EntityMetricData</code> objects allowed is 2.</p>
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <code>MissingRequiredFields</code> - There are missing required 
-    #                               fields in the <code>KeyAttributes</code> for the provided
+    #                           <code>MissingRequiredFields</code> - There are missing required fields
+    #                               in the <code>KeyAttributes</code> for the provided
     #                               <code>Type</code>.</p>
     #                     </li>
     #                  </ul>
-    #                  <p>For details of the requirements for specifying an entity, see 
-    #                       <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How 
-    #                       to add related information to telemetry</a> in the 
-    #                       <i>CloudWatch User Guide</i>.</p>
+    #                  <p>For details of the requirements for specifying an entity, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html">How to add related information to telemetry</a> in the
+    #                               <i>CloudWatch User Guide</i>.</p>
     #               </li>
     #            </ul>
     #            <p>This parameter is <i>required</i> when <code>EntityMetricData</code> is
@@ -4031,7 +5026,7 @@ module Aws::CloudWatch
     #   @return [String]
     # @!attribute output_format
     #   <p>The output format for the stream. Valid values are <code>json</code>,
-    #               <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more
+    #                   <code>opentelemetry1.0</code>, and <code>opentelemetry0.7</code>. For more
     #               information about metric stream output formats, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html">
     #                   Metric streams output formats</a>.</p>
     #   @return [String]
@@ -4047,14 +5042,14 @@ module Aws::CloudWatch
     #   @return [Array<Types::Tag>]
     # @!attribute statistics_configurations
     #   <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>,
-    #               <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
+    #                   <code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is
     #               streamed. You can use this parameter to have the metric stream also send additional
     #               statistics in the stream. This array can have up to 100 members.</p>
     #            <p>For each entry in this array, you specify one or more metrics and the list of
     #               additional statistics to stream for those metrics. The additional statistics that you
     #               can stream depend on the stream's <code>OutputFormat</code>. If the
-    #               <code>OutputFormat</code> is <code>json</code>, you can stream any additional
-    #               statistic that is supported by CloudWatch, listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html">
+    #                   <code>OutputFormat</code> is <code>json</code>, you can stream any additional
+    #               statistic that is supported by CloudWatch, listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html">
     #                   CloudWatch statistics definitions</a>. If the <code>OutputFormat</code>
     #               is <code>opentelemetry1.0</code> or <code>opentelemetry0.7</code>, you can stream
     #               percentile statistics such as p95, p99.9, and so on.</p>
@@ -4094,7 +5089,7 @@ module Aws::CloudWatch
     #             detection model.</p>
     # @!attribute start_time
     #   <p>The start time of the range to exclude. The format is
-    #               <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
+    #                   <code>yyyy-MM-dd'T'HH:mm:ss</code>. For example,
     #               <code>2019-07-01T23:59:59</code>.</p>
     #   @return [Time]
     # @!attribute end_time
@@ -4106,6 +5101,66 @@ module Aws::CloudWatch
       nil,
       :start_time,
       :end_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The operation could not be completed because the request conflicts with the current state of the alarm or its underlying scheduled query resource.</p>
+    # @!attribute message
+    #   @return [String]
+    class ResourceConflict < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies which metrics Amazon CloudWatch collects for a resource metrics
+    #             configuration. Include this in a <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html">CreateResourceMetricsConfiguration</a> or <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html">UpdateResourceMetricsConfiguration</a> request to limit collection to a specific
+    #             set of metrics. If you omit metric selections, Amazon CloudWatch collects all
+    #             available detailed metrics for the resource.</p>
+    # @!attribute include_metrics
+    #   <p>The names of the metrics to collect for the resource. Amazon CloudWatch collects
+    #               only the metrics that you list here.</p>
+    #   @return [Array<String>]
+    class ResourceMetricSelection < Struct.new(
+      nil,
+      :include_metrics,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a resource metrics configuration for an Amazon Web Services resource. A
+    #             resource metrics configuration enables detailed metric collection for the resource that
+    #             is identified by its Amazon Resource Name (ARN). Each Amazon Web Services resource can
+    #             have only one resource metrics configuration.</p>
+    #          <p>This structure is returned by the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html">CreateResourceMetricsConfiguration</a>, <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html">UpdateResourceMetricsConfiguration</a>, and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetResourceMetricsConfiguration.html">GetResourceMetricsConfiguration</a> operations.</p>
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource that this
+    #               configuration applies to.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the resource metrics configuration was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the resource metrics configuration was last updated. When the
+    #               configuration is first created, this value is the same as
+    #               <code>CreatedAt</code>.</p>
+    #   @return [Time]
+    # @!attribute metric_selections
+    #   <p>The metrics that Amazon CloudWatch collects for the resource. If this field is not
+    #               present, Amazon CloudWatch collects all available detailed metrics for the
+    #               resource.</p>
+    #   @return [Array<Types::ResourceMetricSelection>]
+    class ResourceMetricsConfiguration < Struct.new(
+      nil,
+      :resource_arn,
+      :created_at,
+      :updated_at,
+      :metric_selections,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4135,6 +5190,220 @@ module Aws::CloudWatch
       :resource_type,
       :resource_id,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the schedule configuration for an alarm mute rule.</p>
+    #          <p>The rule contains a schedule that specifies when and how long alarms should be muted.
+    #             The schedule can be a recurring pattern using cron expressions or a one-time mute window
+    #             using at expressions.</p>
+    # @!attribute schedule
+    #   <p>The schedule configuration that defines when the mute rule activates and how long it
+    #               remains active.</p>
+    #   @return [Types::Schedule]
+    class Rule < Struct.new(
+      nil,
+      :schedule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies when and how long an alarm mute rule is active.</p>
+    #          <p>The schedule uses either a cron expression for recurring mute windows or an at
+    #             expression for one-time mute windows. When the schedule activates, the mute rule mutes
+    #             alarm actions for the specified duration.</p>
+    # @!attribute expression
+    #   <p>The schedule expression that defines when the mute rule activates. The expression must
+    #               be between 1 and 256 characters in length.</p>
+    #            <p>You can use one of two expression formats:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>Cron expressions</b> - For recurring mute
+    #                       windows. Format: <code>cron(Minutes Hours Day-of-month Month
+    #                       Day-of-week)</code>
+    #                  </p>
+    #                  <p>Examples:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>cron(0 2 * * *)</code> - Activates daily at 2:00 AM</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>cron(0 2 * * SUN)</code> - Activates every Sunday at 2:00 AM for
+    #                               weekly system maintenance</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>cron(0 1 1 * *)</code> - Activates on the first day of each
+    #                               month at 1:00 AM for monthly database maintenance</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>cron(0 18 * * FRI)</code> - Activates every Friday at 6:00
+    #                               PM</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>cron(0 23 * * *)</code> - Activates every day at 11:00 PM during
+    #                               nightly backup operations</p>
+    #                     </li>
+    #                  </ul>
+    #                  <p>The characters <code>*</code>, <code>-</code>, and <code>,</code> are
+    #                       supported in all fields. English names can be used for the month (JAN-DEC) and
+    #                       day of week (SUN-SAT) fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>At expressions</b> - For one-time mute windows.
+    #                       Format: <code>at(yyyy-MM-ddThh:mm)</code>
+    #                  </p>
+    #                  <p>Examples:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>at(2024-05-10T14:00)</code> - Activates once on May 10, 2024 at
+    #                               2:00 PM during an active incident response session</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>at(2024-12-23T00:00)</code> - Activates once on December 23,
+    #                               2024 at midnight during annual company shutdown</p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute duration
+    #   <p>The length of time that alarms remain muted when the schedule activates. The duration
+    #               must be between 1 and 50 characters in length.</p>
+    #            <p>Specify the duration using ISO 8601 duration format with a minimum of 1 minute
+    #                   (<code>PT1M</code>) and maximum of 15 days (<code>P15D</code>).</p>
+    #            <p>Examples:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>PT4H</code> - 4 hours for weekly system maintenance</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>P2DT12H</code> - 2 days and 12 hours for weekend muting from Friday 6:00
+    #                       PM to Monday 6:00 AM</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PT6H</code> - 6 hours for monthly database maintenance</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PT2H</code> - 2 hours for nightly backup operations</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>P7D</code> - 7 days for annual company shutdown</p>
+    #               </li>
+    #            </ul>
+    #            <p>The duration begins when the schedule expression time is reached. For recurring
+    #               schedules, the duration applies to each occurrence.</p>
+    #   @return [String]
+    # @!attribute timezone
+    #   <p>The time zone to use when evaluating the schedule expression. The time zone must be
+    #               between 1 and 50 characters in length.</p>
+    #            <p>Specify the time zone using standard timezone identifiers (for example,
+    #                   <code>America/New_York</code>, <code>Europe/London</code>, or
+    #                   <code>Asia/Tokyo</code>).</p>
+    #            <p>If you don't specify a time zone, UTC is used by default. The time zone affects how
+    #               cron and at expressions are interpreted, as well as start and expire dates you
+    #               specify</p>
+    #            <p>Examples:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>America/New_York</code> - Eastern Time (US)</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>America/Los_Angeles</code> - Pacific Time (US)</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Europe/London</code> - British Time</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Asia/Tokyo</code> - Japan Standard Time</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UTC</code> - Coordinated Universal Time</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class Schedule < Struct.new(
+      nil,
+      :expression,
+      :duration,
+      :timezone,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the schedule expression and time-range offsets that define when a scheduled query runs and what time range each execution covers.</p>
+    # @!attribute schedule_expression
+    #   <p>The schedule expression that defines how often the underlying CloudWatch Logs scheduled query runs. Specify a <code>rate()</code> expression, for example <code>rate(5 minutes)</code>.</p>
+    #   @return [String]
+    # @!attribute start_time_offset
+    #   <p>The offset, in seconds, before the scheduled execution time at which the query time range begins. For example, an offset of 360 (6 minutes) on a query running at 12:05:00 starts the query time range at 11:59:00.</p>
+    #   @return [Integer]
+    # @!attribute end_time_offset
+    #   <p>The offset, in seconds, before the scheduled execution time at which the query time range ends. Must be non-negative and less than <code>StartTimeOffset</code>.  The default is 0.</p>
+    #   @return [Integer]
+    class ScheduleConfiguration < Struct.new(
+      nil,
+      :schedule_expression,
+      :start_time_offset,
+      :end_time_offset,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration of the CloudWatch Logs scheduled query that backs a log alarm.</p>
+    # @!attribute query_string
+    #   <p>The CloudWatch Logs query to execute on each scheduled run. Length constraints: maximum of 10,000 characters.</p>
+    #   @return [String]
+    # @!attribute log_group_identifiers
+    #   <p>The log groups to query. Each entry can be a log group name or ARN. Use the ARN form when querying log groups in a different account (for example, when running cross-account queries from a monitoring account). The list must contain between 1 and 50 entries.</p>
+    #   @return [Array<String>]
+    # @!attribute query_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudWatch Logs scheduled query that the alarm uses. This field is populated in <code>DescribeAlarms</code> responses.</p>
+    #   @return [String]
+    # @!attribute scheduled_query_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that CloudWatch assumes when executing the scheduled query against the configured log groups.</p>
+    #   @return [String]
+    # @!attribute schedule_configuration
+    #   <p>The schedule and time-range offset configuration for the underlying scheduled query.</p>
+    #   @return [Types::ScheduleConfiguration]
+    # @!attribute aggregation_expression
+    #   <p>The expression that defines how to aggregate query results into one or more scalar values for alarm evaluation. For example, <code>count(*)</code> or <code>avg(latency) by host | sort desc</code>. Length constraints: minimum 1 character, maximum 2048 characters.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A list of key-value pairs to associate with the underlying scheduled query resource.</p>
+    #   @return [Array<Types::Tag>]
+    class ScheduledQueryConfiguration < Struct.new(
+      nil,
+      :query_string,
+      :log_group_identifiers,
+      :query_arn,
+      :scheduled_query_role_arn,
+      :schedule_configuration,
+      :aggregation_expression,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4199,6 +5468,19 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An evaluation window that advances each time the alarm is evaluated, forming a rolling
+    #             time window. This is the default evaluation window. A sliding window has no additional
+    #             configuration options.</p>
+    #          <p>Choose a sliding window when you need the fastest detection and the calendar
+    #             boundaries of the data don't matter, such as for continuous performance, latency, or
+    #             resource-exhaustion monitoring.</p>
+    class SlidingWindow < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute names
     #   <p>The array of the names of metric streams to start streaming.</p>
     #            <p>This is an "all or nothing" operation. If you do not have permission to access all of
@@ -4215,6 +5497,55 @@ module Aws::CloudWatch
 
     class StartMetricStreamsOutput < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute include_filters
+    #   <p>The metric namespaces, and the metric names, to enrich. If this parameter is
+    #               omitted, every namespace that Amazon CloudWatch supports for enrichment is in
+    #               scope.</p>
+    #            <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+    #                   <code>ExcludeFilters</code> combined.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    # @!attribute exclude_filters
+    #   <p>The metric namespaces, and the metric names, to leave unenriched. If this parameter
+    #               is omitted, nothing is excluded.</p>
+    #            <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after
+    #                   <code>IncludeFilters</code>, so a metric that both parameters match is not
+    #               enriched.</p>
+    #            <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+    #                   <code>ExcludeFilters</code> combined.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    class StartOTelEnrichmentInput < Struct.new(
+      nil,
+      :include_filters,
+      :exclude_filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute include_filters
+    #   <p>The include filters that are stored for the account.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    # @!attribute exclude_filters
+    #   <p>The exclude filters that are stored for the account.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    # @!attribute created_at
+    #   <p>The date and time that enrichment started for the account.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the enrichment configuration for the account was last
+    #               stored.</p>
+    #   @return [Time]
+    class StartOTelEnrichmentOutput < Struct.new(
+      nil,
+      :include_filters,
+      :exclude_filters,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4265,6 +5596,20 @@ module Aws::CloudWatch
       include ::Smithy::Schema::Structure
     end
 
+    class StopOTelEnrichmentInput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class StopOTelEnrichmentOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A key-value pair associated with a CloudWatch resource.</p>
     # @!attribute key
     #   <p>A string that you can use to assign a value. The combination of tag keys and values
@@ -4285,11 +5630,19 @@ module Aws::CloudWatch
     # @!attribute resource_arn
     #   <p>The ARN of the CloudWatch resource that you're adding tags to.</p>
     #            <p>The ARN format of an alarm is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
     #               </code>
     #            </p>
     #            <p>The ARN format of a Contributor Insights rule is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a dashboard is
+    #                       <code>arn:aws:cloudwatch::<i>account-id</i>:dashboard/<i>dashboard-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a metric stream is
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:metric-stream/<i>metric-stream-name</i>
     #               </code>
     #            </p>
     #            <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web
@@ -4317,11 +5670,19 @@ module Aws::CloudWatch
     # @!attribute resource_arn
     #   <p>The ARN of the CloudWatch resource that you're removing tags from.</p>
     #            <p>The ARN format of an alarm is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i>
     #               </code>
     #            </p>
     #            <p>The ARN format of a Contributor Insights rule is
-    #               <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule/<i>insight-rule-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a dashboard is
+    #                       <code>arn:aws:cloudwatch::<i>account-id</i>:dashboard/<i>dashboard-name</i>
+    #               </code>
+    #            </p>
+    #            <p>The ARN format of a metric stream is
+    #                       <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:metric-stream/<i>metric-stream-name</i>
     #               </code>
     #            </p>
     #            <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web
@@ -4341,6 +5702,161 @@ module Aws::CloudWatch
 
     class UntagResourceOutput < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute include_filters
+    #   <p>The metric namespaces, and the metric names, to enrich. If this parameter is
+    #               omitted, every namespace that Amazon CloudWatch supports for enrichment is in
+    #               scope.</p>
+    #            <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+    #                   <code>ExcludeFilters</code> combined.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    # @!attribute exclude_filters
+    #   <p>The metric namespaces, and the metric names, to leave unenriched. If this parameter
+    #               is omitted, nothing is excluded.</p>
+    #            <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after
+    #                   <code>IncludeFilters</code>, so a metric that both parameters match is not
+    #               enriched.</p>
+    #            <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and
+    #                   <code>ExcludeFilters</code> combined.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    class UpdateOTelEnrichmentInput < Struct.new(
+      nil,
+      :include_filters,
+      :exclude_filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute include_filters
+    #   <p>The include filters that are stored for the account after the replacement. This
+    #               parameter is omitted when the request cleared the include filters, which means that
+    #               every supported namespace is in scope.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    # @!attribute exclude_filters
+    #   <p>The exclude filters that are stored for the account after the replacement. This
+    #               parameter is omitted when the request cleared the exclude filters, which means that
+    #               nothing is excluded.</p>
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    # @!attribute created_at
+    #   <p>The date and time that enrichment started for the account.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the enrichment configuration for the account was last
+    #               stored.</p>
+    #   @return [Time]
+    class UpdateOTelEnrichmentOutput < Struct.new(
+      nil,
+      :include_filters,
+      :exclude_filters,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the resource ARN and optional replacement metric selections for an
+    #             <code>UpdateResourceMetricsConfiguration</code> request.</p>
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services resource to update the
+    #               resource metrics configuration for.</p>
+    #   @return [String]
+    # @!attribute metric_selections
+    #   <p>Specifies which metrics Amazon CloudWatch collects for the resource. The selections
+    #               that you provide completely replace any existing metric selections.</p>
+    #            <p>If you omit this parameter, Amazon CloudWatch removes any existing metric selection
+    #               filter and collects all available detailed metrics for the resource.</p>
+    #   @return [Array<Types::ResourceMetricSelection>]
+    class UpdateResourceMetricsConfigurationInput < Struct.new(
+      nil,
+      :resource_arn,
+      :metric_selections,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns the updated resource metrics configuration.</p>
+    # @!attribute resource_metrics_configuration
+    #   <p>The resource metrics configuration after the update was applied.</p>
+    #   @return [Types::ResourceMetricsConfiguration]
+    class UpdateResourceMetricsConfigurationOutput < Struct.new(
+      nil,
+      :resource_metrics_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request failed validation. One or more input parameters do not satisfy the
+    #             constraints that the operation requires.</p>
+    # @!attribute message
+    #   @return [String]
+    class ValidationException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An evaluation window that aligns the evaluated range to fixed clock boundaries that
+    #             match the alarm's period, such as the top of the hour, midnight, or the start of the
+    #             calendar week, optionally in a specific time zone.</p>
+    #          <p>When you use a wall clock window, the alarm's period must be 1 minute (60 seconds),
+    #             5 minutes (300 seconds), 1 hour (3,600 seconds), 1 day (86,400 seconds), or 1 week
+    #             (604,800 seconds). Other period values aren't supported with a wall clock window.</p>
+    #          <p>Choose a wall clock window when your monitoring is tied to a business or calendar
+    #             period, such as daily reports, batch jobs, or backups, or when you want alarm
+    #             evaluations to match the periods shown on a metric dashboard.</p>
+    # @!attribute timezone
+    #   <p>The time zone to use when the alarm aligns the evaluation window to clock boundaries.
+    #               You can specify an IANA time zone name (for example, <code>America/New_York</code>), a
+    #               fixed UTC offset (for example, <code>+05:30</code>), or an offset-prefixed identifier
+    #               (for example, <code>UTC+05:30</code>). The offset must be aligned to a multiple of
+    #               5 minutes. If you don't specify a time zone, CloudWatch uses
+    #               <code>UTC</code>.</p>
+    #            <p>The time zone affects window alignment for all periods, including periods of one
+    #               hour or shorter.</p>
+    #   @return [String]
+    class WallClockWindow < Struct.new(
+      nil,
+      :timezone,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings that define the warm-up behavior for an alarm. Use these
+    #             settings to delay alarm evaluation after you create or update the alarm, which reduces
+    #             alarm noise while a new resource or service starts publishing data.</p>
+    #          <p>During the warm-up period, the alarm stays in <code>INSUFFICIENT_DATA</code> and
+    #             does not perform alarm actions.</p>
+    # @!attribute warm_up_period_duration_in_minutes
+    #   <p>The length of the warm-up period, in minutes. After you create or update the alarm,
+    #               the alarm stays in <code>INSUFFICIENT_DATA</code> for this duration. During this time,
+    #               the alarm does not perform alarm actions.</p>
+    #            <p>You can change this value at any time, including after the warm-up period ends. If
+    #               you change it after the warm-up period ends, the new value does not restart the
+    #               warm-up period.</p>
+    #   @return [Integer]
+    # @!attribute only_start_evaluating_after_warm_up_period_ends
+    #   <p>Specifies whether the alarm waits for the full warm-up period before it starts
+    #               to evaluate. The default is <code>false</code>. If <code>true</code>, the alarm waits
+    #               the entire <code>WarmUpPeriodDurationInMinutes</code> before it starts to evaluate, even
+    #               if metric data arrives earlier. If <code>false</code>, the alarm ends the warm-up period
+    #               early. Evaluation begins as soon as the alarm has enough metric data to fill its
+    #               evaluation window.</p>
+    #   @return [Boolean]
+    class WarmUpConfiguration < Struct.new(
+      nil,
+      :warm_up_period_duration_in_minutes,
+      :only_start_evaluating_after_warm_up_period_ends,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

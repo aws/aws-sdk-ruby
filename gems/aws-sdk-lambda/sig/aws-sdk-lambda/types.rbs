@@ -78,12 +78,13 @@ module Aws::Lambda
         ?action: String,
         ?principal: String,
         ?source_arn: String,
+        ?function_url_auth_type: String,
+        ?invoked_via_function_url: bool,
         ?source_account: String,
         ?event_source_token: String,
         ?qualifier: String,
         ?revision_id: String,
         ?principal_org_id: String,
-        ?function_url_auth_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -92,12 +93,13 @@ module Aws::Lambda
       attr_accessor action: String?
       attr_accessor principal: String?
       attr_accessor source_arn: String?
+      attr_accessor function_url_auth_type: String?
+      attr_accessor invoked_via_function_url: bool?
       attr_accessor source_account: String?
       attr_accessor event_source_token: String?
       attr_accessor qualifier: String?
       attr_accessor revision_id: String?
       attr_accessor principal_org_id: String?
-      attr_accessor function_url_auth_type: String?
     end
 
     class AddPermissionResponse
@@ -130,6 +132,19 @@ module Aws::Lambda
       attr_accessor description: String?
       attr_accessor routing_config: Types::AliasRoutingConfiguration?
       attr_accessor revision_id: String?
+    end
+
+    class AliasLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
     end
 
     class AliasRoutingConfiguration
@@ -179,6 +194,400 @@ module Aws::Lambda
     module Architecture
       x86_64: String
       arm64: String
+    end
+
+    class CallbackDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?callback_id: String,
+        ?result: String,
+        ?error: Types::ErrorObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor callback_id: String?
+      attr_accessor result: String?
+      attr_accessor error: Types::ErrorObject?
+    end
+
+    class CallbackFailedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+    end
+
+    class CallbackOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_seconds: Integer,
+        ?heartbeat_timeout_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor heartbeat_timeout_seconds: Integer?
+    end
+
+    class CallbackStartedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?callback_id: String,
+        ?heartbeat_timeout: Integer,
+        ?timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor callback_id: String?
+      attr_accessor heartbeat_timeout: Integer?
+      attr_accessor timeout: Integer?
+    end
+
+    class CallbackSucceededDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: Types::EventResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: Types::EventResult?
+    end
+
+    class CallbackTimedOutDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+    end
+
+    class CallbackTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class CapacityProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider_arn: String,
+        ?state: String,
+        ?vpc_config: Types::CapacityProviderVpcConfig,
+        ?permissions_config: Types::CapacityProviderPermissionsConfig,
+        ?instance_requirements: Types::InstanceRequirements,
+        ?capacity_provider_scaling_config: Types::CapacityProviderScalingConfig,
+        ?kms_key_arn: String,
+        ?last_modified: String,
+        ?propagate_tags: Types::PropagateTags,
+        ?telemetry_config: Types::CapacityProviderTelemetryConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider_arn: String?
+      attr_accessor state: String?
+      attr_accessor vpc_config: Types::CapacityProviderVpcConfig?
+      attr_accessor permissions_config: Types::CapacityProviderPermissionsConfig?
+      attr_accessor instance_requirements: Types::InstanceRequirements?
+      attr_accessor capacity_provider_scaling_config: Types::CapacityProviderScalingConfig?
+      attr_accessor kms_key_arn: String?
+      attr_accessor last_modified: String?
+      attr_accessor propagate_tags: Types::PropagateTags?
+      attr_accessor telemetry_config: Types::CapacityProviderTelemetryConfig?
+    end
+
+    class CapacityProviderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_managed_instances_capacity_provider_config: Types::LambdaManagedInstancesCapacityProviderConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_managed_instances_capacity_provider_config: Types::LambdaManagedInstancesCapacityProviderConfig?
+    end
+
+    class CapacityProviderLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class CapacityProviderLoggingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_log_level: String,
+        ?log_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_log_level: String?
+      attr_accessor log_group: String?
+    end
+
+    class CapacityProviderPermissionsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider_operator_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider_operator_role_arn: String?
+    end
+
+    module CapacityProviderPredefinedMetricType
+      LambdaCapacityProviderAverageCPUUtilization: String
+    end
+
+    class CapacityProviderScalingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_v_cpu_count: Integer,
+        ?scaling_mode: String,
+        ?scaling_policies: Array[Types::TargetTrackingScalingPolicy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_v_cpu_count: Integer?
+      attr_accessor scaling_mode: String?
+      attr_accessor scaling_policies: Array[Types::TargetTrackingScalingPolicy]?
+    end
+
+    module CapacityProviderScalingMode
+      Auto: String
+      Manual: String
+    end
+
+    module CapacityProviderState
+      Pending: String
+      Active: String
+      Failed: String
+      Deleting: String
+    end
+
+    class CapacityProviderTelemetryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_config: Types::CapacityProviderLoggingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_config: Types::CapacityProviderLoggingConfig?
+    end
+
+    class CapacityProviderVpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class ChainedInvokeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+        ?error: Types::ErrorObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+      attr_accessor error: Types::ErrorObject?
+    end
+
+    class ChainedInvokeFailedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+    end
+
+    class ChainedInvokeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?tenant_id: String,
+        ?x_amzn_trace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor tenant_id: String?
+      attr_accessor x_amzn_trace_id: String?
+    end
+
+    class ChainedInvokeStartedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?tenant_id: String,
+        ?input: Types::EventInput,
+        ?executed_version: String,
+        ?durable_execution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor tenant_id: String?
+      attr_accessor input: Types::EventInput?
+      attr_accessor executed_version: String?
+      attr_accessor durable_execution_arn: String?
+    end
+
+    class ChainedInvokeStoppedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+    end
+
+    class ChainedInvokeSucceededDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: Types::EventResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: Types::EventResult?
+    end
+
+    class ChainedInvokeTimedOutDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+    end
+
+    class CheckpointDurableExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?durable_execution_arn: String,
+        ?checkpoint_token: String,
+        ?updates: Array[Types::OperationUpdate],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor durable_execution_arn: String?
+      attr_accessor checkpoint_token: String?
+      attr_accessor updates: Array[Types::OperationUpdate]?
+      attr_accessor client_token: String?
+    end
+
+    class CheckpointDurableExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?checkpoint_token: String,
+        ?new_execution_state: Types::CheckpointUpdatedExecutionState,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor checkpoint_token: String?
+      attr_accessor new_execution_state: Types::CheckpointUpdatedExecutionState?
+    end
+
+    class CheckpointUpdatedExecutionState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operations: Array[Types::Operation],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operations: Array[Types::Operation]?
+      attr_accessor next_marker: String?
+    end
+
+    class CodeArtifactUserDeletedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class CodeArtifactUserFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class CodeArtifactUserPendingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
     end
 
     class CodeSigningConfig
@@ -268,6 +677,63 @@ module Aws::Lambda
       attr_accessor reserved_concurrent_executions: Integer?
     end
 
+    class ContextDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replay_children: bool,
+        ?result: String,
+        ?error: Types::ErrorObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replay_children: bool?
+      attr_accessor result: String?
+      attr_accessor error: Types::ErrorObject?
+    end
+
+    class ContextFailedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+    end
+
+    class ContextOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replay_children: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replay_children: bool?
+    end
+
+    class ContextStartedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ContextSucceededDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: Types::EventResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: Types::EventResult?
+    end
+
     class Cors
       include Smithy::Schema::Structure
 
@@ -329,6 +795,44 @@ module Aws::Lambda
       attr_accessor routing_config: Types::AliasRoutingConfiguration?
     end
 
+    class CreateCapacityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider_name: String,
+        ?vpc_config: Types::CapacityProviderVpcConfig,
+        ?permissions_config: Types::CapacityProviderPermissionsConfig,
+        ?instance_requirements: Types::InstanceRequirements,
+        ?capacity_provider_scaling_config: Types::CapacityProviderScalingConfig,
+        ?kms_key_arn: String,
+        ?tags: Hash[String, String],
+        ?propagate_tags: Types::PropagateTags,
+        ?telemetry_config: Types::CapacityProviderTelemetryConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider_name: String?
+      attr_accessor vpc_config: Types::CapacityProviderVpcConfig?
+      attr_accessor permissions_config: Types::CapacityProviderPermissionsConfig?
+      attr_accessor instance_requirements: Types::InstanceRequirements?
+      attr_accessor capacity_provider_scaling_config: Types::CapacityProviderScalingConfig?
+      attr_accessor kms_key_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor propagate_tags: Types::PropagateTags?
+      attr_accessor telemetry_config: Types::CapacityProviderTelemetryConfig?
+    end
+
+    class CreateCapacityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider: Types::CapacityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider: Types::CapacityProvider?
+    end
+
     class CreateCodeSigningConfigRequest
       include Smithy::Schema::Structure
 
@@ -369,6 +873,11 @@ module Aws::Lambda
         ?parallelization_factor: Integer,
         ?event_source_arn: String,
         ?filter_criteria: Types::FilterCriteria,
+        ?filter_criteria_error: Types::FilterCriteriaError,
+        ?kms_key_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?logging_config: Types::EventSourceMappingLoggingConfig,
+        ?scaling_config: Types::ScalingConfig,
         ?function_arn: String,
         ?last_modified: Time,
         ?last_processing_result: String,
@@ -386,12 +895,8 @@ module Aws::Lambda
         ?function_response_types: Array[String],
         ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
         ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
-        ?scaling_config: Types::ScalingConfig,
         ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
-        ?kms_key_arn: String,
-        ?filter_criteria_error: Types::FilterCriteriaError,
         ?event_source_mapping_arn: String,
-        ?metrics_config: Types::EventSourceMappingMetricsConfig,
         ?provisioned_poller_config: Types::ProvisionedPollerConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -404,6 +909,11 @@ module Aws::Lambda
       attr_accessor parallelization_factor: Integer?
       attr_accessor event_source_arn: String?
       attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor logging_config: Types::EventSourceMappingLoggingConfig?
+      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor function_arn: String?
       attr_accessor last_modified: Time?
       attr_accessor last_processing_result: String?
@@ -421,12 +931,8 @@ module Aws::Lambda
       attr_accessor function_response_types: Array[String]?
       attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
       attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
-      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
-      attr_accessor kms_key_arn: String?
-      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
       attr_accessor event_source_mapping_arn: String?
-      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
       attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
     end
 
@@ -439,6 +945,10 @@ module Aws::Lambda
         ?enabled: bool,
         ?batch_size: Integer,
         ?filter_criteria: Types::FilterCriteria,
+        ?kms_key_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?logging_config: Types::EventSourceMappingLoggingConfig,
+        ?scaling_config: Types::ScalingConfig,
         ?maximum_batching_window_in_seconds: Integer,
         ?parallelization_factor: Integer,
         ?starting_position: String,
@@ -456,10 +966,7 @@ module Aws::Lambda
         ?function_response_types: Array[String],
         ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
         ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
-        ?scaling_config: Types::ScalingConfig,
         ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
-        ?kms_key_arn: String,
-        ?metrics_config: Types::EventSourceMappingMetricsConfig,
         ?provisioned_poller_config: Types::ProvisionedPollerConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -469,6 +976,10 @@ module Aws::Lambda
       attr_accessor enabled: bool?
       attr_accessor batch_size: Integer?
       attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor logging_config: Types::EventSourceMappingLoggingConfig?
+      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor maximum_batching_window_in_seconds: Integer?
       attr_accessor parallelization_factor: Integer?
       attr_accessor starting_position: String?
@@ -486,10 +997,7 @@ module Aws::Lambda
       attr_accessor function_response_types: Array[String]?
       attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
       attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
-      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
-      attr_accessor kms_key_arn: String?
-      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
       attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
     end
 
@@ -524,15 +1032,19 @@ module Aws::Lambda
         ?last_update_status_reason: String,
         ?last_update_status_reason_code: String,
         ?file_system_configs: Array[Types::FileSystemConfig],
-        ?package_type: String,
-        ?image_config_response: Types::ImageConfigResponse,
         ?signing_profile_version_arn: String,
         ?signing_job_arn: String,
+        ?package_type: String,
+        ?image_config_response: Types::ImageConfigResponse,
         ?architectures: Array[String],
         ?ephemeral_storage: Types::EphemeralStorage,
         ?snap_start: Types::SnapStartResponse,
         ?runtime_version_config: Types::RuntimeVersionConfig,
         ?logging_config: Types::LoggingConfig,
+        ?tenancy_config: Types::TenancyConfig,
+        ?capacity_provider_config: Types::CapacityProviderConfig,
+        ?config_sha256: String,
+        ?durable_config: Types::DurableConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -563,15 +1075,19 @@ module Aws::Lambda
       attr_accessor last_update_status_reason: String?
       attr_accessor last_update_status_reason_code: String?
       attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
-      attr_accessor package_type: String?
-      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor signing_profile_version_arn: String?
       attr_accessor signing_job_arn: String?
+      attr_accessor package_type: String?
+      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor architectures: Array[String]?
       attr_accessor ephemeral_storage: Types::EphemeralStorage?
       attr_accessor snap_start: Types::SnapStartResponse?
       attr_accessor runtime_version_config: Types::RuntimeVersionConfig?
       attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor tenancy_config: Types::TenancyConfig?
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig?
+      attr_accessor config_sha256: String?
+      attr_accessor durable_config: Types::DurableConfig?
     end
 
     class CreateFunctionRequest
@@ -587,6 +1103,7 @@ module Aws::Lambda
         ?timeout: Integer,
         ?memory_size: Integer,
         ?publish: bool,
+        ?publish_to: String,
         ?vpc_config: Types::VpcConfig,
         ?package_type: String,
         ?dead_letter_config: Types::DeadLetterConfig,
@@ -596,12 +1113,15 @@ module Aws::Lambda
         ?tags: Hash[String, String],
         ?layers: Array[String],
         ?file_system_configs: Array[Types::FileSystemConfig],
-        ?image_config: Types::ImageConfig,
         ?code_signing_config_arn: String,
+        ?image_config: Types::ImageConfig,
         ?architectures: Array[String],
         ?ephemeral_storage: Types::EphemeralStorage,
         ?snap_start: Types::SnapStart,
         ?logging_config: Types::LoggingConfig,
+        ?tenancy_config: Types::TenancyConfig,
+        ?capacity_provider_config: Types::CapacityProviderConfig,
+        ?durable_config: Types::DurableConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -614,6 +1134,7 @@ module Aws::Lambda
       attr_accessor timeout: Integer?
       attr_accessor memory_size: Integer?
       attr_accessor publish: bool?
+      attr_accessor publish_to: String?
       attr_accessor vpc_config: Types::VpcConfig?
       attr_accessor package_type: String?
       attr_accessor dead_letter_config: Types::DeadLetterConfig?
@@ -623,12 +1144,15 @@ module Aws::Lambda
       attr_accessor tags: Hash[String, String]?
       attr_accessor layers: Array[String]?
       attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
-      attr_accessor image_config: Types::ImageConfig?
       attr_accessor code_signing_config_arn: String?
+      attr_accessor image_config: Types::ImageConfig?
       attr_accessor architectures: Array[String]?
       attr_accessor ephemeral_storage: Types::EphemeralStorage?
       attr_accessor snap_start: Types::SnapStart?
       attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor tenancy_config: Types::TenancyConfig?
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig?
+      attr_accessor durable_config: Types::DurableConfig?
     end
 
     class CreateFunctionUrlConfigRequest
@@ -695,6 +1219,28 @@ module Aws::Lambda
       attr_accessor name: String?
     end
 
+    class DeleteCapacityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider_name: String?
+    end
+
+    class DeleteCapacityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider: Types::CapacityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider: Types::CapacityProvider?
+    end
+
     class DeleteCodeSigningConfigRequest
       include Smithy::Schema::Structure
 
@@ -727,6 +1273,11 @@ module Aws::Lambda
         ?parallelization_factor: Integer,
         ?event_source_arn: String,
         ?filter_criteria: Types::FilterCriteria,
+        ?filter_criteria_error: Types::FilterCriteriaError,
+        ?kms_key_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?logging_config: Types::EventSourceMappingLoggingConfig,
+        ?scaling_config: Types::ScalingConfig,
         ?function_arn: String,
         ?last_modified: Time,
         ?last_processing_result: String,
@@ -744,12 +1295,8 @@ module Aws::Lambda
         ?function_response_types: Array[String],
         ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
         ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
-        ?scaling_config: Types::ScalingConfig,
         ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
-        ?kms_key_arn: String,
-        ?filter_criteria_error: Types::FilterCriteriaError,
         ?event_source_mapping_arn: String,
-        ?metrics_config: Types::EventSourceMappingMetricsConfig,
         ?provisioned_poller_config: Types::ProvisionedPollerConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -762,6 +1309,11 @@ module Aws::Lambda
       attr_accessor parallelization_factor: Integer?
       attr_accessor event_source_arn: String?
       attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor logging_config: Types::EventSourceMappingLoggingConfig?
+      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor function_arn: String?
       attr_accessor last_modified: Time?
       attr_accessor last_processing_result: String?
@@ -779,12 +1331,8 @@ module Aws::Lambda
       attr_accessor function_response_types: Array[String]?
       attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
       attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
-      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
-      attr_accessor kms_key_arn: String?
-      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
       attr_accessor event_source_mapping_arn: String?
-      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
       attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
     end
 
@@ -847,6 +1395,17 @@ module Aws::Lambda
       attr_accessor qualifier: String?
     end
 
+    class DeleteFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+    end
+
     class DeleteFunctionUrlConfigRequest
       include Smithy::Schema::Structure
 
@@ -886,6 +1445,19 @@ module Aws::Lambda
       attr_accessor qualifier: String?
     end
 
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor revision_id: String?
+    end
+
     class DestinationConfig
       include Smithy::Schema::Structure
 
@@ -897,6 +1469,12 @@ module Aws::Lambda
 
       attr_accessor on_success: Types::OnSuccess?
       attr_accessor on_failure: Types::OnFailure?
+    end
+
+    module DirectS3Read
+      ENABLED: String
+      DISABLED: String
+      AUTO: String
     end
 
     class DocumentDBEventSourceConfig
@@ -912,6 +1490,34 @@ module Aws::Lambda
       attr_accessor database_name: String?
       attr_accessor collection_name: String?
       attr_accessor full_document: String?
+    end
+
+    class DurableConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+        ?retention_period_in_days: Integer,
+        ?execution_timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+      attr_accessor retention_period_in_days: Integer?
+      attr_accessor execution_timeout: Integer?
+    end
+
+    class DurableExecutionAlreadyStartedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
     end
 
     class EC2AccessDeniedException
@@ -1020,6 +1626,19 @@ module Aws::Lambda
       attr_accessor message: String?
     end
 
+    class ENINotReadyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
     module EndPointType
       KAFKA_BOOTSTRAP_SERVERS: String
     end
@@ -1072,6 +1691,133 @@ module Aws::Lambda
       attr_accessor size: Integer?
     end
 
+    class ErrorObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_message: String,
+        ?error_type: String,
+        ?error_data: String,
+        ?stack_trace: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_message: String?
+      attr_accessor error_type: String?
+      attr_accessor error_data: String?
+      attr_accessor stack_trace: Array[String]?
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type: String,
+        ?sub_type: String,
+        ?event_id: Integer,
+        ?id: String,
+        ?name: String,
+        ?event_timestamp: Time,
+        ?parent_id: String,
+        ?execution_started_details: Types::ExecutionStartedDetails,
+        ?execution_succeeded_details: Types::ExecutionSucceededDetails,
+        ?execution_failed_details: Types::ExecutionFailedDetails,
+        ?execution_timed_out_details: Types::ExecutionTimedOutDetails,
+        ?execution_stopped_details: Types::ExecutionStoppedDetails,
+        ?context_started_details: Types::ContextStartedDetails,
+        ?context_succeeded_details: Types::ContextSucceededDetails,
+        ?context_failed_details: Types::ContextFailedDetails,
+        ?wait_started_details: Types::WaitStartedDetails,
+        ?wait_succeeded_details: Types::WaitSucceededDetails,
+        ?wait_cancelled_details: Types::WaitCancelledDetails,
+        ?step_started_details: Types::StepStartedDetails,
+        ?step_succeeded_details: Types::StepSucceededDetails,
+        ?step_failed_details: Types::StepFailedDetails,
+        ?chained_invoke_started_details: Types::ChainedInvokeStartedDetails,
+        ?chained_invoke_succeeded_details: Types::ChainedInvokeSucceededDetails,
+        ?chained_invoke_failed_details: Types::ChainedInvokeFailedDetails,
+        ?chained_invoke_timed_out_details: Types::ChainedInvokeTimedOutDetails,
+        ?chained_invoke_stopped_details: Types::ChainedInvokeStoppedDetails,
+        ?callback_started_details: Types::CallbackStartedDetails,
+        ?callback_succeeded_details: Types::CallbackSucceededDetails,
+        ?callback_failed_details: Types::CallbackFailedDetails,
+        ?callback_timed_out_details: Types::CallbackTimedOutDetails,
+        ?invocation_completed_details: Types::InvocationCompletedDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type: String?
+      attr_accessor sub_type: String?
+      attr_accessor event_id: Integer?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor event_timestamp: Time?
+      attr_accessor parent_id: String?
+      attr_accessor execution_started_details: Types::ExecutionStartedDetails?
+      attr_accessor execution_succeeded_details: Types::ExecutionSucceededDetails?
+      attr_accessor execution_failed_details: Types::ExecutionFailedDetails?
+      attr_accessor execution_timed_out_details: Types::ExecutionTimedOutDetails?
+      attr_accessor execution_stopped_details: Types::ExecutionStoppedDetails?
+      attr_accessor context_started_details: Types::ContextStartedDetails?
+      attr_accessor context_succeeded_details: Types::ContextSucceededDetails?
+      attr_accessor context_failed_details: Types::ContextFailedDetails?
+      attr_accessor wait_started_details: Types::WaitStartedDetails?
+      attr_accessor wait_succeeded_details: Types::WaitSucceededDetails?
+      attr_accessor wait_cancelled_details: Types::WaitCancelledDetails?
+      attr_accessor step_started_details: Types::StepStartedDetails?
+      attr_accessor step_succeeded_details: Types::StepSucceededDetails?
+      attr_accessor step_failed_details: Types::StepFailedDetails?
+      attr_accessor chained_invoke_started_details: Types::ChainedInvokeStartedDetails?
+      attr_accessor chained_invoke_succeeded_details: Types::ChainedInvokeSucceededDetails?
+      attr_accessor chained_invoke_failed_details: Types::ChainedInvokeFailedDetails?
+      attr_accessor chained_invoke_timed_out_details: Types::ChainedInvokeTimedOutDetails?
+      attr_accessor chained_invoke_stopped_details: Types::ChainedInvokeStoppedDetails?
+      attr_accessor callback_started_details: Types::CallbackStartedDetails?
+      attr_accessor callback_succeeded_details: Types::CallbackSucceededDetails?
+      attr_accessor callback_failed_details: Types::CallbackFailedDetails?
+      attr_accessor callback_timed_out_details: Types::CallbackTimedOutDetails?
+      attr_accessor invocation_completed_details: Types::InvocationCompletedDetails?
+    end
+
+    class EventError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: Types::ErrorObject,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: Types::ErrorObject?
+      attr_accessor truncated: bool?
+    end
+
+    class EventInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+      attr_accessor truncated: bool?
+    end
+
+    class EventResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+      attr_accessor truncated: bool?
+    end
+
     class EventSourceMappingConfiguration
       include Smithy::Schema::Structure
 
@@ -1084,6 +1830,11 @@ module Aws::Lambda
         ?parallelization_factor: Integer,
         ?event_source_arn: String,
         ?filter_criteria: Types::FilterCriteria,
+        ?filter_criteria_error: Types::FilterCriteriaError,
+        ?kms_key_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?logging_config: Types::EventSourceMappingLoggingConfig,
+        ?scaling_config: Types::ScalingConfig,
         ?function_arn: String,
         ?last_modified: Time,
         ?last_processing_result: String,
@@ -1101,12 +1852,8 @@ module Aws::Lambda
         ?function_response_types: Array[String],
         ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
         ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
-        ?scaling_config: Types::ScalingConfig,
         ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
-        ?kms_key_arn: String,
-        ?filter_criteria_error: Types::FilterCriteriaError,
         ?event_source_mapping_arn: String,
-        ?metrics_config: Types::EventSourceMappingMetricsConfig,
         ?provisioned_poller_config: Types::ProvisionedPollerConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1119,6 +1866,11 @@ module Aws::Lambda
       attr_accessor parallelization_factor: Integer?
       attr_accessor event_source_arn: String?
       attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor logging_config: Types::EventSourceMappingLoggingConfig?
+      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor function_arn: String?
       attr_accessor last_modified: Time?
       attr_accessor last_processing_result: String?
@@ -1136,17 +1888,26 @@ module Aws::Lambda
       attr_accessor function_response_types: Array[String]?
       attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
       attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
-      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
-      attr_accessor kms_key_arn: String?
-      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
       attr_accessor event_source_mapping_arn: String?
-      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
       attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
+    end
+
+    class EventSourceMappingLoggingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_log_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_log_level: String?
     end
 
     module EventSourceMappingMetric
       EventCount: String
+      ErrorCount: String
+      KafkaMetrics: String
     end
 
     class EventSourceMappingMetricsConfig
@@ -1160,10 +1921,142 @@ module Aws::Lambda
       attr_accessor metrics: Array[String]?
     end
 
+    module EventSourceMappingSystemLogLevel
+      Debug: String
+      Info: String
+      Warn: String
+    end
+
     module EventSourcePosition
       TRIM_HORIZON: String
       LATEST: String
       AT_TIMESTAMP: String
+    end
+
+    module EventType
+      ExecutionStarted: String
+      ExecutionSucceeded: String
+      ExecutionFailed: String
+      ExecutionTimedOut: String
+      ExecutionStopped: String
+      ContextStarted: String
+      ContextSucceeded: String
+      ContextFailed: String
+      WaitStarted: String
+      WaitSucceeded: String
+      WaitCancelled: String
+      StepStarted: String
+      StepSucceeded: String
+      StepFailed: String
+      ChainedInvokeStarted: String
+      ChainedInvokeSucceeded: String
+      ChainedInvokeFailed: String
+      ChainedInvokeTimedOut: String
+      ChainedInvokeStopped: String
+      CallbackStarted: String
+      CallbackSucceeded: String
+      CallbackFailed: String
+      CallbackTimedOut: String
+      InvocationCompleted: String
+    end
+
+    class Execution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?durable_execution_arn: String,
+        ?durable_execution_name: String,
+        ?function_arn: String,
+        ?status: String,
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor durable_execution_arn: String?
+      attr_accessor durable_execution_name: String?
+      attr_accessor function_arn: String?
+      attr_accessor status: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class ExecutionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_payload: String?
+    end
+
+    class ExecutionFailedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+    end
+
+    class ExecutionStartedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: Types::EventInput,
+        ?execution_timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: Types::EventInput?
+      attr_accessor execution_timeout: Integer?
+    end
+
+    module ExecutionStatus
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      TIMED_OUT: String
+      STOPPED: String
+    end
+
+    class ExecutionStoppedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+    end
+
+    class ExecutionSucceededDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: Types::EventResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: Types::EventResult?
+    end
+
+    class ExecutionTimedOutDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
     end
 
     class FileSystemConfig
@@ -1172,11 +2065,13 @@ module Aws::Lambda
       def initialize: (
         ?arn: String,
         ?local_mount_path: String,
+        ?s3_files_config: Types::S3FilesConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
       attr_accessor local_mount_path: String?
+      attr_accessor s3_files_config: Types::S3FilesConfig?
     end
 
     class Filter
@@ -1227,6 +2122,7 @@ module Aws::Lambda
         ?s3_bucket: String,
         ?s3_key: String,
         ?s3_object_version: String,
+        ?s3_object_storage_mode: String,
         ?image_uri: String,
         ?source_kms_key_arn: String,
       ) -> void
@@ -1236,6 +2132,7 @@ module Aws::Lambda
       attr_accessor s3_bucket: String?
       attr_accessor s3_key: String?
       attr_accessor s3_object_version: String?
+      attr_accessor s3_object_storage_mode: String?
       attr_accessor image_uri: String?
       attr_accessor source_kms_key_arn: String?
     end
@@ -1248,7 +2145,9 @@ module Aws::Lambda
         ?location: String,
         ?image_uri: String,
         ?resolved_image_uri: String,
+        ?resolved_s3_object: Types::ResolvedS3Object,
         ?source_kms_key_arn: String,
+        ?error: Types::FunctionCodeLocationError,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1256,7 +2155,22 @@ module Aws::Lambda
       attr_accessor location: String?
       attr_accessor image_uri: String?
       attr_accessor resolved_image_uri: String?
+      attr_accessor resolved_s3_object: Types::ResolvedS3Object?
       attr_accessor source_kms_key_arn: String?
+      attr_accessor error: Types::FunctionCodeLocationError?
+    end
+
+    class FunctionCodeLocationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
     end
 
     class FunctionConfiguration
@@ -1290,15 +2204,19 @@ module Aws::Lambda
         ?last_update_status_reason: String,
         ?last_update_status_reason_code: String,
         ?file_system_configs: Array[Types::FileSystemConfig],
-        ?package_type: String,
-        ?image_config_response: Types::ImageConfigResponse,
         ?signing_profile_version_arn: String,
         ?signing_job_arn: String,
+        ?package_type: String,
+        ?image_config_response: Types::ImageConfigResponse,
         ?architectures: Array[String],
         ?ephemeral_storage: Types::EphemeralStorage,
         ?snap_start: Types::SnapStartResponse,
         ?runtime_version_config: Types::RuntimeVersionConfig,
         ?logging_config: Types::LoggingConfig,
+        ?tenancy_config: Types::TenancyConfig,
+        ?capacity_provider_config: Types::CapacityProviderConfig,
+        ?config_sha256: String,
+        ?durable_config: Types::DurableConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1329,15 +2247,19 @@ module Aws::Lambda
       attr_accessor last_update_status_reason: String?
       attr_accessor last_update_status_reason_code: String?
       attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
-      attr_accessor package_type: String?
-      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor signing_profile_version_arn: String?
       attr_accessor signing_job_arn: String?
+      attr_accessor package_type: String?
+      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor architectures: Array[String]?
       attr_accessor ephemeral_storage: Types::EphemeralStorage?
       attr_accessor snap_start: Types::SnapStartResponse?
       attr_accessor runtime_version_config: Types::RuntimeVersionConfig?
       attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor tenancy_config: Types::TenancyConfig?
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig?
+      attr_accessor config_sha256: String?
+      attr_accessor durable_config: Types::DurableConfig?
     end
 
     class FunctionEventInvokeConfig
@@ -1361,6 +2283,19 @@ module Aws::Lambda
 
     module FunctionResponseType
       ReportBatchItemFailures: String
+    end
+
+    class FunctionScalingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_execution_environments: Integer,
+        ?max_execution_environments: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_execution_environments: Integer?
+      attr_accessor max_execution_environments: Integer?
     end
 
     module FunctionUrlAuthType
@@ -1393,6 +2328,36 @@ module Aws::Lambda
 
     module FunctionVersion
       ALL: String
+    end
+
+    module FunctionVersionLatestPublished
+      LATEST_PUBLISHED: String
+    end
+
+    class FunctionVersionsByCapacityProviderListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor state: String?
+    end
+
+    class FunctionVersionsPerCapacityProviderLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
     end
 
     class GetAccountSettingsRequest
@@ -1451,6 +2416,28 @@ module Aws::Lambda
       attr_accessor name: String?
     end
 
+    class GetCapacityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider_name: String?
+    end
+
+    class GetCapacityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider: Types::CapacityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider: Types::CapacityProvider?
+    end
+
     class GetCodeSigningConfigRequest
       include Smithy::Schema::Structure
 
@@ -1473,6 +2460,116 @@ module Aws::Lambda
       attr_accessor code_signing_config: Types::CodeSigningConfig?
     end
 
+    class GetDurableExecutionHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?durable_execution_arn: String,
+        ?include_execution_data: bool,
+        ?max_items: Integer,
+        ?marker: String,
+        ?reverse_order: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor durable_execution_arn: String?
+      attr_accessor include_execution_data: bool?
+      attr_accessor max_items: Integer?
+      attr_accessor marker: String?
+      attr_accessor reverse_order: bool?
+    end
+
+    class GetDurableExecutionHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::Event],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::Event]?
+      attr_accessor next_marker: String?
+    end
+
+    class GetDurableExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?durable_execution_arn: String,
+        ?include_execution_data: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor durable_execution_arn: String?
+      attr_accessor include_execution_data: bool?
+    end
+
+    class GetDurableExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?durable_execution_arn: String,
+        ?durable_execution_name: String,
+        ?function_arn: String,
+        ?input_payload: String,
+        ?result: String,
+        ?error: Types::ErrorObject,
+        ?start_timestamp: Time,
+        ?status: String,
+        ?end_timestamp: Time,
+        ?version: String,
+        ?trace_header: Types::TraceHeader,
+        ?execution_data_included: bool,
+        ?durable_config: Types::DurableConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor durable_execution_arn: String?
+      attr_accessor durable_execution_name: String?
+      attr_accessor function_arn: String?
+      attr_accessor input_payload: String?
+      attr_accessor result: String?
+      attr_accessor error: Types::ErrorObject?
+      attr_accessor start_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor end_timestamp: Time?
+      attr_accessor version: String?
+      attr_accessor trace_header: Types::TraceHeader?
+      attr_accessor execution_data_included: bool?
+      attr_accessor durable_config: Types::DurableConfig?
+    end
+
+    class GetDurableExecutionStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?durable_execution_arn: String,
+        ?checkpoint_token: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor durable_execution_arn: String?
+      attr_accessor checkpoint_token: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class GetDurableExecutionStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operations: Array[Types::Operation],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operations: Array[Types::Operation]?
+      attr_accessor next_marker: String?
+    end
+
     class GetEventSourceMappingOutput
       include Smithy::Schema::Structure
 
@@ -1485,6 +2582,11 @@ module Aws::Lambda
         ?parallelization_factor: Integer,
         ?event_source_arn: String,
         ?filter_criteria: Types::FilterCriteria,
+        ?filter_criteria_error: Types::FilterCriteriaError,
+        ?kms_key_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?logging_config: Types::EventSourceMappingLoggingConfig,
+        ?scaling_config: Types::ScalingConfig,
         ?function_arn: String,
         ?last_modified: Time,
         ?last_processing_result: String,
@@ -1502,12 +2604,8 @@ module Aws::Lambda
         ?function_response_types: Array[String],
         ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
         ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
-        ?scaling_config: Types::ScalingConfig,
         ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
-        ?kms_key_arn: String,
-        ?filter_criteria_error: Types::FilterCriteriaError,
         ?event_source_mapping_arn: String,
-        ?metrics_config: Types::EventSourceMappingMetricsConfig,
         ?provisioned_poller_config: Types::ProvisionedPollerConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1520,6 +2618,11 @@ module Aws::Lambda
       attr_accessor parallelization_factor: Integer?
       attr_accessor event_source_arn: String?
       attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor logging_config: Types::EventSourceMappingLoggingConfig?
+      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor function_arn: String?
       attr_accessor last_modified: Time?
       attr_accessor last_processing_result: String?
@@ -1537,12 +2640,8 @@ module Aws::Lambda
       attr_accessor function_response_types: Array[String]?
       attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
       attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
-      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
-      attr_accessor kms_key_arn: String?
-      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
       attr_accessor event_source_mapping_arn: String?
-      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
       attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
     end
 
@@ -1634,15 +2733,19 @@ module Aws::Lambda
         ?last_update_status_reason: String,
         ?last_update_status_reason_code: String,
         ?file_system_configs: Array[Types::FileSystemConfig],
-        ?package_type: String,
-        ?image_config_response: Types::ImageConfigResponse,
         ?signing_profile_version_arn: String,
         ?signing_job_arn: String,
+        ?package_type: String,
+        ?image_config_response: Types::ImageConfigResponse,
         ?architectures: Array[String],
         ?ephemeral_storage: Types::EphemeralStorage,
         ?snap_start: Types::SnapStartResponse,
         ?runtime_version_config: Types::RuntimeVersionConfig,
         ?logging_config: Types::LoggingConfig,
+        ?tenancy_config: Types::TenancyConfig,
+        ?capacity_provider_config: Types::CapacityProviderConfig,
+        ?config_sha256: String,
+        ?durable_config: Types::DurableConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1673,15 +2776,19 @@ module Aws::Lambda
       attr_accessor last_update_status_reason: String?
       attr_accessor last_update_status_reason_code: String?
       attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
-      attr_accessor package_type: String?
-      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor signing_profile_version_arn: String?
       attr_accessor signing_job_arn: String?
+      attr_accessor package_type: String?
+      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor architectures: Array[String]?
       attr_accessor ephemeral_storage: Types::EphemeralStorage?
       attr_accessor snap_start: Types::SnapStartResponse?
       attr_accessor runtime_version_config: Types::RuntimeVersionConfig?
       attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor tenancy_config: Types::TenancyConfig?
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig?
+      attr_accessor config_sha256: String?
+      attr_accessor durable_config: Types::DurableConfig?
     end
 
     class GetFunctionConfigurationRequest
@@ -1783,6 +2890,34 @@ module Aws::Lambda
       attr_accessor concurrency: Types::Concurrency?
     end
 
+    class GetFunctionScalingConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+    end
+
+    class GetFunctionScalingConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?applied_function_scaling_config: Types::FunctionScalingConfig,
+        ?requested_function_scaling_config: Types::FunctionScalingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor applied_function_scaling_config: Types::FunctionScalingConfig?
+      attr_accessor requested_function_scaling_config: Types::FunctionScalingConfig?
+    end
+
     class GetFunctionUrlConfigRequest
       include Smithy::Schema::Structure
 
@@ -1829,9 +2964,9 @@ module Aws::Lambda
         ?description: String,
         ?created_date: String,
         ?version: Integer,
+        ?compatible_architectures: Array[String],
         ?compatible_runtimes: Array[String],
         ?license_info: String,
-        ?compatible_architectures: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1841,9 +2976,9 @@ module Aws::Lambda
       attr_accessor description: String?
       attr_accessor created_date: String?
       attr_accessor version: Integer?
+      attr_accessor compatible_architectures: Array[String]?
       attr_accessor compatible_runtimes: Array[String]?
       attr_accessor license_info: String?
-      attr_accessor compatible_architectures: Array[String]?
     end
 
     class GetLayerVersionByArnRequest
@@ -1867,9 +3002,9 @@ module Aws::Lambda
         ?description: String,
         ?created_date: String,
         ?version: Integer,
+        ?compatible_architectures: Array[String],
         ?compatible_runtimes: Array[String],
         ?license_info: String,
-        ?compatible_architectures: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1879,9 +3014,9 @@ module Aws::Lambda
       attr_accessor description: String?
       attr_accessor created_date: String?
       attr_accessor version: Integer?
+      attr_accessor compatible_architectures: Array[String]?
       attr_accessor compatible_runtimes: Array[String]?
       attr_accessor license_info: String?
-      attr_accessor compatible_architectures: Array[String]?
     end
 
     class GetLayerVersionPolicyRequest
@@ -1983,6 +3118,30 @@ module Aws::Lambda
       attr_accessor last_modified: String?
     end
 
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
     class GetRuntimeManagementConfigRequest
       include Smithy::Schema::Structure
 
@@ -2001,14 +3160,14 @@ module Aws::Lambda
 
       def initialize: (
         ?update_runtime_on: String,
-        ?runtime_version_arn: String,
         ?function_arn: String,
+        ?runtime_version_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor update_runtime_on: String?
-      attr_accessor runtime_version_arn: String?
       attr_accessor function_arn: String?
+      attr_accessor runtime_version_arn: String?
     end
 
     class ImageConfig
@@ -2050,6 +3209,21 @@ module Aws::Lambda
 
       attr_accessor image_config: Types::ImageConfig?
       attr_accessor error: Types::ImageConfigError?
+    end
+
+    class InstanceRequirements
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?architectures: Array[String],
+        ?allowed_instance_types: Array[String],
+        ?excluded_instance_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor architectures: Array[String]?
+      attr_accessor allowed_instance_types: Array[String]?
+      attr_accessor excluded_instance_types: Array[String]?
     end
 
     class InvalidCodeSignatureException
@@ -2143,6 +3317,23 @@ module Aws::Lambda
       attr_accessor message: String?
     end
 
+    class InvocationCompletedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+        ?request_id: String,
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+      attr_accessor request_id: String?
+      attr_accessor error: Types::EventError?
+    end
+
     class InvocationRequest
       include Smithy::Schema::Structure
 
@@ -2151,8 +3342,10 @@ module Aws::Lambda
         ?invocation_type: String,
         ?log_type: String,
         ?client_context: String,
+        ?durable_execution_name: String,
         ?payload: String,
         ?qualifier: String,
+        ?tenant_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2160,8 +3353,10 @@ module Aws::Lambda
       attr_accessor invocation_type: String?
       attr_accessor log_type: String?
       attr_accessor client_context: String?
+      attr_accessor durable_execution_name: String?
       attr_accessor payload: String?
       attr_accessor qualifier: String?
+      attr_accessor tenant_id: String?
     end
 
     class InvocationResponse
@@ -2173,6 +3368,7 @@ module Aws::Lambda
         ?log_result: String,
         ?payload: String,
         ?executed_version: String,
+        ?durable_execution_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2181,6 +3377,7 @@ module Aws::Lambda
       attr_accessor log_result: String?
       attr_accessor payload: String?
       attr_accessor executed_version: String?
+      attr_accessor durable_execution_arn: String?
     end
 
     module InvocationType
@@ -2249,20 +3446,22 @@ module Aws::Lambda
 
       def initialize: (
         ?function_name: String,
-        ?invocation_type: String,
         ?log_type: String,
         ?client_context: String,
         ?qualifier: String,
         ?payload: String,
+        ?tenant_id: String,
+        ?invocation_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor function_name: String?
-      attr_accessor invocation_type: String?
       attr_accessor log_type: String?
       attr_accessor client_context: String?
       attr_accessor qualifier: String?
       attr_accessor payload: String?
+      attr_accessor tenant_id: String?
+      attr_accessor invocation_type: String?
     end
 
     class InvokeWithResponseStreamResponse
@@ -2371,6 +3570,7 @@ module Aws::Lambda
       BASIC_AUTH: String
       CLIENT_CERTIFICATE_TLS_AUTH: String
       SERVER_ROOT_CA_CERTIFICATE: String
+      OAUTHBEARER_AUTH: String
     end
 
     class KafkaSchemaRegistryConfig
@@ -2406,6 +3606,21 @@ module Aws::Lambda
       attr_accessor attribute: String?
     end
 
+    class LambdaManagedInstancesCapacityProviderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider_arn: String,
+        ?per_execution_environment_max_concurrency: Integer,
+        ?execution_environment_memory_gi_b_per_v_cpu: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider_arn: String?
+      attr_accessor per_execution_environment_max_concurrency: Integer?
+      attr_accessor execution_environment_memory_gi_b_per_v_cpu: Float?
+    end
+
     module LastUpdateStatus
       Successful: String
       Failed: String
@@ -2434,6 +3649,21 @@ module Aws::Lambda
       InvalidRuntime: String
       InvalidZipFileException: String
       FunctionError: String
+      ServiceQuotaExceededException: String
+      VcpuLimitExceeded: String
+      CapacityProviderScalingLimitExceeded: String
+      InsufficientCapacity: String
+      EC2RequestLimitExceeded: String
+      FunctionErrorInitTimeout: String
+      FunctionErrorRuntimeInitError: String
+      FunctionErrorExtensionInitError: String
+      FunctionErrorInvalidEntryPoint: String
+      FunctionErrorInvalidWorkingDirectory: String
+      FunctionErrorPermissionDenied: String
+      FunctionErrorTooManyExtensions: String
+      FunctionErrorInitResourceExhausted: String
+      DisallowedByVpcEncryptionControl: String
+      DependencyError: String
     end
 
     class Layer
@@ -2460,6 +3690,7 @@ module Aws::Lambda
         ?s3_bucket: String,
         ?s3_key: String,
         ?s3_object_version: String,
+        ?s3_object_storage_mode: String,
         ?zip_file: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2467,6 +3698,7 @@ module Aws::Lambda
       attr_accessor s3_bucket: String?
       attr_accessor s3_key: String?
       attr_accessor s3_object_version: String?
+      attr_accessor s3_object_storage_mode: String?
       attr_accessor zip_file: String?
     end
 
@@ -2479,6 +3711,7 @@ module Aws::Lambda
         ?code_size: Integer,
         ?signing_profile_version_arn: String,
         ?signing_job_arn: String,
+        ?resolved_s3_object: Types::ResolvedS3Object,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2487,6 +3720,7 @@ module Aws::Lambda
       attr_accessor code_size: Integer?
       attr_accessor signing_profile_version_arn: String?
       attr_accessor signing_job_arn: String?
+      attr_accessor resolved_s3_object: Types::ResolvedS3Object?
     end
 
     class LayerVersionsListItem
@@ -2497,9 +3731,9 @@ module Aws::Lambda
         ?version: Integer,
         ?description: String,
         ?created_date: String,
+        ?compatible_architectures: Array[String],
         ?compatible_runtimes: Array[String],
         ?license_info: String,
-        ?compatible_architectures: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2507,9 +3741,9 @@ module Aws::Lambda
       attr_accessor version: Integer?
       attr_accessor description: String?
       attr_accessor created_date: String?
+      attr_accessor compatible_architectures: Array[String]?
       attr_accessor compatible_runtimes: Array[String]?
       attr_accessor license_info: String?
-      attr_accessor compatible_architectures: Array[String]?
     end
 
     class LayersListItem
@@ -2557,6 +3791,34 @@ module Aws::Lambda
       attr_accessor aliases: Array[Types::AliasConfiguration]?
     end
 
+    class ListCapacityProvidersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListCapacityProvidersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_providers: Array[Types::CapacityProvider],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_providers: Array[Types::CapacityProvider]?
+      attr_accessor next_marker: String?
+    end
+
     class ListCodeSigningConfigsRequest
       include Smithy::Schema::Structure
 
@@ -2581,6 +3843,46 @@ module Aws::Lambda
 
       attr_accessor next_marker: String?
       attr_accessor code_signing_configs: Array[Types::CodeSigningConfig]?
+    end
+
+    class ListDurableExecutionsByFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+        ?durable_execution_name: String,
+        ?statuses: Array[String],
+        ?started_after: Time,
+        ?started_before: Time,
+        ?reverse_order: bool,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+      attr_accessor durable_execution_name: String?
+      attr_accessor statuses: Array[String]?
+      attr_accessor started_after: Time?
+      attr_accessor started_before: Time?
+      attr_accessor reverse_order: bool?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListDurableExecutionsByFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?durable_executions: Array[Types::Execution],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor durable_executions: Array[Types::Execution]?
+      attr_accessor next_marker: String?
     end
 
     class ListEventSourceMappingsRequest
@@ -2669,6 +3971,36 @@ module Aws::Lambda
       attr_accessor next_marker: String?
     end
 
+    class ListFunctionVersionsByCapacityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider_name: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider_name: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListFunctionVersionsByCapacityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider_arn: String,
+        ?function_versions: Array[Types::FunctionVersionsByCapacityProviderListItem],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider_arn: String?
+      attr_accessor function_versions: Array[Types::FunctionVersionsByCapacityProviderListItem]?
+      attr_accessor next_marker: String?
+    end
+
     class ListFunctionsByCodeSigningConfigRequest
       include Smithy::Schema::Structure
 
@@ -2731,19 +4063,19 @@ module Aws::Lambda
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?compatible_architecture: String,
         ?compatible_runtime: String,
         ?layer_name: String,
         ?marker: String,
         ?max_items: Integer,
-        ?compatible_architecture: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor compatible_architecture: String?
       attr_accessor compatible_runtime: String?
       attr_accessor layer_name: String?
       attr_accessor marker: String?
       attr_accessor max_items: Integer?
-      attr_accessor compatible_architecture: String?
     end
 
     class ListLayerVersionsResponse
@@ -2763,17 +4095,17 @@ module Aws::Lambda
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?compatible_architecture: String,
         ?compatible_runtime: String,
         ?marker: String,
         ?max_items: Integer,
-        ?compatible_architecture: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor compatible_architecture: String?
       attr_accessor compatible_runtime: String?
       attr_accessor marker: String?
       attr_accessor max_items: Integer?
-      attr_accessor compatible_architecture: String?
     end
 
     class ListLayersResponse
@@ -2894,6 +4226,32 @@ module Aws::Lambda
       attr_accessor log_group: String?
     end
 
+    class ModeNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class NoPublishedVersionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
     class OnFailure
       include Smithy::Schema::Structure
 
@@ -2914,6 +4272,106 @@ module Aws::Lambda
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor destination: String?
+    end
+
+    class Operation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?parent_id: String,
+        ?name: String,
+        ?type: String,
+        ?sub_type: String,
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+        ?status: String,
+        ?execution_details: Types::ExecutionDetails,
+        ?context_details: Types::ContextDetails,
+        ?step_details: Types::StepDetails,
+        ?wait_details: Types::WaitDetails,
+        ?callback_details: Types::CallbackDetails,
+        ?chained_invoke_details: Types::ChainedInvokeDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor parent_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor sub_type: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor execution_details: Types::ExecutionDetails?
+      attr_accessor context_details: Types::ContextDetails?
+      attr_accessor step_details: Types::StepDetails?
+      attr_accessor wait_details: Types::WaitDetails?
+      attr_accessor callback_details: Types::CallbackDetails?
+      attr_accessor chained_invoke_details: Types::ChainedInvokeDetails?
+    end
+
+    module OperationAction
+      START: String
+      SUCCEED: String
+      FAIL: String
+      RETRY: String
+      CANCEL: String
+    end
+
+    module OperationStatus
+      STARTED: String
+      PENDING: String
+      READY: String
+      SUCCEEDED: String
+      FAILED: String
+      CANCELLED: String
+      TIMED_OUT: String
+      STOPPED: String
+    end
+
+    module OperationType
+      EXECUTION: String
+      CONTEXT: String
+      STEP: String
+      WAIT: String
+      CALLBACK: String
+      CHAINED_INVOKE: String
+    end
+
+    class OperationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?parent_id: String,
+        ?name: String,
+        ?type: String,
+        ?sub_type: String,
+        ?action: String,
+        ?payload: String,
+        ?error: Types::ErrorObject,
+        ?context_options: Types::ContextOptions,
+        ?step_options: Types::StepOptions,
+        ?wait_options: Types::WaitOptions,
+        ?callback_options: Types::CallbackOptions,
+        ?chained_invoke_options: Types::ChainedInvokeOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor parent_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor sub_type: String?
+      attr_accessor action: String?
+      attr_accessor payload: String?
+      attr_accessor error: Types::ErrorObject?
+      attr_accessor context_options: Types::ContextOptions?
+      attr_accessor step_options: Types::StepOptions?
+      attr_accessor wait_options: Types::WaitOptions?
+      attr_accessor callback_options: Types::CallbackOptions?
+      attr_accessor chained_invoke_options: Types::ChainedInvokeOptions?
     end
 
     module PackageType
@@ -2945,6 +4403,24 @@ module Aws::Lambda
 
       attr_accessor type: String?
       attr_accessor message: String?
+    end
+
+    class PropagateTags
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?explicit_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor explicit_tags: Hash[String, String]?
+    end
+
+    module PropagateTagsMode
+      None: String
+      Explicit: String
     end
 
     class ProvisionedConcurrencyConfigListItem
@@ -2995,11 +4471,26 @@ module Aws::Lambda
       def initialize: (
         ?minimum_pollers: Integer,
         ?maximum_pollers: Integer,
+        ?poller_group_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor minimum_pollers: Integer?
       attr_accessor maximum_pollers: Integer?
+      attr_accessor poller_group_name: String?
+    end
+
+    class PublicPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
     end
 
     class PublishLayerVersionRequest
@@ -3009,18 +4500,18 @@ module Aws::Lambda
         ?layer_name: String,
         ?description: String,
         ?content: Types::LayerVersionContentInput,
+        ?compatible_architectures: Array[String],
         ?compatible_runtimes: Array[String],
         ?license_info: String,
-        ?compatible_architectures: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor layer_name: String?
       attr_accessor description: String?
       attr_accessor content: Types::LayerVersionContentInput?
+      attr_accessor compatible_architectures: Array[String]?
       attr_accessor compatible_runtimes: Array[String]?
       attr_accessor license_info: String?
-      attr_accessor compatible_architectures: Array[String]?
     end
 
     class PublishLayerVersionResponse
@@ -3033,9 +4524,9 @@ module Aws::Lambda
         ?description: String,
         ?created_date: String,
         ?version: Integer,
+        ?compatible_architectures: Array[String],
         ?compatible_runtimes: Array[String],
         ?license_info: String,
-        ?compatible_architectures: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3045,9 +4536,9 @@ module Aws::Lambda
       attr_accessor description: String?
       attr_accessor created_date: String?
       attr_accessor version: Integer?
+      attr_accessor compatible_architectures: Array[String]?
       attr_accessor compatible_runtimes: Array[String]?
       attr_accessor license_info: String?
-      attr_accessor compatible_architectures: Array[String]?
     end
 
     class PublishVersionOutput
@@ -3081,15 +4572,19 @@ module Aws::Lambda
         ?last_update_status_reason: String,
         ?last_update_status_reason_code: String,
         ?file_system_configs: Array[Types::FileSystemConfig],
-        ?package_type: String,
-        ?image_config_response: Types::ImageConfigResponse,
         ?signing_profile_version_arn: String,
         ?signing_job_arn: String,
+        ?package_type: String,
+        ?image_config_response: Types::ImageConfigResponse,
         ?architectures: Array[String],
         ?ephemeral_storage: Types::EphemeralStorage,
         ?snap_start: Types::SnapStartResponse,
         ?runtime_version_config: Types::RuntimeVersionConfig,
         ?logging_config: Types::LoggingConfig,
+        ?tenancy_config: Types::TenancyConfig,
+        ?capacity_provider_config: Types::CapacityProviderConfig,
+        ?config_sha256: String,
+        ?durable_config: Types::DurableConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3120,15 +4615,19 @@ module Aws::Lambda
       attr_accessor last_update_status_reason: String?
       attr_accessor last_update_status_reason_code: String?
       attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
-      attr_accessor package_type: String?
-      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor signing_profile_version_arn: String?
       attr_accessor signing_job_arn: String?
+      attr_accessor package_type: String?
+      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor architectures: Array[String]?
       attr_accessor ephemeral_storage: Types::EphemeralStorage?
       attr_accessor snap_start: Types::SnapStartResponse?
       attr_accessor runtime_version_config: Types::RuntimeVersionConfig?
       attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor tenancy_config: Types::TenancyConfig?
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig?
+      attr_accessor config_sha256: String?
+      attr_accessor durable_config: Types::DurableConfig?
     end
 
     class PublishVersionRequest
@@ -3139,6 +4638,7 @@ module Aws::Lambda
         ?code_sha256: String,
         ?description: String,
         ?revision_id: String,
+        ?publish_to: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3146,6 +4646,7 @@ module Aws::Lambda
       attr_accessor code_sha256: String?
       attr_accessor description: String?
       attr_accessor revision_id: String?
+      attr_accessor publish_to: String?
     end
 
     class PutFunctionCodeSigningConfigRequest
@@ -3260,6 +4761,32 @@ module Aws::Lambda
       attr_accessor recursive_loop: String?
     end
 
+    class PutFunctionScalingConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?qualifier: String,
+        ?function_scaling_config: Types::FunctionScalingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor qualifier: String?
+      attr_accessor function_scaling_config: Types::FunctionScalingConfig?
+    end
+
+    class PutFunctionScalingConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_state: String?
+    end
+
     class PutProvisionedConcurrencyConfigRequest
       include Smithy::Schema::Structure
 
@@ -3280,8 +4807,8 @@ module Aws::Lambda
 
       def initialize: (
         ?requested_provisioned_concurrent_executions: Integer,
-        ?available_provisioned_concurrent_executions: Integer,
         ?allocated_provisioned_concurrent_executions: Integer,
+        ?available_provisioned_concurrent_executions: Integer,
         ?status: String,
         ?status_reason: String,
         ?last_modified: String,
@@ -3289,11 +4816,39 @@ module Aws::Lambda
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor requested_provisioned_concurrent_executions: Integer?
-      attr_accessor available_provisioned_concurrent_executions: Integer?
       attr_accessor allocated_provisioned_concurrent_executions: Integer?
+      attr_accessor available_provisioned_concurrent_executions: Integer?
       attr_accessor status: String?
       attr_accessor status_reason: String?
       attr_accessor last_modified: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
     end
 
     class PutRuntimeManagementConfigRequest
@@ -3393,6 +4948,21 @@ module Aws::Lambda
       attr_accessor message: String?
     end
 
+    class ResolvedS3Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_key: String,
+        ?s3_object_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key: String?
+      attr_accessor s3_object_version: String?
+    end
+
     class ResourceConflictException
       include Smithy::Schema::Structure
 
@@ -3450,6 +5020,19 @@ module Aws::Lambda
       DryRun: String
     end
 
+    class RetryDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_attempt: Integer,
+        ?next_attempt_delay_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_attempt: Integer?
+      attr_accessor next_attempt_delay_seconds: Integer?
+    end
+
     module Runtime
       nodejs: String
       nodejs43: String
@@ -3459,39 +5042,49 @@ module Aws::Lambda
       nodejs12x: String
       nodejs14x: String
       nodejs16x: String
+      nodejs18x: String
+      nodejs20x: String
+      nodejs22x: String
+      nodejs24x: String
       java8: String
       java8al2: String
       java11: String
+      java17: String
+      java21: String
+      java25: String
       python27: String
       python36: String
       python37: String
       python38: String
       python39: String
+      python310: String
+      python311: String
+      python312: String
+      python313: String
+      python314: String
       dotnetcore10: String
       dotnetcore20: String
       dotnetcore21: String
       dotnetcore31: String
       dotnet6: String
       dotnet8: String
+      dotnet10: String
       nodejs43edge: String
       go1x: String
       ruby25: String
       ruby27: String
-      provided: String
-      providedal2: String
-      nodejs18x: String
-      python310: String
-      java17: String
       ruby32: String
       ruby33: String
       ruby34: String
-      python311: String
-      nodejs20x: String
+      ruby40: String
+      provided: String
+      providedal2: String
       providedal2023: String
-      python312: String
-      java21: String
-      python313: String
-      nodejs22x: String
+      nodejs26x: String
+      python315: String
+      java8al2023: String
+      java11al2023: String
+      java17al2023: String
     end
 
     class RuntimeVersionConfig
@@ -3518,6 +5111,61 @@ module Aws::Lambda
 
       attr_accessor error_code: String?
       attr_accessor message: String?
+    end
+
+    class S3FilesConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_s3_read: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_s3_read: String?
+    end
+
+    class S3FilesMountConnectivityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class S3FilesMountFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class S3FilesMountTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    module S3ObjectStorageMode
+      Copy: String
+      Reference: String
     end
 
     class ScalingConfig
@@ -3560,7 +5208,97 @@ module Aws::Lambda
       attr_accessor schema_registry_config: Types::KafkaSchemaRegistryConfig?
     end
 
+    class SendDurableExecutionCallbackFailureRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?callback_id: String,
+        ?error: Types::ErrorObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor callback_id: String?
+      attr_accessor error: Types::ErrorObject?
+    end
+
+    class SendDurableExecutionCallbackFailureResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SendDurableExecutionCallbackHeartbeatRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?callback_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor callback_id: String?
+    end
+
+    class SendDurableExecutionCallbackHeartbeatResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SendDurableExecutionCallbackSuccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?callback_id: String,
+        ?result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor callback_id: String?
+      attr_accessor result: String?
+    end
+
+    class SendDurableExecutionCallbackSuccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SerializedRequestEntityTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
     class ServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -3620,6 +5358,19 @@ module Aws::Lambda
       Off: String
     end
 
+    class SnapStartRegenerationFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
     class SnapStartResponse
       include Smithy::Schema::Structure
 
@@ -3668,6 +5419,13 @@ module Aws::Lambda
       VIRTUAL_HOST: String
       CLIENT_CERTIFICATE_TLS_AUTH: String
       SERVER_ROOT_CA_CERTIFICATE: String
+      OAUTHBEARER_AUTH: String
+      OAUTHBEARER_SCOPE: String
+      OAUTHBEARER_AUDIENCE: String
+      OAUTHBEARER_LOGICAL_CLUSTER: String
+      OAUTHBEARER_IDENTITY_POOL: String
+      IAM_AUTH: String
+      IAM_OAUTHBEARER_AUTH: String
     end
 
     module State
@@ -3675,6 +5433,10 @@ module Aws::Lambda
       Active: String
       Inactive: String
       Failed: String
+      Deactivating: String
+      Deactivated: String
+      ActiveNonInvocable: String
+      Deleting: String
     end
 
     module StateReasonCode
@@ -3702,6 +5464,109 @@ module Aws::Lambda
       InvalidRuntime: String
       InvalidZipFileException: String
       FunctionError: String
+      ServiceQuotaExceededException: String
+      VcpuLimitExceeded: String
+      CapacityProviderScalingLimitExceeded: String
+      InsufficientCapacity: String
+      EC2RequestLimitExceeded: String
+      FunctionErrorInitTimeout: String
+      FunctionErrorRuntimeInitError: String
+      FunctionErrorExtensionInitError: String
+      FunctionErrorInvalidEntryPoint: String
+      FunctionErrorInvalidWorkingDirectory: String
+      FunctionErrorPermissionDenied: String
+      FunctionErrorTooManyExtensions: String
+      FunctionErrorInitResourceExhausted: String
+      DisallowedByVpcEncryptionControl: String
+      DrainingDurableExecutions: String
+      DependencyError: String
+    end
+
+    class StepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attempt: Integer,
+        ?next_attempt_timestamp: Time,
+        ?result: String,
+        ?error: Types::ErrorObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attempt: Integer?
+      attr_accessor next_attempt_timestamp: Time?
+      attr_accessor result: String?
+      attr_accessor error: Types::ErrorObject?
+    end
+
+    class StepFailedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+        ?retry_details: Types::RetryDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+      attr_accessor retry_details: Types::RetryDetails?
+    end
+
+    class StepOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_attempt_delay_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_attempt_delay_seconds: Integer?
+    end
+
+    class StepStartedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StepSucceededDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: Types::EventResult,
+        ?retry_details: Types::RetryDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: Types::EventResult?
+      attr_accessor retry_details: Types::RetryDetails?
+    end
+
+    class StopDurableExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?durable_execution_arn: String,
+        ?error: Types::ErrorObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor durable_execution_arn: String?
+      attr_accessor error: Types::ErrorObject?
+    end
+
+    class StopDurableExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stop_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stop_timestamp: Time?
     end
 
     class SubnetIPAddressLimitReachedException
@@ -3749,6 +5614,34 @@ module Aws::Lambda
       attr_accessor message: String?
     end
 
+    class TargetTrackingScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?predefined_metric_type: String,
+        ?target_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor predefined_metric_type: String?
+      attr_accessor target_value: Float?
+    end
+
+    class TenancyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_isolation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_isolation_mode: String?
+    end
+
+    module TenantIsolationMode
+      PER_TENANT: String
+    end
+
     module ThrottleReason
       ConcurrentInvocationLimitExceeded: String
       FunctionInvocationRateLimitExceeded: String
@@ -3773,6 +5666,17 @@ module Aws::Lambda
       attr_accessor type: String?
       attr_accessor message: String?
       attr_accessor reason: String?
+    end
+
+    class TraceHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?x_amzn_trace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x_amzn_trace_id: String?
     end
 
     class TracingConfig
@@ -3870,6 +5774,34 @@ module Aws::Lambda
       attr_accessor revision_id: String?
     end
 
+    class UpdateCapacityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider_name: String,
+        ?capacity_provider_scaling_config: Types::CapacityProviderScalingConfig,
+        ?propagate_tags: Types::PropagateTags,
+        ?telemetry_config: Types::CapacityProviderTelemetryConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider_name: String?
+      attr_accessor capacity_provider_scaling_config: Types::CapacityProviderScalingConfig?
+      attr_accessor propagate_tags: Types::PropagateTags?
+      attr_accessor telemetry_config: Types::CapacityProviderTelemetryConfig?
+    end
+
+    class UpdateCapacityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_provider: Types::CapacityProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_provider: Types::CapacityProvider?
+    end
+
     class UpdateCodeSigningConfigRequest
       include Smithy::Schema::Structure
 
@@ -3910,6 +5842,11 @@ module Aws::Lambda
         ?parallelization_factor: Integer,
         ?event_source_arn: String,
         ?filter_criteria: Types::FilterCriteria,
+        ?filter_criteria_error: Types::FilterCriteriaError,
+        ?kms_key_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?logging_config: Types::EventSourceMappingLoggingConfig,
+        ?scaling_config: Types::ScalingConfig,
         ?function_arn: String,
         ?last_modified: Time,
         ?last_processing_result: String,
@@ -3927,12 +5864,8 @@ module Aws::Lambda
         ?function_response_types: Array[String],
         ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
         ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
-        ?scaling_config: Types::ScalingConfig,
         ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
-        ?kms_key_arn: String,
-        ?filter_criteria_error: Types::FilterCriteriaError,
         ?event_source_mapping_arn: String,
-        ?metrics_config: Types::EventSourceMappingMetricsConfig,
         ?provisioned_poller_config: Types::ProvisionedPollerConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3945,6 +5878,11 @@ module Aws::Lambda
       attr_accessor parallelization_factor: Integer?
       attr_accessor event_source_arn: String?
       attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor logging_config: Types::EventSourceMappingLoggingConfig?
+      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor function_arn: String?
       attr_accessor last_modified: Time?
       attr_accessor last_processing_result: String?
@@ -3962,12 +5900,8 @@ module Aws::Lambda
       attr_accessor function_response_types: Array[String]?
       attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
       attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
-      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
-      attr_accessor kms_key_arn: String?
-      attr_accessor filter_criteria_error: Types::FilterCriteriaError?
       attr_accessor event_source_mapping_arn: String?
-      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
       attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
     end
 
@@ -3980,21 +5914,22 @@ module Aws::Lambda
         ?enabled: bool,
         ?batch_size: Integer,
         ?filter_criteria: Types::FilterCriteria,
+        ?kms_key_arn: String,
+        ?metrics_config: Types::EventSourceMappingMetricsConfig,
+        ?logging_config: Types::EventSourceMappingLoggingConfig,
+        ?scaling_config: Types::ScalingConfig,
         ?maximum_batching_window_in_seconds: Integer,
+        ?parallelization_factor: Integer,
         ?destination_config: Types::DestinationConfig,
         ?maximum_record_age_in_seconds: Integer,
         ?bisect_batch_on_function_error: bool,
         ?maximum_retry_attempts: Integer,
-        ?parallelization_factor: Integer,
-        ?source_access_configurations: Array[Types::SourceAccessConfiguration],
         ?tumbling_window_in_seconds: Integer,
+        ?source_access_configurations: Array[Types::SourceAccessConfiguration],
         ?function_response_types: Array[String],
-        ?scaling_config: Types::ScalingConfig,
         ?amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig,
         ?self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig,
         ?document_db_event_source_config: Types::DocumentDBEventSourceConfig,
-        ?kms_key_arn: String,
-        ?metrics_config: Types::EventSourceMappingMetricsConfig,
         ?provisioned_poller_config: Types::ProvisionedPollerConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4004,21 +5939,22 @@ module Aws::Lambda
       attr_accessor enabled: bool?
       attr_accessor batch_size: Integer?
       attr_accessor filter_criteria: Types::FilterCriteria?
+      attr_accessor kms_key_arn: String?
+      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
+      attr_accessor logging_config: Types::EventSourceMappingLoggingConfig?
+      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor maximum_batching_window_in_seconds: Integer?
+      attr_accessor parallelization_factor: Integer?
       attr_accessor destination_config: Types::DestinationConfig?
       attr_accessor maximum_record_age_in_seconds: Integer?
       attr_accessor bisect_batch_on_function_error: bool?
       attr_accessor maximum_retry_attempts: Integer?
-      attr_accessor parallelization_factor: Integer?
-      attr_accessor source_access_configurations: Array[Types::SourceAccessConfiguration]?
       attr_accessor tumbling_window_in_seconds: Integer?
+      attr_accessor source_access_configurations: Array[Types::SourceAccessConfiguration]?
       attr_accessor function_response_types: Array[String]?
-      attr_accessor scaling_config: Types::ScalingConfig?
       attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig?
       attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig?
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig?
-      attr_accessor kms_key_arn: String?
-      attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig?
       attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
     end
 
@@ -4053,15 +5989,19 @@ module Aws::Lambda
         ?last_update_status_reason: String,
         ?last_update_status_reason_code: String,
         ?file_system_configs: Array[Types::FileSystemConfig],
-        ?package_type: String,
-        ?image_config_response: Types::ImageConfigResponse,
         ?signing_profile_version_arn: String,
         ?signing_job_arn: String,
+        ?package_type: String,
+        ?image_config_response: Types::ImageConfigResponse,
         ?architectures: Array[String],
         ?ephemeral_storage: Types::EphemeralStorage,
         ?snap_start: Types::SnapStartResponse,
         ?runtime_version_config: Types::RuntimeVersionConfig,
         ?logging_config: Types::LoggingConfig,
+        ?tenancy_config: Types::TenancyConfig,
+        ?capacity_provider_config: Types::CapacityProviderConfig,
+        ?config_sha256: String,
+        ?durable_config: Types::DurableConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4092,15 +6032,19 @@ module Aws::Lambda
       attr_accessor last_update_status_reason: String?
       attr_accessor last_update_status_reason_code: String?
       attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
-      attr_accessor package_type: String?
-      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor signing_profile_version_arn: String?
       attr_accessor signing_job_arn: String?
+      attr_accessor package_type: String?
+      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor architectures: Array[String]?
       attr_accessor ephemeral_storage: Types::EphemeralStorage?
       attr_accessor snap_start: Types::SnapStartResponse?
       attr_accessor runtime_version_config: Types::RuntimeVersionConfig?
       attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor tenancy_config: Types::TenancyConfig?
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig?
+      attr_accessor config_sha256: String?
+      attr_accessor durable_config: Types::DurableConfig?
     end
 
     class UpdateFunctionCodeRequest
@@ -4112,11 +6056,13 @@ module Aws::Lambda
         ?s3_bucket: String,
         ?s3_key: String,
         ?s3_object_version: String,
+        ?s3_object_storage_mode: String,
         ?image_uri: String,
+        ?architectures: Array[String],
         ?publish: bool,
+        ?publish_to: String,
         ?dry_run: bool,
         ?revision_id: String,
-        ?architectures: Array[String],
         ?source_kms_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4126,11 +6072,13 @@ module Aws::Lambda
       attr_accessor s3_bucket: String?
       attr_accessor s3_key: String?
       attr_accessor s3_object_version: String?
+      attr_accessor s3_object_storage_mode: String?
       attr_accessor image_uri: String?
+      attr_accessor architectures: Array[String]?
       attr_accessor publish: bool?
+      attr_accessor publish_to: String?
       attr_accessor dry_run: bool?
       attr_accessor revision_id: String?
-      attr_accessor architectures: Array[String]?
       attr_accessor source_kms_key_arn: String?
     end
 
@@ -4165,15 +6113,19 @@ module Aws::Lambda
         ?last_update_status_reason: String,
         ?last_update_status_reason_code: String,
         ?file_system_configs: Array[Types::FileSystemConfig],
-        ?package_type: String,
-        ?image_config_response: Types::ImageConfigResponse,
         ?signing_profile_version_arn: String,
         ?signing_job_arn: String,
+        ?package_type: String,
+        ?image_config_response: Types::ImageConfigResponse,
         ?architectures: Array[String],
         ?ephemeral_storage: Types::EphemeralStorage,
         ?snap_start: Types::SnapStartResponse,
         ?runtime_version_config: Types::RuntimeVersionConfig,
         ?logging_config: Types::LoggingConfig,
+        ?tenancy_config: Types::TenancyConfig,
+        ?capacity_provider_config: Types::CapacityProviderConfig,
+        ?config_sha256: String,
+        ?durable_config: Types::DurableConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4204,15 +6156,19 @@ module Aws::Lambda
       attr_accessor last_update_status_reason: String?
       attr_accessor last_update_status_reason_code: String?
       attr_accessor file_system_configs: Array[Types::FileSystemConfig]?
-      attr_accessor package_type: String?
-      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor signing_profile_version_arn: String?
       attr_accessor signing_job_arn: String?
+      attr_accessor package_type: String?
+      attr_accessor image_config_response: Types::ImageConfigResponse?
       attr_accessor architectures: Array[String]?
       attr_accessor ephemeral_storage: Types::EphemeralStorage?
       attr_accessor snap_start: Types::SnapStartResponse?
       attr_accessor runtime_version_config: Types::RuntimeVersionConfig?
       attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor tenancy_config: Types::TenancyConfig?
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig?
+      attr_accessor config_sha256: String?
+      attr_accessor durable_config: Types::DurableConfig?
     end
 
     class UpdateFunctionConfigurationRequest
@@ -4238,6 +6194,8 @@ module Aws::Lambda
         ?ephemeral_storage: Types::EphemeralStorage,
         ?snap_start: Types::SnapStart,
         ?logging_config: Types::LoggingConfig,
+        ?capacity_provider_config: Types::CapacityProviderConfig,
+        ?durable_config: Types::DurableConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4260,6 +6218,8 @@ module Aws::Lambda
       attr_accessor ephemeral_storage: Types::EphemeralStorage?
       attr_accessor snap_start: Types::SnapStart?
       attr_accessor logging_config: Types::LoggingConfig?
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig?
+      attr_accessor durable_config: Types::DurableConfig?
     end
 
     class UpdateFunctionEventInvokeConfigOutput
@@ -4378,6 +6338,63 @@ module Aws::Lambda
       attr_accessor security_group_ids: Array[String]?
       attr_accessor vpc_id: String?
       attr_accessor ipv6_allowed_for_dual_stack: bool?
+    end
+
+    class WaitCancelledDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::EventError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::EventError?
+    end
+
+    class WaitDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_end_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_end_timestamp: Time?
+    end
+
+    class WaitOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wait_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wait_seconds: Integer?
+    end
+
+    class WaitStartedDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+        ?scheduled_end_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
+      attr_accessor scheduled_end_timestamp: Time?
+    end
+
+    class WaitSucceededDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration: Integer?
     end
   end
 end

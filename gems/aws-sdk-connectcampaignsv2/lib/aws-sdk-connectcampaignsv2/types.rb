@@ -6,6 +6,30 @@ module Aws::ConnectCampaignsV2
   # This module contains the types returned by client operations.
   module Types
 
+    # Configuration for abandonment-rate-based dialer throttling.
+    # @!attribute target_rate
+    #   Target abandonment rate.
+    #   @return [Float]
+    # @!attribute connection_start_point
+    #   Event from which connectionThresholdSeconds is measured.
+    #   @return [String]
+    # @!attribute connection_threshold_seconds
+    #   Seconds after connectionStartPoint before a contact counts as abandoned.
+    #   @return [Integer]
+    # @!attribute evaluation_window
+    #   Rolling window over which abandonmentRate is computed.
+    #   @return [String]
+    class AbandonmentRatePacingConfig < Struct.new(
+      nil,
+      :target_rate,
+      :connection_start_point,
+      :connection_threshold_seconds,
+      :evaluation_window,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # You do not have sufficient access to perform this action.
     # @!attribute message
     #   @return [String]
@@ -66,6 +90,9 @@ module Aws::ConnectCampaignsV2
     # @!attribute channel_subtype_config
     #   Campaign Channel Subtype config
     #   @return [Types::ChannelSubtypeConfig]
+    # @!attribute type
+    #   The type of campaign externally exposed in APIs.
+    #   @return [String]
     # @!attribute source
     #   Source of the campaign
     #   @return [Types::Source]
@@ -75,6 +102,9 @@ module Aws::ConnectCampaignsV2
     # @!attribute schedule
     #   Campaign schedule
     #   @return [Types::Schedule]
+    # @!attribute entry_limits_config
+    #   Campaign entry limits config
+    #   @return [Types::EntryLimitsConfig]
     # @!attribute communication_time_config
     #   Campaign communication time config
     #   @return [Types::CommunicationTimeConfig]
@@ -91,9 +121,11 @@ module Aws::ConnectCampaignsV2
       :name,
       :connect_instance_id,
       :channel_subtype_config,
+      :type,
       :source,
       :connect_campaign_flow_arn,
       :schedule,
+      :entry_limits_config,
       :communication_time_config,
       :communication_limits_override,
       :tags,
@@ -130,9 +162,15 @@ module Aws::ConnectCampaignsV2
     # @!attribute channel_subtypes
     #   Channel subtype list
     #   @return [Array<String>]
+    # @!attribute type
+    #   The type of campaign externally exposed in APIs.
+    #   @return [String]
     # @!attribute schedule
     #   Campaign schedule
     #   @return [Types::Schedule]
+    # @!attribute entry_limits_config
+    #   Campaign entry limits config
+    #   @return [Types::EntryLimitsConfig]
     # @!attribute connect_campaign_flow_arn
     #   Amazon Resource Names(ARN)
     #   @return [String]
@@ -143,8 +181,22 @@ module Aws::ConnectCampaignsV2
       :name,
       :connect_instance_id,
       :channel_subtypes,
+      :type,
       :schedule,
+      :entry_limits_config,
       :connect_campaign_flow_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Additional metadata related to the event trigger context
+    # @!attribute web_notification_context
+    #   Context metadata for the web notification type channel
+    #   @return [Types::WebNotificationContext]
+    class ChannelContext < Struct.new(
+      nil,
+      :web_notification_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -160,11 +212,15 @@ module Aws::ConnectCampaignsV2
     # @!attribute email
     #   Email Channel Subtype config
     #   @return [Types::EmailChannelSubtypeConfig]
+    # @!attribute whats_app
+    #   WhatsApp Channel Subtype config
+    #   @return [Types::WhatsAppChannelSubtypeConfig]
     class ChannelSubtypeConfig < Struct.new(
       nil,
       :telephony,
       :sms,
       :email,
+      :whats_app,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -180,10 +236,14 @@ module Aws::ConnectCampaignsV2
     # @!attribute email
     #   Parameters for the Email Channel Subtype
     #   @return [Types::EmailChannelSubtypeParameters]
+    # @!attribute whats_app
+    #   Parameters for the WhatsApp Channel Subtype
+    #   @return [Types::WhatsAppChannelSubtypeParameters]
     class ChannelSubtypeParameters < Struct.new(
       :telephony,
       :sms,
       :email,
+      :whats_app,
       :unknown,
       keyword_init: true
     )
@@ -192,6 +252,7 @@ module Aws::ConnectCampaignsV2
       class Telephony < ChannelSubtypeParameters; end
       class Sms < ChannelSubtypeParameters; end
       class Email < ChannelSubtypeParameters; end
+      class WhatsApp < ChannelSubtypeParameters; end
       class Unknown < ChannelSubtypeParameters; end
     end
 
@@ -259,12 +320,16 @@ module Aws::ConnectCampaignsV2
     # @!attribute email
     #   Time window config
     #   @return [Types::TimeWindow]
+    # @!attribute whats_app
+    #   Time window config
+    #   @return [Types::TimeWindow]
     class CommunicationTimeConfig < Struct.new(
       nil,
       :local_time_zone_config,
       :telephony,
       :sms,
       :email,
+      :whats_app,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -295,6 +360,9 @@ module Aws::ConnectCampaignsV2
     # @!attribute channel_subtype_config
     #   Campaign Channel Subtype config
     #   @return [Types::ChannelSubtypeConfig]
+    # @!attribute type
+    #   The type of campaign externally exposed in APIs.
+    #   @return [String]
     # @!attribute source
     #   Source of the campaign
     #   @return [Types::Source]
@@ -304,6 +372,9 @@ module Aws::ConnectCampaignsV2
     # @!attribute schedule
     #   Campaign schedule
     #   @return [Types::Schedule]
+    # @!attribute entry_limits_config
+    #   Campaign entry limits config
+    #   @return [Types::EntryLimitsConfig]
     # @!attribute communication_time_config
     #   Campaign communication time config
     #   @return [Types::CommunicationTimeConfig]
@@ -318,9 +389,11 @@ module Aws::ConnectCampaignsV2
       :name,
       :connect_instance_id,
       :channel_subtype_config,
+      :type,
       :source,
       :connect_campaign_flow_arn,
       :schedule,
+      :entry_limits_config,
       :communication_time_config,
       :communication_limits_override,
       :tags,
@@ -436,6 +509,18 @@ module Aws::ConnectCampaignsV2
       nil,
       :id,
       :config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # The request for DeleteCampaignEntryLimits API.
+    # @!attribute id
+    #   Identifier representing a Campaign
+    #   @return [String]
+    class DeleteCampaignEntryLimitsRequest < Struct.new(
+      nil,
+      :id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -628,6 +713,22 @@ module Aws::ConnectCampaignsV2
       end
     end
 
+    # Campaign entry limits config
+    # @!attribute max_entry_count
+    #   Maximum number of times a participant can enter the campaign. A value of 0 indicates unlimited entries. Values of 1 or greater specify the exact number of entries allowed.
+    #   @return [Integer]
+    # @!attribute min_entry_interval
+    #   Minimum time interval that must pass before a participant can enter the campaign again.
+    #   @return [String]
+    class EntryLimitsConfig < Struct.new(
+      nil,
+      :max_entry_count,
+      :min_entry_interval,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Event trigger of the campaign
     # @!attribute customer_profiles_domain_arn
     #   Amazon Resource Names(ARN)
@@ -635,6 +736,22 @@ module Aws::ConnectCampaignsV2
     class EventTrigger < Struct.new(
       nil,
       :customer_profiles_domain_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Event trigger context data
+    # @!attribute source_event
+    #   Source event object for event triggers
+    #   @return [String]
+    # @!attribute channel_context
+    #   Additional metadata related to the event trigger context
+    #   @return [Types::ChannelContext]
+    class EventTriggerContext < Struct.new(
+      nil,
+      :source_event,
+      :channel_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -898,9 +1015,13 @@ module Aws::ConnectCampaignsV2
     # @!attribute q_connect
     #   Q Connect integration config
     #   @return [Types::QConnectIntegrationConfig]
+    # @!attribute lambda
+    #   Lambda integration config
+    #   @return [Types::LambdaIntegrationConfig]
     class IntegrationConfig < Struct.new(
       :customer_profiles,
       :q_connect,
+      :lambda,
       :unknown,
       keyword_init: true
     )
@@ -908,6 +1029,7 @@ module Aws::ConnectCampaignsV2
 
       class CustomerProfiles < IntegrationConfig; end
       class QConnect < IntegrationConfig; end
+      class Lambda < IntegrationConfig; end
       class Unknown < IntegrationConfig; end
     end
 
@@ -918,9 +1040,13 @@ module Aws::ConnectCampaignsV2
     # @!attribute q_connect
     #   Q Connect integration identifier
     #   @return [Types::QConnectIntegrationIdentifier]
+    # @!attribute lambda
+    #   Lambda integration identifier
+    #   @return [Types::LambdaIntegrationIdentifier]
     class IntegrationIdentifier < Struct.new(
       :customer_profiles,
       :q_connect,
+      :lambda,
       :unknown,
       keyword_init: true
     )
@@ -928,6 +1054,7 @@ module Aws::ConnectCampaignsV2
 
       class CustomerProfiles < IntegrationIdentifier; end
       class QConnect < IntegrationIdentifier; end
+      class Lambda < IntegrationIdentifier; end
       class Unknown < IntegrationIdentifier; end
     end
 
@@ -938,9 +1065,13 @@ module Aws::ConnectCampaignsV2
     # @!attribute q_connect
     #   Q Connect integration summary
     #   @return [Types::QConnectIntegrationSummary]
+    # @!attribute lambda
+    #   Lambda integration summary
+    #   @return [Types::LambdaIntegrationSummary]
     class IntegrationSummary < Struct.new(
       :customer_profiles,
       :q_connect,
+      :lambda,
       :unknown,
       keyword_init: true
     )
@@ -948,6 +1079,7 @@ module Aws::ConnectCampaignsV2
 
       class CustomerProfiles < IntegrationSummary; end
       class QConnect < IntegrationSummary; end
+      class Lambda < IntegrationSummary; end
       class Unknown < IntegrationSummary; end
     end
 
@@ -995,6 +1127,42 @@ module Aws::ConnectCampaignsV2
       nil,
       :message,
       :x_amz_error_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Lambda integration config
+    # @!attribute function_arn
+    #   Lambda ARN for integration with Connect instances
+    #   @return [String]
+    class LambdaIntegrationConfig < Struct.new(
+      nil,
+      :function_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Lambda integration identifier
+    # @!attribute function_arn
+    #   Lambda ARN for integration with Connect instances
+    #   @return [String]
+    class LambdaIntegrationIdentifier < Struct.new(
+      nil,
+      :function_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Lambda integration summary
+    # @!attribute function_arn
+    #   Lambda ARN for integration with Connect instances
+    #   @return [String]
+    class LambdaIntegrationSummary < Struct.new(
+      nil,
+      :function_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1103,10 +1271,14 @@ module Aws::ConnectCampaignsV2
     # @!attribute local_time_zone_detection
     #   Local TimeZone Detection method list
     #   @return [Array<String>]
+    # @!attribute local_time_zone_detection_scope
+    #   Local TimeZone Detection scope.
+    #   @return [String]
     class LocalTimeZoneConfig < Struct.new(
       nil,
       :default_time_zone,
       :local_time_zone_detection,
+      :local_time_zone_detection_scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1147,6 +1319,21 @@ module Aws::ConnectCampaignsV2
       include ::Smithy::Schema::Structure
     end
 
+    # Pacing constraint the dialer may enforce.
+    # @!attribute abandonment_rate
+    #   Configuration for abandonment-rate-based dialer throttling.
+    #   @return [Types::AbandonmentRatePacingConfig]
+    class PacingStrategy < Struct.new(
+      :abandonment_rate,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AbandonmentRate < PacingStrategy; end
+      class Unknown < PacingStrategy; end
+    end
+
     # The request for PauseCampaign API.
     # @!attribute id
     #   Identifier representing a Campaign
@@ -1163,9 +1350,33 @@ module Aws::ConnectCampaignsV2
     # @!attribute bandwidth_allocation
     #   The bandwidth allocation of a queue resource.
     #   @return [Float]
+    # @!attribute pacing_strategies
+    #   Pacing strategies the dialer enforces simultaneously.
+    #   @return [Array<Types::PacingStrategy>]
     class PredictiveConfig < Struct.new(
       nil,
       :bandwidth_allocation,
+      :pacing_strategies,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Preview config
+    # @!attribute bandwidth_allocation
+    #   The bandwidth allocation of a queue resource.
+    #   @return [Float]
+    # @!attribute timeout_config
+    #   Timeout Config for preview contacts.
+    #   @return [Types::TimeoutConfig]
+    # @!attribute agent_actions
+    #   Actions that can be performed by agent during preview phase.
+    #   @return [Array<String>]
+    class PreviewConfig < Struct.new(
+      nil,
+      :bandwidth_allocation,
+      :timeout_config,
+      :agent_actions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1181,11 +1392,15 @@ module Aws::ConnectCampaignsV2
     # @!attribute expiration_time
     #   Timestamp with no UTC offset or timezone
     #   @return [Time]
+    # @!attribute event_trigger_context
+    #   Event trigger context data
+    #   @return [Types::EventTriggerContext]
     class ProfileOutboundRequest < Struct.new(
       nil,
       :client_token,
       :profile_id,
       :expiration_time,
+      :event_trigger_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1683,12 +1898,16 @@ module Aws::ConnectCampaignsV2
     # @!attribute answer_machine_detection_config
     #   Answering Machine Detection config
     #   @return [Types::AnswerMachineDetectionConfig]
+    # @!attribute ring_timeout
+    #   Ring timeout for outbound calls
+    #   @return [Integer]
     class TelephonyChannelSubtypeParameters < Struct.new(
       nil,
       :destination_phone_number,
       :attributes,
       :connect_source_phone_number,
       :answer_machine_detection_config,
+      :ring_timeout,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1704,11 +1923,15 @@ module Aws::ConnectCampaignsV2
     # @!attribute answer_machine_detection_config
     #   Answering Machine Detection config
     #   @return [Types::AnswerMachineDetectionConfig]
+    # @!attribute ring_timeout
+    #   Ring timeout for outbound calls
+    #   @return [Integer]
     class TelephonyOutboundConfig < Struct.new(
       nil,
       :connect_contact_flow_id,
       :connect_source_phone_number,
       :answer_machine_detection_config,
+      :ring_timeout,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1724,10 +1947,14 @@ module Aws::ConnectCampaignsV2
     # @!attribute agentless
     #   Agentless config
     #   @return [Types::AgentlessConfig]
+    # @!attribute preview
+    #   Preview config
+    #   @return [Types::PreviewConfig]
     class TelephonyOutboundMode < Struct.new(
       :progressive,
       :predictive,
       :agentless,
+      :preview,
       :unknown,
       keyword_init: true
     )
@@ -1736,6 +1963,7 @@ module Aws::ConnectCampaignsV2
       class Progressive < TelephonyOutboundMode; end
       class Predictive < TelephonyOutboundMode; end
       class Agentless < TelephonyOutboundMode; end
+      class Preview < TelephonyOutboundMode; end
       class Unknown < TelephonyOutboundMode; end
     end
 
@@ -1781,6 +2009,18 @@ module Aws::ConnectCampaignsV2
       nil,
       :open_hours,
       :restricted_periods,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Timeout Config for preview contacts.
+    # @!attribute duration_in_seconds
+    #   Timeout duration for a preview contact in seconds.
+    #   @return [Integer]
+    class TimeoutConfig < Struct.new(
+      nil,
+      :duration_in_seconds,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1845,6 +2085,22 @@ module Aws::ConnectCampaignsV2
       nil,
       :id,
       :communication_time_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # The request for UpdateCampaignEntryLimits API.
+    # @!attribute id
+    #   Identifier representing a Campaign
+    #   @return [String]
+    # @!attribute entry_limits_config
+    #   Campaign entry limits config
+    #   @return [Types::EntryLimitsConfig]
+    class UpdateCampaignEntryLimitsRequest < Struct.new(
+      nil,
+      :id,
+      :entry_limits_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1927,6 +2183,97 @@ module Aws::ConnectCampaignsV2
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # Context metadata for the web notification type channel
+    # @!attribute session_id
+    #   Session Id for web notification event trigger
+    #   @return [String]
+    # @!attribute browser_id
+    #   Browser Id for web notification event trigger
+    #   @return [String]
+    class WebNotificationContext < Struct.new(
+      nil,
+      :session_id,
+      :browser_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # WhatsApp Channel Subtype config
+    # @!attribute capacity
+    #   Allocates outbound capacity for the specific channel subtype of this campaign between multiple active campaigns
+    #   @return [Float]
+    # @!attribute outbound_mode
+    #   WhatsApp Outbound Mode
+    #   @return [Types::WhatsAppOutboundMode]
+    # @!attribute default_outbound_config
+    #   Default WhatsApp Outbound config
+    #   @return [Types::WhatsAppOutboundConfig]
+    class WhatsAppChannelSubtypeConfig < Struct.new(
+      nil,
+      :capacity,
+      :outbound_mode,
+      :default_outbound_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Parameters for the WhatsApp Channel Subtype
+    # @!attribute destination_phone_number
+    #   The phone number of the customer, in E.164 format.
+    #   @return [String]
+    # @!attribute connect_source_phone_number_arn
+    #   Amazon Resource Names(ARN)
+    #   @return [String]
+    # @!attribute template_arn
+    #   Amazon Resource Names(ARN)
+    #   @return [String]
+    # @!attribute template_parameters
+    #   A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.
+    #   @return [Hash<String, String>]
+    class WhatsAppChannelSubtypeParameters < Struct.new(
+      nil,
+      :destination_phone_number,
+      :connect_source_phone_number_arn,
+      :template_arn,
+      :template_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Default WhatsApp Outbound config
+    # @!attribute connect_source_phone_number_arn
+    #   Amazon Resource Names(ARN)
+    #   @return [String]
+    # @!attribute wisdom_template_arn
+    #   Amazon Resource Names(ARN)
+    #   @return [String]
+    class WhatsAppOutboundConfig < Struct.new(
+      nil,
+      :connect_source_phone_number_arn,
+      :wisdom_template_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # WhatsApp Outbound Mode
+    # @!attribute agentless
+    #   Agentless config
+    #   @return [Types::AgentlessConfig]
+    class WhatsAppOutboundMode < Struct.new(
+      :agentless,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Agentless < WhatsAppOutboundMode; end
+      class Unknown < WhatsAppOutboundMode; end
     end
 
   end

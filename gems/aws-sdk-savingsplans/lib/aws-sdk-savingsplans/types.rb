@@ -471,7 +471,7 @@ module Aws::Savingsplans
     #   @return [Hash<String, String>]
     # @!attribute returnable_until
     #   <p>The time until when a return for the Savings Plan can be requested. If the
-    #               Savings Plan is not returnable, the field reflects the Savings Plan start time.</p>
+    #               Savings Plan is not returnable, the field reflects the Savings Plans start time.</p>
     #   @return [String]
     class SavingsPlan < Struct.new(
       nil,

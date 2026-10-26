@@ -5,11 +5,15 @@ module Aws::Signin
       ?use_fips: bool,
       ?endpoint: String,
       ?region: String,
+      ?is_control_plane: bool,
+      ?is_o_auth_endpoint: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
     attr_accessor use_dual_stack: bool?
     attr_accessor use_fips: bool?
     attr_accessor endpoint: String?
     attr_accessor region: String?
+    attr_accessor is_control_plane: bool?
+    attr_accessor is_o_auth_endpoint: bool?
   end
 end

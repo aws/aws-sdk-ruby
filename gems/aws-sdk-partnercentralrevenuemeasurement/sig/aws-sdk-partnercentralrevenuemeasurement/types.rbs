@@ -1,0 +1,1157 @@
+module Aws::PartnerCentralRevenueMeasurement
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AccessDeniedExceptionReason
+      ACCESS_DENIED: String
+    end
+
+    module AllocationStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    module AttributionSortBy
+      LAST_MODIFIED_DATE: String
+    end
+
+    class AttributionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?catalog: String,
+        ?name: String,
+        ?tenancy_model: String,
+        ?marketplace_product: Types::MarketplaceProductSummary,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+        ?latest_revision: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?total_active_revenue_attribution_allocation_count: Integer,
+        ?total_revenue_attribution_allocation_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor catalog: String?
+      attr_accessor name: String?
+      attr_accessor tenancy_model: String?
+      attr_accessor marketplace_product: Types::MarketplaceProductSummary?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor latest_revision: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor total_active_revenue_attribution_allocation_count: Integer?
+      attr_accessor total_revenue_attribution_allocation_count: Integer?
+    end
+
+    module CatalogName
+      AWS: String
+      SANDBOX: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ConflictExceptionReason
+      CONFLICT_CLIENT_TOKEN: String
+      CONCURRENT_MODIFICATION: String
+      RESOURCE_ALREADY_EXISTS: String
+      REVISION_MISMATCH: String
+    end
+
+    class CreateMarketplaceRevenueShareAllocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?product_id: String,
+        ?client_token: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?revenue_share_percent: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor product_id: String?
+      attr_accessor client_token: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor revenue_share_percent: String?
+    end
+
+    class CreateMarketplaceRevenueShareAllocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marketplace_revenue_share_allocation_id: String,
+        ?product_id: String,
+        ?product_name: String,
+        ?arn: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?revenue_share_percent: String,
+        ?status: String,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+        ?latest_marketplace_revenue_share_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marketplace_revenue_share_allocation_id: String?
+      attr_accessor product_id: String?
+      attr_accessor product_name: String?
+      attr_accessor arn: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor revenue_share_percent: String?
+      attr_accessor status: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor latest_marketplace_revenue_share_revision: String?
+    end
+
+    class CreateMarketplaceRevenueShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?product_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor product_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMarketplaceRevenueShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?arn: String,
+        ?catalog: String,
+        ?product_code: String,
+        ?product_name: String,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor arn: String?
+      attr_accessor catalog: String?
+      attr_accessor product_code: String?
+      attr_accessor product_name: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor revision: Integer?
+    end
+
+    class CreateRevenueAttributionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?name: String,
+        ?description: String,
+        ?tenancy_model: String,
+        ?product_identifier: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tenancy_model: String?
+      attr_accessor product_identifier: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRevenueAttributionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?tenancy_model: String,
+        ?marketplace_product: Types::MarketplaceProductSummary,
+        ?revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tenancy_model: String?
+      attr_accessor marketplace_product: Types::MarketplaceProductSummary?
+      attr_accessor revision: String?
+    end
+
+    module EntityType
+      OFFER: String
+      OPPORTUNITY: String
+    end
+
+    module FieldValidationCode
+      REQUIRED_FIELD_MISSING: String
+      DUPLICATE_VALUE: String
+      INVALID_VALUE: String
+      INVALID_STRING_FORMAT: String
+      TOO_MANY_VALUES: String
+      ACTION_NOT_PERMITTED: String
+      INVALID_ENUM_VALUE: String
+      INVALID_NUMBER_FORMAT: String
+      INVALID_STRING_LENGTH: String
+    end
+
+    class GetMarketplaceRevenueShareAllocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?product_id: String,
+        ?marketplace_revenue_share_allocation_id: String,
+        ?marketplace_revenue_share_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor product_id: String?
+      attr_accessor marketplace_revenue_share_allocation_id: String?
+      attr_accessor marketplace_revenue_share_revision: String?
+    end
+
+    class GetMarketplaceRevenueShareAllocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marketplace_revenue_share_allocation_id: String,
+        ?product_id: String,
+        ?product_name: String,
+        ?arn: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?revenue_share_percent: String,
+        ?status: String,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+        ?latest_marketplace_revenue_share_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marketplace_revenue_share_allocation_id: String?
+      attr_accessor product_id: String?
+      attr_accessor product_name: String?
+      attr_accessor arn: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor revenue_share_percent: String?
+      attr_accessor status: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor latest_marketplace_revenue_share_revision: String?
+    end
+
+    class GetMarketplaceRevenueShareInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?product_id: String,
+        ?revision: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor product_id: String?
+      attr_accessor revision: Integer?
+    end
+
+    class GetMarketplaceRevenueShareOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?arn: String,
+        ?catalog: String,
+        ?product_code: String,
+        ?product_name: String,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+        ?revision: Integer,
+        ?latest_revision: Integer,
+        ?total_active_marketplace_revenue_share_allocation_count: Integer,
+        ?total_marketplace_revenue_share_allocation_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor arn: String?
+      attr_accessor catalog: String?
+      attr_accessor product_code: String?
+      attr_accessor product_name: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor revision: Integer?
+      attr_accessor latest_revision: Integer?
+      attr_accessor total_active_marketplace_revenue_share_allocation_count: Integer?
+      attr_accessor total_marketplace_revenue_share_allocation_count: Integer?
+    end
+
+    class GetRevenueAttributionAllocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?revenue_attribution_identifier: String,
+        ?revenue_attribution_allocation_id: String,
+        ?revenue_attribution_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor revenue_attribution_identifier: String?
+      attr_accessor revenue_attribution_allocation_id: String?
+      attr_accessor revenue_attribution_revision: String?
+    end
+
+    class GetRevenueAttributionAllocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revenue_attribution_allocation_id: String,
+        ?revenue_attribution_identifier: String,
+        ?entity_type: String,
+        ?entity_identifier: String,
+        ?entity_name: String,
+        ?customer_aws_account_id: String,
+        ?revenue_share_percent: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?status: String,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+        ?revenue_attribution_revision: String,
+        ?revenue_attribution_latest_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revenue_attribution_allocation_id: String?
+      attr_accessor revenue_attribution_identifier: String?
+      attr_accessor entity_type: String?
+      attr_accessor entity_identifier: String?
+      attr_accessor entity_name: String?
+      attr_accessor customer_aws_account_id: String?
+      attr_accessor revenue_share_percent: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor status: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor revenue_attribution_revision: String?
+      attr_accessor revenue_attribution_latest_revision: String?
+    end
+
+    class GetRevenueAttributionAllocationsTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?revenue_attribution_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor revenue_attribution_identifier: String?
+    end
+
+    class GetRevenueAttributionAllocationsTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?status: String,
+        ?catalog: String,
+        ?revenue_attribution_arn: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?total_revenue_attribution_allocation_records: Integer,
+        ?description: String,
+        ?revenue_attribution_latest_revision: String,
+        ?error_detail_list: Array[Types::RevenueAttributionAllocationErrorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor catalog: String?
+      attr_accessor revenue_attribution_arn: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor total_revenue_attribution_allocation_records: Integer?
+      attr_accessor description: String?
+      attr_accessor revenue_attribution_latest_revision: String?
+      attr_accessor error_detail_list: Array[Types::RevenueAttributionAllocationErrorDetail]?
+    end
+
+    class GetRevenueAttributionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor revision: String?
+    end
+
+    class GetRevenueAttributionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?catalog: String,
+        ?name: String,
+        ?description: String,
+        ?tenancy_model: String,
+        ?marketplace_product: Types::MarketplaceProductSummary,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+        ?revision: String,
+        ?latest_revision: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?total_active_revenue_attribution_allocation_count: Integer,
+        ?total_revenue_attribution_allocation_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor catalog: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tenancy_model: String?
+      attr_accessor marketplace_product: Types::MarketplaceProductSummary?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor revision: String?
+      attr_accessor latest_revision: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor total_active_revenue_attribution_allocation_count: Integer?
+      attr_accessor total_revenue_attribution_allocation_count: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListMarketplaceRevenueShareAllocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?product_id: String,
+        ?status: String,
+        ?after_effective_from: String,
+        ?before_effective_from: String,
+        ?sort_by: String,
+        ?sort_order: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?marketplace_revenue_share_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor product_id: String?
+      attr_accessor status: String?
+      attr_accessor after_effective_from: String?
+      attr_accessor before_effective_from: String?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor marketplace_revenue_share_revision: String?
+    end
+
+    class ListMarketplaceRevenueShareAllocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marketplace_revenue_share_allocation_summaries: Array[Types::MarketplaceRevenueShareAllocationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marketplace_revenue_share_allocation_summaries: Array[Types::MarketplaceRevenueShareAllocationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMarketplaceRevenueSharesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?product_ids: Array[String],
+        ?product_codes: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort_by: String,
+        ?sort_order: String,
+        ?created_after: Time,
+        ?created_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor product_ids: Array[String]?
+      attr_accessor product_codes: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+    end
+
+    class ListMarketplaceRevenueSharesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marketplace_revenue_share_summaries: Array[Types::MarketplaceRevenueShareSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marketplace_revenue_share_summaries: Array[Types::MarketplaceRevenueShareSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRevenueAttributionAllocationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?revenue_attribution_identifier: String,
+        ?entity_type_filters: Array[String],
+        ?entity_identifier_filters: Array[String],
+        ?customer_aws_account_id_filters: Array[String],
+        ?status_filter: String,
+        ?after_effective_from: String,
+        ?before_effective_from: String,
+        ?after_effective_until: String,
+        ?before_effective_until: String,
+        ?sort_by: String,
+        ?sort_order: String,
+        ?revenue_attribution_revision: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor revenue_attribution_identifier: String?
+      attr_accessor entity_type_filters: Array[String]?
+      attr_accessor entity_identifier_filters: Array[String]?
+      attr_accessor customer_aws_account_id_filters: Array[String]?
+      attr_accessor status_filter: String?
+      attr_accessor after_effective_from: String?
+      attr_accessor before_effective_from: String?
+      attr_accessor after_effective_until: String?
+      attr_accessor before_effective_until: String?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor revenue_attribution_revision: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRevenueAttributionAllocationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revenue_attribution_allocation_summaries: Array[Types::RevenueAttributionAllocationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revenue_attribution_allocation_summaries: Array[Types::RevenueAttributionAllocationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRevenueAttributionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifiers: Array[String],
+        ?created_after: Time,
+        ?created_before: Time,
+        ?sort_by: String,
+        ?sort_order: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifiers: Array[String]?
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRevenueAttributionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revenue_attribution_summaries: Array[Types::AttributionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revenue_attribution_summaries: Array[Types::AttributionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MarketplaceProductSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?product_code: String,
+        ?product_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor product_code: String?
+      attr_accessor product_name: String?
+    end
+
+    module MarketplaceRevenueShareAllocationSortField
+      EFFECTIVE_FROM: String
+    end
+
+    class MarketplaceRevenueShareAllocationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marketplace_revenue_share_allocation_id: String,
+        ?product_id: String,
+        ?product_name: String,
+        ?arn: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?revenue_share_percent: String,
+        ?status: String,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marketplace_revenue_share_allocation_id: String?
+      attr_accessor product_id: String?
+      attr_accessor product_name: String?
+      attr_accessor arn: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor revenue_share_percent: String?
+      attr_accessor status: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+    end
+
+    module MarketplaceRevenueShareSortBy
+      LAST_MODIFIED_DATE: String
+    end
+
+    class MarketplaceRevenueShareSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_id: String,
+        ?arn: String,
+        ?catalog: String,
+        ?product_code: String,
+        ?product_name: String,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+        ?latest_revision: Integer,
+        ?total_active_marketplace_revenue_share_allocation_count: Integer,
+        ?total_marketplace_revenue_share_allocation_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_id: String?
+      attr_accessor arn: String?
+      attr_accessor catalog: String?
+      attr_accessor product_code: String?
+      attr_accessor product_name: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor latest_revision: Integer?
+      attr_accessor total_active_marketplace_revenue_share_allocation_count: Integer?
+      attr_accessor total_marketplace_revenue_share_allocation_count: Integer?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ResourceNotFoundExceptionReason
+      RESOURCE_NOT_FOUND: String
+    end
+
+    module RevenueAttributionAllocationAction
+      CREATE: String
+      UPDATE: String
+    end
+
+    module RevenueAttributionAllocationErrorCode
+      ALLOCATION_CAP_EXCEEDED: String
+      RESOURCE_NOT_FOUND: String
+      IMMUTABLE_ALLOCATION: String
+      ACCESS_DENIED: String
+      INVALID_VALUE: String
+      CONCURRENT_MODIFICATION: String
+      INTERNAL_ERROR: String
+    end
+
+    class RevenueAttributionAllocationErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revenue_attribution_allocation_id: String,
+        ?entity_type: String,
+        ?entity_id: String,
+        ?customer_aws_account_id: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?action: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revenue_attribution_allocation_id: String?
+      attr_accessor entity_type: String?
+      attr_accessor entity_id: String?
+      attr_accessor customer_aws_account_id: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor action: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module RevenueAttributionAllocationSortField
+      EFFECTIVE_FROM: String
+    end
+
+    class RevenueAttributionAllocationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revenue_attribution_allocation_id: String,
+        ?revenue_attribution_identifier: String,
+        ?entity_type: String,
+        ?entity_identifier: String,
+        ?entity_name: String,
+        ?customer_aws_account_id: String,
+        ?revenue_share_percent: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revenue_attribution_allocation_id: String?
+      attr_accessor revenue_attribution_identifier: String?
+      attr_accessor entity_type: String?
+      attr_accessor entity_identifier: String?
+      attr_accessor entity_name: String?
+      attr_accessor customer_aws_account_id: String?
+      attr_accessor revenue_share_percent: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor status: String?
+    end
+
+    module RevenueAttributionAllocationTaskStatus
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+    end
+
+    class RevenueShareAllocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?revenue_attribution_allocation_id: String,
+        ?entity_type: String,
+        ?entity_identifier: String,
+        ?customer_aws_account_id: String,
+        ?revenue_share_percent: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor revenue_attribution_allocation_id: String?
+      attr_accessor entity_type: String?
+      attr_accessor entity_identifier: String?
+      attr_accessor customer_aws_account_id: String?
+      attr_accessor revenue_share_percent: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor status: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ServiceQuotaExceededExceptionReason
+      ATTRIBUTION_LIMIT_EXCEEDED: String
+      TAG_LIMIT_EXCEEDED: String
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class StartRevenueAttributionAllocationsTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?revenue_attribution_identifier: String,
+        ?revenue_attribution_revision: String,
+        ?revenue_share_allocations: Array[Types::RevenueShareAllocation],
+        ?client_token: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor revenue_attribution_identifier: String?
+      attr_accessor revenue_attribution_revision: String?
+      attr_accessor revenue_share_allocations: Array[Types::RevenueShareAllocation]?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+    end
+
+    class StartRevenueAttributionAllocationsTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?status: String,
+        ?catalog: String,
+        ?revenue_attribution_arn: String,
+        ?started_at: Time,
+        ?total_revenue_attribution_allocation_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor status: String?
+      attr_accessor catalog: String?
+      attr_accessor revenue_attribution_arn: String?
+      attr_accessor started_at: Time?
+      attr_accessor total_revenue_attribution_allocation_records: Integer?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module TenancyModel
+      MULTI_TENANT: String
+      SINGLE_TENANT: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateMarketplaceRevenueShareAllocationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?product_id: String,
+        ?marketplace_revenue_share_allocation_id: String,
+        ?marketplace_revenue_share_revision: String,
+        ?client_token: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?revenue_share_percent: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor product_id: String?
+      attr_accessor marketplace_revenue_share_allocation_id: String?
+      attr_accessor marketplace_revenue_share_revision: String?
+      attr_accessor client_token: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor revenue_share_percent: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateMarketplaceRevenueShareAllocationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marketplace_revenue_share_allocation_id: String,
+        ?product_id: String,
+        ?product_name: String,
+        ?arn: String,
+        ?effective_from: String,
+        ?effective_until: String,
+        ?revenue_share_percent: String,
+        ?status: String,
+        ?created_date: Time,
+        ?last_modified_date: Time,
+        ?latest_marketplace_revenue_share_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marketplace_revenue_share_allocation_id: String?
+      attr_accessor product_id: String?
+      attr_accessor product_name: String?
+      attr_accessor arn: String?
+      attr_accessor effective_from: String?
+      attr_accessor effective_until: String?
+      attr_accessor revenue_share_percent: String?
+      attr_accessor status: String?
+      attr_accessor created_date: Time?
+      attr_accessor last_modified_date: Time?
+      attr_accessor latest_marketplace_revenue_share_revision: String?
+    end
+
+    class UpdateRevenueAttributionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifier: String,
+        ?client_token: String,
+        ?description: String,
+        ?revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor revision: String?
+    end
+
+    class UpdateRevenueAttributionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?last_modified_date: Time,
+        ?latest_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor last_modified_date: Time?
+      attr_accessor latest_revision: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module ValidationExceptionReason
+      REQUEST_VALIDATION_FAILED: String
+      BUSINESS_VALIDATION_FAILED: String
+    end
+  end
+end

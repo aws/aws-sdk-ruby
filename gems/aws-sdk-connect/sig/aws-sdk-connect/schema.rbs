@@ -2,21 +2,35 @@ module Aws::Connect
   module Schema
     include Smithy::Schema::Shapes
 
+    ACGRInstanceArn: StringShape
+    ACGRInstanceIdOrArn: StringShape
+    ACGRTrafficDistributionGroupArn: StringShape
+    ACGRTrafficDistributionGroupId: StringShape
+    AIAgent: StructureShape
+    AIAgentType: EnumShape
     ARN: StringShape
     AWSAccountId: StringShape
     AccessDeniedException: StructureShape
     AccessTokenDuration: IntegerShape
+    AccessType: EnumShape
     ActionSummaries: ListShape
     ActionSummary: StructureShape
     ActionType: EnumShape
     ActivateEvaluationFormRequest: StructureShape
     ActivateEvaluationFormResponse: StructureShape
+    ActiveRegion: StringShape
+    ActiveRegionList: ListShape
     AdditionalEmailRecipients: StructureShape
+    AfterContactWorkConfig: StructureShape
+    AfterContactWorkConfigPerChannel: StructureShape
+    AfterContactWorkConfigs: ListShape
     AfterContactWorkTimeLimit: IntegerShape
     AgentAvailabilityTimer: EnumShape
     AgentConfig: StructureShape
     AgentContactReference: StructureShape
     AgentContactReferenceList: ListShape
+    AgentFirst: StructureShape
+    AgentFirstCallbackAutoAccept: BooleanShape
     AgentFirstName: StringShape
     AgentHierarchyGroup: StructureShape
     AgentHierarchyGroups: StructureShape
@@ -48,18 +62,40 @@ module Aws::Connect
     AgentUsername: StringShape
     AgentsCriteria: StructureShape
     AgentsMinOneMaxHundred: ListShape
+    AiAgentId: StringShape
+    AiAgentInfo: StructureShape
+    AiAgentInput: StructureShape
+    AiAgentSearchCriteria: StructureShape
+    AiAgentSearchCriteriaList: ListShape
+    AiAgentVersionId: StringShape
+    AiAgentVersionNumber: IntegerShape
+    AiAgents: ListShape
+    AiAgentsCriteria: StructureShape
+    AiUseCase: EnumShape
     AliasArn: StringShape
+    AliasConfiguration: StructureShape
+    AliasConfigurationList: ListShape
+    AllowedAIAgents: ListShape
     AllowedAccessControlTags: MapShape
     AllowedCapabilities: StructureShape
+    AllowedExtension: StructureShape
+    AllowedExtensionsList: ListShape
+    AllowedFlowModules: ListShape
     AllowedMonitorCapabilities: ListShape
+    AllowedUserAction: EnumShape
+    AllowedUserActions: ListShape
+    AnalyticsConfiguration: StructureShape
     AnalyticsDataAssociationResult: StructureShape
     AnalyticsDataAssociationResults: ListShape
     AnalyticsDataSetsResult: StructureShape
     AnalyticsDataSetsResults: ListShape
+    AnalyticsMode: EnumShape
+    AnalyticsModes: ListShape
     AnswerMachineDetectionConfig: StructureShape
     AnsweringMachineDetectionStatus: EnumShape
     Application: StructureShape
     ApplicationPermissions: ListShape
+    ApplicationType: EnumShape
     Applications: ListShape
     ApproximateTotalCount: IntegerShape
     ArtifactId: StringShape
@@ -74,20 +110,27 @@ module Aws::Connect
     AssociateContactWithUserResponse: StructureShape
     AssociateDefaultVocabularyRequest: StructureShape
     AssociateDefaultVocabularyResponse: StructureShape
+    AssociateEmailAddressAliasRequest: StructureShape
+    AssociateEmailAddressAliasResponse: StructureShape
     AssociateFlowRequest: StructureShape
     AssociateFlowResponse: StructureShape
+    AssociateHoursOfOperationsRequest: StructureShape
     AssociateInstanceStorageConfigRequest: StructureShape
     AssociateInstanceStorageConfigResponse: StructureShape
     AssociateLambdaFunctionRequest: StructureShape
     AssociateLexBotRequest: StructureShape
     AssociatePhoneNumberContactFlowRequest: StructureShape
+    AssociateQueueEmailAddressesRequest: StructureShape
     AssociateQueueQuickConnectsRequest: StructureShape
     AssociateRoutingProfileQueuesRequest: StructureShape
     AssociateSecurityKeyRequest: StructureShape
     AssociateSecurityKeyResponse: StructureShape
+    AssociateSecurityProfilesRequest: StructureShape
     AssociateTrafficDistributionGroupUserRequest: StructureShape
     AssociateTrafficDistributionGroupUserResponse: StructureShape
     AssociateUserProficienciesRequest: StructureShape
+    AssociateWorkspaceRequest: StructureShape
+    AssociateWorkspaceResponse: StructureShape
     AssociatedContactSummary: StructureShape
     AssociatedContactSummaryList: ListShape
     AssociatedQueueIdList: ListShape
@@ -97,15 +140,22 @@ module Aws::Connect
     AttachedFileErrorsList: ListShape
     AttachedFileInvalidRequestExceptionReason: EnumShape
     AttachedFileServiceQuotaExceededExceptionReason: EnumShape
+    AttachedFilesConfiguration: StructureShape
+    AttachedFilesConfigurationSummary: StructureShape
+    AttachedFilesConfigurationSummaryList: ListShape
     AttachedFilesList: ListShape
     AttachmentName: StringShape
     AttachmentReference: StructureShape
+    AttachmentScope: EnumShape
     Attendee: StructureShape
     AttendeeId: StringShape
     Attribute: StructureShape
     AttributeAndCondition: StructureShape
     AttributeCondition: StructureShape
+    AttributeIds: ListShape
+    AttributeList: ListShape
     AttributeName: StringShape
+    AttributeNameList: ListShape
     AttributeOrConditionList: ListShape
     AttributeValue: StringShape
     Attributes: MapShape
@@ -113,6 +163,9 @@ module Aws::Connect
     AudioFeatures: StructureShape
     AudioQualityMetricsInfo: StructureShape
     AudioQualityScore: FloatShape
+    AuthCode: StringShape
+    AuthCodeEntityType: EnumShape
+    AuthScope: StructureShape
     AuthenticationError: StringShape
     AuthenticationErrorDescription: StringShape
     AuthenticationProfile: StructureShape
@@ -123,11 +176,38 @@ module Aws::Connect
     AuthenticationProfileSummaryList: ListShape
     AuthorizationCode: StringShape
     AutoAccept: BooleanShape
+    AutoAcceptConfig: StructureShape
+    AutoAcceptConfigs: ListShape
+    AutoEvaluationConfiguration: StructureShape
+    AutoEvaluationDetails: StructureShape
+    AutoEvaluationStatus: EnumShape
+    AutomaticFailConfiguration: StructureShape
+    AvailableFilter: StructureShape
+    AvailableFilterList: ListShape
+    AvailableFilterType: EnumShape
     AvailableNumberSummary: StructureShape
     AvailableNumbersList: ListShape
     AwsRegion: StringShape
     BatchAssociateAnalyticsDataSetRequest: StructureShape
     BatchAssociateAnalyticsDataSetResponse: StructureShape
+    BatchCreateDataTableValueFailureResult: StructureShape
+    BatchCreateDataTableValueFailureResultList: ListShape
+    BatchCreateDataTableValueRequest: StructureShape
+    BatchCreateDataTableValueResponse: StructureShape
+    BatchCreateDataTableValueSuccessResult: StructureShape
+    BatchCreateDataTableValueSuccessResultList: ListShape
+    BatchDeleteDataTableValueFailureResult: StructureShape
+    BatchDeleteDataTableValueFailureResultList: ListShape
+    BatchDeleteDataTableValueRequest: StructureShape
+    BatchDeleteDataTableValueResponse: StructureShape
+    BatchDeleteDataTableValueSuccessResult: StructureShape
+    BatchDeleteDataTableValueSuccessResultList: ListShape
+    BatchDescribeDataTableValueFailureResult: StructureShape
+    BatchDescribeDataTableValueFailureResultList: ListShape
+    BatchDescribeDataTableValueRequest: StructureShape
+    BatchDescribeDataTableValueResponse: StructureShape
+    BatchDescribeDataTableValueSuccessResult: StructureShape
+    BatchDescribeDataTableValueSuccessResultList: ListShape
     BatchDisassociateAnalyticsDataSetRequest: StructureShape
     BatchDisassociateAnalyticsDataSetResponse: StructureShape
     BatchGetAttachedFileMetadataRequest: StructureShape
@@ -136,23 +216,37 @@ module Aws::Connect
     BatchGetFlowAssociationResponse: StructureShape
     BatchPutContactRequest: StructureShape
     BatchPutContactResponse: StructureShape
+    BatchUpdateDataTableValueFailureResult: StructureShape
+    BatchUpdateDataTableValueFailureResultList: ListShape
+    BatchUpdateDataTableValueRequest: StructureShape
+    BatchUpdateDataTableValueResponse: StructureShape
+    BatchUpdateDataTableValueSuccessResult: StructureShape
+    BatchUpdateDataTableValueSuccessResultList: ListShape
+    Behavior: EnumShape
     BehaviorType: EnumShape
     Body: StringShape
     Boolean: BooleanShape
+    BooleanComparisonType: EnumShape
+    BooleanCondition: StructureShape
     BotName: StringShape
     BoxedBoolean: BooleanShape
     BucketName: StringShape
+    CalculationComponent: StructureShape
+    CalculationComponentList: ListShape
+    CalculationExpression: StringShape
     Campaign: StructureShape
     CampaignId: StringShape
     CaseSlaConfiguration: StructureShape
     Channel: EnumShape
     ChannelList: ListShape
     ChannelToCountMap: MapShape
+    ChannelWorkloadBehaviorType: EnumShape
     Channels: ListShape
     ChatContactMetrics: StructureShape
     ChatContent: StringShape
     ChatContentType: StringShape
     ChatDurationInMinutes: IntegerShape
+    ChatEntryPointParameters: StructureShape
     ChatEvent: StructureShape
     ChatEventType: EnumShape
     ChatMessage: StructureShape
@@ -160,6 +254,7 @@ module Aws::Connect
     ChatParticipantRoleConfig: StructureShape
     ChatStreamingConfiguration: StructureShape
     ChatStreamingEndpointARN: StringShape
+    ChildHoursOfOperationsList: ListShape
     ClaimPhoneNumberRequest: StructureShape
     ClaimPhoneNumberResponse: StructureShape
     ClaimedPhoneNumberSummary: StructureShape
@@ -173,14 +268,20 @@ module Aws::Connect
     ComparisonOperator: StringShape
     CompleteAttachedFileUploadRequest: StructureShape
     CompleteAttachedFileUploadResponse: StructureShape
+    ComponentAlias: StringShape
     Concurrency: IntegerShape
     Condition: StructureShape
     ConditionalOperationFailedException: StructureShape
     Conditions: ListShape
+    ConfigurableNotificationPriority: EnumShape
     ConflictException: StructureShape
+    ConnectionCredentials: StructureShape
     ConnectionData: StructureShape
+    ConnectionType: EnumShape
+    ConnectionTypeList: ListShape
     Contact: StructureShape
     ContactAnalysis: StructureShape
+    ContactAnalysisReference: StructureShape
     ContactConfiguration: StructureShape
     ContactDataRequest: StructureShape
     ContactDataRequestList: ListShape
@@ -188,13 +289,33 @@ module Aws::Connect
     ContactDetailName: StringShape
     ContactDetails: StructureShape
     ContactEvaluation: StructureShape
+    ContactEvaluationAttributeAndCondition: StructureShape
+    ContactEvaluationAttributeComparisonType: EnumShape
+    ContactEvaluationAttributeCondition: StructureShape
+    ContactEvaluationAttributeConditionList: ListShape
+    ContactEvaluationAttributeFilter: StructureShape
+    ContactEvaluationAttributeKey: EnumShape
+    ContactEvaluationAttributeOrConditionList: ListShape
+    ContactEvaluationAttributeValue: StructureShape
     ContactEvaluations: MapShape
+    ContactField: EnumShape
+    ContactFields: ListShape
     ContactFilter: StructureShape
     ContactFlow: StructureShape
+    ContactFlowAliasInfo: StructureShape
+    ContactFlowAliasSummary: StructureShape
+    ContactFlowAliasSummaryList: ListShape
+    ContactFlowAttributeAndCondition: StructureShape
+    ContactFlowAttributeFilter: StructureShape
+    ContactFlowAttributeOrConditionList: ListShape
     ContactFlowContent: StringShape
     ContactFlowDescription: StringShape
     ContactFlowId: StringShape
     ContactFlowModule: StructureShape
+    ContactFlowModuleAlias: StringShape
+    ContactFlowModuleAliasInfo: StructureShape
+    ContactFlowModuleAliasSummary: StructureShape
+    ContactFlowModuleAliasSummaryList: ListShape
     ContactFlowModuleContent: StringShape
     ContactFlowModuleDescription: StringShape
     ContactFlowModuleId: StringShape
@@ -206,6 +327,8 @@ module Aws::Connect
     ContactFlowModuleState: EnumShape
     ContactFlowModuleStatus: EnumShape
     ContactFlowModuleSummary: StructureShape
+    ContactFlowModuleVersionSummary: StructureShape
+    ContactFlowModuleVersionSummaryList: ListShape
     ContactFlowModulesSummaryList: ListShape
     ContactFlowName: StringShape
     ContactFlowNotPublishedException: StructureShape
@@ -218,11 +341,14 @@ module Aws::Connect
     ContactFlowSummary: StructureShape
     ContactFlowSummaryList: ListShape
     ContactFlowType: EnumShape
+    ContactFlowTypeCondition: StructureShape
     ContactFlowTypes: ListShape
     ContactFlowVersionSummary: StructureShape
     ContactFlowVersionSummaryList: ListShape
     ContactId: StringShape
     ContactInitiationMethod: EnumShape
+    ContactInteractionType: EnumShape
+    ContactMediaProcessingFailureMode: EnumShape
     ContactMetricInfo: StructureShape
     ContactMetricName: EnumShape
     ContactMetricResult: StructureShape
@@ -230,10 +356,14 @@ module Aws::Connect
     ContactMetricValue: UnionShape
     ContactMetrics: ListShape
     ContactNotFoundException: StructureShape
+    ContactNotTerminatedException: StructureShape
+    ContactParticipantRole: EnumShape
     ContactRecordingType: EnumShape
     ContactReferences: MapShape
     ContactSearchSummary: StructureShape
     ContactSearchSummaryAgentInfo: StructureShape
+    ContactSearchSummaryAiAgentInfo: StructureShape
+    ContactSearchSummaryAiAgentInfoList: ListShape
     ContactSearchSummaryQueueInfo: StructureShape
     ContactSearchSummarySegmentAttributeValue: StructureShape
     ContactSearchSummarySegmentAttributes: MapShape
@@ -245,6 +375,7 @@ module Aws::Connect
     ContactTagValue: StringShape
     Contacts: ListShape
     Content: StringShape
+    ContentAttributes: StructureShape
     ContentType: StringShape
     ControlPlaneAttributeFilter: StructureShape
     ControlPlaneTagFilter: StructureShape
@@ -252,19 +383,35 @@ module Aws::Connect
     Count: IntegerShape
     CreateAgentStatusRequest: StructureShape
     CreateAgentStatusResponse: StructureShape
+    CreateAttachedFileRequest: StructureShape
+    CreateAttachedFileResponse: StructureShape
+    CreateAuthCodeRequest: StructureShape
+    CreateAuthCodeResponse: StructureShape
     CreateCaseActionDefinition: StructureShape
+    CreateContactFlowAliasRequest: StructureShape
+    CreateContactFlowAliasResponse: StructureShape
+    CreateContactFlowModuleAliasRequest: StructureShape
+    CreateContactFlowModuleAliasResponse: StructureShape
     CreateContactFlowModuleRequest: StructureShape
     CreateContactFlowModuleResponse: StructureShape
+    CreateContactFlowModuleVersionRequest: StructureShape
+    CreateContactFlowModuleVersionResponse: StructureShape
     CreateContactFlowRequest: StructureShape
     CreateContactFlowResponse: StructureShape
     CreateContactFlowVersionRequest: StructureShape
     CreateContactFlowVersionResponse: StructureShape
     CreateContactRequest: StructureShape
     CreateContactResponse: StructureShape
+    CreateDataTableAttributeRequest: StructureShape
+    CreateDataTableAttributeResponse: StructureShape
+    CreateDataTableRequest: StructureShape
+    CreateDataTableResponse: StructureShape
     CreateEmailAddressRequest: StructureShape
     CreateEmailAddressResponse: StructureShape
     CreateEvaluationFormRequest: StructureShape
     CreateEvaluationFormResponse: StructureShape
+    CreateExtractionDefinitionRequest: StructureShape
+    CreateExtractionDefinitionResponse: StructureShape
     CreateHoursOfOperationOverrideRequest: StructureShape
     CreateHoursOfOperationOverrideResponse: StructureShape
     CreateHoursOfOperationRequest: StructureShape
@@ -273,6 +420,10 @@ module Aws::Connect
     CreateInstanceResponse: StructureShape
     CreateIntegrationAssociationRequest: StructureShape
     CreateIntegrationAssociationResponse: StructureShape
+    CreateMetricRequest: StructureShape
+    CreateMetricResponse: StructureShape
+    CreateNotificationRequest: StructureShape
+    CreateNotificationResponse: StructureShape
     CreateParticipantRequest: StructureShape
     CreateParticipantResponse: StructureShape
     CreatePersistentContactAssociationRequest: StructureShape
@@ -295,6 +446,8 @@ module Aws::Connect
     CreateSecurityProfileResponse: StructureShape
     CreateTaskTemplateRequest: StructureShape
     CreateTaskTemplateResponse: StructureShape
+    CreateTestCaseRequest: StructureShape
+    CreateTestCaseResponse: StructureShape
     CreateTrafficDistributionGroupRequest: StructureShape
     CreateTrafficDistributionGroupResponse: StructureShape
     CreateUseCaseRequest: StructureShape
@@ -309,12 +462,18 @@ module Aws::Connect
     CreateViewVersionResponse: StructureShape
     CreateVocabularyRequest: StructureShape
     CreateVocabularyResponse: StructureShape
+    CreateWorkspacePageRequest: StructureShape
+    CreateWorkspacePageResponse: StructureShape
+    CreateWorkspaceRequest: StructureShape
+    CreateWorkspaceResponse: StructureShape
     CreatedByInfo: UnionShape
     Credentials: StructureShape
     CrossChannelBehavior: StructureShape
+    CrossChannelWorkloadBehavior: StructureShape
     CurrentMetric: StructureShape
     CurrentMetricData: StructureShape
     CurrentMetricDataCollections: ListShape
+    CurrentMetricId: StringShape
     CurrentMetricName: EnumShape
     CurrentMetricResult: StructureShape
     CurrentMetricResults: ListShape
@@ -325,35 +484,90 @@ module Aws::Connect
     CustomerId: StringShape
     CustomerIdNonEmpty: StringShape
     CustomerProfileAttributesSerialized: StringShape
+    CustomerProfileId: StringShape
+    CustomerProfilesDomainName: StringShape
     CustomerQualityMetrics: StructureShape
     CustomerVoiceActivity: StructureShape
     DataSetId: StringShape
     DataSetIds: ListShape
+    DataTable: StructureShape
+    DataTableAccessControlConfiguration: StructureShape
+    DataTableAttribute: StructureShape
+    DataTableAttributeValueType: EnumShape
+    DataTableDeleteValueIdentifier: StructureShape
+    DataTableDeleteValueIdentifierList: ListShape
+    DataTableDescription: StringShape
+    DataTableEvaluatedValue: StructureShape
+    DataTableEvaluatedValueList: ListShape
+    DataTableId: StringShape
+    DataTableList: ListShape
+    DataTableLockLevel: EnumShape
+    DataTableLockVersion: StructureShape
+    DataTableName: StringShape
+    DataTableSearchConditionList: ListShape
+    DataTableSearchCriteria: StructureShape
+    DataTableSearchFilter: StructureShape
+    DataTableStatus: EnumShape
+    DataTableSummary: StructureShape
+    DataTableSummaryList: ListShape
+    DataTableValue: StructureShape
+    DataTableValueEvaluationSet: StructureShape
+    DataTableValueEvaluationSetList: ListShape
+    DataTableValueIdentifier: StructureShape
+    DataTableValueIdentifierList: ListShape
+    DataTableValueList: ListShape
+    DataTableValueSummary: StructureShape
+    DataTableValueSummaryList: ListShape
+    DataTableVersion: StringShape
     DateComparisonType: EnumShape
     DateCondition: StructureShape
     DateReference: StructureShape
+    DateTimeComparisonType: EnumShape
+    DateTimeCondition: StructureShape
+    DateTimeFormat: StringShape
     DateYearMonthDayFormat: StringShape
     DeactivateEvaluationFormRequest: StructureShape
     DeactivateEvaluationFormResponse: StructureShape
+    DecimalComparisonType: EnumShape
+    DecimalCondition: StructureShape
+    DefaultStat: StringShape
     DefaultVocabulary: StructureShape
     DefaultVocabularyList: ListShape
     Delay: IntegerShape
     DeleteAttachedFileRequest: StructureShape
     DeleteAttachedFileResponse: StructureShape
+    DeleteContactDataRequest: StructureShape
+    DeleteContactDataResponse: StructureShape
     DeleteContactEvaluationRequest: StructureShape
+    DeleteContactFlowAliasRequest: StructureShape
+    DeleteContactFlowAliasResponse: StructureShape
+    DeleteContactFlowModuleAliasRequest: StructureShape
+    DeleteContactFlowModuleAliasResponse: StructureShape
     DeleteContactFlowModuleRequest: StructureShape
     DeleteContactFlowModuleResponse: StructureShape
+    DeleteContactFlowModuleVersionRequest: StructureShape
+    DeleteContactFlowModuleVersionResponse: StructureShape
     DeleteContactFlowRequest: StructureShape
     DeleteContactFlowResponse: StructureShape
     DeleteContactFlowVersionRequest: StructureShape
     DeleteContactFlowVersionResponse: StructureShape
+    DeleteDataTableAttributeRequest: StructureShape
+    DeleteDataTableAttributeResponse: StructureShape
+    DeleteDataTableRequest: StructureShape
+    DeleteDataTableResponse: StructureShape
     DeleteEmailAddressRequest: StructureShape
     DeleteEmailAddressResponse: StructureShape
     DeleteEvaluationFormRequest: StructureShape
+    DeleteExtractionDefinitionRequest: StructureShape
+    DeleteExtractionDefinitionResponse: StructureShape
     DeleteHoursOfOperationOverrideRequest: StructureShape
     DeleteHoursOfOperationRequest: StructureShape
     DeleteInstanceRequest: StructureShape
     DeleteIntegrationAssociationRequest: StructureShape
+    DeleteMetricRequest: StructureShape
+    DeleteMetricResponse: StructureShape
+    DeleteNotificationRequest: StructureShape
+    DeleteNotificationResponse: StructureShape
     DeletePredefinedAttributeRequest: StructureShape
     DeletePromptRequest: StructureShape
     DeletePushNotificationRegistrationRequest: StructureShape
@@ -363,8 +577,12 @@ module Aws::Connect
     DeleteRoutingProfileRequest: StructureShape
     DeleteRuleRequest: StructureShape
     DeleteSecurityProfileRequest: StructureShape
+    DeleteSessionRequest: StructureShape
+    DeleteSessionResponse: StructureShape
     DeleteTaskTemplateRequest: StructureShape
     DeleteTaskTemplateResponse: StructureShape
+    DeleteTestCaseRequest: StructureShape
+    DeleteTestCaseResponse: StructureShape
     DeleteTrafficDistributionGroupRequest: StructureShape
     DeleteTrafficDistributionGroupResponse: StructureShape
     DeleteUseCaseRequest: StructureShape
@@ -376,22 +594,40 @@ module Aws::Connect
     DeleteViewVersionResponse: StructureShape
     DeleteVocabularyRequest: StructureShape
     DeleteVocabularyResponse: StructureShape
+    DeleteWorkspaceMediaRequest: StructureShape
+    DeleteWorkspaceMediaResponse: StructureShape
+    DeleteWorkspacePageRequest: StructureShape
+    DeleteWorkspacePageResponse: StructureShape
+    DeleteWorkspaceRequest: StructureShape
+    DeleteWorkspaceResponse: StructureShape
     DescribeAgentStatusRequest: StructureShape
     DescribeAgentStatusResponse: StructureShape
+    DescribeAttachedFilesConfigurationRequest: StructureShape
+    DescribeAttachedFilesConfigurationResponse: StructureShape
     DescribeAuthenticationProfileRequest: StructureShape
     DescribeAuthenticationProfileResponse: StructureShape
     DescribeContactEvaluationRequest: StructureShape
     DescribeContactEvaluationResponse: StructureShape
+    DescribeContactFlowAliasRequest: StructureShape
+    DescribeContactFlowAliasResponse: StructureShape
+    DescribeContactFlowModuleAliasRequest: StructureShape
+    DescribeContactFlowModuleAliasResponse: StructureShape
     DescribeContactFlowModuleRequest: StructureShape
     DescribeContactFlowModuleResponse: StructureShape
     DescribeContactFlowRequest: StructureShape
     DescribeContactFlowResponse: StructureShape
     DescribeContactRequest: StructureShape
     DescribeContactResponse: StructureShape
+    DescribeDataTableAttributeRequest: StructureShape
+    DescribeDataTableAttributeResponse: StructureShape
+    DescribeDataTableRequest: StructureShape
+    DescribeDataTableResponse: StructureShape
     DescribeEmailAddressRequest: StructureShape
     DescribeEmailAddressResponse: StructureShape
     DescribeEvaluationFormRequest: StructureShape
     DescribeEvaluationFormResponse: StructureShape
+    DescribeExtractionDefinitionRequest: StructureShape
+    DescribeExtractionDefinitionResponse: StructureShape
     DescribeHoursOfOperationOverrideRequest: StructureShape
     DescribeHoursOfOperationOverrideResponse: StructureShape
     DescribeHoursOfOperationRequest: StructureShape
@@ -402,6 +638,10 @@ module Aws::Connect
     DescribeInstanceResponse: StructureShape
     DescribeInstanceStorageConfigRequest: StructureShape
     DescribeInstanceStorageConfigResponse: StructureShape
+    DescribeMetricRequest: StructureShape
+    DescribeMetricResponse: StructureShape
+    DescribeNotificationRequest: StructureShape
+    DescribeNotificationResponse: StructureShape
     DescribePhoneNumberRequest: StructureShape
     DescribePhoneNumberResponse: StructureShape
     DescribePredefinedAttributeRequest: StructureShape
@@ -418,6 +658,8 @@ module Aws::Connect
     DescribeRuleResponse: StructureShape
     DescribeSecurityProfileRequest: StructureShape
     DescribeSecurityProfileResponse: StructureShape
+    DescribeTestCaseRequest: StructureShape
+    DescribeTestCaseResponse: StructureShape
     DescribeTrafficDistributionGroupRequest: StructureShape
     DescribeTrafficDistributionGroupResponse: StructureShape
     DescribeUserHierarchyGroupRequest: StructureShape
@@ -430,6 +672,8 @@ module Aws::Connect
     DescribeViewResponse: StructureShape
     DescribeVocabularyRequest: StructureShape
     DescribeVocabularyResponse: StructureShape
+    DescribeWorkspaceRequest: StructureShape
+    DescribeWorkspaceResponse: StructureShape
     Description: StringShape
     Description250: StringShape
     DestinationId: StringShape
@@ -448,19 +692,28 @@ module Aws::Connect
     DisassociateAnalyticsDataSetRequest: StructureShape
     DisassociateApprovedOriginRequest: StructureShape
     DisassociateBotRequest: StructureShape
+    DisassociateEmailAddressAliasRequest: StructureShape
+    DisassociateEmailAddressAliasResponse: StructureShape
     DisassociateFlowRequest: StructureShape
     DisassociateFlowResponse: StructureShape
+    DisassociateHoursOfOperationsRequest: StructureShape
     DisassociateInstanceStorageConfigRequest: StructureShape
     DisassociateLambdaFunctionRequest: StructureShape
     DisassociateLexBotRequest: StructureShape
     DisassociatePhoneNumberContactFlowRequest: StructureShape
+    DisassociateQueueEmailAddressesRequest: StructureShape
     DisassociateQueueQuickConnectsRequest: StructureShape
     DisassociateRoutingProfileQueuesRequest: StructureShape
     DisassociateSecurityKeyRequest: StructureShape
+    DisassociateSecurityProfilesRequest: StructureShape
     DisassociateTrafficDistributionGroupUserRequest: StructureShape
     DisassociateTrafficDistributionGroupUserResponse: StructureShape
     DisassociateUserProficienciesRequest: StructureShape
+    DisassociateWorkspaceRequest: StructureShape
+    DisassociateWorkspaceResponse: StructureShape
     DisconnectDetails: StructureShape
+    DisconnectOnCustomerExit: ListShape
+    DisconnectOnCustomerExitParticipantType: EnumShape
     DisconnectReason: StructureShape
     DisconnectReasonCode: StringShape
     DismissUserContactRequest: StructureShape
@@ -476,18 +729,25 @@ module Aws::Connect
     DurationMillis: IntegerShape
     EffectiveHoursOfOperationList: ListShape
     EffectiveHoursOfOperations: StructureShape
+    EffectiveOverrideHours: StructureShape
+    EffectiveOverrideHoursList: ListShape
     Email: StringShape
     EmailAddress: StringShape
     EmailAddressArn: StringShape
+    EmailAddressConfig: StructureShape
+    EmailAddressConfigList: ListShape
     EmailAddressDisplayName: StringShape
     EmailAddressId: StringShape
+    EmailAddressIdList: ListShape
     EmailAddressInfo: StructureShape
     EmailAddressList: ListShape
     EmailAddressMetadata: StructureShape
+    EmailAddressMetadataList: ListShape
     EmailAddressRecipientList: ListShape
     EmailAddressSearchConditionList: ListShape
     EmailAddressSearchCriteria: StructureShape
     EmailAddressSearchFilter: StructureShape
+    EmailAddressSummary: StructureShape
     EmailAttachment: StructureShape
     EmailAttachments: ListShape
     EmailHeaderType: EnumShape
@@ -508,39 +768,97 @@ module Aws::Connect
     EndpointDisplayName: StringShape
     EndpointInfo: StructureShape
     EndpointType: EnumShape
+    Entities: ListShape
+    Entity: StringShape
+    EntityArn: StringShape
+    EntityId: StringShape
+    EntityType: EnumShape
+    EpochMilliseconds: IntegerShape
     ErrorCode: StringShape
     ErrorMessage: StringShape
     ErrorResult: StructureShape
     ErrorResults: ListShape
+    EvaluateDataTableValuesRequest: StructureShape
+    EvaluateDataTableValuesResponse: StructureShape
     Evaluation: StructureShape
+    EvaluationAcknowledgement: StructureShape
+    EvaluationAcknowledgementSummary: StructureShape
+    EvaluationAcknowledgerCommentString: StringShape
     EvaluationAnswerData: UnionShape
     EvaluationAnswerDataNumericValue: FloatShape
     EvaluationAnswerDataStringValue: StringShape
+    EvaluationAnswerDataStringValueList: ListShape
     EvaluationAnswerInput: StructureShape
     EvaluationAnswerOutput: StructureShape
     EvaluationAnswersInputMap: MapShape
     EvaluationAnswersOutputMap: MapShape
     EvaluationArn: StringShape
+    EvaluationAutomationRuleCategory: StructureShape
+    EvaluationAutomationRuleCategoryList: ListShape
+    EvaluationContactLensAnswerAnalysisDetails: StructureShape
+    EvaluationContactParticipant: StructureShape
     EvaluationForm: StructureShape
+    EvaluationFormAIVersion: StringShape
+    EvaluationFormAIVersionLifecycle: StructureShape
+    EvaluationFormAIVersionStatus: EnumShape
+    EvaluationFormAIVersionSummary: StructureShape
+    EvaluationFormAIVersionSummaryList: ListShape
+    EvaluationFormAutoEvaluationConfiguration: StructureShape
     EvaluationFormContent: StructureShape
     EvaluationFormDescription: StringShape
     EvaluationFormId: StringShape
     EvaluationFormItem: UnionShape
+    EvaluationFormItemEnablementAction: EnumShape
+    EvaluationFormItemEnablementCondition: StructureShape
+    EvaluationFormItemEnablementConditionOperand: UnionShape
+    EvaluationFormItemEnablementConditionOperandList: ListShape
+    EvaluationFormItemEnablementConfiguration: StructureShape
+    EvaluationFormItemEnablementExpression: StructureShape
+    EvaluationFormItemEnablementOperator: EnumShape
+    EvaluationFormItemEnablementSource: StructureShape
+    EvaluationFormItemEnablementSourceType: EnumShape
+    EvaluationFormItemEnablementSourceValue: StructureShape
+    EvaluationFormItemEnablementSourceValueList: ListShape
+    EvaluationFormItemEnablementSourceValueType: EnumShape
+    EvaluationFormItemSourceValuesComparator: EnumShape
     EvaluationFormItemWeight: FloatShape
     EvaluationFormItemsList: ListShape
+    EvaluationFormLanguageCode: EnumShape
+    EvaluationFormLanguageConfiguration: StructureShape
+    EvaluationFormMetricConfiguration: StructureShape
+    EvaluationFormMetricName: StringShape
+    EvaluationFormMetricType: EnumShape
+    EvaluationFormMultiSelectQuestionAutomation: StructureShape
+    EvaluationFormMultiSelectQuestionAutomationOption: UnionShape
+    EvaluationFormMultiSelectQuestionAutomationOptionList: ListShape
+    EvaluationFormMultiSelectQuestionDisplayMode: EnumShape
+    EvaluationFormMultiSelectQuestionOption: StructureShape
+    EvaluationFormMultiSelectQuestionOptionList: ListShape
+    EvaluationFormMultiSelectQuestionOptionText: StringShape
+    EvaluationFormMultiSelectQuestionProperties: StructureShape
     EvaluationFormNumericQuestionAutomation: UnionShape
     EvaluationFormNumericQuestionOption: StructureShape
     EvaluationFormNumericQuestionOptionList: ListShape
     EvaluationFormNumericQuestionProperties: StructureShape
     EvaluationFormQuestion: StructureShape
     EvaluationFormQuestionAnswerScore: IntegerShape
+    EvaluationFormQuestionAutomationAnswerSource: StructureShape
+    EvaluationFormQuestionAutomationAnswerSourceType: EnumShape
     EvaluationFormQuestionInstructions: StringShape
+    EvaluationFormQuestionScoringConfiguration: StructureShape
     EvaluationFormQuestionTitle: StringShape
     EvaluationFormQuestionType: EnumShape
     EvaluationFormQuestionTypeProperties: UnionShape
+    EvaluationFormScoreThreshold: StructureShape
+    EvaluationFormScoreThresholdList: ListShape
     EvaluationFormScoringMode: EnumShape
     EvaluationFormScoringStatus: EnumShape
     EvaluationFormScoringStrategy: StructureShape
+    EvaluationFormSearchConditionList: ListShape
+    EvaluationFormSearchCriteria: StructureShape
+    EvaluationFormSearchFilter: StructureShape
+    EvaluationFormSearchSummary: StructureShape
+    EvaluationFormSearchSummaryList: ListShape
     EvaluationFormSection: StructureShape
     EvaluationFormSectionTitle: StringShape
     EvaluationFormSingleSelectQuestionAutomation: StructureShape
@@ -553,30 +871,94 @@ module Aws::Connect
     EvaluationFormSingleSelectQuestionProperties: StructureShape
     EvaluationFormSummary: StructureShape
     EvaluationFormSummaryList: ListShape
+    EvaluationFormTargetConfiguration: StructureShape
+    EvaluationFormTextQuestionAutomation: StructureShape
+    EvaluationFormTextQuestionProperties: StructureShape
     EvaluationFormTitle: StringShape
+    EvaluationFormValidationFailureReason: StringShape
+    EvaluationFormValidationFinding: StructureShape
+    EvaluationFormValidationFindingDescription: StringShape
+    EvaluationFormValidationFindingItem: StructureShape
+    EvaluationFormValidationFindingItemList: ListShape
+    EvaluationFormValidationFindingItemProperty: StringShape
+    EvaluationFormValidationFindingList: ListShape
+    EvaluationFormValidationFindingSeverity: EnumShape
+    EvaluationFormValidationFindingSuggestion: StringShape
+    EvaluationFormValidationIssueCode: StringShape
+    EvaluationFormValidationStatus: EnumShape
     EvaluationFormVersionIsLocked: BooleanShape
     EvaluationFormVersionStatus: EnumShape
     EvaluationFormVersionSummary: StructureShape
     EvaluationFormVersionSummaryList: ListShape
+    EvaluationGenAIAnswerAnalysisDetails: StructureShape
     EvaluationId: StringShape
     EvaluationMetadata: StructureShape
     EvaluationNote: StructureShape
     EvaluationNoteString: StringShape
     EvaluationNotesMap: MapShape
+    EvaluationQuestionAnswerAnalysisDetails: UnionShape
+    EvaluationQuestionAnswerAnalysisType: EnumShape
+    EvaluationQuestionInputDetails: StructureShape
+    EvaluationReviewConfiguration: StructureShape
+    EvaluationReviewMetadata: StructureShape
+    EvaluationReviewNotificationRecipient: StructureShape
+    EvaluationReviewNotificationRecipientList: ListShape
+    EvaluationReviewNotificationRecipientType: EnumShape
+    EvaluationReviewNotificationRecipientValue: StructureShape
+    EvaluationReviewRequestComment: StructureShape
+    EvaluationReviewRequestCommentContent: StringShape
+    EvaluationReviewRequestCommentList: ListShape
     EvaluationScore: StructureShape
     EvaluationScorePercentage: FloatShape
     EvaluationScoresMap: MapShape
+    EvaluationSearchConditionList: ListShape
+    EvaluationSearchCriteria: StructureShape
+    EvaluationSearchFilter: StructureShape
+    EvaluationSearchMetadata: StructureShape
+    EvaluationSearchSummary: StructureShape
+    EvaluationSearchSummaryList: ListShape
     EvaluationStatus: EnumShape
+    EvaluationSuggestedAnswer: StructureShape
+    EvaluationSuggestedAnswerJustification: StringShape
+    EvaluationSuggestedAnswerStatus: EnumShape
+    EvaluationSuggestedAnswerTranscriptMillisOffset: IntegerShape
+    EvaluationSuggestedAnswerTranscriptMillisecondOffsets: StructureShape
+    EvaluationSuggestedAnswerTranscriptSegment: StringShape
+    EvaluationSuggestedAnswersList: ListShape
     EvaluationSummary: StructureShape
     EvaluationSummaryList: ListShape
+    EvaluationTranscriptPointOfInterest: StructureShape
+    EvaluationTranscriptPointsOfInterest: ListShape
+    EvaluationTranscriptType: EnumShape
+    EvaluationType: EnumShape
+    EvaluatorUserUnion: UnionShape
     EventBridgeActionDefinition: StructureShape
     EventBridgeActionName: StringShape
     EventSourceName: EnumShape
+    ExecutionRecord: StructureShape
+    ExecutionRecordList: ListShape
+    ExecutionRecordStatus: EnumShape
+    ExecutionRecordString: StringShape
     Expiry: StructureShape
     ExpiryDurationInMinutes: IntegerShape
     ExportLocation: StringShape
     Expression: StructureShape
     Expressions: ListShape
+    ExtensionConfiguration: StructureShape
+    ExternalInvocationConfiguration: StructureShape
+    ExtractInformationActionDefinition: StructureShape
+    ExtractionConfiguration: StructureShape
+    ExtractionDefinition: StructureShape
+    ExtractionDefinitionDisplay: StructureShape
+    ExtractionDefinitionDisplayLabel: StringShape
+    ExtractionDefinitionId: StringShape
+    ExtractionDefinitionName: StringShape
+    ExtractionDefinitionNotFoundBehavior: StructureShape
+    ExtractionDefinitionPromptHint: StringShape
+    ExtractionDefinitionSummary: StructureShape
+    ExtractionDefinitionSummaryList: ListShape
+    FailedBatchAssociationSummary: StructureShape
+    FailedBatchAssociationSummaryList: ListShape
     FailedRequest: StructureShape
     FailedRequestList: ListShape
     FailureReasonCode: EnumShape
@@ -585,13 +967,18 @@ module Aws::Connect
     FieldValueId: StringShape
     FieldValueUnion: StructureShape
     FieldValues: ListShape
+    FileExtension: StringShape
     FileId: StringShape
     FileIdList: ListShape
     FileName: StringShape
     FileSizeInBytes: IntegerShape
+    FileSourceUri: StringShape
     FileStatusType: EnumShape
     FileUseCaseType: EnumShape
+    FilterId: StringShape
     FilterV2: StructureShape
+    FilterV2StringCondition: StructureShape
+    FilterV2StringConditionComparisonOperator: EnumShape
     FilterValueList: ListShape
     Filters: StructureShape
     FiltersV2List: ListShape
@@ -599,6 +986,13 @@ module Aws::Connect
     FlowAssociationSummary: StructureShape
     FlowAssociationSummaryList: ListShape
     FlowContentSha256: StringShape
+    FlowModule: StructureShape
+    FlowModuleContentSha256: StringShape
+    FlowModuleId: StringShape
+    FlowModuleSettings: StringShape
+    FlowModuleType: EnumShape
+    FlowQuickConnectConfig: StructureShape
+    FontFamily: StructureShape
     FormId: StringShape
     FragmentNumber: StringShape
     FunctionArn: StringShape
@@ -609,12 +1003,16 @@ module Aws::Connect
     GetContactAttributesResponse: StructureShape
     GetContactMetricsRequest: StructureShape
     GetContactMetricsResponse: StructureShape
+    GetCrossRegionRoutingRequest: StructureShape
+    GetCrossRegionRoutingResponse: StructureShape
     GetCurrentMetricDataRequest: StructureShape
     GetCurrentMetricDataResponse: StructureShape
     GetCurrentUserDataRequest: StructureShape
     GetCurrentUserDataResponse: StructureShape
     GetEffectiveHoursOfOperationsRequest: StructureShape
     GetEffectiveHoursOfOperationsResponse: StructureShape
+    GetEvaluationFormValidationRequest: StructureShape
+    GetEvaluationFormValidationResponse: StructureShape
     GetFederationTokenRequest: StructureShape
     GetFederationTokenResponse: StructureShape
     GetFlowAssociationRequest: StructureShape
@@ -627,9 +1025,13 @@ module Aws::Connect
     GetPromptFileResponse: StructureShape
     GetTaskTemplateRequest: StructureShape
     GetTaskTemplateResponse: StructureShape
+    GetTestCaseExecutionSummaryRequest: StructureShape
+    GetTestCaseExecutionSummaryResponse: StructureShape
     GetTrafficDistributionRequest: StructureShape
     GetTrafficDistributionResponse: StructureShape
+    GlobalResiliencyMetadata: StructureShape
     GlobalSignInEndpoint: StringShape
+    GranularAccessControlConfiguration: StructureShape
     Grouping: EnumShape
     GroupingV2: StringShape
     Groupings: ListShape
@@ -685,10 +1087,16 @@ module Aws::Connect
     HoursOfOperationSummary: StructureShape
     HoursOfOperationSummaryList: ListShape
     HoursOfOperationTimeSlice: StructureShape
+    HoursOfOperationsIdentifier: StructureShape
+    IAMRestrictedPrimaryValue: StringShape
     ISO8601Datetime: StringShape
     IdempotencyException: StructureShape
+    ImagesLogo: StructureShape
     ImportPhoneNumberRequest: StructureShape
     ImportPhoneNumberResponse: StructureShape
+    ImportWorkspaceMediaRequest: StructureShape
+    ImportWorkspaceMediaResponse: StructureShape
+    InactivityDuration: IntegerShape
     InboundAdditionalRecipients: StructureShape
     InboundCallsEnabled: BooleanShape
     InboundEmailContent: StructureShape
@@ -699,9 +1107,9 @@ module Aws::Connect
     Index: IntegerShape
     InitiateAs: EnumShape
     InitiationMethodList: ListShape
+    InputData: StringShape
     InputPredefinedAttributeConfiguration: StructureShape
     Instance: StructureShape
-    InstanceArn: StringShape
     InstanceAttributeType: EnumShape
     InstanceAttributeValue: StringShape
     InstanceId: StringShape
@@ -723,23 +1131,30 @@ module Aws::Connect
     InternalServiceException: StructureShape
     IntervalDetails: StructureShape
     IntervalPeriod: EnumShape
+    IntervalPositiveInteger: IntegerShape
+    InvalidActiveRegionException: StructureShape
     InvalidContactFlowException: StructureShape
     InvalidContactFlowModuleException: StructureShape
     InvalidParameterException: StructureShape
     InvalidRequestException: StructureShape
     InvalidRequestExceptionReason: UnionShape
+    InvalidTestCaseException: StructureShape
     InvisibleFieldInfo: StructureShape
     InvisibleTaskTemplateFields: ListShape
     IpCidr: StringShape
     IpCidrList: ListShape
     IsReadOnly: BooleanShape
+    IsolatedRegionsList: ListShape
     IvrRecordingTrack: EnumShape
     JoinToken: StringShape
     KeyId: StringShape
     KinesisFirehoseConfig: StructureShape
     KinesisStreamConfig: StructureShape
     KinesisVideoStreamConfig: StructureShape
+    LanguageConfiguration: StructureShape
+    LanguageLocale: StringShape
     LargeNextToken: StringShape
+    LengthBoundary: IntegerShape
     LexBot: StructureShape
     LexBotConfig: StructureShape
     LexBotConfigList: ListShape
@@ -759,13 +1174,23 @@ module Aws::Connect
     ListAssociatedContactsRequest: StructureShape
     ListAssociatedContactsRequestMaxResults: IntegerShape
     ListAssociatedContactsResponse: StructureShape
+    ListAttachedFilesConfigurationsRequest: StructureShape
+    ListAttachedFilesConfigurationsResponse: StructureShape
     ListAuthenticationProfilesRequest: StructureShape
     ListAuthenticationProfilesResponse: StructureShape
     ListBotsRequest: StructureShape
     ListBotsResponse: StructureShape
+    ListChildHoursOfOperationsRequest: StructureShape
+    ListChildHoursOfOperationsResponse: StructureShape
     ListCondition: StructureShape
     ListContactEvaluationsRequest: StructureShape
     ListContactEvaluationsResponse: StructureShape
+    ListContactFlowAliasesRequest: StructureShape
+    ListContactFlowAliasesResponse: StructureShape
+    ListContactFlowModuleAliasesRequest: StructureShape
+    ListContactFlowModuleAliasesResponse: StructureShape
+    ListContactFlowModuleVersionsRequest: StructureShape
+    ListContactFlowModuleVersionsResponse: StructureShape
     ListContactFlowModulesRequest: StructureShape
     ListContactFlowModulesResponse: StructureShape
     ListContactFlowVersionsRequest: StructureShape
@@ -774,12 +1199,26 @@ module Aws::Connect
     ListContactFlowsResponse: StructureShape
     ListContactReferencesRequest: StructureShape
     ListContactReferencesResponse: StructureShape
+    ListDataTableAttributesRequest: StructureShape
+    ListDataTableAttributesResponse: StructureShape
+    ListDataTablePrimaryValuesRequest: StructureShape
+    ListDataTablePrimaryValuesResponse: StructureShape
+    ListDataTableValuesRequest: StructureShape
+    ListDataTableValuesResponse: StructureShape
+    ListDataTablesRequest: StructureShape
+    ListDataTablesResponse: StructureShape
     ListDefaultVocabulariesRequest: StructureShape
     ListDefaultVocabulariesResponse: StructureShape
+    ListEntitySecurityProfilesRequest: StructureShape
+    ListEntitySecurityProfilesResponse: StructureShape
+    ListEvaluationFormAIVersionsRequest: StructureShape
+    ListEvaluationFormAIVersionsResponse: StructureShape
     ListEvaluationFormVersionsRequest: StructureShape
     ListEvaluationFormVersionsResponse: StructureShape
     ListEvaluationFormsRequest: StructureShape
     ListEvaluationFormsResponse: StructureShape
+    ListExtractionDefinitionsRequest: StructureShape
+    ListExtractionDefinitionsResponse: StructureShape
     ListFlowAssociationResourceType: EnumShape
     ListFlowAssociationsRequest: StructureShape
     ListFlowAssociationsResponse: StructureShape
@@ -799,6 +1238,10 @@ module Aws::Connect
     ListLambdaFunctionsResponse: StructureShape
     ListLexBotsRequest: StructureShape
     ListLexBotsResponse: StructureShape
+    ListMetricsRequest: StructureShape
+    ListMetricsResponse: StructureShape
+    ListNotificationsRequest: StructureShape
+    ListNotificationsResponse: StructureShape
     ListPhoneNumbersRequest: StructureShape
     ListPhoneNumbersResponse: StructureShape
     ListPhoneNumbersSummary: StructureShape
@@ -809,6 +1252,8 @@ module Aws::Connect
     ListPredefinedAttributesResponse: StructureShape
     ListPromptsRequest: StructureShape
     ListPromptsResponse: StructureShape
+    ListQueueEmailAddressesRequest: StructureShape
+    ListQueueEmailAddressesResponse: StructureShape
     ListQueueQuickConnectsRequest: StructureShape
     ListQueueQuickConnectsResponse: StructureShape
     ListQueuesRequest: StructureShape
@@ -827,8 +1272,12 @@ module Aws::Connect
     ListRulesResponse: StructureShape
     ListSecurityKeysRequest: StructureShape
     ListSecurityKeysResponse: StructureShape
+    ListSecurityProfileAIAgentsRequest: StructureShape
+    ListSecurityProfileAIAgentsResponse: StructureShape
     ListSecurityProfileApplicationsRequest: StructureShape
     ListSecurityProfileApplicationsResponse: StructureShape
+    ListSecurityProfileFlowModulesRequest: StructureShape
+    ListSecurityProfileFlowModulesResponse: StructureShape
     ListSecurityProfilePermissionsRequest: StructureShape
     ListSecurityProfilePermissionsResponse: StructureShape
     ListSecurityProfilesRequest: StructureShape
@@ -837,6 +1286,12 @@ module Aws::Connect
     ListTagsForResourceResponse: StructureShape
     ListTaskTemplatesRequest: StructureShape
     ListTaskTemplatesResponse: StructureShape
+    ListTestCaseExecutionRecordsRequest: StructureShape
+    ListTestCaseExecutionRecordsResponse: StructureShape
+    ListTestCaseExecutionsRequest: StructureShape
+    ListTestCaseExecutionsResponse: StructureShape
+    ListTestCasesRequest: StructureShape
+    ListTestCasesResponse: StructureShape
     ListTrafficDistributionGroupUsersRequest: StructureShape
     ListTrafficDistributionGroupUsersResponse: StructureShape
     ListTrafficDistributionGroupsRequest: StructureShape
@@ -845,6 +1300,8 @@ module Aws::Connect
     ListUseCasesResponse: StructureShape
     ListUserHierarchyGroupsRequest: StructureShape
     ListUserHierarchyGroupsResponse: StructureShape
+    ListUserNotificationsRequest: StructureShape
+    ListUserNotificationsResponse: StructureShape
     ListUserProficienciesRequest: StructureShape
     ListUserProficienciesResponse: StructureShape
     ListUsersRequest: StructureShape
@@ -853,7 +1310,16 @@ module Aws::Connect
     ListViewVersionsResponse: StructureShape
     ListViewsRequest: StructureShape
     ListViewsResponse: StructureShape
+    ListWorkspaceMediaRequest: StructureShape
+    ListWorkspaceMediaResponse: StructureShape
+    ListWorkspacePagesRequest: StructureShape
+    ListWorkspacePagesResponse: StructureShape
+    ListWorkspacesRequest: StructureShape
+    ListWorkspacesResponse: StructureShape
+    LocaleCode: EnumShape
+    LocalizedString: StringShape
     Long: IntegerShape
+    MaskMode: EnumShape
     MatchCriteria: StructureShape
     MaxResult10: IntegerShape
     MaxResult100: IntegerShape
@@ -864,12 +1330,18 @@ module Aws::Connect
     MaxResult500: IntegerShape
     MaxResult7: IntegerShape
     MaxResults: IntegerShape
+    MaxSessionDurationMinutes: IntegerShape
     MaximumResultReturnedException: StructureShape
+    MaximumSizeLimitInBytes: IntegerShape
     MediaConcurrencies: ListShape
     MediaConcurrency: StructureShape
+    MediaItem: StructureShape
+    MediaList: ListShape
     MediaPlacement: StructureShape
     MediaRegion: StringShape
+    MediaSource: StringShape
     MediaStreamType: EnumShape
+    MediaType: EnumShape
     Meeting: StructureShape
     MeetingFeatureStatus: EnumShape
     MeetingFeaturesConfiguration: StructureShape
@@ -878,44 +1350,101 @@ module Aws::Connect
     MessageTemplateId: StringShape
     MessageTemplateKnowledgeBaseId: StringShape
     MetadataUrl: StringShape
+    MetricCalculation: StructureShape
+    MetricCategory: StringShape
+    MetricCreationMethod: EnumShape
     MetricDataCollectionsV2: ListShape
     MetricDataV2: StructureShape
+    MetricDefinition: StructureShape
+    MetricDescription: StringShape
+    MetricFilter: StructureShape
+    MetricFilterBooleanCondition: StructureShape
+    MetricFilterBooleanConditionComparison: EnumShape
+    MetricFilterKey: StringShape
+    MetricFilterList: ListShape
+    MetricFilterNumberCondition: StructureShape
+    MetricFilterNumberConditionComparison: EnumShape
+    MetricFilterStringCondition: StructureShape
+    MetricFilterStringConditionComparison: EnumShape
     MetricFilterV2: StructureShape
     MetricFilterValueList: ListShape
     MetricFiltersV2List: ListShape
+    MetricGroupingList: ListShape
+    MetricId: StringShape
     MetricInterval: StructureShape
+    MetricName: StringShape
     MetricNameV2: StringShape
     MetricResultV2: StructureShape
     MetricResultsV2: ListShape
+    MetricSearchConditionList: ListShape
+    MetricSearchCriteria: StructureShape
+    MetricSearchFilter: StructureShape
+    MetricSearchSummaryList: ListShape
+    MetricStatus: EnumShape
+    MetricSummary: StructureShape
+    MetricSummaryList: ListShape
+    MetricType: EnumShape
+    MetricUnit: EnumShape
     MetricV2: StructureShape
     MetricsV2: ListShape
     MinutesLimit60: IntegerShape
     MonitorCapability: EnumShape
     MonitorContactRequest: StructureShape
     MonitorContactResponse: StructureShape
+    Month: IntegerShape
+    MonthDay: IntegerShape
+    MonthDayList: ListShape
+    MonthList: ListShape
+    MultiSelectQuestionRuleCategoryAutomation: StructureShape
+    MultiSelectQuestionRuleCategoryAutomationCondition: EnumShape
+    MultiSelectQuestionRuleCategoryAutomationLabel: StringShape
     Name: StringShape
     Name128: StringShape
     NameCriteria: StructureShape
     Namespace: StringShape
     NewChatCreated: BooleanShape
     NewSessionDetails: StructureShape
+    NextContactEntry: StructureShape
+    NextContactMetadata: UnionShape
+    NextContactType: EnumShape
+    NextContacts: ListShape
     NextToken: StringShape
     NextToken2500: StringShape
+    NotFoundBehaviorType: EnumShape
+    NotFoundDefaultValue: StringShape
+    Notification: StructureShape
+    NotificationContent: MapShape
     NotificationContentType: EnumShape
     NotificationDeliveryType: EnumShape
+    NotificationId: StringShape
+    NotificationPriority: EnumShape
     NotificationRecipientType: StructureShape
+    NotificationSearchConditionList: ListShape
+    NotificationSearchCriteria: StructureShape
+    NotificationSearchFilter: StructureShape
+    NotificationSearchSummary: StructureShape
+    NotificationSearchSummaryList: ListShape
+    NotificationSource: EnumShape
+    NotificationStatus: EnumShape
+    NotificationSummaryList: ListShape
+    NotificationType: EnumShape
     NullableBoolean: BooleanShape
+    NullableDouble: FloatShape
     NullableProficiencyLevel: FloatShape
     NullableProficiencyLimitValue: IntegerShape
     NumberComparisonType: EnumShape
     NumberCondition: StructureShape
     NumberReference: StructureShape
+    NumberValueList: ListShape
     NumericQuestionPropertyAutomationLabel: EnumShape
     NumericQuestionPropertyValueAutomation: StructureShape
+    ObservationSummary: StructureShape
     OperatingSystem: StringShape
     OperationalHour: StructureShape
     OperationalHours: ListShape
+    OperationalStatus: EnumShape
     Origin: StringShape
+    OriginRegion: StringShape
     OriginsList: ListShape
     OutboundAdditionalRecipients: StructureShape
     OutboundCallerConfig: StructureShape
@@ -927,12 +1456,28 @@ module Aws::Connect
     OutboundMessageSourceType: EnumShape
     OutboundRawMessage: StructureShape
     OutboundRequestId: StringShape
+    OutboundStrategy: StructureShape
+    OutboundStrategyConfig: StructureShape
+    OutboundStrategyType: EnumShape
     OutboundSubject: StringShape
     OutputTypeNotFoundException: StructureShape
     OverrideDays: EnumShape
+    OverrideHour: StructureShape
+    OverrideHours: ListShape
     OverrideTimeSlice: StructureShape
+    OverrideType: EnumShape
     PEM: StringShape
+    Page: StringShape
+    PaletteCanvas: StructureShape
+    PaletteHeader: StructureShape
+    PaletteNavigation: StructureShape
+    PalettePrimary: StructureShape
+    ParentHoursOfOperationConfig: StructureShape
+    ParentHoursOfOperationConfigList: ListShape
+    ParentHoursOfOperationIdList: ListShape
+    ParentHoursOfOperationsList: ListShape
     ParticipantCapabilities: StructureShape
+    ParticipantConfiguration: StructureShape
     ParticipantDetails: StructureShape
     ParticipantDetailsToAdd: StructureShape
     ParticipantId: StringShape
@@ -952,11 +1497,17 @@ module Aws::Connect
     PauseContactRequest: StructureShape
     PauseContactResponse: StructureShape
     Percentage: IntegerShape
+    PerformanceCategoryName: EnumShape
     Permission: StringShape
     PermissionsList: ListShape
     PersistentChat: StructureShape
     PersistentConnection: BooleanShape
+    PersistentConnectionConfig: StructureShape
+    PersistentConnectionConfigs: ListShape
+    PersonalizeDomainName: StringShape
     PhoneNumber: StringShape
+    PhoneNumberConfig: StructureShape
+    PhoneNumberConfigs: ListShape
     PhoneNumberCountryCode: EnumShape
     PhoneNumberCountryCodes: ListShape
     PhoneNumberDescription: StringShape
@@ -973,10 +1524,23 @@ module Aws::Connect
     PhoneType: EnumShape
     PlatformName: StringShape
     PlatformVersion: StringShape
+    PointValue: IntegerShape
+    Policy: EnumShape
+    PositiveAndNegativeDouble: FloatShape
+    PositiveDouble: FloatShape
+    PostAcceptPreviewTimeoutDurationInSeconds: IntegerShape
+    PostAcceptTimeoutConfig: StructureShape
     PotentialAudioQualityIssue: StringShape
     PotentialAudioQualityIssues: ListShape
     PotentialDisconnectIssue: StringShape
+    PreEvaluationFilter: StructureShape
+    PreEvaluationFilterList: ListShape
+    PreEvaluationFilterOperator: EnumShape
+    PreEvaluationFilterResourceType: EnumShape
+    PreEvaluationFilterType: EnumShape
+    PreEvaluationFilters: StructureShape
     PreSignedAttachmentUrl: StringShape
+    PreSignedConnectionUrl: StringShape
     PredefinedAttribute: StructureShape
     PredefinedAttributeConfiguration: StructureShape
     PredefinedAttributeName: StringShape
@@ -991,6 +1555,21 @@ module Aws::Connect
     PredefinedAttributeSummaryList: ListShape
     PredefinedAttributeValues: UnionShape
     Prefix: StringShape
+    Preview: StructureShape
+    PrimaryAttributeAccessControlConfigurationItem: StructureShape
+    PrimaryAttributeContextKeyName: StringShape
+    PrimaryAttributeValue: StructureShape
+    PrimaryAttributeValueFilter: StructureShape
+    PrimaryAttributeValueFilters: ListShape
+    PrimaryAttributeValuesSet: ListShape
+    PrimaryEventSource: StringShape
+    PrimaryEventSourceEffectiveTimestampType: StringShape
+    PrimaryValue: StructureShape
+    PrimaryValueList: ListShape
+    PrimaryValueResponse: StructureShape
+    PrimaryValuesList: ListShape
+    PrimaryValuesResponseSet: ListShape
+    PrimaryValuesSet: ListShape
     Priority: IntegerShape
     ProblemDetail: StructureShape
     ProblemMessageString: StringShape
@@ -1015,6 +1594,10 @@ module Aws::Connect
     PutUserStatusRequest: StructureShape
     PutUserStatusResponse: StructureShape
     QualityMetrics: StructureShape
+    QuestionOptionPointsConfiguration: StructureShape
+    QuestionPointsConfiguration: StructureShape
+    QuestionRuleCategoryAutomationCondition: EnumShape
+    QuestionRuleCategoryAutomationLabel: StringShape
     Queue: StructureShape
     QueueDescription: StringShape
     QueueId: StringShape
@@ -1039,6 +1622,7 @@ module Aws::Connect
     Queues: ListShape
     QuickConnect: StructureShape
     QuickConnectConfig: StructureShape
+    QuickConnectContactData: StructureShape
     QuickConnectDescription: StringShape
     QuickConnectId: StringShape
     QuickConnectName: StringShape
@@ -1062,6 +1646,10 @@ module Aws::Connect
     RealTimeContactAnalysisCharacterIntervals: ListShape
     RealTimeContactAnalysisContentType: StringShape
     RealTimeContactAnalysisEventType: StringShape
+    RealTimeContactAnalysisExtractedInformationContent: StringShape
+    RealTimeContactAnalysisExtractedInformationFailureCode: EnumShape
+    RealTimeContactAnalysisExtractedInformationValue: StructureShape
+    RealTimeContactAnalysisExtractedInformationValues: ListShape
     RealTimeContactAnalysisId256: StringShape
     RealTimeContactAnalysisIssueDetected: StructureShape
     RealTimeContactAnalysisIssuesDetected: ListShape
@@ -1076,6 +1664,7 @@ module Aws::Connect
     RealTimeContactAnalysisSegmentAttachments: StructureShape
     RealTimeContactAnalysisSegmentCategories: StructureShape
     RealTimeContactAnalysisSegmentEvent: StructureShape
+    RealTimeContactAnalysisSegmentExtractedInformation: StructureShape
     RealTimeContactAnalysisSegmentIssues: StructureShape
     RealTimeContactAnalysisSegmentPostContactSummary: StructureShape
     RealTimeContactAnalysisSegmentTranscript: StructureShape
@@ -1094,14 +1683,27 @@ module Aws::Connect
     RealTimeContactAnalysisTranscriptItemsWithContent: ListShape
     RealtimeContactAnalysisSegment: UnionShape
     RealtimeContactAnalysisSegments: ListShape
+    RecipientList: ListShape
+    RecommenderConfig: StructureShape
+    RecommenderContext: MapShape
+    RecommenderContextKey: StringShape
+    RecommenderContextValue: StringShape
+    RecommenderName: StringShape
+    RecordIds: ListShape
+    RecordPrimaryValue: StructureShape
     RecordingDeletionReason: StringShape
     RecordingInfo: StructureShape
     RecordingLocation: StringShape
     RecordingStatus: EnumShape
     Recordings: ListShape
+    RecurrenceConfig: StructureShape
+    RecurrenceFrequency: EnumShape
+    RecurrencePattern: StructureShape
+    RedactionConfiguration: StructureShape
     Reference: StructureShape
     ReferenceArn: StringShape
     ReferenceId: StringShape
+    ReferenceIdList: ListShape
     ReferenceKey: StringShape
     ReferenceStatus: EnumShape
     ReferenceStatusReason: StringShape
@@ -1110,6 +1712,7 @@ module Aws::Connect
     ReferenceType: EnumShape
     ReferenceTypes: ListShape
     ReferenceValue: StringShape
+    RefreshRate: IntegerShape
     RefreshTokenDuration: IntegerShape
     RegionName: StringShape
     RegistrationId: StringShape
@@ -1134,10 +1737,12 @@ module Aws::Connect
     ResourceType: EnumShape
     ResourceTypeList: ListShape
     ResourceVersion: IntegerShape
+    ResponseMode: EnumShape
     ResumeContactRecordingRequest: StructureShape
     ResumeContactRecordingResponse: StructureShape
     ResumeContactRequest: StructureShape
     ResumeContactResponse: StructureShape
+    RingTimeoutInSeconds: IntegerShape
     RoutingCriteria: StructureShape
     RoutingCriteriaInput: StructureShape
     RoutingCriteriaInputStep: StructureShape
@@ -1171,13 +1776,27 @@ module Aws::Connect
     Rule: StructureShape
     RuleAction: StructureShape
     RuleActions: ListShape
+    RuleAttributeAndCondition: StructureShape
+    RuleAttributeFilter: StructureShape
+    RuleAttributeOrConditionList: ListShape
+    RuleCapabilityTier: EnumShape
+    RuleCapabilityTiers: ListShape
     RuleFunction: StringShape
     RuleId: StringShape
     RuleName: StringShape
     RulePublishStatus: EnumShape
+    RuleSearchSummary: StructureShape
+    RuleSearchSummaryList: ListShape
     RuleSummary: StructureShape
     RuleSummaryList: ListShape
     RuleTriggerEventSource: StructureShape
+    RulesConfiguration: StructureShape
+    RulesExtractionDefinitionId: StringShape
+    RulesExtractionDefinitionIdentifier: StructureShape
+    RulesExtractionDefinitionIdentifierList: ListShape
+    RulesSearchConditionList: ListShape
+    RulesSearchCriteria: StructureShape
+    RulesSearchFilter: StructureShape
     S3Config: StructureShape
     S3Uri: StringShape
     ScreenShareCapability: EnumShape
@@ -1185,6 +1804,8 @@ module Aws::Connect
     SearchAgentStatusesResponse: StructureShape
     SearchAvailablePhoneNumbersRequest: StructureShape
     SearchAvailablePhoneNumbersResponse: StructureShape
+    SearchContactEvaluationsRequest: StructureShape
+    SearchContactEvaluationsResponse: StructureShape
     SearchContactFlowModulesRequest: StructureShape
     SearchContactFlowModulesResponse: StructureShape
     SearchContactFlowsRequest: StructureShape
@@ -1200,12 +1821,20 @@ module Aws::Connect
     SearchContactsTimeRangeType: EnumShape
     SearchContactsTimestampCondition: StructureShape
     SearchCriteria: StructureShape
+    SearchDataTablesRequest: StructureShape
+    SearchDataTablesResponse: StructureShape
     SearchEmailAddressesRequest: StructureShape
     SearchEmailAddressesResponse: StructureShape
+    SearchEvaluationFormsRequest: StructureShape
+    SearchEvaluationFormsResponse: StructureShape
     SearchHoursOfOperationOverridesRequest: StructureShape
     SearchHoursOfOperationOverridesResponse: StructureShape
     SearchHoursOfOperationsRequest: StructureShape
     SearchHoursOfOperationsResponse: StructureShape
+    SearchMetricsRequest: StructureShape
+    SearchMetricsResponse: StructureShape
+    SearchNotificationsRequest: StructureShape
+    SearchNotificationsResponse: StructureShape
     SearchPredefinedAttributesRequest: StructureShape
     SearchPredefinedAttributesResponse: StructureShape
     SearchPromptsRequest: StructureShape
@@ -1218,16 +1847,26 @@ module Aws::Connect
     SearchResourceTagsResponse: StructureShape
     SearchRoutingProfilesRequest: StructureShape
     SearchRoutingProfilesResponse: StructureShape
+    SearchRulesRequest: StructureShape
+    SearchRulesResponse: StructureShape
     SearchSecurityProfilesRequest: StructureShape
     SearchSecurityProfilesResponse: StructureShape
+    SearchTestCasesRequest: StructureShape
+    SearchTestCasesResponse: StructureShape
     SearchText: StringShape
     SearchTextList: ListShape
     SearchUserHierarchyGroupsRequest: StructureShape
     SearchUserHierarchyGroupsResponse: StructureShape
     SearchUsersRequest: StructureShape
     SearchUsersResponse: StructureShape
+    SearchViewsRequest: StructureShape
+    SearchViewsResponse: StructureShape
     SearchVocabulariesRequest: StructureShape
     SearchVocabulariesResponse: StructureShape
+    SearchWorkspaceAssociationsRequest: StructureShape
+    SearchWorkspaceAssociationsResponse: StructureShape
+    SearchWorkspacesRequest: StructureShape
+    SearchWorkspacesResponse: StructureShape
     SearchableAgentCriteriaStep: StructureShape
     SearchableContactAttributeKey: StringShape
     SearchableContactAttributeValue: StringShape
@@ -1251,6 +1890,7 @@ module Aws::Connect
     SecurityProfileDescription: StringShape
     SecurityProfileId: StringShape
     SecurityProfileIds: ListShape
+    SecurityProfileItem: StructureShape
     SecurityProfileName: StringShape
     SecurityProfilePermission: StringShape
     SecurityProfilePolicyKey: StringShape
@@ -1260,6 +1900,8 @@ module Aws::Connect
     SecurityProfileSearchSummary: StructureShape
     SecurityProfileSummary: StructureShape
     SecurityProfileSummaryList: ListShape
+    SecurityProfiles: ListShape
+    SecurityProfiles100: ListShape
     SecurityProfilesSearchFilter: StructureShape
     SecurityProfilesSearchSummaryList: ListShape
     SecurityToken: StringShape
@@ -1272,11 +1914,18 @@ module Aws::Connect
     SegmentAttributes: MapShape
     SendChatIntegrationEventRequest: StructureShape
     SendChatIntegrationEventResponse: StructureShape
+    SendInAppNotificationActionDefinition: StructureShape
     SendNotificationActionDefinition: StructureShape
     SendOutboundEmailRequest: StructureShape
     SendOutboundEmailResponse: StructureShape
+    SendOutboundWebNotificationRequest: StructureShape
+    SendOutboundWebNotificationResponse: StructureShape
+    SensitivePhoneNumber: StringShape
+    SentimentConfiguration: StructureShape
     ServiceQuotaExceededException: StructureShape
     ServiceQuotaExceededExceptionReason: UnionShape
+    SessionId: StringShape
+    SessionInactivityDurationMinutes: IntegerShape
     SignInConfig: StructureShape
     SignInDistribution: StructureShape
     SignInDistributionList: ListShape
@@ -1288,6 +1937,7 @@ module Aws::Connect
     SlaFieldValueUnionList: ListShape
     SlaName: StringShape
     SlaType: EnumShape
+    Slug: StringShape
     SnapshotVersion: StringShape
     Sort: StructureShape
     SortOrder: EnumShape
@@ -1296,18 +1946,26 @@ module Aws::Connect
     SourceCampaign: StructureShape
     SourceId: StringShape
     SourceType: EnumShape
+    StartAssistantContactRequest: StructureShape
+    StartAssistantContactResponse: StructureShape
     StartAttachedFileUploadRequest: StructureShape
     StartAttachedFileUploadResponse: StructureShape
     StartChatContactRequest: StructureShape
     StartChatContactResponse: StructureShape
+    StartContactConversationalAnalyticsJobRequest: StructureShape
+    StartContactConversationalAnalyticsJobResponse: StructureShape
     StartContactEvaluationRequest: StructureShape
     StartContactEvaluationResponse: StructureShape
+    StartContactMediaProcessingRequest: StructureShape
+    StartContactMediaProcessingResponse: StructureShape
     StartContactRecordingRequest: StructureShape
     StartContactRecordingResponse: StructureShape
     StartContactStreamingRequest: StructureShape
     StartContactStreamingResponse: StructureShape
     StartEmailContactRequest: StructureShape
     StartEmailContactResponse: StructureShape
+    StartEvaluationFormValidationRequest: StructureShape
+    StartEvaluationFormValidationResponse: StructureShape
     StartOutboundChatContactRequest: StructureShape
     StartOutboundChatContactResponse: StructureShape
     StartOutboundEmailContactRequest: StructureShape
@@ -1318,6 +1976,8 @@ module Aws::Connect
     StartScreenSharingResponse: StructureShape
     StartTaskContactRequest: StructureShape
     StartTaskContactResponse: StructureShape
+    StartTestCaseExecutionRequest: StructureShape
+    StartTestCaseExecutionResponse: StructureShape
     StartWebRTCContactRequest: StructureShape
     StartWebRTCContactResponse: StructureShape
     StateTransition: StructureShape
@@ -1326,27 +1986,41 @@ module Aws::Connect
     Status: EnumShape
     Step: StructureShape
     Steps: ListShape
+    StopContactMediaProcessingRequest: StructureShape
+    StopContactMediaProcessingResponse: StructureShape
     StopContactRecordingRequest: StructureShape
     StopContactRecordingResponse: StructureShape
     StopContactRequest: StructureShape
     StopContactResponse: StructureShape
     StopContactStreamingRequest: StructureShape
     StopContactStreamingResponse: StructureShape
+    StopTestCaseExecutionRequest: StructureShape
+    StopTestCaseExecutionResponse: StructureShape
     StorageType: EnumShape
     StreamingId: StringShape
     String: StringShape
     StringComparisonType: EnumShape
     StringCondition: StructureShape
     StringReference: StructureShape
+    StringValueList: ListShape
     Subject: StringShape
     SubmitAutoEvaluationActionDefinition: StructureShape
     SubmitContactEvaluationRequest: StructureShape
     SubmitContactEvaluationResponse: StructureShape
     Subtype: StringShape
+    Subtypes: ListShape
+    SuccessfulBatchAssociationSummary: StructureShape
+    SuccessfulBatchAssociationSummaryList: ListShape
     SuccessfulRequest: StructureShape
     SuccessfulRequestList: ListShape
+    SummaryConfiguration: StructureShape
+    SummaryMode: EnumShape
+    SummaryModes: ListShape
     SupportedMessagingContentType: StringShape
     SupportedMessagingContentTypes: ListShape
+    SupportedStatsList: ListShape
+    SupportsCustomCalculation: BooleanShape
+    SupportsPreaggregateCalculation: BooleanShape
     SuspendContactRecordingRequest: StructureShape
     SuspendContactRecordingResponse: StructureShape
     TagAndConditionList: ListShape
@@ -1369,6 +2043,8 @@ module Aws::Connect
     TargetListType: EnumShape
     TargetSlaMinutes: IntegerShape
     TaskActionDefinition: StructureShape
+    TaskAttachment: StructureShape
+    TaskAttachments: ListShape
     TaskDescriptionExpression: StringShape
     TaskNameExpression: StringShape
     TaskTemplateArn: StringShape
@@ -1385,6 +2061,7 @@ module Aws::Connect
     TaskTemplateFieldValue: StringShape
     TaskTemplateFields: ListShape
     TaskTemplateId: StringShape
+    TaskTemplateInfoV2: StructureShape
     TaskTemplateList: ListShape
     TaskTemplateMetadata: StructureShape
     TaskTemplateName: StringShape
@@ -1394,6 +2071,29 @@ module Aws::Connect
     TemplateAttributes: StructureShape
     TemplateId: StringShape
     TemplatedMessageConfig: StructureShape
+    TestCase: StructureShape
+    TestCaseContent: StringShape
+    TestCaseDescription: StringShape
+    TestCaseEntryPoint: StructureShape
+    TestCaseEntryPointType: EnumShape
+    TestCaseExecution: StructureShape
+    TestCaseExecutionId: StringShape
+    TestCaseExecutionList: ListShape
+    TestCaseExecutionStatus: EnumShape
+    TestCaseId: StringShape
+    TestCaseInitializationData: StringShape
+    TestCaseName: StringShape
+    TestCaseResourceId: StringShape
+    TestCaseSearchConditionList: ListShape
+    TestCaseSearchCriteria: StructureShape
+    TestCaseSearchFilter: StructureShape
+    TestCaseSearchSummaryList: ListShape
+    TestCaseSha256: StringShape
+    TestCaseStatus: EnumShape
+    TestCaseSummary: StructureShape
+    TestCaseSummaryList: ListShape
+    ThemeImageLink: StringShape
+    ThemeString: StringShape
     Threshold: StructureShape
     ThresholdCollections: ListShape
     ThresholdV2: StructureShape
@@ -1407,7 +2107,6 @@ module Aws::Connect
     TotalPauseCount: IntegerShape
     TotalPauseDurationInSeconds: IntegerShape
     TrafficDistributionGroup: StructureShape
-    TrafficDistributionGroupArn: StringShape
     TrafficDistributionGroupId: StringShape
     TrafficDistributionGroupIdOrArn: StringShape
     TrafficDistributionGroupStatus: EnumShape
@@ -1421,24 +2120,32 @@ module Aws::Connect
     TranscriptCriteriaList: ListShape
     TransferContactRequest: StructureShape
     TransferContactResponse: StructureShape
+    TrendIndicator: EnumShape
     URI: StringShape
     URLExpiryInSeconds: IntegerShape
     Unit: EnumShape
+    UnprocessedTranscriptLocation: StringShape
     UntagContactRequest: StructureShape
     UntagContactResponse: StructureShape
     UntagResourceRequest: StructureShape
     UpdateAgentStatusDescription: StringShape
     UpdateAgentStatusRequest: StructureShape
+    UpdateAttachedFilesConfigurationRequest: StructureShape
+    UpdateAttachedFilesConfigurationResponse: StructureShape
     UpdateAuthenticationProfileRequest: StructureShape
     UpdateCaseActionDefinition: StructureShape
     UpdateContactAttributesRequest: StructureShape
     UpdateContactAttributesResponse: StructureShape
     UpdateContactEvaluationRequest: StructureShape
     UpdateContactEvaluationResponse: StructureShape
+    UpdateContactFlowAliasRequest: StructureShape
+    UpdateContactFlowAliasResponse: StructureShape
     UpdateContactFlowContentRequest: StructureShape
     UpdateContactFlowContentResponse: StructureShape
     UpdateContactFlowMetadataRequest: StructureShape
     UpdateContactFlowMetadataResponse: StructureShape
+    UpdateContactFlowModuleAliasRequest: StructureShape
+    UpdateContactFlowModuleAliasResponse: StructureShape
     UpdateContactFlowModuleContentRequest: StructureShape
     UpdateContactFlowModuleContentResponse: StructureShape
     UpdateContactFlowModuleMetadataRequest: StructureShape
@@ -1451,15 +2158,33 @@ module Aws::Connect
     UpdateContactRoutingDataResponse: StructureShape
     UpdateContactScheduleRequest: StructureShape
     UpdateContactScheduleResponse: StructureShape
+    UpdateContactTaskTemplateRequest: StructureShape
+    UpdateContactTaskTemplateResponse: StructureShape
+    UpdateCrossRegionRoutingRequest: StructureShape
+    UpdateCrossRegionRoutingResponse: StructureShape
+    UpdateDataTableAttributeRequest: StructureShape
+    UpdateDataTableAttributeResponse: StructureShape
+    UpdateDataTableMetadataRequest: StructureShape
+    UpdateDataTableMetadataResponse: StructureShape
+    UpdateDataTablePrimaryValuesRequest: StructureShape
+    UpdateDataTablePrimaryValuesResponse: StructureShape
     UpdateEmailAddressMetadataRequest: StructureShape
     UpdateEmailAddressMetadataResponse: StructureShape
     UpdateEvaluationFormRequest: StructureShape
     UpdateEvaluationFormResponse: StructureShape
+    UpdateExtractionDefinitionRequest: StructureShape
+    UpdateExtractionDefinitionResponse: StructureShape
     UpdateHoursOfOperationDescription: StringShape
     UpdateHoursOfOperationOverrideRequest: StructureShape
     UpdateHoursOfOperationRequest: StructureShape
     UpdateInstanceAttributeRequest: StructureShape
     UpdateInstanceStorageConfigRequest: StructureShape
+    UpdateMetricContentRequest: StructureShape
+    UpdateMetricContentResponse: StructureShape
+    UpdateMetricMetadataRequest: StructureShape
+    UpdateMetricMetadataResponse: StructureShape
+    UpdateNotificationContentRequest: StructureShape
+    UpdateNotificationContentResponse: StructureShape
     UpdateParticipantAuthenticationRequest: StructureShape
     UpdateParticipantAuthenticationResponse: StructureShape
     UpdateParticipantRoleConfigChannelInfo: UnionShape
@@ -1489,12 +2214,17 @@ module Aws::Connect
     UpdateSecurityProfileRequest: StructureShape
     UpdateTaskTemplateRequest: StructureShape
     UpdateTaskTemplateResponse: StructureShape
+    UpdateTestCaseRequest: StructureShape
+    UpdateTestCaseResponse: StructureShape
     UpdateTrafficDistributionRequest: StructureShape
     UpdateTrafficDistributionResponse: StructureShape
+    UpdateUserConfigRequest: StructureShape
     UpdateUserHierarchyGroupNameRequest: StructureShape
     UpdateUserHierarchyRequest: StructureShape
     UpdateUserHierarchyStructureRequest: StructureShape
     UpdateUserIdentityInfoRequest: StructureShape
+    UpdateUserNotificationStatusRequest: StructureShape
+    UpdateUserNotificationStatusResponse: StructureShape
     UpdateUserPhoneConfigRequest: StructureShape
     UpdateUserProficienciesRequest: StructureShape
     UpdateUserRoutingProfileRequest: StructureShape
@@ -1503,6 +2233,14 @@ module Aws::Connect
     UpdateViewContentResponse: StructureShape
     UpdateViewMetadataRequest: StructureShape
     UpdateViewMetadataResponse: StructureShape
+    UpdateWorkspaceMetadataRequest: StructureShape
+    UpdateWorkspaceMetadataResponse: StructureShape
+    UpdateWorkspacePageRequest: StructureShape
+    UpdateWorkspacePageResponse: StructureShape
+    UpdateWorkspaceThemeRequest: StructureShape
+    UpdateWorkspaceThemeResponse: StructureShape
+    UpdateWorkspaceVisibilityRequest: StructureShape
+    UpdateWorkspaceVisibilityResponse: StructureShape
     UploadUrlMetadata: StructureShape
     Url: StringShape
     UrlMetadataSignedHeaders: MapShape
@@ -1528,6 +2266,8 @@ module Aws::Connect
     UserIdentityInfoLite: StructureShape
     UserInfo: StructureShape
     UserNotFoundException: StructureShape
+    UserNotificationSummary: StructureShape
+    UserNotificationSummaryList: ListShape
     UserPhoneConfig: StructureShape
     UserProficiency: StructureShape
     UserProficiencyDisassociate: StructureShape
@@ -1543,12 +2283,20 @@ module Aws::Connect
     UserSummary: StructureShape
     UserSummaryList: ListShape
     UserTagMap: MapShape
+    Validation: StructureShape
+    ValidationEnum: StructureShape
+    ValidationEnumValues: ListShape
+    ValidationTestType: StringShape
+    ValidationTestTypes: ListShape
     Value: FloatShape
+    ValueBoundary: IntegerShape
+    ValueList: ListShape
     VersionNumber: IntegerShape
     VideoCapability: EnumShape
     View: StructureShape
     ViewAction: StringShape
     ViewActions: ListShape
+    ViewArn: StringShape
     ViewContent: StructureShape
     ViewContentSha256: StringShape
     ViewDescription: StringShape
@@ -1556,6 +2304,10 @@ module Aws::Connect
     ViewInputContent: StructureShape
     ViewInputSchema: StringShape
     ViewName: StringShape
+    ViewSearchConditionList: ListShape
+    ViewSearchCriteria: StructureShape
+    ViewSearchFilter: StructureShape
+    ViewSearchSummaryList: ListShape
     ViewStatus: EnumShape
     ViewSummary: StructureShape
     ViewTemplate: StringShape
@@ -1567,6 +2319,7 @@ module Aws::Connect
     ViewsInstanceId: StringShape
     ViewsNextToken: StringShape
     ViewsSummaryList: ListShape
+    Visibility: EnumShape
     Vocabulary: StructureShape
     VocabularyContent: StringShape
     VocabularyFailureReason: StringShape
@@ -1578,9 +2331,57 @@ module Aws::Connect
     VocabularyState: EnumShape
     VocabularySummary: StructureShape
     VocabularySummaryList: ListShape
+    VoiceCallEntryPointParameters: StructureShape
+    VoiceEnhancementConfig: StructureShape
+    VoiceEnhancementConfigs: ListShape
+    VoiceEnhancementMode: EnumShape
     VoiceRecordingConfiguration: StructureShape
     VoiceRecordingTrack: EnumShape
+    WebBrowserId: StringShape
+    WebNotificationContent: StructureShape
+    WebNotificationSource: StructureShape
+    WebSessionId: StringShape
+    Websocket: StructureShape
+    WeekdayOccurrenceInteger: IntegerShape
+    WeekdayOccurrenceList: ListShape
+    WidgetDestination: StructureShape
+    WidgetId: StringShape
     WisdomInfo: StructureShape
+    WorkloadType: StringShape
+    WorkloadTypeConcurrencies: ListShape
+    WorkloadTypeConcurrency: StructureShape
+    WorkloadTypeConcurrencyType: IntegerShape
+    Workspace: StructureShape
+    WorkspaceAssociatedResourceId: StringShape
+    WorkspaceAssociatedResourceName: StringShape
+    WorkspaceAssociatedResourceType: StringShape
+    WorkspaceAssociationSearchConditionList: ListShape
+    WorkspaceAssociationSearchCriteria: StructureShape
+    WorkspaceAssociationSearchFilter: StructureShape
+    WorkspaceAssociationSearchSummary: StructureShape
+    WorkspaceAssociationSearchSummaryList: ListShape
+    WorkspaceBatchErrorMessage: StringShape
+    WorkspaceDescription: StringShape
+    WorkspaceErrorCode: StringShape
+    WorkspaceFontFamily: EnumShape
+    WorkspaceId: StringShape
+    WorkspaceName: StringShape
+    WorkspacePage: StructureShape
+    WorkspacePageList: ListShape
+    WorkspaceResourceArnList: ListShape
+    WorkspaceSearchConditionList: ListShape
+    WorkspaceSearchCriteria: StructureShape
+    WorkspaceSearchFilter: StructureShape
+    WorkspaceSearchSummary: StructureShape
+    WorkspaceSearchSummaryList: ListShape
+    WorkspaceSummary: StructureShape
+    WorkspaceSummaryList: ListShape
+    WorkspaceTheme: StructureShape
+    WorkspaceThemeConfig: StructureShape
+    WorkspaceThemeImages: StructureShape
+    WorkspaceThemePalette: StructureShape
+    WorkspaceThemeTypography: StructureShape
+    WorkspaceTitle: StringShape
     ResourceArnListMaxLimit100: ListShape
 
     AmazonConnectService: ServiceShape

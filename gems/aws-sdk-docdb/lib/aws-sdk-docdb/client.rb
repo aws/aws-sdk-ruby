@@ -146,18 +146,18 @@ module Aws::DocDB
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -449,14 +449,14 @@ module Aws::DocDB
     #            <p>Constraints:</p>
     #            <ul>
     #               <li>
-    #                  <p>Must specify a valid system snapshot in the
+    #                  <p>Must specify a valid cluster snapshot in the
     #                       <i>available</i> state.</p>
     #               </li>
     #               <li>
-    #                  <p>If the source snapshot is in the same Amazon Web Services Region as the copy, specify a valid snapshot identifier.</p>
+    #                  <p>If the source cluster snapshot is in the same Amazon Web Services Region as the copy, specify a valid snapshot identifier.</p>
     #               </li>
     #               <li>
-    #                  <p>If the source snapshot is in a different Amazon Web Services Region than the copy, specify a valid cluster snapshot ARN.</p>
+    #                  <p>If the source cluster snapshot is in a different Amazon Web Services Region or owned by another Amazon Web Services account, specify the snapshot ARN.</p>
     #               </li>
     #            </ul>
     #            <p>Example: <code>my-cluster-snapshot1</code>
@@ -533,7 +533,7 @@ module Aws::DocDB
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags to be assigned to the cluster snapshot.</p>
     # @option params [String] :source_region
-    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   <p>The source region of the snapshot. This is only needed when the snapshot is encrypted and in a different region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_db_cluster_snapshot_identifier: "String", # required
@@ -707,9 +707,9 @@ module Aws::DocDB
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   <p>A list of log types that need to be enabled for exporting to Amazon
     #               CloudWatch Logs. You can enable audit logs or profiler logs. For more
-    #               information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html">
+    #               information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/event-auditing.html">
     #                   Auditing Amazon DocumentDB Events</a>
-    #               and <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html">
+    #               and <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/profiling.html">
     #                   Profiling Amazon DocumentDB Operations</a>.
     #           </p>
     # @option params [Boolean] :deletion_protection
@@ -722,14 +722,14 @@ module Aws::DocDB
     #   <p>The cluster identifier of the new global cluster.</p>
     # @option params [String] :storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
     #            <p>Default value is <code>standard </code>
     #            </p>
     #            <note>
-    #               <p>When you create a DocumentDB DB cluster with the storage type set to <code>iopt1</code>, the storage type is returned
+    #               <p>When you create an Amazon DocumentDB cluster with the storage type set to <code>iopt1</code>, the storage type is returned
     #                       in the response. The storage type isn't returned when you set it to <code>standard</code>.</p>
     #            </note>
     # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
@@ -740,14 +740,23 @@ module Aws::DocDB
     # @option params [String] :master_user_secret_kms_key_id
     #   <p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.
     #               This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the DB cluster.</p>
-    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. 
+    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
     #               To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>
-    #            <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. 
+    #            <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret.
     #               If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>
-    #            <p>There is a default KMS key for your Amazon Web Services account. 
+    #            <p>There is a default KMS key for your Amazon Web Services account.
     #               Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>
+    # @option params [String] :network_type
+    #   <p>The network type of the cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.</p>
     # @option params [String] :source_region
-    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   <p>The source region of the snapshot. This is only needed when the snapshot is encrypted and in a different region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     availability_zones: ["String"],
@@ -782,6 +791,8 @@ module Aws::DocDB
     #     },
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     network_type: "String",
+    #     copy_tags_to_snapshot: false,
     #     source_region: "String"
     #   }
     #   options = {}
@@ -839,6 +850,7 @@ module Aws::DocDB
     #       cluster_create_time: Time.now,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       deletion_protection: false,
+    #       io_optimized_next_allowed_modification_time: Time.now,
     #       storage_type: "String",
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
@@ -848,7 +860,9 @@ module Aws::DocDB
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
-    #       }
+    #       },
+    #       network_type: "String",
+    #       copy_tags_to_snapshot: false
     #     }
     #   }
     # @return [Types::CreateDBClusterResult]
@@ -865,15 +879,15 @@ module Aws::DocDB
     #             In Amazon DocumentDB, you cannot make modifications directly to the
     #             <code>default.docdb3.6</code> cluster parameter group. If your
     #             Amazon DocumentDB cluster is using the default cluster parameter group and you
-    #             want to modify a value in it, you must first <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-create.html">
+    #             want to modify a value in it, you must first <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-create.html">
     #                 create a new parameter group</a>
-    #             or <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-copy.html">
+    #             or <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-copy.html">
     #                 copy an existing parameter group</a>,
     #             modify it, and then apply the modified parameter group to your
     #             cluster. For the new cluster parameter group and associated settings
     #             to take effect, you must then reboot the instances in the cluster
     #             without failover. For more information,
-    #             see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-modify.html">
+    #             see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-modify.html">
     #                 Modifying Amazon DocumentDB Cluster Parameter Groups</a>.
     #             </p>
     # @param [Hash, Types::CreateDBClusterParameterGroupMessage] params
@@ -1059,7 +1073,7 @@ module Aws::DocDB
     #            <p>Valid values: 0-15</p>
     # @option params [Boolean] :enable_performance_insights
     #   <p>A value that indicates whether to enable Performance Insights for the DB Instance. For
-    #               more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html">Using Amazon
+    #               more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html">Using Amazon
     #                   Performance Insights</a>.</p>
     # @option params [String] :performance_insights_kms_key_id
     #   <p>The KMS key identifier for encryption of Performance Insights
@@ -1072,10 +1086,10 @@ module Aws::DocDB
     #               default KMS key for each Amazon Web Services region.</p>
     # @option params [String] :ca_certificate_identifier
     #   <p>The CA certificate identifier to use for the DB instance's server certificate.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS 
-    #               Certificates</a> and 
-    #               <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html">
-    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS
+    #               Certificates</a> and
+    #               <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html">
+    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer
     #                       Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1137,7 +1151,8 @@ module Aws::DocDB
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -1240,7 +1255,8 @@ module Aws::DocDB
     #           subnet_status: "String"
     #         }
     #       ],
-    #       db_subnet_group_arn: "String"
+    #       db_subnet_group_arn: "String",
+    #       supported_network_types: ["String"]
     #     }
     #   }
     # @return [Types::CreateDBSubnetGroupResult]
@@ -1335,9 +1351,11 @@ module Aws::DocDB
       request.send_request(options)
     end
 
-    # <p>Creates an Amazon DocumentDB global cluster that can span multiple multiple Amazon Web Services Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p>
+    # <p>Creates an Amazon DocumentDB global cluster that can span multiple multiple Amazon Web Services Regions.
+    #             The global cluster contains one primary cluster with read-write capability, and up-to 10 read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p>
     #          <p></p>
-    #          <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p>
+    #          <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it.
+    #             Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p>
     #          <note>
     #             <p>This action only applies to Amazon DocumentDB clusters.</p>
     #          </note>
@@ -1385,7 +1403,20 @@ module Aws::DocDB
     #         {
     #           db_cluster_arn: "String",
     #           readers: ["String"],
-    #           is_writer: false
+    #           is_writer: false,
+    #           synchronization_status: "connected" # One of: ["connected", "pending-resync"]
+    #         }
+    #       ],
+    #       failover_state: {
+    #         status: "pending" # One of: ["pending", "failing-over", "cancelling"],
+    #         from_db_cluster_arn: "String",
+    #         to_db_cluster_arn: "String",
+    #         is_data_loss_allowed: false
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
     #         }
     #       ]
     #     }
@@ -1492,6 +1523,7 @@ module Aws::DocDB
     #       cluster_create_time: Time.now,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       deletion_protection: false,
+    #       io_optimized_next_allowed_modification_time: Time.now,
     #       storage_type: "String",
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
@@ -1501,7 +1533,9 @@ module Aws::DocDB
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
-    #       }
+    #       },
+    #       network_type: "String",
+    #       copy_tags_to_snapshot: false
     #     }
     #   }
     # @return [Types::DeleteDBClusterResult]
@@ -1639,7 +1673,8 @@ module Aws::DocDB
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -1788,7 +1823,20 @@ module Aws::DocDB
     #         {
     #           db_cluster_arn: "String",
     #           readers: ["String"],
-    #           is_writer: false
+    #           is_writer: false,
+    #           synchronization_status: "connected" # One of: ["connected", "pending-resync"]
+    #         }
+    #       ],
+    #       failover_state: {
+    #         status: "pending" # One of: ["pending", "failing-over", "cancelling"],
+    #         from_db_cluster_arn: "String",
+    #         to_db_cluster_arn: "String",
+    #         is_data_loss_allowed: false
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
     #         }
     #       ]
     #     }
@@ -2230,6 +2278,7 @@ module Aws::DocDB
     #         cluster_create_time: Time.now,
     #         enabled_cloudwatch_logs_exports: ["String"],
     #         deletion_protection: false,
+    #         io_optimized_next_allowed_modification_time: Time.now,
     #         storage_type: "String",
     #         serverless_v2_scaling_configuration: {
     #           min_capacity: 1.0,
@@ -2239,7 +2288,9 @@ module Aws::DocDB
     #           secret_arn: "String",
     #           secret_status: "String",
     #           kms_key_id: "String"
-    #         }
+    #         },
+    #         network_type: "String",
+    #         copy_tags_to_snapshot: false
     #       }
     #     ]
     #   }
@@ -2428,7 +2479,8 @@ module Aws::DocDB
     #               subnet_status: "String"
     #             }
     #           ],
-    #           db_subnet_group_arn: "String"
+    #           db_subnet_group_arn: "String",
+    #           supported_network_types: ["String"]
     #         },
     #         preferred_maintenance_window: "String",
     #         pending_modified_values: {
@@ -2536,7 +2588,8 @@ module Aws::DocDB
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       }
     #     ]
     #   }
@@ -2843,7 +2896,20 @@ module Aws::DocDB
     #           {
     #             db_cluster_arn: "String",
     #             readers: ["String"],
-    #             is_writer: false
+    #             is_writer: false,
+    #             synchronization_status: "connected" # One of: ["connected", "pending-resync"]
+    #           }
+    #         ],
+    #         failover_state: {
+    #           status: "pending" # One of: ["pending", "failing-over", "cancelling"],
+    #           from_db_cluster_arn: "String",
+    #           to_db_cluster_arn: "String",
+    #           is_data_loss_allowed: false
+    #         },
+    #         tag_list: [
+    #           {
+    #             key: "String",
+    #             value: "String"
     #           }
     #         ]
     #       }
@@ -3076,6 +3142,7 @@ module Aws::DocDB
     #       cluster_create_time: Time.now,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       deletion_protection: false,
+    #       io_optimized_next_allowed_modification_time: Time.now,
     #       storage_type: "String",
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
@@ -3085,7 +3152,9 @@ module Aws::DocDB
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
-    #       }
+    #       },
+    #       network_type: "String",
+    #       copy_tags_to_snapshot: false
     #     }
     #   }
     # @return [Types::FailoverDBClusterResult]
@@ -3095,13 +3164,13 @@ module Aws::DocDB
     end
 
     # <p>Promotes the specified secondary DB cluster to be the primary DB cluster in the global cluster when failing over a global cluster occurs.</p>
-    #          <p>Use this operation to respond to an unplanned event, such as a regional disaster in the primary region. 
-    #             Failing over can result in a loss of write transaction data that wasn't replicated to the chosen secondary before the failover event occurred. 
+    #          <p>Use this operation to respond to an unplanned event, such as a regional disaster in the primary region.
+    #             Failing over can result in a loss of write transaction data that wasn't replicated to the chosen secondary before the failover event occurred.
     #             However, the recovery process that promotes a DB instance on the chosen seconday DB cluster to be the primary writer DB instance guarantees that the data is in a transactionally consistent state.</p>
     # @param [Hash, Types::FailoverGlobalClusterMessage] params
     # @option params [String] :global_cluster_identifier
-    #   <p>The identifier of the Amazon DocumentDB global cluster to apply this operation. 
-    #               The identifier is the unique key assigned by the user when the cluster is created. 
+    #   <p>The identifier of the Amazon DocumentDB global cluster to apply this operation.
+    #               The identifier is the unique key assigned by the user when the cluster is created.
     #               In other words, it's the name of the global cluster.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -3115,7 +3184,7 @@ module Aws::DocDB
     #            <p>Pattern: <code>[A-Za-z][0-9A-Za-z-:._]*</code>
     #            </p>
     # @option params [String] :target_db_cluster_identifier
-    #   <p>The identifier of the secondary Amazon DocumentDB cluster that you want to promote to the primary for the global cluster. 
+    #   <p>The identifier of the secondary Amazon DocumentDB cluster that you want to promote to the primary for the global cluster.
     #               Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -3171,7 +3240,20 @@ module Aws::DocDB
     #         {
     #           db_cluster_arn: "String",
     #           readers: ["String"],
-    #           is_writer: false
+    #           is_writer: false,
+    #           synchronization_status: "connected" # One of: ["connected", "pending-resync"]
+    #         }
+    #       ],
+    #       failover_state: {
+    #         status: "pending" # One of: ["pending", "failing-over", "cancelling"],
+    #         from_db_cluster_arn: "String",
+    #         to_db_cluster_arn: "String",
+    #         is_data_loss_allowed: false
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
     #         }
     #       ]
     #     }
@@ -3329,9 +3411,40 @@ module Aws::DocDB
     #            </p>
     # @option params [Boolean] :allow_major_version_upgrade
     #   <p>A value that indicates whether major version upgrades are allowed.</p>
-    #            <p>Constraints: You must allow major version upgrades when specifying a value for the
-    #                <code>EngineVersion</code> parameter that is a different major version than the DB
-    #                cluster's current version.</p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the cluster's current version.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Since some parameters are version specific, changing them requires executing a new <code>ModifyDBCluster</code> API call after the in-place MVU completes.</p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>Performing an MVU directly impacts the following parameters:</p>
+    #               <ul>
+    #                  <li>
+    #                     <p>
+    #                        <code>MasterUserPassword</code>
+    #                     </p>
+    #                  </li>
+    #                  <li>
+    #                     <p>
+    #                        <code>NewDBClusterIdentifier</code>
+    #                     </p>
+    #                  </li>
+    #                  <li>
+    #                     <p>
+    #                        <code>VpcSecurityGroupIds</code>
+    #                     </p>
+    #                  </li>
+    #                  <li>
+    #                     <p>
+    #                        <code>Port</code>
+    #                     </p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     # @option params [Boolean] :deletion_protection
     #   <p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is
     #               enabled, the cluster cannot be deleted unless it is modified and
@@ -3339,7 +3452,7 @@ module Aws::DocDB
     #               protects clusters from being accidentally deleted.</p>
     # @option params [String] :storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
@@ -3349,33 +3462,42 @@ module Aws::DocDB
     #   <p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>
     # @option params [Boolean] :manage_master_user_password
     #   <p>Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.
-    #               If the cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn on this management. 
+    #               If the cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn on this management.
     #               In this case, you can't specify <code>MasterUserPassword</code>.
-    #               If the cluster already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>. 
+    #               If the cluster already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>.
     #               In this case, Amazon DocumentDB deletes the secret and uses the new password for the master user specified by <code>MasterUserPassword</code>.</p>
     # @option params [String] :master_user_secret_kms_key_id
     #   <p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.</p>
     #            <p>This setting is valid only if both of the following conditions are met:</p>
     #            <ul>
     #               <li>
-    #                  <p>The cluster doesn't manage the master user password in Amazon Web Services Secrets Manager. 
+    #                  <p>The cluster doesn't manage the master user password in Amazon Web Services Secrets Manager.
     #                   If the cluster already manages the master user password in Amazon Web Services Secrets Manager, you can't change the KMS key that is used to encrypt the secret.</p>
     #               </li>
     #               <li>
-    #                  <p>You are enabling <code>ManageMasterUserPassword</code> to manage the master user password in Amazon Web Services Secrets Manager. 
-    #                   If you are turning on <code>ManageMasterUserPassword</code> and don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. 
+    #                  <p>You are enabling <code>ManageMasterUserPassword</code> to manage the master user password in Amazon Web Services Secrets Manager.
+    #                   If you are turning on <code>ManageMasterUserPassword</code> and don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret.
     #                   If the secret is in a different Amazon Web Services account, then you can't use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p>
     #               </li>
     #            </ul>
-    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. 
+    #            <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
     #               To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>
-    #            <p>There is a default KMS key for your Amazon Web Services account. 
+    #            <p>There is a default KMS key for your Amazon Web Services account.
     #               Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>
     # @option params [Boolean] :rotate_master_user_password
     #   <p>Specifies whether to rotate the secret managed by Amazon Web Services Secrets Manager for the master user password.</p>
-    #            <p>This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the cluster. 
+    #            <p>This setting is valid only if the master user password is managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the cluster.
     #               The secret value contains the updated password.</p>
     #            <p>Constraint: You must apply the change immediately when rotating the master user password.</p>
+    # @option params [String] :network_type
+    #   <p>The network type of the cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     db_cluster_identifier: "String", # required
@@ -3402,7 +3524,9 @@ module Aws::DocDB
     #     },
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     rotate_master_user_password: false
+    #     rotate_master_user_password: false,
+    #     network_type: "String",
+    #     copy_tags_to_snapshot: false
     #   }
     #   options = {}
     #   response = client.modify_db_cluster(params, options)
@@ -3459,6 +3583,7 @@ module Aws::DocDB
     #       cluster_create_time: Time.now,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       deletion_protection: false,
+    #       io_optimized_next_allowed_modification_time: Time.now,
     #       storage_type: "String",
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
@@ -3468,7 +3593,9 @@ module Aws::DocDB
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
-    #       }
+    #       },
+    #       network_type: "String",
+    #       copy_tags_to_snapshot: false
     #     }
     #   }
     # @return [Types::ModifyDBClusterResult]
@@ -3484,7 +3611,7 @@ module Aws::DocDB
     #          <note>
     #             <p>Changes to dynamic parameters are applied immediately. Changes to static
     #                 parameters require a reboot or maintenance window
-    #                 
+    #
     #                 before the change can take effect.</p>
     #          </note>
     #          <important>
@@ -3642,7 +3769,7 @@ module Aws::DocDB
     #            <p>Valid values: 0-15</p>
     # @option params [Boolean] :enable_performance_insights
     #   <p>A value that indicates whether to enable Performance Insights for the DB Instance. For
-    #               more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html">Using Amazon
+    #               more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html">Using Amazon
     #                   Performance Insights</a>.</p>
     # @option params [String] :performance_insights_kms_key_id
     #   <p>The KMS key identifier for encryption of Performance Insights
@@ -3654,17 +3781,17 @@ module Aws::DocDB
     #               Amazon Web Services account. Your Amazon Web Services account has a different
     #               default KMS key for each Amazon Web Services region.</p>
     # @option params [Boolean] :certificate_rotation_restart
-    #   <p>Specifies whether the DB instance is restarted when you rotate your 
+    #   <p>Specifies whether the DB instance is restarted when you rotate your
     #               SSL/TLS certificate.</p>
-    #            <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate 
+    #            <p>By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate
     #               is not updated until the DB instance is restarted.</p>
     #            <important>
     #               <p>Set this parameter only if you are <i>not</i> using SSL/TLS to connect to the DB instance.</p>
     #            </important>
-    #            <p>If you are using SSL/TLS to connect to the DB instance, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS 
-    #               Certificates</a> and 
-    #               <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html">
-    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer 
+    #            <p>If you are using SSL/TLS to connect to the DB instance, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html">Updating Your Amazon DocumentDB TLS
+    #               Certificates</a> and
+    #               <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html">
+    #                   Encrypting Data in Transit</a> in the <i>Amazon DocumentDB Developer
     #                       Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3720,7 +3847,8 @@ module Aws::DocDB
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -3813,7 +3941,8 @@ module Aws::DocDB
     #           subnet_status: "String"
     #         }
     #       ],
-    #       db_subnet_group_arn: "String"
+    #       db_subnet_group_arn: "String",
+    #       supported_network_types: ["String"]
     #     }
     #   }
     # @return [Types::ModifyDBSubnetGroupResult]
@@ -3921,7 +4050,20 @@ module Aws::DocDB
     #         {
     #           db_cluster_arn: "String",
     #           readers: ["String"],
-    #           is_writer: false
+    #           is_writer: false,
+    #           synchronization_status: "connected" # One of: ["connected", "pending-resync"]
+    #         }
+    #       ],
+    #       failover_state: {
+    #         status: "pending" # One of: ["pending", "failing-over", "cancelling"],
+    #         from_db_cluster_arn: "String",
+    #         to_db_cluster_arn: "String",
+    #         is_data_loss_allowed: false
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
     #         }
     #       ]
     #     }
@@ -3996,7 +4138,8 @@ module Aws::DocDB
     #             subnet_status: "String"
     #           }
     #         ],
-    #         db_subnet_group_arn: "String"
+    #         db_subnet_group_arn: "String",
+    #         supported_network_types: ["String"]
     #       },
     #       preferred_maintenance_window: "String",
     #       pending_modified_values: {
@@ -4086,7 +4229,20 @@ module Aws::DocDB
     #         {
     #           db_cluster_arn: "String",
     #           readers: ["String"],
-    #           is_writer: false
+    #           is_writer: false,
+    #           synchronization_status: "connected" # One of: ["connected", "pending-resync"]
+    #         }
+    #       ],
+    #       failover_state: {
+    #         status: "pending" # One of: ["pending", "failing-over", "cancelling"],
+    #         from_db_cluster_arn: "String",
+    #         to_db_cluster_arn: "String",
+    #         is_data_loss_allowed: false
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
     #         }
     #       ]
     #     }
@@ -4297,12 +4453,21 @@ module Aws::DocDB
     #   <p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>
     # @option params [String] :storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
     #            <p>Default value is <code>standard </code>
     #            </p>
+    # @option params [String] :network_type
+    #   <p>The network type of the cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     availability_zones: ["String"],
@@ -4327,7 +4492,9 @@ module Aws::DocDB
     #       min_capacity: 1.0,
     #       max_capacity: 1.0
     #     },
-    #     storage_type: "String"
+    #     storage_type: "String",
+    #     network_type: "String",
+    #     copy_tags_to_snapshot: false
     #   }
     #   options = {}
     #   response = client.restore_db_cluster_from_snapshot(params, options)
@@ -4384,6 +4551,7 @@ module Aws::DocDB
     #       cluster_create_time: Time.now,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       deletion_protection: false,
+    #       io_optimized_next_allowed_modification_time: Time.now,
     #       storage_type: "String",
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
@@ -4393,7 +4561,9 @@ module Aws::DocDB
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
-    #       }
+    #       },
+    #       network_type: "String",
+    #       copy_tags_to_snapshot: false
     #     }
     #   }
     # @return [Types::RestoreDBClusterFromSnapshotResult]
@@ -4512,12 +4682,21 @@ module Aws::DocDB
     #   <p>Contains the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>
     # @option params [String] :storage_type
     #   <p>The storage type to associate with the DB cluster.</p>
-    #            <p>For information on storage types for Amazon DocumentDB clusters, see 
+    #            <p>For information on storage types for Amazon DocumentDB clusters, see
     #               Cluster storage configurations in the <i>Amazon DocumentDB Developer Guide</i>.</p>
     #            <p>Valid values for storage type - <code>standard | iopt1</code>
     #            </p>
     #            <p>Default value is <code>standard </code>
     #            </p>
+    # @option params [String] :network_type
+    #   <p>The network type of the cluster.</p>
+    #            <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the cluster.
+    #               A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html">DocumentDB clusters in a VPC</a> in the Amazon DocumentDB Developer Guide.</p>
+    #            <p>Valid Values: <code>IPV4</code> | <code>DUAL</code>
+    #            </p>
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   <p>Specifies whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     db_cluster_identifier: "String", # required
@@ -4541,7 +4720,9 @@ module Aws::DocDB
     #       min_capacity: 1.0,
     #       max_capacity: 1.0
     #     },
-    #     storage_type: "String"
+    #     storage_type: "String",
+    #     network_type: "String",
+    #     copy_tags_to_snapshot: false
     #   }
     #   options = {}
     #   response = client.restore_db_cluster_to_point_in_time(params, options)
@@ -4598,6 +4779,7 @@ module Aws::DocDB
     #       cluster_create_time: Time.now,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       deletion_protection: false,
+    #       io_optimized_next_allowed_modification_time: Time.now,
     #       storage_type: "String",
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
@@ -4607,7 +4789,9 @@ module Aws::DocDB
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
-    #       }
+    #       },
+    #       network_type: "String",
+    #       copy_tags_to_snapshot: false
     #     }
     #   }
     # @return [Types::RestoreDBClusterToPointInTimeResult]
@@ -4617,7 +4801,7 @@ module Aws::DocDB
     end
 
     # <p>Restarts the stopped cluster that is specified by <code>DBClusterIdentifier</code>.
-    #             For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and
+    #             For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/db-cluster-stop-start.html">Stopping and
     #                 Starting an Amazon DocumentDB Cluster</a>.</p>
     # @param [Hash, Types::StartDBClusterMessage] params
     # @option params [String] :db_cluster_identifier
@@ -4683,6 +4867,7 @@ module Aws::DocDB
     #       cluster_create_time: Time.now,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       deletion_protection: false,
+    #       io_optimized_next_allowed_modification_time: Time.now,
     #       storage_type: "String",
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
@@ -4692,7 +4877,9 @@ module Aws::DocDB
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
-    #       }
+    #       },
+    #       network_type: "String",
+    #       copy_tags_to_snapshot: false
     #     }
     #   }
     # @return [Types::StartDBClusterResult]
@@ -4703,7 +4890,7 @@ module Aws::DocDB
 
     # <p>Stops the running cluster that is specified by <code>DBClusterIdentifier</code>. The
     #             cluster must be in the <i>available</i> state. For more information, see
-    #                 <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and
+    #                 <a href="https://docs.aws.amazon.com/documentdb/latest/devguide/db-cluster-stop-start.html">Stopping and
     #                 Starting an Amazon DocumentDB Cluster</a>.</p>
     # @param [Hash, Types::StopDBClusterMessage] params
     # @option params [String] :db_cluster_identifier
@@ -4769,6 +4956,7 @@ module Aws::DocDB
     #       cluster_create_time: Time.now,
     #       enabled_cloudwatch_logs_exports: ["String"],
     #       deletion_protection: false,
+    #       io_optimized_next_allowed_modification_time: Time.now,
     #       storage_type: "String",
     #       serverless_v2_scaling_configuration: {
     #         min_capacity: 1.0,
@@ -4778,7 +4966,9 @@ module Aws::DocDB
     #         secret_arn: "String",
     #         secret_status: "String",
     #         kms_key_id: "String"
-    #       }
+    #       },
+    #       network_type: "String",
+    #       copy_tags_to_snapshot: false
     #     }
     #   }
     # @return [Types::StopDBClusterResult]
@@ -4790,8 +4980,8 @@ module Aws::DocDB
     # <p>Switches over the specified secondary Amazon DocumentDB cluster to be the new primary Amazon DocumentDB cluster in the global database cluster.</p>
     # @param [Hash, Types::SwitchoverGlobalClusterMessage] params
     # @option params [String] :global_cluster_identifier
-    #   <p>The identifier of the Amazon DocumentDB global database cluster to switch over. 
-    #           The identifier is the unique key assigned by the user when the cluster is created. 
+    #   <p>The identifier of the Amazon DocumentDB global database cluster to switch over.
+    #           The identifier is the unique key assigned by the user when the cluster is created.
     #           In other words, it's the name of the global cluster.
     #           This parameter isn’t case-sensitive.</p>
     #            <p>Constraints:</p>
@@ -4806,7 +4996,7 @@ module Aws::DocDB
     #            <p>Pattern: <code>[A-Za-z][0-9A-Za-z-:._]*</code>
     #            </p>
     # @option params [String] :target_db_cluster_identifier
-    #   <p>The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster. 
+    #   <p>The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster.
     #               Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -4843,7 +5033,20 @@ module Aws::DocDB
     #         {
     #           db_cluster_arn: "String",
     #           readers: ["String"],
-    #           is_writer: false
+    #           is_writer: false,
+    #           synchronization_status: "connected" # One of: ["connected", "pending-resync"]
+    #         }
+    #       ],
+    #       failover_state: {
+    #         status: "pending" # One of: ["pending", "failing-over", "cancelling"],
+    #         from_db_cluster_arn: "String",
+    #         to_db_cluster_arn: "String",
+    #         is_data_loss_allowed: false
+    #       },
+    #       tag_list: [
+    #         {
+    #           key: "String",
+    #           value: "String"
     #         }
     #       ]
     #     }

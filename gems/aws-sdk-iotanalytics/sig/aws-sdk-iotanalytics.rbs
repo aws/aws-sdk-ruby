@@ -1,5 +1,0 @@
-  module Aws
-    module IoTAnalytics
-      VERSION: String
-    end
-  end

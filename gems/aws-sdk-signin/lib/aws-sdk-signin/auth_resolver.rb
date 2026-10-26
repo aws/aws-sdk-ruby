@@ -12,6 +12,12 @@ module Aws::Signin
       case parameters.operation_name
       when :create_o_auth2_token
         options << Smithy::Client::AuthOption.new(scheme_id: 'smithy.api#noAuth')
+      when :create_o_auth2_token_with_iam
+        options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
+      when :introspect_o_auth2_token_with_iam
+        options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
+      when :revoke_o_auth2_token_with_iam
+        options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
       else
         options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4')
       end

@@ -71,6 +71,7 @@ module Aws::WorkSpaces
     ClientDeviceType: EnumShape
     ClientDeviceTypeList: ListShape
     ClientEmail: StringShape
+    ClientExperiencePolicy: StringShape
     ClientLocale: StringShape
     ClientLoginMessage: StringShape
     ClientProperties: StructureShape
@@ -236,6 +237,7 @@ module Aws::WorkSpaces
     DisassociateWorkspaceApplicationResult: StructureShape
     DisconnectTimeoutInSeconds: IntegerShape
     DnsIpAddresses: ListShape
+    DnsIpv6Addresses: ListShape
     DomainName: StringShape
     Ec2ImageId: StringShape
     Ec2ImportTaskId: StringShape
@@ -303,6 +305,7 @@ module Aws::WorkSpaces
     IpRuleDesc: StringShape
     IpRuleItem: StructureShape
     IpRuleList: ListShape
+    Ipv6Address: StringShape
     Limit: IntegerShape
     Limit50: IntegerShape
     LinkId: StringShape
@@ -361,6 +364,7 @@ module Aws::WorkSpaces
     PaginationToken: StringShape
     PendingCreateStandbyWorkspacesRequest: StructureShape
     PendingCreateStandbyWorkspacesRequestList: ListShape
+    Percentage: IntegerShape
     Platform: EnumShape
     PoolsRunningMode: EnumShape
     Protocol: EnumShape
@@ -489,6 +493,7 @@ module Aws::WorkSpaces
     WorkSpaceApplicationState: EnumShape
     WorkSpaceAssociatedResourceType: EnumShape
     WorkSpaceAssociatedResourceTypeList: ListShape
+    WorkflowStateMessage: StringShape
     Workspace: StructureShape
     WorkspaceAccessProperties: StructureShape
     WorkspaceBundle: StructureShape

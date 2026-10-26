@@ -16,22 +16,31 @@ module Aws::STS
     DecodeAuthorizationMessageRequest: StructureShape
     DecodeAuthorizationMessageResponse: StructureShape
     ExpiredTokenException: StructureShape
+    ExpiredTradeInTokenException: StructureShape
     FederatedUser: StructureShape
     GetAccessKeyInfoRequest: StructureShape
     GetAccessKeyInfoResponse: StructureShape
     GetCallerIdentityRequest: StructureShape
     GetCallerIdentityResponse: StructureShape
+    GetDelegatedAccessTokenRequest: StructureShape
+    GetDelegatedAccessTokenResponse: StructureShape
     GetFederationTokenRequest: StructureShape
     GetFederationTokenResponse: StructureShape
     GetSessionTokenRequest: StructureShape
     GetSessionTokenResponse: StructureShape
+    GetWebIdentityTokenRequest: StructureShape
+    GetWebIdentityTokenResponse: StructureShape
     IDPCommunicationErrorException: StructureShape
     IDPRejectedClaimException: StructureShape
     InvalidAuthorizationMessageException: StructureShape
     InvalidIdentityTokenException: StructureShape
     Issuer: StringShape
+    JWTPayloadSizeExceededException: StructureShape
+    JWTPayloadSizeExceededException2: StringShape
     MalformedPolicyDocumentException: StructureShape
     NameQualifier: StringShape
+    OutboundWebIdentityFederationDisabledException: StructureShape
+    OutboundWebIdentityFederationDisabledException2: StringShape
     PackedPolicyTooLargeException: StructureShape
     PolicyDescriptorType: StructureShape
     ProvidedContext: StructureShape
@@ -39,6 +48,8 @@ module Aws::STS
     RegionDisabledException: StructureShape
     RootDurationSecondsType: IntegerShape
     SAMLAssertionType: StringShape
+    SessionDurationEscalationException: StructureShape
+    SessionDurationEscalationException2: StringShape
     Subject: StringShape
     SubjectType: StringShape
     Tag: StructureShape
@@ -55,13 +66,16 @@ module Aws::STS
     DurationSecondsType: IntegerShape
     EncodedMessageType: StringShape
     ExpiredIdentityTokenMessage: StringShape
+    ExpiredTradeInTokenExceptionMessage: StringShape
     ExternalIdType: StringShape
     FederatedIdType: StringShape
     IdpCommunicationErrorMessage: StringShape
     IdpRejectedClaimMessage: StringShape
     InvalidAuthorizationMessage: StringShape
     InvalidIdentityTokenMessage: StringShape
+    JwtAlgorithmType: StringShape
     MalformedPolicyDocumentMessage: StringShape
+    MinimumSessionTokenSizeType: IntegerShape
     NonNegativeIntegerType: IntegerShape
     PackedPolicyTooLargeMessage: StringShape
     PolicyDescriptorListType: ListShape
@@ -70,6 +84,8 @@ module Aws::STS
     RoleSessionNameType: StringShape
     SerialNumberType: StringShape
     SessionPolicyDocumentType: StringShape
+    SessionTokenSizeType: IntegerShape
+    SessionTokenUtilizationType: IntegerShape
     SourceIdentityType: StringShape
     TagKeyListType: ListShape
     TagKeyType: StringShape
@@ -77,11 +93,16 @@ module Aws::STS
     TagValueType: StringShape
     TokenCodeType: StringShape
     TokenType: StringShape
+    TradeInTokenType: StringShape
     UnrestrictedSessionPolicyDocumentType: StringShape
     UrlType: StringShape
     UserIdType: StringShape
     UserNameType: StringShape
     WebIdentitySubjectType: StringShape
+    WebIdentityTokenAudienceListType: ListShape
+    WebIdentityTokenAudienceStringType: StringShape
+    WebIdentityTokenDurationSecondsType: IntegerShape
+    WebIdentityTokenType: StringShape
 
     AWSSecurityTokenServiceV20110615: ServiceShape
   end

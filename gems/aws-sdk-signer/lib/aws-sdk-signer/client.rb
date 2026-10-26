@@ -144,18 +144,18 @@ module Aws::Signer
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -216,9 +216,9 @@ module Aws::Signer
     # @option params [String] :profile_version
     #   <p>The version of the signing profile.</p>
     # @option params [String] :action
-    #   <p>For cross-account signing. Grant a designated account permission to perform one or more of the following actions. Each action is associated with a specific API's operations. For more information about cross-account signing, see <a href="https://docs.aws.amazon.com/signer/latest/developerguide/signing-profile-cross-account.html">Using cross-account signing with signing profiles</a> in the <i>AWS Signer Developer Guide</i>.</p>
-    #   		       <p>You can designate the following actions to an account.</p>
-    #   		       <ul>
+    #   <p>For cross-account signing. Grant a designated account permission to perform one or more of the following actions. Each action is associated with a specific API's operations. For more information about cross-account signing, see <a href="http://docs.aws.amazon.com/signer/latest/developerguide/signing-profile-cross-account.html">Using cross-account signing with signing profiles</a> in the <i>AWS Signer Developer Guide</i>.</p>
+    #            <p>You can designate the following actions to an account.</p>
+    #            <ul>
     #               <li>
     #                  <p>
     #                     <code>signer:StartSigningJob</code>. This action isn't supported for container image workflows. For details, see <a>StartSigningJob</a>.</p>
@@ -268,8 +268,7 @@ module Aws::Signer
 
     # <p>Changes the state of an <code>ACTIVE</code> signing profile to <code>CANCELED</code>.
     # 			A canceled profile is still viewable with the <code>ListSigningProfiles</code>
-    # 			operation, but it cannot perform new signing jobs, and is deleted two years after
-    # 			cancelation.</p>
+    # 				operation, but it cannot perform new signing jobs. See <a href="https://docs.aws.amazon.com/signer/latest/developerguide/retention.html">Data Retention</a> for more information on scheduled deletion of a canceled signing profile.</p>
     # @param [Hash, Types::CancelSigningProfileRequest] params
     # @option params [String] :profile_name
     #   <p>The name of the signing profile to be canceled.</p>
@@ -367,27 +366,26 @@ module Aws::Signer
     #   <p>The ARN of a signing job.</p>
     # @option params [Array<String>] :certificate_hashes
     #   <p>A list of composite signed hashes that identify certificates.</p>
-    #   		       <p>A certificate identifier consists of a subject certificate TBS hash (signed by the
+    #            <p>A certificate identifier consists of a subject certificate TBS hash (signed by the
     #   			parent CA) combined with a parent CA TBS hash (signed by the parent CA’s CA). Root
     #   			certificates are defined as their own CA.</p>
-    #   		       <p>The following example shows how to calculate a hash for this parameter using OpenSSL
+    #            <p>The following example shows how to calculate a hash for this parameter using OpenSSL
     #   			commands: </p>
-    #   		
-    #   			      <p>
-    #               <code>openssl asn1parse -in childCert.pem -strparse 4 -out childCert.tbs</code> 
+    #            <p>
+    #               <code>openssl asn1parse -in childCert.pem -strparse 4 -out childCert.tbs</code>
     #            </p>
-    #   			      <p>
-    #               <code>openssl sha384 < childCert.tbs -binary > childCertTbsHash</code> 
+    #            <p>
+    #               <code>openssl sha384 < childCert.tbs -binary > childCertTbsHash</code>
     #            </p>
-    #   			      <p>
-    #               <code>openssl asn1parse -in parentCert.pem -strparse 4 -out parentCert.tbs</code> 
+    #            <p>
+    #               <code>openssl asn1parse -in parentCert.pem -strparse 4 -out parentCert.tbs</code>
     #            </p>
-    #   			      <p>
+    #            <p>
     #               <code>openssl sha384 < parentCert.tbs -binary > parentCertTbsHash xxd -p
     #   				childCertTbsHash > certificateHash.hex xxd -p parentCertTbsHash >>
     #   				certificateHash.hex</code>
     #            </p>
-    #   			      <p>
+    #            <p>
     #               <code>cat certificateHash.hex | tr -d '\n'</code>
     #            </p>
     # @example Request syntax with placeholder values
@@ -882,7 +880,7 @@ module Aws::Signer
       request.send_request(options)
     end
 
-    # <p>Changes the state of a signing job to REVOKED. This indicates that the signature is no
+    # <p>Changes the state of a signing job to <code>REVOKED</code>. This indicates that the signature is no
     # 			longer valid.</p>
     # @param [Hash, Types::RevokeSignatureRequest] params
     # @option params [String] :job_id
@@ -908,9 +906,11 @@ module Aws::Signer
       request.send_request(options)
     end
 
-    # <p>Changes the state of a signing profile to REVOKED. This indicates that signatures
+    # <p>Changes the state of a signing profile to <code>REVOKED</code>. This indicates that signatures
     # 			generated using the signing profile after an effective start date are no longer
-    # 			valid.</p>
+    # 			valid. A revoked profile is still viewable with the <code>ListSigningProfiles</code>
+    # 				operation, but it cannot perform new signing jobs. See <a href="https://docs.aws.amazon.com/signer/latest/developerguide/retention.html">Data Retention</a>
+    # 					for more information on scheduled deletion of a revoked signing profile.  </p>
     # @param [Hash, Types::RevokeSigningProfileRequest] params
     # @option params [String] :profile_name
     #   <p>The name of the signing profile to be revoked.</p>
@@ -977,34 +977,33 @@ module Aws::Signer
     end
 
     # <p>Initiates a signing job to be performed on the code provided. Signing jobs are
-    # 			viewable by the <code>ListSigningJobs</code> operation for two years after they are
-    # 			performed. Note the following requirements: </p>
-    # 		       <ul>
+    # 			viewable by the <code>ListSigningJobs</code> operation. Note the following requirements: </p>
+    #          <ul>
     #             <li>
-    # 				           <p> You must create an Amazon S3 source bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html">Creating a Bucket</a> in the
+    #                <p> You must create an Amazon S3 source bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html">Creating a Bucket</a> in the
     # 						<i>Amazon S3 Getting Started Guide</i>. </p>
-    # 			         </li>
+    #             </li>
     #             <li>
-    # 				           <p>Your S3 source bucket must be version enabled.</p>
-    # 			         </li>
+    #                <p>Your S3 source bucket must be version enabled.</p>
+    #             </li>
     #             <li>
-    # 				           <p>You must create an S3 destination bucket. AWS Signer uses your S3 destination bucket to
+    #                <p>You must create an S3 destination bucket. AWS Signer uses your S3 destination bucket to
     # 					write your signed code.</p>
-    # 			         </li>
+    #             </li>
     #             <li>
-    # 				           <p>You specify the name of the source and destination buckets when calling the
+    #                <p>You specify the name of the source and destination buckets when calling the
     # 						<code>StartSigningJob</code> operation.</p>
-    # 			         </li>
+    #             </li>
     #             <li>
-    # 				           <p>You must ensure the S3 buckets are from the same Region as the signing profile. Cross-Region signing isn't supported.</p>
-    # 			         </li>
+    #                <p>You must ensure the S3 buckets are from the same Region as the signing profile. Cross-Region signing isn't supported.</p>
+    #             </li>
     #             <li>
-    # 				           <p>You must also specify a request token that identifies your request to Signer.</p>
-    # 			         </li>
+    #                <p>You must also specify a request token that identifies your request to Signer.</p>
+    #             </li>
     #          </ul>
-    # 		       <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call
+    #          <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call
     # 			<code>StartSigningJob</code>.</p>
-    # 		       <p>For a Java example that shows how to use this action, see <a href="https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html">StartSigningJob</a>.</p>
+    #          <p>For a Java example that shows how to use this action, see <a href="https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html">StartSigningJob</a>.</p>
     # @param [Hash, Types::StartSigningJobRequest] params
     # @option params [Types::Source] :source
     #   <p>The S3 bucket that contains the object to sign or a BLOB that contains your raw

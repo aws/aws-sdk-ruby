@@ -57,6 +57,7 @@ module Aws::LicenseManagerUserSubscriptions
           active_directory_settings: {
             domain_name: String,
             domain_ipv4_list: Array[String],
+            domain_ipv6_list: Array[String],
             domain_credentials_provider: {
               secrets_manager_credentials_provider: {
                 secret_id: untyped
@@ -116,6 +117,7 @@ module Aws::LicenseManagerUserSubscriptions
           active_directory_settings: {
             domain_name: String,
             domain_ipv4_list: Array[String],
+            domain_ipv6_list: Array[String],
             domain_credentials_provider: {
               secrets_manager_credentials_provider: {
                 secret_id: untyped
@@ -146,6 +148,7 @@ module Aws::LicenseManagerUserSubscriptions
           active_directory_settings: {
             domain_name: String,
             domain_ipv4_list: Array[String],
+            domain_ipv6_list: Array[String],
             domain_credentials_provider: {
               secrets_manager_credentials_provider: {
                 secret_id: untyped
@@ -227,6 +230,7 @@ module Aws::LicenseManagerUserSubscriptions
           active_directory_settings: {
             domain_name: String,
             domain_ipv4_list: Array[String],
+            domain_ipv6_list: Array[String],
             domain_credentials_provider: {
               secrets_manager_credentials_provider: {
                 secret_id: untyped
@@ -272,6 +276,7 @@ module Aws::LicenseManagerUserSubscriptions
           active_directory_settings: {
             domain_name: String,
             domain_ipv4_list: Array[String],
+            domain_ipv6_list: Array[String],
             domain_credentials_provider: {
               secrets_manager_credentials_provider: {
                 secret_id: untyped
@@ -307,6 +312,7 @@ module Aws::LicenseManagerUserSubscriptions
           active_directory_settings: {
             domain_name: String,
             domain_ipv4_list: Array[String],
+            domain_ipv6_list: Array[String],
             domain_credentials_provider: {
               secrets_manager_credentials_provider: {
                 secret_id: untyped
@@ -340,6 +346,7 @@ module Aws::LicenseManagerUserSubscriptions
           active_directory_settings: {
             domain_name: String,
             domain_ipv4_list: Array[String],
+            domain_ipv6_list: Array[String],
             domain_credentials_provider: {
               secrets_manager_credentials_provider: {
                 secret_id: untyped
@@ -370,6 +377,7 @@ module Aws::LicenseManagerUserSubscriptions
           active_directory_settings: {
             domain_name: String,
             domain_ipv4_list: Array[String],
+            domain_ipv6_list: Array[String],
             domain_credentials_provider: {
               secrets_manager_credentials_provider: {
                 secret_id: untyped
@@ -415,6 +423,7 @@ module Aws::LicenseManagerUserSubscriptions
           active_directory_settings: {
             domain_name: String,
             domain_ipv4_list: Array[String],
+            domain_ipv6_list: Array[String],
             domain_credentials_provider: {
               secrets_manager_credentials_provider: {
                 secret_id: untyped

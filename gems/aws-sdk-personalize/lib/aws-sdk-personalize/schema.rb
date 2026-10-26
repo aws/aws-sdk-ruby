@@ -91,7 +91,7 @@ module Aws::Personalize
     DatasetSchema = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.personalize#DatasetSchema", name: "DatasetSchema")
     DatasetSchemaSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.personalize#DatasetSchemaSummary", name: "DatasetSchemaSummary")
     DatasetSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.personalize#DatasetSummary", name: "DatasetSummary")
-    DatasetType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.personalize#DatasetType", name: "DatasetType", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    DatasetType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.personalize#DatasetType", name: "DatasetType", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z_]+$"})
     DatasetUpdateSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.personalize#DatasetUpdateSummary", name: "DatasetUpdateSummary")
     Datasets = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.personalize#Datasets", name: "Datasets", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     Date = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.personalize#Date", name: "Date")
@@ -181,6 +181,7 @@ module Aws::Personalize
     HyperParameterRanges = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.personalize#HyperParameterRanges", name: "HyperParameterRanges")
     HyperParameters = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.personalize#HyperParameters", name: "HyperParameters", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ImportMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.personalize#ImportMode", name: "ImportMode")
+    IncludedDatasetColumns = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.personalize#IncludedDatasetColumns", name: "IncludedDatasetColumns", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
     IngestionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.personalize#IngestionMode", name: "IngestionMode")
     Integer = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.personalize#Integer", name: "Integer")
     IntegerHyperParameterRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.personalize#IntegerHyperParameterRange", name: "IntegerHyperParameterRange")
@@ -251,6 +252,10 @@ module Aws::Personalize
     PerformAutoML = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.personalize#PerformAutoML", name: "PerformAutoML", traits: {"smithy.api#default" => false})
     PerformAutoTraining = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.personalize#PerformAutoTraining", name: "PerformAutoTraining")
     PerformHPO = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.personalize#PerformHPO", name: "PerformHPO", traits: {"smithy.api#default" => false})
+    PerformIncrementalUpdate = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.personalize#PerformIncrementalUpdate", name: "PerformIncrementalUpdate")
+    RankingInfluence = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.personalize#RankingInfluence", name: "RankingInfluence")
+    RankingInfluenceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.personalize#RankingInfluenceType", name: "RankingInfluenceType")
+    RankingInfluenceWeight = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.personalize#RankingInfluenceWeight", name: "RankingInfluenceWeight", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 1}})
     Recipe = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.personalize#Recipe", name: "Recipe")
     RecipeProvider = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.personalize#RecipeProvider", name: "RecipeProvider")
     RecipeSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.personalize#RecipeSummary", name: "RecipeSummary")
@@ -356,6 +361,7 @@ module Aws::Personalize
     BatchInferenceJob.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     BatchInferenceJob.type = Types::BatchInferenceJob
     BatchInferenceJobConfig.add_member(:item_exploration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HyperParameters, name: "itemExplorationConfig"))
+    BatchInferenceJobConfig.add_member(:ranking_influence, ::Smithy::Schema::Shapes::MemberShape.new(target: RankingInfluence, name: "rankingInfluence"))
     BatchInferenceJobConfig.type = Types::BatchInferenceJobConfig
     BatchInferenceJobInput.add_member(:s3_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataConfig, name: "s3DataSource", traits: {"smithy.api#required" => {}}))
     BatchInferenceJobInput.type = Types::BatchInferenceJobInput
@@ -413,6 +419,7 @@ module Aws::Personalize
     CampaignConfig.add_member(:item_exploration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HyperParameters, name: "itemExplorationConfig"))
     CampaignConfig.add_member(:enable_metadata_with_recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enableMetadataWithRecommendations"))
     CampaignConfig.add_member(:sync_with_latest_solution_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "syncWithLatestSolutionVersion"))
+    CampaignConfig.add_member(:ranking_influence, ::Smithy::Schema::Shapes::MemberShape.new(target: RankingInfluence, name: "rankingInfluence"))
     CampaignConfig.type = Types::CampaignConfig
     CampaignSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     CampaignSummary.add_member(:campaign_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "campaignArn"))
@@ -503,7 +510,7 @@ module Aws::Personalize
     CreateDatasetImportJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "jobName", traits: {"smithy.api#required" => {}}))
     CreateDatasetImportJobRequest.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetArn", traits: {"smithy.api#required" => {}}))
     CreateDatasetImportJobRequest.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSource, name: "dataSource", traits: {"smithy.api#required" => {}}))
-    CreateDatasetImportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
+    CreateDatasetImportJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "roleArn"))
     CreateDatasetImportJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "tags"))
     CreateDatasetImportJobRequest.add_member(:import_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportMode, name: "importMode"))
     CreateDatasetImportJobRequest.add_member(:publish_attribution_metrics_to_s3, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "publishAttributionMetricsToS3"))
@@ -557,6 +564,7 @@ module Aws::Personalize
     CreateSolutionRequest.add_member(:perform_hpo, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "performHPO"))
     CreateSolutionRequest.add_member(:perform_auto_ml, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformAutoML, name: "performAutoML", traits: {"smithy.api#default" => false}))
     CreateSolutionRequest.add_member(:perform_auto_training, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformAutoTraining, name: "performAutoTraining"))
+    CreateSolutionRequest.add_member(:perform_incremental_update, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformIncrementalUpdate, name: "performIncrementalUpdate"))
     CreateSolutionRequest.add_member(:recipe_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "recipeArn"))
     CreateSolutionRequest.add_member(:dataset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetGroupArn", traits: {"smithy.api#required" => {}}))
     CreateSolutionRequest.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "eventType"))
@@ -886,6 +894,8 @@ module Aws::Personalize
     HyperParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
     ImportMode.add_member(:full, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL", traits: {"smithy.api#enumValue" => "FULL"}))
     ImportMode.add_member(:incremental, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCREMENTAL", traits: {"smithy.api#enumValue" => "INCREMENTAL"}))
+    IncludedDatasetColumns.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, name: "key"))
+    IncludedDatasetColumns.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNamesList, name: "value"))
     IngestionMode.add_member(:bulk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BULK", traits: {"smithy.api#enumValue" => "BULK"}))
     IngestionMode.add_member(:put, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUT", traits: {"smithy.api#enumValue" => "PUT"}))
     IngestionMode.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
@@ -1057,6 +1067,10 @@ module Aws::Personalize
     OptimizationObjective.add_member(:item_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ItemAttribute, name: "itemAttribute"))
     OptimizationObjective.add_member(:objective_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveSensitivity, name: "objectiveSensitivity"))
     OptimizationObjective.type = Types::OptimizationObjective
+    RankingInfluence.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RankingInfluenceType, name: "key"))
+    RankingInfluence.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RankingInfluenceWeight, name: "value"))
+    RankingInfluenceType.add_member(:popularity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POPULARITY", traits: {"smithy.api#enumValue" => "POPULARITY"}))
+    RankingInfluenceType.add_member(:freshness, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FRESHNESS", traits: {"smithy.api#enumValue" => "FRESHNESS"}))
     Recipe.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name"))
     Recipe.add_member(:recipe_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "recipeArn"))
     Recipe.add_member(:algorithm_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "algorithmArn"))
@@ -1126,6 +1140,7 @@ module Aws::Personalize
     Solution.add_member(:perform_hpo, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformHPO, name: "performHPO", traits: {"smithy.api#default" => false}))
     Solution.add_member(:perform_auto_ml, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformAutoML, name: "performAutoML", traits: {"smithy.api#default" => false}))
     Solution.add_member(:perform_auto_training, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformAutoTraining, name: "performAutoTraining"))
+    Solution.add_member(:perform_incremental_update, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformIncrementalUpdate, name: "performIncrementalUpdate"))
     Solution.add_member(:recipe_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "recipeArn"))
     Solution.add_member(:dataset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetGroupArn"))
     Solution.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "eventType"))
@@ -1160,6 +1175,7 @@ module Aws::Personalize
     SolutionUpdateSummary.add_member(:solution_update_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionUpdateConfig, name: "solutionUpdateConfig"))
     SolutionUpdateSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "status"))
     SolutionUpdateSummary.add_member(:perform_auto_training, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformAutoTraining, name: "performAutoTraining"))
+    SolutionUpdateSummary.add_member(:perform_incremental_update, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformIncrementalUpdate, name: "performIncrementalUpdate"))
     SolutionUpdateSummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "creationDateTime"))
     SolutionUpdateSummary.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastUpdatedDateTime"))
     SolutionUpdateSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "failureReason"))
@@ -1169,6 +1185,7 @@ module Aws::Personalize
     SolutionVersion.add_member(:solution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionArn"))
     SolutionVersion.add_member(:perform_hpo, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformHPO, name: "performHPO", traits: {"smithy.api#default" => false}))
     SolutionVersion.add_member(:perform_auto_ml, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformAutoML, name: "performAutoML", traits: {"smithy.api#default" => false}))
+    SolutionVersion.add_member(:perform_incremental_update, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformIncrementalUpdate, name: "performIncrementalUpdate"))
     SolutionVersion.add_member(:recipe_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "recipeArn"))
     SolutionVersion.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EventType, name: "eventType"))
     SolutionVersion.add_member(:dataset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datasetGroupArn"))
@@ -1218,6 +1235,7 @@ module Aws::Personalize
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
     TrainingDataConfig.add_member(:excluded_dataset_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludedDatasetColumns, name: "excludedDatasetColumns"))
+    TrainingDataConfig.add_member(:included_dataset_columns, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedDatasetColumns, name: "includedDatasetColumns"))
     TrainingDataConfig.type = Types::TrainingDataConfig
     TrainingMode.add_member(:full, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL", traits: {"smithy.api#enumValue" => "FULL"}))
     TrainingMode.add_member(:update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE", traits: {"smithy.api#enumValue" => "UPDATE"}))
@@ -1256,6 +1274,7 @@ module Aws::Personalize
     UpdateRecommenderResponse.type = Types::UpdateRecommenderResponse
     UpdateSolutionRequest.add_member(:solution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionArn", traits: {"smithy.api#required" => {}}))
     UpdateSolutionRequest.add_member(:perform_auto_training, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformAutoTraining, name: "performAutoTraining"))
+    UpdateSolutionRequest.add_member(:perform_incremental_update, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformIncrementalUpdate, name: "performIncrementalUpdate"))
     UpdateSolutionRequest.add_member(:solution_update_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionUpdateConfig, name: "solutionUpdateConfig"))
     UpdateSolutionRequest.type = Types::UpdateSolutionRequest
     UpdateSolutionResponse.add_member(:solution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "solutionArn"))
@@ -1265,7 +1284,7 @@ module Aws::Personalize
       service.id = "com.amazonaws.personalize#AmazonPersonalize"
       service.name = "AmazonPersonalize"
       service.version = "2018-05-22"
-      service.traits = {"aws.api#service" => {"sdkId" => "Personalize", "arnNamespace" => "personalize", "cloudFormationName" => "Personalize", "cloudTrailEventSource" => "personalize.amazonaws.com", "endpointPrefix" => "personalize"}, "aws.auth#sigv4" => {"name" => "personalize"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Personalize"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Personalize", "arnNamespace" => "personalize", "cloudFormationName" => "Personalize", "cloudTrailEventSource" => "personalize.amazonaws.com", "endpointPrefix" => "personalize"}, "aws.auth#sigv4" => {"name" => "personalize"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Personalize", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://personalize-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://personalize-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://personalize.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://personalize.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_batch_inference_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.personalize#CreateBatchInferenceJob"
         operation.name = "CreateBatchInferenceJob"

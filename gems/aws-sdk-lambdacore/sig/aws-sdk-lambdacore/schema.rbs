@@ -1,0 +1,59 @@
+module Aws::LambdaCore
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AssociatedComputeResourceTypesList: ListShape
+    ClientTokenString: StringShape
+    ComputeResourceType: EnumShape
+    CoreTimestamp: TimestampShape
+    CreateNetworkConnectorRequest: StructureShape
+    CreateNetworkConnectorResponse: StructureShape
+    DeleteNetworkConnectorRequest: StructureShape
+    DeleteNetworkConnectorResponse: StructureShape
+    GetNetworkConnectorRequest: StructureShape
+    GetNetworkConnectorResponse: StructureShape
+    InvalidParameterValueException: StructureShape
+    ListNetworkConnectorVersionsRequest: StructureShape
+    ListNetworkConnectorVersionsResponse: StructureShape
+    ListNetworkConnectorsRequest: StructureShape
+    ListNetworkConnectorsResponse: StructureShape
+    MaxHundredListItems: IntegerShape
+    NetworkConnectorArn: StringShape
+    NetworkConnectorConfiguration: UnionShape
+    NetworkConnectorId: StringShape
+    NetworkConnectorIdentifier: StringShape
+    NetworkConnectorLastUpdateStatus: EnumShape
+    NetworkConnectorLastUpdateStatusReason: StringShape
+    NetworkConnectorLastUpdateStatusReasonCode: EnumShape
+    NetworkConnectorLimitExceededException: StructureShape
+    NetworkConnectorName: StringShape
+    NetworkConnectorRoleArn: StringShape
+    NetworkConnectorSecurityGroupId: StringShape
+    NetworkConnectorSecurityGroupIds: ListShape
+    NetworkConnectorState: EnumShape
+    NetworkConnectorStateReasonCode: EnumShape
+    NetworkConnectorSubnetId: StringShape
+    NetworkConnectorSubnetIds: ListShape
+    NetworkConnectorSummary: StructureShape
+    NetworkConnectorTagKey: StringShape
+    NetworkConnectorTagValue: StringShape
+    NetworkConnectorTags: MapShape
+    NetworkConnectorType: EnumShape
+    NetworkConnectorVersion: IntegerShape
+    NetworkConnectorVersionSummary: StructureShape
+    NetworkConnectorVersionsList: ListShape
+    NetworkConnectorVpcEgressConfiguration: StructureShape
+    NetworkConnectorsList: ListShape
+    NetworkProtocol: EnumShape
+    ResourceConflictException: StructureShape
+    ResourceNotFoundException: StructureShape
+    ServiceException: StructureShape
+    String: StringShape
+    ThrottleReason: EnumShape
+    TooManyRequestsException: StructureShape
+    UpdateNetworkConnectorRequest: StructureShape
+    UpdateNetworkConnectorResponse: StructureShape
+
+    LambdaCoreApiService: ServiceShape
+  end
+end

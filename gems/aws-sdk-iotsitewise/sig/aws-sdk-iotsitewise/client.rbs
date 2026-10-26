@@ -64,6 +64,29 @@ module Aws::IoTSiteWise
       ?client_token: String
     ) -> _AssociateTimeSeriesToAssetPropertyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateTimeSeriesToAssetPropertyResponse
 
+    interface _BatchAssociateDataSegmentsToDatasetResponse
+      include Smithy::Client::_Response[Types::BatchAssociateDataSegmentsToDatasetResponse]
+      def dataset_id: () -> String?
+      def dataset_version: () -> String?
+      def failed_associations: () -> Array[Types::FailedDataSegmentAssociation]?
+    end
+    def batch_associate_data_segments_to_dataset: (
+      ?dataset_id: String,
+      ?workspace_name: String,
+      ?associate_data_segment_entries: Array[
+        {
+          source_dataset_id: String,
+          time_series_id: String,
+          start_timestamp: {
+            time_in_seconds: Integer,
+            offset_in_nanos: Integer
+          },
+          end_timestamp: untyped
+        }
+      ],
+      ?client_token: String
+    ) -> _BatchAssociateDataSegmentsToDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateDataSegmentsToDatasetResponse
+
     interface _BatchAssociateProjectAssetsResponse
       include Smithy::Client::_Response[Types::BatchAssociateProjectAssetsResponse]
       def errors: () -> Array[Types::AssetErrorDetails]?
@@ -73,6 +96,51 @@ module Aws::IoTSiteWise
       ?asset_ids: Array[String],
       ?client_token: String
     ) -> _BatchAssociateProjectAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateProjectAssetsResponse
+
+    interface _BatchDeleteDatasetDataSegmentsResponse
+      include Smithy::Client::_Response[Types::BatchDeleteDatasetDataSegmentsResponse]
+      def dataset_id: () -> String?
+      def dataset_version: () -> String?
+      def errors: () -> Array[Types::FailedDataSegmentDeletion]?
+    end
+    def batch_delete_dataset_data_segments: (
+      ?dataset_id: String,
+      ?workspace_name: String,
+      ?delete_data_segment_entries: Array[
+        {
+          time_series_id: String,
+          start_timestamp: {
+            time_in_seconds: Integer,
+            offset_in_nanos: Integer
+          },
+          end_timestamp: untyped
+        }
+      ],
+      ?client_token: String
+    ) -> _BatchDeleteDatasetDataSegmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteDatasetDataSegmentsResponse
+
+    interface _BatchDisassociateDataSegmentsFromDatasetResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateDataSegmentsFromDatasetResponse]
+      def dataset_id: () -> String?
+      def dataset_version: () -> String?
+      def failed_disassociations: () -> Array[Types::FailedDataSegmentDisassociation]?
+    end
+    def batch_disassociate_data_segments_from_dataset: (
+      ?dataset_id: String,
+      ?workspace_name: String,
+      ?disassociate_data_segment_entries: Array[
+        {
+          source_dataset_id: String,
+          time_series_id: String,
+          start_timestamp: {
+            time_in_seconds: Integer,
+            offset_in_nanos: Integer
+          },
+          end_timestamp: untyped
+        }
+      ],
+      ?client_token: String
+    ) -> _BatchDisassociateDataSegmentsFromDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateDataSegmentsFromDatasetResponse
 
     interface _BatchDisassociateProjectAssetsResponse
       include Smithy::Client::_Response[Types::BatchDisassociateProjectAssetsResponse]
@@ -187,6 +255,37 @@ module Aws::IoTSiteWise
       ]
     ) -> _BatchPutAssetPropertyValueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutAssetPropertyValueResponse
 
+    interface _CancelEnrichmentJobResponse
+      include Smithy::Client::_Response[Types::CancelEnrichmentJobResponse]
+      def job_id: () -> String?
+      def status: () -> String?
+    end
+    def cancel_enrichment_job: (
+      ?workspace_name: String,
+      ?job_id: String
+    ) -> _CancelEnrichmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelEnrichmentJobResponse
+
+    interface _CancelPipelineExecutionResponse
+      include Smithy::Client::_Response[Types::CancelPipelineExecutionResponse]
+      def state: () -> String?
+    end
+    def cancel_pipeline_execution: (
+      ?workspace_name: String,
+      ?pipeline_name: String,
+      ?pipeline_execution_id: String,
+      ?reason: String
+    ) -> _CancelPipelineExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelPipelineExecutionResponse
+
+    interface _CancelQueryResponse
+      include Smithy::Client::_Response[Types::CancelQueryResponse]
+      def query_id: () -> String?
+      def status: () -> String?
+    end
+    def cancel_query: (
+      ?workspace_name: String,
+      ?query_id: String
+    ) -> _CancelQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelQueryResponse
+
     interface _CreateAccessPolicyResponse
       include Smithy::Client::_Response[Types::CreateAccessPolicyResponse]
       def access_policy_id: () -> String?
@@ -219,6 +318,23 @@ module Aws::IoTSiteWise
       ?client_token: String,
       ?tags: Hash[String, String]
     ) -> _CreateAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessPolicyResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def dns_subdomain: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def create_application: (
+      ?client_token: String,
+      ?idc_instance_arn: String,
+      ?workspace_name: String,
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
 
     interface _CreateAssetResponse
       include Smithy::Client::_Response[Types::CreateAssetResponse]
@@ -388,6 +504,7 @@ module Aws::IoTSiteWise
       def asset_model_composite_model_id: () -> String?
       def asset_model_composite_model_path: () -> Array[Types::AssetModelCompositeModelPathSegment]?
       def asset_model_status: () -> Types::AssetModelStatus?
+      def asset_model_id: () -> String?
     end
     def create_asset_model_composite_model: (
       ?asset_model_id: String,
@@ -474,7 +591,23 @@ module Aws::IoTSiteWise
         {
           bucket: String,
           key: String,
-          version_id: untyped
+          version_id: untyped,
+          alias: String,
+          start_time: {
+            time_in_seconds: Integer,
+            offset_in_nanos: Integer
+          },
+          file_format: {
+            csv: {
+              column_names: Array[String]
+            },
+            parquet: {
+            },
+            mp4: {
+            },
+            annotation: {
+            }
+          }
         }
       ],
       ?error_report_location: {
@@ -487,11 +620,17 @@ module Aws::IoTSiteWise
             column_names: Array[String]
           },
           parquet: {
+          },
+          mp4: {
+          },
+          annotation: {
           }
         }
       },
       ?adaptive_ingestion: bool,
-      ?delete_files_after_import: bool
+      ?delete_files_after_import: bool,
+      ?dataset_id: String,
+      ?workspace_name: String
     ) -> _CreateBulkImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBulkImportJobResponse
 
     interface _CreateComputationModelResponse
@@ -556,6 +695,18 @@ module Aws::IoTSiteWise
       ?dataset_id: String,
       ?dataset_name: String,
       ?dataset_description: String,
+      ?dataset_type: String,
+      ?dataset_config: {
+        session: {
+          session_start_timestamp: {
+            time_in_seconds: Integer,
+            offset_in_nanos: Integer
+          },
+          session_end_timestamp: untyped
+        }
+      },
+      ?workspace_name: String,
+      ?metadata: Hash[String, String],
       ?dataset_source: {
         source_type: String,
         source_format: String,
@@ -569,6 +720,70 @@ module Aws::IoTSiteWise
       ?client_token: String,
       ?tags: Hash[String, String]
     ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreateDatasetExportJobResponse
+      include Smithy::Client::_Response[Types::CreateDatasetExportJobResponse]
+      def job_id: () -> String?
+      def workspace_name: () -> String?
+    end
+    def create_dataset_export_job: (
+      ?workspace_name: String,
+      ?client_token: String,
+      ?destination_s3_uri: String,
+      ?input: {
+        timeseries: Array[
+          {
+            time_series_id: String,
+            property_alias: String,
+            trim_settings: {
+              start_time: {
+                time_in_seconds: Integer,
+                offset_in_nanos: Integer
+              },
+              end_time: untyped
+            },
+            format_settings: {
+              frames_per_second: Integer,
+              width_in_pixels: untyped,
+              height_in_pixels: untyped
+            }
+          }
+        ],
+        dataset: {
+          dataset_id: String,
+          trim_settings: untyped,
+          export_data_types: Array[String]
+        }
+      },
+      ?error_report_location: {
+        s3_uri: String
+      }
+    ) -> _CreateDatasetExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetExportJobResponse
+
+    interface _CreateEnrichmentJobResponse
+      include Smithy::Client::_Response[Types::CreateEnrichmentJobResponse]
+      def job_id: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_enrichment_job: (
+      ?workspace_name: String,
+      ?job_configuration: {
+        event_detection: {
+          dataset_id: String,
+          time_series_id: String,
+          property_alias: String,
+          trim_settings: {
+            start_time: {
+              time_in_seconds: Integer,
+              offset_in_nanos: Integer
+            },
+            end_time: untyped
+          }
+        }
+      },
+      ?client_token: String
+    ) -> _CreateEnrichmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnrichmentJobResponse
 
     interface _CreateGatewayResponse
       include Smithy::Client::_Response[Types::CreateGatewayResponse]
@@ -592,6 +807,30 @@ module Aws::IoTSiteWise
       ?gateway_version: String,
       ?tags: Hash[String, String]
     ) -> _CreateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayResponse
+
+    interface _CreatePipelineResponse
+      include Smithy::Client::_Response[Types::CreatePipelineResponse]
+      def pipeline_name: () -> String?
+      def pipeline_arn: () -> String?
+      def version: () -> String?
+      def status: () -> Types::ResourceStatus?
+    end
+    def create_pipeline: (
+      ?workspace_name: String,
+      ?pipeline_name: String,
+      ?description: String,
+      ?environment_variables: Hash[String, String],
+      ?computations: Array[
+        {
+          compute_node_name: String,
+          task_name: untyped,
+          environment_variables: Hash[String, String],
+          depends_on: Array[String]
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePipelineResponse
 
     interface _CreatePortalResponse
       include Smithy::Client::_Response[Types::CreatePortalResponse]
@@ -639,6 +878,66 @@ module Aws::IoTSiteWise
       ?tags: Hash[String, String]
     ) -> _CreateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectResponse
 
+    interface _CreateTaskResponse
+      include Smithy::Client::_Response[Types::CreateTaskResponse]
+      def task_name: () -> String?
+      def task_arn: () -> String?
+      def version: () -> String?
+      def status: () -> Types::ResourceStatus?
+    end
+    def create_task: (
+      ?workspace_name: String,
+      ?task_name: String,
+      ?description: String,
+      ?task_configuration: {
+        container_task_configuration: {
+          ecr_uri: String,
+          task_execution_role: String,
+          processing_type: String,
+          processing_unit: String,
+          ephemeral_storage_configuration: {
+            storage_class: String,
+            storage_size_in_gi_b: Integer
+          },
+          command: Array[String],
+          timeout_seconds: Integer,
+          environment_variables: Hash[String, String],
+          mounts: Array[
+            {
+              name: String,
+              relative_path: String,
+              source: {
+                s3_access_point: {
+                  access_point_arn: String,
+                  prefix: String
+                }
+              },
+              storage_type: String
+            }
+          ]
+        }
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTaskResponse
+
+    interface _CreateWorkspaceResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceResponse]
+      def workspace_name: () -> String?
+      def workspace_arn: () -> String?
+      def workspace_status: () -> Types::WorkspaceStatus?
+    end
+    def create_workspace: (
+      ?workspace_name: String,
+      ?workspace_description: String,
+      ?encryption_configuration: {
+        encryption_type: String,
+        kms_key_id: String
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceResponse
+
     interface _DeleteAccessPolicyResponse
       include Smithy::Client::_Response[Types::DeleteAccessPolicyResponse]
     end
@@ -647,8 +946,17 @@ module Aws::IoTSiteWise
       ?client_token: String
     ) -> _DeleteAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessPolicyResponse
 
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationResponse]
+    end
+    def delete_application: (
+      ?workspace_name: String,
+      ?id: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
     interface _DeleteAssetResponse
       include Smithy::Client::_Response[Types::DeleteAssetResponse]
+      def asset_id: () -> String?
       def asset_status: () -> Types::AssetStatus?
     end
     def delete_asset: (
@@ -658,6 +966,7 @@ module Aws::IoTSiteWise
 
     interface _DeleteAssetModelResponse
       include Smithy::Client::_Response[Types::DeleteAssetModelResponse]
+      def asset_model_id: () -> String?
       def asset_model_status: () -> Types::AssetModelStatus?
     end
     def delete_asset_model: (
@@ -671,6 +980,7 @@ module Aws::IoTSiteWise
     interface _DeleteAssetModelCompositeModelResponse
       include Smithy::Client::_Response[Types::DeleteAssetModelCompositeModelResponse]
       def asset_model_status: () -> Types::AssetModelStatus?
+      def asset_model_id: () -> String?
     end
     def delete_asset_model_composite_model: (
       ?asset_model_id: String,
@@ -717,6 +1027,7 @@ module Aws::IoTSiteWise
     end
     def delete_dataset: (
       ?dataset_id: String,
+      ?workspace_name: String,
       ?client_token: String
     ) -> _DeleteDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetResponse
 
@@ -726,6 +1037,15 @@ module Aws::IoTSiteWise
     def delete_gateway: (
       ?gateway_id: String
     ) -> _DeleteGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayResponse
+
+    interface _DeletePipelineResponse
+      include Smithy::Client::_Response[Types::DeletePipelineResponse]
+      def status: () -> Types::ResourceStatus?
+    end
+    def delete_pipeline: (
+      ?workspace_name: String,
+      ?pipeline_name: String
+    ) -> _DeletePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePipelineResponse
 
     interface _DeletePortalResponse
       include Smithy::Client::_Response[Types::DeletePortalResponse]
@@ -744,6 +1064,15 @@ module Aws::IoTSiteWise
       ?client_token: String
     ) -> _DeleteProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectResponse
 
+    interface _DeleteTaskResponse
+      include Smithy::Client::_Response[Types::DeleteTaskResponse]
+      def status: () -> Types::ResourceStatus?
+    end
+    def delete_task: (
+      ?workspace_name: String,
+      ?task_name: String
+    ) -> _DeleteTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTaskResponse
+
     interface _DeleteTimeSeriesResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -751,8 +1080,18 @@ module Aws::IoTSiteWise
       ?alias: String,
       ?asset_id: String,
       ?property_id: String,
-      ?client_token: String
+      ?client_token: String,
+      ?workspace_name: String
     ) -> _DeleteTimeSeriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTimeSeriesResponse
+
+    interface _DeleteWorkspaceResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceResponse]
+      def workspace_status: () -> Types::WorkspaceStatus?
+    end
+    def delete_workspace: (
+      ?workspace_name: String,
+      ?client_token: String
+    ) -> _DeleteWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceResponse
 
     interface _DescribeAccessPolicyResponse
       include Smithy::Client::_Response[Types::DescribeAccessPolicyResponse]
@@ -780,6 +1119,24 @@ module Aws::IoTSiteWise
     def describe_action: (
       ?action_id: String
     ) -> _DescribeActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeActionResponse
+
+    interface _DescribeApplicationResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def dns_subdomain: () -> String?
+      def description: () -> String?
+      def id: () -> String?
+      def idc_application_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+      def workspace_name: () -> String?
+    end
+    def describe_application: (
+      ?workspace_name: String,
+      ?id: String
+    ) -> _DescribeApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationResponse
 
     interface _DescribeAssetResponse
       include Smithy::Client::_Response[Types::DescribeAssetResponse]
@@ -904,9 +1261,12 @@ module Aws::IoTSiteWise
       def job_last_update_date: () -> Time?
       def adaptive_ingestion: () -> bool?
       def delete_files_after_import: () -> bool?
+      def dataset_id: () -> String?
+      def workspace_name: () -> String?
     end
     def describe_bulk_import_job: (
-      ?job_id: String
+      ?job_id: String,
+      ?workspace_name: String
     ) -> _DescribeBulkImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBulkImportJobResponse
 
     interface _DescribeComputationModelResponse
@@ -961,15 +1321,38 @@ module Aws::IoTSiteWise
       def dataset_arn: () -> String?
       def dataset_name: () -> String?
       def dataset_description: () -> String?
+      def dataset_type: () -> String?
+      def dataset_config: () -> Types::DatasetConfig?
+      def workspace_name: () -> String?
+      def metadata: () -> Hash[String, String]?
       def dataset_source: () -> Types::DatasetSource?
       def dataset_status: () -> Types::DatasetStatus?
       def dataset_creation_date: () -> Time?
       def dataset_last_update_date: () -> Time?
       def dataset_version: () -> String?
+      def enrichment_status: () -> Types::DatasetEnrichment?
     end
     def describe_dataset: (
-      ?dataset_id: String
+      ?dataset_id: String,
+      ?workspace_name: String,
+      ?dataset_version: String
     ) -> _DescribeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetResponse
+
+    interface _DescribeDatasetExportJobResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetExportJobResponse]
+      def job_id: () -> String?
+      def workspace_name: () -> String?
+      def status: () -> String?
+      def started_at: () -> Time?
+      def completed_at: () -> Time?
+      def destination_s3_uri: () -> String?
+      def error_report_location: () -> Types::ExportErrorReportLocation?
+      def input: () -> Types::ProcessingInput?
+    end
+    def describe_dataset_export_job: (
+      ?workspace_name: String,
+      ?job_id: String
+    ) -> _DescribeDatasetExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetExportJobResponse
 
     interface _DescribeDefaultEncryptionConfigurationResponse
       include Smithy::Client::_Response[Types::DescribeDefaultEncryptionConfigurationResponse]
@@ -978,6 +1361,24 @@ module Aws::IoTSiteWise
       def configuration_status: () -> Types::ConfigurationStatus?
     end
     def describe_default_encryption_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDefaultEncryptionConfigurationResponse
+
+    interface _DescribeEnrichmentJobResponse
+      include Smithy::Client::_Response[Types::DescribeEnrichmentJobResponse]
+      def job_id: () -> String?
+      def status: () -> String?
+      def workspace_name: () -> String?
+      def job_type: () -> String?
+      def job_configuration: () -> Types::EnrichmentJobConfiguration?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def completed_at: () -> Time?
+      def cancelled_at: () -> Time?
+      def failure_message: () -> String?
+    end
+    def describe_enrichment_job: (
+      ?workspace_name: String,
+      ?job_id: String
+    ) -> _DescribeEnrichmentJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEnrichmentJobResponse
 
     interface _DescribeExecutionResponse
       include Smithy::Client::_Response[Types::DescribeExecutionResponse]
@@ -1028,7 +1429,51 @@ module Aws::IoTSiteWise
       include Smithy::Client::_Response[Types::DescribeLoggingOptionsResponse]
       def logging_options: () -> Types::LoggingOptions?
     end
-    def describe_logging_options: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoggingOptionsResponse
+    def describe_logging_options: (
+      ?workspace_name: String
+    ) -> _DescribeLoggingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoggingOptionsResponse
+
+    interface _DescribePipelineResponse
+      include Smithy::Client::_Response[Types::DescribePipelineResponse]
+      def pipeline_name: () -> String?
+      def workspace_name: () -> String?
+      def description: () -> String?
+      def pipeline_arn: () -> String?
+      def version: () -> String?
+      def environment_variables: () -> Hash[String, String]?
+      def computations: () -> Array[Types::ComputeNode]?
+      def status: () -> Types::ResourceStatus?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def describe_pipeline: (
+      ?workspace_name: String,
+      ?pipeline_name: String,
+      ?pipeline_version: String
+    ) -> _DescribePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePipelineResponse
+
+    interface _DescribePipelineExecutionResponse
+      include Smithy::Client::_Response[Types::DescribePipelineExecutionResponse]
+      def pipeline_execution_id: () -> String?
+      def pipeline_name: () -> String?
+      def workspace_name: () -> String?
+      def pipeline_version: () -> String?
+      def status: () -> Types::PipelineExecutionStatus?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def request_environment_variables: () -> Types::ExecutionEnvironmentVariables?
+      def request_mount_overrides: () -> Types::MountOverrides?
+      def execution_priority: () -> Integer?
+      def compute_node_execution_details: () -> Array[Types::ComputeNodeExecutionDetails]?
+      def next_token: () -> String?
+    end
+    def describe_pipeline_execution: (
+      ?workspace_name: String,
+      ?pipeline_name: String,
+      ?pipeline_execution_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribePipelineExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePipelineExecutionResponse
 
     interface _DescribePortalResponse
       include Smithy::Client::_Response[Types::DescribePortalResponse]
@@ -1068,6 +1513,36 @@ module Aws::IoTSiteWise
       ?project_id: String
     ) -> _DescribeProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProjectResponse
 
+    interface _DescribeQueryResponse
+      include Smithy::Client::_Response[Types::DescribeQueryResponse]
+      def query_id: () -> String?
+      def status: () -> String?
+      def submitted_at: () -> Time?
+      def completed_at: () -> Time?
+      def statistics: () -> Types::QueryStatistics?
+      def error_message: () -> String?
+    end
+    def describe_query: (
+      ?workspace_name: String,
+      ?query_id: String
+    ) -> _DescribeQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQueryResponse
+
+    interface _DescribeSearchResponse
+      include Smithy::Client::_Response[Types::DescribeSearchResponse]
+      def search_id: () -> String?
+      def workspace_name: () -> String?
+      def status: () -> String?
+      def query_statement: () -> String?
+      def search_type: () -> String?
+      def status_reason: () -> String?
+      def started_at: () -> Time?
+      def group_id: () -> String?
+    end
+    def describe_search: (
+      ?workspace_name: String,
+      ?search_id: String
+    ) -> _DescribeSearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSearchResponse
+
     interface _DescribeStorageConfigurationResponse
       include Smithy::Client::_Response[Types::DescribeStorageConfigurationResponse]
       def storage_type: () -> String?
@@ -1082,6 +1557,24 @@ module Aws::IoTSiteWise
     end
     def describe_storage_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStorageConfigurationResponse
 
+    interface _DescribeTaskResponse
+      include Smithy::Client::_Response[Types::DescribeTaskResponse]
+      def workspace_name: () -> String?
+      def task_name: () -> String?
+      def description: () -> String?
+      def task_arn: () -> String?
+      def version: () -> String?
+      def task_configuration: () -> Types::TaskConfiguration?
+      def status: () -> Types::ResourceStatus?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def describe_task: (
+      ?workspace_name: String,
+      ?task_name: String,
+      ?task_version: String
+    ) -> _DescribeTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTaskResponse
+
     interface _DescribeTimeSeriesResponse
       include Smithy::Client::_Response[Types::DescribeTimeSeriesResponse]
       def asset_id: () -> String?
@@ -1093,12 +1586,28 @@ module Aws::IoTSiteWise
       def time_series_creation_date: () -> Time?
       def time_series_last_update_date: () -> Time?
       def time_series_arn: () -> String?
+      def workspace_name: () -> String?
     end
     def describe_time_series: (
       ?alias: String,
       ?asset_id: String,
-      ?property_id: String
+      ?property_id: String,
+      ?workspace_name: String
     ) -> _DescribeTimeSeriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTimeSeriesResponse
+
+    interface _DescribeWorkspaceResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceResponse]
+      def workspace_arn: () -> String?
+      def workspace_name: () -> String?
+      def workspace_description: () -> String?
+      def workspace_status: () -> Types::WorkspaceStatus?
+      def encryption_configuration: () -> Types::WorkspaceEncryptionConfigurationInfo?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def describe_workspace: (
+      ?workspace_name: String
+    ) -> _DescribeWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceResponse
 
     interface _DisassociateAssetsResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1198,6 +1707,34 @@ module Aws::IoTSiteWise
       ?max_results: Integer
     ) -> _GetAssetPropertyValueHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetPropertyValueHistoryResponse
 
+    interface _GetCaptureDataResponse
+      include Smithy::Client::_Response[Types::GetCaptureDataResponse]
+      def data: () -> String?
+      def start_time: () -> Types::TimeInNanos?
+      def end_time: () -> Types::TimeInNanos?
+      def data_type: () -> String?
+      def next_token: () -> String?
+    end
+    def get_capture_data: (
+      ?workspace_name: String,
+      ?start_time: {
+        time_in_seconds: Integer,
+        offset_in_nanos: Integer
+      },
+      ?end_time: {
+        time_in_seconds: Integer,
+        offset_in_nanos: Integer
+      },
+      ?time_series_id: String,
+      ?property_alias: String,
+      ?format_settings: {
+        frames_per_second: Integer,
+        width_in_pixels: untyped,
+        height_in_pixels: untyped
+      },
+      ?next_token: String
+    ) -> _GetCaptureDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCaptureDataResponse
+
     interface _GetInterpolatedAssetPropertyValuesResponse
       include Smithy::Client::_Response[Types::GetInterpolatedAssetPropertyValuesResponse]
       def interpolated_asset_property_values: () -> Array[Types::InterpolatedAssetPropertyValue]?
@@ -1218,6 +1755,31 @@ module Aws::IoTSiteWise
       ?type: String,
       ?interval_window_in_seconds: Integer
     ) -> _GetInterpolatedAssetPropertyValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInterpolatedAssetPropertyValuesResponse
+
+    interface _GetQueryResultsResponse
+      include Smithy::Client::_Response[Types::GetQueryResultsResponse]
+      def column_info: () -> Array[Types::ColumnInformation]?
+      def rows: () -> Array[Array[String?]]?
+      def next_token: () -> String?
+    end
+    def get_query_results: (
+      ?workspace_name: String,
+      ?query_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetQueryResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryResultsResponse
+
+    interface _GetSearchResultsResponse
+      include Smithy::Client::_Response[Types::GetSearchResultsResponse]
+      def search_results: () -> Array[Types::SearchResult]?
+      def next_token: () -> String?
+    end
+    def get_search_results: (
+      ?search_id: String,
+      ?workspace_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetSearchResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSearchResultsResponse
 
     interface _InvokeAssistantResponse
       include Smithy::Client::_Response[Types::InvokeAssistantResponse]
@@ -1258,6 +1820,16 @@ module Aws::IoTSiteWise
       ?resolve_to_resource_type: String,
       ?resolve_to_resource_id: String
     ) -> _ListActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActionsResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsResponse]
+      def next_token: () -> String?
+      def applications: () -> Array[Types::ApplicationSummary]?
+    end
+    def list_applications: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
 
     interface _ListAssetModelCompositeModelsResponse
       include Smithy::Client::_Response[Types::ListAssetModelCompositeModelsResponse]
@@ -1353,7 +1925,8 @@ module Aws::IoTSiteWise
     def list_bulk_import_jobs: (
       ?next_token: String,
       ?max_results: Integer,
-      ?filter: String
+      ?filter: String,
+      ?workspace_name: String
     ) -> _ListBulkImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBulkImportJobsResponse
 
     interface _ListCompositionRelationshipsResponse
@@ -1426,16 +1999,74 @@ module Aws::IoTSiteWise
       ?max_results: Integer
     ) -> _ListDashboardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDashboardsResponse
 
+    interface _ListDatasetDataSegmentRelationshipsResponse
+      include Smithy::Client::_Response[Types::ListDatasetDataSegmentRelationshipsResponse]
+      def data_segment_relationship_summaries: () -> Array[Types::DataSegmentRelationshipSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_data_segment_relationships: (
+      ?dataset_id: String,
+      ?workspace_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDatasetDataSegmentRelationshipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetDataSegmentRelationshipsResponse
+
+    interface _ListDatasetDataSegmentsResponse
+      include Smithy::Client::_Response[Types::ListDatasetDataSegmentsResponse]
+      def data_segments: () -> Array[Types::DataSegmentSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_data_segments: (
+      ?dataset_id: String,
+      ?workspace_name: String,
+      ?dataset_version: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDatasetDataSegmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetDataSegmentsResponse
+
+    interface _ListDatasetExportJobsResponse
+      include Smithy::Client::_Response[Types::ListDatasetExportJobsResponse]
+      def jobs: () -> Array[Types::ExportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_export_jobs: (
+      ?workspace_name: String,
+      ?filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDatasetExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetExportJobsResponse
+
     interface _ListDatasetsResponse
       include Smithy::Client::_Response[Types::ListDatasetsResponse]
       def dataset_summaries: () -> Array[Types::DatasetSummary]?
       def next_token: () -> String?
+      def workspace_name: () -> String?
     end
     def list_datasets: (
       ?source_type: String,
+      ?workspace_name: String,
+      ?dataset_type: String,
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetsResponse
+
+    interface _ListEnrichmentJobsResponse
+      include Smithy::Client::_Response[Types::ListEnrichmentJobsResponse]
+      def jobs: () -> Array[Types::EnrichmentJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_enrichment_jobs: (
+      ?workspace_name: String,
+      ?dataset_id: String,
+      ?property_alias: String,
+      ?time_series_id: String,
+      ?status: String,
+      ?job_type: String,
+      ?start_date: Time,
+      ?end_date: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEnrichmentJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnrichmentJobsResponse
 
     interface _ListExecutionsResponse
       include Smithy::Client::_Response[Types::ListExecutionsResponse]
@@ -1473,6 +2104,34 @@ module Aws::IoTSiteWise
       ?max_results: Integer
     ) -> _ListInterfaceRelationshipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInterfaceRelationshipsResponse
 
+    interface _ListPipelineExecutionsResponse
+      include Smithy::Client::_Response[Types::ListPipelineExecutionsResponse]
+      def pipeline_execution_summaries: () -> Array[Types::PipelineExecutionSummary]?
+      def next_token: () -> String?
+    end
+    def list_pipeline_executions: (
+      ?workspace_name: String,
+      ?pipeline_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?state: String,
+      ?start_time_after: Time,
+      ?start_time_before: Time,
+      ?end_time_after: Time,
+      ?end_time_before: Time
+    ) -> _ListPipelineExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelineExecutionsResponse
+
+    interface _ListPipelinesResponse
+      include Smithy::Client::_Response[Types::ListPipelinesResponse]
+      def pipeline_summaries: () -> Array[Types::PipelineSummary]?
+      def next_token: () -> String?
+    end
+    def list_pipelines: (
+      ?workspace_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPipelinesResponse
+
     interface _ListPortalsResponse
       include Smithy::Client::_Response[Types::ListPortalsResponse]
       def portal_summaries: () -> Array[Types::PortalSummary]?
@@ -1505,6 +2164,36 @@ module Aws::IoTSiteWise
       ?max_results: Integer
     ) -> _ListProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectsResponse
 
+    interface _ListQueriesResponse
+      include Smithy::Client::_Response[Types::ListQueriesResponse]
+      def queries: () -> Array[Types::QuerySummary]?
+      def next_token: () -> String?
+    end
+    def list_queries: (
+      ?workspace_name: String,
+      ?filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueriesResponse
+
+    interface _ListSearchesResponse
+      include Smithy::Client::_Response[Types::ListSearchesResponse]
+      def search_summaries: () -> Array[Types::SearchSummary]?
+      def next_token: () -> String?
+    end
+    def list_searches: (
+      ?workspace_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?list_searches_filters: {
+        status_filter: Array[String],
+        started_after: Time,
+        started_before: untyped,
+        group_id_filter: Array[String],
+        search_type_filter: Array[String]
+      }
+    ) -> _ListSearchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSearchesResponse
+
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
       def tags: () -> Hash[String, String]?
@@ -1513,18 +2202,41 @@ module Aws::IoTSiteWise
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _ListTasksResponse
+      include Smithy::Client::_Response[Types::ListTasksResponse]
+      def task_summaries: () -> Array[Types::TaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_tasks: (
+      ?workspace_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTasksResponse
+
     interface _ListTimeSeriesResponse
       include Smithy::Client::_Response[Types::ListTimeSeriesResponse]
       def time_series_summaries: () -> Array[Types::TimeSeriesSummary]?
       def next_token: () -> String?
+      def workspace_name: () -> String?
     end
     def list_time_series: (
       ?next_token: String,
       ?max_results: Integer,
       ?asset_id: String,
       ?alias_prefix: String,
-      ?time_series_type: String
+      ?time_series_type: String,
+      ?workspace_name: String
     ) -> _ListTimeSeriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTimeSeriesResponse
+
+    interface _ListWorkspacesResponse
+      include Smithy::Client::_Response[Types::ListWorkspacesResponse]
+      def workspace_summaries: () -> Array[Types::WorkspaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_workspaces: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkspacesResponse
 
     interface _PutAssetModelInterfaceRelationshipResponse
       include Smithy::Client::_Response[Types::PutAssetModelInterfaceRelationshipResponse]
@@ -1566,7 +2278,8 @@ module Aws::IoTSiteWise
     def put_logging_options: (
       ?logging_options: {
         level: String
-      }
+      },
+      ?workspace_name: String
     ) -> _PutLoggingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLoggingOptionsResponse
 
     interface _PutStorageConfigurationResponse
@@ -1600,6 +2313,79 @@ module Aws::IoTSiteWise
       },
       ?disallow_ingest_null_na_n: bool
     ) -> _PutStorageConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutStorageConfigurationResponse
+
+    interface _StartPipelineExecutionResponse
+      include Smithy::Client::_Response[Types::StartPipelineExecutionResponse]
+      def pipeline_execution_id: () -> String?
+    end
+    def start_pipeline_execution: (
+      ?workspace_name: String,
+      ?pipeline_name: String,
+      ?execution_environment_variable_overrides: {
+        global: Hash[String, String],
+        compute_nodes: Hash[String,
+          Hash[String, String]
+        ]
+      },
+      ?execution_mount_overrides: {
+        compute_nodes: Hash[String,
+          Array[
+            {
+              name: String,
+              relative_path: String,
+              source: {
+                s3_access_point: {
+                  access_point_arn: String,
+                  prefix: String
+                }
+              },
+              storage_type: String
+            }
+          ]
+        ]
+      },
+      ?execution_priority: Integer,
+      ?client_token: String
+    ) -> _StartPipelineExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPipelineExecutionResponse
+
+    interface _StartQueryResponse
+      include Smithy::Client::_Response[Types::StartQueryResponse]
+      def query_id: () -> String?
+      def status: () -> String?
+    end
+    def start_query: (
+      ?client_token: String,
+      ?workspace_name: String,
+      ?query_statement: String
+    ) -> _StartQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartQueryResponse
+
+    interface _StartSearchResponse
+      include Smithy::Client::_Response[Types::StartSearchResponse]
+      def search_id: () -> String?
+      def workspace_name: () -> String?
+      def status: () -> String?
+      def group_id: () -> String?
+    end
+    def start_search: (
+      ?workspace_name: String,
+      ?query_statement: String,
+      ?client_token: String,
+      ?search_type: String,
+      ?search_filters: {
+        time_series_ids: Array[String],
+        dataset_ids: Array[String],
+        time_intervals: Array[
+          {
+            start_time: {
+              time_in_seconds: Integer,
+              offset_in_nanos: Integer
+            },
+            end_time: untyped
+          }
+        ]
+      },
+      ?group_id: String
+    ) -> _StartSearchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSearchResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
@@ -1650,6 +2436,7 @@ module Aws::IoTSiteWise
 
     interface _UpdateAssetResponse
       include Smithy::Client::_Response[Types::UpdateAssetResponse]
+      def asset_id: () -> String?
       def asset_status: () -> Types::AssetStatus?
     end
     def update_asset: (
@@ -1662,6 +2449,7 @@ module Aws::IoTSiteWise
 
     interface _UpdateAssetModelResponse
       include Smithy::Client::_Response[Types::UpdateAssetModelResponse]
+      def asset_model_id: () -> String?
       def asset_model_status: () -> Types::AssetModelStatus?
     end
     def update_asset_model: (
@@ -1812,6 +2600,7 @@ module Aws::IoTSiteWise
       include Smithy::Client::_Response[Types::UpdateAssetModelCompositeModelResponse]
       def asset_model_composite_model_path: () -> Array[Types::AssetModelCompositeModelPathSegment]?
       def asset_model_status: () -> Types::AssetModelStatus?
+      def asset_model_id: () -> String?
     end
     def update_asset_model_composite_model: (
       ?asset_model_id: String,
@@ -1950,8 +2739,19 @@ module Aws::IoTSiteWise
     end
     def update_dataset: (
       ?dataset_id: String,
+      ?workspace_name: String,
       ?dataset_name: String,
       ?dataset_description: String,
+      ?dataset_config: {
+        session: {
+          session_start_timestamp: {
+            time_in_seconds: Integer,
+            offset_in_nanos: Integer
+          },
+          session_end_timestamp: untyped
+        }
+      },
+      ?metadata: Hash[String, String],
       ?dataset_source: {
         source_type: String,
         source_format: String,
@@ -1983,6 +2783,26 @@ module Aws::IoTSiteWise
       ?capability_namespace: String,
       ?capability_configuration: String
     ) -> _UpdateGatewayCapabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayCapabilityConfigurationResponse
+
+    interface _UpdatePipelineResponse
+      include Smithy::Client::_Response[Types::UpdatePipelineResponse]
+      def version: () -> String?
+      def status: () -> Types::ResourceStatus?
+    end
+    def update_pipeline: (
+      ?workspace_name: String,
+      ?pipeline_name: String,
+      ?description: String,
+      ?environment_variables: Hash[String, String],
+      ?computations: Array[
+        {
+          compute_node_name: String,
+          task_name: untyped,
+          environment_variables: Hash[String, String],
+          depends_on: Array[String]
+        }
+      ]
+    ) -> _UpdatePipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePipelineResponse
 
     interface _UpdatePortalResponse
       include Smithy::Client::_Response[Types::UpdatePortalResponse]
@@ -2024,5 +2844,58 @@ module Aws::IoTSiteWise
       ?project_description: String,
       ?client_token: String
     ) -> _UpdateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectResponse
+
+    interface _UpdateTaskResponse
+      include Smithy::Client::_Response[Types::UpdateTaskResponse]
+      def version: () -> String?
+      def status: () -> Types::ResourceStatus?
+    end
+    def update_task: (
+      ?workspace_name: String,
+      ?task_name: String,
+      ?description: String,
+      ?task_configuration: {
+        container_task_configuration: {
+          ecr_uri: String,
+          task_execution_role: String,
+          processing_type: String,
+          processing_unit: String,
+          ephemeral_storage_configuration: {
+            storage_class: String,
+            storage_size_in_gi_b: Integer
+          },
+          command: Array[String],
+          timeout_seconds: Integer,
+          environment_variables: Hash[String, String],
+          mounts: Array[
+            {
+              name: String,
+              relative_path: String,
+              source: {
+                s3_access_point: {
+                  access_point_arn: String,
+                  prefix: String
+                }
+              },
+              storage_type: String
+            }
+          ]
+        }
+      }
+    ) -> _UpdateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTaskResponse
+
+    interface _UpdateWorkspaceResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceResponse]
+      def workspace_status: () -> Types::WorkspaceStatus?
+    end
+    def update_workspace: (
+      ?workspace_name: String,
+      ?workspace_description: String,
+      ?encryption_configuration: {
+        encryption_type: String,
+        kms_key_id: String
+      },
+      ?client_token: String
+    ) -> _UpdateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceResponse
   end
 end

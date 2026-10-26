@@ -35,8 +35,7 @@ module Aws::Location
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>The request was denied because of insufficient access or permissions. Check with an
-    #       administrator to verify your permissions.</p>
+    # <p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Location::Types::AccessDeniedException] data
@@ -92,8 +91,7 @@ module Aws::Location
       end
     end
 
-    # <p>The operation was denied because the request would exceed the maximum <a href="https://docs.aws.amazon.com/location/previous/developerguide/location-quotas.html">quota</a>
-    #       set for Amazon Location Service.</p>
+    # <p>The operation was denied because the request would exceed the maximum <a href="https://docs.aws.amazon.com/location/previous/developerguide/location-quotas.html">quota</a> set for Amazon Location Service.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Location::Types::ServiceQuotaExceededException] data

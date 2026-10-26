@@ -27,6 +27,8 @@ module Aws::NetworkFirewall
     AssociateSubnetsRequest: StructureShape
     AssociateSubnetsResponse: StructureShape
     AssociationSyncState: MapShape
+    AttachRuleGroupsToProxyConfigurationRequest: StructureShape
+    AttachRuleGroupsToProxyConfigurationResponse: StructureShape
     Attachment: StructureShape
     AttachmentId: StringShape
     AttachmentStatus: EnumShape
@@ -45,35 +47,75 @@ module Aws::NetworkFirewall
     Certificates: ListShape
     CheckCertificateRevocationStatusActions: StructureShape
     CollectionMemberString: StringShape
+    ConditionKey: StringShape
+    ConditionOperator: StringShape
     ConfigurationSyncState: EnumShape
+    ContainerAssociationLastUpdatedTime: TimestampShape
+    ContainerAssociationStatus: EnumShape
+    ContainerAssociationSummary: StructureShape
+    ContainerAssociations: ListShape
+    ContainerAttribute: StructureShape
+    ContainerAttributeKey: StringShape
+    ContainerAttributeValue: StringShape
+    ContainerAttributes: ListShape
+    ContainerMonitoringConfiguration: StructureShape
+    ContainerMonitoringConfigurations: ListShape
+    ContainerMonitoringType: EnumShape
     Count: IntegerShape
+    CreateContainerAssociationRequest: StructureShape
+    CreateContainerAssociationResponse: StructureShape
     CreateFirewallPolicyRequest: StructureShape
     CreateFirewallPolicyResponse: StructureShape
     CreateFirewallRequest: StructureShape
     CreateFirewallResponse: StructureShape
+    CreateProxyConfigurationRequest: StructureShape
+    CreateProxyConfigurationResponse: StructureShape
+    CreateProxyRequest: StructureShape
+    CreateProxyResponse: StructureShape
+    CreateProxyRule: StructureShape
+    CreateProxyRuleGroupRequest: StructureShape
+    CreateProxyRuleGroupResponse: StructureShape
+    CreateProxyRuleList: ListShape
+    CreateProxyRulesByRequestPhase: StructureShape
+    CreateProxyRulesRequest: StructureShape
+    CreateProxyRulesResponse: StructureShape
     CreateRuleGroupRequest: StructureShape
     CreateRuleGroupResponse: StructureShape
     CreateTLSInspectionConfigurationRequest: StructureShape
     CreateTLSInspectionConfigurationResponse: StructureShape
+    CreateTime: TimestampShape
     CreateVpcEndpointAssociationRequest: StructureShape
     CreateVpcEndpointAssociationResponse: StructureShape
     CustomAction: StructureShape
     CustomActions: ListShape
     DeepThreatInspection: BooleanShape
+    DeleteContainerAssociationRequest: StructureShape
+    DeleteContainerAssociationResponse: StructureShape
     DeleteFirewallPolicyRequest: StructureShape
     DeleteFirewallPolicyResponse: StructureShape
     DeleteFirewallRequest: StructureShape
     DeleteFirewallResponse: StructureShape
     DeleteNetworkFirewallTransitGatewayAttachmentRequest: StructureShape
     DeleteNetworkFirewallTransitGatewayAttachmentResponse: StructureShape
+    DeleteProxyConfigurationRequest: StructureShape
+    DeleteProxyConfigurationResponse: StructureShape
+    DeleteProxyRequest: StructureShape
+    DeleteProxyResponse: StructureShape
+    DeleteProxyRuleGroupRequest: StructureShape
+    DeleteProxyRuleGroupResponse: StructureShape
+    DeleteProxyRulesRequest: StructureShape
+    DeleteProxyRulesResponse: StructureShape
     DeleteResourcePolicyRequest: StructureShape
     DeleteResourcePolicyResponse: StructureShape
     DeleteRuleGroupRequest: StructureShape
     DeleteRuleGroupResponse: StructureShape
     DeleteTLSInspectionConfigurationRequest: StructureShape
     DeleteTLSInspectionConfigurationResponse: StructureShape
+    DeleteTime: TimestampShape
     DeleteVpcEndpointAssociationRequest: StructureShape
     DeleteVpcEndpointAssociationResponse: StructureShape
+    DescribeContainerAssociationRequest: StructureShape
+    DescribeContainerAssociationResponse: StructureShape
     DescribeFirewallMetadataRequest: StructureShape
     DescribeFirewallMetadataResponse: StructureShape
     DescribeFirewallPolicyRequest: StructureShape
@@ -84,6 +126,15 @@ module Aws::NetworkFirewall
     DescribeFlowOperationResponse: StructureShape
     DescribeLoggingConfigurationRequest: StructureShape
     DescribeLoggingConfigurationResponse: StructureShape
+    DescribeProxyConfigurationRequest: StructureShape
+    DescribeProxyConfigurationResponse: StructureShape
+    DescribeProxyRequest: StructureShape
+    DescribeProxyResource: StructureShape
+    DescribeProxyResponse: StructureShape
+    DescribeProxyRuleGroupRequest: StructureShape
+    DescribeProxyRuleGroupResponse: StructureShape
+    DescribeProxyRuleRequest: StructureShape
+    DescribeProxyRuleResponse: StructureShape
     DescribeResourcePolicyRequest: StructureShape
     DescribeResourcePolicyResponse: StructureShape
     DescribeRuleGroupMetadataRequest: StructureShape
@@ -98,6 +149,8 @@ module Aws::NetworkFirewall
     DescribeVpcEndpointAssociationResponse: StructureShape
     Description: StringShape
     Destination: StringShape
+    DetachRuleGroupsFromProxyConfigurationRequest: StructureShape
+    DetachRuleGroupsFromProxyConfigurationResponse: StructureShape
     Dimension: StructureShape
     DimensionValue: StringShape
     Dimensions: ListShape
@@ -105,6 +158,7 @@ module Aws::NetworkFirewall
     DisassociateAvailabilityZonesResponse: StructureShape
     DisassociateSubnetsRequest: StructureShape
     DisassociateSubnetsResponse: StructureShape
+    DnsName: StringShape
     Domain: StringShape
     EnableMonitoringDashboard: BooleanShape
     EnableTLSSessionHolding: BooleanShape
@@ -115,6 +169,8 @@ module Aws::NetworkFirewall
     EndTime: TimestampShape
     EndpointId: StringShape
     ErrorMessage: StringShape
+    FailureCode: StringShape
+    FailureMessage: StringShape
     Firewall: StructureShape
     FirewallMetadata: StructureShape
     FirewallPolicies: ListShape
@@ -155,6 +211,7 @@ module Aws::NetworkFirewall
     IPSetReferenceName: StringShape
     IPSets: MapShape
     IdentifiedType: EnumShape
+    InsertPosition: IntegerShape
     InsufficientCapacityException: StructureShape
     InternalServerError: StructureShape
     InvalidOperationException: StructureShape
@@ -168,6 +225,8 @@ module Aws::NetworkFirewall
     LimitExceededException: StructureShape
     ListAnalysisReportsRequest: StructureShape
     ListAnalysisReportsResponse: StructureShape
+    ListContainerAssociationsRequest: StructureShape
+    ListContainerAssociationsResponse: StructureShape
     ListFirewallPoliciesRequest: StructureShape
     ListFirewallPoliciesResponse: StructureShape
     ListFirewallsRequest: StructureShape
@@ -176,6 +235,12 @@ module Aws::NetworkFirewall
     ListFlowOperationResultsResponse: StructureShape
     ListFlowOperationsRequest: StructureShape
     ListFlowOperationsResponse: StructureShape
+    ListProxiesRequest: StructureShape
+    ListProxiesResponse: StructureShape
+    ListProxyConfigurationsRequest: StructureShape
+    ListProxyConfigurationsResponse: StructureShape
+    ListProxyRuleGroupsRequest: StructureShape
+    ListProxyRuleGroupsResponse: StructureShape
     ListRuleGroupsRequest: StructureShape
     ListRuleGroupsResponse: StructureShape
     ListTLSInspectionConfigurationsRequest: StructureShape
@@ -184,6 +249,12 @@ module Aws::NetworkFirewall
     ListTagsForResourceResponse: StructureShape
     ListVpcEndpointAssociationsRequest: StructureShape
     ListVpcEndpointAssociationsResponse: StructureShape
+    ListenerProperties: ListShape
+    ListenerPropertiesRequest: ListShape
+    ListenerProperty: StructureShape
+    ListenerPropertyRequest: StructureShape
+    ListenerPropertyType: EnumShape
+    ListingName: StringShape
     LogDestinationConfig: StructureShape
     LogDestinationConfigs: ListShape
     LogDestinationMap: MapShape
@@ -192,6 +263,13 @@ module Aws::NetworkFirewall
     LogType: EnumShape
     LoggingConfiguration: StructureShape
     MatchAttributes: StructureShape
+    NatGatewayAttachment: StructureShape
+    NatGatewayAttachmentStatus: EnumShape
+    NatGatewayAttachmentsList: ListShape
+    NatGatewayId: StringShape
+    NatGatewayMapping: StructureShape
+    NatGatewayMappingsList: ListShape
+    NatGatewayPort: IntegerShape
     NumberOfAssociations: IntegerShape
     OverrideAction: EnumShape
     PacketCount: IntegerShape
@@ -208,10 +286,46 @@ module Aws::NetworkFirewall
     PortSet: StructureShape
     PortSets: MapShape
     Priority: IntegerShape
+    PrivateDNSName: StringShape
+    ProductId: StringShape
     ProtocolNumber: IntegerShape
     ProtocolNumbers: ListShape
     ProtocolString: StringShape
     ProtocolStrings: ListShape
+    Proxies: ListShape
+    Proxy: StructureShape
+    ProxyConditionValue: StringShape
+    ProxyConditionValueList: ListShape
+    ProxyConfigDefaultRulePhaseActionsRequest: StructureShape
+    ProxyConfigRuleGroup: StructureShape
+    ProxyConfigRuleGroupPriority: IntegerShape
+    ProxyConfigRuleGroupSet: ListShape
+    ProxyConfigRuleGroupType: StringShape
+    ProxyConfiguration: StructureShape
+    ProxyConfigurationMetadata: StructureShape
+    ProxyConfigurations: ListShape
+    ProxyMetadata: StructureShape
+    ProxyModifyState: EnumShape
+    ProxyRule: StructureShape
+    ProxyRuleCondition: StructureShape
+    ProxyRuleConditionList: ListShape
+    ProxyRuleGroup: StructureShape
+    ProxyRuleGroupAttachment: StructureShape
+    ProxyRuleGroupAttachmentList: ListShape
+    ProxyRuleGroupMetadata: StructureShape
+    ProxyRuleGroupPriority: StructureShape
+    ProxyRuleGroupPriorityList: ListShape
+    ProxyRuleGroupPriorityResult: StructureShape
+    ProxyRuleGroupPriorityResultList: ListShape
+    ProxyRuleGroupPriorityResultPriority: IntegerShape
+    ProxyRuleGroups: ListShape
+    ProxyRuleList: ListShape
+    ProxyRulePhaseAction: EnumShape
+    ProxyRulePriority: StructureShape
+    ProxyRulePriorityList: ListShape
+    ProxyRulesByRequestPhase: StructureShape
+    ProxySettings: StructureShape
+    ProxyState: EnumShape
     PublishMetricAction: StructureShape
     PutResourcePolicyRequest: StructureShape
     PutResourcePolicyResponse: StructureShape
@@ -220,10 +334,12 @@ module Aws::NetworkFirewall
     RejectNetworkFirewallTransitGatewayAttachmentResponse: StructureShape
     ReportTime: TimestampShape
     ResourceArn: StringShape
+    ResourceArnList: ListShape
     ResourceId: StringShape
     ResourceManagedStatus: EnumShape
     ResourceManagedType: EnumShape
     ResourceName: StringShape
+    ResourceNameList: ListShape
     ResourceNotFoundException: StructureShape
     ResourceOwnerCheckException: StructureShape
     ResourceStatus: EnumShape
@@ -232,6 +348,7 @@ module Aws::NetworkFirewall
     RuleDefinition: StructureShape
     RuleGroup: StructureShape
     RuleGroupMetadata: StructureShape
+    RuleGroupRequestPhase: EnumShape
     RuleGroupResponse: StructureShape
     RuleGroupType: EnumShape
     RuleGroups: ListShape
@@ -287,6 +404,7 @@ module Aws::NetworkFirewall
     StreamExceptionPolicy: EnumShape
     SubnetMapping: StructureShape
     SubnetMappings: ListShape
+    SubscriptionStatus: EnumShape
     Summary: StructureShape
     SummaryConfiguration: StructureShape
     SummaryRuleOption: EnumShape
@@ -315,6 +433,9 @@ module Aws::NetworkFirewall
     TcpIdleTimeoutRangeBound: IntegerShape
     ThrottlingException: StructureShape
     TlsCertificateData: StructureShape
+    TlsInterceptMode: EnumShape
+    TlsInterceptProperties: StructureShape
+    TlsInterceptPropertiesRequest: StructureShape
     TransitGatewayAttachmentId: StringShape
     TransitGatewayAttachmentStatus: EnumShape
     TransitGatewayAttachmentSyncState: StructureShape
@@ -326,6 +447,8 @@ module Aws::NetworkFirewall
     UntagResourceResponse: StructureShape
     UpdateAvailabilityZoneChangeProtectionRequest: StructureShape
     UpdateAvailabilityZoneChangeProtectionResponse: StructureShape
+    UpdateContainerAssociationRequest: StructureShape
+    UpdateContainerAssociationResponse: StructureShape
     UpdateFirewallAnalysisSettingsRequest: StructureShape
     UpdateFirewallAnalysisSettingsResponse: StructureShape
     UpdateFirewallDeleteProtectionRequest: StructureShape
@@ -340,20 +463,36 @@ module Aws::NetworkFirewall
     UpdateFirewallPolicyResponse: StructureShape
     UpdateLoggingConfigurationRequest: StructureShape
     UpdateLoggingConfigurationResponse: StructureShape
+    UpdateProxyConfigurationRequest: StructureShape
+    UpdateProxyConfigurationResponse: StructureShape
+    UpdateProxyRequest: StructureShape
+    UpdateProxyResponse: StructureShape
+    UpdateProxyRuleGroupPrioritiesRequest: StructureShape
+    UpdateProxyRuleGroupPrioritiesResponse: StructureShape
+    UpdateProxyRulePrioritiesRequest: StructureShape
+    UpdateProxyRulePrioritiesResponse: StructureShape
+    UpdateProxyRuleRequest: StructureShape
+    UpdateProxyRuleResponse: StructureShape
+    UpdateProxySettingsRequest: StructureShape
+    UpdateProxySettingsResponse: StructureShape
     UpdateRuleGroupRequest: StructureShape
     UpdateRuleGroupResponse: StructureShape
     UpdateSubnetChangeProtectionRequest: StructureShape
     UpdateSubnetChangeProtectionResponse: StructureShape
     UpdateTLSInspectionConfigurationRequest: StructureShape
     UpdateTLSInspectionConfigurationResponse: StructureShape
+    UpdateTime: TimestampShape
     UpdateToken: StringShape
     VariableDefinition: StringShape
     VariableDefinitionList: ListShape
+    VendorName: StringShape
+    VpcEndpoint: StructureShape
     VpcEndpointAssociation: StructureShape
     VpcEndpointAssociationMetadata: StructureShape
     VpcEndpointAssociationStatus: StructureShape
     VpcEndpointAssociations: ListShape
     VpcEndpointId: StringShape
+    VpcEndpointServiceName: StringShape
     VpcId: StringShape
     VpcIds: ListShape
 

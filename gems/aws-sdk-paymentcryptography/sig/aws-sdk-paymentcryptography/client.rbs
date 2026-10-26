@@ -53,6 +53,16 @@ module Aws::PaymentCryptography
       ?replication_regions: Array[String]
     ) -> _AddKeyReplicationRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddKeyReplicationRegionsResponse
 
+    interface _AssociateMpaTeamResponse
+      include Smithy::Client::_Response[Types::AssociateMpaTeamOutput]
+      def mpa_team_association: () -> Types::MpaTeamAssociation?
+    end
+    def associate_mpa_team: (
+      ?action: String,
+      ?mpa_team_arn: String,
+      ?requester_comment: String
+    ) -> _AssociateMpaTeamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMpaTeamResponse
+
     interface _CreateAliasResponse
       include Smithy::Client::_Response[Types::CreateAliasOutput]
       def alias: () -> Types::Alias?
@@ -112,6 +122,13 @@ module Aws::PaymentCryptography
       ?delete_key_in_days: Integer
     ) -> _DeleteKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeyResponse
 
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyOutput]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
     interface _DisableDefaultKeyReplicationRegionsResponse
       include Smithy::Client::_Response[Types::DisableDefaultKeyReplicationRegionsOutput]
       def enabled_replication_regions: () -> Array[String]?
@@ -119,6 +136,15 @@ module Aws::PaymentCryptography
     def disable_default_key_replication_regions: (
       ?replication_regions: Array[String]
     ) -> _DisableDefaultKeyReplicationRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableDefaultKeyReplicationRegionsResponse
+
+    interface _DisassociateMpaTeamResponse
+      include Smithy::Client::_Response[Types::DisassociateMpaTeamOutput]
+      def mpa_team_association: () -> Types::MpaTeamAssociation?
+    end
+    def disassociate_mpa_team: (
+      ?action: String,
+      ?requester_comment: String
+    ) -> _DisassociateMpaTeamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMpaTeamResponse
 
     interface _EnableDefaultKeyReplicationRegionsResponse
       include Smithy::Client::_Response[Types::EnableDefaultKeyReplicationRegionsOutput]
@@ -179,6 +205,10 @@ module Aws::PaymentCryptography
             shared_information: String
           },
           key_block_headers: untyped
+        },
+        as2805_key_cryptogram: {
+          wrapping_key_identifier: untyped,
+          as2805_key_variant: String
         }
       },
       ?export_key_identifier: String,
@@ -230,6 +260,14 @@ module Aws::PaymentCryptography
       ?key_identifier: String
     ) -> _GetKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyResponse
 
+    interface _GetMpaTeamAssociationResponse
+      include Smithy::Client::_Response[Types::GetMpaTeamAssociationOutput]
+      def mpa_team_association: () -> Types::MpaTeamAssociation?
+    end
+    def get_mpa_team_association: (
+      ?action: String
+    ) -> _GetMpaTeamAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMpaTeamAssociationResponse
+
     interface _GetParametersForExportResponse
       include Smithy::Client::_Response[Types::GetParametersForExportOutput]
       def signing_key_certificate: () -> String?
@@ -240,7 +278,8 @@ module Aws::PaymentCryptography
     end
     def get_parameters_for_export: (
       ?key_material_type: String,
-      ?signing_key_algorithm: String
+      ?signing_key_algorithm: String,
+      ?reuse_last_generated_token: bool
     ) -> _GetParametersForExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParametersForExportResponse
 
     interface _GetParametersForImportResponse
@@ -253,7 +292,8 @@ module Aws::PaymentCryptography
     end
     def get_parameters_for_import: (
       ?key_material_type: String,
-      ?wrapping_key_algorithm: String
+      ?wrapping_key_algorithm: String,
+      ?reuse_last_generated_token: bool
     ) -> _GetParametersForImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetParametersForImportResponse
 
     interface _GetPublicKeyCertificateResponse
@@ -264,6 +304,15 @@ module Aws::PaymentCryptography
     def get_public_key_certificate: (
       ?key_identifier: String
     ) -> _GetPublicKeyCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPublicKeyCertificateResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyOutput]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
 
     interface _ImportKeyResponse
       include Smithy::Client::_Response[Types::ImportKeyOutput]
@@ -327,6 +376,14 @@ module Aws::PaymentCryptography
             shared_information: String
           },
           wrapped_key_block: untyped
+        },
+        as2805_key_cryptogram: {
+          as2805_key_variant: String,
+          key_modes_of_use: untyped,
+          key_algorithm: untyped,
+          exportable: untyped,
+          wrapping_key_identifier: untyped,
+          wrapped_key_cryptogram: untyped
         }
       },
       ?key_check_value_algorithm: String,
@@ -337,7 +394,8 @@ module Aws::PaymentCryptography
           value: String
         }
       ],
-      ?replication_regions: Array[String]
+      ?replication_regions: Array[String],
+      ?requester_comment: String
     ) -> _ImportKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportKeyResponse
 
     interface _ListAliasesResponse
@@ -372,6 +430,16 @@ module Aws::PaymentCryptography
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyOutput]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
 
     interface _RemoveKeyReplicationRegionsResponse
       include Smithy::Client::_Response[Types::RemoveKeyReplicationRegionsOutput]

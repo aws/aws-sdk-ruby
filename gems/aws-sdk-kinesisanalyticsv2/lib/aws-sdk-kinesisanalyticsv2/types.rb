@@ -120,7 +120,7 @@ module Aws::KinesisAnalyticsV2
     #         source.</p>
     #   @return [String]
     # @!attribute current_application_version_id
-    #   <p>The current version of your application. 
+    #   <p>The current version of your application.
     #           You must provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>.You can use the <a>DescribeApplication</a> operation to find the current application version.</p>
     #   @return [Integer]
     # @!attribute input
@@ -143,9 +143,9 @@ module Aws::KinesisAnalyticsV2
     #   <p>Provides the current application version.</p>
     #   @return [Integer]
     # @!attribute input_descriptions
-    #   <p>Describes the application input configuration. 
-    #          
-    #         
+    #   <p>Describes the application input configuration.
+    #
+    #
     #       </p>
     #   @return [Array<Types::InputDescription>]
     class AddApplicationInputResponse < Struct.new(
@@ -192,9 +192,9 @@ module Aws::KinesisAnalyticsV2
     #   @return [Integer]
     # @!attribute output_descriptions
     #   <p>Describes the application output configuration.
-    #         For more information, 
-    #         see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>. 
-    #         
+    #         For more information,
+    #         see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>.
+    #
     #       </p>
     #   @return [Array<Types::OutputDescription>]
     class AddApplicationOutputResponse < Struct.new(
@@ -211,7 +211,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The name of an existing application.</p>
     #   @return [String]
     # @!attribute current_application_version_id
-    #   <p>The version of the application for which you are adding the reference data source. 
+    #   <p>The version of the application for which you are adding the reference data source.
     #           You can
     #         use the <a>DescribeApplication</a> operation to get the current application
     #         version. If the version specified is not the current version, the
@@ -219,8 +219,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [Integer]
     # @!attribute reference_data_source
     #   <p>The reference data source can be an object in your Amazon S3 bucket. Kinesis Data Analytics reads the object and copies the data
-    #         into the in-application table that is created. You provide an S3 bucket, object key name, and the resulting 
-    #         in-application table that is 
+    #         into the in-application table that is created. You provide an S3 bucket, object key name, and the resulting
+    #         in-application table that is
     #         created. </p>
     #   @return [Types::ReferenceDataSource]
     class AddApplicationReferenceDataSourceRequest < Struct.new(
@@ -241,10 +241,10 @@ module Aws::KinesisAnalyticsV2
     #         the application is updated.</p>
     #   @return [Integer]
     # @!attribute reference_data_source_descriptions
-    #   <p>Describes reference data sources configured for the application. 
-    #         
-    #         
-    #         
+    #   <p>Describes reference data sources configured for the application.
+    #
+    #
+    #
     #       </p>
     #   @return [Array<Types::ReferenceDataSourceDescription>]
     class AddApplicationReferenceDataSourceResponse < Struct.new(
@@ -726,7 +726,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     # @!attribute snapshot_name
     #   <p>The identifier of an existing snapshot of application state to use to restart an application.
-    #         The application uses this value if <code>RESTORE_FROM_CUSTOM_SNAPSHOT</code> is specified for the 
+    #         The application uses this value if <code>RESTORE_FROM_CUSTOM_SNAPSHOT</code> is specified for the
     #         <code>ApplicationRestoreType</code>.</p>
     #   @return [String]
     class ApplicationRestoreConfiguration < Struct.new(
@@ -937,14 +937,14 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault 
+    # <p>Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault
     #       tolerance.
-    #       For more information, see 
-    #       <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing">
+    #       For more information, see
+    #       <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing">
     #         Checkpoints for Fault Tolerance</a> in the
-    #       <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink Documentation</a>.</p>
+    #       <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/">Apache Flink Documentation</a>.</p>
     # @!attribute configuration_type
-    #   <p>Describes whether the application uses Managed Service for Apache Flink' default checkpointing behavior. 
+    #   <p>Describes whether the application uses Managed Service for Apache Flink' default checkpointing behavior.
     #       You must set this property to <code>CUSTOM</code> in order to set the
     #         <code>CheckpointingEnabled</code>, <code>CheckpointInterval</code>, or <code>MinPauseBetweenCheckpoints</code> parameters.</p>
     #            <note>
@@ -970,7 +970,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether checkpointing is enabled for a Managed Service for Apache Flink application.</p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
-    #       the application will use a <code>CheckpointingEnabled</code> value of <code>true</code>, even if this value 
+    #       the application will use a <code>CheckpointingEnabled</code> value of <code>true</code>, even if this value
     #         is set to another value using this API or in application code.</p>
     #            </note>
     #   @return [Boolean]
@@ -978,7 +978,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the interval in milliseconds between checkpoint operations. </p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
-    #       the application will use a <code>CheckpointInterval</code> value of 60000, even if this value is set 
+    #       the application will use a <code>CheckpointInterval</code> value of 60000, even if this value is set
     #         to another value using this API or in application code.</p>
     #            </note>
     #   @return [Integer]
@@ -986,11 +986,11 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the minimum time in milliseconds after a checkpoint operation completes that a
     #         new checkpoint operation can start. If a checkpoint operation takes longer than the
     #           <code>CheckpointInterval</code>, the application otherwise performs continual checkpoint
-    #         operations. For more information, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/ops/state/large_state_tuning/#tuning-checkpointing"> Tuning Checkpointing</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink
+    #         operations. For more information, see <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/docs/ops/state/large_state_tuning/#tuning-checkpointing"> Tuning Checkpointing</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/">Apache Flink
     #           Documentation</a>.</p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
-    #       the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this 
+    #       the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this
     #         API or in application code.</p>
     #            </note>
     #   @return [Integer]
@@ -1009,7 +1009,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute configuration_type
     #   <p>Describes whether the application uses the default checkpointing behavior in Managed Service for Apache Flink. </p>
     #            <note>
-    #               <p>If this value is set to <code>DEFAULT</code>, the application will use the following values, 
+    #               <p>If this value is set to <code>DEFAULT</code>, the application will use the following values,
     #         even if they are set to other values using APIs or
     #       application code:</p>
     #               <ul>
@@ -1032,7 +1032,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether checkpointing is enabled for a Managed Service for Apache Flink application.</p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
-    #       the application will use a <code>CheckpointingEnabled</code> value of <code>true</code>, even if this value is set to 
+    #       the application will use a <code>CheckpointingEnabled</code> value of <code>true</code>, even if this value is set to
     #         another value using this API or in application code.</p>
     #            </note>
     #   @return [Boolean]
@@ -1040,7 +1040,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the interval in milliseconds between checkpoint operations. </p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
-    #       the application will use a <code>CheckpointInterval</code> value of 60000, even if this value is set to another value 
+    #       the application will use a <code>CheckpointInterval</code> value of 60000, even if this value is set to another value
     #         using this API or in application code.</p>
     #            </note>
     #   @return [Integer]
@@ -1049,7 +1049,7 @@ module Aws::KinesisAnalyticsV2
     #         can start. </p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
-    #       the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this 
+    #       the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this
     #         API or in application code.</p>
     #            </note>
     #   @return [Integer]
@@ -1071,7 +1071,7 @@ module Aws::KinesisAnalyticsV2
     #         <code>CheckpointingEnabled</code>, <code>CheckpointInterval</code>, or <code>MinPauseBetweenCheckpoints</code> parameters.
     #         </p>
     #            <note>
-    #               <p>If this value is set to <code>DEFAULT</code>, the application will use the following values, even if they are 
+    #               <p>If this value is set to <code>DEFAULT</code>, the application will use the following values, even if they are
     #         set to other values using APIs or
     #       application code:</p>
     #               <ul>
@@ -1094,7 +1094,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes updates to whether checkpointing is enabled for an application.</p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
-    #       the application will use a <code>CheckpointingEnabled</code> value of <code>true</code>, even if this value is set to 
+    #       the application will use a <code>CheckpointingEnabled</code> value of <code>true</code>, even if this value is set to
     #         another value using this API or in application code.</p>
     #            </note>
     #   @return [Boolean]
@@ -1102,7 +1102,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes updates to the interval in milliseconds between checkpoint operations.</p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
-    #       the application will use a <code>CheckpointInterval</code> value of 60000, even if this value is set to another value 
+    #       the application will use a <code>CheckpointInterval</code> value of 60000, even if this value is set to another value
     #         using this API or in application code.</p>
     #            </note>
     #   @return [Integer]
@@ -1111,7 +1111,7 @@ module Aws::KinesisAnalyticsV2
     #         can start.</p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
-    #       the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this API or 
+    #       the application will use a <code>MinPauseBetweenCheckpoints</code> value of 5000, even if this value is set using this API or
     #         in application code.</p>
     #            </note>
     #   @return [Integer]
@@ -1325,14 +1325,14 @@ module Aws::KinesisAnalyticsV2
     #         </p>
     #   @return [Array<Types::CloudWatchLoggingOption>]
     # @!attribute tags
-    #   <p>A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an 
-    #           application. Note that the maximum number of application tags includes system tags. The maximum number of 
+    #   <p>A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an
+    #           application. Note that the maximum number of application tags includes system tags. The maximum number of
     #           user-defined application tags is 50.
-    #           For more information, see 
+    #           For more information, see
     #           <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute application_mode
-    #   <p>Use the <code>STREAMING</code> mode to create a Managed Service for Apache Flink application. To create a Managed Service for Apache Flink Studio notebook, use the 
+    #   <p>Use the <code>STREAMING</code> mode to create a Managed Service for Apache Flink application. To create a Managed Service for Apache Flink Studio notebook, use the
     #       <code>INTERACTIVE</code> mode.</p>
     #   @return [String]
     class CreateApplicationRequest < Struct.new(
@@ -1351,7 +1351,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # @!attribute application_detail
-    #   <p>In response to your <code>CreateApplication</code> request, Managed Service for Apache Flink returns a 
+    #   <p>In response to your <code>CreateApplication</code> request, Managed Service for Apache Flink returns a
     #         response with details of the application it created.</p>
     #   @return [Types::ApplicationDetail]
     class CreateApplicationResponse < Struct.new(
@@ -1492,9 +1492,9 @@ module Aws::KinesisAnalyticsV2
     #   <p>The name of the application.</p>
     #   @return [String]
     # @!attribute current_application_version_id
-    #   <p>The application version. 
+    #   <p>The application version.
     #         You can use the <a>DescribeApplication</a> operation to get the current application version.
-    #         If the version specified is not the current version, the 
+    #         If the version specified is not the current version, the
     #         <code>ConcurrentModificationException</code> is returned.
     #       </p>
     #   @return [Integer]
@@ -1531,9 +1531,9 @@ module Aws::KinesisAnalyticsV2
     #   <p>The application name.</p>
     #   @return [String]
     # @!attribute current_application_version_id
-    #   <p>The application version. 
+    #   <p>The application version.
     #         You can use the <a>DescribeApplication</a> operation to get the current application version.
-    #         If the version specified is not the current version, the 
+    #         If the version specified is not the current version, the
     #         <code>ConcurrentModificationException</code> is returned.
     #       </p>
     #   @return [Integer]
@@ -1573,9 +1573,9 @@ module Aws::KinesisAnalyticsV2
     #   <p>The name of an existing application.</p>
     #   @return [String]
     # @!attribute current_application_version_id
-    #   <p>The current application version.  
+    #   <p>The current application version.
     #         You can use the <a>DescribeApplication</a> operation to get the current application version.
-    #         If the version specified 
+    #         If the version specified
     #         is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>
     #   @return [Integer]
     # @!attribute reference_id
@@ -1638,8 +1638,8 @@ module Aws::KinesisAnalyticsV2
     #   <p>The identifier for the snapshot delete.</p>
     #   @return [String]
     # @!attribute snapshot_creation_timestamp
-    #   <p>The creation timestamp of the application snapshot to delete. You can retrieve this value 
-    #         using 
+    #   <p>The creation timestamp of the application snapshot to delete. You can retrieve this value
+    #         using
     #         or .</p>
     #   @return [Time]
     class DeleteApplicationSnapshotRequest < Struct.new(
@@ -1710,7 +1710,7 @@ module Aws::KinesisAnalyticsV2
 
     # <p>The information required to deploy a Managed Service for Apache Flink Studio notebook as an application with durable state.</p>
     # @!attribute s3_content_location
-    #   <p>The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data.    
+    #   <p>The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data.
     #       </p>
     #   @return [Types::S3ContentBaseLocation]
     class DeployAsApplicationConfiguration < Struct.new(
@@ -1804,7 +1804,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The name of an existing application.</p>
     #   @return [String]
     # @!attribute snapshot_name
-    #   <p>The identifier of an application snapshot. You can retrieve this value using 
+    #   <p>The identifier of an application snapshot. You can retrieve this value using
     #         .</p>
     #   @return [String]
     class DescribeApplicationSnapshotRequest < Struct.new(
@@ -1881,7 +1881,7 @@ module Aws::KinesisAnalyticsV2
     #         object.</p>
     #   @return [Types::S3Configuration]
     # @!attribute input_processing_configuration
-    #   <p>The <a>InputProcessingConfiguration</a> to use to preprocess the records 
+    #   <p>The <a>InputProcessingConfiguration</a> to use to preprocess the records
     #         before discovering the schema of the records.</p>
     #   @return [Types::InputProcessingConfiguration]
     class DiscoverInputSchemaRequest < Struct.new(
@@ -1902,7 +1902,7 @@ module Aws::KinesisAnalyticsV2
     #         stream that you can create.</p>
     #   @return [Types::SourceSchema]
     # @!attribute parsed_input_records
-    #   <p>An array of elements, where each element corresponds to a row in a stream record 
+    #   <p>An array of elements, where each element corresponds to a row in a stream record
     #         (a stream record can have more than one row).</p>
     #   @return [Array<Array<String>>]
     # @!attribute processed_input_records
@@ -1973,12 +1973,12 @@ module Aws::KinesisAnalyticsV2
 
     # <p>Describes configuration parameters for a Managed Service for Apache Flink application or a Studio notebook.</p>
     # @!attribute checkpoint_configuration
-    #   <p>Describes an application's checkpointing configuration. Checkpointing is the 
+    #   <p>Describes an application's checkpointing configuration. Checkpointing is the
     #         process of persisting application state for fault tolerance.
-    #         For more information, see 
-    #         <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing">
-    #           Checkpoints for Fault Tolerance</a> in the 
-    #         <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink Documentation</a>. </p>
+    #         For more information, see
+    #         <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing">
+    #           Checkpoints for Fault Tolerance</a> in the
+    #         <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/">Apache Flink Documentation</a>. </p>
     #   @return [Types::CheckpointConfiguration]
     # @!attribute monitoring_configuration
     #   <p>Describes configuration parameters for Amazon CloudWatch logging for an
@@ -1999,7 +1999,7 @@ module Aws::KinesisAnalyticsV2
 
     # <p>Describes configuration parameters for a Managed Service for Apache Flink application.</p>
     # @!attribute checkpoint_configuration_description
-    #   <p>Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state 
+    #   <p>Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state
     #         for fault tolerance.</p>
     #   @return [Types::CheckpointConfigurationDescription]
     # @!attribute monitoring_configuration_description
@@ -2010,7 +2010,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes parameters for how an application executes multiple tasks simultaneously.</p>
     #   @return [Types::ParallelismConfigurationDescription]
     # @!attribute job_plan_description
-    #   <p>The job plan for an application. For more information about the job plan, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/internals/job_scheduling.html">Jobs and Scheduling</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink
+    #   <p>The job plan for an application. For more information about the job plan, see <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/internals/job_scheduling.html">Jobs and Scheduling</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/">Apache Flink
     #           Documentation</a>. To retrieve the job plan for the application, use the <a>DescribeApplicationRequest$IncludeAdditionalDetails</a> parameter of the <a>DescribeApplication</a> operation.</p>
     #   @return [String]
     class FlinkApplicationConfigurationDescription < Struct.new(
@@ -2026,7 +2026,7 @@ module Aws::KinesisAnalyticsV2
 
     # <p>Describes updates to the configuration parameters for a Managed Service for Apache Flink application.</p>
     # @!attribute checkpoint_configuration_update
-    #   <p>Describes updates to an application's checkpointing configuration. Checkpointing is the process of persisting 
+    #   <p>Describes updates to an application's checkpointing configuration. Checkpointing is the process of persisting
     #         application state for fault tolerance.</p>
     #   @return [Types::CheckpointConfigurationUpdate]
     # @!attribute monitoring_configuration_update
@@ -2048,13 +2048,13 @@ module Aws::KinesisAnalyticsV2
 
     # <p>Describes the starting parameters for a Managed Service for Apache Flink application.</p>
     # @!attribute allow_non_restored_state
-    #   <p>When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot 
+    #   <p>When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot
     #          be mapped to the new program.
-    #        This will happen if the program is updated between snapshots to remove stateful parameters, and 
-    #        state data in the snapshot no longer 
-    #        corresponds to valid application data. For more information, see 
-    #        <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/ops/state/savepoints/#allowing-non-restored-state">
-    #          Allowing Non-Restored State</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink
+    #        This will happen if the program is updated between snapshots to remove stateful parameters, and
+    #        state data in the snapshot no longer
+    #        corresponds to valid application data. For more information, see
+    #        <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/docs/ops/state/savepoints/#allowing-non-restored-state">
+    #          Allowing Non-Restored State</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/">Apache Flink
     #            documentation</a>.</p>
     #            <note>
     #               <p>This value defaults to <code>false</code>. If you update your application without
@@ -2106,7 +2106,7 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>When you configure the application input for a SQL-based Kinesis Data Analytics application, you specify the streaming source, the in-application stream 
+    # <p>When you configure the application input for a SQL-based Kinesis Data Analytics application, you specify the streaming source, the in-application stream
     #       name that is created,
     #       and the mapping between the two. </p>
     # @!attribute name_prefix
@@ -2117,8 +2117,8 @@ module Aws::KinesisAnalyticsV2
     #         so on. </p>
     #   @return [String]
     # @!attribute input_processing_configuration
-    #   <p>The <a>InputProcessingConfiguration</a> for the input. An input processor transforms records as they are received 
-    #         from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is 
+    #   <p>The <a>InputProcessingConfiguration</a> for the input. An input processor transforms records as they are received
+    #         from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is
     #         <a>InputLambdaProcessor</a>. </p>
     #   @return [Types::InputProcessingConfiguration]
     # @!attribute kinesis_streams_input
@@ -2170,7 +2170,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>If a Kinesis Data Firehose delivery stream is configured as a streaming source, provides the delivery stream's ARN. </p>
     #   @return [Types::KinesisFirehoseInputDescription]
     # @!attribute input_schema
-    #   <p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns 
+    #   <p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns
     #         in the in-application stream that is being created. </p>
     #   @return [Types::SourceSchema]
     # @!attribute input_parallelism
@@ -2335,7 +2335,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Specifies the encoding of the records in the streaming source; for example, UTF-8.</p>
     #   @return [String]
     # @!attribute record_column_updates
-    #   <p>A list of <code>RecordColumn</code> objects. Each object describes the mapping 
+    #   <p>A list of <code>RecordColumn</code> objects. Each object describes the mapping
     #         of the streaming source element to the corresponding column in the in-application stream.</p>
     #   @return [Array<Types::RecordColumn>]
     class InputSchemaUpdate < Struct.new(
@@ -2348,7 +2348,7 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the point at which the application reads from 
+    # <p>Describes the point at which the application reads from
     #       the streaming source.</p>
     # @!attribute input_starting_position
     #   <p>The starting position on the stream.</p>
@@ -2360,8 +2360,8 @@ module Aws::KinesisAnalyticsV2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the stream, 
-    #             which is the oldest record available in the stream. This option is not available 
+    #                     <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the stream,
+    #             which is the oldest record available in the stream. This option is not available
     #             for an Amazon Kinesis Data Firehose delivery stream.</p>
     #               </li>
     #               <li>
@@ -2399,7 +2399,7 @@ module Aws::KinesisAnalyticsV2
     #         updated, provides an updated stream ARN.</p>
     #   @return [Types::KinesisFirehoseInputUpdate]
     # @!attribute input_schema_update
-    #   <p>Describes the data format on the streaming source, and 
+    #   <p>Describes the data format on the streaming source, and
     #         how record elements on the streaming source map to columns of the in-application stream that is created.</p>
     #   @return [Types::InputSchemaUpdate]
     # @!attribute input_parallelism_update
@@ -2479,7 +2479,7 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the Amazon Kinesis Data Firehose delivery stream that is configured as the streaming source 
+    # <p>Describes the Amazon Kinesis Data Firehose delivery stream that is configured as the streaming source
     #       in the application input configuration. </p>
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the delivery stream.</p>
@@ -2602,7 +2602,7 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>When you update the input configuration for a SQL-based Kinesis Data Analytics application, provides information about a 
+    # <p>When you update the input configuration for a SQL-based Kinesis Data Analytics application, provides information about a
     #       Kinesis stream as the streaming
     #       source.</p>
     # @!attribute resource_arn_update
@@ -2789,8 +2789,8 @@ module Aws::KinesisAnalyticsV2
     #   <p>The maximum number of application snapshots to list.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more 
-    #         output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should 
+    #   <p>Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more
+    #         output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should
     #         continue from. </p>
     #   @return [String]
     class ListApplicationSnapshotsRequest < Struct.new(
@@ -2825,7 +2825,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The maximum number of versions to list in this invocation of the operation.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see 
+    #   <p>If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     #   @return [String]
     class ListApplicationVersionsRequest < Struct.new(
@@ -2843,8 +2843,8 @@ module Aws::KinesisAnalyticsV2
     #            <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p>
     #   @return [Array<Types::ApplicationVersionSummary>]
     # @!attribute next_token
-    #   <p>The pagination token for the next set of results, or <code>null</code> if there are no additional results. 
-    #         To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see 
+    #   <p>The pagination token for the next set of results, or <code>null</code> if there are no additional results.
+    #         To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     #   @return [String]
     class ListApplicationVersionsResponse < Struct.new(
@@ -2860,9 +2860,9 @@ module Aws::KinesisAnalyticsV2
     #   <p>The maximum number of applications to list.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If a previous command returned a pagination token, 
+    #   <p>If a previous command returned a pagination token,
     #         pass it into this value to retrieve the next set of results.
-    #         For more information about pagination, see 
+    #         For more information about pagination, see
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     #   @return [String]
     class ListApplicationsRequest < Struct.new(
@@ -2880,7 +2880,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute next_token
     #   <p>The pagination token for the next set of results, or <code>null</code> if there are no additional results.
     #         Pass this token into a subsequent command to retrieve the next set of items
-    #         For more information about pagination, see 
+    #         For more information about pagination, see
     #         <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface's Pagination Options</a>.</p>
     #   @return [String]
     class ListApplicationsResponse < Struct.new(
@@ -2922,7 +2922,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Provides additional mapping information when JSON is the record format on the streaming source.</p>
     #   @return [Types::JSONMappingParameters]
     # @!attribute csv_mapping_parameters
-    #   <p>Provides additional mapping information when the record format uses delimiters 
+    #   <p>Provides additional mapping information when the record format uses delimiters
     #         (for example, CSV).</p>
     #   @return [Types::CSVMappingParameters]
     class MappingParameters < Struct.new(
@@ -2956,7 +2956,7 @@ module Aws::KinesisAnalyticsV2
 
     # <p>Describes configuration parameters for Amazon CloudWatch logging for an application. For more information about CloudWatch logging, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html">Monitoring</a>.</p>
     # @!attribute configuration_type
-    #   <p>Describes whether to use the default CloudWatch logging configuration for an application. 
+    #   <p>Describes whether to use the default CloudWatch logging configuration for an application.
     #       You must set this property to <code>CUSTOM</code> in order to set the <code>LogLevel</code> or
     #       <code>MetricsLevel</code> parameters.</p>
     #   @return [String]
@@ -2999,7 +2999,7 @@ module Aws::KinesisAnalyticsV2
 
     # <p>Describes updates to configuration parameters for Amazon CloudWatch logging for an application.</p>
     # @!attribute configuration_type_update
-    #   <p>Describes updates to whether to use the default CloudWatch logging configuration for 
+    #   <p>Describes updates to whether to use the default CloudWatch logging configuration for
     #         an application. You must set this property to <code>CUSTOM</code> in order to set the <code>LogLevel</code> or
     #       <code>MetricsLevel</code> parameters.</p>
     #   @return [String]
@@ -3045,7 +3045,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The name of the in-application stream.</p>
     #   @return [String]
     # @!attribute kinesis_streams_output
-    #   <p>Identifies a Kinesis data stream 
+    #   <p>Identifies a Kinesis data stream
     #         as the destination.</p>
     #   @return [Types::KinesisStreamsOutput]
     # @!attribute kinesis_firehose_output
@@ -3055,7 +3055,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Identifies an Amazon Lambda function as the destination.</p>
     #   @return [Types::LambdaOutput]
     # @!attribute destination_schema
-    #   <p>Describes the data format when records are written to the destination. 
+    #   <p>Describes the data format when records are written to the destination.
     #         </p>
     #   @return [Types::DestinationSchema]
     class Output < Struct.new(
@@ -3114,8 +3114,8 @@ module Aws::KinesisAnalyticsV2
     #   <p>Identifies the specific output configuration that you want to update.</p>
     #   @return [String]
     # @!attribute name_update
-    #   <p>If you want to specify a different in-application stream 
-    #         for this output configuration, use this field to 
+    #   <p>If you want to specify a different in-application stream
+    #         for this output configuration, use this field to
     #         specify the new in-application stream name.</p>
     #   @return [String]
     # @!attribute kinesis_streams_output_update
@@ -3129,7 +3129,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes an Amazon Lambda function as the destination for the output.</p>
     #   @return [Types::LambdaOutputUpdate]
     # @!attribute destination_schema_update
-    #   <p>Describes the data format when records are written to the destination. 
+    #   <p>Describes the data format when records are written to the destination.
     #         </p>
     #   @return [Types::DestinationSchema]
     class OutputUpdate < Struct.new(
@@ -3147,7 +3147,7 @@ module Aws::KinesisAnalyticsV2
 
     # <p>Describes parameters for how a Managed Service for Apache Flink application
     #       executes multiple tasks simultaneously. For more information about parallelism,
-    #       see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/dev/parallel.html">Parallel Execution</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink
+    #       see <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/dev/parallel.html">Parallel Execution</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-2.3/">Apache Flink
     #         Documentation</a>.</p>
     # @!attribute configuration_type
     #   <p>Describes whether the application uses the default parallelism for the Managed Service for Apache Flink service. You must set this property to <code>CUSTOM</code>
@@ -3164,7 +3164,7 @@ module Aws::KinesisAnalyticsV2
     #         down to the <code>Parallelism</code> setting.</p>
     #   @return [Integer]
     # @!attribute parallelism_per_kpu
-    #   <p>Describes the number of parallel tasks that a Managed Service for Apache Flink application can perform per Kinesis Processing Unit 
+    #   <p>Describes the number of parallel tasks that a Managed Service for Apache Flink application can perform per Kinesis Processing Unit
     #         (KPU) used by the application. For more
     #         information about KPUs, see <a href="http://aws.amazon.com/kinesis/data-analytics/pricing/">Amazon Managed Service for Apache Flink Pricing</a>.</p>
     #   @return [Integer]
@@ -3198,13 +3198,13 @@ module Aws::KinesisAnalyticsV2
     #         down to the <code>Parallelism</code> setting.</p>
     #   @return [Integer]
     # @!attribute parallelism_per_kpu
-    #   <p>Describes the number of parallel tasks that a Managed Service for Apache Flink application can perform per 
+    #   <p>Describes the number of parallel tasks that a Managed Service for Apache Flink application can perform per
     #         Kinesis Processing Unit (KPU) used by the application.</p>
     #   @return [Integer]
     # @!attribute current_parallelism
-    #   <p>Describes the current number of parallel tasks that a Managed Service for Apache Flink application can perform. 
+    #   <p>Describes the current number of parallel tasks that a Managed Service for Apache Flink application can perform.
     #         If <code>AutoScalingEnabled</code> is set to True, Managed Service for Apache Flink can increase this value in response to application
-    #       load. The service can increase this value up to the maximum parallelism, which is <code>ParalellismPerKPU</code> times the maximum KPUs for the application. 
+    #       load. The service can increase this value up to the maximum parallelism, which is <code>ParalellismPerKPU</code> times the maximum KPUs for the application.
     #       The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce
     #       the <code>CurrentParallelism</code> value down to the <code>Parallelism</code> setting.</p>
     #   @return [Integer]
@@ -3230,9 +3230,9 @@ module Aws::KinesisAnalyticsV2
     #       in order to change your application's <code>AutoScalingEnabled</code>, <code>Parallelism</code>, or <code>ParallelismPerKPU</code> properties.</p>
     #   @return [String]
     # @!attribute parallelism_update
-    #   <p>Describes updates to the initial number of parallel tasks an application can perform. If <code>AutoScalingEnabled</code> is set to True, then 
+    #   <p>Describes updates to the initial number of parallel tasks an application can perform. If <code>AutoScalingEnabled</code> is set to True, then
     #         Managed Service for Apache Flink can increase the <code>CurrentParallelism</code> value in response to application
-    #       load. The service can increase <code>CurrentParallelism</code> up to the maximum parallelism, which is <code>ParalellismPerKPU</code> times the maximum KPUs for the application. 
+    #       load. The service can increase <code>CurrentParallelism</code> up to the maximum parallelism, which is <code>ParalellismPerKPU</code> times the maximum KPUs for the application.
     #       The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service will
     #       reduce <code>CurrentParallelism</code> down to the <code>Parallelism</code> setting.</p>
     #   @return [Integer]
@@ -3323,7 +3323,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     # @!attribute s3_reference_data_source
     #   <p>Identifies the S3 bucket and object that contains the reference data.
-    #         
+    #
     #         A SQL-based Kinesis Data Analytics application loads reference data only once. If the data changes, you call the <a>UpdateApplication</a> operation to trigger reloading of data into your application. </p>
     #   @return [Types::S3ReferenceDataSource]
     # @!attribute reference_schema
@@ -3366,9 +3366,9 @@ module Aws::KinesisAnalyticsV2
     end
 
     # <p>When you update a reference data source configuration for a
-    #        SQL-based Kinesis Data Analytics application, this object provides all the updated values 
-    #       (such as the source bucket name and object key name), the in-application table name that is created, 
-    #       and updated mapping information that maps the data in the Amazon S3 object to the in-application 
+    #        SQL-based Kinesis Data Analytics application, this object provides all the updated values
+    #       (such as the source bucket name and object key name), the in-application table name that is created,
+    #       and updated mapping information that maps the data in the Amazon S3 object to the in-application
     #       reference table that is created.</p>
     # @!attribute reference_id
     #   <p>The ID of the reference data source that is being updated. You can use the <a>DescribeApplication</a> operation to get this value.</p>
@@ -3381,7 +3381,7 @@ module Aws::KinesisAnalyticsV2
     #         Amazon S3 object on your behalf and populate the in-application reference table.</p>
     #   @return [Types::S3ReferenceDataSourceUpdate]
     # @!attribute reference_schema_update
-    #   <p>Describes the format of the data in the streaming source, and how each data element maps to 
+    #   <p>Describes the format of the data in the streaming source, and how each data element maps to
     #         corresponding columns created in the in-application stream. </p>
     #   @return [Types::SourceSchema]
     class ReferenceDataSourceUpdate < Struct.new(
@@ -3433,7 +3433,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The name of the application.</p>
     #   @return [String]
     # @!attribute current_application_version_id
-    #   <p>The current application version ID. You can retrieve the application version ID using 
+    #   <p>The current application version ID. You can retrieve the application version ID using
     #               <a>DescribeApplication</a>.</p>
     #   @return [Integer]
     class RollbackApplicationRequest < Struct.new(
@@ -3889,11 +3889,11 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     # @!attribute force
     #   <p>Set to <code>true</code> to force the application to stop. If you set <code>Force</code>
-    #             to <code>true</code>, Managed Service for Apache Flink stops the application without taking a snapshot. 
+    #             to <code>true</code>, Managed Service for Apache Flink stops the application without taking a snapshot.
     #         </p>
     #            <note>
     #               <p>Force-stopping your application may lead to data loss or duplication.
-    #                 To prevent data loss or duplicate processing of data during application restarts, 
+    #                 To prevent data loss or duplicate processing of data during application restarts,
     #                 we recommend you to take frequent snapshots of your application.</p>
     #            </note>
     #            <p>You can only force stop a Managed Service for Apache Flink application. You can't force stop a SQL-based Kinesis Data Analytics application.</p>
@@ -3921,12 +3921,12 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A key-value pair (the value is optional) that you can define and assign to Amazon resources. 
-    #         If you specify a tag that already exists, the tag value is replaced with the value that you 
-    #         specify in the request. Note that 
-    #         the maximum number of application tags includes system tags. The maximum number of user-defined 
+    # <p>A key-value pair (the value is optional) that you can define and assign to Amazon resources.
+    #         If you specify a tag that already exists, the tag value is replaced with the value that you
+    #         specify in the request. Note that
+    #         the maximum number of application tags includes system tags. The maximum number of user-defined
     #         application tags is 50.
-    #       For more information, see 
+    #       For more information, see
     #         <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.</p>
     # @!attribute key
     #   <p>The key of the key-value tag.</p>
@@ -3965,7 +3965,7 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Application created with too many tags, or too many tags added to an application. Note that the maximum 
+    # <p>Application created with too many tags, or too many tags added to an application. Note that the maximum
     #         number of application tags includes system tags. The maximum number of user-defined application tags is 50.</p>
     # @!attribute message
     #   @return [String]
@@ -3997,7 +3997,7 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this 
+    # <p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this
     #       operation. </p>
     # @!attribute message
     #   @return [String]
@@ -4135,11 +4135,11 @@ module Aws::KinesisAnalyticsV2
 
     # <p>Describes the parameters of a VPC used by the application.</p>
     # @!attribute subnet_ids
-    #   <p>The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html">Subnet</a> IDs 
+    #   <p>The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html">Subnet</a> IDs
     #           used by the VPC configuration.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
-    #   <p>The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html">SecurityGroup</a> 
+    #   <p>The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html">SecurityGroup</a>
     #           IDs used by the VPC configuration.</p>
     #   @return [Array<String>]
     class VpcConfiguration < Struct.new(
@@ -4159,11 +4159,11 @@ module Aws::KinesisAnalyticsV2
     #   <p>The ID of the associated VPC.</p>
     #   @return [String]
     # @!attribute subnet_ids
-    #   <p>The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html">Subnet</a> 
+    #   <p>The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html">Subnet</a>
     #           IDs used by the VPC configuration.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
-    #   <p>The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html">SecurityGroup</a> 
+    #   <p>The array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html">SecurityGroup</a>
     #           IDs used by the VPC configuration.</p>
     #   @return [Array<String>]
     class VpcConfigurationDescription < Struct.new(
@@ -4182,12 +4182,12 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes an update to the ID of the VPC configuration.</p>
     #   @return [String]
     # @!attribute subnet_id_updates
-    #   <p>Describes updates to the array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html">Subnet</a> 
-    #           IDs 
+    #   <p>Describes updates to the array of <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html">Subnet</a>
+    #           IDs
     #           used by the VPC configuration.</p>
     #   @return [Array<String>]
     # @!attribute security_group_id_updates
-    #   <p>Describes updates to the array of 
+    #   <p>Describes updates to the array of
     #           <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html">SecurityGroup</a> IDs used by the VPC configuration.</p>
     #   @return [Array<String>]
     class VpcConfigurationUpdate < Struct.new(

@@ -14,6 +14,8 @@ module Aws::RAM
     AssociateResourceShareResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#AssociateResourceShareResponse", name: "AssociateResourceShareResponse")
     AssociatedPermission = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#AssociatedPermission", name: "AssociatedPermission")
     AssociatedPermissionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ram#AssociatedPermissionList", name: "AssociatedPermissionList")
+    AssociatedSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#AssociatedSource", name: "AssociatedSource")
+    AssociatedSourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ram#AssociatedSourceList", name: "AssociatedSourceList")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ram#Boolean", name: "Boolean")
     CreatePermissionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#CreatePermissionRequest", name: "CreatePermissionRequest")
     CreatePermissionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#CreatePermissionResponse", name: "CreatePermissionResponse")
@@ -71,6 +73,8 @@ module Aws::RAM
     ListResourceTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#ListResourceTypesResponse", name: "ListResourceTypesResponse")
     ListResourcesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#ListResourcesRequest", name: "ListResourcesRequest")
     ListResourcesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#ListResourcesResponse", name: "ListResourcesResponse")
+    ListSourceAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#ListSourceAssociationsRequest", name: "ListSourceAssociationsRequest")
+    ListSourceAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#ListSourceAssociationsResponse", name: "ListSourceAssociationsResponse")
     MalformedArnException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#MalformedArnException", name: "MalformedArnException", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidArn.Malformed", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     MalformedPolicyTemplateException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#MalformedPolicyTemplateException", name: "MalformedPolicyTemplateException", traits: {"aws.protocols#awsQueryError" => {"code" => "MalformedPolicyTemplateException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ram#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 500}})
@@ -115,6 +119,7 @@ module Aws::RAM
     ResourceShareAssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ram#ResourceShareAssociationList", name: "ResourceShareAssociationList")
     ResourceShareAssociationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ram#ResourceShareAssociationStatus", name: "ResourceShareAssociationStatus")
     ResourceShareAssociationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ram#ResourceShareAssociationType", name: "ResourceShareAssociationType")
+    ResourceShareConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#ResourceShareConfiguration", name: "ResourceShareConfiguration")
     ResourceShareFeatureSet = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ram#ResourceShareFeatureSet", name: "ResourceShareFeatureSet")
     ResourceShareInvitation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#ResourceShareInvitation", name: "ResourceShareInvitation")
     ResourceShareInvitationAlreadyAcceptedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ram#ResourceShareInvitationAlreadyAcceptedException", name: "ResourceShareInvitationAlreadyAcceptedException", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidResourceShareInvitationArn.AlreadyAccepted", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -193,6 +198,15 @@ module Aws::RAM
     AssociatedPermission.add_member(:resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceShareArn"))
     AssociatedPermission.type = Types::AssociatedPermission
     AssociatedPermissionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedPermission, name: "member", traits: {"smithy.api#xmlName" => "item"}))
+    AssociatedSource.add_member(:resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceShareArn"))
+    AssociatedSource.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "sourceId"))
+    AssociatedSource.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "sourceType"))
+    AssociatedSource.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
+    AssociatedSource.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "lastUpdatedTime"))
+    AssociatedSource.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "creationTime"))
+    AssociatedSource.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "statusMessage"))
+    AssociatedSource.type = Types::AssociatedSource
+    AssociatedSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedSource, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     CreatePermissionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionName, name: "name", traits: {"smithy.api#required" => {}}))
     CreatePermissionRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceType", traits: {"smithy.api#required" => {}}))
     CreatePermissionRequest.add_member(:policy_template, ::Smithy::Schema::Shapes::MemberShape.new(target: Policy, name: "policyTemplate", traits: {"smithy.api#required" => {}}))
@@ -217,6 +231,7 @@ module Aws::RAM
     CreateResourceShareRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clientToken"))
     CreateResourceShareRequest.add_member(:permission_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: PermissionArnList, name: "permissionArns"))
     CreateResourceShareRequest.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceArnOrAccountList, name: "sources"))
+    CreateResourceShareRequest.add_member(:resource_share_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareConfiguration, name: "resourceShareConfiguration"))
     CreateResourceShareRequest.type = Types::CreateResourceShareRequest
     CreateResourceShareResponse.add_member(:resource_share, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShare, name: "resourceShare"))
     CreateResourceShareResponse.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "clientToken"))
@@ -402,6 +417,16 @@ module Aws::RAM
     ListResourcesResponse.add_member(:resources, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "resources"))
     ListResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
     ListResourcesResponse.type = Types::ListResourcesResponse
+    ListSourceAssociationsRequest.add_member(:resource_share_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareArnList, name: "resourceShareArns"))
+    ListSourceAssociationsRequest.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "sourceId"))
+    ListSourceAssociationsRequest.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "sourceType"))
+    ListSourceAssociationsRequest.add_member(:association_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareAssociationStatus, name: "associationStatus"))
+    ListSourceAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListSourceAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
+    ListSourceAssociationsRequest.type = Types::ListSourceAssociationsRequest
+    ListSourceAssociationsResponse.add_member(:source_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedSourceList, name: "sourceAssociations"))
+    ListSourceAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListSourceAssociationsResponse.type = Types::ListSourceAssociationsResponse
     MalformedArnException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
     MalformedArnException.type = Types::MalformedArnException
     MalformedPolicyTemplateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -509,6 +534,7 @@ module Aws::RAM
     ResourceShare.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "creationTime"))
     ResourceShare.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "lastUpdatedTime"))
     ResourceShare.add_member(:feature_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareFeatureSet, name: "featureSet"))
+    ResourceShare.add_member(:resource_share_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareConfiguration, name: "resourceShareConfiguration"))
     ResourceShare.type = Types::ResourceShare
     ResourceShareArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member", traits: {"smithy.api#xmlName" => "item"}))
     ResourceShareAssociation.add_member(:resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "resourceShareArn"))
@@ -527,8 +553,14 @@ module Aws::RAM
     ResourceShareAssociationStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     ResourceShareAssociationStatus.add_member(:disassociating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISASSOCIATING", traits: {"smithy.api#enumValue" => "DISASSOCIATING"}))
     ResourceShareAssociationStatus.add_member(:disassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISASSOCIATED", traits: {"smithy.api#enumValue" => "DISASSOCIATED"}))
+    ResourceShareAssociationStatus.add_member(:suspended, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUSPENDED", traits: {"smithy.api#enumValue" => "SUSPENDED"}))
+    ResourceShareAssociationStatus.add_member(:suspending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUSPENDING", traits: {"smithy.api#enumValue" => "SUSPENDING"}))
+    ResourceShareAssociationStatus.add_member(:restoring, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTORING", traits: {"smithy.api#enumValue" => "RESTORING"}))
     ResourceShareAssociationType.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRINCIPAL", traits: {"smithy.api#enumValue" => "PRINCIPAL"}))
     ResourceShareAssociationType.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
+    ResourceShareAssociationType.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE", traits: {"smithy.api#enumValue" => "SOURCE"}))
+    ResourceShareConfiguration.add_member(:retain_sharing_on_account_leave_organization, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "retainSharingOnAccountLeaveOrganization"))
+    ResourceShareConfiguration.type = Types::ResourceShareConfiguration
     ResourceShareFeatureSet.add_member(:created_from_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED_FROM_POLICY", traits: {"smithy.api#enumValue" => "CREATED_FROM_POLICY"}))
     ResourceShareFeatureSet.add_member(:promoting_to_standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROMOTING_TO_STANDARD", traits: {"smithy.api#enumValue" => "PROMOTING_TO_STANDARD"}))
     ResourceShareFeatureSet.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
@@ -657,7 +689,7 @@ module Aws::RAM
       service.id = "com.amazonaws.ram#AmazonResourceSharing"
       service.name = "AmazonResourceSharing"
       service.version = "2018-01-04"
-      service.traits = {"aws.api#service" => {"sdkId" => "RAM", "arnNamespace" => "ram", "cloudFormationName" => "RAM", "cloudTrailEventSource" => "ram.amazonaws.com", "endpointPrefix" => "ram"}, "aws.auth#sigv4" => {"name" => "ram"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Resource Access Manager"}
+      service.traits = {"aws.api#service" => {"sdkId" => "RAM", "arnNamespace" => "ram", "cloudFormationName" => "RAM", "cloudTrailEventSource" => "ram.amazonaws.com", "endpointPrefix" => "ram"}, "aws.auth#sigv4" => {"name" => "ram"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Resource Access Manager", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ram-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ram.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ram-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ram.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ram.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:accept_resource_share_invitation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ram#AcceptResourceShareInvitation"
         operation.name = "AcceptResourceShareInvitation"
@@ -757,6 +789,7 @@ module Aws::RAM
         operation.errors << ServiceUnavailableException
         operation.errors << TagLimitExceededException
         operation.errors << TagPolicyViolationException
+        operation.errors << ThrottlingException
         operation.errors << UnknownResourceException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/createresourceshare", "code" => 200}}
       end)
@@ -802,6 +835,7 @@ module Aws::RAM
         operation.errors << OperationNotPermittedException
         operation.errors << ServerInternalException
         operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.errors << UnknownResourceException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/deleteresourceshare", "code" => 200}}
       end)
@@ -819,6 +853,7 @@ module Aws::RAM
         operation.errors << ResourceShareLimitExceededException
         operation.errors << ServerInternalException
         operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
         operation.errors << UnknownResourceException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/disassociateresourceshare", "code" => 200}}
       end)
@@ -1045,12 +1080,27 @@ module Aws::RAM
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/listresources", "code" => 200}}
         operation[:paginator] = Paginators::ListResources.new
       end)
+      service.add_operation(:list_source_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ram#ListSourceAssociations"
+        operation.name = "ListSourceAssociations"
+        operation.input = ListSourceAssociationsRequest
+        operation.output = ListSourceAssociationsResponse
+        operation.errors << InvalidNextTokenException
+        operation.errors << InvalidParameterException
+        operation.errors << MalformedArnException
+        operation.errors << ServerInternalException
+        operation.errors << ServiceUnavailableException
+        operation.errors << UnknownResourceException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/listsourceassociations", "code" => 200}}
+        operation[:paginator] = Paginators::ListSourceAssociations.new
+      end)
       service.add_operation(:promote_permission_created_from_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ram#PromotePermissionCreatedFromPolicy"
         operation.name = "PromotePermissionCreatedFromPolicy"
         operation.input = PromotePermissionCreatedFromPolicyRequest
         operation.output = PromotePermissionCreatedFromPolicyResponse
         operation.errors << InvalidParameterException
+        operation.errors << InvalidPolicyException
         operation.errors << MalformedArnException
         operation.errors << MissingRequiredParameterException
         operation.errors << OperationNotPermittedException

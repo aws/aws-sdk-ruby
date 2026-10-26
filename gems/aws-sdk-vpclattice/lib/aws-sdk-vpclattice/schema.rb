@@ -23,6 +23,9 @@ module Aws::VPCLattice
     BatchUpdateRuleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#BatchUpdateRuleOutput", name: "BatchUpdateRuleOutput")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.vpclattice#Boolean", name: "Boolean")
     CertificateArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#CertificateArn", name: "CertificateArn", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^(arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:certificate/[0-9a-z-]+)?$"})
+    CidrRange = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#CidrRange", name: "CidrRange", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    CidrRangeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.vpclattice#CidrRangeList", name: "CidrRangeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    CidrResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#CidrResource", name: "CidrResource")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "[!-~]+"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CreateAccessLogSubscriptionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#CreateAccessLogSubscriptionInput", name: "CreateAccessLogSubscriptionInput")
@@ -51,6 +54,8 @@ module Aws::VPCLattice
     DeleteAccessLogSubscriptionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeleteAccessLogSubscriptionOutput", name: "DeleteAccessLogSubscriptionOutput")
     DeleteAuthPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeleteAuthPolicyInput", name: "DeleteAuthPolicyInput")
     DeleteAuthPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeleteAuthPolicyOutput", name: "DeleteAuthPolicyOutput")
+    DeleteDomainVerificationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeleteDomainVerificationRequest", name: "DeleteDomainVerificationRequest")
+    DeleteDomainVerificationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeleteDomainVerificationResponse", name: "DeleteDomainVerificationResponse")
     DeleteListenerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeleteListenerInput", name: "DeleteListenerInput")
     DeleteListenerOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeleteListenerOutput", name: "DeleteListenerOutput")
     DeleteResourceConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeleteResourceConfigurationRequest", name: "DeleteResourceConfigurationRequest")
@@ -78,8 +83,14 @@ module Aws::VPCLattice
     DeregisterTargetsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeregisterTargetsInput", name: "DeregisterTargetsInput")
     DeregisterTargetsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DeregisterTargetsOutput", name: "DeregisterTargetsOutput")
     DnsEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DnsEntry", name: "DnsEntry")
+    DnsOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DnsOptions", name: "DnsOptions")
     DnsResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DnsResource", name: "DnsResource")
     DomainName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#DomainName", name: "DomainName", traits: {"smithy.api#length" => {"min" => 3, "max" => 255}})
+    DomainVerificationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#DomainVerificationArn", name: "DomainVerificationArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:domainverification/dv-[a-fA-F0-9]{17}$"})
+    DomainVerificationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#DomainVerificationId", name: "DomainVerificationId", traits: {"smithy.api#length" => {"min" => 20, "max" => 20}, "smithy.api#pattern" => "^dv-[a-fA-F0-9]{17}$"})
+    DomainVerificationIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#DomainVerificationIdentifier", name: "DomainVerificationIdentifier", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^((dv-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:domainverification/dv-[a-fA-F0-9]{17}))$"})
+    DomainVerificationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.vpclattice#DomainVerificationList", name: "DomainVerificationList")
+    DomainVerificationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#DomainVerificationSummary", name: "DomainVerificationSummary")
     FailureCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#FailureCode", name: "FailureCode")
     FailureMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#FailureMessage", name: "FailureMessage")
     FixedResponseAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#FixedResponseAction", name: "FixedResponseAction")
@@ -88,6 +99,8 @@ module Aws::VPCLattice
     GetAccessLogSubscriptionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#GetAccessLogSubscriptionOutput", name: "GetAccessLogSubscriptionOutput")
     GetAuthPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#GetAuthPolicyInput", name: "GetAuthPolicyInput")
     GetAuthPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#GetAuthPolicyOutput", name: "GetAuthPolicyOutput")
+    GetDomainVerificationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#GetDomainVerificationRequest", name: "GetDomainVerificationRequest")
+    GetDomainVerificationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#GetDomainVerificationResponse", name: "GetDomainVerificationResponse")
     GetListenerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#GetListenerInput", name: "GetListenerInput")
     GetListenerOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#GetListenerOutput", name: "GetListenerOutput")
     GetResourceConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#GetResourceConfigurationRequest", name: "GetResourceConfigurationRequest")
@@ -128,6 +141,7 @@ module Aws::VPCLattice
     HttpMatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#HttpMatch", name: "HttpMatch")
     HttpMethod = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#HttpMethod", name: "HttpMethod", traits: {"smithy.api#length" => {"max" => 16}})
     HttpStatusCode = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.vpclattice#HttpStatusCode", name: "HttpStatusCode", traits: {"smithy.api#range" => {"min" => 100, "max" => 599}})
+    IdleTimeoutSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.vpclattice#IdleTimeoutSeconds", name: "IdleTimeoutSeconds", traits: {"smithy.api#range" => {"min" => 60, "max" => 600}})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
     IpAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#IpAddress", name: "IpAddress", traits: {"smithy.api#length" => {"min" => 4, "max" => 39}})
     IpAddressType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#IpAddressType", name: "IpAddressType", traits: {"smithy.api#enum" => [{"name" => "IPV4", "value" => "IPV4", "documentation" => "Indicates IPv4 address type"}, {"name" => "IPV6", "value" => "IPV6", "documentation" => "Indicates IPv6 address type"}]})
@@ -136,6 +150,8 @@ module Aws::VPCLattice
     LambdaEventStructureVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#LambdaEventStructureVersion", name: "LambdaEventStructureVersion", traits: {"smithy.api#enum" => [{"name" => "V1", "value" => "V1", "documentation" => "This is the default lambda event structure version"}, {"name" => "V2", "value" => "V2", "documentation" => "Indicates use of lambda event structure version 2"}]})
     ListAccessLogSubscriptionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ListAccessLogSubscriptionsInput", name: "ListAccessLogSubscriptionsInput")
     ListAccessLogSubscriptionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ListAccessLogSubscriptionsOutput", name: "ListAccessLogSubscriptionsOutput")
+    ListDomainVerificationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ListDomainVerificationsRequest", name: "ListDomainVerificationsRequest")
+    ListDomainVerificationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ListDomainVerificationsResponse", name: "ListDomainVerificationsResponse")
     ListListenersInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ListListenersInput", name: "ListListenersInput")
     ListListenersOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ListListenersOutput", name: "ListListenersOutput")
     ListResourceConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ListResourceConfigurationsRequest", name: "ListResourceConfigurationsRequest")
@@ -178,11 +194,18 @@ module Aws::VPCLattice
     PathMatchExact = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#PathMatchExact", name: "PathMatchExact", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^/[a-zA-Z0-9@:%_+.~#?&/=-]*$"})
     PathMatchPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#PathMatchPrefix", name: "PathMatchPrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^/[a-zA-Z0-9@:%_+.~#?&/=-]*$"})
     PathMatchType = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.vpclattice#PathMatchType", name: "PathMatchType")
+    PayerResponsibilityEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#PayerResponsibilityEntry", name: "PayerResponsibilityEntry")
+    PayerResponsibilityList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.vpclattice#PayerResponsibilityList", name: "PayerResponsibilityList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    PayerResponsibilityPayer = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.vpclattice#PayerResponsibilityPayer", name: "PayerResponsibilityPayer")
+    PayerResponsibilityScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.vpclattice#PayerResponsibilityScope", name: "PayerResponsibilityScope")
     PolicyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#PolicyString", name: "PolicyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}, "smithy.api#pattern" => "^.*\\S.*$"})
     Port = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.vpclattice#Port", name: "Port", traits: {"smithy.api#range" => {"min" => 1, "max" => 65535}})
     PortRange = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#PortRange", name: "PortRange", traits: {"smithy.api#length" => {"min" => 1, "max" => 11}, "smithy.api#pattern" => "^((\\d{1,5}\\-\\d{1,5})|(\\d+))$"})
     PortRangeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.vpclattice#PortRangeList", name: "PortRangeList")
-    ProtocolType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ProtocolType", name: "ProtocolType", traits: {"smithy.api#enum" => [{"name" => "TCP", "value" => "TCP", "documentation" => "Resource Configuration protocol type TCP"}]})
+    PrivateDnsPreference = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#PrivateDnsPreference", name: "PrivateDnsPreference", traits: {"smithy.api#enum" => [{"name" => "VERIFIED_DOMAINS_ONLY", "value" => "VERIFIED_DOMAINS_ONLY"}, {"name" => "ALL_DOMAINS", "value" => "ALL_DOMAINS"}, {"name" => "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS", "value" => "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS"}, {"name" => "SPECIFIED_DOMAINS_ONLY", "value" => "SPECIFIED_DOMAINS_ONLY"}]})
+    PrivateDnsSpecifiedDomain = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#PrivateDnsSpecifiedDomain", name: "PrivateDnsSpecifiedDomain", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    PrivateDnsSpecifiedDomainsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.vpclattice#PrivateDnsSpecifiedDomainsList", name: "PrivateDnsSpecifiedDomainsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    ProtocolType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.vpclattice#ProtocolType", name: "ProtocolType")
     PutAuthPolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#PutAuthPolicyInput", name: "PutAuthPolicyInput")
     PutAuthPolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#PutAuthPolicyOutput", name: "PutAuthPolicyOutput")
     PutResourcePolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#PutResourcePolicyInput", name: "PutResourcePolicyInput")
@@ -190,6 +213,7 @@ module Aws::VPCLattice
     RegisterTargetsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#RegisterTargetsInput", name: "RegisterTargetsInput")
     RegisterTargetsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#RegisterTargetsOutput", name: "RegisterTargetsOutput")
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ResourceArn", name: "ResourceArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 200}, "smithy.api#pattern" => "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:((servicenetwork/sn)|(service/svc)|(resourceconfiguration/rcfg))-[0-9a-z]{17}$"})
+    ResourceConfigDnsResolution = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ResourceConfigDnsResolution", name: "ResourceConfigDnsResolution", traits: {"smithy.api#enum" => [{"name" => "IN_VPC", "value" => "IN_VPC", "documentation" => "Enable private DNS resolution within VPC for resources behind this resource gateway"}, {"name" => "PUBLIC", "value" => "PUBLIC", "documentation" => "Use public DNS resolution for resources behind this resource gateway"}]})
     ResourceConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ResourceConfigurationArn", name: "ResourceConfigurationArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"})
     ResourceConfigurationDefinition = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.vpclattice#ResourceConfigurationDefinition", name: "ResourceConfigurationDefinition")
     ResourceConfigurationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ResourceConfigurationId", name: "ResourceConfigurationId", traits: {"smithy.api#length" => {"min" => 22, "max" => 22}, "smithy.api#pattern" => "^rcfg-[0-9a-z]{17}$"})
@@ -199,7 +223,7 @@ module Aws::VPCLattice
     ResourceConfigurationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ResourceConfigurationStatus", name: "ResourceConfigurationStatus", traits: {"smithy.api#enum" => [{"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Resource Configuration is active."}, {"name" => "CREATE_IN_PROGRESS", "value" => "CREATE_IN_PROGRESS", "documentation" => "Resource Configuration creation in progress."}, {"name" => "UPDATE_IN_PROGRESS", "value" => "UPDATE_IN_PROGRESS", "documentation" => "Resource Configuration update in progress."}, {"name" => "DELETE_IN_PROGRESS", "value" => "DELETE_IN_PROGRESS", "documentation" => "Resource Configuration deletion in progress"}, {"name" => "CREATE_FAILED", "value" => "CREATE_FAILED", "documentation" => "Resource Configuration creation failed"}, {"name" => "UPDATE_FAILED", "value" => "UPDATE_FAILED", "documentation" => "Resource Configuration update failed"}, {"name" => "DELETE_FAILED", "value" => "DELETE_FAILED", "documentation" => "Resource Configuration deletion failed."}]})
     ResourceConfigurationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ResourceConfigurationSummary", name: "ResourceConfigurationSummary")
     ResourceConfigurationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.vpclattice#ResourceConfigurationSummaryList", name: "ResourceConfigurationSummaryList")
-    ResourceConfigurationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ResourceConfigurationType", name: "ResourceConfigurationType", traits: {"smithy.api#enum" => [{"name" => "GROUP", "value" => "GROUP", "documentation" => "Resource Configuration of type GROUP"}, {"name" => "CHILD", "value" => "CHILD", "documentation" => "Resource Configuration of type CHILD"}, {"name" => "SINGLE", "value" => "SINGLE", "documentation" => "Resource Configuration of type SINGLE"}, {"name" => "ARN", "value" => "ARN", "documentation" => "Resource Configuration of type ARN"}]})
+    ResourceConfigurationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.vpclattice#ResourceConfigurationType", name: "ResourceConfigurationType")
     ResourceEndpointAssociationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ResourceEndpointAssociationArn", name: "ResourceEndpointAssociationArn", traits: {"smithy.api#length" => {"min" => 21, "max" => 2048}, "smithy.api#pattern" => "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceendpointassociation/rea-[0-9a-f]{17}$"})
     ResourceEndpointAssociationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ResourceEndpointAssociationId", name: "ResourceEndpointAssociationId", traits: {"smithy.api#length" => {"min" => 21, "max" => 21}, "smithy.api#pattern" => "^rea-[0-9a-f]{17}$"})
     ResourceEndpointAssociationIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ResourceEndpointAssociationIdentifier", name: "ResourceEndpointAssociationIdentifier", traits: {"smithy.api#length" => {"min" => 21, "max" => 2048}, "smithy.api#pattern" => "^((rea-[0-9a-f]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceendpointassociation/rea-[0-9a-f]{17}))$"})
@@ -273,6 +297,8 @@ module Aws::VPCLattice
     ServiceStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ServiceStatus", name: "ServiceStatus", traits: {"smithy.api#enum" => [{"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Service is active."}, {"name" => "CREATE_IN_PROGRESS", "value" => "CREATE_IN_PROGRESS", "documentation" => "Service creation in progress."}, {"name" => "DELETE_IN_PROGRESS", "value" => "DELETE_IN_PROGRESS", "documentation" => "Service deletion in progress"}, {"name" => "CREATE_FAILED", "value" => "CREATE_FAILED", "documentation" => "Service creation failed"}, {"name" => "DELETE_FAILED", "value" => "DELETE_FAILED", "documentation" => "Service deletion failed."}]})
     ServiceSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ServiceSummary", name: "ServiceSummary")
     SharingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#SharingConfig", name: "SharingConfig")
+    StartDomainVerificationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#StartDomainVerificationRequest", name: "StartDomainVerificationRequest")
+    StartDomainVerificationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#StartDomainVerificationResponse", name: "StartDomainVerificationResponse")
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#SubnetId", name: "SubnetId", traits: {"smithy.api#length" => {"min" => 5, "max" => 200}})
     SubnetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.vpclattice#SubnetList", name: "SubnetList")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -302,6 +328,7 @@ module Aws::VPCLattice
     TargetSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.vpclattice#TargetSummaryList", name: "TargetSummaryList")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {"throttling" => true}})
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.vpclattice#Timestamp", name: "Timestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
+    TxtMethodConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#TxtMethodConfig", name: "TxtMethodConfig")
     UnhealthyThresholdCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.vpclattice#UnhealthyThresholdCount", name: "UnhealthyThresholdCount", traits: {"smithy.api#range" => {"min" => 0, "max" => 10}})
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#UntagResourceInput", name: "UntagResourceInput")
     UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#UntagResourceOutput", name: "UntagResourceOutput")
@@ -327,6 +354,7 @@ module Aws::VPCLattice
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.vpclattice#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.vpclattice#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"value" => "unknownOperation", "name" => "UNKNOWN_OPERATION"}, {"value" => "cannotParse", "name" => "CANNOT_PARSE"}, {"value" => "fieldValidationFailed", "name" => "FIELD_VALIDATION_FAILED"}, {"value" => "other", "name" => "OTHER"}]})
+    VerificationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#VerificationStatus", name: "VerificationStatus", traits: {"smithy.api#enum" => [{"name" => "VERIFIED", "value" => "VERIFIED"}, {"name" => "PENDING", "value" => "PENDING"}, {"name" => "VERIFICATION_TIMED_OUT", "value" => "VERIFICATION_TIMED_OUT"}]})
     VpcEndpointId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#VpcEndpointId", name: "VpcEndpointId", traits: {"smithy.api#length" => {"min" => 22, "max" => 22}, "smithy.api#pattern" => "^vpce-[0-9a-f]{17}$"})
     VpcEndpointOwner = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#VpcEndpointOwner", name: "VpcEndpointOwner", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\d{12}$"})
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.vpclattice#VpcId", name: "VpcId", traits: {"smithy.api#length" => {"min" => 5, "max" => 50}, "smithy.api#pattern" => "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"})
@@ -355,6 +383,9 @@ module Aws::VPCLattice
     BatchUpdateRuleOutput.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdateSuccessList, name: "successful"))
     BatchUpdateRuleOutput.add_member(:unsuccessful, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleUpdateFailureList, name: "unsuccessful"))
     BatchUpdateRuleOutput.type = Types::BatchUpdateRuleOutput
+    CidrRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrRange, name: "member"))
+    CidrResource.add_member(:cidr_ranges, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrRangeList, name: "cidrRanges"))
+    CidrResource.type = Types::CidrResource
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -397,6 +428,9 @@ module Aws::VPCLattice
     CreateResourceConfigurationRequest.add_member(:resource_configuration_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationIdentifier, name: "resourceConfigurationGroupIdentifier"))
     CreateResourceConfigurationRequest.add_member(:resource_configuration_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationDefinition, name: "resourceConfigurationDefinition"))
     CreateResourceConfigurationRequest.add_member(:allow_association_to_shareable_service_network, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "allowAssociationToShareableServiceNetwork"))
+    CreateResourceConfigurationRequest.add_member(:custom_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "customDomainName"))
+    CreateResourceConfigurationRequest.add_member(:group_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "groupDomain"))
+    CreateResourceConfigurationRequest.add_member(:domain_verification_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationIdentifier, name: "domainVerificationIdentifier"))
     CreateResourceConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateResourceConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CreateResourceConfigurationRequest.type = Types::CreateResourceConfigurationRequest
@@ -413,6 +447,10 @@ module Aws::VPCLattice
     CreateResourceConfigurationResponse.add_member(:allow_association_to_shareable_service_network, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "allowAssociationToShareableServiceNetwork"))
     CreateResourceConfigurationResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     CreateResourceConfigurationResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureReason"))
+    CreateResourceConfigurationResponse.add_member(:custom_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "customDomainName"))
+    CreateResourceConfigurationResponse.add_member(:domain_verification_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationId, name: "domainVerificationId"))
+    CreateResourceConfigurationResponse.add_member(:group_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "groupDomain"))
+    CreateResourceConfigurationResponse.add_member(:domain_verification_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationArn, name: "domainVerificationArn"))
     CreateResourceConfigurationResponse.type = Types::CreateResourceConfigurationResponse
     CreateResourceGatewayRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateResourceGatewayRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -421,6 +459,7 @@ module Aws::VPCLattice
     CreateResourceGatewayRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}}))
     CreateResourceGatewayRequest.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayIpAddressType, name: "ipAddressType"))
     CreateResourceGatewayRequest.add_member(:ipv4_addresses_per_eni, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4AddressesPerEni, name: "ipv4AddressesPerEni"))
+    CreateResourceGatewayRequest.add_member(:resource_config_dns_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigDnsResolution, name: "resourceConfigDnsResolution"))
     CreateResourceGatewayRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CreateResourceGatewayRequest.type = Types::CreateResourceGatewayRequest
     CreateResourceGatewayResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayName, name: "name"))
@@ -432,6 +471,7 @@ module Aws::VPCLattice
     CreateResourceGatewayResponse.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds"))
     CreateResourceGatewayResponse.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayIpAddressType, name: "ipAddressType"))
     CreateResourceGatewayResponse.add_member(:ipv4_addresses_per_eni, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4AddressesPerEni, name: "ipv4AddressesPerEni"))
+    CreateResourceGatewayResponse.add_member(:resource_config_dns_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigDnsResolution, name: "resourceConfigDnsResolution"))
     CreateResourceGatewayResponse.type = Types::CreateResourceGatewayResponse
     CreateRuleInput.add_member(:service_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIdentifier, name: "serviceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateRuleInput.add_member(:listener_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerIdentifier, name: "listenerIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -455,6 +495,7 @@ module Aws::VPCLattice
     CreateServiceInput.add_member(:custom_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCustomDomainName, name: "customDomainName"))
     CreateServiceInput.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "certificateArn"))
     CreateServiceInput.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "authType"))
+    CreateServiceInput.add_member(:idle_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeoutSeconds, name: "idleTimeoutSeconds"))
     CreateServiceInput.type = Types::CreateServiceInput
     CreateServiceNetworkInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateServiceNetworkInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -471,12 +512,14 @@ module Aws::VPCLattice
     CreateServiceNetworkResourceAssociationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateServiceNetworkResourceAssociationRequest.add_member(:resource_configuration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationIdentifier, name: "resourceConfigurationIdentifier", traits: {"smithy.api#required" => {}}))
     CreateServiceNetworkResourceAssociationRequest.add_member(:service_network_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkIdentifierWithoutRegex, name: "serviceNetworkIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateServiceNetworkResourceAssociationRequest.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
     CreateServiceNetworkResourceAssociationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CreateServiceNetworkResourceAssociationRequest.type = Types::CreateServiceNetworkResourceAssociationRequest
     CreateServiceNetworkResourceAssociationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkResourceAssociationId, name: "id"))
     CreateServiceNetworkResourceAssociationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkResourceAssociationArn, name: "arn"))
     CreateServiceNetworkResourceAssociationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkResourceAssociationStatus, name: "status"))
     CreateServiceNetworkResourceAssociationResponse.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "createdBy"))
+    CreateServiceNetworkResourceAssociationResponse.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
     CreateServiceNetworkResourceAssociationResponse.type = Types::CreateServiceNetworkResourceAssociationResponse
     CreateServiceNetworkServiceAssociationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateServiceNetworkServiceAssociationInput.add_member(:service_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIdentifier, name: "serviceIdentifier", traits: {"smithy.api#required" => {}}))
@@ -491,16 +534,20 @@ module Aws::VPCLattice
     CreateServiceNetworkServiceAssociationOutput.add_member(:dns_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsEntry, name: "dnsEntry"))
     CreateServiceNetworkServiceAssociationOutput.type = Types::CreateServiceNetworkServiceAssociationOutput
     CreateServiceNetworkVpcAssociationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
-    CreateServiceNetworkVpcAssociationInput.add_member(:service_network_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkIdentifier, name: "serviceNetworkIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateServiceNetworkVpcAssociationInput.add_member(:service_network_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkIdentifierWithoutRegex, name: "serviceNetworkIdentifier", traits: {"smithy.api#required" => {}}))
     CreateServiceNetworkVpcAssociationInput.add_member(:vpc_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateServiceNetworkVpcAssociationInput.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
     CreateServiceNetworkVpcAssociationInput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}}))
     CreateServiceNetworkVpcAssociationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateServiceNetworkVpcAssociationInput.add_member(:dns_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsOptions, name: "dnsOptions"))
     CreateServiceNetworkVpcAssociationInput.type = Types::CreateServiceNetworkVpcAssociationInput
     CreateServiceNetworkVpcAssociationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationId, name: "id"))
     CreateServiceNetworkVpcAssociationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationStatus, name: "status"))
     CreateServiceNetworkVpcAssociationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationArn, name: "arn"))
     CreateServiceNetworkVpcAssociationOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "createdBy"))
     CreateServiceNetworkVpcAssociationOutput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds"))
+    CreateServiceNetworkVpcAssociationOutput.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
+    CreateServiceNetworkVpcAssociationOutput.add_member(:dns_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsOptions, name: "dnsOptions"))
     CreateServiceNetworkVpcAssociationOutput.type = Types::CreateServiceNetworkVpcAssociationOutput
     CreateServiceOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceId, name: "id"))
     CreateServiceOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceArn, name: "arn"))
@@ -509,6 +556,7 @@ module Aws::VPCLattice
     CreateServiceOutput.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "certificateArn"))
     CreateServiceOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceStatus, name: "status"))
     CreateServiceOutput.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "authType"))
+    CreateServiceOutput.add_member(:idle_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeoutSeconds, name: "idleTimeoutSeconds"))
     CreateServiceOutput.add_member(:dns_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsEntry, name: "dnsEntry"))
     CreateServiceOutput.type = Types::CreateServiceOutput
     CreateTargetGroupInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -530,6 +578,9 @@ module Aws::VPCLattice
     DeleteAuthPolicyInput.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAuthPolicyInput.type = Types::DeleteAuthPolicyInput
     DeleteAuthPolicyOutput.type = Types::DeleteAuthPolicyOutput
+    DeleteDomainVerificationRequest.add_member(:domain_verification_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationIdentifier, name: "domainVerificationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteDomainVerificationRequest.type = Types::DeleteDomainVerificationRequest
+    DeleteDomainVerificationResponse.type = Types::DeleteDomainVerificationResponse
     DeleteListenerInput.add_member(:service_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIdentifier, name: "serviceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteListenerInput.add_member(:listener_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerIdentifier, name: "listenerIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteListenerInput.type = Types::DeleteListenerInput
@@ -603,9 +654,22 @@ module Aws::VPCLattice
     DnsEntry.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "domainName"))
     DnsEntry.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "hostedZoneId"))
     DnsEntry.type = Types::DnsEntry
+    DnsOptions.add_member(:private_dns_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateDnsPreference, name: "privateDnsPreference"))
+    DnsOptions.add_member(:private_dns_specified_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateDnsSpecifiedDomainsList, name: "privateDnsSpecifiedDomains"))
+    DnsOptions.type = Types::DnsOptions
     DnsResource.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName"))
     DnsResource.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationIpAddressType, name: "ipAddressType"))
     DnsResource.type = Types::DnsResource
+    DomainVerificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationSummary, name: "member"))
+    DomainVerificationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationId, name: "id", traits: {"smithy.api#required" => {}}))
+    DomainVerificationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    DomainVerificationSummary.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName", traits: {"smithy.api#required" => {}}))
+    DomainVerificationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DomainVerificationSummary.add_member(:txt_method_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TxtMethodConfig, name: "txtMethodConfig"))
+    DomainVerificationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    DomainVerificationSummary.add_member(:last_verified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastVerifiedTime"))
+    DomainVerificationSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    DomainVerificationSummary.type = Types::DomainVerificationSummary
     FixedResponseAction.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpStatusCode, name: "statusCode", traits: {"smithy.api#required" => {}}))
     FixedResponseAction.type = Types::FixedResponseAction
     ForwardAction.add_member(:target_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: WeightedTargetGroupList, name: "targetGroups", traits: {"smithy.api#required" => {}}))
@@ -628,6 +692,17 @@ module Aws::VPCLattice
     GetAuthPolicyOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     GetAuthPolicyOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     GetAuthPolicyOutput.type = Types::GetAuthPolicyOutput
+    GetDomainVerificationRequest.add_member(:domain_verification_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationIdentifier, name: "domainVerificationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDomainVerificationRequest.type = Types::GetDomainVerificationRequest
+    GetDomainVerificationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationId, name: "id", traits: {"smithy.api#required" => {}}))
+    GetDomainVerificationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    GetDomainVerificationResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName", traits: {"smithy.api#required" => {}}))
+    GetDomainVerificationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    GetDomainVerificationResponse.add_member(:txt_method_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TxtMethodConfig, name: "txtMethodConfig"))
+    GetDomainVerificationResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    GetDomainVerificationResponse.add_member(:last_verified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastVerifiedTime"))
+    GetDomainVerificationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    GetDomainVerificationResponse.type = Types::GetDomainVerificationResponse
     GetListenerInput.add_member(:service_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIdentifier, name: "serviceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetListenerInput.add_member(:listener_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerIdentifier, name: "listenerIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetListenerInput.type = Types::GetListenerInput
@@ -660,6 +735,10 @@ module Aws::VPCLattice
     GetResourceConfigurationResponse.add_member(:amazon_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "amazonManaged"))
     GetResourceConfigurationResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureReason"))
     GetResourceConfigurationResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
+    GetResourceConfigurationResponse.add_member(:domain_verification_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationId, name: "domainVerificationId"))
+    GetResourceConfigurationResponse.add_member(:domain_verification_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationArn, name: "domainVerificationArn"))
+    GetResourceConfigurationResponse.add_member(:domain_verification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "domainVerificationStatus"))
+    GetResourceConfigurationResponse.add_member(:group_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "groupDomain"))
     GetResourceConfigurationResponse.type = Types::GetResourceConfigurationResponse
     GetResourceGatewayRequest.add_member(:resource_gateway_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayIdentifier, name: "resourceGatewayIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetResourceGatewayRequest.type = Types::GetResourceGatewayRequest
@@ -669,9 +748,12 @@ module Aws::VPCLattice
     GetResourceGatewayResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayStatus, name: "status"))
     GetResourceGatewayResponse.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
     GetResourceGatewayResponse.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetList, name: "subnetIds"))
+    GetResourceGatewayResponse.add_member(:service_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "serviceManaged"))
+    GetResourceGatewayResponse.add_member(:managed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "managedBy"))
     GetResourceGatewayResponse.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds"))
     GetResourceGatewayResponse.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayIpAddressType, name: "ipAddressType"))
     GetResourceGatewayResponse.add_member(:ipv4_addresses_per_eni, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4AddressesPerEni, name: "ipv4AddressesPerEni"))
+    GetResourceGatewayResponse.add_member(:resource_config_dns_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigDnsResolution, name: "resourceConfigDnsResolution"))
     GetResourceGatewayResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     GetResourceGatewayResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     GetResourceGatewayResponse.type = Types::GetResourceGatewayResponse
@@ -724,8 +806,10 @@ module Aws::VPCLattice
     GetServiceNetworkResourceAssociationResponse.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureCode"))
     GetServiceNetworkResourceAssociationResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     GetServiceNetworkResourceAssociationResponse.add_member(:private_dns_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsEntry, name: "privateDnsEntry"))
+    GetServiceNetworkResourceAssociationResponse.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
     GetServiceNetworkResourceAssociationResponse.add_member(:dns_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsEntry, name: "dnsEntry"))
     GetServiceNetworkResourceAssociationResponse.add_member(:is_managed_association, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isManagedAssociation"))
+    GetServiceNetworkResourceAssociationResponse.add_member(:domain_verification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "domainVerificationStatus"))
     GetServiceNetworkResourceAssociationResponse.type = Types::GetServiceNetworkResourceAssociationResponse
     GetServiceNetworkServiceAssociationInput.add_member(:service_network_service_association_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkServiceAssociationIdentifier, name: "serviceNetworkServiceAssociationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetServiceNetworkServiceAssociationInput.type = Types::GetServiceNetworkServiceAssociationInput
@@ -757,9 +841,11 @@ module Aws::VPCLattice
     GetServiceNetworkVpcAssociationOutput.add_member(:service_network_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkArn, name: "serviceNetworkArn"))
     GetServiceNetworkVpcAssociationOutput.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
     GetServiceNetworkVpcAssociationOutput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds"))
+    GetServiceNetworkVpcAssociationOutput.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
     GetServiceNetworkVpcAssociationOutput.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
     GetServiceNetworkVpcAssociationOutput.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureCode"))
     GetServiceNetworkVpcAssociationOutput.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
+    GetServiceNetworkVpcAssociationOutput.add_member(:dns_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsOptions, name: "dnsOptions"))
     GetServiceNetworkVpcAssociationOutput.type = Types::GetServiceNetworkVpcAssociationOutput
     GetServiceOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceId, name: "id"))
     GetServiceOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceName, name: "name"))
@@ -771,6 +857,7 @@ module Aws::VPCLattice
     GetServiceOutput.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "certificateArn"))
     GetServiceOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceStatus, name: "status"))
     GetServiceOutput.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "authType"))
+    GetServiceOutput.add_member(:idle_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeoutSeconds, name: "idleTimeoutSeconds"))
     GetServiceOutput.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureCode, name: "failureCode"))
     GetServiceOutput.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureMessage, name: "failureMessage"))
     GetServiceOutput.type = Types::GetServiceOutput
@@ -825,6 +912,12 @@ module Aws::VPCLattice
     ListAccessLogSubscriptionsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogSubscriptionList, name: "items", traits: {"smithy.api#required" => {}}))
     ListAccessLogSubscriptionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListAccessLogSubscriptionsOutput.type = Types::ListAccessLogSubscriptionsOutput
+    ListDomainVerificationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListDomainVerificationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListDomainVerificationsRequest.type = Types::ListDomainVerificationsRequest
+    ListDomainVerificationsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationList, name: "items", traits: {"smithy.api#required" => {}}))
+    ListDomainVerificationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListDomainVerificationsResponse.type = Types::ListDomainVerificationsResponse
     ListListenersInput.add_member(:service_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIdentifier, name: "serviceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListListenersInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListListenersInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -834,6 +927,7 @@ module Aws::VPCLattice
     ListListenersOutput.type = Types::ListListenersOutput
     ListResourceConfigurationsRequest.add_member(:resource_gateway_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayIdentifier, name: "resourceGatewayIdentifier", traits: {"smithy.api#httpQuery" => "resourceGatewayIdentifier"}))
     ListResourceConfigurationsRequest.add_member(:resource_configuration_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationIdentifier, name: "resourceConfigurationGroupIdentifier", traits: {"smithy.api#httpQuery" => "resourceConfigurationGroupIdentifier"}))
+    ListResourceConfigurationsRequest.add_member(:domain_verification_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationIdentifier, name: "domainVerificationIdentifier", traits: {"smithy.api#httpQuery" => "domainVerificationIdentifier"}))
     ListResourceConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListResourceConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListResourceConfigurationsRequest.type = Types::ListResourceConfigurationsRequest
@@ -947,7 +1041,17 @@ module Aws::VPCLattice
     PathMatchType.add_member(:prefix, Types::PathMatchType::Prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: PathMatchPrefix, name: "prefix"))
     PathMatchType.add_member(:unknown, Types::PathMatchType::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     PathMatchType.type = Types::PathMatchType
+    PayerResponsibilityEntry.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: PayerResponsibilityScope, name: "scope"))
+    PayerResponsibilityEntry.add_member(:payer_responsibility_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PayerResponsibilityPayer, name: "payerResponsibilityType"))
+    PayerResponsibilityEntry.type = Types::PayerResponsibilityEntry
+    PayerResponsibilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PayerResponsibilityEntry, name: "member"))
+    PayerResponsibilityPayer.add_member(:vpc_endpoint_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VpcEndpointAccount", traits: {"smithy.api#enumValue" => "VpcEndpointAccount"}))
+    PayerResponsibilityPayer.add_member(:resource_gateway_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceGatewayAccount", traits: {"smithy.api#enumValue" => "ResourceGatewayAccount"}))
+    PayerResponsibilityScope.add_member(:resource_gateway_charges, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceGatewayCharges", traits: {"smithy.api#enumValue" => "ResourceGatewayCharges"}))
     PortRangeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortRange, name: "member"))
+    PrivateDnsSpecifiedDomainsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivateDnsSpecifiedDomain, name: "member"))
+    ProtocolType.add_member(:tcp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP", traits: {"smithy.api#enumValue" => "TCP"}))
+    ProtocolType.add_member(:tcp_udp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP_UDP", traits: {"smithy.api#enumValue" => "TCP_UDP"}))
     PutAuthPolicyInput.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "resourceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutAuthPolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthPolicyString, name: "policy", traits: {"smithy.api#required" => {}}))
     PutAuthPolicyInput.type = Types::PutAuthPolicyInput
@@ -967,6 +1071,7 @@ module Aws::VPCLattice
     ResourceConfigurationDefinition.add_member(:dns_resource, Types::ResourceConfigurationDefinition::DnsResource, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsResource, name: "dnsResource"))
     ResourceConfigurationDefinition.add_member(:ip_resource, Types::ResourceConfigurationDefinition::IpResource, ::Smithy::Schema::Shapes::MemberShape.new(target: IpResource, name: "ipResource"))
     ResourceConfigurationDefinition.add_member(:arn_resource, Types::ResourceConfigurationDefinition::ArnResource, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnResource, name: "arnResource"))
+    ResourceConfigurationDefinition.add_member(:cidr_resource, Types::ResourceConfigurationDefinition::CidrResource, ::Smithy::Schema::Shapes::MemberShape.new(target: CidrResource, name: "cidrResource"))
     ResourceConfigurationDefinition.add_member(:unknown, Types::ResourceConfigurationDefinition::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ResourceConfigurationDefinition.type = Types::ResourceConfigurationDefinition
     ResourceConfigurationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationId, name: "id"))
@@ -979,8 +1084,16 @@ module Aws::VPCLattice
     ResourceConfigurationSummary.add_member(:amazon_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "amazonManaged"))
     ResourceConfigurationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ResourceConfigurationSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
+    ResourceConfigurationSummary.add_member(:custom_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "customDomainName"))
+    ResourceConfigurationSummary.add_member(:domain_verification_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationId, name: "domainVerificationId"))
+    ResourceConfigurationSummary.add_member(:group_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "groupDomain"))
     ResourceConfigurationSummary.type = Types::ResourceConfigurationSummary
     ResourceConfigurationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigurationSummary, name: "member"))
+    ResourceConfigurationType.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GROUP", traits: {"smithy.api#enumValue" => "GROUP"}))
+    ResourceConfigurationType.add_member(:child, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHILD", traits: {"smithy.api#enumValue" => "CHILD"}))
+    ResourceConfigurationType.add_member(:single, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE", traits: {"smithy.api#enumValue" => "SINGLE"}))
+    ResourceConfigurationType.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARN", traits: {"smithy.api#enumValue" => "ARN"}))
+    ResourceConfigurationType.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CIDR", traits: {"smithy.api#enumValue" => "CIDR"}))
     ResourceEndpointAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpointAssociationSummary, name: "member"))
     ResourceEndpointAssociationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpointAssociationId, name: "id"))
     ResourceEndpointAssociationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceEndpointAssociationArn, name: "arn"))
@@ -991,6 +1104,7 @@ module Aws::VPCLattice
     ResourceEndpointAssociationSummary.add_member(:vpc_endpoint_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointOwner, name: "vpcEndpointOwner"))
     ResourceEndpointAssociationSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "createdBy"))
     ResourceEndpointAssociationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    ResourceEndpointAssociationSummary.add_member(:payer_responsibility, ::Smithy::Schema::Shapes::MemberShape.new(target: PayerResponsibilityList, name: "payerResponsibility"))
     ResourceEndpointAssociationSummary.type = Types::ResourceEndpointAssociationSummary
     ResourceGatewayList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewaySummary, name: "member"))
     ResourceGatewaySummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayName, name: "name"))
@@ -1002,6 +1116,7 @@ module Aws::VPCLattice
     ResourceGatewaySummary.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds"))
     ResourceGatewaySummary.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceGatewayIpAddressType, name: "ipAddressType"))
     ResourceGatewaySummary.add_member(:ipv4_addresses_per_eni, ::Smithy::Schema::Shapes::MemberShape.new(target: Ipv4AddressesPerEni, name: "ipv4AddressesPerEni"))
+    ResourceGatewaySummary.add_member(:resource_config_dns_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfigDnsResolution, name: "resourceConfigDnsResolution"))
     ResourceGatewaySummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     ResourceGatewaySummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     ResourceGatewaySummary.type = Types::ResourceGatewaySummary
@@ -1073,6 +1188,7 @@ module Aws::VPCLattice
     ServiceNetworkResourceAssociationSummary.add_member(:private_dns_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsEntry, name: "privateDnsEntry"))
     ServiceNetworkResourceAssociationSummary.add_member(:is_managed_association, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isManagedAssociation"))
     ServiceNetworkResourceAssociationSummary.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureCode"))
+    ServiceNetworkResourceAssociationSummary.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
     ServiceNetworkResourceAssociationSummary.type = Types::ServiceNetworkResourceAssociationSummary
     ServiceNetworkServiceAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkServiceAssociationSummary, name: "member"))
     ServiceNetworkServiceAssociationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkServiceAssociationIdentifier, name: "id"))
@@ -1107,6 +1223,8 @@ module Aws::VPCLattice
     ServiceNetworkVpcAssociationSummary.add_member(:service_network_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkId, name: "serviceNetworkId"))
     ServiceNetworkVpcAssociationSummary.add_member(:service_network_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkName, name: "serviceNetworkName"))
     ServiceNetworkVpcAssociationSummary.add_member(:service_network_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkArn, name: "serviceNetworkArn"))
+    ServiceNetworkVpcAssociationSummary.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
+    ServiceNetworkVpcAssociationSummary.add_member(:dns_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsOptions, name: "dnsOptions"))
     ServiceNetworkVpcAssociationSummary.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
     ServiceNetworkVpcAssociationSummary.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
     ServiceNetworkVpcAssociationSummary.type = Types::ServiceNetworkVpcAssociationSummary
@@ -1128,6 +1246,16 @@ module Aws::VPCLattice
     ServiceSummary.type = Types::ServiceSummary
     SharingConfig.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled"))
     SharingConfig.type = Types::SharingConfig
+    StartDomainVerificationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartDomainVerificationRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName", traits: {"smithy.api#required" => {}}))
+    StartDomainVerificationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    StartDomainVerificationRequest.type = Types::StartDomainVerificationRequest
+    StartDomainVerificationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationId, name: "id", traits: {"smithy.api#required" => {}}))
+    StartDomainVerificationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainVerificationArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    StartDomainVerificationResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "domainName", traits: {"smithy.api#required" => {}}))
+    StartDomainVerificationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VerificationStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    StartDomainVerificationResponse.add_member(:txt_method_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TxtMethodConfig, name: "txtMethodConfig"))
+    StartDomainVerificationResponse.type = Types::StartDomainVerificationResponse
     SubnetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
@@ -1180,6 +1308,9 @@ module Aws::VPCLattice
     ThrottlingException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode"))
     ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
+    TxtMethodConfig.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value", traits: {"smithy.api#required" => {}}))
+    TxtMethodConfig.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#required" => {}}))
+    TxtMethodConfig.type = Types::TxtMethodConfig
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
@@ -1253,6 +1384,7 @@ module Aws::VPCLattice
     UpdateServiceInput.add_member(:service_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceIdentifier, name: "serviceIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateServiceInput.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "certificateArn"))
     UpdateServiceInput.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "authType"))
+    UpdateServiceInput.add_member(:idle_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeoutSeconds, name: "idleTimeoutSeconds"))
     UpdateServiceInput.type = Types::UpdateServiceInput
     UpdateServiceNetworkInput.add_member(:service_network_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkIdentifier, name: "serviceNetworkIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateServiceNetworkInput.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "authType", traits: {"smithy.api#required" => {}}))
@@ -1263,13 +1395,17 @@ module Aws::VPCLattice
     UpdateServiceNetworkOutput.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "authType"))
     UpdateServiceNetworkOutput.type = Types::UpdateServiceNetworkOutput
     UpdateServiceNetworkVpcAssociationInput.add_member(:service_network_vpc_association_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationIdentifier, name: "serviceNetworkVpcAssociationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateServiceNetworkVpcAssociationInput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#required" => {}}))
+    UpdateServiceNetworkVpcAssociationInput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}}))
+    UpdateServiceNetworkVpcAssociationInput.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
+    UpdateServiceNetworkVpcAssociationInput.add_member(:dns_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsOptions, name: "dnsOptions"))
     UpdateServiceNetworkVpcAssociationInput.type = Types::UpdateServiceNetworkVpcAssociationInput
     UpdateServiceNetworkVpcAssociationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationId, name: "id"))
     UpdateServiceNetworkVpcAssociationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationArn, name: "arn"))
     UpdateServiceNetworkVpcAssociationOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceNetworkVpcAssociationStatus, name: "status"))
     UpdateServiceNetworkVpcAssociationOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "createdBy"))
     UpdateServiceNetworkVpcAssociationOutput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupList, name: "securityGroupIds"))
+    UpdateServiceNetworkVpcAssociationOutput.add_member(:private_dns_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "privateDnsEnabled"))
+    UpdateServiceNetworkVpcAssociationOutput.add_member(:dns_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsOptions, name: "dnsOptions"))
     UpdateServiceNetworkVpcAssociationOutput.type = Types::UpdateServiceNetworkVpcAssociationOutput
     UpdateServiceOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceId, name: "id"))
     UpdateServiceOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceArn, name: "arn"))
@@ -1277,6 +1413,7 @@ module Aws::VPCLattice
     UpdateServiceOutput.add_member(:custom_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCustomDomainName, name: "customDomainName"))
     UpdateServiceOutput.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateArn, name: "certificateArn"))
     UpdateServiceOutput.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "authType"))
+    UpdateServiceOutput.add_member(:idle_timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeoutSeconds, name: "idleTimeoutSeconds"))
     UpdateServiceOutput.type = Types::UpdateServiceOutput
     UpdateTargetGroupInput.add_member(:target_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupIdentifier, name: "targetGroupIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateTargetGroupInput.add_member(:health_check, ::Smithy::Schema::Shapes::MemberShape.new(target: HealthCheckConfig, name: "healthCheck", traits: {"smithy.api#required" => {}}))
@@ -1305,7 +1442,7 @@ module Aws::VPCLattice
       service.id = "com.amazonaws.vpclattice#MercuryControlPlane"
       service.name = "MercuryControlPlane"
       service.version = "2022-11-30"
-      service.traits = {"aws.api#service" => {"sdkId" => "VPC Lattice", "arnNamespace" => "vpc-lattice", "cloudFormationName" => "VpcLattice", "cloudTrailEventSource" => "vpc-lattice.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "vpc-lattice"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"]}, "smithy.api#title" => "Amazon VPC Lattice"}
+      service.traits = {"aws.api#service" => {"sdkId" => "VPC Lattice", "arnNamespace" => "vpc-lattice", "cloudFormationName" => "VpcLattice", "cloudTrailEventSource" => "vpc-lattice.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "vpc-lattice"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"]}, "smithy.api#title" => "Amazon VPC Lattice", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://vpc-lattice-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://vpc-lattice-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://vpc-lattice.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://vpc-lattice.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_update_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.vpclattice#BatchUpdateRule"
         operation.name = "BatchUpdateRule"
@@ -1495,6 +1632,18 @@ module Aws::VPCLattice
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 204, "method" => "DELETE", "uri" => "/authpolicy/{resourceIdentifier}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_domain_verification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.vpclattice#DeleteDomainVerification"
+        operation.name = "DeleteDomainVerification"
+        operation.input = DeleteDomainVerificationRequest
+        operation.output = DeleteDomainVerificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/domainverifications/{domainVerificationIdentifier}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_listener, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.vpclattice#DeleteListener"
@@ -1686,6 +1835,18 @@ module Aws::VPCLattice
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/authpolicy/{resourceIdentifier}"}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_domain_verification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.vpclattice#GetDomainVerification"
+        operation.name = "GetDomainVerification"
+        operation.input = GetDomainVerificationRequest
+        operation.output = GetDomainVerificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/domainverifications/{domainVerificationIdentifier}"}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_listener, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.vpclattice#GetListener"
         operation.name = "GetListener"
@@ -1829,6 +1990,19 @@ module Aws::VPCLattice
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "uri" => "/accesslogsubscriptions", "method" => "GET"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAccessLogSubscriptions.new
+      end)
+      service.add_operation(:list_domain_verifications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.vpclattice#ListDomainVerifications"
+        operation.name = "ListDomainVerifications"
+        operation.input = ListDomainVerificationsRequest
+        operation.output = ListDomainVerificationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/domainverifications"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListDomainVerifications.new
       end)
       service.add_operation(:list_listeners, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.vpclattice#ListListeners"
@@ -2037,6 +2211,19 @@ module Aws::VPCLattice
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "uri" => "/targetgroups/{targetGroupIdentifier}/registertargets", "method" => "POST"}}
+      end)
+      service.add_operation(:start_domain_verification, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.vpclattice#StartDomainVerification"
+        operation.name = "StartDomainVerification"
+        operation.input = StartDomainVerificationRequest
+        operation.output = StartDomainVerificationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 201, "uri" => "/domainverifications", "method" => "POST"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.vpclattice#TagResource"

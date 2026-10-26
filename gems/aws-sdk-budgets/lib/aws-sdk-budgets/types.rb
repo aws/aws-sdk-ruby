@@ -25,6 +25,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute notification_type
     #   <p> The type of a notification. It must be ACTUAL or FORECASTED.</p>
@@ -178,6 +180,8 @@ module Aws::Budgets
     #   <p>The name of a budget. The name must be unique within an account. The <code>:</code>
     #   			and <code>\</code> characters, and the "/action/" substring, aren't allowed in
     #   				<code>BudgetName</code>.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute budget_limit
     #   <p>The total amount of cost, usage, RI utilization, RI coverage, Savings Plans
@@ -334,6 +338,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     class BudgetNotificationsForAccount < Struct.new(
       nil,
@@ -349,6 +355,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute budget_type
     #   <p> The type of a budget. It must be one of the following types: </p>
@@ -377,6 +385,12 @@ module Aws::Budgets
     #   <p>A list of amounts of cost or usage that you created budgets for, which are compared to
     #   			your actual costs or usage.</p>
     #   @return [Array<Types::BudgetedAndActualAmounts>]
+    # @!attribute filter_expression
+    #   <p>The filtering dimensions for the budget and their corresponding values.</p>
+    #   @return [Types::Expression]
+    # @!attribute metrics
+    #   <p>The definition for how the budget data is aggregated.</p>
+    #   @return [Array<String>]
     class BudgetPerformanceHistory < Struct.new(
       nil,
       :budget_name,
@@ -386,6 +400,8 @@ module Aws::Budgets
       :time_unit,
       :billing_view_arn,
       :budgeted_and_actual_amounts_list,
+      :filter_expression,
+      :metrics,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -529,6 +545,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute notification_type
     #   <p> The type of a notification. It must be ACTUAL or FORECASTED.</p>
@@ -584,6 +602,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute action_id
     #   <p>
@@ -735,6 +755,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute action_id
     #   <p>
@@ -757,6 +779,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute action
     #   <p>A budget action resource. </p>
@@ -861,6 +885,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute action_id
     #   <p>
@@ -915,6 +941,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute action_id
     #   <p>
@@ -937,6 +965,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute action
     #   <p>
@@ -996,6 +1026,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p> An integer that represents how many entries a paginated response contains. The
@@ -1073,6 +1105,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute time_period
     #   <p>Retrieves how often the budget went into an <code>ALARM</code> state for the specified time period.</p>
@@ -1293,6 +1327,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute action_id
     #   <p>
@@ -1321,6 +1357,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute action_id
     #   <p>
@@ -1374,6 +1412,9 @@ module Aws::Budgets
     # @!attribute cost_categories
     #   <p>The filter that's based on CostCategoryValues.</p>
     #   @return [Types::CostCategoryValues]
+    # @!attribute product_attributes
+    #   <p>The filter that limits results based on the values of specific product attributes.</p>
+    #   @return [Types::ProductAttributeValues]
     class Expression < Struct.new(
       nil,
       :or,
@@ -1382,6 +1423,7 @@ module Aws::Budgets
       :dimensions,
       :tags,
       :cost_categories,
+      :product_attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1678,6 +1720,73 @@ module Aws::Budgets
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The product attribute values used for filtering the costs by key and value pairs.
+    # 			Product attributes are supported for Amazon Bedrock only.</p>
+    # @!attribute key
+    #   <p>The name of the product attribute to filter on. Valid values are the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>feature</code> – The feature that was used, such as
+    #   					<code>On-demand Inference</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>inferenceType</code> – The type of inference usage, such as
+    #   					<code>Input tokens</code> or <code>Output tokens</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>model</code> – The model, such as <code>Claude Sonnet 5</code> or
+    #   					<code>Claude Haiku 4.5</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>provider</code> – The model provider, such as <code>Anthropic</code>,
+    #   					<code>Cohere</code>, or <code>Amazon</code>.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Keys are case-sensitive.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The specific values of the product attribute, such as <code>Claude Sonnet 5</code> for
+    #   			the <code>model</code> key. Values are matched exactly.</p>
+    #            <p>
+    #               <code>Values</code> is required unless <code>MatchOptions</code> is
+    #   			<code>ABSENT</code>. To match costs that have no value for the key, set
+    #   			<code>MatchOptions</code> to <code>ABSENT</code> and omit <code>Values</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute match_options
+    #   <p>The match options for the <code>ProductAttributes</code> filter. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ABSENT</code> – Matches costs that have no value for the attribute.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CASE_SENSITIVE</code> – Requires an exact case match.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EQUALS</code> – Matches costs where the attribute equals the specified
+    #   					value.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Specify either <code>EQUALS</code> or <code>ABSENT</code>. You can add
+    #   			<code>CASE_SENSITIVE</code> to <code>EQUALS</code>, but you can't use it by itself or
+    #   			with <code>ABSENT</code>.</p>
+    #   @return [Array<String>]
+    class ProductAttributeValues < Struct.new(
+      nil,
+      :key,
+      :values,
+      :match_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request was received and recognized by the server, but the server rejected that
     #       particular method for the requested resource.</p>
     # @!attribute message
@@ -1723,7 +1832,7 @@ module Aws::Budgets
       include ::Smithy::Schema::Structure
     end
 
-    # <p>You've reached the limit on the number of tags you can associate with a resource.</p>
+    # <p>You've reached a Service Quota limit on this resource.</p>
     # @!attribute message
     #   <p>The error message the exception carries.</p>
     #   @return [String]
@@ -1943,6 +2052,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute action_id
     #   <p>
@@ -1993,6 +2104,8 @@ module Aws::Budgets
     # @!attribute budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     #   @return [String]
     # @!attribute old_action
     #   <p>

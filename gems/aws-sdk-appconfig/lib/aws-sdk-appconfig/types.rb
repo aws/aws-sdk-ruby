@@ -164,6 +164,41 @@ module Aws::AppConfig
       end
     end
 
+    # <p>A value for a feature flag attribute. Only one of the members can be set.</p>
+    # @!attribute string_value
+    #   <p>A string value for the attribute.</p>
+    #   @return [String]
+    # @!attribute number_value
+    #   <p>A numeric value for the attribute.</p>
+    #   @return [Float]
+    # @!attribute boolean_value
+    #   <p>A Boolean value for the attribute.</p>
+    #   @return [Boolean]
+    # @!attribute string_array
+    #   <p>An array of string values for the attribute.</p>
+    #   @return [Array<String>]
+    # @!attribute number_array
+    #   <p>An array of numeric values for the attribute.</p>
+    #   @return [Array<Float>]
+    class AttributeValue < Struct.new(
+      :string_value,
+      :number_value,
+      :boolean_value,
+      :string_array,
+      :number_array,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class StringValue < AttributeValue; end
+      class NumberValue < AttributeValue; end
+      class BooleanValue < AttributeValue; end
+      class StringArray < AttributeValue; end
+      class NumberArray < AttributeValue; end
+      class Unknown < AttributeValue; end
+    end
+
     # <p>Detailed information about the input that failed to satisfy the constraints specified by
     #          a call.</p>
     # @!attribute invalid_configuration
@@ -505,6 +540,10 @@ module Aws::AppConfig
     #   @return [String]
     # @!attribute deployment_duration_in_minutes
     #   <p>Total amount of time for a deployment to last.</p>
+    #            <note>
+    #               <p>AppConfig Agent supports deploying feature flag or free-form configuration data to specific segments or individual users during a gradual rollout. Entity-based gradual deployments ensure that once a user or segment receives a configuration version, they continue to receive that same version throughout the deployment period, regardless of which compute resource serves their requests. For more information, see <a href="https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-agent-how-to-use.html#appconfig-entity-based-gradual-deployments">Using AppConfig Agent for user-based or entity-based gradual deployments</a>
+    #               </p>
+    #            </note>
     #   @return [Integer]
     # @!attribute final_bake_time_in_minutes
     #   <p>Specifies the amount of time AppConfig monitors for Amazon CloudWatch alarms after the
@@ -628,6 +667,133 @@ module Aws::AppConfig
       :name,
       :description,
       :monitors,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes an experiment definition, including the target audience, feature flag, treatments, and current status.</p>
+    # @!attribute application_id
+    #   <p>The application ID.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the experiment definition.</p>
+    #   @return [String]
+    # @!attribute hypothesis
+    #   <p>The hypothesis that the experiment is designed to validate.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the experiment definition. Valid values: <code>ACTIVE</code>, <code>IDLE</code>, <code>ARCHIVED</code>.</p>
+    #   @return [String]
+    # @!attribute configuration_profile_id
+    #   <p>The configuration profile ID associated with the experiment.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>The environment ID where the experiment runs.</p>
+    #   @return [String]
+    # @!attribute flag_key
+    #   <p>The key of the feature flag used by the experiment.</p>
+    #   @return [String]
+    # @!attribute audience_rule
+    #   <p>The rule that defines which users are eligible to be assigned to treatments.</p>
+    #   @return [String]
+    # @!attribute audience_description
+    #   <p>A description of the intended audience for the experiment.</p>
+    #   @return [String]
+    # @!attribute launch_criteria
+    #   <p>The conditions under which the winning treatment should be launched.</p>
+    #   @return [String]
+    # @!attribute treatments
+    #   <p>The list of treatments defined for the experiment.</p>
+    #   @return [Array<Types::Treatment>]
+    # @!attribute control
+    #   <p>The control treatment used as the baseline for comparison.</p>
+    #   @return [Types::Treatment]
+    # @!attribute created_at
+    #   <p>The date and time the experiment definition was created, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the experiment definition was last updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute kms_key_identifier
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt experiment data.</p>
+    #   @return [String]
+    class CreateExperimentDefinitionOutput < Struct.new(
+      nil,
+      :application_id,
+      :id,
+      :name,
+      :hypothesis,
+      :status,
+      :configuration_profile_id,
+      :environment_id,
+      :flag_key,
+      :audience_rule,
+      :audience_description,
+      :launch_criteria,
+      :treatments,
+      :control,
+      :created_at,
+      :updated_at,
+      :kms_key_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A name for the experiment definition.</p>
+    #   @return [String]
+    # @!attribute configuration_profile_identifier
+    #   <p>The configuration profile ID or name that stores the feature flag.</p>
+    #   @return [String]
+    # @!attribute environment_identifier
+    #   <p>The environment ID or name where the experiment will run.</p>
+    #   @return [String]
+    # @!attribute flag_key
+    #   <p>The key of the existing feature flag to use with the experiment.</p>
+    #   @return [String]
+    # @!attribute treatments
+    #   <p>A list of treatments to evaluate during the experiment. Each treatment defines a distinct variation compared to the control.</p>
+    #   @return [Array<Types::TreatmentInput>]
+    # @!attribute control
+    #   <p>The control treatment that represents the baseline experience for comparison.</p>
+    #   @return [Types::TreatmentInput]
+    # @!attribute audience_rule
+    #   <p>A rule that defines which users are eligible to be assigned to treatments during the experiment.</p>
+    #   @return [String]
+    # @!attribute hypothesis
+    #   <p>A description of the goal or hypothesis the experiment is designed to validate.</p>
+    #   @return [String]
+    # @!attribute audience_description
+    #   <p>A description of the intended audience for the experiment.</p>
+    #   @return [String]
+    # @!attribute launch_criteria
+    #   <p>Information about the conditions under which you would launch the winning treatment.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to assign to the experiment definition. Tags help organize and categorize your AppConfig resources.</p>
+    #   @return [Hash<String, String>]
+    class CreateExperimentDefinitionRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :name,
+      :configuration_profile_identifier,
+      :environment_identifier,
+      :flag_key,
+      :treatments,
+      :control,
+      :audience_rule,
+      :hypothesis,
+      :audience_description,
+      :launch_criteria,
       :tags,
       keyword_init: true
     )
@@ -840,6 +1006,9 @@ module Aws::AppConfig
     #   @return [String]
     # @!attribute description
     #   <p>A description of the configuration.</p>
+    #            <note>
+    #               <p>Due to HTTP limitations, this field only supports ASCII characters.</p>
+    #            </note>
     #   @return [String]
     # @!attribute content
     #   <p>The configuration data, as bytes.</p>
@@ -983,6 +1152,25 @@ module Aws::AppConfig
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_identifier
+    #   <p>The experiment definition ID or name.</p>
+    #   @return [String]
+    # @!attribute delete_type
+    #   <p>The type of deletion to perform. Valid values include archive (hide but preserve) and permanent (delete permanently).</p>
+    #   @return [String]
+    class DeleteExperimentDefinitionRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :experiment_definition_identifier,
+      :delete_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute extension_association_id
     #   <p>The ID of the extension association to delete.</p>
     #   @return [String]
@@ -1105,6 +1293,22 @@ module Aws::AppConfig
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The deployment parameters for an experiment run, including dynamic extension parameters and tags.</p>
+    # @!attribute dynamic_extension_parameters
+    #   <p>A map of extension parameters for the deployment.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute tags
+    #   <p>The tags to assign to the deployment.</p>
+    #   @return [Hash<String, String>]
+    class DeploymentParameters < Struct.new(
+      nil,
+      :dynamic_extension_parameters,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute id
     #   <p>The deployment strategy ID.</p>
     #   @return [String]
@@ -1156,6 +1360,9 @@ module Aws::AppConfig
     # @!attribute deployment_number
     #   <p>The sequence number of the deployment.</p>
     #   @return [Integer]
+    # @!attribute configuration_profile_id
+    #   <p>The ID of the configuration profile that was deployed.</p>
+    #   @return [String]
     # @!attribute configuration_name
     #   <p>The name of the configuration.</p>
     #   @return [String]
@@ -1191,9 +1398,13 @@ module Aws::AppConfig
     # @!attribute version_label
     #   <p>A user-defined label for an AppConfig hosted configuration version.</p>
     #   @return [String]
+    # @!attribute type
+    #   <p>The type of deployment.</p>
+    #   @return [String]
     class DeploymentSummary < Struct.new(
       nil,
       :deployment_number,
+      :configuration_profile_id,
       :configuration_name,
       :configuration_version,
       :deployment_duration_in_minutes,
@@ -1205,6 +1416,7 @@ module Aws::AppConfig
       :started_at,
       :completed_at,
       :version_label,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1249,6 +1461,207 @@ module Aws::AppConfig
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>A snapshot of the experiment definition captured at the time an experiment run was started. This preserves the configuration that was active during the run.</p>
+    # @!attribute application_id
+    #   <p>The application ID at the time the run was started.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the experiment definition at the time the run was started.</p>
+    #   @return [String]
+    # @!attribute hypothesis
+    #   <p>The hypothesis at the time the run was started.</p>
+    #   @return [String]
+    # @!attribute configuration_profile_id
+    #   <p>The configuration profile ID at the time the run was started.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>The environment ID at the time the run was started.</p>
+    #   @return [String]
+    # @!attribute flag_key
+    #   <p>The feature flag key at the time the run was started.</p>
+    #   @return [String]
+    # @!attribute audience_rule
+    #   <p>The audience rule at the time the run was started.</p>
+    #   @return [String]
+    # @!attribute audience_description
+    #   <p>The audience description at the time the run was started.</p>
+    #   @return [String]
+    # @!attribute launch_criteria
+    #   <p>The launch criteria at the time the run was started.</p>
+    #   @return [String]
+    # @!attribute treatments
+    #   <p>The treatments at the time the run was started.</p>
+    #   @return [Array<Types::Treatment>]
+    # @!attribute control
+    #   <p>The control treatment at the time the run was started.</p>
+    #   @return [Types::Treatment]
+    class ExperimentDefinitionSnapshot < Struct.new(
+      nil,
+      :application_id,
+      :id,
+      :name,
+      :hypothesis,
+      :configuration_profile_id,
+      :environment_id,
+      :flag_key,
+      :audience_rule,
+      :audience_description,
+      :launch_criteria,
+      :treatments,
+      :control,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about an experiment definition.</p>
+    # @!attribute application_id
+    #   <p>The application ID.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the experiment definition.</p>
+    #   @return [String]
+    # @!attribute hypothesis
+    #   <p>The hypothesis that the experiment is designed to validate.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the experiment definition.</p>
+    #   @return [String]
+    # @!attribute configuration_profile_id
+    #   <p>The configuration profile ID associated with the experiment.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>The environment ID where the experiment runs.</p>
+    #   @return [String]
+    # @!attribute flag_key
+    #   <p>The key of the feature flag used by the experiment.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time the experiment definition was created, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the experiment definition was last updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    class ExperimentDefinitionSummary < Struct.new(
+      nil,
+      :application_id,
+      :id,
+      :name,
+      :hypothesis,
+      :status,
+      :configuration_profile_id,
+      :environment_id,
+      :flag_key,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes an event that occurred during an experiment run.</p>
+    # @!attribute description
+    #   <p>A description of the event.</p>
+    #   @return [String]
+    # @!attribute associated_deployment
+    #   <p>The Amazon Resource Name (ARN) of the deployment associated with this event.</p>
+    #   @return [String]
+    # @!attribute event_type
+    #   <p>The type of event. Valid values: <code>RUN_STARTED</code>, <code>EXPOSURE_UPDATED</code>, <code>OVERRIDES_UPDATED</code>, <code>RUN_STOPPED</code>.</p>
+    #   @return [String]
+    # @!attribute occurred_at
+    #   <p>The date and time the event occurred, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute triggered_by
+    #   <p>The principal that triggered the event.</p>
+    #   @return [String]
+    # @!attribute exposure_percentage
+    #   <p>The exposure percentage at the time of the event.</p>
+    #   @return [Float]
+    # @!attribute treatment_overrides
+    #   <p>The treatment overrides at the time of the event.</p>
+    #   @return [Types::TreatmentOverrides]
+    class ExperimentRunEvent < Struct.new(
+      nil,
+      :description,
+      :associated_deployment,
+      :event_type,
+      :occurred_at,
+      :triggered_by,
+      :exposure_percentage,
+      :treatment_overrides,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The result of an experiment run, including the executive summary and launch decision rationale.</p>
+    # @!attribute executive_summary
+    #   <p>A summary of the experiment outcome and key findings.</p>
+    #   @return [String]
+    # @!attribute reasons_to_launch
+    #   <p>Evidence in favor of launching the winning treatment.</p>
+    #   @return [String]
+    # @!attribute reasons_not_to_launch
+    #   <p>Evidence against launching the treatment.</p>
+    #   @return [String]
+    class ExperimentRunResult < Struct.new(
+      nil,
+      :executive_summary,
+      :reasons_to_launch,
+      :reasons_not_to_launch,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about an experiment run.</p>
+    # @!attribute experiment_definition_id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute run
+    #   <p>The experiment run number.</p>
+    #   @return [Integer]
+    # @!attribute description
+    #   <p>A description of the experiment run.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the experiment run.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The date and time the experiment run started, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the experiment run was last updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The date and time the experiment run ended, in ISO 8601 format.</p>
+    #   @return [Time]
+    class ExperimentRunSummary < Struct.new(
+      nil,
+      :experiment_definition_id,
+      :run,
+      :description,
+      :status,
+      :started_at,
+      :updated_at,
+      :ended_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:run] = 0 unless options.key?(:run)
+        super
+      end
     end
 
     # <p>Information about an association between an extension and an AppConfig
@@ -1311,6 +1724,27 @@ module Aws::AppConfig
       end
     end
 
+    # <p>The feature flag value configuration for a treatment, including the enabled state and attribute values.</p>
+    # @!attribute enabled
+    #   <p>Specifies whether the feature flag is enabled for this treatment.</p>
+    #   @return [Boolean]
+    # @!attribute attribute_values
+    #   <p>The attribute values associated with this flag value.</p>
+    #   @return [Hash<String, Types::AttributeValue>]
+    class FlagValue < Struct.new(
+      nil,
+      :enabled,
+      :attribute_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enabled] = false unless options.key?(:enabled)
+        super
+      end
+    end
+
     # @!attribute deletion_protection
     #   <p>A parameter to configure deletion protection. Deletion protection prevents a user from
     #            deleting a configuration profile or an environment if AppConfig has called either
@@ -1318,9 +1752,13 @@ module Aws::AppConfig
     #            configuration profile or from the environment during the specified interval. The default
     #            interval for <code>ProtectionPeriodInMinutes</code> is 60.</p>
     #   @return [Types::DeletionProtectionSettings]
+    # @!attribute vended_metrics
+    #   <p>The configuration for vended metrics in the account.</p>
+    #   @return [Types::VendedMetricsSettings]
     class GetAccountSettingsOutput < Struct.new(
       nil,
       :deletion_protection,
+      :vended_metrics,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1743,6 +2181,173 @@ module Aws::AppConfig
       nil,
       :application_id,
       :environment_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes an experiment definition, including the target audience, feature flag, treatments, and current status.</p>
+    # @!attribute application_id
+    #   <p>The application ID.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the experiment definition.</p>
+    #   @return [String]
+    # @!attribute hypothesis
+    #   <p>The hypothesis that the experiment is designed to validate.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the experiment definition. Valid values: <code>ACTIVE</code>, <code>IDLE</code>, <code>ARCHIVED</code>.</p>
+    #   @return [String]
+    # @!attribute configuration_profile_id
+    #   <p>The configuration profile ID associated with the experiment.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>The environment ID where the experiment runs.</p>
+    #   @return [String]
+    # @!attribute flag_key
+    #   <p>The key of the feature flag used by the experiment.</p>
+    #   @return [String]
+    # @!attribute audience_rule
+    #   <p>The rule that defines which users are eligible to be assigned to treatments.</p>
+    #   @return [String]
+    # @!attribute audience_description
+    #   <p>A description of the intended audience for the experiment.</p>
+    #   @return [String]
+    # @!attribute launch_criteria
+    #   <p>The conditions under which the winning treatment should be launched.</p>
+    #   @return [String]
+    # @!attribute treatments
+    #   <p>The list of treatments defined for the experiment.</p>
+    #   @return [Array<Types::Treatment>]
+    # @!attribute control
+    #   <p>The control treatment used as the baseline for comparison.</p>
+    #   @return [Types::Treatment]
+    # @!attribute created_at
+    #   <p>The date and time the experiment definition was created, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the experiment definition was last updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute kms_key_identifier
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt experiment data.</p>
+    #   @return [String]
+    class GetExperimentDefinitionOutput < Struct.new(
+      nil,
+      :application_id,
+      :id,
+      :name,
+      :hypothesis,
+      :status,
+      :configuration_profile_id,
+      :environment_id,
+      :flag_key,
+      :audience_rule,
+      :audience_description,
+      :launch_criteria,
+      :treatments,
+      :control,
+      :created_at,
+      :updated_at,
+      :kms_key_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_identifier
+    #   <p>The experiment definition ID or name.</p>
+    #   @return [String]
+    class GetExperimentDefinitionRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :experiment_definition_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes an experiment run, including its status, exposure settings, and treatment overrides.</p>
+    # @!attribute application_id
+    #   <p>The application ID.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute run
+    #   <p>The experiment run number.</p>
+    #   @return [Integer]
+    # @!attribute description
+    #   <p>A description of the experiment run.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the experiment run. Valid values: <code>RUNNING</code>, <code>DONE</code>.</p>
+    #   @return [String]
+    # @!attribute exposure_percentage
+    #   <p>The percentage of the target audience exposed to treatments.</p>
+    #   @return [Float]
+    # @!attribute treatment_overrides
+    #   <p>Treatment assignment overrides that assign specific entity IDs to treatments.</p>
+    #   @return [Types::TreatmentOverrides]
+    # @!attribute result
+    #   <p>The result of the experiment run, including the executive summary and launch decision rationale.</p>
+    #   @return [Types::ExperimentRunResult]
+    # @!attribute started_at
+    #   <p>The date and time the experiment run started, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the experiment run was last updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The date and time the experiment run ended, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute experiment_definition_snapshot
+    #   <p>A snapshot of the experiment definition at the time the run was started.</p>
+    #   @return [Types::ExperimentDefinitionSnapshot]
+    class GetExperimentRunOutput < Struct.new(
+      nil,
+      :application_id,
+      :experiment_definition_id,
+      :run,
+      :description,
+      :status,
+      :exposure_percentage,
+      :treatment_overrides,
+      :result,
+      :started_at,
+      :updated_at,
+      :ended_at,
+      :experiment_definition_snapshot,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:run] = 0 unless options.key?(:run)
+        super
+      end
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_identifier
+    #   <p>The experiment definition ID or name.</p>
+    #   @return [String]
+    # @!attribute run
+    #   <p>The run number to retrieve.</p>
+    #   @return [Integer]
+    class GetExperimentRunRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :experiment_definition_identifier,
+      :run,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2195,6 +2800,139 @@ module Aws::AppConfig
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The response for a list experiment definitions request.</p>
+    # @!attribute items
+    #   <p>The list of experiment definitions.</p>
+    #   @return [Array<Types::ExperimentDefinitionSummary>]
+    # @!attribute next_token
+    #   <p>A token to use for the next set of results.</p>
+    #   @return [String]
+    class ListExperimentDefinitionsOutput < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name to filter results.</p>
+    #   @return [String]
+    # @!attribute configuration_profile_identifier
+    #   <p>The configuration profile ID or name to filter results.</p>
+    #   @return [String]
+    # @!attribute environment_identifier
+    #   <p>The environment ID or name to filter results.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>A filter for the experiment definition status.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token to start the list from a previously truncated response.</p>
+    #   @return [String]
+    class ListExperimentDefinitionsRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :configuration_profile_identifier,
+      :environment_identifier,
+      :status,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response for a list experiment run events request.</p>
+    # @!attribute items
+    #   <p>The list of experiment run events.</p>
+    #   @return [Array<Types::ExperimentRunEvent>]
+    # @!attribute next_token
+    #   <p>A token to use for the next set of results.</p>
+    #   @return [String]
+    class ListExperimentRunEventsOutput < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_identifier
+    #   <p>The experiment definition ID or name.</p>
+    #   @return [String]
+    # @!attribute run
+    #   <p>The run number.</p>
+    #   @return [Integer]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token to start the list from a previously truncated response.</p>
+    #   @return [String]
+    class ListExperimentRunEventsRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :experiment_definition_identifier,
+      :run,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response for a list experiment runs request.</p>
+    # @!attribute items
+    #   <p>The list of experiment runs.</p>
+    #   @return [Array<Types::ExperimentRunSummary>]
+    # @!attribute next_token
+    #   <p>A token to use for the next set of results.</p>
+    #   @return [String]
+    class ListExperimentRunsOutput < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_identifier
+    #   <p>The experiment definition ID or name.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token to start the list from a previously truncated response.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>A filter for the experiment run status.</p>
+    #   @return [String]
+    class ListExperimentRunsRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :experiment_definition_identifier,
+      :max_results,
+      :next_token,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute items
     #   <p>The list of extension associations. Each item represents an extension association to an
     #            application, environment, or configuration profile. </p>
@@ -2440,9 +3178,6 @@ module Aws::AppConfig
     # <p>The number of one more AppConfig resources exceeds the maximum allowed. Verify that your
     #          environment doesn't exceed the following service quotas:</p>
     #          <p>Applications: 100 max</p>
-    #          <p>Deployment strategies: 20 max</p>
-    #          <p>Configuration profiles: 100 max per application</p>
-    #          <p>Environments: 20 max per application</p>
     #          <p>To resolve this issue, you can delete one or more resources and try again. Or, you can
     #          request a quota increase. For more information about quotas and to request an increase, see
     #             <a href="https://docs.aws.amazon.com/general/latest/gr/appconfig.html#limits_appconfig">Service quotas for AppConfig</a> in the Amazon Web Services General Reference.</p>
@@ -2598,6 +3333,9 @@ module Aws::AppConfig
     #   <p>A map of dynamic extension parameter names to values to pass to associated extensions
     #            with <code>PRE_START_DEPLOYMENT</code> actions.</p>
     #   @return [Hash<String, String>]
+    # @!attribute latest_deployment_number
+    #   <p>The number of the latest deployment. Use this value to ensure that the deployment starts from the expected state and to prevent conflicting updates.</p>
+    #   @return [Integer]
     class StartDeploymentRequest < Struct.new(
       nil,
       :application_id,
@@ -2609,6 +3347,103 @@ module Aws::AppConfig
       :tags,
       :kms_key_identifier,
       :dynamic_extension_parameters,
+      :latest_deployment_number,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes an experiment run, including its status, exposure settings, and treatment overrides.</p>
+    # @!attribute application_id
+    #   <p>The application ID.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute run
+    #   <p>The experiment run number.</p>
+    #   @return [Integer]
+    # @!attribute description
+    #   <p>A description of the experiment run.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the experiment run. Valid values: <code>RUNNING</code>, <code>DONE</code>.</p>
+    #   @return [String]
+    # @!attribute exposure_percentage
+    #   <p>The percentage of the target audience exposed to treatments.</p>
+    #   @return [Float]
+    # @!attribute treatment_overrides
+    #   <p>Treatment assignment overrides that assign specific entity IDs to treatments.</p>
+    #   @return [Types::TreatmentOverrides]
+    # @!attribute result
+    #   <p>The result of the experiment run, including the executive summary and launch decision rationale.</p>
+    #   @return [Types::ExperimentRunResult]
+    # @!attribute started_at
+    #   <p>The date and time the experiment run started, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the experiment run was last updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The date and time the experiment run ended, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute experiment_definition_snapshot
+    #   <p>A snapshot of the experiment definition at the time the run was started.</p>
+    #   @return [Types::ExperimentDefinitionSnapshot]
+    class StartExperimentRunOutput < Struct.new(
+      nil,
+      :application_id,
+      :experiment_definition_id,
+      :run,
+      :description,
+      :status,
+      :exposure_percentage,
+      :treatment_overrides,
+      :result,
+      :started_at,
+      :updated_at,
+      :ended_at,
+      :experiment_definition_snapshot,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:run] = 0 unless options.key?(:run)
+        super
+      end
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_identifier
+    #   <p>The experiment definition ID or name.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of this experiment run.</p>
+    #   @return [String]
+    # @!attribute exposure_percentage
+    #   <p>The percentage of the target audience to expose to treatments. Set to 0 to validate the experiment before exposing production users.</p>
+    #   @return [Float]
+    # @!attribute treatment_overrides
+    #   <p>Treatment assignment overrides that assign specific entity IDs to treatments directly, bypassing random assignment.</p>
+    #   @return [Types::TreatmentOverrides]
+    # @!attribute tags
+    #   <p>The tags to assign to the experiment run.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute deployment_parameters
+    #   <p>The deployment parameters for the experiment run, including a KMS key identifier for encryption.</p>
+    #   @return [Types::DeploymentParameters]
+    class StartExperimentRunRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :experiment_definition_identifier,
+      :description,
+      :exposure_percentage,
+      :treatment_overrides,
+      :tags,
+      :deployment_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2750,6 +3585,94 @@ module Aws::AppConfig
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes an experiment run, including its status, exposure settings, and treatment overrides.</p>
+    # @!attribute application_id
+    #   <p>The application ID.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute run
+    #   <p>The experiment run number.</p>
+    #   @return [Integer]
+    # @!attribute description
+    #   <p>A description of the experiment run.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the experiment run. Valid values: <code>RUNNING</code>, <code>DONE</code>.</p>
+    #   @return [String]
+    # @!attribute exposure_percentage
+    #   <p>The percentage of the target audience exposed to treatments.</p>
+    #   @return [Float]
+    # @!attribute treatment_overrides
+    #   <p>Treatment assignment overrides that assign specific entity IDs to treatments.</p>
+    #   @return [Types::TreatmentOverrides]
+    # @!attribute result
+    #   <p>The result of the experiment run, including the executive summary and launch decision rationale.</p>
+    #   @return [Types::ExperimentRunResult]
+    # @!attribute started_at
+    #   <p>The date and time the experiment run started, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the experiment run was last updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The date and time the experiment run ended, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute experiment_definition_snapshot
+    #   <p>A snapshot of the experiment definition at the time the run was started.</p>
+    #   @return [Types::ExperimentDefinitionSnapshot]
+    class StopExperimentRunOutput < Struct.new(
+      nil,
+      :application_id,
+      :experiment_definition_id,
+      :run,
+      :description,
+      :status,
+      :exposure_percentage,
+      :treatment_overrides,
+      :result,
+      :started_at,
+      :updated_at,
+      :ended_at,
+      :experiment_definition_snapshot,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:run] = 0 unless options.key?(:run)
+        super
+      end
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_identifier
+    #   <p>The experiment definition ID or name.</p>
+    #   @return [String]
+    # @!attribute run
+    #   <p>The run number to stop.</p>
+    #   @return [Integer]
+    # @!attribute result
+    #   <p>The result of the experiment run, including an executive summary and reasons for or against launching.</p>
+    #   @return [Types::ExperimentRunResult]
+    # @!attribute deployment_parameters
+    #   <p>The deployment parameters for the stop operation.</p>
+    #   @return [Types::DeploymentParameters]
+    class StopExperimentRunRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :experiment_definition_identifier,
+      :run,
+      :result,
+      :deployment_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The ARN of the resource for which to retrieve tags.</p>
     #   @return [String]
@@ -2765,6 +3688,75 @@ module Aws::AppConfig
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes a treatment in an experiment, including its traffic allocation weight and feature flag value.</p>
+    # @!attribute key
+    #   <p>The unique key that identifies this treatment.</p>
+    #   @return [String]
+    # @!attribute weight
+    #   <p>The traffic allocation weight for this treatment.</p>
+    #   @return [Float]
+    # @!attribute description
+    #   <p>A description of the treatment.</p>
+    #   @return [String]
+    # @!attribute flag_value
+    #   <p>The feature flag value served to users assigned to this treatment.</p>
+    #   @return [Types::FlagValue]
+    class Treatment < Struct.new(
+      nil,
+      :key,
+      :weight,
+      :description,
+      :flag_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:weight] = 0 unless options.key?(:weight)
+        super
+      end
+    end
+
+    # <p>Input structure for defining a treatment when creating or updating an experiment definition.</p>
+    # @!attribute weight
+    #   <p>The traffic allocation weight for this treatment.</p>
+    #   @return [Float]
+    # @!attribute description
+    #   <p>A description of the treatment.</p>
+    #   @return [String]
+    # @!attribute flag_value
+    #   <p>The feature flag value to serve to users assigned to this treatment.</p>
+    #   @return [Types::FlagValue]
+    class TreatmentInput < Struct.new(
+      nil,
+      :weight,
+      :description,
+      :flag_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:weight] = 0 unless options.key?(:weight)
+        super
+      end
+    end
+
+    # <p>Treatment assignment overrides that assign specific entity IDs to treatments, bypassing random assignment.</p>
+    # @!attribute inline
+    #   <p>A map of entity IDs to treatment keys. Each entry assigns the specified entity to the specified treatment, bypassing random assignment.</p>
+    #   @return [Hash<String, String>]
+    class TreatmentOverrides < Struct.new(
+      :inline,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Inline < TreatmentOverrides; end
+      class Unknown < TreatmentOverrides; end
     end
 
     # @!attribute resource_arn
@@ -2789,9 +3781,13 @@ module Aws::AppConfig
     #            configuration profile or from the environment during the specified interval. The default
     #            interval for <code>ProtectionPeriodInMinutes</code> is 60.</p>
     #   @return [Types::DeletionProtectionSettings]
+    # @!attribute vended_metrics
+    #   <p>The configuration for vended metrics in the account.</p>
+    #   @return [Types::VendedMetricsSettings]
     class UpdateAccountSettingsOutput < Struct.new(
       nil,
       :deletion_protection,
+      :vended_metrics,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2804,9 +3800,13 @@ module Aws::AppConfig
     #            configuration profile or from the environment during the specified interval. The default
     #            interval for <code>ProtectionPeriodInMinutes</code> is 60.</p>
     #   @return [Types::DeletionProtectionSettings]
+    # @!attribute vended_metrics
+    #   <p>The configuration for vended metrics in the account.</p>
+    #   @return [Types::VendedMetricsSettings]
     class UpdateAccountSettingsRequest < Struct.new(
       nil,
       :deletion_protection,
+      :vended_metrics,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3125,6 +4125,213 @@ module Aws::AppConfig
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes an experiment definition, including the target audience, feature flag, treatments, and current status.</p>
+    # @!attribute application_id
+    #   <p>The application ID.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the experiment definition.</p>
+    #   @return [String]
+    # @!attribute hypothesis
+    #   <p>The hypothesis that the experiment is designed to validate.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the experiment definition. Valid values: <code>ACTIVE</code>, <code>IDLE</code>, <code>ARCHIVED</code>.</p>
+    #   @return [String]
+    # @!attribute configuration_profile_id
+    #   <p>The configuration profile ID associated with the experiment.</p>
+    #   @return [String]
+    # @!attribute environment_id
+    #   <p>The environment ID where the experiment runs.</p>
+    #   @return [String]
+    # @!attribute flag_key
+    #   <p>The key of the feature flag used by the experiment.</p>
+    #   @return [String]
+    # @!attribute audience_rule
+    #   <p>The rule that defines which users are eligible to be assigned to treatments.</p>
+    #   @return [String]
+    # @!attribute audience_description
+    #   <p>A description of the intended audience for the experiment.</p>
+    #   @return [String]
+    # @!attribute launch_criteria
+    #   <p>The conditions under which the winning treatment should be launched.</p>
+    #   @return [String]
+    # @!attribute treatments
+    #   <p>The list of treatments defined for the experiment.</p>
+    #   @return [Array<Types::Treatment>]
+    # @!attribute control
+    #   <p>The control treatment used as the baseline for comparison.</p>
+    #   @return [Types::Treatment]
+    # @!attribute created_at
+    #   <p>The date and time the experiment definition was created, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the experiment definition was last updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute kms_key_identifier
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt experiment data.</p>
+    #   @return [String]
+    class UpdateExperimentDefinitionOutput < Struct.new(
+      nil,
+      :application_id,
+      :id,
+      :name,
+      :hypothesis,
+      :status,
+      :configuration_profile_id,
+      :environment_id,
+      :flag_key,
+      :audience_rule,
+      :audience_description,
+      :launch_criteria,
+      :treatments,
+      :control,
+      :created_at,
+      :updated_at,
+      :kms_key_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_identifier
+    #   <p>The experiment definition ID or name.</p>
+    #   @return [String]
+    # @!attribute treatments
+    #   <p>The updated list of treatments to evaluate during the experiment. Each treatment defines a distinct variation compared to the control.</p>
+    #   @return [Array<Types::TreatmentInput>]
+    # @!attribute control
+    #   <p>An updated control treatment.</p>
+    #   @return [Types::TreatmentInput]
+    # @!attribute hypothesis
+    #   <p>An updated hypothesis.</p>
+    #   @return [String]
+    # @!attribute audience_rule
+    #   <p>An updated audience rule.</p>
+    #   @return [String]
+    # @!attribute audience_description
+    #   <p>An updated audience description.</p>
+    #   @return [String]
+    # @!attribute launch_criteria
+    #   <p>Updated launch criteria.</p>
+    #   @return [String]
+    class UpdateExperimentDefinitionRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :experiment_definition_identifier,
+      :treatments,
+      :control,
+      :hypothesis,
+      :audience_rule,
+      :audience_description,
+      :launch_criteria,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes an experiment run, including its status, exposure settings, and treatment overrides.</p>
+    # @!attribute application_id
+    #   <p>The application ID.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_id
+    #   <p>The experiment definition ID.</p>
+    #   @return [String]
+    # @!attribute run
+    #   <p>The experiment run number.</p>
+    #   @return [Integer]
+    # @!attribute description
+    #   <p>A description of the experiment run.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the experiment run. Valid values: <code>RUNNING</code>, <code>DONE</code>.</p>
+    #   @return [String]
+    # @!attribute exposure_percentage
+    #   <p>The percentage of the target audience exposed to treatments.</p>
+    #   @return [Float]
+    # @!attribute treatment_overrides
+    #   <p>Treatment assignment overrides that assign specific entity IDs to treatments.</p>
+    #   @return [Types::TreatmentOverrides]
+    # @!attribute result
+    #   <p>The result of the experiment run, including the executive summary and launch decision rationale.</p>
+    #   @return [Types::ExperimentRunResult]
+    # @!attribute started_at
+    #   <p>The date and time the experiment run started, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the experiment run was last updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The date and time the experiment run ended, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute experiment_definition_snapshot
+    #   <p>A snapshot of the experiment definition at the time the run was started.</p>
+    #   @return [Types::ExperimentDefinitionSnapshot]
+    class UpdateExperimentRunOutput < Struct.new(
+      nil,
+      :application_id,
+      :experiment_definition_id,
+      :run,
+      :description,
+      :status,
+      :exposure_percentage,
+      :treatment_overrides,
+      :result,
+      :started_at,
+      :updated_at,
+      :ended_at,
+      :experiment_definition_snapshot,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:run] = 0 unless options.key?(:run)
+        super
+      end
+    end
+
+    # @!attribute application_identifier
+    #   <p>The application ID or name.</p>
+    #   @return [String]
+    # @!attribute experiment_definition_identifier
+    #   <p>The experiment definition ID or name.</p>
+    #   @return [String]
+    # @!attribute run
+    #   <p>The run number to update.</p>
+    #   @return [Integer]
+    # @!attribute description
+    #   <p>An updated description for the experiment run.</p>
+    #   @return [String]
+    # @!attribute exposure_percentage
+    #   <p>The new exposure percentage. This value can only be increased from the current setting.</p>
+    #   @return [Float]
+    # @!attribute treatment_overrides
+    #   <p>The updated treatment assignment overrides that assign specific entity IDs to treatments, bypassing random assignment.</p>
+    #   @return [Types::TreatmentOverrides]
+    # @!attribute deployment_parameters
+    #   <p>The updated deployment parameters for the experiment run.</p>
+    #   @return [Types::DeploymentParameters]
+    class UpdateExperimentRunRequest < Struct.new(
+      nil,
+      :application_identifier,
+      :experiment_definition_identifier,
+      :run,
+      :description,
+      :exposure_percentage,
+      :treatment_overrides,
+      :deployment_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute id
     #   <p>The system-generated ID for the association.</p>
     #   @return [String]
@@ -3287,6 +4494,23 @@ module Aws::AppConfig
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration settings for vended metrics in your AppConfig account.</p>
+    # @!attribute enabled
+    #   <p>Specifies whether vended metrics are enabled for the account.</p>
+    #   @return [Boolean]
+    class VendedMetricsSettings < Struct.new(
+      nil,
+      :enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enabled] = nil unless options.key?(:enabled)
+        super
+      end
     end
 
   end

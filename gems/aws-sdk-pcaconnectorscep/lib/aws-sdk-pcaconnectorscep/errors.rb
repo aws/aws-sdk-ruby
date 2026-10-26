@@ -36,11 +36,7 @@ module Aws::PcaConnectorScep
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>You can receive this error if you attempt to perform an operation and you don't have
-    #       the required permissions. This can be caused by insufficient permissions in policies
-    #       attached to your Amazon Web Services Identity and Access Management (IAM) principal. It can also happen
-    #       because of restrictions in place from an Amazon Web Services Organizations service control policy (SCP)
-    #       that affects your Amazon Web Services account.</p>
+    # <p>You can receive this error if you attempt to perform an operation and you don't have the required permissions. This can be caused by insufficient permissions in policies attached to your Amazon Web Services Identity and Access Management (IAM) principal. It can also happen because of restrictions in place from an Amazon Web Services Organizations service control policy (SCP) that affects your Amazon Web Services account.</p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PcaConnectorScep::Types::AccessDeniedException] data
@@ -66,8 +62,7 @@ module Aws::PcaConnectorScep
       end
     end
 
-    # <p>This request can't be completed for one of the following reasons because the requested
-    #       resource was being concurrently modified by another request.</p>
+    # <p>This request can't be completed for one of the following reasons because the requested resource was being concurrently modified by another request.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PcaConnectorScep::Types::ConflictException] data
@@ -90,8 +85,7 @@ module Aws::PcaConnectorScep
       end
     end
 
-    # <p>The request processing has failed because of an unknown error, exception or failure with
-    #       an internal server.</p>
+    # <p>The request processing has failed because of an unknown error, exception or failure with an internal server.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PcaConnectorScep::Types::InternalServerException] data

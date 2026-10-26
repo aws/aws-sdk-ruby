@@ -22,10 +22,15 @@ module Aws::ECR
   #
   # ## Error Classes
   #
+  # * {BlockedByOrganizationPolicyException}
   # * {EmptyUploadException}
+  # * {ExclusionAlreadyExistsException}
+  # * {ExclusionNotFoundException}
   # * {ImageAlreadyExistsException}
+  # * {ImageArchivedException}
   # * {ImageDigestDoesNotMatchException}
   # * {ImageNotFoundException}
+  # * {ImageStorageClassUpdateNotSupportedException}
   # * {ImageTagAlreadyExistsException}
   # * {InvalidLayerException}
   # * {InvalidLayerPartException}
@@ -51,6 +56,7 @@ module Aws::ECR
   # * {ScanNotFoundException}
   # * {SecretNotFoundException}
   # * {ServerException}
+  # * {SigningConfigurationNotFoundException}
   # * {TemplateAlreadyExistsException}
   # * {TemplateNotFoundException}
   # * {TooManyTagsException}
@@ -58,6 +64,7 @@ module Aws::ECR
   # * {UnableToDecryptSecretValueException}
   # * {UnableToGetUpstreamImageException}
   # * {UnableToGetUpstreamLayerException}
+  # * {UnableToListUpstreamImageReferrersException}
   # * {UnsupportedImageTypeException}
   # * {UnsupportedUpstreamRegistryException}
   # * {UploadNotFoundException}
@@ -67,6 +74,19 @@ module Aws::ECR
   # if they are not defined above.
   module Errors
     extend Smithy::Client::DynamicErrors
+
+    # <p>The operation did not succeed because the account is managed by a organization policy.</p>
+    class BlockedByOrganizationPolicyException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECR::Types::BlockedByOrganizationPolicyException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
 
     # <p>The specified layer upload does not contain any layer parts.</p>
     class EmptyUploadException < Smithy::Client::ServiceError
@@ -82,6 +102,32 @@ module Aws::ECR
       end
     end
 
+    # <p>The specified pull time update exclusion already exists for the registry.</p>
+    class ExclusionAlreadyExistsException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECR::Types::ExclusionAlreadyExistsException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified pull time update exclusion was not found.</p>
+    class ExclusionNotFoundException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECR::Types::ExclusionNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The specified image has already been pushed, and there were no changes to the manifest
     #             or image tag after the last push.</p>
     class ImageAlreadyExistsException < Smithy::Client::ServiceError
@@ -92,6 +138,19 @@ module Aws::ECR
       end
 
       # <p>The error message associated with the exception.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified image is archived and cannot be scanned.</p>
+    class ImageArchivedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECR::Types::ImageArchivedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
       def message
         @data[:message]
       end
@@ -115,6 +174,19 @@ module Aws::ECR
     class ImageNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::ImageNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The requested image storage class update is not supported.</p>
+    class ImageStorageClassUpdateNotSupportedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECR::Types::ImageStorageClassUpdateNotSupportedException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -506,6 +578,21 @@ module Aws::ECR
       end
     end
 
+    # <p>The specified signing configuration was not found. This occurs when
+    #             attempting to retrieve or delete a signing configuration that does not exist.</p>
+    class SigningConfigurationNotFoundException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECR::Types::SigningConfigurationNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>The error message associated with the exception.</p>
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The repository creation template already exists. Specify a unique prefix and try
     #             again.</p>
     class TemplateAlreadyExistsException < Smithy::Client::ServiceError
@@ -596,6 +683,21 @@ module Aws::ECR
     class UnableToGetUpstreamLayerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECR::Types::UnableToGetUpstreamLayerException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The referrer or referrers were unable to be listed using the pull through cache rule. This
+    #             is usually caused because of an issue with the Secrets Manager secret containing the credentials
+    #             for the upstream registry.</p>
+    class UnableToListUpstreamImageReferrersException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECR::Types::UnableToListUpstreamImageReferrersException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

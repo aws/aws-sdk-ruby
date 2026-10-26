@@ -41,6 +41,9 @@ module Aws::CostExplorer
           if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-eusc") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ce.eusc-de-east-1.api.amazonwebservices.eu", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]})
           end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-eusc") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ce.eusc-de-east-1.api.amazonwebservices.eu", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]})
+          end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS")) && Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://ce-fips.#{partition_result['implicitGlobalRegion']}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "#{partition_result['implicitGlobalRegion']}"}]})

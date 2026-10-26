@@ -25,6 +25,7 @@ module Aws::CloudWatchLogs
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {DataAlreadyAcceptedException}
+  # * {InternalServerException}
   # * {InternalStreamingException}
   # * {InvalidOperationException}
   # * {InvalidParameterException}
@@ -90,6 +91,21 @@ module Aws::CloudWatchLogs
 
       def expected_sequence_token
         @data[:expected_sequence_token]
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>An internal server error occurred while processing the request. This exception is returned
+    #       when the service encounters an unexpected condition that prevents it from fulfilling the
+    #       request.</p>
+    class InternalServerException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CloudWatchLogs::Types::InternalServerException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
       end
 
       def message

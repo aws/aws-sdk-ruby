@@ -1,5 +1,0 @@
-  module Aws
-    module SimSpaceWeaver
-      VERSION: String
-    end
-  end

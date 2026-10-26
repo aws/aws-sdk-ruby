@@ -1500,6 +1500,12 @@ module Aws::CodeBuild
       attr_accessor fetch_submodules: bool?
     end
 
+    module HostKernel
+      LINUX_KERNEL_4: String
+      LINUX_KERNEL_6: String
+      LINUX_KERNEL_LATEST: String
+    end
+
     module ImagePullCredentialsType
       CODEBUILD: String
       SERVICE_ROLE: String
@@ -2285,6 +2291,7 @@ module Aws::CodeBuild
         ?registry_credential: Types::RegistryCredential,
         ?image_pull_credentials_type: String,
         ?docker_server: Types::DockerServer,
+        ?host_kernel: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2299,6 +2306,7 @@ module Aws::CodeBuild
       attr_accessor registry_credential: Types::RegistryCredential?
       attr_accessor image_pull_credentials_type: String?
       attr_accessor docker_server: Types::DockerServer?
+      attr_accessor host_kernel: String?
     end
 
     class ProjectFileSystemLocation
@@ -3105,6 +3113,7 @@ module Aws::CodeBuild
         ?debug_session_enabled: bool,
         ?fleet_override: Types::ProjectFleet,
         ?auto_retry_limit_override: Integer,
+        ?host_kernel_override: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3141,6 +3150,7 @@ module Aws::CodeBuild
       attr_accessor debug_session_enabled: bool?
       attr_accessor fleet_override: Types::ProjectFleet?
       attr_accessor auto_retry_limit_override: Integer?
+      attr_accessor host_kernel_override: String?
     end
 
     class StartBuildOutput

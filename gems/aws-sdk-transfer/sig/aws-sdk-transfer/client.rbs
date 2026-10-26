@@ -115,7 +115,11 @@ module Aws::Transfer
         mdn_signing_algorithm: String,
         mdn_response: String,
         basic_auth_secret_id: String,
-        preserve_content_type: String
+        preserve_content_type: String,
+        async_mdn_config: {
+          url: String,
+          server_ids: Array[String]
+        }
       },
       ?access_role: String,
       ?logging_role: String,
@@ -128,9 +132,17 @@ module Aws::Transfer
       ?sftp_config: {
         user_secret_id: String,
         trusted_host_keys: Array[String],
-        max_concurrent_connections: Integer
+        max_concurrent_connections: Integer,
+        ordered_user_secret_version_stages: Array[String]
       },
-      ?security_policy_name: String
+      ?security_policy_name: String,
+      ?egress_config: {
+        vpc_lattice: {
+          resource_configuration_arn: String,
+          port_number: Integer
+        }
+      },
+      ?ip_address_type: String
     ) -> _CreateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorResponse
 
     interface _CreateProfileResponse
@@ -181,7 +193,16 @@ module Aws::Transfer
         passive_ip: String,
         tls_session_resumption_mode: String,
         set_stat_option: String,
-        as2_transports: Array[String]
+        sftp_ports: Array[
+          {
+            sftp_port: Integer,
+            communication_mode: String
+          }
+        ],
+        as2_transports: Array[String],
+        proxy_config: {
+          sftp_mode: String
+        }
       },
       ?security_policy_name: String,
       ?tags: Array[
@@ -208,7 +229,8 @@ module Aws::Transfer
       ?s3_storage_options: {
         directory_listing_optimization: String
       },
-      ?ip_address_type: String
+      ?ip_address_type: String,
+      ?host_key_storage_type: String
     ) -> _CreateServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServerResponse
 
     interface _CreateUserResponse
@@ -265,7 +287,15 @@ module Aws::Transfer
           value: String
         }
       ],
-      ?web_app_endpoint_policy: String
+      ?web_app_endpoint_policy: String,
+      ?endpoint_details: {
+        vpc: {
+          subnet_ids: Array[String],
+          vpc_id: String,
+          security_group_ids: Array[String],
+          ip_address_type: String
+        }
+      }
     ) -> _CreateWebAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebAppResponse
 
     interface _CreateWorkflowResponse
@@ -373,7 +403,8 @@ module Aws::Transfer
           key: String,
           value: String
         }
-      ]
+      ],
+      ?structured_log_destinations: Array[String]
     ) -> _CreateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowResponse
 
     interface _DeleteAccessResponse
@@ -612,7 +643,9 @@ module Aws::Transfer
           key: String,
           value: String
         }
-      ]
+      ],
+      ?storage_type: String,
+      ?kms_key: String
     ) -> _ImportHostKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportHostKeyResponse
 
     interface _ImportSshPublicKeyResponse
@@ -812,7 +845,13 @@ module Aws::Transfer
       ?send_file_paths: Array[String],
       ?retrieve_file_paths: Array[String],
       ?local_directory_path: String,
-      ?remote_directory_path: String
+      ?remote_directory_path: String,
+      ?custom_http_headers: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
     ) -> _StartFileTransferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFileTransferResponse
 
     interface _StartRemoteDeleteResponse
@@ -973,16 +1012,28 @@ module Aws::Transfer
         mdn_signing_algorithm: String,
         mdn_response: String,
         basic_auth_secret_id: String,
-        preserve_content_type: String
+        preserve_content_type: String,
+        async_mdn_config: {
+          url: String,
+          server_ids: Array[String]
+        }
       },
       ?access_role: String,
       ?logging_role: String,
       ?sftp_config: {
         user_secret_id: String,
         trusted_host_keys: Array[String],
-        max_concurrent_connections: Integer
+        max_concurrent_connections: Integer,
+        ordered_user_secret_version_stages: Array[String]
       },
-      ?security_policy_name: String
+      ?security_policy_name: String,
+      ?egress_config: {
+        vpc_lattice: {
+          resource_configuration_arn: String,
+          port_number: Integer
+        }
+      },
+      ?ip_address_type: String
     ) -> _UpdateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorResponse
 
     interface _UpdateHostKeyResponse
@@ -993,7 +1044,9 @@ module Aws::Transfer
     def update_host_key: (
       ?server_id: String,
       ?host_key_id: String,
-      ?description: String
+      ?description: String,
+      ?storage_type: String,
+      ?kms_key: String
     ) -> _UpdateHostKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHostKeyResponse
 
     interface _UpdateProfileResponse
@@ -1015,7 +1068,16 @@ module Aws::Transfer
         passive_ip: String,
         tls_session_resumption_mode: String,
         set_stat_option: String,
-        as2_transports: Array[String]
+        sftp_ports: Array[
+          {
+            sftp_port: Integer,
+            communication_mode: String
+          }
+        ],
+        as2_transports: Array[String],
+        proxy_config: {
+          sftp_mode: String
+        }
       },
       ?endpoint_details: {
         address_allocation_ids: Array[String],
@@ -1101,6 +1163,12 @@ module Aws::Transfer
       ?access_endpoint: String,
       ?web_app_units: {
         provisioned: Integer
+      },
+      ?endpoint_details: {
+        vpc: {
+          subnet_ids: Array[String],
+          ip_address_type: String
+        }
       }
     ) -> _UpdateWebAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebAppResponse
 

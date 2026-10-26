@@ -46,6 +46,11 @@ module Aws::PartnerCentralSelling
       def message
         @data[:message]
       end
+
+      # <p>The reason why access was denied for the requested operation.</p>
+      def reason
+        @data[:reason]
+      end
     end
 
     # <p>This error occurs when the request can’t be processed due to a conflict with the target resource's current state, which could result from updating or deleting the resource.</p> <p>Suggested action: Fetch the latest state of the resource, verify the state, and retry the request.</p>

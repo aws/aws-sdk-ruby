@@ -1,17 +1,28 @@
 module Aws::OpenSearch
   module Types
 
+    class AIConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class AIMLOptionsInput
       include Smithy::Schema::Structure
 
       def initialize: (
         ?natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsInput,
         ?s3_vectors_engine: Types::S3VectorsEngine,
+        ?serverless_vector_acceleration: Types::ServerlessVectorAcceleration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsInput?
       attr_accessor s3_vectors_engine: Types::S3VectorsEngine?
+      attr_accessor serverless_vector_acceleration: Types::ServerlessVectorAcceleration?
     end
 
     class AIMLOptionsOutput
@@ -20,11 +31,13 @@ module Aws::OpenSearch
       def initialize: (
         ?natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsOutput,
         ?s3_vectors_engine: Types::S3VectorsEngine,
+        ?serverless_vector_acceleration: Types::ServerlessVectorAcceleration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsOutput?
       attr_accessor s3_vectors_engine: Types::S3VectorsEngine?
+      attr_accessor serverless_vector_acceleration: Types::ServerlessVectorAcceleration?
     end
 
     class AIMLOptionsStatus
@@ -162,6 +175,7 @@ module Aws::OpenSearch
         ?data_source_type: Types::DirectQueryDataSourceType,
         ?description: String,
         ?open_search_arns: Array[String],
+        ?data_source_access_policy: String,
         ?tag_list: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -170,6 +184,7 @@ module Aws::OpenSearch
       attr_accessor data_source_type: Types::DirectQueryDataSourceType?
       attr_accessor description: String?
       attr_accessor open_search_arns: Array[String]?
+      attr_accessor data_source_access_policy: String?
       attr_accessor tag_list: Array[Types::Tag]?
     end
 
@@ -383,6 +398,44 @@ module Aws::OpenSearch
       attr_accessor domain_package_details_list: Array[Types::DomainPackageDetails]?
     end
 
+    class AttachDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data_source_arn: String,
+        ?workspace_id: String,
+        ?workspace_configuration: Types::WorkspaceConfigurationInput,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data_source_arn: String?
+      attr_accessor workspace_id: String?
+      attr_accessor workspace_configuration: Types::WorkspaceConfigurationInput?
+      attr_accessor client_token: String?
+    end
+
+    class AttachDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?id: String,
+        ?arn: String,
+        ?data_source_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor data_source_arn: String?
+      attr_accessor status: String?
+    end
+
     class AuthorizeVpcEndpointAccessRequest
       include Smithy::Schema::Structure
 
@@ -390,12 +443,14 @@ module Aws::OpenSearch
         ?domain_name: String,
         ?account: String,
         ?service: String,
+        ?service_options: Types::ServiceOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_name: String?
       attr_accessor account: String?
       attr_accessor service: String?
+      attr_accessor service_options: Types::ServiceOptions?
     end
 
     class AuthorizeVpcEndpointAccessResponse
@@ -415,11 +470,13 @@ module Aws::OpenSearch
       def initialize: (
         ?principal_type: String,
         ?principal: String,
+        ?service_options: Types::ServiceOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor principal_type: String?
       attr_accessor principal: String?
+      attr_accessor service_options: Types::ServiceOptions?
     end
 
     class AutoTune
@@ -563,6 +620,51 @@ module Aws::OpenSearch
       SCHEDULED_ACTION: String
     end
 
+    class AutomatedSnapshotPauseOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor state: String?
+    end
+
+    class AutomatedSnapshotPauseOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::AutomatedSnapshotPauseOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::AutomatedSnapshotPauseOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class AutomatedSnapshotPauseRequestOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
     class AvailabilityZoneInfo
       include Smithy::Schema::Structure
 
@@ -660,6 +762,81 @@ module Aws::OpenSearch
       attr_accessor active_value: String?
     end
 
+    class CapabilityBaseRequestConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ai_config: Types::AIConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_config: Types::AIConfig?
+
+      class AiConfig < CapabilityBaseRequestConfig
+      end
+      class Unknown < CapabilityBaseRequestConfig
+      end
+    end
+
+    class CapabilityBaseResponseConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ai_config: Types::AIConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_config: Types::AIConfig?
+
+      class AiConfig < CapabilityBaseResponseConfig
+      end
+      class Unknown < CapabilityBaseResponseConfig
+      end
+    end
+
+    class CapabilityExtendedResponseConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ai_config: Types::AIConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_config: Types::AIConfig?
+
+      class AiConfig < CapabilityExtendedResponseConfig
+      end
+      class Unknown < CapabilityExtendedResponseConfig
+      end
+    end
+
+    class CapabilityFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor details: String?
+    end
+
+    module CapabilityFailureReason
+      KMS_KEY_INSUFFICIENT_PERMISSION: String
+    end
+
+    module CapabilityStatus
+      CREATING: String
+      CREATE_FAILED: String
+      ACTIVE: String
+      UPDATING: String
+      UPDATE_FAILED: String
+      DELETING: String
+      DELETE_FAILED: String
+    end
+
     class ChangeProgressDetails
       include Smithy::Schema::Structure
 
@@ -712,6 +889,8 @@ module Aws::OpenSearch
         ?last_updated_time: Time,
         ?config_change_status: String,
         ?initiated_by: String,
+        ?validation_failures: Array[Types::ValidationFailure],
+        ?accepted_warnings: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -725,6 +904,8 @@ module Aws::OpenSearch
       attr_accessor last_updated_time: Time?
       attr_accessor config_change_status: String?
       attr_accessor initiated_by: String?
+      attr_accessor validation_failures: Array[Types::ValidationFailure]?
+      attr_accessor accepted_warnings: Array[String]?
     end
 
     class CloudWatchDirectQueryDataSource
@@ -890,6 +1071,7 @@ module Aws::OpenSearch
         ?iam_identity_center_options: Types::IamIdentityCenterOptionsInput,
         ?app_configs: Array[Types::AppConfig],
         ?tag_list: Array[Types::Tag],
+        ?kms_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -899,6 +1081,7 @@ module Aws::OpenSearch
       attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptionsInput?
       attr_accessor app_configs: Array[Types::AppConfig]?
       attr_accessor tag_list: Array[Types::Tag]?
+      attr_accessor kms_key_arn: String?
     end
 
     class CreateApplicationResponse
@@ -913,6 +1096,7 @@ module Aws::OpenSearch
         ?app_configs: Array[Types::AppConfig],
         ?tag_list: Array[Types::Tag],
         ?created_at: Time,
+        ?kms_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -924,6 +1108,7 @@ module Aws::OpenSearch
       attr_accessor app_configs: Array[Types::AppConfig]?
       attr_accessor tag_list: Array[Types::Tag]?
       attr_accessor created_at: Time?
+      attr_accessor kms_key_arn: String?
     end
 
     class CreateDomainRequest
@@ -951,6 +1136,10 @@ module Aws::OpenSearch
         ?off_peak_window_options: Types::OffPeakWindowOptions,
         ?software_update_options: Types::SoftwareUpdateOptions,
         ?aiml_options: Types::AIMLOptionsInput,
+        ?deployment_strategy_options: Types::DeploymentStrategyOptions,
+        ?automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions,
+        ?use_case: String,
+        ?engine_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -975,6 +1164,10 @@ module Aws::OpenSearch
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptions?
       attr_accessor software_update_options: Types::SoftwareUpdateOptions?
       attr_accessor aiml_options: Types::AIMLOptionsInput?
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions?
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions?
+      attr_accessor use_case: String?
+      attr_accessor engine_mode: String?
     end
 
     class CreateDomainResponse
@@ -986,6 +1179,32 @@ module Aws::OpenSearch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_status: Types::DomainStatus?
+    end
+
+    class CreateIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?index_name: String,
+        ?index_schema: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_schema: Smithy::Schema::document?
+    end
+
+    class CreateIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
     end
 
     class CreateOutboundConnectionRequest
@@ -1109,11 +1328,34 @@ module Aws::OpenSearch
       def initialize: (
         ?data_source_arn: String,
         ?data_source_description: String,
+        ?iam_role_for_data_source_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor data_source_arn: String?
       attr_accessor data_source_description: String?
+      attr_accessor iam_role_for_data_source_arn: String?
+    end
+
+    module DataSourceAttachmentStatus
+      PENDING: String
+      ATTACHED: String
+      FAILED: String
+    end
+
+    class DataSourceAttachmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?data_source_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor data_source_arn: String?
+      attr_accessor status: String?
     end
 
     class DataSourceDetails
@@ -1253,6 +1495,30 @@ module Aws::OpenSearch
       attr_accessor connection: Types::InboundConnection?
     end
 
+    class DeleteIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?index_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor index_name: String?
+    end
+
+    class DeleteIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
     class DeleteOutboundConnectionRequest
       include Smithy::Schema::Structure
 
@@ -1336,6 +1602,91 @@ module Aws::OpenSearch
       COMPLETED: String
       NOT_ELIGIBLE: String
       ELIGIBLE: String
+    end
+
+    module DeploymentStrategy
+      DEFAULT: String
+      CAPACITY_OPTIMIZED: String
+    end
+
+    class DeploymentStrategyOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_strategy: String?
+    end
+
+    class DeploymentStrategyOptionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: Types::DeploymentStrategyOptions,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: Types::DeploymentStrategyOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    class DeregisterCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?capability_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor capability_name: String?
+    end
+
+    class DeregisterCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DescribeDataSourceAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data_source_arn: String?
+    end
+
+    class DescribeDataSourceAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?id: String,
+        ?arn: String,
+        ?data_source_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor data_source_arn: String?
+      attr_accessor status: String?
     end
 
     class DescribeDomainAutoTunesRequest
@@ -1582,6 +1933,32 @@ module Aws::OpenSearch
       attr_accessor next_token: String?
     end
 
+    class DescribeInsightDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::InsightEntity,
+        ?insight_id: String,
+        ?show_html_content: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::InsightEntity?
+      attr_accessor insight_id: String?
+      attr_accessor show_html_content: bool?
+    end
+
+    class DescribeInsightDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::InsightField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::InsightField]?
+    end
+
     class DescribeInstanceTypeLimitsRequest
       include Smithy::Schema::Structure
 
@@ -1766,6 +2143,34 @@ module Aws::OpenSearch
       attr_accessor vpc_endpoint_errors: Array[Types::VpcEndpointError]?
     end
 
+    class DetachDataSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data_source_arn: String?
+    end
+
+    class DetachDataSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?data_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor data_source_arn: String?
+    end
+
     class DirectQueryDataSource
       include Smithy::Schema::Structure
 
@@ -1793,15 +2198,19 @@ module Aws::OpenSearch
       def initialize: (
         ?cloud_watch_log: Types::CloudWatchDirectQueryDataSource,
         ?security_lake: Types::SecurityLakeDirectQueryDataSource,
+        ?prometheus: Types::PrometheusDirectQueryDataSource,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cloud_watch_log: Types::CloudWatchDirectQueryDataSource?
       attr_accessor security_lake: Types::SecurityLakeDirectQueryDataSource?
+      attr_accessor prometheus: Types::PrometheusDirectQueryDataSource?
 
       class CloudWatchLog < DirectQueryDataSourceType
       end
       class SecurityLake < DirectQueryDataSourceType
+      end
+      class Prometheus < DirectQueryDataSourceType
       end
       class Unknown < DirectQueryDataSourceType
       end
@@ -1891,6 +2300,10 @@ module Aws::OpenSearch
         ?software_update_options: Types::SoftwareUpdateOptionsStatus,
         ?modifying_properties: Array[Types::ModifyingProperties],
         ?aiml_options: Types::AIMLOptionsStatus,
+        ?deployment_strategy_options: Types::DeploymentStrategyOptionsStatus,
+        ?automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptionsStatus,
+        ?use_case: Types::UseCaseStatus,
+        ?engine_mode: Types::EngineModeStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1915,6 +2328,10 @@ module Aws::OpenSearch
       attr_accessor software_update_options: Types::SoftwareUpdateOptionsStatus?
       attr_accessor modifying_properties: Array[Types::ModifyingProperties]?
       attr_accessor aiml_options: Types::AIMLOptionsStatus?
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptionsStatus?
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptionsStatus?
+      attr_accessor use_case: Types::UseCaseStatus?
+      attr_accessor engine_mode: Types::EngineModeStatus?
     end
 
     class DomainEndpointOptions
@@ -2123,6 +2540,10 @@ module Aws::OpenSearch
         ?domain_processing_status: String,
         ?modifying_properties: Array[Types::ModifyingProperties],
         ?aiml_options: Types::AIMLOptionsOutput,
+        ?deployment_strategy_options: Types::DeploymentStrategyOptions,
+        ?automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptions,
+        ?use_case: String,
+        ?engine_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2160,6 +2581,17 @@ module Aws::OpenSearch
       attr_accessor domain_processing_status: String?
       attr_accessor modifying_properties: Array[Types::ModifyingProperties]?
       attr_accessor aiml_options: Types::AIMLOptionsOutput?
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions?
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptions?
+      attr_accessor use_case: String?
+      attr_accessor engine_mode: String?
+    end
+
+    module DomainUseCase
+      SEARCH: String
+      VECTOR: String
+      OBSERVABILITY: String
+      MIXED: String
     end
 
     module DryRunMode
@@ -2176,6 +2608,7 @@ module Aws::OpenSearch
         ?creation_date: String,
         ?update_date: String,
         ?validation_failures: Array[Types::ValidationFailure],
+        ?accepted_warnings: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2184,6 +2617,7 @@ module Aws::OpenSearch
       attr_accessor creation_date: String?
       attr_accessor update_date: String?
       attr_accessor validation_failures: Array[Types::ValidationFailure]?
+      attr_accessor accepted_warnings: Array[String]?
     end
 
     class DryRunResults
@@ -2250,11 +2684,13 @@ module Aws::OpenSearch
       def initialize: (
         ?enabled: bool,
         ?kms_key_id: String,
+        ?encryption_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enabled: bool?
       attr_accessor kms_key_id: String?
+      attr_accessor encryption_mode: String?
     end
 
     class EncryptionAtRestOptionsStatus
@@ -2267,6 +2703,29 @@ module Aws::OpenSearch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor options: Types::EncryptionAtRestOptions?
+      attr_accessor status: Types::OptionStatus?
+    end
+
+    module EncryptionMode
+      Disk: String
+      Native: String
+    end
+
+    module EngineMode
+      GENERAL: String
+      OPTIMIZED: String
+    end
+
+    class EngineModeStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: String,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: String?
       attr_accessor status: Types::OptionStatus?
     end
 
@@ -2297,6 +2756,21 @@ module Aws::OpenSearch
 
       attr_accessor error_type: String?
       attr_accessor error_message: String?
+    end
+
+    class ExportOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[String],
+        ?objects: Array[Types::SavedObjectIdentifier],
+        ?include_references_deep: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[String]?
+      attr_accessor objects: Array[Types::SavedObjectIdentifier]?
+      attr_accessor include_references_deep: bool?
     end
 
     class Filter
@@ -2337,6 +2811,7 @@ module Aws::OpenSearch
         ?app_configs: Array[Types::AppConfig],
         ?created_at: Time,
         ?last_updated_at: Time,
+        ?kms_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2350,6 +2825,39 @@ module Aws::OpenSearch
       attr_accessor app_configs: Array[Types::AppConfig]?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class GetCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?capability_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor capability_name: String?
+    end
+
+    class GetCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_name: String,
+        ?application_id: String,
+        ?status: String,
+        ?capability_config: Types::CapabilityExtendedResponseConfig,
+        ?failures: Array[Types::CapabilityFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_name: String?
+      attr_accessor application_id: String?
+      attr_accessor status: String?
+      attr_accessor capability_config: Types::CapabilityExtendedResponseConfig?
+      attr_accessor failures: Array[Types::CapabilityFailure]?
     end
 
     class GetCompatibleVersionsRequest
@@ -2404,6 +2912,26 @@ module Aws::OpenSearch
       attr_accessor status: String?
     end
 
+    class GetDefaultApplicationSettingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDefaultApplicationSettingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
     class GetDirectQueryDataSourceRequest
       include Smithy::Schema::Structure
 
@@ -2423,6 +2951,7 @@ module Aws::OpenSearch
         ?data_source_type: Types::DirectQueryDataSourceType,
         ?description: String,
         ?open_search_arns: Array[String],
+        ?data_source_access_policy: String,
         ?data_source_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2431,6 +2960,7 @@ module Aws::OpenSearch
       attr_accessor data_source_type: Types::DirectQueryDataSourceType?
       attr_accessor description: String?
       attr_accessor open_search_arns: Array[String]?
+      attr_accessor data_source_access_policy: String?
       attr_accessor data_source_arn: String?
     end
 
@@ -2464,6 +2994,68 @@ module Aws::OpenSearch
       attr_accessor status_message: String?
       attr_accessor node_id: String?
       attr_accessor action: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?index_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor index_name: String?
+    end
+
+    class GetIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_schema: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_schema: Smithy::Schema::document?
+    end
+
+    class GetMigrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_id: String?
+    end
+
+    class GetMigrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_id: String,
+        ?status: String,
+        ?application_id: String,
+        ?source: Types::MigrationSource,
+        ?exported_count: Integer,
+        ?imported_count: Integer,
+        ?error: Types::MigrationError,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_id: String?
+      attr_accessor status: String?
+      attr_accessor application_id: String?
+      attr_accessor source: Types::MigrationSource?
+      attr_accessor exported_count: Integer?
+      attr_accessor imported_count: Integer?
+      attr_accessor error: Types::MigrationError?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
     end
@@ -2638,6 +3230,7 @@ module Aws::OpenSearch
       def initialize: (
         ?enabled_api_access: bool,
         ?identity_center_instance_arn: String,
+        ?identity_center_instance_region: String,
         ?subject_key: String,
         ?roles_key: String,
         ?identity_center_application_arn: String,
@@ -2647,6 +3240,7 @@ module Aws::OpenSearch
 
       attr_accessor enabled_api_access: bool?
       attr_accessor identity_center_instance_arn: String?
+      attr_accessor identity_center_instance_region: String?
       attr_accessor subject_key: String?
       attr_accessor roles_key: String?
       attr_accessor identity_center_application_arn: String?
@@ -2659,6 +3253,7 @@ module Aws::OpenSearch
       def initialize: (
         ?enabled_api_access: bool,
         ?identity_center_instance_arn: String,
+        ?identity_center_instance_region: String,
         ?subject_key: String,
         ?roles_key: String,
       ) -> void
@@ -2666,6 +3261,7 @@ module Aws::OpenSearch
 
       attr_accessor enabled_api_access: bool?
       attr_accessor identity_center_instance_arn: String?
+      attr_accessor identity_center_instance_region: String?
       attr_accessor subject_key: String?
       attr_accessor roles_key: String?
     end
@@ -2726,9 +3322,169 @@ module Aws::OpenSearch
       DELETED: String
     end
 
+    module IndexStatus
+      CREATED: String
+      UPDATED: String
+      DELETED: String
+    end
+
     module InitiatedBy
       CUSTOMER: String
       SERVICE: String
+    end
+
+    class Insight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_id: String,
+        ?display_name: String,
+        ?type: String,
+        ?priority: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?update_time: Time,
+        ?is_experimental: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_id: String?
+      attr_accessor display_name: String?
+      attr_accessor type: String?
+      attr_accessor priority: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor is_experimental: bool?
+    end
+
+    class InsightEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    module InsightEntityType
+      ACCOUNT: String
+      DOMAIN: String
+    end
+
+    class InsightFeedbackEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    module InsightFeedbackEntityType
+      DOMAIN: String
+    end
+
+    class InsightFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::InsightFeedbackEntity,
+        ?insight_id: String,
+        ?thumbs: String,
+        ?feedback_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::InsightFeedbackEntity?
+      attr_accessor insight_id: String?
+      attr_accessor thumbs: String?
+      attr_accessor feedback_text: String?
+    end
+
+    class InsightFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module InsightFeedbackThumbs
+      UP: String
+      DOWN: String
+    end
+
+    class InsightField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    module InsightFieldType
+      TEXT: String
+      METRIC: String
+    end
+
+    module InsightPriorityLevel
+      CRITICAL: String
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+    end
+
+    module InsightResponseStatus
+      SUCCESS: String
+      ERROR: String
+    end
+
+    module InsightSortOrder
+      ASC: String
+      DESC: String
+    end
+
+    module InsightStatus
+      ACTIVE: String
+      RESOLVED: String
+      DISMISSED: String
+    end
+
+    class InsightTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from: Integer,
+        ?to: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from: Integer?
+      attr_accessor to: Integer?
+    end
+
+    module InsightType
+      EVENT: String
+      RECOMMENDATION: String
     end
 
     class InstanceCountLimits
@@ -2820,6 +3576,7 @@ module Aws::OpenSearch
         ?enabled: bool,
         ?subject_key: String,
         ?roles_key: String,
+        ?jwks_url: String,
         ?public_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2827,6 +3584,7 @@ module Aws::OpenSearch
       attr_accessor enabled: bool?
       attr_accessor subject_key: String?
       attr_accessor roles_key: String?
+      attr_accessor jwks_url: String?
       attr_accessor public_key: String?
     end
 
@@ -2837,6 +3595,7 @@ module Aws::OpenSearch
         ?enabled: bool,
         ?subject_key: String,
         ?roles_key: String,
+        ?jwks_url: String,
         ?public_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2844,6 +3603,7 @@ module Aws::OpenSearch
       attr_accessor enabled: bool?
       attr_accessor subject_key: String?
       attr_accessor roles_key: String?
+      attr_accessor jwks_url: String?
       attr_accessor public_key: String?
     end
 
@@ -2911,6 +3671,34 @@ module Aws::OpenSearch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor application_summaries: Array[Types::ApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataSourceAttachmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataSourceAttachmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachments: Array[Types::DataSourceAttachmentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachments: Array[Types::DataSourceAttachmentSummary]?
       attr_accessor next_token: String?
     end
 
@@ -3042,6 +3830,38 @@ module Aws::OpenSearch
       attr_accessor next_token: String?
     end
 
+    class ListInsightsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity: Types::InsightEntity,
+        ?time_range: Types::InsightTimeRange,
+        ?sort_order: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity: Types::InsightEntity?
+      attr_accessor time_range: Types::InsightTimeRange?
+      attr_accessor sort_order: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListInsightsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insights: Array[Types::Insight],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insights: Array[Types::Insight]?
+      attr_accessor next_token: String?
+    end
+
     class ListInstanceTypeDetailsRequest
       include Smithy::Schema::Structure
 
@@ -3073,6 +3893,36 @@ module Aws::OpenSearch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_type_details: Array[Types::InstanceTypeDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMigrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMigrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migrations: Array[Types::MigrationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migrations: Array[Types::MigrationSummary]?
       attr_accessor next_token: String?
     end
 
@@ -3323,6 +4173,91 @@ module Aws::OpenSearch
       attr_accessor master_user_password: String?
     end
 
+    class MigrationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class MigrationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::MigrationSource,
+        ?workspace: Types::MigrationWorkspace,
+        ?export_options: Types::ExportOptions,
+        ?conflict_resolution: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::MigrationSource?
+      attr_accessor workspace: Types::MigrationWorkspace?
+      attr_accessor export_options: Types::ExportOptions?
+      attr_accessor conflict_resolution: String?
+    end
+
+    class MigrationSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datasource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datasource_arn: String?
+    end
+
+    class MigrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_id: String,
+        ?status: String,
+        ?application_id: String,
+        ?source: Types::MigrationSource,
+        ?exported_count: Integer,
+        ?imported_count: Integer,
+        ?error: Types::MigrationError,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_id: String?
+      attr_accessor status: String?
+      attr_accessor application_id: String?
+      attr_accessor source: Types::MigrationSource?
+      attr_accessor exported_count: Integer?
+      attr_accessor imported_count: Integer?
+      attr_accessor error: Types::MigrationError?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class MigrationWorkspace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?create_workspace: bool,
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor create_workspace: bool?
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
     class ModifyingProperties
       include Smithy::Schema::Structure
 
@@ -3445,6 +4380,7 @@ module Aws::OpenSearch
       Data: String
       Ultrawarm: String
       Master: String
+      Warm: String
     end
 
     class OffPeakWindow
@@ -3841,6 +4777,13 @@ module Aws::OpenSearch
       attr_accessor package_configuration: Types::PackageConfiguration?
     end
 
+    module PauseState
+      ACTIVE: String
+      COMPLETED: String
+      SCHEDULED: String
+      DISABLED: String
+    end
+
     class PluginProperties
       include Smithy::Schema::Structure
 
@@ -3863,6 +4806,19 @@ module Aws::OpenSearch
     module PrincipalType
       AWS_ACCOUNT: String
       AWS_SERVICE: String
+    end
+
+    class PrometheusDirectQueryDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?workspace_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor workspace_arn: String?
     end
 
     module PropertyValueType
@@ -3898,6 +4854,30 @@ module Aws::OpenSearch
       attr_accessor reservation_name: String?
     end
 
+    class PutDefaultApplicationSettingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?set_as_default: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor set_as_default: bool?
+    end
+
+    class PutDefaultApplicationSettingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
     class RecurringCharge
       include Smithy::Schema::Structure
 
@@ -3909,6 +4889,38 @@ module Aws::OpenSearch
 
       attr_accessor recurring_charge_amount: Float?
       attr_accessor recurring_charge_frequency: String?
+    end
+
+    class RegisterCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?capability_name: String,
+        ?capability_config: Types::CapabilityBaseRequestConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor capability_name: String?
+      attr_accessor capability_config: Types::CapabilityBaseRequestConfig?
+    end
+
+    class RegisterCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_name: String,
+        ?application_id: String,
+        ?status: String,
+        ?capability_config: Types::CapabilityBaseResponseConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_name: String?
+      attr_accessor application_id: String?
+      attr_accessor status: String?
+      attr_accessor capability_config: Types::CapabilityBaseResponseConfig?
     end
 
     class RejectInboundConnectionRequest
@@ -4049,12 +5061,14 @@ module Aws::OpenSearch
         ?domain_name: String,
         ?account: String,
         ?service: String,
+        ?service_options: Types::ServiceOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor domain_name: String?
       attr_accessor account: String?
       attr_accessor service: String?
+      attr_accessor service_options: Types::ServiceOptions?
     end
 
     class RevokeVpcEndpointAccessResponse
@@ -4074,6 +5088,45 @@ module Aws::OpenSearch
     module RollbackOnDisable
       NO_ROLLBACK: String
       DEFAULT_ROLLBACK: String
+    end
+
+    class RollbackServiceSoftwareOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_version: String,
+        ?new_version: String,
+        ?rollback_available: bool,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_version: String?
+      attr_accessor new_version: String?
+      attr_accessor rollback_available: bool?
+      attr_accessor description: String?
+    end
+
+    class RollbackServiceSoftwareUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+    end
+
+    class RollbackServiceSoftwareUpdateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rollback_service_software_options: Types::RollbackServiceSoftwareOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rollback_service_software_options: Types::RollbackServiceSoftwareOptions?
     end
 
     class S3GlueDataCatalog
@@ -4153,6 +5206,19 @@ module Aws::OpenSearch
       attr_accessor session_timeout_minutes: Integer?
     end
 
+    class SavedObjectIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor id: String?
+    end
+
     module ScheduleAt
       NOW: String
       TIMESTAMP: String
@@ -4230,6 +5296,39 @@ module Aws::OpenSearch
       attr_accessor role_arn: String?
     end
 
+    class ServerlessVectorAcceleration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class ServiceOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?supported_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor supported_regions: Array[String]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class ServiceSoftwareOptions
       include Smithy::Schema::Structure
 
@@ -4302,10 +5401,12 @@ module Aws::OpenSearch
 
       def initialize: (
         ?auto_software_update_enabled: bool,
+        ?use_latest_service_software_for_blue_green: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor auto_software_update_enabled: bool?
+      attr_accessor use_latest_service_software_for_blue_green: bool?
     end
 
     class SoftwareUpdateOptionsStatus
@@ -4345,6 +5446,34 @@ module Aws::OpenSearch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor maintenance_id: String?
+    end
+
+    class StartMigrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?migration_options: Types::MigrationOptions,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor migration_options: Types::MigrationOptions?
+      attr_accessor client_token: String?
+    end
+
+    class StartMigrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_id: String?
+      attr_accessor status: String?
     end
 
     class StartServiceSoftwareUpdateRequest
@@ -4411,6 +5540,7 @@ module Aws::OpenSearch
       POLICY_MIN_TLS_1_0_2019_07: String
       POLICY_MIN_TLS_1_2_2019_07: String
       POLICY_MIN_TLS_1_2_PFS_2023_10: String
+      POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08: String
     end
 
     class Tag
@@ -4426,6 +5556,17 @@ module Aws::OpenSearch
       attr_accessor value: String?
     end
 
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     module TimeUnit
       HOURS: String
     end
@@ -4437,12 +5578,14 @@ module Aws::OpenSearch
         ?id: String,
         ?data_sources: Array[Types::DataSource],
         ?app_configs: Array[Types::AppConfig],
+        ?iam_identity_center_options: Types::IamIdentityCenterOptionsInput,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor data_sources: Array[Types::DataSource]?
       attr_accessor app_configs: Array[Types::AppConfig]?
+      attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptionsInput?
     end
 
     class UpdateApplicationResponse
@@ -4508,6 +5651,7 @@ module Aws::OpenSearch
         ?data_source_type: Types::DirectQueryDataSourceType,
         ?description: String,
         ?open_search_arns: Array[String],
+        ?data_source_access_policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4515,6 +5659,7 @@ module Aws::OpenSearch
       attr_accessor data_source_type: Types::DirectQueryDataSourceType?
       attr_accessor description: String?
       attr_accessor open_search_arns: Array[String]?
+      attr_accessor data_source_access_policy: String?
     end
 
     class UpdateDirectQueryDataSourceResponse
@@ -4553,6 +5698,11 @@ module Aws::OpenSearch
         ?off_peak_window_options: Types::OffPeakWindowOptions,
         ?software_update_options: Types::SoftwareUpdateOptions,
         ?aiml_options: Types::AIMLOptionsInput,
+        ?deployment_strategy_options: Types::DeploymentStrategyOptions,
+        ?automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions,
+        ?use_case: String,
+        ?engine_mode: String,
+        ?accepted_warnings: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4577,6 +5727,11 @@ module Aws::OpenSearch
       attr_accessor off_peak_window_options: Types::OffPeakWindowOptions?
       attr_accessor software_update_options: Types::SoftwareUpdateOptions?
       attr_accessor aiml_options: Types::AIMLOptionsInput?
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions?
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions?
+      attr_accessor use_case: String?
+      attr_accessor engine_mode: String?
+      attr_accessor accepted_warnings: Array[String]?
     end
 
     class UpdateDomainConfigResponse
@@ -4592,6 +5747,32 @@ module Aws::OpenSearch
       attr_accessor domain_config: Types::DomainConfig?
       attr_accessor dry_run_results: Types::DryRunResults?
       attr_accessor dry_run_progress_status: Types::DryRunProgressStatus?
+    end
+
+    class UpdateIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?index_name: String,
+        ?index_schema: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_schema: Smithy::Schema::document?
+    end
+
+    class UpdateIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
     end
 
     class UpdatePackageRequest
@@ -4795,6 +5976,19 @@ module Aws::OpenSearch
       attr_accessor progress_percent: Float?
     end
 
+    class UseCaseStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?options: String,
+        ?status: Types::OptionStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor options: String?
+      attr_accessor status: Types::OptionStatus?
+    end
+
     class VPCDerivedInfo
       include Smithy::Schema::Structure
 
@@ -4803,6 +5997,7 @@ module Aws::OpenSearch
         ?subnet_ids: Array[String],
         ?availability_zones: Array[String],
         ?security_group_ids: Array[String],
+        ?egress_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4810,6 +6005,7 @@ module Aws::OpenSearch
       attr_accessor subnet_ids: Array[String]?
       attr_accessor availability_zones: Array[String]?
       attr_accessor security_group_ids: Array[String]?
+      attr_accessor egress_enabled: bool?
     end
 
     class VPCDerivedInfoStatus
@@ -4831,11 +6027,13 @@ module Aws::OpenSearch
       def initialize: (
         ?subnet_ids: Array[String],
         ?security_group_ids: Array[String],
+        ?egress_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor subnet_ids: Array[String]?
       attr_accessor security_group_ids: Array[String]?
+      attr_accessor egress_enabled: bool?
     end
 
     class ValidationException
@@ -4855,11 +6053,18 @@ module Aws::OpenSearch
       def initialize: (
         ?code: String,
         ?message: String,
+        ?severity: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor code: String?
       attr_accessor message: String?
+      attr_accessor severity: String?
+    end
+
+    module ValidationFailureSeverity
+      CRITICAL: String
+      WARNING: String
     end
 
     class VersionStatus
@@ -4961,6 +6166,19 @@ module Aws::OpenSearch
 
       attr_accessor hours: Integer?
       attr_accessor minutes: Integer?
+    end
+
+    class WorkspaceConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?workspace_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor workspace_type: String?
     end
 
     class ZoneAwarenessConfig

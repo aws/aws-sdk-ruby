@@ -20,6 +20,11 @@ module Aws::Glacier
       def code: () -> String?
       def message: () -> String?
     end
+    class NoLongerSupportedException < Smithy::Client::ServiceError
+      def type: () -> String?
+      def code: () -> String?
+      def message: () -> String?
+    end
     class PolicyEnforcedException < Smithy::Client::ServiceError
       def type: () -> String?
       def code: () -> String?

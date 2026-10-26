@@ -140,6 +140,17 @@ module Aws::CostOptimizationHub
       attr_accessor db_instance_class: String?
     end
 
+    class DocumentDbCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
     class DynamoDbReservedCapacity
       include Smithy::Schema::Structure
 
@@ -178,6 +189,17 @@ module Aws::CostOptimizationHub
       attr_accessor monthly_recurring_cost: String?
       attr_accessor number_of_capacity_units_to_purchase: String?
       attr_accessor capacity_units: String?
+    end
+
+    class DynamoDbTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
     end
 
     class EbsVolume
@@ -379,6 +401,32 @@ module Aws::CostOptimizationHub
       attr_accessor compute: Types::ComputeConfiguration?
     end
 
+    class EfficiencyMetricsByGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics_by_time: Array[Types::MetricsByTime],
+        ?group: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics_by_time: Array[Types::MetricsByTime]?
+      attr_accessor group: String?
+      attr_accessor message: String?
+    end
+
+    class ElastiCacheCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
     class ElastiCacheReservedInstances
       include Smithy::Schema::Structure
 
@@ -568,6 +616,11 @@ module Aws::CostOptimizationHub
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    module GranularityType
+      DAILY: String
+      MONTHLY: String
+    end
+
     module ImplementationEffort
       VERY_LOW: String
       LOW: String
@@ -620,6 +673,40 @@ module Aws::CostOptimizationHub
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor compute: Types::ComputeConfiguration?
+    end
+
+    class ListEfficiencyMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_by: String,
+        ?granularity: String,
+        ?time_period: Types::TimePeriod,
+        ?max_results: Integer,
+        ?order_by: Types::OrderBy,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_by: String?
+      attr_accessor granularity: String?
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor max_results: Integer?
+      attr_accessor order_by: Types::OrderBy?
+      attr_accessor next_token: String?
+    end
+
+    class ListEfficiencyMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?efficiency_metrics_by_group: Array[Types::EfficiencyMetricsByGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor efficiency_metrics_by_group: Array[Types::EfficiencyMetricsByGroup]?
+      attr_accessor next_token: String?
     end
 
     class ListEnrollmentStatusesRequest
@@ -731,6 +818,17 @@ module Aws::CostOptimizationHub
       NONE: String
     end
 
+    class MemoryDbCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
     class MemoryDbReservedInstances
       include Smithy::Schema::Structure
 
@@ -779,6 +877,23 @@ module Aws::CostOptimizationHub
       attr_accessor current_generation: String?
     end
 
+    class MetricsByTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?score: Float,
+        ?savings: Float,
+        ?spend: Float,
+        ?timestamp: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor score: Float?
+      attr_accessor savings: Float?
+      attr_accessor spend: Float?
+      attr_accessor timestamp: String?
+    end
+
     class MixedInstanceConfiguration
       include Smithy::Schema::Structure
 
@@ -788,6 +903,34 @@ module Aws::CostOptimizationHub
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+    end
+
+    class NatGateway
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::NatGatewayConfiguration,
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::NatGatewayConfiguration?
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
+    end
+
+    class NatGatewayConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_connection_count: Integer,
+        ?packets_in_from_source: Integer,
+        ?packets_in_from_destination: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_connection_count: Integer?
+      attr_accessor packets_in_from_source: Integer?
+      attr_accessor packets_in_from_destination: Integer?
     end
 
     class OpenSearchReservedInstances
@@ -1160,6 +1303,13 @@ module Aws::CostOptimizationHub
         ?aurora_db_cluster_storage: Types::AuroraDbClusterStorage,
         ?dynamo_db_reserved_capacity: Types::DynamoDbReservedCapacity,
         ?memory_db_reserved_instances: Types::MemoryDbReservedInstances,
+        ?nat_gateway: Types::NatGateway,
+        ?dynamo_db_table: Types::DynamoDbTable,
+        ?elasti_cache_cluster: Types::ElastiCacheCluster,
+        ?memory_db_cluster: Types::MemoryDbCluster,
+        ?document_db_cluster: Types::DocumentDbCluster,
+        ?work_spaces: Types::WorkSpaces,
+        ?sage_maker_endpoint: Types::SageMakerEndpoint,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1181,6 +1331,13 @@ module Aws::CostOptimizationHub
       attr_accessor aurora_db_cluster_storage: Types::AuroraDbClusterStorage?
       attr_accessor dynamo_db_reserved_capacity: Types::DynamoDbReservedCapacity?
       attr_accessor memory_db_reserved_instances: Types::MemoryDbReservedInstances?
+      attr_accessor nat_gateway: Types::NatGateway?
+      attr_accessor dynamo_db_table: Types::DynamoDbTable?
+      attr_accessor elasti_cache_cluster: Types::ElastiCacheCluster?
+      attr_accessor memory_db_cluster: Types::MemoryDbCluster?
+      attr_accessor document_db_cluster: Types::DocumentDbCluster?
+      attr_accessor work_spaces: Types::WorkSpaces?
+      attr_accessor sage_maker_endpoint: Types::SageMakerEndpoint?
 
       class LambdaFunction < ResourceDetails
       end
@@ -1217,6 +1374,20 @@ module Aws::CostOptimizationHub
       class DynamoDbReservedCapacity < ResourceDetails
       end
       class MemoryDbReservedInstances < ResourceDetails
+      end
+      class NatGateway < ResourceDetails
+      end
+      class DynamoDbTable < ResourceDetails
+      end
+      class ElastiCacheCluster < ResourceDetails
+      end
+      class MemoryDbCluster < ResourceDetails
+      end
+      class DocumentDbCluster < ResourceDetails
+      end
+      class WorkSpaces < ResourceDetails
+      end
+      class SageMakerEndpoint < ResourceDetails
       end
       class Unknown < ResourceDetails
       end
@@ -1271,6 +1442,24 @@ module Aws::CostOptimizationHub
       AURORA_DB_CLUSTER_STORAGE: String
       DYNAMO_DB_RESERVED_CAPACITY: String
       MEMORY_DB_RESERVED_INSTANCES: String
+      NAT_GATEWAY: String
+      DYNAMO_DB_TABLE: String
+      ELASTI_CACHE_CLUSTER: String
+      MEMORY_DB_CLUSTER: String
+      DOCUMENT_DB_CLUSTER: String
+      WORK_SPACES: String
+      SAGE_MAKER_ENDPOINT: String
+    end
+
+    class SageMakerEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
     end
 
     class SageMakerSavingsPlans
@@ -1398,6 +1587,19 @@ module Aws::CostOptimizationHub
       attr_accessor message: String?
     end
 
+    class TimePeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: String,
+        ?end: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: String?
+      attr_accessor end: String?
+    end
+
     class UpdateEnrollmentStatusRequest
       include Smithy::Schema::Structure
 
@@ -1502,6 +1704,17 @@ module Aws::CostOptimizationHub
     module ValidationExceptionReason
       FIELD_VALIDATION_FAILED: String
       OTHER: String
+    end
+
+    class WorkSpaces
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_calculation: Types::ResourceCostCalculation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_calculation: Types::ResourceCostCalculation?
     end
   end
 end

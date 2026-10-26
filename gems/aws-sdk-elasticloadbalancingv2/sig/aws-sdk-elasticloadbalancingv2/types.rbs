@@ -24,6 +24,7 @@ module Aws::ElasticLoadBalancingV2
         ?redirect_config: Types::RedirectActionConfig,
         ?fixed_response_config: Types::FixedResponseActionConfig,
         ?forward_config: Types::ForwardActionConfig,
+        ?jwt_validation_config: Types::JwtValidationActionConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -35,6 +36,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor redirect_config: Types::RedirectActionConfig?
       attr_accessor fixed_response_config: Types::FixedResponseActionConfig?
       attr_accessor forward_config: Types::ForwardActionConfig?
+      attr_accessor jwt_validation_config: Types::JwtValidationActionConfig?
     end
 
     module ActionTypeEnum
@@ -43,6 +45,7 @@ module Aws::ElasticLoadBalancingV2
       AUTHENTICATE_COGNITO: String
       REDIRECT: String
       FIXED_RESPONSE: String
+      JWT_VALIDATION: String
     end
 
     class AddListenerCertificatesInput
@@ -454,6 +457,7 @@ module Aws::ElasticLoadBalancingV2
         ?priority: Integer,
         ?actions: Array[Types::Action],
         ?tags: Array[Types::Tag],
+        ?transforms: Array[Types::RuleTransform],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -462,6 +466,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor priority: Integer?
       attr_accessor actions: Array[Types::Action]?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor transforms: Array[Types::RuleTransform]?
     end
 
     class CreateRuleOutput
@@ -496,6 +501,7 @@ module Aws::ElasticLoadBalancingV2
         ?target_type: String,
         ?tags: Array[Types::Tag],
         ?ip_address_type: String,
+        ?target_control_port: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -516,6 +522,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor target_type: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor ip_address_type: String?
+      attr_accessor target_control_port: Integer?
     end
 
     class CreateTargetGroupOutput
@@ -1349,10 +1356,23 @@ module Aws::ElasticLoadBalancingV2
 
       def initialize: (
         ?values: Array[String],
+        ?regex_values: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor values: Array[String]?
+      attr_accessor regex_values: Array[String]?
+    end
+
+    class HostHeaderRewriteConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rewrites: Array[Types::RewriteConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rewrites: Array[Types::RewriteConfig]?
     end
 
     class HttpHeaderConditionConfig
@@ -1361,11 +1381,13 @@ module Aws::ElasticLoadBalancingV2
       def initialize: (
         ?http_header_name: String,
         ?values: Array[String],
+        ?regex_values: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor http_header_name: String?
       attr_accessor values: Array[String]?
+      attr_accessor regex_values: Array[String]?
     end
 
     class HttpRequestMethodConditionConfig
@@ -1504,6 +1526,42 @@ module Aws::ElasticLoadBalancingV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ipv4_ipam_pool_id: String?
+    end
+
+    class JwtValidationActionAdditionalClaim
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module JwtValidationActionAdditionalClaimFormatEnum
+      SINGLE_STRING: String
+      STRING_ARRAY: String
+      SPACE_SEPARATED_VALUES: String
+    end
+
+    class JwtValidationActionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jwks_endpoint: String,
+        ?issuer: String,
+        ?additional_claims: Array[Types::JwtValidationActionAdditionalClaim],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jwks_endpoint: String?
+      attr_accessor issuer: String?
+      attr_accessor additional_claims: Array[Types::JwtValidationActionAdditionalClaim]?
     end
 
     class Limit
@@ -1861,12 +1919,16 @@ module Aws::ElasticLoadBalancingV2
         ?rule_arn: String,
         ?conditions: Array[Types::RuleCondition],
         ?actions: Array[Types::Action],
+        ?transforms: Array[Types::RuleTransform],
+        ?reset_transforms: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor rule_arn: String?
       attr_accessor conditions: Array[Types::RuleCondition]?
       attr_accessor actions: Array[Types::Action]?
+      attr_accessor transforms: Array[Types::RuleTransform]?
+      attr_accessor reset_transforms: bool?
     end
 
     class ModifyRuleOutput
@@ -2007,10 +2069,12 @@ module Aws::ElasticLoadBalancingV2
 
       def initialize: (
         ?values: Array[String],
+        ?regex_values: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor values: Array[String]?
+      attr_accessor regex_values: Array[String]?
     end
 
     class PriorRequestNotCompleteException
@@ -2043,6 +2107,8 @@ module Aws::ElasticLoadBalancingV2
       UDP: String
       TCP_UDP: String
       GENEVE: String
+      QUIC: String
+      TCP_QUIC: String
     end
 
     class QueryStringConditionConfig
@@ -2252,6 +2318,19 @@ module Aws::ElasticLoadBalancingV2
       CRL: String
     end
 
+    class RewriteConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regex: String,
+        ?replace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regex: String?
+      attr_accessor replace: String?
+    end
+
     class Rule
       include Smithy::Schema::Structure
 
@@ -2261,6 +2340,7 @@ module Aws::ElasticLoadBalancingV2
         ?conditions: Array[Types::RuleCondition],
         ?actions: Array[Types::Action],
         ?is_default: bool,
+        ?transforms: Array[Types::RuleTransform],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2269,6 +2349,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor conditions: Array[Types::RuleCondition]?
       attr_accessor actions: Array[Types::Action]?
       attr_accessor is_default: bool?
+      attr_accessor transforms: Array[Types::RuleTransform]?
     end
 
     class RuleCondition
@@ -2283,6 +2364,7 @@ module Aws::ElasticLoadBalancingV2
         ?query_string_config: Types::QueryStringConditionConfig,
         ?http_request_method_config: Types::HttpRequestMethodConditionConfig,
         ?source_ip_config: Types::SourceIpConditionConfig,
+        ?regex_values: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2294,6 +2376,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor query_string_config: Types::QueryStringConditionConfig?
       attr_accessor http_request_method_config: Types::HttpRequestMethodConditionConfig?
       attr_accessor source_ip_config: Types::SourceIpConditionConfig?
+      attr_accessor regex_values: Array[String]?
     end
 
     class RuleNotFoundException
@@ -2318,6 +2401,21 @@ module Aws::ElasticLoadBalancingV2
 
       attr_accessor rule_arn: String?
       attr_accessor priority: Integer?
+    end
+
+    class RuleTransform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?host_header_rewrite_config: Types::HostHeaderRewriteConfig,
+        ?url_rewrite_config: Types::UrlRewriteConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor host_header_rewrite_config: Types::HostHeaderRewriteConfig?
+      attr_accessor url_rewrite_config: Types::UrlRewriteConfig?
     end
 
     class SSLPolicyNotFoundException
@@ -2439,15 +2537,22 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor enable_prefix_for_ipv6_source_nat: String?
     end
 
+    module SourceIpAddressTypeEnum
+      IPV4: String
+      IPV6: String
+    end
+
     class SourceIpConditionConfig
       include Smithy::Schema::Structure
 
       def initialize: (
         ?values: Array[String],
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor values: Array[String]?
+      attr_accessor ip_address_type: String?
     end
 
     class SslPolicy
@@ -2544,12 +2649,14 @@ module Aws::ElasticLoadBalancingV2
         ?id: String,
         ?port: Integer,
         ?availability_zone: String,
+        ?quic_server_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor port: Integer?
       attr_accessor availability_zone: String?
+      attr_accessor quic_server_id: String?
     end
 
     class TargetGroup
@@ -2574,6 +2681,7 @@ module Aws::ElasticLoadBalancingV2
         ?target_type: String,
         ?protocol_version: String,
         ?ip_address_type: String,
+        ?target_control_port: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2595,6 +2703,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor target_type: String?
       attr_accessor protocol_version: String?
       attr_accessor ip_address_type: String?
+      attr_accessor target_control_port: Integer?
     end
 
     class TargetGroupAssociationLimitException
@@ -2861,6 +2970,11 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor message: String?
     end
 
+    module TransformTypeEnum
+      HOST_HEADER_REWRITE: String
+      URL_REWRITE: String
+    end
+
     class TrustStore
       include Smithy::Schema::Structure
 
@@ -2971,6 +3085,17 @@ module Aws::ElasticLoadBalancingV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class UrlRewriteConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rewrites: Array[Types::RewriteConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rewrites: Array[Types::RewriteConfig]?
     end
 
     class ZonalCapacityReservationState

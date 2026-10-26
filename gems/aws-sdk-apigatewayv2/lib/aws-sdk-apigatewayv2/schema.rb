@@ -6,16 +6,19 @@ module Aws::ApiGatewayV2
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    ACMManaged = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ACMManaged", name: "ACMManaged")
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccessLogSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#AccessLogSettings", name: "AccessLogSettings")
     Api = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#Api", name: "Api")
     ApiMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ApiMapping", name: "ApiMapping")
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#Arn", name: "Arn")
+    Authorization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#Authorization", name: "Authorization")
     AuthorizationScopes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#AuthorizationScopes", name: "AuthorizationScopes")
     AuthorizationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#AuthorizationType", name: "AuthorizationType")
     Authorizer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#Authorizer", name: "Authorizer")
     AuthorizerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#AuthorizerType", name: "AuthorizerType")
     BadRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#BadRequestException", name: "BadRequestException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    CognitoConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CognitoConfig", name: "CognitoConfig")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConnectionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#ConnectionType", name: "ConnectionType")
     ContentHandlingStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#ContentHandlingStrategy", name: "ContentHandlingStrategy")
@@ -39,6 +42,14 @@ module Aws::ApiGatewayV2
     CreateIntegrationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateIntegrationResult", name: "CreateIntegrationResult")
     CreateModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateModelRequest", name: "CreateModelRequest")
     CreateModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateModelResponse", name: "CreateModelResponse")
+    CreatePortalProductRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreatePortalProductRequest", name: "CreatePortalProductRequest")
+    CreatePortalProductResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreatePortalProductResponse", name: "CreatePortalProductResponse")
+    CreatePortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreatePortalRequest", name: "CreatePortalRequest")
+    CreatePortalResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreatePortalResponse", name: "CreatePortalResponse")
+    CreateProductPageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateProductPageRequest", name: "CreateProductPageRequest")
+    CreateProductPageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateProductPageResponse", name: "CreateProductPageResponse")
+    CreateProductRestEndpointPageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateProductRestEndpointPageRequest", name: "CreateProductRestEndpointPageRequest")
+    CreateProductRestEndpointPageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateProductRestEndpointPageResponse", name: "CreateProductRestEndpointPageResponse")
     CreateRouteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateRouteRequest", name: "CreateRouteRequest")
     CreateRouteResponseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateRouteResponseRequest", name: "CreateRouteResponseRequest")
     CreateRouteResponseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateRouteResponseResponse", name: "CreateRouteResponseResponse")
@@ -49,6 +60,7 @@ module Aws::ApiGatewayV2
     CreateStageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateStageResponse", name: "CreateStageResponse")
     CreateVpcLinkRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateVpcLinkRequest", name: "CreateVpcLinkRequest")
     CreateVpcLinkResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CreateVpcLinkResponse", name: "CreateVpcLinkResponse")
+    CustomColors = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#CustomColors", name: "CustomColors")
     DeleteAccessLogSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteAccessLogSettingsRequest", name: "DeleteAccessLogSettingsRequest")
     DeleteApiMappingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteApiMappingRequest", name: "DeleteApiMappingRequest")
     DeleteApiRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteApiRequest", name: "DeleteApiRequest")
@@ -59,6 +71,11 @@ module Aws::ApiGatewayV2
     DeleteIntegrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteIntegrationRequest", name: "DeleteIntegrationRequest")
     DeleteIntegrationResponseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteIntegrationResponseRequest", name: "DeleteIntegrationResponseRequest")
     DeleteModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteModelRequest", name: "DeleteModelRequest")
+    DeletePortalProductRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeletePortalProductRequest", name: "DeletePortalProductRequest")
+    DeletePortalProductSharingPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeletePortalProductSharingPolicyRequest", name: "DeletePortalProductSharingPolicyRequest")
+    DeletePortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeletePortalRequest", name: "DeletePortalRequest")
+    DeleteProductPageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteProductPageRequest", name: "DeleteProductPageRequest")
+    DeleteProductRestEndpointPageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteProductRestEndpointPageRequest", name: "DeleteProductRestEndpointPageRequest")
     DeleteRouteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteRouteRequest", name: "DeleteRouteRequest")
     DeleteRouteRequestParameterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteRouteRequestParameterRequest", name: "DeleteRouteRequestParameterRequest")
     DeleteRouteResponseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteRouteResponseRequest", name: "DeleteRouteResponseRequest")
@@ -69,10 +86,18 @@ module Aws::ApiGatewayV2
     DeleteVpcLinkResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DeleteVpcLinkResponse", name: "DeleteVpcLinkResponse")
     Deployment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#Deployment", name: "Deployment")
     DeploymentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#DeploymentStatus", name: "DeploymentStatus")
+    DisablePortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DisablePortalRequest", name: "DisablePortalRequest")
+    DisplayContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DisplayContent", name: "DisplayContent")
+    DisplayContentOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DisplayContentOverrides", name: "DisplayContentOverrides")
+    DisplayOrder = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DisplayOrder", name: "DisplayOrder")
     DomainName = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DomainName", name: "DomainName")
     DomainNameConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#DomainNameConfiguration", name: "DomainNameConfiguration")
     DomainNameConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#DomainNameConfigurations", name: "DomainNameConfigurations")
     DomainNameStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#DomainNameStatus", name: "DomainNameStatus")
+    EndpointConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#EndpointConfigurationRequest", name: "EndpointConfigurationRequest")
+    EndpointConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#EndpointConfigurationResponse", name: "EndpointConfigurationResponse")
+    EndpointDisplayContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#EndpointDisplayContent", name: "EndpointDisplayContent")
+    EndpointDisplayContentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#EndpointDisplayContentResponse", name: "EndpointDisplayContentResponse")
     EndpointType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#EndpointType", name: "EndpointType")
     ExportApiRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ExportApiRequest", name: "ExportApiRequest")
     ExportApiResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ExportApiResponse", name: "ExportApiResponse")
@@ -111,6 +136,16 @@ module Aws::ApiGatewayV2
     GetModelTemplateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetModelTemplateResponse", name: "GetModelTemplateResponse")
     GetModelsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetModelsRequest", name: "GetModelsRequest")
     GetModelsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetModelsResponse", name: "GetModelsResponse")
+    GetPortalProductRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetPortalProductRequest", name: "GetPortalProductRequest")
+    GetPortalProductResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetPortalProductResponse", name: "GetPortalProductResponse")
+    GetPortalProductSharingPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetPortalProductSharingPolicyRequest", name: "GetPortalProductSharingPolicyRequest")
+    GetPortalProductSharingPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetPortalProductSharingPolicyResponse", name: "GetPortalProductSharingPolicyResponse")
+    GetPortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetPortalRequest", name: "GetPortalRequest")
+    GetPortalResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetPortalResponse", name: "GetPortalResponse")
+    GetProductPageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetProductPageRequest", name: "GetProductPageRequest")
+    GetProductPageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetProductPageResponse", name: "GetProductPageResponse")
+    GetProductRestEndpointPageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetProductRestEndpointPageRequest", name: "GetProductRestEndpointPageRequest")
+    GetProductRestEndpointPageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetProductRestEndpointPageResponse", name: "GetProductRestEndpointPageResponse")
     GetRouteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetRouteRequest", name: "GetRouteRequest")
     GetRouteResponseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetRouteResponseRequest", name: "GetRouteResponseRequest")
     GetRouteResponseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetRouteResponseResponse", name: "GetRouteResponseResponse")
@@ -132,6 +167,7 @@ module Aws::ApiGatewayV2
     GetVpcLinksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetVpcLinksRequest", name: "GetVpcLinksRequest")
     GetVpcLinksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#GetVpcLinksResponse", name: "GetVpcLinksResponse")
     Id = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#Id", name: "Id")
+    IdentifierParts = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#IdentifierParts", name: "IdentifierParts")
     IdentitySourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#IdentitySourceList", name: "IdentitySourceList")
     ImportApiRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ImportApiRequest", name: "ImportApiRequest")
     ImportApiResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ImportApiResponse", name: "ImportApiResponse")
@@ -144,6 +180,14 @@ module Aws::ApiGatewayV2
     IntegrationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#IntegrationType", name: "IntegrationType")
     IpAddressType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#IpAddressType", name: "IpAddressType")
     JWTConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#JWTConfiguration", name: "JWTConfiguration")
+    ListPortalProductsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListPortalProductsRequest", name: "ListPortalProductsRequest")
+    ListPortalProductsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListPortalProductsResponse", name: "ListPortalProductsResponse")
+    ListPortalsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListPortalsRequest", name: "ListPortalsRequest")
+    ListPortalsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListPortalsResponse", name: "ListPortalsResponse")
+    ListProductPagesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListProductPagesRequest", name: "ListProductPagesRequest")
+    ListProductPagesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListProductPagesResponse", name: "ListProductPagesResponse")
+    ListProductRestEndpointPagesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListProductRestEndpointPagesRequest", name: "ListProductRestEndpointPagesRequest")
+    ListProductRestEndpointPagesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListProductRestEndpointPagesResponse", name: "ListProductRestEndpointPagesResponse")
     ListRoutingRulesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListRoutingRulesRequest", name: "ListRoutingRulesRequest")
     ListRoutingRulesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ListRoutingRulesResponse", name: "ListRoutingRulesResponse")
     LoggingLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#LoggingLevel", name: "LoggingLevel")
@@ -152,16 +196,33 @@ module Aws::ApiGatewayV2
     MutualTlsAuthentication = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#MutualTlsAuthentication", name: "MutualTlsAuthentication")
     MutualTlsAuthenticationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#MutualTlsAuthenticationInput", name: "MutualTlsAuthenticationInput")
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#NextToken", name: "NextToken")
+    None = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#None", name: "None")
     NotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#NotFoundException", name: "NotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ParameterConstraints = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ParameterConstraints", name: "ParameterConstraints")
     PassthroughBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#PassthroughBehavior", name: "PassthroughBehavior")
+    PortalContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PortalContent", name: "PortalContent")
+    PortalProductSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PortalProductSummary", name: "PortalProductSummary")
+    PortalSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PortalSummary", name: "PortalSummary")
+    PortalTheme = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PortalTheme", name: "PortalTheme")
+    Preview = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#Preview", name: "Preview")
+    PreviewPortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PreviewPortalRequest", name: "PreviewPortalRequest")
+    PreviewPortalResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PreviewPortalResponse", name: "PreviewPortalResponse")
+    PreviewStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#PreviewStatus", name: "PreviewStatus")
+    ProductPageSummaryNoBody = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ProductPageSummaryNoBody", name: "ProductPageSummaryNoBody")
+    ProductRestEndpointPageSummaryNoBody = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ProductRestEndpointPageSummaryNoBody", name: "ProductRestEndpointPageSummaryNoBody")
     ProtocolType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#ProtocolType", name: "ProtocolType")
+    PublishPortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PublishPortalRequest", name: "PublishPortalRequest")
+    PublishPortalResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PublishPortalResponse", name: "PublishPortalResponse")
+    PublishStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#PublishStatus", name: "PublishStatus")
+    PutPortalProductSharingPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PutPortalProductSharingPolicyRequest", name: "PutPortalProductSharingPolicyRequest")
+    PutPortalProductSharingPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PutPortalProductSharingPolicyResponse", name: "PutPortalProductSharingPolicyResponse")
     PutRoutingRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PutRoutingRuleRequest", name: "PutRoutingRuleRequest")
     PutRoutingRuleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#PutRoutingRuleResponse", name: "PutRoutingRuleResponse")
     ReimportApiRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ReimportApiRequest", name: "ReimportApiRequest")
     ReimportApiResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ReimportApiResponse", name: "ReimportApiResponse")
     ResetAuthorizersCacheRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#ResetAuthorizersCacheRequest", name: "ResetAuthorizersCacheRequest")
     ResponseParameters = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.apigatewayv2#ResponseParameters", name: "ResponseParameters")
+    RestEndpointIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#RestEndpointIdentifier", name: "RestEndpointIdentifier")
     Route = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#Route", name: "Route")
     RouteModels = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.apigatewayv2#RouteModels", name: "RouteModels")
     RouteParameters = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.apigatewayv2#RouteParameters", name: "RouteParameters")
@@ -177,12 +238,15 @@ module Aws::ApiGatewayV2
     RoutingRuleMatchHeaderValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#RoutingRuleMatchHeaderValue", name: "RoutingRuleMatchHeaderValue")
     RoutingRuleMatchHeaders = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#RoutingRuleMatchHeaders", name: "RoutingRuleMatchHeaders")
     RoutingRulePriority = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.apigatewayv2#RoutingRulePriority", name: "RoutingRulePriority", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000000}})
+    Section = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#Section", name: "Section")
     SecurityGroupIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#SecurityGroupIdList", name: "SecurityGroupIdList")
     SecurityPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#SecurityPolicy", name: "SecurityPolicy")
     SelectionExpression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#SelectionExpression", name: "SelectionExpression")
     SelectionKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#SelectionKey", name: "SelectionKey")
     Stage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#Stage", name: "Stage")
     StageVariablesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.apigatewayv2#StageVariablesMap", name: "StageVariablesMap")
+    Status = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#Status", name: "Status")
+    StatusException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#StatusException", name: "StatusException")
     StringWithLengthBetween0And1024 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#StringWithLengthBetween0And1024", name: "StringWithLengthBetween0And1024")
     StringWithLengthBetween0And2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#StringWithLengthBetween0And2048", name: "StringWithLengthBetween0And2048")
     StringWithLengthBetween0And32K = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#StringWithLengthBetween0And32K", name: "StringWithLengthBetween0And32K")
@@ -200,6 +264,7 @@ module Aws::ApiGatewayV2
     TlsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#TlsConfig", name: "TlsConfig")
     TlsConfigInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#TlsConfigInput", name: "TlsConfigInput")
     TooManyRequestsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#TooManyRequestsException", name: "TooManyRequestsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TryItState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.apigatewayv2#TryItState", name: "TryItState")
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UntagResourceRequest", name: "UntagResourceRequest")
     UpdateApiMappingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateApiMappingRequest", name: "UpdateApiMappingRequest")
     UpdateApiMappingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateApiMappingResponse", name: "UpdateApiMappingResponse")
@@ -217,6 +282,14 @@ module Aws::ApiGatewayV2
     UpdateIntegrationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateIntegrationResult", name: "UpdateIntegrationResult")
     UpdateModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateModelRequest", name: "UpdateModelRequest")
     UpdateModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateModelResponse", name: "UpdateModelResponse")
+    UpdatePortalProductRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdatePortalProductRequest", name: "UpdatePortalProductRequest")
+    UpdatePortalProductResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdatePortalProductResponse", name: "UpdatePortalProductResponse")
+    UpdatePortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdatePortalRequest", name: "UpdatePortalRequest")
+    UpdatePortalResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdatePortalResponse", name: "UpdatePortalResponse")
+    UpdateProductPageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateProductPageRequest", name: "UpdateProductPageRequest")
+    UpdateProductPageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateProductPageResponse", name: "UpdateProductPageResponse")
+    UpdateProductRestEndpointPageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateProductRestEndpointPageRequest", name: "UpdateProductRestEndpointPageRequest")
+    UpdateProductRestEndpointPageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateProductRestEndpointPageResponse", name: "UpdateProductRestEndpointPageResponse")
     UpdateRouteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateRouteRequest", name: "UpdateRouteRequest")
     UpdateRouteResponseRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateRouteResponseRequest", name: "UpdateRouteResponseRequest")
     UpdateRouteResponseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.apigatewayv2#UpdateRouteResponseResponse", name: "UpdateRouteResponseResponse")
@@ -240,19 +313,48 @@ module Aws::ApiGatewayV2
     Listofintegration = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfIntegration", name: "Listofintegration")
     Listofintegrationresponse = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfIntegrationResponse", name: "Listofintegrationresponse")
     Listofmodel = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfModel", name: "Listofmodel")
+    Listofportalproductsummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfPortalProductSummary", name: "Listofportalproductsummary")
+    Listofportalsummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfPortalSummary", name: "Listofportalsummary")
+    Listofproductpagesummarynobody = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfProductPageSummaryNoBody", name: "Listofproductpagesummarynobody")
+    Listofproductrestendpointpagesummarynobody = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfProductRestEndpointPageSummaryNoBody", name: "Listofproductrestendpointpagesummarynobody")
     Listofroute = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfRoute", name: "Listofroute")
     Listofrouteresponse = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfRouteResponse", name: "Listofrouteresponse")
     Listofroutingrule = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfRoutingRule", name: "Listofroutingrule")
     Listofroutingruleaction = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfRoutingRuleAction", name: "Listofroutingruleaction")
     Listofroutingrulecondition = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfRoutingRuleCondition", name: "Listofroutingrulecondition")
     Listofroutingrulematchheadervalue = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfRoutingRuleMatchHeaderValue", name: "Listofroutingrulematchheadervalue")
+    Listofsection = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfSection", name: "Listofsection")
     Listofselectionkey = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfSelectionKey", name: "Listofselectionkey")
     Listofstage = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfStage", name: "Listofstage")
     Listofvpclink = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOfVpcLink", name: "Listofvpclink")
     ListofString = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOf__string", name: "ListofString")
+    ListofStringmin20max2048 = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.apigatewayv2#__listOf__stringMin20Max2048", name: "ListofStringmin20max2048")
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__string", name: "String")
+    Stringmin0max1024 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin0Max1024", name: "Stringmin0max1024", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    Stringmin0max1092 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin0Max1092", name: "Stringmin0max1092", traits: {"smithy.api#length" => {"min" => 0, "max" => 1092}})
+    Stringmin0max255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin0Max255", name: "Stringmin0max255", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
+    Stringmin10max2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin10Max2048", name: "Stringmin10max2048", traits: {"smithy.api#length" => {"min" => 10, "max" => 2048}})
+    Stringmin10max30patternaz09 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin10Max30PatternAZ09", name: "Stringmin10max30patternaz09", traits: {"smithy.api#length" => {"min" => 10, "max" => 30}, "smithy.api#pattern" => "^[a-z0-9]+$"})
+    Stringmin1max1024 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max1024", name: "Stringmin1max1024", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    Stringmin1max128 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max128", name: "Stringmin1max128", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    Stringmin1max16 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max16", name: "Stringmin1max16", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}})
+    Stringmin1max20 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max20", name: "Stringmin1max20", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
+    Stringmin1max2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max2048", name: "Stringmin1max2048", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    Stringmin1max255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max255", name: "Stringmin1max255", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    Stringmin1max256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max256", name: "Stringmin1max256", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    Stringmin1max307200 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max307200", name: "Stringmin1max307200", traits: {"smithy.api#length" => {"min" => 1, "max" => 307200}})
+    Stringmin1max32768 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max32768", name: "Stringmin1max32768", traits: {"smithy.api#length" => {"min" => 1, "max" => 32768}})
+    Stringmin1max4096 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max4096", name: "Stringmin1max4096", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    Stringmin1max50 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max50", name: "Stringmin1max50", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    Stringmin1max64 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin1Max64", name: "Stringmin1max64", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
+    Stringmin20max2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin20Max2048", name: "Stringmin20max2048", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}})
+    Stringmin3max255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin3Max255", name: "Stringmin3max255", traits: {"smithy.api#length" => {"min" => 3, "max" => 255}})
+    Stringmin3max256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.apigatewayv2#__stringMin3Max256", name: "Stringmin3max256", traits: {"smithy.api#length" => {"min" => 3, "max" => 256}})
     Timestampiso8601 = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.apigatewayv2#__timestampIso8601", name: "Timestampiso8601", traits: {"smithy.api#timestampFormat" => "date-time"})
 
+    ACMManaged.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max2048, name: "CertificateArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "certificateArn", "smithy.api#required" => {}}))
+    ACMManaged.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin3max256, name: "DomainName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "domainName", "smithy.api#required" => {}}))
+    ACMManaged.type = Types::ACMManaged
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     AccessDeniedException.type = Types::AccessDeniedException
     AccessLogSettings.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DestinationArn", traits: {"smithy.api#jsonName" => "destinationArn"}))
@@ -281,6 +383,9 @@ module Aws::ApiGatewayV2
     ApiMapping.add_member(:api_mapping_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectionKey, name: "ApiMappingKey", traits: {"smithy.api#jsonName" => "apiMappingKey"}))
     ApiMapping.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And128, name: "Stage", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "stage", "smithy.api#required" => {}}))
     ApiMapping.type = Types::ApiMapping
+    Authorization.add_member(:cognito_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoConfig, name: "CognitoConfig", traits: {"smithy.api#jsonName" => "cognitoConfig"}))
+    Authorization.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: None, name: "None", traits: {"smithy.api#jsonName" => "none"}))
+    Authorization.type = Types::Authorization
     AuthorizationScopes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And64, name: "member"))
     AuthorizationType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     AuthorizationType.add_member(:aws_iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_IAM", traits: {"smithy.api#enumValue" => "AWS_IAM"}))
@@ -302,6 +407,10 @@ module Aws::ApiGatewayV2
     AuthorizerType.add_member(:jwt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JWT", traits: {"smithy.api#enumValue" => "JWT"}))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     BadRequestException.type = Types::BadRequestException
+    CognitoConfig.add_member(:app_client_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max256, name: "AppClientId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "appClientId", "smithy.api#required" => {}}))
+    CognitoConfig.add_member(:user_pool_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "UserPoolArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "userPoolArn", "smithy.api#required" => {}}))
+    CognitoConfig.add_member(:user_pool_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "UserPoolDomain", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "userPoolDomain", "smithy.api#required" => {}}))
+    CognitoConfig.type = Types::CognitoConfig
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     ConflictException.type = Types::ConflictException
     ConnectionType.add_member(:internet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNET", traits: {"smithy.api#enumValue" => "INTERNET"}))
@@ -477,6 +586,62 @@ module Aws::ApiGatewayV2
     CreateModelResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And128, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     CreateModelResponse.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween0And32K, name: "Schema", traits: {"smithy.api#jsonName" => "schema"}))
     CreateModelResponse.type = Types::CreateModelResponse
+    CreatePortalProductRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "Description", traits: {"smithy.api#jsonName" => "description"}))
+    CreatePortalProductRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "DisplayName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "displayName", "smithy.api#required" => {}}))
+    CreatePortalProductRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreatePortalProductRequest.type = Types::CreatePortalProductRequest
+    CreatePortalProductResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "Description", traits: {"smithy.api#jsonName" => "description"}))
+    CreatePortalProductResponse.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "DisplayName", traits: {"smithy.api#jsonName" => "displayName"}))
+    CreatePortalProductResponse.add_member(:display_order, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayOrder, name: "DisplayOrder", traits: {"smithy.api#jsonName" => "displayOrder"}))
+    CreatePortalProductResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    CreatePortalProductResponse.add_member(:portal_product_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "PortalProductArn", traits: {"smithy.api#jsonName" => "portalProductArn"}))
+    CreatePortalProductResponse.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "PortalProductId", traits: {"smithy.api#jsonName" => "portalProductId"}))
+    CreatePortalProductResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreatePortalProductResponse.type = Types::CreatePortalProductResponse
+    CreatePortalRequest.add_member(:authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: Authorization, name: "Authorization", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "authorization", "smithy.api#required" => {}}))
+    CreatePortalRequest.add_member(:endpoint_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfigurationRequest, name: "EndpointConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "endpointConfiguration", "smithy.api#required" => {}}))
+    CreatePortalRequest.add_member(:included_portal_product_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofStringmin20max2048, name: "IncludedPortalProductArns", traits: {"smithy.api#jsonName" => "includedPortalProductArns"}))
+    CreatePortalRequest.add_member(:logo_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1092, name: "LogoUri", traits: {"smithy.api#jsonName" => "logoUri"}))
+    CreatePortalRequest.add_member(:portal_content, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalContent, name: "PortalContent", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "portalContent", "smithy.api#required" => {}}))
+    CreatePortalRequest.add_member(:rum_app_monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max255, name: "RumAppMonitorName", traits: {"smithy.api#jsonName" => "rumAppMonitorName"}))
+    CreatePortalRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreatePortalRequest.type = Types::CreatePortalRequest
+    CreatePortalResponse.add_member(:authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: Authorization, name: "Authorization", traits: {"smithy.api#jsonName" => "authorization"}))
+    CreatePortalResponse.add_member(:endpoint_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfigurationResponse, name: "EndpointConfiguration", traits: {"smithy.api#jsonName" => "endpointConfiguration"}))
+    CreatePortalResponse.add_member(:included_portal_product_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofStringmin20max2048, name: "IncludedPortalProductArns", traits: {"smithy.api#jsonName" => "includedPortalProductArns"}))
+    CreatePortalResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    CreatePortalResponse.add_member(:last_published, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastPublished", traits: {"smithy.api#jsonName" => "lastPublished"}))
+    CreatePortalResponse.add_member(:last_published_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "LastPublishedDescription", traits: {"smithy.api#jsonName" => "lastPublishedDescription"}))
+    CreatePortalResponse.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "PortalArn", traits: {"smithy.api#jsonName" => "portalArn"}))
+    CreatePortalResponse.add_member(:portal_content, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalContent, name: "PortalContent", traits: {"smithy.api#jsonName" => "portalContent"}))
+    CreatePortalResponse.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "PortalId", traits: {"smithy.api#jsonName" => "portalId"}))
+    CreatePortalResponse.add_member(:publish_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishStatus, name: "PublishStatus", traits: {"smithy.api#jsonName" => "publishStatus"}))
+    CreatePortalResponse.add_member(:rum_app_monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max255, name: "RumAppMonitorName", traits: {"smithy.api#jsonName" => "rumAppMonitorName"}))
+    CreatePortalResponse.add_member(:status_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusException, name: "StatusException", traits: {"smithy.api#jsonName" => "statusException"}))
+    CreatePortalResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    CreatePortalResponse.type = Types::CreatePortalResponse
+    CreateProductPageRequest.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayContent, name: "DisplayContent", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "displayContent", "smithy.api#required" => {}}))
+    CreateProductPageRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateProductPageRequest.type = Types::CreateProductPageRequest
+    CreateProductPageResponse.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayContent, name: "DisplayContent", traits: {"smithy.api#jsonName" => "displayContent"}))
+    CreateProductPageResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    CreateProductPageResponse.add_member(:product_page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "ProductPageArn", traits: {"smithy.api#jsonName" => "productPageArn"}))
+    CreateProductPageResponse.add_member(:product_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "ProductPageId", traits: {"smithy.api#jsonName" => "productPageId"}))
+    CreateProductPageResponse.type = Types::CreateProductPageResponse
+    CreateProductRestEndpointPageRequest.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDisplayContent, name: "DisplayContent", traits: {"smithy.api#jsonName" => "displayContent"}))
+    CreateProductRestEndpointPageRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateProductRestEndpointPageRequest.add_member(:rest_endpoint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RestEndpointIdentifier, name: "RestEndpointIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "restEndpointIdentifier", "smithy.api#required" => {}}))
+    CreateProductRestEndpointPageRequest.add_member(:try_it_state, ::Smithy::Schema::Shapes::MemberShape.new(target: TryItState, name: "TryItState", traits: {"smithy.api#jsonName" => "tryItState"}))
+    CreateProductRestEndpointPageRequest.type = Types::CreateProductRestEndpointPageRequest
+    CreateProductRestEndpointPageResponse.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDisplayContentResponse, name: "DisplayContent", traits: {"smithy.api#jsonName" => "displayContent"}))
+    CreateProductRestEndpointPageResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    CreateProductRestEndpointPageResponse.add_member(:product_rest_endpoint_page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "ProductRestEndpointPageArn", traits: {"smithy.api#jsonName" => "productRestEndpointPageArn"}))
+    CreateProductRestEndpointPageResponse.add_member(:product_rest_endpoint_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "ProductRestEndpointPageId", traits: {"smithy.api#jsonName" => "productRestEndpointPageId"}))
+    CreateProductRestEndpointPageResponse.add_member(:rest_endpoint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RestEndpointIdentifier, name: "RestEndpointIdentifier", traits: {"smithy.api#jsonName" => "restEndpointIdentifier"}))
+    CreateProductRestEndpointPageResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "Status", traits: {"smithy.api#jsonName" => "status"}))
+    CreateProductRestEndpointPageResponse.add_member(:status_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusException, name: "StatusException", traits: {"smithy.api#jsonName" => "statusException"}))
+    CreateProductRestEndpointPageResponse.add_member(:try_it_state, ::Smithy::Schema::Shapes::MemberShape.new(target: TryItState, name: "TryItState", traits: {"smithy.api#jsonName" => "tryItState"}))
+    CreateProductRestEndpointPageResponse.type = Types::CreateProductRestEndpointPageResponse
     CreateRouteRequest.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateRouteRequest.add_member(:api_key_required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ApiKeyRequired", traits: {"smithy.api#jsonName" => "apiKeyRequired"}))
     CreateRouteRequest.add_member(:authorization_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationScopes, name: "AuthorizationScopes", traits: {"smithy.api#jsonName" => "authorizationScopes"}))
@@ -571,6 +736,13 @@ module Aws::ApiGatewayV2
     CreateVpcLinkResponse.add_member(:vpc_link_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween0And1024, name: "VpcLinkStatusMessage", traits: {"smithy.api#jsonName" => "vpcLinkStatusMessage"}))
     CreateVpcLinkResponse.add_member(:vpc_link_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLinkVersion, name: "VpcLinkVersion", traits: {"smithy.api#jsonName" => "vpcLinkVersion"}))
     CreateVpcLinkResponse.type = Types::CreateVpcLinkResponse
+    CustomColors.add_member(:accent_color, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max16, name: "AccentColor", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "accentColor", "smithy.api#required" => {}}))
+    CustomColors.add_member(:background_color, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max16, name: "BackgroundColor", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "backgroundColor", "smithy.api#required" => {}}))
+    CustomColors.add_member(:error_validation_color, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max16, name: "ErrorValidationColor", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "errorValidationColor", "smithy.api#required" => {}}))
+    CustomColors.add_member(:header_color, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max16, name: "HeaderColor", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "headerColor", "smithy.api#required" => {}}))
+    CustomColors.add_member(:navigation_color, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max16, name: "NavigationColor", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "navigationColor", "smithy.api#required" => {}}))
+    CustomColors.add_member(:text_color, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max16, name: "TextColor", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "textColor", "smithy.api#required" => {}}))
+    CustomColors.type = Types::CustomColors
     DeleteAccessLogSettingsRequest.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAccessLogSettingsRequest.add_member(:stage_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StageName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAccessLogSettingsRequest.type = Types::DeleteAccessLogSettingsRequest
@@ -599,6 +771,18 @@ module Aws::ApiGatewayV2
     DeleteModelRequest.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteModelRequest.add_member(:model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteModelRequest.type = Types::DeleteModelRequest
+    DeletePortalProductRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeletePortalProductRequest.type = Types::DeletePortalProductRequest
+    DeletePortalProductSharingPolicyRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeletePortalProductSharingPolicyRequest.type = Types::DeletePortalProductSharingPolicyRequest
+    DeletePortalRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeletePortalRequest.type = Types::DeletePortalRequest
+    DeleteProductPageRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteProductPageRequest.add_member(:product_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProductPageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteProductPageRequest.type = Types::DeleteProductPageRequest
+    DeleteProductRestEndpointPageRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteProductRestEndpointPageRequest.add_member(:product_rest_endpoint_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProductRestEndpointPageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteProductRestEndpointPageRequest.type = Types::DeleteProductRestEndpointPageRequest
     DeleteRouteRequest.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRouteRequest.add_member(:route_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RouteId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRouteRequest.type = Types::DeleteRouteRequest
@@ -634,6 +818,19 @@ module Aws::ApiGatewayV2
     DeploymentStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     DeploymentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     DeploymentStatus.add_member(:deployed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYED", traits: {"smithy.api#enumValue" => "DEPLOYED"}))
+    DisablePortalRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisablePortalRequest.type = Types::DisablePortalRequest
+    DisplayContent.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max32768, name: "Body", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "body", "smithy.api#required" => {}}))
+    DisplayContent.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "Title", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "title", "smithy.api#required" => {}}))
+    DisplayContent.type = Types::DisplayContent
+    DisplayContentOverrides.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max32768, name: "Body", traits: {"smithy.api#jsonName" => "body"}))
+    DisplayContentOverrides.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max1024, name: "Endpoint", traits: {"smithy.api#jsonName" => "endpoint"}))
+    DisplayContentOverrides.add_member(:operation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "OperationName", traits: {"smithy.api#jsonName" => "operationName"}))
+    DisplayContentOverrides.type = Types::DisplayContentOverrides
+    DisplayOrder.add_member(:contents, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofsection, name: "Contents", traits: {"smithy.api#jsonName" => "contents"}))
+    DisplayOrder.add_member(:overview_page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "OverviewPageArn", traits: {"smithy.api#jsonName" => "overviewPageArn"}))
+    DisplayOrder.add_member(:product_page_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofStringmin20max2048, name: "ProductPageArns", traits: {"smithy.api#jsonName" => "productPageArns"}))
+    DisplayOrder.type = Types::DisplayOrder
     DomainName.add_member(:api_mapping_selection_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectionExpression, name: "ApiMappingSelectionExpression", traits: {"smithy.api#jsonName" => "apiMappingSelectionExpression"}))
     DomainName.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And512, name: "DomainName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "domainName", "smithy.api#required" => {}}))
     DomainName.add_member(:domain_name_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "DomainNameArn", traits: {"smithy.api#jsonName" => "domainNameArn"}))
@@ -659,6 +856,21 @@ module Aws::ApiGatewayV2
     DomainNameStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
     DomainNameStatus.add_member(:pending_certificate_reimport, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CERTIFICATE_REIMPORT", traits: {"smithy.api#enumValue" => "PENDING_CERTIFICATE_REIMPORT"}))
     DomainNameStatus.add_member(:pending_ownership_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_OWNERSHIP_VERIFICATION", traits: {"smithy.api#enumValue" => "PENDING_OWNERSHIP_VERIFICATION"}))
+    EndpointConfigurationRequest.add_member(:acm_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ACMManaged, name: "AcmManaged", traits: {"smithy.api#jsonName" => "acmManaged"}))
+    EndpointConfigurationRequest.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: None, name: "None", traits: {"smithy.api#jsonName" => "none"}))
+    EndpointConfigurationRequest.type = Types::EndpointConfigurationRequest
+    EndpointConfigurationResponse.add_member(:certificate_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max2048, name: "CertificateArn", traits: {"smithy.api#jsonName" => "certificateArn"}))
+    EndpointConfigurationResponse.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin3max256, name: "DomainName", traits: {"smithy.api#jsonName" => "domainName"}))
+    EndpointConfigurationResponse.add_member(:portal_default_domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin3max256, name: "PortalDefaultDomainName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "portalDefaultDomainName", "smithy.api#required" => {}}))
+    EndpointConfigurationResponse.add_member(:portal_domain_hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max64, name: "PortalDomainHostedZoneId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "portalDomainHostedZoneId", "smithy.api#required" => {}}))
+    EndpointConfigurationResponse.type = Types::EndpointConfigurationResponse
+    EndpointDisplayContent.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: None, name: "None", traits: {"smithy.api#jsonName" => "none"}))
+    EndpointDisplayContent.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayContentOverrides, name: "Overrides", traits: {"smithy.api#jsonName" => "overrides"}))
+    EndpointDisplayContent.type = Types::EndpointDisplayContent
+    EndpointDisplayContentResponse.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max32768, name: "Body", traits: {"smithy.api#jsonName" => "body"}))
+    EndpointDisplayContentResponse.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max1024, name: "Endpoint", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "endpoint", "smithy.api#required" => {}}))
+    EndpointDisplayContentResponse.add_member(:operation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "OperationName", traits: {"smithy.api#jsonName" => "operationName"}))
+    EndpointDisplayContentResponse.type = Types::EndpointDisplayContentResponse
     EndpointType.add_member(:regional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGIONAL", traits: {"smithy.api#enumValue" => "REGIONAL"}))
     EndpointType.add_member(:edge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EDGE", traits: {"smithy.api#enumValue" => "EDGE"}))
     ExportApiRequest.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -839,6 +1051,63 @@ module Aws::ApiGatewayV2
     GetModelsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofmodel, name: "Items", traits: {"smithy.api#jsonName" => "items"}))
     GetModelsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
     GetModelsResponse.type = Types::GetModelsResponse
+    GetPortalProductRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetPortalProductRequest.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceOwnerAccountId", traits: {"smithy.api#httpQuery" => "resourceOwnerAccountId"}))
+    GetPortalProductRequest.type = Types::GetPortalProductRequest
+    GetPortalProductResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "Description", traits: {"smithy.api#jsonName" => "description"}))
+    GetPortalProductResponse.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "DisplayName", traits: {"smithy.api#jsonName" => "displayName"}))
+    GetPortalProductResponse.add_member(:display_order, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayOrder, name: "DisplayOrder", traits: {"smithy.api#jsonName" => "displayOrder"}))
+    GetPortalProductResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    GetPortalProductResponse.add_member(:portal_product_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "PortalProductArn", traits: {"smithy.api#jsonName" => "portalProductArn"}))
+    GetPortalProductResponse.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "PortalProductId", traits: {"smithy.api#jsonName" => "portalProductId"}))
+    GetPortalProductResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    GetPortalProductResponse.type = Types::GetPortalProductResponse
+    GetPortalProductSharingPolicyRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetPortalProductSharingPolicyRequest.type = Types::GetPortalProductSharingPolicyRequest
+    GetPortalProductSharingPolicyResponse.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max307200, name: "PolicyDocument", traits: {"smithy.api#jsonName" => "policyDocument"}))
+    GetPortalProductSharingPolicyResponse.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "PortalProductId", traits: {"smithy.api#jsonName" => "portalProductId"}))
+    GetPortalProductSharingPolicyResponse.type = Types::GetPortalProductSharingPolicyResponse
+    GetPortalRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetPortalRequest.type = Types::GetPortalRequest
+    GetPortalResponse.add_member(:authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: Authorization, name: "Authorization", traits: {"smithy.api#jsonName" => "authorization"}))
+    GetPortalResponse.add_member(:endpoint_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfigurationResponse, name: "EndpointConfiguration", traits: {"smithy.api#jsonName" => "endpointConfiguration"}))
+    GetPortalResponse.add_member(:included_portal_product_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofStringmin20max2048, name: "IncludedPortalProductArns", traits: {"smithy.api#jsonName" => "includedPortalProductArns"}))
+    GetPortalResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    GetPortalResponse.add_member(:last_published, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastPublished", traits: {"smithy.api#jsonName" => "lastPublished"}))
+    GetPortalResponse.add_member(:last_published_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "LastPublishedDescription", traits: {"smithy.api#jsonName" => "lastPublishedDescription"}))
+    GetPortalResponse.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "PortalArn", traits: {"smithy.api#jsonName" => "portalArn"}))
+    GetPortalResponse.add_member(:portal_content, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalContent, name: "PortalContent", traits: {"smithy.api#jsonName" => "portalContent"}))
+    GetPortalResponse.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "PortalId", traits: {"smithy.api#jsonName" => "portalId"}))
+    GetPortalResponse.add_member(:preview, ::Smithy::Schema::Shapes::MemberShape.new(target: Preview, name: "Preview", traits: {"smithy.api#jsonName" => "preview"}))
+    GetPortalResponse.add_member(:publish_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishStatus, name: "PublishStatus", traits: {"smithy.api#jsonName" => "publishStatus"}))
+    GetPortalResponse.add_member(:rum_app_monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max255, name: "RumAppMonitorName", traits: {"smithy.api#jsonName" => "rumAppMonitorName"}))
+    GetPortalResponse.add_member(:status_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusException, name: "StatusException", traits: {"smithy.api#jsonName" => "statusException"}))
+    GetPortalResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    GetPortalResponse.type = Types::GetPortalResponse
+    GetProductPageRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProductPageRequest.add_member(:product_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProductPageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProductPageRequest.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceOwnerAccountId", traits: {"smithy.api#httpQuery" => "resourceOwnerAccountId"}))
+    GetProductPageRequest.type = Types::GetProductPageRequest
+    GetProductPageResponse.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayContent, name: "DisplayContent", traits: {"smithy.api#jsonName" => "displayContent"}))
+    GetProductPageResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    GetProductPageResponse.add_member(:product_page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "ProductPageArn", traits: {"smithy.api#jsonName" => "productPageArn"}))
+    GetProductPageResponse.add_member(:product_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "ProductPageId", traits: {"smithy.api#jsonName" => "productPageId"}))
+    GetProductPageResponse.type = Types::GetProductPageResponse
+    GetProductRestEndpointPageRequest.add_member(:include_raw_display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "IncludeRawDisplayContent", traits: {"smithy.api#httpQuery" => "includeRawDisplayContent"}))
+    GetProductRestEndpointPageRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProductRestEndpointPageRequest.add_member(:product_rest_endpoint_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProductRestEndpointPageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetProductRestEndpointPageRequest.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceOwnerAccountId", traits: {"smithy.api#httpQuery" => "resourceOwnerAccountId"}))
+    GetProductRestEndpointPageRequest.type = Types::GetProductRestEndpointPageRequest
+    GetProductRestEndpointPageResponse.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDisplayContentResponse, name: "DisplayContent", traits: {"smithy.api#jsonName" => "displayContent"}))
+    GetProductRestEndpointPageResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    GetProductRestEndpointPageResponse.add_member(:product_rest_endpoint_page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "ProductRestEndpointPageArn", traits: {"smithy.api#jsonName" => "productRestEndpointPageArn"}))
+    GetProductRestEndpointPageResponse.add_member(:product_rest_endpoint_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "ProductRestEndpointPageId", traits: {"smithy.api#jsonName" => "productRestEndpointPageId"}))
+    GetProductRestEndpointPageResponse.add_member(:raw_display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RawDisplayContent", traits: {"smithy.api#jsonName" => "rawDisplayContent"}))
+    GetProductRestEndpointPageResponse.add_member(:rest_endpoint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RestEndpointIdentifier, name: "RestEndpointIdentifier", traits: {"smithy.api#jsonName" => "restEndpointIdentifier"}))
+    GetProductRestEndpointPageResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "Status", traits: {"smithy.api#jsonName" => "status"}))
+    GetProductRestEndpointPageResponse.add_member(:status_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusException, name: "StatusException", traits: {"smithy.api#jsonName" => "statusException"}))
+    GetProductRestEndpointPageResponse.add_member(:try_it_state, ::Smithy::Schema::Shapes::MemberShape.new(target: TryItState, name: "TryItState", traits: {"smithy.api#jsonName" => "tryItState"}))
+    GetProductRestEndpointPageResponse.type = Types::GetProductRestEndpointPageResponse
     GetRouteRequest.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRouteRequest.add_member(:route_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RouteId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRouteRequest.type = Types::GetRouteRequest
@@ -938,6 +1207,11 @@ module Aws::ApiGatewayV2
     GetVpcLinksResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofvpclink, name: "Items", traits: {"smithy.api#jsonName" => "items"}))
     GetVpcLinksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
     GetVpcLinksResponse.type = Types::GetVpcLinksResponse
+    IdentifierParts.add_member(:method, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max20, name: "Method", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "method", "smithy.api#required" => {}}))
+    IdentifierParts.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max4096, name: "Path", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "path", "smithy.api#required" => {}}))
+    IdentifierParts.add_member(:rest_api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max50, name: "RestApiId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "restApiId", "smithy.api#required" => {}}))
+    IdentifierParts.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max128, name: "Stage", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "stage", "smithy.api#required" => {}}))
+    IdentifierParts.type = Types::IdentifierParts
     IdentitySourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     ImportApiRequest.add_member(:basepath, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Basepath", traits: {"smithy.api#httpQuery" => "basepath"}))
     ImportApiRequest.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Body", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "body", "smithy.api#required" => {}}))
@@ -1001,6 +1275,35 @@ module Aws::ApiGatewayV2
     JWTConfiguration.add_member(:audience, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "Audience", traits: {"smithy.api#jsonName" => "audience"}))
     JWTConfiguration.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: UriWithLengthBetween1And2048, name: "Issuer", traits: {"smithy.api#jsonName" => "issuer"}))
     JWTConfiguration.type = Types::JWTConfiguration
+    ListPortalProductsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListPortalProductsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListPortalProductsRequest.add_member(:resource_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceOwner", traits: {"smithy.api#httpQuery" => "resourceOwner"}))
+    ListPortalProductsRequest.type = Types::ListPortalProductsRequest
+    ListPortalProductsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofportalproductsummary, name: "Items", traits: {"smithy.api#jsonName" => "items"}))
+    ListPortalProductsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max2048, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
+    ListPortalProductsResponse.type = Types::ListPortalProductsResponse
+    ListPortalsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListPortalsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListPortalsRequest.type = Types::ListPortalsRequest
+    ListPortalsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofportalsummary, name: "Items", traits: {"smithy.api#jsonName" => "items"}))
+    ListPortalsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max2048, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
+    ListPortalsResponse.type = Types::ListPortalsResponse
+    ListProductPagesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListProductPagesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListProductPagesRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListProductPagesRequest.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceOwnerAccountId", traits: {"smithy.api#httpQuery" => "resourceOwnerAccountId"}))
+    ListProductPagesRequest.type = Types::ListProductPagesRequest
+    ListProductPagesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofproductpagesummarynobody, name: "Items", traits: {"smithy.api#jsonName" => "items"}))
+    ListProductPagesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max2048, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
+    ListProductPagesResponse.type = Types::ListProductPagesResponse
+    ListProductRestEndpointPagesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListProductRestEndpointPagesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListProductRestEndpointPagesRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListProductRestEndpointPagesRequest.add_member(:resource_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceOwnerAccountId", traits: {"smithy.api#httpQuery" => "resourceOwnerAccountId"}))
+    ListProductRestEndpointPagesRequest.type = Types::ListProductRestEndpointPagesRequest
+    ListProductRestEndpointPagesResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofproductrestendpointpagesummarynobody, name: "Items", traits: {"smithy.api#jsonName" => "items"}))
+    ListProductRestEndpointPagesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
+    ListProductRestEndpointPagesResponse.type = Types::ListProductRestEndpointPagesResponse
     ListRoutingRulesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListRoutingRulesRequest.add_member(:domain_name_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DomainNameId", traits: {"smithy.api#httpQuery" => "domainNameId"}))
     ListRoutingRulesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -1025,6 +1328,7 @@ module Aws::ApiGatewayV2
     MutualTlsAuthenticationInput.add_member(:truststore_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: UriWithLengthBetween1And2048, name: "TruststoreUri", traits: {"smithy.api#jsonName" => "truststoreUri"}))
     MutualTlsAuthenticationInput.add_member(:truststore_version, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And64, name: "TruststoreVersion", traits: {"smithy.api#jsonName" => "truststoreVersion"}))
     MutualTlsAuthenticationInput.type = Types::MutualTlsAuthenticationInput
+    None.type = Types::None
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     NotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType", traits: {"smithy.api#jsonName" => "resourceType"}))
     NotFoundException.type = Types::NotFoundException
@@ -1033,8 +1337,76 @@ module Aws::ApiGatewayV2
     PassthroughBehavior.add_member(:when_no_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WHEN_NO_MATCH", traits: {"smithy.api#enumValue" => "WHEN_NO_MATCH"}))
     PassthroughBehavior.add_member(:never, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEVER", traits: {"smithy.api#enumValue" => "NEVER"}))
     PassthroughBehavior.add_member(:when_no_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WHEN_NO_TEMPLATES", traits: {"smithy.api#enumValue" => "WHEN_NO_TEMPLATES"}))
+    PortalContent.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "Description", traits: {"smithy.api#jsonName" => "description"}))
+    PortalContent.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin3max255, name: "DisplayName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "displayName", "smithy.api#required" => {}}))
+    PortalContent.add_member(:theme, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalTheme, name: "Theme", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "theme", "smithy.api#required" => {}}))
+    PortalContent.type = Types::PortalContent
+    PortalProductSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "Description", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "description", "smithy.api#required" => {}}))
+    PortalProductSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "DisplayName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "displayName", "smithy.api#required" => {}}))
+    PortalProductSummary.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "lastModified", "smithy.api#required" => {}}))
+    PortalProductSummary.add_member(:portal_product_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "PortalProductArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "portalProductArn", "smithy.api#required" => {}}))
+    PortalProductSummary.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "PortalProductId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "portalProductId", "smithy.api#required" => {}}))
+    PortalProductSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    PortalProductSummary.type = Types::PortalProductSummary
+    PortalSummary.add_member(:authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: Authorization, name: "Authorization", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "authorization", "smithy.api#required" => {}}))
+    PortalSummary.add_member(:endpoint_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfigurationResponse, name: "EndpointConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "endpointConfiguration", "smithy.api#required" => {}}))
+    PortalSummary.add_member(:included_portal_product_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofStringmin20max2048, name: "IncludedPortalProductArns", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "includedPortalProductArns", "smithy.api#required" => {}}))
+    PortalSummary.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "lastModified", "smithy.api#required" => {}}))
+    PortalSummary.add_member(:last_published, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastPublished", traits: {"smithy.api#jsonName" => "lastPublished"}))
+    PortalSummary.add_member(:last_published_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "LastPublishedDescription", traits: {"smithy.api#jsonName" => "lastPublishedDescription"}))
+    PortalSummary.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "PortalArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "portalArn", "smithy.api#required" => {}}))
+    PortalSummary.add_member(:portal_content, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalContent, name: "PortalContent", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "portalContent", "smithy.api#required" => {}}))
+    PortalSummary.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "PortalId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "portalId", "smithy.api#required" => {}}))
+    PortalSummary.add_member(:preview, ::Smithy::Schema::Shapes::MemberShape.new(target: Preview, name: "Preview", traits: {"smithy.api#jsonName" => "preview"}))
+    PortalSummary.add_member(:publish_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishStatus, name: "PublishStatus", traits: {"smithy.api#jsonName" => "publishStatus"}))
+    PortalSummary.add_member(:rum_app_monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max255, name: "RumAppMonitorName", traits: {"smithy.api#jsonName" => "rumAppMonitorName"}))
+    PortalSummary.add_member(:status_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusException, name: "StatusException", traits: {"smithy.api#jsonName" => "statusException"}))
+    PortalSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    PortalSummary.type = Types::PortalSummary
+    PortalTheme.add_member(:custom_colors, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomColors, name: "CustomColors", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "customColors", "smithy.api#required" => {}}))
+    PortalTheme.add_member(:logo_last_uploaded, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LogoLastUploaded", traits: {"smithy.api#jsonName" => "logoLastUploaded"}))
+    PortalTheme.type = Types::PortalTheme
+    Preview.add_member(:preview_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PreviewStatus, name: "PreviewStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "previewStatus", "smithy.api#required" => {}}))
+    Preview.add_member(:preview_url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PreviewUrl", traits: {"smithy.api#jsonName" => "previewUrl"}))
+    Preview.add_member(:status_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusException, name: "StatusException", traits: {"smithy.api#jsonName" => "statusException"}))
+    Preview.type = Types::Preview
+    PreviewPortalRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PreviewPortalRequest.type = Types::PreviewPortalRequest
+    PreviewPortalResponse.type = Types::PreviewPortalResponse
+    PreviewStatus.add_member(:preview_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREVIEW_IN_PROGRESS", traits: {"smithy.api#enumValue" => "PREVIEW_IN_PROGRESS"}))
+    PreviewStatus.add_member(:preview_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREVIEW_FAILED", traits: {"smithy.api#enumValue" => "PREVIEW_FAILED"}))
+    PreviewStatus.add_member(:preview_ready, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREVIEW_READY", traits: {"smithy.api#enumValue" => "PREVIEW_READY"}))
+    ProductPageSummaryNoBody.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "lastModified", "smithy.api#required" => {}}))
+    ProductPageSummaryNoBody.add_member(:page_title, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "PageTitle", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "pageTitle", "smithy.api#required" => {}}))
+    ProductPageSummaryNoBody.add_member(:product_page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "ProductPageArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "productPageArn", "smithy.api#required" => {}}))
+    ProductPageSummaryNoBody.add_member(:product_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "ProductPageId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "productPageId", "smithy.api#required" => {}}))
+    ProductPageSummaryNoBody.type = Types::ProductPageSummaryNoBody
+    ProductRestEndpointPageSummaryNoBody.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max1024, name: "Endpoint", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "endpoint", "smithy.api#required" => {}}))
+    ProductRestEndpointPageSummaryNoBody.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "lastModified", "smithy.api#required" => {}}))
+    ProductRestEndpointPageSummaryNoBody.add_member(:operation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "OperationName", traits: {"smithy.api#jsonName" => "operationName"}))
+    ProductRestEndpointPageSummaryNoBody.add_member(:product_rest_endpoint_page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "ProductRestEndpointPageArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "productRestEndpointPageArn", "smithy.api#required" => {}}))
+    ProductRestEndpointPageSummaryNoBody.add_member(:product_rest_endpoint_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "ProductRestEndpointPageId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "productRestEndpointPageId", "smithy.api#required" => {}}))
+    ProductRestEndpointPageSummaryNoBody.add_member(:rest_endpoint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RestEndpointIdentifier, name: "RestEndpointIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "restEndpointIdentifier", "smithy.api#required" => {}}))
+    ProductRestEndpointPageSummaryNoBody.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "status", "smithy.api#required" => {}}))
+    ProductRestEndpointPageSummaryNoBody.add_member(:status_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusException, name: "StatusException", traits: {"smithy.api#jsonName" => "statusException"}))
+    ProductRestEndpointPageSummaryNoBody.add_member(:try_it_state, ::Smithy::Schema::Shapes::MemberShape.new(target: TryItState, name: "TryItState", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "tryItState", "smithy.api#required" => {}}))
+    ProductRestEndpointPageSummaryNoBody.type = Types::ProductRestEndpointPageSummaryNoBody
     ProtocolType.add_member(:websocket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEBSOCKET", traits: {"smithy.api#enumValue" => "WEBSOCKET"}))
     ProtocolType.add_member(:http, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTTP", traits: {"smithy.api#enumValue" => "HTTP"}))
+    PublishPortalRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "Description", traits: {"smithy.api#jsonName" => "description"}))
+    PublishPortalRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PublishPortalRequest.type = Types::PublishPortalRequest
+    PublishPortalResponse.type = Types::PublishPortalResponse
+    PublishStatus.add_member(:published, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISHED", traits: {"smithy.api#enumValue" => "PUBLISHED"}))
+    PublishStatus.add_member(:publish_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISH_IN_PROGRESS", traits: {"smithy.api#enumValue" => "PUBLISH_IN_PROGRESS"}))
+    PublishStatus.add_member(:publish_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PUBLISH_FAILED", traits: {"smithy.api#enumValue" => "PUBLISH_FAILED"}))
+    PublishStatus.add_member(:disable_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DISABLE_IN_PROGRESS"}))
+    PublishStatus.add_member(:disable_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE_FAILED", traits: {"smithy.api#enumValue" => "DISABLE_FAILED"}))
+    PublishStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    PutPortalProductSharingPolicyRequest.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max307200, name: "PolicyDocument", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "policyDocument", "smithy.api#required" => {}}))
+    PutPortalProductSharingPolicyRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutPortalProductSharingPolicyRequest.type = Types::PutPortalProductSharingPolicyRequest
+    PutPortalProductSharingPolicyResponse.type = Types::PutPortalProductSharingPolicyResponse
     PutRoutingRuleRequest.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofroutingruleaction, name: "Actions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "actions", "smithy.api#required" => {}}))
     PutRoutingRuleRequest.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofroutingrulecondition, name: "Conditions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "conditions", "smithy.api#required" => {}}))
     PutRoutingRuleRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1076,6 +1448,8 @@ module Aws::ApiGatewayV2
     ResetAuthorizersCacheRequest.type = Types::ResetAuthorizersCacheRequest
     ResponseParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
     ResponseParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationParameters, name: "value"))
+    RestEndpointIdentifier.add_member(:identifier_parts, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentifierParts, name: "IdentifierParts", traits: {"smithy.api#jsonName" => "identifierParts"}))
+    RestEndpointIdentifier.type = Types::RestEndpointIdentifier
     Route.add_member(:api_gateway_managed, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ApiGatewayManaged", traits: {"smithy.api#jsonName" => "apiGatewayManaged"}))
     Route.add_member(:api_key_required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ApiKeyRequired", traits: {"smithy.api#jsonName" => "apiKeyRequired"}))
     Route.add_member(:authorization_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationScopes, name: "AuthorizationScopes", traits: {"smithy.api#jsonName" => "authorizationScopes"}))
@@ -1133,6 +1507,9 @@ module Aws::ApiGatewayV2
     RoutingRuleMatchHeaderValue.type = Types::RoutingRuleMatchHeaderValue
     RoutingRuleMatchHeaders.add_member(:any_of, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofroutingrulematchheadervalue, name: "AnyOf", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "anyOf", "smithy.api#required" => {}}))
     RoutingRuleMatchHeaders.type = Types::RoutingRuleMatchHeaders
+    Section.add_member(:product_rest_endpoint_page_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofStringmin20max2048, name: "ProductRestEndpointPageArns", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "productRestEndpointPageArns", "smithy.api#required" => {}}))
+    Section.add_member(:section_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SectionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "sectionName", "smithy.api#required" => {}}))
+    Section.type = Types::Section
     SecurityGroupIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     SecurityPolicy.add_member(:tls_1_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_1_0", traits: {"smithy.api#enumValue" => "TLS_1_0"}))
     SecurityPolicy.add_member(:tls_1_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TLS_1_2", traits: {"smithy.api#enumValue" => "TLS_1_2"}))
@@ -1153,6 +1530,12 @@ module Aws::ApiGatewayV2
     Stage.type = Types::Stage
     StageVariablesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
     StageVariablesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween0And2048, name: "value"))
+    Status.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    Status.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    Status.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    StatusException.add_member(:exception, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max256, name: "Exception", traits: {"smithy.api#jsonName" => "exception"}))
+    StatusException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max2048, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    StatusException.type = Types::StatusException
     SubnetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
@@ -1169,6 +1552,8 @@ module Aws::ApiGatewayV2
     TooManyRequestsException.add_member(:limit_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LimitType", traits: {"smithy.api#jsonName" => "limitType"}))
     TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     TooManyRequestsException.type = Types::TooManyRequestsException
+    TryItState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    TryItState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -1334,6 +1719,65 @@ module Aws::ApiGatewayV2
     UpdateModelResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And128, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     UpdateModelResponse.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween0And32K, name: "Schema", traits: {"smithy.api#jsonName" => "schema"}))
     UpdateModelResponse.type = Types::UpdateModelResponse
+    UpdatePortalProductRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "Description", traits: {"smithy.api#jsonName" => "description"}))
+    UpdatePortalProductRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "DisplayName", traits: {"smithy.api#jsonName" => "displayName"}))
+    UpdatePortalProductRequest.add_member(:display_order, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayOrder, name: "DisplayOrder", traits: {"smithy.api#jsonName" => "displayOrder"}))
+    UpdatePortalProductRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdatePortalProductRequest.type = Types::UpdatePortalProductRequest
+    UpdatePortalProductResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "Description", traits: {"smithy.api#jsonName" => "description"}))
+    UpdatePortalProductResponse.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max255, name: "DisplayName", traits: {"smithy.api#jsonName" => "displayName"}))
+    UpdatePortalProductResponse.add_member(:display_order, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayOrder, name: "DisplayOrder", traits: {"smithy.api#jsonName" => "displayOrder"}))
+    UpdatePortalProductResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    UpdatePortalProductResponse.add_member(:portal_product_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "PortalProductArn", traits: {"smithy.api#jsonName" => "portalProductArn"}))
+    UpdatePortalProductResponse.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "PortalProductId", traits: {"smithy.api#jsonName" => "portalProductId"}))
+    UpdatePortalProductResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    UpdatePortalProductResponse.type = Types::UpdatePortalProductResponse
+    UpdatePortalRequest.add_member(:authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: Authorization, name: "Authorization", traits: {"smithy.api#jsonName" => "authorization"}))
+    UpdatePortalRequest.add_member(:endpoint_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfigurationRequest, name: "EndpointConfiguration", traits: {"smithy.api#jsonName" => "endpointConfiguration"}))
+    UpdatePortalRequest.add_member(:included_portal_product_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofStringmin20max2048, name: "IncludedPortalProductArns", traits: {"smithy.api#jsonName" => "includedPortalProductArns"}))
+    UpdatePortalRequest.add_member(:logo_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1092, name: "LogoUri", traits: {"smithy.api#jsonName" => "logoUri"}))
+    UpdatePortalRequest.add_member(:portal_content, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalContent, name: "PortalContent", traits: {"smithy.api#jsonName" => "portalContent"}))
+    UpdatePortalRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdatePortalRequest.add_member(:rum_app_monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max255, name: "RumAppMonitorName", traits: {"smithy.api#jsonName" => "rumAppMonitorName"}))
+    UpdatePortalRequest.type = Types::UpdatePortalRequest
+    UpdatePortalResponse.add_member(:authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: Authorization, name: "Authorization", traits: {"smithy.api#jsonName" => "authorization"}))
+    UpdatePortalResponse.add_member(:endpoint_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfigurationResponse, name: "EndpointConfiguration", traits: {"smithy.api#jsonName" => "endpointConfiguration"}))
+    UpdatePortalResponse.add_member(:included_portal_product_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofStringmin20max2048, name: "IncludedPortalProductArns", traits: {"smithy.api#jsonName" => "includedPortalProductArns"}))
+    UpdatePortalResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    UpdatePortalResponse.add_member(:last_published, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastPublished", traits: {"smithy.api#jsonName" => "lastPublished"}))
+    UpdatePortalResponse.add_member(:last_published_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max1024, name: "LastPublishedDescription", traits: {"smithy.api#jsonName" => "lastPublishedDescription"}))
+    UpdatePortalResponse.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "PortalArn", traits: {"smithy.api#jsonName" => "portalArn"}))
+    UpdatePortalResponse.add_member(:portal_content, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalContent, name: "PortalContent", traits: {"smithy.api#jsonName" => "portalContent"}))
+    UpdatePortalResponse.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "PortalId", traits: {"smithy.api#jsonName" => "portalId"}))
+    UpdatePortalResponse.add_member(:preview, ::Smithy::Schema::Shapes::MemberShape.new(target: Preview, name: "Preview", traits: {"smithy.api#jsonName" => "preview"}))
+    UpdatePortalResponse.add_member(:publish_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PublishStatus, name: "PublishStatus", traits: {"smithy.api#jsonName" => "publishStatus"}))
+    UpdatePortalResponse.add_member(:rum_app_monitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin0max255, name: "RumAppMonitorName", traits: {"smithy.api#jsonName" => "rumAppMonitorName"}))
+    UpdatePortalResponse.add_member(:status_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusException, name: "StatusException", traits: {"smithy.api#jsonName" => "statusException"}))
+    UpdatePortalResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
+    UpdatePortalResponse.type = Types::UpdatePortalResponse
+    UpdateProductPageRequest.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayContent, name: "DisplayContent", traits: {"smithy.api#jsonName" => "displayContent"}))
+    UpdateProductPageRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateProductPageRequest.add_member(:product_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProductPageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateProductPageRequest.type = Types::UpdateProductPageRequest
+    UpdateProductPageResponse.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayContent, name: "DisplayContent", traits: {"smithy.api#jsonName" => "displayContent"}))
+    UpdateProductPageResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    UpdateProductPageResponse.add_member(:product_page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "ProductPageArn", traits: {"smithy.api#jsonName" => "productPageArn"}))
+    UpdateProductPageResponse.add_member(:product_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "ProductPageId", traits: {"smithy.api#jsonName" => "productPageId"}))
+    UpdateProductPageResponse.type = Types::UpdateProductPageResponse
+    UpdateProductRestEndpointPageRequest.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDisplayContent, name: "DisplayContent", traits: {"smithy.api#jsonName" => "displayContent"}))
+    UpdateProductRestEndpointPageRequest.add_member(:portal_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PortalProductId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateProductRestEndpointPageRequest.add_member(:product_rest_endpoint_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProductRestEndpointPageId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateProductRestEndpointPageRequest.add_member(:try_it_state, ::Smithy::Schema::Shapes::MemberShape.new(target: TryItState, name: "TryItState", traits: {"smithy.api#jsonName" => "tryItState"}))
+    UpdateProductRestEndpointPageRequest.type = Types::UpdateProductRestEndpointPageRequest
+    UpdateProductRestEndpointPageResponse.add_member(:display_content, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointDisplayContentResponse, name: "DisplayContent", traits: {"smithy.api#jsonName" => "displayContent"}))
+    UpdateProductRestEndpointPageResponse.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "LastModified", traits: {"smithy.api#jsonName" => "lastModified"}))
+    UpdateProductRestEndpointPageResponse.add_member(:product_rest_endpoint_page_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "ProductRestEndpointPageArn", traits: {"smithy.api#jsonName" => "productRestEndpointPageArn"}))
+    UpdateProductRestEndpointPageResponse.add_member(:product_rest_endpoint_page_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin10max30patternaz09, name: "ProductRestEndpointPageId", traits: {"smithy.api#jsonName" => "productRestEndpointPageId"}))
+    UpdateProductRestEndpointPageResponse.add_member(:rest_endpoint_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: RestEndpointIdentifier, name: "RestEndpointIdentifier", traits: {"smithy.api#jsonName" => "restEndpointIdentifier"}))
+    UpdateProductRestEndpointPageResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: Status, name: "Status", traits: {"smithy.api#jsonName" => "status"}))
+    UpdateProductRestEndpointPageResponse.add_member(:status_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusException, name: "StatusException", traits: {"smithy.api#jsonName" => "statusException"}))
+    UpdateProductRestEndpointPageResponse.add_member(:try_it_state, ::Smithy::Schema::Shapes::MemberShape.new(target: TryItState, name: "TryItState", traits: {"smithy.api#jsonName" => "tryItState"}))
+    UpdateProductRestEndpointPageResponse.type = Types::UpdateProductRestEndpointPageResponse
     UpdateRouteRequest.add_member(:api_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ApiId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateRouteRequest.add_member(:api_key_required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ApiKeyRequired", traits: {"smithy.api#jsonName" => "apiKeyRequired"}))
     UpdateRouteRequest.add_member(:authorization_scopes, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizationScopes, name: "AuthorizationScopes", traits: {"smithy.api#jsonName" => "authorizationScopes"}))
@@ -1439,22 +1883,28 @@ module Aws::ApiGatewayV2
     Listofintegration.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Integration, name: "member"))
     Listofintegrationresponse.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegrationResponse, name: "member"))
     Listofmodel.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Model, name: "member"))
+    Listofportalproductsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalProductSummary, name: "member"))
+    Listofportalsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalSummary, name: "member"))
+    Listofproductpagesummarynobody.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductPageSummaryNoBody, name: "member"))
+    Listofproductrestendpointpagesummarynobody.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductRestEndpointPageSummaryNoBody, name: "member"))
     Listofroute.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Route, name: "member"))
     Listofrouteresponse.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteResponse, name: "member"))
     Listofroutingrule.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingRule, name: "member"))
     Listofroutingruleaction.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingRuleAction, name: "member"))
     Listofroutingrulecondition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingRuleCondition, name: "member"))
     Listofroutingrulematchheadervalue.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingRuleMatchHeaderValue, name: "member"))
+    Listofsection.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Section, name: "member"))
     Listofselectionkey.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectionKey, name: "member"))
     Listofstage.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Stage, name: "member"))
     Listofvpclink.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcLink, name: "member"))
     ListofString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    ListofStringmin20max2048.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin20max2048, name: "member"))
 
     ApiGatewayV2 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.apigatewayv2#ApiGatewayV2"
       service.name = "ApiGatewayV2"
       service.version = "2018-11-29"
-      service.traits = {"aws.api#service" => {"sdkId" => "ApiGatewayV2", "arnNamespace" => "apigateway", "cloudFormationName" => "ApiGatewayV2", "cloudTrailEventSource" => "apigatewayv2.amazonaws.com", "endpointPrefix" => "apigateway"}, "aws.auth#sigv4" => {"name" => "apigateway"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AmazonApiGatewayV2"}
+      service.traits = {"aws.api#service" => {"sdkId" => "ApiGatewayV2", "arnNamespace" => "apigateway", "cloudFormationName" => "ApiGatewayV2", "cloudTrailEventSource" => "apigatewayv2.amazonaws.com", "endpointPrefix" => "apigateway"}, "aws.auth#sigv4" => {"name" => "apigateway"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AmazonApiGatewayV2", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://apigateway-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://apigateway-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://apigateway.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://apigateway.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_api, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigatewayv2#CreateApi"
         operation.name = "CreateApi"
@@ -1543,6 +1993,48 @@ module Aws::ApiGatewayV2
         operation.errors << NotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/apis/{ApiId}/models", "code" => 201}}
+      end)
+      service.add_operation(:create_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#CreatePortal"
+        operation.name = "CreatePortal"
+        operation.input = CreatePortalRequest
+        operation.output = CreatePortalResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/portals", "code" => 201}}
+      end)
+      service.add_operation(:create_portal_product, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#CreatePortalProduct"
+        operation.name = "CreatePortalProduct"
+        operation.input = CreatePortalProductRequest
+        operation.output = CreatePortalProductResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/portalproducts", "code" => 201}}
+      end)
+      service.add_operation(:create_product_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#CreateProductPage"
+        operation.name = "CreateProductPage"
+        operation.input = CreateProductPageRequest
+        operation.output = CreateProductPageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/portalproducts/{PortalProductId}/productpages", "code" => 201}}
+      end)
+      service.add_operation(:create_product_rest_endpoint_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#CreateProductRestEndpointPage"
+        operation.name = "CreateProductRestEndpointPage"
+        operation.input = CreateProductRestEndpointPageRequest
+        operation.output = CreateProductRestEndpointPageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/portalproducts/{PortalProductId}/productrestendpointpages", "code" => 201}}
       end)
       service.add_operation(:create_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigatewayv2#CreateRoute"
@@ -1688,6 +2180,60 @@ module Aws::ApiGatewayV2
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v2/apis/{ApiId}/models/{ModelId}", "code" => 204}}
       end)
+      service.add_operation(:delete_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#DeletePortal"
+        operation.name = "DeletePortal"
+        operation.input = DeletePortalRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v2/portals/{PortalId}", "code" => 204}}
+      end)
+      service.add_operation(:delete_portal_product, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#DeletePortalProduct"
+        operation.name = "DeletePortalProduct"
+        operation.input = DeletePortalProductRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v2/portalproducts/{PortalProductId}", "code" => 204}}
+      end)
+      service.add_operation(:delete_portal_product_sharing_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#DeletePortalProductSharingPolicy"
+        operation.name = "DeletePortalProductSharingPolicy"
+        operation.input = DeletePortalProductSharingPolicyRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v2/portalproducts/{PortalProductId}/sharingpolicy", "code" => 204}}
+      end)
+      service.add_operation(:delete_product_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#DeleteProductPage"
+        operation.name = "DeleteProductPage"
+        operation.input = DeleteProductPageRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v2/portalproducts/{PortalProductId}/productpages/{ProductPageId}", "code" => 204}}
+      end)
+      service.add_operation(:delete_product_rest_endpoint_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#DeleteProductRestEndpointPage"
+        operation.name = "DeleteProductRestEndpointPage"
+        operation.input = DeleteProductRestEndpointPageRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v2/portalproducts/{PortalProductId}/productrestendpointpages/{ProductRestEndpointPageId}", "code" => 204}}
+      end)
       service.add_operation(:delete_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigatewayv2#DeleteRoute"
         operation.name = "DeleteRoute"
@@ -1751,6 +2297,18 @@ module Aws::ApiGatewayV2
         operation.errors << NotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v2/vpclinks/{VpcLinkId}", "code" => 202}}
+      end)
+      service.add_operation(:disable_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#DisablePortal"
+        operation.name = "DisablePortal"
+        operation.input = DisablePortalRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/v2/portals/{PortalId}/publish", "code" => 204}}
       end)
       service.add_operation(:export_api, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigatewayv2#ExportApi"
@@ -1924,6 +2482,61 @@ module Aws::ApiGatewayV2
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/apis/{ApiId}/models", "code" => 200}}
       end)
+      service.add_operation(:get_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#GetPortal"
+        operation.name = "GetPortal"
+        operation.input = GetPortalRequest
+        operation.output = GetPortalResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/portals/{PortalId}", "code" => 200}}
+      end)
+      service.add_operation(:get_portal_product, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#GetPortalProduct"
+        operation.name = "GetPortalProduct"
+        operation.input = GetPortalProductRequest
+        operation.output = GetPortalProductResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/portalproducts/{PortalProductId}", "code" => 200}}
+      end)
+      service.add_operation(:get_portal_product_sharing_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#GetPortalProductSharingPolicy"
+        operation.name = "GetPortalProductSharingPolicy"
+        operation.input = GetPortalProductSharingPolicyRequest
+        operation.output = GetPortalProductSharingPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/portalproducts/{PortalProductId}/sharingpolicy", "code" => 200}}
+      end)
+      service.add_operation(:get_product_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#GetProductPage"
+        operation.name = "GetProductPage"
+        operation.input = GetProductPageRequest
+        operation.output = GetProductPageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/portalproducts/{PortalProductId}/productpages/{ProductPageId}", "code" => 200}}
+      end)
+      service.add_operation(:get_product_rest_endpoint_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#GetProductRestEndpointPage"
+        operation.name = "GetProductRestEndpointPage"
+        operation.input = GetProductRestEndpointPageRequest
+        operation.output = GetProductRestEndpointPageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/portalproducts/{PortalProductId}/productrestendpointpages/{ProductRestEndpointPageId}", "code" => 200}}
+      end)
       service.add_operation(:get_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigatewayv2#GetRoute"
         operation.name = "GetRoute"
@@ -2031,6 +2644,52 @@ module Aws::ApiGatewayV2
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v2/apis", "code" => 201}}
       end)
+      service.add_operation(:list_portal_products, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#ListPortalProducts"
+        operation.name = "ListPortalProducts"
+        operation.input = ListPortalProductsRequest
+        operation.output = ListPortalProductsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/portalproducts", "code" => 200}}
+        operation[:paginator] = Paginators::ListPortalProducts.new
+      end)
+      service.add_operation(:list_portals, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#ListPortals"
+        operation.name = "ListPortals"
+        operation.input = ListPortalsRequest
+        operation.output = ListPortalsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/portals", "code" => 200}}
+        operation[:paginator] = Paginators::ListPortals.new
+      end)
+      service.add_operation(:list_product_pages, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#ListProductPages"
+        operation.name = "ListProductPages"
+        operation.input = ListProductPagesRequest
+        operation.output = ListProductPagesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/portalproducts/{PortalProductId}/productpages", "code" => 200}}
+        operation[:paginator] = Paginators::ListProductPages.new
+      end)
+      service.add_operation(:list_product_rest_endpoint_pages, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#ListProductRestEndpointPages"
+        operation.name = "ListProductRestEndpointPages"
+        operation.input = ListProductRestEndpointPagesRequest
+        operation.output = ListProductRestEndpointPagesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/portalproducts/{PortalProductId}/productrestendpointpages", "code" => 200}}
+        operation[:paginator] = Paginators::ListProductRestEndpointPages.new
+      end)
       service.add_operation(:list_routing_rules, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigatewayv2#ListRoutingRules"
         operation.name = "ListRoutingRules"
@@ -2041,6 +2700,41 @@ module Aws::ApiGatewayV2
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v2/domainnames/{DomainName}/routingrules", "code" => 200}}
         operation[:paginator] = Paginators::ListRoutingRules.new
+      end)
+      service.add_operation(:preview_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#PreviewPortal"
+        operation.name = "PreviewPortal"
+        operation.input = PreviewPortalRequest
+        operation.output = PreviewPortalResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/portals/{PortalId}/preview", "code" => 202}}
+      end)
+      service.add_operation(:publish_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#PublishPortal"
+        operation.name = "PublishPortal"
+        operation.input = PublishPortalRequest
+        operation.output = PublishPortalResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v2/portals/{PortalId}/publish", "code" => 202}}
+      end)
+      service.add_operation(:put_portal_product_sharing_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#PutPortalProductSharingPolicy"
+        operation.name = "PutPortalProductSharingPolicy"
+        operation.input = PutPortalProductSharingPolicyRequest
+        operation.output = PutPortalProductSharingPolicyResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/v2/portalproducts/{PortalProductId}/sharingpolicy", "code" => 200}}
       end)
       service.add_operation(:put_routing_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigatewayv2#PutRoutingRule"
@@ -2182,6 +2876,51 @@ module Aws::ApiGatewayV2
         operation.errors << NotFoundException
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/v2/apis/{ApiId}/models/{ModelId}", "code" => 200}}
+      end)
+      service.add_operation(:update_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#UpdatePortal"
+        operation.name = "UpdatePortal"
+        operation.input = UpdatePortalRequest
+        operation.output = UpdatePortalResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/v2/portals/{PortalId}", "code" => 200}}
+      end)
+      service.add_operation(:update_portal_product, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#UpdatePortalProduct"
+        operation.name = "UpdatePortalProduct"
+        operation.input = UpdatePortalProductRequest
+        operation.output = UpdatePortalProductResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/v2/portalproducts/{PortalProductId}", "code" => 200}}
+      end)
+      service.add_operation(:update_product_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#UpdateProductPage"
+        operation.name = "UpdateProductPage"
+        operation.input = UpdateProductPageRequest
+        operation.output = UpdateProductPageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/v2/portalproducts/{PortalProductId}/productpages/{ProductPageId}", "code" => 200}}
+      end)
+      service.add_operation(:update_product_rest_endpoint_page, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.apigatewayv2#UpdateProductRestEndpointPage"
+        operation.name = "UpdateProductRestEndpointPage"
+        operation.input = UpdateProductRestEndpointPageRequest
+        operation.output = UpdateProductRestEndpointPageResponse
+        operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/v2/portalproducts/{PortalProductId}/productrestendpointpages/{ProductRestEndpointPageId}", "code" => 200}}
       end)
       service.add_operation(:update_route, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.apigatewayv2#UpdateRoute"

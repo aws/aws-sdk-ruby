@@ -57,6 +57,31 @@ module Aws::CustomerProfiles
     end
 
     # @api private
+    class ListDomainObjectTypes
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.items
+      end
+    end
+
+    # @api private
     class ListEventStreams
       def next_tokens(data)
         next_token = data.next_token
@@ -132,6 +157,106 @@ module Aws::CustomerProfiles
     end
 
     # @api private
+    class ListRecommenderFilters
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.recommender_filters
+      end
+    end
+
+    # @api private
+    class ListRecommenderRecipes
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.recommender_recipes
+      end
+    end
+
+    # @api private
+    class ListRecommenderSchemas
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.recommender_schemas
+      end
+    end
+
+    # @api private
+    class ListRecommenders
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.recommenders
+      end
+    end
+
+    # @api private
     class ListRuleBasedMatches
       def next_tokens(data)
         next_token = data.next_token
@@ -178,6 +303,31 @@ module Aws::CustomerProfiles
 
       def items(data)
         data.items
+      end
+    end
+
+    # @api private
+    class ListSegmentSubscriptionEvents
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.events
       end
     end
 

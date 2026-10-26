@@ -9,6 +9,14 @@ module Aws::ConnectContactLens
     CharacterOffset: IntegerShape
     CharacterOffsets: StructureShape
     ContactId: StringShape
+    ExtractedInformation: StructureShape
+    ExtractedInformationContent: StringShape
+    ExtractedInformationFailureCode: EnumShape
+    ExtractedInformationValue: StructureShape
+    ExtractedInformationValues: ListShape
+    ExtractionDefinitionDisplayLabel: StringShape
+    ExtractionDefinitionId: StringShape
+    ExtractionDefinitionName: StringShape
     InstanceId: StringShape
     InternalServiceException: StructureShape
     InvalidRequestException: StructureShape

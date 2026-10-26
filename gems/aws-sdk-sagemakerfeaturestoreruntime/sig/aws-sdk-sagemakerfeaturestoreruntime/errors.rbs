@@ -3,6 +3,9 @@ module Aws::SageMakerFeatureStoreRuntime
     class AccessForbidden < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InternalFailure < Smithy::Client::ServiceError
       def message: () -> String?
     end

@@ -31,11 +31,16 @@ module Aws::CloudWatch
   # * {InvalidNextToken}
   # * {InvalidParameterCombinationException}
   # * {InvalidParameterValueException}
+  # * {KmsAccessDeniedException}
+  # * {KmsKeyDisabledException}
+  # * {KmsKeyNotFoundException}
   # * {LimitExceededException}
   # * {LimitExceededFault}
   # * {MissingRequiredParameterException}
+  # * {ResourceConflict}
   # * {ResourceNotFound}
   # * {ResourceNotFoundException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -169,6 +174,57 @@ module Aws::CloudWatch
       end
     end
 
+    # <p>The operation was denied because either the calling principal lacks the required
+    #             Amazon Web Services Key Management Service (Amazon Web Services KMS) permission on the
+    #             key, or the key policy does not grant Amazon CloudWatch the permissions it needs
+    #             to use the key. Verify that the caller has <code>kms:Decrypt</code> permission on the
+    #             key, and that the key policy grants the CloudWatch service principal the
+    #             <code>kms:DescribeKey</code>, <code>kms:GenerateDataKey</code>,
+    #             <code>kms:Encrypt</code>, <code>kms:Decrypt</code>, and <code>kms:ReEncrypt*</code>
+    #             permissions described in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_AssociateDatasetKmsKey.html">AssociateDatasetKmsKey</a>.</p>
+    class KmsAccessDeniedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CloudWatch::Types::KmsAccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+    #             is disabled or pending deletion. Re-enable the key (or restore it, if it is pending
+    #             deletion) and retry the operation.</p>
+    class KmsKeyDisabledException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CloudWatch::Types::KmsKeyDisabledException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+    #             could not be found. Verify that the key Amazon Resource Name (ARN) is correct, that
+    #             the key exists, and that it is in the same Amazon Web Services Region as the
+    #             resource.</p>
+    class KmsKeyNotFoundException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CloudWatch::Types::KmsKeyNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The operation exceeded one or more limits.</p>
     class LimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -210,6 +266,19 @@ module Aws::CloudWatch
       end
     end
 
+    # <p>The operation could not be completed because the request conflicts with the current state of the alarm or its underlying scheduled query resource.</p>
+    class ResourceConflict < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CloudWatch::Types::ResourceConflict] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The named resource does not exist.</p>
     class ResourceNotFound < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -238,6 +307,20 @@ module Aws::CloudWatch
 
       def resource_id
         @data[:resource_id]
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request failed validation. One or more input parameters do not satisfy the
+    #             constraints that the operation requires.</p>
+    class ValidationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CloudWatch::Types::ValidationException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
       end
 
       def message

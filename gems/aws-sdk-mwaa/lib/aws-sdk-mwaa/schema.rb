@@ -64,7 +64,7 @@ module Aws::MWAA
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"max" => 2048}})
     PublishMetricsOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mwaa#PublishMetricsOperationInput", name: "PublishMetricsOperationInput", traits: {"smithy.api#deprecated" => {"message" => "This type is for internal use and not meant for public use. Data set for this type will be ignored."}})
     PublishMetricsOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mwaa#PublishMetricsOperationOutput", name: "PublishMetricsOperationOutput", traits: {"smithy.api#deprecated" => {"message" => "This type is for internal use and not meant for public use. Data set for this type will be ignored."}})
-    RelativePath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#RelativePath", name: "RelativePath", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => ".*"})
+    RelativePath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#RelativePath", name: "RelativePath", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => ".*"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mwaa#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     RestApiClientException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mwaa#RestApiClientException", name: "RestApiClientException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     RestApiMethod = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#RestApiMethod", name: "RestApiMethod", traits: {"smithy.api#enum" => [{"value" => "GET", "name" => "GET"}, {"value" => "PUT", "name" => "PUT"}, {"value" => "POST", "name" => "POST"}, {"value" => "PATCH", "name" => "PATCH"}, {"value" => "DELETE", "name" => "DELETE"}]})
@@ -73,10 +73,11 @@ module Aws::MWAA
     RestApiResponse = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.mwaa#RestApiResponse", name: "RestApiResponse", traits: {"smithy.api#sensitive" => {}})
     RestApiServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mwaa#RestApiServerException", name: "RestApiServerException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     S3BucketArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#S3BucketArn", name: "S3BucketArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1224}, "smithy.api#pattern" => "^arn:aws(-[a-z]+)?:s3:::[a-z0-9.\\-]+$"})
-    S3ObjectVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#S3ObjectVersion", name: "S3ObjectVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    S3ObjectVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#S3ObjectVersion", name: "S3ObjectVersion", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     Schedulers = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.mwaa#Schedulers", name: "Schedulers", traits: {"smithy.api#range" => {"max" => 5}})
     SecurityGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#SecurityGroupId", name: "SecurityGroupId", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^sg-[a-zA-Z0-9\\-._]+$"})
     SecurityGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mwaa#SecurityGroupList", name: "SecurityGroupList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    ServiceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mwaa#ServiceUnavailableException", name: "ServiceUnavailableException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 503})
     StatisticSet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mwaa#StatisticSet", name: "StatisticSet", traits: {"smithy.api#deprecated" => {"message" => "This type is for internal use and not meant for public use. Data set for this type will be ignored."}})
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#SubnetId", name: "SubnetId", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^subnet-[a-zA-Z0-9\\-._]+$"})
     SubnetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mwaa#SubnetList", name: "SubnetList", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
@@ -99,7 +100,7 @@ module Aws::MWAA
     UpdateStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#UpdateStatus", name: "UpdateStatus", traits: {"smithy.api#enum" => [{"value" => "SUCCESS", "name" => "SUCCESS"}, {"value" => "PENDING", "name" => "PENDING"}, {"value" => "FAILED", "name" => "FAILED"}]})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mwaa#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VpcEndpointServiceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#VpcEndpointServiceName", name: "VpcEndpointServiceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1224}, "smithy.api#pattern" => "^([a-z.-]+)?com\\.amazonaws\\.vpce\\.[a-z0-9\\-]+\\.[a-zA-Z_0-9+=,.@\\-_/]+$"})
-    WebserverAccessMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#WebserverAccessMode", name: "WebserverAccessMode", traits: {"smithy.api#enum" => [{"value" => "PRIVATE_ONLY", "name" => "PRIVATE_ONLY"}, {"value" => "PUBLIC_ONLY", "name" => "PUBLIC_ONLY"}]})
+    WebserverAccessMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#WebserverAccessMode", name: "WebserverAccessMode", traits: {"smithy.api#enum" => [{"value" => "PRIVATE_ONLY", "name" => "PRIVATE_ONLY"}, {"value" => "PUBLIC_ONLY", "name" => "PUBLIC_ONLY"}, {"value" => "PUBLIC_AND_PRIVATE", "name" => "PUBLIC_AND_PRIVATE"}]})
     WebserverUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#WebserverUrl", name: "WebserverUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^https://.+$"})
     WeeklyMaintenanceWindowStart = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#WeeklyMaintenanceWindowStart", name: "WeeklyMaintenanceWindowStart", traits: {"smithy.api#length" => {"min" => 1, "max" => 9}, "smithy.api#pattern" => "(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)"})
     WorkerReplacementStrategy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.mwaa#WorkerReplacementStrategy", name: "WorkerReplacementStrategy", traits: {"smithy.api#enum" => [{"value" => "FORCED", "name" => "FORCED"}, {"value" => "GRACEFUL", "name" => "GRACEFUL"}]})
@@ -265,6 +266,8 @@ module Aws::MWAA
     RestApiServerException.add_member(:rest_api_response, ::Smithy::Schema::Shapes::MemberShape.new(target: RestApiResponse, name: "RestApiResponse"))
     RestApiServerException.type = Types::RestApiServerException
     SecurityGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
+    ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
+    ServiceUnavailableException.type = Types::ServiceUnavailableException
     StatisticSet.add_member(:sample_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "SampleCount"))
     StatisticSet.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Sum"))
     StatisticSet.add_member(:minimum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "Minimum"))
@@ -320,7 +323,7 @@ module Aws::MWAA
       service.id = "com.amazonaws.mwaa#AmazonMWAA"
       service.name = "AmazonMWAA"
       service.version = "2020-07-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "MWAA", "arnNamespace" => "airflow"}, "aws.auth#sigv4" => {"name" => "airflow"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AmazonMWAA"}
+      service.traits = {"aws.api#service" => {"sdkId" => "MWAA", "arnNamespace" => "airflow"}, "aws.auth#sigv4" => {"name" => "airflow"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AmazonMWAA", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://airflow-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://airflow-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://airflow.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://airflow.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_cli_token, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mwaa#CreateCliToken"
         operation.name = "CreateCliToken"
@@ -335,6 +338,7 @@ module Aws::MWAA
         operation.input = CreateEnvironmentOperationInput
         operation.output = CreateEnvironmentOperationOutput
         operation.errors << InternalServerException
+        operation.errors << ServiceUnavailableException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/environments/{Name}"}, "smithy.api#idempotent" => {}}
       end)
@@ -356,6 +360,7 @@ module Aws::MWAA
         operation.output = DeleteEnvironmentOperationOutput
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/environments/{Name}"}, "smithy.api#idempotent" => {}}
       end)
@@ -438,6 +443,7 @@ module Aws::MWAA
         operation.output = UpdateEnvironmentOperationOutput
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/environments/{Name}"}}
       end)

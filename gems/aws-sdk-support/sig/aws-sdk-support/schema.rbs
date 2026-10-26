@@ -40,6 +40,12 @@ module Aws::Support
     CommunicationList: ListShape
     CommunicationTypeOptions: StructureShape
     CommunicationTypeOptionsList: ListShape
+    CompleteAttachmentUploadRequest: StructureShape
+    CompleteAttachmentUploadResponse: StructureShape
+    CompletedUpload: StructureShape
+    CompletedUploadList: ListShape
+    CoralAvailabilityThrottledResource: StringShape
+    CoralAvailabilityThrottlingReason: StringShape
     CreateCaseRequest: StructureShape
     CreateCaseResponse: StructureShape
     Data: BlobShape
@@ -48,6 +54,8 @@ module Aws::Support
     DescribeAttachmentLimitExceeded: StructureShape
     DescribeAttachmentRequest: StructureShape
     DescribeAttachmentResponse: StructureShape
+    DescribeAttachmentUploadStatusRequest: StructureShape
+    DescribeAttachmentUploadStatusResponse: StructureShape
     DescribeCasesRequest: StructureShape
     DescribeCasesResponse: StructureShape
     DescribeCommunicationsRequest: StructureShape
@@ -71,18 +79,32 @@ module Aws::Support
     Display: StringShape
     DisplayId: StringShape
     Double: FloatShape
+    DownloadUrl: StructureShape
+    DryRunOperationException: StructureShape
+    ETag: StringShape
+    EndIndex: IntegerShape
     EndTime: StringShape
     ErrorMessage: StringShape
     ExpiryTime: StringShape
+    FieldIntegerValue: IntegerShape
     FileName: StringShape
+    FileSize: IntegerShape
+    GetAttachmentDownloadLinkRequest: StructureShape
+    GetAttachmentDownloadLinkResponse: StructureShape
+    GetAttachmentUploadLinksRequest: StructureShape
+    GetAttachmentUploadLinksResponse: StructureShape
+    HttpsUrl: StringShape
     IncludeCommunications: BooleanShape
     IncludeResolvedCases: BooleanShape
+    Integer: IntegerShape
     InternalServerError: StructureShape
     IssueType: StringShape
     Language: StringShape
     Long: IntegerShape
     MaxResults: IntegerShape
     NextToken: StringShape
+    NullableBooleanType: BooleanShape
+    PartSizeBytes: IntegerShape
     RecentCaseCommunications: StructureShape
     RefreshTrustedAdvisorCheckRequest: StructureShape
     RefreshTrustedAdvisorCheckResponse: StructureShape
@@ -100,6 +122,7 @@ module Aws::Support
     SeverityLevelCode: StringShape
     SeverityLevelName: StringShape
     SeverityLevelsList: ListShape
+    StartIndex: IntegerShape
     StartTime: StringShape
     Status: StringShape
     String: StringShape
@@ -111,6 +134,8 @@ module Aws::Support
     SupportedLanguage: StructureShape
     SupportedLanguagesList: ListShape
     ThrottlingException: StructureShape
+    ThrottlingReason: StructureShape
+    ThrottlingReasonList: ListShape
     TimeCreated: StringShape
     TrustedAdvisorCategorySpecificSummary: StructureShape
     TrustedAdvisorCheckDescription: StructureShape
@@ -125,6 +150,14 @@ module Aws::Support
     TrustedAdvisorResourceDetailList: ListShape
     TrustedAdvisorResourcesSummary: StructureShape
     Type: StringShape
+    UploadId: StringShape
+    UploadIdNotFound: StructureShape
+    UploadIds: ListShape
+    UploadProgress: StructureShape
+    UploadRange: StructureShape
+    UploadStatus: EnumShape
+    UploadUrl: StructureShape
+    UploadUrlList: ListShape
     ValidatedCategoryCode: StringShape
     ValidatedCommunicationBody: StringShape
     ValidatedDateTime: StringShape

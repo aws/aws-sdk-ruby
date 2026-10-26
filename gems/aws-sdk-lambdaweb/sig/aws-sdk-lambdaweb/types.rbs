@@ -1,0 +1,1140 @@
+module Aws::LambdaWeb
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountQuotas
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_total_arm_v_cpus: Integer,
+        ?max_total_rate_limit: Integer,
+        ?max_revisions_per_function: Integer,
+        ?max_endpoints_per_function: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_total_arm_v_cpus: Integer?
+      attr_accessor max_total_rate_limit: Integer?
+      attr_accessor max_revisions_per_function: Integer?
+      attr_accessor max_endpoints_per_function: Integer?
+    end
+
+    class AccountUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_count: Integer?
+    end
+
+    module ApplicationLogLevel
+      TRACE: String
+      DEBUG: String
+      INFO: String
+      WARN: String
+      ERROR: String
+      FATAL: String
+    end
+
+    module AuthType
+      APPLICATION_MANAGED: String
+      IAM_AUTH: String
+    end
+
+    module AutoDeploymentMode
+      LATEST_REVISION: String
+      DISABLED: String
+    end
+
+    class BuildConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code_config: Types::CodeConfig,
+        ?runtime_config: Types::RuntimeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_config: Types::CodeConfig?
+      attr_accessor runtime_config: Types::RuntimeConfig?
+    end
+
+    class CodeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_object: Types::S3Object,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_object: Types::S3Object?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateWebFunctionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?endpoint_name: String,
+        ?description: String,
+        ?endpoint_type: String,
+        ?auth_type: String,
+        ?auto_deployment_mode: String,
+        ?revision_weights: Array[Types::RevisionWeight],
+        ?regions: Array[String],
+        ?scaling_config: Types::ScalingConfig,
+        ?throttle_config: Types::ThrottleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor endpoint_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor auth_type: String?
+      attr_accessor auto_deployment_mode: String?
+      attr_accessor revision_weights: Array[Types::RevisionWeight]?
+      attr_accessor regions: Array[String]?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor throttle_config: Types::ThrottleConfig?
+    end
+
+    class CreateWebFunctionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?endpoint_arn: String,
+        ?endpoint_name: String,
+        ?description: String,
+        ?endpoint_type: String,
+        ?domain_name: String,
+        ?auth_type: String,
+        ?auto_deployment_mode: String,
+        ?revision_weights: Array[Types::RevisionWeight],
+        ?regions: Array[String],
+        ?scaling_config: Types::ScalingConfig,
+        ?throttle_config: Types::ThrottleConfig,
+        ?state: String,
+        ?state_reason: String,
+        ?update_status: String,
+        ?update_status_reason: String,
+        ?regional_endpoints: Hash[String, Types::RegionalEndpoint],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor endpoint_arn: String?
+      attr_accessor endpoint_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor domain_name: String?
+      attr_accessor auth_type: String?
+      attr_accessor auto_deployment_mode: String?
+      attr_accessor revision_weights: Array[Types::RevisionWeight]?
+      attr_accessor regions: Array[String]?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor throttle_config: Types::ThrottleConfig?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor update_status: String?
+      attr_accessor update_status_reason: String?
+      attr_accessor regional_endpoints: Hash[String, Types::RegionalEndpoint]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateWebFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?revision_config: Types::RevisionConfig,
+        ?endpoint_config: Types::EndpointConfig,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor revision_config: Types::RevisionConfig?
+      attr_accessor endpoint_config: Types::EndpointConfig?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWebFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?function_arn: String,
+        ?state: String,
+        ?state_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?revision: Types::FunctionRevisionSummary,
+        ?endpoint: Types::FunctionEndpointSummary,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor function_arn: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor revision: Types::FunctionRevisionSummary?
+      attr_accessor endpoint: Types::FunctionEndpointSummary?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWebFunctionRevisionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?build_config: Types::BuildConfig,
+        ?service_config: Types::ServiceConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor build_config: Types::BuildConfig?
+      attr_accessor service_config: Types::ServiceConfig?
+    end
+
+    class CreateWebFunctionRevisionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?revision_arn: String,
+        ?revision_id: String,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?build_config: Types::BuildConfig,
+        ?service_config: Types::ServiceConfig,
+        ?state: String,
+        ?state_reason: String,
+        ?errors: Array[Types::RevisionError],
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor revision_arn: String?
+      attr_accessor revision_id: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor build_config: Types::BuildConfig?
+      attr_accessor service_config: Types::ServiceConfig?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor errors: Array[Types::RevisionError]?
+      attr_accessor created_at: Time?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor revision_id: String?
+    end
+
+    class DeleteWebFunctionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor endpoint_name: String?
+    end
+
+    class DeleteWebFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+    end
+
+    class DeleteWebFunctionRevisionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor revision_id: String?
+    end
+
+    class EndpointConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_name: String,
+        ?description: String,
+        ?endpoint_type: String,
+        ?auth_type: String,
+        ?auto_deployment_mode: String,
+        ?regions: Array[String],
+        ?scaling_config: Types::ScalingConfig,
+        ?throttle_config: Types::ThrottleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor auth_type: String?
+      attr_accessor auto_deployment_mode: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor throttle_config: Types::ThrottleConfig?
+    end
+
+    module EndpointState
+      PENDING: String
+      ACTIVE: String
+      FAILED: String
+      DELETING: String
+    end
+
+    module EndpointType
+      HOME_REGION: String
+      MULTI_REGION: String
+      PER_REGION: String
+    end
+
+    module EndpointUpdateStatus
+      IN_PROGRESS: String
+      SUCCESSFUL: String
+      FAILED: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class FunctionEndpointSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_arn: String,
+        ?endpoint_name: String,
+        ?description: String,
+        ?endpoint_type: String,
+        ?domain_name: String,
+        ?auth_type: String,
+        ?auto_deployment_mode: String,
+        ?revision_weights: Array[Types::RevisionWeight],
+        ?regions: Array[String],
+        ?scaling_config: Types::ScalingConfig,
+        ?throttle_config: Types::ThrottleConfig,
+        ?state: String,
+        ?state_reason: String,
+        ?update_status: String,
+        ?update_status_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_arn: String?
+      attr_accessor endpoint_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor domain_name: String?
+      attr_accessor auth_type: String?
+      attr_accessor auto_deployment_mode: String?
+      attr_accessor revision_weights: Array[Types::RevisionWeight]?
+      attr_accessor regions: Array[String]?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor throttle_config: Types::ThrottleConfig?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor update_status: String?
+      attr_accessor update_status_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class FunctionRevisionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_arn: String,
+        ?revision_id: String,
+        ?description: String,
+        ?state: String,
+        ?state_reason: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_arn: String?
+      attr_accessor revision_id: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor created_at: Time?
+    end
+
+    module FunctionState
+      PENDING: String
+      ACTIVE: String
+      FAILED: String
+      DELETING: String
+    end
+
+    class FunctionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?function_arn: String,
+        ?state: String,
+        ?state_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor function_arn: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetWebAccountSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetWebAccountSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_quotas: Types::AccountQuotas,
+        ?account_usage: Types::AccountUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_quotas: Types::AccountQuotas?
+      attr_accessor account_usage: Types::AccountUsage?
+    end
+
+    class GetWebFunctionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?endpoint_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor endpoint_name: String?
+    end
+
+    class GetWebFunctionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?endpoint_arn: String,
+        ?endpoint_name: String,
+        ?description: String,
+        ?endpoint_type: String,
+        ?domain_name: String,
+        ?auth_type: String,
+        ?auto_deployment_mode: String,
+        ?revision_weights: Array[Types::RevisionWeight],
+        ?regions: Array[String],
+        ?scaling_config: Types::ScalingConfig,
+        ?throttle_config: Types::ThrottleConfig,
+        ?state: String,
+        ?state_reason: String,
+        ?update_status: String,
+        ?update_status_reason: String,
+        ?regional_endpoints: Hash[String, Types::RegionalEndpoint],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor endpoint_arn: String?
+      attr_accessor endpoint_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor domain_name: String?
+      attr_accessor auth_type: String?
+      attr_accessor auto_deployment_mode: String?
+      attr_accessor revision_weights: Array[Types::RevisionWeight]?
+      attr_accessor regions: Array[String]?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor throttle_config: Types::ThrottleConfig?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor update_status: String?
+      attr_accessor update_status_reason: String?
+      attr_accessor regional_endpoints: Hash[String, Types::RegionalEndpoint]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetWebFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+    end
+
+    class GetWebFunctionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?function_arn: String,
+        ?state: String,
+        ?state_reason: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor function_arn: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetWebFunctionRevisionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetWebFunctionRevisionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?revision_arn: String,
+        ?revision_id: String,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?build_config: Types::BuildConfig,
+        ?service_config: Types::ServiceConfig,
+        ?state: String,
+        ?state_reason: String,
+        ?errors: Array[Types::RevisionError],
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor revision_arn: String?
+      attr_accessor revision_id: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor build_config: Types::BuildConfig?
+      attr_accessor service_config: Types::ServiceConfig?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor errors: Array[Types::RevisionError]?
+      attr_accessor created_at: Time?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+    end
+
+    class ListTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListWebFunctionEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWebFunctionEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints: Array[Types::FunctionEndpointSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints: Array[Types::FunctionEndpointSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWebFunctionRevisionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWebFunctionRevisionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revisions: Array[Types::FunctionRevisionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revisions: Array[Types::FunctionRevisionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWebFunctionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWebFunctionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?functions: Array[Types::FunctionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor functions: Array[Types::FunctionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class LoggingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group: String,
+        ?application_log_level: String,
+        ?system_log_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group: String?
+      attr_accessor application_log_level: String?
+      attr_accessor system_log_level: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class RegionalEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?auth_type: String,
+        ?revision_weights: Array[Types::RevisionWeight],
+        ?scaling_config: Types::ScalingConfig,
+        ?throttle_config: Types::ThrottleConfig,
+        ?state: String,
+        ?state_reason: String,
+        ?update_status: String,
+        ?update_status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor auth_type: String?
+      attr_accessor revision_weights: Array[Types::RevisionWeight]?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor throttle_config: Types::ThrottleConfig?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor update_status: String?
+      attr_accessor update_status_reason: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RevisionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?kms_key_arn: String,
+        ?build_config: Types::BuildConfig,
+        ?service_config: Types::ServiceConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor build_config: Types::BuildConfig?
+      attr_accessor service_config: Types::ServiceConfig?
+    end
+
+    class RevisionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module RevisionState
+      PENDING: String
+      ACTIVE: String
+      FAILED: String
+    end
+
+    class RevisionWeight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+        ?weight: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+      attr_accessor weight: Integer?
+    end
+
+    class RuntimeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime: String?
+    end
+
+    class S3Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+    end
+
+    class ScalingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_environments: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_environments: Integer?
+    end
+
+    class ServiceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_role_arn: String,
+        ?timeout_seconds: Integer,
+        ?egress_network_connector_arn: String,
+        ?max_concurrency_per_environment: Integer,
+        ?environment_variables: Hash[String, String],
+        ?telemetry_config: Types::TelemetryConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_role_arn: String?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor egress_network_connector_arn: String?
+      attr_accessor max_concurrency_per_environment: Integer?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor telemetry_config: Types::TelemetryConfig?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    module SystemLogLevel
+      DEBUG: String
+      INFO: String
+      WARN: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TelemetryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_config: Types::LoggingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_config: Types::LoggingConfig?
+    end
+
+    class ThrottleConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rate_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rate_limit: Integer?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateWebFunctionEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?endpoint_name: String,
+        ?description: String,
+        ?auth_type: String,
+        ?auto_deployment_mode: String,
+        ?revision_weights: Array[Types::RevisionWeight],
+        ?scaling_config: Types::ScalingConfig,
+        ?throttle_config: Types::ThrottleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor endpoint_name: String?
+      attr_accessor description: String?
+      attr_accessor auth_type: String?
+      attr_accessor auto_deployment_mode: String?
+      attr_accessor revision_weights: Array[Types::RevisionWeight]?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor throttle_config: Types::ThrottleConfig?
+    end
+
+    class UpdateWebFunctionEndpointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?endpoint_arn: String,
+        ?endpoint_name: String,
+        ?description: String,
+        ?endpoint_type: String,
+        ?domain_name: String,
+        ?auth_type: String,
+        ?auto_deployment_mode: String,
+        ?revision_weights: Array[Types::RevisionWeight],
+        ?regions: Array[String],
+        ?scaling_config: Types::ScalingConfig,
+        ?throttle_config: Types::ThrottleConfig,
+        ?state: String,
+        ?state_reason: String,
+        ?update_status: String,
+        ?update_status_reason: String,
+        ?regional_endpoints: Hash[String, Types::RegionalEndpoint],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor endpoint_arn: String?
+      attr_accessor endpoint_name: String?
+      attr_accessor description: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor domain_name: String?
+      attr_accessor auth_type: String?
+      attr_accessor auto_deployment_mode: String?
+      attr_accessor revision_weights: Array[Types::RevisionWeight]?
+      attr_accessor regions: Array[String]?
+      attr_accessor scaling_config: Types::ScalingConfig?
+      attr_accessor throttle_config: Types::ThrottleConfig?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor update_status: String?
+      attr_accessor update_status_reason: String?
+      attr_accessor regional_endpoints: Hash[String, Types::RegionalEndpoint]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

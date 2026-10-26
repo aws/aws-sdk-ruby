@@ -6,6 +6,22 @@ module Aws::ApiGatewayV2
   # This module contains the types returned by client operations.
   module Types
 
+    # <p>Represents a domain name and certificate for a portal.</p>
+    # @!attribute certificate_arn
+    #   <p>The certificate ARN.</p>
+    #   @return [String]
+    # @!attribute domain_name
+    #   <p>The domain name.</p>
+    #   @return [String]
+    class ACMManaged < Struct.new(
+      nil,
+      :certificate_arn,
+      :domain_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
@@ -132,6 +148,22 @@ module Aws::ApiGatewayV2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents an authorization configuration for a portal.</p>
+    # @!attribute cognito_config
+    #   <p>The Amazon Cognito configuration.</p>
+    #   @return [Types::CognitoConfig]
+    # @!attribute none
+    #   <p>Provide no authorization for your portal. This makes your portal publicly accesible on the web.</p>
+    #   @return [Types::None]
+    class Authorization < Struct.new(
+      nil,
+      :cognito_config,
+      :none,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents an authorizer.</p>
     # @!attribute authorizer_credentials_arn
     #   <p>Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, don't specify this parameter. Supported only for REQUEST authorizers.</p>
@@ -192,6 +224,26 @@ module Aws::ApiGatewayV2
     class BadRequestException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for using Amazon Cognito user pools to control access to your portal.</p>
+    # @!attribute app_client_id
+    #   <p>The app client ID.</p>
+    #   @return [String]
+    # @!attribute user_pool_arn
+    #   <p>The user pool ARN.</p>
+    #   @return [String]
+    # @!attribute user_pool_domain
+    #   <p>The user pool domain.</p>
+    #   @return [String]
+    class CognitoConfig < Struct.new(
+      nil,
+      :app_client_id,
+      :user_pool_arn,
+      :user_pool_domain,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -685,9 +737,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     # @!attribute request_parameters
     #   <p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>
-    #                  , where 
+    #                  , where
     #                     <replaceable>{location}</replaceable>
-    #                   is querystring, path, or header; and 
+    #                   is querystring, path, or header; and
     #                     <replaceable>{name}</replaceable>
     #                   must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>.</p>
     #   @return [Hash<String, String>]
@@ -842,9 +894,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     # @!attribute request_parameters
     #   <p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>
-    #             , where 
+    #             , where
     #               <replaceable>{location}</replaceable>
-    #              is querystring, path, or header; and 
+    #              is querystring, path, or header; and
     #               <replaceable>{name}</replaceable>
     #              must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>.</p>
     #   @return [Hash<String, String>]
@@ -940,6 +992,258 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the post operation.</p>
+    # @!attribute description
+    #   <p>A description of the portal product.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The name of the portal product as it appears in a published portal.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class CreatePortalProductRequest < Struct.new(
+      nil,
+      :description,
+      :display_name,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute description
+    #   <p>A description of the portal product.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The display name for the portal product.</p>
+    #   @return [String]
+    # @!attribute display_order
+    #   <p>The visual ordering of the product pages and product REST endpoint pages in a published portal.</p>
+    #   @return [Types::DisplayOrder]
+    # @!attribute last_modified
+    #   <p>The timestamp when the portal product was last modified.</p>
+    #   @return [Time]
+    # @!attribute portal_product_arn
+    #   <p>The ARN of the portal product.</p>
+    #   @return [String]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class CreatePortalProductResponse < Struct.new(
+      nil,
+      :description,
+      :display_name,
+      :display_order,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the post operation.</p>
+    # @!attribute authorization
+    #   <p>The authentication configuration for the portal.</p>
+    #   @return [Types::Authorization]
+    # @!attribute endpoint_configuration
+    #   <p>The domain configuration for the portal. Use a default domain provided by API Gateway or provide a fully-qualified domain name that you own.</p>
+    #   @return [Types::EndpointConfigurationRequest]
+    # @!attribute included_portal_product_arns
+    #   <p>The ARNs of the portal products included in the portal.</p>
+    #   @return [Array<String>]
+    # @!attribute logo_uri
+    #   <p>The URI for the portal logo image that is displayed in the portal header.</p>
+    #   @return [String]
+    # @!attribute portal_content
+    #   <p>The content of the portal.</p>
+    #   @return [Types::PortalContent]
+    # @!attribute rum_app_monitor_name
+    #   <p>The name of the Amazon CloudWatch RUM app monitor for the portal.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class CreatePortalRequest < Struct.new(
+      nil,
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :logo_uri,
+      :portal_content,
+      :rum_app_monitor_name,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute authorization
+    #   <p>The authorization for the portal. Supports Cognito-based user authentication or no authentication.</p>
+    #   @return [Types::Authorization]
+    # @!attribute endpoint_configuration
+    #   <p>The endpoint configuration.</p>
+    #   @return [Types::EndpointConfigurationResponse]
+    # @!attribute included_portal_product_arns
+    #   <p>The ARNs of the portal products included in the portal.</p>
+    #   @return [Array<String>]
+    # @!attribute last_modified
+    #   <p>The timestamp when the portal configuration was last modified.</p>
+    #   @return [Time]
+    # @!attribute last_published
+    #   <p>The timestamp when the portal was last published.</p>
+    #   @return [Time]
+    # @!attribute last_published_description
+    #   <p>A user-written description of the changes made in the last published version of the portal.</p>
+    #   @return [String]
+    # @!attribute portal_arn
+    #   <p>The ARN of the portal.</p>
+    #   @return [String]
+    # @!attribute portal_content
+    #   <p>The name, description, and theme for the portal.</p>
+    #   @return [Types::PortalContent]
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    # @!attribute publish_status
+    #   <p>The current publishing status of the portal.</p>
+    #   @return [String]
+    # @!attribute rum_app_monitor_name
+    #   <p>The name of the Amazon CloudWatch RUM app monitor.</p>
+    #   @return [String]
+    # @!attribute status_exception
+    #   <p>Error information for failed portal operations. Contains details about any issues encountered during portal creation or publishing.</p>
+    #   @return [Types::StatusException]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class CreatePortalResponse < Struct.new(
+      nil,
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the post operation.</p>
+    # @!attribute display_content
+    #   <p>The content of the product page.</p>
+    #   @return [Types::DisplayContent]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    class CreateProductPageRequest < Struct.new(
+      nil,
+      :display_content,
+      :portal_product_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_content
+    #   <p>The content of the product page.</p>
+    #   @return [Types::DisplayContent]
+    # @!attribute last_modified
+    #   <p>The timestamp when the product page was last modified.</p>
+    #   @return [Time]
+    # @!attribute product_page_arn
+    #   <p>The ARN of the product page.</p>
+    #   @return [String]
+    # @!attribute product_page_id
+    #   <p>The product page identifier.</p>
+    #   @return [String]
+    class CreateProductPageResponse < Struct.new(
+      nil,
+      :display_content,
+      :last_modified,
+      :product_page_arn,
+      :product_page_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the post operation.</p>
+    # @!attribute display_content
+    #   <p>The content of the product REST endpoint page.</p>
+    #   @return [Types::EndpointDisplayContent]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute rest_endpoint_identifier
+    #   <p>The REST endpoint identifier.</p>
+    #   @return [Types::RestEndpointIdentifier]
+    # @!attribute try_it_state
+    #   <p>The try it state of the product REST endpoint page.</p>
+    #   @return [String]
+    class CreateProductRestEndpointPageRequest < Struct.new(
+      nil,
+      :display_content,
+      :portal_product_id,
+      :rest_endpoint_identifier,
+      :try_it_state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_content
+    #   <p>The display content.</p>
+    #   @return [Types::EndpointDisplayContentResponse]
+    # @!attribute last_modified
+    #   <p>The timestamp when the product REST endpoint page was last modified.</p>
+    #   @return [Time]
+    # @!attribute product_rest_endpoint_page_arn
+    #   <p>The ARN of the product REST endpoint page.</p>
+    #   @return [String]
+    # @!attribute product_rest_endpoint_page_id
+    #   <p>The product REST endpoint page identifier.</p>
+    #   @return [String]
+    # @!attribute rest_endpoint_identifier
+    #   <p>The REST endpoint identifier.</p>
+    #   @return [Types::RestEndpointIdentifier]
+    # @!attribute status
+    #   <p>The status.</p>
+    #   @return [String]
+    # @!attribute status_exception
+    #   <p>The status exception information.</p>
+    #   @return [Types::StatusException]
+    # @!attribute try_it_state
+    #   <p>The try it state.</p>
+    #   @return [String]
+    class CreateProductRestEndpointPageResponse < Struct.new(
+      nil,
+      :display_content,
+      :last_modified,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1355,6 +1659,38 @@ module Aws::ApiGatewayV2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents custom colors for a published portal.</p>
+    # @!attribute accent_color
+    #   <p>Represents the accent color.</p>
+    #   @return [String]
+    # @!attribute background_color
+    #   <p>Represents the background color.</p>
+    #   @return [String]
+    # @!attribute error_validation_color
+    #   <p>The errorValidationColor.</p>
+    #   @return [String]
+    # @!attribute header_color
+    #   <p>Represents the header color.</p>
+    #   @return [String]
+    # @!attribute navigation_color
+    #   <p>Represents the navigation color.</p>
+    #   @return [String]
+    # @!attribute text_color
+    #   <p>Represents the text color.</p>
+    #   @return [String]
+    class CustomColors < Struct.new(
+      nil,
+      :accent_color,
+      :background_color,
+      :error_validation_color,
+      :header_color,
+      :navigation_color,
+      :text_color,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute api_id
     #   <p>The API identifier.</p>
     #   @return [String]
@@ -1492,6 +1828,69 @@ module Aws::ApiGatewayV2
       nil,
       :api_id,
       :model_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    class DeletePortalProductRequest < Struct.new(
+      nil,
+      :portal_product_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    class DeletePortalProductSharingPolicyRequest < Struct.new(
+      nil,
+      :portal_product_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    class DeletePortalRequest < Struct.new(
+      nil,
+      :portal_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute product_page_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    class DeleteProductPageRequest < Struct.new(
+      nil,
+      :portal_product_id,
+      :product_page_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute product_rest_endpoint_page_id
+    #   <p>The product REST endpoint identifier.</p>
+    #   @return [String]
+    class DeleteProductRestEndpointPageRequest < Struct.new(
+      nil,
+      :portal_product_id,
+      :product_rest_endpoint_page_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1653,6 +2052,73 @@ module Aws::ApiGatewayV2
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    class DisablePortalRequest < Struct.new(
+      nil,
+      :portal_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content of the product page.</p>
+    # @!attribute body
+    #   <p>The body.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>The title.</p>
+    #   @return [String]
+    class DisplayContent < Struct.new(
+      nil,
+      :body,
+      :title,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains any values that override the default configuration generated from API Gateway.</p>
+    # @!attribute body
+    #   <p>By default, this is the documentation of your REST API from API Gateway. You can provide custom documentation to override this value.</p>
+    #   @return [String]
+    # @!attribute endpoint
+    #   <p>The URL for your REST API. By default, API Gateway uses the default execute API endpoint. You can provide a custom domain to override this value.</p>
+    #   @return [String]
+    # @!attribute operation_name
+    #   <p>The operation name of the product REST endpoint.</p>
+    #   @return [String]
+    class DisplayContentOverrides < Struct.new(
+      nil,
+      :body,
+      :endpoint,
+      :operation_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The display order.</p>
+    # @!attribute contents
+    #   <p>Represents a list of sections which include section name and list of product REST endpoints for a product.</p>
+    #   @return [Array<Types::Section>]
+    # @!attribute overview_page_arn
+    #   <p>The ARN of the overview page.</p>
+    #   @return [String]
+    # @!attribute product_page_arns
+    #   <p>The product page ARNs.</p>
+    #   @return [Array<String>]
+    class DisplayOrder < Struct.new(
+      nil,
+      :contents,
+      :overview_page_arn,
+      :product_page_arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents a domain name.</p>
     # @!attribute api_mapping_selection_expression
     #   <p>The API mapping selection expression.</p>
@@ -1736,6 +2202,82 @@ module Aws::ApiGatewayV2
       :ip_address_type,
       :security_policy,
       :ownership_verification_certificate_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents an endpoint configuration.</p>
+    # @!attribute acm_managed
+    #   <p>Represents a domain name and certificate for a portal.</p>
+    #   @return [Types::ACMManaged]
+    # @!attribute none
+    #   <p>Use the default portal domain name that is generated and managed by API Gateway.</p>
+    #   @return [Types::None]
+    class EndpointConfigurationRequest < Struct.new(
+      nil,
+      :acm_managed,
+      :none,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents an endpoint configuration.</p>
+    # @!attribute certificate_arn
+    #   <p>The ARN of the ACM certificate.</p>
+    #   @return [String]
+    # @!attribute domain_name
+    #   <p>The domain name.</p>
+    #   @return [String]
+    # @!attribute portal_default_domain_name
+    #   <p>The portal default domain name. This domain name is generated and managed by API Gateway.</p>
+    #   @return [String]
+    # @!attribute portal_domain_hosted_zone_id
+    #   <p>The portal domain hosted zone identifier.</p>
+    #   @return [String]
+    class EndpointConfigurationResponse < Struct.new(
+      nil,
+      :certificate_arn,
+      :domain_name,
+      :portal_default_domain_name,
+      :portal_domain_hosted_zone_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the endpoint display content.</p>
+    # @!attribute none
+    #   <p>If your product REST endpoint contains no overrides, the none object is returned.</p>
+    #   @return [Types::None]
+    # @!attribute overrides
+    #   <p>The overrides for endpoint display content.</p>
+    #   @return [Types::DisplayContentOverrides]
+    class EndpointDisplayContent < Struct.new(
+      nil,
+      :none,
+      :overrides,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The product REST endpoint page.</p>
+    # @!attribute body
+    #   <p>The API documentation.</p>
+    #   @return [String]
+    # @!attribute endpoint
+    #   <p>The URL to invoke your REST API.</p>
+    #   @return [String]
+    # @!attribute operation_name
+    #   <p>The operation name.</p>
+    #   @return [String]
+    class EndpointDisplayContentResponse < Struct.new(
+      nil,
+      :body,
+      :endpoint,
+      :operation_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2170,7 +2712,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the DomainName resource.</p>
     #   @return [String]
     # @!attribute domain_name_arn
-    #   <p>Represents an Amazon Resource Name (ARN).</p>
+    #   <p>The ARN of the DomainName resource.</p>
     #   @return [String]
     # @!attribute domain_name_configurations
     #   <p>The domain name configurations.</p>
@@ -2375,9 +2917,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     # @!attribute request_parameters
     #   <p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>
-    #             , where 
+    #             , where
     #               <replaceable>{location}</replaceable>
-    #              is querystring, path, or header; and 
+    #              is querystring, path, or header; and
     #               <replaceable>{name}</replaceable>
     #              must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>.</p>
     #   @return [Hash<String, String>]
@@ -2554,6 +3096,264 @@ module Aws::ApiGatewayV2
       nil,
       :items,
       :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    #   @return [String]
+    class GetPortalProductRequest < Struct.new(
+      nil,
+      :portal_product_id,
+      :resource_owner_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute description
+    #   <p>The description of a portal product.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The display name.</p>
+    #   @return [String]
+    # @!attribute display_order
+    #   <p>The display order.</p>
+    #   @return [Types::DisplayOrder]
+    # @!attribute last_modified
+    #   <p>The timestamp when the portal product was last modified.</p>
+    #   @return [Time]
+    # @!attribute portal_product_arn
+    #   <p>The ARN of the portal product.</p>
+    #   @return [String]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class GetPortalProductResponse < Struct.new(
+      nil,
+      :description,
+      :display_name,
+      :display_order,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    class GetPortalProductSharingPolicyRequest < Struct.new(
+      nil,
+      :portal_product_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy_document
+    #   <p>The product sharing policy.</p>
+    #   @return [String]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    class GetPortalProductSharingPolicyResponse < Struct.new(
+      nil,
+      :policy_document,
+      :portal_product_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    class GetPortalRequest < Struct.new(
+      nil,
+      :portal_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute authorization
+    #   <p>The authorization for the portal.</p>
+    #   @return [Types::Authorization]
+    # @!attribute endpoint_configuration
+    #   <p>The endpoint configuration.</p>
+    #   @return [Types::EndpointConfigurationResponse]
+    # @!attribute included_portal_product_arns
+    #   <p>The ARNs of the portal products included in the portal.</p>
+    #   @return [Array<String>]
+    # @!attribute last_modified
+    #   <p>The timestamp when the portal was last modified.</p>
+    #   @return [Time]
+    # @!attribute last_published
+    #   <p>The timestamp when the portal was last published.</p>
+    #   @return [Time]
+    # @!attribute last_published_description
+    #   <p>The publish description used when the portal was last published.</p>
+    #   @return [String]
+    # @!attribute portal_arn
+    #   <p>The ARN of the portal.</p>
+    #   @return [String]
+    # @!attribute portal_content
+    #   <p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>
+    #   @return [Types::PortalContent]
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    # @!attribute preview
+    #   <p>Represents the preview endpoint and the any possible error messages during preview generation.</p>
+    #   @return [Types::Preview]
+    # @!attribute publish_status
+    #   <p>The publish status of a portal.</p>
+    #   @return [String]
+    # @!attribute rum_app_monitor_name
+    #   <p>The CloudWatch RUM app monitor name.</p>
+    #   @return [String]
+    # @!attribute status_exception
+    #   <p>The status exception information.</p>
+    #   @return [Types::StatusException]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class GetPortalResponse < Struct.new(
+      nil,
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :preview,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute product_page_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    #   @return [String]
+    class GetProductPageRequest < Struct.new(
+      nil,
+      :portal_product_id,
+      :product_page_id,
+      :resource_owner_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_content
+    #   <p>The content of the product page.</p>
+    #   @return [Types::DisplayContent]
+    # @!attribute last_modified
+    #   <p>The timestamp when the product page was last modified.</p>
+    #   @return [Time]
+    # @!attribute product_page_arn
+    #   <p>The ARN of the product page.</p>
+    #   @return [String]
+    # @!attribute product_page_id
+    #   <p>The product page identifier.</p>
+    #   @return [String]
+    class GetProductPageResponse < Struct.new(
+      nil,
+      :display_content,
+      :last_modified,
+      :product_page_arn,
+      :product_page_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute include_raw_display_content
+    #   <p>The query parameter to include raw display content.</p>
+    #   @return [String]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute product_rest_endpoint_page_id
+    #   <p>The product REST endpoint identifier.</p>
+    #   @return [String]
+    # @!attribute resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    #   @return [String]
+    class GetProductRestEndpointPageRequest < Struct.new(
+      nil,
+      :include_raw_display_content,
+      :portal_product_id,
+      :product_rest_endpoint_page_id,
+      :resource_owner_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_content
+    #   <p>The content of the product REST endpoint page.</p>
+    #   @return [Types::EndpointDisplayContentResponse]
+    # @!attribute last_modified
+    #   <p>The timestamp when the product REST endpoint page was last modified.</p>
+    #   @return [Time]
+    # @!attribute product_rest_endpoint_page_arn
+    #   <p>The ARN of the product REST endpoint page.</p>
+    #   @return [String]
+    # @!attribute product_rest_endpoint_page_id
+    #   <p>The product REST endpoint page identifier.</p>
+    #   @return [String]
+    # @!attribute raw_display_content
+    #   <p>The raw display content of the product REST endpoint page.</p>
+    #   @return [String]
+    # @!attribute rest_endpoint_identifier
+    #   <p>The REST endpoint identifier.</p>
+    #   @return [Types::RestEndpointIdentifier]
+    # @!attribute status
+    #   <p>The status of the product REST endpoint page.</p>
+    #   @return [String]
+    # @!attribute status_exception
+    #   <p>The status exception information.</p>
+    #   @return [Types::StatusException]
+    # @!attribute try_it_state
+    #   <p>The try it state.</p>
+    #   @return [String]
+    class GetProductRestEndpointPageResponse < Struct.new(
+      nil,
+      :display_content,
+      :last_modified,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :raw_display_content,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3015,6 +3815,30 @@ module Aws::ApiGatewayV2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The identifier parts of a product REST endpoint.</p>
+    # @!attribute method
+    #   <p>The method of the product REST endpoint.</p>
+    #   @return [String]
+    # @!attribute path
+    #   <p>The path of the product REST endpoint.</p>
+    #   @return [String]
+    # @!attribute rest_api_id
+    #   <p>The REST API ID of the product REST endpoint.</p>
+    #   @return [String]
+    # @!attribute stage
+    #   <p>The stage of the product REST endpoint.</p>
+    #   @return [String]
+    class IdentifierParts < Struct.new(
+      nil,
+      :method,
+      :path,
+      :rest_api_id,
+      :stage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p></p>
     # @!attribute basepath
     #   <p>Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html">Set the OpenAPI basePath Property</a>. Supported only for HTTP APIs.</p>
@@ -3155,9 +3979,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     # @!attribute request_parameters
     #   <p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>
-    #             , where 
+    #             , where
     #               <replaceable>{location}</replaceable>
-    #              is querystring, path, or header; and 
+    #              is querystring, path, or header; and
     #               <replaceable>{name}</replaceable>
     #              must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>.</p>
     #   @return [Hash<String, String>]
@@ -3247,6 +4071,146 @@ module Aws::ApiGatewayV2
       nil,
       :audience,
       :issuer,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of elements to be returned for this resource.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    #   @return [String]
+    # @!attribute resource_owner
+    #   <p>The resource owner of the portal product.</p>
+    #   @return [String]
+    class ListPortalProductsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :resource_owner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The elements from this collection.</p>
+    #   @return [Array<Types::PortalProductSummary>]
+    # @!attribute next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    #   @return [String]
+    class ListPortalProductsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of elements to be returned for this resource.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    #   @return [String]
+    class ListPortalsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The elements from this collection.</p>
+    #   @return [Array<Types::PortalSummary>]
+    # @!attribute next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    #   @return [String]
+    class ListPortalsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of elements to be returned for this resource.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    #   @return [String]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    #   @return [String]
+    class ListProductPagesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :portal_product_id,
+      :resource_owner_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The elements from this collection.</p>
+    #   @return [Array<Types::ProductPageSummaryNoBody>]
+    # @!attribute next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    #   @return [String]
+    class ListProductPagesResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of elements to be returned for this resource.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    #   @return [String]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute resource_owner_account_id
+    #   <p>The account ID of the resource owner of the portal product.</p>
+    #   @return [String]
+    class ListProductRestEndpointPagesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :portal_product_id,
+      :resource_owner_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The elements from this collection.</p>
+    #   @return [Array<Types::ProductRestEndpointPageSummaryNoBody>]
+    # @!attribute next_token
+    #   <p>The next page of elements from this collection. Not valid for the last element of the collection.</p>
+    #   @return [String]
+    class ListProductRestEndpointPagesResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3352,6 +4316,14 @@ module Aws::ApiGatewayV2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The none option.</p>
+    class None < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The resource specified in the request was not found. See the message field for more information.</p>
     # @!attribute message
     #   <p>Describes the error encountered.</p>
@@ -3375,6 +4347,290 @@ module Aws::ApiGatewayV2
     class ParameterConstraints < Struct.new(
       nil,
       :required,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>
+    # @!attribute description
+    #   <p>A description of the portal.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The display name for the portal.</p>
+    #   @return [String]
+    # @!attribute theme
+    #   <p>The theme for the portal.</p>
+    #   @return [Types::PortalTheme]
+    class PortalContent < Struct.new(
+      nil,
+      :description,
+      :display_name,
+      :theme,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a portal product.</p>
+    # @!attribute description
+    #   <p>The description.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The display name of a portal product.</p>
+    #   @return [String]
+    # @!attribute last_modified
+    #   <p>The timestamp when the portal product was last modified.</p>
+    #   @return [Time]
+    # @!attribute portal_product_arn
+    #   <p>The ARN of a portal product.</p>
+    #   @return [String]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class PortalProductSummary < Struct.new(
+      nil,
+      :description,
+      :display_name,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a portal summary.</p>
+    # @!attribute authorization
+    #   <p>The authorization of the portal.</p>
+    #   @return [Types::Authorization]
+    # @!attribute endpoint_configuration
+    #   <p>The endpoint configuration of the portal.</p>
+    #   @return [Types::EndpointConfigurationResponse]
+    # @!attribute included_portal_product_arns
+    #   <p>The ARNs of the portal products included in the portal.</p>
+    #   @return [Array<String>]
+    # @!attribute last_modified
+    #   <p>The timestamp when the portal was last modified.</p>
+    #   @return [Time]
+    # @!attribute last_published
+    #   <p>The timestamp when the portal was last published.</p>
+    #   @return [Time]
+    # @!attribute last_published_description
+    #   <p>The description of the portal the last time it was published.</p>
+    #   @return [String]
+    # @!attribute portal_arn
+    #   <p>The ARN of the portal.</p>
+    #   @return [String]
+    # @!attribute portal_content
+    #   <p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>
+    #   @return [Types::PortalContent]
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    # @!attribute preview
+    #   <p>Represents the preview endpoint and the any possible error messages during preview generation.</p>
+    #   @return [Types::Preview]
+    # @!attribute publish_status
+    #   <p>The publish status.</p>
+    #   @return [String]
+    # @!attribute rum_app_monitor_name
+    #   <p>The CloudWatch RUM app monitor name.</p>
+    #   @return [String]
+    # @!attribute status_exception
+    #   <p>The status exception information.</p>
+    #   @return [Types::StatusException]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class PortalSummary < Struct.new(
+      nil,
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :preview,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the theme for a portal.</p>
+    # @!attribute custom_colors
+    #   <p>Defines custom color values.</p>
+    #   @return [Types::CustomColors]
+    # @!attribute logo_last_uploaded
+    #   <p>The timestamp when the logo was last uploaded.</p>
+    #   @return [Time]
+    class PortalTheme < Struct.new(
+      nil,
+      :custom_colors,
+      :logo_last_uploaded,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the preview status and preview URL.</p>
+    # @!attribute preview_status
+    #   <p>The status of the preview.</p>
+    #   @return [String]
+    # @!attribute preview_url
+    #   <p>The URL of the preview.</p>
+    #   @return [String]
+    # @!attribute status_exception
+    #   <p>The status exception information.</p>
+    #   @return [Types::StatusException]
+    class Preview < Struct.new(
+      nil,
+      :preview_status,
+      :preview_url,
+      :status_exception,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    class PreviewPortalRequest < Struct.new(
+      nil,
+      :portal_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class PreviewPortalResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a product page summary without listing any page content.</p>
+    # @!attribute last_modified
+    #   <p>The timestamp when the product page was last modified.</p>
+    #   @return [Time]
+    # @!attribute page_title
+    #   <p>The page title.</p>
+    #   @return [String]
+    # @!attribute product_page_arn
+    #   <p>The ARN of the product page.</p>
+    #   @return [String]
+    # @!attribute product_page_id
+    #   <p>The product page identifier.</p>
+    #   @return [String]
+    class ProductPageSummaryNoBody < Struct.new(
+      nil,
+      :last_modified,
+      :page_title,
+      :product_page_arn,
+      :product_page_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a product REST endpoint page, without providing the page content.</p>
+    # @!attribute endpoint
+    #   <p>The endpoint of the product REST endpoint page.</p>
+    #   @return [String]
+    # @!attribute last_modified
+    #   <p>The timestamp when the product REST endpoint page was last modified.</p>
+    #   @return [Time]
+    # @!attribute operation_name
+    #   <p>The operation name of the product REST endpoint.</p>
+    #   @return [String]
+    # @!attribute product_rest_endpoint_page_arn
+    #   <p>The ARN of the product REST endpoint page.</p>
+    #   @return [String]
+    # @!attribute product_rest_endpoint_page_id
+    #   <p>The product REST endpoint page identifier.</p>
+    #   @return [String]
+    # @!attribute rest_endpoint_identifier
+    #   <p>The REST endpoint identifier.</p>
+    #   @return [Types::RestEndpointIdentifier]
+    # @!attribute status
+    #   <p>The status.</p>
+    #   @return [String]
+    # @!attribute status_exception
+    #   <p>The status exception information.</p>
+    #   @return [Types::StatusException]
+    # @!attribute try_it_state
+    #   <p>The try it state of a product REST endpoint page.</p>
+    #   @return [String]
+    class ProductRestEndpointPageSummaryNoBody < Struct.new(
+      nil,
+      :endpoint,
+      :last_modified,
+      :operation_name,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the post operation.</p>
+    # @!attribute description
+    #   <p>The description of the portal. When the portal is published, this description becomes the last published description.</p>
+    #   @return [String]
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    class PublishPortalRequest < Struct.new(
+      nil,
+      :description,
+      :portal_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class PublishPortalResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the put operation.</p>
+    # @!attribute policy_document
+    #   <p>The product sharing policy.</p>
+    #   @return [String]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    class PutPortalProductSharingPolicyRequest < Struct.new(
+      nil,
+      :policy_document,
+      :portal_product_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class PutPortalProductSharingPolicyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3547,6 +4803,18 @@ module Aws::ApiGatewayV2
       nil,
       :api_id,
       :stage_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The REST API endpoint identifier.</p>
+    # @!attribute identifier_parts
+    #   <p>The identifier parts of the REST endpoint identifier.</p>
+    #   @return [Types::IdentifierParts]
+    class RestEndpointIdentifier < Struct.new(
+      nil,
+      :identifier_parts,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3784,6 +5052,22 @@ module Aws::ApiGatewayV2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the section name and list of product REST endpoints for a product.</p>
+    # @!attribute product_rest_endpoint_page_arns
+    #   <p>The ARNs of the product REST endpoint pages in a portal product.</p>
+    #   @return [Array<String>]
+    # @!attribute section_name
+    #   <p>The section name.</p>
+    #   @return [String]
+    class Section < Struct.new(
+      nil,
+      :product_rest_endpoint_page_arns,
+      :section_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents an API stage.</p>
     # @!attribute access_log_settings
     #   <p>Settings for logging access in this stage.</p>
@@ -3843,6 +5127,22 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a StatusException.</p>
+    # @!attribute exception
+    #   <p>The exception.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The error message.</p>
+    #   @return [String]
+    class StatusException < Struct.new(
+      nil,
+      :exception,
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4303,7 +5603,7 @@ module Aws::ApiGatewayV2
     #   <p>The name of the DomainName resource.</p>
     #   @return [String]
     # @!attribute domain_name_arn
-    #   <p>Represents an Amazon Resource Name (ARN).</p>
+    #   <p>The ARN of the DomainName resource.</p>
     #   @return [String]
     # @!attribute domain_name_configurations
     #   <p>The domain name configurations.</p>
@@ -4373,9 +5673,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     # @!attribute request_parameters
     #   <p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>
-    #             , where 
+    #             , where
     #               <replaceable>{location}</replaceable>
-    #              is querystring, path, or header; and 
+    #              is querystring, path, or header; and
     #               <replaceable>{name}</replaceable>
     #              must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>.</p>
     #   @return [Hash<String, String>]
@@ -4440,9 +5740,9 @@ module Aws::ApiGatewayV2
     #   <p>A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.<replaceable>{name}</replaceable>
     #                  , where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.<replaceable>{name}</replaceable>
     #                   or integration.response.body.<replaceable>{JSON-expression}</replaceable>
-    #                  , where 
+    #                  , where
     #                     <replaceable>{name}</replaceable>
-    #                   is a valid and unique response header name and 
+    #                   is a valid and unique response header name and
     #                     <replaceable>{JSON-expression}</replaceable>
     #                   is a valid JSON expression without the $ prefix.</p>
     #   @return [Hash<String, String>]
@@ -4542,9 +5842,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     # @!attribute request_parameters
     #   <p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>
-    #             , where 
+    #             , where
     #               <replaceable>{location}</replaceable>
-    #              is querystring, path, or header; and 
+    #              is querystring, path, or header; and
     #               <replaceable>{name}</replaceable>
     #              must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>.</p>
     #   @return [Hash<String, String>]
@@ -4644,6 +5944,270 @@ module Aws::ApiGatewayV2
       :model_id,
       :name,
       :schema,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the patch operation.</p>
+    # @!attribute description
+    #   <p>The description.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The displayName.</p>
+    #   @return [String]
+    # @!attribute display_order
+    #   <p>The display order.</p>
+    #   @return [Types::DisplayOrder]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    class UpdatePortalProductRequest < Struct.new(
+      nil,
+      :description,
+      :display_name,
+      :display_order,
+      :portal_product_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute description
+    #   <p>The description of the portal product.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The display name of a portal product.</p>
+    #   @return [String]
+    # @!attribute display_order
+    #   <p>The display order that the portal products will appear in a portal.</p>
+    #   @return [Types::DisplayOrder]
+    # @!attribute last_modified
+    #   <p>The timestamp when the portal product was last modified.</p>
+    #   @return [Time]
+    # @!attribute portal_product_arn
+    #   <p>The ARN of the portal product.</p>
+    #   @return [String]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class UpdatePortalProductResponse < Struct.new(
+      nil,
+      :description,
+      :display_name,
+      :display_order,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the patch operation.</p>
+    # @!attribute authorization
+    #   <p>The authorization of the portal.</p>
+    #   @return [Types::Authorization]
+    # @!attribute endpoint_configuration
+    #   <p>Represents an endpoint configuration.</p>
+    #   @return [Types::EndpointConfigurationRequest]
+    # @!attribute included_portal_product_arns
+    #   <p>The ARNs of the portal products included in the portal.</p>
+    #   @return [Array<String>]
+    # @!attribute logo_uri
+    #   <p>The logo URI.</p>
+    #   @return [String]
+    # @!attribute portal_content
+    #   <p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>
+    #   @return [Types::PortalContent]
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    # @!attribute rum_app_monitor_name
+    #   <p>The CloudWatch RUM app monitor name.</p>
+    #   @return [String]
+    class UpdatePortalRequest < Struct.new(
+      nil,
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :logo_uri,
+      :portal_content,
+      :portal_id,
+      :rum_app_monitor_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute authorization
+    #   <p>The authorization for the portal.</p>
+    #   @return [Types::Authorization]
+    # @!attribute endpoint_configuration
+    #   <p>The endpoint configuration.</p>
+    #   @return [Types::EndpointConfigurationResponse]
+    # @!attribute included_portal_product_arns
+    #   <p>The ARNs of the portal products included in the portal.</p>
+    #   @return [Array<String>]
+    # @!attribute last_modified
+    #   <p>The timestamp when the portal was last modified.</p>
+    #   @return [Time]
+    # @!attribute last_published
+    #   <p>The timestamp when the portal was last published.</p>
+    #   @return [Time]
+    # @!attribute last_published_description
+    #   <p>The description associated with the last time the portal was published.</p>
+    #   @return [String]
+    # @!attribute portal_arn
+    #   <p>The ARN of the portal.</p>
+    #   @return [String]
+    # @!attribute portal_content
+    #   <p>Contains the content that is visible to portal consumers including the themes, display names, and description.</p>
+    #   @return [Types::PortalContent]
+    # @!attribute portal_id
+    #   <p>The portal identifier.</p>
+    #   @return [String]
+    # @!attribute preview
+    #   <p>Represents the preview endpoint and the any possible error messages during preview generation.</p>
+    #   @return [Types::Preview]
+    # @!attribute publish_status
+    #   <p>The publishStatus.</p>
+    #   @return [String]
+    # @!attribute rum_app_monitor_name
+    #   <p>The CloudWatch RUM app monitor name.</p>
+    #   @return [String]
+    # @!attribute status_exception
+    #   <p>The status exception information.</p>
+    #   @return [Types::StatusException]
+    # @!attribute tags
+    #   <p>The collection of tags. Each tag element is associated with a given resource.</p>
+    #   @return [Hash<String, String>]
+    class UpdatePortalResponse < Struct.new(
+      nil,
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :preview,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the patch operation.</p>
+    # @!attribute display_content
+    #   <p>The content of the product page.</p>
+    #   @return [Types::DisplayContent]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute product_page_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    class UpdateProductPageRequest < Struct.new(
+      nil,
+      :display_content,
+      :portal_product_id,
+      :product_page_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_content
+    #   <p>The content of the product page.</p>
+    #   @return [Types::DisplayContent]
+    # @!attribute last_modified
+    #   <p>The timestamp when the product page was last modified.</p>
+    #   @return [Time]
+    # @!attribute product_page_arn
+    #   <p>The ARN of the product page.</p>
+    #   @return [String]
+    # @!attribute product_page_id
+    #   <p>The product page identifier.</p>
+    #   @return [String]
+    class UpdateProductPageResponse < Struct.new(
+      nil,
+      :display_content,
+      :last_modified,
+      :product_page_arn,
+      :product_page_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request body for the patch operation.</p>
+    # @!attribute display_content
+    #   <p>The display content.</p>
+    #   @return [Types::EndpointDisplayContent]
+    # @!attribute portal_product_id
+    #   <p>The portal product identifier.</p>
+    #   @return [String]
+    # @!attribute product_rest_endpoint_page_id
+    #   <p>The product REST endpoint identifier.</p>
+    #   @return [String]
+    # @!attribute try_it_state
+    #   <p>The try it state of a product REST endpoint page.</p>
+    #   @return [String]
+    class UpdateProductRestEndpointPageRequest < Struct.new(
+      nil,
+      :display_content,
+      :portal_product_id,
+      :product_rest_endpoint_page_id,
+      :try_it_state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_content
+    #   <p>The content of the product REST endpoint page.</p>
+    #   @return [Types::EndpointDisplayContentResponse]
+    # @!attribute last_modified
+    #   <p>The timestamp when the product REST endpoint page was last modified.</p>
+    #   @return [Time]
+    # @!attribute product_rest_endpoint_page_arn
+    #   <p>The ARN of the product REST endpoint page.</p>
+    #   @return [String]
+    # @!attribute product_rest_endpoint_page_id
+    #   <p>The product REST endpoint page identifier.</p>
+    #   @return [String]
+    # @!attribute rest_endpoint_identifier
+    #   <p>The REST endpoint identifier.</p>
+    #   @return [Types::RestEndpointIdentifier]
+    # @!attribute status
+    #   <p>The status.</p>
+    #   @return [String]
+    # @!attribute status_exception
+    #   <p>The status exception information.</p>
+    #   @return [Types::StatusException]
+    # @!attribute try_it_state
+    #   <p>The try it state of a product REST endpoint page.</p>
+    #   @return [String]
+    class UpdateProductRestEndpointPageResponse < Struct.new(
+      nil,
+      :display_content,
+      :last_modified,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

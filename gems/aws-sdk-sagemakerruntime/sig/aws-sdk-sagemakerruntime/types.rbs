@@ -44,8 +44,11 @@ module Aws::SageMakerRuntime
         ?custom_attributes: String,
         ?inference_id: String,
         ?input_location: String,
+        ?s3_output_path_extension: String,
+        ?filename: String,
         ?request_ttl_seconds: Integer,
         ?invocation_timeout_seconds: Integer,
+        ?body: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -55,8 +58,11 @@ module Aws::SageMakerRuntime
       attr_accessor custom_attributes: String?
       attr_accessor inference_id: String?
       attr_accessor input_location: String?
+      attr_accessor s3_output_path_extension: String?
+      attr_accessor filename: String?
       attr_accessor request_ttl_seconds: Integer?
       attr_accessor invocation_timeout_seconds: Integer?
+      attr_accessor body: String?
     end
 
     class InvokeEndpointAsyncOutput
@@ -90,6 +96,7 @@ module Aws::SageMakerRuntime
         ?enable_explanations: String,
         ?inference_component_name: String,
         ?session_id: String,
+        ?prefix_aware_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -105,6 +112,7 @@ module Aws::SageMakerRuntime
       attr_accessor enable_explanations: String?
       attr_accessor inference_component_name: String?
       attr_accessor session_id: String?
+      attr_accessor prefix_aware_id: String?
     end
 
     class InvokeEndpointOutput
@@ -142,6 +150,7 @@ module Aws::SageMakerRuntime
         ?inference_id: String,
         ?inference_component_name: String,
         ?session_id: String,
+        ?prefix_aware_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -155,6 +164,7 @@ module Aws::SageMakerRuntime
       attr_accessor inference_id: String?
       attr_accessor inference_component_name: String?
       attr_accessor session_id: String?
+      attr_accessor prefix_aware_id: String?
     end
 
     class InvokeEndpointWithResponseStreamOutput

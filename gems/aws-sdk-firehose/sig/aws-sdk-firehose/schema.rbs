@@ -3,6 +3,7 @@ module Aws::Firehose
     include Smithy::Schema::Shapes
 
     AWSKMSKeyARN: StringShape
+    AWSKMSKeyARNForSSE: StringShape
     AmazonOpenSearchServerlessBufferingHints: StructureShape
     AmazonOpenSearchServerlessBufferingIntervalInSeconds: IntegerShape
     AmazonOpenSearchServerlessBufferingSizeInMBs: IntegerShape

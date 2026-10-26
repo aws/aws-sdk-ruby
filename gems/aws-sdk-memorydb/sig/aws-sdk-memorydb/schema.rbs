@@ -74,6 +74,10 @@ module Aws::MemoryDB
     DescribeEventsResponse: StructureShape
     DescribeMultiRegionClustersRequest: StructureShape
     DescribeMultiRegionClustersResponse: StructureShape
+    DescribeMultiRegionParameterGroupsRequest: StructureShape
+    DescribeMultiRegionParameterGroupsResponse: StructureShape
+    DescribeMultiRegionParametersRequest: StructureShape
+    DescribeMultiRegionParametersResponse: StructureShape
     DescribeParameterGroupsRequest: StructureShape
     DescribeParameterGroupsResponse: StructureShape
     DescribeParametersRequest: StructureShape
@@ -136,7 +140,11 @@ module Aws::MemoryDB
     MultiRegionClusterAlreadyExistsFault: StructureShape
     MultiRegionClusterList: ListShape
     MultiRegionClusterNotFoundFault: StructureShape
+    MultiRegionParameter: StructureShape
+    MultiRegionParameterGroup: StructureShape
+    MultiRegionParameterGroupList: ListShape
     MultiRegionParameterGroupNotFoundFault: StructureShape
+    MultiRegionParametersList: ListShape
     NetworkType: EnumShape
     NetworkTypeList: ListShape
     NoOperationFault: StructureShape

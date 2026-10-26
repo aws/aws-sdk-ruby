@@ -6,8 +6,7 @@ module Aws::InspectorScan
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>You do not have sufficient access to perform this action.
-    #   </p>
+    # <p>You do not have sufficient access to perform this action. </p>
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
@@ -18,9 +17,7 @@ module Aws::InspectorScan
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request processing has failed because of an unknown error, exception or failure.
-    #    
-    #   </p>
+    # <p>The request processing has failed because of an unknown error, exception or failure. </p>
     # @!attribute message
     #   @return [String]
     # @!attribute reason
@@ -40,7 +37,7 @@ module Aws::InspectorScan
     end
 
     # @!attribute sbom
-    #   <p>The JSON file for the SBOM you want to scan. The SBOM must be in CycloneDX 1.5 format.</p>
+    #   <p>The JSON file for the SBOM you want to scan. The SBOM must be in CycloneDX 1.5 format. This format limits you to passing 2000 components before throwing a <code>ValidException</code> error.</p>
     #   @return [JSON]
     # @!attribute output_format
     #   <p>The output format for the vulnerability report.</p>
@@ -65,9 +62,7 @@ module Aws::InspectorScan
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request was denied due to request throttling.
-    #    
-    #   </p>
+    # <p>The request was denied due to request throttling. </p>
     # @!attribute message
     #   @return [String]
     # @!attribute retry_after_seconds
@@ -101,16 +96,12 @@ module Aws::InspectorScan
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request has failed validation due to missing required fields or having invalid inputs.
-    #    </p>
+    # <p>The request has failed validation due to missing required fields or having invalid inputs. </p>
     # @!attribute name
-    #   <p>The name of the validation exception.
-    #      
-    #     </p>
+    #   <p>The name of the validation exception. </p>
     #   @return [String]
     # @!attribute message
-    #   <p>The validation exception message.
-    #     </p>
+    #   <p>The validation exception message. </p>
     #   @return [String]
     class ValidationExceptionField < Struct.new(
       nil,

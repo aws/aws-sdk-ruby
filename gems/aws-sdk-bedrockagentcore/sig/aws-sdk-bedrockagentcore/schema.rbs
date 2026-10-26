@@ -2,19 +2,68 @@ module Aws::BedrockAgentCore
   module Schema
     include Smithy::Schema::Shapes
 
+    A2aDescriptor: StructureShape
+    ABTestArn: StringShape
+    ABTestDescription: StringShape
+    ABTestEvaluationConfig: UnionShape
+    ABTestExecutionStatus: EnumShape
+    ABTestId: StringShape
+    ABTestName: StringShape
+    ABTestResults: StructureShape
+    ABTestStatus: EnumShape
+    ABTestSummary: StructureShape
+    ABTestSummaryList: ListShape
     AccessDeniedException: StructureShape
     AccessTokenType: StringShape
     ActorId: StringShape
     ActorSummary: StructureShape
     ActorSummaryList: ListShape
+    AffectedSession: StructureShape
+    AffectedSessionList: ListShape
+    AgentCard: DocumentShape
+    AgentCardDefinition: StructureShape
+    AgentSkillsDescriptor: StructureShape
+    AgentTracesConfig: UnionShape
+    Amount: StructureShape
+    ApiKeyArn: StringShape
     ApiKeyType: StringShape
+    AudienceType: StringShape
+    AudiencesListType: ListShape
+    AuthorizationUrlType: StringShape
     AutomationStream: StructureShape
     AutomationStreamStatus: EnumShape
     AutomationStreamUpdate: StructureShape
+    AvailableLimits: StructureShape
+    BasicAuth: StructureShape
+    BatchCreateMemoryRecordsInput: StructureShape
+    BatchCreateMemoryRecordsOutput: StructureShape
+    BatchDeleteMemoryRecordsInput: StructureShape
+    BatchDeleteMemoryRecordsOutput: StructureShape
+    BatchEvaluationArn: StringShape
+    BatchEvaluationDescription: StringShape
+    BatchEvaluationId: StringShape
+    BatchEvaluationName: StringShape
+    BatchEvaluationStatus: EnumShape
+    BatchEvaluationSummary: StructureShape
+    BatchEvaluationSummaryList: ListShape
+    BatchEvaluationTraceConfig: StructureShape
+    BatchUpdateMemoryRecordsInput: StructureShape
+    BatchUpdateMemoryRecordsOutput: StructureShape
+    BlockchainChainId: EnumShape
     Body: BlobShape
     Branch: StructureShape
     BranchFilter: StructureShape
     BranchName: StringShape
+    BrowserAction: UnionShape
+    BrowserActionResult: UnionShape
+    BrowserActionStatus: EnumShape
+    BrowserEnterprisePolicies: ListShape
+    BrowserEnterprisePolicy: StructureShape
+    BrowserEnterprisePolicyType: EnumShape
+    BrowserExtension: StructureShape
+    BrowserExtensions: ListShape
+    BrowserProfileConfiguration: StructureShape
+    BrowserProfileId: StringShape
     BrowserSessionId: StringShape
     BrowserSessionStatus: EnumShape
     BrowserSessionStream: StructureShape
@@ -22,7 +71,21 @@ module Aws::BedrockAgentCore
     BrowserSessionSummary: StructureShape
     BrowserSessionTimeout: IntegerShape
     BrowserStreamEndpoint: StringShape
+    CapacityProviderArn: StringShape
+    CapacityProviderId: StringShape
+    CapacityProviderSessionStatus: EnumShape
+    Certificate: StructureShape
+    CertificateLocation: UnionShape
+    Certificates: ListShape
     ClientToken: StringShape
+    CloudWatchFilterConfig: StructureShape
+    CloudWatchLogsFilter: StructureShape
+    CloudWatchLogsFilterList: ListShape
+    CloudWatchLogsFilterOperator: EnumShape
+    CloudWatchLogsRule: StructureShape
+    CloudWatchLogsSource: StructureShape
+    CloudWatchLogsTraceConfig: StructureShape
+    CloudWatchOutputConfig: StructureShape
     CodeInterpreterResult: StructureShape
     CodeInterpreterSessionId: StringShape
     CodeInterpreterSessionStatus: EnumShape
@@ -30,28 +93,146 @@ module Aws::BedrockAgentCore
     CodeInterpreterSessionSummary: StructureShape
     CodeInterpreterSessionTimeout: IntegerShape
     CodeInterpreterStreamOutput: UnionShape
+    CoinbaseCdpPaymentJwtTokenType: StringShape
+    CoinbaseCdpPaymentRequestBodyType: StringShape
+    CoinbaseCdpTokenRequestInput: StructureShape
+    CoinbaseCdpTokenResponseOutput: StructureShape
+    CommandExecutionStatus: EnumShape
+    CompleteResourceTokenAuthRequest: StructureShape
+    CompleteResourceTokenAuthResponse: StructureShape
+    ConfidenceInterval: StructureShape
+    ConfigurationBundleArn: StringShape
+    ConfigurationBundleRef: StructureShape
+    ConfigurationBundleToolEntry: StructureShape
+    ConfigurationBundleToolEntryList: ListShape
+    ConfigurationBundleVersion: StringShape
+    ConfigurationBundleVersionId: StringShape
     ConflictException: StructureShape
     Content: UnionShape
     ContentBlock: StructureShape
     ContentBlockList: ListShape
     ContentBlockType: EnumShape
+    ContentDeltaEvent: StructureShape
+    ContentSource: UnionShape
+    ContentStartEvent: StructureShape
+    ContentStopEvent: StructureShape
+    Context: UnionShape
+    ControlStats: StructureShape
     Conversational: StructureShape
+    CreateABTestRequest: StructureShape
+    CreateABTestResponse: StructureShape
     CreateEventInput: StructureShape
     CreateEventOutput: StructureShape
+    CreatePaymentInstrumentRequest: StructureShape
+    CreatePaymentInstrumentResponse: StructureShape
+    CreatePaymentSessionRequest: StructureShape
+    CreatePaymentSessionResponse: StructureShape
     CredentialProviderName: StringShape
+    CryptoWalletNetwork: EnumShape
+    CryptoX402PaymentInput: StructureShape
+    CryptoX402PaymentOutput: StructureShape
+    Currency: EnumShape
+    CustomDescriptor: StructureShape
     CustomRequestKeyType: StringShape
     CustomRequestParametersType: MapShape
     CustomRequestValueType: StringShape
+    DataSourceConfig: UnionShape
     DateTimestamp: TimestampShape
+    DeleteABTestRequest: StructureShape
+    DeleteABTestResponse: StructureShape
+    DeleteBatchEvaluationRequest: StructureShape
+    DeleteBatchEvaluationResponse: StructureShape
+    DeleteCapacityProviderSessionRequest: StructureShape
+    DeleteCapacityProviderSessionResponse: StructureShape
     DeleteEventInput: StructureShape
     DeleteEventOutput: StructureShape
     DeleteMemoryRecordInput: StructureShape
     DeleteMemoryRecordOutput: StructureShape
-    Document: DocumentShape
+    DeletePaymentInstrumentRequest: StructureShape
+    DeletePaymentInstrumentResponse: StructureShape
+    DeletePaymentSessionRequest: StructureShape
+    DeletePaymentSessionResponse: StructureShape
+    DeleteRecommendationRequest: StructureShape
+    DeleteRecommendationResponse: StructureShape
+    Description: StringShape
+    DescriptorType: EnumShape
+    Descriptors: StructureShape
+    DomainPattern: StringShape
+    DomainPatterns: ListShape
+    DuplicateIdException: StructureShape
+    EfsAccessPointArn: StringShape
+    EfsConfiguration: StructureShape
+    EfsFileSystemArn: StringShape
+    Email: StringShape
+    EmbeddedCryptoWallet: StructureShape
+    ErrorDetailsList: ListShape
+    EvaluateRequest: StructureShape
+    EvaluateResponse: StructureShape
+    EvaluationContent: UnionShape
+    EvaluationContentList: ListShape
+    EvaluationErrorCode: StringShape
+    EvaluationErrorMessage: StringShape
+    EvaluationExpectedTrajectory: StructureShape
+    EvaluationExplanation: StringShape
+    EvaluationInput: UnionShape
+    EvaluationJobResults: StructureShape
+    EvaluationMetadata: UnionShape
+    EvaluationReferenceInput: StructureShape
+    EvaluationReferenceInputs: ListShape
+    EvaluationResultContent: StructureShape
+    EvaluationResults: ListShape
+    EvaluationStringList: ListShape
+    EvaluationTarget: UnionShape
+    EvaluationToolName: StringShape
+    EvaluationToolNames: ListShape
+    Evaluator: StructureShape
+    EvaluatorArn: StringShape
+    EvaluatorId: StringShape
+    EvaluatorList: ListShape
+    EvaluatorMetric: StructureShape
+    EvaluatorMetricList: ListShape
+    EvaluatorName: StringShape
+    EvaluatorStatistics: StructureShape
+    EvaluatorSummary: StructureShape
+    EvaluatorSummaryList: ListShape
     Event: StructureShape
+    EventFilterCondition: EnumShape
     EventId: StringShape
     EventList: ListShape
+    EventMetadataFilterExpression: StructureShape
+    EventMetadataFilterList: ListShape
+    ExecutionSummaryAffectedSession: StructureShape
+    ExecutionSummaryAffectedSessionList: ListShape
+    ExecutionSummaryCluster: StructureShape
+    ExecutionSummaryClusterList: ListShape
+    ExecutionSummaryClusteringResultContent: StructureShape
+    ExternalProxy: StructureShape
+    ExtractionConfig: StructureShape
+    ExtractionJob: StructureShape
+    ExtractionJobFilterInput: StructureShape
+    ExtractionJobMessages: UnionShape
+    ExtractionJobMetadata: StructureShape
+    ExtractionJobMetadataList: ListShape
+    ExtractionJobStatus: EnumShape
+    ExtractionMode: EnumShape
+    FailureAnalysisResultContent: StructureShape
+    FailureCategoryCluster: StructureShape
+    FailureCategoryClusterList: ListShape
+    FailureSpanDetail: StructureShape
+    FailureSpanDetailList: ListShape
+    FailureSubCategoryCluster: StructureShape
+    FailureSubCategoryClusterList: ListShape
     FilterInput: StructureShape
+    FilterStringValue: StringShape
+    FilterValue: UnionShape
+    GatewayArn: StringShape
+    GatewayFilter: StructureShape
+    GetABTestRequest: StructureShape
+    GetABTestResponse: StructureShape
+    GetAgentCardRequest: StructureShape
+    GetAgentCardResponse: StructureShape
+    GetBatchEvaluationRequest: StructureShape
+    GetBatchEvaluationResponse: StructureShape
     GetBrowserSessionRequest: StructureShape
     GetBrowserSessionResponse: StructureShape
     GetCodeInterpreterSessionRequest: StructureShape
@@ -60,108 +241,516 @@ module Aws::BedrockAgentCore
     GetEventOutput: StructureShape
     GetMemoryRecordInput: StructureShape
     GetMemoryRecordOutput: StructureShape
+    GetPaymentInstrumentBalanceRequest: StructureShape
+    GetPaymentInstrumentBalanceResponse: StructureShape
+    GetPaymentInstrumentRequest: StructureShape
+    GetPaymentInstrumentResponse: StructureShape
+    GetPaymentSessionRequest: StructureShape
+    GetPaymentSessionResponse: StructureShape
+    GetRecommendationRequest: StructureShape
+    GetRecommendationResponse: StructureShape
     GetResourceApiKeyRequest: StructureShape
     GetResourceApiKeyResponse: StructureShape
     GetResourceOauth2TokenRequest: StructureShape
     GetResourceOauth2TokenResponse: StructureShape
+    GetResourcePaymentTokenRequest: StructureShape
+    GetResourcePaymentTokenResponse: StructureShape
     GetWorkloadAccessTokenForJWTRequest: StructureShape
     GetWorkloadAccessTokenForJWTResponse: StructureShape
     GetWorkloadAccessTokenForUserIdRequest: StructureShape
     GetWorkloadAccessTokenForUserIdResponse: StructureShape
     GetWorkloadAccessTokenRequest: StructureShape
     GetWorkloadAccessTokenResponse: StructureShape
+    GroundTruthSource: UnionShape
+    GroundTruthTurn: StructureShape
+    GroundTruthTurnInput: UnionShape
+    GroundTruthTurnList: ListShape
+    HarnessAgentCoreBrowserConfig: StructureShape
+    HarnessAgentCoreCodeInterpreterConfig: StructureShape
+    HarnessAgentCoreGatewayConfig: StructureShape
+    HarnessAllowedTool: StringShape
+    HarnessAllowedTools: ListShape
+    HarnessArn: StringShape
+    HarnessAwsSkillPath: StringShape
+    HarnessAwsSkillPaths: ListShape
+    HarnessBedrockApiFormat: EnumShape
+    HarnessBedrockModelConfig: StructureShape
+    HarnessBrowserArn: StringShape
+    HarnessCodeInterpreterArn: StringShape
+    HarnessContentBlock: UnionShape
+    HarnessContentBlockDelta: UnionShape
+    HarnessContentBlockDeltaEvent: StructureShape
+    HarnessContentBlockStart: UnionShape
+    HarnessContentBlockStartEvent: StructureShape
+    HarnessContentBlockStopEvent: StructureShape
+    HarnessContentBlocks: ListShape
+    HarnessConversationRole: EnumShape
+    HarnessEndpointName: StringShape
+    HarnessGatewayOutboundAuth: UnionShape
+    HarnessGeminiModelConfig: StructureShape
+    HarnessHookDecision: EnumShape
+    HarnessHookEvent: StructureShape
+    HarnessHookEventId: StringShape
+    HarnessHookEventType: EnumShape
+    HarnessHookName: StringShape
+    HarnessInlineFunctionConfig: StructureShape
+    HarnessInlineFunctionDescription: StringShape
+    HarnessLiteLlmApiBase: StringShape
+    HarnessLiteLlmModelConfig: StructureShape
+    HarnessMessage: StructureShape
+    HarnessMessageStartEvent: StructureShape
+    HarnessMessageStopEvent: StructureShape
+    HarnessMessages: ListShape
+    HarnessMetadataEvent: StructureShape
+    HarnessModelConfiguration: UnionShape
+    HarnessOpenAiApiBase: StringShape
+    HarnessOpenAiApiFormat: EnumShape
+    HarnessOpenAiModelConfig: StructureShape
+    HarnessReasoningContentBlock: UnionShape
+    HarnessReasoningContentBlockDelta: UnionShape
+    HarnessReasoningTextBlock: StructureShape
+    HarnessRemoteMcpConfig: StructureShape
+    HarnessRemoteMcpUrl: StringShape
+    HarnessSkill: UnionShape
+    HarnessSkillAwsSkillsSource: StructureShape
+    HarnessSkillGitAuth: StructureShape
+    HarnessSkillGitSource: StructureShape
+    HarnessSkillGitUrl: StringShape
+    HarnessSkillPath: StringShape
+    HarnessSkillS3Source: StructureShape
+    HarnessSkillS3Uri: StringShape
+    HarnessSkills: ListShape
+    HarnessStopReason: EnumShape
+    HarnessStreamMetrics: StructureShape
+    HarnessSystemContentBlock: UnionShape
+    HarnessSystemPrompt: ListShape
+    HarnessTokenUsage: StructureShape
+    HarnessTool: StructureShape
+    HarnessToolConfiguration: UnionShape
+    HarnessToolName: StringShape
+    HarnessToolResultBlock: StructureShape
+    HarnessToolResultBlockDelta: UnionShape
+    HarnessToolResultBlockStart: StructureShape
+    HarnessToolResultBlocksDelta: ListShape
+    HarnessToolResultContentBlock: UnionShape
+    HarnessToolResultContentBlocks: ListShape
+    HarnessToolResultMetadataBlockDelta: StructureShape
+    HarnessToolType: EnumShape
+    HarnessToolUseBlock: StructureShape
+    HarnessToolUseBlockDelta: StructureShape
+    HarnessToolUseBlockStart: StructureShape
+    HarnessToolUseId: StringShape
+    HarnessToolUseStatus: EnumShape
+    HarnessToolUseType: EnumShape
+    HarnessTools: ListShape
+    HostName: StringShape
+    HttpHeaderKey: StringShape
+    HttpHeaderValue: StringShape
+    HttpHeadersMap: MapShape
     HttpResponseCode: IntegerShape
+    IgnoredReferenceInputField: StringShape
+    IgnoredReferenceInputFields: ListShape
+    IngestDataInput: StructureShape
+    IngestDataOutput: StructureShape
+    IngestPayloadList: ListShape
+    IngestPayloadType: UnionShape
+    InlineContent: StringShape
+    InlineGroundTruth: StructureShape
+    InlineMemoryContent: StructureShape
     InputContentBlock: StructureShape
     InputContentBlockList: ListShape
+    Insight: StructureShape
+    InsightId: StringShape
+    InsightList: ListShape
+    InsightsFailureCategory: EnumShape
+    InsightsFailureSignal: StructureShape
+    InsightsFailureSignalList: ListShape
+    InstrumentBalanceToken: EnumShape
     InternalServerException: StructureShape
     InvalidInputException: StructureShape
+    InvokeAgentRuntimeCommandRequest: StructureShape
+    InvokeAgentRuntimeCommandRequestBody: StructureShape
+    InvokeAgentRuntimeCommandResponse: StructureShape
+    InvokeAgentRuntimeCommandStreamOutput: UnionShape
     InvokeAgentRuntimeRequest: StructureShape
     InvokeAgentRuntimeResponse: StructureShape
+    InvokeBrowserRequest: StructureShape
+    InvokeBrowserResponse: StructureShape
     InvokeCodeInterpreterRequest: StructureShape
     InvokeCodeInterpreterResponse: StructureShape
+    InvokeHarnessRequest: StructureShape
+    InvokeHarnessResponse: StructureShape
+    InvokeHarnessStreamOutput: UnionShape
+    JwtKeyId: StringShape
+    KeyList: ListShape
+    KeyPressArguments: StructureShape
+    KeyPressResult: StructureShape
+    KeyShortcutArguments: StructureShape
+    KeyShortcutResult: StructureShape
+    KeyTypeArguments: StructureShape
+    KeyTypeResult: StructureShape
+    KmsKeyArn: StringShape
+    LanguageRuntime: EnumShape
+    LeftExpression: UnionShape
+    LinkedAccount: UnionShape
+    LinkedAccountDeveloperJwt: StructureShape
+    LinkedAccountEmail: StructureShape
+    LinkedAccountList: ListShape
+    LinkedAccountOAuth2: UnionShape
+    LinkedAccountSms: StructureShape
+    ListABTestsRequest: StructureShape
+    ListABTestsResponse: StructureShape
     ListActorsInput: StructureShape
     ListActorsOutput: StructureShape
+    ListBatchEvaluationsRequest: StructureShape
+    ListBatchEvaluationsResponse: StructureShape
     ListBrowserSessionsRequest: StructureShape
     ListBrowserSessionsResponse: StructureShape
     ListCodeInterpreterSessionsRequest: StructureShape
     ListCodeInterpreterSessionsResponse: StructureShape
     ListEventsInput: StructureShape
     ListEventsOutput: StructureShape
+    ListMemoryExtractionJobsInput: StructureShape
+    ListMemoryExtractionJobsOutput: StructureShape
     ListMemoryRecordsInput: StructureShape
     ListMemoryRecordsOutput: StructureShape
+    ListPaymentInstrumentsRequest: StructureShape
+    ListPaymentInstrumentsResponse: StructureShape
+    ListPaymentSessionsRequest: StructureShape
+    ListPaymentSessionsResponse: StructureShape
+    ListRecommendationsRequest: StructureShape
+    ListRecommendationsResponse: StructureShape
     ListSessionsInput: StructureShape
     ListSessionsOutput: StructureShape
     LiveViewStream: StructureShape
+    LogGroupArnList: ListShape
+    LogGroupName: StringShape
+    LogGroupNameList: ListShape
+    LogGroupNamePrefix: StringShape
+    LogGroupNamePrefixList: ListShape
+    LogStreamName: StringShape
     MaxLenString: StringShape
     MaxResults: IntegerShape
+    MaxTokens: IntegerShape
+    McpDescriptor: StructureShape
     MemoryContent: UnionShape
+    MemoryDocument: DocumentShape
     MemoryId: StringShape
+    MemoryJsonData: StructureShape
+    MemoryJsonDataContent: DocumentShape
+    MemoryMetadataFilterExpression: StructureShape
+    MemoryMetadataFilterList: ListShape
     MemoryRecord: StructureShape
+    MemoryRecordCreateInput: StructureShape
+    MemoryRecordDeleteInput: StructureShape
     MemoryRecordId: StringShape
+    MemoryRecordLeftExpression: UnionShape
+    MemoryRecordMetadataMap: MapShape
+    MemoryRecordMetadataValue: UnionShape
+    MemoryRecordOperatorType: EnumShape
+    MemoryRecordOutput: StructureShape
+    MemoryRecordRightExpression: UnionShape
+    MemoryRecordStatus: EnumShape
     MemoryRecordSummary: StructureShape
     MemoryRecordSummaryList: ListShape
+    MemoryRecordUpdateInput: StructureShape
+    MemoryRecordsCreateInputList: ListShape
+    MemoryRecordsDeleteInputList: ListShape
+    MemoryRecordsOutputList: ListShape
+    MemoryRecordsUpdateInputList: ListShape
     MemoryStrategyId: StringShape
+    MessageMetadata: StructureShape
+    MessagesList: ListShape
+    MetadataFilterExpression: DocumentShape
+    MetadataKey: StringShape
+    MetadataMap: MapShape
+    MetadataValue: UnionShape
+    MetricsNamespace: StringShape
     MimeType: StringShape
+    ModelId: StringShape
+    MountPath: StringShape
+    MouseButton: EnumShape
+    MouseClickArguments: StructureShape
+    MouseClickResult: StructureShape
+    MouseDragArguments: StructureShape
+    MouseDragResult: StructureShape
+    MouseMoveArguments: StructureShape
+    MouseMoveResult: StructureShape
+    MouseScrollArguments: StructureShape
+    MouseScrollResult: StructureShape
+    MppPaymentCredential: StringShape
+    MppPaymentInput: StructureShape
+    MppPaymentOutput: StructureShape
     Name: StringShape
     Namespace: StringShape
+    NamespaceVariableName: StringShape
+    NamespaceVariableValue: StringShape
+    NamespaceVariablesMap: MapShape
     NamespacesList: ListShape
     NextToken: StringShape
     NonBlankString: StringShape
+    OAuth2Authentication: StructureShape
+    OAuthCredentialProvider: StructureShape
+    OAuthCredentialProviderArn: StringShape
+    OAuthCustomParameters: MapShape
+    OAuthCustomParametersKey: StringShape
+    OAuthCustomParametersValue: StringShape
+    OAuthDefaultReturnUrl: StringShape
+    OAuthGrantType: EnumShape
+    OAuthScope: StringShape
+    OAuthScopes: ListShape
     Oauth2FlowType: EnumShape
+    OnlineEvaluationConfigArn: StringShape
+    OnlineEvaluationConfigSource: StructureShape
+    OnlineEvaluationTraceConfig: StructureShape
+    OperatorType: EnumShape
+    OptionalLogGroupName: StringShape
+    OutputConfig: UnionShape
     PaginationToken: StringShape
+    PathPattern: StringShape
     PayloadType: UnionShape
     PayloadTypeList: ListShape
+    PaymentAgentName: StringShape
+    PaymentConnectorId: StringShape
+    PaymentDocument: DocumentShape
+    PaymentHttpMethodType: EnumShape
+    PaymentInput: UnionShape
+    PaymentInstrument: StructureShape
+    PaymentInstrumentDetails: UnionShape
+    PaymentInstrumentId: StringShape
+    PaymentInstrumentStatus: EnumShape
+    PaymentInstrumentSummary: StructureShape
+    PaymentInstrumentSummaryList: ListShape
+    PaymentInstrumentType: EnumShape
+    PaymentManagerArn: StringShape
+    PaymentOutput: UnionShape
+    PaymentRequestHostType: StringShape
+    PaymentRequestPathType: StringShape
+    PaymentSession: StructureShape
+    PaymentSessionId: StringShape
+    PaymentSessionStatus: EnumShape
+    PaymentSessionSummary: StructureShape
+    PaymentSessionSummaryList: ListShape
+    PaymentStatus: EnumShape
+    PaymentTokenRequestInput: UnionShape
+    PaymentTokenResponseOutput: UnionShape
+    PaymentType: EnumShape
+    PerVariantOnlineEvaluationConfig: StructureShape
+    PerVariantOnlineEvaluationConfigList: ListShape
+    Permit2AllowanceLimit: StringShape
+    PhoneNumber: StringShape
+    ProcessPaymentId: StringShape
+    ProcessPaymentRequest: StructureShape
+    ProcessPaymentResponse: StructureShape
     ProgrammingLanguage: EnumShape
+    Proxies: ListShape
+    Proxy: UnionShape
+    ProxyBypass: StructureShape
+    ProxyConfiguration: StructureShape
+    ProxyCredentials: UnionShape
+    RecommendationArn: StringShape
+    RecommendationConfig: UnionShape
+    RecommendationDescription: StringShape
+    RecommendationErrorCode: StringShape
+    RecommendationErrorMessage: StringShape
+    RecommendationEvaluationConfig: StructureShape
+    RecommendationEvaluatorList: ListShape
+    RecommendationEvaluatorReference: StructureShape
+    RecommendationExplanation: StringShape
+    RecommendationId: StringShape
+    RecommendationName: StringShape
+    RecommendationResult: UnionShape
+    RecommendationResultConfigurationBundle: StructureShape
+    RecommendationStatus: EnumShape
+    RecommendationSummary: StructureShape
+    RecommendationSummaryList: ListShape
+    RecommendationToolName: StringShape
+    RecommendationType: EnumShape
+    RecordExpiryAction: EnumShape
+    RecordExpiryDurationDays: IntegerShape
+    RecordExpirySpecification: UnionShape
+    RegistryArn: StringShape
+    RegistryIdList: ListShape
+    RegistryIdentifier: StringShape
+    RegistryRecordArn: StringShape
+    RegistryRecordId: StringShape
+    RegistryRecordName: StringShape
+    RegistryRecordStatus: EnumShape
+    RegistryRecordSummary: StructureShape
+    RegistryRecordSummaryList: ListShape
+    RegistryRecordVersion: StringShape
+    RequestIdentifier: StringShape
+    RequestUri: StringShape
     ResourceContent: StructureShape
     ResourceContentType: EnumShape
+    ResourceLocation: UnionShape
     ResourceNotFoundException: StructureShape
     ResourceOauth2ReturnUrlType: StringShape
+    ResourceType: StringShape
+    ResourcesListType: ListShape
+    ResponseChunk: StructureShape
     ResponseStream: BlobShape
+    ResultDestination: EnumShape
     RetrieveMemoryRecordsInput: StructureShape
     RetrieveMemoryRecordsOutput: StructureShape
+    RetryableConflictException: StructureShape
+    RightExpression: UnionShape
     Role: EnumShape
+    RoleArn: StringShape
+    RootCauseCluster: StructureShape
+    RootCauseClusterList: ListShape
     RuntimeClientError: StructureShape
+    S3FilesAccessPointArn: StringShape
+    S3FilesConfiguration: StructureShape
+    S3FilesFileSystemArn: StringShape
+    S3Location: StructureShape
+    SaveBrowserSessionProfileRequest: StructureShape
+    SaveBrowserSessionProfileResponse: StructureShape
+    SchemaVersion: StringShape
     ScopeType: StringShape
     ScopesListType: ListShape
+    ScreenshotArguments: StructureShape
+    ScreenshotFormat: EnumShape
+    ScreenshotResult: StructureShape
     SearchCriteria: StructureShape
+    SearchRegistryRecordsRequest: StructureShape
+    SearchRegistryRecordsResponse: StructureShape
+    SecretArn: StringShape
+    SecretsManagerLocation: StructureShape
+    SensitiveJson: DocumentShape
     SensitiveString: StringShape
+    SensitiveText: StringShape
+    ServerDefinition: StructureShape
     ServiceException: StructureShape
+    ServiceName: StringShape
+    ServiceNameList: ListShape
     ServiceQuotaExceededException: StructureShape
+    SessionFilter: StructureShape
+    SessionFilterConfig: StructureShape
     SessionId: StringShape
+    SessionLimits: StructureShape
+    SessionMetadataList: ListShape
+    SessionMetadataShape: StructureShape
+    SessionStatus: EnumShape
     SessionSummary: StructureShape
     SessionSummaryList: ListShape
+    SessionTraceIds: StructureShape
+    SessionTraceIdsList: ListShape
     SessionType: StringShape
+    SkillDefinition: StructureShape
+    SkillMdDefinition: StructureShape
+    Span: DocumentShape
+    SpanContext: StructureShape
+    SpanId: StringShape
+    SpanIds: ListShape
+    Spans: ListShape
+    StartBatchEvaluationRequest: StructureShape
+    StartBatchEvaluationResponse: StructureShape
     StartBrowserSessionRequest: StructureShape
     StartBrowserSessionResponse: StructureShape
     StartCodeInterpreterSessionRequest: StructureShape
     StartCodeInterpreterSessionResponse: StructureShape
+    StartMemoryExtractionJobInput: StructureShape
+    StartMemoryExtractionJobOutput: StructureShape
+    StartRecommendationRequest: StructureShape
+    StartRecommendationResponse: StructureShape
+    State: StringShape
+    StopBatchEvaluationRequest: StructureShape
+    StopBatchEvaluationResponse: StructureShape
     StopBrowserSessionRequest: StructureShape
     StopBrowserSessionResponse: StructureShape
     StopCodeInterpreterSessionRequest: StructureShape
     StopCodeInterpreterSessionResponse: StructureShape
+    StopRuntimeSessionRequest: StructureShape
+    StopRuntimeSessionResponse: StructureShape
     StreamUpdate: UnionShape
     StringList: ListShape
+    StringListMemberValue: StringShape
+    StringMap: MapShape
     StringType: StringShape
+    StringValue: StringShape
+    StringValueList: ListShape
+    StripePrivyAppIdType: StringShape
+    StripePrivyAuthorizationSignatureType: StringShape
+    StripePrivyBasicAuthTokenType: StringShape
+    StripePrivyRequestBodyType: StringShape
+    StripePrivyRequestHostType: StringShape
+    StripePrivyRequestPathType: StringShape
+    StripePrivyTokenRequestInput: StructureShape
+    StripePrivyTokenResponseOutput: StructureShape
+    SubscriptionRequiredException: StructureShape
+    SystemPromptConfig: UnionShape
+    SystemPromptConfigurationBundle: StructureShape
+    SystemPromptRecommendationConfig: StructureShape
+    SystemPromptRecommendationResult: StructureShape
+    SystemPromptText: StringShape
+    TagKey: StringShape
+    TagValue: StringShape
+    TagsMap: MapShape
+    TargetName: StringShape
+    TargetPathList: ListShape
+    TargetRef: StructureShape
     TaskStatus: EnumShape
+    Temperature: FloatShape
     ThrottledException: StructureShape
     ThrottlingException: StructureShape
+    TokenBalance: StructureShape
+    TokenUsage: StructureShape
     ToolArguments: StructureShape
+    ToolDescriptionConfig: UnionShape
+    ToolDescriptionConfigurationBundle: StructureShape
+    ToolDescriptionInput: StructureShape
+    ToolDescriptionList: ListShape
+    ToolDescriptionOutput: StructureShape
+    ToolDescriptionRecommendationConfig: StructureShape
+    ToolDescriptionRecommendationResult: StructureShape
+    ToolDescriptionResultList: ListShape
+    ToolDescriptionSource: UnionShape
+    ToolDescriptionText: StringShape
+    ToolDescriptionTextInput: StructureShape
     ToolName: EnumShape
     ToolResultStructuredContent: StructureShape
+    ToolsDefinition: StructureShape
+    ToolsFileSystemConfiguration: UnionShape
+    ToolsFileSystemConfigurations: ListShape
+    TopK: IntegerShape
+    TopP: FloatShape
+    TraceId: StringShape
+    TraceIdList: ListShape
+    TraceIds: ListShape
     UnauthorizedException: StructureShape
+    UpdateABTestRequest: StructureShape
+    UpdateABTestResponse: StructureShape
     UpdateBrowserStreamRequest: StructureShape
     UpdateBrowserStreamResponse: StructureShape
+    UserId: StringShape
     UserIdType: StringShape
+    UserIdentifier: UnionShape
+    UserIntentAffectedSession: StructureShape
+    UserIntentAffectedSessionList: ListShape
+    UserIntentCluster: StructureShape
+    UserIntentClusterList: ListShape
+    UserIntentClusteringResultContent: StructureShape
+    UserIntentList: ListShape
     UserTokenType: StringShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: EnumShape
+    Variant: StructureShape
+    VariantConfiguration: StructureShape
+    VariantList: ListShape
+    VariantName: StringShape
+    VariantResult: StructureShape
+    VariantResultList: ListShape
+    Version: StringShape
     ViewPort: StructureShape
     ViewPortHeight: IntegerShape
     ViewPortWidth: IntegerShape
     WorkloadIdentityNameType: StringShape
     WorkloadIdentityTokenType: StringShape
+    WwwAuthenticateHeader: StringShape
+    WwwAuthenticateHeaderList: ListShape
 
     AmazonBedrockAgentCore: ServiceShape
   end

@@ -132,6 +132,103 @@ module Aws::SageMakerFeatureStoreRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An entry to write as part of a <code>BatchWriteRecord</code> request.</p>
+    # @!attribute feature_group_name
+    #   <p>The name or Amazon Resource Name (ARN) of the <code>FeatureGroup</code> to write the
+    #            record to.</p>
+    #   @return [String]
+    # @!attribute record
+    #   <p>List of FeatureValues to be inserted. This will be a full over-write.</p>
+    #   @return [Array<Types::FeatureValue>]
+    # @!attribute target_stores
+    #   <p>A list of stores to which you're adding the record. By default, Feature Store adds the
+    #            record to all of the stores that you're using for the
+    #               <code>FeatureGroup</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute ttl_duration
+    #   <p>Time to live duration for this entry, where the record is hard deleted after the
+    #            expiration time is reached; <code>ExpiresAt</code> = <code>EventTime</code> +
+    #               <code>TtlDuration</code>. This overrides the request level
+    #            <code>TtlDuration</code>.</p>
+    #   @return [Types::TtlDuration]
+    class BatchWriteRecordEntry < Struct.new(
+      nil,
+      :feature_group_name,
+      :record,
+      :target_stores,
+      :ttl_duration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The error that has occurred when attempting to write a record in a batch.</p>
+    # @!attribute entry
+    #   <p>The entry that failed to be written.</p>
+    #   @return [Types::BatchWriteRecordEntry]
+    # @!attribute error_code
+    #   <p>The error code for the failed record write.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message for the failed record write.</p>
+    #   @return [String]
+    class BatchWriteRecordError < Struct.new(
+      nil,
+      :entry,
+      :error_code,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute entries
+    #   <p>A list of records to write. Each entry specifies the <code>FeatureGroup</code>, the
+    #            record data, and optionally target stores and a TTL duration.</p>
+    #   @return [Array<Types::BatchWriteRecordEntry>]
+    # @!attribute ttl_duration
+    #   <p>Time to live duration applied to all entries in the batch that do not specify their own
+    #               <code>TtlDuration</code>; <code>ExpiresAt</code> = <code>EventTime</code> +
+    #               <code>TtlDuration</code>. For information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
+    #   @return [Types::TtlDuration]
+    class BatchWriteRecordRequest < Struct.new(
+      nil,
+      :entries,
+      :ttl_duration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute errors
+    #   <p>A list of errors that occurred when writing records in the batch.</p>
+    #   @return [Array<Types::BatchWriteRecordError>]
+    # @!attribute unprocessed_entries
+    #   <p>A list of entries that were not processed. These entries can be retried.</p>
+    #   @return [Array<Types::BatchWriteRecordEntry>]
+    class BatchWriteRecordResponse < Struct.new(
+      nil,
+      :errors,
+      :unprocessed_entries,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The service rejected the update because the provided <code>EventTime</code> is
+    #          older than the record's current <code>EventTime</code>. To persist the update, retrieve
+    #          the record's latest <code>EventTime</code> and resubmit the request with an
+    #             <code>EventTime</code> that is equal to or newer than the current value.</p>
+    # @!attribute message
+    #   @return [String]
+    class ConflictException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute feature_group_name
     #   <p>The name or Amazon Resource Name (ARN) of the feature group to delete the record from.
     #         </p>
@@ -248,6 +345,47 @@ module Aws::SageMakerFeatureStoreRuntime
     end
 
     # @!attribute feature_group_name
+    #   <p>The name or Amazon Resource Name (ARN) of the feature group to list records from.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of record identifiers to return in a single page of results. For the <code>InMemory</code> tier, this value is a hint and not a strict requirement. The response may contain more or fewer results than the specified <code>MaxResults</code>.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A token to resume pagination of <code>ListRecords</code> results.</p>
+    #   @return [String]
+    # @!attribute include_soft_deleted_records
+    #   <p>If set to <code>true</code>, the result includes records that have been soft
+    #            deleted.</p>
+    #   @return [Boolean]
+    class ListRecordsRequest < Struct.new(
+      nil,
+      :feature_group_name,
+      :max_results,
+      :next_token,
+      :include_soft_deleted_records,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute record_identifiers
+    #   <p>A list of record identifier values for the records stored in the
+    #               <code>OnlineStore</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>A token to resume pagination if the response includes more record identifiers than
+    #               <code>MaxResults</code>.</p>
+    #   @return [String]
+    class ListRecordsResponse < Struct.new(
+      nil,
+      :record_identifiers,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute feature_group_name
     #   <p>The name or Amazon Resource Name (ARN) of the feature group that you want to insert the
     #            record into.</p>
     #   @return [String]
@@ -323,6 +461,48 @@ module Aws::SageMakerFeatureStoreRuntime
       nil,
       :unit,
       :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute feature_group_name
+    #   <p>The identifier for the feature group that contains the record to update. You can
+    #            specify one of the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The feature group name.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The feature group Amazon Resource Name (ARN).</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute record_identifier_value_as_string
+    #   <p>The value that uniquely identifies the record in the feature group. This must
+    #            match the value defined by the feature group's record identifier feature.</p>
+    #   @return [String]
+    # @!attribute features
+    #   <p>The feature values to write to the record.</p>
+    #   @return [Array<Types::FeatureValue>]
+    # @!attribute target_stores
+    #   <p>The target stores for the record update. By default, Amazon SageMaker Feature
+    #            Store updates the record in all stores associated with the
+    #               <code>FeatureGroup</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute ttl_duration
+    #   <p>The time-to-live (TTL) duration for the record. Amazon SageMaker Feature Store
+    #            deletes the record when <code>EventTime</code> + <code>TtlDuration</code>
+    #            elapses. If you omit this parameter, the record's existing TTL setting remains
+    #            unchanged. For information about <code>HardDelete</code>, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> operation in the Amazon SageMaker API Reference.</p>
+    #   @return [Types::TtlDuration]
+    class UpdateRecordRequest < Struct.new(
+      nil,
+      :feature_group_name,
+      :record_identifier_value_as_string,
+      :features,
+      :target_stores,
+      :ttl_duration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

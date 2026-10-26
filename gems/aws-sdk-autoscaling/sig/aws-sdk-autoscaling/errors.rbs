@@ -6,6 +6,12 @@ module Aws::AutoScaling
     class AlreadyExistsFault < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class IdempotentCallInProgressFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotentParameterMismatchError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InstanceRefreshInProgressFault < Smithy::Client::ServiceError
       def message: () -> String?
     end

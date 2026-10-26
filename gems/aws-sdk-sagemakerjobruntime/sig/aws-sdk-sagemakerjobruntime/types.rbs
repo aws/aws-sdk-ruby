@@ -1,0 +1,194 @@
+module Aws::SagemakerJobRuntime
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CompleteRolloutRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?trajectory_id: String,
+        ?status: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor trajectory_id: String?
+      attr_accessor status: String?
+      attr_accessor client_token: String?
+    end
+
+    class CompleteRolloutResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module CompletionStatus
+      READY: String
+      FAILED: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServiceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SampleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?trajectory_id: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor trajectory_id: String?
+      attr_accessor body: String?
+    end
+
+    class SampleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor body: String?
+    end
+
+    class SampleWithResponseStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?trajectory_id: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor trajectory_id: String?
+      attr_accessor body: String?
+    end
+
+    class SampleWithResponseStreamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor body: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateRewardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?trajectory_id: String,
+        ?rewards: Array[Float],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor trajectory_id: String?
+      attr_accessor rewards: Array[Float]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateRewardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

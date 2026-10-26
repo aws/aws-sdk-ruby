@@ -536,6 +536,44 @@ module Aws::GeoRoutes
             quint: untyped
           },
           width: untyped
+        },
+        intermodal: {
+          accessibility_attributes: Array[String],
+          max_transfers: Integer,
+          pedestrian: {
+            max_distance: Integer,
+            speed: untyped
+          },
+          rental: {
+            allowed_modes: Array[String],
+            enabled_for: Array[String],
+            excluded_modes: untyped
+          },
+          taxi: {
+            allowed_modes: Array[String],
+            enabled_for: untyped,
+            excluded_modes: untyped
+          },
+          transit: {
+            allowed_modes: Array[String],
+            enabled_for: untyped,
+            excluded_modes: untyped
+          },
+          vehicle: {
+            allowed_modes: Array[String],
+            enabled_for: untyped,
+            excluded_modes: untyped
+          }
+        },
+        transit: {
+          accessibility_attributes: untyped,
+          allowed_modes: untyped,
+          excluded_modes: untyped,
+          max_transfers: untyped,
+          pedestrian: {
+            max_distance: untyped,
+            speed: untyped
+          }
         }
       },
       ?travel_step_type: String,

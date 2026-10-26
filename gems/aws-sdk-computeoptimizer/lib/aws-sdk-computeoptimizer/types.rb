@@ -102,7 +102,7 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             An object that describes the estimated monthly savings  possible by adopting Compute Optimizer’s Auto Scaling group recommendations. This is based on the 
+    #             An object that describes the estimated monthly savings  possible by adopting Compute Optimizer’s Auto Scaling group recommendations. This is based on the
     #             Savings Plans and Reserved Instances discounts.
     #         </p>
     # @!attribute currency
@@ -319,7 +319,7 @@ module Aws::ComputeOptimizer
     #   @return [Types::SavingsOpportunity]
     # @!attribute savings_opportunity_after_discounts
     #   <p>
-    #               An object that describes the savings opportunity for the Auto Scaling group recommendation option that includes Savings Plans and Reserved Instances discounts. 
+    #               An object that describes the savings opportunity for the Auto Scaling group recommendation option that includes Savings Plans and Reserved Instances discounts.
     #               Savings opportunity includes the estimated monthly savings and percentage.
     #           </p>
     #   @return [Types::AutoScalingGroupSavingsOpportunityAfterDiscounts]
@@ -360,13 +360,13 @@ module Aws::ComputeOptimizer
     #          <p>Savings opportunity represents the estimated monthly savings you can achieve by implementing Compute Optimizer recommendations.</p>
     # @!attribute savings_opportunity_percentage
     #   <p>
-    #               The estimated monthly savings possible as a percentage of monthly cost after applying the Savings Plans and Reserved Instances discounts. This saving can be 
+    #               The estimated monthly savings possible as a percentage of monthly cost after applying the Savings Plans and Reserved Instances discounts. This saving can be
     #               achieved by adopting Compute Optimizer’s Auto Scaling group recommendations.
     #           </p>
     #   @return [Float]
     # @!attribute estimated_monthly_savings
     #   <p>
-    #               An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Auto Scaling group recommendations. This is based on the 
+    #               An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Auto Scaling group recommendations. This is based on the
     #               Savings Plans and Reserved Instances pricing discounts.
     #           </p>
     #   @return [Types::AutoScalingGroupEstimatedMonthlySavings]
@@ -644,16 +644,20 @@ module Aws::ComputeOptimizer
     #               Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon EBS volumes.
     #           </p>
     #   @return [Types::EBSSavingsEstimationMode]
+    # @!attribute look_back_period
+    #   <p>The number of days for which utilization metrics were analyzed for the volume.</p>
+    #   @return [String]
     class EBSEffectiveRecommendationPreferences < Struct.new(
       nil,
       :savings_estimation_mode,
+      :look_back_period,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>
-    #             An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Amazon EBS volume 
+    #             An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Amazon EBS volume
     #             recommendations. This includes any applicable discounts.
     #         </p>
     # @!attribute currency
@@ -689,17 +693,17 @@ module Aws::ComputeOptimizer
     #   <p>The name of the filter.</p>
     #            <p>Specify <code>Finding</code> to return recommendations with a specific finding
     #               classification (for example, <code>NotOptimized</code>).</p>
-    #            <p>You can filter your Amazon EBS volume recommendations by <code>tag:key</code> 
+    #            <p>You can filter your Amazon EBS volume recommendations by <code>tag:key</code>
     #               and <code>tag-key</code> tags.</p>
-    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your 
-    #               Amazon EBS volume recommendations. Use the tag key in the filter name and the tag value 
-    #               as the filter value. For example, to find all Amazon EBS volume recommendations that have 
-    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, 
+    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your
+    #               Amazon EBS volume recommendations. Use the tag key in the filter name and the tag value
+    #               as the filter value. For example, to find all Amazon EBS volume recommendations that have
+    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>,
     #               specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
-    #            <p>A <code>tag-key</code> is the key of a tag assigned to your Amazon EBS volume recommendations. Use 
-    #               this filter to find all of your Amazon EBS volume recommendations that have a tag with a 
-    #               specific key. This doesn’t consider the tag value. For example, you can find 
-    #               your Amazon EBS volume recommendations with a tag key value of <code>Owner</code> or without any tag 
+    #            <p>A <code>tag-key</code> is the key of a tag assigned to your Amazon EBS volume recommendations. Use
+    #               this filter to find all of your Amazon EBS volume recommendations that have a tag with a
+    #               specific key. This doesn’t consider the tag value. For example, you can find
+    #               your Amazon EBS volume recommendations with a tag key value of <code>Owner</code> or without any tag
     #               keys assigned.</p>
     #   @return [String]
     # @!attribute values
@@ -736,13 +740,13 @@ module Aws::ComputeOptimizer
     #         </p>
     # @!attribute savings_opportunity_percentage
     #   <p>
-    #               The estimated monthly savings possible as a percentage of monthly cost after applying the specific discounts. 
+    #               The estimated monthly savings possible as a percentage of monthly cost after applying the specific discounts.
     #               This saving can be achieved by adopting Compute Optimizer’s Amazon EBS volume recommendations.
     #           </p>
     #   @return [Float]
     # @!attribute estimated_monthly_savings
     #   <p>
-    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s Amazon EBS volume 
+    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s Amazon EBS volume
     #               recommendations. This saving includes any applicable discounts.
     #           </p>
     #   @return [Types::EBSEstimatedMonthlySavings]
@@ -793,6 +797,22 @@ module Aws::ComputeOptimizer
     #                       specified period of time.</p>
     #                  <p>Unit: Bytes</p>
     #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>VolumeIOPSExceeded</code> - Indicates whether the volume's
+    #                       provisioned IOPS performance was exceeded in a specified period of time.
+    #                       A value of <code>1</code> means the provisioned IOPS were exceeded; a value of
+    #                       <code>0</code> means they were not.</p>
+    #                  <p>Unit: None</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>VolumeThroughputExceeded</code> - Indicates whether the volume's
+    #                       provisioned throughput performance was exceeded in a specified period of
+    #                       time. A value of <code>1</code> means the provisioned throughput was exceeded;
+    #                       a value of <code>0</code> means it was not.</p>
+    #                  <p>Unit: None</p>
+    #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute statistic
@@ -835,16 +855,22 @@ module Aws::ComputeOptimizer
     #               Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon ECS services.
     #           </p>
     #   @return [Types::ECSSavingsEstimationMode]
+    # @!attribute look_back_period
+    #   <p>
+    #               The number of days the Amazon ECS service utilization metrics were analyzed.
+    #           </p>
+    #   @return [String]
     class ECSEffectiveRecommendationPreferences < Struct.new(
       nil,
       :savings_estimation_mode,
+      :look_back_period,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>
-    #             Describes the estimated monthly savings possible for Amazon ECS services by adopting Compute Optimizer recommendations. 
+    #             Describes the estimated monthly savings possible for Amazon ECS services by adopting Compute Optimizer recommendations.
     #             This is based on Amazon ECS service pricing after applying Savings Plans discounts.
     #         </p>
     # @!attribute currency
@@ -890,17 +916,17 @@ module Aws::ComputeOptimizer
     # <p>
     #             Describes the savings opportunity for Amazon ECS service recommendations after applying Savings Plans discounts.
     #         </p>
-    #          <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. 
+    #          <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts.
     #             You can achieve this by implementing a given Compute Optimizer recommendation.</p>
     # @!attribute savings_opportunity_percentage
     #   <p>
-    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s 
+    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s
     #               Amazon ECS service recommendations. This includes any applicable Savings Plans discounts.
     #           </p>
     #   @return [Float]
     # @!attribute estimated_monthly_savings
     #   <p>
-    #               The estimated monthly savings possible by adopting Compute Optimizer’s Amazon ECS service recommendations. 
+    #               The estimated monthly savings possible by adopting Compute Optimizer’s Amazon ECS service recommendations.
     #               This includes any applicable Savings Plans discounts.
     #           </p>
     #   @return [Types::ECSEstimatedMonthlySavings]
@@ -921,7 +947,7 @@ module Aws::ComputeOptimizer
     # <p>
     #             Describes the projected metrics of an Amazon ECS service recommendation option.
     #         </p>
-    #          <p>To determine the performance difference between your current Amazon ECS service and the recommended option, 
+    #          <p>To determine the performance difference between your current Amazon ECS service and the recommended option,
     #             compare the metric data of your service against its projected metric data.</p>
     # @!attribute name
     #   <p>
@@ -931,12 +957,12 @@ module Aws::ComputeOptimizer
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>Cpu</code> — The percentage of allocated compute units 
+    #                     <code>Cpu</code> — The percentage of allocated compute units
     #                       that are currently in use on the service tasks.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Memory</code> — The percentage of memory that's 
+    #                     <code>Memory</code> — The percentage of memory that's
     #                       currently in use on the service tasks.</p>
     #               </li>
     #            </ul>
@@ -970,7 +996,7 @@ module Aws::ComputeOptimizer
     # <p>
     #             Describes the projected utilization metrics of an Amazon ECS service recommendation option.
     #         </p>
-    #          <p>To determine the performance difference between your current Amazon ECS service and the recommended option, 
+    #          <p>To determine the performance difference between your current Amazon ECS service and the recommended option,
     #             compare the utilization metric data of your service against its projected utilization metric data.</p>
     # @!attribute name
     #   <p>
@@ -980,12 +1006,12 @@ module Aws::ComputeOptimizer
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>Cpu</code> — The percentage of allocated compute units 
+    #                     <code>Cpu</code> — The percentage of allocated compute units
     #                       that are currently in use on the service tasks.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Memory</code> — The percentage of memory that's 
+    #                     <code>Memory</code> — The percentage of memory that's
     #                       currently in use on the service tasks.</p>
     #               </li>
     #            </ul>
@@ -1067,7 +1093,7 @@ module Aws::ComputeOptimizer
     #   @return [Float]
     # @!attribute launch_type
     #   <p>
-    #               The launch type the Amazon ECS service is using. 
+    #               The launch type the Amazon ECS service is using.
     #           </p>
     #            <note>
     #               <p>Compute Optimizer only supports the Fargate launch type.</p>
@@ -1088,26 +1114,26 @@ module Aws::ComputeOptimizer
     #                  <p>
     #                     <b>
     #                        <code>Underprovisioned</code>
-    #                     </b> — 
-    #                       When Compute Optimizer detects that there’s not enough memory or CPU, an Amazon ECS 
-    #                       service is considered under-provisioned. An under-provisioned service might 
+    #                     </b> —
+    #                       When Compute Optimizer detects that there’s not enough memory or CPU, an Amazon ECS
+    #                       service is considered under-provisioned. An under-provisioned service might
     #                       result in poor application performance.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>
     #                        <code>Overprovisioned</code>
-    #                     </b> — 
-    #                       When Compute Optimizer detects that there’s excessive memory or CPU, an Amazon ECS 
-    #                       service is considered over-provisioned. An over-provisioned service might 
+    #                     </b> —
+    #                       When Compute Optimizer detects that there’s excessive memory or CPU, an Amazon ECS
+    #                       service is considered over-provisioned. An over-provisioned service might
     #                       result in additional infrastructure costs. </p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>
     #                        <code>Optimized</code>
-    #                     </b> — 
-    #                       When both the CPU and memory of your Amazon ECS service meet the performance requirements 
+    #                     </b> —
+    #                       When both the CPU and memory of your Amazon ECS service meet the performance requirements
     #                       of your workload, the service is considered optimized.</p>
     #               </li>
     #            </ul>
@@ -1122,36 +1148,36 @@ module Aws::ComputeOptimizer
     #                  <p>
     #                     <b>
     #                        <code>CPUUnderprovisioned</code>
-    #                     </b> — 
-    #                       The service CPU configuration can be sized up to enhance the performance of 
-    #                       your workload. This is identified by analyzing the <code>CPUUtilization</code> metric of the 
+    #                     </b> —
+    #                       The service CPU configuration can be sized up to enhance the performance of
+    #                       your workload. This is identified by analyzing the <code>CPUUtilization</code> metric of the
     #                       current service during the look-back period.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>
     #                        <code>CPUOverprovisioned</code>
-    #                     </b> — 
+    #                     </b> —
     #                       The service CPU configuration can be sized down while still meeting the performance
-    #                       requirements of your workload. This is identified by analyzing the <code>CPUUtilization</code> 
+    #                       requirements of your workload. This is identified by analyzing the <code>CPUUtilization</code>
     #                       metric of the current service during the look-back period. </p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>
     #                        <code>MemoryUnderprovisioned</code>
-    #                     </b> — 
-    #                       The service memory configuration  can be sized up to enhance the performance of 
-    #                       your workload. This is identified by analyzing the <code>MemoryUtilization</code> metric of the 
+    #                     </b> —
+    #                       The service memory configuration  can be sized up to enhance the performance of
+    #                       your workload. This is identified by analyzing the <code>MemoryUtilization</code> metric of the
     #                       current service during the look-back period.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>
     #                        <code>MemoryOverprovisioned</code>
-    #                     </b> — 
-    #                       The service memory configuration can be sized down while still meeting the 
-    #                       performance requirements of your workload. This is identified by analyzing the 
+    #                     </b> —
+    #                       The service memory configuration can be sized down while still meeting the
+    #                       performance requirements of your workload. This is identified by analyzing the
     #                       <code>MemoryUtilization</code> metric of the current service during the look-back period.</p>
     #               </li>
     #            </ul>
@@ -1163,8 +1189,8 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::ECSServiceRecommendationOption>]
     # @!attribute current_performance_risk
     #   <p>
-    #               The risk of the current Amazon ECS service not meeting the performance needs of its workloads. 
-    #               The higher the risk, the more likely the current service can't meet the performance 
+    #               The risk of the current Amazon ECS service not meeting the performance needs of its workloads.
+    #               The higher the risk, the more likely the current service can't meet the performance
     #               requirements of its workload.
     #           </p>
     #   @return [String]
@@ -1204,7 +1230,7 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             Describes a filter that returns a more specific list of Amazon ECS service 
+    #             Describes a filter that returns a more specific list of Amazon ECS service
     #             recommendations. Use this filter with the <a>GetECSServiceRecommendations</a> action.
     #         </p>
     # @!attribute name
@@ -1217,17 +1243,17 @@ module Aws::ComputeOptimizer
     #            <p>
     #               Specify <code>FindingReasonCode</code> to return recommendations with a specific finding reason code.
     #           </p>
-    #            <p>You can filter your Amazon ECS service recommendations by <code>tag:key</code> 
+    #            <p>You can filter your Amazon ECS service recommendations by <code>tag:key</code>
     #               and <code>tag-key</code> tags.</p>
-    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your 
-    #               Amazon ECS service recommendations. Use the tag key in the filter name and the tag value 
-    #               as the filter value. For example, to find all Amazon ECS service recommendations that have 
-    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, 
+    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your
+    #               Amazon ECS service recommendations. Use the tag key in the filter name and the tag value
+    #               as the filter value. For example, to find all Amazon ECS service recommendations that have
+    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>,
     #               specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
-    #            <p>A <code>tag-key</code> is the key of a tag assigned to your Amazon ECS service recommendations. Use 
-    #               this filter to find all of your Amazon ECS service recommendations that have a tag with a 
-    #               specific key. This doesn’t consider the tag value. For example, you can find 
-    #               your Amazon ECS service recommendations with a tag key value of <code>Owner</code> or without any tag 
+    #            <p>A <code>tag-key</code> is the key of a tag assigned to your Amazon ECS service recommendations. Use
+    #               this filter to find all of your Amazon ECS service recommendations that have a tag with a
+    #               specific key. This doesn’t consider the tag value. For example, you can find
+    #               your Amazon ECS service recommendations with a tag key value of <code>Owner</code> or without any tag
     #               keys assigned.</p>
     #   @return [String]
     # @!attribute values
@@ -1242,7 +1268,7 @@ module Aws::ComputeOptimizer
     #               </li>
     #               <li>
     #                  <p>If you specify the <code>name</code> parameter as <code>FindingReasonCode</code>, specify
-    #                       <code>CPUUnderprovisioned</code>, <code>CPUOverprovisioned</code>, 
+    #                       <code>CPUUnderprovisioned</code>, <code>CPUOverprovisioned</code>,
     #                       <code>MemoryUnderprovisioned</code>, or <code>MemoryOverprovisioned</code>.</p>
     #               </li>
     #            </ul>
@@ -1291,7 +1317,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               Describes the savings opportunity for Amazon ECS service recommendations or for the recommendation option.
     #           </p>
-    #            <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. 
+    #            <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts.
     #               You can achieve this by implementing a given Compute Optimizer recommendation.</p>
     #   @return [Types::ECSSavingsOpportunityAfterDiscounts]
     # @!attribute projected_utilization_metrics
@@ -1320,7 +1346,7 @@ module Aws::ComputeOptimizer
     # <p>
     #             Describes the projected metrics of an Amazon ECS service recommendation option.
     #         </p>
-    #          <p>To determine the performance difference between your current Amazon ECS service and the recommended option, 
+    #          <p>To determine the performance difference between your current Amazon ECS service and the recommended option,
     #             compare the metric data of your service against its projected metric data.</p>
     # @!attribute recommended_cpu_units
     #   <p>
@@ -1356,7 +1382,7 @@ module Aws::ComputeOptimizer
     # <p>
     #             Describes the utilization metric of an Amazon ECS service.
     #         </p>
-    #          <p>To determine the performance difference between your current Amazon ECS service and the recommended option, 
+    #          <p>To determine the performance difference between your current Amazon ECS service and the recommended option,
     #             compare the utilization metric data of your service against its projected utilization metric data.</p>
     # @!attribute name
     #   <p>
@@ -1494,8 +1520,8 @@ module Aws::ComputeOptimizer
     #   @return [String]
     # @!attribute utilization_preferences
     #   <p>
-    #               The resource’s CPU and memory utilization preferences, such as threshold and headroom, that 
-    #               are used to generate rightsizing recommendations. 
+    #               The resource’s CPU and memory utilization preferences, such as threshold and headroom, that
+    #               are used to generate rightsizing recommendations.
     #           </p>
     #            <note>
     #               <p>This preference is only available for the Amazon EC2 instance resource type.</p>
@@ -1838,10 +1864,10 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The Amazon Web Services account IDs for the export Amazon ECS service recommendations.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
-    #               of an organization, use this parameter to specify the member account you want to 
+    #            <p>If your account is the management account or the delegated administrator
+    #               of an organization, use this parameter to specify the member account you want to
     #               export recommendations to.</p>
-    #            <p>This parameter can't be specified together with the include member accounts 
+    #            <p>This parameter can't be specified together with the include member accounts
     #               parameter. The parameters are mutually exclusive.</p>
     #            <p>If this parameter or the include member accounts parameter is omitted,
     #               the recommendations for member accounts aren't included in the export.</p>
@@ -1849,7 +1875,7 @@ module Aws::ComputeOptimizer
     #   @return [Array<String>]
     # @!attribute filters
     #   <p>
-    #               An array of objects to specify a filter that exports a more specific set 
+    #               An array of objects to specify a filter that exports a more specific set
     #               of Amazon ECS service recommendations.
     #           </p>
     #   @return [Array<Types::ECSServiceRecommendationFilter>]
@@ -1871,7 +1897,7 @@ module Aws::ComputeOptimizer
     #   @return [Types::S3DestinationConfig]
     # @!attribute file_format
     #   <p>
-    #               The format of the export file. 
+    #               The format of the export file.
     #           </p>
     #            <p>The CSV file is the only export file format currently supported.</p>
     #   @return [String]
@@ -1883,9 +1909,9 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the 
+    #            <p>If this parameter is omitted, recommendations for member accounts of the
     #               organization aren't included in the export file.</p>
-    #            <p>If this parameter or the account ID parameter is omitted, recommendations for 
+    #            <p>If this parameter or the account ID parameter is omitted, recommendations for
     #               member accounts aren't included in the export.</p>
     #   @return [Boolean]
     class ExportECSServiceRecommendationsRequest < Struct.new(
@@ -1905,7 +1931,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The identification number of the export job.
     #           </p>
-    #            <p>To view the status of an export job, use the 
+    #            <p>To view the status of an export job, use the
     #               <a>DescribeRecommendationExportJobs</a> action and specify the job ID.
     #           </p>
     #   @return [String]
@@ -1926,10 +1952,10 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The Amazon Web Services account IDs for the export idle resource recommendations.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
-    #               of an organization, use this parameter to specify the member account you want to 
+    #            <p>If your account is the management account or the delegated administrator
+    #               of an organization, use this parameter to specify the member account you want to
     #               export recommendations to.</p>
-    #            <p>This parameter can't be specified together with the include member accounts 
+    #            <p>This parameter can't be specified together with the include member accounts
     #               parameter. The parameters are mutually exclusive.</p>
     #            <p>If this parameter or the include member accounts parameter is omitted,
     #               the recommendations for member accounts aren't included in the export.</p>
@@ -1965,9 +1991,9 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the 
+    #            <p>If this parameter is omitted, recommendations for member accounts of the
     #               organization aren't included in the export file.</p>
-    #            <p>If this parameter or the account ID parameter is omitted, recommendations for 
+    #            <p>If this parameter or the account ID parameter is omitted, recommendations for
     #               member accounts aren't included in the export.</p>
     #   @return [Boolean]
     class ExportIdleRecommendationsRequest < Struct.new(
@@ -1987,7 +2013,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The identification number of the export job.
     #           </p>
-    #            <p>To view the status of an export job, use the 
+    #            <p>To view the status of an export job, use the
     #               <a>DescribeRecommendationExportJobs</a> action and specify the job ID.
     #           </p>
     #   @return [String]
@@ -2090,7 +2116,7 @@ module Aws::ComputeOptimizer
     #               specify the member account for which you want to export recommendations.</p>
     #            <p>This parameter can't be specified together with the include member accounts
     #               parameter. The parameters are mutually exclusive.</p>
-    #            <p>If this parameter is omitted, recommendations 
+    #            <p>If this parameter is omitted, recommendations
     #               for member accounts aren't included in the export.</p>
     #            <p>You can specify multiple account IDs per request.</p>
     #   @return [Array<String>]
@@ -2126,7 +2152,7 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the organization 
+    #            <p>If this parameter is omitted, recommendations for member accounts of the organization
     #               aren't included in the export file .</p>
     #            <p>This parameter cannot be specified together with the account IDs parameter. The
     #               parameters are mutually exclusive.</p>
@@ -2148,7 +2174,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The identification number of the export job.
     #           </p>
-    #            <p>To view the status of an export job, use the <a>DescribeRecommendationExportJobs</a> 
+    #            <p>To view the status of an export job, use the <a>DescribeRecommendationExportJobs</a>
     #               action and specify the job ID.</p>
     #   @return [String]
     # @!attribute s3_destination
@@ -2168,10 +2194,10 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The Amazon Web Services account IDs for the export Amazon Aurora and RDS database recommendations.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
-    #               of an organization, use this parameter to specify the member account you want to 
+    #            <p>If your account is the management account or the delegated administrator
+    #               of an organization, use this parameter to specify the member account you want to
     #               export recommendations to.</p>
-    #            <p>This parameter can't be specified together with the include member accounts 
+    #            <p>This parameter can't be specified together with the include member accounts
     #               parameter. The parameters are mutually exclusive.</p>
     #            <p>If this parameter or the include member accounts parameter is omitted,
     #               the recommendations for member accounts aren't included in the export.</p>
@@ -2179,7 +2205,7 @@ module Aws::ComputeOptimizer
     #   @return [Array<String>]
     # @!attribute filters
     #   <p>
-    #               An array of objects to specify a filter that exports a more specific set of 
+    #               An array of objects to specify a filter that exports a more specific set of
     #               Amazon Aurora and RDS recommendations.
     #           </p>
     #   @return [Array<Types::RDSDBRecommendationFilter>]
@@ -2201,7 +2227,7 @@ module Aws::ComputeOptimizer
     #   @return [Types::S3DestinationConfig]
     # @!attribute file_format
     #   <p>
-    #               The format of the export file. 
+    #               The format of the export file.
     #           </p>
     #            <p>The CSV file is the only export file format currently supported.</p>
     #   @return [String]
@@ -2213,9 +2239,9 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the 
+    #            <p>If this parameter is omitted, recommendations for member accounts of the
     #               organization aren't included in the export file.</p>
-    #            <p>If this parameter or the account ID parameter is omitted, recommendations for 
+    #            <p>If this parameter or the account ID parameter is omitted, recommendations for
     #               member accounts aren't included in the export.</p>
     #   @return [Boolean]
     # @!attribute recommendation_preferences
@@ -2239,7 +2265,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The identification number of the export job.
     #           </p>
-    #            <p>To view the status of an export job, use the 
+    #            <p>To view the status of an export job, use the
     #               <a>DescribeRecommendationExportJobs</a> action and specify the job ID.
     #           </p>
     #   @return [String]
@@ -2307,15 +2333,15 @@ module Aws::ComputeOptimizer
     #            <p>Specify <code>InferredWorkloadTypes</code> to return recommendations of a specific
     #               inferred workload. For example, <code>Redis</code>.</p>
     #            <p>You can filter your EC2 instance recommendations by <code>tag:key</code> and <code>tag-key</code> tags.</p>
-    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your 
-    #               recommendations. Use the tag key in the filter name and the tag value 
-    #               as the filter value. For example, to find all recommendations that have 
-    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, 
+    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your
+    #               recommendations. Use the tag key in the filter name and the tag value
+    #               as the filter value. For example, to find all recommendations that have
+    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>,
     #               specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
-    #            <p>A <code>tag-key</code> is the key of a tag assigned to your recommendations. Use 
-    #               this filter to find all of your recommendations that have a tag with a 
-    #               specific key. This doesn’t consider the tag value. For example, you can find 
-    #               your recommendations with a tag key value of <code>Owner</code> or without any tag 
+    #            <p>A <code>tag-key</code> is the key of a tag assigned to your recommendations. Use
+    #               this filter to find all of your recommendations that have a tag with a
+    #               specific key. This doesn’t consider the tag value. For example, you can find
+    #               your recommendations with a tag key value of <code>Owner</code> or without any tag
     #               keys assigned.</p>
     #   @return [String]
     # @!attribute values
@@ -2802,7 +2828,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The maximum number of Amazon ECS service recommendations to return with a single request.
     #           </p>
-    #            <p>To retrieve the remaining results, make another request with the returned 
+    #            <p>To retrieve the remaining results, make another request with the returned
     #               <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute filters
@@ -2814,7 +2840,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               Return the Amazon ECS service recommendations to the specified Amazon Web Services account IDs.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
+    #            <p>If your account is the management account or the delegated administrator
     #               of an organization, use this parameter to return the Amazon ECS service recommendations to specific
     #               member accounts.</p>
     #            <p>You can only specify one account ID per request.</p>
@@ -2899,31 +2925,32 @@ module Aws::ComputeOptimizer
     #   @return [Types::ExternalMetricsPreference]
     # @!attribute look_back_period
     #   <p>
-    #               The number of days the utilization metrics of the Amazon Web Services resource are analyzed. 
+    #               The number of days the utilization metrics of the Amazon Web Services resource are analyzed.
     #           </p>
-    #            <p>To validate that the preference is applied to your last generated set of recommendations, review 
-    #               the <code>effectiveRecommendationPreferences</code> value in the response of the 
-    #               GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.</p>
+    #            <p>To validate that the preference is applied to your last generated set of recommendations, review
+    #               the <code>effectiveRecommendationPreferences</code> value in the response of the
+    #               GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations, GetEBSVolumeRecommendations,
+    #               GetECSServiceRecommendations, or GetRDSDatabaseRecommendations actions.</p>
     #   @return [String]
     # @!attribute utilization_preferences
     #   <p>
-    #               The resource’s CPU and memory utilization preferences, such as threshold and headroom, 
-    #               that were used to generate rightsizing recommendations. It considers all applicable preferences 
+    #               The resource’s CPU and memory utilization preferences, such as threshold and headroom,
+    #               that were used to generate rightsizing recommendations. It considers all applicable preferences
     #               that you set at the resource, account, and organization level.
     #           </p>
-    #            <p>To validate that the preference is applied to your last generated set of recommendations, review the 
-    #               <code>effectiveRecommendationPreferences</code> value in the response of the 
+    #            <p>To validate that the preference is applied to your last generated set of recommendations, review the
+    #               <code>effectiveRecommendationPreferences</code> value in the response of the
     #               GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.</p>
     #   @return [Array<Types::UtilizationPreference>]
     # @!attribute preferred_resources
     #   <p>
-    #               The resource type values that are considered as candidates when generating rightsizing recommendations. 
-    #               This object resolves any wildcard expressions and returns the effective list of candidate resource type 
-    #               values. It also considers all applicable preferences that you set at the resource, account, and 
+    #               The resource type values that are considered as candidates when generating rightsizing recommendations.
+    #               This object resolves any wildcard expressions and returns the effective list of candidate resource type
+    #               values. It also considers all applicable preferences that you set at the resource, account, and
     #               organization level.
     #           </p>
-    #            <p>To validate that the preference is applied to your last generated set of recommendations, review the 
-    #               <code>effectiveRecommendationPreferences</code> value in the response of the GetAutoScalingGroupRecommendations 
+    #            <p>To validate that the preference is applied to your last generated set of recommendations, review the
+    #               <code>effectiveRecommendationPreferences</code> value in the response of the GetAutoScalingGroupRecommendations
     #               or GetEC2InstanceRecommendations actions.</p>
     #   @return [Array<Types::EffectivePreferredResource>]
     class GetEffectiveRecommendationPreferencesResponse < Struct.new(
@@ -3031,7 +3058,7 @@ module Aws::ComputeOptimizer
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of idle resource recommendations to return with a single request. </p>
-    #            <p>To retrieve the remaining results, 
+    #            <p>To retrieve the remaining results,
     #               make another request with the returned <code>nextToken</code> value.</p>
     #   @return [Integer]
     # @!attribute filters
@@ -3039,8 +3066,8 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::IdleRecommendationFilter>]
     # @!attribute account_ids
     #   <p>Return the idle resource recommendations to the specified Amazon Web Services account IDs.</p>
-    #            <p>If your account is the management account 
-    #               or the delegated administrator of an organization, use this parameter to return the idle resource recommendations to 
+    #            <p>If your account is the management account
+    #               or the delegated administrator of an organization, use this parameter to return the idle resource recommendations to
     #               specific member accounts.</p>
     #            <p>You can only specify one account ID per request.</p>
     #   @return [Array<String>]
@@ -3306,7 +3333,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               Return the Amazon Aurora and RDS database recommendations to the specified Amazon Web Services account IDs.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
+    #            <p>If your account is the management account or the delegated administrator
     #               of an organization, use this parameter to return the Amazon Aurora and RDS database recommendations to specific
     #               member accounts.</p>
     #            <p>You can only specify one account ID per request.</p>
@@ -3513,6 +3540,22 @@ module Aws::ComputeOptimizer
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes the dimension of an idle resource utilization metric.</p>
+    # @!attribute key
+    #   <p>The name of the dimension key.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The value of the dimension.</p>
+    #   @return [Array<String>]
+    class IdleDimension < Struct.new(
+      nil,
+      :key,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes the estimated monthly savings possible for idle resources by adopting Compute Optimizer recommendations.</p>
     # @!attribute currency
     #   <p>The currency of the estimated monthly savings.</p>
@@ -3627,17 +3670,17 @@ module Aws::ComputeOptimizer
     #            <p>
     #               Specify <code>Finding</code> to return recommendations with a specific finding classification.
     #           </p>
-    #            <p>You can filter your idle resource recommendations by <code>tag:key</code> 
+    #            <p>You can filter your idle resource recommendations by <code>tag:key</code>
     #               and <code>tag-key</code> tags.</p>
-    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your 
-    #               idle resource recommendations. Use the tag key in the filter name and the tag value 
-    #               as the filter value. For example, to find all idle resource service recommendations that have 
-    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, 
+    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your
+    #               idle resource recommendations. Use the tag key in the filter name and the tag value
+    #               as the filter value. For example, to find all idle resource service recommendations that have
+    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>,
     #               specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
-    #            <p>A <code>tag-key</code> is the key of a tag assigned to your idle resource recommendations. Use 
-    #               this filter to find all of your idle resource recommendations that have a tag with a 
-    #               specific key. This doesn’t consider the tag value. For example, you can find 
-    #               your idle resource service recommendations with a tag key value of <code>Owner</code> or without any tag 
+    #            <p>A <code>tag-key</code> is the key of a tag assigned to your idle resource recommendations. Use
+    #               this filter to find all of your idle resource recommendations that have a tag with a
+    #               specific key. This doesn’t consider the tag value. For example, you can find
+    #               your idle resource service recommendations with a tag key value of <code>Owner</code> or without any tag
     #               keys assigned.</p>
     #   @return [String]
     # @!attribute values
@@ -3739,11 +3782,15 @@ module Aws::ComputeOptimizer
     # @!attribute value
     #   <p>The value of the utilization metric.</p>
     #   @return [Float]
+    # @!attribute dimensions
+    #   <p>The dimensions of the utilization metric.</p>
+    #   @return [Array<Types::IdleDimension>]
     class IdleUtilizationMetric < Struct.new(
       nil,
       :name,
       :statistic,
       :value,
+      :dimensions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3755,9 +3802,9 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             The estimated monthly savings after you adjust the configurations of your instances running on the 
+    #             The estimated monthly savings after you adjust the configurations of your instances running on the
     #             inferred workload types to the recommended configurations. If the <code>inferredWorkloadTypes</code>
-    #             list contains multiple entries, then the savings are the sum of the monthly savings from instances 
+    #             list contains multiple entries, then the savings are the sum of the monthly savings from instances
     #             that run the exact combination of the inferred workload types.
     #         </p>
     # @!attribute inferred_workload_types
@@ -3826,7 +3873,7 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Amazon EC2 instance 
+    #             An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Amazon EC2 instance
     #             recommendations. This is based on the Savings Plans and Reserved Instances pricing discounts.
     #         </p>
     # @!attribute currency
@@ -4381,7 +4428,7 @@ module Aws::ComputeOptimizer
     #   @return [Types::SavingsOpportunity]
     # @!attribute savings_opportunity_after_discounts
     #   <p>
-    #               An object that describes the savings opportunity for the instance recommendation option that includes Savings Plans and Reserved Instances 
+    #               An object that describes the savings opportunity for the instance recommendation option that includes Savings Plans and Reserved Instances
     #               discounts. Savings opportunity includes the estimated monthly savings and percentage.
     #           </p>
     #   @return [Types::InstanceSavingsOpportunityAfterDiscounts]
@@ -4436,17 +4483,17 @@ module Aws::ComputeOptimizer
     # <p>
     #             Describes the savings opportunity for instance recommendations after applying the Savings Plans and Reserved Instances discounts.
     #         </p>
-    #          <p>Savings opportunity after discounts represents the estimated monthly savings you can achieve by 
+    #          <p>Savings opportunity after discounts represents the estimated monthly savings you can achieve by
     #             implementing Compute Optimizer recommendations.</p>
     # @!attribute savings_opportunity_percentage
     #   <p>
-    #               The estimated monthly savings possible as a percentage of monthly cost after applying the Savings Plans and Reserved Instances discounts. 
+    #               The estimated monthly savings possible as a percentage of monthly cost after applying the Savings Plans and Reserved Instances discounts.
     #               This saving can be achieved by adopting Compute Optimizer’s EC2 instance recommendations.
     #           </p>
     #   @return [Float]
     # @!attribute estimated_monthly_savings
     #   <p>
-    #               An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Amazon EC2 instance recommendations. This is 
+    #               An object that describes the estimated monthly savings possible by adopting Compute Optimizer’s Amazon EC2 instance recommendations. This is
     #               based on pricing after applying the Savings Plans and Reserved Instances discounts.
     #           </p>
     #   @return [Types::InstanceEstimatedMonthlySavings]
@@ -4543,7 +4590,7 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             Describes the estimated monthly savings possible for Lambda functions by adopting Compute Optimizer recommendations. This is based 
+    #             Describes the estimated monthly savings possible for Lambda functions by adopting Compute Optimizer recommendations. This is based
     #             on Lambda functions pricing after applying Savings Plans discounts.
     #         </p>
     # @!attribute currency
@@ -4615,7 +4662,7 @@ module Aws::ComputeOptimizer
     #   @return [Types::SavingsOpportunity]
     # @!attribute savings_opportunity_after_discounts
     #   <p>
-    #               An object that describes the savings opportunity for the Lambda recommendation option which includes Saving Plans 
+    #               An object that describes the savings opportunity for the Lambda recommendation option which includes Saving Plans
     #               discounts. Savings opportunity includes the estimated monthly savings and percentage.
     #           </p>
     #   @return [Types::LambdaSavingsOpportunityAfterDiscounts]
@@ -4817,17 +4864,17 @@ module Aws::ComputeOptimizer
     #               classification (for example, <code>NotOptimized</code>).</p>
     #            <p>Specify <code>FindingReasonCode</code> to return recommendations with a specific
     #               finding reason code (for example, <code>MemoryUnderprovisioned</code>).</p>
-    #            <p>You can filter your Lambda function recommendations by <code>tag:key</code> 
+    #            <p>You can filter your Lambda function recommendations by <code>tag:key</code>
     #               and <code>tag-key</code> tags.</p>
-    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your 
-    #               Lambda function recommendations. Use the tag key in the filter name and the tag value 
-    #               as the filter value. For example, to find all Lambda function recommendations that have 
-    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, 
+    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your
+    #               Lambda function recommendations. Use the tag key in the filter name and the tag value
+    #               as the filter value. For example, to find all Lambda function recommendations that have
+    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>,
     #               specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
-    #            <p>A <code>tag-key</code> is the key of a tag assigned to your Lambda function recommendations. Use 
-    #               this filter to find all of your Lambda function recommendations that have a tag with a 
-    #               specific key. This doesn’t consider the tag value. For example, you can find 
-    #               your Lambda function recommendations with a tag key value of <code>Owner</code> or without any tag 
+    #            <p>A <code>tag-key</code> is the key of a tag assigned to your Lambda function recommendations. Use
+    #               this filter to find all of your Lambda function recommendations that have a tag with a
+    #               specific key. This doesn’t consider the tag value. For example, you can find
+    #               your Lambda function recommendations with a tag key value of <code>Owner</code> or without any tag
     #               keys assigned.</p>
     #   @return [String]
     # @!attribute values
@@ -4924,17 +4971,17 @@ module Aws::ComputeOptimizer
     # <p>
     #             Describes the savings opportunity for Lambda functions recommendations after applying Savings Plans discounts.
     #         </p>
-    #          <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. 
+    #          <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts.
     #             You can achieve this by implementing a given Compute Optimizer recommendation.</p>
     # @!attribute savings_opportunity_percentage
     #   <p>
-    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s Lambda 
+    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s Lambda
     #               function recommendations. This includes any applicable Savings Plans discounts.
     #           </p>
     #   @return [Float]
     # @!attribute estimated_monthly_savings
     #   <p>
-    #               The estimated monthly savings possible by adopting Compute Optimizer’s Lambda function recommendations. This 
+    #               The estimated monthly savings possible by adopting Compute Optimizer’s Lambda function recommendations. This
     #               includes any applicable Savings Plans discounts.
     #           </p>
     #   @return [Types::LambdaEstimatedMonthlySavings]
@@ -4967,7 +5014,7 @@ module Aws::ComputeOptimizer
     #   @return [String]
     # @!attribute operating_system
     #   <p>
-    #               The operating system of the instance. 
+    #               The operating system of the instance.
     #           </p>
     #   @return [String]
     # @!attribute license_edition
@@ -5025,7 +5072,7 @@ module Aws::ComputeOptimizer
     #   @return [String]
     # @!attribute account_id
     #   <p>
-    #               The Amazon Web Services account ID of the license. 
+    #               The Amazon Web Services account ID of the license.
     #           </p>
     #   @return [String]
     # @!attribute current_license_configuration
@@ -5056,13 +5103,13 @@ module Aws::ComputeOptimizer
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>NotOptimized</code> — When Compute Optimizer detects that your EC2 infrastructure 
-    #                           isn't using any of the SQL server license features you're paying for, a license is considered 
+    #                     <code>NotOptimized</code> — When Compute Optimizer detects that your EC2 infrastructure
+    #                           isn't using any of the SQL server license features you're paying for, a license is considered
     #                           not optimized.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Optimized</code> — When Compute Optimizer detects that all specifications of your 
+    #                     <code>Optimized</code> — When Compute Optimizer detects that all specifications of your
     #                           license meet the performance requirements of your workload. </p>
     #               </li>
     #            </ul>
@@ -5075,12 +5122,12 @@ module Aws::ComputeOptimizer
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>Optimized</code> — All specifications of your 
+    #                     <code>Optimized</code> — All specifications of your
     #                           license meet the performance requirements of your workload. </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>LicenseOverprovisioned</code> — A license is considered over-provisioned when your license can be 
+    #                     <code>LicenseOverprovisioned</code> — A license is considered over-provisioned when your license can be
     #                           downgraded while still meeting the performance requirements of your workload.</p>
     #               </li>
     #               <li>
@@ -5127,7 +5174,7 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             Describes a filter that returns a more specific list of license recommendations. Use this filter 
+    #             Describes a filter that returns a more specific list of license recommendations. Use this filter
     #             with the <code>GetLicenseRecommendation</code> action.
     #         </p>
     # @!attribute name
@@ -5136,17 +5183,17 @@ module Aws::ComputeOptimizer
     #               classification.</p>
     #            <p>Specify <code>FindingReasonCode</code> to return recommendations with a specific
     #               finding reason code.</p>
-    #            <p>You can filter your license recommendations by <code>tag:key</code> 
+    #            <p>You can filter your license recommendations by <code>tag:key</code>
     #               and <code>tag-key</code> tags.</p>
-    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your 
-    #               license recommendations. Use the tag key in the filter name and the tag value 
-    #               as the filter value. For example, to find all license recommendations that have 
-    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, 
+    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your
+    #               license recommendations. Use the tag key in the filter name and the tag value
+    #               as the filter value. For example, to find all license recommendations that have
+    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>,
     #               specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
-    #            <p>A <code>tag-key</code> is the key of a tag assigned to your license recommendations. Use 
-    #               this filter to find all of your license recommendations that have a tag with a 
-    #               specific key. This doesn’t consider the tag value. For example, you can find 
-    #               your license recommendations with a tag key value of <code>Owner</code> or without any tag 
+    #            <p>A <code>tag-key</code> is the key of a tag assigned to your license recommendations. Use
+    #               this filter to find all of your license recommendations that have a tag with a
+    #               specific key. This doesn’t consider the tag value. For example, you can find
+    #               your license recommendations with a tag key value of <code>Owner</code> or without any tag
     #               keys assigned.</p>
     #   @return [String]
     # @!attribute values
@@ -5332,9 +5379,9 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             The preference to control which resource type values are considered when generating rightsizing recommendations. 
-    #             You can specify this preference as a combination of include and exclude lists. You must specify either an 
-    #             <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, 
+    #             The preference to control which resource type values are considered when generating rightsizing recommendations.
+    #             You can specify this preference as a combination of include and exclude lists. You must specify either an
+    #             <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values,
     #             an error occurs. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html">
     #                 Rightsizing recommendation preferences</a> in the <i>Compute Optimizer User
     #                     Guide</i>.
@@ -5359,14 +5406,14 @@ module Aws::ComputeOptimizer
     #   @return [String]
     # @!attribute include_list
     #   <p>
-    #               The preferred resource type values to include in the recommendation candidates. You can specify the exact resource type value, 
-    #               such as m5.large, or use wild card expressions, such as m5. If this isn’t specified, all supported resources are included by default. 
+    #               The preferred resource type values to include in the recommendation candidates. You can specify the exact resource type value,
+    #               such as m5.large, or use wild card expressions, such as m5. If this isn’t specified, all supported resources are included by default.
     #               You can specify up to 1000 values in this list.
     #           </p>
     #   @return [Array<String>]
     # @!attribute exclude_list
     #   <p>
-    #               The preferred resource type values to exclude from the recommendation candidates. If this isn’t specified, all supported 
+    #               The preferred resource type values to exclude from the recommendation candidates. If this isn’t specified, all supported
     #               resources are included by default. You can specify up to 1000 values in this list.
     #           </p>
     #   @return [Array<String>]
@@ -5387,11 +5434,11 @@ module Aws::ComputeOptimizer
     #             metric data to determine the performance difference between your current resource and
     #             the recommended option.</p>
     #          <note>
-    #             <p>The <code>Cpu</code>, <code>Memory</code>, <code>GPU</code>, and <code>GPU_MEMORY</code> metrics 
+    #             <p>The <code>Cpu</code>, <code>Memory</code>, <code>GPU</code>, and <code>GPU_MEMORY</code> metrics
     #                 are the only projected utilization metrics returned when you run the <a>GetEC2RecommendationProjectedMetrics</a> action. Additionally, these
     #                     metrics are only returned for resources with the unified
     #                     CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a> and
-    #                     <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent">Enabling NVIDIA GPU 
+    #                     <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent">Enabling NVIDIA GPU
     #                         utilization with the CloudWatch Agent</a>.</p>
     #          </note>
     # @!attribute name
@@ -5432,9 +5479,9 @@ module Aws::ComputeOptimizer
     #                     <code>GPU_MEMORY</code> - The projected percentage of total GPU memory if you adjust your
     #                       configurations to Compute Optimizer's recommendation option.</p>
     #                  <note>
-    #                     <p>The <code>GPU</code> and <code>GPU_MEMORY</code> metrics are only returned for resources 
-    #                           with the unified CloudWatch Agent installed on them. For more information, see 
-    #                           <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent">Enabling NVIDIA GPU 
+    #                     <p>The <code>GPU</code> and <code>GPU_MEMORY</code> metrics are only returned for resources
+    #                           with the unified CloudWatch Agent installed on them. For more information, see
+    #                           <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent">Enabling NVIDIA GPU
     #                               utilization with the CloudWatch Agent</a>.</p>
     #                  </note>
     #               </li>
@@ -5514,25 +5561,40 @@ module Aws::ComputeOptimizer
     #   @return [Types::ExternalMetricsPreference]
     # @!attribute look_back_period
     #   <p>
-    #               The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. 
+    #               The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed.
     #               When this preference isn't specified, we use the default value <code>DAYS_14</code>.
     #           </p>
-    #            <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.
+    #            <p>You can only set this preference for the Amazon EC2 instance, Auto Scaling group, Amazon EBS volume, Amazon ECS service on Fargate, Amazon RDS DB instance, and Aurora DB cluster storage resource types.
     #               </p>
     #            <note>
     #               <ul>
     #                  <li>
-    #                     <p>Amazon EC2 instance lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                     <p>Lookback period preferences for Amazon EC2 instances, Amazon EBS volumes, Amazon ECS services, Amazon RDS DB instances, and Aurora DB cluster storage resource types can be set at the organization, account, and resource levels.</p>
     #                  </li>
     #                  <li>
     #                     <p>Auto Scaling group lookback preferences can only be set at the resource level.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Amazon EBS volume lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Amazon ECS service on Fargate lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Amazon RDS DB instance lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Aurora DB cluster storage lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Changing the lookback period for Amazon EBS volumes to 14 days does not affect the 32-day lookback period used to determine whether an Amazon EBS volume is unattached.</p>
     #                  </li>
     #               </ul>
     #            </note>
     #   @return [String]
     # @!attribute utilization_preferences
     #   <p>
-    #               The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. When this 
+    #               The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. When this
     #               preference isn't specified, we use the following default values.
     #           </p>
     #            <p>CPU utilization:</p>
@@ -5566,13 +5628,13 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::UtilizationPreference>]
     # @!attribute preferred_resources
     #   <p>
-    #               The preference to control which resource type values are considered when generating rightsizing recommendations. 
-    #               You can specify this preference as a combination of include and exclude lists. You must specify either an 
-    #               <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, 
+    #               The preference to control which resource type values are considered when generating rightsizing recommendations.
+    #               You can specify this preference as a combination of include and exclude lists. You must specify either an
+    #               <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values,
     #               an error occurs.
     #           </p>
     #            <note>
-    #               <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.</p>
+    #               <p>You can only set this preference for the Amazon EC2 instance, Auto Scaling group, Amazon EBS volume, Amazon ECS service, Amazon RDS DB instance, and Aurora DB cluster storage resource types.</p>
     #            </note>
     #   @return [Array<Types::PreferredResource>]
     # @!attribute savings_estimation_mode
@@ -5652,7 +5714,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               Describes the savings opportunity for Amazon Aurora and RDS database recommendations or for the recommendation option.
     #           </p>
-    #            <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. 
+    #            <p>Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts.
     #               You can achieve this by implementing a given Compute Optimizer recommendation.</p>
     #   @return [Types::RDSInstanceSavingsOpportunityAfterDiscounts]
     class RDSDBInstanceRecommendationOption < Struct.new(
@@ -5828,7 +5890,7 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             Describes a filter that returns a more specific list of DB instance 
+    #             Describes a filter that returns a more specific list of DB instance
     #             recommendations. Use this filter with the <a>GetECSServiceRecommendations</a> action.
     #         </p>
     # @!attribute name
@@ -5838,17 +5900,17 @@ module Aws::ComputeOptimizer
     #            <p>
     #               Specify <code>Finding</code> to return recommendations with a specific finding classification.
     #           </p>
-    #            <p>You can filter your DB instance recommendations by <code>tag:key</code> 
+    #            <p>You can filter your DB instance recommendations by <code>tag:key</code>
     #               and <code>tag-key</code> tags.</p>
-    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your 
-    #               DB instance recommendations. Use the tag key in the filter name and the tag value 
-    #               as the filter value. For example, to find all DB instance recommendations that have 
-    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>, 
+    #            <p>A <code>tag:key</code> is a key and value combination of a tag assigned to your
+    #               DB instance recommendations. Use the tag key in the filter name and the tag value
+    #               as the filter value. For example, to find all DB instance recommendations that have
+    #               a tag with the key of <code>Owner</code> and the value of <code>TeamA</code>,
     #               specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
-    #            <p>A <code>tag-key</code> is the key of a tag assigned to your DB instance recommendations. Use 
-    #               this filter to find all of your DB instance recommendations that have a tag with a 
-    #               specific key. This doesn’t consider the tag value. For example, you can find 
-    #               your DB instance recommendations with a tag key value of <code>Owner</code> or without any tag 
+    #            <p>A <code>tag-key</code> is the key of a tag assigned to your DB instance recommendations. Use
+    #               this filter to find all of your DB instance recommendations that have a tag with a
+    #               specific key. This doesn’t consider the tag value. For example, you can find
+    #               your DB instance recommendations with a tag key value of <code>Owner</code> or without any tag
     #               keys assigned.</p>
     #   @return [String]
     # @!attribute values
@@ -5931,7 +5993,7 @@ module Aws::ComputeOptimizer
     #             Describes the utilization metric of an Amazon Aurora and RDS database.
     #         </p>
     #          <p>
-    #             To determine the performance difference between your current DB instance and the recommended option, 
+    #             To determine the performance difference between your current DB instance and the recommended option,
     #             compare the utilization metric data of your service against its projected utilization metric data.
     #         </p>
     # @!attribute name
@@ -5979,8 +6041,8 @@ module Aws::ComputeOptimizer
     #             Describes the projected metrics of an Amazon Aurora and RDS database recommendation option.
     #         </p>
     #          <p>
-    #             To determine the performance difference between your current Amazon Aurora and RDS database 
-    #             and the recommended option, compare the metric data of your service against 
+    #             To determine the performance difference between your current Amazon Aurora and RDS database
+    #             and the recommended option, compare the metric data of your service against
     #             its projected metric data.
     #         </p>
     # @!attribute name
@@ -6012,7 +6074,7 @@ module Aws::ComputeOptimizer
     #             Describes the projected metrics of an Amazon Aurora and RDS database recommendation option.
     #         </p>
     #          <p>
-    #             To determine the performance difference between your current Amazon Aurora and RDS database and the recommended option, compare 
+    #             To determine the performance difference between your current Amazon Aurora and RDS database and the recommended option, compare
     #             the metric data of your service against its projected metric data.
     #         </p>
     # @!attribute recommended_db_instance_class
@@ -6088,8 +6150,8 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             Describes the estimated monthly savings possible for DB instances by adopting 
-    #             Compute Optimizer recommendations. This is based on DB instance pricing after applying 
+    #             Describes the estimated monthly savings possible for DB instances by adopting
+    #             Compute Optimizer recommendations. This is based on DB instance pricing after applying
     #             Savings Plans discounts.
     #         </p>
     # @!attribute currency
@@ -6120,18 +6182,18 @@ module Aws::ComputeOptimizer
     #             Describes the savings opportunity for DB instance recommendations after applying Savings Plans discounts.
     #         </p>
     #          <p>
-    #             Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. 
+    #             Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts.
     #             You can achieve this by implementing a given Compute Optimizer recommendation.
     #         </p>
     # @!attribute savings_opportunity_percentage
     #   <p>
-    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s 
+    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s
     #               DB instance recommendations. This includes any applicable Savings Plans discounts.
     #           </p>
     #   @return [Float]
     # @!attribute estimated_monthly_savings
     #   <p>
-    #               The estimated monthly savings possible by adopting Compute Optimizer’s DB instance recommendations. 
+    #               The estimated monthly savings possible by adopting Compute Optimizer’s DB instance recommendations.
     #               This includes any applicable Savings Plans discounts.
     #           </p>
     #   @return [Types::RDSInstanceEstimatedMonthlySavings]
@@ -6166,7 +6228,7 @@ module Aws::ComputeOptimizer
     end
 
     # <p>
-    #             Describes the estimated monthly savings possible for DB instance storage by adopting Compute Optimizer 
+    #             Describes the estimated monthly savings possible for DB instance storage by adopting Compute Optimizer
     #             recommendations. This is based on DB instance pricing after applying Savings Plans discounts.
     #         </p>
     # @!attribute currency
@@ -6197,12 +6259,12 @@ module Aws::ComputeOptimizer
     #             Describes the savings opportunity for Amazon RDS storage recommendations after applying Savings Plans discounts.
     #         </p>
     #          <p>
-    #             Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts. 
+    #             Savings opportunity represents the estimated monthly savings after applying Savings Plans discounts.
     #             You can achieve this by implementing a given Compute Optimizer recommendation.
     #         </p>
     # @!attribute savings_opportunity_percentage
     #   <p>
-    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s 
+    #               The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer’s
     #               DB instance storage recommendations. This includes any applicable Savings Plans discounts.
     #           </p>
     #   @return [Float]
@@ -6353,14 +6415,14 @@ module Aws::ComputeOptimizer
     #   @return [Types::ExternalMetricsPreference]
     # @!attribute look_back_period
     #   <p>
-    #               The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. 
+    #               The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed.
     #               If the preference isn’t set, this object is null.
     #           </p>
     #   @return [String]
     # @!attribute utilization_preferences
     #   <p>
-    #               The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. 
-    #               If the preference isn’t set, this object is null. 
+    #               The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom.
+    #               If the preference isn’t set, this object is null.
     #           </p>
     #            <note>
     #               <p>This preference is only available for the Amazon EC2 instance resource type.</p>
@@ -6368,14 +6430,14 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::UtilizationPreference>]
     # @!attribute preferred_resources
     #   <p>
-    #               The preference to control which resource type values are considered when generating rightsizing recommendations. 
-    #               This object resolves any wildcard expressions and returns the effective list of candidate resource type values. 
+    #               The preference to control which resource type values are considered when generating rightsizing recommendations.
+    #               This object resolves any wildcard expressions and returns the effective list of candidate resource type values.
     #               If the preference isn’t set, this object is null.
     #           </p>
     #   @return [Array<Types::EffectivePreferredResource>]
     # @!attribute savings_estimation_mode
     #   <p>
-    #               Describes the savings estimation mode used for calculating savings opportunity. 
+    #               Describes the savings estimation mode used for calculating savings opportunity.
     #           </p>
     #            <p>Only the account manager or delegated administrator of your organization can activate this preference.</p>
     #   @return [String]
@@ -6473,8 +6535,8 @@ module Aws::ComputeOptimizer
     #   @return [Types::CurrentPerformanceRiskRatings]
     # @!attribute inferred_workload_savings
     #   <p>
-    #               An array of objects that describes the estimated monthly saving amounts for the instances running on the specified 
-    #               <code>inferredWorkloadTypes</code>. The array contains the top five savings opportunites for the instances that run 
+    #               An array of objects that describes the estimated monthly saving amounts for the instances running on the specified
+    #               <code>inferredWorkloadTypes</code>. The array contains the top five savings opportunites for the instances that run
     #               inferred workload types.
     #           </p>
     #   @return [Array<Types::InferredWorkloadSaving>]
@@ -6716,8 +6778,8 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::ContainerConfiguration>]
     # @!attribute auto_scaling_configuration
     #   <p>
-    #               Describes the Auto Scaling configuration methods for an Amazon ECS service. This affects 
-    #               the generated recommendations. For example, if Auto Scaling is configured on a 
+    #               Describes the Auto Scaling configuration methods for an Amazon ECS service. This affects
+    #               the generated recommendations. For example, if Auto Scaling is configured on a
     #               service’s CPU, then Compute Optimizer doesn’t generate CPU size recommendations.
     #           </p>
     #            <p>The Auto Scaling configuration methods include:</p>
@@ -6733,11 +6795,11 @@ module Aws::ComputeOptimizer
     #                       to use target scaling on memory, Compute Optimizer doesn't generate memory recommendations.</p>
     #               </li>
     #            </ul>
-    #            <p>For more information about step scaling and target scaling, see 
+    #            <p>For more information about step scaling and target scaling, see
     #               <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html">
-    #                   Step scaling policies for Application Auto Scaling</a> and 
+    #                   Step scaling policies for Application Auto Scaling</a> and
     #               <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html">
-    #                   Target tracking scaling policies for Application Auto Scaling</a> in the 
+    #                   Target tracking scaling policies for Application Auto Scaling</a> in the
     #               <i>Application Auto Scaling User Guide</i>.</p>
     #   @return [String]
     # @!attribute task_definition_arn
@@ -6798,13 +6860,13 @@ module Aws::ComputeOptimizer
     #         </p>
     # @!attribute key
     #   <p>
-    #               One part of a key-value pair that makes up a tag. A key is a general 
+    #               One part of a key-value pair that makes up a tag. A key is a general
     #               label that acts like a category for more specific tag values.
     #           </p>
     #   @return [String]
     # @!attribute value
     #   <p>
-    #               One part of a key-value pair that make up a tag. A value acts as a descriptor 
+    #               One part of a key-value pair that make up a tag. A value acts as a descriptor
     #               within a tag category (key). The value can be empty or null.
     #           </p>
     #   @return [String]
@@ -6916,17 +6978,17 @@ module Aws::ComputeOptimizer
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>GPU</code> - The percentage of allocated GPUs that currently run on 
+    #                     <code>GPU</code> - The percentage of allocated GPUs that currently run on
     #                       the instance.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>GPU_MEMORY</code> - The percentage of total GPU memory that currently runs on 
+    #                     <code>GPU_MEMORY</code> - The percentage of total GPU memory that currently runs on
     #                       the instance.</p>
     #                  <note>
-    #                     <p>The <code>GPU</code> and <code>GPU_MEMORY</code> metrics are only returned for resources 
-    #                           with the unified CloudWatch Agent installed on them. For more information, see 
-    #                           <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent">Enabling NVIDIA GPU 
+    #                     <p>The <code>GPU</code> and <code>GPU_MEMORY</code> metrics are only returned for resources
+    #                           with the unified CloudWatch Agent installed on them. For more information, see
+    #                           <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#nvidia-cw-agent">Enabling NVIDIA GPU
     #                               utilization with the CloudWatch Agent</a>.</p>
     #                  </note>
     #               </li>
@@ -7054,7 +7116,7 @@ module Aws::ComputeOptimizer
     #          </note>
     # @!attribute metric_name
     #   <p>
-    #               The name of the resource utilization metric name to customize. 
+    #               The name of the resource utilization metric name to customize.
     #           </p>
     #   @return [String]
     # @!attribute metric_parameters
@@ -7252,7 +7314,7 @@ module Aws::ComputeOptimizer
     #   @return [Types::SavingsOpportunity]
     # @!attribute savings_opportunity_after_discounts
     #   <p>
-    #               An object that describes the savings opportunity for the Amazon EBS volume recommendation option with specific discounts. Savings 
+    #               An object that describes the savings opportunity for the Amazon EBS volume recommendation option with specific discounts. Savings
     #               opportunity includes the estimated monthly savings  and percentage.
     #           </p>
     #   @return [Types::EBSSavingsOpportunityAfterDiscounts]

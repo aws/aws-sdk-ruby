@@ -24,12 +24,15 @@ module Aws::BedrockAgentCore
   #
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {DuplicateIdException}
   # * {InternalServerException}
   # * {InvalidInputException}
   # * {ResourceNotFoundException}
+  # * {RetryableConflictException}
   # * {RuntimeClientError}
   # * {ServiceException}
   # * {ServiceQuotaExceededException}
+  # * {SubscriptionRequiredException}
   # * {ThrottledException}
   # * {ThrottlingException}
   # * {UnauthorizedException}
@@ -57,6 +60,19 @@ module Aws::BedrockAgentCore
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BedrockAgentCore::Types::ConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p> An exception thrown when attempting to create a resource with an identifier that already exists.</p>
+    class DuplicateIdException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::BedrockAgentCore::Types::DuplicateIdException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -105,6 +121,23 @@ module Aws::BedrockAgentCore
       end
     end
 
+    # <p>The exception that occurs when there is a retryable conflict performing an operation. This is a temporary condition that may resolve itself with retries. We recommend implementing exponential backoff retry logic in your application.</p>
+    class RetryableConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::BedrockAgentCore::Types::RetryableConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+    end
+
     # <p>The exception that occurs when there is an error in the runtime client. This can happen due to network issues, invalid configuration, or other client-side problems. Check the error message for specific details about the error.</p>
     class RuntimeClientError < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -141,6 +174,29 @@ module Aws::BedrockAgentCore
 
       def message
         @data[:message]
+      end
+    end
+
+    # <p>Returned when you attempt a wallet operation against a Coinbase Marketplace connector whose account does not hold an active Marketplace subscription and is not within the legacy exception period. Subscribe to the Marketplace listing before you retry the operation.</p>
+    class SubscriptionRequiredException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::BedrockAgentCore::Types::SubscriptionRequiredException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>The URL to the Marketplace listing where you can subscribe.</p>
+      def subscription_url
+        @data[:subscription_url]
+      end
+
+      # <p>The name of the product that requires a Marketplace subscription.</p>
+      def product_name
+        @data[:product_name]
       end
     end
 

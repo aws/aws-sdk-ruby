@@ -1,5 +1,0 @@
-  module Aws
-    module ElasticTranscoder
-      VERSION: String
-    end
-  end

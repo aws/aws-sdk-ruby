@@ -46,7 +46,7 @@ Aws.const_set('MarketplaceMetering', Module.new) unless Aws.const_defined?('Mark
 #             <li>
 #                <p>Submits the metering record for a set of customers.
 #                         <code>BatchMeterUsage</code> API calls are captured by CloudTrail. You can use
-#                     CloudTrail to verify that the software as a subscription (SaaS) metering records that
+#                     CloudTrail to verify that the software as a service (SaaS) metering records that
 #                     you sent are accurate by searching for records with the <code>eventName</code>
 #                     of <code>BatchMeterUsage</code>. You can also use CloudTrail to audit records over
 #                     time. For more information, see the <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html">CloudTrail User
@@ -72,7 +72,7 @@ Aws.const_set('MarketplaceMetering', Module.new) unless Aws.const_defined?('Mark
 #             <li>
 #                <p>Resolves the registration token that the buyer submits through the browser
 #                     during the registration process. Obtains a <code>CustomerIdentifier</code> along
-#                     with the <code>CustomerAWSAccountId</code> and <code>ProductCode</code>.</p>
+#                     with the <code>CustomerAWSAccountId</code>, <code>ProductCode</code>, and <code>LicenseArn</code>.</p>
 #             </li>
 #             <li>
 #                <p>Called from: SaaS application during the registration process</p>
@@ -89,7 +89,7 @@ Aws.const_set('MarketplaceMetering', Module.new) unless Aws.const_defined?('Mark
 #             products</b>
 #          </p>
 #          <p>
-#             <i>RegisteredUsage</i>
+#             <i>RegisterUsage</i>
 #          </p>
 #          <ul>
 #             <li>

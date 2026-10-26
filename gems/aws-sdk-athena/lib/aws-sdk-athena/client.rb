@@ -144,18 +144,18 @@ module Aws::Athena
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -370,7 +370,8 @@ module Aws::Athena
     #           service_processing_time_in_millis: 1,
     #           result_reuse_information: {
     #             reused_previous_result: false, # required
-    #           }
+    #           },
+    #           dpu_count: 1.0
     #         },
     #         work_group: "WorkGroupName",
     #         engine_version: {
@@ -829,6 +830,44 @@ module Aws::Athena
     #       },
     #       additional_configuration: "NameString",
     #       execution_role: "RoleArn",
+    #       monitoring_configuration: {
+    #         cloud_watch_logging_configuration: {
+    #           enabled: false, # required
+    #           log_group: "LogGroupName",
+    #           log_stream_name_prefix: "LogStreamNamePrefix",
+    #           log_types: {
+    #             "LogTypeKey" => ["LogTypeValue"]
+    #           }
+    #         },
+    #         managed_logging_configuration: {
+    #           enabled: false, # required
+    #           kms_key: "KmsKey"
+    #         },
+    #         s3_logging_configuration: {
+    #           enabled: false, # required
+    #           kms_key: "KmsKey",
+    #           log_location: "S3OutputLocation"
+    #         }
+    #       },
+    #       engine_configuration: {
+    #         coordinator_dpu_size: 1,
+    #         max_concurrent_dpus: 1,
+    #         default_executor_dpu_size: 1,
+    #         additional_configs: {
+    #           "KeyString" => "ParametersMapValue"
+    #         },
+    #         spark_properties: {
+    #           "KeyString" => "ParametersMapValue"
+    #         },
+    #         classifications: [
+    #           {
+    #             name: "NameString",
+    #             properties: {
+    #               "KeyString" => "ParametersMapValue"
+    #             }
+    #           }
+    #         ]
+    #       },
     #       customer_content_encryption_configuration: {
     #         kms_key: "KmsKey", # required
     #       },
@@ -1418,7 +1457,8 @@ module Aws::Athena
     #         service_processing_time_in_millis: 1,
     #         result_reuse_information: {
     #           reused_previous_result: false, # required
-    #         }
+    #         },
+    #         dpu_count: 1.0
     #       },
     #       work_group: "WorkGroupName",
     #       engine_version: {
@@ -1524,8 +1564,8 @@ module Aws::Athena
     #                 <code>Timeline</code> section of the response object are available as soon as <a>QueryExecutionStatus$State</a> is in a SUCCEEDED or FAILED state. The
     #             remaining non-timeline statistics in the response (like stage-level input and output row
     #             count and data size) are updated asynchronously and may not be available immediately
-    #             after a query completes. The non-timeline statistics are also not included when a query
-    #             has row-level filters defined in Lake Formation.</p>
+    #             after a query completes or, in some cases, may not be returned. The non-timeline
+    #             statistics are also not included when a query has row-level filters defined in Lake Formation.</p>
     # @param [Hash, Types::GetQueryRuntimeStatisticsInput] params
     # @option params [String] :query_execution_id
     #   <p>The unique ID of the query execution.</p>
@@ -1585,6 +1625,27 @@ module Aws::Athena
       request.send_request(options)
     end
 
+    # <p>Gets the Live UI/Persistence UI for a session.</p>
+    # @param [Hash, Types::GetResourceDashboardRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The The Amazon Resource Name (ARN) for a session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "AmazonResourceName", # required
+    #   }
+    #   options = {}
+    #   response = client.get_resource_dashboard(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     url: "String", # required
+    #   }
+    # @return [Types::GetResourceDashboardResponse]
+    def get_resource_dashboard(params = {}, options = {})
+      request = build_request(:get_resource_dashboard, params)
+      request.send_request(options)
+    end
+
     # <p>Gets the full details of a previously created session, including the session status
     #             and configuration.</p>
     # @param [Hash, Types::GetSessionRequest] params
@@ -1605,20 +1666,48 @@ module Aws::Athena
     #     engine_version: "NameString",
     #     engine_configuration: {
     #       coordinator_dpu_size: 1,
-    #       max_concurrent_dpus: 1, # required
+    #       max_concurrent_dpus: 1,
     #       default_executor_dpu_size: 1,
     #       additional_configs: {
     #         "KeyString" => "ParametersMapValue"
     #       },
     #       spark_properties: {
     #         "KeyString" => "ParametersMapValue"
-    #       }
+    #       },
+    #       classifications: [
+    #         {
+    #           name: "NameString",
+    #           properties: {
+    #             "KeyString" => "ParametersMapValue"
+    #           }
+    #         }
+    #       ]
     #     },
     #     notebook_version: "NameString",
+    #     monitoring_configuration: {
+    #       cloud_watch_logging_configuration: {
+    #         enabled: false, # required
+    #         log_group: "LogGroupName",
+    #         log_stream_name_prefix: "LogStreamNamePrefix",
+    #         log_types: {
+    #           "LogTypeKey" => ["LogTypeValue"]
+    #         }
+    #       },
+    #       managed_logging_configuration: {
+    #         enabled: false, # required
+    #         kms_key: "KmsKey"
+    #       },
+    #       s3_logging_configuration: {
+    #         enabled: false, # required
+    #         kms_key: "KmsKey",
+    #         log_location: "S3OutputLocation"
+    #       }
+    #     },
     #     session_configuration: {
     #       execution_role: "RoleArn",
     #       working_directory: "ResultOutputLocation",
     #       idle_timeout_seconds: 1,
+    #       session_idle_timeout_in_minutes: 1,
     #       encryption_configuration: {
     #         encryption_option: "SSE_S3" # One of: ["SSE_S3", "SSE_KMS", "CSE_KMS"], # required
     #         kms_key: "String"
@@ -1639,6 +1728,29 @@ module Aws::Athena
     # @return [Types::GetSessionResponse]
     def get_session(params = {}, options = {})
       request = build_request(:get_session, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets a connection endpoint and authentication token for a given session Id.</p>
+    # @param [Hash, Types::GetSessionEndpointRequest] params
+    # @option params [String] :session_id
+    #   <p>The session ID.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     session_id: "SessionId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_session_endpoint(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     endpoint_url: "String", # required
+    #     auth_token: "String", # required
+    #     auth_token_expiration_time: Time.now, # required
+    #   }
+    # @return [Types::GetSessionEndpointResponse]
+    def get_session_endpoint(params = {}, options = {})
+      request = build_request(:get_session_endpoint, params)
       request.send_request(options)
     end
 
@@ -1769,6 +1881,44 @@ module Aws::Athena
     #         },
     #         additional_configuration: "NameString",
     #         execution_role: "RoleArn",
+    #         monitoring_configuration: {
+    #           cloud_watch_logging_configuration: {
+    #             enabled: false, # required
+    #             log_group: "LogGroupName",
+    #             log_stream_name_prefix: "LogStreamNamePrefix",
+    #             log_types: {
+    #               "LogTypeKey" => ["LogTypeValue"]
+    #             }
+    #           },
+    #           managed_logging_configuration: {
+    #             enabled: false, # required
+    #             kms_key: "KmsKey"
+    #           },
+    #           s3_logging_configuration: {
+    #             enabled: false, # required
+    #             kms_key: "KmsKey",
+    #             log_location: "S3OutputLocation"
+    #           }
+    #         },
+    #         engine_configuration: {
+    #           coordinator_dpu_size: 1,
+    #           max_concurrent_dpus: 1,
+    #           default_executor_dpu_size: 1,
+    #           additional_configs: {
+    #             "KeyString" => "ParametersMapValue"
+    #           },
+    #           spark_properties: {
+    #             "KeyString" => "ParametersMapValue"
+    #           },
+    #           classifications: [
+    #             {
+    #               name: "NameString",
+    #               properties: {
+    #                 "KeyString" => "ParametersMapValue"
+    #               }
+    #             }
+    #           ]
+    #         },
     #         customer_content_encryption_configuration: {
     #           kms_key: "KmsKey", # required
     #         },
@@ -2675,6 +2825,11 @@ module Aws::Athena
     #               the parameters in the query in the order in which the parameters occur.</p>
     # @option params [Types::ResultReuseConfiguration] :result_reuse_configuration
     #   <p>Specifies the query result reuse behavior for the query.</p>
+    # @option params [Types::EngineConfiguration] :engine_configuration
+    #   <p>The engine configuration for the workgroup, which includes the minimum/maximum number of Data Processing Units (DPU) that queries should use when
+    #               running in provisioned capacity. If not specified, Athena uses default values (Default value for min is 4 and for max is Minimum of 124 and allocated DPUs).</p>
+    #            <p>To specify minimum and maximum DPU values for Capacity Reservations queries, the workgroup containing <code>EngineConfiguration</code> should have the following values: The name of
+    #               the <code>Classifications</code> should be <code>athena-query-engine-properties</code>, with the only allowed properties as <code>max-dpu-count</code> and <code>min-dpu-count</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     query_string: "QueryString", # required
@@ -2701,6 +2856,25 @@ module Aws::Athena
     #         enabled: false, # required
     #         max_age_in_minutes: 1
     #       }
+    #     },
+    #     engine_configuration: {
+    #       coordinator_dpu_size: 1,
+    #       max_concurrent_dpus: 1,
+    #       default_executor_dpu_size: 1,
+    #       additional_configs: {
+    #         "KeyString" => "ParametersMapValue"
+    #       },
+    #       spark_properties: {
+    #         "KeyString" => "ParametersMapValue"
+    #       },
+    #       classifications: [
+    #         {
+    #           name: "NameString",
+    #           properties: {
+    #             "KeyString" => "ParametersMapValue"
+    #           }
+    #         }
+    #       ]
     #     }
     #   }
     #   options = {}
@@ -2726,6 +2900,13 @@ module Aws::Athena
     # @option params [Types::EngineConfiguration] :engine_configuration
     #   <p>Contains engine data processing unit (DPU) configuration settings and parameter
     #               mappings.</p>
+    # @option params [String] :execution_role
+    #   <p>The ARN of the execution role used to access user resources for Spark sessions and
+    #               Identity Center enabled workgroups. This property applies only to Spark enabled
+    #               workgroups and Identity Center enabled workgroups.</p>
+    # @option params [Types::MonitoringConfiguration] :monitoring_configuration
+    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #               Amazon CloudWatch log groups etc.</p>
     # @option params [String] :notebook_version
     #   <p>The notebook version. This value is supplied automatically for notebook sessions in
     #               the Athena console and is not required for programmatic session access. The
@@ -2745,24 +2926,63 @@ module Aws::Athena
     #                   not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide
     #                   this token or the action will fail.</p>
     #            </important>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>A list of comma separated tags to add to the session that is created.</p>
+    # @option params [Boolean] :copy_work_group_tags
+    #   <p>Copies the tags from the Workgroup to the Session when.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     description: "DescriptionString",
     #     work_group: "WorkGroupName", # required
     #     engine_configuration: { # required
     #       coordinator_dpu_size: 1,
-    #       max_concurrent_dpus: 1, # required
+    #       max_concurrent_dpus: 1,
     #       default_executor_dpu_size: 1,
     #       additional_configs: {
     #         "KeyString" => "ParametersMapValue"
     #       },
     #       spark_properties: {
     #         "KeyString" => "ParametersMapValue"
+    #       },
+    #       classifications: [
+    #         {
+    #           name: "NameString",
+    #           properties: {
+    #             "KeyString" => "ParametersMapValue"
+    #           }
+    #         }
+    #       ]
+    #     },
+    #     execution_role: "RoleArn",
+    #     monitoring_configuration: {
+    #       cloud_watch_logging_configuration: {
+    #         enabled: false, # required
+    #         log_group: "LogGroupName",
+    #         log_stream_name_prefix: "LogStreamNamePrefix",
+    #         log_types: {
+    #           "LogTypeKey" => ["LogTypeValue"]
+    #         }
+    #       },
+    #       managed_logging_configuration: {
+    #         enabled: false, # required
+    #         kms_key: "KmsKey"
+    #       },
+    #       s3_logging_configuration: {
+    #         enabled: false, # required
+    #         kms_key: "KmsKey",
+    #         log_location: "S3OutputLocation"
     #       }
     #     },
     #     notebook_version: "NameString",
     #     session_idle_timeout_in_minutes: 1,
-    #     client_request_token: "IdempotencyToken"
+    #     client_request_token: "IdempotencyToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue"
+    #       }
+    #     ],
+    #     copy_work_group_tags: false
     #   }
     #   options = {}
     #   response = client.start_session(params, options)
@@ -3196,6 +3416,44 @@ module Aws::Athena
     #         enable_s3_access_grants: false, # required
     #         create_user_level_prefix: false,
     #         authentication_type: "DIRECTORY_IDENTITY" # One of: ["DIRECTORY_IDENTITY"], # required
+    #       },
+    #       monitoring_configuration: {
+    #         cloud_watch_logging_configuration: {
+    #           enabled: false, # required
+    #           log_group: "LogGroupName",
+    #           log_stream_name_prefix: "LogStreamNamePrefix",
+    #           log_types: {
+    #             "LogTypeKey" => ["LogTypeValue"]
+    #           }
+    #         },
+    #         managed_logging_configuration: {
+    #           enabled: false, # required
+    #           kms_key: "KmsKey"
+    #         },
+    #         s3_logging_configuration: {
+    #           enabled: false, # required
+    #           kms_key: "KmsKey",
+    #           log_location: "S3OutputLocation"
+    #         }
+    #       },
+    #       engine_configuration: {
+    #         coordinator_dpu_size: 1,
+    #         max_concurrent_dpus: 1,
+    #         default_executor_dpu_size: 1,
+    #         additional_configs: {
+    #           "KeyString" => "ParametersMapValue"
+    #         },
+    #         spark_properties: {
+    #           "KeyString" => "ParametersMapValue"
+    #         },
+    #         classifications: [
+    #           {
+    #             name: "NameString",
+    #             properties: {
+    #               "KeyString" => "ParametersMapValue"
+    #             }
+    #           }
+    #         ]
     #       }
     #     },
     #     state: "ENABLED" # One of: ["ENABLED", "DISABLED"]

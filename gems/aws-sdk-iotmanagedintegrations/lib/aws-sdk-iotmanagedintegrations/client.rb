@@ -144,18 +144,18 @@ module Aws::IoTManagedIntegrations
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -221,6 +221,8 @@ module Aws::IoTManagedIntegrations
     #   <p>A description of the account association request.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>A set of key/value pairs that are used to manage the account association.</p>
+    # @option params [Types::GeneralAuthorizationName] :general_authorization
+    #   <p>The General Authorization reference by authorization material name.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -229,6 +231,9 @@ module Aws::IoTManagedIntegrations
     #     description: "AccountAssociationDescription",
     #     tags: {
     #       "TagKey" => "TagValue"
+    #     },
+    #     general_authorization: {
+    #       auth_material_name: "AuthMaterialName"
     #     }
     #   }
     #   options = {}
@@ -236,7 +241,7 @@ module Aws::IoTManagedIntegrations
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     o_auth_authorization_url: "OAuthAuthorizationUrl", # required
+    #     o_auth_authorization_url: "OAuthAuthorizationUrlOutput", # required
     #     account_association_id: "AccountAssociationId", # required
     #     association_state: "ASSOCIATION_IN_PROGRESS" # One of: ["ASSOCIATION_IN_PROGRESS", "ASSOCIATION_FAILED", "ASSOCIATION_SUCCEEDED", "ASSOCIATION_DELETING", "REFRESH_TOKEN_EXPIRED"], # required
     #     arn: "AccountAssociationArn"
@@ -363,7 +368,7 @@ module Aws::IoTManagedIntegrations
     #     name: "ConnectorDestinationName",
     #     description: "ConnectorDestinationDescription",
     #     cloud_connector_id: "CloudConnectorId", # required
-    #     auth_type: "OAUTH" # One of: ["OAUTH"], # required
+    #     auth_type: "OAUTH" # One of: ["OAUTH"],
     #     auth_config: { # required
     #       o_auth: {
     #         auth_url: "AuthUrl", # required
@@ -375,9 +380,18 @@ module Aws::IoTManagedIntegrations
     #           enabled: false,
     #           days_before_renewal: 1
     #         }
-    #       }
+    #       },
+    #       general_authorization: [
+    #         {
+    #           secrets_manager: { # required
+    #             arn: "SecretsManagerArn", # required
+    #             version_id: "SecretsManagerVersionId", # required
+    #           },
+    #           auth_material_name: "AuthMaterialName", # required
+    #         }
+    #       ]
     #     },
-    #     secrets_manager: { # required
+    #     secrets_manager: {
     #       arn: "SecretsManagerArn", # required
     #       version_id: "SecretsManagerVersionId", # required
     #     },
@@ -396,7 +410,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Create a product credential locker. This operation will trigger the creation of all the manufacturing resources including the Wi-Fi setup key pair and device certificate.</p>
+    # <p>Create a credential locker.</p> <note> <p>This operation will not trigger the creation of all the manufacturing resources.</p> </note>
     # @param [Hash, Types::CreateCredentialLockerRequest] params
     # @option params [String] :name
     #   <p>The name of the credential locker.</p>
@@ -427,7 +441,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p> Create a destination. IoT managed integrations uses the destination to determine where to deliver notifications for a device. </p>
+    # <p> Create a notification destination such as Kinesis Data Streams that receive events and notifications from Managed integrations. Managed integrations uses the destination to determine where to deliver notifications.</p>
     # @param [Hash, Types::CreateDestinationRequest] params
     # @option params [String] :delivery_destination_arn
     #   <p>The Amazon Resource Name (ARN) of the customer-managed destination.</p>
@@ -498,7 +512,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Creates a managed thing. A managed thing contains the device identifier, protocol supported, and capabilities of the device in a protocol-specific format.</p>
+    # <p>Creates a managed thing. A managed thing contains the device identifier, protocol supported, and capabilities of the device in a data model format defined by Managed integrations.</p>
     # @param [Hash, Types::CreateManagedThingRequest] params
     # @option params [String] :role
     #   <p>The type of device used. This will be the hub controller, cloud device, or AWS IoT device.</p>
@@ -507,9 +521,11 @@ module Aws::IoTManagedIntegrations
     # @option params [String] :credential_locker_id
     #   <p>The identifier of the credential for the managed thing.</p>
     # @option params [String] :authentication_material
-    #   <p>The authentication material defining the device connectivity setup requests. The authentication materials used are the device bar code.</p>
+    #   <p>The authentication material defining the device connectivity setup requests. The authorization materials used are the device bar code.</p>
     # @option params [String] :authentication_material_type
     #   <p>The type of authentication material used for device connectivity setup requests.</p>
+    # @option params [Types::WiFiSimpleSetupConfiguration] :wi_fi_simple_setup_configuration
+    #   <p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>
     # @option params [String] :serial_number
     #   <p>The serial number of the device.</p>
     # @option params [String] :brand
@@ -538,7 +554,12 @@ module Aws::IoTManagedIntegrations
     #     owner: "Owner",
     #     credential_locker_id: "CredentialLockerId",
     #     authentication_material: "AuthMaterialString", # required
-    #     authentication_material_type: "CUSTOM_PROTOCOL_QR_BAR_CODE" # One of: ["CUSTOM_PROTOCOL_QR_BAR_CODE", "WIFI_SETUP_QR_BAR_CODE", "ZWAVE_QR_BAR_CODE", "ZIGBEE_QR_BAR_CODE", "DISCOVERED_DEVICE"], # required
+    #     authentication_material_type: "CUSTOM_PROTOCOL_QR_BAR_CODE" # One of: ["CUSTOM_PROTOCOL_QR_BAR_CODE", "WIFI_SETUP_QR_BAR_CODE", "ZWAVE_QR_BAR_CODE", "ZIGBEE_QR_BAR_CODE", "DISCOVERED_DEVICE", "PRE_ONBOARDED_CLOUD"], # required
+    #     wi_fi_simple_setup_configuration: {
+    #       enable_as_provisioner: false,
+    #       enable_as_provisionee: false,
+    #       timeout_in_minutes: 1
+    #     },
     #     serial_number: "SerialNumber",
     #     brand: "Brand",
     #     model: "Model",
@@ -609,7 +630,7 @@ module Aws::IoTManagedIntegrations
     #   <p>A set of key/value pairs that are used to manage the notification configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"], # required
+    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"], # required
     #     destination_name: "DestinationName", # required
     #     client_token: "ClientToken",
     #     tags: {
@@ -621,7 +642,7 @@ module Aws::IoTManagedIntegrations
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"]
+    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"]
     #   }
     # @return [Types::CreateNotificationConfigurationResponse]
     def create_notification_configuration(params = {}, options = {})
@@ -629,7 +650,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Create an over-the-air (OTA) task to update a device.</p>
+    # <p>Create an over-the-air (OTA) task to target a device.</p>
     # @param [Hash, Types::CreateOtaTaskRequest] params
     # @option params [String] :description
     #   <p>The description of the over-the-air (OTA) task.</p>
@@ -759,14 +780,16 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Create a provisioning profile for a device to execute the provisioning flows using a provisioning template. The provisioning template is a document that defines the set of resources and policies applied to a device during the provisioning process.</p>
+    # <p>Create a provisioning profile for executing device provisioning flows. The provisioning profile is a document that defines the set of resources and policies applied to a device during the provisioning process.</p>
     # @param [Hash, Types::CreateProvisioningProfileRequest] params
     # @option params [String] :provisioning_type
     #   <p>The type of provisioning workflow the device uses for onboarding to IoT managed integrations.</p>
     # @option params [String] :ca_certificate
-    #   <p>The id of the certificate authority (CA) certificate.</p>
+    #   <p>The body of the PEM-encoded certificate authority (CA) certificate.</p>
+    # @option params [String] :claim_certificate
+    #   <p>The body of the PEM-encoded claim certificate. If a claim certificate is provided, it will be used for the provisioning profile. Otherwise, a claim certificate will be generated.</p>
     # @option params [String] :name
-    #   <p>The name of the provisioning template.</p>
+    #   <p>The name of the provisioning profile.</p>
     # @option params [String] :client_token
     #   <p>An idempotency token. If you retry a request that completed successfully initially using the same client token and parameters, then the retry attempt will succeed without performing any further actions.</p>
     # @option params [Hash<String, String>] :tags
@@ -775,6 +798,7 @@ module Aws::IoTManagedIntegrations
     #   params = {
     #     provisioning_type: "FLEET_PROVISIONING" # One of: ["FLEET_PROVISIONING", "JITR"], # required
     #     ca_certificate: "CaCertificate",
+    #     claim_certificate: "ClaimCertificate",
     #     name: "ProvisioningProfileName",
     #     client_token: "ClientToken",
     #     tags: {
@@ -790,6 +814,7 @@ module Aws::IoTManagedIntegrations
     #     name: "ProvisioningProfileName",
     #     provisioning_type: "FLEET_PROVISIONING" # One of: ["FLEET_PROVISIONING", "JITR"],
     #     id: "ProvisioningProfileId",
+    #     status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED"],
     #     claim_certificate: "ClaimCertificate",
     #     claim_certificate_private_key: "ClaimCertificatePrivateKey"
     #   }
@@ -799,7 +824,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Remove a third party account and related devices from an end user.</p>
+    # <p>Remove a third-party account association for an end user.</p> <note> <p>You must first call the <code>DeregisterAccountAssociation</code> to remove the connection between the managed thing and the third-party account before calling the <code>DeleteAccountAssociation</code> API.</p> </note>
     # @param [Hash, Types::DeleteAccountAssociationRequest] params
     # @option params [String] :account_association_id
     #   <p>The unique identifier of the account association to be deleted.</p>
@@ -837,7 +862,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Delete a connector destination for connecting a cloud-to-cloud (C2C) connector to the customer's Amazon Web Services account.</p>
+    # <p>Delete a connector destination linked to a cloud-to-cloud (C2C) connector.</p> <note> <p>Deletion can't be done if the account association has used this connector destination.</p> </note>
     # @param [Hash, Types::DeleteConnectorDestinationRequest] params
     # @option params [String] :identifier
     #   <p>The identifier of the connector destination.</p>
@@ -875,7 +900,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Deletes a customer-managed destination specified by id. </p>
+    # <p>Deletes a notification destination specified by name. </p>
     # @param [Hash, Types::DeleteDestinationRequest] params
     # @option params [String] :name
     #   <p>The id of the customer-managed destination.</p>
@@ -913,7 +938,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Delete a managed thing. If a controller is deleted, all of the devices connected to it will have their status changed to <code>PENDING</code>. It is not possible to remove a cloud device.</p>
+    # <p>Delete a managed thing. For direct-connected and hub-connected devices connecting with Managed integrations via a controller, all of the devices connected to it will have their status changed to <code>PENDING</code>. It is not possible to remove a cloud-to-cloud device.</p>
     # @param [Hash, Types::DeleteManagedThingRequest] params
     # @option params [String] :identifier
     #   <p>The id of the managed thing.</p>
@@ -941,7 +966,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The type of event triggering a device notification to the customer-managed destination.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"], # required
+    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"], # required
     #   }
     #   options = {}
     #   response = client.delete_notification_configuration(params, options)
@@ -995,7 +1020,7 @@ module Aws::IoTManagedIntegrations
     # <p>Delete a provisioning profile.</p>
     # @param [Hash, Types::DeleteProvisioningProfileRequest] params
     # @option params [String] :identifier
-    #   <p>The name of the provisioning template.</p>
+    #   <p>The id of the provisioning profile.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identifier: "ProvisioningProfileId", # required
@@ -1011,7 +1036,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Deregisters an account association, removing the connection between a managed thing and a third-party account.</p>
+    # <p>Deregister an account association from a managed thing.</p>
     # @param [Hash, Types::DeregisterAccountAssociationRequest] params
     # @option params [String] :managed_thing_id
     #   <p>The identifier of the managed thing to be deregistered from the account association.</p>
@@ -1053,9 +1078,12 @@ module Aws::IoTManagedIntegrations
     #     name: "AccountAssociationName",
     #     description: "AccountAssociationDescription",
     #     arn: "AccountAssociationArn",
-    #     o_auth_authorization_url: "OAuthAuthorizationUrl", # required
+    #     o_auth_authorization_url: "OAuthAuthorizationUrlOutput", # required
     #     tags: {
     #       "TagKey" => "TagValue"
+    #     },
+    #     general_authorization: {
+    #       auth_material_name: "AuthMaterialName"
     #     }
     #   }
     # @return [Types::GetAccountAssociationResponse]
@@ -1064,7 +1092,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Gets all the information about a connector for a connector developer.</p>
+    # <p>Get configuration details for a cloud connector.</p>
     # @param [Hash, Types::GetCloudConnectorRequest] params
     # @option params [String] :identifier
     #   <p>The identifier of the C2C connector.</p>
@@ -1145,7 +1173,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Get a connector destination of a cloud-to-cloud (C2C) connector connecting to a customer's Amazon Web Services account.</p>
+    # <p>Get connector destination details linked to a cloud-to-cloud (C2C) connector.</p>
     # @param [Hash, Types::GetConnectorDestinationRequest] params
     # @option params [String] :identifier
     #   <p>The identifier of the C2C connector destination.</p>
@@ -1174,7 +1202,16 @@ module Aws::IoTManagedIntegrations
     #           enabled: false,
     #           days_before_renewal: 1
     #         }
-    #       }
+    #       },
+    #       general_authorization: [
+    #         {
+    #           secrets_manager: { # required
+    #             arn: "SecretsManagerArn", # required
+    #             version_id: "SecretsManagerVersionId", # required
+    #           },
+    #           auth_material_name: "AuthMaterialName", # required
+    #         }
+    #       ]
     #     },
     #     secrets_manager: {
     #       arn: "SecretsManagerArn", # required
@@ -1257,7 +1294,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Gets a destination by ID. </p>
+    # <p>Gets a destination by name. </p>
     # @param [Hash, Types::GetDestinationRequest] params
     # @option params [String] :name
     #   <p>The name of the customer-managed destination.</p>
@@ -1302,7 +1339,7 @@ module Aws::IoTManagedIntegrations
     #   {
     #     id: "DeviceDiscoveryId", # required
     #     arn: "DeviceDiscoveryArn", # required
-    #     discovery_type: "ZWAVE" # One of: ["ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM"], # required
+    #     discovery_type: "ZWAVE" # One of: ["ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM", "CONTROLLER_CAPABILITY_REDISCOVERY"], # required
     #     status: "RUNNING" # One of: ["RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT"], # required
     #     started_at: Time.now, # required
     #     controller_id: "ManagedThingId",
@@ -1361,7 +1398,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p> Get the attributes and capabilities associated with a managed thing.</p>
+    # <p> Get details of a managed thing including its attributes and capabilities.</p>
     # @param [Hash, Types::GetManagedThingRequest] params
     # @option params [String] :identifier
     #   <p>The id of the managed thing.</p>
@@ -1403,6 +1440,11 @@ module Aws::IoTManagedIntegrations
     #     },
     #     tags: {
     #       "TagKey" => "TagValue"
+    #     },
+    #     wi_fi_simple_setup_configuration: {
+    #       enable_as_provisioner: false,
+    #       enable_as_provisionee: false,
+    #       timeout_in_minutes: 1
     #     }
     #   }
     # @return [Types::GetManagedThingResponse]
@@ -1450,6 +1492,40 @@ module Aws::IoTManagedIntegrations
     # @return [Types::GetManagedThingCapabilitiesResponse]
     def get_managed_thing_capabilities(params = {}, options = {})
       request = build_request(:get_managed_thing_capabilities, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the certificate PEM for a managed IoT thing.</p>
+    # @param [Hash, Types::GetManagedThingCertificateRequest] params
+    # @option params [String] :identifier
+    #   <p>The identifier of the managed thing.</p>
+    # @example Get managed thing certificate
+    #   # Example operation for get_managed_thing_certificate
+    #   params = {
+    #     identifier: "example-managed-thing-id"
+    #   }
+    #   options = {}
+    #   response = client.get_managed_thing_certificate(params, options)
+    #   response.to_h #=>
+    #   {
+    #     managed_thing_id: "example-managed-thing-id",
+    #     certificate_pem: "-----BEGIN CERTIFICATE-----\nMIIBkTCB+wIJAKHHH...\n-----END CERTIFICATE-----"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     identifier: "ManagedThingId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_managed_thing_certificate(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     managed_thing_id: "ManagedThingId",
+    #     certificate_pem: "CertificatePem"
+    #   }
+    # @return [Types::GetManagedThingCertificateResponse]
+    def get_managed_thing_certificate(params = {}, options = {})
+      request = build_request(:get_managed_thing_certificate, params)
       request.send_request(options)
     end
 
@@ -1534,20 +1610,20 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p> Get a notification configuration.</p>
+    # <p> Get a notification configuration for a specified event type.</p>
     # @param [Hash, Types::GetNotificationConfigurationRequest] params
     # @option params [String] :event_type
     #   <p>The type of event triggering a device notification to the customer-managed destination.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"], # required
+    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"], # required
     #   }
     #   options = {}
     #   response = client.get_notification_configuration(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"],
+    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"],
     #     destination_name: "DestinationName",
     #     created_at: Time.now,
     #     updated_at: Time.now,
@@ -1561,7 +1637,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Get the over-the-air (OTA) task.</p>
+    # <p>Get details of the over-the-air (OTA) task by its task id.</p>
     # @param [Hash, Types::GetOtaTaskRequest] params
     # @option params [String] :identifier
     #   <p>The over-the-air (OTA) task id.</p>
@@ -1677,10 +1753,10 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Get a provisioning profile by template name.</p>
+    # <p>Get details of a provisioning profile.</p>
     # @param [Hash, Types::GetProvisioningProfileRequest] params
     # @option params [String] :identifier
-    #   <p>The provisioning template the device uses for the provisioning process.</p>
+    #   <p>The id of a provisioning profile.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identifier: "ProvisioningProfileId", # required
@@ -1694,6 +1770,7 @@ module Aws::IoTManagedIntegrations
     #     name: "ProvisioningProfileName",
     #     provisioning_type: "FLEET_PROVISIONING" # One of: ["FLEET_PROVISIONING", "JITR"],
     #     id: "ProvisioningProfileId",
+    #     status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED"],
     #     claim_certificate: "ClaimCertificate",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -1705,7 +1782,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Get the runtime log configuration for a specific managed thing or for all managed things as a group.</p>
+    # <p>Get the runtime log configuration for a specific managed thing.</p>
     # @param [Hash, Types::GetRuntimeLogConfigurationRequest] params
     # @option params [String] :managed_thing_id
     #   <p>The id for a managed thing.</p>
@@ -1890,7 +1967,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Returns a list of connectors based on permissions. </p>
+    # <p>Returns a list of connectors filtered by its Lambda Amazon Resource Name (ARN) and <code>type</code>.</p>
     # @param [Hash, Types::ListCloudConnectorsRequest] params
     # @option params [String] :type
     #   <p>The type of cloud connectors to filter by when listing available connectors.</p>
@@ -2048,7 +2125,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p> List all destination names under one Amazon Web Services account.</p>
+    # <p> List all notification destinations.</p>
     # @param [Hash, Types::ListDestinationsRequest] params
     # @option params [String] :next_token
     #   <p>A token that can be used to retrieve the next set of results.</p>
@@ -2095,7 +2172,7 @@ module Aws::IoTManagedIntegrations
     #   params = {
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     type_filter: "ZWAVE" # One of: ["ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM"],
+    #     type_filter: "ZWAVE" # One of: ["ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM", "CONTROLLER_CAPABILITY_REDISCOVERY"],
     #     status_filter: "RUNNING" # One of: ["RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT"]
     #   }
     #   options = {}
@@ -2106,7 +2183,7 @@ module Aws::IoTManagedIntegrations
     #     items: [
     #       {
     #         id: "DeviceDiscoveryId",
-    #         discovery_type: "ZWAVE" # One of: ["ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM"],
+    #         discovery_type: "ZWAVE" # One of: ["ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM", "CONTROLLER_CAPABILITY_REDISCOVERY"],
     #         status: "RUNNING" # One of: ["RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT"]
     #       }
     #     ],
@@ -2215,7 +2292,8 @@ module Aws::IoTManagedIntegrations
     #     items: [
     #       {
     #         managed_thing_id: "ManagedThingId",
-    #         account_association_id: "AccountAssociationId"
+    #         account_association_id: "AccountAssociationId",
+    #         managed_thing_association_status: "PRE_ASSOCIATED" # One of: ["PRE_ASSOCIATED", "ASSOCIATED"]
     #       }
     #     ],
     #     next_token: "String"
@@ -2285,7 +2363,7 @@ module Aws::IoTManagedIntegrations
     # @option params [String] :serial_number_filter
     #   <p>Filter on the serial number of the device.</p>
     # @option params [String] :provisioning_status_filter
-    #   <p>Filter on the status of the device.</p>
+    #   <p>Filter on the status of the device. For more information, see <a href="https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html">Device Provisioning</a>.</p>
     # @option params [String] :next_token
     #   <p>A token that can be used to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
@@ -2358,7 +2436,7 @@ module Aws::IoTManagedIntegrations
     #   {
     #     notification_configuration_list: [
     #       {
-    #         event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"],
+    #         event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"],
     #         destination_name: "DestinationName"
     #       }
     #     ],
@@ -2496,7 +2574,8 @@ module Aws::IoTManagedIntegrations
     #         name: "ProvisioningProfileName",
     #         id: "ProvisioningProfileId",
     #         arn: "ProvisioningProfileArn",
-    #         provisioning_type: "FLEET_PROVISIONING" # One of: ["FLEET_PROVISIONING", "JITR"]
+    #         provisioning_type: "FLEET_PROVISIONING" # One of: ["FLEET_PROVISIONING", "JITR"],
+    #         status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -2612,10 +2691,10 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # List tags for the specified resource.
+    # <p>Lists the tags for a specified resource.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
-    #   The ARN of the resource for which to list tags.
+    #   <p>The Amazon Resource Name (ARN) of the resource for which to list tags.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "IoTManagedIntegrationsResourceARN", # required
@@ -2688,7 +2767,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Set the runtime log configuration for a specific managed thing or for all managed things as a group.</p>
+    # <p>Set the runtime log configuration for a specific managed thing.</p>
     # @param [Hash, Types::PutRuntimeLogConfigurationRequest] params
     # @option params [String] :managed_thing_id
     #   <p>The id for a managed thing.</p>
@@ -2765,7 +2844,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p>Reset a runtime log configuration for a specific managed thing or for all managed things as a group.</p>
+    # <p>Reset a runtime log configuration for a specific managed thing.</p>
     # @param [Hash, Types::ResetRuntimeLogConfigurationRequest] params
     # @option params [String] :managed_thing_id
     #   <p>The id of a managed thing.</p>
@@ -2803,7 +2882,7 @@ module Aws::IoTManagedIntegrations
     # @option params [String] :connector_device_id
     #   <p>The third-party device id as defined by the connector. This device id must not contain personal identifiable information (PII).</p> <note> <p>This parameter is used for cloud-to-cloud devices only.</p> </note>
     # @option params [String] :trace_id
-    #   <p>The trace request identifier used to correlate a command request and response. This is specified by the device owner, but will be generated by IoT managed integrations if not provided by the device owner.</p>
+    #   <p>The trace request identifier. This is generated by IoT managed integrations and can be used to trace this command and its related operations in CloudWatch.</p>
     # @option params [Array<Types::Device>] :devices
     #   <p>The list of devices.</p>
     # @option params [Types::MatterEndpoint] :matter_endpoint
@@ -3079,7 +3158,7 @@ module Aws::IoTManagedIntegrations
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     o_auth_authorization_url: "OAuthAuthorizationUrl", # required
+    #     o_auth_authorization_url: "OAuthAuthorizationUrlOutput", # required
     #   }
     # @return [Types::StartAccountAssociationRefreshResponse]
     def start_account_association_refresh(params = {}, options = {})
@@ -3087,7 +3166,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p> This API is used to start device discovery for hub-connected and third-party-connected devices. The authentication material (install code) is passed as a message to the controller telling it to start the discovery.</p>
+    # <p> This API is used to start device discovery for hub-connected and third-party-connected devices. The authentication material (install code) is delivered as a message to the controller instructing it to start the discovery.</p>
     # @param [Hash, Types::StartDeviceDiscoveryRequest] params
     # @option params [String] :discovery_type
     #   <p>The discovery type supporting the type of device to be discovered in the device discovery task request.</p>
@@ -3107,9 +3186,15 @@ module Aws::IoTManagedIntegrations
     #   <p>An idempotency token. If you retry a request that completed successfully initially using the same client token and parameters, then the retry attempt will succeed without performing any further actions.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>A set of key/value pairs that are used to manage the device discovery request.</p>
+    # @option params [Array<String>] :connector_device_id_list
+    #   <p>Used as a filter for PLA discoveries.</p>
+    # @option params [String] :protocol
+    #   <p>The protocol type for capability rediscovery (ZWAVE, ZIGBEE, or CUSTOM).</p> <note> <p>This parameter is only available when the discovery type is CONTROLLER_CAPABILITY_REDISCOVERY.</p> </note>
+    # @option params [String] :end_device_identifier
+    #   <p>The unique id of the end device for capability rediscovery.</p> <note> <p>This parameter is only available when the discovery type is CONTROLLER_CAPABILITY_REDISCOVERY.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
-    #     discovery_type: "ZWAVE" # One of: ["ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM"], # required
+    #     discovery_type: "ZWAVE" # One of: ["ZWAVE", "ZIGBEE", "CLOUD", "CUSTOM", "CONTROLLER_CAPABILITY_REDISCOVERY"], # required
     #     custom_protocol_detail: {
     #       "CustomProtocolDetailKey" => "CustomProtocolDetailValue"
     #     },
@@ -3121,7 +3206,10 @@ module Aws::IoTManagedIntegrations
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue"
-    #     }
+    #     },
+    #     connector_device_id_list: ["ConnectorDeviceId"],
+    #     protocol: "ZWAVE" # One of: ["ZWAVE", "ZIGBEE", "CUSTOM"],
+    #     end_device_identifier: "ManagedThingId"
     #   }
     #   options = {}
     #   response = client.start_device_discovery(params, options)
@@ -3137,12 +3225,12 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # Add tags for the specified resource.
+    # <p>Adds tags to a specified resource.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
-    #   The ARN of the resource to which to add tags.
+    #   <p>The Amazon Resource Name (ARN) of the resource to which to add tags.</p>
     # @option params [Hash<String, String>] :tags
-    #   A set of key/value pairs that are used to manage the resource
+    #   <p>A set of key/value pairs that are used to manage the resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "IoTManagedIntegrationsResourceARN", # required
@@ -3161,12 +3249,12 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # Remove tags for the specified resource.
+    # <p>Removes tags from a specified resource.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
-    #   The ARN of the resource to which to add tags.
+    #   <p>The Amazon Resource Name (ARN) of the resource from which to remove tags.</p>
     # @option params [Array<String>] :tag_keys
-    #   A list of tag keys to remove from the resource.
+    #   <p>A list of tag keys to remove from the resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "IoTManagedIntegrationsResourceARN", # required
@@ -3288,6 +3376,26 @@ module Aws::IoTManagedIntegrations
     #           enabled: false,
     #           days_before_renewal: 1
     #         }
+    #       },
+    #       general_authorization_update: {
+    #         auth_materials_to_add: [
+    #           {
+    #             secrets_manager: { # required
+    #               arn: "SecretsManagerArn", # required
+    #               version_id: "SecretsManagerVersionId", # required
+    #             },
+    #             auth_material_name: "AuthMaterialName", # required
+    #           }
+    #         ],
+    #         auth_materials_to_update: [
+    #           {
+    #             secrets_manager: { # required
+    #               arn: "SecretsManagerArn", # required
+    #               version_id: "SecretsManagerVersionId", # required
+    #             },
+    #             auth_material_name: "AuthMaterialName", # required
+    #           }
+    #         ]
     #       }
     #     },
     #     secrets_manager: {
@@ -3306,7 +3414,7 @@ module Aws::IoTManagedIntegrations
       request.send_request(options)
     end
 
-    # <p> Update a destination specified by id. </p>
+    # <p> Update a destination specified by name. </p>
     # @param [Hash, Types::UpdateDestinationRequest] params
     # @option params [String] :name
     #   <p>The name of the customer-managed destination.</p>
@@ -3369,6 +3477,8 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the credential for the managed thing.</p>
     # @option params [String] :serial_number
     #   <p>The serial number of the device.</p>
+    # @option params [Types::WiFiSimpleSetupConfiguration] :wi_fi_simple_setup_configuration
+    #   <p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>
     # @option params [String] :brand
     #   <p>The brand of the device.</p>
     # @option params [String] :model
@@ -3393,6 +3503,11 @@ module Aws::IoTManagedIntegrations
     #     owner: "Owner",
     #     credential_locker_id: "CredentialLockerId",
     #     serial_number: "SerialNumber",
+    #     wi_fi_simple_setup_configuration: {
+    #       enable_as_provisioner: false,
+    #       enable_as_provisionee: false,
+    #       timeout_in_minutes: 1
+    #     },
     #     brand: "Brand",
     #     model: "Model",
     #     name: "Name",
@@ -3451,7 +3566,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The name of the destination for the notification configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"], # required
+    #     event_type: "DEVICE_COMMAND" # One of: ["DEVICE_COMMAND", "DEVICE_COMMAND_REQUEST", "DEVICE_DISCOVERY_STATUS", "DEVICE_EVENT", "DEVICE_LIFE_CYCLE", "DEVICE_STATE", "DEVICE_OTA", "DEVICE_WSS", "CONNECTOR_ASSOCIATION", "ACCOUNT_ASSOCIATION", "CONNECTOR_ERROR_REPORT"], # required
     #     destination_name: "DestinationName", # required
     #   }
     #   options = {}

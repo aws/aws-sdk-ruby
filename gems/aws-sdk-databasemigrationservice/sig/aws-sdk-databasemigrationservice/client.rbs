@@ -84,6 +84,24 @@ module Aws::DatabaseMigrationService
       ]
     ) -> _BatchStartRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchStartRecommendationsResponse
 
+    interface _CancelMetadataModelConversionResponse
+      include Smithy::Client::_Response[Types::CancelMetadataModelConversionResponse]
+      def request: () -> Types::SchemaConversionRequest?
+    end
+    def cancel_metadata_model_conversion: (
+      ?migration_project_identifier: String,
+      ?request_identifier: String
+    ) -> _CancelMetadataModelConversionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMetadataModelConversionResponse
+
+    interface _CancelMetadataModelCreationResponse
+      include Smithy::Client::_Response[Types::CancelMetadataModelCreationResponse]
+      def request: () -> Types::SchemaConversionRequest?
+    end
+    def cancel_metadata_model_creation: (
+      ?migration_project_identifier: String,
+      ?request_identifier: String
+    ) -> _CancelMetadataModelCreationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMetadataModelCreationResponse
+
     interface _CancelReplicationTaskAssessmentRunResponse
       include Smithy::Client::_Response[Types::CancelReplicationTaskAssessmentRunResponse]
       def replication_task_assessment_run: () -> Types::ReplicationTaskAssessmentRun?
@@ -174,6 +192,14 @@ module Aws::DatabaseMigrationService
           s3_path: untyped,
           s3_access_role_arn: untyped
         },
+        sybase_ase_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          encrypt_password: bool,
+          certificate_arn: untyped
+        },
         microsoft_sql_server_settings: {
           server_name: untyped,
           port: untyped,
@@ -204,6 +230,8 @@ module Aws::DatabaseMigrationService
           database_name: untyped,
           ssl_mode: untyped,
           certificate_arn: untyped,
+          encryption_algorithm: untyped,
+          security_mechanism: untyped,
           s3_path: untyped,
           s3_access_role_arn: untyped
         },
@@ -1237,6 +1265,19 @@ module Aws::DatabaseMigrationService
       ?marker: String
     ) -> _DescribeInstanceProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceProfilesResponse
 
+    interface _DescribeMetadataModelResponse
+      include Smithy::Client::_Response[Types::DescribeMetadataModelResponse]
+      def metadata_model_name: () -> String?
+      def metadata_model_type: () -> String?
+      def target_metadata_models: () -> Array[Types::MetadataModelReference]?
+      def definition: () -> String?
+    end
+    def describe_metadata_model: (
+      ?selection_rules: String,
+      ?migration_project_identifier: String,
+      ?origin: String
+    ) -> _DescribeMetadataModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelResponse
+
     interface _DescribeMetadataModelAssessmentsResponse
       include Smithy::Client::_Response[Types::DescribeMetadataModelAssessmentsResponse]
       def marker: () -> String?
@@ -1254,6 +1295,19 @@ module Aws::DatabaseMigrationService
       ?max_records: Integer
     ) -> _DescribeMetadataModelAssessmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelAssessmentsResponse
 
+    interface _DescribeMetadataModelChildrenResponse
+      include Smithy::Client::_Response[Types::DescribeMetadataModelChildrenResponse]
+      def marker: () -> String?
+      def metadata_model_children: () -> Array[Types::MetadataModelReference]?
+    end
+    def describe_metadata_model_children: (
+      ?selection_rules: String,
+      ?migration_project_identifier: String,
+      ?origin: String,
+      ?marker: String,
+      ?max_records: Integer
+    ) -> _DescribeMetadataModelChildrenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelChildrenResponse
+
     interface _DescribeMetadataModelConversionsResponse
       include Smithy::Client::_Response[Types::DescribeMetadataModelConversionsResponse]
       def marker: () -> String?
@@ -1270,6 +1324,23 @@ module Aws::DatabaseMigrationService
       ?marker: String,
       ?max_records: Integer
     ) -> _DescribeMetadataModelConversionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelConversionsResponse
+
+    interface _DescribeMetadataModelCreationsResponse
+      include Smithy::Client::_Response[Types::DescribeMetadataModelCreationsResponse]
+      def marker: () -> String?
+      def requests: () -> Array[Types::SchemaConversionRequest]?
+    end
+    def describe_metadata_model_creations: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?marker: String,
+      ?max_records: Integer,
+      ?migration_project_identifier: String
+    ) -> _DescribeMetadataModelCreationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetadataModelCreationsResponse
 
     interface _DescribeMetadataModelExportsAsScriptResponse
       include Smithy::Client::_Response[Types::DescribeMetadataModelExportsAsScriptResponse]
@@ -1601,6 +1672,15 @@ module Aws::DatabaseMigrationService
       ?assessment_report_types: Array[String]
     ) -> _ExportMetadataModelAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportMetadataModelAssessmentResponse
 
+    interface _GetTargetSelectionRulesResponse
+      include Smithy::Client::_Response[Types::GetTargetSelectionRulesResponse]
+      def target_selection_rules: () -> String?
+    end
+    def get_target_selection_rules: (
+      ?migration_project_identifier: String,
+      ?selection_rules: String
+    ) -> _GetTargetSelectionRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTargetSelectionRulesResponse
+
     interface _ImportCertificateResponse
       include Smithy::Client::_Response[Types::ImportCertificateResponse]
       def certificate: () -> Types::Certificate?
@@ -1615,7 +1695,8 @@ module Aws::DatabaseMigrationService
           value: untyped,
           resource_arn: untyped
         }
-      ]
+      ],
+      ?kms_key_id: String
     ) -> _ImportCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportCertificateResponse
 
     interface _ListTagsForResourceResponse
@@ -1713,6 +1794,14 @@ module Aws::DatabaseMigrationService
           s3_path: untyped,
           s3_access_role_arn: untyped
         },
+        sybase_ase_settings: {
+          server_name: untyped,
+          port: untyped,
+          database_name: untyped,
+          ssl_mode: untyped,
+          encrypt_password: bool,
+          certificate_arn: untyped
+        },
         microsoft_sql_server_settings: {
           server_name: untyped,
           port: untyped,
@@ -1743,6 +1832,8 @@ module Aws::DatabaseMigrationService
           database_name: untyped,
           ssl_mode: untyped,
           certificate_arn: untyped,
+          encryption_algorithm: untyped,
+          security_mechanism: untyped,
           s3_path: untyped,
           s3_access_role_arn: untyped
         },
@@ -2370,6 +2461,21 @@ module Aws::DatabaseMigrationService
       ?migration_project_identifier: String,
       ?selection_rules: String
     ) -> _StartMetadataModelConversionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetadataModelConversionResponse
+
+    interface _StartMetadataModelCreationResponse
+      include Smithy::Client::_Response[Types::StartMetadataModelCreationResponse]
+      def request_identifier: () -> String?
+    end
+    def start_metadata_model_creation: (
+      ?migration_project_identifier: String,
+      ?selection_rules: String,
+      ?metadata_model_name: String,
+      ?properties: {
+        statement_properties: {
+          definition: String
+        }
+      }
+    ) -> _StartMetadataModelCreationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetadataModelCreationResponse
 
     interface _StartMetadataModelExportAsScriptResponse
       include Smithy::Client::_Response[Types::StartMetadataModelExportAsScriptResponse]

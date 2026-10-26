@@ -1,0 +1,439 @@
+module Aws::PricingPlanManager
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ApprovalMode
+      MANUAL: String
+      IMMEDIATE: String
+    end
+
+    class ApprovePaidSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?if_match: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor if_match: String?
+      attr_accessor client_token: String?
+    end
+
+    class ApprovePaidSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+      attr_accessor e_tag: String?
+    end
+
+    class AssociateResourcesToSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?resource_arns: Array[String],
+        ?if_match: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor if_match: String?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateResourcesToSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+      attr_accessor e_tag: String?
+    end
+
+    class CancelSubscriptionChangeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?if_match: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor if_match: String?
+      attr_accessor client_token: String?
+    end
+
+    class CancelSubscriptionChangeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+      attr_accessor e_tag: String?
+    end
+
+    class CancelSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?if_match: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor if_match: String?
+      attr_accessor client_token: String?
+    end
+
+    class CancelSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+      attr_accessor e_tag: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class CreateSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_family: String,
+        ?plan_tier: String,
+        ?usage_level: String,
+        ?resource_arns: Array[String],
+        ?approval_mode: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_family: String?
+      attr_accessor plan_tier: String?
+      attr_accessor usage_level: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor approval_mode: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+      attr_accessor e_tag: String?
+    end
+
+    class DisassociateResourcesFromSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?resource_arns: Array[String],
+        ?if_match: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor if_match: String?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateResourcesFromSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+      attr_accessor e_tag: String?
+    end
+
+    class GetSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+      attr_accessor e_tag: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListSubscriptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscriptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_summaries: Array[Types::SubscriptionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_summaries: Array[Types::SubscriptionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ScheduledChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_type: String,
+        ?effective_date: Time,
+        ?plan_tier: String,
+        ?usage_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_type: String?
+      attr_accessor effective_date: Time?
+      attr_accessor plan_tier: String?
+      attr_accessor usage_level: String?
+    end
+
+    module ScheduledChangeType
+      DOWNGRADE: String
+      CANCELLATION: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Status
+      PENDING_APPROVAL: String
+      ACTIVE: String
+      SYNC_IN_PROGRESS: String
+      FAILED: String
+    end
+
+    class Subscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?plan_family: String,
+        ?plan_tier: String,
+        ?usage_level: String,
+        ?scheduled_change: Types::ScheduledChange,
+        ?status: String,
+        ?status_reason: String,
+        ?resource_arns: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor plan_family: String?
+      attr_accessor plan_tier: String?
+      attr_accessor usage_level: String?
+      attr_accessor scheduled_change: Types::ScheduledChange?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class SubscriptionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?plan_family: String,
+        ?plan_tier: String,
+        ?usage_level: String,
+        ?scheduled_change: Types::ScheduledChange,
+        ?status: String,
+        ?status_reason: String,
+        ?resource_arns: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor plan_family: String?
+      attr_accessor plan_tier: String?
+      attr_accessor usage_level: String?
+      attr_accessor scheduled_change: Types::ScheduledChange?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor resource_arns: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor e_tag: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?plan_tier: String,
+        ?usage_level: String,
+        ?if_match: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor plan_tier: String?
+      attr_accessor usage_level: String?
+      attr_accessor if_match: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::Subscription,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::Subscription?
+      attr_accessor e_tag: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+  end
+end

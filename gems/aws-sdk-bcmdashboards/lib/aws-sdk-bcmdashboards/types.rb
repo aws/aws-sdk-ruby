@@ -17,6 +17,17 @@ module Aws::BCMDashboards
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The request could not be completed due to a conflict with the current state of the resource. For example, attempting to create a resource that already exists or is being created.</p>
+    # @!attribute message
+    #   @return [String]
+    class ConflictException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines the parameters for retrieving Amazon Web Services cost and usage data. Includes specifications for metrics, time periods, granularity, grouping dimensions, and filtering conditions.</p>
     # @!attribute metrics
     #   <p>The specific cost and usage metrics to retrieve.</p> <note> <p>Valid values for CostAndUsageQuery metrics are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>NetAmortizedCost</code>, <code>NetUnblendedCost</code>, <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>.</p> </note>
@@ -92,6 +103,36 @@ module Aws::BCMDashboards
     #   <p>The ARN of the newly created dashboard.</p>
     #   @return [String]
     class CreateDashboardResponse < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scheduled_report
+    #   <p>The configuration for the scheduled report, including the dashboard to report on, the schedule, and the execution role that the service will use to generate the dashboard snapshot.</p>
+    #   @return [Types::ScheduledReportInput]
+    # @!attribute resource_tags
+    #   <p>The tags to apply to the scheduled report resource for organization and management.</p>
+    #   @return [Array<Types::ResourceTag>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class CreateScheduledReportRequest < Struct.new(
+      nil,
+      :scheduled_report,
+      :resource_tags,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the newly created scheduled report.</p>
+    #   @return [String]
+    class CreateScheduledReportResponse < Struct.new(
       nil,
       :arn,
       keyword_init: true
@@ -185,6 +226,28 @@ module Aws::BCMDashboards
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The ARN of the scheduled report to delete.</p>
+    #   @return [String]
+    class DeleteScheduledReportRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the scheduled report that was deleted.</p>
+    #   @return [String]
+    class DeleteScheduledReportResponse < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies the values and match options for dimension-based filtering in cost and usage queries.</p>
     # @!attribute key
     #   <p>The key of the dimension to filter on (for example, <code>SERVICE</code>, <code>USAGE_TYPE</code>, or <code>OPERATION</code>).</p>
@@ -223,6 +286,40 @@ module Aws::BCMDashboards
       class Graph < DisplayConfig; end
       class Table < DisplayConfig; end
       class Unknown < DisplayConfig; end
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the scheduled report to execute.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>When set to <code>true</code>, validates the scheduled report configuration without triggering an actual execution.</p>
+    #   @return [Boolean]
+    class ExecuteScheduledReportRequest < Struct.new(
+      nil,
+      :arn,
+      :client_token,
+      :dry_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute health_status
+    #   <p>The health status of the scheduled report after the execution request.</p>
+    #   @return [Types::HealthStatus]
+    # @!attribute execution_triggered
+    #   <p>Indicates whether the execution was successfully triggered.</p>
+    #   @return [Boolean]
+    class ExecuteScheduledReportResponse < Struct.new(
+      nil,
+      :health_status,
+      :execution_triggered,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines complex filtering conditions using logical operators (<code>AND</code>, <code>OR</code>, <code>NOT</code>) and various filter types.</p>
@@ -329,6 +426,28 @@ module Aws::BCMDashboards
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The ARN of the scheduled report to retrieve.</p>
+    #   @return [String]
+    class GetScheduledReportRequest < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scheduled_report
+    #   <p>The scheduled report configuration and metadata.</p>
+    #   @return [Types::ScheduledReport]
+    class GetScheduledReportResponse < Struct.new(
+      nil,
+      :scheduled_report,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines the visual representation settings for widget data, including the visualization type, styling options, and display preferences for different metric types.</p>
     # @!attribute visual_type
     #   <p>The type of visualization to use for the data.</p>
@@ -360,6 +479,26 @@ module Aws::BCMDashboards
         options[:type] = 'DIMENSION' unless options.key?(:type)
         super
       end
+    end
+
+    # <p>Contains the health status information for a scheduled report, including the status code and any reasons for an unhealthy state.</p>
+    # @!attribute status_code
+    #   <p>The health status code. <code>HEALTHY</code> indicates the scheduled report is configured properly and has all required permissions to execute. <code>UNHEALTHY</code> indicates the scheduled report is unable to deliver the notification to the default Amazon EventBridge EventBus in your account and your action is needed. The reason for the unhealthy state is captured in the health status reasons.</p>
+    #   @return [String]
+    # @!attribute last_refreshed_at
+    #   <p>The timestamp when the health status was last refreshed.</p>
+    #   @return [Time]
+    # @!attribute status_reasons
+    #   <p>The list of reasons for the current health status. Only present when the status is <code>UNHEALTHY</code>.</p>
+    #   @return [Array<String>]
+    class HealthStatus < Struct.new(
+      nil,
+      :status_code,
+      :last_refreshed_at,
+      :status_reasons,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred while processing the request. Retry your request. If the problem persists, contact Amazon Web Services Support.</p>
@@ -397,6 +536,36 @@ module Aws::BCMDashboards
     class ListDashboardsResponse < Struct.new(
       nil,
       :dashboards,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token for the next page of results. Use the value returned in the previous response.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. Valid range is 1 to 100. The default value is 50.</p>
+    #   @return [Integer]
+    class ListScheduledReportsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scheduled_reports
+    #   <p>An array of scheduled report summaries, containing basic information about each scheduled report.</p>
+    #   @return [Array<Types::ScheduledReportSummary>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. Not returned if there are no more results to retrieve.</p>
+    #   @return [String]
+    class ListScheduledReportsResponse < Struct.new(
+      nil,
+      :scheduled_reports,
       :next_token,
       keyword_init: true
     )
@@ -572,7 +741,7 @@ module Aws::BCMDashboards
     #   <p>Defines a time period with explicit start and end times for data queries.</p>
     #   @return [Types::DateTimeRange]
     # @!attribute granularity
-    #   <p>The time granularity of the retrieved data: HOURLY, DAILY, or MONTHLY.</p>
+    #   <p>The time granularity of the retrieved data: <code>HOURLY</code>, <code>DAILY</code>, or <code>MONTHLY</code>.</p>
     #   @return [String]
     # @!attribute filter
     #   <p>Defines complex filtering conditions using logical operators (<code>AND</code>, <code>OR</code>, <code>NOT</code>) and various filter types.</p>
@@ -587,7 +756,179 @@ module Aws::BCMDashboards
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request would exceed service quotas. For example, attempting to create more than 20 widgets in a dashboard or exceeding the maximum number of dashboards per account.</p>
+    # <p>Defines the schedule for a scheduled report, including the cron expression, time zone, active period, and the schedule state.</p>
+    # @!attribute schedule_expression
+    #   <p>The schedule expression that specifies when to trigger the scheduled report run. This value must be a cron expression consisting of six fields separated by white spaces: <code>cron(minutes hours day_of_month month day_of_week year)</code>.</p>
+    #   @return [String]
+    # @!attribute schedule_expression_time_zone
+    #   <p>The time zone for the schedule expression, for example, <code>UTC</code>.</p>
+    #   @return [String]
+    # @!attribute schedule_period
+    #   <p>The time period during which the schedule is active.</p>
+    #   @return [Types::SchedulePeriod]
+    # @!attribute state
+    #   <p>The state of the schedule. <code>ENABLED</code> means the scheduled report runs according to its schedule expression. <code>DISABLED</code> means the scheduled report is paused and will not run until re-enabled.</p>
+    #   @return [String]
+    class ScheduleConfig < Struct.new(
+      nil,
+      :schedule_expression,
+      :schedule_expression_time_zone,
+      :schedule_period,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the active time period for execution of the scheduled report.</p>
+    # @!attribute start_time
+    #   <p>The start time of the schedule period. If not specified, defaults to the time of the create or update request. The start time cannot be more than 5 minutes before the time of the request.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end time of the schedule period. If not specified, defaults to 3 years from the time of the create or update request. The maximum allowed value is 3 years from the current time. Setting an end time beyond this limit returns a <code>ValidationException</code>.</p>
+    #   @return [Time]
+    class SchedulePeriod < Struct.new(
+      nil,
+      :start_time,
+      :end_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the full configuration and metadata of a scheduled report.</p>
+    # @!attribute arn
+    #   <p>The ARN of the scheduled report.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the scheduled report.</p>
+    #   @return [String]
+    # @!attribute dashboard_arn
+    #   <p>The ARN of the dashboard associated with the scheduled report.</p>
+    #   @return [String]
+    # @!attribute scheduled_report_execution_role_arn
+    #   <p>The ARN of the IAM role that the scheduled report uses to execute. Amazon Web Services Billing and Cost Management Dashboards will assume this IAM role while executing the scheduled report.</p>
+    #   @return [String]
+    # @!attribute schedule_config
+    #   <p>The schedule configuration that defines when and how often the report is generated.</p>
+    #   @return [Types::ScheduleConfig]
+    # @!attribute description
+    #   <p>A description of the scheduled report's purpose or contents.</p>
+    #   @return [String]
+    # @!attribute widget_ids
+    #   <p>The list of widget identifiers included in the scheduled report.</p>
+    #   @return [Array<String>]
+    # @!attribute widget_date_range_override
+    #   <p>The date range override applied to widgets in the scheduled report.</p>
+    #   @return [Types::DateTimeRange]
+    # @!attribute created_at
+    #   <p>The timestamp when the scheduled report was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the scheduled report was last modified.</p>
+    #   @return [Time]
+    # @!attribute last_execution_at
+    #   <p>The timestamp of the most recent execution of the scheduled report.</p>
+    #   @return [Time]
+    # @!attribute health_status
+    #   <p>The health status of the scheduled report at last refresh time.</p>
+    #   @return [Types::HealthStatus]
+    class ScheduledReport < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :dashboard_arn,
+      :scheduled_report_execution_role_arn,
+      :schedule_config,
+      :description,
+      :widget_ids,
+      :widget_date_range_override,
+      :created_at,
+      :updated_at,
+      :last_execution_at,
+      :health_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the configuration for creating a new scheduled report, including the dashboard, schedule, execution role, and optional widget settings.</p>
+    # @!attribute name
+    #   <p>The name of the scheduled report.</p>
+    #   @return [String]
+    # @!attribute dashboard_arn
+    #   <p>The ARN of the dashboard to generate the scheduled report from.</p>
+    #   @return [String]
+    # @!attribute scheduled_report_execution_role_arn
+    #   <p>The ARN of the IAM role that the scheduled report uses to execute. Amazon Web Services Billing and Cost Management Dashboards will assume this IAM role while executing the scheduled report.</p>
+    #   @return [String]
+    # @!attribute schedule_config
+    #   <p>The schedule configuration that defines when and how often the report is generated. If the schedule state is not specified, it defaults to <code>ENABLED</code>.</p>
+    #   @return [Types::ScheduleConfig]
+    # @!attribute description
+    #   <p>A description of the scheduled report's purpose or contents.</p>
+    #   @return [String]
+    # @!attribute widget_ids
+    #   <p>The list of widget identifiers to include in the scheduled report. If not specified, all widgets in the dashboard are included.</p>
+    #   @return [Array<String>]
+    # @!attribute widget_date_range_override
+    #   <p>The date range override to apply to widgets in the scheduled report.</p>
+    #   @return [Types::DateTimeRange]
+    class ScheduledReportInput < Struct.new(
+      nil,
+      :name,
+      :dashboard_arn,
+      :scheduled_report_execution_role_arn,
+      :schedule_config,
+      :description,
+      :widget_ids,
+      :widget_date_range_override,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information for a scheduled report.</p>
+    # @!attribute arn
+    #   <p>The ARN of the scheduled report.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the scheduled report.</p>
+    #   @return [String]
+    # @!attribute dashboard_arn
+    #   <p>The ARN of the dashboard associated with the scheduled report.</p>
+    #   @return [String]
+    # @!attribute schedule_expression
+    #   <p>The schedule expression that defines when the report runs.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the schedule: <code>ENABLED</code> or <code>DISABLED</code>.</p>
+    #   @return [String]
+    # @!attribute health_status
+    #   <p>The health status of the scheduled report as of its last refresh time.</p>
+    #   @return [Types::HealthStatus]
+    # @!attribute schedule_expression_time_zone
+    #   <p>The time zone for the schedule expression, for example, <code>UTC</code>.</p>
+    #   @return [String]
+    # @!attribute widget_ids
+    #   <p>The list of widget identifiers included in the scheduled report.</p>
+    #   @return [Array<String>]
+    class ScheduledReportSummary < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :dashboard_arn,
+      :schedule_expression,
+      :state,
+      :health_status,
+      :schedule_expression_time_zone,
+      :widget_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request would exceed a service quota. Review the service quotas for Amazon Web Services Billing and Cost Management Dashboards and retry your request.</p>
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
@@ -685,10 +1026,10 @@ module Aws::BCMDashboards
     #   <p>The ARN of the dashboard to update.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The new name for the dashboard. If not specified, the existing name is retained.</p>
+    #   <p>The new name for the dashboard.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The new description for the dashboard. If not specified, the existing description is retained.</p>
+    #   <p>The new description for the dashboard.</p>
     #   @return [String]
     # @!attribute widgets
     #   <p>The updated array of widget configurations for the dashboard. Replaces all existing widgets.</p>
@@ -715,6 +1056,64 @@ module Aws::BCMDashboards
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute arn
+    #   <p>The ARN of the scheduled report to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The new name for the scheduled report.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The new description for the scheduled report.</p>
+    #   @return [String]
+    # @!attribute dashboard_arn
+    #   <p>The ARN of the dashboard to associate with the scheduled report.</p>
+    #   @return [String]
+    # @!attribute scheduled_report_execution_role_arn
+    #   <p>The ARN of the IAM role that the scheduled report uses to execute. Amazon Web Services Billing and Cost Management Dashboards will assume this IAM role while executing the scheduled report.</p>
+    #   @return [String]
+    # @!attribute schedule_config
+    #   <p>The updated schedule configuration for the report.</p>
+    #   @return [Types::ScheduleConfig]
+    # @!attribute widget_ids
+    #   <p>The list of widget identifiers to include in the scheduled report. If not specified, all widgets in the dashboard are included.</p>
+    #   @return [Array<String>]
+    # @!attribute widget_date_range_override
+    #   <p>The date range override to apply to widgets in the scheduled report.</p>
+    #   @return [Types::DateTimeRange]
+    # @!attribute clear_widget_ids
+    #   Set to true to clear existing widgetIds.
+    #   @return [Boolean]
+    # @!attribute clear_widget_date_range_override
+    #   Set to true to clear existing widgetDateRangeOverride.
+    #   @return [Boolean]
+    class UpdateScheduledReportRequest < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :description,
+      :dashboard_arn,
+      :scheduled_report_execution_role_arn,
+      :schedule_config,
+      :widget_ids,
+      :widget_date_range_override,
+      :clear_widget_ids,
+      :clear_widget_date_range_override,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The ARN of the updated scheduled report.</p>
+    #   @return [String]
+    class UpdateScheduledReportResponse < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The input parameters do not satisfy the requirements. Check the error message for specific validation details.</p>
     # @!attribute message
     #   @return [String]
@@ -727,6 +1126,9 @@ module Aws::BCMDashboards
     end
 
     # <p>A configurable visualization component within a dashboard that displays specific cost and usage metrics. Each widget can show data as charts or tables and includes settings for data querying, filtering, and visual presentation.</p>
+    # @!attribute id
+    #   <p>The unique identifier for the widget.</p>
+    #   @return [String]
     # @!attribute title
     #   <p>The title of the widget.</p>
     #   @return [String]
@@ -747,6 +1149,7 @@ module Aws::BCMDashboards
     #   @return [Array<Types::WidgetConfig>]
     class Widget < Struct.new(
       nil,
+      :id,
       :title,
       :description,
       :width,

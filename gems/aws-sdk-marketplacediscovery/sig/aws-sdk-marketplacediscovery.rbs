@@ -1,0 +1,5 @@
+  module Aws
+    module MarketplaceDiscovery
+      VERSION: String
+    end
+  end

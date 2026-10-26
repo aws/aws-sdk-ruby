@@ -126,7 +126,8 @@ module Aws::SecurityIR
         {
           name: String,
           job_title: String,
-          email: String
+          email: String,
+          communication_preferences: Array[String]
         }
       ],
       ?opt_in_features: Array[
@@ -160,6 +161,7 @@ module Aws::SecurityIR
       def impacted_services: () -> Array[String]?
       def case_attachments: () -> Array[Types::CaseAttachmentAttributes]?
       def closed_date: () -> Time?
+      def case_metadata: () -> Array[Types::CaseMetadataEntry]?
     end
     def get_case: (
       ?case_id: String
@@ -184,6 +186,26 @@ module Aws::SecurityIR
       ?content_length: Integer,
       ?client_token: String
     ) -> _GetCaseAttachmentUploadUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCaseAttachmentUploadUrlResponse
+
+    interface _GetFindingMetricsResponse
+      include Smithy::Client::_Response[Types::GetFindingMetricsResponse]
+      def findings_ingested_security_hub: () -> Integer?
+      def findings_ingested_guard_duty: () -> Integer?
+      def findings_triaged: () -> Integer?
+      def findings_triaged_false_positive: () -> Integer?
+      def findings_investigated: () -> Integer?
+      def findings_investigated_false_positive: () -> Integer?
+      def findings_escalated: () -> Integer?
+      def findings_escalated_false_positive: () -> Integer?
+      def findings_true_positive: () -> Integer?
+      def findings_investigated_in_progress: () -> Integer?
+      def findings_escalated_in_progress: () -> Integer?
+    end
+    def get_finding_metrics: (
+      ?membership_id: String,
+      ?start_date: Time,
+      ?end_date: Time
+    ) -> _GetFindingMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingMetricsResponse
 
     interface _GetMembershipResponse
       include Smithy::Client::_Response[Types::GetMembershipResponse]
@@ -240,6 +262,17 @@ module Aws::SecurityIR
       ?case_id: String
     ) -> _ListCommentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCommentsResponse
 
+    interface _ListInvestigationsResponse
+      include Smithy::Client::_Response[Types::ListInvestigationsResponse]
+      def next_token: () -> String?
+      def investigation_actions: () -> Array[Types::InvestigationAction]?
+    end
+    def list_investigations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?case_id: String
+    ) -> _ListInvestigationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInvestigationsResponse
+
     interface _ListMembershipsResponse
       include Smithy::Client::_Response[Types::ListMembershipsResponse]
       def next_token: () -> String?
@@ -257,6 +290,16 @@ module Aws::SecurityIR
     def list_tags_for_resource: (
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _SendFeedbackResponse
+      include Smithy::Client::_Response[Types::SendFeedbackResponse]
+    end
+    def send_feedback: (
+      ?case_id: String,
+      ?result_id: String,
+      ?usefulness: String,
+      ?comment: String
+    ) -> _SendFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendFeedbackResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceOutput]
@@ -323,7 +366,13 @@ module Aws::SecurityIR
         }
       ],
       ?impacted_accounts_to_add: Array[String],
-      ?impacted_accounts_to_delete: Array[String]
+      ?impacted_accounts_to_delete: Array[String],
+      ?case_metadata: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
     ) -> _UpdateCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCaseResponse
 
     interface _UpdateCaseCommentResponse
@@ -356,7 +405,8 @@ module Aws::SecurityIR
         {
           name: String,
           job_title: String,
-          email: String
+          email: String,
+          communication_preferences: Array[String]
         }
       ],
       ?opt_in_features: Array[

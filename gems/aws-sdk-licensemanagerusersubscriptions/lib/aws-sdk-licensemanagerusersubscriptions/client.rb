@@ -144,18 +144,18 @@ module Aws::LicenseManagerUserSubscriptions
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -232,6 +232,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv4_list: ["IpV4"],
+    #           domain_ipv6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             # One of:
     #             secrets_manager_credentials_provider: {
@@ -266,6 +267,7 @@ module Aws::LicenseManagerUserSubscriptions
     #           active_directory_settings: {
     #             domain_name: "String",
     #             domain_ipv4_list: ["IpV4"],
+    #             domain_ipv6_list: ["IpV6"],
     #             domain_credentials_provider: {
     #               # One of:
     #               secrets_manager_credentials_provider: {
@@ -367,7 +369,8 @@ module Aws::LicenseManagerUserSubscriptions
     #         {
     #           provisioning_status: "LicenseServerEndpointProvisioningStatus",
     #           health_status: "LicenseServerHealthStatus",
-    #           ipv4_address: "String"
+    #           ipv4_address: "String",
+    #           ipv6_address: "String"
     #         }
     #       ],
     #       creation_time: Time.now
@@ -384,7 +387,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the Active Directory identity provider.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [String] :identity_provider_arn
     #   <p>The Amazon Resource Name (ARN) that identifies the identity provider to deregister.</p>
     # @example Request syntax with placeholder values
@@ -396,6 +399,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv4_list: ["IpV4"],
+    #           domain_ipv6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             # One of:
     #             secrets_manager_credentials_provider: {
@@ -426,6 +430,7 @@ module Aws::LicenseManagerUserSubscriptions
     #           active_directory_settings: {
     #             domain_name: "String",
     #             domain_ipv4_list: ["IpV4"],
+    #             domain_ipv6_list: ["IpV6"],
     #             domain_credentials_provider: {
     #               # One of:
     #               secrets_manager_credentials_provider: {
@@ -480,6 +485,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv4_list: ["IpV4"],
+    #           domain_ipv6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             # One of:
     #             secrets_manager_credentials_provider: {
@@ -512,6 +518,7 @@ module Aws::LicenseManagerUserSubscriptions
     #           active_directory_settings: {
     #             domain_name: "String",
     #             domain_ipv4_list: ["IpV4"],
+    #             domain_ipv6_list: ["IpV6"],
     #             domain_credentials_provider: {
     #               # One of:
     #               secrets_manager_credentials_provider: {
@@ -574,6 +581,7 @@ module Aws::LicenseManagerUserSubscriptions
     #             active_directory_settings: {
     #               domain_name: "String",
     #               domain_ipv4_list: ["IpV4"],
+    #               domain_ipv6_list: ["IpV6"],
     #               domain_credentials_provider: {
     #                 # One of:
     #                 secrets_manager_credentials_provider: {
@@ -647,6 +655,7 @@ module Aws::LicenseManagerUserSubscriptions
     #             active_directory_settings: {
     #               domain_name: "String",
     #               domain_ipv4_list: ["IpV4"],
+    #               domain_ipv6_list: ["IpV6"],
     #               domain_credentials_provider: {
     #                 # One of:
     #                 secrets_manager_credentials_provider: {
@@ -711,7 +720,8 @@ module Aws::LicenseManagerUserSubscriptions
     #           {
     #             provisioning_status: "LicenseServerEndpointProvisioningStatus",
     #             health_status: "LicenseServerHealthStatus",
-    #             ipv4_address: "String"
+    #             ipv4_address: "String",
+    #             ipv6_address: "String"
     #           }
     #         ],
     #         creation_time: Time.now
@@ -728,7 +738,7 @@ module Aws::LicenseManagerUserSubscriptions
     # <p>Lists the user-based subscription products available from an identity provider.</p>
     # @param [Hash, Types::ListProductSubscriptionsRequest] params
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the identity provider.</p>
     # @option params [Integer] :max_results
@@ -747,6 +757,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv4_list: ["IpV4"],
+    #           domain_ipv6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             # One of:
     #             secrets_manager_credentials_provider: {
@@ -787,6 +798,7 @@ module Aws::LicenseManagerUserSubscriptions
     #             active_directory_settings: {
     #               domain_name: "String",
     #               domain_ipv4_list: ["IpV4"],
+    #               domain_ipv6_list: ["IpV6"],
     #               domain_credentials_provider: {
     #                 # One of:
     #                 secrets_manager_credentials_provider: {
@@ -806,7 +818,8 @@ module Aws::LicenseManagerUserSubscriptions
     #         status_message: "String",
     #         domain: "String",
     #         subscription_start_date: "String",
-    #         subscription_end_date: "String"
+    #         subscription_end_date: "String",
+    #         license_expiration_date: "String"
     #       }
     #     ],
     #     next_token: "String"
@@ -862,6 +875,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv4_list: ["IpV4"],
+    #           domain_ipv6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             # One of:
     #             secrets_manager_credentials_provider: {
@@ -902,6 +916,7 @@ module Aws::LicenseManagerUserSubscriptions
     #             active_directory_settings: {
     #               domain_name: "String",
     #               domain_ipv4_list: ["IpV4"],
+    #               domain_ipv6_list: ["IpV6"],
     #               domain_credentials_provider: {
     #                 # One of:
     #                 secrets_manager_credentials_provider: {
@@ -937,7 +952,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the identity provider to register.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [Types::Settings] :settings
     #   <p>The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.</p>
     # @option params [Hash<String, String>] :tags
@@ -951,6 +966,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv4_list: ["IpV4"],
+    #           domain_ipv6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             # One of:
     #             secrets_manager_credentials_provider: {
@@ -987,6 +1003,7 @@ module Aws::LicenseManagerUserSubscriptions
     #           active_directory_settings: {
     #             domain_name: "String",
     #             domain_ipv4_list: ["IpV4"],
+    #             domain_ipv6_list: ["IpV6"],
     #             domain_credentials_provider: {
     #               # One of:
     #               secrets_manager_credentials_provider: {
@@ -1025,7 +1042,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the identity provider.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [String] :domain
     #   <p>The domain name of the Active Directory that contains the user for whom to start the product subscription.</p>
     # @option params [Hash<String, String>] :tags
@@ -1040,6 +1057,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv4_list: ["IpV4"],
+    #           domain_ipv6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             # One of:
     #             secrets_manager_credentials_provider: {
@@ -1075,6 +1093,7 @@ module Aws::LicenseManagerUserSubscriptions
     #           active_directory_settings: {
     #             domain_name: "String",
     #             domain_ipv4_list: ["IpV4"],
+    #             domain_ipv6_list: ["IpV6"],
     #             domain_credentials_provider: {
     #               # One of:
     #               secrets_manager_credentials_provider: {
@@ -1094,7 +1113,8 @@ module Aws::LicenseManagerUserSubscriptions
     #       status_message: "String",
     #       domain: "String",
     #       subscription_start_date: "String",
-    #       subscription_end_date: "String"
+    #       subscription_end_date: "String",
+    #       license_expiration_date: "String"
     #     }
     #   }
     # @return [Types::StartProductSubscriptionResponse]
@@ -1110,7 +1130,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>An object that specifies details for the identity provider.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [String] :product_user_arn
     #   <p>The Amazon Resource Name (ARN) of the product user.</p>
     # @option params [String] :domain
@@ -1125,6 +1145,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv4_list: ["IpV4"],
+    #           domain_ipv6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             # One of:
     #             secrets_manager_credentials_provider: {
@@ -1158,6 +1179,7 @@ module Aws::LicenseManagerUserSubscriptions
     #           active_directory_settings: {
     #             domain_name: "String",
     #             domain_ipv4_list: ["IpV4"],
+    #             domain_ipv6_list: ["IpV6"],
     #             domain_credentials_provider: {
     #               # One of:
     #               secrets_manager_credentials_provider: {
@@ -1177,7 +1199,8 @@ module Aws::LicenseManagerUserSubscriptions
     #       status_message: "String",
     #       domain: "String",
     #       subscription_start_date: "String",
-    #       subscription_end_date: "String"
+    #       subscription_end_date: "String",
+    #       license_expiration_date: "String"
     #     }
     #   }
     # @return [Types::StopProductSubscriptionResponse]
@@ -1237,7 +1260,7 @@ module Aws::LicenseManagerUserSubscriptions
     # @option params [Types::IdentityProvider] :identity_provider
     #   <p>Refers to an identity provider.</p>
     # @option params [String] :product
-    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
+    #   <p>The name of the user-based subscription product.</p> <p>Valid values: <code>VISUAL_STUDIO_ENTERPRISE</code> | <code>VISUAL_STUDIO_PROFESSIONAL</code> | <code>OFFICE_PROFESSIONAL_PLUS</code> | <code>OFFICE_STANDARD</code> | <code>REMOTE_DESKTOP_SERVICES</code> </p>
     # @option params [String] :identity_provider_arn
     #   <p>The Amazon Resource Name (ARN) of the identity provider to update.</p>
     # @option params [Types::UpdateSettings] :update_settings
@@ -1251,6 +1274,7 @@ module Aws::LicenseManagerUserSubscriptions
     #         active_directory_settings: {
     #           domain_name: "String",
     #           domain_ipv4_list: ["IpV4"],
+    #           domain_ipv6_list: ["IpV6"],
     #           domain_credentials_provider: {
     #             # One of:
     #             secrets_manager_credentials_provider: {
@@ -1286,6 +1310,7 @@ module Aws::LicenseManagerUserSubscriptions
     #           active_directory_settings: {
     #             domain_name: "String",
     #             domain_ipv4_list: ["IpV4"],
+    #             domain_ipv6_list: ["IpV6"],
     #             domain_credentials_provider: {
     #               # One of:
     #               secrets_manager_credentials_provider: {

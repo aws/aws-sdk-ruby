@@ -144,18 +144,18 @@ module Aws::Braket
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -377,6 +377,8 @@ module Aws::Braket
     #   <p>The token for an Amazon Braket hybrid job that associates it with the quantum task.</p>
     # @option params [Array<Types::Association>] :associations
     #   <p>The list of Amazon Braket resources associated with the quantum task.</p>
+    # @option params [Types::ExperimentalCapabilities] :experimental_capabilities
+    #   <p>Enable experimental capabilities for the quantum task.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "String64", # required
@@ -395,7 +397,11 @@ module Aws::Braket
     #         arn: "BraketResourceArn", # required
     #         type: "AssociationType", # required
     #       }
-    #     ]
+    #     ],
+    #     experimental_capabilities: {
+    #       # One of:
+    #       enabled: "ExperimentalCapabilitiesEnablementType"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_quantum_task(params, options)
@@ -407,6 +413,63 @@ module Aws::Braket
     # @return [Types::CreateQuantumTaskOutput]
     def create_quantum_task(params = {}, options = {})
       request = build_request(:create_quantum_task, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a spending limit for a specified quantum device. Spending limits help you control costs by setting maximum amounts that can be spent on quantum computing tasks within a specified time period. Simulators do not support spending limits.</p>
+    # @param [Hash, Types::CreateSpendingLimitRequest] params
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Braket ignores the request, but does not return an error.</p>
+    # @option params [String] :device_arn
+    #   <p>The Amazon Resource Name (ARN) of the quantum device to apply the spending limit to.</p>
+    # @option params [String] :spending_limit
+    #   <p>The maximum amount that can be spent on the specified device, in USD.</p>
+    # @option params [Types::TimePeriod] :time_period
+    #   <p>The time period during which the spending limit is active, including start and end dates.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to apply to the spending limit. Each tag consists of a key and an optional value.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "String64", # required
+    #     device_arn: "DeviceArn", # required
+    #     spending_limit: "String", # required
+    #     time_period: {
+    #       start_at: Time.now, # required
+    #       end_at: Time.now, # required
+    #     },
+    #     tags: {
+    #       "String" => "String"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_spending_limit(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     spending_limit_arn: "SpendingLimitArn", # required
+    #   }
+    # @return [Types::CreateSpendingLimitResponse]
+    def create_spending_limit(params = {}, options = {})
+      request = build_request(:create_spending_limit, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an existing spending limit. This operation permanently removes the spending limit and cannot be undone. After deletion, the associated device becomes unrestricted for spending.</p>
+    # @param [Hash, Types::DeleteSpendingLimitRequest] params
+    # @option params [String] :spending_limit_arn
+    #   <p>The Amazon Resource Name (ARN) of the spending limit to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     spending_limit_arn: "SpendingLimitArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_spending_limit(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteSpendingLimitResponse]
+    def delete_spending_limit(params = {}, options = {})
+      request = build_request(:delete_spending_limit, params)
       request.send_request(options)
     end
 
@@ -586,6 +649,10 @@ module Aws::Braket
     #       action_type: "String", # required
     #       program_count: 1,
     #       executable_count: 1
+    #     },
+    #     experimental_capabilities: {
+    #       # One of:
+    #       enabled: "ExperimentalCapabilitiesEnablementType"
     #     }
     #   }
     # @return [Types::GetQuantumTaskOutput]
@@ -753,6 +820,57 @@ module Aws::Braket
       request.send_request(options)
     end
 
+    # <p>Searches and lists spending limits based on specified filters. This operation supports pagination and allows filtering by various criteria to find specific spending limits. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>
+    # @param [Hash, Types::SearchSpendingLimitsRequest] params
+    # @option params [String] :next_token
+    #   <p>The token to retrieve the next page of results. This value is returned from a previous call to SearchSpendingLimits when there are more results available.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call. Minimum value of 1, maximum value of 100. Default is 20.</p>
+    # @option params [Array<Types::SearchSpendingLimitsFilter>] :filters
+    #   <p>The filters to apply when searching for spending limits. Use filters to narrow down the results based on specific criteria.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "String64", # required
+    #         values: ["String256"], # required
+    #         operator: "SearchSpendingLimitsFilterOperator", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.search_spending_limits(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     spending_limits: [ # required
+    #       {
+    #         spending_limit_arn: "SpendingLimitArn", # required
+    #         device_arn: "DeviceArn", # required
+    #         time_period: { # required
+    #           start_at: Time.now, # required
+    #           end_at: Time.now, # required
+    #         },
+    #         spending_limit: "String", # required
+    #         queued_spend: "String", # required
+    #         total_spend: "String", # required
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #         tags: {
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::SearchSpendingLimitsResponse]
+    def search_spending_limits(params = {}, options = {})
+      request = build_request(:search_spending_limits, params)
+      request.send_request(options)
+    end
+
     # <p>Add a tag to the specified resource.</p>
     # @param [Hash, Types::TagResourceInput] params
     # @option params [String] :resource_arn
@@ -796,6 +914,37 @@ module Aws::Braket
     # @return [Types::UntagResourceOutput]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an existing spending limit. You can modify the spending amount or time period. Changes take effect immediately.</p>
+    # @param [Hash, Types::UpdateSpendingLimitRequest] params
+    # @option params [String] :spending_limit_arn
+    #   <p>The Amazon Resource Name (ARN) of the spending limit to update.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Braket ignores the request, but does not return an error.</p>
+    # @option params [String] :spending_limit
+    #   <p>The new maximum amount that can be spent on the specified device, in USD.</p>
+    # @option params [Types::TimePeriod] :time_period
+    #   <p>The new time period during which the spending limit is active, including start and end dates.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     spending_limit_arn: "SpendingLimitArn", # required
+    #     client_token: "String64", # required
+    #     spending_limit: "String",
+    #     time_period: {
+    #       start_at: Time.now, # required
+    #       end_at: Time.now, # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_spending_limit(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateSpendingLimitResponse]
+    def update_spending_limit(params = {}, options = {})
+      request = build_request(:update_spending_limit, params)
       request.send_request(options)
     end
 

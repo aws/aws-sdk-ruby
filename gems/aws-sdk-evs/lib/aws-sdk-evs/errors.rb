@@ -22,6 +22,7 @@ module Aws::Evs
   #
   # ## Error Classes
   #
+  # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {TagPolicyException}
@@ -33,6 +34,24 @@ module Aws::Evs
   # if they are not defined above.
   module Errors
     extend Smithy::Client::DynamicErrors
+
+    # <p>An internal server error occurred. Retry your request.</p>
+    class InternalServerException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Evs::Types::InternalServerException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>Describes the error encountered.</p>
+      def message
+        @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+    end
 
     # <p>A service resource associated with the request could not be found. The resource might not be specified correctly, or it may have a <code>state</code> of <code>DELETED</code>.</p>
     class ResourceNotFoundException < Smithy::Client::ServiceError
@@ -86,7 +105,7 @@ module Aws::Evs
       end
     end
 
-    # <p>The operation couldn't be performed because the service is throttling requests. This exception is thrown when there are too many requests accepted concurrently from the service endpoint.</p>
+    # <p>The operation could not be performed because the service is throttling requests. This exception is thrown when the service endpoint receives too many concurrent requests.</p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Evs::Types::ThrottlingException] data

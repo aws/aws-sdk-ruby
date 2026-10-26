@@ -1,0 +1,5 @@
+  module Aws
+    module DevOpsAgent
+      VERSION: String
+    end
+  end

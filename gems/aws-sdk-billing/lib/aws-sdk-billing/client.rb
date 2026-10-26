@@ -144,18 +144,18 @@ module Aws::Billing
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -257,7 +257,7 @@ module Aws::Billing
     # @option params [Array<String>] :source_views
     #   <p>A list of billing views used as the data source for the custom billing view.</p>
     # @option params [Types::Expression] :data_filter_expression
-    #   <p> See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>
+    #   <p> See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code>, <code>Tags</code>, and <code>CostCategories</code>. </p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. If the original request completes successfully, any subsequent retries complete successfully without performing any further actions with an idempotent request. </p>
     # @option params [Array<Types::ResourceTag>] :resource_tags
@@ -298,6 +298,10 @@ module Aws::Billing
     #       },
     #       tags: {
     #         key: "TagKey", # required
+    #         values: ["Value"], # required
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName", # required
     #         values: ["Value"], # required
     #       },
     #       time_range: {
@@ -401,6 +405,54 @@ module Aws::Billing
       request.send_request(options)
     end
 
+    # <p>Retrieves billing preferences for the specified feature. Each feature controls a distinct billing capability: which accounts can share Reserved Instances or credits, whether billing alerts are enabled, the historical record of sharing changes, and per-credit options.</p>
+    # @param [Hash, Types::GetBillingPreferencesRequest] params
+    # @option params [String] :next_token
+    #   <p>Pagination token from a previous response. Pass the value returned in <code>nextToken</code> to retrieve the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of records to return per page. Range: 1 to 50. Default: 50.</p>
+    # @option params [Array<String>] :features
+    #   <p>The feature to retrieve. Specify exactly one value. Valid values: <code>BILLING_ALERTS</code>, <code>RI_SHARING</code>, <code>RI_SHARING_HISTORY</code>, <code>CREDIT_SHARING</code>, <code>CREDIT_SHARING_HISTORY</code>, <code>CREDIT_LEVEL_SHARING</code>, <code>CREDIT_PREFERENCE_OPTIONS</code>.</p>
+    # @option params [Array<Types::BillingFeatureFilter>] :filters
+    #   <p>Filters to narrow results. Specify exactly one filter when supplied. The supported filter name is <code>PREFERENCE_KEY</code>, which accepts 1 to 10 values to match preference keys.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "PageToken",
+    #     max_results: 1,
+    #     features: ["RI_SHARING" # One of: ["RI_SHARING", "RI_SHARING_HISTORY", "CREDIT_SHARING", "CREDIT_SHARING_HISTORY", "CREDIT_LEVEL_SHARING", "BILLING_ALERTS", "CREDIT_PREFERENCE_OPTIONS"]], # required
+    #     filters: [
+    #       {
+    #         name: "PREFERENCE_KEY" # One of: ["PREFERENCE_KEY"],
+    #         value: ["BillingFeatureFilterValue"]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.get_billing_preferences(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     billing_preferences: [ # required
+    #       {
+    #         feature: "RI_SHARING" # One of: ["RI_SHARING", "RI_SHARING_HISTORY", "CREDIT_SHARING", "CREDIT_SHARING_HISTORY", "CREDIT_LEVEL_SHARING", "BILLING_ALERTS", "CREDIT_PREFERENCE_OPTIONS"], # required
+    #         key: "PreferenceKey", # required
+    #         value: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #         account_name: "AccountName",
+    #         account_id: "AccountId",
+    #         billing_period: {
+    #           year: 1, # required
+    #           month: 1, # required
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PageToken"
+    #   }
+    # @return [Types::GetBillingPreferencesResponse]
+    def get_billing_preferences(params = {}, options = {})
+      request = build_request(:get_billing_preferences, params)
+      request.send_request(options)
+    end
+
     # <p>Returns the metadata associated to the specified billing view ARN. </p>
     # @param [Hash, Types::GetBillingViewRequest] params
     # @option params [String] :arn
@@ -443,7 +495,7 @@ module Aws::Billing
     #       arn: "BillingViewArn",
     #       name: "BillingViewName",
     #       description: "BillingViewDescription",
-    #       billing_view_type: "PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM"],
+    #       billing_view_type: "PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM", "BILLING_TRANSFER", "BILLING_TRANSFER_SHOWBACK"],
     #       owner_account_id: "AccountId",
     #       source_account_id: "AccountId",
     #       data_filter_expression: {
@@ -453,6 +505,10 @@ module Aws::Billing
     #         },
     #         tags: {
     #           key: "TagKey", # required
+    #           values: ["Value"], # required
+    #         },
+    #         cost_categories: {
+    #           key: "CostCategoryName", # required
     #           values: ["Value"], # required
     #         },
     #         time_range: {
@@ -474,6 +530,255 @@ module Aws::Billing
     # @return [Types::GetBillingViewResponse]
     def get_billing_view(params = {}, options = {})
       request = build_request(:get_billing_view, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the per-billing-month allocation history for credits applied to an Amazon Web Services account's bills. Traverses the consolidated billing family to capture cross-account credit applications. Supports pagination and optional filtering to a single credit.</p>
+    # @param [Hash, Types::GetCreditAllocationHistoryRequest] params
+    # @option params [String] :account_id
+    #   <p>The Amazon Web Services account ID whose allocation history to retrieve. Must be a 12-digit numeric string.</p>
+    # @option params [Integer] :credit_id
+    #   <p>Filters the result to a single credit. When omitted, returns allocation entries for all credits.</p>
+    # @option params [Time] :start_date
+    #   <p>Inclusive start date as Unix epoch seconds. Must be on or before <code>endDate</code>. The range from <code>startDate</code> to <code>endDate</code> cannot exceed 24 billing months.</p>
+    # @option params [Time] :end_date
+    #   <p>Inclusive end date as Unix epoch seconds.</p>
+    # @option params [String] :next_token
+    #   <p>Pagination token from a previous response. Pass the value returned in <code>nextToken</code> to retrieve the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of records to return per page. Range: 1 to 1000. Default: 100.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     account_id: "AccountId", # required
+    #     credit_id: 1,
+    #     start_date: Time.now, # required
+    #     end_date: Time.now, # required
+    #     next_token: "PageToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.get_credit_allocation_history(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     credit_allocation_history_list: [
+    #       {
+    #         credit_id: "CreditId", # required
+    #         credit_amount: { # required
+    #           currency_code: "CurrencyCode", # required
+    #           currency_amount: "CurrencyAmount", # required
+    #         },
+    #         description: "String",
+    #         account_id: "AccountId", # required
+    #         applied_service_name: "String", # required
+    #         billing_month: "BillingMonth", # required
+    #         is_estimated_bill: false, # required
+    #       }
+    #     ],
+    #     partial_results: false, # required
+    #     failed_months: ["BillingMonth"],
+    #     next_token: "PageToken"
+    #   }
+    # @return [Types::GetCreditAllocationHistoryResponse]
+    def get_credit_allocation_history(params = {}, options = {})
+      request = build_request(:get_credit_allocation_history, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the list of Amazon Web Services account credits for the specified account. Each credit includes its identifier, type, monetary amounts, applicable products, expiration, sharing configuration, and current enabled status.</p> <p>When the caller is the management account of a consolidated billing family and <code>payerAccountFlag</code> is <code>true</code>, the response aggregates credits across the entire family. Otherwise, the response includes only credits owned by the account specified in <code>accountId</code>.</p>
+    # @param [Hash, Types::GetCreditsRequest] params
+    # @option params [String] :account_id
+    #   <p>The Amazon Web Services account ID. Must be a 12-digit numeric string.</p>
+    # @option params [Time] :start_date
+    #   <p>The start date for the credit period as Unix epoch seconds. Must be a past date that is not more than one year before the current date.</p>
+    # @option params [Time] :end_date
+    #   <p>The end date for the credit period as Unix epoch seconds. Must not be a future date and must be on or after <code>startDate</code>. Defaults to the current date when omitted.</p>
+    # @option params [Boolean] :payer_account_flag
+    #   <p>When <code>true</code> and the caller is the management account, the response aggregates credits across the entire consolidated billing family. When <code>false</code> or omitted, returns only credits for the specified <code>accountId</code>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     account_id: "String", # required
+    #     start_date: Time.now, # required
+    #     end_date: Time.now,
+    #     payer_account_flag: false
+    #   }
+    #   options = {}
+    #   response = client.get_credits(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     credits: [
+    #       {
+    #         credit_id: "CreditId", # required
+    #         account_id: "AccountId", # required
+    #         credit_type: "String", # required
+    #         initial_amount: { # required
+    #           currency_code: "CurrencyCode", # required
+    #           currency_amount: "CurrencyAmount", # required
+    #         },
+    #         remaining_amount: { # required
+    #           currency_code: "CurrencyCode", # required
+    #           currency_amount: "CurrencyAmount", # required
+    #         },
+    #         estimated_amount: {
+    #           currency_code: "CurrencyCode", # required
+    #           currency_amount: "CurrencyAmount", # required
+    #         },
+    #         applicable_product_names: ["ProductName"],
+    #         description: "String", # required
+    #         start_date: Time.now, # required
+    #         end_date: Time.now,
+    #         exhaust_date: Time.now,
+    #         application_type: "BEFORE_CROSS_SERVICE_DISCOUNTS" # One of: ["BEFORE_CROSS_SERVICE_DISCOUNTS", "AFTER_DISCOUNTS"],
+    #         shareable_accounts: ["AccountId"],
+    #         account_has_credit_sharing_enabled: false,
+    #         credit_console_visibility: "String",
+    #         credit_sharing_type: "DEFAULT" # One of: ["DEFAULT", "DISABLED", "CUSTOM", "COST_CATEGORY_RULE"],
+    #         cost_category_arn: "String",
+    #         rule_name: "String",
+    #         credit_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         purchase_type_applications: ["PurchaseType"]
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetCreditsResponse]
+    def get_credits(params = {}, options = {})
+      request = build_request(:get_credits, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a summary of Enterprise Support data aggregated across all accounts in the Enterprise Support profile.</p>
+    # @param [Hash, Types::GetEnterpriseSupportChargeSummaryRequest] params
+    # @option params [String] :billing_month
+    #   <p>The billing month in YYYY-MM format. This must be a month in the past.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     billing_month: "EnterpriseSupportBillingMonth", # required
+    #   }
+    #   options = {}
+    #   response = client.get_enterprise_support_charge_summary(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     payer_account_id: "AccountId", # required
+    #     billing_month: "EnterpriseSupportBillingMonth", # required
+    #     billing_period_start_date: Time.now, # required
+    #     billing_period_end_date: Time.now, # required
+    #     is_estimated: false, # required
+    #     bill_date: Time.now, # required
+    #     support_charge: "String", # required
+    #     total_support_charge: "String", # required
+    #     support_discount: "String", # required
+    #     total_support_eligible_spend: "String", # required
+    #     total_support_eligible_usage_spend: "String", # required
+    #     total_support_eligible_reserved_instance_spend: "String", # required
+    #     total_support_eligible_savings_plan_spend: "String", # required
+    #     support_charge_percentage: "String", # required
+    #     support_effective_pricing_plan: { # required
+    #       pricing_plan_id: "String",
+    #       name: "String",
+    #       description: "String",
+    #       start_date: Time.now,
+    #       end_date: Time.now,
+    #       plan_discount_percent: "String",
+    #       discount_applies_to_minimum_charge: false,
+    #       minimum_charge: "String",
+    #       tiered: "String",
+    #       tiers: [ # required
+    #         {
+    #           tier_minimum: "String", # required
+    #           tier_maximum: "String",
+    #           base_charge: "String", # required
+    #           additional_percentage_of_aggregate_charges: "String", # required
+    #           aggregate_charges_adjustment: "String", # required
+    #           incremental: false, # required
+    #           increment: "String",
+    #           increment_charge: "String"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetEnterpriseSupportChargeSummaryResponse]
+    def get_enterprise_support_charge_summary(params = {}, options = {})
+      request = build_request(:get_enterprise_support_charge_summary, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns Enterprise Support contract details.</p>
+    # @param [Hash, Types::GetEnterpriseSupportContractDetailsRequest] params
+    # @option params [String] :billing_month
+    #   <p>The billing month in YYYY-MM format. This must be a month in the past.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     billing_month: "EnterpriseSupportBillingMonth", # required
+    #   }
+    #   options = {}
+    #   response = client.get_enterprise_support_contract_details(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     is_contract_active: false,
+    #     support_allocation_method: "String", # required
+    #     support_reserved_instance_amortization_start_date: Time.now,
+    #     support_reserved_instance_treatment_method: "String",
+    #     support_savings_plans_amortization_start_date: Time.now,
+    #     support_savings_plans_treatment_method: "String",
+    #     support_prorate_start_date: Time.now,
+    #     contract_payer_account_ids: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         is_gdn: false, # required
+    #       }
+    #     ],
+    #     charged_payer_account_ids: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         charge_percentage: "String", # required
+    #       }
+    #     ],
+    #     additional_support_charge: [
+    #       {
+    #         description: "String", # required
+    #         amount: "String",
+    #         charge_type: "String"
+    #       }
+    #     ],
+    #     additional_support_eligible_usage_spend: [
+    #       {
+    #         description: "String", # required
+    #         amount: "String",
+    #         charge_type: "String"
+    #       }
+    #     ],
+    #     pricing_plans: [ # required
+    #       {
+    #         pricing_plan_id: "String",
+    #         name: "String",
+    #         description: "String",
+    #         start_date: Time.now,
+    #         end_date: Time.now,
+    #         plan_discount_percent: "String",
+    #         discount_applies_to_minimum_charge: false,
+    #         minimum_charge: "String",
+    #         tiered: "String",
+    #         tiers: [ # required
+    #           {
+    #             tier_minimum: "String", # required
+    #             tier_maximum: "String",
+    #             base_charge: "String", # required
+    #             additional_percentage_of_aggregate_charges: "String", # required
+    #             aggregate_charges_adjustment: "String", # required
+    #             incremental: false, # required
+    #             increment: "String",
+    #             increment_charge: "String"
+    #           }
+    #         ]
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetEnterpriseSupportContractDetailsResponse]
+    def get_enterprise_support_contract_details(params = {}, options = {})
+      request = build_request(:get_enterprise_support_contract_details, params)
       request.send_request(options)
     end
 
@@ -511,6 +816,95 @@ module Aws::Billing
       request.send_request(options)
     end
 
+    # <p>Lists the segments of a billing view over a given time period. Each segment identifies the billing domain (<code>PRO_FORMA</code> or <code>BILLABLE</code>) and the account relationships that apply during its time range.</p> <p>If you don't provide an <code>arn</code>, the response includes segments for the caller's <code>PRIMARY</code> billing view.</p> <p>If a mid-period change occurs, the response includes multiple segments, each with its own time range. The response omits hidden segments, so the segments it returns might not cover the entire requested time period.</p>
+    # @param [Hash, Types::ListBillingViewSegmentsRequest] params
+    # @option params [Types::BillingViewSegmentTimeRange] :time_range
+    #   <p> The billing period to query. If you don't provide a time range, the current billing period, which is the calendar month in UTC, is used. </p>
+    # @option params [String] :arn
+    #   <p> The Amazon Resource Name (ARN) that uniquely identifies the billing view to query. If you don't provide an ARN, the caller's <code>PRIMARY</code> billing view is used. The ARN must reference a primary billing view. Custom billing views aren't supported. </p>
+    # @option params [Integer] :max_results
+    #   <p> The number of entries a paginated response contains. Valid values range from 1 to 100. The default is 100. </p>
+    # @option params [String] :next_token
+    #   <p> The pagination token that is used on subsequent calls to list billing view segments. </p>
+    # @example Invoke ListBillingViewSegments
+    #   # Example operation for list_billing_view_segments
+    #   params = {
+    #     time_range: {
+    #       begin_date_inclusive: Time.parse(1719792000),
+    #       end_date_exclusive: Time.parse(1722470400)
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.list_billing_view_segments(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         domain: BILLABLE,
+    #         time_range: {
+    #           begin_date_inclusive: Time.parse(1719792000),
+    #           end_date_exclusive: Time.parse(1722470400)
+    #         },
+    #         billing_transfer_account_id: "111111111111",
+    #         management_account_id: "222222222222",
+    #         billing_group_primary_account_id: "333333333333"
+    #       }
+    #     ]
+    #   }
+    # @example Error example for ListBillingViewSegments
+    #   # Example operation for list_billing_view_segments
+    #   params = {
+    #     time_range: {
+    #       begin_date_inclusive: Time.parse(1722470400),
+    #       end_date_exclusive: Time.parse(1719792000)
+    #     }
+    #   }
+    #   options = {}
+    #   begin
+    #     response = client.list_billing_view_segments(params, options)
+    #   rescue Smithy::Client::ServiceError => e
+    #     puts e.class #=> ValidationException
+    #     puts e.data.to_h #=>
+    #     {
+    #       message: "Failed to list billing view segments for an invalid time range.",
+    #       reason: other
+    #     }
+    #   end
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     time_range: {
+    #       begin_date_inclusive: Time.now,
+    #       end_date_exclusive: Time.now
+    #     },
+    #     arn: "BillingViewArn",
+    #     max_results: 1,
+    #     next_token: "PageToken"
+    #   }
+    #   options = {}
+    #   response = client.list_billing_view_segments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         domain: "BILLABLE" # One of: ["BILLABLE", "PRO_FORMA"],
+    #         time_range: {
+    #           begin_date_inclusive: Time.now,
+    #           end_date_exclusive: Time.now
+    #         },
+    #         billing_transfer_account_id: "AccountId",
+    #         management_account_id: "AccountId",
+    #         billing_group_primary_account_id: "AccountId"
+    #       }
+    #     ],
+    #     next_token: "PageToken"
+    #   }
+    # @return [Types::ListBillingViewSegmentsResponse]
+    def list_billing_view_segments(params = {}, options = {})
+      request = build_request(:list_billing_view_segments, params)
+      request.send_request(options)
+    end
+
     # <p>Lists the billing views available for a given time period. </p> <p>Every Amazon Web Services account has a unique <code>PRIMARY</code> billing view that represents the billing data available by default. Accounts that use Billing Conductor also have <code>BILLING_GROUP</code> billing views representing pro forma costs associated with each created billing group.</p>
     # @param [Hash, Types::ListBillingViewsRequest] params
     # @option params [Types::ActiveTimeRange] :active_time_range
@@ -519,6 +913,8 @@ module Aws::Billing
     #   <p>The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
     # @option params [Array<String>] :billing_view_types
     #   <p>The type of billing view.</p>
+    # @option params [Array<Types::StringSearch>] :names
+    #   <p> Filters the list of billing views by name. You can specify search criteria to match billing view names based on the search option provided. </p>
     # @option params [String] :owner_account_id
     #   <p> The list of owners of the billing view. </p>
     # @option params [String] :source_account_id
@@ -574,7 +970,13 @@ module Aws::Billing
     #       active_before_inclusive: Time.now, # required
     #     },
     #     arns: ["BillingViewArn"],
-    #     billing_view_types: ["PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM"]],
+    #     billing_view_types: ["PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM", "BILLING_TRANSFER", "BILLING_TRANSFER_SHOWBACK"]],
+    #     names: [
+    #       {
+    #         search_option: "STARTS_WITH" # One of: ["STARTS_WITH"], # required
+    #         search_value: "SearchValue", # required
+    #       }
+    #     ],
     #     owner_account_id: "AccountId",
     #     source_account_id: "AccountId",
     #     max_results: 1,
@@ -592,7 +994,7 @@ module Aws::Billing
     #         description: "BillingViewDescription",
     #         owner_account_id: "AccountId",
     #         source_account_id: "AccountId",
-    #         billing_view_type: "PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM"],
+    #         billing_view_type: "PRIMARY" # One of: ["PRIMARY", "BILLING_GROUP", "CUSTOM", "BILLING_TRANSFER", "BILLING_TRANSFER_SHOWBACK"],
     #         health_status: {
     #           status_code: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY", "CREATING", "UPDATING"],
     #           status_reasons: ["SOURCE_VIEW_UNHEALTHY" # One of: ["SOURCE_VIEW_UNHEALTHY", "SOURCE_VIEW_UPDATING", "SOURCE_VIEW_ACCESS_DENIED", "SOURCE_VIEW_NOT_FOUND", "CYCLIC_DEPENDENCY", "SOURCE_VIEW_DEPTH_EXCEEDED", "AGGREGATE_SOURCE", "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"]]
@@ -604,6 +1006,179 @@ module Aws::Billing
     # @return [Types::ListBillingViewsResponse]
     def list_billing_views(params = {}, options = {})
       request = build_request(:list_billing_views, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns Business Support charges broken down at the linked account level for a given billing month.</p>
+    # @param [Hash, Types::ListBusinessSupportAccountChargesRequest] params
+    # @option params [String] :billing_month
+    #   <p>The billing month to retrieve Business Support charges for, in YYYY-MM format. You can request the current month (charges will be estimated) or a past month (charges will be finalized).</p>
+    # @option params [String] :account_id
+    #   <p>The linked account ID to filter results to a specific account. If you don't specify a value, the response includes charges for all linked accounts.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page. Default is 100.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     billing_month: "BusinessSupportBillingMonth", # required
+    #     account_id: "AccountId",
+    #     max_results: 1,
+    #     next_token: "PageToken"
+    #   }
+    #   options = {}
+    #   response = client.list_business_support_account_charges(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     billing_month: "BusinessSupportBillingMonth", # required
+    #     is_estimated: false, # required
+    #     total_support_charge: "String", # required
+    #     total_support_eligible_spend: "String", # required
+    #     account_count: 1, # required
+    #     account_charges: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         support_plan_name: "String", # required
+    #         total_charge: "String", # required
+    #         total_usage_basis: "String", # required
+    #         tier_charges: [
+    #           {
+    #             tier_description: "String", # required
+    #             tier_rate: "String", # required
+    #             usage_slice: "String", # required
+    #             tier_charge: "String", # required
+    #             charge_period_start_date: Time.now,
+    #             charge_period_end_date: Time.now
+    #           }
+    #         ],
+    #         support_discount: {
+    #           discount_amount: "String",
+    #           discount_percentage: "String",
+    #           discount_type: "String",
+    #           discount_source: "String"
+    #         },
+    #         support_eligible_spend_by_service: [
+    #           {
+    #             contributing_service: "String", # required
+    #             item_type: "String", # required
+    #             description: "String",
+    #             charge_amount: "String", # required
+    #             currency: "String", # required
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "PageToken"
+    #   }
+    # @return [Types::ListBusinessSupportAccountChargesResponse]
+    def list_business_support_account_charges(params = {}, options = {})
+      request = build_request(:list_business_support_account_charges, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the history of Business Support subscription contracts across accounts.</p>
+    # @param [Hash, Types::ListBusinessSupportSubscriptionHistoryRequest] params
+    # @option params [String] :billing_month
+    #   <p>The billing month to retrieve subscription contracts for, in YYYY-MM format. If you don't specify a value, defaults to the current month.</p>
+    # @option params [String] :account_id
+    #   <p>The account ID to filter results to a specific account. If you don't specify a value, the response includes subscription history for all accounts.</p>
+    # @option params [Time] :start_date
+    #   <p>The start date to filter subscription contracts from.</p>
+    # @option params [Time] :end_date
+    #   <p>The end date to filter subscription contracts to.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page. Default is 100.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     billing_month: "BusinessSupportBillingMonth",
+    #     account_id: "AccountId",
+    #     start_date: Time.now,
+    #     end_date: Time.now,
+    #     max_results: 1,
+    #     next_token: "PageToken"
+    #   }
+    #   options = {}
+    #   response = client.list_business_support_subscription_history(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     subscription_contracts: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         plan_name: "String", # required
+    #         contract_start_date: Time.now, # required
+    #         contract_end_date: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "PageToken"
+    #   }
+    # @return [Types::ListBusinessSupportSubscriptionHistoryResponse]
+    def list_business_support_subscription_history(params = {}, options = {})
+      request = build_request(:list_business_support_subscription_history, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns Support-eligible spend broken down at linked account level.</p>
+    # @param [Hash, Types::ListEnterpriseSupportLinkedAccountChargesRequest] params
+    # @option params [String] :billing_month
+    #   <p>The billing month in YYYY-MM format. This must be a month in the past.</p>
+    # @option params [String] :account_id
+    #   <p>The linked account ID to filter results to a specific account. If you don't specify a value, the response includes charges for all linked accounts.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per page. Default is 100.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     billing_month: "EnterpriseSupportBillingMonth", # required
+    #     account_id: "AccountId",
+    #     max_results: 1,
+    #     next_token: "PageToken"
+    #   }
+    #   options = {}
+    #   response = client.list_enterprise_support_linked_account_charges(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     linked_account: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         payer_account_id: "AccountId", # required
+    #         account_type: "String",
+    #         billable_seconds: 1, # required
+    #         total_seconds: 1, # required
+    #         total_support_eligible_spend: "String", # required
+    #         prorated_total_support_eligible_spend: "String", # required
+    #         linked_time_periods: [
+    #           {
+    #             begin_date: Time.now, # required
+    #             end_date: Time.now
+    #           }
+    #         ],
+    #         subscription_time_periods: [
+    #           {
+    #             begin_date: Time.now, # required
+    #             end_date: Time.now
+    #           }
+    #         ],
+    #         total_support_eligible_reserved_instance_spend: "String",
+    #         total_support_eligible_savings_plan_spend: "String",
+    #         support_eligible_spend_by_service: [
+    #           {
+    #             service_code: "String",
+    #             total_support_eligible_spend: "String"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "PageToken"
+    #   }
+    # @return [Types::ListEnterpriseSupportLinkedAccountChargesResponse]
+    def list_enterprise_support_linked_account_charges(params = {}, options = {})
+      request = build_request(:list_enterprise_support_linked_account_charges, params)
       request.send_request(options)
     end
 
@@ -690,6 +1265,25 @@ module Aws::Billing
       request.send_request(options)
     end
 
+    # <p>Redeems an Amazon Web Services promotional credit code on behalf of the calling account. On success, a new credit is added to the account's credit ledger with the amount, validity period, and applicable products defined by the promotion. The credit is then automatically applied to subsequent bills according to the standard credit application order.</p>
+    # @param [Hash, Types::RedeemCreditsRequest] params
+    # @option params [String] :promo_code
+    #   <p>The promotional credit code to redeem.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     promo_code: "PromoCode", # required
+    #   }
+    #   options = {}
+    #   response = client.redeem_credits(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::RedeemCreditsResponse]
+    def redeem_credits(params = {}, options = {})
+      request = build_request(:redeem_credits, params)
+      request.send_request(options)
+    end
+
     # <p> An API operation for adding one or more tags (key-value pairs) to a resource. </p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
@@ -766,6 +1360,33 @@ module Aws::Billing
       request.send_request(options)
     end
 
+    # <p>Updates billing preferences for the specified feature. Each feature targets a distinct billing capability and has its own set of supported keys. The action sets the value for each provided key; keys not present in the request are unchanged.</p> <p>Sharing keys (<code>RI_SHARING</code>, <code>CREDIT_SHARING</code>, <code>CREDIT_LEVEL_SHARING</code>, and sharing keys under <code>CREDIT_PREFERENCE_OPTIONS</code>) may only be set by the management account of a consolidated billing family. The <code>credit/{creditId}/status</code> key may be set by member accounts for credits they own, or by the management account for any credit in the family.</p>
+    # @param [Hash, Types::UpdateBillingPreferencesRequest] params
+    # @option params [String] :feature
+    #   <p>The feature to update. Valid values: <code>BILLING_ALERTS</code>, <code>RI_SHARING</code>, <code>CREDIT_SHARING</code>, <code>CREDIT_LEVEL_SHARING</code>, <code>CREDIT_PREFERENCE_OPTIONS</code>. The history features (<code>RI_SHARING_HISTORY</code> and <code>CREDIT_SHARING_HISTORY</code>) are read-only and cannot be updated.</p>
+    # @option params [Array<Types::BillingPreferenceForKey>] :billing_preferences_per_key
+    #   <p>Key/value pairs to apply. All keys in a single request must be valid for the specified <code>feature</code> and must not be duplicated. For <code>CREDIT_PREFERENCE_OPTIONS</code>, all keys must reference the same <code>creditId</code>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     feature: "RI_SHARING" # One of: ["RI_SHARING", "RI_SHARING_HISTORY", "CREDIT_SHARING", "CREDIT_SHARING_HISTORY", "CREDIT_LEVEL_SHARING", "BILLING_ALERTS", "CREDIT_PREFERENCE_OPTIONS"], # required
+    #     billing_preferences_per_key: [ # required
+    #       {
+    #         key: "PreferenceKey", # required
+    #         value: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.update_billing_preferences(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateBillingPreferencesResponse]
+    def update_billing_preferences(params = {}, options = {})
+      request = build_request(:update_billing_preferences, params)
+      request.send_request(options)
+    end
+
     # <p>An API to update the attributes of the billing view. </p>
     # @param [Hash, Types::UpdateBillingViewRequest] params
     # @option params [String] :arn
@@ -775,7 +1396,7 @@ module Aws::Billing
     # @option params [String] :description
     #   <p> The description of the billing view. </p>
     # @option params [Types::Expression] :data_filter_expression
-    #   <p>See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>
+    #   <p>See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code>, <code>Tags</code>, and <code>CostCategories</code>. </p>
     # @example Invoke UpdateBillingView
     #   # Example operation for update_billing_view
     #   params = {
@@ -810,6 +1431,10 @@ module Aws::Billing
     #       },
     #       tags: {
     #         key: "TagKey", # required
+    #         values: ["Value"], # required
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName", # required
     #         values: ["Value"], # required
     #       },
     #       time_range: {

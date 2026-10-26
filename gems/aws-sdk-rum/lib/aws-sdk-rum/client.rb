@@ -144,18 +144,18 @@ module Aws::RUM
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,61 +209,14 @@ module Aws::RUM
       super
     end
 
-    # <p>Specifies the extended metrics and custom metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid
-    #          destinations include CloudWatch and Evidently.</p>
-    #          <p>By default, RUM app monitors send some metrics to CloudWatch. These default metrics
-    #          are listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html">CloudWatch metrics that you can collect 
-    #             with CloudWatch RUM</a>.</p>
-    #          <p>In addition to these default metrics, you can choose to send extended metrics, custom
-    #          metrics, or both.</p>
-    #          <ul>
-    #             <li>
-    #                <p>Extended metrics let you send metrics with additional dimensions that aren't included in the
-    #                default metrics. You can also send extended metrics to both Evidently and CloudWatch. The valid dimension names for the additional dimensions for extended
-    #                metrics are <code>BrowserName</code>, <code>CountryCode</code>,
-    #                   <code>DeviceType</code>, <code>FileType</code>, <code>OSName</code>, and
-    #                   <code>PageId</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html">
-    #                   Extended metrics that you can send to CloudWatch and CloudWatch
-    #                   Evidently</a>.</p>
-    #             </li>
-    #             <li>
-    #                <p>Custom metrics are metrics that you define. You can send custom metrics to CloudWatch.
-    #                   CloudWatch Evidently, or both. With custom metrics, you can use any metric
-    #                name and namespace. To derive the metrics, you can use any custom events, built-in
-    #                events, custom attributes, or default attributes. </p>
-    #                <p>You can't send custom metrics to the <code>AWS/RUM</code> namespace. You must send custom metrics to a 
-    #                custom namespace that you define. The namespace that you use can't start with <code>AWS/</code>. 
-    #                CloudWatch RUM prepends <code>RUM/CustomMetrics/</code> to the custom namespace that you define, 
-    #                so the final namespace for your metrics in CloudWatch is 
-    #          <code>RUM/CustomMetrics/<i>your-custom-namespace</i>
-    #                   </code>.</p>
-    #             </li>
-    #          </ul>
-    #          <p>The maximum number of metric definitions that you can specify in one 
-    #          <code>BatchCreateRumMetricDefinitions</code> operation is 200.</p>
-    #          <p>The maximum number of metric definitions that one destination can contain is 2000.</p>
-    #          <p>Extended metrics sent to CloudWatch and RUM custom metrics are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension
-    #          value counts as a custom metric. For more information, see 
-    #          <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p>
-    #          <p>You must have
-    #          already created a destination for the metrics before you send them. For more information, see 
-    #          <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html">PutRumMetricsDestination</a>.</p>
-    #          <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid,
-    #       those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>
+    # <p>Specifies the extended metrics and custom metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid destinations include CloudWatch and Evidently.</p> <p>By default, RUM app monitors send some metrics to CloudWatch. These default metrics are listed in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html">CloudWatch metrics that you can collect with CloudWatch RUM</a>.</p> <p>In addition to these default metrics, you can choose to send extended metrics, custom metrics, or both.</p> <ul> <li> <p>Extended metrics let you send metrics with additional dimensions that aren't included in the default metrics. You can also send extended metrics to both Evidently and CloudWatch. The valid dimension names for the additional dimensions for extended metrics are <code>BrowserName</code>, <code>CountryCode</code>, <code>DeviceType</code>, <code>FileType</code>, <code>OSName</code>, and <code>PageId</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html"> Extended metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p> </li> <li> <p>Custom metrics are metrics that you define. You can send custom metrics to CloudWatch. CloudWatch Evidently, or both. With custom metrics, you can use any metric name and namespace. To derive the metrics, you can use any custom events, built-in events, custom attributes, or default attributes. </p> <p>You can't send custom metrics to the <code>AWS/RUM</code> namespace. You must send custom metrics to a custom namespace that you define. The namespace that you use can't start with <code>AWS/</code>. CloudWatch RUM prepends <code>RUM/CustomMetrics/</code> to the custom namespace that you define, so the final namespace for your metrics in CloudWatch is <code>RUM/CustomMetrics/<i>your-custom-namespace</i> </code>.</p> </li> </ul> <p>The maximum number of metric definitions that you can specify in one <code>BatchCreateRumMetricDefinitions</code> operation is 200.</p> <p>The maximum number of metric definitions that one destination can contain is 2000.</p> <p>Extended metrics sent to CloudWatch and RUM custom metrics are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see <a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> <p>You must have already created a destination for the metrics before you send them. For more information, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html">PutRumMetricsDestination</a>.</p> <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>
     # @param [Hash, Types::BatchCreateRumMetricDefinitionsInput] params
     # @option params [String] :app_monitor_name
     #   <p>The name of the CloudWatch RUM app monitor that is to send the metrics.</p>
     # @option params [String] :destination
-    #   <p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and
-    #               <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the
-    #            Amazon Resource Name (ARN) of the CloudWatchEvidently experiment that will receive
-    #            the metrics and an IAM role that has permission to write to the
-    #            experiment.</p>
+    #   <p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the Amazon Resource Name (ARN) of the CloudWatchEvidently experiment that will receive the metrics and an IAM role that has permission to write to the experiment.</p>
     # @option params [String] :destination_arn
-    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is 
-    #            <code>CloudWatch</code>, do not use this parameter.</p>
-    #            <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this 
-    #            experiment as a valid destination. For more information, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html">PutRumMetricsDestination</a>.</p>
+    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter.</p> <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this experiment as a valid destination. For more information, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html">PutRumMetricsDestination</a>.</p>
     # @option params [Array<Types::MetricDefinitionRequest>] :metric_definitions
     #   <p>An array of structures which define the metrics that you want to send.</p>
     # @example Request syntax with placeholder values
@@ -326,25 +279,14 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Removes the specified metrics from being sent to an extended metrics destination.</p>
-    #          <p>If some metric definition IDs specified in a <code>BatchDeleteRumMetricDefinitions</code> operations are not valid,
-    #          those metric definitions fail and return errors, but all valid metric definition IDs in the same operation are still 
-    #          deleted.</p>
-    #          <p>The maximum number of metric definitions that you can specify in one 
-    #          <code>BatchDeleteRumMetricDefinitions</code> operation is 200.</p>
+    # <p>Removes the specified metrics from being sent to an extended metrics destination.</p> <p>If some metric definition IDs specified in a <code>BatchDeleteRumMetricDefinitions</code> operations are not valid, those metric definitions fail and return errors, but all valid metric definition IDs in the same operation are still deleted.</p> <p>The maximum number of metric definitions that you can specify in one <code>BatchDeleteRumMetricDefinitions</code> operation is 200.</p>
     # @param [Hash, Types::BatchDeleteRumMetricDefinitionsInput] params
     # @option params [String] :app_monitor_name
     #   <p>The name of the CloudWatch RUM app monitor that is sending these metrics.</p>
     # @option params [String] :destination
-    #   <p>Defines the destination where you want to stop sending the specified metrics. Valid values are <code>CloudWatch</code> and
-    #            <code>Evidently</code>. If
-    #            you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to 
-    #            be the destination and an IAM role that has permission to write to the experiment.</p>
+    #   <p>Defines the destination where you want to stop sending the specified metrics. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.</p>
     # @option params [String] :destination_arn
-    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is 
-    #            <code>CloudWatch</code>, do not use this parameter. </p>
-    #            <p>This parameter specifies
-    #            the ARN of the Evidently experiment that was receiving the metrics that are being deleted.</p>
+    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter. </p> <p>This parameter specifies the ARN of the Evidently experiment that was receiving the metrics that are being deleted.</p>
     # @option params [Array<String>] :metric_definition_ids
     #   <p>An array of structures which define the metrics that you want to stop sending.</p>
     # @example Request syntax with placeholder values
@@ -380,18 +322,11 @@ module Aws::RUM
     # @option params [String] :app_monitor_name
     #   <p>The name of the CloudWatch RUM app monitor that is sending the metrics.</p>
     # @option params [String] :destination
-    #   <p>The type of destination that you want to view metrics for. Valid values are <code>CloudWatch</code> 
-    #            and <code>Evidently</code>.</p>
+    #   <p>The type of destination that you want to view metrics for. Valid values are <code>CloudWatch</code> and <code>Evidently</code>.</p>
     # @option params [String] :destination_arn
-    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is 
-    #            <code>CloudWatch</code>, do not use this parameter.</p>
-    #            <p>This parameter
-    #            specifies the ARN of the Evidently experiment that corresponds to the destination.</p>
+    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter.</p> <p>This parameter specifies the ARN of the Evidently experiment that corresponds to the destination.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in one operation. The default is 50. The maximum that you can 
-    #            specify is 100.</p>
-    #            <p>To retrieve the remaining results, make another call with the returned 
-    #            <code>NextToken</code> value. </p>
+    #   <p>The maximum number of results to return in one operation. The default is 50. The maximum that you can specify is 100.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>
     # @option params [String] :next_token
     #   <p>Use the token returned by the previous operation to request the next page of results.</p>
     # @example Request syntax with placeholder values
@@ -429,55 +364,26 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Creates a Amazon CloudWatch RUM app monitor, which collects telemetry data from your application and sends that
-    #       data to RUM. The data includes performance and reliability information such as page load time, client-side errors, 
-    #       and user behavior.</p>
-    #          <p>You use this operation only to create a new app monitor. To update an existing app monitor, use <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_UpdateAppMonitor.html">UpdateAppMonitor</a> instead.</p>
-    #          <p>After you create an app monitor, sign in to the CloudWatch RUM console to get 
-    #          the JavaScript code snippet to add to your web application. For more information, see
-    #          <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html">How do I find a code snippet
-    #          that I've already generated?</a>
-    #          </p>
+    # <p>Creates a Amazon CloudWatch RUM app monitor, which collects telemetry data from your application and sends that data to RUM. The data includes performance and reliability information such as page load time, client-side errors, and user behavior.</p> <p>You use this operation only to create a new app monitor. To update an existing app monitor, use <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_UpdateAppMonitor.html">UpdateAppMonitor</a> instead.</p> <p>After you create an app monitor, sign in to the CloudWatch RUM console to get the JavaScript code snippet to add to your web application. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html">How do I find a code snippet that I've already generated?</a> </p>
     # @param [Hash, Types::CreateAppMonitorInput] params
     # @option params [String] :name
     #   <p>A name for the app monitor.</p>
     # @option params [String] :domain
     #   <p>The top-level internet domain name for which your application has administrative authority.</p>
     # @option params [Array<String>] :domain_list
-    #   <p>
-    #            List the domain names for which your application has administrative authority. The <code>CreateAppMonitor</code> requires either the domain or the domain list.
-    #         </p>
+    #   <p> List the domain names for which your application has administrative authority. The <code>CreateAppMonitor</code> requires either the domain or the domain list. </p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Assigns one or more tags (key-value pairs) to the app monitor.</p>
-    #            <p>Tags can help you organize and categorize your resources. You can also use them to scope user
-    #            permissions by granting a user
-    #            permission to access or change only resources with certain tag values.</p>
-    #            <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>
-    #            <p>You can associate as many as 50 tags with an app monitor.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    #   <p>Assigns one or more tags (key-value pairs) to the app monitor.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can associate as many as 50 tags with an app monitor.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
     # @option params [Types::AppMonitorConfiguration] :app_monitor_configuration
-    #   <p>A structure that contains much of the configuration data for the app monitor. If you are using 
-    #            Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the 
-    #            Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own 
-    #            authorization method. For more information, see 
-    #            <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html">Authorize your application
-    #               to send data to Amazon Web Services</a>.</p>
-    #            <p>If you omit this argument, the sample rate used for RUM is set to 10% of the user sessions.</p>
+    #   <p>A structure that contains much of the configuration data for the app monitor. If you are using Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own authorization method. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html">Authorize your application to send data to Amazon Web Services</a>.</p> <p>If you omit this argument, the sample rate used for RUM is set to 10% of the user sessions.</p>
     # @option params [Boolean] :cw_log_enabled
-    #   <p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM 
-    #            sends a copy of this telemetry data to Amazon CloudWatch Logs
-    #            in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur
-    #            Amazon CloudWatch Logs charges.</p>
-    #            <p>If you omit this parameter, the default is <code>false</code>.</p>
+    #   <p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges.</p> <p>If you omit this parameter, the default is <code>false</code>.</p>
     # @option params [Types::CustomEvents] :custom_events
-    #   <p>Specifies whether this app monitor allows the web client to define and send
-    #            custom events. If you omit this parameter, custom events are <code>DISABLED</code>.</p>
-    #            <p>For more information about custom events, see 
-    #            <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html">Send custom events</a>.</p>
+    #   <p>Specifies whether this app monitor allows the web client to define and send custom events. If you omit this parameter, custom events are <code>DISABLED</code>.</p> <p>For more information about custom events, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html">Send custom events</a>.</p>
     # @option params [Types::DeobfuscationConfiguration] :deobfuscation_configuration
-    #   <p>
-    #            A structure that contains the configuration for how an app monitor can deobfuscate stack traces.
-    #         </p>
+    #   <p> A structure that contains the configuration for how an app monitor can deobfuscate stack traces. </p>
+    # @option params [String] :platform
+    #   <p>The platform type for the app monitor. Valid values are <code>Web</code> for web applications, <code>Android</code> for Android applications, and <code>iOS</code> for IOS applications. If you omit this parameter, the default is <code>Web</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "AppMonitorName", # required
@@ -506,7 +412,8 @@ module Aws::RUM
     #         status: "DeobfuscationStatus", # required
     #         s3_uri: "DeobfuscationS3Uri"
     #       }
-    #     }
+    #     },
+    #     platform: "AppMonitorPlatform"
     #   }
     #   options = {}
     #   response = client.create_app_monitor(params, options)
@@ -546,8 +453,7 @@ module Aws::RUM
     # @option params [String] :name
     #   <p>The app monitor that you want to remove the resource policy from.</p>
     # @option params [String] :policy_revision_id
-    #   <p>Specifies a specific policy revision to delete. Provide a <code>PolicyRevisionId</code> to ensure an atomic delete operation. 
-    #            If the revision ID that you provide doesn't match the latest policy revision ID, the request will be rejected with an <code>InvalidPolicyRevisionIdException</code> error.</p>
+    #   <p>Specifies a specific policy revision to delete. Provide a <code>PolicyRevisionId</code> to ensure an atomic delete operation. If the revision ID that you provide doesn't match the latest policy revision ID, the request will be rejected with an <code>InvalidPolicyRevisionIdException</code> error.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "AppMonitorName", # required
@@ -566,17 +472,14 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Deletes a destination for CloudWatch RUM extended metrics, so that the specified app monitor stops
-    #          sending extended metrics to that destination.</p>
+    # <p>Deletes a destination for CloudWatch RUM extended metrics, so that the specified app monitor stops sending extended metrics to that destination.</p>
     # @param [Hash, Types::DeleteRumMetricsDestinationInput] params
     # @option params [String] :app_monitor_name
     #   <p>The name of the app monitor that is sending metrics to the destination that you want to delete.</p>
     # @option params [String] :destination
     #   <p>The type of destination to delete. Valid values are <code>CloudWatch</code> and <code>Evidently</code>.</p>
     # @option params [String] :destination_arn
-    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is 
-    #            <code>CloudWatch</code>, do not use this parameter. This parameter
-    #            specifies the ARN of the Evidently experiment that corresponds to the destination to delete.</p>
+    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter. This parameter specifies the ARN of the Evidently experiment that corresponds to the destination to delete.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     app_monitor_name: "AppMonitorName", # required
@@ -643,7 +546,8 @@ module Aws::RUM
     #           status: "DeobfuscationStatus", # required
     #           s3_uri: "DeobfuscationS3Uri"
     #         }
-    #       }
+    #       },
+    #       platform: "AppMonitorPlatform"
     #     }
     #   }
     # @return [Types::GetAppMonitorOutput]
@@ -652,16 +556,14 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Retrieves the raw performance events that RUM has collected from your web application,
-    #          so that you can do your own processing or analysis of this data.</p>
+    # <p>Retrieves the raw performance events that RUM has collected from your web application, so that you can do your own processing or analysis of this data.</p>
     # @param [Hash, Types::GetAppMonitorDataInput] params
     # @option params [String] :name
     #   <p>The name of the app monitor that collected the data that you want to retrieve.</p>
     # @option params [Types::TimeRange] :time_range
     #   <p>A structure that defines the time range that you want to retrieve results from.</p>
     # @option params [Array<Types::QueryFilter>] :filters
-    #   <p>An array of structures that you can use to filter the results to those that match one or
-    #            more sets of key-value pairs that you specify.</p>
+    #   <p>An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in one operation. </p>
     # @option params [String] :next_token
@@ -721,8 +623,7 @@ module Aws::RUM
     # <p>Returns a list of the Amazon CloudWatch RUM app monitors in the account.</p>
     # @param [Hash, Types::ListAppMonitorsInput] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in one operation. The default is 50. The maximum that you can 
-    #         specify is 100.</p>
+    #   <p>The maximum number of results to return in one operation. The default is 50. The maximum that you can specify is 100.</p>
     # @option params [String] :next_token
     #   <p>Use the token returned by the previous operation to request the next page of results.</p>
     # @example Request syntax with placeholder values
@@ -742,7 +643,8 @@ module Aws::RUM
     #         id: "AppMonitorId",
     #         created: "ISOTimestampString",
     #         last_modified: "ISOTimestampString",
-    #         state: "StateEnum"
+    #         state: "StateEnum",
+    #         platform: "AppMonitorPlatform"
     #       }
     #     ]
     #   }
@@ -752,17 +654,12 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Returns a list of destinations that you have created to receive RUM extended metrics, 
-    #          for the specified app monitor.</p>
-    #          <p>For more information about extended metrics, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html">AddRumMetrics</a>.</p>
+    # <p>Returns a list of destinations that you have created to receive RUM extended metrics, for the specified app monitor.</p> <p>For more information about extended metrics, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html">AddRumMetrics</a>.</p>
     # @param [Hash, Types::ListRumMetricsDestinationsInput] params
     # @option params [String] :app_monitor_name
     #   <p>The name of the app monitor associated with the destinations that you want to retrieve.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in one operation. The default is 50. The maximum that you can 
-    #            specify is 100.</p>
-    #            <p>To retrieve the remaining results, make another call with the returned 
-    #            <code>NextToken</code> value. </p>
+    #   <p>The maximum number of results to return in one operation. The default is 50. The maximum that you can specify is 100.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>
     # @option params [String] :next_token
     #   <p>Use the token returned by the previous operation to request the next page of results.</p>
     # @example Request syntax with placeholder values
@@ -815,19 +712,14 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Use this operation to assign a resource-based policy to a CloudWatch RUM app monitor to control access to it. Each app monitor can 
-    #          have one resource-based policy. The maximum size of the policy is 4 KB. To learn more about using resource policies with RUM, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html">Using resource-based policies with CloudWatch RUM</a>.</p>
+    # <p>Use this operation to assign a resource-based policy to a CloudWatch RUM app monitor to control access to it. Each app monitor can have one resource-based policy. The maximum size of the policy is 4 KB. To learn more about using resource policies with RUM, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html">Using resource-based policies with CloudWatch RUM</a>.</p>
     # @param [Hash, Types::PutResourcePolicyRequest] params
     # @option params [String] :name
-    #   <p>The name of the app monitor that you want to apply this resource-based policy to. To find the names of your app monitors, you can use
-    #            the <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_ListAppMonitors.html">ListAppMonitors</a> operation.</p>
+    #   <p>The name of the app monitor that you want to apply this resource-based policy to. To find the names of your app monitors, you can use the <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_ListAppMonitors.html">ListAppMonitors</a> operation.</p>
     # @option params [String] :policy_document
-    #   <p>The JSON to use as the resource policy. The document can be up to 4 KB in size. For more information about the contents and syntax 
-    #            for this policy, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html">Using resource-based policies with CloudWatch RUM</a>.</p>
+    #   <p>The JSON to use as the resource policy. The document can be up to 4 KB in size. For more information about the contents and syntax for this policy, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html">Using resource-based policies with CloudWatch RUM</a>.</p>
     # @option params [String] :policy_revision_id
-    #   <p>A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy.</p>
-    #            <p>When you assign a policy revision ID, then later requests about that policy will be rejected with an <code>InvalidPolicyRevisionIdException</code> error
-    #            if they don't provide the correct current revision ID.</p>
+    #   <p>A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy.</p> <p>When you assign a policy revision ID, then later requests about that policy will be rejected with an <code>InvalidPolicyRevisionIdException</code> error if they don't provide the correct current revision ID.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "AppMonitorName", # required
@@ -848,10 +740,7 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Sends telemetry events about your application performance and user behavior to CloudWatch RUM. The code 
-    #       snippet that RUM generates for you to add to your application includes <code>PutRumEvents</code> operations to 
-    #       send this data to RUM.</p>
-    #          <p>Each <code>PutRumEvents</code> operation can send a batch of events from one user session.</p>
+    # <p>Sends telemetry events about your application performance and user behavior to CloudWatch RUM. The code snippet that RUM generates for you to add to your application includes <code>PutRumEvents</code> operations to send this data to RUM.</p> <p>Each <code>PutRumEvents</code> operation can send a batch of events from one user session.</p>
     # @param [Hash, Types::PutRumEventsInput] params
     # @option params [String] :id
     #   <p>The ID of the app monitor that is sending this data.</p>
@@ -864,8 +753,7 @@ module Aws::RUM
     # @option params [Array<Types::RumEvent>] :rum_events
     #   <p>An array of structures that contain the telemetry event data.</p>
     # @option params [String] :alias
-    #   <p>If the app monitor uses a resource-based policy that requires <code>PutRumEvents</code> requests to specify a certain alias,
-    #            specify that alias here. This alias will be compared to the <code>rum:alias</code> context key in the resource-based policy.  For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html">Using resource-based policies with CloudWatch RUM</a>.</p>
+    #   <p>If the app monitor uses a resource-based policy that requires <code>PutRumEvents</code> requests to specify a certain alias, specify that alias here. This alias will be compared to the <code>rum:alias</code> context key in the resource-based policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html">Using resource-based policies with CloudWatch RUM</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "AppMonitorId", # required
@@ -901,31 +789,16 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send
-    #          extended metrics to CloudWatch or to a CloudWatch Evidently experiment.</p>
-    #          <p>For more information about extended metrics, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricDefinitions.html">BatchCreateRumMetricDefinitions</a>.</p>
+    # <p>Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently experiment.</p> <p>For more information about extended metrics, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricDefinitions.html">BatchCreateRumMetricDefinitions</a>.</p>
     # @param [Hash, Types::PutRumMetricsDestinationInput] params
     # @option params [String] :app_monitor_name
     #   <p>The name of the CloudWatch RUM app monitor that will send the metrics.</p>
     # @option params [String] :destination
-    #   <p>Defines the destination to send the metrics to. Valid values are <code>CloudWatch</code> and
-    #            <code>Evidently</code>. If
-    #            you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to 
-    #            be the destination and an IAM role that has permission to write to the experiment.</p>
+    #   <p>Defines the destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.</p>
     # @option params [String] :destination_arn
-    #   <p>Use this parameter only if <code>Destination</code> is <code>Evidently</code>. This parameter specifies
-    #         the ARN of the Evidently experiment that will receive the extended metrics.</p>
+    #   <p>Use this parameter only if <code>Destination</code> is <code>Evidently</code>. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.</p>
     # @option params [String] :iam_role_arn
-    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is 
-    #            <code>CloudWatch</code>, don't use this parameter.</p>
-    #            <p>This parameter specifies
-    #            the ARN of an IAM role that RUM will assume to write to the Evidently 
-    #            experiment that you are sending metrics to. This role must have permission to write to that experiment.</p>
-    #            <p>If you specify this parameter, you must be signed on to a role that has <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html">PassRole</a> permissions attached to it, to allow
-    #            the role to be passed. The <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html#managed-policies-cloudwatch-RUM">
-    #               CloudWatchAmazonCloudWatchRUMFullAccess</a>
-    #             policy doesn't include <code>PassRole</code>
-    #            permissions.</p>
+    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, don't use this parameter.</p> <p>This parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.</p> <p>If you specify this parameter, you must be signed on to a role that has <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html">PassRole</a> permissions attached to it, to allow the role to be passed. The <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html#managed-policies-cloudwatch-RUM"> CloudWatchAmazonCloudWatchRUMFullAccess</a> policy doesn't include <code>PassRole</code> permissions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     app_monitor_name: "AppMonitorName", # required
@@ -945,20 +818,7 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Assigns one or more tags (key-value pairs) to the specified CloudWatch RUM resource. Currently, 
-    #        the only resources that 
-    #        can be tagged app monitors.</p>
-    #          <p>Tags can help you organize and categorize your resources. You can also use them to scope user
-    #        permissions by granting a user
-    #        permission to access or change only resources with certain tag values.</p>
-    #          <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>
-    #          <p>You can use the <code>TagResource</code> action with a resource that already has tags. 
-    #        If you specify a new tag key for the resource, 
-    #        this tag is appended to the list of tags associated
-    #        with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces
-    #        the previous value for that tag.</p>
-    #          <p>You can associate as many as 50 tags with a resource.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+    # <p>Assigns one or more tags (key-value pairs) to the specified CloudWatch RUM resource. Currently, the only resources that can be tagged app monitors.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
     # @param [Hash, Types::TagResourceInput] params
     # @option params [String] :resource_arn
     #   <p>The ARN of the CloudWatch RUM resource that you're adding tags to.</p>
@@ -1004,47 +864,22 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Updates the configuration of an existing app monitor. When you use this operation, only the parts of the app monitor
-    #          configuration that you specify in this operation are changed. For any parameters that you omit, the existing
-    #          values are kept.</p>
-    #          <p>You can't use this operation to change the tags of an existing app monitor. To change the tags of an existing app monitor, use
-    #          <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_TagResource.html">TagResource</a>.</p>
-    #          <p>To create a new app monitor, use <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_CreateAppMonitor.html">CreateAppMonitor</a>.</p>
-    #          <p>After you update an app monitor, sign in to the CloudWatch RUM console to get 
-    #          the updated JavaScript code snippet to add to your web application. For more information, see
-    #          <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html">How do I find a code snippet
-    #             that I've already generated?</a>
-    #          </p>
+    # <p>Updates the configuration of an existing app monitor. When you use this operation, only the parts of the app monitor configuration that you specify in this operation are changed. For any parameters that you omit, the existing values are kept.</p> <p>You can't use this operation to change the tags of an existing app monitor. To change the tags of an existing app monitor, use <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_TagResource.html">TagResource</a>.</p> <p>To create a new app monitor, use <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_CreateAppMonitor.html">CreateAppMonitor</a>.</p> <p>After you update an app monitor, sign in to the CloudWatch RUM console to get the updated JavaScript code snippet to add to your web application. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html">How do I find a code snippet that I've already generated?</a> </p>
     # @param [Hash, Types::UpdateAppMonitorInput] params
     # @option params [String] :name
     #   <p>The name of the app monitor to update.</p>
     # @option params [String] :domain
     #   <p>The top-level internet domain name for which your application has administrative authority.</p>
     # @option params [Array<String>] :domain_list
-    #   <p>
-    #            List the domain names for which your application has administrative authority. The <code>UpdateAppMonitor</code> allows either the domain or the domain list.
-    #         </p>
+    #   <p> List the domain names for which your application has administrative authority. The <code>UpdateAppMonitor</code> allows either the domain or the domain list. </p>
     # @option params [Types::AppMonitorConfiguration] :app_monitor_configuration
-    #   <p>A structure that contains much of the configuration data for the app monitor. If you are using 
-    #            Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the 
-    #            Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own 
-    #            authorization method. For more information, see 
-    #            <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html">Authorize your application
-    #               to send data to Amazon Web Services</a>.</p>
+    #   <p>A structure that contains much of the configuration data for the app monitor. If you are using Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own authorization method. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html">Authorize your application to send data to Amazon Web Services</a>.</p>
     # @option params [Boolean] :cw_log_enabled
-    #   <p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM 
-    #            sends a copy of this telemetry data to Amazon CloudWatch Logs
-    #            in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur
-    #            Amazon CloudWatch Logs charges.</p>
+    #   <p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to Amazon CloudWatch Logs in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur Amazon CloudWatch Logs charges.</p>
     # @option params [Types::CustomEvents] :custom_events
-    #   <p>Specifies whether this app monitor allows the web client to define and send
-    #            custom events. The default is for custom events to be <code>DISABLED</code>.</p>
-    #            <p>For more information about custom events, see 
-    #            <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html">Send custom events</a>.</p>
+    #   <p>Specifies whether this app monitor allows the web client to define and send custom events. The default is for custom events to be <code>DISABLED</code>.</p> <p>For more information about custom events, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html">Send custom events</a>.</p>
     # @option params [Types::DeobfuscationConfiguration] :deobfuscation_configuration
-    #   <p>
-    #            A structure that contains the configuration for how an app monitor can deobfuscate stack traces.
-    #         </p>
+    #   <p> A structure that contains the configuration for how an app monitor can deobfuscate stack traces. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "AppMonitorName", # required
@@ -1083,21 +918,14 @@ module Aws::RUM
       request.send_request(options)
     end
 
-    # <p>Modifies one existing metric definition for CloudWatch RUM extended metrics. For 
-    #          more information about extended metrics, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html">BatchCreateRumMetricsDefinitions</a>.</p>
+    # <p>Modifies one existing metric definition for CloudWatch RUM extended metrics. For more information about extended metrics, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html">BatchCreateRumMetricsDefinitions</a>.</p>
     # @param [Hash, Types::UpdateRumMetricDefinitionInput] params
     # @option params [String] :app_monitor_name
     #   <p>The name of the CloudWatch RUM app monitor that sends these metrics.</p>
     # @option params [String] :destination
-    #   <p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If
-    #            you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment 
-    #            that will receive
-    #            the metrics and an IAM role that has permission to write to the experiment.</p>
+    #   <p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that will receive the metrics and an IAM role that has permission to write to the experiment.</p>
     # @option params [String] :destination_arn
-    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is 
-    #            <code>CloudWatch</code>, do not use this parameter.</p>
-    #            <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this 
-    #            experiment as a valid destination. For more information, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html">PutRumMetricsDestination</a>.</p>
+    #   <p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is <code>CloudWatch</code>, do not use this parameter.</p> <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this experiment as a valid destination. For more information, see <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html">PutRumMetricsDestination</a>.</p>
     # @option params [Types::MetricDefinitionRequest] :metric_definition
     #   <p>A structure that contains the new definition that you want to use for this metric.</p>
     # @option params [String] :metric_definition_id

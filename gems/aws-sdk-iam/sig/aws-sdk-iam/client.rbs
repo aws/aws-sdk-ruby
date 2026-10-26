@@ -44,6 +44,27 @@ module Aws::IAM
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AcceptDelegationRequestResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def accept_delegation_request: (
+      ?delegation_request_id: String
+    ) -> _AcceptDelegationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptDelegationRequestResponse
+
+    interface _AcquireRoleResponse
+      include Smithy::Client::_Response[Types::AcquireRoleResponse]
+      def role: () -> Types::Role?
+    end
+    def acquire_role: (
+      ?template_arn: String,
+      ?template_minor_version: Integer,
+      ?replacement_values: Hash[String,
+        {
+          values: Array[String]
+        }
+      ]
+    ) -> _AcquireRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcquireRoleResponse
+
     interface _AddClientIDToOpenIDConnectProviderResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -67,6 +88,13 @@ module Aws::IAM
       ?group_name: String,
       ?user_name: String
     ) -> _AddUserToGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddUserToGroupResponse
+
+    interface _AssociateDelegationRequestResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_delegation_request: (
+      ?delegation_request_id: String
+    ) -> _AssociateDelegationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDelegationRequestResponse
 
     interface _AttachGroupPolicyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -114,6 +142,32 @@ module Aws::IAM
     def create_account_alias: (
       ?account_alias: String
     ) -> _CreateAccountAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccountAliasResponse
+
+    interface _CreateDelegationRequestResponse
+      include Smithy::Client::_Response[Types::CreateDelegationRequestResponse]
+      def console_deep_link: () -> String?
+      def delegation_request_id: () -> String?
+    end
+    def create_delegation_request: (
+      ?owner_account_id: String,
+      ?description: String,
+      ?permissions: {
+        policy_template_arn: String,
+        parameters: Array[
+          {
+            name: String,
+            values: Array[String],
+            type: String
+          }
+        ]
+      },
+      ?request_message: String,
+      ?requestor_workflow_id: String,
+      ?redirect_url: String,
+      ?notification_channel: String,
+      ?session_duration: Integer,
+      ?only_send_by_owner: bool
+    ) -> _CreateDelegationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDelegationRequestResponse
 
     interface _CreateGroupResponse
       include Smithy::Client::_Response[Types::CreateGroupResponse]
@@ -495,6 +549,11 @@ module Aws::IAM
     end
     def disable_organizations_root_sessions: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableOrganizationsRootSessionsResponse
 
+    interface _DisableOutboundWebIdentityFederationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_outbound_web_identity_federation: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableOutboundWebIdentityFederationResponse
+
     interface _EnableMFADeviceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -518,6 +577,12 @@ module Aws::IAM
       def enabled_features: () -> Array[String]?
     end
     def enable_organizations_root_sessions: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableOrganizationsRootSessionsResponse
+
+    interface _EnableOutboundWebIdentityFederationResponse
+      include Smithy::Client::_Response[Types::EnableOutboundWebIdentityFederationResponse]
+      def issuer_identifier: () -> String?
+    end
+    def enable_outbound_web_identity_federation: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableOutboundWebIdentityFederationResponse
 
     interface _GenerateCredentialReportResponse
       include Smithy::Client::_Response[Types::GenerateCredentialReportResponse]
@@ -574,6 +639,12 @@ module Aws::IAM
     end
     def get_account_password_policy: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountPasswordPolicyResponse
 
+    interface _GetAccountPropertiesResponse
+      include Smithy::Client::_Response[Types::GetAccountPropertiesResponse]
+      def properties: () -> Hash[String, String]?
+    end
+    def get_account_properties: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountPropertiesResponse
+
     interface _GetAccountSummaryResponse
       include Smithy::Client::_Response[Types::GetAccountSummaryResponse]
       def summary_map: () -> Hash[String, Integer]?
@@ -605,6 +676,17 @@ module Aws::IAM
     end
     def get_credential_report: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCredentialReportResponse
 
+    interface _GetDelegationRequestResponse
+      include Smithy::Client::_Response[Types::GetDelegationRequestResponse]
+      def delegation_request: () -> Types::DelegationRequest?
+      def permission_check_status: () -> String?
+      def permission_check_result: () -> String?
+    end
+    def get_delegation_request: (
+      ?delegation_request_id: String,
+      ?delegation_permission_check: bool
+    ) -> _GetDelegationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDelegationRequestResponse
+
     interface _GetGroupResponse
       include Smithy::Client::_Response[Types::GetGroupResponse]
       def group: () -> Types::Group?
@@ -628,6 +710,17 @@ module Aws::IAM
       ?group_name: String,
       ?policy_name: String
     ) -> _GetGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupPolicyResponse
+
+    interface _GetHumanReadableSummaryResponse
+      include Smithy::Client::_Response[Types::GetHumanReadableSummaryResponse]
+      def summary_content: () -> String?
+      def locale: () -> String?
+      def summary_state: () -> String?
+    end
+    def get_human_readable_summary: (
+      ?entity_arn: String,
+      ?locale: String
+    ) -> _GetHumanReadableSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHumanReadableSummaryResponse
 
     interface _GetInstanceProfileResponse
       include Smithy::Client::_Response[Types::GetInstanceProfileResponse]
@@ -688,6 +781,13 @@ module Aws::IAM
       ?sort_key: String
     ) -> _GetOrganizationsAccessReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOrganizationsAccessReportResponse
 
+    interface _GetOutboundWebIdentityFederationInfoResponse
+      include Smithy::Client::_Response[Types::GetOutboundWebIdentityFederationInfoResponse]
+      def issuer_identifier: () -> String?
+      def jwt_vending_enabled: () -> bool?
+    end
+    def get_outbound_web_identity_federation_info: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOutboundWebIdentityFederationInfoResponse
+
     interface _GetPolicyResponse
       include Smithy::Client::_Response[Types::GetPolicyResponse]
       def policy: () -> Types::Policy?
@@ -723,6 +823,15 @@ module Aws::IAM
       ?role_name: String,
       ?policy_name: String
     ) -> _GetRolePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRolePolicyResponse
+
+    interface _GetRoleTemplateVersionResponse
+      include Smithy::Client::_Response[Types::GetRoleTemplateVersionResponse]
+      def role_template_version: () -> Types::RoleTemplateVersion?
+    end
+    def get_role_template_version: (
+      ?template_arn: String,
+      ?minor_version: Integer
+    ) -> _GetRoleTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRoleTemplateVersionResponse
 
     interface _GetSAMLProviderResponse
       include Smithy::Client::_Response[Types::GetSAMLProviderResponse]
@@ -879,6 +988,18 @@ module Aws::IAM
       ?marker: String,
       ?max_items: Integer
     ) -> _ListAttachedUserPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachedUserPoliciesResponse
+
+    interface _ListDelegationRequestsResponse
+      include Smithy::Client::_Response[Types::ListDelegationRequestsResponse]
+      def delegation_requests: () -> Array[Types::DelegationRequest]?
+      def marker: () -> String?
+      def is_truncated: () -> bool?
+    end
+    def list_delegation_requests: (
+      ?owner_id: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListDelegationRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDelegationRequestsResponse
 
     interface _ListEntitiesForPolicyResponse
       include Smithy::Client::_Response[Types::ListEntitiesForPolicyResponse]
@@ -1233,6 +1354,13 @@ module Aws::IAM
       ?max_items: Integer
     ) -> _ListVirtualMFADevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVirtualMFADevicesResponse
 
+    interface _PutAccountPropertiesResponse
+      include Smithy::Client::_Response[Types::PutAccountPropertiesResponse]
+    end
+    def put_account_properties: (
+      ?properties: Hash[String, String]
+    ) -> _PutAccountPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountPropertiesResponse
+
     interface _PutGroupPolicyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -1275,6 +1403,14 @@ module Aws::IAM
       ?policy_name: String,
       ?policy_document: String
     ) -> _PutUserPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutUserPolicyResponse
+
+    interface _RejectDelegationRequestResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def reject_delegation_request: (
+      ?delegation_request_id: String,
+      ?notes: String
+    ) -> _RejectDelegationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectDelegationRequestResponse
 
     interface _RemoveClientIDFromOpenIDConnectProviderResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1319,6 +1455,13 @@ module Aws::IAM
       ?authentication_code2: String
     ) -> _ResyncMFADeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResyncMFADeviceResponse
 
+    interface _SendDelegationTokenResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def send_delegation_token: (
+      ?delegation_request_id: String
+    ) -> _SendDelegationTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendDelegationTokenResponse
+
     interface _SetDefaultPolicyVersionResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -1343,6 +1486,11 @@ module Aws::IAM
     def simulate_custom_policy: (
       ?policy_input_list: Array[String],
       ?permissions_boundary_policy_input_list: Array[String],
+      ?ordered_organization_policy_input_list: Array[
+        {
+          service_control_policy_input_list: Array[String]
+        }
+      ],
       ?action_names: Array[String],
       ?resource_arns: Array[String],
       ?resource_policy: String,
@@ -1370,6 +1518,17 @@ module Aws::IAM
       ?policy_source_arn: String,
       ?policy_input_list: Array[String],
       ?permissions_boundary_policy_input_list: Array[String],
+      ?policy_exclusion_list: Array[
+        {
+          policy_type: String,
+          policy_arn: String,
+          inline_policy_identifier: {
+            policy_name: String,
+            attachment_type: String,
+            attachment_name: String
+          }
+        }
+      ],
       ?action_names: Array[String],
       ?resource_arns: Array[String],
       ?resource_policy: String,
@@ -1586,6 +1745,14 @@ module Aws::IAM
       ?role_name: String,
       ?policy_document: String
     ) -> _UpdateAssumeRolePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssumeRolePolicyResponse
+
+    interface _UpdateDelegationRequestResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_delegation_request: (
+      ?delegation_request_id: String,
+      ?notes: String
+    ) -> _UpdateDelegationRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDelegationRequestResponse
 
     interface _UpdateGroupResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]

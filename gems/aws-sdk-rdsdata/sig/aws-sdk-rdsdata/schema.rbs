@@ -28,7 +28,7 @@ module Aws::RDSData
     DatabaseResumingException: StructureShape
     DatabaseUnavailableException: StructureShape
     DbName: StringShape
-    DecimalReturnType: StringShape
+    DecimalReturnType: EnumShape
     DoubleArray: ListShape
     ErrorMessage: StringShape
     ExecuteSqlInput: StructureShape
@@ -47,13 +47,13 @@ module Aws::RDSData
     InvalidSecretException: StructureShape
     Long: IntegerShape
     LongArray: ListShape
-    LongReturnType: StringShape
+    LongReturnType: EnumShape
     Metadata: ListShape
     NotFoundException: StructureShape
     ParameterName: StringShape
     Record: StructureShape
     Records: ListShape
-    RecordsFormatType: StringShape
+    RecordsFormatType: EnumShape
     RecordsUpdated: IntegerShape
     ResultFrame: StructureShape
     ResultSetMetadata: StructureShape
@@ -76,7 +76,7 @@ module Aws::RDSData
     StructValue: StructureShape
     TransactionNotFoundException: StructureShape
     TransactionStatus: StringShape
-    TypeHint: StringShape
+    TypeHint: EnumShape
     UnsupportedResultException: StructureShape
     UpdateResult: StructureShape
     UpdateResults: ListShape

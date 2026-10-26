@@ -472,6 +472,19 @@ module Aws::FSx
       attr_accessor constituents_per_aggregate: Integer?
     end
 
+    class CreateAndAttachS3AccessPointOntapConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+        ?file_system_identity: Types::OntapFileSystemIdentity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+      attr_accessor file_system_identity: Types::OntapFileSystemIdentity?
+    end
+
     class CreateAndAttachS3AccessPointOpenZFSConfiguration
       include Smithy::Schema::Structure
 
@@ -493,6 +506,7 @@ module Aws::FSx
         ?name: String,
         ?type: String,
         ?open_zfs_configuration: Types::CreateAndAttachS3AccessPointOpenZFSConfiguration,
+        ?ontap_configuration: Types::CreateAndAttachS3AccessPointOntapConfiguration,
         ?s3_access_point: Types::CreateAndAttachS3AccessPointS3Configuration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -501,6 +515,7 @@ module Aws::FSx
       attr_accessor name: String?
       attr_accessor type: String?
       attr_accessor open_zfs_configuration: Types::CreateAndAttachS3AccessPointOpenZFSConfiguration?
+      attr_accessor ontap_configuration: Types::CreateAndAttachS3AccessPointOntapConfiguration?
       attr_accessor s3_access_point: Types::CreateAndAttachS3AccessPointS3Configuration?
     end
 
@@ -927,6 +942,7 @@ module Aws::FSx
         ?aliases: Array[String],
         ?audit_log_configuration: Types::WindowsAuditLogCreateConfiguration,
         ?disk_iops_configuration: Types::DiskIopsConfiguration,
+        ?fsrm_configuration: Types::WindowsFsrmConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -942,6 +958,7 @@ module Aws::FSx
       attr_accessor aliases: Array[String]?
       attr_accessor audit_log_configuration: Types::WindowsAuditLogCreateConfiguration?
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+      attr_accessor fsrm_configuration: Types::WindowsFsrmConfiguration?
     end
 
     class CreateOntapVolumeConfiguration
@@ -2944,6 +2961,37 @@ module Aws::FSx
       attr_accessor endpoint_ipv6_address_range: String?
     end
 
+    class OntapFileSystemIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?unix_user: Types::OntapUnixFileSystemUser,
+        ?windows_user: Types::OntapWindowsFileSystemUser,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor unix_user: Types::OntapUnixFileSystemUser?
+      attr_accessor windows_user: Types::OntapWindowsFileSystemUser?
+    end
+
+    module OntapFileSystemUserType
+      UNIX: String
+      WINDOWS: String
+    end
+
+    class OntapUnixFileSystemUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
     class OntapVolumeConfiguration
       include Smithy::Schema::Structure
 
@@ -2989,6 +3037,17 @@ module Aws::FSx
       RW: String
       DP: String
       LS: String
+    end
+
+    class OntapWindowsFileSystemUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
     end
 
     class OpenZFSClientConfiguration
@@ -3392,6 +3451,7 @@ module Aws::FSx
         ?name: String,
         ?type: String,
         ?open_zfs_configuration: Types::S3AccessPointOpenZFSConfiguration,
+        ?ontap_configuration: Types::S3AccessPointOntapConfiguration,
         ?s3_access_point: Types::S3AccessPoint,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3402,6 +3462,7 @@ module Aws::FSx
       attr_accessor name: String?
       attr_accessor type: String?
       attr_accessor open_zfs_configuration: Types::S3AccessPointOpenZFSConfiguration?
+      attr_accessor ontap_configuration: Types::S3AccessPointOntapConfiguration?
       attr_accessor s3_access_point: Types::S3AccessPoint?
     end
 
@@ -3411,6 +3472,7 @@ module Aws::FSx
       DELETING: String
       UPDATING: String
       FAILED: String
+      MISCONFIGURED: String
     end
 
     class S3AccessPointAttachmentNotFound
@@ -3426,6 +3488,7 @@ module Aws::FSx
 
     module S3AccessPointAttachmentType
       OPENZFS: String
+      ONTAP: String
     end
 
     class S3AccessPointAttachmentsFilter
@@ -3445,6 +3508,19 @@ module Aws::FSx
       FILE_SYSTEM_ID: String
       VOLUME_ID: String
       TYPE: String
+    end
+
+    class S3AccessPointOntapConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_id: String,
+        ?file_system_identity: Types::OntapFileSystemIdentity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_id: String?
+      attr_accessor file_system_identity: Types::OntapFileSystemIdentity?
     end
 
     class S3AccessPointOpenZFSConfiguration
@@ -3499,6 +3575,7 @@ module Aws::FSx
         ?file_system_administrators_group: String,
         ?user_name: String,
         ?dns_ips: Array[String],
+        ?domain_join_service_account_secret: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3507,6 +3584,7 @@ module Aws::FSx
       attr_accessor file_system_administrators_group: String?
       attr_accessor user_name: String?
       attr_accessor dns_ips: Array[String]?
+      attr_accessor domain_join_service_account_secret: String?
     end
 
     class SelfManagedActiveDirectoryConfiguration
@@ -3519,6 +3597,7 @@ module Aws::FSx
         ?user_name: String,
         ?password: String,
         ?dns_ips: Array[String],
+        ?domain_join_service_account_secret: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3528,6 +3607,7 @@ module Aws::FSx
       attr_accessor user_name: String?
       attr_accessor password: String?
       attr_accessor dns_ips: Array[String]?
+      attr_accessor domain_join_service_account_secret: String?
     end
 
     class SelfManagedActiveDirectoryConfigurationUpdates
@@ -3540,6 +3620,7 @@ module Aws::FSx
         ?domain_name: String,
         ?organizational_unit_distinguished_name: String,
         ?file_system_administrators_group: String,
+        ?domain_join_service_account_secret: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3549,6 +3630,7 @@ module Aws::FSx
       attr_accessor domain_name: String?
       attr_accessor organizational_unit_distinguished_name: String?
       attr_accessor file_system_administrators_group: String?
+      attr_accessor domain_join_service_account_secret: String?
     end
 
     module ServiceLimit
@@ -4192,6 +4274,7 @@ module Aws::FSx
         ?self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfigurationUpdates,
         ?audit_log_configuration: Types::WindowsAuditLogCreateConfiguration,
         ?disk_iops_configuration: Types::DiskIopsConfiguration,
+        ?fsrm_configuration: Types::WindowsFsrmConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4202,6 +4285,7 @@ module Aws::FSx
       attr_accessor self_managed_active_directory_configuration: Types::SelfManagedActiveDirectoryConfigurationUpdates?
       attr_accessor audit_log_configuration: Types::WindowsAuditLogCreateConfiguration?
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
+      attr_accessor fsrm_configuration: Types::WindowsFsrmConfiguration?
     end
 
     class UpdateOntapVolumeConfiguration
@@ -4545,6 +4629,7 @@ module Aws::FSx
         ?audit_log_configuration: Types::WindowsAuditLogConfiguration,
         ?disk_iops_configuration: Types::DiskIopsConfiguration,
         ?preferred_file_server_ipv6: String,
+        ?fsrm_configuration: Types::WindowsFsrmConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4564,6 +4649,20 @@ module Aws::FSx
       attr_accessor audit_log_configuration: Types::WindowsAuditLogConfiguration?
       attr_accessor disk_iops_configuration: Types::DiskIopsConfiguration?
       attr_accessor preferred_file_server_ipv6: String?
+      attr_accessor fsrm_configuration: Types::WindowsFsrmConfiguration?
+    end
+
+    class WindowsFsrmConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fsrm_service_enabled: bool,
+        ?event_log_destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fsrm_service_enabled: bool?
+      attr_accessor event_log_destination: String?
     end
   end
 end

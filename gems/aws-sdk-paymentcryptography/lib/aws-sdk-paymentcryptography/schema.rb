@@ -12,6 +12,10 @@ module Aws::PaymentCryptography
     Alias = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#Alias", name: "Alias")
     AliasName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#AliasName", name: "AliasName", traits: {"smithy.api#length" => {"min" => 7, "max" => 256}, "smithy.api#pattern" => "^alias/[a-zA-Z0-9/_-]+$"})
     Aliases = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.paymentcryptography#Aliases", name: "Aliases")
+    As2805KeyVariant = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptography#As2805KeyVariant", name: "As2805KeyVariant")
+    AssociateMpaTeamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#AssociateMpaTeamInput", name: "AssociateMpaTeamInput")
+    AssociateMpaTeamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#AssociateMpaTeamOutput", name: "AssociateMpaTeamOutput")
+    AssociationState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#AssociationState", name: "AssociationState", traits: {"smithy.api#enum" => [{"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "UPDATE_PENDING", "name" => "UPDATE_PENDING"}, {"value" => "DELETE_PENDING", "name" => "DELETE_PENDING"}]})
     CertificateSigningRequestType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#CertificateSigningRequestType", name: "CertificateSigningRequestType", traits: {"smithy.api#length" => {"min" => 1, "max" => 32768}, "smithy.api#pattern" => "^[^\\[;\\]<>]+$", "smithy.api#sensitive" => {}})
     CertificateSubjectType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#CertificateSubjectType", name: "CertificateSubjectType")
     CertificateType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#CertificateType", name: "CertificateType", traits: {"smithy.api#length" => {"min" => 1, "max" => 32768}, "smithy.api#pattern" => "^[^\\[;\\]<>]+$"})
@@ -24,13 +28,18 @@ module Aws::PaymentCryptography
     DeleteAliasOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#DeleteAliasOutput", name: "DeleteAliasOutput")
     DeleteKeyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#DeleteKeyInput", name: "DeleteKeyInput")
     DeleteKeyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#DeleteKeyOutput", name: "DeleteKeyOutput")
+    DeleteResourcePolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#DeleteResourcePolicyInput", name: "DeleteResourcePolicyInput")
+    DeleteResourcePolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#DeleteResourcePolicyOutput", name: "DeleteResourcePolicyOutput")
     DeriveKeyUsage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#DeriveKeyUsage", name: "DeriveKeyUsage", traits: {"smithy.api#enum" => [{"value" => "TR31_B0_BASE_DERIVATION_KEY", "name" => "TR31_B0_BASE_DERIVATION_KEY"}, {"value" => "TR31_C0_CARD_VERIFICATION_KEY", "name" => "TR31_C0_CARD_VERIFICATION_KEY"}, {"value" => "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "name" => "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY"}, {"value" => "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "name" => "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS"}, {"value" => "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "name" => "TR31_E1_EMV_MKEY_CONFIDENTIALITY"}, {"value" => "TR31_E2_EMV_MKEY_INTEGRITY", "name" => "TR31_E2_EMV_MKEY_INTEGRITY"}, {"value" => "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "name" => "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS"}, {"value" => "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "name" => "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION"}, {"value" => "TR31_E6_EMV_MKEY_OTHER", "name" => "TR31_E6_EMV_MKEY_OTHER"}, {"value" => "TR31_K0_KEY_ENCRYPTION_KEY", "name" => "TR31_K0_KEY_ENCRYPTION_KEY"}, {"value" => "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "name" => "TR31_K1_KEY_BLOCK_PROTECTION_KEY"}, {"value" => "TR31_M3_ISO_9797_3_MAC_KEY", "name" => "TR31_M3_ISO_9797_3_MAC_KEY"}, {"value" => "TR31_M1_ISO_9797_1_MAC_KEY", "name" => "TR31_M1_ISO_9797_1_MAC_KEY"}, {"value" => "TR31_M6_ISO_9797_5_CMAC_KEY", "name" => "TR31_M6_ISO_9797_5_CMAC_KEY"}, {"value" => "TR31_M7_HMAC_KEY", "name" => "TR31_M7_HMAC_KEY"}, {"value" => "TR31_P0_PIN_ENCRYPTION_KEY", "name" => "TR31_P0_PIN_ENCRYPTION_KEY"}, {"value" => "TR31_P1_PIN_GENERATION_KEY", "name" => "TR31_P1_PIN_GENERATION_KEY"}, {"value" => "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "name" => "TR31_V1_IBM3624_PIN_VERIFICATION_KEY"}, {"value" => "TR31_V2_VISA_PIN_VERIFICATION_KEY", "name" => "TR31_V2_VISA_PIN_VERIFICATION_KEY"}]})
     DiffieHellmanDerivationData = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.paymentcryptography#DiffieHellmanDerivationData", name: "DiffieHellmanDerivationData")
     DisableDefaultKeyReplicationRegionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#DisableDefaultKeyReplicationRegionsInput", name: "DisableDefaultKeyReplicationRegionsInput")
     DisableDefaultKeyReplicationRegionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#DisableDefaultKeyReplicationRegionsOutput", name: "DisableDefaultKeyReplicationRegionsOutput")
+    DisassociateMpaTeamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#DisassociateMpaTeamInput", name: "DisassociateMpaTeamInput")
+    DisassociateMpaTeamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#DisassociateMpaTeamOutput", name: "DisassociateMpaTeamOutput")
     EnableDefaultKeyReplicationRegionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#EnableDefaultKeyReplicationRegionsInput", name: "EnableDefaultKeyReplicationRegionsInput")
     EnableDefaultKeyReplicationRegionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#EnableDefaultKeyReplicationRegionsOutput", name: "EnableDefaultKeyReplicationRegionsOutput")
     EvenHexLengthBetween16And32 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#EvenHexLengthBetween16And32", name: "EvenHexLengthBetween16And32", traits: {"smithy.api#length" => {"min" => 16, "max" => 32}, "smithy.api#pattern" => "^(?:[0-9a-fA-F][0-9a-fA-F])+$"})
+    ExportAs2805KeyCryptogram = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ExportAs2805KeyCryptogram", name: "ExportAs2805KeyCryptogram")
     ExportAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ExportAttributes", name: "ExportAttributes")
     ExportDiffieHellmanTr31KeyBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ExportDiffieHellmanTr31KeyBlock", name: "ExportDiffieHellmanTr31KeyBlock")
     ExportDukptInitialKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ExportDukptInitialKey", name: "ExportDukptInitialKey")
@@ -49,13 +58,18 @@ module Aws::PaymentCryptography
     GetDefaultKeyReplicationRegionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetDefaultKeyReplicationRegionsOutput", name: "GetDefaultKeyReplicationRegionsOutput")
     GetKeyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetKeyInput", name: "GetKeyInput")
     GetKeyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetKeyOutput", name: "GetKeyOutput")
+    GetMpaTeamAssociationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetMpaTeamAssociationInput", name: "GetMpaTeamAssociationInput")
+    GetMpaTeamAssociationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetMpaTeamAssociationOutput", name: "GetMpaTeamAssociationOutput")
     GetParametersForExportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetParametersForExportInput", name: "GetParametersForExportInput")
     GetParametersForExportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetParametersForExportOutput", name: "GetParametersForExportOutput")
     GetParametersForImportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetParametersForImportInput", name: "GetParametersForImportInput")
     GetParametersForImportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetParametersForImportOutput", name: "GetParametersForImportOutput")
     GetPublicKeyCertificateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetPublicKeyCertificateInput", name: "GetPublicKeyCertificateInput")
     GetPublicKeyCertificateOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetPublicKeyCertificateOutput", name: "GetPublicKeyCertificateOutput")
+    GetResourcePolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetResourcePolicyInput", name: "GetResourcePolicyInput")
+    GetResourcePolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#GetResourcePolicyOutput", name: "GetResourcePolicyOutput")
     HexLength20Or24 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#HexLength20Or24", name: "HexLength20Or24", traits: {"smithy.api#length" => {"min" => 20, "max" => 24}, "smithy.api#pattern" => "^[0-9A-F]{20}$|^[0-9A-F]{24}$"})
+    ImportAs2805KeyCryptogram = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ImportAs2805KeyCryptogram", name: "ImportAs2805KeyCryptogram")
     ImportDiffieHellmanTr31KeyBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ImportDiffieHellmanTr31KeyBlock", name: "ImportDiffieHellmanTr31KeyBlock")
     ImportKeyCryptogram = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ImportKeyCryptogram", name: "ImportKeyCryptogram")
     ImportKeyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ImportKeyInput", name: "ImportKeyInput")
@@ -77,7 +91,7 @@ module Aws::PaymentCryptography
     KeyDerivationFunction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptography#KeyDerivationFunction", name: "KeyDerivationFunction")
     KeyDerivationHashAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.paymentcryptography#KeyDerivationHashAlgorithm", name: "KeyDerivationHashAlgorithm")
     KeyExportability = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#KeyExportability", name: "KeyExportability", traits: {"smithy.api#enum" => [{"value" => "EXPORTABLE", "name" => "EXPORTABLE"}, {"value" => "NON_EXPORTABLE", "name" => "NON_EXPORTABLE"}, {"value" => "SENSITIVE", "name" => "SENSITIVE"}]})
-    KeyMaterial = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#KeyMaterial", name: "KeyMaterial", traits: {"smithy.api#length" => {"min" => 48, "max" => 16384}, "smithy.api#sensitive" => {}})
+    KeyMaterial = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#KeyMaterial", name: "KeyMaterial", traits: {"smithy.api#length" => {"min" => 32, "max" => 16384}, "smithy.api#sensitive" => {}})
     KeyMaterialType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#KeyMaterialType", name: "KeyMaterialType", traits: {"smithy.api#enum" => [{"value" => "TR34_KEY_BLOCK", "name" => "TR34_KEY_BLOCK"}, {"value" => "TR31_KEY_BLOCK", "name" => "TR31_KEY_BLOCK"}, {"value" => "ROOT_PUBLIC_KEY_CERTIFICATE", "name" => "ROOT_PUBLIC_KEY_CERTIFICATE"}, {"value" => "TRUSTED_PUBLIC_KEY_CERTIFICATE", "name" => "TRUSTED_PUBLIC_KEY_CERTIFICATE"}, {"value" => "KEY_CRYPTOGRAM", "name" => "KEY_CRYPTOGRAM"}]})
     KeyModesOfUse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#KeyModesOfUse", name: "KeyModesOfUse")
     KeyOrigin = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#KeyOrigin", name: "KeyOrigin", traits: {"smithy.api#enum" => [{"value" => "EXTERNAL", "name" => "EXTERNAL"}, {"value" => "AWS_PAYMENT_CRYPTOGRAPHY", "name" => "AWS_PAYMENT_CRYPTOGRAPHY"}]})
@@ -85,7 +99,7 @@ module Aws::PaymentCryptography
     KeyState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#KeyState", name: "KeyState", traits: {"smithy.api#enum" => [{"value" => "CREATE_IN_PROGRESS", "name" => "CREATE_IN_PROGRESS"}, {"value" => "CREATE_COMPLETE", "name" => "CREATE_COMPLETE"}, {"value" => "DELETE_PENDING", "name" => "DELETE_PENDING"}, {"value" => "DELETE_COMPLETE", "name" => "DELETE_COMPLETE"}]})
     KeySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#KeySummary", name: "KeySummary")
     KeySummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.paymentcryptography#KeySummaryList", name: "KeySummaryList")
-    KeyUsage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#KeyUsage", name: "KeyUsage", traits: {"smithy.api#enum" => [{"value" => "TR31_B0_BASE_DERIVATION_KEY", "name" => "TR31_B0_BASE_DERIVATION_KEY"}, {"value" => "TR31_C0_CARD_VERIFICATION_KEY", "name" => "TR31_C0_CARD_VERIFICATION_KEY"}, {"value" => "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "name" => "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY"}, {"value" => "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "name" => "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION"}, {"value" => "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "name" => "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS"}, {"value" => "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "name" => "TR31_E1_EMV_MKEY_CONFIDENTIALITY"}, {"value" => "TR31_E2_EMV_MKEY_INTEGRITY", "name" => "TR31_E2_EMV_MKEY_INTEGRITY"}, {"value" => "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "name" => "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS"}, {"value" => "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "name" => "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION"}, {"value" => "TR31_E6_EMV_MKEY_OTHER", "name" => "TR31_E6_EMV_MKEY_OTHER"}, {"value" => "TR31_K0_KEY_ENCRYPTION_KEY", "name" => "TR31_K0_KEY_ENCRYPTION_KEY"}, {"value" => "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "name" => "TR31_K1_KEY_BLOCK_PROTECTION_KEY"}, {"value" => "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "name" => "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT"}, {"value" => "TR31_M3_ISO_9797_3_MAC_KEY", "name" => "TR31_M3_ISO_9797_3_MAC_KEY"}, {"value" => "TR31_M1_ISO_9797_1_MAC_KEY", "name" => "TR31_M1_ISO_9797_1_MAC_KEY"}, {"value" => "TR31_M6_ISO_9797_5_CMAC_KEY", "name" => "TR31_M6_ISO_9797_5_CMAC_KEY"}, {"value" => "TR31_M7_HMAC_KEY", "name" => "TR31_M7_HMAC_KEY"}, {"value" => "TR31_P0_PIN_ENCRYPTION_KEY", "name" => "TR31_P0_PIN_ENCRYPTION_KEY"}, {"value" => "TR31_P1_PIN_GENERATION_KEY", "name" => "TR31_P1_PIN_GENERATION_KEY"}, {"value" => "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "name" => "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE"}, {"value" => "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "name" => "TR31_V1_IBM3624_PIN_VERIFICATION_KEY"}, {"value" => "TR31_V2_VISA_PIN_VERIFICATION_KEY", "name" => "TR31_V2_VISA_PIN_VERIFICATION_KEY"}, {"value" => "TR31_K2_TR34_ASYMMETRIC_KEY", "name" => "TR31_K2_TR34_ASYMMETRIC_KEY"}]})
+    KeyUsage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#KeyUsage", name: "KeyUsage", traits: {"smithy.api#enum" => [{"value" => "TR31_B0_BASE_DERIVATION_KEY", "name" => "TR31_B0_BASE_DERIVATION_KEY"}, {"value" => "TR31_C0_CARD_VERIFICATION_KEY", "name" => "TR31_C0_CARD_VERIFICATION_KEY"}, {"value" => "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY", "name" => "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY"}, {"value" => "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION", "name" => "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION"}, {"value" => "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS", "name" => "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS"}, {"value" => "TR31_E1_EMV_MKEY_CONFIDENTIALITY", "name" => "TR31_E1_EMV_MKEY_CONFIDENTIALITY"}, {"value" => "TR31_E2_EMV_MKEY_INTEGRITY", "name" => "TR31_E2_EMV_MKEY_INTEGRITY"}, {"value" => "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS", "name" => "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS"}, {"value" => "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION", "name" => "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION"}, {"value" => "TR31_E6_EMV_MKEY_OTHER", "name" => "TR31_E6_EMV_MKEY_OTHER"}, {"value" => "TR31_K0_KEY_ENCRYPTION_KEY", "name" => "TR31_K0_KEY_ENCRYPTION_KEY"}, {"value" => "TR31_K1_KEY_BLOCK_PROTECTION_KEY", "name" => "TR31_K1_KEY_BLOCK_PROTECTION_KEY"}, {"value" => "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT", "name" => "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT"}, {"value" => "TR31_M0_ISO_16609_MAC_KEY", "name" => "TR31_M0_ISO_16609_MAC_KEY"}, {"value" => "TR31_M3_ISO_9797_3_MAC_KEY", "name" => "TR31_M3_ISO_9797_3_MAC_KEY"}, {"value" => "TR31_M1_ISO_9797_1_MAC_KEY", "name" => "TR31_M1_ISO_9797_1_MAC_KEY"}, {"value" => "TR31_M6_ISO_9797_5_CMAC_KEY", "name" => "TR31_M6_ISO_9797_5_CMAC_KEY"}, {"value" => "TR31_M7_HMAC_KEY", "name" => "TR31_M7_HMAC_KEY"}, {"value" => "TR31_P0_PIN_ENCRYPTION_KEY", "name" => "TR31_P0_PIN_ENCRYPTION_KEY"}, {"value" => "TR31_P1_PIN_GENERATION_KEY", "name" => "TR31_P1_PIN_GENERATION_KEY"}, {"value" => "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE", "name" => "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE"}, {"value" => "TR31_V1_IBM3624_PIN_VERIFICATION_KEY", "name" => "TR31_V1_IBM3624_PIN_VERIFICATION_KEY"}, {"value" => "TR31_V2_VISA_PIN_VERIFICATION_KEY", "name" => "TR31_V2_VISA_PIN_VERIFICATION_KEY"}, {"value" => "TR31_K2_TR34_ASYMMETRIC_KEY", "name" => "TR31_K2_TR34_ASYMMETRIC_KEY"}]})
     KeyVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#KeyVersion", name: "KeyVersion", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#pattern" => "^[0-9A-Z]{2}+$"})
     ListAliasesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ListAliasesInput", name: "ListAliasesInput")
     ListAliasesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ListAliasesOutput", name: "ListAliasesOutput")
@@ -94,11 +108,21 @@ module Aws::PaymentCryptography
     ListTagsForResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ListTagsForResourceInput", name: "ListTagsForResourceInput")
     ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ListTagsForResourceOutput", name: "ListTagsForResourceOutput")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.paymentcryptography#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    MpaOperation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#MpaOperation", name: "MpaOperation", traits: {"smithy.api#enum" => [{"value" => "IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE", "name" => "IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE"}]})
+    MpaRequesterComment = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#MpaRequesterComment", name: "MpaRequesterComment", traits: {"smithy.api#length" => {"max" => 200}, "smithy.api#sensitive" => {}})
+    MpaSessionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#MpaSessionArn", name: "MpaSessionArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:mpa:[a-z0-9-]{1,20}:[0-9]{12}:session/[a-zA-Z0-9._-]+/[a-zA-Z0-9_-]+$"})
+    MpaStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#MpaStatus", name: "MpaStatus")
+    MpaStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#MpaStatusMessage", name: "MpaStatusMessage", traits: {"smithy.api#length" => {"max" => 1000}})
+    MpaTeamArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#MpaTeamArn", name: "MpaTeamArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:mpa:[a-z0-9-]{1,20}:[0-9]{12}:approval-team/[a-zA-Z0-9._-]+$"})
+    MpaTeamAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#MpaTeamAssociation", name: "MpaTeamAssociation")
     MultiRegionKeyType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#MultiRegionKeyType", name: "MultiRegionKeyType", traits: {"smithy.api#enum" => [{"value" => "PRIMARY", "name" => "PRIMARY"}, {"value" => "REPLICA", "name" => "REPLICA"}]})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 8192}})
     OptionalBlockId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#OptionalBlockId", name: "OptionalBlockId", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#pattern" => "^[0-9A-Z]{2}+$", "smithy.api#sensitive" => {}})
     OptionalBlockValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#OptionalBlockValue", name: "OptionalBlockValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 108}, "smithy.api#pattern" => "^[0-9a-zA-Z]+$", "smithy.api#sensitive" => {}})
     OptionalBlocks = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.paymentcryptography#OptionalBlocks", name: "OptionalBlocks")
+    PublicPolicyException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#PublicPolicyException", name: "PublicPolicyException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    PutResourcePolicyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#PutResourcePolicyInput", name: "PutResourcePolicyInput")
+    PutResourcePolicyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#PutResourcePolicyOutput", name: "PutResourcePolicyOutput")
     Region = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#Region", name: "Region", traits: {"smithy.api#pattern" => "^[a-z]{2}-[a-z]{1,16}-[0-9]+$"})
     Regions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.paymentcryptography#Regions", name: "Regions")
     RemoveKeyReplicationRegionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#RemoveKeyReplicationRegionsInput", name: "RemoveKeyReplicationRegionsInput")
@@ -107,11 +131,13 @@ module Aws::PaymentCryptography
     ReplicationStatusType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ReplicationStatusType", name: "ReplicationStatusType")
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#ResourceArn", name: "ResourceArn", traits: {"smithy.api#length" => {"min" => 70, "max" => 150}, "smithy.api#pattern" => "^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:key/[0-9a-zA-Z]{16,64}$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourcePolicy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#ResourcePolicy", name: "ResourcePolicy", traits: {"smithy.api#length" => {"min" => 1, "max" => 20480}, "smithy.api#pattern" => "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"})
     RestoreKeyInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#RestoreKeyInput", name: "RestoreKeyInput")
     RestoreKeyOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#RestoreKeyOutput", name: "RestoreKeyOutput")
     RootCertificatePublicKey = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#RootCertificatePublicKey", name: "RootCertificatePublicKey")
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     ServiceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#ServiceUnavailableException", name: "ServiceUnavailableException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 503})
+    SessionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#SessionStatus", name: "SessionStatus", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "APPROVED", "name" => "APPROVED"}, {"value" => "FAILED", "name" => "FAILED"}, {"value" => "CANCELLED", "name" => "CANCELLED"}]})
     SharedInformation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#SharedInformation", name: "SharedInformation", traits: {"smithy.api#length" => {"min" => 2, "max" => 2048}, "smithy.api#pattern" => "^(?:[0-9a-fA-F][0-9a-fA-F])+$"})
     SigningAlgorithmType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.paymentcryptography#SigningAlgorithmType", name: "SigningAlgorithmType", traits: {"smithy.api#enum" => [{"value" => "SHA224", "name" => "SHA224"}, {"value" => "SHA256", "name" => "SHA256"}, {"value" => "SHA384", "name" => "SHA384"}, {"value" => "SHA512", "name" => "SHA512"}]})
     StartKeyUsageInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.paymentcryptography#StartKeyUsageInput", name: "StartKeyUsageInput")
@@ -153,12 +179,22 @@ module Aws::PaymentCryptography
     Alias.add_member(:key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "KeyArn"))
     Alias.type = Types::Alias
     Aliases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Alias, name: "member"))
-    CertificateSubjectType.add_member(:common_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CommonName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$", "smithy.api#required" => {}}))
-    CertificateSubjectType.add_member(:organization_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OrganizationUnit", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
-    CertificateSubjectType.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Organization", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
-    CertificateSubjectType.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "City", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
+    As2805KeyVariant.add_member(:terminal_major_key_variant_00, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TERMINAL_MAJOR_KEY_VARIANT_00", traits: {"smithy.api#enumValue" => "TERMINAL_MAJOR_KEY_VARIANT_00"}))
+    As2805KeyVariant.add_member(:pin_encryption_key_variant_28, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PIN_ENCRYPTION_KEY_VARIANT_28", traits: {"smithy.api#enumValue" => "PIN_ENCRYPTION_KEY_VARIANT_28"}))
+    As2805KeyVariant.add_member(:message_authentication_key_variant_24, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MESSAGE_AUTHENTICATION_KEY_VARIANT_24", traits: {"smithy.api#enumValue" => "MESSAGE_AUTHENTICATION_KEY_VARIANT_24"}))
+    As2805KeyVariant.add_member(:data_encryption_key_variant_22, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_ENCRYPTION_KEY_VARIANT_22", traits: {"smithy.api#enumValue" => "DATA_ENCRYPTION_KEY_VARIANT_22"}))
+    AssociateMpaTeamInput.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaOperation, name: "Action", traits: {"smithy.api#required" => {}}))
+    AssociateMpaTeamInput.add_member(:mpa_team_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaTeamArn, name: "MpaTeamArn", traits: {"smithy.api#required" => {}}))
+    AssociateMpaTeamInput.add_member(:requester_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaRequesterComment, name: "RequesterComment"))
+    AssociateMpaTeamInput.type = Types::AssociateMpaTeamInput
+    AssociateMpaTeamOutput.add_member(:mpa_team_association, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaTeamAssociation, name: "MpaTeamAssociation", traits: {"smithy.api#required" => {}}))
+    AssociateMpaTeamOutput.type = Types::AssociateMpaTeamOutput
+    CertificateSubjectType.add_member(:common_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CommonName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[^\\[;\\]<>]+$", "smithy.api#required" => {}}))
+    CertificateSubjectType.add_member(:organization_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OrganizationUnit", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[^\\[;\\]<>]+$"}))
+    CertificateSubjectType.add_member(:organization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Organization", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[^\\[;\\]<>]+$"}))
+    CertificateSubjectType.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "City", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[^\\[;\\]<>]+$"}))
     CertificateSubjectType.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Country", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
-    CertificateSubjectType.add_member(:state_or_province, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "StateOrProvince", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z]+$"}))
+    CertificateSubjectType.add_member(:state_or_province, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "StateOrProvince", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[^\\[;\\]<>]+$"}))
     CertificateSubjectType.add_member(:email_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "EmailAddress", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9.!\#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$"}))
     CertificateSubjectType.type = Types::CertificateSubjectType
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
@@ -174,7 +210,7 @@ module Aws::PaymentCryptography
     CreateKeyInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Enabled", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
     CreateKeyInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
     CreateKeyInput.add_member(:derive_key_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: DeriveKeyUsage, name: "DeriveKeyUsage", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#suppress" => ["UnstableTrait"]}))
-    CreateKeyInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, name: "ReplicationRegions", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    CreateKeyInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, name: "ReplicationRegions", traits: {"aws.cloudformation#cfnMutability" => "write", "smithy.api#suppress" => ["UnstableTrait"]}))
     CreateKeyInput.type = Types::CreateKeyInput
     CreateKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     CreateKeyOutput.type = Types::CreateKeyOutput
@@ -186,6 +222,9 @@ module Aws::PaymentCryptography
     DeleteKeyInput.type = Types::DeleteKeyInput
     DeleteKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     DeleteKeyOutput.type = Types::DeleteKeyOutput
+    DeleteResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    DeleteResourcePolicyInput.type = Types::DeleteResourcePolicyInput
+    DeleteResourcePolicyOutput.type = Types::DeleteResourcePolicyOutput
     DiffieHellmanDerivationData.add_member(:shared_information, Types::DiffieHellmanDerivationData::SharedInformation, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedInformation, name: "SharedInformation"))
     DiffieHellmanDerivationData.add_member(:unknown, Types::DiffieHellmanDerivationData::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DiffieHellmanDerivationData.type = Types::DiffieHellmanDerivationData
@@ -193,10 +232,18 @@ module Aws::PaymentCryptography
     DisableDefaultKeyReplicationRegionsInput.type = Types::DisableDefaultKeyReplicationRegionsInput
     DisableDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, name: "EnabledReplicationRegions", traits: {"smithy.api#required" => {}}))
     DisableDefaultKeyReplicationRegionsOutput.type = Types::DisableDefaultKeyReplicationRegionsOutput
+    DisassociateMpaTeamInput.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaOperation, name: "Action", traits: {"smithy.api#required" => {}}))
+    DisassociateMpaTeamInput.add_member(:requester_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaRequesterComment, name: "RequesterComment"))
+    DisassociateMpaTeamInput.type = Types::DisassociateMpaTeamInput
+    DisassociateMpaTeamOutput.add_member(:mpa_team_association, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaTeamAssociation, name: "MpaTeamAssociation", traits: {"smithy.api#required" => {}}))
+    DisassociateMpaTeamOutput.type = Types::DisassociateMpaTeamOutput
     EnableDefaultKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
     EnableDefaultKeyReplicationRegionsInput.type = Types::EnableDefaultKeyReplicationRegionsInput
     EnableDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, name: "EnabledReplicationRegions", traits: {"smithy.api#required" => {}}))
     EnableDefaultKeyReplicationRegionsOutput.type = Types::EnableDefaultKeyReplicationRegionsOutput
+    ExportAs2805KeyCryptogram.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "WrappingKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ExportAs2805KeyCryptogram.add_member(:as2805_key_variant, ::Smithy::Schema::Shapes::MemberShape.new(target: As2805KeyVariant, name: "As2805KeyVariant", traits: {"smithy.api#required" => {}}))
+    ExportAs2805KeyCryptogram.type = Types::ExportAs2805KeyCryptogram
     ExportAttributes.add_member(:export_dukpt_initial_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDukptInitialKey, name: "ExportDukptInitialKey"))
     ExportAttributes.add_member(:key_check_value_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyCheckValueAlgorithm, name: "KeyCheckValueAlgorithm"))
     ExportAttributes.type = Types::ExportAttributes
@@ -223,6 +270,7 @@ module Aws::PaymentCryptography
     ExportKeyMaterial.add_member(:tr34_key_block, Types::ExportKeyMaterial::Tr34KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportTr34KeyBlock, name: "Tr34KeyBlock"))
     ExportKeyMaterial.add_member(:key_cryptogram, Types::ExportKeyMaterial::KeyCryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportKeyCryptogram, name: "KeyCryptogram"))
     ExportKeyMaterial.add_member(:diffie_hellman_tr31_key_block, Types::ExportKeyMaterial::DiffieHellmanTr31KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDiffieHellmanTr31KeyBlock, name: "DiffieHellmanTr31KeyBlock"))
+    ExportKeyMaterial.add_member(:as2805_key_cryptogram, Types::ExportKeyMaterial::As2805KeyCryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportAs2805KeyCryptogram, name: "As2805KeyCryptogram"))
     ExportKeyMaterial.add_member(:unknown, Types::ExportKeyMaterial::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ExportKeyMaterial.type = Types::ExportKeyMaterial
     ExportKeyOutput.add_member(:wrapped_key, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKey, name: "WrappedKey"))
@@ -256,8 +304,13 @@ module Aws::PaymentCryptography
     GetKeyInput.type = Types::GetKeyInput
     GetKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#required" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     GetKeyOutput.type = Types::GetKeyOutput
+    GetMpaTeamAssociationInput.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaOperation, name: "Action", traits: {"smithy.api#required" => {}}))
+    GetMpaTeamAssociationInput.type = Types::GetMpaTeamAssociationInput
+    GetMpaTeamAssociationOutput.add_member(:mpa_team_association, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaTeamAssociation, name: "MpaTeamAssociation", traits: {"smithy.api#required" => {}}))
+    GetMpaTeamAssociationOutput.type = Types::GetMpaTeamAssociationOutput
     GetParametersForExportInput.add_member(:key_material_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMaterialType, name: "KeyMaterialType", traits: {"smithy.api#required" => {}}))
     GetParametersForExportInput.add_member(:signing_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, name: "SigningKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    GetParametersForExportInput.add_member(:reuse_last_generated_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "ReuseLastGeneratedToken"))
     GetParametersForExportInput.type = Types::GetParametersForExportInput
     GetParametersForExportOutput.add_member(:signing_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, name: "SigningKeyCertificate", traits: {"smithy.api#required" => {}}))
     GetParametersForExportOutput.add_member(:signing_key_certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, name: "SigningKeyCertificateChain", traits: {"smithy.api#required" => {}}))
@@ -267,6 +320,7 @@ module Aws::PaymentCryptography
     GetParametersForExportOutput.type = Types::GetParametersForExportOutput
     GetParametersForImportInput.add_member(:key_material_type, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyMaterialType, name: "KeyMaterialType", traits: {"smithy.api#required" => {}}))
     GetParametersForImportInput.add_member(:wrapping_key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, name: "WrappingKeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    GetParametersForImportInput.add_member(:reuse_last_generated_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "ReuseLastGeneratedToken"))
     GetParametersForImportInput.type = Types::GetParametersForImportInput
     GetParametersForImportOutput.add_member(:wrapping_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, name: "WrappingKeyCertificate", traits: {"smithy.api#required" => {}}))
     GetParametersForImportOutput.add_member(:wrapping_key_certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, name: "WrappingKeyCertificateChain", traits: {"smithy.api#required" => {}}))
@@ -279,6 +333,18 @@ module Aws::PaymentCryptography
     GetPublicKeyCertificateOutput.add_member(:key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, name: "KeyCertificate", traits: {"smithy.api#required" => {}}))
     GetPublicKeyCertificateOutput.add_member(:key_certificate_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, name: "KeyCertificateChain", traits: {"smithy.api#required" => {}}))
     GetPublicKeyCertificateOutput.type = Types::GetPublicKeyCertificateOutput
+    GetResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    GetResourcePolicyInput.type = Types::GetResourcePolicyInput
+    GetResourcePolicyOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    GetResourcePolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "Policy", traits: {"smithy.api#required" => {}}))
+    GetResourcePolicyOutput.type = Types::GetResourcePolicyOutput
+    ImportAs2805KeyCryptogram.add_member(:as2805_key_variant, ::Smithy::Schema::Shapes::MemberShape.new(target: As2805KeyVariant, name: "As2805KeyVariant", traits: {"smithy.api#required" => {}}))
+    ImportAs2805KeyCryptogram.add_member(:key_modes_of_use, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyModesOfUse, name: "KeyModesOfUse", traits: {"smithy.api#required" => {}}))
+    ImportAs2805KeyCryptogram.add_member(:key_algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyAlgorithm, name: "KeyAlgorithm", traits: {"smithy.api#required" => {}}))
+    ImportAs2805KeyCryptogram.add_member(:exportable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Exportable", traits: {"smithy.api#required" => {}}))
+    ImportAs2805KeyCryptogram.add_member(:wrapping_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "WrappingKeyIdentifier", traits: {"smithy.api#required" => {}}))
+    ImportAs2805KeyCryptogram.add_member(:wrapped_key_cryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: WrappedKeyCryptogram, name: "WrappedKeyCryptogram", traits: {"smithy.api#required" => {}}))
+    ImportAs2805KeyCryptogram.type = Types::ImportAs2805KeyCryptogram
     ImportDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "PrivateKeyIdentifier", traits: {"smithy.api#required" => {}}))
     ImportDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "CertificateAuthorityPublicKeyIdentifier", traits: {"smithy.api#required" => {}}))
     ImportDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateType, name: "PublicKeyCertificate", traits: {"smithy.api#required" => {}}))
@@ -299,6 +365,7 @@ module Aws::PaymentCryptography
     ImportKeyInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Enabled"))
     ImportKeyInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
     ImportKeyInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, name: "ReplicationRegions"))
+    ImportKeyInput.add_member(:requester_comment, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaRequesterComment, name: "RequesterComment"))
     ImportKeyInput.type = Types::ImportKeyInput
     ImportKeyMaterial.add_member(:root_certificate_public_key, Types::ImportKeyMaterial::RootCertificatePublicKey, ::Smithy::Schema::Shapes::MemberShape.new(target: RootCertificatePublicKey, name: "RootCertificatePublicKey"))
     ImportKeyMaterial.add_member(:trusted_certificate_public_key, Types::ImportKeyMaterial::TrustedCertificatePublicKey, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustedCertificatePublicKey, name: "TrustedCertificatePublicKey"))
@@ -306,6 +373,7 @@ module Aws::PaymentCryptography
     ImportKeyMaterial.add_member(:tr34_key_block, Types::ImportKeyMaterial::Tr34KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportTr34KeyBlock, name: "Tr34KeyBlock"))
     ImportKeyMaterial.add_member(:key_cryptogram, Types::ImportKeyMaterial::KeyCryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportKeyCryptogram, name: "KeyCryptogram"))
     ImportKeyMaterial.add_member(:diffie_hellman_tr31_key_block, Types::ImportKeyMaterial::DiffieHellmanTr31KeyBlock, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportDiffieHellmanTr31KeyBlock, name: "DiffieHellmanTr31KeyBlock"))
+    ImportKeyMaterial.add_member(:as2805_key_cryptogram, Types::ImportKeyMaterial::As2805KeyCryptogram, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportAs2805KeyCryptogram, name: "As2805KeyCryptogram"))
     ImportKeyMaterial.add_member(:unknown, Types::ImportKeyMaterial::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ImportKeyMaterial.type = Types::ImportKeyMaterial
     ImportKeyOutput.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Key, name: "Key", traits: {"smithy.api#required" => {}}))
@@ -340,8 +408,9 @@ module Aws::PaymentCryptography
     Key.add_member(:derive_key_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: DeriveKeyUsage, name: "DeriveKeyUsage", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     Key.add_member(:multi_region_key_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiRegionKeyType, name: "MultiRegionKeyType", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     Key.add_member(:primary_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "PrimaryRegion", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
-    Key.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, name: "ReplicationStatus", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, name: "ReplicationStatus", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#suppress" => ["UnstableTrait"]}))
     Key.add_member(:using_default_replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "UsingDefaultReplicationRegions", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
+    Key.add_member(:mpa_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaStatus, name: "MpaStatus", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#suppress" => ["UnstableTrait"]}))
     Key.type = Types::Key
     KeyAttributes.add_member(:key_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyUsage, name: "KeyUsage", traits: {"smithy.api#required" => {}}))
     KeyAttributes.add_member(:key_class, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyClass, name: "KeyClass", traits: {"smithy.api#required" => {}}))
@@ -399,8 +468,26 @@ module Aws::PaymentCryptography
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
+    MpaStatus.add_member(:mpa_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaSessionArn, name: "MpaSessionArn", traits: {"smithy.api#required" => {}}))
+    MpaStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    MpaStatus.add_member(:initiation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "InitiationDate", traits: {"smithy.api#required" => {}}))
+    MpaStatus.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaStatusMessage, name: "StatusMessage"))
+    MpaStatus.type = Types::MpaStatus
+    MpaTeamAssociation.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaOperation, name: "Action", traits: {"smithy.api#required" => {}}))
+    MpaTeamAssociation.add_member(:mpa_team_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaTeamArn, name: "MpaTeamArn", traits: {"smithy.api#required" => {}}))
+    MpaTeamAssociation.add_member(:association_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationState, name: "AssociationState", traits: {"smithy.api#required" => {}}))
+    MpaTeamAssociation.add_member(:mpa_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MpaStatus, name: "MpaStatus"))
+    MpaTeamAssociation.type = Types::MpaTeamAssociation
     OptionalBlocks.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBlockId, name: "key"))
     OptionalBlocks.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalBlockValue, name: "value"))
+    PublicPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
+    PublicPolicyException.type = Types::PublicPolicyException
+    PutResourcePolicyInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyInput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "Policy", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyInput.type = Types::PutResourcePolicyInput
+    PutResourcePolicyOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyOutput.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicy, name: "Policy", traits: {"smithy.api#required" => {}}))
+    PutResourcePolicyOutput.type = Types::PutResourcePolicyOutput
     Regions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
     RemoveKeyReplicationRegionsInput.add_member(:key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArnOrKeyAliasType, name: "KeyIdentifier", traits: {"smithy.api#required" => {}}))
     RemoveKeyReplicationRegionsInput.add_member(:replication_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: Regions, name: "ReplicationRegions", traits: {"smithy.api#required" => {}}))
@@ -479,7 +566,7 @@ module Aws::PaymentCryptography
       service.id = "com.amazonaws.paymentcryptography#PaymentCryptographyControlPlane"
       service.name = "PaymentCryptographyControlPlane"
       service.version = "2021-09-14"
-      service.traits = {"aws.api#service" => {"sdkId" => "Payment Cryptography", "arnNamespace" => "payment-cryptography", "endpointPrefix" => "controlplane.payment-cryptography", "cloudFormationName" => "PaymentCryptography"}, "aws.auth#sigv4" => {"name" => "payment-cryptography"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Payment Cryptography Control Plane"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Payment Cryptography", "arnNamespace" => "payment-cryptography", "endpointPrefix" => "controlplane.payment-cryptography", "cloudFormationName" => "PaymentCryptography"}, "aws.auth#sigv4" => {"name" => "payment-cryptography"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Payment Cryptography Control Plane", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://controlplane.payment-cryptography-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://controlplane.payment-cryptography-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://controlplane.payment-cryptography.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://controlplane.payment-cryptography.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:add_key_replication_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#AddKeyReplicationRegions"
         operation.name = "AddKeyReplicationRegions"
@@ -490,6 +577,21 @@ module Aws::PaymentCryptography
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.api#controlPlane" => {}}
+      end)
+      service.add_operation(:associate_mpa_team, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.paymentcryptography#AssociateMpaTeam"
+        operation.name = "AssociateMpaTeam"
+        operation.input = AssociateMpaTeamInput
+        operation.output = AssociateMpaTeamOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
@@ -552,6 +654,20 @@ module Aws::PaymentCryptography
         operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.paymentcryptography#DeleteResourcePolicy"
+        operation.name = "DeleteResourcePolicy"
+        operation.input = DeleteResourcePolicyInput
+        operation.output = DeleteResourcePolicyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:disable_default_key_replication_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#DisableDefaultKeyReplicationRegions"
         operation.name = "DisableDefaultKeyReplicationRegions"
@@ -562,6 +678,21 @@ module Aws::PaymentCryptography
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.api#controlPlane" => {}}
+      end)
+      service.add_operation(:disassociate_mpa_team, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.paymentcryptography#DisassociateMpaTeam"
+        operation.name = "DisassociateMpaTeam"
+        operation.input = DisassociateMpaTeamInput
+        operation.output = DisassociateMpaTeamOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}}
@@ -647,6 +778,21 @@ module Aws::PaymentCryptography
         operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_mpa_team_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.paymentcryptography#GetMpaTeamAssociation"
+        operation.name = "GetMpaTeamAssociation"
+        operation.input = GetMpaTeamAssociationInput
+        operation.output = GetMpaTeamAssociationOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_parameters_for_export, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#GetParametersForExport"
         operation.name = "GetParametersForExport"
@@ -682,6 +828,19 @@ module Aws::PaymentCryptography
         operation.name = "GetPublicKeyCertificate"
         operation.input = GetPublicKeyCertificateInput
         operation.output = GetPublicKeyCertificateOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.paymentcryptography#GetResourcePolicy"
+        operation.name = "GetResourcePolicy"
+        operation.input = GetResourcePolicyInput
+        operation.output = GetResourcePolicyOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
@@ -746,6 +905,22 @@ module Aws::PaymentCryptography
         operation.errors << ValidationException
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTagsForResource.new
+      end)
+      service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.paymentcryptography#PutResourcePolicy"
+        operation.name = "PutResourcePolicy"
+        operation.input = PutResourcePolicyInput
+        operation.output = PutResourcePolicyOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << PublicPolicyException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:remove_key_replication_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.paymentcryptography#RemoveKeyReplicationRegions"

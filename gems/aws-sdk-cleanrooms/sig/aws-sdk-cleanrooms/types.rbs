@@ -128,9 +128,137 @@ module Aws::CleanRooms
       attr_accessor type: String?
     end
 
+    class AggregationThreshold
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_columns: Array[String],
+        ?minimum_identity_count: Integer,
+        ?type: String,
+        ?output_column_thresholds: Array[Types::OutputColumnThreshold],
+        ?allowed_aggregate_expression_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_columns: Array[String]?
+      attr_accessor minimum_identity_count: Integer?
+      attr_accessor type: String?
+      attr_accessor output_column_thresholds: Array[Types::OutputColumnThreshold]?
+      attr_accessor allowed_aggregate_expression_type: String?
+    end
+
+    module AggregationThresholdType
+      COUNT_DISTINCT: String
+    end
+
+    module AllowedAggregateExpressionType
+      COLUMNS_ONLY: String
+      ANY_EXPRESSION: String
+    end
+
     module AnalysisFormat
       SQL: String
       PYSPARK_1_0: String
+    end
+
+    class AnalysisLogExport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_log_export_id: String,
+        ?analysis_id: String,
+        ?analysis_type: String,
+        ?membership_id: String,
+        ?status: String,
+        ?result_configuration: Types::AnalysisLogExportResultConfiguration,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?error: Types::AnalysisLogExportError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_log_export_id: String?
+      attr_accessor analysis_id: String?
+      attr_accessor analysis_type: String?
+      attr_accessor membership_id: String?
+      attr_accessor status: String?
+      attr_accessor result_configuration: Types::AnalysisLogExportResultConfiguration?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor error: Types::AnalysisLogExportError?
+    end
+
+    class AnalysisLogExportError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class AnalysisLogExportOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3: Types::AnalysisLogExportS3OutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::AnalysisLogExportS3OutputConfiguration?
+    end
+
+    class AnalysisLogExportResultConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_configuration: Types::AnalysisLogExportOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_configuration: Types::AnalysisLogExportOutputConfiguration?
+    end
+
+    class AnalysisLogExportS3OutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key_prefix: String?
+    end
+
+    module AnalysisLogExportStatus
+      IN_PROGRESS: String
+      SUCCESS: String
+      FAILED: String
+    end
+
+    class AnalysisLogExportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_log_export_id: String,
+        ?analysis_id: String,
+        ?analysis_type: String,
+        ?status: String,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_log_export_id: String?
+      attr_accessor analysis_id: String?
+      attr_accessor analysis_type: String?
+      attr_accessor status: String?
+      attr_accessor create_time: Time?
     end
 
     module AnalysisMethod
@@ -213,6 +341,10 @@ module Aws::CleanRooms
         ?additional_analyses: String,
         ?disallowed_output_columns: Array[String],
         ?differential_privacy: Types::DifferentialPrivacyConfiguration,
+        ?aggregation_thresholds: Array[Types::AggregationThreshold],
+        ?comparison_controls: Types::ComparisonControls,
+        ?allowed_result_receivers: Array[String],
+        ?allowed_additional_analyses: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -221,6 +353,10 @@ module Aws::CleanRooms
       attr_accessor additional_analyses: String?
       attr_accessor disallowed_output_columns: Array[String]?
       attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration?
+      attr_accessor aggregation_thresholds: Array[Types::AggregationThreshold]?
+      attr_accessor comparison_controls: Types::ComparisonControls?
+      attr_accessor allowed_result_receivers: Array[String]?
+      attr_accessor allowed_additional_analyses: Array[String]?
     end
 
     class AnalysisRuleIdMappingTable
@@ -374,6 +510,7 @@ module Aws::CleanRooms
         ?analysis_parameters: Array[Types::AnalysisParameter],
         ?validations: Array[Types::AnalysisTemplateValidationStatusDetail],
         ?error_message_configuration: Types::ErrorMessageConfiguration,
+        ?synthetic_data_parameters: Types::SyntheticDataParameters,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -394,6 +531,7 @@ module Aws::CleanRooms
       attr_accessor analysis_parameters: Array[Types::AnalysisParameter]?
       attr_accessor validations: Array[Types::AnalysisTemplateValidationStatusDetail]?
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration?
+      attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters?
     end
 
     class AnalysisTemplateArtifact
@@ -449,6 +587,7 @@ module Aws::CleanRooms
         ?collaboration_arn: String,
         ?collaboration_id: String,
         ?description: String,
+        ?is_synthetic_data: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -462,6 +601,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_arn: String?
       attr_accessor collaboration_id: String?
       attr_accessor description: String?
+      attr_accessor is_synthetic_data: bool?
     end
 
     module AnalysisTemplateValidationStatus
@@ -510,6 +650,23 @@ module Aws::CleanRooms
       CLEAN_ROOMS_SQL: String
     end
 
+    module ApprovalStatus
+      APPROVED: String
+      DENIED: String
+      PENDING: String
+    end
+
+    class ApprovalStatusDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
     class AthenaTableReference
       include Smithy::Schema::Structure
 
@@ -519,6 +676,7 @@ module Aws::CleanRooms
         ?output_location: String,
         ?database_name: String,
         ?table_name: String,
+        ?catalog_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -527,15 +685,31 @@ module Aws::CleanRooms
       attr_accessor output_location: String?
       attr_accessor database_name: String?
       attr_accessor table_name: String?
+      attr_accessor catalog_name: String?
     end
 
     module AutoApprovedChangeType
       ADD_MEMBER: String
+      GRANT_RECEIVE_RESULTS_ABILITY: String
+      REVOKE_RECEIVE_RESULTS_ABILITY: String
+      GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY: String
+      REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY: String
     end
 
     module AutoRefreshMode
       ENABLED: String
       DISABLED: String
+    end
+
+    module BaseTableDependencyType
+      TABLE: String
+      INTERMEDIATE_TABLE: String
+      ID_MAPPING_TABLE: String
+    end
+
+    module BaseTableParentType
+      DIRECT: String
+      INDIRECT: String
     end
 
     class BatchGetCollaborationAnalysisTemplateError
@@ -728,6 +902,13 @@ module Aws::CleanRooms
       attr_accessor specification: Types::ChangeSpecification?
     end
 
+    module ChangeRequestAction
+      APPROVE: String
+      DENY: String
+      CANCEL: String
+      COMMIT: String
+    end
+
     module ChangeRequestStatus
       PENDING: String
       APPROVED: String
@@ -741,12 +922,16 @@ module Aws::CleanRooms
 
       def initialize: (
         ?member: Types::MemberChangeSpecification,
+        ?collaboration: Types::CollaborationChangeSpecification,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor member: Types::MemberChangeSpecification?
+      attr_accessor collaboration: Types::CollaborationChangeSpecification?
 
       class Member < ChangeSpecification
+      end
+      class Collaboration < ChangeSpecification
       end
       class Unknown < ChangeSpecification
       end
@@ -754,10 +939,45 @@ module Aws::CleanRooms
 
     module ChangeSpecificationType
       MEMBER: String
+      COLLABORATION: String
     end
 
     module ChangeType
       ADD_MEMBER: String
+      GRANT_RECEIVE_RESULTS_ABILITY: String
+      REVOKE_RECEIVE_RESULTS_ABILITY: String
+      EDIT_AUTO_APPROVED_CHANGE_TYPES: String
+      ADD_PAYER_CANDIDATE: String
+      REMOVE_PAYER_CANDIDATE: String
+      GRANT_CAN_RECEIVE_MODEL_OUTPUT: String
+      GRANT_CAN_RECEIVE_INFERENCE_OUTPUT: String
+      REVOKE_CAN_RECEIVE_MODEL_OUTPUT: String
+      REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT: String
+      GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY: String
+      REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY: String
+    end
+
+    class ChildResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?resource_type: String,
+        ?resource_name: String,
+        ?owner_account_id: String,
+        ?resource_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_name: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor resource_status: String?
+    end
+
+    module ChildResourceType
+      INTERMEDIATE_TABLE: String
     end
 
     class Collaboration
@@ -781,6 +1001,7 @@ module Aws::CleanRooms
         ?analytics_engine: String,
         ?auto_approved_change_types: Array[String],
         ?allowed_result_regions: Array[String],
+        ?is_metrics_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -801,6 +1022,7 @@ module Aws::CleanRooms
       attr_accessor analytics_engine: String?
       attr_accessor auto_approved_change_types: Array[String]?
       attr_accessor allowed_result_regions: Array[String]?
+      attr_accessor is_metrics_enabled: bool?
     end
 
     class CollaborationAnalysisTemplate
@@ -823,6 +1045,7 @@ module Aws::CleanRooms
         ?analysis_parameters: Array[Types::AnalysisParameter],
         ?validations: Array[Types::AnalysisTemplateValidationStatusDetail],
         ?error_message_configuration: Types::ErrorMessageConfiguration,
+        ?synthetic_data_parameters: Types::SyntheticDataParameters,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -842,6 +1065,7 @@ module Aws::CleanRooms
       attr_accessor analysis_parameters: Array[Types::AnalysisParameter]?
       attr_accessor validations: Array[Types::AnalysisTemplateValidationStatusDetail]?
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration?
+      attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters?
     end
 
     class CollaborationAnalysisTemplateSummary
@@ -857,6 +1081,7 @@ module Aws::CleanRooms
         ?collaboration_id: String,
         ?creator_account_id: String,
         ?description: String,
+        ?is_synthetic_data: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -869,6 +1094,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_id: String?
       attr_accessor creator_account_id: String?
       attr_accessor description: String?
+      attr_accessor is_synthetic_data: bool?
     end
 
     class CollaborationChangeRequest
@@ -882,6 +1108,7 @@ module Aws::CleanRooms
         ?status: String,
         ?is_auto_approved: bool,
         ?changes: Array[Types::Change],
+        ?approvals: Hash[String, Types::ApprovalStatusDetails],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -892,6 +1119,7 @@ module Aws::CleanRooms
       attr_accessor status: String?
       attr_accessor is_auto_approved: bool?
       attr_accessor changes: Array[Types::Change]?
+      attr_accessor approvals: Hash[String, Types::ApprovalStatusDetails]?
     end
 
     class CollaborationChangeRequestSummary
@@ -905,6 +1133,7 @@ module Aws::CleanRooms
         ?status: String,
         ?is_auto_approved: bool,
         ?changes: Array[Types::Change],
+        ?approvals: Hash[String, Types::ApprovalStatusDetails],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -915,6 +1144,18 @@ module Aws::CleanRooms
       attr_accessor status: String?
       attr_accessor is_auto_approved: bool?
       attr_accessor changes: Array[Types::Change]?
+      attr_accessor approvals: Hash[String, Types::ApprovalStatusDetails]?
+    end
+
+    class CollaborationChangeSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_approved_change_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_approved_change_types: Array[String]?
     end
 
     class CollaborationConfiguredAudienceModelAssociation
@@ -1174,6 +1415,38 @@ module Aws::CleanRooms
       attr_accessor type: String?
     end
 
+    class ColumnClassificationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_mapping: Array[Types::SyntheticDataColumnProperties],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_mapping: Array[Types::SyntheticDataColumnProperties]?
+    end
+
+    class ColumnLineageEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column: String,
+        ?source_column: String,
+        ?source_name: String,
+        ?source_id: String,
+        ?source_type: String,
+        ?source_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column: String?
+      attr_accessor source_column: String?
+      attr_accessor source_name: String?
+      attr_accessor source_id: String?
+      attr_accessor source_type: String?
+      attr_accessor source_account_id: String?
+    end
+
     module CommercialRegion
       US_WEST_1: String
       US_WEST_2: String
@@ -1208,6 +1481,19 @@ module Aws::CleanRooms
       SA_EAST_1: String
       MX_CENTRAL_1: String
       AP_EAST_2: String
+    end
+
+    class ComparisonControls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_literal_comparison_columns: Array[String],
+        ?allowed_column_comparison_columns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_literal_comparison_columns: Array[String]?
+      attr_accessor allowed_column_comparison_columns: Array[String]?
     end
 
     class ComputeConfiguration
@@ -1420,6 +1706,7 @@ module Aws::CleanRooms
         ?analysis_rule_types: Array[String],
         ?create_time: Time,
         ?update_time: Time,
+        ?child_resources: Array[Types::ChildResource],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1435,6 +1722,7 @@ module Aws::CleanRooms
       attr_accessor analysis_rule_types: Array[String]?
       attr_accessor create_time: Time?
       attr_accessor update_time: Time?
+      attr_accessor child_resources: Array[Types::ChildResource]?
     end
 
     class ConfiguredTableAssociationAnalysisRule
@@ -1543,6 +1831,17 @@ module Aws::CleanRooms
       AGGREGATION: String
       LIST: String
       CUSTOM: String
+    end
+
+    class ConfiguredTableAssociationSchemaTypeProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configured_table_association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configured_table_association_id: String?
     end
 
     class ConfiguredTableAssociationSummary
@@ -1668,6 +1967,8 @@ module Aws::CleanRooms
         ?additional_analyses: String,
         ?disallowed_output_columns: Array[String],
         ?differential_privacy: Types::DifferentialPrivacyConfiguration,
+        ?aggregation_thresholds: Array[Types::AggregationThreshold],
+        ?comparison_controls: Types::ComparisonControls,
         ?allowed_result_receivers: Array[String],
         ?allowed_additional_analyses: Array[String],
       ) -> void
@@ -1678,6 +1979,8 @@ module Aws::CleanRooms
       attr_accessor additional_analyses: String?
       attr_accessor disallowed_output_columns: Array[String]?
       attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration?
+      attr_accessor aggregation_thresholds: Array[Types::AggregationThreshold]?
+      attr_accessor comparison_controls: Types::ComparisonControls?
       attr_accessor allowed_result_receivers: Array[String]?
       attr_accessor allowed_additional_analyses: Array[String]?
     end
@@ -1740,6 +2043,7 @@ module Aws::CleanRooms
         ?analysis_parameters: Array[Types::AnalysisParameter],
         ?schema: Types::AnalysisSchema,
         ?error_message_configuration: Types::ErrorMessageConfiguration,
+        ?synthetic_data_parameters: Types::SyntheticDataParameters,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1752,6 +2056,7 @@ module Aws::CleanRooms
       attr_accessor analysis_parameters: Array[Types::AnalysisParameter]?
       attr_accessor schema: Types::AnalysisSchema?
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration?
+      attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters?
     end
 
     class CreateAnalysisTemplateOperationOutput
@@ -1807,6 +2112,7 @@ module Aws::CleanRooms
         ?analytics_engine: String,
         ?auto_approved_change_request_types: Array[String],
         ?allowed_result_regions: Array[String],
+        ?is_metrics_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1824,6 +2130,7 @@ module Aws::CleanRooms
       attr_accessor analytics_engine: String?
       attr_accessor auto_approved_change_request_types: Array[String]?
       attr_accessor allowed_result_regions: Array[String]?
+      attr_accessor is_metrics_enabled: bool?
     end
 
     class CreateCollaborationOperationOutput
@@ -2053,6 +2360,68 @@ module Aws::CleanRooms
       attr_accessor id_namespace_association: Types::IdNamespaceAssociation?
     end
 
+    class CreateIntermediateTableAnalysisRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?intermediate_table_identifier: String,
+        ?analysis_rule_type: String,
+        ?analysis_rule_policy: Types::IntermediateTableAnalysisRulePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor intermediate_table_identifier: String?
+      attr_accessor analysis_rule_type: String?
+      attr_accessor analysis_rule_policy: Types::IntermediateTableAnalysisRulePolicy?
+    end
+
+    class CreateIntermediateTableAnalysisRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::IntermediateTableAnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::IntermediateTableAnalysisRule?
+    end
+
+    class CreateIntermediateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?name: String,
+        ?description: String,
+        ?population_analysis_configuration: Types::PopulationAnalysisConfiguration,
+        ?kms_key_arn: String,
+        ?retention_in_days: Integer,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor population_analysis_configuration: Types::PopulationAnalysisConfiguration?
+      attr_accessor kms_key_arn: String?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateIntermediateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table: Types::IntermediateTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table: Types::IntermediateTable?
+    end
+
     class CreateMembershipOperationInput
       include Smithy::Schema::Structure
 
@@ -2064,6 +2433,7 @@ module Aws::CleanRooms
         ?default_result_configuration: Types::MembershipProtectedQueryResultConfiguration,
         ?default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration,
         ?payment_configuration: Types::MembershipPaymentConfiguration,
+        ?is_metrics_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2074,6 +2444,7 @@ module Aws::CleanRooms
       attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration?
       attr_accessor default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration?
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration?
+      attr_accessor is_metrics_enabled: bool?
     end
 
     class CreateMembershipOperationOutput
@@ -2335,6 +2706,52 @@ module Aws::CleanRooms
 
     end
 
+    class DeleteIntermediateTableAnalysisRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?intermediate_table_identifier: String,
+        ?analysis_rule_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor intermediate_table_identifier: String?
+      attr_accessor analysis_rule_type: String?
+    end
+
+    class DeleteIntermediateTableAnalysisRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIntermediateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?intermediate_table_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor intermediate_table_identifier: String?
+    end
+
+    class DeleteIntermediateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteMemberOperationInput
       include Smithy::Schema::Structure
 
@@ -2574,6 +2991,30 @@ module Aws::CleanRooms
       attr_accessor receiver_account_ids: Array[String]?
     end
 
+    class DisallowIntermediateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?intermediate_table_name: String,
+        ?include_descendants: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor intermediate_table_name: String?
+      attr_accessor include_descendants: bool?
+    end
+
+    class DisallowIntermediateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class ErrorMessageConfiguration
       include Smithy::Schema::Structure
 
@@ -2587,6 +3028,30 @@ module Aws::CleanRooms
 
     module ErrorMessageType
       DETAILED: String
+    end
+
+    class GetAnalysisLogExportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?analysis_log_export_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor analysis_log_export_identifier: String?
+    end
+
+    class GetAnalysisLogExportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_log_export: Types::AnalysisLogExport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_log_export: Types::AnalysisLogExport?
     end
 
     class GetAnalysisTemplateOperationInput
@@ -2923,6 +3388,56 @@ module Aws::CleanRooms
       attr_accessor id_namespace_association: Types::IdNamespaceAssociation?
     end
 
+    class GetIntermediateTableAnalysisRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?intermediate_table_identifier: String,
+        ?analysis_rule_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor intermediate_table_identifier: String?
+      attr_accessor analysis_rule_type: String?
+    end
+
+    class GetIntermediateTableAnalysisRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::IntermediateTableAnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::IntermediateTableAnalysisRule?
+    end
+
+    class GetIntermediateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table_identifier: String,
+        ?membership_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table_identifier: String?
+      attr_accessor membership_identifier: String?
+    end
+
+    class GetIntermediateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table: Types::IntermediateTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table: Types::IntermediateTable?
+    end
+
     class GetMembershipOperationInput
       include Smithy::Schema::Structure
 
@@ -3121,6 +3636,7 @@ module Aws::CleanRooms
         ?update_time: Time,
         ?input_reference_properties: Types::IdMappingTableInputReferenceProperties,
         ?kms_key_arn: String,
+        ?child_resources: Array[Types::ChildResource],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3137,6 +3653,7 @@ module Aws::CleanRooms
       attr_accessor update_time: Time?
       attr_accessor input_reference_properties: Types::IdMappingTableInputReferenceProperties?
       attr_accessor kms_key_arn: String?
+      attr_accessor child_resources: Array[Types::ChildResource]?
     end
 
     class IdMappingTableInputReferenceConfig
@@ -3181,10 +3698,12 @@ module Aws::CleanRooms
 
       def initialize: (
         ?id_mapping_table_input_source: Array[Types::IdMappingTableInputSource],
+        ?id_mapping_table_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id_mapping_table_input_source: Array[Types::IdMappingTableInputSource]?
+      attr_accessor id_mapping_table_id: String?
     end
 
     class IdMappingTableSummary
@@ -3328,6 +3847,450 @@ module Aws::CleanRooms
       TARGET: String
     end
 
+    class InheritedAdditionalAnalyses
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?sources: Array[Types::InheritedAdditionalAnalysesSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor sources: Array[Types::InheritedAdditionalAnalysesSource]?
+    end
+
+    class InheritedAdditionalAnalysesSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?type: String,
+        ?value: String,
+        ?source_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor value: String?
+      attr_accessor source_account_id: String?
+    end
+
+    class InheritedAllowedAdditionalAnalyses
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Array[String],
+        ?sources: Array[Types::InheritedAllowedAdditionalAnalysesSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Array[String]?
+      attr_accessor sources: Array[Types::InheritedAllowedAdditionalAnalysesSource]?
+    end
+
+    class InheritedAllowedAdditionalAnalysesSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?type: String,
+        ?value: Array[String],
+        ?source_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor value: Array[String]?
+      attr_accessor source_account_id: String?
+    end
+
+    class InheritedAllowedResultReceivers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Array[String],
+        ?sources: Array[Types::InheritedAllowedResultReceiversSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Array[String]?
+      attr_accessor sources: Array[Types::InheritedAllowedResultReceiversSource]?
+    end
+
+    class InheritedAllowedResultReceiversSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?type: String,
+        ?value: Array[String],
+        ?source_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor value: Array[String]?
+      attr_accessor source_account_id: String?
+    end
+
+    class InheritedDisallowedOutputColumns
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Array[String],
+        ?column_lineage: Array[Types::ColumnLineageEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Array[String]?
+      attr_accessor column_lineage: Array[Types::ColumnLineageEntry]?
+    end
+
+    class IntermediateTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?membership_arn: String,
+        ?membership_id: String,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?child_resources: Array[Types::ChildResource],
+        ?create_time: Time,
+        ?update_time: Time,
+        ?status: String,
+        ?status_reason: String,
+        ?kms_key_arn: String,
+        ?population_analysis_configuration: Types::PopulationAnalysisConfiguration,
+        ?retention_in_days: Integer,
+        ?table_dependencies: Array[Types::IntermediateTableDependency],
+        ?intermediate_table_version: Types::IntermediateTableActiveVersion,
+        ?analysis_rule_types: Array[String],
+        ?schema: Types::IntermediateTableSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor membership_arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor child_resources: Array[Types::ChildResource]?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor population_analysis_configuration: Types::PopulationAnalysisConfiguration?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor table_dependencies: Array[Types::IntermediateTableDependency]?
+      attr_accessor intermediate_table_version: Types::IntermediateTableActiveVersion?
+      attr_accessor analysis_rule_types: Array[String]?
+      attr_accessor schema: Types::IntermediateTableSchema?
+    end
+
+    class IntermediateTableActiveVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_id: String,
+        ?analysis_id: String,
+        ?analysis_type: String,
+        ?kms_key_arn: String,
+        ?parameters: Hash[String, String],
+        ?inherited_constraints: Types::IntermediateTableInheritedConstraints,
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_id: String?
+      attr_accessor analysis_id: String?
+      attr_accessor analysis_type: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor inherited_constraints: Types::IntermediateTableInheritedConstraints?
+      attr_accessor expiration_time: Time?
+    end
+
+    class IntermediateTableAnalysisRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table_identifier: String,
+        ?intermediate_table_arn: String,
+        ?analysis_rule_policy: Types::IntermediateTableAnalysisRulePolicy,
+        ?analysis_rule_type: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table_identifier: String?
+      attr_accessor intermediate_table_arn: String?
+      attr_accessor analysis_rule_policy: Types::IntermediateTableAnalysisRulePolicy?
+      attr_accessor analysis_rule_type: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class IntermediateTableAnalysisRuleCustom
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_analyses: Array[String],
+        ?additional_analyses: String,
+        ?allowed_additional_analyses: Array[String],
+        ?allowed_analysis_providers: Array[String],
+        ?allowed_result_receivers: Array[String],
+        ?differential_privacy: Types::DifferentialPrivacyConfiguration,
+        ?disallowed_output_columns: Array[String],
+        ?aggregation_thresholds: Array[Types::AggregationThreshold],
+        ?comparison_controls: Types::ComparisonControls,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_analyses: Array[String]?
+      attr_accessor additional_analyses: String?
+      attr_accessor allowed_additional_analyses: Array[String]?
+      attr_accessor allowed_analysis_providers: Array[String]?
+      attr_accessor allowed_result_receivers: Array[String]?
+      attr_accessor differential_privacy: Types::DifferentialPrivacyConfiguration?
+      attr_accessor disallowed_output_columns: Array[String]?
+      attr_accessor aggregation_thresholds: Array[Types::AggregationThreshold]?
+      attr_accessor comparison_controls: Types::ComparisonControls?
+    end
+
+    class IntermediateTableAnalysisRulePolicy
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?v1: Types::IntermediateTableAnalysisRulePolicyV1,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v1: Types::IntermediateTableAnalysisRulePolicyV1?
+
+      class V1 < IntermediateTableAnalysisRulePolicy
+      end
+      class Unknown < IntermediateTableAnalysisRulePolicy
+      end
+    end
+
+    class IntermediateTableAnalysisRulePolicyV1
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?custom: Types::IntermediateTableAnalysisRuleCustom,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom: Types::IntermediateTableAnalysisRuleCustom?
+
+      class Custom < IntermediateTableAnalysisRulePolicyV1
+      end
+      class Unknown < IntermediateTableAnalysisRulePolicyV1
+      end
+    end
+
+    module IntermediateTableAnalysisRuleType
+      CUSTOM: String
+    end
+
+    class IntermediateTableColumn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class IntermediateTableComputeConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?query_compute_configuration: Types::WorkerComputeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_compute_configuration: Types::WorkerComputeConfiguration?
+
+      class QueryComputeConfiguration < IntermediateTableComputeConfiguration
+      end
+      class Unknown < IntermediateTableComputeConfiguration
+      end
+    end
+
+    class IntermediateTableDependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?type: String,
+        ?parent_type: String,
+        ?creator_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor parent_type: String?
+      attr_accessor creator_account_id: String?
+    end
+
+    class IntermediateTableInheritedConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?additional_analyses: Types::InheritedAdditionalAnalyses,
+        ?allowed_additional_analyses: Types::InheritedAllowedAdditionalAnalyses,
+        ?allowed_result_receivers: Types::InheritedAllowedResultReceivers,
+        ?disallowed_output_columns: Types::InheritedDisallowedOutputColumns,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor additional_analyses: Types::InheritedAdditionalAnalyses?
+      attr_accessor allowed_additional_analyses: Types::InheritedAllowedAdditionalAnalyses?
+      attr_accessor allowed_result_receivers: Types::InheritedAllowedResultReceivers?
+      attr_accessor disallowed_output_columns: Types::InheritedDisallowedOutputColumns?
+    end
+
+    class IntermediateTableOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class IntermediateTableSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?columns: Array[Types::Column],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor columns: Array[Types::Column]?
+    end
+
+    class IntermediateTableSchemaTypeProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table_id: String?
+    end
+
+    module IntermediateTableStatus
+      CREATED: String
+      POPULATE_STARTED: String
+      POPULATE_SUCCESS: String
+      POPULATE_FAILED: String
+      DISALLOWED_BY_DATA_PROVIDER: String
+      BASE_TABLE_REMOVED: String
+      RETENTION_PERIOD_EXPIRED: String
+    end
+
+    class IntermediateTableSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?membership_arn: String,
+        ?membership_id: String,
+        ?collaboration_arn: String,
+        ?collaboration_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?status: String,
+        ?retention_in_days: Integer,
+        ?analysis_rule_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor membership_arn: String?
+      attr_accessor membership_id: String?
+      attr_accessor collaboration_arn: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor status: String?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor analysis_rule_types: Array[String]?
+    end
+
+    module IntermediateTableVersionStatus
+      POPULATE_STARTED: String
+      POPULATE_SUCCESS: String
+      POPULATE_FAILED: String
+      RETENTION_PERIOD_EXPIRED: String
+    end
+
+    class IntermediateTableVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_id: String,
+        ?table_id: String,
+        ?create_time: Time,
+        ?analysis_id: String,
+        ?status: String,
+        ?analysis_type: String,
+        ?kms_key_arn: String,
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_id: String?
+      attr_accessor table_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor analysis_id: String?
+      attr_accessor status: String?
+      attr_accessor analysis_type: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor expiration_time: Time?
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -3354,6 +4317,38 @@ module Aws::CleanRooms
       BATCH: String
       INCREMENTAL: String
       DELETE_ONLY: String
+    end
+
+    class ListAnalysisLogExportsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?analysis_identifier: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor analysis_identifier: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAnalysisLogExportsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?analysis_log_exports: Array[Types::AnalysisLogExportSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor analysis_log_exports: Array[Types::AnalysisLogExportSummary]?
     end
 
     class ListAnalysisTemplatesOperationInput
@@ -3724,6 +4719,64 @@ module Aws::CleanRooms
       attr_accessor id_namespace_association_summaries: Array[Types::IdNamespaceAssociationSummary]?
     end
 
+    class ListIntermediateTableVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?intermediate_table_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor intermediate_table_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIntermediateTableVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table_version_summaries: Array[Types::IntermediateTableVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table_version_summaries: Array[Types::IntermediateTableVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIntermediateTablesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListIntermediateTablesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table_summaries: Array[Types::IntermediateTableSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table_summaries: Array[Types::IntermediateTableSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListMembersOperationInput
       include Smithy::Schema::Structure
 
@@ -3952,6 +5005,10 @@ module Aws::CleanRooms
       attr_accessor tags: Hash[String, String]?
     end
 
+    module LogExportAnalysisType
+      PROTECTED_QUERY: String
+    end
+
     class MLMemberAbilities
       include Smithy::Schema::Structure
 
@@ -3969,17 +5026,35 @@ module Aws::CleanRooms
       def initialize: (
         ?model_training: Types::ModelTrainingPaymentConfig,
         ?model_inference: Types::ModelInferencePaymentConfig,
+        ?synthetic_data_generation: Types::SyntheticDataGenerationPaymentConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor model_training: Types::ModelTrainingPaymentConfig?
       attr_accessor model_inference: Types::ModelInferencePaymentConfig?
+      attr_accessor synthetic_data_generation: Types::SyntheticDataGenerationPaymentConfig?
+    end
+
+    class MLSyntheticDataParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?epsilon: Float,
+        ?max_membership_inference_attack_score: Float,
+        ?column_classification: Types::ColumnClassificationDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor epsilon: Float?
+      attr_accessor max_membership_inference_attack_score: Float?
+      attr_accessor column_classification: Types::ColumnClassificationDetails?
     end
 
     module MemberAbility
       CAN_QUERY: String
       CAN_RECEIVE_RESULTS: String
       CAN_RUN_JOB: String
+      CAN_EXPORT_QUERY_ANALYSIS_LOG: String
     end
 
     class MemberChangeSpecification
@@ -3988,12 +5063,16 @@ module Aws::CleanRooms
       def initialize: (
         ?account_id: String,
         ?member_abilities: Array[String],
+        ?ml_member_abilities: Types::MLMemberAbilities,
+        ?payment_configuration: Types::PaymentConfiguration,
         ?display_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor account_id: String?
       attr_accessor member_abilities: Array[String]?
+      attr_accessor ml_member_abilities: Types::MLMemberAbilities?
+      attr_accessor payment_configuration: Types::PaymentConfiguration?
       attr_accessor display_name: String?
     end
 
@@ -4066,6 +5145,7 @@ module Aws::CleanRooms
         ?default_result_configuration: Types::MembershipProtectedQueryResultConfiguration,
         ?default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration,
         ?payment_configuration: Types::MembershipPaymentConfiguration,
+        ?is_metrics_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4086,6 +5166,7 @@ module Aws::CleanRooms
       attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration?
       attr_accessor default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration?
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration?
+      attr_accessor is_metrics_enabled: bool?
     end
 
     class MembershipJobComputePaymentConfig
@@ -4110,11 +5191,13 @@ module Aws::CleanRooms
       def initialize: (
         ?model_training: Types::MembershipModelTrainingPaymentConfig,
         ?model_inference: Types::MembershipModelInferencePaymentConfig,
+        ?synthetic_data_generation: Types::MembershipSyntheticDataGenerationPaymentConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor model_training: Types::MembershipModelTrainingPaymentConfig?
       attr_accessor model_inference: Types::MembershipModelInferencePaymentConfig?
+      attr_accessor synthetic_data_generation: Types::MembershipSyntheticDataGenerationPaymentConfig?
     end
 
     class MembershipModelInferencePaymentConfig
@@ -4263,6 +5346,17 @@ module Aws::CleanRooms
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration?
     end
 
+    class MembershipSyntheticDataGenerationPaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
     class ModelInferencePaymentConfig
       include Smithy::Schema::Structure
 
@@ -4283,6 +5377,19 @@ module Aws::CleanRooms
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor is_responsible: bool?
+    end
+
+    class OutputColumnThreshold
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_column_name: String,
+        ?minimum_identity_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_column_name: String?
+      attr_accessor minimum_identity_count: Integer?
     end
 
     module ParameterType
@@ -4355,6 +5462,73 @@ module Aws::CleanRooms
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id_mapping_job_id: String?
+    end
+
+    module PopulateIntermediateTableAnalysisType
+      QUERY: String
+    end
+
+    class PopulateIntermediateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table_identifier: String,
+        ?membership_identifier: String,
+        ?parameters: Hash[String, String],
+        ?compute_configuration: Types::IntermediateTableComputeConfiguration,
+        ?analysis_payer_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table_identifier: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor compute_configuration: Types::IntermediateTableComputeConfiguration?
+      attr_accessor analysis_payer_account_id: String?
+    end
+
+    class PopulateIntermediateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_id: String,
+        ?analysis_type: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_id: String?
+      attr_accessor analysis_type: String?
+      attr_accessor version_id: String?
+    end
+
+    class PopulationAnalysisConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?sql_parameters: Types::PopulationAnalysisSqlParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sql_parameters: Types::PopulationAnalysisSqlParameters?
+
+      class SqlParameters < PopulationAnalysisConfiguration
+      end
+      class Unknown < PopulationAnalysisConfiguration
+      end
+    end
+
+    class PopulationAnalysisSqlParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_string: String,
+        ?analysis_template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_string: String?
+      attr_accessor analysis_template_arn: String?
     end
 
     class PreviewPrivacyImpactInput
@@ -4607,6 +5781,7 @@ module Aws::CleanRooms
         ?result: Types::ProtectedJobResult,
         ?error: Types::ProtectedJobError,
         ?compute_configuration: Types::ProtectedJobComputeConfiguration,
+        ?job_compute_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4621,6 +5796,7 @@ module Aws::CleanRooms
       attr_accessor result: Types::ProtectedJobResult?
       attr_accessor error: Types::ProtectedJobError?
       attr_accessor compute_configuration: Types::ProtectedJobComputeConfiguration?
+      attr_accessor job_compute_payer_account_id: String?
     end
 
     module ProtectedJobAnalysisType
@@ -4766,10 +5942,12 @@ module Aws::CleanRooms
 
       def initialize: (
         ?analysis_template_arn: String,
+        ?parameters: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor analysis_template_arn: String?
+      attr_accessor parameters: Hash[String, String]?
     end
 
     class ProtectedJobReceiverConfiguration
@@ -4898,6 +6076,7 @@ module Aws::CleanRooms
         ?create_time: Time,
         ?status: String,
         ?receiver_configurations: Array[Types::ProtectedJobReceiverConfiguration],
+        ?job_compute_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4907,6 +6086,7 @@ module Aws::CleanRooms
       attr_accessor create_time: Time?
       attr_accessor status: String?
       attr_accessor receiver_configurations: Array[Types::ProtectedJobReceiverConfiguration]?
+      attr_accessor job_compute_payer_account_id: String?
     end
 
     module ProtectedJobType
@@ -4919,11 +6099,13 @@ module Aws::CleanRooms
       def initialize: (
         ?type: String,
         ?number: Integer,
+        ?properties: Types::WorkerComputeConfigurationProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
       attr_accessor number: Integer?
+      attr_accessor properties: Types::WorkerComputeConfigurationProperties?
     end
 
     module ProtectedJobWorkerComputeType
@@ -4947,6 +6129,7 @@ module Aws::CleanRooms
         ?error: Types::ProtectedQueryError,
         ?differential_privacy: Types::DifferentialPrivacyParameters,
         ?compute_configuration: Types::ComputeConfiguration,
+        ?query_compute_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4962,6 +6145,7 @@ module Aws::CleanRooms
       attr_accessor error: Types::ProtectedQueryError?
       attr_accessor differential_privacy: Types::DifferentialPrivacyParameters?
       attr_accessor compute_configuration: Types::ComputeConfiguration?
+      attr_accessor query_compute_payer_account_id: String?
     end
 
     class ProtectedQueryDistributeOutput
@@ -5063,18 +6247,22 @@ module Aws::CleanRooms
         ?s3: Types::ProtectedQueryS3OutputConfiguration,
         ?member: Types::ProtectedQueryMemberOutputConfiguration,
         ?distribute: Types::ProtectedQueryDistributeOutputConfiguration,
+        ?intermediate_table: Types::IntermediateTableOutputConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor s3: Types::ProtectedQueryS3OutputConfiguration?
       attr_accessor member: Types::ProtectedQueryMemberOutputConfiguration?
       attr_accessor distribute: Types::ProtectedQueryDistributeOutputConfiguration?
+      attr_accessor intermediate_table: Types::IntermediateTableOutputConfiguration?
 
       class S3 < ProtectedQueryOutputConfiguration
       end
       class Member < ProtectedQueryOutputConfiguration
       end
       class Distribute < ProtectedQueryOutputConfiguration
+      end
+      class IntermediateTable < ProtectedQueryOutputConfiguration
       end
       class Unknown < ProtectedQueryOutputConfiguration
       end
@@ -5179,6 +6367,8 @@ module Aws::CleanRooms
         ?create_time: Time,
         ?status: String,
         ?receiver_configurations: Array[Types::ReceiverConfiguration],
+        ?query_compute_payer_account_id: String,
+        ?intermediate_table_configuration: Types::IntermediateTableOutputConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5188,6 +6378,8 @@ module Aws::CleanRooms
       attr_accessor create_time: Time?
       attr_accessor status: String?
       attr_accessor receiver_configurations: Array[Types::ReceiverConfiguration]?
+      attr_accessor query_compute_payer_account_id: String?
+      attr_accessor intermediate_table_configuration: Types::IntermediateTableOutputConfiguration?
     end
 
     class QueryComputePaymentConfig
@@ -5254,6 +6446,21 @@ module Aws::CleanRooms
       attr_accessor message: String?
       attr_accessor resource_id: String?
       attr_accessor resource_type: String?
+    end
+
+    module ResourceStatus
+      CREATED: String
+      POPULATE_STARTED: String
+      POPULATE_SUCCESS: String
+      POPULATE_FAILED: String
+      DISALLOWED_BY_DATA_PROVIDER: String
+      BASE_TABLE_REMOVED: String
+      RETENTION_PERIOD_EXPIRED: String
+    end
+
+    module ResultFormat
+      CSV: String
+      PARQUET: String
     end
 
     class S3Location
@@ -5376,6 +6583,12 @@ module Aws::CleanRooms
       ADDITIONAL_ANALYSES_NOT_ALLOWED: String
       RESULT_RECEIVERS_NOT_ALLOWED: String
       ANALYSIS_RULE_TYPES_NOT_COMPATIBLE: String
+      INTERMEDIATE_TABLE_NOT_POPULATED: String
+      INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING: String
+      INTERMEDIATE_TABLE_BASE_TABLE_REMOVED: String
+      INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED: String
+      INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER: String
+      INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED: String
     end
 
     class SchemaSummary
@@ -5412,6 +6625,7 @@ module Aws::CleanRooms
     module SchemaType
       TABLE: String
       ID_MAPPING_TABLE: String
+      INTERMEDIATE_TABLE: String
     end
 
     class SchemaTypeProperties
@@ -5419,12 +6633,20 @@ module Aws::CleanRooms
 
       def initialize: (
         ?id_mapping_table: Types::IdMappingTableSchemaTypeProperties,
+        ?intermediate_table: Types::IntermediateTableSchemaTypeProperties,
+        ?configured_table_association: Types::ConfiguredTableAssociationSchemaTypeProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id_mapping_table: Types::IdMappingTableSchemaTypeProperties?
+      attr_accessor intermediate_table: Types::IntermediateTableSchemaTypeProperties?
+      attr_accessor configured_table_association: Types::ConfiguredTableAssociationSchemaTypeProperties?
 
       class IdMappingTable < SchemaTypeProperties
+      end
+      class IntermediateTable < SchemaTypeProperties
+      end
+      class ConfiguredTableAssociation < SchemaTypeProperties
       end
       class Unknown < SchemaTypeProperties
       end
@@ -5500,6 +6722,34 @@ module Aws::CleanRooms
       attr_accessor column_type: String?
     end
 
+    class StartAnalysisLogExportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?analysis_id: String,
+        ?analysis_type: String,
+        ?result_configuration: Types::AnalysisLogExportResultConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor analysis_id: String?
+      attr_accessor analysis_type: String?
+      attr_accessor result_configuration: Types::AnalysisLogExportResultConfiguration?
+    end
+
+    class StartAnalysisLogExportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_log_export: Types::AnalysisLogExport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_log_export: Types::AnalysisLogExport?
+    end
+
     class StartProtectedJobInput
       include Smithy::Schema::Structure
 
@@ -5509,6 +6759,7 @@ module Aws::CleanRooms
         ?job_parameters: Types::ProtectedJobParameters,
         ?result_configuration: Types::ProtectedJobResultConfigurationInput,
         ?compute_configuration: Types::ProtectedJobComputeConfiguration,
+        ?job_compute_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5517,6 +6768,7 @@ module Aws::CleanRooms
       attr_accessor job_parameters: Types::ProtectedJobParameters?
       attr_accessor result_configuration: Types::ProtectedJobResultConfigurationInput?
       attr_accessor compute_configuration: Types::ProtectedJobComputeConfiguration?
+      attr_accessor job_compute_payer_account_id: String?
     end
 
     class StartProtectedJobOutput
@@ -5539,6 +6791,7 @@ module Aws::CleanRooms
         ?sql_parameters: Types::ProtectedQuerySQLParameters,
         ?result_configuration: Types::ProtectedQueryResultConfiguration,
         ?compute_configuration: Types::ComputeConfiguration,
+        ?query_compute_payer_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5547,6 +6800,7 @@ module Aws::CleanRooms
       attr_accessor sql_parameters: Types::ProtectedQuerySQLParameters?
       attr_accessor result_configuration: Types::ProtectedQueryResultConfiguration?
       attr_accessor compute_configuration: Types::ComputeConfiguration?
+      attr_accessor query_compute_payer_account_id: String?
     end
 
     class StartProtectedQueryOperationOutput
@@ -5594,6 +6848,53 @@ module Aws::CleanRooms
       IL_CENTRAL_1: String
       SA_EAST_1: String
       MX_CENTRAL_1: String
+    end
+
+    class SyntheticDataColumnProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_name: String,
+        ?column_type: String,
+        ?is_predictive_value: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_name: String?
+      attr_accessor column_type: String?
+      attr_accessor is_predictive_value: bool?
+    end
+
+    module SyntheticDataColumnType
+      CATEGORICAL: String
+      NUMERICAL: String
+    end
+
+    class SyntheticDataGenerationPaymentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_responsible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_responsible: bool?
+    end
+
+    class SyntheticDataParameters
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ml_synthetic_data_parameters: Types::MLSyntheticDataParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ml_synthetic_data_parameters: Types::MLSyntheticDataParameters?
+
+      class MlSyntheticDataParameters < SyntheticDataParameters
+      end
+      class Unknown < SyntheticDataParameters
+      end
     end
 
     class TableReference
@@ -5703,6 +7004,32 @@ module Aws::CleanRooms
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor analysis_template: Types::AnalysisTemplate?
+    end
+
+    class UpdateCollaborationChangeRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?change_request_identifier: String,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor change_request_identifier: String?
+      attr_accessor action: String?
+    end
+
+    class UpdateCollaborationChangeRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_change_request: Types::CollaborationChangeRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_change_request: Types::CollaborationChangeRequest?
     end
 
     class UpdateCollaborationOperationInput
@@ -5935,6 +7262,64 @@ module Aws::CleanRooms
       attr_accessor id_namespace_association: Types::IdNamespaceAssociation?
     end
 
+    class UpdateIntermediateTableAnalysisRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?membership_identifier: String,
+        ?intermediate_table_identifier: String,
+        ?analysis_rule_type: String,
+        ?analysis_rule_policy: Types::IntermediateTableAnalysisRulePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor membership_identifier: String?
+      attr_accessor intermediate_table_identifier: String?
+      attr_accessor analysis_rule_type: String?
+      attr_accessor analysis_rule_policy: Types::IntermediateTableAnalysisRulePolicy?
+    end
+
+    class UpdateIntermediateTableAnalysisRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_rule: Types::IntermediateTableAnalysisRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_rule: Types::IntermediateTableAnalysisRule?
+    end
+
+    class UpdateIntermediateTableInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table_identifier: String,
+        ?membership_identifier: String,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?columns: Array[Types::IntermediateTableColumn],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table_identifier: String?
+      attr_accessor membership_identifier: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor columns: Array[Types::IntermediateTableColumn]?
+    end
+
+    class UpdateIntermediateTableOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intermediate_table: Types::IntermediateTable,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intermediate_table: Types::IntermediateTable?
+    end
+
     class UpdateMembershipOperationInput
       include Smithy::Schema::Structure
 
@@ -5944,6 +7329,7 @@ module Aws::CleanRooms
         ?job_log_status: String,
         ?default_result_configuration: Types::MembershipProtectedQueryResultConfiguration,
         ?default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration,
+        ?membership_payment_configuration: Types::UpdateMembershipPaymentConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5952,6 +7338,7 @@ module Aws::CleanRooms
       attr_accessor job_log_status: String?
       attr_accessor default_result_configuration: Types::MembershipProtectedQueryResultConfiguration?
       attr_accessor default_job_result_configuration: Types::MembershipProtectedJobResultConfiguration?
+      attr_accessor membership_payment_configuration: Types::UpdateMembershipPaymentConfiguration?
     end
 
     class UpdateMembershipOperationOutput
@@ -5963,6 +7350,21 @@ module Aws::CleanRooms
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor membership: Types::Membership?
+    end
+
+    class UpdateMembershipPaymentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_compute: Types::MembershipQueryComputePaymentConfig,
+        ?machine_learning: Types::MembershipMLPaymentConfig,
+        ?job_compute: Types::MembershipJobComputePaymentConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_compute: Types::MembershipQueryComputePaymentConfig?
+      attr_accessor machine_learning: Types::MembershipMLPaymentConfig?
+      attr_accessor job_compute: Types::MembershipJobComputePaymentConfig?
     end
 
     class UpdatePrivacyBudgetTemplateInput
@@ -6079,16 +7481,35 @@ module Aws::CleanRooms
       def initialize: (
         ?type: String,
         ?number: Integer,
+        ?properties: Types::WorkerComputeConfigurationProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
       attr_accessor number: Integer?
+      attr_accessor properties: Types::WorkerComputeConfigurationProperties?
+    end
+
+    class WorkerComputeConfigurationProperties
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?spark: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spark: Hash[String, String]?
+
+      class Spark < WorkerComputeConfigurationProperties
+      end
+      class Unknown < WorkerComputeConfigurationProperties
+      end
     end
 
     module WorkerComputeType
       CR1X: String
       CR4X: String
+      CR8X: String
     end
   end
 end

@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'base64'
-gem 'cgi', '~> 0.4.1' # TODO: CGI.parse is deprecated so we need ot find alternative for Ruby 3.5+
+gem 'cgi', '~> 0.4.1' # TODO: CGI.parse is deprecated so we need to find an alternative for Ruby 3.5+
 gem 'logger'
 gem 'pry'
 gem 'rake', require: false

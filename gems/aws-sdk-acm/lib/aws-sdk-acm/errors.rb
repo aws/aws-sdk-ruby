@@ -24,6 +24,7 @@ module Aws::ACM
   #
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {InternalServerException}
   # * {InvalidArgsException}
   # * {InvalidArnException}
   # * {InvalidDomainValidationOptionsException}
@@ -34,6 +35,7 @@ module Aws::ACM
   # * {RequestInProgressException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {TagPolicyException}
   # * {ThrottlingException}
   # * {TooManyTagsException}
@@ -67,6 +69,23 @@ module Aws::ACM
 
       def message
         @data[:message]
+      end
+    end
+
+    # <p>The request processing has failed because of an unknown error, exception, or failure.</p>
+    class InternalServerException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ACM::Types::InternalServerException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 
@@ -200,6 +219,19 @@ module Aws::ACM
       end
     end
 
+    # <p>A service quota has been exceeded.</p>
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ACM::Types::ServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>A specified tag did not comply with an existing tag policy and was rejected.</p>
     class TagPolicyException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -223,6 +255,11 @@ module Aws::ACM
 
       def message
         @data[:message]
+      end
+
+      # <p>One or more reasons why the request was throttled.</p>
+      def throttling_reasons
+        @data[:throttling_reasons]
       end
     end
 

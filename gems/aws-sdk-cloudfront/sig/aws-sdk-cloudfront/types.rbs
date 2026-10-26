@@ -91,6 +91,8 @@ module Aws::CloudFront
         ?name: String,
         ?status: String,
         ?arn: String,
+        ?ip_address_type: String,
+        ?ipam_config: Types::IpamConfig,
         ?anycast_ips: Array[String],
         ?ip_count: Integer,
         ?last_modified_time: Time,
@@ -101,6 +103,8 @@ module Aws::CloudFront
       attr_accessor name: String?
       attr_accessor status: String?
       attr_accessor arn: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor ipam_config: Types::IpamConfig?
       attr_accessor anycast_ips: Array[String]?
       attr_accessor ip_count: Integer?
       attr_accessor last_modified_time: Time?
@@ -137,6 +141,9 @@ module Aws::CloudFront
         ?arn: String,
         ?ip_count: Integer,
         ?last_modified_time: Time,
+        ?ip_address_type: String,
+        ?e_tag: String,
+        ?ipam_config: Types::IpamConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -146,6 +153,9 @@ module Aws::CloudFront
       attr_accessor arn: String?
       attr_accessor ip_count: Integer?
       attr_accessor last_modified_time: Time?
+      attr_accessor ip_address_type: String?
+      attr_accessor e_tag: String?
+      attr_accessor ipam_config: Types::IpamConfig?
     end
 
     class AssociateAliasRequest
@@ -241,6 +251,39 @@ module Aws::CloudFront
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class CaCertificatesBundleS3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?region: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor region: String?
+      attr_accessor version: String?
+    end
+
+    class CaCertificatesBundleSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ca_certificates_bundle_s3_location: Types::CaCertificatesBundleS3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ca_certificates_bundle_s3_location: Types::CaCertificatesBundleS3Location?
+
+      class CaCertificatesBundleS3Location < CaCertificatesBundleSource
+      end
+      class Unknown < CaCertificatesBundleSource
+      end
     end
 
     class CacheBehavior
@@ -456,6 +499,17 @@ module Aws::CloudFront
       custom: String
     end
 
+    class CacheTagConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?header_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor header_name: String?
+    end
+
     class CachedMethods
       include Smithy::Schema::Structure
 
@@ -640,6 +694,61 @@ module Aws::CloudFront
       attr_accessor max_items: Integer?
       attr_accessor quantity: Integer?
       attr_accessor items: Array[Types::ConflictingAlias]?
+    end
+
+    class ConnectionFunctionAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ConnectionFunctionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?connection_function_config: Types::FunctionConfig,
+        ?connection_function_arn: String,
+        ?status: String,
+        ?stage: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor connection_function_config: Types::FunctionConfig?
+      attr_accessor connection_function_arn: String?
+      attr_accessor status: String?
+      attr_accessor stage: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class ConnectionFunctionTestResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_function_summary: Types::ConnectionFunctionSummary,
+        ?compute_utilization: String,
+        ?connection_function_execution_logs: Array[String],
+        ?connection_function_error_message: String,
+        ?connection_function_output: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_function_summary: Types::ConnectionFunctionSummary?
+      attr_accessor compute_utilization: String?
+      attr_accessor connection_function_execution_logs: Array[String]?
+      attr_accessor connection_function_error_message: String?
+      attr_accessor connection_function_output: String?
     end
 
     class ConnectionGroup
@@ -941,12 +1050,16 @@ module Aws::CloudFront
         ?name: String,
         ?ip_count: Integer,
         ?tags: Types::Tags,
+        ?ip_address_type: String,
+        ?ipam_cidr_configs: Array[Types::IpamCidrConfig],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor ip_count: Integer?
       attr_accessor tags: Types::Tags?
+      attr_accessor ip_address_type: String?
+      attr_accessor ipam_cidr_configs: Array[Types::IpamCidrConfig]?
     end
 
     class CreateAnycastIpListResult
@@ -1010,6 +1123,38 @@ module Aws::CloudFront
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cloud_front_origin_access_identity: Types::CloudFrontOriginAccessIdentity?
+      attr_accessor location: String?
+      attr_accessor e_tag: String?
+    end
+
+    class CreateConnectionFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?connection_function_config: Types::FunctionConfig,
+        ?connection_function_code: String,
+        ?tags: Types::Tags,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor connection_function_config: Types::FunctionConfig?
+      attr_accessor connection_function_code: String?
+      attr_accessor tags: Types::Tags?
+    end
+
+    class CreateConnectionFunctionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_function_summary: Types::ConnectionFunctionSummary,
+        ?location: String,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_function_summary: Types::ConnectionFunctionSummary?
       attr_accessor location: String?
       attr_accessor e_tag: String?
     end
@@ -1223,12 +1368,14 @@ module Aws::CloudFront
         ?name: String,
         ?function_config: Types::FunctionConfig,
         ?function_code: String,
+        ?tags: Types::Tags,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor function_config: Types::FunctionConfig?
       attr_accessor function_code: String?
+      attr_accessor tags: Types::Tags?
     end
 
     class CreateFunctionResult
@@ -1331,12 +1478,14 @@ module Aws::CloudFront
         ?name: String,
         ?comment: String,
         ?import_source: Types::ImportSource,
+        ?tags: Types::Tags,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor comment: String?
       attr_accessor import_source: Types::ImportSource?
+      attr_accessor tags: Types::Tags?
     end
 
     class CreateKeyValueStoreResult
@@ -1562,6 +1711,36 @@ module Aws::CloudFront
       attr_accessor e_tag: String?
     end
 
+    class CreateTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?ca_certificates_bundle_source: Types::CaCertificatesBundleSource,
+        ?use_client_certificate_ocsp_endpoint: bool,
+        ?tags: Types::Tags,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor ca_certificates_bundle_source: Types::CaCertificatesBundleSource?
+      attr_accessor use_client_certificate_ocsp_endpoint: bool?
+      attr_accessor tags: Types::Tags?
+    end
+
+    class CreateTrustStoreResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store: Types::TrustStore,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store: Types::TrustStore?
+      attr_accessor e_tag: String?
+    end
+
     class CreateVpcOriginRequest
       include Smithy::Schema::Structure
 
@@ -1644,6 +1823,7 @@ module Aws::CloudFront
         ?origin_read_timeout: Integer,
         ?origin_keepalive_timeout: Integer,
         ?ip_address_type: String,
+        ?origin_mtls_config: Types::OriginMtlsConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1654,6 +1834,7 @@ module Aws::CloudFront
       attr_accessor origin_read_timeout: Integer?
       attr_accessor origin_keepalive_timeout: Integer?
       attr_accessor ip_address_type: String?
+      attr_accessor origin_mtls_config: Types::OriginMtlsConfig?
     end
 
     module CustomizationActionType
@@ -1750,6 +1931,19 @@ module Aws::CloudFront
     end
 
     class DeleteCloudFrontOriginAccessIdentityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?if_match: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor if_match: String?
+    end
+
+    class DeleteConnectionFunctionRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -1951,6 +2145,17 @@ module Aws::CloudFront
       attr_accessor arn: String?
     end
 
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
     class DeleteResponseHeadersPolicyRequest
       include Smithy::Schema::Structure
 
@@ -1965,6 +2170,19 @@ module Aws::CloudFront
     end
 
     class DeleteStreamingDistributionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?if_match: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor if_match: String?
+    end
+
+    class DeleteTrustStoreRequest
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2000,6 +2218,32 @@ module Aws::CloudFront
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor vpc_origin: Types::VpcOrigin?
+      attr_accessor e_tag: String?
+    end
+
+    class DescribeConnectionFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor stage: String?
+    end
+
+    class DescribeConnectionFunctionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_function_summary: Types::ConnectionFunctionSummary,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_function_summary: Types::ConnectionFunctionSummary?
       attr_accessor e_tag: String?
     end
 
@@ -2171,6 +2415,9 @@ module Aws::CloudFront
         ?anycast_ip_list_id: String,
         ?tenant_config: Types::TenantConfig,
         ?connection_mode: String,
+        ?viewer_mtls_config: Types::ViewerMtlsConfig,
+        ?connection_function_association: Types::ConnectionFunctionAssociation,
+        ?cache_tag_config: Types::CacheTagConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2196,6 +2443,9 @@ module Aws::CloudFront
       attr_accessor anycast_ip_list_id: String?
       attr_accessor tenant_config: Types::TenantConfig?
       attr_accessor connection_mode: String?
+      attr_accessor viewer_mtls_config: Types::ViewerMtlsConfig?
+      attr_accessor connection_function_association: Types::ConnectionFunctionAssociation?
+      attr_accessor cache_tag_config: Types::CacheTagConfig?
     end
 
     class DistributionConfigWithTags
@@ -2230,6 +2480,40 @@ module Aws::CloudFront
       attr_accessor is_truncated: bool?
       attr_accessor quantity: Integer?
       attr_accessor items: Array[String]?
+    end
+
+    class DistributionIdOwner
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distribution_id: String,
+        ?owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distribution_id: String?
+      attr_accessor owner_account_id: String?
+    end
+
+    class DistributionIdOwnerList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?next_marker: String,
+        ?max_items: Integer,
+        ?is_truncated: bool,
+        ?quantity: Integer,
+        ?items: Array[Types::DistributionIdOwner],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor next_marker: String?
+      attr_accessor max_items: Integer?
+      attr_accessor is_truncated: bool?
+      attr_accessor quantity: Integer?
+      attr_accessor items: Array[Types::DistributionIdOwner]?
     end
 
     class DistributionList
@@ -2310,6 +2594,8 @@ module Aws::CloudFront
         ?staging: bool,
         ?connection_mode: String,
         ?anycast_ip_list_id: String,
+        ?viewer_mtls_config: Types::ViewerMtlsConfig,
+        ?connection_function_association: Types::ConnectionFunctionAssociation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2337,6 +2623,8 @@ module Aws::CloudFront
       attr_accessor staging: bool?
       attr_accessor connection_mode: String?
       attr_accessor anycast_ip_list_id: String?
+      attr_accessor viewer_mtls_config: Types::ViewerMtlsConfig?
+      attr_accessor connection_function_association: Types::ConnectionFunctionAssociation?
     end
 
     class DistributionTenant
@@ -3098,6 +3386,34 @@ module Aws::CloudFront
       attr_accessor e_tag: String?
     end
 
+    class GetConnectionFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor stage: String?
+    end
+
+    class GetConnectionFunctionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_function_code: String,
+        ?e_tag: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_function_code: String?
+      attr_accessor e_tag: String?
+      attr_accessor content_type: String?
+    end
+
     class GetConnectionGroupByRoutingEndpointRequest
       include Smithy::Schema::Structure
 
@@ -3722,6 +4038,30 @@ module Aws::CloudFront
       attr_accessor realtime_log_config: Types::RealtimeLogConfig?
     end
 
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_document: String?
+    end
+
     class GetResponseHeadersPolicyConfigRequest
       include Smithy::Schema::Structure
 
@@ -3815,6 +4155,30 @@ module Aws::CloudFront
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor streaming_distribution: Types::StreamingDistribution?
+      attr_accessor e_tag: String?
+    end
+
+    class GetTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetTrustStoreResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store: Types::TrustStore,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store: Types::TrustStore?
       attr_accessor e_tag: String?
     end
 
@@ -4320,6 +4684,51 @@ module Aws::CloudFront
       DualStack: String
     end
 
+    class IpamCidrConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+        ?ipam_pool_arn: String,
+        ?anycast_ip: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+      attr_accessor ipam_pool_arn: String?
+      attr_accessor anycast_ip: String?
+      attr_accessor status: String?
+    end
+
+    module IpamCidrStatus
+      Provisioned: String
+      FailedProvision: String
+      Provisioning: String
+      Deprovisioned: String
+      FailedDeprovision: String
+      Deprovisioning: String
+      Advertised: String
+      FailedAdvertise: String
+      Advertising: String
+      Withdrawn: String
+      FailedWithdraw: String
+      Withdrawing: String
+    end
+
+    class IpamConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quantity: Integer,
+        ?ipam_cidr_configs: Array[Types::IpamCidrConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quantity: Integer?
+      attr_accessor ipam_cidr_configs: Array[Types::IpamCidrConfig]?
+    end
+
     module ItemSelection
       none: String
       whitelist: String
@@ -4626,6 +5035,34 @@ module Aws::CloudFront
       attr_accessor conflicting_aliases_list: Types::ConflictingAliasesList?
     end
 
+    class ListConnectionFunctionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?max_items: Integer,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+      attr_accessor stage: String?
+    end
+
+    class ListConnectionFunctionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?connection_functions: Array[Types::ConnectionFunctionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor connection_functions: Array[Types::ConnectionFunctionSummary]?
+    end
+
     class ListConnectionGroupsRequest
       include Smithy::Schema::Structure
 
@@ -4788,6 +5225,32 @@ module Aws::CloudFront
       attr_accessor distribution_id_list: Types::DistributionIdList?
     end
 
+    class ListDistributionsByConnectionFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?max_items: Integer,
+        ?connection_function_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+      attr_accessor connection_function_identifier: String?
+    end
+
+    class ListDistributionsByConnectionFunctionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distribution_list: Types::DistributionList,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distribution_list: Types::DistributionList?
+    end
+
     class ListDistributionsByConnectionModeRequest
       include Smithy::Schema::Structure
 
@@ -4866,6 +5329,32 @@ module Aws::CloudFront
       attr_accessor distribution_id_list: Types::DistributionIdList?
     end
 
+    class ListDistributionsByOwnedResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListDistributionsByOwnedResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distribution_list: Types::DistributionIdOwnerList,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distribution_list: Types::DistributionIdOwnerList?
+    end
+
     class ListDistributionsByRealtimeLogConfigRequest
       include Smithy::Schema::Structure
 
@@ -4918,6 +5407,32 @@ module Aws::CloudFront
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor distribution_id_list: Types::DistributionIdList?
+    end
+
+    class ListDistributionsByTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_identifier: String,
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_identifier: String?
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListDistributionsByTrustStoreResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distribution_list: Types::DistributionList,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distribution_list: Types::DistributionList?
     end
 
     class ListDistributionsByVpcOriginIdRequest
@@ -5372,6 +5887,32 @@ module Aws::CloudFront
       attr_accessor tags: Types::Tags?
     end
 
+    class ListTrustStoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?max_items: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor max_items: Integer?
+    end
+
+    class ListTrustStoresResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_marker: String,
+        ?trust_store_list: Array[Types::TrustStoreSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_marker: String?
+      attr_accessor trust_store_list: Array[Types::TrustStoreSummary]?
+    end
+
     class ListVpcOriginsRequest
       include Smithy::Schema::Structure
 
@@ -5474,6 +6015,7 @@ module Aws::CloudFront
       TLSv1_2_2019: String
       TLSv1_2_2021: String
       TLSv1_3_2025: String
+      TLSv1_2_2025: String
     end
 
     class MissingBody
@@ -5815,10 +6357,12 @@ module Aws::CloudFront
       never: String
       always: String
       no_override: String
+      always_amz_auth: String
     end
 
     module OriginAccessControlSigningProtocols
       sigv4: String
+      sigv4a: String
     end
 
     class OriginAccessControlSummary
@@ -5923,6 +6467,17 @@ module Aws::CloudFront
 
       attr_accessor quantity: Integer?
       attr_accessor items: Array[Types::OriginGroup]?
+    end
+
+    class OriginMtlsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_certificate_arn: String?
     end
 
     module OriginProtocolPolicy
@@ -6299,6 +6854,30 @@ module Aws::CloudFront
       attr_accessor comment: String?
     end
 
+    class PublishConnectionFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?if_match: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor if_match: String?
+    end
+
+    class PublishConnectionFunctionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_function_summary: Types::ConnectionFunctionSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_function_summary: Types::ConnectionFunctionSummary?
+    end
+
     class PublishFunctionRequest
       include Smithy::Schema::Structure
 
@@ -6321,6 +6900,30 @@ module Aws::CloudFront
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor function_summary: Types::FunctionSummary?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_document: String?
+    end
+
+    class PutResourcePolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
     end
 
     class QueryArgProfile
@@ -7207,6 +7810,34 @@ module Aws::CloudFront
       attr_accessor parameter_definitions: Array[Types::ParameterDefinition]?
     end
 
+    class TestConnectionFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?if_match: String,
+        ?stage: String,
+        ?connection_object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor if_match: String?
+      attr_accessor stage: String?
+      attr_accessor connection_object: String?
+    end
+
+    class TestConnectionFunctionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_function_test_result: Types::ConnectionFunctionTestResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_function_test_result: Types::ConnectionFunctionTestResult?
+    end
+
     class TestFunctionFailed
       include Smithy::Schema::Structure
 
@@ -7852,6 +8483,77 @@ module Aws::CloudFront
       attr_accessor type: String?
     end
 
+    class TrustStore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+        ?number_of_ca_certificates: Integer,
+        ?last_modified_time: Time,
+        ?reason: String,
+        ?use_client_certificate_ocsp_endpoint: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor number_of_ca_certificates: Integer?
+      attr_accessor last_modified_time: Time?
+      attr_accessor reason: String?
+      attr_accessor use_client_certificate_ocsp_endpoint: bool?
+    end
+
+    class TrustStoreConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store_id: String,
+        ?advertise_trust_store_ca_names: bool,
+        ?ignore_certificate_expiry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store_id: String?
+      attr_accessor advertise_trust_store_ca_names: bool?
+      attr_accessor ignore_certificate_expiry: bool?
+    end
+
+    module TrustStoreStatus
+      Pending: String
+      Active: String
+      Failed: String
+    end
+
+    class TrustStoreSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+        ?number_of_ca_certificates: Integer,
+        ?last_modified_time: Time,
+        ?reason: String,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor number_of_ca_certificates: Integer?
+      attr_accessor last_modified_time: Time?
+      attr_accessor reason: String?
+      attr_accessor e_tag: String?
+    end
+
     class TrustedKeyGroupDoesNotExist
       include Smithy::Schema::Structure
 
@@ -7928,6 +8630,36 @@ module Aws::CloudFront
       attr_accessor tag_keys: Types::TagKeys?
     end
 
+    class UpdateAnycastIpListRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?ip_address_type: String,
+        ?ipam_cidr_configs: Array[Types::IpamCidrConfig],
+        ?if_match: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor ipam_cidr_configs: Array[Types::IpamCidrConfig]?
+      attr_accessor if_match: String?
+    end
+
+    class UpdateAnycastIpListResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anycast_ip_list: Types::AnycastIpList,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anycast_ip_list: Types::AnycastIpList?
+      attr_accessor e_tag: String?
+    end
+
     class UpdateCachePolicyRequest
       include Smithy::Schema::Structure
 
@@ -7981,6 +8713,36 @@ module Aws::CloudFront
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cloud_front_origin_access_identity: Types::CloudFrontOriginAccessIdentity?
+      attr_accessor e_tag: String?
+    end
+
+    class UpdateConnectionFunctionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?if_match: String,
+        ?connection_function_config: Types::FunctionConfig,
+        ?connection_function_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor if_match: String?
+      attr_accessor connection_function_config: Types::FunctionConfig?
+      attr_accessor connection_function_code: String?
+    end
+
+    class UpdateConnectionFunctionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_function_summary: Types::ConnectionFunctionSummary,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_function_summary: Types::ConnectionFunctionSummary?
       attr_accessor e_tag: String?
     end
 
@@ -8482,6 +9244,36 @@ module Aws::CloudFront
       attr_accessor e_tag: String?
     end
 
+    class UpdateTrustStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?ca_certificates_bundle_source: Types::CaCertificatesBundleSource,
+        ?use_client_certificate_ocsp_endpoint: bool,
+        ?if_match: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor ca_certificates_bundle_source: Types::CaCertificatesBundleSource?
+      attr_accessor use_client_certificate_ocsp_endpoint: bool?
+      attr_accessor if_match: String?
+    end
+
+    class UpdateTrustStoreResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store: Types::TrustStore,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store: Types::TrustStore?
+      attr_accessor e_tag: String?
+    end
+
     class UpdateVpcOriginRequest
       include Smithy::Schema::Structure
 
@@ -8577,10 +9369,34 @@ module Aws::CloudFront
       attr_accessor certificate_source: String?
     end
 
+    class ViewerMtlsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?trust_store_config: Types::TrustStoreConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor trust_store_config: Types::TrustStoreConfig?
+    end
+
+    module ViewerMtlsMode
+      Required: String
+      Optional: String
+      Passthrough: String
+    end
+
     module ViewerProtocolPolicy
       allow_all: String
       https_only: String
       redirect_to_https: String
+    end
+
+    module VpcIpAddressType
+      Ipv4: String
+      DualStack: String
     end
 
     class VpcOrigin
@@ -8589,6 +9405,7 @@ module Aws::CloudFront
       def initialize: (
         ?id: String,
         ?arn: String,
+        ?account_id: String,
         ?status: String,
         ?created_time: Time,
         ?last_modified_time: Time,
@@ -8598,6 +9415,7 @@ module Aws::CloudFront
 
       attr_accessor id: String?
       attr_accessor arn: String?
+      attr_accessor account_id: String?
       attr_accessor status: String?
       attr_accessor created_time: Time?
       attr_accessor last_modified_time: Time?
@@ -8609,12 +9427,14 @@ module Aws::CloudFront
 
       def initialize: (
         ?vpc_origin_id: String,
+        ?owner_account_id: String,
         ?origin_read_timeout: Integer,
         ?origin_keepalive_timeout: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor vpc_origin_id: String?
+      attr_accessor owner_account_id: String?
       attr_accessor origin_read_timeout: Integer?
       attr_accessor origin_keepalive_timeout: Integer?
     end
@@ -8629,6 +9449,7 @@ module Aws::CloudFront
         ?https_port: Integer,
         ?origin_protocol_policy: String,
         ?origin_ssl_protocols: Types::OriginSslProtocols,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8638,6 +9459,7 @@ module Aws::CloudFront
       attr_accessor https_port: Integer?
       attr_accessor origin_protocol_policy: String?
       attr_accessor origin_ssl_protocols: Types::OriginSslProtocols?
+      attr_accessor ip_address_type: String?
     end
 
     class VpcOriginList
@@ -8671,7 +9493,9 @@ module Aws::CloudFront
         ?created_time: Time,
         ?last_modified_time: Time,
         ?arn: String,
+        ?account_id: String,
         ?origin_endpoint_arn: String,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8681,7 +9505,9 @@ module Aws::CloudFront
       attr_accessor created_time: Time?
       attr_accessor last_modified_time: Time?
       attr_accessor arn: String?
+      attr_accessor account_id: String?
       attr_accessor origin_endpoint_arn: String?
+      attr_accessor ip_address_type: String?
     end
 
     class WebAclCustomization

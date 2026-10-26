@@ -20,13 +20,13 @@ module Aws::KafkaConnect
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConnectorConfiguration = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.kafkaconnect#ConnectorConfiguration", name: "ConnectorConfiguration", traits: {"smithy.api#sensitive" => {}})
     ConnectorConfigurationUpdate = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.kafkaconnect#ConnectorConfigurationUpdate", name: "ConnectorConfigurationUpdate", traits: {"smithy.api#sensitive" => {}})
-    ConnectorOperationState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#ConnectorOperationState", name: "ConnectorOperationState", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "UPDATE_IN_PROGRESS", "name" => "UPDATE_IN_PROGRESS"}, {"value" => "UPDATE_COMPLETE", "name" => "UPDATE_COMPLETE"}, {"value" => "UPDATE_FAILED", "name" => "UPDATE_FAILED"}, {"value" => "ROLLBACK_IN_PROGRESS", "name" => "ROLLBACK_IN_PROGRESS"}, {"value" => "ROLLBACK_FAILED", "name" => "ROLLBACK_FAILED"}, {"value" => "ROLLBACK_COMPLETE", "name" => "ROLLBACK_COMPLETE"}]})
+    ConnectorOperationState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#ConnectorOperationState", name: "ConnectorOperationState", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "UPDATE_IN_PROGRESS", "name" => "UPDATE_IN_PROGRESS"}, {"value" => "UPDATE_COMPLETE", "name" => "UPDATE_COMPLETE"}, {"value" => "UPDATE_FAILED", "name" => "UPDATE_FAILED"}, {"value" => "ROLLBACK_IN_PROGRESS", "name" => "ROLLBACK_IN_PROGRESS"}, {"value" => "ROLLBACK_FAILED", "name" => "ROLLBACK_FAILED"}, {"value" => "ROLLBACK_COMPLETE", "name" => "ROLLBACK_COMPLETE"}, {"value" => "RESTART_IN_PROGRESS", "name" => "RESTART_IN_PROGRESS"}, {"value" => "RESTART_COMPLETE", "name" => "RESTART_COMPLETE"}, {"value" => "RESTART_FAILED", "name" => "RESTART_FAILED"}]})
     ConnectorOperationStep = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#ConnectorOperationStep", name: "ConnectorOperationStep")
     ConnectorOperationStepState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#ConnectorOperationStepState", name: "ConnectorOperationStepState", traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "IN_PROGRESS", "name" => "IN_PROGRESS"}, {"value" => "COMPLETED", "name" => "COMPLETED"}, {"value" => "FAILED", "name" => "FAILED"}, {"value" => "CANCELLED", "name" => "CANCELLED"}]})
     ConnectorOperationStepType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#ConnectorOperationStepType", name: "ConnectorOperationStepType", traits: {"smithy.api#enum" => [{"value" => "INITIALIZE_UPDATE", "name" => "INITIALIZE_UPDATE"}, {"value" => "FINALIZE_UPDATE", "name" => "FINALIZE_UPDATE"}, {"value" => "UPDATE_WORKER_SETTING", "name" => "UPDATE_WORKER_SETTING"}, {"value" => "UPDATE_CONNECTOR_CONFIGURATION", "name" => "UPDATE_CONNECTOR_CONFIGURATION"}, {"value" => "VALIDATE_UPDATE", "name" => "VALIDATE_UPDATE"}]})
     ConnectorOperationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#ConnectorOperationSummary", name: "ConnectorOperationSummary")
-    ConnectorOperationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#ConnectorOperationType", name: "ConnectorOperationType", traits: {"smithy.api#enum" => [{"value" => "UPDATE_WORKER_SETTING", "name" => "UPDATE_WORKER_SETTING"}, {"value" => "UPDATE_CONNECTOR_CONFIGURATION", "name" => "UPDATE_CONNECTOR_CONFIGURATION"}, {"value" => "ISOLATE_CONNECTOR", "name" => "ISOLATE_CONNECTOR"}, {"value" => "RESTORE_CONNECTOR", "name" => "RESTORE_CONNECTOR"}]})
-    ConnectorState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#ConnectorState", name: "ConnectorState", traits: {"smithy.api#enum" => [{"value" => "RUNNING", "name" => "RUNNING"}, {"value" => "CREATING", "name" => "CREATING"}, {"value" => "UPDATING", "name" => "UPDATING"}, {"value" => "DELETING", "name" => "DELETING"}, {"value" => "FAILED", "name" => "FAILED"}]})
+    ConnectorOperationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#ConnectorOperationType", name: "ConnectorOperationType", traits: {"smithy.api#enum" => [{"value" => "UPDATE_WORKER_SETTING", "name" => "UPDATE_WORKER_SETTING"}, {"value" => "UPDATE_CONNECTOR_CONFIGURATION", "name" => "UPDATE_CONNECTOR_CONFIGURATION"}, {"value" => "ISOLATE_CONNECTOR", "name" => "ISOLATE_CONNECTOR"}, {"value" => "RESTORE_CONNECTOR", "name" => "RESTORE_CONNECTOR"}, {"value" => "RESTART_CONNECTOR", "name" => "RESTART_CONNECTOR"}]})
+    ConnectorState = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#ConnectorState", name: "ConnectorState", traits: {"smithy.api#enum" => [{"value" => "RUNNING", "name" => "RUNNING"}, {"value" => "CREATING", "name" => "CREATING"}, {"value" => "UPDATING", "name" => "UPDATING"}, {"value" => "DELETING", "name" => "DELETING"}, {"value" => "FAILED", "name" => "FAILED"}, {"value" => "RESTARTING", "name" => "RESTARTING"}]})
     ConnectorSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#ConnectorSummary", name: "ConnectorSummary")
     CreateConnectorOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#CreateConnectorOutput", name: "CreateConnectorOutput")
     CreateConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#CreateConnectorRequest", name: "CreateConnectorRequest")
@@ -82,12 +82,15 @@ module Aws::KafkaConnect
     LogDelivery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#LogDelivery", name: "LogDelivery")
     LogDeliveryDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#LogDeliveryDescription", name: "LogDeliveryDescription")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.kafkaconnect#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    NetworkType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.kafkaconnect#NetworkType", name: "NetworkType", traits: {"smithy.api#enum" => [{"value" => "IPV4", "name" => "IPV4"}, {"value" => "DUAL", "name" => "DUAL"}]})
     NotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#NotFoundException", name: "NotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     Plugin = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#Plugin", name: "Plugin")
     PluginDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#PluginDescription", name: "PluginDescription")
     ProvisionedCapacity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#ProvisionedCapacity", name: "ProvisionedCapacity")
     ProvisionedCapacityDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#ProvisionedCapacityDescription", name: "ProvisionedCapacityDescription")
     ProvisionedCapacityUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#ProvisionedCapacityUpdate", name: "ProvisionedCapacityUpdate")
+    RestartConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#RestartConnectorRequest", name: "RestartConnectorRequest")
+    RestartConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#RestartConnectorResponse", name: "RestartConnectorResponse")
     S3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#S3Location", name: "S3Location")
     S3LocationDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#S3LocationDescription", name: "S3LocationDescription")
     S3LogDelivery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.kafkaconnect#S3LogDelivery", name: "S3LogDelivery")
@@ -154,18 +157,21 @@ module Aws::KafkaConnect
     AutoScaling.add_member(:min_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "minWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AutoScaling.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleInPolicy, name: "scaleInPolicy"))
     AutoScaling.add_member(:scale_out_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleOutPolicy, name: "scaleOutPolicy"))
+    AutoScaling.add_member(:max_autoscaling_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxAutoscalingTaskCount", traits: {"smithy.api#default" => 0}))
     AutoScaling.type = Types::AutoScaling
     AutoScalingDescription.add_member(:max_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxWorkerCount", traits: {"smithy.api#default" => 0}))
     AutoScalingDescription.add_member(:mcu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "mcuCount", traits: {"smithy.api#default" => 0}))
     AutoScalingDescription.add_member(:min_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "minWorkerCount", traits: {"smithy.api#default" => 0}))
     AutoScalingDescription.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleInPolicyDescription, name: "scaleInPolicy"))
     AutoScalingDescription.add_member(:scale_out_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleOutPolicyDescription, name: "scaleOutPolicy"))
+    AutoScalingDescription.add_member(:max_autoscaling_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxAutoscalingTaskCount", traits: {"smithy.api#default" => 0}))
     AutoScalingDescription.type = Types::AutoScalingDescription
     AutoScalingUpdate.add_member(:max_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AutoScalingUpdate.add_member(:mcu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max8, name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AutoScalingUpdate.add_member(:min_worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "minWorkerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     AutoScalingUpdate.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleInPolicyUpdate, name: "scaleInPolicy", traits: {"smithy.api#required" => {}}))
     AutoScalingUpdate.add_member(:scale_out_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ScaleOutPolicyUpdate, name: "scaleOutPolicy", traits: {"smithy.api#required" => {}}))
+    AutoScalingUpdate.add_member(:max_autoscaling_task_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxAutoscalingTaskCount", traits: {"smithy.api#default" => 0}))
     AutoScalingUpdate.type = Types::AutoScalingUpdate
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     BadRequestException.type = Types::BadRequestException
@@ -211,6 +217,7 @@ module Aws::KafkaConnect
     ConnectorSummary.add_member(:kafka_cluster_encryption_in_transit, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterEncryptionInTransitDescription, name: "kafkaClusterEncryptionInTransit"))
     ConnectorSummary.add_member(:kafka_connect_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kafkaConnectVersion"))
     ConnectorSummary.add_member(:log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryDescription, name: "logDelivery"))
+    ConnectorSummary.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "networkType"))
     ConnectorSummary.add_member(:plugins, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofplugindescription, name: "plugins"))
     ConnectorSummary.add_member(:service_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceExecutionRoleArn"))
     ConnectorSummary.add_member(:worker_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationDescription, name: "workerConfiguration"))
@@ -228,6 +235,7 @@ module Aws::KafkaConnect
     CreateConnectorRequest.add_member(:kafka_cluster_encryption_in_transit, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterEncryptionInTransit, name: "kafkaClusterEncryptionInTransit", traits: {"smithy.api#required" => {}}))
     CreateConnectorRequest.add_member(:kafka_connect_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kafkaConnectVersion", traits: {"smithy.api#required" => {}}))
     CreateConnectorRequest.add_member(:log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDelivery, name: "logDelivery"))
+    CreateConnectorRequest.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "networkType"))
     CreateConnectorRequest.add_member(:plugins, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofplugin, name: "plugins", traits: {"smithy.api#required" => {}}))
     CreateConnectorRequest.add_member(:service_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceExecutionRoleArn", traits: {"smithy.api#required" => {}}))
     CreateConnectorRequest.add_member(:worker_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfiguration, name: "workerConfiguration"))
@@ -326,6 +334,7 @@ module Aws::KafkaConnect
     DescribeConnectorOutput.add_member(:kafka_cluster_encryption_in_transit, ::Smithy::Schema::Shapes::MemberShape.new(target: KafkaClusterEncryptionInTransitDescription, name: "kafkaClusterEncryptionInTransit"))
     DescribeConnectorOutput.add_member(:kafka_connect_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "kafkaConnectVersion"))
     DescribeConnectorOutput.add_member(:log_delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: LogDeliveryDescription, name: "logDelivery"))
+    DescribeConnectorOutput.add_member(:network_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkType, name: "networkType"))
     DescribeConnectorOutput.add_member(:plugins, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofplugindescription, name: "plugins"))
     DescribeConnectorOutput.add_member(:service_execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "serviceExecutionRoleArn"))
     DescribeConnectorOutput.add_member(:worker_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerConfigurationDescription, name: "workerConfiguration"))
@@ -425,6 +434,12 @@ module Aws::KafkaConnect
     ProvisionedCapacityUpdate.add_member(:mcu_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max8, name: "mcuCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ProvisionedCapacityUpdate.add_member(:worker_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "workerCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     ProvisionedCapacityUpdate.type = Types::ProvisionedCapacityUpdate
+    RestartConnectorRequest.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "connectorArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RestartConnectorRequest.add_member(:only_failed_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "onlyFailedTasks", traits: {"smithy.api#default" => false, "smithy.api#httpQuery" => "onlyFailedTasks"}))
+    RestartConnectorRequest.type = Types::RestartConnectorRequest
+    RestartConnectorResponse.add_member(:connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "connectorArn"))
+    RestartConnectorResponse.add_member(:connector_operation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "connectorOperationArn"))
+    RestartConnectorResponse.type = Types::RestartConnectorResponse
     S3Location.add_member(:bucket_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "bucketArn", traits: {"smithy.api#required" => {}}))
     S3Location.add_member(:file_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "fileKey", traits: {"smithy.api#required" => {}}))
     S3Location.add_member(:object_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "objectVersion"))
@@ -533,7 +548,7 @@ module Aws::KafkaConnect
       service.id = "com.amazonaws.kafkaconnect#KafkaConnect"
       service.name = "KafkaConnect"
       service.version = "2021-09-14"
-      service.traits = {"aws.api#service" => {"sdkId" => "KafkaConnect", "name" => "kafkaconnect", "arnNamespace" => "kafkaconnect", "cloudFormationName" => "KafkaConnect", "cloudTrailEventSource" => "kafkaconnect.amazonaws.com", "endpointPrefix" => "kafkaconnect"}, "aws.auth#sigv4" => {"name" => "kafkaconnect"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Date", "X-Amz-Target", "x-amzn-platform-id", "x-amzn-trace-id", "Authorization", "Content-Type", "Credentials", "X-Amz-Date", "X-Api-Key", "X-Amz-Security-Token", "x-amz-content-sha256", "X-Amz-User-Agent"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amz-apigw-id", "date"], "origin" => "*", "maxAge" => 86400}, "smithy.api#title" => "Managed Streaming for Kafka Connect"}
+      service.traits = {"aws.api#service" => {"sdkId" => "KafkaConnect", "name" => "kafkaconnect", "arnNamespace" => "kafkaconnect", "cloudFormationName" => "KafkaConnect", "cloudTrailEventSource" => "kafkaconnect.amazonaws.com", "endpointPrefix" => "kafkaconnect"}, "aws.auth#sigv4" => {"name" => "kafkaconnect"}, "aws.endpoints#standardRegionalEndpoints" => {"partitionSpecialCases" => {"aws-us-gov" => [{"endpoint" => "https://kafkaconnect.{region}.{dnsSuffix}", "fips" => true, "dualStack" => false}, {"endpoint" => "https://kafkaconnect.{region}.{dualStackDnsSuffix}", "fips" => true, "dualStack" => true}]}}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Date", "X-Amz-Target", "x-amzn-platform-id", "x-amzn-trace-id", "Authorization", "Content-Type", "Credentials", "X-Amz-Date", "X-Api-Key", "X-Amz-Security-Token", "x-amz-content-sha256", "X-Amz-User-Agent"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-errormessage", "x-amzn-trace-id", "x-amz-apigw-id", "date"], "origin" => "*", "maxAge" => 86400}, "smithy.api#title" => "Managed Streaming for Kafka Connect", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://kafkaconnect.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://kafkaconnect.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://kafkaconnect-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://kafkaconnect-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEEAAAABwX14QUF9eEKAAAABAAAAAsAAAAJAAAABQX14QQAAAAKAAAABgX14QgF9eEJAAAABQX14QUAAAAMAAAABgAAAA0F9eEHAAAABwX14QYF9eEHAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
       service.add_operation(:create_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#CreateConnector"
         operation.name = "CreateConnector"
@@ -750,6 +765,20 @@ module Aws::KafkaConnect
         operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/worker-configurations", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListWorkerConfigurations.new
+      end)
+      service.add_operation(:restart_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.kafkaconnect#RestartConnector"
+        operation.name = "RestartConnector"
+        operation.input = RestartConnectorRequest
+        operation.output = RestartConnectorResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << TooManyRequestsException
+        operation.errors << UnauthorizedException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/v1/connectors/{connectorArn}/restart", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.kafkaconnect#TagResource"

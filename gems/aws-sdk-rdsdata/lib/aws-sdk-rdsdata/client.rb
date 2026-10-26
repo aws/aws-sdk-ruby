@@ -144,18 +144,18 @@ module Aws::RDSData
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,57 +209,22 @@ module Aws::RDSData
       super
     end
 
-    # <p>Runs a batch SQL statement over an array of data.</p>
-    #          <p>You can run bulk update and insert operations for multiple records using a DML 
-    #             statement with different parameter sets. Bulk operations can provide a significant 
-    #             performance improvement over individual insert and update operations.</p>
-    #          <note>
-    #             <p>If a call isn't part of a transaction because it doesn't include the <code>transactionID</code> parameter,
-    #                 changes that result from the call are committed automatically.</p>
-    #             <p>There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request
-    #                 submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't
-    #                 process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the
-    #                 number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and
-    #                 the size of each parameter set.</p>
-    #             <p>The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated.</p>
-    #          </note>
+    # <p>Runs a batch SQL statement over an array of data.</p> <p>You can run bulk update and insert operations for multiple records using a DML statement with different parameter sets. Bulk operations can provide a significant performance improvement over individual insert and update operations.</p> <note> <p>If a call isn't part of a transaction because it doesn't include the <code>transactionID</code> parameter, changes that result from the call are committed automatically.</p> <p>There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and the size of each parameter set.</p> <p>The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated.</p> </note>
     # @param [Hash, Types::BatchExecuteStatementInput] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>
     # @option params [String] :secret_arn
-    #   <p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in
-    #               the secret.</p>
-    #            <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
+    #   <p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
     # @option params [String] :sql
     #   <p>The SQL statement to run. Don't include a semicolon (;) at the end of the SQL statement.</p>
     # @option params [String] :database
     #   <p>The name of the database.</p>
     # @option params [String] :schema
-    #   <p>The name of the database schema.</p>
-    #            <note>
-    #               <p>Currently, the <code>schema</code> parameter isn't supported.</p>
-    #            </note>
+    #   <p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn't supported.</p> </note>
     # @option params [Array<Array<Types::SqlParameter>>] :parameter_sets
-    #   <p>The parameter set for the batch operation.</p>
-    #            <p>The SQL statement is executed as many times as the number of parameter sets provided. 
-    #             To execute a SQL statement with no parameters, use one of the following options:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Specify one or more empty parameter sets.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p>
-    #               </li>
-    #            </ul>
-    #            <note>
-    #               <p>Array parameters are not supported.</p>
-    #            </note>
+    #   <p>The parameter set for the batch operation.</p> <p>The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:</p> <ul> <li> <p>Specify one or more empty parameter sets.</p> </li> <li> <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p> </li> </ul> <note> <p>Array parameters are not supported.</p> </note>
     # @option params [String] :transaction_id
-    #   <p>The identifier of a transaction that was started by using the
-    #                   <code>BeginTransaction</code> operation. Specify the transaction ID of the
-    #               transaction that you want to include the SQL statement in.</p>
-    #            <p>If the SQL statement is not part of a transaction, don't set this
-    #               parameter.</p>
+    #   <p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -290,7 +255,7 @@ module Aws::RDSData
     #               }]
     #             }
     #           },
-    #           type_hint: "TypeHint"
+    #           type_hint: "JSON" # One of: ["JSON", "UUID", "TIMESTAMP", "DATE", "TIME", "DECIMAL"]
     #         }
     #       ]
     #     ],
@@ -331,15 +296,7 @@ module Aws::RDSData
       request.send_request(options)
     end
 
-    # <p>Starts a SQL transaction.</p>
-    #          <note>
-    #             <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24
-    #                 hours.</p>
-    #             <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's
-    #                 committed, it's rolled back automatically.</p>
-    #             <p>For Aurora MySQL, DDL statements inside a transaction cause an implicit commit. We recommend that you run each MySQL DDL statement in a separate
-    #                     <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p>
-    #          </note>
+    # <p>Starts a SQL transaction.</p> <note> <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.</p> <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically.</p> <p>For Aurora MySQL, DDL statements inside a transaction cause an implicit commit. We recommend that you run each MySQL DDL statement in a separate <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p> </note>
     # @param [Hash, Types::BeginTransactionInput] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>
@@ -369,8 +326,7 @@ module Aws::RDSData
       request.send_request(options)
     end
 
-    # <p>Ends a SQL transaction started with the <code>BeginTransaction</code> operation and
-    #             commits the changes.</p>
+    # <p>Ends a SQL transaction started with the <code>BeginTransaction</code> operation and commits the changes.</p>
     # @param [Hash, Types::CommitTransactionInput] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>
@@ -397,24 +353,14 @@ module Aws::RDSData
       request.send_request(options)
     end
 
-    # <p>Runs one or more SQL statements.</p>
-    #          <note>
-    #             <p>This operation isn't supported for Aurora Serverless v2 and provisioned DB clusters.
-    #             For Aurora Serverless v1 DB clusters, the operation is deprecated.
-    #             Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation.</p>
-    #          </note>
+    # <p>Runs one or more SQL statements.</p> <note> <p>This operation is deprecated. Please use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation.</p> </note>
     # @param [Hash, Types::ExecuteSqlInput] params
     # @option params [String] :db_cluster_or_instance_arn
     #   <p>The ARN of the Aurora Serverless DB cluster.</p>
     # @option params [String] :aws_secret_store_arn
-    #   <p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password
-    #               for the credentials in the secret.</p>
-    #            <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
     # @option params [String] :sql_statements
-    #   <p>One or more SQL statements to run on the DB cluster.</p>
-    #            <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL
-    #               statement is permitted, including data definition, data manipulation, and commit
-    #               statements. </p>
+    #   <p>One or more SQL statements to run on the DB cluster.</p> <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements. </p>
     # @option params [String] :database
     #   <p>The name of the database.</p>
     # @option params [String] :schema
@@ -493,60 +439,30 @@ module Aws::RDSData
       request.send_request(options)
     end
 
-    # <p>Runs a SQL statement against a database.</p>
-    #          <note>
-    #             <p>If a call isn't part of a transaction because it doesn't include the
-    #                     <code>transactionID</code> parameter, changes that result from the call are
-    #                 committed automatically.</p>
-    #             <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p>
-    #          </note>
+    # <p>Runs a SQL statement against a database.</p> <note> <p>If a call isn't part of a transaction because it doesn't include the <code>transactionID</code> parameter, changes that result from the call are committed automatically.</p> <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p> </note>
     # @param [Hash, Types::ExecuteStatementInput] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>
     # @option params [String] :secret_arn
-    #   <p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in
-    #               the secret.</p>
-    #            <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>
+    #   <p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p> <note> <p>When you use the CLI on Linux to reference a secret created in the RDS console, the ARN might include special characters like <code>rds!cluster</code>. If you enclose the ARN in double quotes, the <code>!</code> character might trigger a shell expansion error, such as <code>-bash: !cluster: event not found</code>. To avoid this, escape the exclamation mark (\!) in the ARN or enclose the entire ARN in single quotes (') instead of double quotes.</p> <p>Alternatively, disable shell history expansion by running <code>set +H</code> before you execute the command.</p> </note>
     # @option params [String] :sql
     #   <p>The SQL statement to run.</p>
     # @option params [String] :database
     #   <p>The name of the database.</p>
     # @option params [String] :schema
-    #   <p>The name of the database schema.</p>
-    #            <note>
-    #               <p>Currently, the <code>schema</code> parameter isn't supported.</p>
-    #            </note>
+    #   <p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn't supported.</p> </note>
     # @option params [Array<Types::SqlParameter>] :parameters
-    #   <p>The parameters for the SQL statement.</p>
-    #            <note>
-    #               <p>Array parameters are not supported.</p>
-    #            </note>
+    #   <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
     # @option params [String] :transaction_id
-    #   <p>The identifier of a transaction that was started by using the
-    #                   <code>BeginTransaction</code> operation. Specify the transaction ID of the
-    #               transaction that you want to include the SQL statement in.</p>
-    #            <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>
+    #   <p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>
     # @option params [Boolean] :include_result_metadata
     #   <p>A value that indicates whether to include metadata in the results.</p>
     # @option params [Boolean] :continue_after_timeout
-    #   <p>A value that indicates whether to continue running the statement after 
-    #               the call times out. By default, the statement stops running when the call 
-    #               times out.</p>
-    #            <note>
-    #               <p>For DDL statements, we recommend continuing to run the statement after 
-    #                  the call times out. When a DDL statement terminates before it is finished 
-    #                  running, it can result in errors and possibly corrupted data structures.</p>
-    #            </note>
+    #   <p>A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.</p> <note> <p>For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures.</p> </note>
     # @option params [Types::ResultSetOptions] :result_set_options
     #   <p>Options that control how the result set is returned.</p>
     # @option params [String] :format_records_as
-    #   <p>A value that indicates whether to format the result set as a single JSON string.
-    #           This parameter only applies to <code>SELECT</code> statements and is ignored for
-    #           other types of statements. Allowed values are <code>NONE</code> and <code>JSON</code>.
-    #           The default value is <code>NONE</code>. The result is returned in the <code>formattedRecords</code> field.</p>
-    #            <p>For usage information about the JSON format for result sets, see
-    #             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API</a>
-    #             in the <i>Amazon Aurora User Guide</i>.</p>
+    #   <p>A value that indicates whether to format the result set as a single JSON string. This parameter only applies to <code>SELECT</code> statements and is ignored for other types of statements. Allowed values are <code>NONE</code> and <code>JSON</code>. The default value is <code>NONE</code>. The result is returned in the <code>formattedRecords</code> field.</p> <p>For usage information about the JSON format for result sets, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API</a> in the <i>Amazon Aurora User Guide</i>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -576,17 +492,17 @@ module Aws::RDSData
     #             }]
     #           }
     #         },
-    #         type_hint: "TypeHint"
+    #         type_hint: "JSON" # One of: ["JSON", "UUID", "TIMESTAMP", "DATE", "TIME", "DECIMAL"]
     #       }
     #     ],
     #     transaction_id: "Id",
     #     include_result_metadata: false,
     #     continue_after_timeout: false,
     #     result_set_options: {
-    #       decimal_return_type: "DecimalReturnType",
-    #       long_return_type: "LongReturnType"
+    #       decimal_return_type: "STRING" # One of: ["STRING", "DOUBLE_OR_LONG"],
+    #       long_return_type: "STRING" # One of: ["STRING", "LONG"]
     #     },
-    #     format_records_as: "RecordsFormatType"
+    #     format_records_as: "NONE" # One of: ["NONE", "JSON"]
     #   }
     #   options = {}
     #   response = client.execute_statement(params, options)

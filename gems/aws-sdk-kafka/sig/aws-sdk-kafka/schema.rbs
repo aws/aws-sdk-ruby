@@ -3,6 +3,8 @@ module Aws::Kafka
     include Smithy::Schema::Shapes
 
     AmazonMskCluster: StructureShape
+    ApacheKafkaCluster: StructureShape
+    AuthorizerLogs: StructureShape
     BadRequestException: StructureShape
     BatchAssociateScramSecretRequest: StructureShape
     BatchAssociateScramSecretResponse: StructureShape
@@ -15,11 +17,18 @@ module Aws::Kafka
     BrokerNodeGroupInfo: StructureShape
     BrokerNodeInfo: StructureShape
     BrokerSoftwareInfo: StructureShape
+    Catalog: StructureShape
+    ChannelDestinationType: EnumShape
+    ChannelInfo: StructureShape
+    ChannelLoggingInfo: StructureShape
+    ChannelStateInfo: StructureShape
+    ChannelStatus: EnumShape
     ClientAuthentication: StructureShape
     ClientBroker: EnumShape
     ClientVpcConnection: StructureShape
     CloudWatchLogs: StructureShape
     Cluster: StructureShape
+    ClusterConnectivityException: StructureShape
     ClusterInfo: StructureShape
     ClusterOperationInfo: StructureShape
     ClusterOperationStep: StructureShape
@@ -37,9 +46,13 @@ module Aws::Kafka
     ConfigurationState: EnumShape
     ConflictException: StructureShape
     ConnectivityInfo: StructureShape
+    ConsumerGroupOffsetSyncMode: EnumShape
     ConsumerGroupReplication: StructureShape
     ConsumerGroupReplicationUpdate: StructureShape
+    ControllerMovedException: StructureShape
     ControllerNodeInfo: StructureShape
+    CreateChannelRequest: StructureShape
+    CreateChannelResponse: StructureShape
     CreateClusterRequest: StructureShape
     CreateClusterResponse: StructureShape
     CreateClusterV2Request: StructureShape
@@ -48,9 +61,14 @@ module Aws::Kafka
     CreateConfigurationResponse: StructureShape
     CreateReplicatorRequest: StructureShape
     CreateReplicatorResponse: StructureShape
+    CreateTopicRequest: StructureShape
+    CreateTopicResponse: StructureShape
     CreateVpcConnectionRequest: StructureShape
     CreateVpcConnectionResponse: StructureShape
     CustomerActionStatus: EnumShape
+    DeadLetterQueueS3: StructureShape
+    DeleteChannelRequest: StructureShape
+    DeleteChannelResponse: StructureShape
     DeleteClusterPolicyRequest: StructureShape
     DeleteClusterPolicyResponse: StructureShape
     DeleteClusterRequest: StructureShape
@@ -59,8 +77,12 @@ module Aws::Kafka
     DeleteConfigurationResponse: StructureShape
     DeleteReplicatorRequest: StructureShape
     DeleteReplicatorResponse: StructureShape
+    DeleteTopicRequest: StructureShape
+    DeleteTopicResponse: StructureShape
     DeleteVpcConnectionRequest: StructureShape
     DeleteVpcConnectionResponse: StructureShape
+    DescribeChannelRequest: StructureShape
+    DescribeChannelResponse: StructureShape
     DescribeClusterOperationRequest: StructureShape
     DescribeClusterOperationResponse: StructureShape
     DescribeClusterOperationV2Request: StructureShape
@@ -75,10 +97,16 @@ module Aws::Kafka
     DescribeConfigurationRevisionResponse: StructureShape
     DescribeReplicatorRequest: StructureShape
     DescribeReplicatorResponse: StructureShape
+    DescribeTopicPartitionsRequest: StructureShape
+    DescribeTopicPartitionsResponse: StructureShape
+    DescribeTopicRequest: StructureShape
+    DescribeTopicResponse: StructureShape
     DescribeVpcConnectionRequest: StructureShape
     DescribeVpcConnectionResponse: StructureShape
+    DestinationTable: StructureShape
     EBSStorageInfo: StructureShape
     EncryptionAtRest: StructureShape
+    EncryptionConfiguration: StructureShape
     EncryptionInTransit: StructureShape
     EncryptionInfo: StructureShape
     EnhancedMonitoring: EnumShape
@@ -91,16 +119,35 @@ module Aws::Kafka
     GetClusterPolicyResponse: StructureShape
     GetCompatibleKafkaVersionsRequest: StructureShape
     GetCompatibleKafkaVersionsResponse: StructureShape
+    GroupSubscribedToTopicException: StructureShape
     Iam: StructureShape
+    IcebergCompressionType: EnumShape
+    IcebergDestinationConfiguration: StructureShape
+    IcebergDestinationUpdate: StructureShape
     InternalServerErrorException: StructureShape
     JmxExporter: StructureShape
     JmxExporterInfo: StructureShape
+    JwtSigningAlgorithm: EnumShape
     KafkaCluster: StructureShape
+    KafkaClusterClientAuthentication: StructureShape
     KafkaClusterClientVpcConfig: StructureShape
     KafkaClusterDescription: StructureShape
+    KafkaClusterEncryptionInTransit: StructureShape
+    KafkaClusterEncryptionInTransitType: EnumShape
+    KafkaClusterMTLSAuthentication: StructureShape
+    KafkaClusterOAuthClientCredentials: StructureShape
+    KafkaClusterOAuthClientCredentialsAssertion: StructureShape
+    KafkaClusterOAuthIamJwtBearer: StructureShape
+    KafkaClusterSaslOAuthBearerAuthentication: StructureShape
+    KafkaClusterSaslScramAuthentication: StructureShape
+    KafkaClusterSaslScramMechanism: EnumShape
     KafkaClusterSummary: StructureShape
+    KafkaRequestException: StructureShape
+    KafkaTimeoutException: StructureShape
     KafkaVersion: StructureShape
     KafkaVersionStatus: EnumShape
+    ListChannelsRequest: StructureShape
+    ListChannelsResponse: StructureShape
     ListClientVpcConnectionsRequest: StructureShape
     ListClientVpcConnectionsResponse: StructureShape
     ListClusterOperationsRequest: StructureShape
@@ -125,18 +172,26 @@ module Aws::Kafka
     ListScramSecretsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    ListTopicsRequest: StructureShape
+    ListTopicsResponse: StructureShape
     ListVpcConnectionsRequest: StructureShape
     ListVpcConnectionsResponse: StructureShape
+    LogDelivery: StructureShape
     LoggingInfo: StructureShape
     MaxResults: IntegerShape
     MutableClusterInfo: StructureShape
+    NetworkType: EnumShape
     NodeExporter: StructureShape
     NodeExporterInfo: StructureShape
     NodeInfo: StructureShape
     NodeType: EnumShape
+    NotControllerException: StructureShape
     NotFoundException: StructureShape
     OpenMonitoring: StructureShape
     OpenMonitoringInfo: StructureShape
+    PartitionSource: StructureShape
+    PartitionSpec: StructureShape
+    PartitionStrategy: EnumShape
     Prometheus: StructureShape
     PrometheusInfo: StructureShape
     Provisioned: StructureShape
@@ -145,8 +200,13 @@ module Aws::Kafka
     PublicAccess: StructureShape
     PutClusterPolicyRequest: StructureShape
     PutClusterPolicyResponse: StructureShape
+    ReassignmentInProgressException: StructureShape
+    Rebalancing: StructureShape
+    RebalancingStatus: EnumShape
     RebootBrokerRequest: StructureShape
     RebootBrokerResponse: StructureShape
+    RecordConverter: StructureShape
+    RecordSchema: StructureShape
     RejectClientVpcConnectionRequest: StructureShape
     RejectClientVpcConnectionResponse: StructureShape
     ReplicationInfo: StructureShape
@@ -157,27 +217,46 @@ module Aws::Kafka
     ReplicationStateInfo: StructureShape
     ReplicationTopicNameConfiguration: StructureShape
     ReplicationTopicNameConfigurationType: EnumShape
+    ReplicatorCloudWatchLogs: StructureShape
+    ReplicatorFirehose: StructureShape
+    ReplicatorLogDelivery: StructureShape
+    ReplicatorS3: StructureShape
     ReplicatorState: EnumShape
     ReplicatorSummary: StructureShape
     S3: StructureShape
+    S3CompressionType: EnumShape
+    S3DestinationConfiguration: StructureShape
+    S3DestinationUpdate: StructureShape
+    S3Storage: StructureShape
+    S3StorageClass: EnumShape
     Sasl: StructureShape
+    SchemaEvolution: StructureShape
     Scram: StructureShape
     Serverless: StructureShape
     ServerlessClientAuthentication: StructureShape
+    ServerlessConnectivityInfo: StructureShape
     ServerlessRequest: StructureShape
     ServerlessSasl: StructureShape
     ServiceUnavailableException: StructureShape
     StateInfo: StructureShape
     StorageInfo: StructureShape
     StorageMode: EnumShape
+    TableCreation: StructureShape
     TagResourceRequest: StructureShape
     TargetCompressionType: EnumShape
     Tls: StructureShape
+    TokenEndpointAuthenticationMethod: EnumShape
     TooManyRequestsException: StructureShape
+    TopicConfiguration: StructureShape
+    TopicExistsException: StructureShape
+    TopicInfo: StructureShape
+    TopicPartitionInfo: StructureShape
     TopicReplication: StructureShape
     TopicReplicationUpdate: StructureShape
+    TopicState: EnumShape
     Unauthenticated: StructureShape
     UnauthorizedException: StructureShape
+    UnknownTopicOrPartitionException: StructureShape
     UnprocessedScramSecret: StructureShape
     UntagResourceRequest: StructureShape
     UpdateBrokerCountRequest: StructureShape
@@ -186,6 +265,8 @@ module Aws::Kafka
     UpdateBrokerStorageResponse: StructureShape
     UpdateBrokerTypeRequest: StructureShape
     UpdateBrokerTypeResponse: StructureShape
+    UpdateChannelRequest: StructureShape
+    UpdateChannelResponse: StructureShape
     UpdateClusterConfigurationRequest: StructureShape
     UpdateClusterConfigurationResponse: StructureShape
     UpdateClusterKafkaVersionRequest: StructureShape
@@ -196,14 +277,19 @@ module Aws::Kafka
     UpdateConnectivityResponse: StructureShape
     UpdateMonitoringRequest: StructureShape
     UpdateMonitoringResponse: StructureShape
+    UpdateRebalancingRequest: StructureShape
+    UpdateRebalancingResponse: StructureShape
     UpdateReplicationInfoRequest: StructureShape
     UpdateReplicationInfoResponse: StructureShape
     UpdateSecurityRequest: StructureShape
     UpdateSecurityResponse: StructureShape
     UpdateStorageRequest: StructureShape
     UpdateStorageResponse: StructureShape
+    UpdateTopicRequest: StructureShape
+    UpdateTopicResponse: StructureShape
     UserIdentity: StructureShape
     UserIdentityType: EnumShape
+    ValueConverter: EnumShape
     VpcConfig: StructureShape
     VpcConnection: StructureShape
     VpcConnectionInfo: StructureShape
@@ -215,14 +301,17 @@ module Aws::Kafka
     VpcConnectivitySasl: StructureShape
     VpcConnectivityScram: StructureShape
     VpcConnectivityTls: StructureShape
+    ZookeeperAccess: StructureShape
     ZookeeperNodeInfo: StructureShape
     Blob: BlobShape
     Boolean: BooleanShape
     Double: FloatShape
     Integer: IntegerShape
+    Integermin1: IntegerShape
     Integermin1max15: IntegerShape
     Integermin1max16384: IntegerShape
     Listofbrokerebsvolumeinfo: ListShape
+    Listofchannelinfo: ListShape
     Listofclientvpcconnection: ListShape
     Listofcluster: ListShape
     Listofclusterinfo: ListShape
@@ -232,19 +321,25 @@ module Aws::Kafka
     Listofcompatiblekafkaversion: ListShape
     Listofconfiguration: ListShape
     Listofconfigurationrevision: ListShape
+    Listofdestinationtable: ListShape
     Listofkafkacluster: ListShape
     Listofkafkaclusterdescription: ListShape
     Listofkafkaclustersummary: ListShape
     Listofkafkaversion: ListShape
     Listofnodeinfo: ListShape
+    Listofpartitionsource: ListShape
     Listofreplicationinfo: ListShape
     Listofreplicationinfodescription: ListShape
     Listofreplicationinfosummary: ListShape
     Listofreplicatorsummary: ListShape
+    Listoftopicconfiguration: ListShape
+    Listoftopicinfo: ListShape
+    Listoftopicpartitioninfo: ListShape
     Listofunprocessedscramsecret: ListShape
     Listofvpcconfig: ListShape
     Listofvpcconnection: ListShape
     ListofDouble: ListShape
+    ListofInteger: ListShape
     ListofString: ListShape
     ListofStringmax249: ListShape
     ListofStringmax256: ListShape

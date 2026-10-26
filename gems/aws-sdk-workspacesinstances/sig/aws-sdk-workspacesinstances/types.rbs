@@ -52,6 +52,22 @@ module Aws::WorkspacesInstances
       EBS_1: String
     end
 
+    class BillingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_mode: String?
+    end
+
+    module BillingMode
+      MONTHLY: String
+      HOURLY: String
+    end
+
     class BlockDeviceMappingRequest
       include Smithy::Schema::Structure
 
@@ -143,12 +159,14 @@ module Aws::WorkspacesInstances
         ?amd_sev_snp: String,
         ?core_count: Integer,
         ?threads_per_core: Integer,
+        ?nested_virtualization: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor amd_sev_snp: String?
       attr_accessor core_count: Integer?
       attr_accessor threads_per_core: Integer?
+      attr_accessor nested_virtualization: String?
     end
 
     class CreateVolumeRequest
@@ -198,12 +216,14 @@ module Aws::WorkspacesInstances
         ?client_token: String,
         ?tags: Array[Types::Tag],
         ?managed_instance: Types::ManagedInstanceRequest,
+        ?billing_configuration: Types::BillingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor client_token: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor managed_instance: Types::ManagedInstanceRequest?
+      attr_accessor billing_configuration: Types::BillingConfiguration?
     end
 
     class CreateWorkspaceInstanceResponse
@@ -401,6 +421,7 @@ module Aws::WorkspacesInstances
         ?provision_state: String,
         ?workspace_instance_id: String,
         ?ec2_managed_instance: Types::EC2ManagedInstance,
+        ?billing_configuration: Types::BillingConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -409,6 +430,7 @@ module Aws::WorkspacesInstances
       attr_accessor provision_state: String?
       attr_accessor workspace_instance_id: String?
       attr_accessor ec2_managed_instance: Types::EC2ManagedInstance?
+      attr_accessor billing_configuration: Types::BillingConfiguration?
     end
 
     class HibernationOptionsRequest
@@ -453,6 +475,26 @@ module Aws::WorkspacesInstances
 
       attr_accessor arn: String?
       attr_accessor name: String?
+    end
+
+    class InstanceConfigurationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_mode: String,
+        ?platform_type: String,
+        ?tenancy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_mode: String?
+      attr_accessor platform_type: String?
+      attr_accessor tenancy: String?
+    end
+
+    module InstanceConfigurationTenancyEnum
+      SHARED: String
+      DEDICATED: String
     end
 
     module InstanceInterruptionBehaviorEnum
@@ -588,10 +630,12 @@ module Aws::WorkspacesInstances
 
       def initialize: (
         ?instance_type: String,
+        ?supported_instance_configurations: Array[Types::SupportedInstanceConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_type: String?
+      attr_accessor supported_instance_configurations: Array[Types::SupportedInstanceConfiguration]?
     end
 
     module InterfaceTypeEnum
@@ -652,11 +696,13 @@ module Aws::WorkspacesInstances
       def initialize: (
         ?max_results: Integer,
         ?next_token: String,
+        ?instance_configuration_filter: Types::InstanceConfigurationFilter,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
+      attr_accessor instance_configuration_filter: Types::InstanceConfigurationFilter?
     end
 
     class ListInstanceTypesResponse
@@ -826,6 +872,11 @@ module Aws::WorkspacesInstances
       CAPACITY_BLOCK: String
     end
 
+    module NestedVirtualizationEnum
+      ENABLED: String
+      DISABLED: String
+    end
+
     class Placement
       include Smithy::Schema::Structure
 
@@ -849,6 +900,16 @@ module Aws::WorkspacesInstances
       attr_accessor host_resource_group_arn: String?
       attr_accessor partition_number: Integer?
       attr_accessor tenancy: String?
+    end
+
+    module PlatformTypeEnum
+      WINDOWS: String
+      WINDOWS_BYOL: String
+      LINUX_UNIX: String
+      UBUNTU_PRO: String
+      RHEL: String
+      LINUX_BYOL: String
+      SUSE: String
     end
 
     class PrivateDnsNameOptionsRequest
@@ -973,6 +1034,21 @@ module Aws::WorkspacesInstances
       attr_accessor max_price: String?
       attr_accessor spot_instance_type: String?
       attr_accessor valid_until_utc: Time?
+    end
+
+    class SupportedInstanceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_mode: String,
+        ?platform_type: String,
+        ?tenancy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_mode: String?
+      attr_accessor platform_type: String?
+      attr_accessor tenancy: String?
     end
 
     class Tag

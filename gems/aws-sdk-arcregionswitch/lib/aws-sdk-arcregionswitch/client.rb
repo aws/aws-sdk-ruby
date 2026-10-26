@@ -145,18 +145,18 @@ module Aws::ARCRegionswitch
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -280,6 +280,10 @@ module Aws::ARCRegionswitch
     #   <p>The alarms associated with a Region switch plan.</p>
     # @option params [Array<Types::Trigger>] :triggers
     #   <p>The triggers associated with a Region switch plan.</p>
+    # @option params [Types::ReportConfiguration] :report_configuration
+    #   <p>Configuration for automatic report generation for plan executions. When configured, Region switch automatically generates a report after each plan execution that includes execution events, plan configuration, and CloudWatch alarm states.</p>
+    # @option params [Boolean] :service_quota_checks_enabled
+    #   <p>Specifies whether to enable service quota checks for the Region switch plan.</p>
     # @option params [String] :name
     #   <p>The name of a Region switch plan.</p>
     # @option params [Array<String>] :regions
@@ -307,11 +311,12 @@ module Aws::ARCRegionswitch
     #                   {
     #                     cross_account_role: "IamRoleArn",
     #                     external_id: "String",
-    #                     arn: "LambdaArn"
+    #                     arn: "LambdaArn",
+    #                     payload: "LambdaPayload"
     #                   }
     #                 ],
     #                 retry_interval_minutes: 1.0, # required
-    #                 region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion"], # required
+    #                 region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"], # required
     #                 ungraceful: {
     #                   behavior: "skip" # One of: ["skip"]
     #                 }
@@ -329,7 +334,8 @@ module Aws::ARCRegionswitch
     #                   minimum_success_percentage: 1, # required
     #                 },
     #                 target_percent: 1,
-    #                 capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"]
+    #                 capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"],
+    #                 wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #               },
     #               execution_approval_config: {
     #                 timeout_minutes: 1,
@@ -383,7 +389,8 @@ module Aws::ARCRegionswitch
     #                   minimum_success_percentage: 1, # required
     #                 },
     #                 target_percent: 1,
-    #                 capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"]
+    #                 capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"],
+    #                 wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #               },
     #               eks_resource_scaling_config: {
     #                 timeout_minutes: 1,
@@ -427,12 +434,123 @@ module Aws::ARCRegionswitch
     #                     region: "Region"
     #                   }
     #                 ]
+    #               },
+    #               document_db_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                 ungraceful: {
+    #                   ungraceful: "failover" # One of: ["failover"]
+    #                 },
+    #                 global_cluster_identifier: "DocumentDbGlobalClusterIdentifier", # required
+    #                 database_cluster_arns: ["DocumentDbClusterArn"], # required
+    #               },
+    #               rds_promote_read_replica_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 db_instance_arn_map: { # required
+    #                   "Region" => "RdsDbInstanceArn"
+    #                 }
+    #               },
+    #               rds_create_cross_region_read_replica_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 db_instance_arn_map: { # required
+    #                   "Region" => "RdsDbInstanceArn"
+    #                 }
+    #               },
+    #               lambda_event_source_mapping_config: {
+    #                 timeout_minutes: 1,
+    #                 action: "enable" # One of: ["enable", "disable"], # required
+    #                 region_event_source_mappings: { # required
+    #                   "Region" => {
+    #                     cross_account_role: "IamRoleArn",
+    #                     external_id: "String",
+    #                     arn: "EventSourceMappingArn", # required
+    #                   }
+    #                 },
+    #                 ungraceful: {
+    #                   behavior: "skip" # One of: ["skip"]
+    #                 }
+    #               },
+    #               aurora_serverless_scaling_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                 region_database_cluster_arns: { # required
+    #                   "Region" => "AuroraClusterArn"
+    #                 },
+    #                 target_percent: 1
+    #               },
+    #               aurora_provisioned_scaling_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                 region_database_cluster_arns: { # required
+    #                   "Region" => "AuroraClusterArn"
+    #                 },
+    #                 instance_arns: { # required
+    #                   "Region" => "AuroraInstanceArn"
+    #                 }
+    #               },
+    #               neptune_global_database_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                 ungraceful: {
+    #                   ungraceful: "failover" # One of: ["failover"]
+    #                 },
+    #                 global_cluster_identifier: "NeptuneGlobalClusterIdentifier", # required
+    #                 region_database_cluster_arns: { # required
+    #                   "Region" => "NeptuneClusterArn"
+    #                 }
+    #               },
+    #               rds_switchover_read_replica_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 db_instance_arn_map: { # required
+    #                   "Region" => "RdsDbInstanceArn"
+    #                 },
+    #                 ungraceful: {
+    #                   ungraceful: "promoteReadReplica" # One of: ["promoteReadReplica"]
+    #                 }
+    #               },
+    #               ssm_send_command_config: {
+    #                 timeout_minutes: 1,
+    #                 region_documents: { # required
+    #                   "Region" => {
+    #                     cross_account_role: "IamRoleArn",
+    #                     external_id: "String",
+    #                     document_arn: "SsmDocumentArn", # required
+    #                     targets: [ # required
+    #                       {
+    #                         key: "SsmTargetKey", # required
+    #                         values: ["SsmTargetValue"], # required
+    #                       }
+    #                     ],
+    #                     parameters: {
+    #                       "SsmParameterKey" => ["SsmParameterValue"]
+    #                     },
+    #                     document_version: "SsmDocumentVersion"
+    #                   }
+    #                 },
+    #                 retry_interval_minutes: 1.0, # required
+    #                 ungraceful: {
+    #                   behavior: "skip" # One of: ["skip"]
+    #                 }
     #               }
     #             },
-    #             execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"], # required
+    #             execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"], # required
     #           }
     #         ],
-    #         workflow_target_action: "activate" # One of: ["activate", "deactivate"], # required
+    #         workflow_target_action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #         workflow_target_region: "Region",
     #         workflow_description: "String"
     #       }
@@ -451,7 +569,7 @@ module Aws::ARCRegionswitch
     #       {
     #         description: "String",
     #         target_region: "Region", # required
-    #         action: "activate" # One of: ["activate", "deactivate"], # required
+    #         action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #         conditions: [ # required
     #           {
     #             associated_alarm_name: "String", # required
@@ -461,6 +579,16 @@ module Aws::ARCRegionswitch
     #         min_delay_minutes_between_executions: 1, # required
     #       }
     #     ],
+    #     report_configuration: {
+    #       report_output: [{
+    #         # One of:
+    #         s3_configuration: {
+    #           bucket_path: "String",
+    #           bucket_owner: "AccountId"
+    #         }
+    #       }]
+    #     },
+    #     service_quota_checks_enabled: false,
     #     name: "PlanName", # required
     #     regions: ["Region"], # required
     #     recovery_approach: "activeActive" # One of: ["activeActive", "activePassive"], # required
@@ -491,11 +619,12 @@ module Aws::ARCRegionswitch
     #                     {
     #                       cross_account_role: "IamRoleArn",
     #                       external_id: "String",
-    #                       arn: "LambdaArn"
+    #                       arn: "LambdaArn",
+    #                       payload: "LambdaPayload"
     #                     }
     #                   ],
     #                   retry_interval_minutes: 1.0, # required
-    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion"], # required
+    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"], # required
     #                   ungraceful: {
     #                     behavior: "skip" # One of: ["skip"]
     #                   }
@@ -513,7 +642,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 execution_approval_config: {
     #                   timeout_minutes: 1,
@@ -567,7 +697,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 eks_resource_scaling_config: {
     #                   timeout_minutes: 1,
@@ -611,12 +742,123 @@ module Aws::ARCRegionswitch
     #                       region: "Region"
     #                     }
     #                   ]
+    #                 },
+    #                 document_db_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "DocumentDbGlobalClusterIdentifier", # required
+    #                   database_cluster_arns: ["DocumentDbClusterArn"], # required
+    #                 },
+    #                 rds_promote_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 rds_create_cross_region_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 lambda_event_source_mapping_config: {
+    #                   timeout_minutes: 1,
+    #                   action: "enable" # One of: ["enable", "disable"], # required
+    #                   region_event_source_mappings: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       arn: "EventSourceMappingArn", # required
+    #                     }
+    #                   },
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
+    #                 },
+    #                 aurora_serverless_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   target_percent: 1
+    #                 },
+    #                 aurora_provisioned_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   instance_arns: { # required
+    #                     "Region" => "AuroraInstanceArn"
+    #                   }
+    #                 },
+    #                 neptune_global_database_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "NeptuneGlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "NeptuneClusterArn"
+    #                   }
+    #                 },
+    #                 rds_switchover_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   },
+    #                   ungraceful: {
+    #                     ungraceful: "promoteReadReplica" # One of: ["promoteReadReplica"]
+    #                   }
+    #                 },
+    #                 ssm_send_command_config: {
+    #                   timeout_minutes: 1,
+    #                   region_documents: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       document_arn: "SsmDocumentArn", # required
+    #                       targets: [ # required
+    #                         {
+    #                           key: "SsmTargetKey", # required
+    #                           values: ["SsmTargetValue"], # required
+    #                         }
+    #                       ],
+    #                       parameters: {
+    #                         "SsmParameterKey" => ["SsmParameterValue"]
+    #                       },
+    #                       document_version: "SsmDocumentVersion"
+    #                     }
+    #                   },
+    #                   retry_interval_minutes: 1.0, # required
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
     #                 }
     #               },
-    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"], # required
+    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"], # required
     #             }
     #           ],
-    #           workflow_target_action: "activate" # One of: ["activate", "deactivate"], # required
+    #           workflow_target_action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           workflow_target_region: "Region",
     #           workflow_description: "String"
     #         }
@@ -635,7 +877,7 @@ module Aws::ARCRegionswitch
     #         {
     #           description: "String",
     #           target_region: "Region", # required
-    #           action: "activate" # One of: ["activate", "deactivate"], # required
+    #           action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           conditions: [ # required
     #             {
     #               associated_alarm_name: "String", # required
@@ -645,6 +887,16 @@ module Aws::ARCRegionswitch
     #           min_delay_minutes_between_executions: 1, # required
     #         }
     #       ],
+    #       report_configuration: {
+    #         report_output: [{
+    #           # One of:
+    #           s3_configuration: {
+    #             bucket_path: "String",
+    #             bucket_owner: "AccountId"
+    #           }
+    #         }]
+    #       },
+    #       service_quota_checks_enabled: false,
     #       name: "PlanName", # required
     #       regions: ["Region"], # required
     #       recovery_approach: "activeActive" # One of: ["activeActive", "activePassive"], # required
@@ -709,11 +961,12 @@ module Aws::ARCRegionswitch
     #                     {
     #                       cross_account_role: "IamRoleArn",
     #                       external_id: "String",
-    #                       arn: "LambdaArn"
+    #                       arn: "LambdaArn",
+    #                       payload: "LambdaPayload"
     #                     }
     #                   ],
     #                   retry_interval_minutes: 1.0, # required
-    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion"], # required
+    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"], # required
     #                   ungraceful: {
     #                     behavior: "skip" # One of: ["skip"]
     #                   }
@@ -731,7 +984,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 execution_approval_config: {
     #                   timeout_minutes: 1,
@@ -785,7 +1039,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 eks_resource_scaling_config: {
     #                   timeout_minutes: 1,
@@ -829,12 +1084,123 @@ module Aws::ARCRegionswitch
     #                       region: "Region"
     #                     }
     #                   ]
+    #                 },
+    #                 document_db_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "DocumentDbGlobalClusterIdentifier", # required
+    #                   database_cluster_arns: ["DocumentDbClusterArn"], # required
+    #                 },
+    #                 rds_promote_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 rds_create_cross_region_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 lambda_event_source_mapping_config: {
+    #                   timeout_minutes: 1,
+    #                   action: "enable" # One of: ["enable", "disable"], # required
+    #                   region_event_source_mappings: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       arn: "EventSourceMappingArn", # required
+    #                     }
+    #                   },
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
+    #                 },
+    #                 aurora_serverless_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   target_percent: 1
+    #                 },
+    #                 aurora_provisioned_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   instance_arns: { # required
+    #                     "Region" => "AuroraInstanceArn"
+    #                   }
+    #                 },
+    #                 neptune_global_database_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "NeptuneGlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "NeptuneClusterArn"
+    #                   }
+    #                 },
+    #                 rds_switchover_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   },
+    #                   ungraceful: {
+    #                     ungraceful: "promoteReadReplica" # One of: ["promoteReadReplica"]
+    #                   }
+    #                 },
+    #                 ssm_send_command_config: {
+    #                   timeout_minutes: 1,
+    #                   region_documents: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       document_arn: "SsmDocumentArn", # required
+    #                       targets: [ # required
+    #                         {
+    #                           key: "SsmTargetKey", # required
+    #                           values: ["SsmTargetValue"], # required
+    #                         }
+    #                       ],
+    #                       parameters: {
+    #                         "SsmParameterKey" => ["SsmParameterValue"]
+    #                       },
+    #                       document_version: "SsmDocumentVersion"
+    #                     }
+    #                   },
+    #                   retry_interval_minutes: 1.0, # required
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
     #                 }
     #               },
-    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"], # required
+    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"], # required
     #             }
     #           ],
-    #           workflow_target_action: "activate" # One of: ["activate", "deactivate"], # required
+    #           workflow_target_action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           workflow_target_region: "Region",
     #           workflow_description: "String"
     #         }
@@ -853,7 +1219,7 @@ module Aws::ARCRegionswitch
     #         {
     #           description: "String",
     #           target_region: "Region", # required
-    #           action: "activate" # One of: ["activate", "deactivate"], # required
+    #           action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           conditions: [ # required
     #             {
     #               associated_alarm_name: "String", # required
@@ -863,6 +1229,16 @@ module Aws::ARCRegionswitch
     #           min_delay_minutes_between_executions: 1, # required
     #         }
     #       ],
+    #       report_configuration: {
+    #         report_output: [{
+    #           # One of:
+    #           s3_configuration: {
+    #             bucket_path: "String",
+    #             bucket_owner: "AccountId"
+    #           }
+    #         }]
+    #       },
+    #       service_quota_checks_enabled: false,
     #       name: "PlanName", # required
     #       regions: ["Region"], # required
     #       recovery_approach: "activeActive" # One of: ["activeActive", "activePassive"], # required
@@ -905,7 +1281,7 @@ module Aws::ARCRegionswitch
     #     warnings: [
     #       {
     #         workflow: {
-    #           action: "activate" # One of: ["activate", "deactivate"],
+    #           action: "activate" # One of: ["activate", "deactivate", "postRecovery"],
     #           name: "String"
     #         },
     #         version: "String", # required
@@ -955,8 +1331,9 @@ module Aws::ARCRegionswitch
     #     end_time: Time.now,
     #     mode: "graceful" # One of: ["graceful", "ungraceful"], # required
     #     execution_state: "inProgress" # One of: ["inProgress", "pausedByFailedStep", "pausedByOperator", "completed", "completedWithExceptions", "canceled", "planExecutionTimedOut", "pendingManualApproval", "failed", "pending", "completedMonitoringApplicationHealth"], # required
-    #     execution_action: "activate" # One of: ["activate", "deactivate"], # required
+    #     execution_action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #     execution_region: "String", # required
+    #     recovery_execution_id: "String",
     #     step_states: [
     #       {
     #         name: "StepName",
@@ -983,11 +1360,12 @@ module Aws::ARCRegionswitch
     #                     {
     #                       cross_account_role: "IamRoleArn",
     #                       external_id: "String",
-    #                       arn: "LambdaArn"
+    #                       arn: "LambdaArn",
+    #                       payload: "LambdaPayload"
     #                     }
     #                   ],
     #                   retry_interval_minutes: 1.0, # required
-    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion"], # required
+    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"], # required
     #                   ungraceful: {
     #                     behavior: "skip" # One of: ["skip"]
     #                   }
@@ -1005,7 +1383,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 execution_approval_config: {
     #                   timeout_minutes: 1,
@@ -1059,7 +1438,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 eks_resource_scaling_config: {
     #                   timeout_minutes: 1,
@@ -1103,12 +1483,123 @@ module Aws::ARCRegionswitch
     #                       region: "Region"
     #                     }
     #                   ]
+    #                 },
+    #                 document_db_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "DocumentDbGlobalClusterIdentifier", # required
+    #                   database_cluster_arns: ["DocumentDbClusterArn"], # required
+    #                 },
+    #                 rds_promote_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 rds_create_cross_region_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 lambda_event_source_mapping_config: {
+    #                   timeout_minutes: 1,
+    #                   action: "enable" # One of: ["enable", "disable"], # required
+    #                   region_event_source_mappings: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       arn: "EventSourceMappingArn", # required
+    #                     }
+    #                   },
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
+    #                 },
+    #                 aurora_serverless_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   target_percent: 1
+    #                 },
+    #                 aurora_provisioned_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   instance_arns: { # required
+    #                     "Region" => "AuroraInstanceArn"
+    #                   }
+    #                 },
+    #                 neptune_global_database_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "NeptuneGlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "NeptuneClusterArn"
+    #                   }
+    #                 },
+    #                 rds_switchover_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   },
+    #                   ungraceful: {
+    #                     ungraceful: "promoteReadReplica" # One of: ["promoteReadReplica"]
+    #                   }
+    #                 },
+    #                 ssm_send_command_config: {
+    #                   timeout_minutes: 1,
+    #                   region_documents: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       document_arn: "SsmDocumentArn", # required
+    #                       targets: [ # required
+    #                         {
+    #                           key: "SsmTargetKey", # required
+    #                           values: ["SsmTargetValue"], # required
+    #                         }
+    #                       ],
+    #                       parameters: {
+    #                         "SsmParameterKey" => ["SsmParameterValue"]
+    #                       },
+    #                       document_version: "SsmDocumentVersion"
+    #                     }
+    #                   },
+    #                   retry_interval_minutes: 1.0, # required
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
     #                 }
     #               },
-    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"], # required
+    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"], # required
     #             }
     #           ],
-    #           workflow_target_action: "activate" # One of: ["activate", "deactivate"], # required
+    #           workflow_target_action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           workflow_target_region: "Region",
     #           workflow_description: "String"
     #         }
@@ -1127,7 +1618,7 @@ module Aws::ARCRegionswitch
     #         {
     #           description: "String",
     #           target_region: "Region", # required
-    #           action: "activate" # One of: ["activate", "deactivate"], # required
+    #           action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           conditions: [ # required
     #             {
     #               associated_alarm_name: "String", # required
@@ -1137,6 +1628,16 @@ module Aws::ARCRegionswitch
     #           min_delay_minutes_between_executions: 1, # required
     #         }
     #       ],
+    #       report_configuration: {
+    #         report_output: [{
+    #           # One of:
+    #           s3_configuration: {
+    #             bucket_path: "String",
+    #             bucket_owner: "AccountId"
+    #           }
+    #         }]
+    #       },
+    #       service_quota_checks_enabled: false,
     #       name: "PlanName", # required
     #       regions: ["Region"], # required
     #       recovery_approach: "activeActive" # One of: ["activeActive", "activePassive"], # required
@@ -1146,6 +1647,21 @@ module Aws::ARCRegionswitch
     #       updated_at: Time.now
     #     },
     #     actual_recovery_time: "Duration",
+    #     generated_report_details: [
+    #       {
+    #         report_generation_time: Time.now,
+    #         report_output: {
+    #           # One of:
+    #           s3_report_output: {
+    #             s3_object_key: "String"
+    #           },
+    #           failed_report_output: {
+    #             error_code: "insufficientPermissions" # One of: ["insufficientPermissions", "invalidResource", "configurationError"],
+    #             error_message: "String"
+    #           }
+    #         }
+    #       }
+    #     ],
     #     next_token: "String"
     #   }
     # @return [Types::GetPlanExecutionResponse]
@@ -1184,11 +1700,12 @@ module Aws::ARCRegionswitch
     #                     {
     #                       cross_account_role: "IamRoleArn",
     #                       external_id: "String",
-    #                       arn: "LambdaArn"
+    #                       arn: "LambdaArn",
+    #                       payload: "LambdaPayload"
     #                     }
     #                   ],
     #                   retry_interval_minutes: 1.0, # required
-    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion"], # required
+    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"], # required
     #                   ungraceful: {
     #                     behavior: "skip" # One of: ["skip"]
     #                   }
@@ -1206,7 +1723,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 execution_approval_config: {
     #                   timeout_minutes: 1,
@@ -1260,7 +1778,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 eks_resource_scaling_config: {
     #                   timeout_minutes: 1,
@@ -1304,12 +1823,123 @@ module Aws::ARCRegionswitch
     #                       region: "Region"
     #                     }
     #                   ]
+    #                 },
+    #                 document_db_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "DocumentDbGlobalClusterIdentifier", # required
+    #                   database_cluster_arns: ["DocumentDbClusterArn"], # required
+    #                 },
+    #                 rds_promote_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 rds_create_cross_region_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 lambda_event_source_mapping_config: {
+    #                   timeout_minutes: 1,
+    #                   action: "enable" # One of: ["enable", "disable"], # required
+    #                   region_event_source_mappings: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       arn: "EventSourceMappingArn", # required
+    #                     }
+    #                   },
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
+    #                 },
+    #                 aurora_serverless_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   target_percent: 1
+    #                 },
+    #                 aurora_provisioned_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   instance_arns: { # required
+    #                     "Region" => "AuroraInstanceArn"
+    #                   }
+    #                 },
+    #                 neptune_global_database_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "NeptuneGlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "NeptuneClusterArn"
+    #                   }
+    #                 },
+    #                 rds_switchover_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   },
+    #                   ungraceful: {
+    #                     ungraceful: "promoteReadReplica" # One of: ["promoteReadReplica"]
+    #                   }
+    #                 },
+    #                 ssm_send_command_config: {
+    #                   timeout_minutes: 1,
+    #                   region_documents: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       document_arn: "SsmDocumentArn", # required
+    #                       targets: [ # required
+    #                         {
+    #                           key: "SsmTargetKey", # required
+    #                           values: ["SsmTargetValue"], # required
+    #                         }
+    #                       ],
+    #                       parameters: {
+    #                         "SsmParameterKey" => ["SsmParameterValue"]
+    #                       },
+    #                       document_version: "SsmDocumentVersion"
+    #                     }
+    #                   },
+    #                   retry_interval_minutes: 1.0, # required
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
     #                 }
     #               },
-    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"], # required
+    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"], # required
     #             }
     #           ],
-    #           workflow_target_action: "activate" # One of: ["activate", "deactivate"], # required
+    #           workflow_target_action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           workflow_target_region: "Region",
     #           workflow_description: "String"
     #         }
@@ -1328,7 +1958,7 @@ module Aws::ARCRegionswitch
     #         {
     #           description: "String",
     #           target_region: "Region", # required
-    #           action: "activate" # One of: ["activate", "deactivate"], # required
+    #           action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           conditions: [ # required
     #             {
     #               associated_alarm_name: "String", # required
@@ -1338,6 +1968,16 @@ module Aws::ARCRegionswitch
     #           min_delay_minutes_between_executions: 1, # required
     #         }
     #       ],
+    #       report_configuration: {
+    #         report_output: [{
+    #           # One of:
+    #           s3_configuration: {
+    #             bucket_path: "String",
+    #             bucket_owner: "AccountId"
+    #           }
+    #         }]
+    #       },
+    #       service_quota_checks_enabled: false,
     #       name: "PlanName", # required
     #       regions: ["Region"], # required
     #       recovery_approach: "activeActive" # One of: ["activeActive", "activePassive"], # required
@@ -1381,9 +2021,9 @@ module Aws::ARCRegionswitch
     #     items: [
     #       {
     #         timestamp: Time.now,
-    #         type: "unknown" # One of: ["unknown", "executionPending", "executionStarted", "executionSucceeded", "executionFailed", "executionPausing", "executionPaused", "executionCanceling", "executionCanceled", "executionPendingApproval", "executionBehaviorChangedToUngraceful", "executionBehaviorChangedToGraceful", "executionPendingChildPlanManualApproval", "executionSuccessMonitoringApplicationHealth", "stepStarted", "stepUpdate", "stepSucceeded", "stepFailed", "stepSkipped", "stepPausedByError", "stepPausedByOperator", "stepCanceled", "stepPendingApproval", "stepExecutionBehaviorChangedToUngraceful", "stepPendingApplicationHealthMonitor"],
+    #         type: "unknown" # One of: ["unknown", "executionPending", "executionStarted", "executionSucceeded", "executionFailed", "executionPausing", "executionPaused", "executionCanceling", "executionCanceled", "executionPendingApproval", "executionBehaviorChangedToUngraceful", "executionBehaviorChangedToGraceful", "executionPendingChildPlanManualApproval", "executionSuccessMonitoringApplicationHealth", "stepStarted", "stepUpdate", "stepSucceeded", "stepFailed", "stepSkipped", "stepPausedByError", "stepPausedByOperator", "stepCanceled", "stepPendingApproval", "stepExecutionBehaviorChangedToUngraceful", "stepPendingApplicationHealthMonitor", "planEvaluationWarning"],
     #         step_name: "StepName",
-    #         execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"],
+    #         execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"],
     #         resources: ["String"],
     #         error: "String",
     #         description: "String",
@@ -1432,8 +2072,9 @@ module Aws::ARCRegionswitch
     #         end_time: Time.now,
     #         mode: "graceful" # One of: ["graceful", "ungraceful"], # required
     #         execution_state: "inProgress" # One of: ["inProgress", "pausedByFailedStep", "pausedByOperator", "completed", "completedWithExceptions", "canceled", "planExecutionTimedOut", "pendingManualApproval", "failed", "pending", "completedMonitoringApplicationHealth"], # required
-    #         execution_action: "activate" # One of: ["activate", "deactivate"], # required
+    #         execution_action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #         execution_region: "String", # required
+    #         recovery_execution_id: "String",
     #         actual_recovery_time: "Duration"
     #       }
     #     ],
@@ -1534,7 +2175,7 @@ module Aws::ARCRegionswitch
     # @option params [String] :record_name
     #   <p>The record name for the health checks.</p>
     # @option params [Integer] :max_results
-    #   <p>The number of objects that you want to return with this call.</p>
+    #   <p>The maximum number of results to return in the response.</p>
     # @option params [String] :next_token
     #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
     # @example Request syntax with placeholder values
@@ -1555,6 +2196,7 @@ module Aws::ARCRegionswitch
     #         hosted_zone_id: "Route53HostedZoneId", # required
     #         record_name: "Route53RecordName", # required
     #         health_check_id: "Route53HealthCheckId",
+    #         status: "healthy" # One of: ["healthy", "unhealthy", "unknown"],
     #         region: "Region", # required
     #       }
     #     ],
@@ -1563,6 +2205,121 @@ module Aws::ARCRegionswitch
     # @return [Types::ListRoute53HealthChecksResponse]
     def list_route53_health_checks(params = {}, options = {})
       request = build_request(:list_route53_health_checks, params)
+      request.send_request(options)
+    end
+
+    # <p>List the Amazon Route 53 health checks in a specific Amazon Web Services Region.</p>
+    # @param [Hash, Types::ListRoute53HealthChecksInRegionRequest] params
+    # @option params [String] :arn
+    #   <p>The Amazon Resource Name (ARN) of the Arc Region Switch Plan.</p>
+    # @option params [String] :hosted_zone_id
+    #   <p>The hosted zone ID for the health checks.</p>
+    # @option params [String] :record_name
+    #   <p>The record name for the health checks.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
+    # @example Example ListRoute53HealthChecksInRegion
+    #   # Example operation for list_route53_health_checks_in_region
+    #   params = {
+    #     arn: "arn:aws:arc-region-switch::123456789012:plan/example:000000",
+    #     hosted_zone_id: "Z0123456789ABCDEFGHI",
+    #     record_name: "my.record.name",
+    #     max_results: 10,
+    #     next_token: "eyJNYXJrZXIiOiBudWxsLCAiYm90b190cnVuY2F0ZV9hbW91bnQiOiAxfQ"
+    #   }
+    #   options = {}
+    #   response = client.list_route53_health_checks_in_region(params, options)
+    #   response.to_h #=>
+    #   {
+    #     health_checks: [
+    #       {
+    #         hosted_zone_id: "Z0123456789ABCDEFGHI",
+    #         record_name: "my.record.name",
+    #         health_check_id: "01234567-8901-abcd-efgh-ijklmnop0123",
+    #         status: healthy,
+    #         region: "us-west-2"
+    #       },
+    #       {
+    #         hosted_zone_id: "Z0123456789ABCDEFGHI",
+    #         record_name: "my.record.name",
+    #         health_check_id: "zyxwvuts-rqpo-9876-5432-10nmlkji0123",
+    #         status: healthy,
+    #         region: "us-east-1"
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "PlanArn", # required
+    #     hosted_zone_id: "Route53HostedZoneId",
+    #     record_name: "Route53RecordName",
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_route53_health_checks_in_region(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     health_checks: [
+    #       {
+    #         hosted_zone_id: "Route53HostedZoneId", # required
+    #         record_name: "Route53RecordName", # required
+    #         health_check_id: "Route53HealthCheckId",
+    #         status: "healthy" # One of: ["healthy", "unhealthy", "unknown"],
+    #         region: "Region", # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListRoute53HealthChecksInRegionResponse]
+    def list_route53_health_checks_in_region(params = {}, options = {})
+      request = build_request(:list_route53_health_checks_in_region, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the service quota warnings for the plans that you can access. Region switch creates a warning when the applied quota value in one Region of a plan is lower than the value required for the matching resource in another Region or account in the plan.</p> <p>Returns the warnings for the plans that you own and for plans that are shared with your account through Resource Access Manager (RAM). To return warnings for specific plans, provide a list of plan Amazon Resource Names (ARNs). Region switch ignores any plan ARN that you can't access. If you don't provide any plan ARNs, Region switch returns the warnings for all of your accessible plans.</p>
+    # @param [Hash, Types::ListServiceQuotaWarningsRequest] params
+    # @option params [Array<String>] :plan_arns
+    #   <p>The Amazon Resource Names (ARNs) of the plans to return service quota warnings for. You can specify up to 100 plan ARNs. Region switch ignores any plan ARN that you can't access. If you omit this parameter, Region switch returns the warnings for all of your accessible plans.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with this call. Valid values are <code>1</code> to <code>100</code>. If you don't specify a value, the operation returns up to the maximum number of results.</p>
+    # @option params [String] :next_token
+    #   <p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     plan_arns: ["PlanArn"],
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_service_quota_warnings(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     service_quota_warning_summaries: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         quota_region: "Region", # required
+    #         service_code: "String",
+    #         quota_code: "String",
+    #         quota_name: "String",
+    #         status: "pending" # One of: ["pending", "denied", "insufficientPermissions", "maxRegionSwitchRequestsExceeded", "maxAccountRequestsExceeded"], # required
+    #         plan_arn: "PlanArn", # required
+    #         request_id: "String",
+    #         case_id: "String",
+    #         warning_message: "String",
+    #         last_checked_at: Time.now,
+    #         warning_created_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListServiceQuotaWarningsResponse]
+    def list_service_quota_warnings(params = {}, options = {})
+      request = build_request(:list_service_quota_warnings, params)
       request.send_request(options)
     end
 
@@ -1589,28 +2346,34 @@ module Aws::ARCRegionswitch
       request.send_request(options)
     end
 
-    # <p>Starts the execution of a Region switch plan. You can execute a plan in either PRACTICE or RECOVERY mode.</p> <p>In PRACTICE mode, the execution simulates the steps without making actual changes to your application's traffic routing. In RECOVERY mode, the execution performs actual changes to shift traffic between Regions.</p>
+    # <p>Starts the execution of a Region switch plan. You can execute a plan in either <code>graceful</code> or <code>ungraceful</code> mode.</p> <p>Specifing <code>ungraceful</code> mode either changes the behavior of the execution blocks in a workflow or skips specific execution blocks.</p>
     # @param [Hash, Types::StartPlanExecutionRequest] params
     # @option params [String] :plan_arn
     #   <p>The Amazon Resource Name (ARN) of the plan to execute.</p>
     # @option params [String] :target_region
     #   <p>The Amazon Web Services Region to target with this execution. This is the Region that traffic will be shifted to or from, depending on the action.</p>
     # @option params [String] :action
-    #   <p>The action to perform. Valid values are ACTIVATE (to shift traffic to the target Region) or DEACTIVATE (to shift traffic away from the target Region).</p>
+    #   <p>The action to perform. Valid values are <code>activate</code> (to shift traffic to the target Region) or <code>deactivate</code> (to shift traffic away from the target Region).</p>
     # @option params [String] :mode
-    #   <p>The plan execution mode. Valid values are <code>Practice</code>, for testing without making actual changes, or <code>Recovery</code>, for actual traffic shifting and application recovery.</p>
+    #   <p>The plan execution mode. Valid values are <code>graceful</code>, for starting the execution in graceful mode, or <code>ungraceful</code>, for starting the execution in ungraceful mode.</p>
     # @option params [String] :comment
     #   <p>An optional comment explaining why the plan execution is being started.</p>
     # @option params [String] :latest_version
     #   <p>A boolean value indicating whether to use the latest version of the plan. If set to false, you must specify a specific version.</p>
+    # @option params [String] :recovery_execution_id
+    #   <p>The execution identifier of the recovery execution that ran in the opposite region post-recovery is ran in. Required when starting a post-recovery execution.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request and returns the result of the original successful request. If you don't provide a client token, the service automatically generates one. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     plan_arn: "PlanArn", # required
     #     target_region: "String", # required
-    #     action: "activate" # One of: ["activate", "deactivate"], # required
+    #     action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #     mode: "graceful" # One of: ["graceful", "ungraceful"],
     #     comment: "ExecutionComment",
-    #     latest_version: "String"
+    #     latest_version: "String",
+    #     recovery_execution_id: "RecoveryExecutionId",
+    #     client_token: "String"
     #   }
     #   options = {}
     #   response = client.start_plan_execution(params, options)
@@ -1691,6 +2454,10 @@ module Aws::ARCRegionswitch
     #   <p>The updated CloudWatch alarms associated with the plan.</p>
     # @option params [Array<Types::Trigger>] :triggers
     #   <p>The updated conditions that can automatically trigger the execution of the plan.</p>
+    # @option params [Types::ReportConfiguration] :report_configuration
+    #   <p>The updated report configuration for the plan.</p>
+    # @option params [Boolean] :service_quota_checks_enabled
+    #   <p>Specifies whether service quota checks are enabled for the Region switch plan.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "PlanArn", # required
@@ -1709,11 +2476,12 @@ module Aws::ARCRegionswitch
     #                   {
     #                     cross_account_role: "IamRoleArn",
     #                     external_id: "String",
-    #                     arn: "LambdaArn"
+    #                     arn: "LambdaArn",
+    #                     payload: "LambdaPayload"
     #                   }
     #                 ],
     #                 retry_interval_minutes: 1.0, # required
-    #                 region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion"], # required
+    #                 region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"], # required
     #                 ungraceful: {
     #                   behavior: "skip" # One of: ["skip"]
     #                 }
@@ -1731,7 +2499,8 @@ module Aws::ARCRegionswitch
     #                   minimum_success_percentage: 1, # required
     #                 },
     #                 target_percent: 1,
-    #                 capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"]
+    #                 capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"],
+    #                 wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #               },
     #               execution_approval_config: {
     #                 timeout_minutes: 1,
@@ -1785,7 +2554,8 @@ module Aws::ARCRegionswitch
     #                   minimum_success_percentage: 1, # required
     #                 },
     #                 target_percent: 1,
-    #                 capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"]
+    #                 capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"],
+    #                 wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #               },
     #               eks_resource_scaling_config: {
     #                 timeout_minutes: 1,
@@ -1829,12 +2599,123 @@ module Aws::ARCRegionswitch
     #                     region: "Region"
     #                   }
     #                 ]
+    #               },
+    #               document_db_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                 ungraceful: {
+    #                   ungraceful: "failover" # One of: ["failover"]
+    #                 },
+    #                 global_cluster_identifier: "DocumentDbGlobalClusterIdentifier", # required
+    #                 database_cluster_arns: ["DocumentDbClusterArn"], # required
+    #               },
+    #               rds_promote_read_replica_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 db_instance_arn_map: { # required
+    #                   "Region" => "RdsDbInstanceArn"
+    #                 }
+    #               },
+    #               rds_create_cross_region_read_replica_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 db_instance_arn_map: { # required
+    #                   "Region" => "RdsDbInstanceArn"
+    #                 }
+    #               },
+    #               lambda_event_source_mapping_config: {
+    #                 timeout_minutes: 1,
+    #                 action: "enable" # One of: ["enable", "disable"], # required
+    #                 region_event_source_mappings: { # required
+    #                   "Region" => {
+    #                     cross_account_role: "IamRoleArn",
+    #                     external_id: "String",
+    #                     arn: "EventSourceMappingArn", # required
+    #                   }
+    #                 },
+    #                 ungraceful: {
+    #                   behavior: "skip" # One of: ["skip"]
+    #                 }
+    #               },
+    #               aurora_serverless_scaling_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                 region_database_cluster_arns: { # required
+    #                   "Region" => "AuroraClusterArn"
+    #                 },
+    #                 target_percent: 1
+    #               },
+    #               aurora_provisioned_scaling_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                 region_database_cluster_arns: { # required
+    #                   "Region" => "AuroraClusterArn"
+    #                 },
+    #                 instance_arns: { # required
+    #                   "Region" => "AuroraInstanceArn"
+    #                 }
+    #               },
+    #               neptune_global_database_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                 ungraceful: {
+    #                   ungraceful: "failover" # One of: ["failover"]
+    #                 },
+    #                 global_cluster_identifier: "NeptuneGlobalClusterIdentifier", # required
+    #                 region_database_cluster_arns: { # required
+    #                   "Region" => "NeptuneClusterArn"
+    #                 }
+    #               },
+    #               rds_switchover_read_replica_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 db_instance_arn_map: { # required
+    #                   "Region" => "RdsDbInstanceArn"
+    #                 },
+    #                 ungraceful: {
+    #                   ungraceful: "promoteReadReplica" # One of: ["promoteReadReplica"]
+    #                 }
+    #               },
+    #               ssm_send_command_config: {
+    #                 timeout_minutes: 1,
+    #                 region_documents: { # required
+    #                   "Region" => {
+    #                     cross_account_role: "IamRoleArn",
+    #                     external_id: "String",
+    #                     document_arn: "SsmDocumentArn", # required
+    #                     targets: [ # required
+    #                       {
+    #                         key: "SsmTargetKey", # required
+    #                         values: ["SsmTargetValue"], # required
+    #                       }
+    #                     ],
+    #                     parameters: {
+    #                       "SsmParameterKey" => ["SsmParameterValue"]
+    #                     },
+    #                     document_version: "SsmDocumentVersion"
+    #                   }
+    #                 },
+    #                 retry_interval_minutes: 1.0, # required
+    #                 ungraceful: {
+    #                   behavior: "skip" # One of: ["skip"]
+    #                 }
     #               }
     #             },
-    #             execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"], # required
+    #             execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"], # required
     #           }
     #         ],
-    #         workflow_target_action: "activate" # One of: ["activate", "deactivate"], # required
+    #         workflow_target_action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #         workflow_target_region: "Region",
     #         workflow_description: "String"
     #       }
@@ -1853,7 +2734,7 @@ module Aws::ARCRegionswitch
     #       {
     #         description: "String",
     #         target_region: "Region", # required
-    #         action: "activate" # One of: ["activate", "deactivate"], # required
+    #         action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #         conditions: [ # required
     #           {
     #             associated_alarm_name: "String", # required
@@ -1862,7 +2743,17 @@ module Aws::ARCRegionswitch
     #         ],
     #         min_delay_minutes_between_executions: 1, # required
     #       }
-    #     ]
+    #     ],
+    #     report_configuration: {
+    #       report_output: [{
+    #         # One of:
+    #         s3_configuration: {
+    #           bucket_path: "String",
+    #           bucket_owner: "AccountId"
+    #         }
+    #       }]
+    #     },
+    #     service_quota_checks_enabled: false
     #   }
     #   options = {}
     #   response = client.update_plan(params, options)
@@ -1886,11 +2777,12 @@ module Aws::ARCRegionswitch
     #                     {
     #                       cross_account_role: "IamRoleArn",
     #                       external_id: "String",
-    #                       arn: "LambdaArn"
+    #                       arn: "LambdaArn",
+    #                       payload: "LambdaPayload"
     #                     }
     #                   ],
     #                   retry_interval_minutes: 1.0, # required
-    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion"], # required
+    #                   region_to_run: "activatingRegion" # One of: ["activatingRegion", "deactivatingRegion", "activeRegion", "inactiveRegion"], # required
     #                   ungraceful: {
     #                     behavior: "skip" # One of: ["skip"]
     #                   }
@@ -1908,7 +2800,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "autoscalingMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 execution_approval_config: {
     #                   timeout_minutes: 1,
@@ -1962,7 +2855,8 @@ module Aws::ARCRegionswitch
     #                     minimum_success_percentage: 1, # required
     #                   },
     #                   target_percent: 1,
-    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"]
+    #                   capacity_monitoring_approach: "sampledMaxInLast24Hours" # One of: ["sampledMaxInLast24Hours", "containerInsightsMaxInLast24Hours"],
+    #                   wait_elb_target_group_healthy: "enabled" # One of: ["enabled", "disabled"]
     #                 },
     #                 eks_resource_scaling_config: {
     #                   timeout_minutes: 1,
@@ -2006,12 +2900,123 @@ module Aws::ARCRegionswitch
     #                       region: "Region"
     #                     }
     #                   ]
+    #                 },
+    #                 document_db_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "DocumentDbGlobalClusterIdentifier", # required
+    #                   database_cluster_arns: ["DocumentDbClusterArn"], # required
+    #                 },
+    #                 rds_promote_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 rds_create_cross_region_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   }
+    #                 },
+    #                 lambda_event_source_mapping_config: {
+    #                   timeout_minutes: 1,
+    #                   action: "enable" # One of: ["enable", "disable"], # required
+    #                   region_event_source_mappings: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       arn: "EventSourceMappingArn", # required
+    #                     }
+    #                   },
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
+    #                 },
+    #                 aurora_serverless_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   target_percent: 1
+    #                 },
+    #                 aurora_provisioned_scaling_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "AuroraClusterArn"
+    #                   },
+    #                   instance_arns: { # required
+    #                     "Region" => "AuroraInstanceArn"
+    #                   }
+    #                 },
+    #                 neptune_global_database_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   behavior: "switchoverOnly" # One of: ["switchoverOnly", "failover"], # required
+    #                   ungraceful: {
+    #                     ungraceful: "failover" # One of: ["failover"]
+    #                   },
+    #                   global_cluster_identifier: "NeptuneGlobalClusterIdentifier", # required
+    #                   region_database_cluster_arns: { # required
+    #                     "Region" => "NeptuneClusterArn"
+    #                   }
+    #                 },
+    #                 rds_switchover_read_replica_config: {
+    #                   timeout_minutes: 1,
+    #                   cross_account_role: "IamRoleArn",
+    #                   external_id: "String",
+    #                   db_instance_arn_map: { # required
+    #                     "Region" => "RdsDbInstanceArn"
+    #                   },
+    #                   ungraceful: {
+    #                     ungraceful: "promoteReadReplica" # One of: ["promoteReadReplica"]
+    #                   }
+    #                 },
+    #                 ssm_send_command_config: {
+    #                   timeout_minutes: 1,
+    #                   region_documents: { # required
+    #                     "Region" => {
+    #                       cross_account_role: "IamRoleArn",
+    #                       external_id: "String",
+    #                       document_arn: "SsmDocumentArn", # required
+    #                       targets: [ # required
+    #                         {
+    #                           key: "SsmTargetKey", # required
+    #                           values: ["SsmTargetValue"], # required
+    #                         }
+    #                       ],
+    #                       parameters: {
+    #                         "SsmParameterKey" => ["SsmParameterValue"]
+    #                       },
+    #                       document_version: "SsmDocumentVersion"
+    #                     }
+    #                   },
+    #                   retry_interval_minutes: 1.0, # required
+    #                   ungraceful: {
+    #                     behavior: "skip" # One of: ["skip"]
+    #                   }
     #                 }
     #               },
-    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"], # required
+    #               execution_block_type: "CustomActionLambda" # One of: ["CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping", "AuroraServerlessScaling", "AuroraProvisionedScaling", "NeptuneGlobalDatabase", "RdsSwitchoverReadReplica", "SSMSendCommand"], # required
     #             }
     #           ],
-    #           workflow_target_action: "activate" # One of: ["activate", "deactivate"], # required
+    #           workflow_target_action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           workflow_target_region: "Region",
     #           workflow_description: "String"
     #         }
@@ -2030,7 +3035,7 @@ module Aws::ARCRegionswitch
     #         {
     #           description: "String",
     #           target_region: "Region", # required
-    #           action: "activate" # One of: ["activate", "deactivate"], # required
+    #           action: "activate" # One of: ["activate", "deactivate", "postRecovery"], # required
     #           conditions: [ # required
     #             {
     #               associated_alarm_name: "String", # required
@@ -2040,6 +3045,16 @@ module Aws::ARCRegionswitch
     #           min_delay_minutes_between_executions: 1, # required
     #         }
     #       ],
+    #       report_configuration: {
+    #         report_output: [{
+    #           # One of:
+    #           s3_configuration: {
+    #             bucket_path: "String",
+    #             bucket_owner: "AccountId"
+    #           }
+    #         }]
+    #       },
+    #       service_quota_checks_enabled: false,
     #       name: "PlanName", # required
     #       regions: ["Region"], # required
     #       recovery_approach: "activeActive" # One of: ["activeActive", "activePassive"], # required

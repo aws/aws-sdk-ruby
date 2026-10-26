@@ -3,6 +3,7 @@ module Aws::KMS
     include Smithy::Schema::Shapes
 
     AWSAccountIdType: StringShape
+    AccountIdType: StringShape
     AlgorithmSpec: EnumShape
     AliasList: ListShape
     AliasListEntry: StructureShape
@@ -22,6 +23,7 @@ module Aws::KMS
     CloudHsmClusterNotActiveException: StructureShape
     CloudHsmClusterNotFoundException: StructureShape
     CloudHsmClusterNotRelatedException: StructureShape
+    CloudTrailEventIdType: StringShape
     ConflictException: StructureShape
     ConnectCustomKeyStoreRequest: StructureShape
     ConnectCustomKeyStoreResponse: StructureShape
@@ -67,6 +69,8 @@ module Aws::KMS
     DisabledException: StructureShape
     DisconnectCustomKeyStoreRequest: StructureShape
     DisconnectCustomKeyStoreResponse: StructureShape
+    DryRunModifierList: ListShape
+    DryRunModifierType: EnumShape
     DryRunOperationException: StructureShape
     EnableKeyRequest: StructureShape
     EnableKeyRotationRequest: StructureShape
@@ -92,6 +96,8 @@ module Aws::KMS
     GenerateMacResponse: StructureShape
     GenerateRandomRequest: StructureShape
     GenerateRandomResponse: StructureShape
+    GetKeyLastUsageRequest: StructureShape
+    GetKeyLastUsageResponse: StructureShape
     GetKeyPolicyRequest: StructureShape
     GetKeyPolicyResponse: StructureShape
     GetKeyRotationStatusRequest: StructureShape
@@ -100,6 +106,7 @@ module Aws::KMS
     GetParametersForImportResponse: StructureShape
     GetPublicKeyRequest: StructureShape
     GetPublicKeyResponse: StructureShape
+    GrantConstraintSourceArnType: StringShape
     GrantConstraints: StructureShape
     GrantIdType: StringShape
     GrantList: ListShape
@@ -133,6 +140,8 @@ module Aws::KMS
     KeyAgreementAlgorithmSpecList: ListShape
     KeyEncryptionMechanism: EnumShape
     KeyIdType: StringShape
+    KeyLastUsageData: StructureShape
+    KeyLastUsageTrackingOperation: EnumShape
     KeyList: ListShape
     KeyListEntry: StructureShape
     KeyManagerType: EnumShape
@@ -144,6 +153,7 @@ module Aws::KMS
     KeyStorePasswordType: StringShape
     KeyUnavailableException: StructureShape
     KeyUsageType: EnumShape
+    KmsRequestIdType: StringShape
     LimitExceededException: StructureShape
     LimitType: IntegerShape
     ListAliasesRequest: StructureShape
@@ -197,6 +207,7 @@ module Aws::KMS
     RotationsListEntry: StructureShape
     ScheduleKeyDeletionRequest: StructureShape
     ScheduleKeyDeletionResponse: StructureShape
+    ServicePrincipalType: StringShape
     SignRequest: StructureShape
     SignResponse: StructureShape
     SigningAlgorithmSpec: EnumShape

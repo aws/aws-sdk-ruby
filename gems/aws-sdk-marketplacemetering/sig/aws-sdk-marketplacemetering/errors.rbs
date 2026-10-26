@@ -12,6 +12,9 @@ module Aws::MarketplaceMetering
     class ExpiredTokenException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class IdempotencyConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InternalServiceErrorException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -19,6 +22,9 @@ module Aws::MarketplaceMetering
       def message: () -> String?
     end
     class InvalidEndpointRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidLicenseException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class InvalidProductCodeException < Smithy::Client::ServiceError

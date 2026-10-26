@@ -134,6 +134,42 @@ module Aws::IoTSiteWise
       attr_accessor notification_lambda_arn: String?
     end
 
+    class Annotation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ApplicationStatus
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+        ?workspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor workspace_name: String?
+    end
+
     class AssetBindingValueFilter
       include Smithy::Schema::Structure
 
@@ -734,6 +770,23 @@ module Aws::IoTSiteWise
       attr_accessor client_token: String?
     end
 
+    class AssociateDataSegmentEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_dataset_id: String,
+        ?time_series_id: String,
+        ?start_timestamp: Types::TimeInNanos,
+        ?end_timestamp: Types::TimeInNanos,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_dataset_id: String?
+      attr_accessor time_series_id: String?
+      attr_accessor start_timestamp: Types::TimeInNanos?
+      attr_accessor end_timestamp: Types::TimeInNanos?
+    end
+
     class AssociateTimeSeriesToAssetPropertyRequest
       include Smithy::Schema::Structure
 
@@ -796,6 +849,38 @@ module Aws::IoTSiteWise
       SSO: String
     end
 
+    class BatchAssociateDataSegmentsToDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?workspace_name: String,
+        ?associate_data_segment_entries: Array[Types::AssociateDataSegmentEntry],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor associate_data_segment_entries: Array[Types::AssociateDataSegmentEntry]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchAssociateDataSegmentsToDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_version: String,
+        ?failed_associations: Array[Types::FailedDataSegmentAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_version: String?
+      attr_accessor failed_associations: Array[Types::FailedDataSegmentAssociation]?
+    end
+
     class BatchAssociateProjectAssetsRequest
       include Smithy::Schema::Structure
 
@@ -820,6 +905,70 @@ module Aws::IoTSiteWise
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor errors: Array[Types::AssetErrorDetails]?
+    end
+
+    class BatchDeleteDatasetDataSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?workspace_name: String,
+        ?delete_data_segment_entries: Array[Types::DeleteDataSegmentEntry],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor delete_data_segment_entries: Array[Types::DeleteDataSegmentEntry]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchDeleteDatasetDataSegmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_version: String,
+        ?errors: Array[Types::FailedDataSegmentDeletion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_version: String?
+      attr_accessor errors: Array[Types::FailedDataSegmentDeletion]?
+    end
+
+    class BatchDisassociateDataSegmentsFromDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?workspace_name: String,
+        ?disassociate_data_segment_entries: Array[Types::DisassociateDataSegmentEntry],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor disassociate_data_segment_entries: Array[Types::DisassociateDataSegmentEntry]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchDisassociateDataSegmentsFromDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_version: String,
+        ?failed_disassociations: Array[Types::FailedDataSegmentDisassociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_version: String?
+      attr_accessor failed_disassociations: Array[Types::FailedDataSegmentDisassociation]?
     end
 
     class BatchDisassociateProjectAssetsRequest
@@ -1268,6 +1417,86 @@ module Aws::IoTSiteWise
       attr_accessor error_entries: Array[Types::BatchPutAssetPropertyErrorEntry]?
     end
 
+    class CancelEnrichmentJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class CancelEnrichmentJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+    end
+
+    class CancelPipelineExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?pipeline_name: String,
+        ?pipeline_execution_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor pipeline_name: String?
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor reason: String?
+    end
+
+    class CancelPipelineExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class CancelQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor query_id: String?
+    end
+
+    class CancelQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor status: String?
+    end
+
     module CapabilitySyncStatus
       IN_SYNC: String
       OUT_OF_SYNC: String
@@ -1300,6 +1529,19 @@ module Aws::IoTSiteWise
 
       attr_accessor name: String?
       attr_accessor type: Types::ColumnType?
+    end
+
+    class ColumnInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
     end
 
     module ColumnName
@@ -1500,6 +1742,95 @@ module Aws::IoTSiteWise
       CLOUD: String
     end
 
+    class ComputeNode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_node_name: String,
+        ?task_name: String,
+        ?environment_variables: Hash[String, String],
+        ?depends_on: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_node_name: String?
+      attr_accessor task_name: String?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor depends_on: Array[String]?
+    end
+
+    module ComputeNodeErrorCode
+      VALIDATION_ERROR: String
+      INTERNAL_FAILURE: String
+      EXECUTION_ERROR: String
+      TIMED_OUT: String
+    end
+
+    class ComputeNodeExecutionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_node_name: String,
+        ?task_name: String,
+        ?task_arn: String,
+        ?task_version: String,
+        ?depends_on: Array[String],
+        ?status: Types::ComputeNodeExecutionStatus,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?execution_environment_variables: Hash[String, String],
+        ?execution_mounts: Array[Types::Mount],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_node_name: String?
+      attr_accessor task_name: String?
+      attr_accessor task_arn: String?
+      attr_accessor task_version: String?
+      attr_accessor depends_on: Array[String]?
+      attr_accessor status: Types::ComputeNodeExecutionStatus?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor execution_environment_variables: Hash[String, String]?
+      attr_accessor execution_mounts: Array[Types::Mount]?
+    end
+
+    module ComputeNodeExecutionState
+      NOT_STARTED: String
+      QUEUED: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class ComputeNodeExecutionStateDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?details: Array[Types::DetailedPipelineError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor details: Array[Types::DetailedPipelineError]?
+    end
+
+    class ComputeNodeExecutionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_details: Types::ComputeNodeExecutionStateDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_details: Types::ComputeNodeExecutionStateDetails?
+    end
+
     class ConfigurationErrorDetails
       include Smithy::Schema::Structure
 
@@ -1545,6 +1876,33 @@ module Aws::IoTSiteWise
       attr_accessor message: String?
       attr_accessor resource_id: String?
       attr_accessor resource_arn: String?
+    end
+
+    class ContainerTaskConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ecr_uri: String,
+        ?task_execution_role: String,
+        ?processing_type: String,
+        ?processing_unit: String,
+        ?ephemeral_storage_configuration: Types::EphemeralStorageConfiguration,
+        ?command: Array[String],
+        ?timeout_seconds: Integer,
+        ?environment_variables: Hash[String, String],
+        ?mounts: Array[Types::Mount],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ecr_uri: String?
+      attr_accessor task_execution_role: String?
+      attr_accessor processing_type: String?
+      attr_accessor processing_unit: String?
+      attr_accessor ephemeral_storage_configuration: Types::EphemeralStorageConfiguration?
+      attr_accessor command: Array[String]?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor mounts: Array[Types::Mount]?
     end
 
     class Content
@@ -1596,6 +1954,46 @@ module Aws::IoTSiteWise
       attr_accessor access_policy_arn: String?
     end
 
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?idc_instance_arn: String,
+        ?workspace_name: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor idc_instance_arn: String?
+      attr_accessor workspace_name: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?dns_subdomain: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor dns_subdomain: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
     class CreateAssetModelCompositeModelRequest
       include Smithy::Schema::Structure
 
@@ -1638,12 +2036,14 @@ module Aws::IoTSiteWise
         ?asset_model_composite_model_id: String,
         ?asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment],
         ?asset_model_status: Types::AssetModelStatus,
+        ?asset_model_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor asset_model_composite_model_id: String?
       attr_accessor asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment]?
       attr_accessor asset_model_status: Types::AssetModelStatus?
+      attr_accessor asset_model_id: String?
     end
 
     class CreateAssetModelRequest
@@ -1739,6 +2139,8 @@ module Aws::IoTSiteWise
         ?job_configuration: Types::JobConfiguration,
         ?adaptive_ingestion: bool,
         ?delete_files_after_import: bool,
+        ?dataset_id: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1749,6 +2151,8 @@ module Aws::IoTSiteWise
       attr_accessor job_configuration: Types::JobConfiguration?
       attr_accessor adaptive_ingestion: bool?
       attr_accessor delete_files_after_import: bool?
+      attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
     end
 
     class CreateBulkImportJobResponse
@@ -1836,6 +2240,38 @@ module Aws::IoTSiteWise
       attr_accessor dashboard_arn: String?
     end
 
+    class CreateDatasetExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?client_token: String,
+        ?destination_s3_uri: String,
+        ?input: Types::ProcessingInput,
+        ?error_report_location: Types::ExportErrorReportLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor client_token: String?
+      attr_accessor destination_s3_uri: String?
+      attr_accessor input: Types::ProcessingInput?
+      attr_accessor error_report_location: Types::ExportErrorReportLocation?
+    end
+
+    class CreateDatasetExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?workspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor workspace_name: String?
+    end
+
     class CreateDatasetRequest
       include Smithy::Schema::Structure
 
@@ -1843,6 +2279,10 @@ module Aws::IoTSiteWise
         ?dataset_id: String,
         ?dataset_name: String,
         ?dataset_description: String,
+        ?dataset_type: String,
+        ?dataset_config: Types::DatasetConfig,
+        ?workspace_name: String,
+        ?metadata: Hash[String, String],
         ?dataset_source: Types::DatasetSource,
         ?client_token: String,
         ?tags: Hash[String, String],
@@ -1852,6 +2292,10 @@ module Aws::IoTSiteWise
       attr_accessor dataset_id: String?
       attr_accessor dataset_name: String?
       attr_accessor dataset_description: String?
+      attr_accessor dataset_type: String?
+      attr_accessor dataset_config: Types::DatasetConfig?
+      attr_accessor workspace_name: String?
+      attr_accessor metadata: Hash[String, String]?
       attr_accessor dataset_source: Types::DatasetSource?
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
@@ -1870,6 +2314,36 @@ module Aws::IoTSiteWise
       attr_accessor dataset_id: String?
       attr_accessor dataset_arn: String?
       attr_accessor dataset_status: Types::DatasetStatus?
+    end
+
+    class CreateEnrichmentJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?job_configuration: Types::EnrichmentJobConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor job_configuration: Types::EnrichmentJobConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class CreateEnrichmentJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
     end
 
     class CreateGatewayRequest
@@ -1900,6 +2374,46 @@ module Aws::IoTSiteWise
 
       attr_accessor gateway_id: String?
       attr_accessor gateway_arn: String?
+    end
+
+    class CreatePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?pipeline_name: String,
+        ?description: String,
+        ?environment_variables: Hash[String, String],
+        ?computations: Array[Types::ComputeNode],
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor pipeline_name: String?
+      attr_accessor description: String?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor computations: Array[Types::ComputeNode]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreatePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?pipeline_arn: String,
+        ?version: String,
+        ?status: Types::ResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor pipeline_arn: String?
+      attr_accessor version: String?
+      attr_accessor status: Types::ResourceStatus?
     end
 
     class CreatePortalRequest
@@ -1986,6 +2500,78 @@ module Aws::IoTSiteWise
       attr_accessor project_arn: String?
     end
 
+    class CreateTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?task_name: String,
+        ?description: String,
+        ?task_configuration: Types::TaskConfiguration,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor task_name: String?
+      attr_accessor description: String?
+      attr_accessor task_configuration: Types::TaskConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_name: String,
+        ?task_arn: String,
+        ?version: String,
+        ?status: Types::ResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_name: String?
+      attr_accessor task_arn: String?
+      attr_accessor version: String?
+      attr_accessor status: Types::ResourceStatus?
+    end
+
+    class CreateWorkspaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?workspace_description: String,
+        ?encryption_configuration: Types::WorkspaceEncryptionConfiguration,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor workspace_description: String?
+      attr_accessor encryption_configuration: Types::WorkspaceEncryptionConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateWorkspaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?workspace_arn: String,
+        ?workspace_status: Types::WorkspaceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor workspace_arn: String?
+      attr_accessor workspace_status: Types::WorkspaceStatus?
+    end
+
     class Csv
       include Smithy::Schema::Structure
 
@@ -2059,6 +2645,69 @@ module Aws::IoTSiteWise
       attr_accessor asset_model_property: Types::AssetModelPropertyBindingValueFilter?
     end
 
+    class DataSegmentEnrichment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?last_enriched_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor last_enriched_at: Time?
+    end
+
+    module DataSegmentErrorCode
+      INTERNAL_FAILURE: String
+      VALIDATION_ERROR: String
+      RESOURCE_NOT_FOUND: String
+      LIMIT_EXCEEDED: String
+      CONFLICTING_OPERATION: String
+    end
+
+    class DataSegmentRelationshipSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_dataset_id: String,
+        ?source_dataset_id: String,
+        ?time_series_id: String,
+        ?start_timestamp: Types::TimeInNanos,
+        ?end_timestamp: Types::TimeInNanos,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_dataset_id: String?
+      attr_accessor source_dataset_id: String?
+      attr_accessor time_series_id: String?
+      attr_accessor start_timestamp: Types::TimeInNanos?
+      attr_accessor end_timestamp: Types::TimeInNanos?
+    end
+
+    class DataSegmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_dataset_id: String,
+        ?time_series_id: String,
+        ?start_timestamp: Types::TimeInNanos,
+        ?end_timestamp: Types::TimeInNanos,
+        ?alias: String,
+        ?data_type: String,
+        ?enrichment: Types::DataSegmentEnrichment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_dataset_id: String?
+      attr_accessor time_series_id: String?
+      attr_accessor start_timestamp: Types::TimeInNanos?
+      attr_accessor end_timestamp: Types::TimeInNanos?
+      attr_accessor alias: String?
+      attr_accessor data_type: String?
+      attr_accessor enrichment: Types::DataSegmentEnrichment?
+    end
+
     class DataSetReference
       include Smithy::Schema::Structure
 
@@ -2070,6 +2719,79 @@ module Aws::IoTSiteWise
 
       attr_accessor dataset_arn: String?
       attr_accessor source: Types::Source?
+    end
+
+    class DatasetConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session: Types::SessionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session: Types::SessionConfig?
+    end
+
+    class DatasetEnrichment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?video: Types::DatasetEnrichmentEntry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor video: Types::DatasetEnrichmentEntry?
+    end
+
+    class DatasetEnrichmentEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?last_enriched_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor last_enriched_at: Time?
+    end
+
+    module DatasetEnrichmentStatus
+      FULLY_ENRICHED: String
+      PARTIALLY_ENRICHED: String
+      NOT_ENRICHED: String
+    end
+
+    module DatasetExportJobFilter
+      ALL: String
+      SUBMITTED: String
+      RUNNING: String
+      COMPLETED: String
+      COMPLETED_WITH_ERRORS: String
+      FAILED: String
+    end
+
+    module DatasetExportJobStatus
+      SUBMITTED: String
+      RUNNING: String
+      COMPLETED: String
+      COMPLETED_WITH_ERRORS: String
+      FAILED: String
+    end
+
+    class DatasetItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?trim_settings: Types::TrimSettings,
+        ?export_data_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor trim_settings: Types::TrimSettings?
+      attr_accessor export_data_types: Array[String]?
     end
 
     class DatasetSource
@@ -2089,10 +2811,12 @@ module Aws::IoTSiteWise
 
     module DatasetSourceFormat
       KNOWLEDGE_BASE: String
+      TIMESERIES: String
     end
 
     module DatasetSourceType
       KENDRA: String
+      SITEWISE: String
     end
 
     module DatasetState
@@ -2124,9 +2848,12 @@ module Aws::IoTSiteWise
         ?arn: String,
         ?name: String,
         ?description: String,
+        ?source_type: String,
+        ?dataset_type: String,
         ?creation_date: Time,
         ?last_update_date: Time,
         ?status: Types::DatasetStatus,
+        ?enrichment_status: Types::DatasetEnrichment,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2134,9 +2861,18 @@ module Aws::IoTSiteWise
       attr_accessor arn: String?
       attr_accessor name: String?
       attr_accessor description: String?
+      attr_accessor source_type: String?
+      attr_accessor dataset_type: String?
       attr_accessor creation_date: Time?
       attr_accessor last_update_date: Time?
       attr_accessor status: Types::DatasetStatus?
+      attr_accessor enrichment_status: Types::DatasetEnrichment?
+    end
+
+    module DatasetTypeEnum
+      SESSION: String
+      CURATED: String
+      EXTERNAL: String
     end
 
     class Datum
@@ -2178,6 +2914,28 @@ module Aws::IoTSiteWise
 
     end
 
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor id: String?
+    end
+
+    class DeleteApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteAssetModelCompositeModelRequest
       include Smithy::Schema::Structure
 
@@ -2204,10 +2962,12 @@ module Aws::IoTSiteWise
 
       def initialize: (
         ?asset_model_status: Types::AssetModelStatus,
+        ?asset_model_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor asset_model_status: Types::AssetModelStatus?
+      attr_accessor asset_model_id: String?
     end
 
     class DeleteAssetModelInterfaceRelationshipRequest
@@ -2265,10 +3025,12 @@ module Aws::IoTSiteWise
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?asset_model_id: String,
         ?asset_model_status: Types::AssetModelStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor asset_model_id: String?
       attr_accessor asset_model_status: Types::AssetModelStatus?
     end
 
@@ -2289,10 +3051,12 @@ module Aws::IoTSiteWise
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?asset_id: String,
         ?asset_status: Types::AssetStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor asset_id: String?
       attr_accessor asset_status: Types::AssetStatus?
     end
 
@@ -2342,16 +3106,33 @@ module Aws::IoTSiteWise
 
     end
 
+    class DeleteDataSegmentEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_series_id: String,
+        ?start_timestamp: Types::TimeInNanos,
+        ?end_timestamp: Types::TimeInNanos,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_series_id: String?
+      attr_accessor start_timestamp: Types::TimeInNanos?
+      attr_accessor end_timestamp: Types::TimeInNanos?
+    end
+
     class DeleteDatasetRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?dataset_id: String,
+        ?workspace_name: String,
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
       attr_accessor client_token: String?
     end
 
@@ -2375,6 +3156,30 @@ module Aws::IoTSiteWise
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor gateway_id: String?
+    end
+
+    class DeletePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?pipeline_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor pipeline_name: String?
+    end
+
+    class DeletePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::ResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::ResourceStatus?
     end
 
     class DeletePortalRequest
@@ -2423,6 +3228,30 @@ module Aws::IoTSiteWise
 
     end
 
+    class DeleteTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?task_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor task_name: String?
+    end
+
+    class DeleteTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: Types::ResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: Types::ResourceStatus?
+    end
+
     class DeleteTimeSeriesRequest
       include Smithy::Schema::Structure
 
@@ -2431,6 +3260,7 @@ module Aws::IoTSiteWise
         ?asset_id: String,
         ?property_id: String,
         ?client_token: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2438,6 +3268,31 @@ module Aws::IoTSiteWise
       attr_accessor asset_id: String?
       attr_accessor property_id: String?
       attr_accessor client_token: String?
+      attr_accessor workspace_name: String?
+    end
+
+    class DeleteWorkspaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteWorkspaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_status: Types::WorkspaceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_status: Types::WorkspaceStatus?
     end
 
     class DescribeAccessPolicyRequest
@@ -2504,6 +3359,48 @@ module Aws::IoTSiteWise
       attr_accessor action_payload: Types::ActionPayload?
       attr_accessor execution_time: Time?
       attr_accessor resolve_to: Types::ResolveTo?
+    end
+
+    class DescribeApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor id: String?
+    end
+
+    class DescribeApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?created_at: Time,
+        ?dns_subdomain: String,
+        ?description: String,
+        ?id: String,
+        ?idc_application_arn: String,
+        ?name: String,
+        ?status: String,
+        ?updated_at: Time,
+        ?workspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor dns_subdomain: String?
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor idc_application_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+      attr_accessor workspace_name: String?
     end
 
     class DescribeAssetCompositeModelRequest
@@ -2767,10 +3664,12 @@ module Aws::IoTSiteWise
 
       def initialize: (
         ?job_id: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor job_id: String?
+      attr_accessor workspace_name: String?
     end
 
     class DescribeBulkImportJobResponse
@@ -2788,6 +3687,8 @@ module Aws::IoTSiteWise
         ?job_last_update_date: Time,
         ?adaptive_ingestion: bool,
         ?delete_files_after_import: bool,
+        ?dataset_id: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2802,6 +3703,8 @@ module Aws::IoTSiteWise
       attr_accessor job_last_update_date: Time?
       attr_accessor adaptive_ingestion: bool?
       attr_accessor delete_files_after_import: bool?
+      attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
     end
 
     class DescribeComputationModelExecutionSummaryRequest
@@ -2914,15 +3817,57 @@ module Aws::IoTSiteWise
       attr_accessor dashboard_last_update_date: Time?
     end
 
+    class DescribeDatasetExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class DescribeDatasetExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?workspace_name: String,
+        ?status: String,
+        ?started_at: Time,
+        ?completed_at: Time,
+        ?destination_s3_uri: String,
+        ?error_report_location: Types::ExportErrorReportLocation,
+        ?input: Types::ProcessingInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor destination_s3_uri: String?
+      attr_accessor error_report_location: Types::ExportErrorReportLocation?
+      attr_accessor input: Types::ProcessingInput?
+    end
+
     class DescribeDatasetRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?dataset_id: String,
+        ?workspace_name: String,
+        ?dataset_version: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor dataset_version: String?
     end
 
     class DescribeDatasetResponse
@@ -2933,11 +3878,16 @@ module Aws::IoTSiteWise
         ?dataset_arn: String,
         ?dataset_name: String,
         ?dataset_description: String,
+        ?dataset_type: String,
+        ?dataset_config: Types::DatasetConfig,
+        ?workspace_name: String,
+        ?metadata: Hash[String, String],
         ?dataset_source: Types::DatasetSource,
         ?dataset_status: Types::DatasetStatus,
         ?dataset_creation_date: Time,
         ?dataset_last_update_date: Time,
         ?dataset_version: String,
+        ?enrichment_status: Types::DatasetEnrichment,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2945,11 +3895,16 @@ module Aws::IoTSiteWise
       attr_accessor dataset_arn: String?
       attr_accessor dataset_name: String?
       attr_accessor dataset_description: String?
+      attr_accessor dataset_type: String?
+      attr_accessor dataset_config: Types::DatasetConfig?
+      attr_accessor workspace_name: String?
+      attr_accessor metadata: Hash[String, String]?
       attr_accessor dataset_source: Types::DatasetSource?
       attr_accessor dataset_status: Types::DatasetStatus?
       attr_accessor dataset_creation_date: Time?
       attr_accessor dataset_last_update_date: Time?
       attr_accessor dataset_version: String?
+      attr_accessor enrichment_status: Types::DatasetEnrichment?
     end
 
     class DescribeDefaultEncryptionConfigurationRequest
@@ -2974,6 +3929,48 @@ module Aws::IoTSiteWise
       attr_accessor encryption_type: String?
       attr_accessor kms_key_arn: String?
       attr_accessor configuration_status: Types::ConfigurationStatus?
+    end
+
+    class DescribeEnrichmentJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor job_id: String?
+    end
+
+    class DescribeEnrichmentJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?workspace_name: String,
+        ?job_type: String,
+        ?job_configuration: Types::EnrichmentJobConfiguration,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?completed_at: Time,
+        ?cancelled_at: Time,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor workspace_name: String?
+      attr_accessor job_type: String?
+      attr_accessor job_configuration: Types::EnrichmentJobConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor cancelled_at: Time?
+      attr_accessor failure_message: String?
     end
 
     class DescribeExecutionRequest
@@ -3088,9 +4085,11 @@ module Aws::IoTSiteWise
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor workspace_name: String?
     end
 
     class DescribeLoggingOptionsResponse
@@ -3102,6 +4101,102 @@ module Aws::IoTSiteWise
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor logging_options: Types::LoggingOptions?
+    end
+
+    class DescribePipelineExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?pipeline_name: String,
+        ?pipeline_execution_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor pipeline_name: String?
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribePipelineExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+        ?pipeline_name: String,
+        ?workspace_name: String,
+        ?pipeline_version: String,
+        ?status: Types::PipelineExecutionStatus,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?request_environment_variables: Types::ExecutionEnvironmentVariables,
+        ?request_mount_overrides: Types::MountOverrides,
+        ?execution_priority: Integer,
+        ?compute_node_execution_details: Array[Types::ComputeNodeExecutionDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor pipeline_name: String?
+      attr_accessor workspace_name: String?
+      attr_accessor pipeline_version: String?
+      attr_accessor status: Types::PipelineExecutionStatus?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor request_environment_variables: Types::ExecutionEnvironmentVariables?
+      attr_accessor request_mount_overrides: Types::MountOverrides?
+      attr_accessor execution_priority: Integer?
+      attr_accessor compute_node_execution_details: Array[Types::ComputeNodeExecutionDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?pipeline_name: String,
+        ?pipeline_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor pipeline_name: String?
+      attr_accessor pipeline_version: String?
+    end
+
+    class DescribePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?workspace_name: String,
+        ?description: String,
+        ?pipeline_arn: String,
+        ?version: String,
+        ?environment_variables: Hash[String, String],
+        ?computations: Array[Types::ComputeNode],
+        ?status: Types::ResourceStatus,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor workspace_name: String?
+      attr_accessor description: String?
+      attr_accessor pipeline_arn: String?
+      attr_accessor version: String?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor computations: Array[Types::ComputeNode]?
+      attr_accessor status: Types::ResourceStatus?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
     end
 
     class DescribePortalRequest
@@ -3192,6 +4287,78 @@ module Aws::IoTSiteWise
       attr_accessor project_last_update_date: Time?
     end
 
+    class DescribeQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor query_id: String?
+    end
+
+    class DescribeQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?status: String,
+        ?submitted_at: Time,
+        ?completed_at: Time,
+        ?statistics: Types::QueryStatistics,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor status: String?
+      attr_accessor submitted_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor statistics: Types::QueryStatistics?
+      attr_accessor error_message: String?
+    end
+
+    class DescribeSearchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?search_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor search_id: String?
+    end
+
+    class DescribeSearchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+        ?workspace_name: String,
+        ?status: String,
+        ?query_statement: String,
+        ?search_type: String,
+        ?status_reason: String,
+        ?started_at: Time,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor status: String?
+      attr_accessor query_statement: String?
+      attr_accessor search_type: String?
+      attr_accessor status_reason: String?
+      attr_accessor started_at: Time?
+      attr_accessor group_id: String?
+    end
+
     class DescribeStorageConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -3228,6 +4395,48 @@ module Aws::IoTSiteWise
       attr_accessor disallow_ingest_null_na_n: bool?
     end
 
+    class DescribeTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?task_name: String,
+        ?task_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor task_name: String?
+      attr_accessor task_version: String?
+    end
+
+    class DescribeTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?task_name: String,
+        ?description: String,
+        ?task_arn: String,
+        ?version: String,
+        ?task_configuration: Types::TaskConfiguration,
+        ?status: Types::ResourceStatus,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor task_name: String?
+      attr_accessor description: String?
+      attr_accessor task_arn: String?
+      attr_accessor version: String?
+      attr_accessor task_configuration: Types::TaskConfiguration?
+      attr_accessor status: Types::ResourceStatus?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     class DescribeTimeSeriesRequest
       include Smithy::Schema::Structure
 
@@ -3235,12 +4444,14 @@ module Aws::IoTSiteWise
         ?alias: String,
         ?asset_id: String,
         ?property_id: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor alias: String?
       attr_accessor asset_id: String?
       attr_accessor property_id: String?
+      attr_accessor workspace_name: String?
     end
 
     class DescribeTimeSeriesResponse
@@ -3256,6 +4467,7 @@ module Aws::IoTSiteWise
         ?time_series_creation_date: Time,
         ?time_series_last_update_date: Time,
         ?time_series_arn: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3268,6 +4480,41 @@ module Aws::IoTSiteWise
       attr_accessor time_series_creation_date: Time?
       attr_accessor time_series_last_update_date: Time?
       attr_accessor time_series_arn: String?
+      attr_accessor workspace_name: String?
+    end
+
+    class DescribeWorkspaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+    end
+
+    class DescribeWorkspaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_arn: String,
+        ?workspace_name: String,
+        ?workspace_description: String,
+        ?workspace_status: Types::WorkspaceStatus,
+        ?encryption_configuration: Types::WorkspaceEncryptionConfigurationInfo,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_arn: String?
+      attr_accessor workspace_name: String?
+      attr_accessor workspace_description: String?
+      attr_accessor workspace_status: Types::WorkspaceStatus?
+      attr_accessor encryption_configuration: Types::WorkspaceEncryptionConfigurationInfo?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
     end
 
     class DetailedError
@@ -3288,6 +4535,26 @@ module Aws::IoTSiteWise
       INCOMPATIBLE_FORWARDING_CONFIGURATION: String
     end
 
+    class DetailedPipelineError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module DetailedPipelineErrorCode
+      VALIDATION_ERROR: String
+      INTERNAL_FAILURE: String
+      EXECUTION_ERROR: String
+      TIMED_OUT: String
+    end
+
     class DisassociateAssetsRequest
       include Smithy::Schema::Structure
 
@@ -3303,6 +4570,23 @@ module Aws::IoTSiteWise
       attr_accessor hierarchy_id: String?
       attr_accessor child_asset_id: String?
       attr_accessor client_token: String?
+    end
+
+    class DisassociateDataSegmentEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_dataset_id: String,
+        ?time_series_id: String,
+        ?start_timestamp: Types::TimeInNanos,
+        ?end_timestamp: Types::TimeInNanos,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_dataset_id: String?
+      attr_accessor time_series_id: String?
+      attr_accessor start_timestamp: Types::TimeInNanos?
+      attr_accessor end_timestamp: Types::TimeInNanos?
     end
 
     class DisassociateTimeSeriesFromAssetPropertyRequest
@@ -3330,6 +4614,89 @@ module Aws::IoTSiteWise
     module EncryptionType
       SITEWISE_DEFAULT_ENCRYPTION: String
       KMS_BASED_ENCRYPTION: String
+    end
+
+    class EnrichmentJobConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?event_detection: Types::EventDetection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_detection: Types::EventDetection?
+
+      class EventDetection < EnrichmentJobConfiguration
+      end
+      class Unknown < EnrichmentJobConfiguration
+      end
+    end
+
+    module EnrichmentJobStatus
+      PENDING: String
+      RUNNING: String
+      COMPLETED: String
+      FAILED: String
+      TIMED_OUT: String
+      CANCELLED: String
+    end
+
+    class EnrichmentJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?workspace_name: String,
+        ?job_type: String,
+        ?dataset_id: String,
+        ?property_alias: String,
+        ?time_series_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor workspace_name: String?
+      attr_accessor job_type: String?
+      attr_accessor dataset_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor time_series_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module EnrichmentStatus
+      ENRICHED: String
+      NOT_ENRICHED: String
+    end
+
+    class EnrichmentTrimSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Types::TimeInNanos,
+        ?end_time: Types::TimeInNanos,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Types::TimeInNanos?
+      attr_accessor end_time: Types::TimeInNanos?
+    end
+
+    class EphemeralStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_class: String,
+        ?storage_size_in_gi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_class: String?
+      attr_accessor storage_size_in_gi_b: Integer?
     end
 
     module ErrorCode
@@ -3363,6 +4730,23 @@ module Aws::IoTSiteWise
 
       attr_accessor bucket: String?
       attr_accessor prefix: String?
+    end
+
+    class EventDetection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?time_series_id: String,
+        ?property_alias: String,
+        ?trim_settings: Types::EnrichmentTrimSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor time_series_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor trim_settings: Types::EnrichmentTrimSettings?
     end
 
     class ExecuteActionRequest
@@ -3427,6 +4811,19 @@ module Aws::IoTSiteWise
       attr_accessor next_token: String?
     end
 
+    class ExecutionEnvironmentVariables
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global: Hash[String, String],
+        ?compute_nodes: Hash[String, Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global: Hash[String, String]?
+      attr_accessor compute_nodes: Hash[String, Hash[String, String]]?
+    end
+
     module ExecutionState
       RUNNING: String
       COMPLETED: String
@@ -3471,6 +4868,42 @@ module Aws::IoTSiteWise
       attr_accessor execution_entity_version: String?
     end
 
+    module ExportDataType
+      VIDEO: String
+      TELEMETRY: String
+      ANNOTATION: String
+    end
+
+    class ExportErrorReportLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
+    class ExportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?status: String,
+        ?started_at: Time,
+        ?completed_at: Time,
+        ?destination_s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor destination_s3_uri: String?
+    end
+
     class ExpressionVariable
       include Smithy::Schema::Structure
 
@@ -3484,6 +4917,67 @@ module Aws::IoTSiteWise
       attr_accessor value: Types::VariableValue?
     end
 
+    class FailedDataSegmentAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_dataset_id: String,
+        ?time_series_id: String,
+        ?start_timestamp: Types::TimeInNanos,
+        ?end_timestamp: Types::TimeInNanos,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_dataset_id: String?
+      attr_accessor time_series_id: String?
+      attr_accessor start_timestamp: Types::TimeInNanos?
+      attr_accessor end_timestamp: Types::TimeInNanos?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class FailedDataSegmentDeletion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_series_id: String,
+        ?start_timestamp: Types::TimeInNanos,
+        ?end_timestamp: Types::TimeInNanos,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_series_id: String?
+      attr_accessor start_timestamp: Types::TimeInNanos?
+      attr_accessor end_timestamp: Types::TimeInNanos?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class FailedDataSegmentDisassociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_dataset_id: String,
+        ?time_series_id: String,
+        ?start_timestamp: Types::TimeInNanos,
+        ?end_timestamp: Types::TimeInNanos,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_dataset_id: String?
+      attr_accessor time_series_id: String?
+      attr_accessor start_timestamp: Types::TimeInNanos?
+      attr_accessor end_timestamp: Types::TimeInNanos?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
     class File
       include Smithy::Schema::Structure
 
@@ -3491,12 +4985,18 @@ module Aws::IoTSiteWise
         ?bucket: String,
         ?key: String,
         ?version_id: String,
+        ?alias: String,
+        ?start_time: Types::TimeInNanos,
+        ?file_format: Types::FileFormat,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor bucket: String?
       attr_accessor key: String?
       attr_accessor version_id: String?
+      attr_accessor alias: String?
+      attr_accessor start_time: Types::TimeInNanos?
+      attr_accessor file_format: Types::FileFormat?
     end
 
     class FileFormat
@@ -3505,11 +5005,30 @@ module Aws::IoTSiteWise
       def initialize: (
         ?csv: Types::Csv,
         ?parquet: Types::Parquet,
+        ?mp4: Types::Mp4,
+        ?annotation: Types::Annotation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor csv: Types::Csv?
       attr_accessor parquet: Types::Parquet?
+      attr_accessor mp4: Types::Mp4?
+      attr_accessor annotation: Types::Annotation?
+    end
+
+    class FormatSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?frames_per_second: Integer,
+        ?width_in_pixels: Integer,
+        ?height_in_pixels: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor frames_per_second: Integer?
+      attr_accessor width_in_pixels: Integer?
+      attr_accessor height_in_pixels: Integer?
     end
 
     class ForwardingConfig
@@ -3689,6 +5208,48 @@ module Aws::IoTSiteWise
       attr_accessor property_value: Types::AssetPropertyValue?
     end
 
+    class GetCaptureDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?start_time: Types::TimeInNanos,
+        ?end_time: Types::TimeInNanos,
+        ?time_series_id: String,
+        ?property_alias: String,
+        ?format_settings: Types::FormatSettings,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor start_time: Types::TimeInNanos?
+      attr_accessor end_time: Types::TimeInNanos?
+      attr_accessor time_series_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor format_settings: Types::FormatSettings?
+      attr_accessor next_token: String?
+    end
+
+    class GetCaptureDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?start_time: Types::TimeInNanos,
+        ?end_time: Types::TimeInNanos,
+        ?data_type: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor start_time: Types::TimeInNanos?
+      attr_accessor end_time: Types::TimeInNanos?
+      attr_accessor data_type: String?
+      attr_accessor next_token: String?
+    end
+
     class GetInterpolatedAssetPropertyValuesRequest
       include Smithy::Schema::Structure
 
@@ -3734,6 +5295,68 @@ module Aws::IoTSiteWise
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor interpolated_asset_property_values: Array[Types::InterpolatedAssetPropertyValue]?
+      attr_accessor next_token: String?
+    end
+
+    class GetQueryResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?query_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor query_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetQueryResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?column_info: Array[Types::ColumnInformation],
+        ?rows: Array[Array[String?]],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor column_info: Array[Types::ColumnInformation]?
+      attr_accessor rows: Array[Array[String?]]?
+      attr_accessor next_token: String?
+    end
+
+    class GetSearchResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+        ?workspace_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetSearchResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_results: Array[Types::SearchResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_results: Array[Types::SearchResult]?
       attr_accessor next_token: String?
     end
 
@@ -4019,6 +5642,10 @@ module Aws::IoTSiteWise
       attr_accessor status: String?
     end
 
+    module JobType
+      EVENT_DETECTION: String
+    end
+
     class KendraSourceDetail
       include Smithy::Schema::Structure
 
@@ -4111,6 +5738,32 @@ module Aws::IoTSiteWise
 
       attr_accessor action_summaries: Array[Types::ActionSummary]?
       attr_accessor next_token: String?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?applications: Array[Types::ApplicationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor applications: Array[Types::ApplicationSummary]?
     end
 
     class ListAssetModelCompositeModelsRequest
@@ -4359,12 +6012,14 @@ module Aws::IoTSiteWise
         ?next_token: String,
         ?max_results: Integer,
         ?filter: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
       attr_accessor filter: String?
+      attr_accessor workspace_name: String?
     end
 
     class ListBulkImportJobsResponse
@@ -4520,17 +6175,113 @@ module Aws::IoTSiteWise
       attr_accessor next_token: String?
     end
 
+    class ListDatasetDataSegmentRelationshipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?workspace_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetDataSegmentRelationshipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_segment_relationship_summaries: Array[Types::DataSegmentRelationshipSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_segment_relationship_summaries: Array[Types::DataSegmentRelationshipSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetDataSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?workspace_name: String,
+        ?dataset_version: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor dataset_version: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetDataSegmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_segments: Array[Types::DataSegmentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_segments: Array[Types::DataSegmentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::ExportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::ExportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListDatasetsRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?source_type: String,
+        ?workspace_name: String,
+        ?dataset_type: String,
         ?next_token: String,
         ?max_results: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor source_type: String?
+      attr_accessor workspace_name: String?
+      attr_accessor dataset_type: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
     end
@@ -4541,10 +6292,54 @@ module Aws::IoTSiteWise
       def initialize: (
         ?dataset_summaries: Array[Types::DatasetSummary],
         ?next_token: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dataset_summaries: Array[Types::DatasetSummary]?
+      attr_accessor next_token: String?
+      attr_accessor workspace_name: String?
+    end
+
+    class ListEnrichmentJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?dataset_id: String,
+        ?property_alias: String,
+        ?time_series_id: String,
+        ?status: String,
+        ?job_type: String,
+        ?start_date: Time,
+        ?end_date: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor dataset_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor time_series_id: String?
+      attr_accessor status: String?
+      attr_accessor job_type: String?
+      attr_accessor start_date: Time?
+      attr_accessor end_date: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnrichmentJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::EnrichmentJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::EnrichmentJobSummary]?
       attr_accessor next_token: String?
     end
 
@@ -4638,6 +6433,74 @@ module Aws::IoTSiteWise
       attr_accessor next_token: String?
     end
 
+    class ListPipelineExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?pipeline_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?state: String,
+        ?start_time_after: Time,
+        ?start_time_before: Time,
+        ?end_time_after: Time,
+        ?end_time_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor pipeline_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor state: String?
+      attr_accessor start_time_after: Time?
+      attr_accessor start_time_before: Time?
+      attr_accessor end_time_after: Time?
+      attr_accessor end_time_before: Time?
+    end
+
+    class ListPipelineExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_summaries: Array[Types::PipelineExecutionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_summaries: Array[Types::PipelineExecutionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPipelinesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPipelinesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_summaries: Array[Types::PipelineSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_summaries: Array[Types::PipelineSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListPortalsRequest
       include Smithy::Schema::Structure
 
@@ -4720,6 +6583,85 @@ module Aws::IoTSiteWise
       attr_accessor next_token: String?
     end
 
+    class ListQueriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListQueriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queries: Array[Types::QuerySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queries: Array[Types::QuerySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSearchesFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_filter: Array[String],
+        ?started_after: Time,
+        ?started_before: Time,
+        ?group_id_filter: Array[String],
+        ?search_type_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_filter: Array[String]?
+      attr_accessor started_after: Time?
+      attr_accessor started_before: Time?
+      attr_accessor group_id_filter: Array[String]?
+      attr_accessor search_type_filter: Array[String]?
+    end
+
+    class ListSearchesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?list_searches_filters: Types::ListSearchesFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor list_searches_filters: Types::ListSearchesFilters?
+    end
+
+    class ListSearchesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_summaries: Array[Types::SearchSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_summaries: Array[Types::SearchSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListTagsForResourceRequest
       include Smithy::Schema::Structure
 
@@ -4742,6 +6684,34 @@ module Aws::IoTSiteWise
       attr_accessor tags: Hash[String, String]?
     end
 
+    class ListTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_summaries: Array[Types::TaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_summaries: Array[Types::TaskSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListTimeSeriesRequest
       include Smithy::Schema::Structure
 
@@ -4751,6 +6721,7 @@ module Aws::IoTSiteWise
         ?asset_id: String,
         ?alias_prefix: String,
         ?time_series_type: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4759,6 +6730,7 @@ module Aws::IoTSiteWise
       attr_accessor asset_id: String?
       attr_accessor alias_prefix: String?
       attr_accessor time_series_type: String?
+      attr_accessor workspace_name: String?
     end
 
     class ListTimeSeriesResponse
@@ -4767,16 +6739,44 @@ module Aws::IoTSiteWise
       def initialize: (
         ?time_series_summaries: Array[Types::TimeSeriesSummary],
         ?next_token: String,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor time_series_summaries: Array[Types::TimeSeriesSummary]?
       attr_accessor next_token: String?
+      attr_accessor workspace_name: String?
     end
 
     module ListTimeSeriesType
       ASSOCIATED: String
       DISASSOCIATED: String
+    end
+
+    class ListWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkspacesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_summaries: Array[Types::WorkspaceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_summaries: Array[Types::WorkspaceSummary]?
+      attr_accessor next_token: String?
     end
 
     class Location
@@ -4898,6 +6898,63 @@ module Aws::IoTSiteWise
       attr_accessor message: String?
     end
 
+    class Mount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?relative_path: String,
+        ?source: Types::MountSource,
+        ?storage_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor relative_path: String?
+      attr_accessor source: Types::MountSource?
+      attr_accessor storage_type: String?
+    end
+
+    class MountOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compute_nodes: Hash[String, Array[Types::Mount]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compute_nodes: Hash[String, Array[Types::Mount]]?
+    end
+
+    class MountSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_access_point: Types::S3AccessPointSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_access_point: Types::S3AccessPointSource?
+
+      class S3AccessPoint < MountSource
+      end
+      class Unknown < MountSource
+      end
+    end
+
+    module MountStorageType
+      SHARED_STORAGE: String
+    end
+
+    class Mp4
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class MultiLayerStorage
       include Smithy::Schema::Structure
 
@@ -4921,6 +6978,94 @@ module Aws::IoTSiteWise
     module Permission
       ADMINISTRATOR: String
       VIEWER: String
+    end
+
+    module PipelineErrorCode
+      VALIDATION_ERROR: String
+      INTERNAL_FAILURE: String
+      EXECUTION_ERROR: String
+      TIMED_OUT: String
+    end
+
+    module PipelineExecutionState
+      NOT_STARTED: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      CANCELLING: String
+      CANCELLED: String
+    end
+
+    class PipelineExecutionStateDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?details: Array[Types::DetailedPipelineError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor details: Array[Types::DetailedPipelineError]?
+    end
+
+    class PipelineExecutionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_details: Types::PipelineExecutionStateDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_details: Types::PipelineExecutionStateDetails?
+    end
+
+    class PipelineExecutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+        ?pipeline_version: String,
+        ?status: Types::PipelineExecutionStatus,
+        ?execution_priority: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor pipeline_version: String?
+      attr_accessor status: Types::PipelineExecutionStatus?
+      attr_accessor execution_priority: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class PipelineSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?description: String,
+        ?pipeline_arn: String,
+        ?version: String,
+        ?status: Types::ResourceStatus,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor description: String?
+      attr_accessor pipeline_arn: String?
+      attr_accessor version: String?
+      attr_accessor status: Types::ResourceStatus?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
     end
 
     class PortalResource
@@ -5014,6 +7159,48 @@ module Aws::IoTSiteWise
       attr_accessor resource_arn: String?
     end
 
+    class ProcessingInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?timeseries: Array[Types::TimeseriesItem],
+        ?dataset: Types::DatasetItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeseries: Array[Types::TimeseriesItem]?
+      attr_accessor dataset: Types::DatasetItem?
+
+      class Timeseries < ProcessingInput
+      end
+      class Dataset < ProcessingInput
+      end
+      class Unknown < ProcessingInput
+      end
+    end
+
+    module ProcessingType
+      GENERIC_COMPUTE_PROCESSING: String
+      HARDWARE_ACCELERATED_PROCESSING: String
+    end
+
+    module ProcessingUnit
+      UNITS_2: String
+      UNITS_4: String
+      UNITS_8: String
+      UNITS_12: String
+      UNITS_16: String
+      UNITS_24: String
+      UNITS_32: String
+      UNITS_36: String
+      UNITS_48: String
+      UNITS_60: String
+      UNITS_64: String
+      UNITS_72: String
+      UNITS_84: String
+      UNITS_96: String
+    end
+
     class ProjectResource
       include Smithy::Schema::Structure
 
@@ -5077,6 +7264,9 @@ module Aws::IoTSiteWise
       DOUBLE: String
       BOOLEAN: String
       STRUCT: String
+      VIDEO: String
+      ANNOTATION: String
+      JSON: String
     end
 
     class PropertyMapping
@@ -5239,10 +7429,12 @@ module Aws::IoTSiteWise
 
       def initialize: (
         ?logging_options: Types::LoggingOptions,
+        ?workspace_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor logging_options: Types::LoggingOptions?
+      attr_accessor workspace_name: String?
     end
 
     class PutLoggingOptionsResponse
@@ -5306,6 +7498,47 @@ module Aws::IoTSiteWise
       GOOD: String
       BAD: String
       UNCERTAIN: String
+    end
+
+    class QueryStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?row_count: Integer,
+        ?bytes_scanned: Integer,
+        ?execution_time_in_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor row_count: Integer?
+      attr_accessor bytes_scanned: Integer?
+      attr_accessor execution_time_in_millis: Integer?
+    end
+
+    module QueryStatus
+      SUBMITTED: String
+      RUNNING: String
+      COMPLETED: String
+      FAILED: String
+      CANCELED: String
+      CANCELING: String
+    end
+
+    class QuerySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?status: String,
+        ?submitted_at: Time,
+        ?completed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor status: String?
+      attr_accessor submitted_at: Time?
+      attr_accessor completed_at: Time?
     end
 
     class QueryTimeoutException
@@ -5381,6 +7614,24 @@ module Aws::IoTSiteWise
       attr_accessor resource_arn: String?
     end
 
+    class ResourceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module ResourceErrorCode
+      VALIDATION_ERROR: String
+      INTERNAL_FAILURE: String
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -5390,6 +7641,27 @@ module Aws::IoTSiteWise
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module ResourceState
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class ResourceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: Types::ResourceError,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: Types::ResourceError?
+      attr_accessor state: String?
     end
 
     module ResourceType
@@ -5469,12 +7741,102 @@ module Aws::IoTSiteWise
       attr_accessor data: Array[Types::Datum]?
     end
 
+    class S3AccessPointSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_arn: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_arn: String?
+      attr_accessor prefix: String?
+    end
+
     module ScalarType
       BOOLEAN: String
       INT: String
       DOUBLE: String
       TIMESTAMP: String
       STRING: String
+    end
+
+    class SearchFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_series_ids: Array[String],
+        ?dataset_ids: Array[String],
+        ?time_intervals: Array[Types::TimeInterval],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_series_ids: Array[String]?
+      attr_accessor dataset_ids: Array[String]?
+      attr_accessor time_intervals: Array[Types::TimeInterval]?
+    end
+
+    class SearchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+        ?workspace_name: String,
+        ?dataset_id: String,
+        ?time_series_id: String,
+        ?start_timestamp: Types::TimeInNanos,
+        ?end_timestamp: Types::TimeInNanos,
+        ?top_timestamp: Types::TimeInNanos,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor dataset_id: String?
+      attr_accessor time_series_id: String?
+      attr_accessor start_timestamp: Types::TimeInNanos?
+      attr_accessor end_timestamp: Types::TimeInNanos?
+      attr_accessor top_timestamp: Types::TimeInNanos?
+      attr_accessor score: Float?
+    end
+
+    module SearchStatus
+      QUEUED: String
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class SearchSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+        ?workspace_name: String,
+        ?status: String,
+        ?query_statement: String,
+        ?search_type: String,
+        ?status_reason: String,
+        ?started_at: Time,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor status: String?
+      attr_accessor query_statement: String?
+      attr_accessor search_type: String?
+      attr_accessor status_reason: String?
+      attr_accessor started_at: Time?
+      attr_accessor group_id: String?
+    end
+
+    module SearchType
+      DEEP: String
+      QUICK: String
     end
 
     class ServiceUnavailableException
@@ -5486,6 +7848,19 @@ module Aws::IoTSiteWise
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class SessionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_start_timestamp: Types::TimeInNanos,
+        ?session_end_timestamp: Types::TimeInNanos,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_start_timestamp: Types::TimeInNanos?
+      attr_accessor session_end_timestamp: Types::TimeInNanos?
     end
 
     class SiemensIE
@@ -5521,6 +7896,111 @@ module Aws::IoTSiteWise
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor kendra: Types::KendraSourceDetail?
+    end
+
+    class StartPipelineExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?pipeline_name: String,
+        ?execution_environment_variable_overrides: Types::ExecutionEnvironmentVariables,
+        ?execution_mount_overrides: Types::MountOverrides,
+        ?execution_priority: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor pipeline_name: String?
+      attr_accessor execution_environment_variable_overrides: Types::ExecutionEnvironmentVariables?
+      attr_accessor execution_mount_overrides: Types::MountOverrides?
+      attr_accessor execution_priority: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class StartPipelineExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+    end
+
+    class StartQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?workspace_name: String,
+        ?query_statement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor workspace_name: String?
+      attr_accessor query_statement: String?
+    end
+
+    class StartQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor status: String?
+    end
+
+    class StartSearchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?query_statement: String,
+        ?client_token: String,
+        ?search_type: String,
+        ?search_filters: Types::SearchFilters,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor query_statement: String?
+      attr_accessor client_token: String?
+      attr_accessor search_type: String?
+      attr_accessor search_filters: Types::SearchFilters?
+      attr_accessor group_id: String?
+    end
+
+    class StartSearchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_id: String,
+        ?workspace_name: String,
+        ?status: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_id: String?
+      attr_accessor workspace_name: String?
+      attr_accessor status: String?
+      attr_accessor group_id: String?
+    end
+
+    module StorageClass
+      STANDARD_1: String
+      STANDARD_2: String
+      THROUGHPUT_1: String
+      THROUGHPUT_2: String
     end
 
     module StorageType
@@ -5568,6 +8048,45 @@ module Aws::IoTSiteWise
       COMPUTATION_MODEL: String
     end
 
+    class TaskConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?container_task_configuration: Types::ContainerTaskConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_task_configuration: Types::ContainerTaskConfiguration?
+
+      class ContainerTaskConfiguration < TaskConfiguration
+      end
+      class Unknown < TaskConfiguration
+      end
+    end
+
+    class TaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_name: String,
+        ?description: String,
+        ?task_arn: String,
+        ?version: String,
+        ?status: Types::ResourceStatus,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_name: String?
+      attr_accessor description: String?
+      attr_accessor task_arn: String?
+      attr_accessor version: String?
+      attr_accessor status: Types::ResourceStatus?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     class ThrottlingException
       include Smithy::Schema::Structure
 
@@ -5590,6 +8109,19 @@ module Aws::IoTSiteWise
 
       attr_accessor time_in_seconds: Integer?
       attr_accessor offset_in_nanos: Integer?
+    end
+
+    class TimeInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Types::TimeInNanos,
+        ?end_time: Types::TimeInNanos,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Types::TimeInNanos?
+      attr_accessor end_time: Types::TimeInNanos?
     end
 
     module TimeOrdering
@@ -5622,6 +8154,23 @@ module Aws::IoTSiteWise
       attr_accessor time_series_creation_date: Time?
       attr_accessor time_series_last_update_date: Time?
       attr_accessor time_series_arn: String?
+    end
+
+    class TimeseriesItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_series_id: String,
+        ?property_alias: String,
+        ?trim_settings: Types::TrimSettings,
+        ?format_settings: Types::FormatSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_series_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor trim_settings: Types::TrimSettings?
+      attr_accessor format_settings: Types::FormatSettings?
     end
 
     class TooManyTagsException
@@ -5683,6 +8232,19 @@ module Aws::IoTSiteWise
 
     module TraversalType
       PATH_TO_ROOT: String
+    end
+
+    class TrimSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Types::TimeInNanos,
+        ?end_time: Types::TimeInNanos,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Types::TimeInNanos?
+      attr_accessor end_time: Types::TimeInNanos?
     end
 
     class TumblingWindow
@@ -5794,11 +8356,13 @@ module Aws::IoTSiteWise
       def initialize: (
         ?asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment],
         ?asset_model_status: Types::AssetModelStatus,
+        ?asset_model_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor asset_model_composite_model_path: Array[Types::AssetModelCompositeModelPathSegment]?
       attr_accessor asset_model_status: Types::AssetModelStatus?
+      attr_accessor asset_model_id: String?
     end
 
     class UpdateAssetModelRequest
@@ -5836,10 +8400,12 @@ module Aws::IoTSiteWise
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?asset_model_id: String,
         ?asset_model_status: Types::AssetModelStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor asset_model_id: String?
       attr_accessor asset_model_status: Types::AssetModelStatus?
     end
 
@@ -5887,10 +8453,12 @@ module Aws::IoTSiteWise
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?asset_id: String,
         ?asset_status: Types::AssetStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor asset_id: String?
       attr_accessor asset_status: Types::AssetStatus?
     end
 
@@ -5959,16 +8527,22 @@ module Aws::IoTSiteWise
 
       def initialize: (
         ?dataset_id: String,
+        ?workspace_name: String,
         ?dataset_name: String,
         ?dataset_description: String,
+        ?dataset_config: Types::DatasetConfig,
+        ?metadata: Hash[String, String],
         ?dataset_source: Types::DatasetSource,
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dataset_id: String?
+      attr_accessor workspace_name: String?
       attr_accessor dataset_name: String?
       attr_accessor dataset_description: String?
+      attr_accessor dataset_config: Types::DatasetConfig?
+      attr_accessor metadata: Hash[String, String]?
       attr_accessor dataset_source: Types::DatasetSource?
       attr_accessor client_token: String?
     end
@@ -6027,6 +8601,38 @@ module Aws::IoTSiteWise
 
       attr_accessor gateway_id: String?
       attr_accessor gateway_name: String?
+    end
+
+    class UpdatePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?pipeline_name: String,
+        ?description: String,
+        ?environment_variables: Hash[String, String],
+        ?computations: Array[Types::ComputeNode],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor pipeline_name: String?
+      attr_accessor description: String?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor computations: Array[Types::ComputeNode]?
+    end
+
+    class UpdatePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?status: Types::ResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor status: Types::ResourceStatus?
     end
 
     class UpdatePortalRequest
@@ -6097,6 +8703,64 @@ module Aws::IoTSiteWise
 
     end
 
+    class UpdateTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?task_name: String,
+        ?description: String,
+        ?task_configuration: Types::TaskConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor task_name: String?
+      attr_accessor description: String?
+      attr_accessor task_configuration: Types::TaskConfiguration?
+    end
+
+    class UpdateTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?status: Types::ResourceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor status: Types::ResourceStatus?
+    end
+
+    class UpdateWorkspaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_name: String,
+        ?workspace_description: String,
+        ?encryption_configuration: Types::WorkspaceEncryptionConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_name: String?
+      attr_accessor workspace_description: String?
+      attr_accessor encryption_configuration: Types::WorkspaceEncryptionConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateWorkspaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_status: Types::WorkspaceStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_status: Types::WorkspaceStatus?
+    end
+
     class UserIdentity
       include Smithy::Schema::Structure
 
@@ -6153,6 +8817,10 @@ module Aws::IoTSiteWise
       attr_accessor null_value: Types::PropertyValueNullValue?
     end
 
+    module VideoDataType
+      MP4: String
+    end
+
     class WarmTierRetentionPeriod
       include Smithy::Schema::Structure
 
@@ -6169,6 +8837,85 @@ module Aws::IoTSiteWise
     module WarmTierState
       ENABLED: String
       DISABLED: String
+    end
+
+    class WorkspaceEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class WorkspaceEncryptionConfigurationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class WorkspaceErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module WorkspaceState
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class WorkspaceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?error: Types::WorkspaceErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor error: Types::WorkspaceErrorDetails?
+    end
+
+    class WorkspaceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?status: Types::WorkspaceStatus,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: Types::WorkspaceStatus?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
     end
   end
 end

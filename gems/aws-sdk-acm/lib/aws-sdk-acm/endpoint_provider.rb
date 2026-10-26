@@ -10,41 +10,36 @@ module Aws::ACM
     # @raise [ArgumentError]
     def resolve(parameters)
       if Smithy::Client::EndpointRules.set?(parameters.endpoint)
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "#{parameters.endpoint}")
+      end
+      if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
+        if Smithy::Client::EndpointRules.string_equals?(parameters.service_type, "ACM-ACME")
+          if Smithy::Client::EndpointRules.set?(parameters.endpoint)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "#{parameters.endpoint}")
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws")
+            if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
+              raise ArgumentError, "FIPS endpoints are not available for ACME operations"
+            end
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm-acme.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}")
+          end
+          raise ArgumentError, "ACME operations are only available in commercial AWS partitions"
+        end
+        if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}")
+        end
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
-          raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov")
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm.#{parameters.region}.amazonaws.com")
+          end
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm-fips.#{parameters.region}.#{partition_result['dnsSuffix']}")
         end
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
-          raise ArgumentError, "Invalid Configuration: Dualstack and custom endpoint are not supported"
+          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}")
         end
-        return Smithy::Client::EndpointRules::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {})
+        return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm.#{parameters.region}.#{partition_result['dnsSuffix']}")
       end
-      if Smithy::Client::EndpointRules.set?(parameters.region)
-        if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
-          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
-            if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS")) && Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
-              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
-            end
-            raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
-          end
-          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
-            if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
-              if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov")
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
-              end
-              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
-            end
-            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
-          end
-          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
-            if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
-              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
-            end
-            raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
-          end
-          return Smithy::Client::EndpointRules::Endpoint.new(url: "https://acm.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
-        end
-      end
-      raise ArgumentError, "Invalid Configuration: Missing Region"
+      raise ArgumentError, "Region must be set to resolve an endpoint."
     end
   end
 end

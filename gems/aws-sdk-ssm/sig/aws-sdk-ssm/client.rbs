@@ -190,7 +190,8 @@ module Aws::SSM
             name: String
           }
         ]
-      }
+      },
+      ?association_dispatch_assume_role: String
     ) -> _CreateAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssociationResponse
 
     interface _CreateAssociationBatchResponse
@@ -246,7 +247,12 @@ module Aws::SSM
               },
               include_child_organization_units: untyped,
               exclude_accounts: Array[String],
-              targets: untyped,
+              targets: Array[
+                {
+                  key: untyped,
+                  values: untyped
+                }
+              ],
               targets_max_concurrency: untyped,
               targets_max_errors: untyped
             }
@@ -260,8 +266,42 @@ module Aws::SSM
           ],
           alarm_configuration: untyped
         }
-      ]
+      ],
+      ?association_dispatch_assume_role: String
     ) -> _CreateAssociationBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssociationBatchResponse
+
+    interface _CreateCloudConnectorResponse
+      include Smithy::Client::_Response[Types::CreateCloudConnectorResult]
+      def cloud_connector_id: () -> String?
+    end
+    def create_cloud_connector: (
+      ?display_name: String,
+      ?role_arn: String,
+      ?description: String,
+      ?configuration: {
+        azure_configuration: {
+          tenant_id: String,
+          tenant_display_name: String,
+          application_id: String,
+          application_display_name: String,
+          targets: {
+            subscriptions: Array[
+              {
+                id: String,
+                display_name: String
+              }
+            ]
+          }
+        }
+      },
+      ?config_connector_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateCloudConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudConnectorResponse
 
     interface _CreateDocumentResponse
       include Smithy::Client::_Response[Types::CreateDocumentResult]
@@ -487,6 +527,14 @@ module Aws::SSM
       ?association_id: String
     ) -> _DeleteAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssociationResponse
 
+    interface _DeleteCloudConnectorResponse
+      include Smithy::Client::_Response[Types::DeleteCloudConnectorResult]
+      def cloud_connector_id: () -> String?
+    end
+    def delete_cloud_connector: (
+      ?cloud_connector_id: String
+    ) -> _DeleteCloudConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCloudConnectorResponse
+
     interface _DeleteDocumentResponse
       include Smithy::Client::_Response[Types::DeleteDocumentResult]
     end
@@ -570,7 +618,8 @@ module Aws::SSM
     def delete_resource_policy: (
       ?resource_arn: String,
       ?policy_id: String,
-      ?policy_hash: String
+      ?policy_hash: String,
+      ?deletion_mode: String
     ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
 
     interface _DeregisterManagedInstanceResponse
@@ -1184,6 +1233,21 @@ module Aws::SSM
       ?at_time: String
     ) -> _GetCalendarStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCalendarStateResponse
 
+    interface _GetCloudConnectorResponse
+      include Smithy::Client::_Response[Types::GetCloudConnectorResult]
+      def cloud_connector_arn: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def configuration: () -> Types::CloudConnectorConfiguration?
+      def config_connector_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_cloud_connector: (
+      ?cloud_connector_id: String
+    ) -> _GetCloudConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudConnectorResponse
+
     interface _GetCommandInvocationResponse
       include Smithy::Client::_Response[Types::GetCommandInvocationResult]
       def command_id: () -> String?
@@ -1668,6 +1732,22 @@ module Aws::SSM
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociationsResponse
+
+    interface _ListCloudConnectorsResponse
+      include Smithy::Client::_Response[Types::ListCloudConnectorsResult]
+      def cloud_connectors: () -> Array[Types::CloudConnectorSummary]?
+      def next_token: () -> String?
+    end
+    def list_cloud_connectors: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          filter_key: String,
+          filter_values: Array[String]
+        }
+      ]
+    ) -> _ListCloudConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCloudConnectorsResponse
 
     interface _ListCommandInvocationsResponse
       include Smithy::Client::_Response[Types::ListCommandInvocationsResult]
@@ -2389,7 +2469,12 @@ module Aws::SSM
               },
               include_child_organization_units: untyped,
               exclude_accounts: Array[String],
-              targets: untyped,
+              targets: Array[
+                {
+                  key: untyped,
+                  values: untyped
+                }
+              ],
               targets_max_concurrency: untyped,
               targets_max_errors: untyped
             }
@@ -2574,7 +2659,8 @@ module Aws::SSM
             name: String
           }
         ]
-      }
+      },
+      ?association_dispatch_assume_role: String
     ) -> _UpdateAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssociationResponse
 
     interface _UpdateAssociationStatusResponse
@@ -2591,6 +2677,32 @@ module Aws::SSM
         additional_info: String
       }
     ) -> _UpdateAssociationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssociationStatusResponse
+
+    interface _UpdateCloudConnectorResponse
+      include Smithy::Client::_Response[Types::UpdateCloudConnectorResult]
+      def cloud_connector_id: () -> String?
+    end
+    def update_cloud_connector: (
+      ?cloud_connector_id: String,
+      ?display_name: String,
+      ?configuration: {
+        azure_configuration: {
+          tenant_id: String,
+          tenant_display_name: String,
+          application_id: String,
+          application_display_name: String,
+          targets: {
+            subscriptions: Array[
+              {
+                id: String,
+                display_name: String
+              }
+            ]
+          }
+        }
+      },
+      ?description: String
+    ) -> _UpdateCloudConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCloudConnectorResponse
 
     interface _UpdateDocumentResponse
       include Smithy::Client::_Response[Types::UpdateDocumentResult]
@@ -2939,5 +3051,16 @@ module Aws::SSM
       ?setting_id: String,
       ?setting_value: String
     ) -> _UpdateServiceSettingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceSettingResponse
+
+    interface _ValidateCloudConnectorResponse
+      include Smithy::Client::_Response[Types::ValidateCloudConnectorResult]
+      def validation_findings: () -> Array[Types::ValidationFinding]?
+      def next_token: () -> String?
+    end
+    def validate_cloud_connector: (
+      ?cloud_connector_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ValidateCloudConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateCloudConnectorResponse
   end
 end

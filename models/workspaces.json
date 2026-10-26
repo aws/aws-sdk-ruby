@@ -894,6 +894,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DeploymentError.WorkspaceUnreachable"
                     }
+                },
+                "APPLICATION_OLDVERSIONEXIST_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidationError.ApplicationOldVersionExists"
+                    }
                 }
             }
         },
@@ -1375,6 +1381,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$"
             }
         },
+        "com.amazonaws.workspaces#ClientExperiencePolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Z_0-9]+$"
+            }
+        },
         "com.amazonaws.workspaces#ClientLocale": {
             "type": "string",
             "traits": {
@@ -1408,6 +1424,12 @@
                     "target": "com.amazonaws.workspaces#LogUploadEnum",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether users can upload diagnostic log files of Amazon WorkSpaces client directly to \n         WorkSpaces to troubleshoot issues when using the WorkSpaces client. \n         When enabled, the log files will be sent to WorkSpaces automatically and will be applied to all \n         users in the specified directory.</p>"
+                    }
+                },
+                "ClientExperiencePolicy": {
+                    "target": "com.amazonaws.workspaces#ClientExperiencePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client experience policy that determines which client experience the user sees.\n         Administrators can set this policy to control the client experience for users in a directory.\n         Valid values include <code>FORCE_CLASSIC</code>, <code>FORCE_UI_2026</code>,\n         and <code>USER_CHOICE</code>.</p>"
                     }
                 }
             },
@@ -1525,6 +1547,102 @@
                     "traits": {
                         "smithy.api#enumValue": "GRAPHICSPRO_G4DN"
                     }
+                },
+                "GRAPHICS_G6_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_XLARGE"
+                    }
+                },
+                "GRAPHICS_G6_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_2XLARGE"
+                    }
+                },
+                "GRAPHICS_G6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_4XLARGE"
+                    }
+                },
+                "GRAPHICS_G6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_8XLARGE"
+                    }
+                },
+                "GRAPHICS_G6_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6_16XLARGE"
+                    }
+                },
+                "GRAPHICS_GR6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_GR6_4XLARGE"
+                    }
+                },
+                "GRAPHICS_GR6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_GR6_8XLARGE"
+                    }
+                },
+                "GRAPHICS_G6F_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6F_LARGE"
+                    }
+                },
+                "GRAPHICS_G6F_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6F_XLARGE"
+                    }
+                },
+                "GRAPHICS_G6F_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6F_2XLARGE"
+                    }
+                },
+                "GRAPHICS_G6F_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6F_4XLARGE"
+                    }
+                },
+                "GRAPHICS_GR6F_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_GR6F_4XLARGE"
+                    }
+                },
+                "GRAPHICS_G7_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G7_2XLARGE"
+                    }
+                },
+                "GRAPHICS_G7_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G7_4XLARGE"
+                    }
+                },
+                "GRAPHICS_G7_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G7_8XLARGE"
+                    }
+                },
+                "GRAPHICS_G7_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G7_12XLARGE"
+                    }
                 }
             }
         },
@@ -1600,7 +1718,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an Amazon Connect client add-in.</p>"
+                "smithy.api#documentation": "<p>Describes an Connect Customer client add-in.</p>"
             }
         },
         "com.amazonaws.workspaces#ConnectClientAddInList": {
@@ -1857,7 +1975,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Copies the specified image from the specified Region to the current Region. For more\n         information about copying images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html\"> Copy a Custom WorkSpaces\n            Image</a>.</p>\n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web ServicesSupport.</p>\n         <important>\n            <p>Before copying a shared image, be sure to verify that it has been shared from the\n            correct Amazon Web Services account. To determine if an image has been shared and to see\n            the ID of the Amazon Web Services account that owns an image, use the <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html\">DescribeWorkSpaceImages</a> and <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html\">DescribeWorkspaceImagePermissions</a> API operations. </p>\n         </important>"
+                "smithy.api#documentation": "<p>Copies the specified image from the specified Region to the current Region. For more\n         information about copying images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html\"> Copy a Custom WorkSpaces\n            Image</a>.</p>\n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p>\n         <important>\n            <p>Before copying a shared image, be sure to verify that it has been shared from the\n            correct Amazon Web Services account. To determine if an image has been shared and to see\n            the ID of the Amazon Web Services account that owns an image, use the <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html\">DescribeWorkSpaceImages</a> and <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html\">DescribeWorkspaceImagePermissions</a> API operations. </p>\n         </important>"
             }
         },
         "com.amazonaws.workspaces#CopyWorkspaceImageRequest": {
@@ -2002,7 +2120,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a client-add-in for Amazon Connect within a directory. You can create only\n         one Amazon Connect client add-in within a directory.</p>\n         <p>This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.</p>"
+                "smithy.api#documentation": "<p>Creates a client-add-in for Connect Customer within a directory. You can create only\n         one Connect Customer client add-in within a directory.</p>\n         <p>This client add-in allows WorkSpaces users to seamlessly connect to Connect Customer.</p>"
             }
         },
         "com.amazonaws.workspaces#CreateConnectClientAddInRequest": {
@@ -2025,7 +2143,7 @@
                 "URL": {
                     "target": "com.amazonaws.workspaces#AddInUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint URL of the Amazon Connect client add-in.</p>",
+                        "smithy.api#documentation": "<p>The endpoint URL of the Connect Customer client add-in.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2666,7 +2784,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a pool of WorkSpaces.</p>"
+                "smithy.api#documentation": "<note>\n            <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,\nyou will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see\n<a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html\">Amazon WorkSpaces Pools end of support</a>.\n </p>\n         </note>\n         <p>Creates a pool of WorkSpaces.</p>"
             }
         },
         "com.amazonaws.workspaces#CreateWorkspacesPoolRequest": {
@@ -2847,6 +2965,66 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "PROCESSING_SOURCE_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING_SOURCE_IMAGE"
+                    }
+                },
+                "IMAGE_TESTING_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_TESTING_START"
+                    }
+                },
+                "UPDATING_OPERATING_SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING_OPERATING_SYSTEM"
+                    }
+                },
+                "IMAGE_COMPATIBILITY_CHECKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_COMPATIBILITY_CHECKING"
+                    }
+                },
+                "IMAGE_TESTING_GENERALIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_TESTING_GENERALIZATION"
+                    }
+                },
+                "CREATING_TEST_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING_TEST_INSTANCE"
+                    }
+                },
+                "INSTALLING_COMPONENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTALLING_COMPONENTS"
+                    }
+                },
+                "GENERALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERALIZING"
+                    }
+                },
+                "VALIDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATING"
+                    }
+                },
+                "PUBLISHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHING"
                     }
                 },
                 "COMPLETED": {
@@ -3288,7 +3466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a client-add-in for Amazon Connect that is configured within a\n         directory.</p>"
+                "smithy.api#documentation": "<p>Deletes a client-add-in for Connect Customer that is configured within a\n         directory.</p>"
             }
         },
         "com.amazonaws.workspaces#DeleteConnectClientAddInRequest": {
@@ -4190,7 +4368,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of Amazon Connect client add-ins that have been created.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of Connect Customer client add-ins that have been created.</p>"
             }
         },
         "com.amazonaws.workspaces#DescribeConnectClientAddInsRequest": {
@@ -4448,6 +4626,18 @@
                     "target": "com.amazonaws.workspaces#CustomWorkspaceImageImportState",
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the WorkSpace image.</p>"
+                    }
+                },
+                "StateMessage": {
+                    "target": "com.amazonaws.workspaces#WorkflowStateMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state message of the WorkSpace image import workflow.</p>"
+                    }
+                },
+                "ProgressPercentage": {
+                    "target": "com.amazonaws.workspaces#Percentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated progress percentage of the WorkSpace image import workflow.</p>"
                     }
                 },
                 "Created": {
@@ -5257,7 +5447,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list that describes the streaming sessions for a specified pool.</p>"
+                "smithy.api#documentation": "<note>\n            <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,\nyou will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see\n<a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html\">Amazon WorkSpaces Pools end of support</a>.\n </p>\n         </note>\n         <p>Retrieves a list that describes the streaming sessions for a specified pool.</p>"
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspacesPoolSessionsRequest": {
@@ -5333,7 +5523,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified WorkSpaces Pools.</p>"
+                "smithy.api#documentation": "<note>\n            <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,\nyou will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see\n<a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html\">Amazon WorkSpaces Pools end of support</a>.\n </p>\n         </note>\n         <p>Describes the specified WorkSpaces Pools.</p>"
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspacesPoolsFilter": {
@@ -5792,6 +5982,12 @@
                 "target": "com.amazonaws.workspaces#IpAddress"
             }
         },
+        "com.amazonaws.workspaces#DnsIpv6Addresses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#Ipv6Address"
+            }
+        },
         "com.amazonaws.workspaces#DomainName": {
             "type": "string",
             "traits": {
@@ -6169,6 +6365,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GRAPHICS_G4DN"
+                    }
+                },
+                "GRAPHICS_G6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G6"
+                    }
+                },
+                "GRAPHICS_G7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G7"
                     }
                 }
             }
@@ -6913,6 +7121,12 @@
                 "target": "com.amazonaws.workspaces#IpRuleItem"
             }
         },
+        "com.amazonaws.workspaces#Ipv6Address": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|[0-9a-fA-F]{1,4}(?::[0-9a-fA-F]{1,4}){0,6}::[0-9a-fA-F]{1,4}$"
+            }
+        },
         "com.amazonaws.workspaces#Limit": {
             "type": "integer",
             "traits": {
@@ -7201,7 +7415,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Migrates a WorkSpace from one operating system or bundle type to another, while\n         retaining the data on the user volume.</p>\n         <p>The migration process recreates the WorkSpace by using a new root volume from the target\n         bundle image and the user volume from the last available snapshot of the original\n         WorkSpace. During migration, the original <code>D:\\Users\\%USERNAME%</code> user profile\n         folder is renamed to <code>D:\\Users\\%USERNAME%MMddyyTHHmmss%.NotMigrated</code>. A new\n            <code>D:\\Users\\%USERNAME%\\</code> folder is generated by the new OS. Certain files in\n         the old user profile are moved to the new user profile.</p>\n         <p>For available migration scenarios, details about what happens during migration, and best\n         practices, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html\">Migrate a\n         WorkSpace</a>.</p>"
+                "smithy.api#documentation": "<p>Migrates a WorkSpace from one operating system or bundle type to another, while\n         retaining the data on the user volume.</p>\n         <p>The migration process recreates the WorkSpace by using a new root volume from the target\n         bundle image and the user volume from the last available snapshot of the original\n         WorkSpace. During migration, the original <code>D:\\Users\\%USERNAME%</code> user profile\n         folder is renamed to <code>D:\\Users\\%USERNAME%MMddyyTHHmmss%.NotMigrated</code>. A new\n            <code>D:\\Users\\%USERNAME%\\</code> folder is generated by the new OS. Certain files in\n         the old user profile are moved to the new user profile.</p>\n         <p>For available migration scenarios, details about what happens during migration, and best\n         practices, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html\">Migrate a\n         WorkSpace</a>.</p>\n         <note>\n            <p>If the source WorkSpace has nested virtualization enabled and the target bundle does\n            not support nested virtualization, the migration fails.</p>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#MigrateWorkspaceRequest": {
@@ -7266,6 +7480,18 @@
                     "traits": {
                         "smithy.api#enumValue": "COMPUTE_TYPE"
                     }
+                },
+                "PROTOCOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROTOCOL"
+                    }
+                },
+                "NESTED_VIRTUALIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NESTED_VIRTUALIZATION"
+                    }
                 }
             }
         },
@@ -7275,7 +7501,7 @@
                 "Resource": {
                     "target": "com.amazonaws.workspaces#ModificationResourceEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource.</p>"
+                        "smithy.api#documentation": "<p>The WorkSpace property being modified.</p>"
                     }
                 },
                 "State": {
@@ -7302,6 +7528,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
                     }
                 }
             }
@@ -8076,6 +8308,12 @@
                         "smithy.api#enumValue": "WINDOWS_SERVER_2022"
                     }
                 },
+                "WINDOWS_SERVER_2025": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2025"
+                    }
+                },
                 "RHEL_8": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -8199,6 +8437,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequest"
+            }
+        },
+        "com.amazonaws.workspaces#Percentage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.workspaces#Platform": {
@@ -9288,7 +9535,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the specified pool.</p>\n         <p>You cannot start a pool unless it has a running mode of \n         <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,\nyou will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see\n<a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html\">Amazon WorkSpaces Pools end of support</a>.\n </p>\n         </note>\n         <p>Starts the specified pool.</p>\n         <p>You cannot start a pool unless it has a running mode of \n         <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>"
             }
         },
         "com.amazonaws.workspaces#StartWorkspacesPoolRequest": {
@@ -9406,7 +9653,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops the specified pool.</p>\n         <p>You cannot stop a WorkSpace pool unless it has a running mode of <code>AutoStop</code> \n         and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,\nyou will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see\n<a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html\">Amazon WorkSpaces Pools end of support</a>.\n </p>\n         </note>\n         <p>Stops the specified pool.</p>\n         <p>You cannot stop a WorkSpace pool unless it has a running mode of <code>AutoStop</code> \n         and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>"
             }
         },
         "com.amazonaws.workspaces#StopWorkspacesPoolRequest": {
@@ -9722,7 +9969,7 @@
                 "target": "com.amazonaws.workspaces#TerminateWorkspacesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the specified WorkSpaces.</p>\n         <important>\n            <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data\n            is destroyed. If you need to archive any user data, contact Amazon Web ServicesSupport before\n            terminating the WorkSpace.</p>\n         </important>\n         <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have been completely\n         terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned\n         only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely\n         returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using\n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n            DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace has\n         been successfully terminated.</p>\n         <note>\n            <p>Simple AD and AD Connector are made available to you free of charge to use with\n            WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector\n            directory for 30 consecutive days, this directory will be automatically deregistered for\n            use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href=\"http://aws.amazon.com/directoryservice/pricing/\">Directory Service pricing\n               terms</a>.</p>\n            <p>To delete empty directories, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html\"> Delete the\n               Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector\n            directory, you can always create a new one when you want to start using WorkSpaces\n            again.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Terminates the specified WorkSpaces.</p>\n         <important>\n            <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data\n            is destroyed. If you need to archive any user data, contact Amazon Web Services Support before\n            terminating the WorkSpace.</p>\n         </important>\n         <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have been completely\n         terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned\n         only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely\n         returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using\n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n            DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace has\n         been successfully terminated.</p>\n         <note>\n            <p>Simple AD and AD Connector are made available to you free of charge to use with\n            WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector\n            directory for 30 consecutive days, this directory will be automatically deregistered for\n            use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href=\"http://aws.amazon.com/directoryservice/pricing/\">Directory Service pricing\n               terms</a>.</p>\n            <p>To delete empty directories, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html\"> Delete the\n               Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector\n            directory, you can always create a new one when you want to start using WorkSpaces\n            again.</p>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#TerminateWorkspacesPool": {
@@ -9751,7 +9998,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the specified pool.</p>"
+                "smithy.api#documentation": "<note>\n            <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,\nyou will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see\n<a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html\">Amazon WorkSpaces Pools end of support</a>.\n </p>\n         </note>\n         <p>Terminates the specified pool.</p>"
             }
         },
         "com.amazonaws.workspaces#TerminateWorkspacesPoolRequest": {
@@ -9802,7 +10049,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the pool session.</p>"
+                "smithy.api#documentation": "<note>\n            <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,\nyou will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see\n<a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html\">Amazon WorkSpaces Pools end of support</a>.\n </p>\n         </note>\n         <p>Terminates the pool session.</p>"
             }
         },
         "com.amazonaws.workspaces#TerminateWorkspacesPoolSessionRequest": {
@@ -9929,7 +10176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Amazon Connect client add-in. Use this action to update the name and\n         endpoint URL of a Amazon Connect client add-in.</p>"
+                "smithy.api#documentation": "<p>Updates a Connect Customer client add-in. Use this action to update the name and\n         endpoint URL of a Connect Customer client add-in.</p>"
             }
         },
         "com.amazonaws.workspaces#UpdateConnectClientAddInRequest": {
@@ -9958,7 +10205,7 @@
                 "URL": {
                     "target": "com.amazonaws.workspaces#AddInUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint URL of the Amazon Connect client add-in.</p>"
+                        "smithy.api#documentation": "<p>The endpoint URL of the Connect Customer client add-in.</p>"
                     }
                 }
             },
@@ -10207,7 +10454,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Shares or unshares an image with one account in the same Amazon Web Services Region by\n         specifying whether that account has permission to copy the image. If the copy image\n         permission is granted, the image is shared with that account. If the copy image permission\n         is revoked, the image is unshared with the account.</p>\n         <p>After an image has been shared, the recipient account can copy the image to other\n         Regions as needed.</p>\n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web ServicesSupport.</p>\n         <p>For more information about sharing images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\"> Share or Unshare a Custom\n            WorkSpaces Image</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>To delete an image that has been shared, you must unshare the image before you\n                  delete it.</p>\n               </li>\n               <li>\n                  <p>Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts\n                  isn't supported at this time in Amazon Web Services GovCloud (US). To share BYOL images\n                  across accounts in Amazon Web Services GovCloud (US), contact Amazon Web ServicesSupport.</p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Shares or unshares an image with one account in the same Amazon Web Services Region by\n         specifying whether that account has permission to copy the image. If the copy image\n         permission is granted, the image is shared with that account. If the copy image permission\n         is revoked, the image is unshared with the account.</p>\n         <p>After an image has been shared, the recipient account can copy the image to other\n         Regions as needed.</p>\n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p>\n         <p>For more information about sharing images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\"> Share or Unshare a Custom\n            WorkSpaces Image</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>To delete an image that has been shared, you must unshare the image before you\n                  delete it.</p>\n               </li>\n               <li>\n                  <p>Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts\n                  isn't supported at this time in Amazon Web Services GovCloud (US). To share BYOL images\n                  across accounts in Amazon Web Services GovCloud (US), contact Amazon Web Services Support.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#UpdateWorkspaceImagePermissionRequest": {
@@ -10278,7 +10525,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified pool.</p>"
+                "smithy.api#documentation": "<note>\n            <p>End of support notice: On December 31, 2027, Amazon Web Services will end support for Amazon WorkSpaces Pools. After December 31, 2027,\nyou will no longer be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools resources. For more information, see\n<a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html\">Amazon WorkSpaces Pools end of support</a>.\n </p>\n         </note>\n         <p>Updates the specified pool.</p>"
             }
         },
         "com.amazonaws.workspaces#UpdateWorkspacesPoolRequest": {
@@ -10671,6 +10918,15 @@
                 "target": "com.amazonaws.workspaces#WorkSpaceAssociatedResourceType"
             }
         },
+        "com.amazonaws.workspaces#WorkflowStateMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.workspaces#Workspace": {
             "type": "structure",
             "members": {
@@ -10696,6 +10952,12 @@
                     "target": "com.amazonaws.workspaces#IpAddress",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address of the WorkSpace.</p>"
+                    }
+                },
+                "Ipv6Address": {
+                    "target": "com.amazonaws.workspaces#Ipv6Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address of the WorkSpace.</p>"
                     }
                 },
                 "State": {
@@ -11103,6 +11365,12 @@
                     "target": "com.amazonaws.workspaces#DnsIpAddresses",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP addresses of the DNS servers for the directory.</p>"
+                    }
+                },
+                "DnsIpv6Addresses": {
+                    "target": "com.amazonaws.workspaces#DnsIpv6Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 addresses of the DNS servers for the directory.</p>"
                     }
                 },
                 "CustomerUserName": {
@@ -11912,7 +12180,7 @@
                 "Protocols": {
                     "target": "com.amazonaws.workspaces#ProtocolList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol. For more information, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html\">\n            Protocols for Amazon WorkSpaces</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Only available for WorkSpaces created with PCoIP bundles.</p>\n               </li>\n               <li>\n                  <p>The <code>Protocols</code> property is case sensitive. Ensure you use <code>PCOIP</code> or <code>DCV</code> (formerly WSP).</p>\n               </li>\n               <li>\n                  <p>Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles \n               (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The protocol. For more information, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html\">\n            Protocols for Amazon WorkSpaces</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Only available for WorkSpaces created with PCoIP bundles.</p>\n               </li>\n               <li>\n                  <p>The <code>Protocols</code> property is case sensitive. Ensure you use <code>PCOIP</code> or <code>DCV</code> (formerly WSP).</p>\n               </li>\n               <li>\n                  <p>Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles \n               (Graphics, GraphicsPro, Graphics.g4dn, GraphicsPro.g4dn, Graphics.g6, and Graphics.g7).</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "OperatingSystemName": {
@@ -11925,6 +12193,12 @@
                     "target": "com.amazonaws.workspaces#GlobalAcceleratorForWorkSpace",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the Global Accelerator properties.</p>"
+                    }
+                },
+                "NestedVirtualizationEnabled": {
+                    "target": "com.amazonaws.workspaces#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether nested virtualization is enabled for the WorkSpace.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/nested-virtualization.html\">Nested virtualization\n         for Amazon WorkSpaces</a>.</p>"
                     }
                 }
             },
@@ -11990,6 +12264,12 @@
                     "target": "com.amazonaws.workspaces#WorkspaceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the user-decoupled WorkSpace.</p>\n         <note>\n            <p>\n               <code>WorkspaceName</code> is required if <code>UserName</code> is\n            <code>[UNDEFINED]</code> for user-decoupled WorkSpaces.\n            <code>WorkspaceName</code> is not applicable if <code>UserName</code> is specified\n            for user-assigned WorkSpaces.</p>\n         </note>"
+                    }
+                },
+                "Ipv6Address": {
+                    "target": "com.amazonaws.workspaces#Ipv6Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address for the WorkSpace.</p>"
                     }
                 }
             },
@@ -13058,6 +13338,194 @@
                 "smithy.api#xmlNamespace": {
                     "uri": "http://workspaces.amazonaws.com/api/v1"
                 },
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://workspaces-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://workspaces-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://workspaces.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://workspaces.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -13065,27 +13533,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [

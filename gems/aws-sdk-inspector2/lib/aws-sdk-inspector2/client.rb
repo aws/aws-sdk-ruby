@@ -144,18 +144,18 @@ module Aws::Inspector2
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -584,6 +584,7 @@ module Aws::Inspector2
     #             start: Time.now, # required
     #             end: Time.now, # required
     #             status: "FreeTrialStatus", # required
+    #             cloud_provider: "CloudProvider"
     #           }
     #         ]
     #       }
@@ -913,6 +914,95 @@ module Aws::Inspector2
       request.send_request(options)
     end
 
+    # <p>Creates a connector that links an external cloud provider to Amazon Inspector for vulnerability scanning.</p>
+    # @param [Hash, Types::CreateConnectorRequest] params
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request but does not return an error.</p>
+    # @option params [String] :name
+    #   <p>The name of the connector.</p>
+    # @option params [String] :provider
+    #   <p>The cloud provider for the connector.</p>
+    # @option params [String] :description
+    #   <p>A description of the connector.</p>
+    # @option params [Types::ProviderDetailCreate] :provider_detail
+    #   <p>The provider-specific configuration details for the connector.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to apply to the connector.</p>
+    # @example Create an Azure customer-managed connector for VM scanning at SUBSCRIPTION scope
+    #   # Example operation for create_connector
+    #   params = {
+    #     name: "my-azure-connector",
+    #     description: "Azure subscription scanner",
+    #     provider: AZURE,
+    #     provider_detail: {
+    #     "azure" => {
+    #       "awsConfigConnectorArn" => arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae,
+    #       "scopeConfiguration" => {
+    #         "vmScanning" => {
+    #           "scopeType" => SUBSCRIPTION,
+    #           "scopeValues" => [552802f5-1492-4184-bbae-7291c9939b16]
+    #         }
+    #       },
+    #       "azureRegions" => [eastus],
+    #       "autoInstallVMScanner" => true
+    #     }
+    #   },
+    #     tags: {
+    #       "env" => "prod",
+    #       "owner" => "security-team"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_connector(params, options)
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "String",
+    #     name: "ConnectorName", # required
+    #     provider: "AZURE" # One of: ["AZURE"], # required
+    #     description: "ConnectorDescription",
+    #     provider_detail: { # required
+    #       # One of:
+    #       azure: {
+    #         aws_config_connector_arn: "AwsConfigConnectorArn", # required
+    #         scope_configuration: { # required
+    #           vm_scanning: {
+    #             scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #             scope_values: ["ScopeValue"]
+    #           },
+    #           container_image_scanning: {
+    #             scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #             scope_values: ["ScopeValue"]
+    #           },
+    #           serverless_scanning: {
+    #             scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #             scope_values: ["ScopeValue"]
+    #           }
+    #         },
+    #         azure_regions: ["AzureRegion"], # required
+    #         auto_install_vm_scanner: false
+    #       }
+    #     },
+    #     tags: {
+    #       "ConnectorTagKey" => "ConnectorTagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "ConnectorArn", # required
+    #   }
+    # @return [Types::CreateConnectorResponse]
+    def create_connector(params = {}, options = {})
+      request = build_request(:create_connector, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a filter resource using specified filter criteria. When the filter action is set
     #          to <code>SUPPRESS</code> this action creates a suppression rule.</p>
     # @param [Hash, Types::CreateFilterInput] params
@@ -1237,6 +1327,120 @@ module Aws::Inspector2
     #         }
     #       ],
     #       code_repository_provider_type: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_org_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_image_reference: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_network_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_subnet_ids: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_repository_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_registry: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_digest: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_tags: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_pushed_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_architecture: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_last_in_use_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_in_use_count: [
+    #         {
+    #           upper_inclusive: 1.0,
+    #           lower_inclusive: 1.0
+    #         }
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_last_modified_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_serverless_function_execution_role: [
     #         {
     #           comparison: "StringComparison", # required
     #           value: "StringInput", # required
@@ -1581,6 +1785,120 @@ module Aws::Inspector2
     #           comparison: "StringComparison", # required
     #           value: "StringInput", # required
     #         }
+    #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_org_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_image_reference: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_network_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_subnet_ids: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_repository_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_registry: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_digest: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_tags: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_pushed_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_architecture: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_last_in_use_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_in_use_count: [
+    #         {
+    #           upper_inclusive: 1.0,
+    #           lower_inclusive: 1.0
+    #         }
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_last_modified_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_serverless_function_execution_role: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
     #       ]
     #     },
     #     report_format: "ReportFormat", # required
@@ -1658,6 +1976,74 @@ module Aws::Inspector2
     #         }
     #       ],
     #       lambda_function_tags: [
+    #         {
+    #           comparison: "ResourceMapComparison", # required
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString"
+    #         }
+    #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_org_id: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_instance_tags: [
+    #         {
+    #           comparison: "ResourceMapComparison", # required
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString"
+    #         }
+    #       ],
+    #       cloud_container_image_tags: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_container_repository_name: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_container_registry_name: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_tags: [
     #         {
     #           comparison: "ResourceMapComparison", # required
     #           key: "NonEmptyString", # required
@@ -1756,6 +2142,34 @@ module Aws::Inspector2
     # @return [Types::DeleteCodeSecurityScanConfigurationResponse]
     def delete_code_security_scan_configuration(params = {}, options = {})
       request = build_request(:delete_code_security_scan_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a connector from your account.</p>
+    # @param [Hash, Types::DeleteConnectorRequest] params
+    # @option params [String] :connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector to delete.</p>
+    # @example Delete a customer-managed connector
+    #   # Example operation for delete_connector
+    #   params = {
+    #     connector_arn: "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a"
+    #   }
+    #   options = {}
+    #   response = client.delete_connector(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connector_arn: "ConnectorArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteConnectorResponse]
+    def delete_connector(params = {}, options = {})
+      request = build_request(:delete_connector, params)
       request.send_request(options)
     end
 
@@ -2218,10 +2632,10 @@ module Aws::Inspector2
     #     status_reason: "String", # required
     #     created_on: Time.now, # required
     #     last_update_on: Time.now, # required
+    #     authorization_url: "AuthorizationUrl",
     #     tags: {
     #       "MapKey" => "MapValue"
-    #     },
-    #     authorization_url: "AuthorizationUrl"
+    #     }
     #   }
     # @return [Types::GetCodeSecurityIntegrationResponse]
     def get_code_security_integration(params = {}, options = {})
@@ -2307,10 +2721,21 @@ module Aws::Inspector2
       request.send_request(options)
     end
 
-    # <p>Retrieves setting configurations for Inspector scans.</p>
+    # <p>Retrieves setting configurations for Amazon Inspector scans. If you specify an
+    #          <code>accountId</code>, this operation returns the scan configuration for that member
+    #          account. You must be the delegated administrator for the specified member account.
+    #          If you do not specify an <code>accountId</code>, this operation returns your own
+    #          scan configuration.</p>
     # @param [Hash, Types::GetConfigurationInput] params
+    # @option params [String] :account_id
+    #   <p>The 12-digit Amazon Web Services account ID of the member account whose scan configuration you want
+    #            to retrieve. When specified, you must be the delegated administrator for this
+    #            member account. If not specified, the operation returns your own
+    #            configuration.</p>
     # @example Request syntax with placeholder values
-    #   params = {}
+    #   params = {
+    #     account_id: "AccountId"
+    #   }
     #   options = {}
     #   response = client.get_configuration(params, options)
     # @example Response structure with placeholder values
@@ -2329,6 +2754,11 @@ module Aws::Inspector2
     #       scan_mode_state: {
     #         scan_mode: "Ec2ScanMode",
     #         scan_mode_status: "Ec2ScanModeStatus"
+    #       },
+    #       vm_scanner_state: {
+    #         activated: false,
+    #         activated_at: Time.now,
+    #         status: "VMScannerStatus"
     #       }
     #     }
     #   }
@@ -2733,6 +3163,120 @@ module Aws::Inspector2
     #           comparison: "StringComparison", # required
     #           value: "StringInput", # required
     #         }
+    #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_org_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_image_reference: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_network_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_subnet_ids: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_repository_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_registry: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_digest: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_tags: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_pushed_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_architecture: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_last_in_use_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_in_use_count: [
+    #         {
+    #           upper_inclusive: 1.0,
+    #           lower_inclusive: 1.0
+    #         }
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_last_modified_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_serverless_function_execution_role: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
     #       ]
     #     }
     #   }
@@ -2841,6 +3385,74 @@ module Aws::Inspector2
     #           key: "NonEmptyString", # required
     #           value: "NonEmptyString"
     #         }
+    #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_org_id: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_instance_tags: [
+    #         {
+    #           comparison: "ResourceMapComparison", # required
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString"
+    #         }
+    #       ],
+    #       cloud_container_image_tags: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_container_repository_name: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_container_registry_name: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "ResourceStringComparison", # required
+    #           value: "ResourceStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_tags: [
+    #         {
+    #           comparison: "ResourceMapComparison", # required
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString"
+    #         }
     #       ]
     #     }
     #   }
@@ -2850,7 +3462,10 @@ module Aws::Inspector2
       request.send_request(options)
     end
 
-    # <p>Lists the permissions an account has to configure Amazon Inspector.</p>
+    # <p>
+    #          Lists the permissions an account has to configure Amazon Inspector.
+    #          If the account is a member account or standalone account with resources managed by an Organizations policy, the operation returns fewer permissions.
+    #       </p>
     # @param [Hash, Types::ListAccountPermissionsInput] params
     # @option params [String] :service
     #   <p>The service scan type to check permissions for.</p>
@@ -3455,9 +4070,6 @@ module Aws::Inspector2
     #         status_reason: "String", # required
     #         created_on: Time.now, # required
     #         last_update_on: Time.now, # required
-    #         tags: {
-    #           "MapKey" => "MapValue"
-    #         }
     #       }
     #     ],
     #     next_token: "String"
@@ -3540,9 +4152,6 @@ module Aws::Inspector2
     #         rule_set_categories: ["SAST" # One of: ["SAST", "IAC", "SCA"]], # required
     #         scope_settings: {
     #           project_selection_scope: "ALL" # One of: ["ALL"]
-    #         },
-    #         tags: {
-    #           "MapKey" => "MapValue"
     #         }
     #       }
     #     ],
@@ -3551,6 +4160,225 @@ module Aws::Inspector2
     # @return [Types::ListCodeSecurityScanConfigurationsResponse]
     def list_code_security_scan_configurations(params = {}, options = {})
       request = build_request(:list_code_security_scan_configurations, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists scan configurations for Amazon Web Services Config connectors. Results are paginated. Use the <code>nextToken</code> parameter to retrieve the next page of results.</p>
+    # @param [Hash, Types::ListConnectorScanConfigurationsRequest] params
+    # @option params [Array<String>] :aws_config_connector_arns
+    #   <p>The list of Amazon Web Services Config connector ARNs to filter results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call. Valid range is 1 to 50. To retrieve the remaining results, make another request with the <code>nextToken</code> value returned from this request.</p>
+    # @option params [String] :next_token
+    #   <p>A token to use for paginating results. Set this value to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request.</p>
+    # @example List scan configurations for a specific AWS Config connector
+    #   # Example operation for list_connector_scan_configurations
+    #   params = {
+    #     aws_config_connector_arns: [
+    #       "arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae"
+    #     ],
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_connector_scan_configurations(params, options)
+    #   response.to_h #=>
+    #   {
+    #     scan_configurations: [
+    #       {
+    #         aws_config_connector_arn: "arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae",
+    #         connector_arns: [
+    #           "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a"
+    #         ],
+    #         scan_configuration: {
+    #           container_image_scanning: {
+    #             push_duration: "DAYS_30",
+    #             pull_duration: "DAYS_14"
+    #           }
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     aws_config_connector_arns: ["AwsConfigConnectorArn"],
+    #     max_results: 1,
+    #     next_token: "ConnectorNextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_connector_scan_configurations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     scan_configurations: [ # required
+    #       {
+    #         aws_config_connector_arn: "AwsConfigConnectorArn", # required
+    #         connector_arns: ["ConnectorArn"], # required
+    #         scan_configuration: { # required
+    #           container_image_scanning: {
+    #             push_duration: "ContainerImageRescanDuration",
+    #             pull_duration: "ContainerImagePullDateRescanDuration"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "ConnectorNextToken"
+    #   }
+    # @return [Types::ListConnectorScanConfigurationsResponse]
+    def list_connector_scan_configurations(params = {}, options = {})
+      request = build_request(:list_connector_scan_configurations, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists connectors in your account. Results are paginated. Use the <code>nextToken</code> parameter to retrieve the next page of results.</p>
+    # @param [Hash, Types::ListConnectorsRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the <code>nextToken</code> value returned from this request.</p>
+    # @option params [String] :next_token
+    #   <p>A token to use for paginating results. Set this value to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request.</p>
+    # @option params [Types::ConnectorFilterCriteria] :filter_criteria
+    #   <p>The filter criteria to apply to the list of connectors.</p>
+    # @example List all Azure customer-managed connectors
+    #   # Example operation for list_connectors
+    #   params = {
+    #     max_results: 10,
+    #     filter_criteria: {
+    #       provider: [
+    #         {
+    #           comparison: EQUALS,
+    #           value: AZURE
+    #         }
+    #       ],
+    #       connector_type: [
+    #         {
+    #           comparison: EQUALS,
+    #           value: CUSTOMER_MANAGED
+    #         }
+    #       ]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.list_connectors(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         connector_arn: "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a",
+    #         name: "my-azure-connector",
+    #         description: "Azure subscription scanner",
+    #         provider: AZURE,
+    #         enablement_status: ENABLED,
+    #         health: {
+    #           connector_status: CONNECTED,
+    #           last_checked_at: Time.parse("2026-04-20T21:57:06.400Z")
+    #         },
+    #         created_at: Time.parse("2026-04-20T21:00:00.000Z"),
+    #         updated_at: Time.parse("2026-04-20T21:57:06.400Z"),
+    #         azure_regions: [
+    #           "eastus"
+    #         ],
+    #         aws_config_connector_arn: "arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae",
+    #         scope_configuration: {
+    #           vm_scanning: {
+    #             scope_type: SUBSCRIPTION,
+    #             scope_values: [
+    #               "552802f5-1492-4184-bbae-7291c9939b16"
+    #             ],
+    #             state: ACTIVE
+    #           }
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "ConnectorNextToken",
+    #     filter_criteria: {
+    #       connector_arns: [
+    #         {
+    #           comparison: "EQUALS" # One of: ["EQUALS"], # required
+    #           value: "ConnectorArn", # required
+    #         }
+    #       ],
+    #       accounts: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       aws_config_connector_arns: [
+    #         {
+    #           comparison: "EQUALS" # One of: ["EQUALS"], # required
+    #           value: "AwsConfigConnectorArn", # required
+    #         }
+    #       ],
+    #       connector_type: [
+    #         {
+    #           comparison: "EQUALS" # One of: ["EQUALS"], # required
+    #           value: "CUSTOMER_MANAGED" # One of: ["CUSTOMER_MANAGED", "SERVICE_LINKED"], # required
+    #         }
+    #       ],
+    #       provider: [
+    #         {
+    #           comparison: "EQUALS" # One of: ["EQUALS"], # required
+    #           value: "AZURE" # One of: ["AZURE"], # required
+    #         }
+    #       ]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.list_connectors(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         connector_arn: "ConnectorArn", # required
+    #         name: "ConnectorName",
+    #         description: "ConnectorDescription",
+    #         provider: "AZURE" # One of: ["AZURE"], # required
+    #         enablement_status: "ENABLED" # One of: ["ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "DELETED", "FAILED_TO_DELETE"],
+    #         enablement_status_reason: "String",
+    #         health: {
+    #           connector_status: "CONNECTED" # One of: ["CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"], # required
+    #           last_checked_at: Time.now, # required
+    #           message: "String"
+    #         },
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #         azure_regions: ["AzureRegion"],
+    #         aws_config_connector_arn: "AwsConfigConnectorArn",
+    #         scope_configuration: {
+    #           vm_scanning: {
+    #             scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #             scope_values: ["ScopeValue"],
+    #             state: "ACTIVE" # One of: ["ACTIVE", "PENDING", "ERROR", "DISABLED"],
+    #             state_reason: "String"
+    #           },
+    #           container_image_scanning: {
+    #             scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #             scope_values: ["ScopeValue"],
+    #             state: "ACTIVE" # One of: ["ACTIVE", "PENDING", "ERROR", "DISABLED"],
+    #             state_reason: "String"
+    #           },
+    #           serverless_scanning: {
+    #             scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #             scope_values: ["ScopeValue"],
+    #             state: "ACTIVE" # One of: ["ACTIVE", "PENDING", "ERROR", "DISABLED"],
+    #             state_reason: "String"
+    #           }
+    #         },
+    #         tags: {
+    #           "ConnectorTagKey" => "ConnectorTagValue"
+    #         },
+    #         auto_install_vm_scanner: false
+    #       }
+    #     ],
+    #     next_token: "ConnectorNextToken"
+    #   }
+    # @return [Types::ListConnectorsResponse]
+    def list_connectors(params = {}, options = {})
+      request = build_request(:list_connectors, params)
       request.send_request(options)
     end
 
@@ -3701,6 +4529,74 @@ module Aws::Inspector2
     #           comparison: "CoverageStringComparison", # required
     #           value: "CoverageStringInput", # required
     #         }
+    #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_instance_tags: [
+    #         {
+    #           comparison: "CoverageMapComparison", # required
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString"
+    #         }
+    #       ],
+    #       cloud_container_image_tags: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_container_repository_name: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_container_registry_name: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_tags: [
+    #         {
+    #           comparison: "CoverageMapComparison", # required
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString"
+    #         }
+    #       ],
+    #       cloud_provider_org_id: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
     #       ]
     #     }
     #   }
@@ -3774,10 +4670,43 @@ module Aws::Inspector2
     #                 reason: "ScanStatusReason", # required
     #               }
     #             }
+    #           },
+    #           vm_instance: {
+    #             tags: {
+    #               "MapKey" => "MapValue"
+    #             },
+    #             platform: "VmPlatform",
+    #             inventory_hash: "String",
+    #             vm_image_reference: "String"
+    #           },
+    #           container_image: {
+    #             image_tags: ["String"],
+    #             image_pulled_at: Time.now,
+    #             last_in_use_at: Time.now,
+    #             in_use_count: 1
+    #           },
+    #           container_repository: {
+    #             name: "String",
+    #             scan_frequency: "String"
+    #           },
+    #           container_registry: {
+    #             name: "String"
+    #           },
+    #           serverless_function: {
+    #             serverless_function_name: "String",
+    #             runtime: "String",
+    #             function_tags: {
+    #               "MapKey" => "MapValue"
+    #             }
     #           }
     #         },
     #         last_scanned_at: Time.now,
-    #         scan_mode: "ScanMode"
+    #         scan_mode: "ScanMode",
+    #         provider: "Provider",
+    #         provider_account_id: "ProviderAccountId",
+    #         provider_org_id: "ProviderOrgId",
+    #         provider_region: "ProviderRegion",
+    #         provider_partition: "ProviderPartition"
     #       }
     #     ]
     #   }
@@ -3925,6 +4854,74 @@ module Aws::Inspector2
     #         }
     #       ],
     #       last_scanned_commit_id: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_instance_tags: [
+    #         {
+    #           comparison: "CoverageMapComparison", # required
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString"
+    #         }
+    #       ],
+    #       cloud_container_image_tags: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_container_repository_name: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_container_registry_name: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "CoverageStringComparison", # required
+    #           value: "CoverageStringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_tags: [
+    #         {
+    #           comparison: "CoverageMapComparison", # required
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString"
+    #         }
+    #       ],
+    #       cloud_provider_org_id: [
     #         {
     #           comparison: "CoverageStringComparison", # required
     #           value: "CoverageStringInput", # required
@@ -4330,6 +5327,120 @@ module Aws::Inspector2
     #               comparison: "StringComparison", # required
     #               value: "StringInput", # required
     #             }
+    #           ],
+    #           cloud_provider: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_provider_region: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_provider_account_id: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_provider_org_id: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_vm_image_reference: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_vm_network_id: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_vm_subnet_ids: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_image_repository_name: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_image_registry: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_image_digest: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_image_tags: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_image_pushed_at: [
+    #             {
+    #               start_inclusive: Time.now,
+    #               end_inclusive: Time.now
+    #             }
+    #           ],
+    #           cloud_image_architecture: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_image_last_in_use_at: [
+    #             {
+    #               start_inclusive: Time.now,
+    #               end_inclusive: Time.now
+    #             }
+    #           ],
+    #           cloud_image_in_use_count: [
+    #             {
+    #               upper_inclusive: 1.0,
+    #               lower_inclusive: 1.0
+    #             }
+    #           ],
+    #           cloud_serverless_function_name: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_serverless_function_runtime: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
+    #           ],
+    #           cloud_serverless_function_last_modified_at: [
+    #             {
+    #               start_inclusive: Time.now,
+    #               end_inclusive: Time.now
+    #             }
+    #           ],
+    #           cloud_serverless_function_execution_role: [
+    #             {
+    #               comparison: "StringComparison", # required
+    #               value: "StringInput", # required
+    #             }
     #           ]
     #         },
     #         action: "FilterAction", # required
@@ -4498,6 +5609,36 @@ module Aws::Inspector2
     #             value: "StringInput", # required
     #           }
     #         ],
+    #         cloud_providers: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_account_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_org_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_regions: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_partitions: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
     #         sort_order: "SortOrder",
     #         sort_by: "ImageLayerSortBy"
     #       },
@@ -4535,9 +5676,9 @@ module Aws::Inspector2
     #           }
     #         ],
     #         resource_type: "AggregationResourceType",
+    #         finding_type: "AggregationFindingType",
     #         sort_order: "SortOrder",
-    #         sort_by: "TitleSortBy",
-    #         finding_type: "AggregationFindingType"
+    #         sort_by: "TitleSortBy"
     #       },
     #       lambda_layer_aggregation: {
     #         function_names: [
@@ -4611,6 +5752,206 @@ module Aws::Inspector2
     #             value: "StringInput", # required
     #           }
     #         ]
+    #       },
+    #       vm_instance_aggregation: {
+    #         resource_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         operating_systems: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         instance_tags: [
+    #           {
+    #             comparison: "MapComparison", # required
+    #             key: "MapKey", # required
+    #             value: "MapValue"
+    #           }
+    #         ],
+    #         vm_image_references: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_providers: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_partitions: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_regions: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_org_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_account_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         sort_order: "SortOrder",
+    #         sort_by: "VmInstanceSortBy"
+    #       },
+    #       container_image_aggregation: {
+    #         resource_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         image_digests: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         repositories: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         registries: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         architectures: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         image_tags: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_providers: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_partitions: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_regions: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_org_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_account_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         last_in_use_at: [
+    #           {
+    #             start_inclusive: Time.now,
+    #             end_inclusive: Time.now
+    #           }
+    #         ],
+    #         in_use_count: [
+    #           {
+    #             upper_inclusive: 1.0,
+    #             lower_inclusive: 1.0
+    #           }
+    #         ],
+    #         sort_order: "SortOrder",
+    #         sort_by: "ContainerImageSortBy"
+    #       },
+    #       serverless_function_aggregation: {
+    #         resource_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         function_names: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         runtimes: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         function_tags: [
+    #           {
+    #             comparison: "MapComparison", # required
+    #             key: "MapKey", # required
+    #             value: "MapValue"
+    #           }
+    #         ],
+    #         cloud_providers: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_partitions: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_regions: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_org_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         cloud_account_ids: [
+    #           {
+    #             comparison: "StringComparison", # required
+    #             value: "StringInput", # required
+    #           }
+    #         ],
+    #         sort_order: "SortOrder",
+    #         sort_by: "ServerlessFunctionSortBy"
     #       }
     #     }
     #   }
@@ -4628,7 +5969,10 @@ module Aws::Inspector2
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         },
     #         exploit_available_count: 1,
     #         fix_available_count: 1
@@ -4636,11 +5980,19 @@ module Aws::Inspector2
     #       ami_aggregation: {
     #         ami: "AmiId", # required
     #         account_id: "AccountId",
+    #         cloud_provider: "Provider",
+    #         cloud_partition: "ProviderPartition",
+    #         cloud_region: "ProviderRegion",
+    #         cloud_org_id: "ProviderOrgId",
+    #         cloud_account_id: "ProviderAccountId",
     #         severity_counts: {
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         },
     #         affected_instances: 1
     #       },
@@ -4655,7 +6007,10 @@ module Aws::Inspector2
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         },
     #         last_in_use_at: Time.now,
     #         in_use_count: 1
@@ -4672,7 +6027,10 @@ module Aws::Inspector2
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         },
     #         network_findings: 1
     #       },
@@ -4682,21 +6040,37 @@ module Aws::Inspector2
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         },
     #         exploit_available_count: 1,
-    #         fix_available_count: 1
+    #         fix_available_count: 1,
+    #         cloud_provider: "String",
+    #         cloud_account_id: "String",
+    #         cloud_org_id: "String",
+    #         cloud_region: "String",
+    #         cloud_partition: "String"
     #       },
     #       image_layer_aggregation: {
     #         repository: "NonEmptyString", # required
     #         resource_id: "NonEmptyString", # required
     #         layer_hash: "NonEmptyString", # required
     #         account_id: "AccountId", # required
+    #         cloud_provider: "String",
+    #         cloud_account_id: "String",
+    #         cloud_org_id: "String",
+    #         cloud_region: "String",
+    #         cloud_partition: "String",
     #         severity_counts: {
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         }
     #       },
     #       package_aggregation: {
@@ -4706,17 +6080,28 @@ module Aws::Inspector2
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         }
     #       },
     #       repository_aggregation: {
     #         repository: "NonEmptyString", # required
     #         account_id: "AccountId",
+    #         cloud_provider: "Provider",
+    #         cloud_partition: "ProviderPartition",
+    #         cloud_region: "ProviderRegion",
+    #         cloud_org_id: "ProviderOrgId",
+    #         cloud_account_id: "ProviderAccountId",
     #         severity_counts: {
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         },
     #         affected_images: 1
     #       },
@@ -4728,7 +6113,10 @@ module Aws::Inspector2
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         }
     #       },
     #       lambda_layer_aggregation: {
@@ -4740,7 +6128,10 @@ module Aws::Inspector2
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         }
     #       },
     #       lambda_function_aggregation: {
@@ -4755,7 +6146,10 @@ module Aws::Inspector2
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         },
     #         last_modified_at: Time.now
     #       },
@@ -4766,12 +6160,94 @@ module Aws::Inspector2
     #           all: 1,
     #           medium: 1,
     #           high: 1,
-    #           critical: 1
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
     #         },
     #         exploit_available_active_findings_count: 1,
     #         fix_available_active_findings_count: 1,
     #         account_id: "String",
     #         resource_id: "String"
+    #       },
+    #       vm_instance_aggregation: {
+    #         resource_id: "NonEmptyString", # required
+    #         cloud_provider: "Provider",
+    #         cloud_account_id: "ProviderAccountId",
+    #         cloud_partition: "ProviderPartition",
+    #         cloud_region: "ProviderRegion",
+    #         cloud_org_id: "ProviderOrgId",
+    #         vm_image_reference: "String",
+    #         operating_system: "String",
+    #         tags: {
+    #           "MapKey" => "MapValue"
+    #         },
+    #         account_id: "String",
+    #         severity_counts: {
+    #           all: 1,
+    #           medium: 1,
+    #           high: 1,
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
+    #         },
+    #         network_findings: 1,
+    #         exploit_available_active_findings_count: 1,
+    #         fix_available_active_findings_count: 1
+    #       },
+    #       container_image_aggregation: {
+    #         resource_id: "NonEmptyString", # required
+    #         cloud_provider: "Provider",
+    #         cloud_account_id: "ProviderAccountId",
+    #         cloud_partition: "ProviderPartition",
+    #         cloud_region: "ProviderRegion",
+    #         cloud_org_id: "ProviderOrgId",
+    #         image_digest: "String",
+    #         repository: "String",
+    #         registry: "String",
+    #         architecture: "String",
+    #         image_tags: ["NonEmptyString"],
+    #         account_id: "String",
+    #         severity_counts: {
+    #           all: 1,
+    #           medium: 1,
+    #           high: 1,
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
+    #         },
+    #         last_in_use_at: Time.now,
+    #         in_use_count: 1,
+    #         exploit_available_active_findings_count: 1,
+    #         fix_available_active_findings_count: 1
+    #       },
+    #       serverless_function_aggregation: {
+    #         resource_id: "NonEmptyString", # required
+    #         cloud_provider: "Provider",
+    #         cloud_account_id: "ProviderAccountId",
+    #         cloud_partition: "ProviderPartition",
+    #         cloud_region: "ProviderRegion",
+    #         cloud_org_id: "ProviderOrgId",
+    #         function_name: "String",
+    #         runtime: "String",
+    #         tags: {
+    #           "MapKey" => "MapValue"
+    #         },
+    #         account_id: "String",
+    #         severity_counts: {
+    #           all: 1,
+    #           medium: 1,
+    #           high: 1,
+    #           critical: 1,
+    #           low: 1,
+    #           informational: 1,
+    #           untriaged: 1
+    #         },
+    #         last_modified_at: Time.now,
+    #         exploit_available_active_findings_count: 1,
+    #         fix_available_active_findings_count: 1
     #       }
     #     }],
     #     next_token: "NextToken"
@@ -5109,6 +6585,120 @@ module Aws::Inspector2
     #           comparison: "StringComparison", # required
     #           value: "StringInput", # required
     #         }
+    #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_org_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_image_reference: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_network_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_subnet_ids: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_repository_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_registry: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_digest: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_tags: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_pushed_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_architecture: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_last_in_use_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_in_use_count: [
+    #         {
+    #           upper_inclusive: 1.0,
+    #           lower_inclusive: 1.0
+    #         }
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_last_modified_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_serverless_function_execution_role: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
     #       ]
     #     },
     #     sort_criteria: {
@@ -5194,8 +6784,51 @@ module Aws::Inspector2
     #                 project_name: "CodeRepositoryProjectName",
     #                 integration_arn: "CodeRepositoryIntegrationArn",
     #                 provider_type: "CodeRepositoryProviderType"
+    #               },
+    #               vm: {
+    #                 type: "NonEmptyString",
+    #                 vm_name: "NonEmptyString",
+    #                 vm_image_reference: "NonEmptyString",
+    #                 ip_v4_addresses: ["IpV4Address"],
+    #                 ip_v6_addresses: ["IpV6Address"],
+    #                 network_id: "NonEmptyString",
+    #                 subnet_ids: ["NonEmptyString"],
+    #                 security_group_ids: ["NonEmptyString"],
+    #                 launched_at: Time.now,
+    #                 platform: "Platform",
+    #                 execution_role: "NonEmptyString",
+    #                 key_name: "NonEmptyString"
+    #               },
+    #               image: {
+    #                 repository_name: "NonEmptyString",
+    #                 registry: "NonEmptyString",
+    #                 image_tags: ["NonEmptyString"],
+    #                 image_digest: "NonEmptyString",
+    #                 pushed_at: Time.now,
+    #                 architecture: "NonEmptyString",
+    #                 author: "String",
+    #                 in_use_count: 1,
+    #                 last_in_use_at: Time.now,
+    #                 platform: "Platform"
+    #               },
+    #               serverless_function: {
+    #                 serverless_function_name: "NonEmptyString",
+    #                 runtime: "NonEmptyString",
+    #                 version: "NonEmptyString",
+    #                 code_digest: "NonEmptyString",
+    #                 last_modified_at: Time.now,
+    #                 network_id: "NonEmptyString",
+    #                 subnet_ids: ["NonEmptyString"],
+    #                 security_group_ids: ["NonEmptyString"],
+    #                 execution_role: "NonEmptyString",
+    #                 package_type: "PackageType",
+    #                 architectures: ["Architecture"],
+    #                 layers: ["ServerlessFunctionLayerUrn"]
     #               }
-    #             }
+    #             },
+    #             provider: "Provider",
+    #             provider_account_id: "ProviderAccountId",
+    #             provider_org_id: "ProviderOrgId"
     #           }
     #         ],
     #         inspector_score: 1.0,
@@ -5395,7 +7028,8 @@ module Aws::Inspector2
     #             type: "UsageType",
     #             total: 1.0,
     #             estimated_monthly_cost: 1.0,
-    #             currency: "Currency"
+    #             currency: "Currency",
+    #             cloud_provider: "CloudProvider"
     #           }
     #         ]
     #       }
@@ -5949,16 +7583,33 @@ module Aws::Inspector2
       request.send_request(options)
     end
 
-    # <p>Updates setting configurations for your Amazon Inspector account. When you use this API as an Amazon Inspector
-    #          delegated administrator this updates the setting for all accounts you manage. Member
-    #          accounts in an organization cannot update this setting.</p>
+    # <p>Updates the scan configuration for your Amazon Inspector account. If you don't specify an
+    #          <code>accountId</code>, this operation updates the delegated administrator's configuration
+    #          and propagates it to member accounts that have not been individually configured. If you
+    #          specify an <code>accountId</code>, this operation updates that member account's
+    #          configuration. Only the delegated administrator can specify an <code>accountId</code>;
+    #          member accounts cannot call this operation.</p>
     # @param [Hash, Types::UpdateConfigurationInput] params
+    # @option params [String] :account_id
+    #   <p>The 12-digit Amazon Web Services account ID of the member account whose scan configuration you want
+    #            to update. When specified, you must be the delegated administrator for this member
+    #            account. If not specified, the operation updates your own configuration and
+    #            propagates changes to any member accounts that have not been individually configured.</p>
     # @option params [Types::EcrConfiguration] :ecr_configuration
     #   <p>Specifies how the ECR automated re-scan will be updated for your environment.</p>
     # @option params [Types::Ec2Configuration] :ec2_configuration
     #   <p>Specifies how the Amazon EC2 automated scan will be updated for your environment.</p>
+    # @option params [Types::UpdateConfigurationInheritance] :update_configuration_inheritance
+    #   <p>Specifies which scan-type configurations to reset to the delegated administrator's
+    #            inherited values for the targeted member account. Each member of this structure is
+    #            independently optional. When specified, <code>ec2Configuration</code> and
+    #            <code>ecrConfiguration</code> must be absent, and <code>accountId</code> must also be
+    #            present. Only <code>INHERIT_FROM_ADMIN</code> is valid for each member. If not specified,
+    #            the operation uses the <code>ec2Configuration</code> and <code>ecrConfiguration</code>
+    #            parameters instead.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     account_id: "AccountId",
     #     ecr_configuration: {
     #       rescan_duration: "EcrRescanDuration", # required
     #       pull_date_rescan_duration: "EcrPullDateRescanDuration",
@@ -5966,6 +7617,11 @@ module Aws::Inspector2
     #     },
     #     ec2_configuration: {
     #       scan_mode: "Ec2ScanMode", # required
+    #       activate_vm_scanner: false
+    #     },
+    #     update_configuration_inheritance: {
+    #       ec2_configuration: "InheritanceMode",
+    #       ecr_configuration: "InheritanceMode"
     #     }
     #   }
     #   options = {}
@@ -5976,6 +7632,114 @@ module Aws::Inspector2
     # @return [Types::UpdateConfigurationOutput]
     def update_configuration(params = {}, options = {})
       request = build_request(:update_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the description or provider-specific configuration details of an existing connector.</p>
+    # @param [Hash, Types::UpdateConnectorRequest] params
+    # @option params [String] :connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector to update.</p>
+    # @option params [String] :description
+    #   <p>The updated description of the connector.</p>
+    # @option params [Types::ProviderDetailUpdate] :provider_detail
+    #   <p>The updated provider-specific configuration details for the connector.</p>
+    # @example Expand the Azure regions covered by a connector
+    #   # Example operation for update_connector
+    #   params = {
+    #     connector_arn: "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a",
+    #     provider_detail: {
+    #     "azure" => {
+    #       "azureRegions" => [
+    #         eastus,
+    #         westus
+    #       ]
+    #     }
+    #   }
+    #   }
+    #   options = {}
+    #   response = client.update_connector(params, options)
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connector_arn: "ConnectorArn", # required
+    #     description: "ConnectorDescription",
+    #     provider_detail: {
+    #       # One of:
+    #       azure: {
+    #         azure_regions: ["AzureRegion"],
+    #         scope_configuration: {
+    #           vm_scanning: {
+    #             scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #             scope_values: ["ScopeValue"]
+    #           },
+    #           container_image_scanning: {
+    #             scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #             scope_values: ["ScopeValue"]
+    #           },
+    #           serverless_scanning: {
+    #             scope_type: "TENANT" # One of: ["TENANT", "SUBSCRIPTION"], # required
+    #             scope_values: ["ScopeValue"]
+    #           }
+    #         },
+    #         auto_install_vm_scanner: false
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "ConnectorArn"
+    #   }
+    # @return [Types::UpdateConnectorResponse]
+    def update_connector(params = {}, options = {})
+      request = build_request(:update_connector, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates scan configuration settings for resources associated with an Amazon Web Services Config connector.</p>
+    # @param [Hash, Types::UpdateConnectorScanConfigurationRequest] params
+    # @option params [String] :aws_config_connector_arn
+    #   <p>The ARN of the Amazon Web Services Config connector.</p>
+    # @option params [Types::ConnectorScanConfiguration] :scan_configuration
+    #   <p>The scan configuration settings to apply.</p>
+    # @example Set 30-day push and 14-day pull rescan durations for an Azure container registry connector
+    #   # Example operation for update_connector_scan_configuration
+    #   params = {
+    #     aws_config_connector_arn: "arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae",
+    #     scan_configuration: {
+    #       container_image_scanning: {
+    #         push_duration: "DAYS_30",
+    #         pull_duration: "DAYS_14"
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_connector_scan_configuration(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     aws_config_connector_arn: "AwsConfigConnectorArn", # required
+    #     scan_configuration: { # required
+    #       container_image_scanning: {
+    #         push_duration: "ContainerImageRescanDuration",
+    #         pull_duration: "ContainerImagePullDateRescanDuration"
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_connector_scan_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateConnectorScanConfigurationResponse]
+    def update_connector_scan_configuration(params = {}, options = {})
+      request = build_request(:update_connector_scan_configuration, params)
       request.send_request(options)
     end
 
@@ -6361,6 +8125,120 @@ module Aws::Inspector2
     #           comparison: "StringComparison", # required
     #           value: "StringInput", # required
     #         }
+    #       ],
+    #       cloud_provider: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_region: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_account_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_provider_org_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_image_reference: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_network_id: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_vm_subnet_ids: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_repository_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_registry: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_digest: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_tags: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_pushed_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_architecture: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_image_last_in_use_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_image_in_use_count: [
+    #         {
+    #           upper_inclusive: 1.0,
+    #           lower_inclusive: 1.0
+    #         }
+    #       ],
+    #       cloud_serverless_function_name: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_runtime: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
+    #       ],
+    #       cloud_serverless_function_last_modified_at: [
+    #         {
+    #           start_inclusive: Time.now,
+    #           end_inclusive: Time.now
+    #         }
+    #       ],
+    #       cloud_serverless_function_execution_role: [
+    #         {
+    #           comparison: "StringComparison", # required
+    #           value: "StringInput", # required
+    #         }
     #       ]
     #     },
     #     name: "FilterName",
@@ -6517,7 +8395,11 @@ module Aws::Inspector2
     private
 
     def waiters
-      {}
+      {
+        connector_connected: Waiters::ConnectorConnected,
+        connector_deleted: Waiters::ConnectorDeleted,
+        connector_enabled: Waiters::ConnectorEnabled
+      }
     end
 
     class << self

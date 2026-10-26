@@ -81,7 +81,9 @@ module Aws::Grafana
         prefix_list_ids: Array[String],
         vpce_ids: Array[String]
       },
-      ?grafana_version: String
+      ?grafana_version: String,
+      ?ip_address_type: String,
+      ?kms_key_id: String
     ) -> _CreateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceResponse
 
     interface _CreateWorkspaceApiKeyResponse
@@ -327,7 +329,8 @@ module Aws::Grafana
         prefix_list_ids: Array[String],
         vpce_ids: Array[String]
       },
-      ?remove_network_access_configuration: bool
+      ?remove_network_access_configuration: bool,
+      ?ip_address_type: String
     ) -> _UpdateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceResponse
 
     interface _UpdateWorkspaceAuthenticationResponse

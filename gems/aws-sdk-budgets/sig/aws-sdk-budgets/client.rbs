@@ -116,6 +116,11 @@ module Aws::Budgets
                 key: String,
                 values: untyped,
                 match_options: untyped
+              },
+              product_attributes: {
+                key: String,
+                values: untyped,
+                match_options: untyped
               }
             }
           ],
@@ -123,7 +128,8 @@ module Aws::Budgets
           not: untyped,
           dimensions: untyped,
           tags: untyped,
-          cost_categories: untyped
+          cost_categories: untyped,
+          product_attributes: untyped
         },
         metrics: Array[String],
         billing_view_arn: String,
@@ -547,6 +553,11 @@ module Aws::Budgets
                 key: String,
                 values: untyped,
                 match_options: untyped
+              },
+              product_attributes: {
+                key: String,
+                values: untyped,
+                match_options: untyped
               }
             }
           ],
@@ -554,7 +565,8 @@ module Aws::Budgets
           not: untyped,
           dimensions: untyped,
           tags: untyped,
-          cost_categories: untyped
+          cost_categories: untyped,
+          product_attributes: untyped
         },
         metrics: Array[String],
         billing_view_arn: String,

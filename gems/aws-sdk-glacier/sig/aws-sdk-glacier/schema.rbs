@@ -72,6 +72,7 @@ module Aws::Glacier
     ListVaultsInput: StructureShape
     ListVaultsOutput: StructureShape
     MissingParameterValueException: StructureShape
+    NoLongerSupportedException: StructureShape
     NotificationEventList: ListShape
     NullableLong: IntegerShape
     OutputLocation: StructureShape

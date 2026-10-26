@@ -34,9 +34,9 @@ module Aws::TranscribeStreaming
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>One or more arguments to the <code>StartStreamTranscription</code>, 
-    #       <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code> 
-    #       operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code> 
+    # <p>One or more arguments to the <code>StartStreamTranscription</code>,
+    #       <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code>
+    #       operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code>
     #       used unsupported values. Check the specified parameters and try your request again.</p>
     class BadRequestException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -63,7 +63,7 @@ module Aws::TranscribeStreaming
       end
     end
 
-    # <p>A problem occurred while processing the audio. Amazon Transcribe terminated 
+    # <p>A problem occurred while processing the audio. Amazon Transcribe terminated
     #       processing.</p>
     class InternalFailureException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -77,8 +77,11 @@ module Aws::TranscribeStreaming
       end
     end
 
-    # <p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length
-    #       limit. Break your audio stream into smaller chunks and try your request again.</p>
+    # <p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream
+    #       service quota. This error can also occur if a stream exceeds the maximum session duration. In rare
+    #       cases, this error can also occur if you increase your number of concurrent streams too quickly.
+    #       Reduce your number of concurrent streams and try your request again using an exponential backoff
+    #       strategy.</p>
     class LimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TranscribeStreaming::Types::LimitExceededException] data

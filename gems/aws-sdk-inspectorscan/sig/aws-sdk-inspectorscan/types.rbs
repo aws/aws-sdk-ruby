@@ -35,6 +35,7 @@ module Aws::InspectorScan
     module OutputFormat
       CYCLONE_DX_1_5: String
       INSPECTOR: String
+      INSPECTOR_ALT: String
     end
 
     class ScanSbomRequest

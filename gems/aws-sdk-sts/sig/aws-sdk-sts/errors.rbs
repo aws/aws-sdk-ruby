@@ -3,6 +3,9 @@ module Aws::STS
     class ExpiredTokenException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ExpiredTradeInTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class IDPCommunicationErrorException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -15,13 +18,22 @@ module Aws::STS
     class InvalidIdentityTokenException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class JWTPayloadSizeExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class MalformedPolicyDocumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OutboundWebIdentityFederationDisabledException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class PackedPolicyTooLargeException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class RegionDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SessionDurationEscalationException < Smithy::Client::ServiceError
       def message: () -> String?
     end
   end

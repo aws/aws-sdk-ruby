@@ -103,13 +103,25 @@ module Aws::Synthetics
           browser_type: String
         }
       ],
+      ?add_replica_locations: Array[
+        {
+          location: String,
+          vpc_config: {
+            subnet_ids: Array[String],
+            security_group_ids: Array[String],
+            ipv6_allowed_for_dual_stack: bool
+          },
+          kms_key_arn: String
+        }
+      ],
       ?tags: Hash[String, String],
       ?artifact_config: {
         s3_encryption: {
           encryption_mode: String,
           kms_key_arn: String
         }
-      }
+      },
+      ?kms_key_arn: String
     ) -> _CreateCanaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCanaryResponse
 
     interface _CreateGroupResponse
@@ -427,7 +439,20 @@ module Aws::Synthetics
         {
           browser_type: String
         }
-      ]
+      ],
+      ?add_replica_locations: Array[
+        {
+          location: String,
+          vpc_config: {
+            subnet_ids: Array[String],
+            security_group_ids: Array[String],
+            ipv6_allowed_for_dual_stack: bool
+          },
+          kms_key_arn: String
+        }
+      ],
+      ?remove_replica_locations: Array[String],
+      ?kms_key_arn: String
     ) -> _UpdateCanaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCanaryResponse
   end
 end

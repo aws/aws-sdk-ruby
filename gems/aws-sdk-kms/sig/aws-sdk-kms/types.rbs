@@ -202,6 +202,7 @@ module Aws::KMS
         ?xks_proxy_uri_endpoint: String,
         ?xks_proxy_uri_path: String,
         ?xks_proxy_vpc_endpoint_service_name: String,
+        ?xks_proxy_vpc_endpoint_service_owner: String,
         ?xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType,
         ?xks_proxy_connectivity: String,
       ) -> void
@@ -215,6 +216,7 @@ module Aws::KMS
       attr_accessor xks_proxy_uri_endpoint: String?
       attr_accessor xks_proxy_uri_path: String?
       attr_accessor xks_proxy_vpc_endpoint_service_name: String?
+      attr_accessor xks_proxy_vpc_endpoint_service_owner: String?
       attr_accessor xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType?
       attr_accessor xks_proxy_connectivity: String?
     end
@@ -242,6 +244,8 @@ module Aws::KMS
         ?grant_tokens: Array[String],
         ?name: String,
         ?dry_run: bool,
+        ?grantee_service_principal: String,
+        ?retiring_service_principal: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -253,6 +257,8 @@ module Aws::KMS
       attr_accessor grant_tokens: Array[String]?
       attr_accessor name: String?
       attr_accessor dry_run: bool?
+      attr_accessor grantee_service_principal: String?
+      attr_accessor retiring_service_principal: String?
     end
 
     class CreateGrantResponse
@@ -411,6 +417,7 @@ module Aws::KMS
       ECC_NIST_P521: String
       ECC_SECG_P256K1: String
       SM2: String
+      ECC_NIST_EDWARDS25519: String
     end
 
     module DataKeySpec
@@ -429,6 +436,7 @@ module Aws::KMS
         ?encryption_algorithm: String,
         ?recipient: Types::RecipientInfo,
         ?dry_run: bool,
+        ?dry_run_modifiers: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -439,6 +447,7 @@ module Aws::KMS
       attr_accessor encryption_algorithm: String?
       attr_accessor recipient: Types::RecipientInfo?
       attr_accessor dry_run: bool?
+      attr_accessor dry_run_modifiers: Array[String]?
     end
 
     class DecryptResponse
@@ -675,6 +684,10 @@ module Aws::KMS
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    module DryRunModifierType
+      IGNORE_CIPHERTEXT: String
     end
 
     class DryRunOperationException
@@ -993,6 +1006,34 @@ module Aws::KMS
       attr_accessor ciphertext_for_recipient: String?
     end
 
+    class GetKeyLastUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    class GetKeyLastUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?key_last_usage: Types::KeyLastUsageData,
+        ?tracking_start_date: Time,
+        ?key_creation_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor key_last_usage: Types::KeyLastUsageData?
+      attr_accessor tracking_start_date: Time?
+      attr_accessor key_creation_date: Time?
+    end
+
     class GetKeyPolicyRequest
       include Smithy::Schema::Structure
 
@@ -1125,11 +1166,13 @@ module Aws::KMS
       def initialize: (
         ?encryption_context_subset: Hash[String, String],
         ?encryption_context_equals: Hash[String, String],
+        ?source_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor encryption_context_subset: Hash[String, String]?
       attr_accessor encryption_context_equals: Hash[String, String]?
+      attr_accessor source_arn: String?
     end
 
     class GrantListEntry
@@ -1145,6 +1188,8 @@ module Aws::KMS
         ?issuing_account: String,
         ?operations: Array[String],
         ?constraints: Types::GrantConstraints,
+        ?grantee_service_principal: String,
+        ?retiring_service_principal: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1157,6 +1202,8 @@ module Aws::KMS
       attr_accessor issuing_account: String?
       attr_accessor operations: Array[String]?
       attr_accessor constraints: Types::GrantConstraints?
+      attr_accessor grantee_service_principal: String?
+      attr_accessor retiring_service_principal: String?
     end
 
     module GrantOperation
@@ -1405,6 +1452,38 @@ module Aws::KMS
       RSAES_OAEP_SHA_256: String
     end
 
+    class KeyLastUsageData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation: String,
+        ?timestamp: Time,
+        ?cloud_trail_event_id: String,
+        ?kms_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation: String?
+      attr_accessor timestamp: Time?
+      attr_accessor cloud_trail_event_id: String?
+      attr_accessor kms_request_id: String?
+    end
+
+    module KeyLastUsageTrackingOperation
+      Decrypt: String
+      DeriveSharedSecret: String
+      Encrypt: String
+      GenerateDataKey: String
+      GenerateDataKeyPair: String
+      GenerateDataKeyPairWithoutPlaintext: String
+      GenerateDataKeyWithoutPlaintext: String
+      GenerateMac: String
+      ReEncrypt: String
+      Sign: String
+      Verify: String
+      VerifyMac: String
+    end
+
     class KeyListEntry
       include Smithy::Schema::Structure
 
@@ -1427,6 +1506,7 @@ module Aws::KMS
       NON_CURRENT: String
       CURRENT: String
       PENDING_ROTATION: String
+      PENDING_MULTI_REGION_IMPORT_AND_ROTATION: String
     end
 
     class KeyMetadata
@@ -1507,6 +1587,7 @@ module Aws::KMS
       ML_DSA_44: String
       ML_DSA_65: String
       ML_DSA_87: String
+      ECC_NIST_EDWARDS25519: String
     end
 
     module KeyState
@@ -1603,6 +1684,7 @@ module Aws::KMS
         ?key_id: String,
         ?grant_id: String,
         ?grantee_principal: String,
+        ?grantee_service_principal: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1611,6 +1693,7 @@ module Aws::KMS
       attr_accessor key_id: String?
       attr_accessor grant_id: String?
       attr_accessor grantee_principal: String?
+      attr_accessor grantee_service_principal: String?
     end
 
     class ListKeyPoliciesRequest
@@ -1755,12 +1838,14 @@ module Aws::KMS
         ?limit: Integer,
         ?marker: String,
         ?retiring_principal: String,
+        ?retiring_service_principal: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor limit: Integer?
       attr_accessor marker: String?
       attr_accessor retiring_principal: String?
+      attr_accessor retiring_service_principal: String?
     end
 
     module MacAlgorithmSpec
@@ -1868,6 +1953,7 @@ module Aws::KMS
         ?destination_encryption_algorithm: String,
         ?grant_tokens: Array[String],
         ?dry_run: bool,
+        ?dry_run_modifiers: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1880,6 +1966,7 @@ module Aws::KMS
       attr_accessor destination_encryption_algorithm: String?
       attr_accessor grant_tokens: Array[String]?
       attr_accessor dry_run: bool?
+      attr_accessor dry_run_modifiers: Array[String]?
     end
 
     class ReEncryptResponse
@@ -2118,6 +2205,8 @@ module Aws::KMS
       ECDSA_SHA_512: String
       SM2DSA: String
       ML_DSA_SHAKE_256: String
+      ED25519_SHA_512: String
+      ED25519_PH_SHA_512: String
     end
 
     class Tag
@@ -2205,6 +2294,7 @@ module Aws::KMS
         ?xks_proxy_uri_endpoint: String,
         ?xks_proxy_uri_path: String,
         ?xks_proxy_vpc_endpoint_service_name: String,
+        ?xks_proxy_vpc_endpoint_service_owner: String,
         ?xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType,
         ?xks_proxy_connectivity: String,
       ) -> void
@@ -2217,6 +2307,7 @@ module Aws::KMS
       attr_accessor xks_proxy_uri_endpoint: String?
       attr_accessor xks_proxy_uri_path: String?
       attr_accessor xks_proxy_vpc_endpoint_service_name: String?
+      attr_accessor xks_proxy_vpc_endpoint_service_owner: String?
       attr_accessor xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType?
       attr_accessor xks_proxy_connectivity: String?
     end
@@ -2403,6 +2494,7 @@ module Aws::KMS
         ?uri_endpoint: String,
         ?uri_path: String,
         ?vpc_endpoint_service_name: String,
+        ?vpc_endpoint_service_owner: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2411,6 +2503,7 @@ module Aws::KMS
       attr_accessor uri_endpoint: String?
       attr_accessor uri_path: String?
       attr_accessor vpc_endpoint_service_name: String?
+      attr_accessor vpc_endpoint_service_owner: String?
     end
 
     module XksProxyConnectivityType

@@ -9,6 +9,8 @@ module Aws::Route53
     ARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53#ARN", name: "ARN", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "\\S"})
     AWSAccountID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53#AWSAccountID", name: "AWSAccountID")
     AWSRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53#AWSRegion", name: "AWSRegion", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
+    AcceleratedRecoveryEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.route53#AcceleratedRecoveryEnabled", name: "AcceleratedRecoveryEnabled")
+    AcceleratedRecoveryStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53#AcceleratedRecoveryStatus", name: "AcceleratedRecoveryStatus")
     AccountLimit = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#AccountLimit", name: "AccountLimit")
     AccountLimitType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53#AccountLimitType", name: "AccountLimitType")
     ActivateKeySigningKeyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#ActivateKeySigningKeyRequest", name: "ActivateKeySigningKeyRequest")
@@ -131,6 +133,7 @@ module Aws::Route53
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53#ErrorMessage", name: "ErrorMessage")
     ErrorMessages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53#ErrorMessages", name: "ErrorMessages")
     EvaluationPeriods = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53#EvaluationPeriods", name: "EvaluationPeriods", traits: {"smithy.api#range" => {"min" => 1}})
+    FailureReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53#FailureReason", name: "FailureReason")
     FailureThreshold = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53#FailureThreshold", name: "FailureThreshold", traits: {"smithy.api#range" => {"min" => 1, "max" => 10}})
     FullyQualifiedDomainName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.route53#FullyQualifiedDomainName", name: "FullyQualifiedDomainName", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     GeoLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#GeoLocation", name: "GeoLocation")
@@ -199,6 +202,8 @@ module Aws::Route53
     HostedZoneAlreadyExists = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#HostedZoneAlreadyExists", name: "HostedZoneAlreadyExists", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     HostedZoneConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#HostedZoneConfig", name: "HostedZoneConfig")
     HostedZoneCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.route53#HostedZoneCount", name: "HostedZoneCount")
+    HostedZoneFailureReasons = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#HostedZoneFailureReasons", name: "HostedZoneFailureReasons")
+    HostedZoneFeatures = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#HostedZoneFeatures", name: "HostedZoneFeatures")
     HostedZoneLimit = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#HostedZoneLimit", name: "HostedZoneLimit")
     HostedZoneLimitType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53#HostedZoneLimitType", name: "HostedZoneLimitType")
     HostedZoneNotEmpty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#HostedZoneNotEmpty", name: "HostedZoneNotEmpty", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -396,6 +401,8 @@ module Aws::Route53
     UpdateHealthCheckResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#UpdateHealthCheckResponse", name: "UpdateHealthCheckResponse")
     UpdateHostedZoneCommentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#UpdateHostedZoneCommentRequest", name: "UpdateHostedZoneCommentRequest")
     UpdateHostedZoneCommentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#UpdateHostedZoneCommentResponse", name: "UpdateHostedZoneCommentResponse")
+    UpdateHostedZoneFeaturesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#UpdateHostedZoneFeaturesRequest", name: "UpdateHostedZoneFeaturesRequest")
+    UpdateHostedZoneFeaturesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#UpdateHostedZoneFeaturesResponse", name: "UpdateHostedZoneFeaturesResponse")
     UpdateTrafficPolicyCommentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#UpdateTrafficPolicyCommentRequest", name: "UpdateTrafficPolicyCommentRequest")
     UpdateTrafficPolicyCommentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#UpdateTrafficPolicyCommentResponse", name: "UpdateTrafficPolicyCommentResponse")
     UpdateTrafficPolicyInstanceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.route53#UpdateTrafficPolicyInstanceRequest", name: "UpdateTrafficPolicyInstanceRequest")
@@ -408,6 +415,14 @@ module Aws::Route53
     VPCRegion = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.route53#VPCRegion", name: "VPCRegion", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     VPCs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.route53#VPCs", name: "VPCs", traits: {"smithy.api#length" => {"min" => 1}})
 
+    AcceleratedRecoveryStatus.add_member(:enabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING", traits: {"smithy.api#enumValue" => "ENABLING"}))
+    AcceleratedRecoveryStatus.add_member(:enable_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLE_FAILED", traits: {"smithy.api#enumValue" => "ENABLE_FAILED"}))
+    AcceleratedRecoveryStatus.add_member(:enabling_hosted_zone_locked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLING_HOSTED_ZONE_LOCKED", traits: {"smithy.api#enumValue" => "ENABLING_HOSTED_ZONE_LOCKED"}))
+    AcceleratedRecoveryStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    AcceleratedRecoveryStatus.add_member(:disabling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING", traits: {"smithy.api#enumValue" => "DISABLING"}))
+    AcceleratedRecoveryStatus.add_member(:disable_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE_FAILED", traits: {"smithy.api#enumValue" => "DISABLE_FAILED"}))
+    AcceleratedRecoveryStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    AcceleratedRecoveryStatus.add_member(:disabling_hosted_zone_locked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLING_HOSTED_ZONE_LOCKED", traits: {"smithy.api#enumValue" => "DISABLING_HOSTED_ZONE_LOCKED"}))
     AccountLimit.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountLimitType, name: "Type", traits: {"smithy.api#required" => {}}))
     AccountLimit.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitValue, name: "Value", traits: {"smithy.api#required" => {}}))
     AccountLimit.type = Types::AccountLimit
@@ -551,6 +566,8 @@ module Aws::Route53
     CloudWatchRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_east_2", traits: {"smithy.api#enumValue" => "ap-east-2"}))
     CloudWatchRegion.add_member(:eu_isoe_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "eu_isoe_west_1", traits: {"smithy.api#enumValue" => "eu-isoe-west-1"}))
     CloudWatchRegion.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_6", traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
+    CloudWatchRegion.add_member(:us_isob_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "us_isob_west_1", traits: {"smithy.api#enumValue" => "us-isob-west-1"}))
+    CloudWatchRegion.add_member(:eusc_de_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "eusc_de_east_1", traits: {"smithy.api#enumValue" => "eusc-de-east-1"}))
     CollectionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollectionSummary, name: "member"))
     CollectionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "Arn"))
     CollectionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id"))
@@ -879,12 +896,18 @@ module Aws::Route53
     HostedZone.add_member(:config, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneConfig, name: "Config"))
     HostedZone.add_member(:resource_record_set_count, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneRRSetCount, name: "ResourceRecordSetCount"))
     HostedZone.add_member(:linked_service, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedService, name: "LinkedService"))
+    HostedZone.add_member(:features, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneFeatures, name: "Features"))
     HostedZone.type = Types::HostedZone
     HostedZoneAlreadyExists.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     HostedZoneAlreadyExists.type = Types::HostedZoneAlreadyExists
     HostedZoneConfig.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "Comment"))
     HostedZoneConfig.add_member(:private_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: IsPrivateZone, name: "PrivateZone", traits: {"smithy.api#default" => false}))
     HostedZoneConfig.type = Types::HostedZoneConfig
+    HostedZoneFailureReasons.add_member(:accelerated_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "AcceleratedRecovery"))
+    HostedZoneFailureReasons.type = Types::HostedZoneFailureReasons
+    HostedZoneFeatures.add_member(:accelerated_recovery_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratedRecoveryStatus, name: "AcceleratedRecoveryStatus"))
+    HostedZoneFeatures.add_member(:failure_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneFailureReasons, name: "FailureReasons"))
+    HostedZoneFeatures.type = Types::HostedZoneFeatures
     HostedZoneLimit.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZoneLimitType, name: "Type", traits: {"smithy.api#required" => {}}))
     HostedZoneLimit.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitValue, name: "Value", traits: {"smithy.api#required" => {}}))
     HostedZoneLimit.type = Types::HostedZoneLimit
@@ -1267,6 +1290,7 @@ module Aws::Route53
     ResourceRecordSetRegion.add_member(:us_gov_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "us_gov_west_1", traits: {"smithy.api#enumValue" => "us-gov-west-1"}))
     ResourceRecordSetRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_east_2", traits: {"smithy.api#enumValue" => "ap-east-2"}))
     ResourceRecordSetRegion.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_6", traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
+    ResourceRecordSetRegion.add_member(:eusc_de_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "eusc_de_east_1", traits: {"smithy.api#enumValue" => "eusc-de-east-1"}))
     ResourceRecordSets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRecordSet, name: "member", traits: {"smithy.api#xmlName" => "ResourceRecordSet"}))
     ResourceRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceRecord, name: "member", traits: {"smithy.api#xmlName" => "ResourceRecord"}))
     ResourceTagSet.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TagResourceType, name: "ResourceType"))
@@ -1381,6 +1405,10 @@ module Aws::Route53
     UpdateHostedZoneCommentRequest.type = Types::UpdateHostedZoneCommentRequest
     UpdateHostedZoneCommentResponse.add_member(:hosted_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedZone, name: "HostedZone", traits: {"smithy.api#required" => {}}))
     UpdateHostedZoneCommentResponse.type = Types::UpdateHostedZoneCommentResponse
+    UpdateHostedZoneFeaturesRequest.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "HostedZoneId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateHostedZoneFeaturesRequest.add_member(:enable_accelerated_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratedRecoveryEnabled, name: "EnableAcceleratedRecovery"))
+    UpdateHostedZoneFeaturesRequest.type = Types::UpdateHostedZoneFeaturesRequest
+    UpdateHostedZoneFeaturesResponse.type = Types::UpdateHostedZoneFeaturesResponse
     UpdateTrafficPolicyCommentRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyId, name: "Id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateTrafficPolicyCommentRequest.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyVersion, name: "Version", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateTrafficPolicyCommentRequest.add_member(:comment, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficPolicyComment, name: "Comment", traits: {"smithy.api#required" => {}}))
@@ -1445,13 +1473,15 @@ module Aws::Route53
     VPCRegion.add_member(:ap_east_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_east_2", traits: {"smithy.api#enumValue" => "ap-east-2"}))
     VPCRegion.add_member(:eu_isoe_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "eu_isoe_west_1", traits: {"smithy.api#enumValue" => "eu-isoe-west-1"}))
     VPCRegion.add_member(:ap_southeast_6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ap_southeast_6", traits: {"smithy.api#enumValue" => "ap-southeast-6"}))
+    VPCRegion.add_member(:us_isob_west_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "us_isob_west_1", traits: {"smithy.api#enumValue" => "us-isob-west-1"}))
+    VPCRegion.add_member(:eusc_de_east_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "eusc_de_east_1", traits: {"smithy.api#enumValue" => "eusc-de-east-1"}))
     VPCs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VPC, name: "member", traits: {"smithy.api#xmlName" => "VPC"}))
 
     AWSDnsV20130401 = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.route53#AWSDnsV20130401"
       service.name = "AWSDnsV20130401"
       service.version = "2013-04-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Route 53", "arnNamespace" => "route53", "cloudFormationName" => "Route53", "cloudTrailEventSource" => "route53.amazonaws.com", "docId" => "route53-2013-04-01", "endpointPrefix" => "route53"}, "aws.auth#sigv4" => {"name" => "route53"}, "aws.protocols#restXml" => {}, "smithy.api#title" => "Amazon Route 53", "smithy.api#xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Route 53", "arnNamespace" => "route53", "cloudFormationName" => "Route53", "cloudTrailEventSource" => "route53.amazonaws.com", "docId" => "route53-2013-04-01", "endpointPrefix" => "route53"}, "aws.auth#sigv4" => {"name" => "route53"}, "aws.protocols#restXml" => {}, "smithy.api#title" => "Amazon Route 53", "smithy.api#xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-cn"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-b"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-e"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-f"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-eusc"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53-fips.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.global.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53-fips.global.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.amazonaws.com.cn", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.global.api.amazonwebservices.com.cn", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.us-gov.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.us-gov.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.c2s.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.sc2s.sgov.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.cloud.adc-e.uk", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.csp.hci.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.amazonaws.eu", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.global.api.amazonwebservices.eu", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://route53-fips.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://route53-fips.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://route53.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 28, "nodes" => "/////wAAAAH/////AAAAAAAAABsAAAADAAAAAQAAAAQF9eEZAAAAAgAAAAUF9eEZAAAAAwAAABMAAAAGAAAABAAAABIAAAAHAAAABQAAABEAAAAIAAAABgAAABkAAAAJAAAABwAAAA8AAAAKAAAACQX14QwAAAALAAAACgX14Q0AAAAMAAAACwX14Q4AAAANAAAADAX14Q8AAAAOAAAADQX14RAF9eEYAAAADQX14REAAAAQAAAADgX14RYF9eEXAAAABwX14QkF9eEIAAAABwX14QYF9eEEAAAABAAAABoAAAAUAAAABgAAABkAAAAVAAAABwAAABcAAAAWAAAACAX14RQF9eEVAAAACAAAABgF9eETAAAADgX14RIF9eETAAAABwX14QsF9eEKAAAABwX14QcF9eEFAAAAAwX14QEAAAAcAAAABwX14QIF9eED"}}
       service.add_operation(:activate_key_signing_key, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53#ActivateKeySigningKey"
         operation.name = "ActivateKeySigningKey"
@@ -2173,6 +2203,17 @@ module Aws::Route53
         operation.errors << NoSuchHostedZone
         operation.errors << PriorRequestNotComplete
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2013-04-01/hostedzone/{Id}", "code" => 200}}
+      end)
+      service.add_operation(:update_hosted_zone_features, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.route53#UpdateHostedZoneFeatures"
+        operation.name = "UpdateHostedZoneFeatures"
+        operation.input = UpdateHostedZoneFeaturesRequest
+        operation.output = UpdateHostedZoneFeaturesResponse
+        operation.errors << InvalidInput
+        operation.errors << LimitsExceeded
+        operation.errors << NoSuchHostedZone
+        operation.errors << PriorRequestNotComplete
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2013-04-01/hostedzone/{HostedZoneId}/features", "code" => 200}}
       end)
       service.add_operation(:update_traffic_policy_comment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.route53#UpdateTrafficPolicyComment"

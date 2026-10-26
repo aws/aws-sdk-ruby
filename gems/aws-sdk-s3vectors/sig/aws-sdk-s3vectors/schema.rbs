@@ -36,6 +36,7 @@ module Aws::S3Vectors
     GetVectorsOutputList: ListShape
     Index: StructureShape
     IndexArn: StringShape
+    IndexMode: EnumShape
     IndexName: StringShape
     IndexSummary: StructureShape
     InternalServerException: StructureShape
@@ -51,6 +52,8 @@ module Aws::S3Vectors
     ListIndexesOutputList: ListShape
     ListIndexesPrefix: StringShape
     ListOutputVector: StructureShape
+    ListTagsForResourceInput: StructureShape
+    ListTagsForResourceOutput: StructureShape
     ListVectorBucketsInput: StructureShape
     ListVectorBucketsMaxResults: IntegerShape
     ListVectorBucketsNextToken: StringShape
@@ -69,6 +72,8 @@ module Aws::S3Vectors
     NonFilterableMetadataKeys: ListShape
     NotFoundException: StructureShape
     PutInputVector: StructureShape
+    PutVectorBucketDefaultIndexModeInput: StructureShape
+    PutVectorBucketDefaultIndexModeOutput: StructureShape
     PutVectorBucketPolicyInput: StructureShape
     PutVectorBucketPolicyOutput: StructureShape
     PutVectorsInput: StructureShape
@@ -76,13 +81,26 @@ module Aws::S3Vectors
     PutVectorsOutput: StructureShape
     QueryOutputVector: StructureShape
     QueryVectorsInput: StructureShape
+    QueryVectorsNextToken: StringShape
     QueryVectorsOutput: StructureShape
     QueryVectorsOutputList: ListShape
+    RequestTimeoutException: StructureShape
+    ResourceARN: StringShape
     ServiceQuotaExceededException: StructureShape
     ServiceUnavailableException: StructureShape
     SseType: EnumShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagResourceInput: StructureShape
+    TagResourceOutput: StructureShape
+    TagValue: StringShape
+    TagsMap: MapShape
     TooManyRequestsException: StructureShape
     TopK: IntegerShape
+    UntagResourceInput: StructureShape
+    UntagResourceOutput: StructureShape
+    UpdateIndexModeInput: StructureShape
+    UpdateIndexModeOutput: StructureShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape

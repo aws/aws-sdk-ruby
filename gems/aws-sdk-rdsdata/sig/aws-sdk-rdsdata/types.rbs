@@ -16,19 +16,19 @@ module Aws::RDSData
       include Smithy::Schema::Union
 
       def initialize: (
-        ?boolean_values: Array[bool],
-        ?long_values: Array[Integer],
-        ?double_values: Array[Float],
-        ?string_values: Array[String],
-        ?array_values: Array[Types::ArrayValue],
+        ?boolean_values: Array[bool?],
+        ?long_values: Array[Integer?],
+        ?double_values: Array[Float?],
+        ?string_values: Array[String?],
+        ?array_values: Array[Types::ArrayValue?],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor boolean_values: Array[bool]?
-      attr_accessor long_values: Array[Integer]?
-      attr_accessor double_values: Array[Float]?
-      attr_accessor string_values: Array[String]?
-      attr_accessor array_values: Array[Types::ArrayValue]?
+      attr_accessor boolean_values: Array[bool?]?
+      attr_accessor long_values: Array[Integer?]?
+      attr_accessor double_values: Array[Float?]?
+      attr_accessor string_values: Array[String?]?
+      attr_accessor array_values: Array[Types::ArrayValue?]?
 
       class BooleanValues < ArrayValue
       end
@@ -222,6 +222,11 @@ module Aws::RDSData
 
     end
 
+    module DecimalReturnType
+      STRING: String
+      DOUBLE_OR_LONG: String
+    end
+
     class ExecuteSqlInput
       include Smithy::Schema::Structure
 
@@ -395,6 +400,11 @@ module Aws::RDSData
       attr_accessor message: String?
     end
 
+    module LongReturnType
+      STRING: String
+      LONG: String
+    end
+
     class NotFoundException
       include Smithy::Schema::Structure
 
@@ -415,6 +425,11 @@ module Aws::RDSData
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor values: Array[Types::Value]?
+    end
+
+    module RecordsFormatType
+      NONE: String
+      JSON: String
     end
 
     class ResultFrame
@@ -563,6 +578,15 @@ module Aws::RDSData
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module TypeHint
+      JSON: String
+      UUID: String
+      TIMESTAMP: String
+      DATE: String
+      TIME: String
+      DECIMAL: String
     end
 
     class UnsupportedResultException

@@ -144,18 +144,18 @@ module Aws::KinesisVideo
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -220,7 +220,8 @@ module Aws::KinesisVideo
     #                   <code>SINGLE_MASTER</code> is the only supported channel type. </p>
     # @option params [Types::SingleMasterConfiguration] :single_master_configuration
     #   <p>A structure containing the configuration for the <code>SINGLE_MASTER</code> channel
-    #               type. </p>
+    #               type. The default configuration for the channel message's time to live is 60 seconds (1
+    #               minute).</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>A set of tags (key-value pairs) that you want to associate with this channel.</p>
     # @example Request syntax with placeholder values
@@ -262,8 +263,7 @@ module Aws::KinesisVideo
     # @option params [String] :device_name
     #   <p>The name of the device that is writing to the stream. </p>
     #            <note>
-    #               <p>In the current implementation, Kinesis Video Streams does not use this
-    #                   name.</p>
+    #               <p>In the current implementation, Kinesis Video Streams doesn't use this name.</p>
     #            </note>
     # @option params [String] :stream_name
     #   <p>A name for the stream that you are creating.</p>
@@ -281,11 +281,12 @@ module Aws::KinesisVideo
     #   <p>The ID of the Key Management Service (KMS) key that you want Kinesis Video
     #               Streams to use to encrypt stream data.</p>
     #            <p>If no key ID is specified, the default, Kinesis Video-managed key
-    #               (<code>Amazon Web Services/kinesisvideo</code>) is used.</p>
+    #               (<code>aws/kinesisvideo</code>) is used.</p>
     #            <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>
     # @option params [Integer] :data_retention_in_hours
     #   <p>The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p>
-    #            <p>The default value is 0, indicating that the stream does not persist data.</p>
+    #            <p>The default value is 0, indicating that the stream does not persist data. The minimum
+    #               is 1 hour.</p>
     #            <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume
     #               the fragments that remain in the service host buffer, which has a retention time limit
     #               of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the
@@ -293,6 +294,9 @@ module Aws::KinesisVideo
     # @option params [Hash<String, String>] :tags
     #   <p>A list of tags to associate with the specified stream. Each tag is a key-value pair
     #               (the value is optional).</p>
+    # @option params [Types::StreamStorageConfiguration] :stream_storage_configuration
+    #   <p>The configuration for the stream's storage, including the default storage tier for stream data. This configuration determines how stream data is stored and accessed, with different tiers offering varying levels of performance and cost optimization.</p>
+    #            <p>If not specified, the stream will use the default storage configuration with HOT tier for optimal performance.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     device_name: "DeviceName",
@@ -302,6 +306,9 @@ module Aws::KinesisVideo
     #     data_retention_in_hours: 1,
     #     tags: {
     #       "TagKey" => "TagValue"
+    #     },
+    #     stream_storage_configuration: {
+    #       default_storage_tier: "HOT" # One of: ["HOT", "WARM"], # required
     #     }
     #   }
     #   options = {}
@@ -410,7 +417,7 @@ module Aws::KinesisVideo
     #             evaluate the health of the Edge Agent.</p>
     # @param [Hash, Types::DescribeEdgeConfigurationInput] params
     # @option params [String] :stream_name
-    #   <p>The name of the stream whose edge configuration you want to update. Specify either the <code>StreamName</code> or 
+    #   <p>The name of the stream whose edge configuration you want to update. Specify either the <code>StreamName</code> or
     #               the <code>StreamARN</code>.
     #           </p>
     # @option params [String] :stream_arn
@@ -682,6 +689,36 @@ module Aws::KinesisVideo
       request.send_request(options)
     end
 
+    # <p>Retrieves the current storage configuration for the specified Kinesis video stream.</p>
+    #          <p>In the request, you must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>
+    #          <p>You must have permissions for the <code>KinesisVideo:DescribeStreamStorageConfiguration</code> action.</p>
+    # @param [Hash, Types::DescribeStreamStorageConfigurationInput] params
+    # @option params [String] :stream_name
+    #   <p>The name of the stream for which you want to retrieve the storage configuration.</p>
+    # @option params [String] :stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the stream for which you want to retrieve the storage configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN"
+    #   }
+    #   options = {}
+    #   response = client.describe_stream_storage_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #     stream_storage_configuration: {
+    #       default_storage_tier: "HOT" # One of: ["HOT", "WARM"], # required
+    #     }
+    #   }
+    # @return [Types::DescribeStreamStorageConfigurationOutput]
+    def describe_stream_storage_configuration(params = {}, options = {})
+      request = build_request(:describe_stream_storage_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Gets an endpoint for a specified stream for either reading or writing. Use this
     #             endpoint in your application to read from the specified stream (using the
     #                 <code>GetMedia</code> or <code>GetMediaForFragmentList</code> operations) or write
@@ -729,7 +766,9 @@ module Aws::KinesisVideo
     #             <code>Protocols</code> is used to determine the communication mechanism. For example,
     #             if you specify <code>WSS</code> as the protocol, this API produces a secure websocket
     #             endpoint. If you specify <code>HTTPS</code> as the protocol, this API generates an HTTPS
-    #             endpoint. </p>
+    #             endpoint. If you specify <code>WEBRTC</code> as the protocol, but the signaling channel isn't
+    #             configured for ingestion, you will receive the error
+    #                 <code>InvalidArgumentException</code>.</p>
     #          <p>
     #             <code>Role</code> determines the messaging permissions. A <code>MASTER</code> role
     #             results in this API generating an endpoint that a client can use to communicate with any
@@ -996,16 +1035,16 @@ module Aws::KinesisVideo
       request.send_request(options)
     end
 
-    # <p>An asynchronous API that updates a stream’s existing edge configuration. 
-    #             The Kinesis Video Stream will sync the stream’s edge configuration with the Edge Agent IoT Greengrass 
+    # <p>An asynchronous API that updates a stream’s existing edge configuration.
+    #             The Kinesis Video Stream will sync the stream’s edge configuration with the Edge Agent IoT Greengrass
     #             component that runs on an IoT Hub Device, setup at your premise. The time to sync can vary
-    #             and depends on the connectivity of the Hub Device. 
-    #             The <code>SyncStatus</code> will be updated as the edge configuration is acknowledged, 
+    #             and depends on the connectivity of the Hub Device.
+    #             The <code>SyncStatus</code> will be updated as the edge configuration is acknowledged,
     #             and synced with the Edge Agent. </p>
     #          <p>If this API is invoked for the first time, a new edge configuration will be created for the stream,
     #             and the sync status will be set to <code>SYNCING</code>. You will have to wait for the sync status
-    #             to reach a terminal state such as: <code>IN_SYNC</code>, or <code>SYNC_FAILED</code>, before using this API again. 
-    #             If you invoke this API during the syncing process, a <code>ResourceInUseException</code> will be thrown. 
+    #             to reach a terminal state such as: <code>IN_SYNC</code>, or <code>SYNC_FAILED</code>, before using this API again.
+    #             If you invoke this API during the syncing process, a <code>ResourceInUseException</code> will be thrown.
     #             The connectivity of the stream’s edge configuration and the Edge Agent will be retried for 15 minutes. After 15 minutes,
     #             the status will transition into the <code>SYNC_FAILED</code> state.</p>
     #          <p>To move an edge configuration from one device to another, use <a>DeleteEdgeConfiguration</a> to delete
@@ -1015,7 +1054,7 @@ module Aws::KinesisVideo
     #   <p>The name of the stream whose edge configuration you want to update. Specify either the <code>StreamName</code>
     #               or the <code>StreamARN</code>.</p>
     # @option params [String] :stream_arn
-    #   <p> The Amazon Resource Name (ARN) of the stream. Specify either the 
+    #   <p> The Amazon Resource Name (ARN) of the stream. Specify either the
     #               <code>StreamName</code> or the <code>StreamARN</code>.</p>
     # @option params [Types::EdgeConfig] :edge_config
     #   <p>The edge configuration details required to invoke the update process.</p>
@@ -1284,7 +1323,7 @@ module Aws::KinesisVideo
     # @option params [String] :stream_name
     #   <p>The name of the stream from which to update the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>
     # @option params [String] :stream_arn
-    #   <p>The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the image generation configuration. You must specify either the <code>StreamName</code> 
+    #   <p>The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the image generation configuration. You must specify either the <code>StreamName</code>
     #               or the <code>StreamARN</code>.</p>
     # @option params [Types::ImageGenerationConfiguration] :image_generation_configuration
     #   <p>The structure that contains the information required for the KVS images delivery. If the structure is null, the configuration will be deleted from the stream.</p>
@@ -1406,7 +1445,9 @@ module Aws::KinesisVideo
     #   <p>The current version of the signaling channel that you want to update.</p>
     # @option params [Types::SingleMasterConfiguration] :single_master_configuration
     #   <p>The structure containing the configuration for the <code>SINGLE_MASTER</code> type of
-    #               the signaling channel that you want to update. </p>
+    #               the signaling channel that you want to update. This parameter and the channel message's
+    #               time-to-live are required for channels with the <code>SINGLE_MASTER</code> channel
+    #               type.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     channel_arn: "ResourceARN", # required
@@ -1476,6 +1517,43 @@ module Aws::KinesisVideo
     # @return [Types::UpdateStreamOutput]
     def update_stream(params = {}, options = {})
       request = build_request(:update_stream, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the storage configuration for an existing Kinesis video stream.</p>
+    #          <p>This operation allows you to modify the storage tier settings for a stream, enabling you to optimize storage costs and performance based on your access patterns.</p>
+    #          <p>
+    #             <code>UpdateStreamStorageConfiguration</code> is an asynchronous operation.</p>
+    #          <p>You must have permissions for the <code>KinesisVideo:UpdateStreamStorageConfiguration</code> action.</p>
+    # @param [Hash, Types::UpdateStreamStorageConfigurationInput] params
+    # @option params [String] :stream_name
+    #   <p>The name of the stream for which you want to update the storage configuration.</p>
+    # @option params [String] :stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the stream for which you want to update the storage configuration.</p>
+    # @option params [String] :current_version
+    #   <p>The version of the stream whose storage configuration you want to change. To get the
+    #               version, call either the <code>DescribeStream</code> or the <code>ListStreams</code>
+    #               API.</p>
+    # @option params [Types::StreamStorageConfiguration] :stream_storage_configuration
+    #   <p>The new storage configuration for the stream. This includes the default storage tier that determines how stream data is stored and accessed.</p>
+    #            <p>Different storage tiers offer varying levels of performance and cost optimization to match your specific use case requirements.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #     current_version: "Version", # required
+    #     stream_storage_configuration: { # required
+    #       default_storage_tier: "HOT" # One of: ["HOT", "WARM"], # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_stream_storage_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateStreamStorageConfigurationOutput]
+    def update_stream_storage_configuration(params = {}, options = {})
+      request = build_request(:update_stream_storage_configuration, params)
       request.send_request(options)
     end
 

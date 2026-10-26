@@ -24,14 +24,19 @@ module Aws::GameLiftStreams
     CreateApplicationOutput: StructureShape
     CreateStreamGroupInput: StructureShape
     CreateStreamGroupOutput: StructureShape
+    CreateStreamSessionAdminShellInput: StructureShape
+    CreateStreamSessionAdminShellOutput: StructureShape
     CreateStreamSessionConnectionInput: StructureShape
     CreateStreamSessionConnectionOutput: StructureShape
+    CreateStreamUrlInput: StructureShape
+    CreateStreamUrlOutput: StructureShape
     DefaultApplication: StructureShape
     DeleteApplicationInput: StructureShape
     DeleteStreamGroupInput: StructureShape
     Description: StringShape
     DisassociateApplicationsInput: StructureShape
     DisassociateApplicationsOutput: StructureShape
+    DisplayConfiguration: StructureShape
     EnvironmentVariables: MapShape
     ExecutablePath: StringShape
     ExportFilesMetadata: StructureShape
@@ -49,10 +54,17 @@ module Aws::GameLiftStreams
     GetStreamGroupOutput: StructureShape
     GetStreamSessionInput: StructureShape
     GetStreamSessionOutput: StructureShape
+    GetStreamUrlInput: StructureShape
+    GetStreamUrlOutput: StructureShape
+    IamRoleArn: StringShape
     Id: StringShape
     Identifier: StringShape
     Identifiers: ListShape
     InternalServerException: StructureShape
+    Ipv4CidrBlock: StringShape
+    Ipv4CidrBlockList: ListShape
+    ListApplicationShaderCachesInput: StructureShape
+    ListApplicationShaderCachesOutput: StructureShape
     ListApplicationsInput: StructureShape
     ListApplicationsOutput: StructureShape
     ListStreamGroupsInput: StructureShape
@@ -61,6 +73,8 @@ module Aws::GameLiftStreams
     ListStreamSessionsByAccountOutput: StructureShape
     ListStreamSessionsInput: StructureShape
     ListStreamSessionsOutput: StructureShape
+    ListStreamUrlsInput: StructureShape
+    ListStreamUrlsOutput: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     LocationConfiguration: StructureShape
@@ -71,20 +85,32 @@ module Aws::GameLiftStreams
     LocationStates: ListShape
     LocationsList: ListShape
     MaxResults: IntegerShape
+    MaximumCapacity: IntegerShape
     NextToken: StringShape
     OnDemandCapacity: IntegerShape
     OutputUri: StringShape
+    PerformanceStatsConfiguration: StructureShape
     Protocol: EnumShape
+    RemainingUses: IntegerShape
     RemoveStreamGroupLocationsInput: StructureShape
     ReplicationStatus: StructureShape
     ReplicationStatusType: EnumShape
     ReplicationStatuses: ListShape
+    Resolution: StructureShape
+    ResolutionHeight: IntegerShape
+    ResolutionWidth: IntegerShape
     ResourceNotFoundException: StructureShape
+    RevocationMode: EnumShape
+    RevokeStreamUrlInput: StructureShape
     RuntimeEnvironment: StructureShape
     RuntimeEnvironmentType: EnumShape
     RuntimeEnvironmentVersion: StringShape
     ServiceQuotaExceededException: StructureShape
+    SessionId: StringShape
     SessionLengthSeconds: IntegerShape
+    ShaderCacheStatus: EnumShape
+    ShaderCacheSummary: StructureShape
+    ShaderCacheSummaryList: ListShape
     SignalRequest: StringShape
     SignalResponse: StringShape
     StartStreamSessionInput: StructureShape
@@ -95,26 +121,40 @@ module Aws::GameLiftStreams
     StreamGroupStatusReason: EnumShape
     StreamGroupSummary: StructureShape
     StreamGroupSummaryList: ListShape
+    StreamSessionAccessNotReadyException: StructureShape
     StreamSessionStatus: EnumShape
     StreamSessionStatusReason: EnumShape
+    StreamSessionStreamUrl: StringShape
     StreamSessionSummary: StructureShape
     StreamSessionSummaryList: ListShape
+    StreamUrl: StringShape
+    StreamUrlStatus: EnumShape
+    StreamUrlStatusReason: EnumShape
+    StreamUrlSummary: StructureShape
+    StreamUrlSummaryList: ListShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagResourceRequest: StructureShape
     TagResourceResponse: StructureShape
     TagValue: StringShape
     Tags: MapShape
+    TargetIdleCapacity: IntegerShape
     TerminateStreamSessionInput: StructureShape
     ThrottlingException: StructureShape
+    TokenValue: StringShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     UpdateApplicationInput: StructureShape
     UpdateApplicationOutput: StructureShape
     UpdateStreamGroupInput: StructureShape
     UpdateStreamGroupOutput: StructureShape
+    UrlExpiresAfterMinutes: IntegerShape
+    UsageLimit: IntegerShape
     UserId: StringShape
     ValidationException: StructureShape
+    VpcId: StringShape
+    VpcTransitConfiguration: StructureShape
+    VpcTransitConfigurationResponse: StructureShape
     WebSdkProtocolUrl: StringShape
 
     GameLiftStreams: ServiceShape

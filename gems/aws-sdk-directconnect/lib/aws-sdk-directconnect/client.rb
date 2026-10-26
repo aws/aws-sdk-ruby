@@ -144,18 +144,18 @@ module Aws::DirectConnect
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -338,7 +338,18 @@ module Aws::DirectConnect
     #         start_on: "StartOnDate"
     #       }
     #     ],
-    #     partner_interconnect_mac_sec_capable: false
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     partner_interconnect_mac_sec_capable: false,
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @deprecated
     # @return [Types::AllocateConnectionOnInterconnectOutput]
@@ -348,7 +359,7 @@ module Aws::DirectConnect
     end
 
     # <p>Creates a hosted connection on the specified interconnect or a link aggregation group (LAG) of interconnects.</p>
-    #          <p>Allocates a VLAN number and a specified amount of capacity (bandwidth) for use by a hosted connection on the specified interconnect or LAG of interconnects. 
+    #          <p>Allocates a VLAN number and a specified amount of capacity (bandwidth) for use by a hosted connection on the specified interconnect or LAG of interconnects.
     #       Amazon Web Services polices the hosted connection for the specified capacity and the Direct Connect Partner must also police the hosted connection for the specified capacity.</p>
     #          <note>
     #             <p>Intended for use by Direct Connect Partners only.</p>
@@ -422,7 +433,18 @@ module Aws::DirectConnect
     #         start_on: "StartOnDate"
     #       }
     #     ],
-    #     partner_interconnect_mac_sec_capable: false
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     partner_interconnect_mac_sec_capable: false,
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::AllocateHostedConnectionOutput]
     def allocate_hosted_connection(params = {}, options = {})
@@ -431,7 +453,7 @@ module Aws::DirectConnect
     end
 
     # <p>Provisions a private virtual interface to be owned by the specified Amazon Web Services account.</p>
-    #          <p>Virtual interfaces created using this action must be confirmed by the owner using <a>ConfirmPrivateVirtualInterface</a>. 
+    #          <p>Virtual interfaces created using this action must be confirmed by the owner using <a>ConfirmPrivateVirtualInterface</a>.
     #       Until then, the virtual interface is in the <code>Confirming</code> state and is not available to handle traffic.</p>
     # @param [Hash, Types::AllocatePrivateVirtualInterfaceRequest] params
     # @option params [String] :connection_id
@@ -459,7 +481,8 @@ module Aws::DirectConnect
     #           key: "TagKey", # required
     #           value: "TagValue"
     #         }
-    #       ]
+    #       ],
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     #   options = {}
@@ -516,7 +539,10 @@ module Aws::DirectConnect
     #         value: "TagValue"
     #       }
     #     ],
-    #     site_link_enabled: false
+    #     site_link_enabled: false,
+    #     prefix_pool_allocated_count_ipv4: 1,
+    #     prefix_pool_allocated_count_ipv6: 1,
+    #     rate_limit: "RateLimit"
     #   }
     # @return [Types::AllocatePrivateVirtualInterfaceOutput]
     def allocate_private_virtual_interface(params = {}, options = {})
@@ -560,7 +586,8 @@ module Aws::DirectConnect
     #           key: "TagKey", # required
     #           value: "TagValue"
     #         }
-    #       ]
+    #       ],
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     #   options = {}
@@ -617,7 +644,10 @@ module Aws::DirectConnect
     #         value: "TagValue"
     #       }
     #     ],
-    #     site_link_enabled: false
+    #     site_link_enabled: false,
+    #     prefix_pool_allocated_count_ipv4: 1,
+    #     prefix_pool_allocated_count_ipv6: 1,
+    #     rate_limit: "RateLimit"
     #   }
     # @return [Types::AllocatePublicVirtualInterfaceOutput]
     def allocate_public_virtual_interface(params = {}, options = {})
@@ -654,7 +684,8 @@ module Aws::DirectConnect
     #           key: "TagKey", # required
     #           value: "TagValue"
     #         }
-    #       ]
+    #       ],
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     #   options = {}
@@ -712,7 +743,10 @@ module Aws::DirectConnect
     #           value: "TagValue"
     #         }
     #       ],
-    #       site_link_enabled: false
+    #       site_link_enabled: false,
+    #       prefix_pool_allocated_count_ipv4: 1,
+    #       prefix_pool_allocated_count_ipv6: 1,
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     # @return [Types::AllocateTransitVirtualInterfaceResult]
@@ -723,10 +757,10 @@ module Aws::DirectConnect
 
     # <p>Associates an existing connection with a link aggregation group (LAG). The connection
     #       is interrupted and re-established as a member of the LAG (connectivity to Amazon Web Services is
-    #       interrupted). The connection must be hosted on the same Direct Connect endpoint as the LAG, and its 
-    #       bandwidth must match the bandwidth for the LAG. You can re-associate a connection that's 
-    #       currently associated with a different LAG; however, if removing the connection would cause 
-    #       the original LAG to fall below its setting for minimum number of operational connections, 
+    #       interrupted). The connection must be hosted on the same Direct Connect endpoint as the LAG, and its
+    #       bandwidth must match the bandwidth for the LAG. You can re-associate a connection that's
+    #       currently associated with a different LAG; however, if removing the connection would cause
+    #       the original LAG to fall below its setting for minimum number of operational connections,
     #       the request fails.</p>
     #          <p>Any virtual interfaces that are directly associated with the connection are
     #       automatically re-associated with the LAG. If the connection was originally associated
@@ -784,7 +818,18 @@ module Aws::DirectConnect
     #         start_on: "StartOnDate"
     #       }
     #     ],
-    #     partner_interconnect_mac_sec_capable: false
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     partner_interconnect_mac_sec_capable: false,
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::AssociateConnectionWithLagOutput]
     def associate_connection_with_lag(params = {}, options = {})
@@ -792,10 +837,46 @@ module Aws::DirectConnect
       request.send_request(options)
     end
 
+    # <p>Associates one or more connections with the specified resiliency group. This operation is
+    #       atomic: either all of the specified connections are associated, or the operation fails and no
+    #       changes are made.</p>
+    # @param [Hash, Types::AssociateConnectionsToResiliencyGroupRequest] params
+    # @option params [Array<String>] :connection_identifiers
+    #   <p>The IDs or ARNs of the connections to associate with the resiliency group.</p>
+    # @option params [String] :resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connection_identifiers: ["ConnectionIdentifier"], # required
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #     client_token: "IdempotencyToken"
+    #   }
+    #   options = {}
+    #   response = client.associate_connections_to_resiliency_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resiliency_group_associations: [
+    #       {
+    #         resiliency_group_id: "ResiliencyGroupId",
+    #         connection_arn: "ConnectionArn",
+    #         state: "associating" # One of: ["associating", "associated", "disassociating", "disassociated"]
+    #       }
+    #     ]
+    #   }
+    # @return [Types::AssociateConnectionsToResiliencyGroupResult]
+    def associate_connections_to_resiliency_group(params = {}, options = {})
+      request = build_request(:associate_connections_to_resiliency_group, params)
+      request.send_request(options)
+    end
+
     # <p>Associates a hosted connection and its virtual interfaces with a link aggregation
     #       group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted
     #       connection with a conflicting VLAN number or IP address, the operation fails. This
-    #       action temporarily interrupts the hosted connection's connectivity to Amazon Web Services 
+    #       action temporarily interrupts the hosted connection's connectivity to Amazon Web Services
     #       as it is being migrated.</p>
     #          <note>
     #             <p>Intended for use by Direct Connect Partners only.</p>
@@ -849,7 +930,18 @@ module Aws::DirectConnect
     #         start_on: "StartOnDate"
     #       }
     #     ],
-    #     partner_interconnect_mac_sec_capable: false
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     partner_interconnect_mac_sec_capable: false,
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::AssociateHostedConnectionOutput]
     def associate_hosted_connection(params = {}, options = {})
@@ -980,7 +1072,10 @@ module Aws::DirectConnect
     #         value: "TagValue"
     #       }
     #     ],
-    #     site_link_enabled: false
+    #     site_link_enabled: false,
+    #     prefix_pool_allocated_count_ipv4: 1,
+    #     prefix_pool_allocated_count_ipv6: 1,
+    #     rate_limit: "RateLimit"
     #   }
     # @return [Types::AssociateVirtualInterfaceOutput]
     def associate_virtual_interface(params = {}, options = {})
@@ -989,7 +1084,7 @@ module Aws::DirectConnect
     end
 
     # <p>Confirms the creation of the specified hosted connection on an interconnect.</p>
-    #          <p>Upon creation, the hosted connection is initially in the <code>Ordering</code> state, and 
+    #          <p>Upon creation, the hosted connection is initially in the <code>Ordering</code> state, and
     #       remains in this state until the owner confirms creation of the hosted connection.</p>
     # @param [Hash, Types::ConfirmConnectionRequest] params
     # @option params [String] :connection_id
@@ -1017,9 +1112,9 @@ module Aws::DirectConnect
     # @param [Hash, Types::ConfirmCustomerAgreementRequest] params
     # @option params [String] :agreement_name
     #   <p>
-    #   
+    #
     #         The name of the customer agreement.
-    #   
+    #
     #       </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1069,7 +1164,7 @@ module Aws::DirectConnect
     end
 
     # <p>Accepts ownership of a public virtual interface created by another Amazon Web Services account.</p>
-    #          <p>After the virtual interface owner makes this call, the specified virtual interface is 
+    #          <p>After the virtual interface owner makes this call, the specified virtual interface is
     #       created and made available to handle traffic.</p>
     # @param [Hash, Types::ConfirmPublicVirtualInterfaceRequest] params
     # @option params [String] :virtual_interface_id
@@ -1119,7 +1214,7 @@ module Aws::DirectConnect
     # <p>Creates a BGP peer on the specified virtual interface.</p>
     #          <p>You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to
     #       access Amazon Web Services resources that also use that address family.</p>
-    #          <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot 
+    #          <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot
     #       be in the same address family as an existing BGP peer on the virtual interface.</p>
     #          <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from
     #       the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p>
@@ -1204,7 +1299,10 @@ module Aws::DirectConnect
     #           value: "TagValue"
     #         }
     #       ],
-    #       site_link_enabled: false
+    #       site_link_enabled: false,
+    #       prefix_pool_allocated_count_ipv4: 1,
+    #       prefix_pool_allocated_count_ipv6: 1,
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     # @return [Types::CreateBGPPeerResponse]
@@ -1214,12 +1312,12 @@ module Aws::DirectConnect
     end
 
     # <p>Creates a connection between a customer network and a specific Direct Connect location.</p>
-    #          <p>A connection links your internal network to an Direct Connect location over a standard Ethernet fiber-optic 
+    #          <p>A connection links your internal network to an Direct Connect location over a standard Ethernet fiber-optic
     #       cable. One end of the cable is connected to your router, the other to an Direct Connect router.</p>
     #          <p>To find the locations for your Region, use <a>DescribeLocations</a>.</p>
     #          <p>You can automatically add the new connection to a link aggregation group (LAG) by
     #       specifying a LAG ID in the request. This ensures that the new connection is allocated on the
-    #       same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, 
+    #       same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint,
     #       the request fails and no connection is created.</p>
     # @param [Hash, Types::CreateConnectionRequest] params
     # @option params [String] :location
@@ -1237,6 +1335,8 @@ module Aws::DirectConnect
     # @option params [Boolean] :request_mac_sec
     #   <p>Indicates whether you want the connection to support MAC Security (MACsec).</p>
     #            <p>MAC Security (MACsec) is unavailable on hosted connections. For information about MAC Security (MACsec) prerequisites, see  <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html">MAC Security in Direct Connect</a> in the <i>Direct Connect User Guide</i>.</p>
+    # @option params [String] :billing_mode
+    #   <p>The billing mode for the connection.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     location: "LocationCode", # required
@@ -1250,7 +1350,8 @@ module Aws::DirectConnect
     #       }
     #     ],
     #     provider_name: "ProviderName",
-    #     request_mac_sec: false
+    #     request_mac_sec: false,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5"]
     #   }
     #   options = {}
     #   response = client.create_connection(params, options)
@@ -1291,7 +1392,18 @@ module Aws::DirectConnect
     #         start_on: "StartOnDate"
     #       }
     #     ],
-    #     partner_interconnect_mac_sec_capable: false
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     partner_interconnect_mac_sec_capable: false,
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::CreateConnectionOutput]
     def create_connection(params = {}, options = {})
@@ -1299,9 +1411,9 @@ module Aws::DirectConnect
       request.send_request(options)
     end
 
-    # <p>Creates a Direct Connect gateway, which is an intermediate object that enables you to connect a set 
-    #       of virtual interfaces and virtual private gateways. A Direct Connect gateway is global and visible in any 
-    #       Amazon Web Services Region after it is created. The virtual interfaces and virtual private gateways that 
+    # <p>Creates a Direct Connect gateway, which is an intermediate object that enables you to connect a set
+    #       of virtual interfaces and virtual private gateways. A Direct Connect gateway is global and visible in any
+    #       Amazon Web Services Region after it is created. The virtual interfaces and virtual private gateways that
     #       are connected through a Direct Connect gateway can be in different Amazon Web Services Regions. This enables you to
     #       connect to a VPC in any Region, regardless of the Region in which the virtual interfaces
     #       are located, and pass traffic between them.</p>
@@ -1337,6 +1449,7 @@ module Aws::DirectConnect
     #       owner_account: "OwnerAccount",
     #       direct_connect_gateway_state: "pending" # One of: ["pending", "available", "deleting", "deleted"],
     #       state_change_error: "StateChangeError",
+    #       total_prefix_pool_allocations: 1,
     #       tags: [
     #         {
     #           key: "TagKey", # required
@@ -1477,7 +1590,7 @@ module Aws::DirectConnect
     end
 
     # <p>Creates an interconnect between an Direct Connect Partner's network and a specific Direct Connect location.</p>
-    #          <p>An interconnect is a connection that is capable of hosting other connections. The 
+    #          <p>An interconnect is a connection that is capable of hosting other connections. The
     #       Direct Connect Partner can use an interconnect to provide Direct Connect hosted
     #       connections to customers through their own network services. Like a standard connection, an
     #       interconnect links the partner's network to an Direct Connect location over a standard Ethernet
@@ -1485,7 +1598,7 @@ module Aws::DirectConnect
     #       router.</p>
     #          <p>You can automatically add the new interconnect to a link aggregation group (LAG) by
     #       specifying a LAG ID in the request. This ensures that the new interconnect is allocated on
-    #       the same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the 
+    #       the same Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the
     #       endpoint, the request fails and no interconnect is created.</p>
     #          <p>For each end customer, the Direct Connect Partner provisions a connection on their interconnect by calling <a>AllocateHostedConnection</a>.
     #       The end customer can then connect to Amazon Web Services resources by creating a virtual interface on their connection, using the VLAN assigned to them by the Direct Connect Partner.</p>
@@ -1568,7 +1681,7 @@ module Aws::DirectConnect
     # <p>Creates a link aggregation group (LAG) with the specified number of bundled
     #       physical dedicated connections between the customer network and a specific Direct Connect location.
     #       A LAG is a logical interface that uses the Link Aggregation Control Protocol
-    #       (LACP) to aggregate multiple interfaces, enabling you to treat them as a single 
+    #       (LACP) to aggregate multiple interfaces, enabling you to treat them as a single
     #       interface.</p>
     #          <p>All connections in a LAG must use the same bandwidth (either 1Gbps, 10Gbps, 100Gbps,
     #       or 400Gbps) and must terminate at the same Direct Connect endpoint.</p>
@@ -1581,8 +1694,8 @@ module Aws::DirectConnect
     #       will be created on the same Direct Connect endpoint to which the dedicated connection terminates. Any
     #       virtual interfaces associated with the dedicated connection are automatically disassociated
     #       and re-associated with the LAG. The connection ID does not change.</p>
-    #          <p>If the Amazon Web Services account used to create a LAG is a registered Direct Connect Partner, the LAG is 
-    #       automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual 
+    #          <p>If the Amazon Web Services account used to create a LAG is a registered Direct Connect Partner, the LAG is
+    #       automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual
     #       interfaces cannot be directly configured.</p>
     # @param [Hash, Types::CreateLagRequest] params
     # @option params [Integer] :number_of_connections
@@ -1609,6 +1722,8 @@ module Aws::DirectConnect
     #            <note>
     #               <p>All connections in the LAG must be capable of  supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see  <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites">MACsec prerequisties</a> in the <i>Direct Connect User Guide</i>.</p>
     #            </note>
+    # @option params [String] :billing_mode
+    #   <p>The billing mode for the LAG.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     number_of_connections: 1, # required
@@ -1629,7 +1744,8 @@ module Aws::DirectConnect
     #       }
     #     ],
     #     provider_name: "ProviderName",
-    #     request_mac_sec: false
+    #     request_mac_sec: false,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5"]
     #   }
     #   options = {}
     #   response = client.create_lag(params, options)
@@ -1684,7 +1800,18 @@ module Aws::DirectConnect
     #             start_on: "StartOnDate"
     #           }
     #         ],
-    #         partner_interconnect_mac_sec_capable: false
+    #         rate_limiter_status: {
+    #           max_allowed: 1,
+    #           in_use: 1,
+    #           remaining: 1,
+    #           total_bandwidth: "Bandwidth"
+    #         },
+    #         partner_interconnect_mac_sec_capable: false,
+    #         prefix_pool_size_ipv4: 1,
+    #         prefix_pool_size_ipv6: 1,
+    #         prefix_pool_unallocated_count_ipv4: 1,
+    #         prefix_pool_unallocated_count_ipv6: 1,
+    #         billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #       }
     #     ],
     #     allows_hosted_connections: false,
@@ -1706,7 +1833,18 @@ module Aws::DirectConnect
     #         state: "State",
     #         start_on: "StartOnDate"
     #       }
-    #     ]
+    #     ],
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::CreateLagOutput]
     def create_lag(params = {}, options = {})
@@ -1716,14 +1854,14 @@ module Aws::DirectConnect
 
     # <p>Creates a private virtual interface. A virtual interface is the VLAN that transports Direct Connect traffic.
     #       A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW).
-    #       Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple 
-    #       VPCs, including VPCs in different Amazon Web Services Regions. Connecting the private virtual interface 
+    #       Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple
+    #       VPCs, including VPCs in different Amazon Web Services Regions. Connecting the private virtual interface
     #       to a VGW only provides access to a single VPC within the same Region.</p>
     #          <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to
-    #       the underlying physical connection if it wasn't updated to support jumbo frames. Updating 
-    #       the connection disrupts network connectivity for all virtual interfaces associated with 
-    #       the connection for up to 30 seconds. To check whether your connection supports jumbo 
-    #       frames, call <a>DescribeConnections</a>. To check whether your virtual 
+    #       the underlying physical connection if it wasn't updated to support jumbo frames. Updating
+    #       the connection disrupts network connectivity for all virtual interfaces associated with
+    #       the connection for up to 30 seconds. To check whether your connection supports jumbo
+    #       frames, call <a>DescribeConnections</a>. To check whether your virtual
     #       interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>
     # @param [Hash, Types::CreatePrivateVirtualInterfaceRequest] params
     # @option params [String] :connection_id
@@ -1751,7 +1889,10 @@ module Aws::DirectConnect
     #           value: "TagValue"
     #         }
     #       ],
-    #       enable_site_link: false
+    #       enable_site_link: false,
+    #       prefix_pool_allocated_count_ipv4: 1,
+    #       prefix_pool_allocated_count_ipv6: 1,
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     #   options = {}
@@ -1808,7 +1949,10 @@ module Aws::DirectConnect
     #         value: "TagValue"
     #       }
     #     ],
-    #     site_link_enabled: false
+    #     site_link_enabled: false,
+    #     prefix_pool_allocated_count_ipv4: 1,
+    #     prefix_pool_allocated_count_ipv6: 1,
+    #     rate_limit: "RateLimit"
     #   }
     # @return [Types::CreatePrivateVirtualInterfaceOutput]
     def create_private_virtual_interface(params = {}, options = {})
@@ -1847,7 +1991,8 @@ module Aws::DirectConnect
     #           key: "TagKey", # required
     #           value: "TagValue"
     #         }
-    #       ]
+    #       ],
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     #   options = {}
@@ -1904,11 +2049,66 @@ module Aws::DirectConnect
     #         value: "TagValue"
     #       }
     #     ],
-    #     site_link_enabled: false
+    #     site_link_enabled: false,
+    #     prefix_pool_allocated_count_ipv4: 1,
+    #     prefix_pool_allocated_count_ipv6: 1,
+    #     rate_limit: "RateLimit"
     #   }
     # @return [Types::CreatePublicVirtualInterfaceOutput]
     def create_public_virtual_interface(params = {}, options = {})
       request = build_request(:create_public_virtual_interface, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a resiliency group. A resiliency group lets you group Direct Connect connections together
+    #       and manage them as a single unit to meet a target resiliency model.</p>
+    # @param [Hash, Types::CreateResiliencyGroupRequest] params
+    # @option params [String] :resiliency_group_name
+    #   <p>The name of the resiliency group.</p>
+    # @option params [String] :intended_resiliency_model
+    #   <p>The resiliency model that the resiliency group is intended to meet. The valid values are
+    #         <code>maximum-resiliency</code>, <code>high-resiliency</code>, and
+    #         <code>basic-resiliency</code>.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>The tags to associate with the resiliency group.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resiliency_group_name: "ResiliencyGroupName", # required
+    #     intended_resiliency_model: "maximum-resiliency" # One of: ["maximum-resiliency", "high-resiliency", "basic-resiliency"], # required
+    #     client_token: "IdempotencyToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_resiliency_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resiliency_group: {
+    #       resiliency_group_id: "ResiliencyGroupId",
+    #       resiliency_group_arn: "ResiliencyGroupArn",
+    #       resiliency_group_name: "ResiliencyGroupName",
+    #       resiliency_group_type: "Managed" # One of: ["Managed"],
+    #       owner_account: "OwnerAccount",
+    #       state: "pending" # One of: ["pending", "available", "deleting", "deleted"],
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::CreateResiliencyGroupResult]
+    def create_resiliency_group(params = {}, options = {})
+      request = build_request(:create_resiliency_group, params)
       request.send_request(options)
     end
 
@@ -1947,7 +2147,10 @@ module Aws::DirectConnect
     #           value: "TagValue"
     #         }
     #       ],
-    #       enable_site_link: false
+    #       enable_site_link: false,
+    #       prefix_pool_allocated_count_ipv4: 1,
+    #       prefix_pool_allocated_count_ipv6: 1,
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     #   options = {}
@@ -2005,7 +2208,10 @@ module Aws::DirectConnect
     #           value: "TagValue"
     #         }
     #       ],
-    #       site_link_enabled: false
+    #       site_link_enabled: false,
+    #       prefix_pool_allocated_count_ipv4: 1,
+    #       prefix_pool_allocated_count_ipv6: 1,
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     # @return [Types::CreateTransitVirtualInterfaceResult]
@@ -2021,36 +2227,50 @@ module Aws::DirectConnect
     #   <p>The ID of the virtual interface.</p>
     # @option params [Integer] :asn
     #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
-    #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #                                   <code>asnLong</code>.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you enter a 4-byte ASN for the <code>asn</code> parameter, the API returns an error.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #            </ul>
     # @option params [Integer] :asn_long
     #   <p>The long ASN for the BGP peer to be deleted from a Direct Connect virtual interface. The valid range is from 1 to 4294967294 for BGP configuration. </p>
-    #            <note>
-    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
-    #               <ul>
-    #                  <li>
-    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
-    #                               ranges.</p>
-    #                  </li>
-    #                  <li>
-    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #            <p>Note the following limitations when using <code>asnLong</code>:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>asnLong</code> accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+    #                 </p>
+    #               </li>
+    #               <li>
+    #                  <p>When using a 4-byte <code>asnLong</code>, the API response returns <code>0</code> for the legacy <code>asn</code> attribute since 4-byte ASN values exceed the maximum supported value of 2,147,483,647.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you are using a 2-byte ASN, the API response will include the
+    #   2-byte value for both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you provide a value in the same API call for both <code>asn</code>
     #                               and <code>asnLong</code>, the API will only accept the value for
     #                                   <code>asnLong</code>.</p>
-    #                  </li>
-    #               </ul>
-    #            </note>
+    #               </li>
+    #            </ul>
     # @option params [String] :customer_address
     #   <p>The IP address assigned to the customer interface.</p>
     # @option params [String] :bgp_peer_id
@@ -2118,7 +2338,10 @@ module Aws::DirectConnect
     #           value: "TagValue"
     #         }
     #       ],
-    #       site_link_enabled: false
+    #       site_link_enabled: false,
+    #       prefix_pool_allocated_count_ipv4: 1,
+    #       prefix_pool_allocated_count_ipv6: 1,
+    #       rate_limit: "RateLimit"
     #     }
     #   }
     # @return [Types::DeleteBGPPeerResponse]
@@ -2128,8 +2351,8 @@ module Aws::DirectConnect
     end
 
     # <p>Deletes the specified connection.</p>
-    #          <p>Deleting a connection only stops the Direct Connect port hour and data transfer charges. 
-    #       If you are partnering with any third parties to connect with the Direct Connect location, 
+    #          <p>Deleting a connection only stops the Direct Connect port hour and data transfer charges.
+    #       If you are partnering with any third parties to connect with the Direct Connect location,
     #       you must cancel your service with them separately.</p>
     # @param [Hash, Types::DeleteConnectionRequest] params
     # @option params [String] :connection_id
@@ -2177,7 +2400,18 @@ module Aws::DirectConnect
     #         start_on: "StartOnDate"
     #       }
     #     ],
-    #     partner_interconnect_mac_sec_capable: false
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     partner_interconnect_mac_sec_capable: false,
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::DeleteConnectionOutput]
     def delete_connection(params = {}, options = {})
@@ -2186,7 +2420,7 @@ module Aws::DirectConnect
     end
 
     # <p>Deletes the specified Direct Connect gateway. You must first delete all virtual interfaces that are
-    #       attached to the Direct Connect gateway and disassociate all virtual private gateways associated 
+    #       attached to the Direct Connect gateway and disassociate all virtual private gateways associated
     #       with the Direct Connect gateway.</p>
     # @param [Hash, Types::DeleteDirectConnectGatewayRequest] params
     # @option params [String] :direct_connect_gateway_id
@@ -2207,6 +2441,7 @@ module Aws::DirectConnect
     #       owner_account: "OwnerAccount",
     #       direct_connect_gateway_state: "pending" # One of: ["pending", "available", "deleting", "deleted"],
     #       state_change_error: "StateChangeError",
+    #       total_prefix_pool_allocations: 1,
     #       tags: [
     #         {
     #           key: "TagKey", # required
@@ -2403,7 +2638,18 @@ module Aws::DirectConnect
     #             start_on: "StartOnDate"
     #           }
     #         ],
-    #         partner_interconnect_mac_sec_capable: false
+    #         rate_limiter_status: {
+    #           max_allowed: 1,
+    #           in_use: 1,
+    #           remaining: 1,
+    #           total_bandwidth: "Bandwidth"
+    #         },
+    #         partner_interconnect_mac_sec_capable: false,
+    #         prefix_pool_size_ipv4: 1,
+    #         prefix_pool_size_ipv6: 1,
+    #         prefix_pool_unallocated_count_ipv4: 1,
+    #         prefix_pool_unallocated_count_ipv6: 1,
+    #         billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #       }
     #     ],
     #     allows_hosted_connections: false,
@@ -2425,11 +2671,59 @@ module Aws::DirectConnect
     #         state: "State",
     #         start_on: "StartOnDate"
     #       }
-    #     ]
+    #     ],
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::DeleteLagOutput]
     def delete_lag(params = {}, options = {})
       request = build_request(:delete_lag, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the specified resiliency group. Deletion is asynchronous: the resiliency group
+    #       transitions through the <code>deleting</code> state before it reaches the
+    #       <code>deleted</code> state. The response returns the resiliency group so you can observe its
+    #       current state without a subsequent <a>GetResiliencyGroup</a> call.</p>
+    # @param [Hash, Types::DeleteResiliencyGroupRequest] params
+    # @option params [String] :resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_resiliency_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resiliency_group: {
+    #       resiliency_group_id: "ResiliencyGroupId",
+    #       resiliency_group_arn: "ResiliencyGroupArn",
+    #       resiliency_group_name: "ResiliencyGroupName",
+    #       resiliency_group_type: "Managed" # One of: ["Managed"],
+    #       owner_account: "OwnerAccount",
+    #       state: "pending" # One of: ["pending", "available", "deleting", "deleted"],
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::DeleteResiliencyGroupResult]
+    def delete_resiliency_group(params = {}, options = {})
+      request = build_request(:delete_resiliency_group, params)
       request.send_request(options)
     end
 
@@ -2466,7 +2760,7 @@ module Aws::DirectConnect
     # @option params [String] :connection_id
     #   <p>The ID of the connection.</p>
     # @option params [String] :provider_name
-    #   <p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you specify this parameter, 
+    #   <p>The name of the APN partner or service provider who establishes connectivity on your behalf. If you specify this parameter,
     #         the LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p>
     # @option params [String] :loa_content_type
     #   <p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>
@@ -2551,7 +2845,18 @@ module Aws::DirectConnect
     #             start_on: "StartOnDate"
     #           }
     #         ],
-    #         partner_interconnect_mac_sec_capable: false
+    #         rate_limiter_status: {
+    #           max_allowed: 1,
+    #           in_use: 1,
+    #           remaining: 1,
+    #           total_bandwidth: "Bandwidth"
+    #         },
+    #         partner_interconnect_mac_sec_capable: false,
+    #         prefix_pool_size_ipv4: 1,
+    #         prefix_pool_size_ipv6: 1,
+    #         prefix_pool_unallocated_count_ipv4: 1,
+    #         prefix_pool_unallocated_count_ipv6: 1,
+    #         billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -2617,7 +2922,18 @@ module Aws::DirectConnect
     #             start_on: "StartOnDate"
     #           }
     #         ],
-    #         partner_interconnect_mac_sec_capable: false
+    #         rate_limiter_status: {
+    #           max_allowed: 1,
+    #           in_use: 1,
+    #           remaining: 1,
+    #           total_bandwidth: "Bandwidth"
+    #         },
+    #         partner_interconnect_mac_sec_capable: false,
+    #         prefix_pool_size_ipv4: 1,
+    #         prefix_pool_size_ipv6: 1,
+    #         prefix_pool_unallocated_count_ipv4: 1,
+    #         prefix_pool_unallocated_count_ipv6: 1,
+    #         billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -2810,9 +3126,9 @@ module Aws::DirectConnect
     end
 
     # <p>Lists the attachments between your Direct Connect gateways and virtual interfaces. You must specify
-    #       a Direct Connect gateway, a virtual interface, or both. If you specify a Direct Connect gateway, the response contains 
-    #       all virtual interfaces attached to the Direct Connect gateway. If you specify a virtual interface, the 
-    #       response contains all Direct Connect gateways attached to the virtual interface. If you specify both, 
+    #       a Direct Connect gateway, a virtual interface, or both. If you specify a Direct Connect gateway, the response contains
+    #       all virtual interfaces attached to the Direct Connect gateway. If you specify a virtual interface, the
+    #       response contains all Direct Connect gateways attached to the virtual interface. If you specify both,
     #       the response contains the attachment between the Direct Connect gateway and the virtual interface.</p>
     # @param [Hash, Types::DescribeDirectConnectGatewayAttachmentsRequest] params
     # @option params [String] :direct_connect_gateway_id
@@ -2887,6 +3203,7 @@ module Aws::DirectConnect
     #         owner_account: "OwnerAccount",
     #         direct_connect_gateway_state: "pending" # One of: ["pending", "available", "deleting", "deleted"],
     #         state_change_error: "StateChangeError",
+    #         total_prefix_pool_allocations: 1,
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -2965,7 +3282,18 @@ module Aws::DirectConnect
     #             start_on: "StartOnDate"
     #           }
     #         ],
-    #         partner_interconnect_mac_sec_capable: false
+    #         rate_limiter_status: {
+    #           max_allowed: 1,
+    #           in_use: 1,
+    #           remaining: 1,
+    #           total_bandwidth: "Bandwidth"
+    #         },
+    #         partner_interconnect_mac_sec_capable: false,
+    #         prefix_pool_size_ipv4: 1,
+    #         prefix_pool_size_ipv6: 1,
+    #         prefix_pool_unallocated_count_ipv4: 1,
+    #         prefix_pool_unallocated_count_ipv6: 1,
+    #         billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -3150,7 +3478,18 @@ module Aws::DirectConnect
     #                 start_on: "StartOnDate"
     #               }
     #             ],
-    #             partner_interconnect_mac_sec_capable: false
+    #             rate_limiter_status: {
+    #               max_allowed: 1,
+    #               in_use: 1,
+    #               remaining: 1,
+    #               total_bandwidth: "Bandwidth"
+    #             },
+    #             partner_interconnect_mac_sec_capable: false,
+    #             prefix_pool_size_ipv4: 1,
+    #             prefix_pool_size_ipv6: 1,
+    #             prefix_pool_unallocated_count_ipv4: 1,
+    #             prefix_pool_unallocated_count_ipv6: 1,
+    #             billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #           }
     #         ],
     #         allows_hosted_connections: false,
@@ -3172,7 +3511,18 @@ module Aws::DirectConnect
     #             state: "State",
     #             start_on: "StartOnDate"
     #           }
-    #         ]
+    #         ],
+    #         prefix_pool_size_ipv4: 1,
+    #         prefix_pool_size_ipv6: 1,
+    #         prefix_pool_unallocated_count_ipv4: 1,
+    #         prefix_pool_unallocated_count_ipv6: 1,
+    #         rate_limiter_status: {
+    #           max_allowed: 1,
+    #           in_use: 1,
+    #           remaining: 1,
+    #           total_bandwidth: "Bandwidth"
+    #         },
+    #         billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -3184,14 +3534,14 @@ module Aws::DirectConnect
     end
 
     # <p>Gets the LOA-CFA for a connection, interconnect, or link aggregation group (LAG).</p>
-    #          <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing 
+    #          <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing
     #       your cross connect to Amazon Web Services at the colocation facility. For more information, see <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html">Requesting Cross Connects at Direct Connect Locations</a>
     #       in the <i>Direct Connect User Guide</i>.</p>
     # @param [Hash, Types::DescribeLoaRequest] params
     # @option params [String] :connection_id
     #   <p>The ID of a connection, LAG, or interconnect.</p>
     # @option params [String] :provider_name
-    #   <p>The name of the service provider who establishes connectivity on your behalf. If you specify this parameter, the 
+    #   <p>The name of the service provider who establishes connectivity on your behalf. If you specify this parameter, the
     #         LOA-CFA lists the provider name alongside your company name as the requester of the cross connect.</p>
     # @option params [String] :loa_content_type
     #   <p>The standard media type for the LOA-CFA document. The only supported value is application/pdf.</p>
@@ -3232,7 +3582,14 @@ module Aws::DirectConnect
     #         region: "Region",
     #         available_port_speeds: ["PortSpeed"],
     #         available_providers: ["ProviderName"],
-    #         available_mac_sec_port_speeds: ["PortSpeed"]
+    #         available_mac_sec_port_speeds: ["PortSpeed"],
+    #         available_billing_modes: [
+    #           {
+    #             billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"],
+    #             available_port_speeds: ["PortSpeed"],
+    #             included_regions: ["Region"]
+    #           }
+    #         ]
     #       }
     #     ]
     #   }
@@ -3342,7 +3699,7 @@ module Aws::DirectConnect
     #          <p>A virtual interface (VLAN) transmits the traffic between the Direct Connect location and the customer network.</p>
     #          <ul>
     #             <li>
-    #                <p>If you're using an <code>asn</code>, the response includes ASN value in both the <code>asn</code> and <code>asnLong</code> fields.</p>
+    #                <p>If you're using an <code>asn</code>, the response includes the ASN value in both the <code>asn</code> and <code>asnLong</code> fields.</p>
     #             </li>
     #             <li>
     #                <p>If you're using <code>asnLong</code>, the response returns a value of <code>0</code> (zero) for the <code>asn</code> attribute because it exceeds the highest ASN value of 2,147,483,647 that it can support</p>
@@ -3423,7 +3780,10 @@ module Aws::DirectConnect
     #             value: "TagValue"
     #           }
     #         ],
-    #         site_link_enabled: false
+    #         site_link_enabled: false,
+    #         prefix_pool_allocated_count_ipv4: 1,
+    #         prefix_pool_allocated_count_ipv6: 1,
+    #         rate_limit: "RateLimit"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -3438,7 +3798,7 @@ module Aws::DirectConnect
     #       interrupted and re-established as a standalone connection (the connection is not
     #       deleted; to delete the connection, use the <a>DeleteConnection</a> request).
     #       If the LAG has associated virtual interfaces or hosted connections, they remain
-    #       associated with the LAG. A disassociated connection owned by an Direct Connect Partner is 
+    #       associated with the LAG. A disassociated connection owned by an Direct Connect Partner is
     #       automatically converted to an interconnect.</p>
     #          <p>If disassociating the connection would cause the LAG to fall below its setting for
     #       minimum number of operational connections, the request fails, except when it's the last
@@ -3493,11 +3853,58 @@ module Aws::DirectConnect
     #         start_on: "StartOnDate"
     #       }
     #     ],
-    #     partner_interconnect_mac_sec_capable: false
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     partner_interconnect_mac_sec_capable: false,
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::DisassociateConnectionFromLagOutput]
     def disassociate_connection_from_lag(params = {}, options = {})
       request = build_request(:disassociate_connection_from_lag, params)
+      request.send_request(options)
+    end
+
+    # <p>Disassociates one or more connections from the specified resiliency group. This operation
+    #       is atomic: either all of the specified connections are disassociated, or the operation fails
+    #       and no changes are made.</p>
+    # @param [Hash, Types::DisassociateConnectionsFromResiliencyGroupRequest] params
+    # @option params [Array<String>] :connection_identifiers
+    #   <p>The IDs or ARNs of the connections to disassociate from the resiliency group.</p>
+    # @option params [String] :resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connection_identifiers: ["ConnectionIdentifier"], # required
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #     client_token: "IdempotencyToken"
+    #   }
+    #   options = {}
+    #   response = client.disassociate_connections_from_resiliency_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resiliency_group_associations: [
+    #       {
+    #         resiliency_group_id: "ResiliencyGroupId",
+    #         connection_arn: "ConnectionArn",
+    #         state: "associating" # One of: ["associating", "associated", "disassociating", "disassociated"]
+    #       }
+    #     ]
+    #   }
+    # @return [Types::DisassociateConnectionsFromResiliencyGroupResult]
+    def disassociate_connections_from_resiliency_group(params = {}, options = {})
+      request = build_request(:disassociate_connections_from_resiliency_group, params)
       request.send_request(options)
     end
 
@@ -3532,6 +3939,182 @@ module Aws::DirectConnect
     # @return [Types::DisassociateMacSecKeyResponse]
     def disassociate_mac_sec_key(params = {}, options = {})
       request = build_request(:disassociate_mac_sec_key, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets information about the specified resiliency group.</p>
+    # @param [Hash, Types::GetResiliencyGroupRequest] params
+    # @option params [String] :resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_resiliency_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resiliency_group: {
+    #       resiliency_group_id: "ResiliencyGroupId",
+    #       resiliency_group_arn: "ResiliencyGroupArn",
+    #       resiliency_group_name: "ResiliencyGroupName",
+    #       resiliency_group_type: "Managed" # One of: ["Managed"],
+    #       owner_account: "OwnerAccount",
+    #       state: "pending" # One of: ["pending", "available", "deleting", "deleted"],
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetResiliencyGroupResult]
+    def get_resiliency_group(params = {}, options = {})
+      request = build_request(:get_resiliency_group, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the connection associations for the specified resiliency group.</p>
+    # @param [Hash, Types::ListResiliencyGroupAssociationsRequest] params
+    # @option params [String] :resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_resiliency_group_associations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         resiliency_group_id: "ResiliencyGroupId",
+    #         connection_arn: "ConnectionArn",
+    #         state: "associating" # One of: ["associating", "associated", "disassociating", "disassociated"]
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListResiliencyGroupAssociationsResult]
+    def list_resiliency_group_associations(params = {}, options = {})
+      request = build_request(:list_resiliency_group_associations, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the resiliency groups owned by your Amazon Web Services account in the current
+    #       Amazon Web Services Region.</p>
+    # @param [Hash, Types::ListResiliencyGroupsRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_resiliency_groups(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         resiliency_group_id: "ResiliencyGroupId",
+    #         resiliency_group_arn: "ResiliencyGroupArn",
+    #         resiliency_group_name: "ResiliencyGroupName",
+    #         resiliency_group_type: "Managed" # One of: ["Managed"],
+    #         owner_account: "OwnerAccount",
+    #         state: "pending" # One of: ["pending", "available", "deleting", "deleted"]
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListResiliencyGroupsResult]
+    def list_resiliency_groups(params = {}, options = {})
+      request = build_request(:list_resiliency_groups, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the routes for the specified virtual interface.</p>
+    #          <p>Use the <code>routeDirection</code> filter to control which routes are returned:</p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <code>accepted</code>: routes received from the customer network over the virtual interface.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>advertised</code>: routes advertised to the customer network over the virtual interface.</p>
+    #             </li>
+    #          </ul>
+    # @param [Hash, Types::ListVirtualInterfaceRoutesRequest] params
+    # @option params [String] :virtual_interface_id
+    #   <p>The ID of the virtual interface.</p>
+    # @option params [Types::RouteFilters] :filters
+    #   <p>The filters to apply to the routes returned.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     virtual_interface_id: "VirtualInterfaceId",
+    #     filters: {
+    #       route_direction: "accepted" # One of: ["accepted", "advertised"],
+    #       address_family: "ipv4" # One of: ["ipv4", "ipv6"],
+    #       cidrs: ["RouteFilterCidrString"],
+    #       as_path: [1],
+    #       communities: ["CommunityEntry"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_virtual_interface_routes(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     virtual_interface_id: "VirtualInterfaceId",
+    #     routes: [
+    #       {
+    #         cidr: "RouteCidr",
+    #         route_direction: "accepted" # One of: ["accepted", "advertised"],
+    #         address_family: "ipv4" # One of: ["ipv4", "ipv6"],
+    #         as_path: [
+    #           {
+    #             path_type: "seq" # One of: ["seq", "set"],
+    #             path: [1]
+    #           }
+    #         ],
+    #         communities: ["CommunityEntry"],
+    #         aws_logical_device_id: "AwsLogicalDeviceId",
+    #         route_installed_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListVirtualInterfaceRoutesResponse]
+    def list_virtual_interface_routes(params = {}, options = {})
+      request = build_request(:list_virtual_interface_routes, params)
       request.send_request(options)
     end
 
@@ -3771,11 +4354,100 @@ module Aws::DirectConnect
     #         start_on: "StartOnDate"
     #       }
     #     ],
-    #     partner_interconnect_mac_sec_capable: false
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     partner_interconnect_mac_sec_capable: false,
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::UpdateConnectionOutput]
     def update_connection(params = {}, options = {})
       request = build_request(:update_connection, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the billing mode for the specified Direct Connect connections. You can update the billing
+    #       mode for up to 200 connections in a single request.</p>
+    # @param [Hash, Types::UpdateConnectionsBillingModeRequest] params
+    # @option params [Array<String>] :connection_ids
+    #   <p>The IDs of the connections to update. You can specify from 1 to 200 connections.</p>
+    # @option params [String] :billing_mode
+    #   <p>The billing mode to apply to the specified connections. The valid values are
+    #         <code>PayAsYouGo</code>, <code>FlatRateTier1</code>, <code>FlatRateTier2</code>,
+    #         <code>FlatRateTier3</code>, <code>FlatRateTier4</code>, and
+    #         <code>FlatRateTier5</code>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connection_ids: ["ConnectionId"], # required
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5"], # required
+    #   }
+    #   options = {}
+    #   response = client.update_connections_billing_mode(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"],
+    #     connections: [
+    #       {
+    #         owner_account: "OwnerAccount",
+    #         connection_id: "ConnectionId",
+    #         connection_name: "ConnectionName",
+    #         connection_state: "ordering" # One of: ["ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected", "unknown"],
+    #         region: "Region",
+    #         location: "LocationCode",
+    #         bandwidth: "Bandwidth",
+    #         vlan: 1,
+    #         partner_name: "PartnerName",
+    #         loa_issue_time: Time.now,
+    #         lag_id: "LagId",
+    #         aws_device: "AwsDevice",
+    #         jumbo_frame_capable: false,
+    #         aws_device_v2: "AwsDeviceV2",
+    #         aws_logical_device_id: "AwsLogicalDeviceId",
+    #         has_logical_redundancy: "unknown" # One of: ["unknown", "yes", "no"],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue"
+    #           }
+    #         ],
+    #         provider_name: "ProviderName",
+    #         mac_sec_capable: false,
+    #         port_encryption_status: "PortEncryptionStatus",
+    #         encryption_mode: "EncryptionMode",
+    #         mac_sec_keys: [
+    #           {
+    #             secret_arn: "SecretARN",
+    #             ckn: "Ckn",
+    #             state: "State",
+    #             start_on: "StartOnDate"
+    #           }
+    #         ],
+    #         rate_limiter_status: {
+    #           max_allowed: 1,
+    #           in_use: 1,
+    #           remaining: 1,
+    #           total_bandwidth: "Bandwidth"
+    #         },
+    #         partner_interconnect_mac_sec_capable: false,
+    #         prefix_pool_size_ipv4: 1,
+    #         prefix_pool_size_ipv6: 1,
+    #         prefix_pool_unallocated_count_ipv4: 1,
+    #         prefix_pool_unallocated_count_ipv6: 1,
+    #         billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
+    #       }
+    #     ]
+    #   }
+    # @return [Types::UpdateConnectionsBillingModeResponse]
+    def update_connections_billing_mode(params = {}, options = {})
+      request = build_request(:update_connections_billing_mode, params)
       request.send_request(options)
     end
 
@@ -3802,6 +4474,7 @@ module Aws::DirectConnect
     #       owner_account: "OwnerAccount",
     #       direct_connect_gateway_state: "pending" # One of: ["pending", "available", "deleting", "deleted"],
     #       state_change_error: "StateChangeError",
+    #       total_prefix_pool_allocations: 1,
     #       tags: [
     #         {
     #           key: "TagKey", # required
@@ -3970,7 +4643,18 @@ module Aws::DirectConnect
     #             start_on: "StartOnDate"
     #           }
     #         ],
-    #         partner_interconnect_mac_sec_capable: false
+    #         rate_limiter_status: {
+    #           max_allowed: 1,
+    #           in_use: 1,
+    #           remaining: 1,
+    #           total_bandwidth: "Bandwidth"
+    #         },
+    #         partner_interconnect_mac_sec_capable: false,
+    #         prefix_pool_size_ipv4: 1,
+    #         prefix_pool_size_ipv6: 1,
+    #         prefix_pool_unallocated_count_ipv4: 1,
+    #         prefix_pool_unallocated_count_ipv6: 1,
+    #         billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #       }
     #     ],
     #     allows_hosted_connections: false,
@@ -3992,7 +4676,18 @@ module Aws::DirectConnect
     #         state: "State",
     #         start_on: "StartOnDate"
     #       }
-    #     ]
+    #     ],
+    #     prefix_pool_size_ipv4: 1,
+    #     prefix_pool_size_ipv6: 1,
+    #     prefix_pool_unallocated_count_ipv4: 1,
+    #     prefix_pool_unallocated_count_ipv6: 1,
+    #     rate_limiter_status: {
+    #       max_allowed: 1,
+    #       in_use: 1,
+    #       remaining: 1,
+    #       total_bandwidth: "Bandwidth"
+    #     },
+    #     billing_mode: "PayAsYouGo" # One of: ["PayAsYouGo", "FlatRateTier1", "FlatRateTier2", "FlatRateTier3", "FlatRateTier4", "FlatRateTier5", "PortPairFlatRateTier1", "PortPairFlatRateTier2", "PortPairFlatRateTier3", "PortPairFlatRateTier4", "PortPairFlatRateTier5"]
     #   }
     # @return [Types::UpdateLagOutput]
     def update_lag(params = {}, options = {})
@@ -4000,12 +4695,53 @@ module Aws::DirectConnect
       request.send_request(options)
     end
 
+    # <p>Updates the name of the specified resiliency group.</p>
+    # @param [Hash, Types::UpdateResiliencyGroupRequest] params
+    # @option params [String] :resiliency_group_id
+    #   <p>The ID of the resiliency group.</p>
+    # @option params [String] :resiliency_group_name
+    #   <p>The new name of the resiliency group.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resiliency_group_id: "ResiliencyGroupId", # required
+    #     resiliency_group_name: "ResiliencyGroupName", # required
+    #     client_token: "IdempotencyToken"
+    #   }
+    #   options = {}
+    #   response = client.update_resiliency_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resiliency_group: {
+    #       resiliency_group_id: "ResiliencyGroupId",
+    #       resiliency_group_arn: "ResiliencyGroupArn",
+    #       resiliency_group_name: "ResiliencyGroupName",
+    #       resiliency_group_type: "Managed" # One of: ["Managed"],
+    #       owner_account: "OwnerAccount",
+    #       state: "pending" # One of: ["pending", "available", "deleting", "deleted"],
+    #       tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::UpdateResiliencyGroupResult]
+    def update_resiliency_group(params = {}, options = {})
+      request = build_request(:update_resiliency_group, params)
+      request.send_request(options)
+    end
+
     # <p>Updates the specified attributes of the specified virtual private interface.</p>
     #          <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to
-    #       the underlying physical connection if it wasn't updated to support jumbo frames. Updating 
-    #       the connection disrupts network connectivity for all virtual interfaces associated with 
-    #       the connection for up to 30 seconds. To check whether your connection supports jumbo 
-    #       frames, call <a>DescribeConnections</a>. To check whether your virtual 
+    #       the underlying physical connection if it wasn't updated to support jumbo frames. Updating
+    #       the connection disrupts network connectivity for all virtual interfaces associated with
+    #       the connection for up to 30 seconds. To check whether your connection supports jumbo
+    #       frames, call <a>DescribeConnections</a>. To check whether your virtual
     #       interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>
     # @param [Hash, Types::UpdateVirtualInterfaceAttributesRequest] params
     # @option params [String] :virtual_interface_id
@@ -4016,12 +4752,21 @@ module Aws::DirectConnect
     #   <p>Indicates whether to enable or disable SiteLink.</p>
     # @option params [String] :virtual_interface_name
     #   <p>The name of the virtual private interface.</p>
+    # @option params [Integer] :prefix_pool_allocated_count_ipv4
+    #   <p>The number of inbound IPv4 route prefixes to allocate to the virtual interface. Not applicable to public virtual interfaces.</p>
+    # @option params [Integer] :prefix_pool_allocated_count_ipv6
+    #   <p>The number of inbound IPv6 route prefixes to allocate to the virtual interface. Not applicable to public virtual interfaces.</p>
+    # @option params [String] :rate_limit
+    #   <p>The rate limit (bandwidth allocation) to apply to the virtual interface. Use this to update the bandwidth allocation on an existing virtual interface.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     virtual_interface_id: "VirtualInterfaceId", # required
     #     mtu: 1,
     #     enable_site_link: false,
-    #     virtual_interface_name: "VirtualInterfaceName"
+    #     virtual_interface_name: "VirtualInterfaceName",
+    #     prefix_pool_allocated_count_ipv4: 1,
+    #     prefix_pool_allocated_count_ipv6: 1,
+    #     rate_limit: "RateLimit"
     #   }
     #   options = {}
     #   response = client.update_virtual_interface_attributes(params, options)
@@ -4077,7 +4822,10 @@ module Aws::DirectConnect
     #         value: "TagValue"
     #       }
     #     ],
-    #     site_link_enabled: false
+    #     site_link_enabled: false,
+    #     prefix_pool_allocated_count_ipv4: 1,
+    #     prefix_pool_allocated_count_ipv6: 1,
+    #     rate_limit: "RateLimit"
     #   }
     # @return [Types::UpdateVirtualInterfaceAttributesOutput]
     def update_virtual_interface_attributes(params = {}, options = {})

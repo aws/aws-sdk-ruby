@@ -144,18 +144,18 @@ module Aws::CostOptimizationHub
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -253,8 +253,8 @@ module Aws::CostOptimizationHub
     #     cost_calculation_lookback_period_in_days: 1,
     #     estimated_savings_percentage: 1.0,
     #     estimated_savings_over_cost_calculation_lookback_period: 1.0,
-    #     current_resource_type: "Ec2Instance" # One of: ["Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"],
-    #     recommended_resource_type: "Ec2Instance" # One of: ["Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"],
+    #     current_resource_type: "Ec2Instance" # One of: ["Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances", "NatGateway", "DynamoDBTable", "ElastiCacheCluster", "MemoryDBCluster", "DocumentDBCluster", "WorkSpaces", "SageMakerEndpoint"],
+    #     recommended_resource_type: "Ec2Instance" # One of: ["Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances", "NatGateway", "DynamoDBTable", "ElastiCacheCluster", "MemoryDBCluster", "DocumentDBCluster", "WorkSpaces", "SageMakerEndpoint"],
     #     region: "String",
     #     source: "ComputeOptimizer" # One of: ["ComputeOptimizer", "CostExplorer"],
     #     last_refresh_timestamp: Time.now,
@@ -734,6 +734,172 @@ module Aws::CostOptimizationHub
     #             estimated_monthly_amortized_reservation_cost: 1.0
     #           }
     #         }
+    #       },
+    #       nat_gateway: {
+    #         configuration: {
+    #           active_connection_count: 1,
+    #           packets_in_from_source: 1,
+    #           packets_in_from_destination: 1
+    #         },
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       dynamo_db_table: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       elasti_cache_cluster: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       memory_db_cluster: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       document_db_cluster: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       work_spaces: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       sage_maker_endpoint: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
     #       }
     #     },
     #     recommended_resource_details: {
@@ -1206,6 +1372,172 @@ module Aws::CostOptimizationHub
     #             estimated_monthly_amortized_reservation_cost: 1.0
     #           }
     #         }
+    #       },
+    #       nat_gateway: {
+    #         configuration: {
+    #           active_connection_count: 1,
+    #           packets_in_from_source: 1,
+    #           packets_in_from_destination: 1
+    #         },
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       dynamo_db_table: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       elasti_cache_cluster: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       memory_db_cluster: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       document_db_cluster: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       work_spaces: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
+    #       },
+    #       sage_maker_endpoint: {
+    #         cost_calculation: {
+    #           usages: [
+    #             {
+    #               usage_type: "String",
+    #               usage_amount: 1.0,
+    #               operation: "String",
+    #               product_code: "String",
+    #               unit: "String"
+    #             }
+    #           ],
+    #           pricing: {
+    #             estimated_cost_before_discounts: 1.0,
+    #             estimated_net_unused_amortized_commitments: 1.0,
+    #             estimated_discounts: {
+    #               savings_plans_discount: 1.0,
+    #               reserved_instances_discount: 1.0,
+    #               other_discount: 1.0
+    #             },
+    #             estimated_cost_after_discounts: 1.0
+    #           }
+    #         }
     #       }
     #     },
     #     tags: [
@@ -1218,6 +1550,62 @@ module Aws::CostOptimizationHub
     # @return [Types::GetRecommendationResponse]
     def get_recommendation(params = {}, options = {})
       request = build_request(:get_recommendation, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns cost efficiency metrics aggregated over time and optionally grouped by a specified dimension. The metrics provide insights into your cost optimization progress by tracking estimated savings, spending, and measures how effectively you're optimizing your Cloud resources.</p> <p>The operation supports both daily and monthly time granularities and allows grouping results by account ID, Amazon Web Services Region. Results are returned as time-series data, enabling you to analyze trends in your cost optimization performance over the specified time period.</p>
+    # @param [Hash, Types::ListEfficiencyMetricsRequest] params
+    # @option params [String] :group_by
+    #   <p>The dimension by which to group the cost efficiency metrics. Valid values include account ID, Amazon Web Services Region. When no grouping is specified, metrics are aggregated across all resources in the specified time period.</p>
+    # @option params [String] :granularity
+    #   <p>The time granularity for the cost efficiency metrics. Specify <code>Daily</code> for metrics aggregated by day, or <code>Monthly</code> for metrics aggregated by month.</p>
+    # @option params [Types::TimePeriod] :time_period
+    #   <p>The time period for which to retrieve the cost efficiency metrics. The start date is inclusive and the end date is exclusive. Dates can be specified in either YYYY-MM-DD format or YYYY-MM format depending on the desired granularity.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of groups to return in the response. Valid values range from 0 to 1000. Use in conjunction with <code>nextToken</code> to paginate through results when the total number of groups exceeds this limit.</p>
+    # @option params [Types::OrderBy] :order_by
+    #   <p>The ordering specification for the results. Defines which dimension to sort by and whether to sort in ascending or descending order.</p>
+    # @option params [String] :next_token
+    #   <p>The token to retrieve the next page of results. This value is returned in the response when the number of groups exceeds the specified <code>maxResults</code> value.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     group_by: "String",
+    #     granularity: "Daily" # One of: ["Daily", "Monthly"], # required
+    #     time_period: { # required
+    #       start: "String", # required
+    #       end: "String", # required
+    #     },
+    #     max_results: 1,
+    #     order_by: {
+    #       dimension: "String",
+    #       order: "Asc" # One of: ["Asc", "Desc"]
+    #     },
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_efficiency_metrics(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     efficiency_metrics_by_group: [
+    #       {
+    #         metrics_by_time: [
+    #           {
+    #             score: 1.0,
+    #             savings: 1.0,
+    #             spend: 1.0,
+    #             timestamp: "String"
+    #           }
+    #         ],
+    #         group: "String",
+    #         message: "String"
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListEfficiencyMetricsResponse]
+    def list_efficiency_metrics(params = {}, options = {})
+      request = build_request(:list_efficiency_metrics, params)
       request.send_request(options)
     end
 
@@ -1280,7 +1668,7 @@ module Aws::CostOptimizationHub
     #       implementation_efforts: ["VeryLow" # One of: ["VeryLow", "Low", "Medium", "High", "VeryHigh"]],
     #       account_ids: ["AccountId"],
     #       regions: ["String"],
-    #       resource_types: ["Ec2Instance" # One of: ["Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"]],
+    #       resource_types: ["Ec2Instance" # One of: ["Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances", "NatGateway", "DynamoDBTable", "ElastiCacheCluster", "MemoryDBCluster", "DocumentDBCluster", "WorkSpaces", "SageMakerEndpoint"]],
     #       action_types: ["Rightsize" # One of: ["Rightsize", "Stop", "Upgrade", "PurchaseSavingsPlans", "PurchaseReservedInstances", "MigrateToGraviton", "Delete", "ScaleIn"]],
     #       tags: [
     #         {
@@ -1343,7 +1731,7 @@ module Aws::CostOptimizationHub
     #       implementation_efforts: ["VeryLow" # One of: ["VeryLow", "Low", "Medium", "High", "VeryHigh"]],
     #       account_ids: ["AccountId"],
     #       regions: ["String"],
-    #       resource_types: ["Ec2Instance" # One of: ["Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"]],
+    #       resource_types: ["Ec2Instance" # One of: ["Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances", "NatGateway", "DynamoDBTable", "ElastiCacheCluster", "MemoryDBCluster", "DocumentDBCluster", "WorkSpaces", "SageMakerEndpoint"]],
     #       action_types: ["Rightsize" # One of: ["Rightsize", "Stop", "Upgrade", "PurchaseSavingsPlans", "PurchaseReservedInstances", "MigrateToGraviton", "Delete", "ScaleIn"]],
     #       tags: [
     #         {
@@ -1406,7 +1794,7 @@ module Aws::CostOptimizationHub
       request.send_request(options)
     end
 
-    # <p>Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization Hub service.</p> <p>If the account is a management account or delegated administrator of an organization, this action can also be used to enroll member accounts of the organization.</p> <p>You must have the appropriate permissions to opt in to Cost Optimization Hub and to view its recommendations. When you opt in, Cost Optimization Hub automatically creates a service-linked role in your account to access its data.</p>
+    # <p>Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization Hub service.</p> <p>If the account is a management account of an organization, this action can also be used to enroll member accounts of the organization.</p> <p>You must have the appropriate permissions to opt in to Cost Optimization Hub and to view its recommendations. When you opt in, Cost Optimization Hub automatically creates a service-linked role in your account to access its data.</p>
     # @param [Hash, Types::UpdateEnrollmentStatusRequest] params
     # @option params [String] :status
     #   <p>Sets the account status.</p>

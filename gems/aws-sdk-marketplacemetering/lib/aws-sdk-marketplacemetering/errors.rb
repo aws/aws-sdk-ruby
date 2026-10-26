@@ -26,9 +26,11 @@ module Aws::MarketplaceMetering
   # * {DisabledApiException}
   # * {DuplicateRequestException}
   # * {ExpiredTokenException}
+  # * {IdempotencyConflictException}
   # * {InternalServiceErrorException}
   # * {InvalidCustomerIdentifierException}
   # * {InvalidEndpointRegionException}
+  # * {InvalidLicenseException}
   # * {InvalidProductCodeException}
   # * {InvalidPublicKeyVersionException}
   # * {InvalidRegionException}
@@ -104,6 +106,19 @@ module Aws::MarketplaceMetering
       end
     end
 
+    # <p>The <code>ClientToken</code> is being used for multiple requests.</p>
+    class IdempotencyConflictException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MarketplaceMetering::Types::IdempotencyConflictException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>An internal error has occurred. Retry your request. If the problem persists, post a
     #             message with details on the Amazon Web Services forums.</p>
     class InternalServiceErrorException < Smithy::Client::ServiceError
@@ -138,6 +153,19 @@ module Aws::MarketplaceMetering
     class InvalidEndpointRegionException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MarketplaceMetering::Types::InvalidEndpointRegionException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>Ensure the <code>LicenseArn</code> is valid, matches the customer, and usage is within the license activation period.</p>
+    class InvalidLicenseException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MarketplaceMetering::Types::InvalidLicenseException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

@@ -140,8 +140,33 @@ module Aws::Braket
           arn: String,
           type: String
         }
-      ]
+      ],
+      ?experimental_capabilities: {
+        enabled: String
+      }
     ) -> _CreateQuantumTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQuantumTaskResponse
+
+    interface _CreateSpendingLimitResponse
+      include Smithy::Client::_Response[Types::CreateSpendingLimitResponse]
+      def spending_limit_arn: () -> String?
+    end
+    def create_spending_limit: (
+      ?client_token: String,
+      ?device_arn: String,
+      ?spending_limit: String,
+      ?time_period: {
+        start_at: Time,
+        end_at: untyped
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateSpendingLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSpendingLimitResponse
+
+    interface _DeleteSpendingLimitResponse
+      include Smithy::Client::_Response[Types::DeleteSpendingLimitResponse]
+    end
+    def delete_spending_limit: (
+      ?spending_limit_arn: String
+    ) -> _DeleteSpendingLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSpendingLimitResponse
 
     interface _GetDeviceResponse
       include Smithy::Client::_Response[Types::GetDeviceOutput]
@@ -204,6 +229,7 @@ module Aws::Braket
       def associations: () -> Array[Types::Association]?
       def num_successful_shots: () -> Integer?
       def action_metadata: () -> Types::ActionMetadata?
+      def experimental_capabilities: () -> Types::ExperimentalCapabilities?
     end
     def get_quantum_task: (
       ?quantum_task_arn: String,
@@ -268,6 +294,23 @@ module Aws::Braket
       ]
     ) -> _SearchQuantumTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchQuantumTasksResponse
 
+    interface _SearchSpendingLimitsResponse
+      include Smithy::Client::_Response[Types::SearchSpendingLimitsResponse]
+      def spending_limits: () -> Array[Types::SpendingLimitSummary]?
+      def next_token: () -> String?
+    end
+    def search_spending_limits: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ]
+    ) -> _SearchSpendingLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchSpendingLimitsResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceOutput]
     end
@@ -283,5 +326,18 @@ module Aws::Braket
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateSpendingLimitResponse
+      include Smithy::Client::_Response[Types::UpdateSpendingLimitResponse]
+    end
+    def update_spending_limit: (
+      ?spending_limit_arn: String,
+      ?client_token: String,
+      ?spending_limit: String,
+      ?time_period: {
+        start_at: Time,
+        end_at: untyped
+      }
+    ) -> _UpdateSpendingLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSpendingLimitResponse
   end
 end

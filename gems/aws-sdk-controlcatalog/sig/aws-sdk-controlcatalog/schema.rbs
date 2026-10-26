@@ -21,7 +21,9 @@ module Aws::ControlCatalog
     ControlMappingFilter: StructureShape
     ControlMappings: ListShape
     ControlParameter: StructureShape
+    ControlParameterRequirement: EnumShape
     ControlParameters: ListShape
+    ControlRelationType: EnumShape
     ControlScope: EnumShape
     ControlSeverity: EnumShape
     ControlSummary: StructureShape
@@ -37,6 +39,9 @@ module Aws::ControlCatalog
     FrameworkName: StringShape
     GetControlRequest: StructureShape
     GetControlResponse: StructureShape
+    GovernedProvider: StringShape
+    GovernedProviderFilterList: ListShape
+    GovernedProviders: ListShape
     GovernedResource: StringShape
     GovernedResources: ListShape
     ImplementationDetails: StructureShape
@@ -72,8 +77,10 @@ module Aws::ControlCatalog
     ObjectiveSummary: StructureShape
     ObjectiveSummaryList: ListShape
     PaginationToken: StringShape
+    ParameterRequirementSummary: EnumShape
     RegionCode: StringShape
     RegionConfiguration: StructureShape
+    RelatedControlMappingDetails: StructureShape
     ResourceNotFoundException: StructureShape
     ThrottlingException: StructureShape
     ValidationException: StructureShape

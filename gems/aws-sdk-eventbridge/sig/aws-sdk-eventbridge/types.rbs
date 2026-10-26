@@ -1142,6 +1142,7 @@ module Aws::EventBridge
         ?log_config: Types::LogConfig,
         ?creation_time: Time,
         ?last_modified_time: Time,
+        ?managed_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1154,6 +1155,7 @@ module Aws::EventBridge
       attr_accessor log_config: Types::LogConfig?
       attr_accessor creation_time: Time?
       attr_accessor last_modified_time: Time?
+      attr_accessor managed_by: String?
     end
 
     class DescribeEventSourceRequest
@@ -1427,6 +1429,7 @@ module Aws::EventBridge
         ?policy: String,
         ?creation_time: Time,
         ?last_modified_time: Time,
+        ?managed_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1436,6 +1439,7 @@ module Aws::EventBridge
       attr_accessor policy: String?
       attr_accessor creation_time: Time?
       attr_accessor last_modified_time: Time?
+      attr_accessor managed_by: String?
     end
 
     class EventSource

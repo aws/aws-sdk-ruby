@@ -104,7 +104,14 @@ module Aws::DeviceFarm
         security_group_ids: Array[String],
         subnet_ids: Array[String],
         vpc_id: String
-      }
+      },
+      ?environment_variables: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?execution_role_arn: String
     ) -> _CreateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectResponse
 
     interface _CreateRemoteAccessSessionResponse
@@ -114,20 +121,18 @@ module Aws::DeviceFarm
     def create_remote_access_session: (
       ?project_arn: String,
       ?device_arn: String,
+      ?app_arn: String,
       ?instance_arn: String,
-      ?ssh_public_key: String,
-      ?remote_debug_enabled: bool,
-      ?remote_record_enabled: bool,
-      ?remote_record_app_arn: String,
       ?name: String,
-      ?client_id: String,
       ?configuration: {
+        auxiliary_apps: Array[String],
         billing_method: String,
         vpce_configuration_arns: Array[String],
         device_proxy: {
           host: String,
           port: Integer
-        }
+        },
+        parameters: Hash[String, String]
       },
       ?interaction_mode: String,
       ?skip_app_resign: bool
@@ -313,7 +318,15 @@ module Aws::DeviceFarm
           gps: untyped
         },
         auxiliary_apps: untyped,
-        billing_method: String
+        billing_method: String,
+        environment_variables: Array[
+          {
+            name: String,
+            value: String
+          }
+        ],
+        execution_role_arn: String,
+        insights_types: Array[String]
       },
       ?project_arn: String
     ) -> _GetDevicePoolCompatibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDevicePoolCompatibilityResponse
@@ -760,7 +773,15 @@ module Aws::DeviceFarm
           gps: untyped
         },
         auxiliary_apps: untyped,
-        billing_method: String
+        billing_method: String,
+        environment_variables: Array[
+          {
+            name: String,
+            value: String
+          }
+        ],
+        execution_role_arn: String,
+        insights_types: Array[String]
       },
       ?execution_configuration: {
         job_timeout_minutes: Integer,
@@ -889,7 +910,14 @@ module Aws::DeviceFarm
         security_group_ids: Array[String],
         subnet_ids: Array[String],
         vpc_id: String
-      }
+      },
+      ?environment_variables: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?execution_role_arn: String
     ) -> _UpdateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectResponse
 
     interface _UpdateTestGridProjectResponse

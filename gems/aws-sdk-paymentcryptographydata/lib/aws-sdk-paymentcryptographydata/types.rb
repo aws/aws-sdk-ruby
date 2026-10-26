@@ -77,6 +77,42 @@ module Aws::PaymentCryptographyData
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Parameter information for generating a random key for KEK validation to perform node-to-node initialization.</p>
+    # @!attribute kek_validation_request
+    #   <p>Parameter information for generating a KEK validation request during node-to-node initialization.</p>
+    #   @return [Types::KekValidationRequest]
+    # @!attribute kek_validation_response
+    #   <p>Parameter information for generating a KEK validation response during node-to-node initialization.</p>
+    #   @return [Types::KekValidationResponse]
+    class As2805KekValidationType < Struct.new(
+      :kek_validation_request,
+      :kek_validation_response,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class KekValidationRequest < As2805KekValidationType; end
+      class KekValidationResponse < As2805KekValidationType; end
+      class Unknown < As2805KekValidationType; end
+    end
+
+    # <p>Parameter information to use a PEK derived using AS2805.</p>
+    # @!attribute system_trace_audit_number
+    #   <p>The system trace audit number for the transaction.</p>
+    #   @return [String]
+    # @!attribute transaction_amount
+    #   <p>The transaction amount for the transaction.</p>
+    #   @return [String]
+    class As2805PekDerivationAttributes < Struct.new(
+      nil,
+      :system_trace_audit_number,
+      :transaction_amount,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Parameters for plaintext encryption using asymmetric keys.</p>
     # @!attribute padding_type
     #   <p>The padding to be included with the data.</p>
@@ -717,6 +753,90 @@ module Aws::PaymentCryptographyData
     end
 
     # @!attribute key_identifier
+    #   <p>The <code>keyARN</code> of sending KEK that Amazon Web Services Payment Cryptography uses for node-to-node initialization</p>
+    #   @return [String]
+    # @!attribute kek_validation_type
+    #   <p>Defines whether to generate a KEK validation request or KEK validation response for node-to-node initialization.</p>
+    #   @return [Types::As2805KekValidationType]
+    # @!attribute random_key_send_variant_mask
+    #   <p>The key variant to use for generating a random key for KEK validation during node-to-node initialization.</p>
+    #   @return [String]
+    class GenerateAs2805KekValidationInput < Struct.new(
+      nil,
+      :key_identifier,
+      :kek_validation_type,
+      :random_key_send_variant_mask,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute key_arn
+    #   <p>The <code>keyARN</code> of sending KEK that Amazon Web Services Payment Cryptography validates for node-to-node initialization</p>
+    #   @return [String]
+    # @!attribute key_check_value
+    #   <p>The key check value (KCV) of the sending KEK that Amazon Web Services Payment Cryptography validates for node-to-node initialization.</p>
+    #   @return [String]
+    # @!attribute random_key_send
+    #   <p>The random key generated for sending KEK validation.</p>
+    #   @return [String]
+    # @!attribute random_key_receive
+    #   <p>The random key generated for receiving KEK validation. The initiating node sends this key to its partner node for validation.</p>
+    #   @return [String]
+    class GenerateAs2805KekValidationOutput < Struct.new(
+      nil,
+      :key_arn,
+      :key_check_value,
+      :random_key_send,
+      :random_key_receive,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute key_identifier
+    #   <p>The <code>keyARN</code> of the IMK-AC (TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS) that Amazon Web Services Payment Cryptography uses to generate the ARQC.</p>
+    #   @return [String]
+    # @!attribute transaction_data
+    #   <p>The transaction data that Amazon Web Services Payment Cryptography uses for ARQC generation. The same transaction data is used for ARQC verification by the issuer using <a>VerifyAuthRequestCryptogram</a>.</p>
+    #   @return [String]
+    # @!attribute major_key_derivation_mode
+    #   <p>The method to use when deriving the major encryption key for ARQC generation within Amazon Web Services Payment Cryptography.</p>
+    #   @return [String]
+    # @!attribute session_key_derivation_attributes
+    #   <p>The attributes and values to use for deriving a session key for ARQC generation within Amazon Web Services Payment Cryptography.</p>
+    #   @return [Types::SessionKeyDerivation]
+    class GenerateAuthRequestCryptogramInput < Struct.new(
+      nil,
+      :key_identifier,
+      :transaction_data,
+      :major_key_derivation_mode,
+      :session_key_derivation_attributes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute key_arn
+    #   <p>The <code>keyARN</code> of the IMK-AC that Amazon Web Services Payment Cryptography uses for ARQC generation.</p>
+    #   @return [String]
+    # @!attribute key_check_value
+    #   <p>The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p> <p>Amazon Web Services Payment Cryptography computes the KCV according to the CMAC specification.</p>
+    #   @return [String]
+    # @!attribute auth_request_cryptogram
+    #   <p>The Authorization Request Cryptogram (ARQC) generated by Amazon Web Services Payment Cryptography using the specified key and transaction data.</p>
+    #   @return [String]
+    class GenerateAuthRequestCryptogramOutput < Struct.new(
+      nil,
+      :key_arn,
+      :key_check_value,
+      :auth_request_cryptogram,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute key_identifier
     #   <p>The <code>keyARN</code> of the CVK encryption key that Amazon Web Services Payment Cryptography uses to generate card data.</p>
     #   @return [String]
     # @!attribute primary_account_number
@@ -894,7 +1014,7 @@ module Aws::PaymentCryptographyData
     #   <p>The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.</p>
     #   @return [String]
     # @!attribute pin_block_format
-    #   <p>The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports <code>ISO_Format_0</code>, <code>ISO_Format_3</code> and <code>ISO_Format_4</code>.</p> <p>The <code>ISO_Format_0</code> PIN block format is equivalent to the ANSI X9.8, VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN block format. It supports a PIN from 4 to 12 digits in length.</p> <p>The <code>ISO_Format_3</code> PIN block format is the same as <code>ISO_Format_0</code> except that the fill digits are random values from 10 to 15.</p> <p>The <code>ISO_Format_4</code> PIN block format is the only one supporting AES encryption. It is similar to <code>ISO_Format_3</code> but doubles the pin block length by padding with fill digit A and random values from 10 to 15.</p>
+    #   <p>The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports <code>ISO_Format_0</code>, <code>ISO_Format_3</code> and <code>ISO_Format_4</code>.</p> <p>The <code>ISO_Format_0</code> PIN block format is equivalent to the ANSI X9.8, VISA-1, and ECI-1 PIN block formats. It is similar to a VISA-4 PIN block format. It supports a PIN from 4 to 12 digits in length.</p> <p>The <code>ISO_Format_3</code> PIN block format is the same as <code>ISO_Format_0</code> except that the fill digits are random values from 10 to 15.</p> <p>The <code>ISO_Format_4</code> PIN block format is the only one supporting AES encryption.</p>
     #   @return [String]
     # @!attribute encryption_wrapped_key
     #   <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
@@ -1117,6 +1237,34 @@ module Aws::PaymentCryptographyData
     class InternalServerException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Parameter information for generating a KEK validation request during node-to-node initialization.</p>
+    # @!attribute derive_key_algorithm
+    #   <p>The key derivation algorithm to use for generating a KEK validation request.</p>
+    #   @return [String]
+    # @!attribute random_key_max_length
+    #   <p>The maximum length of the random key to generate for a KEK validation request.</p>
+    #   @return [String]
+    class KekValidationRequest < Struct.new(
+      nil,
+      :derive_key_algorithm,
+      :random_key_max_length,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Parameter information for generating a KEK validation response during node-to-node initialization.</p>
+    # @!attribute random_key_send
+    #   <p>The random key send value received from the initiating node to generate a KEK validation response.</p>
+    #   @return [String]
+    class KekValidationResponse < Struct.new(
+      nil,
+      :random_key_send,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1392,13 +1540,17 @@ module Aws::PaymentCryptographyData
 
     # <p>Parameters that are required to perform reencryption operation.</p>
     # @!attribute symmetric
-    #   <p>Parameters that are required to encrypt data using symmetric keys.</p>
+    #   <p>Specifies the parameters required to encrypt data using symmetric keys.</p>
     #   @return [Types::SymmetricEncryptionAttributes]
+    # @!attribute asymmetric
+    #   <p>Specifies the parameters required to encrypt data using an asymmetric key pair. You must specify a <code>PaddingType</code>.</p>
+    #   @return [Types::AsymmetricEncryptionAttributes]
     # @!attribute dukpt
-    #   <p>Parameters that are required to encrypt plaintext data using DUKPT.</p>
+    #   <p>Specifies the parameters required to encrypt data using DUKPT.</p>
     #   @return [Types::DukptEncryptionAttributes]
     class ReEncryptionAttributes < Struct.new(
       :symmetric,
+      :asymmetric,
       :dukpt,
       :unknown,
       keyword_init: true
@@ -1406,6 +1558,7 @@ module Aws::PaymentCryptographyData
       include ::Smithy::Schema::Union
 
       class Symmetric < ReEncryptionAttributes; end
+      class Asymmetric < ReEncryptionAttributes; end
       class Dukpt < ReEncryptionAttributes; end
       class Unknown < ReEncryptionAttributes; end
     end
@@ -1454,12 +1607,16 @@ module Aws::PaymentCryptographyData
     # @!attribute visa
     #   <p>Parameters to derive session key for a Visa payment cardfor ARQC verification.</p>
     #   @return [Types::SessionKeyVisa]
+    # @!attribute union_pay
+    #   <p>Parameters to derive session key for a UnionPay payment card for Authorization Request Cryptogram (ARQC) generation and verification.</p>
+    #   @return [Types::SessionKeyUnionPay]
     class SessionKeyDerivation < Struct.new(
       :emv_common,
       :mastercard,
       :emv2000,
       :amex,
       :visa,
+      :union_pay,
       :unknown,
       keyword_init: true
     )
@@ -1470,6 +1627,7 @@ module Aws::PaymentCryptographyData
       class Emv2000 < SessionKeyDerivation; end
       class Amex < SessionKeyDerivation; end
       class Visa < SessionKeyDerivation; end
+      class UnionPay < SessionKeyDerivation; end
       class Unknown < SessionKeyDerivation; end
     end
 
@@ -1557,6 +1715,26 @@ module Aws::PaymentCryptographyData
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Parameters to derive session key for a UnionPay payment card for Authorization Request Cryptogram (ARQC) generation and verification.</p>
+    # @!attribute primary_account_number
+    #   <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+    #   @return [String]
+    # @!attribute pan_sequence_number
+    #   <p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN). If not used, enter <code>00</code>.</p>
+    #   @return [String]
+    # @!attribute application_transaction_counter
+    #   <p>The transaction counter that the terminal provides during transaction processing. This value is in hexadecimal format. For example, enter a decimal counter of 109 as <code>006D</code>.</p>
+    #   @return [String]
+    class SessionKeyUnionPay < Struct.new(
+      nil,
+      :primary_account_number,
+      :pan_sequence_number,
+      :application_transaction_counter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Parameters to derive session key for Visa payment card for ARQC verification.</p>
     # @!attribute primary_account_number
     #   <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
@@ -1611,7 +1789,7 @@ module Aws::PaymentCryptographyData
     #   <p>Parameter information of the wrapping key used to wrap the transaction key in the outgoing TR31WrappedKeyBlock.</p>
     #   @return [Types::OutgoingKeyMaterial]
     # @!attribute key_check_value_algorithm
-    #   <p>The key check value (KCV) algorithm used for calculating the KCV.</p>
+    #   <p>The key check value (KCV) algorithm used for calculating the KCV of the derived key.</p>
     #   @return [String]
     class TranslateKeyMaterialInput < Struct.new(
       nil,
@@ -1661,6 +1839,9 @@ module Aws::PaymentCryptographyData
     # @!attribute outgoing_wrapped_key
     #   <p>The WrappedKeyBlock containing the encryption key for encrypting outgoing PIN block data.</p>
     #   @return [Types::WrappedKey]
+    # @!attribute incoming_as2805_attributes
+    #   <p>The attributes and values to use for incoming AS2805 encryption key for PIN block translation.</p>
+    #   @return [Types::As2805PekDerivationAttributes]
     class TranslatePinDataInput < Struct.new(
       nil,
       :incoming_key_identifier,
@@ -1672,6 +1853,7 @@ module Aws::PaymentCryptographyData
       :outgoing_dukpt_attributes,
       :incoming_wrapped_key,
       :outgoing_wrapped_key,
+      :incoming_as2805_attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1698,22 +1880,26 @@ module Aws::PaymentCryptographyData
 
     # <p>Parameters that are required for translation between ISO9564 PIN block formats 0,1,3,4.</p>
     # @!attribute iso_format0
-    #   <p>Parameters that are required for ISO9564 PIN format 0 tranlation.</p>
+    #   <p>Parameters that are required for ISO9564 PIN format 0 translation.</p>
     #   @return [Types::TranslationPinDataIsoFormat034]
     # @!attribute iso_format1
-    #   <p>Parameters that are required for ISO9564 PIN format 1 tranlation.</p>
+    #   <p>Parameters that are required for ISO9564 PIN format 1 translation.</p>
     #   @return [Types::TranslationPinDataIsoFormat1]
     # @!attribute iso_format3
-    #   <p>Parameters that are required for ISO9564 PIN format 3 tranlation.</p>
+    #   <p>Parameters that are required for ISO9564 PIN format 3 translation.</p>
     #   @return [Types::TranslationPinDataIsoFormat034]
     # @!attribute iso_format4
-    #   <p>Parameters that are required for ISO9564 PIN format 4 tranlation.</p>
+    #   <p>Parameters that are required for ISO9564 PIN format 4 translation.</p>
     #   @return [Types::TranslationPinDataIsoFormat034]
+    # @!attribute as2805_format0
+    #   <p>Parameters that are required for AS2805 PIN format 0 translation.</p>
+    #   @return [Types::TranslationPinDataAs2805Format0]
     class TranslationIsoFormats < Struct.new(
       :iso_format0,
       :iso_format1,
       :iso_format3,
       :iso_format4,
+      :as2805_format0,
       :unknown,
       keyword_init: true
     )
@@ -1723,10 +1909,23 @@ module Aws::PaymentCryptographyData
       class IsoFormat1 < TranslationIsoFormats; end
       class IsoFormat3 < TranslationIsoFormats; end
       class IsoFormat4 < TranslationIsoFormats; end
+      class As2805Format0 < TranslationIsoFormats; end
       class Unknown < TranslationIsoFormats; end
     end
 
-    # <p>Parameters that are required for tranlation between ISO9564 PIN format 0,3,4 tranlation.</p>
+    # <p>Parameters that are required for translation between AS2805 PIN format 0 translation.</p>
+    # @!attribute primary_account_number
+    #   <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
+    #   @return [String]
+    class TranslationPinDataAs2805Format0 < Struct.new(
+      nil,
+      :primary_account_number,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Parameters that are required for translation between ISO9564 PIN format 0,3,4 translation.</p>
     # @!attribute primary_account_number
     #   <p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>
     #   @return [String]
@@ -1738,7 +1937,7 @@ module Aws::PaymentCryptographyData
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Parameters that are required for ISO9564 PIN format 1 tranlation.</p>
+    # <p>Parameters that are required for ISO9564 PIN format 1 translation.</p>
     class TranslationPinDataIsoFormat1 < Struct.new(
       nil,
       keyword_init: true

@@ -6,7 +6,7 @@ module Aws::AppStream
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>Describes an interface VPC endpoint (interface endpoint) that lets you create a private connection between the virtual private cloud (VPC) that you specify and AppStream 2.0. When you specify an interface endpoint for a stack, users of the stack can connect to AppStream 2.0 only through that endpoint. When you specify an interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.</p>
+    # <p>Describes an interface VPC endpoint (interface endpoint) that lets you create a private connection between the virtual private cloud (VPC) that you specify and WorkSpaces Applications. When you specify an interface endpoint for a stack, users of the stack can connect to WorkSpaces Applications only through that endpoint. When you specify an interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.</p>
     # @!attribute endpoint_type
     #   <p>The type of interface endpoint.</p>
     #   @return [String]
@@ -22,8 +22,124 @@ module Aws::AppStream
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The collection of license usage records.</p>
+    # @!attribute user_arn
+    #   <p>The ARN of the user who used the license-included application.</p>
+    #   @return [String]
+    # @!attribute billing_period
+    #   <p>The billing period for the license usage record.</p>
+    #   @return [String]
+    # @!attribute owner_aws_account_id
+    #   <p>The account ID of the owner of the license.</p>
+    #   @return [String]
+    # @!attribute subscription_first_used_date
+    #   <p>The date and time when the license was first used.</p>
+    #   @return [Time]
+    # @!attribute subscription_last_used_date
+    #   <p>The date and time when the license was last used.</p>
+    #   @return [Time]
+    # @!attribute license_type
+    #   <p>The type of license (for example, Microsoft Office).</p>
+    #   @return [String]
+    # @!attribute user_id
+    #   <p>The ID of the user who used the license-included application.</p>
+    #   @return [String]
+    class AdminAppLicenseUsageRecord < Struct.new(
+      nil,
+      :user_arn,
+      :billing_period,
+      :owner_aws_account_id,
+      :subscription_first_used_date,
+      :subscription_last_used_date,
+      :license_type,
+      :user_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for agent access on a stack. Agent access enables AI agents to interact with desktop applications during streaming sessions.</p>
+    # @!attribute settings
+    #   <p>The list of agent access settings that define permissions for each agent action. You must specify at least one setting.</p>
+    #   @return [Array<Types::AgentAccessSetting>]
+    # @!attribute s3_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.</p>
+    #   @return [String]
+    # @!attribute screenshots_upload_enabled
+    #   <p>Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>
+    #   @return [Boolean]
+    # @!attribute screen_resolution
+    #   <p>The screen resolution for the agent streaming environment.</p>
+    #   @return [String]
+    # @!attribute screen_image_format
+    #   <p>The image format for agent screen captures.</p>
+    #   @return [String]
+    # @!attribute user_control_mode
+    #   <p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p>
+    #   @return [String]
+    class AgentAccessConfig < Struct.new(
+      nil,
+      :settings,
+      :s3_bucket_arn,
+      :screenshots_upload_enabled,
+      :screen_resolution,
+      :screen_image_format,
+      :user_control_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for updating agent access on a stack. This type supports partial updates, so you only need to specify the fields you want to change.</p>
+    # @!attribute settings
+    #   <p>The list of agent access settings that define permissions for each agent action.</p>
+    #   @return [Array<Types::AgentAccessSetting>]
+    # @!attribute s3_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored.</p>
+    #   @return [String]
+    # @!attribute screenshots_upload_enabled
+    #   <p>Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>
+    #   @return [Boolean]
+    # @!attribute screen_resolution
+    #   <p>The screen resolution for the agent streaming environment.</p>
+    #   @return [String]
+    # @!attribute screen_image_format
+    #   <p>The image format for agent screen captures.</p>
+    #   @return [String]
+    # @!attribute user_control_mode
+    #   <p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p>
+    #   @return [String]
+    class AgentAccessConfigForUpdate < Struct.new(
+      nil,
+      :settings,
+      :s3_bucket_arn,
+      :screenshots_upload_enabled,
+      :screen_resolution,
+      :screen_image_format,
+      :user_control_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A permission setting for an agent action. Each setting specifies an agent action and whether it is enabled or disabled.</p>
+    # @!attribute agent_action
+    #   <p>The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. If you enable COMPUTER_INPUT, you must also enable COMPUTER_VISION.</p>
+    #   @return [String]
+    # @!attribute permission
+    #   <p>Whether the agent action is enabled or disabled.</p>
+    #   @return [String]
+    class AgentAccessSetting < Struct.new(
+      nil,
+      :agent_action,
+      :permission,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes an app block.</p>
-    #          <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the
+    #          <p>App blocks are a WorkSpaces Applications resource that stores the details about the
     #            virtual hard disk in an S3 bucket. It also stores the setup script with details about
     #            how to mount the virtual hard disk. The virtual hard disk includes the application
     #            binaries and other files necessary to launch your applications. Multiple applications
@@ -60,7 +176,7 @@ module Aws::AppStream
     #   @return [String]
     # @!attribute state
     #   <p>The state of the app block.</p>
-    #            <p>An app block with AppStream 2.0 packaging will be in the <code>INACTIVE</code> state
+    #            <p>An app block with WorkSpaces Applications packaging will be in the <code>INACTIVE</code> state
     #               if no application package (VHD) is assigned to it. After an application package (VHD) is
     #               created by an app block builder for an app block, it becomes <code>ACTIVE</code>. </p>
     #            <p>Custom app blocks are always in the <code>ACTIVE</code> state and no action is required to use them.</p>
@@ -131,6 +247,9 @@ module Aws::AppStream
     # @!attribute access_endpoints
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>
     #   @return [Array<Types::AccessEndpoint>]
+    # @!attribute disable_imdsv1
+    #   <p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the app block builder.</p>
+    #   @return [Boolean]
     class AppBlockBuilder < Struct.new(
       nil,
       :arn,
@@ -147,6 +266,7 @@ module Aws::AppStream
       :app_block_builder_errors,
       :state_change_reason,
       :access_endpoints,
+      :disable_imdsv1,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -252,6 +372,43 @@ module Aws::AppStream
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for an application in the imported image's application catalog. This structure defines how applications appear and launch for users.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute name
+    #   <p>The name of the application. This is a required field that must be unique within the application catalog and between 1-100 characters, matching the pattern ^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,99}$.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The display name shown to users for this application. This field is optional and can be 0-100 characters, matching the pattern ^[a-zA-Z0-9][a-zA-Z0-9_. -]{0,99}$.</p>
+    #   @return [String]
+    # @!attribute absolute_app_path
+    #   <p>The absolute path to the executable file that launches the application. This is a required field that can be 1-32767 characters to support Windows extended file paths. Use escaped file path strings like "C:\\\\Windows\\\\System32\\\\notepad.exe".</p>
+    #   @return [String]
+    # @!attribute absolute_icon_path
+    #   <p>The absolute path to the icon file for the application. This field is optional and can be 1-32767 characters. If not provided, the icon is derived from the executable. Use PNG images with proper transparency for the best user experience.</p>
+    #   @return [String]
+    # @!attribute absolute_manifest_path
+    #   <p>The absolute path to the prewarm manifest file for this application. This field is optional and only applicable when using application-specific manifests. The path can be 1-32767 characters and should point to a text file containing file paths to prewarm.</p>
+    #   @return [String]
+    # @!attribute working_directory
+    #   <p>The working directory to use when launching the application. This field is optional and can be 0-32767 characters. Use escaped file path strings like "C:\\\\Path\\\\To\\\\Working\\\\Directory".</p>
+    #   @return [String]
+    # @!attribute launch_parameters
+    #   <p>The launch parameters to pass to the application executable. This field is optional and can be 0-1024 characters. Use escaped strings with the full list of required parameters, such as PowerShell script paths or command-line arguments.</p>
+    #   @return [String]
+    class ApplicationConfig < Struct.new(
+      nil,
+      :name,
+      :display_name,
+      :absolute_app_path,
+      :absolute_icon_path,
+      :absolute_manifest_path,
+      :working_directory,
+      :launch_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes the application fleet association.</p>
     # @!attribute fleet_name
     #   <p>The name of the fleet associated with the application.</p>
@@ -292,7 +449,7 @@ module Aws::AppStream
     #   <p>The path prefix for the S3 bucket where users’ persistent application settings are stored.</p>
     #   @return [String]
     # @!attribute s3_bucket_name
-    #   <p>The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region. 
+    #   <p>The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region.
     #           </p>
     #   @return [String]
     class ApplicationSettingsResponse < Struct.new(
@@ -401,6 +558,103 @@ module Aws::AppStream
     end
 
     class AssociateFleetResult < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image_builder_name
+    #   <p>The name of the target image builder instance.</p>
+    #   @return [String]
+    # @!attribute software_names
+    #   <p>The list of license included applications to associate with the image builder.</p>
+    #            <p>Possible values include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_64Bit</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    class AssociateSoftwareToImageBuilderRequest < Struct.new(
+      nil,
+      :image_builder_name,
+      :software_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class AssociateSoftwareToImageBuilderResult < Struct.new(
       nil,
       keyword_init: true
     )
@@ -522,6 +776,15 @@ module Aws::AppStream
     #            <p>ActualUserSessionCapacity = AvailableUserSessionCapacity + ActiveUserSessions</p>
     #            <p>This only applies to multi-session fleets.</p>
     #   @return [Integer]
+    # @!attribute draining
+    #   <p>The number of instances in drain mode. This only applies to multi-session fleets.</p>
+    #   @return [Integer]
+    # @!attribute drain_mode_active_user_sessions
+    #   <p>The number of active user sessions on instances in drain mode. This only applies to multi-session fleets.</p>
+    #   @return [Integer]
+    # @!attribute drain_mode_unused_user_sessions
+    #   <p>The number of unused session slots on instances in drain mode that cannot be used for user session provisioning. This only applies to multi-session fleets.</p>
+    #   @return [Integer]
     class ComputeCapacityStatus < Struct.new(
       nil,
       :desired,
@@ -532,6 +795,9 @@ module Aws::AppStream
       :available_user_sessions,
       :active_user_sessions,
       :actual_user_sessions,
+      :draining,
+      :drain_mode_active_user_sessions,
+      :drain_mode_unused_user_sessions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -544,6 +810,18 @@ module Aws::AppStream
     class ConcurrentModificationException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for bidirectional URL redirection between the streaming session and the local client. Use HostToClient to redirect URLs from the remote desktop to the local browser.</p>
+    # @!attribute host_to_client
+    #   <p>Configuration for redirecting URLs from the remote desktop to the local client browser.</p>
+    #   @return [Types::UrlRedirectionConfig]
+    class ContentRedirection < Struct.new(
+      nil,
+      :host_to_client,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -599,7 +877,7 @@ module Aws::AppStream
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [Hash<String, String>]
     # @!attribute platform
     #   <p>The platform of the app block builder.</p>
@@ -639,13 +917,16 @@ module Aws::AppStream
     #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To
     #               assume a role, the app block builder calls the AWS Security Token Service (STS)
     #                   <code>AssumeRole</code> API operation and passes the ARN of the role to use. The
-    #               operation creates a new session with temporary credentials. AppStream 2.0 retrieves the
+    #               operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the
     #               temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [String]
     # @!attribute access_endpoints
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>
     #   @return [Array<Types::AccessEndpoint>]
+    # @!attribute disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
+    #   @return [Boolean]
     class CreateAppBlockBuilderRequest < Struct.new(
       nil,
       :name,
@@ -658,6 +939,7 @@ module Aws::AppStream
       :enable_default_internet_access,
       :iam_role_arn,
       :access_endpoints,
+      :disable_imdsv1,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -678,7 +960,7 @@ module Aws::AppStream
     #   <p>The name of the app block builder.</p>
     #   @return [String]
     # @!attribute validity
-    #   <p>The time that the streaming URL will be valid, in seconds. 
+    #   <p>The time that the streaming URL will be valid, in seconds.
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     #   @return [Integer]
     class CreateAppBlockBuilderStreamingURLRequest < Struct.new(
@@ -779,7 +1061,7 @@ module Aws::AppStream
     #   <p>The launch parameters of the application.</p>
     #   @return [String]
     # @!attribute platforms
-    #   <p>The platforms the application supports. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets.</p>
+    #   <p>The platforms the application supports. WINDOWS_SERVER_2019, AMAZON_LINUX2 and UBUNTU_PRO_2404 are supported for Elastic fleets.</p>
     #   @return [Array<String>]
     # @!attribute instance_families
     #   <p>The instance families the application supports. Valid values are GENERAL_PURPOSE and GRAPHICS_G4.</p>
@@ -897,6 +1179,44 @@ module Aws::AppStream
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute image_name
+    #   <p>The name of the WorkSpaces Applications image to export. The image must be in an available state and owned by your account.</p>
+    #   @return [String]
+    # @!attribute ami_name
+    #   <p>The name for the exported EC2 AMI. This is a required field that must be unique within your account and region.</p>
+    #   @return [String]
+    # @!attribute iam_role_arn
+    #   <p>The ARN of the IAM role that allows WorkSpaces Applications to create the AMI. The role must have permissions to copy images, describe images, and create tags, with a trust relationship allowing appstream.amazonaws.com to assume the role.</p>
+    #   @return [String]
+    # @!attribute tag_specifications
+    #   <p>The tags to apply to the exported AMI. These tags help you organize and manage your EC2 AMIs.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute ami_description
+    #   <p>An optional description for the exported AMI. This description will be applied to the resulting EC2 AMI.</p>
+    #   @return [String]
+    class CreateExportImageTaskRequest < Struct.new(
+      nil,
+      :image_name,
+      :ami_name,
+      :iam_role_arn,
+      :tag_specifications,
+      :ami_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute export_image_task
+    #   <p>Information about the export image task that was created, including the task ID and initial state.</p>
+    #   @return [Types::ExportImageTask]
+    class CreateExportImageTaskResult < Struct.new(
+      nil,
+      :export_image_task,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>A unique name for the fleet.</p>
     #   @return [String]
@@ -973,21 +1293,6 @@ module Aws::AppStream
     #                  <p>stream.memory.z1d.12xlarge</p>
     #               </li>
     #               <li>
-    #                  <p>stream.graphics-design.large</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.2xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-desktop.2xlarge</p>
-    #               </li>
-    #               <li>
     #                  <p>stream.graphics.g4dn.xlarge</p>
     #               </li>
     #               <li>
@@ -1025,15 +1330,6 @@ module Aws::AppStream
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g5.24xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.8xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.16xlarge</p>
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g6.xlarge</p>
@@ -1144,7 +1440,7 @@ module Aws::AppStream
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [Hash<String, String>]
     # @!attribute idle_disconnect_timeout_in_seconds
     #   <p>The amount of time that users can be idle (inactive) before they are disconnected
@@ -1163,15 +1459,15 @@ module Aws::AppStream
     #            </note>
     #   @return [Integer]
     # @!attribute iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [String]
     # @!attribute stream_view
-    #   <p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
+    #   <p>The WorkSpaces Applications view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
     #            <p>The default value is <code>APP</code>.</p>
     #   @return [String]
     # @!attribute platform
-    #   <p>The fleet platform. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic
+    #   <p>The fleet platform. WINDOWS_SERVER_2019, AMAZON_LINUX2 and UBUNTU_PRO_2404 are supported for Elastic
     #               fleets. </p>
     #   @return [String]
     # @!attribute max_concurrent_sessions
@@ -1187,6 +1483,15 @@ module Aws::AppStream
     # @!attribute max_sessions_per_instance
     #   <p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>
     #   @return [Integer]
+    # @!attribute root_volume_config
+    #   <p>The configuration for the root volume of fleet instances. Use this to customize storage capacity from 200 GB up to 500 GB based on your application requirements.</p>
+    #   @return [Types::VolumeConfig]
+    # @!attribute disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
+    #            <note>
+    #               <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>
+    #            </note>
+    #   @return [Boolean]
     class CreateFleetRequest < Struct.new(
       nil,
       :name,
@@ -1211,6 +1516,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
+      :root_volume_config,
+      :disable_imdsv1,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1297,21 +1604,6 @@ module Aws::AppStream
     #                  <p>stream.memory.z1d.12xlarge</p>
     #               </li>
     #               <li>
-    #                  <p>stream.graphics-design.large</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.2xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-desktop.2xlarge</p>
-    #               </li>
-    #               <li>
     #                  <p>stream.graphics.g4dn.xlarge</p>
     #               </li>
     #               <li>
@@ -1328,15 +1620,6 @@ module Aws::AppStream
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g4dn.16xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.8xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.16xlarge</p>
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g5.xlarge</p>
@@ -1413,8 +1696,8 @@ module Aws::AppStream
     #   <p>The VPC configuration for the image builder. You can specify only one subnet.</p>
     #   @return [Types::VpcConfig]
     # @!attribute iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [String]
     # @!attribute enable_default_internet_access
     #   <p>Enables or disables default internet access for the image builder.</p>
@@ -1423,18 +1706,183 @@ module Aws::AppStream
     #   <p>The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. </p>
     #   @return [Types::DomainJoinInfo]
     # @!attribute appstream_agent_version
-    #   <p>The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. </p>
+    #   <p>The version of the WorkSpaces Applications agent to use for this image builder. To use the latest version of the WorkSpaces Applications agent, specify [LATEST]. </p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
-    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [Hash<String, String>]
     # @!attribute access_endpoints
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the image builder only through the specified endpoints.</p>
     #   @return [Array<Types::AccessEndpoint>]
+    # @!attribute root_volume_config
+    #   <p>The configuration for the root volume of the image builder. Use this to customize storage capacity from 200 GB up to 500 GB based on your application installation requirements.</p>
+    #   @return [Types::VolumeConfig]
+    # @!attribute softwares_to_install
+    #   <p>The list of license included applications to install on the image builder during creation.</p>
+    #            <p>Possible values include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_64Bit</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    # @!attribute softwares_to_uninstall
+    #   <p>The list of license included applications to uninstall from the image builder during creation.</p>
+    #            <p>Possible values include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_64Bit</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    # @!attribute disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
+    #            <note>
+    #               <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>
+    #            </note>
+    #   @return [Boolean]
     class CreateImageBuilderRequest < Struct.new(
       nil,
       :name,
@@ -1450,6 +1898,10 @@ module Aws::AppStream
       :appstream_agent_version,
       :tags,
       :access_endpoints,
+      :root_volume_config,
+      :softwares_to_install,
+      :softwares_to_uninstall,
+      :disable_imdsv1,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1470,7 +1922,7 @@ module Aws::AppStream
     #   <p>The name of the image builder.</p>
     #   @return [String]
     # @!attribute validity
-    #   <p>The time that the streaming URL will be valid, in seconds. 
+    #   <p>The time that the streaming URL will be valid, in seconds.
     #               Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>
     #   @return [Integer]
     class CreateImageBuilderStreamingURLRequest < Struct.new(
@@ -1483,7 +1935,7 @@ module Aws::AppStream
     end
 
     # @!attribute streaming_url
-    #   <p>The URL to start the AppStream 2.0 streaming session.</p>
+    #   <p>The URL to start the WorkSpaces Applications streaming session.</p>
     #   @return [String]
     # @!attribute expires
     #   <p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>
@@ -1492,6 +1944,68 @@ module Aws::AppStream
       nil,
       :streaming_url,
       :expires,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>A unique name for the imported image. The name must be between 1 and 100 characters and can contain letters, numbers, underscores, periods, and hyphens.</p>
+    #   @return [String]
+    # @!attribute source_ami_id
+    #   <p>The ID of the EC2 AMI to import.</p>
+    #   @return [String]
+    # @!attribute workspace_image_id
+    #   <p>The ID of the Workspaces Image to import.</p>
+    #   @return [String]
+    # @!attribute iam_role_arn
+    #   <p>The ARN of the IAM role that allows WorkSpaces Applications to access your AMI. The role must have permissions to modify image attributes and describe images, with a trust relationship allowing appstream.amazonaws.com to assume the role.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>An optional description for the imported image. The description must match approved regex patterns and can be up to 256 characters.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>An optional display name for the imported image. The display name must match approved regex patterns and can be up to 100 characters.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to apply to the imported image. Tags help you organize and manage your WorkSpaces Applications resources.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute runtime_validation_config
+    #   <p>Configuration for runtime validation of the imported image. When specified, WorkSpaces Applications provisions an instance to test streaming functionality, which helps ensure the image is suitable for use.</p>
+    #   @return [Types::RuntimeValidationConfig]
+    # @!attribute agent_software_version
+    #   <p>The version of the WorkSpaces Applications agent to use for the imported image. Choose CURRENT_LATEST to use the agent version available at the time of import, or ALWAYS_LATEST to automatically update to the latest agent version when new versions are released.</p>
+    #   @return [String]
+    # @!attribute app_catalog_config
+    #   <p>Configuration for the application catalog of the imported image. This allows you to specify applications available for streaming, including their paths, icons, and launch parameters. This field contains sensitive data.</p>
+    #   @return [Array<Types::ApplicationConfig>]
+    # @!attribute dry_run
+    #   <p>When set to true, performs validation checks without actually creating the imported image. Use this to verify your configuration before executing the actual import operation.</p>
+    #   @return [Boolean]
+    class CreateImportedImageRequest < Struct.new(
+      nil,
+      :name,
+      :source_ami_id,
+      :workspace_image_id,
+      :iam_role_arn,
+      :description,
+      :display_name,
+      :tags,
+      :runtime_validation_config,
+      :agent_software_version,
+      :app_catalog_config,
+      :dry_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image
+    #   <p>Describes an image.</p>
+    #   @return [Types::Image]
+    class CreateImportedImageResult < Struct.new(
+      nil,
+      :image,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1526,17 +2040,26 @@ module Aws::AppStream
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
-    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [Hash<String, String>]
     # @!attribute access_endpoints
-    #   <p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>
+    #   <p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to WorkSpaces Applications only through the specified endpoints.</p>
     #   @return [Array<Types::AccessEndpoint>]
     # @!attribute embed_host_domains
-    #   <p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>
+    #   <p>The domains where WorkSpaces Applications streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded WorkSpaces Applications streaming sessions. </p>
     #   @return [Array<String>]
     # @!attribute streaming_experience_settings
     #   <p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>
     #   @return [Types::StreamingExperienceSettings]
+    # @!attribute content_redirection
+    #   <p>Configuration for bidirectional URL redirection between the streaming session and the local client. Use HostToClient to redirect URLs from the remote desktop to the local browser.</p>
+    #   @return [Types::ContentRedirection]
+    # @!attribute agent_access_config
+    #   <p>The configuration for agent access on the stack. If specified, agent access is enabled for the stack.</p>
+    #   @return [Types::AgentAccessConfig]
+    # @!attribute storage_connector_authentication
+    #   <p>Specifies whether users' cloud storage authentication persists across streaming sessions. When you specify FORCE_REAUTHENTICATION, WorkSpaces Applications removes the stored authentication for the stack's OneDrive and Google Drive connectors when a user's session ends. The user links their cloud storage again on their next session. The default is REUSE_CREDENTIALS.</p>
+    #   @return [String]
     class CreateStackRequest < Struct.new(
       nil,
       :name,
@@ -1551,6 +2074,9 @@ module Aws::AppStream
       :access_endpoints,
       :embed_host_domains,
       :streaming_experience_settings,
+      :content_redirection,
+      :agent_access_config,
+      :storage_connector_authentication,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1585,7 +2111,7 @@ module Aws::AppStream
     #               Specify a value between 1 and 604800 seconds. The default is 60 seconds.</p>
     #   @return [Integer]
     # @!attribute session_context
-    #   <p>The session context. For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters">Session Context</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The session context. For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters">Session Context</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [String]
     class CreateStreamingURLRequest < Struct.new(
       nil,
@@ -1601,7 +2127,7 @@ module Aws::AppStream
     end
 
     # @!attribute streaming_url
-    #   <p>The URL to start the AppStream 2.0 streaming session.</p>
+    #   <p>The URL to start the WorkSpaces Applications streaming session.</p>
     #   @return [String]
     # @!attribute expires
     #   <p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>
@@ -1674,10 +2200,10 @@ module Aws::AppStream
     #            <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>
     #            <p>_ . : / = + \ - @</p>
     #            <p>If you do not specify a value, the value is set to an empty string.</p>
-    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information about tags, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [Hash<String, String>]
     # @!attribute dry_run
-    #   <p>Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to <code>true</code>, AppStream 2.0 displays whether image updates are available. If this value is set to <code>false</code>, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.</p>
+    #   <p>Indicates whether to display the status of image update availability before WorkSpaces Applications initiates the process of creating a new updated image. If this value is set to <code>true</code>, WorkSpaces Applications displays whether image updates are available. If this value is set to <code>false</code>, WorkSpaces Applications initiates the process of creating a new updated image without displaying whether image updates are available.</p>
     #   @return [Boolean]
     class CreateUpdatedImageRequest < Struct.new(
       nil,
@@ -1717,10 +2243,10 @@ module Aws::AppStream
     # @!attribute s3_bucket_name
     #   <p>The Amazon S3 bucket where generated reports are stored.</p>
     #            <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script
-    #               configuration, AppStream 2.0 created an S3 bucket to store the script output. The bucket is
-    #               unique to your account and Region. When you enable usage reporting in this case, AppStream 2.0
-    #               uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, 
-    #               when you enable usage reports, AppStream 2.0 creates a new S3 bucket.</p>
+    #               configuration, WorkSpaces Applications created an S3 bucket to store the script output. The bucket is
+    #               unique to your account and Region. When you enable usage reporting in this case, WorkSpaces Applications
+    #               uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts,
+    #               when you enable usage reports, WorkSpaces Applications creates a new S3 bucket.</p>
     #   @return [String]
     # @!attribute schedule
     #   <p>The schedule for generating usage reports.</p>
@@ -2139,6 +2665,42 @@ module Aws::AppStream
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute billing_period
+    #   <p>Billing period for the usage record.</p>
+    #            <p>Specify the value in <i>yyyy-mm</i> format. For example, for August
+    #               2025, use <i>2025-08</i>.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Token for pagination of results.</p>
+    #   @return [String]
+    class DescribeAppLicenseUsageRequest < Struct.new(
+      nil,
+      :billing_period,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute app_license_usages
+    #   <p>Collection of license usage records.</p>
+    #   @return [Array<Types::AdminAppLicenseUsageRecord>]
+    # @!attribute next_token
+    #   <p>Token for pagination of results.</p>
+    #   @return [String]
+    class DescribeAppLicenseUsageResult < Struct.new(
+      nil,
+      :app_license_usages,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute fleet_name
     #   <p>The name of the fleet.</p>
     #   @return [String]
@@ -2453,7 +3015,7 @@ module Aws::AppStream
     #   @return [Integer]
     # @!attribute authentication_type
     #   <p>The authentication method. Specify <code>API</code> for a user
-    #               authenticated using a streaming URL or <code>SAML</code> for a SAML federated user. 
+    #               authenticated using a streaming URL or <code>SAML</code> for a SAML federated user.
     #               The default is to authenticate users using a streaming URL.</p>
     #   @return [String]
     # @!attribute instance_id
@@ -2482,6 +3044,58 @@ module Aws::AppStream
     class DescribeSessionsResult < Struct.new(
       nil,
       :sessions,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute associated_resource
+    #   <p>The ARN of the resource to describe software associations. Possible resources are Image and ImageBuilder.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token to use to retrieve the next page of results for this operation.</p>
+    #   @return [String]
+    class DescribeSoftwareAssociationsRequest < Struct.new(
+      nil,
+      :associated_resource,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute associated_resource
+    #   <p>The ARN of the resource to describe software associations.</p>
+    #   @return [String]
+    # @!attribute software_associations
+    #   <p>Collection of license included applications association details including:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>License included application name and version information</p>
+    #               </li>
+    #               <li>
+    #                  <p>Deployment status (SoftwareDeploymentStatus enum)</p>
+    #               </li>
+    #               <li>
+    #                  <p>Error details for failed deployments</p>
+    #               </li>
+    #               <li>
+    #                  <p>Association timestamps</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::SoftwareAssociations>]
+    # @!attribute next_token
+    #   <p>The pagination token to use to retrieve the next page of results for this operation.</p>
+    #   @return [String]
+    class DescribeSoftwareAssociationsResult < Struct.new(
+      nil,
+      :associated_resource,
+      :software_associations,
       :next_token,
       keyword_init: true
     )
@@ -2800,6 +3414,103 @@ module Aws::AppStream
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute image_builder_name
+    #   <p>The name of the target image builder instance.</p>
+    #   @return [String]
+    # @!attribute software_names
+    #   <p>The list of license included applications to disassociate from the image builder.</p>
+    #            <p>Possible values include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_64Bit</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    class DisassociateSoftwareFromImageBuilderRequest < Struct.new(
+      nil,
+      :image_builder_name,
+      :software_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DisassociateSoftwareFromImageBuilderResult < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>
     # @!attribute directory_name
     #   <p>The fully qualified name of the directory (for example, corp.example.com).</p>
@@ -2811,6 +3522,36 @@ module Aws::AppStream
       nil,
       :directory_name,
       :organizational_unit_distinguished_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute session_id
+    #   <p>The identifier of the streaming session.</p>
+    #   @return [String]
+    class DrainSessionInstanceRequest < Struct.new(
+      nil,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DrainSessionInstanceResult < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The exception that is thrown when a dry run operation is requested. This indicates that the validation checks have been performed successfully, but no actual resources were created or modified.</p>
+    # @!attribute message
+    #   <p>The error message in the exception.</p>
+    #   @return [String]
+    class DryRunOperationException < Struct.new(
+      nil,
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2855,7 +3596,7 @@ module Aws::AppStream
 
     # <p>Specifies an entitlement. Entitlements control access to specific applications within
     #             a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user
-    #             identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all
+    #             identities. WorkSpaces Applications user pool and streaming URL users are entitled to all
     #             applications in a stack. Entitlements don't apply to the desktop stream view
     #             application, or to applications managed by a dynamic app provider using the Dynamic
     #             Application Framework.</p>
@@ -2907,11 +3648,10 @@ module Aws::AppStream
     end
 
     # <p>An attribute associated with an entitlement. Application entitlements work by matching
-    #             a supported SAML 2.0 attribute name to a value when a user identity federates to an
-    #             Amazon AppStream 2.0 SAML application.</p>
+    #             a supported SAML 2.0 attribute name to a value when a user identity federates to a WorkSpaces Applications SAML application.</p>
     # @!attribute name
     #   <p>A supported AWS IAM SAML <code>PrincipalTag</code> attribute that is matched to the
-    #               associated value when a user identity federates into an Amazon AppStream 2.0 SAML
+    #               associated value when a user identity federates into a WorkSpaces Applications SAML
     #               application.</p>
     #            <p>The following are valid values:</p>
     #            <ul>
@@ -2941,7 +3681,7 @@ module Aws::AppStream
     #   @return [String]
     # @!attribute value
     #   <p>A value that is matched to a supported SAML attribute name when a user identity
-    #               federates into an Amazon AppStream 2.0 SAML application. </p>
+    #               federates into a WorkSpaces Applications SAML application. </p>
     #   @return [String]
     class EntitlementAttribute < Struct.new(
       nil,
@@ -2993,6 +3733,66 @@ module Aws::AppStream
 
     class ExpireSessionResult < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an export image task, including its current state, timestamps, and any error details.</p>
+    # @!attribute task_id
+    #   <p>The unique identifier for the export image task. Use this ID to track the task's progress and retrieve its details.</p>
+    #   @return [String]
+    # @!attribute image_arn
+    #   <p>The ARN of the WorkSpaces Applications image being exported.</p>
+    #   @return [String]
+    # @!attribute ami_name
+    #   <p>The name of the EC2 AMI that will be created by this export task.</p>
+    #   @return [String]
+    # @!attribute created_date
+    #   <p>The date and time when the export image task was created.</p>
+    #   @return [Time]
+    # @!attribute ami_description
+    #   <p>The description that will be applied to the exported EC2 AMI.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The current state of the export image task, such as PENDING, RUNNING, COMPLETED, or FAILED.</p>
+    #   @return [String]
+    # @!attribute ami_id
+    #   <p>The ID of the EC2 AMI that was created by this export task. This field is only populated when the task completes successfully.</p>
+    #   @return [String]
+    # @!attribute tag_specifications
+    #   <p>The tags that will be applied to the exported EC2 AMI.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute error_details
+    #   <p>Details about any errors that occurred during the export process. This field is only populated when the task fails.</p>
+    #   @return [Array<Types::ErrorDetails>]
+    class ExportImageTask < Struct.new(
+      nil,
+      :task_id,
+      :image_arn,
+      :ami_name,
+      :created_date,
+      :ami_description,
+      :state,
+      :ami_id,
+      :tag_specifications,
+      :error_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter for narrowing down the results when listing export image tasks. Filters allow you to specify criteria such as task state or creation date.</p>
+    # @!attribute name
+    #   <p>The name of the filter. Valid filter names depend on the operation being performed.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The values for the filter. Multiple values can be specified for a single filter name.</p>
+    #   @return [Array<String>]
+    class Filter < Struct.new(
+      nil,
+      :name,
+      :values,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3078,21 +3878,6 @@ module Aws::AppStream
     #                  <p>stream.memory.z1d.12xlarge</p>
     #               </li>
     #               <li>
-    #                  <p>stream.graphics-design.large</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.2xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-desktop.2xlarge</p>
-    #               </li>
-    #               <li>
     #                  <p>stream.graphics.g4dn.xlarge</p>
     #               </li>
     #               <li>
@@ -3109,15 +3894,6 @@ module Aws::AppStream
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g4dn.16xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.8xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.16xlarge</p>
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g5.xlarge</p>
@@ -3246,11 +4022,11 @@ module Aws::AppStream
     #            </note>
     #   @return [Integer]
     # @!attribute iam_role_arn
-    #   <p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [String]
     # @!attribute stream_view
-    #   <p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
+    #   <p>The WorkSpaces Applications view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
     #            <p>The default value is <code>APP</code>.</p>
     #   @return [String]
     # @!attribute platform
@@ -3268,6 +4044,12 @@ module Aws::AppStream
     # @!attribute max_sessions_per_instance
     #   <p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>
     #   @return [Integer]
+    # @!attribute root_volume_config
+    #   <p>The current configuration of the root volume for fleet instances, including the storage size in GB.</p>
+    #   @return [Types::VolumeConfig]
+    # @!attribute disable_imdsv1
+    #   <p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the fleet.</p>
+    #   @return [Boolean]
     class Fleet < Struct.new(
       nil,
       :arn,
@@ -3295,6 +4077,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
+      :root_volume_config,
+      :disable_imdsv1,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3311,6 +4095,28 @@ module Aws::AppStream
       nil,
       :error_code,
       :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute task_id
+    #   <p>The unique identifier of the export image task to retrieve information about.</p>
+    #   @return [String]
+    class GetExportImageTaskRequest < Struct.new(
+      nil,
+      :task_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute export_image_task
+    #   <p>Information about the export image task, including its current state, created date, and any error details.</p>
+    #   @return [Types::ExportImageTask]
+    class GetExportImageTaskResult < Struct.new(
+      nil,
+      :export_image_task,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3358,11 +4164,11 @@ module Aws::AppStream
     #   <p>The time the image was created.</p>
     #   @return [Time]
     # @!attribute public_base_image_released_date
-    #   <p>The release date of the public base image. 
+    #   <p>The release date of the public base image.
     #               For private images, this date is the release date of the base image from which the image was created.</p>
     #   @return [Time]
     # @!attribute appstream_agent_version
-    #   <p>The version of the AppStream 2.0 agent to use for instances that are launched from this image. </p>
+    #   <p>The version of the WorkSpaces Applications agent to use for instances that are launched from this image. </p>
     #   @return [String]
     # @!attribute image_permissions
     #   <p>The permissions to provide to the destination AWS account for the specified image.</p>
@@ -3371,7 +4177,7 @@ module Aws::AppStream
     #   <p>Describes the errors that are returned when a new image can't be created.</p>
     #   @return [Array<Types::ResourceError>]
     # @!attribute latest_appstream_agent_version
-    #   <p>Indicates whether the image is using the latest AppStream 2.0 agent version or not.</p>
+    #   <p>Indicates whether the image is using the latest WorkSpaces Applications agent version or not.</p>
     #   @return [String]
     # @!attribute supported_instance_families
     #   <p>The supported instances families that determine which image a customer can use when the customer launches a fleet or image builder. The following instances families are supported:</p>
@@ -3386,28 +4192,31 @@ module Aws::AppStream
     #                  <p>Memory Optimized</p>
     #               </li>
     #               <li>
-    #                  <p>Graphics</p>
-    #               </li>
-    #               <li>
-    #                  <p>Graphics Design</p>
-    #               </li>
-    #               <li>
-    #                  <p>Graphics Pro</p>
-    #               </li>
-    #               <li>
     #                  <p>Graphics G4</p>
     #               </li>
     #               <li>
     #                  <p>Graphics G5</p>
     #               </li>
+    #               <li>
+    #                  <p>Graphics G6</p>
+    #               </li>
     #            </ul>
     #   @return [Array<String>]
     # @!attribute dynamic_app_providers_enabled
-    #   <p>Indicates whether dynamic app providers are enabled within an AppStream 2.0 image or not.</p>
+    #   <p>Indicates whether dynamic app providers are enabled within an WorkSpaces Applications image or not.</p>
     #   @return [String]
     # @!attribute image_shared_with_others
     #   <p>Indicates whether the image is shared with another account ID.</p>
     #   @return [String]
+    # @!attribute managed_software_included
+    #   <p>Indicates whether the image includes license-included applications.</p>
+    #   @return [Boolean]
+    # @!attribute image_type
+    #   <p>The type of the image. Images created through AMI import have type "custom", while WorkSpaces Applications provided images have type "native". Custom images support additional instance types including GeneralPurpose, MemoryOptimized, ComputeOptimized, and Accelerated instance families.</p>
+    #   @return [String]
+    # @!attribute image_software_metadata
+    #   <p>The software metadata associated with the image.</p>
+    #   @return [Types::ImageSoftwareMetadata]
     class Image < Struct.new(
       nil,
       :name,
@@ -3431,6 +4240,9 @@ module Aws::AppStream
       :supported_instance_families,
       :dynamic_app_providers_enabled,
       :image_shared_with_others,
+      :managed_software_included,
+      :image_type,
+      :image_software_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3516,21 +4328,6 @@ module Aws::AppStream
     #                  <p>stream.memory.z1d.12xlarge</p>
     #               </li>
     #               <li>
-    #                  <p>stream.graphics-design.large</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.2xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-desktop.2xlarge</p>
-    #               </li>
-    #               <li>
     #                  <p>stream.graphics.g4dn.xlarge</p>
     #               </li>
     #               <li>
@@ -3547,15 +4344,6 @@ module Aws::AppStream
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g4dn.16xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.8xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.16xlarge</p>
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g5.xlarge</p>
@@ -3626,8 +4414,8 @@ module Aws::AppStream
     #   <p>The operating system platform of the image builder.</p>
     #   @return [String]
     # @!attribute iam_role_arn
-    #   <p>The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [String]
     # @!attribute state
     #   <p>The state of the image builder.</p>
@@ -3651,14 +4439,20 @@ module Aws::AppStream
     #   <p>The image builder errors.</p>
     #   @return [Array<Types::ResourceError>]
     # @!attribute appstream_agent_version
-    #   <p>The version of the AppStream 2.0 agent that is currently being used by the image builder. </p>
+    #   <p>The version of the WorkSpaces Applications agent that is currently being used by the image builder. </p>
     #   @return [String]
     # @!attribute access_endpoints
     #   <p>The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.</p>
     #   @return [Array<Types::AccessEndpoint>]
+    # @!attribute root_volume_config
+    #   <p>The current configuration of the root volume for the image builder, including the storage size in GB.</p>
+    #   @return [Types::VolumeConfig]
     # @!attribute latest_appstream_agent_version
-    #   <p>Indicates whether the image builder is using the latest AppStream 2.0 agent version or not.</p>
+    #   <p>Indicates whether the image builder is using the latest WorkSpaces Applications agent version or not.</p>
     #   @return [String]
+    # @!attribute disable_imdsv1
+    #   <p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the image builder.</p>
+    #   @return [Boolean]
     class ImageBuilder < Struct.new(
       nil,
       :name,
@@ -3679,7 +4473,9 @@ module Aws::AppStream
       :image_builder_errors,
       :appstream_agent_version,
       :access_endpoints,
+      :root_volume_config,
       :latest_appstream_agent_version,
+      :disable_imdsv1,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3712,6 +4508,18 @@ module Aws::AppStream
       nil,
       :allow_fleet,
       :allow_image_builder,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes the software metadata for an image, such as the installed NVIDIA GRID driver version.</p>
+    # @!attribute nvidia_grid_driver_version
+    #   <p>The version of the NVIDIA GRID driver installed on the image. This field is empty if no NVIDIA GRID driver is installed.</p>
+    #   @return [String]
+    class ImageSoftwareMetadata < Struct.new(
+      nil,
+      :nvidia_grid_driver_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3907,6 +4715,40 @@ module Aws::AppStream
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute filters
+    #   <p>Optional filters to apply when listing export image tasks. Filters help you narrow down the results based on specific criteria.</p>
+    #   @return [Array<Types::Filter>]
+    # @!attribute max_results
+    #   <p>The maximum number of export image tasks to return in a single request. The valid range is 1-500, with a default of 50.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token from a previous request. Use this to retrieve the next page of results when there are more tasks than the MaxResults limit.</p>
+    #   @return [String]
+    class ListExportImageTasksRequest < Struct.new(
+      nil,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute export_image_tasks
+    #   <p>The list of export image tasks that match the specified criteria.</p>
+    #   @return [Array<Types::ExportImageTask>]
+    # @!attribute next_token
+    #   <p>The pagination token to use for retrieving the next page of results. This field is only present when there are more results available.</p>
+    #   @return [String]
+    class ListExportImageTasksResult < Struct.new(
+      nil,
+      :export_image_tasks,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
@@ -3933,12 +4775,16 @@ module Aws::AppStream
     # @!attribute eni_private_ip_address
     #   <p>The private IP address of the elastic network interface that is attached to instances in your VPC.</p>
     #   @return [String]
+    # @!attribute eni_ipv6_addresses
+    #   <p>The IPv6 addresses assigned to the elastic network interface. This field supports IPv6 connectivity for WorkSpaces Applications instances.</p>
+    #   @return [Array<String>]
     # @!attribute eni_id
     #   <p>The resource identifier of the elastic network interface that is attached to instances in your VPC. All network interfaces have the eni-xxxxxxxx resource identifier.</p>
     #   @return [String]
     class NetworkAccessConfiguration < Struct.new(
       nil,
       :eni_private_ip_address,
+      :eni_ipv6_addresses,
       :eni_id,
       keyword_init: true
     )
@@ -3957,7 +4803,7 @@ module Aws::AppStream
       include ::Smithy::Schema::Structure
     end
 
-    # <p>AppStream 2.0 can’t process the request right now because the Describe calls from your AWS account are being throttled by Amazon EC2. Try again later.</p>
+    # <p>WorkSpaces Applications can’t process the request right now because the Describe calls from your AWS account are being throttled by Amazon EC2. Try again later.</p>
     # @!attribute message
     #   <p>The error message in the exception.</p>
     #   @return [String]
@@ -4037,6 +4883,18 @@ module Aws::AppStream
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for runtime validation of imported images. This structure specifies the instance type to use for testing the imported image's streaming capabilities.</p>
+    # @!attribute intended_instance_type
+    #   <p>The instance type to use for runtime validation testing. It's recommended to use the same instance type you plan to use for your fleet to ensure accurate validation results.</p>
+    #   @return [String]
+    class RuntimeValidationConfig < Struct.new(
+      nil,
+      :intended_instance_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes the S3 location.</p>
     # @!attribute s3_bucket
     #   <p>The S3 bucket of the S3 object.</p>
@@ -4102,8 +4960,8 @@ module Aws::AppStream
 
     # <p>Describes the credentials for the service account used by the fleet or image builder to connect to the directory.</p>
     # @!attribute account_name
-    #   <p>The user name of the account. This account must have the following privileges: create computer objects, 
-    #               join computers to the domain, and change/reset the password on descendant computer objects for the 
+    #   <p>The user name of the account. This account must have the following privileges: create computer objects,
+    #               join computers to the domain, and change/reset the password on descendant computer objects for the
     #               organizational units specified.</p>
     #   @return [String]
     # @!attribute account_password
@@ -4153,6 +5011,9 @@ module Aws::AppStream
     # @!attribute instance_id
     #   <p>The identifier for the instance hosting the session.</p>
     #   @return [String]
+    # @!attribute instance_drain_status
+    #   <p>The drain status of the instance hosting the streaming session. This only applies to multi-session fleets.</p>
+    #   @return [String]
     class Session < Struct.new(
       nil,
       :id,
@@ -4166,6 +5027,7 @@ module Aws::AppStream
       :authentication_type,
       :network_access_configuration,
       :instance_id,
+      :instance_drain_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4182,6 +5044,101 @@ module Aws::AppStream
       nil,
       :shared_account_id,
       :image_permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The association between a license-included application and a resource.</p>
+    # @!attribute software_name
+    #   <p>The name of the license-included application.</p>
+    #            <p>Possible values include the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Professional_Plus_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Professional_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Office_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2021_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Visio_2024_LTSC_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2021_Standard_64Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_32Bit</p>
+    #               </li>
+    #               <li>
+    #                  <p>Microsoft_Project_2024_Standard_64Bit</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The deployment status of the license-included application.</p>
+    #   @return [String]
+    # @!attribute deployment_error
+    #   <p>The error details for failed deployments of the license-included application.</p>
+    #   @return [Array<Types::ErrorDetails>]
+    class SoftwareAssociations < Struct.new(
+      nil,
+      :software_name,
+      :status,
+      :deployment_error,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4222,14 +5179,23 @@ module Aws::AppStream
     #   <p>The persistent application settings for users of the stack.</p>
     #   @return [Types::ApplicationSettingsResponse]
     # @!attribute access_endpoints
-    #   <p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. </p>
+    #   <p>The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to WorkSpaces Applications only through the specified endpoints. </p>
     #   @return [Array<Types::AccessEndpoint>]
     # @!attribute embed_host_domains
-    #   <p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.</p>
+    #   <p>The domains where WorkSpaces Applications streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded WorkSpaces Applications streaming sessions.</p>
     #   @return [Array<String>]
     # @!attribute streaming_experience_settings
     #   <p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>
     #   @return [Types::StreamingExperienceSettings]
+    # @!attribute content_redirection
+    #   <p>Configuration for bidirectional URL redirection between the streaming session and the local client. Use HostToClient to redirect URLs from the remote desktop to the local browser.</p>
+    #   @return [Types::ContentRedirection]
+    # @!attribute agent_access_config
+    #   <p>The agent access configuration of the stack, if agent access is enabled.</p>
+    #   @return [Types::AgentAccessConfig]
+    # @!attribute storage_connector_authentication
+    #   <p>Indicates whether users' cloud storage authentication persists across streaming sessions. When this attribute is FORCE_REAUTHENTICATION, WorkSpaces Applications removes the stored authentication for the stack's OneDrive and Google Drive connectors when a user's session ends. The user links their cloud storage again on their next session. The default is REUSE_CREDENTIALS.</p>
+    #   @return [String]
     class Stack < Struct.new(
       nil,
       :arn,
@@ -4246,6 +5212,9 @@ module Aws::AppStream
       :access_endpoints,
       :embed_host_domains,
       :streaming_experience_settings,
+      :content_redirection,
+      :agent_access_config,
+      :storage_connector_authentication,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4311,7 +5280,7 @@ module Aws::AppStream
     #   <p>The name of the image builder.</p>
     #   @return [String]
     # @!attribute appstream_agent_version
-    #   <p>The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. </p>
+    #   <p>The version of the WorkSpaces Applications agent to use for this image builder. To use the latest version of the WorkSpaces Applications agent, specify [LATEST]. </p>
     #   @return [String]
     class StartImageBuilderRequest < Struct.new(
       nil,
@@ -4328,6 +5297,28 @@ module Aws::AppStream
     class StartImageBuilderResult < Struct.new(
       nil,
       :image_builder,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute image_builder_name
+    #   <p>The name of the target image builder instance.</p>
+    #   @return [String]
+    # @!attribute retry_failed_deployments
+    #   <p>Whether to retry previously failed license included application deployments.</p>
+    #   @return [Boolean]
+    class StartSoftwareDeploymentToImageBuilderRequest < Struct.new(
+      nil,
+      :image_builder_name,
+      :retry_failed_deployments,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class StartSoftwareDeploymentToImageBuilderResult < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4406,7 +5397,7 @@ module Aws::AppStream
     #   <p>The names of the domains for the account.</p>
     #   @return [Array<String>]
     # @!attribute domains_require_admin_consent
-    #   <p>The OneDrive for Business domains where you require admin consent when users try to link their OneDrive account to AppStream 2.0. The attribute can only be specified when ConnectorType=ONE_DRIVE.</p>
+    #   <p>The OneDrive for Business domains where you require admin consent when users try to link their OneDrive account to WorkSpaces Applications. The attribute can only be specified when ConnectorType=ONE_DRIVE.</p>
     #   @return [Array<String>]
     class StorageConnector < Struct.new(
       nil,
@@ -4581,9 +5572,9 @@ module Aws::AppStream
     #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To
     #               assume a role, the app block builder calls the AWS Security Token Service (STS)
     #               <code>AssumeRole</code> API operation and passes the ARN of the role to use. The
-    #               operation creates a new session with temporary credentials. AppStream 2.0 retrieves the
+    #               operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the
     #               temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [String]
     # @!attribute access_endpoints
     #   <p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>
@@ -4591,6 +5582,9 @@ module Aws::AppStream
     # @!attribute attributes_to_delete
     #   <p>The attributes to delete from the app block builder.</p>
     #   @return [Array<String>]
+    # @!attribute disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
+    #   @return [Boolean]
     class UpdateAppBlockBuilderRequest < Struct.new(
       nil,
       :name,
@@ -4603,6 +5597,7 @@ module Aws::AppStream
       :iam_role_arn,
       :access_endpoints,
       :attributes_to_delete,
+      :disable_imdsv1,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4827,21 +5822,6 @@ module Aws::AppStream
     #                  <p>stream.memory.z1d.12xlarge</p>
     #               </li>
     #               <li>
-    #                  <p>stream.graphics-design.large</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.2xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-design.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-desktop.2xlarge</p>
-    #               </li>
-    #               <li>
     #                  <p>stream.graphics.g4dn.xlarge</p>
     #               </li>
     #               <li>
@@ -4858,15 +5838,6 @@ module Aws::AppStream
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g4dn.16xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.4xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.8xlarge</p>
-    #               </li>
-    #               <li>
-    #                  <p>stream.graphics-pro.16xlarge</p>
     #               </li>
     #               <li>
     #                  <p>stream.graphics.g5.xlarge</p>
@@ -5001,15 +5972,15 @@ module Aws::AppStream
     #   <p>The fleet attributes to delete.</p>
     #   @return [Array<String>]
     # @!attribute iam_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. WorkSpaces Applications retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on WorkSpaces Applications Streaming Instances</a> in the <i>Amazon WorkSpaces Applications Administration Guide</i>.</p>
     #   @return [String]
     # @!attribute stream_view
-    #   <p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
+    #   <p>The WorkSpaces Applications view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
     #            <p>The default value is <code>APP</code>.</p>
     #   @return [String]
     # @!attribute platform
-    #   <p>The platform of the fleet. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. </p>
+    #   <p>The platform of the fleet. WINDOWS_SERVER_2019, AMAZON_LINUX2 and UBUNTU_PRO_2404 are supported for Elastic fleets. </p>
     #   @return [String]
     # @!attribute max_concurrent_sessions
     #   <p>The maximum number of concurrent sessions for a fleet.</p>
@@ -5023,6 +5994,15 @@ module Aws::AppStream
     # @!attribute max_sessions_per_instance
     #   <p>The maximum number of user sessions on an instance. This only applies to multi-session fleets.</p>
     #   @return [Integer]
+    # @!attribute root_volume_config
+    #   <p>The updated configuration for the root volume of fleet instances. Note that volume size cannot be decreased below the image volume size.</p>
+    #   @return [Types::VolumeConfig]
+    # @!attribute disable_imdsv1
+    #   <p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>
+    #            <note>
+    #               <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>
+    #            </note>
+    #   @return [Boolean]
     class UpdateFleetRequest < Struct.new(
       nil,
       :image_name,
@@ -5047,6 +6027,8 @@ module Aws::AppStream
       :usb_device_filter_strings,
       :session_script_s3_location,
       :max_sessions_per_instance,
+      :root_volume_config,
+      :disable_imdsv1,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5121,14 +6103,23 @@ module Aws::AppStream
     #   <p>The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.</p>
     #   @return [Types::ApplicationSettings]
     # @!attribute access_endpoints
-    #   <p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.</p>
+    #   <p>The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to WorkSpaces Applications only through the specified endpoints.</p>
     #   @return [Array<Types::AccessEndpoint>]
     # @!attribute embed_host_domains
-    #   <p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>
+    #   <p>The domains where WorkSpaces Applications streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded WorkSpaces Applications streaming sessions. </p>
     #   @return [Array<String>]
     # @!attribute streaming_experience_settings
     #   <p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>
     #   @return [Types::StreamingExperienceSettings]
+    # @!attribute content_redirection
+    #   <p>Configuration for bidirectional URL redirection between the streaming session and the local client. Use HostToClient to redirect URLs from the remote desktop to the local browser.</p>
+    #   @return [Types::ContentRedirection]
+    # @!attribute agent_access_config
+    #   <p>The configuration for agent access on the stack. Specify this to update agent access settings. To remove agent access, use AttributesToDelete with the AGENT_ACCESS_CONFIG value.</p>
+    #   @return [Types::AgentAccessConfigForUpdate]
+    # @!attribute storage_connector_authentication
+    #   <p>Specifies whether users' cloud storage authentication persists across streaming sessions. When you specify FORCE_REAUTHENTICATION, WorkSpaces Applications removes the stored authentication for the stack's OneDrive and Google Drive connectors when a user's session ends. The user links their cloud storage again on their next session. To clear this attribute, add STORAGE_CONNECTOR_AUTHENTICATION to AttributesToDelete.</p>
+    #   @return [String]
     class UpdateStackRequest < Struct.new(
       nil,
       :display_name,
@@ -5144,6 +6135,9 @@ module Aws::AppStream
       :access_endpoints,
       :embed_host_domains,
       :streaming_experience_settings,
+      :content_redirection,
+      :agent_access_config,
+      :storage_connector_authentication,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5210,14 +6204,34 @@ module Aws::AppStream
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for URL redirection in a specific direction (host-to-client or client-to-host). When enabled, URLs matching the allowed or denied patterns are redirected accordingly. The denied list takes precedence over the allowed list.</p>
+    # @!attribute enabled
+    #   <p>Whether URL redirection is enabled for this direction.</p>
+    #   @return [Boolean]
+    # @!attribute allowed_urls
+    #   <p>List of URL patterns that are allowed to be redirected. URLs matching these patterns will be redirected unless they also match a pattern in the denied list.</p>
+    #   @return [Array<String>]
+    # @!attribute denied_urls
+    #   <p>List of URL patterns that are denied from redirection. This list takes precedence over the allowed list.</p>
+    #   @return [Array<String>]
+    class UrlRedirectionConfig < Struct.new(
+      nil,
+      :enabled,
+      :allowed_urls,
+      :denied_urls,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes information about the usage report subscription.</p>
     # @!attribute s3_bucket_name
     #   <p>The Amazon S3 bucket where generated reports are stored.</p>
     #            <p>If you enabled on-instance session scripts and Amazon S3 logging for your session script
-    #               configuration, AppStream 2.0 created an S3 bucket to store the script output. The bucket is
-    #               unique to your account and Region. When you enable usage reporting in this case, AppStream 2.0
-    #               uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, 
-    #               when you enable usage reports, AppStream 2.0 creates a new S3 bucket.</p>
+    #               configuration, WorkSpaces Applications created an S3 bucket to store the script output. The bucket is
+    #               unique to your account and Region. When you enable usage reporting in this case, WorkSpaces Applications
+    #               uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts,
+    #               when you enable usage reports, WorkSpaces Applications creates a new S3 bucket.</p>
     #   @return [String]
     # @!attribute schedule
     #   <p>The schedule for generating usage reports.</p>
@@ -5364,6 +6378,18 @@ module Aws::AppStream
       :user_stack_association,
       :error_code,
       :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for the root volume of fleet instances and image builders. This allows you to customize the storage capacity beyond the default 200 GB.</p>
+    # @!attribute volume_size_in_gb
+    #   <p>The size of the root volume in GB. Valid range is 200-500 GB. The default is 200 GB, which is included in the hourly instance rate. Additional storage beyond 200 GB incurs extra charges and applies to instances regardless of their running state.</p>
+    #   @return [Integer]
+    class VolumeConfig < Struct.new(
+      nil,
+      :volume_size_in_gb,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

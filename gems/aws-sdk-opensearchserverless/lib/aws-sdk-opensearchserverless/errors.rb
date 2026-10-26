@@ -34,7 +34,7 @@ module Aws::OpenSearchServerless
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>When creating a resource, thrown when a resource with the same name already exists or is being created. When deleting a resource, thrown when the resource is not in the ACTIVE or FAILED state.</p>
+    # <p>When creating a resource, thrown when a resource with the same name already exists or is being created. When deleting a resource, thrown when the resource is not in the ACTIVE, FAILED, or UPDATE_FAILED state.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::ConflictException] data

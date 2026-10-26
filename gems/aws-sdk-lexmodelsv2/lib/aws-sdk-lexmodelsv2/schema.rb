@@ -22,6 +22,7 @@ module Aws::LexModelsV2
     AggregatedUtterancesSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#AggregatedUtterancesSummaryList", name: "AggregatedUtterancesSummaryList")
     AllowedInputTypes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#AllowedInputTypes", name: "AllowedInputTypes")
     AmazonResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#AmazonResourceName", name: "AmazonResourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}})
+    AnalysisScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#AnalysisScope", name: "AnalysisScope")
     AnalyticsBinByList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#AnalyticsBinByList", name: "AnalyticsBinByList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     AnalyticsBinByName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#AnalyticsBinByName", name: "AnalyticsBinByName")
     AnalyticsBinBySpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#AnalyticsBinBySpecification", name: "AnalyticsBinBySpecification")
@@ -118,6 +119,7 @@ module Aws::LexModelsV2
     AnalyticsUtteranceResults = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#AnalyticsUtteranceResults", name: "AnalyticsUtteranceResults")
     AnalyticsUtteranceSortByName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#AnalyticsUtteranceSortByName", name: "AnalyticsUtteranceSortByName")
     AnswerField = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#AnswerField", name: "AnswerField")
+    AssistedNluMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#AssistedNluMode", name: "AssistedNluMode")
     AssociatedTranscript = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#AssociatedTranscript", name: "AssociatedTranscript")
     AssociatedTranscriptFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilter", name: "AssociatedTranscriptFilter")
     AssociatedTranscriptFilterName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilterName", name: "AssociatedTranscriptFilterName")
@@ -127,6 +129,11 @@ module Aws::LexModelsV2
     AttachmentUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#AttachmentUrl", name: "AttachmentUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 250}})
     AudioAndDTMFInputSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#AudioAndDTMFInputSpecification", name: "AudioAndDTMFInputSpecification")
     AudioFileS3Location = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#AudioFileS3Location", name: "AudioFileS3Location", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://([a-z0-9\\\\.-]+)/(.+)$"})
+    AudioFillerDelayInMilliseconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#AudioFillerDelayInMilliseconds", name: "AudioFillerDelayInMilliseconds")
+    AudioFillerDeliveryDelayInMilliseconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#AudioFillerDeliveryDelayInMilliseconds", name: "AudioFillerDeliveryDelayInMilliseconds")
+    AudioFillerDurationInMilliseconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#AudioFillerDurationInMilliseconds", name: "AudioFillerDurationInMilliseconds")
+    AudioFillerSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#AudioFillerSettings", name: "AudioFillerSettings")
+    AudioFillerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#AudioFillerType", name: "AudioFillerType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     AudioLogDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#AudioLogDestination", name: "AudioLogDestination")
     AudioLogSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#AudioLogSetting", name: "AudioLogSetting")
     AudioLogSettingsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#AudioLogSettingsList", name: "AudioLogSettingsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
@@ -162,6 +169,11 @@ module Aws::LexModelsV2
     BotAliasSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#BotAliasSummary", name: "BotAliasSummary")
     BotAliasSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#BotAliasSummaryList", name: "BotAliasSummaryList")
     BotAliasTestExecutionTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#BotAliasTestExecutionTarget", name: "BotAliasTestExecutionTarget")
+    BotAnalyzerHistoryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#BotAnalyzerHistoryList", name: "BotAnalyzerHistoryList")
+    BotAnalyzerHistorySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#BotAnalyzerHistorySummary", name: "BotAnalyzerHistorySummary")
+    BotAnalyzerRecommendation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendation", name: "BotAnalyzerRecommendation")
+    BotAnalyzerRecommendationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendationList", name: "BotAnalyzerRecommendationList")
+    BotAnalyzerStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#BotAnalyzerStatus", name: "BotAnalyzerStatus")
     BotExportSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#BotExportSpecification", name: "BotExportSpecification")
     BotFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#BotFilter", name: "BotFilter")
     BotFilterName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#BotFilterName", name: "BotFilterName")
@@ -290,6 +302,7 @@ module Aws::LexModelsV2
     CreateTestSetDiscrepancyReportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#CreateTestSetDiscrepancyReportResponse", name: "CreateTestSetDiscrepancyReportResponse")
     CreateUploadUrlRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#CreateUploadUrlRequest", name: "CreateUploadUrlRequest")
     CreateUploadUrlResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#CreateUploadUrlResponse", name: "CreateUploadUrlResponse")
+    CustomDisambiguationMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#CustomDisambiguationMessage", name: "CustomDisambiguationMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
     CustomPayload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#CustomPayload", name: "CustomPayload")
     CustomPayloadValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#CustomPayloadValue", name: "CustomPayloadValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
     CustomVocabularyEntryId = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#CustomVocabularyEntryId", name: "CustomVocabularyEntryId")
@@ -303,9 +316,13 @@ module Aws::LexModelsV2
     DataPrivacy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DataPrivacy", name: "DataPrivacy")
     DataSourceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DataSourceConfiguration", name: "DataSourceConfiguration")
     DateRangeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DateRangeFilter", name: "DateRangeFilter")
+    DeepgramModelId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#DeepgramModelId", name: "DeepgramModelId", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$"})
+    DeepgramSpeechModelConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DeepgramSpeechModelConfig", name: "DeepgramSpeechModelConfig")
     DefaultConditionalBranch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DefaultConditionalBranch", name: "DefaultConditionalBranch")
     DeleteBotAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DeleteBotAliasRequest", name: "DeleteBotAliasRequest")
     DeleteBotAliasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DeleteBotAliasResponse", name: "DeleteBotAliasResponse")
+    DeleteBotAnalyzerRecommendationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationRequest", name: "DeleteBotAnalyzerRecommendationRequest")
+    DeleteBotAnalyzerRecommendationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationResponse", name: "DeleteBotAnalyzerRecommendationResponse")
     DeleteBotLocaleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DeleteBotLocaleRequest", name: "DeleteBotLocaleRequest")
     DeleteBotLocaleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DeleteBotLocaleResponse", name: "DeleteBotLocaleResponse")
     DeleteBotReplicaRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DeleteBotReplicaRequest", name: "DeleteBotReplicaRequest")
@@ -333,6 +350,8 @@ module Aws::LexModelsV2
     DeleteUtterancesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DeleteUtterancesResponse", name: "DeleteUtterancesResponse")
     DescribeBotAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DescribeBotAliasRequest", name: "DescribeBotAliasRequest")
     DescribeBotAliasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DescribeBotAliasResponse", name: "DescribeBotAliasResponse")
+    DescribeBotAnalyzerRecommendationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationRequest", name: "DescribeBotAnalyzerRecommendationRequest")
+    DescribeBotAnalyzerRecommendationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationResponse", name: "DescribeBotAnalyzerRecommendationResponse")
     DescribeBotLocaleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DescribeBotLocaleRequest", name: "DescribeBotLocaleRequest")
     DescribeBotLocaleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DescribeBotLocaleResponse", name: "DescribeBotLocaleResponse")
     DescribeBotRecommendationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DescribeBotRecommendationRequest", name: "DescribeBotRecommendationRequest")
@@ -374,6 +393,7 @@ module Aws::LexModelsV2
     DialogCodeHookInvocationSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DialogCodeHookInvocationSetting", name: "DialogCodeHookInvocationSetting")
     DialogCodeHookSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DialogCodeHookSettings", name: "DialogCodeHookSettings")
     DialogState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#DialogState", name: "DialogState")
+    DisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#DisplayName", name: "DisplayName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     DomainEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#DomainEndpoint", name: "DomainEndpoint", traits: {"smithy.api#pattern" => "^(http|https):\\/\\/+[^\\s]+[\\w]$"})
     DraftBotVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#DraftBotVersion", name: "DraftBotVersion", traits: {"smithy.api#length" => {"min" => 5, "max" => 5}, "smithy.api#pattern" => "^DRAFT$"})
     Effect = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#Effect", name: "Effect")
@@ -452,6 +472,7 @@ module Aws::LexModelsV2
     IntentClassificationTestResults = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#IntentClassificationTestResults", name: "IntentClassificationTestResults")
     IntentClosingSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#IntentClosingSetting", name: "IntentClosingSetting")
     IntentConfirmationSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#IntentConfirmationSetting", name: "IntentConfirmationSetting")
+    IntentDisambiguationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#IntentDisambiguationSettings", name: "IntentDisambiguationSettings")
     IntentFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#IntentFilter", name: "IntentFilter")
     IntentFilterName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#IntentFilterName", name: "IntentFilterName")
     IntentFilterOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#IntentFilterOperator", name: "IntentFilterOperator")
@@ -470,6 +491,7 @@ module Aws::LexModelsV2
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     InvokedIntentSample = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#InvokedIntentSample", name: "InvokedIntentSample")
     InvokedIntentSamples = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#InvokedIntentSamples", name: "InvokedIntentSamples")
+    IssueLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#IssueLocation", name: "IssueLocation")
     ItemId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#ItemId", name: "ItemId", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}})
     KendraConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#KendraConfiguration", name: "KendraConfiguration")
     KendraIndexArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#KendraIndexArn", name: "KendraIndexArn", traits: {"smithy.api#length" => {"min" => 32, "max" => 2048}, "smithy.api#pattern" => "^arn:aws:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index\\/[a-zA-Z0-9][a-zA-Z0-9_-]*$"})
@@ -483,6 +505,8 @@ module Aws::LexModelsV2
     ListBotAliasReplicasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#ListBotAliasReplicasResponse", name: "ListBotAliasReplicasResponse")
     ListBotAliasesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#ListBotAliasesRequest", name: "ListBotAliasesRequest")
     ListBotAliasesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#ListBotAliasesResponse", name: "ListBotAliasesResponse")
+    ListBotAnalyzerHistoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryRequest", name: "ListBotAnalyzerHistoryRequest")
+    ListBotAnalyzerHistoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryResponse", name: "ListBotAnalyzerHistoryResponse")
     ListBotLocalesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#ListBotLocalesRequest", name: "ListBotLocalesRequest")
     ListBotLocalesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#ListBotLocalesResponse", name: "ListBotLocalesResponse")
     ListBotRecommendationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#ListBotRecommendationsRequest", name: "ListBotRecommendationsRequest")
@@ -542,6 +566,7 @@ module Aws::LexModelsV2
     LocaleId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#LocaleId", name: "LocaleId")
     LocaleName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#LocaleName", name: "LocaleName")
     LogPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#LogPrefix", name: "LogPrefix", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    MaxDisambiguationIntents = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#MaxDisambiguationIntents", name: "MaxDisambiguationIntents", traits: {"smithy.api#range" => {"min" => 2, "max" => 5}})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
     MaxUtteranceDigits = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#MaxUtteranceDigits", name: "MaxUtteranceDigits", traits: {"smithy.api#range" => {"min" => 1, "max" => 1024}})
     MergeStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#MergeStrategy", name: "MergeStrategy")
@@ -587,6 +612,7 @@ module Aws::LexModelsV2
     Principal = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#Principal", name: "Principal")
     PrincipalArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#PrincipalArn", name: "PrincipalArn", traits: {"smithy.api#length" => {"min" => 30, "max" => 1024}, "smithy.api#pattern" => "^arn:aws:iam::[0-9]{12}:(root|(user|role)/.*)$"})
     PrincipalList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#PrincipalList", name: "PrincipalList")
+    Priority = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#Priority", name: "Priority")
     PriorityValue = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#PriorityValue", name: "PriorityValue", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
     PromptAttempt = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#PromptAttempt", name: "PromptAttempt")
     PromptAttemptSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#PromptAttemptSpecification", name: "PromptAttemptSpecification")
@@ -635,6 +661,7 @@ module Aws::LexModelsV2
     SearchAssociatedTranscriptsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#SearchAssociatedTranscriptsRequest", name: "SearchAssociatedTranscriptsRequest")
     SearchAssociatedTranscriptsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#SearchAssociatedTranscriptsResponse", name: "SearchAssociatedTranscriptsResponse")
     SearchOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#SearchOrder", name: "SearchOrder")
+    SecretsManagerSecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#SecretsManagerSecretArn", name: "SecretsManagerSecretArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[A-Za-z-]*:secretsmanager:[a-z0-9-]{1,20}:[0-9]{12}:secret:[A-Za-z0-9/_+=.@-]{1,512}-[A-Za-z0-9]{6}$"})
     SentimentAnalysisSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#SentimentAnalysisSettings", name: "SentimentAnalysisSettings")
     ServicePrincipal = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#ServicePrincipal", name: "ServicePrincipal", traits: {"smithy.api#length" => {"min" => 15, "max" => 1024}, "smithy.api#pattern" => "^[0-9a-zA-Z_.]+$"})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
@@ -691,7 +718,15 @@ module Aws::LexModelsV2
     SlotValueSelectionSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#SlotValueSelectionSetting", name: "SlotValueSelectionSetting")
     SlotValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelsv2#SlotValues", name: "SlotValues")
     SortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#SortOrder", name: "SortOrder")
+    SpeakerDiarizationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings", name: "SpeakerDiarizationSettings")
     Specifications = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#Specifications", name: "Specifications")
+    SpeechDetectionSensitivity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity", name: "SpeechDetectionSensitivity")
+    SpeechFoundationModel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#SpeechFoundationModel", name: "SpeechFoundationModel")
+    SpeechModelConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#SpeechModelConfig", name: "SpeechModelConfig")
+    SpeechModelPreference = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelsv2#SpeechModelPreference", name: "SpeechModelPreference")
+    SpeechRecognitionSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings", name: "SpeechRecognitionSettings")
+    StartBotAnalyzerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StartBotAnalyzerRequest", name: "StartBotAnalyzerRequest")
+    StartBotAnalyzerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StartBotAnalyzerResponse", name: "StartBotAnalyzerResponse")
     StartBotRecommendationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StartBotRecommendationRequest", name: "StartBotRecommendationRequest")
     StartBotRecommendationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StartBotRecommendationResponse", name: "StartBotRecommendationResponse")
     StartBotResourceGenerationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StartBotResourceGenerationRequest", name: "StartBotResourceGenerationRequest")
@@ -705,6 +740,8 @@ module Aws::LexModelsV2
     StillWaitingResponseFrequency = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#StillWaitingResponseFrequency", name: "StillWaitingResponseFrequency", traits: {"smithy.api#range" => {"min" => 1, "max" => 300}})
     StillWaitingResponseSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StillWaitingResponseSpecification", name: "StillWaitingResponseSpecification")
     StillWaitingResponseTimeout = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#StillWaitingResponseTimeout", name: "StillWaitingResponseTimeout", traits: {"smithy.api#range" => {"min" => 1, "max" => 900}})
+    StopBotAnalyzerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StopBotAnalyzerRequest", name: "StopBotAnalyzerRequest")
+    StopBotAnalyzerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StopBotAnalyzerResponse", name: "StopBotAnalyzerResponse")
     StopBotRecommendationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StopBotRecommendationRequest", name: "StopBotRecommendationRequest")
     StopBotRecommendationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#StopBotRecommendationResponse", name: "StopBotRecommendationResponse")
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#String", name: "String")
@@ -777,6 +814,8 @@ module Aws::LexModelsV2
     TranscriptSourceSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#TranscriptSourceSetting", name: "TranscriptSourceSetting")
     TurnNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelsv2#TurnNumber", name: "TurnNumber", traits: {"smithy.api#range" => {"min" => 0, "max" => 30}})
     TurnSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#TurnSpecification", name: "TurnSpecification")
+    UUID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelsv2#UUID", name: "UUID", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
+    UnifiedSpeechSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings", name: "UnifiedSpeechSettings")
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#UntagResourceResponse", name: "UntagResourceResponse")
     UpdateBotAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelsv2#UpdateBotAliasRequest", name: "UpdateBotAliasRequest")
@@ -867,6 +906,7 @@ module Aws::LexModelsV2
     AllowedInputTypes.add_member(:allow_audio_input, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "allowAudioInput", traits: {"smithy.api#required" => {}}))
     AllowedInputTypes.add_member(:allow_dtmf_input, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "allowDTMFInput", traits: {"smithy.api#required" => {}}))
     AllowedInputTypes.type = Types::AllowedInputTypes
+    AnalysisScope.add_member(:bot_locale, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BotLocale", traits: {"smithy.api#enumValue" => "BotLocale"}))
     AnalyticsBinByList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsBinBySpecification, name: "member"))
     AnalyticsBinByName.add_member(:conversation_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ConversationStartTime", traits: {"smithy.api#enumValue" => "ConversationStartTime"}))
     AnalyticsBinByName.add_member(:utterance_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UtteranceTimestamp", traits: {"smithy.api#enumValue" => "UtteranceTimestamp"}))
@@ -1099,6 +1139,8 @@ module Aws::LexModelsV2
     AnalyticsUtteranceResult.type = Types::AnalyticsUtteranceResult
     AnalyticsUtteranceResults.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyticsUtteranceResult, name: "member"))
     AnalyticsUtteranceSortByName.add_member(:utterance_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UtteranceTimestamp", traits: {"smithy.api#enumValue" => "UtteranceTimestamp"}))
+    AssistedNluMode.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Primary", traits: {"smithy.api#enumValue" => "Primary"}))
+    AssistedNluMode.add_member(:fallback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Fallback", traits: {"smithy.api#enumValue" => "Fallback"}))
     AssociatedTranscript.add_member(:transcript, ::Smithy::Schema::Shapes::MemberShape.new(target: Transcript, name: "transcript"))
     AssociatedTranscript.type = Types::AssociatedTranscript
     AssociatedTranscriptFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociatedTranscriptFilterName, name: "name", traits: {"smithy.api#required" => {}}))
@@ -1112,6 +1154,19 @@ module Aws::LexModelsV2
     AudioAndDTMFInputSpecification.add_member(:audio_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioSpecification, name: "audioSpecification"))
     AudioAndDTMFInputSpecification.add_member(:dtmf_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: DTMFSpecification, name: "dtmfSpecification"))
     AudioAndDTMFInputSpecification.type = Types::AudioAndDTMFInputSpecification
+    AudioFillerSettings.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#default" => false}))
+    AudioFillerSettings.add_member(:audio_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerType, name: "audioType"))
+    AudioFillerSettings.add_member(:start_delay_in_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerDelayInMilliseconds, name: "startDelayInMilliseconds"))
+    AudioFillerSettings.add_member(:minimum_play_duration_in_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerDurationInMilliseconds, name: "minimumPlayDurationInMilliseconds"))
+    AudioFillerSettings.add_member(:response_delivery_delay_in_milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerDeliveryDelayInMilliseconds, name: "responseDeliveryDelayInMilliseconds"))
+    AudioFillerSettings.type = Types::AudioFillerSettings
+    AudioFillerType.add_member(:melody_chipper_chime, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MELODY_CHIPPER_CHIME", traits: {"smithy.api#enumValue" => "MELODY_CHIPPER_CHIME"}))
+    AudioFillerType.add_member(:melody_curious_crawl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MELODY_CURIOUS_CRAWL", traits: {"smithy.api#enumValue" => "MELODY_CURIOUS_CRAWL"}))
+    AudioFillerType.add_member(:melody_rising_ripple, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MELODY_RISING_RIPPLE", traits: {"smithy.api#enumValue" => "MELODY_RISING_RIPPLE"}))
+    AudioFillerType.add_member(:melody_patient_ping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MELODY_PATIENT_PING", traits: {"smithy.api#enumValue" => "MELODY_PATIENT_PING"}))
+    AudioFillerType.add_member(:melody_pondering_pong, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MELODY_PONDERING_PONG", traits: {"smithy.api#enumValue" => "MELODY_PONDERING_PONG"}))
+    AudioFillerType.add_member(:typing_kinetic_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TYPING_KINETIC_KEYS", traits: {"smithy.api#enumValue" => "TYPING_KINETIC_KEYS"}))
+    AudioFillerType.add_member(:typing_quiet_qwerty, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TYPING_QUIET_QWERTY", traits: {"smithy.api#enumValue" => "TYPING_QUIET_QWERTY"}))
     AudioLogDestination.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: S3BucketLogDestination, name: "s3Bucket", traits: {"smithy.api#required" => {}}))
     AudioLogDestination.type = Types::AudioLogDestination
     AudioLogSetting.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
@@ -1212,6 +1267,22 @@ module Aws::LexModelsV2
     BotAliasTestExecutionTarget.add_member(:bot_alias_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasId, name: "botAliasId", traits: {"smithy.api#required" => {}}))
     BotAliasTestExecutionTarget.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#required" => {}}))
     BotAliasTestExecutionTarget.type = Types::BotAliasTestExecutionTarget
+    BotAnalyzerHistoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAnalyzerHistorySummary, name: "member"))
+    BotAnalyzerHistorySummary.add_member(:bot_analyzer_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAnalyzerStatus, name: "botAnalyzerStatus", traits: {"smithy.api#required" => {}}))
+    BotAnalyzerHistorySummary.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
+    BotAnalyzerHistorySummary.add_member(:bot_analyzer_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "botAnalyzerRequestId", traits: {"smithy.api#required" => {}}))
+    BotAnalyzerHistorySummary.type = Types::BotAnalyzerHistorySummary
+    BotAnalyzerRecommendation.add_member(:issue_location, ::Smithy::Schema::Shapes::MemberShape.new(target: IssueLocation, name: "issueLocation", traits: {"smithy.api#required" => {}}))
+    BotAnalyzerRecommendation.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: Priority, name: "priority", traits: {"smithy.api#required" => {}}))
+    BotAnalyzerRecommendation.add_member(:issue_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "issueDescription", traits: {"smithy.api#required" => {}}))
+    BotAnalyzerRecommendation.add_member(:proposed_fix, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "proposedFix", traits: {"smithy.api#required" => {}}))
+    BotAnalyzerRecommendation.type = Types::BotAnalyzerRecommendation
+    BotAnalyzerRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAnalyzerRecommendation, name: "member"))
+    BotAnalyzerStatus.add_member(:processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Processing", traits: {"smithy.api#enumValue" => "Processing"}))
+    BotAnalyzerStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Available", traits: {"smithy.api#enumValue" => "Available"}))
+    BotAnalyzerStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
+    BotAnalyzerStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Stopping", traits: {"smithy.api#enumValue" => "Stopping"}))
+    BotAnalyzerStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Stopped", traits: {"smithy.api#enumValue" => "Stopped"}))
     BotExportSpecification.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#required" => {}}))
     BotExportSpecification.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersion, name: "botVersion", traits: {"smithy.api#required" => {}}))
     BotExportSpecification.type = Types::BotExportSpecification
@@ -1254,6 +1325,11 @@ module Aws::LexModelsV2
     BotLocaleImportSpecification.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#required" => {}}))
     BotLocaleImportSpecification.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "nluIntentConfidenceThreshold"))
     BotLocaleImportSpecification.add_member(:voice_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceSettings, name: "voiceSettings"))
+    BotLocaleImportSpecification.add_member(:speech_recognition_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechRecognitionSettings, name: "speechRecognitionSettings"))
+    BotLocaleImportSpecification.add_member(:speech_detection_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechDetectionSensitivity, name: "speechDetectionSensitivity"))
+    BotLocaleImportSpecification.add_member(:unified_speech_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UnifiedSpeechSettings, name: "unifiedSpeechSettings"))
+    BotLocaleImportSpecification.add_member(:audio_filler_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerSettings, name: "audioFillerSettings"))
+    BotLocaleImportSpecification.add_member(:speaker_diarization_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerDiarizationSettings, name: "speakerDiarizationSettings"))
     BotLocaleImportSpecification.type = Types::BotLocaleImportSpecification
     BotLocaleSortAttribute.add_member(:bot_locale_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BotLocaleName", traits: {"smithy.api#enumValue" => "BotLocaleName"}))
     BotLocaleSortBy.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleSortAttribute, name: "attribute", traits: {"smithy.api#required" => {}}))
@@ -1492,7 +1568,12 @@ module Aws::LexModelsV2
     CreateBotLocaleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     CreateBotLocaleRequest.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "nluIntentConfidenceThreshold", traits: {"smithy.api#required" => {}}))
     CreateBotLocaleRequest.add_member(:voice_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceSettings, name: "voiceSettings"))
+    CreateBotLocaleRequest.add_member(:unified_speech_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UnifiedSpeechSettings, name: "unifiedSpeechSettings"))
+    CreateBotLocaleRequest.add_member(:audio_filler_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerSettings, name: "audioFillerSettings"))
+    CreateBotLocaleRequest.add_member(:speech_recognition_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechRecognitionSettings, name: "speechRecognitionSettings"))
     CreateBotLocaleRequest.add_member(:generative_ai_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerativeAISettings, name: "generativeAISettings"))
+    CreateBotLocaleRequest.add_member(:speech_detection_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechDetectionSensitivity, name: "speechDetectionSensitivity"))
+    CreateBotLocaleRequest.add_member(:speaker_diarization_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerDiarizationSettings, name: "speakerDiarizationSettings"))
     CreateBotLocaleRequest.type = Types::CreateBotLocaleRequest
     CreateBotLocaleResponse.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId"))
     CreateBotLocaleResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion"))
@@ -1501,9 +1582,14 @@ module Aws::LexModelsV2
     CreateBotLocaleResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     CreateBotLocaleResponse.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "nluIntentConfidenceThreshold"))
     CreateBotLocaleResponse.add_member(:voice_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceSettings, name: "voiceSettings"))
+    CreateBotLocaleResponse.add_member(:unified_speech_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UnifiedSpeechSettings, name: "unifiedSpeechSettings"))
+    CreateBotLocaleResponse.add_member(:audio_filler_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerSettings, name: "audioFillerSettings"))
+    CreateBotLocaleResponse.add_member(:speech_recognition_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechRecognitionSettings, name: "speechRecognitionSettings"))
     CreateBotLocaleResponse.add_member(:bot_locale_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleStatus, name: "botLocaleStatus"))
     CreateBotLocaleResponse.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     CreateBotLocaleResponse.add_member(:generative_ai_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerativeAISettings, name: "generativeAISettings"))
+    CreateBotLocaleResponse.add_member(:speech_detection_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechDetectionSensitivity, name: "speechDetectionSensitivity"))
+    CreateBotLocaleResponse.add_member(:speaker_diarization_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerDiarizationSettings, name: "speakerDiarizationSettings"))
     CreateBotLocaleResponse.type = Types::CreateBotLocaleResponse
     CreateBotReplicaRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateBotReplicaRequest.add_member(:replica_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicaRegion, name: "replicaRegion", traits: {"smithy.api#required" => {}}))
@@ -1562,6 +1648,7 @@ module Aws::LexModelsV2
     CreateExportResponse.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     CreateExportResponse.type = Types::CreateExportResponse
     CreateIntentRequest.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName", traits: {"smithy.api#required" => {}}))
+    CreateIntentRequest.add_member(:intent_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "intentDisplayName"))
     CreateIntentRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     CreateIntentRequest.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSignature, name: "parentIntentSignature"))
     CreateIntentRequest.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleUtterancesList, name: "sampleUtterances"))
@@ -1581,6 +1668,7 @@ module Aws::LexModelsV2
     CreateIntentRequest.type = Types::CreateIntentRequest
     CreateIntentResponse.add_member(:intent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "intentId"))
     CreateIntentResponse.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName"))
+    CreateIntentResponse.add_member(:intent_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "intentDisplayName"))
     CreateIntentResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     CreateIntentResponse.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSignature, name: "parentIntentSignature"))
     CreateIntentResponse.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleUtterancesList, name: "sampleUtterances"))
@@ -1715,6 +1803,9 @@ module Aws::LexModelsV2
     DateRangeFilter.add_member(:start_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startDateTime", traits: {"smithy.api#required" => {}}))
     DateRangeFilter.add_member(:end_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endDateTime", traits: {"smithy.api#required" => {}}))
     DateRangeFilter.type = Types::DateRangeFilter
+    DeepgramSpeechModelConfig.add_member(:api_token_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManagerSecretArn, name: "apiTokenSecretArn", traits: {"smithy.api#required" => {}}))
+    DeepgramSpeechModelConfig.add_member(:model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeepgramModelId, name: "modelId"))
+    DeepgramSpeechModelConfig.type = Types::DeepgramSpeechModelConfig
     DefaultConditionalBranch.add_member(:next_step, ::Smithy::Schema::Shapes::MemberShape.new(target: DialogState, name: "nextStep"))
     DefaultConditionalBranch.add_member(:response, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseSpecification, name: "response"))
     DefaultConditionalBranch.type = Types::DefaultConditionalBranch
@@ -1726,6 +1817,10 @@ module Aws::LexModelsV2
     DeleteBotAliasResponse.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId"))
     DeleteBotAliasResponse.add_member(:bot_alias_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAliasStatus, name: "botAliasStatus"))
     DeleteBotAliasResponse.type = Types::DeleteBotAliasResponse
+    DeleteBotAnalyzerRecommendationRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotAnalyzerRecommendationRequest.add_member(:bot_analyzer_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "botAnalyzerRequestId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBotAnalyzerRecommendationRequest.type = Types::DeleteBotAnalyzerRecommendationRequest
+    DeleteBotAnalyzerRecommendationResponse.type = Types::DeleteBotAnalyzerRecommendationResponse
     DeleteBotLocaleRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteBotLocaleRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteBotLocaleRequest.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1830,6 +1925,19 @@ module Aws::LexModelsV2
     DescribeBotAliasResponse.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     DescribeBotAliasResponse.add_member(:parent_bot_networks, ::Smithy::Schema::Shapes::MemberShape.new(target: ParentBotNetworks, name: "parentBotNetworks"))
     DescribeBotAliasResponse.type = Types::DescribeBotAliasResponse
+    DescribeBotAnalyzerRecommendationRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeBotAnalyzerRecommendationRequest.add_member(:bot_analyzer_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "botAnalyzerRequestId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeBotAnalyzerRecommendationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    DescribeBotAnalyzerRecommendationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
+    DescribeBotAnalyzerRecommendationRequest.type = Types::DescribeBotAnalyzerRecommendationRequest
+    DescribeBotAnalyzerRecommendationResponse.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId"))
+    DescribeBotAnalyzerRecommendationResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion"))
+    DescribeBotAnalyzerRecommendationResponse.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId"))
+    DescribeBotAnalyzerRecommendationResponse.add_member(:bot_analyzer_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAnalyzerStatus, name: "botAnalyzerStatus"))
+    DescribeBotAnalyzerRecommendationResponse.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
+    DescribeBotAnalyzerRecommendationResponse.add_member(:bot_analyzer_recommendation_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAnalyzerRecommendationList, name: "botAnalyzerRecommendationList"))
+    DescribeBotAnalyzerRecommendationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    DescribeBotAnalyzerRecommendationResponse.type = Types::DescribeBotAnalyzerRecommendationResponse
     DescribeBotLocaleRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeBotLocaleRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersion, name: "botVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeBotLocaleRequest.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1841,6 +1949,9 @@ module Aws::LexModelsV2
     DescribeBotLocaleResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     DescribeBotLocaleResponse.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "nluIntentConfidenceThreshold"))
     DescribeBotLocaleResponse.add_member(:voice_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceSettings, name: "voiceSettings"))
+    DescribeBotLocaleResponse.add_member(:unified_speech_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UnifiedSpeechSettings, name: "unifiedSpeechSettings"))
+    DescribeBotLocaleResponse.add_member(:audio_filler_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerSettings, name: "audioFillerSettings"))
+    DescribeBotLocaleResponse.add_member(:speech_recognition_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechRecognitionSettings, name: "speechRecognitionSettings"))
     DescribeBotLocaleResponse.add_member(:intents_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCount, name: "intentsCount"))
     DescribeBotLocaleResponse.add_member(:slot_types_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCount, name: "slotTypesCount"))
     DescribeBotLocaleResponse.add_member(:bot_locale_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleStatus, name: "botLocaleStatus"))
@@ -1851,6 +1962,8 @@ module Aws::LexModelsV2
     DescribeBotLocaleResponse.add_member(:bot_locale_history_events, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleHistoryEventsList, name: "botLocaleHistoryEvents"))
     DescribeBotLocaleResponse.add_member(:recommended_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedActions, name: "recommendedActions"))
     DescribeBotLocaleResponse.add_member(:generative_ai_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerativeAISettings, name: "generativeAISettings"))
+    DescribeBotLocaleResponse.add_member(:speech_detection_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechDetectionSensitivity, name: "speechDetectionSensitivity"))
+    DescribeBotLocaleResponse.add_member(:speaker_diarization_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerDiarizationSettings, name: "speakerDiarizationSettings"))
     DescribeBotLocaleResponse.type = Types::DescribeBotLocaleResponse
     DescribeBotRecommendationRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeBotRecommendationRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1970,6 +2083,7 @@ module Aws::LexModelsV2
     DescribeIntentRequest.type = Types::DescribeIntentRequest
     DescribeIntentResponse.add_member(:intent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "intentId"))
     DescribeIntentResponse.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName"))
+    DescribeIntentResponse.add_member(:intent_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "intentDisplayName"))
     DescribeIntentResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     DescribeIntentResponse.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSignature, name: "parentIntentSignature"))
     DescribeIntentResponse.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleUtterancesList, name: "sampleUtterances"))
@@ -2316,6 +2430,10 @@ module Aws::LexModelsV2
     IntentConfirmationSetting.add_member(:code_hook, ::Smithy::Schema::Shapes::MemberShape.new(target: DialogCodeHookInvocationSetting, name: "codeHook"))
     IntentConfirmationSetting.add_member(:elicitation_code_hook, ::Smithy::Schema::Shapes::MemberShape.new(target: ElicitationCodeHookInvocationSetting, name: "elicitationCodeHook"))
     IntentConfirmationSetting.type = Types::IntentConfirmationSetting
+    IntentDisambiguationSettings.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    IntentDisambiguationSettings.add_member(:max_disambiguation_intents, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxDisambiguationIntents, name: "maxDisambiguationIntents"))
+    IntentDisambiguationSettings.add_member(:custom_disambiguation_message, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDisambiguationMessage, name: "customDisambiguationMessage"))
+    IntentDisambiguationSettings.type = Types::IntentDisambiguationSettings
     IntentFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentFilterName, name: "name", traits: {"smithy.api#required" => {}}))
     IntentFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "values", traits: {"smithy.api#required" => {}}))
     IntentFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentFilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
@@ -2349,6 +2467,7 @@ module Aws::LexModelsV2
     IntentStatistics.type = Types::IntentStatistics
     IntentSummary.add_member(:intent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "intentId"))
     IntentSummary.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName"))
+    IntentSummary.add_member(:intent_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "intentDisplayName"))
     IntentSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     IntentSummary.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSignature, name: "parentIntentSignature"))
     IntentSummary.add_member(:input_contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: InputContextsList, name: "inputContexts"))
@@ -2361,6 +2480,10 @@ module Aws::LexModelsV2
     InvokedIntentSample.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName"))
     InvokedIntentSample.type = Types::InvokedIntentSample
     InvokedIntentSamples.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InvokedIntentSample, name: "member"))
+    IssueLocation.add_member(:bot_locale, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "botLocale"))
+    IssueLocation.add_member(:intent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "intentId"))
+    IssueLocation.add_member(:slot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "slotId"))
+    IssueLocation.type = Types::IssueLocation
     KendraConfiguration.add_member(:kendra_index, ::Smithy::Schema::Shapes::MemberShape.new(target: KendraIndexArn, name: "kendraIndex", traits: {"smithy.api#required" => {}}))
     KendraConfiguration.add_member(:query_filter_string_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "queryFilterStringEnabled", traits: {"smithy.api#default" => false}))
     KendraConfiguration.add_member(:query_filter_string, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilterString, name: "queryFilterString"))
@@ -2410,6 +2533,18 @@ module Aws::LexModelsV2
     ListBotAliasesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListBotAliasesResponse.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId"))
     ListBotAliasesResponse.type = Types::ListBotAliasesResponse
+    ListBotAnalyzerHistoryRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListBotAnalyzerHistoryRequest.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId"))
+    ListBotAnalyzerHistoryRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion"))
+    ListBotAnalyzerHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListBotAnalyzerHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
+    ListBotAnalyzerHistoryRequest.type = Types::ListBotAnalyzerHistoryRequest
+    ListBotAnalyzerHistoryResponse.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId"))
+    ListBotAnalyzerHistoryResponse.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId"))
+    ListBotAnalyzerHistoryResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion"))
+    ListBotAnalyzerHistoryResponse.add_member(:bot_analyzer_history_list, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAnalyzerHistoryList, name: "botAnalyzerHistoryList"))
+    ListBotAnalyzerHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListBotAnalyzerHistoryResponse.type = Types::ListBotAnalyzerHistoryResponse
     ListBotLocalesRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListBotLocalesRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: BotVersion, name: "botVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListBotLocalesRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleSortBy, name: "sortBy"))
@@ -2742,6 +2877,8 @@ module Aws::LexModelsV2
     NewCustomVocabularyItem.add_member(:display_as, ::Smithy::Schema::Shapes::MemberShape.new(target: Phrase, name: "displayAs"))
     NewCustomVocabularyItem.type = Types::NewCustomVocabularyItem
     NluImprovementSpecification.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    NluImprovementSpecification.add_member(:assisted_nlu_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AssistedNluMode, name: "assistedNluMode"))
+    NluImprovementSpecification.add_member(:intent_disambiguation_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentDisambiguationSettings, name: "intentDisambiguationSettings"))
     NluImprovementSpecification.type = Types::NluImprovementSpecification
     OSIncludeFields.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludeField, name: "member"))
     ObfuscationSetting.add_member(:obfuscation_setting_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ObfuscationSettingType, name: "obfuscationSettingType", traits: {"smithy.api#required" => {}}))
@@ -2803,6 +2940,9 @@ module Aws::LexModelsV2
     Principal.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "arn"))
     Principal.type = Types::Principal
     PrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Principal, name: "member"))
+    Priority.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "High", traits: {"smithy.api#enumValue" => "High"}))
+    Priority.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Medium", traits: {"smithy.api#enumValue" => "Medium"}))
+    Priority.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Low", traits: {"smithy.api#enumValue" => "Low"}))
     PromptAttempt.add_member(:initial, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Initial", traits: {"smithy.api#enumValue" => "Initial"}))
     PromptAttempt.add_member(:retry1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Retry1", traits: {"smithy.api#enumValue" => "Retry1"}))
     PromptAttempt.add_member(:retry2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Retry2", traits: {"smithy.api#enumValue" => "Retry2"}))
@@ -3043,9 +3183,38 @@ module Aws::LexModelsV2
     SlotValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SlotValueOverride, name: "member"))
     SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ascending", traits: {"smithy.api#enumValue" => "Ascending"}))
     SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Descending", traits: {"smithy.api#enumValue" => "Descending"}))
+    SpeakerDiarizationSettings.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Enabled, name: "enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    SpeakerDiarizationSettings.type = Types::SpeakerDiarizationSettings
     Specifications.add_member(:slot_type_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BuiltInOrCustomSlotTypeId, name: "slotTypeId", traits: {"smithy.api#required" => {}}))
     Specifications.add_member(:value_elicitation_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: SubSlotValueElicitationSetting, name: "valueElicitationSetting", traits: {"smithy.api#required" => {}}))
     Specifications.type = Types::Specifications
+    SpeechDetectionSensitivity.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Default", traits: {"smithy.api#enumValue" => "Default"}))
+    SpeechDetectionSensitivity.add_member(:high_noise_tolerance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HighNoiseTolerance", traits: {"smithy.api#enumValue" => "HighNoiseTolerance"}))
+    SpeechDetectionSensitivity.add_member(:maximum_noise_tolerance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MaximumNoiseTolerance", traits: {"smithy.api#enumValue" => "MaximumNoiseTolerance"}))
+    SpeechFoundationModel.add_member(:model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockModelArn, name: "modelArn", traits: {"smithy.api#required" => {}}))
+    SpeechFoundationModel.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceId, name: "voiceId"))
+    SpeechFoundationModel.type = Types::SpeechFoundationModel
+    SpeechModelConfig.add_member(:deepgram_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeepgramSpeechModelConfig, name: "deepgramConfig"))
+    SpeechModelConfig.type = Types::SpeechModelConfig
+    SpeechModelPreference.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Standard", traits: {"smithy.api#enumValue" => "Standard"}))
+    SpeechModelPreference.add_member(:neural, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Neural", traits: {"smithy.api#enumValue" => "Neural"}))
+    SpeechModelPreference.add_member(:deepgram, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deepgram", traits: {"smithy.api#enumValue" => "Deepgram"}))
+    SpeechModelPreference.add_member(:advanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Advanced", traits: {"smithy.api#enumValue" => "Advanced"}))
+    SpeechRecognitionSettings.add_member(:speech_model_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechModelPreference, name: "speechModelPreference"))
+    SpeechRecognitionSettings.add_member(:speech_model_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechModelConfig, name: "speechModelConfig"))
+    SpeechRecognitionSettings.type = Types::SpeechRecognitionSettings
+    StartBotAnalyzerRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartBotAnalyzerRequest.add_member(:analysis_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisScope, name: "analysisScope", traits: {"smithy.api#required" => {}}))
+    StartBotAnalyzerRequest.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId"))
+    StartBotAnalyzerRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion"))
+    StartBotAnalyzerRequest.type = Types::StartBotAnalyzerRequest
+    StartBotAnalyzerResponse.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId"))
+    StartBotAnalyzerResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion"))
+    StartBotAnalyzerResponse.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId"))
+    StartBotAnalyzerResponse.add_member(:bot_analyzer_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAnalyzerStatus, name: "botAnalyzerStatus"))
+    StartBotAnalyzerResponse.add_member(:bot_analyzer_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "botAnalyzerRequestId"))
+    StartBotAnalyzerResponse.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
+    StartBotAnalyzerResponse.type = Types::StartBotAnalyzerResponse
     StartBotRecommendationRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartBotRecommendationRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartBotRecommendationRequest.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -3119,6 +3288,15 @@ module Aws::LexModelsV2
     StillWaitingResponseSpecification.add_member(:timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: StillWaitingResponseTimeout, name: "timeoutInSeconds", traits: {"smithy.api#required" => {}}))
     StillWaitingResponseSpecification.add_member(:allow_interrupt, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "allowInterrupt"))
     StillWaitingResponseSpecification.type = Types::StillWaitingResponseSpecification
+    StopBotAnalyzerRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopBotAnalyzerRequest.add_member(:bot_analyzer_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "botAnalyzerRequestId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopBotAnalyzerRequest.type = Types::StopBotAnalyzerRequest
+    StopBotAnalyzerResponse.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId"))
+    StopBotAnalyzerResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion"))
+    StopBotAnalyzerResponse.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId"))
+    StopBotAnalyzerResponse.add_member(:bot_analyzer_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotAnalyzerStatus, name: "botAnalyzerStatus"))
+    StopBotAnalyzerResponse.add_member(:bot_analyzer_request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "botAnalyzerRequestId"))
+    StopBotAnalyzerResponse.type = Types::StopBotAnalyzerResponse
     StopBotRecommendationRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopBotRecommendationRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopBotRecommendationRequest.add_member(:locale_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LocaleId, name: "localeId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -3302,6 +3480,8 @@ module Aws::LexModelsV2
     TurnSpecification.add_member(:agent_turn, ::Smithy::Schema::Shapes::MemberShape.new(target: AgentTurnSpecification, name: "agentTurn"))
     TurnSpecification.add_member(:user_turn, ::Smithy::Schema::Shapes::MemberShape.new(target: UserTurnSpecification, name: "userTurn"))
     TurnSpecification.type = Types::TurnSpecification
+    UnifiedSpeechSettings.add_member(:speech_foundation_model, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechFoundationModel, name: "speechFoundationModel", traits: {"smithy.api#required" => {}}))
+    UnifiedSpeechSettings.type = Types::UnifiedSpeechSettings
     UntagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceARN", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
@@ -3333,7 +3513,12 @@ module Aws::LexModelsV2
     UpdateBotLocaleRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     UpdateBotLocaleRequest.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "nluIntentConfidenceThreshold", traits: {"smithy.api#required" => {}}))
     UpdateBotLocaleRequest.add_member(:voice_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceSettings, name: "voiceSettings"))
+    UpdateBotLocaleRequest.add_member(:unified_speech_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UnifiedSpeechSettings, name: "unifiedSpeechSettings"))
+    UpdateBotLocaleRequest.add_member(:audio_filler_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerSettings, name: "audioFillerSettings"))
+    UpdateBotLocaleRequest.add_member(:speech_recognition_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechRecognitionSettings, name: "speechRecognitionSettings"))
     UpdateBotLocaleRequest.add_member(:generative_ai_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerativeAISettings, name: "generativeAISettings"))
+    UpdateBotLocaleRequest.add_member(:speech_detection_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechDetectionSensitivity, name: "speechDetectionSensitivity"))
+    UpdateBotLocaleRequest.add_member(:speaker_diarization_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerDiarizationSettings, name: "speakerDiarizationSettings"))
     UpdateBotLocaleRequest.type = Types::UpdateBotLocaleRequest
     UpdateBotLocaleResponse.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId"))
     UpdateBotLocaleResponse.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion"))
@@ -3342,12 +3527,17 @@ module Aws::LexModelsV2
     UpdateBotLocaleResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     UpdateBotLocaleResponse.add_member(:nlu_intent_confidence_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfidenceThreshold, name: "nluIntentConfidenceThreshold"))
     UpdateBotLocaleResponse.add_member(:voice_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceSettings, name: "voiceSettings"))
+    UpdateBotLocaleResponse.add_member(:unified_speech_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UnifiedSpeechSettings, name: "unifiedSpeechSettings"))
+    UpdateBotLocaleResponse.add_member(:audio_filler_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFillerSettings, name: "audioFillerSettings"))
+    UpdateBotLocaleResponse.add_member(:speech_recognition_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechRecognitionSettings, name: "speechRecognitionSettings"))
     UpdateBotLocaleResponse.add_member(:bot_locale_status, ::Smithy::Schema::Shapes::MemberShape.new(target: BotLocaleStatus, name: "botLocaleStatus"))
     UpdateBotLocaleResponse.add_member(:failure_reasons, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReasons, name: "failureReasons"))
     UpdateBotLocaleResponse.add_member(:creation_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDateTime"))
     UpdateBotLocaleResponse.add_member(:last_updated_date_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedDateTime"))
     UpdateBotLocaleResponse.add_member(:recommended_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendedActions, name: "recommendedActions"))
     UpdateBotLocaleResponse.add_member(:generative_ai_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerativeAISettings, name: "generativeAISettings"))
+    UpdateBotLocaleResponse.add_member(:speech_detection_sensitivity, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeechDetectionSensitivity, name: "speechDetectionSensitivity"))
+    UpdateBotLocaleResponse.add_member(:speaker_diarization_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpeakerDiarizationSettings, name: "speakerDiarizationSettings"))
     UpdateBotLocaleResponse.type = Types::UpdateBotLocaleResponse
     UpdateBotRecommendationRequest.add_member(:bot_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "botId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateBotRecommendationRequest.add_member(:bot_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DraftBotVersion, name: "botVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -3401,6 +3591,7 @@ module Aws::LexModelsV2
     UpdateExportResponse.type = Types::UpdateExportResponse
     UpdateIntentRequest.add_member(:intent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "intentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateIntentRequest.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName", traits: {"smithy.api#required" => {}}))
+    UpdateIntentRequest.add_member(:intent_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "intentDisplayName"))
     UpdateIntentRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     UpdateIntentRequest.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSignature, name: "parentIntentSignature"))
     UpdateIntentRequest.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleUtterancesList, name: "sampleUtterances"))
@@ -3421,6 +3612,7 @@ module Aws::LexModelsV2
     UpdateIntentRequest.type = Types::UpdateIntentRequest
     UpdateIntentResponse.add_member(:intent_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "intentId"))
     UpdateIntentResponse.add_member(:intent_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "intentName"))
+    UpdateIntentResponse.add_member(:intent_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "intentDisplayName"))
     UpdateIntentResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
     UpdateIntentResponse.add_member(:parent_intent_signature, ::Smithy::Schema::Shapes::MemberShape.new(target: IntentSignature, name: "parentIntentSignature"))
     UpdateIntentResponse.add_member(:sample_utterances, ::Smithy::Schema::Shapes::MemberShape.new(target: SampleUtterancesList, name: "sampleUtterances"))
@@ -3604,8 +3796,8 @@ module Aws::LexModelsV2
     VoiceEngine.add_member(:neural, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Neural", traits: {"smithy.api#enumValue" => "neural"}))
     VoiceEngine.add_member(:long_form, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LongForm", traits: {"smithy.api#enumValue" => "long-form"}))
     VoiceEngine.add_member(:generative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Generative", traits: {"smithy.api#enumValue" => "generative"}))
-    VoiceSettings.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceId, name: "voiceId", traits: {"smithy.api#required" => {}}))
     VoiceSettings.add_member(:engine, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceEngine, name: "engine"))
+    VoiceSettings.add_member(:voice_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VoiceId, name: "voiceId", traits: {"smithy.api#required" => {}}))
     VoiceSettings.type = Types::VoiceSettings
     WaitAndContinueSpecification.add_member(:waiting_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseSpecification, name: "waitingResponse", traits: {"smithy.api#required" => {}}))
     WaitAndContinueSpecification.add_member(:continue_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseSpecification, name: "continueResponse", traits: {"smithy.api#required" => {}}))
@@ -3617,7 +3809,7 @@ module Aws::LexModelsV2
       service.id = "com.amazonaws.lexmodelsv2#LexModelBuildingServiceV2"
       service.name = "LexModelBuildingServiceV2"
       service.version = "2020-08-07"
-      service.traits = {"aws.api#service" => {"sdkId" => "Lex Models V2", "arnNamespace" => "lex", "cloudFormationName" => "LexModelsV2", "cloudTrailEventSource" => "lexmodelsv2.amazonaws.com", "docId" => "models.lex.v2-2020-08-07", "endpointPrefix" => "models-v2-lex"}, "aws.auth#sigv4" => {"name" => "lex"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Lex Model Building V2"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Lex Models V2", "arnNamespace" => "lex", "cloudFormationName" => "LexModelsV2", "cloudTrailEventSource" => "lexmodelsv2.amazonaws.com", "docId" => "models.lex.v2-2020-08-07", "endpointPrefix" => "models-v2-lex"}, "aws.auth#sigv4" => {"name" => "lex"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Lex Model Building V2", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://models-v2-lex-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://models-v2-lex-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://models-v2-lex.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://models-v2-lex.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_create_custom_vocabulary_item, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelsv2#BatchCreateCustomVocabularyItem"
         operation.name = "BatchCreateCustomVocabularyItem"
@@ -3862,6 +4054,17 @@ module Aws::LexModelsV2
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botId}/botaliases/{botAliasId}", "code" => 202}}
       end)
+      service.add_operation(:delete_bot_analyzer_recommendation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendation"
+        operation.name = "DeleteBotAnalyzerRecommendation"
+        operation.input = DeleteBotAnalyzerRecommendationRequest
+        operation.output = DeleteBotAnalyzerRecommendationResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botId}/botanalyzer/{botAnalyzerRequestId}", "code" => 204}}
+      end)
       service.add_operation(:delete_bot_locale, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelsv2#DeleteBotLocale"
         operation.name = "DeleteBotLocale"
@@ -4045,6 +4248,18 @@ module Aws::LexModelsV2
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botId}/botaliases/{botAliasId}", "code" => 200}}
+      end)
+      service.add_operation(:describe_bot_analyzer_recommendation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendation"
+        operation.name = "DescribeBotAnalyzerRecommendation"
+        operation.input = DescribeBotAnalyzerRecommendationRequest
+        operation.output = DescribeBotAnalyzerRecommendationResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/bots/{botId}/botanalyzer/describe/{botAnalyzerRequestId}", "code" => 200}}
+        operation[:paginator] = Paginators::DescribeBotAnalyzerRecommendation.new
       end)
       service.add_operation(:describe_bot_locale, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelsv2#DescribeBotLocale"
@@ -4293,6 +4508,18 @@ module Aws::LexModelsV2
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/bots/{botId}/botaliases", "code" => 200}}
         operation[:paginator] = Paginators::ListBotAliases.new
+      end)
+      service.add_operation(:list_bot_analyzer_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistory"
+        operation.name = "ListBotAnalyzerHistory"
+        operation.input = ListBotAnalyzerHistoryRequest
+        operation.output = ListBotAnalyzerHistoryResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/bots/{botId}/botanalyzer/history", "code" => 200}}
+        operation[:paginator] = Paginators::ListBotAnalyzerHistory.new
       end)
       service.add_operation(:list_bot_locales, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelsv2#ListBotLocales"
@@ -4648,6 +4875,18 @@ module Aws::LexModelsV2
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/associatedtranscripts", "code" => 200}}
       end)
+      service.add_operation(:start_bot_analyzer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lexmodelsv2#StartBotAnalyzer"
+        operation.name = "StartBotAnalyzer"
+        operation.input = StartBotAnalyzerRequest
+        operation.output = StartBotAnalyzerResponse
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/bots/{botId}/botanalyzer", "code" => 202}}
+      end)
       service.add_operation(:start_bot_recommendation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelsv2#StartBotRecommendation"
         operation.name = "StartBotRecommendation"
@@ -4713,6 +4952,17 @@ module Aws::LexModelsV2
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/testsetgenerations", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:stop_bot_analyzer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.lexmodelsv2#StopBotAnalyzer"
+        operation.name = "StopBotAnalyzer"
+        operation.input = StopBotAnalyzerRequest
+        operation.output = StopBotAnalyzerResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/bots/{botId}/botanalyzer/{botAnalyzerRequestId}/stop", "code" => 200}}
       end)
       service.add_operation(:stop_bot_recommendation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelsv2#StopBotRecommendation"

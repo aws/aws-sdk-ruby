@@ -34,9 +34,10 @@ module Aws::TaxSettings
     BatchPutTaxRegistrationErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.taxsettings#BatchPutTaxRegistrationErrors", name: "BatchPutTaxRegistrationErrors")
     BatchPutTaxRegistrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#BatchPutTaxRegistrationRequest", name: "BatchPutTaxRegistrationRequest")
     BatchPutTaxRegistrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#BatchPutTaxRegistrationResponse", name: "BatchPutTaxRegistrationResponse")
-    Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.taxsettings#Boolean", name: "Boolean")
+    BelgiumAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#BelgiumAdditionalInfo", name: "BelgiumAdditionalInfo")
     BrazilAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#BrazilAdditionalInfo", name: "BrazilAdditionalInfo")
-    BusinessRegistrationNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#BusinessRegistrationNumber", name: "BusinessRegistrationNumber", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
+    BusinessNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#BusinessNumber", name: "BusinessNumber", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9]{1,12}$"})
+    BusinessRegistrationNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#BusinessRegistrationNumber", name: "BusinessRegistrationNumber", traits: {"smithy.api#pattern" => "^([0-9]{12}|LL[0-9]{5})$"})
     BusinessRepresentativeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#BusinessRepresentativeName", name: "BusinessRepresentativeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[0-9\\u3130-\\u318F\\uAC00-\\uD7AF,.( )-\\\\s]*$"})
     CanadaAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#CanadaAdditionalInfo", name: "CanadaAdditionalInfo")
     CanadaProvincialSalesTaxIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#CanadaProvincialSalesTaxIdString", name: "CanadaProvincialSalesTaxIdString", traits: {"smithy.api#length" => {"min" => 7, "max" => 16}, "smithy.api#pattern" => "^([0-9A-Z/-]+)$"})
@@ -45,12 +46,15 @@ module Aws::TaxSettings
     CaseCreationLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#CaseCreationLimitExceededException", name: "CaseCreationLimitExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 413})
     CcmCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#CcmCode", name: "CcmCode", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#pattern" => "^\\d+$"})
     CertifiedEmailId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#CertifiedEmailId", name: "CertifiedEmailId", traits: {"smithy.api#pattern" => "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,20}$"})
+    ChileAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#ChileAdditionalInfo", name: "ChileAdditionalInfo")
+    ChileDocumentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.taxsettings#ChileDocumentType", name: "ChileDocumentType")
     CigNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#CigNumber", name: "CigNumber", traits: {"smithy.api#pattern" => "^([0-9A-Z]{1,15})$"})
     City = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#City", name: "City", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^(?!\\s*$)[\\s\\S]+$"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ContractingAuthorityCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#ContractingAuthorityCode", name: "ContractingAuthorityCode", traits: {"smithy.api#pattern" => "^\\d{4}\\.[A-Z]\\d{5}\\.\\d{4}$"})
     CountryCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#CountryCode", name: "CountryCode", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#pattern" => "^[a-zA-Z]+$"})
     CupNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#CupNumber", name: "CupNumber", traits: {"smithy.api#pattern" => "^([0-9A-Z]{1,15})$"})
+    CustomerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.taxsettings#CustomerType", name: "CustomerType")
     DateOfBirth = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#DateOfBirth", name: "DateOfBirth", traits: {"smithy.api#length" => {"min" => 10, "max" => 10}, "smithy.api#pattern" => "^(\\d{4}-(0[0-9]|1[0-2])-([0-2][0-9]|3[0-1]))$"})
     DateString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#DateString", name: "DateString", traits: {"smithy.api#pattern" => "^(\\d{4}-(0[0-9]|1[0-2])-([0-2][0-9]|3[0-1]))$"})
     DecisionNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#DecisionNumber", name: "DecisionNumber", traits: {"smithy.api#pattern" => "^([a-zA-Z0-9/.\\-]{0,200})$"})
@@ -70,10 +74,11 @@ module Aws::TaxSettings
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#ErrorMessage", name: "ErrorMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\s\\S]*$", "smithy.api#sensitive" => {}})
     EstoniaAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#EstoniaAdditionalInfo", name: "EstoniaAdditionalInfo")
     ExemptionCertificate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#ExemptionCertificate", name: "ExemptionCertificate")
-    ExemptionDocumentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#ExemptionDocumentName", name: "ExemptionDocumentName", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^([A-Za-z0-9-_.]+).(pdf|jpg|png)$"})
+    ExemptionDocumentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#ExemptionDocumentName", name: "ExemptionDocumentName", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^([A-Za-z0-9_.-]+)\\.([pP][dD][fF]|[jJ][pP][gG]|[pP][nN][gG])$"})
     ExemptionFileBlob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.taxsettings#ExemptionFileBlob", name: "ExemptionFileBlob", traits: {"smithy.api#length" => {"min" => 1, "max" => 4194304}})
     FieldName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#FieldName", name: "FieldName", traits: {"smithy.api#pattern" => "^(?!\\s*$)[\\s\\S]+$"})
     FileBlob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.taxsettings#FileBlob", name: "FileBlob", traits: {"smithy.api#length" => {"min" => 1, "max" => 5242880}})
+    FranceAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#FranceAdditionalInfo", name: "FranceAdditionalInfo")
     GenericString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#GenericString", name: "GenericString", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[\\s\\S]*$"})
     GeorgiaAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#GeorgiaAdditionalInfo", name: "GeorgiaAdditionalInfo")
     GetTaxExemptionTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#GetTaxExemptionTypesRequest", name: "GetTaxExemptionTypesRequest")
@@ -114,11 +119,15 @@ module Aws::TaxSettings
     MalaysiaServiceTaxCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.taxsettings#MalaysiaServiceTaxCode", name: "MalaysiaServiceTaxCode")
     MalaysiaServiceTaxCodesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.taxsettings#MalaysiaServiceTaxCodesList", name: "MalaysiaServiceTaxCodesList", traits: {"smithy.api#length" => {"max" => 4}, "smithy.api#uniqueItems" => {}})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.taxsettings#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    MonacoAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#MonacoAdditionalInfo", name: "MonacoAdditionalInfo")
     PaginationTokenString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#PaginationTokenString", name: "PaginationTokenString", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}, "smithy.api#pattern" => "^[-A-Za-z0-9_+\\=\\/]+$"})
     Pan = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#Pan", name: "Pan", traits: {"smithy.api#pattern" => "^[A-Z]{5}[0-9]{4}[A-Z]{1}$"})
-    PaymentVoucherNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#PaymentVoucherNumber", name: "PaymentVoucherNumber", traits: {"smithy.api#pattern" => "^(\\d{17}|[A-Za-z]{3}\\d{13})$"})
+    PaymentVoucherNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#PaymentVoucherNumber", name: "PaymentVoucherNumber", traits: {"smithy.api#pattern" => "^(\\d{17}|[A-Za-z]{3}\\d{13}|(?=[^A-Za-z]*[A-Za-z][^A-Za-z]*$)[0-9A-Za-z]{17})$"})
+    PeppolId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#PeppolId", name: "PeppolId", traits: {"smithy.api#pattern" => "^[0-9]{10}$"})
     PersonType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.taxsettings#PersonType", name: "PersonType")
+    PhilippinesAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#PhilippinesAdditionalInfo", name: "PhilippinesAdditionalInfo")
     PolandAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#PolandAdditionalInfo", name: "PolandAdditionalInfo")
+    PolandTaxRegistrationNumberType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.taxsettings#PolandTaxRegistrationNumberType", name: "PolandTaxRegistrationNumberType")
     PostalCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#PostalCode", name: "PostalCode", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#pattern" => "^(?!\\s*$)[\\s\\S]+$"})
     PpnExceptionDesignationCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#PpnExceptionDesignationCode", name: "PpnExceptionDesignationCode", traits: {"smithy.api#pattern" => "^(01|02|03|07|08)$"})
     PutSupplementalTaxRegistrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#PutSupplementalTaxRegistrationRequest", name: "PutSupplementalTaxRegistrationRequest")
@@ -143,6 +152,7 @@ module Aws::TaxSettings
     SecondaryTaxId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#SecondaryTaxId", name: "SecondaryTaxId", traits: {"smithy.api#pattern" => "^([0-9]{10})$"})
     Sector = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.taxsettings#Sector", name: "Sector")
     Seller = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#Seller", name: "Seller", traits: {"smithy.api#pattern" => "^[\\s\\S]*$"})
+    SirenNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#SirenNumber", name: "SirenNumber", traits: {"smithy.api#pattern" => "^[0-9]{9}$"})
     SourceS3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#SourceS3Location", name: "SourceS3Location")
     SouthKoreaAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#SouthKoreaAdditionalInfo", name: "SouthKoreaAdditionalInfo")
     SpainAdditionalInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#SpainAdditionalInfo", name: "SpainAdditionalInfo")
@@ -162,7 +172,7 @@ module Aws::TaxSettings
     TaxExemptionType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#TaxExemptionType", name: "TaxExemptionType")
     TaxExemptionTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.taxsettings#TaxExemptionTypes", name: "TaxExemptionTypes")
     TaxExemptions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.taxsettings#TaxExemptions", name: "TaxExemptions")
-    TaxInformationNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#TaxInformationNumber", name: "TaxInformationNumber", traits: {"smithy.api#pattern" => "^[A-Z]{1,2}[0-9]{1,11}$"})
+    TaxInformationNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#TaxInformationNumber", name: "TaxInformationNumber", traits: {"smithy.api#pattern" => "^(IG|C|CS|P|D|F|FA|PT|TA|TC|TN|TR|TP|J|LE)[0-9]{10,13}$"})
     TaxInheritanceDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#TaxInheritanceDetails", name: "TaxInheritanceDetails")
     TaxOffice = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.taxsettings#TaxOffice", name: "TaxOffice", traits: {"smithy.api#pattern" => "^[\\s\\S]*$"})
     TaxRegistration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.taxsettings#TaxRegistration", name: "TaxRegistration", traits: {"smithy.api#sensitive" => {}})
@@ -223,6 +233,11 @@ module Aws::TaxSettings
     AdditionalInfoRequest.add_member(:egypt_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: EgyptAdditionalInfo, name: "egyptAdditionalInfo"))
     AdditionalInfoRequest.add_member(:greece_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: GreeceAdditionalInfo, name: "greeceAdditionalInfo"))
     AdditionalInfoRequest.add_member(:uzbekistan_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: UzbekistanAdditionalInfo, name: "uzbekistanAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:philippines_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: PhilippinesAdditionalInfo, name: "philippinesAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:belgium_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: BelgiumAdditionalInfo, name: "belgiumAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:chile_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ChileAdditionalInfo, name: "chileAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:france_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: FranceAdditionalInfo, name: "franceAdditionalInfo"))
+    AdditionalInfoRequest.add_member(:monaco_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: MonacoAdditionalInfo, name: "monacoAdditionalInfo"))
     AdditionalInfoRequest.type = Types::AdditionalInfoRequest
     AdditionalInfoResponse.add_member(:malaysia_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: MalaysiaAdditionalInfo, name: "malaysiaAdditionalInfo"))
     AdditionalInfoResponse.add_member(:israel_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: IsraelAdditionalInfo, name: "israelAdditionalInfo"))
@@ -245,12 +260,17 @@ module Aws::TaxSettings
     AdditionalInfoResponse.add_member(:egypt_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: EgyptAdditionalInfo, name: "egyptAdditionalInfo"))
     AdditionalInfoResponse.add_member(:greece_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: GreeceAdditionalInfo, name: "greeceAdditionalInfo"))
     AdditionalInfoResponse.add_member(:uzbekistan_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: UzbekistanAdditionalInfo, name: "uzbekistanAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:philippines_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: PhilippinesAdditionalInfo, name: "philippinesAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:belgium_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: BelgiumAdditionalInfo, name: "belgiumAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:chile_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ChileAdditionalInfo, name: "chileAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:france_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: FranceAdditionalInfo, name: "franceAdditionalInfo"))
+    AdditionalInfoResponse.add_member(:monaco_additional_info, ::Smithy::Schema::Shapes::MemberShape.new(target: MonacoAdditionalInfo, name: "monacoAdditionalInfo"))
     AdditionalInfoResponse.type = Types::AdditionalInfoResponse
-    Address.add_member(:address_line1, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressLine1, name: "addressLine1", traits: {"smithy.api#required" => {}}))
+    Address.add_member(:address_line1, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressLine1, name: "addressLine1", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "Unknown"}))
     Address.add_member(:address_line2, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressLine2, name: "addressLine2"))
     Address.add_member(:address_line3, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressLine3, name: "addressLine3"))
     Address.add_member(:district_or_county, ::Smithy::Schema::Shapes::MemberShape.new(target: District, name: "districtOrCounty"))
-    Address.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: City, name: "city", traits: {"smithy.api#required" => {}}))
+    Address.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: City, name: "city", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "Unknown"}))
     Address.add_member(:state_or_region, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "stateOrRegion"))
     Address.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: PostalCode, name: "postalCode", traits: {"smithy.api#required" => {}}))
     Address.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "countryCode", traits: {"smithy.api#required" => {}}))
@@ -291,19 +311,29 @@ module Aws::TaxSettings
     BatchPutTaxRegistrationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxRegistrationStatus, name: "status"))
     BatchPutTaxRegistrationResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutTaxRegistrationErrors, name: "errors", traits: {"smithy.api#required" => {}}))
     BatchPutTaxRegistrationResponse.type = Types::BatchPutTaxRegistrationResponse
+    BelgiumAdditionalInfo.add_member(:peppol_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PeppolId, name: "peppolId"))
+    BelgiumAdditionalInfo.add_member(:is_mercurius_box_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isMercuriusBoxEnabled"))
+    BelgiumAdditionalInfo.type = Types::BelgiumAdditionalInfo
     BrazilAdditionalInfo.add_member(:ccm_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CcmCode, name: "ccmCode"))
     BrazilAdditionalInfo.add_member(:legal_nature_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LegalNatureCode, name: "legalNatureCode"))
     BrazilAdditionalInfo.type = Types::BrazilAdditionalInfo
     CanadaAdditionalInfo.add_member(:provincial_sales_tax_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CanadaProvincialSalesTaxIdString, name: "provincialSalesTaxId"))
     CanadaAdditionalInfo.add_member(:canada_quebec_sales_tax_number, ::Smithy::Schema::Shapes::MemberShape.new(target: CanadaQuebecSalesTaxNumberString, name: "canadaQuebecSalesTaxNumber"))
     CanadaAdditionalInfo.add_member(:canada_retail_sales_tax_number, ::Smithy::Schema::Shapes::MemberShape.new(target: CanadaRetailSalesTaxNumberString, name: "canadaRetailSalesTaxNumber"))
-    CanadaAdditionalInfo.add_member(:is_reseller_account, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isResellerAccount"))
+    CanadaAdditionalInfo.add_member(:is_reseller_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isResellerAccount"))
     CanadaAdditionalInfo.type = Types::CanadaAdditionalInfo
     CaseCreationLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     CaseCreationLimitExceededException.type = Types::CaseCreationLimitExceededException
+    ChileAdditionalInfo.add_member(:document_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChileDocumentType, name: "documentType"))
+    ChileAdditionalInfo.add_member(:business_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "businessActivity"))
+    ChileAdditionalInfo.type = Types::ChileAdditionalInfo
+    ChileDocumentType.add_member(:invoice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVOICE", traits: {"smithy.api#enumValue" => "Invoice"}))
+    ChileDocumentType.add_member(:receipt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECEIPT", traits: {"smithy.api#enumValue" => "Receipt"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
+    CustomerType.add_member(:business, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSINESS", traits: {"smithy.api#enumValue" => "Business"}))
+    CustomerType.add_member(:individual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INDIVIDUAL", traits: {"smithy.api#enumValue" => "Individual"}))
     DeleteSupplementalTaxRegistrationRequest.add_member(:authority_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "authorityId", traits: {"smithy.api#required" => {}}))
     DeleteSupplementalTaxRegistrationRequest.type = Types::DeleteSupplementalTaxRegistrationRequest
     DeleteSupplementalTaxRegistrationResponse.type = Types::DeleteSupplementalTaxRegistrationResponse
@@ -325,6 +355,9 @@ module Aws::TaxSettings
     ExemptionCertificate.add_member(:document_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExemptionDocumentName, name: "documentName", traits: {"smithy.api#required" => {}}))
     ExemptionCertificate.add_member(:document_file, ::Smithy::Schema::Shapes::MemberShape.new(target: ExemptionFileBlob, name: "documentFile", traits: {"smithy.api#required" => {}}))
     ExemptionCertificate.type = Types::ExemptionCertificate
+    FranceAdditionalInfo.add_member(:siren_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SirenNumber, name: "sirenNumber", traits: {"smithy.api#required" => {}}))
+    FranceAdditionalInfo.add_member(:e_invoice_routing_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "eInvoiceRoutingCode"))
+    FranceAdditionalInfo.type = Types::FranceAdditionalInfo
     GeorgiaAdditionalInfo.add_member(:person_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PersonType, name: "personType", traits: {"smithy.api#required" => {}}))
     GeorgiaAdditionalInfo.type = Types::GeorgiaAdditionalInfo
     GetTaxExemptionTypesRequest.type = Types::GetTaxExemptionTypesRequest
@@ -377,6 +410,7 @@ module Aws::TaxSettings
     ItalyAdditionalInfo.add_member(:cig_number, ::Smithy::Schema::Shapes::MemberShape.new(target: CigNumber, name: "cigNumber"))
     ItalyAdditionalInfo.add_member(:cup_number, ::Smithy::Schema::Shapes::MemberShape.new(target: CupNumber, name: "cupNumber"))
     ItalyAdditionalInfo.add_member(:tax_code, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxCode, name: "taxCode"))
+    ItalyAdditionalInfo.add_member(:customer_type, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerType, name: "customerType"))
     ItalyAdditionalInfo.type = Types::ItalyAdditionalInfo
     Jurisdiction.add_member(:state_or_region, ::Smithy::Schema::Shapes::MemberShape.new(target: State, name: "stateOrRegion"))
     Jurisdiction.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "countryCode", traits: {"smithy.api#required" => {}}))
@@ -410,12 +444,20 @@ module Aws::TaxSettings
     MalaysiaServiceTaxCode.add_member(:it_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IT_SERVICES", traits: {"smithy.api#enumValue" => "IT Services"}))
     MalaysiaServiceTaxCode.add_member(:training_or_coaching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING_OR_COACHING", traits: {"smithy.api#enumValue" => "Training Or Coaching"}))
     MalaysiaServiceTaxCodesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MalaysiaServiceTaxCode, name: "member"))
+    MonacoAdditionalInfo.add_member(:business_number, ::Smithy::Schema::Shapes::MemberShape.new(target: BusinessNumber, name: "businessNumber", traits: {"smithy.api#required" => {}}))
+    MonacoAdditionalInfo.type = Types::MonacoAdditionalInfo
     PersonType.add_member(:legal_person, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEGAL_PERSON", traits: {"smithy.api#enumValue" => "Legal Person"}))
     PersonType.add_member(:physical_person, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHYSICAL_PERSON", traits: {"smithy.api#enumValue" => "Physical Person"}))
     PersonType.add_member(:business, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSINESS", traits: {"smithy.api#enumValue" => "Business"}))
+    PhilippinesAdditionalInfo.add_member(:is_vat_registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isVatRegistered"))
+    PhilippinesAdditionalInfo.type = Types::PhilippinesAdditionalInfo
     PolandAdditionalInfo.add_member(:individual_registration_number, ::Smithy::Schema::Shapes::MemberShape.new(target: IndividualRegistrationNumber, name: "individualRegistrationNumber"))
-    PolandAdditionalInfo.add_member(:is_group_vat_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "isGroupVatEnabled"))
+    PolandAdditionalInfo.add_member(:is_group_vat_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isGroupVatEnabled"))
+    PolandAdditionalInfo.add_member(:tax_registration_number_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PolandTaxRegistrationNumberType, name: "taxRegistrationNumberType"))
     PolandAdditionalInfo.type = Types::PolandAdditionalInfo
+    PolandTaxRegistrationNumberType.add_member(:eu_tax_registration_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EU_TAX_REGISTRATION_NUMBER", traits: {"smithy.api#enumValue" => "EUTaxRegistrationNumber"}))
+    PolandTaxRegistrationNumberType.add_member(:local_tax_registration_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCAL_TAX_REGISTRATION_NUMBER", traits: {"smithy.api#enumValue" => "LocalTaxRegistrationNumber"}))
+    PolandTaxRegistrationNumberType.add_member(:local_registration_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCAL_REGISTRATION_NUMBER", traits: {"smithy.api#enumValue" => "LocalRegistrationNumber"}))
     PutSupplementalTaxRegistrationRequest.add_member(:tax_registration_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: SupplementalTaxRegistrationEntry, name: "taxRegistrationEntry", traits: {"smithy.api#required" => {}}))
     PutSupplementalTaxRegistrationRequest.type = Types::PutSupplementalTaxRegistrationRequest
     PutSupplementalTaxRegistrationResponse.add_member(:authority_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "authorityId", traits: {"smithy.api#required" => {}}))
@@ -486,7 +528,7 @@ module Aws::TaxSettings
     TaxExemption.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityExemptionAccountStatus, name: "status"))
     TaxExemption.type = Types::TaxExemption
     TaxExemptionDetails.add_member(:tax_exemptions, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxExemptions, name: "taxExemptions"))
-    TaxExemptionDetails.add_member(:heritage_obtained_details, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "heritageObtainedDetails"))
+    TaxExemptionDetails.add_member(:heritage_obtained_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "heritageObtainedDetails"))
     TaxExemptionDetails.add_member(:heritage_obtained_parent_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "heritageObtainedParentEntity"))
     TaxExemptionDetails.add_member(:heritage_obtained_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "heritageObtainedReason"))
     TaxExemptionDetails.type = Types::TaxExemptionDetails
@@ -540,6 +582,8 @@ module Aws::TaxSettings
     TaxRegistrationType.add_member(:sst, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SST", traits: {"smithy.api#enumValue" => "SST"}))
     TaxRegistrationType.add_member(:tin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIN", traits: {"smithy.api#enumValue" => "TIN"}))
     TaxRegistrationType.add_member(:nric, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NRIC", traits: {"smithy.api#enumValue" => "NRIC"}))
+    TaxRegistrationType.add_member(:pan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PAN", traits: {"smithy.api#enumValue" => "PAN"}))
+    TaxRegistrationType.add_member(:nip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NIP", traits: {"smithy.api#enumValue" => "NIP"}))
     TaxRegistrationWithJurisdiction.add_member(:registration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistrationId, name: "registrationId", traits: {"smithy.api#required" => {}}))
     TaxRegistrationWithJurisdiction.add_member(:registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaxRegistrationType, name: "registrationType", traits: {"smithy.api#required" => {}}))
     TaxRegistrationWithJurisdiction.add_member(:legal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LegalName, name: "legalName", traits: {"smithy.api#required" => {}}))
@@ -573,6 +617,8 @@ module Aws::TaxSettings
     ValidationExceptionErrorCode.add_member(:invalid_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_TOKEN", traits: {"smithy.api#enumValue" => "InvalidToken"}))
     ValidationExceptionErrorCode.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FieldValidationFailed"}))
     ValidationExceptionErrorCode.add_member(:missing_input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_INPUT", traits: {"smithy.api#enumValue" => "MissingInput"}))
+    ValidationExceptionErrorCode.add_member(:non_india_customer_can_not_set_pan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN", traits: {"smithy.api#enumValue" => "NonIndiaCustomerCanNotSetPAN"}))
+    ValidationExceptionErrorCode.add_member(:gst_existence_block_set_pan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GST_EXISTENCE_BLOCK_SET_PAN", traits: {"smithy.api#enumValue" => "GSTExistenceBlockSetPAN"}))
     ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "name", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
     ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
@@ -589,7 +635,7 @@ module Aws::TaxSettings
       service.id = "com.amazonaws.taxsettings#TaxSettings"
       service.name = "TaxSettings"
       service.version = "2018-05-10"
-      service.traits = {"aws.api#service" => {"sdkId" => "TaxSettings", "arnNamespace" => "tax", "cloudTrailEventSource" => "tax.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "tax"}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["Content-Type,X-Amz-Date", "Authorization", "X-Api-Key", "X-Amz-Security-Token", "Access-Control-Allow-Origin", "X-Amz-Content-Sha256", "Amz-Sdk-Invocation-Id", "Amz-Sdk-Request", "X-Amz-User-Agent"]}, "smithy.api#title" => "Tax Settings"}
+      service.traits = {"aws.api#service" => {"sdkId" => "TaxSettings", "arnNamespace" => "tax", "cloudTrailEventSource" => "tax.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "tax"}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["Content-Type,X-Amz-Date", "Authorization", "X-Api-Key", "X-Amz-Security-Token", "Access-Control-Allow-Origin", "X-Amz-Content-Sha256", "Amz-Sdk-Invocation-Id", "Amz-Sdk-Request", "X-Amz-User-Agent"]}, "smithy.api#title" => "Tax Settings", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://tax-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://tax-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://tax.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://tax.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_delete_tax_registration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.taxsettings#BatchDeleteTaxRegistration"
         operation.name = "BatchDeleteTaxRegistration"

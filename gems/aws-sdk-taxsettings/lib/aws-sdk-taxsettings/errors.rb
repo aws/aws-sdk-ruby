@@ -35,8 +35,7 @@ module Aws::TaxSettings
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>The access is denied for the Amazon Web ServicesSupport API.
-    #     </p>
+    # <p>The access is denied for the Amazon Web Services Support API. </p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::AccessDeniedException] data
@@ -49,8 +48,7 @@ module Aws::TaxSettings
       end
     end
 
-    # <p>Failed to upload the tax exemption document to Amazon Web ServicesSupport case.
-    #     </p>
+    # <p>Failed to upload the tax exemption document to Amazon Web Services Support case. </p>
     class AttachmentUploadException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::AttachmentUploadException] data
@@ -63,8 +61,7 @@ module Aws::TaxSettings
       end
     end
 
-    # <p>You've exceeded the Amazon Web ServicesSupport case creation limit for your account.
-    #     </p>
+    # <p>You've exceeded the Amazon Web Services Support case creation limit for your account. </p>
     class CaseCreationLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::CaseCreationLimitExceededException] data
@@ -131,8 +128,7 @@ module Aws::TaxSettings
       end
     end
 
-    # <p>The exception when the input doesn't pass validation for at least one of the input
-    #       parameters. </p>
+    # <p>The exception when the input doesn't pass validation for at least one of the input parameters. </p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::TaxSettings::Types::ValidationException] data

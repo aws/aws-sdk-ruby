@@ -71,6 +71,10 @@ module Aws::TrustedAdvisor
         ?aws_services: Array[String],
         ?source: String,
         ?metadata: Hash[String, String],
+        ?resource_arn_queryable: bool,
+        ?aws_resource_types: Array[String],
+        ?check_granularity: String,
+        ?recommendation_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -82,6 +86,10 @@ module Aws::TrustedAdvisor
       attr_accessor aws_services: Array[String]?
       attr_accessor source: String?
       attr_accessor metadata: Hash[String, String]?
+      attr_accessor resource_arn_queryable: bool?
+      attr_accessor aws_resource_types: Array[String]?
+      attr_accessor check_granularity: String?
+      attr_accessor recommendation_id: String?
     end
 
     class ConflictException
@@ -127,10 +135,12 @@ module Aws::TrustedAdvisor
 
       def initialize: (
         ?recommendation_identifier: String,
+        ?language: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor recommendation_identifier: String?
+      attr_accessor language: String?
     end
 
     class GetRecommendationResponse
@@ -307,6 +317,7 @@ module Aws::TrustedAdvisor
         ?exclusion_status: String,
         ?region_code: String,
         ?recommendation_identifier: String,
+        ?language: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -316,6 +327,7 @@ module Aws::TrustedAdvisor
       attr_accessor exclusion_status: String?
       attr_accessor region_code: String?
       attr_accessor recommendation_identifier: String?
+      attr_accessor language: String?
     end
 
     class ListRecommendationResourcesResponse
@@ -329,6 +341,42 @@ module Aws::TrustedAdvisor
 
       attr_accessor next_token: String?
       attr_accessor recommendation_resource_summaries: Array[Types::RecommendationResourceSummary]?
+    end
+
+    class ListRecommendationsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?aws_resource_arn: String,
+        ?pillar: String,
+        ?status: String,
+        ?check_arn: String,
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor aws_resource_arn: String?
+      attr_accessor pillar: String?
+      attr_accessor status: String?
+      attr_accessor check_arn: String?
+      attr_accessor language: String?
+    end
+
+    class ListRecommendationsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommendation_for_resource_summaries: Array[Types::RecommendationForResourceSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommendation_for_resource_summaries: Array[Types::RecommendationForResourceSummary]?
     end
 
     class ListRecommendationsRequest
@@ -345,6 +393,7 @@ module Aws::TrustedAdvisor
         ?check_identifier: String,
         ?after_last_updated_at: Time,
         ?before_last_updated_at: Time,
+        ?language: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -358,6 +407,7 @@ module Aws::TrustedAdvisor
       attr_accessor check_identifier: String?
       attr_accessor after_last_updated_at: Time?
       attr_accessor before_last_updated_at: Time?
+      attr_accessor language: String?
     end
 
     class ListRecommendationsResponse
@@ -508,6 +558,7 @@ module Aws::TrustedAdvisor
         ?created_at: Time,
         ?last_updated_at: Time,
         ?arn: String,
+        ?status_reason: String,
         ?description: String,
         ?created_by: String,
         ?updated_on_behalf_of: String,
@@ -532,6 +583,7 @@ module Aws::TrustedAdvisor
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
       attr_accessor arn: String?
+      attr_accessor status_reason: String?
       attr_accessor description: String?
       attr_accessor created_by: String?
       attr_accessor updated_on_behalf_of: String?
@@ -552,6 +604,31 @@ module Aws::TrustedAdvisor
 
       attr_accessor estimated_monthly_savings: Float?
       attr_accessor estimated_percent_monthly_savings: Float?
+    end
+
+    class RecommendationForResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_arn: String,
+        ?recommendation_arn: String,
+        ?aws_resource_arn: String,
+        ?status: String,
+        ?last_updated_at: Time,
+        ?exclusion_status: String,
+        ?metadata: Hash[String, String],
+        ?pillars: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_arn: String?
+      attr_accessor recommendation_arn: String?
+      attr_accessor aws_resource_arn: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor exclusion_status: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor pillars: Array[String]?
     end
 
     module RecommendationLanguage
@@ -642,12 +719,14 @@ module Aws::TrustedAdvisor
         ?ok_count: Integer,
         ?warning_count: Integer,
         ?error_count: Integer,
+        ?excluded_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ok_count: Integer?
       attr_accessor warning_count: Integer?
       attr_accessor error_count: Integer?
+      attr_accessor excluded_count: Integer?
     end
 
     module RecommendationSource
@@ -664,6 +743,7 @@ module Aws::TrustedAdvisor
       STIR: String
       TA_CHECK: String
       WELL_ARCHITECTED: String
+      COST_OPTIMIZATION_HUB: String
     end
 
     module RecommendationStatus
@@ -690,6 +770,7 @@ module Aws::TrustedAdvisor
         ?created_at: Time,
         ?last_updated_at: Time,
         ?arn: String,
+        ?status_reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -707,6 +788,7 @@ module Aws::TrustedAdvisor
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
       attr_accessor arn: String?
+      attr_accessor status_reason: String?
     end
 
     module RecommendationType
@@ -729,6 +811,10 @@ module Aws::TrustedAdvisor
       OK: String
       WARNING: String
       ERROR: String
+    end
+
+    module StatusReason
+      NO_DATA_OK: String
     end
 
     class ThrottlingException

@@ -27,6 +27,7 @@ module Aws::GameLiftStreams
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
+  # * {StreamSessionAccessNotReadyException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -106,6 +107,24 @@ module Aws::GameLiftStreams
       # <p>Description of the error.</p>
       def message
         @data[:message]
+      end
+    end
+
+    # <p>The terminal connection to the stream session is not yet available. Wait before retrying the request.</p>
+    class StreamSessionAccessNotReadyException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::GameLiftStreams::Types::StreamSessionAccessNotReadyException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>Description of the error.</p>
+      def message
+        @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

@@ -1,0 +1,1538 @@
+module Aws::ComputeOptimizerAutomation
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?status: String,
+        ?organization_rule_mode: String,
+        ?status_reason: String,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor status: String?
+      attr_accessor organization_rule_mode: String?
+      attr_accessor status_reason: String?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class AssociateAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?errors: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor errors: Array[String]?
+    end
+
+    class AutomationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_description: String,
+        ?event_type: String,
+        ?event_status: String,
+        ?event_status_reason: String,
+        ?resource_arn: String,
+        ?resource_id: String,
+        ?recommended_action_id: String,
+        ?account_id: String,
+        ?region: String,
+        ?rule_id: String,
+        ?resource_type: String,
+        ?created_timestamp: Time,
+        ?completed_timestamp: Time,
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_description: String?
+      attr_accessor event_type: String?
+      attr_accessor event_status: String?
+      attr_accessor event_status_reason: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor recommended_action_id: String?
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor rule_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor completed_timestamp: Time?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+    end
+
+    class AutomationEventFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class AutomationEventStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?step_id: String,
+        ?step_type: String,
+        ?step_status: String,
+        ?resource_id: String,
+        ?start_timestamp: Time,
+        ?completed_timestamp: Time,
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor step_id: String?
+      attr_accessor step_type: String?
+      attr_accessor step_status: String?
+      attr_accessor resource_id: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor completed_timestamp: Time?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+    end
+
+    class AutomationEventSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?dimensions: Array[Types::SummaryDimension],
+        ?time_period: Types::TimePeriod,
+        ?total: Types::SummaryTotals,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor dimensions: Array[Types::SummaryDimension]?
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor total: Types::SummaryTotals?
+    end
+
+    class AutomationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+        ?rule_id: String,
+        ?name: String,
+        ?description: String,
+        ?rule_type: String,
+        ?rule_revision: Integer,
+        ?account_id: String,
+        ?organization_configuration: Types::OrganizationConfiguration,
+        ?priority: String,
+        ?recommended_action_types: Array[String],
+        ?schedule: Types::Schedule,
+        ?status: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+      attr_accessor rule_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rule_type: String?
+      attr_accessor rule_revision: Integer?
+      attr_accessor account_id: String?
+      attr_accessor organization_configuration: Types::OrganizationConfiguration?
+      attr_accessor priority: String?
+      attr_accessor recommended_action_types: Array[String]?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    module ComparisonOperator
+      STRING_EQUALS: String
+      STRING_NOT_EQUALS: String
+      STRING_EQUALS_IGNORE_CASE: String
+      STRING_NOT_EQUALS_IGNORE_CASE: String
+      STRING_LIKE: String
+      STRING_NOT_LIKE: String
+      NUMERIC_EQUALS: String
+      NUMERIC_NOT_EQUALS: String
+      NUMERIC_LESS_THAN: String
+      NUMERIC_LESS_THAN_EQUALS: String
+      NUMERIC_GREATER_THAN: String
+      NUMERIC_GREATER_THAN_EQUALS: String
+      STRING_EQUALS_IF_EXISTS: String
+      STRING_NOT_EQUALS_IF_EXISTS: String
+      STRING_EQUALS_IGNORE_CASE_IF_EXISTS: String
+      STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS: String
+      STRING_LIKE_IF_EXISTS: String
+      STRING_NOT_LIKE_IF_EXISTS: String
+      NUMERIC_EQUALS_IF_EXISTS: String
+      NUMERIC_NOT_EQUALS_IF_EXISTS: String
+      NUMERIC_LESS_THAN_IF_EXISTS: String
+      NUMERIC_LESS_THAN_EQUALS_IF_EXISTS: String
+      NUMERIC_GREATER_THAN_IF_EXISTS: String
+      NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS: String
+    end
+
+    class CreateAutomationRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?rule_type: String,
+        ?organization_configuration: Types::OrganizationConfiguration,
+        ?priority: String,
+        ?recommended_action_types: Array[String],
+        ?criteria: Types::Criteria,
+        ?schedule: Types::Schedule,
+        ?status: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rule_type: String?
+      attr_accessor organization_configuration: Types::OrganizationConfiguration?
+      attr_accessor priority: String?
+      attr_accessor recommended_action_types: Array[String]?
+      attr_accessor criteria: Types::Criteria?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAutomationRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+        ?rule_id: String,
+        ?name: String,
+        ?description: String,
+        ?rule_type: String,
+        ?rule_revision: Integer,
+        ?organization_configuration: Types::OrganizationConfiguration,
+        ?priority: String,
+        ?recommended_action_types: Array[String],
+        ?criteria: Types::Criteria,
+        ?schedule: Types::Schedule,
+        ?status: String,
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+      attr_accessor rule_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rule_type: String?
+      attr_accessor rule_revision: Integer?
+      attr_accessor organization_configuration: Types::OrganizationConfiguration?
+      attr_accessor priority: String?
+      attr_accessor recommended_action_types: Array[String]?
+      attr_accessor criteria: Types::Criteria?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class Criteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: Array[Types::StringCriteriaCondition],
+        ?resource_arn: Array[Types::StringCriteriaCondition],
+        ?ebs_volume_type: Array[Types::StringCriteriaCondition],
+        ?ebs_volume_size_in_gib: Array[Types::IntegerCriteriaCondition],
+        ?estimated_monthly_savings: Array[Types::DoubleCriteriaCondition],
+        ?resource_tag: Array[Types::ResourceTagsCriteriaCondition],
+        ?look_back_period_in_days: Array[Types::IntegerCriteriaCondition],
+        ?restart_needed: Array[Types::StringCriteriaCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: Array[Types::StringCriteriaCondition]?
+      attr_accessor resource_arn: Array[Types::StringCriteriaCondition]?
+      attr_accessor ebs_volume_type: Array[Types::StringCriteriaCondition]?
+      attr_accessor ebs_volume_size_in_gib: Array[Types::IntegerCriteriaCondition]?
+      attr_accessor estimated_monthly_savings: Array[Types::DoubleCriteriaCondition]?
+      attr_accessor resource_tag: Array[Types::ResourceTagsCriteriaCondition]?
+      attr_accessor look_back_period_in_days: Array[Types::IntegerCriteriaCondition]?
+      attr_accessor restart_needed: Array[Types::StringCriteriaCondition]?
+    end
+
+    class DeleteAutomationRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+        ?rule_revision: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+      attr_accessor rule_revision: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAutomationRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?errors: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor errors: Array[String]?
+    end
+
+    class DoubleCriteriaCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison: String,
+        ?values: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison: String?
+      attr_accessor values: Array[Float]?
+    end
+
+    class EbsVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::EbsVolumeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::EbsVolumeConfiguration?
+    end
+
+    class EbsVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?size_in_gib: Integer,
+        ?iops: Integer,
+        ?throughput: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor size_in_gib: Integer?
+      attr_accessor iops: Integer?
+      attr_accessor throughput: Integer?
+    end
+
+    module EnrollmentStatus
+      ACTIVE: String
+      INACTIVE: String
+      PENDING: String
+      FAILED: String
+    end
+
+    class EstimatedMonthlySavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency: String,
+        ?before_discount_savings: Float,
+        ?after_discount_savings: Float,
+        ?savings_estimation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency: String?
+      attr_accessor before_discount_savings: Float?
+      attr_accessor after_discount_savings: Float?
+      attr_accessor savings_estimation_mode: String?
+    end
+
+    module EventStatus
+      READY: String
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+      CANCELLED: String
+      ROLLBACK_READY: String
+      ROLLBACK_IN_PROGRESS: String
+      ROLLBACK_COMPLETE: String
+      ROLLBACK_FAILED: String
+    end
+
+    module EventType
+      SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME: String
+      UPGRADE_EBS_VOLUME_TYPE: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetAutomationEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+    end
+
+    class GetAutomationEventResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_description: String,
+        ?event_type: String,
+        ?event_status: String,
+        ?event_status_reason: String,
+        ?resource_arn: String,
+        ?resource_id: String,
+        ?recommended_action_id: String,
+        ?account_id: String,
+        ?region: String,
+        ?rule_id: String,
+        ?resource_type: String,
+        ?created_timestamp: Time,
+        ?completed_timestamp: Time,
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_description: String?
+      attr_accessor event_type: String?
+      attr_accessor event_status: String?
+      attr_accessor event_status_reason: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor recommended_action_id: String?
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor rule_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor completed_timestamp: Time?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+    end
+
+    class GetAutomationRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+    end
+
+    class GetAutomationRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+        ?rule_id: String,
+        ?name: String,
+        ?description: String,
+        ?rule_type: String,
+        ?rule_revision: Integer,
+        ?account_id: String,
+        ?organization_configuration: Types::OrganizationConfiguration,
+        ?priority: String,
+        ?recommended_action_types: Array[String],
+        ?criteria: Types::Criteria,
+        ?schedule: Types::Schedule,
+        ?status: String,
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+      attr_accessor rule_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rule_type: String?
+      attr_accessor rule_revision: Integer?
+      attr_accessor account_id: String?
+      attr_accessor organization_configuration: Types::OrganizationConfiguration?
+      attr_accessor priority: String?
+      attr_accessor recommended_action_types: Array[String]?
+      attr_accessor criteria: Types::Criteria?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class GetEnrollmentConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetEnrollmentConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+        ?organization_rule_mode: String,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor organization_rule_mode: String?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class IdempotencyTokenInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IdempotentParameterMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IntegerCriteriaCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison: String,
+        ?values: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison: String?
+      attr_accessor values: Array[Integer]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[Types::AccountInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[Types::AccountInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationEventStepsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationEventStepsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automation_event_steps: Array[Types::AutomationEventStep],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automation_event_steps: Array[Types::AutomationEventStep]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationEventSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::AutomationEventFilter],
+        ?start_date_inclusive: String,
+        ?end_date_exclusive: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::AutomationEventFilter]?
+      attr_accessor start_date_inclusive: String?
+      attr_accessor end_date_exclusive: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationEventSummariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automation_event_summaries: Array[Types::AutomationEventSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automation_event_summaries: Array[Types::AutomationEventSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::AutomationEventFilter],
+        ?start_time_inclusive: Time,
+        ?end_time_exclusive: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::AutomationEventFilter]?
+      attr_accessor start_time_inclusive: Time?
+      attr_accessor end_time_exclusive: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automation_events: Array[Types::AutomationEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automation_events: Array[Types::AutomationEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationRulePreviewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_type: String,
+        ?organization_scope: Types::OrganizationScope,
+        ?recommended_action_types: Array[String],
+        ?criteria: Types::Criteria,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_type: String?
+      attr_accessor organization_scope: Types::OrganizationScope?
+      attr_accessor recommended_action_types: Array[String]?
+      attr_accessor criteria: Types::Criteria?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationRulePreviewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preview_results: Array[Types::PreviewResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preview_results: Array[Types::PreviewResult]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationRulePreviewSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_type: String,
+        ?organization_scope: Types::OrganizationScope,
+        ?recommended_action_types: Array[String],
+        ?criteria: Types::Criteria,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_type: String?
+      attr_accessor organization_scope: Types::OrganizationScope?
+      attr_accessor recommended_action_types: Array[String]?
+      attr_accessor criteria: Types::Criteria?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationRulePreviewSummariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preview_result_summaries: Array[Types::PreviewResultSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preview_result_summaries: Array[Types::PreviewResultSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAutomationRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automation_rules: Array[Types::AutomationRule],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automation_rules: Array[Types::AutomationRule]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendedActionSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::RecommendedActionFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::RecommendedActionFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendedActionSummariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_action_summaries: Array[Types::RecommendedActionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_action_summaries: Array[Types::RecommendedActionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendedActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::RecommendedActionFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::RecommendedActionFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendedActionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_actions: Array[Types::RecommendedAction],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_actions: Array[Types::RecommendedAction]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class NotManagementAccountException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OptInRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OrganizationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_apply_order: String,
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_apply_order: String?
+      attr_accessor account_ids: Array[String]?
+    end
+
+    module OrganizationRuleMode
+      ANY_ALLOWED: String
+      NONE_ALLOWED: String
+    end
+
+    class OrganizationScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+    end
+
+    class PreviewResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_action_id: String,
+        ?resource_arn: String,
+        ?resource_id: String,
+        ?account_id: String,
+        ?region: String,
+        ?resource_type: String,
+        ?look_back_period_in_days: Integer,
+        ?recommended_action_type: String,
+        ?current_resource_summary: String,
+        ?current_resource_details: Types::ResourceDetails,
+        ?recommended_resource_summary: String,
+        ?recommended_resource_details: Types::ResourceDetails,
+        ?restart_needed: bool,
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+        ?resource_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_action_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor resource_type: String?
+      attr_accessor look_back_period_in_days: Integer?
+      attr_accessor recommended_action_type: String?
+      attr_accessor current_resource_summary: String?
+      attr_accessor current_resource_details: Types::ResourceDetails?
+      attr_accessor recommended_resource_summary: String?
+      attr_accessor recommended_resource_details: Types::ResourceDetails?
+      attr_accessor restart_needed: bool?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+      attr_accessor resource_tags: Array[Types::Tag]?
+    end
+
+    class PreviewResultSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?total: Types::RulePreviewTotal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor total: Types::RulePreviewTotal?
+    end
+
+    class RecommendedAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_action_id: String,
+        ?resource_arn: String,
+        ?resource_id: String,
+        ?account_id: String,
+        ?region: String,
+        ?resource_type: String,
+        ?look_back_period_in_days: Integer,
+        ?recommended_action_type: String,
+        ?current_resource_summary: String,
+        ?current_resource_details: Types::ResourceDetails,
+        ?recommended_resource_summary: String,
+        ?recommended_resource_details: Types::ResourceDetails,
+        ?restart_needed: bool,
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+        ?resource_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_action_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_id: String?
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor resource_type: String?
+      attr_accessor look_back_period_in_days: Integer?
+      attr_accessor recommended_action_type: String?
+      attr_accessor current_resource_summary: String?
+      attr_accessor current_resource_details: Types::ResourceDetails?
+      attr_accessor recommended_resource_summary: String?
+      attr_accessor recommended_resource_details: Types::ResourceDetails?
+      attr_accessor restart_needed: bool?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+      attr_accessor resource_tags: Array[Types::Tag]?
+    end
+
+    class RecommendedActionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class RecommendedActionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?total: Types::RecommendedActionTotal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor total: Types::RecommendedActionTotal?
+    end
+
+    class RecommendedActionTotal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_action_count: Integer,
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_action_count: Integer?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+    end
+
+    module RecommendedActionType
+      SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME: String
+      UPGRADE_EBS_VOLUME_TYPE: String
+    end
+
+    class ResourceDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ebs_volume: Types::EbsVolume,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ebs_volume: Types::EbsVolume?
+
+      class EbsVolume < ResourceDetails
+      end
+      class Unknown < ResourceDetails
+      end
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceTagsCriteriaCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison: String,
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison: String?
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module ResourceType
+      EBS_VOLUME: String
+    end
+
+    class RollbackAutomationEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class RollbackAutomationEventResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?event_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor event_status: String?
+    end
+
+    module RuleApplyOrder
+      BEFORE_ACCOUNT_RULES: String
+      AFTER_ACCOUNT_RULES: String
+    end
+
+    class RulePreviewTotal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_action_count: Integer,
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_action_count: Integer?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+    end
+
+    module RuleStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    module RuleType
+      ORGANIZATIONAL_RULE: String
+      ACCOUNT_RULE: String
+    end
+
+    module SavingsEstimationMode
+      BEFORE_DISCOUNT: String
+      AFTER_DISCOUNT: String
+    end
+
+    class Schedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_expression: String,
+        ?schedule_expression_timezone: String,
+        ?execution_window_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_expression: String?
+      attr_accessor schedule_expression_timezone: String?
+      attr_accessor execution_window_in_minutes: Integer?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartAutomationEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_action_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_action_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartAutomationEventResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_action_id: String,
+        ?event_id: String,
+        ?event_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_action_id: String?
+      attr_accessor event_id: String?
+      attr_accessor event_status: String?
+    end
+
+    module StepStatus
+      READY: String
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+    end
+
+    module StepType
+      CREATE_EBS_SNAPSHOT: String
+      DELETE_EBS_VOLUME: String
+      MODIFY_EBS_VOLUME: String
+      CREATE_EBS_VOLUME: String
+    end
+
+    class StringCriteriaCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class SummaryDimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class SummaryTotals
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automation_event_count: Integer,
+        ?estimated_monthly_savings: Types::EstimatedMonthlySavings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automation_event_count: Integer?
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?rule_revision: Integer,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor rule_revision: Integer?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimePeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time_inclusive: Time,
+        ?end_time_exclusive: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time_inclusive: Time?
+      attr_accessor end_time_exclusive: Time?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?rule_revision: Integer,
+        ?tag_keys: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor rule_revision: Integer?
+      attr_accessor tag_keys: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAutomationRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+        ?rule_revision: Integer,
+        ?name: String,
+        ?description: String,
+        ?rule_type: String,
+        ?organization_configuration: Types::OrganizationConfiguration,
+        ?priority: String,
+        ?recommended_action_types: Array[String],
+        ?criteria: Types::Criteria,
+        ?schedule: Types::Schedule,
+        ?status: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+      attr_accessor rule_revision: Integer?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rule_type: String?
+      attr_accessor organization_configuration: Types::OrganizationConfiguration?
+      attr_accessor priority: String?
+      attr_accessor recommended_action_types: Array[String]?
+      attr_accessor criteria: Types::Criteria?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor status: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateAutomationRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+        ?rule_revision: Integer,
+        ?name: String,
+        ?description: String,
+        ?rule_type: String,
+        ?organization_configuration: Types::OrganizationConfiguration,
+        ?priority: String,
+        ?recommended_action_types: Array[String],
+        ?criteria: Types::Criteria,
+        ?schedule: Types::Schedule,
+        ?status: String,
+        ?created_timestamp: Time,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+      attr_accessor rule_revision: Integer?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rule_type: String?
+      attr_accessor organization_configuration: Types::OrganizationConfiguration?
+      attr_accessor priority: String?
+      attr_accessor recommended_action_types: Array[String]?
+      attr_accessor criteria: Types::Criteria?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class UpdateEnrollmentConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateEnrollmentConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_reason: String,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor last_updated_timestamp: Time?
+    end
+  end
+end

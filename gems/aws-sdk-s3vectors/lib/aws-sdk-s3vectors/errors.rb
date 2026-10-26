@@ -30,6 +30,7 @@ module Aws::S3Vectors
   # * {KmsInvalidStateException}
   # * {KmsNotFoundException}
   # * {NotFoundException}
+  # * {RequestTimeoutException}
   # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
   # * {TooManyRequestsException}
@@ -145,6 +146,23 @@ module Aws::S3Vectors
 
       def message
         @data[:message]
+      end
+    end
+
+    # <p>The request timed out. Retry your request.</p>
+    class RequestTimeoutException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::S3Vectors::Types::RequestTimeoutException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

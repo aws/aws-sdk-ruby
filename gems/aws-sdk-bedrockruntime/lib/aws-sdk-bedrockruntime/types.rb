@@ -17,9 +17,37 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The model must request at least one tool (no text is generated). For example, <code>{"any" : {}}</code>.</p>
+    # <p>The model must request at least one tool (no text is generated). For example, <code>{"any" : {}}</code>. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
     class AnyToolChoice < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about the specific guardrail that was applied during this assessment, including its identifier, version, ARN, origin, and ownership information.</p>
+    # @!attribute guardrail_id
+    #   <p>The unique ID of the guardrail that was applied.</p>
+    #   @return [String]
+    # @!attribute guardrail_version
+    #   <p>The version of the guardrail that was applied.</p>
+    #   @return [String]
+    # @!attribute guardrail_arn
+    #   <p>The ARN of the guardrail that was applied.</p>
+    #   @return [String]
+    # @!attribute guardrail_origin
+    #   <p>The origin of how the guardrail was applied. This can be either requested at the API level or enforced at the account or organization level as a default guardrail.</p>
+    #   @return [Array<String>]
+    # @!attribute guardrail_ownership
+    #   <p>The ownership type of the guardrail, indicating whether it is owned by the requesting account or is a cross-account guardrail shared from another AWS account.</p>
+    #   @return [String]
+    class AppliedGuardrailDetails < Struct.new(
+      nil,
+      :guardrail_id,
+      :guardrail_version,
+      :guardrail_arn,
+      :guardrail_origin,
+      :guardrail_ownership,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -162,7 +190,48 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Model automatically decides if a tool should be called or whether to generate text instead. For example, <code>{"auto" : {}}</code>.</p>
+    # <p>An audio content block that contains audio data in various supported formats.</p>
+    # @!attribute format
+    #   <p>The format of the audio data, such as MP3, WAV, FLAC, or other supported audio formats.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source of the audio data, which can be provided as raw bytes or an S3 location.</p>
+    #   @return [Types::AudioSource]
+    # @!attribute error
+    #   <p>Error information if the audio block could not be processed or contains invalid data.</p>
+    #   @return [Types::ErrorBlock]
+    class AudioBlock < Struct.new(
+      nil,
+      :format,
+      :source,
+      :error,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The source of audio data, which can be provided either as raw bytes or a reference to an S3 location.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute bytes
+    #   <p>Audio data encoded in base64.</p>
+    #   @return [String]
+    # @!attribute s3_location
+    #   <p>A reference to audio data stored in an Amazon S3 bucket. To see which models support S3 uploads, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html">Supported models and features for Converse</a>.</p>
+    #   @return [Types::S3Location]
+    class AudioSource < Struct.new(
+      :bytes,
+      :s3_location,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Bytes < AudioSource; end
+      class S3Location < AudioSource; end
+      class Unknown < AudioSource; end
+    end
+
+    # <p>The Model automatically decides if a tool should be called or whether to generate text instead. For example, <code>{"auto" : {}}</code>. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide</p>
     class AutoToolChoice < Struct.new(
       nil,
       keyword_init: true
@@ -196,13 +265,33 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Cache creation metrics for a specific TTL duration</p>
+    # @!attribute ttl
+    #   <p>TTL duration for these cached tokens</p>
+    #   @return [String]
+    # @!attribute input_tokens
+    #   <p>Number of tokens written to cache with this TTL (cache creation tokens)</p>
+    #   @return [Integer]
+    class CacheDetail < Struct.new(
+      nil,
+      :ttl,
+      :input_tokens,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines a section of content to be cached for reuse in subsequent API calls.</p>
     # @!attribute type
     #   <p>Specifies the type of cache point within the CachePointBlock.</p>
     #   @return [String]
+    # @!attribute ttl
+    #   <p>Optional TTL duration for cache entries. When specified, enables extended TTL caching with the specified duration. When omitted, uses <code>type</code> value for caching behavior.</p>
+    #   @return [String]
     class CachePointBlock < Struct.new(
       nil,
       :type,
+      :ttl,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -211,6 +300,9 @@ module Aws::BedrockRuntime
     # <p>Contains information about a citation that references a specific source document. Citations provide traceability between the model's generated response and the source documents that informed that response.</p>
     # @!attribute title
     #   <p>The title or identifier of the source document being cited.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source from the original search result that provided the cited content.</p>
     #   @return [String]
     # @!attribute source_content
     #   <p>The specific content from the source document that was referenced or cited in the generated response.</p>
@@ -221,6 +313,7 @@ module Aws::BedrockRuntime
     class Citation < Struct.new(
       nil,
       :title,
+      :source,
       :source_content,
       :location,
       keyword_init: true
@@ -244,6 +337,9 @@ module Aws::BedrockRuntime
     end
 
     # <p>Specifies the precise location within a source document where cited content can be found. This can include character-level positions, page numbers, or document chunks depending on the document type and indexing method.</p>
+    # @!attribute web
+    #   <p>The web URL that was cited for this reference.</p>
+    #   @return [Types::WebLocation]
     # @!attribute document_char
     #   <p>The character-level location within the document where the cited content is found.</p>
     #   @return [Types::DocumentCharLocation]
@@ -253,18 +349,25 @@ module Aws::BedrockRuntime
     # @!attribute document_chunk
     #   <p>The chunk-level location within the document where the cited content is found, typically used for documents that have been segmented into logical chunks.</p>
     #   @return [Types::DocumentChunkLocation]
+    # @!attribute search_result_location
+    #   <p>The search result location where the cited content is found, including the search result index and block positions within the content array.</p>
+    #   @return [Types::SearchResultLocation]
     class CitationLocation < Struct.new(
+      :web,
       :document_char,
       :document_page,
       :document_chunk,
+      :search_result_location,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
+      class Web < CitationLocation; end
       class DocumentChar < CitationLocation; end
       class DocumentPage < CitationLocation; end
       class DocumentChunk < CitationLocation; end
+      class SearchResultLocation < CitationLocation; end
       class Unknown < CitationLocation; end
     end
 
@@ -297,7 +400,7 @@ module Aws::BedrockRuntime
 
     # <p>Configuration settings for enabling and controlling document citations in Converse API responses. When enabled, the model can include citation information that links generated content back to specific source documents.</p>
     # @!attribute enabled
-    #   <p>Specifies whether document citations should be included in the model's response. When set to true, the model can generate citations that reference the source documents used to inform the response.</p>
+    #   <p>Specifies whether citations from the selected document should be used in the model's response. When set to true, the model can generate citations that reference the source documents used to inform the response.</p>
     #   @return [Boolean]
     class CitationsConfig < Struct.new(
       nil,
@@ -327,6 +430,9 @@ module Aws::BedrockRuntime
     # @!attribute title
     #   <p>The title or identifier of the source document being cited.</p>
     #   @return [String]
+    # @!attribute source
+    #   <p>The source from the original search result that provided the cited content.</p>
+    #   @return [String]
     # @!attribute source_content
     #   <p>The specific content from the source document that was referenced or cited in the generated response.</p>
     #   @return [Array<Types::CitationSourceContentDelta>]
@@ -336,6 +442,7 @@ module Aws::BedrockRuntime
     class CitationsDelta < Struct.new(
       nil,
       :title,
+      :source,
       :source_content,
       :location,
       keyword_init: true
@@ -367,6 +474,9 @@ module Aws::BedrockRuntime
     # @!attribute video
     #   <p>Video to include in the message. </p>
     #   @return [Types::VideoBlock]
+    # @!attribute audio
+    #   <p>An audio content block containing audio data in the conversation.</p>
+    #   @return [Types::AudioBlock]
     # @!attribute tool_use
     #   <p>Information about a tool use request from a model.</p>
     #   @return [Types::ToolUseBlock]
@@ -374,7 +484,7 @@ module Aws::BedrockRuntime
     #   <p>The result for a tool request that a model makes.</p>
     #   @return [Types::ToolResultBlock]
     # @!attribute guard_content
-    #   <p>Contains the content to assess with the guardrail. If you don't specify <code>guardContent</code> in a call to the Converse API, the guardrail (if passed in the Converse API) assesses the entire message.</p> <p>For more information, see <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>. </p>
+    #   <p>Contains the content to assess with the guardrail. If you don't specify <code>guardContent</code> in a call to the Converse API, the guardrail (if passed in the Converse API) assesses the entire message.</p> <p>For more information, see <i>Use a guardrail with the Converse API</i> in the <i>Amazon Bedrock User Guide</i>.</p>
     #   @return [Types::GuardrailConverseContentBlock]
     # @!attribute cache_point
     #   <p>CachePoint to include in the message.</p>
@@ -385,17 +495,30 @@ module Aws::BedrockRuntime
     # @!attribute citations_content
     #   <p>A content block that contains both generated text and associated citation information, providing traceability between the response and source documents.</p>
     #   @return [Types::CitationsContentBlock]
+    # @!attribute search_result
+    #   <p>Search result to include in the message.</p>
+    #   @return [Types::SearchResultBlock]
+    # @!attribute tool_addition
+    #   <p>A content block for adding a tool to the available tool set mid-conversation. Each block references a single tool via its <code>tool</code> field. Use within a <code>system</code> role message to make a tool available without re-sending the full tool configuration.</p>
+    #   @return [Types::ToolAdditionBlock]
+    # @!attribute tool_removal
+    #   <p>A content block for removing a tool from the available tool set mid-conversation. Each block references a single tool via its <code>tool</code> field. Use within a <code>system</code> role message to remove a tool without re-sending the full tool configuration.</p>
+    #   @return [Types::ToolRemovalBlock]
     class ContentBlock < Struct.new(
       :text,
       :image,
       :document,
       :video,
+      :audio,
       :tool_use,
       :tool_result,
       :guard_content,
       :cache_point,
       :reasoning_content,
       :citations_content,
+      :search_result,
+      :tool_addition,
+      :tool_removal,
       :unknown,
       keyword_init: true
     )
@@ -405,12 +528,16 @@ module Aws::BedrockRuntime
       class Image < ContentBlock; end
       class Document < ContentBlock; end
       class Video < ContentBlock; end
+      class Audio < ContentBlock; end
       class ToolUse < ContentBlock; end
       class ToolResult < ContentBlock; end
       class GuardContent < ContentBlock; end
       class CachePoint < ContentBlock; end
       class ReasoningContent < ContentBlock; end
       class CitationsContent < ContentBlock; end
+      class SearchResult < ContentBlock; end
+      class ToolAddition < ContentBlock; end
+      class ToolRemoval < ContentBlock; end
       class Unknown < ContentBlock; end
     end
 
@@ -421,17 +548,25 @@ module Aws::BedrockRuntime
     # @!attribute tool_use
     #   <p>Information about a tool that the model is requesting to use.</p>
     #   @return [Types::ToolUseBlockDelta]
+    # @!attribute tool_result
+    #   <p>An incremental update that contains the results from a tool call.</p>
+    #   @return [Array<Types::ToolResultBlockDelta>]
     # @!attribute reasoning_content
     #   <p>Contains content regarding the reasoning that is carried out by the model. Reasoning refers to a Chain of Thought (CoT) that the model generates to enhance the accuracy of its final response.</p>
     #   @return [Types::ReasoningContentBlockDelta]
     # @!attribute citation
     #   <p>Incremental citation information that is streamed as part of the response generation process.</p>
     #   @return [Types::CitationsDelta]
+    # @!attribute image
+    #   <p>A streaming delta event containing incremental image data.</p>
+    #   @return [Types::ImageBlockDelta]
     class ContentBlockDelta < Struct.new(
       :text,
       :tool_use,
+      :tool_result,
       :reasoning_content,
       :citation,
+      :image,
       :unknown,
       keyword_init: true
     )
@@ -439,8 +574,10 @@ module Aws::BedrockRuntime
 
       class Text < ContentBlockDelta; end
       class ToolUse < ContentBlockDelta; end
+      class ToolResult < ContentBlockDelta; end
       class ReasoningContent < ContentBlockDelta; end
       class Citation < ContentBlockDelta; end
+      class Image < ContentBlockDelta; end
       class Unknown < ContentBlockDelta; end
     end
 
@@ -464,14 +601,24 @@ module Aws::BedrockRuntime
     # @!attribute tool_use
     #   <p>Information about a tool that the model is requesting to use.</p>
     #   @return [Types::ToolUseBlockStart]
+    # @!attribute tool_result
+    #   <p>The </p>
+    #   @return [Types::ToolResultBlockStart]
+    # @!attribute image
+    #   <p>The initial event indicating the start of a streaming image block.</p>
+    #   @return [Types::ImageBlockStart]
     class ContentBlockStart < Struct.new(
       :tool_use,
+      :tool_result,
+      :image,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class ToolUse < ContentBlockStart; end
+      class ToolResult < ContentBlockStart; end
+      class Image < ContentBlockStart; end
       class Unknown < ContentBlockStart; end
     end
 
@@ -563,6 +710,12 @@ module Aws::BedrockRuntime
     # @!attribute performance_config
     #   <p>Model performance settings for the request.</p>
     #   @return [Types::PerformanceConfiguration]
+    # @!attribute service_tier
+    #   <p>Specifies the processing tier configuration used for serving the request.</p>
+    #   @return [Types::ServiceTier]
+    # @!attribute output_config
+    #   <p>Output configuration for a model response.</p>
+    #   @return [Types::OutputConfig]
     class ConverseRequest < Struct.new(
       nil,
       :model_id,
@@ -576,6 +729,8 @@ module Aws::BedrockRuntime
       :additional_model_response_field_paths,
       :request_metadata,
       :performance_config,
+      :service_tier,
+      :output_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -602,6 +757,9 @@ module Aws::BedrockRuntime
     # @!attribute performance_config
     #   <p>Model performance settings for the request.</p>
     #   @return [Types::PerformanceConfiguration]
+    # @!attribute service_tier
+    #   <p>Specifies the processing tier configuration used for serving the request.</p>
+    #   @return [Types::ServiceTier]
     class ConverseResponse < Struct.new(
       nil,
       :output,
@@ -611,6 +769,7 @@ module Aws::BedrockRuntime
       :additional_model_response_fields,
       :trace,
       :performance_config,
+      :service_tier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -629,12 +788,16 @@ module Aws::BedrockRuntime
     # @!attribute performance_config
     #   <p>Model performance configuration metadata for the conversation stream event.</p>
     #   @return [Types::PerformanceConfiguration]
+    # @!attribute service_tier
+    #   <p>Specifies the processing tier configuration used for serving the request.</p>
+    #   @return [Types::ServiceTier]
     class ConverseStreamMetadataEvent < Struct.new(
       nil,
       :usage,
       :metrics,
       :trace,
       :performance_config,
+      :service_tier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -678,10 +841,10 @@ module Aws::BedrockRuntime
     #   <p>A streaming error occurred. Retry your request.</p>
     #   @return [Types::ModelStreamErrorException]
     # @!attribute validation_exception
-    #   <p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error">ValidationError</a> in the Amazon Bedrock User Guide</p>
+    #   <p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error">ValidationError</a> in the Amazon Bedrock User Guide.</p>
     #   @return [Types::ValidationException]
     # @!attribute throttling_exception
-    #   <p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception">ThrottlingException</a> in the Amazon Bedrock User Guide</p>
+    #   <p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception">ThrottlingException</a> in the Amazon Bedrock User Guide.</p>
     #   @return [Types::ThrottlingException]
     # @!attribute service_unavailable_exception
     #   <p>The service isn't currently available. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-service-unavailable">ServiceUnavailable</a> in the Amazon Bedrock User Guide</p>
@@ -750,6 +913,12 @@ module Aws::BedrockRuntime
     # @!attribute performance_config
     #   <p>Model performance settings for the request.</p>
     #   @return [Types::PerformanceConfiguration]
+    # @!attribute service_tier
+    #   <p>Specifies the processing tier configuration used for serving the request.</p>
+    #   @return [Types::ServiceTier]
+    # @!attribute output_config
+    #   <p>Output configuration for a model response.</p>
+    #   @return [Types::OutputConfig]
     class ConverseStreamRequest < Struct.new(
       nil,
       :model_id,
@@ -763,6 +932,8 @@ module Aws::BedrockRuntime
       :additional_model_response_field_paths,
       :request_metadata,
       :performance_config,
+      :service_tier,
+      :output_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -779,7 +950,7 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The trace object in a response from <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html">ConverseStream</a>. Currently, you can only trace guardrails.</p>
+    # <p>The trace object in a response from <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html">ConverseStream</a>.</p>
     # @!attribute guardrail
     #   <p>The guardrail trace object. </p>
     #   @return [Types::GuardrailTraceAssessment]
@@ -802,16 +973,24 @@ module Aws::BedrockRuntime
     # @!attribute system
     #   <p>The system content blocks to count tokens for. System content provides instructions or context to the model about how it should behave or respond. The token count will include any system content provided.</p>
     #   @return [Array<Types::SystemContentBlock>]
+    # @!attribute tool_config
+    #   <p>The toolConfig of Converse input request to count tokens for. Configuration information for the tools that the model can use when generating a response.</p>
+    #   @return [Types::ToolConfiguration]
+    # @!attribute additional_model_request_fields
+    #   <p>The additionalModelRequestFields of Converse input request to count tokens for. Use this field when you want to pass additional parameters that the model supports.</p>
+    #   @return [JSON]
     class ConverseTokensRequest < Struct.new(
       nil,
       :messages,
       :system,
+      :tool_config,
+      :additional_model_request_fields,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The trace object in a response from <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a>. Currently, you can only trace guardrails.</p>
+    # <p>The trace object in a response from <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a>.</p>
     # @!attribute guardrail
     #   <p>The guardrail trace object. </p>
     #   @return [Types::GuardrailTraceAssessment]
@@ -1011,6 +1190,19 @@ module Aws::BedrockRuntime
       class Unknown < DocumentSource; end
     end
 
+    # <p>A block containing error information when content processing fails.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute message
+    #   <p>A human-readable error message describing what went wrong during content processing.</p>
+    #   @return [String]
+    class ErrorBlock < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute invocation_arn
     #   <p>The invocation's ARN.</p>
     #   @return [String]
@@ -1087,6 +1279,9 @@ module Aws::BedrockRuntime
     # @!attribute invocation_metrics
     #   <p>The invocation metrics for the guardrail assessment.</p>
     #   @return [Types::GuardrailInvocationMetrics]
+    # @!attribute applied_guardrail_details
+    #   <p>Details about the specific guardrail that was applied during this assessment, including its identifier, version, ARN, origin, and ownership information.</p>
+    #   @return [Types::AppliedGuardrailDetails]
     class GuardrailAssessment < Struct.new(
       nil,
       :topic_policy,
@@ -1096,6 +1291,7 @@ module Aws::BedrockRuntime
       :contextual_grounding_policy,
       :automated_reasoning_policy,
       :invocation_metrics,
+      :applied_guardrail_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1394,6 +1590,309 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for inline guardrail checks. Specify one or more check types to run against the messages.</p>
+    # @!attribute content_filter
+    #   <p>The content filter check configuration.</p>
+    #   @return [Types::GuardrailChecksContentFilterConfig]
+    # @!attribute prompt_attack
+    #   <p>The prompt attack check configuration.</p>
+    #   @return [Types::GuardrailChecksPromptAttackConfig]
+    # @!attribute sensitive_information
+    #   <p>The sensitive information check configuration.</p>
+    #   @return [Types::GuardrailChecksSensitiveInformationConfig]
+    class GuardrailChecksConfig < Struct.new(
+      nil,
+      :content_filter,
+      :prompt_attack,
+      :sensitive_information,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A content block within a message to evaluate.</p>
+    # @!attribute text
+    #   <p>The text content to evaluate.</p>
+    #   @return [String]
+    class GuardrailChecksContentBlock < Struct.new(
+      :text,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Text < GuardrailChecksContentBlock; end
+      class Unknown < GuardrailChecksContentBlock; end
+    end
+
+    # <p>The configuration for a single content filter category to evaluate.</p>
+    # @!attribute category
+    #   <p>The content filter category to evaluate.</p>
+    #   @return [String]
+    class GuardrailChecksContentFilterCategoryConfig < Struct.new(
+      nil,
+      :category,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for the content filter check, specifying which categories to evaluate.</p>
+    # @!attribute categories
+    #   <p>The content filter categories to evaluate.</p>
+    #   @return [Array<Types::GuardrailChecksContentFilterCategoryConfig>]
+    class GuardrailChecksContentFilterConfig < Struct.new(
+      nil,
+      :categories,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The content filter check results.</p>
+    # @!attribute results
+    #   <p>The per-category content filter results.</p>
+    #   @return [Array<Types::GuardrailChecksContentFilterResultEntry>]
+    class GuardrailChecksContentFilterResult < Struct.new(
+      nil,
+      :results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The evaluation result for a single content filter category.</p>
+    # @!attribute category
+    #   <p>The content filter category that was evaluated.</p>
+    #   @return [String]
+    # @!attribute severity_score
+    #   <p>The severity score for the category, ranging from 0.0 to 1.0. Higher values indicate greater severity.</p>
+    #   @return [Float]
+    class GuardrailChecksContentFilterResultEntry < Struct.new(
+      nil,
+      :category,
+      :severity_score,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The text unit usage for the content filter check.</p>
+    # @!attribute text_units
+    #   <p>The number of text units consumed by the content filter check.</p>
+    #   @return [Integer]
+    class GuardrailChecksContentFilterUsage < Struct.new(
+      nil,
+      :text_units,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A message to evaluate against guardrail checks, containing a role and content blocks.</p>
+    # @!attribute role
+    #   <p>The role of the message sender.</p>
+    #   @return [String]
+    # @!attribute content
+    #   <p>The content blocks for the message.</p>
+    #   @return [Array<Types::GuardrailChecksContentBlock>]
+    class GuardrailChecksMessage < Struct.new(
+      nil,
+      :role,
+      :content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for a single prompt attack category to evaluate.</p>
+    # @!attribute category
+    #   <p>The prompt attack category to evaluate.</p>
+    #   @return [String]
+    class GuardrailChecksPromptAttackCategoryConfig < Struct.new(
+      nil,
+      :category,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for the prompt attack check, specifying which categories to evaluate.</p>
+    # @!attribute categories
+    #   <p>The prompt attack categories to evaluate.</p>
+    #   @return [Array<Types::GuardrailChecksPromptAttackCategoryConfig>]
+    class GuardrailChecksPromptAttackConfig < Struct.new(
+      nil,
+      :categories,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The prompt attack check results.</p>
+    # @!attribute results
+    #   <p>The per-category prompt attack results.</p>
+    #   @return [Array<Types::GuardrailChecksPromptAttackResultEntry>]
+    class GuardrailChecksPromptAttackResult < Struct.new(
+      nil,
+      :results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The evaluation result for a single prompt attack category.</p>
+    # @!attribute category
+    #   <p>The prompt attack category that was evaluated.</p>
+    #   @return [String]
+    # @!attribute severity_score
+    #   <p>The severity score for the category, ranging from 0.0 to 1.0. Higher values indicate greater severity.</p>
+    #   @return [Float]
+    class GuardrailChecksPromptAttackResultEntry < Struct.new(
+      nil,
+      :category,
+      :severity_score,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The text unit usage for the prompt attack check.</p>
+    # @!attribute text_units
+    #   <p>The number of text units consumed by the prompt attack check.</p>
+    #   @return [Integer]
+    class GuardrailChecksPromptAttackUsage < Struct.new(
+      nil,
+      :text_units,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The results from the guardrail checks evaluation, organized by check type.</p>
+    # @!attribute content_filter
+    #   <p>The content filter check results.</p>
+    #   @return [Types::GuardrailChecksContentFilterResult]
+    # @!attribute prompt_attack
+    #   <p>The prompt attack check results.</p>
+    #   @return [Types::GuardrailChecksPromptAttackResult]
+    # @!attribute sensitive_information
+    #   <p>The sensitive information check results.</p>
+    #   @return [Types::GuardrailChecksSensitiveInformationResult]
+    class GuardrailChecksResults < Struct.new(
+      nil,
+      :content_filter,
+      :prompt_attack,
+      :sensitive_information,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for the sensitive information check, specifying which entity types to detect.</p>
+    # @!attribute entities
+    #   <p>The sensitive information entity types to detect.</p>
+    #   @return [Array<Types::GuardrailChecksSensitiveInformationEntityConfig>]
+    class GuardrailChecksSensitiveInformationConfig < Struct.new(
+      nil,
+      :entities,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for a single sensitive information entity type to detect.</p>
+    # @!attribute type
+    #   <p>The PII entity type to detect.</p>
+    #   @return [String]
+    class GuardrailChecksSensitiveInformationEntityConfig < Struct.new(
+      nil,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The sensitive information check results.</p>
+    # @!attribute results
+    #   <p>The detected sensitive information entities.</p>
+    #   @return [Array<Types::GuardrailChecksSensitiveInformationResultEntry>]
+    # @!attribute truncated
+    #   <p>Specifies whether the results were truncated because the number of detected entities exceeded the maximum limit.</p>
+    #   @return [Boolean]
+    class GuardrailChecksSensitiveInformationResult < Struct.new(
+      nil,
+      :results,
+      :truncated,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The detection result for a single sensitive information entity found in the evaluated messages.</p>
+    # @!attribute type
+    #   <p>The PII entity type that was detected.</p>
+    #   @return [String]
+    # @!attribute confidence_score
+    #   <p>The confidence score for the detection, ranging from 0.0 to 1.0. Higher values indicate greater confidence.</p>
+    #   @return [Float]
+    # @!attribute begin_offset
+    #   <p>The start character offset of the detected entity within the content block.</p>
+    #   @return [Integer]
+    # @!attribute end_offset
+    #   <p>The end character offset of the detected entity within the content block.</p>
+    #   @return [Integer]
+    # @!attribute message_index
+    #   <p>The zero-based index of the message in the input messages array where the entity was detected.</p>
+    #   @return [Integer]
+    # @!attribute content_index
+    #   <p>The zero-based index of the content block within the message where the entity was detected.</p>
+    #   @return [Integer]
+    class GuardrailChecksSensitiveInformationResultEntry < Struct.new(
+      nil,
+      :type,
+      :confidence_score,
+      :begin_offset,
+      :end_offset,
+      :message_index,
+      :content_index,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The text unit usage for the sensitive information check.</p>
+    # @!attribute text_units
+    #   <p>The number of text units consumed by the sensitive information check.</p>
+    #   @return [Integer]
+    class GuardrailChecksSensitiveInformationUsage < Struct.new(
+      nil,
+      :text_units,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The text unit usage for the guardrail checks evaluation, organized by check type.</p>
+    # @!attribute content_filter
+    #   <p>The text unit usage for the content filter check.</p>
+    #   @return [Types::GuardrailChecksContentFilterUsage]
+    # @!attribute prompt_attack
+    #   <p>The text unit usage for the prompt attack check.</p>
+    #   @return [Types::GuardrailChecksPromptAttackUsage]
+    # @!attribute sensitive_information
+    #   <p>The text unit usage for the sensitive information check.</p>
+    #   @return [Types::GuardrailChecksSensitiveInformationUsage]
+    class GuardrailChecksUsageResults < Struct.new(
+      nil,
+      :content_filter,
+      :prompt_attack,
+      :sensitive_information,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Configuration information for a guardrail that you use with the <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a> operation.</p>
     # @!attribute guardrail_identifier
     #   <p>The identifier for the guardrail.</p>
@@ -1414,6 +1913,8 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
+        options[:guardrail_identifier] = '' unless options.key?(:guardrail_identifier)
+        options[:guardrail_version] = '' unless options.key?(:guardrail_version)
         options[:trace] = 'disabled' unless options.key?(:trace)
         super
       end
@@ -1572,7 +2073,7 @@ module Aws::BedrockRuntime
       class Unknown < GuardrailConverseImageSource; end
     end
 
-    # <p>A text block that contains text that you want to assess with a guardrail. For more information, see <a>GuardrailConverseContentBlock</a>.</p>
+    # <p>A text block that contains text that you want to assess with a guardrail. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_GuardrailConverseContentBlock.html">GuardrailConverseContentBlock</a>.</p>
     # @!attribute text
     #   <p>The text that you want to guard.</p>
     #   @return [String]
@@ -1781,7 +2282,7 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The assessment for aPersonally Identifiable Information (PII) policy. </p>
+    # <p>The assessment for a Personally Identifiable Information (PII) policy. </p>
     # @!attribute pii_entities
     #   <p>The PII entities in the assessment.</p>
     #   @return [Array<Types::GuardrailPiiEntityFilter>]
@@ -1797,7 +2298,7 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Configuration information for a guardrail that you use with the <a>ConverseStream</a> action. </p>
+    # <p>Configuration information for a guardrail that you use with the <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html">ConverseStream</a> action. </p>
     # @!attribute guardrail_identifier
     #   <p>The identifier for the guardrail.</p>
     #   @return [String]
@@ -1821,6 +2322,8 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
+        options[:guardrail_identifier] = '' unless options.key?(:guardrail_identifier)
+        options[:guardrail_version] = '' unless options.key?(:guardrail_version)
         options[:trace] = 'disabled' unless options.key?(:trace)
         options[:stream_processing_mode] = 'sync' unless options.key?(:stream_processing_mode)
         super
@@ -1895,7 +2398,7 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A Top level guardrail trace object. For more information, see <a>ConverseTrace</a>.</p>
+    # <p>A Top level guardrail trace object. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseTrace.html">ConverseTrace</a>.</p>
     # @!attribute model_output
     #   <p>The output from the model.</p>
     #   @return [Array<String>]
@@ -1986,16 +2489,49 @@ module Aws::BedrockRuntime
     # @!attribute source
     #   <p>The source for the image.</p>
     #   @return [Types::ImageSource]
+    # @!attribute error
+    #   <p>Error information if the image block could not be processed or contains invalid data.</p>
+    #   @return [Types::ErrorBlock]
     class ImageBlock < Struct.new(
       nil,
       :format,
       :source,
+      :error,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A streaming delta event that contains incremental image data during streaming responses.</p>
+    # @!attribute source
+    #   <p>The incremental image source data for this delta event.</p>
+    #   @return [Types::ImageSource]
+    # @!attribute error
+    #   <p>Error information if this image delta could not be processed.</p>
+    #   @return [Types::ErrorBlock]
+    class ImageBlockDelta < Struct.new(
+      nil,
+      :source,
+      :error,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The initial event in a streaming image block that indicates the start of image content.</p>
+    # @!attribute format
+    #   <p>The format of the image data that will be streamed in subsequent delta events.</p>
+    #   @return [String]
+    class ImageBlockStart < Struct.new(
+      nil,
+      :format,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>The source for an image.</p>
+    # @note This shape contains sensitive data and should be treated as such.
     # @!attribute bytes
     #   <p>The raw image bytes for the image. If you use an AWS SDK, you don't need to encode the image bytes in base64.</p>
     #   @return [String]
@@ -2050,6 +2586,36 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute messages
+    #   <p>The messages to evaluate against the specified guardrail checks. Each message includes a role and one or more content blocks.</p>
+    #   @return [Array<Types::GuardrailChecksMessage>]
+    # @!attribute checks
+    #   <p>The inline check configurations that specify which guardrail checks to run against the messages.</p>
+    #   @return [Types::GuardrailChecksConfig]
+    class InvokeGuardrailChecksRequest < Struct.new(
+      nil,
+      :messages,
+      :checks,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute results
+    #   <p>The per-check results containing findings from the guardrail evaluation.</p>
+    #   @return [Types::GuardrailChecksResults]
+    # @!attribute usage
+    #   <p>The per-check text unit consumption for the guardrail evaluation.</p>
+    #   @return [Types::GuardrailChecksUsageResults]
+    class InvokeGuardrailChecksResponse < Struct.new(
+      nil,
+      :results,
+      :usage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute body
     #   <p>The prompt and inference parameters in the format specified in the <code>contentType</code> in the header. You must provide the body in JSON format. To see the format and content of the request and response bodies for different models, refer to <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html">Inference parameters</a>. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html">Run inference</a> in the Bedrock User Guide.</p>
     #   @return [String]
@@ -2074,6 +2640,12 @@ module Aws::BedrockRuntime
     # @!attribute performance_config_latency
     #   <p>Model performance settings for the request.</p>
     #   @return [String]
+    # @!attribute service_tier
+    #   <p>Specifies the processing tier type used for serving the request.</p>
+    #   @return [String]
+    # @!attribute request_metadata
+    #   <p>Key-value pairs that you can use to filter invocation logs.</p>
+    #   @return [String]
     class InvokeModelRequest < Struct.new(
       nil,
       :body,
@@ -2084,6 +2656,8 @@ module Aws::BedrockRuntime
       :guardrail_identifier,
       :guardrail_version,
       :performance_config_latency,
+      :service_tier,
+      :request_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2098,11 +2672,15 @@ module Aws::BedrockRuntime
     # @!attribute performance_config_latency
     #   <p>Model performance settings for the request.</p>
     #   @return [String]
+    # @!attribute service_tier
+    #   <p>Specifies the processing tier type used for serving the request.</p>
+    #   @return [String]
     class InvokeModelResponse < Struct.new(
       nil,
       :body,
       :content_type,
       :performance_config_latency,
+      :service_tier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2230,6 +2808,12 @@ module Aws::BedrockRuntime
     # @!attribute performance_config_latency
     #   <p>Model performance settings for the request.</p>
     #   @return [String]
+    # @!attribute service_tier
+    #   <p>Specifies the processing tier type used for serving the request.</p>
+    #   @return [String]
+    # @!attribute request_metadata
+    #   <p>Key-value pairs that you can use to filter invocation logs.</p>
+    #   @return [String]
     class InvokeModelWithResponseStreamRequest < Struct.new(
       nil,
       :body,
@@ -2240,6 +2824,8 @@ module Aws::BedrockRuntime
       :guardrail_identifier,
       :guardrail_version,
       :performance_config_latency,
+      :service_tier,
+      :request_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2254,11 +2840,35 @@ module Aws::BedrockRuntime
     # @!attribute performance_config_latency
     #   <p>Model performance settings for the request.</p>
     #   @return [String]
+    # @!attribute service_tier
+    #   <p>Specifies the processing tier type used for serving the request.</p>
+    #   @return [String]
     class InvokeModelWithResponseStreamResponse < Struct.new(
       nil,
       :body,
       :content_type,
       :performance_config_latency,
+      :service_tier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> JSON schema structured output format options. </p>
+    # @!attribute schema
+    #   <p> The JSON schema to constrain the model's output. For more information, see <a href="https://json-schema.org/understanding-json-schema/reference">JSON Schema Reference</a>. </p>
+    #   @return [String]
+    # @!attribute name
+    #   <p> The name of the JSON schema. </p>
+    #   @return [String]
+    # @!attribute description
+    #   <p> A description of the JSON schema. </p>
+    #   @return [String]
+    class JsonSchemaDefinition < Struct.new(
+      nil,
+      :schema,
+      :name,
+      :description,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2416,6 +3026,54 @@ module Aws::BedrockRuntime
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Output configuration for a model response in a call to <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a> or <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html">ConverseStream</a>.</p>
+    # @!attribute text_format
+    #   <p>Structured output parameters to control the model's text response. </p>
+    #   @return [Types::OutputFormat]
+    # @!attribute effort
+    #   <p>The effort level for the model to use when generating a response. Higher effort levels allow the model to spend more time reasoning before responding. Supported values are <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code>, and <code>max</code>.</p> <note> <p>When extended thinking is disabled, the effort level is capped at <code>high</code>. Use effort <code>high</code> or below, or enable thinking to use higher effort levels.</p> </note>
+    #   @return [String]
+    class OutputConfig < Struct.new(
+      nil,
+      :text_format,
+      :effort,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Structured output parameters to control the model's response. </p>
+    # @!attribute type
+    #   <p> The type of structured output format. </p>
+    #   @return [String]
+    # @!attribute structure
+    #   <p> The structure that the model's output must adhere to. </p>
+    #   @return [Types::OutputFormatStructure]
+    class OutputFormat < Struct.new(
+      nil,
+      :type,
+      :structure,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> The structure that the model's output must adhere to. </p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute json_schema
+    #   <p> A JSON schema structure that the model's output must adhere to. </p>
+    #   @return [Types::JsonSchemaDefinition]
+    class OutputFormatStructure < Struct.new(
+      :json_schema,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class JsonSchema < OutputFormatStructure; end
+      class Unknown < OutputFormatStructure; end
     end
 
     # <p>Payload content included in the response.</p>
@@ -2611,12 +3269,80 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A search result block that enables natural citations with proper source attribution for retrieved content.</p> <note> <p>This field is only supported by Anthropic Claude Opus 4.1, Opus 4, Sonnet 4.5, Sonnet 4, Sonnet 3.7, and 3.5 Haiku models.</p> </note>
+    # @!attribute source
+    #   <p>The source URL or identifier for the content.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>A descriptive title for the search result.</p>
+    #   @return [String]
+    # @!attribute content
+    #   <p>An array of search result content block.</p>
+    #   @return [Array<Types::SearchResultContentBlock>]
+    # @!attribute citations
+    #   <p>Configuration setting for citations</p>
+    #   @return [Types::CitationsConfig]
+    class SearchResultBlock < Struct.new(
+      nil,
+      :source,
+      :title,
+      :content,
+      :citations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A block within a search result that contains the content.</p>
+    # @!attribute text
+    #   <p>The actual text content</p>
+    #   @return [String]
+    class SearchResultContentBlock < Struct.new(
+      nil,
+      :text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies a search result location within the content array, providing positioning information for cited content using search result index and block positions.</p>
+    # @!attribute search_result_index
+    #   <p>The index of the search result content block where the cited content is found.</p>
+    #   @return [Integer]
+    # @!attribute start
+    #   <p>The starting position in the content array where the cited content begins.</p>
+    #   @return [Integer]
+    # @!attribute end
+    #   <p>The ending position in the content array where the cited content ends.</p>
+    #   @return [Integer]
+    class SearchResultLocation < Struct.new(
+      nil,
+      :search_result_index,
+      :start,
+      :end,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Your request exceeds the service quota for your account. You can view your quotas at <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/gs-request-quota.html">Viewing service quotas</a>. You can resubmit your request later.</p>
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the processing tier configuration used for serving the request.</p>
+    # @!attribute type
+    #   <p>Specifies the processing tier type used for serving the request.</p>
+    #   @return [String]
+    class ServiceTier < Struct.new(
+      nil,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2633,7 +3359,7 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The model must request a specific tool. For example, <code>{"tool" : {"name" : "Your tool name"}}</code>.</p> <note> <p>This field is only supported by Anthropic Claude 3 models.</p> </note>
+    # <p>The model must request a specific tool. For example, <code>{"tool" : {"name" : "Your tool name"}}</code>. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide</p> <note> <p>This field is only supported by Anthropic Claude 3 models.</p> </note>
     # @!attribute name
     #   <p>The name of the tool that the model must request. </p>
     #   @return [String]
@@ -2683,7 +3409,7 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A system content block.</p>
+    # <p>Contains configurations for instructions to provide the model for how to handle input. To learn more, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-call.html">Using the Converse API</a>.</p>
     # @!attribute text
     #   <p>A system prompt for the model. </p>
     #   @return [String]
@@ -2706,6 +3432,18 @@ module Aws::BedrockRuntime
       class GuardContent < SystemContentBlock; end
       class CachePoint < SystemContentBlock; end
       class Unknown < SystemContentBlock; end
+    end
+
+    # <p>Specifies a system-defined tool for the model to use. <i>System-defined tools</i> are tools that are created and provided by the model provider.</p>
+    # @!attribute name
+    #   <p>The name of the system-defined tool that you want to call. </p>
+    #   @return [String]
+    class SystemTool < Struct.new(
+      nil,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag.</p>
@@ -2751,6 +3489,9 @@ module Aws::BedrockRuntime
     # @!attribute cache_write_input_tokens
     #   <p>The number of input tokens written to the cache for the request.</p>
     #   @return [Integer]
+    # @!attribute cache_details
+    #   <p>Detailed breakdown of cache writes by TTL. Empty if no cache creation occurred. Sorted by TTL duration (1h before 5m).</p>
+    #   @return [Array<Types::CacheDetail>]
     class TokenUsage < Struct.new(
       nil,
       :input_tokens,
@@ -2758,20 +3499,25 @@ module Aws::BedrockRuntime
       :total_tokens,
       :cache_read_input_tokens,
       :cache_write_input_tokens,
+      :cache_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about a tool that you can use with the Converse API. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Tool use (function calling)</a> in the Amazon Bedrock User Guide.</p>
+    # <p>Information about a tool that you can use with the Converse API. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
     # @!attribute tool_spec
-    #   <p>The specfication for the tool.</p>
+    #   <p>The specfication for the tool. </p>
     #   @return [Types::ToolSpecification]
+    # @!attribute system_tool
+    #   <p>Specifies the system-defined tool that you want use.</p>
+    #   @return [Types::SystemTool]
     # @!attribute cache_point
     #   <p>CachePoint to include in the tool configuration.</p>
     #   @return [Types::CachePointBlock]
     class Tool < Struct.new(
       :tool_spec,
+      :system_tool,
       :cache_point,
       :unknown,
       keyword_init: true
@@ -2779,11 +3525,24 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Union
 
       class ToolSpec < Tool; end
+      class SystemTool < Tool; end
       class CachePoint < Tool; end
       class Unknown < Tool; end
     end
 
-    # <p>Determines which tools the model should request in a call to <code>Converse</code> or <code>ConverseStream</code>. <code>ToolChoice</code> is only supported by Anthropic Claude 3 models and by Mistral AI Mistral Large.</p>
+    # <p>A content block for adding a tool to the available tool set mid-conversation. Each block references a single tool via its <code>tool</code> field. Use within a <code>system</code> role message to make a tool available without re-sending the full tool configuration.</p>
+    # @!attribute tool
+    #   <p>A reference to the tool to add to the available tool set.</p>
+    #   @return [Types::ToolReference]
+    class ToolAdditionBlock < Struct.new(
+      nil,
+      :tool,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Determines which tools the model should request in a call to <code>Converse</code> or <code>ConverseStream</code>. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
     # @!attribute auto
     #   <p>(Default). The Model automatically decides if a tool should be called or whether to generate text instead. </p>
     #   @return [Types::AutoToolChoice]
@@ -2791,7 +3550,7 @@ module Aws::BedrockRuntime
     #   <p>The model must request at least one tool (no text is generated).</p>
     #   @return [Types::AnyToolChoice]
     # @!attribute tool
-    #   <p>The Model must request the specified tool. Only supported by Anthropic Claude 3 models. </p>
+    #   <p>The Model must request the specified tool. Only supported by Anthropic Claude 3 and Amazon Nova models. </p>
     #   @return [Types::SpecificToolChoice]
     class ToolChoice < Struct.new(
       :auto,
@@ -2810,10 +3569,10 @@ module Aws::BedrockRuntime
 
     # <p>Configuration information for the tools that you pass to a model. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Tool use (function calling)</a> in the Amazon Bedrock User Guide.</p>
     # @!attribute tools
-    #   <p>An array of tools that you want to pass to a model.</p>
+    #   <p>An array of tools that you want to pass to a model. </p>
     #   @return [Array<Types::Tool>]
     # @!attribute tool_choice
-    #   <p>If supported by model, forces the model to request a tool.</p>
+    #   <p>If supported by model, forces the model to request a tool. </p>
     #   @return [Types::ToolChoice]
     class ToolConfiguration < Struct.new(
       nil,
@@ -2824,7 +3583,7 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The schema for the tool. The top level schema type must be <code>object</code>. </p>
+    # <p>The schema for the tool. The top level schema type must be <code>object</code>. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
     # @!attribute json
     #   <p>The JSON schema for the tool. For more information, see <a href="https://json-schema.org/understanding-json-schema/reference">JSON Schema Reference</a>.</p>
     #   @return [JSON]
@@ -2839,35 +3598,111 @@ module Aws::BedrockRuntime
       class Unknown < ToolInputSchema; end
     end
 
-    # <p>A tool result block that contains the results for a tool request that the model previously made.</p>
+    # <p>A reference to a tool in the tool configuration. Used with <code>ToolAdditionBlock</code> and <code>ToolRemovalBlock</code> to identify which tool to add or remove mid-conversation.</p>
+    # @!attribute type
+    #   <p>The type of tool reference.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the tool. Must match the name of a tool declared in the top-level tool configuration.</p>
+    #   @return [String]
+    # @!attribute server_name
+    #   <p>The name of the MCP server that provides the tool. Required when referencing an MCP tool.</p>
+    #   @return [String]
+    class ToolReference < Struct.new(
+      nil,
+      :type,
+      :name,
+      :server_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A content block for removing a tool from the available tool set mid-conversation. Each block references a single tool via its <code>tool</code> field. Use within a <code>system</code> role message to remove a tool without re-sending the full tool configuration.</p>
+    # @!attribute tool
+    #   <p>A reference to the tool to remove from the available tool set.</p>
+    #   @return [Types::ToolReference]
+    class ToolRemovalBlock < Struct.new(
+      nil,
+      :tool,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A tool result block that contains the results for a tool request that the model previously made. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
     # @!attribute tool_use_id
-    #   <p>The ID of the tool request that this is the result for.</p>
+    #   <p>The ID of the tool request that this is the result for. </p>
     #   @return [String]
     # @!attribute content
     #   <p>The content for tool result content block.</p>
     #   @return [Array<Types::ToolResultContentBlock>]
     # @!attribute status
-    #   <p>The status for the tool result content block.</p> <note> <p>This field is only supported Anthropic Claude 3 models.</p> </note>
+    #   <p>The status for the tool result content block.</p> <note> <p>This field is only supported by Amazon Nova and Anthropic Claude 3 and 4 models.</p> </note>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type for the tool result content block.</p>
     #   @return [String]
     class ToolResultBlock < Struct.new(
       nil,
       :tool_use_id,
       :content,
       :status,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The tool result content block.</p>
+    # <p>Contains incremental updates to tool results information during streaming responses. This allows clients to build up tool results data progressively as the response is generated.</p>
+    # @!attribute text
+    #   <p>The reasoning the model used to return the output.</p>
+    #   @return [String]
     # @!attribute json
-    #   <p>A tool result that is JSON format data.</p>
+    #   <p>The JSON schema for the tool result content block. see <a href="https://json-schema.org/understanding-json-schema/reference">JSON Schema Reference</a>.</p>
+    #   @return [JSON]
+    class ToolResultBlockDelta < Struct.new(
+      :text,
+      :json,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Text < ToolResultBlockDelta; end
+      class Json < ToolResultBlockDelta; end
+      class Unknown < ToolResultBlockDelta; end
+    end
+
+    # <p>The start of a tool result block. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
+    # @!attribute tool_use_id
+    #   <p>The ID of the tool that was used to generate this tool result block.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type for the tool that was used to generate this tool result block.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the tool result block.</p>
+    #   @return [String]
+    class ToolResultBlockStart < Struct.new(
+      nil,
+      :tool_use_id,
+      :type,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The tool result content block. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
+    # @!attribute json
+    #   <p>A tool result that is JSON format data. </p>
     #   @return [JSON]
     # @!attribute text
-    #   <p>A tool result that is text.</p>
+    #   <p>A tool result that is text. </p>
     #   @return [String]
     # @!attribute image
-    #   <p>A tool result that is an image.</p> <note> <p>This field is only supported by Anthropic Claude 3 models.</p> </note>
+    #   <p>A tool result that is an image. </p> <note> <p>This field is only supported by Amazon Nova and Anthropic Claude 3 and 4 models.</p> </note>
     #   @return [Types::ImageBlock]
     # @!attribute document
     #   <p>A tool result that is a document.</p>
@@ -2875,12 +3710,16 @@ module Aws::BedrockRuntime
     # @!attribute video
     #   <p>A tool result that is video.</p>
     #   @return [Types::VideoBlock]
+    # @!attribute search_result
+    #   <p>A tool result that is a search result.</p>
+    #   @return [Types::SearchResultBlock]
     class ToolResultContentBlock < Struct.new(
       :json,
       :text,
       :image,
       :document,
       :video,
+      :search_result,
       :unknown,
       keyword_init: true
     )
@@ -2891,10 +3730,11 @@ module Aws::BedrockRuntime
       class Image < ToolResultContentBlock; end
       class Document < ToolResultContentBlock; end
       class Video < ToolResultContentBlock; end
+      class SearchResult < ToolResultContentBlock; end
       class Unknown < ToolResultContentBlock; end
     end
 
-    # <p>The specification for the tool.</p>
+    # <p>The specification for the tool. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
     # @!attribute name
     #   <p>The name for the tool.</p>
     #   @return [String]
@@ -2904,17 +3744,21 @@ module Aws::BedrockRuntime
     # @!attribute input_schema
     #   <p>The input schema for the tool in JSON format.</p>
     #   @return [Types::ToolInputSchema]
+    # @!attribute strict
+    #   <p>Flag to enable structured output enforcement on a tool usage response.</p>
+    #   @return [Boolean]
     class ToolSpecification < Struct.new(
       nil,
       :name,
       :description,
       :input_schema,
+      :strict,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A tool use content block. Contains information about a tool that the model is requesting be run., The model uses the result from the tool to generate a response. </p>
+    # <p>A tool use content block. Contains information about a tool that the model is requesting be run., The model uses the result from the tool to generate a response. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
     # @!attribute tool_use_id
     #   <p>The ID for the tool request.</p>
     #   @return [String]
@@ -2924,11 +3768,15 @@ module Aws::BedrockRuntime
     # @!attribute input
     #   <p>The input to pass to the tool. </p>
     #   @return [JSON]
+    # @!attribute type
+    #   <p>The type for the tool request.</p>
+    #   @return [String]
     class ToolUseBlock < Struct.new(
       nil,
       :tool_use_id,
       :name,
       :input,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2946,17 +3794,21 @@ module Aws::BedrockRuntime
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The start of a tool use block.</p>
+    # <p>The start of a tool use block. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>
     # @!attribute tool_use_id
     #   <p>The ID for the tool request.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the tool that the model is requesting to use.</p>
     #   @return [String]
+    # @!attribute type
+    #   <p>The type for the tool request.</p>
+    #   @return [String]
     class ToolUseBlockStart < Struct.new(
       nil,
       :tool_use_id,
       :name,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3007,6 +3859,22 @@ module Aws::BedrockRuntime
       class Bytes < VideoSource; end
       class S3Location < VideoSource; end
       class Unknown < VideoSource; end
+    end
+
+    # <p>Provides the URL and domain information for the website that was cited when performing a web search.</p>
+    # @!attribute url
+    #   <p>The URL that was cited when performing a web search.</p>
+    #   @return [String]
+    # @!attribute domain
+    #   <p>The domain that was cited when performing a web search.</p>
+    #   @return [String]
+    class WebLocation < Struct.new(
+      nil,
+      :url,
+      :domain,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
   end

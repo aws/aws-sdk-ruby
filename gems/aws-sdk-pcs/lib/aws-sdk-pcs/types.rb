@@ -22,7 +22,7 @@ module Aws::PCS
     #   <p>The default value for all purge settings for <code>slurmdbd.conf</code>. For more information, see the <a href="https://slurm.schedmd.com/slurmdbd.conf.html">slurmdbd.conf documentation at SchedMD</a>.</p> <p>The default value for <code>defaultPurgeTimeInDays</code> is <code>-1</code>.</p> <p>A value of <code>-1</code> means there is no purge time and records persist as long as the cluster exists.</p> <important> <p> <code>0</code> isn't a valid value.</p> </important>
     #   @return [Integer]
     # @!attribute mode
-    #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
+    #   <p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
     #   @return [String]
     class Accounting < Struct.new(
       nil,
@@ -38,12 +38,28 @@ module Aws::PCS
     #   <p>The default value for all purge settings for <code>slurmdbd.conf</code>. For more information, see the <a href="https://slurm.schedmd.com/slurmdbd.conf.html">slurmdbd.conf documentation at SchedMD</a>.</p> <p>The default value for <code>defaultPurgeTimeInDays</code> is <code>-1</code>.</p> <p>A value of <code>-1</code> means there is no purge time and records persist as long as the cluster exists.</p> <important> <p> <code>0</code> isn't a valid value.</p> </important>
     #   @return [Integer]
     # @!attribute mode
-    #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
+    #   <p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
     #   @return [String]
     class AccountingRequest < Struct.new(
       nil,
       :default_purge_time_in_days,
       :mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional settings that directly map to Cgroup settings.</p> <important> <p>PCS supports a subset of Cgroup settings. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/cgroup-custom-settings.html">Configuring custom Cgroup settings in PCS</a> in the <i>PCS User Guide</i>.</p> </important>
+    # @!attribute parameter_name
+    #   <p>PCS supports custom Cgroup settings for clusters. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/cgroup-custom-settings.html">Configuring custom Cgroup settings in PCS</a> in the <i>PCS User Guide</i>.</p>
+    #   @return [String]
+    # @!attribute parameter_value
+    #   <p>The values for the configured Cgroup settings.</p>
+    #   @return [String]
+    class CgroupCustomSetting < Struct.new(
+      nil,
+      :parameter_name,
+      :parameter_value,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -112,18 +128,34 @@ module Aws::PCS
     # @!attribute slurm_custom_settings
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
+    # @!attribute slurmdbd_custom_settings
+    #   <p>Additional SlurmDBD-specific configuration that directly maps to SlurmDBD settings.</p>
+    #   @return [Array<Types::SlurmdbdCustomSetting>]
+    # @!attribute cgroup_custom_settings
+    #   <p>Additional Cgroup-specific configuration that directly maps to Cgroup settings.</p>
+    #   @return [Array<Types::CgroupCustomSetting>]
     # @!attribute auth_key
     #   <p>The shared Slurm key for authentication, also known as the <b>cluster secret</b>.</p>
     #   @return [Types::SlurmAuthKey]
+    # @!attribute jwt_auth
+    #   <p>The JWT authentication configuration for Slurm REST API access.</p>
+    #   @return [Types::JwtAuth]
     # @!attribute accounting
     #   <p>The accounting configuration includes configurable settings for Slurm accounting.</p>
     #   @return [Types::Accounting]
+    # @!attribute slurm_rest
+    #   <p>The Slurm REST API configuration for the cluster.</p>
+    #   @return [Types::SlurmRest]
     class ClusterSlurmConfiguration < Struct.new(
       nil,
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
+      :slurmdbd_custom_settings,
+      :cgroup_custom_settings,
       :auth_key,
+      :jwt_auth,
       :accounting,
+      :slurm_rest,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -136,14 +168,26 @@ module Aws::PCS
     # @!attribute slurm_custom_settings
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
+    # @!attribute slurmdbd_custom_settings
+    #   <p>Additional SlurmDBD-specific configuration that directly maps to SlurmDBD settings.</p>
+    #   @return [Array<Types::SlurmdbdCustomSetting>]
+    # @!attribute cgroup_custom_settings
+    #   <p>Additional Cgroup-specific configuration that directly maps to Cgroup settings.</p>
+    #   @return [Array<Types::CgroupCustomSetting>]
     # @!attribute accounting
     #   <p>The accounting configuration includes configurable settings for Slurm accounting.</p>
     #   @return [Types::AccountingRequest]
+    # @!attribute slurm_rest
+    #   <p>The Slurm REST API configuration for the cluster.</p>
+    #   @return [Types::SlurmRestRequest]
     class ClusterSlurmConfigurationRequest < Struct.new(
       nil,
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
+      :slurmdbd_custom_settings,
+      :cgroup_custom_settings,
       :accounting,
+      :slurm_rest,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -210,7 +254,7 @@ module Aws::PCS
     #   <p>The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.</p>
     #   @return [Array<String>]
     # @!attribute purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, Interruptible Capacity Reservations, On-Demand Capacity Reservations, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. For more information about PCS support for interruptible capacity reservations, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html">Using I-ODCRs with PCS</a> in the <i>PCS User Guide</i>. Choose On-Demand if you plan to use an On-Demand Capacity Reservation (ODCR). For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html">Using ODCRs with PCS</a>. If you don't provide this option, it defaults to On-Demand.</p>
     #   @return [String]
     # @!attribute custom_launch_template
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
@@ -230,6 +274,9 @@ module Aws::PCS
     # @!attribute slurm_configuration
     #   <p>Additional options related to the Slurm scheduler.</p>
     #   @return [Types::ComputeNodeGroupSlurmConfiguration]
+    # @!attribute node_lifecycle_actions
+    #   <p>The lifecycle actions to run on compute nodes in the compute node group. Use lifecycle actions to run custom scripts at defined stages of a compute node's lifecycle, such as when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>
+    #   @return [Types::NodeLifecycleActions]
     # @!attribute error_info
     #   <p>The list of errors that occurred during compute node group provisioning.</p>
     #   @return [Array<Types::ErrorInfo>]
@@ -251,6 +298,7 @@ module Aws::PCS
       :instance_configs,
       :spot_options,
       :slurm_configuration,
+      :node_lifecycle_actions,
       :error_info,
       keyword_init: true
     )
@@ -270,24 +318,40 @@ module Aws::PCS
     end
 
     # <p>Additional options related to the Slurm scheduler.</p>
+    # @!attribute scale_down_idle_time_in_seconds
+    #   <p>The time (in seconds) before an idle node is scaled down. If not specified, the cluster-level setting applies. This overrides the cluster-level <code>scaleDownIdleTimeInSeconds</code> setting. A value of <code>-1</code> removes the override and applies the cluster-level setting to this compute node group. Requires Slurm version 25.11 or later.</p>
+    #   @return [Integer]
     # @!attribute slurm_custom_settings
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
+    # @!attribute gres_custom_settings
+    #   <p>The additional Slurm <code>gres.conf</code> records for the compute node group. Each item is a map of <code>gres.conf</code> attribute names to values that describes one <code>gres.conf</code> record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the <code>NodeName=</code> prefix and merges these records with the GPU record it derives from the instance type.</p>
+    #   @return [Array<Hash<String, String>>]
     class ComputeNodeGroupSlurmConfiguration < Struct.new(
       nil,
+      :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
+      :gres_custom_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options related to the Slurm scheduler.</p>
+    # @!attribute scale_down_idle_time_in_seconds
+    #   <p>The time (in seconds) before an idle node is scaled down. If not specified, the cluster-level setting applies. This overrides the cluster-level <code>scaleDownIdleTimeInSeconds</code> setting. A value of <code>-1</code> removes the override and applies the cluster-level setting to this compute node group. Requires Slurm version 25.11 or later.</p>
+    #   @return [Integer]
     # @!attribute slurm_custom_settings
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
+    # @!attribute gres_custom_settings
+    #   <p>The additional Slurm <code>gres.conf</code> records for the compute node group. Each item is a map of <code>gres.conf</code> attribute names to values that describes one <code>gres.conf</code> record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the <code>NodeName=</code> prefix and merges these records with the GPU record it derives from the instance type.</p>
+    #   @return [Array<Hash<String, String>>]
     class ComputeNodeGroupSlurmConfigurationRequest < Struct.new(
       nil,
+      :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
+      :gres_custom_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -407,7 +471,7 @@ module Aws::PCS
     #   <p>The list of subnet IDs where the compute node group launches instances. Subnets must be in the same VPC as the cluster.</p>
     #   @return [Array<String>]
     # @!attribute purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, Interruptible Capacity Reservations, On-Demand Capacity Reservations, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. For more information about PCS support for interruptible capacity reservations, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html">Using I-ODCRs with PCS</a> in the <i>PCS User Guide</i>. Choose On-Demand if you plan to use an On-Demand Capacity Reservation (ODCR). For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html">Using ODCRs with PCS</a>. If you don't provide this option, it defaults to On-Demand.</p>
     #   @return [String]
     # @!attribute custom_launch_template
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
@@ -427,6 +491,9 @@ module Aws::PCS
     # @!attribute slurm_configuration
     #   <p>Additional options related to the Slurm scheduler.</p>
     #   @return [Types::ComputeNodeGroupSlurmConfigurationRequest]
+    # @!attribute node_lifecycle_actions
+    #   <p>The lifecycle actions to run on compute nodes in the compute node group. Use lifecycle actions to run custom scripts at defined stages of a compute node's lifecycle, such as when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>
+    #   @return [Types::NodeLifecycleActionsRequest]
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     #   @return [String]
@@ -446,6 +513,7 @@ module Aws::PCS
       :instance_configs,
       :spot_options,
       :slurm_configuration,
+      :node_lifecycle_actions,
       :client_token,
       :tags,
       keyword_init: true
@@ -737,6 +805,34 @@ module Aws::PCS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The JWT authentication configuration for Slurm REST API access.</p>
+    # @!attribute jwt_key
+    #   <p>The JWT key for Slurm REST API authentication.</p>
+    #   @return [Types::JwtKey]
+    class JwtAuth < Struct.new(
+      nil,
+      :jwt_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The JWT key stored in Amazon Web Services Secrets Manager for Slurm REST API authentication.</p>
+    # @!attribute secret_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the JWT key.</p>
+    #   @return [String]
+    # @!attribute secret_version
+    #   <p>The version of the Amazon Web Services Secrets Manager secret containing the JWT key.</p>
+    #   @return [String]
+    class JwtKey < Struct.new(
+      nil,
+      :secret_arn,
+      :secret_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute next_token
     #   <p>The value of <code>nextToken</code> is a unique pagination token for each page of results returned. If <code>nextToken</code> is returned, there are more results available. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token returns an <code>HTTP 400 InvalidToken</code> error.</p>
     #   @return [String]
@@ -897,6 +993,98 @@ module Aws::PCS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The lifecycle actions configured on a compute node group. Lifecycle actions define scripts that PCS runs on compute nodes at specific stages of their lifecycle.</p>
+    # @!attribute stages
+    #   <p>The lifecycle stages where you configure scripts to run.</p>
+    #   @return [Types::NodeLifecycleStages]
+    # @!attribute script_caching_policy
+    #   <p>The caching policy for node lifecycle scripts. The default value is <code>CACHE_ONCE</code>. Valid values:</p> <ul> <li> <p> <code>CACHE_ONCE</code> – Downloads each script once and reuses it on subsequent boots.</p> </li> <li> <p> <code>REFRESH_ON_REBOOT</code> – Downloads each script on every boot.</p> </li> </ul>
+    #   @return [String]
+    class NodeLifecycleActions < Struct.new(
+      nil,
+      :stages,
+      :script_caching_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:script_caching_policy] = 'CACHE_ONCE' unless options.key?(:script_caching_policy)
+        super
+      end
+    end
+
+    # <p>The lifecycle actions to configure on a compute node group when you create it. Lifecycle actions define scripts that PCS runs on compute nodes at specific stages of their lifecycle.</p>
+    # @!attribute stages
+    #   <p>The lifecycle stages where you configure scripts to run.</p>
+    #   @return [Types::NodeLifecycleStages]
+    # @!attribute script_caching_policy
+    #   <p>The caching policy for node lifecycle scripts. The default value is <code>CACHE_ONCE</code>. Valid values:</p> <ul> <li> <p> <code>CACHE_ONCE</code> – Downloads each script once and reuses it on subsequent boots.</p> </li> <li> <p> <code>REFRESH_ON_REBOOT</code> – Downloads each script on every boot.</p> </li> </ul>
+    #   @return [String]
+    class NodeLifecycleActionsRequest < Struct.new(
+      nil,
+      :stages,
+      :script_caching_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:script_caching_policy] = 'CACHE_ONCE' unless options.key?(:script_caching_policy)
+        super
+      end
+    end
+
+    # <p>A script to run during a compute node lifecycle stage.</p>
+    # @!attribute name
+    #   <p>A unique name for the script. The name can be up to 64 characters long. Valid characters are letters, numbers, spaces, underscores (<code>_</code>), and hyphens (<code>-</code>). The first character must be a letter or a number.</p>
+    #   @return [String]
+    # @!attribute script_source
+    #   <p>The source location and integrity information for the script.</p>
+    #   @return [Types::ScriptSource]
+    # @!attribute arguments
+    #   <p>The command-line arguments to pass to the script. You can specify up to 20 arguments, and each argument can be up to 256 characters long.</p>
+    #   @return [Array<String>]
+    # @!attribute on_error
+    #   <p>The behavior when the script fails. The default value is <code>TERMINATE</code>. Valid values:</p> <ul> <li> <p> <code>TERMINATE</code> – Terminates the compute node.</p> </li> <li> <p> <code>STOP_SEQUENCE</code> – Stops running subsequent scripts in the sequence but doesn't terminate the compute node.</p> </li> <li> <p> <code>CONTINUE</code> – Ignores the error and continues running the next script.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute execution_policy
+    #   <p>The policy that determines when the script runs. The default value is <code>FIRST_BOOT_ONLY</code>. Valid values:</p> <ul> <li> <p> <code>FIRST_BOOT_ONLY</code> – Runs the script only the first time the compute node boots.</p> </li> <li> <p> <code>EVERY_BOOT</code> – Runs the script every time the compute node boots, including reboots.</p> </li> </ul>
+    #   @return [String]
+    class NodeLifecycleScript < Struct.new(
+      nil,
+      :name,
+      :script_source,
+      :arguments,
+      :on_error,
+      :execution_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:on_error] = 'TERMINATE' unless options.key?(:on_error)
+        options[:execution_policy] = 'FIRST_BOOT_ONLY' unless options.key?(:execution_policy)
+        super
+      end
+    end
+
+    # <p>The stages of a compute node's lifecycle where you can configure scripts to run.</p>
+    # @!attribute node_bootstrapped
+    #   <p>The scripts to run after PCS finishes setting up the compute node and before the Slurm daemon (<code>slurmd</code>) starts. Use this stage for tasks that must complete before the node accepts jobs, such as mounting shared storage, configuring networking, or installing software packages.</p>
+    #   @return [Array<Types::NodeLifecycleScript>]
+    # @!attribute node_ready
+    #   <p>The scripts to run after the Slurm daemon (<code>slurmd</code>) starts and the compute node registers with the Slurm controller. Use this stage for tasks that require Slurm to be running, such as running Slurm commands.</p>
+    #   @return [Array<Types::NodeLifecycleScript>]
+    class NodeLifecycleStages < Struct.new(
+      nil,
+      :node_bootstrapped,
+      :node_ready,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A queue resource.</p>
     # @!attribute name
     #   <p>The name that identifies the queue.</p>
@@ -1029,11 +1217,31 @@ module Aws::PCS
     # @!attribute endpoints
     #   <p>The list of endpoints available for interaction with the scheduler.</p>
     #   @return [Array<Types::Endpoint>]
+    # @!attribute cluster_name
+    #   <p>The name of the cluster that the compute node registered into.</p>
+    #   @return [String]
+    # @!attribute compute_node_group_id
+    #   <p>The ID of the compute node group that the compute node registered into.</p>
+    #   @return [String]
+    # @!attribute compute_node_group_name
+    #   <p>The name of the compute node group that the compute node registered into.</p>
+    #   @return [String]
+    # @!attribute node_lifecycle_actions
+    #   <p>The node lifecycle actions configured for the node group, including scripts to run when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>
+    #   @return [Types::NodeLifecycleActions]
+    # @!attribute scheduler_version
+    #   <p>The scheduler version that the cluster is running. A compute node uses this value to run the matching scheduler version.</p>
+    #   @return [String]
     class RegisterComputeNodeGroupInstanceResponse < Struct.new(
       nil,
       :node_id,
       :shared_secret,
       :endpoints,
+      :cluster_name,
+      :compute_node_group_id,
+      :compute_node_group_name,
+      :node_lifecycle_actions,
+      :scheduler_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1107,7 +1315,7 @@ module Aws::PCS
     #   <p>The software PCS uses to manage cluster scaling and job scheduling.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>
+    #   <p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. You can update this version using the <code>UpdateCluster</code> API action. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html">Updating the scheduler version on a cluster</a> and <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11 | 25.05 | 25.11 | 26.05</code> </p>
     #   @return [String]
     class Scheduler < Struct.new(
       nil,
@@ -1123,12 +1331,32 @@ module Aws::PCS
     #   <p>The software PCS uses to manage cluster scaling and job scheduling.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>
+    #   <p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>24.11 | 25.05 | 25.11 | 26.05</code> </p>
     #   @return [String]
     class SchedulerRequest < Struct.new(
       nil,
       :type,
       :version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The source location and integrity information for a node lifecycle script.</p>
+    # @!attribute script_location
+    #   <p>The location of the script. Specify either an Amazon S3 URI in the format <code>s3://bucket-name/key</code> or an HTTPS URL.</p>
+    #   @return [String]
+    # @!attribute s3_version_id
+    #   <p>The Amazon S3 version ID of the script. Use this value to pin the script to a specific version in a versioned Amazon S3 bucket. This value is only valid when <code>scriptLocation</code> is an Amazon S3 URI.</p>
+    #   @return [String]
+    # @!attribute checksum
+    #   <p>The SHA-256 checksum of the script content, as a 64-character hexadecimal string. This value is optional. When specified, PCS uses this value to verify the integrity of the downloaded script.</p>
+    #   @return [String]
+    class ScriptSource < Struct.new(
+      nil,
+      :script_location,
+      :s3_version_id,
+      :checksum,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1193,6 +1421,46 @@ module Aws::PCS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The Slurm REST API configuration includes settings for enabling and configuring the Slurm REST API. It's a property of the <b>ClusterSlurmConfiguration</b> object.</p>
+    # @!attribute mode
+    #   <p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>
+    #   @return [String]
+    class SlurmRest < Struct.new(
+      nil,
+      :mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Slurm REST API configuration includes settings for enabling and configuring the Slurm REST API. It's a property of the <b>ClusterSlurmConfiguration</b> object.</p>
+    # @!attribute mode
+    #   <p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>
+    #   @return [String]
+    class SlurmRestRequest < Struct.new(
+      nil,
+      :mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional settings that directly map to SlurmDBD settings.</p> <important> <p>PCS supports a subset of SlurmDBD settings. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurmdbd-custom-settings.html">Configuring custom SlurmDBD settings in PCS</a> in the <i>PCS User Guide</i>.</p> </important>
+    # @!attribute parameter_name
+    #   <p>PCS supports custom SlurmDBD settings for clusters. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurmdbd-custom-settings.html">Configuring custom SlurmDBD settings in PCS</a> in the <i>PCS User Guide</i>.</p>
+    #   @return [String]
+    # @!attribute parameter_value
+    #   <p>The values for the configured SlurmDBD settings.</p>
+    #   @return [String]
+    class SlurmdbdCustomSetting < Struct.new(
+      nil,
+      :parameter_name,
+      :parameter_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
     # @!attribute allocation_strategy
     #   <p>The Amazon EC2 allocation strategy PCS uses to provision EC2 instances. PCS supports <b>lowest price</b>, <b>capacity optimized</b>, and <b>price capacity optimized</b>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html">Use allocation strategies to determine how EC2 Fleet or Spot Fleet fulfills Spot and On-Demand capacity</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to <b>price capacity optimized</b>.</p>
@@ -1215,6 +1483,13 @@ module Aws::PCS
       nil,
       :resource_arn,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class TagResourceResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1250,12 +1525,19 @@ module Aws::PCS
       include ::Smithy::Schema::Structure
     end
 
+    class UntagResourceResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The accounting configuration includes configurable settings for Slurm accounting.</p>
     # @!attribute default_purge_time_in_days
     #   <p>The default value for all purge settings for <code>slurmdbd.conf</code>. For more information, see the <a href="https://slurm.schedmd.com/slurmdbd.conf.html">slurmdbd.conf documentation at SchedMD</a>.</p> <p>The default value for <code>defaultPurgeTimeInDays</code> is <code>-1</code>.</p> <p>A value of <code>-1</code> means there is no purge time and records persist as long as the cluster exists.</p> <important> <p> <code>0</code> isn't a valid value.</p> </important>
     #   @return [Integer]
     # @!attribute mode
-    #   <p>The default value for <code>mode</code> is <code>STANDARD</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
+    #   <p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means Slurm accounting is enabled.</p>
     #   @return [String]
     class UpdateAccountingRequest < Struct.new(
       nil,
@@ -1275,11 +1557,15 @@ module Aws::PCS
     # @!attribute slurm_configuration
     #   <p>Additional options related to the Slurm scheduler.</p>
     #   @return [Types::UpdateClusterSlurmConfigurationRequest]
+    # @!attribute scheduler
+    #   <p>The scheduler configuration to update for the cluster. Use this to update the scheduler version. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html">Updating the scheduler version on a cluster</a> in the <i>PCS User Guide</i>.</p>
+    #   @return [Types::UpdateSchedulerRequest]
     class UpdateClusterRequest < Struct.new(
       nil,
       :cluster_identifier,
       :client_token,
       :slurm_configuration,
+      :scheduler,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1303,14 +1589,26 @@ module Aws::PCS
     # @!attribute slurm_custom_settings
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
+    # @!attribute slurmdbd_custom_settings
+    #   <p>Additional SlurmDBD-specific configuration that directly maps to SlurmDBD settings.</p>
+    #   @return [Array<Types::SlurmdbdCustomSetting>]
+    # @!attribute cgroup_custom_settings
+    #   <p>Additional Cgroup-specific configuration that directly maps to Cgroup settings.</p>
+    #   @return [Array<Types::CgroupCustomSetting>]
     # @!attribute accounting
     #   <p>The accounting configuration includes configurable settings for Slurm accounting.</p>
     #   @return [Types::UpdateAccountingRequest]
+    # @!attribute slurm_rest
+    #   <p>The Slurm REST API configuration for the cluster.</p>
+    #   @return [Types::UpdateSlurmRestRequest]
     class UpdateClusterSlurmConfigurationRequest < Struct.new(
       nil,
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
+      :slurmdbd_custom_settings,
+      :cgroup_custom_settings,
       :accounting,
+      :slurm_rest,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1332,7 +1630,7 @@ module Aws::PCS
     #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     #   @return [Types::CustomLaunchTemplate]
     # @!attribute purchase_option
-    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
+    #   <p>Specifies how EC2 instances are purchased on your behalf. PCS supports On-Demand Instances, Spot Instances, Interruptible Capacity Reservations, On-Demand Capacity Reservations, and Amazon EC2 Capacity Blocks for ML. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Amazon EC2 billing and purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about PCS support for Capacity Blocks, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html">Using Amazon EC2 Capacity Blocks for ML with PCS</a> in the <i>PCS User Guide</i>. For more information about PCS support for interruptible capacity reservations, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html">Using I-ODCRs with PCS</a> in the <i>PCS User Guide</i>. Choose On-Demand if you plan to use an On-Demand Capacity Reservation (ODCR). For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html">Using ODCRs with PCS</a>. If you don't provide this option, it defaults to On-Demand.</p>
     #   @return [String]
     # @!attribute spot_options
     #   <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
@@ -1346,6 +1644,9 @@ module Aws::PCS
     # @!attribute slurm_configuration
     #   <p>Additional options related to the Slurm scheduler.</p>
     #   @return [Types::UpdateComputeNodeGroupSlurmConfigurationRequest]
+    # @!attribute node_lifecycle_actions
+    #   <p>The lifecycle actions to run on compute nodes in the compute node group. Use lifecycle actions to run custom scripts at defined stages of a compute node's lifecycle, such as when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>
+    #   @return [Types::UpdateNodeLifecycleActionsRequest]
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries with the same client token return the result from the original successful request and they have no additional effect. If you don't specify a client token, the CLI and SDK automatically generate 1 for you.</p>
     #   @return [String]
@@ -1361,6 +1662,7 @@ module Aws::PCS
       :scaling_configuration,
       :iam_instance_profile_arn,
       :slurm_configuration,
+      :node_lifecycle_actions,
       :client_token,
       keyword_init: true
     )
@@ -1379,15 +1681,44 @@ module Aws::PCS
     end
 
     # <p>Additional options related to the Slurm scheduler.</p>
+    # @!attribute scale_down_idle_time_in_seconds
+    #   <p>The time (in seconds) before an idle node is scaled down. If not specified, the cluster-level setting applies. This overrides the cluster-level <code>scaleDownIdleTimeInSeconds</code> setting. A value of <code>-1</code> removes the override and applies the cluster-level setting to this compute node group. Requires Slurm version 25.11 or later.</p>
+    #   @return [Integer]
     # @!attribute slurm_custom_settings
     #   <p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>
     #   @return [Array<Types::SlurmCustomSetting>]
+    # @!attribute gres_custom_settings
+    #   <p>The additional Slurm <code>gres.conf</code> records for the compute node group. Each item is a map of <code>gres.conf</code> attribute names to values that describes one <code>gres.conf</code> record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the <code>NodeName=</code> prefix and merges these records with the GPU record it derives from the instance type.</p>
+    #   @return [Array<Hash<String, String>>]
     class UpdateComputeNodeGroupSlurmConfigurationRequest < Struct.new(
       nil,
+      :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
+      :gres_custom_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The lifecycle actions to configure on a compute node group when you update it. Lifecycle actions define scripts that PCS runs on compute nodes at specific stages of their lifecycle.</p>
+    # @!attribute stages
+    #   <p>The lifecycle stages where you configure scripts to run.</p>
+    #   @return [Types::NodeLifecycleStages]
+    # @!attribute script_caching_policy
+    #   <p>The caching policy for node lifecycle scripts. The default value is <code>CACHE_ONCE</code>. Valid values:</p> <ul> <li> <p> <code>CACHE_ONCE</code> – Downloads each script once and reuses it on subsequent boots.</p> </li> <li> <p> <code>REFRESH_ON_REBOOT</code> – Downloads each script on every boot.</p> </li> </ul>
+    #   @return [String]
+    class UpdateNodeLifecycleActionsRequest < Struct.new(
+      nil,
+      :stages,
+      :script_caching_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:script_caching_policy] = 'CACHE_ONCE' unless options.key?(:script_caching_policy)
+        super
+      end
     end
 
     # @!attribute cluster_identifier
@@ -1435,6 +1766,30 @@ module Aws::PCS
     class UpdateQueueSlurmConfigurationRequest < Struct.new(
       nil,
       :slurm_custom_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scheduler configuration for updating a cluster. Use this to specify the scheduler version to update to.</p>
+    # @!attribute version
+    #   <p>The scheduler version to update the cluster to. You can only update to a newer version. For more information about supported versions and update paths, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html">Updating the scheduler version on a cluster</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>24.05 | 24.11 | 25.05 | 25.11 | 26.05</code> </p>
+    #   @return [String]
+    class UpdateSchedulerRequest < Struct.new(
+      nil,
+      :version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Slurm REST API configuration includes settings for enabling and configuring the Slurm REST API.</p>
+    # @!attribute mode
+    #   <p>The default value for <code>mode</code> is <code>NONE</code>. A value of <code>STANDARD</code> means the Slurm REST API is enabled.</p>
+    #   @return [String]
+    class UpdateSlurmRestRequest < Struct.new(
+      nil,
+      :mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

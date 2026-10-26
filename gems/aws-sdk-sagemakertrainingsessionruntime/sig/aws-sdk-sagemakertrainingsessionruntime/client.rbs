@@ -1,0 +1,197 @@
+module Aws::SageMakerTrainingSessionRuntime
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SageMakerTrainingSessionRuntime::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ExecuteSamplingOperationResponse
+      include Smithy::Client::_Response[Types::ExecuteSamplingOperationOutput]
+      def operation_id: () -> String?
+    end
+    def execute_sampling_operation: (
+      ?training_session_name: String,
+      ?operation_config: {
+        sample: {
+          prompt: {
+            chunks: Array[
+              {
+                tokens: Array[Integer],
+                type: String
+              }
+            ]
+          },
+          num_samples: Integer,
+          sampling_params: {
+            max_tokens: untyped,
+            temperature: Float,
+            top_k: untyped,
+            top_p: untyped,
+            seed: untyped,
+            stop: Array[String]
+          },
+          include_prompt_logprobs: bool,
+          topk_prompt_logprobs: untyped,
+          model_package_arn: String
+        },
+        compute_logprobs: {
+          prompt: untyped,
+          model_package_arn: untyped
+        },
+        load_weights_for_sampling: {
+          model_package_arn: untyped
+        }
+      }
+    ) -> _ExecuteSamplingOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteSamplingOperationResponse
+
+    interface _ExecuteTrainingOperationResponse
+      include Smithy::Client::_Response[Types::ExecuteTrainingOperationOutput]
+      def operation_id: () -> String?
+    end
+    def execute_training_operation: (
+      ?training_session_name: String,
+      ?sequence_number: Integer,
+      ?client_token: String,
+      ?operation_config: {
+        forward: {
+          loss_fn_name: String,
+          datum_list: Array[
+            {
+              model_input: {
+                chunks: Array[
+                  {
+                    tokens: Array[Integer],
+                    type: String
+                  }
+                ]
+              },
+              loss_fn_inputs: Hash[String,
+                {
+                  data: Smithy::Schema::document,
+                  dtype: String,
+                  shape: untyped
+                }
+              ]
+            }
+          ],
+          loss_fn_config: untyped
+        },
+        forward_backward: {
+          loss_fn_name: untyped,
+          datum_list: untyped,
+          loss_fn_config: untyped
+        },
+        optimizer_step: {
+          adam_params_config: {
+            learning_rate: Float,
+            beta1: untyped,
+            beta2: untyped,
+            eps: untyped,
+            weight_decay: untyped,
+            grad_clip_norm: untyped,
+            lora_plus_lr_ratio: untyped
+          }
+        },
+        save_weights: {
+          merge_weights: bool,
+          description: untyped
+        },
+        save_state: {
+          description: untyped
+        },
+        load_state: {
+          model_package_arn: untyped,
+          load_optimizer: untyped
+        }
+      }
+    ) -> _ExecuteTrainingOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteTrainingOperationResponse
+
+    interface _GetSamplingOperationResultResponse
+      include Smithy::Client::_Response[Types::GetSamplingOperationResultOutput]
+      def status: () -> String?
+      def operation_result: () -> Types::SampleOperationResult?
+      def error_details: () -> String?
+    end
+    def get_sampling_operation_result: (
+      ?training_session_name: String,
+      ?operation_id: String
+    ) -> _GetSamplingOperationResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSamplingOperationResultResponse
+
+    interface _GetTrainingOperationResultResponse
+      include Smithy::Client::_Response[Types::GetTrainingOperationResultOutput]
+      def status: () -> String?
+      def operation_result: () -> Types::OperationResult?
+      def error_details: () -> String?
+      def token_usage: () -> Types::TrainingTokenUsage?
+    end
+    def get_training_operation_result: (
+      ?training_session_name: String,
+      ?operation_id: String
+    ) -> _GetTrainingOperationResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrainingOperationResultResponse
+
+    interface _SampleTrainingSessionResponse
+      include Smithy::Client::_Response[Types::SampleTrainingSessionOutput]
+      def content_type: () -> String?
+      def body: () -> String?
+    end
+    def sample_training_session: (
+      ?training_session_name: String,
+      ?content_type: String,
+      ?accept: String,
+      ?model_package_arn: String,
+      ?body: String
+    ) -> _SampleTrainingSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SampleTrainingSessionResponse
+
+    interface _SampleTrainingSessionWithResponseStreamResponse
+      include Smithy::Client::_Response[Types::SampleTrainingSessionWithResponseStreamOutput]
+      def content_type: () -> String?
+      def body: () -> String?
+    end
+    def sample_training_session_with_response_stream: (
+      ?training_session_name: String,
+      ?content_type: String,
+      ?accept: String,
+      ?model_package_arn: String,
+      ?body: String
+    ) -> _SampleTrainingSessionWithResponseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SampleTrainingSessionWithResponseStreamResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module Sustainability
+      VERSION: String
+    end
+  end

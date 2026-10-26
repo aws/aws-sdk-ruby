@@ -6,6 +6,7 @@ module Aws::BedrockRuntime
     AccountId: StringShape
     AdditionalModelResponseFieldPaths: ListShape
     AnyToolChoice: StructureShape
+    AppliedGuardrailDetails: StructureShape
     ApplyGuardrailRequest: StructureShape
     ApplyGuardrailResponse: StructureShape
     AsyncInvokeArn: StringShape
@@ -17,13 +18,19 @@ module Aws::BedrockRuntime
     AsyncInvokeStatus: EnumShape
     AsyncInvokeSummaries: ListShape
     AsyncInvokeSummary: StructureShape
+    AudioBlock: StructureShape
+    AudioFormat: EnumShape
+    AudioSource: UnionShape
     AutoToolChoice: StructureShape
     AutomatedReasoningRuleIdentifier: StringShape
     BidirectionalInputPayloadPart: StructureShape
     BidirectionalOutputPayloadPart: StructureShape
     Body: BlobShape
+    CacheDetail: StructureShape
+    CacheDetailsList: ListShape
     CachePointBlock: StructureShape
     CachePointType: EnumShape
+    CacheTTL: EnumShape
     Citation: StructureShape
     CitationGeneratedContent: UnionShape
     CitationGeneratedContentList: ListShape
@@ -69,10 +76,12 @@ module Aws::BedrockRuntime
     DocumentFormat: EnumShape
     DocumentPageLocation: StructureShape
     DocumentSource: UnionShape
+    ErrorBlock: StructureShape
     FoundationModelVersionIdentifier: StringShape
     GetAsyncInvokeRequest: StructureShape
     GetAsyncInvokeResponse: StructureShape
     GuardrailAction: EnumShape
+    GuardrailArn: StringShape
     GuardrailAssessment: StructureShape
     GuardrailAssessmentList: ListShape
     GuardrailAssessmentListMap: MapShape
@@ -107,6 +116,39 @@ module Aws::BedrockRuntime
     GuardrailAutomatedReasoningTranslationOption: StructureShape
     GuardrailAutomatedReasoningTranslationOptionList: ListShape
     GuardrailAutomatedReasoningValidFinding: StructureShape
+    GuardrailChecksConfig: StructureShape
+    GuardrailChecksContentBlock: UnionShape
+    GuardrailChecksContentBlockList: ListShape
+    GuardrailChecksContentFilterCategory: EnumShape
+    GuardrailChecksContentFilterCategoryConfig: StructureShape
+    GuardrailChecksContentFilterCategoryConfigList: ListShape
+    GuardrailChecksContentFilterConfig: StructureShape
+    GuardrailChecksContentFilterResult: StructureShape
+    GuardrailChecksContentFilterResultEntry: StructureShape
+    GuardrailChecksContentFilterResultList: ListShape
+    GuardrailChecksContentFilterUsage: StructureShape
+    GuardrailChecksMessage: StructureShape
+    GuardrailChecksMessageList: ListShape
+    GuardrailChecksPromptAttackCategory: EnumShape
+    GuardrailChecksPromptAttackCategoryConfig: StructureShape
+    GuardrailChecksPromptAttackCategoryConfigList: ListShape
+    GuardrailChecksPromptAttackConfig: StructureShape
+    GuardrailChecksPromptAttackResult: StructureShape
+    GuardrailChecksPromptAttackResultEntry: StructureShape
+    GuardrailChecksPromptAttackResultList: ListShape
+    GuardrailChecksPromptAttackUsage: StructureShape
+    GuardrailChecksResults: StructureShape
+    GuardrailChecksRole: EnumShape
+    GuardrailChecksSensitiveInformationConfig: StructureShape
+    GuardrailChecksSensitiveInformationEntityConfig: StructureShape
+    GuardrailChecksSensitiveInformationEntityConfigList: ListShape
+    GuardrailChecksSensitiveInformationEntityType: EnumShape
+    GuardrailChecksSensitiveInformationResult: StructureShape
+    GuardrailChecksSensitiveInformationResultEntry: StructureShape
+    GuardrailChecksSensitiveInformationResultList: ListShape
+    GuardrailChecksSensitiveInformationUsage: StructureShape
+    GuardrailChecksTextContent: StringShape
+    GuardrailChecksUsageResults: StructureShape
     GuardrailConfiguration: StructureShape
     GuardrailContentBlock: UnionShape
     GuardrailContentBlockList: ListShape
@@ -138,6 +180,7 @@ module Aws::BedrockRuntime
     GuardrailCoverage: StructureShape
     GuardrailCustomWord: StructureShape
     GuardrailCustomWordList: ListShape
+    GuardrailId: StringShape
     GuardrailIdentifier: StringShape
     GuardrailImageBlock: StructureShape
     GuardrailImageCoverage: StructureShape
@@ -147,10 +190,13 @@ module Aws::BedrockRuntime
     GuardrailManagedWord: StructureShape
     GuardrailManagedWordList: ListShape
     GuardrailManagedWordType: EnumShape
+    GuardrailOrigin: EnumShape
+    GuardrailOriginList: ListShape
     GuardrailOutputContent: StructureShape
     GuardrailOutputContentList: ListShape
     GuardrailOutputScope: EnumShape
     GuardrailOutputText: StringShape
+    GuardrailOwnership: EnumShape
     GuardrailPiiEntityFilter: StructureShape
     GuardrailPiiEntityFilterList: ListShape
     GuardrailPiiEntityType: EnumShape
@@ -179,6 +225,8 @@ module Aws::BedrockRuntime
     GuardrailWordPolicyAssessment: StructureShape
     GuardrailWordPolicyUnitsProcessed: IntegerShape
     ImageBlock: StructureShape
+    ImageBlockDelta: StructureShape
+    ImageBlockStart: StructureShape
     ImageFormat: EnumShape
     ImageSource: UnionShape
     ImagesGuarded: IntegerShape
@@ -186,6 +234,8 @@ module Aws::BedrockRuntime
     InferenceConfiguration: StructureShape
     InternalServerException: StructureShape
     InvocationArn: StringShape
+    InvokeGuardrailChecksRequest: StructureShape
+    InvokeGuardrailChecksResponse: StructureShape
     InvokeModelIdentifier: StringShape
     InvokeModelRequest: StructureShape
     InvokeModelResponse: StructureShape
@@ -197,6 +247,7 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamRequest: StructureShape
     InvokeModelWithResponseStreamResponse: StructureShape
     InvokedModelId: StringShape
+    JsonSchemaDefinition: StructureShape
     KmsKeyId: StringShape
     ListAsyncInvokesRequest: StructureShape
     ListAsyncInvokesResponse: StructureShape
@@ -216,6 +267,10 @@ module Aws::BedrockRuntime
     NonEmptyString: StringShape
     NonEmptyStringList: ListShape
     NonNegativeInteger: IntegerShape
+    OutputConfig: StructureShape
+    OutputFormat: StructureShape
+    OutputFormatStructure: UnionShape
+    OutputFormatType: EnumShape
     PaginationToken: StringShape
     PartBody: BlobShape
     PayloadPart: StructureShape
@@ -228,11 +283,18 @@ module Aws::BedrockRuntime
     ReasoningContentBlockDelta: UnionShape
     ReasoningTextBlock: StructureShape
     RequestMetadata: MapShape
+    RequestMetadataJson: StringShape
     ResourceNotFoundException: StructureShape
     ResponseStream: UnionShape
     S3Location: StructureShape
     S3Uri: StringShape
+    SearchResultBlock: StructureShape
+    SearchResultContentBlock: StructureShape
+    SearchResultContentBlocks: ListShape
+    SearchResultLocation: StructureShape
     ServiceQuotaExceededException: StructureShape
+    ServiceTier: StructureShape
+    ServiceTierType: EnumShape
     ServiceUnavailableException: StructureShape
     SortAsyncInvocationBy: EnumShape
     SortOrder: EnumShape
@@ -243,6 +305,7 @@ module Aws::BedrockRuntime
     StopReason: EnumShape
     SystemContentBlock: UnionShape
     SystemContentBlocks: ListShape
+    SystemTool: StructureShape
     Tag: StructureShape
     TagKey: StringShape
     TagList: ListShape
@@ -253,11 +316,17 @@ module Aws::BedrockRuntime
     Timestamp: TimestampShape
     TokenUsage: StructureShape
     Tool: UnionShape
+    ToolAdditionBlock: StructureShape
     ToolChoice: UnionShape
     ToolConfiguration: StructureShape
     ToolInputSchema: UnionShape
     ToolName: StringShape
+    ToolReference: StructureShape
+    ToolRemovalBlock: StructureShape
     ToolResultBlock: StructureShape
+    ToolResultBlockDelta: UnionShape
+    ToolResultBlockStart: StructureShape
+    ToolResultBlocksDelta: ListShape
     ToolResultContentBlock: UnionShape
     ToolResultContentBlocks: ListShape
     ToolResultStatus: EnumShape
@@ -266,12 +335,14 @@ module Aws::BedrockRuntime
     ToolUseBlockDelta: StructureShape
     ToolUseBlockStart: StructureShape
     ToolUseId: StringShape
+    ToolUseType: EnumShape
     Tools: ListShape
     Trace: EnumShape
     ValidationException: StructureShape
     VideoBlock: StructureShape
     VideoFormat: EnumShape
     VideoSource: UnionShape
+    WebLocation: StructureShape
 
     AmazonBedrockFrontendService: ServiceShape
   end

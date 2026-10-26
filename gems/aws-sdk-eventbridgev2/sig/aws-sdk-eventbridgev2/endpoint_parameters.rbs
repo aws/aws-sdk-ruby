@@ -1,0 +1,21 @@
+module Aws::EventBridgeV2
+  class EndpointParameters
+    def initialize: (
+      region: String,
+      ?endpoint: String,
+      ?use_fips: bool,
+      ?use_dual_stack: bool,
+      ?account_id: String,
+      ?event_bus_arn: String,
+      ?account_id_endpoint_mode: String,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor region: String
+    attr_accessor endpoint: String?
+    attr_accessor use_fips: bool?
+    attr_accessor use_dual_stack: bool?
+    attr_accessor account_id: String?
+    attr_accessor event_bus_arn: String?
+    attr_accessor account_id_endpoint_mode: String?
+  end
+end

@@ -185,6 +185,7 @@ module Aws::Braket
         ?tags: Hash[String, String],
         ?job_token: String,
         ?associations: Array[Types::Association],
+        ?experimental_capabilities: Types::ExperimentalCapabilities,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -198,6 +199,7 @@ module Aws::Braket
       attr_accessor tags: Hash[String, String]?
       attr_accessor job_token: String?
       attr_accessor associations: Array[Types::Association]?
+      attr_accessor experimental_capabilities: Types::ExperimentalCapabilities?
     end
 
     class CreateQuantumTaskOutput
@@ -211,6 +213,36 @@ module Aws::Braket
       attr_accessor quantum_task_arn: String?
     end
 
+    class CreateSpendingLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?device_arn: String,
+        ?spending_limit: String,
+        ?time_period: Types::TimePeriod,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor device_arn: String?
+      attr_accessor spending_limit: String?
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSpendingLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spending_limit_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spending_limit_arn: String?
+    end
+
     class DataSource
       include Smithy::Schema::Structure
 
@@ -220,6 +252,26 @@ module Aws::Braket
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor s3_data_source: Types::S3DataSource?
+    end
+
+    class DeleteSpendingLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spending_limit_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spending_limit_arn: String?
+    end
+
+    class DeleteSpendingLimitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class DeviceConfig
@@ -287,6 +339,22 @@ module Aws::Braket
       attr_accessor provider_name: String?
       attr_accessor device_type: String?
       attr_accessor device_status: String?
+    end
+
+    class ExperimentalCapabilities
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?enabled: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: String?
+
+      class Enabled < ExperimentalCapabilities
+      end
+      class Unknown < ExperimentalCapabilities
+      end
     end
 
     class GetDeviceInput
@@ -420,6 +488,7 @@ module Aws::Braket
         ?associations: Array[Types::Association],
         ?num_successful_shots: Integer,
         ?action_metadata: Types::ActionMetadata,
+        ?experimental_capabilities: Types::ExperimentalCapabilities,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -439,6 +508,7 @@ module Aws::Braket
       attr_accessor associations: Array[Types::Association]?
       attr_accessor num_successful_shots: Integer?
       attr_accessor action_metadata: Types::ActionMetadata?
+      attr_accessor experimental_capabilities: Types::ExperimentalCapabilities?
     end
 
     class HybridJobQueueInfo
@@ -819,6 +889,49 @@ module Aws::Braket
       attr_accessor next_token: String?
     end
 
+    class SearchSpendingLimitsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+    end
+
+    class SearchSpendingLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::SearchSpendingLimitsFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::SearchSpendingLimitsFilter]?
+    end
+
+    class SearchSpendingLimitsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spending_limits: Array[Types::SpendingLimitSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spending_limits: Array[Types::SpendingLimitSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -828,6 +941,33 @@ module Aws::Braket
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class SpendingLimitSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spending_limit_arn: String,
+        ?device_arn: String,
+        ?time_period: Types::TimePeriod,
+        ?spending_limit: String,
+        ?queued_spend: String,
+        ?total_spend: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spending_limit_arn: String?
+      attr_accessor device_arn: String?
+      attr_accessor time_period: Types::TimePeriod?
+      attr_accessor spending_limit: String?
+      attr_accessor queued_spend: String?
+      attr_accessor total_spend: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class TagResourceInput
@@ -863,6 +1003,19 @@ module Aws::Braket
       attr_accessor message: String?
     end
 
+    class TimePeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_at: Time,
+        ?end_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_at: Time?
+      attr_accessor end_at: Time?
+    end
+
     class UntagResourceInput
       include Smithy::Schema::Structure
 
@@ -877,6 +1030,32 @@ module Aws::Braket
     end
 
     class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateSpendingLimitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spending_limit_arn: String,
+        ?client_token: String,
+        ?spending_limit: String,
+        ?time_period: Types::TimePeriod,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spending_limit_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor spending_limit: String?
+      attr_accessor time_period: Types::TimePeriod?
+    end
+
+    class UpdateSpendingLimitResponse
       include Smithy::Schema::Structure
 
       def initialize: (

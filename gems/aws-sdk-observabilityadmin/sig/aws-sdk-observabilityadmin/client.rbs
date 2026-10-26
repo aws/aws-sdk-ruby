@@ -56,7 +56,13 @@ module Aws::ObservabilityAdmin
           scope: String,
           source_logs_configuration: {
             log_group_selection_criteria: String,
+            data_source_selection_criteria: String,
             encrypted_log_group_strategy: String
+          },
+          source_metrics_configuration: {
+            metrics_selection_criteria: String
+          },
+          source_context_graph_configuration: {
           }
         },
         destination: {
@@ -66,17 +72,67 @@ module Aws::ObservabilityAdmin
             logs_encryption_configuration: {
               encryption_strategy: String,
               kms_key_arn: String,
-              encryption_conflict_resolution_strategy: String
+              encryption_conflict_resolution_strategy: String,
+              encryption_scope: String
             },
             backup_configuration: {
               region: untyped,
               kms_key_arn: untyped
+            },
+            log_group_name_configuration: {
+              log_group_name_pattern: String
+            },
+            tag_propagation_configuration: {
+              destination_role_arn: String,
+              tag_conflict_resolution_strategy: String
+            }
+          },
+          destination_metrics_configuration: {
+            backup_configuration: {
+              region: untyped
             }
           }
         }
       },
       ?tags: Hash[String, String]
     ) -> _CreateCentralizationRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCentralizationRuleForOrganizationResponse
+
+    interface _CreateDatasetIntegrationResponse
+      include Smithy::Client::_Response[Types::CreateDatasetIntegrationOutput]
+      def arn: () -> String?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_dataset_integration: (
+      ?role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDatasetIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetIntegrationResponse
+
+    interface _CreateS3TableIntegrationResponse
+      include Smithy::Client::_Response[Types::CreateS3TableIntegrationOutput]
+      def arn: () -> String?
+    end
+    def create_s3_table_integration: (
+      ?encryption: {
+        sse_algorithm: String,
+        kms_key_arn: String
+      },
+      ?role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateS3TableIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateS3TableIntegrationResponse
+
+    interface _CreateTelemetryPipelineResponse
+      include Smithy::Client::_Response[Types::CreateTelemetryPipelineOutput]
+      def arn: () -> String?
+    end
+    def create_telemetry_pipeline: (
+      ?name: String,
+      ?configuration: {
+        body: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateTelemetryPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTelemetryPipelineResponse
 
     interface _CreateTelemetryRuleResponse
       include Smithy::Client::_Response[Types::CreateTelemetryRuleOutput]
@@ -87,6 +143,7 @@ module Aws::ObservabilityAdmin
       ?rule: {
         resource_type: String,
         telemetry_type: String,
+        telemetry_source_types: Array[String],
         destination_configuration: {
           destination_type: String,
           destination_pattern: String,
@@ -95,10 +152,74 @@ module Aws::ObservabilityAdmin
             log_format: untyped,
             traffic_type: untyped,
             max_aggregation_interval: Integer
-          }
+          },
+          cloudtrail_parameters: {
+            advanced_event_selectors: Array[
+              {
+                name: untyped,
+                field_selectors: Array[
+                  {
+                    field: untyped,
+                    equals: Array[String],
+                    starts_with: untyped,
+                    ends_with: untyped,
+                    not_equals: untyped,
+                    not_starts_with: untyped,
+                    not_ends_with: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          elb_load_balancer_logging_parameters: {
+            output_format: String,
+            field_delimiter: untyped
+          },
+          waf_logging_parameters: {
+            redacted_fields: Array[
+              {
+                single_header: {
+                  name: untyped
+                },
+                uri_path: untyped,
+                query_string: untyped,
+                method: untyped
+              }
+            ],
+            logging_filter: {
+              filters: Array[
+                {
+                  behavior: String,
+                  requirement: String,
+                  conditions: Array[
+                    {
+                      action_condition: {
+                        action: String
+                      },
+                      label_name_condition: {
+                        label_name: untyped
+                      }
+                    }
+                  ]
+                }
+              ],
+              default_behavior: untyped
+            },
+            log_type: String
+          },
+          log_delivery_parameters: {
+            log_types: Array[String]
+          },
+          msk_monitoring_parameters: {
+            enhanced_monitoring: String
+          },
+          kms_key_arn: String
         },
         scope: untyped,
-        selection_criteria: untyped
+        selection_criteria: untyped,
+        allow_field_updates: bool,
+        regions: Array[String],
+        all_regions: bool
       },
       ?tags: Hash[String, String]
     ) -> _CreateTelemetryRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTelemetryRuleResponse
@@ -112,6 +233,7 @@ module Aws::ObservabilityAdmin
       ?rule: {
         resource_type: String,
         telemetry_type: String,
+        telemetry_source_types: Array[String],
         destination_configuration: {
           destination_type: String,
           destination_pattern: String,
@@ -120,10 +242,74 @@ module Aws::ObservabilityAdmin
             log_format: untyped,
             traffic_type: untyped,
             max_aggregation_interval: Integer
-          }
+          },
+          cloudtrail_parameters: {
+            advanced_event_selectors: Array[
+              {
+                name: untyped,
+                field_selectors: Array[
+                  {
+                    field: untyped,
+                    equals: Array[String],
+                    starts_with: untyped,
+                    ends_with: untyped,
+                    not_equals: untyped,
+                    not_starts_with: untyped,
+                    not_ends_with: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          elb_load_balancer_logging_parameters: {
+            output_format: String,
+            field_delimiter: untyped
+          },
+          waf_logging_parameters: {
+            redacted_fields: Array[
+              {
+                single_header: {
+                  name: untyped
+                },
+                uri_path: untyped,
+                query_string: untyped,
+                method: untyped
+              }
+            ],
+            logging_filter: {
+              filters: Array[
+                {
+                  behavior: String,
+                  requirement: String,
+                  conditions: Array[
+                    {
+                      action_condition: {
+                        action: String
+                      },
+                      label_name_condition: {
+                        label_name: untyped
+                      }
+                    }
+                  ]
+                }
+              ],
+              default_behavior: untyped
+            },
+            log_type: String
+          },
+          log_delivery_parameters: {
+            log_types: Array[String]
+          },
+          msk_monitoring_parameters: {
+            enhanced_monitoring: String
+          },
+          kms_key_arn: String
         },
         scope: untyped,
-        selection_criteria: untyped
+        selection_criteria: untyped,
+        allow_field_updates: bool,
+        regions: Array[String],
+        all_regions: bool
       },
       ?tags: Hash[String, String]
     ) -> _CreateTelemetryRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTelemetryRuleForOrganizationResponse
@@ -134,6 +320,27 @@ module Aws::ObservabilityAdmin
     def delete_centralization_rule_for_organization: (
       ?rule_identifier: String
     ) -> _DeleteCentralizationRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCentralizationRuleForOrganizationResponse
+
+    interface _DeleteDatasetIntegrationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_dataset_integration: (
+      ?arn: String
+    ) -> _DeleteDatasetIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetIntegrationResponse
+
+    interface _DeleteS3TableIntegrationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_s3_table_integration: (
+      ?arn: String
+    ) -> _DeleteS3TableIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteS3TableIntegrationResponse
+
+    interface _DeleteTelemetryPipelineResponse
+      include Smithy::Client::_Response[Types::DeleteTelemetryPipelineOutput]
+    end
+    def delete_telemetry_pipeline: (
+      ?pipeline_identifier: String
+    ) -> _DeleteTelemetryPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTelemetryPipelineResponse
 
     interface _DeleteTelemetryRuleResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -159,16 +366,52 @@ module Aws::ObservabilityAdmin
       def last_update_time_stamp: () -> Integer?
       def rule_health: () -> String?
       def failure_reason: () -> String?
+      def tag_propagation_status: () -> String?
+      def tag_propagation_failure_reason: () -> String?
+      def context_graph_status: () -> String?
       def centralization_rule: () -> Types::CentralizationRule?
     end
     def get_centralization_rule_for_organization: (
       ?rule_identifier: String
     ) -> _GetCentralizationRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCentralizationRuleForOrganizationResponse
 
+    interface _GetDatasetIntegrationResponse
+      include Smithy::Client::_Response[Types::GetDatasetIntegrationOutput]
+      def arn: () -> String?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_dataset_integration: (
+      ?arn: String
+    ) -> _GetDatasetIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDatasetIntegrationResponse
+
+    interface _GetS3TableIntegrationResponse
+      include Smithy::Client::_Response[Types::GetS3TableIntegrationOutput]
+      def arn: () -> String?
+      def role_arn: () -> String?
+      def status: () -> String?
+      def encryption: () -> Types::Encryption?
+      def destination_table_bucket_arn: () -> String?
+      def created_time_stamp: () -> Integer?
+    end
+    def get_s3_table_integration: (
+      ?arn: String
+    ) -> _GetS3TableIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetS3TableIntegrationResponse
+
+    interface _GetTelemetryEnrichmentStatusResponse
+      include Smithy::Client::_Response[Types::GetTelemetryEnrichmentStatusOutput]
+      def status: () -> String?
+      def aws_resource_explorer_managed_view_arn: () -> String?
+    end
+    def get_telemetry_enrichment_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTelemetryEnrichmentStatusResponse
+
     interface _GetTelemetryEvaluationStatusResponse
       include Smithy::Client::_Response[Types::GetTelemetryEvaluationStatusOutput]
       def status: () -> String?
       def failure_reason: () -> String?
+      def home_region: () -> String?
+      def region_statuses: () -> Array[Types::RegionStatus]?
     end
     def get_telemetry_evaluation_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTelemetryEvaluationStatusResponse
 
@@ -176,8 +419,18 @@ module Aws::ObservabilityAdmin
       include Smithy::Client::_Response[Types::GetTelemetryEvaluationStatusForOrganizationOutput]
       def status: () -> String?
       def failure_reason: () -> String?
+      def home_region: () -> String?
+      def region_statuses: () -> Array[Types::RegionStatus]?
     end
     def get_telemetry_evaluation_status_for_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTelemetryEvaluationStatusForOrganizationResponse
+
+    interface _GetTelemetryPipelineResponse
+      include Smithy::Client::_Response[Types::GetTelemetryPipelineOutput]
+      def pipeline: () -> Types::TelemetryPipeline?
+    end
+    def get_telemetry_pipeline: (
+      ?pipeline_identifier: String
+    ) -> _GetTelemetryPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTelemetryPipelineResponse
 
     interface _GetTelemetryRuleResponse
       include Smithy::Client::_Response[Types::GetTelemetryRuleOutput]
@@ -186,6 +439,9 @@ module Aws::ObservabilityAdmin
       def created_time_stamp: () -> Integer?
       def last_update_time_stamp: () -> Integer?
       def telemetry_rule: () -> Types::TelemetryRule?
+      def home_region: () -> String?
+      def is_replicated: () -> bool?
+      def region_statuses: () -> Array[Types::RegionStatus]?
     end
     def get_telemetry_rule: (
       ?rule_identifier: String
@@ -198,6 +454,9 @@ module Aws::ObservabilityAdmin
       def created_time_stamp: () -> Integer?
       def last_update_time_stamp: () -> Integer?
       def telemetry_rule: () -> Types::TelemetryRule?
+      def home_region: () -> String?
+      def is_replicated: () -> bool?
+      def region_statuses: () -> Array[Types::RegionStatus]?
     end
     def get_telemetry_rule_for_organization: (
       ?rule_identifier: String
@@ -214,6 +473,16 @@ module Aws::ObservabilityAdmin
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListCentralizationRulesForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCentralizationRulesForOrganizationResponse
+
+    interface _ListDatasetIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListDatasetIntegrationsOutput]
+      def dataset_integration_summaries: () -> Array[Types::DatasetIntegrationSummary]?
+      def next_token: () -> String?
+    end
+    def list_dataset_integrations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDatasetIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetIntegrationsResponse
 
     interface _ListResourceTelemetryResponse
       include Smithy::Client::_Response[Types::ListResourceTelemetryOutput]
@@ -244,6 +513,16 @@ module Aws::ObservabilityAdmin
       ?next_token: String
     ) -> _ListResourceTelemetryForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceTelemetryForOrganizationResponse
 
+    interface _ListS3TableIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListS3TableIntegrationsOutput]
+      def integration_summaries: () -> Array[Types::IntegrationSummary]?
+      def next_token: () -> String?
+    end
+    def list_s3_table_integrations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListS3TableIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListS3TableIntegrationsResponse
+
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
       def tags: () -> Hash[String, String]?
@@ -251,6 +530,16 @@ module Aws::ObservabilityAdmin
     def list_tags_for_resource: (
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTelemetryPipelinesResponse
+      include Smithy::Client::_Response[Types::ListTelemetryPipelinesOutput]
+      def pipeline_summaries: () -> Array[Types::TelemetryPipelineSummary]?
+      def next_token: () -> String?
+    end
+    def list_telemetry_pipelines: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTelemetryPipelinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTelemetryPipelinesResponse
 
     interface _ListTelemetryRulesResponse
       include Smithy::Client::_Response[Types::ListTelemetryRulesOutput]
@@ -276,15 +565,34 @@ module Aws::ObservabilityAdmin
       ?next_token: String
     ) -> _ListTelemetryRulesForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTelemetryRulesForOrganizationResponse
 
+    interface _StartTelemetryEnrichmentResponse
+      include Smithy::Client::_Response[Types::StartTelemetryEnrichmentOutput]
+      def status: () -> String?
+      def aws_resource_explorer_managed_view_arn: () -> String?
+    end
+    def start_telemetry_enrichment: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTelemetryEnrichmentResponse
+
     interface _StartTelemetryEvaluationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
-    def start_telemetry_evaluation: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTelemetryEvaluationResponse
+    def start_telemetry_evaluation: (
+      ?regions: Array[String],
+      ?all_regions: bool
+    ) -> _StartTelemetryEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTelemetryEvaluationResponse
 
     interface _StartTelemetryEvaluationForOrganizationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
-    def start_telemetry_evaluation_for_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTelemetryEvaluationForOrganizationResponse
+    def start_telemetry_evaluation_for_organization: (
+      ?regions: Array[String],
+      ?all_regions: bool
+    ) -> _StartTelemetryEvaluationForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTelemetryEvaluationForOrganizationResponse
+
+    interface _StopTelemetryEnrichmentResponse
+      include Smithy::Client::_Response[Types::StopTelemetryEnrichmentOutput]
+      def status: () -> String?
+    end
+    def stop_telemetry_enrichment: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTelemetryEnrichmentResponse
 
     interface _StopTelemetryEvaluationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -303,6 +611,23 @@ module Aws::ObservabilityAdmin
       ?resource_arn: String,
       ?tags: Hash[String, String]
     ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestTelemetryPipelineResponse
+      include Smithy::Client::_Response[Types::TestTelemetryPipelineOutput]
+      def results: () -> Array[Types::PipelineOutput]?
+    end
+    def test_telemetry_pipeline: (
+      ?records: Array[
+        {
+          data: String,
+          type: String
+        }
+      ],
+      ?configuration: {
+        body: String
+      },
+      ?signal_type: String
+    ) -> _TestTelemetryPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestTelemetryPipelineResponse
 
     interface _UntagResourceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -324,7 +649,13 @@ module Aws::ObservabilityAdmin
           scope: String,
           source_logs_configuration: {
             log_group_selection_criteria: String,
+            data_source_selection_criteria: String,
             encrypted_log_group_strategy: String
+          },
+          source_metrics_configuration: {
+            metrics_selection_criteria: String
+          },
+          source_context_graph_configuration: {
           }
         },
         destination: {
@@ -334,16 +665,51 @@ module Aws::ObservabilityAdmin
             logs_encryption_configuration: {
               encryption_strategy: String,
               kms_key_arn: String,
-              encryption_conflict_resolution_strategy: String
+              encryption_conflict_resolution_strategy: String,
+              encryption_scope: String
             },
             backup_configuration: {
               region: untyped,
               kms_key_arn: untyped
+            },
+            log_group_name_configuration: {
+              log_group_name_pattern: String
+            },
+            tag_propagation_configuration: {
+              destination_role_arn: String,
+              tag_conflict_resolution_strategy: String
+            }
+          },
+          destination_metrics_configuration: {
+            backup_configuration: {
+              region: untyped
             }
           }
         }
       }
     ) -> _UpdateCentralizationRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCentralizationRuleForOrganizationResponse
+
+    interface _UpdateDatasetIntegrationResponse
+      include Smithy::Client::_Response[Types::UpdateDatasetIntegrationOutput]
+      def arn: () -> String?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_dataset_integration: (
+      ?arn: String,
+      ?role_arn: String
+    ) -> _UpdateDatasetIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasetIntegrationResponse
+
+    interface _UpdateTelemetryPipelineResponse
+      include Smithy::Client::_Response[Types::UpdateTelemetryPipelineOutput]
+    end
+    def update_telemetry_pipeline: (
+      ?pipeline_identifier: String,
+      ?configuration: {
+        body: String
+      }
+    ) -> _UpdateTelemetryPipelineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTelemetryPipelineResponse
 
     interface _UpdateTelemetryRuleResponse
       include Smithy::Client::_Response[Types::UpdateTelemetryRuleOutput]
@@ -354,6 +720,7 @@ module Aws::ObservabilityAdmin
       ?rule: {
         resource_type: String,
         telemetry_type: String,
+        telemetry_source_types: Array[String],
         destination_configuration: {
           destination_type: String,
           destination_pattern: String,
@@ -362,10 +729,74 @@ module Aws::ObservabilityAdmin
             log_format: untyped,
             traffic_type: untyped,
             max_aggregation_interval: Integer
-          }
+          },
+          cloudtrail_parameters: {
+            advanced_event_selectors: Array[
+              {
+                name: untyped,
+                field_selectors: Array[
+                  {
+                    field: untyped,
+                    equals: Array[String],
+                    starts_with: untyped,
+                    ends_with: untyped,
+                    not_equals: untyped,
+                    not_starts_with: untyped,
+                    not_ends_with: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          elb_load_balancer_logging_parameters: {
+            output_format: String,
+            field_delimiter: untyped
+          },
+          waf_logging_parameters: {
+            redacted_fields: Array[
+              {
+                single_header: {
+                  name: untyped
+                },
+                uri_path: untyped,
+                query_string: untyped,
+                method: untyped
+              }
+            ],
+            logging_filter: {
+              filters: Array[
+                {
+                  behavior: String,
+                  requirement: String,
+                  conditions: Array[
+                    {
+                      action_condition: {
+                        action: String
+                      },
+                      label_name_condition: {
+                        label_name: untyped
+                      }
+                    }
+                  ]
+                }
+              ],
+              default_behavior: untyped
+            },
+            log_type: String
+          },
+          log_delivery_parameters: {
+            log_types: Array[String]
+          },
+          msk_monitoring_parameters: {
+            enhanced_monitoring: String
+          },
+          kms_key_arn: String
         },
         scope: untyped,
-        selection_criteria: untyped
+        selection_criteria: untyped,
+        allow_field_updates: bool,
+        regions: Array[String],
+        all_regions: bool
       }
     ) -> _UpdateTelemetryRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTelemetryRuleResponse
 
@@ -378,6 +809,7 @@ module Aws::ObservabilityAdmin
       ?rule: {
         resource_type: String,
         telemetry_type: String,
+        telemetry_source_types: Array[String],
         destination_configuration: {
           destination_type: String,
           destination_pattern: String,
@@ -386,11 +818,85 @@ module Aws::ObservabilityAdmin
             log_format: untyped,
             traffic_type: untyped,
             max_aggregation_interval: Integer
-          }
+          },
+          cloudtrail_parameters: {
+            advanced_event_selectors: Array[
+              {
+                name: untyped,
+                field_selectors: Array[
+                  {
+                    field: untyped,
+                    equals: Array[String],
+                    starts_with: untyped,
+                    ends_with: untyped,
+                    not_equals: untyped,
+                    not_starts_with: untyped,
+                    not_ends_with: untyped
+                  }
+                ]
+              }
+            ]
+          },
+          elb_load_balancer_logging_parameters: {
+            output_format: String,
+            field_delimiter: untyped
+          },
+          waf_logging_parameters: {
+            redacted_fields: Array[
+              {
+                single_header: {
+                  name: untyped
+                },
+                uri_path: untyped,
+                query_string: untyped,
+                method: untyped
+              }
+            ],
+            logging_filter: {
+              filters: Array[
+                {
+                  behavior: String,
+                  requirement: String,
+                  conditions: Array[
+                    {
+                      action_condition: {
+                        action: String
+                      },
+                      label_name_condition: {
+                        label_name: untyped
+                      }
+                    }
+                  ]
+                }
+              ],
+              default_behavior: untyped
+            },
+            log_type: String
+          },
+          log_delivery_parameters: {
+            log_types: Array[String]
+          },
+          msk_monitoring_parameters: {
+            enhanced_monitoring: String
+          },
+          kms_key_arn: String
         },
         scope: untyped,
-        selection_criteria: untyped
+        selection_criteria: untyped,
+        allow_field_updates: bool,
+        regions: Array[String],
+        all_regions: bool
       }
     ) -> _UpdateTelemetryRuleForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTelemetryRuleForOrganizationResponse
+
+    interface _ValidateTelemetryPipelineConfigurationResponse
+      include Smithy::Client::_Response[Types::ValidateTelemetryPipelineConfigurationOutput]
+      def errors: () -> Array[Types::ValidationError]?
+    end
+    def validate_telemetry_pipeline_configuration: (
+      ?configuration: {
+        body: String
+      }
+    ) -> _ValidateTelemetryPipelineConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateTelemetryPipelineConfigurationResponse
   end
 end

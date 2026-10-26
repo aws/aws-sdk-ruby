@@ -318,7 +318,7 @@ module Aws::MediaLive
 
     # @api private
     #
-    # Wait until a channel has is stopped
+    # Wait until a channel is not running
     #
     class ChannelStopped
       def initialize(options = {})
@@ -354,6 +354,32 @@ module Aws::MediaLive
                 "state" => "retry",
                 "matcher" => {
                   "errorType" => "InternalServerErrorException"
+                }
+              },
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "state",
+                    "expected" => "DELETING",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "state",
+                    "expected" => "DELETED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "errorType" => "NotFoundException"
                 }
               }
             ]

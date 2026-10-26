@@ -18,6 +18,42 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Details of an Apache Kafka Cluster.</p>
+    # @!attribute apache_kafka_cluster_id
+    #   <p>The ID of the Apache Kafka cluster.</p>
+    #   @return [String]
+    # @!attribute bootstrap_broker_string
+    #   <p>The bootstrap broker string of the Apache Kafka cluster.</p>
+    #   @return [String]
+    class ApacheKafkaCluster < Struct.new(
+      nil,
+      :apache_kafka_cluster_id,
+      :bootstrap_broker_string,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The authorizer logs configuration for this MSK cluster.</p>
+    # @!attribute cloud_watch_logs
+    #   <p>Details of the CloudWatch Logs destination for authorizer logs.</p>
+    #   @return [Types::CloudWatchLogs]
+    # @!attribute firehose
+    #   <p>Details of the Kinesis Data Firehose delivery stream that is the destination for authorizer logs.</p>
+    #   @return [Types::Firehose]
+    # @!attribute s3
+    #   <p>Details of the Amazon S3 destination for authorizer logs.</p>
+    #   @return [Types::S3]
+    class AuthorizerLogs < Struct.new(
+      nil,
+      :cloud_watch_logs,
+      :firehose,
+      :s3,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Returns information about an error.</p>
     # @!attribute invalid_parameter
     #   <p>The parameter that caused the error.</p>
@@ -238,6 +274,90 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration of the AWS Glue Data Catalog and S3 Tables warehouse used by the Apache Iceberg destination.</p>
+    # @!attribute catalog_arn
+    #   <p>The Amazon Resource Name (ARN) of the federated AWS Glue Data Catalog that projects the S3 Tables bucket. If omitted, MSK derives the catalog ARN from warehouseLocation.</p>
+    #   @return [String]
+    # @!attribute warehouse_location
+    #   <p>The Amazon Resource Name (ARN) of the S3 Tables bucket that backs the Apache Iceberg warehouse.</p>
+    #   @return [String]
+    class Catalog < Struct.new(
+      nil,
+      :catalog_arn,
+      :warehouse_location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a channel returned by ListChannels.</p>
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>
+    #   @return [String]
+    # @!attribute channel_name
+    #   <p>The name of the channel.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current lifecycle state of the channel.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The time when the channel was created.</p>
+    #   @return [Time]
+    # @!attribute destination_type
+    #   <p>The type of destination configured for the channel.</p>
+    #   @return [String]
+    # @!attribute cluster_operation_arn
+    #   <p>The Amazon Resource Name (ARN) of the in-flight cluster operation. Returned only while the channel is in CREATING, UPDATING, or DELETING.</p>
+    #   @return [String]
+    class ChannelInfo < Struct.new(
+      nil,
+      :channel_arn,
+      :channel_name,
+      :status,
+      :creation_time,
+      :destination_type,
+      :cluster_operation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for the destinations to which the channel publishes operational logs.</p>
+    # @!attribute cloud_watch_logs
+    #   <p>Details of the CloudWatch Logs destination for Channel logs.</p>
+    #   @return [Types::CloudWatchLogs]
+    # @!attribute firehose
+    #   <p>Details of the Kinesis Data Firehose delivery stream that is the destination for Channel logs.</p>
+    #   @return [Types::Firehose]
+    # @!attribute s3
+    #   <p>Details of the Amazon S3 destination for Channel logs.</p>
+    #   @return [Types::S3]
+    class ChannelLoggingInfo < Struct.new(
+      nil,
+      :cloud_watch_logs,
+      :firehose,
+      :s3,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional context for the current channel state, populated when the channel is in FAILED.</p>
+    # @!attribute code
+    #   <p>A short, machine-readable code identifying the failure cause.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable message describing the failure.</p>
+    #   @return [String]
+    class ChannelStateInfo < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Includes all client authentication information.</p>
     # @!attribute sasl
     #   <p>Details for ClientAuthentication using SASL.</p>
@@ -351,6 +471,22 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Returns information about an error.</p>
+    # @!attribute invalid_parameter
+    #   <p>The parameter that caused the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The description of the error.</p>
+    #   @return [String]
+    class ClusterConnectivityException < Struct.new(
+      nil,
+      :invalid_parameter,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Returns information about a cluster.</p>
     # @!attribute active_operation_arn
     #   <p>Arn of active cluster operation.</p>
@@ -358,6 +494,9 @@ module Aws::Kafka
     # @!attribute broker_node_group_info
     #   <p>Information about the broker nodes.</p>
     #   @return [Types::BrokerNodeGroupInfo]
+    # @!attribute rebalancing
+    #   <p>Contains information about intelligent rebalancing for new MSK Provisioned clusters with Express brokers. By default, intelligent rebalancing status is ACTIVE.</p>
+    #   @return [Types::Rebalancing]
     # @!attribute client_authentication
     #   <p>Includes all client authentication information.</p>
     #   @return [Types::ClientAuthentication]
@@ -414,6 +553,7 @@ module Aws::Kafka
       nil,
       :active_operation_arn,
       :broker_node_group_info,
+      :rebalancing,
       :client_authentication,
       :cluster_arn,
       :cluster_name,
@@ -594,11 +734,19 @@ module Aws::Kafka
     end
 
     # <p>Returns information about a serverless cluster operation.</p>
+    # @!attribute source_cluster_info
+    #   <p>Describes the cluster's attributes before any updates are applied. For example, networkType, which can be either IPv4 or DUAL.</p>
+    #   @return [Types::ServerlessConnectivityInfo]
+    # @!attribute target_cluster_info
+    #   <p>Describes the cluster's attributes after any updates are applied. For example, networkType, which can be either IPv4 or DUAL.</p>
+    #   @return [Types::ServerlessConnectivityInfo]
     # @!attribute vpc_connection_info
     #   <p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>
     #   @return [Types::VpcConnectionInfoServerless]
     class ClusterOperationV2Serverless < Struct.new(
       nil,
+      :source_cluster_info,
+      :target_cluster_info,
       :vpc_connection_info,
       keyword_init: true
     )
@@ -752,10 +900,14 @@ module Aws::Kafka
     # @!attribute vpc_connectivity
     #   <p>VPC connectivity access control for brokers.</p>
     #   @return [Types::VpcConnectivity]
+    # @!attribute network_type
+    #   <p>The network type of the cluster, which is IPv4 or DUAL. The DUAL network type uses both IPv4 and IPv6 addresses for your cluster and its resources.</p><p>By default, a cluster uses the IPv4 network type.</p>
+    #   @return [String]
     class ConnectivityInfo < Struct.new(
       nil,
       :public_access,
       :vpc_connectivity,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -774,12 +926,16 @@ module Aws::Kafka
     # @!attribute synchronise_consumer_group_offsets
     #   <p>Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.</p>
     #   @return [Boolean]
+    # @!attribute consumer_group_offset_sync_mode
+    #   <p>The consumer group offset synchronization mode. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster.</p>
+    #   @return [String]
     class ConsumerGroupReplication < Struct.new(
       nil,
       :consumer_groups_to_exclude,
       :consumer_groups_to_replicate,
       :detect_and_copy_new_consumer_groups,
       :synchronise_consumer_group_offsets,
+      :consumer_group_offset_sync_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -809,6 +965,22 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Returns information about an error.</p>
+    # @!attribute invalid_parameter
+    #   <p>The parameter that caused the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The description of the error.</p>
+    #   @return [String]
+    class ControllerMovedException < Struct.new(
+      nil,
+      :invalid_parameter,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Controller node information.</p>
     # @!attribute endpoints
     #   <p>Endpoints for accessing the Controller.</p>
@@ -821,9 +993,68 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Creates a Channel that streams records from an Amazon MSK Express cluster topic to Amazon S3 or Apache Iceberg.</p>
+    # @!attribute channel_name
+    #   <p>The name of the channel. Must be unique within the cluster.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration applied to the channel.</p>
+    #   @return [Types::EncryptionConfiguration]
+    # @!attribute iceberg_destination_configuration
+    #   <p>The Apache Iceberg destination for the channel. Mutually exclusive with s3DestinationConfiguration.</p>
+    #   @return [Types::IcebergDestinationConfiguration]
+    # @!attribute s3_destination_configuration
+    #   <p>The Amazon S3 destination for the channel. Mutually exclusive with icebergDestinationConfiguration.</p>
+    #   @return [Types::S3DestinationConfiguration]
+    # @!attribute tags
+    #   <p>The tags attached to the channel.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute topic_configuration_list
+    #   <p>The list of topic configurations for the channel. Currently exactly one topic must be specified.</p>
+    #   @return [Array<Types::TopicConfiguration>]
+    # @!attribute logging_info
+    #   <p>The destinations to which the channel publishes operational logs.</p>
+    #   @return [Types::ChannelLoggingInfo]
+    class CreateChannelRequest < Struct.new(
+      nil,
+      :channel_name,
+      :cluster_arn,
+      :encryption_configuration,
+      :iceberg_destination_configuration,
+      :s3_destination_configuration,
+      :tags,
+      :topic_configuration_list,
+      :logging_info,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns the channel ARN and the cluster-operation ARN that tracks the asynchronous create.</p>
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>
+    #   @return [String]
+    # @!attribute cluster_operation_arn
+    #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+    #   @return [String]
+    class CreateChannelResponse < Struct.new(
+      nil,
+      :channel_arn,
+      :cluster_operation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute broker_node_group_info
     #   <p>Information about the broker nodes in the cluster.</p>
     #   @return [Types::BrokerNodeGroupInfo]
+    # @!attribute rebalancing
+    #   <p>Specifies if intelligent rebalancing should be turned on for the new MSK Provisioned cluster with Express brokers. By default, intelligent rebalancing status is ACTIVE for all new clusters.</p>
+    #   @return [Types::Rebalancing]
     # @!attribute client_authentication
     #   <p>Includes all client authentication related information.</p>
     #   @return [Types::ClientAuthentication]
@@ -859,6 +1090,7 @@ module Aws::Kafka
     class CreateClusterRequest < Struct.new(
       nil,
       :broker_node_group_info,
+      :rebalancing,
       :client_authentication,
       :cluster_name,
       :configuration_info,
@@ -950,7 +1182,7 @@ module Aws::Kafka
     #   <p>The name of the configuration.</p>
     #   @return [String]
     # @!attribute server_properties
-    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded.
     #                  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
     #   @return [String]
     class CreateConfigurationRequest < Struct.new(
@@ -1010,6 +1242,9 @@ module Aws::Kafka
     # @!attribute tags
     #   <p>List of tags to attach to created Replicator.</p>
     #   @return [Hash<String, String>]
+    # @!attribute log_delivery
+    #   <p>Configuration for delivering replicator logs to customer destinations.</p>
+    #   @return [Types::LogDelivery]
     class CreateReplicatorRequest < Struct.new(
       nil,
       :description,
@@ -1018,6 +1253,7 @@ module Aws::Kafka
       :replicator_name,
       :service_execution_role_arn,
       :tags,
+      :log_delivery,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1037,6 +1273,52 @@ module Aws::Kafka
       :replicator_arn,
       :replicator_name,
       :replicator_state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>The name of the topic to create.</p>
+    #   @return [String]
+    # @!attribute partition_count
+    #   <p>The number of partitions for the topic.</p>
+    #   @return [Integer]
+    # @!attribute replication_factor
+    #   <p>The replication factor for the topic.</p>
+    #   @return [Integer]
+    # @!attribute configs
+    #   <p>Topic configurations encoded as a Base64 string.</p>
+    #   @return [String]
+    class CreateTopicRequest < Struct.new(
+      nil,
+      :cluster_arn,
+      :topic_name,
+      :partition_count,
+      :replication_factor,
+      :configs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute topic_arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>The name of the topic that was created.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the topic creation.</p>
+    #   @return [String]
+    class CreateTopicResponse < Struct.new(
+      nil,
+      :topic_arn,
+      :topic_name,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1107,6 +1389,57 @@ module Aws::Kafka
       :security_groups,
       :creation_time,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration of the Amazon S3 bucket where records that fail to deliver are stored.</p>
+    # @!attribute bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the dead-letter Amazon S3 bucket.</p>
+    #   @return [String]
+    # @!attribute error_output_prefix
+    #   <p>An optional prefix prepended to every dead-letter Amazon S3 object key.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>Optional 12-digit AWS account ID expected to own the dead-letter Amazon S3 bucket.</p>
+    #   @return [String]
+    class DeadLetterQueueS3 < Struct.new(
+      nil,
+      :bucket_arn,
+      :error_output_prefix,
+      :expected_bucket_owner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    class DeleteChannelRequest < Struct.new(
+      nil,
+      :channel_arn,
+      :cluster_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns the channel ARN and the cluster-operation ARN that tracks the asynchronous delete.</p>
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>
+    #   @return [String]
+    # @!attribute cluster_operation_arn
+    #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+    #   @return [String]
+    class DeleteChannelResponse < Struct.new(
+      nil,
+      :channel_arn,
+      :cluster_operation_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1216,6 +1549,40 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>The name of the topic to delete.</p>
+    #   @return [String]
+    class DeleteTopicRequest < Struct.new(
+      nil,
+      :cluster_arn,
+      :topic_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute topic_arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>The name of the topic that was deleted.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the topic deletion.</p>
+    #   @return [String]
+    class DeleteTopicResponse < Struct.new(
+      nil,
+      :topic_arn,
+      :topic_name,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.</p>
     #   @return [String]
@@ -1237,6 +1604,81 @@ module Aws::Kafka
       nil,
       :vpc_connection_arn,
       :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    class DescribeChannelRequest < Struct.new(
+      nil,
+      :channel_arn,
+      :cluster_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the current configuration and state of a channel.</p>
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>
+    #   @return [String]
+    # @!attribute channel_name
+    #   <p>The name of the channel.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration applied to the channel.</p>
+    #   @return [Types::EncryptionConfiguration]
+    # @!attribute iceberg_destination_configuration
+    #   <p>The Apache Iceberg destination for the channel, if configured.</p>
+    #   @return [Types::IcebergDestinationConfiguration]
+    # @!attribute s3_destination_configuration
+    #   <p>The Amazon S3 destination for the channel, if configured.</p>
+    #   @return [Types::S3DestinationConfiguration]
+    # @!attribute status
+    #   <p>The current lifecycle state of the channel.</p>
+    #   @return [String]
+    # @!attribute destination_type
+    #   <p>The type of destination configured for the channel.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The time when the channel was created.</p>
+    #   @return [Time]
+    # @!attribute topic_configuration_list
+    #   <p>The list of topic configurations for the channel.</p>
+    #   @return [Array<Types::TopicConfiguration>]
+    # @!attribute logging_info
+    #   <p>The destinations to which the channel publishes operational logs.</p>
+    #   @return [Types::ChannelLoggingInfo]
+    # @!attribute state_info
+    #   <p>Additional context for the current channel state, populated when the channel is in FAILED.</p>
+    #   @return [Types::ChannelStateInfo]
+    # @!attribute cluster_operation_arn
+    #   <p>The Amazon Resource Name (ARN) of the in-flight cluster operation. Returned only while the channel is in CREATING, UPDATING, or DELETING.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags attached to the channel.</p>
+    #   @return [Hash<String, String>]
+    class DescribeChannelResponse < Struct.new(
+      nil,
+      :channel_arn,
+      :channel_name,
+      :encryption_configuration,
+      :iceberg_destination_configuration,
+      :s3_destination_configuration,
+      :status,
+      :destination_type,
+      :creation_time,
+      :topic_configuration_list,
+      :logging_info,
+      :state_info,
+      :cluster_operation_arn,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1404,7 +1846,7 @@ module Aws::Kafka
     #   <p>The revision number.</p>
     #   @return [Integer]
     # @!attribute server_properties
-    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded.
     #                  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
     #   @return [String]
     class DescribeConfigurationRevisionResponse < Struct.new(
@@ -1469,6 +1911,9 @@ module Aws::Kafka
     # @!attribute tags
     #   <p>List of tags attached to the Replicator.</p>
     #   @return [Hash<String, String>]
+    # @!attribute log_delivery
+    #   <p>Configuration for log delivery.</p>
+    #   @return [Types::LogDelivery]
     class DescribeReplicatorResponse < Struct.new(
       nil,
       :creation_time,
@@ -1484,6 +1929,93 @@ module Aws::Kafka
       :service_execution_role_arn,
       :state_info,
       :tags,
+      :log_delivery,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>The Kafka topic name that uniquely identifies the topic.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #               To get the next batch, provide this token in your next request.</p>
+    #   @return [String]
+    class DescribeTopicPartitionsRequest < Struct.new(
+      nil,
+      :cluster_arn,
+      :topic_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute partitions
+    #   <p>The list of partition information for the topic.</p>
+    #   @return [Array<Types::TopicPartitionInfo>]
+    # @!attribute next_token
+    #   <p>The paginated results marker. When the result of a DescribeTopicPartitions operation is truncated, the call returns NextToken in the response.
+    #                  To get another batch of configurations, provide this token in your next request.</p>
+    #   @return [String]
+    class DescribeTopicPartitionsResponse < Struct.new(
+      nil,
+      :partitions,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>The Kafka topic name that uniquely identifies the topic.</p>
+    #   @return [String]
+    class DescribeTopicRequest < Struct.new(
+      nil,
+      :cluster_arn,
+      :topic_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute topic_arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>The Kafka topic name of the topic.</p>
+    #   @return [String]
+    # @!attribute replication_factor
+    #   <p>The replication factor of the topic.</p>
+    #   @return [Integer]
+    # @!attribute partition_count
+    #   <p>The partition count of the topic.</p>
+    #   @return [Integer]
+    # @!attribute configs
+    #   <p>Topic configurations encoded as a Base64 string.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the topic.</p>
+    #   @return [String]
+    class DescribeTopicResponse < Struct.new(
+      nil,
+      :topic_arn,
+      :topic_name,
+      :replication_factor,
+      :partition_count,
+      :configs,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1543,6 +2075,26 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration of an Apache Iceberg destination table.</p>
+    # @!attribute destination_database_name
+    #   <p>The name of the destination namespace (database) in the AWS Glue Data Catalog.</p>
+    #   @return [String]
+    # @!attribute destination_table_name
+    #   <p>The name of the destination Apache Iceberg table.</p>
+    #   @return [String]
+    # @!attribute partition_spec
+    #   <p>The partition specification for the destination table.</p>
+    #   @return [Types::PartitionSpec]
+    class DestinationTable < Struct.new(
+      nil,
+      :destination_database_name,
+      :destination_table_name,
+      :partition_spec,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the EBS storage volumes attached to Apache Kafka broker nodes.</p>
     # @!attribute provisioned_throughput
     #   <p>EBS volume provisioned throughput information.</p>
@@ -1566,6 +2118,18 @@ module Aws::Kafka
     class EncryptionAtRest < Struct.new(
       nil,
       :data_volume_kms_key_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The AWS KMS encryption configuration applied to data at rest.</p>
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the data.</p>
+    #   @return [String]
+    class EncryptionConfiguration < Struct.new(
+      nil,
+      :kms_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1697,6 +2261,18 @@ module Aws::Kafka
     # @!attribute bootstrap_broker_string_vpc_connectivity_sasl_iam
     #   <p>A string containing one or more DNS names (or IP) and SASL/IAM port pairs for VPC connectivity.</p>
     #   @return [String]
+    # @!attribute bootstrap_broker_string_ipv6
+    #   <p>A string that contains one or more DNS names (or IP) and port pairs for IPv6 connectivity.</p>
+    #   @return [String]
+    # @!attribute bootstrap_broker_string_tls_ipv6
+    #   <p>A string that contains one or more DNS names (or IP) and TLS port pairs for IPv6 connectivity.</p>
+    #   @return [String]
+    # @!attribute bootstrap_broker_string_sasl_scram_ipv6
+    #   <p>A string that contains one or more DNS names (or IP) and SASL SCRAM port pairs for IPv6 connectivity.</p>
+    #   @return [String]
+    # @!attribute bootstrap_broker_string_sasl_iam_ipv6
+    #   <p>A string that contains one or more DNS names (or IP) and SASL IAM port pairs for IPv6 connectivity.</p>
+    #   @return [String]
     class GetBootstrapBrokersResponse < Struct.new(
       nil,
       :bootstrap_broker_string,
@@ -1709,6 +2285,10 @@ module Aws::Kafka
       :bootstrap_broker_string_vpc_connectivity_tls,
       :bootstrap_broker_string_vpc_connectivity_sasl_scram,
       :bootstrap_broker_string_vpc_connectivity_sasl_iam,
+      :bootstrap_broker_string_ipv6,
+      :bootstrap_broker_string_tls_ipv6,
+      :bootstrap_broker_string_sasl_scram_ipv6,
+      :bootstrap_broker_string_sasl_iam_ipv6,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1762,6 +2342,22 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Returns information about an error.</p>
+    # @!attribute invalid_parameter
+    #   <p>The parameter that caused the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The description of the error.</p>
+    #   @return [String]
+    class GroupSubscribedToTopicException < Struct.new(
+      nil,
+      :invalid_parameter,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details for IAM access control.</p>
     # @!attribute enabled
     #   <p>Indicates whether IAM access control is enabled.</p>
@@ -1769,6 +2365,62 @@ module Aws::Kafka
     class Iam < Struct.new(
       nil,
       :enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration of an Apache Iceberg destination for a channel.</p>
+    # @!attribute append_only
+    #   <p>Whether the destination is append-only. Must be true; updates and deletes are not supported.</p>
+    #   @return [Boolean]
+    # @!attribute catalog
+    #   <p>The AWS Glue Data Catalog and S3 Tables warehouse used by the destination.</p>
+    #   @return [Types::Catalog]
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum time, in seconds, that records buffer in MSK before being flushed to the destination. Allowed range: 300 to 900. Default: 600.</p>
+    #   @return [Integer]
+    # @!attribute dead_letter_queue_s3
+    #   <p>The Amazon S3 bucket and prefix where MSK writes records that fail to deliver.</p>
+    #   @return [Types::DeadLetterQueueS3]
+    # @!attribute destination_table_list
+    #   <p>The destination Iceberg tables. Currently exactly one table must be specified.</p>
+    #   @return [Array<Types::DestinationTable>]
+    # @!attribute schema_evolution
+    #   <p>Configuration controlling whether the destination table's schema is evolved to match incoming records.</p>
+    #   @return [Types::SchemaEvolution]
+    # @!attribute service_execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that MSK assumes to access the destination table, the AWS Glue Data Catalog, and the dead-letter Amazon S3 bucket.</p>
+    #   @return [String]
+    # @!attribute table_creation
+    #   <p>Configuration controlling whether MSK creates the destination table if it does not already exist.</p>
+    #   @return [Types::TableCreation]
+    # @!attribute compression_type
+    #   <p>The compression codec for Iceberg table data files. Defaults to ZSTD.</p>
+    #   @return [String]
+    class IcebergDestinationConfiguration < Struct.new(
+      nil,
+      :append_only,
+      :catalog,
+      :data_freshness_in_seconds,
+      :dead_letter_queue_s3,
+      :destination_table_list,
+      :schema_evolution,
+      :service_execution_role_arn,
+      :table_creation,
+      :compression_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Update payload for an Apache Iceberg destination.</p>
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum time, in seconds, that records buffer in MSK before being flushed to the destination. Allowed range: 300 to 900.</p>
+    #   @return [Integer]
+    class IcebergDestinationUpdate < Struct.new(
+      nil,
+      :data_freshness_in_seconds,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1818,13 +2470,45 @@ module Aws::Kafka
     # @!attribute amazon_msk_cluster
     #   <p>Details of an Amazon MSK Cluster.</p>
     #   @return [Types::AmazonMskCluster]
+    # @!attribute apache_kafka_cluster
+    #   <p>Details of an Apache Kafka Cluster.</p>
+    #   @return [Types::ApacheKafkaCluster]
     # @!attribute vpc_config
     #   <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>
     #   @return [Types::KafkaClusterClientVpcConfig]
+    # @!attribute client_authentication
+    #   <p>Details of the client authentication used by the Apache Kafka cluster.</p>
+    #   @return [Types::KafkaClusterClientAuthentication]
+    # @!attribute encryption_in_transit
+    #   <p>Details of encryption in transit to the Apache Kafka cluster.</p>
+    #   @return [Types::KafkaClusterEncryptionInTransit]
     class KafkaCluster < Struct.new(
       nil,
       :amazon_msk_cluster,
+      :apache_kafka_cluster,
       :vpc_config,
+      :client_authentication,
+      :encryption_in_transit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details of the client authentication used by the Apache Kafka cluster.</p>
+    # @!attribute sasl_scram
+    #   <p>Details for SASL/SCRAM client authentication.</p>
+    #   @return [Types::KafkaClusterSaslScramAuthentication]
+    # @!attribute mtls
+    #   <p>Details for mTLS client authentication.</p>
+    #   @return [Types::KafkaClusterMTLSAuthentication]
+    # @!attribute sasl_o_auth_bearer
+    #   <p>Details for SASL/OAUTHBEARER client authentication.</p>
+    #   @return [Types::KafkaClusterSaslOAuthBearerAuthentication]
+    class KafkaClusterClientAuthentication < Struct.new(
+      nil,
+      :sasl_scram,
+      :mtls,
+      :sasl_o_auth_bearer,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1850,17 +2534,161 @@ module Aws::Kafka
     # @!attribute amazon_msk_cluster
     #   <p>Details of an Amazon MSK Cluster.</p>
     #   @return [Types::AmazonMskCluster]
+    # @!attribute apache_kafka_cluster
+    #   <p>Details of an Apache Kafka Cluster.</p>
+    #   @return [Types::ApacheKafkaCluster]
     # @!attribute kafka_cluster_alias
     #   <p>The alias of the Kafka cluster. Used to prefix names of replicated topics.</p>
     #   @return [String]
     # @!attribute vpc_config
     #   <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>
     #   @return [Types::KafkaClusterClientVpcConfig]
+    # @!attribute client_authentication
+    #   <p>Details of the client authentication used by the Apache Kafka cluster.</p>
+    #   @return [Types::KafkaClusterClientAuthentication]
+    # @!attribute encryption_in_transit
+    #   <p>Details of encryption in transit to the Apache Kafka cluster.</p>
+    #   @return [Types::KafkaClusterEncryptionInTransit]
     class KafkaClusterDescription < Struct.new(
       nil,
       :amazon_msk_cluster,
+      :apache_kafka_cluster,
       :kafka_cluster_alias,
       :vpc_config,
+      :client_authentication,
+      :encryption_in_transit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details of encryption in transit to the Apache Kafka cluster.</p>
+    # @!attribute encryption_type
+    #   <p>The type of encryption in transit to the Apache Kafka cluster.</p>
+    #   @return [String]
+    # @!attribute root_ca_certificate
+    #   <p>The root CA certificate.</p>
+    #   @return [String]
+    class KafkaClusterEncryptionInTransit < Struct.new(
+      nil,
+      :encryption_type,
+      :root_ca_certificate,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details for mTLS client authentication.</p>
+    # @!attribute secret_arn
+    #   <p>The Amazon Resource Name (ARN) of the Secrets Manager secret.</p>
+    #   @return [String]
+    class KafkaClusterMTLSAuthentication < Struct.new(
+      nil,
+      :secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details for SASL/OAUTHBEARER using standard client_credentials grant.</p>
+    # @!attribute token_request_secret_arn
+    #   <p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the OAuth client credentials.</p>
+    #   @return [String]
+    class KafkaClusterOAuthClientCredentials < Struct.new(
+      nil,
+      :token_request_secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion.</p>
+    # @!attribute audience
+    #   <p>The audience for the JWT client assertion.</p>
+    #   @return [String]
+    # @!attribute signing_algorithm
+    #   <p>The signing algorithm for the JWT client assertion.</p>
+    #   @return [String]
+    # @!attribute token_request_secret_arn
+    #   <p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the signing key.</p>
+    #   @return [String]
+    class KafkaClusterOAuthClientCredentialsAssertion < Struct.new(
+      nil,
+      :audience,
+      :signing_algorithm,
+      :token_request_secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details for SASL/OAUTHBEARER using JWT Bearer assertion grant.</p>
+    # @!attribute audience
+    #   <p>The audience for the JWT Bearer assertion.</p>
+    #   @return [String]
+    # @!attribute signing_algorithm
+    #   <p>The signing algorithm for the JWT Bearer assertion.</p>
+    #   @return [String]
+    # @!attribute token_request_secret_arn
+    #   <p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the signing key.</p>
+    #   @return [String]
+    class KafkaClusterOAuthIamJwtBearer < Struct.new(
+      nil,
+      :audience,
+      :signing_algorithm,
+      :token_request_secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details for SASL/OAUTHBEARER client authentication.</p>
+    # @!attribute token_endpoint_url
+    #   <p>The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer tokens per RFC 6749.</p>
+    #   @return [String]
+    # @!attribute client_credentials
+    #   <p>Details for SASL/OAUTHBEARER using standard client_credentials grant.</p>
+    #   @return [Types::KafkaClusterOAuthClientCredentials]
+    # @!attribute iam_jwt_bearer
+    #   <p>Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC 7523).</p>
+    #   @return [Types::KafkaClusterOAuthIamJwtBearer]
+    # @!attribute client_credentials_assertion
+    #   <p>Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion.</p>
+    #   @return [Types::KafkaClusterOAuthClientCredentialsAssertion]
+    # @!attribute token_endpoint_authentication_method
+    #   <p>How client credentials are sent to the identity provider. Valid values are POST, BASIC, or NONE.</p>
+    #   @return [String]
+    # @!attribute scope
+    #   <p>OAuth scope to request.</p>
+    #   @return [String]
+    # @!attribute token_endpoint_tls_certificate_arn
+    #   <p>Secrets Manager ARN containing a custom CA certificate for the identity provider.</p>
+    #   @return [String]
+    class KafkaClusterSaslOAuthBearerAuthentication < Struct.new(
+      nil,
+      :token_endpoint_url,
+      :client_credentials,
+      :iam_jwt_bearer,
+      :client_credentials_assertion,
+      :token_endpoint_authentication_method,
+      :scope,
+      :token_endpoint_tls_certificate_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details for SASL/SCRAM client authentication.</p>
+    # @!attribute mechanism
+    #   <p>The SASL/SCRAM authentication mechanism.</p>
+    #   @return [String]
+    # @!attribute secret_arn
+    #   <p>The Amazon Resource Name (ARN) of the Secrets Manager secret.</p>
+    #   @return [String]
+    class KafkaClusterSaslScramAuthentication < Struct.new(
+      nil,
+      :mechanism,
+      :secret_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1870,13 +2698,49 @@ module Aws::Kafka
     # @!attribute amazon_msk_cluster
     #   <p>Details of an Amazon MSK Cluster.</p>
     #   @return [Types::AmazonMskCluster]
+    # @!attribute apache_kafka_cluster
+    #   <p>Details of an Apache Kafka Cluster.</p>
+    #   @return [Types::ApacheKafkaCluster]
     # @!attribute kafka_cluster_alias
     #   <p>The alias of the Kafka cluster. Used to prefix names of replicated topics.</p>
     #   @return [String]
     class KafkaClusterSummary < Struct.new(
       nil,
       :amazon_msk_cluster,
+      :apache_kafka_cluster,
       :kafka_cluster_alias,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns information about an error.</p>
+    # @!attribute invalid_parameter
+    #   <p>The parameter that caused the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The description of the error.</p>
+    #   @return [String]
+    class KafkaRequestException < Struct.new(
+      nil,
+      :invalid_parameter,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns information about an error.</p>
+    # @!attribute invalid_parameter
+    #   <p>The parameter that caused the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The description of the error.</p>
+    #   @return [String]
+    class KafkaTimeoutException < Struct.new(
+      nil,
+      :invalid_parameter,
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1896,13 +2760,52 @@ module Aws::Kafka
     end
 
     # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>Maximum number of channels to return in a single response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>If the response of ListChannels is truncated, it returns a nextToken in the response. This nextToken should be sent in the subsequent request to ListChannels.</p>
+    #   @return [String]
+    # @!attribute topic_name_filter
+    #   <p>Filters results to channels whose topic name matches the specified value.</p>
+    #   @return [String]
+    class ListChannelsRequest < Struct.new(
+      nil,
+      :cluster_arn,
+      :max_results,
+      :next_token,
+      :topic_name_filter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns the list of channels in the cluster.</p>
+    # @!attribute channels
+    #   <p>The list of channels in the cluster.</p>
+    #   @return [Array<Types::ChannelInfo>]
+    # @!attribute next_token
+    #   <p>If the response from ListChannels is truncated, this token is included. Send it as the nextToken parameter on a subsequent ListChannels call to retrieve the next page.</p>
+    #   @return [String]
+    class ListChannelsResponse < Struct.new(
+      nil,
+      :channels,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arn
     #   <p>The Amazon Resource Name (ARN) of the cluster.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClientVpcConnectionsRequest < Struct.new(
@@ -1919,7 +2822,7 @@ module Aws::Kafka
     #   <p>List of client VPC connections.</p>
     #   @return [Array<Types::ClientVpcConnection>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response.
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListClientVpcConnectionsResponse < Struct.new(
@@ -1938,7 +2841,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClusterOperationsRequest < Struct.new(
@@ -2007,7 +2910,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersRequest < Struct.new(
@@ -2024,7 +2927,7 @@ module Aws::Kafka
     #   <p>Information on each of the MSK clusters in the response.</p>
     #   @return [Array<Types::ClusterInfo>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response.
     #                  To get another batch of clusters, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersResponse < Struct.new(
@@ -2046,7 +2949,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersV2Request < Struct.new(
@@ -2064,7 +2967,7 @@ module Aws::Kafka
     #   <p>Information on each of the MSK clusters in the response.</p>
     #   @return [Array<Types::Cluster>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response.
     #                  To get another batch of clusters, provide this token in your next request.</p>
     #   @return [String]
     class ListClustersV2Response < Struct.new(
@@ -2083,7 +2986,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListConfigurationRevisionsRequest < Struct.new(
@@ -2115,7 +3018,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListConfigurationsRequest < Struct.new(
@@ -2131,7 +3034,7 @@ module Aws::Kafka
     #   <p>An array of MSK configurations.</p>
     #   @return [Array<Types::Configuration>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListConfigurations operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of a ListConfigurations operation is truncated, the call returns NextToken in the response.
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListConfigurationsResponse < Struct.new(
@@ -2178,7 +3081,7 @@ module Aws::Kafka
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListNodesRequest < Struct.new(
@@ -2192,7 +3095,7 @@ module Aws::Kafka
     end
 
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response.
     #                  To get another batch of nodes, provide this token in your next request.</p>
     #   @return [String]
     # @!attribute node_info_list
@@ -2297,11 +3200,51 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
+    #               To get the next batch, provide this token in your next request.</p>
+    #   @return [String]
+    # @!attribute topic_name_filter
+    #   <p>Returns topics starting with given name.</p>
+    #   @return [String]
+    class ListTopicsRequest < Struct.new(
+      nil,
+      :cluster_arn,
+      :max_results,
+      :next_token,
+      :topic_name_filter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute topics
+    #   <p>List containing topics info.</p>
+    #   @return [Array<Types::TopicInfo>]
+    # @!attribute next_token
+    #   <p>The paginated results marker. When the result of a ListTopics operation is truncated, the call returns NextToken in the response.
+    #                  To get another batch of configurations, provide this token in your next request.</p>
+    #   @return [String]
+    class ListTopicsResponse < Struct.new(
+      nil,
+      :topics,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response.
     #               To get the next batch, provide this token in your next request.</p>
     #   @return [String]
     class ListVpcConnectionsRequest < Struct.new(
@@ -2317,7 +3260,7 @@ module Aws::Kafka
     #   <p>List of VPC connections.</p>
     #   @return [Array<Types::VpcConnection>]
     # @!attribute next_token
-    #   <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. 
+    #   <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response.
     #                  To get another batch of configurations, provide this token in your next request.</p>
     #   @return [String]
     class ListVpcConnectionsResponse < Struct.new(
@@ -2329,10 +3272,26 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for log delivery to customer destinations.</p>
+    # @!attribute replicator_log_delivery
+    #   <p>Configuration for replicator log delivery.</p>
+    #   @return [Types::ReplicatorLogDelivery]
+    class LogDelivery < Struct.new(
+      nil,
+      :replicator_log_delivery,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute authorizer_logs
+    #   <p>You can configure your MSK cluster to send authorizer logs to different destination types.</p>
+    #   @return [Types::AuthorizerLogs]
     # @!attribute broker_logs
     #   @return [Types::BrokerLogs]
     class LoggingInfo < Struct.new(
       nil,
+      :authorizer_logs,
       :broker_logs,
       keyword_init: true
     )
@@ -2355,6 +3314,9 @@ module Aws::Kafka
     # @!attribute open_monitoring
     #   <p>The settings for open monitoring.</p>
     #   @return [Types::OpenMonitoring]
+    # @!attribute zookeeper_access
+    #   <p>Access control settings for zookeeper</p>
+    #   @return [Types::ZookeeperAccess]
     # @!attribute kafka_version
     #   <p>The Apache Kafka version.</p>
     #   @return [String]
@@ -2379,6 +3341,9 @@ module Aws::Kafka
     # @!attribute broker_count_update_info
     #   <p>Describes brokers being changed during a broker count update.</p>
     #   @return [Types::BrokerCountUpdateInfo]
+    # @!attribute rebalancing
+    #   <p>Describes the intelligent rebalancing configuration of an MSK Provisioned cluster with Express brokers.</p>
+    #   @return [Types::Rebalancing]
     class MutableClusterInfo < Struct.new(
       nil,
       :broker_ebs_volume_info,
@@ -2386,6 +3351,7 @@ module Aws::Kafka
       :number_of_broker_nodes,
       :enhanced_monitoring,
       :open_monitoring,
+      :zookeeper_access,
       :kafka_version,
       :logging_info,
       :instance_type,
@@ -2394,6 +3360,7 @@ module Aws::Kafka
       :connectivity_info,
       :storage_mode,
       :broker_count_update_info,
+      :rebalancing,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2466,6 +3433,22 @@ module Aws::Kafka
     # @!attribute message
     #   <p>The description of the error.</p>
     #   @return [String]
+    class NotControllerException < Struct.new(
+      nil,
+      :invalid_parameter,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns information about an error.</p>
+    # @!attribute invalid_parameter
+    #   <p>The parameter that caused the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The description of the error.</p>
+    #   @return [String]
     class NotFoundException < Struct.new(
       nil,
       :invalid_parameter,
@@ -2494,6 +3477,34 @@ module Aws::Kafka
     class OpenMonitoringInfo < Struct.new(
       nil,
       :prometheus,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A source column used by an Apache Iceberg destination table's partition specification.</p>
+    # @!attribute source_name
+    #   <p>Source name.</p>
+    #   @return [String]
+    class PartitionSource < Struct.new(
+      nil,
+      :source_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Partition specification for an Apache Iceberg destination table.</p>
+    # @!attribute partition_strategy
+    #   <p>The partitioning strategy applied to records written to the table.</p>
+    #   @return [String]
+    # @!attribute source_list
+    #   <p>The source columns used by the partitioning strategy. For TIME_HOUR, must contain exactly one source column whose value is a timestamp.</p>
+    #   @return [Array<Types::PartitionSource>]
+    class PartitionSpec < Struct.new(
+      nil,
+      :partition_strategy,
+      :source_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2535,6 +3546,9 @@ module Aws::Kafka
     # @!attribute broker_node_group_info
     #   <p>Information about the brokers.</p>
     #   @return [Types::BrokerNodeGroupInfo]
+    # @!attribute rebalancing
+    #   <p>Specifies whether or not intelligent rebalancing is turned on for a newly created MSK Provisioned cluster with Express brokers. Intelligent rebalancing performs automatic partition balancing operations when you scale your clusters up or down.  By default, intelligent rebalancing is ACTIVE for all new Express-based clusters.</p>
+    #   @return [Types::Rebalancing]
     # @!attribute current_broker_software_info
     #   <p>Information about the Apache Kafka version deployed on the brokers.</p>
     #   @return [Types::BrokerSoftwareInfo]
@@ -2571,6 +3585,7 @@ module Aws::Kafka
     class Provisioned < Struct.new(
       nil,
       :broker_node_group_info,
+      :rebalancing,
       :current_broker_software_info,
       :client_authentication,
       :encryption_info,
@@ -2591,6 +3606,9 @@ module Aws::Kafka
     # @!attribute broker_node_group_info
     #   <p>Information about the brokers.</p>
     #   @return [Types::BrokerNodeGroupInfo]
+    # @!attribute rebalancing
+    #   <p>Specifies if intelligent rebalancing is turned on for your MSK Provisioned cluster with Express brokers. For all new Express-based clusters that you create, intelligent rebalancing is turned on by default.</p>
+    #   @return [Types::Rebalancing]
     # @!attribute client_authentication
     #   <p>Includes all client authentication information.</p>
     #   @return [Types::ClientAuthentication]
@@ -2621,6 +3639,7 @@ module Aws::Kafka
     class ProvisionedRequest < Struct.new(
       nil,
       :broker_node_group_info,
+      :rebalancing,
       :client_authentication,
       :configuration_info,
       :encryption_info,
@@ -2693,6 +3712,34 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Returns information about an error.</p>
+    # @!attribute invalid_parameter
+    #   <p>The parameter that caused the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The description of the error.</p>
+    #   @return [String]
+    class ReassignmentInProgressException < Struct.new(
+      nil,
+      :invalid_parameter,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies whether or not intelligent rebalancing is turned on for a newly created MSK Provisioned cluster with Express brokers. Intelligent rebalancing performs automatic partition balancing operations when you scale your clusters up or down. By default, intelligent rebalancing is ACTIVE for all new Express-based clusters.</p>
+    # @!attribute status
+    #   <p>Intelligent rebalancing status. The default intelligent rebalancing status is ACTIVE for all new Express-based clusters.</p>
+    #   @return [String]
+    class Rebalancing < Struct.new(
+      nil,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # Reboots a node.
     # @!attribute broker_ids
     #   <p>The list of broker IDs to be rebooted. The reboot-broker operation supports rebooting one broker at a time.</p>
@@ -2719,6 +3766,30 @@ module Aws::Kafka
       nil,
       :cluster_arn,
       :cluster_operation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that controls how Apache Kafka record values are deserialized for the destination.</p>
+    # @!attribute value_converter
+    #   <p>The deserialization format applied to Apache Kafka record values.</p>
+    #   @return [String]
+    class RecordConverter < Struct.new(
+      nil,
+      :value_converter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Schema configuration that controls how Apache Kafka record values are validated.</p>
+    # @!attribute gsr_arn
+    #   <p>The Amazon Resource Name (ARN) of the AWS Glue Schema Registry schema (not registry) used to validate records for the destination Apache Iceberg table.</p>
+    #   @return [String]
+    class RecordSchema < Struct.new(
+      nil,
+      :gsr_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2753,11 +3824,17 @@ module Aws::Kafka
     # @!attribute source_kafka_cluster_arn
     #   <p>The ARN of the source Kafka cluster.</p>
     #   @return [String]
+    # @!attribute source_kafka_cluster_id
+    #   <p>The ID of the source Kafka cluster.</p>
+    #   @return [String]
     # @!attribute target_compression_type
     #   <p>The compression type to use when producing records to target cluster.</p>
     #   @return [String]
     # @!attribute target_kafka_cluster_arn
     #   <p>The ARN of the target Kafka cluster.</p>
+    #   @return [String]
+    # @!attribute target_kafka_cluster_id
+    #   <p>The ID of the target Kafka cluster.</p>
     #   @return [String]
     # @!attribute topic_replication
     #   <p>Configuration relating to topic replication.</p>
@@ -2766,8 +3843,10 @@ module Aws::Kafka
       nil,
       :consumer_group_replication,
       :source_kafka_cluster_arn,
+      :source_kafka_cluster_id,
       :target_compression_type,
       :target_kafka_cluster_arn,
+      :target_kafka_cluster_id,
       :topic_replication,
       keyword_init: true
     )
@@ -2858,6 +3937,78 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Details about delivering logs to CloudWatch Logs.</p>
+    # @!attribute enabled
+    #   <p>Whether log delivery to CloudWatch Logs is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute log_group
+    #   <p>The CloudWatch log group that is the destination for log delivery.</p>
+    #   @return [String]
+    class ReplicatorCloudWatchLogs < Struct.new(
+      nil,
+      :enabled,
+      :log_group,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about delivering logs to Firehose.</p>
+    # @!attribute enabled
+    #   <p>Whether log delivery to Firehose is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute delivery_stream
+    #   <p>The Firehose delivery stream that is the destination for log delivery.</p>
+    #   @return [String]
+    class ReplicatorFirehose < Struct.new(
+      nil,
+      :enabled,
+      :delivery_stream,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for replicator log delivery.</p>
+    # @!attribute cloud_watch_logs
+    #   <p>Configuration for CloudWatch Logs delivery.</p>
+    #   @return [Types::ReplicatorCloudWatchLogs]
+    # @!attribute firehose
+    #   <p>Configuration for Firehose delivery.</p>
+    #   @return [Types::ReplicatorFirehose]
+    # @!attribute s3
+    #   <p>Configuration for S3 delivery.</p>
+    #   @return [Types::ReplicatorS3]
+    class ReplicatorLogDelivery < Struct.new(
+      nil,
+      :cloud_watch_logs,
+      :firehose,
+      :s3,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about delivering logs to S3.</p>
+    # @!attribute enabled
+    #   <p>Whether log delivery to S3 is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute bucket
+    #   <p>The S3 bucket that is the destination for log delivery.</p>
+    #   @return [String]
+    # @!attribute prefix
+    #   <p>The S3 prefix that is the destination for log delivery.</p>
+    #   @return [String]
+    class ReplicatorS3 < Struct.new(
+      nil,
+      :enabled,
+      :bucket,
+      :prefix,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about a replicator.</p>
     # @!attribute creation_time
     #   <p>The time the replicator was created.</p>
@@ -2918,6 +4069,74 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration of an Amazon S3 destination for a channel.</p>
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum time, in seconds, that records buffer in MSK before being flushed to the destination. Allowed range: 300 to 900. Default: 600.</p>
+    #   @return [Integer]
+    # @!attribute dead_letter_queue_s3
+    #   <p>The Amazon S3 bucket and prefix where MSK writes records that fail to deliver.</p>
+    #   @return [Types::DeadLetterQueueS3]
+    # @!attribute service_execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that MSK assumes to write to the destination Amazon S3 bucket and the dead-letter bucket.</p>
+    #   @return [String]
+    # @!attribute storage
+    #   <p>The Amazon S3 bucket, prefix, and storage class for delivered records.</p>
+    #   @return [Types::S3Storage]
+    class S3DestinationConfiguration < Struct.new(
+      nil,
+      :data_freshness_in_seconds,
+      :dead_letter_queue_s3,
+      :service_execution_role_arn,
+      :storage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Update payload for an Amazon S3 destination.</p>
+    # @!attribute data_freshness_in_seconds
+    #   <p>The maximum time, in seconds, that records buffer in MSK before being flushed to the destination. Allowed range: 300 to 900.</p>
+    #   @return [Integer]
+    class S3DestinationUpdate < Struct.new(
+      nil,
+      :data_freshness_in_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Storage configuration for an Amazon S3 destination bucket.</p>
+    # @!attribute bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the destination Amazon S3 bucket.</p>
+    #   @return [String]
+    # @!attribute compression_type
+    #   <p>The compression codec applied to delivered Amazon S3 objects.</p>
+    #   @return [String]
+    # @!attribute output_prefix
+    #   <p>An optional prefix prepended to every Amazon S3 object key written by the channel.</p>
+    #   @return [String]
+    # @!attribute output_key_template
+    #   <p>An optional template that controls the Amazon S3 object key for each delivered record. Supports the placeholders !{partition-id}, !{sequence-number}, and !{kafka-offset}.</p>
+    #   @return [String]
+    # @!attribute storage_class
+    #   <p>The Amazon S3 storage class for delivered objects.</p>
+    #   @return [String]
+    # @!attribute expected_bucket_owner
+    #   <p>Optional 12-digit AWS account ID expected to own the Amazon S3 bucket.</p>
+    #   @return [String]
+    class S3Storage < Struct.new(
+      nil,
+      :bucket_arn,
+      :compression_type,
+      :output_prefix,
+      :output_key_template,
+      :storage_class,
+      :expected_bucket_owner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details for client authentication using SASL.</p>
     # @!attribute scram
     #   <p>Details for SASL/SCRAM client authentication.</p>
@@ -2929,6 +4148,18 @@ module Aws::Kafka
       nil,
       :scram,
       :iam,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration controlling whether the Apache Iceberg destination table's schema is evolved as incoming records change.</p>
+    # @!attribute enable_schema_evolution
+    #   <p>Whether to allow MSK to evolve the destination table's schema. Must be false for the current release.</p>
+    #   @return [Boolean]
+    class SchemaEvolution < Struct.new(
+      nil,
+      :enable_schema_evolution,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2953,10 +4184,14 @@ module Aws::Kafka
     # @!attribute client_authentication
     #   <p>Includes all client authentication information.</p>
     #   @return [Types::ServerlessClientAuthentication]
+    # @!attribute connectivity_info
+    #   <p>Describes the cluster's connectivity information, such as its network type, which is IPv4 or DUAL.</p>
+    #   @return [Types::ServerlessConnectivityInfo]
     class Serverless < Struct.new(
       nil,
       :vpc_configs,
       :client_authentication,
+      :connectivity_info,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2969,6 +4204,18 @@ module Aws::Kafka
     class ServerlessClientAuthentication < Struct.new(
       nil,
       :sasl,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes the cluster's connectivity information, such as its network type, which is IPv4 or DUAL.</p>
+    # @!attribute network_type
+    #   <p>The network type of the cluster, which is IPv4 or DUAL. The DUAL network type uses both IPv4 and IPv6 addresses for your cluster and its resources.</p><p>By default, a cluster uses the IPv4 network type.</p>
+    #   @return [String]
+    class ServerlessConnectivityInfo < Struct.new(
+      nil,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3043,6 +4290,18 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration controlling whether MSK creates the destination Apache Iceberg table if it does not already exist.</p>
+    # @!attribute enable_table_creation
+    #   <p>Whether MSK creates the destination table on the customer's behalf. Must be true for the current release.</p>
+    #   @return [Boolean]
+    class TableCreation < Struct.new(
+      nil,
+      :enable_table_creation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.</p>
     #   @return [String]
@@ -3085,6 +4344,94 @@ module Aws::Kafka
       nil,
       :invalid_parameter,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration of an Apache Kafka topic that feeds a channel.</p>
+    # @!attribute record_converter
+    #   <p>Configuration that controls how Apache Kafka record values are deserialized for the destination.</p>
+    #   @return [Types::RecordConverter]
+    # @!attribute record_schema
+    #   <p>The schema used to validate records when the value converter requires one (for example, JSON_SCHEMA_GSR).</p>
+    #   @return [Types::RecordSchema]
+    # @!attribute topic_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the topic.</p>
+    #   @return [String]
+    class TopicConfiguration < Struct.new(
+      nil,
+      :record_converter,
+      :record_schema,
+      :topic_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns information about an error.</p>
+    # @!attribute invalid_parameter
+    #   <p>The parameter that caused the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The description of the error.</p>
+    #   @return [String]
+    class TopicExistsException < Struct.new(
+      nil,
+      :invalid_parameter,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Includes identification info about the topic.</p>
+    # @!attribute topic_arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>Name for a topic.</p>
+    #   @return [String]
+    # @!attribute replication_factor
+    #   <p>Replication factor for a topic.</p>
+    #   @return [Integer]
+    # @!attribute partition_count
+    #   <p>Partition count for a topic.</p>
+    #   @return [Integer]
+    # @!attribute out_of_sync_replica_count
+    #   <p>Number of out-of-sync replicas for a topic.</p>
+    #   @return [Integer]
+    class TopicInfo < Struct.new(
+      nil,
+      :topic_arn,
+      :topic_name,
+      :replication_factor,
+      :partition_count,
+      :out_of_sync_replica_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a topic partition.</p>
+    # @!attribute partition
+    #   <p>The partition ID.</p>
+    #   @return [Integer]
+    # @!attribute leader
+    #   <p>The leader broker ID for the partition.</p>
+    #   @return [Integer]
+    # @!attribute replicas
+    #   <p>The list of replica broker IDs for the partition.</p>
+    #   @return [Array<Integer>]
+    # @!attribute isr
+    #   <p>The list of in-sync replica broker IDs for the partition.</p>
+    #   @return [Array<Integer>]
+    class TopicPartitionInfo < Struct.new(
+      nil,
+      :partition,
+      :leader,
+      :replicas,
+      :isr,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3173,6 +4520,22 @@ module Aws::Kafka
     #   <p>The description of the error.</p>
     #   @return [String]
     class UnauthorizedException < Struct.new(
+      nil,
+      :invalid_parameter,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns information about an error.</p>
+    # @!attribute invalid_parameter
+    #   <p>The parameter that caused the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The description of the error.</p>
+    #   @return [String]
+    class UnknownTopicOrPartitionException < Struct.new(
       nil,
       :invalid_parameter,
       :message,
@@ -3337,6 +4700,46 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Updates an existing channel's destination configuration. You must update the same destination type the channel was created with; the destination type cannot be changed.</p>
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>
+    #   @return [String]
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    # @!attribute iceberg_destination_update
+    #   <p>Updates fields on an Apache Iceberg destination. Use only when the channel was created with an Iceberg destination.</p>
+    #   @return [Types::IcebergDestinationUpdate]
+    # @!attribute s3_destination_update
+    #   <p>Updates fields on an Amazon S3 destination. Use only when the channel was created with an Amazon S3 destination.</p>
+    #   @return [Types::S3DestinationUpdate]
+    class UpdateChannelRequest < Struct.new(
+      nil,
+      :channel_arn,
+      :cluster_arn,
+      :iceberg_destination_update,
+      :s3_destination_update,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Returns the channel ARN and the cluster-operation ARN that tracks the asynchronous update.</p>
+    # @!attribute channel_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>
+    #   @return [String]
+    # @!attribute cluster_operation_arn
+    #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+    #   @return [String]
+    class UpdateChannelResponse < Struct.new(
+      nil,
+      :channel_arn,
+      :cluster_operation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute cluster_arn
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
     #   @return [String]
@@ -3416,7 +4819,7 @@ module Aws::Kafka
     #   <p>The description of the configuration revision.</p>
     #   @return [String]
     # @!attribute server_properties
-    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+    #   <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded.
     #                  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
     #   @return [String]
     class UpdateConfigurationRequest < Struct.new(
@@ -3454,11 +4857,15 @@ module Aws::Kafka
     # @!attribute current_version
     #   <p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>
     #   @return [String]
+    # @!attribute zookeeper_access
+    #   <p>Access control settings for zookeeper</p>
+    #   @return [Types::ZookeeperAccess]
     class UpdateConnectivityRequest < Struct.new(
       nil,
       :cluster_arn,
       :connectivity_info,
       :current_version,
+      :zookeeper_access,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3521,6 +4928,40 @@ module Aws::Kafka
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the cluster.</p>
+    #   @return [String]
+    # @!attribute current_version
+    #   <p>The current version of the cluster.</p>
+    #   @return [String]
+    # @!attribute rebalancing
+    #   <p>Specifies if intelligent rebalancing should be turned on for your cluster. The default intelligent rebalancing status is ACTIVE for all new MSK Provisioned clusters that you create with Express brokers.</p>
+    #   @return [Types::Rebalancing]
+    class UpdateRebalancingRequest < Struct.new(
+      nil,
+      :cluster_arn,
+      :current_version,
+      :rebalancing,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) of the cluster whose intelligent rebalancing status you've updated.</p>
+    #   @return [String]
+    # @!attribute cluster_operation_arn
+    #   <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+    #   @return [String]
+    class UpdateRebalancingResponse < Struct.new(
+      nil,
+      :cluster_arn,
+      :cluster_operation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Update information relating to replication between a given source and target Kafka cluster.</p>
     # @!attribute consumer_group_replication
     #   <p>Updated consumer group replication information.</p>
@@ -3534,20 +4975,32 @@ module Aws::Kafka
     # @!attribute source_kafka_cluster_arn
     #   <p>The ARN of the source Kafka cluster.</p>
     #   @return [String]
+    # @!attribute source_kafka_cluster_id
+    #   <p>The ID of the source Kafka cluster.</p>
+    #   @return [String]
     # @!attribute target_kafka_cluster_arn
     #   <p>The ARN of the target Kafka cluster.</p>
+    #   @return [String]
+    # @!attribute target_kafka_cluster_id
+    #   <p>The ID of the target Kafka cluster.</p>
     #   @return [String]
     # @!attribute topic_replication
     #   <p>Updated topic replication information.</p>
     #   @return [Types::TopicReplicationUpdate]
+    # @!attribute log_delivery
+    #   <p>Configuration for delivering replicator logs to customer destinations.</p>
+    #   @return [Types::LogDelivery]
     class UpdateReplicationInfoRequest < Struct.new(
       nil,
       :consumer_group_replication,
       :current_version,
       :replicator_arn,
       :source_kafka_cluster_arn,
+      :source_kafka_cluster_id,
       :target_kafka_cluster_arn,
+      :target_kafka_cluster_id,
       :topic_replication,
+      :log_delivery,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3644,6 +5097,48 @@ module Aws::Kafka
       nil,
       :cluster_arn,
       :cluster_operation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>The name of the topic to update configuration for.</p>
+    #   @return [String]
+    # @!attribute configs
+    #   <p>The new topic configurations encoded as a Base64 string.</p>
+    #   @return [String]
+    # @!attribute partition_count
+    #   <p>The new total number of partitions for the topic.</p>
+    #   @return [Integer]
+    class UpdateTopicRequest < Struct.new(
+      nil,
+      :cluster_arn,
+      :topic_name,
+      :configs,
+      :partition_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute topic_arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_name
+    #   <p>The name of the topic whose configuration was updated.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the topic update.</p>
+    #   @return [String]
+    class UpdateTopicResponse < Struct.new(
+      nil,
+      :topic_arn,
+      :topic_name,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3834,6 +5329,18 @@ module Aws::Kafka
     #   <p>TLS authentication is on or off for VPC connectivity.</p>
     #   @return [Boolean]
     class VpcConnectivityTls < Struct.new(
+      nil,
+      :enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Access control settings for zookeeper</p>
+    # @!attribute enabled
+    #   <p>Zookeeper Access was on or off for the cluster</p>
+    #   @return [Boolean]
+    class ZookeeperAccess < Struct.new(
       nil,
       :enabled,
       keyword_init: true

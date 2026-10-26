@@ -2,9 +2,87 @@ module Aws::SageMaker
   module Schema
     include Smithy::Schema::Shapes
 
+    AIAdapterId: StringShape
+    AIAdapterModelPackageEntry: StructureShape
+    AIAdapterModelPackageEntryList: ListShape
+    AIAdapterS3Entry: StructureShape
+    AIAdapterS3EntryList: ListShape
+    AIAdapterSource: UnionShape
+    AIBenchmarkEndpoint: StructureShape
+    AIBenchmarkInferenceComponent: StructureShape
+    AIBenchmarkInferenceComponentList: ListShape
+    AIBenchmarkJobArn: StringShape
+    AIBenchmarkJobStatus: EnumShape
+    AIBenchmarkJobSummary: StructureShape
+    AIBenchmarkJobSummaryList: ListShape
+    AIBenchmarkNetworkConfig: StructureShape
+    AIBenchmarkOutputConfig: StructureShape
+    AIBenchmarkOutputResult: StructureShape
+    AIBenchmarkTarget: UnionShape
+    AICapacityReservationConfig: StructureShape
+    AICapacityReservationPreference: EnumShape
+    AIChannelName: StringShape
+    AICloudWatchLogs: StructureShape
+    AICloudWatchLogsList: ListShape
+    AIDatasetConfig: UnionShape
+    AIEntityName: StringShape
+    AIInferenceSpecificationName: StringShape
+    AIMlReservationArn: StringShape
+    AIMlReservationArnList: ListShape
+    AIMlflowConfig: StructureShape
+    AIMlflowExperimentName: StringShape
+    AIMlflowResourceArn: StringShape
+    AIMlflowRunName: StringShape
+    AIModelSource: UnionShape
+    AIModelSourceS3: StructureShape
+    AIRecommendation: StructureShape
+    AIRecommendationAdapterDetails: StructureShape
+    AIRecommendationAllowOptimization: BooleanShape
+    AIRecommendationComputeSpec: StructureShape
+    AIRecommendationConstraint: StructureShape
+    AIRecommendationConstraintList: ListShape
+    AIRecommendationCopyCountPerInstance: IntegerShape
+    AIRecommendationDeploymentConfiguration: StructureShape
+    AIRecommendationDeploymentS3Channel: StructureShape
+    AIRecommendationDeploymentS3ChannelList: ListShape
+    AIRecommendationInferenceFramework: EnumShape
+    AIRecommendationInferenceSpecification: StructureShape
+    AIRecommendationInstanceCount: IntegerShape
+    AIRecommendationInstanceDetail: StructureShape
+    AIRecommendationInstanceDetailList: ListShape
+    AIRecommendationInstanceType: EnumShape
+    AIRecommendationInstanceTypeList: ListShape
+    AIRecommendationJobArn: StringShape
+    AIRecommendationJobStatus: EnumShape
+    AIRecommendationJobSummary: StructureShape
+    AIRecommendationJobSummaryList: ListShape
+    AIRecommendationList: ListShape
+    AIRecommendationMetric: EnumShape
+    AIRecommendationMinCpuMemoryRequiredInMb: IntegerShape
+    AIRecommendationModelDetails: StructureShape
+    AIRecommendationOptimizationConfigMap: MapShape
+    AIRecommendationOptimizationDetail: StructureShape
+    AIRecommendationOptimizationDetailList: ListShape
+    AIRecommendationOptimizationType: EnumShape
+    AIRecommendationOutputConfig: StructureShape
+    AIRecommendationOutputResult: StructureShape
+    AIRecommendationPerformanceMetric: StructureShape
+    AIRecommendationPerformanceTarget: StructureShape
+    AIResourceIdentifier: StringShape
+    AIWorkloadConfigArn: StringShape
+    AIWorkloadConfigSummary: StructureShape
+    AIWorkloadConfigSummaryList: ListShape
+    AIWorkloadConfigs: StructureShape
+    AIWorkloadDataSource: StructureShape
+    AIWorkloadInputDataConfig: StructureShape
+    AIWorkloadInputDataConfigList: ListShape
+    AIWorkloadS3DataSource: StructureShape
+    AbsoluteBorrowLimitResourceList: ListShape
+    AcceleratorPartitionConfig: StructureShape
     AcceleratorsAmount: IntegerShape
     Accept: StringShape
     AcceptEula: BooleanShape
+    AccountDefaultStatus: EnumShape
     AccountId: StringShape
     ActionArn: StringShape
     ActionSource: StructureShape
@@ -12,6 +90,9 @@ module Aws::SageMaker
     ActionSummaries: ListShape
     ActionSummary: StructureShape
     ActivationState: EnumShape
+    ActiveClusterOperationCount: IntegerShape
+    ActiveClusterOperationName: EnumShape
+    ActiveOperations: MapShape
     AddAssociationRequest: StructureShape
     AddAssociationResponse: StructureShape
     AddClusterNodeSpecification: StructureShape
@@ -68,6 +149,7 @@ module Aws::SageMaker
     AppSpecification: StructureShape
     AppStatus: EnumShape
     AppType: EnumShape
+    ApplicationArn: StringShape
     ApprovalDescription: StringShape
     ArnOrName: StringShape
     ArtifactArn: StringShape
@@ -81,10 +163,13 @@ module Aws::SageMaker
     ArtifactSummaries: ListShape
     ArtifactSummary: StructureShape
     AssemblyType: EnumShape
+    AssignedGroupPatternsList: ListShape
     AssociateTrialComponentRequest: StructureShape
     AssociateTrialComponentResponse: StructureShape
     AssociationEdgeType: EnumShape
     AssociationEntityArn: StringShape
+    AssociationInfo: StructureShape
+    AssociationInfoList: ListShape
     AssociationSummaries: ListShape
     AssociationSummary: StructureShape
     AssumableRoleArns: ListShape
@@ -100,7 +185,10 @@ module Aws::SageMaker
     AthenaQueryString: StringShape
     AthenaResultCompressionType: EnumShape
     AthenaResultFormat: EnumShape
+    AthenaStepMetadata: StructureShape
     AthenaWorkGroup: StringShape
+    AttachClusterNodeNetworkInterfaceRequest: StructureShape
+    AttachClusterNodeNetworkInterfaceResponse: StructureShape
     AttachClusterNodeVolumeRequest: StructureShape
     AttachClusterNodeVolumeResponse: StructureShape
     AttributeName: StringShape
@@ -171,10 +259,16 @@ module Aws::SageMaker
     Autotune: StructureShape
     AutotuneMode: EnumShape
     AvailabilityZone: StringShape
+    AvailabilityZoneBalanceEnforcementMode: EnumShape
+    AvailabilityZoneBalanceMaxImbalance: IntegerShape
+    AvailabilityZoneId: StringShape
     AvailableInstanceCount: IntegerShape
     AvailableSpareInstanceCount: IntegerShape
+    AvailableUpgrade: StructureShape
     AwsManagedHumanLoopRequestSource: EnumShape
     BacktestResultsLocation: StringShape
+    BaseModel: StructureShape
+    BaseModelArn: StringShape
     BaseModelName: StringShape
     BatchAddClusterNodesError: StructureShape
     BatchAddClusterNodesErrorCode: EnumShape
@@ -196,11 +290,31 @@ module Aws::SageMaker
     BatchDescribeModelPackageInput: StructureShape
     BatchDescribeModelPackageOutput: StructureShape
     BatchDescribeModelPackageSummary: StructureShape
+    BatchRebootClusterNodeLogicalIdsError: StructureShape
+    BatchRebootClusterNodeLogicalIdsErrors: ListShape
+    BatchRebootClusterNodesError: StructureShape
+    BatchRebootClusterNodesErrorCode: EnumShape
+    BatchRebootClusterNodesErrors: ListShape
+    BatchRebootClusterNodesRequest: StructureShape
+    BatchRebootClusterNodesResponse: StructureShape
+    BatchReplaceClusterNodeLogicalIdsError: StructureShape
+    BatchReplaceClusterNodeLogicalIdsErrors: ListShape
+    BatchReplaceClusterNodesError: StructureShape
+    BatchReplaceClusterNodesErrorCode: EnumShape
+    BatchReplaceClusterNodesErrors: ListShape
+    BatchReplaceClusterNodesRequest: StructureShape
+    BatchReplaceClusterNodesResponse: StructureShape
     BatchStrategy: EnumShape
     BatchTransformInput: StructureShape
+    BedrockCustomModelDeploymentMetadata: StructureShape
+    BedrockCustomModelMetadata: StructureShape
+    BedrockModelImportMetadata: StructureShape
+    BedrockProvisionedModelThroughputMetadata: StructureShape
     BestObjectiveNotImproving: StructureShape
     Bias: StructureShape
     BillableTimeInSeconds: IntegerShape
+    BillableTokenCount: IntegerShape
+    BillableTokenUsage: StructureShape
     BlockedReason: StringShape
     BlueGreenUpdatePolicy: StructureShape
     Boolean: BooleanShape
@@ -296,10 +410,22 @@ module Aws::SageMaker
     ClarifyTextConfig: StructureShape
     ClarifyTextGranularity: EnumShape
     ClarifyTextLanguage: EnumShape
+    CleanupFailure: StructureShape
+    CleanupFailureErrorCode: EnumShape
+    CleanupFailureList: ListShape
+    CleanupStepMetadata: StructureShape
+    CleanupStepNameList: ListShape
     ClientId: StringShape
     ClientSecret: StringShape
     ClientToken: StringShape
+    ClusterAccountingDatabase: StructureShape
+    ClusterAccountingDatabaseEndpoint: StringShape
+    ClusterAccountingDatabaseName: StringShape
+    ClusterAccountingDatabasePort: IntegerShape
+    ClusterAccountingDatabaseSecretArn: StringShape
     ClusterArn: StringShape
+    ClusterAutoPatchConfig: StructureShape
+    ClusterAutoPatchConfigDetails: StructureShape
     ClusterAutoScalerType: EnumShape
     ClusterAutoScalingConfig: StructureShape
     ClusterAutoScalingConfigOutput: StructureShape
@@ -307,14 +433,24 @@ module Aws::SageMaker
     ClusterAutoScalingStatus: EnumShape
     ClusterAvailabilityZone: StringShape
     ClusterAvailabilityZoneId: StringShape
+    ClusterAvailabilityZones: ListShape
+    ClusterCapacityRequirements: StructureShape
+    ClusterCapacityType: EnumShape
     ClusterConfigMode: EnumShape
+    ClusterDnsName: StringShape
     ClusterEbsVolumeConfig: StructureShape
     ClusterEbsVolumeSizeInGB: IntegerShape
     ClusterEventDetail: StructureShape
+    ClusterEventLevel: EnumShape
     ClusterEventMaxResults: IntegerShape
     ClusterEventResourceType: EnumShape
     ClusterEventSummaries: ListShape
     ClusterEventSummary: StructureShape
+    ClusterFSxLustreDeletionPolicy: EnumShape
+    ClusterFsxLustreConfig: StructureShape
+    ClusterFsxMountPath: StringShape
+    ClusterFsxOpenZfsConfig: StructureShape
+    ClusterImageVersionStatus: EnumShape
     ClusterInstanceCount: IntegerShape
     ClusterInstanceGroupDetails: StructureShape
     ClusterInstanceGroupDetailsList: ListShape
@@ -324,16 +460,38 @@ module Aws::SageMaker
     ClusterInstanceGroupsToDelete: ListShape
     ClusterInstanceMemoryAllocationPercentage: IntegerShape
     ClusterInstancePlacement: StructureShape
+    ClusterInstanceRequirementDetails: StructureShape
+    ClusterInstanceRequirements: StructureShape
     ClusterInstanceStatus: EnumShape
     ClusterInstanceStatusDetails: StructureShape
     ClusterInstanceStorageConfig: UnionShape
     ClusterInstanceStorageConfigs: ListShape
     ClusterInstanceType: EnumShape
+    ClusterInstanceTypeDetail: StructureShape
+    ClusterInstanceTypeDetails: ListShape
+    ClusterInstanceTypes: ListShape
+    ClusterInterfaceType: EnumShape
+    ClusterKubernetesConfig: StructureShape
+    ClusterKubernetesConfigDetails: StructureShape
+    ClusterKubernetesConfigNodeDetails: StructureShape
+    ClusterKubernetesLabelKey: StringShape
+    ClusterKubernetesLabelValue: StringShape
+    ClusterKubernetesLabels: MapShape
+    ClusterKubernetesTaint: StructureShape
+    ClusterKubernetesTaintEffect: EnumShape
+    ClusterKubernetesTaintKey: StringShape
+    ClusterKubernetesTaintValue: StringShape
+    ClusterKubernetesTaints: ListShape
     ClusterLifeCycleConfig: StructureShape
     ClusterLifeCycleConfigFileName: StringShape
     ClusterMetadata: StructureShape
+    ClusterMountName: StringShape
     ClusterName: StringShape
     ClusterNameOrArn: StringShape
+    ClusterNetworkInterface: StructureShape
+    ClusterNetworkInterfaceAttachmentId: StringShape
+    ClusterNetworkInterfaceDetails: StructureShape
+    ClusterNetworkInterfaceId: StringShape
     ClusterNodeDetails: StructureShape
     ClusterNodeId: StringShape
     ClusterNodeIds: ListShape
@@ -344,8 +502,15 @@ module Aws::SageMaker
     ClusterNodeSummaries: ListShape
     ClusterNodeSummary: StructureShape
     ClusterNonNegativeInstanceCount: IntegerShape
+    ClusterOnDemandOptions: StructureShape
     ClusterOrchestrator: StructureShape
     ClusterOrchestratorEksConfig: StructureShape
+    ClusterOrchestratorSlurmConfig: StructureShape
+    ClusterPartitionName: StringShape
+    ClusterPartitionNames: ListShape
+    ClusterPatchSchedule: StructureShape
+    ClusterPatchScheduleDetails: StructureShape
+    ClusterPatchingStrategy: EnumShape
     ClusterPrivateDnsHostname: StringShape
     ClusterPrivatePrimaryIp: StringShape
     ClusterPrivatePrimaryIpv6: StringShape
@@ -353,12 +518,21 @@ module Aws::SageMaker
     ClusterRestrictedInstanceGroupDetailsList: ListShape
     ClusterRestrictedInstanceGroupSpecification: StructureShape
     ClusterRestrictedInstanceGroupSpecifications: ListShape
+    ClusterRestrictedInstanceGroupsConfig: StructureShape
+    ClusterRestrictedInstanceGroupsConfigOutput: StructureShape
     ClusterSchedulerConfigArn: StringShape
     ClusterSchedulerConfigId: StringShape
     ClusterSchedulerConfigSummary: StructureShape
     ClusterSchedulerConfigSummaryList: ListShape
     ClusterSchedulerPriorityClassName: StringShape
+    ClusterSharedEnvironmentConfig: StructureShape
+    ClusterSharedEnvironmentConfigDetails: StructureShape
+    ClusterSlurmConfig: StructureShape
+    ClusterSlurmConfigDetails: StructureShape
+    ClusterSlurmConfigStrategy: EnumShape
+    ClusterSlurmNodeType: EnumShape
     ClusterSortBy: EnumShape
+    ClusterSpotOptions: StructureShape
     ClusterStatus: EnumShape
     ClusterSummaries: ListShape
     ClusterSummary: StructureShape
@@ -418,6 +592,7 @@ module Aws::SageMaker
     ContainerEntrypointString: StringShape
     ContainerHostname: StringShape
     ContainerImage: StringShape
+    ContainerMetricsConfig: StructureShape
     ContainerMode: EnumShape
     ContentClassifier: EnumShape
     ContentClassifiers: ListShape
@@ -436,6 +611,12 @@ module Aws::SageMaker
     ContinuousParameterRanges: ListShape
     ConvergenceDetected: StructureShape
     CountryCode: StringShape
+    CreateAIBenchmarkJobRequest: StructureShape
+    CreateAIBenchmarkJobResponse: StructureShape
+    CreateAIRecommendationJobRequest: StructureShape
+    CreateAIRecommendationJobResponse: StructureShape
+    CreateAIWorkloadConfigRequest: StructureShape
+    CreateAIWorkloadConfigResponse: StructureShape
     CreateActionRequest: StructureShape
     CreateActionResponse: StructureShape
     CreateAlgorithmInput: StructureShape
@@ -501,8 +682,12 @@ module Aws::SageMaker
     CreateInferenceExperimentResponse: StructureShape
     CreateInferenceRecommendationsJobRequest: StructureShape
     CreateInferenceRecommendationsJobResponse: StructureShape
+    CreateJobRequest: StructureShape
+    CreateJobResponse: StructureShape
     CreateLabelingJobRequest: StructureShape
     CreateLabelingJobResponse: StructureShape
+    CreateMlflowAppRequest: StructureShape
+    CreateMlflowAppResponse: StructureShape
     CreateMlflowTrackingServerRequest: StructureShape
     CreateMlflowTrackingServerResponse: StructureShape
     CreateModelBiasJobDefinitionRequest: StructureShape
@@ -537,6 +722,8 @@ module Aws::SageMaker
     CreatePipelineResponse: StructureShape
     CreatePresignedDomainUrlRequest: StructureShape
     CreatePresignedDomainUrlResponse: StructureShape
+    CreatePresignedMlflowAppUrlRequest: StructureShape
+    CreatePresignedMlflowAppUrlResponse: StructureShape
     CreatePresignedMlflowTrackingServerUrlRequest: StructureShape
     CreatePresignedMlflowTrackingServerUrlResponse: StructureShape
     CreatePresignedNotebookInstanceUrlInput: StructureShape
@@ -555,6 +742,8 @@ module Aws::SageMaker
     CreateTrainingJobResponse: StructureShape
     CreateTrainingPlanRequest: StructureShape
     CreateTrainingPlanResponse: StructureShape
+    CreateTrainingSessionRequest: StructureShape
+    CreateTrainingSessionResponse: StructureShape
     CreateTransformJobRequest: StructureShape
     CreateTransformJobResponse: StructureShape
     CreateTrialComponentRequest: StructureShape
@@ -583,10 +772,12 @@ module Aws::SageMaker
     CustomImageContainerEnvironmentVariables: MapShape
     CustomImages: ListShape
     CustomPosixUserConfig: StructureShape
+    CustomerKmsKeyArn: StringShape
     CustomerMetadataKey: StringShape
     CustomerMetadataKeyList: ListShape
     CustomerMetadataMap: MapShape
     CustomerMetadataValue: StringShape
+    CustomizationTechnique: EnumShape
     CustomizedMetricSpecification: StructureShape
     DataCaptureConfig: StructureShape
     DataCaptureConfigSummary: StructureShape
@@ -601,18 +792,30 @@ module Aws::SageMaker
     DataSource: StructureShape
     DataSourceName: EnumShape
     Database: StringShape
+    DatabaseConfigurationMetadata: StructureShape
+    DatabaseConfigurationRollbackStatus: EnumShape
     DatasetDefinition: StructureShape
+    DatasetSource: StructureShape
     DebugHookConfig: StructureShape
     DebugRuleConfiguration: StructureShape
     DebugRuleConfigurations: ListShape
     DebugRuleEvaluationStatus: StructureShape
     DebugRuleEvaluationStatuses: ListShape
+    DeepHealthCheckConfigurations: ListShape
     DeepHealthCheckType: EnumShape
+    DeepHealthChecks: ListShape
+    DefaultDomainIdList: ListShape
     DefaultEbsStorageSettings: StructureShape
     DefaultGid: IntegerShape
     DefaultSpaceSettings: StructureShape
     DefaultSpaceStorageSettings: StructureShape
     DefaultUid: IntegerShape
+    DeleteAIBenchmarkJobRequest: StructureShape
+    DeleteAIBenchmarkJobResponse: StructureShape
+    DeleteAIRecommendationJobRequest: StructureShape
+    DeleteAIRecommendationJobResponse: StructureShape
+    DeleteAIWorkloadConfigRequest: StructureShape
+    DeleteAIWorkloadConfigResponse: StructureShape
     DeleteActionRequest: StructureShape
     DeleteActionResponse: StructureShape
     DeleteAlgorithmInput: StructureShape
@@ -655,6 +858,10 @@ module Aws::SageMaker
     DeleteInferenceComponentInput: StructureShape
     DeleteInferenceExperimentRequest: StructureShape
     DeleteInferenceExperimentResponse: StructureShape
+    DeleteJobRequest: StructureShape
+    DeleteJobResponse: StructureShape
+    DeleteMlflowAppRequest: StructureShape
+    DeleteMlflowAppResponse: StructureShape
     DeleteMlflowTrackingServerRequest: StructureShape
     DeleteMlflowTrackingServerResponse: StructureShape
     DeleteModelBiasJobDefinitionRequest: StructureShape
@@ -673,11 +880,15 @@ module Aws::SageMaker
     DeletePartnerAppResponse: StructureShape
     DeletePipelineRequest: StructureShape
     DeletePipelineResponse: StructureShape
+    DeleteProcessingJobRequest: StructureShape
     DeleteProjectInput: StructureShape
     DeleteSpaceRequest: StructureShape
     DeleteStudioLifecycleConfigRequest: StructureShape
     DeleteTagsInput: StructureShape
     DeleteTagsOutput: StructureShape
+    DeleteTrainingJobRequest: StructureShape
+    DeleteTrainingSessionRequest: StructureShape
+    DeleteTrainingSessionResponse: StructureShape
     DeleteTrialComponentRequest: StructureShape
     DeleteTrialComponentResponse: StructureShape
     DeleteTrialRequest: StructureShape
@@ -701,6 +912,12 @@ module Aws::SageMaker
     DeploymentStages: ListShape
     DeregisterDevicesRequest: StructureShape
     DerivedInformation: StructureShape
+    DescribeAIBenchmarkJobRequest: StructureShape
+    DescribeAIBenchmarkJobResponse: StructureShape
+    DescribeAIRecommendationJobRequest: StructureShape
+    DescribeAIRecommendationJobResponse: StructureShape
+    DescribeAIWorkloadConfigRequest: StructureShape
+    DescribeAIWorkloadConfigResponse: StructureShape
     DescribeActionRequest: StructureShape
     DescribeActionResponse: StructureShape
     DescribeAlgorithmInput: StructureShape
@@ -773,10 +990,16 @@ module Aws::SageMaker
     DescribeInferenceExperimentResponse: StructureShape
     DescribeInferenceRecommendationsJobRequest: StructureShape
     DescribeInferenceRecommendationsJobResponse: StructureShape
+    DescribeJobRequest: StructureShape
+    DescribeJobResponse: StructureShape
+    DescribeJobSchemaVersionRequest: StructureShape
+    DescribeJobSchemaVersionResponse: StructureShape
     DescribeLabelingJobRequest: StructureShape
     DescribeLabelingJobResponse: StructureShape
     DescribeLineageGroupRequest: StructureShape
     DescribeLineageGroupResponse: StructureShape
+    DescribeMlflowAppRequest: StructureShape
+    DescribeMlflowAppResponse: StructureShape
     DescribeMlflowTrackingServerRequest: StructureShape
     DescribeMlflowTrackingServerResponse: StructureShape
     DescribeModelBiasJobDefinitionRequest: StructureShape
@@ -825,8 +1048,12 @@ module Aws::SageMaker
     DescribeSubscribedWorkteamResponse: StructureShape
     DescribeTrainingJobRequest: StructureShape
     DescribeTrainingJobResponse: StructureShape
+    DescribeTrainingPlanExtensionHistoryRequest: StructureShape
+    DescribeTrainingPlanExtensionHistoryResponse: StructureShape
     DescribeTrainingPlanRequest: StructureShape
     DescribeTrainingPlanResponse: StructureShape
+    DescribeTrainingSessionRequest: StructureShape
+    DescribeTrainingSessionResponse: StructureShape
     DescribeTransformJobRequest: StructureShape
     DescribeTransformJobResponse: StructureShape
     DescribeTrialComponentRequest: StructureShape
@@ -901,6 +1128,9 @@ module Aws::SageMaker
     DynamicScalingConfiguration: StructureShape
     EFSFileSystem: StructureShape
     EFSFileSystemConfig: StructureShape
+    EMRServerlessApplicationId: StringShape
+    EMRServerlessJobRunId: StringShape
+    EMRServerlessStepMetadata: StructureShape
     EMRStepMetadata: StructureShape
     EbsStorageSettings: StructureShape
     Ec2CapacityReservation: StructureShape
@@ -938,7 +1168,10 @@ module Aws::SageMaker
     EmrServerlessComputeConfig: StructureShape
     EmrServerlessSettings: StructureShape
     EmrSettings: StructureShape
+    EnableCaching: BooleanShape
     EnableCapture: BooleanShape
+    EnableDetailedObservability: BooleanShape
+    EnableEnhancedMetrics: BooleanShape
     EnableInfraCheck: BooleanShape
     EnableIotRoleAlias: BooleanShape
     EnableRemoteDebug: BooleanShape
@@ -982,6 +1215,8 @@ module Aws::SageMaker
     EnvironmentParameters: ListShape
     EnvironmentValue: StringShape
     ErrorInfo: StructureShape
+    EvaluationType: EnumShape
+    EvaluatorArn: StringShape
     EventDetails: StructureShape
     EventId: StringShape
     EventMetadata: UnionShape
@@ -989,8 +1224,10 @@ module Aws::SageMaker
     ExcludeFeaturesAttribute: StringShape
     ExecutionRoleArns: ListShape
     ExecutionRoleIdentityConfig: EnumShape
+    ExecutionRoleSessionNameMode: EnumShape
     ExecutionStatus: EnumShape
     ExitMessage: StringShape
+    ExpectedPerformanceList: ListShape
     Experiment: StructureShape
     ExperimentArn: StringShape
     ExperimentConfig: StructureShape
@@ -1005,6 +1242,8 @@ module Aws::SageMaker
     Explainability: StructureShape
     ExplainabilityLocation: StringShape
     ExplainerConfig: StructureShape
+    ExtendTrainingPlanRequest: StructureShape
+    ExtendTrainingPlanResponse: StructureShape
     FSxLustreConfig: StructureShape
     FSxLustreFileSystem: StructureShape
     FSxLustreFileSystemConfig: StructureShape
@@ -1072,6 +1311,9 @@ module Aws::SageMaker
     FlowDefinitionTaskKeywords: ListShape
     FlowDefinitionTaskTimeLimitInSeconds: IntegerShape
     FlowDefinitionTaskTitle: StringShape
+    ForEachSelectorResult: StructureShape
+    ForEachStatus: EnumShape
+    ForEachStepMetadata: StructureShape
     ForecastFrequency: StringShape
     ForecastHorizon: IntegerShape
     ForecastQuantile: StringShape
@@ -1097,6 +1339,8 @@ module Aws::SageMaker
     GitConfigForUpdate: StructureShape
     GitConfigUrl: StringShape
     Group: StringShape
+    GroupNamePattern: StringShape
+    GroupPatternsList: ListShape
     GroupingAttributeName: StringShape
     GroupingAttributeNames: ListShape
     Groups: ListShape
@@ -1107,10 +1351,12 @@ module Aws::SageMaker
     HiddenSageMakerImageVersionAliasesList: ListShape
     HolidayConfig: ListShape
     HolidayConfigAttributes: StructureShape
+    HomeEfsFileSystemCreation: EnumShape
     HookParameters: MapShape
     Horovod: BooleanShape
     HubAccessConfig: StructureShape
     HubArn: StringShape
+    HubContent: StructureShape
     HubContentArn: StringShape
     HubContentDependency: StructureShape
     HubContentDependencyList: ListShape
@@ -1121,12 +1367,14 @@ module Aws::SageMaker
     HubContentInfoList: ListShape
     HubContentMarkdown: StringShape
     HubContentName: StringShape
+    HubContentSearchKeyword: StringShape
     HubContentSearchKeywordList: ListShape
     HubContentSortBy: EnumShape
     HubContentStatus: EnumShape
     HubContentSupportStatus: EnumShape
     HubContentType: EnumShape
     HubContentVersion: StringShape
+    HubDataSetArn: StringShape
     HubDescription: StringShape
     HubDisplayName: StringShape
     HubInfo: StructureShape
@@ -1192,9 +1440,12 @@ module Aws::SageMaker
     IPAddressType: EnumShape
     IamIdentity: StructureShape
     IamPolicyConstraints: StructureShape
+    IdcConfigInput: StructureShape
+    IdcConfigOutput: StructureShape
     IdempotencyToken: StringShape
     IdentityProviderOAuthSetting: StructureShape
     IdentityProviderOAuthSettings: ListShape
+    IdleResourceSharing: EnumShape
     IdleSettings: StructureShape
     IdleTimeoutInMinutes: IntegerShape
     Image: StructureShape
@@ -1211,6 +1462,7 @@ module Aws::SageMaker
     ImageId: StringShape
     ImageName: StringShape
     ImageNameContains: StringShape
+    ImageReleaseVersion: StringShape
     ImageSortBy: EnumShape
     ImageSortOrder: EnumShape
     ImageStatus: EnumShape
@@ -1229,22 +1481,33 @@ module Aws::SageMaker
     ImportHubContentResponse: StructureShape
     InUseInstanceCount: IntegerShape
     IncludeNodeLogicalIdsBoolean: BooleanShape
+    IncludedData: EnumShape
     InferenceComponentArn: StringShape
+    InferenceComponentAvailabilityZoneBalance: StructureShape
     InferenceComponentCapacitySize: StructureShape
     InferenceComponentCapacitySizeType: EnumShape
     InferenceComponentComputeResourceRequirements: StructureShape
     InferenceComponentContainerSpecification: StructureShape
     InferenceComponentContainerSpecificationSummary: StructureShape
     InferenceComponentCopyCount: IntegerShape
+    InferenceComponentDataCacheConfig: StructureShape
+    InferenceComponentDataCacheConfigSummary: StructureShape
     InferenceComponentDeploymentConfig: StructureShape
+    InferenceComponentMetadata: StructureShape
     InferenceComponentName: StringShape
     InferenceComponentNameContains: StringShape
+    InferenceComponentPlacementStatus: StructureShape
+    InferenceComponentPlacementStatusList: ListShape
+    InferenceComponentPlacementStrategy: EnumShape
     InferenceComponentRollingUpdatePolicy: StructureShape
     InferenceComponentRuntimeConfig: StructureShape
     InferenceComponentRuntimeConfigSummary: StructureShape
+    InferenceComponentSchedulingConfig: StructureShape
     InferenceComponentSortKey: EnumShape
     InferenceComponentSpecification: StructureShape
+    InferenceComponentSpecificationList: ListShape
     InferenceComponentSpecificationSummary: StructureShape
+    InferenceComponentSpecificationSummaryList: ListShape
     InferenceComponentStartupParameters: StructureShape
     InferenceComponentStatus: EnumShape
     InferenceComponentSummary: StructureShape
@@ -1281,8 +1544,10 @@ module Aws::SageMaker
     InputDataConfig: ListShape
     InputMode: EnumShape
     InputModes: ListShape
+    InstanceArn: StringShape
     InstanceCount: IntegerShape
     InstanceGroup: StructureShape
+    InstanceGroupHealthCheckConfiguration: StructureShape
     InstanceGroupMetadata: StructureShape
     InstanceGroupName: StringShape
     InstanceGroupNames: ListShape
@@ -1290,9 +1555,19 @@ module Aws::SageMaker
     InstanceGroupStatus: EnumShape
     InstanceGroupTrainingPlanStatus: StringShape
     InstanceGroups: ListShape
+    InstanceIds: ListShape
     InstanceMetadata: StructureShape
     InstanceMetadataServiceConfiguration: StructureShape
     InstancePlacementConfig: StructureShape
+    InstancePool: StructureShape
+    InstancePoolList: ListShape
+    InstancePoolPriority: IntegerShape
+    InstancePoolSummary: StructureShape
+    InstancePoolSummaryList: ListShape
+    InstancePreference: StructureShape
+    InstancePreferenceList: ListShape
+    InstanceRequirementsEniConfiguration: StructureShape
+    InstanceRequirementsEniConfigurations: ListShape
     InstanceType: EnumShape
     Integer: IntegerShape
     IntegerParameterRange: StructureShape
@@ -1305,9 +1580,28 @@ module Aws::SageMaker
     IotRoleAlias: StringShape
     IsTrackingServerActive: EnumShape
     ItemIdentifierAttributeName: StringShape
+    IterationContext: StructureShape
+    JavaBoolean: BooleanShape
+    JavaInteger: IntegerShape
+    JavaLong: IntegerShape
+    Job: StructureShape
+    JobArn: StringShape
+    JobCategory: EnumShape
+    JobConfigDocument: StringShape
+    JobConfigSchemaVersionSummary: StructureShape
+    JobConfigSchemas: ListShape
     JobDurationInSeconds: IntegerShape
+    JobName: StringShape
     JobReferenceCode: StringShape
     JobReferenceCodeContains: StringShape
+    JobSchemaVersion: StringShape
+    JobSecondaryStatus: EnumShape
+    JobSecondaryStatusTransition: StructureShape
+    JobSecondaryStatusTransitions: ListShape
+    JobStatus: EnumShape
+    JobStepMetadata: StructureShape
+    JobSummaries: ListShape
+    JobSummary: StructureShape
     JobType: EnumShape
     JoinSource: EnumShape
     JsonContentType: StringShape
@@ -1361,7 +1655,17 @@ module Aws::SageMaker
     LineageGroupNameOrArn: StringShape
     LineageGroupSummaries: ListShape
     LineageGroupSummary: StructureShape
+    LineageMetadata: StructureShape
     LineageType: EnumShape
+    ListAIBenchmarkJobsRequest: StructureShape
+    ListAIBenchmarkJobsResponse: StructureShape
+    ListAIBenchmarkJobsSortBy: EnumShape
+    ListAIRecommendationJobsRequest: StructureShape
+    ListAIRecommendationJobsResponse: StructureShape
+    ListAIRecommendationJobsSortBy: EnumShape
+    ListAIWorkloadConfigsRequest: StructureShape
+    ListAIWorkloadConfigsResponse: StructureShape
+    ListAIWorkloadConfigsSortBy: EnumShape
     ListActionsRequest: StructureShape
     ListActionsResponse: StructureShape
     ListAlgorithmsInput: StructureShape
@@ -1445,6 +1749,10 @@ module Aws::SageMaker
     ListInferenceRecommendationsJobsRequest: StructureShape
     ListInferenceRecommendationsJobsResponse: StructureShape
     ListInferenceRecommendationsJobsSortBy: EnumShape
+    ListJobSchemaVersionsRequest: StructureShape
+    ListJobSchemaVersionsResponse: StructureShape
+    ListJobsRequest: StructureShape
+    ListJobsResponse: StructureShape
     ListLabelingJobsForWorkteamRequest: StructureShape
     ListLabelingJobsForWorkteamResponse: StructureShape
     ListLabelingJobsForWorkteamSortByOptions: EnumShape
@@ -1454,6 +1762,8 @@ module Aws::SageMaker
     ListLineageGroupsRequest: StructureShape
     ListLineageGroupsResponse: StructureShape
     ListMaxResults: IntegerShape
+    ListMlflowAppsRequest: StructureShape
+    ListMlflowAppsResponse: StructureShape
     ListMlflowTrackingServersRequest: StructureShape
     ListMlflowTrackingServersResponse: StructureShape
     ListModelBiasJobDefinitionsRequest: StructureShape
@@ -1526,6 +1836,8 @@ module Aws::SageMaker
     ListTrainingJobsResponse: StructureShape
     ListTrainingPlansRequest: StructureShape
     ListTrainingPlansResponse: StructureShape
+    ListTrainingSessionsRequest: StructureShape
+    ListTrainingSessionsResponse: StructureShape
     ListTransformJobsRequest: StructureShape
     ListTransformJobsResponse: StructureShape
     ListTrialComponentKey256: ListShape
@@ -1546,10 +1858,23 @@ module Aws::SageMaker
     LocalPath: StringShape
     Long: IntegerShape
     LongS3Uri: StringShape
+    LoraAlpha: IntegerShape
+    LoraConfig: StructureShape
+    MIGProfileType: EnumShape
     MLFramework: StringShape
+    MLflowArn: StringShape
+    MLflowConfiguration: StructureShape
+    MaintenanceStatus: EnumShape
+    MajorMinorVersion: StringShape
+    ManagedConfiguration: StructureShape
+    ManagedInstanceScalingCooldownInMinutes: IntegerShape
     ManagedInstanceScalingMaxInstanceCount: IntegerShape
+    ManagedInstanceScalingMaximumStepSize: IntegerShape
     ManagedInstanceScalingMinInstanceCount: IntegerShape
+    ManagedInstanceScalingScaleInStrategy: EnumShape
     ManagedInstanceScalingStatus: EnumShape
+    ManagedStorageType: EnumShape
+    MapString2048: MapShape
     MaxAutoMLJobRuntimeInSeconds: IntegerShape
     MaxCandidates: IntegerShape
     MaxConcurrentInvocationsPerInstance: IntegerShape
@@ -1584,14 +1909,33 @@ module Aws::SageMaker
     MetricDefinition: StructureShape
     MetricDefinitionList: ListShape
     MetricName: StringShape
+    MetricPublishFrequencyInSeconds: IntEnumShape
     MetricRegex: StringShape
     MetricSetSource: EnumShape
     MetricSpecification: UnionShape
     MetricValue: FloatShape
+    MetricsConfig: StructureShape
+    MetricsEndpoint: StructureShape
+    MetricsEndpointList: ListShape
+    MetricsEndpointPath: StringShape
     MetricsSource: StructureShape
     MinimumInstanceMetadataServiceVersion: StringShape
+    MlFlowResourceArn: StringShape
     MlReservationArn: StringShape
     MlTools: EnumShape
+    MlflowAppArn: StringShape
+    MlflowAppName: StringShape
+    MlflowAppStatus: EnumShape
+    MlflowAppSummaries: ListShape
+    MlflowAppSummary: StructureShape
+    MlflowAppUrl: StringShape
+    MlflowConfig: StructureShape
+    MlflowDetails: StructureShape
+    MlflowExperimentEntityName: StringShape
+    MlflowExperimentId: StringShape
+    MlflowExperimentName: StringShape
+    MlflowRunId: StringShape
+    MlflowRunName: StringShape
     MlflowVersion: StringShape
     Model: StructureShape
     ModelAccessConfig: StructureShape
@@ -1662,6 +2006,7 @@ module Aws::SageMaker
     ModelPackage: StructureShape
     ModelPackageArn: StringShape
     ModelPackageArnList: ListShape
+    ModelPackageConfig: StructureShape
     ModelPackageContainerDefinition: StructureShape
     ModelPackageContainerDefinitionList: ListShape
     ModelPackageFrameworkVersion: StringShape
@@ -1672,6 +2017,7 @@ module Aws::SageMaker
     ModelPackageGroupSummary: StructureShape
     ModelPackageGroupSummaryList: ListShape
     ModelPackageModelCard: StructureShape
+    ModelPackageRegistrationType: EnumShape
     ModelPackageSecurityConfig: StructureShape
     ModelPackageSortBy: EnumShape
     ModelPackageSourceUri: StringShape
@@ -1693,9 +2039,14 @@ module Aws::SageMaker
     ModelQualityJobInput: StructureShape
     ModelQuantizationConfig: StructureShape
     ModelRegisterSettings: StructureShape
+    ModelRegistrationMode: EnumShape
     ModelSetupTime: IntegerShape
     ModelShardingConfig: StructureShape
     ModelSortKey: EnumShape
+    ModelSpeculativeDecodingConfig: StructureShape
+    ModelSpeculativeDecodingS3DataType: EnumShape
+    ModelSpeculativeDecodingTechnique: EnumShape
+    ModelSpeculativeDecodingTrainingDataSource: StructureShape
     ModelStepMetadata: StructureShape
     ModelSummary: StructureShape
     ModelSummaryList: ListShape
@@ -1830,15 +2181,18 @@ module Aws::SageMaker
     OptimizationJobArn: StringShape
     OptimizationJobDeploymentInstanceType: EnumShape
     OptimizationJobEnvironmentVariables: MapShape
+    OptimizationJobMaxInstanceCount: IntegerShape
     OptimizationJobModelSource: StructureShape
     OptimizationJobModelSourceS3: StructureShape
     OptimizationJobOutputConfig: StructureShape
     OptimizationJobStatus: EnumShape
     OptimizationJobSummaries: ListShape
     OptimizationJobSummary: StructureShape
+    OptimizationJobTrainingPlanArns: ListShape
     OptimizationModelAcceptEula: BooleanShape
     OptimizationModelAccessConfig: StructureShape
     OptimizationOutput: StructureShape
+    OptimizationSageMakerModel: StructureShape
     OptimizationType: StringShape
     OptimizationTypes: ListShape
     OptimizationVpcConfig: StructureShape
@@ -1855,6 +2209,7 @@ module Aws::SageMaker
     OutputDataConfig: StructureShape
     OutputParameter: StructureShape
     OutputParameterList: ListShape
+    OutputS3Path: StringShape
     OwnershipSettings: StructureShape
     OwnershipSettingsSummary: StructureShape
     PaginationToken: StringShape
@@ -1883,6 +2238,7 @@ module Aws::SageMaker
     PartnerAppSummaries: ListShape
     PartnerAppSummary: StructureShape
     PartnerAppType: EnumShape
+    Peft: EnumShape
     PendingDeploymentSummary: StructureShape
     PendingProductionVariantSummary: StructureShape
     PendingProductionVariantSummaryList: ListShape
@@ -1924,6 +2280,9 @@ module Aws::SageMaker
     PolicyString: StringShape
     PredefinedMetricSpecification: StructureShape
     PreemptTeamTasks: EnumShape
+    PrefixAwareRoutingConcurrencyThreshold: IntegerShape
+    PrefixAwareRoutingConfig: StructureShape
+    PrefixAwareRoutingPrefixLength: IntegerShape
     PresignedDomainUrl: StringShape
     PresignedUrlAccessConfig: StructureShape
     PriorityClass: StructureShape
@@ -1939,6 +2298,8 @@ module Aws::SageMaker
     ProcessingInput: StructureShape
     ProcessingInputs: ListShape
     ProcessingInstanceCount: IntegerShape
+    ProcessingInstancePreference: StructureShape
+    ProcessingInstancePreferenceList: ListShape
     ProcessingInstanceType: EnumShape
     ProcessingJob: StructureShape
     ProcessingJobArn: StringShape
@@ -1975,6 +2336,7 @@ module Aws::SageMaker
     ProductionVariantInstanceType: EnumShape
     ProductionVariantList: ListShape
     ProductionVariantManagedInstanceScaling: StructureShape
+    ProductionVariantManagedInstanceScalingScaleInPolicy: StructureShape
     ProductionVariantModelDataDownloadTimeoutInSeconds: IntegerShape
     ProductionVariantRoutingConfig: StructureShape
     ProductionVariantSSMAccess: BooleanShape
@@ -2034,10 +2396,12 @@ module Aws::SageMaker
     RStudioServerProDomainSettingsForUpdate: StructureShape
     RStudioServerProUserGroup: EnumShape
     RandomSeed: IntegerShape
+    Rank: IntegerShape
     RealTimeInferenceConfig: StructureShape
     RealTimeInferenceRecommendation: StructureShape
     RealTimeInferenceRecommendations: ListShape
     RealtimeInferenceInstanceTypes: ListShape
+    RecipeName: StringShape
     RecommendationFailureReason: StringShape
     RecommendationJobArn: StringShape
     RecommendationJobCompilationJobName: StringShape
@@ -2083,6 +2447,7 @@ module Aws::SageMaker
     RegisterModelStepMetadata: StructureShape
     Relation: EnumShape
     ReleaseNotes: StringShape
+    ReleaseNotesList: ListShape
     RemoteDebugConfig: StructureShape
     RemoteDebugConfigForUpdate: StructureShape
     RenderUiTemplateRequest: StructureShape
@@ -2137,6 +2502,8 @@ module Aws::SageMaker
     RetryPipelineExecutionResponse: StructureShape
     RetryStrategy: StructureShape
     RoleArn: StringShape
+    RoleGroupAssignment: StructureShape
+    RoleGroupAssignmentsList: ListShape
     RollingDeploymentPolicy: StructureShape
     RollingUpdatePolicy: StructureShape
     RootAccess: EnumShape
@@ -2175,6 +2542,7 @@ module Aws::SageMaker
     ScheduleStatus: EnumShape
     ScheduledUpdateConfig: StructureShape
     SchedulerConfig: StructureShape
+    SchedulerConfigComponent: EnumShape
     SchedulerResourceStatus: EnumShape
     Scope: StringShape
     SearchExpression: StructureShape
@@ -2201,6 +2569,10 @@ module Aws::SageMaker
     SendPipelineExecutionStepFailureResponse: StructureShape
     SendPipelineExecutionStepSuccessRequest: StructureShape
     SendPipelineExecutionStepSuccessResponse: StructureShape
+    SequenceLength: StringShape
+    ServerlessJobBaseModelArn: StringShape
+    ServerlessJobConfig: StructureShape
+    ServerlessJobType: EnumShape
     ServerlessMaxConcurrency: IntegerShape
     ServerlessMemorySizeInMB: IntegerShape
     ServerlessProvisionedConcurrency: IntegerShape
@@ -2220,7 +2592,12 @@ module Aws::SageMaker
     SingleSignOnApplicationArn: StringShape
     SingleSignOnUserIdentifier: StringShape
     SkipModelValidation: EnumShape
+    SlurmHealthComponent: EnumShape
+    SlurmHealthMetadata: StructureShape
+    SlurmHealthReason: EnumShape
+    SlurmHealthStatus: EnumShape
     SnsTopicArn: StringShape
+    SoftwareUpdateStatus: EnumShape
     SortActionsBy: EnumShape
     SortArtifactsBy: EnumShape
     SortAssociationsBy: EnumShape
@@ -2230,6 +2607,7 @@ module Aws::SageMaker
     SortExperimentsBy: EnumShape
     SortInferenceExperimentsBy: EnumShape
     SortLineageGroupsBy: EnumShape
+    SortMlflowAppBy: EnumShape
     SortOrder: EnumShape
     SortPipelineExecutionsBy: EnumShape
     SortPipelinesBy: EnumShape
@@ -2265,6 +2643,8 @@ module Aws::SageMaker
     StageDescription: StringShape
     StageStatus: EnumShape
     Stairs: StructureShape
+    StartClusterHealthCheckRequest: StructureShape
+    StartClusterHealthCheckResponse: StructureShape
     StartEdgeDeploymentStageRequest: StructureShape
     StartInferenceExperimentRequest: StructureShape
     StartInferenceExperimentResponse: StructureShape
@@ -2278,11 +2658,16 @@ module Aws::SageMaker
     StartSessionResponse: StructureShape
     Statistic: EnumShape
     StatusDetails: StringShape
+    StatusDetailsMap: MapShape
     StatusMessage: StringShape
     StepDescription: StringShape
     StepDisplayName: StringShape
     StepName: StringShape
     StepStatus: EnumShape
+    StopAIBenchmarkJobRequest: StructureShape
+    StopAIBenchmarkJobResponse: StructureShape
+    StopAIRecommendationJobRequest: StructureShape
+    StopAIRecommendationJobResponse: StructureShape
     StopAutoMLJobRequest: StructureShape
     StopCompilationJobRequest: StructureShape
     StopEdgeDeploymentStageRequest: StructureShape
@@ -2291,6 +2676,8 @@ module Aws::SageMaker
     StopInferenceExperimentRequest: StructureShape
     StopInferenceExperimentResponse: StructureShape
     StopInferenceRecommendationsJobRequest: StructureShape
+    StopJobRequest: StructureShape
+    StopJobResponse: StructureShape
     StopLabelingJobRequest: StructureShape
     StopMlflowTrackingServerRequest: StructureShape
     StopMlflowTrackingServerResponse: StructureShape
@@ -2301,6 +2688,8 @@ module Aws::SageMaker
     StopPipelineExecutionResponse: StructureShape
     StopProcessingJobRequest: StructureShape
     StopTrainingJobRequest: StructureShape
+    StopTrainingSessionRequest: StructureShape
+    StopTrainingSessionResponse: StructureShape
     StopTransformJobRequest: StructureShape
     StoppingCondition: StructureShape
     StorageType: EnumShape
@@ -2308,6 +2697,7 @@ module Aws::SageMaker
     String: StringShape
     String1024: StringShape
     String128: StringShape
+    String12800: StringShape
     String200: StringShape
     String2048: StringShape
     String256: StringShape
@@ -2323,6 +2713,7 @@ module Aws::SageMaker
     StudioLifecycleConfigName: StringShape
     StudioLifecycleConfigSortKey: EnumShape
     StudioLifecycleConfigsList: ListShape
+    StudioResourceSpecTrainingPlanArn: StringShape
     StudioWebPortal: EnumShape
     StudioWebPortalSettings: StructureShape
     SubnetId: StringShape
@@ -2388,6 +2779,7 @@ module Aws::SageMaker
     TokenValue: StringShape
     TotalHits: StructureShape
     TotalInstanceCount: IntegerShape
+    TotalStepCountPerEpoch: IntegerShape
     TrackingServerArn: StringShape
     TrackingServerMaintenanceStatus: EnumShape
     TrackingServerName: StringShape
@@ -2408,6 +2800,8 @@ module Aws::SageMaker
     TrainingEnvironmentKey: StringShape
     TrainingEnvironmentMap: MapShape
     TrainingEnvironmentValue: StringShape
+    TrainingEpochCount: IntegerShape
+    TrainingEpochIndex: IntegerShape
     TrainingImageConfig: StructureShape
     TrainingInputMode: EnumShape
     TrainingInstanceCount: IntegerShape
@@ -2426,14 +2820,22 @@ module Aws::SageMaker
     TrainingJobSummaries: ListShape
     TrainingJobSummary: StructureShape
     TrainingPlanArn: StringShape
+    TrainingPlanArnList: ListShape
     TrainingPlanArns: ListShape
     TrainingPlanDurationHours: IntegerShape
     TrainingPlanDurationHoursInput: IntegerShape
     TrainingPlanDurationMinutes: IntegerShape
+    TrainingPlanExtension: StructureShape
+    TrainingPlanExtensionDurationHours: IntegerShape
+    TrainingPlanExtensionOffering: StructureShape
+    TrainingPlanExtensionOfferingId: StringShape
+    TrainingPlanExtensionOfferings: ListShape
+    TrainingPlanExtensions: ListShape
     TrainingPlanFilter: StructureShape
     TrainingPlanFilterName: EnumShape
     TrainingPlanFilters: ListShape
     TrainingPlanName: StringShape
+    TrainingPlanNameOrArn: StringShape
     TrainingPlanOffering: StructureShape
     TrainingPlanOfferingId: StringShape
     TrainingPlanOfferings: ListShape
@@ -2443,10 +2845,21 @@ module Aws::SageMaker
     TrainingPlanStatusMessage: StringShape
     TrainingPlanSummaries: ListShape
     TrainingPlanSummary: StructureShape
+    TrainingProgressInfo: StructureShape
     TrainingRepositoryAccessMode: EnumShape
     TrainingRepositoryAuthConfig: StructureShape
     TrainingRepositoryCredentialsProviderArn: StringShape
+    TrainingSessionArn: StringShape
+    TrainingSessionDetail: StructureShape
+    TrainingSessionModelConfig: StructureShape
+    TrainingSessionName: StringShape
+    TrainingSessionOutputConfig: StructureShape
+    TrainingSessionS3Location: StructureShape
+    TrainingSessionStatus: EnumShape
+    TrainingSessionSummaries: ListShape
+    TrainingSessionSummary: StructureShape
     TrainingSpecification: StructureShape
+    TrainingStepIndex: IntegerShape
     TrainingTimeInSeconds: IntegerShape
     TransformAmiVersion: StringShape
     TransformDataSource: StructureShape
@@ -2570,6 +2983,8 @@ module Aws::SageMaker
     UpdateInferenceComponentRuntimeConfigOutput: StructureShape
     UpdateInferenceExperimentRequest: StructureShape
     UpdateInferenceExperimentResponse: StructureShape
+    UpdateMlflowAppRequest: StructureShape
+    UpdateMlflowAppResponse: StructureShape
     UpdateMlflowTrackingServerRequest: StructureShape
     UpdateMlflowTrackingServerResponse: StructureShape
     UpdateModelCardRequest: StructureShape
@@ -2624,6 +3039,7 @@ module Aws::SageMaker
     UtilizationPercentagePerCore: IntegerShape
     VCpuAmount: FloatShape
     ValidationFraction: FloatShape
+    VariantInstanceProvisionTimeoutInSeconds: IntegerShape
     VariantName: StringShape
     VariantProperty: StructureShape
     VariantPropertyList: ListShape
@@ -2672,6 +3088,7 @@ module Aws::SageMaker
     WorkforceVpcEndpointId: StringShape
     WorkforceVpcId: StringShape
     Workforces: ListShape
+    WorkloadSpec: UnionShape
     WorkspaceSettings: StructureShape
     Workteam: StructureShape
     WorkteamArn: StringShape

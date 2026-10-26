@@ -21,6 +21,7 @@ module Aws::ChimeSDKVoice
     BatchUpdatePhoneNumberResponse: StructureShape
     Boolean: BooleanShape
     CallDetails: StructureShape
+    CallDistributionType: EnumShape
     CallLegType: EnumShape
     CallingName: StringShape
     CallingNameStatus: EnumShape
@@ -237,6 +238,7 @@ module Aws::ChimeSDKVoice
     RestorePhoneNumberRequest: StructureShape
     RestorePhoneNumberResponse: StructureShape
     ResultMax: IntegerShape
+    S3BucketName: StringShape
     SMACreateCallArgumentsMap: MapShape
     SMAUpdateCallArgumentsMap: MapShape
     SearchAvailablePhoneNumbersRequest: StructureShape
@@ -325,6 +327,7 @@ module Aws::ChimeSDKVoice
     VoiceConnectorGroup: StructureShape
     VoiceConnectorGroupList: ListShape
     VoiceConnectorGroupName: StringShape
+    VoiceConnectorId: StringShape
     VoiceConnectorIntegrationType: EnumShape
     VoiceConnectorItem: StructureShape
     VoiceConnectorItemList: ListShape

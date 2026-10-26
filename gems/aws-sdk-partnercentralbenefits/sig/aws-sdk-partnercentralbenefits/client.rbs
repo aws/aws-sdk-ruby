@@ -1,0 +1,336 @@
+module Aws::PartnerCentralBenefits
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PartnerCentralBenefits::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AmendBenefitApplicationResponse
+      include Smithy::Client::_Response[Types::AmendBenefitApplicationOutput]
+    end
+    def amend_benefit_application: (
+      ?catalog: String,
+      ?client_token: String,
+      ?revision: String,
+      ?identifier: String,
+      ?amendment_reason: String,
+      ?amendments: Array[
+        {
+          field_path: String,
+          new_value: untyped
+        }
+      ]
+    ) -> _AmendBenefitApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AmendBenefitApplicationResponse
+
+    interface _AssociateBenefitApplicationResourceResponse
+      include Smithy::Client::_Response[Types::AssociateBenefitApplicationResourceOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def revision: () -> String?
+    end
+    def associate_benefit_application_resource: (
+      ?catalog: String,
+      ?benefit_application_identifier: String,
+      ?resource_arn: String
+    ) -> _AssociateBenefitApplicationResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateBenefitApplicationResourceResponse
+
+    interface _CancelBenefitApplicationResponse
+      include Smithy::Client::_Response[Types::CancelBenefitApplicationOutput]
+    end
+    def cancel_benefit_application: (
+      ?catalog: String,
+      ?client_token: String,
+      ?identifier: String,
+      ?reason: String
+    ) -> _CancelBenefitApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelBenefitApplicationResponse
+
+    interface _CreateBenefitApplicationResponse
+      include Smithy::Client::_Response[Types::CreateBenefitApplicationOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def revision: () -> String?
+    end
+    def create_benefit_application: (
+      ?catalog: String,
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?benefit_identifier: String,
+      ?fulfillment_types: Array[String],
+      ?benefit_application_details: Smithy::Schema::document,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?associated_resources: Array[String],
+      ?partner_contacts: Array[
+        {
+          email: String,
+          first_name: String,
+          last_name: String,
+          business_title: String,
+          phone: String
+        }
+      ],
+      ?file_details: Array[
+        {
+          file_uri: String,
+          business_use_case: String
+        }
+      ]
+    ) -> _CreateBenefitApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBenefitApplicationResponse
+
+    interface _DisassociateBenefitApplicationResourceResponse
+      include Smithy::Client::_Response[Types::DisassociateBenefitApplicationResourceOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def revision: () -> String?
+    end
+    def disassociate_benefit_application_resource: (
+      ?catalog: String,
+      ?benefit_application_identifier: String,
+      ?resource_arn: String
+    ) -> _DisassociateBenefitApplicationResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateBenefitApplicationResourceResponse
+
+    interface _GetBenefitResponse
+      include Smithy::Client::_Response[Types::GetBenefitOutput]
+      def id: () -> String?
+      def catalog: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def programs: () -> Array[String]?
+      def fulfillment_types: () -> Array[String]?
+      def benefit_request_schema: () -> Smithy::Schema::document?
+      def status: () -> String?
+    end
+    def get_benefit: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetBenefitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBenefitResponse
+
+    interface _GetBenefitAllocationResponse
+      include Smithy::Client::_Response[Types::GetBenefitAllocationOutput]
+      def id: () -> String?
+      def catalog: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def benefit_application_id: () -> String?
+      def benefit_id: () -> String?
+      def fulfillment_type: () -> String?
+      def applicable_benefit_ids: () -> Array[String]?
+      def fulfillment_detail: () -> Types::FulfillmentDetails?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def starts_at: () -> Time?
+      def expires_at: () -> Time?
+    end
+    def get_benefit_allocation: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetBenefitAllocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBenefitAllocationResponse
+
+    interface _GetBenefitApplicationResponse
+      include Smithy::Client::_Response[Types::GetBenefitApplicationOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def catalog: () -> String?
+      def benefit_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def fulfillment_types: () -> Array[String]?
+      def benefit_application_details: () -> Smithy::Schema::document?
+      def programs: () -> Array[String]?
+      def status: () -> String?
+      def stage: () -> String?
+      def status_reason: () -> String?
+      def status_reason_code: () -> String?
+      def status_reason_codes: () -> Array[String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def revision: () -> String?
+      def associated_resources: () -> Array[String]?
+      def partner_contacts: () -> Array[Types::Contact]?
+      def file_details: () -> Array[Types::FileDetail]?
+    end
+    def get_benefit_application: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetBenefitApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBenefitApplicationResponse
+
+    interface _ListBenefitAllocationsResponse
+      include Smithy::Client::_Response[Types::ListBenefitAllocationsOutput]
+      def benefit_allocation_summaries: () -> Array[Types::BenefitAllocationSummary]?
+      def next_token: () -> String?
+    end
+    def list_benefit_allocations: (
+      ?catalog: String,
+      ?fulfillment_types: Array[String],
+      ?benefit_identifiers: Array[String],
+      ?benefit_application_identifiers: Array[String],
+      ?status: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBenefitAllocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBenefitAllocationsResponse
+
+    interface _ListBenefitApplicationsResponse
+      include Smithy::Client::_Response[Types::ListBenefitApplicationsOutput]
+      def benefit_application_summaries: () -> Array[Types::BenefitApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_benefit_applications: (
+      ?catalog: String,
+      ?programs: Array[String],
+      ?fulfillment_types: Array[String],
+      ?benefit_identifiers: Array[String],
+      ?status: Array[String],
+      ?stages: Array[String],
+      ?associated_resources: Array[
+        {
+          resource_type: String,
+          resource_identifier: String,
+          resource_arn: String
+        }
+      ],
+      ?associated_resource_arns: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBenefitApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBenefitApplicationsResponse
+
+    interface _ListBenefitsResponse
+      include Smithy::Client::_Response[Types::ListBenefitsOutput]
+      def benefit_summaries: () -> Array[Types::BenefitSummary]?
+      def next_token: () -> String?
+    end
+    def list_benefits: (
+      ?catalog: String,
+      ?programs: Array[String],
+      ?fulfillment_types: Array[String],
+      ?status: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBenefitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBenefitsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RecallBenefitApplicationResponse
+      include Smithy::Client::_Response[Types::RecallBenefitApplicationOutput]
+    end
+    def recall_benefit_application: (
+      ?catalog: String,
+      ?client_token: String,
+      ?identifier: String,
+      ?reason: String
+    ) -> _RecallBenefitApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RecallBenefitApplicationResponse
+
+    interface _SubmitBenefitApplicationResponse
+      include Smithy::Client::_Response[Types::SubmitBenefitApplicationOutput]
+    end
+    def submit_benefit_application: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _SubmitBenefitApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitBenefitApplicationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBenefitApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateBenefitApplicationOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def revision: () -> String?
+    end
+    def update_benefit_application: (
+      ?catalog: String,
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?identifier: String,
+      ?revision: String,
+      ?benefit_application_details: Smithy::Schema::document,
+      ?partner_contacts: Array[
+        {
+          email: String,
+          first_name: String,
+          last_name: String,
+          business_title: String,
+          phone: String
+        }
+      ],
+      ?file_details: Array[
+        {
+          file_uri: String,
+          business_use_case: String
+        }
+      ]
+    ) -> _UpdateBenefitApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBenefitApplicationResponse
+  end
+end

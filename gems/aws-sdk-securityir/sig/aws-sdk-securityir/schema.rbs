@@ -5,6 +5,7 @@ module Aws::SecurityIR
     AWSAccountId: StringShape
     AWSAccountIds: ListShape
     AccessDeniedException: StructureShape
+    ActionType: EnumShape
     Arn: StringShape
     AttachmentId: StringShape
     AwsRegion: EnumShape
@@ -23,6 +24,8 @@ module Aws::SecurityIR
     CaseEditItems: ListShape
     CaseEditMessage: StringShape
     CaseId: StringShape
+    CaseMetadata: ListShape
+    CaseMetadataEntry: StructureShape
     CaseStatus: EnumShape
     CaseTitle: StringShape
     CloseCaseRequest: StructureShape
@@ -30,6 +33,8 @@ module Aws::SecurityIR
     ClosureCode: EnumShape
     CommentBody: StringShape
     CommentId: StringShape
+    CommunicationPreferences: ListShape
+    CommunicationType: EnumShape
     ConflictException: StructureShape
     ContentLength: IntegerShape
     CreateCaseCommentRequest: StructureShape
@@ -41,6 +46,8 @@ module Aws::SecurityIR
     CustomerType: EnumShape
     EmailAddress: StringShape
     EngagementType: EnumShape
+    ExecutionStatus: EnumShape
+    FeedbackComment: StringShape
     FileName: StringShape
     GetCaseAttachmentDownloadUrlRequest: StructureShape
     GetCaseAttachmentDownloadUrlResponse: StructureShape
@@ -48,6 +55,8 @@ module Aws::SecurityIR
     GetCaseAttachmentUploadUrlResponse: StructureShape
     GetCaseRequest: StructureShape
     GetCaseResponse: StructureShape
+    GetFindingMetricsRequest: StructureShape
+    GetFindingMetricsResponse: StructureShape
     GetMembershipAccountDetailError: StructureShape
     GetMembershipAccountDetailErrors: ListShape
     GetMembershipAccountDetailItem: StructureShape
@@ -64,6 +73,12 @@ module Aws::SecurityIR
     IncidentResponseTeam: ListShape
     InternalServerException: StructureShape
     InvalidTokenException: StructureShape
+    InvestigationAction: StructureShape
+    InvestigationActionList: ListShape
+    InvestigationContent: StringShape
+    InvestigationFeedback: StructureShape
+    InvestigationId: StringShape
+    InvestigationTitle: StringShape
     JobTitle: StringShape
     ListCaseEditsRequest: StructureShape
     ListCaseEditsResponse: StructureShape
@@ -75,6 +90,8 @@ module Aws::SecurityIR
     ListCommentsItems: ListShape
     ListCommentsRequest: StructureShape
     ListCommentsResponse: StructureShape
+    ListInvestigationsRequest: StructureShape
+    ListInvestigationsResponse: StructureShape
     ListMembershipItem: StructureShape
     ListMembershipItems: ListShape
     ListMembershipsRequest: StructureShape
@@ -99,8 +116,11 @@ module Aws::SecurityIR
     PrincipalId: StringShape
     ResolverType: EnumShape
     ResourceNotFoundException: StructureShape
+    ResultId: StringShape
     SecurityIncidentResponseNotActiveException: StructureShape
     SelfManagedCaseStatus: EnumShape
+    SendFeedbackRequest: StructureShape
+    SendFeedbackResponse: StructureShape
     ServiceQuotaExceededException: StructureShape
     TagKey: StringShape
     TagKeys: ListShape
@@ -124,6 +144,7 @@ module Aws::SecurityIR
     UpdateResolverTypeRequest: StructureShape
     UpdateResolverTypeResponse: StructureShape
     Url: StringShape
+    UsefulnessRating: EnumShape
     UserAgent: StringShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape

@@ -9,6 +9,9 @@ module Aws::LakeFormation
     class ConcurrentModificationException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class EntityNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end

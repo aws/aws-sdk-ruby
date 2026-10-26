@@ -1,5 +1,8 @@
 module Aws::BCMDataExports
   module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InternalServerException < Smithy::Client::ServiceError
       def message: () -> String?
     end

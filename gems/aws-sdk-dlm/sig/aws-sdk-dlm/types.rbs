@@ -298,6 +298,7 @@ module Aws::DLM
         ?interval: Integer,
         ?interval_unit: String,
         ?availability_zones: Array[String],
+        ?availability_zone_ids: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -305,6 +306,7 @@ module Aws::DLM
       attr_accessor interval: Integer?
       attr_accessor interval_unit: String?
       attr_accessor availability_zones: Array[String]?
+      attr_accessor availability_zone_ids: Array[String]?
     end
 
     class GetLifecyclePoliciesRequest

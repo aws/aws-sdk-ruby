@@ -25,7 +25,9 @@ module Aws::ControlCatalog
     ControlMappingFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#ControlMappingFilter", name: "ControlMappingFilter")
     ControlMappings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controlcatalog#ControlMappings", name: "ControlMappings")
     ControlParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#ControlParameter", name: "ControlParameter")
+    ControlParameterRequirement = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.controlcatalog#ControlParameterRequirement", name: "ControlParameterRequirement")
     ControlParameters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controlcatalog#ControlParameters", name: "ControlParameters")
+    ControlRelationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.controlcatalog#ControlRelationType", name: "ControlRelationType")
     ControlScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.controlcatalog#ControlScope", name: "ControlScope")
     ControlSeverity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.controlcatalog#ControlSeverity", name: "ControlSeverity")
     ControlSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#ControlSummary", name: "ControlSummary")
@@ -41,7 +43,10 @@ module Aws::ControlCatalog
     FrameworkName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.controlcatalog#FrameworkName", name: "FrameworkName", traits: {"smithy.api#length" => {"min" => 3, "max" => 250}})
     GetControlRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#GetControlRequest", name: "GetControlRequest")
     GetControlResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#GetControlResponse", name: "GetControlResponse")
-    GovernedResource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.controlcatalog#GovernedResource", name: "GovernedResource", traits: {"smithy.api#pattern" => "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$"})
+    GovernedProvider = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.controlcatalog#GovernedProvider", name: "GovernedProvider", traits: {"smithy.api#length" => {"min" => 2, "max" => 64}, "smithy.api#pattern" => "^[A-Z]{2,64}$"})
+    GovernedProviderFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controlcatalog#GovernedProviderFilterList", name: "GovernedProviderFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    GovernedProviders = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controlcatalog#GovernedProviders", name: "GovernedProviders")
+    GovernedResource = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.controlcatalog#GovernedResource", name: "GovernedResource", traits: {"smithy.api#pattern" => "^[A-Za-z0-9][A-Za-z0-9.:/_-]{1,254}$"})
     GovernedResources = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controlcatalog#GovernedResources", name: "GovernedResources")
     ImplementationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#ImplementationDetails", name: "ImplementationDetails")
     ImplementationFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#ImplementationFilter", name: "ImplementationFilter")
@@ -76,8 +81,10 @@ module Aws::ControlCatalog
     ObjectiveSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#ObjectiveSummary", name: "ObjectiveSummary")
     ObjectiveSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.controlcatalog#ObjectiveSummaryList", name: "ObjectiveSummaryList")
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.controlcatalog#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"max" => 1024}})
+    ParameterRequirementSummary = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.controlcatalog#ParameterRequirementSummary", name: "ParameterRequirementSummary")
     RegionCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.controlcatalog#RegionCode", name: "RegionCode", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9-]{1,128}$"})
     RegionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#RegionConfiguration", name: "RegionConfiguration")
+    RelatedControlMappingDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#RelatedControlMappingDetails", name: "RelatedControlMappingDetails")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {"throttling" => true}})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.controlcatalog#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -110,6 +117,7 @@ module Aws::ControlCatalog
     ControlBehavior.add_member(:proactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROACTIVE", traits: {"smithy.api#enumValue" => "PROACTIVE"}))
     ControlBehavior.add_member(:detective, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DETECTIVE", traits: {"smithy.api#enumValue" => "DETECTIVE"}))
     ControlFilter.add_member(:implementations, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationFilter, name: "Implementations"))
+    ControlFilter.add_member(:governed_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedProviderFilterList, name: "GovernedProviders"))
     ControlFilter.type = Types::ControlFilter
     ControlMapping.add_member(:control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlArn, name: "ControlArn", traits: {"smithy.api#required" => {}}))
     ControlMapping.add_member(:mapping_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingType, name: "MappingType", traits: {"smithy.api#required" => {}}))
@@ -121,8 +129,14 @@ module Aws::ControlCatalog
     ControlMappingFilter.type = Types::ControlMappingFilter
     ControlMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlMapping, name: "member"))
     ControlParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Name", traits: {"smithy.api#required" => {}}))
+    ControlParameter.add_member(:requirement, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlParameterRequirement, name: "Requirement"))
     ControlParameter.type = Types::ControlParameter
+    ControlParameterRequirement.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "REQUIRED"}))
+    ControlParameterRequirement.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
     ControlParameters.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlParameter, name: "member"))
+    ControlRelationType.add_member(:complementary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLEMENTARY", traits: {"smithy.api#enumValue" => "COMPLEMENTARY"}))
+    ControlRelationType.add_member(:alternative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALTERNATIVE", traits: {"smithy.api#enumValue" => "ALTERNATIVE"}))
+    ControlRelationType.add_member(:mutually_exclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MUTUALLY_EXCLUSIVE", traits: {"smithy.api#enumValue" => "MUTUALLY_EXCLUSIVE"}))
     ControlScope.add_member(:global, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GLOBAL", traits: {"smithy.api#enumValue" => "GLOBAL"}))
     ControlScope.add_member(:regional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGIONAL", traits: {"smithy.api#enumValue" => "REGIONAL"}))
     ControlSeverity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
@@ -135,9 +149,11 @@ module Aws::ControlCatalog
     ControlSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Description", traits: {"smithy.api#required" => {}}))
     ControlSummary.add_member(:behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlBehavior, name: "Behavior"))
     ControlSummary.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSeverity, name: "Severity"))
+    ControlSummary.add_member(:parameter_requirement_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterRequirementSummary, name: "ParameterRequirementSummary"))
     ControlSummary.add_member(:implementation, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationSummary, name: "Implementation"))
     ControlSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreateTime"))
     ControlSummary.add_member(:governed_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedResources, name: "GovernedResources"))
+    ControlSummary.add_member(:governed_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedProviders, name: "GovernedProviders"))
     ControlSummary.type = Types::ControlSummary
     Controls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSummary, name: "member"))
     DeployableRegions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionCode, name: "member"))
@@ -164,10 +180,14 @@ module Aws::ControlCatalog
     GetControlResponse.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlSeverity, name: "Severity"))
     GetControlResponse.add_member(:region_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionConfiguration, name: "RegionConfiguration", traits: {"smithy.api#required" => {}}))
     GetControlResponse.add_member(:implementation, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationDetails, name: "Implementation"))
+    GetControlResponse.add_member(:parameter_requirement_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterRequirementSummary, name: "ParameterRequirementSummary"))
     GetControlResponse.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlParameters, name: "Parameters"))
     GetControlResponse.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreateTime"))
     GetControlResponse.add_member(:governed_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedResources, name: "GovernedResources"))
+    GetControlResponse.add_member(:governed_providers, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedProviders, name: "GovernedProviders"))
     GetControlResponse.type = Types::GetControlResponse
+    GovernedProviderFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedProvider, name: "member"))
+    GovernedProviders.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedProvider, name: "member"))
     GovernedResources.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GovernedResource, name: "member"))
     ImplementationDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationType, name: "Type", traits: {"smithy.api#required" => {}}))
     ImplementationDetails.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ImplementationIdentifier, name: "Identifier"))
@@ -218,10 +238,12 @@ module Aws::ControlCatalog
     ListObjectivesResponse.type = Types::ListObjectivesResponse
     Mapping.add_member(:framework, Types::Mapping::Framework, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkMappingDetails, name: "Framework"))
     Mapping.add_member(:common_control, Types::Mapping::CommonControl, ::Smithy::Schema::Shapes::MemberShape.new(target: CommonControlMappingDetails, name: "CommonControl"))
+    Mapping.add_member(:related_control, Types::Mapping::RelatedControl, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedControlMappingDetails, name: "RelatedControl"))
     Mapping.add_member(:unknown, Types::Mapping::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Mapping.type = Types::Mapping
     MappingType.add_member(:framework, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FRAMEWORK", traits: {"smithy.api#enumValue" => "FRAMEWORK"}))
     MappingType.add_member(:common_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMON_CONTROL", traits: {"smithy.api#enumValue" => "COMMON_CONTROL"}))
+    MappingType.add_member(:related_control, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RELATED_CONTROL", traits: {"smithy.api#enumValue" => "RELATED_CONTROL"}))
     MappingTypeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MappingType, name: "member"))
     ObjectiveFilter.add_member(:domains, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainResourceFilterList, name: "Domains"))
     ObjectiveFilter.type = Types::ObjectiveFilter
@@ -236,9 +258,15 @@ module Aws::ControlCatalog
     ObjectiveSummary.add_member(:last_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "LastUpdateTime", traits: {"smithy.api#required" => {}}))
     ObjectiveSummary.type = Types::ObjectiveSummary
     ObjectiveSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ObjectiveSummary, name: "member"))
+    ParameterRequirementSummary.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUIRED", traits: {"smithy.api#enumValue" => "REQUIRED"}))
+    ParameterRequirementSummary.add_member(:optional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIONAL", traits: {"smithy.api#enumValue" => "OPTIONAL"}))
+    ParameterRequirementSummary.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     RegionConfiguration.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlScope, name: "Scope", traits: {"smithy.api#required" => {}}))
     RegionConfiguration.add_member(:deployable_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: DeployableRegions, name: "DeployableRegions"))
     RegionConfiguration.type = Types::RegionConfiguration
+    RelatedControlMappingDetails.add_member(:control_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlArn, name: "ControlArn"))
+    RelatedControlMappingDetails.add_member(:relation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlRelationType, name: "RelationType", traits: {"smithy.api#required" => {}}))
+    RelatedControlMappingDetails.type = Types::RelatedControlMappingDetails
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
@@ -250,7 +278,7 @@ module Aws::ControlCatalog
       service.id = "com.amazonaws.controlcatalog#ControlCatalog"
       service.name = "ControlCatalog"
       service.version = "2018-05-10"
-      service.traits = {"aws.api#service" => {"sdkId" => "ControlCatalog", "arnNamespace" => "controlcatalog", "cloudTrailEventSource" => "controlcatalog.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "controlcatalog"}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"origin" => "*", "additionalAllowedHeaders" => ["*", "access-control-allow-origin", "Amz-Sdk-Invocation-Id", "Amz-Sdk-Request", "Authorization", "Content-Length", "Content-Type", "Date", "Host", "X-Amz-Content-Sha256", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "X-Amz-User-Agent", "X-Amzn-Trace-Id"]}, "smithy.api#title" => "AWS Control Catalog"}
+      service.traits = {"aws.api#service" => {"sdkId" => "ControlCatalog", "arnNamespace" => "controlcatalog", "cloudTrailEventSource" => "controlcatalog.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "controlcatalog"}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"origin" => "*", "additionalAllowedHeaders" => ["*", "access-control-allow-origin", "Amz-Sdk-Invocation-Id", "Amz-Sdk-Request", "Authorization", "Content-Length", "Content-Type", "Date", "Host", "X-Amz-Content-Sha256", "X-Amz-Date", "X-Amz-Security-Token", "X-Amz-Target", "X-Amz-User-Agent", "X-Amzn-Trace-Id"]}, "smithy.api#title" => "AWS Control Catalog", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://controlcatalog-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://controlcatalog-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://controlcatalog.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://controlcatalog.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:get_control, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.controlcatalog#GetControl"
         operation.name = "GetControl"

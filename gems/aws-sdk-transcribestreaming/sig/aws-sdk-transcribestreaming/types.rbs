@@ -429,6 +429,51 @@ module Aws::TranscribeStreaming
       UK_UA: String
       VI_VN: String
       ZU_ZA: String
+      AM_ET: String
+      BE_BY: String
+      BG_BG: String
+      BN_IN: String
+      BS_BA: String
+      CKB_IQ: String
+      CKB_IR: String
+      CY_WL: String
+      ES_MX: String
+      ET_ET: String
+      FA_AF: String
+      GU_IN: String
+      HT_HT: String
+      HU_HU: String
+      HY_AM: String
+      IS_IS: String
+      JV_ID: String
+      KA_GE: String
+      KAB_DZ: String
+      KK_KZ: String
+      KM_KH: String
+      KN_IN: String
+      LG_IN: String
+      LT_LT: String
+      MK_MK: String
+      ML_IN: String
+      MR_IN: String
+      MY_MM: String
+      NE_NP: String
+      OR_IN: String
+      PA_IN: String
+      PS_AF: String
+      SI_LK: String
+      SL_SI: String
+      SQ_AL: String
+      SU_ID: String
+      SW_BI: String
+      SW_KE: String
+      SW_RW: String
+      SW_TZ: String
+      SW_UG: String
+      TA_IN: String
+      TE_IN: String
+      TR_TR: String
+      UZ_UZ: String
     end
 
     class LanguageWithScore
@@ -459,6 +504,9 @@ module Aws::TranscribeStreaming
       PCM: String
       OGG_OPUS: String
       FLAC: String
+      G711_ALAW: String
+      G711_ULAW: String
+      G729: String
     end
 
     class MedicalAlternative
@@ -1258,6 +1306,8 @@ module Aws::TranscribeStreaming
         ?identify_multiple_languages: bool,
         ?vocabulary_names: String,
         ?vocabulary_filter_names: String,
+        ?session_resume_window: Integer,
+        ?transcript_format: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1284,6 +1334,8 @@ module Aws::TranscribeStreaming
       attr_accessor identify_multiple_languages: bool?
       attr_accessor vocabulary_names: String?
       attr_accessor vocabulary_filter_names: String?
+      attr_accessor session_resume_window: Integer?
+      attr_accessor transcript_format: String?
     end
 
     class StartStreamTranscriptionResponse
@@ -1314,6 +1366,8 @@ module Aws::TranscribeStreaming
         ?identify_multiple_languages: bool,
         ?vocabulary_names: String,
         ?vocabulary_filter_names: String,
+        ?session_resume_window: Integer,
+        ?transcript_format: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1341,6 +1395,8 @@ module Aws::TranscribeStreaming
       attr_accessor identify_multiple_languages: bool?
       attr_accessor vocabulary_names: String?
       attr_accessor vocabulary_filter_names: String?
+      attr_accessor session_resume_window: Integer?
+      attr_accessor transcript_format: String?
     end
 
     class TimestampRange
@@ -1376,6 +1432,11 @@ module Aws::TranscribeStreaming
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor transcript: Types::Transcript?
+    end
+
+    module TranscriptFormat
+      SPOKEN: String
+      WRITTEN: String
     end
 
     class TranscriptResultStream

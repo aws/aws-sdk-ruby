@@ -144,18 +144,18 @@ module Aws::RolesAnywhere
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,16 +209,12 @@ module Aws::RolesAnywhere
       super
     end
 
-    # <p>Creates a <i>profile</i>, a list of the roles that Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:CreateProfile</code>. 
-    #          </p>
+    # <p>Creates a <i>profile</i>, a list of the roles that Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateProfile</code>. </p>
     # @param [Hash, Types::CreateProfileInput] params
     # @option params [String] :name
     #   <p>The name of the profile.</p>
     # @option params [Boolean] :require_instance_properties
-    #   <p>Specifies whether instance properties are required in temporary credential requests with this profile. </p>
+    #   <p>Unused, saved for future use. Will likely specify whether instance properties are required in temporary credential requests with this profile. </p>
     # @option params [String] :session_policy
     #   <p>A session policy that applies to the trust boundary of the vended session credentials. </p>
     # @option params [Array<String>] :role_arns
@@ -226,9 +222,7 @@ module Aws::RolesAnywhere
     # @option params [Array<String>] :managed_policy_arns
     #   <p>A list of managed policy ARNs that apply to the vended session credentials. </p>
     # @option params [Integer] :duration_seconds
-    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the 
-    #   <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a>
-    #   page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
+    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a> page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
     # @option params [Boolean] :enabled
     #   <p>Specifies whether the profile is enabled.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -289,13 +283,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Creates a trust anchor to establish trust between IAM Roles Anywhere and
-    #          your certificate authority (CA). You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by
-    #          the CA in exchange for temporary Amazon Web Services credentials.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:CreateTrustAnchor</code>. 
-    #          </p>
+    # <p>Creates a trust anchor to establish trust between IAM Roles Anywhere and your certificate authority (CA). You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateTrustAnchor</code>. </p>
     # @param [Hash, Types::CreateTrustAnchorInput] params
     # @option params [String] :name
     #   <p>The name of the trust anchor.</p>
@@ -464,11 +452,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Deletes a certificate revocation list (CRL).</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:DeleteCrl</code>. 
-    #          </p>
+    # <p>Deletes a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteCrl</code>. </p>
     # @param [Hash, Types::DeleteCrlInput] params
     # @option params [String] :crl_id
     #   <p>The unique identifier of the certificate revocation list (CRL).</p>
@@ -498,11 +482,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Deletes a profile.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:DeleteProfile</code>. 
-    #          </p>
+    # <p>Deletes a profile.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteProfile</code>. </p>
     # @param [Hash, Types::DeleteProfileInput] params
     # @option params [String] :profile_id
     #   <p>The unique identifier of the profile.</p>
@@ -547,11 +527,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Deletes a trust anchor.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:DeleteTrustAnchor</code>. 
-    #          </p>
+    # <p>Deletes a trust anchor.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteTrustAnchor</code>. </p>
     # @param [Hash, Types::DeleteTrustAnchorInput] params
     # @option params [String] :trust_anchor_id
     #   <p>The unique identifier of the trust anchor.</p>
@@ -596,11 +572,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Disables a certificate revocation list (CRL).</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:DisableCrl</code>. 
-    #          </p>
+    # <p>Disables a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableCrl</code>. </p>
     # @param [Hash, Types::DisableCrlInput] params
     # @option params [String] :crl_id
     #   <p>The unique identifier of the certificate revocation list (CRL).</p>
@@ -630,11 +602,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Disables a profile. When disabled, temporary credential requests with this profile fail.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:DisableProfile</code>. 
-    #          </p>
+    # <p>Disables a profile. When disabled, temporary credential requests with this profile fail.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableProfile</code>. </p>
     # @param [Hash, Types::DisableProfileInput] params
     # @option params [String] :profile_id
     #   <p>The unique identifier of the profile.</p>
@@ -679,11 +647,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Disables a trust anchor. When disabled, temporary credential requests specifying this trust anchor are unauthorized.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:DisableTrustAnchor</code>. 
-    #          </p>
+    # <p>Disables a trust anchor. When disabled, temporary credential requests specifying this trust anchor are unauthorized.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableTrustAnchor</code>. </p>
     # @param [Hash, Types::DisableTrustAnchorInput] params
     # @option params [String] :trust_anchor_id
     #   <p>The unique identifier of the trust anchor.</p>
@@ -728,11 +692,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Enables a certificate revocation list (CRL). When enabled, certificates stored in the CRL are unauthorized to receive session credentials.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:EnableCrl</code>. 
-    #          </p>
+    # <p>Enables a certificate revocation list (CRL). When enabled, certificates stored in the CRL are unauthorized to receive session credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableCrl</code>. </p>
     # @param [Hash, Types::EnableCrlInput] params
     # @option params [String] :crl_id
     #   <p>The unique identifier of the certificate revocation list (CRL).</p>
@@ -762,11 +722,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Enables temporary credential requests for a profile. </p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:EnableProfile</code>. 
-    #          </p>
+    # <p>Enables temporary credential requests for a profile. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableProfile</code>. </p>
     # @param [Hash, Types::EnableProfileInput] params
     # @option params [String] :profile_id
     #   <p>The unique identifier of the profile.</p>
@@ -811,11 +767,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Enables a trust anchor. When enabled, certificates in the trust anchor chain are authorized for trust validation. </p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:EnableTrustAnchor</code>. 
-    #          </p>
+    # <p>Enables a trust anchor. When enabled, certificates in the trust anchor chain are authorized for trust validation. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableTrustAnchor</code>. </p>
     # @param [Hash, Types::EnableTrustAnchorInput] params
     # @option params [String] :trust_anchor_id
     #   <p>The unique identifier of the trust anchor.</p>
@@ -860,11 +812,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Gets a certificate revocation list (CRL).</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:GetCrl</code>. 
-    #          </p>
+    # <p>Gets a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetCrl</code>. </p>
     # @param [Hash, Types::GetCrlInput] params
     # @option params [String] :crl_id
     #   <p>The unique identifier of the certificate revocation list (CRL).</p>
@@ -894,11 +842,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Gets a profile.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:GetProfile</code>. 
-    #          </p>
+    # <p>Gets a profile.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetProfile</code>. </p>
     # @param [Hash, Types::GetProfileInput] params
     # @option params [String] :profile_id
     #   <p>The unique identifier of the profile.</p>
@@ -943,14 +887,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Gets a <i>subject</i>, which associates a certificate identity with
-    #          authentication attempts. The subject stores auditing information such as the status
-    #          of the last authentication attempt, the certificate data used in the attempt, and the
-    #          last time the associated identity attempted authentication. </p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:GetSubject</code>. 
-    #          </p>
+    # <p>Gets a <i>subject</i>, which associates a certificate identity with authentication attempts. The subject stores auditing information such as the status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetSubject</code>. </p>
     # @param [Hash, Types::GetSubjectInput] params
     # @option params [String] :subject_id
     #   <p>The unique identifier of the subject. </p>
@@ -998,11 +935,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Gets a trust anchor.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:GetTrustAnchor</code>. 
-    #          </p>
+    # <p>Gets a trust anchor.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetTrustAnchor</code>. </p>
     # @param [Hash, Types::GetTrustAnchorInput] params
     # @option params [String] :trust_anchor_id
     #   <p>The unique identifier of the trust anchor.</p>
@@ -1047,14 +980,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Imports the certificate revocation list (CRL). A CRL is a list of certificates that have
-    #          been revoked by the issuing certificate Authority (CA).In order to be properly imported, a CRL must be in PEM 
-    #          format. IAM Roles Anywhere
-    #          validates against the CRL before issuing credentials. </p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:ImportCrl</code>. 
-    #          </p>
+    # <p>Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA).In order to be properly imported, a CRL must be in PEM format. IAM Roles Anywhere validates against the CRL before issuing credentials. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:ImportCrl</code>. </p>
     # @param [Hash, Types::ImportCrlInput] params
     # @option params [String] :name
     #   <p>The name of the certificate revocation list (CRL).</p>
@@ -1101,11 +1027,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:ListCrls</code>. 
-    #          </p>
+    # <p>Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListCrls</code>. </p>
     # @param [Hash, Types::ListCrlsInput] params
     # @option params [String] :next_token
     #   <p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>
@@ -1141,11 +1063,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Lists all profiles in the authenticated account and Amazon Web Services Region.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:ListProfiles</code>. 
-    #          </p>
+    # <p>Lists all profiles in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListProfiles</code>. </p>
     # @param [Hash, Types::ListProfilesInput] params
     # @option params [String] :next_token
     #   <p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>
@@ -1196,11 +1114,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Lists the subjects in the authenticated account and Amazon Web Services Region.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:ListSubjects</code>. 
-    #          </p>
+    # <p>Lists the subjects in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListSubjects</code>. </p>
     # @param [Hash, Types::ListSubjectsInput] params
     # @option params [String] :next_token
     #   <p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>
@@ -1235,11 +1149,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Lists the tags attached to the resource.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:ListTagsForResource</code>. 
-    #          </p>
+    # <p>Lists the tags attached to the resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListTagsForResource</code>. </p>
     # @param [Hash, Types::ListTagsForResourceInput] params
     # @option params [String] :resource_arn
     #   <p>The ARN of the resource.</p>
@@ -1265,11 +1175,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Lists the trust anchors in the authenticated account and Amazon Web Services Region.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:ListTrustAnchors</code>. 
-    #          </p>
+    # <p>Lists the trust anchors in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListTrustAnchors</code>. </p>
     # @param [Hash, Types::ListTrustAnchorsInput] params
     # @option params [String] :next_token
     #   <p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>
@@ -1320,8 +1226,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Put an entry in the attribute mapping rules that will be enforced by a given profile. 
-    #       A mapping specifies a certificate field and one or more specifiers that have contextual meanings.</p>
+    # <p>Put an entry in the attribute mapping rules that will be enforced by a given profile. A mapping specifies a certificate field and one or more specifiers that have contextual meanings.</p>
     # @param [Hash, Types::PutAttributeMappingRequest] params
     # @option params [String] :profile_id
     #   <p>The unique identifier of the profile.</p>
@@ -1420,13 +1325,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Attaches a list of <i>notification settings</i> to a trust anchor.</p>
-    #          <p>A notification setting includes information such as event name, threshold, status of
-    #          the notification setting, and the channel to notify.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:PutNotificationSettings</code>.
-    #          </p>
+    # <p>Attaches a list of <i>notification settings</i> to a trust anchor.</p> <p>A notification setting includes information such as event name, threshold, status of the notification setting, and the channel to notify.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:PutNotificationSettings</code>. </p>
     # @param [Hash, Types::PutNotificationSettingsRequest] params
     # @option params [String] :trust_anchor_id
     #   <p>The unique identifier of the trust anchor.</p>
@@ -1528,19 +1427,12 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Resets the <i>custom notification setting</i> to IAM Roles Anywhere default setting.
-    #       </p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:ResetNotificationSettings</code>.
-    #          </p>
+    # <p>Resets the <i>custom notification setting</i> to IAM Roles Anywhere default setting. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:ResetNotificationSettings</code>. </p>
     # @param [Hash, Types::ResetNotificationSettingsRequest] params
     # @option params [String] :trust_anchor_id
     #   <p>The unique identifier of the trust anchor.</p>
     # @option params [Array<Types::NotificationSettingKey>] :notification_setting_keys
-    #   <p>A list of notification setting keys to reset.
-    #            A notification setting key includes the event and the channel.
-    #         </p>
+    #   <p>A list of notification setting keys to reset. A notification setting key includes the event and the channel. </p>
     # @example ResetNotificationSettings - Resets to IAM Roles Anywhere defined default notification settings
     #   # Example operation for reset_notification_settings
     #   params = {
@@ -1633,11 +1525,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Attaches tags to a resource.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:TagResource</code>. 
-    #          </p>
+    # <p>Attaches tags to a resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:TagResource</code>. </p>
     # @param [Hash, Types::TagResourceInput] params
     # @option params [String] :resource_arn
     #   <p>The ARN of the resource.</p>
@@ -1664,11 +1552,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Removes tags from the resource.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:UntagResource</code>. 
-    #          </p>
+    # <p>Removes tags from the resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UntagResource</code>. </p>
     # @param [Hash, Types::UntagResourceInput] params
     # @option params [String] :resource_arn
     #   <p>The ARN of the resource.</p>
@@ -1690,13 +1574,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Updates the certificate revocation list (CRL). A CRL is a list of certificates that have
-    #          been revoked by the issuing certificate authority (CA). IAM Roles Anywhere
-    #          validates against the CRL before issuing credentials.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:UpdateCrl</code>. 
-    #          </p>
+    # <p>Updates the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateCrl</code>. </p>
     # @param [Hash, Types::UpdateCrlInput] params
     # @option params [String] :crl_id
     #   <p>The unique identifier of the certificate revocation list (CRL).</p>
@@ -1732,13 +1610,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Updates a <i>profile</i>, a list of the roles that IAM
-    #          Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with
-    #             IAM managed policies.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:UpdateProfile</code>. 
-    #          </p>
+    # <p>Updates a <i>profile</i>, a list of the roles that IAM Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateProfile</code>. </p>
     # @param [Hash, Types::UpdateProfileInput] params
     # @option params [String] :profile_id
     #   <p>The unique identifier of the profile.</p>
@@ -1751,9 +1623,7 @@ module Aws::RolesAnywhere
     # @option params [Array<String>] :managed_policy_arns
     #   <p>A list of managed policy ARNs that apply to the vended session credentials. </p>
     # @option params [Integer] :duration_seconds
-    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the 
-    #   <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a>
-    #   page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
+    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a> page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
     # @option params [Boolean] :accept_role_session_name
     #   <p>Used to determine if a custom role session name will be accepted in a temporary credential request.</p>
     # @example Request syntax with placeholder values
@@ -1803,16 +1673,7 @@ module Aws::RolesAnywhere
       request.send_request(options)
     end
 
-    # <p>Updates a trust anchor. You establish trust between IAM Roles Anywhere
-    #          and your certificate authority (CA) by configuring a trust anchor. You can define a trust
-    #          anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a
-    #          CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor
-    #          using certificates issued by the CA in exchange for temporary Amazon Web Services
-    #          credentials.</p>
-    #          <p>
-    #             <b>Required permissions: </b>
-    #             <code>rolesanywhere:UpdateTrustAnchor</code>. 
-    #          </p>
+    # <p>Updates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateTrustAnchor</code>. </p>
     # @param [Hash, Types::UpdateTrustAnchorInput] params
     # @option params [String] :trust_anchor_id
     #   <p>The unique identifier of the trust anchor.</p>

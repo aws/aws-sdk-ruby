@@ -12,20 +12,31 @@ module Aws::ResourceExplorer2
     BatchGetViewErrors: ListShape
     BatchGetViewOperationInput: StructureShape
     BatchGetViewOperationOutput: StructureShape
+    CFNResourceTypeList: ListShape
     ConflictException: StructureShape
     CreateIndexOperationInput: StructureShape
     CreateIndexOperationOutput: StructureShape
+    CreateResourceExplorerSetupInput: StructureShape
+    CreateResourceExplorerSetupOutput: StructureShape
     CreateViewOperationInput: StructureShape
     CreateViewOperationOutput: StructureShape
     DeleteIndexOperationInput: StructureShape
     DeleteIndexOperationOutput: StructureShape
+    DeleteResourceExplorerSetupInput: StructureShape
+    DeleteResourceExplorerSetupOutput: StructureShape
     DeleteViewOperationInput: StructureShape
     DeleteViewOperationOutput: StructureShape
+    ErrorDetails: StructureShape
     GetAccountLevelServiceConfigurationOutput: StructureShape
     GetDefaultViewOperationOutput: StructureShape
     GetIndexOperationOutput: StructureShape
     GetManagedViewInput: StructureShape
     GetManagedViewOutput: StructureShape
+    GetResourceExplorerSetupInput: StructureShape
+    GetResourceExplorerSetupOutput: StructureShape
+    GetServiceIndexOutput: StructureShape
+    GetServiceViewInput: StructureShape
+    GetServiceViewOutput: StructureShape
     GetViewOperationInput: StructureShape
     GetViewOperationOutput: StructureShape
     IncludedProperty: StructureShape
@@ -33,6 +44,7 @@ module Aws::ResourceExplorer2
     Index: StructureShape
     IndexList: ListShape
     IndexState: StringShape
+    IndexStatus: StructureShape
     IndexType: StringShape
     InternalServerException: StructureShape
     ListIndexesForMembersInput: StructureShape
@@ -43,6 +55,12 @@ module Aws::ResourceExplorer2
     ListManagedViewsOutput: StructureShape
     ListResourcesInput: StructureShape
     ListResourcesOutput: StructureShape
+    ListServiceIndexesInput: StructureShape
+    ListServiceIndexesOutput: StructureShape
+    ListServiceViewsInput: StructureShape
+    ListServiceViewsOutput: StructureShape
+    ListStreamingAccessForServicesInput: StructureShape
+    ListStreamingAccessForServicesOutput: StructureShape
     ListSupportedResourceTypesOperationInput: StructureShape
     ListSupportedResourceTypesOperationOutput: StructureShape
     ListTagsForResourceOperationInput: StructureShape
@@ -53,9 +71,13 @@ module Aws::ResourceExplorer2
     ManagedViewArnList: ListShape
     MemberIndex: StructureShape
     MemberIndexList: ListShape
+    OperationStatus: StringShape
     OrgConfiguration: StructureShape
     QueryString: StringShape
+    RecorderType: StringShape
     RegionList: ListShape
+    RegionStatus: StructureShape
+    RegionStatusList: ListShape
     Resource: StructureShape
     ResourceCount: StructureShape
     ResourceList: ListShape
@@ -66,7 +88,13 @@ module Aws::ResourceExplorer2
     SearchFilter: StructureShape
     SearchOperationInput: StructureShape
     SearchOperationOutput: StructureShape
+    ServiceLinkedRecorderInfo: StructureShape
     ServiceQuotaExceededException: StructureShape
+    ServiceView: StructureShape
+    ServiceViewArnList: ListShape
+    ServiceViewName: StringShape
+    StreamingAccessDetails: StructureShape
+    StreamingAccessDetailsList: ListShape
     StringList: ListShape
     SupportedResourceType: StructureShape
     TagMap: MapShape
@@ -87,6 +115,7 @@ module Aws::ResourceExplorer2
     ViewArnList: ListShape
     ViewList: ListShape
     ViewName: StringShape
+    ViewStatus: StructureShape
 
     ResourceExplorer: ServiceShape
   end

@@ -57,6 +57,76 @@ module Aws::Deadline
     BatchGetJobEntityList: ListShape
     BatchGetJobEntityRequest: StructureShape
     BatchGetJobEntityResponse: StructureShape
+    BatchGetJobError: StructureShape
+    BatchGetJobErrorCode: EnumShape
+    BatchGetJobErrors: ListShape
+    BatchGetJobIdentifier: StructureShape
+    BatchGetJobIdentifiers: ListShape
+    BatchGetJobItem: StructureShape
+    BatchGetJobItems: ListShape
+    BatchGetJobRequest: StructureShape
+    BatchGetJobResponse: StructureShape
+    BatchGetSessionActionError: StructureShape
+    BatchGetSessionActionErrorCode: EnumShape
+    BatchGetSessionActionErrors: ListShape
+    BatchGetSessionActionIdentifier: StructureShape
+    BatchGetSessionActionIdentifiers: ListShape
+    BatchGetSessionActionItem: StructureShape
+    BatchGetSessionActionItems: ListShape
+    BatchGetSessionActionRequest: StructureShape
+    BatchGetSessionActionResponse: StructureShape
+    BatchGetSessionError: StructureShape
+    BatchGetSessionErrorCode: EnumShape
+    BatchGetSessionErrors: ListShape
+    BatchGetSessionIdentifier: StructureShape
+    BatchGetSessionIdentifiers: ListShape
+    BatchGetSessionItem: StructureShape
+    BatchGetSessionItems: ListShape
+    BatchGetSessionRequest: StructureShape
+    BatchGetSessionResponse: StructureShape
+    BatchGetStepError: StructureShape
+    BatchGetStepErrorCode: EnumShape
+    BatchGetStepErrors: ListShape
+    BatchGetStepIdentifier: StructureShape
+    BatchGetStepIdentifiers: ListShape
+    BatchGetStepItem: StructureShape
+    BatchGetStepItems: ListShape
+    BatchGetStepRequest: StructureShape
+    BatchGetStepResponse: StructureShape
+    BatchGetTaskError: StructureShape
+    BatchGetTaskErrorCode: EnumShape
+    BatchGetTaskErrors: ListShape
+    BatchGetTaskIdentifier: StructureShape
+    BatchGetTaskIdentifiers: ListShape
+    BatchGetTaskItem: StructureShape
+    BatchGetTaskItems: ListShape
+    BatchGetTaskRequest: StructureShape
+    BatchGetTaskResponse: StructureShape
+    BatchGetWorkerError: StructureShape
+    BatchGetWorkerErrorCode: EnumShape
+    BatchGetWorkerErrors: ListShape
+    BatchGetWorkerIdentifier: StructureShape
+    BatchGetWorkerIdentifiers: ListShape
+    BatchGetWorkerItem: StructureShape
+    BatchGetWorkerItems: ListShape
+    BatchGetWorkerRequest: StructureShape
+    BatchGetWorkerResponse: StructureShape
+    BatchUpdateJobError: StructureShape
+    BatchUpdateJobErrorCode: EnumShape
+    BatchUpdateJobErrors: ListShape
+    BatchUpdateJobItem: StructureShape
+    BatchUpdateJobItems: ListShape
+    BatchUpdateJobRequest: StructureShape
+    BatchUpdateJobResponse: StructureShape
+    BatchUpdateTaskError: StructureShape
+    BatchUpdateTaskErrorCode: EnumShape
+    BatchUpdateTaskErrors: ListShape
+    BatchUpdateTaskItem: StructureShape
+    BatchUpdateTaskItems: ListShape
+    BatchUpdateTaskRequest: StructureShape
+    BatchUpdateTaskResponse: StructureShape
+    BooleanString: StringShape
+    BooleanStringList: ListShape
     BoundedString: StringShape
     BudgetActionToAdd: StructureShape
     BudgetActionToRemove: StructureShape
@@ -79,6 +149,7 @@ module Aws::Deadline
     ConsumedUsages: StructureShape
     CopyJobTemplateRequest: StructureShape
     CopyJobTemplateResponse: StructureShape
+    CostScaleFactor: FloatShape
     CpuArchitectureType: EnumShape
     CreateBudgetRequest: StructureShape
     CreateBudgetResponse: StructureShape
@@ -111,12 +182,14 @@ module Aws::Deadline
     CreatedBy: StringShape
     CustomFleetAmountCapabilities: ListShape
     CustomFleetAttributeCapabilities: ListShape
+    CustomerManagedAutoScalingConfiguration: StructureShape
     CustomerManagedFleetConfiguration: StructureShape
     CustomerManagedFleetOperatingSystemFamily: EnumShape
     CustomerManagedWorkerCapabilities: StructureShape
     DateTimeFilterExpression: StructureShape
     DeadlinePrincipalType: EnumShape
     DefaultQueueBudgetAction: EnumShape
+    DefaultTaskCount: IntegerShape
     DeleteBudgetRequest: StructureShape
     DeleteBudgetResponse: StructureShape
     DeleteFarmRequest: StructureShape
@@ -141,6 +214,8 @@ module Aws::Deadline
     DeleteQueueResponse: StructureShape
     DeleteStorageProfileRequest: StructureShape
     DeleteStorageProfileResponse: StructureShape
+    DeleteVolumeRequest: StructureShape
+    DeleteVolumeResponse: StructureShape
     DeleteWorkerRequest: StructureShape
     DeleteWorkerResponse: StructureShape
     DependenciesList: ListShape
@@ -161,6 +236,7 @@ module Aws::Deadline
     Double: FloatShape
     EbsIops: IntegerShape
     EbsThroughputMiB: IntegerShape
+    EbsVolumeType: EnumShape
     Ec2EbsVolume: StructureShape
     Ec2MarketType: EnumShape
     EndedAt: TimestampShape
@@ -198,10 +274,14 @@ module Aws::Deadline
     FleetIds: ListShape
     FleetMember: StructureShape
     FleetMembers: ListShape
+    FleetSoftwareAddOn: StructureShape
+    FleetSoftwareAddOnName: EnumShape
+    FleetSoftwareAddOns: ListShape
     FleetStatus: EnumShape
     FleetSummaries: ListShape
     FleetSummary: StructureShape
     FloatString: StringShape
+    FloatStringList: ListShape
     GetBudgetRequest: StructureShape
     GetBudgetResponse: StructureShape
     GetFarmRequest: StructureShape
@@ -217,6 +297,8 @@ module Aws::Deadline
     GetLimitResponse: StructureShape
     GetMonitorRequest: StructureShape
     GetMonitorResponse: StructureShape
+    GetMonitorSettingsRequest: StructureShape
+    GetMonitorSettingsResponse: StructureShape
     GetQueueEnvironmentRequest: StructureShape
     GetQueueEnvironmentResponse: StructureShape
     GetQueueFleetAssociationRequest: StructureShape
@@ -239,6 +321,8 @@ module Aws::Deadline
     GetStorageProfileResponse: StructureShape
     GetTaskRequest: StructureShape
     GetTaskResponse: StructureShape
+    GetVolumeRequest: StructureShape
+    GetVolumeResponse: StructureShape
     GetWorkerRequest: StructureShape
     GetWorkerResponse: StructureShape
     HostConfiguration: StructureShape
@@ -255,6 +339,8 @@ module Aws::Deadline
     InstanceType: StringShape
     InstanceTypes: ListShape
     IntString: StringShape
+    IntStringList: ListShape
+    IntStringListList: ListShape
     Integer: IntegerShape
     InternalServerErrorException: StructureShape
     IpAddresses: StructureShape
@@ -268,9 +354,11 @@ module Aws::Deadline
     JobAttachmentSettings: StructureShape
     JobAttachmentsFileSystem: EnumShape
     JobDescription: StringShape
+    JobDescriptionOverride: StringShape
     JobDetailsEntity: StructureShape
     JobDetailsError: StructureShape
     JobDetailsIdentifiers: StructureShape
+    JobDetailsJobAttachmentSettings: StructureShape
     JobEntity: UnionShape
     JobEntityErrorCode: EnumShape
     JobEntityIdentifiers: ListShape
@@ -325,6 +413,8 @@ module Aws::Deadline
     ListLicenseEndpointsResponse: StructureShape
     ListLimitsRequest: StructureShape
     ListLimitsResponse: StructureShape
+    ListMembershipsRequest: StructureShape
+    ListMembershipsResponse: StructureShape
     ListMeteredProductsRequest: StructureShape
     ListMeteredProductsResponse: StructureShape
     ListMonitorsRequest: StructureShape
@@ -360,6 +450,8 @@ module Aws::Deadline
     ListTagsForResourceResponse: StructureShape
     ListTasksRequest: StructureShape
     ListTasksResponse: StructureShape
+    ListVolumesRequest: StructureShape
+    ListVolumesResponse: StructureShape
     ListWorkersRequest: StructureShape
     ListWorkersResponse: StructureShape
     LogConfiguration: StructureShape
@@ -376,6 +468,10 @@ module Aws::Deadline
     MaxRetriesPerTask: IntegerShape
     MaxWorkerCount: IntegerShape
     MembershipLevel: EnumShape
+    MembershipResourceType: EnumShape
+    MembershipResourceTypes: ListShape
+    MembershipSummaries: ListShape
+    MembershipSummary: UnionShape
     MemoryAmountMiB: IntegerShape
     MemoryMiBRange: StructureShape
     MeteredProductId: StringShape
@@ -387,21 +483,35 @@ module Aws::Deadline
     MonitorId: StringShape
     MonitorSummaries: ListShape
     MonitorSummary: StructureShape
+    MountPath: StringShape
+    NestedIntStringList: ListShape
     NextItemOffset: IntegerShape
+    NextToken: StringShape
+    OpenjdExtensionName: StringShape
+    OpenjdExtensionNameList: ListShape
     OutputRelativeDirectoriesList: ListShape
     ParameterFilterExpression: StructureShape
     ParameterSortExpression: StructureShape
     ParameterSpace: StructureShape
     ParameterString: StringShape
+    ParameterStringList: ListShape
     ParameterValue: StringShape
     PathFormat: EnumShape
     PathMappingRule: StructureShape
     PathMappingRules: ListShape
     PathString: StringShape
+    PathStringList: ListShape
     Period: EnumShape
+    PersistentVolumeConfiguration: StructureShape
+    PersistentVolumeIops: IntegerShape
+    PersistentVolumeSizeGiB: IntegerShape
+    PersistentVolumeThroughputMiB: IntegerShape
+    PersistentVolumeTtlHours: IntegerShape
     PortNumber: IntegerShape
     PosixUser: StructureShape
     Priority: IntegerShape
+    PriorityBalancedSchedulingConfiguration: StructureShape
+    PriorityFifoSchedulingConfiguration: StructureShape
     ProcessExitCode: IntegerShape
     PutMeteredProductRequest: StructureShape
     PutMeteredProductResponse: StructureShape
@@ -422,6 +532,9 @@ module Aws::Deadline
     QueueStatus: EnumShape
     QueueSummaries: ListShape
     QueueSummary: StructureShape
+    RangeConstraint: EnumShape
+    RangeExprString: StringShape
+    Region: StringShape
     RequiredFileSystemLocationNames: ListShape
     ResourceName: StringShape
     ResourceNotFoundException: StructureShape
@@ -432,6 +545,16 @@ module Aws::Deadline
     S3Key: StringShape
     S3Location: StructureShape
     S3Prefix: StringShape
+    SchedulingConfiguration: UnionShape
+    SchedulingErrorWeight: FloatShape
+    SchedulingMaxPriorityOverride: UnionShape
+    SchedulingMaxPriorityOverrideAlwaysScheduleFirst: StructureShape
+    SchedulingMinPriorityOverride: UnionShape
+    SchedulingMinPriorityOverrideAlwaysScheduleLast: StructureShape
+    SchedulingPriorityWeight: FloatShape
+    SchedulingRenderingTaskBuffer: IntegerShape
+    SchedulingRenderingTaskWeight: FloatShape
+    SchedulingSubmissionTimeWeight: FloatShape
     SearchFilterExpression: UnionShape
     SearchFilterExpressions: ListShape
     SearchGroupedFilterExpressions: StructureShape
@@ -451,9 +574,12 @@ module Aws::Deadline
     SecretAccessKey: StringShape
     SecurityGroupId: StringShape
     SecurityGroupIdList: ListShape
+    SerializedSymbolTable: StringShape
+    ServiceManagedEc2AutoScalingConfiguration: StructureShape
     ServiceManagedEc2FleetConfiguration: StructureShape
     ServiceManagedEc2InstanceCapabilities: StructureShape
     ServiceManagedEc2InstanceMarketOptions: StructureShape
+    ServiceManagedEc2WorkerIdleDurationSeconds: IntegerShape
     ServiceManagedFleetOperatingSystemFamily: EnumShape
     ServiceQuotaExceededException: StructureShape
     ServiceQuotaExceededExceptionReason: EnumShape
@@ -469,11 +595,17 @@ module Aws::Deadline
     SessionId: StringShape
     SessionLifecycleStatus: EnumShape
     SessionLifecycleTargetStatus: EnumShape
+    SessionMetadata: MapShape
+    SessionMetadataKey: StringShape
+    SessionMetadataValue: StringShape
     SessionSummaries: ListShape
     SessionSummary: StructureShape
     SessionToken: StringShape
     SessionsStatisticsAggregationStatus: EnumShape
     SessionsStatisticsResources: UnionShape
+    SettingKey: StringShape
+    SettingValue: StringShape
+    SettingsMap: MapShape
     SortOrder: EnumShape
     StartSessionsStatisticsAggregationRequest: StructureShape
     StartSessionsStatisticsAggregationResponse: StructureShape
@@ -499,6 +631,7 @@ module Aws::Deadline
     StepLifecycleStatus: EnumShape
     StepName: StringShape
     StepParameter: StructureShape
+    StepParameterChunks: StructureShape
     StepParameterList: ListShape
     StepParameterName: StringShape
     StepParameterType: EnumShape
@@ -515,7 +648,9 @@ module Aws::Deadline
     String: StringShape
     StringFilter: StringShape
     StringFilterExpression: StructureShape
+    StringFilterList: ListShape
     StringList: ListShape
+    StringListFilterExpression: StructureShape
     Subdomain: StringShape
     SubnetId: StringShape
     SubnetIdList: ListShape
@@ -525,6 +660,7 @@ module Aws::Deadline
     TagResourceRequest: StructureShape
     TagResourceResponse: StructureShape
     Tags: MapShape
+    TargetRuntimeSeconds: IntegerShape
     TaskFailureRetryCount: IntegerShape
     TaskId: StringShape
     TaskParameterValue: UnionShape
@@ -563,6 +699,8 @@ module Aws::Deadline
     UpdateLimitResponse: StructureShape
     UpdateMonitorRequest: StructureShape
     UpdateMonitorResponse: StructureShape
+    UpdateMonitorSettingsRequest: StructureShape
+    UpdateMonitorSettingsResponse: StructureShape
     UpdateQueueEnvironmentRequest: StructureShape
     UpdateQueueEnvironmentResponse: StructureShape
     UpdateQueueFleetAssociationRequest: StructureShape
@@ -605,10 +743,15 @@ module Aws::Deadline
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: EnumShape
+    VolumeId: StringShape
+    VolumeState: EnumShape
+    VolumeSummaries: ListShape
+    VolumeSummary: StructureShape
     VpcConfiguration: StructureShape
     VpcId: StringShape
     VpcResourceConfigurationArn: StringShape
     VpcResourceConfigurationArns: ListShape
+    WeightedBalancedSchedulingConfiguration: StructureShape
     WindowsUser: StructureShape
     WorkerAmountCapability: StructureShape
     WorkerAmountCapabilityList: ListShape

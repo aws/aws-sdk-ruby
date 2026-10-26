@@ -144,18 +144,18 @@ module Aws::CostExplorer
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -257,7 +257,7 @@ module Aws::CostExplorer
     #       last_updated_date: "YearMonthDay",
     #       last_evaluated_date: "YearMonthDay",
     #       monitor_type: "DIMENSIONAL" # One of: ["DIMENSIONAL", "CUSTOM"], # required
-    #       monitor_dimension: "SERVICE" # One of: ["SERVICE"],
+    #       monitor_dimension: "SERVICE" # One of: ["SERVICE", "LINKED_ACCOUNT", "TAG", "COST_CATEGORY"],
     #       monitor_specification: {
     #         or: [
     #           {
@@ -273,7 +273,7 @@ module Aws::CostExplorer
     #           # recursive Expression
     #         },
     #         dimensions: {
-    #           key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #           key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #           values: ["Value"],
     #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #         },
@@ -284,6 +284,11 @@ module Aws::CostExplorer
     #         },
     #         cost_categories: {
     #           key: "CostCategoryName",
+    #           values: ["Value"],
+    #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #         },
+    #         product_attributes: {
+    #           key: "ProductAttributeName", # required
     #           values: ["Value"],
     #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #         }
@@ -381,7 +386,7 @@ module Aws::CostExplorer
     #           # recursive Expression
     #         },
     #         dimensions: {
-    #           key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #           key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #           values: ["Value"],
     #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #         },
@@ -392,6 +397,11 @@ module Aws::CostExplorer
     #         },
     #         cost_categories: {
     #           key: "CostCategoryName",
+    #           values: ["Value"],
+    #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #         },
+    #         product_attributes: {
+    #           key: "ProductAttributeName", # required
     #           values: ["Value"],
     #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #         }
@@ -417,21 +427,21 @@ module Aws::CostExplorer
       request.send_request(options)
     end
 
-    # <p>Creates a new Cost Category with the requested name and rules.</p>
+    # <p>Creates a new cost category with the requested name and rules.</p>
     # @param [Hash, Types::CreateCostCategoryDefinitionRequest] params
     # @option params [String] :name
-    #   <p>The unique name of the Cost Category.</p>
+    #   <p>The unique name of the cost category.</p>
     # @option params [String] :effective_start
-    #   <p>The Cost Category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>
+    #   <p>The cost category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>
     # @option params [String] :rule_version
-    #   <p>The rule schema version in this particular Cost Category.</p>
+    #   <p>The rule schema version in this particular cost category.</p>
     # @option params [Array<Types::CostCategoryRule>] :rules
-    #   <p>The Cost Category rules used to categorize costs. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html">CostCategoryRule</a>.</p>
+    #   <p>The cost category rules used to categorize costs. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html">CostCategoryRule</a>.</p>
     # @option params [String] :default_value
     #   <p>The
     #               default value for the cost category.</p>
     # @option params [Array<Types::CostCategorySplitChargeRule>] :split_charge_rules
-    #   <p> The split charge rules used to allocate your charges between your Cost Category values.
+    #   <p> The split charge rules used to allocate your charges between your cost category values.
     #       </p>
     # @option params [Array<Types::ResourceTag>] :resource_tags
     #   <p>An optional list of tags to associate with the specified <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html">
@@ -490,7 +500,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           },
@@ -501,6 +511,11 @@ module Aws::CostExplorer
     #           },
     #           cost_categories: {
     #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #           },
+    #           product_attributes: {
+    #             key: "ProductAttributeName", # required
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           }
@@ -585,11 +600,11 @@ module Aws::CostExplorer
       request.send_request(options)
     end
 
-    # <p>Deletes a Cost Category. Expenses from this month going forward will no longer be
-    #       categorized with this Cost Category.</p>
+    # <p>Deletes a cost category. Expenses from this month going forward will no longer be
+    #       categorized with this cost category.</p>
     # @param [Hash, Types::DeleteCostCategoryDefinitionRequest] params
     # @option params [String] :cost_category_arn
-    #   <p>The unique identifier for your Cost Category. </p>
+    #   <p>The unique identifier for your cost category. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     cost_category_arn: "Arn", # required
@@ -609,16 +624,16 @@ module Aws::CostExplorer
     end
 
     # <p>Returns the name, Amazon Resource Name (ARN), rules, definition, and effective dates of a
-    #       Cost Category that's defined in the account.</p>
-    #          <p>You have the option to use <code>EffectiveOn</code> to return a Cost Category that's
+    #       cost category that's defined in the account.</p>
+    #          <p>You have the option to use <code>EffectiveOn</code> to return a cost category that's
     #       active on a specific date. If there's no <code>EffectiveOn</code> specified, you see a Cost
-    #       Category that's effective on the current date. If Cost Category is still effective,
+    #       Category that's effective on the current date. If cost category is still effective,
     #         <code>EffectiveEnd</code> is omitted in the response. </p>
     # @param [Hash, Types::DescribeCostCategoryDefinitionRequest] params
     # @option params [String] :cost_category_arn
-    #   <p>The unique identifier for your Cost Category. </p>
+    #   <p>The unique identifier for your cost category. </p>
     # @option params [String] :effective_on
-    #   <p>The date when the Cost Category was effective. </p>
+    #   <p>The date when the cost category was effective. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     cost_category_arn: "Arn", # required
@@ -653,7 +668,7 @@ module Aws::CostExplorer
     #               # recursive Expression
     #             },
     #             dimensions: {
-    #               key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #               key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #               values: ["Value"],
     #               match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #             },
@@ -664,6 +679,11 @@ module Aws::CostExplorer
     #             },
     #             cost_categories: {
     #               key: "CostCategoryName",
+    #               values: ["Value"],
+    #               match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #             },
+    #             product_attributes: {
+    #               key: "ProductAttributeName", # required
     #               values: ["Value"],
     #               match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #             }
@@ -815,7 +835,7 @@ module Aws::CostExplorer
     #         last_updated_date: "YearMonthDay",
     #         last_evaluated_date: "YearMonthDay",
     #         monitor_type: "DIMENSIONAL" # One of: ["DIMENSIONAL", "CUSTOM"], # required
-    #         monitor_dimension: "SERVICE" # One of: ["SERVICE"],
+    #         monitor_dimension: "SERVICE" # One of: ["SERVICE", "LINKED_ACCOUNT", "TAG", "COST_CATEGORY"],
     #         monitor_specification: {
     #           or: [
     #             {
@@ -831,7 +851,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           },
@@ -842,6 +862,11 @@ module Aws::CostExplorer
     #           },
     #           cost_categories: {
     #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #           },
+    #           product_attributes: {
+    #             key: "ProductAttributeName", # required
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           }
@@ -911,7 +936,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           },
@@ -922,6 +947,11 @@ module Aws::CostExplorer
     #           },
     #           cost_categories: {
     #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #           },
+    #           product_attributes: {
+    #             key: "ProductAttributeName", # required
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           }
@@ -1032,11 +1062,11 @@ module Aws::CostExplorer
     #       savings_plans_purchase_analysis_configuration: {
     #         account_scope: "PAYER" # One of: ["PAYER", "LINKED"],
     #         account_id: "AccountId",
-    #         analysis_type: "MAX_SAVINGS" # One of: ["MAX_SAVINGS", "CUSTOM_COMMITMENT"], # required
+    #         analysis_type: "MAX_SAVINGS" # One of: ["MAX_SAVINGS", "CUSTOM_COMMITMENT", "TARGET_AVERAGE_COVERAGE"], # required
     #         savings_plans_to_add: [ # required
     #           {
     #             payment_option: "NO_UPFRONT" # One of: ["NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"],
-    #             savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"],
+    #             savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"],
     #             region: "GenericString",
     #             instance_family: "GenericString",
     #             term_in_years: "ONE_YEAR" # One of: ["ONE_YEAR", "THREE_YEARS"],
@@ -1048,7 +1078,8 @@ module Aws::CostExplorer
     #         look_back_time_period: { # required
     #           start: "YearMonthDay", # required
     #           end: "YearMonthDay", # required
-    #         }
+    #         },
+    #         savings_plans_target_coverage: 1
     #       }
     #     }
     #   }
@@ -1084,10 +1115,14 @@ module Aws::CostExplorer
     #         define any combination of dimension filters. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. </p>
     #            <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are
     #           <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>
-    #            <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and
-    #           <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and
-    #           <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and
-    #           <code>CASE_SENSITIVE</code>.</p>
+    #            <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code>,
+    #           <code>Tags</code>, and <code>ProductAttributes</code> are <code>EQUALS</code>,
+    #           <code>ABSENT</code>, and <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code>
+    #         and <code>CASE_SENSITIVE</code>.</p>
+    #            <p>You can filter by product attributes with or without grouping by them. If you filter or
+    #         group by product attributes, the results include only the costs of supported services, and a
+    #           <code>SERVICE</code> filter is optional. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">ProductAttributeValues</a>.</p>
+    #            <p>If you include a <code>SERVICE</code> filter, it must apply to the whole request: combine it with other filters by using <code>And</code>, and include it in every branch of an <code>Or</code>. A <code>SERVICE</code> filter inside <code>Not</code> doesn't meet this requirement, and the request fails with a <code>ValidationException</code>.</p>
     # @option params [Array<String>] :metrics
     #   <p>Which metrics are returned in the query. For more information about blended and
     #         unblended rates, see <a href="http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation
@@ -1108,7 +1143,8 @@ module Aws::CostExplorer
     #               <code>Metrics</code> is required for <code>GetCostAndUsage</code> requests.</p>
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   <p>You can group Amazon Web Services costs using up to two different groups, either
-    #         dimensions, tag keys, cost categories, or any two group by types.</p>
+    #         dimensions, tag keys, cost categories, product attributes, or any two group by
+    #         types.</p>
     #            <p>Valid values for the <code>DIMENSION</code> type are <code>AZ</code>,
     #           <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>INVOICING_ENTITY</code>,
     #           <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>,
@@ -1116,6 +1152,16 @@ module Aws::CostExplorer
     #           <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>
     #            <p>When you group by the <code>TAG</code> type and include a valid tag key, you get all
     #         tag values, including empty strings.</p>
+    #            <p>To group by the <code>PRODUCT_ATTRIBUTE</code> type, set <code>Key</code> to a
+    #         product attribute key, such as <code>model</code>. For the keys of each supported service, see
+    #         <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">ProductAttributeValues</a>. The results include only the costs of supported services, and if you have no
+    #         such costs, the response contains no groups.</p>
+    #            <p>In the response, each group key has the format <code>key$value</code>, for example,
+    #           <code>model$Claude Sonnet 5</code>. Costs that have no value for the key are in the group
+    #           <code>key$</code>, for example, <code>model$</code>. Remove the <code>key$</code> prefix
+    #         before you use a value in a <code>ProductAttributes</code> filter. Keys are case-sensitive: if
+    #         you group by a key that doesn't exist, such as <code>Model</code>, all of your costs of
+    #         supported services are in the group <code>Model$</code>.</p>
     # @option params [String] :billing_view_arn
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN
     #         is used to specify which particular billing view you want to interact with or retrieve
@@ -1147,7 +1193,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -1160,12 +1206,17 @@ module Aws::CostExplorer
     #         key: "CostCategoryName",
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
     #     },
     #     metrics: ["MetricName"], # required
     #     group_by: [
     #       {
-    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY"],
+    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY", "PRODUCT_ATTRIBUTE"],
     #         key: "GroupDefinitionKey"
     #       }
     #     ],
@@ -1180,7 +1231,7 @@ module Aws::CostExplorer
     #     next_page_token: "NextPageToken",
     #     group_definitions: [
     #       {
-    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY"],
+    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY", "PRODUCT_ATTRIBUTE"],
     #         key: "GroupDefinitionKey"
     #       }
     #     ],
@@ -1258,9 +1309,10 @@ module Aws::CostExplorer
     #                  <p>Simple dimension values.</p>
     #                  <ul>
     #                     <li>
-    #                        <p>There are three types of simple dimension values:
-    #                                   <code>CostCategories</code>, <code>Tags</code>, and
-    #                                   <code>Dimensions</code>.</p>
+    #                        <p>There are four types of simple dimension values:
+    #                                   <code>CostCategories</code>, <code>Tags</code>,
+    #                                   <code>Dimensions</code>, and
+    #                               <code>ProductAttributes</code>.</p>
     #                        <ul>
     #                           <li>
     #                              <p>Specify the <code>CostCategories</code> field to define a
@@ -1274,6 +1326,20 @@ module Aws::CostExplorer
     #                              <p>Specify the <code>Dimensions</code> field to define a filter
     #                                       that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html">
     #                                    <code>DimensionValues</code>
+    #                                 </a>.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Specify the <code>ProductAttributes</code> field to define a
+    #                                       filter that acts on the product attributes of supported
+    #                                       services, such as Amazon Bedrock. Only
+    #                                           <code>GetCostAndUsage</code>,
+    #                                           <code>GetCostAndUsageWithResources</code>,
+    #                                           <code>GetDimensionValues</code> (in the
+    #                                           <code>COST_AND_USAGE</code> context),
+    #                                           <code>GetTags</code>, and <code>GetCostCategories</code>
+    #                                       support <code>ProductAttributes</code>. For the supported
+    #                                       services, keys and <code>SERVICE</code> filter rules, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">
+    #                                    <code>ProductAttributeValues</code>
     #                                 </a>.</p>
     #                           </li>
     #                        </ul>
@@ -1405,7 +1471,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -1418,11 +1484,16 @@ module Aws::CostExplorer
     #         key: "CostCategoryName",
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
     #     },
     #     group_by: [
     #       {
-    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY"],
+    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY", "PRODUCT_ATTRIBUTE"],
     #         key: "GroupDefinitionKey"
     #       }
     #     ],
@@ -1451,7 +1522,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           },
@@ -1462,6 +1533,11 @@ module Aws::CostExplorer
     #           },
     #           cost_categories: {
     #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #           },
+    #           product_attributes: {
+    #             key: "ProductAttributeName", # required
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           }
@@ -1524,12 +1600,17 @@ module Aws::CostExplorer
     #           <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated
     #         with that account's usage of that service. You can nest <code>Expression</code> objects to
     #         define any combination of dimension filters. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. </p>
+    #            <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group
+    #         by or filter by a <code>ResourceId</code>. It requires the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>
+    #               <code>"SERVICE = Amazon Elastic Compute Cloud - Compute"</code> in the filter.</p>
     #            <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are
     #           <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>
-    #            <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and
-    #           <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and
-    #           <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and
-    #           <code>CASE_SENSITIVE</code>.</p>
+    #            <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code>,
+    #           <code>Tags</code>, and <code>ProductAttributes</code> are <code>EQUALS</code>,
+    #           <code>ABSENT</code>, and <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code>
+    #         and <code>CASE_SENSITIVE</code>.</p>
+    #            <p>If you filter or group by product attributes, the <code>SERVICE</code> filter rules are
+    #         the same as for <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html">GetCostAndUsage</a>.</p>
     # @option params [Array<String>] :metrics
     #   <p>Which metrics are returned in the query. For more information about blended and
     #         unblended rates, see <a href="http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation
@@ -1551,7 +1632,12 @@ module Aws::CostExplorer
     #         requests.</p>
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   <p>You can group Amazon Web Services costs using up to two different groups:
-    #           <code>DIMENSION</code>, <code>TAG</code>, <code>COST_CATEGORY</code>.</p>
+    #           <code>DIMENSION</code>, <code>TAG</code>, <code>COST_CATEGORY</code>, and
+    #           <code>PRODUCT_ATTRIBUTE</code>.</p>
+    #            <p>
+    #               <code>PRODUCT_ATTRIBUTE</code> groups work the same way as in <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html">GetCostAndUsage</a>. A
+    #           <code>PRODUCT_ATTRIBUTE</code> group or a <code>ProductAttributes</code> filter doesn't meet
+    #         the requirement to group by or filter by a <code>ResourceId</code>.</p>
     # @option params [String] :billing_view_arn
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies a specific billing view. The ARN
     #         is used to specify which particular billing view you want to interact with or retrieve
@@ -1583,7 +1669,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -1596,12 +1682,17 @@ module Aws::CostExplorer
     #         key: "CostCategoryName",
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
     #     },
     #     metrics: ["MetricName"],
     #     group_by: [
     #       {
-    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY"],
+    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY", "PRODUCT_ATTRIBUTE"],
     #         key: "GroupDefinitionKey"
     #       }
     #     ],
@@ -1616,7 +1707,7 @@ module Aws::CostExplorer
     #     next_page_token: "NextPageToken",
     #     group_definitions: [
     #       {
-    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY"],
+    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY", "PRODUCT_ATTRIBUTE"],
     #         key: "GroupDefinitionKey"
     #       }
     #     ],
@@ -1661,22 +1752,22 @@ module Aws::CostExplorer
       request.send_request(options)
     end
 
-    # <p>Retrieves an array of Cost Category names and values incurred cost.</p>
+    # <p>Retrieves an array of cost category names and values incurred cost.</p>
     #          <note>
-    #             <p>If some Cost Category names and values are not associated with any cost, they will not
+    #             <p>If some cost category names and values are not associated with any cost, they will not
     #         be returned by this API.</p>
     #          </note>
     # @param [Hash, Types::GetCostCategoriesRequest] params
     # @option params [String] :search_string
     #   <p>The value that you want to search the filter values for.</p>
     #            <p>If you don't specify a <code>CostCategoryName</code>, <code>SearchString</code> is used to
-    #         filter Cost Category names that match the <code>SearchString</code> pattern. If you specify a
-    #           <code>CostCategoryName</code>, <code>SearchString</code> is used to filter Cost Category
+    #         filter cost category names that match the <code>SearchString</code> pattern. If you specify a
+    #           <code>CostCategoryName</code>, <code>SearchString</code> is used to filter cost category
     #         values that match the <code>SearchString</code> pattern.</p>
     # @option params [Types::DateInterval] :time_period
     #   <p>The time period of the request. </p>
     # @option params [String] :cost_category_name
-    #   <p>The unique name of the Cost Category.</p>
+    #   <p>The unique name of the cost category.</p>
     # @option params [Types::Expression] :filter
     #   <p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p>
     #            <p>Not all <code>Expression</code> types are supported in each API. Refer to the
@@ -1687,9 +1778,10 @@ module Aws::CostExplorer
     #                  <p>Simple dimension values.</p>
     #                  <ul>
     #                     <li>
-    #                        <p>There are three types of simple dimension values:
-    #                                   <code>CostCategories</code>, <code>Tags</code>, and
-    #                                   <code>Dimensions</code>.</p>
+    #                        <p>There are four types of simple dimension values:
+    #                                   <code>CostCategories</code>, <code>Tags</code>,
+    #                                   <code>Dimensions</code>, and
+    #                               <code>ProductAttributes</code>.</p>
     #                        <ul>
     #                           <li>
     #                              <p>Specify the <code>CostCategories</code> field to define a
@@ -1703,6 +1795,20 @@ module Aws::CostExplorer
     #                              <p>Specify the <code>Dimensions</code> field to define a filter
     #                                       that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html">
     #                                    <code>DimensionValues</code>
+    #                                 </a>.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Specify the <code>ProductAttributes</code> field to define a
+    #                                       filter that acts on the product attributes of supported
+    #                                       services, such as Amazon Bedrock. Only
+    #                                           <code>GetCostAndUsage</code>,
+    #                                           <code>GetCostAndUsageWithResources</code>,
+    #                                           <code>GetDimensionValues</code> (in the
+    #                                           <code>COST_AND_USAGE</code> context),
+    #                                           <code>GetTags</code>, and <code>GetCostCategories</code>
+    #                                       support <code>ProductAttributes</code>. For the supported
+    #                                       services, keys and <code>SERVICE</code> filter rules, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">
+    #                                    <code>ProductAttributeValues</code>
     #                                 </a>.</p>
     #                           </li>
     #                        </ul>
@@ -1883,7 +1989,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -1894,6 +2000,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -1958,9 +2069,10 @@ module Aws::CostExplorer
     #                  <p>Simple dimension values.</p>
     #                  <ul>
     #                     <li>
-    #                        <p>There are three types of simple dimension values:
-    #                                   <code>CostCategories</code>, <code>Tags</code>, and
-    #                                   <code>Dimensions</code>.</p>
+    #                        <p>There are four types of simple dimension values:
+    #                                   <code>CostCategories</code>, <code>Tags</code>,
+    #                                   <code>Dimensions</code>, and
+    #                               <code>ProductAttributes</code>.</p>
     #                        <ul>
     #                           <li>
     #                              <p>Specify the <code>CostCategories</code> field to define a
@@ -1974,6 +2086,20 @@ module Aws::CostExplorer
     #                              <p>Specify the <code>Dimensions</code> field to define a filter
     #                                       that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html">
     #                                    <code>DimensionValues</code>
+    #                                 </a>.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Specify the <code>ProductAttributes</code> field to define a
+    #                                       filter that acts on the product attributes of supported
+    #                                       services, such as Amazon Bedrock. Only
+    #                                           <code>GetCostAndUsage</code>,
+    #                                           <code>GetCostAndUsageWithResources</code>,
+    #                                           <code>GetDimensionValues</code> (in the
+    #                                           <code>COST_AND_USAGE</code> context),
+    #                                           <code>GetTags</code>, and <code>GetCostCategories</code>
+    #                                       support <code>ProductAttributes</code>. For the supported
+    #                                       services, keys and <code>SERVICE</code> filter rules, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">
+    #                                    <code>ProductAttributeValues</code>
     #                                 </a>.</p>
     #                           </li>
     #                        </ul>
@@ -2106,7 +2232,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -2119,11 +2245,16 @@ module Aws::CostExplorer
     #         key: "CostCategoryName",
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
     #     },
     #     group_by: [
     #       {
-    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY"],
+    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY", "PRODUCT_ATTRIBUTE"],
     #         key: "GroupDefinitionKey"
     #       }
     #     ],
@@ -2152,7 +2283,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           },
@@ -2163,6 +2294,11 @@ module Aws::CostExplorer
     #           },
     #           cost_categories: {
     #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #           },
+    #           product_attributes: {
+    #             key: "ProductAttributeName", # required
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           }
@@ -2229,7 +2365,7 @@ module Aws::CostExplorer
     #            </ul>
     # @option params [String] :granularity
     #   <p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>
-    #         forecasts or 12 months of <code>MONTHLY</code> forecasts.</p>
+    #         forecasts or 18 months of <code>MONTHLY</code> forecasts.</p>
     #            <p>The <code>GetCostForecast</code> operation supports only <code>DAILY</code> and
     #           <code>MONTHLY</code> granularities.</p>
     # @option params [Types::Expression] :filter
@@ -2381,7 +2517,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -2392,6 +2528,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -2441,6 +2582,24 @@ module Aws::CostExplorer
     #   <p>The name of the dimension. Each <code>Dimension</code> is available for a different
     #           <code>Context</code>. For more information, see <code>Context</code>.
     #           <code>LINK_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html">CostCategoryRule</a>. </p>
+    #            <p>
+    #               <code>PRODUCT_ATTRIBUTE</code> returns the product attribute keys that are available for
+    #         your costs of supported services, or the values of the key that you specify in
+    #           <code>DimensionKey</code>. <code>PRODUCT_ATTRIBUTE</code> is supported only in the
+    #           <code>COST_AND_USAGE</code> context.</p>
+    # @option params [String] :dimension_key
+    #   <p>The product attribute key to return values for, such as <code>model</code>. If you omit
+    #           <code>DimensionKey</code> or set it to an empty string, the response lists the product
+    #         attribute keys that are available for your costs of supported services instead. For the
+    #         supported services, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">ProductAttributeValues</a>.</p>
+    #            <p>If you specify a key, the response lists the values of that key. If some of your costs
+    #         have no value for the key, the response includes an empty-string value. Keys are
+    #         case-sensitive, and a key that doesn't exist returns no values other than an empty
+    #         string.</p>
+    #            <p>You can specify <code>DimensionKey</code> only when <code>Dimension</code> is
+    #           <code>PRODUCT_ATTRIBUTE</code>. If you also specify <code>SortBy</code>,
+    #           <code>DimensionKey</code> is required. As a result, you can't list product attribute keys when
+    #         you use <code>SortBy</code>.</p>
     # @option params [String] :context
     #   <p>The context for the call to <code>GetDimensionValues</code>. This can be
     #           <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is
@@ -2509,6 +2668,10 @@ module Aws::CostExplorer
     #               <li>
     #                  <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or
     #             Linux.</p>
+    #               </li>
+    #               <li>
+    #                  <p>PRODUCT_ATTRIBUTE - The product attributes of supported services, such as the model
+    #             provider or the model for Amazon Bedrock.</p>
     #               </li>
     #               <li>
     #                  <p>PURCHASE_TYPE - The reservation type of the purchase that this usage is related to.
@@ -2629,9 +2792,10 @@ module Aws::CostExplorer
     #                  <p>Simple dimension values.</p>
     #                  <ul>
     #                     <li>
-    #                        <p>There are three types of simple dimension values:
-    #                                   <code>CostCategories</code>, <code>Tags</code>, and
-    #                                   <code>Dimensions</code>.</p>
+    #                        <p>There are four types of simple dimension values:
+    #                                   <code>CostCategories</code>, <code>Tags</code>,
+    #                                   <code>Dimensions</code>, and
+    #                               <code>ProductAttributes</code>.</p>
     #                        <ul>
     #                           <li>
     #                              <p>Specify the <code>CostCategories</code> field to define a
@@ -2645,6 +2809,20 @@ module Aws::CostExplorer
     #                              <p>Specify the <code>Dimensions</code> field to define a filter
     #                                       that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html">
     #                                    <code>DimensionValues</code>
+    #                                 </a>.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Specify the <code>ProductAttributes</code> field to define a
+    #                                       filter that acts on the product attributes of supported
+    #                                       services, such as Amazon Bedrock. Only
+    #                                           <code>GetCostAndUsage</code>,
+    #                                           <code>GetCostAndUsageWithResources</code>,
+    #                                           <code>GetDimensionValues</code> (in the
+    #                                           <code>COST_AND_USAGE</code> context),
+    #                                           <code>GetTags</code>, and <code>GetCostCategories</code>
+    #                                       support <code>ProductAttributes</code>. For the supported
+    #                                       services, keys and <code>SERVICE</code> filter rules, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">
+    #                                    <code>ProductAttributeValues</code>
     #                                 </a>.</p>
     #                           </li>
     #                        </ul>
@@ -2808,7 +2986,8 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     dimension: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"], # required
+    #     dimension: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"], # required
+    #     dimension_key: "DimensionKey",
     #     context: "COST_AND_USAGE" # One of: ["COST_AND_USAGE", "RESERVATIONS", "SAVINGS_PLANS"],
     #     filter: {
     #       or: [
@@ -2825,7 +3004,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -2836,6 +3015,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -2876,7 +3060,7 @@ module Aws::CostExplorer
     # <p>Retrieves the reservation coverage for your account, which you can use to see how much
     #       of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service,
     #       or Amazon Redshift usage is covered by a reservation. An organization's management account can
-    #       see the coverage of the associated member accounts. This supports dimensions, Cost Categories,
+    #       see the coverage of the associated member accounts. This supports dimensions, cost categories,
     #       and nested expressions. For any time period, you can filter data about reservation usage by
     #       the following dimensions:</p>
     #          <ul>
@@ -3098,7 +3282,7 @@ module Aws::CostExplorer
     #     },
     #     group_by: [
     #       {
-    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY"],
+    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY", "PRODUCT_ATTRIBUTE"],
     #         key: "GroupDefinitionKey"
     #       }
     #     ],
@@ -3118,7 +3302,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -3129,6 +3313,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -3251,9 +3440,10 @@ module Aws::CostExplorer
     #                  <p>Simple dimension values.</p>
     #                  <ul>
     #                     <li>
-    #                        <p>There are three types of simple dimension values:
-    #                                   <code>CostCategories</code>, <code>Tags</code>, and
-    #                                   <code>Dimensions</code>.</p>
+    #                        <p>There are four types of simple dimension values:
+    #                                   <code>CostCategories</code>, <code>Tags</code>,
+    #                                   <code>Dimensions</code>, and
+    #                               <code>ProductAttributes</code>.</p>
     #                        <ul>
     #                           <li>
     #                              <p>Specify the <code>CostCategories</code> field to define a
@@ -3267,6 +3457,20 @@ module Aws::CostExplorer
     #                              <p>Specify the <code>Dimensions</code> field to define a filter
     #                                       that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html">
     #                                    <code>DimensionValues</code>
+    #                                 </a>.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Specify the <code>ProductAttributes</code> field to define a
+    #                                       filter that acts on the product attributes of supported
+    #                                       services, such as Amazon Bedrock. Only
+    #                                           <code>GetCostAndUsage</code>,
+    #                                           <code>GetCostAndUsageWithResources</code>,
+    #                                           <code>GetDimensionValues</code> (in the
+    #                                           <code>COST_AND_USAGE</code> context),
+    #                                           <code>GetTags</code>, and <code>GetCostCategories</code>
+    #                                       support <code>ProductAttributes</code>. For the supported
+    #                                       services, keys and <code>SERVICE</code> filter rules, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">
+    #                                    <code>ProductAttributeValues</code>
     #                                 </a>.</p>
     #                           </li>
     #                        </ul>
@@ -3404,7 +3608,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -3415,6 +3619,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -3475,7 +3684,8 @@ module Aws::CostExplorer
     #                 deployment_option: "GenericString",
     #                 license_model: "GenericString",
     #                 current_generation: false,
-    #                 size_flex_eligible: false
+    #                 size_flex_eligible: false,
+    #                 deployment_model: "GenericString"
     #               },
     #               redshift_instance_details: {
     #                 family: "GenericString",
@@ -3729,7 +3939,7 @@ module Aws::CostExplorer
     #     },
     #     group_by: [
     #       {
-    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY"],
+    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY", "PRODUCT_ATTRIBUTE"],
     #         key: "GroupDefinitionKey"
     #       }
     #     ],
@@ -3749,7 +3959,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -3760,6 +3970,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -3874,9 +4089,10 @@ module Aws::CostExplorer
     #                  <p>Simple dimension values.</p>
     #                  <ul>
     #                     <li>
-    #                        <p>There are three types of simple dimension values:
-    #                                   <code>CostCategories</code>, <code>Tags</code>, and
-    #                                   <code>Dimensions</code>.</p>
+    #                        <p>There are four types of simple dimension values:
+    #                                   <code>CostCategories</code>, <code>Tags</code>,
+    #                                   <code>Dimensions</code>, and
+    #                               <code>ProductAttributes</code>.</p>
     #                        <ul>
     #                           <li>
     #                              <p>Specify the <code>CostCategories</code> field to define a
@@ -3890,6 +4106,20 @@ module Aws::CostExplorer
     #                              <p>Specify the <code>Dimensions</code> field to define a filter
     #                                       that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html">
     #                                    <code>DimensionValues</code>
+    #                                 </a>.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Specify the <code>ProductAttributes</code> field to define a
+    #                                       filter that acts on the product attributes of supported
+    #                                       services, such as Amazon Bedrock. Only
+    #                                           <code>GetCostAndUsage</code>,
+    #                                           <code>GetCostAndUsageWithResources</code>,
+    #                                           <code>GetDimensionValues</code> (in the
+    #                                           <code>COST_AND_USAGE</code> context),
+    #                                           <code>GetTags</code>, and <code>GetCostCategories</code>
+    #                                       support <code>ProductAttributes</code>. For the supported
+    #                                       services, keys and <code>SERVICE</code> filter rules, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">
+    #                                    <code>ProductAttributeValues</code>
     #                                 </a>.</p>
     #                           </li>
     #                        </ul>
@@ -4018,7 +4248,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -4029,6 +4259,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -4203,7 +4438,7 @@ module Aws::CostExplorer
     #     recommendation_detail_data: {
     #       account_scope: "PAYER" # One of: ["PAYER", "LINKED"],
     #       lookback_period_in_days: "SEVEN_DAYS" # One of: ["SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"],
-    #       savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"],
+    #       savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"],
     #       term_in_years: "ONE_YEAR" # One of: ["ONE_YEAR", "THREE_YEARS"],
     #       payment_option: "NO_UPFRONT" # One of: ["NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"],
     #       account_id: "GenericString",
@@ -4248,7 +4483,7 @@ module Aws::CostExplorer
 
     # <p>Retrieves the Savings Plans covered for your account. This enables you to see how much of
     #       your cost is covered by a Savings Plan. An organization’s management account can see the
-    #       coverage of the associated member accounts. This supports dimensions, Cost Categories, and
+    #       coverage of the associated member accounts. This supports dimensions, cost categories, and
     #       nested expressions. For any time period, you can filter data for Savings Plans usage with the
     #       following dimensions:</p>
     #          <ul>
@@ -4377,7 +4612,7 @@ module Aws::CostExplorer
     #     },
     #     group_by: [
     #       {
-    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY"],
+    #         type: "DIMENSION" # One of: ["DIMENSION", "TAG", "COST_CATEGORY", "PRODUCT_ATTRIBUTE"],
     #         key: "GroupDefinitionKey"
     #       }
     #     ],
@@ -4397,7 +4632,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -4408,6 +4643,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -4486,7 +4726,7 @@ module Aws::CostExplorer
     #           <code>OR</code> operators are not supported.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"], # required
+    #     savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"], # required
     #     term_in_years: "ONE_YEAR" # One of: ["ONE_YEAR", "THREE_YEARS"], # required
     #     payment_option: "NO_UPFRONT" # One of: ["NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"], # required
     #     account_scope: "PAYER" # One of: ["PAYER", "LINKED"],
@@ -4508,7 +4748,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -4519,6 +4759,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -4536,7 +4781,7 @@ module Aws::CostExplorer
     #     },
     #     savings_plans_purchase_recommendation: {
     #       account_scope: "PAYER" # One of: ["PAYER", "LINKED"],
-    #       savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"],
+    #       savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"],
     #       term_in_years: "ONE_YEAR" # One of: ["ONE_YEAR", "THREE_YEARS"],
     #       payment_option: "NO_UPFRONT" # One of: ["NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"],
     #       lookback_period_in_days: "SEVEN_DAYS" # One of: ["SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"],
@@ -4697,7 +4942,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -4708,6 +4953,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -4890,7 +5140,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -4901,6 +5151,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -4993,9 +5248,10 @@ module Aws::CostExplorer
     #                  <p>Simple dimension values.</p>
     #                  <ul>
     #                     <li>
-    #                        <p>There are three types of simple dimension values:
-    #                                   <code>CostCategories</code>, <code>Tags</code>, and
-    #                                   <code>Dimensions</code>.</p>
+    #                        <p>There are four types of simple dimension values:
+    #                                   <code>CostCategories</code>, <code>Tags</code>,
+    #                                   <code>Dimensions</code>, and
+    #                               <code>ProductAttributes</code>.</p>
     #                        <ul>
     #                           <li>
     #                              <p>Specify the <code>CostCategories</code> field to define a
@@ -5009,6 +5265,20 @@ module Aws::CostExplorer
     #                              <p>Specify the <code>Dimensions</code> field to define a filter
     #                                       that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html">
     #                                    <code>DimensionValues</code>
+    #                                 </a>.</p>
+    #                           </li>
+    #                           <li>
+    #                              <p>Specify the <code>ProductAttributes</code> field to define a
+    #                                       filter that acts on the product attributes of supported
+    #                                       services, such as Amazon Bedrock. Only
+    #                                           <code>GetCostAndUsage</code>,
+    #                                           <code>GetCostAndUsageWithResources</code>,
+    #                                           <code>GetDimensionValues</code> (in the
+    #                                           <code>COST_AND_USAGE</code> context),
+    #                                           <code>GetTags</code>, and <code>GetCostCategories</code>
+    #                                       support <code>ProductAttributes</code>. For the supported
+    #                                       services, keys and <code>SERVICE</code> filter rules, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html">
+    #                                    <code>ProductAttributeValues</code>
     #                                 </a>.</p>
     #                           </li>
     #                        </ul>
@@ -5187,7 +5457,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -5198,6 +5468,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -5252,7 +5527,7 @@ module Aws::CostExplorer
     #            </ul>
     # @option params [String] :granularity
     #   <p>How granular you want the forecast to be. You can get 3 months of <code>DAILY</code>
-    #         forecasts or 12 months of <code>MONTHLY</code> forecasts.</p>
+    #         forecasts or 18 months of <code>MONTHLY</code> forecasts.</p>
     #            <p>The <code>GetUsageForecast</code> operation supports only <code>DAILY</code> and
     #           <code>MONTHLY</code> granularities.</p>
     # @option params [Types::Expression] :filter
@@ -5410,7 +5685,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -5421,6 +5696,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -5489,11 +5769,11 @@ module Aws::CostExplorer
     #           savings_plans_purchase_analysis_configuration: {
     #             account_scope: "PAYER" # One of: ["PAYER", "LINKED"],
     #             account_id: "AccountId",
-    #             analysis_type: "MAX_SAVINGS" # One of: ["MAX_SAVINGS", "CUSTOM_COMMITMENT"], # required
+    #             analysis_type: "MAX_SAVINGS" # One of: ["MAX_SAVINGS", "CUSTOM_COMMITMENT", "TARGET_AVERAGE_COVERAGE"], # required
     #             savings_plans_to_add: [ # required
     #               {
     #                 payment_option: "NO_UPFRONT" # One of: ["NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"],
-    #                 savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"],
+    #                 savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"],
     #                 region: "GenericString",
     #                 instance_family: "GenericString",
     #                 term_in_years: "ONE_YEAR" # One of: ["ONE_YEAR", "THREE_YEARS"],
@@ -5505,7 +5785,8 @@ module Aws::CostExplorer
     #             look_back_time_period: { # required
     #               start: "YearMonthDay", # required
     #               end: "YearMonthDay", # required
-    #             }
+    #             },
+    #             savings_plans_target_coverage: 1
     #           }
     #         }
     #       }
@@ -5607,25 +5888,30 @@ module Aws::CostExplorer
     end
 
     # <p>Returns the name, Amazon Resource Name (ARN), <code>NumberOfRules</code> and effective
-    #       dates of all Cost Categories defined in the account. You have the option to use
-    #         <code>EffectiveOn</code> to return a list of Cost Categories that were active on a specific
-    #       date. If there is no <code>EffectiveOn</code> specified, you’ll see Cost Categories that are
-    #       effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code>
+    #       dates of all cost categories defined in the account. You have the option to use
+    #       <code>EffectiveOn</code> and <code>SupportedResourceTypes</code> to return a list of cost categories that were active on a specific
+    #       date. If there is no <code>EffectiveOn</code> specified, you’ll see cost categories that are
+    #       effective on the current date. If cost category is still effective, <code>EffectiveEnd</code>
     #       is omitted in the response. <code>ListCostCategoryDefinitions</code> supports pagination. The
     #       request can have a <code>MaxResults</code> range up to 100.</p>
     # @param [Hash, Types::ListCostCategoryDefinitionsRequest] params
     # @option params [String] :effective_on
-    #   <p>The date when the Cost Category was effective. </p>
+    #   <p>The date when the cost category was effective. </p>
     # @option params [String] :next_token
     #   <p>The token to retrieve the next set of results. Amazon Web Services provides the token
     #         when the response from a previous call has more results than the maximum page size. </p>
     # @option params [Integer] :max_results
     #   <p>The number of entries a paginated response contains. </p>
+    # @option params [Array<String>] :supported_resource_types
+    #   <p>
+    #         Filter cost category definitions that are supported by given resource types based on the latest version. If the filter is present, the result only includes Cost Categories that supports input resource type. If the filter isn't provided, no filtering is applied. The valid values are <code>billing:rispgroupsharing</code>, <code>billing:billingview</code>, and <code>billing:creditsharing</code>.
+    #       </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     effective_on: "ZonedDateTime",
     #     next_token: "NextPageToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     supported_resource_types: ["ResourceType"]
     #   }
     #   options = {}
     #   response = client.list_cost_category_definitions(params, options)
@@ -5646,7 +5932,8 @@ module Aws::CostExplorer
     #           }
     #         ],
     #         values: ["CostCategoryValue"],
-    #         default_value: "CostCategoryValue"
+    #         default_value: "CostCategoryValue",
+    #         supported_resource_types: ["ResourceType"]
     #       }
     #     ],
     #     next_token: "NextPageToken"
@@ -5654,6 +5941,45 @@ module Aws::CostExplorer
     # @return [Types::ListCostCategoryDefinitionsResponse]
     def list_cost_category_definitions(params = {}, options = {})
       request = build_request(:list_cost_category_definitions, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns resource associations of all cost categories defined in the account. You have the option to use <code>CostCategoryArn</code> to get the association for a specific cost category. <code>ListCostCategoryResourceAssociations</code> supports pagination. The request can have a <code>MaxResults</code> range up to 100.
+    #     </p>
+    # @param [Hash, Types::ListCostCategoryResourceAssociationsRequest] params
+    # @option params [String] :cost_category_arn
+    #   <p>The unique identifier for your cost category.</p>
+    # @option params [String] :next_token
+    #   <p>
+    #         The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
+    #       </p>
+    # @option params [Integer] :max_results
+    #   <p>
+    #         The number of entries a paginated response contains.
+    #       </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cost_category_arn: "Arn",
+    #     next_token: "NextPageToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_cost_category_resource_associations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     cost_category_resource_associations: [
+    #       {
+    #         resource_arn: "GenericArn",
+    #         cost_category_name: "CostCategoryName",
+    #         cost_category_arn: "Arn"
+    #       }
+    #     ],
+    #     next_token: "NextPageToken"
+    #   }
+    # @return [Types::ListCostCategoryResourceAssociationsResponse]
+    def list_cost_category_resource_associations(params = {}, options = {})
+      request = build_request(:list_cost_category_resource_associations, params)
       request.send_request(options)
     end
 
@@ -5762,11 +6088,11 @@ module Aws::CostExplorer
     #       savings_plans_purchase_analysis_configuration: {
     #         account_scope: "PAYER" # One of: ["PAYER", "LINKED"],
     #         account_id: "AccountId",
-    #         analysis_type: "MAX_SAVINGS" # One of: ["MAX_SAVINGS", "CUSTOM_COMMITMENT"], # required
+    #         analysis_type: "MAX_SAVINGS" # One of: ["MAX_SAVINGS", "CUSTOM_COMMITMENT", "TARGET_AVERAGE_COVERAGE"], # required
     #         savings_plans_to_add: [ # required
     #           {
     #             payment_option: "NO_UPFRONT" # One of: ["NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"],
-    #             savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP"],
+    #             savings_plans_type: "COMPUTE_SP" # One of: ["COMPUTE_SP", "EC2_INSTANCE_SP", "SAGEMAKER_SP", "DATABASE_SP"],
     #             region: "GenericString",
     #             instance_family: "GenericString",
     #             term_in_years: "ONE_YEAR" # One of: ["ONE_YEAR", "THREE_YEARS"],
@@ -5778,7 +6104,8 @@ module Aws::CostExplorer
     #         look_back_time_period: { # required
     #           start: "YearMonthDay", # required
     #           end: "YearMonthDay", # required
-    #         }
+    #         },
+    #         savings_plans_target_coverage: 1
     #       }
     #     }
     #   }
@@ -6063,7 +6390,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #         key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       },
@@ -6074,6 +6401,11 @@ module Aws::CostExplorer
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #       },
+    #       product_attributes: {
+    #         key: "ProductAttributeName", # required
     #         values: ["Value"],
     #         match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #       }
@@ -6128,16 +6460,16 @@ module Aws::CostExplorer
       request.send_request(options)
     end
 
-    # <p>Updates an existing Cost Category. Changes made to the Cost Category rules will be used to
+    # <p>Updates an existing cost category. Changes made to the cost category rules will be used to
     #       categorize the current month’s expenses and future expenses. This won’t change categorization
     #       for the previous months.</p>
     # @param [Hash, Types::UpdateCostCategoryDefinitionRequest] params
     # @option params [String] :cost_category_arn
-    #   <p>The unique identifier for your Cost Category.</p>
+    #   <p>The unique identifier for your cost category.</p>
     # @option params [String] :effective_start
-    #   <p>The Cost Category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>
+    #   <p>The cost category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>
     # @option params [String] :rule_version
-    #   <p>The rule schema version in this particular Cost Category.</p>
+    #   <p>The rule schema version in this particular cost category.</p>
     # @option params [Array<Types::CostCategoryRule>] :rules
     #   <p>The <code>Expression</code> object used to categorize costs. For more information, see
     #           <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html">CostCategoryRule
@@ -6146,7 +6478,7 @@ module Aws::CostExplorer
     #   <p>The
     #               default value for the cost category.</p>
     # @option params [Array<Types::CostCategorySplitChargeRule>] :split_charge_rules
-    #   <p> The split charge rules used to allocate your charges between your Cost Category values.
+    #   <p> The split charge rules used to allocate your charges between your cost category values.
     #       </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -6171,7 +6503,7 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"],
+    #             key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "PAYER_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "PRODUCT_ATTRIBUTE"],
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           },
@@ -6182,6 +6514,11 @@ module Aws::CostExplorer
     #           },
     #           cost_categories: {
     #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
+    #           },
+    #           product_attributes: {
+    #             key: "ProductAttributeName", # required
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"]]
     #           }

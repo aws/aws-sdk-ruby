@@ -144,18 +144,18 @@ module Aws::MemoryDB
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -325,11 +325,11 @@ module Aws::MemoryDB
     #   <p>A name for the snapshot copy. MemoryDB does not permit overwriting a snapshot, therefore this name must be unique within its context - MemoryDB or an Amazon S3 bucket if exporting.</p>
     # @option params [String] :target_bucket
     #   <p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.
-    #          
-    #          When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see 
-    #          
-    #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>. 
-    #          
+    #
+    #          When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see
+    #
+    #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>.
+    #
     #        </p>
     # @option params [String] :kms_key_id
     #   <p>The ID of the KMS key used to encrypt the target snapshot.</p>
@@ -534,7 +534,7 @@ module Aws::MemoryDB
     # @option params [Boolean] :auto_minor_version_upgrade
     #   <p>When set to true, the cluster will automatically receive minor engine version upgrades after launch.</p>
     # @option params [Boolean] :data_tiering
-    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. 
+    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
     #               This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
     # @option params [String] :network_type
     #   <p>Specifies the IP address type for the cluster. Valid values are 'ipv4', 'ipv6', or 'dual_stack'. When set to 'ipv4', the cluster will only be accessible via IPv4 addresses. When set to 'ipv6', the cluster will only be accessible via IPv6 addresses. When set to 'dual_stack', the cluster will be accessible via both IPv4 and IPv6 addresses. If not specified, the default is 'ipv4'.</p>
@@ -729,9 +729,9 @@ module Aws::MemoryDB
       request.send_request(options)
     end
 
-    # <p>Creates a new MemoryDB parameter group. A parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster. For 
+    # <p>Creates a new MemoryDB parameter group. A parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster. For
     #          more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/parametergroups.html">Configuring engine parameters using parameter groups</a>.
-    #          
+    #
     #          </p>
     # @param [Hash, Types::CreateParameterGroupRequest] params
     # @option params [String] :parameter_group_name
@@ -844,8 +844,8 @@ module Aws::MemoryDB
     end
 
     # <p>Creates a subnet group. A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment.
-    #          
-    #          When you create a cluster in an Amazon VPC, you must specify a subnet group. MemoryDB uses that subnet group to choose a subnet and IP addresses within that subnet to associate with your nodes. 
+    #
+    #          When you create a cluster in an Amazon VPC, you must specify a subnet group. MemoryDB uses that subnet group to choose a subnet and IP addresses within that subnet to associate with your nodes.
     #          For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/subnetgroups.html">Subnets and subnet groups</a>.</p>
     # @param [Hash, Types::CreateSubnetGroupRequest] params
     # @option params [String] :subnet_group_name
@@ -980,7 +980,7 @@ module Aws::MemoryDB
     # <p>Deletes a cluster. It also deletes all associated nodes and node endpoints.</p>
     #          <note>
     #             <p>
-    #                <code>CreateSnapshot</code> permission is required to create a final snapshot. 
+    #                <code>CreateSnapshot</code> permission is required to create a final snapshot.
     #          Without this permission, the API call will fail with an <code>Access Denied</code> exception.</p>
     #          </note>
     # @param [Hash, Types::DeleteClusterRequest] params
@@ -1122,7 +1122,7 @@ module Aws::MemoryDB
       request.send_request(options)
     end
 
-    # <p>Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any clusters. 
+    # <p>Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any clusters.
     #          You cannot delete the default parameter groups in your account.</p>
     # @param [Hash, Types::DeleteParameterGroupRequest] params
     # @option params [String] :parameter_group_name
@@ -1466,7 +1466,7 @@ module Aws::MemoryDB
     end
 
     # <p>Returns events related to clusters, security groups, and parameter groups. You can obtain events specific to a particular cluster, security group, or parameter group by providing the name as a parameter.
-    #          
+    #
     #          By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.</p>
     # @param [Hash, Types::DescribeEventsRequest] params
     # @option params [String] :source_name
@@ -1475,11 +1475,11 @@ module Aws::MemoryDB
     #   <p>The event source to retrieve events for. If no value is specified, all events are returned.</p>
     # @option params [Time] :start_time
     #   <p>The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
-    #            
+    #
     #            Example: 2017-03-30T07:03:49.555Z</p>
     # @option params [Time] :end_time
     #   <p>The end of the time interval for which to retrieve events, specified in ISO 8601 format.
-    #            
+    #
     #            Example: 2017-03-30T07:03:49.555Z</p>
     # @option params [Integer] :duration
     #   <p>The number of minutes worth of events to retrieve.</p>
@@ -1570,6 +1570,82 @@ module Aws::MemoryDB
       request.send_request(options)
     end
 
+    # <p>Returns a list of multi-region parameter groups.</p>
+    # @param [Hash, Types::DescribeMultiRegionParameterGroupsRequest] params
+    # @option params [String] :multi_region_parameter_group_name
+    #   <p>The request for information on a specific multi-region parameter group.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+    # @option params [String] :next_token
+    #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     multi_region_parameter_group_name: "String",
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.describe_multi_region_parameter_groups(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "String",
+    #     multi_region_parameter_groups: [
+    #       {
+    #         name: "String",
+    #         family: "String",
+    #         description: "String",
+    #         arn: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::DescribeMultiRegionParameterGroupsResponse]
+    def describe_multi_region_parameter_groups(params = {}, options = {})
+      request = build_request(:describe_multi_region_parameter_groups, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the detailed parameter list for a particular multi-region parameter group.</p>
+    # @param [Hash, Types::DescribeMultiRegionParametersRequest] params
+    # @option params [String] :multi_region_parameter_group_name
+    #   <p>The name of the multi-region parameter group to return details for.</p>
+    # @option params [String] :source
+    #   <p>The parameter types to return. Valid values: user | system | engine-default</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+    # @option params [String] :next_token
+    #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     multi_region_parameter_group_name: "String", # required
+    #     source: "String",
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.describe_multi_region_parameters(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "String",
+    #     multi_region_parameters: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #         description: "String",
+    #         source: "String",
+    #         data_type: "String",
+    #         allowed_values: "String",
+    #         minimum_engine_version: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::DescribeMultiRegionParametersResponse]
+    def describe_multi_region_parameters(params = {}, options = {})
+      request = build_request(:describe_multi_region_parameters, params)
+      request.send_request(options)
+    end
+
     # <p>Returns a list of parameter group descriptions. If a parameter group name is specified, the list contains only the descriptions for that group.</p>
     # @param [Hash, Types::DescribeParameterGroupsRequest] params
     # @option params [String] :parameter_group_name
@@ -1653,7 +1729,7 @@ module Aws::MemoryDB
     # @option params [String] :duration
     #   <p>The duration filter value, specified in years or seconds. Use this parameter to show only reservations for this duration.</p>
     # @option params [String] :offering_type
-    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. 
+    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
     #            Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.</p>
@@ -1711,7 +1787,7 @@ module Aws::MemoryDB
     # @option params [String] :duration
     #   <p>Duration filter value, specified in years or seconds. Use this parameter to show only reservations for a given duration.</p>
     # @option params [String] :offering_type
-    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. 
+    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
     #            Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.</p>
@@ -1800,7 +1876,7 @@ module Aws::MemoryDB
       request.send_request(options)
     end
 
-    # <p>Returns information about cluster snapshots. By default, DescribeSnapshots lists all of your snapshots; it can optionally describe a single snapshot, 
+    # <p>Returns information about cluster snapshots. By default, DescribeSnapshots lists all of your snapshots; it can optionally describe a single snapshot,
     #          or just the snapshots associated with a particular cluster.</p>
     # @param [Hash, Types::DescribeSnapshotsRequest] params
     # @option params [String] :cluster_name
@@ -2091,7 +2167,7 @@ module Aws::MemoryDB
     end
 
     # <p>Lists all available node types that you can scale to from your cluster's current node type.
-    #          
+    #
     #          When you use the UpdateCluster operation to scale your cluster, the value of the NodeType parameter must be one of the node types returned by this operation.</p>
     # @param [Hash, Types::ListAllowedNodeTypeUpdatesRequest] params
     # @option params [String] :cluster_name
@@ -2229,10 +2305,10 @@ module Aws::MemoryDB
 
     # <p> Use this operation to add tags to a resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a>.</p>
     #          <p>When you add tags to multi region clusters, you might not immediately see the latest effective tags in the ListTags API response due to it being eventually consistent specifically for multi region clusters. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a>.</p>
-    #          <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value 
-    #           (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories 
+    #          <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value
+    #           (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories
     #           (such as cost centers, application names, or owners) to organize your costs across multiple services.
-    #          
+    #
     #          For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html">Using Cost Allocation Tags</a>.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
@@ -2269,10 +2345,10 @@ module Aws::MemoryDB
 
     # <p>Use this operation to remove tags on a resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a>.</p>
     #          <p>When you remove tags from multi region clusters, you might not immediately see the latest effective tags in the ListTags API response due to it being eventually consistent specifically for multi region clusters. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a>.</p>
-    #          <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value 
-    #          (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories 
+    #          <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value
+    #          (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories
     #          (such as cost centers, application names, or owners) to organize your costs across multiple services.
-    #          
+    #
     #          For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html">Using Cost Allocation Tags</a>.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn

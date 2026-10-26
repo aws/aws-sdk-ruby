@@ -1,0 +1,2025 @@
+module Aws::SecurityAgent
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SecurityAgent::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddArtifactResponse
+      include Smithy::Client::_Response[Types::AddArtifactOutput]
+      def artifact_id: () -> String?
+    end
+    def add_artifact: (
+      ?agent_space_id: String,
+      ?artifact_content: String,
+      ?artifact_type: String,
+      ?file_name: String
+    ) -> _AddArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddArtifactResponse
+
+    interface _BatchCreateSecurityRequirementsResponse
+      include Smithy::Client::_Response[Types::BatchCreateSecurityRequirementsOutput]
+      def security_requirements: () -> Array[Types::BatchCreateSecurityRequirementResult]?
+      def errors: () -> Array[Types::BatchSecurityRequirementError]?
+    end
+    def batch_create_security_requirements: (
+      ?pack_id: String,
+      ?security_requirements: Array[
+        {
+          name: String,
+          description: String,
+          domain: untyped,
+          evaluation: untyped,
+          remediation: untyped
+        }
+      ]
+    ) -> _BatchCreateSecurityRequirementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateSecurityRequirementsResponse
+
+    interface _BatchDeleteCodeReviewsResponse
+      include Smithy::Client::_Response[Types::BatchDeleteCodeReviewsOutput]
+      def deleted: () -> Array[String]?
+      def failed: () -> Array[Types::DeleteCodeReviewFailure]?
+    end
+    def batch_delete_code_reviews: (
+      ?code_review_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchDeleteCodeReviewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteCodeReviewsResponse
+
+    interface _BatchDeletePentestsResponse
+      include Smithy::Client::_Response[Types::BatchDeletePentestsOutput]
+      def deleted: () -> Array[Types::Pentest]?
+      def failed: () -> Array[Types::DeletePentestFailure]?
+    end
+    def batch_delete_pentests: (
+      ?pentest_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchDeletePentestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeletePentestsResponse
+
+    interface _BatchDeleteSecurityRequirementsResponse
+      include Smithy::Client::_Response[Types::BatchDeleteSecurityRequirementsOutput]
+      def deleted_security_requirement_names: () -> Array[String]?
+      def errors: () -> Array[Types::BatchSecurityRequirementError]?
+    end
+    def batch_delete_security_requirements: (
+      ?pack_id: String,
+      ?security_requirement_names: Array[String]
+    ) -> _BatchDeleteSecurityRequirementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteSecurityRequirementsResponse
+
+    interface _BatchDeleteThreatModelsResponse
+      include Smithy::Client::_Response[Types::BatchDeleteThreatModelsOutput]
+      def deleted: () -> Array[String]?
+      def failed: () -> Array[Types::DeleteThreatModelFailure]?
+    end
+    def batch_delete_threat_models: (
+      ?threat_model_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchDeleteThreatModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteThreatModelsResponse
+
+    interface _BatchDisassociateFindingIssueResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateFindingIssueOutput]
+      def errors: () -> Array[Types::BatchDisassociateFindingIssueError]?
+    end
+    def batch_disassociate_finding_issue: (
+      ?agent_space_id: String,
+      ?pentest_job_id: String,
+      ?code_review_job_id: String,
+      ?finding_ids: Array[String]
+    ) -> _BatchDisassociateFindingIssueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateFindingIssueResponse
+
+    interface _BatchExportFindingsResponse
+      include Smithy::Client::_Response[Types::BatchExportFindingsOutput]
+      def results: () -> Array[Types::BatchExportFindingResult]?
+      def errors: () -> Array[Types::BatchExportFindingError]?
+    end
+    def batch_export_findings: (
+      ?agent_space_id: String,
+      ?pentest_job_id: String,
+      ?code_review_job_id: String,
+      ?issue_destination: {
+        integration_id: String,
+        project_key: untyped
+      },
+      ?finding_ids: Array[String]
+    ) -> _BatchExportFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchExportFindingsResponse
+
+    interface _BatchGetAgentSpacesResponse
+      include Smithy::Client::_Response[Types::BatchGetAgentSpacesOutput]
+      def agent_spaces: () -> Array[Types::AgentSpace]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_agent_spaces: (
+      ?agent_space_ids: Array[String]
+    ) -> _BatchGetAgentSpacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetAgentSpacesResponse
+
+    interface _BatchGetArtifactMetadataResponse
+      include Smithy::Client::_Response[Types::BatchGetArtifactMetadataOutput]
+      def artifact_metadata_list: () -> Array[Types::ArtifactMetadataItem]?
+    end
+    def batch_get_artifact_metadata: (
+      ?agent_space_id: String,
+      ?artifact_ids: Array[String]
+    ) -> _BatchGetArtifactMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetArtifactMetadataResponse
+
+    interface _BatchGetCodeReviewJobTasksResponse
+      include Smithy::Client::_Response[Types::BatchGetCodeReviewJobTasksOutput]
+      def code_review_job_tasks: () -> Array[Types::CodeReviewJobTask]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_code_review_job_tasks: (
+      ?agent_space_id: String,
+      ?code_review_job_task_ids: Array[String]
+    ) -> _BatchGetCodeReviewJobTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCodeReviewJobTasksResponse
+
+    interface _BatchGetCodeReviewJobsResponse
+      include Smithy::Client::_Response[Types::BatchGetCodeReviewJobsOutput]
+      def code_review_jobs: () -> Array[Types::CodeReviewJob]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_code_review_jobs: (
+      ?code_review_job_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchGetCodeReviewJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCodeReviewJobsResponse
+
+    interface _BatchGetCodeReviewsResponse
+      include Smithy::Client::_Response[Types::BatchGetCodeReviewsOutput]
+      def code_reviews: () -> Array[Types::CodeReview]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_code_reviews: (
+      ?code_review_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchGetCodeReviewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCodeReviewsResponse
+
+    interface _BatchGetFindingsResponse
+      include Smithy::Client::_Response[Types::BatchGetFindingsOutput]
+      def findings: () -> Array[Types::Finding]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_findings: (
+      ?finding_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchGetFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetFindingsResponse
+
+    interface _BatchGetPentestJobTasksResponse
+      include Smithy::Client::_Response[Types::BatchGetPentestJobTasksOutput]
+      def tasks: () -> Array[Types::Task]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_pentest_job_tasks: (
+      ?agent_space_id: String,
+      ?task_ids: Array[String]
+    ) -> _BatchGetPentestJobTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetPentestJobTasksResponse
+
+    interface _BatchGetPentestJobsResponse
+      include Smithy::Client::_Response[Types::BatchGetPentestJobsOutput]
+      def pentest_jobs: () -> Array[Types::PentestJob]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_pentest_jobs: (
+      ?pentest_job_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchGetPentestJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetPentestJobsResponse
+
+    interface _BatchGetPentestsResponse
+      include Smithy::Client::_Response[Types::BatchGetPentestsOutput]
+      def pentests: () -> Array[Types::Pentest]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_pentests: (
+      ?pentest_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchGetPentestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetPentestsResponse
+
+    interface _BatchGetSecurityRequirementsResponse
+      include Smithy::Client::_Response[Types::BatchGetSecurityRequirementsOutput]
+      def security_requirements: () -> Array[Types::BatchGetSecurityRequirementResult]?
+      def errors: () -> Array[Types::BatchSecurityRequirementError]?
+    end
+    def batch_get_security_requirements: (
+      ?pack_id: String,
+      ?security_requirement_names: Array[String]
+    ) -> _BatchGetSecurityRequirementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetSecurityRequirementsResponse
+
+    interface _BatchGetTargetDomainsResponse
+      include Smithy::Client::_Response[Types::BatchGetTargetDomainsOutput]
+      def target_domains: () -> Array[Types::TargetDomain]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_target_domains: (
+      ?target_domain_ids: Array[String]
+    ) -> _BatchGetTargetDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetTargetDomainsResponse
+
+    interface _BatchGetThreatModelJobTasksResponse
+      include Smithy::Client::_Response[Types::BatchGetThreatModelJobTasksOutput]
+      def threat_model_job_tasks: () -> Array[Types::ThreatModelJobTask]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_threat_model_job_tasks: (
+      ?agent_space_id: String,
+      ?threat_model_job_task_ids: Array[String]
+    ) -> _BatchGetThreatModelJobTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetThreatModelJobTasksResponse
+
+    interface _BatchGetThreatModelJobsResponse
+      include Smithy::Client::_Response[Types::BatchGetThreatModelJobsOutput]
+      def threat_model_jobs: () -> Array[Types::ThreatModelJob]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_threat_model_jobs: (
+      ?threat_model_job_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchGetThreatModelJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetThreatModelJobsResponse
+
+    interface _BatchGetThreatModelsResponse
+      include Smithy::Client::_Response[Types::BatchGetThreatModelsOutput]
+      def threat_models: () -> Array[Types::ThreatModel]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_threat_models: (
+      ?threat_model_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchGetThreatModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetThreatModelsResponse
+
+    interface _BatchGetThreatsResponse
+      include Smithy::Client::_Response[Types::BatchGetThreatsOutput]
+      def threats: () -> Array[Types::Threat]?
+      def not_found: () -> Array[String]?
+    end
+    def batch_get_threats: (
+      ?threat_ids: Array[String],
+      ?agent_space_id: String
+    ) -> _BatchGetThreatsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetThreatsResponse
+
+    interface _BatchUpdateSecurityRequirementsResponse
+      include Smithy::Client::_Response[Types::BatchUpdateSecurityRequirementsOutput]
+      def updated_security_requirement_names: () -> Array[String]?
+      def errors: () -> Array[Types::BatchSecurityRequirementError]?
+    end
+    def batch_update_security_requirements: (
+      ?pack_id: String,
+      ?security_requirements: Array[
+        {
+          name: String,
+          description: String,
+          domain: untyped,
+          evaluation: untyped,
+          remediation: untyped
+        }
+      ]
+    ) -> _BatchUpdateSecurityRequirementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateSecurityRequirementsResponse
+
+    interface _CreateAgentSpaceResponse
+      include Smithy::Client::_Response[Types::CreateAgentSpaceOutput]
+      def agent_space_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def aws_resources: () -> Types::AWSResources?
+      def target_domain_ids: () -> Array[String]?
+      def code_review_settings: () -> Types::CodeReviewSettings?
+      def kms_key_id: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_agent_space: (
+      ?name: String,
+      ?description: String,
+      ?aws_resources: {
+        vpcs: Array[
+          {
+            vpc_arn: String,
+            security_group_arns: Array[String],
+            subnet_arns: Array[String]
+          }
+        ],
+        log_groups: Array[String],
+        s3_buckets: Array[String],
+        secret_arns: Array[String],
+        lambda_function_arns: Array[String],
+        iam_roles: Array[String]
+      },
+      ?target_domain_ids: Array[String],
+      ?code_review_settings: {
+        controls_scanning: bool,
+        general_purpose_scanning: untyped
+      },
+      ?kms_key_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAgentSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentSpaceResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationResponse]
+      def application_id: () -> String?
+    end
+    def create_application: (
+      ?idc_instance_arn: String,
+      ?role_arn: String,
+      ?default_kms_key_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateCodeReviewResponse
+      include Smithy::Client::_Response[Types::CreateCodeReviewOutput]
+      def code_review_id: () -> String?
+      def title: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def assets: () -> Types::Assets?
+      def service_role: () -> String?
+      def log_config: () -> Types::CloudWatchLog?
+      def agent_space_id: () -> String?
+      def code_remediation_strategy: () -> String?
+      def validation_mode: () -> String?
+      def max_task_hours: () -> Float?
+      def report_destination: () -> Types::ReportDestination?
+      def report_filters: () -> Types::ReportFilters?
+    end
+    def create_code_review: (
+      ?title: String,
+      ?agent_space_id: String,
+      ?assets: {
+        endpoints: Array[
+          {
+            uri: String
+          }
+        ],
+        actors: Array[
+          {
+            identifier: untyped,
+            uris: Array[String],
+            authentication: {
+              provider_type: String,
+              value: untyped
+            },
+            description: untyped,
+            enable_email_mfa: bool,
+            mfa_forwarding_address: String
+          }
+        ],
+        documents: Array[
+          {
+            s3_location: untyped,
+            artifact_id: untyped,
+            integrated_document: {
+              integration_id: untyped,
+              resource_id: untyped
+            }
+          }
+        ],
+        source_code: Array[
+          {
+            s3_location: untyped
+          }
+        ],
+        integrated_repositories: Array[
+          {
+            integration_id: untyped,
+            provider_resource_id: untyped,
+            branch: untyped
+          }
+        ],
+        trusted_ca_certificates: Array[
+          {
+            source: {
+              inline_pem: String,
+              artifact_id: untyped,
+              s3_location: untyped
+            }
+          }
+        ]
+      },
+      ?service_role: String,
+      ?log_config: {
+        log_group: String,
+        log_stream: untyped
+      },
+      ?code_remediation_strategy: String,
+      ?validation_mode: String,
+      ?max_task_hours: Float,
+      ?report_destination: {
+        integration_id: String,
+        container_id: untyped,
+        parent_id: untyped,
+        document_id: untyped
+      },
+      ?report_filters: {
+        risk_levels: Array[String],
+        confidence_levels: Array[String],
+        statuses: Array[String],
+        risk_types: Array[String],
+        finding_types: Array[String],
+        task_statuses: Array[String],
+        annotation_notes: bool,
+        compliance_report: untyped
+      }
+    ) -> _CreateCodeReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeReviewResponse
+
+    interface _CreateIntegrationResponse
+      include Smithy::Client::_Response[Types::CreateIntegrationOutput]
+      def integration_id: () -> String?
+    end
+    def create_integration: (
+      ?provider: String,
+      ?input: {
+        github: {
+          code: String,
+          state: String,
+          organization_name: String,
+          target_url: String,
+          installation_id: untyped
+        },
+        gitlab: {
+          access_token: String,
+          target_url: untyped,
+          token_type: String,
+          group_id: untyped
+        },
+        bitbucket: {
+          installation_id: String,
+          workspace: String,
+          code: untyped,
+          state: untyped
+        },
+        confluence: {
+          installation_id: String,
+          code: untyped,
+          state: untyped,
+          site_url: String
+        },
+        azure_dev_ops: {
+          code: untyped,
+          state: untyped,
+          organization_name: untyped
+        },
+        bitbucket_data_center: {
+          target_url: untyped,
+          code: untyped,
+          state: untyped
+        },
+        jira: {
+          installation_id: String,
+          code: untyped,
+          state: untyped,
+          site_url: String
+        }
+      },
+      ?integration_display_name: String,
+      ?kms_key_id: String,
+      ?tags: Hash[String, String],
+      ?private_connection_name: String
+    ) -> _CreateIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationResponse
+
+    interface _CreateMembershipResponse
+      include Smithy::Client::_Response[Types::CreateMembershipResponse]
+    end
+    def create_membership: (
+      ?application_id: String,
+      ?agent_space_id: String,
+      ?membership_id: String,
+      ?member_type: String,
+      ?config: {
+        user: {
+          role: String
+        }
+      }
+    ) -> _CreateMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMembershipResponse
+
+    interface _CreatePentestResponse
+      include Smithy::Client::_Response[Types::CreatePentestOutput]
+      def pentest_id: () -> String?
+      def title: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def assets: () -> Types::Assets?
+      def exclude_risk_types: () -> Array[String]?
+      def service_role: () -> String?
+      def log_config: () -> Types::CloudWatchLog?
+      def agent_space_id: () -> String?
+      def report_destination: () -> Types::ReportDestination?
+      def report_filters: () -> Types::ReportFilters?
+      def cicd_configuration: () -> Types::CiCdConfiguration?
+      def test_scope: () -> Types::TestScope?
+    end
+    def create_pentest: (
+      ?title: String,
+      ?agent_space_id: String,
+      ?assets: {
+        endpoints: Array[
+          {
+            uri: String
+          }
+        ],
+        actors: Array[
+          {
+            identifier: untyped,
+            uris: Array[String],
+            authentication: {
+              provider_type: String,
+              value: untyped
+            },
+            description: untyped,
+            enable_email_mfa: bool,
+            mfa_forwarding_address: String
+          }
+        ],
+        documents: Array[
+          {
+            s3_location: untyped,
+            artifact_id: untyped,
+            integrated_document: {
+              integration_id: untyped,
+              resource_id: untyped
+            }
+          }
+        ],
+        source_code: Array[
+          {
+            s3_location: untyped
+          }
+        ],
+        integrated_repositories: Array[
+          {
+            integration_id: untyped,
+            provider_resource_id: untyped,
+            branch: untyped
+          }
+        ],
+        trusted_ca_certificates: Array[
+          {
+            source: {
+              inline_pem: String,
+              artifact_id: untyped,
+              s3_location: untyped
+            }
+          }
+        ]
+      },
+      ?exclude_risk_types: Array[String],
+      ?service_role: String,
+      ?log_config: {
+        log_group: String,
+        log_stream: untyped
+      },
+      ?vpc_config: {
+        vpc_arn: String,
+        security_group_arns: Array[String],
+        subnet_arns: Array[String]
+      },
+      ?network_traffic_config: {
+        rules: Array[
+          {
+            effect: String,
+            pattern: String,
+            network_traffic_rule_type: String
+          }
+        ],
+        custom_headers: Array[
+          {
+            name: untyped,
+            value: untyped
+          }
+        ]
+      },
+      ?code_remediation_strategy: String,
+      ?disable_managed_skills: Array[String],
+      ?max_task_hours: Float,
+      ?report_destination: {
+        integration_id: String,
+        container_id: untyped,
+        parent_id: untyped,
+        document_id: untyped
+      },
+      ?report_filters: {
+        risk_levels: Array[String],
+        confidence_levels: Array[String],
+        statuses: Array[String],
+        risk_types: Array[String],
+        finding_types: Array[String],
+        task_statuses: Array[String],
+        annotation_notes: bool,
+        compliance_report: untyped
+      },
+      ?cicd_configuration: {
+        enabled: bool
+      },
+      ?test_scope: {
+        type: String
+      }
+    ) -> _CreatePentestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePentestResponse
+
+    interface _CreatePrivateConnectionResponse
+      include Smithy::Client::_Response[Types::CreatePrivateConnectionOutput]
+      def name: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def resource_gateway_id: () -> String?
+      def host_address: () -> String?
+      def vpc_id: () -> String?
+      def resource_configuration_id: () -> String?
+      def certificate_expiry_time: () -> Time?
+      def dns_resolution: () -> String?
+      def failure_message: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_private_connection: (
+      ?private_connection_name: String,
+      ?mode: {
+        service_managed: {
+          host_address: String,
+          vpc_id: String,
+          subnet_ids: Array[String],
+          security_group_ids: Array[String],
+          ip_address_type: String,
+          ipv4_addresses_per_eni: Integer,
+          port_ranges: Array[String],
+          certificate: String,
+          dns_resolution: String
+        },
+        self_managed: {
+          resource_configuration_id: String,
+          certificate: untyped
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreatePrivateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePrivateConnectionResponse
+
+    interface _CreateSecurityRequirementPackResponse
+      include Smithy::Client::_Response[Types::CreateSecurityRequirementPackOutput]
+      def pack_id: () -> String?
+      def status: () -> String?
+      def kms_key_id: () -> String?
+    end
+    def create_security_requirement_pack: (
+      ?name: String,
+      ?description: String,
+      ?status: String,
+      ?kms_key_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateSecurityRequirementPackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecurityRequirementPackResponse
+
+    interface _CreateTargetDomainResponse
+      include Smithy::Client::_Response[Types::CreateTargetDomainOutput]
+      def target_domain_id: () -> String?
+      def domain_name: () -> String?
+      def verification_status: () -> String?
+      def verification_status_reason: () -> String?
+      def verification_details: () -> Types::VerificationDetails?
+      def created_at: () -> Time?
+      def verified_at: () -> Time?
+    end
+    def create_target_domain: (
+      ?target_domain_name: String,
+      ?verification_method: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTargetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTargetDomainResponse
+
+    interface _CreateThreatResponse
+      include Smithy::Client::_Response[Types::CreateThreatOutput]
+      def threat_id: () -> String?
+      def threat_job_id: () -> String?
+      def title: () -> String?
+      def statement: () -> String?
+      def severity: () -> String?
+      def status: () -> String?
+      def comments: () -> String?
+      def stride: () -> Array[String]?
+      def threat_source: () -> String?
+      def prerequisites: () -> String?
+      def threat_action: () -> String?
+      def threat_impact: () -> String?
+      def impacted_goal: () -> Array[String]?
+      def impacted_assets: () -> Array[String]?
+      def anchor: () -> Types::ThreatAnchorShape?
+      def evidence: () -> Array[Types::ThreatEvidenceShape]?
+      def recommendation: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_threat: (
+      ?agent_space_id: String,
+      ?threat_job_id: String,
+      ?title: String,
+      ?statement: String,
+      ?severity: String,
+      ?comments: String,
+      ?stride: Array[String],
+      ?threat_source: String,
+      ?prerequisites: String,
+      ?threat_action: String,
+      ?threat_impact: String,
+      ?impacted_goal: Array[String],
+      ?impacted_assets: Array[String],
+      ?anchor: {
+        kind: String,
+        id: untyped,
+        package_id: untyped
+      },
+      ?evidence: Array[
+        {
+          package_id: String,
+          path: untyped
+        }
+      ],
+      ?recommendation: String
+    ) -> _CreateThreatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateThreatResponse
+
+    interface _CreateThreatModelResponse
+      include Smithy::Client::_Response[Types::CreateThreatModelOutput]
+      def threat_model_id: () -> String?
+      def title: () -> String?
+      def agent_space_id: () -> String?
+      def description: () -> String?
+      def assets: () -> Types::Assets?
+      def scope_docs: () -> Array[Types::DocumentInfo]?
+      def service_role: () -> String?
+      def log_config: () -> Types::CloudWatchLog?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def report_destination: () -> Types::ReportDestination?
+    end
+    def create_threat_model: (
+      ?title: String,
+      ?agent_space_id: String,
+      ?description: String,
+      ?assets: {
+        endpoints: Array[
+          {
+            uri: String
+          }
+        ],
+        actors: Array[
+          {
+            identifier: untyped,
+            uris: Array[String],
+            authentication: {
+              provider_type: String,
+              value: untyped
+            },
+            description: untyped,
+            enable_email_mfa: bool,
+            mfa_forwarding_address: String
+          }
+        ],
+        documents: Array[
+          {
+            s3_location: untyped,
+            artifact_id: untyped,
+            integrated_document: {
+              integration_id: untyped,
+              resource_id: untyped
+            }
+          }
+        ],
+        source_code: Array[
+          {
+            s3_location: untyped
+          }
+        ],
+        integrated_repositories: Array[
+          {
+            integration_id: untyped,
+            provider_resource_id: untyped,
+            branch: untyped
+          }
+        ],
+        trusted_ca_certificates: Array[
+          {
+            source: {
+              inline_pem: String,
+              artifact_id: untyped,
+              s3_location: untyped
+            }
+          }
+        ]
+      },
+      ?scope_docs: Array[
+        {
+          s3_location: String,
+          artifact_id: untyped,
+          integrated_document: {
+            integration_id: untyped,
+            resource_id: untyped
+          }
+        }
+      ],
+      ?service_role: String,
+      ?log_config: {
+        log_group: String,
+        log_stream: untyped
+      },
+      ?report_destination: {
+        integration_id: String,
+        container_id: untyped,
+        parent_id: untyped,
+        document_id: untyped
+      }
+    ) -> _CreateThreatModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateThreatModelResponse
+
+    interface _DeleteAgentSpaceResponse
+      include Smithy::Client::_Response[Types::DeleteAgentSpaceOutput]
+      def agent_space_id: () -> String?
+    end
+    def delete_agent_space: (
+      ?agent_space_id: String
+    ) -> _DeleteAgentSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentSpaceResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_application: (
+      ?application_id: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteArtifactResponse
+      include Smithy::Client::_Response[Types::DeleteArtifactOutput]
+    end
+    def delete_artifact: (
+      ?agent_space_id: String,
+      ?artifact_id: String
+    ) -> _DeleteArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteArtifactResponse
+
+    interface _DeleteIntegrationResponse
+      include Smithy::Client::_Response[Types::DeleteIntegrationOutput]
+    end
+    def delete_integration: (
+      ?integration_id: String
+    ) -> _DeleteIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntegrationResponse
+
+    interface _DeleteMembershipResponse
+      include Smithy::Client::_Response[Types::DeleteMembershipResponse]
+    end
+    def delete_membership: (
+      ?application_id: String,
+      ?agent_space_id: String,
+      ?membership_id: String,
+      ?member_type: String
+    ) -> _DeleteMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMembershipResponse
+
+    interface _DeletePrivateConnectionResponse
+      include Smithy::Client::_Response[Types::DeletePrivateConnectionOutput]
+      def name: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def resource_gateway_id: () -> String?
+      def host_address: () -> String?
+      def vpc_id: () -> String?
+      def resource_configuration_id: () -> String?
+      def certificate_expiry_time: () -> Time?
+      def dns_resolution: () -> String?
+      def failure_message: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def delete_private_connection: (
+      ?private_connection_name: String
+    ) -> _DeletePrivateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePrivateConnectionResponse
+
+    interface _DeleteSecurityRequirementPackResponse
+      include Smithy::Client::_Response[Types::DeleteSecurityRequirementPackOutput]
+    end
+    def delete_security_requirement_pack: (
+      ?pack_id: String
+    ) -> _DeleteSecurityRequirementPackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecurityRequirementPackResponse
+
+    interface _DeleteTargetDomainResponse
+      include Smithy::Client::_Response[Types::DeleteTargetDomainOutput]
+      def target_domain_id: () -> String?
+    end
+    def delete_target_domain: (
+      ?target_domain_id: String
+    ) -> _DeleteTargetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTargetDomainResponse
+
+    interface _DescribePrivateConnectionResponse
+      include Smithy::Client::_Response[Types::DescribePrivateConnectionOutput]
+      def name: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def resource_gateway_id: () -> String?
+      def host_address: () -> String?
+      def vpc_id: () -> String?
+      def resource_configuration_id: () -> String?
+      def certificate_expiry_time: () -> Time?
+      def dns_resolution: () -> String?
+      def failure_message: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_private_connection: (
+      ?private_connection_name: String
+    ) -> _DescribePrivateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePrivateConnectionResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationResponse]
+      def application_id: () -> String?
+      def domain: () -> String?
+      def application_name: () -> String?
+      def idc_configuration: () -> Types::IdCConfiguration?
+      def role_arn: () -> String?
+      def default_kms_key_id: () -> String?
+    end
+    def get_application: (
+      ?application_id: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetArtifactResponse
+      include Smithy::Client::_Response[Types::GetArtifactOutput]
+      def agent_space_id: () -> String?
+      def artifact_id: () -> String?
+      def artifact: () -> Types::Artifact?
+      def file_name: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_artifact: (
+      ?agent_space_id: String,
+      ?artifact_id: String
+    ) -> _GetArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArtifactResponse
+
+    interface _GetIntegrationResponse
+      include Smithy::Client::_Response[Types::GetIntegrationOutput]
+      def integration_id: () -> String?
+      def installation_id: () -> String?
+      def provider: () -> String?
+      def provider_type: () -> String?
+      def display_name: () -> String?
+      def kms_key_id: () -> String?
+      def target_url: () -> String?
+      def site_url: () -> String?
+      def webhook_url: () -> String?
+      def private_connection_name: () -> String?
+    end
+    def get_integration: (
+      ?integration_id: String
+    ) -> _GetIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntegrationResponse
+
+    interface _GetSecurityRequirementPackResponse
+      include Smithy::Client::_Response[Types::GetSecurityRequirementPackOutput]
+      def pack_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def vendor_name: () -> String?
+      def management_type: () -> String?
+      def status: () -> String?
+      def import_status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def kms_key_id: () -> String?
+    end
+    def get_security_requirement_pack: (
+      ?pack_id: String
+    ) -> _GetSecurityRequirementPackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSecurityRequirementPackResponse
+
+    interface _ImportSecurityRequirementsResponse
+      include Smithy::Client::_Response[Types::ImportSecurityRequirementsOutput]
+      def pack_id: () -> String?
+      def import_status: () -> String?
+    end
+    def import_security_requirements: (
+      ?pack_id: String,
+      ?input: {
+        documents: Array[
+          {
+            name: String,
+            format: String,
+            content: String
+          }
+        ]
+      }
+    ) -> _ImportSecurityRequirementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportSecurityRequirementsResponse
+
+    interface _InitiateProviderRegistrationResponse
+      include Smithy::Client::_Response[Types::InitiateProviderRegistrationOutput]
+      def redirect_to: () -> String?
+      def csrf_state: () -> String?
+    end
+    def initiate_provider_registration: (
+      ?provider: String,
+      ?target_url: String,
+      ?organization_name: String,
+      ?client_id: String,
+      ?client_secret: String
+    ) -> _InitiateProviderRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitiateProviderRegistrationResponse
+
+    interface _ListActorMessagesResponse
+      include Smithy::Client::_Response[Types::ListActorMessagesOutput]
+      def messages: () -> Array[Types::ActorMessage]?
+      def next_token: () -> String?
+    end
+    def list_actor_messages: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?agent_space_id: String,
+      ?pentest_id: String,
+      ?actor_identifier: String
+    ) -> _ListActorMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListActorMessagesResponse
+
+    interface _ListAgentSpacesResponse
+      include Smithy::Client::_Response[Types::ListAgentSpacesOutput]
+      def agent_space_summaries: () -> Array[Types::AgentSpaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_spaces: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAgentSpacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentSpacesResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsResponse]
+      def application_summaries: () -> Array[Types::ApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListArtifactsResponse
+      include Smithy::Client::_Response[Types::ListArtifactsOutput]
+      def artifact_summaries: () -> Array[Types::ArtifactSummary]?
+      def next_token: () -> String?
+    end
+    def list_artifacts: (
+      ?agent_space_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListArtifactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListArtifactsResponse
+
+    interface _ListCodeReviewJobTasksResponse
+      include Smithy::Client::_Response[Types::ListCodeReviewJobTasksOutput]
+      def code_review_job_task_summaries: () -> Array[Types::CodeReviewJobTaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_code_review_job_tasks: (
+      ?agent_space_id: String,
+      ?max_results: Integer,
+      ?code_review_job_id: String,
+      ?step_name: String,
+      ?category_name: String,
+      ?next_token: String
+    ) -> _ListCodeReviewJobTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeReviewJobTasksResponse
+
+    interface _ListCodeReviewJobsForCodeReviewResponse
+      include Smithy::Client::_Response[Types::ListCodeReviewJobsForCodeReviewOutput]
+      def code_review_job_summaries: () -> Array[Types::CodeReviewJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_code_review_jobs_for_code_review: (
+      ?max_results: Integer,
+      ?code_review_id: String,
+      ?agent_space_id: String,
+      ?next_token: String
+    ) -> _ListCodeReviewJobsForCodeReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeReviewJobsForCodeReviewResponse
+
+    interface _ListCodeReviewsResponse
+      include Smithy::Client::_Response[Types::ListCodeReviewsOutput]
+      def code_review_summaries: () -> Array[Types::CodeReviewSummary]?
+      def next_token: () -> String?
+    end
+    def list_code_reviews: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?agent_space_id: String
+    ) -> _ListCodeReviewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeReviewsResponse
+
+    interface _ListDiscoveredEndpointsResponse
+      include Smithy::Client::_Response[Types::ListDiscoveredEndpointsOutput]
+      def discovered_endpoints: () -> Array[Types::DiscoveredEndpoint]?
+      def next_token: () -> String?
+    end
+    def list_discovered_endpoints: (
+      ?max_results: Integer,
+      ?pentest_job_id: String,
+      ?agent_space_id: String,
+      ?prefix: String,
+      ?next_token: String
+    ) -> _ListDiscoveredEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDiscoveredEndpointsResponse
+
+    interface _ListFindingsResponse
+      include Smithy::Client::_Response[Types::ListFindingsOutput]
+      def findings_summaries: () -> Array[Types::FindingSummary]?
+      def next_token: () -> String?
+    end
+    def list_findings: (
+      ?max_results: Integer,
+      ?pentest_job_id: String,
+      ?code_review_job_id: String,
+      ?agent_space_id: String,
+      ?next_token: String,
+      ?risk_type: String,
+      ?risk_level: String,
+      ?status: String,
+      ?confidence: String,
+      ?name: String
+    ) -> _ListFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingsResponse
+
+    interface _ListIntegratedResourcesResponse
+      include Smithy::Client::_Response[Types::ListIntegratedResourcesOutput]
+      def integrated_resource_summaries: () -> Array[Types::IntegratedResourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_integrated_resources: (
+      ?agent_space_id: String,
+      ?integration_id: String,
+      ?resource_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIntegratedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntegratedResourcesResponse
+
+    interface _ListIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListIntegrationsOutput]
+      def integration_summaries: () -> Array[Types::IntegrationSummary]?
+      def next_token: () -> String?
+    end
+    def list_integrations: (
+      ?filter: {
+        provider: String,
+        provider_type: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntegrationsResponse
+
+    interface _ListMembershipsResponse
+      include Smithy::Client::_Response[Types::ListMembershipsResponse]
+      def membership_summaries: () -> Array[Types::MembershipSummary]?
+      def next_token: () -> String?
+    end
+    def list_memberships: (
+      ?application_id: String,
+      ?agent_space_id: String,
+      ?member_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMembershipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembershipsResponse
+
+    interface _ListPentestJobTasksResponse
+      include Smithy::Client::_Response[Types::ListPentestJobTasksOutput]
+      def task_summaries: () -> Array[Types::TaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_pentest_job_tasks: (
+      ?agent_space_id: String,
+      ?max_results: Integer,
+      ?pentest_job_id: String,
+      ?step_name: String,
+      ?category_name: String,
+      ?next_token: String
+    ) -> _ListPentestJobTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPentestJobTasksResponse
+
+    interface _ListPentestJobsForPentestResponse
+      include Smithy::Client::_Response[Types::ListPentestJobsForPentestOutput]
+      def pentest_job_summaries: () -> Array[Types::PentestJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_pentest_jobs_for_pentest: (
+      ?max_results: Integer,
+      ?pentest_id: String,
+      ?agent_space_id: String,
+      ?next_token: String,
+      ?job_type: String
+    ) -> _ListPentestJobsForPentestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPentestJobsForPentestResponse
+
+    interface _ListPentestsResponse
+      include Smithy::Client::_Response[Types::ListPentestsOutput]
+      def pentest_summaries: () -> Array[Types::PentestSummary]?
+      def next_token: () -> String?
+    end
+    def list_pentests: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?agent_space_id: String
+    ) -> _ListPentestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPentestsResponse
+
+    interface _ListPrivateConnectionsResponse
+      include Smithy::Client::_Response[Types::ListPrivateConnectionsOutput]
+      def private_connections: () -> Array[Types::PrivateConnectionSummary]?
+      def next_token: () -> String?
+    end
+    def list_private_connections: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPrivateConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPrivateConnectionsResponse
+
+    interface _ListSecurityRequirementPacksResponse
+      include Smithy::Client::_Response[Types::ListSecurityRequirementPacksOutput]
+      def security_requirement_pack_summaries: () -> Array[Types::SecurityRequirementPackSummary]?
+      def next_token: () -> String?
+    end
+    def list_security_requirement_packs: (
+      ?filter: {
+        management_type: String,
+        status: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityRequirementPacksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityRequirementPacksResponse
+
+    interface _ListSecurityRequirementsResponse
+      include Smithy::Client::_Response[Types::ListSecurityRequirementsOutput]
+      def security_requirement_summaries: () -> Array[Types::SecurityRequirementSummary]?
+      def next_token: () -> String?
+    end
+    def list_security_requirements: (
+      ?pack_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityRequirementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityRequirementsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTargetDomainsResponse
+      include Smithy::Client::_Response[Types::ListTargetDomainsOutput]
+      def target_domain_summaries: () -> Array[Types::TargetDomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_target_domains: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTargetDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTargetDomainsResponse
+
+    interface _ListThreatModelJobTasksResponse
+      include Smithy::Client::_Response[Types::ListThreatModelJobTasksOutput]
+      def threat_model_job_task_summaries: () -> Array[Types::ThreatModelJobTaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_threat_model_job_tasks: (
+      ?agent_space_id: String,
+      ?max_results: Integer,
+      ?threat_model_job_id: String,
+      ?next_token: String
+    ) -> _ListThreatModelJobTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThreatModelJobTasksResponse
+
+    interface _ListThreatModelJobsResponse
+      include Smithy::Client::_Response[Types::ListThreatModelJobsOutput]
+      def threat_model_job_summaries: () -> Array[Types::ThreatModelJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_threat_model_jobs: (
+      ?max_results: Integer,
+      ?threat_model_id: String,
+      ?agent_space_id: String,
+      ?next_token: String
+    ) -> _ListThreatModelJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThreatModelJobsResponse
+
+    interface _ListThreatModelsResponse
+      include Smithy::Client::_Response[Types::ListThreatModelsOutput]
+      def threat_model_summaries: () -> Array[Types::ThreatModelSummary]?
+      def next_token: () -> String?
+    end
+    def list_threat_models: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?agent_space_id: String
+    ) -> _ListThreatModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThreatModelsResponse
+
+    interface _ListThreatsResponse
+      include Smithy::Client::_Response[Types::ListThreatsOutput]
+      def threats: () -> Array[Types::ThreatSummary]?
+      def next_token: () -> String?
+    end
+    def list_threats: (
+      ?threat_job_id: String,
+      ?agent_space_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListThreatsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThreatsResponse
+
+    interface _StartCodeRemediationResponse
+      include Smithy::Client::_Response[Types::StartCodeRemediationOutput]
+    end
+    def start_code_remediation: (
+      ?agent_space_id: String,
+      ?pentest_job_id: String,
+      ?code_review_job_id: String,
+      ?finding_ids: Array[String]
+    ) -> _StartCodeRemediationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCodeRemediationResponse
+
+    interface _StartCodeReviewJobResponse
+      include Smithy::Client::_Response[Types::StartCodeReviewJobOutput]
+      def title: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def code_review_id: () -> String?
+      def code_review_job_id: () -> String?
+      def agent_space_id: () -> String?
+    end
+    def start_code_review_job: (
+      ?agent_space_id: String,
+      ?code_review_id: String,
+      ?diff_source: {
+        s3_uri: String
+      }
+    ) -> _StartCodeReviewJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCodeReviewJobResponse
+
+    interface _StartPentestJobResponse
+      include Smithy::Client::_Response[Types::StartPentestJobOutput]
+      def title: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def pentest_id: () -> String?
+      def pentest_job_id: () -> String?
+      def agent_space_id: () -> String?
+    end
+    def start_pentest_job: (
+      ?agent_space_id: String,
+      ?pentest_id: String,
+      ?job_type: String,
+      ?selected_finding_ids: Array[String],
+      ?scope_changes: Array[
+        {
+          integration_id: String,
+          provider_resource_id: untyped,
+          base_commit_sha: untyped,
+          head_commit_sha: untyped,
+          trigger_run_id: untyped
+        }
+      ]
+    ) -> _StartPentestJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPentestJobResponse
+
+    interface _StartThreatModelJobResponse
+      include Smithy::Client::_Response[Types::StartThreatModelJobOutput]
+      def title: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def threat_model_id: () -> String?
+      def threat_model_job_id: () -> String?
+      def agent_space_id: () -> String?
+    end
+    def start_threat_model_job: (
+      ?agent_space_id: String,
+      ?threat_model_id: String
+    ) -> _StartThreatModelJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartThreatModelJobResponse
+
+    interface _StopCodeReviewJobResponse
+      include Smithy::Client::_Response[Types::StopCodeReviewJobOutput]
+    end
+    def stop_code_review_job: (
+      ?agent_space_id: String,
+      ?code_review_job_id: String
+    ) -> _StopCodeReviewJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopCodeReviewJobResponse
+
+    interface _StopPentestJobResponse
+      include Smithy::Client::_Response[Types::StopPentestJobOutput]
+    end
+    def stop_pentest_job: (
+      ?agent_space_id: String,
+      ?pentest_job_id: String
+    ) -> _StopPentestJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopPentestJobResponse
+
+    interface _StopThreatModelJobResponse
+      include Smithy::Client::_Response[Types::StopThreatModelJobOutput]
+    end
+    def stop_threat_model_job: (
+      ?agent_space_id: String,
+      ?threat_model_job_id: String
+    ) -> _StopThreatModelJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopThreatModelJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAgentSpaceResponse
+      include Smithy::Client::_Response[Types::UpdateAgentSpaceOutput]
+      def agent_space_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def aws_resources: () -> Types::AWSResources?
+      def target_domain_ids: () -> Array[String]?
+      def code_review_settings: () -> Types::CodeReviewSettings?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_agent_space: (
+      ?agent_space_id: String,
+      ?name: String,
+      ?description: String,
+      ?aws_resources: {
+        vpcs: Array[
+          {
+            vpc_arn: String,
+            security_group_arns: Array[String],
+            subnet_arns: Array[String]
+          }
+        ],
+        log_groups: Array[String],
+        s3_buckets: Array[String],
+        secret_arns: Array[String],
+        lambda_function_arns: Array[String],
+        iam_roles: Array[String]
+      },
+      ?target_domain_ids: Array[String],
+      ?code_review_settings: {
+        controls_scanning: bool,
+        general_purpose_scanning: untyped
+      }
+    ) -> _UpdateAgentSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentSpaceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationResponse]
+      def application_id: () -> String?
+    end
+    def update_application: (
+      ?application_id: String,
+      ?role_arn: String,
+      ?default_kms_key_id: String
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateCodeReviewResponse
+      include Smithy::Client::_Response[Types::UpdateCodeReviewOutput]
+      def code_review_id: () -> String?
+      def title: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def assets: () -> Types::Assets?
+      def service_role: () -> String?
+      def log_config: () -> Types::CloudWatchLog?
+      def agent_space_id: () -> String?
+      def code_remediation_strategy: () -> String?
+      def validation_mode: () -> String?
+      def max_task_hours: () -> Float?
+      def report_destination: () -> Types::ReportDestination?
+      def report_filters: () -> Types::ReportFilters?
+    end
+    def update_code_review: (
+      ?code_review_id: String,
+      ?agent_space_id: String,
+      ?title: String,
+      ?assets: {
+        endpoints: Array[
+          {
+            uri: String
+          }
+        ],
+        actors: Array[
+          {
+            identifier: untyped,
+            uris: Array[String],
+            authentication: {
+              provider_type: String,
+              value: untyped
+            },
+            description: untyped,
+            enable_email_mfa: bool,
+            mfa_forwarding_address: String
+          }
+        ],
+        documents: Array[
+          {
+            s3_location: untyped,
+            artifact_id: untyped,
+            integrated_document: {
+              integration_id: untyped,
+              resource_id: untyped
+            }
+          }
+        ],
+        source_code: Array[
+          {
+            s3_location: untyped
+          }
+        ],
+        integrated_repositories: Array[
+          {
+            integration_id: untyped,
+            provider_resource_id: untyped,
+            branch: untyped
+          }
+        ],
+        trusted_ca_certificates: Array[
+          {
+            source: {
+              inline_pem: String,
+              artifact_id: untyped,
+              s3_location: untyped
+            }
+          }
+        ]
+      },
+      ?service_role: String,
+      ?log_config: {
+        log_group: String,
+        log_stream: untyped
+      },
+      ?code_remediation_strategy: String,
+      ?validation_mode: String,
+      ?max_task_hours: Float,
+      ?report_destination: {
+        integration_id: String,
+        container_id: untyped,
+        parent_id: untyped,
+        document_id: untyped
+      },
+      ?report_filters: {
+        risk_levels: Array[String],
+        confidence_levels: Array[String],
+        statuses: Array[String],
+        risk_types: Array[String],
+        finding_types: Array[String],
+        task_statuses: Array[String],
+        annotation_notes: bool,
+        compliance_report: untyped
+      }
+    ) -> _UpdateCodeReviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCodeReviewResponse
+
+    interface _UpdateFindingResponse
+      include Smithy::Client::_Response[Types::UpdateFindingOutput]
+    end
+    def update_finding: (
+      ?finding_id: String,
+      ?agent_space_id: String,
+      ?name: String,
+      ?description: String,
+      ?risk_type: String,
+      ?risk_level: String,
+      ?risk_score: String,
+      ?attack_script: String,
+      ?reasoning: String,
+      ?status: String,
+      ?customer_note: String
+    ) -> _UpdateFindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFindingResponse
+
+    interface _UpdateIntegratedResourcesResponse
+      include Smithy::Client::_Response[Types::UpdateIntegratedResourcesOutput]
+    end
+    def update_integrated_resources: (
+      ?agent_space_id: String,
+      ?integration_id: String,
+      ?items: Array[
+        {
+          resource: {
+            github_repository: {
+              name: String,
+              owner: String
+            },
+            gitlab_repository: {
+              name: untyped,
+              namespace: String
+            },
+            bitbucket_repository: {
+              name: untyped,
+              workspace: String
+            },
+            confluence_document: {
+              name: untyped,
+              space_key: String,
+              page_id: untyped,
+              title: untyped,
+              space_title: untyped
+            },
+            azure_dev_ops_repository: {
+              name: untyped,
+              organization: String,
+              project: untyped
+            },
+            jira_project: {
+              name: untyped,
+              project_key: untyped,
+              project_id: untyped,
+              project_name: untyped
+            }
+          },
+          capabilities: {
+            github: {
+              trigger_filter_groups: Array[
+                {
+                  events: Array[String],
+                  filters: Array[
+                    {
+                      type: String,
+                      patterns: Array[String],
+                      match_mode: String
+                    }
+                  ]
+                }
+              ],
+              leave_comments: bool,
+              remediate_code: untyped
+            },
+            gitlab: {
+              trigger_filter_groups: untyped,
+              leave_comments: untyped,
+              remediate_code: untyped
+            },
+            bitbucket: {
+              trigger_filter_groups: untyped,
+              leave_comments: untyped,
+              remediate_code: untyped
+            },
+            confluence: {
+              fetch_document: untyped,
+              create_document: untyped,
+              update_document: untyped
+            },
+            azure_dev_ops: {
+              trigger_filter_groups: untyped,
+              leave_comments: untyped,
+              remediate_code: untyped
+            },
+            jira: {
+              create_issue: untyped,
+              comment_issue: untyped
+            }
+          }
+        }
+      ]
+    ) -> _UpdateIntegratedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIntegratedResourcesResponse
+
+    interface _UpdateIntegrationResponse
+      include Smithy::Client::_Response[Types::UpdateIntegrationOutput]
+      def integration_id: () -> String?
+      def webhook_url: () -> String?
+      def secret: () -> String?
+    end
+    def update_integration: (
+      ?integration_id: String,
+      ?webhook_action: String
+    ) -> _UpdateIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIntegrationResponse
+
+    interface _UpdatePentestResponse
+      include Smithy::Client::_Response[Types::UpdatePentestOutput]
+      def pentest_id: () -> String?
+      def title: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def assets: () -> Types::Assets?
+      def exclude_risk_types: () -> Array[String]?
+      def service_role: () -> String?
+      def log_config: () -> Types::CloudWatchLog?
+      def agent_space_id: () -> String?
+      def report_destination: () -> Types::ReportDestination?
+      def report_filters: () -> Types::ReportFilters?
+      def cicd_configuration: () -> Types::CiCdConfiguration?
+      def test_scope: () -> Types::TestScope?
+    end
+    def update_pentest: (
+      ?pentest_id: String,
+      ?agent_space_id: String,
+      ?title: String,
+      ?assets: {
+        endpoints: Array[
+          {
+            uri: String
+          }
+        ],
+        actors: Array[
+          {
+            identifier: untyped,
+            uris: Array[String],
+            authentication: {
+              provider_type: String,
+              value: untyped
+            },
+            description: untyped,
+            enable_email_mfa: bool,
+            mfa_forwarding_address: String
+          }
+        ],
+        documents: Array[
+          {
+            s3_location: untyped,
+            artifact_id: untyped,
+            integrated_document: {
+              integration_id: untyped,
+              resource_id: untyped
+            }
+          }
+        ],
+        source_code: Array[
+          {
+            s3_location: untyped
+          }
+        ],
+        integrated_repositories: Array[
+          {
+            integration_id: untyped,
+            provider_resource_id: untyped,
+            branch: untyped
+          }
+        ],
+        trusted_ca_certificates: Array[
+          {
+            source: {
+              inline_pem: String,
+              artifact_id: untyped,
+              s3_location: untyped
+            }
+          }
+        ]
+      },
+      ?exclude_risk_types: Array[String],
+      ?service_role: String,
+      ?log_config: {
+        log_group: String,
+        log_stream: untyped
+      },
+      ?vpc_config: {
+        vpc_arn: String,
+        security_group_arns: Array[String],
+        subnet_arns: Array[String]
+      },
+      ?network_traffic_config: {
+        rules: Array[
+          {
+            effect: String,
+            pattern: String,
+            network_traffic_rule_type: String
+          }
+        ],
+        custom_headers: Array[
+          {
+            name: untyped,
+            value: untyped
+          }
+        ]
+      },
+      ?code_remediation_strategy: String,
+      ?disable_managed_skills: Array[String],
+      ?max_task_hours: Float,
+      ?report_destination: {
+        integration_id: String,
+        container_id: untyped,
+        parent_id: untyped,
+        document_id: untyped
+      },
+      ?report_filters: {
+        risk_levels: Array[String],
+        confidence_levels: Array[String],
+        statuses: Array[String],
+        risk_types: Array[String],
+        finding_types: Array[String],
+        task_statuses: Array[String],
+        annotation_notes: bool,
+        compliance_report: untyped
+      },
+      ?cicd_configuration: {
+        enabled: bool
+      },
+      ?test_scope: {
+        type: String
+      }
+    ) -> _UpdatePentestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePentestResponse
+
+    interface _UpdatePrivateConnectionCertificateResponse
+      include Smithy::Client::_Response[Types::UpdatePrivateConnectionCertificateOutput]
+      def name: () -> String?
+      def type: () -> String?
+      def status: () -> String?
+      def resource_gateway_id: () -> String?
+      def host_address: () -> String?
+      def vpc_id: () -> String?
+      def resource_configuration_id: () -> String?
+      def certificate_expiry_time: () -> Time?
+      def dns_resolution: () -> String?
+      def failure_message: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_private_connection_certificate: (
+      ?private_connection_name: String,
+      ?certificate: String
+    ) -> _UpdatePrivateConnectionCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePrivateConnectionCertificateResponse
+
+    interface _UpdateSecurityRequirementPackResponse
+      include Smithy::Client::_Response[Types::UpdateSecurityRequirementPackOutput]
+      def pack_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+    end
+    def update_security_requirement_pack: (
+      ?pack_id: String,
+      ?name: String,
+      ?description: String,
+      ?status: String
+    ) -> _UpdateSecurityRequirementPackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSecurityRequirementPackResponse
+
+    interface _UpdateTargetDomainResponse
+      include Smithy::Client::_Response[Types::UpdateTargetDomainOutput]
+      def target_domain_id: () -> String?
+      def domain_name: () -> String?
+      def verification_status: () -> String?
+      def verification_status_reason: () -> String?
+      def verification_details: () -> Types::VerificationDetails?
+      def created_at: () -> Time?
+      def verified_at: () -> Time?
+    end
+    def update_target_domain: (
+      ?target_domain_id: String,
+      ?verification_method: String
+    ) -> _UpdateTargetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTargetDomainResponse
+
+    interface _UpdateThreatResponse
+      include Smithy::Client::_Response[Types::UpdateThreatOutput]
+      def threat_id: () -> String?
+      def threat_job_id: () -> String?
+      def title: () -> String?
+      def statement: () -> String?
+      def severity: () -> String?
+      def status: () -> String?
+      def comments: () -> String?
+      def stride: () -> Array[String]?
+      def threat_source: () -> String?
+      def prerequisites: () -> String?
+      def threat_action: () -> String?
+      def threat_impact: () -> String?
+      def impacted_goal: () -> Array[String]?
+      def impacted_assets: () -> Array[String]?
+      def anchor: () -> Types::ThreatAnchorShape?
+      def evidence: () -> Array[Types::ThreatEvidenceShape]?
+      def recommendation: () -> String?
+      def created_by: () -> String?
+      def updated_by: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_threat: (
+      ?threat_id: String,
+      ?agent_space_id: String,
+      ?title: String,
+      ?status: String,
+      ?comments: String,
+      ?statement: String,
+      ?severity: String,
+      ?threat_source: String,
+      ?prerequisites: String,
+      ?threat_action: String,
+      ?threat_impact: String,
+      ?impacted_goal: Array[String],
+      ?impacted_assets: Array[String],
+      ?anchor: {
+        kind: String,
+        id: untyped,
+        package_id: untyped
+      },
+      ?evidence: Array[
+        {
+          package_id: String,
+          path: untyped
+        }
+      ],
+      ?recommendation: String
+    ) -> _UpdateThreatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThreatResponse
+
+    interface _UpdateThreatModelResponse
+      include Smithy::Client::_Response[Types::UpdateThreatModelOutput]
+      def threat_model_id: () -> String?
+      def title: () -> String?
+      def agent_space_id: () -> String?
+      def description: () -> String?
+      def assets: () -> Types::Assets?
+      def scope_docs: () -> Array[Types::DocumentInfo]?
+      def service_role: () -> String?
+      def log_config: () -> Types::CloudWatchLog?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def report_destination: () -> Types::ReportDestination?
+    end
+    def update_threat_model: (
+      ?threat_model_id: String,
+      ?agent_space_id: String,
+      ?title: String,
+      ?description: String,
+      ?assets: {
+        endpoints: Array[
+          {
+            uri: String
+          }
+        ],
+        actors: Array[
+          {
+            identifier: untyped,
+            uris: Array[String],
+            authentication: {
+              provider_type: String,
+              value: untyped
+            },
+            description: untyped,
+            enable_email_mfa: bool,
+            mfa_forwarding_address: String
+          }
+        ],
+        documents: Array[
+          {
+            s3_location: untyped,
+            artifact_id: untyped,
+            integrated_document: {
+              integration_id: untyped,
+              resource_id: untyped
+            }
+          }
+        ],
+        source_code: Array[
+          {
+            s3_location: untyped
+          }
+        ],
+        integrated_repositories: Array[
+          {
+            integration_id: untyped,
+            provider_resource_id: untyped,
+            branch: untyped
+          }
+        ],
+        trusted_ca_certificates: Array[
+          {
+            source: {
+              inline_pem: String,
+              artifact_id: untyped,
+              s3_location: untyped
+            }
+          }
+        ]
+      },
+      ?scope_docs: Array[
+        {
+          s3_location: String,
+          artifact_id: untyped,
+          integrated_document: {
+            integration_id: untyped,
+            resource_id: untyped
+          }
+        }
+      ],
+      ?service_role: String,
+      ?log_config: {
+        log_group: String,
+        log_stream: untyped
+      },
+      ?report_destination: {
+        integration_id: String,
+        container_id: untyped,
+        parent_id: untyped,
+        document_id: untyped
+      }
+    ) -> _UpdateThreatModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThreatModelResponse
+
+    interface _VerifyTargetDomainResponse
+      include Smithy::Client::_Response[Types::VerifyTargetDomainOutput]
+      def target_domain_id: () -> String?
+      def domain_name: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def verified_at: () -> Time?
+      def status: () -> String?
+      def verification_status_reason: () -> String?
+    end
+    def verify_target_domain: (
+      ?target_domain_id: String
+    ) -> _VerifyTargetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyTargetDomainResponse
+  end
+end

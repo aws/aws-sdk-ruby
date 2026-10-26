@@ -44,6 +44,34 @@ module Aws::CloudWatch
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AssociateDatasetKmsKeyResponse
+      include Smithy::Client::_Response[Types::AssociateDatasetKmsKeyOutput]
+    end
+    def associate_dataset_kms_key: (
+      ?dataset_identifier: String,
+      ?kms_key_arn: String
+    ) -> _AssociateDatasetKmsKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDatasetKmsKeyResponse
+
+    interface _CreateResourceMetricsConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateResourceMetricsConfigurationOutput]
+      def resource_metrics_configuration: () -> Types::ResourceMetricsConfiguration?
+    end
+    def create_resource_metrics_configuration: (
+      ?resource_arn: String,
+      ?metric_selections: Array[
+        {
+          include_metrics: Array[String]
+        }
+      ]
+    ) -> _CreateResourceMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceMetricsConfigurationResponse
+
+    interface _DeleteAlarmMuteRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_alarm_mute_rule: (
+      ?alarm_mute_rule_name: String
+    ) -> _DeleteAlarmMuteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAlarmMuteRuleResponse
+
     interface _DeleteAlarmsResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -55,6 +83,7 @@ module Aws::CloudWatch
       include Smithy::Client::_Response[Types::DeleteAnomalyDetectorOutput]
     end
     def delete_anomaly_detector: (
+      ?anomaly_detector_id: String,
       ?namespace: String,
       ?metric_name: String,
       ?dimensions: Array[
@@ -127,6 +156,13 @@ module Aws::CloudWatch
       ?name: String
     ) -> _DeleteMetricStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMetricStreamResponse
 
+    interface _DeleteResourceMetricsConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteResourceMetricsConfigurationOutput]
+    end
+    def delete_resource_metrics_configuration: (
+      ?resource_arn: String
+    ) -> _DeleteResourceMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceMetricsConfigurationResponse
+
     interface _DescribeAlarmContributorsResponse
       include Smithy::Client::_Response[Types::DescribeAlarmContributorsOutput]
       def alarm_contributors: () -> Array[Types::AlarmContributor]?
@@ -158,6 +194,7 @@ module Aws::CloudWatch
       include Smithy::Client::_Response[Types::DescribeAlarmsOutput]
       def composite_alarms: () -> Array[Types::CompositeAlarm]?
       def metric_alarms: () -> Array[Types::MetricAlarm]?
+      def log_alarms: () -> Array[Types::LogAlarm]?
       def next_token: () -> String?
     end
     def describe_alarms: (
@@ -197,6 +234,7 @@ module Aws::CloudWatch
       def next_token: () -> String?
     end
     def describe_anomaly_detectors: (
+      ?anomaly_detector_ids: Array[String],
       ?next_token: String,
       ?max_results: Integer,
       ?namespace: String,
@@ -235,6 +273,13 @@ module Aws::CloudWatch
       ?rule_names: Array[String]
     ) -> _DisableInsightRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableInsightRulesResponse
 
+    interface _DisassociateDatasetKmsKeyResponse
+      include Smithy::Client::_Response[Types::DisassociateDatasetKmsKeyOutput]
+    end
+    def disassociate_dataset_kms_key: (
+      ?dataset_identifier: String
+    ) -> _DisassociateDatasetKmsKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDatasetKmsKeyResponse
+
     interface _EnableAlarmActionsResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -250,6 +295,23 @@ module Aws::CloudWatch
       ?rule_names: Array[String]
     ) -> _EnableInsightRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableInsightRulesResponse
 
+    interface _GetAlarmMuteRuleResponse
+      include Smithy::Client::_Response[Types::GetAlarmMuteRuleOutput]
+      def name: () -> String?
+      def alarm_mute_rule_arn: () -> String?
+      def description: () -> String?
+      def rule: () -> Types::Rule?
+      def mute_targets: () -> Types::MuteTargets?
+      def start_date: () -> Time?
+      def expire_date: () -> Time?
+      def status: () -> String?
+      def last_updated_timestamp: () -> Time?
+      def mute_type: () -> String?
+    end
+    def get_alarm_mute_rule: (
+      ?alarm_mute_rule_name: String
+    ) -> _GetAlarmMuteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAlarmMuteRuleResponse
+
     interface _GetDashboardResponse
       include Smithy::Client::_Response[Types::GetDashboardOutput]
       def dashboard_arn: () -> String?
@@ -259,6 +321,16 @@ module Aws::CloudWatch
     def get_dashboard: (
       ?dashboard_name: String
     ) -> _GetDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDashboardResponse
+
+    interface _GetDatasetResponse
+      include Smithy::Client::_Response[Types::GetDatasetOutput]
+      def dataset_id: () -> String?
+      def arn: () -> String?
+      def kms_key_arn: () -> String?
+    end
+    def get_dataset: (
+      ?dataset_identifier: String
+    ) -> _GetDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDatasetResponse
 
     interface _GetInsightRuleReportResponse
       include Smithy::Client::_Response[Types::GetInsightRuleReportOutput]
@@ -371,6 +443,36 @@ module Aws::CloudWatch
       ?output_format: String
     ) -> _GetMetricWidgetImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetricWidgetImageResponse
 
+    interface _GetOTelEnrichmentResponse
+      include Smithy::Client::_Response[Types::GetOTelEnrichmentOutput]
+      def status: () -> String?
+      def include_filters: () -> Array[Types::OTelEnrichmentMetricSelector]?
+      def exclude_filters: () -> Array[Types::OTelEnrichmentMetricSelector]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_o_tel_enrichment: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOTelEnrichmentResponse
+
+    interface _GetResourceMetricsConfigurationResponse
+      include Smithy::Client::_Response[Types::GetResourceMetricsConfigurationOutput]
+      def resource_metrics_configuration: () -> Types::ResourceMetricsConfiguration?
+    end
+    def get_resource_metrics_configuration: (
+      ?resource_arn: String
+    ) -> _GetResourceMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceMetricsConfigurationResponse
+
+    interface _ListAlarmMuteRulesResponse
+      include Smithy::Client::_Response[Types::ListAlarmMuteRulesOutput]
+      def alarm_mute_rule_summaries: () -> Array[Types::AlarmMuteRuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_alarm_mute_rules: (
+      ?alarm_name: String,
+      ?statuses: Array[String],
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _ListAlarmMuteRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAlarmMuteRulesResponse
+
     interface _ListDashboardsResponse
       include Smithy::Client::_Response[Types::ListDashboardsOutput]
       def dashboard_entries: () -> Array[Types::DashboardEntry]?
@@ -431,8 +533,35 @@ module Aws::CloudWatch
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _PutAlarmMuteRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_alarm_mute_rule: (
+      ?name: String,
+      ?description: String,
+      ?rule: {
+        schedule: {
+          expression: String,
+          duration: String,
+          timezone: String
+        }
+      },
+      ?mute_targets: {
+        alarm_names: Array[String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?start_date: Time,
+      ?expire_date: Time
+    ) -> _PutAlarmMuteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAlarmMuteRuleResponse
+
     interface _PutAnomalyDetectorResponse
       include Smithy::Client::_Response[Types::PutAnomalyDetectorOutput]
+      def anomaly_detector_id: () -> String?
     end
     def put_anomaly_detector: (
       ?namespace: String,
@@ -525,7 +654,13 @@ module Aws::CloudWatch
     end
     def put_dashboard: (
       ?dashboard_name: String,
-      ?dashboard_body: String
+      ?dashboard_body: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
     ) -> _PutDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDashboardResponse
 
     interface _PutInsightRuleResponse
@@ -543,6 +678,53 @@ module Aws::CloudWatch
       ],
       ?apply_on_transformed_logs: bool
     ) -> _PutInsightRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutInsightRuleResponse
+
+    interface _PutLogAlarmResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_log_alarm: (
+      ?alarm_name: String,
+      ?alarm_description: String,
+      ?scheduled_query_configuration: {
+        query_string: String,
+        log_group_identifiers: Array[String],
+        query_arn: String,
+        scheduled_query_role_arn: untyped,
+        schedule_configuration: {
+          schedule_expression: String,
+          start_time_offset: Integer,
+          end_time_offset: Integer
+        },
+        aggregation_expression: String,
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      },
+      ?action_log_line_count: Integer,
+      ?action_log_line_role_arn: String,
+      ?actions_enabled: bool,
+      ?ok_actions: Array[String],
+      ?alarm_actions: Array[String],
+      ?insufficient_data_actions: Array[String],
+      ?query_results_to_evaluate: Integer,
+      ?query_results_to_alarm: Integer,
+      ?threshold: Float,
+      ?comparison_operator: String,
+      ?treat_missing_data: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?warm_up_configuration: {
+        warm_up_period_duration_in_minutes: Integer,
+        only_start_evaluating_after_warm_up_period_ends: bool
+      }
+    ) -> _PutLogAlarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLogAlarmResponse
 
     interface _PutManagedInsightRulesResponse
       include Smithy::Client::_Response[Types::PutManagedInsightRulesOutput]
@@ -622,7 +804,26 @@ module Aws::CloudWatch
           value: String
         }
       ],
-      ?threshold_metric_id: String
+      ?threshold_metric_id: String,
+      ?evaluation_window: {
+        wall_clock_window: {
+          timezone: String
+        },
+        sliding_window: {
+        }
+      },
+      ?warm_up_configuration: {
+        warm_up_period_duration_in_minutes: Integer,
+        only_start_evaluating_after_warm_up_period_ends: bool
+      },
+      ?evaluation_criteria: {
+        prom_ql_criteria: {
+          query: String,
+          pending_period: Integer,
+          recovery_period: Integer
+        }
+      },
+      ?evaluation_interval: Integer
     ) -> _PutMetricAlarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMetricAlarmResponse
 
     interface _PutMetricDataResponse
@@ -745,12 +946,39 @@ module Aws::CloudWatch
       ?names: Array[String]
     ) -> _StartMetricStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetricStreamsResponse
 
+    interface _StartOTelEnrichmentResponse
+      include Smithy::Client::_Response[Types::StartOTelEnrichmentOutput]
+      def include_filters: () -> Array[Types::OTelEnrichmentMetricSelector]?
+      def exclude_filters: () -> Array[Types::OTelEnrichmentMetricSelector]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def start_o_tel_enrichment: (
+      ?include_filters: Array[
+        {
+          namespace: String,
+          metric_names: Array[String]
+        }
+      ],
+      ?exclude_filters: Array[
+        {
+          namespace: String,
+          metric_names: Array[String]
+        }
+      ]
+    ) -> _StartOTelEnrichmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOTelEnrichmentResponse
+
     interface _StopMetricStreamsResponse
       include Smithy::Client::_Response[Types::StopMetricStreamsOutput]
     end
     def stop_metric_streams: (
       ?names: Array[String]
     ) -> _StopMetricStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopMetricStreamsResponse
+
+    interface _StopOTelEnrichmentResponse
+      include Smithy::Client::_Response[Types::StopOTelEnrichmentOutput]
+    end
+    def stop_o_tel_enrichment: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopOTelEnrichmentResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceOutput]
@@ -772,5 +1000,40 @@ module Aws::CloudWatch
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateOTelEnrichmentResponse
+      include Smithy::Client::_Response[Types::UpdateOTelEnrichmentOutput]
+      def include_filters: () -> Array[Types::OTelEnrichmentMetricSelector]?
+      def exclude_filters: () -> Array[Types::OTelEnrichmentMetricSelector]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_o_tel_enrichment: (
+      ?include_filters: Array[
+        {
+          namespace: String,
+          metric_names: Array[String]
+        }
+      ],
+      ?exclude_filters: Array[
+        {
+          namespace: String,
+          metric_names: Array[String]
+        }
+      ]
+    ) -> _UpdateOTelEnrichmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOTelEnrichmentResponse
+
+    interface _UpdateResourceMetricsConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateResourceMetricsConfigurationOutput]
+      def resource_metrics_configuration: () -> Types::ResourceMetricsConfiguration?
+    end
+    def update_resource_metrics_configuration: (
+      ?resource_arn: String,
+      ?metric_selections: Array[
+        {
+          include_metrics: Array[String]
+        }
+      ]
+    ) -> _UpdateResourceMetricsConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceMetricsConfigurationResponse
   end
 end

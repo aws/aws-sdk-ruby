@@ -24,6 +24,9 @@ module Aws::EntityResolution
     CreateMatchingWorkflowOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#CreateMatchingWorkflowOutput", name: "CreateMatchingWorkflowOutput")
     CreateSchemaMappingInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#CreateSchemaMappingInput", name: "CreateSchemaMappingInput")
     CreateSchemaMappingOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#CreateSchemaMappingOutput", name: "CreateSchemaMappingOutput")
+    CustomerProfilesDomainArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#CustomerProfilesDomainArn", name: "CustomerProfilesDomainArn", traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255})$"})
+    CustomerProfilesIntegrationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#CustomerProfilesIntegrationConfig", name: "CustomerProfilesIntegrationConfig")
+    CustomerProfilesObjectTypeArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#CustomerProfilesObjectTypeArn", name: "CustomerProfilesObjectTypeArn", traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255}/object-types/[a-zA-Z_0-9-]{1,255})$"})
     DeleteIdMappingWorkflowInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#DeleteIdMappingWorkflowInput", name: "DeleteIdMappingWorkflowInput")
     DeleteIdMappingWorkflowOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#DeleteIdMappingWorkflowOutput", name: "DeleteIdMappingWorkflowOutput")
     DeleteIdNamespaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#DeleteIdNamespaceInput", name: "DeleteIdNamespaceInput")
@@ -136,6 +139,7 @@ module Aws::EntityResolution
     MatchPurpose = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.entityresolution#MatchPurpose", name: "MatchPurpose")
     MatchedRecord = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#MatchedRecord", name: "MatchedRecord")
     MatchedRecordsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#MatchedRecordsList", name: "MatchedRecordsList")
+    MatchingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#MatchingConfig", name: "MatchingConfig")
     MatchingKeys = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#MatchingKeys", name: "MatchingKeys")
     MatchingWorkflowArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#MatchingWorkflowArn", name: "MatchingWorkflowArn", traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$"})
     MatchingWorkflowList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#MatchingWorkflowList", name: "MatchingWorkflowList")
@@ -143,6 +147,7 @@ module Aws::EntityResolution
     NamespaceProviderProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#NamespaceProviderProperties", name: "NamespaceProviderProperties")
     NamespaceRuleBasedProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#NamespaceRuleBasedProperties", name: "NamespaceRuleBasedProperties")
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z_0-9-=+/]*$"})
+    OptionalS3Path = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#OptionalS3Path", name: "OptionalS3Path", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^$|^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"})
     OutputAttribute = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#OutputAttribute", name: "OutputAttribute")
     OutputAttributes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#OutputAttributes", name: "OutputAttributes")
     OutputSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#OutputSource", name: "OutputSource")
@@ -184,7 +189,7 @@ module Aws::EntityResolution
     S3Path = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#S3Path", name: "S3Path", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"})
     SchemaAttributeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.entityresolution#SchemaAttributeType", name: "SchemaAttributeType")
     SchemaInputAttribute = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.entityresolution#SchemaInputAttribute", name: "SchemaInputAttribute")
-    SchemaInputAttributes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#SchemaInputAttributes", name: "SchemaInputAttributes", traits: {"smithy.api#length" => {"min" => 2, "max" => 35}})
+    SchemaInputAttributes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#SchemaInputAttributes", name: "SchemaInputAttributes", traits: {"smithy.api#length" => {"min" => 2, "max" => 60}})
     SchemaList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#SchemaList", name: "SchemaList")
     SchemaMappingArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#SchemaMappingArn", name: "SchemaMappingArn", traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(schemamapping/[a-zA-Z_0-9-]{1,255})$"})
     SchemaMappingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#SchemaMappingList", name: "SchemaMappingList")
@@ -200,7 +205,7 @@ module Aws::EntityResolution
     StatementCondition = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#StatementCondition", name: "StatementCondition", traits: {"smithy.api#length" => {"min" => 1, "max" => 40960}})
     StatementEffect = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.entityresolution#StatementEffect", name: "StatementEffect")
     StatementId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#StatementId", name: "StatementId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[0-9A-Za-z]+$"})
-    StatementPrincipal = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#StatementPrincipal", name: "StatementPrincipal", traits: {"smithy.api#length" => {"min" => 12, "max" => 64}, "smithy.api#pattern" => "^(\\d{12})|([a-z0-9\\.]+)$"})
+    StatementPrincipal = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#StatementPrincipal", name: "StatementPrincipal", traits: {"smithy.api#length" => {"min" => 12, "max" => 64}, "smithy.api#pattern" => "^((\\d{12})|([a-z0-9\\.]+))$"})
     StatementPrincipalList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#StatementPrincipalList", name: "StatementPrincipalList", traits: {"smithy.api#length" => {"min" => 1}})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.entityresolution#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.entityresolution#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
@@ -316,6 +321,9 @@ module Aws::EntityResolution
     CreateSchemaMappingOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description", traits: {"smithy.api#required" => {}}))
     CreateSchemaMappingOutput.add_member(:mapped_input_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaInputAttributes, name: "mappedInputFields", traits: {"smithy.api#required" => {}}))
     CreateSchemaMappingOutput.type = Types::CreateSchemaMappingOutput
+    CustomerProfilesIntegrationConfig.add_member(:domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfilesDomainArn, name: "domainArn", traits: {"smithy.api#required" => {}}))
+    CustomerProfilesIntegrationConfig.add_member(:object_type_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfilesObjectTypeArn, name: "objectTypeArn", traits: {"smithy.api#required" => {}}))
+    CustomerProfilesIntegrationConfig.type = Types::CustomerProfilesIntegrationConfig
     DeleteIdMappingWorkflowInput.add_member(:workflow_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "workflowName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteIdMappingWorkflowInput.type = Types::DeleteIdMappingWorkflowInput
     DeleteIdMappingWorkflowOutput.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -515,8 +523,8 @@ module Aws::EntityResolution
     IdMappingWorkflowInputSource.type = Types::IdMappingWorkflowInputSource
     IdMappingWorkflowInputSourceConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdMappingWorkflowInputSource, name: "member"))
     IdMappingWorkflowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdMappingWorkflowSummary, name: "member"))
-    IdMappingWorkflowOutputSource.add_member(:output_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Path, name: "outputS3Path", traits: {"smithy.api#required" => {}}))
     IdMappingWorkflowOutputSource.add_member(:kms_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSArn, name: "KMSArn"))
+    IdMappingWorkflowOutputSource.add_member(:output_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Path, name: "outputS3Path", traits: {"smithy.api#required" => {}}))
     IdMappingWorkflowOutputSource.type = Types::IdMappingWorkflowOutputSource
     IdMappingWorkflowOutputSourceConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdMappingWorkflowOutputSource, name: "member"))
     IdMappingWorkflowRuleDefinitionType.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE", traits: {"smithy.api#enumValue" => "SOURCE"}))
@@ -646,6 +654,8 @@ module Aws::EntityResolution
     MatchedRecord.add_member(:record_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recordId", traits: {"smithy.api#required" => {}}))
     MatchedRecord.type = Types::MatchedRecord
     MatchedRecordsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchedRecord, name: "member"))
+    MatchingConfig.add_member(:enable_transitive_matching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableTransitiveMatching"))
+    MatchingConfig.type = Types::MatchingConfig
     MatchingKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeName, name: "member"))
     MatchingWorkflowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingWorkflowSummary, name: "member"))
     MatchingWorkflowSummary.add_member(:workflow_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "workflowName", traits: {"smithy.api#required" => {}}))
@@ -666,10 +676,11 @@ module Aws::EntityResolution
     OutputAttribute.add_member(:hashed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "hashed"))
     OutputAttribute.type = Types::OutputAttribute
     OutputAttributes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputAttribute, name: "member"))
-    OutputSource.add_member(:output_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Path, name: "outputS3Path", traits: {"smithy.api#required" => {}}))
     OutputSource.add_member(:kms_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KMSArn, name: "KMSArn"))
+    OutputSource.add_member(:output_s3_path, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalS3Path, name: "outputS3Path", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     OutputSource.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputAttributes, name: "output", traits: {"smithy.api#length" => {"max" => 750}, "smithy.api#required" => {}}))
     OutputSource.add_member(:apply_normalization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "applyNormalization"))
+    OutputSource.add_member(:customer_profiles_integration_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProfilesIntegrationConfig, name: "customerProfilesIntegrationConfig"))
     OutputSource.type = Types::OutputSource
     OutputSourceConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputSource, name: "member"))
     ProcessingType.add_member(:consistent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONSISTENT", traits: {"smithy.api#enumValue" => "CONSISTENT"}))
@@ -734,6 +745,7 @@ module Aws::EntityResolution
     ResolutionTechniques.add_member(:resolution_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolutionType, name: "resolutionType", traits: {"smithy.api#required" => {}}))
     ResolutionTechniques.add_member(:rule_based_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleBasedProperties, name: "ruleBasedProperties"))
     ResolutionTechniques.add_member(:rule_condition_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConditionProperties, name: "ruleConditionProperties"))
+    ResolutionTechniques.add_member(:enable_real_time_matching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enableRealTimeMatching"))
     ResolutionTechniques.add_member(:provider_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ProviderProperties, name: "providerProperties"))
     ResolutionTechniques.type = Types::ResolutionTechniques
     ResolutionType.add_member(:rule_matching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RULE_MATCHING", traits: {"smithy.api#enumValue" => "RULE_MATCHING"}))
@@ -753,6 +765,7 @@ module Aws::EntityResolution
     RuleCondition.type = Types::RuleCondition
     RuleConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleCondition, name: "member"))
     RuleConditionProperties.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConditionList, name: "rules", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#required" => {}}))
+    RuleConditionProperties.add_member(:matching_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingConfig, name: "matchingConfig"))
     RuleConditionProperties.type = Types::RuleConditionProperties
     RuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     SchemaAttributeType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
@@ -892,7 +905,7 @@ module Aws::EntityResolution
       service.id = "com.amazonaws.entityresolution#AWSVeniceService"
       service.name = "AWSVeniceService"
       service.version = "2018-05-10"
-      service.traits = {"aws.api#service" => {"sdkId" => "EntityResolution", "arnNamespace" => "entityresolution", "cloudTrailEventSource" => "entityresolution.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "entityresolution"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"], "maxAge" => 86400}, "smithy.api#title" => "AWS EntityResolution"}
+      service.traits = {"aws.api#service" => {"sdkId" => "EntityResolution", "arnNamespace" => "entityresolution", "cloudTrailEventSource" => "entityresolution.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "entityresolution"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"], "maxAge" => 86400}, "smithy.api#title" => "AWS EntityResolution", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://entityresolution-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://entityresolution-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://entityresolution.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://entityresolution.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:add_policy_statement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.entityresolution#AddPolicyStatement"
         operation.name = "AddPolicyStatement"
@@ -976,6 +989,7 @@ module Aws::EntityResolution
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/idmappingworkflows/{workflowName}"}, "smithy.api#idempotent" => {}}
@@ -987,6 +1001,7 @@ module Aws::EntityResolution
         operation.output = DeleteIdNamespaceOutput
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/idnamespaces/{idNamespaceName}"}, "smithy.api#idempotent" => {}}
@@ -999,6 +1014,7 @@ module Aws::EntityResolution
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/matchingworkflows/{workflowName}"}, "smithy.api#idempotent" => {}}
@@ -1024,6 +1040,7 @@ module Aws::EntityResolution
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/schemas/{schemaName}"}, "smithy.api#idempotent" => {}}

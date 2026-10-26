@@ -250,6 +250,14 @@ module Aws::Organizations
     end
     def describe_resource_policy: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourcePolicyResponse
 
+    interface _DescribeResponsibilityTransferResponse
+      include Smithy::Client::_Response[Types::DescribeResponsibilityTransferResponse]
+      def responsibility_transfer: () -> Types::ResponsibilityTransfer?
+    end
+    def describe_responsibility_transfer: (
+      ?id: String
+    ) -> _DescribeResponsibilityTransferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResponsibilityTransferResponse
+
     interface _DetachPolicyResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -313,6 +321,27 @@ module Aws::Organizations
         }
       ]
     ) -> _InviteAccountToOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InviteAccountToOrganizationResponse
+
+    interface _InviteOrganizationToTransferResponsibilityResponse
+      include Smithy::Client::_Response[Types::InviteOrganizationToTransferResponsibilityResponse]
+      def handshake: () -> Types::Handshake?
+    end
+    def invite_organization_to_transfer_responsibility: (
+      ?type: String,
+      ?target: {
+        id: String,
+        type: String
+      },
+      ?notes: String,
+      ?start_timestamp: Time,
+      ?source_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _InviteOrganizationToTransferResponsibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InviteOrganizationToTransferResponsibilityResponse
 
     interface _LeaveOrganizationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -451,6 +480,18 @@ module Aws::Organizations
       ?max_results: Integer
     ) -> _ListHandshakesForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHandshakesForOrganizationResponse
 
+    interface _ListInboundResponsibilityTransfersResponse
+      include Smithy::Client::_Response[Types::ListInboundResponsibilityTransfersResponse]
+      def responsibility_transfers: () -> Array[Types::ResponsibilityTransfer]?
+      def next_token: () -> String?
+    end
+    def list_inbound_responsibility_transfers: (
+      ?type: String,
+      ?id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListInboundResponsibilityTransfersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInboundResponsibilityTransfersResponse
+
     interface _ListOrganizationalUnitsForParentResponse
       include Smithy::Client::_Response[Types::ListOrganizationalUnitsForParentResponse]
       def organizational_units: () -> Array[Types::OrganizationalUnit]?
@@ -461,6 +502,17 @@ module Aws::Organizations
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListOrganizationalUnitsForParentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationalUnitsForParentResponse
+
+    interface _ListOutboundResponsibilityTransfersResponse
+      include Smithy::Client::_Response[Types::ListOutboundResponsibilityTransfersResponse]
+      def responsibility_transfers: () -> Array[Types::ResponsibilityTransfer]?
+      def next_token: () -> String?
+    end
+    def list_outbound_responsibility_transfers: (
+      ?type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOutboundResponsibilityTransfersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOutboundResponsibilityTransfersResponse
 
     interface _ListParentsResponse
       include Smithy::Client::_Response[Types::ListParentsResponse]
@@ -578,6 +630,15 @@ module Aws::Organizations
       ]
     ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
 
+    interface _TerminateResponsibilityTransferResponse
+      include Smithy::Client::_Response[Types::TerminateResponsibilityTransferResponse]
+      def responsibility_transfer: () -> Types::ResponsibilityTransfer?
+    end
+    def terminate_responsibility_transfer: (
+      ?id: String,
+      ?end_timestamp: Time
+    ) -> _TerminateResponsibilityTransferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateResponsibilityTransferResponse
+
     interface _UntagResourceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -605,5 +666,14 @@ module Aws::Organizations
       ?description: String,
       ?content: String
     ) -> _UpdatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyResponse
+
+    interface _UpdateResponsibilityTransferResponse
+      include Smithy::Client::_Response[Types::UpdateResponsibilityTransferResponse]
+      def responsibility_transfer: () -> Types::ResponsibilityTransfer?
+    end
+    def update_responsibility_transfer: (
+      ?id: String,
+      ?name: String
+    ) -> _UpdateResponsibilityTransferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResponsibilityTransferResponse
   end
 end

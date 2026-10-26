@@ -3,26 +3,32 @@ module Aws::Mq
     class BadRequestException < Smithy::Client::ServiceError
       def error_attribute: () -> String?
       def message: () -> String?
+      def resource_share_errors: () -> Array[Types::ResourceShareError]?
     end
     class ConflictException < Smithy::Client::ServiceError
       def error_attribute: () -> String?
       def message: () -> String?
+      def resource_share_errors: () -> Array[Types::ResourceShareError]?
     end
     class ForbiddenException < Smithy::Client::ServiceError
       def error_attribute: () -> String?
       def message: () -> String?
+      def resource_share_errors: () -> Array[Types::ResourceShareError]?
     end
     class InternalServerErrorException < Smithy::Client::ServiceError
       def error_attribute: () -> String?
       def message: () -> String?
+      def resource_share_errors: () -> Array[Types::ResourceShareError]?
     end
     class NotFoundException < Smithy::Client::ServiceError
       def error_attribute: () -> String?
       def message: () -> String?
+      def resource_share_errors: () -> Array[Types::ResourceShareError]?
     end
     class UnauthorizedException < Smithy::Client::ServiceError
       def error_attribute: () -> String?
       def message: () -> String?
+      def resource_share_errors: () -> Array[Types::ResourceShareError]?
     end
   end
 end

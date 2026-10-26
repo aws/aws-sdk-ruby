@@ -118,6 +118,10 @@ module Aws::Transcribe
         tuning_data_s3_uri: untyped,
         data_access_role_arn: String
       },
+      ?encryption_configuration: {
+        kms_encryption_context: Hash[String, String],
+        kms_key: String
+      },
       ?tags: Array[
         {
           key: String,
@@ -165,7 +169,11 @@ module Aws::Transcribe
           value: String
         }
       ],
-      ?data_access_role_arn: String
+      ?data_access_role_arn: String,
+      ?encryption_configuration: {
+        kms_encryption_context: Hash[String, String],
+        kms_key: String
+      }
     ) -> _CreateVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVocabularyResponse
 
     interface _CreateVocabularyFilterResponse
@@ -185,7 +193,11 @@ module Aws::Transcribe
           value: String
         }
       ],
-      ?data_access_role_arn: String
+      ?data_access_role_arn: String,
+      ?encryption_configuration: {
+        kms_encryption_context: Hash[String, String],
+        kms_key: String
+      }
     ) -> _CreateVocabularyFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVocabularyFilterResponse
 
     interface _DeleteCallAnalyticsCategoryResponse
@@ -320,6 +332,8 @@ module Aws::Transcribe
       def last_modified_time: () -> Time?
       def failure_reason: () -> String?
       def download_uri: () -> String?
+      def data_access_role_arn: () -> String?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
     end
     def get_vocabulary: (
       ?vocabulary_name: String
@@ -331,6 +345,8 @@ module Aws::Transcribe
       def language_code: () -> String?
       def last_modified_time: () -> Time?
       def download_uri: () -> String?
+      def data_access_role_arn: () -> String?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
     end
     def get_vocabulary_filter: (
       ?vocabulary_filter_name: String
@@ -723,6 +739,21 @@ module Aws::Transcribe
       ?input_type: String
     ) -> _UpdateCallAnalyticsCategoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCallAnalyticsCategoryResponse
 
+    interface _UpdateLanguageModelResponse
+      include Smithy::Client::_Response[Types::UpdateLanguageModelResponse]
+      def model_name: () -> String?
+      def model_status: () -> String?
+      def last_modified_time: () -> Time?
+    end
+    def update_language_model: (
+      ?model_name: String,
+      ?data_access_role_arn: String,
+      ?encryption_configuration: {
+        kms_encryption_context: Hash[String, String],
+        kms_key: String
+      }
+    ) -> _UpdateLanguageModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLanguageModelResponse
+
     interface _UpdateMedicalVocabularyResponse
       include Smithy::Client::_Response[Types::UpdateMedicalVocabularyResponse]
       def vocabulary_name: () -> String?
@@ -748,7 +779,11 @@ module Aws::Transcribe
       ?language_code: String,
       ?phrases: Array[String],
       ?vocabulary_file_uri: String,
-      ?data_access_role_arn: String
+      ?data_access_role_arn: String,
+      ?encryption_configuration: {
+        kms_encryption_context: Hash[String, String],
+        kms_key: String
+      }
     ) -> _UpdateVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVocabularyResponse
 
     interface _UpdateVocabularyFilterResponse
@@ -761,7 +796,11 @@ module Aws::Transcribe
       ?vocabulary_filter_name: String,
       ?words: Array[String],
       ?vocabulary_filter_file_uri: String,
-      ?data_access_role_arn: String
+      ?data_access_role_arn: String,
+      ?encryption_configuration: {
+        kms_encryption_context: Hash[String, String],
+        kms_key: String
+      }
     ) -> _UpdateVocabularyFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVocabularyFilterResponse
   end
 end

@@ -67,6 +67,9 @@ module Aws::EMRServerless
     # @!attribute monitoring_configuration
     #   <p>The configuration setting for monitoring.</p>
     #   @return [Types::MonitoringConfiguration]
+    # @!attribute disk_encryption_configuration
+    #   <p>The configuration object that allows encrypting local disks.</p>
+    #   @return [Types::DiskEncryptionConfiguration]
     # @!attribute interactive_configuration
     #   <p>The interactive configuration object that enables the interactive use cases for an application.</p>
     #   @return [Types::InteractiveConfiguration]
@@ -74,8 +77,11 @@ module Aws::EMRServerless
     #   <p>The scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above.</p>
     #   @return [Types::SchedulerConfiguration]
     # @!attribute identity_center_configuration
-    #   <p>The IAM Identity Center configuration applied to enable trusted identity propagation. </p>
+    #   <p>The IAM Identity Center configuration applied to enable trusted identity propagation.</p>
     #   @return [Types::IdentityCenterConfiguration]
+    # @!attribute job_level_cost_allocation_configuration
+    #   <p>The configuration object that enables job level cost allocation.</p>
+    #   @return [Types::JobLevelCostAllocationConfiguration]
     class Application < Struct.new(
       nil,
       :application_id,
@@ -98,9 +104,11 @@ module Aws::EMRServerless
       :worker_type_specifications,
       :runtime_configuration,
       :monitoring_configuration,
+      :disk_encryption_configuration,
       :interactive_configuration,
       :scheduler_configuration,
       :identity_center_configuration,
+      :job_level_cost_allocation_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -276,10 +284,14 @@ module Aws::EMRServerless
     # @!attribute monitoring_configuration
     #   <p>The override configurations for monitoring.</p>
     #   @return [Types::MonitoringConfiguration]
+    # @!attribute disk_encryption_configuration
+    #   <p>The override configuration to encrypt local disks.</p>
+    #   @return [Types::DiskEncryptionConfiguration]
     class ConfigurationOverrides < Struct.new(
       nil,
       :application_configuration,
       :monitoring_configuration,
+      :disk_encryption_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -341,6 +353,9 @@ module Aws::EMRServerless
     # @!attribute monitoring_configuration
     #   <p>The configuration setting for monitoring.</p>
     #   @return [Types::MonitoringConfiguration]
+    # @!attribute disk_encryption_configuration
+    #   <p>The configuration object that allows encrypting local disks.</p>
+    #   @return [Types::DiskEncryptionConfiguration]
     # @!attribute interactive_configuration
     #   <p>The interactive configuration object that enables the interactive use cases to use when running an application.</p>
     #   @return [Types::InteractiveConfiguration]
@@ -350,6 +365,9 @@ module Aws::EMRServerless
     # @!attribute identity_center_configuration
     #   <p>The IAM Identity Center Configuration accepts the Identity Center instance parameter required to enable trusted identity propagation. This configuration allows identity propagation between integrated services and the Identity Center instance.</p>
     #   @return [Types::IdentityCenterConfigurationInput]
+    # @!attribute job_level_cost_allocation_configuration
+    #   <p>The configuration object that enables job level cost allocation.</p>
+    #   @return [Types::JobLevelCostAllocationConfiguration]
     class CreateApplicationInput < Struct.new(
       nil,
       :name,
@@ -367,9 +385,11 @@ module Aws::EMRServerless
       :worker_type_specifications,
       :runtime_configuration,
       :monitoring_configuration,
+      :disk_encryption_configuration,
       :interactive_configuration,
       :scheduler_configuration,
       :identity_center_configuration,
+      :job_level_cost_allocation_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -407,6 +427,22 @@ module Aws::EMRServerless
 
     class DeleteApplicationOutput < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration object that allows encrypting local disks.</p>
+    # @!attribute encryption_context
+    #   <p>Specifies the optional encryption context that will be used when encrypting the data. An encryption context is a collection of non-secret key-value pairs that represent additional authenticated data. </p>
+    #   @return [Hash<String, String>]
+    # @!attribute encryption_key_arn
+    #   <p>The KMS key ARN to encrypt local disks.</p>
+    #   @return [String]
+    class DiskEncryptionConfiguration < Struct.new(
+      nil,
+      :encryption_context,
+      :encryption_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -498,6 +534,108 @@ module Aws::EMRServerless
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute application_id
+    #   <p>The ID of the application that the resource belongs to.</p>
+    #   @return [String]
+    # @!attribute resource_id
+    #   <p>The ID of the resource.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of resource to access the dashboard for. Currently, only <code>Session</code> is supported.</p>
+    #   @return [String]
+    # @!attribute access_system_profile_logs
+    #   <p>Allows access to system profile logs for Lake Formation-enabled sessions. Default is false.</p>
+    #   @return [Boolean]
+    class GetResourceDashboardRequest < Struct.new(
+      nil,
+      :application_id,
+      :resource_id,
+      :resource_type,
+      :access_system_profile_logs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute url
+    #   <p>A URL to the resource dashboard. For an active resource, this URL opens the live application UI. For a terminated resource, this URL opens the persistent application UI. This value is not included in the response if the URL is not available.</p>
+    #   @return [String]
+    class GetResourceDashboardResponse < Struct.new(
+      nil,
+      :url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_id
+    #   <p>The ID of the application that the session belongs to.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The ID of the session.</p>
+    #   @return [String]
+    class GetSessionEndpointRequest < Struct.new(
+      nil,
+      :application_id,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_id
+    #   <p>The output contains the ID of the application.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The output contains the ID of the session.</p>
+    #   @return [String]
+    # @!attribute endpoint
+    #   <p>The endpoint URL for connecting to the session.</p>
+    #   @return [String]
+    # @!attribute auth_token
+    #   <p>The authentication token for connecting to the session endpoint. Call <code>GetSessionEndpoint</code> again to obtain a new token before it expires.</p>
+    #   @return [String]
+    # @!attribute auth_token_expires_at
+    #   <p>The expiration time of the authentication token.</p>
+    #   @return [Time]
+    class GetSessionEndpointResponse < Struct.new(
+      nil,
+      :application_id,
+      :session_id,
+      :endpoint,
+      :auth_token,
+      :auth_token_expires_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_id
+    #   <p>The ID of the application that the session belongs to.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The ID of the session.</p>
+    #   @return [String]
+    class GetSessionRequest < Struct.new(
+      nil,
+      :application_id,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute session
+    #   <p>The output displays information about the session.</p>
+    #   @return [Types::Session]
+    class GetSessionResponse < Struct.new(
+      nil,
+      :session,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configurations for the Hive job driver.</p>
     # @!attribute query
     #   <p>The query for the Hive job run.</p>
@@ -518,29 +656,37 @@ module Aws::EMRServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The IAM Identity Center Configuration that includes the Identify Center instance and application ARNs that provide trusted-identity propagation.</p>
+    # <p>The IAM Identity Center Configuration accepts the Identity Center instance parameter required to enable trusted identity propagation. This configuration allows identity propagation between integrated services and the Identity Center instance.</p>
     # @!attribute identity_center_instance_arn
     #   <p>The ARN of the IAM Identity Center instance.</p>
     #   @return [String]
     # @!attribute identity_center_application_arn
     #   <p>The ARN of the EMR Serverless created IAM Identity Center Application that provides trusted-identity propagation.</p>
     #   @return [String]
+    # @!attribute user_background_sessions_enabled
+    #   <p>Enables user background sessions for this application so Livy sessions can continue running after users log out of their interactive notebook or their Identity Center sessions expire.</p>
+    #   @return [Boolean]
     class IdentityCenterConfiguration < Struct.new(
       nil,
       :identity_center_instance_arn,
       :identity_center_application_arn,
+      :user_background_sessions_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the IAM Identity Center configuration used to enable or disable trusted identity propagation. When provided, this configuration determines how the application interacts with IAM Identity Center for user authentication and access control.</p>
+    # <p>The IAM Identity Center Configuration accepts the Identity Center instance parameter required to enable trusted identity propagation. This configuration allows identity propagation between integrated services and the Identity Center instance.</p>
     # @!attribute identity_center_instance_arn
     #   <p>The ARN of the IAM Identity Center instance.</p>
     #   @return [String]
+    # @!attribute user_background_sessions_enabled
+    #   <p>Enables user background sessions for this application so Livy sessions can continue running after users log out of their interactive notebook or their Identity Center sessions expire.</p>
+    #   @return [Boolean]
     class IdentityCenterConfigurationInput < Struct.new(
       nil,
       :identity_center_instance_arn,
+      :user_background_sessions_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -553,10 +699,14 @@ module Aws::EMRServerless
     # @!attribute resolved_image_digest
     #   <p>The SHA256 digest of the image URI. This indicates which specific image the application is configured for. The image digest doesn't exist until an application has started.</p>
     #   @return [String]
+    # @!attribute application_level_digest_resolution
+    #   <p>Boolean value indicating if the digest resolution is application level or workload level. If true, a custom image URI is resolved at application start time and all workloads submitted will use that image digest. If false, the custom image URI is resolved at the workload submission time.</p>
+    #   @return [Boolean]
     class ImageConfiguration < Struct.new(
       nil,
       :image_uri,
       :resolved_image_digest,
+      :application_level_digest_resolution,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -566,9 +716,13 @@ module Aws::EMRServerless
     # @!attribute image_uri
     #   <p>The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.</p>
     #   @return [String]
+    # @!attribute application_level_digest_resolution
+    #   <p>Boolean value indicating if the digest resolution is application level or workload level. If true, a custom image URI is resolved at application start time and all workloads submitted will use that image digest. If false, the custom image URI is resolved at the workload submission time.</p>
+    #   @return [Boolean]
     class ImageConfigurationInput < Struct.new(
       nil,
       :image_uri,
+      :application_level_digest_resolution,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -604,10 +758,14 @@ module Aws::EMRServerless
     # @!attribute livy_endpoint_enabled
     #   <p>Enables an Apache Livy endpoint that you can connect to and run interactive jobs.</p>
     #   @return [Boolean]
+    # @!attribute session_enabled
+    #   <p>Enables interactive sessions on the application. When set to <code>true</code>, you can start interactive sessions using the <code>StartSession</code> operation.</p>
+    #   @return [Boolean]
     class InteractiveConfiguration < Struct.new(
       nil,
       :studio_enabled,
       :livy_endpoint_enabled,
+      :session_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -642,6 +800,18 @@ module Aws::EMRServerless
       class SparkSubmit < JobDriver; end
       class Hive < JobDriver; end
       class Unknown < JobDriver; end
+    end
+
+    # <p>The configuration object that enables job level cost allocation.</p>
+    # @!attribute enabled
+    #   <p>Enables job level cost allocation for the application.</p>
+    #   @return [Boolean]
+    class JobLevelCostAllocationConfiguration < Struct.new(
+      nil,
+      :enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a job run. A job run is a unit of work, such as a Spark JAR, Hive query, or SparkSQL query, that you submit to an Amazon EMR Serverless application.</p>
@@ -700,7 +870,7 @@ module Aws::EMRServerless
     #   <p>The job run total execution duration in seconds. This field is only available for job runs in a <code>COMPLETED</code>, <code>FAILED</code>, or <code>CANCELLED</code> state.</p>
     #   @return [Integer]
     # @!attribute execution_timeout_minutes
-    #   <p>Returns the job run timeout value from the <code>StartJobRun</code> call. If no timeout was specified, then it returns the default timeout of 720 minutes.</p>
+    #   <p>Returns the job run timeout value from the <code>StartJobRun</code> call. If you didn't specify a timeout, this value defaults to 720 minutes.</p> <p>For BATCH mode job runs, the maximum value is 10080 minutes (7 days) starting with Amazon EMR release 7.11.</p>
     #   @return [Integer]
     # @!attribute billed_resource_utilization
     #   <p>The aggregate vCPU, memory, and storage that Amazon Web Services has billed for the job run. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker. Note that billed resources do not include usage for idle pre-initialized workers.</p>
@@ -729,6 +899,12 @@ module Aws::EMRServerless
     # @!attribute queued_duration_milliseconds
     #   <p>The total time for a job in the QUEUED state in milliseconds.</p>
     #   @return [Integer]
+    # @!attribute image_configuration
+    #   <p>The applied image configuration.</p>
+    #   @return [Types::ImageConfiguration]
+    # @!attribute worker_type_specifications
+    #   <p>The specification applied to each worker type. Includes the JobRun-level ImageConfiguration when the applicationLevelDigestResolution is false for the application.</p>
+    #   @return [Hash<String, Types::WorkerTypeSpecification>]
     class JobRun < Struct.new(
       nil,
       :application_id,
@@ -759,6 +935,8 @@ module Aws::EMRServerless
       :started_at,
       :ended_at,
       :queued_duration_milliseconds,
+      :image_configuration,
+      :worker_type_specifications,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1047,6 +1225,52 @@ module Aws::EMRServerless
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute application_id
+    #   <p>The ID of the application to list sessions for.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of session results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of sessions to return in each page of results.</p>
+    #   @return [Integer]
+    # @!attribute states
+    #   <p>An optional filter for session states. Note that if this filter contains multiple states, the resulting list will be grouped by the state.</p>
+    #   @return [Array<String>]
+    # @!attribute created_at_after
+    #   <p>The lower bound of the option to filter by creation date and time.</p>
+    #   @return [Time]
+    # @!attribute created_at_before
+    #   <p>The upper bound of the option to filter by creation date and time.</p>
+    #   @return [Time]
+    class ListSessionsRequest < Struct.new(
+      nil,
+      :application_id,
+      :next_token,
+      :max_results,
+      :states,
+      :created_at_after,
+      :created_at_before,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute sessions
+    #   <p>The output lists information about the specified sessions.</p>
+    #   @return [Array<Types::SessionSummary>]
+    # @!attribute next_token
+    #   <p>The output displays the token for the next set of session results. This is required for pagination and is available as a response of the previous request.</p>
+    #   @return [String]
+    class ListSessionsResponse < Struct.new(
+      nil,
+      :sessions,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) that identifies the resource to list the tags for. Currently, the supported resources are Amazon EMR Serverless applications and job runs.</p>
     #   @return [String]
@@ -1252,6 +1476,167 @@ module Aws::EMRServerless
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about a session, including the session state, configuration, and timestamps.</p>
+    # @!attribute application_id
+    #   <p>The ID of the application that the session belongs to.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The ID of the session.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the session.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The optional name of the session.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the session.</p>
+    #   @return [String]
+    # @!attribute state_details
+    #   <p>Additional details about the current state of the session.</p>
+    #   @return [String]
+    # @!attribute release_label
+    #   <p>The Amazon EMR release label associated with the session.</p>
+    #   @return [String]
+    # @!attribute execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the execution role for the session.</p>
+    #   @return [String]
+    # @!attribute created_by
+    #   <p>The IAM principal that created the session.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the session was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the session was last updated.</p>
+    #   @return [Time]
+    # @!attribute started_at
+    #   <p>The date and time that the session moved to a running state.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The date and time that the session was terminated or failed.</p>
+    #   @return [Time]
+    # @!attribute idle_since
+    #   <p>The date and time that the session became idle.</p>
+    #   @return [Time]
+    # @!attribute configuration_overrides
+    #   <p>The configuration overrides for the session, including runtime configuration properties.</p>
+    #   @return [Types::SessionConfigurationOverrides]
+    # @!attribute network_configuration
+    #   <p>The network configuration for customer VPC connectivity for the session.</p>
+    #   @return [Types::NetworkConfiguration]
+    # @!attribute idle_timeout_minutes
+    #   <p>The idle timeout in minutes for the session. After the session remains idle for this duration, it is automatically terminated.</p>
+    #   @return [Integer]
+    # @!attribute tags
+    #   <p>The tags assigned to the session.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute total_resource_utilization
+    #   <p>The aggregate vCPU, memory, and storage resources used from the time the session starts to execute, until the time the session terminates, rounded up to the nearest second.</p>
+    #   @return [Types::TotalResourceUtilization]
+    # @!attribute billed_resource_utilization
+    #   <p>The aggregate vCPU, memory, and storage that Amazon Web Services has billed for the session. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker. Note that billed resources do not include usage for idle pre-initialized workers.</p>
+    #   @return [Types::ResourceUtilization]
+    # @!attribute total_execution_duration_seconds
+    #   <p>The total execution duration of the session in seconds.</p>
+    #   @return [Integer]
+    class Session < Struct.new(
+      nil,
+      :application_id,
+      :session_id,
+      :arn,
+      :name,
+      :state,
+      :state_details,
+      :release_label,
+      :execution_role_arn,
+      :created_by,
+      :created_at,
+      :updated_at,
+      :started_at,
+      :ended_at,
+      :idle_since,
+      :configuration_overrides,
+      :network_configuration,
+      :idle_timeout_minutes,
+      :tags,
+      :total_resource_utilization,
+      :billed_resource_utilization,
+      :total_execution_duration_seconds,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:idle_timeout_minutes] = nil unless options.key?(:idle_timeout_minutes)
+        super
+      end
+    end
+
+    # <p>The configuration overrides for a session.</p>
+    # @!attribute runtime_configuration
+    #   <p>The runtime configuration for the session. Contains Spark configuration properties specified at session creation time.</p>
+    #   @return [Array<Types::Configuration>]
+    class SessionConfigurationOverrides < Struct.new(
+      nil,
+      :runtime_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The summary of attributes associated with a session.</p>
+    # @!attribute application_id
+    #   <p>The ID of the application that the session belongs to.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The ID of the session.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the session.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The optional name of the session.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state of the session.</p>
+    #   @return [String]
+    # @!attribute state_details
+    #   <p>Additional details about the current state of the session.</p>
+    #   @return [String]
+    # @!attribute release_label
+    #   <p>The Amazon EMR release label associated with the session.</p>
+    #   @return [String]
+    # @!attribute execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the execution role for the session.</p>
+    #   @return [String]
+    # @!attribute created_by
+    #   <p>The IAM principal that created the session.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the session was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the session was last updated.</p>
+    #   @return [Time]
+    class SessionSummary < Struct.new(
+      nil,
+      :application_id,
+      :session_id,
+      :arn,
+      :name,
+      :state,
+      :state_details,
+      :release_label,
+      :execution_role_arn,
+      :created_by,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configurations for the Spark submit job driver.</p>
     # @!attribute entry_point
     #   <p>The entry point for the Spark submit job run.</p>
@@ -1312,7 +1697,7 @@ module Aws::EMRServerless
     #   <p>The tags assigned to the job run.</p>
     #   @return [Hash<String, String>]
     # @!attribute execution_timeout_minutes
-    #   <p>The maximum duration for the job run to run. If the job run runs beyond this duration, it will be automatically cancelled.</p>
+    #   <p>The maximum duration, in minutes, for the job run. If the job run exceeds this duration, Amazon EMR Serverless cancels it automatically.</p> <p>For BATCH mode job runs, the maximum value is 10080 minutes (7 days) starting with Amazon EMR release 7.11. Setting a value of 0 to disable the timeout is no longer supported for BATCH mode job runs.</p>
     #   @return [Integer]
     # @!attribute name
     #   <p>The optional job run name. This doesn't have to be unique.</p>
@@ -1361,6 +1746,60 @@ module Aws::EMRServerless
     end
 
     # @!attribute application_id
+    #   <p>The ID of the application on which to start the session.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client token, the server returns the successful response without performing the operation again.</p>
+    #   @return [String]
+    # @!attribute execution_role_arn
+    #   <p>The execution role ARN for the session. Amazon EMR Serverless uses this role to access Amazon Web Services resources on your behalf during session execution.</p>
+    #   @return [String]
+    # @!attribute configuration_overrides
+    #   <p>The configuration overrides for the session. Only runtime configuration overrides are supported.</p>
+    #   @return [Types::SessionConfigurationOverrides]
+    # @!attribute tags
+    #   <p>The tags to assign to the session.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute idle_timeout_minutes
+    #   <p>The idle timeout in minutes for the session. After the session remains idle for this duration, Amazon EMR Serverless automatically terminates it.</p>
+    #   @return [Integer]
+    # @!attribute name
+    #   <p>The optional name for the session.</p>
+    #   @return [String]
+    class StartSessionRequest < Struct.new(
+      nil,
+      :application_id,
+      :client_token,
+      :execution_role_arn,
+      :configuration_overrides,
+      :tags,
+      :idle_timeout_minutes,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_id
+    #   <p>The output contains the application ID on which the session was started.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The output contains the ID of the session.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The output contains the ARN of the session.</p>
+    #   @return [String]
+    class StartSessionResponse < Struct.new(
+      nil,
+      :application_id,
+      :session_id,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_id
     #   <p>The ID of the application to stop.</p>
     #   @return [String]
     class StopApplicationInput < Struct.new(
@@ -1395,6 +1834,36 @@ module Aws::EMRServerless
 
     class TagResourceOutput < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_id
+    #   <p>The ID of the application that the session belongs to.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The ID of the session to terminate.</p>
+    #   @return [String]
+    class TerminateSessionRequest < Struct.new(
+      nil,
+      :application_id,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute application_id
+    #   <p>The output contains the application ID on which the session was terminated.</p>
+    #   @return [String]
+    # @!attribute session_id
+    #   <p>The output contains the ID of the terminated session.</p>
+    #   @return [String]
+    class TerminateSessionResponse < Struct.new(
+      nil,
+      :application_id,
+      :session_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1484,12 +1953,18 @@ module Aws::EMRServerless
     # @!attribute monitoring_configuration
     #   <p>The configuration setting for monitoring.</p>
     #   @return [Types::MonitoringConfiguration]
+    # @!attribute disk_encryption_configuration
+    #   <p>The configuration object that allows encrypting local disks.</p>
+    #   @return [Types::DiskEncryptionConfiguration]
     # @!attribute scheduler_configuration
     #   <p>The scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above.</p>
     #   @return [Types::SchedulerConfiguration]
     # @!attribute identity_center_configuration
     #   <p>Specifies the IAM Identity Center configuration used to enable or disable trusted identity propagation. When provided, this configuration determines how the application interacts with IAM Identity Center for user authentication and access control.</p>
     #   @return [Types::IdentityCenterConfigurationInput]
+    # @!attribute job_level_cost_allocation_configuration
+    #   <p>The configuration object that enables job level cost allocation.</p>
+    #   @return [Types::JobLevelCostAllocationConfiguration]
     class UpdateApplicationInput < Struct.new(
       nil,
       :application_id,
@@ -1506,8 +1981,10 @@ module Aws::EMRServerless
       :release_label,
       :runtime_configuration,
       :monitoring_configuration,
+      :disk_encryption_configuration,
       :scheduler_configuration,
       :identity_center_configuration,
+      :job_level_cost_allocation_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

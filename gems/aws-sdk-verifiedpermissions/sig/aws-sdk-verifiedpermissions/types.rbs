@@ -25,6 +25,11 @@ module Aws::VerifiedPermissions
       attr_accessor action_id: String?
     end
 
+    module AliasState
+      ACTIVE: String
+      PENDING_DELETION: String
+    end
+
     class AttributeValue
       include Smithy::Schema::Union
 
@@ -80,6 +85,7 @@ module Aws::VerifiedPermissions
     module BatchGetPolicyErrorCode
       POLICY_STORE_NOT_FOUND: String
       POLICY_NOT_FOUND: String
+      POLICY_STORE_ALIAS_NOT_FOUND: String
     end
 
     class BatchGetPolicyErrorItem
@@ -146,6 +152,7 @@ module Aws::VerifiedPermissions
         ?definition: Types::PolicyDefinitionDetail,
         ?created_date: Time,
         ?last_updated_date: Time,
+        ?name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -155,6 +162,7 @@ module Aws::VerifiedPermissions
       attr_accessor definition: Types::PolicyDefinitionDetail?
       attr_accessor created_date: Time?
       attr_accessor last_updated_date: Time?
+      attr_accessor name: String?
     end
 
     class BatchIsAuthorizedInput
@@ -279,6 +287,58 @@ module Aws::VerifiedPermissions
       attr_accessor decision: String?
       attr_accessor determining_policies: Array[Types::DeterminingPolicyItem]?
       attr_accessor errors: Array[Types::EvaluationErrorItem]?
+    end
+
+    class CedarTagValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?boolean: bool,
+        ?entity_identifier: Types::EntityIdentifier,
+        ?long: Integer,
+        ?string: String,
+        ?set: Array[Types::CedarTagValue],
+        ?record: Hash[String, Types::CedarTagValue],
+        ?ipaddr: String,
+        ?decimal: String,
+        ?datetime: String,
+        ?duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor boolean: bool?
+      attr_accessor entity_identifier: Types::EntityIdentifier?
+      attr_accessor long: Integer?
+      attr_accessor string: String?
+      attr_accessor set: Array[Types::CedarTagValue]?
+      attr_accessor record: Hash[String, Types::CedarTagValue]?
+      attr_accessor ipaddr: String?
+      attr_accessor decimal: String?
+      attr_accessor datetime: String?
+      attr_accessor duration: String?
+
+      class Boolean < CedarTagValue
+      end
+      class EntityIdentifier < CedarTagValue
+      end
+      class Long < CedarTagValue
+      end
+      class String < CedarTagValue
+      end
+      class Set < CedarTagValue
+      end
+      class Record < CedarTagValue
+      end
+      class Ipaddr < CedarTagValue
+      end
+      class Decimal < CedarTagValue
+      end
+      class Datetime < CedarTagValue
+      end
+      class Duration < CedarTagValue
+      end
+      class Unknown < CedarTagValue
+      end
     end
 
     module CedarVersion
@@ -502,12 +562,14 @@ module Aws::VerifiedPermissions
         ?client_token: String,
         ?policy_store_id: String,
         ?definition: Types::PolicyDefinition,
+        ?name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor client_token: String?
       attr_accessor policy_store_id: String?
       attr_accessor definition: Types::PolicyDefinition?
+      attr_accessor name: String?
     end
 
     class CreatePolicyOutput
@@ -537,6 +599,36 @@ module Aws::VerifiedPermissions
       attr_accessor effect: String?
     end
 
+    class CreatePolicyStoreAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?policy_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor policy_store_id: String?
+    end
+
+    class CreatePolicyStoreAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?policy_store_id: String,
+        ?alias_arn: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor policy_store_id: String?
+      attr_accessor alias_arn: String?
+      attr_accessor created_at: Time?
+    end
+
     class CreatePolicyStoreInput
       include Smithy::Schema::Structure
 
@@ -545,6 +637,7 @@ module Aws::VerifiedPermissions
         ?validation_settings: Types::ValidationSettings,
         ?description: String,
         ?deletion_protection: String,
+        ?encryption_settings: Types::EncryptionSettings,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -553,6 +646,7 @@ module Aws::VerifiedPermissions
       attr_accessor validation_settings: Types::ValidationSettings?
       attr_accessor description: String?
       attr_accessor deletion_protection: String?
+      attr_accessor encryption_settings: Types::EncryptionSettings?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -581,6 +675,7 @@ module Aws::VerifiedPermissions
         ?policy_store_id: String,
         ?description: String,
         ?statement: String,
+        ?name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -588,6 +683,7 @@ module Aws::VerifiedPermissions
       attr_accessor policy_store_id: String?
       attr_accessor description: String?
       attr_accessor statement: String?
+      attr_accessor name: String?
     end
 
     class CreatePolicyTemplateOutput
@@ -656,6 +752,28 @@ module Aws::VerifiedPermissions
 
     end
 
+    class DeletePolicyStoreAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?deletion_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor deletion_mode: String?
+    end
+
+    class DeletePolicyStoreAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeletePolicyStoreInput
       include Smithy::Schema::Structure
 
@@ -698,6 +816,11 @@ module Aws::VerifiedPermissions
 
     end
 
+    module DeletionMode
+      SOFT_DELETE: String
+      HARD_DELETE: String
+    end
+
     module DeletionProtection
       ENABLED: String
       DISABLED: String
@@ -712,6 +835,46 @@ module Aws::VerifiedPermissions
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor policy_id: String?
+    end
+
+    class EncryptionSettings
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?kms_encryption_settings: Types::KmsEncryptionSettings,
+        ?default: Smithy::Schema::EmptyStructure,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_encryption_settings: Types::KmsEncryptionSettings?
+      attr_accessor default: Smithy::Schema::EmptyStructure?
+
+      class KmsEncryptionSettings < EncryptionSettings
+      end
+      class Default < EncryptionSettings
+      end
+      class Unknown < EncryptionSettings
+      end
+    end
+
+    class EncryptionState
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?kms_encryption_state: Types::KmsEncryptionState,
+        ?default: Smithy::Schema::EmptyStructure,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_encryption_state: Types::KmsEncryptionState?
+      attr_accessor default: Smithy::Schema::EmptyStructure?
+
+      class KmsEncryptionState < EncryptionState
+      end
+      class Default < EncryptionState
+      end
+      class Unknown < EncryptionState
+      end
     end
 
     class EntitiesDefinition
@@ -754,12 +917,14 @@ module Aws::VerifiedPermissions
         ?identifier: Types::EntityIdentifier,
         ?attributes: Hash[String, Types::AttributeValue],
         ?parents: Array[Types::EntityIdentifier],
+        ?tags: Hash[String, Types::CedarTagValue],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identifier: Types::EntityIdentifier?
       attr_accessor attributes: Hash[String, Types::AttributeValue]?
       attr_accessor parents: Array[Types::EntityIdentifier]?
+      attr_accessor tags: Hash[String, Types::CedarTagValue]?
     end
 
     class EntityReference
@@ -856,6 +1021,7 @@ module Aws::VerifiedPermissions
         ?created_date: Time,
         ?last_updated_date: Time,
         ?effect: String,
+        ?name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -869,6 +1035,37 @@ module Aws::VerifiedPermissions
       attr_accessor created_date: Time?
       attr_accessor last_updated_date: Time?
       attr_accessor effect: String?
+      attr_accessor name: String?
+    end
+
+    class GetPolicyStoreAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+    end
+
+    class GetPolicyStoreAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?policy_store_id: String,
+        ?alias_arn: String,
+        ?created_at: Time,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor policy_store_id: String?
+      attr_accessor alias_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor state: String?
     end
 
     class GetPolicyStoreInput
@@ -895,6 +1092,7 @@ module Aws::VerifiedPermissions
         ?last_updated_date: Time,
         ?description: String,
         ?deletion_protection: String,
+        ?encryption_state: Types::EncryptionState,
         ?cedar_version: String,
         ?tags: Hash[String, String],
       ) -> void
@@ -907,6 +1105,7 @@ module Aws::VerifiedPermissions
       attr_accessor last_updated_date: Time?
       attr_accessor description: String?
       attr_accessor deletion_protection: String?
+      attr_accessor encryption_state: Types::EncryptionState?
       attr_accessor cedar_version: String?
       attr_accessor tags: Hash[String, String]?
     end
@@ -934,6 +1133,7 @@ module Aws::VerifiedPermissions
         ?statement: String,
         ?created_date: Time,
         ?last_updated_date: Time,
+        ?name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -943,6 +1143,7 @@ module Aws::VerifiedPermissions
       attr_accessor statement: String?
       attr_accessor created_date: Time?
       attr_accessor last_updated_date: Time?
+      attr_accessor name: String?
     end
 
     class GetSchemaInput
@@ -1141,6 +1342,32 @@ module Aws::VerifiedPermissions
       attr_accessor principal: Types::EntityIdentifier?
     end
 
+    class KmsEncryptionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor encryption_context: Hash[String, String]?
+    end
+
+    class KmsEncryptionState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor encryption_context: Hash[String, String]?
+    end
+
     class ListIdentitySourcesInput
       include Smithy::Schema::Structure
 
@@ -1199,6 +1426,34 @@ module Aws::VerifiedPermissions
 
       attr_accessor next_token: String?
       attr_accessor policies: Array[Types::PolicyItem]?
+    end
+
+    class ListPolicyStoreAliasesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: Types::PolicyStoreAliasFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::PolicyStoreAliasFilter?
+    end
+
+    class ListPolicyStoreAliasesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?policy_store_aliases: Array[Types::PolicyStoreAliasItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor policy_store_aliases: Array[Types::PolicyStoreAliasItem]?
     end
 
     class ListPolicyStoresInput
@@ -1605,6 +1860,7 @@ module Aws::VerifiedPermissions
         ?created_date: Time,
         ?last_updated_date: Time,
         ?effect: String,
+        ?name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1618,6 +1874,37 @@ module Aws::VerifiedPermissions
       attr_accessor created_date: Time?
       attr_accessor last_updated_date: Time?
       attr_accessor effect: String?
+      attr_accessor name: String?
+    end
+
+    class PolicyStoreAliasFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_store_id: String?
+    end
+
+    class PolicyStoreAliasItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?policy_store_id: String,
+        ?alias_arn: String,
+        ?created_at: Time,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor policy_store_id: String?
+      attr_accessor alias_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor state: String?
     end
 
     class PolicyStoreItem
@@ -1648,6 +1935,7 @@ module Aws::VerifiedPermissions
         ?description: String,
         ?created_date: Time,
         ?last_updated_date: Time,
+        ?name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1656,6 +1944,7 @@ module Aws::VerifiedPermissions
       attr_accessor description: String?
       attr_accessor created_date: Time?
       attr_accessor last_updated_date: Time?
+      attr_accessor name: String?
     end
 
     module PolicyType
@@ -1727,6 +2016,7 @@ module Aws::VerifiedPermissions
       POLICY: String
       POLICY_TEMPLATE: String
       SCHEMA: String
+      POLICY_STORE_ALIAS: String
     end
 
     class SchemaDefinition
@@ -2097,12 +2387,14 @@ module Aws::VerifiedPermissions
         ?policy_store_id: String,
         ?policy_id: String,
         ?definition: Types::UpdatePolicyDefinition,
+        ?name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor policy_store_id: String?
       attr_accessor policy_id: String?
       attr_accessor definition: Types::UpdatePolicyDefinition?
+      attr_accessor name: String?
     end
 
     class UpdatePolicyOutput
@@ -2174,6 +2466,7 @@ module Aws::VerifiedPermissions
         ?policy_template_id: String,
         ?description: String,
         ?statement: String,
+        ?name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2181,6 +2474,7 @@ module Aws::VerifiedPermissions
       attr_accessor policy_template_id: String?
       attr_accessor description: String?
       attr_accessor statement: String?
+      attr_accessor name: String?
     end
 
     class UpdatePolicyTemplateOutput

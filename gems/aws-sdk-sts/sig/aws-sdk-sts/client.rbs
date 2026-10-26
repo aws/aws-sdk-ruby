@@ -51,6 +51,8 @@ module Aws::STS
       def assumed_role_user: () -> Types::AssumedRoleUser?
       def packed_policy_size: () -> Integer?
       def source_identity: () -> String?
+      def session_token_utilization: () -> Integer?
+      def session_token_size: () -> Integer?
     end
     def assume_role: (
       ?role_arn: String,
@@ -78,7 +80,8 @@ module Aws::STS
           provider_arn: String,
           context_assertion: String
         }
-      ]
+      ],
+      ?minimum_session_token_size: Integer
     ) -> _AssumeRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeRoleResponse
 
     interface _AssumeRoleWithSAMLResponse
@@ -92,6 +95,8 @@ module Aws::STS
       def audience: () -> String?
       def name_qualifier: () -> String?
       def source_identity: () -> String?
+      def session_token_utilization: () -> Integer?
+      def session_token_size: () -> Integer?
     end
     def assume_role_with_saml: (
       ?role_arn: String,
@@ -103,7 +108,8 @@ module Aws::STS
         }
       ],
       ?policy: String,
-      ?duration_seconds: Integer
+      ?duration_seconds: Integer,
+      ?minimum_session_token_size: Integer
     ) -> _AssumeRoleWithSAMLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeRoleWithSAMLResponse
 
     interface _AssumeRoleWithWebIdentityResponse
@@ -115,6 +121,8 @@ module Aws::STS
       def provider: () -> String?
       def audience: () -> String?
       def source_identity: () -> String?
+      def session_token_utilization: () -> Integer?
+      def session_token_size: () -> Integer?
     end
     def assume_role_with_web_identity: (
       ?role_arn: String,
@@ -127,20 +135,24 @@ module Aws::STS
         }
       ],
       ?policy: String,
-      ?duration_seconds: Integer
+      ?duration_seconds: Integer,
+      ?minimum_session_token_size: Integer
     ) -> _AssumeRoleWithWebIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeRoleWithWebIdentityResponse
 
     interface _AssumeRootResponse
       include Smithy::Client::_Response[Types::AssumeRootResponse]
       def credentials: () -> Types::Credentials?
       def source_identity: () -> String?
+      def session_token_utilization: () -> Integer?
+      def session_token_size: () -> Integer?
     end
     def assume_root: (
       ?target_principal: String,
       ?task_policy_arn: {
         arn: String
       },
-      ?duration_seconds: Integer
+      ?duration_seconds: Integer,
+      ?minimum_session_token_size: Integer
     ) -> _AssumeRootResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeRootResponse
 
     interface _DecodeAuthorizationMessageResponse
@@ -167,11 +179,23 @@ module Aws::STS
     end
     def get_caller_identity: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCallerIdentityResponse
 
+    interface _GetDelegatedAccessTokenResponse
+      include Smithy::Client::_Response[Types::GetDelegatedAccessTokenResponse]
+      def credentials: () -> Types::Credentials?
+      def packed_policy_size: () -> Integer?
+      def assumed_principal: () -> String?
+    end
+    def get_delegated_access_token: (
+      ?trade_in_token: String
+    ) -> _GetDelegatedAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDelegatedAccessTokenResponse
+
     interface _GetFederationTokenResponse
       include Smithy::Client::_Response[Types::GetFederationTokenResponse]
       def credentials: () -> Types::Credentials?
       def federated_user: () -> Types::FederatedUser?
       def packed_policy_size: () -> Integer?
+      def session_token_utilization: () -> Integer?
+      def session_token_size: () -> Integer?
     end
     def get_federation_token: (
       ?name: String,
@@ -187,17 +211,38 @@ module Aws::STS
           key: String,
           value: String
         }
-      ]
+      ],
+      ?minimum_session_token_size: Integer
     ) -> _GetFederationTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFederationTokenResponse
 
     interface _GetSessionTokenResponse
       include Smithy::Client::_Response[Types::GetSessionTokenResponse]
       def credentials: () -> Types::Credentials?
+      def session_token_utilization: () -> Integer?
+      def session_token_size: () -> Integer?
     end
     def get_session_token: (
       ?duration_seconds: Integer,
       ?serial_number: String,
-      ?token_code: String
+      ?token_code: String,
+      ?minimum_session_token_size: Integer
     ) -> _GetSessionTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionTokenResponse
+
+    interface _GetWebIdentityTokenResponse
+      include Smithy::Client::_Response[Types::GetWebIdentityTokenResponse]
+      def web_identity_token: () -> String?
+      def expiration: () -> Time?
+    end
+    def get_web_identity_token: (
+      ?audience: Array[String],
+      ?duration_seconds: Integer,
+      ?signing_algorithm: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _GetWebIdentityTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebIdentityTokenResponse
   end
 end

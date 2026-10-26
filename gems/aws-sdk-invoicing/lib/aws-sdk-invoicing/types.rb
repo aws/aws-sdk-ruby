@@ -83,6 +83,42 @@ module Aws::Invoicing
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The request could not be completed due to a conflict with the current state of the resource. This exception occurs when a concurrent modification is detected during an update operation, or when attempting to create a resource that already exists.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute resource_id
+    #   <p>The identifier of the resource that caused the conflict.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of resource that caused the conflict.</p>
+    #   @return [String]
+    class ConflictException < Struct.new(
+      nil,
+      :message,
+      :resource_id,
+      :resource_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents contact information for a person or role associated with the procurement portal preference.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute name
+    #   <p>The name of the contact person or role.</p>
+    #   @return [String]
+    # @!attribute email
+    #   <p>The email address of the contact person or role.</p>
+    #   @return [String]
+    class Contact < Struct.new(
+      nil,
+      :name,
+      :email,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p> The unique name of the invoice unit that is shown on the generated invoice. This can't be changed once it is set. To change this name, you must delete the invoice unit recreate. </p>
     #   @return [String]
@@ -101,6 +137,9 @@ module Aws::Invoicing
     # @!attribute resource_tags
     #   <p> The tag structure that contains a tag key and value. </p>
     #   @return [Array<Types::ResourceTag>]
+    # @!attribute client_token
+    #   <p> A unique, case-sensitive identifier that you provide to ensure idempotency of the request. </p>
+    #   @return [String]
     class CreateInvoiceUnitRequest < Struct.new(
       nil,
       :name,
@@ -109,6 +148,7 @@ module Aws::Invoicing
       :tax_inheritance_disabled,
       :rule,
       :resource_tags,
+      :client_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -120,6 +160,92 @@ module Aws::Invoicing
     class CreateInvoiceUnitResponse < Struct.new(
       nil,
       :invoice_unit_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_name
+    #   <p>The name of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute buyer_domain
+    #   <p>The domain identifier for the buyer in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute buyer_identifier
+    #   <p>The unique identifier for the buyer in the procurement portal. </p>
+    #   @return [String]
+    # @!attribute supplier_domain
+    #   <p>The domain identifier for the supplier in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute supplier_identifier
+    #   <p>The unique identifier for the supplier in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute selector
+    #   <p>Specifies criteria for selecting which invoices should be processed using a particular procurement portal preference.</p>
+    #   @return [Types::ProcurementPortalPreferenceSelector]
+    # @!attribute procurement_portal_shared_secret
+    #   <p>The shared secret or authentication credential used to establish secure communication with the procurement portal. This value must be encrypted at rest.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_instance_endpoint
+    #   <p>The endpoint URL where e-invoices will be delivered to the procurement portal. Must be a valid HTTPS URL.</p>
+    #   @return [String]
+    # @!attribute test_env_preference
+    #   <p>Configuration settings for the test environment of the procurement portal. Includes test credentials and endpoints that are used for validation before production deployment.</p>
+    #   @return [Types::TestEnvPreferenceInput]
+    # @!attribute einvoice_delivery_enabled
+    #   <p>Indicates whether e-invoice delivery is enabled for this procurement portal preference. Set to true to enable e-invoice delivery, false to disable.</p>
+    #   @return [Boolean]
+    # @!attribute einvoice_delivery_preference
+    #   <p>Specifies the e-invoice delivery configuration including document types, attachment types, and customization settings for the portal.</p>
+    #   @return [Types::EinvoiceDeliveryPreference]
+    # @!attribute purchase_order_retrieval_enabled
+    #   <p>Indicates whether purchase order retrieval is enabled for this procurement portal preference. Set to true to enable PO retrieval, false to disable.</p>
+    #   @return [Boolean]
+    # @!attribute marketplace_punch_out_enabled
+    #   Defaults to false if not provided.
+    #   @return [Boolean]
+    # @!attribute marketplace_punch_out_preference
+    #   Required for Coupa when MarketplacePunchOutEnabled is true.
+    #   @return [Types::MarketplacePunchOutPreference]
+    # @!attribute contacts
+    #   <p>List of contact information for portal administrators and technical contacts responsible for the e-invoice integration.</p>
+    #   @return [Array<Types::Contact>]
+    # @!attribute resource_tags
+    #   <p>The tags to apply to this procurement portal preference resource. Each tag consists of a key and an optional value.</p>
+    #   @return [Array<Types::ResourceTag>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>
+    #   @return [String]
+    class CreateProcurementPortalPreferenceRequest < Struct.new(
+      nil,
+      :procurement_portal_name,
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :selector,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint,
+      :test_env_preference,
+      :einvoice_delivery_enabled,
+      :einvoice_delivery_preference,
+      :purchase_order_retrieval_enabled,
+      :marketplace_punch_out_enabled,
+      :marketplace_punch_out_preference,
+      :contacts,
+      :resource_tags,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the created procurement portal preference.</p>
+    #   @return [String]
+    class CreateProcurementPortalPreferenceResponse < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -164,9 +290,13 @@ module Aws::Invoicing
     # @!attribute invoice_unit_arn
     #   <p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>
     #   @return [String]
+    # @!attribute client_token
+    #   <p> A unique, case-sensitive identifier that you provide to ensure idempotency of the request. </p>
+    #   @return [String]
     class DeleteInvoiceUnitRequest < Struct.new(
       nil,
       :invoice_unit_arn,
+      :client_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -178,6 +308,32 @@ module Aws::Invoicing
     class DeleteInvoiceUnitResponse < Struct.new(
       nil,
       :invoice_unit_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference to delete.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>
+    #   @return [String]
+    class DeleteProcurementPortalPreferenceRequest < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the deleted procurement portal preference.</p>
+    #   @return [String]
+    class DeleteProcurementPortalPreferenceResponse < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -219,13 +375,61 @@ module Aws::Invoicing
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies the preferences for e-invoice delivery, including document types, attachment types, and customization settings.</p>
+    # @!attribute einvoice_delivery_document_types
+    #   <p>The types of e-invoice documents to be delivered.</p>
+    #   @return [Array<String>]
+    # @!attribute einvoice_delivery_attachment_types
+    #   <p>The types of attachments to include with the e-invoice delivery.</p>
+    #   @return [Array<String>]
+    # @!attribute protocol
+    #   <p>The communication protocol to use for e-invoice delivery.</p>
+    #   @return [String]
+    # @!attribute purchase_order_data_sources
+    #   <p>The sources of purchase order data to use for e-invoice generation and delivery.</p>
+    #   @return [Array<Types::PurchaseOrderDataSource>]
+    # @!attribute connection_testing_method
+    #   <p>The method to use for testing the connection to the procurement portal.</p>
+    #   @return [String]
+    # @!attribute einvoice_delivery_activation_date
+    #   <p>The date when e-invoice delivery should be activated for this preference.</p>
+    #   @return [Time]
+    class EinvoiceDeliveryPreference < Struct.new(
+      nil,
+      :einvoice_delivery_document_types,
+      :einvoice_delivery_attachment_types,
+      :protocol,
+      :purchase_order_data_sources,
+      :connection_testing_method,
+      :einvoice_delivery_activation_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The organization name providing Amazon Web Services services.</p>
     # @!attribute invoicing_entity
     #   <p>The name of the entity that issues the Amazon Web Services invoice.</p>
     #   @return [String]
+    # @!attribute billing_entity
+    #   <p>Helps you identify whether your invoices are for Amazon Web Services Marketplace or for purchases of other Amazon Web Services services.</p>
+    #   @return [String]
     class Entity < Struct.new(
       nil,
       :invoicing_entity,
+      :billing_entity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the default feature configuration settings for a procurement portal.</p>
+    # @!attribute invoice_configuration
+    #   <p>The invoice configuration settings for the procurement portal.</p>
+    #   @return [Types::InvoiceConfiguration]
+    class FeatureConfigurations < Struct.new(
+      nil,
+      :invoice_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -277,11 +481,37 @@ module Aws::Invoicing
     # @!attribute accounts
     #   <p> You can specify a list of Amazon Web Services account IDs inside filters to return invoice units that match only the specified accounts. If multiple accounts are provided, the result is an <code>OR</code> condition (match any) of the specified accounts. The specified account IDs are matched with either the receiver or the linked accounts in the rules. </p>
     #   @return [Array<String>]
+    # @!attribute bill_source_accounts
+    #   <p> A list of Amazon Web Services account IDs used to filter invoice units. These are payer accounts from other Organizations that have delegated their billing responsibility to the receiver account through the billing transfer feature. </p>
+    #   @return [Array<String>]
     class Filters < Struct.new(
       nil,
       :names,
       :invoice_receivers,
       :accounts,
+      :bill_source_accounts,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute invoice_id
+    #   <p> Your unique invoice ID. </p>
+    #   @return [String]
+    class GetInvoicePDFRequest < Struct.new(
+      nil,
+      :invoice_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute invoice_pdf
+    #   <p> The invoice document and supplemental documents associated with the invoice. </p>
+    #   @return [Types::InvoicePDF]
+    class GetInvoicePDFResponse < Struct.new(
+      nil,
+      :invoice_pdf,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -342,6 +572,28 @@ module Aws::Invoicing
       end
     end
 
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference to retrieve.</p>
+    #   @return [String]
+    class GetProcurementPortalPreferenceRequest < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference
+    #   <p>The detailed configuration of the requested procurement portal preference.</p>
+    #   @return [Types::ProcurementPortalPreference]
+    class GetProcurementPortalPreferenceResponse < Struct.new(
+      nil,
+      :procurement_portal_preference,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The processing request failed because of an unknown error, exception, or failure. </p>
     # @!attribute retry_after_seconds
     #   <p>The processing request failed because of an unknown error, exception, or failure.</p>
@@ -352,6 +604,22 @@ module Aws::Invoicing
       nil,
       :retry_after_seconds,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the supported document types and attachment types for invoice delivery to a procurement portal.</p>
+    # @!attribute document_types
+    #   <p>The e-invoice document types supported by the procurement portal.</p>
+    #   @return [Array<String>]
+    # @!attribute attachment_types
+    #   <p>The attachment types supported by the procurement portal for e-invoice delivery.</p>
+    #   @return [Array<String>]
+    class InvoiceConfiguration < Struct.new(
+      nil,
+      :document_types,
+      :attachment_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -380,6 +648,30 @@ module Aws::Invoicing
       :currency_code,
       :amount_breakdown,
       :currency_exchange_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Invoice document data. </p>
+    # @!attribute invoice_id
+    #   <p> Your unique invoice ID. </p>
+    #   @return [String]
+    # @!attribute document_url
+    #   <p>The pre-signed URL to download the invoice document. </p>
+    #   @return [String]
+    # @!attribute document_url_expiration_date
+    #   <p>The pre-signed URL expiration date of the invoice document.</p>
+    #   @return [Time]
+    # @!attribute supplemental_documents
+    #   <p>List of supplemental documents associated with the invoice.</p>
+    #   @return [Array<Types::SupplementalDocument>]
+    class InvoicePDF < Struct.new(
+      nil,
+      :invoice_id,
+      :document_url,
+      :document_url_expiration_date,
+      :supplemental_documents,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -427,11 +719,15 @@ module Aws::Invoicing
     # @!attribute invoicing_entity
     #   <p>The name of the entity that issues the Amazon Web Services invoice.</p>
     #   @return [String]
+    # @!attribute receiver_role
+    #   <p>The role of the invoice receiver to filter by.</p> <note> <p>When <code>ReceiverRole</code> is specified:</p> <ul> <li> <p>Data is available starting <code>2025-06-01</code>. Queries for periods before <code>2025-06-01</code> return a validation error.</p> </li> <li> <p> <code>TimeInterval</code> supports a time interval of up to 5 years. Without <code>ReceiverRole</code>, <code>TimeInterval</code> is limited to one month.</p> </li> </ul> </note>
+    #   @return [String]
     class InvoiceSummariesFilter < Struct.new(
       nil,
       :time_interval,
       :billing_period,
       :invoicing_entity,
+      :receiver_role,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -466,20 +762,44 @@ module Aws::Invoicing
     # @!attribute due_date
     #   <p> The invoice due date. </p>
     #   @return [Time]
+    # @!attribute bill_source_accounts
+    #   <p> The list of Amazon Web Services account IDs that are the bill source of the invoice. Currently, only a single bill source account is returned.</p>
+    #   @return [Array<String>]
+    # @!attribute bill_source_accounts_total_count
+    #   <p> The total number of accounts that are the bill source of the invoice. </p>
+    #   @return [Integer]
+    # @!attribute receiver_role
+    #   <p>The role of the invoice receiver.</p>
+    #   @return [String]
     # @!attribute entity
     #   <p>The organization name providing Amazon Web Services services.</p>
     #   @return [Types::Entity]
     # @!attribute billing_period
     #   <p> The billing period of the invoice-related document. </p>
     #   @return [Types::BillingPeriod]
+    # @!attribute invoice_frequency
+    #   <p> The frequency of the invoice. </p>
+    #   @return [String]
+    # @!attribute bill_type
+    #   <p> The type of the bill. </p>
+    #   @return [String]
     # @!attribute invoice_type
     #   <p> The type of invoice. </p>
+    #   @return [String]
+    # @!attribute commercial_invoice_id
+    #   <p> The commercial invoice ID. This is only applicable for tax invoices and identifies the associated commercial invoice. </p>
     #   @return [String]
     # @!attribute original_invoice_id
     #   <p>The initial or original invoice ID. </p>
     #   @return [String]
     # @!attribute purchase_order_number
     #   <p> The purchase order number associated to the invoice.</p>
+    #   @return [String]
+    # @!attribute einvoice_delivery_status
+    #   <p> The e-invoice delivery status. </p>
+    #   @return [String]
+    # @!attribute tax_authority_status
+    #   <p> The current status of an invoice as reported to the tax authority. This captures scenarios where an invoice may be cancelled after issuance. </p>
     #   @return [String]
     # @!attribute base_currency_amount
     #   <p> The summary with the product and service currency. </p>
@@ -496,11 +816,19 @@ module Aws::Invoicing
       :invoice_id,
       :issued_date,
       :due_date,
+      :bill_source_accounts,
+      :bill_source_accounts_total_count,
+      :receiver_role,
       :entity,
       :billing_period,
+      :invoice_frequency,
+      :bill_type,
       :invoice_type,
+      :commercial_invoice_id,
       :original_invoice_id,
       :purchase_order_number,
+      :einvoice_delivery_status,
+      :tax_authority_status,
       :base_currency_amount,
       :tax_currency_amount,
       :payment_currency_amount,
@@ -554,9 +882,13 @@ module Aws::Invoicing
     # @!attribute linked_accounts
     #   <p>The list of <code>LINKED_ACCOUNT</code> IDs where charges are included within the invoice unit. </p>
     #   @return [Array<String>]
+    # @!attribute bill_source_accounts
+    #   <p> A list of Amazon Web Services account IDs that have delegated their billing responsibility to the receiver account through transfer billing. Unlike linked accounts, these bill source accounts can be payer accounts from other organizations that have authorized billing transfer to this account. </p>
+    #   @return [Array<String>]
     class InvoiceUnitRule < Struct.new(
       nil,
       :linked_accounts,
+      :bill_source_accounts,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -569,7 +901,7 @@ module Aws::Invoicing
     #   <p>Filters you can use to customize your invoice summary.</p>
     #   @return [Types::InvoiceSummariesFilter]
     # @!attribute next_token
-    #   <p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>
+    #   <p>The token for the next set of results. (You received this token from a previous call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of invoice summaries a paginated response can contain.</p>
@@ -589,7 +921,7 @@ module Aws::Invoicing
     #   <p>List of key (summary level) invoice details without line item details.</p>
     #   @return [Array<Types::InvoiceSummary>]
     # @!attribute next_token
-    #   <p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>
+    #   <p>The token to use to retrieve the next set of results, or null if there are no more results.</p>
     #   @return [String]
     class ListInvoiceSummariesResponse < Struct.new(
       nil,
@@ -638,6 +970,100 @@ module Aws::Invoicing
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute next_token
+    #   <p>The token for the next set of results. (You received this token from a previous call.)</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.</p>
+    #   @return [Integer]
+    class ListProcurementPortalPreferencesRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preferences
+    #   <p>The list of procurement portal preferences associated with the Amazon Web Services account.</p>
+    #   @return [Array<Types::ProcurementPortalPreferenceSummary>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListProcurementPortalPreferencesResponse < Struct.new(
+      nil,
+      :procurement_portal_preferences,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute portal_identifier
+    #   <p>The unique identifier of the procurement portal for which to list suppliers. Use the <code>PortalIdentifier</code> value returned by <code>ListProcurementPortals</code>.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of results. You received this token from a previous call.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. Default is 100.</p>
+    #   @return [Integer]
+    class ListProcurementPortalSuppliersRequest < Struct.new(
+      nil,
+      :portal_identifier,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_suppliers
+    #   <p>The list of suppliers configured for the specified procurement portal.</p>
+    #   @return [Array<Types::ProcurementPortalSupplier>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListProcurementPortalSuppliersResponse < Struct.new(
+      nil,
+      :procurement_portal_suppliers,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token for the next set of results. You received this token from a previous call.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. Default is 100.</p>
+    #   @return [Integer]
+    class ListProcurementPortalsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portals
+    #   <p>The list of procurement portals available for configuration.</p>
+    #   @return [Array<Types::ProcurementPortal>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListProcurementPortalsResponse < Struct.new(
+      nil,
+      :procurement_portals,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of tags to list. </p>
     #   @return [String]
@@ -655,6 +1081,352 @@ module Aws::Invoicing
     class ListTagsForResourceResponse < Struct.new(
       nil,
       :resource_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the Marketplace PunchOut configuration for a procurement portal preference.</p>
+    # @!attribute approval_request_redirect_url
+    #   <p>The URL that buyers are redirected to for approval requests in the procurement portal. This is only supported for Coupa. When provided together with the procurement portal instance endpoint, its host must match the host of that endpoint.</p>
+    #   @return [String]
+    class MarketplacePunchOutPreference < Struct.new(
+      nil,
+      :approval_request_redirect_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata for a procurement portal, including the portal identifier, name, and default feature configurations.</p>
+    # @!attribute portal_identifier
+    #   <p>The unique identifier of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute portal_name
+    #   <p>The name of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute portal_display_name
+    #   <p>The display name of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute default_feature_configurations
+    #   <p>The default feature configurations for the procurement portal.</p>
+    #   @return [Types::FeatureConfigurations]
+    class ProcurementPortal < Struct.new(
+      nil,
+      :portal_identifier,
+      :portal_name,
+      :portal_display_name,
+      :default_feature_configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the full configuration of a procurement portal preference, including settings for e-invoice delivery and purchase order retrieval.</p>
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID associated with this procurement portal preference.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_name
+    #   <p>The name of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute buyer_domain
+    #   <p>The domain identifier for the buyer in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute buyer_identifier
+    #   <p>The unique identifier for the buyer in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute supplier_domain
+    #   <p>The domain identifier for the supplier in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute supplier_identifier
+    #   <p>The unique identifier for the supplier in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute selector
+    #   <p>Specifies criteria for selecting which invoices should be processed using a particular procurement portal preference.</p>
+    #   @return [Types::ProcurementPortalPreferenceSelector]
+    # @!attribute procurement_portal_shared_secret
+    #   <p>The shared secret or authentication credential used for secure communication with the procurement portal.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_instance_endpoint
+    #   <p>The endpoint URL where e-invoices are delivered to the procurement portal.</p>
+    #   @return [String]
+    # @!attribute purchase_order_retrieval_endpoint
+    #   <p>The endpoint URL used for retrieving purchase orders from the procurement portal.</p>
+    #   @return [String]
+    # @!attribute test_env_preference
+    #   <p>Configuration on settings for the test environment of the procurement portal.</p>
+    #   @return [Types::TestEnvPreference]
+    # @!attribute einvoice_delivery_enabled
+    #   <p>Indicates whether e-invoice delivery is enabled for this procurement portal preference.</p>
+    #   @return [Boolean]
+    # @!attribute einvoice_delivery_preference
+    #   <p>The e-invoice delivery configuration including document types, attachment types, and customization settings.</p>
+    #   @return [Types::EinvoiceDeliveryPreference]
+    # @!attribute purchase_order_retrieval_enabled
+    #   <p>Indicates whether purchase order retrieval is enabled for this procurement portal preference.</p>
+    #   @return [Boolean]
+    # @!attribute marketplace_punch_out_enabled
+    #   <p>Indicates whether Marketplace PunchOut is enabled for this procurement portal preference. Defaults to <code>false</code>.</p>
+    #   @return [Boolean]
+    # @!attribute marketplace_punch_out_preference
+    #   <p>The Marketplace PunchOut configuration for this procurement portal preference. This is present when <code>MarketplacePunchOutEnabled</code> is <code>true</code>.</p>
+    #   @return [Types::MarketplacePunchOutPreference]
+    # @!attribute contacts
+    #   <p>List of contact information for portal administrators and technical contacts.</p>
+    #   @return [Array<Types::Contact>]
+    # @!attribute einvoice_delivery_preference_status
+    #   <p>The current status of the e-invoice delivery preference.</p>
+    #   @return [String]
+    # @!attribute einvoice_delivery_preference_status_reason
+    #   <p>The reason for the current e-invoice delivery preference status.</p>
+    #   @return [String]
+    # @!attribute purchase_order_retrieval_preference_status
+    #   <p>The current status of the purchase order retrieval preference.</p>
+    #   @return [String]
+    # @!attribute purchase_order_retrieval_preference_status_reason
+    #   <p>The reason for the current purchase order retrieval preference status.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version number of the procurement portal preference configuration.</p>
+    #   @return [Integer]
+    # @!attribute create_date
+    #   <p>The date and time when the procurement portal preference was created.</p>
+    #   @return [Time]
+    # @!attribute last_update_date
+    #   <p>The date and time when the procurement portal preference was last updated.</p>
+    #   @return [Time]
+    class ProcurementPortalPreference < Struct.new(
+      nil,
+      :aws_account_id,
+      :procurement_portal_preference_arn,
+      :procurement_portal_name,
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :selector,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint,
+      :purchase_order_retrieval_endpoint,
+      :test_env_preference,
+      :einvoice_delivery_enabled,
+      :einvoice_delivery_preference,
+      :purchase_order_retrieval_enabled,
+      :marketplace_punch_out_enabled,
+      :marketplace_punch_out_preference,
+      :contacts,
+      :einvoice_delivery_preference_status,
+      :einvoice_delivery_preference_status_reason,
+      :purchase_order_retrieval_preference_status,
+      :purchase_order_retrieval_preference_status_reason,
+      :version,
+      :create_date,
+      :last_update_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies criteria for selecting which invoices should be processed using a particular procurement portal preference.</p>
+    # @!attribute invoice_unit_arns
+    #   <p> The Amazon Resource Name (ARN) of invoice unit identifiers to which this preference applies. </p>
+    #   @return [Array<String>]
+    # @!attribute seller_of_records
+    #   <p> The list of seller of record IDs to which this preference applies. </p>
+    #   @return [Array<String>]
+    class ProcurementPortalPreferenceSelector < Struct.new(
+      nil,
+      :invoice_unit_arns,
+      :seller_of_records,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides a summary of a procurement portal preference, including key identifiers and status information.</p>
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID associated with this procurement portal preference summary.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_name
+    #   <p>The name of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute buyer_domain
+    #   <p>The domain identifier for the buyer in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute buyer_identifier
+    #   <p>The unique identifier for the buyer in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute supplier_domain
+    #   <p>The domain identifier for the supplier in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute supplier_identifier
+    #   <p>The unique identifier for the supplier in the procurement portal.</p>
+    #   @return [String]
+    # @!attribute selector
+    #   <p>Specifies criteria for selecting which invoices should be processed using a particular procurement portal preference.</p>
+    #   @return [Types::ProcurementPortalPreferenceSelector]
+    # @!attribute einvoice_delivery_enabled
+    #   <p>Indicates whether e-invoice delivery is enabled for this procurement portal preference.</p>
+    #   @return [Boolean]
+    # @!attribute purchase_order_retrieval_enabled
+    #   <p>Indicates whether purchase order retrieval is enabled for this procurement portal preference.</p>
+    #   @return [Boolean]
+    # @!attribute marketplace_punch_out_enabled
+    #   <p>Indicates whether Marketplace PunchOut is enabled for this procurement portal preference. Defaults to <code>false</code>.</p>
+    #   @return [Boolean]
+    # @!attribute einvoice_delivery_preference_status
+    #   <p>The current status of the e-invoice delivery preference in this summary.</p>
+    #   @return [String]
+    # @!attribute einvoice_delivery_preference_status_reason
+    #   <p>The reason for the current e-invoice delivery preference status in this summary.</p>
+    #   @return [String]
+    # @!attribute purchase_order_retrieval_preference_status
+    #   <p>The current status of the purchase order retrieval preference in this summary.</p>
+    #   @return [String]
+    # @!attribute purchase_order_retrieval_preference_status_reason
+    #   <p>The reason for the current purchase order retrieval preference status in this summary.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version number of the procurement portal preference configuration in this summary.</p>
+    #   @return [Integer]
+    # @!attribute create_date
+    #   <p>The date and time when the procurement portal preference was created.</p>
+    #   @return [Time]
+    # @!attribute last_update_date
+    #   <p>The date and time when the procurement portal preference was last updated.</p>
+    #   @return [Time]
+    class ProcurementPortalPreferenceSummary < Struct.new(
+      nil,
+      :aws_account_id,
+      :procurement_portal_preference_arn,
+      :procurement_portal_name,
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :selector,
+      :einvoice_delivery_enabled,
+      :purchase_order_retrieval_enabled,
+      :marketplace_punch_out_enabled,
+      :einvoice_delivery_preference_status,
+      :einvoice_delivery_preference_status_reason,
+      :purchase_order_retrieval_preference_status,
+      :purchase_order_retrieval_preference_status_reason,
+      :version,
+      :create_date,
+      :last_update_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata for a supplier configured within a procurement portal.</p>
+    # @!attribute supplier_identifier
+    #   <p>The unique identifier of the supplier within the procurement portal.</p>
+    #   @return [String]
+    # @!attribute seller_of_record
+    #   <p>The Amazon Web Services seller of record associated with the supplier—the Amazon Web Services legal entity that issues invoices for the account (for example, <code>AWS_INC</code> or <code>AWS_EUROPE</code>).</p>
+    #   @return [String]
+    # @!attribute country_code
+    #   <p>The two-letter ISO 3166-1 alpha-2 country code associated with the supplier.</p>
+    #   @return [String]
+    # @!attribute environment
+    #   <p>The environment identifier for the supplier in the procurement portal. PROD for production env, or TEST for sandbox/test env.</p>
+    #   @return [String]
+    class ProcurementPortalSupplier < Struct.new(
+      nil,
+      :supplier_identifier,
+      :seller_of_record,
+      :country_code,
+      :environment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the source configuration for retrieving purchase order data.</p>
+    # @!attribute einvoice_delivery_document_type
+    #   <p>The type of e-invoice document that requires purchase order data.</p>
+    #   @return [String]
+    # @!attribute purchase_order_data_source_type
+    #   <p>The type of source for purchase order data.</p>
+    #   @return [String]
+    class PurchaseOrderDataSource < Struct.new(
+      nil,
+      :einvoice_delivery_document_type,
+      :purchase_order_data_source_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference to update.</p>
+    #   @return [String]
+    # @!attribute selector
+    #   <p>Specifies criteria for selecting which invoices should be processed using a particular procurement portal preference.</p>
+    #   @return [Types::ProcurementPortalPreferenceSelector]
+    # @!attribute procurement_portal_shared_secret
+    #   <p>The updated shared secret or authentication credential for the procurement portal. This value must be encrypted at rest.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_instance_endpoint
+    #   <p>The updated endpoint URL where e-invoices will be delivered to the procurement portal. Must be a valid HTTPS URL.</p>
+    #   @return [String]
+    # @!attribute test_env_preference
+    #   <p>Updated configuration settings for the test environment of the procurement portal.</p>
+    #   @return [Types::TestEnvPreferenceInput]
+    # @!attribute einvoice_delivery_enabled
+    #   <p>Updated flag indicating whether e-invoice delivery is enabled for this procurement portal preference.</p>
+    #   @return [Boolean]
+    # @!attribute einvoice_delivery_preference
+    #   <p>Updated e-invoice delivery configuration including document types, attachment types, and customization settings for the portal.</p>
+    #   @return [Types::EinvoiceDeliveryPreference]
+    # @!attribute purchase_order_retrieval_enabled
+    #   <p>Updated flag indicating whether purchase order retrieval is enabled for this procurement portal preference.</p>
+    #   @return [Boolean]
+    # @!attribute marketplace_punch_out_enabled
+    #   Whether Marketplace PunchOut is enabled for this connection. Defaults to false if not provided.
+    #   @return [Boolean]
+    # @!attribute marketplace_punch_out_preference
+    #   Configuration for Marketplace PunchOut. Required when MarketplacePunchOutEnabled is true.
+    #   @return [Types::MarketplacePunchOutPreference]
+    # @!attribute contacts
+    #   <p>Updated list of contact information for portal administrators and technical contacts.</p>
+    #   @return [Array<Types::Contact>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>
+    #   @return [String]
+    class PutProcurementPortalPreferenceRequest < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
+      :selector,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint,
+      :test_env_preference,
+      :einvoice_delivery_enabled,
+      :einvoice_delivery_preference,
+      :purchase_order_retrieval_enabled,
+      :marketplace_punch_out_enabled,
+      :marketplace_punch_out_preference,
+      :contacts,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the updated procurement portal preference.</p>
+    #   @return [String]
+    class PutProcurementPortalPreferenceResponse < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -736,12 +1508,62 @@ module Aws::Invoicing
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference to validate.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>
+    #   @return [String]
+    class SendProcurementPortalValidationRequest < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference for which the validation request was sent.</p>
+    #   @return [String]
+    class SendProcurementPortalValidationResponse < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services account limits. The error message describes the limit exceeded. </p>
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Supplemental document associated with the invoice.</p>
+    # @!attribute document_type
+    #   <p>The type of supplemental document.</p>
+    #   @return [String]
+    # @!attribute document_id
+    #   <p>The ID of the supplemental document.</p>
+    #   @return [String]
+    # @!attribute document_url
+    #   <p>The pre-signed URL to download invoice supplemental document.</p>
+    #   @return [String]
+    # @!attribute document_url_expiration_date
+    #   <p>The pre-signed URL expiration date of invoice supplemental document.</p>
+    #   @return [Time]
+    class SupplementalDocument < Struct.new(
+      nil,
+      :document_type,
+      :document_id,
+      :document_url,
+      :document_url_expiration_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -805,6 +1627,74 @@ module Aws::Invoicing
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains configuration settings for testing the procurement portal integration in a non-production environment.</p>
+    # @!attribute buyer_domain
+    #   <p>The domain identifier for the buyer in the test environment of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute buyer_identifier
+    #   <p>The unique identifier for the buyer in the test environment of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute supplier_domain
+    #   <p>The domain identifier for the supplier in the test environment of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute supplier_identifier
+    #   <p>The unique identifier for the supplier in the test environment of the procurement portal.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_shared_secret
+    #   <p>The shared secret or authentication credential used for secure communication with the test environment.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_instance_endpoint
+    #   <p>The endpoint URL where e-invoices are delivered in the test environment.</p>
+    #   @return [String]
+    # @!attribute purchase_order_retrieval_endpoint
+    #   <p>The endpoint URL used for retrieving purchase orders in the test environment.</p>
+    #   @return [String]
+    class TestEnvPreference < Struct.new(
+      nil,
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint,
+      :purchase_order_retrieval_endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Input parameters for configuring test environment preferences for a procurement portal.</p>
+    # @!attribute buyer_domain
+    #   <p>The domain identifier to use for the buyer in the test environment.</p>
+    #   @return [String]
+    # @!attribute buyer_identifier
+    #   <p>The unique identifier to use for the buyer in the test environment.</p>
+    #   @return [String]
+    # @!attribute supplier_domain
+    #   <p>The domain identifier to use for the supplier in the test environment.</p>
+    #   @return [String]
+    # @!attribute supplier_identifier
+    #   <p>The unique identifier to use for the supplier in the test environment.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_shared_secret
+    #   <p>The shared secret or authentication credential to use for secure communication in the test environment.</p>
+    #   @return [String]
+    # @!attribute procurement_portal_instance_endpoint
+    #   <p>The endpoint URL where e-invoices will be delivered in the test environment.</p>
+    #   @return [String]
+    class TestEnvPreferenceInput < Struct.new(
+      nil,
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request was denied due to request throttling.</p>
     # @!attribute message
     #   @return [String]
@@ -850,12 +1740,16 @@ module Aws::Invoicing
     # @!attribute rule
     #   <p>The <code>InvoiceUnitRule</code> object used to update invoice units. </p>
     #   @return [Types::InvoiceUnitRule]
+    # @!attribute client_token
+    #   <p> A unique, case-sensitive identifier that you provide to ensure idempotency of the request. </p>
+    #   @return [String]
     class UpdateInvoiceUnitRequest < Struct.new(
       nil,
       :invoice_unit_arn,
       :description,
       :tax_inheritance_disabled,
       :rule,
+      :client_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -867,6 +1761,48 @@ module Aws::Invoicing
     class UpdateInvoiceUnitResponse < Struct.new(
       nil,
       :invoice_unit_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference to update.</p>
+    #   @return [String]
+    # @!attribute einvoice_delivery_preference_status
+    #   <p>The updated status of the e-invoice delivery preference.</p>
+    #   @return [String]
+    # @!attribute einvoice_delivery_preference_status_reason
+    #   <p>The reason for the e-invoice delivery preference status update, providing context for the change.</p>
+    #   @return [String]
+    # @!attribute purchase_order_retrieval_preference_status
+    #   <p>The updated status of the purchase order retrieval preference.</p>
+    #   @return [String]
+    # @!attribute purchase_order_retrieval_preference_status_reason
+    #   <p>The reason for the purchase order retrieval preference status update, providing context for the change.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>
+    #   @return [String]
+    class UpdateProcurementPortalPreferenceStatusRequest < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
+      :einvoice_delivery_preference_status,
+      :einvoice_delivery_preference_status_reason,
+      :purchase_order_retrieval_preference_status,
+      :purchase_order_retrieval_preference_status_reason,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference with updated status.</p>
+    #   @return [String]
+    class UpdateProcurementPortalPreferenceStatusResponse < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -906,6 +1842,36 @@ module Aws::Invoicing
       nil,
       :name,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference to validate.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The validation code received from the procurement portal in response to a previous <code>SendProcurementPortalValidation</code> request.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>
+    #   @return [String]
+    class VerifyProcurementPortalValidationRequest < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
+      :code,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute procurement_portal_preference_arn
+    #   <p>The Amazon Resource Name (ARN) of the procurement portal preference for which validation was completed.</p>
+    #   @return [String]
+    class VerifyProcurementPortalValidationResponse < Struct.new(
+      nil,
+      :procurement_portal_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

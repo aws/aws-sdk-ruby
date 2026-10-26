@@ -44,6 +44,9 @@ module Aws::ConfigService
     AutoRemediationAttempts: IntegerShape
     AvailabilityZone: StringShape
     AwsRegion: StringShape
+    AzureClientIdentifier: StringShape
+    AzureConnectorConfiguration: StructureShape
+    AzureTenantIdentifier: StringShape
     BaseConfigurationItem: StructureShape
     BaseConfigurationItems: ListShape
     BaseResourceId: StringShape
@@ -136,6 +139,14 @@ module Aws::ConfigService
     ConformancePackStatusDetailsList: ListShape
     ConformancePackStatusReason: StringShape
     ConformancePackTemplateValidationException: StructureShape
+    Connector: StructureShape
+    ConnectorConfiguration: StructureShape
+    ConnectorFilter: StructureShape
+    ConnectorFilterList: ListShape
+    ConnectorFilterName: EnumShape
+    ConnectorName: StringShape
+    ConnectorSummaries: ListShape
+    ConnectorSummary: StructureShape
     ControlsList: ListShape
     CosmosPageLimit: IntegerShape
     CustomPolicyDetails: StructureShape
@@ -146,6 +157,7 @@ module Aws::ConfigService
     DeleteConfigurationAggregatorRequest: StructureShape
     DeleteConfigurationRecorderRequest: StructureShape
     DeleteConformancePackRequest: StructureShape
+    DeleteConnectorRequest: StructureShape
     DeleteDeliveryChannelRequest: StructureShape
     DeleteEvaluationResultsRequest: StructureShape
     DeleteEvaluationResultsResponse: StructureShape
@@ -260,6 +272,7 @@ module Aws::ConfigService
     FieldInfo: StructureShape
     FieldInfoList: ListShape
     FieldName: StringShape
+    FilterValueList: ListShape
     GetAggregateComplianceDetailsByConfigRuleRequest: StructureShape
     GetAggregateComplianceDetailsByConfigRuleResponse: StructureShape
     GetAggregateConfigRuleComplianceSummaryRequest: StructureShape
@@ -282,6 +295,8 @@ module Aws::ConfigService
     GetConformancePackComplianceDetailsResponse: StructureShape
     GetConformancePackComplianceSummaryRequest: StructureShape
     GetConformancePackComplianceSummaryResponse: StructureShape
+    GetConnectorRequest: StructureShape
+    GetConnectorResponse: StructureShape
     GetCustomRulePolicyRequest: StructureShape
     GetCustomRulePolicyResponse: StructureShape
     GetDiscoveredResourceCountsRequest: StructureShape
@@ -303,6 +318,7 @@ module Aws::ConfigService
     GroupedResourceCountList: ListShape
     IdempotentParameterMismatch: StructureShape
     IncludeGlobalResourceTypes: BooleanShape
+    IncludedRegions: ListShape
     InsufficientDeliveryPolicyException: StructureShape
     InsufficientPermissionsException: StructureShape
     Integer: IntegerShape
@@ -330,6 +346,9 @@ module Aws::ConfigService
     ListConfigurationRecordersResponse: StructureShape
     ListConformancePackComplianceScoresRequest: StructureShape
     ListConformancePackComplianceScoresResponse: StructureShape
+    ListConnectorsMaxResults: IntegerShape
+    ListConnectorsRequest: StructureShape
+    ListConnectorsResponse: StructureShape
     ListDiscoveredResourcesRequest: StructureShape
     ListDiscoveredResourcesResponse: StructureShape
     ListResourceEvaluationsPageItemLimit: IntegerShape
@@ -344,6 +363,7 @@ module Aws::ConfigService
     MaxNumberOfConfigRulesExceededException: StructureShape
     MaxNumberOfConfigurationRecordersExceededException: StructureShape
     MaxNumberOfConformancePacksExceededException: StructureShape
+    MaxNumberOfConnectorsExceededException: StructureShape
     MaxNumberOfDeliveryChannelsExceededException: StructureShape
     MaxNumberOfOrganizationConfigRulesExceededException: StructureShape
     MaxNumberOfOrganizationConformancePacksExceededException: StructureShape
@@ -413,6 +433,7 @@ module Aws::ConfigService
     Percentage: IntegerShape
     PolicyRuntime: StringShape
     PolicyText: StringShape
+    Provider: EnumShape
     PutAggregationAuthorizationRequest: StructureShape
     PutAggregationAuthorizationResponse: StructureShape
     PutConfigRuleRequest: StructureShape
@@ -421,6 +442,8 @@ module Aws::ConfigService
     PutConfigurationRecorderRequest: StructureShape
     PutConformancePackRequest: StructureShape
     PutConformancePackResponse: StructureShape
+    PutConnectorRequest: StructureShape
+    PutConnectorResponse: StructureShape
     PutDeliveryChannelRequest: StructureShape
     PutEvaluationsRequest: StructureShape
     PutEvaluationsResponse: StructureShape
@@ -441,6 +464,8 @@ module Aws::ConfigService
     PutServiceLinkedConfigurationRecorderResponse: StructureShape
     PutStoredQueryRequest: StructureShape
     PutStoredQueryResponse: StructureShape
+    PutThirdPartyServiceLinkedConfigurationRecorderRequest: StructureShape
+    PutThirdPartyServiceLinkedConfigurationRecorderResponse: StructureShape
     QueryArn: StringShape
     QueryDescription: StringShape
     QueryExpression: StringShape
@@ -522,11 +547,16 @@ module Aws::ConfigService
     RetentionConfigurationName: StringShape
     RetentionConfigurationNameList: ListShape
     RetentionPeriodInDays: IntegerShape
+    RuleEvaluationVisibility: EnumShape
     RuleLimit: IntegerShape
     SSMDocumentName: StringShape
     SSMDocumentVersion: StringShape
     SchemaVersionId: StringShape
     Scope: StructureShape
+    ScopeConfiguration: StructureShape
+    ScopeType: StringShape
+    ScopeValue: StringShape
+    ScopeValues: ListShape
     SelectAggregateResourceConfigRequest: StructureShape
     SelectAggregateResourceConfigResponse: StructureShape
     SelectResourceConfigRequest: StructureShape
@@ -534,6 +564,7 @@ module Aws::ConfigService
     ServicePrincipal: StringShape
     ServicePrincipalValue: StringShape
     ServicePrincipalValueList: ListShape
+    ServicePrincipals: ListShape
     SortBy: EnumShape
     SortOrder: EnumShape
     Source: StructureShape
@@ -558,7 +589,6 @@ module Aws::ConfigService
     String: StringShape
     StringWithCharLimit1024: StringShape
     StringWithCharLimit128: StringShape
-    StringWithCharLimit2048: StringShape
     StringWithCharLimit256: StringShape
     StringWithCharLimit256Min0: StringShape
     StringWithCharLimit64: StringShape
@@ -577,6 +607,7 @@ module Aws::ConfigService
     TemplateBody: StringShape
     TemplateS3Uri: StringShape
     TemplateSSMDocumentDetails: StructureShape
+    ThirdPartyCloudRegion: StringShape
     TimeWindow: StructureShape
     TooManyTagsException: StructureShape
     UnmodifiableEntityException: StructureShape

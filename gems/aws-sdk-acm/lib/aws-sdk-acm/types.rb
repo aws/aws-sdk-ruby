@@ -17,6 +17,471 @@ module Aws::ACM
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains ACM-specific metadata about a certificate.</p>
+    # @!attribute created_at
+    #   <p>The time at which the certificate was requested.</p>
+    #   @return [Time]
+    # @!attribute exported
+    #   <p>Indicates whether the certificate has been exported.</p>
+    #   @return [Boolean]
+    # @!attribute imported_at
+    #   <p>The date and time when the certificate was imported. This value exists only when the certificate type is <code>IMPORTED</code>. </p>
+    #   @return [Time]
+    # @!attribute in_use
+    #   <p>Indicates whether the certificate is currently in use by an Amazon Web Services service.</p>
+    #   @return [Boolean]
+    # @!attribute issued_at
+    #   <p>The time at which the certificate was issued. This value exists only when the certificate type is <code>AMAZON_ISSUED</code>. </p>
+    #   @return [Time]
+    # @!attribute renewal_eligibility
+    #   <p>Specifies whether the certificate is eligible for renewal. At this time, only exported private certificates can be renewed with the <a>RenewCertificate</a> command.</p>
+    #   @return [String]
+    # @!attribute revoked_at
+    #   <p>The time at which the certificate was revoked. This value exists only when the certificate status is <code>REVOKED</code>. </p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The status of the certificate.</p> <p>A certificate enters status PENDING_VALIDATION upon being requested, unless it fails for any of the reasons given in the troubleshooting topic <a href="https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html">Certificate request fails</a>. ACM makes repeated attempts to validate a certificate for 72 hours and then times out. If a certificate shows status FAILED or VALIDATION_TIMED_OUT, delete the request, correct the issue with <a href="https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html">DNS validation</a> or <a href="https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html">Email validation</a>, and try again. If validation succeeds, the certificate enters status ISSUED. </p>
+    #   @return [String]
+    # @!attribute renewal_status
+    #   <p>The renewal status of the certificate.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The source of the certificate. For certificates provided by ACM, this value is <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html">Importing Certificates</a> in the <i>Certificate Manager User Guide</i>. </p>
+    #   @return [String]
+    # @!attribute export_option
+    #   <p>Indicates whether the certificate can be exported.</p>
+    #   @return [String]
+    # @!attribute managed_by
+    #   <p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>
+    #   @return [String]
+    # @!attribute validation_method
+    #   <p>Specifies the domain validation method.</p>
+    #   @return [String]
+    # @!attribute certificate_key_pair_origin
+    #   <p>The origin of the certificate's key pair.</p>
+    #   @return [String]
+    # @!attribute acme_endpoint_arn
+    #   <p>The ARN of the ACME endpoint used to issue the certificate.</p>
+    #   @return [String]
+    # @!attribute acme_account_id
+    #   <p>The ACME account identifier associated with the certificate.</p>
+    #   @return [String]
+    class AcmCertificateMetadata < Struct.new(
+      nil,
+      :created_at,
+      :exported,
+      :imported_at,
+      :in_use,
+      :issued_at,
+      :renewal_eligibility,
+      :revoked_at,
+      :status,
+      :renewal_status,
+      :type,
+      :export_option,
+      :managed_by,
+      :validation_method,
+      :certificate_key_pair_origin,
+      :acme_endpoint_arn,
+      :acme_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters certificates by ACM metadata.</p>
+    # @!attribute status
+    #   <p>Filter by certificate status.</p>
+    #   @return [String]
+    # @!attribute renewal_status
+    #   <p>Filter by certificate renewal status.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>Filter by certificate type.</p>
+    #   @return [String]
+    # @!attribute in_use
+    #   <p>Filter by whether the certificate is in use.</p>
+    #   @return [Boolean]
+    # @!attribute exported
+    #   <p>Filter by whether the certificate has been exported.</p>
+    #   @return [Boolean]
+    # @!attribute export_option
+    #   <p>Filter by certificate export option.</p>
+    #   @return [String]
+    # @!attribute managed_by
+    #   <p>Filter by the entity that manages the certificate.</p>
+    #   @return [String]
+    # @!attribute validation_method
+    #   <p>Filter by validation method.</p>
+    #   @return [String]
+    # @!attribute certificate_key_pair_origin
+    #   <p>Filter by certificate key pair origin.</p>
+    #   @return [String]
+    # @!attribute acme_endpoint_arn
+    #   <p>Filter by ACME endpoint ARN.</p>
+    #   @return [String]
+    # @!attribute acme_account_id
+    #   <p>Filter by ACME account identifier.</p>
+    #   @return [String]
+    class AcmCertificateMetadataFilter < Struct.new(
+      :status,
+      :renewal_status,
+      :type,
+      :in_use,
+      :exported,
+      :export_option,
+      :managed_by,
+      :validation_method,
+      :certificate_key_pair_origin,
+      :acme_endpoint_arn,
+      :acme_account_id,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Status < AcmCertificateMetadataFilter; end
+      class RenewalStatus < AcmCertificateMetadataFilter; end
+      class Type < AcmCertificateMetadataFilter; end
+      class InUse < AcmCertificateMetadataFilter; end
+      class Exported < AcmCertificateMetadataFilter; end
+      class ExportOption < AcmCertificateMetadataFilter; end
+      class ManagedBy < AcmCertificateMetadataFilter; end
+      class ValidationMethod < AcmCertificateMetadataFilter; end
+      class CertificateKeyPairOrigin < AcmCertificateMetadataFilter; end
+      class AcmeEndpointArn < AcmCertificateMetadataFilter; end
+      class AcmeAccountId < AcmCertificateMetadataFilter; end
+      class Unknown < AcmCertificateMetadataFilter; end
+    end
+
+    # <p>Contains detailed information about an ACME account.</p>
+    # @!attribute account_url
+    #   <p>The URL of the ACME account.</p>
+    #   @return [String]
+    # @!attribute public_key_thumbprint
+    #   <p>The thumbprint of the public key associated with the ACME account.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the ACME account.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The time at which the ACME account was created.</p>
+    #   @return [Time]
+    # @!attribute acme_external_account_binding_arn
+    #   <p>The Amazon Resource Name (ARN) of the external account binding associated with this ACME account.</p>
+    #   @return [String]
+    # @!attribute contacts
+    #   <p>The contact information for the ACME account.</p>
+    #   @return [Array<String>]
+    class AcmeAccount < Struct.new(
+      nil,
+      :account_url,
+      :public_key_thumbprint,
+      :status,
+      :created_at,
+      :acme_external_account_binding_arn,
+      :contacts,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about an ACME account.</p>
+    # @!attribute account_url
+    #   <p>The URL of the ACME account.</p>
+    #   @return [String]
+    # @!attribute public_key_thumbprint
+    #   <p>The thumbprint of the public key associated with the ACME account.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the ACME account.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The time at which the ACME account was created.</p>
+    #   @return [Time]
+    # @!attribute acme_external_account_binding_arn
+    #   <p>The Amazon Resource Name (ARN) of the external account binding associated with this ACME account.</p>
+    #   @return [String]
+    # @!attribute contacts
+    #   <p>The contact information for the ACME account.</p>
+    #   @return [Array<String>]
+    class AcmeAccountSummary < Struct.new(
+      nil,
+      :account_url,
+      :public_key_thumbprint,
+      :status,
+      :created_at,
+      :acme_external_account_binding_arn,
+      :contacts,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains detailed information about an ACME domain validation.</p>
+    # @!attribute acme_domain_validation_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME domain validation.</p>
+    #   @return [String]
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute domain_name
+    #   <p>The domain name being validated.</p>
+    #   @return [String]
+    # @!attribute prevalidation_type
+    #   <p>The type of prevalidation used.</p>
+    #   @return [String]
+    # @!attribute prevalidation_details
+    #   <p>Details about the prevalidation configuration.</p>
+    #   @return [Types::PrevalidationDetails]
+    # @!attribute status
+    #   <p>The status of the domain validation.</p>
+    #   @return [String]
+    # @!attribute failure_details
+    #   <p>Details about the failure, if the validation failed.</p>
+    #   @return [Types::FailureDetails]
+    # @!attribute created_at
+    #   <p>The time at which the domain validation was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time at which the domain validation was last updated.</p>
+    #   @return [Time]
+    class AcmeDomainValidation < Struct.new(
+      nil,
+      :acme_domain_validation_arn,
+      :acme_endpoint_arn,
+      :domain_name,
+      :prevalidation_type,
+      :prevalidation_details,
+      :status,
+      :failure_details,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about an ACME domain validation.</p>
+    # @!attribute acme_domain_validation_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME domain validation.</p>
+    #   @return [String]
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute domain_name
+    #   <p>The domain name being validated.</p>
+    #   @return [String]
+    # @!attribute prevalidation_type
+    #   <p>The type of prevalidation used.</p>
+    #   @return [String]
+    # @!attribute prevalidation_details
+    #   <p>Details about the prevalidation configuration.</p>
+    #   @return [Types::PrevalidationDetails]
+    # @!attribute status
+    #   <p>The status of the domain validation.</p>
+    #   @return [String]
+    # @!attribute failure_details
+    #   <p>Details about the failure, if the validation failed.</p>
+    #   @return [Types::FailureDetails]
+    # @!attribute created_at
+    #   <p>The time at which the domain validation was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time at which the domain validation was last updated.</p>
+    #   @return [Time]
+    class AcmeDomainValidationSummary < Struct.new(
+      nil,
+      :acme_domain_validation_arn,
+      :acme_endpoint_arn,
+      :domain_name,
+      :prevalidation_type,
+      :prevalidation_details,
+      :status,
+      :failure_details,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains detailed information about an ACME endpoint.</p>
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute endpoint_url
+    #   <p>The URL of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>The reason the ACME endpoint failed, if applicable.</p>
+    #   @return [String]
+    # @!attribute authorization_behavior
+    #   <p>The authorization behavior of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute contact
+    #   <p>Whether ACME clients must provide contact information during account registration.</p>
+    #   @return [String]
+    # @!attribute certificate_authority
+    #   <p>The certificate authority configuration for the ACME endpoint.</p>
+    #   @return [Types::CertificateAuthority]
+    # @!attribute certificate_tags
+    #   <p>Tags applied to certificates issued through this ACME endpoint.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute created_at
+    #   <p>The time at which the ACME endpoint was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time at which the ACME endpoint was last updated.</p>
+    #   @return [Time]
+    class AcmeEndpoint < Struct.new(
+      nil,
+      :acme_endpoint_arn,
+      :endpoint_url,
+      :status,
+      :failure_reason,
+      :authorization_behavior,
+      :contact,
+      :certificate_authority,
+      :certificate_tags,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about an ACME endpoint.</p>
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute endpoint_url
+    #   <p>The URL of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>The reason the ACME endpoint failed, if applicable.</p>
+    #   @return [String]
+    # @!attribute authorization_behavior
+    #   <p>The authorization behavior of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute contact
+    #   <p>Whether ACME clients must provide contact information during account registration.</p>
+    #   @return [String]
+    # @!attribute certificate_authority
+    #   <p>The certificate authority configuration for the ACME endpoint.</p>
+    #   @return [Types::CertificateAuthority]
+    # @!attribute certificate_tags
+    #   <p>Tags applied to certificates issued through this ACME endpoint.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute created_at
+    #   <p>The time at which the ACME endpoint was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time at which the ACME endpoint was last updated.</p>
+    #   @return [Time]
+    class AcmeEndpointSummary < Struct.new(
+      nil,
+      :acme_endpoint_arn,
+      :endpoint_url,
+      :status,
+      :failure_reason,
+      :authorization_behavior,
+      :contact,
+      :certificate_authority,
+      :certificate_tags,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains detailed information about an ACME external account binding.</p>
+    # @!attribute acme_external_account_binding_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME external account binding.</p>
+    #   @return [String]
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role associated with the external account binding.</p>
+    #   @return [String]
+    # @!attribute expires_at
+    #   <p>The time at which the external account binding expires.</p>
+    #   @return [Time]
+    # @!attribute revoked_at
+    #   <p>The time at which the external account binding was revoked.</p>
+    #   @return [Time]
+    # @!attribute last_used_at
+    #   <p>The time at which the external account binding was last used.</p>
+    #   @return [Time]
+    # @!attribute created_at
+    #   <p>The time at which the external account binding was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time at which the external account binding was last updated.</p>
+    #   @return [Time]
+    class AcmeExternalAccountBinding < Struct.new(
+      nil,
+      :acme_external_account_binding_arn,
+      :acme_endpoint_arn,
+      :role_arn,
+      :expires_at,
+      :revoked_at,
+      :last_used_at,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about an ACME external account binding.</p>
+    # @!attribute acme_external_account_binding_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME external account binding.</p>
+    #   @return [String]
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role associated with the external account binding.</p>
+    #   @return [String]
+    # @!attribute expires_at
+    #   <p>The time at which the external account binding expires.</p>
+    #   @return [Time]
+    # @!attribute revoked_at
+    #   <p>The time at which the external account binding was revoked.</p>
+    #   @return [Time]
+    # @!attribute last_used_at
+    #   <p>The time at which the external account binding was last used.</p>
+    #   @return [Time]
+    # @!attribute created_at
+    #   <p>The time at which the external account binding was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time at which the external account binding was last updated.</p>
+    #   @return [Time]
+    class AcmeExternalAccountBindingSummary < Struct.new(
+      nil,
+      :acme_external_account_binding_arn,
+      :acme_endpoint_arn,
+      :role_arn,
+      :expires_at,
+      :revoked_at,
+      :last_used_at,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute certificate_arn
     #   <p>String that contains the ARN of the ACM certificate to which the tag is to be applied. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     #   @return [String]
@@ -30,6 +495,21 @@ module Aws::ACM
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the certificate authority to use for an ACME endpoint.</p>
+    # @!attribute public_certificate_authority
+    #   <p>Configuration for using a public certificate authority.</p>
+    #   @return [Types::PublicCertificateAuthority]
+    class CertificateAuthority < Struct.new(
+      :public_certificate_authority,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class PublicCertificateAuthority < CertificateAuthority; end
+      class Unknown < CertificateAuthority; end
     end
 
     # <p>Contains metadata about an ACM certificate. This structure is returned in the response to a <a>DescribeCertificate</a> request. </p>
@@ -112,8 +592,20 @@ module Aws::ACM
     #   <p>Specifies whether the certificate is eligible for renewal. At this time, only exported private certificates can be renewed with the <a>RenewCertificate</a> command.</p>
     #   @return [String]
     # @!attribute options
-    #   <p>Value that specifies whether to add the certificate to a transparency log. Certificate transparency makes it possible to detect SSL certificates that have been mistakenly or maliciously issued. A browser might respond to certificate that has not been logged by showing an error message. The logs are cryptographically secure. </p>
+    #   <p>Contains the certificate options. Certificate transparency logging opt-out is no longer available. All public certificates are recorded in a certificate transparency log.</p>
     #   @return [Types::CertificateOptions]
+    # @!attribute update_summary
+    #   <p>Contains information about the most recent update to the certificate. This field exists only when the certificate type is <code>AMAZON_ISSUED</code> and a certificate update has been requested.</p>
+    #   @return [Types::UpdateSummary]
+    # @!attribute certificate_key_pair_origin
+    #   <p>The origin of the certificate's key pair.</p>
+    #   @return [String]
+    # @!attribute acme_endpoint_arn
+    #   <p>The ARN of the ACME endpoint used to issue the certificate.</p>
+    #   @return [String]
+    # @!attribute acme_account_id
+    #   <p>The ACME account identifier associated with the certificate.</p>
+    #   @return [String]
     class CertificateDetail < Struct.new(
       nil,
       :certificate_arn,
@@ -143,22 +635,123 @@ module Aws::ACM
       :certificate_authority_arn,
       :renewal_eligibility,
       :options,
+      :update_summary,
+      :certificate_key_pair_origin,
+      :acme_endpoint_arn,
+      :acme_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Structure that contains options for your certificate. You can use this structure to specify whether to opt in to or out of certificate transparency logging and export your certificate. </p> <p>Some browsers require that public certificates issued for your domain be recorded in a log. Certificates that are not logged typically generate a browser error. Transparency makes it possible for you to detect SSL/TLS certificates that have been mistakenly or maliciously issued for your domain. For general information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency">Certificate Transparency Logging</a>.</p> <p>You can export public ACM certificates to use with Amazon Web Services services as well as outside Amazon Web Services Cloud. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html">Certificate Manager exportable public certificate</a>.</p>
+    # <p>Defines a filter for searching certificates by ARN, X.509 attributes, or ACM metadata.</p>
+    # @!attribute certificate_arn
+    #   <p>Filter by certificate ARN.</p>
+    #   @return [String]
+    # @!attribute x509_attribute_filter
+    #   <p>Filter by X.509 certificate attributes.</p>
+    #   @return [Types::X509AttributeFilter]
+    # @!attribute acm_certificate_metadata_filter
+    #   <p>Filter by ACM certificate metadata.</p>
+    #   @return [Types::AcmCertificateMetadataFilter]
+    class CertificateFilter < Struct.new(
+      :certificate_arn,
+      :x509_attribute_filter,
+      :acm_certificate_metadata_filter,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CertificateArn < CertificateFilter; end
+      class X509AttributeFilter < CertificateFilter; end
+      class AcmCertificateMetadataFilter < CertificateFilter; end
+      class Unknown < CertificateFilter; end
+    end
+
+    # <p>A filter statement used to search for certificates. Can contain AND, OR, NOT logical operators or a single filter.</p>
+    # @!attribute and
+    #   <p>A list of filter statements that must all be true.</p>
+    #   @return [Array<Types::CertificateFilterStatement>]
+    # @!attribute or
+    #   <p>A list of filter statements where at least one must be true.</p>
+    #   @return [Array<Types::CertificateFilterStatement>]
+    # @!attribute not
+    #   <p>A filter statement that must not be true.</p>
+    #   @return [Types::CertificateFilterStatement]
+    # @!attribute filter
+    #   <p>A single certificate filter.</p>
+    #   @return [Types::CertificateFilter]
+    class CertificateFilterStatement < Struct.new(
+      :and,
+      :or,
+      :not,
+      :filter,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class And < CertificateFilterStatement; end
+      class Or < CertificateFilterStatement; end
+      class Not < CertificateFilterStatement; end
+      class Filter < CertificateFilterStatement; end
+      class Unknown < CertificateFilterStatement; end
+    end
+
+    # <p>Contains metadata about a certificate. Currently supports ACM certificate metadata.</p>
+    # @!attribute acm_certificate_metadata
+    #   <p>Metadata for an ACM certificate.</p>
+    #   @return [Types::AcmCertificateMetadata]
+    class CertificateMetadata < Struct.new(
+      :acm_certificate_metadata,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AcmCertificateMetadata < CertificateMetadata; end
+      class Unknown < CertificateMetadata; end
+    end
+
+    # <p>Structure that contains options for your certificate. You can use this structure to change the domain validation method or specify whether to export your certificate.</p> <p>All public certificates are recorded in a certificate transparency log. For general information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency">Certificate Transparency Logging</a>.</p> <p>You can export public ACM certificates to use with Amazon Web Services services as well as outside Amazon Web Services Cloud. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html">Certificate Manager exportable public certificate</a>.</p>
     # @!attribute certificate_transparency_logging_preference
-    #   <p>You can opt out of certificate transparency logging by specifying the <code>DISABLED</code> option. Opt in by specifying <code>ENABLED</code>. </p>
+    #   <p>This parameter has been deprecated. Certificate transparency logging opt-out is no longer available. All public certificates are recorded in a certificate transparency log.</p>
+    #   @deprecated
+    #     Certificate transparency logging opt-out is no longer available.
+    #     Since: 12th June 2026
     #   @return [String]
     # @!attribute export
-    #   <p>You can opt in to allow the export of your certificates by specifying <code>ENABLED</code>.</p>
+    #   <p>You can opt in to allow the export of your certificates by specifying <code>ENABLED</code>. You cannot update the value of <code>Export</code> after the the certificate is created.</p>
+    #   @return [String]
+    # @!attribute validation_method
+    #   <p>The domain validation method for the certificate. To migrate from email to DNS validation, specify <code>DNS</code>.</p>
     #   @return [String]
     class CertificateOptions < Struct.new(
       nil,
       :certificate_transparency_logging_preference,
       :export,
+      :validation_method,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a certificate returned by the <a>SearchCertificates</a> action. This structure includes the certificate ARN, X.509 attributes, and ACM metadata.</p>
+    # @!attribute certificate_arn
+    #   <p>The Amazon Resource Name (ARN) of the certificate.</p>
+    #   @return [String]
+    # @!attribute x509_attributes
+    #   <p>X.509 certificate attributes such as subject, issuer, and validity period.</p>
+    #   @return [Types::X509Attributes]
+    # @!attribute certificate_metadata
+    #   <p>ACM-specific metadata about the certificate.</p>
+    #   @return [Types::CertificateMetadata]
+    class CertificateSearchResult < Struct.new(
+      nil,
+      :certificate_arn,
+      :x509_attributes,
+      :certificate_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -172,10 +765,10 @@ module Aws::ACM
     #   <p>Fully qualified domain name (FQDN), such as www.example.com or example.com, for the certificate.</p>
     #   @return [String]
     # @!attribute subject_alternative_name_summaries
-    #   <p>One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website. </p> <p>When called by <a href="https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html">ListCertificates</a>, this parameter will only return the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a href="https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html">DescribeCertificate</a>.</p>
+    #   <p>One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website. </p> <p>When called by <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_ListCertificates.html">ListCertificates</a>, this parameter will only return the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html">DescribeCertificate</a>.</p>
     #   @return [Array<String>]
     # @!attribute has_additional_subject_alternative_names
-    #   <p>When called by <a href="https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html">ListCertificates</a>, indicates whether the full list of subject alternative names has been included in the response. If false, the response includes all of the subject alternative names included in the certificate. If true, the response only includes the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a href="https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html">DescribeCertificate</a>.</p>
+    #   <p>When called by <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_ListCertificates.html">ListCertificates</a>, indicates whether the full list of subject alternative names has been included in the response. If false, the response includes all of the subject alternative names included in the certificate. If true, the response only includes the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html">DescribeCertificate</a>.</p>
     #   @return [Boolean]
     # @!attribute status
     #   <p>The status of the certificate.</p> <p>A certificate enters status PENDING_VALIDATION upon being requested, unless it fails for any of the reasons given in the troubleshooting topic <a href="https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html">Certificate request fails</a>. ACM makes repeated attempts to validate a certificate for 72 hours and then times out. If a certificate shows status FAILED or VALIDATION_TIMED_OUT, delete the request, correct the issue with <a href="https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html">DNS validation</a> or <a href="https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html">Email validation</a>, and try again. If validation succeeds, the certificate enters status ISSUED. </p>
@@ -199,7 +792,7 @@ module Aws::ACM
     #   <p>Indicates whether the certificate is currently in use by any Amazon Web Services resources.</p>
     #   @return [Boolean]
     # @!attribute exported
-    #   <p>Indicates whether the certificate has been exported. This value exists only when the certificate type is <code>PRIVATE</code>.</p>
+    #   <p>Indicates whether the certificate has been exported.</p>
     #   @return [Boolean]
     # @!attribute renewal_eligibility
     #   <p>Specifies whether the certificate is eligible for renewal. At this time, only exported private certificates can be renewed with the <a>RenewCertificate</a> command.</p>
@@ -225,6 +818,9 @@ module Aws::ACM
     # @!attribute managed_by
     #   <p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>
     #   @return [String]
+    # @!attribute certificate_key_pair_origin
+    #   <p>The origin of the certificate's key pair.</p>
+    #   @return [String]
     class CertificateSummary < Struct.new(
       nil,
       :certificate_arn,
@@ -247,6 +843,23 @@ module Aws::ACM
       :imported_at,
       :revoked_at,
       :managed_by,
+      :certificate_key_pair_origin,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters certificates by common name.</p>
+    # @!attribute value
+    #   <p>The value to match against.</p>
+    #   @return [String]
+    # @!attribute comparison_operator
+    #   <p>The comparison operator to use.</p>
+    #   @return [String]
+    class CommonNameFilter < Struct.new(
+      nil,
+      :value,
+      :comparison_operator,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -263,12 +876,271 @@ module Aws::ACM
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute idempotency_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    #   @return [String]
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute domain_name
+    #   <p>The domain name to validate.</p>
+    #   @return [String]
+    # @!attribute prevalidation_options
+    #   <p>The prevalidation options for the domain.</p>
+    #   @return [Types::PrevalidationOptions]
+    # @!attribute tags
+    #   <p>One or more tags to associate with the domain validation.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateAcmeDomainValidationRequest < Struct.new(
+      nil,
+      :idempotency_token,
+      :acme_endpoint_arn,
+      :domain_name,
+      :prevalidation_options,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_domain_validation_arn
+    #   <p>The Amazon Resource Name (ARN) of the created domain validation.</p>
+    #   @return [String]
+    class CreateAcmeDomainValidationResponse < Struct.new(
+      nil,
+      :acme_domain_validation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute idempotency_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    #   @return [String]
+    # @!attribute authorization_behavior
+    #   <p>The authorization behavior for the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute contact
+    #   <p>Specifies whether ACME clients must provide contact information during account registration.</p>
+    #   @return [String]
+    # @!attribute certificate_authority
+    #   <p>The type of certificate authority to use for issuing certificates through this ACME endpoint.</p>
+    #   @return [Types::CertificateAuthority]
+    # @!attribute tags
+    #   <p>One or more tags to associate with the ACME endpoint.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute certificate_tags
+    #   <p>Tags to apply to certificates issued through this ACME endpoint.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateAcmeEndpointRequest < Struct.new(
+      nil,
+      :idempotency_token,
+      :authorization_behavior,
+      :contact,
+      :certificate_authority,
+      :tags,
+      :certificate_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the created ACME endpoint.</p>
+    #   @return [String]
+    class CreateAcmeEndpointResponse < Struct.new(
+      nil,
+      :acme_endpoint_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute idempotency_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    #   @return [String]
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to associate with the external account binding.</p>
+    #   @return [String]
+    # @!attribute expiration
+    #   <p>The expiration configuration for the external account binding.</p>
+    #   @return [Types::Expiration]
+    # @!attribute tags
+    #   <p>One or more tags to associate with the external account binding.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateAcmeExternalAccountBindingRequest < Struct.new(
+      nil,
+      :idempotency_token,
+      :acme_endpoint_arn,
+      :role_arn,
+      :expiration,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute external_account_binding
+    #   <p>The created external account binding.</p>
+    #   @return [Types::AcmeExternalAccountBinding]
+    class CreateAcmeExternalAccountBindingResponse < Struct.new(
+      nil,
+      :external_account_binding,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the X.500 relative distinguished name (RDN).</p>
+    # @!attribute object_identifier
+    #   <p>Specifies the object identifier (OID) of the attribute type of the relative distinguished name (RDN).</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>Specifies the attribute value of relative distinguished name (RDN).</p>
+    #   @return [String]
+    class CustomAttribute < Struct.new(
+      nil,
+      :object_identifier,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_domain_validation_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME domain validation to delete.</p>
+    #   @return [String]
+    class DeleteAcmeDomainValidationRequest < Struct.new(
+      nil,
+      :acme_domain_validation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint to delete.</p>
+    #   @return [String]
+    class DeleteAcmeEndpointRequest < Struct.new(
+      nil,
+      :acme_endpoint_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_external_account_binding_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME external account binding to delete.</p>
+    #   @return [String]
+    class DeleteAcmeExternalAccountBindingRequest < Struct.new(
+      nil,
+      :acme_external_account_binding_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute certificate_arn
     #   <p>String that contains the ARN of the ACM certificate to be deleted. This must be of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>
     #   @return [String]
     class DeleteCertificateRequest < Struct.new(
       nil,
       :certificate_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute account_url
+    #   <p>The URL of the ACME account.</p>
+    #   @return [String]
+    class DescribeAcmeAccountRequest < Struct.new(
+      nil,
+      :acme_endpoint_arn,
+      :account_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_account
+    #   <p>The ACME account details.</p>
+    #   @return [Types::AcmeAccount]
+    class DescribeAcmeAccountResponse < Struct.new(
+      nil,
+      :acme_account,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_domain_validation_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME domain validation.</p>
+    #   @return [String]
+    class DescribeAcmeDomainValidationRequest < Struct.new(
+      nil,
+      :acme_domain_validation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_domain_validation
+    #   <p>The ACME domain validation details.</p>
+    #   @return [Types::AcmeDomainValidation]
+    class DescribeAcmeDomainValidationResponse < Struct.new(
+      nil,
+      :acme_domain_validation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    class DescribeAcmeEndpointRequest < Struct.new(
+      nil,
+      :acme_endpoint_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_endpoint
+    #   <p>The ACME endpoint details.</p>
+    #   @return [Types::AcmeEndpoint]
+    class DescribeAcmeEndpointResponse < Struct.new(
+      nil,
+      :acme_endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_external_account_binding_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME external account binding.</p>
+    #   @return [String]
+    class DescribeAcmeExternalAccountBindingRequest < Struct.new(
+      nil,
+      :acme_external_account_binding_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute external_account_binding
+    #   <p>The external account binding details.</p>
+    #   @return [Types::AcmeExternalAccountBinding]
+    class DescribeAcmeExternalAccountBindingResponse < Struct.new(
+      nil,
+      :external_account_binding,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -291,6 +1163,162 @@ module Aws::ACM
     class DescribeCertificateResponse < Struct.new(
       nil,
       :certificate,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains X.500 distinguished name information.</p>
+    # @!attribute common_name
+    #   <p>The common name (CN) attribute.</p>
+    #   @return [String]
+    # @!attribute domain_components
+    #   <p>The domain component attributes.</p>
+    #   @return [Array<String>]
+    # @!attribute country
+    #   <p>The country (C) attribute.</p>
+    #   @return [String]
+    # @!attribute custom_attributes
+    #   <p>A list of custom attributes in the distinguished name. Each custom attribute contains an object identifier (OID) and its corresponding value.</p>
+    #   @return [Array<Types::CustomAttribute>]
+    # @!attribute distinguished_name_qualifier
+    #   <p>The distinguished name qualifier attribute.</p>
+    #   @return [String]
+    # @!attribute generation_qualifier
+    #   <p>The generation qualifier attribute.</p>
+    #   @return [String]
+    # @!attribute given_name
+    #   <p>The given name attribute.</p>
+    #   @return [String]
+    # @!attribute initials
+    #   <p>The initials attribute.</p>
+    #   @return [String]
+    # @!attribute locality
+    #   <p>The locality (L) attribute.</p>
+    #   @return [String]
+    # @!attribute organization
+    #   <p>The organization (O) attribute.</p>
+    #   @return [String]
+    # @!attribute organizational_unit
+    #   <p>The organizational unit (OU) attribute.</p>
+    #   @return [String]
+    # @!attribute pseudonym
+    #   <p>The pseudonym attribute.</p>
+    #   @return [String]
+    # @!attribute serial_number
+    #   <p>The serial number attribute.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state or province (ST) attribute.</p>
+    #   @return [String]
+    # @!attribute surname
+    #   <p>The surname attribute.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>The title attribute.</p>
+    #   @return [String]
+    class DistinguishedName < Struct.new(
+      nil,
+      :common_name,
+      :domain_components,
+      :country,
+      :custom_attributes,
+      :distinguished_name_qualifier,
+      :generation_qualifier,
+      :given_name,
+      :initials,
+      :locality,
+      :organization,
+      :organizational_unit,
+      :pseudonym,
+      :serial_number,
+      :state,
+      :surname,
+      :title,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters certificates by DNS name.</p>
+    # @!attribute value
+    #   <p>The DNS name value to match against.</p>
+    #   @return [String]
+    # @!attribute comparison_operator
+    #   <p>The comparison operator to use.</p>
+    #   @return [String]
+    class DnsNameFilter < Struct.new(
+      nil,
+      :value,
+      :comparison_operator,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>DNS prevalidation details including the resource record for validation.</p>
+    # @!attribute domain_scope
+    #   <p>The scope of domains covered by this prevalidation.</p>
+    #   @return [Types::DomainScope]
+    # @!attribute hosted_zone_id
+    #   <p>The Route 53 hosted zone ID for DNS validation.</p>
+    #   @return [String]
+    # @!attribute resource_record
+    #   <p>The DNS resource record to create for domain validation.</p>
+    #   @return [Types::ResourceRecord]
+    class DnsPrevalidationDetails < Struct.new(
+      nil,
+      :domain_scope,
+      :hosted_zone_id,
+      :resource_record,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>DNS prevalidation options for domain validation.</p>
+    # @!attribute domain_scope
+    #   <p>The scope of domains covered by this prevalidation.</p>
+    #   @return [Types::DomainScope]
+    # @!attribute hosted_zone_id
+    #   <p>The Route 53 hosted zone ID for DNS validation.</p>
+    #   @return [String]
+    class DnsPrevalidationOptions < Struct.new(
+      nil,
+      :domain_scope,
+      :hosted_zone_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the CNAME record that you must add to your DNS configuration to validate domain ownership using DNS validation.</p>
+    # @!attribute resource_record
+    #   <p>The CNAME record that ACM creates for DNS validation. Add this record to your DNS configuration to prove that you own or control the domain.</p>
+    #   @return [Types::ResourceRecord]
+    class DnsValidationChallenge < Struct.new(
+      nil,
+      :resource_record,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the scope of domain validation.</p>
+    # @!attribute exact_domain
+    #   <p>Whether validation applies to the exact domain.</p>
+    #   @return [String]
+    # @!attribute subdomains
+    #   <p>Whether validation applies to subdomains.</p>
+    #   @return [String]
+    # @!attribute wildcards
+    #   <p>Whether validation applies to wildcard domains.</p>
+    #   @return [String]
+    class DomainScope < Struct.new(
+      nil,
+      :exact_domain,
+      :subdomains,
+      :wildcards,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -332,6 +1360,22 @@ module Aws::ACM
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about a domain validation method migration, including the previous validation method and the target validation method.</p>
+    # @!attribute from
+    #   <p>The validation method that the certificate was using before the update.</p>
+    #   @return [String]
+    # @!attribute to
+    #   <p>The target validation method for the update.</p>
+    #   @return [String]
+    class DomainValidationMethodUpdateSummary < Struct.new(
+      nil,
+      :from,
+      :to,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the domain names that you want ACM to use to send you emails that enable you to validate domain ownership.</p>
     # @!attribute domain_name
     #   <p>A fully qualified domain name (FQDN) in the certificate request.</p>
@@ -343,6 +1387,58 @@ module Aws::ACM
       nil,
       :domain_name,
       :validation_domain,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains per-domain validation information for a certificate. This structure is returned as a member of the <a>ListCertificateDomainValidations</a> response.</p>
+    # @!attribute domain_name
+    #   <p>The fully qualified domain name (FQDN) in the certificate for which this validation summary applies.</p>
+    #   @return [String]
+    # @!attribute active_validation_configuration
+    #   <p>The validation configuration currently in effect for this domain. This reflects the validation method that ACM is currently using to validate domain ownership (for example, email or DNS).</p>
+    #   @return [Types::ValidationConfiguration]
+    # @!attribute requested_validation_configuration
+    #   <p>The validation configuration for a pending validation method migration. This field is present only when a migration is in progress (for example, from email to DNS validation). It contains the target validation method, the current validation status, and the validation challenge details (such as the CNAME record to add to your DNS configuration).</p>
+    #   @return [Types::ValidationConfiguration]
+    class DomainValidationSummary < Struct.new(
+      nil,
+      :domain_name,
+      :active_validation_configuration,
+      :requested_validation_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the email addresses used for email-based domain validation.</p>
+    # @!attribute validation_emails
+    #   <p>A list of email addresses that ACM uses to send domain validation emails.</p>
+    #   @return [Array<String>]
+    # @!attribute validation_domain
+    #   <p>The domain name that ACM uses to send validation emails.</p>
+    #   @return [String]
+    class EmailValidationChallenge < Struct.new(
+      nil,
+      :validation_emails,
+      :validation_domain,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies an expiration configuration.</p>
+    # @!attribute value
+    #   <p>The numeric value of the expiration.</p>
+    #   @return [Integer]
+    # @!attribute type
+    #   <p>The time unit for the expiration value.</p>
+    #   @return [String]
+    class Expiration < Struct.new(
+      nil,
+      :value,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -410,6 +1506,22 @@ module Aws::ACM
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains details about a failure.</p>
+    # @!attribute reason
+    #   <p>The reason for the failure.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message describing the failure.</p>
+    #   @return [String]
+    class FailureDetails < Struct.new(
+      nil,
+      :reason,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This structure can be used in the <a>ListCertificates</a> action to filter the output of the certificate list. </p>
     # @!attribute extended_key_usage
     #   <p>Specify one or more <a>ExtendedKeyUsage</a> extension values.</p>
@@ -438,12 +1550,83 @@ module Aws::ACM
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes an ASN.1 X.400 <code>GeneralName</code> as defined in <a href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a>. Only one of the following naming options should be provided.</p>
+    # @!attribute directory_name
+    #   <p>Contains information about the certificate subject. The <code>Subject</code> field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The <code>Subject</code> must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate.</p>
+    #   @return [Types::DistinguishedName]
+    # @!attribute dns_name
+    #   <p>Represents <code>GeneralName</code> as a DNS name.</p>
+    #   @return [String]
+    # @!attribute ip_address
+    #   <p>Represents <code>GeneralName</code> as an IPv4 or IPv6 address.</p>
+    #   @return [String]
+    # @!attribute other_name
+    #   <p>Represents <code>GeneralName</code> using an <code>OtherName</code> object.</p>
+    #   @return [Types::OtherName]
+    # @!attribute registered_id
+    #   <p>Represents <code>GeneralName</code> as an object identifier (OID).</p>
+    #   @return [String]
+    # @!attribute rfc822_name
+    #   <p>Represents <code>GeneralName</code> as an <a href="https://datatracker.ietf.org/doc/html/rfc822">RFC 822</a> email address.</p>
+    #   @return [String]
+    # @!attribute uniform_resource_identifier
+    #   <p>Represents <code>GeneralName</code> as a URI.</p>
+    #   @return [String]
+    class GeneralName < Struct.new(
+      :directory_name,
+      :dns_name,
+      :ip_address,
+      :other_name,
+      :registered_id,
+      :rfc822_name,
+      :uniform_resource_identifier,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DirectoryName < GeneralName; end
+      class DnsName < GeneralName; end
+      class IpAddress < GeneralName; end
+      class OtherName < GeneralName; end
+      class RegisteredId < GeneralName; end
+      class Rfc822Name < GeneralName; end
+      class UniformResourceIdentifier < GeneralName; end
+      class Unknown < GeneralName; end
+    end
+
     # @!attribute expiry_events
     #   <p>Expiration events configuration options associated with the Amazon Web Services account.</p>
     #   @return [Types::ExpiryEventsConfiguration]
     class GetAccountConfigurationResponse < Struct.new(
       nil,
       :expiry_events,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_external_account_binding_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME external account binding.</p>
+    #   @return [String]
+    class GetAcmeExternalAccountBindingCredentialsRequest < Struct.new(
+      nil,
+      :acme_external_account_binding_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute key_id
+    #   <p>The key identifier for the external account binding credentials.</p>
+    #   @return [String]
+    # @!attribute mac_key
+    #   <p>The MAC key for the external account binding credentials.</p>
+    #   @return [String]
+    class GetAcmeExternalAccountBindingCredentialsResponse < Struct.new(
+      nil,
+      :key_id,
+      :mac_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -524,6 +1707,17 @@ module Aws::ACM
     class ImportCertificateResponse < Struct.new(
       nil,
       :certificate_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request processing has failed because of an unknown error, exception, or failure.</p>
+    # @!attribute message
+    #   @return [String]
+    class InternalServerException < Struct.new(
+      nil,
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -618,8 +1812,177 @@ module Aws::ACM
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute next_token
+    #   <p>A token for pagination.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    class ListAcmeAccountsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :acme_endpoint_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_accounts
+    #   <p>The list of ACME accounts.</p>
+    #   @return [Array<Types::AcmeAccountSummary>]
+    # @!attribute next_token
+    #   <p>A token for pagination.</p>
+    #   @return [String]
+    class ListAcmeAccountsResponse < Struct.new(
+      nil,
+      :acme_accounts,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A token for pagination.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    class ListAcmeDomainValidationsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :acme_endpoint_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_domain_validations
+    #   <p>The list of domain validations.</p>
+    #   @return [Array<Types::AcmeDomainValidationSummary>]
+    # @!attribute next_token
+    #   <p>A token for pagination.</p>
+    #   @return [String]
+    class ListAcmeDomainValidationsResponse < Struct.new(
+      nil,
+      :acme_domain_validations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A token for pagination.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    class ListAcmeEndpointsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_endpoints
+    #   <p>The list of ACME endpoints.</p>
+    #   @return [Array<Types::AcmeEndpointSummary>]
+    # @!attribute next_token
+    #   <p>A token for pagination.</p>
+    #   @return [String]
+    class ListAcmeEndpointsResponse < Struct.new(
+      nil,
+      :acme_endpoints,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A token for pagination.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    class ListAcmeExternalAccountBindingsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :acme_endpoint_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute external_account_bindings
+    #   <p>The list of external account bindings.</p>
+    #   @return [Array<Types::AcmeExternalAccountBindingSummary>]
+    # @!attribute next_token
+    #   <p>A token for pagination.</p>
+    #   @return [String]
+    class ListAcmeExternalAccountBindingsResponse < Struct.new(
+      nil,
+      :external_account_bindings,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute certificate_arn
+    #   <p>The Amazon Resource Name (ARN) of the certificate for which to list domain validation summaries.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>A token returned by a previous call to <code>ListCertificateDomainValidations</code>. If the number of results exceeds <code>MaxItems</code>, use this token to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute max_items
+    #   <p>The maximum number of domain validation summaries to return. If you don't specify a value, the default is 1000.</p>
+    #   @return [Integer]
+    class ListCertificateDomainValidationsRequest < Struct.new(
+      nil,
+      :certificate_arn,
+      :next_token,
+      :max_items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_validation_summary_list
+    #   <p>A list of <a>DomainValidationSummary</a> objects, one for each domain on the certificate. Each object contains the domain name and its active and requested validation configurations.</p>
+    #   @return [Array<Types::DomainValidationSummary>]
+    # @!attribute next_token
+    #   <p>If the number of results exceeds <code>MaxItems</code>, this token is included in the response. Use this token in a subsequent <code>ListCertificateDomainValidations</code> request to retrieve the next page of results.</p>
+    #   @return [String]
+    class ListCertificateDomainValidationsResponse < Struct.new(
+      nil,
+      :domain_validation_summary_list,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute certificate_statuses
     #   <p>Filter the certificate list by status value.</p>
+    #   @return [Array<String>]
+    # @!attribute certificate_key_pair_origins
+    #   <p>Filter the certificate list by certificate key pair origin. Specify one or more <code>CertificateKeyPairOrigin</code> values. Default filtering returns only certificates with key pair origin of <code>AWS_MANAGED</code> and <code>CUSTOMER_PROVIDED</code>.</p>
     #   @return [Array<String>]
     # @!attribute includes
     #   <p>Filter the certificate list. For more information, see the <a>Filters</a> structure.</p>
@@ -639,6 +2002,7 @@ module Aws::ACM
     class ListCertificatesRequest < Struct.new(
       nil,
       :certificate_statuses,
+      :certificate_key_pair_origins,
       :includes,
       :next_token,
       :max_items,
@@ -681,6 +2045,86 @@ module Aws::ACM
     class ListTagsForCertificateResponse < Struct.new(
       nil,
       :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The ARN of the ACM resource for which to list tags.</p>
+    #   @return [String]
+    class ListTagsForResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute tags
+    #   <p>The tags associated with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class ListTagsForResourceResponse < Struct.new(
+      nil,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines a custom ASN.1 X.400 <code>GeneralName</code> using an object identifier (OID) and value. For more information, see NIST's definition of <a href="https://csrc.nist.gov/glossary/term/Object_Identifier">Object Identifier (OID)</a>.</p>
+    # @!attribute object_identifier
+    #   <p>Specifies an OID.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>Specifies an OID value.</p>
+    #   @return [String]
+    class OtherName < Struct.new(
+      nil,
+      :object_identifier,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains details about the prevalidation configuration.</p>
+    # @!attribute dns_prevalidation
+    #   <p>DNS-based prevalidation details.</p>
+    #   @return [Types::DnsPrevalidationDetails]
+    class PrevalidationDetails < Struct.new(
+      :dns_prevalidation,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DnsPrevalidation < PrevalidationDetails; end
+      class Unknown < PrevalidationDetails; end
+    end
+
+    # <p>Specifies prevalidation options for domain validation.</p>
+    # @!attribute dns_prevalidation
+    #   <p>DNS-based prevalidation options.</p>
+    #   @return [Types::DnsPrevalidationOptions]
+    class PrevalidationOptions < Struct.new(
+      :dns_prevalidation,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DnsPrevalidation < PrevalidationOptions; end
+      class Unknown < PrevalidationOptions; end
+    end
+
+    # <p>Configuration for a public certificate authority.</p>
+    # @!attribute allowed_key_algorithms
+    #   <p>The key algorithms allowed for certificates issued by this certificate authority.</p>
+    #   @return [Array<String>]
+    class PublicCertificateAuthority < Struct.new(
+      nil,
+      :allowed_key_algorithms,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -767,7 +2211,7 @@ module Aws::ACM
     #   <p>The domain name that you want ACM to use to send you emails so that you can validate domain ownership.</p>
     #   @return [Array<Types::DomainValidationOption>]
     # @!attribute options
-    #   <p>You can use this parameter to specify whether to add the certificate to a certificate transparency log and export your certificate.</p> <p>Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency">Opting Out of Certificate Transparency Logging</a>.</p> <p>You can export public ACM certificates to use with Amazon Web Services services as well as outside the Amazon Web Services Cloud. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html">Certificate Manager exportable public certificate</a>.</p>
+    #   <p>You can use this parameter to specify whether to export your certificate.</p> <p>Certificate transparency logging opt-out is no longer available. All public certificates are recorded in a certificate transparency log. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency">Certificate Transparency Logging</a>.</p> <p>You can export public ACM certificates to use with Amazon Web Services services as well as outside the Amazon Web Services Cloud. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html">Certificate Manager exportable public certificate</a>.</p>
     #   @return [Types::CertificateOptions]
     # @!attribute certificate_authority_arn
     #   <p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate. If you do not provide an ARN and you are trying to request a private certificate, ACM will attempt to issue a public certificate. For more information about private CAs, see the <a href="https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html">Amazon Web Services Private Certificate Authority</a> user guide. The ARN must have the following form: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>
@@ -776,7 +2220,7 @@ module Aws::ACM
     #   <p>One or more resource tags to associate with the certificate.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute key_algorithm
-    #   <p>Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data. RSA is the default key algorithm for ACM certificates. Elliptic Curve Digital Signature Algorithm (ECDSA) keys are smaller, offering security comparable to RSA keys but with greater computing efficiency. However, ECDSA is not supported by all network clients. Some Amazon Web Services services may require RSA keys, or only support ECDSA keys of a particular size, while others allow the use of either RSA and ECDSA keys to ensure that compatibility is not broken. Check the requirements for the Amazon Web Services service where you plan to deploy your certificate. For more information about selecting an algorithm, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms">Key algorithms</a>.</p> <note> <p>Algorithms supported for an ACM certificate request include: </p> <ul> <li> <p> <code>RSA_2048</code> </p> </li> <li> <p> <code>EC_prime256v1</code> </p> </li> <li> <p> <code>EC_secp384r1</code> </p> </li> </ul> <p>Other listed algorithms are for imported certificates only. </p> </note> <note> <p>When you request a private PKI certificate signed by a CA from Amazon Web Services Private CA, the specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key.</p> </note> <p>Default: RSA_2048</p>
+    #   <p>Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data. RSA is the default key algorithm for ACM certificates. Elliptic Curve Digital Signature Algorithm (ECDSA) keys are smaller, offering security comparable to RSA keys but with greater computing efficiency. However, ECDSA is not supported by all network clients. Some Amazon Web Services services may require RSA keys, or only support ECDSA keys of a particular size, while others allow the use of either RSA and ECDSA keys to ensure that compatibility is not broken. Check the requirements for the Amazon Web Services service where you plan to deploy your certificate. For more information about selecting an algorithm, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate-characteristics.html#algorithms-term">Key algorithms</a>.</p> <note> <p>Algorithms supported for an ACM certificate request include: </p> <ul> <li> <p> <code>RSA_2048</code> </p> </li> <li> <p> <code>EC_prime256v1</code> </p> </li> <li> <p> <code>EC_secp384r1</code> </p> </li> </ul> <p>Other listed algorithms are for imported certificates only. </p> </note> <note> <p>When you request a private PKI certificate signed by a CA from Amazon Web Services Private CA, the specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key.</p> </note> <p>Default: RSA_2048</p>
     #   @return [String]
     # @!attribute managed_by
     #   <p>Identifies the Amazon Web Services service that manages the certificate issued by ACM.</p>
@@ -827,7 +2271,7 @@ module Aws::ACM
     #   <p>The fully qualified domain name (FQDN) of the certificate that needs to be validated.</p>
     #   @return [String]
     # @!attribute validation_domain
-    #   <p>The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>site.subdomain.example.com</code> and specify a <b>ValidationDomain</b> of <code>subdomain.example.com</code>, ACM sends email to the domain registrant, technical contact, and administrative contact in WHOIS and the following five addresses:</p> <ul> <li> <p>admin@subdomain.example.com</p> </li> <li> <p>administrator@subdomain.example.com</p> </li> <li> <p>hostmaster@subdomain.example.com</p> </li> <li> <p>postmaster@subdomain.example.com</p> </li> <li> <p>webmaster@subdomain.example.com</p> </li> </ul>
+    #   <p>The base validation domain that will act as the suffix of the email addresses that are used to send the emails. This must be the same as the <code>Domain</code> value or a superdomain of the <code>Domain</code> value. For example, if you requested a certificate for <code>site.subdomain.example.com</code> and specify a <b>ValidationDomain</b> of <code>subdomain.example.com</code>, ACM sends email to the the following five addresses:</p> <ul> <li> <p>admin@subdomain.example.com</p> </li> <li> <p>administrator@subdomain.example.com</p> </li> <li> <p>hostmaster@subdomain.example.com</p> </li> <li> <p>postmaster@subdomain.example.com</p> </li> <li> <p>webmaster@subdomain.example.com</p> </li> </ul>
     #   @return [String]
     class ResendValidationEmailRequest < Struct.new(
       nil,
@@ -881,6 +2325,32 @@ module Aws::ACM
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint.</p>
+    #   @return [String]
+    # @!attribute account_url
+    #   <p>The URL of the ACME account to revoke.</p>
+    #   @return [String]
+    class RevokeAcmeAccountRequest < Struct.new(
+      nil,
+      :acme_endpoint_arn,
+      :account_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_external_account_binding_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME external account binding to revoke.</p>
+    #   @return [String]
+    class RevokeAcmeExternalAccountBindingRequest < Struct.new(
+      nil,
+      :acme_external_account_binding_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute certificate_arn
     #   <p>The Amazon Resource Name (ARN) of the public or private certificate that will be revoked. The ARN must have the following form: </p> <p> <code>arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012</code> </p>
     #   @return [String]
@@ -905,6 +2375,89 @@ module Aws::ACM
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filter_statement
+    #   <p>A filter statement that defines the search criteria. You can combine multiple filters using AND, OR, and NOT logical operators to create complex queries.</p>
+    #   @return [Types::CertificateFilterStatement]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response. Default is 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>Use this parameter only when paginating results and only in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextToken</code> from the response you just received.</p>
+    #   @return [String]
+    # @!attribute sort_by
+    #   <p>Specifies the field to sort results by. Valid values are CREATED_AT, NOT_AFTER, STATUS, RENEWAL_STATUS, EXPORTED, IN_USE, NOT_BEFORE, KEY_ALGORITHM, TYPE, CERTIFICATE_ARN, COMMON_NAME, REVOKED_AT, RENEWAL_ELIGIBILITY, ISSUED_AT, MANAGED_BY, EXPORT_OPTION, VALIDATION_METHOD, and IMPORTED_AT.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>Specifies the order of sorted results. Valid values are ASCENDING or DESCENDING.</p>
+    #   @return [String]
+    class SearchCertificatesRequest < Struct.new(
+      nil,
+      :filter_statement,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute results
+    #   <p>A list of certificate search results containing certificate ARNs, X.509 attributes, and ACM metadata.</p>
+    #   @return [Array<Types::CertificateSearchResult>]
+    # @!attribute next_token
+    #   <p>When the list is truncated, this value is present and contains the value to use for the <code>NextToken</code> parameter in a subsequent pagination request.</p>
+    #   @return [String]
+    class SearchCertificatesResponse < Struct.new(
+      nil,
+      :results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A service quota has been exceeded.</p>
+    # @!attribute message
+    #   @return [String]
+    class ServiceQuotaExceededException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters certificates by subject alternative name attributes.</p>
+    # @!attribute dns_name
+    #   <p>Filter by DNS name in subject alternative names.</p>
+    #   @return [Types::DnsNameFilter]
+    class SubjectAlternativeNameFilter < Struct.new(
+      :dns_name,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DnsName < SubjectAlternativeNameFilter; end
+      class Unknown < SubjectAlternativeNameFilter; end
+    end
+
+    # <p>Filters certificates by subject attributes.</p>
+    # @!attribute common_name
+    #   <p>Filter by common name in the subject.</p>
+    #   @return [Types::CommonNameFilter]
+    class SubjectFilter < Struct.new(
+      :common_name,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CommonName < SubjectFilter; end
+      class Unknown < SubjectFilter; end
     end
 
     # <p>A key-value pair that identifies or specifies metadata about an ACM resource.</p>
@@ -934,12 +2487,63 @@ module Aws::ACM
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The ARN of the ACM resource to which the tag is to be applied.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The key-value pair that defines the tag to apply.</p>
+    #   @return [Array<Types::Tag>]
+    class TagResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request was denied because it exceeded a quota.</p>
     # @!attribute message
     #   @return [String]
+    # @!attribute throttling_reasons
+    #   <p>One or more reasons why the request was throttled.</p>
+    #   @return [Array<Types::ThrottlingReason>]
     class ThrottlingException < Struct.new(
       nil,
       :message,
+      :throttling_reasons,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A description of why a request was throttled.</p>
+    # @!attribute reason
+    #   <p>A description of why a request was throttled.</p>
+    #   @return [String]
+    # @!attribute resource
+    #   <p>The resource that causes the request to be throttled.</p>
+    #   @return [String]
+    class ThrottlingReason < Struct.new(
+      nil,
+      :reason,
+      :resource,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies a time range for filtering certificates.</p>
+    # @!attribute start
+    #   <p>The start of the time range. This value is inclusive.</p>
+    #   @return [Time]
+    # @!attribute end
+    #   <p>The end of the time range. This value is inclusive.</p>
+    #   @return [Time]
+    class TimestampRange < Struct.new(
+      nil,
+      :start,
+      :end,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -956,16 +2560,137 @@ module Aws::ACM
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The ARN of the ACM resource from which the tag is to be removed.</p>
+    #   @return [String]
+    # @!attribute tag_keys
+    #   <p>The key of each tag to remove.</p>
+    #   @return [Array<String>]
+    class UntagResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :tag_keys,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_domain_validation_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME domain validation to update.</p>
+    #   @return [String]
+    # @!attribute prevalidation_options
+    #   <p>The updated prevalidation options.</p>
+    #   @return [Types::PrevalidationOptions]
+    class UpdateAcmeDomainValidationRequest < Struct.new(
+      nil,
+      :acme_domain_validation_arn,
+      :prevalidation_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute acme_endpoint_arn
+    #   <p>The Amazon Resource Name (ARN) of the ACME endpoint to update.</p>
+    #   @return [String]
+    # @!attribute authorization_behavior
+    #   <p>The updated authorization behavior.</p>
+    #   @return [String]
+    # @!attribute contact
+    #   <p>The updated contact requirement.</p>
+    #   @return [String]
+    # @!attribute certificate_authority
+    #   <p>The updated certificate authority configuration.</p>
+    #   @return [Types::CertificateAuthority]
+    class UpdateAcmeEndpointRequest < Struct.new(
+      nil,
+      :acme_endpoint_arn,
+      :authorization_behavior,
+      :contact,
+      :certificate_authority,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute certificate_arn
     #   <p>ARN of the requested certificate to update. This must be of the form:</p> <p> <code>arn:aws:acm:us-east-1:<i>account</i>:certificate/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>
     #   @return [String]
     # @!attribute options
-    #   <p>Use to update the options for your certificate. Currently, you can specify whether to add your certificate to a transparency log or export your certificate. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. </p>
+    #   <p>Use to update the options for your certificate. Currently, you can change the domain validation method or specify whether to export your certificate. For more information about migrating from email to DNS validation, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/email-to-dns-migration.html">Migrate from email to DNS validation</a>.</p>
     #   @return [Types::CertificateOptions]
     class UpdateCertificateOptionsRequest < Struct.new(
       nil,
       :certificate_arn,
       :options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the most recent certificate update, such as a domain validation method migration. This structure is returned as part of the <a>CertificateDetail</a> response from <a>DescribeCertificate</a>.</p>
+    # @!attribute status
+    #   <p>The status of the certificate update. The following are valid values:</p> <ul> <li> <p> <code>PENDING_DOMAIN_VALIDATION</code> – The certificate update is waiting for domain ownership validation to complete.</p> </li> <li> <p> <code>SUCCESS</code> – The certificate was updated successfully.</p> </li> <li> <p> <code>FAILED</code> – The certificate update failed.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of update that was requested for the certificate. The following are valid values:</p> <ul> <li> <p> <code>DOMAIN_VALIDATION_METHOD</code> – The update changes the domain validation method for the certificate.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute domain_validation_method_update_summary
+    #   <p>Contains information about a domain validation method migration, including the previous and target validation methods.</p>
+    #   @return [Types::DomainValidationMethodUpdateSummary]
+    # @!attribute requested_at
+    #   <p>The time at which the certificate update was requested.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The time at which the certificate update status was last changed.</p>
+    #   @return [Time]
+    class UpdateSummary < Struct.new(
+      nil,
+      :status,
+      :type,
+      :domain_validation_method_update_summary,
+      :requested_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the challenge details that you use to prove domain ownership. Only one member is set, depending on the validation method.</p>
+    # @!attribute email_validation_challenge
+    #   <p>Contains the email addresses used for email-based domain validation.</p>
+    #   @return [Types::EmailValidationChallenge]
+    # @!attribute dns_validation_challenge
+    #   <p>Contains the CNAME record that you must add to your DNS configuration to validate domain ownership using DNS validation.</p>
+    #   @return [Types::DnsValidationChallenge]
+    class ValidationChallenge < Struct.new(
+      :email_validation_challenge,
+      :dns_validation_challenge,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class EmailValidationChallenge < ValidationChallenge; end
+      class DnsValidationChallenge < ValidationChallenge; end
+      class Unknown < ValidationChallenge; end
+    end
+
+    # <p>Contains the validation method, validation status, and validation challenge details for a domain. This structure appears in <a>DomainValidationSummary</a> as both the active and requested validation configuration.</p>
+    # @!attribute validation_method
+    #   <p>The validation method for this configuration. Valid values:</p> <ul> <li> <p> <code>DNS</code> – Validation using a CNAME record added to your DNS configuration.</p> </li> <li> <p> <code>EMAIL</code> – Validation using an approval email sent to domain contacts.</p> </li> <li> <p> <code>HTTP</code> – Validation using an HTTP resource placed on your web server.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute validation_challenge
+    #   <p>The validation challenge details for this configuration. The structure varies by validation method: for DNS validation, contains a <code>DnsValidationChallenge</code> with the CNAME record to add; for email validation, contains an <code>EmailValidationChallenge</code> with the validation email addresses.</p>
+    #   @return [Types::ValidationChallenge]
+    # @!attribute validation_status
+    #   <p>The validation status for this domain. Valid values:</p> <ul> <li> <p> <code>PENDING_VALIDATION</code> – The domain is waiting for validation to complete.</p> </li> <li> <p> <code>SUCCESS</code> – Validation completed successfully.</p> </li> <li> <p> <code>FAILED</code> – Validation failed.</p> </li> </ul>
+    #   @return [String]
+    class ValidationConfiguration < Struct.new(
+      nil,
+      :validation_method,
+      :validation_challenge,
+      :validation_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -977,6 +2702,100 @@ module Aws::ACM
     class ValidationException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Filters certificates by X.509 attributes.</p>
+    # @!attribute subject
+    #   <p>Filter by certificate subject.</p>
+    #   @return [Types::SubjectFilter]
+    # @!attribute subject_alternative_name
+    #   <p>Filter by subject alternative names.</p>
+    #   @return [Types::SubjectAlternativeNameFilter]
+    # @!attribute extended_key_usage
+    #   <p>Filter by extended key usage.</p>
+    #   @return [String]
+    # @!attribute key_usage
+    #   <p>Filter by key usage.</p>
+    #   @return [String]
+    # @!attribute key_algorithm
+    #   <p>Filter by key algorithm.</p>
+    #   @return [String]
+    # @!attribute serial_number
+    #   <p>Filter by serial number.</p>
+    #   @return [String]
+    # @!attribute not_after
+    #   <p>Filter by certificate expiration date. The start date is inclusive.</p>
+    #   @return [Types::TimestampRange]
+    # @!attribute not_before
+    #   <p>Filter by certificate validity start date. The start date is inclusive.</p>
+    #   @return [Types::TimestampRange]
+    class X509AttributeFilter < Struct.new(
+      :subject,
+      :subject_alternative_name,
+      :extended_key_usage,
+      :key_usage,
+      :key_algorithm,
+      :serial_number,
+      :not_after,
+      :not_before,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Subject < X509AttributeFilter; end
+      class SubjectAlternativeName < X509AttributeFilter; end
+      class ExtendedKeyUsage < X509AttributeFilter; end
+      class KeyUsage < X509AttributeFilter; end
+      class KeyAlgorithm < X509AttributeFilter; end
+      class SerialNumber < X509AttributeFilter; end
+      class NotAfter < X509AttributeFilter; end
+      class NotBefore < X509AttributeFilter; end
+      class Unknown < X509AttributeFilter; end
+    end
+
+    # <p>Contains X.509 certificate attributes extracted from the certificate.</p>
+    # @!attribute issuer
+    #   <p>The distinguished name of the certificate issuer.</p>
+    #   @return [Types::DistinguishedName]
+    # @!attribute subject
+    #   <p>The distinguished name of the certificate subject.</p>
+    #   @return [Types::DistinguishedName]
+    # @!attribute subject_alternative_names
+    #   <p>One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website. </p>
+    #   @return [Array<Types::GeneralName>]
+    # @!attribute extended_key_usages
+    #   <p>Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID). </p>
+    #   @return [Array<String>]
+    # @!attribute key_algorithm
+    #   <p>The algorithm that was used to generate the public-private key pair.</p>
+    #   @return [String]
+    # @!attribute key_usages
+    #   <p>A list of Key Usage X.509 v3 extension objects. Each object is a string value that identifies the purpose of the public key contained in the certificate. Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT, NON_REPUDIATION, and more.</p>
+    #   @return [Array<String>]
+    # @!attribute serial_number
+    #   <p>The serial number assigned by the certificate authority.</p>
+    #   @return [String]
+    # @!attribute not_after
+    #   <p>The time after which the certificate is not valid.</p>
+    #   @return [Time]
+    # @!attribute not_before
+    #   <p>The time before which the certificate is not valid.</p>
+    #   @return [Time]
+    class X509Attributes < Struct.new(
+      nil,
+      :issuer,
+      :subject,
+      :subject_alternative_names,
+      :extended_key_usages,
+      :key_algorithm,
+      :key_usages,
+      :serial_number,
+      :not_after,
+      :not_before,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

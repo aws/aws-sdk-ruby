@@ -2,6 +2,7 @@ module Aws::PartnerCentralSelling
   module Errors
     class AccessDeniedException < Smithy::Client::ServiceError
       def message: () -> String?
+      def reason: () -> String?
     end
     class ConflictException < Smithy::Client::ServiceError
       def message: () -> String?

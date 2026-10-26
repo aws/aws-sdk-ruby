@@ -144,18 +144,18 @@ module Aws::Transfer
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -327,7 +327,7 @@ module Aws::Transfer
     # <p>Creates the connector, which captures the parameters for a connection for the AS2 or SFTP protocol. For AS2, the connector is required for sending files to an externally hosted AS2 server. For SFTP, the connector is required when sending files to an SFTP server or receiving files from an SFTP server. For more details about connectors, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/configure-as2-connector.html">Configure AS2 connectors</a> and <a href="https://docs.aws.amazon.com/transfer/latest/userguide/configure-sftp-connector.html">Create SFTP connectors</a>.</p> <note> <p>You must specify exactly one configuration object: either for AS2 (<code>As2Config</code>) or SFTP (<code>SftpConfig</code>).</p> </note>
     # @param [Hash, Types::CreateConnectorRequest] params
     # @option params [String] :url
-    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p>
+    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>
     # @option params [Types::As2ConnectorConfig] :as2_config
     #   <p>A structure that contains the parameters for an AS2 connector object.</p>
     # @option params [String] :access_role
@@ -340,9 +340,13 @@ module Aws::Transfer
     #   <p>A structure that contains the parameters for an SFTP connector object.</p>
     # @option params [String] :security_policy_name
     #   <p>Specifies the name of the security policy for the connector.</p>
+    # @option params [Types::ConnectorEgressConfig] :egress_config
+    #   <p>Specifies the egress configuration for the connector, which determines how traffic is routed from the connector to the SFTP server. When set to VPC, enables routing through customer VPCs using VPC_LATTICE for private connectivity.</p>
+    # @option params [String] :ip_address_type
+    #   <p>Specifies the IP address type for the connector's network connections. When set to <code>IPV4</code>, the connector uses IPv4 addresses only. When set to <code>DUALSTACK</code>, the connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when available.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     url: "Url", # required
+    #     url: "Url",
     #     as2_config: {
     #       local_profile_id: "ProfileId",
     #       partner_profile_id: "ProfileId",
@@ -351,9 +355,13 @@ module Aws::Transfer
     #       encryption_algorithm: "AES128_CBC" # One of: ["AES128_CBC", "AES192_CBC", "AES256_CBC", "DES_EDE3_CBC", "NONE"],
     #       signing_algorithm: "SHA256" # One of: ["SHA256", "SHA384", "SHA512", "SHA1", "NONE"],
     #       mdn_signing_algorithm: "SHA256" # One of: ["SHA256", "SHA384", "SHA512", "SHA1", "NONE", "DEFAULT"],
-    #       mdn_response: "SYNC" # One of: ["SYNC", "NONE"],
+    #       mdn_response: "SYNC" # One of: ["SYNC", "NONE", "ASYNC"],
     #       basic_auth_secret_id: "As2ConnectorSecretId",
-    #       preserve_content_type: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #       preserve_content_type: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #       async_mdn_config: {
+    #         url: "Url",
+    #         server_ids: ["ServerId"]
+    #       }
     #     },
     #     access_role: "Role", # required
     #     logging_role: "Role",
@@ -366,9 +374,18 @@ module Aws::Transfer
     #     sftp_config: {
     #       user_secret_id: "SecretId",
     #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
-    #       max_concurrent_connections: 1
+    #       max_concurrent_connections: 1,
+    #       ordered_user_secret_version_stages: ["SecretVersionStage"]
     #     },
-    #     security_policy_name: "ConnectorSecurityPolicyName"
+    #     security_policy_name: "ConnectorSecurityPolicyName",
+    #     egress_config: {
+    #       # One of:
+    #       vpc_lattice: {
+    #         resource_configuration_arn: "VpcLatticeResourceConfigurationArn", # required
+    #         port_number: 1
+    #       }
+    #     },
+    #     ip_address_type: "IPV4" # One of: ["IPV4", "DUALSTACK"]
     #   }
     #   options = {}
     #   response = client.create_connector(params, options)
@@ -443,7 +460,7 @@ module Aws::Transfer
     # @option params [Array<String>] :protocols
     #   <p>Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:</p> <ul> <li> <p> <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH</p> </li> <li> <p> <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS encryption</p> </li> <li> <p> <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p> </li> <li> <p> <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p> </li> </ul> <note> <ul> <li> <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.</p> </li> <li> <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the <code>EndpointType</code> must be <code>VPC</code> and the <code>IdentityProviderType</code> must be either <code>AWS_DIRECTORY_SERVICE</code>, <code>AWS_LAMBDA</code>, or <code>API_GATEWAY</code>.</p> </li> <li> <p>If <code>Protocol</code> includes <code>FTP</code>, then <code>AddressAllocationIds</code> cannot be associated.</p> </li> <li> <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code> can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set any of the supported identity types: <code>SERVICE_MANAGED</code>, <code>AWS_DIRECTORY_SERVICE</code>, <code>AWS_LAMBDA</code>, or <code>API_GATEWAY</code>.</p> </li> <li> <p>If <code>Protocol</code> includes <code>AS2</code>, then the <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p> </li> </ul> </note>
     # @option params [Types::ProtocolDetails] :protocol_details
-    #   <p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
+    #   <p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To specify which ports your Transfer Family server listens to, use the <code>SftpPorts</code> parameter.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
     # @option params [String] :security_policy_name
     #   <p>Specifies the name of the security policy for the server.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -451,11 +468,13 @@ module Aws::Transfer
     # @option params [Types::WorkflowDetails] :workflow_details
     #   <p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p> <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.</p>
     # @option params [Array<String>] :structured_log_destinations
-    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
+    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
     # @option params [Types::S3StorageOptions] :s3_storage_options
     #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
     # @option params [String] :ip_address_type
     #   <p>Specifies whether to use IPv4 only, or to use dual-stack (IPv4 and IPv6) for your Transfer Family endpoint. The default value is <code>IPV4</code>.</p> <important> <p>The <code>IpAddressType</code> parameter has the following limitations:</p> <ul> <li> <p>It cannot be changed while the server is online. You must stop the server before modifying this parameter.</p> </li> <li> <p>It cannot be updated to <code>DUALSTACK</code> if the server has <code>AddressAllocationIds</code> specified.</p> </li> </ul> </important> <note> <p>When using <code>DUALSTACK</code> as the <code>IpAddressType</code>, you cannot set the <code>AddressAllocationIds</code> parameter for the <a href="https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html">EndpointDetails</a> for the server.</p> </note>
+    # @option params [String] :host_key_storage_type
+    #   <p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     certificate: "Certificate",
@@ -485,7 +504,16 @@ module Aws::Transfer
     #       passive_ip: "PassiveIp",
     #       tls_session_resumption_mode: "DISABLED" # One of: ["DISABLED", "ENABLED", "ENFORCED"],
     #       set_stat_option: "DEFAULT" # One of: ["DEFAULT", "ENABLE_NO_OP"],
-    #       as2_transports: ["HTTP" # One of: ["HTTP"]]
+    #       sftp_ports: [
+    #         {
+    #           sftp_port: 1, # required
+    #           communication_mode: "CLIENT_TALK_FIRST" # One of: ["CLIENT_TALK_FIRST", "SERVER_TALK_FIRST"]
+    #         }
+    #       ],
+    #       as2_transports: ["HTTP" # One of: ["HTTP"]],
+    #       proxy_config: {
+    #         sftp_mode: "NONE" # One of: ["NONE", "PROXY_PROTOCOL_V2_ENFORCED"]
+    #       }
     #     },
     #     security_policy_name: "SecurityPolicyName",
     #     tags: [
@@ -512,7 +540,8 @@ module Aws::Transfer
     #     s3_storage_options: {
     #       directory_listing_optimization: "ENABLED" # One of: ["ENABLED", "DISABLED"]
     #     },
-    #     ip_address_type: "IPV4" # One of: ["IPV4", "DUALSTACK"]
+    #     ip_address_type: "IPV4" # One of: ["IPV4", "DUALSTACK"],
+    #     host_key_storage_type: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "SECRETS_MANAGER"]
     #   }
     #   options = {}
     #   response = client.create_server(params, options)
@@ -591,7 +620,7 @@ module Aws::Transfer
       request.send_request(options)
     end
 
-    # <p>Creates a web app based on specified parameters, and returns the ID for the new web app.</p>
+    # <p>Creates a web app based on specified parameters, and returns the ID for the new web app. You can configure the web app to be publicly accessible or hosted within a VPC.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html">Create a Transfer Family web app in a VPC</a>.</p>
     # @param [Hash, Types::CreateWebAppRequest] params
     # @option params [Types::WebAppIdentityProviderDetails] :identity_provider_details
     #   <p>You can provide a structure that contains the details for the identity provider to use with your web app.</p> <p>For more details about this parameter, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/webapp-identity-center.html">Configure your identity provider for Transfer Family web apps</a>.</p>
@@ -603,6 +632,8 @@ module Aws::Transfer
     #   <p>Key-value pairs that can be used to group and search for web apps.</p>
     # @option params [String] :web_app_endpoint_policy
     #   <p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If you are creating the web app in an Amazon Web Services GovCloud (US) Region, you can set this parameter to <code>FIPS</code>.</p>
+    # @option params [Types::WebAppEndpointDetails] :endpoint_details
+    #   <p>The endpoint configuration for the web app. You can specify whether the web app endpoint is publicly accessible or hosted within a VPC.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identity_provider_details: { # required
@@ -623,7 +654,16 @@ module Aws::Transfer
     #         value: "TagValue", # required
     #       }
     #     ],
-    #     web_app_endpoint_policy: "FIPS" # One of: ["FIPS", "STANDARD"]
+    #     web_app_endpoint_policy: "FIPS" # One of: ["FIPS", "STANDARD"],
+    #     endpoint_details: {
+    #       # One of:
+    #       vpc: {
+    #         subnet_ids: ["SubnetId"],
+    #         vpc_id: "VpcId",
+    #         security_group_ids: ["SecurityGroupId"],
+    #         ip_address_type: "IPV4" # One of: ["IPV4", "DUALSTACK"]
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.create_web_app(params, options)
@@ -648,6 +688,8 @@ module Aws::Transfer
     #   <p>Specifies the steps (actions) to take if errors are encountered during execution of the workflow.</p> <note> <p>For custom steps, the Lambda function needs to send <code>FAILURE</code> to the call back API to kick off the exception steps. Additionally, if the Lambda does not send <code>SUCCESS</code> before it times out, the exception steps are executed.</p> </note>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.</p>
+    # @option params [Array<String>] :structured_log_destinations
+    #   <p>Specifies the log groups to which your workflow logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     description: "WorkflowDescription",
@@ -768,7 +810,8 @@ module Aws::Transfer
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     structured_log_destinations: ["Arn"]
     #   }
     #   options = {}
     #   response = client.create_workflow(params, options)
@@ -1187,9 +1230,13 @@ module Aws::Transfer
     #         encryption_algorithm: "AES128_CBC" # One of: ["AES128_CBC", "AES192_CBC", "AES256_CBC", "DES_EDE3_CBC", "NONE"],
     #         signing_algorithm: "SHA256" # One of: ["SHA256", "SHA384", "SHA512", "SHA1", "NONE"],
     #         mdn_signing_algorithm: "SHA256" # One of: ["SHA256", "SHA384", "SHA512", "SHA1", "NONE", "DEFAULT"],
-    #         mdn_response: "SYNC" # One of: ["SYNC", "NONE"],
+    #         mdn_response: "SYNC" # One of: ["SYNC", "NONE", "ASYNC"],
     #         basic_auth_secret_id: "As2ConnectorSecretId",
-    #         preserve_content_type: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #         preserve_content_type: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #         async_mdn_config: {
+    #           url: "Url",
+    #           server_ids: ["ServerId"]
+    #         }
     #       },
     #       access_role: "Role",
     #       logging_role: "Role",
@@ -1202,10 +1249,22 @@ module Aws::Transfer
     #       sftp_config: {
     #         user_secret_id: "SecretId",
     #         trusted_host_keys: ["SftpConnectorTrustedHostKey"],
-    #         max_concurrent_connections: 1
+    #         max_concurrent_connections: 1,
+    #         ordered_user_secret_version_stages: ["SecretVersionStage"]
     #       },
     #       service_managed_egress_ip_addresses: ["ServiceManagedEgressIpAddress"],
-    #       security_policy_name: "ConnectorSecurityPolicyName"
+    #       security_policy_name: "ConnectorSecurityPolicyName",
+    #       egress_config: {
+    #         # One of:
+    #         vpc_lattice: {
+    #           resource_configuration_arn: "VpcLatticeResourceConfigurationArn", # required
+    #           port_number: 1
+    #         }
+    #       },
+    #       egress_type: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "VPC_LATTICE"], # required
+    #       error_message: "ConnectorErrorMessage",
+    #       status: "ACTIVE" # One of: ["ACTIVE", "ERRORED", "PENDING"], # required
+    #       ip_address_type: "IPV4" # One of: ["IPV4", "DUALSTACK"]
     #     }
     #   }
     # @return [Types::DescribeConnectorResponse]
@@ -1321,7 +1380,9 @@ module Aws::Transfer
     #           key: "TagKey", # required
     #           value: "TagValue", # required
     #         }
-    #       ]
+    #       ],
+    #       storage_type: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "SECRETS_MANAGER"],
+    #       secret_id: "SecretId"
     #     }
     #   }
     # @return [Types::DescribeHostKeyResponse]
@@ -1414,7 +1475,16 @@ module Aws::Transfer
     #         passive_ip: "PassiveIp",
     #         tls_session_resumption_mode: "DISABLED" # One of: ["DISABLED", "ENABLED", "ENFORCED"],
     #         set_stat_option: "DEFAULT" # One of: ["DEFAULT", "ENABLE_NO_OP"],
-    #         as2_transports: ["HTTP" # One of: ["HTTP"]]
+    #         sftp_ports: [
+    #           {
+    #             sftp_port: 1, # required
+    #             communication_mode: "CLIENT_TALK_FIRST" # One of: ["CLIENT_TALK_FIRST", "SERVER_TALK_FIRST"]
+    #           }
+    #         ],
+    #         as2_transports: ["HTTP" # One of: ["HTTP"]],
+    #         proxy_config: {
+    #           sftp_mode: "NONE" # One of: ["NONE", "PROXY_PROTOCOL_V2_ENFORCED"]
+    #         }
     #       },
     #       domain: "S3" # One of: ["S3", "EFS"],
     #       endpoint_details: {
@@ -1533,7 +1603,7 @@ module Aws::Transfer
       request.send_request(options)
     end
 
-    # <p>Describes the web app that's identified by <code>WebAppId</code>.</p>
+    # <p>Describes the web app that's identified by <code>WebAppId</code>. The response includes endpoint configuration details such as whether the web app is publicly accessible or VPC hosted.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html">Create a Transfer Family web app in a VPC</a>.</p>
     # @param [Hash, Types::DescribeWebAppRequest] params
     # @option params [String] :web_app_id
     #   <p>Provide the unique identifier for the web app.</p>
@@ -1569,7 +1639,16 @@ module Aws::Transfer
     #           value: "TagValue", # required
     #         }
     #       ],
-    #       web_app_endpoint_policy: "FIPS" # One of: ["FIPS", "STANDARD"]
+    #       web_app_endpoint_policy: "FIPS" # One of: ["FIPS", "STANDARD"],
+    #       endpoint_type: "PUBLIC" # One of: ["PUBLIC", "VPC"],
+    #       described_endpoint_details: {
+    #         # One of:
+    #         vpc: {
+    #           subnet_ids: ["SubnetId"],
+    #           vpc_id: "VpcId",
+    #           vpc_endpoint_id: "VpcEndpointId"
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::DescribeWebAppResponse]
@@ -1739,7 +1818,8 @@ module Aws::Transfer
     #           key: "TagKey", # required
     #           value: "TagValue", # required
     #         }
-    #       ]
+    #       ],
+    #       structured_log_destinations: ["Arn"]
     #     }
     #   }
     # @return [Types::DescribeWorkflowResponse]
@@ -1805,6 +1885,10 @@ module Aws::Transfer
     #   <p>The text description that identifies this host key.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Key-value pairs that can be used to group and search for host keys.</p>
+    # @option params [String] :storage_type
+    #   <p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>
+    # @option params [String] :kms_key
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key. If you specify a customer managed key, its key policy must allow the <code>AWSServiceRoleForTransfer</code> service-linked role to decrypt the secret. If you don't specify a value, Transfer Family uses the Amazon Web Services managed key for Secrets Manager.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     server_id: "ServerId", # required
@@ -1815,7 +1899,9 @@ module Aws::Transfer
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     storage_type: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "SECRETS_MANAGER"],
+    #     kms_key: "KmsKey"
     #   }
     #   options = {}
     #   response = client.import_host_key(params, options)
@@ -2120,7 +2206,9 @@ module Aws::Transfer
     #         fingerprint: "HostKeyFingerprint",
     #         description: "HostKeyDescription",
     #         type: "HostKeyType",
-    #         date_imported: Time.now
+    #         date_imported: Time.now,
+    #         storage_type: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "SECRETS_MANAGER"],
+    #         secret_id: "SecretId"
     #       }
     #     ]
     #   }
@@ -2298,7 +2386,7 @@ module Aws::Transfer
       request.send_request(options)
     end
 
-    # <p>Lists all web apps associated with your Amazon Web Services account for your current region.</p>
+    # <p>Lists all web apps associated with your Amazon Web Services account for your current region. The response includes the endpoint type for each web app, showing whether it is publicly accessible or VPC hosted.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html">Create a Transfer Family web app in a VPC</a>.</p>
     # @param [Hash, Types::ListWebAppsRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return.</p>
@@ -2320,7 +2408,8 @@ module Aws::Transfer
     #         arn: "Arn", # required
     #         web_app_id: "WebAppId", # required
     #         access_endpoint: "WebAppAccessEndpoint",
-    #         web_app_endpoint: "WebAppEndpoint"
+    #         web_app_endpoint: "WebAppEndpoint",
+    #         endpoint_type: "PUBLIC" # One of: ["PUBLIC", "VPC"]
     #       }
     #     ]
     #   }
@@ -2389,7 +2478,7 @@ module Aws::Transfer
       request.send_request(options)
     end
 
-    # <p>Retrieves a list of the contents of a directory from a remote SFTP server. You specify the connector ID, the output path, and the remote directory path. You can also specify the optional <code>MaxItems</code> value to control the maximum number of items that are listed from the remote directory. This API returns a list of all files and directories in the remote directory (up to the maximum value), but does not return files or folders in sub-directories. That is, it only returns a list of files and directories one-level deep.</p> <p>After you receive the listing file, you can provide the files that you want to transfer to the <code>RetrieveFilePaths</code> parameter of the <code>StartFileTransfer</code> API call.</p> <p>The naming convention for the output file is <code> <i>connector-ID</i>-<i>listing-ID</i>.json</code>. The output file contains the following information:</p> <ul> <li> <p> <code>filePath</code>: the complete path of a remote file, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>modifiedTimestamp</code>: the last time the file was modified, in UTC time format. This field is optional. If the remote file attributes don't contain a timestamp, it is omitted from the file listing.</p> </li> <li> <p> <code>size</code>: the size of the file, in bytes. This field is optional. If the remote file attributes don't contain a file size, it is omitted from the file listing.</p> </li> <li> <p> <code>path</code>: the complete path of a remote directory, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>truncated</code>: a flag indicating whether the list output contains all of the items contained in the remote directory or not. If your <code>Truncated</code> output value is true, you can increase the value provided in the optional <code>max-items</code> input attribute to be able to list more items (up to the maximum allowed list size of 10,000 items).</p> </li> </ul>
+    # <p>Retrieves a list of the contents of a directory from a remote SFTP server. You specify the connector ID, the output path, and the remote directory path. You can also specify the optional <code>MaxItems</code> value to control the maximum number of items that are listed from the remote directory. This API returns a list of all files and directories in the remote directory (up to the maximum value), but does not return files or folders in sub-directories. That is, it only returns a list of files and directories one-level deep.</p> <p>After you receive the listing file, you can provide the files that you want to transfer to the <code>RetrieveFilePaths</code> parameter of the <code>StartFileTransfer</code> API call.</p> <p>The naming convention for the output file is <code> <i>connector-ID</i>-<i>listing-ID</i>.json</code>. The output file contains the following information:</p> <ul> <li> <p> <code>filePath</code>: the complete path of a remote file, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>modifiedTimestamp</code>: the last time the file was modified, in UTC time format. This field is optional. If the remote file attributes don't contain a timestamp, it is omitted from the file listing.</p> </li> <li> <p> <code>size</code>: the size of the file, in bytes. This field is optional. If the remote file attributes don't contain a file size, it is omitted from the file listing.</p> </li> <li> <p> <code>path</code>: the complete path of a remote directory, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>truncated</code>: a flag indicating whether the list output contains all of the items contained in the remote directory or not. If your <code>Truncated</code> output value is true, you can increase the value provided in the optional <code>max-items</code> input attribute to be able to list more items (up to the maximum allowed list size of 200,000 items).</p> </li> </ul>
     # @param [Hash, Types::StartDirectoryListingRequest] params
     # @option params [String] :connector_id
     #   <p>The unique identifier for the connector.</p>
@@ -2432,13 +2521,21 @@ module Aws::Transfer
     #   <p>For an inbound transfer, the <code>LocaDirectoryPath</code> specifies the destination for one or more files that are transferred from the partner's SFTP server.</p>
     # @option params [String] :remote_directory_path
     #   <p>For an outbound transfer, the <code>RemoteDirectoryPath</code> specifies the destination for one or more files that are transferred to the partner's SFTP server. If you don't specify a <code>RemoteDirectoryPath</code>, the destination for transferred files is the SFTP user's home directory.</p>
+    # @option params [Array<Types::CustomHttpHeader>] :custom_http_headers
+    #   <p>An array of key-value pairs that represent custom HTTP headers to include in AS2 messages. These headers are added to the AS2 message when sending files to your trading partner.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     connector_id: "ConnectorId", # required
     #     send_file_paths: ["FilePath"],
     #     retrieve_file_paths: ["FilePath"],
     #     local_directory_path: "FilePath",
-    #     remote_directory_path: "FilePath"
+    #     remote_directory_path: "FilePath",
+    #     custom_http_headers: [
+    #       {
+    #         key: "CustomHttpHeaderKeyType",
+    #         value: "CustomHttpHeaderValueType"
+    #       }
+    #     ]
     #   }
     #   options = {}
     #   response = client.start_file_transfer(params, options)
@@ -2798,7 +2895,7 @@ module Aws::Transfer
     # @option params [String] :connector_id
     #   <p>The unique identifier for the connector.</p>
     # @option params [String] :url
-    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p>
+    #   <p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>
     # @option params [Types::As2ConnectorConfig] :as2_config
     #   <p>A structure that contains the parameters for an AS2 connector object.</p>
     # @option params [String] :access_role
@@ -2809,6 +2906,10 @@ module Aws::Transfer
     #   <p>A structure that contains the parameters for an SFTP connector object.</p>
     # @option params [String] :security_policy_name
     #   <p>Specifies the name of the security policy for the connector.</p>
+    # @option params [Types::UpdateConnectorEgressConfig] :egress_config
+    #   <p>Updates the egress configuration for the connector, allowing you to modify how traffic is routed from the connector to the SFTP server. Changes to VPC configuration may require connector restart.</p>
+    # @option params [String] :ip_address_type
+    #   <p>Specifies the IP address type for the connector's network connections. When set to <code>IPV4</code>, the connector uses IPv4 addresses only. When set to <code>DUALSTACK</code>, the connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when available.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     connector_id: "ConnectorId", # required
@@ -2821,18 +2922,31 @@ module Aws::Transfer
     #       encryption_algorithm: "AES128_CBC" # One of: ["AES128_CBC", "AES192_CBC", "AES256_CBC", "DES_EDE3_CBC", "NONE"],
     #       signing_algorithm: "SHA256" # One of: ["SHA256", "SHA384", "SHA512", "SHA1", "NONE"],
     #       mdn_signing_algorithm: "SHA256" # One of: ["SHA256", "SHA384", "SHA512", "SHA1", "NONE", "DEFAULT"],
-    #       mdn_response: "SYNC" # One of: ["SYNC", "NONE"],
+    #       mdn_response: "SYNC" # One of: ["SYNC", "NONE", "ASYNC"],
     #       basic_auth_secret_id: "As2ConnectorSecretId",
-    #       preserve_content_type: "ENABLED" # One of: ["ENABLED", "DISABLED"]
+    #       preserve_content_type: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #       async_mdn_config: {
+    #         url: "Url",
+    #         server_ids: ["ServerId"]
+    #       }
     #     },
     #     access_role: "Role",
     #     logging_role: "Role",
     #     sftp_config: {
     #       user_secret_id: "SecretId",
     #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
-    #       max_concurrent_connections: 1
+    #       max_concurrent_connections: 1,
+    #       ordered_user_secret_version_stages: ["SecretVersionStage"]
     #     },
-    #     security_policy_name: "ConnectorSecurityPolicyName"
+    #     security_policy_name: "ConnectorSecurityPolicyName",
+    #     egress_config: {
+    #       # One of:
+    #       vpc_lattice: {
+    #         resource_configuration_arn: "VpcLatticeResourceConfigurationArn",
+    #         port_number: 1
+    #       }
+    #     },
+    #     ip_address_type: "IPV4" # One of: ["IPV4", "DUALSTACK"]
     #   }
     #   options = {}
     #   response = client.update_connector(params, options)
@@ -2847,7 +2961,7 @@ module Aws::Transfer
       request.send_request(options)
     end
 
-    # <p>Updates the description for the host key that's specified by the <code>ServerId</code> and <code>HostKeyId</code> parameters.</p>
+    # <p>Updates the host key that's specified by the <code>ServerId</code> and <code>HostKeyId</code> parameters. You can update the description of the host key, change where the host key is stored by specifying the <code>StorageType</code>, and specify the KMS key used to encrypt the host key when it's stored in Secrets Manager.</p> <p>To change a host key's storage type from <code>SERVICE_MANAGED</code> to <code>SECRETS_MANAGER</code>, you must have the <code>transfer:ExportHostKey</code> permission. <code>transfer:ExportHostKey</code> is a permission-only action that has no corresponding API operation.</p>
     # @param [Hash, Types::UpdateHostKeyRequest] params
     # @option params [String] :server_id
     #   <p>The identifier of the server that contains the host key that you are updating.</p>
@@ -2855,11 +2969,17 @@ module Aws::Transfer
     #   <p>The identifier of the host key that you are updating.</p>
     # @option params [String] :description
     #   <p>An updated description for the host key.</p>
+    # @option params [String] :storage_type
+    #   <p>Specifies whether the host key is stored by Transfer Family (<code>SERVICE_MANAGED</code>) or in Secrets Manager (<code>SECRETS_MANAGER</code>). When you specify <code>SECRETS_MANAGER</code>, Transfer Family stores the private host key material in an Secrets Manager secret.</p>
+    # @option params [String] :kms_key
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key. If you specify a customer managed key, its key policy must allow the <code>AWSServiceRoleForTransfer</code> service-linked role to decrypt the secret. If you don't specify a value, Transfer Family uses the Amazon Web Services managed key for Secrets Manager.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     server_id: "ServerId", # required
     #     host_key_id: "HostKeyId", # required
-    #     description: "HostKeyDescription", # required
+    #     description: "HostKeyDescription",
+    #     storage_type: "SERVICE_MANAGED" # One of: ["SERVICE_MANAGED", "SECRETS_MANAGER"],
+    #     kms_key: "KmsKey"
     #   }
     #   options = {}
     #   response = client.update_host_key(params, options)
@@ -2904,7 +3024,7 @@ module Aws::Transfer
     # @option params [String] :certificate
     #   <p>The Amazon Resource Name (ARN) of the Amazon Web ServicesCertificate Manager (ACM) certificate. Required when <code>Protocols</code> is set to <code>FTPS</code>.</p> <p>To request a new public certificate, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html">Request a public certificate</a> in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p> <p>To import an existing certificate into ACM, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html">Importing certificates into ACM</a> in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p> <p>To request a private certificate to use FTPS through private IP addresses, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html">Request a private certificate</a> in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p> <p>Certificates with the following cryptographic algorithms and key sizes are supported:</p> <ul> <li> <p>2048-bit RSA (RSA_2048)</p> </li> <li> <p>4096-bit RSA (RSA_4096)</p> </li> <li> <p>Elliptic Prime Curve 256 bit (EC_prime256v1)</p> </li> <li> <p>Elliptic Prime Curve 384 bit (EC_secp384r1)</p> </li> <li> <p>Elliptic Prime Curve 521 bit (EC_secp521r1)</p> </li> </ul> <note> <p>The certificate must be a valid SSL/TLS X.509 version 3 certificate with FQDN or IP address specified and information about the issuer.</p> </note>
     # @option params [Types::ProtocolDetails] :protocol_details
-    #   <p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
+    #   <p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To specify which ports your Transfer Family server listens to, use the <code>SftpPorts</code> parameter.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>
     # @option params [Types::EndpointDetails] :endpoint_details
     #   <p>The virtual private cloud (VPC) endpoint settings that are configured for your server. When you host your endpoint within your VPC, you can make your endpoint accessible only to resources within your VPC, or you can attach Elastic IP addresses and make your endpoint accessible to clients over the internet. Your VPC's default security groups are automatically assigned to your endpoint.</p>
     # @option params [String] :endpoint_type
@@ -2928,7 +3048,7 @@ module Aws::Transfer
     # @option params [Types::WorkflowDetails] :workflow_details
     #   <p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p> <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.</p> <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p> <p> <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}'</code> </p>
     # @option params [Array<String>] :structured_log_destinations
-    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
+    #   <p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>
     # @option params [Types::S3StorageOptions] :s3_storage_options
     #   <p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>
     # @option params [String] :ip_address_type
@@ -2942,7 +3062,16 @@ module Aws::Transfer
     #       passive_ip: "PassiveIp",
     #       tls_session_resumption_mode: "DISABLED" # One of: ["DISABLED", "ENABLED", "ENFORCED"],
     #       set_stat_option: "DEFAULT" # One of: ["DEFAULT", "ENABLE_NO_OP"],
-    #       as2_transports: ["HTTP" # One of: ["HTTP"]]
+    #       sftp_ports: [
+    #         {
+    #           sftp_port: 1, # required
+    #           communication_mode: "CLIENT_TALK_FIRST" # One of: ["CLIENT_TALK_FIRST", "SERVER_TALK_FIRST"]
+    #         }
+    #       ],
+    #       as2_transports: ["HTTP" # One of: ["HTTP"]],
+    #       proxy_config: {
+    #         sftp_mode: "NONE" # One of: ["NONE", "PROXY_PROTOCOL_V2_ENFORCED"]
+    #       }
     #     },
     #     endpoint_details: {
     #       address_allocation_ids: ["AddressAllocationId"],
@@ -3053,7 +3182,7 @@ module Aws::Transfer
       request.send_request(options)
     end
 
-    # <p>Assigns new properties to a web app. You can modify the access point, identity provider details, and the web app units.</p>
+    # <p>Assigns new properties to a web app. You can modify the access point, identity provider details, endpoint configuration, and the web app units.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html">Create a Transfer Family web app in a VPC</a>.</p>
     # @param [Hash, Types::UpdateWebAppRequest] params
     # @option params [String] :web_app_id
     #   <p>Provide the identifier of the web app that you are updating.</p>
@@ -3063,6 +3192,8 @@ module Aws::Transfer
     #   <p>The <code>AccessEndpoint</code> is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.</p>
     # @option params [Types::WebAppUnits] :web_app_units
     #   <p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>
+    # @option params [Types::UpdateWebAppEndpointDetails] :endpoint_details
+    #   <p>The updated endpoint configuration for the web app. You can modify the endpoint type and VPC configuration settings.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     web_app_id: "WebAppId", # required
@@ -3076,6 +3207,13 @@ module Aws::Transfer
     #     web_app_units: {
     #       # One of:
     #       provisioned: 1
+    #     },
+    #     endpoint_details: {
+    #       # One of:
+    #       vpc: {
+    #         subnet_ids: ["SubnetId"],
+    #         ip_address_type: "IPV4" # One of: ["IPV4", "DUALSTACK"]
+    #       }
     #     }
     #   }
     #   options = {}

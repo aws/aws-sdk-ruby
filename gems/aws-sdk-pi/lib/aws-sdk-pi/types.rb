@@ -96,7 +96,7 @@ module Aws::PI
     # @!attribute identifier
     #   <p>An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from
     #               this data source.</p>
-    #            <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value. 
+    #            <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value.
     #               For example, specify <code>db-ADECBTYHKTSAUMUZQYPDS2GW4A</code>.</p>
     #   @return [String]
     # @!attribute start_time
@@ -131,14 +131,14 @@ module Aws::PI
       include ::Smithy::Schema::Structure
     end
 
-    # <p>List of data objects which provide details about source metrics. 
+    # <p>List of data objects which provide details about source metrics.
     #             This field can be used to determine the PI metric to render
-    #             for the insight. This data type also includes static values 
-    #             for the metrics for the Insight that were calculated and included 
+    #             for the insight. This data type also includes static values
+    #             for the metrics for the Insight that were calculated and included
     #             in text and annotations on the DB load chart.</p>
     # @!attribute performance_insights_metric
-    #   <p>This field determines the Performance Insights metric to render 
-    #               for the insight. The <code>name</code> field refers to a Performance Insights metric. 
+    #   <p>This field determines the Performance Insights metric to render
+    #               for the insight. The <code>name</code> field refers to a Performance Insights metric.
     #           </p>
     #   @return [Types::PerformanceInsightsMetric]
     class Data < Struct.new(
@@ -169,8 +169,8 @@ module Aws::PI
     #   <p>The Amazon Web Services service for which Performance Insights will return metrics. Valid value is <code>RDS</code>.</p>
     #   @return [String]
     # @!attribute identifier
-    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. 
-    #               In the console, the identifier is shown as <i>ResourceID</i>. When you 
+    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source.
+    #               In the console, the identifier is shown as <i>ResourceID</i>. When you
     #               call <code>DescribeDBInstances</code>, the identifier is returned as <code>DbiResourceId</code>.</p>
     #            <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify
     #               <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>
@@ -213,13 +213,13 @@ module Aws::PI
     # @!attribute identifier
     #   <p>An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from
     #               this data source.</p>
-    #            <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value. 
+    #            <p>To use an Amazon RDS instance as a data source, you specify its <code>DbiResourceId</code> value.
     #               For example, specify <code>db-FAIHNTYBKTGAUSUZQYPDS2GW4A</code>.
     #           </p>
     #   @return [String]
     # @!attribute start_time
     #   <p>The date and time specifying the beginning of the requested time series data. You must specify a
-    #               <code>StartTime</code> within the past 7 days. The value specified is <i>inclusive</i>, 
+    #               <code>StartTime</code> within the past 7 days. The value specified is <i>inclusive</i>,
     #               which means that data points equal to or greater than <code>StartTime</code> are returned.
     #           </p>
     #            <p>The value for <code>StartTime</code> must be earlier than the value for <code>EndTime</code>.
@@ -244,16 +244,16 @@ module Aws::PI
     #                     <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine. </p>
     #               </li>
     #            </ul>
-    #            <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> 
-    #               and <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than 
-    #               the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> 
-    #               showing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and 
-    #               <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. For most use cases, you can 
+    #            <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code>
+    #               and <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than
+    #               the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code>
+    #               showing the scaled values, <code>db.sampledload.avg</code> showing the raw values, and
+    #               <code>db.sampledload.avg</code> less than <code>db.load.avg</code>. For most use cases, you can
     #               query <code>db.load.avg</code> only.
     #           </p>
     #   @return [String]
     # @!attribute period_in_seconds
-    #   <p>The granularity, in seconds, of the data points returned from Performance Insights. A period can be as short as 
+    #   <p>The granularity, in seconds, of the data points returned from Performance Insights. A period can be as short as
     #               one second, or as long as one day (86400 seconds). Valid values are:
     #           </p>
     #            <ul>
@@ -278,7 +278,7 @@ module Aws::PI
     #                     <code>86400</code> (twenty-four hours)</p>
     #               </li>
     #            </ul>
-    #            <p>If you don't specify <code>PeriodInSeconds</code>, then Performance Insights chooses a value for you, with a 
+    #            <p>If you don't specify <code>PeriodInSeconds</code>, then Performance Insights chooses a value for you, with a
     #               goal of returning roughly 100-200 data points in the response.
     #           </p>
     #   @return [Integer]
@@ -294,7 +294,7 @@ module Aws::PI
     #            <p>The only supported statistic function is <code>.avg</code>.</p>
     #   @return [Array<String>]
     # @!attribute partition_by
-    #   <p>For each dimension specified in <code>GroupBy</code>, specify a secondary dimension 
+    #   <p>For each dimension specified in <code>GroupBy</code>, specify a secondary dimension
     #               to further subdivide the partition keys in the response.
     #           </p>
     #   @return [Types::DimensionGroup]
@@ -406,7 +406,7 @@ module Aws::PI
     #             </li>
     #          </ul>
     #          <note>
-    #             <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL 
+    #             <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL
     #                 statements, only the first 500 bytes are returned.</p>
     #          </note>
     # @!attribute group
@@ -636,7 +636,7 @@ module Aws::PI
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>db.sql.tokenized_id</code> - The hash of the SQL digest generated by Performance Insights (all engines except Amazon DocumentDB). The <code>db.sql.tokenized_id</code> dimension 
+    #                     <code>db.sql.tokenized_id</code> - The hash of the SQL digest generated by Performance Insights (all engines except Amazon DocumentDB). The <code>db.sql.tokenized_id</code> dimension
     #                       fetches the value of the <code>db.sql_tokenized.id</code> dimension. Amazon RDS returns <code>db.sql.tokenized_id</code> from the <code>db.sql</code> dimension group.
     #                   </p>
     #               </li>
@@ -712,7 +712,7 @@ module Aws::PI
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that includes the requested dimension key values and aggregated metric values 
+    # <p>An object that includes the requested dimension key values and aggregated metric values
     #           within a dimension group.</p>
     # @!attribute dimensions
     #   <p>A map of name-value pairs for the dimensions in the group.</p>
@@ -739,7 +739,7 @@ module Aws::PI
 
     # <p>An object that describes the details for a specified dimension.</p>
     # @!attribute value
-    #   <p>The value of the dimension detail data. Depending on the return status, this value is either the 
+    #   <p>The value of the dimension detail data. Depending on the return status, this value is either the
     #             full or truncated SQL query for the following dimensions:</p>
     #            <ul>
     #               <li>
@@ -836,8 +836,8 @@ module Aws::PI
     #   <p>The Amazon Web Services service for which Performance Insights returns data. The only valid value is <code>RDS</code>.</p>
     #   @return [String]
     # @!attribute identifier
-    #   <p>The ID for a data source from which to gather dimension data. This ID must be immutable and 
-    #             unique within an Amazon Web Services Region. When a DB instance is the data source, specify its 
+    #   <p>The ID for a data source from which to gather dimension data. This ID must be immutable and
+    #             unique within an Amazon Web Services Region. When a DB instance is the data source, specify its
     #             <code>DbiResourceId</code> value. For example, specify <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.
     #         </p>
     #   @return [String]
@@ -880,7 +880,7 @@ module Aws::PI
     #                     <code>db.query.id</code> for dimension group <code>db.query</code> (DocumentDB only)</p>
     #               </li>
     #               <li>
-    #                  <p>For the dimension group <code>db.lock_snapshot</code>, the <code>GroupIdentifier</code> is the epoch timestamp when Performance Insights captured the snapshot, in seconds. 
+    #                  <p>For the dimension group <code>db.lock_snapshot</code>, the <code>GroupIdentifier</code> is the epoch timestamp when Performance Insights captured the snapshot, in seconds.
     #                       You can retrieve this value with the <code>GetResourceMetrics</code> operation for a 1 second period.</p>
     #               </li>
     #            </ul>
@@ -937,8 +937,8 @@ module Aws::PI
     #               <code>RDS</code>.</p>
     #   @return [String]
     # @!attribute identifier
-    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers 
-    #               metrics from this data source. In the console, the identifier is shown as 
+    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers
+    #               metrics from this data source. In the console, the identifier is shown as
     #               <i>ResourceID</i>. When you call <code>DescribeDBInstances</code>, the identifier is
     #               returned as <code>DbiResourceId</code>.</p>
     #            <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify
@@ -954,7 +954,7 @@ module Aws::PI
     #               value is <code>plain text</code>.</p>
     #   @return [String]
     # @!attribute accept_language
-    #   <p>The text language in the report. The default language is <code>EN_US</code> (English). 
+    #   <p>The text language in the report. The default language is <code>EN_US</code> (English).
     #           </p>
     #   @return [String]
     class GetPerformanceAnalysisReportRequest < Struct.new(
@@ -984,8 +984,8 @@ module Aws::PI
     #   <p>The Amazon Web Services service for which Performance Insights returns metrics.</p>
     #   @return [String]
     # @!attribute identifier
-    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. 
-    #               Performance Insights gathers metrics from this data source. To use a DB instance as a data source, 
+    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region.
+    #               Performance Insights gathers metrics from this data source. To use a DB instance as a data source,
     #               specify its <code>DbiResourceId</code> value. For example, specify <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.
     #           </p>
     #   @return [String]
@@ -999,9 +999,9 @@ module Aws::PI
     end
 
     # @!attribute identifier
-    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. 
-    #         
-    #         Performance Insights gathers metrics from this data source. To use a DB instance as a data source, 
+    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region.
+    #
+    #         Performance Insights gathers metrics from this data source. To use a DB instance as a data source,
     #               specify its <code>DbiResourceId</code> value. For example, specify <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.
     #           </p>
     #   @return [String]
@@ -1042,21 +1042,21 @@ module Aws::PI
     #   @return [String]
     # @!attribute metric_queries
     #   <p>An array of one or more queries to perform. Each query must specify a Performance Insights metric and specify an aggregate function, and you can provide filtering
-    #               criteria. You must append the aggregate function to the metric. For example, to find the average for the metric <code>db.load</code> 
-    #               you must use <code>db.load.avg</code>. Valid values for aggregate functions include <code>.avg</code>, <code>.min</code>, 
+    #               criteria. You must append the aggregate function to the metric. For example, to find the average for the metric <code>db.load</code>
+    #               you must use <code>db.load.avg</code>. Valid values for aggregate functions include <code>.avg</code>, <code>.min</code>,
     #               <code>.max</code>, and <code>.sum</code>.</p>
     #   @return [Array<Types::MetricQuery>]
     # @!attribute start_time
     #   <p>The date and time specifying the beginning of the requested time series query range. You can't
-    #               specify a <code>StartTime</code> that is earlier than 7 days ago. By default, Performance Insights has 7 days of 
+    #               specify a <code>StartTime</code> that is earlier than 7 days ago. By default, Performance Insights has 7 days of
     #               retention, but you can extend this range up to 2 years. The value specified is
-    #               <i>inclusive</i>. Thus, the command returns data points equal to or greater 
+    #               <i>inclusive</i>. Thus, the command returns data points equal to or greater
     #               than <code>StartTime</code>.</p>
     #            <p>The value for <code>StartTime</code> must be earlier than the value for <code>EndTime</code>.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>The date and time specifying the end of the requested time series query range. The value 
-    #               specified is <i>exclusive</i>. Thus, the command returns data points less than 
+    #   <p>The date and time specifying the end of the requested time series query range. The value
+    #               specified is <i>exclusive</i>. Thus, the command returns data points less than
     #               (but not equal to) <code>EndTime</code>.</p>
     #            <p>The value for <code>EndTime</code> must be later than the value for <code>StartTime</code>.</p>
     #   @return [Time]
@@ -1128,11 +1128,11 @@ module Aws::PI
     #               returned as <code>DbiResourceId</code>.</p>
     #   @return [String]
     # @!attribute metric_list
-    #   <p>An array of metric results, where each array element contains all of the data points for a 
+    #   <p>An array of metric results, where each array element contains all of the data points for a
     #             particular dimension.</p>
     #   @return [Array<Types::MetricKeyDataPoints>]
     # @!attribute next_token
-    #   <p>An optional pagination token provided by a previous request. If this parameter is specified, 
+    #   <p>An optional pagination token provided by a previous request. If this parameter is specified,
     #             the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.
     #         </p>
     #   @return [String]
@@ -1173,12 +1173,12 @@ module Aws::PI
     # @!attribute description
     #   <p>Description of the insight. For example:
     #               <code>A high severity Insight found between 02:00 to 02:30,
-    #                   where there was an unusually high DB load 600x above baseline. 
+    #                   where there was an unusually high DB load 600x above baseline.
     #                   Likely performance impact</code>.</p>
     #   @return [String]
     # @!attribute recommendations
     #   <p>List of recommendations for the insight.
-    #               For example, <code>Investigate the following SQLs that contributed 
+    #               For example, <code>Investigate the following SQLs that contributed
     #                   to 100% of the total DBLoad during that time period: sql-id</code>.</p>
     #   @return [Array<Types::Recommendation>]
     # @!attribute insight_data
@@ -1186,7 +1186,7 @@ module Aws::PI
     #   @return [Array<Types::Data>]
     # @!attribute baseline_data
     #   <p>
-    #               Metric names and values from the timeframe 
+    #               Metric names and values from the timeframe
     #               used as baseline to generate the insight.</p>
     #   @return [Array<Types::Data>]
     class Insight < Struct.new(
@@ -1241,19 +1241,19 @@ module Aws::PI
     #   <p>The types of metrics for which to retrieve dimensions. Valid values include <code>db.load</code>.</p>
     #   @return [Array<String>]
     # @!attribute max_results
-    #   <p>The maximum number of items to return in the response. If more items exist than the specified 
-    #               <code>MaxRecords</code> value, a pagination token is included in the response so that the remaining 
+    #   <p>The maximum number of items to return in the response. If more items exist than the specified
+    #               <code>MaxRecords</code> value, a pagination token is included in the response so that the remaining
     #               results can be retrieved.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>An optional pagination token provided by a previous request. If this parameter is specified, 
+    #   <p>An optional pagination token provided by a previous request. If this parameter is specified,
     #               the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.
     #           </p>
     #   @return [String]
     # @!attribute authorized_actions
     #   <p>The actions to discover the dimensions you are authorized to access. If you specify multiple actions, then the response will
     #           contain the dimensions common for all the actions.</p>
-    #            <p>When you don't specify this request parameter or provide an empty list, the response contains all the 
+    #            <p>When you don't specify this request parameter or provide an empty list, the response contains all the
     #               available dimensions for the target database engine whether or not you are authorized to access them.</p>
     #   @return [Array<String>]
     class ListAvailableResourceDimensionsRequest < Struct.new(
@@ -1273,7 +1273,7 @@ module Aws::PI
     #   <p>The dimension information returned for requested metric types.</p>
     #   @return [Array<Types::MetricDimensionGroups>]
     # @!attribute next_token
-    #   <p>An optional pagination token provided by a previous request. If this parameter is specified, 
+    #   <p>An optional pagination token provided by a previous request. If this parameter is specified,
     #               the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.</p>
     #   @return [String]
     class ListAvailableResourceDimensionsResponse < Struct.new(
@@ -1315,12 +1315,12 @@ module Aws::PI
     #            </ul>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>An optional pagination token provided by a previous request. If this parameter is specified, 
+    #   <p>An optional pagination token provided by a previous request. If this parameter is specified,
     #             the response includes only records beyond the token, up to the value specified by <code>MaxRecords</code>.
     #         </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return. If the <code>MaxRecords</code> value is less than the number 
+    #   <p>The maximum number of items to return. If the <code>MaxRecords</code> value is less than the number
     #               of existing items, the response includes a pagination token. </p>
     #   @return [Integer]
     class ListAvailableResourceMetricsRequest < Struct.new(
@@ -1336,7 +1336,7 @@ module Aws::PI
     end
 
     # @!attribute metrics
-    #   <p>An array of metrics available to query. Each array element contains the full name, 
+    #   <p>An array of metrics available to query. Each array element contains the full name,
     #               description, and unit of the metric.
     #           </p>
     #   @return [Array<Types::ResponseResourceMetric>]
@@ -1364,8 +1364,66 @@ module Aws::PI
     #            <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify
     #               <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>
     #   @return [String]
+    # @!attribute analysis_report_id
+    #   <p>A unique identifier of the created analysis report. For example,
+    #               <code>report-12345678901234567</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute recommendation_ids
+    #   <p>A list of recommendation identifiers to filter the results.</p>
+    #   @return [Array<String>]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return in the response. If more items exist than the specified <code>MaxResults</code> value, a
+    #               pagination token is included in the response so that the remaining results can be retrieved. </p>
+    #   @return [Integer]
     # @!attribute next_token
-    #   <p>An optional pagination token provided by a previous request. 
+    #   <p>An optional pagination token provided by a previous request.
+    #               If this parameter is specified, the response includes only records beyond
+    #               the token, up to the value specified by <code>MaxResults</code>.</p>
+    #   @return [String]
+    class ListPerformanceAnalysisReportRecommendationsRequest < Struct.new(
+      nil,
+      :service_type,
+      :identifier,
+      :analysis_report_id,
+      :recommendation_ids,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute recommendations
+    #   <p>The list of recommendations for the analysis report.</p>
+    #   @return [Array<Types::Recommendation>]
+    # @!attribute next_token
+    #   <p>An optional pagination token provided by a previous request.
+    #               If this parameter is specified, the response includes only records beyond the token,
+    #               up to the value specified by <code>MaxResults</code>.</p>
+    #   @return [String]
+    class ListPerformanceAnalysisReportRecommendationsResponse < Struct.new(
+      nil,
+      :recommendations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute service_type
+    #   <p>The Amazon Web Services service for which Performance Insights returns metrics. Valid value is
+    #               <code>RDS</code>.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the
+    #               console, the identifier is shown as <i>ResourceID</i>. When you call <code>DescribeDBInstances</code>, the identifier is
+    #               returned as <code>DbiResourceId</code>.</p>
+    #            <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify
+    #               <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>An optional pagination token provided by a previous request.
     #               If this parameter is specified, the response includes only records beyond
     #               the token, up to the value specified by <code>MaxResults</code>.</p>
     #   @return [String]
@@ -1393,8 +1451,8 @@ module Aws::PI
     #               and status.</p>
     #   @return [Array<Types::AnalysisReportSummary>]
     # @!attribute next_token
-    #   <p>An optional pagination token provided by a previous request. 
-    #               If this parameter is specified, the response includes only records beyond the token, 
+    #   <p>An optional pagination token provided by a previous request.
+    #               If this parameter is specified, the response includes only records beyond the token,
     #               up to the value specified by <code>MaxResults</code>.</p>
     #   @return [String]
     class ListPerformanceAnalysisReportsResponse < Struct.new(
@@ -1410,8 +1468,8 @@ module Aws::PI
     #   <p>List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>Lists all the tags for the Amazon RDS Performance Insights resource. This value is an 
-    #               Amazon Resource Name (ARN). For information about creating an ARN, 
+    #   <p>Lists all the tags for the Amazon RDS Performance Insights resource. This value is an
+    #               Amazon Resource Name (ARN). For information about creating an ARN,
     #               see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing">
     #                   Constructing an RDS Amazon Resource Name (ARN)</a>.</p>
     #   @return [String]
@@ -1469,11 +1527,11 @@ module Aws::PI
     end
 
     # <p>A single query to be processed. You must provide the metric to query and append an aggregate function to the metric.
-    #             For example, to find the average for the metric <code>db.load</code> 
-    #             you must use <code>db.load.avg</code>. Valid values for aggregate functions include <code>.avg</code>, <code>.min</code>, 
+    #             For example, to find the average for the metric <code>db.load</code>
+    #             you must use <code>db.load.avg</code>. Valid values for aggregate functions include <code>.avg</code>, <code>.min</code>,
     #             <code>.max</code>, and <code>.sum</code>.
     #             If no other parameters are specified, Performance Insights returns all data points for the specified metric. Optionally, you can
-    #       request that the data points be aggregated by dimension group (<code>GroupBy</code>), and return only 
+    #       request that the data points be aggregated by dimension group (<code>GroupBy</code>), and return only
     #           those data points that match your criteria (<code>Filter</code>).</p>
     # @!attribute metric
     #   <p>The name of a Performance Insights metric to be measured.</p>
@@ -1481,7 +1539,7 @@ module Aws::PI
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>db.load.avg</code> - A scaled representation of the number of active sessions for the 
+    #                     <code>db.load.avg</code> - A scaled representation of the number of active sessions for the
     #                       database engine.</p>
     #               </li>
     #               <li>
@@ -1576,14 +1634,18 @@ module Aws::PI
     #   <p>The unique identifier for the recommendation.</p>
     #   @return [String]
     # @!attribute recommendation_description
-    #   <p>The recommendation details to help resolve the performance issue. For example, 
+    #   <p>The recommendation details to help resolve the performance issue. For example,
     #               <code>Investigate the following SQLs that contributed to 100% of the total DBLoad during that time period: sql-id</code>
     #            </p>
+    #   @return [String]
+    # @!attribute recommendation_details
+    #   <p>Detailed information about the recommendation, including steps to resolve the performance issue.</p>
     #   @return [String]
     class Recommendation < Struct.new(
       nil,
       :recommendation_id,
       :recommendation_description,
+      :recommendation_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1646,10 +1708,10 @@ module Aws::PI
     #                       operating system counters</a> in the <i>Amazon RDS User Guide</i>.</p>
     #               </li>
     #            </ul>
-    #            <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and 
-    #             <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than the 
-    #             internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the scaled values, 
-    #             <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less 
+    #            <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and
+    #             <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than the
+    #             internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the scaled values,
+    #             <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less
     #             than <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.
     #         </p>
     #   @return [String]
@@ -1667,15 +1729,15 @@ module Aws::PI
 
     # <p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>
     # @!attribute key
-    #   <p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode 
-    #               characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. 
-    #               The string can only contain only the set of Unicode letters, digits, 
+    #   <p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode
+    #               characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>.
+    #               The string can only contain only the set of Unicode letters, digits,
     #               white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: <code>"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"</code>).</p>
     #   @return [String]
     # @!attribute value
-    #   <p>A value is the optional value of the tag. The string value can be from 1 to 256 
-    #               Unicode characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. 
-    #               The string can only contain only the set of Unicode letters, digits, 
+    #   <p>A value is the optional value of the tag. The string value can be from 1 to 256
+    #               Unicode characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>.
+    #               The string can only contain only the set of Unicode letters, digits,
     #               white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").</p>
     #   @return [String]
     class Tag < Struct.new(
@@ -1691,7 +1753,7 @@ module Aws::PI
     #   <p>The Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  
+    #   <p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about
     #               creating an ARN, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing">
     #                   Constructing an RDS Amazon Resource Name (ARN)</a>.</p>
     #   @return [String]
@@ -1719,7 +1781,7 @@ module Aws::PI
     #   <p>List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>
     #   @return [String]
     # @!attribute resource_arn
-    #   <p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  
+    #   <p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about
     #               creating an ARN, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing">
     #                   Constructing an RDS Amazon Resource Name (ARN)</a>.</p>
     #   @return [String]

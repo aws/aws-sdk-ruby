@@ -86,6 +86,7 @@ module Aws::BedrockRuntime
       def additional_model_response_fields: () -> Smithy::Schema::document?
       def trace: () -> Types::ConverseTrace?
       def performance_config: () -> Types::PerformanceConfiguration?
+      def service_tier: () -> Types::ServiceTier?
     end
     def converse: (
       ?model_id: String,
@@ -103,6 +104,9 @@ module Aws::BedrockRuntime
                     uri: String,
                     bucket_owner: String
                   }
+                },
+                error: {
+                  message: untyped
                 }
               },
               document: {
@@ -130,10 +134,19 @@ module Aws::BedrockRuntime
                   s3_location: untyped
                 }
               },
+              audio: {
+                format: String,
+                source: {
+                  bytes: untyped,
+                  s3_location: untyped
+                },
+                error: untyped
+              },
               tool_use: {
                 tool_use_id: String,
                 name: String,
-                input: Smithy::Schema::document
+                input: Smithy::Schema::document,
+                type: String
               },
               tool_result: {
                 tool_use_id: untyped,
@@ -143,10 +156,21 @@ module Aws::BedrockRuntime
                     text: untyped,
                     image: untyped,
                     document: untyped,
-                    video: untyped
+                    video: untyped,
+                    search_result: {
+                      source: untyped,
+                      title: untyped,
+                      content: Array[
+                        {
+                          text: untyped
+                        }
+                      ],
+                      citations: untyped
+                    }
                   }
                 ],
-                status: String
+                status: String,
+                type: untyped
               },
               guard_content: {
                 text: {
@@ -161,7 +185,8 @@ module Aws::BedrockRuntime
                 }
               },
               cache_point: {
-                type: String
+                type: String,
+                ttl: String
               },
               reasoning_content: {
                 reasoning_text: {
@@ -179,12 +204,17 @@ module Aws::BedrockRuntime
                 citations: Array[
                   {
                     title: untyped,
+                    source: untyped,
                     source_content: Array[
                       {
                         text: untyped
                       }
                     ],
                     location: {
+                      web: {
+                        url: untyped,
+                        domain: untyped
+                      },
                       document_char: {
                         document_index: Integer,
                         start: untyped,
@@ -199,10 +229,26 @@ module Aws::BedrockRuntime
                         document_index: untyped,
                         start: untyped,
                         end: untyped
+                      },
+                      search_result_location: {
+                        search_result_index: untyped,
+                        start: untyped,
+                        end: untyped
                       }
                     }
                   }
                 ]
+              },
+              search_result: untyped,
+              tool_addition: {
+                tool: {
+                  type: untyped,
+                  name: untyped,
+                  server_name: untyped
+                }
+              },
+              tool_removal: {
+                tool: untyped
               }
             }
           ]
@@ -224,7 +270,8 @@ module Aws::BedrockRuntime
             }
           },
           cache_point: {
-            type: String
+            type: String,
+            ttl: String
           }
         }
       ],
@@ -242,10 +289,15 @@ module Aws::BedrockRuntime
               description: String,
               input_schema: {
                 json: Smithy::Schema::document
-              }
+              },
+              strict: bool
+            },
+            system_tool: {
+              name: untyped
             },
             cache_point: {
-              type: String
+              type: String,
+              ttl: String
             }
           }
         ],
@@ -274,6 +326,22 @@ module Aws::BedrockRuntime
       ?request_metadata: Hash[String, String],
       ?performance_config: {
         latency: String
+      },
+      ?service_tier: {
+        type: String
+      },
+      ?output_config: {
+        text_format: {
+          type: String,
+          structure: {
+            json_schema: {
+              schema: String,
+              name: untyped,
+              description: untyped
+            }
+          }
+        },
+        effort: untyped
       }
     ) -> _ConverseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConverseResponse
 
@@ -297,6 +365,9 @@ module Aws::BedrockRuntime
                     uri: String,
                     bucket_owner: String
                   }
+                },
+                error: {
+                  message: untyped
                 }
               },
               document: {
@@ -324,10 +395,19 @@ module Aws::BedrockRuntime
                   s3_location: untyped
                 }
               },
+              audio: {
+                format: String,
+                source: {
+                  bytes: untyped,
+                  s3_location: untyped
+                },
+                error: untyped
+              },
               tool_use: {
                 tool_use_id: String,
                 name: String,
-                input: Smithy::Schema::document
+                input: Smithy::Schema::document,
+                type: String
               },
               tool_result: {
                 tool_use_id: untyped,
@@ -337,10 +417,21 @@ module Aws::BedrockRuntime
                     text: untyped,
                     image: untyped,
                     document: untyped,
-                    video: untyped
+                    video: untyped,
+                    search_result: {
+                      source: untyped,
+                      title: untyped,
+                      content: Array[
+                        {
+                          text: untyped
+                        }
+                      ],
+                      citations: untyped
+                    }
                   }
                 ],
-                status: String
+                status: String,
+                type: untyped
               },
               guard_content: {
                 text: {
@@ -355,7 +446,8 @@ module Aws::BedrockRuntime
                 }
               },
               cache_point: {
-                type: String
+                type: String,
+                ttl: String
               },
               reasoning_content: {
                 reasoning_text: {
@@ -373,12 +465,17 @@ module Aws::BedrockRuntime
                 citations: Array[
                   {
                     title: untyped,
+                    source: untyped,
                     source_content: Array[
                       {
                         text: untyped
                       }
                     ],
                     location: {
+                      web: {
+                        url: untyped,
+                        domain: untyped
+                      },
                       document_char: {
                         document_index: Integer,
                         start: untyped,
@@ -393,10 +490,26 @@ module Aws::BedrockRuntime
                         document_index: untyped,
                         start: untyped,
                         end: untyped
+                      },
+                      search_result_location: {
+                        search_result_index: untyped,
+                        start: untyped,
+                        end: untyped
                       }
                     }
                   }
                 ]
+              },
+              search_result: untyped,
+              tool_addition: {
+                tool: {
+                  type: untyped,
+                  name: untyped,
+                  server_name: untyped
+                }
+              },
+              tool_removal: {
+                tool: untyped
               }
             }
           ]
@@ -418,7 +531,8 @@ module Aws::BedrockRuntime
             }
           },
           cache_point: {
-            type: String
+            type: String,
+            ttl: String
           }
         }
       ],
@@ -436,10 +550,15 @@ module Aws::BedrockRuntime
               description: String,
               input_schema: {
                 json: Smithy::Schema::document
-              }
+              },
+              strict: bool
+            },
+            system_tool: {
+              name: untyped
             },
             cache_point: {
-              type: String
+              type: String,
+              ttl: String
             }
           }
         ],
@@ -469,6 +588,22 @@ module Aws::BedrockRuntime
       ?request_metadata: Hash[String, String],
       ?performance_config: {
         latency: String
+      },
+      ?service_tier: {
+        type: String
+      },
+      ?output_config: {
+        text_format: {
+          type: String,
+          structure: {
+            json_schema: {
+              schema: String,
+              name: untyped,
+              description: untyped
+            }
+          }
+        },
+        effort: untyped
       }
     ) -> _ConverseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConverseStreamResponse
 
@@ -497,6 +632,9 @@ module Aws::BedrockRuntime
                         uri: String,
                         bucket_owner: String
                       }
+                    },
+                    error: {
+                      message: untyped
                     }
                   },
                   document: {
@@ -524,10 +662,19 @@ module Aws::BedrockRuntime
                       s3_location: untyped
                     }
                   },
+                  audio: {
+                    format: String,
+                    source: {
+                      bytes: untyped,
+                      s3_location: untyped
+                    },
+                    error: untyped
+                  },
                   tool_use: {
                     tool_use_id: String,
                     name: String,
-                    input: Smithy::Schema::document
+                    input: Smithy::Schema::document,
+                    type: String
                   },
                   tool_result: {
                     tool_use_id: untyped,
@@ -537,10 +684,21 @@ module Aws::BedrockRuntime
                         text: untyped,
                         image: untyped,
                         document: untyped,
-                        video: untyped
+                        video: untyped,
+                        search_result: {
+                          source: untyped,
+                          title: untyped,
+                          content: Array[
+                            {
+                              text: untyped
+                            }
+                          ],
+                          citations: untyped
+                        }
                       }
                     ],
-                    status: String
+                    status: String,
+                    type: untyped
                   },
                   guard_content: {
                     text: {
@@ -555,7 +713,8 @@ module Aws::BedrockRuntime
                     }
                   },
                   cache_point: {
-                    type: String
+                    type: String,
+                    ttl: String
                   },
                   reasoning_content: {
                     reasoning_text: {
@@ -573,12 +732,17 @@ module Aws::BedrockRuntime
                     citations: Array[
                       {
                         title: untyped,
+                        source: untyped,
                         source_content: Array[
                           {
                             text: untyped
                           }
                         ],
                         location: {
+                          web: {
+                            url: untyped,
+                            domain: untyped
+                          },
                           document_char: {
                             document_index: Integer,
                             start: untyped,
@@ -593,10 +757,26 @@ module Aws::BedrockRuntime
                             document_index: untyped,
                             start: untyped,
                             end: untyped
+                          },
+                          search_result_location: {
+                            search_result_index: untyped,
+                            start: untyped,
+                            end: untyped
                           }
                         }
                       }
                     ]
+                  },
+                  search_result: untyped,
+                  tool_addition: {
+                    tool: {
+                      type: untyped,
+                      name: untyped,
+                      server_name: untyped
+                    }
+                  },
+                  tool_removal: {
+                    tool: untyped
                   }
                 }
               ]
@@ -608,7 +788,35 @@ module Aws::BedrockRuntime
               guard_content: untyped,
               cache_point: untyped
             }
-          ]
+          ],
+          tool_config: {
+            tools: Array[
+              {
+                tool_spec: {
+                  name: untyped,
+                  description: untyped,
+                  input_schema: {
+                    json: untyped
+                  },
+                  strict: untyped
+                },
+                system_tool: {
+                  name: untyped
+                },
+                cache_point: untyped
+              }
+            ],
+            tool_choice: {
+              auto: {
+              },
+              any: {
+              },
+              tool: {
+                name: untyped
+              }
+            }
+          },
+          additional_model_request_fields: untyped
         }
       }
     ) -> _CountTokensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CountTokensResponse
@@ -629,11 +837,53 @@ module Aws::BedrockRuntime
       ?invocation_arn: String
     ) -> _GetAsyncInvokeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAsyncInvokeResponse
 
+    interface _InvokeGuardrailChecksResponse
+      include Smithy::Client::_Response[Types::InvokeGuardrailChecksResponse]
+      def results: () -> Types::GuardrailChecksResults?
+      def usage: () -> Types::GuardrailChecksUsageResults?
+    end
+    def invoke_guardrail_checks: (
+      ?messages: Array[
+        {
+          role: String,
+          content: Array[
+            {
+              text: String
+            }
+          ]
+        }
+      ],
+      ?checks: {
+        content_filter: {
+          categories: Array[
+            {
+              category: String
+            }
+          ]
+        },
+        prompt_attack: {
+          categories: Array[
+            {
+              category: String
+            }
+          ]
+        },
+        sensitive_information: {
+          entities: Array[
+            {
+              type: String
+            }
+          ]
+        }
+      }
+    ) -> _InvokeGuardrailChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeGuardrailChecksResponse
+
     interface _InvokeModelResponse
       include Smithy::Client::_Response[Types::InvokeModelResponse]
       def body: () -> String?
       def content_type: () -> String?
       def performance_config_latency: () -> String?
+      def service_tier: () -> String?
     end
     def invoke_model: (
       ?body: String,
@@ -643,7 +893,9 @@ module Aws::BedrockRuntime
       ?trace: String,
       ?guardrail_identifier: String,
       ?guardrail_version: String,
-      ?performance_config_latency: String
+      ?performance_config_latency: String,
+      ?service_tier: String,
+      ?request_metadata: String
     ) -> _InvokeModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeModelResponse
 
     interface _InvokeModelWithBidirectionalStreamResponse
@@ -664,6 +916,7 @@ module Aws::BedrockRuntime
       def body: () -> Types::ResponseStream?
       def content_type: () -> String?
       def performance_config_latency: () -> String?
+      def service_tier: () -> String?
     end
     def invoke_model_with_response_stream: (
       ?body: String,
@@ -673,7 +926,9 @@ module Aws::BedrockRuntime
       ?trace: String,
       ?guardrail_identifier: String,
       ?guardrail_version: String,
-      ?performance_config_latency: String
+      ?performance_config_latency: String,
+      ?service_tier: String,
+      ?request_metadata: String
     ) -> _InvokeModelWithResponseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeModelWithResponseStreamResponse
 
     interface _ListAsyncInvokesResponse

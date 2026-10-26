@@ -87,6 +87,7 @@ module Aws::SecretsManager
         ?tags: Array[Types::Tag],
         ?add_replica_regions: Array[Types::ReplicaRegionType],
         ?force_overwrite_replica_secret: bool,
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -99,6 +100,7 @@ module Aws::SecretsManager
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor add_replica_regions: Array[Types::ReplicaRegionType]?
       attr_accessor force_overwrite_replica_secret: bool?
+      attr_accessor type: String?
     end
 
     class CreateSecretResponse
@@ -200,11 +202,14 @@ module Aws::SecretsManager
       def initialize: (
         ?arn: String,
         ?name: String,
+        ?type: String,
         ?description: String,
         ?kms_key_id: String,
         ?rotation_enabled: bool,
         ?rotation_lambda_arn: String,
         ?rotation_rules: Types::RotationRulesType,
+        ?external_secret_rotation_metadata: Array[Types::ExternalSecretRotationMetadataItem],
+        ?external_secret_rotation_role_arn: String,
         ?last_rotated_date: Time,
         ?last_changed_date: Time,
         ?last_accessed_date: Time,
@@ -221,11 +226,14 @@ module Aws::SecretsManager
 
       attr_accessor arn: String?
       attr_accessor name: String?
+      attr_accessor type: String?
       attr_accessor description: String?
       attr_accessor kms_key_id: String?
       attr_accessor rotation_enabled: bool?
       attr_accessor rotation_lambda_arn: String?
       attr_accessor rotation_rules: Types::RotationRulesType?
+      attr_accessor external_secret_rotation_metadata: Array[Types::ExternalSecretRotationMetadataItem]?
+      attr_accessor external_secret_rotation_role_arn: String?
       attr_accessor last_rotated_date: Time?
       attr_accessor last_changed_date: Time?
       attr_accessor last_accessed_date: Time?
@@ -248,6 +256,19 @@ module Aws::SecretsManager
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ExternalSecretRotationMetadataItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
     end
 
     class Filter
@@ -471,6 +492,7 @@ module Aws::SecretsManager
         ?next_token: String,
         ?filters: Array[Types::Filter],
         ?sort_order: String,
+        ?sort_by: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -479,6 +501,7 @@ module Aws::SecretsManager
       attr_accessor next_token: String?
       attr_accessor filters: Array[Types::Filter]?
       attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
     end
 
     class ListSecretsResponse
@@ -733,6 +756,8 @@ module Aws::SecretsManager
         ?client_request_token: String,
         ?rotation_lambda_arn: String,
         ?rotation_rules: Types::RotationRulesType,
+        ?external_secret_rotation_metadata: Array[Types::ExternalSecretRotationMetadataItem],
+        ?external_secret_rotation_role_arn: String,
         ?rotate_immediately: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -741,6 +766,8 @@ module Aws::SecretsManager
       attr_accessor client_request_token: String?
       attr_accessor rotation_lambda_arn: String?
       attr_accessor rotation_rules: Types::RotationRulesType?
+      attr_accessor external_secret_rotation_metadata: Array[Types::ExternalSecretRotationMetadataItem]?
+      attr_accessor external_secret_rotation_role_arn: String?
       attr_accessor rotate_immediately: bool?
     end
 
@@ -780,11 +807,14 @@ module Aws::SecretsManager
       def initialize: (
         ?arn: String,
         ?name: String,
+        ?type: String,
         ?description: String,
         ?kms_key_id: String,
         ?rotation_enabled: bool,
         ?rotation_lambda_arn: String,
         ?rotation_rules: Types::RotationRulesType,
+        ?external_secret_rotation_metadata: Array[Types::ExternalSecretRotationMetadataItem],
+        ?external_secret_rotation_role_arn: String,
         ?last_rotated_date: Time,
         ?last_changed_date: Time,
         ?last_accessed_date: Time,
@@ -800,11 +830,14 @@ module Aws::SecretsManager
 
       attr_accessor arn: String?
       attr_accessor name: String?
+      attr_accessor type: String?
       attr_accessor description: String?
       attr_accessor kms_key_id: String?
       attr_accessor rotation_enabled: bool?
       attr_accessor rotation_lambda_arn: String?
       attr_accessor rotation_rules: Types::RotationRulesType?
+      attr_accessor external_secret_rotation_metadata: Array[Types::ExternalSecretRotationMetadataItem]?
+      attr_accessor external_secret_rotation_role_arn: String?
       attr_accessor last_rotated_date: Time?
       attr_accessor last_changed_date: Time?
       attr_accessor last_accessed_date: Time?
@@ -857,6 +890,13 @@ module Aws::SecretsManager
       attr_accessor last_accessed_date: Time?
       attr_accessor created_date: Time?
       attr_accessor kms_key_ids: Array[String]?
+    end
+
+    module SortByType
+      created_date: String
+      last_accessed_date: String
+      last_changed_date: String
+      name: String
     end
 
     module SortOrderType
@@ -941,6 +981,7 @@ module Aws::SecretsManager
         ?kms_key_id: String,
         ?secret_binary: String,
         ?secret_string: String,
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -950,6 +991,7 @@ module Aws::SecretsManager
       attr_accessor kms_key_id: String?
       attr_accessor secret_binary: String?
       attr_accessor secret_string: String?
+      attr_accessor type: String?
     end
 
     class UpdateSecretResponse

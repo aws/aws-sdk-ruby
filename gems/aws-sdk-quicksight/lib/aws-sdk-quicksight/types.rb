@@ -6,9 +6,47 @@ module Aws::QuickSight
   # This module contains the types returned by client operations.
   module Types
 
+    # <p>Configuration for API key-based authentication to external services.</p>
+    # @!attribute base_endpoint
+    #   <p>The base URL endpoint for the external service.</p>
+    #   @return [String]
+    # @!attribute api_key
+    #   <p>The API key used for authentication.</p>
+    #   @return [String]
+    # @!attribute email
+    #   <p>The email address associated with the API key, if required.</p>
+    #   @return [String]
+    class APIKeyConnectionMetadata < Struct.new(
+      nil,
+      :base_endpoint,
+      :api_key,
+      :email,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The access control settings for a knowledge base. Use this structure to enable or disable document-level access control lists (ACLs) that filter query results based on the permissions from the source data connector.</p>
+    # @!attribute is_acl_enabled
+    #   <p>Specifies whether ACLs are enabled for the knowledge base.</p>
+    #            <p>This setting works together with the data source connector's ACL crawling. To enforce document-level access control end to end, set <code>isACLEnabled</code> to <code>true</code> and enable ACL crawling on the connector. For example, for an Amazon S3 data source, set <code>accessControlConfiguration.crawlAcl</code> to <code>true</code> in the connector template. For more information, see <code>KbTemplateConfiguration</code>. Enabling only one of the two settings does not produce a fully ACL-enforced knowledge base.</p>
+    #   @return [Boolean]
+    class AccessControlConfiguration < Struct.new(
+      nil,
+      :is_acl_enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:is_acl_enabled] = nil unless options.key?(:is_acl_enabled)
+        super
+      end
+    end
+
     # <p>You don't have access to this item. The provided credentials couldn't be
     # 			validated. You might not be authorized to carry out the request. Make sure that your
-    # 			account is authorized to use the Amazon QuickSight service, that your policies have the
+    # 			account is authorized to use the Amazon Quick Sight service, that your policies have the
     # 			correct permissions, and that you are using the correct credentials.</p>
     # @!attribute message
     #   @return [String]
@@ -24,9 +62,9 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Amazon QuickSight customizations associated with your Amazon Web Services account or a QuickSight namespace in a specific Amazon Web Services Region.</p>
+    # <p>The Quick Sight customizations associated with your Amazon Web Services account or a Quick Sight namespace in a specific Amazon Web Services Region.</p>
     # @!attribute default_theme
-    #   <p>The default theme for this QuickSight subscription.</p>
+    #   <p>The default theme for this Quick Sight subscription.</p>
     #   @return [String]
     # @!attribute default_email_customization_template
     #   <p>The default email customization template.</p>
@@ -40,39 +78,39 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure that contains the following account information
-    #             elements:</p>
+    # <p>A structure that contains the following account information elements:
+    #           </p>
     #          <ul>
     #             <li>
-    #                <p>Your QuickSight account name.</p>
+    #                <p>Your Quick Sight account name.</p>
     #             </li>
     #             <li>
-    #                <p>The edition of QuickSight that your account is using.</p>
+    #                <p>The edition of Quick Sight that your account is using.</p>
     #             </li>
     #             <li>
-    #                <p>The notification email address that is associated with the QuickSight account.
+    #                <p>The notification email address that is associated with the Quick Sight account.
     #             </p>
     #             </li>
     #             <li>
-    #                <p>The authentication type of the QuickSight account.</p>
+    #                <p>The authentication type of the Quick Sight account.</p>
     #             </li>
     #             <li>
-    #                <p>The status of the QuickSight account's subscription.</p>
+    #                <p>The status of the Quick Sight account's subscription.</p>
     #             </li>
     #          </ul>
     # @!attribute account_name
-    #   <p>The account name that you provided for the QuickSight subscription in your
-    #                   Amazon Web Services account. You create this name when you sign up for QuickSight. It's unique over all of Amazon Web Services, and it appears only when
+    #   <p>The account name that you provided for the Amazon Quick Sight subscription in your
+    #                   Amazon Web Services account. You create this name when you sign up for Quick. It's unique over all of Amazon Web Services, and it appears only when
     #               users sign in.</p>
     #   @return [String]
     # @!attribute edition
-    #   <p>The edition of your QuickSight account.</p>
+    #   <p>The edition of your Quick Sight account.</p>
     #   @return [String]
     # @!attribute notification_email
-    #   <p>The email address that will be used for QuickSight to send notifications regarding your Amazon Web Services account or QuickSight subscription.</p>
+    #   <p>The email address that will be used for Quick Sight to send notifications regarding your Amazon Web Services account or Quick Sight subscription.</p>
     #   @return [String]
     # @!attribute authentication_type
-    #   <p>The way that your QuickSight account is authenticated.</p>
+    #   <p>The way that your Amazon Quick Sight account is authenticated.</p>
     #   @return [String]
     # @!attribute account_subscription_status
     #   <p>The status of your account subscription.</p>
@@ -93,27 +131,27 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The QuickSight settings associated with your Amazon Web Services account.</p>
+    # <p>The Quick Sight settings associated with your Amazon Web Services account.</p>
     # @!attribute account_name
-    #   <p>The "account name" you provided for the QuickSight subscription in your Amazon Web Services account.
-    #               You create this name when you sign up for QuickSight. It is unique in all of Amazon Web Services and
+    #   <p>The "account name" you provided for the Quick Sight subscription in your Amazon Web Services account.
+    #               You create this name when you sign up for Quick Sight. It is unique in all of Amazon Web Services and
     #               it appears only when users sign in.</p>
     #   @return [String]
     # @!attribute edition
-    #   <p>The edition of QuickSight that you're currently subscribed to:
+    #   <p>The edition of Quick Sight that you're currently subscribed to:
     #           Enterprise edition or Standard edition.</p>
     #   @return [String]
     # @!attribute default_namespace
-    #   <p>The default QuickSight namespace for your Amazon Web Services account. </p>
+    #   <p>The default Quick Sight namespace for your Amazon Web Services account. </p>
     #   @return [String]
     # @!attribute notification_email
-    #   <p>The main notification email for your QuickSight subscription.</p>
+    #   <p>The main notification email for your Quick Sight subscription.</p>
     #   @return [String]
     # @!attribute public_sharing_enabled
-    #   <p>A Boolean value that indicates whether public sharing is turned on for an QuickSight account. For more information about turning on public sharing, see <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html">UpdatePublicSharingSettings</a>.</p>
+    #   <p>A Boolean value that indicates whether public sharing is turned on for an Quick account. For more information about turning on public sharing, see <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html">UpdatePublicSharingSettings</a>.</p>
     #   @return [Boolean]
     # @!attribute termination_protection_enabled
-    #   <p>A boolean value that determines whether or not an QuickSight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubsctiption</code> request. A <code>False</code> value will allow the ccount to be deleted. </p>
+    #   <p>A boolean value that determines whether or not an Quick Sight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubsctiption</code> request. A <code>False</code> value will allow the ccount to be deleted. </p>
     #   @return [Boolean]
     class AccountSettings < Struct.new(
       nil,
@@ -132,6 +170,138 @@ module Aws::QuickSight
         options[:termination_protection_enabled] = false unless options.key?(:termination_protection_enabled)
         super
       end
+    end
+
+    # <p>Contains detailed information about an action connector, including its configuration, status, and enabled actions.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the action connector.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of action connector.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the action connector.</p>
+    #   @return [String]
+    # @!attribute created_time
+    #   <p>The timestamp when the action connector was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The date and time when the action connector was last updated.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the action connector.</p>
+    #   @return [String]
+    # @!attribute error
+    #   <p>Error information if the action connector is in an error state.</p>
+    #   @return [Types::ActionConnectorError]
+    # @!attribute description
+    #   <p>The description of the action connector.</p>
+    #   @return [String]
+    # @!attribute authentication_config
+    #   <p>The authentication configuration used to connect to the external service.</p>
+    #   @return [Types::ReadAuthConfig]
+    # @!attribute enabled_actions
+    #   <p>The list of actions that are enabled for this connector.</p>
+    #   @return [Array<String>]
+    # @!attribute vpc_connection_arn
+    #   <p>The ARN of the VPC connection used for secure connectivity to the external service.</p>
+    #   @return [String]
+    class ActionConnector < Struct.new(
+      nil,
+      :arn,
+      :action_connector_id,
+      :type,
+      :name,
+      :created_time,
+      :last_updated_time,
+      :status,
+      :error,
+      :description,
+      :authentication_config,
+      :enabled_actions,
+      :vpc_connection_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains error information for an action connector that is in an error state.</p>
+    # @!attribute message
+    #   <p>The error message describing what went wrong with the action connector.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type or category of the error.</p>
+    #   @return [String]
+    class ActionConnectorError < Struct.new(
+      nil,
+      :message,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter used to search for action connectors based on specific criteria.</p>
+    # @!attribute name
+    #   <p>The name of the filter attribute (e.g., ACTION_CONNECTOR_NAME, ACTION_CONNECTOR_TYPE, QUICKSIGHT_VIEWER_OR_OWNER).</p>
+    #   @return [String]
+    # @!attribute operator
+    #   <p>The comparison operator to use for the filter (e.g., StringEquals, StringLike).</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value to compare against using the specified operator.</p>
+    #   @return [String]
+    class ActionConnectorSearchFilter < Struct.new(
+      nil,
+      :name,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about an action connector, used in list and search operations.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the action connector.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of action connector (e.g., SALESFORCE, JIRA, CUSTOM, BEDROCK).</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the action connector.</p>
+    #   @return [String]
+    # @!attribute created_time
+    #   <p>The date and time when the action connector was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The date and time when the action connector was last updated.</p>
+    #   @return [Time]
+    # @!attribute status
+    #   <p>The current status of the action connector.</p>
+    #   @return [String]
+    # @!attribute error
+    #   <p>Error information if the action connector is in an error state.</p>
+    #   @return [Types::ActionConnectorError]
+    class ActionConnectorSummary < Struct.new(
+      nil,
+      :arn,
+      :action_connector_id,
+      :type,
+      :name,
+      :created_time,
+      :last_updated_time,
+      :status,
+      :error,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The active Identity and Access Management (IAM) policy assignment.</p>
@@ -162,6 +332,146 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Additional notes that provide supplementary context for a column.</p>
+    # @!attribute text
+    #   <p>The additional notes text.</p>
+    #   @return [String]
+    class AdditionalNotes < Struct.new(
+      nil,
+      :text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An agent resource in Amazon QuickSight that provides AI-powered conversational experiences.</p>
+    # @!attribute spaces
+    #   <p>The Amazon Resource Names (ARNs) of the spaces attached to the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute action_connectors
+    #   <p>The Amazon Resource Names (ARNs) of the action connectors attached to the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute description
+    #   <p>A description of the agent.</p>
+    #   @return [String]
+    # @!attribute icon_id
+    #   <p>The icon identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the agent.</p>
+    #   @return [String]
+    # @!attribute starter_prompts
+    #   <p>A list of starter prompts that are displayed to users when they begin interacting with the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute welcome_message
+    #   <p>The welcome message that is displayed when a user starts a conversation with the agent.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the agent.</p>
+    #   @return [String]
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute agent_lifecycle
+    #   <p>The lifecycle state of the agent. Valid values are <code>PREVIEW</code> and <code>PUBLISHED</code>.</p>
+    #   @return [String]
+    # @!attribute agent_status
+    #   <p>The status of the agent.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the agent was created.</p>
+    #   @return [Time]
+    # @!attribute creator
+    #   <p>The identity of the user who created the agent.</p>
+    #   @return [String]
+    # @!attribute custom_prompt_interface
+    #   <p>The custom prompt interface configuration for the agent.</p>
+    #   @return [Types::CustomPromptInterface]
+    # @!attribute error_message
+    #   <p>An error message associated with the agent, if applicable.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The date and time that the agent was last updated.</p>
+    #   @return [Time]
+    class Agent < Struct.new(
+      nil,
+      :spaces,
+      :action_connectors,
+      :description,
+      :icon_id,
+      :name,
+      :starter_prompts,
+      :welcome_message,
+      :arn,
+      :agent_id,
+      :agent_lifecycle,
+      :agent_status,
+      :created_at,
+      :creator,
+      :custom_prompt_interface,
+      :error_message,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter to apply when searching agents.</p>
+    # @!attribute name
+    #   <p>The name of the field to filter on.</p>
+    #   @return [String]
+    # @!attribute operator
+    #   <p>The comparison operator to use for the filter.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value to filter on.</p>
+    #   @return [String]
+    class AgentSearchFilter < Struct.new(
+      nil,
+      :name,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an agent, including its identifier, name, and metadata.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the agent.</p>
+    #   @return [String]
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the agent.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the agent.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the agent was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the agent was last updated.</p>
+    #   @return [Time]
+    # @!attribute icon_id
+    #   <p>The icon identifier for the agent.</p>
+    #   @return [String]
+    class AgentSummary < Struct.new(
+      nil,
+      :arn,
+      :agent_id,
+      :name,
+      :description,
+      :created_at,
+      :updated_at,
+      :icon_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The definition of an Agg function.</p>
     # @!attribute aggregation
     #   <p>The aggregation of an Agg function.</p>
@@ -181,6 +491,56 @@ module Aws::QuickSight
       :aggregation_function_parameters,
       :period,
       :period_field,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A transform operation that groups rows by specified columns and applies aggregation functions
+    #            to calculate summary values.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source transform operation that provides input data for the aggregation.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute group_by_column_names
+    #   <p>The list of column names to group by when performing the aggregation. Rows with the same values in
+    #              these columns will be grouped together.</p>
+    #   @return [Array<String>]
+    # @!attribute aggregations
+    #   <p>The list of aggregation functions to apply to the grouped data, such as <code>SUM</code>,
+    #              <code>COUNT</code>, or <code>AVERAGE</code>.</p>
+    #   @return [Array<Types::Aggregation>]
+    class AggregateOperation < Struct.new(
+      nil,
+      :alias,
+      :source,
+      :group_by_column_names,
+      :aggregations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines an aggregation function to be applied to grouped data, creating a new column with
+    #            the calculated result.</p>
+    # @!attribute aggregation_function
+    #   <p>The aggregation function to apply, such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>,
+    #              <code>MIN</code>, <code>MAX</code>
+    #            </p>
+    #   @return [Types::DataPrepAggregationFunction]
+    # @!attribute new_column_name
+    #   <p>The name for the new column that will contain the aggregated values.</p>
+    #   @return [String]
+    # @!attribute new_column_id
+    #   <p>A unique identifier for the new column that will contain the aggregated values.</p>
+    #   @return [String]
+    class Aggregation < Struct.new(
+      nil,
+      :aggregation_function,
+      :new_column_name,
+      :new_column_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -318,18 +678,19 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A collection of Amazon Q feature configurations in an embedded QuickSight console.</p>
+    # <p>A collection of Amazon Q feature configurations in an embedded Quick Sight
+    #             console.</p>
     # @!attribute data_qn_a
-    #   <p>Adds generative Q&A capabilitiees to an embedded QuickSight console.</p>
+    #   <p>Adds generative Q&A capabilitiees to an embedded Quick Sight console.</p>
     #   @return [Types::DataQnAConfigurations]
     # @!attribute generative_authoring
-    #   <p>Adds the generative BI authoring experience to an embedded QuickSight console.</p>
+    #   <p>Adds the generative BI authoring experience to an embedded Quick Sight console.</p>
     #   @return [Types::GenerativeAuthoringConfigurations]
     # @!attribute executive_summary
-    #   <p>Adds the executive summaries feature to an embedded QuickSight console.</p>
+    #   <p>Adds the executive summaries feature to an embedded Quick Sight console.</p>
     #   @return [Types::ExecutiveSummaryConfigurations]
     # @!attribute data_stories
-    #   <p>Adds the data stories feature to an embedded QuickSight console.</p>
+    #   <p>Adds the data stories feature to an embedded Quick Sight console.</p>
     #   @return [Types::DataStoriesConfigurations]
     class AmazonQInQuickSightConsoleConfigurations < Struct.new(
       nil,
@@ -342,9 +703,10 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A collection of Amazon Q feature configurations in an embedded QuickSight dashboard.</p>
+    # <p>A collection of Amazon Q feature configurations in an embedded Quick Sight
+    #             dashboard.</p>
     # @!attribute executive_summary
-    #   <p>A generated executive summary of an embedded QuickSight dashboard.</p>
+    #   <p>A generated executive summary of an embedded Quick Sight dashboard.</p>
     #   @return [Types::ExecutiveSummaryConfigurations]
     class AmazonQInQuickSightDashboardConfigurations < Struct.new(
       nil,
@@ -354,7 +716,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Metadata structure for an analysis in Amazon QuickSight</p>
+    # <p>Metadata structure for an analysis in Quick Sight</p>
     # @!attribute analysis_id
     #   <p>The ID of the analysis.</p>
     #   @return [String]
@@ -372,6 +734,9 @@ module Aws::QuickSight
     #   @return [Array<Types::AnalysisError>]
     # @!attribute data_set_arns
     #   <p>The ARNs of the datasets of the analysis.</p>
+    #   @return [Array<String>]
+    # @!attribute topic_arns
+    #   <p>The ARNs of the topics associated with the analysis.</p>
     #   @return [Array<String>]
     # @!attribute theme_arn
     #   <p>The ARN of the theme of the analysis.</p>
@@ -393,6 +758,7 @@ module Aws::QuickSight
       :status,
       :errors,
       :data_set_arns,
+      :topic_arns,
       :theme_arn,
       :created_time,
       :last_updated_time,
@@ -419,21 +785,29 @@ module Aws::QuickSight
     #   <p>An array of dataset identifier declarations. This mapping allows the usage of dataset identifiers instead
     #               of dataset ARNs throughout analysis sub-structures.</p>
     #   @return [Array<Types::DataSetIdentifierDeclaration>]
+    # @!attribute topic_identifier_declarations
+    #   <p>An array of topic identifier declarations. This mapping allows the usage of topic identifiers instead
+    #               of topic ARNs throughout analysis sub-structures.</p>
+    #   @return [Array<Types::TopicIdentifierDeclaration>]
     # @!attribute sheets
     #   <p>An array of sheet definitions for an analysis. Each <code>SheetDefinition</code> provides detailed information about
     #               a sheet within this analysis.</p>
     #   @return [Array<Types::SheetDefinition>]
+    # @!attribute tooltip_sheets
+    #   <p>An array of tooltip sheet definitions for an analysis. Each <code>TooltipSheetDefinition</code> provides detailed information about
+    #               a tooltip sheet within this analysis.</p>
+    #   @return [Array<Types::TooltipSheetDefinition>]
     # @!attribute calculated_fields
     #   <p>An array of calculated field definitions for the analysis.</p>
     #   @return [Array<Types::CalculatedField>]
     # @!attribute parameter_declarations
     #   <p>An array of parameter declarations for an analysis.</p>
     #            <p>Parameters are named variables that can transfer a value for use by an action or an object.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html">Parameters in Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html">Parameters in Amazon Quick Sight</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Array<Types::ParameterDeclaration>]
     # @!attribute filter_groups
     #   <p>Filter definitions for an analysis.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/adding-a-filter.html">Filtering Data in Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/adding-a-filter.html">Filtering Data in Amazon Quick Sight</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Array<Types::FilterGroup>]
     # @!attribute column_configurations
     #   <p>
@@ -456,7 +830,9 @@ module Aws::QuickSight
     class AnalysisDefinition < Struct.new(
       nil,
       :data_set_identifier_declarations,
+      :topic_identifier_declarations,
       :sheets,
+      :tooltip_sheets,
       :calculated_fields,
       :parameter_declarations,
       :filter_groups,
@@ -558,12 +934,16 @@ module Aws::QuickSight
     # @!attribute data_set_references
     #   <p>The dataset references of the source template of an analysis.</p>
     #   @return [Array<Types::DataSetReference>]
+    # @!attribute topic_references
+    #   <p>The topic references of the source template of an analysis.</p>
+    #   @return [Array<Types::TopicReference>]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>
     #   @return [String]
     class AnalysisSourceTemplate < Struct.new(
       nil,
       :data_set_references,
+      :topic_references,
       :arn,
       keyword_init: true
     )
@@ -578,7 +958,7 @@ module Aws::QuickSight
     #   <p>The ID of the analysis. This ID displays in the URL.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the analysis. This name is displayed in the QuickSight console.
+    #   <p>The name of the analysis. This name is displayed in the Quick Sight console.
     #               </p>
     #   @return [String]
     # @!attribute status
@@ -653,8 +1033,12 @@ module Aws::QuickSight
 
     # <p>Information about the dashboard that you want to embed.</p>
     # @!attribute initial_dashboard_id
-    #   <p>The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, QuickSight renders this dashboard.</p>
-    #            <p>The Amazon Resource Name (ARN) of this dashboard must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>
+    #   <p>The dashboard ID for the dashboard that you want the user to see first. This ID is
+    #               included in the output URL. When the URL in response is accessed, Amazon Quick Sight
+    #               renders this dashboard.</p>
+    #            <p>The Amazon Resource Name (ARN) of this dashboard must be included in the
+    #                   <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with
+    #                   <code>InvalidParameterValueException</code>.</p>
     #   @return [String]
     # @!attribute enabled_features
     #   <p>A list of all enabled features of a specified anonymous dashboard.</p>
@@ -688,10 +1072,15 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The experience that you are embedding. You can use this object to generate a url that embeds a visual into your application.</p>
+    # <p>The experience that you are embedding. You can use this object to generate a url that
+    #             embeds a visual into your application.</p>
     # @!attribute initial_dashboard_visual_id
-    #   <p>The visual ID for the visual that you want the user to see. This ID is included in the output URL. When the URL in response is accessed, QuickSight renders this visual.</p>
-    #            <p>The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>
+    #   <p>The visual ID for the visual that you want the user to see. This ID is included in the
+    #               output URL. When the URL in response is accessed, Amazon Quick Sight renders this
+    #               visual.</p>
+    #            <p>The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be
+    #               included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request
+    #               will fail with <code>InvalidParameterValueException</code>.</p>
     #   @return [Types::DashboardVisualId]
     class AnonymousUserDashboardVisualEmbeddingConfiguration < Struct.new(
       nil,
@@ -701,12 +1090,12 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The type of experience you want to embed. For anonymous users, you can embed QuickSight dashboards.</p>
+    # <p>The type of experience you want to embed. For anonymous users, you can embed Quick dashboards.</p>
     # @!attribute dashboard
-    #   <p>The type of embedding experience. In this case, QuickSight dashboards.</p>
+    #   <p>The type of embedding experience. In this case, Amazon Quick Sight dashboards.</p>
     #   @return [Types::AnonymousUserDashboardEmbeddingConfiguration]
     # @!attribute dashboard_visual
-    #   <p>The type of embedding experience. In this case, QuickSight visuals.</p>
+    #   <p>The type of embedding experience. In this case, Amazon Quick Sight visuals.</p>
     #   @return [Types::AnonymousUserDashboardVisualEmbeddingConfiguration]
     # @!attribute q_search_bar
     #   <p>The Q search bar that you want to use for anonymous user embedding.</p>
@@ -727,7 +1116,7 @@ module Aws::QuickSight
 
     # <p>The settings that you want to use for the Generative Q&A experience.</p>
     # @!attribute initial_topic_id
-    #   <p>The QuickSight Q topic ID of the new reader experience topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, QuickSight renders the Generative Q&A experience with this new reader experience topic pre selected.</p>
+    #   <p>The Quick Sight Q topic ID of the new reader experience topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Quick Sight renders the Generative Q&A experience with this new reader experience topic pre selected.</p>
     #            <p>The Amazon Resource Name (ARN) of this Q new reader experience topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request fails with an <code>InvalidParameterValueException</code> error.</p>
     #   @return [String]
     class AnonymousUserGenerativeQnAEmbeddingConfiguration < Struct.new(
@@ -740,7 +1129,7 @@ module Aws::QuickSight
 
     # <p>The settings that you want to use with the Q search bar.</p>
     # @!attribute initial_topic_id
-    #   <p>The QuickSight Q topic ID of the legacy topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, QuickSight renders the Q search bar with this legacy topic pre-selected.</p>
+    #   <p>The Quick Sight Q topic ID of the legacy topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Quick Sight renders the Q search bar with this legacy topic pre-selected.</p>
     #            <p>The Amazon Resource Name (ARN) of this Q legacy topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request fails with an <code>InvalidParameterValueException</code> error.</p>
     #   @return [String]
     class AnonymousUserQSearchBarEmbeddingConfiguration < Struct.new(
@@ -764,17 +1153,167 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A summary of an app, including its identifier, name, and metadata.</p>
+    # @!attribute app_id
+    #   <p>The ID of the app.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the app.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the app.</p>
+    #   @return [String]
+    # @!attribute created_time
+    #   <p>The time that the app was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The time that the app was last updated.</p>
+    #   @return [Time]
+    # @!attribute visibility
+    #   <p>The sharing status of the app: <code>PUBLIC</code> if the app is shared publicly, or <code>PRIVATE</code> if it is private.</p>
+    #   @return [String]
+    class AppSummary < Struct.new(
+      nil,
+      :app_id,
+      :arn,
+      :name,
+      :created_time,
+      :last_updated_time,
+      :visibility,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A transform operation that combines rows from two data sources by stacking them vertically (union operation).</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute first_source
+    #   <p>The first data source to be included in the append operation.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute second_source
+    #   <p>The second data source to be appended to the first source.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute appended_columns
+    #   <p>The list of columns to include in the appended result, mapping columns from both sources.</p>
+    #   @return [Array<Types::AppendedColumn>]
+    class AppendOperation < Struct.new(
+      nil,
+      :alias,
+      :first_source,
+      :second_source,
+      :appended_columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a column that will be included in the result of an append operation, combining data from multiple sources.</p>
+    # @!attribute column_name
+    #   <p>The name of the column to include in the appended result.</p>
+    #   @return [String]
+    # @!attribute new_column_id
+    #   <p>A unique identifier for the column in the appended result.</p>
+    #   @return [String]
+    class AppendedColumn < Struct.new(
+      nil,
+      :column_name,
+      :new_column_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The scoping configuration that determines which principals an approval policy applies to.</p>
+    # @!attribute type
+    #   <p>The type of scoping that determines which principals the approval policy applies to. Valid values
+    #            are defined as follows:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>GROUP</code>: The policy applies only to principals in the groups specified by
+    #                  <code>GroupArns</code>. When you use <code>GROUP</code>, you must also provide a value for
+    #                  <code>GroupArns</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute group_arns
+    #   <p>The list of group ARNs that the policy applies to. Required when type is GROUP.</p>
+    #   @return [Array<String>]
+    class ApplicableTo < Struct.new(
+      nil,
+      :type,
+      :group_arns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The application theme.</p>
     # @!attribute brand_color_palette
     #   <p>The color palette.</p>
     #   @return [Types::BrandColorPalette]
+    # @!attribute contextual_accent_palette
+    #   <p>The contextual accent palette.</p>
+    #   @return [Types::ContextualAccentPalette]
     # @!attribute brand_element_style
     #   <p>The element style.</p>
     #   @return [Types::BrandElementStyle]
     class ApplicationTheme < Struct.new(
       nil,
       :brand_color_palette,
+      :contextual_accent_palette,
       :brand_element_style,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A governance approval policy that specifies which principals and governed actions require
+    #          approval, and which assets the policy applies to.</p>
+    # @!attribute policy_id
+    #   <p>The unique identifier of the approval policy.</p>
+    #   @return [String]
+    # @!attribute policy_arn
+    #   <p>The Amazon Resource Name (ARN) of the approval policy.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the approval policy.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the approval policy.</p>
+    #   @return [String]
+    # @!attribute actions
+    #   <p>The list of governed actions that trigger the approval workflow.</p>
+    #   @return [Array<String>]
+    # @!attribute asset_types
+    #   <p>The list of asset types that the approval policy applies to.</p>
+    #   @return [Array<String>]
+    # @!attribute applicable_to
+    #   <p>The scoping configuration that determines who the approval policy applies to.</p>
+    #   @return [Types::ApplicableTo]
+    # @!attribute approval_groups
+    #   <p>The list of group ARNs whose members can approve requests.</p>
+    #   @return [Array<String>]
+    # @!attribute created_at
+    #   <p>The date and time that the approval policy was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the approval policy was last updated.</p>
+    #   @return [Time]
+    class ApprovalPolicy < Struct.new(
+      nil,
+      :policy_id,
+      :policy_arn,
+      :name,
+      :description,
+      :actions,
+      :asset_types,
+      :applicable_to,
+      :approval_groups,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -856,34 +1395,48 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An optional collection of CloudFormation property configurations that control how the export job is generated.</p>
+    # <p>An optional collection of CloudFormation property configurations that control how
+    #          the export job is generated.</p>
     # @!attribute resource_id_override_configuration
-    #   <p>An optional list of structures that control how resource IDs are parameterized in the returned CloudFormation template.</p>
+    #   <p>An optional list of structures that control how resource IDs are parameterized in the
+    #            returned CloudFormation template.</p>
     #   @return [Types::AssetBundleExportJobResourceIdOverrideConfiguration]
     # @!attribute vpc_connections
-    #   <p>An optional list of structures that control how <code>VPCConnection</code> resources are parameterized in the returned CloudFormation template.</p>
+    #   <p>An optional list of structures that control how <code>VPCConnection</code> resources are
+    #            parameterized in the returned CloudFormation template.</p>
     #   @return [Array<Types::AssetBundleExportJobVPCConnectionOverrideProperties>]
     # @!attribute refresh_schedules
-    #   <p>An optional list of structures that control how <code>RefreshSchedule</code> resources are parameterized in the returned CloudFormation template.</p>
+    #   <p>An optional list of structures that control how <code>RefreshSchedule</code> resources
+    #            are parameterized in the returned CloudFormation template.</p>
     #   @return [Array<Types::AssetBundleExportJobRefreshScheduleOverrideProperties>]
     # @!attribute data_sources
-    #   <p>An optional list of structures that control how <code>DataSource</code> resources are parameterized in the returned CloudFormation template.</p>
+    #   <p>An optional list of structures that control how <code>DataSource</code> resources are
+    #            parameterized in the returned CloudFormation template.</p>
     #   @return [Array<Types::AssetBundleExportJobDataSourceOverrideProperties>]
     # @!attribute data_sets
-    #   <p>An optional list of structures that control how <code>DataSet</code> resources are parameterized in the returned CloudFormation template.</p>
+    #   <p>An optional list of structures that control how <code>DataSet</code> resources are
+    #            parameterized in the returned CloudFormation template.</p>
     #   @return [Array<Types::AssetBundleExportJobDataSetOverrideProperties>]
     # @!attribute themes
-    #   <p>An optional list of structures that control how <code>Theme</code> resources are parameterized in the returned CloudFormation template.</p>
+    #   <p>An optional list of structures that control how <code>Theme</code> resources are
+    #            parameterized in the returned CloudFormation template.</p>
     #   @return [Array<Types::AssetBundleExportJobThemeOverrideProperties>]
     # @!attribute analyses
-    #   <p>An optional list of structures that control how <code>Analysis</code> resources are parameterized in the returned CloudFormation template.</p>
+    #   <p>An optional list of structures that control how <code>Analysis</code> resources are
+    #            parameterized in the returned CloudFormation template.</p>
     #   @return [Array<Types::AssetBundleExportJobAnalysisOverrideProperties>]
     # @!attribute dashboards
-    #   <p>An optional list of structures that control how <code>Dashboard</code> resources are parameterized in the returned CloudFormation template.</p>
+    #   <p>An optional list of structures that control how <code>Dashboard</code> resources are
+    #            parameterized in the returned CloudFormation template.</p>
     #   @return [Array<Types::AssetBundleExportJobDashboardOverrideProperties>]
     # @!attribute folders
-    #   <p>An optional list of structures that controls how <code>Folder</code> resources are parameterized in the returned CloudFormation template.</p>
+    #   <p>An optional list of structures that controls how <code>Folder</code> resources are
+    #            parameterized in the returned CloudFormation template.</p>
     #   @return [Array<Types::AssetBundleExportJobFolderOverrideProperties>]
+    # @!attribute topics_v2
+    #   <p>An optional list of structures that controls how <code>Topic</code> resources are
+    #            parameterized in the returned CloudFormation template.</p>
+    #   @return [Array<Types::AssetBundleExportJobTopicV2OverrideProperties>]
     class AssetBundleCloudFormationOverridePropertyConfiguration < Struct.new(
       nil,
       :resource_id_override_configuration,
@@ -895,17 +1448,21 @@ module Aws::QuickSight
       :analyses,
       :dashboards,
       :folders,
+      :topics_v2,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Controls how a specific <code>Analysis</code> resource is parameterized in the returned CloudFormation template.</p>
+    # <p>Controls how a specific <code>Analysis</code> resource is parameterized in the returned
+    #             CloudFormation template.</p>
     # @!attribute arn
-    #   <p>The ARN of the specific <code>Analysis</code> resource whose override properties are configured in this structure.</p>
+    #   <p>The ARN of the specific <code>Analysis</code> resource whose override properties are
+    #            configured in this structure.</p>
     #   @return [String]
     # @!attribute properties
-    #   <p>A list of <code>Analysis</code> resource properties to generate variables for in the returned CloudFormation template.</p>
+    #   <p>A list of <code>Analysis</code> resource properties to generate variables for in the
+    #            returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobAnalysisOverrideProperties < Struct.new(
       nil,
@@ -916,12 +1473,15 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Controls how a specific <code>Dashboard</code> resource is parameterized in the returned CloudFormation template.</p>
+    # <p>Controls how a specific <code>Dashboard</code> resource is parameterized in the returned
+    #             CloudFormation template.</p>
     # @!attribute arn
-    #   <p>The ARN of the specific <code>Dashboard</code> resource whose override properties are configured in this structure.</p>
+    #   <p>The ARN of the specific <code>Dashboard</code> resource whose override properties are
+    #            configured in this structure.</p>
     #   @return [String]
     # @!attribute properties
-    #   <p>A list of <code>Dashboard</code> resource properties to generate variables for in the returned CloudFormation template.</p>
+    #   <p>A list of <code>Dashboard</code> resource properties to generate variables for in the
+    #            returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobDashboardOverrideProperties < Struct.new(
       nil,
@@ -932,12 +1492,15 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Controls how a specific <code>DataSet</code> resource is parameterized in the returned CloudFormation template.</p>
+    # <p>Controls how a specific <code>DataSet</code> resource is parameterized in the returned
+    #             CloudFormation template.</p>
     # @!attribute arn
-    #   <p>The ARN of the specific <code>DataSet</code> resource whose override properties are configured in this structure.</p>
+    #   <p>The ARN of the specific <code>DataSet</code> resource whose override properties are
+    #            configured in this structure.</p>
     #   @return [String]
     # @!attribute properties
-    #   <p>A list of <code>DataSet</code> resource properties to generate variables for in the returned CloudFormation template.</p>
+    #   <p>A list of <code>DataSet</code> resource properties to generate variables for in the
+    #            returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobDataSetOverrideProperties < Struct.new(
       nil,
@@ -948,12 +1511,15 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Controls how a specific <code>DataSource</code> resource is parameterized in the returned CloudFormation template.</p>
+    # <p>Controls how a specific <code>DataSource</code> resource is parameterized in the
+    #          returned CloudFormation template.</p>
     # @!attribute arn
-    #   <p>The ARN of the specific <code>DataSource</code> resource whose override properties are configured in this structure.</p>
+    #   <p>The ARN of the specific <code>DataSource</code> resource whose override properties are
+    #            configured in this structure.</p>
     #   @return [String]
     # @!attribute properties
-    #   <p>A list of <code>DataSource</code> resource properties to generate variables for in the returned CloudFormation template.</p>
+    #   <p>A list of <code>DataSource</code> resource properties to generate variables for in the
+    #            returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobDataSourceOverrideProperties < Struct.new(
       nil,
@@ -984,12 +1550,15 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Controls how a specific <code>Folder</code> resource is parameterized in the returned CloudFormation template.</p>
+    # <p>Controls how a specific <code>Folder</code> resource is parameterized in the returned
+    #             CloudFormation template.</p>
     # @!attribute arn
-    #   <p>The ARN of the specific <code>Folder</code> resource whose override properties are configured in this structure.</p>
+    #   <p>The ARN of the specific <code>Folder</code> resource whose override properties are
+    #            configured in this structure.</p>
     #   @return [String]
     # @!attribute properties
-    #   <p>A list of <code>Folder</code> resource properties to generate variables for in the returned CloudFormation template.</p>
+    #   <p>A list of <code>Folder</code> resource properties to generate variables for in the
+    #            returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobFolderOverrideProperties < Struct.new(
       nil,
@@ -1000,12 +1569,15 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Controls how a specific <code>RefreshSchedule</code> resource is parameterized in the returned CloudFormation template.</p>
+    # <p>Controls how a specific <code>RefreshSchedule</code> resource is parameterized in the
+    #          returned CloudFormation template.</p>
     # @!attribute arn
-    #   <p>The ARN of the specific <code>RefreshSchedule</code> resource whose override properties are configured in this structure.</p>
+    #   <p>The ARN of the specific <code>RefreshSchedule</code> resource whose override properties
+    #            are configured in this structure.</p>
     #   @return [String]
     # @!attribute properties
-    #   <p>A list of <code>RefreshSchedule</code> resource properties to generate variables for in the returned CloudFormation template.</p>
+    #   <p>A list of <code>RefreshSchedule</code> resource properties to generate variables for in
+    #            the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobRefreshScheduleOverrideProperties < Struct.new(
       nil,
@@ -1018,7 +1590,9 @@ module Aws::QuickSight
 
     # <p>An optional structure that configures resource ID overrides for the export job.</p>
     # @!attribute prefix_for_all_resources
-    #   <p>An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.</p>
+    #   <p>An option to request a CloudFormation variable for a prefix to be prepended to each
+    #            resource's ID before import. The prefix is only added to the asset IDs and does not
+    #            change the name of the asset.</p>
     #   @return [Boolean]
     class AssetBundleExportJobResourceIdOverrideConfiguration < Struct.new(
       nil,
@@ -1033,7 +1607,8 @@ module Aws::QuickSight
       end
     end
 
-    # <p>A summary of the export job that includes details of the job's configuration and its current status.</p>
+    # <p>A summary of the export job that includes details of the job's configuration and
+    #          its current status.</p>
     # @!attribute job_status
     #   <p>The current status of the export job.</p>
     #   @return [String]
@@ -1047,13 +1622,15 @@ module Aws::QuickSight
     #   <p>The ID of the export job.</p>
     #   @return [String]
     # @!attribute include_all_dependencies
-    #   <p>The flag that determines the inclusion of resource dependencies in the returned asset bundle.</p>
+    #   <p>The flag that determines the inclusion of resource dependencies in the returned asset
+    #            bundle.</p>
     #   @return [Boolean]
     # @!attribute export_format
     #   <p>The format for the export job.</p>
     #   @return [String]
     # @!attribute include_permissions
-    #   <p>The flag that determines the inclusion of permissions associated with each resource ARN.</p>
+    #   <p>The flag that determines the inclusion of permissions associated with each resource
+    #            ARN.</p>
     #   @return [Boolean]
     # @!attribute include_tags
     #   <p>The flag that determines the inclusion of tags associated with each resource ARN.</p>
@@ -1080,12 +1657,15 @@ module Aws::QuickSight
       end
     end
 
-    # <p>Controls how a specific <code>Theme</code> resource is parameterized in the returned CloudFormation template.</p>
+    # <p>Controls how a specific <code>Theme</code> resource is parameterized in the returned
+    #             CloudFormation template.</p>
     # @!attribute arn
-    #   <p>The ARN of the specific <code>Theme</code> resource whose override properties are configured in this structure.</p>
+    #   <p>The ARN of the specific <code>Theme</code> resource whose override properties are
+    #            configured in this structure.</p>
     #   @return [String]
     # @!attribute properties
-    #   <p>A list of <code>Theme</code> resource properties to generate variables for in the returned CloudFormation template.</p>
+    #   <p>A list of <code>Theme</code> resource properties to generate variables for in the
+    #            returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobThemeOverrideProperties < Struct.new(
       nil,
@@ -1096,12 +1676,34 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Controls how a specific <code>VPCConnection</code> resource is parameterized in the outputted CloudFormation template.</p>
+    # <p>Controls how a specific <code>Topic</code> resource is parameterized in the returned
+    #             CloudFormation template.</p>
     # @!attribute arn
-    #   <p>The ARN of the specific <code>VPCConnection</code> resource whose override properties are configured in this structure.</p>
+    #   <p>The ARN of the specific <code>Topic</code> resource whose override properties are
+    #            configured in this structure.</p>
     #   @return [String]
     # @!attribute properties
-    #   <p>A list of <code>VPCConnection</code> resource properties to generate variables for in the returned CloudFormation template.</p>
+    #   <p>A list of <code>Topic</code> resource properties to generate variables for in the
+    #            returned CloudFormation template.</p>
+    #   @return [Array<String>]
+    class AssetBundleExportJobTopicV2OverrideProperties < Struct.new(
+      nil,
+      :arn,
+      :properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Controls how a specific <code>VPCConnection</code> resource is parameterized in the
+    #          outputted CloudFormation template.</p>
+    # @!attribute arn
+    #   <p>The ARN of the specific <code>VPCConnection</code> resource whose override properties
+    #            are configured in this structure.</p>
+    #   @return [String]
+    # @!attribute properties
+    #   <p>A list of <code>VPCConnection</code> resource properties to generate variables for in
+    #            the returned CloudFormation template.</p>
     #   @return [Array<String>]
     class AssetBundleExportJobVPCConnectionOverrideProperties < Struct.new(
       nil,
@@ -1112,9 +1714,12 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The option to relax the validation that is required to export each asset. When <code>StrictModeForAllResource</code> is set to <code>false</code>, validation is skipped for specific UI errors.</p>
+    # <p>The option to relax the validation that is required to export each asset. When
+    #             <code>StrictModeForAllResource</code> is set to <code>false</code>, validation is
+    #          skipped for specific UI errors.</p>
     # @!attribute strict_mode_for_all_resources
-    #   <p>A Boolean value that indicates whether to export resources under strict or lenient mode.</p>
+    #   <p>A Boolean value that indicates whether to export resources under strict or lenient
+    #            mode.</p>
     #   @return [Boolean]
     class AssetBundleExportJobValidationStrategy < Struct.new(
       nil,
@@ -1161,9 +1766,11 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains a list of permissions to be applied to a list of analysis IDs.</p>
+    # <p>An object that contains a list of permissions to be applied to a list of analysis
+    #          IDs.</p>
     # @!attribute analysis_ids
-    #   <p>A list of analysis IDs that you want to apply overrides to. You can use <code>*</code> to override all analyses in this asset bundle.</p>
+    #   <p>A list of analysis IDs that you want to apply overrides to. You can use <code>*</code>
+    #            to override all analyses in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute permissions
     #   <p>A list of permissions for the analyses that you want to apply overrides to.</p>
@@ -1179,7 +1786,8 @@ module Aws::QuickSight
 
     # <p>An object that contains a list of tags to be assigned to a list of analysis IDs.</p>
     # @!attribute analysis_ids
-    #   <p>A list of analysis IDs that you want to apply overrides to. You can use <code>*</code> to override all analyses in this asset bundle.</p>
+    #   <p>A list of analysis IDs that you want to apply overrides to. You can use <code>*</code>
+    #            to override all analyses in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>A list of tags for the analyses that you want to apply overrides to.</p>
@@ -1209,15 +1817,18 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains a list of permissions to be applied to a list of dashboard IDs.</p>
+    # <p>An object that contains a list of permissions to be applied to a list of dashboard
+    #          IDs.</p>
     # @!attribute dashboard_ids
-    #   <p>A list of dashboard IDs that you want to apply overrides to. You can use <code>*</code> to override all dashboards in this asset bundle.</p>
+    #   <p>A list of dashboard IDs that you want to apply overrides to. You can use <code>*</code>
+    #            to override all dashboards in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute permissions
     #   <p>A list of permissions for the dashboards that you want to apply overrides to.</p>
     #   @return [Types::AssetBundleResourcePermissions]
     # @!attribute link_sharing_configuration
-    #   <p>A structure that contains the link sharing configurations that you want to apply overrides to.</p>
+    #   <p>A structure that contains the link sharing configurations that you want to apply
+    #            overrides to.</p>
     #   @return [Types::AssetBundleResourceLinkSharingConfiguration]
     class AssetBundleImportJobDashboardOverridePermissions < Struct.new(
       nil,
@@ -1231,7 +1842,8 @@ module Aws::QuickSight
 
     # <p>An object that contains a list of tags to be assigned to a list of dashboard IDs.</p>
     # @!attribute dashboard_ids
-    #   <p>A list of dashboard IDs that you want to apply overrides to. You can use <code>*</code> to override all dashboards in this asset bundle.</p>
+    #   <p>A list of dashboard IDs that you want to apply overrides to. You can use <code>*</code>
+    #            to override all dashboards in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>A list of tags for the dashboards that you want to apply overrides to.</p>
@@ -1265,9 +1877,11 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains a list of permissions to be applied to a list of dataset IDs.</p>
+    # <p>An object that contains a list of permissions to be applied to a list of dataset
+    #          IDs.</p>
     # @!attribute data_set_ids
-    #   <p>A list of dataset IDs that you want to apply overrides to. You can use <code>*</code> to override all datasets in this asset bundle.</p>
+    #   <p>A list of dataset IDs that you want to apply overrides to. You can use <code>*</code> to
+    #            override all datasets in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute permissions
     #   <p>A list of permissions for the datasets that you want to apply overrides to.</p>
@@ -1283,7 +1897,8 @@ module Aws::QuickSight
 
     # <p>An object that contains a list of tags to be assigned to a list of dataset IDs.</p>
     # @!attribute data_set_ids
-    #   <p>A list of dataset IDs that you want to apply overrides to. You can use <code>*</code> to override all datasets in this asset bundle.</p>
+    #   <p>A list of dataset IDs that you want to apply overrides to. You can use <code>*</code> to
+    #            override all datasets in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>A list of tags for the datasets that you want to apply overrides to.</p>
@@ -1316,10 +1931,13 @@ module Aws::QuickSight
 
     # <p>The login credentials to use to import a data source resource.</p>
     # @!attribute credential_pair
-    #   <p>A username and password credential pair to be used to create the imported data source. Keep this field blank if you are using a Secrets Manager secret to provide credentials.</p>
+    #   <p>A username and password credential pair to be used to create the imported data source.
+    #            Keep this field blank if you are using a Secrets Manager secret to provide
+    #            credentials.</p>
     #   @return [Types::AssetBundleImportJobDataSourceCredentialPair]
     # @!attribute secret_arn
-    #   <p>The ARN of the Secrets Manager secret that's used to create the imported data source. Keep this field blank, unless you are using a secret in place of a credential pair.</p>
+    #   <p>The ARN of the Secrets Manager secret that's used to create the imported data source.
+    #            Keep this field blank, unless you are using a secret in place of a credential pair.</p>
     #   @return [String]
     class AssetBundleImportJobDataSourceCredentials < Struct.new(
       nil,
@@ -1338,7 +1956,7 @@ module Aws::QuickSight
     #   <p>A new name for the data source.</p>
     #   @return [String]
     # @!attribute data_source_parameters
-    #   <p>The parameters that Amazon QuickSight uses to connect to your underlying data source.
+    #   <p>The parameters that Quick Sight uses to connect to your underlying data source.
     #               This is a variant type structure. For this structure to be valid, only one of the
     #               attributes can be non-null.</p>
     #   @return [Types::DataSourceParameters]
@@ -1346,11 +1964,12 @@ module Aws::QuickSight
     #   <p>VPC connection properties.</p>
     #   @return [Types::VpcConnectionProperties]
     # @!attribute ssl_properties
-    #   <p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
+    #   <p>Secure Socket Layer (SSL) properties that apply when Quick Sight connects to your
     #               underlying data source.</p>
     #   @return [Types::SslProperties]
     # @!attribute credentials
-    #   <p>An optional structure that provides the credentials to be used to create the imported data source.</p>
+    #   <p>An optional structure that provides the credentials to be used to create the imported
+    #            data source.</p>
     #   @return [Types::AssetBundleImportJobDataSourceCredentials]
     class AssetBundleImportJobDataSourceOverrideParameters < Struct.new(
       nil,
@@ -1365,9 +1984,11 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains a list of permissions to be applied to a list of data source IDs.</p>
+    # <p>An object that contains a list of permissions to be applied to a list of data source
+    #          IDs.</p>
     # @!attribute data_source_ids
-    #   <p>A list of data source IDs that you want to apply overrides to. You can use <code>*</code> to override all data sources in this asset bundle.</p>
+    #   <p>A list of data source IDs that you want to apply overrides to. You can use
+    #               <code>*</code> to override all data sources in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute permissions
     #   <p>A list of permissions for the data source that you want to apply overrides to.</p>
@@ -1381,9 +2002,11 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains a list of tags to be assigned to a list of data source IDs.</p>
+    # <p>An object that contains a list of tags to be assigned to a list of data source
+    #          IDs.</p>
     # @!attribute data_source_ids
-    #   <p>A list of data source IDs that you want to apply overrides to. You can use <code>*</code> to override all data sources in this asset bundle.</p>
+    #   <p>A list of data source IDs that you want to apply overrides to. You can use
+    #               <code>*</code> to override all data sources in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>A list of tags for the data source that you want to apply overrides to.</p>
@@ -1425,7 +2048,8 @@ module Aws::QuickSight
     #   <p>A new name for the folder.</p>
     #   @return [String]
     # @!attribute parent_folder_arn
-    #   <p>A new parent folder arn. This change can only be applied if the import creates a brand new folder. Existing folders cannot be moved.</p>
+    #   <p>A new parent folder arn. This change can only be applied if the import creates a brand
+    #            new folder. Existing folders cannot be moved.</p>
     #   @return [String]
     class AssetBundleImportJobFolderOverrideParameters < Struct.new(
       nil,
@@ -1437,12 +2061,15 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains a list of permissions to be applied to a list of folder IDs.</p>
+    # <p>An object that contains a list of permissions to be applied to a list of folder
+    #          IDs.</p>
     # @!attribute folder_ids
-    #   <p>A list of folder IDs that you want to apply overrides to. You can use <code>*</code> to override all folders in this asset bundle.</p>
+    #   <p>A list of folder IDs that you want to apply overrides to. You can use <code>*</code> to
+    #            override all folders in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute permissions
-    #   <p>A structure that contains the permissions for the resource that you want to override in an asset bundle import job.</p>
+    #   <p>A structure that contains the permissions for the resource that you want to override in
+    #            an asset bundle import job.</p>
     #   @return [Types::AssetBundleResourcePermissions]
     class AssetBundleImportJobFolderOverridePermissions < Struct.new(
       nil,
@@ -1455,7 +2082,8 @@ module Aws::QuickSight
 
     # <p>An object that contains a list of tags to be assigned to a list of folder IDs.</p>
     # @!attribute folder_ids
-    #   <p>A list of folder IDs that you want to apply overrides to. You can use <code>*</code> to override all folders in this asset bundle.</p>
+    #   <p>A list of folder IDs that you want to apply overrides to. You can use <code>*</code> to
+    #            override all folders in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>A list of tags for the folders that you want to apply overrides to.</p>
@@ -1469,34 +2097,48 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A list of overrides that modify the asset bundle resource configuration before the resource is imported.</p>
+    # <p>A list of overrides that modify the asset bundle resource configuration before the
+    #          resource is imported.</p>
     # @!attribute resource_id_override_configuration
-    #   <p>An optional structure that configures resource ID overrides to be applied within the import job.</p>
+    #   <p>An optional structure that configures resource ID overrides to be applied within the
+    #            import job.</p>
     #   @return [Types::AssetBundleImportJobResourceIdOverrideConfiguration]
     # @!attribute vpc_connections
-    #   <p>A list of overrides for any <code>VPCConnection</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of overrides for any <code>VPCConnection</code> resources that are present in the
+    #            asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobVPCConnectionOverrideParameters>]
     # @!attribute refresh_schedules
-    #   <p>A list of overrides for any <code>RefreshSchedule</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of overrides for any <code>RefreshSchedule</code> resources that are present in
+    #            the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobRefreshScheduleOverrideParameters>]
     # @!attribute data_sources
-    #   <p> A list of overrides for any <code>DataSource</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p> A list of overrides for any <code>DataSource</code> resources that are present in the
+    #            asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobDataSourceOverrideParameters>]
     # @!attribute data_sets
-    #   <p>A list of overrides for any <code>DataSet</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of overrides for any <code>DataSet</code> resources that are present in the asset
+    #            bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobDataSetOverrideParameters>]
     # @!attribute themes
-    #   <p>A list of overrides for any <code>Theme</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of overrides for any <code>Theme</code> resources that are present in the asset
+    #            bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobThemeOverrideParameters>]
     # @!attribute analyses
-    #   <p>A list of overrides for any <code>Analysis</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of overrides for any <code>Analysis</code> resources that are present in the
+    #            asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobAnalysisOverrideParameters>]
     # @!attribute dashboards
-    #   <p>A list of overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of overrides for any <code>Dashboard</code> resources that are present in the
+    #            asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobDashboardOverrideParameters>]
     # @!attribute folders
-    #   <p>A list of overrides for any <code>Folder</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of overrides for any <code>Folder</code> resources that are present in the asset
+    #            bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobFolderOverrideParameters>]
+    # @!attribute topics_v2
+    #   <p>A list of overrides for any <code>Topic</code> resources that are present in the asset
+    #            bundle that is imported.</p>
+    #   @return [Array<Types::AssetBundleImportJobTopicV2OverrideParameters>]
     class AssetBundleImportJobOverrideParameters < Struct.new(
       nil,
       :resource_id_override_configuration,
@@ -1508,30 +2150,40 @@ module Aws::QuickSight
       :analyses,
       :dashboards,
       :folders,
+      :topics_v2,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure that contains the override permission configurations that modify the permissions for specified resources before the resource is imported.</p>
+    # <p>A structure that contains the override permission configurations that modify the
+    #          permissions for specified resources before the resource is imported.</p>
     # @!attribute data_sources
-    #   <p>A list of permissions overrides for any <code>DataSource</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of permissions overrides for any <code>DataSource</code> resources that are
+    #            present in the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobDataSourceOverridePermissions>]
     # @!attribute data_sets
-    #   <p>A list of permissions overrides for any <code>DataSet</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of permissions overrides for any <code>DataSet</code> resources that are present
+    #            in the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobDataSetOverridePermissions>]
     # @!attribute themes
-    #   <p>A list of permissions overrides for any <code>Theme</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of permissions overrides for any <code>Theme</code> resources that are present in
+    #            the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobThemeOverridePermissions>]
     # @!attribute analyses
-    #   <p>A list of permissions overrides for any <code>Analysis</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of permissions overrides for any <code>Analysis</code> resources that are present
+    #            in the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobAnalysisOverridePermissions>]
     # @!attribute dashboards
-    #   <p>A list of permissions overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of permissions overrides for any <code>Dashboard</code> resources that are
+    #            present in the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobDashboardOverridePermissions>]
     # @!attribute folders
     #   <p>A list of permissions for the folders that you want to apply overrides to.</p>
     #   @return [Array<Types::AssetBundleImportJobFolderOverridePermissions>]
+    # @!attribute topics_v2
+    #   <p>A list of permissions for the topics that you want to apply overrides to.</p>
+    #   @return [Array<Types::AssetBundleImportJobTopicV2OverridePermissions>]
     class AssetBundleImportJobOverridePermissions < Struct.new(
       nil,
       :data_sources,
@@ -1540,33 +2192,46 @@ module Aws::QuickSight
       :analyses,
       :dashboards,
       :folders,
+      :topics_v2,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure that contains the override tag configuration that modify the tags that are assigned to specified resources before the resource is imported.</p>
+    # <p>A structure that contains the override tag configuration that modify the tags that are
+    #          assigned to specified resources before the resource is imported.</p>
     # @!attribute vpc_connections
-    #   <p>A list of tag overrides for any <code>VPCConnection</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of tag overrides for any <code>VPCConnection</code> resources that are present in
+    #            the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobVPCConnectionOverrideTags>]
     # @!attribute data_sources
-    #   <p>A list of tag overrides for any <code>DataSource</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of tag overrides for any <code>DataSource</code> resources that are present in
+    #            the asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobDataSourceOverrideTags>]
     # @!attribute data_sets
-    #   <p>A list of tag overrides for any <code>DataSet</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of tag overrides for any <code>DataSet</code> resources that are present in the
+    #            asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobDataSetOverrideTags>]
     # @!attribute themes
-    #   <p>A list of tag overrides for any <code>Theme</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of tag overrides for any <code>Theme</code> resources that are present in the
+    #            asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobThemeOverrideTags>]
     # @!attribute analyses
-    #   <p>A list of tag overrides for any <code>Analysis</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of tag overrides for any <code>Analysis</code> resources that are present in the
+    #            asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobAnalysisOverrideTags>]
     # @!attribute dashboards
-    #   <p>A list of tag overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of tag overrides for any <code>Dashboard</code> resources that are present in the
+    #            asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobDashboardOverrideTags>]
     # @!attribute folders
-    #   <p>A list of tag overrides for any <code>Folder</code> resources that are present in the asset bundle that is imported.</p>
+    #   <p>A list of tag overrides for any <code>Folder</code> resources that are present in the
+    #            asset bundle that is imported.</p>
     #   @return [Array<Types::AssetBundleImportJobFolderOverrideTags>]
+    # @!attribute topics_v2
+    #   <p>A list of tag overrides for any <code>Topic</code> resources that are present in the
+    #            asset bundle that is imported.</p>
+    #   @return [Array<Types::AssetBundleImportJobTopicV2OverrideTags>]
     class AssetBundleImportJobOverrideTags < Struct.new(
       nil,
       :vpc_connections,
@@ -1576,14 +2241,17 @@ module Aws::QuickSight
       :analyses,
       :dashboards,
       :folders,
+      :topics_v2,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An optional parameter that overrides the validation strategy for all analyses and dashboards before the resource is imported.</p>
+    # <p>An optional parameter that overrides the validation strategy for all analyses and
+    #          dashboards before the resource is imported.</p>
     # @!attribute strict_mode_for_all_resources
-    #   <p>A Boolean value that indicates whether to import all analyses and dashboards under strict or lenient mode.</p>
+    #   <p>A Boolean value that indicates whether to import all analyses and dashboards under
+    #            strict or lenient mode.</p>
     #   @return [Boolean]
     class AssetBundleImportJobOverrideValidationStrategy < Struct.new(
       nil,
@@ -1598,17 +2266,22 @@ module Aws::QuickSight
       end
     end
 
-    # <p>A list of overrides for a specific <code>RefreshsSchedule</code> resource that is present in the asset bundle that is imported.</p>
+    # <p>A list of overrides for a specific <code>RefreshsSchedule</code> resource that is
+    #          present in the asset bundle that is imported.</p>
     # @!attribute data_set_id
-    #   <p>A partial identifier for the specific <code>RefreshSchedule</code> resource that is being overridden. This structure is used together with the <code>ScheduleID</code> structure.</p>
+    #   <p>A partial identifier for the specific <code>RefreshSchedule</code> resource that is
+    #            being overridden. This structure is used together with the <code>ScheduleID</code>
+    #            structure.</p>
     #   @return [String]
     # @!attribute schedule_id
-    #   <p>A partial identifier for the specific <code>RefreshSchedule</code> resource being overridden. This structure is used together with the <code>DataSetId</code> structure.</p>
+    #   <p>A partial identifier for the specific <code>RefreshSchedule</code> resource being
+    #            overridden. This structure is used together with the <code>DataSetId</code>
+    #            structure.</p>
     #   @return [String]
     # @!attribute start_after_date_time
-    #   <p>An override for the <code>StartAfterDateTime</code> of a <code>RefreshSchedule</code>. Make
-    #            sure that the <code>StartAfterDateTime</code> is set to a time that takes
-    #            place in the future.</p>
+    #   <p>An override for the <code>StartAfterDateTime</code> of a <code>RefreshSchedule</code>.
+    #            Make sure that the <code>StartAfterDateTime</code> is set to a time that takes place in the
+    #            future.</p>
     #   @return [Time]
     class AssetBundleImportJobRefreshScheduleOverrideParameters < Struct.new(
       nil,
@@ -1622,7 +2295,9 @@ module Aws::QuickSight
 
     # <p>An optional structure that configures resource ID overrides for the import job.</p>
     # @!attribute prefix_for_all_resources
-    #   <p>An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.</p>
+    #   <p>An option to request a CloudFormation variable for a prefix to be prepended to each
+    #            resource's ID before import. The prefix is only added to the asset IDs and does not
+    #            change the name of the asset.</p>
     #   @return [String]
     class AssetBundleImportJobResourceIdOverrideConfiguration < Struct.new(
       nil,
@@ -1632,7 +2307,8 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A summary of the import job that includes details of the requested job's configuration and its current status.</p>
+    # <p>A summary of the import job that includes details of the requested job's
+    #          configuration and its current status.</p>
     # @!attribute job_status
     #   <p>The current status of the import job.</p>
     #   @return [String]
@@ -1643,7 +2319,8 @@ module Aws::QuickSight
     #   <p>The time that the import job was created.</p>
     #   @return [Time]
     # @!attribute asset_bundle_import_job_id
-    #   <p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>
+    #   <p>The ID of the job. This ID is unique while the job is running. After the job is
+    #            completed, you can reuse this ID for another job.</p>
     #   @return [String]
     # @!attribute failure_action
     #   <p>The failure action for the import job.</p>
@@ -1676,9 +2353,11 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains a list of permissions to be applied to a list of theme IDs.</p>
+    # <p>An object that contains a list of permissions to be applied to a list of theme
+    #          IDs.</p>
     # @!attribute theme_ids
-    #   <p>A list of theme IDs that you want to apply overrides to. You can use <code>*</code> to override all themes in this asset bundle.</p>
+    #   <p>A list of theme IDs that you want to apply overrides to. You can use <code>*</code> to
+    #            override all themes in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute permissions
     #   <p>A list of permissions for the themes that you want to apply overrides to.</p>
@@ -1694,7 +2373,8 @@ module Aws::QuickSight
 
     # <p>An object that contains a list of tags to be assigned to a list of theme IDs.</p>
     # @!attribute theme_ids
-    #   <p>A list of theme IDs that you want to apply overrides to. You can use <code>*</code> to override all themes in this asset bundle.</p>
+    #   <p>A list of theme IDs that you want to apply overrides to. You can use <code>*</code> to
+    #            override all themes in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>A list of tags for the themes that you want to apply overrides to.</p>
@@ -1702,6 +2382,61 @@ module Aws::QuickSight
     class AssetBundleImportJobThemeOverrideTags < Struct.new(
       nil,
       :theme_ids,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The override parameters for a single topic that is being imported.</p>
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to apply overrides to.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A new name for the topic.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A new description for the topic.</p>
+    #   @return [String]
+    class AssetBundleImportJobTopicV2OverrideParameters < Struct.new(
+      nil,
+      :topic_id,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that contains a list of permissions to be applied to a list of topic
+    #          IDs.</p>
+    # @!attribute topic_ids
+    #   <p>A list of topic IDs that you want to apply overrides to. You can use <code>*</code> to
+    #            override all topics in this asset bundle.</p>
+    #   @return [Array<String>]
+    # @!attribute permissions
+    #   <p>A list of permissions for the topics that you want to apply overrides to.</p>
+    #   @return [Types::AssetBundleResourcePermissions]
+    class AssetBundleImportJobTopicV2OverridePermissions < Struct.new(
+      nil,
+      :topic_ids,
+      :permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that contains a list of tags to be assigned to a list of topic IDs.</p>
+    # @!attribute topic_ids
+    #   <p>A list of topic IDs that you want to apply overrides to. You can use <code>*</code> to
+    #            override all topics in this asset bundle.</p>
+    #   @return [Array<String>]
+    # @!attribute tags
+    #   <p>A list of tags for the topics that you want to apply overrides to.</p>
+    #   @return [Array<Types::Tag>]
+    class AssetBundleImportJobTopicV2OverrideTags < Struct.new(
+      nil,
+      :topic_ids,
       :tags,
       keyword_init: true
     )
@@ -1717,11 +2452,13 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute subnet_ids
     #   <p>A list of new subnet IDs for the VPC connection you are importing. This field is
-    #            required if you are importing the VPC connection from another Amazon Web Services account or Region.</p>
+    #            required if you are importing the VPC connection from another Amazon Web Services account or
+    #            Region.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
     #   <p>A new security group ID for the VPC connection you are importing. This field is required
-    #            if you are importing the VPC connection from another Amazon Web Services account or Region.</p>
+    #            if you are importing the VPC connection from another Amazon Web Services account or
+    #            Region.</p>
     #   @return [Array<String>]
     # @!attribute dns_resolvers
     #   <p>An optional override of DNS resolvers to be used by the VPC connection.</p>
@@ -1742,9 +2479,11 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains a list of tags to be assigned to a list of VPC connection IDs.</p>
+    # <p>An object that contains a list of tags to be assigned to a list of VPC connection
+    #          IDs.</p>
     # @!attribute vpc_connection_ids
-    #   <p>A list of VPC connection IDs that you want to apply overrides to. You can use <code>*</code> to override all VPC connections in this asset bundle.</p>
+    #   <p>A list of VPC connection IDs that you want to apply overrides to. You can use
+    #               <code>*</code> to override all VPC connections in this asset bundle.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>A list of tags for the VPC connections that you want to apply overrides to.</p>
@@ -1774,13 +2513,21 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The source of the asset bundle zip file that contains the data that you want to import. The file must be in <code>QUICKSIGHT_JSON</code> format.</p>
+    # <p>The source of the asset bundle zip file that contains the data that you want to import.
+    #          The file must be in <code>QUICKSIGHT_JSON</code> format.</p>
     # @!attribute body
-    #   <p>The bytes of the base64 encoded asset bundle import zip file. This file can't exceed 20 MB. If the size of the file that you want to upload is more than 20 MB, add the file to your Amazon S3 bucket and use <code>S3Uri</code> of the file for this operation.</p>
-    #            <p>If you are calling the API operations from the Amazon Web Services SDK for Java, JavaScript, Python, or PHP, the SDK encodes base64 automatically to allow the direct setting of the zip file's bytes. If you are using an SDK for a different language or receiving related errors, try to base64 encode your data.</p>
+    #   <p>The bytes of the base64 encoded asset bundle import zip file. This file can't
+    #            exceed 20 MB. If the size of the file that you want to upload is more than 20 MB, add the
+    #            file to your Amazon S3 bucket and use <code>S3Uri</code> of the file for this
+    #            operation.</p>
+    #            <p>If you are calling the API operations from the Amazon Web Services SDK for Java,
+    #            JavaScript, Python, or PHP, the SDK encodes base64 automatically to allow the direct
+    #            setting of the zip file's bytes. If you are using an SDK for a different language or
+    #            receiving related errors, try to base64 encode your data.</p>
     #   @return [String]
     # @!attribute s3_uri
-    #   <p>The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 1 GB.</p>
+    #   <p>The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file
+    #            and can't exceed 1 GB.</p>
     #   @return [String]
     class AssetBundleImportSource < Struct.new(
       nil,
@@ -1791,9 +2538,14 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A description of the import source that you provide at the start of an import job. This value is set to either <code>Body</code> or <code>S3Uri</code>, depending on how the <code>StartAssetBundleImportJobRequest</code> is configured.</p>
+    # <p>A description of the import source that you provide at the start of an import job. This
+    #          value is set to either <code>Body</code> or <code>S3Uri</code>, depending on how the
+    #             <code>StartAssetBundleImportJobRequest</code> is configured.</p>
     # @!attribute body
-    #   <p>An HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for five minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed. The downloaded asset bundle is a <code>.qs</code> zip file.</p>
+    #   <p>An HTTPS download URL for the provided asset bundle that you optionally provided at the
+    #            start of the import job. This URL is valid for five minutes after issuance. Call
+    #               <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed. The
+    #            downloaded asset bundle is a <code>.qs</code> zip file.</p>
     #   @return [String]
     # @!attribute s3_uri
     #   <p>The Amazon S3 URI that you provided at the start of the import job.</p>
@@ -1807,9 +2559,11 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure that contains the configuration of a shared link to an QuickSight dashboard.</p>
+    # <p>A structure that contains the configuration of a shared link to an Amazon Quick Sight
+    #          dashboard.</p>
     # @!attribute permissions
-    #   <p>A list of link sharing permissions for the dashboards that you want to apply overrides to.</p>
+    #   <p>A list of link sharing permissions for the dashboards that you want to apply overrides
+    #            to.</p>
     #   @return [Types::AssetBundleResourcePermissions]
     class AssetBundleResourceLinkSharingConfiguration < Struct.new(
       nil,
@@ -1819,7 +2573,8 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure that contains the permissions for the resource that you want to override in an asset bundle import job.</p>
+    # <p>A structure that contains the permissions for the resource that you want to override in
+    #          an asset bundle import job.</p>
     # @!attribute principals
     #   <p>A list of principals to grant permissions on.</p>
     #   @return [Array<String>]
@@ -1851,6 +2606,9 @@ module Aws::QuickSight
     # @!attribute custom_action_defaults
     #   <p>A list of visual custom actions for the analysis.</p>
     #   @return [Types::VisualCustomActionDefaults]
+    # @!attribute visual_messages
+    #   <p>The configuration options for the messages that are displayed on visuals in the analysis.</p>
+    #   @return [Types::VisualMessages]
     class AssetOptions < Struct.new(
       nil,
       :timezone,
@@ -1858,6 +2616,7 @@ module Aws::QuickSight
       :q_business_insights_status,
       :excluded_data_set_arns,
       :custom_action_defaults,
+      :visual_messages,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1870,14 +2629,18 @@ module Aws::QuickSight
     # @!attribute role_arn
     #   <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>
     #   @return [String]
+    # @!attribute consumer_account_role_arn
+    #   <p>Use <code>ConsumerAccountRoleArn</code> to perform cross-account Athena access. This is an IAM role ARN in the same AWS account as the Athena resources you want to access. Provide this along with <code>RoleArn</code> to enable role-chaining, where Amazon Quick Sight first assumes the <code>RoleArn</code> and then assumes the <code>ConsumerAccountRoleArn</code> to access Athena resources.</p>
+    #   @return [String]
     # @!attribute identity_center_configuration
-    #   <p>An optional parameter that configures IAM Identity Center authentication to grant QuickSight access to your workgroup.</p>
-    #            <p>This parameter can only be specified if your QuickSight account is configured with IAM Identity Center.</p>
+    #   <p>An optional parameter that configures IAM Identity Center authentication to grant Quick Sight access to your workgroup.</p>
+    #            <p>This parameter can only be specified if your Quick Sight account is configured with IAM Identity Center.</p>
     #   @return [Types::IdentityCenterConfiguration]
     class AthenaParameters < Struct.new(
       nil,
       :work_group,
       :role_arn,
+      :consumer_account_role_arn,
       :identity_center_configuration,
       keyword_init: true
     )
@@ -1901,6 +2664,18 @@ module Aws::QuickSight
       nil,
       :simple_attribute_aggregation,
       :value_for_multiple_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for audio extraction from knowledge base documents.</p>
+    # @!attribute audio_extraction_status
+    #   <p>The status of audio extraction. Valid values are ENABLED and DISABLED.</p>
+    #   @return [String]
+    class AudioExtractionConfiguration < Struct.new(
+      nil,
+      :audio_extraction_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1941,6 +2716,125 @@ module Aws::QuickSight
       :host,
       :port,
       :database,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Authentication configuration for connecting to external services.</p>
+    # @!attribute authentication_type
+    #   <p>The type of authentication method.</p>
+    #   @return [String]
+    # @!attribute authentication_metadata
+    #   <p>The authentication metadata containing the specific configuration for the chosen authentication type.</p>
+    #   @return [Types::AuthenticationMetadata]
+    class AuthConfig < Struct.new(
+      nil,
+      :authentication_type,
+      :authentication_metadata,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Union type containing authentication metadata for different authentication methods.</p>
+    # @!attribute authorization_code_grant_metadata
+    #   <p>OAuth 2.0 authorization code grant authentication metadata.</p>
+    #   @return [Types::AuthorizationCodeGrantMetadata]
+    # @!attribute client_credentials_grant_metadata
+    #   <p>OAuth 2.0 client credentials grant authentication metadata.</p>
+    #   @return [Types::ClientCredentialsGrantMetadata]
+    # @!attribute basic_auth_connection_metadata
+    #   <p>Basic authentication metadata using username and password.</p>
+    #   @return [Types::BasicAuthConnectionMetadata]
+    # @!attribute api_key_connection_metadata
+    #   <p>API key authentication metadata.</p>
+    #   @return [Types::APIKeyConnectionMetadata]
+    # @!attribute none_connection_metadata
+    #   <p>No authentication metadata for services that don't require authentication.</p>
+    #   @return [Types::NoneConnectionMetadata]
+    # @!attribute iam_connection_metadata
+    #   <p>IAM role-based authentication metadata for Amazon Web Services services.</p>
+    #   @return [Types::IAMConnectionMetadata]
+    class AuthenticationMetadata < Struct.new(
+      :authorization_code_grant_metadata,
+      :client_credentials_grant_metadata,
+      :basic_auth_connection_metadata,
+      :api_key_connection_metadata,
+      :none_connection_metadata,
+      :iam_connection_metadata,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AuthorizationCodeGrantMetadata < AuthenticationMetadata; end
+      class ClientCredentialsGrantMetadata < AuthenticationMetadata; end
+      class BasicAuthConnectionMetadata < AuthenticationMetadata; end
+      class ApiKeyConnectionMetadata < AuthenticationMetadata; end
+      class NoneConnectionMetadata < AuthenticationMetadata; end
+      class IamConnectionMetadata < AuthenticationMetadata; end
+      class Unknown < AuthenticationMetadata; end
+    end
+
+    # <p>Details for OAuth 2.0 authorization code grant credentials.</p>
+    # @!attribute authorization_code_grant_details
+    #   <p>The authorization code grant configuration details.</p>
+    #   @return [Types::AuthorizationCodeGrantDetails]
+    class AuthorizationCodeGrantCredentialsDetails < Struct.new(
+      :authorization_code_grant_details,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AuthorizationCodeGrantDetails < AuthorizationCodeGrantCredentialsDetails; end
+      class Unknown < AuthorizationCodeGrantCredentialsDetails; end
+    end
+
+    # <p>Configuration details for OAuth 2.0 authorization code grant flow.</p>
+    # @!attribute client_id
+    #   <p>The client ID for the OAuth application.</p>
+    #   @return [String]
+    # @!attribute client_secret
+    #   <p>The client secret for the OAuth application.</p>
+    #   @return [String]
+    # @!attribute token_endpoint
+    #   <p>The token endpoint URL for obtaining access tokens.</p>
+    #   @return [String]
+    # @!attribute authorization_endpoint
+    #   <p>The authorization endpoint URL for the OAuth flow.</p>
+    #   @return [String]
+    class AuthorizationCodeGrantDetails < Struct.new(
+      nil,
+      :client_id,
+      :client_secret,
+      :token_endpoint,
+      :authorization_endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Metadata for OAuth 2.0 authorization code grant authentication.</p>
+    # @!attribute base_endpoint
+    #   <p>The base URL endpoint for the external service.</p>
+    #   @return [String]
+    # @!attribute redirect_url
+    #   <p>The redirect URL for the OAuth authorization flow.</p>
+    #   @return [String]
+    # @!attribute authorization_code_grant_credentials_source
+    #   <p>The source of the authorization code grant credentials.</p>
+    #   @return [String]
+    # @!attribute authorization_code_grant_credentials_details
+    #   <p>The detailed credentials configuration for authorization code grant.</p>
+    #   @return [Types::AuthorizationCodeGrantCredentialsDetails]
+    class AuthorizationCodeGrantMetadata < Struct.new(
+      nil,
+      :base_endpoint,
+      :redirect_url,
+      :authorization_code_grant_credentials_source,
+      :authorization_code_grant_credentials_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2254,6 +3148,12 @@ module Aws::QuickSight
     # @!attribute color_label_options
     #   <p>The label options (label text, label visibility and sort icon visibility) for a color that is used in a bar chart.</p>
     #   @return [Types::ChartAxisLabelOptions]
+    # @!attribute default_series_settings
+    #   <p>The options that determine the default presentation of all bar series in <code>BarChartVisual</code>.</p>
+    #   @return [Types::BarChartDefaultSeriesSettings]
+    # @!attribute series
+    #   <p>The series item configuration of a  <code>BarChartVisual</code>.</p>
+    #   @return [Array<Types::BarSeriesItem>]
     # @!attribute legend
     #   <p>The legend display setup of the visual.</p>
     #   @return [Types::LegendOptions]
@@ -2285,12 +3185,30 @@ module Aws::QuickSight
       :value_axis,
       :value_label_options,
       :color_label_options,
+      :default_series_settings,
+      :series,
       :legend,
       :data_labels,
       :tooltip,
       :reference_lines,
       :contribution_analysis_defaults,
       :interactions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The options that determine the default presentation of all bar series in <code>BarChartVisual</code>.</p>
+    # @!attribute decal_settings
+    #   <p>Decal settings for all bar series in the visual.</p>
+    #   @return [Types::DecalSettings]
+    # @!attribute border_settings
+    #   <p>Border settings for all bar series in the visual.</p>
+    #   @return [Types::BorderSettings]
+    class BarChartDefaultSeriesSettings < Struct.new(
+      nil,
+      :decal_settings,
+      :border_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2304,6 +3222,22 @@ module Aws::QuickSight
     class BarChartFieldWells < Struct.new(
       nil,
       :bar_chart_aggregated_field_wells,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Options that determine the presentation of a bar series in the visual.</p>
+    # @!attribute decal_settings
+    #   <p>Decal settings for the bar series.</p>
+    #   @return [Types::DecalSettings]
+    # @!attribute border_settings
+    #   <p>Border settings for the bar series.</p>
+    #   @return [Types::BorderSettings]
+    class BarChartSeriesSettings < Struct.new(
+      nil,
+      :decal_settings,
+      :border_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2363,7 +3297,7 @@ module Aws::QuickSight
     #                <p>Vertical stacked 100% bar chart</p>
     #             </li>
     #          </ul>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/bar-charts.html">Using bar charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/bar-charts.html">Using bar charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -2394,6 +3328,43 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The series item configuration of a  <code>BarChartVisual</code>.</p>
+    #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+    # @!attribute field_bar_series_item
+    #   <p>The field series item configuration of a  <code>BarChartVisual</code>.</p>
+    #   @return [Types::FieldBarSeriesItem]
+    # @!attribute data_field_bar_series_item
+    #   <p>The data field series item configuration of a  <code>BarChartVisual</code>.</p>
+    #   @return [Types::DataFieldBarSeriesItem]
+    class BarSeriesItem < Struct.new(
+      nil,
+      :field_bar_series_item,
+      :data_field_bar_series_item,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Metadata for basic authentication using username and password.</p>
+    # @!attribute base_endpoint
+    #   <p>The base URL endpoint for the external service.</p>
+    #   @return [String]
+    # @!attribute username
+    #   <p>The username for basic authentication.</p>
+    #   @return [String]
+    # @!attribute password
+    #   <p>The password for basic authentication.</p>
+    #   @return [String]
+    class BasicAuthConnectionMetadata < Struct.new(
+      nil,
+      :base_endpoint,
+      :username,
+      :password,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2455,6 +3426,85 @@ module Aws::QuickSight
       end
     end
 
+    # <p>Information about a knowledge base that failed to be deleted in a batch operation.</p>
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the knowledge base that failed to be deleted.</p>
+    #   @return [String]
+    # @!attribute error_code
+    #   <p>The error code for the deletion failure.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message for the deletion failure.</p>
+    #   @return [String]
+    class BatchDeleteKnowledgeBaseFailure < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :error_code,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_ids
+    #   <p>A list of knowledge base identifiers to delete.</p>
+    #   @return [Array<String>]
+    class BatchDeleteKnowledgeBaseRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :knowledge_base_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute deleted
+    #   <p>A list of knowledge bases that were successfully deleted.</p>
+    #   @return [Array<Types::BatchDeleteKnowledgeBaseSuccess>]
+    # @!attribute errors
+    #   <p>A list of knowledge bases that failed to be deleted.</p>
+    #   @return [Array<Types::BatchDeleteKnowledgeBaseFailure>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class BatchDeleteKnowledgeBaseResponse < Struct.new(
+      nil,
+      :deleted,
+      :errors,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = nil unless options.key?(:status)
+        super
+      end
+    end
+
+    # <p>Information about a knowledge base that was successfully deleted in a batch operation.</p>
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier of the successfully deleted knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_arn
+    #   <p>The ARN of the successfully deleted knowledge base.</p>
+    #   @return [String]
+    class BatchDeleteKnowledgeBaseSuccess < Struct.new(
+      nil,
+      :knowledge_base_id,
+      :knowledge_base_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account that you want to delete a reviewed answers in.</p>
     #   @return [String]
@@ -2508,6 +3558,68 @@ module Aws::QuickSight
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    # <p>Information about a user whose limits could not be described in a batch operation.</p>
+    # @!attribute user_name
+    #   <p>The name of the user that failed.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The namespace of the user that failed.</p>
+    #   @return [String]
+    # @!attribute user_arn
+    #   <p>The ARN of the user that failed.</p>
+    #   @return [String]
+    # @!attribute error_code
+    #   <p>The error code for the failure.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The error message for the failure.</p>
+    #   @return [String]
+    class BatchDescribeUserLimitsError < Struct.new(
+      nil,
+      :user_name,
+      :namespace,
+      :user_arn,
+      :error_code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute account_id
+    #   <p>The ID of the Amazon Web Services account that contains the users.</p>
+    #   @return [String]
+    # @!attribute users
+    #   <p>A list of users to describe limits for. Each entry contains a user name and namespace.</p>
+    #   @return [Array<Types::UserLimitsEntry>]
+    # @!attribute resource_types
+    #   <p>An optional filter that limits the results to specific resource types. If you don't specify a value, the operation returns limits for all resource types.</p>
+    #   @return [Array<String>]
+    class BatchDescribeUserLimitsRequest < Struct.new(
+      nil,
+      :account_id,
+      :users,
+      :resource_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute user_limits
+    #   <p>A list of user limits results. Each entry contains the effective limits for a user.</p>
+    #   @return [Array<Types::UserLimits>]
+    # @!attribute errors
+    #   <p>A list of errors for users whose limits could not be described.</p>
+    #   @return [Array<Types::BatchDescribeUserLimitsError>]
+    class BatchDescribeUserLimitsResponse < Struct.new(
+      nil,
+      :user_limits,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters that are required to connect to a Google BigQuery data source.</p>
@@ -2700,13 +3812,41 @@ module Aws::QuickSight
       end
     end
 
+    # <p>Border settings configuration for visual elements, including visibility, width, and color properties.</p>
+    # @!attribute border_visibility
+    #   <p>Visibility setting for the border.</p>
+    #   @return [String]
+    # @!attribute border_width
+    #   <p>Width of the border. Valid range is from 1px to 8px.</p>
+    #   @return [String]
+    # @!attribute border_color
+    #   <p>Color of the border.</p>
+    #   @return [String]
+    class BorderSettings < Struct.new(
+      nil,
+      :border_visibility,
+      :border_width,
+      :border_color,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The display options for tile borders for visuals.</p>
+    # @!attribute color
+    #   <p>The option to add color for tile borders for visuals.</p>
+    #   @return [String]
     # @!attribute show
     #   <p>The option to enable display of borders for visuals.</p>
     #   @return [Boolean]
+    # @!attribute width
+    #   <p>The option to set the width of tile borders for visuals.</p>
+    #   @return [String]
     class BorderStyle < Struct.new(
       nil,
+      :color,
       :show,
+      :width,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2851,7 +3991,7 @@ module Aws::QuickSight
     end
 
     # <p>A box plot.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/box-plots.html">Using box plots</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/box-plots.html">Using box plots</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
     #   @return [String]
@@ -2957,7 +4097,7 @@ module Aws::QuickSight
 
     # <p>The details of the brand.</p>
     # @!attribute brand_id
-    #   <p>The ID of the QuickSight brand.</p>
+    #   <p>The ID of the Quick brand.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the brand.</p>
@@ -3016,7 +4156,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the brand.</p>
     #   @return [String]
     # @!attribute brand_id
-    #   <p>The ID of the QuickSight brand.</p>
+    #   <p>The ID of the Quick brand.</p>
     #   @return [String]
     # @!attribute brand_name
     #   <p>The name of the brand.</p>
@@ -3053,7 +4193,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute column_id
     #   <p>A unique ID to identify a calculated column. During a dataset update, if the column ID
-    #               of a calculated column matches that of an existing calculated column, Amazon QuickSight
+    #               of a calculated column matches that of an existing calculated column, Quick Sight
     #               preserves the existing calculated column.</p>
     #   @return [String]
     # @!attribute expression
@@ -3073,6 +4213,9 @@ module Aws::QuickSight
     # @!attribute data_set_identifier
     #   <p>The data set that is used in this calculated field.</p>
     #   @return [String]
+    # @!attribute topic_identifier
+    #   <p>The topic that is used in this calculated field.</p>
+    #   @return [String]
     # @!attribute name
     #   <p>The name of the calculated field.</p>
     #   @return [String]
@@ -3082,11 +4225,17 @@ module Aws::QuickSight
     class CalculatedField < Struct.new(
       nil,
       :data_set_identifier,
+      :topic_identifier,
       :name,
       :expression,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:data_set_identifier] = '' unless options.key?(:data_set_identifier)
+        super
+      end
     end
 
     # <p>The table calculation measure field for pivot tables.</p>
@@ -3152,7 +4301,7 @@ module Aws::QuickSight
       end
     end
 
-    # <p>A set of actions that correspond to QuickSight permissions.</p>
+    # <p>A set of actions that correspond to Amazon Quick Sight permissions.</p>
     # @!attribute export_to_csv
     #   <p>The ability to export to CSV files from the UI.</p>
     #   @return [String]
@@ -3228,6 +4377,2079 @@ module Aws::QuickSight
     # @!attribute analysis
     #   <p>The ability to perform analysis-related actions.</p>
     #   @return [String]
+    # @!attribute automate
+    #   <p>The ability to perform automate-related actions.</p>
+    #   @return [String]
+    # @!attribute flow
+    #   <p>The ability to perform flow-related actions.</p>
+    #   @return [String]
+    # @!attribute apps
+    #   <p>The ability to perform apps-related actions.</p>
+    #   @return [String]
+    # @!attribute create_and_update_apps
+    #   <p>The ability to create or update apps.</p>
+    #   @return [String]
+    # @!attribute share_apps
+    #   <p>The ability to share apps with other users.</p>
+    #   @return [String]
+    # @!attribute invoke_apps_ai_inference
+    #   <p>The ability to add and invoke AI inference in new and existing apps.</p>
+    #   @return [String]
+    # @!attribute access_apps_native_data_store
+    #   <p>The ability to access the native data store for new and existing apps.</p>
+    #   @return [String]
+    # @!attribute publish_without_approval
+    #   <p>The ability to enable approvals for flow share.</p>
+    #   @return [String]
+    # @!attribute use_bedrock_models
+    #   <p>The ability to use Bedrock models for general knowledge step in flows.</p>
+    #   @return [String]
+    # @!attribute perform_flow_ui_task
+    #   <p>The ability to use UI Agent step to perform tasks on public websites.</p>
+    #   @return [String]
+    # @!attribute approve_flow_share_requests
+    #   <p>The ability to review and approve sharing requests of Flows.</p>
+    #   @return [String]
+    # @!attribute use_agent_web_search
+    #   <p>The ability to use internet to enhance results in Chat Agents, Flows, and Quick Research.
+    #   	          Web search queries will be processed securely in an Amazon Web Services region <code>us-east-1</code>.</p>
+    #   @return [String]
+    # @!attribute knowledge_base
+    #   <p>The ability to use knowledge bases to specify content from external applications.</p>
+    #   @return [String]
+    # @!attribute create_and_update_knowledge_bases
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_knowledge_bases
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_point_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_share_point_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_share_point_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_share_point_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute google_drive_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_google_drive_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_google_drive_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_google_drive_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute web_crawler_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_web_crawler_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_web_crawler_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_web_crawler_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute s3_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_s3_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_s3_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_s3_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute confluence_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_confluence_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_confluence_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_confluence_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute one_drive_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_one_drive_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_one_drive_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_one_drive_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute q_business_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_q_business_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_q_business_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_q_business_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute bedrock_managed_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_bedrock_managed_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_bedrock_managed_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_bedrock_managed_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute box_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_box_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_box_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_box_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute idc_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute create_and_update_idc_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute share_idc_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute use_idc_knowledge_base
+    #   <p>The permission state of a capability in a custom permissions profile. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute action
+    #   <p>The ability to perform actions in external services through Action connectors. Actions allow users to interact with third-party systems.</p>
+    #   @return [String]
+    # @!attribute generic_http_action
+    #   <p>The ability to perform actions using REST API connection connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_generic_http_action
+    #   <p>The ability to create and update REST API connection actions.</p>
+    #   @return [String]
+    # @!attribute share_generic_http_action
+    #   <p>The ability to share REST API connection actions.</p>
+    #   @return [String]
+    # @!attribute use_generic_http_action
+    #   <p>The ability to use REST API connection actions.</p>
+    #   @return [String]
+    # @!attribute asana_action
+    #   <p>The ability to perform actions using Asana connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_asana_action
+    #   <p>The ability to create and update Asana actions.</p>
+    #   @return [String]
+    # @!attribute share_asana_action
+    #   <p>The ability to share Asana actions.</p>
+    #   @return [String]
+    # @!attribute use_asana_action
+    #   <p>The ability to use Asana actions.</p>
+    #   @return [String]
+    # @!attribute slack_action
+    #   <p>The ability to perform actions using Slack connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_slack_action
+    #   <p>The ability to create and update Slack actions.</p>
+    #   @return [String]
+    # @!attribute share_slack_action
+    #   <p>The ability to share Slack actions.</p>
+    #   @return [String]
+    # @!attribute use_slack_action
+    #   <p>The ability to use Slack actions.</p>
+    #   @return [String]
+    # @!attribute service_now_action
+    #   <p>The ability to perform actions using ServiceNow connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_service_now_action
+    #   <p>The ability to create and update ServiceNow actions.</p>
+    #   @return [String]
+    # @!attribute share_service_now_action
+    #   <p>The ability to share ServiceNow actions.</p>
+    #   @return [String]
+    # @!attribute use_service_now_action
+    #   <p>The ability to use ServiceNow actions.</p>
+    #   @return [String]
+    # @!attribute salesforce_action
+    #   <p>The ability to perform actions using Salesforce connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_salesforce_action
+    #   <p>The ability to create and update Salesforce actions.</p>
+    #   @return [String]
+    # @!attribute share_salesforce_action
+    #   <p>The ability to share Salesforce actions.</p>
+    #   @return [String]
+    # @!attribute use_salesforce_action
+    #   <p>The ability to use Salesforce actions.</p>
+    #   @return [String]
+    # @!attribute ms_exchange_action
+    #   <p>The ability to perform actions using Microsoft Outlook connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_ms_exchange_action
+    #   <p>The ability to create and update Microsoft Outlook actions.</p>
+    #   @return [String]
+    # @!attribute share_ms_exchange_action
+    #   <p>The ability to share Microsoft Outlook actions.</p>
+    #   @return [String]
+    # @!attribute use_ms_exchange_action
+    #   <p>The ability to use Microsoft Outlook actions.</p>
+    #   @return [String]
+    # @!attribute pager_duty_action
+    #   <p>The ability to perform actions using PagerDuty Advance connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_pager_duty_action
+    #   <p>The ability to create and update PagerDuty Advance actions.</p>
+    #   @return [String]
+    # @!attribute share_pager_duty_action
+    #   <p>The ability to share PagerDuty Advance actions.</p>
+    #   @return [String]
+    # @!attribute use_pager_duty_action
+    #   <p>The ability to use PagerDuty Advance actions.</p>
+    #   @return [String]
+    # @!attribute jira_action
+    #   <p>The ability to perform actions using Jira connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_jira_action
+    #   <p>The ability to create and update Jira actions.</p>
+    #   @return [String]
+    # @!attribute share_jira_action
+    #   <p>The ability to share Jira actions.</p>
+    #   @return [String]
+    # @!attribute use_jira_action
+    #   <p>The ability to use Jira actions.</p>
+    #   @return [String]
+    # @!attribute confluence_action
+    #   <p>The ability to perform actions using Atlassian Confluence Cloud connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_confluence_action
+    #   <p>The ability to create and update Atlassian Confluence Cloud actions.</p>
+    #   @return [String]
+    # @!attribute share_confluence_action
+    #   <p>The ability to share Atlassian Confluence Cloud actions.</p>
+    #   @return [String]
+    # @!attribute use_confluence_action
+    #   <p>The ability to use Atlassian Confluence Cloud actions.</p>
+    #   @return [String]
+    # @!attribute one_drive_action
+    #   <p>The ability to perform actions using Microsoft OneDrive connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_one_drive_action
+    #   <p>The ability to create and update Microsoft OneDrive actions.</p>
+    #   @return [String]
+    # @!attribute share_one_drive_action
+    #   <p>The ability to share Microsoft OneDrive actions.</p>
+    #   @return [String]
+    # @!attribute use_one_drive_action
+    #   <p>The ability to use Microsoft OneDrive actions.</p>
+    #   @return [String]
+    # @!attribute share_point_action
+    #   <p>The ability to perform actions using Microsoft SharePoint Online connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_share_point_action
+    #   <p>The ability to create and update Microsoft SharePoint Online actions.</p>
+    #   @return [String]
+    # @!attribute share_share_point_action
+    #   <p>The ability to share Microsoft SharePoint Online actions.</p>
+    #   @return [String]
+    # @!attribute use_share_point_action
+    #   <p>The ability to use Microsoft SharePoint Online actions.</p>
+    #   @return [String]
+    # @!attribute ms_teams_action
+    #   <p>The ability to perform actions using Microsoft Teams connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_ms_teams_action
+    #   <p>The ability to create and update Microsoft Teams actions.</p>
+    #   @return [String]
+    # @!attribute share_ms_teams_action
+    #   <p>The ability to share Microsoft Teams actions.</p>
+    #   @return [String]
+    # @!attribute use_ms_teams_action
+    #   <p>The ability to use Microsoft Teams actions.</p>
+    #   @return [String]
+    # @!attribute google_calendar_action
+    #   <p>The ability to perform actions using Google Calendar connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_google_calendar_action
+    #   <p>The ability to create and update Google Calendar actions.</p>
+    #   @return [String]
+    # @!attribute share_google_calendar_action
+    #   <p>The ability to share Google Calendar actions.</p>
+    #   @return [String]
+    # @!attribute use_google_calendar_action
+    #   <p>The ability to use Google Calendar actions.</p>
+    #   @return [String]
+    # @!attribute zendesk_action
+    #   <p>The ability to perform actions using Zendesk connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_zendesk_action
+    #   <p>The ability to create and update Zendesk actions.</p>
+    #   @return [String]
+    # @!attribute share_zendesk_action
+    #   <p>The ability to share Zendesk actions.</p>
+    #   @return [String]
+    # @!attribute use_zendesk_action
+    #   <p>The ability to use Zendesk actions.</p>
+    #   @return [String]
+    # @!attribute smartsheet_action
+    #   <p>The ability to perform actions using Smartsheet connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_smartsheet_action
+    #   <p>The ability to create and update Smartsheet actions.</p>
+    #   @return [String]
+    # @!attribute share_smartsheet_action
+    #   <p>The ability to share Smartsheet actions.</p>
+    #   @return [String]
+    # @!attribute use_smartsheet_action
+    #   <p>The ability to use Smartsheet actions.</p>
+    #   @return [String]
+    # @!attribute sap_business_partner_action
+    #   <p>The ability to perform actions using SAP Business Partner connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_sap_business_partner_action
+    #   <p>The ability to create and update SAP Business Partner actions.</p>
+    #   @return [String]
+    # @!attribute share_sap_business_partner_action
+    #   <p>The ability to share SAP Business Partner actions.</p>
+    #   @return [String]
+    # @!attribute use_sap_business_partner_action
+    #   <p>The ability to use SAP Business Partner actions.</p>
+    #   @return [String]
+    # @!attribute sap_product_master_data_action
+    #   <p>The ability to perform actions using SAP Product Master connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_sap_product_master_data_action
+    #   <p>The ability to create and update SAP Product Master actions.</p>
+    #   @return [String]
+    # @!attribute share_sap_product_master_data_action
+    #   <p>The ability to share SAP Product Master actions.</p>
+    #   @return [String]
+    # @!attribute use_sap_product_master_data_action
+    #   <p>The ability to use SAP Product Master actions.</p>
+    #   @return [String]
+    # @!attribute sap_physical_inventory_action
+    #   <p>The ability to perform actions using SAP Physical Inventory connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_sap_physical_inventory_action
+    #   <p>The ability to create and update SAP Physical Inventory actions.</p>
+    #   @return [String]
+    # @!attribute share_sap_physical_inventory_action
+    #   <p>The ability to share SAP Physical Inventory actions.</p>
+    #   @return [String]
+    # @!attribute use_sap_physical_inventory_action
+    #   <p>The ability to use SAP Physical Inventory actions.</p>
+    #   @return [String]
+    # @!attribute sap_bill_of_material_action
+    #   <p>The ability to perform actions using SAP Bill of Materials connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_sap_bill_of_material_action
+    #   <p>The ability to create and update SAP Bill of Materials actions.</p>
+    #   @return [String]
+    # @!attribute share_sap_bill_of_material_action
+    #   <p>The ability to share SAP Bill of Materials actions.</p>
+    #   @return [String]
+    # @!attribute use_sap_bill_of_material_action
+    #   <p>The ability to use SAP Bill of Materials actions.</p>
+    #   @return [String]
+    # @!attribute sap_material_stock_action
+    #   <p>The ability to perform actions using SAP Material Stock connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_sap_material_stock_action
+    #   <p>The ability to create and update SAP Material Stock actions.</p>
+    #   @return [String]
+    # @!attribute share_sap_material_stock_action
+    #   <p>The ability to share SAP Material Stock actions.</p>
+    #   @return [String]
+    # @!attribute use_sap_material_stock_action
+    #   <p>The ability to use SAP Material Stock actions.</p>
+    #   @return [String]
+    # @!attribute fact_set_action
+    #   <p>The ability to perform actions using FactSet connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_fact_set_action
+    #   <p>The ability to create and update FactSet actions.</p>
+    #   @return [String]
+    # @!attribute share_fact_set_action
+    #   <p>The ability to share FactSet actions.</p>
+    #   @return [String]
+    # @!attribute use_fact_set_action
+    #   <p>The ability to use FactSet actions.</p>
+    #   @return [String]
+    # @!attribute amazon_s_three_action
+    #   <p>The ability to perform actions using Amazon S3 connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_amazon_s_three_action
+    #   <p>The ability to create and update Amazon S3 actions.</p>
+    #   @return [String]
+    # @!attribute share_amazon_s_three_action
+    #   <p>The ability to share Amazon S3 actions.</p>
+    #   @return [String]
+    # @!attribute use_amazon_s_three_action
+    #   <p>The ability to use Amazon S3 actions.</p>
+    #   @return [String]
+    # @!attribute textract_action
+    #   <p>The ability to perform actions using Textract connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_textract_action
+    #   <p>The ability to create and update Textract actions.</p>
+    #   @return [String]
+    # @!attribute share_textract_action
+    #   <p>The ability to share Textract actions.</p>
+    #   @return [String]
+    # @!attribute use_textract_action
+    #   <p>The ability to use Textract actions.</p>
+    #   @return [String]
+    # @!attribute comprehend_action
+    #   <p>The ability to perform actions using Comprehend connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_comprehend_action
+    #   <p>The ability to create and update Comprehend actions.</p>
+    #   @return [String]
+    # @!attribute share_comprehend_action
+    #   <p>The ability to share Comprehend actions.</p>
+    #   @return [String]
+    # @!attribute use_comprehend_action
+    #   <p>The ability to use Comprehend actions.</p>
+    #   @return [String]
+    # @!attribute comprehend_medical_action
+    #   <p>The ability to perform actions using Comprehend Medical connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_comprehend_medical_action
+    #   <p>The ability to create and update Comprehend Medical actions.</p>
+    #   @return [String]
+    # @!attribute share_comprehend_medical_action
+    #   <p>The ability to share Comprehend Medical actions.</p>
+    #   @return [String]
+    # @!attribute use_comprehend_medical_action
+    #   <p>The ability to use Comprehend Medical actions.</p>
+    #   @return [String]
+    # @!attribute amazon_bedrock_ars_action
+    #   <p>The ability to perform actions using Bedrock Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_amazon_bedrock_ars_action
+    #   <p>The ability to create and update Bedrock Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_amazon_bedrock_ars_action
+    #   <p>The ability to share Bedrock Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_amazon_bedrock_ars_action
+    #   <p>The ability to use Bedrock Agent actions.</p>
+    #   @return [String]
+    # @!attribute amazon_bedrock_fs_action
+    #   <p>The ability to perform actions using Bedrock Runtime connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_amazon_bedrock_fs_action
+    #   <p>The ability to create and update Bedrock Runtime actions.</p>
+    #   @return [String]
+    # @!attribute share_amazon_bedrock_fs_action
+    #   <p>The ability to share Bedrock Runtime actions.</p>
+    #   @return [String]
+    # @!attribute use_amazon_bedrock_fs_action
+    #   <p>The ability to use Bedrock Runtime actions.</p>
+    #   @return [String]
+    # @!attribute amazon_bedrock_krs_action
+    #   <p>The ability to perform actions using Bedrock Data Automation Runtime connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_amazon_bedrock_krs_action
+    #   <p>The ability to create and update Bedrock Data Automation Runtime actions.</p>
+    #   @return [String]
+    # @!attribute share_amazon_bedrock_krs_action
+    #   <p>The ability to share Bedrock Data Automation Runtime actions.</p>
+    #   @return [String]
+    # @!attribute use_amazon_bedrock_krs_action
+    #   <p>The ability to use Bedrock Data Automation Runtime actions.</p>
+    #   @return [String]
+    # @!attribute mcp_action
+    #   <p>The ability to perform actions using Model Context Protocol connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_mcp_action
+    #   <p>The ability to create and update Model Context Protocol actions.</p>
+    #   @return [String]
+    # @!attribute share_mcp_action
+    #   <p>The ability to share Model Context Protocol actions.</p>
+    #   @return [String]
+    # @!attribute use_mcp_action
+    #   <p>The ability to use Model Context Protocol actions.</p>
+    #   @return [String]
+    # @!attribute open_api_action
+    #   <p>The ability to perform actions using OpenAPI Specification connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_open_api_action
+    #   <p>The ability to create and update OpenAPI Specification actions.</p>
+    #   @return [String]
+    # @!attribute share_open_api_action
+    #   <p>The ability to share OpenAPI Specification actions.</p>
+    #   @return [String]
+    # @!attribute use_open_api_action
+    #   <p>The ability to use OpenAPI Specification actions.</p>
+    #   @return [String]
+    # @!attribute sand_pgmi_action
+    #   <p>The ability to perform actions using S&P Global Market Intelligence connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_sand_pgmi_action
+    #   <p>The ability to create and update S&P Global Market Intelligence actions.</p>
+    #   @return [String]
+    # @!attribute share_sand_pgmi_action
+    #   <p>The ability to share S&P Global Market Intelligence actions.</p>
+    #   @return [String]
+    # @!attribute use_sand_pgmi_action
+    #   <p>The ability to use S&P Global Market Intelligence actions.</p>
+    #   @return [String]
+    # @!attribute sand_p_global_energy_action
+    #   <p>The ability to perform actions using S&P Global Energy connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_sand_p_global_energy_action
+    #   <p>The ability to create and update S&P Global Energy actions.</p>
+    #   @return [String]
+    # @!attribute share_sand_p_global_energy_action
+    #   <p>The ability to share S&P Global Energy actions.</p>
+    #   @return [String]
+    # @!attribute use_sand_p_global_energy_action
+    #   <p>The ability to use S&P Global Energy actions.</p>
+    #   @return [String]
+    # @!attribute bamboo_hr_action
+    #   <p>The ability to perform actions using BambooHR connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_bamboo_hr_action
+    #   <p>The ability to create and update BambooHR actions.</p>
+    #   @return [String]
+    # @!attribute share_bamboo_hr_action
+    #   <p>The ability to share BambooHR actions.</p>
+    #   @return [String]
+    # @!attribute use_bamboo_hr_action
+    #   <p>The ability to use BambooHR actions.</p>
+    #   @return [String]
+    # @!attribute box_agent_action
+    #   <p>The ability to perform actions using Box Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_box_agent_action
+    #   <p>The ability to create and update Box Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_box_agent_action
+    #   <p>The ability to share Box Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_box_agent_action
+    #   <p>The ability to use Box Agent actions.</p>
+    #   @return [String]
+    # @!attribute canva_agent_action
+    #   <p>The ability to perform actions using Canva Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_canva_agent_action
+    #   <p>The ability to create and update Canva Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_canva_agent_action
+    #   <p>The ability to share Canva Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_canva_agent_action
+    #   <p>The ability to use Canva Agent actions.</p>
+    #   @return [String]
+    # @!attribute github_action
+    #   <p>The ability to perform actions using GitHub connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_github_action
+    #   <p>The ability to create and update GitHub actions.</p>
+    #   @return [String]
+    # @!attribute share_github_action
+    #   <p>The ability to share GitHub actions.</p>
+    #   @return [String]
+    # @!attribute use_github_action
+    #   <p>The ability to use GitHub actions.</p>
+    #   @return [String]
+    # @!attribute notion_action
+    #   <p>The ability to perform actions using Notion connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_notion_action
+    #   <p>The ability to create and update Notion actions.</p>
+    #   @return [String]
+    # @!attribute share_notion_action
+    #   <p>The ability to share Notion actions.</p>
+    #   @return [String]
+    # @!attribute use_notion_action
+    #   <p>The ability to use Notion actions.</p>
+    #   @return [String]
+    # @!attribute linear_action
+    #   <p>The ability to perform actions using Linear connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_linear_action
+    #   <p>The ability to create and update Linear actions.</p>
+    #   @return [String]
+    # @!attribute share_linear_action
+    #   <p>The ability to share Linear actions.</p>
+    #   @return [String]
+    # @!attribute use_linear_action
+    #   <p>The ability to use Linear actions.</p>
+    #   @return [String]
+    # @!attribute hugging_face_action
+    #   <p>The ability to perform actions using HuggingFace connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_hugging_face_action
+    #   <p>The ability to create and update HuggingFace actions.</p>
+    #   @return [String]
+    # @!attribute share_hugging_face_action
+    #   <p>The ability to share HuggingFace actions.</p>
+    #   @return [String]
+    # @!attribute use_hugging_face_action
+    #   <p>The ability to use HuggingFace actions.</p>
+    #   @return [String]
+    # @!attribute monday_action
+    #   <p>The ability to perform actions using Monday connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_monday_action
+    #   <p>The ability to create and update Monday actions.</p>
+    #   @return [String]
+    # @!attribute share_monday_action
+    #   <p>The ability to share Monday actions.</p>
+    #   @return [String]
+    # @!attribute use_monday_action
+    #   <p>The ability to use Monday actions.</p>
+    #   @return [String]
+    # @!attribute hubspot_action
+    #   <p>The ability to perform actions using Hubspot connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_hubspot_action
+    #   <p>The ability to create and update Hubspot actions.</p>
+    #   @return [String]
+    # @!attribute share_hubspot_action
+    #   <p>The ability to share Hubspot actions.</p>
+    #   @return [String]
+    # @!attribute use_hubspot_action
+    #   <p>The ability to use Hubspot actions.</p>
+    #   @return [String]
+    # @!attribute intercom_action
+    #   <p>The ability to perform actions using Intercom connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_intercom_action
+    #   <p>The ability to create and update Intercom actions.</p>
+    #   @return [String]
+    # @!attribute share_intercom_action
+    #   <p>The ability to share Intercom actions.</p>
+    #   @return [String]
+    # @!attribute use_intercom_action
+    #   <p>The ability to use Intercom actions.</p>
+    #   @return [String]
+    # @!attribute new_relic_action
+    #   <p>The ability to perform actions using New Relic connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_new_relic_action
+    #   <p>The ability to create and update New Relic actions.</p>
+    #   @return [String]
+    # @!attribute share_new_relic_action
+    #   <p>The ability to share New Relic actions.</p>
+    #   @return [String]
+    # @!attribute use_new_relic_action
+    #   <p>The ability to use New Relic actions.</p>
+    #   @return [String]
+    # @!attribute pager_duty_agent_action
+    #   <p>The ability to perform actions using PagerDuty Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_pager_duty_agent_action
+    #   <p>The ability to create and update PagerDuty Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_pager_duty_agent_action
+    #   <p>The ability to share PagerDuty Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_pager_duty_agent_action
+    #   <p>The ability to use PagerDuty Agent actions.</p>
+    #   @return [String]
+    # @!attribute visier_agent_action
+    #   <p>The ability to perform actions using Visier Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_visier_agent_action
+    #   <p>The ability to create and update Visier Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_visier_agent_action
+    #   <p>The ability to share Visier Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_visier_agent_action
+    #   <p>The ability to use Visier Agent actions.</p>
+    #   @return [String]
+    # @!attribute zoom_action
+    #   <p>The ability to perform actions using Zoom connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_zoom_action
+    #   <p>The ability to create and update Zoom actions.</p>
+    #   @return [String]
+    # @!attribute share_zoom_action
+    #   <p>The ability to share Zoom actions.</p>
+    #   @return [String]
+    # @!attribute use_zoom_action
+    #   <p>The ability to use Zoom actions.</p>
+    #   @return [String]
+    # @!attribute snow_flake_action
+    #   <p>The ability to perform actions using Snowflake Cortex Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_snow_flake_action
+    #   <p>The ability to create and update Snowflake Cortex Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_snow_flake_action
+    #   <p>The ability to share Snowflake Cortex Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_snow_flake_action
+    #   <p>The ability to use Snowflake Cortex Agent actions.</p>
+    #   @return [String]
+    # @!attribute zapier_action
+    #   <p>The ability to perform actions using Zapier Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_zapier_action
+    #   <p>The ability to create and update Zapier Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_zapier_action
+    #   <p>The ability to share Zapier Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_zapier_action
+    #   <p>The ability to use Zapier Agent actions.</p>
+    #   @return [String]
+    # @!attribute airtable_action
+    #   <p>The ability to perform actions using Airtable connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_airtable_action
+    #   <p>The ability to create and update Airtable actions.</p>
+    #   @return [String]
+    # @!attribute share_airtable_action
+    #   <p>The ability to share Airtable actions.</p>
+    #   @return [String]
+    # @!attribute use_airtable_action
+    #   <p>The ability to use Airtable actions.</p>
+    #   @return [String]
+    # @!attribute dropbox_action
+    #   <p>The ability to perform actions using Dropbox connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_dropbox_action
+    #   <p>The ability to create and update Dropbox actions.</p>
+    #   @return [String]
+    # @!attribute share_dropbox_action
+    #   <p>The ability to share Dropbox actions.</p>
+    #   @return [String]
+    # @!attribute use_dropbox_action
+    #   <p>The ability to use Dropbox actions.</p>
+    #   @return [String]
+    # @!attribute gmail_action
+    #   <p>The ability to perform actions using Gmail connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_gmail_action
+    #   <p>The ability to create and update Gmail actions.</p>
+    #   @return [String]
+    # @!attribute share_gmail_action
+    #   <p>The ability to share Gmail actions.</p>
+    #   @return [String]
+    # @!attribute use_gmail_action
+    #   <p>The ability to use Gmail actions.</p>
+    #   @return [String]
+    # @!attribute google_analytics_action
+    #   <p>The ability to perform actions using Google Analytics connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_google_analytics_action
+    #   <p>The ability to create and update Google Analytics actions.</p>
+    #   @return [String]
+    # @!attribute share_google_analytics_action
+    #   <p>The ability to share Google Analytics actions.</p>
+    #   @return [String]
+    # @!attribute use_google_analytics_action
+    #   <p>The ability to use Google Analytics actions.</p>
+    #   @return [String]
+    # @!attribute google_docs_action
+    #   <p>The ability to perform actions using Google Docs connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_google_docs_action
+    #   <p>The ability to create and update Google Docs actions.</p>
+    #   @return [String]
+    # @!attribute share_google_docs_action
+    #   <p>The ability to share Google Docs actions.</p>
+    #   @return [String]
+    # @!attribute use_google_docs_action
+    #   <p>The ability to use Google Docs actions.</p>
+    #   @return [String]
+    # @!attribute google_drive_action
+    #   <p>The ability to perform actions using Google Drive connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_google_drive_action
+    #   <p>The ability to create and update Google Drive actions.</p>
+    #   @return [String]
+    # @!attribute share_google_drive_action
+    #   <p>The ability to share Google Drive actions.</p>
+    #   @return [String]
+    # @!attribute use_google_drive_action
+    #   <p>The ability to use Google Drive actions.</p>
+    #   @return [String]
+    # @!attribute google_meet_action
+    #   <p>The ability to perform actions using Google Meet connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_google_meet_action
+    #   <p>The ability to create and update Google Meet actions.</p>
+    #   @return [String]
+    # @!attribute share_google_meet_action
+    #   <p>The ability to share Google Meet actions.</p>
+    #   @return [String]
+    # @!attribute use_google_meet_action
+    #   <p>The ability to use Google Meet actions.</p>
+    #   @return [String]
+    # @!attribute google_sheets_action
+    #   <p>The ability to perform actions using Google Sheets connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_google_sheets_action
+    #   <p>The ability to create and update Google Sheets actions.</p>
+    #   @return [String]
+    # @!attribute share_google_sheets_action
+    #   <p>The ability to share Google Sheets actions.</p>
+    #   @return [String]
+    # @!attribute use_google_sheets_action
+    #   <p>The ability to use Google Sheets actions.</p>
+    #   @return [String]
+    # @!attribute google_slides_action
+    #   <p>The ability to perform actions using Google Slides connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_google_slides_action
+    #   <p>The ability to create and update Google Slides actions.</p>
+    #   @return [String]
+    # @!attribute share_google_slides_action
+    #   <p>The ability to share Google Slides actions.</p>
+    #   @return [String]
+    # @!attribute use_google_slides_action
+    #   <p>The ability to use Google Slides actions.</p>
+    #   @return [String]
+    # @!attribute quick_books_action
+    #   <p>The ability to perform actions using QuickBooks connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_quick_books_action
+    #   <p>The ability to create and update QuickBooks actions.</p>
+    #   @return [String]
+    # @!attribute share_quick_books_action
+    #   <p>The ability to share QuickBooks actions.</p>
+    #   @return [String]
+    # @!attribute use_quick_books_action
+    #   <p>The ability to use QuickBooks actions.</p>
+    #   @return [String]
+    # @!attribute figma_action
+    #   <p>The ability to perform actions using Figma connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_figma_action
+    #   <p>The ability to create and update Figma actions.</p>
+    #   @return [String]
+    # @!attribute share_figma_action
+    #   <p>The ability to share Figma actions.</p>
+    #   @return [String]
+    # @!attribute use_figma_action
+    #   <p>The ability to use Figma actions.</p>
+    #   @return [String]
+    # @!attribute whats_app_action
+    #   <p>The ability to perform actions using WhatsApp connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_whats_app_action
+    #   <p>The ability to create and update WhatsApp actions.</p>
+    #   @return [String]
+    # @!attribute share_whats_app_action
+    #   <p>The ability to share WhatsApp actions.</p>
+    #   @return [String]
+    # @!attribute use_whats_app_action
+    #   <p>The ability to use WhatsApp actions.</p>
+    #   @return [String]
+    # @!attribute google_chat_action
+    #   <p>The ability to perform actions using Google Chat connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_google_chat_action
+    #   <p>The ability to create and update Google Chat actions.</p>
+    #   @return [String]
+    # @!attribute share_google_chat_action
+    #   <p>The ability to share Google Chat actions.</p>
+    #   @return [String]
+    # @!attribute use_google_chat_action
+    #   <p>The ability to use Google Chat actions.</p>
+    #   @return [String]
+    # @!attribute one_note_action
+    #   <p>The ability to perform actions using Microsoft OneNote connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_one_note_action
+    #   <p>The ability to create and update Microsoft OneNote actions.</p>
+    #   @return [String]
+    # @!attribute share_one_note_action
+    #   <p>The ability to share Microsoft OneNote actions.</p>
+    #   @return [String]
+    # @!attribute use_one_note_action
+    #   <p>The ability to use Microsoft OneNote actions.</p>
+    #   @return [String]
+    # @!attribute shopify_action
+    #   <p>The ability to perform actions using Shopify connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_shopify_action
+    #   <p>The ability to create and update Shopify actions.</p>
+    #   @return [String]
+    # @!attribute share_shopify_action
+    #   <p>The ability to share Shopify actions.</p>
+    #   @return [String]
+    # @!attribute use_shopify_action
+    #   <p>The ability to use Shopify actions.</p>
+    #   @return [String]
+    # @!attribute adobe_action
+    #   <p>The ability to perform actions using Adobe Marketing Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_adobe_action
+    #   <p>The ability to create and update Adobe Marketing Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_adobe_action
+    #   <p>The ability to share Adobe Marketing Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_adobe_action
+    #   <p>The ability to use Adobe Marketing Agent actions.</p>
+    #   @return [String]
+    # @!attribute cisco_webex_vidcast_action
+    #   <p>The ability to perform actions using Cisco Webex Video Messaging Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_cisco_webex_vidcast_action
+    #   <p>The ability to create and update Cisco Webex Video Messaging Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_cisco_webex_vidcast_action
+    #   <p>The ability to share Cisco Webex Video Messaging Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_cisco_webex_vidcast_action
+    #   <p>The ability to use Cisco Webex Video Messaging Agent actions.</p>
+    #   @return [String]
+    # @!attribute cisco_webex_meetings_action
+    #   <p>The ability to perform actions using Cisco Webex Meetings connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_cisco_webex_meetings_action
+    #   <p>The ability to create and update Cisco Webex Meetings actions.</p>
+    #   @return [String]
+    # @!attribute share_cisco_webex_meetings_action
+    #   <p>The ability to share Cisco Webex Meetings actions.</p>
+    #   @return [String]
+    # @!attribute use_cisco_webex_meetings_action
+    #   <p>The ability to use Cisco Webex Meetings actions.</p>
+    #   @return [String]
+    # @!attribute dun_and_bradstreet_action
+    #   <p>The ability to perform actions using Dun and Bradstreet connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_dun_and_bradstreet_action
+    #   <p>The ability to create and update Dun and Bradstreet actions.</p>
+    #   @return [String]
+    # @!attribute share_dun_and_bradstreet_action
+    #   <p>The ability to share Dun and Bradstreet actions.</p>
+    #   @return [String]
+    # @!attribute use_dun_and_bradstreet_action
+    #   <p>The ability to use Dun and Bradstreet actions.</p>
+    #   @return [String]
+    # @!attribute hg_insights_action
+    #   <p>The ability to perform actions using HG Insights Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_hg_insights_action
+    #   <p>The ability to create and update HG Insights Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_hg_insights_action
+    #   <p>The ability to share HG Insights Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_hg_insights_action
+    #   <p>The ability to use HG Insights Agent actions.</p>
+    #   @return [String]
+    # @!attribute zoom_info_action
+    #   <p>The ability to perform actions using ZoomInfo Agent connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_zoom_info_action
+    #   <p>The ability to create and update ZoomInfo Agent actions.</p>
+    #   @return [String]
+    # @!attribute share_zoom_info_action
+    #   <p>The ability to share ZoomInfo Agent actions.</p>
+    #   @return [String]
+    # @!attribute use_zoom_info_action
+    #   <p>The ability to use ZoomInfo Agent actions.</p>
+    #   @return [String]
+    # @!attribute moodys_action
+    #   <p>The ability to perform actions using Moody's GenAI Ready Data connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_moodys_action
+    #   <p>The ability to create and update Moody's GenAI Ready Data actions.</p>
+    #   @return [String]
+    # @!attribute share_moodys_action
+    #   <p>The ability to share Moody's GenAI Ready Data actions.</p>
+    #   @return [String]
+    # @!attribute use_moodys_action
+    #   <p>The ability to use Moody's GenAI Ready Data actions.</p>
+    #   @return [String]
+    # @!attribute bee_action
+    #   <p>The ability to perform actions using Bee connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_bee_action
+    #   <p>The ability to create and update Bee actions.</p>
+    #   @return [String]
+    # @!attribute share_bee_action
+    #   <p>The ability to share Bee actions.</p>
+    #   @return [String]
+    # @!attribute use_bee_action
+    #   <p>The ability to use Bee actions.</p>
+    #   @return [String]
+    # @!attribute gong_action
+    #   <p>The ability to perform actions using Gong connectors.</p>
+    #   @return [String]
+    # @!attribute create_and_update_gong_action
+    #   <p>The ability to create and update Gong actions.</p>
+    #   @return [String]
+    # @!attribute share_gong_action
+    #   <p>The ability to share Gong actions.</p>
+    #   @return [String]
+    # @!attribute use_gong_action
+    #   <p>The ability to use Gong actions.</p>
+    #   @return [String]
+    # @!attribute topic
+    #   <p>The ability to perform Topic-related actions.</p>
+    #   @return [String]
+    # @!attribute edit_visual_with_q
+    #   <p>The ability to Edit Visual with AI</p>
+    #   @return [String]
+    # @!attribute build_calculated_field_with_q
+    #   <p>The ability to Build Calculation with AI</p>
+    #   @return [String]
+    # @!attribute create_dashboard_executive_summary_with_q
+    #   <p>The ability to Create Executive Summary</p>
+    #   @return [String]
+    # @!attribute space
+    #   <p>The ability to perform space-related actions.</p>
+    #   @return [String]
+    # @!attribute create_spaces
+    #   <p>The ability to create spaces.</p>
+    #   @return [String]
+    # @!attribute share_spaces
+    #   <p>The ability to share spaces with other users and groups.</p>
+    #   @return [String]
+    # @!attribute chat_agent
+    #   <p>The ability to perform chat-related actions.</p>
+    #   @return [String]
+    # @!attribute create_chat_agents
+    #   <p>The ability to create chat agents.</p>
+    #   @return [String]
+    # @!attribute share_chat_agents
+    #   <p>The ability to share chat agents with other users and groups.</p>
+    #   @return [String]
+    # @!attribute research
+    #   <p>The ability to perform research-related actions.</p>
+    #   @return [String]
+    # @!attribute self_upgrade_user_role
+    #   <p>The ability to enable users to upgrade their user role.</p>
+    #   @return [String]
+    # @!attribute extension
+    #   <p>The ability to perform Extension-related actions.</p>
+    #   @return [String]
+    # @!attribute use_browser_extension
+    #   <p>The ability to use Amazon Quick through the browser extension for Chrome, Firefox, and Edge.</p>
+    #   @return [String]
+    # @!attribute use_word_add_in_extension
+    #   <p>The ability to use Amazon Quick through the Microsoft Word add-in.</p>
+    #   @return [String]
+    # @!attribute use_outlook_add_in_extension
+    #   <p>The ability to use Amazon Quick through the Microsoft Outlook add-in.</p>
+    #   @return [String]
+    # @!attribute use_excel_add_in_extension
+    #   <p>The ability to use Amazon Quick through the Microsoft Excel add-in.</p>
+    #   @return [String]
+    # @!attribute use_powerpoint_add_in_extension
+    #   <p>The ability to use Amazon Quick through the Microsoft PowerPoint add-in.</p>
+    #   @return [String]
+    # @!attribute manage_shared_folders
+    #   <p>The ability to create, update, delete and view shared folders (both restricted and unrestricted), ability to add any asset to shared folders, and ability to share the folders.</p>
+    #            <p>
+    #               <b>Note:</b> This does <i>not</i> prevent inheriting access to assets that others share with them through folder membership.</p>
+    #   @return [String]
+    # @!attribute generate_analyses
+    #   <p>The ability to generate analysis using AI</p>
+    #   @return [String]
+    # @!attribute story
+    #   <p>The ability to perform Story-related actions.</p>
+    #   @return [String]
+    # @!attribute scenario
+    #   <p>The ability to perform Scenario-related actions.</p>
+    #   @return [String]
+    # @!attribute trigger
+    #   <p>The ability to manage trigger-related settings for flows and automations.</p>
+    #   @return [String]
+    # @!attribute schedule_trigger
+    #   <p>The ability to create, view, edit, delete, and run schedule triggers for flows and automations.</p>
+    #   @return [String]
+    # @!attribute inbound_email_trigger
+    #   <p>The ability to create, view, edit, delete, and run inbound email triggers for flows and automations.</p>
+    #   @return [String]
+    # @!attribute quick_event_trigger
+    #   <p>The ability to create, view, edit, delete, and run Quick event triggers for flows and automations.</p>
+    #   @return [String]
+    # @!attribute file_data_source
+    #   <p>The ability to create, update, and share file data sources.</p>
+    #   @return [String]
+    # @!attribute create_file_data_source
+    #   <p>The ability to create file data sources.</p>
+    #   @return [String]
+    # @!attribute update_file_data_source
+    #   <p>The ability to update file data sources.</p>
+    #   @return [String]
+    # @!attribute share_file_data_source
+    #   <p>The ability to share file data sources.</p>
+    #   @return [String]
+    # @!attribute s3_data_source
+    #   <p>The ability to create, update, and share Amazon S3 data sources.</p>
+    #   @return [String]
+    # @!attribute create_s3_data_source
+    #   <p>The ability to create Amazon S3 data sources.</p>
+    #   @return [String]
+    # @!attribute update_s3_data_source
+    #   <p>The ability to update Amazon S3 data sources.</p>
+    #   @return [String]
+    # @!attribute share_s3_data_source
+    #   <p>The ability to share Amazon S3 data sources.</p>
+    #   @return [String]
+    # @!attribute s3_analytics_data_source
+    #   <p>The ability to create, update, and share Amazon S3 Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute create_s3_analytics_data_source
+    #   <p>The ability to create Amazon S3 Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute update_s3_analytics_data_source
+    #   <p>The ability to update Amazon S3 Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute share_s3_analytics_data_source
+    #   <p>The ability to share Amazon S3 Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute s3_tables_data_source
+    #   <p>The ability to create, update, and share Amazon S3 Tables data sources.</p>
+    #   @return [String]
+    # @!attribute create_s3_tables_data_source
+    #   <p>The ability to create Amazon S3 Tables data sources.</p>
+    #   @return [String]
+    # @!attribute update_s3_tables_data_source
+    #   <p>The ability to update Amazon S3 Tables data sources.</p>
+    #   @return [String]
+    # @!attribute share_s3_tables_data_source
+    #   <p>The ability to share Amazon S3 Tables data sources.</p>
+    #   @return [String]
+    # @!attribute athena_data_source
+    #   <p>The ability to create, update, and share Amazon Athena data sources.</p>
+    #   @return [String]
+    # @!attribute create_athena_data_source
+    #   <p>The ability to create Amazon Athena data sources.</p>
+    #   @return [String]
+    # @!attribute update_athena_data_source
+    #   <p>The ability to update Amazon Athena data sources.</p>
+    #   @return [String]
+    # @!attribute share_athena_data_source
+    #   <p>The ability to share Amazon Athena data sources.</p>
+    #   @return [String]
+    # @!attribute rds_data_source
+    #   <p>The ability to create, update, and share auto-discovered Amazon RDS data sources.</p>
+    #   @return [String]
+    # @!attribute create_rds_data_source
+    #   <p>The ability to create auto-discovered Amazon RDS data sources.</p>
+    #   @return [String]
+    # @!attribute update_rds_data_source
+    #   <p>The ability to update auto-discovered Amazon RDS data sources.</p>
+    #   @return [String]
+    # @!attribute share_rds_data_source
+    #   <p>The ability to share auto-discovered Amazon RDS data sources.</p>
+    #   @return [String]
+    # @!attribute redshift_auto_discovered_data_source
+    #   <p>The ability to create, update, and share auto-discovered Amazon Redshift data sources.</p>
+    #   @return [String]
+    # @!attribute create_redshift_auto_discovered_data_source
+    #   <p>The ability to create auto-discovered Amazon Redshift data sources.</p>
+    #   @return [String]
+    # @!attribute update_redshift_auto_discovered_data_source
+    #   <p>The ability to update auto-discovered Amazon Redshift data sources.</p>
+    #   @return [String]
+    # @!attribute share_redshift_auto_discovered_data_source
+    #   <p>The ability to share auto-discovered Amazon Redshift data sources.</p>
+    #   @return [String]
+    # @!attribute redshift_manual_data_source
+    #   <p>The ability to create, update, and share manually configured Amazon Redshift data sources.</p>
+    #   @return [String]
+    # @!attribute create_redshift_manual_data_source
+    #   <p>The ability to create manually configured Amazon Redshift data sources.</p>
+    #   @return [String]
+    # @!attribute update_redshift_manual_data_source
+    #   <p>The ability to update manually configured Amazon Redshift data sources.</p>
+    #   @return [String]
+    # @!attribute share_redshift_manual_data_source
+    #   <p>The ability to share manually configured Amazon Redshift data sources.</p>
+    #   @return [String]
+    # @!attribute open_search_data_source
+    #   <p>The ability to create, update, and share Amazon OpenSearch Service data sources.</p>
+    #   @return [String]
+    # @!attribute create_open_search_data_source
+    #   <p>The ability to create Amazon OpenSearch Service data sources.</p>
+    #   @return [String]
+    # @!attribute update_open_search_data_source
+    #   <p>The ability to update Amazon OpenSearch Service data sources.</p>
+    #   @return [String]
+    # @!attribute share_open_search_data_source
+    #   <p>The ability to share Amazon OpenSearch Service data sources.</p>
+    #   @return [String]
+    # @!attribute timestream_data_source
+    #   <p>The ability to create, update, and share Amazon Timestream data sources.</p>
+    #   @return [String]
+    # @!attribute create_timestream_data_source
+    #   <p>The ability to create Amazon Timestream data sources.</p>
+    #   @return [String]
+    # @!attribute update_timestream_data_source
+    #   <p>The ability to update Amazon Timestream data sources.</p>
+    #   @return [String]
+    # @!attribute share_timestream_data_source
+    #   <p>The ability to share Amazon Timestream data sources.</p>
+    #   @return [String]
+    # @!attribute aurora_data_source
+    #   <p>The ability to create, update, and share Amazon Aurora data sources.</p>
+    #   @return [String]
+    # @!attribute create_aurora_data_source
+    #   <p>The ability to create Amazon Aurora data sources.</p>
+    #   @return [String]
+    # @!attribute update_aurora_data_source
+    #   <p>The ability to update Amazon Aurora data sources.</p>
+    #   @return [String]
+    # @!attribute share_aurora_data_source
+    #   <p>The ability to share Amazon Aurora data sources.</p>
+    #   @return [String]
+    # @!attribute my_sql_data_source
+    #   <p>The ability to create, update, and share MySQL data sources.</p>
+    #   @return [String]
+    # @!attribute create_my_sql_data_source
+    #   <p>The ability to create MySQL data sources.</p>
+    #   @return [String]
+    # @!attribute update_my_sql_data_source
+    #   <p>The ability to update MySQL data sources.</p>
+    #   @return [String]
+    # @!attribute share_my_sql_data_source
+    #   <p>The ability to share MySQL data sources.</p>
+    #   @return [String]
+    # @!attribute postgre_sql_data_source
+    #   <p>The ability to create, update, and share PostgreSQL data sources.</p>
+    #   @return [String]
+    # @!attribute create_postgre_sql_data_source
+    #   <p>The ability to create PostgreSQL data sources.</p>
+    #   @return [String]
+    # @!attribute update_postgre_sql_data_source
+    #   <p>The ability to update PostgreSQL data sources.</p>
+    #   @return [String]
+    # @!attribute share_postgre_sql_data_source
+    #   <p>The ability to share PostgreSQL data sources.</p>
+    #   @return [String]
+    # @!attribute oracle_data_source
+    #   <p>The ability to create, update, and share Oracle data sources.</p>
+    #   @return [String]
+    # @!attribute create_oracle_data_source
+    #   <p>The ability to create Oracle data sources.</p>
+    #   @return [String]
+    # @!attribute update_oracle_data_source
+    #   <p>The ability to update Oracle data sources.</p>
+    #   @return [String]
+    # @!attribute share_oracle_data_source
+    #   <p>The ability to share Oracle data sources.</p>
+    #   @return [String]
+    # @!attribute sql_server_data_source
+    #   <p>The ability to create, update, and share SQL Server data sources.</p>
+    #   @return [String]
+    # @!attribute create_sql_server_data_source
+    #   <p>The ability to create SQL Server data sources.</p>
+    #   @return [String]
+    # @!attribute update_sql_server_data_source
+    #   <p>The ability to update SQL Server data sources.</p>
+    #   @return [String]
+    # @!attribute share_sql_server_data_source
+    #   <p>The ability to share SQL Server data sources.</p>
+    #   @return [String]
+    # @!attribute maria_db_data_source
+    #   <p>The ability to create, update, and share MariaDB data sources.</p>
+    #   @return [String]
+    # @!attribute create_maria_db_data_source
+    #   <p>The ability to create MariaDB data sources.</p>
+    #   @return [String]
+    # @!attribute update_maria_db_data_source
+    #   <p>The ability to update MariaDB data sources.</p>
+    #   @return [String]
+    # @!attribute share_maria_db_data_source
+    #   <p>The ability to share MariaDB data sources.</p>
+    #   @return [String]
+    # @!attribute snowflake_data_source
+    #   <p>The ability to create, update, and share Snowflake data sources.</p>
+    #   @return [String]
+    # @!attribute create_snowflake_data_source
+    #   <p>The ability to create Snowflake data sources.</p>
+    #   @return [String]
+    # @!attribute update_snowflake_data_source
+    #   <p>The ability to update Snowflake data sources.</p>
+    #   @return [String]
+    # @!attribute share_snowflake_data_source
+    #   <p>The ability to share Snowflake data sources.</p>
+    #   @return [String]
+    # @!attribute google_big_query_data_source
+    #   <p>The ability to create, update, and share Google BigQuery data sources.</p>
+    #   @return [String]
+    # @!attribute create_google_big_query_data_source
+    #   <p>The ability to create Google BigQuery data sources.</p>
+    #   @return [String]
+    # @!attribute update_google_big_query_data_source
+    #   <p>The ability to update Google BigQuery data sources.</p>
+    #   @return [String]
+    # @!attribute share_google_big_query_data_source
+    #   <p>The ability to share Google BigQuery data sources.</p>
+    #   @return [String]
+    # @!attribute databricks_data_source
+    #   <p>The ability to create, update, and share Databricks data sources.</p>
+    #   @return [String]
+    # @!attribute create_databricks_data_source
+    #   <p>The ability to create Databricks data sources.</p>
+    #   @return [String]
+    # @!attribute update_databricks_data_source
+    #   <p>The ability to update Databricks data sources.</p>
+    #   @return [String]
+    # @!attribute share_databricks_data_source
+    #   <p>The ability to share Databricks data sources.</p>
+    #   @return [String]
+    # @!attribute starburst_data_source
+    #   <p>The ability to create, update, and share Starburst data sources.</p>
+    #   @return [String]
+    # @!attribute create_starburst_data_source
+    #   <p>The ability to create Starburst data sources.</p>
+    #   @return [String]
+    # @!attribute update_starburst_data_source
+    #   <p>The ability to update Starburst data sources.</p>
+    #   @return [String]
+    # @!attribute share_starburst_data_source
+    #   <p>The ability to share Starburst data sources.</p>
+    #   @return [String]
+    # @!attribute trino_data_source
+    #   <p>The ability to create, update, and share Trino data sources.</p>
+    #   @return [String]
+    # @!attribute create_trino_data_source
+    #   <p>The ability to create Trino data sources.</p>
+    #   @return [String]
+    # @!attribute update_trino_data_source
+    #   <p>The ability to update Trino data sources.</p>
+    #   @return [String]
+    # @!attribute share_trino_data_source
+    #   <p>The ability to share Trino data sources.</p>
+    #   @return [String]
+    # @!attribute impala_data_source
+    #   <p>The ability to create, update, and share Impala data sources.</p>
+    #   @return [String]
+    # @!attribute create_impala_data_source
+    #   <p>The ability to create Impala data sources.</p>
+    #   @return [String]
+    # @!attribute update_impala_data_source
+    #   <p>The ability to update Impala data sources.</p>
+    #   @return [String]
+    # @!attribute share_impala_data_source
+    #   <p>The ability to share Impala data sources.</p>
+    #   @return [String]
+    # @!attribute teradata_data_source
+    #   <p>The ability to create, update, and share Teradata data sources.</p>
+    #   @return [String]
+    # @!attribute create_teradata_data_source
+    #   <p>The ability to create Teradata data sources.</p>
+    #   @return [String]
+    # @!attribute update_teradata_data_source
+    #   <p>The ability to update Teradata data sources.</p>
+    #   @return [String]
+    # @!attribute share_teradata_data_source
+    #   <p>The ability to share Teradata data sources.</p>
+    #   @return [String]
+    # @!attribute presto_data_source
+    #   <p>The ability to create, update, and share Presto data sources.</p>
+    #   @return [String]
+    # @!attribute create_presto_data_source
+    #   <p>The ability to create Presto data sources.</p>
+    #   @return [String]
+    # @!attribute update_presto_data_source
+    #   <p>The ability to update Presto data sources.</p>
+    #   @return [String]
+    # @!attribute share_presto_data_source
+    #   <p>The ability to share Presto data sources.</p>
+    #   @return [String]
+    # @!attribute spark_data_source
+    #   <p>The ability to create, update, and share Spark data sources.</p>
+    #   @return [String]
+    # @!attribute create_spark_data_source
+    #   <p>The ability to create Spark data sources.</p>
+    #   @return [String]
+    # @!attribute update_spark_data_source
+    #   <p>The ability to update Spark data sources.</p>
+    #   @return [String]
+    # @!attribute share_spark_data_source
+    #   <p>The ability to share Spark data sources.</p>
+    #   @return [String]
+    # @!attribute exasol_data_source
+    #   <p>The ability to create, update, and share Exasol data sources.</p>
+    #   @return [String]
+    # @!attribute create_exasol_data_source
+    #   <p>The ability to create Exasol data sources.</p>
+    #   @return [String]
+    # @!attribute update_exasol_data_source
+    #   <p>The ability to update Exasol data sources.</p>
+    #   @return [String]
+    # @!attribute share_exasol_data_source
+    #   <p>The ability to share Exasol data sources.</p>
+    #   @return [String]
+    # @!attribute db2_data_source
+    #   <p>The ability to create, update, and share Db2 data sources.</p>
+    #   @return [String]
+    # @!attribute create_db2_data_source
+    #   <p>The ability to create Db2 data sources.</p>
+    #   @return [String]
+    # @!attribute update_db2_data_source
+    #   <p>The ability to update Db2 data sources.</p>
+    #   @return [String]
+    # @!attribute share_db2_data_source
+    #   <p>The ability to share Db2 data sources.</p>
+    #   @return [String]
+    # @!attribute sap_hana_data_source
+    #   <p>The ability to create, update, and share SAP HANA data sources.</p>
+    #   @return [String]
+    # @!attribute create_sap_hana_data_source
+    #   <p>The ability to create SAP HANA data sources.</p>
+    #   @return [String]
+    # @!attribute update_sap_hana_data_source
+    #   <p>The ability to update SAP HANA data sources.</p>
+    #   @return [String]
+    # @!attribute share_sap_hana_data_source
+    #   <p>The ability to share SAP HANA data sources.</p>
+    #   @return [String]
+    # @!attribute denodo_data_source
+    #   <p>The ability to create, update, and share Denodo data sources.</p>
+    #   @return [String]
+    # @!attribute create_denodo_data_source
+    #   <p>The ability to create Denodo data sources.</p>
+    #   @return [String]
+    # @!attribute update_denodo_data_source
+    #   <p>The ability to update Denodo data sources.</p>
+    #   @return [String]
+    # @!attribute share_denodo_data_source
+    #   <p>The ability to share Denodo data sources.</p>
+    #   @return [String]
+    # @!attribute dremio_data_source
+    #   <p>The ability to create, update, and share Dremio data sources.</p>
+    #   @return [String]
+    # @!attribute create_dremio_data_source
+    #   <p>The ability to create Dremio data sources.</p>
+    #   @return [String]
+    # @!attribute update_dremio_data_source
+    #   <p>The ability to update Dremio data sources.</p>
+    #   @return [String]
+    # @!attribute share_dremio_data_source
+    #   <p>The ability to share Dremio data sources.</p>
+    #   @return [String]
+    # @!attribute salesforce_data_source
+    #   <p>The ability to create, update, and share Salesforce data sources.</p>
+    #   @return [String]
+    # @!attribute create_salesforce_data_source
+    #   <p>The ability to create Salesforce data sources.</p>
+    #   @return [String]
+    # @!attribute update_salesforce_data_source
+    #   <p>The ability to update Salesforce data sources.</p>
+    #   @return [String]
+    # @!attribute share_salesforce_data_source
+    #   <p>The ability to share Salesforce data sources.</p>
+    #   @return [String]
+    # @!attribute radiant_data_source
+    #   <p>The ability to create, update, and share Amazon QuickSight data sources.</p>
+    #   @return [String]
+    # @!attribute create_radiant_data_source
+    #   <p>The ability to create Amazon QuickSight data sources.</p>
+    #   @return [String]
+    # @!attribute update_radiant_data_source
+    #   <p>The ability to update Amazon QuickSight data sources.</p>
+    #   @return [String]
+    # @!attribute share_radiant_data_source
+    #   <p>The ability to share Amazon QuickSight data sources.</p>
+    #   @return [String]
+    # @!attribute pay_pal_data_source
+    #   <p>The ability to create, update, and share PayPal data sources.</p>
+    #   @return [String]
+    # @!attribute create_pay_pal_data_source
+    #   <p>The ability to create PayPal data sources.</p>
+    #   @return [String]
+    # @!attribute update_pay_pal_data_source
+    #   <p>The ability to update PayPal data sources.</p>
+    #   @return [String]
+    # @!attribute share_pay_pal_data_source
+    #   <p>The ability to share PayPal data sources.</p>
+    #   @return [String]
+    # @!attribute square_data_source
+    #   <p>The ability to create, update, and share Square data sources.</p>
+    #   @return [String]
+    # @!attribute create_square_data_source
+    #   <p>The ability to create Square data sources.</p>
+    #   @return [String]
+    # @!attribute update_square_data_source
+    #   <p>The ability to update Square data sources.</p>
+    #   @return [String]
+    # @!attribute share_square_data_source
+    #   <p>The ability to share Square data sources.</p>
+    #   @return [String]
+    # @!attribute git_hub_data_source
+    #   <p>The ability to create, update, and share GitHub data sources.</p>
+    #   @return [String]
+    # @!attribute create_git_hub_data_source
+    #   <p>The ability to create GitHub data sources.</p>
+    #   @return [String]
+    # @!attribute update_git_hub_data_source
+    #   <p>The ability to update GitHub data sources.</p>
+    #   @return [String]
+    # @!attribute share_git_hub_data_source
+    #   <p>The ability to share GitHub data sources.</p>
+    #   @return [String]
+    # @!attribute twitter_data_source
+    #   <p>The ability to create, update, and share Twitter data sources.</p>
+    #   @return [String]
+    # @!attribute create_twitter_data_source
+    #   <p>The ability to create Twitter data sources.</p>
+    #   @return [String]
+    # @!attribute update_twitter_data_source
+    #   <p>The ability to update Twitter data sources.</p>
+    #   @return [String]
+    # @!attribute share_twitter_data_source
+    #   <p>The ability to share Twitter data sources.</p>
+    #   @return [String]
+    # @!attribute jira_data_source
+    #   <p>The ability to create, update, and share Jira data sources.</p>
+    #   @return [String]
+    # @!attribute create_jira_data_source
+    #   <p>The ability to create Jira data sources.</p>
+    #   @return [String]
+    # @!attribute update_jira_data_source
+    #   <p>The ability to update Jira data sources.</p>
+    #   @return [String]
+    # @!attribute share_jira_data_source
+    #   <p>The ability to share Jira data sources.</p>
+    #   @return [String]
+    # @!attribute service_now_data_source
+    #   <p>The ability to create, update, and share ServiceNow data sources.</p>
+    #   @return [String]
+    # @!attribute create_service_now_data_source
+    #   <p>The ability to create ServiceNow data sources.</p>
+    #   @return [String]
+    # @!attribute update_service_now_data_source
+    #   <p>The ability to update ServiceNow data sources.</p>
+    #   @return [String]
+    # @!attribute share_service_now_data_source
+    #   <p>The ability to share ServiceNow data sources.</p>
+    #   @return [String]
+    # @!attribute adobe_analytics_data_source
+    #   <p>The ability to create, update, and share Adobe Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute create_adobe_analytics_data_source
+    #   <p>The ability to create Adobe Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute update_adobe_analytics_data_source
+    #   <p>The ability to update Adobe Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute share_adobe_analytics_data_source
+    #   <p>The ability to share Adobe Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute google_analytics_data_source
+    #   <p>The ability to create, update, and share Google Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute create_google_analytics_data_source
+    #   <p>The ability to create Google Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute update_google_analytics_data_source
+    #   <p>The ability to update Google Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute share_google_analytics_data_source
+    #   <p>The ability to share Google Analytics data sources.</p>
+    #   @return [String]
+    # @!attribute google_sheets_data_source
+    #   <p>The ability to create, update, and share Google Sheets data sources.</p>
+    #   @return [String]
+    # @!attribute create_google_sheets_data_source
+    #   <p>The ability to create Google Sheets data sources.</p>
+    #   @return [String]
+    # @!attribute update_google_sheets_data_source
+    #   <p>The ability to update Google Sheets data sources.</p>
+    #   @return [String]
+    # @!attribute share_google_sheets_data_source
+    #   <p>The ability to share Google Sheets data sources.</p>
+    #   @return [String]
+    # @!attribute document_db_data_source
+    #   <p>The ability to create, update, and share Amazon DocumentDB data sources.</p>
+    #   @return [String]
+    # @!attribute create_document_db_data_source
+    #   <p>The ability to create Amazon DocumentDB data sources.</p>
+    #   @return [String]
+    # @!attribute update_document_db_data_source
+    #   <p>The ability to update Amazon DocumentDB data sources.</p>
+    #   @return [String]
+    # @!attribute share_document_db_data_source
+    #   <p>The ability to share Amazon DocumentDB data sources.</p>
+    #   @return [String]
+    # @!attribute mongo_db_data_source
+    #   <p>The ability to create, update, and share MongoDB data sources.</p>
+    #   @return [String]
+    # @!attribute create_mongo_db_data_source
+    #   <p>The ability to create MongoDB data sources.</p>
+    #   @return [String]
+    # @!attribute update_mongo_db_data_source
+    #   <p>The ability to update MongoDB data sources.</p>
+    #   @return [String]
+    # @!attribute share_mongo_db_data_source
+    #   <p>The ability to share MongoDB data sources.</p>
+    #   @return [String]
+    # @!attribute mongo_atlas_data_source
+    #   <p>The ability to create, update, and share MongoDB Atlas data sources.</p>
+    #   @return [String]
+    # @!attribute create_mongo_atlas_data_source
+    #   <p>The ability to create MongoDB Atlas data sources.</p>
+    #   @return [String]
+    # @!attribute update_mongo_atlas_data_source
+    #   <p>The ability to update MongoDB Atlas data sources.</p>
+    #   @return [String]
+    # @!attribute share_mongo_atlas_data_source
+    #   <p>The ability to share MongoDB Atlas data sources.</p>
+    #   @return [String]
+    # @!attribute dynamo_db_data_source
+    #   <p>The ability to create, update, and share Amazon DynamoDB data sources.</p>
+    #   @return [String]
+    # @!attribute create_dynamo_db_data_source
+    #   <p>The ability to create Amazon DynamoDB data sources.</p>
+    #   @return [String]
+    # @!attribute update_dynamo_db_data_source
+    #   <p>The ability to update Amazon DynamoDB data sources.</p>
+    #   @return [String]
+    # @!attribute share_dynamo_db_data_source
+    #   <p>The ability to share Amazon DynamoDB data sources.</p>
+    #   @return [String]
     class Capabilities < Struct.new(
       nil,
       :export_to_csv,
@@ -3255,6 +6477,572 @@ module Aws::QuickSight
       :include_content_in_scheduled_reports_email,
       :dashboard,
       :analysis,
+      :automate,
+      :flow,
+      :apps,
+      :create_and_update_apps,
+      :share_apps,
+      :invoke_apps_ai_inference,
+      :access_apps_native_data_store,
+      :publish_without_approval,
+      :use_bedrock_models,
+      :perform_flow_ui_task,
+      :approve_flow_share_requests,
+      :use_agent_web_search,
+      :knowledge_base,
+      :create_and_update_knowledge_bases,
+      :share_knowledge_bases,
+      :share_point_knowledge_base,
+      :create_and_update_share_point_knowledge_base,
+      :share_share_point_knowledge_base,
+      :use_share_point_knowledge_base,
+      :google_drive_knowledge_base,
+      :create_and_update_google_drive_knowledge_base,
+      :share_google_drive_knowledge_base,
+      :use_google_drive_knowledge_base,
+      :web_crawler_knowledge_base,
+      :create_and_update_web_crawler_knowledge_base,
+      :share_web_crawler_knowledge_base,
+      :use_web_crawler_knowledge_base,
+      :s3_knowledge_base,
+      :create_and_update_s3_knowledge_base,
+      :share_s3_knowledge_base,
+      :use_s3_knowledge_base,
+      :confluence_knowledge_base,
+      :create_and_update_confluence_knowledge_base,
+      :share_confluence_knowledge_base,
+      :use_confluence_knowledge_base,
+      :one_drive_knowledge_base,
+      :create_and_update_one_drive_knowledge_base,
+      :share_one_drive_knowledge_base,
+      :use_one_drive_knowledge_base,
+      :q_business_knowledge_base,
+      :create_and_update_q_business_knowledge_base,
+      :share_q_business_knowledge_base,
+      :use_q_business_knowledge_base,
+      :bedrock_managed_knowledge_base,
+      :create_and_update_bedrock_managed_knowledge_base,
+      :share_bedrock_managed_knowledge_base,
+      :use_bedrock_managed_knowledge_base,
+      :box_knowledge_base,
+      :create_and_update_box_knowledge_base,
+      :share_box_knowledge_base,
+      :use_box_knowledge_base,
+      :idc_knowledge_base,
+      :create_and_update_idc_knowledge_base,
+      :share_idc_knowledge_base,
+      :use_idc_knowledge_base,
+      :action,
+      :generic_http_action,
+      :create_and_update_generic_http_action,
+      :share_generic_http_action,
+      :use_generic_http_action,
+      :asana_action,
+      :create_and_update_asana_action,
+      :share_asana_action,
+      :use_asana_action,
+      :slack_action,
+      :create_and_update_slack_action,
+      :share_slack_action,
+      :use_slack_action,
+      :service_now_action,
+      :create_and_update_service_now_action,
+      :share_service_now_action,
+      :use_service_now_action,
+      :salesforce_action,
+      :create_and_update_salesforce_action,
+      :share_salesforce_action,
+      :use_salesforce_action,
+      :ms_exchange_action,
+      :create_and_update_ms_exchange_action,
+      :share_ms_exchange_action,
+      :use_ms_exchange_action,
+      :pager_duty_action,
+      :create_and_update_pager_duty_action,
+      :share_pager_duty_action,
+      :use_pager_duty_action,
+      :jira_action,
+      :create_and_update_jira_action,
+      :share_jira_action,
+      :use_jira_action,
+      :confluence_action,
+      :create_and_update_confluence_action,
+      :share_confluence_action,
+      :use_confluence_action,
+      :one_drive_action,
+      :create_and_update_one_drive_action,
+      :share_one_drive_action,
+      :use_one_drive_action,
+      :share_point_action,
+      :create_and_update_share_point_action,
+      :share_share_point_action,
+      :use_share_point_action,
+      :ms_teams_action,
+      :create_and_update_ms_teams_action,
+      :share_ms_teams_action,
+      :use_ms_teams_action,
+      :google_calendar_action,
+      :create_and_update_google_calendar_action,
+      :share_google_calendar_action,
+      :use_google_calendar_action,
+      :zendesk_action,
+      :create_and_update_zendesk_action,
+      :share_zendesk_action,
+      :use_zendesk_action,
+      :smartsheet_action,
+      :create_and_update_smartsheet_action,
+      :share_smartsheet_action,
+      :use_smartsheet_action,
+      :sap_business_partner_action,
+      :create_and_update_sap_business_partner_action,
+      :share_sap_business_partner_action,
+      :use_sap_business_partner_action,
+      :sap_product_master_data_action,
+      :create_and_update_sap_product_master_data_action,
+      :share_sap_product_master_data_action,
+      :use_sap_product_master_data_action,
+      :sap_physical_inventory_action,
+      :create_and_update_sap_physical_inventory_action,
+      :share_sap_physical_inventory_action,
+      :use_sap_physical_inventory_action,
+      :sap_bill_of_material_action,
+      :create_and_update_sap_bill_of_material_action,
+      :share_sap_bill_of_material_action,
+      :use_sap_bill_of_material_action,
+      :sap_material_stock_action,
+      :create_and_update_sap_material_stock_action,
+      :share_sap_material_stock_action,
+      :use_sap_material_stock_action,
+      :fact_set_action,
+      :create_and_update_fact_set_action,
+      :share_fact_set_action,
+      :use_fact_set_action,
+      :amazon_s_three_action,
+      :create_and_update_amazon_s_three_action,
+      :share_amazon_s_three_action,
+      :use_amazon_s_three_action,
+      :textract_action,
+      :create_and_update_textract_action,
+      :share_textract_action,
+      :use_textract_action,
+      :comprehend_action,
+      :create_and_update_comprehend_action,
+      :share_comprehend_action,
+      :use_comprehend_action,
+      :comprehend_medical_action,
+      :create_and_update_comprehend_medical_action,
+      :share_comprehend_medical_action,
+      :use_comprehend_medical_action,
+      :amazon_bedrock_ars_action,
+      :create_and_update_amazon_bedrock_ars_action,
+      :share_amazon_bedrock_ars_action,
+      :use_amazon_bedrock_ars_action,
+      :amazon_bedrock_fs_action,
+      :create_and_update_amazon_bedrock_fs_action,
+      :share_amazon_bedrock_fs_action,
+      :use_amazon_bedrock_fs_action,
+      :amazon_bedrock_krs_action,
+      :create_and_update_amazon_bedrock_krs_action,
+      :share_amazon_bedrock_krs_action,
+      :use_amazon_bedrock_krs_action,
+      :mcp_action,
+      :create_and_update_mcp_action,
+      :share_mcp_action,
+      :use_mcp_action,
+      :open_api_action,
+      :create_and_update_open_api_action,
+      :share_open_api_action,
+      :use_open_api_action,
+      :sand_pgmi_action,
+      :create_and_update_sand_pgmi_action,
+      :share_sand_pgmi_action,
+      :use_sand_pgmi_action,
+      :sand_p_global_energy_action,
+      :create_and_update_sand_p_global_energy_action,
+      :share_sand_p_global_energy_action,
+      :use_sand_p_global_energy_action,
+      :bamboo_hr_action,
+      :create_and_update_bamboo_hr_action,
+      :share_bamboo_hr_action,
+      :use_bamboo_hr_action,
+      :box_agent_action,
+      :create_and_update_box_agent_action,
+      :share_box_agent_action,
+      :use_box_agent_action,
+      :canva_agent_action,
+      :create_and_update_canva_agent_action,
+      :share_canva_agent_action,
+      :use_canva_agent_action,
+      :github_action,
+      :create_and_update_github_action,
+      :share_github_action,
+      :use_github_action,
+      :notion_action,
+      :create_and_update_notion_action,
+      :share_notion_action,
+      :use_notion_action,
+      :linear_action,
+      :create_and_update_linear_action,
+      :share_linear_action,
+      :use_linear_action,
+      :hugging_face_action,
+      :create_and_update_hugging_face_action,
+      :share_hugging_face_action,
+      :use_hugging_face_action,
+      :monday_action,
+      :create_and_update_monday_action,
+      :share_monday_action,
+      :use_monday_action,
+      :hubspot_action,
+      :create_and_update_hubspot_action,
+      :share_hubspot_action,
+      :use_hubspot_action,
+      :intercom_action,
+      :create_and_update_intercom_action,
+      :share_intercom_action,
+      :use_intercom_action,
+      :new_relic_action,
+      :create_and_update_new_relic_action,
+      :share_new_relic_action,
+      :use_new_relic_action,
+      :pager_duty_agent_action,
+      :create_and_update_pager_duty_agent_action,
+      :share_pager_duty_agent_action,
+      :use_pager_duty_agent_action,
+      :visier_agent_action,
+      :create_and_update_visier_agent_action,
+      :share_visier_agent_action,
+      :use_visier_agent_action,
+      :zoom_action,
+      :create_and_update_zoom_action,
+      :share_zoom_action,
+      :use_zoom_action,
+      :snow_flake_action,
+      :create_and_update_snow_flake_action,
+      :share_snow_flake_action,
+      :use_snow_flake_action,
+      :zapier_action,
+      :create_and_update_zapier_action,
+      :share_zapier_action,
+      :use_zapier_action,
+      :airtable_action,
+      :create_and_update_airtable_action,
+      :share_airtable_action,
+      :use_airtable_action,
+      :dropbox_action,
+      :create_and_update_dropbox_action,
+      :share_dropbox_action,
+      :use_dropbox_action,
+      :gmail_action,
+      :create_and_update_gmail_action,
+      :share_gmail_action,
+      :use_gmail_action,
+      :google_analytics_action,
+      :create_and_update_google_analytics_action,
+      :share_google_analytics_action,
+      :use_google_analytics_action,
+      :google_docs_action,
+      :create_and_update_google_docs_action,
+      :share_google_docs_action,
+      :use_google_docs_action,
+      :google_drive_action,
+      :create_and_update_google_drive_action,
+      :share_google_drive_action,
+      :use_google_drive_action,
+      :google_meet_action,
+      :create_and_update_google_meet_action,
+      :share_google_meet_action,
+      :use_google_meet_action,
+      :google_sheets_action,
+      :create_and_update_google_sheets_action,
+      :share_google_sheets_action,
+      :use_google_sheets_action,
+      :google_slides_action,
+      :create_and_update_google_slides_action,
+      :share_google_slides_action,
+      :use_google_slides_action,
+      :quick_books_action,
+      :create_and_update_quick_books_action,
+      :share_quick_books_action,
+      :use_quick_books_action,
+      :figma_action,
+      :create_and_update_figma_action,
+      :share_figma_action,
+      :use_figma_action,
+      :whats_app_action,
+      :create_and_update_whats_app_action,
+      :share_whats_app_action,
+      :use_whats_app_action,
+      :google_chat_action,
+      :create_and_update_google_chat_action,
+      :share_google_chat_action,
+      :use_google_chat_action,
+      :one_note_action,
+      :create_and_update_one_note_action,
+      :share_one_note_action,
+      :use_one_note_action,
+      :shopify_action,
+      :create_and_update_shopify_action,
+      :share_shopify_action,
+      :use_shopify_action,
+      :adobe_action,
+      :create_and_update_adobe_action,
+      :share_adobe_action,
+      :use_adobe_action,
+      :cisco_webex_vidcast_action,
+      :create_and_update_cisco_webex_vidcast_action,
+      :share_cisco_webex_vidcast_action,
+      :use_cisco_webex_vidcast_action,
+      :cisco_webex_meetings_action,
+      :create_and_update_cisco_webex_meetings_action,
+      :share_cisco_webex_meetings_action,
+      :use_cisco_webex_meetings_action,
+      :dun_and_bradstreet_action,
+      :create_and_update_dun_and_bradstreet_action,
+      :share_dun_and_bradstreet_action,
+      :use_dun_and_bradstreet_action,
+      :hg_insights_action,
+      :create_and_update_hg_insights_action,
+      :share_hg_insights_action,
+      :use_hg_insights_action,
+      :zoom_info_action,
+      :create_and_update_zoom_info_action,
+      :share_zoom_info_action,
+      :use_zoom_info_action,
+      :moodys_action,
+      :create_and_update_moodys_action,
+      :share_moodys_action,
+      :use_moodys_action,
+      :bee_action,
+      :create_and_update_bee_action,
+      :share_bee_action,
+      :use_bee_action,
+      :gong_action,
+      :create_and_update_gong_action,
+      :share_gong_action,
+      :use_gong_action,
+      :topic,
+      :edit_visual_with_q,
+      :build_calculated_field_with_q,
+      :create_dashboard_executive_summary_with_q,
+      :space,
+      :create_spaces,
+      :share_spaces,
+      :chat_agent,
+      :create_chat_agents,
+      :share_chat_agents,
+      :research,
+      :self_upgrade_user_role,
+      :extension,
+      :use_browser_extension,
+      :use_word_add_in_extension,
+      :use_outlook_add_in_extension,
+      :use_excel_add_in_extension,
+      :use_powerpoint_add_in_extension,
+      :manage_shared_folders,
+      :generate_analyses,
+      :story,
+      :scenario,
+      :trigger,
+      :schedule_trigger,
+      :inbound_email_trigger,
+      :quick_event_trigger,
+      :file_data_source,
+      :create_file_data_source,
+      :update_file_data_source,
+      :share_file_data_source,
+      :s3_data_source,
+      :create_s3_data_source,
+      :update_s3_data_source,
+      :share_s3_data_source,
+      :s3_analytics_data_source,
+      :create_s3_analytics_data_source,
+      :update_s3_analytics_data_source,
+      :share_s3_analytics_data_source,
+      :s3_tables_data_source,
+      :create_s3_tables_data_source,
+      :update_s3_tables_data_source,
+      :share_s3_tables_data_source,
+      :athena_data_source,
+      :create_athena_data_source,
+      :update_athena_data_source,
+      :share_athena_data_source,
+      :rds_data_source,
+      :create_rds_data_source,
+      :update_rds_data_source,
+      :share_rds_data_source,
+      :redshift_auto_discovered_data_source,
+      :create_redshift_auto_discovered_data_source,
+      :update_redshift_auto_discovered_data_source,
+      :share_redshift_auto_discovered_data_source,
+      :redshift_manual_data_source,
+      :create_redshift_manual_data_source,
+      :update_redshift_manual_data_source,
+      :share_redshift_manual_data_source,
+      :open_search_data_source,
+      :create_open_search_data_source,
+      :update_open_search_data_source,
+      :share_open_search_data_source,
+      :timestream_data_source,
+      :create_timestream_data_source,
+      :update_timestream_data_source,
+      :share_timestream_data_source,
+      :aurora_data_source,
+      :create_aurora_data_source,
+      :update_aurora_data_source,
+      :share_aurora_data_source,
+      :my_sql_data_source,
+      :create_my_sql_data_source,
+      :update_my_sql_data_source,
+      :share_my_sql_data_source,
+      :postgre_sql_data_source,
+      :create_postgre_sql_data_source,
+      :update_postgre_sql_data_source,
+      :share_postgre_sql_data_source,
+      :oracle_data_source,
+      :create_oracle_data_source,
+      :update_oracle_data_source,
+      :share_oracle_data_source,
+      :sql_server_data_source,
+      :create_sql_server_data_source,
+      :update_sql_server_data_source,
+      :share_sql_server_data_source,
+      :maria_db_data_source,
+      :create_maria_db_data_source,
+      :update_maria_db_data_source,
+      :share_maria_db_data_source,
+      :snowflake_data_source,
+      :create_snowflake_data_source,
+      :update_snowflake_data_source,
+      :share_snowflake_data_source,
+      :google_big_query_data_source,
+      :create_google_big_query_data_source,
+      :update_google_big_query_data_source,
+      :share_google_big_query_data_source,
+      :databricks_data_source,
+      :create_databricks_data_source,
+      :update_databricks_data_source,
+      :share_databricks_data_source,
+      :starburst_data_source,
+      :create_starburst_data_source,
+      :update_starburst_data_source,
+      :share_starburst_data_source,
+      :trino_data_source,
+      :create_trino_data_source,
+      :update_trino_data_source,
+      :share_trino_data_source,
+      :impala_data_source,
+      :create_impala_data_source,
+      :update_impala_data_source,
+      :share_impala_data_source,
+      :teradata_data_source,
+      :create_teradata_data_source,
+      :update_teradata_data_source,
+      :share_teradata_data_source,
+      :presto_data_source,
+      :create_presto_data_source,
+      :update_presto_data_source,
+      :share_presto_data_source,
+      :spark_data_source,
+      :create_spark_data_source,
+      :update_spark_data_source,
+      :share_spark_data_source,
+      :exasol_data_source,
+      :create_exasol_data_source,
+      :update_exasol_data_source,
+      :share_exasol_data_source,
+      :db2_data_source,
+      :create_db2_data_source,
+      :update_db2_data_source,
+      :share_db2_data_source,
+      :sap_hana_data_source,
+      :create_sap_hana_data_source,
+      :update_sap_hana_data_source,
+      :share_sap_hana_data_source,
+      :denodo_data_source,
+      :create_denodo_data_source,
+      :update_denodo_data_source,
+      :share_denodo_data_source,
+      :dremio_data_source,
+      :create_dremio_data_source,
+      :update_dremio_data_source,
+      :share_dremio_data_source,
+      :salesforce_data_source,
+      :create_salesforce_data_source,
+      :update_salesforce_data_source,
+      :share_salesforce_data_source,
+      :radiant_data_source,
+      :create_radiant_data_source,
+      :update_radiant_data_source,
+      :share_radiant_data_source,
+      :pay_pal_data_source,
+      :create_pay_pal_data_source,
+      :update_pay_pal_data_source,
+      :share_pay_pal_data_source,
+      :square_data_source,
+      :create_square_data_source,
+      :update_square_data_source,
+      :share_square_data_source,
+      :git_hub_data_source,
+      :create_git_hub_data_source,
+      :update_git_hub_data_source,
+      :share_git_hub_data_source,
+      :twitter_data_source,
+      :create_twitter_data_source,
+      :update_twitter_data_source,
+      :share_twitter_data_source,
+      :jira_data_source,
+      :create_jira_data_source,
+      :update_jira_data_source,
+      :share_jira_data_source,
+      :service_now_data_source,
+      :create_service_now_data_source,
+      :update_service_now_data_source,
+      :share_service_now_data_source,
+      :adobe_analytics_data_source,
+      :create_adobe_analytics_data_source,
+      :update_adobe_analytics_data_source,
+      :share_adobe_analytics_data_source,
+      :google_analytics_data_source,
+      :create_google_analytics_data_source,
+      :update_google_analytics_data_source,
+      :share_google_analytics_data_source,
+      :google_sheets_data_source,
+      :create_google_sheets_data_source,
+      :update_google_sheets_data_source,
+      :share_google_sheets_data_source,
+      :document_db_data_source,
+      :create_document_db_data_source,
+      :update_document_db_data_source,
+      :share_document_db_data_source,
+      :mongo_db_data_source,
+      :create_mongo_db_data_source,
+      :update_mongo_db_data_source,
+      :share_mongo_db_data_source,
+      :mongo_atlas_data_source,
+      :create_mongo_atlas_data_source,
+      :update_mongo_atlas_data_source,
+      :share_mongo_atlas_data_source,
+      :dynamo_db_data_source,
+      :create_dynamo_db_data_source,
+      :update_dynamo_db_data_source,
+      :share_dynamo_db_data_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter that matches users by total capacity range in bytes.</p>
+    # @!attribute min_bytes
+    #   <p>The minimum capacity in bytes (inclusive). At least one of minBytes or maxBytes is required.</p>
+    #   @return [Integer]
+    # @!attribute max_bytes
+    #   <p>The maximum capacity in bytes (inclusive). At least one of minBytes or maxBytes is required.</p>
+    #   @return [Integer]
+    class CapacityBytesRangeFilter < Struct.new(
+      nil,
+      :min_bytes,
+      :max_bytes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3300,7 +7088,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute format
     #   <p>When casting a column from string to datetime type, you can supply a string in a
-    #               format supported by Amazon QuickSight to denote the source data format.</p>
+    #               format supported by Quick Sight to denote the source data format.</p>
     #   @return [String]
     class CastColumnTypeOperation < Struct.new(
       nil,
@@ -3308,6 +7096,26 @@ module Aws::QuickSight
       :new_column_type,
       :sub_type,
       :format,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A transform operation that changes the data types of one or more columns in the dataset.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source transform operation that provides input data for the type casting.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute cast_column_type_operations
+    #   <p>The list of column type casting operations to perform.</p>
+    #   @return [Array<Types::CastColumnTypeOperation>]
+    class CastColumnTypesOperation < Struct.new(
+      nil,
+      :alias,
+      :source,
+      :cast_column_type_operations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3378,7 +7186,7 @@ module Aws::QuickSight
     end
 
     # <p>A <code>CategoryFilter</code> filters text values.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/add-a-text-filter-data-prep.html">Adding text filters</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/add-a-text-filter-data-prep.html">Adding text filters</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute filter_id
     #   <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
     #   @return [String]
@@ -3405,10 +7213,10 @@ module Aws::QuickSight
     # <p>The configuration for a <code>CategoryFilter</code>.</p>
     #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     # @!attribute filter_list_configuration
-    #   <p>A list of filter configurations. In the QuickSight console, this filter type is called a filter list.</p>
+    #   <p>A list of filter configurations. In the Quick Sight console, this filter type is called a filter list.</p>
     #   @return [Types::FilterListConfiguration]
     # @!attribute custom_filter_list_configuration
-    #   <p>A list of custom filter values. In the QuickSight console, this filter type is called a custom filter list.</p>
+    #   <p>A list of custom filter values. In the Quick Sight console, this filter type is called a custom filter list.</p>
     #   @return [Types::CustomFilterListConfiguration]
     # @!attribute custom_filter_configuration
     #   <p>A custom filter that filters based on a single value. This filter can be partially matched.</p>
@@ -3485,6 +7293,61 @@ module Aws::QuickSight
       :visibility,
       :sort_icon_visibility,
       :axis_label_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details for OAuth 2.0 client credentials grant authentication.</p>
+    # @!attribute client_credentials_grant_details
+    #   <p>The OAuth2 client credentials grant configuration details for authentication.</p>
+    #   @return [Types::ClientCredentialsGrantDetails]
+    class ClientCredentialsDetails < Struct.new(
+      :client_credentials_grant_details,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ClientCredentialsGrantDetails < ClientCredentialsDetails; end
+      class Unknown < ClientCredentialsDetails; end
+    end
+
+    # <p>Configuration details for OAuth2 client credentials grant flow, including client ID, client secret, token endpoint, and optional scopes.</p>
+    # @!attribute client_id
+    #   <p>The client identifier issued to the client during the registration process with the authorization server.</p>
+    #   @return [String]
+    # @!attribute client_secret
+    #   <p>The client secret issued to the client during the registration process with the authorization server.</p>
+    #   @return [String]
+    # @!attribute token_endpoint
+    #   <p>The authorization server endpoint used to obtain access tokens via the client credentials grant flow.</p>
+    #   @return [String]
+    class ClientCredentialsGrantDetails < Struct.new(
+      nil,
+      :client_id,
+      :client_secret,
+      :token_endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for OAuth 2.0 client credentials grant authentication, including client ID, client secret, token endpoint, and optional scopes.</p>
+    # @!attribute base_endpoint
+    #   <p>The base endpoint URL for the external service.</p>
+    #   @return [String]
+    # @!attribute client_credentials_source
+    #   <p>The source of the client credentials configuration.</p>
+    #   @return [String]
+    # @!attribute client_credentials_details
+    #   <p>The detailed client credentials configuration including client ID, client secret, and token endpoint.</p>
+    #   @return [Types::ClientCredentialsDetails]
+    class ClientCredentialsGrantMetadata < Struct.new(
+      nil,
+      :base_endpoint,
+      :client_credentials_source,
+      :client_credentials_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3588,12 +7451,16 @@ module Aws::QuickSight
     # @!attribute colors_configuration
     #   <p>The color configurations of the column.</p>
     #   @return [Types::ColorsConfiguration]
+    # @!attribute decal_settings_configuration
+    #   <p>Decal configuration of the column.</p>
+    #   @return [Types::DecalSettingsConfiguration]
     class ColumnConfiguration < Struct.new(
       nil,
       :column,
       :format_configuration,
       :role,
       :colors_configuration,
+      :decal_settings_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3611,7 +7478,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Groupings of columns that work together in certain Amazon QuickSight features. This is
+    # <p>Groupings of columns that work together in certain Quick Sight features. This is
     #             a variant type structure. For this structure to be valid, only one of the attributes can
     #             be non-null.</p>
     # @!attribute geo_spatial_column_group
@@ -3677,16 +7544,25 @@ module Aws::QuickSight
     # @!attribute data_set_identifier
     #   <p>The data set that the column belongs to.</p>
     #   @return [String]
+    # @!attribute topic_identifier
+    #   <p>The topic that the column belongs to.</p>
+    #   @return [String]
     # @!attribute column_name
     #   <p>The name of the column.</p>
     #   @return [String]
     class ColumnIdentifier < Struct.new(
       nil,
       :data_set_identifier,
+      :topic_identifier,
       :column_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:data_set_identifier] = '' unless options.key?(:data_set_identifier)
+        super
+      end
     end
 
     # <p>A rule defined to grant access on one or more restricted columns.
@@ -3696,7 +7572,7 @@ module Aws::QuickSight
     #             To be able to see a restricted column, a user or group needs to be added
     #             to a rule for that column.</p>
     # @!attribute principals
-    #   <p>An array of Amazon Resource Names (ARNs) for QuickSight users or groups.</p>
+    #   <p>An array of Amazon Resource Names (ARNs) for Quick Sight users or groups.</p>
     #   @return [Array<String>]
     # @!attribute column_names
     #   <p>An array of column names.</p>
@@ -3725,6 +7601,38 @@ module Aws::QuickSight
       :name,
       :data_type,
       :geographic_role,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A semantic property for a column.</p>
+    # @!attribute description
+    #   <p>A description of the column.</p>
+    #   @return [Types::ColumnDescription]
+    # @!attribute additional_notes
+    #   <p>Additional notes for the column.</p>
+    #   @return [Types::AdditionalNotes]
+    # @!attribute semantic_type
+    #   <p>The semantic type of the column.</p>
+    #   @return [Types::ColumnSemanticType]
+    class ColumnSemanticProperty < Struct.new(
+      nil,
+      :description,
+      :additional_notes,
+      :semantic_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The semantic type information for a column in the new data preparation experience.</p>
+    # @!attribute geographical_role
+    #   <p>The geographical role of the column in the new data preparation experience.</p>
+    #   @return [String]
+    class ColumnSemanticType < Struct.new(
+      nil,
+      :geographical_role,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3767,6 +7675,22 @@ module Aws::QuickSight
       nil,
       :column_geographic_role,
       :column_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies a column to be unpivoted, transforming it from a column into rows with associated values.</p>
+    # @!attribute column_name
+    #   <p>The name of the column to unpivot from the source data.</p>
+    #   @return [String]
+    # @!attribute new_value
+    #   <p>The value to assign to this column in the unpivoted result, typically the column name or a descriptive label.</p>
+    #   @return [String]
+    class ColumnToUnpivot < Struct.new(
+      nil,
+      :column_name,
+      :new_value,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3872,6 +7796,12 @@ module Aws::QuickSight
     # @!attribute color_label_options
     #   <p>The label options (label text, label visibility, and sort icon visibility) of a combo chart's color field well.</p>
     #   @return [Types::ChartAxisLabelOptions]
+    # @!attribute default_series_settings
+    #   <p>The options that determine the default presentation of all series in <code>ComboChartVisual</code>.</p>
+    #   @return [Types::ComboChartDefaultSeriesSettings]
+    # @!attribute series
+    #   <p>The series item configuration of a <code>ComboChartVisual</code>.</p>
+    #   @return [Array<Types::ComboSeriesItem>]
     # @!attribute legend
     #   <p>The legend display setup of the visual.</p>
     #   @return [Types::LegendOptions]
@@ -3908,6 +7838,8 @@ module Aws::QuickSight
       :secondary_y_axis_label_options,
       :single_axis_options,
       :color_label_options,
+      :default_series_settings,
+      :series,
       :legend,
       :bar_data_labels,
       :line_data_labels,
@@ -3915,6 +7847,30 @@ module Aws::QuickSight
       :reference_lines,
       :visual_palette,
       :interactions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The options that determine the default presentation of all series in <code>ComboChartVisual</code>.</p>
+    # @!attribute line_style_settings
+    #   <p>Line styles options for all line series in the visual.</p>
+    #   @return [Types::LineChartLineStyleSettings]
+    # @!attribute marker_style_settings
+    #   <p>Marker styles options for all line series in the visual.</p>
+    #   @return [Types::LineChartMarkerStyleSettings]
+    # @!attribute decal_settings
+    #   <p>Decal settings for all series in the visual.</p>
+    #   @return [Types::DecalSettings]
+    # @!attribute border_settings
+    #   <p>Border settings for all bar series in the visual.</p>
+    #   @return [Types::BorderSettings]
+    class ComboChartDefaultSeriesSettings < Struct.new(
+      nil,
+      :line_style_settings,
+      :marker_style_settings,
+      :decal_settings,
+      :border_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3928,6 +7884,30 @@ module Aws::QuickSight
     class ComboChartFieldWells < Struct.new(
       nil,
       :combo_chart_aggregated_field_wells,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Options that determine the presentation of a series in the visual.</p>
+    # @!attribute line_style_settings
+    #   <p>Line styles options for the line series in the visual.</p>
+    #   @return [Types::LineChartLineStyleSettings]
+    # @!attribute marker_style_settings
+    #   <p>Marker styles options for the line series in the visual.</p>
+    #   @return [Types::LineChartMarkerStyleSettings]
+    # @!attribute decal_settings
+    #   <p>Decal settings for the series in the visual.</p>
+    #   @return [Types::DecalSettings]
+    # @!attribute border_settings
+    #   <p>Border settings for the bar series in the visual.</p>
+    #   @return [Types::BorderSettings]
+    class ComboChartSeriesSettings < Struct.new(
+      nil,
+      :line_style_settings,
+      :marker_style_settings,
+      :decal_settings,
+      :border_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3959,7 +7939,7 @@ module Aws::QuickSight
 
     # <p>A combo chart.</p>
     #          <p>The <code>ComboChartVisual</code> includes stacked bar combo charts and clustered bar combo charts</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/combo-charts.html">Using combo charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/combo-charts.html">Using combo charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -3990,6 +7970,23 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The series item configuration of a <code>ComboChartVisual</code>.</p>
+    #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+    # @!attribute field_combo_series_item
+    #   <p>The field series item configuration of a <code>ComboChartVisual</code>.</p>
+    #   @return [Types::FieldComboSeriesItem]
+    # @!attribute data_field_combo_series_item
+    #   <p>The data field series item configuration of a <code>ComboChartVisual</code>.</p>
+    #   @return [Types::DataFieldComboSeriesItem]
+    class ComboSeriesItem < Struct.new(
+      nil,
+      :field_combo_series_item,
+      :data_field_combo_series_item,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4276,6 +8273,18 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The parameters that are required to connect to a Confluence data source</p>
+    # @!attribute confluence_url
+    #   <p>The URL of the Confluence site to connect to.</p>
+    #   @return [String]
+    class ConfluenceParameters < Struct.new(
+      nil,
+      :confluence_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The context menu options for a visual's interactions.</p>
     # @!attribute availability_status
     #   <p>The availability status of the context menu options. If the value of this property is set to <code>ENABLED</code>, dashboard readers can interact with the context menu.</p>
@@ -4283,6 +8292,30 @@ module Aws::QuickSight
     class ContextMenuOption < Struct.new(
       nil,
       :availability_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The contextual accent palette.</p>
+    # @!attribute connection
+    #   <p>The color palette.</p>
+    #   @return [Types::Palette]
+    # @!attribute visualization
+    #   <p>The color palette.</p>
+    #   @return [Types::Palette]
+    # @!attribute insight
+    #   <p>The color palette.</p>
+    #   @return [Types::Palette]
+    # @!attribute automation
+    #   <p>The color palette.</p>
+    #   @return [Types::Palette]
+    class ContextualAccentPalette < Struct.new(
+      nil,
+      :connection,
+      :visualization,
+      :insight,
+      :automation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4333,14 +8366,78 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The sort configuration for control values. This is a tagged union type. Specify either <code>SelectableValuesSort</code> or <code>ControlColumnSort</code>, but not both.</p>
+    # @!attribute selectable_values_sort
+    #   <p>The sort configuration for user-specified values in the control. Use this option to sort values that are manually entered by users in a dropdown or list control.</p>
+    #   @return [Types::SelectableValuesSort]
+    # @!attribute control_column_sort
+    #   <p>The sort configuration for controls that are tied to a dataset column. Use this option to sort control values by an aggregate of a column.</p>
+    #   @return [Types::AggregationSortConfiguration]
+    class ControlSortConfiguration < Struct.new(
+      nil,
+      :selectable_values_sort,
+      :control_column_sort,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configures the display properties of the control title.</p>
+    # @!attribute font_configuration
+    #   <p>Configures the font settings for the control title.</p>
+    #   @return [Types::FontConfiguration]
+    # @!attribute text_alignment
+    #   <p>Determines the alignment of the control title.</p>
+    #   @return [String]
+    class ControlTitleFontConfiguration < Struct.new(
+      nil,
+      :font_configuration,
+      :text_alignment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The title format text configuration for a sheet control. This is a tagged union type. Specify either <code>PlainText</code> or <code>RichText</code>, but not both.</p>
+    # @!attribute plain_text
+    #   <p>The plain text format of the title text.</p>
+    #   @return [String]
+    # @!attribute rich_text
+    #   <p>The rich text format of the title text.</p>
+    #   @return [String]
+    class ControlTitleFormatText < Struct.new(
+      nil,
+      :plain_text,
+      :rich_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The preference coordinate for the geocode preference.</p>
+    # @!attribute latitude
+    #   <p>The latitude coordinate value for the geocode preference.</p>
+    #   @return [Float]
+    # @!attribute longitude
+    #   <p>The longitude coordinate value for the geocode preference.</p>
+    #   @return [Float]
+    class Coordinate < Struct.new(
+      nil,
+      :latitude,
+      :longitude,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to customize QuickSight for.</p>
+    #   <p>The ID for the Amazon Web Services account that you want to customize Quick Sight for.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The QuickSight namespace that you want to add customizations to.</p>
+    #   <p>The Quick Sight namespace that you want to add customizations to.</p>
     #   @return [String]
     # @!attribute account_customization
-    #   <p>The QuickSight customizations you're adding in the current Amazon Web Services Region. You can add
+    #   <p>The Quick Sight customizations you're adding. You can add
     #               these to an Amazon Web Services account and a QuickSight namespace. </p>
     #            <p>For example, you can add a default theme by setting <code>AccountCustomization</code>
     #               to the midnight theme: <code>"AccountCustomization": { "DefaultTheme":
@@ -4367,13 +8464,13 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the customization that you created for this Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to customize QuickSight for.</p>
+    #   <p>The ID for the Amazon Web Services account that you want to customize Quick Sight for.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace associated with the customization you're creating. </p>
     #   @return [String]
     # @!attribute account_customization
-    #   <p>The QuickSight customizations you're adding in the current Amazon Web Services Region. </p>
+    #   <p>The Quick Sight customizations you're adding. </p>
     #   @return [Types::AccountCustomization]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -4400,7 +8497,7 @@ module Aws::QuickSight
     end
 
     # @!attribute edition
-    #   <p>The edition of QuickSight that you want your account to have. Currently, you can
+    #   <p>The edition of Amazon Quick Sight that you want your account to have. Currently, you can
     #               choose from <code>ENTERPRISE</code> or
     #                   <code>ENTERPRISE_AND_Q</code>.</p>
     #            <p>If you choose <code>ENTERPRISE_AND_Q</code>, the following parameters are
@@ -4429,74 +8526,74 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     # @!attribute authentication_method
-    #   <p>The method that you want to use to authenticate your QuickSight account.</p>
+    #   <p>The method that you want to use to authenticate your Quick Sight account.</p>
     #            <p>If you choose <code>ACTIVE_DIRECTORY</code>, provide an <code>ActiveDirectoryName</code>
     #               and an <code>AdminGroup</code> associated with your Active Directory.</p>
     #            <p>If you choose <code>IAM_IDENTITY_CENTER</code>, provide an <code>AdminGroup</code> associated with your IAM Identity Center account.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The Amazon Web Services account ID of the account that you're using to create your QuickSight account.</p>
+    #   <p>The Amazon Web Services account ID of the account that you're using to create your Quick Sight account.</p>
     #   @return [String]
     # @!attribute account_name
-    #   <p>The name of your QuickSight account. This name is unique over all of Amazon Web Services, and it appears only when users sign in. You can't change
-    #                   <code>AccountName</code> value after the QuickSight account is
+    #   <p>The name of your Amazon Quick Sight account. This name is unique over all of Amazon Web Services, and it appears only when users sign in. You can't change
+    #                   <code>AccountName</code> value after the Amazon Quick Sight account is
     #               created.</p>
     #   @return [String]
     # @!attribute notification_email
-    #   <p>The email address that you want QuickSight to send notifications to regarding your QuickSight account or QuickSight subscription.</p>
+    #   <p>The email address that you want Quick Sight to send notifications to regarding your Quick Sight account or Quick Sight subscription.</p>
     #   @return [String]
     # @!attribute active_directory_name
-    #   <p>The name of your Active Directory. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new QuickSight account.</p>
+    #   <p>The name of your Active Directory. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new Quick Sight account.</p>
     #   @return [String]
     # @!attribute realm
-    #   <p>The realm of the Active Directory that is associated with your QuickSight account. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new QuickSight account.</p>
+    #   <p>The realm of the Active Directory that is associated with your Quick Sight account. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new Quick Sight account.</p>
     #   @return [String]
     # @!attribute directory_id
-    #   <p>The ID of the Active Directory that is associated with your QuickSight account.</p>
+    #   <p>The ID of the Active Directory that is associated with your Quick Sight account.</p>
     #   @return [String]
     # @!attribute admin_group
-    #   <p>The admin group associated with your Active Directory or IAM Identity Center account. Either this field or the <code>AdminProGroup</code> field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new QuickSight account.</p>
-    #            <p>For more information about using IAM Identity Center in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with QuickSight Enterprise Edition</a> in the QuickSight User Guide. For more information about using Active Directory in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with QuickSight Enterprise Edition</a> in the QuickSight User Guide.</p>
+    #   <p>The admin group associated with your Active Directory or IAM Identity Center account. Either this field or the <code>AdminProGroup</code> field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new Quick Sight account.</p>
+    #            <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
     #   @return [Array<String>]
     # @!attribute author_group
     #   <p>The author group associated with your Active Directory or IAM Identity Center account.</p>
-    #            <p>For more information about using IAM Identity Center in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with QuickSight Enterprise Edition</a> in the QuickSight User Guide. For more information about using Active Directory in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with QuickSight Enterprise Edition</a> in the QuickSight User Guide.</p>
+    #            <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
     #   @return [Array<String>]
     # @!attribute reader_group
     #   <p>The reader group associated with your Active Directory or IAM Identity Center account.</p>
-    #            <p>For more information about using IAM Identity Center in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with QuickSight Enterprise Edition</a> in the QuickSight User Guide. For more information about using Active Directory in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with QuickSight Enterprise Edition</a> in the QuickSight User Guide.</p>
+    #            <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
     #   @return [Array<String>]
     # @!attribute admin_pro_group
-    #   <p>The admin pro group associated with your Active Directory or IAM Identity Center account. Either this field or the <code>AdminGroup</code> field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new QuickSight account.</p>
-    #            <p>For more information about using IAM Identity Center in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with QuickSight Enterprise Edition</a> in the QuickSight User Guide. For more information about using Active Directory in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with QuickSight Enterprise Edition</a> in the QuickSight User Guide.</p>
+    #   <p>The admin pro group associated with your Active Directory or IAM Identity Center account. Either this field or the <code>AdminGroup</code> field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new Quick Sight account.</p>
+    #            <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
     #   @return [Array<String>]
     # @!attribute author_pro_group
     #   <p>The author pro group associated with your Active Directory or IAM Identity Center account.</p>
-    #            <p>For more information about using IAM Identity Center in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with QuickSight Enterprise Edition</a> in the QuickSight User Guide. For more information about using Active Directory in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with QuickSight Enterprise Edition</a> in the QuickSight User Guide.</p>
+    #            <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
     #   @return [Array<String>]
     # @!attribute reader_pro_group
     #   <p>The reader pro group associated with your Active Directory or IAM Identity Center account.</p>
-    #            <p>For more information about using IAM Identity Center in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with QuickSight Enterprise Edition</a> in the QuickSight User Guide. For more information about using Active Directory in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with QuickSight Enterprise Edition</a> in the QuickSight User Guide.</p>
+    #            <p>For more information about using IAM Identity Center in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html">Using IAM Identity Center with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide. For more information about using Active Directory in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html">Using Active Directory with Amazon Quick Sight Enterprise Edition</a> in the Amazon Quick Sight User Guide.</p>
     #   @return [Array<String>]
     # @!attribute first_name
-    #   <p>The first name of the author of the QuickSight account to use for future
+    #   <p>The first name of the author of the Amazon Quick Sight account to use for future
     #               communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the selected
-    #               edition of the new QuickSight account.</p>
+    #               edition of the new Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute last_name
-    #   <p>The last name of the author of the QuickSight account to use for future
+    #   <p>The last name of the author of the Amazon Quick Sight account to use for future
     #               communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the selected
-    #               edition of the new QuickSight account.</p>
+    #               edition of the new Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute email_address
-    #   <p>The email address of the author of the QuickSight account to use for future
+    #   <p>The email address of the author of the Amazon Quick Sight account to use for future
     #               communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the selected
-    #               edition of the new QuickSight account.</p>
+    #               edition of the new Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute contact_number
-    #   <p>A 10-digit phone number for the author of the QuickSight account to use for
+    #   <p>A 10-digit phone number for the author of the Amazon Quick Sight account to use for
     #               future communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the
-    #               selected edition of the new QuickSight account.</p>
+    #               selected edition of the new Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute iam_identity_center_instance_arn
     #   <p>The Amazon Resource Name (ARN) for the IAM Identity Center instance.</p>
@@ -4528,7 +8625,7 @@ module Aws::QuickSight
     end
 
     # @!attribute signup_response
-    #   <p>A <code>SignupResponse</code> object that returns information about a newly created QuickSight account.</p>
+    #   <p>A <code>SignupResponse</code> object that returns information about a newly created Quick Sight account.</p>
     #   @return [Types::SignupResponse]
     # @!attribute status
     #   <p>The HTTP status of the request.</p>
@@ -4552,6 +8649,161 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID associated with the action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>A unique identifier for the action connector. This ID must be unique within the Amazon Web Services account. The <code>ActionConnectorId</code> must not
+    #   	          start with the prefix <code>quicksuite-</code>
+    #            </p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A descriptive name for the action connector.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of action connector.</p>
+    #   @return [String]
+    # @!attribute authentication_config
+    #   <p>The authentication configuration for connecting to the external service. This includes the authentication type, base URL, and authentication metadata such as client credentials or API keys.</p>
+    #   @return [Types::AuthConfig]
+    # @!attribute description
+    #   <p>An optional description of the action connector.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The permissions configuration that defines which users, groups, or namespaces can access this action connector and what operations they can perform.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute vpc_connection_arn
+    #   <p>The ARN of the VPC connection to use for secure connectivity to the external service.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A list of tags to apply to the action connector for resource management and organization.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateActionConnectorRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :action_connector_id,
+      :name,
+      :type,
+      :authentication_config,
+      :description,
+      :permissions,
+      :vpc_connection_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the created action connector.</p>
+    #   @return [String]
+    # @!attribute creation_status
+    #   <p>The creation status of the action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the created action connector.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status code of the request.</p>
+    #   @return [Integer]
+    class CreateActionConnectorResponse < Struct.new(
+      nil,
+      :arn,
+      :creation_status,
+      :action_connector_id,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute spaces
+    #   <p>The Amazon Resource Names (ARNs) of the spaces to attach to the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute action_connectors
+    #   <p>The Amazon Resource Names (ARNs) of the action connectors to attach to the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the agent.</p>
+    #   @return [String]
+    # @!attribute agent_id
+    #   <p>A unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the agent.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the agent.</p>
+    #   @return [String]
+    # @!attribute icon_id
+    #   <p>The icon identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute starter_prompts
+    #   <p>A list of starter prompts that are displayed to users when they begin interacting with the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute welcome_message
+    #   <p>The welcome message that is displayed when a user starts a conversation with the agent.</p>
+    #   @return [String]
+    # @!attribute agent_lifecycle
+    #   <p>The lifecycle state of the agent. Valid values are <code>PREVIEW</code> and <code>PUBLISHED</code>.</p>
+    #   @return [String]
+    # @!attribute custom_prompt_input
+    #   <p>The custom prompt configuration for the agent.</p>
+    #   @return [Types::CustomPromptInput]
+    class CreateAgentRequest < Struct.new(
+      nil,
+      :spaces,
+      :action_connectors,
+      :aws_account_id,
+      :agent_id,
+      :name,
+      :description,
+      :icon_id,
+      :starter_prompts,
+      :welcome_message,
+      :agent_lifecycle,
+      :custom_prompt_input,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the agent.</p>
+    #   @return [String]
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute agent_status
+    #   <p>The status of the agent.</p>
+    #   @return [String]
+    # @!attribute agent_name
+    #   <p>The name of the agent.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class CreateAgentResponse < Struct.new(
+      nil,
+      :arn,
+      :agent_id,
+      :agent_status,
+      :agent_name,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account where you are creating an analysis.</p>
     #   @return [String]
     # @!attribute analysis_id
@@ -4560,10 +8812,10 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute name
     #   <p>A descriptive name for the analysis that you're creating. This name displays for the
-    #               analysis in the QuickSight console. </p>
+    #               analysis in the Amazon Quick Sight console. </p>
     #   @return [String]
     # @!attribute parameters
-    #   <p>The parameter names and override values that you want to use. An analysis can have 
+    #   <p>The parameter names and override values that you want to use. An analysis can have
     #               any parameter type, and some parameters might accept multiple values. </p>
     #   @return [Types::Parameters]
     # @!attribute permissions
@@ -4575,13 +8827,13 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     # @!attribute source_entity
     #   <p>A source entity to use for the analysis that you're creating. This metadata structure
-    #               contains details that describe a source template and one or more datasets.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
+    #               contains details that describe a source template and one or more datasets or topics.</p>
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
     #               order for the request to be valid.</p>
     #   @return [Types::AnalysisSourceEntity]
     # @!attribute theme_arn
     #   <p>The ARN for the theme to apply to the analysis that you're creating. To see the theme
-    #               in the QuickSight console, make sure that you have access to it.</p>
+    #               in the Amazon Quick Sight console, make sure that you have access to it.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
@@ -4590,14 +8842,14 @@ module Aws::QuickSight
     # @!attribute definition
     #   <p>The definition of an analysis.</p>
     #            <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
     #               order for the request to be valid.</p>
     #   @return [Types::AnalysisDefinition]
     # @!attribute validation_strategy
     #   <p>The option to relax the validation needed to create an analysis with definition objects. This skips the validation step for specific errors.</p>
     #   @return [Types::ValidationStrategy]
     # @!attribute folder_arns
-    #   <p>When you create the analysis, QuickSight adds the analysis to these folders.</p>
+    #   <p>When you create the analysis, Amazon Quick Sight adds the analysis to these folders.</p>
     #   @return [Array<String>]
     class CreateAnalysisRequest < Struct.new(
       nil,
@@ -4649,11 +8901,57 @@ module Aws::QuickSight
       end
     end
 
+    # @!attribute policy_id
+    #   <p>The unique identifier to assign to the approval policy. You cannot change this value after you create the policy.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the approval policy.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the approval policy.</p>
+    #   @return [String]
+    # @!attribute actions
+    #   <p>The list of governed actions that trigger the approval workflow.</p>
+    #   @return [Array<String>]
+    # @!attribute asset_types
+    #   <p>The list of asset types that the approval policy applies to.</p>
+    #   @return [Array<String>]
+    # @!attribute applicable_to
+    #   <p>The scoping configuration that determines who the approval policy applies to.</p>
+    #   @return [Types::ApplicableTo]
+    # @!attribute approval_groups
+    #   <p>The list of group ARNs whose members can approve requests.</p>
+    #   @return [Array<String>]
+    class CreateApprovalPolicyRequest < Struct.new(
+      nil,
+      :policy_id,
+      :name,
+      :description,
+      :actions,
+      :asset_types,
+      :applicable_to,
+      :approval_groups,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy
+    #   <p>The approval policy that was created.</p>
+    #   @return [Types::ApprovalPolicy]
+    class CreateApprovalPolicyResponse < Struct.new(
+      nil,
+      :policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account that owns the brand.</p>
     #   @return [String]
     # @!attribute brand_id
-    #   <p>The ID of the QuickSight brand.</p>
+    #   <p>The ID of the Quick brand.</p>
     #   @return [String]
     # @!attribute brand_definition
     #   <p>The definition of the brand.</p>
@@ -4693,11 +8991,19 @@ module Aws::QuickSight
 
     # <p>A transform operation that creates calculated columns. Columns created in one such
     #             operation form a lexical closure.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source transform operation that provides input data for creating new calculated columns.</p>
+    #   @return [Types::TransformOperationSource]
     # @!attribute columns
     #   <p>Calculated columns to create.</p>
     #   @return [Array<Types::CalculatedColumn>]
     class CreateColumnsOperation < Struct.new(
       nil,
+      :alias,
+      :source,
       :columns,
       keyword_init: true
     )
@@ -4713,6 +9019,9 @@ module Aws::QuickSight
     # @!attribute capabilities
     #   <p>A set of actions to include in the custom permissions profile.</p>
     #   @return [Types::Capabilities]
+    # @!attribute governance
+    #   <p>The governance configuration for the custom permissions profile. When governance controls are defined for a category, any capabilities in that category not explicitly set to <code>ALLOW</code> in <code>Capabilities</code> are denied. Even newly added capabilities in the category are implicitly disabled when Amazon Quick releases them.</p>
+    #   @return [Types::Governance]
     # @!attribute tags
     #   <p>The tags to associate with the custom permissions profile.</p>
     #   @return [Array<Types::Tag>]
@@ -4721,6 +9030,7 @@ module Aws::QuickSight
       :aws_account_id,
       :custom_permissions_name,
       :capabilities,
+      :governance,
       :tags,
       keyword_init: true
     )
@@ -4752,7 +9062,8 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account where you want to create the dashboard.</p>
+    #   <p>The ID of the Amazon Web Services account where you want to create the
+    #               dashboard.</p>
     #   @return [String]
     # @!attribute dashboard_id
     #   <p>The ID for the dashboard, also added to the IAM policy.</p>
@@ -4767,26 +9078,27 @@ module Aws::QuickSight
     #   @return [Types::Parameters]
     # @!attribute permissions
     #   <p>A structure that contains the permissions of the dashboard. You can use this structure
-    #               for granting permissions by providing a list of IAM action information for each
-    #               principal ARN. </p>
+    #               for granting permissions by providing a list of IAM action information
+    #               for each principal ARN. </p>
     #            <p>To specify no permissions, omit the permissions list.</p>
     #   @return [Array<Types::ResourcePermission>]
     # @!attribute source_entity
     #   <p>The entity that you are using as a source when you create the dashboard. In
-    #               <code>SourceEntity</code>, you specify the type of object you're using as source. You
-    #               can only create a dashboard from a template, so you use a <code>SourceTemplate</code>
-    #               entity. If you need to create a dashboard from an analysis, first convert the analysis
-    #               to a template by using the <code>
+    #                   <code>SourceEntity</code>, you specify the type of object you're using as source.
+    #               You can only create a dashboard from a template, so you use a
+    #                   <code>SourceTemplate</code> entity. If you need to create a dashboard from an
+    #               analysis, first convert the analysis to a template by using the <code>
     #                  <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html">CreateTemplate</a>
-    #               </code> 
-    #               API operation. For
-    #               <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source
-    #               template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any
-    #               QuickSight-supported Amazon Web Services Region. </p>
+    #               </code> API operation. For <code>SourceTemplate</code>,
+    #               specify the Amazon Resource Name (ARN) of the source template. The
+    #                   <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any
+    #                   Amazon Quick Sight-supported Amazon Web Services Region. </p>
     #            <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to
     #               list the replacement datasets for the placeholders listed in the original. The schema in
-    #               each dataset must match its placeholder. </p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
+    #               each dataset must match its placeholder. Use the <code>TopicReferences</code>
+    #               entity to list the replacement topics for the topic placeholders listed in the original.
+    #               The schema in each topic must match its placeholder.</p>
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
     #               order for the request to be valid.</p>
     #   @return [Types::DashboardSourceEntity]
     # @!attribute tags
@@ -4803,8 +9115,8 @@ module Aws::QuickSight
     #                  <p>
     #                     <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This
     #                       status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is
-    #                       set to <code>DISABLED</code>, QuickSight disables the left filter pane on the
-    #                       published dashboard, which can be used for ad hoc (one-time) filtering. This
+    #                       set to <code>DISABLED</code>, Amazon Quick Sight disables the left filter pane on
+    #                       the published dashboard, which can be used for ad hoc (one-time) filtering. This
     #                       option is <code>ENABLED</code> by default. </p>
     #               </li>
     #               <li>
@@ -4812,7 +9124,8 @@ module Aws::QuickSight
     #                     <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This
     #                       status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual
     #                       option to export data to .CSV format isn't enabled when this is set to
-    #                       <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p>
+    #                           <code>DISABLED</code>. This option is <code>ENABLED</code> by default.
+    #                   </p>
     #               </li>
     #               <li>
     #                  <p>
@@ -4822,37 +9135,49 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>AvailabilityStatus</code> for <code>ExecutiveSummaryOption</code> - This status
-    #                   can be either <code>ENABLED</code> or <code>DISABLED</code>. The option to build an executive
-    #                   summary is disabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code>
-    #                   by default.</p>
+    #                     <code>AvailabilityStatus</code> for <code>QuickSuiteActionsOption</code> -
+    #                       This status can be either <code>ENABLED</code> or <code>DISABLED</code>.
+    #                       Features related to Actions in Amazon Quick Suite on dashboards are disabled
+    #                       when this is set to <code>DISABLED</code>. This option is <code>DISABLED</code>
+    #                       by default.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>AvailabilityStatus</code> for <code>DataStoriesSharingOption</code> - This status
-    #                   can be either <code>ENABLED</code> or <code>DISABLED</code>. The option to share a data story is
-    #                   disabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code>
-    #                   by default.</p>
+    #                     <code>AvailabilityStatus</code> for <code>ExecutiveSummaryOption</code> - This
+    #                       status can be either <code>ENABLED</code> or <code>DISABLED</code>. The option
+    #                       to build an executive summary is disabled when this is set to
+    #                           <code>DISABLED</code>. This option is <code>ENABLED</code> by
+    #                       default.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AvailabilityStatus</code> for <code>DataStoriesSharingOption</code> -
+    #                       This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The
+    #                       option to share a data story is disabled when this is set to
+    #                           <code>DISABLED</code>. This option is <code>ENABLED</code> by
+    #                       default.</p>
     #               </li>
     #            </ul>
     #   @return [Types::DashboardPublishOptions]
     # @!attribute theme_arn
     #   <p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If
     #               you add a value for this field, it overrides the value that is used in the source
-    #               entity. The theme ARN must exist in the same Amazon Web Services account where you create the
-    #               dashboard.</p>
+    #               entity. The theme ARN must exist in the same Amazon Web Services account where you create
+    #               the dashboard.</p>
     #   @return [String]
     # @!attribute definition
     #   <p>The definition of a dashboard.</p>
     #            <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
     #               order for the request to be valid.</p>
     #   @return [Types::DashboardVersionDefinition]
     # @!attribute validation_strategy
-    #   <p>The option to relax the validation needed to create a dashboard with definition objects. This option skips the validation step for specific errors.</p>
+    #   <p>The option to relax the validation needed to create a dashboard with definition
+    #               objects. This option skips the validation step for specific errors.</p>
     #   @return [Types::ValidationStrategy]
     # @!attribute folder_arns
-    #   <p>When you create the dashboard, QuickSight adds the dashboard to these folders.</p>
+    #   <p>When you create the dashboard, Amazon Quick Sight adds the dashboard to these
+    #               folders.</p>
     #   @return [Array<String>]
     # @!attribute link_sharing_configuration
     #   <p>A structure that contains the permissions of a shareable link to the dashboard.</p>
@@ -4932,13 +9257,18 @@ module Aws::QuickSight
     #   <p>Declares the physical tables that are available in the underlying data sources.</p>
     #   @return [Hash<String, Types::PhysicalTable>]
     # @!attribute logical_table_map
-    #   <p>Configures the combination and transformation of the data from the physical tables.</p>
+    #   <p>Configures the combination and transformation of the data from the physical
+    #   			tables. This parameter is used with the legacy data preparation experience.</p>
+    #   @deprecated
+    #     Only used in the legacy data preparation experience.
+    #     Since: 2025-10-23
     #   @return [Hash<String, Types::LogicalTable>]
     # @!attribute import_mode
     #   <p>Indicates whether you want to import the data into SPICE.</p>
     #   @return [String]
     # @!attribute column_groups
-    #   <p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>
+    #   <p>Groupings of columns that work together in certain Amazon Quick Sight features.
+    #   			Currently, only geospatial hierarchy is supported.</p>
     #   @return [Array<Types::ColumnGroup>]
     # @!attribute field_folders
     #   <p>The folder that contains fields and nested subfolders for your dataset.</p>
@@ -4947,10 +9277,19 @@ module Aws::QuickSight
     #   <p>A list of resource permissions on the dataset.</p>
     #   @return [Array<Types::ResourcePermission>]
     # @!attribute row_level_permission_data_set
-    #   <p>The row-level security configuration for the data that you want to create.</p>
+    #   <p>The row-level security configuration for the data that you want to create. This parameter is
+    #   			used with the legacy data preparation experience.</p>
+    #   @deprecated
+    #     Only used in the legacy data preparation experience.
+    #     Since: 2025-10-23
     #   @return [Types::RowLevelPermissionDataSet]
     # @!attribute row_level_permission_tag_configuration
-    #   <p>The configuration of tags on a dataset to set row-level security. Row-level security tags are currently supported for anonymous embedding only.</p>
+    #   <p>The configuration of tags on a dataset to set row-level security. Row-level security
+    #   			tags are currently supported for anonymous embedding only. This parameter is
+    #   			used with the legacy data preparation experience.</p>
+    #   @deprecated
+    #     Only used in the legacy data preparation experience.
+    #     Since: 2025-10-23
     #   @return [Types::RowLevelPermissionTagConfiguration]
     # @!attribute column_level_permission_rules
     #   <p>A set of one or more definitions of a <code>
@@ -4958,7 +9297,8 @@ module Aws::QuickSight
     #               </code>.</p>
     #   @return [Array<Types::ColumnLevelPermissionRule>]
     # @!attribute tags
-    #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>
+    #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
+    #   			dataset.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute data_set_usage_configuration
     #   <p>The usage configuration to apply to child datasets that reference this dataset as a source.</p>
@@ -4967,14 +9307,27 @@ module Aws::QuickSight
     #   <p>The parameter declarations of the dataset.</p>
     #   @return [Array<Types::DatasetParameter>]
     # @!attribute folder_arns
-    #   <p>When you create the dataset, QuickSight adds the dataset to these folders.</p>
+    #   <p>When you create the dataset, Amazon Quick Sight adds the dataset to these
+    #   			folders.</p>
     #   @return [Array<String>]
     # @!attribute performance_configuration
-    #   <p>The configuration for the performance optimization of the dataset that contains a <code>UniqueKey</code> configuration.</p>
+    #   <p>The configuration for the performance optimization of the dataset that contains a
+    #   				<code>UniqueKey</code> configuration.</p>
     #   @return [Types::PerformanceConfiguration]
     # @!attribute use_as
-    #   <p>The usage of the dataset. <code>RLS_RULES</code> must be specified for RLS permission datasets.</p>
+    #   <p>The usage of the dataset. <code>RLS_RULES</code> must be specified for RLS permission
+    #   			datasets.</p>
     #   @return [String]
+    # @!attribute data_prep_configuration
+    #   <p>The data preparation configuration for the dataset. This configuration defines the source tables,
+    #   			transformation steps, and destination tables used to prepare the data.
+    #   			Required when using the new data preparation experience.</p>
+    #   @return [Types::DataPrepConfiguration]
+    # @!attribute semantic_model_configuration
+    #   <p>The semantic model configuration for the dataset. This configuration defines how the prepared
+    #   			data is structured for an analysis, including table mappings and row-level security configurations.
+    #   			Required when using the new data preparation experience.</p>
+    #   @return [Types::SemanticModelConfiguration]
     class CreateDataSetRequest < Struct.new(
       nil,
       :aws_account_id,
@@ -4995,6 +9348,8 @@ module Aws::QuickSight
       :folder_arns,
       :performance_configuration,
       :use_as,
+      :data_prep_configuration,
+      :semantic_model_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5007,12 +9362,12 @@ module Aws::QuickSight
     #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute ingestion_arn
-    #   <p>The ARN for the ingestion, which is triggered as a result of dataset creation if the import
-    #   			mode is SPICE.</p>
+    #   <p>The ARN for the ingestion, which is triggered as a result of dataset creation if the
+    #   			import mode is SPICE.</p>
     #   @return [String]
     # @!attribute ingestion_id
-    #   <p>The ID of the ingestion, which is triggered as a result of dataset creation if the import
-    #   			mode is SPICE.</p>
+    #   <p>The ID of the ingestion, which is triggered as a result of dataset creation if the
+    #   			import mode is SPICE.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -5042,38 +9397,43 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>An ID for the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>
+    #   <p>An ID for the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account. </p>
     #   @return [String]
     # @!attribute name
     #   <p>A display name for the data source.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of the data source. To return a
-    #   			list of all data sources, use <code>ListDataSources</code>.</p>
+    #   <p>The type of the data source. To return a list of all data sources, use
+    #   				<code>ListDataSources</code>.</p>
     #            <p>Use <code>AMAZON_ELASTICSEARCH</code> for Amazon OpenSearch Service.</p>
     #   @return [String]
     # @!attribute data_source_parameters
-    #   <p>The parameters that QuickSight uses to connect to your underlying source.</p>
+    #   <p>The parameters that Amazon Quick Sight uses to connect to your underlying
+    #   			source.</p>
     #   @return [Types::DataSourceParameters]
     # @!attribute credentials
-    #   <p>The credentials QuickSight that uses to connect to your underlying source. Currently, only
-    #   			credentials based on user name and password are supported.</p>
+    #   <p>The credentials Amazon Quick Sight that uses to connect to your underlying source.
+    #   			Currently, only credentials based on user name and password are supported.</p>
     #   @return [Types::DataSourceCredentials]
     # @!attribute permissions
     #   <p>A list of resource permissions on the data source.</p>
     #   @return [Array<Types::ResourcePermission>]
     # @!attribute vpc_connection_properties
-    #   <p>Use this parameter only when you want QuickSight to use a VPC connection when connecting to
-    #   			your underlying source.</p>
+    #   <p>Use this parameter only when you want Amazon Quick Sight to use a VPC connection when
+    #   			connecting to your underlying source.</p>
     #   @return [Types::VpcConnectionProperties]
     # @!attribute ssl_properties
-    #   <p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying source.</p>
+    #   <p>Secure Socket Layer (SSL) properties that apply when Amazon Quick Sight connects to
+    #   			your underlying source.</p>
     #   @return [Types::SslProperties]
     # @!attribute tags
-    #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p>
+    #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
+    #   			data source.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute folder_arns
-    #   <p>When you create the data source, QuickSight adds the data source to these folders.</p>
+    #   <p>When you create the data source, Amazon Quick Sight adds the data source to these
+    #   			folders.</p>
     #   @return [Array<String>]
     class CreateDataSourceRequest < Struct.new(
       nil,
@@ -5097,7 +9457,8 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the data source.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute creation_status
     #   <p>The status of creating the data source.</p>
@@ -5113,6 +9474,126 @@ module Aws::QuickSight
       :arn,
       :data_source_id,
       :creation_status,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account in which to create the DLP setting.</p>
+    #   @return [String]
+    # @!attribute dlp_setting_id
+    #   <p>A unique identifier for the DLP setting.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A human-readable display name for the DLP setting.</p>
+    #   @return [String]
+    # @!attribute provider_type
+    #   <p>The type of external DLP provider to use for sensitivity label classification. Currently, the only supported value is <code>MICROSOFT_PURVIEW</code>.</p>
+    #   @return [String]
+    # @!attribute provider_config
+    #   <p>The provider-specific configuration for the DLP integration. This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+    #   @return [Types::ProviderConfig]
+    # @!attribute provider_outage_action
+    #   <p>The behavior to apply when the DLP provider is unreachable. Valid values are <code>ALLOW</code>, <code>WARN</code>, and <code>BLOCK</code>.</p>
+    #   @return [String]
+    # @!attribute enabled
+    #   <p>Specifies whether DLP enforcement is active for this setting. Set to <code>true</code> to enable enforcement, or <code>false</code> to disable it at time of setting creation.</p>
+    #   @return [Boolean]
+    # @!attribute tags
+    #   <p>A list of resource tags to apply to the DLP setting. You can use tags to manage access to your Amazon Web Services resources.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateDlpSettingRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :dlp_setting_id,
+      :name,
+      :provider_type,
+      :provider_config,
+      :provider_outage_action,
+      :enabled,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the created DLP setting.</p>
+    #   @return [String]
+    # @!attribute dlp_setting_id
+    #   <p>The ID of the created DLP setting.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class CreateDlpSettingResponse < Struct.new(
+      nil,
+      :arn,
+      :dlp_setting_id,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account where you want to create the flow.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name for the flow.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description for the flow.</p>
+    #   @return [String]
+    # @!attribute flow_definition
+    #   <p>The definition of the flow, specifying the steps and configurations. This is the flow definition in Quick Flow's internal format. The format is subject to change.</p>
+    #            <note>
+    #               <p>Always derive or depend on the flow definition from the <code>DescribeFlow</code> operation to ensure you are working with the latest format.</p>
+    #            </note>
+    #   @return [JSON]
+    # @!attribute permissions
+    #   <p>Initial permissions for the flow. If omitted, the flow is created without any permissions.</p>
+    #   @return [Array<Types::Permission>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class CreateFlowRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :name,
+      :description,
+      :flow_definition,
+      :permissions,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the flow.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class CreateFlowResponse < Struct.new(
+      nil,
+      :arn,
+      :flow_id,
       :request_id,
       :status,
       keyword_init: true
@@ -5249,8 +9730,8 @@ module Aws::QuickSight
     #   <p>The name of the group that you want to add the user to.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the 
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that you want the user to be a part of.</p>
@@ -5299,7 +9780,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that you want the group to be a part of.</p>
@@ -5341,7 +9822,7 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account where you want to assign an IAM policy to QuickSight users or groups.</p>
+    #   <p>The ID of the Amazon Web Services account where you want to assign an IAM policy to Amazon Quick Sight users or groups.</p>
     #   @return [String]
     # @!attribute assignment_name
     #   <p>The name of the assignment, also called a rule.
@@ -5371,11 +9852,11 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     # @!attribute policy_arn
-    #   <p>The ARN for the IAM policy to apply to the QuickSight users and
+    #   <p>The ARN for the IAM policy to apply to the Amazon Quick Sight users and
     #   			groups specified in this assignment.</p>
     #   @return [String]
     # @!attribute identities
-    #   <p>The QuickSight users, groups, or both that you want to assign the policy
+    #   <p>The Amazon Quick Sight users, groups, or both that you want to assign the policy
     #   			to.</p>
     #   @return [Hash<String, Array<String>>]
     # @!attribute namespace
@@ -5423,11 +9904,11 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     # @!attribute policy_arn
-    #   <p>The ARN for the IAM policy that is applied to the QuickSight
+    #   <p>The ARN for the IAM policy that is applied to the Amazon Quick Sight
     #   			users and groups specified in this assignment.</p>
     #   @return [String]
     # @!attribute identities
-    #   <p>The QuickSight users, groups, or both that the IAM policy is
+    #   <p>The Amazon Quick Sight users, groups, or both that the IAM policy is
     #   			assigned to.</p>
     #   @return [Hash<String, Array<String>>]
     # @!attribute request_id
@@ -5511,7 +9992,134 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to create the QuickSight namespace in.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute data_source_arn
+    #   <p>The Amazon Resource Name (ARN) of the data source for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_configuration
+    #   <p>The configuration settings for a knowledge base.</p>
+    #   @return [Types::KnowledgeBaseConfiguration]
+    # @!attribute description
+    #   <p>A description for the knowledge base. If you don't specify a description, the knowledge base is created without one.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>A list of resource permissions on the knowledge base. Each entry grants a specified Amazon QuickSight principal either owner or viewer access. If you don't specify permissions, only the primary owner (if provided) receives owner access.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute media_extraction_configuration
+    #   <p>The configuration for media extraction from knowledge base documents.</p>
+    #   @return [Types::MediaExtractionConfiguration]
+    # @!attribute access_control_configuration
+    #   <p>The access control configuration for the knowledge base. If you don't specify this parameter, document-level ACLs are disabled.</p>
+    #   @return [Types::AccessControlConfiguration]
+    # @!attribute primary_owner_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon QuickSight user or group to set as the primary owner of the knowledge base. The specified principal is always granted owner access, regardless of what is specified in the <code>Permissions</code> field.</p>
+    #            <p>This must be an Amazon QuickSight principal ARN, not an IAM user or role ARN. The API caller is never assigned as the owner automatically. If you don't specify a primary owner and don't grant owner access in <code>Permissions</code>, the knowledge base is created without an owner, even when you call the operation as an Amazon QuickSight user.</p>
+    #            <p>When you call <code>CreateKnowledgeBase</code> as an IAM user or an assumed IAM role, specify <code>PrimaryOwnerArn</code> (as an Amazon QuickSight principal ARN) or an owner entry in <code>Permissions</code> so that the knowledge base has an owner. Although optional, specifying a primary owner is recommended.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to assign to the knowledge base. If you don't specify tags, the knowledge base is created without tags.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateKnowledgeBaseRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :knowledge_base_id,
+      :name,
+      :data_source_arn,
+      :knowledge_base_configuration,
+      :description,
+      :permissions,
+      :media_extraction_configuration,
+      :access_control_configuration,
+      :primary_owner_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute creation_status
+    #   <p>The creation status of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class CreateKnowledgeBaseResponse < Struct.new(
+      nil,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :creation_status,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = nil unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute account_id
+    #   <p>The ID of the Amazon Web Services account that contains the limits profile.</p>
+    #   @return [String]
+    # @!attribute profile_name
+    #   <p>A display name for the limits profile.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description for the limits profile.</p>
+    #   @return [String]
+    # @!attribute resource_limits
+    #   <p>A map of resource types to their limit values for this profile.</p>
+    #   @return [Hash<String, Types::ProfileLimitValue>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error.</p>
+    #   @return [String]
+    class CreateLimitsProfileRequest < Struct.new(
+      nil,
+      :account_id,
+      :profile_name,
+      :description,
+      :resource_limits,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the created limits profile.</p>
+    #   @return [String]
+    # @!attribute profile_id
+    #   <p>The unique identifier for the created limits profile.</p>
+    #   @return [String]
+    class CreateLimitsProfileResponse < Struct.new(
+      nil,
+      :arn,
+      :profile_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID for the Amazon Web Services account that you want to create the Quick Sight namespace in.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The name that you want to use to describe the new namespace.</p>
@@ -5535,7 +10143,7 @@ module Aws::QuickSight
     end
 
     # @!attribute arn
-    #   <p>The ARN of the QuickSight namespace you created. </p>
+    #   <p>The ARN of the Quick Sight namespace you created. </p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the new namespace that you created.</p>
@@ -5568,6 +10176,93 @@ module Aws::QuickSight
       :capacity_region,
       :creation_status,
       :identity_store,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_application_id
+    #   <p>An ID for the OAuthClientApplication that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name for the OAuthClientApplication.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_authentication_type
+    #   <p>The authentication type to use for the OAuthClientApplication. This determines the OAuth 2.0 grant flow that is used when the data source connects to the identity provider. Valid values are <code>TOKEN</code>.</p>
+    #   @return [String]
+    # @!attribute client_id
+    #   <p>The client ID of the OAuth application that is registered with the identity provider.</p>
+    #   @return [String]
+    # @!attribute client_secret
+    #   <p>The client secret of the OAuth application that is registered with the identity provider.</p>
+    #   @return [String]
+    # @!attribute o_auth_token_endpoint_url
+    #   <p>The token endpoint URL of the identity provider that is used to obtain access tokens.</p>
+    #   @return [String]
+    # @!attribute o_auth_authorization_endpoint_url
+    #   <p>The authorization endpoint URL of the identity provider that is used to obtain authorization codes.</p>
+    #   @return [String]
+    # @!attribute o_auth_scopes
+    #   <p>The OAuth scopes that are requested when the OAuthClientApplication obtains an access token from the identity provider.</p>
+    #   @return [String]
+    # @!attribute data_source_type
+    #   <p>The type of data source that the OAuthClientApplication is used with. Valid values are <code>SNOWFLAKE</code>.</p>
+    #   @return [String]
+    # @!attribute identity_provider_vpc_connection_properties
+    #   <p>VPC connection properties.</p>
+    #   @return [Types::VpcConnectionProperties]
+    # @!attribute tags
+    #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the OAuthClientApplication.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateOAuthClientApplicationRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :o_auth_client_application_id,
+      :name,
+      :o_auth_client_authentication_type,
+      :client_id,
+      :client_secret,
+      :o_auth_token_endpoint_url,
+      :o_auth_authorization_endpoint_url,
+      :o_auth_scopes,
+      :data_source_type,
+      :identity_provider_vpc_connection_properties,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the OAuthClientApplication.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_application_id
+    #   <p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute creation_status
+    #   <p>The status of creating the OAuthClientApplication.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class CreateOAuthClientApplicationResponse < Struct.new(
+      nil,
+      :arn,
+      :o_auth_client_application_id,
+      :creation_status,
       :request_id,
       :status,
       keyword_init: true
@@ -5631,7 +10326,7 @@ module Aws::QuickSight
     #   <p>The name of the group that you want to add to the role.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that the role belongs to.</p>
@@ -5671,6 +10366,48 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the space.</p>
+    #   @return [String]
+    # @!attribute space_id
+    #   <p>The ID of the space. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A display name for the space.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the space.</p>
+    #   @return [String]
+    class CreateSpaceRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :space_id,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class CreateSpaceResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account that contains the template that you creating an alias for.</p>
     #   @return [String]
     # @!attribute template_id
@@ -5679,7 +10416,7 @@ module Aws::QuickSight
     # @!attribute alias_name
     #   <p>The name that you want to give to the template alias that you're creating. Don't start the
     #   			alias name with the <code>$</code> character. Alias names that start with <code>$</code>
-    #   			are reserved by QuickSight. </p>
+    #   			are reserved by Quick Sight. </p>
     #   @return [String]
     # @!attribute template_version_number
     #   <p>The version number of the template.</p>
@@ -5720,7 +10457,7 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that the group is in. You use the ID for the Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   <p>The ID for the Amazon Web Services account that the group is in. You use the ID for the Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute template_id
     #   <p>An ID for the template that you want to create. This template is unique per Amazon Web Services Region; in
@@ -5739,11 +10476,13 @@ module Aws::QuickSight
     #   			analysis. Both of these require an Amazon Resource Name (ARN). For
     #   			<code>SourceTemplate</code>, specify the ARN of the source template. For
     #   			<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>
-    #   			ARN can contain any Amazon Web Services account and any QuickSight-supported Amazon Web Services Region. </p>
+    #   			ARN can contain any Amazon Web Services account and any Quick Sight-supported Amazon Web Services Region. </p>
     #            <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or
     #   			<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed
-    #   			in the original. The schema in each dataset must match its placeholder. </p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
+    #   			in the original. The schema in each dataset must match its placeholder. Use the <code>TopicReferences</code>
+    #   			entity to list the replacement topics for the topic placeholders listed in the original.
+    #   			The schema in each topic must match its placeholder.</p>
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
     #   			order for the request to be valid.</p>
     #   @return [Types::TemplateSourceEntity]
     # @!attribute tags
@@ -5758,7 +10497,7 @@ module Aws::QuickSight
     # @!attribute definition
     #   <p>The definition of a template.</p>
     #            <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
     #   			order for the request to be valid.</p>
     #   @return [Types::TemplateVersionDefinition]
     # @!attribute validation_strategy
@@ -5826,7 +10565,7 @@ module Aws::QuickSight
     # @!attribute alias_name
     #   <p>The name that you want to give to the theme alias that you are creating. The
     #   			alias name can't begin with a <code>$</code>. Alias names that start with <code>$</code>
-    #   			are reserved by Amazon QuickSight. </p>
+    #   			are reserved by Amazon Quick Sight. </p>
     #   @return [String]
     # @!attribute theme_version_number
     #   <p>The version number of the theme.</p>
@@ -5878,7 +10617,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute base_theme_id
     #   <p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of
-    #   			the starting themes defined by Amazon QuickSight. For a list of the starting themes, use
+    #   			the starting themes defined by Amazon Quick Sight. For a list of the starting themes, use
     #   				<code>ListThemes</code> or choose <b>Themes</b> from
     #   			within an analysis. </p>
     #   @return [String]
@@ -6105,6 +10844,67 @@ module Aws::QuickSight
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that you want to create a topic in.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID for the topic that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute topic
+    #   <p>The definition of a topic to create.</p>
+    #   @return [Types::TopicV2Details]
+    # @!attribute tags
+    #   <p>Contains a map of the key-value pairs for the resource tag or tags that are assigned to
+    #            the topic.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute folder_arns
+    #   <p>The Amazon Resource Names (ARNs) of the folders that you want the topic to reside
+    #            in.</p>
+    #   @return [Array<String>]
+    # @!attribute custom_instructions
+    #   <p>Instructions that provide additional guidance and context for response generation.</p>
+    #   @return [Types::CustomInstructions]
+    class CreateTopicV2Request < Struct.new(
+      nil,
+      :aws_account_id,
+      :topic_id,
+      :topic,
+      :tags,
+      :folder_arns,
+      :custom_instructions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID for the topic that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class CreateTopicV2Response < Struct.new(
+      nil,
+      :arn,
+      :topic_id,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
     end
 
     # @!attribute aws_account_id
@@ -6385,7 +11185,7 @@ module Aws::QuickSight
     end
 
     # <p>A visual that contains custom content.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/custom-visual-content.html">Using custom visual content</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/custom-visual-content.html">Using custom visual content</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -6402,7 +11202,10 @@ module Aws::QuickSight
     #   <p>The list of custom actions that are configured for a visual.</p>
     #   @return [Array<Types::VisualCustomAction>]
     # @!attribute data_set_identifier
-    #   <p>The dataset that is used to create the custom content visual. You can't create a visual without a dataset.</p>
+    #   <p>The dataset that is used to create the custom content visual. You can't create a visual without a dataset or a topic.</p>
+    #   @return [String]
+    # @!attribute topic_identifier
+    #   <p>The topic that is used in the custom content visual. You can't create a visual without a dataset or a topic.</p>
     #   @return [String]
     # @!attribute visual_content_alt_text
     #   <p>The alt text for the visual.</p>
@@ -6415,10 +11218,16 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :data_set_identifier,
+      :topic_identifier,
       :visual_content_alt_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:data_set_identifier] = '' unless options.key?(:data_set_identifier)
+        super
+      end
     end
 
     # <p>A custom filter that filters based on a single value. This filter can be partially matched.</p>
@@ -6517,6 +11326,18 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A custom instruction that provides guidance on how the dataset should be consumed.</p>
+    # @!attribute inline_custom_instruction
+    #   <p>An inline custom instruction containing text and optional uploaded document metadata.</p>
+    #   @return [Types::InlineCustomInstruction]
+    class CustomInstruction < Struct.new(
+      nil,
+      :inline_custom_instruction,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Instructions that provide additional guidance and context for response generation.</p>
     # @!attribute custom_instructions_string
     #   <p>A text field for providing additional guidance or context for response generation.</p>
@@ -6576,11 +11397,128 @@ module Aws::QuickSight
     # @!attribute capabilities
     #   <p>A set of actions in the custom permissions profile.</p>
     #   @return [Types::Capabilities]
+    # @!attribute governance
+    #   <p>The governance configuration for the custom permissions profile. When you enable governance for a category, Amazon Quick denies access to any current or new capability in that category unless you explicitly set that capability to <code>ALLOW</code> in <code>Capabilities</code>.</p>
+    #   @return [Types::Governance]
     class CustomPermissions < Struct.new(
       nil,
       :arn,
       :custom_permissions_name,
       :capabilities,
+      :governance,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The custom prompt input for an agent. This is a union type that can be either an existing prompt profile or new prompt parameters.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute existing_prompt
+    #   <p>An existing custom prompt profile to use for the agent.</p>
+    #   @return [Types::CustomPromptProfile]
+    # @!attribute new_prompt
+    #   <p>New custom prompt parameters to configure for the agent.</p>
+    #   @return [Types::CustomPromptInputParameters]
+    class CustomPromptInput < Struct.new(
+      :existing_prompt,
+      :new_prompt,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ExistingPrompt < CustomPromptInput; end
+      class NewPrompt < CustomPromptInput; end
+      class Unknown < CustomPromptInput; end
+    end
+
+    # <p>The parameters for configuring a custom prompt for an agent.</p>
+    # @!attribute response_length
+    #   <p>Instructions for the desired response length.</p>
+    #   @return [String]
+    # @!attribute output_style
+    #   <p>Instructions for the desired output style.</p>
+    #   @return [String]
+    # @!attribute identity
+    #   <p>Instructions that define the agent's identity and persona.</p>
+    #   @return [String]
+    # @!attribute tone
+    #   <p>Instructions for the desired tone of responses.</p>
+    #   @return [String]
+    # @!attribute custom_instructions
+    #   <p>Custom instructions for the agent's behavior.</p>
+    #   @return [String]
+    class CustomPromptInputParameters < Struct.new(
+      nil,
+      :response_length,
+      :output_style,
+      :identity,
+      :tone,
+      :custom_instructions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The custom prompt interface configuration that defines how an agent's prompt is configured.</p>
+    # @!attribute model_profile_id
+    #   <p>The identifier of the model profile.</p>
+    #   @return [String]
+    # @!attribute subscription_id
+    #   <p>The subscription identifier.</p>
+    #   @return [String]
+    # @!attribute qbs_aws_account_id
+    #   <p>The Amazon Web Services account ID for the Q Business service.</p>
+    #   @return [String]
+    # @!attribute response_length
+    #   <p>Instructions for the desired response length.</p>
+    #   @return [String]
+    # @!attribute output_style
+    #   <p>Instructions for the desired output style.</p>
+    #   @return [String]
+    # @!attribute identity
+    #   <p>Instructions that define the agent's identity and persona.</p>
+    #   @return [String]
+    # @!attribute tone
+    #   <p>Instructions for the desired tone of responses.</p>
+    #   @return [String]
+    # @!attribute custom_instructions
+    #   <p>Custom instructions for the agent's behavior.</p>
+    #   @return [String]
+    # @!attribute prompt_summary
+    #   <p>A summary of the custom prompt configuration.</p>
+    #   @return [String]
+    class CustomPromptInterface < Struct.new(
+      nil,
+      :model_profile_id,
+      :subscription_id,
+      :qbs_aws_account_id,
+      :response_length,
+      :output_style,
+      :identity,
+      :tone,
+      :custom_instructions,
+      :prompt_summary,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A reference to an existing custom prompt profile.</p>
+    # @!attribute model_profile_id
+    #   <p>The identifier of the model profile.</p>
+    #   @return [String]
+    # @!attribute subscription_id
+    #   <p>The subscription identifier.</p>
+    #   @return [String]
+    # @!attribute qbs_aws_account_id
+    #   <p>The Amazon Web Services account ID for the Q Business service.</p>
+    #   @return [String]
+    class CustomPromptProfile < Struct.new(
+      nil,
+      :model_profile_id,
+      :subscription_id,
+      :qbs_aws_account_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6627,7 +11565,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The customer managed key that is registered to your QuickSight account is unavailable.</p>
+    # <p>The customer managed key that is registered to your Amazon Quick Sight account is unavailable.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute request_id
@@ -6677,6 +11615,35 @@ module Aws::QuickSight
       :last_published_time,
       :last_updated_time,
       :link_entities,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The dashboard customization summary configuration for an embedded Quick Sight dashboard.</p>
+    # @!attribute enabled
+    #   <p>The enabled status of the dashboard customization summary configuration for an embedded Quick Sight dashboard.</p>
+    #   @return [Boolean]
+    class DashboardCustomizationSummaryConfigurations < Struct.new(
+      nil,
+      :enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enabled] = false unless options.key?(:enabled)
+        super
+      end
+    end
+
+    # <p>The options that define customizations available to dashboard readers for a specific visual</p>
+    # @!attribute fields_configuration
+    #   <p>The configuration that controls field customization options available to dashboard readers for a visual.</p>
+    #   @return [Types::VisualCustomizationFieldsConfiguration]
+    class DashboardCustomizationVisualOptions < Struct.new(
+      nil,
+      :fields_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6739,8 +11706,11 @@ module Aws::QuickSight
     #   <p>The data point tool tip options of a dashboard.</p>
     #   @return [Types::DataPointTooltipOption]
     # @!attribute data_qa_enabled_option
-    #   <p>Adds Q&A capabilities to an QuickSight dashboard. If no topic is linked, Dashboard Q&A uses the data values that are rendered on the dashboard. End users can use Dashboard Q&A to ask for different slices of the data that they see on the dashboard. If a topic is linked, Topic Q&A is used.</p>
+    #   <p>Adds Q&A capabilities to an Quick Sight dashboard. If no topic is linked, Dashboard Q&A uses the data values that are rendered on the dashboard. End users can use Dashboard Q&A to ask for different slices of the data that they see on the dashboard. If a topic is linked, Topic Q&A is used.</p>
     #   @return [Types::DataQAEnabledOption]
+    # @!attribute quick_suite_actions_option
+    #   <p>Determines if Actions in Amazon Quick Suite are enabled in a dashboard.</p>
+    #   @return [Types::QuickSuiteActionsOption]
     # @!attribute executive_summary_option
     #   <p>Executive summary option.</p>
     #   @return [Types::ExecutiveSummaryOption]
@@ -6761,6 +11731,7 @@ module Aws::QuickSight
       :data_point_menu_label_option,
       :data_point_tooltip_option,
       :data_qa_enabled_option,
+      :quick_suite_actions_option,
       :executive_summary_option,
       :data_stories_sharing_option,
       keyword_init: true
@@ -6836,12 +11807,16 @@ module Aws::QuickSight
     # @!attribute data_set_references
     #   <p>Dataset references.</p>
     #   @return [Array<Types::DataSetReference>]
+    # @!attribute topic_references
+    #   <p>The topic references for the source template of a dashboard.</p>
+    #   @return [Array<Types::TopicReference>]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     class DashboardSourceTemplate < Struct.new(
       nil,
       :data_set_references,
+      :topic_references,
       :arn,
       keyword_init: true
     )
@@ -6904,7 +11879,11 @@ module Aws::QuickSight
     #   <p>Source entity ARN.</p>
     #   @return [String]
     # @!attribute data_set_arns
-    #   <p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this
+    #   <p>The Amazon Resource Names (ARNs) for the datasets that are associated with this
+    #               version of the dashboard.</p>
+    #   @return [Array<String>]
+    # @!attribute topic_arns
+    #   <p>The Amazon Resource Names (ARNs) for the topics that are associated with this
     #               version of the dashboard.</p>
     #   @return [Array<String>]
     # @!attribute description
@@ -6925,6 +11904,7 @@ module Aws::QuickSight
       :arn,
       :source_entity_arn,
       :data_set_arns,
+      :topic_arns,
       :description,
       :theme_arn,
       :sheets,
@@ -6938,19 +11918,26 @@ module Aws::QuickSight
     #   <p>An array of dataset identifier declarations. With
     #               this mapping,you can use dataset identifiers instead of dataset Amazon Resource Names (ARNs) throughout the dashboard's sub-structures.</p>
     #   @return [Array<Types::DataSetIdentifierDeclaration>]
+    # @!attribute topic_identifier_declarations
+    #   <p>An array of topic identifier declarations. With
+    #               this mapping, you can use topic identifiers instead of topic Amazon Resource Names (ARNs) throughout the dashboard's sub-structures.</p>
+    #   @return [Array<Types::TopicIdentifierDeclaration>]
     # @!attribute sheets
     #   <p>An array of sheet definitions for a dashboard.</p>
     #   @return [Array<Types::SheetDefinition>]
+    # @!attribute tooltip_sheets
+    #   <p>An array of tooltip sheet definitions for a dashboard.</p>
+    #   @return [Array<Types::TooltipSheetDefinition>]
     # @!attribute calculated_fields
     #   <p>An array of calculated field definitions for the dashboard.</p>
     #   @return [Array<Types::CalculatedField>]
     # @!attribute parameter_declarations
     #   <p>The parameter declarations for a dashboard. Parameters are named variables that can transfer a value for use by an action or an object.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html">Parameters in Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html">Parameters in Amazon Quick Sight</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Array<Types::ParameterDeclaration>]
     # @!attribute filter_groups
     #   <p>The filter definitions for a dashboard.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/adding-a-filter.html">Filtering Data in Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/adding-a-filter.html">Filtering Data in Amazon Quick Sight</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Array<Types::FilterGroup>]
     # @!attribute column_configurations
     #   <p>An array of dashboard-level column configurations. Column configurations
@@ -6969,7 +11956,9 @@ module Aws::QuickSight
     class DashboardVersionDefinition < Struct.new(
       nil,
       :data_set_identifier_declarations,
+      :topic_identifier_declarations,
       :sheets,
+      :tooltip_sheets,
       :calculated_fields,
       :parameter_declarations,
       :filter_groups,
@@ -7017,24 +12006,36 @@ module Aws::QuickSight
     # <p>A structure that contains the following elements:</p>
     #          <ul>
     #             <li>
-    #                <p>The <code>DashboardId</code> of the dashboard that has the visual that you want to embed.</p>
+    #                <p>The <code>DashboardId</code> of the dashboard that has the visual that you
+    #                     want to embed.</p>
     #             </li>
     #             <li>
-    #                <p>The <code>SheetId</code> of the sheet that has the visual that you want to embed.</p>
+    #                <p>The <code>SheetId</code> of the sheet that has the visual that you want to
+    #                     embed.</p>
     #             </li>
     #             <li>
     #                <p>The <code>VisualId</code> of the visual that you want to embed.</p>
     #             </li>
     #          </ul>
-    #          <p>The <code>DashboardId</code>, <code>SheetId</code>, and <code>VisualId</code> can be found in the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the visual's on-visual menu of the QuickSight console. You can also get the <code>DashboardId</code> with a <code>ListDashboards</code> API operation.</p>
+    #          <p>The <code>DashboardId</code>, <code>SheetId</code>, and <code>VisualId</code> can be
+    #             found in the <code>IDs for developers</code> section of the <code>Embed visual</code>
+    #             pane of the visual's on-visual menu of the Amazon Quick Sight console. You can also get
+    #             the <code>DashboardId</code> with a <code>ListDashboards</code> API operation.</p>
     # @!attribute dashboard_id
-    #   <p>The ID of the dashboard that has the visual that you want to embed. The <code>DashboardId</code> can be found in the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the visual's on-visual menu of the QuickSight console. You can also get the <code>DashboardId</code> with a <code>ListDashboards</code> API operation.</p>
+    #   <p>The ID of the dashboard that has the visual that you want to embed. The
+    #                   <code>DashboardId</code> can be found in the <code>IDs for developers</code> section
+    #               of the <code>Embed visual</code> pane of the visual's on-visual menu of the Quick console. You can also get the <code>DashboardId</code> with a
+    #                   <code>ListDashboards</code> API operation.</p>
     #   @return [String]
     # @!attribute sheet_id
-    #   <p>The ID of the sheet that the has visual that you want to embed. The <code>SheetId</code> can be found in the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the visual's on-visual menu of the QuickSight console.</p>
+    #   <p>The ID of the sheet that the has visual that you want to embed. The
+    #                   <code>SheetId</code> can be found in the <code>IDs for developers</code> section of
+    #               the <code>Embed visual</code> pane of the visual's on-visual menu of the Quick console.</p>
     #   @return [String]
     # @!attribute visual_id
-    #   <p>The ID of the visual that you want to embed. The <code>VisualID</code> can be found in the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the visual's on-visual menu of the QuickSight console.</p>
+    #   <p>The ID of the visual that you want to embed. The <code>VisualID</code> can be found in
+    #               the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the
+    #               visual's on-visual menu of the Amazon Quick Sight console.</p>
     #   @return [String]
     class DashboardVisualId < Struct.new(
       nil,
@@ -7173,6 +12174,46 @@ module Aws::QuickSight
       :colors,
       :min_max_gradient,
       :empty_fill_color,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The data field series item configuration of a  <code>BarChartVisual</code>.</p>
+    # @!attribute field_id
+    #   <p>Field ID of the field that you are setting the series configuration for.</p>
+    #   @return [String]
+    # @!attribute field_value
+    #   <p>Field value of the field that you are setting the series configuration for.</p>
+    #   @return [String]
+    # @!attribute settings
+    #   <p>Options that determine the presentation of bar series associated to the field.</p>
+    #   @return [Types::BarChartSeriesSettings]
+    class DataFieldBarSeriesItem < Struct.new(
+      nil,
+      :field_id,
+      :field_value,
+      :settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The data field series item configuration of a <code>ComboChartVisual</code>.</p>
+    # @!attribute field_id
+    #   <p>Field ID of the field that you are setting the series configuration for.</p>
+    #   @return [String]
+    # @!attribute field_value
+    #   <p>Field value of the field that you are setting the series configuration for.</p>
+    #   @return [String]
+    # @!attribute settings
+    #   <p>Options that determine the presentation of series associated to the field.</p>
+    #   @return [Types::ComboChartSeriesSettings]
+    class DataFieldComboSeriesItem < Struct.new(
+      nil,
+      :field_id,
+      :field_value,
+      :settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7421,6 +12462,88 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines the type of aggregation function to apply to data during data preparation, supporting simple
+    #           and list aggregations.</p>
+    # @!attribute simple_aggregation
+    #   <p>A simple aggregation function such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>,
+    #              <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>VARIANCE</code>, or <code>STANDARD_DEVIATION</code>.</p>
+    #   @return [Types::DataPrepSimpleAggregationFunction]
+    # @!attribute list_aggregation
+    #   <p>A list aggregation function that concatenates values from multiple rows into a single delimited string.</p>
+    #   @return [Types::DataPrepListAggregationFunction]
+    class DataPrepAggregationFunction < Struct.new(
+      nil,
+      :simple_aggregation,
+      :list_aggregation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for data preparation operations, defining the complete pipeline from source tables
+    #            through transformations to destination tables.</p>
+    # @!attribute source_table_map
+    #   <p>A map of source tables that provide information about underlying sources.</p>
+    #   @return [Hash<String, Types::SourceTable>]
+    # @!attribute transform_step_map
+    #   <p>A map of transformation steps that process the data.</p>
+    #   @return [Hash<String, Types::TransformStep>]
+    # @!attribute destination_table_map
+    #   <p>A map of destination tables that receive the final prepared data.</p>
+    #   @return [Hash<String, Types::DestinationTable>]
+    class DataPrepConfiguration < Struct.new(
+      nil,
+      :source_table_map,
+      :transform_step_map,
+      :destination_table_map,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An aggregation function that concatenates values from multiple rows into a single string with a specified
+    #            separator.</p>
+    # @!attribute input_column_name
+    #   <p>The name of the column containing values to be concatenated.</p>
+    #   @return [String]
+    # @!attribute separator
+    #   <p>The string used to separate values in the concatenated result.</p>
+    #   @return [String]
+    # @!attribute distinct
+    #   <p>Whether to include only distinct values in the concatenated result, removing duplicates.</p>
+    #   @return [Boolean]
+    class DataPrepListAggregationFunction < Struct.new(
+      nil,
+      :input_column_name,
+      :separator,
+      :distinct,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:distinct] = false unless options.key?(:distinct)
+        super
+      end
+    end
+
+    # <p>A simple aggregation function that performs standard statistical operations on a column.</p>
+    # @!attribute input_column_name
+    #   <p>The name of the column on which to perform the aggregation function.</p>
+    #   @return [String]
+    # @!attribute function_type
+    #   <p>The type of aggregation function to perform, such as <code>COUNT</code>, <code>SUM</code>, <code>AVERAGE</code>,
+    #              <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>VARIANCE</code>, or <code>STANDARD_DEVIATION</code>.</p>
+    #   @return [String]
+    class DataPrepSimpleAggregationFunction < Struct.new(
+      nil,
+      :input_column_name,
+      :function_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Adds Q&A capabilities to a dashboard. If no topic is linked, Dashboard Q&A uses the data values that are rendered on the dashboard. End users can use Dashboard Q&A to ask for different slices of the data that they see on the dashboard. If a topic is linked, Topic Q&A is enabled.</p>
     # @!attribute availability_status
     #   <p>The status of the Data Q&A option on the dashboard.</p>
@@ -7433,9 +12556,9 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The generative Q&A settings of an embedded QuickSight console.</p>
+    # <p>The generative Q&A settings of an embedded Quick Sight console.</p>
     # @!attribute enabled
-    #   <p>The generative Q&A settings of an embedded QuickSight console.</p>
+    #   <p>The generative Q&A settings of an embedded Quick Sight console.</p>
     #   @return [Boolean]
     class DataQnAConfigurations < Struct.new(
       nil,
@@ -7485,7 +12608,7 @@ module Aws::QuickSight
     #               imported into SPICE.</p>
     #   @return [Integer]
     # @!attribute column_groups
-    #   <p>Groupings of columns that work together in certain Amazon QuickSight features.
+    #   <p>Groupings of columns that work together in certain Quick Sight features.
     #               Currently, only geospatial hierarchy is supported.</p>
     #   @return [Array<Types::ColumnGroup>]
     # @!attribute field_folders
@@ -7514,6 +12637,12 @@ module Aws::QuickSight
     # @!attribute use_as
     #   <p>The usage of the dataset.</p>
     #   @return [String]
+    # @!attribute data_prep_configuration
+    #   <p>The data preparation configuration associated with this dataset.</p>
+    #   @return [Types::DataPrepConfiguration]
+    # @!attribute semantic_model_configuration
+    #   <p>The semantic model configuration associated with this dataset.</p>
+    #   @return [Types::SemanticModelConfiguration]
     class DataSet < Struct.new(
       nil,
       :arn,
@@ -7535,6 +12664,8 @@ module Aws::QuickSight
       :dataset_parameters,
       :performance_configuration,
       :use_as,
+      :data_prep_configuration,
+      :semantic_model_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7543,6 +12674,22 @@ module Aws::QuickSight
         options[:consumed_spice_capacity_in_bytes] = 0 unless options.key?(:consumed_spice_capacity_in_bytes)
         super
       end
+    end
+
+    # <p>Maps a source column identifier to a target column identifier during transform operations.</p>
+    # @!attribute source_column_id
+    #   <p>Source column ID.</p>
+    #   @return [String]
+    # @!attribute target_column_id
+    #   <p>Target column ID.</p>
+    #   @return [String]
+    class DataSetColumnIdMapping < Struct.new(
+      nil,
+      :source_column_id,
+      :target_column_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dataset configuration.</p>
@@ -7565,6 +12712,86 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A filter condition that compares date values using operators like <code>BEFORE</code>, <code>AFTER</code>, or
+    #            their inclusive variants.</p>
+    # @!attribute operator
+    #   <p>The comparison operator to use, such as <code>BEFORE</code>, <code>BEFORE_OR_EQUALS_TO</code>, <code>AFTER</code>,
+    #              or <code>AFTER_OR_EQUALS_TO</code>.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The date value to compare against.</p>
+    #   @return [Types::DataSetDateFilterValue]
+    class DataSetDateComparisonFilterCondition < Struct.new(
+      nil,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter condition for date columns, supporting both comparison and range-based filtering.</p>
+    # @!attribute column_name
+    #   <p>The name of the date column to filter.</p>
+    #   @return [String]
+    # @!attribute comparison_filter_condition
+    #   <p>A comparison-based filter condition for the date column.</p>
+    #   @return [Types::DataSetDateComparisonFilterCondition]
+    # @!attribute range_filter_condition
+    #   <p>A range-based filter condition for the date column, filtering values between minimum and maximum dates.</p>
+    #   @return [Types::DataSetDateRangeFilterCondition]
+    class DataSetDateFilterCondition < Struct.new(
+      nil,
+      :column_name,
+      :comparison_filter_condition,
+      :range_filter_condition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a date value used in filter conditions.</p>
+    # @!attribute static_value
+    #   <p>A static date value used for filtering.</p>
+    #   @return [Time]
+    class DataSetDateFilterValue < Struct.new(
+      nil,
+      :static_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter condition that filters date values within a specified range.</p>
+    # @!attribute range_minimum
+    #   <p>The minimum date value for the range filter.</p>
+    #   @return [Types::DataSetDateFilterValue]
+    # @!attribute range_maximum
+    #   <p>The maximum date value for the range filter.</p>
+    #   @return [Types::DataSetDateFilterValue]
+    # @!attribute include_minimum
+    #   <p>Whether to include the minimum value in the filter range.</p>
+    #   @return [Boolean]
+    # @!attribute include_maximum
+    #   <p>Whether to include the maximum value in the filter range.</p>
+    #   @return [Boolean]
+    class DataSetDateRangeFilterCondition < Struct.new(
+      nil,
+      :range_minimum,
+      :range_maximum,
+      :include_minimum,
+      :include_maximum,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:include_minimum] = nil unless options.key?(:include_minimum)
+        options[:include_maximum] = nil unless options.key?(:include_maximum)
+        super
+      end
+    end
+
     # <p>A data set.</p>
     # @!attribute identifier
     #   <p>The identifier of the data set, typically the data set's name.</p>
@@ -7579,6 +12806,91 @@ module Aws::QuickSight
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter condition that compares numeric values using operators like <code>EQUALS</code>, <code>GREATER_THAN</code>,
+    #            or <code>LESS_THAN</code>.</p>
+    # @!attribute operator
+    #   <p>The comparison operator to use, such as <code>EQUALS</code>, <code>GREATER_THAN</code>, <code>LESS_THAN</code>,
+    #              or their variants.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The numeric value to compare against.</p>
+    #   @return [Types::DataSetNumericFilterValue]
+    class DataSetNumericComparisonFilterCondition < Struct.new(
+      nil,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter condition for numeric columns, supporting both comparison and range-based filtering.</p>
+    # @!attribute column_name
+    #   <p>The name of the numeric column to filter.</p>
+    #   @return [String]
+    # @!attribute comparison_filter_condition
+    #   <p>A comparison-based filter condition for the numeric column.</p>
+    #   @return [Types::DataSetNumericComparisonFilterCondition]
+    # @!attribute range_filter_condition
+    #   <p>A range-based filter condition for the numeric column, filtering values between minimum and maximum numbers.</p>
+    #   @return [Types::DataSetNumericRangeFilterCondition]
+    class DataSetNumericFilterCondition < Struct.new(
+      nil,
+      :column_name,
+      :comparison_filter_condition,
+      :range_filter_condition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a numeric value used in filter conditions.</p>
+    # @!attribute static_value
+    #   <p>A static numeric value used for filtering.</p>
+    #   @return [Float]
+    class DataSetNumericFilterValue < Struct.new(
+      nil,
+      :static_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:static_value] = nil unless options.key?(:static_value)
+        super
+      end
+    end
+
+    # <p>A filter condition that filters numeric values within a specified range.</p>
+    # @!attribute range_minimum
+    #   <p>The minimum numeric value for the range filter.</p>
+    #   @return [Types::DataSetNumericFilterValue]
+    # @!attribute range_maximum
+    #   <p>The maximum numeric value for the range filter.</p>
+    #   @return [Types::DataSetNumericFilterValue]
+    # @!attribute include_minimum
+    #   <p>Whether to include the minimum value in the filter range.</p>
+    #   @return [Boolean]
+    # @!attribute include_maximum
+    #   <p>Whether to include the maximum value in the filter range.</p>
+    #   @return [Boolean]
+    class DataSetNumericRangeFilterCondition < Struct.new(
+      nil,
+      :range_minimum,
+      :range_maximum,
+      :include_minimum,
+      :include_maximum,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:include_minimum] = nil unless options.key?(:include_minimum)
+        options[:include_maximum] = nil unless options.key?(:include_maximum)
+        super
+      end
     end
 
     # <p>Dataset reference.</p>
@@ -7677,6 +12989,113 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A description structure for dataset-level semantic metadata.</p>
+    # @!attribute text
+    #   <p>The descriptive text for the dataset.</p>
+    #   @return [String]
+    class DataSetSemanticDescription < Struct.new(
+      nil,
+      :text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Semantic metadata for a dataset, including a description and custom instructions.</p>
+    # @!attribute description
+    #   <p>A description of the dataset.</p>
+    #   @return [Types::DataSetSemanticDescription]
+    # @!attribute custom_instructions
+    #   <p>A list of custom instructions that guide how the dataset should be consumed.</p>
+    #   @return [Array<Types::CustomInstruction>]
+    class DataSetSemanticMetadata < Struct.new(
+      nil,
+      :description,
+      :custom_instructions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter condition that compares string values using operators like <code>EQUALS</code>, <code>CONTAINS</code>,
+    #            or <code>STARTS_WITH</code>.</p>
+    # @!attribute operator
+    #   <p>The comparison operator to use, such as <code>EQUALS</code>, <code>CONTAINS</code>, <code>STARTS_WITH</code>,
+    #              <code>ENDS_WITH</code>, or their negations.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The string value to compare against.</p>
+    #   @return [Types::DataSetStringFilterValue]
+    class DataSetStringComparisonFilterCondition < Struct.new(
+      nil,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter condition for string columns, supporting both comparison and list-based filtering.</p>
+    # @!attribute column_name
+    #   <p>The name of the string column to filter.</p>
+    #   @return [String]
+    # @!attribute comparison_filter_condition
+    #   <p>A comparison-based filter condition for the string column.</p>
+    #   @return [Types::DataSetStringComparisonFilterCondition]
+    # @!attribute list_filter_condition
+    #   <p>A list-based filter condition that includes or excludes values from a specified list.</p>
+    #   @return [Types::DataSetStringListFilterCondition]
+    class DataSetStringFilterCondition < Struct.new(
+      nil,
+      :column_name,
+      :comparison_filter_condition,
+      :list_filter_condition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a string value used in filter conditions.</p>
+    # @!attribute static_value
+    #   <p>A static string value used for filtering.</p>
+    #   @return [String]
+    class DataSetStringFilterValue < Struct.new(
+      nil,
+      :static_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter condition that includes or excludes string values from a specified list.</p>
+    # @!attribute operator
+    #   <p>The list operator to use, either <code>INCLUDE</code> to match values in the list or <code>EXCLUDE</code> to
+    #              filter out values in the list.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The list of string values to include or exclude in the filter.</p>
+    #   @return [Types::DataSetStringListFilterValue]
+    class DataSetStringListFilterCondition < Struct.new(
+      nil,
+      :operator,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a list of string values used in filter conditions.</p>
+    # @!attribute static_values
+    #   <p>A list of static string values used for filtering.</p>
+    #   @return [Array<String>]
+    class DataSetStringListFilterValue < Struct.new(
+      nil,
+      :static_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Dataset summary.</p>
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the dataset.</p>
@@ -7697,8 +13116,11 @@ module Aws::QuickSight
     #   <p>A value that indicates whether you want to import the data into SPICE.</p>
     #   @return [String]
     # @!attribute row_level_permission_data_set
-    #   <p>The row-level security configuration for the dataset.</p>
+    #   <p>The row-level security configuration for the dataset in the legacy data preparation experience.</p>
     #   @return [Types::RowLevelPermissionDataSet]
+    # @!attribute row_level_permission_data_set_map
+    #   <p>The row-level security configuration for the dataset in the new data preparation experience.</p>
+    #   @return [Hash<String, Types::RowLevelPermissionDataSet>]
     # @!attribute row_level_permission_tag_configuration_applied
     #   <p>Whether or not the row level permission tags are applied.</p>
     #   @return [Boolean]
@@ -7717,6 +13139,7 @@ module Aws::QuickSight
       :last_updated_time,
       :import_mode,
       :row_level_permission_data_set,
+      :row_level_permission_data_set_map,
       :row_level_permission_tag_configuration_applied,
       :column_level_permission_rules_applied,
       :use_as,
@@ -7736,7 +13159,7 @@ module Aws::QuickSight
     #   <p>An option that controls whether a child dataset of a direct query can use this dataset as a source.</p>
     #   @return [Boolean]
     # @!attribute disable_use_as_imported_source
-    #   <p>An option that controls whether a child dataset that's stored in QuickSight can use this dataset as a source.</p>
+    #   <p>An option that controls whether a child dataset that's stored in Quick Sight can use this dataset as a source.</p>
     #   @return [Boolean]
     class DataSetUsageConfiguration < Struct.new(
       nil,
@@ -7778,7 +13201,7 @@ module Aws::QuickSight
     #   <p>The last time that this data source was updated.</p>
     #   @return [Time]
     # @!attribute data_source_parameters
-    #   <p>The parameters that Amazon QuickSight uses to connect to your underlying source. This
+    #   <p>The parameters that Quick Sight uses to connect to your underlying source. This
     #               is a variant type structure. For this structure to be valid, only one of the attributes
     #               can be non-null.</p>
     #   @return [Types::DataSourceParameters]
@@ -7795,10 +13218,10 @@ module Aws::QuickSight
     #   @return [Array<Types::DataSourceParameters>]
     # @!attribute vpc_connection_properties
     #   <p>The VPC connection information. You need to use this parameter only when you want
-    #               QuickSight to use a VPC connection when connecting to your underlying source.</p>
+    #               Quick Sight to use a VPC connection when connecting to your underlying source.</p>
     #   @return [Types::VpcConnectionProperties]
     # @!attribute ssl_properties
-    #   <p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
+    #   <p>Secure Socket Layer (SSL) properties that apply when Quick Sight connects to your
     #               underlying source.</p>
     #   @return [Types::SslProperties]
     # @!attribute error_info
@@ -7807,6 +13230,26 @@ module Aws::QuickSight
     # @!attribute secret_arn
     #   <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
     #   @return [String]
+    # @!attribute credential_status
+    #   <p>The credential verification status of the data source. Valid values include:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>CONNECTED</code> – Credential validation succeeded.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AUTH_FAILED</code> – Credential validation failed.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NOT_VERIFIED</code> – Credential validation has not been performed.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute last_credential_verified_at
+    #   <p>The time that the credentials were last verified.</p>
+    #   @return [Time]
     class DataSource < Struct.new(
       nil,
       :arn,
@@ -7822,6 +13265,8 @@ module Aws::QuickSight
       :ssl_properties,
       :error_info,
       :secret_arn,
+      :credential_status,
+      :last_credential_verified_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7845,11 +13290,27 @@ module Aws::QuickSight
     # @!attribute secret_arn
     #   <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
     #   @return [String]
+    # @!attribute key_pair_credentials
+    #   <p>The credentials for connecting using key-pair.</p>
+    #   @return [Types::KeyPairCredentials]
+    # @!attribute web_proxy_credentials
+    #   <p>The credentials for connecting through a web proxy server.</p>
+    #   @return [Types::WebProxyCredentials]
+    # @!attribute o_auth_client_credentials
+    #   <p>The OAuth client credentials for connecting to a data source using OAuth 2.0 client
+    #               credentials (2LO) authentication. For more information, see
+    #               <code>
+    #                  <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_OAuthClientCredentials.html">OAuthClientCredentials</a>
+    #               </code>.</p>
+    #   @return [Types::OAuthClientCredentials]
     class DataSourceCredentials < Struct.new(
       nil,
       :credential_pair,
       :copy_source_arn,
       :secret_arn,
+      :key_pair_credentials,
+      :web_proxy_credentials,
+      :o_auth_client_credentials,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7871,7 +13332,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The parameters that Amazon QuickSight uses to connect to your underlying data source.
+    # <p>The parameters that Quick Sight uses to connect to your underlying data source.
     #             This is a variant type structure. For this structure to be valid, only one of the
     #             attributes can be non-null.</p>
     # @!attribute amazon_elasticsearch_parameters
@@ -7916,6 +13377,12 @@ module Aws::QuickSight
     # @!attribute s3_parameters
     #   <p>The parameters for S3.</p>
     #   @return [Types::S3Parameters]
+    # @!attribute s3_tables_parameters
+    #   <p>The parameters for S3 Tables.</p>
+    #   @return [Types::S3TablesParameters]
+    # @!attribute s3_knowledge_base_parameters
+    #   <p>The parameters for S3 Knowledge Base.</p>
+    #   @return [Types::S3KnowledgeBaseParameters]
     # @!attribute service_now_parameters
     #   <p>The parameters for ServiceNow.</p>
     #   @return [Types::ServiceNowParameters]
@@ -7958,6 +13425,27 @@ module Aws::QuickSight
     # @!attribute custom_connection_parameters
     #   <p>The parameters for custom connectors.</p>
     #   @return [Types::CustomConnectionParameters]
+    # @!attribute web_crawler_parameters
+    #   <p>The parameters for Web Crawler.</p>
+    #   @return [Types::WebCrawlerParameters]
+    # @!attribute confluence_parameters
+    #   <p>The parameters for Confluence.</p>
+    #   @return [Types::ConfluenceParameters]
+    # @!attribute q_business_parameters
+    #   <p>The parameters for Amazon Q Business.</p>
+    #   @return [Types::QBusinessParameters]
+    # @!attribute share_point_parameters
+    #   <p>The parameters for a SharePoint data source.</p>
+    #   @return [Types::SharePointParameters]
+    # @!attribute google_drive_parameters
+    #   <p>The parameters for a Google Drive data source.</p>
+    #   @return [Types::GoogleDriveParameters]
+    # @!attribute one_drive_parameters
+    #   <p>The parameters for an OneDrive data source.</p>
+    #   @return [Types::OneDriveParameters]
+    # @!attribute fmkb_parameters
+    #   <p>The parameters for a fully managed knowledge base data source.</p>
+    #   @return [Types::FMKBParameters]
     class DataSourceParameters < Struct.new(
       :amazon_elasticsearch_parameters,
       :athena_parameters,
@@ -7973,6 +13461,8 @@ module Aws::QuickSight
       :rds_parameters,
       :redshift_parameters,
       :s3_parameters,
+      :s3_tables_parameters,
+      :s3_knowledge_base_parameters,
       :service_now_parameters,
       :snowflake_parameters,
       :spark_parameters,
@@ -7987,6 +13477,13 @@ module Aws::QuickSight
       :big_query_parameters,
       :impala_parameters,
       :custom_connection_parameters,
+      :web_crawler_parameters,
+      :confluence_parameters,
+      :q_business_parameters,
+      :share_point_parameters,
+      :google_drive_parameters,
+      :one_drive_parameters,
+      :fmkb_parameters,
       :unknown,
       keyword_init: true
     )
@@ -8006,6 +13503,8 @@ module Aws::QuickSight
       class RdsParameters < DataSourceParameters; end
       class RedshiftParameters < DataSourceParameters; end
       class S3Parameters < DataSourceParameters; end
+      class S3TablesParameters < DataSourceParameters; end
+      class S3KnowledgeBaseParameters < DataSourceParameters; end
       class ServiceNowParameters < DataSourceParameters; end
       class SnowflakeParameters < DataSourceParameters; end
       class SparkParameters < DataSourceParameters; end
@@ -8020,6 +13519,13 @@ module Aws::QuickSight
       class BigQueryParameters < DataSourceParameters; end
       class ImpalaParameters < DataSourceParameters; end
       class CustomConnectionParameters < DataSourceParameters; end
+      class WebCrawlerParameters < DataSourceParameters; end
+      class ConfluenceParameters < DataSourceParameters; end
+      class QBusinessParameters < DataSourceParameters; end
+      class SharePointParameters < DataSourceParameters; end
+      class GoogleDriveParameters < DataSourceParameters; end
+      class OneDriveParameters < DataSourceParameters; end
+      class FMKBParameters < DataSourceParameters; end
       class Unknown < DataSourceParameters; end
     end
 
@@ -8099,9 +13605,9 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The data story settings of an embedded QuickSight console.</p>
+    # <p>The data story settings of an embedded Quick Sight console.</p>
     # @!attribute enabled
-    #   <p>The data story settings of an embedded QuickSight console.</p>
+    #   <p>The data story settings of an embedded Quick Sight console.</p>
     #   @return [Boolean]
     class DataStoriesConfigurations < Struct.new(
       nil,
@@ -8138,11 +13644,19 @@ module Aws::QuickSight
     # @!attribute sql_endpoint_path
     #   <p>The HTTP path of the Databricks data source.</p>
     #   @return [String]
+    # @!attribute authentication_type
+    #   <p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>
+    #   @return [String]
+    # @!attribute o_auth_parameters
+    #   <p>An object that contains information needed to create a data source connection between an Quick Sight account and Databricks.</p>
+    #   @return [Types::OAuthParameters]
     class DatabricksParameters < Struct.new(
       nil,
       :host,
       :port,
       :sql_endpoint_path,
+      :authentication_type,
+      :o_auth_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8518,6 +14032,146 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Decal settings for accessibility features that define visual patterns and styling for data elements.</p>
+    # @!attribute element_value
+    #   <p>Field value of the field that you are setting the decal pattern to. Applicable only for field level settings.</p>
+    #   @return [String]
+    # @!attribute decal_visibility
+    #   <p>Visibility setting for the decal pattern.</p>
+    #   @return [String]
+    # @!attribute decal_color
+    #   <p>Color configuration for the decal pattern.</p>
+    #   @return [String]
+    # @!attribute decal_pattern_type
+    #   <p>Type of pattern used for the decal, such as solid, diagonal, or circular patterns in various sizes.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>SOLID</code>: Solid fill pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAGONAL_SMALL</code>: Small diagonal stripes pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAGONAL_MEDIUM</code>: Medium diagonal stripes pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAGONAL_LARGE</code>: Large diagonal stripes pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAGONAL_OPPOSITE_SMALL</code>: Small cross-diagonal stripes pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAGONAL_OPPOSITE_MEDIUM</code>: Medium cross-diagonal stripes pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAGONAL_OPPOSITE_LARGE</code>: Large cross-diagonal stripes pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CIRCLE_SMALL</code>: Small circle pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CIRCLE_MEDIUM</code>: Medium circle pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CIRCLE_LARGE</code>: Large circle pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAMOND_SMALL</code>: Small diamonds pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAMOND_MEDIUM</code>: Medium diamonds pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAMOND_LARGE</code>: Large diamonds pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAMOND_GRID_SMALL</code>: Small diamond grid pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAMOND_GRID_MEDIUM</code>: Medium diamond grid pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIAMOND_GRID_LARGE</code>: Large diamond grid pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CHECKERBOARD_SMALL</code>: Small checkerboard pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CHECKERBOARD_MEDIUM</code>: Medium checkerboard pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CHECKERBOARD_LARGE</code>: Large checkerboard pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>TRIANGLE_SMALL</code>: Small triangles pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>TRIANGLE_MEDIUM</code>: Medium triangles pattern.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>TRIANGLE_LARGE</code>: Large triangles pattern.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute decal_style_type
+    #   <p>Style type for the decal, which can be either manual or automatic. This field is only applicable for line series.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>Manual</code>: Apply manual line and marker configuration for line series.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>Auto</code>: Apply automatic line and marker configuration for line series.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class DecalSettings < Struct.new(
+      nil,
+      :element_value,
+      :decal_visibility,
+      :decal_color,
+      :decal_pattern_type,
+      :decal_style_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Decal settings configuration for a column</p>
+    # @!attribute custom_decal_settings
+    #   <p>A list of up to 50 decal settings.</p>
+    #   @return [Array<Types::DecalSettings>]
+    class DecalSettingsConfiguration < Struct.new(
+      nil,
+      :custom_decal_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A decimal parameter for a dataset.</p>
     # @!attribute id
     #   <p>An identifier for the decimal parameter created in the dataset.</p>
@@ -8694,13 +14348,22 @@ module Aws::QuickSight
     # @!attribute control_options
     #   <p>The control option for the <code>DefaultFilterControlConfiguration</code>.</p>
     #   @return [Types::DefaultFilterControlOptions]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the default filter control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class DefaultFilterControlConfiguration < Struct.new(
       nil,
       :title,
       :control_options,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>The option that corresponds to the control type of the filter.</p>
@@ -8725,6 +14388,12 @@ module Aws::QuickSight
     # @!attribute default_relative_date_time_options
     #   <p>The default options that correspond to the <code>RelativeDateTime</code> filter control type.</p>
     #   @return [Types::DefaultRelativeDateTimeControlOptions]
+    # @!attribute default_hierarchy_list
+    #   <p>The default options that correspond to the <code>HierarchyList</code> filter control type.</p>
+    #   @return [Types::DefaultHierarchyFilterListControlOptions]
+    # @!attribute default_hierarchy_dropdown
+    #   <p>The default options that correspond to the <code>HierarchyDropdown</code> filter control type.</p>
+    #   @return [Types::DefaultHierarchyFilterDropDownControlOptions]
     class DefaultFilterControlOptions < Struct.new(
       nil,
       :default_date_time_picker_options,
@@ -8734,6 +14403,8 @@ module Aws::QuickSight
       :default_text_area_options,
       :default_slider_options,
       :default_relative_date_time_options,
+      :default_hierarchy_list,
+      :default_hierarchy_dropdown,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8762,12 +14433,16 @@ module Aws::QuickSight
     # @!attribute commit_mode
     #   <p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>
     #   @return [String]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
     class DefaultFilterDropDownControlOptions < Struct.new(
       nil,
       :display_options,
       :type,
       :selectable_values,
       :commit_mode,
+      :control_sort_configurations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8793,11 +14468,15 @@ module Aws::QuickSight
     # @!attribute selectable_values
     #   <p>A list of selectable values that are used in a control.</p>
     #   @return [Types::FilterSelectableValues]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
     class DefaultFilterListControlOptions < Struct.new(
       nil,
       :display_options,
       :type,
       :selectable_values,
+      :control_sort_configurations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8840,6 +14519,82 @@ module Aws::QuickSight
     class DefaultGridLayoutConfiguration < Struct.new(
       nil,
       :canvas_size_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The default options that correspond to the <code>HierarchyDropdown</code> filter control type.</p>
+    # @!attribute display_options
+    #   <p>The display options of a control.</p>
+    #   @return [Types::HierarchyFilterDropDownControlDisplayOptions]
+    # @!attribute type
+    #   <p>The type of the <code>DefaultHierarchyFilterDropDownControlOptions</code>. Choose one of the following options:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute commit_mode
+    #   <p>The visibility configuration of the Apply button on a <code>HierarchyFilterDropDownControl</code>.</p>
+    #   @return [String]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
+    class DefaultHierarchyFilterDropDownControlOptions < Struct.new(
+      nil,
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The default options that correspond to the <code>HierarchyList</code> filter control type.</p>
+    # @!attribute display_options
+    #   <p>The display options of a control.</p>
+    #   @return [Types::HierarchyFilterListControlDisplayOptions]
+    # @!attribute type
+    #   <p>The type of the <code>DefaultHierarchyFilterListControlOptions</code>. Choose one of the following options:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute commit_mode
+    #   <p>The visibility configuration of the Apply button on a <code>HierarchyFilterListControl</code>.</p>
+    #   @return [String]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
+    class DefaultHierarchyFilterListControlOptions < Struct.new(
+      nil,
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9026,11 +14781,10 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to delete QuickSight customizations from in
-    #               this Amazon Web Services Region.</p>
+    #   <p>The ID for the Amazon Web Services account that you want to delete Quick Sight customizations from.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The QuickSight namespace that you're deleting the customizations from.</p>
+    #   <p>The Quick Sight namespace that you're deleting the customizations from.</p>
     #   @return [String]
     class DeleteAccountCustomizationRequest < Struct.new(
       nil,
@@ -9093,13 +14847,82 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID that contains the action connector to delete.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the action connector to delete.</p>
+    #   @return [String]
+    class DeleteActionConnectorRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :action_connector_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the deleted action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the deleted action connector.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status code of the request.</p>
+    #   @return [Integer]
+    class DeleteActionConnectorResponse < Struct.new(
+      nil,
+      :arn,
+      :action_connector_id,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent to delete.</p>
+    #   @return [String]
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the agent.</p>
+    #   @return [String]
+    class DeleteAgentRequest < Struct.new(
+      nil,
+      :agent_id,
+      :aws_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DeleteAgentResponse < Struct.new(
+      nil,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account where you want to delete an analysis.</p>
     #   @return [String]
     # @!attribute analysis_id
     #   <p>The ID of the analysis that you're deleting.</p>
     #   @return [String]
     # @!attribute recovery_window_in_days
-    #   <p>A value that specifies the number of days that QuickSight waits before it deletes the
+    #   <p>A value that specifies the number of days that Amazon Quick Sight waits before it deletes the
     #               analysis. You can't use this parameter with the <code>ForceDeleteWithoutRecovery</code>
     #               option in the same API call. The default value is 30.</p>
     #   @return [Integer]
@@ -9152,6 +14975,50 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the app.</p>
+    #   @return [String]
+    # @!attribute app_id
+    #   <p>The ID of the app that you want to delete.</p>
+    #   @return [String]
+    class DeleteAppRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :app_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DeleteAppResponse < Struct.new(
+      nil,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy_id
+    #   <p>The unique identifier of the approval policy to delete.</p>
+    #   @return [String]
+    class DeleteApprovalPolicyRequest < Struct.new(
+      nil,
+      :policy_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteApprovalPolicyResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account that owns the brand assignment.</p>
     #   @return [String]
     class DeleteBrandAssignmentRequest < Struct.new(
@@ -9177,7 +15044,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that owns the brand.</p>
     #   @return [String]
     # @!attribute brand_id
-    #   <p>The ID of the QuickSight brand.</p>
+    #   <p>The ID of the Quick brand.</p>
     #   @return [String]
     class DeleteBrandRequest < Struct.new(
       nil,
@@ -9326,7 +15193,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_set_id
-    #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID for the dataset that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DeleteDataSetRequest < Struct.new(
       nil,
@@ -9341,7 +15208,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the dataset.</p>
     #   @return [String]
     # @!attribute data_set_id
-    #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID for the dataset that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -9369,7 +15236,8 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account.</p>
     #   @return [String]
     class DeleteDataSourceRequest < Struct.new(
       nil,
@@ -9384,7 +15252,8 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the data source that you deleted.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -9409,10 +15278,10 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the QuickSight account that you want to disconnect from a Amazon Q Business application.</p>
+    #   <p>The ID of the Quick Sight account that you want to disconnect from a Amazon Q Business application.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The QuickSight namespace that you want to delete a linked Amazon Q Business application from. If this field is left blank, the Amazon Q Business application is deleted from the default namespace. Currently, the default namespace is the only valid value for this parameter.</p>
+    #   <p>The Quick Sight namespace that you want to delete a linked Amazon Q Business application from. If this field is left blank, the Amazon Q Business application is deleted from the default namespace. Currently, the default namespace is the only valid value for this parameter.</p>
     #   @return [String]
     class DeleteDefaultQBusinessApplicationRequest < Struct.new(
       nil,
@@ -9430,6 +15299,75 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     class DeleteDefaultQBusinessApplicationResponse < Struct.new(
+      nil,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the DLP setting that you want to delete.</p>
+    #   @return [String]
+    # @!attribute dlp_setting_id
+    #   <p>The ID of the DLP setting that you want to delete.</p>
+    #   @return [String]
+    class DeleteDlpSettingRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :dlp_setting_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the deleted DLP setting.</p>
+    #   @return [String]
+    # @!attribute dlp_setting_id
+    #   <p>The ID of the deleted DLP setting.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DeleteDlpSettingResponse < Struct.new(
+      nil,
+      :arn,
+      :dlp_setting_id,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the flow that you are deleting.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow to delete.</p>
+    #   @return [String]
+    class DeleteFlowRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :flow_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class DeleteFlowResponse < Struct.new(
       nil,
       :request_id,
       :status,
@@ -9537,7 +15475,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace of the group that you want to remove a user from.</p>
@@ -9578,7 +15516,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace of the group that you want to delete.</p>
@@ -9693,7 +15631,76 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to delete the QuickSight namespace from.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    class DeleteKnowledgeBaseRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :knowledge_base_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_arn
+    #   <p>The ARN of the deleted knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The ID of the deleted knowledge base.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class DeleteKnowledgeBaseResponse < Struct.new(
+      nil,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = nil unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute profile_id
+    #   <p>The unique identifier for the limits profile to delete.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The ID of the Amazon Web Services account that contains the limits profile.</p>
+    #   @return [String]
+    class DeleteLimitsProfileRequest < Struct.new(
+      nil,
+      :profile_id,
+      :account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the deleted limits profile.</p>
+    #   @return [String]
+    class DeleteLimitsProfileResponse < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID for the Amazon Web Services account that you want to delete the Quick Sight namespace from.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that you want to delete.</p>
@@ -9715,6 +15722,49 @@ module Aws::QuickSight
     #   @return [Integer]
     class DeleteNamespaceResponse < Struct.new(
       nil,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_application_id
+    #   <p>The ID of the OAuthClientApplication that you want to delete.</p>
+    #   @return [String]
+    class DeleteOAuthClientApplicationRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :o_auth_client_application_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the OAuthClientApplication that you deleted.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_application_id
+    #   <p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class DeleteOAuthClientApplicationResponse < Struct.new(
+      nil,
+      :arn,
+      :o_auth_client_application_id,
       :request_id,
       :status,
       keyword_init: true
@@ -9779,7 +15829,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-    #               Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #               Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that includes the role.</p>
@@ -9821,7 +15871,7 @@ module Aws::QuickSight
     #   <p>The role that you want to remove permissions from.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that contains the role.</p>
@@ -9855,6 +15905,40 @@ module Aws::QuickSight
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the space.</p>
+    #   @return [String]
+    # @!attribute space_id
+    #   <p>The ID of the space that you want to delete.</p>
+    #   @return [String]
+    class DeleteSpaceRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :space_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DeleteSpaceResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -10156,13 +16240,57 @@ module Aws::QuickSight
       end
     end
 
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the topic that you want to
+    #            delete.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    class DeleteTopicV2Request < Struct.new(
+      nil,
+      :aws_account_id,
+      :topic_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class DeleteTopicV2Response < Struct.new(
+      nil,
+      :arn,
+      :topic_id,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
     # <p></p>
     # @!attribute principal_id
     #   <p>The principal ID of the user.</p>
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
@@ -10241,7 +16369,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
@@ -10367,17 +16495,17 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to describe QuickSight customizations
+    #   <p>The ID for the Amazon Web Services account that you want to describe Quick Sight customizations
     #               for.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The QuickSight namespace that you want to describe QuickSight customizations
+    #   <p>The Quick Sight namespace that you want to describe Quick Sight customizations
     #               for.</p>
     #   @return [String]
     # @!attribute resolved
     #   <p>The <code>Resolved</code> flag works with the other parameters to determine which view
-    #               of QuickSight customizations is returned. You can add this flag to your command to use
-    #               the same view that QuickSight uses to identify which customizations to apply to the
+    #               of Quick Sight customizations is returned. You can add this flag to your command to use
+    #               the same view that Quick Sight uses to identify which customizations to apply to the
     #               console. Omit this flag, or set it to <code>no-resolved</code>, to reveal customizations
     #               that are configured at different levels. </p>
     #   @return [Boolean]
@@ -10398,10 +16526,10 @@ module Aws::QuickSight
     #   <p>The ID for the Amazon Web Services account that you're describing.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The QuickSight namespace that you're describing. </p>
+    #   <p>The Quick Sight namespace that you're describing. </p>
     #   @return [String]
     # @!attribute account_customization
-    #   <p>The QuickSight customizations that exist in the current Amazon Web Services Region. </p>
+    #   <p>The Quick Sight customizations that exist. </p>
     #   @return [Types::AccountCustomization]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -10439,13 +16567,13 @@ module Aws::QuickSight
     end
 
     # @!attribute account_settings
-    #   <p>The QuickSight settings for this Amazon Web Services account. This information
-    #               includes the edition of Amazon QuickSight that you subscribed to (Standard or
-    #               Enterprise) and the notification email for the QuickSight subscription. </p>
-    #            <p>In the QuickSight console, the QuickSight subscription is sometimes referred to
-    #               as a QuickSight "account" even though it's technically not an account by
-    #               itself. Instead, it's a subscription to the QuickSight service for your
-    #                   Amazon Web Services account. The edition that you subscribe to applies to QuickSight in every Amazon Web Services Region where you use it.</p>
+    #   <p>The Amazon Quick Sight settings for this Amazon Web Services account. This information
+    #               includes the edition of Amazon Quick Sight that you subscribed to (Standard or
+    #               Enterprise) and the notification email for the Amazon Quick Sight subscription. </p>
+    #            <p>In the Quick Sight console, the Amazon Quick Sight subscription is sometimes referred to
+    #               as a Quick Sight "account" even though it's technically not an account by
+    #               itself. Instead, it's a subscription to the Amazon Quick Sight service for your
+    #                   Amazon Web Services account. The edition that you subscribe to applies to Quick in every Amazon Web Services Region where you use it.</p>
     #   @return [Types::AccountSettings]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -10469,7 +16597,7 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The Amazon Web Services account ID associated with your QuickSight account.</p>
+    #   <p>The Amazon Web Services account ID associated with your Quick Sight account.</p>
     #   @return [String]
     class DescribeAccountSubscriptionRequest < Struct.new(
       nil,
@@ -10483,21 +16611,21 @@ module Aws::QuickSight
     #   <p>A structure that contains the following elements:</p>
     #            <ul>
     #               <li>
-    #                  <p>Your QuickSight account name.</p>
+    #                  <p>Your Quick Sight account name.</p>
     #               </li>
     #               <li>
-    #                  <p>The edition of QuickSight that your account is using.</p>
+    #                  <p>The edition of Quick Sight that your account is using.</p>
     #               </li>
     #               <li>
-    #                  <p>The notification email address that is associated with the QuickSight
+    #                  <p>The notification email address that is associated with the Amazon Quick Sight
     #                       account.
     #               </p>
     #               </li>
     #               <li>
-    #                  <p>The authentication type of the QuickSight account.</p>
+    #                  <p>The authentication type of the Quick Sight account.</p>
     #               </li>
     #               <li>
-    #                  <p>The status of the QuickSight account's subscription.</p>
+    #                  <p>The status of the Quick Sight account's subscription.</p>
     #               </li>
     #            </ul>
     #   @return [Types::AccountInfo]
@@ -10520,6 +16648,160 @@ module Aws::QuickSight
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID that contains the action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the action connector whose permissions you want to describe.</p>
+    #   @return [String]
+    class DescribeActionConnectorPermissionsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :action_connector_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the action connector.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The list of permissions associated with the action connector, including the principals and their allowed actions.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status code of the request.</p>
+    #   @return [Integer]
+    class DescribeActionConnectorPermissionsResponse < Struct.new(
+      nil,
+      :arn,
+      :action_connector_id,
+      :permissions,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID that contains the action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the action connector to describe.</p>
+    #   @return [String]
+    class DescribeActionConnectorRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :action_connector_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute action_connector
+    #   <p>The detailed information about the action connector, including its configuration and current state.</p>
+    #   @return [Types::ActionConnector]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status code of the request.</p>
+    #   @return [Integer]
+    class DescribeActionConnectorResponse < Struct.new(
+      nil,
+      :action_connector,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the agent.</p>
+    #   @return [String]
+    class DescribeAgentPermissionsRequest < Struct.new(
+      nil,
+      :agent_id,
+      :aws_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the agent.</p>
+    #   @return [String]
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The resource permissions for the agent.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeAgentPermissionsResponse < Struct.new(
+      nil,
+      :arn,
+      :agent_id,
+      :permissions,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the agent.</p>
+    #   @return [String]
+    class DescribeAgentRequest < Struct.new(
+      nil,
+      :agent_id,
+      :aws_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute agent
+    #   <p>The full details of the agent, including its configuration, status, and associations.</p>
+    #   @return [Types::Agent]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeAgentResponse < Struct.new(
+      nil,
+      :agent,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -10673,7 +16955,7 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the analysis. You must be using the 
+    #   <p>The ID of the Amazon Web Services account that contains the analysis. You must be using the
     #               Amazon Web Services account that the analysis is in.</p>
     #   @return [String]
     # @!attribute analysis_id
@@ -10715,10 +16997,101 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the app.</p>
+    #   @return [String]
+    # @!attribute app_id
+    #   <p>The ID of the app.</p>
+    #   @return [String]
+    class DescribeAppPermissionsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :app_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute app_id
+    #   <p>The ID of the app.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the app.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The resource permissions for the app.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeAppPermissionsResponse < Struct.new(
+      nil,
+      :app_id,
+      :arn,
+      :permissions,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the app.</p>
+    #   @return [String]
+    # @!attribute app_id
+    #   <p>The ID of the app that you want to describe.</p>
+    #   @return [String]
+    class DescribeAppRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :app_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute app
+    #   <p>The information about the app.</p>
+    #   @return [Types::AppSummary]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeAppResponse < Struct.new(
+      nil,
+      :app,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy_id
+    #   <p>The unique identifier of the approval policy to describe.</p>
+    #   @return [String]
+    class DescribeApprovalPolicyRequest < Struct.new(
+      nil,
+      :policy_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy
+    #   <p>The approval policy.</p>
+    #   @return [Types::ApprovalPolicy]
+    class DescribeApprovalPolicyResponse < Struct.new(
+      nil,
+      :policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account the export job is executed in. </p>
     #   @return [String]
     # @!attribute asset_bundle_export_job_id
-    #   <p>The ID of the job that you want described. The job ID is set when you start a new job with a <code>StartAssetBundleExportJob</code> API call.</p>
+    #   <p>The ID of the job that you want described. The job ID is set when you start a new job
+    #            with a <code>StartAssetBundleExportJob</code> API call.</p>
     #   @return [String]
     class DescribeAssetBundleExportJobRequest < Struct.new(
       nil,
@@ -10731,17 +17104,24 @@ module Aws::QuickSight
 
     # @!attribute job_status
     #   <p>Indicates the status of a job through its queuing and execution.</p>
-    #            <p>Poll this <code>DescribeAssetBundleExportApi</code> until <code>JobStatus</code> is either <code>SUCCESSFUL</code> or <code>FAILED</code>.</p>
+    #            <p>Poll this <code>DescribeAssetBundleExportApi</code> until <code>JobStatus</code> is
+    #            either <code>SUCCESSFUL</code> or <code>FAILED</code>.</p>
     #   @return [String]
     # @!attribute download_url
     #   <p>The URL to download the exported asset bundle data from.</p>
-    #            <p>This URL is available only after the job has succeeded. This URL is valid for 5 minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed.</p>
-    #            <p>The downloaded asset bundle is a zip file named <code>assetbundle-{jobId}.qs</code>. The file has a <code>.qs</code> extension.</p>
-    #            <p>This URL can't be used in a <code>StartAssetBundleImportJob</code> API call and should only be used for download purposes.</p>
+    #            <p>This URL is available only after the job has succeeded. This URL is valid for 5 minutes
+    #            after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if
+    #            needed.</p>
+    #            <p>The downloaded asset bundle is a zip file named <code>assetbundle-{jobId}.qs</code>. The
+    #            file has a <code>.qs</code> extension.</p>
+    #            <p>This URL can't be used in a <code>StartAssetBundleImportJob</code> API call and
+    #            should only be used for download purposes.</p>
     #   @return [String]
     # @!attribute errors
-    #   <p>An array of error records that describes any failures that occurred during the export job processing.</p>
-    #            <p>Error records accumulate while the job runs. The complete set of error records is available after the job has completed and failed.</p>
+    #   <p>An array of error records that describes any failures that occurred during the export
+    #            job processing.</p>
+    #            <p>Error records accumulate while the job runs. The complete set of error records is
+    #            available after the job has completed and failed.</p>
     #   @return [Array<Types::AssetBundleExportJobError>]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) for the export job.</p>
@@ -10750,7 +17130,8 @@ module Aws::QuickSight
     #   <p>The time that the export job was created.</p>
     #   @return [Time]
     # @!attribute asset_bundle_export_job_id
-    #   <p>The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleExportJob</code> API call.</p>
+    #   <p>The ID of the job. The job ID is set when you start a new job with a
+    #               <code>StartAssetBundleExportJob</code> API call.</p>
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account that the export job was executed in. </p>
@@ -10762,7 +17143,10 @@ module Aws::QuickSight
     #   <p>The include dependencies flag.</p>
     #   @return [Boolean]
     # @!attribute export_format
-    #   <p>The format of the exported asset bundle. A <code>QUICKSIGHT_JSON</code> formatted file can be used to make a <code>StartAssetBundleImportJob</code> API call. A <code>CLOUDFORMATION_JSON</code> formatted file can be used in the CloudFormation console and with the CloudFormation APIs.</p>
+    #   <p>The format of the exported asset bundle. A <code>QUICKSIGHT_JSON</code> formatted file
+    #            can be used to make a <code>StartAssetBundleImportJob</code> API call. A
+    #               <code>CLOUDFORMATION_JSON</code> formatted file can be used in the CloudFormation
+    #            console and with the CloudFormation APIs.</p>
     #   @return [String]
     # @!attribute cloud_formation_override_property_configuration
     #   <p>The CloudFormation override property configuration for the export job.</p>
@@ -10783,8 +17167,10 @@ module Aws::QuickSight
     #   <p>The validation strategy that is used to export the analysis or dashboard.</p>
     #   @return [Types::AssetBundleExportJobValidationStrategy]
     # @!attribute warnings
-    #   <p>An array of warning records that describe the analysis or dashboard that is exported. This array includes UI errors that can be skipped during the validation process.</p>
-    #            <p>This property only appears if <code>StrictModeForAllResources</code> in <code>ValidationStrategy</code> is set to <code>FALSE</code>.</p>
+    #   <p>An array of warning records that describe the analysis or dashboard that is exported.
+    #            This array includes UI errors that can be skipped during the validation process.</p>
+    #            <p>This property only appears if <code>StrictModeForAllResources</code> in
+    #               <code>ValidationStrategy</code> is set to <code>FALSE</code>.</p>
     #   @return [Array<Types::AssetBundleExportJobWarning>]
     # @!attribute include_folder_memberships
     #   <p>The include folder memberships flag.</p>
@@ -10831,7 +17217,8 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account the import job was executed in. </p>
     #   @return [String]
     # @!attribute asset_bundle_import_job_id
-    #   <p>The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleImportJob</code> API call.</p>
+    #   <p>The ID of the job. The job ID is set when you start a new job with a
+    #               <code>StartAssetBundleImportJob</code> API call.</p>
     #   @return [String]
     class DescribeAssetBundleImportJobRequest < Struct.new(
       nil,
@@ -10844,7 +17231,8 @@ module Aws::QuickSight
 
     # @!attribute job_status
     #   <p>Indicates the status of a job through its queuing and execution.</p>
-    #            <p>Poll the <code>DescribeAssetBundleImport</code> API until <code>JobStatus</code> returns one of the following values:</p>
+    #            <p>Poll the <code>DescribeAssetBundleImport</code> API until <code>JobStatus</code> returns
+    #            one of the following values:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -10869,12 +17257,16 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     # @!attribute errors
-    #   <p>An array of error records that describes any failures that occurred during the export job processing.</p>
-    #            <p>Error records accumulate while the job is still running. The complete set of error records is available after the job has completed and failed.</p>
+    #   <p>An array of error records that describes any failures that occurred during the export
+    #            job processing.</p>
+    #            <p>Error records accumulate while the job is still running. The complete set of error
+    #            records is available after the job has completed and failed.</p>
     #   @return [Array<Types::AssetBundleImportJobError>]
     # @!attribute rollback_errors
-    #   <p>An array of error records that describes any failures that occurred while an import job was attempting a rollback.</p>
-    #            <p>Error records accumulate while the job is still running. The complete set of error records is available after the job has completed and failed.</p>
+    #   <p>An array of error records that describes any failures that occurred while an import job
+    #            was attempting a rollback.</p>
+    #            <p>Error records accumulate while the job is still running. The complete set of error
+    #            records is available after the job has completed and failed.</p>
     #   @return [Array<Types::AssetBundleImportJobError>]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) for the import job.</p>
@@ -10883,13 +17275,15 @@ module Aws::QuickSight
     #   <p>The time that the import job was created.</p>
     #   @return [Time]
     # @!attribute asset_bundle_import_job_id
-    #   <p>The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleImportJob</code> API call.</p>
+    #   <p>The ID of the job. The job ID is set when you start a new job with a
+    #               <code>StartAssetBundleImportJob</code> API call.</p>
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account the import job was executed in. </p>
     #   @return [String]
     # @!attribute asset_bundle_import_source
-    #   <p>The source of the asset bundle zip file that contains the data that is imported by the job.</p>
+    #   <p>The source of the asset bundle zip file that contains the data that is imported by the
+    #            job.</p>
     #   @return [Types::AssetBundleImportSourceDescription]
     # @!attribute override_parameters
     #   <p>Optional overrides that are applied to the resource configuration before import.</p>
@@ -10904,16 +17298,20 @@ module Aws::QuickSight
     #   <p>The HTTP status of the response.</p>
     #   @return [Integer]
     # @!attribute override_permissions
-    #   <p>Optional permission overrides that are applied to the resource configuration before import.</p>
+    #   <p>Optional permission overrides that are applied to the resource configuration before
+    #            import.</p>
     #   @return [Types::AssetBundleImportJobOverridePermissions]
     # @!attribute override_tags
-    #   <p>Optional tag overrides that are applied to the resource configuration before import.</p>
+    #   <p>Optional tag overrides that are applied to the resource configuration before
+    #            import.</p>
     #   @return [Types::AssetBundleImportJobOverrideTags]
     # @!attribute override_validation_strategy
-    #   <p>An optional validation strategy override for all analyses and dashboards to be applied to the resource configuration before import.</p>
+    #   <p>An optional validation strategy override for all analyses and dashboards to be applied
+    #            to the resource configuration before import.</p>
     #   @return [Types::AssetBundleImportJobOverrideValidationStrategy]
     # @!attribute warnings
-    #   <p>An array of warning records that describe all permitted errors that are encountered during the import job.</p>
+    #   <p>An array of warning records that describe all permitted errors that are encountered
+    #            during the import job.</p>
     #   @return [Array<Types::AssetBundleImportJobWarning>]
     class DescribeAssetBundleImportJobResponse < Struct.new(
       nil,
@@ -10941,6 +17339,76 @@ module Aws::QuickSight
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the automation job.</p>
+    #   @return [String]
+    # @!attribute automation_group_id
+    #   <p>The ID of the automation group that contains the automation.</p>
+    #   @return [String]
+    # @!attribute automation_id
+    #   <p>The ID of the automation that the job belongs to.</p>
+    #   @return [String]
+    # @!attribute include_input_payload
+    #   <p>A Boolean value that indicates whether to include the input payload in the response. If set to <code>true</code>, the input payload will be included. If set to <code>false</code>, the input payload will be returned as <code>null</code>.</p>
+    #   @return [Boolean]
+    # @!attribute include_output_payload
+    #   <p>A Boolean value that indicates whether to include the output payload in the response. If set to <code>true</code>, the output payload will be included. If set to <code>false</code>, the output payload will be returned as <code>null</code>.</p>
+    #   @return [Boolean]
+    # @!attribute job_id
+    #   <p>The ID of the automation job to describe.</p>
+    #   @return [String]
+    class DescribeAutomationJobRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :automation_group_id,
+      :automation_id,
+      :include_input_payload,
+      :include_output_payload,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the automation job.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The time that the automation job was created.</p>
+    #   @return [Time]
+    # @!attribute started_at
+    #   <p>The time that the automation job started running.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The time that the automation job finished running.</p>
+    #   @return [Time]
+    # @!attribute job_status
+    #   <p>The current status of the automation job.</p>
+    #   @return [String]
+    # @!attribute input_payload
+    #   <p>The input payload that was provided when the automation job was started. This field is only included when <code>IncludeInputPayload</code> is set to <code>true</code> in the request.</p>
+    #   @return [String]
+    # @!attribute output_payload
+    #   <p>The output payload that was generated by the automation job. This field is only included when <code>IncludeOutputPayload</code> is set to <code>true</code> in the request.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeAutomationJobResponse < Struct.new(
+      nil,
+      :arn,
+      :created_at,
+      :started_at,
+      :ended_at,
+      :job_status,
+      :input_payload,
+      :output_payload,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -10973,7 +17441,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that owns the brand.</p>
     #   @return [String]
     # @!attribute brand_id
-    #   <p>The ID of the QuickSight brand.</p>
+    #   <p>The ID of the Quick brand.</p>
     #   @return [String]
     class DescribeBrandPublishedVersionRequest < Struct.new(
       nil,
@@ -11007,7 +17475,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that owns the brand.</p>
     #   @return [String]
     # @!attribute brand_id
-    #   <p>The ID of the QuickSight brand.</p>
+    #   <p>The ID of the Quick brand.</p>
     #   @return [String]
     # @!attribute version_id
     #   <p>The ID of the specific version. The default value is the latest version.</p>
@@ -11174,8 +17642,8 @@ module Aws::QuickSight
     #                  <p>
     #                     <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This
     #                       status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is
-    #                       set to <code>DISABLED</code>, QuickSight disables the left filter pane on the
-    #                       published dashboard, which can be used for ad hoc (one-time) filtering. This
+    #                       set to <code>DISABLED</code>, Amazon Quick Sight disables the left filter pane on
+    #                       the published dashboard, which can be used for ad hoc (one-time) filtering. This
     #                       option is <code>ENABLED</code> by default. </p>
     #               </li>
     #               <li>
@@ -11183,7 +17651,8 @@ module Aws::QuickSight
     #                     <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This
     #                       status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual
     #                       option to export data to .CSV format isn't enabled when this is set to
-    #                       <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p>
+    #                           <code>DISABLED</code>. This option is <code>ENABLED</code> by default.
+    #                   </p>
     #               </li>
     #               <li>
     #                  <p>
@@ -11193,17 +17662,27 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>AvailabilityStatus</code> for <code>ExecutiveSummaryOption</code> - This status
-    #                       can be either <code>ENABLED</code> or <code>DISABLED</code>. The option to build an executive
-    #                       summary is disabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code>
+    #                     <code>AvailabilityStatus</code> for <code>QuickSuiteActionsOption</code> -
+    #                       This status can be either <code>ENABLED</code> or <code>DISABLED</code>.
+    #                       Features related to Actions in Amazon Quick Suite on dashboards are disabled
+    #                       when this is set to <code>DISABLED</code>. This option is <code>DISABLED</code>
     #                       by default.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>AvailabilityStatus</code> for <code>DataStoriesSharingOption</code> - This status
-    #                       can be either <code>ENABLED</code> or <code>DISABLED</code>. The option to share a data story is
-    #                       disabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code>
-    #                       by default.</p>
+    #                     <code>AvailabilityStatus</code> for <code>ExecutiveSummaryOption</code> - This
+    #                       status can be either <code>ENABLED</code> or <code>DISABLED</code>. The option
+    #                       to build an executive summary is disabled when this is set to
+    #                           <code>DISABLED</code>. This option is <code>ENABLED</code> by
+    #                       default.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AvailabilityStatus</code> for <code>DataStoriesSharingOption</code> -
+    #                       This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The
+    #                       option to share a data story is disabled when this is set to
+    #                           <code>DISABLED</code>. This option is <code>ENABLED</code> by
+    #                       default.</p>
     #               </li>
     #            </ul>
     #   @return [Types::DashboardPublishOptions]
@@ -11229,8 +17708,8 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the dashboard that you're describing
-    #               permissions for.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the dashboard that you're
+    #               describing permissions for.</p>
     #   @return [String]
     # @!attribute dashboard_id
     #   <p>The ID for the dashboard, also added to the IAM policy.</p>
@@ -11535,7 +18014,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_set_id
-    #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID for the dataset that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DescribeDataSetPermissionsRequest < Struct.new(
       nil,
@@ -11550,7 +18029,7 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the dataset.</p>
     #   @return [String]
     # @!attribute data_set_id
-    #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID for the dataset that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute permissions
     #   <p>A list of resource permissions on the dataset.</p>
@@ -11621,7 +18100,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_set_id
-    #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID for the dataset that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     class DescribeDataSetRequest < Struct.new(
       nil,
@@ -11660,7 +18139,8 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account.</p>
     #   @return [String]
     class DescribeDataSourcePermissionsRequest < Struct.new(
       nil,
@@ -11675,7 +18155,8 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the data source.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute permissions
     #   <p>A list of resource permissions on the data source.</p>
@@ -11707,7 +18188,8 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account.</p>
     #   @return [String]
     class DescribeDataSourceRequest < Struct.new(
       nil,
@@ -11743,10 +18225,10 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the QuickSight account that is linked to the Amazon Q Business application that you want described.</p>
+    #   <p>The ID of the Quick Sight account that is linked to the Amazon Q Business application that you want described.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The QuickSight namespace that contains the linked Amazon Q Business application. If this field is left blank, the default namespace is used. Currently, the default namespace is the only valid value for this parameter.</p>
+    #   <p>The Quick Sight namespace that contains the linked Amazon Q Business application. If this field is left blank, the default namespace is used. Currently, the default namespace is the only valid value for this parameter.</p>
     #   @return [String]
     class DescribeDefaultQBusinessApplicationRequest < Struct.new(
       nil,
@@ -11764,13 +18246,87 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     # @!attribute application_id
-    #   <p>The ID of the Amazon Q Business application that is linked to the QuickSight account.</p>
+    #   <p>The ID of the Amazon Q Business application that is linked to the Quick Sight account.</p>
     #   @return [String]
     class DescribeDefaultQBusinessApplicationResponse < Struct.new(
       nil,
       :request_id,
       :status,
       :application_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the DLP setting that you want to describe.</p>
+    #   @return [String]
+    # @!attribute dlp_setting_id
+    #   <p>The ID of the DLP setting that you want to describe.</p>
+    #   @return [String]
+    class DescribeDlpSettingRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :dlp_setting_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dlp_setting
+    #   <p>The full configuration of the requested DLP setting, returned as a <code>DlpSettingDetails</code> object.</p>
+    #   @return [Types::DlpSettingDetails]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeDlpSettingResponse < Struct.new(
+      nil,
+      :dlp_setting,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the flow that you are describing.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow.</p>
+    #   @return [String]
+    # @!attribute publish_state
+    #   <p>The publish state of the flow version to describe. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>,
+    #               or <code>PENDING_APPROVAL</code>.</p>
+    #   @return [String]
+    class DescribeFlowRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :flow_id,
+      :publish_state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute flow
+    #   <p>The full details of the flow.</p>
+    #   @return [Types::FlowDetail]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class DescribeFlowResponse < Struct.new(
+      nil,
+      :flow,
+      :request_id,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11953,8 +18509,8 @@ module Aws::QuickSight
     #   <p>The name of the group that you want to search.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the 
-    #            Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+    #            Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that includes the group you are searching within.</p>
@@ -11971,7 +18527,7 @@ module Aws::QuickSight
     end
 
     # @!attribute group_member
-    #   <p>A member of an Amazon QuickSight group. Currently, group members must be users. Groups
+    #   <p>A member of an Quick Sight group. Currently, group members must be users. Groups
     #               can't be members of another group. .</p>
     #   @return [Types::GroupMember]
     # @!attribute request_id
@@ -12000,7 +18556,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace of the group that you want described.</p>
@@ -12197,10 +18753,10 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that contains the customer managed key registration specified in the request.</p>
     #   @return [String]
     # @!attribute key_registration
-    #   <p>A list of <code>RegisteredCustomerManagedKey</code> objects in a QuickSight account.</p>
+    #   <p>A list of <code>RegisteredCustomerManagedKey</code> objects in a Quick Sight account.</p>
     #   @return [Array<Types::RegisteredCustomerManagedKey>]
     # @!attribute q_data_key
-    #   <p>A list of <code>QDataKey</code> objects in a QuickSight account.</p>
+    #   <p>A list of <code>QDataKey</code> objects in a Quick Sight account.</p>
     #   @return [Types::QDataKey]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -12226,7 +18782,119 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that contains the QuickSight namespace that you want to describe.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    class DescribeKnowledgeBasePermissionsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :knowledge_base_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The resource permissions for the knowledge base.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class DescribeKnowledgeBasePermissionsResponse < Struct.new(
+      nil,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :permissions,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = nil unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    class DescribeKnowledgeBaseRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :knowledge_base_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base
+    #   <p>The knowledge base.</p>
+    #   @return [Types::KnowledgeBase]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class DescribeKnowledgeBaseResponse < Struct.new(
+      nil,
+      :knowledge_base,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = nil unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute profile_id
+    #   <p>The unique identifier for the limits profile.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The ID of the Amazon Web Services account that contains the limits profile.</p>
+    #   @return [String]
+    class DescribeLimitsProfileRequest < Struct.new(
+      nil,
+      :profile_id,
+      :account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute profile
+    #   <p>The details of the requested limits profile, including its name, description, resource limits, and metadata.</p>
+    #   @return [Types::LimitsProfile]
+    class DescribeLimitsProfileResponse < Struct.new(
+      nil,
+      :profile,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID for the Amazon Web Services account that contains the Quick Sight namespace that you want to describe.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that you want to describe.</p>
@@ -12241,7 +18909,7 @@ module Aws::QuickSight
     end
 
     # @!attribute namespace
-    #   <p>The information about the namespace that you're describing. The response includes 
+    #   <p>The information about the namespace that you're describing. The response includes
     #           the namespace ARN, name, Amazon Web Services Region, creation status, and identity store. <code>DescribeNamespace</code> also
     #           works for namespaces that are in the process of being created. For incomplete namespaces,
     #           this API operation lists the namespace error types and messages associated with the creation process.</p>
@@ -12255,6 +18923,45 @@ module Aws::QuickSight
     class DescribeNamespaceResponse < Struct.new(
       nil,
       :namespace,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_application_id
+    #   <p>The ID of the OAuthClientApplication that you want to describe.</p>
+    #   @return [String]
+    class DescribeOAuthClientApplicationRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :o_auth_client_application_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute o_auth_client_application
+    #   <p>The information about the OAuthClientApplication.</p>
+    #   @return [Types::OAuthClientApplication]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class DescribeOAuthClientApplicationResponse < Struct.new(
+      nil,
+      :o_auth_client_application,
       :request_id,
       :status,
       keyword_init: true
@@ -12303,7 +19010,7 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the QuickSight Q Search configuration that the user wants described.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the Quick Sight Q Search configuration that the user wants described.</p>
     #   @return [String]
     class DescribeQuickSightQSearchConfigurationRequest < Struct.new(
       nil,
@@ -12314,7 +19021,7 @@ module Aws::QuickSight
     end
 
     # @!attribute q_search_status
-    #   <p>The status of QuickSight Q Search configuration.</p>
+    #   <p>The status of Quick Sight Q Search configuration.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -12388,7 +19095,7 @@ module Aws::QuickSight
     #   <p>The name of the role whose permissions you want described.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that contains the role.</p>
@@ -12425,6 +19132,129 @@ module Aws::QuickSight
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the Quick self-upgrade configuration.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The Quick namespace that you want to describe the Quick self-upgrade configuration for.</p>
+    #   @return [String]
+    class DescribeSelfUpgradeConfigurationRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :namespace,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute self_upgrade_configuration
+    #   <p>The self-upgrade configuration for the Quick account.</p>
+    #   @return [Types::SelfUpgradeConfiguration]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class DescribeSelfUpgradeConfigurationResponse < Struct.new(
+      nil,
+      :self_upgrade_configuration,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the space.</p>
+    #   @return [String]
+    # @!attribute space_id
+    #   <p>The ID of the space that you want to describe permissions for.</p>
+    #   @return [String]
+    class DescribeSpacePermissionsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :space_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>A list of resource permissions for the space.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeSpacePermissionsResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :permissions,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the space.</p>
+    #   @return [String]
+    # @!attribute space_id
+    #   <p>The ID of the space that you want to describe.</p>
+    #   @return [String]
+    # @!attribute max_contributors
+    #   <p>The maximum number of contributors to include in the response.</p>
+    #   @return [Integer]
+    class DescribeSpaceRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :space_id,
+      :max_contributors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute space
+    #   <p>The details of the space.</p>
+    #   @return [Types::SpaceDetails]
+    # @!attribute contributors
+    #   <p>A list of contributors to the space.</p>
+    #   @return [Array<Types::SpaceContributor>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeSpaceResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :space,
+      :contributors,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -12872,6 +19702,54 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the topic that you want
+    #            described.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    class DescribeTopicPermissionsV2Request < Struct.new(
+      nil,
+      :aws_account_id,
+      :topic_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute topic_arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>A list of resource permissions that are configured to the topic.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeTopicPermissionsV2Response < Struct.new(
+      nil,
+      :topic_id,
+      :topic_arn,
+      :permissions,
+      :status,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account that contains the topic whose refresh you want
     #            to describe.</p>
     #   @return [String]
@@ -13023,12 +19901,64 @@ module Aws::QuickSight
       end
     end
 
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the topic that you want to
+    #            describe.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    class DescribeTopicV2Request < Struct.new(
+      nil,
+      :aws_account_id,
+      :topic_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute topic
+    #   <p>The definition of a topic.</p>
+    #   @return [Types::TopicV2Details]
+    # @!attribute custom_instructions
+    #   <p>Instructions that provide additional guidance and context for response generation.</p>
+    #   @return [Types::CustomInstructions]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class DescribeTopicV2Response < Struct.new(
+      nil,
+      :arn,
+      :topic_id,
+      :topic,
+      :custom_instructions,
+      :status,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
     # @!attribute user_name
     #   <p>The name of the user that you want to describe.</p>
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
@@ -13137,6 +20067,34 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines a destination table in data preparation that receives the final transformed data.</p>
+    # @!attribute alias
+    #   <p>Alias for the destination table.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source configuration that specifies which transform operation provides data to this destination table.</p>
+    #   @return [Types::DestinationTableSource]
+    class DestinationTable < Struct.new(
+      nil,
+      :alias,
+      :source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the source of data for a destination table, including the transform operation and column mappings.</p>
+    # @!attribute transform_operation_id
+    #   <p>The identifier of the transform operation that provides data to the destination table.</p>
+    #   @return [String]
+    class DestinationTableSource < Struct.new(
+      nil,
+      :transform_operation_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The dimension type field.</p>
     # @!attribute numerical_dimension_field
     #   <p>The dimension type field with numerical type columns.</p>
@@ -13223,8 +20181,88 @@ module Aws::QuickSight
       end
     end
 
+    # <p>The full configuration details of a DLP setting.</p>
+    # @!attribute dlp_setting_id
+    #   <p>The ID of the DLP setting.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the DLP setting.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the DLP setting.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the DLP setting. Valid values are <code>ACTIVE</code> and <code>INACTIVE</code>.</p>
+    #   @return [String]
+    # @!attribute provider_type
+    #   <p>The type of external DLP provider used for sensitivity label classification.</p>
+    #   @return [String]
+    # @!attribute provider_config
+    #   <p>The provider-specific configuration for the DLP integration.</p>
+    #   @return [Types::ProviderConfig]
+    # @!attribute provider_outage_action
+    #   <p>The behavior applied when the DLP provider is unreachable. Valid values are <code>ALLOW</code>, <code>WARN</code>, and <code>BLOCK</code>.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the DLP setting was created, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the DLP setting was most recently updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    class DlpSettingDetails < Struct.new(
+      nil,
+      :dlp_setting_id,
+      :name,
+      :arn,
+      :status,
+      :provider_type,
+      :provider_config,
+      :provider_outage_action,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a DLP setting returned by list operations.</p>
+    # @!attribute dlp_setting_id
+    #   <p>The ID of the DLP setting.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the DLP setting.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the DLP setting.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the DLP setting. Valid values are <code>ACTIVE</code> and <code>INACTIVE</code>.</p>
+    #   @return [String]
+    # @!attribute provider_type
+    #   <p>The type of external DLP provider used for sensitivity label classification.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the DLP setting was created, in ISO 8601 format.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the DLP setting was most recently updated, in ISO 8601 format.</p>
+    #   @return [Time]
+    class DlpSettingSummary < Struct.new(
+      nil,
+      :dlp_setting_id,
+      :name,
+      :arn,
+      :status,
+      :provider_type,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The domain specified isn't on the allow list. All domains for embedded dashboards must be
-    # 			added to the approved list by an Amazon QuickSight admin.</p>
+    # 			added to the approved list by an Amazon Quick Suite admin.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute request_id
@@ -13241,7 +20279,7 @@ module Aws::QuickSight
 
     # <p>The label options of the label that is displayed in the center of a donut chart. This option isn't available for pie charts.</p>
     # @!attribute label_visibility
-    #   <p>Determines the visibility of the label in a donut chart. In the QuickSight console, this option is called <code>'Show total'</code>.</p>
+    #   <p>Determines the visibility of the label in a donut chart. In the Quick Sight console, this option is called <code>'Show total'</code>.</p>
     #   @return [String]
     class DonutCenterOptions < Struct.new(
       nil,
@@ -13347,13 +20385,66 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The effective limit for a resource type that applies to a user, considering all applicable profile assignments and inheritance rules.</p>
+    # @!attribute resource_type
+    #   <p>The type of resource that the limit applies to.</p>
+    #   @return [String]
+    # @!attribute limit_value
+    #   <p>The maximum allowed value for the resource.</p>
+    #   @return [Integer]
+    # @!attribute limit_unit
+    #   <p>The unit of measurement for the limit.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source from which this limit was inherited. Possible values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DIRECT_USER</code> – The limit comes from a profile directly assigned to the user.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>GROUP</code> – The limit comes from a profile assigned to a group the user belongs to.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ROLE</code> – The limit comes from a profile assigned to a role the user has.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ACCOUNT</code> – The limit comes from the account-level default profile.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SYSTEM_DEFAULT</code> – The limit comes from the built-in system default.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute profile_id
+    #   <p>The identifier of the limits profile that defines this limit.</p>
+    #   @return [String]
+    class EffectiveLimit < Struct.new(
+      nil,
+      :resource_type,
+      :limit_value,
+      :limit_unit,
+      :source,
+      :profile_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An empty visual.</p>
-    #          <p>Empty visuals are used in layouts but have not been configured to show any data. A new visual created in the QuickSight console is considered an <code>EmptyVisual</code> until a visual type is selected.</p>
+    #          <p>Empty visuals are used in layouts but have not been configured to show any data. A new visual created in the Quick Sight console is considered an <code>EmptyVisual</code> until a visual type is selected.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
     # @!attribute data_set_identifier
-    #   <p>The data set that is used in the empty visual. Every visual requires a dataset to render.</p>
+    #   <p>The data set that is used in the empty visual. Every visual requires a dataset or a topic to render.</p>
+    #   @return [String]
+    # @!attribute topic_identifier
+    #   <p>The topic that is used in the empty visual. Every visual requires a dataset or a topic to render.</p>
     #   @return [String]
     # @!attribute actions
     #   <p>The list of custom actions that are configured for a visual.</p>
@@ -13362,10 +20453,16 @@ module Aws::QuickSight
       nil,
       :visual_id,
       :data_set_identifier,
+      :topic_identifier,
       :actions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:data_set_identifier] = '' unless options.key?(:data_set_identifier)
+        super
+      end
     end
 
     # <p>An object, structure, or sub-structure of an analysis, template, or dashboard.</p>
@@ -13449,9 +20546,9 @@ module Aws::QuickSight
       end
     end
 
-    # <p>The executive summary settings of an embedded QuickSight console or dashboard.</p>
+    # <p>The executive summary settings of an embedded Quick Sight console or dashboard.</p>
     # @!attribute enabled
-    #   <p>The executive summary settings of an embedded QuickSight console or dashboard.</p>
+    #   <p>The executive summary settings of an embedded Quick Sight console or dashboard.</p>
     #   @return [Boolean]
     class ExecutiveSummaryConfigurations < Struct.new(
       nil,
@@ -13534,7 +20631,23 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An entry that appears when a <code>KeyRegistration</code> update to QuickSight fails.</p>
+    # <p>The connection parameters for a fully managed knowledge base data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses a fully managed knowledge base.</p>
+    # @!attribute knowledge_base_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Bedrock knowledge base.</p>
+    #   @return [String]
+    # @!attribute linked_data_source_ids
+    #   <p>The IDs of the linked data sources.</p>
+    #   @return [Array<String>]
+    class FMKBParameters < Struct.new(
+      nil,
+      :knowledge_base_arn,
+      :linked_data_source_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An entry that appears when a <code>KeyRegistration</code> update to Quick Sight fails.</p>
     # @!attribute key_arn
     #   <p>The ARN of the KMS key that failed to update.</p>
     #   @return [String]
@@ -13565,6 +20678,62 @@ module Aws::QuickSight
       end
     end
 
+    # <p>A resource operation that failed.</p>
+    # @!attribute resource_type
+    #   <p>The type of the resource.</p>
+    #   @return [String]
+    # @!attribute resource_details
+    #   <p>The details of the resource.</p>
+    #   @return [Types::SpaceQuickSightResourceDetails]
+    # @!attribute error_message
+    #   <p>The error message that describes why the operation failed.</p>
+    #   @return [String]
+    class FailedSpaceResourceOperation < Struct.new(
+      nil,
+      :resource_type,
+      :resource_details,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a per-ARN failure when updating agent associations.</p>
+    # @!attribute arn
+    #   <p>The ARN that could not be added or removed.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>A description of the failure.</p>
+    #   @return [String]
+    # @!attribute error_code
+    #   <p>The error code for the failure.</p>
+    #   @return [String]
+    class FailedToUpdateAssociation < Struct.new(
+      nil,
+      :arn,
+      :error_message,
+      :error_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The field series item configuration of a  <code>BarChartVisual</code>.</p>
+    # @!attribute field_id
+    #   <p>Field ID of the field for which you are setting the series configuration.</p>
+    #   @return [String]
+    # @!attribute settings
+    #   <p>Options that determine the presentation of bar series associated to the field.</p>
+    #   @return [Types::BarChartSeriesSettings]
+    class FieldBarSeriesItem < Struct.new(
+      nil,
+      :field_id,
+      :settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The setup for the detailed tooltip.</p>
     # @!attribute aggregation_visibility
     #   <p>The visibility of <code>Show aggregations</code>.</p>
@@ -13591,6 +20760,22 @@ module Aws::QuickSight
       :aggregation_visibility,
       :tooltip_title_type,
       :tooltip_fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The field series item configuration of a <code>ComboChartVisual</code>.</p>
+    # @!attribute field_id
+    #   <p>Field ID of the field for which you are setting the series configuration.</p>
+    #   @return [String]
+    # @!attribute settings
+    #   <p>Options that determine the presentation of series associated to the field.</p>
+    #   @return [Types::ComboChartSeriesSettings]
+    class FieldComboSeriesItem < Struct.new(
+      nil,
+      :field_id,
+      :settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13717,6 +20902,37 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A physical table type that contains the schema and upload settings for a file-based data source.</p>
+    # @!attribute data_source_arn
+    #   <p>The Amazon Resource Name (ARN) for the data source.</p>
+    #   @return [String]
+    # @!attribute upload_settings
+    #   <p>Information about the format for the source file.</p>
+    #   @return [Types::UploadSettings]
+    # @!attribute sheet_index
+    #   <p>The zero-based index of the sheet to use within the file. For files that contain
+    #               multiple sheets, this identifies which sheet to read. Files that contain a single sheet,
+    #               or that have no concept of sheets, use sheet 0.</p>
+    #   @return [Integer]
+    # @!attribute input_columns
+    #   <p>The column schema of the file.</p>
+    #   @return [Array<Types::InputColumn>]
+    class FileSource < Struct.new(
+      nil,
+      :data_source_arn,
+      :upload_settings,
+      :sheet_index,
+      :input_columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:sheet_index] = 0 unless options.key?(:sheet_index)
+        super
+      end
+    end
+
     # <p>The aggregated field well of the filled map.</p>
     # @!attribute geospatial
     #   <p>The aggregated location field well of the filled map. Values are grouped by location fields.</p>
@@ -13835,7 +21051,7 @@ module Aws::QuickSight
     end
 
     # <p>A filled map.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filled-maps.html">Creating filled maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filled-maps.html">Creating filled maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
     #   @return [String]
@@ -13860,6 +21076,9 @@ module Aws::QuickSight
     # @!attribute visual_content_alt_text
     #   <p>The alt text for the visual.</p>
     #   @return [String]
+    # @!attribute geocoding_preferences
+    #   <p>The geocoding prefences for filled map visual.</p>
+    #   @return [Array<Types::GeocodePreference>]
     class FilledMapVisual < Struct.new(
       nil,
       :visual_id,
@@ -13870,6 +21089,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :actions,
       :visual_content_alt_text,
+      :geocoding_preferences,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13879,7 +21099,7 @@ module Aws::QuickSight
     #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     # @!attribute category_filter
     #   <p>A <code>CategoryFilter</code> filters text values.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/add-a-text-filter-data-prep.html">Adding text filters</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/add-a-text-filter-data-prep.html">Adding text filters</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::CategoryFilter]
     # @!attribute numeric_range_filter
     #   <p>A <code>NumericRangeFilter</code> filters numeric values that are either inside or outside a given numeric range.</p>
@@ -13903,6 +21123,9 @@ module Aws::QuickSight
     # @!attribute nested_filter
     #   <p>A <code>NestedFilter</code> filters data with a subset of data that is defined by the nested inner filter.</p>
     #   @return [Types::NestedFilter]
+    # @!attribute hierarchy_filter
+    #   <p>A <code>HierarchyFilter</code> filters data by drilling down through an ordered list of columns. Each level in the list narrows the data by one column, and the selected values at each level determine which values are available at the next.</p>
+    #   @return [Types::HierarchyFilter]
     class Filter < Struct.new(
       nil,
       :category_filter,
@@ -13913,6 +21136,7 @@ module Aws::QuickSight
       :relative_dates_filter,
       :top_bottom_filter,
       :nested_filter,
+      :hierarchy_filter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13964,6 +21188,12 @@ module Aws::QuickSight
     # @!attribute cross_sheet
     #   <p>A control from a filter that is scoped across more than one sheet. This represents your filter control on a sheet</p>
     #   @return [Types::FilterCrossSheetControl]
+    # @!attribute hierarchy_list
+    #   <p>A control from a hierarchy filter that displays the hierarchy as a list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>
+    #   @return [Types::HierarchyFilterListControl]
+    # @!attribute hierarchy_dropdown
+    #   <p>A control from a hierarchy filter that displays the hierarchy as a dropdown list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>
+    #   @return [Types::HierarchyFilterDropDownControl]
     class FilterControl < Struct.new(
       nil,
       :date_time_picker,
@@ -13974,6 +21204,8 @@ module Aws::QuickSight
       :slider,
       :relative_date_time,
       :cross_sheet,
+      :hierarchy_list,
+      :hierarchy_dropdown,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14028,6 +21260,9 @@ module Aws::QuickSight
     # @!attribute commit_mode
     #   <p>The visibility configurationof the Apply button on a <code>DateTimePickerControl</code>.</p>
     #   @return [String]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class FilterDateTimePickerControl < Struct.new(
       nil,
       :filter_control_id,
@@ -14036,9 +21271,15 @@ module Aws::QuickSight
       :display_options,
       :type,
       :commit_mode,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>A control to display a dropdown list with buttons that are used to select a single value.</p>
@@ -14076,6 +21317,12 @@ module Aws::QuickSight
     # @!attribute commit_mode
     #   <p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>
     #   @return [String]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class FilterDropDownControl < Struct.new(
       nil,
       :filter_control_id,
@@ -14086,13 +21333,20 @@ module Aws::QuickSight
       :selectable_values,
       :cascading_control_configuration,
       :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>A grouping of individual filters. Filter groups are applied to the same group of visuals.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/add-a-compound-filter.html">Adding filter conditions (group filters) with AND and OR operators</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/add-a-compound-filter.html">Adding filter conditions (group filters) with AND and OR operators</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute filter_group_id
     #   <p>The value that uniquely identifies a <code>FilterGroup</code> within a dashboard, template, or analysis.</p>
     #   @return [String]
@@ -14210,6 +21464,12 @@ module Aws::QuickSight
     # @!attribute cascading_control_configuration
     #   <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
     #   @return [Types::CascadingControlConfiguration]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class FilterListControl < Struct.new(
       nil,
       :filter_control_id,
@@ -14219,9 +21479,16 @@ module Aws::QuickSight
       :type,
       :selectable_values,
       :cascading_control_configuration,
+      :control_sort_configurations,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>A transform operation that filters rows based on a condition.</p>
@@ -14229,9 +21496,21 @@ module Aws::QuickSight
     #   <p>An expression that must evaluate to a Boolean value. Rows for which the expression
     #               evaluates to true are kept in the dataset.</p>
     #   @return [String]
+    # @!attribute string_filter_condition
+    #   <p>A string-based filter condition within a filter operation.</p>
+    #   @return [Types::DataSetStringFilterCondition]
+    # @!attribute numeric_filter_condition
+    #   <p>A numeric-based filter condition within a filter operation.</p>
+    #   @return [Types::DataSetNumericFilterCondition]
+    # @!attribute date_filter_condition
+    #   <p>A date-based filter condition within a filter operation.</p>
+    #   @return [Types::DataSetDateFilterCondition]
     class FilterOperation < Struct.new(
       nil,
       :condition_expression,
+      :string_filter_condition,
+      :numeric_filter_condition,
+      :date_filter_condition,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14294,6 +21573,9 @@ module Aws::QuickSight
     # @!attribute commit_mode
     #   <p>The visibility configuration of the Apply button on a <code>FilterRelativeDateTimeControl</code>.</p>
     #   @return [String]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class FilterRelativeDateTimeControl < Struct.new(
       nil,
       :filter_control_id,
@@ -14301,9 +21583,15 @@ module Aws::QuickSight
       :source_filter_id,
       :display_options,
       :commit_mode,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>The scope configuration for a <code>FilterGroup</code>.</p>
@@ -14370,6 +21658,9 @@ module Aws::QuickSight
     # @!attribute step_size
     #   <p>The number of increments that the slider bar is divided into.</p>
     #   @return [Float]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class FilterSliderControl < Struct.new(
       nil,
       :filter_control_id,
@@ -14380,11 +21671,13 @@ module Aws::QuickSight
       :maximum_value,
       :minimum_value,
       :step_size,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
         options[:maximum_value] = 0 unless options.key?(:maximum_value)
         options[:minimum_value] = 0 unless options.key?(:minimum_value)
         options[:step_size] = 0 unless options.key?(:step_size)
@@ -14408,6 +21701,9 @@ module Aws::QuickSight
     # @!attribute display_options
     #   <p>The display options of a control.</p>
     #   @return [Types::TextAreaControlDisplayOptions]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class FilterTextAreaControl < Struct.new(
       nil,
       :filter_control_id,
@@ -14415,9 +21711,15 @@ module Aws::QuickSight
       :source_filter_id,
       :delimiter,
       :display_options,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>A control to display a text box that is used to enter a single entry.</p>
@@ -14433,18 +21735,167 @@ module Aws::QuickSight
     # @!attribute display_options
     #   <p>The display options of a control.</p>
     #   @return [Types::TextFieldControlDisplayOptions]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class FilterTextFieldControl < Struct.new(
       nil,
       :filter_control_id,
       :title,
       :source_filter_id,
       :display_options,
+      :control_title_format_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
+    end
+
+    # <p>A transform operation that applies one or more filter conditions.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source transform operation that provides input data for filtering.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute filter_operations
+    #   <p>The list of filter operations to apply.</p>
+    #   @return [Array<Types::FilterOperation>]
+    class FiltersOperation < Struct.new(
+      nil,
+      :alias,
+      :source,
+      :filter_operations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A folder in QuickSight.</p>
+    # <p>The full details of a flow, including its definition specifying the steps.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the flow.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the flow.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the flow.</p>
+    #   @return [String]
+    # @!attribute publish_state
+    #   <p>The publish state of the flow. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>,
+    #               or <code>PENDING_APPROVAL</code>.</p>
+    #   @return [String]
+    # @!attribute created_time
+    #   <p>The time this flow was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the principal who created the flow.</p>
+    #   @return [String]
+    # @!attribute last_updated_time
+    #   <p>The last time this flow was modified.</p>
+    #   @return [Time]
+    # @!attribute last_updated_by
+    #   <p>The identifier of the last principal who updated the flow.</p>
+    #   @return [String]
+    # @!attribute flow_definition
+    #   <p>The definition of the flow, specifying the steps and configurations. This is the flow definition in Quick Flow's internal format. The format is subject to change.</p>
+    #   @return [JSON]
+    # @!attribute step_aliases
+    #   <p>A list of step alias mappings for the flow.</p>
+    #   @return [Array<Types::StepAliasMapping>]
+    class FlowDetail < Struct.new(
+      nil,
+      :arn,
+      :flow_id,
+      :name,
+      :description,
+      :publish_state,
+      :created_time,
+      :created_by,
+      :last_updated_time,
+      :last_updated_by,
+      :flow_definition,
+      :step_aliases,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The basic information of the flow exluding its definition specifying the steps.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the flow.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the flow.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the flow.</p>
+    #   @return [String]
+    # @!attribute created_time
+    #   <p>The time this flow was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the principal who created the flow.</p>
+    #   @return [String]
+    # @!attribute last_updated_time
+    #   <p>The last time this flow was modified.</p>
+    #   @return [Time]
+    # @!attribute last_updated_by
+    #   <p>The identifier of the last principal who updated the flow.</p>
+    #   @return [String]
+    # @!attribute publish_state
+    #   <p>The publish state for the flow. The valid values are <code>DRAFT</code>, <code>PUBLISHED</code>,
+    #               or <code>PENDING_APPROVAL</code>.</p>
+    #   @return [String]
+    # @!attribute run_count
+    #   <p>The number of runs done for the flow.</p>
+    #   @return [Integer]
+    # @!attribute user_count
+    #   <p>The number of users who have used the flow.</p>
+    #   @return [Integer]
+    # @!attribute last_published_by
+    #   <p>The identifier of the last principal who published the flow.</p>
+    #   @return [String]
+    # @!attribute last_published_at
+    #   <p>The last time this flow was published.</p>
+    #   @return [Time]
+    class FlowSummary < Struct.new(
+      nil,
+      :arn,
+      :flow_id,
+      :name,
+      :description,
+      :created_time,
+      :created_by,
+      :last_updated_time,
+      :last_updated_by,
+      :publish_state,
+      :run_count,
+      :user_count,
+      :last_published_by,
+      :last_published_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:run_count] = 0 unless options.key?(:run_count)
+        options[:user_count] = 0 unless options.key?(:user_count)
+        super
+      end
+    end
+
+    # <p>A folder in Quick Sight.</p>
     # @!attribute folder_id
     #   <p>The ID of the folder.</p>
     #   @return [String]
@@ -14484,7 +21935,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An asset in a QuickSight folder, such as a dashboard, analysis, or dataset.</p>
+    # <p>An asset in a Quick Sight folder, such as a dashboard, analysis, or dataset.</p>
     # @!attribute member_id
     #   <p>The ID of an asset in the folder.</p>
     #   @return [String]
@@ -14500,7 +21951,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A filter to use to search an QuickSight folder.</p>
+    # <p>A filter to use to search an Quick Sight folder.</p>
     # @!attribute operator
     #   <p>The comparison operator that you want to use as a filter, for example  <code>"Operator": "StringEquals"</code>. Valid values are  <code>"StringEquals"</code>  and  <code>"StringLike"</code>.</p>
     #            <p>If you set the operator value to <code>"StringEquals"</code>, you need to provide an ownership related filter in the <code>"NAME"</code> field and the arn of the user or group whose folders you want to search in the <code>"Value"</code> field. For example,  <code>"Name":"DIRECT_QUICKSIGHT_OWNER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>.</p>
@@ -14553,7 +22004,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A summary of information about an existing QuickSight folder. </p>
+    # <p>A summary of information about an existing Quick Sight folder. </p>
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the folder.</p>
     #   @return [String]
@@ -14802,10 +22253,14 @@ module Aws::QuickSight
     # @!attribute canvas_size_options
     #   <p>Configuration options for the canvas of a free-form layout.</p>
     #   @return [Types::FreeFormLayoutCanvasSizeOptions]
+    # @!attribute groups
+    #   <p>The groups that are included in a free-form layout.</p>
+    #   @return [Array<Types::SheetLayoutGroup>]
     class FreeFormLayoutConfiguration < Struct.new(
       nil,
       :elements,
       :canvas_size_options,
+      :groups,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14848,6 +22303,12 @@ module Aws::QuickSight
     # @!attribute loading_animation
     #   <p>The loading animation configuration of a free-form layout element.</p>
     #   @return [Types::LoadingAnimation]
+    # @!attribute border_radius
+    #   <p>The border radius of a free-form layout element.</p>
+    #   @return [String]
+    # @!attribute padding
+    #   <p>The padding of a free-form layout element.</p>
+    #   @return [String]
     class FreeFormLayoutElement < Struct.new(
       nil,
       :element_id,
@@ -14862,6 +22323,8 @@ module Aws::QuickSight
       :selected_border_style,
       :background_style,
       :loading_animation,
+      :border_radius,
+      :padding,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14890,10 +22353,14 @@ module Aws::QuickSight
     # @!attribute color
     #   <p>The border color of a free-form layout element.</p>
     #   @return [String]
+    # @!attribute width
+    #   <p>The border width of a free-form layout element.</p>
+    #   @return [String]
     class FreeFormLayoutElementBorderStyle < Struct.new(
       nil,
       :visibility,
       :color,
+      :width,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15046,7 +22513,7 @@ module Aws::QuickSight
     end
 
     # <p>A funnel chart.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/funnel-visual-content.html">Using funnel charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/funnel-visual-content.html">Using funnel charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
     #   @return [String]
@@ -15235,7 +22702,7 @@ module Aws::QuickSight
     end
 
     # <p>A gauge chart.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/gauge-chart.html">Using gauge charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/gauge-chart.html">Using gauge charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -15272,38 +22739,62 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that contains the dashboard that you're embedding.</p>
+    #   <p>The ID for the Amazon Web Services account that contains the dashboard that you're
+    #               embedding.</p>
     #   @return [String]
     # @!attribute session_lifetime_in_minutes
-    #   <p>How many minutes the session is valid. The session lifetime must be in [15-600] minutes range.</p>
+    #   <p>How many minutes the session is valid. The session lifetime must be in [15-600]
+    #               minutes range.</p>
     #   @return [Integer]
     # @!attribute namespace
-    #   <p>The QuickSight namespace that the anonymous user virtually belongs to. If you are not using an Amazon QuickSight custom namespace, set this to <code>default</code>.</p>
+    #   <p>The Amazon Quick Sight namespace that the anonymous user virtually belongs to. If you
+    #               are not using an Amazon Quick custom namespace, set this to
+    #                   <code>default</code>.</p>
     #   @return [String]
     # @!attribute session_tags
-    #   <p>The session tags used for row-level security. Before you use this parameter, make sure that you have configured the relevant datasets using the <code>DataSet$RowLevelPermissionTagConfiguration</code> parameter so that session tags can be used to provide row-level security.</p>
-    #            <p>These are not the tags used for the Amazon Web Services resource tagging feature. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html">Using Row-Level Security (RLS) with Tags</a>in the <i>Amazon QuickSight User Guide</i>.</p>
+    #   <p>Session tags are user-specified strings that identify a session in your application. You can use these tags to implement row-level security (RLS) controls.
+    #               Before you use the <code>SessionTags</code> parameter, make sure that you have configured the relevant datasets using the <code>DataSet$RowLevelPermissionTagConfiguration</code> parameter
+    #               so that session tags can be used to provide row-level security.</p>
+    #            <p>When using <code>SessionTags</code> in <code>GenerateEmbedUrlForAnonymousUser</code>,</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Treat <code>SessionTags</code> as security credentials. Do not expose <code>SessionTags</code> to end users or client-side code.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Implement server-side controls. Ensure that <code>SessionTags</code> are set exclusively by your trusted backend services, not by parameters that end users can modify.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Protect <code>SessionTags</code> from enumeration. Ensure that users in one tenant cannot discover or guess sessionTag values belonging to other tenants.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Review your architecture. If downstream customers or partners are allowed to call the <code>GenerateEmbedUrlForAnonymousUser</code> API directly,
+    #                       evaluate whether those parties could specify sessionTag values for tenants they should not access.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Besides, these are not the tags used for the Amazon Web Services resource tagging feature.
+    #               For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html">Using Row-Level Security (RLS) with Tags</a> in the <i>Amazon Quick User Guide</i>.</p>
     #   @return [Array<Types::SessionTag>]
     # @!attribute authorized_resource_arns
-    #   <p>The Amazon Resource Names (ARNs) for the QuickSight resources that the user
-    #               is authorized to access during the lifetime of the session.</p>
-    #            <p>If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the
-    #               account that you want the user to be able to view.</p>
-    #            <p>If you want to make changes to the theme of your embedded content, pass a list of theme ARNs that the anonymous users need access to.</p>
+    #   <p>The Amazon Resource Names (ARNs) for the Quick Sight resources that the user is authorized to
+    #               access during the lifetime of the session.</p>
+    #            <p>If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard
+    #               ARNs in the account that you want the user to be able to view.</p>
+    #            <p>If you want to make changes to the theme of your embedded content, pass a list of
+    #               theme ARNs that the anonymous users need access to.</p>
     #            <p>Currently, you can pass up to 25 theme ARNs in each API call.</p>
     #   @return [Array<String>]
     # @!attribute experience_configuration
     #   <p>The configuration of the experience that you are embedding.</p>
     #   @return [Types::AnonymousUserEmbeddingExperienceConfiguration]
     # @!attribute allowed_domains
-    #   <p>The domains that you want to add to the allow list for access to the generated URL that
-    #               is then embedded. This optional parameter overrides the static domains that are
-    #               configured in the Manage QuickSight menu in the QuickSight console. Instead, it
+    #   <p>The domains that you want to add to the allow list for access to the generated URL
+    #               that is then embedded. This optional parameter overrides the static domains that are
+    #               configured in the Manage Quick Sight menu in the Amazon Quick Sight console. Instead, it
     #               allows only the domains that you include in this parameter. You can list up to three
     #               domains or subdomains in each API call.</p>
-    #            <p>To include all subdomains under a specific domain to the allow list, use <code>*</code>.
-    #               For example, <code>https://*.sapp.amazon.com</code> includes all subdomains under
-    #               <code>https://sapp.amazon.com</code>.</p>
+    #            <p>To include all subdomains under a specific domain to the allow list, use
+    #                   <code>*</code>. For example, <code>https://*.sapp.amazon.com</code> includes all
+    #               subdomains under <code>https://sapp.amazon.com</code>.</p>
     #   @return [Array<String>]
     class GenerateEmbedUrlForAnonymousUserRequest < Struct.new(
       nil,
@@ -15329,7 +22820,8 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     # @!attribute anonymous_user_arn
-    #   <p>The Amazon Resource Name (ARN) to use for the anonymous Amazon QuickSight user.</p>
+    #   <p>The Amazon Resource Name (ARN) to use for the anonymous Amazon Quick
+    #               user.</p>
     #   @return [String]
     class GenerateEmbedUrlForAnonymousUserResponse < Struct.new(
       nil,
@@ -15348,26 +22840,29 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that contains the dashboard that you're embedding.</p>
+    #   <p>The ID for the Amazon Web Services account that contains the dashboard that you're
+    #               embedding.</p>
     #   @return [String]
     # @!attribute session_lifetime_in_minutes
-    #   <p>How many minutes the session is valid. The session lifetime must be in [15-600] minutes range.</p>
+    #   <p>How many minutes the session is valid. The session lifetime must be in [15-600]
+    #               minutes range.</p>
     #   @return [Integer]
     # @!attribute user_arn
     #   <p>The Amazon Resource Name for the registered user.</p>
     #   @return [String]
     # @!attribute experience_configuration
-    #   <p>The experience that you want to embed. For registered users, you can embed QuickSight dashboards, QuickSight visuals, the QuickSight Q search bar, the QuickSight Generative Q&A experience, or the entire QuickSight console.</p>
+    #   <p>The experience that you want to embed. For registered users, you can embed Quick dashboards, Amazon Quick Sight visuals, the Amazon Quick Sight Q search bar,
+    #               the Amazon Quick Sight Generative Q&A experience, or the entire Amazon Quick Sight console.</p>
     #   @return [Types::RegisteredUserEmbeddingExperienceConfiguration]
     # @!attribute allowed_domains
-    #   <p>The domains that you want to add to the allow list for access to the generated URL that 
-    #             is then embedded. This optional parameter overrides the static domains that are 
-    #             configured in the Manage QuickSight menu in the QuickSight console. Instead, it 
-    #             allows only the domains that you include in this parameter. You can list up to three 
-    #             domains or subdomains in each API call.</p>
-    #            <p>To include all subdomains under a specific domain to the allow list, use <code>*</code>.
-    #               For example, <code>https://*.sapp.amazon.com</code> includes all subdomains under
-    #               <code>https://sapp.amazon.com</code>.</p>
+    #   <p>The domains that you want to add to the allow list for access to the generated URL
+    #               that is then embedded. This optional parameter overrides the static domains that are
+    #               configured in the Manage Quick Sight menu in the Amazon Quick Sight console. Instead, it
+    #               allows only the domains that you include in this parameter. You can list up to three
+    #               domains or subdomains in each API call.</p>
+    #            <p>To include all subdomains under a specific domain to the allow list, use
+    #                   <code>*</code>. For example, <code>https://*.sapp.amazon.com</code> includes all
+    #               subdomains under <code>https://sapp.amazon.com</code>.</p>
     #   @return [Array<String>]
     class GenerateEmbedUrlForRegisteredUserRequest < Struct.new(
       nil,
@@ -15382,7 +22877,8 @@ module Aws::QuickSight
     end
 
     # @!attribute embed_url
-    #   <p>The embed URL for the QuickSight dashboard, visual, Q search bar, Generative Q&A experience, or console.</p>
+    #   <p>The embed URL for the Amazon Quick Sight dashboard, visual, Q search bar, Generative Q&A experience, or
+    #               console.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The HTTP status of the request.</p>
@@ -15412,7 +22908,7 @@ module Aws::QuickSight
     #   <p>The validity of the session in minutes.</p>
     #   @return [Integer]
     # @!attribute experience_configuration
-    #   <p>The type of experience you want to embed. For registered users, you can embed QuickSight dashboards or the QuickSight console.</p>
+    #   <p>The type of experience you want to embed. For registered users, you can embed Quick dashboards or the Amazon Quick Sight console.</p>
     #            <note>
     #               <p>Exactly one of the experience configurations is required. You can choose
     #                       <code>Dashboard</code> or <code>QuickSightConsole</code>. You cannot choose more
@@ -15497,9 +22993,9 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The generative BI authoring settings of an embedded QuickSight console.</p>
+    # <p>The generative BI authoring settings of an embedded Quick Sight console.</p>
     # @!attribute enabled
-    #   <p>The generative BI authoring settings of an embedded QuickSight console.</p>
+    #   <p>The generative BI authoring settings of an embedded Quick Sight console.</p>
     #   @return [Boolean]
     class GenerativeAuthoringConfigurations < Struct.new(
       nil,
@@ -15529,6 +23025,70 @@ module Aws::QuickSight
       :name,
       :country_code,
       :columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The geocode preference.</p>
+    # @!attribute request_key
+    #   <p>The unique request key for the geocode preference.</p>
+    #   @return [Types::GeocoderHierarchy]
+    # @!attribute preference
+    #   <p>The preference definition for the geocode preference.</p>
+    #   @return [Types::GeocodePreferenceValue]
+    class GeocodePreference < Struct.new(
+      nil,
+      :request_key,
+      :preference,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The preference value for the geocode preference.</p>
+    # @!attribute geocoder_hierarchy
+    #   <p>The preference hierarchy for the geocode preference.</p>
+    #   @return [Types::GeocoderHierarchy]
+    # @!attribute coordinate
+    #   <p>The preference coordinate for the geocode preference.</p>
+    #   @return [Types::Coordinate]
+    class GeocodePreferenceValue < Struct.new(
+      :geocoder_hierarchy,
+      :coordinate,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class GeocoderHierarchy < GeocodePreferenceValue; end
+      class Coordinate < GeocodePreferenceValue; end
+      class Unknown < GeocodePreferenceValue; end
+    end
+
+    # <p>The preference hierarchy for the geocode preference.</p>
+    # @!attribute country
+    #   <p>The country value for the preference hierarchy.</p>
+    #   @return [String]
+    # @!attribute state
+    #   <p>The state/region value for the preference hierarchy.</p>
+    #   @return [String]
+    # @!attribute county
+    #   <p>The county/district value for the preference hierarchy.</p>
+    #   @return [String]
+    # @!attribute city
+    #   <p>The city value for the preference hierarchy.</p>
+    #   @return [String]
+    # @!attribute post_code
+    #   <p>The postcode value for the preference hierarchy.</p>
+    #   @return [String]
+    class GeocoderHierarchy < Struct.new(
+      nil,
+      :country,
+      :state,
+      :county,
+      :city,
+      :post_code,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16051,7 +23611,7 @@ module Aws::QuickSight
     end
 
     # <p>A geospatial map or a points on map visual.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/point-maps.html">Creating point maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/point-maps.html">Creating point maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
     #   @return [String]
@@ -16073,6 +23633,9 @@ module Aws::QuickSight
     # @!attribute visual_content_alt_text
     #   <p>The alt text for the visual.</p>
     #   @return [String]
+    # @!attribute geocoding_preferences
+    #   <p>The geocoding prefences for geospatial map.</p>
+    #   @return [Array<Types::GeocodePreference>]
     class GeospatialMapVisual < Struct.new(
       nil,
       :visual_id,
@@ -16082,6 +23645,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :actions,
       :visual_content_alt_text,
+      :geocoding_preferences,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16252,39 +23816,40 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that contains the dashboard that you're embedding.</p>
+    #   <p>The ID for the Amazon Web Services account that contains the dashboard that you're
+    #               embedding.</p>
     #   @return [String]
     # @!attribute dashboard_id
-    #   <p>The ID for the dashboard, also added to the Identity and Access Management (IAM)
-    #               policy.</p>
+    #   <p>The ID for the dashboard, also added to the Identity and Access Management (IAM) policy.</p>
     #   @return [String]
     # @!attribute identity_type
     #   <p>The authentication method that the user uses to sign in.</p>
     #   @return [String]
     # @!attribute session_lifetime_in_minutes
-    #   <p>How many minutes the session is valid. The session lifetime must be 15-600 minutes.</p>
+    #   <p>How many minutes the session is valid. The session lifetime must be 15-600
+    #               minutes.</p>
     #   @return [Integer]
     # @!attribute undo_redo_disabled
-    #   <p>Remove the undo/redo button on the embedded dashboard. The default is FALSE, which enables
-    #   			the undo/redo button.</p>
+    #   <p>Remove the undo/redo button on the embedded dashboard. The default is FALSE, which
+    #               enables the undo/redo button.</p>
     #   @return [Boolean]
     # @!attribute reset_disabled
-    #   <p>Remove the reset button on the embedded dashboard. The default is FALSE, which enables the
-    #   			reset button.</p>
+    #   <p>Remove the reset button on the embedded dashboard. The default is FALSE, which enables
+    #               the reset button.</p>
     #   @return [Boolean]
     # @!attribute state_persistence_enabled
     #   <p>Adds persistence of state for the user session in an embedded dashboard. Persistence
     #               applies to the sheet and the parameter settings. These are control settings that the
-    #               dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is
-    #               set to <code>TRUE</code>, the settings are the same when the subscriber reopens the same
-    #               dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is
-    #               set to FALSE, the state of the user session is not persisted. The default is
-    #                   <code>FALSE</code>.</p>
+    #               dashboard subscriber (Amazon Quick Sight reader) chooses while viewing the dashboard. If
+    #               this is set to <code>TRUE</code>, the settings are the same when the subscriber reopens
+    #               the same dashboard URL. The state is stored in Amazon Quick Sight, not in a browser
+    #               cookie. If this is set to FALSE, the state of the user session is not persisted. The
+    #               default is <code>FALSE</code>.</p>
     #   @return [Boolean]
     # @!attribute user_arn
-    #   <p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type.
-    #   			You can use this for any Amazon QuickSight users in your account (readers, authors, or
-    #   			admins) authenticated as one of the following:</p>
+    #   <p>The Amazon Quick user's Amazon Resource Name (ARN), for use with
+    #                   <code>QUICKSIGHT</code> identity type. You can use this for any Amazon Quick users in your account (readers, authors, or admins) authenticated as one of the
+    #               following:</p>
     #            <ul>
     #               <li>
     #                  <p>Active Directory (AD) users or group members</p>
@@ -16293,19 +23858,24 @@ module Aws::QuickSight
     #                  <p>Invited nonfederated users</p>
     #               </li>
     #               <li>
-    #                  <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using
-    #   					SAML, OpenID Connect, or IAM federation.</p>
+    #                  <p>IAM users and IAM role-based sessions
+    #                       authenticated through Federated Single Sign-On using SAML, OpenID Connect, or
+    #                           IAM federation.</p>
     #               </li>
     #            </ul>
     #            <p>Omit this parameter for users in the third group – IAM users and IAM
     #               role-based sessions.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The QuickSight namespace that contains the dashboard IDs in this request.
-    #       	   If you're not using a custom namespace, set <code>Namespace = default</code>.</p>
+    #   <p>The Amazon Quick Sight namespace that contains the dashboard IDs in this request. If
+    #               you're not using a custom namespace, set <code>Namespace = default</code>.</p>
     #   @return [String]
     # @!attribute additional_dashboard_ids
-    #   <p>A list of one or more dashboard IDs that you want anonymous users to have tempporary access to. Currently, the <code>IdentityType</code> parameter must be set to <code>ANONYMOUS</code> because other identity types authenticate as QuickSight or IAM users. For example, if you set "<code>--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>", the session can access all three dashboards.</p>
+    #   <p>A list of one or more dashboard IDs that you want anonymous users to have tempporary
+    #               access to. Currently, the <code>IdentityType</code> parameter must be set to
+    #                   <code>ANONYMOUS</code> because other identity types authenticate as Quick or IAM users. For example, if you set "<code>--dashboard-id
+    #                   dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>", the
+    #               session can access all three dashboards.</p>
     #   @return [Array<String>]
     class GetDashboardEmbedUrlRequest < Struct.new(
       nil,
@@ -16327,9 +23897,9 @@ module Aws::QuickSight
     # <p>Output returned from the <code>GetDashboardEmbedUrl</code> operation.</p>
     # @!attribute embed_url
     #   <p>A single-use URL that you can put into your server-side webpage to embed your
-    #   			dashboard. This URL is valid for 5 minutes. The API operation provides the URL with an
-    #   			<code>auth_code</code> value that enables one (and only one) sign-on to a user session
-    #   			that is valid for 10 hours. </p>
+    #               dashboard. This URL is valid for 5 minutes. The API operation provides the URL with an
+    #                   <code>auth_code</code> value that enables one (and only one) sign-on to a user
+    #               session that is valid for 10 hours. </p>
     #   @return [String]
     # @!attribute status
     #   <p>The HTTP status of the request.</p>
@@ -16353,11 +23923,196 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account associated with your QuickSight subscription.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the flow that you are getting metadata for.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow.</p>
+    #   @return [String]
+    class GetFlowMetadataInput < Struct.new(
+      nil,
+      :aws_account_id,
+      :flow_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the flow.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A display name for the flow.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description for the flow.</p>
+    #   @return [String]
+    # @!attribute publish_state
+    #   <p>The publish state for the flow. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>,
+    #               or <code>PENDING_APPROVAL</code>.</p>
+    #   @return [String]
+    # @!attribute user_count
+    #   <p>The number of users who have used the flow.</p>
+    #   @return [Integer]
+    # @!attribute run_count
+    #   <p>The number of runs done for the flow.</p>
+    #   @return [Integer]
+    # @!attribute created_time
+    #   <p>The time this flow was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The last time this flow was modified.</p>
+    #   @return [Time]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class GetFlowMetadataOutput < Struct.new(
+      nil,
+      :arn,
+      :flow_id,
+      :name,
+      :description,
+      :publish_state,
+      :user_count,
+      :run_count,
+      :created_time,
+      :last_updated_time,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:user_count] = 0 unless options.key?(:user_count)
+        options[:run_count] = 0 unless options.key?(:run_count)
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the flow that you are getting permissions for.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow to get permissions from.</p>
+    #   @return [String]
+    class GetFlowPermissionsInput < Struct.new(
+      nil,
+      :aws_account_id,
+      :flow_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the flow you are getting permissions against.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow with permissions.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>A structure that contains the permissions for the flow.</p>
+    #   @return [Array<Types::Permission>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class GetFlowPermissionsOutput < Struct.new(
+      nil,
+      :arn,
+      :flow_id,
+      :permissions,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # <p>/////////////////////////
+    # /////////////////////////</p>
+    # @!attribute aws_account_id
+    #   <p>The ID for the Amazon Web Services account that the user whose identity context you want to retrieve is in. Currently, you use the ID for the Amazon Web Services account that contains your Quick Sight account.</p>
+    #   @return [String]
+    # @!attribute user_identifier
+    #   <p>The identifier for the user whose identity context you want to retrieve.</p>
+    #   @return [Types::UserIdentifier]
+    # @!attribute namespace
+    #   <p>The namespace of the user that you want to get identity context for. This parameter is required when the UserIdentifier is specified using Email or UserName.</p>
+    #   @return [String]
+    # @!attribute session_expires_at
+    #   <p>The timestamp at which the session will expire.</p>
+    #   @return [Time]
+    # @!attribute context_region
+    #   <p>The region in which the context is to be used. Use this parameter to obtain an identity context for cross-region use.</p>
+    #            <p>The specified region must meet the following conditions:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>The region must be in the same Amazon Web Services partition as the region you are calling from. Cross-partition requests are not supported. For example, you cannot specify a region in the <code>aws-cn</code> partition when calling from a region in the <code>aws</code> partition.</p>
+    #               </li>
+    #               <li>
+    #                  <p>It must be a valid Amazon QuickSight supported region.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The calling customer account must be enabled in the specified context region.</p>
+    #               </li>
+    #               <li>
+    #                  <p>This parameter is not supported when calling from an opt-in region.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class GetIdentityContextRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :user_identifier,
+      :namespace,
+      :session_expires_at,
+      :context_region,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute context
+    #   <p>The identity context information for the user. This is an identity token that should be used as the ContextAssertion parameter in the <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">STS AssumeRole API</a> call to obtain identity enhanced Amazon Web Services credentials.</p>
+    #   @return [String]
+    class GetIdentityContextResponse < Struct.new(
+      nil,
+      :status,
+      :request_id,
+      :context,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID for the Amazon Web Services account associated with your Amazon Quick Sight
+    #               subscription.</p>
     #   @return [String]
     # @!attribute entry_point
     #   <p>The URL you use to access the embedded session. The entry point URL is constrained to
-    #             the following paths:</p>
+    #               the following paths:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -16382,22 +24137,27 @@ module Aws::QuickSight
     #               <li>
     #                  <p>
     #                     <code>/dashboards/<i>DashboardId</i>
-    #                     </code> - where <code>DashboardId</code> is the actual ID key from the QuickSight console URL of the dashboard</p>
+    #                     </code> - where
+    #                           <code>DashboardId</code> is the actual ID key from the Amazon Quick Sight
+    #                       console URL of the dashboard</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>/analyses/<i>AnalysisId</i>
-    #                     </code> - where <code>AnalysisId</code> is the actual ID key from the QuickSight console URL of the analysis</p>
+    #                     </code> - where
+    #                           <code>AnalysisId</code> is the actual ID key from the Amazon Quick Sight
+    #                       console URL of the analysis</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute session_lifetime_in_minutes
-    #   <p>How many minutes the session is valid. The session lifetime must be 15-600 minutes.</p>
+    #   <p>How many minutes the session is valid. The session lifetime must be 15-600
+    #               minutes.</p>
     #   @return [Integer]
     # @!attribute user_arn
-    #   <p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type.
-    #   			You can use this for any type of Amazon QuickSight users in your account (readers, authors, or
-    #   			admins). They need to be authenticated as one of the following:</p>
+    #   <p>The Amazon Quick user's Amazon Resource Name (ARN), for use with
+    #                   <code>QUICKSIGHT</code> identity type. You can use this for any type of Amazon Quick users in your account (readers, authors, or admins). They need to be
+    #               authenticated as one of the following:</p>
     #            <ol>
     #               <li>
     #                  <p>Active Directory (AD) users or group members</p>
@@ -16406,13 +24166,12 @@ module Aws::QuickSight
     #                  <p>Invited nonfederated users</p>
     #               </li>
     #               <li>
-    #                  <p>IAM users and IAM role-based sessions authenticated
-    #                       through Federated Single Sign-On using SAML, OpenID Connect, or IAM
-    #                       federation</p>
+    #                  <p>IAM users and IAM role-based sessions
+    #                       authenticated through Federated Single Sign-On using SAML, OpenID Connect, or
+    #                           IAM federation</p>
     #               </li>
     #            </ol>
-    #            <p>Omit this parameter for users in the third group, IAM users and IAM role-based
-    #               sessions.</p>
+    #            <p>Omit this parameter for users in the third group, IAM users and IAM role-based sessions.</p>
     #   @return [String]
     class GetSessionEmbedUrlRequest < Struct.new(
       nil,
@@ -16426,10 +24185,9 @@ module Aws::QuickSight
     end
 
     # @!attribute embed_url
-    #   <p>A single-use URL that you can put into your server-side web page to embed your
-    #   			QuickSight session. This URL is valid for 5 minutes. The API operation provides the URL with an
-    #   			<code>auth_code</code> value that enables one (and only one) sign-on to a user session
-    #   			that is valid for 10 hours. </p>
+    #   <p>A single-use URL that you can put into your server-side web page to embed your Quick session. This URL is valid for 5 minutes. The API operation provides the
+    #               URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a
+    #               user session that is valid for 10 hours. </p>
     #   @return [String]
     # @!attribute status
     #   <p>The HTTP status of the request.</p>
@@ -16463,6 +24221,40 @@ module Aws::QuickSight
       nil,
       :uniform_border,
       :side_specific_border,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The connection parameters for a Google Drive data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses Google Drive.</p>
+    # @!attribute auth_type
+    #   <p>The authentication type for the Google Drive data source. Valid values include:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>SERVICE_ACCOUNT</code> – Server-to-server authentication using a Google service account key.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>THREE_LEGGED_OAUTH</code> – Interactive OAuth that requires user consent.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class GoogleDriveParameters < Struct.new(
+      nil,
+      :auth_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the governance configuration for a custom permissions profile. When governance controls are defined for a category, any capabilities in that category not explicitly set to <code>ALLOW</code> in <code>Capabilities</code> are denied. Even newly added capabilities in the category are implicitly disabled when Amazon Quick releases them.</p>
+    # @!attribute default_category_effects
+    #   <p>A map of <code>DefaultCategoryEffects</code>.</p>
+    #   @return [Hash<String, String>]
+    class Governance < Struct.new(
+      nil,
+      :default_category_effects,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16554,6 +24346,24 @@ module Aws::QuickSight
     # @!attribute row_span
     #   <p>The height of a grid element expressed as a number of grid rows.</p>
     #   @return [Integer]
+    # @!attribute border_style
+    #   <p>The border style configuration of a grid layout element.</p>
+    #   @return [Types::GridLayoutElementBorderStyle]
+    # @!attribute selected_border_style
+    #   <p>The border style configuration of a grid layout element. This border style is used when the element is selected.</p>
+    #   @return [Types::GridLayoutElementBorderStyle]
+    # @!attribute background_style
+    #   <p>The background style configuration of a grid layout element.</p>
+    #   @return [Types::GridLayoutElementBackgroundStyle]
+    # @!attribute loading_animation
+    #   <p>The configuration of loading animation in free-form layout. </p>
+    #   @return [Types::LoadingAnimation]
+    # @!attribute border_radius
+    #   <p>The border radius of a grid layout element.</p>
+    #   @return [String]
+    # @!attribute padding
+    #   <p>The padding of a grid layout element.</p>
+    #   @return [String]
     class GridLayoutElement < Struct.new(
       nil,
       :element_id,
@@ -16562,6 +24372,48 @@ module Aws::QuickSight
       :column_span,
       :row_index,
       :row_span,
+      :border_style,
+      :selected_border_style,
+      :background_style,
+      :loading_animation,
+      :border_radius,
+      :padding,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The background style configuration of a grid layout element.</p>
+    # @!attribute visibility
+    #   <p>The background visibility of a grid layout element.</p>
+    #   @return [String]
+    # @!attribute color
+    #   <p>The background color of a grid layout element.</p>
+    #   @return [String]
+    class GridLayoutElementBackgroundStyle < Struct.new(
+      nil,
+      :visibility,
+      :color,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The border style configuration of a grid layout element.</p>
+    # @!attribute visibility
+    #   <p>The border visibility of a grid layout element.</p>
+    #   @return [String]
+    # @!attribute color
+    #   <p>The border color of a grid layout element.</p>
+    #   @return [String]
+    # @!attribute width
+    #   <p>The border width of a grid layout element.</p>
+    #   @return [String]
+    class GridLayoutElementBorderStyle < Struct.new(
+      nil,
+      :visibility,
+      :color,
+      :width,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16574,12 +24426,12 @@ module Aws::QuickSight
     #               <li>
     #                  <p>
     #                     <code>FIXED</code>: A fixed width will be used when optimizing the layout. In
-    #                       the QuickSight console, this option is called <code>Classic</code>.</p>
+    #                       the Quick Sight console, this option is called <code>Classic</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>RESPONSIVE</code>: The width of the canvas will be responsive and
-    #                       optimized to the view port. In the QuickSight console, this option is called <code>Tiled</code>.</p>
+    #                       optimized to the view port. In the Quick Sight console, this option is called <code>Tiled</code>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -16595,7 +24447,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A <i>group</i> in Amazon QuickSight consists of a set of users. You can
+    # <p>A <i>group</i> in Quick Sight consists of a set of users. You can
     #             use groups to make it easier to manage access and security. </p>
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) for the group.</p>
@@ -16620,7 +24472,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A member of an Amazon QuickSight group. Currently, group members must be users. Groups
+    # <p>A member of an Quick Sight group. Currently, group members must be users. Groups
     #             can't be members of another group. .</p>
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) for the group member (user).</p>
@@ -16837,7 +24689,7 @@ module Aws::QuickSight
     end
 
     # <p>A heat map.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/heat-map.html">Using heat maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/heat-map.html">Using heat maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -16868,6 +24720,269 @@ module Aws::QuickSight
       :column_hierarchies,
       :actions,
       :visual_content_alt_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A <code>HierarchyFilter</code> filters data by drilling down through an ordered list of columns. Each level in the list narrows the data by one column, and the selected values at each level determine which values are available at the next.</p>
+    # @!attribute filter_id
+    #   <p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>
+    #   @return [String]
+    # @!attribute column
+    #   <p>The column that anchors the filter. This column determines the dataset that the whole
+    #               filter applies to, so every column in <code>HierarchyLevels</code> and in
+    #               <code>HierarchyTree</code> must belong to the same dataset.</p>
+    #   @return [Types::ColumnIdentifier]
+    # @!attribute hierarchy_levels
+    #   <p>The ordered list of columns that defines the drill-down path of the filter. The first level is the top of the hierarchy. You can specify a maximum of 5 levels.</p>
+    #   @return [Array<Types::HierarchyFilterLevel>]
+    # @!attribute hierarchy_tree
+    #   <p>The tree of selected values for the filter. Each node records the values that are selected at one level of the hierarchy, and its children record the selections beneath those values. Omit this attribute to define the drill-down path without restricting any values.</p>
+    #   @return [Types::HierarchyFilterNode]
+    # @!attribute null_option
+    #   <p>This option determines how null values should be treated when filtering data.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ALL_VALUES</code>: Include null values in filtered results.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute match_operator
+    #   <p>Determines whether the values selected in <code>HierarchyTree</code> are kept or
+    #               removed. Choose one of the following options:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>INCLUDE</code>: Keep only the selected values.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EXCLUDE</code>: Remove the selected values.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute default_filter_control_configuration
+    #   <p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>
+    #   @return [Types::DefaultFilterControlConfiguration]
+    class HierarchyFilter < Struct.new(
+      nil,
+      :filter_id,
+      :column,
+      :hierarchy_levels,
+      :hierarchy_tree,
+      :null_option,
+      :match_operator,
+      :default_filter_control_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A control from a hierarchy filter that displays the hierarchy as a dropdown list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>
+    # @!attribute filter_control_id
+    #   <p>The ID of the <code>HierarchyFilterDropDownControl</code>.</p>
+    #   @return [String]
+    # @!attribute source_filter_id
+    #   <p>The source filter ID of the <code>HierarchyFilterDropDownControl</code>. This must be
+    #               the <code>FilterId</code> of a <code>HierarchyFilter</code>.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>The title of the <code>HierarchyFilterDropDownControl</code>.</p>
+    #   @return [String]
+    # @!attribute display_options
+    #   <p>The display options of a control.</p>
+    #   @return [Types::HierarchyFilterDropDownControlDisplayOptions]
+    # @!attribute type
+    #   <p>The type of the <code>HierarchyFilterDropDownControl</code>. Choose one of the following options:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute commit_mode
+    #   <p>The visibility configuration of the Apply button on a <code>HierarchyFilterDropDownControl</code>.</p>
+    #   @return [String]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
+    class HierarchyFilterDropDownControl < Struct.new(
+      nil,
+      :filter_control_id,
+      :source_filter_id,
+      :title,
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The display options of a control.</p>
+    # @!attribute title_options
+    #   <p>The options to configure the title visibility, name, and font size.</p>
+    #   @return [Types::LabelOptions]
+    # @!attribute info_icon_label_options
+    #   <p>The configuration of info icon label options.</p>
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    class HierarchyFilterDropDownControlDisplayOptions < Struct.new(
+      nil,
+      :title_options,
+      :info_icon_label_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>One level of the drill-down path of a <code>HierarchyFilter</code>.</p>
+    # @!attribute column
+    #   <p>The column that this level of the hierarchy drills down by. This column must belong to
+    #               the same dataset as <code>HierarchyFilter$Column</code>.</p>
+    #   @return [Types::ColumnIdentifier]
+    class HierarchyFilterLevel < Struct.new(
+      nil,
+      :column,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A control from a hierarchy filter that displays the hierarchy as a list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>
+    # @!attribute filter_control_id
+    #   <p>The ID of the <code>HierarchyFilterListControl</code>.</p>
+    #   @return [String]
+    # @!attribute source_filter_id
+    #   <p>The source filter ID of the <code>HierarchyFilterListControl</code>. This must be the
+    #               <code>FilterId</code> of a <code>HierarchyFilter</code>.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>The title of the <code>HierarchyFilterListControl</code>.</p>
+    #   @return [String]
+    # @!attribute display_options
+    #   <p>The display options of a control.</p>
+    #   @return [Types::HierarchyFilterListControlDisplayOptions]
+    # @!attribute type
+    #   <p>The type of the <code>HierarchyFilterListControl</code>. Choose one of the following options:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute commit_mode
+    #   <p>The visibility configuration of the Apply button on a <code>HierarchyFilterListControl</code>.</p>
+    #   @return [String]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
+    class HierarchyFilterListControl < Struct.new(
+      nil,
+      :filter_control_id,
+      :source_filter_id,
+      :title,
+      :display_options,
+      :type,
+      :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The display options of a control.</p>
+    # @!attribute title_options
+    #   <p>The options to configure the title visibility, name, and font size.</p>
+    #   @return [Types::LabelOptions]
+    # @!attribute info_icon_label_options
+    #   <p>The configuration of info icon label options.</p>
+    #   @return [Types::SheetControlInfoIconLabelOptions]
+    # @!attribute search_options
+    #   <p>The configuration of the search options in a hierarchy list control.</p>
+    #   @return [Types::HierarchyFilterListControlSearchOptions]
+    class HierarchyFilterListControlDisplayOptions < Struct.new(
+      nil,
+      :title_options,
+      :info_icon_label_options,
+      :search_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration of the search options in a hierarchy list control.</p>
+    # @!attribute visibility
+    #   <p>The visibility configuration of the search options in a hierarchy list control.</p>
+    #   @return [String]
+    class HierarchyFilterListControlSearchOptions < Struct.new(
+      nil,
+      :visibility,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A node in the selection tree of a <code>HierarchyFilter</code>. Each node records the
+    #             values that are selected at one level of the hierarchy. Nodes nest through
+    #             <code>Children</code> to record selections at deeper levels.</p>
+    #          <p>The tree cannot be deeper than the number of levels declared in
+    #             <code>HierarchyLevels</code>. A tree can be a maximum of 5 levels deep, and a node can
+    #             have a maximum of 1,000 children.</p>
+    # @!attribute column
+    #   <p>The column that this node selects values from. This column must match the column of the
+    #               corresponding level in <code>HierarchyFilter$HierarchyLevels</code>. The node at depth 1
+    #               must match the first level, the node at depth 2 must match the second level, and so on.</p>
+    #   @return [Types::ColumnIdentifier]
+    # @!attribute parent_value
+    #   <p>The value in the parent node's <code>HierarchyValues</code> that this node belongs to.
+    #               When a parent selects several values, each of its children repeats one of them here to
+    #               identify which branch of the hierarchy that child describes.</p>
+    #            <p>Omit this attribute on the root node of <code>HierarchyTree</code>, which has no
+    #               parent.</p>
+    #   @return [String]
+    # @!attribute hierarchy_values
+    #   <p>The values that are selected at this level of the hierarchy. You can specify a maximum
+    #               of 2,000 values per node.</p>
+    #   @return [Array<String>]
+    # @!attribute children
+    #   <p>The nodes that record the selections at the next level of the hierarchy. You can
+    #               specify a maximum of 1,000 children per node.</p>
+    #   @return [Array<Types::HierarchyFilterNode>]
+    class HierarchyFilterNode < Struct.new(
+      nil,
+      :column,
+      :parent_value,
+      :hierarchy_values,
+      :children,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16971,7 +25086,7 @@ module Aws::QuickSight
     end
 
     # <p>A histogram.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/histogram-charts.html">Using histograms</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/histogram-charts.html">Using histograms</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -16998,6 +25113,18 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :visual_content_alt_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Authentication metadata for IAM-based connections, used for first-party Amazon Web Services service integrations.</p>
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to assume for authentication with Amazon Web Services services. This IAM role should be in the same account as Quick Sight.</p>
+    #   @return [String]
+    class IAMConnectionMetadata < Struct.new(
+      nil,
+      :role_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17186,6 +25313,18 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for image extraction from knowledge base documents.</p>
+    # @!attribute image_extraction_status
+    #   <p>The status of image extraction. Valid values are ENABLED and DISABLED.</p>
+    #   @return [String]
+    class ImageExtractionConfiguration < Struct.new(
+      nil,
+      :image_extraction_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The general image interactions setup for image publish options.</p>
     # @!attribute image_menu_option
     #   <p>The menu options for the image.</p>
@@ -17302,6 +25441,38 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A transform operation that imports data from a source table.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source configuration that specifies which source table to import and any column mappings.</p>
+    #   @return [Types::ImportTableOperationSource]
+    class ImportTableOperation < Struct.new(
+      nil,
+      :alias,
+      :source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the source table and column mappings for an import table operation.</p>
+    # @!attribute source_table_id
+    #   <p>The identifier of the source table to import data from.</p>
+    #   @return [String]
+    # @!attribute column_id_mappings
+    #   <p>The mappings between source column identifiers and target column identifiers during the import.</p>
+    #   @return [Array<Types::DataSetColumnIdMapping>]
+    class ImportTableOperationSource < Struct.new(
+      nil,
+      :source_table_id,
+      :column_id_mappings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The incremental refresh configuration for a dataset.</p>
     # @!attribute lookback_window
     #   <p>The lookback window setup for an incremental refresh configuration.</p>
@@ -17372,6 +25543,22 @@ module Aws::QuickSight
       end
     end
 
+    # <p>An inline custom instruction with text content and optional file upload metadata.</p>
+    # @!attribute instruction_text
+    #   <p>The instruction text content.</p>
+    #   @return [String]
+    # @!attribute uploaded_document_metadata
+    #   <p>Metadata about an uploaded document associated with this instruction.</p>
+    #   @return [Types::UploadedDocumentMetadata]
+    class InlineCustomInstruction < Struct.new(
+      nil,
+      :instruction_text,
+      :uploaded_document_metadata,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The <code>InnerFilter</code> defines the subset of data to be used with the <code>NestedFilter</code>.</p>
     # @!attribute category_inner_filter
     #   <p>A <code>CategoryInnerFilter</code> filters text values for the <code>NestedFilter</code>.</p>
@@ -17388,8 +25575,14 @@ module Aws::QuickSight
     # @!attribute name
     #   <p>The name of this column in the underlying data source.</p>
     #   @return [String]
+    # @!attribute id
+    #   <p>A unique identifier for the input column.</p>
+    #   @return [String]
     # @!attribute type
     #   <p>The data type of the column.</p>
+    #            <p>
+    #               <b>Note:</b>
+    #               <code>SEMISTRUCT</code> represents Athena's map, row, and struct data types. It is supported when using the new data preparation experience.</p>
     #   @return [String]
     # @!attribute sub_type
     #   <p>The sub data type of the column. Sub types are only available for decimal columns that are part of a SPICE dataset.</p>
@@ -17397,6 +25590,7 @@ module Aws::QuickSight
     class InputColumn < Struct.new(
       nil,
       :name,
+      :id,
       :type,
       :sub_type,
       keyword_init: true
@@ -17425,7 +25619,7 @@ module Aws::QuickSight
     end
 
     # <p>An insight visual.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/computational-insights.html">Working with insights</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/computational-insights.html">Working with insights</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -17444,6 +25638,9 @@ module Aws::QuickSight
     # @!attribute data_set_identifier
     #   <p>The dataset that is used in the insight visual.</p>
     #   @return [String]
+    # @!attribute topic_identifier
+    #   <p>The topic that is used in the insight visual.</p>
+    #   @return [String]
     # @!attribute visual_content_alt_text
     #   <p>The alt text for the visual.</p>
     #   @return [String]
@@ -17455,10 +25652,16 @@ module Aws::QuickSight
       :insight_configuration,
       :actions,
       :data_set_identifier,
+      :topic_identifier,
       :visual_content_alt_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:data_set_identifier] = '' unless options.key?(:data_set_identifier)
+        super
+      end
     end
 
     # <p>An integer parameter for a dataset.</p>
@@ -17615,6 +25818,21 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An exception thrown when an invalid parameter value is provided for dataset operations.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this request.</p>
+    #   @return [String]
+    class InvalidDataSetParameterValueException < Struct.new(
+      nil,
+      :message,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The <code>NextToken</code> value isn't valid.</p>
     # @!attribute message
     #   @return [String]
@@ -17622,6 +25840,21 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this request.</p>
     #   @return [String]
     class InvalidNextTokenException < Struct.new(
+      nil,
+      :message,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>One or more parameter has a value that isn't valid.</p>
+    # @!attribute message
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this request.</p>
+    #   @return [String]
+    class InvalidParameterException < Struct.new(
       nil,
       :message,
       :request_id,
@@ -17758,7 +25991,7 @@ module Aws::QuickSight
     # <p>Properties associated with the columns participating in a join.</p>
     # @!attribute unique_key
     #   <p>A value that indicates that a row in a table is uniquely identified by the columns in
-    #               a join key. This is used by QuickSight to optimize query performance.</p>
+    #               a join key. This is used by Quick Sight to optimize query performance.</p>
     #   @return [Boolean]
     class JoinKeyProperties < Struct.new(
       nil,
@@ -17771,6 +26004,54 @@ module Aws::QuickSight
         options[:unique_key] = nil unless options.key?(:unique_key)
         super
       end
+    end
+
+    # <p>Properties that control how columns are handled for a join operand, including column name overrides.</p>
+    # @!attribute output_column_name_overrides
+    #   <p>A list of column name overrides to apply to the join operand's output columns.</p>
+    #   @return [Array<Types::OutputColumnNameOverride>]
+    class JoinOperandProperties < Struct.new(
+      nil,
+      :output_column_name_overrides,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A transform operation that combines data from two sources based on specified join conditions.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute left_operand
+    #   <p>The left operand for the join operation.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute right_operand
+    #   <p>The right operand for the join operation.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute type
+    #   <p>The type of join to perform, such as <code>INNER</code>, <code>LEFT</code>, <code>RIGHT</code>, or <code>OUTER</code>.</p>
+    #   @return [String]
+    # @!attribute on_clause
+    #   <p>The join condition that specifies how to match rows between the left and right operands.</p>
+    #   @return [String]
+    # @!attribute left_operand_properties
+    #   <p>Properties that control how the left operand's columns are handled in the join result.</p>
+    #   @return [Types::JoinOperandProperties]
+    # @!attribute right_operand_properties
+    #   <p>Properties that control how the right operand's columns are handled in the join result.</p>
+    #   @return [Types::JoinOperandProperties]
+    class JoinOperation < Struct.new(
+      nil,
+      :alias,
+      :left_operand,
+      :right_operand,
+      :type,
+      :on_clause,
+      :left_operand_properties,
+      :right_operand_properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting for the actual value of a KPI visual.</p>
@@ -17994,7 +26275,7 @@ module Aws::QuickSight
     end
 
     # <p>A key performance indicator (KPI).</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/kpi.html">Using KPIs</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/kpi.html">Using KPIs</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -18053,6 +26334,388 @@ module Aws::QuickSight
     class KPIVisualStandardLayout < Struct.new(
       nil,
       :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The template configuration for a knowledge base. This object contains connector-specific configuration that defines how data is crawled and indexed.</p>
+    # @!attribute template
+    #   <p>The connector configuration for the knowledge base data source. The structure depends on the connector type of the data source referenced by <code>DataSourceArn</code>.</p>
+    #            <p>The template must be a JSON object. All connector types share the following top-level keys. The value of <code>type</code> and the contents of <code>connectionConfiguration</code> vary by connector type.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>type</code> – (Required) The connector type of the data source. This value identifies the connector. Valid values: <code>S3V2</code>, <code>WEBCRAWLERV3</code>, <code>GOOGLEDRIVEV3</code>, <code>ONEDRIVEV3</code>, <code>SHAREPOINTV3</code>. For the fields required by each connector, see the connector-specific list that follows.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>connectionConfiguration</code> – (Required) The connection details for the data source. The keys in this object vary by connector type; see the connector-specific list that follows.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>filterConfiguration</code> – (Optional) Rules that determine which content is crawled, such as inclusion and exclusion prefixes, patterns, or file-size limits.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>accessControlConfiguration</code> – (Optional) Document-level access control (ACL) settings. Supported by all connector types except Web Crawler (<code>WEBCRAWLERV3</code>). The available fields depend on the connector type.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>deletionProtectionConfiguration</code> – (Optional) Deletion-protection settings, supported by all connector types. Contains <code>enableDeletionProtection</code> (Boolean) and <code>deletionProtectionThreshold</code> (String; a value from 1 to 100).</p>
+    #               </li>
+    #            </ul>
+    #            <p>The following list describes the valid <code>type</code> value, the <code>connectionConfiguration</code> contents, and any connector-specific fields for each connector type:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>Amazon S3</b> (<code>type</code>: <code>S3V2</code>) – The <code>type</code> value must be <code>S3V2</code>. <code>connectionConfiguration</code> is required and contains:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>bucketName</code> – (Required) The name of the Amazon S3 bucket to crawl. Type: String. Length: 3–63 characters. Pattern: <code>^[a-z0-9][.\-a-z0-9]{1,61}[a-z0-9]$</code>.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>bucketOwnerAccountId</code> – (Required) The ID of the AWS account that owns the bucket. Type: String. Pattern: <code>^\d{12}$</code>.</p>
+    #                     </li>
+    #                  </ul>
+    #                  <p>Amazon S3 supports the following optional <code>filterConfiguration</code> fields:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>inclusionPrefixes</code> or <code>exclusionPrefixes</code> – Amazon S3 key prefixes to include or exclude. Type: Array of String. Up to 350 items, each 1–1,024 characters.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>inclusionPatterns</code> or <code>exclusionPatterns</code> – Patterns to include or exclude objects. Type: Array of String. Up to 350 items, each 1–1,024 characters.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>maxFileSizeInMegaBytes</code> – The maximum size, in MB, of a file to ingest. Type: String. Pattern: <code>^\d+$</code>.</p>
+    #                     </li>
+    #                  </ul>
+    #                  <p>For Amazon S3, <code>accessControlConfiguration</code> supports the following fields:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>crawlAcl</code> – Specifies whether the connector crawls and enforces document access control lists (ACLs). Type: Boolean. When set to <code>true</code>, provide ACLs either in a global ACL configuration file (<code>aclConfigurationFilePath</code>) or in per-document metadata files.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>aclConfigurationFilePath</code> – The Amazon S3 URI of the global ACL configuration file. Type: String. Length: 1–1,024 characters. Optional. If you don't provide a global ACL configuration file, define ACLs in per-document metadata files.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>defaultAccessType</code> – The access behavior applied to Amazon S3 prefixes that are not listed in the ACL configuration. Type: String. The only supported value is <code>ALLOW</code>.</p>
+    #                     </li>
+    #                  </ul>
+    #                  <p>
+    #                     <code>metadataFilesPrefix</code> – (Optional) The Amazon S3 prefix under which per-document metadata files are stored. Each metadata file describes a single source document and its indexable attributes. This is not the global ACL configuration file. For a single global ACL file, use <code>accessControlConfiguration.aclConfigurationFilePath</code>. Type: String. Length: 1–1,024 characters.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>Google Drive</b> (<code>type</code>: <code>GOOGLEDRIVEV3</code>) – Requires <code>connectionConfiguration</code> with <code>authType</code> set to <code>SERVICE_ACCOUNT</code>. Supports <code>dataEntityConfiguration</code> with <code>crawlMyDrive</code>, <code>crawlSharedWithMe</code>, and <code>crawlSharedDrives</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>OneDrive</b> (<code>type</code>: <code>ONEDRIVEV3</code>) – Requires <code>authType</code> at the template root level set to <code>TWO_LEGGED_OAUTH</code>. Requires <code>connectionConfiguration</code> with <code>tenantId</code> in UUID format. Supports <code>dataEntityConfiguration</code> with <code>crawlPersonalDrives</code> and <code>crawlSharedWithMe</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>SharePoint</b> (<code>type</code>: <code>SHAREPOINTV3</code>) – Requires <code>connectionConfiguration</code> with <code>tenantId</code> in UUID format. Supports <code>dataEntityConfiguration</code> with <code>siteUrls</code>, <code>crawlFiles</code>, and <code>crawlPages</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>Web Crawler</b> (<code>type</code>: <code>WEBCRAWLERV3</code>) – Requires <code>connectionConfiguration</code> with <code>seedUrls</code> or <code>siteMapUrls</code> (mutually exclusive) and <code>authType</code>. Supports <code>crawlConfiguration</code> for crawl depth, rate limits, and scope. Supports <code>filterConfiguration</code> for file size limits and URL patterns. Valid values for <code>authType</code>: <code>NO_AUTH</code>, <code>BASIC_AUTH</code>, <code>FORM</code>, <code>SAML</code>.</p>
+    #               </li>
+    #            </ul>
+    #            <p>
+    #               <b>Enabling document-level access control for Amazon S3</b>
+    #            </p>
+    #            <p>For an Amazon S3 (<code>S3V2</code>) knowledge base, document-level access control is governed by two settings that must both be enabled:</p>
+    #            <ol>
+    #               <li>
+    #                  <p>In this template, set <code>accessControlConfiguration.crawlAcl</code> to <code>true</code>. Define ACLs either in a global ACL configuration file, referenced by <code>accessControlConfiguration.aclConfigurationFilePath</code>, or in per-document metadata files. To control access for prefixes that are not listed in the ACL file, you can also set <code>accessControlConfiguration.defaultAccessType</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>In the <code>CreateKnowledgeBase</code> or <code>UpdateKnowledgeBase</code> request, set the top-level <code>AccessControlConfiguration.isACLEnabled</code> to <code>true</code>.</p>
+    #               </li>
+    #            </ol>
+    #   @return [JSON]
+    class KbTemplateConfiguration < Struct.new(
+      nil,
+      :template,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The combination of username, private key and passphrase that are used as credentials.</p>
+    # @!attribute key_pair_username
+    #   <p>Username</p>
+    #   @return [String]
+    # @!attribute private_key
+    #   <p>PrivateKey</p>
+    #   @return [String]
+    # @!attribute private_key_passphrase
+    #   <p>PrivateKeyPassphrase</p>
+    #   @return [String]
+    class KeyPairCredentials < Struct.new(
+      nil,
+      :key_pair_username,
+      :private_key,
+      :private_key_passphrase,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A knowledge base resource that provides data from connected sources for AI-powered experiences in Amazon QuickSight.</p>
+    # @!attribute knowledge_base_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute data_source_arn
+    #   <p>The ARN of the data source associated with the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_configuration
+    #   <p>The configuration settings for the knowledge base.</p>
+    #   @return [Types::KnowledgeBaseConfiguration]
+    # @!attribute media_extraction_configuration
+    #   <p>The media extraction configuration for the knowledge base.</p>
+    #   @return [Types::MediaExtractionConfiguration]
+    # @!attribute access_control_configuration
+    #   <p>The access control configuration for the knowledge base.</p>
+    #   @return [Types::AccessControlConfiguration]
+    # @!attribute type
+    #   <p>The type of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the knowledge base was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the knowledge base was last updated.</p>
+    #   @return [Time]
+    # @!attribute description
+    #   <p>The description of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute is_email_notification_opted_for_ingestion_failures
+    #   <p>Specifies whether email notifications are enabled for ingestion failures.</p>
+    #   @return [Boolean]
+    # @!attribute first_completed_ingestion_summary
+    #   <p>A summary of the first completed ingestion for the knowledge base.</p>
+    #   @return [Types::KnowledgeBaseIngestionSummary]
+    # @!attribute first_incomplete_ingestion_summary
+    #   <p>A summary of the first incomplete ingestion for the knowledge base.</p>
+    #   @return [Types::KnowledgeBaseIngestionSummary]
+    # @!attribute latest_ingestion_summary
+    #   <p>A summary of the most recent ingestion for the knowledge base.</p>
+    #   @return [Types::KnowledgeBaseIngestionSummary]
+    # @!attribute knowledge_base_size_bytes
+    #   <p>The size of the knowledge base in bytes.</p>
+    #   @return [Integer]
+    # @!attribute document_count
+    #   <p>The number of documents in the knowledge base.</p>
+    #   @return [Integer]
+    # @!attribute primary_owner_arn
+    #   <p>The ARN of the primary owner of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute primary_owner_username
+    #   <p>The username of the primary owner of the knowledge base.</p>
+    #   @return [String]
+    class KnowledgeBase < Struct.new(
+      nil,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :name,
+      :status,
+      :data_source_arn,
+      :knowledge_base_configuration,
+      :media_extraction_configuration,
+      :access_control_configuration,
+      :type,
+      :created_at,
+      :updated_at,
+      :description,
+      :is_email_notification_opted_for_ingestion_failures,
+      :first_completed_ingestion_summary,
+      :first_incomplete_ingestion_summary,
+      :latest_ingestion_summary,
+      :knowledge_base_size_bytes,
+      :document_count,
+      :primary_owner_arn,
+      :primary_owner_username,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:is_email_notification_opted_for_ingestion_failures] = nil unless options.key?(:is_email_notification_opted_for_ingestion_failures)
+        options[:knowledge_base_size_bytes] = nil unless options.key?(:knowledge_base_size_bytes)
+        options[:document_count] = nil unless options.key?(:document_count)
+        super
+      end
+    end
+
+    # <p>The configuration settings for a knowledge base.</p>
+    # @note This shape contains sensitive data and should be treated as such.
+    # @!attribute template_configuration
+    #   <p>The template configuration that defines how the data source connector crawls and indexes data for the knowledge base. The template structure varies by connector type. See <code>KbTemplateConfiguration</code> for connector-specific details.</p>
+    #   @return [Types::KbTemplateConfiguration]
+    class KnowledgeBaseConfiguration < Struct.new(
+      nil,
+      :template_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an ingestion job for a knowledge base.</p>
+    # @!attribute ingestion_id
+    #   <p>The unique identifier for the ingestion job.</p>
+    #   @return [String]
+    # @!attribute ingestion_status
+    #   <p>The status of the ingestion job.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The start time of the ingestion job.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end time of the ingestion job.</p>
+    #   @return [Time]
+    class KnowledgeBaseIngestionSummary < Struct.new(
+      nil,
+      :ingestion_id,
+      :ingestion_status,
+      :start_time,
+      :end_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter to apply when searching knowledge bases.</p>
+    # @!attribute name
+    #   <p>The name of the field to filter on.</p>
+    #   @return [String]
+    # @!attribute operator
+    #   <p>The comparison operator to use for the filter.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value to filter on.</p>
+    #   @return [String]
+    class KnowledgeBaseSearchFilter < Struct.new(
+      nil,
+      :name,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The sort configuration for searching knowledge bases.</p>
+    # @!attribute sort_by_field
+    #   <p>The field to sort by.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>The sort order (ascending or descending).</p>
+    #   @return [String]
+    class KnowledgeBaseSortBy < Struct.new(
+      nil,
+      :sort_by_field,
+      :sort_order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a knowledge base, including its identifier, name, status, and metadata.</p>
+    # @!attribute knowledge_base_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute data_source_arn
+    #   <p>The ARN of the data source associated with the knowledge base.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time that the knowledge base was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the knowledge base was last updated.</p>
+    #   @return [Time]
+    # @!attribute knowledge_base_size_bytes
+    #   <p>The size of the knowledge base in bytes.</p>
+    #   @return [Integer]
+    # @!attribute document_count
+    #   <p>The number of documents in the knowledge base.</p>
+    #   @return [Integer]
+    # @!attribute primary_owner_arn
+    #   <p>The ARN of the primary owner of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute primary_owner_username
+    #   <p>The username of the primary owner of the knowledge base.</p>
+    #   @return [String]
+    class KnowledgeBaseSummary < Struct.new(
+      nil,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :name,
+      :status,
+      :data_source_arn,
+      :type,
+      :created_at,
+      :updated_at,
+      :knowledge_base_size_bytes,
+      :document_count,
+      :primary_owner_arn,
+      :primary_owner_username,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:knowledge_base_size_bytes] = nil unless options.key?(:knowledge_base_size_bytes)
+        options[:document_count] = nil unless options.key?(:document_count)
+        super
+      end
+    end
+
+    # <p>Maps a sensitivity label from Microsoft Purview to an enforcement action.</p>
+    # @!attribute label_id
+    #   <p>The identifier of the sensitivity label from the DLP provider.</p>
+    #   @return [String]
+    # @!attribute label_name
+    #   <p>The display name of the sensitivity label from the DLP provider.</p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>The enforcement action to apply when content with this sensitivity label is detected. Valid values are <code>ALLOW</code>, <code>BLOCK</code>, and <code>WARN</code>.</p>
+    #   @return [String]
+    class LabelActionMapping < Struct.new(
+      nil,
+      :label_id,
+      :label_name,
+      :action,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18158,7 +26821,10 @@ module Aws::QuickSight
     #   <p>The configuration settings of the visual.</p>
     #   @return [Types::GeospatialLayerMapConfiguration]
     # @!attribute data_set_identifier
-    #   <p>The dataset that is used to create the layer map visual. You can't create a visual without a dataset.</p>
+    #   <p>The dataset that is used to create the layer map visual. You can't create a visual without a dataset or a topic.</p>
+    #   @return [String]
+    # @!attribute topic_identifier
+    #   <p>The topic that is used in the layer map visual. You can't create a visual without a dataset or a topic.</p>
     #   @return [String]
     # @!attribute visual_content_alt_text
     #   <p>The alt text for the visual.</p>
@@ -18170,14 +26836,20 @@ module Aws::QuickSight
       :subtitle,
       :chart_configuration,
       :data_set_identifier,
+      :topic_identifier,
       :visual_content_alt_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:data_set_identifier] = '' unless options.key?(:data_set_identifier)
+        super
+      end
     end
 
     # <p>A <code>Layout</code> defines the placement of elements within a sheet.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html">Types of layout</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html">Types of layout</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     # @!attribute configuration
     #   <p>The configuration that determines what the type of layout for a sheet.</p>
@@ -18281,6 +26953,46 @@ module Aws::QuickSight
       :message,
       :resource_type,
       :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A limits profile that defines resource usage limits for Amazon Quick Sight users. Limits profiles can be assigned to users, groups, or roles to control resource consumption.</p>
+    # @!attribute profile_id
+    #   <p>The unique identifier for the limits profile.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the limits profile.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The ID of the Amazon Web Services account that contains the limits profile.</p>
+    #   @return [String]
+    # @!attribute profile_name
+    #   <p>The display name of the limits profile.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the limits profile.</p>
+    #   @return [String]
+    # @!attribute resource_limits
+    #   <p>A map of resource types to their limit values.</p>
+    #   @return [Hash<String, Types::ProfileLimitValue>]
+    # @!attribute created_at
+    #   <p>The date and time that the limits profile was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the limits profile was last updated.</p>
+    #   @return [Time]
+    class LimitsProfile < Struct.new(
+      nil,
+      :profile_id,
+      :arn,
+      :account_id,
+      :profile_name,
+      :description,
+      :resource_limits,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18412,11 +27124,15 @@ module Aws::QuickSight
     # @!attribute marker_style_settings
     #   <p>Marker styles options for all line series in the visual.</p>
     #   @return [Types::LineChartMarkerStyleSettings]
+    # @!attribute decal_settings
+    #   <p>Decal settings options for all line series in the visual.</p>
+    #   @return [Types::DecalSettings]
     class LineChartDefaultSeriesSettings < Struct.new(
       nil,
       :axis_binding,
       :line_style_settings,
       :marker_style_settings,
+      :decal_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18539,10 +27255,14 @@ module Aws::QuickSight
     # @!attribute marker_style_settings
     #   <p>Marker styles options for a line series in <code>LineChartVisual</code>.</p>
     #   @return [Types::LineChartMarkerStyleSettings]
+    # @!attribute decal_settings
+    #   <p>Decal settings for a line series in <code>LineChartVisual</code>.</p>
+    #   @return [Types::DecalSettings]
     class LineChartSeriesSettings < Struct.new(
       nil,
       :line_style_settings,
       :marker_style_settings,
+      :decal_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18577,7 +27297,7 @@ module Aws::QuickSight
     end
 
     # <p>A line chart.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/line-charts.html">Using line charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/line-charts.html">Using line charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -18629,13 +27349,99 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure that contains the configuration of a shareable link to the dashboard.</p>
+    # <p>A structure that contains the configuration of a shareable link to the
+    #             dashboard.</p>
     # @!attribute permissions
     #   <p>A structure that contains the permissions of a shareable link.</p>
     #   @return [Array<Types::ResourcePermission>]
     class LinkSharingConfiguration < Struct.new(
       nil,
       :permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID for which to list action connectors.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of action connectors to return in a single response. Valid range is 1 to 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next set of results. Use the token returned from a previous call to continue listing action connectors.</p>
+    #   @return [String]
+    class ListActionConnectorsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute action_connector_summaries
+    #   <p>A list of action connector summaries containing basic information about each connector.</p>
+    #   @return [Array<Types::ActionConnectorSummary>]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next set of results. If null, there are no more results to retrieve.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status code of the request.</p>
+    #   @return [Integer]
+    class ListActionConnectorsResponse < Struct.new(
+      nil,
+      :action_connector_summaries,
+      :next_token,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the agents.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListAgentsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute agent_summaries
+    #   <p>A list of agent summaries.</p>
+    #   @return [Array<Types::AgentSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListAgentsResponse < Struct.new(
+      nil,
+      :request_id,
+      :agent_summaries,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18686,6 +27492,76 @@ module Aws::QuickSight
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. If you don't specify a value, the
+    #            service returns a default number of results. Use the <code>NextToken</code> value in the response
+    #            to retrieve additional results.</p>
+    #   @return [Integer]
+    class ListApprovalPoliciesRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policies
+    #   <p>The list of approval policies.</p>
+    #   @return [Array<Types::ApprovalPolicy>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListApprovalPoliciesResponse < Struct.new(
+      nil,
+      :policies,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the apps.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single request. Valid range is 1 to 100. If you don't specify a value, the default is 20.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListAppsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute app_summary_list
+    #   <p>A list of app summaries.</p>
+    #   @return [Array<Types::AppSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class ListAppsResponse < Struct.new(
+      nil,
+      :app_summary_list,
+      :next_token,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -18913,8 +27789,8 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the dashboard that you're listing versions
-    #               for.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the dashboard that you're
+    #               listing versions for.</p>
     #   @return [String]
     # @!attribute dashboard_id
     #   <p>The ID for the dashboard.</p>
@@ -18985,8 +27861,8 @@ module Aws::QuickSight
     end
 
     # @!attribute dashboard_summary_list
-    #   <p>A structure that contains all of the dashboards in your Amazon Web Services account. This structure
-    #               provides basic information about the dashboards.</p>
+    #   <p>A structure that contains all of the dashboards in your Amazon Web Services account.
+    #               This structure provides basic information about the dashboards.</p>
     #   @return [Array<Types::DashboardSummary>]
     # @!attribute next_token
     #   <p>The token for the next set of results, or null if there are no more results.</p>
@@ -19094,6 +27970,92 @@ module Aws::QuickSight
     class ListDataSourcesResponse < Struct.new(
       nil,
       :data_sources,
+      :next_token,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the DLP settings that you want to list.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return per request.</p>
+    #   @return [Integer]
+    class ListDlpSettingsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute dlp_setting_summaries
+    #   <p>A list of <code>DlpSettingSummary</code> objects for the DLP settings in the account. The list is empty if no DLP settings have been configured.</p>
+    #   @return [Array<Types::DlpSettingSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class ListDlpSettingsResponse < Struct.new(
+      nil,
+      :dlp_setting_summaries,
+      :next_token,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the flow list that you are getting.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token to request the next set of results, or null if you want to retrieve the first set.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to be returned per request.</p>
+    #   @return [Integer]
+    class ListFlowsInput < Struct.new(
+      nil,
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute flow_summary_list
+    #   <p>A structure that contains all of the flows in your Amazon Web Services account. This structure
+    #               provides basic information about the flows.</p>
+    #   @return [Array<Types::FlowSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class ListFlowsOutput < Struct.new(
+      nil,
+      :flow_summary_list,
       :next_token,
       :request_id,
       :status,
@@ -19267,7 +28229,7 @@ module Aws::QuickSight
     #   @return [Integer]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace of the group that you want a list of users from.</p>
@@ -19314,7 +28276,7 @@ module Aws::QuickSight
 
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>A pagination token that can be used in a subsequent request.</p>
@@ -19495,7 +28457,7 @@ module Aws::QuickSight
     end
 
     # @!attribute services
-    #   <p>A list of services and their authorized targets that the QuickSight IAM Identity Center application can access.</p>
+    #   <p>A list of services and their authorized targets that the Quick Sight IAM Identity Center application can access.</p>
     #   @return [Array<Types::AuthorizedTargetsByService>]
     # @!attribute next_token
     #   <p>The token for the next set of results, or null if there are no more results.</p>
@@ -19574,7 +28536,92 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that contains the QuickSight namespaces that you want to list.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListKnowledgeBasesRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_summaries
+    #   <p>A list of knowledge base summaries.</p>
+    #   @return [Array<Types::KnowledgeBaseSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class ListKnowledgeBasesResponse < Struct.new(
+      nil,
+      :knowledge_base_summaries,
+      :next_token,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = nil unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute account_id
+    #   <p>The ID of the Amazon Web Services account that contains the limits profiles.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>An optional filter that limits the results to profiles that contain the specified resource type. If you don't specify a value, the operation returns all profiles.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. If you don't specify a value, the service uses the default maximum.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListLimitsProfilesRequest < Struct.new(
+      nil,
+      :account_id,
+      :resource_type,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute profiles
+    #   <p>A list of limits profiles.</p>
+    #   @return [Array<Types::LimitsProfile>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class ListLimitsProfilesResponse < Struct.new(
+      nil,
+      :profiles,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID for the Amazon Web Services account that contains the Quick Sight namespaces that you want to list.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>A unique pagination token that can be used in a subsequent request. You will receive a pagination token in the response body of a previous <code>ListNameSpaces</code> API call if there is more data that can be returned. To receive the data, make another <code>ListNamespaces</code> API call with the returned token to retrieve the next page of data. Each token is valid for 24 hours. If you try to make a <code>ListNamespaces</code> API call with an expired token, you will receive a <code>HTTP 400 InvalidNextTokenException</code> error.</p>
@@ -19593,8 +28640,8 @@ module Aws::QuickSight
     end
 
     # @!attribute namespaces
-    #   <p>The information about the namespaces in this Amazon Web Services account. The response includes 
-    #           the namespace ARN, name, Amazon Web Services Region, notification email address, creation status, and 
+    #   <p>The information about the namespaces in this Amazon Web Services account. The response includes
+    #           the namespace ARN, name, Amazon Web Services Region, notification email address, creation status, and
     #           identity store.</p>
     #   @return [Array<Types::NamespaceInfoV2>]
     # @!attribute next_token
@@ -19609,6 +28656,53 @@ module Aws::QuickSight
     class ListNamespacesResponse < Struct.new(
       nil,
       :namespaces,
+      :next_token,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>A pagination token that can be used in a subsequent request.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    class ListOAuthClientApplicationsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute o_auth_client_applications
+    #   <p>A list of OAuthClientApplication summaries.</p>
+    #   @return [Array<Types::OAuthClientApplicationSummary>]
+    # @!attribute next_token
+    #   <p>A pagination token that can be used in a subsequent request.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class ListOAuthClientApplicationsResponse < Struct.new(
+      nil,
+      :o_auth_client_applications,
       :next_token,
       :request_id,
       :status,
@@ -19671,7 +28765,7 @@ module Aws::QuickSight
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that includes the role.</p>
@@ -19716,8 +28810,144 @@ module Aws::QuickSight
       end
     end
 
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the self-upgrade requests.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The Quick namespace for the self-upgrade requests.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    class ListSelfUpgradesRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :namespace,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute self_upgrade_request_details
+    #   <p>A list of self-upgrade request details.</p>
+    #   @return [Array<Types::SelfUpgradeRequestDetail>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class ListSelfUpgradesResponse < Struct.new(
+      nil,
+      :self_upgrade_request_details,
+      :next_token,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the space.</p>
+    #   @return [String]
+    # @!attribute space_id
+    #   <p>The ID of the space that you want to list resources for.</p>
+    #   @return [String]
+    class ListSpaceResourcesRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :space_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute space_resources
+    #   <p>A list of resource summaries in the space.</p>
+    #   @return [Array<Types::SpaceResourceSummary>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class ListSpaceResourcesResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :space_resources,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the spaces.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    class ListSpacesRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute space_summaries
+    #   <p>A list of space summaries.</p>
+    #   @return [Array<Types::SpaceSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class ListSpacesResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :space_summaries,
+      :next_token,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the resource that you want a list of tags for.</p>
+    #   <p>The Amazon Resource Name (ARN) of the resource that you want a list of tags
+    #   			for.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       nil,
@@ -20021,11 +29251,11 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>CUSTOM</code> - Display only the themes created by people using Amazon QuickSight.</p>
+    #                     <code>CUSTOM</code> - Display only the themes created by people using Amazon Quick Sight.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>QUICKSIGHT</code> - Display only the starting themes defined by QuickSight.</p>
+    #                     <code>QUICKSIGHT</code> - Display only the starting themes defined by Quick Sight.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -20211,12 +29441,60 @@ module Aws::QuickSight
       end
     end
 
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the topics that you want to
+    #            list.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to be returned per request.</p>
+    #   @return [Integer]
+    class ListTopicsV2Request < Struct.new(
+      nil,
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute topic_summary_list
+    #   <p>A list of topic summaries.</p>
+    #   @return [Array<Types::TopicV2Summary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class ListTopicsV2Response < Struct.new(
+      nil,
+      :topic_summary_list,
+      :next_token,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
     # @!attribute user_name
-    #   <p>The Amazon QuickSight user name that you want to list group memberships for.</p>
+    #   <p>The Amazon Quick Sight user name that you want to list group memberships for.</p>
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The Amazon Web Services account ID that the user is in. Currently, you use the ID for the Amazon Web Services account
-    #   			that contains your Amazon QuickSight account.</p>
+    #   			that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
@@ -20268,8 +29546,62 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the index capacity data.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The namespace to scope the user search to. Required when the userNameOrEmail filter is present.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply. Only one filter is supported per request. The userNameOrEmail and totalCapacityBytes filters are mutually exclusive.</p>
+    #   @return [Array<Types::UserIndexCapacityFilter>]
+    # @!attribute sort_by
+    #   <p>The field to sort results by.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>The sort order for results. Defaults to DESC if not specified.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return per page.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, received from a previous call.</p>
+    #   @return [String]
+    class ListUsersIndexCapacityRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :namespace,
+      :filters,
+      :sort_by,
+      :sort_order,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute users
+    #   <p>The list of users with their index capacity metrics.</p>
+    #   @return [Array<Types::UserIndexCapacity>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class ListUsersIndexCapacityResponse < Struct.new(
+      nil,
+      :users,
+      :next_token,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>A pagination token that can be used in a subsequent request.</p>
@@ -20679,6 +30011,26 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for media extraction from knowledge base documents.</p>
+    # @!attribute image_extraction_configuration
+    #   <p>The configuration for image extraction.</p>
+    #   @return [Types::ImageExtractionConfiguration]
+    # @!attribute audio_extraction_configuration
+    #   <p>The configuration for audio extraction.</p>
+    #   @return [Types::AudioExtractionConfiguration]
+    # @!attribute video_extraction_configuration
+    #   <p>The configuration for video extraction.</p>
+    #   @return [Types::VideoExtractionConfiguration]
+    class MediaExtractionConfiguration < Struct.new(
+      nil,
+      :image_extraction_configuration,
+      :audio_extraction_configuration,
+      :video_extraction_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object that consists of a member Amazon Resource Name (ARN) and a member ID.</p>
     # @!attribute member_id
     #   <p>The ID of the member.</p>
@@ -20718,6 +30070,38 @@ module Aws::QuickSight
       :time,
       :from_value,
       :target_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The credentials for Microsoft Purview DLP integration. The credentials are stored in Amazon Web Services Secrets Manager and referenced by ARN.</p>
+    # @!attribute secret_arn
+    #   <p>The ARN of the Amazon Web Services Secrets Manager secret that contains the Microsoft Purview OAuth credentials. The secret includes the Azure tenant ID, client ID, and client secret or certificate.</p>
+    #   @return [String]
+    class MicrosoftPurviewCredentials < Struct.new(
+      nil,
+      :secret_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The full configuration for Microsoft Purview DLP integration, including the provider credentials and the label-action mappings that define the enforcement policy.</p>
+    # @!attribute credentials
+    #   <p>The credentials used to authenticate with Microsoft Purview.</p>
+    #   @return [Types::MicrosoftPurviewCredentials]
+    # @!attribute label_action_mappings
+    #   <p>The mappings from Microsoft Purview sensitivity labels to enforcement actions.</p>
+    #   @return [Array<Types::LabelActionMapping>]
+    # @!attribute unmapped_action
+    #   <p>The default action to apply to content that has no sensitivity label or whose label is not mapped. Valid values are <code>ALLOW</code>, <code>BLOCK</code>, and <code>WARN</code>.</p>
+    #   @return [String]
+    class MicrosoftPurviewProviderConfig < Struct.new(
+      nil,
+      :credentials,
+      :label_action_mappings,
+      :unmapped_action,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20800,6 +30184,15 @@ module Aws::QuickSight
     # @!attribute metric
     #   <p>The definition of a metric.</p>
     #   @return [Types::NamedEntityDefinitionMetric]
+    # @!attribute rank_order
+    #   <p>The rank order of the named entity definition.</p>
+    #   @return [Integer]
+    # @!attribute presentation_order
+    #   <p>The presentation order of the named entity definition.</p>
+    #   @return [Integer]
+    # @!attribute is_hidden
+    #   <p>A Boolean value that indicates whether the named entity definition is hidden.</p>
+    #   @return [Boolean]
     class NamedEntityDefinition < Struct.new(
       nil,
       :field_name,
@@ -20807,6 +30200,9 @@ module Aws::QuickSight
       :property_role,
       :property_usage,
       :metric,
+      :rank_order,
+      :presentation_order,
+      :is_hidden,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20840,6 +30236,23 @@ module Aws::QuickSight
     class NamedEntityRef < Struct.new(
       nil,
       :named_entity_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that represents a sort for a named entity.</p>
+    # @!attribute field_name
+    #   <p>The name of the field that is used for the sort.</p>
+    #   @return [String]
+    # @!attribute direction
+    #   <p>The direction of the sort. Valid values are <code>ASCENDING</code> and
+    #            <code>DESCENDING</code>.</p>
+    #   @return [String]
+    class NamedEntitySort < Struct.new(
+      nil,
+      :field_name,
+      :direction,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21021,6 +30434,18 @@ module Aws::QuickSight
       :decimal_static_values,
       :date_time_static_values,
       :integer_static_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Authentication metadata for connections that do not require authentication credentials.</p>
+    # @!attribute base_endpoint
+    #   <p>The base endpoint URL for connections that do not require authentication.</p>
+    #   @return [String]
+    class NoneConnectionMetadata < Struct.new(
+      nil,
+      :base_endpoint,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21436,7 +30861,126 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information needed to create a data source connection that uses OAuth client credentials. This option is available for data source connections that are made with Snowflake and Starburst.</p>
+    # <p>An OAuth client application that is used to authenticate connections to a data source through an OAuth identity provider.</p>
+    # @!attribute o_auth_client_application_id
+    #   <p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the OAuthClientApplication.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_authentication_type
+    #   <p>The OAuth client authentication type used by the OAuthClientApplication. Valid values are <code>TOKEN</code>.</p>
+    #   @return [String]
+    # @!attribute o_auth_token_endpoint_url
+    #   <p>The token endpoint URL of the identity provider that is used to obtain access tokens.</p>
+    #   @return [String]
+    # @!attribute o_auth_authorization_endpoint_url
+    #   <p>The authorization endpoint URL of the identity provider that is used to obtain authorization codes.</p>
+    #   @return [String]
+    # @!attribute o_auth_scopes
+    #   <p>The OAuth scopes that are requested when the OAuthClientApplication obtains an access token from the identity provider.</p>
+    #   @return [String]
+    # @!attribute data_source_type
+    #   <p>The type of data source that the OAuthClientApplication is used with. Valid values are <code>SNOWFLAKE</code>.</p>
+    #   @return [String]
+    # @!attribute identity_provider_vpc_connection_properties
+    #   <p>VPC connection properties.</p>
+    #   @return [Types::VpcConnectionProperties]
+    # @!attribute created_time
+    #   <p>The time that the OAuthClientApplication was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The time that the OAuthClientApplication was last updated.</p>
+    #   @return [Time]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the OAuthClientApplication.</p>
+    #   @return [String]
+    class OAuthClientApplication < Struct.new(
+      nil,
+      :o_auth_client_application_id,
+      :name,
+      :o_auth_client_authentication_type,
+      :o_auth_token_endpoint_url,
+      :o_auth_authorization_endpoint_url,
+      :o_auth_scopes,
+      :data_source_type,
+      :identity_provider_vpc_connection_properties,
+      :created_time,
+      :last_updated_time,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an OAuthClientApplication.</p>
+    # @!attribute o_auth_client_application_id
+    #   <p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the OAuthClientApplication.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_authentication_type
+    #   <p>The OAuth client authentication type used by the OAuthClientApplication. Valid values are <code>TOKEN</code>.</p>
+    #   @return [String]
+    # @!attribute data_source_type
+    #   <p>The type of data source that the OAuthClientApplication is used with. Valid values are <code>SNOWFLAKE</code>.</p>
+    #   @return [String]
+    # @!attribute identity_provider_vpc_connection_properties
+    #   <p>VPC connection properties.</p>
+    #   @return [Types::VpcConnectionProperties]
+    # @!attribute created_time
+    #   <p>The time that the OAuthClientApplication was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated_time
+    #   <p>The time that the OAuthClientApplication was last updated.</p>
+    #   @return [Time]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the OAuthClientApplication.</p>
+    #   @return [String]
+    class OAuthClientApplicationSummary < Struct.new(
+      nil,
+      :o_auth_client_application_id,
+      :name,
+      :o_auth_client_authentication_type,
+      :data_source_type,
+      :identity_provider_vpc_connection_properties,
+      :created_time,
+      :last_updated_time,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The OAuth 2.0 client credentials used for authenticating a data source connection.
+    #             Use this structure to provide a client ID, client secret, and username directly
+    #             instead of referencing a secret stored in Amazon Secrets Manager. This structure
+    #             supports data sources that use two-legged OAuth (2LO) authentication, such as
+    #             Snowflake.</p>
+    # @!attribute client_id
+    #   <p>The client ID of the OAuth 2.0 application that is registered with the data source
+    #               provider.</p>
+    #   @return [String]
+    # @!attribute client_secret
+    #   <p>The client secret of the OAuth 2.0 application that is registered with the data source
+    #               provider.</p>
+    #   @return [String]
+    # @!attribute username
+    #   <p>The username of the account that is used for OAuth 2.0 client credentials
+    #               authentication with the data source provider.</p>
+    #   @return [String]
+    class OAuthClientCredentials < Struct.new(
+      nil,
+      :client_id,
+      :client_secret,
+      :username,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that contains information needed to create a data source connection that uses OAuth client credentials. This option is available for data source connections that are made with Snowflake, Starburst, and Databricks.</p>
     # @!attribute token_provider_url
     #   <p>The token endpoint URL of the identity provider.</p>
     #   @return [String]
@@ -21449,12 +30993,46 @@ module Aws::QuickSight
     # @!attribute identity_provider_resource_uri
     #   <p>The resource uri of the identity provider.</p>
     #   @return [String]
+    # @!attribute identity_provider_ca_certificates_bundle_s3_uri
+    #   <p>The S3 URI of the identity provider's CA certificates bundle in PEM format. Use this parameter to provide a custom CA certificate bundle for the identity provider when the default trust store does not include the required certificates.</p>
+    #   @return [String]
     class OAuthParameters < Struct.new(
       nil,
       :token_provider_url,
       :o_auth_scope,
       :identity_provider_vpc_connection_properties,
       :identity_provider_resource_uri,
+      :identity_provider_ca_certificates_bundle_s3_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The connection parameters for an OneDrive data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses OneDrive.</p>
+    # @!attribute tenant_id
+    #   <p>The tenant ID for the OneDrive data source.</p>
+    #   @return [String]
+    # @!attribute client_id
+    #   <p>The client ID for the OneDrive data source.</p>
+    #   @return [String]
+    # @!attribute auth_type
+    #   <p>The authentication type for the OneDrive data source. Valid values include:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>TWO_LEGGED_OAUTH</code> – Server-to-server authentication using client credentials that do not require user interaction.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>THREE_LEGGED_OAUTH</code> – Interactive OAuth that requires user consent.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class OneDriveParameters < Struct.new(
+      nil,
+      :tenant_id,
+      :client_id,
+      :auth_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21493,6 +31071,9 @@ module Aws::QuickSight
     # @!attribute name
     #   <p>The display name of the column..</p>
     #   @return [String]
+    # @!attribute id
+    #   <p>A unique identifier for the output column.</p>
+    #   @return [String]
     # @!attribute description
     #   <p>A description for a column.</p>
     #   @return [String]
@@ -21505,9 +31086,26 @@ module Aws::QuickSight
     class OutputColumn < Struct.new(
       nil,
       :name,
+      :id,
       :description,
       :type,
       :sub_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies a mapping to override the name of an output column from a transform operation.</p>
+    # @!attribute source_column_name
+    #   <p>The original name of the column from the source transform operation.</p>
+    #   @return [String]
+    # @!attribute output_column_name
+    #   <p>The new name to assign to the column in the output.</p>
+    #   @return [String]
+    class OutputColumnNameOverride < Struct.new(
+      nil,
+      :source_column_name,
+      :output_column_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21681,19 +31279,28 @@ module Aws::QuickSight
     # @!attribute display_options
     #   <p>The display options of a control.</p>
     #   @return [Types::DateTimePickerControlDisplayOptions]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class ParameterDateTimePickerControl < Struct.new(
       nil,
       :parameter_control_id,
       :title,
       :source_parameter_name,
       :display_options,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>The declaration definition of a parameter.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html">Parameters in Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html">Parameters in Amazon Quick Sight</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     # @!attribute string_parameter_declaration
     #   <p>A parameter declaration for the <code>String</code> data type.</p>
@@ -21743,6 +31350,12 @@ module Aws::QuickSight
     # @!attribute commit_mode
     #   <p>The visibility configuration of the Apply button on a <code>ParameterDropDownControl</code>.</p>
     #   @return [String]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class ParameterDropDownControl < Struct.new(
       nil,
       :parameter_control_id,
@@ -21753,9 +31366,16 @@ module Aws::QuickSight
       :selectable_values,
       :cascading_control_configuration,
       :commit_mode,
+      :control_sort_configurations,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>A control to display a list with buttons or boxes that are used to select either a single value or multiple values.</p>
@@ -21780,6 +31400,12 @@ module Aws::QuickSight
     # @!attribute cascading_control_configuration
     #   <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
     #   @return [Types::CascadingControlConfiguration]
+    # @!attribute control_sort_configurations
+    #   <p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>
+    #   @return [Array<Types::ControlSortConfiguration>]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class ParameterListControl < Struct.new(
       nil,
       :parameter_control_id,
@@ -21789,9 +31415,16 @@ module Aws::QuickSight
       :type,
       :selectable_values,
       :cascading_control_configuration,
+      :control_sort_configurations,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>A list of selectable values that are used in a control.</p>
@@ -21832,6 +31465,9 @@ module Aws::QuickSight
     # @!attribute step_size
     #   <p>The number of increments that the slider bar is divided into.</p>
     #   @return [Float]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class ParameterSliderControl < Struct.new(
       nil,
       :parameter_control_id,
@@ -21841,11 +31477,13 @@ module Aws::QuickSight
       :maximum_value,
       :minimum_value,
       :step_size,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
         options[:maximum_value] = 0 unless options.key?(:maximum_value)
         options[:minimum_value] = 0 unless options.key?(:minimum_value)
         options[:step_size] = 0 unless options.key?(:step_size)
@@ -21869,6 +31507,9 @@ module Aws::QuickSight
     # @!attribute display_options
     #   <p>The display options of a control.</p>
     #   @return [Types::TextAreaControlDisplayOptions]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class ParameterTextAreaControl < Struct.new(
       nil,
       :parameter_control_id,
@@ -21876,9 +31517,15 @@ module Aws::QuickSight
       :source_parameter_name,
       :delimiter,
       :display_options,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
     # <p>A control to display a text box that is used to enter a single entry.</p>
@@ -21894,18 +31541,27 @@ module Aws::QuickSight
     # @!attribute display_options
     #   <p>The display options of a control.</p>
     #   @return [Types::TextFieldControlDisplayOptions]
+    # @!attribute control_title_format_text
+    #   <p>The title text format configuration for the control.</p>
+    #   @return [Types::ControlTitleFormatText]
     class ParameterTextFieldControl < Struct.new(
       nil,
       :parameter_control_id,
       :title,
       :source_parameter_name,
       :display_options,
+      :control_title_format_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:title] = '' unless options.key?(:title)
+        super
+      end
     end
 
-    # <p>A list of QuickSight parameters and the list's override values.</p>
+    # <p>A list of Quick Sight parameters and the list's override values.</p>
     # @!attribute string_parameters
     #   <p>The parameters that have a data type of string.</p>
     #   @return [Array<Types::StringParameter>]
@@ -21924,6 +31580,22 @@ module Aws::QuickSight
       :integer_parameters,
       :decimal_parameters,
       :date_time_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>References a parent dataset that serves as a data source, including its columns and metadata.</p>
+    # @!attribute data_set_arn
+    #   <p>The Amazon Resource Name (ARN) of the parent dataset.</p>
+    #   @return [String]
+    # @!attribute input_columns
+    #   <p>The list of input columns available from the parent dataset.</p>
+    #   @return [Array<Types::InputColumn>]
+    class ParentDataSet < Struct.new(
+      nil,
+      :data_set_arn,
+      :input_columns,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21995,7 +31667,8 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration for the performance optimization of the dataset that contains a <code>UniqueKey</code> configuration.</p>
+    # <p>The configuration for the performance optimization of the dataset that contains a
+    # 				<code>UniqueKey</code> configuration.</p>
     # @!attribute unique_keys
     #   <p>A <code>UniqueKey</code> configuration.</p>
     #   @return [Array<Types::UniqueKey>]
@@ -22067,6 +31740,90 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A structure that contains the permission information for one principal against one flow.</p>
+    # @!attribute actions
+    #   <p>A list of actions that the principal can perform against the flow.</p>
+    #            <p>The following are the list of values to set a principal as a flow owner:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>quicksight:PublishFlow</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:GetFlow</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:UpdateFlowPermissions</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:GetFlowSession</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:StartFlowSession</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:StopFlowSession</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:UpdateFlowSession</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:UnpublishFlow</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:GetFlowStages</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:DeleteFlow</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:DescribeFlowPermissions</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:UpdateFlow</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:CreatePresignedUrl</p>
+    #               </li>
+    #            </ul>
+    #            <p>The following are the list of values to set a principal as a flow viewer:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>quicksight:GetFlow</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:UpdateFlowSession</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:StartFlowSession</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:StopFlowSession</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:GetFlowSession</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:CreatePresignedUrl</p>
+    #               </li>
+    #               <li>
+    #                  <p>quicksight:GetFlowStages</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    # @!attribute principal
+    #   <p>The Amazon Resource Name (ARN) of the principal.
+    #               This can be an Amazon Quick user, group or namespace associated with the flow.
+    #               Namespace principal can only be set as a viewer and will grant everyone in the same namespace viewer permissions.</p>
+    #   @return [String]
+    class Permission < Struct.new(
+      nil,
+      :actions,
+      :principal,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A view of a data source that contains information about the shape of the data in the
     #             underlying source. This is a variant type structure. For this structure to be valid,
     #             only one of the attributes can be non-null.</p>
@@ -22077,12 +31834,20 @@ module Aws::QuickSight
     #   <p>A physical table type built from the results of the custom SQL query.</p>
     #   @return [Types::CustomSql]
     # @!attribute s3_source
-    #   <p>A physical table type for as S3 data source.</p>
+    #   <p>A physical table type for an S3 data source.</p>
     #   @return [Types::S3Source]
+    # @!attribute saa_s_table
+    #   <p>A physical table type for Software-as-a-Service (SaaS) sources.</p>
+    #   @return [Types::SaaSTable]
+    # @!attribute file_source
+    #   <p>A physical table type for a file data source.</p>
+    #   @return [Types::FileSource]
     class PhysicalTable < Struct.new(
       :relational_table,
       :custom_sql,
       :s3_source,
+      :saa_s_table,
+      :file_source,
       :unknown,
       keyword_init: true
     )
@@ -22091,6 +31856,8 @@ module Aws::QuickSight
       class RelationalTable < PhysicalTable; end
       class CustomSql < PhysicalTable; end
       class S3Source < PhysicalTable; end
+      class SaaSTable < PhysicalTable; end
+      class FileSource < PhysicalTable; end
       class Unknown < PhysicalTable; end
     end
 
@@ -22218,8 +31985,8 @@ module Aws::QuickSight
     #                <p>Donut charts</p>
     #             </li>
     #          </ul>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pie-chart.html">Using pie charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/donut-chart.html">Using donut charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pie-chart.html">Using pie charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/donut-chart.html">Using donut charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -22255,6 +32022,22 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for a pivot operation, specifying which column contains labels and how to pivot them.</p>
+    # @!attribute label_column_name
+    #   <p>The name of the column that contains the labels to be pivoted into separate columns.</p>
+    #   @return [String]
+    # @!attribute pivoted_labels
+    #   <p>The list of specific label values to pivot into separate columns.</p>
+    #   @return [Array<Types::PivotedLabel>]
+    class PivotConfiguration < Struct.new(
+      nil,
+      :label_column_name,
+      :pivoted_labels,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The field sort options for a pivot table sort configuration.</p>
     # @!attribute field_id
     #   <p>The field ID for the field sort options.</p>
@@ -22266,6 +32049,34 @@ module Aws::QuickSight
       nil,
       :field_id,
       :sort_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A transform operation that pivots data by converting row values into columns.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source transform operation that provides input data for pivoting.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute group_by_column_names
+    #   <p>The list of column names to group by when performing the pivot operation.</p>
+    #   @return [Array<String>]
+    # @!attribute value_column_configuration
+    #   <p>Configuration for how to aggregate values when multiple rows map to the same pivoted column.</p>
+    #   @return [Types::ValueColumnConfiguration]
+    # @!attribute pivot_configuration
+    #   <p>Configuration that specifies which labels to pivot and how to structure the resulting columns.</p>
+    #   @return [Types::PivotConfiguration]
+    class PivotOperation < Struct.new(
+      nil,
+      :alias,
+      :source,
+      :group_by_column_names,
+      :value_column_configuration,
+      :pivot_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22370,6 +32181,12 @@ module Aws::QuickSight
     # @!attribute paginated_report_options
     #   <p>The paginated report options for a pivot table visual.</p>
     #   @return [Types::PivotTablePaginatedReportOptions]
+    # @!attribute tooltip
+    #   <p>The display options for the visual tooltip.</p>
+    #   @return [Types::TooltipOptions]
+    # @!attribute dashboard_customization_visual_options
+    #   <p>The options that define customizations available to dashboard readers for a specific visual</p>
+    #   @return [Types::DashboardCustomizationVisualOptions]
     # @!attribute interactions
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
@@ -22381,6 +32198,8 @@ module Aws::QuickSight
       :total_options,
       :field_options,
       :paginated_report_options,
+      :tooltip,
+      :dashboard_customization_visual_options,
       :interactions,
       keyword_init: true
     )
@@ -22671,7 +32490,7 @@ module Aws::QuickSight
     end
 
     # <p>A pivot table.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pivot-table.html">Using pivot tables</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pivot-table.html">Using pivot tables</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
     #   @return [String]
@@ -22747,8 +32566,28 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A flexible visualization type that allows engineers 
-    #       to create new custom charts in QuickSight.</p>
+    # <p>Specifies a label value to be pivoted into a separate column, including the new column name and identifier.</p>
+    # @!attribute label_name
+    #   <p>The label value from the source data to be pivoted.</p>
+    #   @return [String]
+    # @!attribute new_column_name
+    #   <p>The name for the new column created from this pivoted label.</p>
+    #   @return [String]
+    # @!attribute new_column_id
+    #   <p>A unique identifier for the new column created from this pivoted label.</p>
+    #   @return [String]
+    class PivotedLabel < Struct.new(
+      nil,
+      :label_name,
+      :new_column_name,
+      :new_column_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A flexible visualization type that allows engineers
+    #       to create new custom charts in Quick Sight.</p>
     # @!attribute visual_id
     #   <p>The ID of the visual that you want to use.</p>
     #   @return [String]
@@ -23033,6 +32872,22 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A value that defines a resource usage limit, consisting of a maximum value and a unit of measurement.</p>
+    # @!attribute max_value
+    #   <p>The maximum allowed value for the resource.</p>
+    #   @return [Integer]
+    # @!attribute unit
+    #   <p>The unit of measurement for the limit value.</p>
+    #   @return [String]
+    class ProfileLimitValue < Struct.new(
+      nil,
+      :max_value,
+      :unit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The options that determine the presentation of the progress bar of a KPI visual.</p>
     # @!attribute visibility
     #   <p>The visibility of the progress bar.</p>
@@ -23047,15 +32902,38 @@ module Aws::QuickSight
 
     # <p>A transform operation that projects columns. Operations that come after a projection
     #             can only refer to projected columns.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source transform operation that provides input data for column projection.</p>
+    #   @return [Types::TransformOperationSource]
     # @!attribute projected_columns
     #   <p>Projected columns.</p>
     #   @return [Array<String>]
     class ProjectOperation < Struct.new(
       nil,
+      :alias,
+      :source,
       :projected_columns,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The provider-specific configuration for a DLP integration. This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+    # @!attribute microsoft_purview
+    #   <p>The configuration for a Microsoft Purview DLP integration.</p>
+    #   @return [Types::MicrosoftPurviewProviderConfig]
+    class ProviderConfig < Struct.new(
+      :microsoft_purview,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class MicrosoftPurview < ProviderConfig; end
+      class Unknown < ProviderConfig; end
     end
 
     # @!attribute aws_account_id
@@ -23117,9 +32995,21 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The parameters that are required to connect to an Amazon Q Business data source.</p>
+    # @!attribute application_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Q Business application.</p>
+    #   @return [String]
+    class QBusinessParameters < Struct.new(
+      nil,
+      :application_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure that contains information about the <code>QDataKey</code>.</p>
     # @!attribute q_data_key_arn
-    #   <p>The ARN of the KMS key that is registered to a QuickSight account for encryption and decryption use as a <code>QDataKey</code>.</p>
+    #   <p>The ARN of the KMS key that is registered to a Quick Sight account for encryption and decryption use as a <code>QDataKey</code>.</p>
     #   @return [String]
     # @!attribute q_data_key_type
     #   <p>The type of <code>QDataKey</code>.</p>
@@ -23174,6 +33064,18 @@ module Aws::QuickSight
       nil,
       :message,
       :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Determines if Actions in Amazon Quick Suite are enabled in a dashboard..</p>
+    # @!attribute availability_status
+    #   <p>Availability status.</p>
+    #   @return [String]
+    class QuickSuiteActionsOption < Struct.new(
+      nil,
+      :availability_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23411,9 +33313,235 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The recent snapshots configuration for an embedded QuickSight dashboard.</p>
+    # <p>Read-only authentication metadata for API key-based connections, containing non-sensitive configuration details.</p>
+    # @!attribute base_endpoint
+    #   <p>The base endpoint URL for API key authentication.</p>
+    #   @return [String]
+    # @!attribute email
+    #   <p>The email address associated with the API key authentication.</p>
+    #   @return [String]
+    class ReadAPIKeyConnectionMetadata < Struct.new(
+      nil,
+      :base_endpoint,
+      :email,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Read-only authentication configuration containing non-sensitive authentication details for action connectors.</p>
+    # @!attribute authentication_type
+    #   <p>The type of authentication being used (BASIC, API_KEY, OAUTH2_CLIENT_CREDENTIALS, or OAUTH2_AUTHORIZATION_CODE).</p>
+    #   @return [String]
+    # @!attribute authentication_metadata
+    #   <p>The authentication metadata containing configuration details specific to the authentication type.</p>
+    #   @return [Types::ReadAuthenticationMetadata]
+    class ReadAuthConfig < Struct.new(
+      nil,
+      :authentication_type,
+      :authentication_metadata,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Read-only authentication metadata union containing non-sensitive configuration details for different authentication types.</p>
+    # @!attribute authorization_code_grant_metadata
+    #   <p>Read-only metadata for OAuth2 authorization code grant flow configuration.</p>
+    #   @return [Types::ReadAuthorizationCodeGrantMetadata]
+    # @!attribute client_credentials_grant_metadata
+    #   <p>Read-only metadata for OAuth2 client credentials grant flow configuration.</p>
+    #   @return [Types::ReadClientCredentialsGrantMetadata]
+    # @!attribute basic_auth_connection_metadata
+    #   <p>Read-only metadata for basic authentication configuration.</p>
+    #   @return [Types::ReadBasicAuthConnectionMetadata]
+    # @!attribute api_key_connection_metadata
+    #   <p>Read-only metadata for API key authentication configuration.</p>
+    #   @return [Types::ReadAPIKeyConnectionMetadata]
+    # @!attribute none_connection_metadata
+    #   <p>Read-only metadata for connections that do not require authentication.</p>
+    #   @return [Types::ReadNoneConnectionMetadata]
+    # @!attribute iam_connection_metadata
+    #   <p>Read-only metadata for IAM-based authentication configuration.</p>
+    #   @return [Types::ReadIamConnectionMetadata]
+    class ReadAuthenticationMetadata < Struct.new(
+      :authorization_code_grant_metadata,
+      :client_credentials_grant_metadata,
+      :basic_auth_connection_metadata,
+      :api_key_connection_metadata,
+      :none_connection_metadata,
+      :iam_connection_metadata,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AuthorizationCodeGrantMetadata < ReadAuthenticationMetadata; end
+      class ClientCredentialsGrantMetadata < ReadAuthenticationMetadata; end
+      class BasicAuthConnectionMetadata < ReadAuthenticationMetadata; end
+      class ApiKeyConnectionMetadata < ReadAuthenticationMetadata; end
+      class NoneConnectionMetadata < ReadAuthenticationMetadata; end
+      class IamConnectionMetadata < ReadAuthenticationMetadata; end
+      class Unknown < ReadAuthenticationMetadata; end
+    end
+
+    # <p>Read-only credentials details for OAuth2 authorization code grant flow, containing non-sensitive configuration information.</p>
+    # @!attribute read_authorization_code_grant_details
+    #   <p>The read-only authorization code grant configuration details.</p>
+    #   @return [Types::ReadAuthorizationCodeGrantDetails]
+    class ReadAuthorizationCodeGrantCredentialsDetails < Struct.new(
+      :read_authorization_code_grant_details,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ReadAuthorizationCodeGrantDetails < ReadAuthorizationCodeGrantCredentialsDetails; end
+      class Unknown < ReadAuthorizationCodeGrantCredentialsDetails; end
+    end
+
+    # <p>Read-only configuration details for OAuth2 authorization code grant flow, including endpoints and client information.</p>
+    # @!attribute client_id
+    #   <p>The client identifier for the OAuth2 authorization code grant flow.</p>
+    #   @return [String]
+    # @!attribute token_endpoint
+    #   <p>The authorization server endpoint used to obtain access tokens via the authorization code grant flow.</p>
+    #   @return [String]
+    # @!attribute authorization_endpoint
+    #   <p>The authorization server endpoint used to obtain authorization codes from the resource owner.</p>
+    #   @return [String]
+    class ReadAuthorizationCodeGrantDetails < Struct.new(
+      nil,
+      :client_id,
+      :token_endpoint,
+      :authorization_endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Read-only metadata for OAuth2 authorization code grant authentication configuration.</p>
+    # @!attribute base_endpoint
+    #   <p>The base endpoint URL for the OAuth2 authorization code grant flow.</p>
+    #   @return [String]
+    # @!attribute redirect_url
+    #   <p>The redirect URL where the authorization server will send the user after authorization.</p>
+    #   @return [String]
+    # @!attribute read_authorization_code_grant_credentials_details
+    #   <p>The read-only credentials details for the authorization code grant flow.</p>
+    #   @return [Types::ReadAuthorizationCodeGrantCredentialsDetails]
+    # @!attribute authorization_code_grant_credentials_source
+    #   <p>The source of credentials for the authorization code grant flow.</p>
+    #   @return [String]
+    class ReadAuthorizationCodeGrantMetadata < Struct.new(
+      nil,
+      :base_endpoint,
+      :redirect_url,
+      :read_authorization_code_grant_credentials_details,
+      :authorization_code_grant_credentials_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Read-only metadata for basic authentication connections, containing non-sensitive configuration details.</p>
+    # @!attribute base_endpoint
+    #   <p>The base endpoint URL for basic authentication.</p>
+    #   @return [String]
+    # @!attribute username
+    #   <p>The username used for basic authentication.</p>
+    #   @return [String]
+    class ReadBasicAuthConnectionMetadata < Struct.new(
+      nil,
+      :base_endpoint,
+      :username,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Read-only details for OAuth2 client credentials, containing non-sensitive configuration information.</p>
+    # @!attribute read_client_credentials_grant_details
+    #   <p>The read-only client credentials grant configuration details.</p>
+    #   @return [Types::ReadClientCredentialsGrantDetails]
+    class ReadClientCredentialsDetails < Struct.new(
+      :read_client_credentials_grant_details,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ReadClientCredentialsGrantDetails < ReadClientCredentialsDetails; end
+      class Unknown < ReadClientCredentialsDetails; end
+    end
+
+    # <p>Read-only configuration details for OAuth2 client credentials grant flow, including client ID and token endpoint.</p>
+    # @!attribute client_id
+    #   <p>The client identifier for the OAuth2 client credentials grant flow.</p>
+    #   @return [String]
+    # @!attribute token_endpoint
+    #   <p>The authorization server endpoint used to obtain access tokens via the client credentials grant flow.</p>
+    #   @return [String]
+    class ReadClientCredentialsGrantDetails < Struct.new(
+      nil,
+      :client_id,
+      :token_endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Read-only metadata for OAuth2 client credentials grant authentication configuration.</p>
+    # @!attribute base_endpoint
+    #   <p>The base endpoint URL for the OAuth2 client credentials grant flow.</p>
+    #   @return [String]
+    # @!attribute read_client_credentials_details
+    #   <p>The read-only client credentials configuration details.</p>
+    #   @return [Types::ReadClientCredentialsDetails]
+    # @!attribute client_credentials_source
+    #   <p>The source of client credentials for the OAuth2 client credentials grant flow.</p>
+    #   @return [String]
+    class ReadClientCredentialsGrantMetadata < Struct.new(
+      nil,
+      :base_endpoint,
+      :read_client_credentials_details,
+      :client_credentials_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Read-only metadata for IAM-based connections, containing role and source ARN information.</p>
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role to assume for authentication.</p>
+    #   @return [String]
+    # @!attribute source_arn
+    #   <p>The Amazon Resource Name (ARN) of the source resource for IAM authentication.</p>
+    #   @return [String]
+    class ReadIamConnectionMetadata < Struct.new(
+      nil,
+      :role_arn,
+      :source_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Read-only metadata for connections that do not require authentication credentials.</p>
+    # @!attribute base_endpoint
+    #   <p>The base endpoint URL for connections that do not require authentication.</p>
+    #   @return [String]
+    class ReadNoneConnectionMetadata < Struct.new(
+      nil,
+      :base_endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The recent snapshots configuration for an embedded Quick Sight dashboard.</p>
     # @!attribute enabled
-    #   <p>The recent snapshots configuration for an embedded QuickSight dashboard.</p>
+    #   <p>The recent snapshots configuration for an embedded Quick Sight dashboard.</p>
     #   @return [Boolean]
     class RecentSnapshotsConfigurations < Struct.new(
       nil,
@@ -23428,20 +33556,20 @@ module Aws::QuickSight
       end
     end
 
-    # <p>A structure that grants QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
+    # <p>A structure that grants Quick Sight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
     #                <code>GetClusterCredentials</code>
     #             </a>.</p>
     # @!attribute role_arn
-    #   <p>Use the <code>RoleArn</code> structure to allow QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to QuickSight. The role's trust policy must allow the QuickSight service principal to assume the role.</p>
+    #   <p>Use the <code>RoleArn</code> structure to allow Quick Sight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Quick Sight. The role's trust policy must allow the Quick Sight service principal to assume the role.</p>
     #   @return [String]
     # @!attribute database_user
-    #   <p>The user whose permissions and group memberships will be used by QuickSight to access the cluster. If this user already exists in your database, QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+    #   <p>The user whose permissions and group memberships will be used by Quick Sight to access the cluster. If this user already exists in your database, Amazon Quick Sight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
     #   @return [String]
     # @!attribute database_groups
-    #   <p>A list of groups whose permissions will be granted to QuickSight to access the cluster. These permissions are combined with the permissions granted to QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
+    #   <p>A list of groups whose permissions will be granted to Quick Sight to access the cluster. These permissions are combined with the permissions granted to Quick Sight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
     #   @return [Array<String>]
     # @!attribute auto_create_database_user
-    #   <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
+    #   <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Quick Sight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
     #   @return [Boolean]
     class RedshiftIAMParameters < Struct.new(
       nil,
@@ -23475,11 +33603,11 @@ module Aws::QuickSight
     #               provided.</p>
     #   @return [String]
     # @!attribute iam_parameters
-    #   <p>An optional parameter that uses IAM authentication to grant QuickSight access to your cluster. This parameter can be used instead of <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html">DataSourceCredentials</a>.</p>
+    #   <p>An optional parameter that uses IAM authentication to grant Quick Sight access to your cluster. This parameter can be used instead of <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html">DataSourceCredentials</a>.</p>
     #   @return [Types::RedshiftIAMParameters]
     # @!attribute identity_center_configuration
-    #   <p>An optional parameter that configures IAM Identity Center authentication to grant QuickSight access to your cluster.</p>
-    #            <p>This parameter can only be specified if your QuickSight account is configured with IAM Identity Center.</p>
+    #   <p>An optional parameter that configures IAM Identity Center authentication to grant Quick Sight access to your cluster.</p>
+    #            <p>This parameter can only be specified if your Quick Sight account is configured with IAM Identity Center.</p>
     #   @return [Types::IdentityCenterConfiguration]
     class RedshiftParameters < Struct.new(
       nil,
@@ -23864,7 +33992,7 @@ module Aws::QuickSight
     #                     <code>INCREMENTAL_REFRESH</code>: A partial refresh of some rows of a dataset, based on the time window specified.</p>
     #               </li>
     #            </ul>
-    #            <p>For more information on full and incremental refreshes, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/refreshing-imported-data.html">Refreshing SPICE data</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information on full and incremental refreshes, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/refreshing-imported-data.html">Refreshing SPICE data</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) for the refresh schedule.</p>
@@ -23882,13 +34010,13 @@ module Aws::QuickSight
     end
 
     # @!attribute identity_type
-    #   <p>The identity type that your QuickSight account uses to manage the identity of users.</p>
+    #   <p>The identity type that your Quick Sight account uses to manage the identity of users.</p>
     #   @return [String]
     # @!attribute email
     #   <p>The email address of the user that you want to register.</p>
     #   @return [String]
     # @!attribute user_role
-    #   <p>The Amazon QuickSight role for the user. The user role can be one of the
+    #   <p>The Amazon Quick Sight role for the user. The user role can be one of the
     #   			following:</p>
     #            <ul>
     #               <li>
@@ -23902,12 +34030,12 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight
+    #                     <code>ADMIN</code>: A user who is an author, who can also manage Amazon Quick Sight
     #   					settings.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>
+    #                     <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Quick Sight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -23915,7 +34043,7 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>
+    #                     <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon Quick Sight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -23930,12 +34058,12 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     # @!attribute iam_arn
-    #   <p>The ARN of the IAM user or role that you are registering with Amazon QuickSight. </p>
+    #   <p>The ARN of the IAM user or role that you are registering with Amazon Quick Sight. </p>
     #   @return [String]
     # @!attribute session_name
     #   <p>You need to use this parameter only when you register one or more users using an assumed
     #   			IAM role. You don't need to provide the session name for other scenarios, for example when
-    #   			you are registering an IAM user or an Amazon QuickSight user. You can register multiple
+    #   			you are registering an IAM user or an Amazon Quick Sight user. You can register multiple
     #   			users using the same IAM role if each user has a different session name. For more
     #   			information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html">
     #                  <code>assume-role</code>
@@ -23944,13 +34072,13 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
     #   @return [String]
     # @!attribute user_name
-    #   <p>The Amazon QuickSight user name that you want to create for the user you are
+    #   <p>The Amazon Quick Sight user name that you want to create for the user you are
     #   			registering.</p>
     #   @return [String]
     # @!attribute custom_permissions_name
@@ -23975,16 +34103,16 @@ module Aws::QuickSight
     #                  <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html">UpdateUser</a>
     #               </code> instead.</p>
     #            <p>A set of custom permissions includes any combination of these restrictions. Currently,
-    #               you need to create the profile names for custom permission sets by using the QuickSight
+    #               you need to create the profile names for custom permission sets by using the Quick Sight
     #               console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of
-    #               permissions to a QuickSight user. </p>
-    #            <p>QuickSight custom permissions are applied through IAM policies. Therefore, they
-    #               override the permissions typically granted by assigning QuickSight users to one of the
-    #               default security cohorts in QuickSight (admin, author, reader, admin pro, author pro, reader pro).</p>
-    #            <p>This feature is available only to QuickSight Enterprise edition subscriptions.</p>
+    #               permissions to a Quick Sight user. </p>
+    #            <p>Quick Sight custom permissions are applied through IAM policies. Therefore, they
+    #               override the permissions typically granted by assigning Quick Sight users to one of the
+    #               default security cohorts in Quick Sight (admin, author, reader, admin pro, author pro, reader pro).</p>
+    #            <p>This feature is available only to Quick Sight Enterprise edition subscriptions.</p>
     #   @return [String]
     # @!attribute external_login_federation_provider_type
-    #   <p>The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated Identity and Access Management(IAM) role. The type of supported external login provider can be one of the following.</p>
+    #   <p>The type of supported external login provider that provides identity to let a user federate into Amazon Quick Sight with an associated Identity and Access Management(IAM) role. The type of supported external login provider can be one of the following.</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -23998,7 +34126,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute custom_federation_provider_url
     #   <p>The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate
-    #            into QuickSight with an associated Identity and Access Management(IAM) role. This parameter should
+    #            into Quick Sight with an associated Identity and Access Management(IAM) role. This parameter should
     #            only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.</p>
     #   @return [String]
     # @!attribute external_login_id
@@ -24060,7 +34188,7 @@ module Aws::QuickSight
     #          <ul>
     #             <li>
     #                <p>
-    #                   <code>KeyArn</code> - The ARN of a KMS key that is registered to a QuickSight account for encryption and decryption use.</p>
+    #                   <code>KeyArn</code> - The ARN of a KMS key that is registered to a Quick Sight account for encryption and decryption use.</p>
     #             </li>
     #             <li>
     #                <p>
@@ -24068,7 +34196,7 @@ module Aws::QuickSight
     #             </li>
     #          </ul>
     # @!attribute key_arn
-    #   <p>The ARN of the KMS key that is registered to a QuickSight account for encryption and decryption use.</p>
+    #   <p>The ARN of the KMS key that is registered to a Quick Sight account for encryption and decryption use.</p>
     #   @return [String]
     # @!attribute default_key
     #   <p>Indicates whether a <code>RegisteredCustomerManagedKey</code> is set as the default key for encryption and decryption use.</p>
@@ -24087,25 +34215,29 @@ module Aws::QuickSight
       end
     end
 
-    # <p>The feature configurations of an embedded QuickSight console.</p>
+    # <p>The feature configurations of an embedded Amazon Quick Sight console.</p>
     # @!attribute state_persistence
-    #   <p>The state persistence configurations of an embedded QuickSight console.</p>
+    #   <p>The state persistence configurations of an embedded Amazon Quick Sight console.</p>
     #   @return [Types::StatePersistenceConfigurations]
     # @!attribute shared_view
     #   <p>The shared view settings of an embedded dashboard.</p>
     #   @return [Types::SharedViewConfigurations]
     # @!attribute amazon_q_in_quick_sight
-    #   <p>The Amazon Q configurations of an embedded QuickSight console.</p>
+    #   <p>The Amazon Q configurations of an embedded Amazon Quick Sight
+    #               console.</p>
     #   @return [Types::AmazonQInQuickSightConsoleConfigurations]
     # @!attribute schedules
-    #   <p>The schedules configuration for an embedded QuickSight dashboard.</p>
+    #   <p>The schedules configuration for an embedded Quick Sight dashboard.</p>
     #   @return [Types::SchedulesConfigurations]
     # @!attribute recent_snapshots
-    #   <p>The recent snapshots configuration for an embedded QuickSight dashboard.</p>
+    #   <p>The recent snapshots configuration for an embedded Quick Sight dashboard.</p>
     #   @return [Types::RecentSnapshotsConfigurations]
     # @!attribute threshold_alerts
-    #   <p>The threshold alerts configuration for an embedded QuickSight dashboard.</p>
+    #   <p>The threshold alerts configuration for an embedded Quick Sight dashboard.</p>
     #   @return [Types::ThresholdAlertsConfigurations]
+    # @!attribute dashboard_customization_summary
+    #   <p>The dashboard customization summary configuration for an embedded Quick Sight console.</p>
+    #   @return [Types::DashboardCustomizationSummaryConfigurations]
     class RegisteredUserConsoleFeatureConfigurations < Struct.new(
       nil,
       :state_persistence,
@@ -24114,6 +34246,7 @@ module Aws::QuickSight
       :schedules,
       :recent_snapshots,
       :threshold_alerts,
+      :dashboard_customization_summary,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -24121,11 +34254,14 @@ module Aws::QuickSight
 
     # <p>Information about the dashboard you want to embed.</p>
     # @!attribute initial_dashboard_id
-    #   <p>The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, QuickSight renders this dashboard if the user has permissions to view it.</p>
-    #            <p>If the user does not have permission to view this dashboard, they see a permissions error message.</p>
+    #   <p>The dashboard ID for the dashboard that you want the user to see first. This ID is
+    #               included in the output URL. When the URL in response is accessed, Amazon Quick Sight
+    #               renders this dashboard if the user has permissions to view it.</p>
+    #            <p>If the user does not have permission to view this dashboard, they see a permissions
+    #               error message.</p>
     #   @return [String]
     # @!attribute feature_configurations
-    #   <p>The feature configurations of an embbedded QuickSight dashboard.</p>
+    #   <p>The feature configurations of an embbedded Amazon Quick Sight dashboard.</p>
     #   @return [Types::RegisteredUserDashboardFeatureConfigurations]
     class RegisteredUserDashboardEmbeddingConfiguration < Struct.new(
       nil,
@@ -24140,42 +34276,52 @@ module Aws::QuickSight
     # @!attribute state_persistence
     #   <p>The state persistence settings of an embedded dashboard.</p>
     #   @return [Types::StatePersistenceConfigurations]
+    # @!attribute bookmarks
+    #   <p>The bookmarks configuration for an embedded dashboard in Amazon Quick Sight.</p>
+    #   @return [Types::BookmarksConfigurations]
     # @!attribute shared_view
     #   <p>The shared view settings of an embedded dashboard.</p>
     #   @return [Types::SharedViewConfigurations]
-    # @!attribute bookmarks
-    #   <p>The bookmarks configuration for an embedded dashboard in QuickSight.</p>
-    #   @return [Types::BookmarksConfigurations]
     # @!attribute amazon_q_in_quick_sight
-    #   <p>The Amazon Q configurations of an embedded QuickSight dashboard.</p>
+    #   <p>The Amazon Q configurations of an embedded Amazon Quick Sight
+    #               dashboard.</p>
     #   @return [Types::AmazonQInQuickSightDashboardConfigurations]
     # @!attribute schedules
-    #   <p>The schedules configuration for an embedded QuickSight dashboard.</p>
+    #   <p>The schedules configuration for an embedded Quick Sight dashboard.</p>
     #   @return [Types::SchedulesConfigurations]
     # @!attribute recent_snapshots
-    #   <p>The recent snapshots configuration for an QuickSight embedded dashboard</p>
+    #   <p>The recent snapshots configuration for an Quick Sight embedded dashboard</p>
     #   @return [Types::RecentSnapshotsConfigurations]
     # @!attribute threshold_alerts
-    #   <p>The threshold alerts configuration for an QuickSight embedded dashboard.</p>
+    #   <p>The threshold alerts configuration for an Quick Sight embedded dashboard.</p>
     #   @return [Types::ThresholdAlertsConfigurations]
+    # @!attribute dashboard_customization_summary
+    #   <p>The dashboard customization summary configuration for an embedded Quick Sight dashboard.</p>
+    #   @return [Types::DashboardCustomizationSummaryConfigurations]
     class RegisteredUserDashboardFeatureConfigurations < Struct.new(
       nil,
       :state_persistence,
-      :shared_view,
       :bookmarks,
+      :shared_view,
       :amazon_q_in_quick_sight,
       :schedules,
       :recent_snapshots,
       :threshold_alerts,
+      :dashboard_customization_summary,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The experience that you are embedding. You can use this object to generate a url that embeds a visual into your application.</p>
+    # <p>The experience that you are embedding. You can use this object to generate a url that
+    #             embeds a visual into your application.</p>
     # @!attribute initial_dashboard_visual_id
-    #   <p>The visual ID for the visual that you want the user to embed. This ID is included in the output URL. When the URL in response is accessed, QuickSight renders this visual.</p>
-    #            <p>The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>
+    #   <p>The visual ID for the visual that you want the user to embed. This ID is included in
+    #               the output URL. When the URL in response is accessed, Amazon Quick Sight renders this
+    #               visual.</p>
+    #            <p>The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be
+    #               included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request
+    #               will fail with <code>InvalidParameterValueException</code>.</p>
     #   @return [Types::DashboardVisualId]
     class RegisteredUserDashboardVisualEmbeddingConfiguration < Struct.new(
       nil,
@@ -24185,7 +34331,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The type of experience you want to embed. For registered users, you can embed QuickSight dashboards or the QuickSight console.</p>
+    # <p>The type of experience you want to embed. For registered users, you can embed Quick dashboards or the Amazon Quick Sight console.</p>
     #          <note>
     #             <p>Exactly one of the experience configurations is required. You can choose
     #                     <code>Dashboard</code> or <code>QuickSightConsole</code>. You cannot choose more
@@ -24195,50 +34341,56 @@ module Aws::QuickSight
     #   <p>The configuration details for providing a dashboard embedding experience.</p>
     #   @return [Types::RegisteredUserDashboardEmbeddingConfiguration]
     # @!attribute quick_sight_console
-    #   <p>The configuration details for providing each QuickSight console embedding experience. This can be used along with custom permissions to restrict access to certain features. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html">Customizing Access to the QuickSight Console</a> in the <i>Amazon QuickSight User
-    #               Guide</i>.</p>
+    #   <p>The configuration details for providing each Amazon Quick Sight console embedding
+    #               experience. This can be used along with custom permissions to restrict access to certain
+    #               features. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html">Customizing Access to the Amazon Quick Sight Console</a> in the
+    #                       <i>Amazon Quick User Guide</i>.</p>
     #            <p>Use <code>
     #                  <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html">GenerateEmbedUrlForRegisteredUser</a>
-    #               </code>
-    #               where
-    #               you want to provide an authoring portal that allows users to create data sources,
-    #               datasets, analyses, and dashboards. The users who accesses an embedded QuickSight console
-    #               needs to belong to the author or admin security cohort. If you want to restrict permissions
-    #               to some of these features, add a custom permissions profile to the user with the
-    #               <code>
+    #               </code> where you want to provide an
+    #               authoring portal that allows users to create data sources, datasets, analyses, and
+    #               dashboards. The users who accesses an embedded Amazon Quick Sight console needs to belong
+    #               to the author or admin security cohort. If you want to restrict permissions to some of
+    #               these features, add a custom permissions profile to the user with the <code>
     #                  <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html">UpdateUser</a>
     #               </code> API operation. Use the <code>
     #                  <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html">RegisterUser</a>
-    #               </code> API operation to add a new user with a custom permission profile attached. For more
-    #               information, see the following sections in the <i>Amazon QuickSight User
-    #               Guide</i>:</p>
+    #               </code> API operation to add a new user with a custom
+    #               permission profile attached. For more information, see the following sections in the
+    #                       <i>Amazon Quick User Guide</i>:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html">Embedding the Full Functionality of the QuickSight Console for Authenticated Users</a>
+    #                     <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html">Embedding the Full Functionality of the Amazon Quick Sight Console for
+    #                           Authenticated Users</a>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <a href="https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html">Customizing Access to the Amazon QuickSight Console</a>
+    #                     <a href="https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html">Customizing Access to the Amazon Quick Console</a>
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html">Amazon QuickSight Developer Portal</a>.</p>
+    #            <p>For more information about the high-level steps for embedding and for an interactive
+    #               demo of the ways you can customize embedding, visit the <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html">Amazon Quick
+    #                   Developer Portal</a>.</p>
     #   @return [Types::RegisteredUserQuickSightConsoleEmbeddingConfiguration]
     # @!attribute q_search_bar
     #   <p>The configuration details for embedding the Q search bar.</p>
     #            <p>For more information about embedding the Q search bar, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html">Embedding Overview</a> in
-    #               the <i>QuickSight User Guide</i>.</p>
+    #               the <i>Amazon Quick Sight User Guide</i>.</p>
     #   @return [Types::RegisteredUserQSearchBarEmbeddingConfiguration]
     # @!attribute dashboard_visual
-    #   <p>The type of embedding experience. In this case, QuickSight visuals.</p>
+    #   <p>The type of embedding experience. In this case, Amazon Quick Sight visuals.</p>
     #   @return [Types::RegisteredUserDashboardVisualEmbeddingConfiguration]
     # @!attribute generative_qn_a
     #   <p>The configuration details for embedding the Generative Q&A experience.</p>
     #            <p>For more information about embedding the Generative Q&A experience, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html">Embedding Overview</a> in
-    #                   the <i>QuickSight User Guide</i>.</p>
+    #               the <i>Amazon Quick Sight User Guide</i>.</p>
     #   @return [Types::RegisteredUserGenerativeQnAEmbeddingConfiguration]
+    # @!attribute quick_chat
+    #   <p>The configuration details for embedding the Quick chat agent.</p>
+    #   @return [Types::RegisteredUserQuickChatEmbeddingConfiguration]
     class RegisteredUserEmbeddingExperienceConfiguration < Struct.new(
       nil,
       :dashboard,
@@ -24246,6 +34398,7 @@ module Aws::QuickSight
       :q_search_bar,
       :dashboard_visual,
       :generative_qn_a,
+      :quick_chat,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -24253,10 +34406,14 @@ module Aws::QuickSight
 
     # <p>An object that provides information about the configuration of a Generative Q&A experience.</p>
     # @!attribute initial_topic_id
-    #   <p>The ID of the new Q reader experience topic that you want to make the starting topic in the Generative Q&A experience.
-    #           You can find a topic ID by navigating to the Topics pane in the QuickSight application and opening
-    #           a topic. The ID is in the URL for the topic that you open.</p>
-    #            <p>If you don't specify an initial topic or you specify a legacy topic, a list of all shared new reader experience topics is shown in the Generative Q&A experience for your readers. When you select an initial new reader experience topic, you can specify whether or not readers are allowed to select other new reader experience topics from the available ones in the list.</p>
+    #   <p>The ID of the new Q reader experience topic that you want to make the starting topic
+    #               in the Generative Q&A experience. You can find a topic ID by navigating to the Topics pane in the Quick application and opening a topic. The ID is in the URL for the topic that
+    #               you open.</p>
+    #            <p>If you don't specify an initial topic or you specify a legacy topic, a list of all
+    #               shared new reader experience topics is shown in the Generative Q&A experience for
+    #               your readers. When you select an initial new reader experience topic, you can specify
+    #               whether or not readers are allowed to select other new reader experience topics from the
+    #               available ones in the list.</p>
     #   @return [String]
     class RegisteredUserGenerativeQnAEmbeddingConfiguration < Struct.new(
       nil,
@@ -24268,9 +34425,14 @@ module Aws::QuickSight
 
     # <p>Information about the Q search bar embedding experience.</p>
     # @!attribute initial_topic_id
-    #   <p>The ID of the legacy Q topic that you want to use as the starting topic in the Q search bar. To locate the topic ID of the topic that you want to use, open the <a href="https://quicksight.aws.amazon.com/">QuickSight console</a>, navigate to the <b>Topics</b> pane, and choose thre topic that you want to use. The <code>TopicID</code> is located in the URL of the topic that opens. When you select an initial topic, you can specify whether or not readers
-    #         are allowed to select other topics from the list of available topics.</p>
-    #            <p>If you don't specify an initial topic or if you specify a new reader experience topic, a list of all shared legacy topics is shown in the Q bar. </p>
+    #   <p>The ID of the legacy Q topic that you want to use as the starting topic in the Q
+    #               search bar. To locate the topic ID of the topic that you want to use, open the <a href="https://quicksight.aws.amazon.com/">Quick Sight console</a>, navigate to the
+    #                   <b>Topics</b> pane, and choose thre topic that you want to
+    #               use. The <code>TopicID</code> is located in the URL of the topic that opens. When you
+    #               select an initial topic, you can specify whether or not readers are allowed to select
+    #               other topics from the list of available topics.</p>
+    #            <p>If you don't specify an initial topic or if you specify a new reader experience topic,
+    #               a list of all shared legacy topics is shown in the Q bar. </p>
     #   @return [String]
     class RegisteredUserQSearchBarEmbeddingConfiguration < Struct.new(
       nil,
@@ -24280,9 +34442,18 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the QuickSight console that you want to embed.</p>
+    # <p>An object that provides information about the configuration of a chat agent.</p>
+    class RegisteredUserQuickChatEmbeddingConfiguration < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about the Amazon Quick Sight console that you want to embed.</p>
     # @!attribute initial_path
-    #   <p>The initial URL path for the QuickSight console. <code>InitialPath</code> is required.</p>
+    #   <p>The initial URL path for the Amazon Quick Sight console. <code>InitialPath</code> is
+    #               required.</p>
     #            <p>The entry point URL is constrained to the following paths:</p>
     #            <ul>
     #               <li>
@@ -24307,21 +34478,35 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>/dashboards/DashboardId</code>. <i>DashboardId</i> is the actual ID key from the QuickSight console URL of the dashboard.</p>
+    #                     <code>/dashboards/DashboardId</code>. <i>DashboardId</i> is the
+    #                       actual ID key from the Amazon Quick Sight console URL of the dashboard.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>/analyses/AnalysisId</code>. <i>AnalysisId</i> is the actual ID key from the QuickSight console URL of the analysis.</p>
+    #                     <code>/analyses/AnalysisId</code>. <i>AnalysisId</i> is the
+    #                       actual ID key from the Amazon Quick Sight console URL of the analysis.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute feature_configurations
-    #   <p>The embedding configuration of an embedded QuickSight console.</p>
+    #   <p>The embedding configuration of an embedded Amazon Quick Sight console.</p>
     #   @return [Types::RegisteredUserConsoleFeatureConfigurations]
     class RegisteredUserQuickSightConsoleEmbeddingConfiguration < Struct.new(
       nil,
       :initial_path,
       :feature_configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that contains information about files that are requested for registered user during a <code>StartDashboardSnapshotJob</code> API call.</p>
+    # @!attribute file_groups
+    #   <p>A list of <code>SnapshotJobResultFileGroup</code> objects that contain information on the files that are requested for registered user during a <code>StartDashboardSnapshotJob</code> API call. If the job succeeds, these objects contain the location where the snapshot artifacts are stored. If the job fails, the objects contain information about the error that caused the job to fail.</p>
+    #   @return [Array<Types::SnapshotJobResultFileGroup>]
+    class RegisteredUserSnapshotJobResult < Struct.new(
+      nil,
+      :file_groups,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -24489,6 +34674,26 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A transform operation that renames one or more columns in the dataset.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source transform operation that provides input data for column renaming.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute rename_column_operations
+    #   <p>The list of column rename operations to perform, specifying old and new column names.</p>
+    #   @return [Array<Types::RenameColumnOperation>]
+    class RenameColumnsOperation < Struct.new(
+      nil,
+      :alias,
+      :source,
+      :rename_column_operations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The resource specified already exists. </p>
     # @!attribute message
     #   @return [String]
@@ -24533,14 +34738,14 @@ module Aws::QuickSight
     #               following:</p>
     #            <ul>
     #               <li>
-    #                  <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>
+    #                  <p>The ARN of an Quick Sight user or group associated with a data source or dataset. (This is common.)</p>
     #               </li>
     #               <li>
-    #                  <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
+    #                  <p>The ARN of an Quick Sight user, group, or namespace associated with an analysis, dashboard, template, or theme. Namespace sharing is not supported for action connectors. (This is common.)</p>
     #               </li>
     #               <li>
-    #                  <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight
-    #                       ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.
+    #                  <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a Quick Sight
+    #                       ARN. Use this option only to share resources (templates) across Amazon Web Services accounts. Account root sharing is not supported for action connectors.
     #                       (This is less common.) </p>
     #               </li>
     #            </ul>
@@ -24691,9 +34896,30 @@ module Aws::QuickSight
       end
     end
 
+    # <p>Configuration for row level security.</p>
+    # @!attribute tag_configuration
+    #   <p>The configuration of tags on a dataset to set row-level security. </p>
+    #   @return [Types::RowLevelPermissionTagConfiguration]
+    # @!attribute row_level_permission_data_set
+    #   <p>Information about a dataset that contains permissions for row-level security (RLS).
+    #               The permissions dataset maps fields to users or groups. For more information, see
+    #               <a href="https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Quick Sight User
+    #                   Guide</i>.</p>
+    #            <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is
+    #               not supported for new RLS datasets.</p>
+    #   @return [Types::RowLevelPermissionDataSet]
+    class RowLevelPermissionConfiguration < Struct.new(
+      nil,
+      :tag_configuration,
+      :row_level_permission_data_set,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about a dataset that contains permissions for row-level security (RLS).
     #             The permissions dataset maps fields to users or groups. For more information, see
-    #             <a href="https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User
+    #             <a href="https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Quick Sight User
     #                 Guide</i>.</p>
     #          <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is
     #             not supported for new RLS datasets.</p>
@@ -24770,7 +34996,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An optional structure that contains the Amazon S3 bucket configuration that the generated snapshots are stored in. If you don't provide this information, generated snapshots are stored in the default QuickSight bucket.</p>
+    # <p>An optional structure that contains the Amazon S3 bucket configuration that the generated snapshots are stored in. If you don't provide this information, generated snapshots are stored in the default Amazon Quick Sight bucket.</p>
     # @!attribute bucket_name
     #   <p>The name of an existing Amazon S3 bucket where the generated snapshot artifacts are sent.</p>
     #   @return [String]
@@ -24790,10 +35016,67 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The parameters that are required to connect to an S3 knowledge base data source.</p>
+    #          <p>
+    #             <b>Prerequisites: Amazon S3 bucket access</b>
+    #          </p>
+    #          <p>Before you call <code>CreateKnowledgeBase</code> for an Amazon S3 knowledge base, an administrator must grant Amazon QuickSight access to the source S3 bucket. If access has not been granted for the bucket, knowledge base creation fails.</p>
+    #          <p>To grant access, an administrator adds the bucket in the Amazon QuickSight admin console, under Permissions, Amazon Web Services resources, Amazon S3, Select S3 buckets. This authorizes the Amazon QuickSight service role to read the bucket. The bucket can be in the same Amazon Web Services account or, when the bucket owner has authorized your account, in a different account.</p>
+    #          <p>The service role requires at least the following permissions on the bucket:</p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <code>s3:GetObject</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>s3:ListBucket</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>s3:GetBucketLocation</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>s3:GetObjectVersion</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>s3:ListBucketVersions</code>
+    #                </p>
+    #             </li>
+    #          </ul>
+    #          <p>For the full procedure, including cross-account buckets and KMS-encrypted buckets, see the Amazon S3 knowledge base administrator setup guide.</p>
+    #          <note>
+    #             <p>To grant access for a specific S3 knowledge base data source without granting account-wide S3 access, provide a custom IAM role on the data source by using <code>RoleArn</code>.</p>
+    #          </note>
+    # @!attribute role_arn
+    #   <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 Knowledge Base data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 Knowledge Base data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
+    #   @return [String]
+    # @!attribute bucket_url
+    #   <p>The URL of the S3 bucket that contains the knowledge base data.</p>
+    #   @return [String]
+    # @!attribute metadata_files_location
+    #   <p>The Amazon S3 location (prefix) of per-document metadata files. Each metadata file describes a single source document and its indexable attributes, such as title, category, and version. This is not the global ACL configuration file. To apply a single global ACL file to the entire knowledge base, use the access control configuration instead.</p>
+    #   @return [String]
+    class S3KnowledgeBaseParameters < Struct.new(
+      nil,
+      :role_arn,
+      :bucket_url,
+      :metadata_files_location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The parameters for S3.</p>
     # @!attribute manifest_file_location
     #   <p>Location of the Amazon S3 manifest file. This is NULL if the manifest file was
-    #               uploaded into QuickSight.</p>
+    #               uploaded into Quick Sight.</p>
     #   @return [Types::ManifestFileLocation]
     # @!attribute role_arn
     #   <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
@@ -24824,6 +35107,38 @@ module Aws::QuickSight
       nil,
       :data_source_arn,
       :upload_settings,
+      :input_columns,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The parameters for S3 Tables.</p>
+    # @!attribute table_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the S3 Tables bucket.</p>
+    #   @return [String]
+    class S3TablesParameters < Struct.new(
+      nil,
+      :table_bucket_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A table from a Software-as-a-Service (SaaS) data source, including connection details and column definitions.</p>
+    # @!attribute data_source_arn
+    #   <p>The Amazon Resource Name (ARN) of the SaaS data source.</p>
+    #   @return [String]
+    # @!attribute table_path
+    #   <p>The hierarchical path to the table within the SaaS data source.</p>
+    #   @return [Array<Types::TablePathElement>]
+    # @!attribute input_columns
+    #   <p>The list of input columns available from the SaaS table.</p>
+    #   @return [Array<Types::InputColumn>]
+    class SaaSTable < Struct.new(
+      nil,
+      :data_source_arn,
+      :table_path,
       :input_columns,
       keyword_init: true
     )
@@ -24931,7 +35246,7 @@ module Aws::QuickSight
     end
 
     # <p>A sankey diagram.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sankey-diagram.html">Using Sankey diagrams</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sankey-diagram.html">Using Sankey diagrams</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -25106,7 +35421,7 @@ module Aws::QuickSight
     end
 
     # <p>A scatter plot.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/scatter-plot.html">Using scatter plots</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/scatter-plot.html">Using scatter plots</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -25158,9 +35473,9 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The schedules configuration for an embedded QuickSight dashboard.</p>
+    # <p>The schedules configuration for an embedded Quick Sight dashboard.</p>
     # @!attribute enabled
-    #   <p>The schedules configuration for an embedded QuickSight dashboard.</p>
+    #   <p>The schedules configuration for an embedded Quick Sight dashboard.</p>
     #   @return [Boolean]
     class SchedulesConfigurations < Struct.new(
       nil,
@@ -25186,6 +35501,99 @@ module Aws::QuickSight
       nil,
       :visibility,
       :visible_range,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID in which to search for action connectors.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of action connectors to return in a single response. Valid range is 1 to 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next set of results. Use the token returned from a previous call to continue searching.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The search filters to apply. You can filter by connector name, type, or user permissions. Maximum of one filter is supported.</p>
+    #   @return [Array<Types::ActionConnectorSearchFilter>]
+    class SearchActionConnectorsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next set of results. If null, there are no more results to retrieve.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status code of the request.</p>
+    #   @return [Integer]
+    # @!attribute action_connector_summaries
+    #   <p>A list of action connector summaries that match the search criteria.</p>
+    #   @return [Array<Types::ActionConnectorSummary>]
+    class SearchActionConnectorsResponse < Struct.new(
+      nil,
+      :next_token,
+      :request_id,
+      :status,
+      :action_connector_summaries,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the agents.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters to apply when searching agents.</p>
+    #   @return [Array<Types::AgentSearchFilter>]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class SearchAgentsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute agent_summaries
+    #   <p>A list of agent summaries.</p>
+    #   @return [Array<Types::AgentSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class SearchAgentsResponse < Struct.new(
+      nil,
+      :agent_summaries,
+      :next_token,
+      :request_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25244,14 +35652,77 @@ module Aws::QuickSight
       end
     end
 
+    # <p>A filter to apply when searching for apps.</p>
+    # @!attribute name
+    #   <p>The name of the filter attribute.</p>
+    #   @return [String]
+    # @!attribute operator
+    #   <p>The comparison operator for the filter.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value to filter on.</p>
+    #   @return [String]
+    class SearchAppsFilter < Struct.new(
+      nil,
+      :name,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the user whose dashboards you're searching
-    #               for. </p>
+    #   <p>The ID of the Amazon Web Services account that contains the apps to search.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters to apply to the search.</p>
+    #   @return [Array<Types::SearchAppsFilter>]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single request. Valid range is 1 to 100. If you don't specify a value, the default is 20.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    class SearchAppsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :filters,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute app_summary_list
+    #   <p>A list of app summaries that match the search criteria.</p>
+    #   @return [Array<Types::AppSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class SearchAppsResponse < Struct.new(
+      nil,
+      :app_summary_list,
+      :next_token,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the user whose dashboards
+    #               you're searching for. </p>
     #   @return [String]
     # @!attribute filters
     #   <p>The filters to apply to the search. Currently, you can search only by user name, for
     #               example, <code>"Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals",
-    #               "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]</code>
+    #                   "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" }
+    #               ]</code>
     #            </p>
     #   @return [Array<Types::DashboardSearchFilter>]
     # @!attribute next_token
@@ -25375,7 +35846,8 @@ module Aws::QuickSight
     end
 
     # @!attribute data_source_summaries
-    #   <p>A <code>DataSourceSummaries</code> object that returns a summary of a data source.</p>
+    #   <p>A <code>DataSourceSummaries</code> object that returns a summary of a data
+    #   			source.</p>
     #   @return [Array<Types::DataSourceSummary>]
     # @!attribute next_token
     #   <p>A pagination token that can be used in a subsequent request.</p>
@@ -25392,6 +35864,103 @@ module Aws::QuickSight
       :next_token,
       :status,
       :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # <p>A structure that contains the filter information when searching flows.</p>
+    # @!attribute name
+    #   <p>The name of the value that you want to use as a filter, for example <code>"Name":
+    #                   "DIRECT_QUICKSIGHT_SOLE_OWNER"</code>.</p>
+    #            <p>Valid values are defined as follows:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>assetName</code>: Any flows whose names have a substring match to this value will be returned.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>assetDescription</code>: Any flows whose descriptions have a substring match to this value will be returned.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as the only owner of the analysis are returned. Implicit permissions from folders or groups are not considered.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIRECT_QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the owners of the analyses are returned. Implicit permissions from folders or groups are not considered.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the owners or viewers of the analyses are returned. Implicit permissions from folders or groups are not considered. </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute operator
+    #   <p>The comparison operator that you want to use as a filter, for example  <code>"Operator": "StringEquals"</code>. Valid values are  <code>"StringEquals"</code>  and  <code>"StringLike"</code>.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the named item, in this case <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code>, that you want
+    #               to use as a filter, for example <code>"Value"</code>. An example is
+    #               <code>"arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>.</p>
+    #   @return [String]
+    class SearchFlowsFilter < Struct.new(
+      nil,
+      :name,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account where you are searching for flows from.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters applied to the search when searching for flows in the Amazon Web Services account.</p>
+    #   @return [Array<Types::SearchFlowsFilter>]
+    # @!attribute next_token
+    #   <p>The token to request the next set of results, or null if you want to retrieve the first set.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to be returned per request.</p>
+    #   @return [Integer]
+    class SearchFlowsInput < Struct.new(
+      nil,
+      :aws_account_id,
+      :filters,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute flow_summary_list
+    #   <p>The list of flows found against the search.</p>
+    #   @return [Array<Types::FlowSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class SearchFlowsOutput < Struct.new(
+      nil,
+      :flow_summary_list,
+      :next_token,
+      :request_id,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25455,7 +36024,7 @@ module Aws::QuickSight
 
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-    #             Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #             Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>A pagination token that can be used in a subsequent request.</p>
@@ -25510,6 +36079,111 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute filters
+    #   <p>The filters to apply when searching knowledge bases.</p>
+    #   @return [Array<Types::KnowledgeBaseSearchFilter>]
+    # @!attribute sort_by
+    #   <p>The sort configuration for the search results.</p>
+    #   @return [Types::KnowledgeBaseSortBy]
+    class SearchKnowledgeBasesRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      :filters,
+      :sort_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_summaries
+    #   <p>A list of knowledge base summaries.</p>
+    #   @return [Array<Types::KnowledgeBaseSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class SearchKnowledgeBasesResponse < Struct.new(
+      nil,
+      :knowledge_base_summaries,
+      :next_token,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = nil unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the spaces.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute filters
+    #   <p>The filters to apply to the search.</p>
+    #   @return [Array<Types::SpaceQuicksightSearchFilter>]
+    class SearchSpacesRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute space_summaries
+    #   <p>A list of space summaries that match the search criteria.</p>
+    #   @return [Array<Types::SpaceSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class SearchSpacesResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :space_summaries,
+      :next_token,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account that contains the topic that you want to find.</p>
     #   @return [String]
     # @!attribute filters
@@ -25545,6 +36219,58 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class SearchTopicsResponse < Struct.new(
+      nil,
+      :topic_summary_list,
+      :next_token,
+      :status,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the topic that you want to
+    #            search.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>The filters that you want to use to search for the topic.</p>
+    #   @return [Array<Types::TopicSearchFilter>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to be returned per request.</p>
+    #   @return [Integer]
+    class SearchTopicsV2Request < Struct.new(
+      nil,
+      :aws_account_id,
+      :filters,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute topic_summary_list
+    #   <p>A list of topic summaries that is returned by the search topic request.</p>
+    #   @return [Array<Types::TopicV2Summary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results, or null if there are no more results.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class SearchTopicsV2Response < Struct.new(
       nil,
       :topic_summary_list,
       :next_token,
@@ -25693,6 +36419,32 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The sort configuration for selectable values in a control.</p>
+    # @!attribute direction
+    #   <p>The sort direction for the selectable values. Choose one of the following options:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ASC</code>: Sort in ascending order.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DESC</code>: Sort in descending order.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>USER_DEFINED_ORDER</code>: Preserve the order in which the values were entered.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class SelectableValuesSort < Struct.new(
+      nil,
+      :direction,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration for applying a filter to specific sheets or visuals. You can apply this filter to multiple visuals that are on one sheet or to all visuals on a sheet.</p>
     #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     # @!attribute sheet_visual_scoping_configurations
@@ -25704,6 +36456,78 @@ module Aws::QuickSight
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The self-upgrade configuration for the Quick account.</p>
+    # @!attribute self_upgrade_status
+    #   <p>Status set for the self-upgrade configuration for the Quick account. It can contain the following values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>AUTO_APPROVAL</code>: All the self-upgrade requests will be auto approved.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ADMIN_APPROVAL</code>: All the self-upgrade requests will require admin approval.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class SelfUpgradeConfiguration < Struct.new(
+      nil,
+      :self_upgrade_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details of a self-upgrade request.</p>
+    # @!attribute upgrade_request_id
+    #   <p>The ID of the self-upgrade request.</p>
+    #   @return [String]
+    # @!attribute user_name
+    #   <p>The username of the user who initiated the self-upgrade request.</p>
+    #   @return [String]
+    # @!attribute original_role
+    #   <p>The original role of the user before the upgrade.</p>
+    #   @return [String]
+    # @!attribute requested_role
+    #   <p>The role that the user is requesting to upgrade to.</p>
+    #   @return [String]
+    # @!attribute request_note
+    #   <p>An optional note explaining the reason for the self-upgrade request.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The time when the self-upgrade request was created.</p>
+    #   @return [Integer]
+    # @!attribute request_status
+    #   <p>The status of the self-upgrade request.</p>
+    #   @return [String]
+    # @!attribute last_update_attempt_time
+    #   <p>The time of the last update attempt for the self-upgrade request.</p>
+    #   @return [Integer]
+    # @!attribute last_update_failure_reason
+    #   <p>The reason for the last update failure, if applicable.</p>
+    #   @return [String]
+    class SelfUpgradeRequestDetail < Struct.new(
+      nil,
+      :upgrade_request_id,
+      :user_name,
+      :original_role,
+      :requested_role,
+      :request_note,
+      :creation_time,
+      :request_status,
+      :last_update_attempt_time,
+      :last_update_failure_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:creation_time] = 0 unless options.key?(:creation_time)
+        options[:last_update_attempt_time] = 0 unless options.key?(:last_update_attempt_time)
+        super
+      end
     end
 
     # <p>A structure that represents a semantic entity type.</p>
@@ -25721,6 +36545,46 @@ module Aws::QuickSight
       :type_name,
       :sub_type_name,
       :type_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for the semantic model that defines how prepared data is structured for analysis and reporting.</p>
+    # @!attribute table_map
+    #   <p>A map of semantic tables that define the analytical structure.</p>
+    #   @return [Hash<String, Types::SemanticTable>]
+    # @!attribute semantic_metadata
+    #   <p>The dataset-level semantic metadata, including a description and custom instructions.</p>
+    #   @return [Array<Types::DataSetSemanticMetadata>]
+    class SemanticModelConfiguration < Struct.new(
+      nil,
+      :table_map,
+      :semantic_metadata,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A semantic table that represents the final analytical structure of the data.</p>
+    # @!attribute alias
+    #   <p>Alias for the semantic table.</p>
+    #   @return [String]
+    # @!attribute destination_table_id
+    #   <p>The identifier of the destination table from data preparation that provides data to this semantic table.</p>
+    #   @return [String]
+    # @!attribute row_level_permission_configuration
+    #   <p>Configuration for row level security that control data access for this semantic table.</p>
+    #   @return [Types::RowLevelPermissionConfiguration]
+    # @!attribute semantic_metadata
+    #   <p>The column-level semantic metadata for this semantic table.</p>
+    #   @return [Types::TableSemanticMetadata]
+    class SemanticTable < Struct.new(
+      nil,
+      :alias,
+      :destination_table_id,
+      :row_level_permission_configuration,
+      :semantic_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25852,6 +36716,56 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The connection parameters for a SharePoint data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses SharePoint.</p>
+    # @!attribute share_point_domain
+    #   <p>The SharePoint domain for the data source.</p>
+    #   @return [String]
+    # @!attribute tenant_id
+    #   <p>The tenant ID for the SharePoint data source.</p>
+    #   @return [String]
+    # @!attribute client_id
+    #   <p>The client ID for the SharePoint data source.</p>
+    #   @return [String]
+    # @!attribute auth_type
+    #   <p>The authentication type for the SharePoint data source. Valid values include:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>TWO_LEGGED_OAUTH</code> – Server-to-server authentication using client credentials that do not require user interaction.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>THREE_LEGGED_OAUTH</code> – Interactive OAuth that requires user consent.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class SharePointParameters < Struct.new(
+      nil,
+      :share_point_domain,
+      :tenant_id,
+      :client_id,
+      :auth_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Semantic metadata shared across one or more columns.</p>
+    # @!attribute column_names
+    #   <p>The names of the columns this metadata applies to.</p>
+    #   @return [Array<String>]
+    # @!attribute column_properties
+    #   <p>The semantic properties for the specified columns.</p>
+    #   @return [Array<Types::ColumnSemanticProperty>]
+    class SharedColumnSemanticMetadata < Struct.new(
+      nil,
+      :column_names,
+      :column_properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The shared view settings of an embedded dashboard.</p>
     # @!attribute enabled
     #   <p>The shared view settings of an embedded dashboard.</p>
@@ -25870,7 +36784,7 @@ module Aws::QuickSight
     end
 
     # <p>A <i>sheet</i>, which is an object that contains a set of visuals that
-    #             are viewed together on one page in Amazon QuickSight. Every analysis and dashboard
+    #             are viewed together on one page in Quick Sight. Every analysis and dashboard
     #             contains at least one sheet. Each sheet contains at least one visualization widget, for
     #             example a chart, pivot table, or narrative insight. Sheets can be associated with other
     #             components, such as controls, filters, and so on.</p>
@@ -25878,7 +36792,7 @@ module Aws::QuickSight
     #   <p>The unique identifier associated with a sheet.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
+    #   <p>The name of a sheet. This name is displayed on the sheet's tab in the Quick Sight
     #               console.</p>
     #   @return [String]
     # @!attribute images
@@ -25889,6 +36803,22 @@ module Aws::QuickSight
       :sheet_id,
       :name,
       :images,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The background configuration for sheets.</p>
+    # @!attribute color
+    #   <p>The solid color background option for sheets.</p>
+    #   @return [String]
+    # @!attribute gradient
+    #   <p>The gradient background option for sheets.</p>
+    #   @return [String]
+    class SheetBackgroundStyle < Struct.new(
+      nil,
+      :color,
+      :gradient,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -25958,16 +36888,16 @@ module Aws::QuickSight
     #   <p>A description of the sheet.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the sheet. This name is displayed on the sheet's tab in the QuickSight
+    #   <p>The name of the sheet. This name is displayed on the sheet's tab in the Quick
     #               console.</p>
     #   @return [String]
     # @!attribute parameter_controls
     #   <p>The list of parameter controls that are on a sheet.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-controls.html">Using a Control with a Parameter in Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-controls.html">Using a Control with a Parameter in Amazon Quick Sight</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Array<Types::ParameterControl>]
     # @!attribute filter_controls
     #   <p>The list of filter controls that are on a sheet.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filter-controls.html">Adding filter controls to analysis sheets</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filter-controls.html">Adding filter controls to analysis sheets</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Array<Types::FilterControl>]
     # @!attribute visuals
     #   <p>A list of the visuals that are on a sheet. Visual placement is determined by the layout of the sheet.</p>
@@ -25980,7 +36910,7 @@ module Aws::QuickSight
     #   @return [Array<Types::SheetImage>]
     # @!attribute layouts
     #   <p>Layouts define how the components of a sheet are arranged.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html">Types of layout</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html">Types of layout</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Array<Types::Layout>]
     # @!attribute sheet_control_layouts
     #   <p>The control layouts of the sheet.</p>
@@ -26192,6 +37122,38 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A group of elements within a sheet layout.</p>
+    # @!attribute id
+    #   <p>A unique identifier for the group.</p>
+    #   @return [String]
+    # @!attribute members
+    #   <p>The members of the group.</p>
+    #   @return [Array<Types::SheetLayoutGroupMember>]
+    class SheetLayoutGroup < Struct.new(
+      nil,
+      :id,
+      :members,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A member of a sheet layout group.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the group member.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the group member.</p>
+    #   @return [String]
+    class SheetLayoutGroupMember < Struct.new(
+      nil,
+      :id,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The theme display options for sheets. </p>
     # @!attribute tile
     #   <p>The display options for tiles.</p>
@@ -26199,10 +37161,14 @@ module Aws::QuickSight
     # @!attribute tile_layout
     #   <p>The layout options for tiles.</p>
     #   @return [Types::TileLayoutStyle]
+    # @!attribute background
+    #   <p>The background for sheets.</p>
+    #   @return [Types::SheetBackgroundStyle]
     class SheetStyle < Struct.new(
       nil,
       :tile,
       :tile_layout,
+      :background,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -26223,6 +37189,18 @@ module Aws::QuickSight
       :sheet_text_box_id,
       :content,
       :interactions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration of the sheet tooltip.</p>
+    # @!attribute sheet_id
+    #   <p>The sheet ID of the tooltip sheet that is used by the tooltip.</p>
+    #   @return [String]
+    class SheetTooltip < Struct.new(
+      nil,
+      :sheet_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -26279,17 +37257,17 @@ module Aws::QuickSight
 
     # <p>A <code>SignupResponse</code> object that contains a summary of a newly created account.</p>
     # @!attribute iam_user
-    #   <p>A Boolean that is <code>TRUE</code> if the QuickSight uses IAM as an
+    #   <p>A Boolean that is <code>TRUE</code> if the Amazon Quick Sight uses IAM as an
     #               authentication method.</p>
     #   @return [Boolean]
     # @!attribute user_login_name
-    #   <p>The user login name for your QuickSight account.</p>
+    #   <p>The user login name for your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute account_name
-    #   <p>The name of your QuickSight account.</p>
+    #   <p>The name of your Quick Sight account.</p>
     #   @return [String]
     # @!attribute directory_type
-    #   <p>The type of Active Directory that is being used to authenticate the QuickSight
+    #   <p>The type of Active Directory that is being used to authenticate the Amazon Quick Sight
     #               account. Valid values are <code>SIMPLE_AD</code>, <code>AD_CONNECTOR</code>, and
     #                   <code>MICROSOFT_AD</code>.</p>
     #   @return [String]
@@ -26416,7 +37394,7 @@ module Aws::QuickSight
     # <p>A structure that contains information on the anonymous user configuration.</p>
     # @!attribute row_level_permission_tags
     #   <p>The tags to be used for row-level security (RLS). Make sure that the relevant datasets have RLS tags configured before you start a snapshot export job. You can configure the RLS tags of a dataset with a <code>DataSet$RowLevelPermissionTagConfiguration</code> API call.</p>
-    #            <p>These are not the tags that are used for Amazon Web Services resource tagging. For more information on row level security in QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html">Using Row-Level Security (RLS) with Tags</a>in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>These are not the tags that are used for Amazon Web Services resource tagging. For more information on row level security in Amazon Quick Sight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html">Using Row-Level Security (RLS) with Tags</a>in the <i>Amazon Quick User Guide</i>.</p>
     #   @return [Array<Types::SessionTag>]
     class SnapshotAnonymousUser < Struct.new(
       nil,
@@ -26446,7 +37424,7 @@ module Aws::QuickSight
     #   <p>A structure that contains information on the Amazon S3 bucket that the generated snapshot is stored in.</p>
     #   @return [Types::SnapshotDestinationConfiguration]
     # @!attribute parameters
-    #   <p>A list of QuickSight parameters and the list's override values.</p>
+    #   <p>A list of Quick Sight parameters and the list's override values.</p>
     #   @return [Types::Parameters]
     class SnapshotConfiguration < Struct.new(
       nil,
@@ -26533,6 +37511,7 @@ module Aws::QuickSight
     end
 
     # <p>An object that contains information on the error that caused the snapshot job to fail.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJobResult.html">DescribeDashboardSnapshotJobResult API</a>.</p>
     # @!attribute error_message
     #   <p>The error message.</p>
     #   @return [String]
@@ -26552,9 +37531,13 @@ module Aws::QuickSight
     # @!attribute anonymous_users
     #   <p> A list of <code>AnonymousUserSnapshotJobResult</code> objects that contain information on anonymous users and their user configurations. This data provided by you when you make a <code>StartDashboardSnapshotJob</code> API call.</p>
     #   @return [Array<Types::AnonymousUserSnapshotJobResult>]
+    # @!attribute registered_users
+    #   <p>A list of <code>RegisteredUserSnapshotJobResult</code> objects that contain information about files that are requested for registered user during a <code>StartDashboardSnapshotJob</code> API call.</p>
+    #   @return [Array<Types::RegisteredUserSnapshotJobResult>]
     class SnapshotJobResult < Struct.new(
       nil,
       :anonymous_users,
+      :registered_users,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -26626,6 +37609,9 @@ module Aws::QuickSight
     end
 
     # <p>A structure that contains information about the users that the dashboard snapshot is generated for.</p>
+    #          <important>
+    #             <p>When using identity-enhanced session credentials, set the UserConfiguration request attribute to null. Otherwise, the request will be invalid.</p>
+    #          </important>
     # @!attribute anonymous_users
     #   <p>An array of records that describe the anonymous users that the dashboard snapshot is generated for.</p>
     #   @return [Array<Types::SnapshotAnonymousUser>]
@@ -26669,7 +37655,7 @@ module Aws::QuickSight
     #   <p>The database access control role.</p>
     #   @return [String]
     # @!attribute o_auth_parameters
-    #   <p>An object that contains information needed to create a data source connection between an QuickSight account and Snowflake.</p>
+    #   <p>An object that contains information needed to create a data source connection between an Quick Sight account and Snowflake.</p>
     #   @return [Types::OAuthParameters]
     class SnowflakeParameters < Struct.new(
       nil,
@@ -26682,6 +37668,248 @@ module Aws::QuickSight
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>A source table that provides initial data from either a physical table or parent dataset.</p>
+    # @!attribute physical_table_id
+    #   <p>The identifier of the physical table that serves as the data source.</p>
+    #   @return [String]
+    # @!attribute data_set
+    #   <p>A parent dataset that serves as the data source instead of a physical table.</p>
+    #   @return [Types::ParentDataSet]
+    class SourceTable < Struct.new(
+      nil,
+      :physical_table_id,
+      :data_set,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A contributor to an Amazon QuickSight space.</p>
+    # @!attribute user_name
+    #   <p>The user name of the contributor.</p>
+    #   @return [String]
+    # @!attribute raw_file_size_bytes
+    #   <p>The raw file size in bytes contributed by the user.</p>
+    #   @return [Integer]
+    # @!attribute percentage
+    #   <p>The percentage of total contributions made by the user.</p>
+    #   @return [Float]
+    class SpaceContributor < Struct.new(
+      nil,
+      :user_name,
+      :raw_file_size_bytes,
+      :percentage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:raw_file_size_bytes] = nil unless options.key?(:raw_file_size_bytes)
+        options[:percentage] = nil unless options.key?(:percentage)
+        super
+      end
+    end
+
+    # <p>The details of an Amazon QuickSight space.</p>
+    # @!attribute name
+    #   <p>The display name of the space.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the space.</p>
+    #   @return [String]
+    # @!attribute resources
+    #   <p>The resources in the space.</p>
+    #   @return [Array<Types::SpaceQuickSightResource>]
+    # @!attribute created_at
+    #   <p>The date and time that the space was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time that the space was last updated.</p>
+    #   @return [Time]
+    # @!attribute consumed_source_size
+    #   <p>The total consumed source size in bytes.</p>
+    #   @return [Integer]
+    # @!attribute consumed_source_doc_count
+    #   <p>The number of consumed source documents.</p>
+    #   @return [Integer]
+    # @!attribute created_by
+    #   <p>The user who created the space.</p>
+    #   @return [String]
+    # @!attribute created_by_arn
+    #   <p>The ARN of the user who created the space.</p>
+    #   @return [String]
+    class SpaceDetails < Struct.new(
+      nil,
+      :name,
+      :description,
+      :resources,
+      :created_at,
+      :updated_at,
+      :consumed_source_size,
+      :consumed_source_doc_count,
+      :created_by,
+      :created_by_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:consumed_source_size] = nil unless options.key?(:consumed_source_size)
+        options[:consumed_source_doc_count] = nil unless options.key?(:consumed_source_doc_count)
+        super
+      end
+    end
+
+    # <p>A QuickSight resource that is associated with a space.</p>
+    # @!attribute resource_type
+    #   <p>The type of the QuickSight resource.</p>
+    #   @return [String]
+    # @!attribute resource_details
+    #   <p>The details of the QuickSight resource.</p>
+    #   @return [Types::SpaceQuickSightResourceDetails]
+    class SpaceQuickSightResource < Struct.new(
+      nil,
+      :resource_type,
+      :resource_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The details of a QuickSight resource in a space.</p>
+    # @!attribute resource_arn
+    #   <p>The ARN of the QuickSight resource.</p>
+    #   @return [String]
+    class SpaceQuickSightResourceDetails < Struct.new(
+      :resource_arn,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ResourceArn < SpaceQuickSightResourceDetails; end
+      class Unknown < SpaceQuickSightResourceDetails; end
+    end
+
+    # <p>A filter to use when searching for spaces.</p>
+    # @!attribute name
+    #   <p>The name of the filter field to use.</p>
+    #   @return [String]
+    # @!attribute operator
+    #   <p>The comparison operator to use for the filter.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value to use for the filter.</p>
+    #   @return [String]
+    class SpaceQuicksightSearchFilter < Struct.new(
+      nil,
+      :name,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An operation to perform on a resource in a space.</p>
+    # @!attribute resource_type
+    #   <p>The type of the resource.</p>
+    #   @return [String]
+    # @!attribute resource_details
+    #   <p>The details of the resource.</p>
+    #   @return [Types::SpaceQuickSightResourceDetails]
+    class SpaceResourceOperation < Struct.new(
+      nil,
+      :resource_type,
+      :resource_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a resource in a space.</p>
+    # @!attribute resource_type
+    #   <p>The type of the resource.</p>
+    #   @return [String]
+    # @!attribute resource_details
+    #   <p>The details of the resource.</p>
+    #   @return [Types::SpaceQuickSightResourceDetails]
+    # @!attribute resource_name
+    #   <p>The name of the resource.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The date and time that the resource was last updated.</p>
+    #   @return [Time]
+    class SpaceResourceSummary < Struct.new(
+      nil,
+      :resource_type,
+      :resource_details,
+      :resource_name,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an Amazon QuickSight space.</p>
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the space.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the space.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The date and time that the space was last updated.</p>
+    #   @return [Time]
+    # @!attribute consumed_source_size
+    #   <p>The total consumed source size in bytes.</p>
+    #   @return [Integer]
+    # @!attribute consumed_source_doc_count
+    #   <p>The number of consumed source documents.</p>
+    #   @return [Integer]
+    # @!attribute created_at
+    #   <p>The date and time that the space was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The user who created the space.</p>
+    #   @return [String]
+    # @!attribute created_by_arn
+    #   <p>The ARN of the user who created the space.</p>
+    #   @return [String]
+    # @!attribute resources_count
+    #   <p>The number of resources in the space.</p>
+    #   @return [Integer]
+    class SpaceSummary < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :name,
+      :description,
+      :updated_at,
+      :consumed_source_size,
+      :consumed_source_doc_count,
+      :created_at,
+      :created_by,
+      :created_by_arn,
+      :resources_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:consumed_source_size] = nil unless options.key?(:consumed_source_size)
+        options[:consumed_source_doc_count] = nil unless options.key?(:consumed_source_doc_count)
+        options[:resources_count] = nil unless options.key?(:resources_count)
+        super
+      end
     end
 
     # <p>The configuration of spacing (often a margin or padding).</p>
@@ -26724,6 +37952,50 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The options for sparklines in a table.</p>
+    # @!attribute field_id
+    #   <p>The field ID of the value column that the sparkline is applied to.</p>
+    #   @return [String]
+    # @!attribute x_axis_field
+    #   <p>The dimension type field.</p>
+    #   @return [Types::DimensionField]
+    # @!attribute y_axis_behavior
+    #   <p>Determines whether the Y axis is shared across all sparklines or independent for each sparkline.</p>
+    #   @return [String]
+    # @!attribute visual_type
+    #   <p>The type of the sparkline. Valid values are <code>LINE</code> and <code>AREA_LINE</code>.</p>
+    #   @return [String]
+    # @!attribute line_color
+    #   <p>The color of the sparkline line.</p>
+    #   @return [String]
+    # @!attribute line_interpolation
+    #   <p>The interpolation style for the sparkline line.</p>
+    #   @return [String]
+    # @!attribute all_points_marker
+    #   <p>Marker styles options for a line series in <code>LineChartVisual</code>.</p>
+    #   @return [Types::LineChartMarkerStyleSettings]
+    # @!attribute max_value_marker
+    #   <p>Marker styles options for a line series in <code>LineChartVisual</code>.</p>
+    #   @return [Types::LineChartMarkerStyleSettings]
+    # @!attribute min_value_marker
+    #   <p>Marker styles options for a line series in <code>LineChartVisual</code>.</p>
+    #   @return [Types::LineChartMarkerStyleSettings]
+    class SparklinesOptions < Struct.new(
+      nil,
+      :field_id,
+      :x_axis_field,
+      :y_axis_behavior,
+      :visual_type,
+      :line_color,
+      :line_interpolation,
+      :all_points_marker,
+      :max_value_marker,
+      :min_value_marker,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A static file that contains the geospatial data.</p>
     # @!attribute static_file_id
     #   <p>The ID of the spatial static file.</p>
@@ -26760,7 +38032,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
+    # <p>Secure Socket Layer (SSL) properties that apply when Quick Sight connects to your
     #             underlying data source.</p>
     # @!attribute disable_ssl
     #   <p>A Boolean option to control whether SSL should be disabled.</p>
@@ -26798,7 +38070,7 @@ module Aws::QuickSight
     #   <p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>
     #   @return [String]
     # @!attribute o_auth_parameters
-    #   <p>An object that contains information needed to create a data source connection between an QuickSight account and Starburst.</p>
+    #   <p>An object that contains information needed to create a data source connection between an Quick Sight account and Starburst.</p>
     #   @return [Types::OAuthParameters]
     class StarburstParameters < Struct.new(
       nil,
@@ -26818,7 +38090,8 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account to export assets from.</p>
     #   @return [String]
     # @!attribute asset_bundle_export_job_id
-    #   <p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>
+    #   <p>The ID of the job. This ID is unique while the job is running. After the job is
+    #            completed, you can reuse this ID for another job.</p>
     #   @return [String]
     # @!attribute resource_arns
     #   <p>An array of resource ARNs to export. The following resources are supported.</p>
@@ -26859,37 +38132,51 @@ module Aws::QuickSight
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>
+    #            <p>The API caller must have the necessary permissions in their IAM role to
+    #            access each resource before the resources can be exported.</p>
     #   @return [Array<String>]
     # @!attribute include_all_dependencies
     #   <p>A Boolean that determines whether all dependencies of each resource ARN are recursively
     #            exported with the job. For example, say you provided a Dashboard ARN to the
     #               <code>ResourceArns</code> parameter. If you set <code>IncludeAllDependencies</code> to
-    #               <code>TRUE</code>, any theme, dataset, and data source resource that is a dependency of the dashboard is also
-    #            exported.</p>
+    #               <code>TRUE</code>, any theme, dataset, and data source resource that is a dependency of
+    #            the dashboard is also exported.</p>
     #   @return [Boolean]
     # @!attribute export_format
     #   <p>The export data format.</p>
     #   @return [String]
     # @!attribute cloud_formation_override_property_configuration
-    #   <p>An optional collection of structures that generate CloudFormation parameters to override the existing resource property values when the resource is exported to a new CloudFormation template.</p>
-    #            <p>Use this field if the <code>ExportFormat</code> field of a <code>StartAssetBundleExportJobRequest</code> API call is set to <code>CLOUDFORMATION_JSON</code>.</p>
+    #   <p>An optional collection of structures that generate CloudFormation parameters to
+    #            override the existing resource property values when the resource is exported to a new
+    #               CloudFormation template.</p>
+    #            <p>Use this field if the <code>ExportFormat</code> field of a
+    #               <code>StartAssetBundleExportJobRequest</code> API call is set to
+    #               <code>CLOUDFORMATION_JSON</code>.</p>
     #   @return [Types::AssetBundleCloudFormationOverridePropertyConfiguration]
     # @!attribute include_permissions
-    #   <p>A Boolean that determines whether all permissions for each resource ARN are exported with the job. If you set <code>IncludePermissions</code> to <code>TRUE</code>, any permissions associated with each resource are exported.
-    #         </p>
+    #   <p>A Boolean that determines whether all permissions for each resource ARN are exported
+    #            with the job. If you set <code>IncludePermissions</code> to <code>TRUE</code>, any
+    #            permissions associated with each resource are exported. </p>
     #   @return [Boolean]
     # @!attribute include_tags
-    #   <p> A Boolean that determines whether all tags for each resource ARN are exported with the job. If you set <code>IncludeTags</code> to <code>TRUE</code>, any tags associated with each resource are exported.</p>
+    #   <p> A Boolean that determines whether all tags for each resource ARN are exported with the
+    #            job. If you set <code>IncludeTags</code> to <code>TRUE</code>, any tags associated with
+    #            each resource are exported.</p>
     #   @return [Boolean]
     # @!attribute validation_strategy
-    #   <p>An optional parameter that determines which validation strategy to use for the export job. If <code>StrictModeForAllResources</code> is set to <code>TRUE</code>, strict validation for every error is enforced. If it is set to <code>FALSE</code>, validation is skipped for specific UI errors that are shown as warnings. The default value for <code>StrictModeForAllResources</code> is <code>FALSE</code>.</p>
+    #   <p>An optional parameter that determines which validation strategy to use for the export
+    #            job. If <code>StrictModeForAllResources</code> is set to <code>TRUE</code>, strict
+    #            validation for every error is enforced. If it is set to <code>FALSE</code>, validation is
+    #            skipped for specific UI errors that are shown as warnings. The default value for
+    #               <code>StrictModeForAllResources</code> is <code>FALSE</code>.</p>
     #   @return [Types::AssetBundleExportJobValidationStrategy]
     # @!attribute include_folder_memberships
-    #   <p>A Boolean that determines if the exported asset carries over information about the folders that the asset is a member of. </p>
+    #   <p>A Boolean that determines if the exported asset carries over information about the
+    #            folders that the asset is a member of. </p>
     #   @return [Boolean]
     # @!attribute include_folder_members
-    #   <p>A setting that indicates whether you want to include folder assets. You can also use this setting to recusrsively include all subfolders of an exported folder.</p>
+    #   <p>A setting that indicates whether you want to include folder assets. You can also use
+    #            this setting to recusrsively include all subfolders of an exported folder.</p>
     #   @return [String]
     class StartAssetBundleExportJobRequest < Struct.new(
       nil,
@@ -26913,7 +38200,8 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the export job.</p>
     #   @return [String]
     # @!attribute asset_bundle_export_job_id
-    #   <p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>
+    #   <p>The ID of the job. This ID is unique while the job is running. After the job is
+    #            completed, you can reuse this ID for another job.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services response ID for this operation.</p>
@@ -26941,29 +38229,35 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account to import assets into. </p>
     #   @return [String]
     # @!attribute asset_bundle_import_job_id
-    #   <p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>
+    #   <p>The ID of the job. This ID is unique while the job is running. After the job is
+    #            completed, you can reuse this ID for another job.</p>
     #   @return [String]
     # @!attribute asset_bundle_import_source
-    #   <p>The source of the asset bundle zip file that contains the data that you want to import. The file must be in <code>QUICKSIGHT_JSON</code> format.
-    #         </p>
+    #   <p>The source of the asset bundle zip file that contains the data that you want to import.
+    #            The file must be in <code>QUICKSIGHT_JSON</code> format. </p>
     #   @return [Types::AssetBundleImportSource]
     # @!attribute override_parameters
     #   <p>Optional overrides that are applied to the resource configuration before import.</p>
     #   @return [Types::AssetBundleImportJobOverrideParameters]
     # @!attribute failure_action
     #   <p>The failure action for the import job.</p>
-    #            <p>If you choose <code>ROLLBACK</code>, failed  import jobs will attempt to  undo any asset changes caused by the failed job.</p>
+    #            <p>If you choose <code>ROLLBACK</code>, failed import jobs will attempt to undo any asset
+    #            changes caused by the failed job.</p>
     #            <p>If you choose <code>DO_NOTHING</code>, failed import jobs will not attempt to roll back
-    #            any asset changes caused by the failed job, possibly keeping the QuickSight account in an inconsistent state.</p>
+    #            any asset changes caused by the failed job, possibly keeping the Amazon Quick Sight account
+    #            in an inconsistent state.</p>
     #   @return [String]
     # @!attribute override_permissions
-    #   <p>Optional permission overrides that are applied to the resource configuration before import.</p>
+    #   <p>Optional permission overrides that are applied to the resource configuration before
+    #            import.</p>
     #   @return [Types::AssetBundleImportJobOverridePermissions]
     # @!attribute override_tags
-    #   <p>Optional tag overrides that are applied to the resource configuration before import.</p>
+    #   <p>Optional tag overrides that are applied to the resource configuration before
+    #            import.</p>
     #   @return [Types::AssetBundleImportJobOverrideTags]
     # @!attribute override_validation_strategy
-    #   <p>An optional validation strategy override for all analyses and dashboards that is applied to the resource configuration before import. </p>
+    #   <p>An optional validation strategy override for all analyses and dashboards that is applied
+    #            to the resource configuration before import. </p>
     #   @return [Types::AssetBundleImportJobOverrideValidationStrategy]
     class StartAssetBundleImportJobRequest < Struct.new(
       nil,
@@ -26984,7 +38278,8 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the import job.</p>
     #   @return [String]
     # @!attribute asset_bundle_import_job_id
-    #   <p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>
+    #   <p>The ID of the job. This ID is unique while the job is running. After the job is
+    #            completed, you can reuse this ID for another job.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services response ID for this operation.</p>
@@ -27009,6 +38304,57 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the automation.</p>
+    #   @return [String]
+    # @!attribute automation_group_id
+    #   <p>The ID of the automation group that contains the automation to run.</p>
+    #   @return [String]
+    # @!attribute automation_id
+    #   <p>The ID of the automation to run.</p>
+    #   @return [String]
+    # @!attribute input_payload
+    #   <p>The input payload for the automation job, provided as a JSON string.</p>
+    #   @return [String]
+    class StartAutomationJobRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :automation_group_id,
+      :automation_id,
+      :input_payload,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the automation job.</p>
+    #   @return [String]
+    # @!attribute job_id
+    #   <p>The ID of the automation job that was started.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class StartAutomationJobResponse < Struct.new(
+      nil,
+      :arn,
+      :job_id,
+      :status,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.</p>
     #   @return [String]
     # @!attribute dashboard_id
@@ -27019,8 +38365,10 @@ module Aws::QuickSight
     #   <p>An ID for the dashboard snapshot job. This ID is unique to the dashboard while the job is running. This ID can be used to poll the status of a job with a <code>DescribeDashboardSnapshotJob</code> while the job runs. You can reuse this ID for another job 24 hours after the current job is completed.</p>
     #   @return [String]
     # @!attribute user_configuration
-    #   <p>
-    #               A structure that contains information about the anonymous users that the generated snapshot is for. This API will not return information about registered QuickSight.</p>
+    #   <p>A structure that contains information about the users that the dashboard snapshot is generated for. The users can be either anonymous users or registered users. Anonymous users cannot be used together with registered users.</p>
+    #            <important>
+    #               <p>When using identity-enhanced session credentials, set the UserConfiguration request attribute to null. Otherwise, the request will be invalid.</p>
+    #            </important>
     #   @return [Types::SnapshotUserConfiguration]
     # @!attribute snapshot_configuration
     #   <p>A structure that describes the configuration of the dashboard snapshot.</p>
@@ -27075,7 +38423,7 @@ module Aws::QuickSight
     #           </p>
     #   @return [String]
     # @!attribute schedule_id
-    #   <p>The ID of the schedule that you want to start a snapshot job schedule for. The schedule ID can be found in the QuickSight console in the <b>Schedules</b> pane of the dashboard that the schedule is configured for.</p>
+    #   <p>The ID of the schedule that you want to start a snapshot job schedule for. The schedule ID can be found in the Amazon Quick Sight console in the <b>Schedules</b> pane of the dashboard that the schedule is configured for.</p>
     #   @return [String]
     class StartDashboardSnapshotJobScheduleRequest < Struct.new(
       nil,
@@ -27111,7 +38459,7 @@ module Aws::QuickSight
 
     # <p>The state perssitence configuration of an embedded dashboard.</p>
     # @!attribute enabled
-    #   <p>Determines if a QuickSight dashboard's state persistence settings are turned on or off.</p>
+    #   <p>Determines if a Quick Sight dashboard's state persistence settings are turned on or off.</p>
     #   @return [Boolean]
     class StatePersistenceConfigurations < Struct.new(
       nil,
@@ -27185,6 +38533,22 @@ module Aws::QuickSight
     class StaticFileUrlSourceOptions < Struct.new(
       nil,
       :url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A mapping between a step identifier and its alias in a flow.</p>
+    # @!attribute step_id
+    #   <p>The unique identifier of the step.</p>
+    #   @return [String]
+    # @!attribute step_alias
+    #   <p>The alias for the step.</p>
+    #   @return [String]
+    class StepAliasMapping < Struct.new(
+      nil,
+      :step_id,
+      :step_alias,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27380,7 +38744,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A success entry that occurs when a <code>KeyRegistration</code> job is successfully applied to the QuickSight account.</p>
+    # <p>A success entry that occurs when a <code>KeyRegistration</code> job is successfully applied to the Quick Sight account.</p>
     # @!attribute key_arn
     #   <p>The ARN of the KMS key that is associated with the <code>SuccessfulKeyRegistrationEntry</code> entry.</p>
     #   @return [String]
@@ -27555,6 +38919,12 @@ module Aws::QuickSight
     # @!attribute table_inline_visualizations
     #   <p>A collection of inline visualizations to display within a chart.</p>
     #   @return [Array<Types::TableInlineVisualization>]
+    # @!attribute tooltip
+    #   <p>The display options for the visual tooltip.</p>
+    #   @return [Types::TooltipOptions]
+    # @!attribute dashboard_customization_visual_options
+    #   <p>The options that define customizations available to dashboard readers for a specific visual</p>
+    #   @return [Types::DashboardCustomizationVisualOptions]
     # @!attribute interactions
     #   <p>The general visual interactions setup for a visual.</p>
     #   @return [Types::VisualInteractionOptions]
@@ -27567,6 +38937,8 @@ module Aws::QuickSight
       :field_options,
       :paginated_report_options,
       :table_inline_visualizations,
+      :tooltip,
+      :dashboard_customization_visual_options,
       :interactions,
       keyword_init: true
     )
@@ -27734,9 +39106,13 @@ module Aws::QuickSight
     # @!attribute data_bars
     #   <p>The configuration of the inline visualization of the data bars within a chart.</p>
     #   @return [Types::DataBarsOptions]
+    # @!attribute sparklines
+    #   <p>The configuration of the inline visualization of the sparklines within a chart.</p>
+    #   @return [Types::SparklinesOptions]
     class TableInlineVisualization < Struct.new(
       nil,
       :data_bars,
+      :sparklines,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27782,6 +39158,22 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An element in the hierarchical path to a table within a data source, containing both name and identifier.</p>
+    # @!attribute name
+    #   <p>The name of the path element.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The unique identifier of the path element.</p>
+    #   @return [String]
+    class TablePathElement < Struct.new(
+      nil,
+      :name,
+      :id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The settings for the pinned columns of a table visual.</p>
     # @!attribute pinned_left_fields
     #   <p>A list of columns to be pinned to the left of a table visual.</p>
@@ -27805,6 +39197,18 @@ module Aws::QuickSight
       nil,
       :background_color,
       :text_color,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Column-level semantic metadata for a semantic table.</p>
+    # @!attribute column_metadata
+    #   <p>A list of column semantic metadata entries.</p>
+    #   @return [Array<Types::SharedColumnSemanticMetadata>]
+    class TableSemanticMetadata < Struct.new(
+      nil,
+      :column_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -27883,7 +39287,7 @@ module Aws::QuickSight
     end
 
     # <p>A table visual.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tabular.html">Using tables as visuals</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tabular.html">Using tables as visuals</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
     #   @return [String]
@@ -27959,7 +39363,8 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the resource that you want to tag.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>
+    #   <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
+    #   			resource.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(
       nil,
@@ -27990,7 +39395,7 @@ module Aws::QuickSight
       end
     end
 
-    # <p>A template object. A <i>template</i> is an entity in QuickSight that
+    # <p>A template object. A <i>template</i> is an entity in Quick Sight that
     #             encapsulates the metadata required to create an analysis and that you can use to create
     #             a dashboard. A template adds a layer of abstraction by using placeholders to replace the
     #             dataset associated with an analysis. You can use templates to create dashboards by
@@ -28077,10 +39482,15 @@ module Aws::QuickSight
     #   <p>A structure containing information about the dataset references used as placeholders
     #               in the template.</p>
     #   @return [Array<Types::DataSetReference>]
+    # @!attribute topic_references
+    #   <p>A structure containing information about the topic references used as placeholders
+    #               in the template.</p>
+    #   @return [Array<Types::TopicReference>]
     class TemplateSourceAnalysis < Struct.new(
       nil,
       :arn,
       :data_set_references,
+      :topic_references,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28201,6 +39611,11 @@ module Aws::QuickSight
     #               template should be bound to new datasets matching the same schema described through this
     #               API operation.</p>
     #   @return [Array<Types::DataSetConfiguration>]
+    # @!attribute topic_configurations
+    #   <p>Schema of the topic identified by the placeholder. Any dashboard created from this
+    #               template should be bound to new topics matching the same schema described through this
+    #               API operation.</p>
+    #   @return [Array<Types::TopicConfiguration>]
     # @!attribute description
     #   <p>The description of the template.</p>
     #   @return [String]
@@ -28221,6 +39636,7 @@ module Aws::QuickSight
       :version_number,
       :status,
       :data_set_configurations,
+      :topic_configurations,
       :description,
       :source_entity_arn,
       :theme_arn,
@@ -28234,9 +39650,15 @@ module Aws::QuickSight
     # @!attribute data_set_configurations
     #   <p>An array of dataset configurations. These configurations define the required columns for each dataset used within a template.</p>
     #   @return [Array<Types::DataSetConfiguration>]
+    # @!attribute topic_configurations
+    #   <p>An array of topic configurations. These configurations define the required columns for each topic used within a template.</p>
+    #   @return [Array<Types::TopicConfiguration>]
     # @!attribute sheets
     #   <p>An array of sheet definitions for a template.</p>
     #   @return [Array<Types::SheetDefinition>]
+    # @!attribute tooltip_sheets
+    #   <p>An array of tooltip sheet definitions for a template.</p>
+    #   @return [Array<Types::TooltipSheetDefinition>]
     # @!attribute calculated_fields
     #   <p>An array of calculated field definitions for the template.</p>
     #   @return [Array<Types::CalculatedField>]
@@ -28244,13 +39666,13 @@ module Aws::QuickSight
     #   <p>An array of parameter declarations for a template.</p>
     #            <p>
     #               <i>Parameters</i> are named variables that can transfer a value for use by an action or an object.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html">Parameters in Amazon QuickSight</a> in the
-    #               <i>Amazon QuickSight User Guide</i>.
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/parameters-in-quicksight.html">Parameters in Amazon Quick Sight</a> in the
+    #               <i>Amazon Quick Suite User Guide</i>.
     #           </p>
     #   @return [Array<Types::ParameterDeclaration>]
     # @!attribute filter_groups
     #   <p>Filter definitions for a template.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filtering-visual-data.html">Filtering Data</a> in the <i>Amazon QuickSight User Guide</i>.
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filtering-visual-data.html">Filtering Data</a> in the <i>Amazon Quick Suite User Guide</i>.
     #           </p>
     #   @return [Array<Types::FilterGroup>]
     # @!attribute column_configurations
@@ -28272,7 +39694,9 @@ module Aws::QuickSight
     class TemplateVersionDefinition < Struct.new(
       nil,
       :data_set_configurations,
+      :topic_configurations,
       :sheets,
+      :tooltip_sheets,
       :calculated_fields,
       :parameter_declarations,
       :filter_groups,
@@ -28572,8 +39996,8 @@ module Aws::QuickSight
     #   <p>The description of the theme.</p>
     #   @return [String]
     # @!attribute base_theme_id
-    #   <p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All
-    #               themes initially inherit from a default QuickSight theme.</p>
+    #   <p>The Quick Sight-defined ID of the theme that a custom theme inherits from. All
+    #               themes initially inherit from a default Quick Sight theme.</p>
     #   @return [String]
     # @!attribute created_time
     #   <p>The date and time that this theme version was created.</p>
@@ -28650,9 +40074,9 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The threshold alerts configuration for an embedded QuickSight dashboard.</p>
+    # <p>The threshold alerts configuration for an embedded Quick Sight dashboard.</p>
     # @!attribute enabled
-    #   <p>The threshold alerts configuration for an embedded QuickSight dashboard.</p>
+    #   <p>The threshold alerts configuration for an embedded Quick Sight dashboard.</p>
     #   @return [Boolean]
     class ThresholdAlertsConfigurations < Struct.new(
       nil,
@@ -28699,12 +40123,24 @@ module Aws::QuickSight
     end
 
     # <p>Display options related to tiles on a sheet.</p>
+    # @!attribute background_color
+    #   <p>The background color of a tile.</p>
+    #   @return [String]
     # @!attribute border
     #   <p>The border around a tile.</p>
     #   @return [Types::BorderStyle]
+    # @!attribute border_radius
+    #   <p>The border radius of a tile.</p>
+    #   @return [String]
+    # @!attribute padding
+    #   <p>The padding of a tile.</p>
+    #   @return [String]
     class TileStyle < Struct.new(
       nil,
+      :background_color,
       :border,
+      :border_radius,
+      :padding,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -28947,11 +40383,50 @@ module Aws::QuickSight
     # @!attribute field_based_tooltip
     #   <p>The setup for the detailed tooltip. The tooltip setup is always saved. The display type is decided based on the tooltip type.</p>
     #   @return [Types::FieldBasedTooltip]
+    # @!attribute sheet_tooltip
+    #   <p>The configuration of the sheet tooltip.</p>
+    #   @return [Types::SheetTooltip]
     class TooltipOptions < Struct.new(
       nil,
       :tooltip_visibility,
       :selected_tooltip_type,
       :field_based_tooltip,
+      :sheet_tooltip,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A tooltip sheet is an object that contains a set of visuals that
+    #             are used as a tooltip. Every analysis and dashboard must contain at least one non-tooltip sheet.</p>
+    # @!attribute sheet_id
+    #   <p>The unique identifier of a tooltip sheet.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the tooltip sheet. This name is displayed on the sheet's tab in the Quick
+    #               console.</p>
+    #   @return [String]
+    # @!attribute visuals
+    #   <p>A list of the visuals that are on a tooltip sheet.</p>
+    #   @return [Array<Types::Visual>]
+    # @!attribute text_boxes
+    #   <p>The text boxes that are on a tooltip sheet.</p>
+    #   @return [Array<Types::SheetTextBox>]
+    # @!attribute images
+    #   <p>A list of images on a tooltip sheet.</p>
+    #   @return [Array<Types::SheetImage>]
+    # @!attribute layouts
+    #   <p>Layouts define how the components of a tooltip sheet are arranged.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html">Types of layout</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
+    #   @return [Array<Types::Layout>]
+    class TooltipSheetDefinition < Struct.new(
+      nil,
+      :sheet_id,
+      :name,
+      :visuals,
+      :text_boxes,
+      :images,
+      :layouts,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -29194,12 +40669,16 @@ module Aws::QuickSight
     # @!attribute inverse
     #   <p>A Boolean value that indicates if the filter is inverse.</p>
     #   @return [Boolean]
+    # @!attribute null_filter
+    #   <p>The <code>null</code> filter that is applied to the category filter.</p>
+    #   @return [String]
     class TopicCategoryFilter < Struct.new(
       nil,
       :category_filter_function,
       :category_filter_type,
       :constant,
       :inverse,
+      :null_filter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -29339,6 +40818,26 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration of a topic.</p>
+    # @!attribute placeholder
+    #   <p>The placeholder for the topic configuration.</p>
+    #   @return [String]
+    # @!attribute data_set_schema
+    #   <p>Topic schema.</p>
+    #   @return [Types::DataSetSchema]
+    # @!attribute column_group_schema_list
+    #   <p>The list of column group schemas in the topic configuration.</p>
+    #   @return [Array<Types::ColumnGroupSchema>]
+    class TopicConfiguration < Struct.new(
+      nil,
+      :placeholder,
+      :data_set_schema,
+      :column_group_schema_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The definition for a <code>TopicConstantValue</code>.</p>
     # @!attribute constant_type
     #   <p>The constant type of a <code>TopicConstantValue</code>.</p>
@@ -29376,10 +40875,14 @@ module Aws::QuickSight
     # @!attribute constant
     #   <p>The constant used in a date range filter.</p>
     #   @return [Types::TopicRangeFilterConstant]
+    # @!attribute null_filter
+    #   <p>The <code>null</code> filter that is applied to the date range filter.</p>
+    #   @return [String]
     class TopicDateRangeFilter < Struct.new(
       nil,
       :inclusive,
       :constant,
+      :null_filter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -29724,6 +41227,22 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A topic.</p>
+    # @!attribute identifier
+    #   <p>The identifier of the topic, typically the topic's name.</p>
+    #   @return [String]
+    # @!attribute topic_arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    class TopicIdentifierDeclaration < Struct.new(
+      nil,
+      :identifier,
+      :topic_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure that represents a named entity.</p>
     # @!attribute entity_name
     #   <p>The name of the named entity.</p>
@@ -29741,6 +41260,15 @@ module Aws::QuickSight
     # @!attribute definition
     #   <p>The definition of a named entity.</p>
     #   @return [Array<Types::NamedEntityDefinition>]
+    # @!attribute sort
+    #   <p>The sort configuration of the named entity.</p>
+    #   @return [Array<Types::NamedEntitySort>]
+    # @!attribute rank_order
+    #   <p>The rank order of the named entity.</p>
+    #   @return [Integer]
+    # @!attribute presentation_order
+    #   <p>The presentation order of the named entity.</p>
+    #   @return [Integer]
     class TopicNamedEntity < Struct.new(
       nil,
       :entity_name,
@@ -29748,6 +41276,9 @@ module Aws::QuickSight
       :entity_synonyms,
       :semantic_entity_type,
       :definition,
+      :sort,
+      :rank_order,
+      :presentation_order,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -29790,13 +41321,26 @@ module Aws::QuickSight
     #               <code>VAR</code>,
     #            and <code>VARP</code>.</p>
     #   @return [String]
+    # @!attribute inverse
+    #   <p>A Boolean value that indicates if the filter is inverse.</p>
+    #   @return [Boolean]
+    # @!attribute null_filter
+    #   <p>The <code>null</code> filter that is applied to the numeric equality filter.</p>
+    #   @return [String]
     class TopicNumericEqualityFilter < Struct.new(
       nil,
       :constant,
       :aggregation,
+      :inverse,
+      :null_filter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:inverse] = false unless options.key?(:inverse)
+        super
+      end
     end
 
     # <p>A filter that filters topics based on the value of a numeric field. The filter includes only topics whose numeric field value falls within the specified range.</p>
@@ -29818,17 +41362,26 @@ module Aws::QuickSight
     #               <code>VAR</code>,
     #            and <code>VARP</code>.</p>
     #   @return [String]
+    # @!attribute inverse
+    #   <p>A Boolean value that indicates if the filter is inverse.</p>
+    #   @return [Boolean]
+    # @!attribute null_filter
+    #   <p>The <code>null</code> filter that is applied to the numeric range filter.</p>
+    #   @return [String]
     class TopicNumericRangeFilter < Struct.new(
       nil,
       :inclusive,
       :constant,
       :aggregation,
+      :inverse,
+      :null_filter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inclusive] = false unless options.key?(:inclusive)
+        options[:inverse] = false unless options.key?(:inverse)
         super
       end
     end
@@ -29845,6 +41398,22 @@ module Aws::QuickSight
       nil,
       :constant_type,
       :range_constant,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Topic reference.</p>
+    # @!attribute topic_placeholder
+    #   <p>Topic placeholder.</p>
+    #   @return [String]
+    # @!attribute topic_arn
+    #   <p>Topic Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    class TopicReference < Struct.new(
+      nil,
+      :topic_placeholder,
+      :topic_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -29947,11 +41516,15 @@ module Aws::QuickSight
     #   <p>The constant used in a
     #            relative date filter.</p>
     #   @return [Types::TopicSingularFilterConstant]
+    # @!attribute null_filter
+    #   <p>The <code>null</code> filter that is applied to the relative date filter.</p>
+    #   @return [String]
     class TopicRelativeDateFilter < Struct.new(
       nil,
       :time_granularity,
       :relative_date_filter_function,
       :constant,
+      :null_filter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -30081,6 +41654,98 @@ module Aws::QuickSight
       nil,
       :template_type,
       :slots,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that represents a data set reference of a topic.</p>
+    # @!attribute data_set_arn
+    #   <p>The Amazon Resource Name (ARN) of the data set.</p>
+    #   @return [String]
+    # @!attribute data_set_name
+    #   <p>The name of the data set.</p>
+    #   @return [String]
+    class TopicV2DataSetReference < Struct.new(
+      nil,
+      :data_set_arn,
+      :data_set_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that represents a relation between two data sets of a topic.</p>
+    # @!attribute left
+    #   <p>The left endpoint of the data set relation.</p>
+    #   @return [Types::TopicV2DataSetRelationEndpoint]
+    # @!attribute right
+    #   <p>The right endpoint of the data set relation.</p>
+    #   @return [Types::TopicV2DataSetRelationEndpoint]
+    class TopicV2DataSetRelation < Struct.new(
+      nil,
+      :left,
+      :right,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that represents an endpoint of a data set relation of a topic.</p>
+    # @!attribute data_set_arn
+    #   <p>The Amazon Resource Name (ARN) of the data set at this endpoint of the relation.</p>
+    #   @return [String]
+    # @!attribute column_names
+    #   <p>The names of the columns that are used in the data set relation.</p>
+    #   @return [Array<String>]
+    class TopicV2DataSetRelationEndpoint < Struct.new(
+      nil,
+      :data_set_arn,
+      :column_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The definition of a topic.</p>
+    # @!attribute name
+    #   <p>The name of the topic.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the topic.</p>
+    #   @return [String]
+    # @!attribute data_sets
+    #   <p>The data sets that the topic is associated with.</p>
+    #   @return [Array<Types::TopicV2DataSetReference>]
+    # @!attribute data_set_relations
+    #   <p>The relations between the data sets that the topic is associated with.</p>
+    #   @return [Array<Types::TopicV2DataSetRelation>]
+    class TopicV2Details < Struct.new(
+      nil,
+      :name,
+      :description,
+      :data_sets,
+      :data_set_relations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of the topic.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID of the topic. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the topic.</p>
+    #   @return [String]
+    class TopicV2Summary < Struct.new(
+      nil,
+      :arn,
+      :topic_id,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -30243,6 +41908,76 @@ module Aws::QuickSight
       class Unknown < TransformOperation; end
     end
 
+    # <p>Specifies the source of data for a transform operation, including the source operation and column mappings.</p>
+    # @!attribute transform_operation_id
+    #   <p>The identifier of the transform operation that provides input data.</p>
+    #   @return [String]
+    # @!attribute column_id_mappings
+    #   <p>The mappings between source column identifiers and target column identifiers for this transformation.</p>
+    #   @return [Array<Types::DataSetColumnIdMapping>]
+    class TransformOperationSource < Struct.new(
+      nil,
+      :transform_operation_id,
+      :column_id_mappings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A step in data preparation that performs a specific operation on the data.</p>
+    # @!attribute import_table_step
+    #   <p>A transform step that brings data from a source table.</p>
+    #   @return [Types::ImportTableOperation]
+    # @!attribute project_step
+    #   <p>A transform operation that projects columns. Operations that come after a projection
+    #               can only refer to projected columns.</p>
+    #   @return [Types::ProjectOperation]
+    # @!attribute filters_step
+    #   <p>A transform step that applies filter conditions.</p>
+    #   @return [Types::FiltersOperation]
+    # @!attribute create_columns_step
+    #   <p>A transform operation that creates calculated columns. Columns created in one such
+    #               operation form a lexical closure.</p>
+    #   @return [Types::CreateColumnsOperation]
+    # @!attribute rename_columns_step
+    #   <p>A transform step that changes the names of one or more columns.</p>
+    #   @return [Types::RenameColumnsOperation]
+    # @!attribute cast_column_types_step
+    #   <p>A transform step that changes the data types of one or more columns.</p>
+    #   @return [Types::CastColumnTypesOperation]
+    # @!attribute join_step
+    #   <p>A transform step that combines data from two sources based on specified join conditions.</p>
+    #   @return [Types::JoinOperation]
+    # @!attribute aggregate_step
+    #   <p>A transform step that groups data and applies aggregation functions to calculate summary values.</p>
+    #   @return [Types::AggregateOperation]
+    # @!attribute pivot_step
+    #   <p>A transform step that converts row values into columns to reshape the data structure.</p>
+    #   @return [Types::PivotOperation]
+    # @!attribute unpivot_step
+    #   <p>A transform step that converts columns into rows to normalize the data structure.</p>
+    #   @return [Types::UnpivotOperation]
+    # @!attribute append_step
+    #   <p>A transform step that combines rows from multiple sources by stacking them vertically.</p>
+    #   @return [Types::AppendOperation]
+    class TransformStep < Struct.new(
+      nil,
+      :import_table_step,
+      :project_step,
+      :filters_step,
+      :create_columns_step,
+      :rename_columns_step,
+      :cast_column_types_step,
+      :join_step,
+      :aggregate_step,
+      :pivot_step,
+      :unpivot_step,
+      :append_step,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The column option of the transposed table.</p>
     # @!attribute column_index
     #   <p>The index of a columns in a transposed table. The index range is 0-9999.</p>
@@ -30371,7 +42106,7 @@ module Aws::QuickSight
     end
 
     # <p>A tree map.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tree-map.html">Using tree maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tree-map.html">Using tree maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
     #   @return [String]
@@ -30459,9 +42194,41 @@ module Aws::QuickSight
     # @!attribute font_families
     #   <p>Determines the list of font families.</p>
     #   @return [Array<Types::Font>]
+    # @!attribute axis_title_font_configuration
+    #   <p>Configures the display properties of the given text.</p>
+    #   @return [Types::FontConfiguration]
+    # @!attribute axis_label_font_configuration
+    #   <p>Configures the display properties of the given text.</p>
+    #   @return [Types::FontConfiguration]
+    # @!attribute legend_title_font_configuration
+    #   <p>Configures the display properties of the given text.</p>
+    #   @return [Types::FontConfiguration]
+    # @!attribute legend_value_font_configuration
+    #   <p>Configures the display properties of the given text.</p>
+    #   @return [Types::FontConfiguration]
+    # @!attribute data_label_font_configuration
+    #   <p>Configures the display properties of the given text.</p>
+    #   @return [Types::FontConfiguration]
+    # @!attribute visual_title_font_configuration
+    #   <p>Configures the display properties of the visual title.</p>
+    #   @return [Types::VisualTitleFontConfiguration]
+    # @!attribute visual_subtitle_font_configuration
+    #   <p>Configures the display properties of the visual sub-title.</p>
+    #   @return [Types::VisualSubtitleFontConfiguration]
+    # @!attribute control_title_font_configuration
+    #   <p>Configures the display properties of the control title.</p>
+    #   @return [Types::ControlTitleFontConfiguration]
     class Typography < Struct.new(
       nil,
       :font_families,
+      :axis_title_font_configuration,
+      :axis_label_font_configuration,
+      :legend_title_font_configuration,
+      :legend_value_font_configuration,
+      :data_label_font_configuration,
+      :visual_title_font_configuration,
+      :visual_subtitle_font_configuration,
+      :control_title_font_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -30469,7 +42236,7 @@ module Aws::QuickSight
 
     # <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
     #             description is a hexadecimal color code that consists of six alphanumerical characters,
-    #             prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User
+    #             prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Quick Sight</a> in the <i>Quick Sight User
     #                 Guide.</i>
     #          </p>
     # @!attribute primary_foreground
@@ -30575,7 +42342,8 @@ module Aws::QuickSight
 
     # <p>A <code>UniqueKey</code> configuration that references a dataset column.</p>
     # @!attribute column_names
-    #   <p>The name of the column that is referenced in the <code>UniqueKey</code> configuration.</p>
+    #   <p>The name of the column that is referenced in the <code>UniqueKey</code>
+    #   			configuration.</p>
     #   @return [Array<String>]
     class UniqueKey < Struct.new(
       nil,
@@ -30605,14 +42373,50 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This error indicates that you are calling an embedding operation in Amazon QuickSight
-    # 			without the required pricing plan on your Amazon Web Services account. Before you can use embedding 
-    # 			for anonymous users, a QuickSight administrator needs to add capacity pricing to QuickSight. You 
-    # 		    can do this on the <b>Manage QuickSight</b> page. </p>
-    #          <p>After capacity pricing is added, you can use the 
+    # <p>A transform operation that converts columns into rows, normalizing the data structure.</p>
+    # @!attribute alias
+    #   <p>Alias for this operation.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source transform operation that provides input data for unpivoting.</p>
+    #   @return [Types::TransformOperationSource]
+    # @!attribute columns_to_unpivot
+    #   <p>The list of columns to unpivot from the source data.</p>
+    #   @return [Array<Types::ColumnToUnpivot>]
+    # @!attribute unpivoted_label_column_name
+    #   <p>The name for the new column that will contain the unpivoted column names.</p>
+    #   @return [String]
+    # @!attribute unpivoted_label_column_id
+    #   <p>A unique identifier for the new column that will contain the unpivoted column names.</p>
+    #   @return [String]
+    # @!attribute unpivoted_value_column_name
+    #   <p>The name for the new column that will contain the unpivoted values.</p>
+    #   @return [String]
+    # @!attribute unpivoted_value_column_id
+    #   <p>A unique identifier for the new column that will contain the unpivoted values.</p>
+    #   @return [String]
+    class UnpivotOperation < Struct.new(
+      nil,
+      :alias,
+      :source,
+      :columns_to_unpivot,
+      :unpivoted_label_column_name,
+      :unpivoted_label_column_id,
+      :unpivoted_value_column_name,
+      :unpivoted_value_column_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>This error indicates that you are calling an embedding operation in Amazon Quick Sight
+    # 			without the required pricing plan on your Amazon Web Services account. Before you can use embedding
+    # 			for anonymous users, a Quick Suite administrator needs to add capacity pricing to Quick Sight. You
+    # 		    can do this on the <b>Manage Quick Suite</b> page. </p>
+    #          <p>After capacity pricing is added, you can use the
     #             <code>
     #                <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html">GetDashboardEmbedUrl</a>
-    #             </code> API operation with the 
+    #             </code> API operation with the
     #             <code>--identity-type ANONYMOUS</code> option.</p>
     # @!attribute message
     #   @return [String]
@@ -30628,9 +42432,9 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This error indicates that you are calling an operation on an Amazon QuickSight
+    # <p>This error indicates that you are calling an operation on an Amazon Quick Suite
     # 			subscription where the edition doesn't include support for that operation. Amazon
-    # 			QuickSight currently has Standard Edition and Enterprise Edition. Not every operation and
+    # 			Quick Suite currently has Standard Edition and Enterprise Edition. Not every operation and
     # 			capability is available in every edition.</p>
     # @!attribute message
     #   @return [String]
@@ -30666,7 +42470,8 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the resource that you want to untag.</p>
     #   @return [String]
     # @!attribute tag_keys
-    #   <p>The keys of the key-value pairs for the resource tag or tags assigned to the resource.</p>
+    #   <p>The keys of the key-value pairs for the resource tag or tags assigned to the
+    #   			resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
       nil,
@@ -30733,14 +42538,14 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to update QuickSight customizations
+    #   <p>The ID for the Amazon Web Services account that you want to update Quick Sight customizations
     #               for.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The namespace that you want to update QuickSight customizations for.</p>
+    #   <p>The namespace that you want to update Quick Sight customizations for.</p>
     #   @return [String]
     # @!attribute account_customization
-    #   <p>The QuickSight customizations you're updating in the current Amazon Web Services Region. </p>
+    #   <p>The Quick Sight customizations you're updating. </p>
     #   @return [Types::AccountCustomization]
     class UpdateAccountCustomizationRequest < Struct.new(
       nil,
@@ -30756,14 +42561,14 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) for the updated customization for this Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to update QuickSight customizations
+    #   <p>The ID for the Amazon Web Services account that you want to update Quick Sight customizations
     #               for.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace associated with the customization that you're updating.</p>
     #   @return [String]
     # @!attribute account_customization
-    #   <p>The QuickSight customizations you're updating in the current Amazon Web Services Region. </p>
+    #   <p>The Quick Sight customizations you're updating. </p>
     #   @return [Types::AccountCustomization]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -30790,22 +42595,22 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that contains the QuickSight settings that you want to
+    #   <p>The ID for the Amazon Web Services account that contains the Quick Sight settings that you want to
     #               list.</p>
     #   @return [String]
     # @!attribute default_namespace
     #   <p>The default namespace for this Amazon Web Services account. Currently, the default is
     #                   <code>default</code>. IAM users that
-    #               register for the first time with QuickSight provide an email address that becomes
+    #               register for the first time with Amazon Quick Sight provide an email address that becomes
     #               associated with the default namespace.
     #           </p>
     #   @return [String]
     # @!attribute notification_email
-    #   <p>The email address that you want QuickSight to send notifications to regarding your
-    #               Amazon Web Services account or QuickSight subscription.</p>
+    #   <p>The email address that you want Quick Sight to send notifications to regarding your
+    #               Amazon Web Services account or Quick Sight subscription.</p>
     #   @return [String]
     # @!attribute termination_protection_enabled
-    #   <p>A boolean value that determines whether or not an QuickSight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubscription</code> request. A <code>False</code> value will allow the account to be deleted.</p>
+    #   <p>A boolean value that determines whether or not an Quick Sight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubscription</code> request. A <code>False</code> value will allow the account to be deleted.</p>
     #   @return [Boolean]
     class UpdateAccountSettingsRequest < Struct.new(
       nil,
@@ -30836,6 +42641,264 @@ module Aws::QuickSight
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID that contains the action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the action connector whose permissions you want to update.</p>
+    #   @return [String]
+    # @!attribute grant_permissions
+    #   <p>The permissions to grant to users and groups for this action connector.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute revoke_permissions
+    #   <p>The permissions to revoke from users and groups for this action connector.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    class UpdateActionConnectorPermissionsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :action_connector_id,
+      :grant_permissions,
+      :revoke_permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the action connector.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status code of the request.</p>
+    #   @return [Integer]
+    # @!attribute permissions
+    #   <p>The updated permissions configuration for the action connector.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    class UpdateActionConnectorPermissionsResponse < Struct.new(
+      nil,
+      :arn,
+      :action_connector_id,
+      :request_id,
+      :status,
+      :permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID that contains the action connector to update.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the action connector to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The new name for the action connector.</p>
+    #   @return [String]
+    # @!attribute authentication_config
+    #   <p>The updated authentication configuration for connecting to the external service.</p>
+    #   @return [Types::AuthConfig]
+    # @!attribute description
+    #   <p>The updated description of the action connector.</p>
+    #   @return [String]
+    # @!attribute vpc_connection_arn
+    #   <p>The updated ARN of the VPC connection to use for secure connectivity.</p>
+    #   @return [String]
+    class UpdateActionConnectorRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :action_connector_id,
+      :name,
+      :authentication_config,
+      :description,
+      :vpc_connection_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the updated action connector.</p>
+    #   @return [String]
+    # @!attribute action_connector_id
+    #   <p>The unique identifier of the updated action connector.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute update_status
+    #   <p>The status of the update operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status code of the request.</p>
+    #   @return [Integer]
+    class UpdateActionConnectorResponse < Struct.new(
+      nil,
+      :arn,
+      :action_connector_id,
+      :request_id,
+      :update_status,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the agent.</p>
+    #   @return [String]
+    # @!attribute grant_permissions
+    #   <p>The resource permissions that you want to grant on the agent.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute revoke_permissions
+    #   <p>The resource permissions that you want to revoke from the agent.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    class UpdateAgentPermissionsRequest < Struct.new(
+      nil,
+      :agent_id,
+      :aws_account_id,
+      :grant_permissions,
+      :revoke_permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the agent.</p>
+    #   @return [String]
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The resource permissions for the agent.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    class UpdateAgentPermissionsResponse < Struct.new(
+      nil,
+      :arn,
+      :agent_id,
+      :request_id,
+      :permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent to update.</p>
+    #   @return [String]
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the agent.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the agent.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the agent.</p>
+    #   @return [String]
+    # @!attribute icon_id
+    #   <p>The icon identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute starter_prompts
+    #   <p>A list of starter prompts that are displayed to users when they begin interacting with the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute welcome_message
+    #   <p>The welcome message that is displayed when a user starts a conversation with the agent.</p>
+    #   @return [String]
+    # @!attribute custom_prompt_input
+    #   <p>The custom prompt configuration for the agent.</p>
+    #   @return [Types::CustomPromptInput]
+    # @!attribute spaces_to_add
+    #   <p>The Amazon Resource Names (ARNs) of the spaces to attach to the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute spaces_to_remove
+    #   <p>The Amazon Resource Names (ARNs) of the spaces to detach from the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute action_connectors_to_add
+    #   <p>The Amazon Resource Names (ARNs) of the action connectors to attach to the agent.</p>
+    #   @return [Array<String>]
+    # @!attribute action_connectors_to_remove
+    #   <p>The Amazon Resource Names (ARNs) of the action connectors to detach from the agent.</p>
+    #   @return [Array<String>]
+    class UpdateAgentRequest < Struct.new(
+      nil,
+      :agent_id,
+      :aws_account_id,
+      :name,
+      :description,
+      :icon_id,
+      :starter_prompts,
+      :welcome_message,
+      :custom_prompt_input,
+      :spaces_to_add,
+      :spaces_to_remove,
+      :action_connectors_to_add,
+      :action_connectors_to_remove,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the agent.</p>
+    #   @return [String]
+    # @!attribute agent_id
+    #   <p>The unique identifier for the agent.</p>
+    #   @return [String]
+    # @!attribute agent_status
+    #   <p>The status of the agent.</p>
+    #   @return [String]
+    # @!attribute failed_to_add_spaces
+    #   <p>A list of per-ARN failures from the spaces that were requested to be added.</p>
+    #   @return [Array<Types::FailedToUpdateAssociation>]
+    # @!attribute failed_to_remove_spaces
+    #   <p>A list of per-ARN failures from the spaces that were requested to be removed.</p>
+    #   @return [Array<Types::FailedToUpdateAssociation>]
+    # @!attribute failed_to_add_action_connectors
+    #   <p>A list of per-ARN failures from the action connectors that were requested to be added.</p>
+    #   @return [Array<Types::FailedToUpdateAssociation>]
+    # @!attribute failed_to_remove_action_connectors
+    #   <p>A list of per-ARN failures from the action connectors that were requested to be removed.</p>
+    #   @return [Array<Types::FailedToUpdateAssociation>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class UpdateAgentResponse < Struct.new(
+      nil,
+      :arn,
+      :agent_id,
+      :agent_status,
+      :failed_to_add_spaces,
+      :failed_to_remove_spaces,
+      :failed_to_add_action_connectors,
+      :failed_to_remove_action_connectors,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -30907,19 +42970,19 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute name
     #   <p>A descriptive name for the analysis that you're updating. This name displays for the
-    #               analysis in the QuickSight console.</p>
+    #               analysis in the Amazon Quick Sight console.</p>
     #   @return [String]
     # @!attribute parameters
-    #   <p>The parameter names and override values that you want to use. An analysis can have 
+    #   <p>The parameter names and override values that you want to use. An analysis can have
     #               any parameter type, and some parameters might accept multiple values. </p>
     #   @return [Types::Parameters]
     # @!attribute source_entity
     #   <p>A source entity to use for the analysis that you're updating. This metadata structure
-    #               contains details that describe a source template and one or more datasets.</p>
+    #               contains details that describe a source template and one or more datasets or topics.</p>
     #   @return [Types::AnalysisSourceEntity]
     # @!attribute theme_arn
     #   <p>The Amazon Resource Name (ARN) for the theme to apply to the analysis that you're
-    #               creating. To see the theme in the QuickSight console, make sure that you have access to
+    #               creating. To see the theme in the Amazon Quick Sight console, make sure that you have access to
     #               it.</p>
     #   @return [String]
     # @!attribute definition
@@ -30977,10 +43040,64 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the app.</p>
+    #   @return [String]
+    # @!attribute app_id
+    #   <p>The ID of the app.</p>
+    #   @return [String]
+    # @!attribute grant_permissions
+    #   <p>The permissions that you want to grant on the app.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute revoke_permissions
+    #   <p>The permissions that you want to revoke from the app.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute visibility
+    #   <p>The visibility to set for the app. Currently, only <code>PRIVATE</code> is accepted, which removes public (anonymous) access from the app. If you don't specify a value, the app's visibility is unchanged. Setting an app to <code>PUBLIC</code> through this operation is not supported.</p>
+    #   @return [String]
+    class UpdateAppPermissionsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :app_id,
+      :grant_permissions,
+      :revoke_permissions,
+      :visibility,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the app.</p>
+    #   @return [String]
+    # @!attribute app_id
+    #   <p>The ID of the app.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The updated resource permissions for the app.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute visibility
+    #   <p>The visibility of the app after the update (<code>PRIVATE</code> or <code>PUBLIC</code>).</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class UpdateAppPermissionsResponse < Struct.new(
+      nil,
+      :arn,
+      :app_id,
+      :permissions,
+      :visibility,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
     #   <p>The ID of the Amazon Web Services account to be updated with a token exchange grant.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The namespace of the QuickSight application.</p>
+    #   <p>The namespace of the Quick application.</p>
     #   @return [String]
     class UpdateApplicationWithTokenExchangeGrantRequest < Struct.new(
       nil,
@@ -31009,6 +43126,52 @@ module Aws::QuickSight
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    # @!attribute policy_id
+    #   <p>The unique identifier of the approval policy to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the approval policy.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the approval policy.</p>
+    #   @return [String]
+    # @!attribute actions
+    #   <p>The list of governed actions that trigger the approval workflow.</p>
+    #   @return [Array<String>]
+    # @!attribute asset_types
+    #   <p>The list of asset types that the approval policy applies to.</p>
+    #   @return [Array<String>]
+    # @!attribute applicable_to
+    #   <p>The scoping configuration that determines who the approval policy applies to.</p>
+    #   @return [Types::ApplicableTo]
+    # @!attribute approval_groups
+    #   <p>The list of group ARNs whose members can approve requests.</p>
+    #   @return [Array<String>]
+    class UpdateApprovalPolicyRequest < Struct.new(
+      nil,
+      :policy_id,
+      :name,
+      :description,
+      :actions,
+      :asset_types,
+      :applicable_to,
+      :approval_groups,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute policy
+    #   <p>The updated approval policy.</p>
+    #   @return [Types::ApprovalPolicy]
+    class UpdateApprovalPolicyResponse < Struct.new(
+      nil,
+      :policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -31045,7 +43208,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that owns the brand.</p>
     #   @return [String]
     # @!attribute brand_id
-    #   <p>The ID of the QuickSight brand.</p>
+    #   <p>The ID of the Quick brand.</p>
     #   @return [String]
     # @!attribute version_id
     #   <p>The ID of the published version.</p>
@@ -31079,7 +43242,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that owns the brand.</p>
     #   @return [String]
     # @!attribute brand_id
-    #   <p>The ID of the QuickSight brand.</p>
+    #   <p>The ID of the Quick brand.</p>
     #   @return [String]
     # @!attribute brand_definition
     #   <p>The definition of the brand.</p>
@@ -31122,11 +43285,15 @@ module Aws::QuickSight
     # @!attribute capabilities
     #   <p>A set of actions to include in the custom permissions profile.</p>
     #   @return [Types::Capabilities]
+    # @!attribute governance
+    #   <p>The governance configuration for the custom permissions profile. The <code>UpdateCustomPermissions</code> operation replaces all existing <code>Capabilities</code> and <code>Governance</code> values. If you omit this parameter, Amazon Quick removes governance from the profile and the existing custom permission behavior applies.</p>
+    #   @return [Types::Governance]
     class UpdateCustomPermissionsRequest < Struct.new(
       nil,
       :aws_account_id,
       :custom_permissions_name,
       :capabilities,
+      :governance,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -31157,7 +43324,8 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the dashboard whose links you want to update.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the dashboard whose links you
+    #               want to update.</p>
     #   @return [String]
     # @!attribute dashboard_id
     #   <p>The ID for the dashboard.</p>
@@ -31204,8 +43372,8 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the dashboard whose permissions you're
-    #               updating.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the dashboard whose permissions
+    #               you're updating.</p>
     #   @return [String]
     # @!attribute dashboard_id
     #   <p>The ID for the dashboard.</p>
@@ -31251,7 +43419,7 @@ module Aws::QuickSight
     #   <p>The HTTP status of the request.</p>
     #   @return [Integer]
     # @!attribute link_sharing_configuration
-    #   <p>Updates the permissions of a shared link to an QuickSight dashboard.</p>
+    #   <p>Updates the permissions of a shared link to an Quick Sight dashboard.</p>
     #   @return [Types::LinkSharingConfiguration]
     class UpdateDashboardPermissionsResponse < Struct.new(
       nil,
@@ -31331,18 +43499,20 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute source_entity
     #   <p>The entity that you are using as a source when you update the dashboard. In
-    #               <code>SourceEntity</code>, you specify the type of object you're using as source. You
-    #               can only update a dashboard from a template, so you use a <code>SourceTemplate</code>
-    #               entity. If you need to update a dashboard from an analysis, first convert the analysis
-    #               to a template by using the <code>
+    #                   <code>SourceEntity</code>, you specify the type of object you're using as source.
+    #               You can only update a dashboard from a template, so you use a
+    #                   <code>SourceTemplate</code> entity. If you need to update a dashboard from an
+    #               analysis, first convert the analysis to a template by using the <code>
     #                  <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html">CreateTemplate</a>
-    #               </code> API operation. For
-    #               <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source
-    #               template. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account and any
-    #               QuickSight-supported Amazon Web Services Region. </p>
+    #               </code> API operation. For <code>SourceTemplate</code>,
+    #               specify the Amazon Resource Name (ARN) of the source template. The
+    #                   <code>SourceTemplate</code> ARN can contain any Amazon Web Services account and any
+    #                   Amazon Quick Sight-supported Amazon Web Services Region. </p>
     #            <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to
     #               list the replacement datasets for the placeholders listed in the original. The schema in
-    #               each dataset must match its placeholder. </p>
+    #               each dataset must match its placeholder. Use the <code>TopicReferences</code>
+    #               entity to list the replacement topics for the topic placeholders listed in the original.
+    #               The schema in each topic must match its placeholder.</p>
     #   @return [Types::DashboardSourceEntity]
     # @!attribute parameters
     #   <p>A structure that contains the parameters of the dashboard. These are parameter
@@ -31359,8 +43529,8 @@ module Aws::QuickSight
     #                  <p>
     #                     <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This
     #                       status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is
-    #                       set to <code>DISABLED</code>, QuickSight disables the left filter pane on the
-    #                       published dashboard, which can be used for ad hoc (one-time) filtering. This
+    #                       set to <code>DISABLED</code>, Amazon Quick Sight disables the left filter pane on
+    #                       the published dashboard, which can be used for ad hoc (one-time) filtering. This
     #                       option is <code>ENABLED</code> by default. </p>
     #               </li>
     #               <li>
@@ -31368,7 +43538,8 @@ module Aws::QuickSight
     #                     <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This
     #                       status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual
     #                       option to export data to .CSV format isn't enabled when this is set to
-    #                       <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p>
+    #                           <code>DISABLED</code>. This option is <code>ENABLED</code> by default.
+    #                   </p>
     #               </li>
     #               <li>
     #                  <p>
@@ -31378,32 +43549,43 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>AvailabilityStatus</code> for <code>ExecutiveSummaryOption</code> - This status
-    #                       can be either <code>ENABLED</code> or <code>DISABLED</code>. The option to build an executive
-    #                       summary is disabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code>
+    #                     <code>AvailabilityStatus</code> for <code>QuickSuiteActionsOption</code> -
+    #                       This status can be either <code>ENABLED</code> or <code>DISABLED</code>.
+    #                       Features related to Actions in Amazon Quick Suite on dashboards are disabled
+    #                       when this is set to <code>DISABLED</code>. This option is <code>DISABLED</code>
     #                       by default.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>AvailabilityStatus</code> for <code>DataStoriesSharingOption</code> - This status
-    #                       can be either <code>ENABLED</code> or <code>DISABLED</code>. The option to share a data story is
-    #                       disabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code>
-    #                       by default.</p>
+    #                     <code>AvailabilityStatus</code> for <code>ExecutiveSummaryOption</code> - This
+    #                       status can be either <code>ENABLED</code> or <code>DISABLED</code>. The option
+    #                       to build an executive summary is disabled when this is set to
+    #                           <code>DISABLED</code>. This option is <code>ENABLED</code> by
+    #                       default.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AvailabilityStatus</code> for <code>DataStoriesSharingOption</code> -
+    #                       This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The
+    #                       option to share a data story is disabled when this is set to
+    #                           <code>DISABLED</code>. This option is <code>ENABLED</code> by
+    #                       default.</p>
     #               </li>
     #            </ul>
     #   @return [Types::DashboardPublishOptions]
     # @!attribute theme_arn
     #   <p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If
     #               you add a value for this field, it overrides the value that was originally associated
-    #               with the entity. The theme ARN must exist in the same Amazon Web Services account where you create the
-    #               dashboard.</p>
+    #               with the entity. The theme ARN must exist in the same Amazon Web Services account where
+    #               you create the dashboard.</p>
     #   @return [String]
     # @!attribute definition
     #   <p>The definition of a dashboard.</p>
     #            <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>
     #   @return [Types::DashboardVersionDefinition]
     # @!attribute validation_strategy
-    #   <p>The option to relax the validation needed to update a dashboard with definition objects. This skips the validation step for specific errors.</p>
+    #   <p>The option to relax the validation needed to update a dashboard with definition
+    #               objects. This skips the validation step for specific errors.</p>
     #   @return [Types::ValidationStrategy]
     class UpdateDashboardRequest < Struct.new(
       nil,
@@ -31502,7 +43684,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute data_set_id
     #   <p>The ID for the dataset whose permissions you want to update. This ID is unique per
-    #   			Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   				Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute grant_permissions
     #   <p>The resource permissions that you want to grant to the dataset.</p>
@@ -31526,7 +43708,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute data_set_id
     #   <p>The ID for the dataset whose permissions you want to update. This ID is unique per
-    #   			Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   				Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -31554,8 +43736,7 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_set_id
-    #   <p>The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region for each
-    #   			Amazon Web Services account.</p>
+    #   <p>The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The display name for the dataset.</p>
@@ -31564,22 +43745,36 @@ module Aws::QuickSight
     #   <p>Declares the physical tables that are available in the underlying data sources.</p>
     #   @return [Hash<String, Types::PhysicalTable>]
     # @!attribute logical_table_map
-    #   <p>Configures the combination and transformation of the data from the physical tables.</p>
+    #   <p>Configures the combination and transformation of the data from the physical
+    #   			tables. This parameter is used with the legacy data preparation experience.</p>
+    #   @deprecated
+    #     Only used in the legacy data preparation experience.
+    #     Since: 2025-10-23
     #   @return [Hash<String, Types::LogicalTable>]
     # @!attribute import_mode
     #   <p>Indicates whether you want to import the data into SPICE.</p>
     #   @return [String]
     # @!attribute column_groups
-    #   <p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>
+    #   <p>Groupings of columns that work together in certain Amazon Quick Sight features.
+    #   			Currently, only geospatial hierarchy is supported.</p>
     #   @return [Array<Types::ColumnGroup>]
     # @!attribute field_folders
     #   <p>The folder that contains fields and nested subfolders for your dataset.</p>
     #   @return [Hash<String, Types::FieldFolder>]
     # @!attribute row_level_permission_data_set
-    #   <p>The row-level security configuration for the data you want to create.</p>
+    #   <p>The row-level security configuration for the data you want to create. This parameter is used
+    #   			with the legacy data preparation experience.</p>
+    #   @deprecated
+    #     Only used in the legacy data preparation experience.
+    #     Since: 2025-10-23
     #   @return [Types::RowLevelPermissionDataSet]
     # @!attribute row_level_permission_tag_configuration
-    #   <p>The configuration of tags on a dataset to set row-level security. Row-level security tags are currently supported for anonymous embedding only.</p>
+    #   <p>The configuration of tags on a dataset to set row-level security. Row-level security
+    #   			tags are currently supported for anonymous embedding only. This parameter is used with
+    #   		the legacy data preparation experience.</p>
+    #   @deprecated
+    #     Only used in the legacy data preparation experience.
+    #     Since: 2025-10-23
     #   @return [Types::RowLevelPermissionTagConfiguration]
     # @!attribute column_level_permission_rules
     #   <p>A set of one or more definitions of a <code>
@@ -31593,8 +43788,19 @@ module Aws::QuickSight
     #   <p>The parameter declarations of the dataset.</p>
     #   @return [Array<Types::DatasetParameter>]
     # @!attribute performance_configuration
-    #   <p>The configuration for the performance optimization of the dataset that contains a <code>UniqueKey</code> configuration.</p>
+    #   <p>The configuration for the performance optimization of the dataset that contains a
+    #   				<code>UniqueKey</code> configuration.</p>
     #   @return [Types::PerformanceConfiguration]
+    # @!attribute data_prep_configuration
+    #   <p>The data preparation configuration for the dataset. This configuration defines the source tables,
+    #   			transformation steps, and destination tables used to prepare the data.
+    #   			Required when using the new data preparation experience.</p>
+    #   @return [Types::DataPrepConfiguration]
+    # @!attribute semantic_model_configuration
+    #   <p>The semantic model configuration for the dataset. This configuration defines how the prepared
+    #   			data is structured for an analysis, including table mappings and row-level security configurations.
+    #   			Required when using the new data preparation experience.</p>
+    #   @return [Types::SemanticModelConfiguration]
     class UpdateDataSetRequest < Struct.new(
       nil,
       :aws_account_id,
@@ -31611,6 +43817,8 @@ module Aws::QuickSight
       :data_set_usage_configuration,
       :dataset_parameters,
       :performance_configuration,
+      :data_prep_configuration,
+      :semantic_model_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -31620,15 +43828,15 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the dataset.</p>
     #   @return [String]
     # @!attribute data_set_id
-    #   <p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute ingestion_arn
-    #   <p>The ARN for the ingestion, which is triggered as a result of dataset creation if the import
-    #   			mode is SPICE.</p>
+    #   <p>The ARN for the ingestion, which is triggered as a result of dataset creation if the
+    #   			import mode is SPICE.</p>
     #   @return [String]
     # @!attribute ingestion_id
-    #   <p>The ID of the ingestion, which is triggered as a result of dataset creation if the import
-    #   			mode is SPICE.</p>
+    #   <p>The ID of the ingestion, which is triggered as a result of dataset creation if the
+    #   			import mode is SPICE.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -31658,7 +43866,8 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account. </p>
     #   @return [String]
     # @!attribute grant_permissions
     #   <p>A list of resource permissions that you want to grant on the data source.</p>
@@ -31681,7 +43890,8 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the data source.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -31709,25 +43919,27 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services account ID.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account. </p>
     #   @return [String]
     # @!attribute name
     #   <p>A display name for the data source.</p>
     #   @return [String]
     # @!attribute data_source_parameters
-    #   <p>The parameters that QuickSight uses to connect to your underlying source.</p>
+    #   <p>The parameters that Amazon Quick Sight uses to connect to your underlying
+    #   			source.</p>
     #   @return [Types::DataSourceParameters]
     # @!attribute credentials
-    #   <p>The credentials that QuickSight that uses to connect to your underlying source. Currently,
-    #   			only credentials based on user name and password are supported.</p>
+    #   <p>The credentials that Amazon Quick Sight that uses to connect to your underlying source.
+    #   			Currently, only credentials based on user name and password are supported.</p>
     #   @return [Types::DataSourceCredentials]
     # @!attribute vpc_connection_properties
-    #   <p>Use this parameter only when you want QuickSight to use a VPC connection when connecting to
-    #   			your underlying source.</p>
+    #   <p>Use this parameter only when you want Amazon Quick Sight to use a VPC connection when
+    #   			connecting to your underlying source.</p>
     #   @return [Types::VpcConnectionProperties]
     # @!attribute ssl_properties
-    #   <p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying
-    #   			source.</p>
+    #   <p>Secure Socket Layer (SSL) properties that apply when Amazon Quick Sight connects to
+    #   			your underlying source.</p>
     #   @return [Types::SslProperties]
     class UpdateDataSourceRequest < Struct.new(
       nil,
@@ -31747,7 +43959,8 @@ module Aws::QuickSight
     #   <p>The Amazon Resource Name (ARN) of the data source.</p>
     #   @return [String]
     # @!attribute data_source_id
-    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   <p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+    #   				Amazon Web Services account.</p>
     #   @return [String]
     # @!attribute update_status
     #   <p>The update status of the data source's last update.</p>
@@ -31776,10 +43989,10 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the QuickSight account that is connected to the Amazon Q Business application that you want to update.</p>
+    #   <p>The ID of the Quick Sight account that is connected to the Amazon Q Business application that you want to update.</p>
     #   @return [String]
     # @!attribute namespace
-    #   <p>The QuickSight namespace that contains the linked Amazon Q Business application. If this field is left blank, the default namespace is used. Currently, the default namespace is the only valid value for this parameter.</p>
+    #   <p>The Quick Sight namespace that contains the linked Amazon Q Business application. If this field is left blank, the default namespace is used. Currently, the default namespace is the only valid value for this parameter.</p>
     #   @return [String]
     # @!attribute application_id
     #   <p>The ID of the Amazon Q Business application that you want to update.</p>
@@ -31802,6 +44015,177 @@ module Aws::QuickSight
     #   @return [Integer]
     class UpdateDefaultQBusinessApplicationResponse < Struct.new(
       nil,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the DLP setting that you want to update.</p>
+    #   @return [String]
+    # @!attribute dlp_setting_id
+    #   <p>The ID of the DLP setting that you want to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>An updated display name for the DLP setting.</p>
+    #   @return [String]
+    # @!attribute provider_type
+    #   <p>An updated DLP provider type. Currently, the only supported value is <code>MICROSOFT_PURVIEW</code>.</p>
+    #   @return [String]
+    # @!attribute provider_config
+    #   <p>An updated provider-specific configuration for the DLP integration. This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
+    #   @return [Types::ProviderConfig]
+    # @!attribute provider_outage_action
+    #   <p>An updated behavior to apply when the DLP provider is unreachable. Valid values are <code>ALLOW</code>, <code>WARN</code>, and <code>BLOCK</code>.</p>
+    #   @return [String]
+    # @!attribute enabled
+    #   <p>Specifies whether DLP enforcement is active for this setting. Set to <code>true</code> to enable enforcement, or <code>false</code> to disable it.</p>
+    #   @return [Boolean]
+    class UpdateDlpSettingRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :dlp_setting_id,
+      :name,
+      :provider_type,
+      :provider_config,
+      :provider_outage_action,
+      :enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the updated DLP setting.</p>
+    #   @return [String]
+    # @!attribute dlp_setting_id
+    #   <p>The ID of the updated DLP setting.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class UpdateDlpSettingResponse < Struct.new(
+      nil,
+      :arn,
+      :dlp_setting_id,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the flow you are updating permissions against.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow to update permissions for.</p>
+    #   @return [String]
+    # @!attribute grant_permissions
+    #   <p>The permissions that you want to grant on this flow.</p>
+    #   @return [Array<Types::Permission>]
+    # @!attribute revoke_permissions
+    #   <p>The permissions that you want to revoke from this flow.</p>
+    #   @return [Array<Types::Permission>]
+    class UpdateFlowPermissionsInput < Struct.new(
+      nil,
+      :aws_account_id,
+      :flow_id,
+      :grant_permissions,
+      :revoke_permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the flow you are updating permissions against.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The permissions on the flow after they are updated.</p>
+    #   @return [Array<Types::Permission>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow with updated permissions.</p>
+    #   @return [String]
+    class UpdateFlowPermissionsOutput < Struct.new(
+      nil,
+      :status,
+      :arn,
+      :permissions,
+      :request_id,
+      :flow_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the flow that you are updating.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Updated display name for the flow. Omit to preserve the existing name.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>Updated description for the flow. Omit to preserve the existing description.</p>
+    #   @return [String]
+    # @!attribute flow_definition
+    #   <p>The definition of the flow, specifying the steps and configurations. This is the flow definition in Quick Flow's internal format. The format is subject to change. When provided, all existing steps are replaced. Omit to preserve the existing definition.</p>
+    #            <note>
+    #               <p>Always derive or depend on the flow definition from the <code>DescribeFlow</code> operation to ensure you are working with the latest format.</p>
+    #            </note>
+    #   @return [JSON]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class UpdateFlowRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :flow_id,
+      :name,
+      :description,
+      :flow_definition,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the flow.</p>
+    #   @return [String]
+    # @!attribute flow_id
+    #   <p>The unique identifier of the flow.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class UpdateFlowResponse < Struct.new(
+      nil,
+      :arn,
+      :flow_id,
       :request_id,
       :status,
       keyword_init: true
@@ -31924,7 +44308,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace of the group that you want to update.</p>
@@ -31998,11 +44382,11 @@ module Aws::QuickSight
     #            </ul>
     #   @return [String]
     # @!attribute policy_arn
-    #   <p>The ARN for the IAM policy to apply to the QuickSight users and
+    #   <p>The ARN for the IAM policy to apply to the Amazon Quick Sight users and
     #   			groups specified in this assignment.</p>
     #   @return [String]
     # @!attribute identities
-    #   <p>The QuickSight users, groups, or both that you want to assign the policy
+    #   <p>The Amazon Quick Sight users, groups, or both that you want to assign the policy
     #   			to.</p>
     #   @return [Hash<String, Array<String>>]
     class UpdateIAMPolicyAssignmentRequest < Struct.new(
@@ -32025,11 +44409,11 @@ module Aws::QuickSight
     #   <p>The ID of the assignment.</p>
     #   @return [String]
     # @!attribute policy_arn
-    #   <p>The ARN for the IAM policy applied to the QuickSight users and
+    #   <p>The ARN for the IAM policy applied to the Amazon Quick Sight users and
     #   			groups specified in this assignment.</p>
     #   @return [String]
     # @!attribute identities
-    #   <p>The QuickSight users, groups, or both that the IAM policy is
+    #   <p>The Amazon Quick Sight users, groups, or both that the IAM policy is
     #   			assigned to.</p>
     #   @return [Hash<String, Array<String>>]
     # @!attribute assignment_status
@@ -32171,7 +44555,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account that contains the customer managed key registration that you want to update.</p>
     #   @return [String]
     # @!attribute key_registration
-    #   <p>A list of <code>RegisteredCustomerManagedKey</code> objects to be updated to the QuickSight account.</p>
+    #   <p>A list of <code>RegisteredCustomerManagedKey</code> objects to be updated to the Quick Sight account.</p>
     #   @return [Array<Types::RegisteredCustomerManagedKey>]
     class UpdateKeyRegistrationRequest < Struct.new(
       nil,
@@ -32202,10 +44586,250 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The Amazon Web Services account ID associated with your QuickSight subscription.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute grant_permissions
+    #   <p>The resource permissions that you want to grant on the knowledge base.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute revoke_permissions
+    #   <p>The resource permissions that you want to revoke from the knowledge base.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    class UpdateKnowledgeBasePermissionsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :knowledge_base_id,
+      :grant_permissions,
+      :revoke_permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The resource permissions for the knowledge base.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class UpdateKnowledgeBasePermissionsResponse < Struct.new(
+      nil,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :permissions,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = nil unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the knowledge base. If you don't specify a name, the existing name is retained.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description for the knowledge base. If you don't specify a description, the existing description is retained.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_configuration
+    #   <p>The configuration settings for a knowledge base.</p>
+    #   @return [Types::KnowledgeBaseConfiguration]
+    # @!attribute media_extraction_configuration
+    #   <p>The configuration for media extraction from knowledge base documents.</p>
+    #   @return [Types::MediaExtractionConfiguration]
+    # @!attribute is_email_notification_opted_for_ingestion_failures
+    #   <p>Specifies whether email notifications are enabled for ingestion failures.</p>
+    #   @return [Boolean]
+    # @!attribute access_control_configuration
+    #   <p>The access control configuration for the knowledge base. If you don't specify this parameter, the existing setting is retained.</p>
+    #   @return [Types::AccessControlConfiguration]
+    class UpdateKnowledgeBaseRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :knowledge_base_id,
+      :name,
+      :description,
+      :knowledge_base_configuration,
+      :media_extraction_configuration,
+      :is_email_notification_opted_for_ingestion_failures,
+      :access_control_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute knowledge_base_arn
+    #   <p>The Amazon Resource Name (ARN) of the knowledge base.</p>
+    #   @return [String]
+    # @!attribute knowledge_base_id
+    #   <p>The unique identifier for the knowledge base.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class UpdateKnowledgeBaseResponse < Struct.new(
+      nil,
+      :knowledge_base_arn,
+      :knowledge_base_id,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = nil unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute profile_id
+    #   <p>The unique identifier for the limits profile to update.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The ID of the Amazon Web Services account that contains the limits profile.</p>
+    #   @return [String]
+    # @!attribute profile_name
+    #   <p>A new display name for the limits profile.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A new description for the limits profile.</p>
+    #   @return [String]
+    # @!attribute resource_limits
+    #   <p>A map of resource types to their updated limit values.</p>
+    #   @return [Hash<String, Types::ProfileLimitValue>]
+    class UpdateLimitsProfileRequest < Struct.new(
+      nil,
+      :profile_id,
+      :account_id,
+      :profile_name,
+      :description,
+      :resource_limits,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the updated limits profile.</p>
+    #   @return [String]
+    class UpdateLimitsProfileResponse < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_application_id
+    #   <p>The ID of the OAuthClientApplication that you want to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name for the OAuthClientApplication.</p>
+    #   @return [String]
+    # @!attribute client_id
+    #   <p>The client ID of the OAuth application that is registered with the identity provider.</p>
+    #   @return [String]
+    # @!attribute client_secret
+    #   <p>The client secret of the OAuth application that is registered with the identity provider.</p>
+    #   @return [String]
+    # @!attribute o_auth_token_endpoint_url
+    #   <p>The token endpoint URL of the identity provider that is used to obtain access tokens.</p>
+    #   @return [String]
+    # @!attribute o_auth_authorization_endpoint_url
+    #   <p>The authorization endpoint URL of the identity provider that is used to obtain authorization codes.</p>
+    #   @return [String]
+    # @!attribute o_auth_scopes
+    #   <p>The OAuth scopes that are requested when the OAuthClientApplication obtains an access token from the identity provider.</p>
+    #   @return [String]
+    # @!attribute data_source_type
+    #   <p>The type of data source that the OAuthClientApplication is used with. Valid values are <code>SNOWFLAKE</code>.</p>
+    #   @return [String]
+    # @!attribute identity_provider_vpc_connection_properties
+    #   <p>VPC connection properties.</p>
+    #   @return [Types::VpcConnectionProperties]
+    class UpdateOAuthClientApplicationRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :o_auth_client_application_id,
+      :name,
+      :client_id,
+      :client_secret,
+      :o_auth_token_endpoint_url,
+      :o_auth_authorization_endpoint_url,
+      :o_auth_scopes,
+      :data_source_type,
+      :identity_provider_vpc_connection_properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the OAuthClientApplication.</p>
+    #   @return [String]
+    # @!attribute o_auth_client_application_id
+    #   <p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute update_status
+    #   <p>The status of updating the OAuthClientApplication.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class UpdateOAuthClientApplicationResponse < Struct.new(
+      nil,
+      :arn,
+      :o_auth_client_application_id,
+      :update_status,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The Amazon Web Services account ID associated with your Amazon Quick Sight
+    #               subscription.</p>
     #   @return [String]
     # @!attribute public_sharing_enabled
-    #   <p>A Boolean value that indicates whether public sharing is turned on for an QuickSight account.</p>
+    #   <p>A Boolean value that indicates whether public sharing is turned on for an Quick account.</p>
     #   @return [Boolean]
     class UpdatePublicSharingSettingsRequest < Struct.new(
       nil,
@@ -32240,7 +44864,7 @@ module Aws::QuickSight
     #   <p>The ID of the Amazon Web Services account account that contains the personalization configuration that the user wants to update.</p>
     #   @return [String]
     # @!attribute personalization_mode
-    #   <p>An option to allow QuickSight to customize data stories with user specific metadata, specifically location and job information, in your IAM Identity Center instance.</p>
+    #   <p>An option to allow Amazon Quick Sight to customize data stories with user specific metadata, specifically location and job information, in your IAM Identity Center instance.</p>
     #   @return [String]
     class UpdateQPersonalizationConfigurationRequest < Struct.new(
       nil,
@@ -32276,10 +44900,10 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the QuickSight Q Search configuration that you want to update.</p>
+    #   <p>The ID of the Amazon Web Services account that contains the Quick Sight Q Search configuration that you want to update.</p>
     #   @return [String]
     # @!attribute q_search_status
-    #   <p>The status of the QuickSight Q Search configuration that the user wants to update.</p>
+    #   <p>The status of the Quick Sight Q Search configuration that the user wants to update.</p>
     #   @return [String]
     class UpdateQuickSightQSearchConfigurationRequest < Struct.new(
       nil,
@@ -32291,7 +44915,7 @@ module Aws::QuickSight
     end
 
     # @!attribute q_search_status
-    #   <p>The status of the QuickSight Q Search configuration.</p>
+    #   <p>The status of the Quick Sight Q Search configuration.</p>
     #   @return [String]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -32368,7 +44992,7 @@ module Aws::QuickSight
     #   <p>The name of role tht you want to update.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   <p>The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace that contains the role that you want to update.</p>
@@ -32447,6 +45071,226 @@ module Aws::QuickSight
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the Quick self-upgrade configuration that you want to update.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The Quick namespace that you want to update the Quick self-upgrade configuration for.</p>
+    #   @return [String]
+    # @!attribute self_upgrade_status
+    #   <p>The self-upgrade status that you want to set for the Quick account.</p>
+    #   @return [String]
+    class UpdateSelfUpgradeConfigurationRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :namespace,
+      :self_upgrade_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class UpdateSelfUpgradeConfigurationResponse < Struct.new(
+      nil,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the self-upgrade request.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The Quick namespace for the self-upgrade request.</p>
+    #   @return [String]
+    # @!attribute upgrade_request_id
+    #   <p>The ID of the self-upgrade request to update.</p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>The action to perform on the self-upgrade request. Valid values are <code>APPROVE</code>, <code>DENY</code>, or <code>VERIFY</code>.</p>
+    #   @return [String]
+    class UpdateSelfUpgradeRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :namespace,
+      :upgrade_request_id,
+      :action,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute self_upgrade_request_detail
+    #   <p>Details of the updated self-upgrade request.</p>
+    #   @return [Types::SelfUpgradeRequestDetail]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class UpdateSelfUpgradeResponse < Struct.new(
+      nil,
+      :self_upgrade_request_detail,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the space.</p>
+    #   @return [String]
+    # @!attribute space_id
+    #   <p>The ID of the space that you want to update permissions for.</p>
+    #   @return [String]
+    # @!attribute grant_permissions
+    #   <p>The permissions that you want to grant on the space.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute revoke_permissions
+    #   <p>The permissions that you want to revoke from the space.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    class UpdateSpacePermissionsRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :space_id,
+      :grant_permissions,
+      :revoke_permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The updated permissions for the space.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class UpdateSpacePermissionsResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :permissions,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the space.</p>
+    #   @return [String]
+    # @!attribute space_id
+    #   <p>The ID of the space that you want to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>A new display name for the space.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A new description for the space.</p>
+    #   @return [String]
+    class UpdateSpaceRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :space_id,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the space.</p>
+    #   @return [String]
+    # @!attribute space_id
+    #   <p>The ID of the space that you want to update resources for.</p>
+    #   @return [String]
+    # @!attribute add_resources
+    #   <p>A list of resources to add to the space.</p>
+    #   @return [Array<Types::SpaceResourceOperation>]
+    # @!attribute remove_resources
+    #   <p>A list of resources to remove from the space.</p>
+    #   @return [Array<Types::SpaceResourceOperation>]
+    class UpdateSpaceResourcesRequest < Struct.new(
+      nil,
+      :aws_account_id,
+      :space_id,
+      :add_resources,
+      :remove_resources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute failed_resource_operations
+    #   <p>A list of resource operations that failed.</p>
+    #   @return [Array<Types::FailedSpaceResourceOperation>]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class UpdateSpaceResourcesResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :failed_resource_operations,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute space_id
+    #   <p>The ID of the space.</p>
+    #   @return [String]
+    # @!attribute space_arn
+    #   <p>The ARN of the space.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class UpdateSpaceResponse < Struct.new(
+      nil,
+      :space_id,
+      :space_arn,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -32567,10 +45411,12 @@ module Aws::QuickSight
     #   			analysis. Both of these require an Amazon Resource Name (ARN). For
     #   			<code>SourceTemplate</code>, specify the ARN of the source template. For
     #   			<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>
-    #   			ARN can contain any Amazon Web Services account and any QuickSight-supported Amazon Web Services Region;. </p>
+    #   			ARN can contain any Amazon Web Services account and any Quick Sight-supported Amazon Web Services Region;. </p>
     #            <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or
     #   			<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed
-    #   			in the original. The schema in each dataset must match its placeholder. </p>
+    #   			in the original. The schema in each dataset must match its placeholder. Use the <code>TopicReferences</code>
+    #   			entity to list the replacement topics for the topic placeholders listed in the original.
+    #   			The schema in each topic must match its placeholder.</p>
     #   @return [Types::TemplateSourceEntity]
     # @!attribute version_description
     #   <p>A description of the current template version that is being updated. Every time you call
@@ -32750,8 +45596,8 @@ module Aws::QuickSight
     #   <p>The name for the theme.</p>
     #   @return [String]
     # @!attribute base_theme_id
-    #   <p>The theme ID, defined by Amazon QuickSight, that a custom theme inherits from.
-    #   		All themes initially inherit from a default QuickSight theme.</p>
+    #   <p>The theme ID, defined by Amazon Quick Sight, that a custom theme inherits from.
+    #   		All themes initially inherit from a default Quick Sight theme.</p>
     #   @return [String]
     # @!attribute version_description
     #   <p>A description of the theme version that you're updating Every time that you call
@@ -32850,6 +45696,62 @@ module Aws::QuickSight
     #   <p>The Amazon Web Services request ID for this operation.</p>
     #   @return [String]
     class UpdateTopicPermissionsResponse < Struct.new(
+      nil,
+      :topic_id,
+      :topic_arn,
+      :permissions,
+      :status,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the topic that you want to update
+    #            the permissions for.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute grant_permissions
+    #   <p>The resource permissions that you want to grant to the topic.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute revoke_permissions
+    #   <p>The resource permissions that you want to revoke from the topic.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    class UpdateTopicPermissionsV2Request < Struct.new(
+      nil,
+      :aws_account_id,
+      :topic_id,
+      :grant_permissions,
+      :revoke_permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute topic_arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>A list of resource permissions on the topic.</p>
+    #   @return [Array<Types::ResourcePermission>]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    class UpdateTopicPermissionsV2Response < Struct.new(
       nil,
       :topic_id,
       :topic_arn,
@@ -32978,6 +45880,62 @@ module Aws::QuickSight
       end
     end
 
+    # @!attribute aws_account_id
+    #   <p>The ID of the Amazon Web Services account that contains the topic that you want to
+    #            update.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute topic
+    #   <p>The definition of the topic that you want to update.</p>
+    #   @return [Types::TopicV2Details]
+    # @!attribute custom_instructions
+    #   <p>Instructions that provide additional guidance and context for response generation.</p>
+    #   @return [Types::CustomInstructions]
+    # @!attribute publish_option
+    #   <p>The publish option for the topic that you want to update.</p>
+    #   @return [String]
+    class UpdateTopicV2Request < Struct.new(
+      nil,
+      :aws_account_id,
+      :topic_id,
+      :topic,
+      :custom_instructions,
+      :publish_option,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the topic.</p>
+    #   @return [String]
+    # @!attribute topic_id
+    #   <p>The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>The Amazon Web Services request ID for this operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The HTTP status of the request.</p>
+    #   @return [Integer]
+    class UpdateTopicV2Response < Struct.new(
+      nil,
+      :arn,
+      :topic_id,
+      :request_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:status] = 0 unless options.key?(:status)
+        super
+      end
+    end
+
     # @!attribute user_name
     #   <p>The username of the user that you want to update custom permissions for.</p>
     #   @return [String]
@@ -33022,11 +45980,11 @@ module Aws::QuickSight
     end
 
     # @!attribute user_name
-    #   <p>The Amazon QuickSight user name that you want to update.</p>
+    #   <p>The Amazon Quick Sight user name that you want to update.</p>
     #   @return [String]
     # @!attribute aws_account_id
     #   <p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
-    #   			Amazon Web Services account that contains your Amazon QuickSight account.</p>
+    #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
     #   <p>The namespace. Currently, you should set this to <code>default</code>.</p>
@@ -33035,7 +45993,7 @@ module Aws::QuickSight
     #   <p>The email address of the user that you want to update.</p>
     #   @return [String]
     # @!attribute role
-    #   <p>The Amazon QuickSight role of the user. The role can be one of the
+    #   <p>The Amazon Quick Sight role of the user. The role can be one of the
     #   			following default security cohorts:</p>
     #            <ul>
     #               <li>
@@ -33049,12 +46007,12 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight
+    #                     <code>ADMIN</code>: A user who is an author, who can also manage Amazon Quick Sight
     #   					settings.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>
+    #                     <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Quick Sight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -33062,10 +46020,10 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>
+    #                     <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon Quick Sight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>
     #               </li>
     #            </ul>
-    #            <p>The name of the QuickSight role is invisible to the user except for the console
+    #            <p>The name of the Quick Sight role is invisible to the user except for the console
     #   	        screens dealing with permissions.</p>
     #   @return [String]
     # @!attribute custom_permissions_name
@@ -33087,13 +46045,13 @@ module Aws::QuickSight
     #               </li>
     #            </ul>
     #            <p>A set of custom permissions includes any combination of these restrictions. Currently,
-    #               you need to create the profile names for custom permission sets by using the QuickSight
+    #               you need to create the profile names for custom permission sets by using the Quick Sight
     #               console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of
-    #               permissions to a QuickSight user. </p>
-    #            <p>QuickSight custom permissions are applied through IAM policies. Therefore, they
-    #               override the permissions typically granted by assigning QuickSight users to one of the
-    #               default security cohorts in QuickSight (admin, author, reader).</p>
-    #            <p>This feature is available only to QuickSight Enterprise edition subscriptions.</p>
+    #               permissions to a Quick Sight user. </p>
+    #            <p>Quick Sight custom permissions are applied through IAM policies. Therefore, they
+    #               override the permissions typically granted by assigning Quick Sight users to one of the
+    #               default security cohorts in Quick Sight (admin, author, reader).</p>
+    #            <p>This feature is available only to Quick Sight Enterprise edition subscriptions.</p>
     #   @return [String]
     # @!attribute unapply_custom_permissions
     #   <p>A flag that you use to indicate that you want to remove all custom permissions
@@ -33102,7 +46060,7 @@ module Aws::QuickSight
     #               NULL and it doesn't accept any other value.</p>
     #   @return [Boolean]
     # @!attribute external_login_federation_provider_type
-    #   <p>The type of supported external login provider that provides identity to let a user federate into QuickSight with an associated Identity and Access Management(IAM) role. The type of supported external login provider can be one of the following.</p>
+    #   <p>The type of supported external login provider that provides identity to let a user federate into Quick Sight with an associated Identity and Access Management(IAM) role. The type of supported external login provider can be one of the following.</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -33124,7 +46082,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute custom_federation_provider_url
     #   <p>The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate
-    #            into QuickSight with an associated Identity and Access Management(IAM) role. This parameter should
+    #            into Quick Sight with an associated Identity and Access Management(IAM) role. This parameter should
     #            only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.</p>
     #   @return [String]
     # @!attribute external_login_id
@@ -33148,7 +46106,7 @@ module Aws::QuickSight
     end
 
     # @!attribute user
-    #   <p>The Amazon QuickSight user.</p>
+    #   <p>The Amazon Quick Sight user.</p>
     #   @return [Types::User]
     # @!attribute request_id
     #   <p>The Amazon Web Services request ID for this operation.</p>
@@ -33261,6 +46219,9 @@ module Aws::QuickSight
     # @!attribute delimiter
     #   <p>The delimiter between values in the file.</p>
     #   @return [String]
+    # @!attribute custom_cell_address_range
+    #   <p>A custom cell address range for Excel files, specifying which cells to import from the spreadsheet.</p>
+    #   @return [String]
     class UploadSettings < Struct.new(
       nil,
       :format,
@@ -33268,6 +46229,7 @@ module Aws::QuickSight
       :contains_header,
       :text_qualifier,
       :delimiter,
+      :custom_cell_address_range,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -33278,12 +46240,24 @@ module Aws::QuickSight
       end
     end
 
-    # <p>A registered user of Amazon QuickSight. </p>
+    # <p>Metadata for an uploaded document associated with a custom instruction.</p>
+    # @!attribute name
+    #   <p>The name of the uploaded document.</p>
+    #   @return [String]
+    class UploadedDocumentMetadata < Struct.new(
+      nil,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A registered user of Quick Sight. </p>
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) for the user.</p>
     #   @return [String]
     # @!attribute user_name
-    #   <p>The user's user name. This value is required if you are registering a user that will be managed in QuickSight. In the output, the value for <code>UserName</code> is
+    #   <p>The user's user name. This value is required if you are registering a user that will be managed in Quick Sight. In the output, the value for <code>UserName</code> is
     #                   <code>N/A</code> when the value for <code>IdentityType</code> is <code>IAM</code>
     #               and the corresponding IAM user is deleted.</p>
     #   @return [String]
@@ -33291,7 +46265,7 @@ module Aws::QuickSight
     #   <p>The user's email address.</p>
     #   @return [String]
     # @!attribute role
-    #   <p>The Amazon QuickSight role for the user. The user role can be one of the
+    #   <p>The Quick Sight role for the user. The user role can be one of the
     #               following:.</p>
     #            <ul>
     #               <li>
@@ -33306,11 +46280,11 @@ module Aws::QuickSight
     #               <li>
     #                  <p>
     #                     <code>ADMIN</code>: A user who is an author, who can also manage Amazon
-    #                       QuickSight settings.</p>
+    #                       Quick Sight settings.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in QuickSight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>
+    #                     <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q in Quick Sight, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -33318,7 +46292,7 @@ module Aws::QuickSight
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>
+    #                     <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Quick Sight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -33336,7 +46310,7 @@ module Aws::QuickSight
     #   <p>The type of identity authentication used by the user.</p>
     #   @return [String]
     # @!attribute active
-    #   <p>The active status of user. When you create an Amazon QuickSight user that's not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a
+    #   <p>The active status of user. When you create an Quick Sight user that's not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a
     #               password.</p>
     #   @return [Boolean]
     # @!attribute principal_id
@@ -33347,7 +46321,7 @@ module Aws::QuickSight
     #   @return [String]
     # @!attribute external_login_federation_provider_type
     #   <p>The type of supported external login provider that provides identity to let the user
-    #               federate into Amazon QuickSight with an associated IAM role. The type can be one of the following.</p>
+    #               federate into Quick Sight with an associated IAM role. The type can be one of the following.</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -33386,6 +46360,143 @@ module Aws::QuickSight
         options[:active] = false unless options.key?(:active)
         super
       end
+    end
+
+    # <p>A structure that contains information to identify a user.</p>
+    # @!attribute user_name
+    #   <p>The name of the user that you want to get identity context for.</p>
+    #   @return [String]
+    # @!attribute email
+    #   <p>The email address of the user that you want to get identity context for.</p>
+    #   @return [String]
+    # @!attribute user_arn
+    #   <p>The Amazon Resource Name (ARN) of the user that you want to get identity context for.</p>
+    #   @return [String]
+    class UserIdentifier < Struct.new(
+      :user_name,
+      :email,
+      :user_arn,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class UserName < UserIdentifier; end
+      class Email < UserIdentifier; end
+      class UserArn < UserIdentifier; end
+      class Unknown < UserIdentifier; end
+    end
+
+    # <p>A summary of a user's index capacity consumption.</p>
+    # @!attribute user_arn
+    #   <p>The ARN of the user.</p>
+    #   @return [String]
+    # @!attribute user_name
+    #   <p>The username of the user.</p>
+    #   @return [String]
+    # @!attribute email
+    #   <p>The email address of the user.</p>
+    #   @return [String]
+    # @!attribute role
+    #   <p>The role of the user.</p>
+    #   @return [String]
+    # @!attribute total_capacity_bytes
+    #   <p>The total index capacity consumed by the user in bytes.</p>
+    #   @return [Integer]
+    # @!attribute total_kb_capacity_bytes
+    #   <p>The total index capacity consumed by the user's knowledge bases in bytes.</p>
+    #   @return [Integer]
+    # @!attribute total_space_capacity_bytes
+    #   <p>The total index capacity consumed by the user's spaces in bytes.</p>
+    #   @return [Integer]
+    # @!attribute kb_count
+    #   <p>The number of knowledge bases owned by the user.</p>
+    #   @return [Integer]
+    # @!attribute space_count
+    #   <p>The number of spaces owned by the user.</p>
+    #   @return [Integer]
+    class UserIndexCapacity < Struct.new(
+      nil,
+      :user_arn,
+      :user_name,
+      :email,
+      :role,
+      :total_capacity_bytes,
+      :total_kb_capacity_bytes,
+      :total_space_capacity_bytes,
+      :kb_count,
+      :space_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter for user index capacity queries. Only one filter type can be specified per request.</p>
+    # @!attribute user_name_or_email
+    #   <p>Filter users by username or email prefix.</p>
+    #   @return [Types::UserNameOrEmailFilter]
+    # @!attribute total_capacity_bytes
+    #   <p>Filter users by total capacity range in bytes.</p>
+    #   @return [Types::CapacityBytesRangeFilter]
+    class UserIndexCapacityFilter < Struct.new(
+      :user_name_or_email,
+      :total_capacity_bytes,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class UserNameOrEmail < UserIndexCapacityFilter; end
+      class TotalCapacityBytes < UserIndexCapacityFilter; end
+      class Unknown < UserIndexCapacityFilter; end
+    end
+
+    # <p>The effective limits for an Amazon Quick Sight user.</p>
+    # @!attribute user_name
+    #   <p>The name of the user.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The namespace of the user.</p>
+    #   @return [String]
+    # @!attribute effective_limits
+    #   <p>A list of effective limits for the user.</p>
+    #   @return [Array<Types::EffectiveLimit>]
+    class UserLimits < Struct.new(
+      nil,
+      :user_name,
+      :namespace,
+      :effective_limits,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies a user for the <code>BatchDescribeUserLimits</code> operation.</p>
+    # @!attribute user_name
+    #   <p>The name of the user.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The namespace of the user.</p>
+    #   @return [String]
+    class UserLimitsEntry < Struct.new(
+      nil,
+      :user_name,
+      :namespace,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter that matches users by username or email prefix.</p>
+    # @!attribute prefix
+    #   <p>The prefix to match against username or email (starts-with match).</p>
+    #   @return [String]
+    class UserNameOrEmailFilter < Struct.new(
+      nil,
+      :prefix,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure of a VPC connection.</p>
@@ -33519,6 +46630,34 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for how to handle value columns in pivot operations, including aggregation settings.</p>
+    # @!attribute aggregation_function
+    #   <p>The aggregation function to apply when multiple values map to the same pivoted cell.</p>
+    #   @return [Types::DataPrepAggregationFunction]
+    class ValueColumnConfiguration < Struct.new(
+      nil,
+      :aggregation_function,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for video extraction from knowledge base documents.</p>
+    # @!attribute video_extraction_status
+    #   <p>The status of video extraction. Valid values are ENABLED and DISABLED.</p>
+    #   @return [String]
+    # @!attribute video_extraction_type
+    #   <p>The type of video extraction to perform.</p>
+    #   @return [String]
+    class VideoExtractionConfiguration < Struct.new(
+      nil,
+      :video_extraction_status,
+      :video_extraction_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The range options for the data zoom scroll bar.</p>
     # @!attribute percent_range
     #   <p>The percent range in the visible range.</p>
@@ -33535,97 +46674,97 @@ module Aws::QuickSight
     #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     # @!attribute table_visual
     #   <p>A table visual.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tabular.html">Using tables as visuals</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tabular.html">Using tables as visuals</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::TableVisual]
     # @!attribute pivot_table_visual
     #   <p>A pivot table.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pivot-table.html">Using pivot tables</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pivot-table.html">Using pivot tables</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::PivotTableVisual]
     # @!attribute bar_chart_visual
     #   <p>A bar chart.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/bar-charts.html">Using bar charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/bar-charts.html">Using bar charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::BarChartVisual]
     # @!attribute kpi_visual
     #   <p>A key performance indicator (KPI).</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/kpi.html">Using KPIs</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/kpi.html">Using KPIs</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::KPIVisual]
     # @!attribute pie_chart_visual
     #   <p>A pie or donut chart.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pie-chart.html">Using pie charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/pie-chart.html">Using pie charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::PieChartVisual]
     # @!attribute gauge_chart_visual
     #   <p>A gauge chart.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/gauge-chart.html">Using gauge charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/gauge-chart.html">Using gauge charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::GaugeChartVisual]
     # @!attribute line_chart_visual
     #   <p>A line chart.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/line-charts.html">Using line charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/line-charts.html">Using line charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::LineChartVisual]
     # @!attribute heat_map_visual
     #   <p>A heat map.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/heat-map.html">Using heat maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/heat-map.html">Using heat maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::HeatMapVisual]
     # @!attribute tree_map_visual
     #   <p>A tree map.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tree-map.html">Using tree maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/tree-map.html">Using tree maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::TreeMapVisual]
     # @!attribute geospatial_map_visual
     #   <p>A geospatial map or a points on map visual.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/point-maps.html">Creating point maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/point-maps.html">Creating point maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::GeospatialMapVisual]
     # @!attribute filled_map_visual
     #   <p>A filled map.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filled-maps.html">Creating filled maps</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/filled-maps.html">Creating filled maps</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::FilledMapVisual]
     # @!attribute layer_map_visual
     #   <p>The properties for a layer map visual</p>
     #   @return [Types::LayerMapVisual]
     # @!attribute funnel_chart_visual
     #   <p>A funnel chart.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/funnel-visual-content.html">Using funnel charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/funnel-visual-content.html">Using funnel charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::FunnelChartVisual]
     # @!attribute scatter_plot_visual
     #   <p>A scatter plot.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/scatter-plot.html">Using scatter plots</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/scatter-plot.html">Using scatter plots</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::ScatterPlotVisual]
     # @!attribute combo_chart_visual
     #   <p>A combo chart.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/combo-charts.html">Using combo charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/combo-charts.html">Using combo charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::ComboChartVisual]
     # @!attribute box_plot_visual
     #   <p>A box plot.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/box-plots.html">Using box plots</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/box-plots.html">Using box plots</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::BoxPlotVisual]
     # @!attribute waterfall_visual
     #   <p>A waterfall chart.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/waterfall-chart.html">Using waterfall charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/waterfall-chart.html">Using waterfall charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::WaterfallVisual]
     # @!attribute histogram_visual
     #   <p>A histogram.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/histogram-charts.html">Using histograms</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/histogram-charts.html">Using histograms</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::HistogramVisual]
     # @!attribute word_cloud_visual
     #   <p>A word cloud.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/word-cloud.html">Using word clouds</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/word-cloud.html">Using word clouds</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::WordCloudVisual]
     # @!attribute insight_visual
     #   <p>An insight visual.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/computational-insights.html">Working with insights</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/computational-insights.html">Working with insights</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::InsightVisual]
     # @!attribute sankey_diagram_visual
     #   <p>A sankey diagram.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sankey-diagram.html">Using Sankey diagrams</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sankey-diagram.html">Using Sankey diagrams</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::SankeyDiagramVisual]
     # @!attribute custom_content_visual
     #   <p>A visual that contains custom content.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/custom-visual-content.html">Using custom visual content</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/custom-visual-content.html">Using custom visual content</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::CustomContentVisual]
     # @!attribute empty_visual
     #   <p>An empty visual.</p>
     #   @return [Types::EmptyVisual]
     # @!attribute radar_chart_visual
     #   <p>A radar chart visual.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/radar-chart.html">Using radar charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/radar-chart.html">Using radar charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     #   @return [Types::RadarChartVisual]
     # @!attribute plugin_visual
     #   <p>The custom plugin visual type.</p>
@@ -33751,6 +46890,22 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration that controls field customization options available to dashboard readers for a visual.</p>
+    # @!attribute status
+    #   <p>Specifies whether dashboard readers can customize fields for this visual. This option is <code>ENABLED</code> by default.</p>
+    #   @return [String]
+    # @!attribute additional_fields
+    #   <p>The additional dataset fields available for dashboard readers to customize the visual with, beyond the fields already configured on the visual.</p>
+    #   @return [Array<Types::ColumnIdentifier>]
+    class VisualCustomizationFieldsConfiguration < Struct.new(
+      nil,
+      :status,
+      :additional_fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines what initiates a highlight operation on a visual, such as a click or hover.</p>
     # @!attribute trigger
     #   <p>Specifies whether a highlight operation is initiated by a click or hover, or whether it's disabled.</p>
@@ -33791,6 +46946,63 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for a customizable message displayed on a visual. Supports parameter substitution in text fields.</p>
+    # @!attribute enabled
+    #   <p>Specifies whether the custom message is displayed on the visual. When set to <code>true</code>, the custom message appears in place of the default message. When set to <code>false</code> or omitted, the default message is displayed.</p>
+    #   @return [Boolean]
+    # @!attribute title
+    #   <p>The title text of the message that is displayed on the visual.</p>
+    #   @return [String]
+    # @!attribute title_visibility
+    #   <p>Specifies whether the title of the message is displayed.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description text of the message that is displayed on the visual.</p>
+    #   @return [String]
+    # @!attribute description_visibility
+    #   <p>Specifies whether the description of the message is displayed.</p>
+    #   @return [String]
+    # @!attribute link_text
+    #   <p>The display text of the hyperlink that is shown in the message.</p>
+    #   @return [String]
+    # @!attribute link_url
+    #   <p>The destination URL of the hyperlink that is shown in the message. Only valid <code>http</code>, <code>https</code>, and <code>mailto</code> URLs are supported.</p>
+    #   @return [String]
+    # @!attribute link_visibility
+    #   <p>Specifies whether the hyperlink in the message is displayed.</p>
+    #   @return [String]
+    class VisualMessageConfiguration < Struct.new(
+      nil,
+      :enabled,
+      :title,
+      :title_visibility,
+      :description,
+      :description_visibility,
+      :link_text,
+      :link_url,
+      :link_visibility,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:enabled] = false unless options.key?(:enabled)
+        super
+      end
+    end
+
+    # <p>The messages that are displayed on a visual under specific conditions, such as when the visual returns no data.</p>
+    # @!attribute no_data_message
+    #   <p>The message that is displayed on a visual when there is no data to display.</p>
+    #   @return [Types::VisualMessageConfiguration]
+    class VisualMessages < Struct.new(
+      nil,
+      :no_data_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The definition for a <code>VisualOptions</code>.</p>
     # @!attribute type
     #   <p>The type for a <code>VisualOptions</code>.</p>
@@ -33819,6 +47031,26 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configures the display properties of the visual sub-title.</p>
+    # @!attribute font_configuration
+    #   <p>Configures the display properties of the given text.</p>
+    #   @return [Types::FontConfiguration]
+    # @!attribute text_alignment
+    #   <p>Determines the alignment of visual sub-title.</p>
+    #   @return [String]
+    # @!attribute text_transform
+    #   <p>Determines the text transformation of visual sub-title.</p>
+    #   @return [String]
+    class VisualSubtitleFontConfiguration < Struct.new(
+      nil,
+      :font_configuration,
+      :text_alignment,
+      :text_transform,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The subtitle label options for a visual.</p>
     # @!attribute visibility
     #   <p>The visibility of the subtitle label.</p>
@@ -33830,6 +47062,26 @@ module Aws::QuickSight
       nil,
       :visibility,
       :format_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configures the display properties of the visual title.</p>
+    # @!attribute font_configuration
+    #   <p>Configures the display properties of the given text.</p>
+    #   @return [Types::FontConfiguration]
+    # @!attribute text_alignment
+    #   <p>Determines the alignment of visual title.</p>
+    #   @return [String]
+    # @!attribute text_transform
+    #   <p>Determines the text transformation of visual title.</p>
+    #   @return [String]
+    class VisualTitleFontConfiguration < Struct.new(
+      nil,
+      :font_configuration,
+      :text_alignment,
+      :text_transform,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -34012,7 +47264,7 @@ module Aws::QuickSight
     end
 
     # <p>A waterfall chart.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/waterfall-chart.html">Using waterfall charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/waterfall-chart.html">Using waterfall charts</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>
     #   @return [String]
@@ -34043,6 +47295,85 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The parameters for a web crawler data source.</p>
+    # @!attribute web_crawler_auth_type
+    #   <p>The authentication type for the web crawler. The type can be one of the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>NO_AUTH</code>: No authentication required.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>BASIC_AUTH</code>: Basic authentication using username and password.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SAML</code>: SAML-based authentication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FORM</code>: Form-based authentication.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute username_field_xpath
+    #   <p>The XPath expression for locating the username field on the login page.</p>
+    #   @return [String]
+    # @!attribute password_field_xpath
+    #   <p>The XPath expression for locating the password field on the login page.</p>
+    #   @return [String]
+    # @!attribute username_button_xpath
+    #   <p>The XPath expression for locating the username submit button on the login page.</p>
+    #   @return [String]
+    # @!attribute password_button_xpath
+    #   <p>The XPath expression for locating the password submit button on the login page.</p>
+    #   @return [String]
+    # @!attribute login_page_url
+    #   <p>The URL of the login page for the web crawler to authenticate.</p>
+    #   @return [String]
+    # @!attribute web_proxy_host_name
+    #   <p>The hostname of the web proxy server for the web crawler.</p>
+    #   @return [String]
+    # @!attribute web_proxy_port_number
+    #   <p>The port number of the web proxy server for the web crawler.</p>
+    #   @return [Integer]
+    class WebCrawlerParameters < Struct.new(
+      nil,
+      :web_crawler_auth_type,
+      :username_field_xpath,
+      :password_field_xpath,
+      :username_button_xpath,
+      :password_button_xpath,
+      :login_page_url,
+      :web_proxy_host_name,
+      :web_proxy_port_number,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:web_proxy_port_number] = 0 unless options.key?(:web_proxy_port_number)
+        super
+      end
+    end
+
+    # <p>The credentials for authenticating with a web proxy server.</p>
+    # @!attribute web_proxy_username
+    #   <p>The username for authenticating with the web proxy server.</p>
+    #   @return [String]
+    # @!attribute web_proxy_password
+    #   <p>The password for authenticating with the web proxy server.</p>
+    #   @return [String]
+    class WebProxyCredentials < Struct.new(
+      nil,
+      :web_proxy_username,
+      :web_proxy_password,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -34200,7 +47531,7 @@ module Aws::QuickSight
     end
 
     # <p>A word cloud.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/word-cloud.html">Using word clouds</a> in the <i>Amazon QuickSight User Guide</i>.</p>
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/word-cloud.html">Using word clouds</a> in the <i>Amazon Quick Suite User Guide</i>.</p>
     # @!attribute visual_id
     #   <p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers..</p>
     #   @return [String]

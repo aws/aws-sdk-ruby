@@ -7,6 +7,8 @@ module Aws::Synthetics
   module Schema
 
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AddReplicaLocationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#AddReplicaLocationInput", name: "AddReplicaLocationInput")
+    AddReplicaLocations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.synthetics#AddReplicaLocations", name: "AddReplicaLocations", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     ArtifactConfigInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#ArtifactConfigInput", name: "ArtifactConfigInput")
     ArtifactConfigOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#ArtifactConfigOutput", name: "ArtifactConfigOutput")
     AssociateResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#AssociateResourceRequest", name: "AssociateResourceRequest")
@@ -102,6 +104,8 @@ module Aws::Synthetics
     ListGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#ListGroupsResponse", name: "ListGroupsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
+    Location = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.synthetics#Location", name: "Location", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#pattern" => "^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-{0,1}[0-9]{0,1}$"})
+    LocationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.synthetics#LocationType", name: "LocationType")
     MaxCanaryResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.synthetics#MaxCanaryResults", name: "MaxCanaryResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
     MaxFifteenMinutesInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.synthetics#MaxFifteenMinutesInSeconds", name: "MaxFifteenMinutesInSeconds", traits: {"smithy.api#range" => {"min" => 3, "max" => 840}})
     MaxGroupResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.synthetics#MaxGroupResults", name: "MaxGroupResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
@@ -110,10 +114,16 @@ module Aws::Synthetics
     MaxSize100 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.synthetics#MaxSize100", name: "MaxSize100", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxSize1024 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.synthetics#MaxSize1024", name: "MaxSize1024", traits: {"smithy.api#range" => {"min" => 1, "max" => 1024}})
     MaxSize3008 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.synthetics#MaxSize3008", name: "MaxSize3008", traits: {"smithy.api#range" => {"min" => 960, "max" => 3008}})
+    MultiLocationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#MultiLocationConfig", name: "MultiLocationConfig")
     NotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#NotFoundException", name: "NotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     NullableBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.synthetics#NullableBoolean", name: "NullableBoolean")
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.synthetics#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^.+$"})
     ProvisionedResourceCleanupSetting = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.synthetics#ProvisionedResourceCleanupSetting", name: "ProvisionedResourceCleanupSetting")
+    RemoveReplicaLocations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.synthetics#RemoveReplicaLocations", name: "RemoveReplicaLocations", traits: {"smithy.api#length" => {"min" => 1}})
+    Replica = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#Replica", name: "Replica")
+    Replicas = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.synthetics#Replicas", name: "Replicas", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    ReplicationState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.synthetics#ReplicationState", name: "ReplicationState")
+    ReplicationStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#ReplicationStatus", name: "ReplicationStatus")
     RequestEntityTooLargeException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.synthetics#RequestEntityTooLargeException", name: "RequestEntityTooLargeException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 413})
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.synthetics#ResourceArn", name: "ResourceArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2,4}(-[a-z]{2,4})?-[a-z]+-\\d{1}:\\d{12}:(canary|group):[0-9a-z_\\-]+$"})
     ResourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.synthetics#ResourceList", name: "ResourceList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
@@ -166,6 +176,11 @@ module Aws::Synthetics
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
+    AddReplicaLocationInput.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "Location", traits: {"smithy.api#required" => {}}))
+    AddReplicaLocationInput.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigInput, name: "VpcConfig"))
+    AddReplicaLocationInput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn"))
+    AddReplicaLocationInput.type = Types::AddReplicaLocationInput
+    AddReplicaLocations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddReplicaLocationInput, name: "member"))
     ArtifactConfigInput.add_member(:s3_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: S3EncryptionConfig, name: "S3Encryption"))
     ArtifactConfigInput.type = Types::ArtifactConfigInput
     ArtifactConfigOutput.add_member(:s3_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: S3EncryptionConfig, name: "S3Encryption"))
@@ -208,8 +223,10 @@ module Aws::Synthetics
     Canary.add_member(:browser_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfigs, name: "BrowserConfigs"))
     Canary.add_member(:engine_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineConfigs, name: "EngineConfigs"))
     Canary.add_member(:visual_references, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferencesOutput, name: "VisualReferences"))
+    Canary.add_member(:multi_location_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiLocationConfig, name: "MultiLocationConfig"))
     Canary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     Canary.add_member(:artifact_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactConfigOutput, name: "ArtifactConfig"))
+    Canary.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn"))
     Canary.add_member(:dry_run_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRunConfigOutput, name: "DryRunConfig"))
     Canary.type = Types::Canary
     CanaryCodeInput.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "S3Bucket"))
@@ -239,6 +256,7 @@ module Aws::Synthetics
     CanaryRun.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ArtifactS3Location"))
     CanaryRun.add_member(:dry_run_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryDryRunConfigOutput, name: "DryRunConfig"))
     CanaryRun.add_member(:browser_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserType, name: "BrowserType"))
+    CanaryRun.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "Location"))
     CanaryRun.type = Types::CanaryRun
     CanaryRunConfigInput.add_member(:timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxFifteenMinutesInSeconds, name: "TimeoutInSeconds"))
     CanaryRunConfigInput.add_member(:memory_in_mb, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxSize3008, name: "MemoryInMB"))
@@ -322,8 +340,10 @@ module Aws::Synthetics
     CreateCanaryRequest.add_member(:resources_to_replicate_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceList, name: "ResourcesToReplicateTags"))
     CreateCanaryRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedResourceCleanupSetting, name: "ProvisionedResourceCleanup"))
     CreateCanaryRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfigs, name: "BrowserConfigs"))
+    CreateCanaryRequest.add_member(:add_replica_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: AddReplicaLocations, name: "AddReplicaLocations"))
     CreateCanaryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     CreateCanaryRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactConfigInput, name: "ArtifactConfig"))
+    CreateCanaryRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn"))
     CreateCanaryRequest.type = Types::CreateCanaryRequest
     CreateCanaryResponse.add_member(:canary, ::Smithy::Schema::Shapes::MemberShape.new(target: Canary, name: "Canary"))
     CreateCanaryResponse.type = Types::CreateCanaryResponse
@@ -440,10 +460,32 @@ module Aws::Synthetics
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    LocationType.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Primary", traits: {"smithy.api#enumValue" => "Primary"}))
+    LocationType.add_member(:replica, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Replica", traits: {"smithy.api#enumValue" => "Replica"}))
+    MultiLocationConfig.add_member(:location_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LocationType, name: "LocationType"))
+    MultiLocationConfig.add_member(:primary_location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "PrimaryLocation"))
+    MultiLocationConfig.add_member(:replicas, ::Smithy::Schema::Shapes::MemberShape.new(target: Replicas, name: "Replicas"))
+    MultiLocationConfig.add_member(:replication_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationState, name: "ReplicationState"))
+    MultiLocationConfig.type = Types::MultiLocationConfig
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     NotFoundException.type = Types::NotFoundException
     ProvisionedResourceCleanupSetting.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
     ProvisionedResourceCleanupSetting.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
+    RemoveReplicaLocations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "member"))
+    Replica.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "Location"))
+    Replica.add_member(:replication_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, name: "ReplicationStatus"))
+    Replica.add_member(:canary_state, ::Smithy::Schema::Shapes::MemberShape.new(target: CanaryState, name: "CanaryState"))
+    Replica.add_member(:last_modified, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModified"))
+    Replica.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigOutput, name: "VpcConfig"))
+    Replica.type = Types::Replica
+    Replicas.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Replica, name: "member"))
+    ReplicationState.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InProgress", traits: {"smithy.api#enumValue" => "InProgress"}))
+    ReplicationState.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InSync", traits: {"smithy.api#enumValue" => "InSync"}))
+    ReplicationState.add_member(:inconsistent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Inconsistent", traits: {"smithy.api#enumValue" => "Inconsistent"}))
+    ReplicationStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationState, name: "State"))
+    ReplicationStatus.add_member(:state_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateReason"))
+    ReplicationStatus.add_member(:state_reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateReasonCode"))
+    ReplicationStatus.type = Types::ReplicationStatus
     RequestEntityTooLargeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     RequestEntityTooLargeException.type = Types::RequestEntityTooLargeException
     ResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceToTag, name: "member"))
@@ -522,6 +564,9 @@ module Aws::Synthetics
     UpdateCanaryRequest.add_member(:dry_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "DryRunId"))
     UpdateCanaryRequest.add_member(:visual_references, ::Smithy::Schema::Shapes::MemberShape.new(target: VisualReferences, name: "VisualReferences"))
     UpdateCanaryRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserConfigs, name: "BrowserConfigs"))
+    UpdateCanaryRequest.add_member(:add_replica_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: AddReplicaLocations, name: "AddReplicaLocations"))
+    UpdateCanaryRequest.add_member(:remove_replica_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoveReplicaLocations, name: "RemoveReplicaLocations"))
+    UpdateCanaryRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "KmsKeyArn"))
     UpdateCanaryRequest.type = Types::UpdateCanaryRequest
     UpdateCanaryResponse.type = Types::UpdateCanaryResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
@@ -550,7 +595,7 @@ module Aws::Synthetics
       service.id = "com.amazonaws.synthetics#Synthetics"
       service.name = "Synthetics"
       service.version = "2017-10-11"
-      service.traits = {"aws.api#service" => {"sdkId" => "synthetics", "arnNamespace" => "synthetics", "cloudFormationName" => "Synthetics", "cloudTrailEventSource" => "synthetics.amazonaws.com", "endpointPrefix" => "synthetics"}, "aws.auth#sigv4" => {"name" => "synthetics"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Synthetics"}
+      service.traits = {"aws.api#service" => {"sdkId" => "synthetics", "arnNamespace" => "synthetics", "cloudFormationName" => "Synthetics", "cloudTrailEventSource" => "synthetics.amazonaws.com", "endpointPrefix" => "synthetics"}, "aws.auth#sigv4" => {"name" => "synthetics"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Synthetics", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://synthetics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://synthetics-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://synthetics.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://synthetics.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.synthetics#AssociateResource"
         operation.name = "AssociateResource"

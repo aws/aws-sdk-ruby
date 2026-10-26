@@ -4,16 +4,20 @@ module Aws
   # An auto-refreshing credentials provider that assumes a role via {Aws::SSO::Client#get_role_credentials} using a
   # cached access token. When `sso_session` is specified, token refresh logic from {Aws::SSOOIDCTokenProvider}
   # will be used to refresh the token if possible. This class does NOT implement the SSO login token flow - tokens
-  # must be generated separately by running `aws login` from the AWS CLI with the correct profile.
+  # must be generated separately by running `aws sso login` from the AWS CLI with the correct profile.
+  #
+  #     require 'aws-sdk-ec2'
+  #     require 'aws-sdk-sso'
+  #     require 'aws-sdk-ssooidc'
   #
   #     # You must first run aws sso login --profile your-sso-profile
   #     credentials = Aws::SSOCredentialsProvider.new(
-  #       sso_account_id: '123456789',
+  #       sso_account_id: '123456789012',
   #       sso_role_name: 'role_name',
   #       sso_region: 'us-east-1',
-  #       sso_session: 'your-sso-profile'
+  #       sso_session: 'your-sso-session'
   #     )
-  #     ec2 = Aws::EC2::Client.new(credentials_provider: credentials)
+  #     ec2 = Aws::EC2::Client.new(region: 'us-east-1', credentials_provider: credentials)
   #
   # If you omit the `:client` option, a new {Aws::SSO::Client} object will be constructed.
   #
@@ -28,7 +32,7 @@ module Aws
     # @option options [String] :sso_role_name The corresponding IAM role in the AWS account that temporary AWS
     #   credentials will be resolved for.
     # @option options [String] :sso_region The AWS region where the SSO directory for the given sso_session is hosted.
-    # @option options [AWS::SSO::Client] :client Optional `SSO::Client`.
+    # @option options [Aws::SSO::Client] :client Optional `SSO::Client`.
     #   If not provided, a client will be constructed.
     # @option options [Proc] :before_refresh A Proc called before credentials are refreshed. `before_refresh` is
     #   called when AWS credentials are required and need to be refreshed.

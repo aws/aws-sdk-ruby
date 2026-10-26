@@ -148,6 +148,7 @@ module Aws::ConnectParticipant
       include Smithy::Client::_Response[Types::SendMessageResponse]
       def id: () -> String?
       def absolute_time: () -> String?
+      def message_metadata: () -> Types::MessageProcessingMetadata?
     end
     def send_message: (
       ?content_type: String,

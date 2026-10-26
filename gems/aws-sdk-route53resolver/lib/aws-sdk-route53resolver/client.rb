@@ -144,18 +144,18 @@ module Aws::Route53Resolver
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,7 +209,8 @@ module Aws::Route53Resolver
       super
     end
 
-    # <p>Associates a <a>FirewallRuleGroup</a> with a VPC, to provide DNS filtering for the VPC. </p>
+    # <p>Associates a <a>FirewallRuleGroup</a> with a VPC, to provide DNS filtering for the VPC.</p>
+    #          <p>If the rule group contains any rule configured with the <code>PartnerThreatProtection</code> rule type, the calling account must hold an active Amazon Web Services Marketplace subscription to the named partner. If the subscription is missing, the association request is rejected.</p>
     # @param [Hash, Types::AssociateFirewallRuleGroupRequest] params
     # @option params [String] :creator_request_id
     #   <p>A unique string that identifies the request and that allows failed requests to be
@@ -223,14 +224,14 @@ module Aws::Route53Resolver
     #   <p>The setting that determines the processing order of the rule group among the rule
     #   			groups that you associate with the specified VPC. DNS Firewall filters VPC traffic
     #   			starting from the rule group with the lowest numeric priority setting. </p>
-    #            <p>You must specify a unique priority for each rule group that you associate with a single VPC. 
-    #              To make it easier to insert rule groups later, leave space between the numbers, for example, use 101, 200, and so on. You 
+    #            <p>You must specify a unique priority for each rule group that you associate with a single VPC.
+    #              To make it easier to insert rule groups later, leave space between the numbers, for example, use 101, 200, and so on. You
     #      can change the priority setting for a rule group association after you create it.</p>
     #            <p>The allowed values for <code>Priority</code> are between 100 and 9900.</p>
     # @option params [String] :name
     #   <p>A name that lets you identify the association, to manage and use it.</p>
     # @option params [String] :mutation_protection
-    #   <p>If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. 
+    #   <p>If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections.
     #          When you create the association, the default setting is <code>DISABLED</code>. </p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>A list of the tag keys and values that you want to associate with the rule group association. </p>
@@ -276,16 +277,16 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Adds IP addresses to an inbound or an outbound Resolver endpoint. If you want to add more than one IP address, 
+    # <p>Adds IP addresses to an inbound or an outbound Resolver endpoint. If you want to add more than one IP address,
     # 			submit one <code>AssociateResolverEndpointIpAddress</code> request for each IP address.</p>
-    #          <p>To remove an IP address from an endpoint, see 
+    #          <p>To remove an IP address from an endpoint, see
     # 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverEndpointIpAddress.html">DisassociateResolverEndpointIpAddress</a>.
     # 		</p>
     # @param [Hash, Types::AssociateResolverEndpointIpAddressRequest] params
     # @option params [String] :resolver_endpoint_id
     #   <p>The ID of the Resolver endpoint that you want to associate IP addresses with.</p>
     # @option params [Types::IpAddressUpdate] :ip_address
-    #   <p>Either the IPv4 address that you want to add to a Resolver endpoint or a subnet ID. If you specify a subnet ID, 
+    #   <p>Either the IPv4 address that you want to add to a Resolver endpoint or a subnet ID. If you specify a subnet ID,
     #   			Resolver chooses an IP address for you from the available IPs in the specified subnet.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -318,7 +319,11 @@ module Aws::Route53Resolver
     #       outpost_arn: "OutpostArn",
     #       preferred_instance_type: "OutpostInstanceType",
     #       resolver_endpoint_type: "IPV6" # One of: ["IPV6", "IPV4", "DUALSTACK"],
-    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]]
+    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]],
+    #       rni_enhanced_metrics_enabled: false,
+    #       target_name_server_metrics_enabled: false,
+    #       dns64_enabled: false,
+    #       ipv6_internet_access_enabled: false
     #     }
     #   }
     # @return [Types::AssociateResolverEndpointIpAddressResponse]
@@ -327,13 +332,13 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Associates an Amazon VPC with a specified query logging configuration. Route 53 Resolver logs DNS queries that originate in all of the Amazon VPCs 
-    # 			that are associated with a specified query logging configuration. To associate more than one VPC with a configuration, submit one <code>AssociateResolverQueryLogConfig</code> 
+    # <p>Associates an Amazon VPC with a specified query logging configuration. Route 53 Resolver logs DNS queries that originate in all of the Amazon VPCs
+    # 			that are associated with a specified query logging configuration. To associate more than one VPC with a configuration, submit one <code>AssociateResolverQueryLogConfig</code>
     # 			request for each VPC.</p>
     #          <note>
     #             <p>The VPCs that you associate with a query logging configuration must be in the same Region as the configuration.</p>
     #          </note>
-    #          <p>To remove a VPC from a query logging configuration, see 
+    #          <p>To remove a VPC from a query logging configuration, see
     # 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverQueryLogConfig.html">DisassociateResolverQueryLogConfig</a>.
     # 			</p>
     # @param [Hash, Types::AssociateResolverQueryLogConfigRequest] params
@@ -370,16 +375,17 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Associates a Resolver rule with a VPC. When you associate a rule with a VPC, Resolver forwards all DNS queries 
-    # 			for the domain name that is specified in the rule and that originate in the VPC. The queries are forwarded to the 
-    # 			IP addresses for the DNS resolvers that are specified in the rule. For more information about rules, see 
+    # <p>Associates a Resolver rule with a VPC. When you associate a rule with a VPC, Resolver forwards all DNS queries
+    # 			for the domain name that is specified in the rule and that originate in the VPC. The queries are forwarded to the
+    # 			IP addresses for the DNS resolvers that are specified in the rule. For more information about rules, see
     # 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html">CreateResolverRule</a>. </p>
     # @param [Hash, Types::AssociateResolverRuleRequest] params
     # @option params [String] :resolver_rule_id
-    #   <p>The ID of the Resolver rule that you want to associate with the VPC. To list the existing Resolver rules, use 
+    #   <p>The ID of the Resolver rule that you want to associate with the VPC. To list the existing Resolver rules, use
     #   			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html">ListResolverRules</a>.</p>
     # @option params [String] :name
     #   <p>A name for the association that you're creating between a Resolver rule and a VPC.</p>
+    #            <p>The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.</p>
     # @option params [String] :vpc_id
     #   <p>The ID of the VPC that you want to associate the Resolver rule with.</p>
     # @example Request syntax with placeholder values
@@ -405,6 +411,337 @@ module Aws::Route53Resolver
     # @return [Types::AssociateResolverRuleResponse]
     def associate_resolver_rule(params = {}, options = {})
       request = build_request(:associate_resolver_rule, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates multiple DNS Firewall rules in the specified rule group.</p>
+    # @param [Hash, Types::BatchCreateFirewallRuleRequest] params
+    # @option params [Array<Types::CreateFirewallRuleEntry>] :create_firewall_rule_entries
+    #   <p>The list of firewall rules to create.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     create_firewall_rule_entries: [ # required
+    #       {
+    #         creator_request_id: "CreatorRequestId", # required
+    #         firewall_rule_group_id: "ResourceId", # required
+    #         firewall_domain_list_id: "ResourceId",
+    #         priority: 1, # required
+    #         action: "ALLOW" # One of: ["ALLOW", "BLOCK", "ALERT"], # required
+    #         block_response: "NODATA" # One of: ["NODATA", "NXDOMAIN", "OVERRIDE"],
+    #         block_override_domain: "BlockOverrideDomain",
+    #         block_override_dns_type: "CNAME" # One of: ["CNAME"],
+    #         block_override_ttl: 1,
+    #         name: "Name", # required
+    #         firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
+    #         qtype: "Qtype",
+    #         dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #         confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #         firewall_rule_type: {
+    #           partner_threat_protection: {
+    #             partner: "PartnerValue", # required
+    #           },
+    #           firewall_advanced_content_category: {
+    #             category: "FirewallAdvancedContentCategoryValue", # required
+    #           },
+    #           firewall_advanced_threat_category: {
+    #             category: "FirewallAdvancedThreatCategoryValue", # required
+    #           },
+    #           dns_threat_protection: {
+    #             value: "DnsThreatProtectionRuleTypeValue", # required
+    #             confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #           }
+    #         }
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_create_firewall_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     created_firewall_rules: [
+    #       {
+    #         firewall_rule_group_id: "ResourceId",
+    #         firewall_domain_list_id: "ResourceId",
+    #         firewall_threat_protection_id: "ResourceId",
+    #         name: "Name",
+    #         priority: 1,
+    #         action: "ALLOW" # One of: ["ALLOW", "BLOCK", "ALERT"],
+    #         block_response: "NODATA" # One of: ["NODATA", "NXDOMAIN", "OVERRIDE"],
+    #         block_override_domain: "BlockOverrideDomain",
+    #         block_override_dns_type: "CNAME" # One of: ["CNAME"],
+    #         block_override_ttl: 1,
+    #         creator_request_id: "CreatorRequestId",
+    #         creation_time: "Rfc3339TimeString",
+    #         modification_time: "Rfc3339TimeString",
+    #         firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
+    #         qtype: "Qtype",
+    #         dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #         confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #         firewall_rule_type: {
+    #           partner_threat_protection: {
+    #             partner: "PartnerValue", # required
+    #           },
+    #           firewall_advanced_content_category: {
+    #             category: "FirewallAdvancedContentCategoryValue", # required
+    #           },
+    #           firewall_advanced_threat_category: {
+    #             category: "FirewallAdvancedThreatCategoryValue", # required
+    #           },
+    #           dns_threat_protection: {
+    #             value: "DnsThreatProtectionRuleTypeValue", # required
+    #             confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #           }
+    #         },
+    #         status: "FirewallRuleStatus",
+    #         status_message: "FirewallRuleStatusMessage"
+    #       }
+    #     ],
+    #     create_errors: [
+    #       {
+    #         firewall_rule: {
+    #           creator_request_id: "CreatorRequestId", # required
+    #           firewall_rule_group_id: "ResourceId", # required
+    #           firewall_domain_list_id: "ResourceId",
+    #           priority: 1, # required
+    #           action: "ALLOW" # One of: ["ALLOW", "BLOCK", "ALERT"], # required
+    #           block_response: "NODATA" # One of: ["NODATA", "NXDOMAIN", "OVERRIDE"],
+    #           block_override_domain: "BlockOverrideDomain",
+    #           block_override_dns_type: "CNAME" # One of: ["CNAME"],
+    #           block_override_ttl: 1,
+    #           name: "Name", # required
+    #           firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
+    #           qtype: "Qtype",
+    #           dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #           confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #           firewall_rule_type: {
+    #             partner_threat_protection: {
+    #               partner: "PartnerValue", # required
+    #             },
+    #             firewall_advanced_content_category: {
+    #               category: "FirewallAdvancedContentCategoryValue", # required
+    #             },
+    #             firewall_advanced_threat_category: {
+    #               category: "FirewallAdvancedThreatCategoryValue", # required
+    #             },
+    #             dns_threat_protection: {
+    #               value: "DnsThreatProtectionRuleTypeValue", # required
+    #               confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #             }
+    #           }
+    #         },
+    #         code: "String",
+    #         message: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchCreateFirewallRuleResponse]
+    def batch_create_firewall_rule(params = {}, options = {})
+      request = build_request(:batch_create_firewall_rule, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes multiple DNS Firewall rules from the specified rule group.</p>
+    # @param [Hash, Types::BatchDeleteFirewallRuleRequest] params
+    # @option params [Array<Types::DeleteFirewallRuleEntry>] :delete_firewall_rule_entries
+    #   <p>The list of firewall rules to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     delete_firewall_rule_entries: [ # required
+    #       {
+    #         firewall_rule_group_id: "ResourceId", # required
+    #         firewall_domain_list_id: "ResourceId",
+    #         firewall_threat_protection_id: "ResourceId",
+    #         qtype: "Qtype"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_delete_firewall_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     deleted_firewall_rules: [
+    #       {
+    #         firewall_rule_group_id: "ResourceId",
+    #         firewall_domain_list_id: "ResourceId",
+    #         firewall_threat_protection_id: "ResourceId",
+    #         name: "Name",
+    #         priority: 1,
+    #         action: "ALLOW" # One of: ["ALLOW", "BLOCK", "ALERT"],
+    #         block_response: "NODATA" # One of: ["NODATA", "NXDOMAIN", "OVERRIDE"],
+    #         block_override_domain: "BlockOverrideDomain",
+    #         block_override_dns_type: "CNAME" # One of: ["CNAME"],
+    #         block_override_ttl: 1,
+    #         creator_request_id: "CreatorRequestId",
+    #         creation_time: "Rfc3339TimeString",
+    #         modification_time: "Rfc3339TimeString",
+    #         firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
+    #         qtype: "Qtype",
+    #         dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #         confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #         firewall_rule_type: {
+    #           partner_threat_protection: {
+    #             partner: "PartnerValue", # required
+    #           },
+    #           firewall_advanced_content_category: {
+    #             category: "FirewallAdvancedContentCategoryValue", # required
+    #           },
+    #           firewall_advanced_threat_category: {
+    #             category: "FirewallAdvancedThreatCategoryValue", # required
+    #           },
+    #           dns_threat_protection: {
+    #             value: "DnsThreatProtectionRuleTypeValue", # required
+    #             confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #           }
+    #         },
+    #         status: "FirewallRuleStatus",
+    #         status_message: "FirewallRuleStatusMessage"
+    #       }
+    #     ],
+    #     delete_errors: [
+    #       {
+    #         firewall_rule: {
+    #           firewall_rule_group_id: "ResourceId", # required
+    #           firewall_domain_list_id: "ResourceId",
+    #           firewall_threat_protection_id: "ResourceId",
+    #           qtype: "Qtype"
+    #         },
+    #         code: "String",
+    #         message: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchDeleteFirewallRuleResponse]
+    def batch_delete_firewall_rule(params = {}, options = {})
+      request = build_request(:batch_delete_firewall_rule, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates multiple DNS Firewall rules in the specified rule group.</p>
+    # @param [Hash, Types::BatchUpdateFirewallRuleRequest] params
+    # @option params [Array<Types::UpdateFirewallRuleEntry>] :update_firewall_rule_entries
+    #   <p>The list of firewall rules to update.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     update_firewall_rule_entries: [ # required
+    #       {
+    #         firewall_rule_group_id: "ResourceId", # required
+    #         firewall_domain_list_id: "ResourceId",
+    #         firewall_threat_protection_id: "ResourceId",
+    #         priority: 1,
+    #         action: "ALLOW" # One of: ["ALLOW", "BLOCK", "ALERT"],
+    #         block_response: "NODATA" # One of: ["NODATA", "NXDOMAIN", "OVERRIDE"],
+    #         block_override_domain: "BlockOverrideDomain",
+    #         block_override_dns_type: "CNAME" # One of: ["CNAME"],
+    #         block_override_ttl: 1,
+    #         name: "Name",
+    #         firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
+    #         qtype: "Qtype",
+    #         dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #         confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #         firewall_rule_type: {
+    #           partner_threat_protection: {
+    #             partner: "PartnerValue", # required
+    #           },
+    #           firewall_advanced_content_category: {
+    #             category: "FirewallAdvancedContentCategoryValue", # required
+    #           },
+    #           firewall_advanced_threat_category: {
+    #             category: "FirewallAdvancedThreatCategoryValue", # required
+    #           },
+    #           dns_threat_protection: {
+    #             value: "DnsThreatProtectionRuleTypeValue", # required
+    #             confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #           }
+    #         }
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_update_firewall_rule(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     updated_firewall_rules: [
+    #       {
+    #         firewall_rule_group_id: "ResourceId",
+    #         firewall_domain_list_id: "ResourceId",
+    #         firewall_threat_protection_id: "ResourceId",
+    #         name: "Name",
+    #         priority: 1,
+    #         action: "ALLOW" # One of: ["ALLOW", "BLOCK", "ALERT"],
+    #         block_response: "NODATA" # One of: ["NODATA", "NXDOMAIN", "OVERRIDE"],
+    #         block_override_domain: "BlockOverrideDomain",
+    #         block_override_dns_type: "CNAME" # One of: ["CNAME"],
+    #         block_override_ttl: 1,
+    #         creator_request_id: "CreatorRequestId",
+    #         creation_time: "Rfc3339TimeString",
+    #         modification_time: "Rfc3339TimeString",
+    #         firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
+    #         qtype: "Qtype",
+    #         dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #         confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #         firewall_rule_type: {
+    #           partner_threat_protection: {
+    #             partner: "PartnerValue", # required
+    #           },
+    #           firewall_advanced_content_category: {
+    #             category: "FirewallAdvancedContentCategoryValue", # required
+    #           },
+    #           firewall_advanced_threat_category: {
+    #             category: "FirewallAdvancedThreatCategoryValue", # required
+    #           },
+    #           dns_threat_protection: {
+    #             value: "DnsThreatProtectionRuleTypeValue", # required
+    #             confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #           }
+    #         },
+    #         status: "FirewallRuleStatus",
+    #         status_message: "FirewallRuleStatusMessage"
+    #       }
+    #     ],
+    #     update_errors: [
+    #       {
+    #         firewall_rule: {
+    #           firewall_rule_group_id: "ResourceId", # required
+    #           firewall_domain_list_id: "ResourceId",
+    #           firewall_threat_protection_id: "ResourceId",
+    #           priority: 1,
+    #           action: "ALLOW" # One of: ["ALLOW", "BLOCK", "ALERT"],
+    #           block_response: "NODATA" # One of: ["NODATA", "NXDOMAIN", "OVERRIDE"],
+    #           block_override_domain: "BlockOverrideDomain",
+    #           block_override_dns_type: "CNAME" # One of: ["CNAME"],
+    #           block_override_ttl: 1,
+    #           name: "Name",
+    #           firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
+    #           qtype: "Qtype",
+    #           dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #           confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #           firewall_rule_type: {
+    #             partner_threat_protection: {
+    #               partner: "PartnerValue", # required
+    #             },
+    #             firewall_advanced_content_category: {
+    #               category: "FirewallAdvancedContentCategoryValue", # required
+    #             },
+    #             firewall_advanced_threat_category: {
+    #               category: "FirewallAdvancedThreatCategoryValue", # required
+    #             },
+    #             dns_threat_protection: {
+    #               value: "DnsThreatProtectionRuleTypeValue", # required
+    #               confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #             }
+    #           }
+    #         },
+    #         code: "String",
+    #         message: "String"
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchUpdateFirewallRuleResponse]
+    def batch_update_firewall_rule(params = {}, options = {})
+      request = build_request(:batch_update_firewall_rule, params)
       request.send_request(options)
     end
 
@@ -444,7 +781,9 @@ module Aws::Route53Resolver
     #       managed_owner_name: "ServicePrinciple",
     #       creator_request_id: "CreatorRequestId",
     #       creation_time: "Rfc3339TimeString",
-    #       modification_time: "Rfc3339TimeString"
+    #       modification_time: "Rfc3339TimeString",
+    #       category: "Category",
+    #       managed_list_type: "THREAT" # One of: ["THREAT", "CONTENT"]
     #     }
     #   }
     # @return [Types::CreateFirewallDomainListResponse]
@@ -453,7 +792,22 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Creates a single DNS Firewall rule in the specified rule group, using the specified domain list.</p>
+    # <p>Creates a single DNS Firewall rule in the specified rule group. The rule can use any one of the following match sources, and the chosen source must be supplied through the matching request field — they are mutually exclusive:</p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <code>FirewallDomainListId</code> — match a customer-managed or Amazon Web Services-managed domain list.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>DnsThreatProtection</code> — match a built-in DNS Firewall Advanced threat detector (<code>DGA</code>, <code>DNS_TUNNELING</code>, or <code>DICTIONARY_DGA</code>).</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>FirewallRuleType</code> — match one of the rule-type variants returned by <a>ListFirewallRuleTypes</a>: <code>FirewallAdvancedContentCategory</code>, <code>FirewallAdvancedThreatCategory</code>, <code>DnsThreatProtection</code>, or <code>PartnerThreatProtection</code>. The <code>PartnerThreatProtection</code> variant requires an active Amazon Web Services Marketplace subscription to the named partner product.</p>
+    #             </li>
+    #          </ul>
+    #          <p>For rules that require asynchronous provisioning (today, the <code>PartnerThreatProtection</code> rule type), the rule's <code>Status</code> begins at <code>CREATING</code> and transitions to <code>COMPLETE</code> once the rule is provisioned and the marketplace entitlement is verified. If provisioning fails, <code>Status</code> becomes <code>CREATION_FAILED</code> and <code>StatusMessage</code> contains a human-readable reason; the rule is then immutable and must be removed with <a>DeleteFirewallRule</a>.</p>
     # @param [Hash, Types::CreateFirewallRuleRequest] params
     # @option params [String] :creator_request_id
     #   <p>A unique string that identifies the request and that allows you to retry failed requests
@@ -464,10 +818,10 @@ module Aws::Route53Resolver
     # @option params [String] :firewall_domain_list_id
     #   <p>The ID of the domain list that you want to use in the rule. Can't be used together with <code>DnsThreatProtecton</code>.</p>
     # @option params [Integer] :priority
-    #   <p>The setting that determines the processing order of the rule in the rule group. DNS Firewall 
+    #   <p>The setting that determines the processing order of the rule in the rule group. DNS Firewall
     #              processes the rules in a rule group by order of priority, starting from the lowest setting.</p>
-    #            <p>You must specify a unique priority for each rule in a rule group. 
-    #              To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You 
+    #            <p>You must specify a unique priority for each rule in a rule group.
+    #              To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You
     #      can change the priority setting for the rules in a rule group at any time.</p>
     # @option params [String] :action
     #   <p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list, or a threat in a DNS Firewall Advanced rule:</p>
@@ -516,13 +870,13 @@ module Aws::Route53Resolver
     #   <p>A name that lets you identify the rule in the rule group.</p>
     # @option params [String] :firewall_domain_redirection_action
     #   <p>
-    #   			How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME. 
+    #   			How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.
     #   		</p>
     #            <p>
-    #               <code>INSPECT_REDIRECTION_DOMAIN</code>: (Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be 
+    #               <code>INSPECT_REDIRECTION_DOMAIN</code>: (Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be
     #   			added to the domain list.</p>
     #            <p>
-    #               <code>TRUST_REDIRECTION_DOMAIN</code>: Inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to 
+    #               <code>TRUST_REDIRECTION_DOMAIN</code>: Inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to
     #   			the domain list.</p>
     # @option params [String] :qtype
     #   <p>
@@ -572,15 +926,29 @@ module Aws::Route53Resolver
     #               <li>
     #                  <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be
     #   				defined as TYPENUMBER, where the
-    #   				NUMBER can be 1-65334, for
-    #   				example, TYPE28. For more information, see 
+    #   				NUMBER can be 1-65534, for
+    #   				example, TYPE28. For more information, see
     #   				<a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types">List of DNS record types</a>.</p>
     #               </li>
     #            </ul>
     # @option params [String] :dns_threat_protection
     #   <p>
-    #   			Use to create a DNS Firewall Advanced rule.
+    #   			The type of the DNS Firewall Advanced rule. This setting is mutually exclusive with <code>FirewallDomainListId</code> and <code>FirewallRuleType</code>. Valid values are:
     #   		</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DGA</code>: Domain generation algorithms detection. DGAs are used by attackers to generate a large number of domains to launch malware attacks.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DNS_TUNNELING</code>: DNS tunneling detection. DNS tunneling is used by attackers to exfiltrate data from the client by using the DNS tunnel without making a network connection to the client.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DICTIONARY_DGA</code>: Dictionary-based domain generation algorithms detection. Dictionary DGAs use wordlists to generate domains that appear more legitimate, making them harder to detect than traditional DGAs.</p>
+    #               </li>
+    #            </ul>
     # @option params [String] :confidence_threshold
     #   <p>
     #   			The confidence threshold for DNS Firewall Advanced. You must provide this value when you create a DNS Firewall Advanced rule. The confidence
@@ -600,6 +968,27 @@ module Aws::Route53Resolver
     #                     <code>HIGH</code>: Detects only the most well corroborated threats with a low rate of false positives. </p>
     #               </li>
     #            </ul>
+    # @option params [Types::FirewallRuleType] :firewall_rule_type
+    #   <p>The rule type configuration for the firewall rule. This is a tagged union — set exactly one of its members. This setting is mutually exclusive with the top-level <code>FirewallDomainListId</code> and <code>DnsThreatProtection</code> fields. Use one of:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>FirewallAdvancedContentCategory</code> — match an Amazon Web Services-managed content category (for example, <code>VIOLENCE_AND_HATE_SPEECH</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FirewallAdvancedThreatCategory</code> — match an Amazon Web Services-managed advanced threat category (for example, <code>PHISHING</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DnsThreatProtection</code> — match a built-in DNS Firewall Advanced threat detector (<code>DGA</code>, <code>DNS_TUNNELING</code>, or <code>DICTIONARY_DGA</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PartnerThreatProtection</code> — match a third-party threat feed delivered through Amazon Web Services Marketplace. The selected partner must be an active subscription on the calling account.</p>
+    #               </li>
+    #            </ul>
+    #            <p>To enumerate the values supported in your account, call <a>ListFirewallRuleTypes</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     creator_request_id: "CreatorRequestId", # required
@@ -614,8 +1003,23 @@ module Aws::Route53Resolver
     #     name: "Name", # required
     #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
     #     qtype: "Qtype",
-    #     dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING"],
-    #     confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #     dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #     confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #     firewall_rule_type: {
+    #       partner_threat_protection: {
+    #         partner: "PartnerValue", # required
+    #       },
+    #       firewall_advanced_content_category: {
+    #         category: "FirewallAdvancedContentCategoryValue", # required
+    #       },
+    #       firewall_advanced_threat_category: {
+    #         category: "FirewallAdvancedThreatCategoryValue", # required
+    #       },
+    #       dns_threat_protection: {
+    #         value: "DnsThreatProtectionRuleTypeValue", # required
+    #         confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.create_firewall_rule(params, options)
@@ -638,8 +1042,25 @@ module Aws::Route53Resolver
     #       modification_time: "Rfc3339TimeString",
     #       firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
     #       qtype: "Qtype",
-    #       dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING"],
-    #       confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #       dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #       confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #       firewall_rule_type: {
+    #         partner_threat_protection: {
+    #           partner: "PartnerValue", # required
+    #         },
+    #         firewall_advanced_content_category: {
+    #           category: "FirewallAdvancedContentCategoryValue", # required
+    #         },
+    #         firewall_advanced_threat_category: {
+    #           category: "FirewallAdvancedThreatCategoryValue", # required
+    #         },
+    #         dns_threat_protection: {
+    #           value: "DnsThreatProtectionRuleTypeValue", # required
+    #           confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #         }
+    #       },
+    #       status: "FirewallRuleStatus",
+    #       status_message: "FirewallRuleStatusMessage"
     #     }
     #   }
     # @return [Types::CreateFirewallRuleResponse]
@@ -648,7 +1069,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Creates an empty DNS Firewall rule group for filtering DNS network traffic in a VPC. You can add rules to the new rule group 
+    # <p>Creates an empty DNS Firewall rule group for filtering DNS network traffic in a VPC. You can add rules to the new rule group
     #            by calling <a>CreateFirewallRule</a>. </p>
     # @param [Hash, Types::CreateFirewallRuleGroupRequest] params
     # @option params [String] :creator_request_id
@@ -696,18 +1117,22 @@ module Aws::Route53Resolver
     end
 
     # <p>Creates a Route 53 Resolver on an Outpost.</p>
+    #          <note>
+    #             <p>This operation applies to first-generation Outposts only. On second-generation Outposts, Resolver
+    # 				is enabled by default and managed automatically by Amazon Web Services, so you don't need to create it.</p>
+    #          </note>
     # @param [Hash, Types::CreateOutpostResolverRequest] params
     # @option params [String] :creator_request_id
-    #   <p>A unique string that identifies the request 
+    #   <p>A unique string that identifies the request
     #   		and that allows failed requests to be retried without the risk of running the operation twice. </p>
     #            <p>
     #               <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp.</p>
     # @option params [String] :name
-    #   <p>A friendly name that lets you easily find a configuration in the 
+    #   <p>A friendly name that lets you easily find a configuration in the
     #   		Resolver dashboard in the Route 53 console.</p>
     # @option params [Integer] :instance_count
     #   <p>Number of Amazon EC2 instances for the
-    #   		Resolver on Outpost. 
+    #   		Resolver on Outpost.
     #   		The default and minimal value is 4.</p>
     # @option params [String] :preferred_instance_type
     #   <p>
@@ -761,11 +1186,11 @@ module Aws::Route53Resolver
     # <p>Creates a Resolver endpoint. There are two types of Resolver endpoints, inbound and outbound:</p>
     #          <ul>
     #             <li>
-    #                <p>An <i>inbound Resolver endpoint</i> forwards DNS queries to the DNS service for a VPC 
+    #                <p>An <i>inbound Resolver endpoint</i> forwards DNS queries to the DNS service for a VPC
     # 				from your network.</p>
     #             </li>
     #             <li>
-    #                <p>An <i>outbound Resolver endpoint</i> forwards DNS queries from the DNS service for a VPC 
+    #                <p>An <i>outbound Resolver endpoint</i> forwards DNS queries from the DNS service for a VPC
     # 				to your network.</p>
     #             </li>
     #          </ul>
@@ -777,13 +1202,13 @@ module Aws::Route53Resolver
     # @option params [String] :name
     #   <p>A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.</p>
     # @option params [Array<String>] :security_group_ids
-    #   <p>The ID of one or more security groups that you want to use to control access to this VPC. The security group that you specify 
-    #   			must include one or more inbound rules (for inbound Resolver endpoints) or outbound rules (for outbound Resolver endpoints). 
-    #   			Inbound and outbound rules must allow TCP and UDP access. For inbound access, open port 53. For outbound access, open the port 
+    #   <p>The ID of one or more security groups that you want to use to control access to this VPC. The security group that you specify
+    #   			must include one or more inbound rules (for inbound Resolver endpoints) or outbound rules (for outbound Resolver endpoints).
+    #   			Inbound and outbound rules must allow TCP and UDP access. For inbound access, open port 53. For outbound access, open the port
     #   			that you're using for DNS queries on your network.</p>
-    #            <p>Some security group rules will cause your connection to be tracked. For outbound resolver endpoint, it can potentially impact the 
-    #   			maximum queries per second from outbound endpoint to your target name server. For inbound resolver endpoint, it can bring down the overall maximum queries per second per IP address to as low as 1500. 
-    #   			To avoid connection tracking caused by security group, see  
+    #            <p>Some security group rules will cause your connection to be tracked. For outbound resolver endpoint, it can potentially impact the
+    #   			maximum queries per second from outbound endpoint to your target name server. For inbound resolver endpoint, it can bring down the overall maximum queries per second per IP address to as low as 1500.
+    #   			To avoid connection tracking caused by security group, see
     #   			<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#untracked-connectionsl">Untracked connections</a>.</p>
     # @option params [String] :direction
     #   <p>Specify the applicable value:</p>
@@ -802,14 +1227,22 @@ module Aws::Route53Resolver
     #               </li>
     #            </ul>
     # @option params [Array<Types::IpAddressRequest>] :ip_addresses
-    #   <p>The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward 
+    #   <p>The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward
     #   			DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC. </p>
     #            <note>
     #               <p>Even though the minimum is 1, Route 53 requires that you create at least two.</p>
     #            </note>
+    #            <p>We recommend using <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/outpost-resolver-getting-started.html">VPC Resolver on Outposts</a> to create endpoints on Outposts Racks.</p>
+    #            <important>
+    #               <p>Outposts subnets with <a href="https://docs.aws.amazon.com/outposts/latest/server-userguide/local-network-interface.html">Local Network Interface (LNI)</a> enabled are not compatible with Route 53 Resolver endpoints. If you enable LNI on a subnet that contains Route 53 Resolver endpoint elastic network interfaces (ENIs), those ENIs will stop functioning. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver.html#best-practices-resolver-subnet-compatibility">Subnet compatibility for Resolver endpoints</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>
+    #            </important>
     # @option params [String] :outpost_arn
     #   <p>The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must also specify a
     #   			value for the <code>PreferredInstanceType</code>. </p>
+    #            <note>
+    #               <p>Resolver endpoints on Outposts are supported on first-generation Outposts only. Inbound and outbound
+    #   				Resolver endpoints aren't supported on second-generation Outposts.</p>
+    #            </note>
     # @option params [String] :preferred_instance_type
     #   <p>The  instance type. If you specify this, you must also specify a value for the <code>OutpostArn</code>.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -861,6 +1294,38 @@ module Aws::Route53Resolver
     #                  <p>None, which is treated as Do53.</p>
     #               </li>
     #            </ul>
+    # @option params [Boolean] :rni_enhanced_metrics_enabled
+    #   <p>Specifies whether RNI enhanced metrics are enabled for the Resolver endpoints.
+    #   		When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint.
+    #   		When set to false, metrics are not published. Default is false.</p>
+    #            <note>
+    #               <p>Standard CloudWatch pricing and charges are applied for using the Route 53 Resolver
+    #   	endpoint RNI enhanced metrics. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html">Detailed metrics</a>.</p>
+    #            </note>
+    # @option params [Boolean] :target_name_server_metrics_enabled
+    #   <p>Specifies whether target name server metrics are enabled for the outbound Resolver endpoints.
+    #   		When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint.
+    #   		When set to false, metrics are not published. Default is false. This is not supported for inbound Resolver endpoints.</p>
+    #            <note>
+    #               <p>Standard CloudWatch pricing and charges are applied for using the Route 53 Resolver
+    #   	endpoint target name server metrics. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html">Detailed metrics</a>.</p>
+    #            </note>
+    # @option params [Boolean] :dns64_enabled
+    #   <p>Specifies whether DNS64 is enabled for the inbound Resolver endpoint. When set to <code>true</code>, Route 53 Resolver
+    #   			synthesizes AAAA (IPv6) records for IPv4-only services by prepending the <code>64:ff9b::/96</code> prefix to the IPv4 address.
+    #   			This enables IPv6-only clients that send queries through the inbound endpoint to reach IPv4-only services.
+    #   			DNS64 works with NAT64 to provide complete IPv6-to-IPv4 translation. Default is false.</p>
+    # @option params [Boolean] :ipv6_internet_access_enabled
+    #   <p>Specifies whether IPv6 internet access is enabled for the outbound Resolver endpoint. When set to <code>true</code>,
+    #   			the endpoint elastic network interfaces (ENIs) can forward DNS queries to public IPv6 targets through an internet gateway.
+    #   			Default is false.</p>
+    #            <important>
+    #               <p>When you enable IPv6 internet access, use network controls like security groups, NACLs, or egress-only internet gateways
+    #   				to protect the endpoint ENIs from unsolicited ingress traffic. Be aware that some network controls can affect DNS query
+    #   				throughput due to connection tracking. For more information, see
+    #   				<a href="https://docs.aws.amazon.com/ec2/latest/userguide/security-group-connection-tracking.html">Amazon EC2 security group connection tracking</a>
+    #   				and <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver-endpoint-scaling.html">Resolver endpoint scaling</a>.</p>
+    #            </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     creator_request_id: "CreatorRequestId", # required
@@ -883,7 +1348,11 @@ module Aws::Route53Resolver
     #       }
     #     ],
     #     resolver_endpoint_type: "IPV6" # One of: ["IPV6", "IPV4", "DUALSTACK"],
-    #     protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]]
+    #     protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]],
+    #     rni_enhanced_metrics_enabled: false,
+    #     target_name_server_metrics_enabled: false,
+    #     dns64_enabled: false,
+    #     ipv6_internet_access_enabled: false
     #   }
     #   options = {}
     #   response = client.create_resolver_endpoint(params, options)
@@ -906,7 +1375,11 @@ module Aws::Route53Resolver
     #       outpost_arn: "OutpostArn",
     #       preferred_instance_type: "OutpostInstanceType",
     #       resolver_endpoint_type: "IPV6" # One of: ["IPV6", "IPV4", "DUALSTACK"],
-    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]]
+    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]],
+    #       rni_enhanced_metrics_enabled: false,
+    #       target_name_server_metrics_enabled: false,
+    #       dns64_enabled: false,
+    #       ipv6_internet_access_enabled: false
     #     }
     #   }
     # @return [Types::CreateResolverEndpointResponse]
@@ -915,18 +1388,18 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Creates a Resolver query logging configuration, which defines where you want Resolver to save DNS query logs that originate in your VPCs. 
+    # <p>Creates a Resolver query logging configuration, which defines where you want Resolver to save DNS query logs that originate in your VPCs.
     # 			Resolver can log queries only for VPCs that are in the same Region as the query logging configuration.</p>
-    #          <p>To specify which VPCs you want to log queries for, you use <code>AssociateResolverQueryLogConfig</code>. For more information, see 
+    #          <p>To specify which VPCs you want to log queries for, you use <code>AssociateResolverQueryLogConfig</code>. For more information, see
     # 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html">AssociateResolverQueryLogConfig</a>. </p>
-    #          <p>You can optionally use Resource Access Manager (RAM) to share a query logging configuration with other Amazon Web Services accounts. The other accounts 
-    # 			can then associate VPCs with the configuration. The query logs that Resolver creates for a configuration include all DNS queries that originate in all 
+    #          <p>You can optionally use Resource Access Manager (RAM) to share a query logging configuration with other Amazon Web Services accounts. The other accounts
+    # 			can then associate VPCs with the configuration. The query logs that Resolver creates for a configuration include all DNS queries that originate in all
     # 			VPCs that are associated with the configuration.</p>
     # @param [Hash, Types::CreateResolverQueryLogConfigRequest] params
     # @option params [String] :name
     #   <p>The name that you want to give the query logging configuration.</p>
     # @option params [String] :destination_arn
-    #   <p>The ARN of the resource that you want Resolver to send query logs. You can send query logs to an S3 bucket, a CloudWatch Logs log group, 
+    #   <p>The ARN of the resource that you want Resolver to send query logs. You can send query logs to an S3 bucket, a CloudWatch Logs log group,
     #   			or a Kinesis Data Firehose delivery stream. Examples of valid values include the following:</p>
     #            <ul>
     #               <li>
@@ -997,7 +1470,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>For DNS queries that originate in your VPCs, specifies which Resolver endpoint the queries pass through, 
+    # <p>For DNS queries that originate in your VPCs, specifies which Resolver endpoint the queries pass through,
     # 			one domain name that you want to forward to your network, and the IP addresses of the DNS resolvers in your network.</p>
     # @param [Hash, Types::CreateResolverRuleRequest] params
     # @option params [String] :creator_request_id
@@ -1006,30 +1479,37 @@ module Aws::Route53Resolver
     #   			any unique string, for example, a date/time stamp. </p>
     # @option params [String] :name
     #   <p>A friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.</p>
+    #            <p>The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.</p>
     # @option params [String] :rule_type
     #   <p>When you want to forward DNS queries for specified domain name to resolvers on your network, specify <code>FORWARD</code> or <code>DELEGATE</code>.</p>
-    #            <p>When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for 
+    #            <p>When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for
     #   			a subdomain of that domain, specify <code>SYSTEM</code>.</p>
-    #            <p>For example, to forward DNS queries for example.com to resolvers on your network, you create a rule and specify <code>FORWARD</code> 
-    #   			for <code>RuleType</code>. To then have Resolver process queries for apex.example.com, you create a rule and specify 
+    #            <p>For example, to forward DNS queries for example.com to resolvers on your network, you create a rule and specify <code>FORWARD</code>
+    #   			for <code>RuleType</code>. To then have Resolver process queries for apex.example.com, you create a rule and specify
     #   			<code>SYSTEM</code> for <code>RuleType</code>.</p>
     #            <p>Currently, only Resolver can create rules that have a value of <code>RECURSIVE</code> for <code>RuleType</code>.</p>
     # @option params [String] :domain_name
-    #   <p>DNS queries for this domain name are forwarded to the IP addresses that you specify in <code>TargetIps</code>. If a query matches 
-    #   			multiple Resolver rules (example.com and www.example.com), outbound DNS queries are routed using the Resolver rule that contains 
+    #   <p>DNS queries for this domain name are forwarded to the IP addresses that you specify in <code>TargetIps</code>. If a query matches
+    #   			multiple Resolver rules (example.com and www.example.com), outbound DNS queries are routed using the Resolver rule that contains
     #   			the most specific domain name (www.example.com).</p>
     # @option params [Array<Types::TargetAddress>] :target_ips
     #   <p>The IPs that you want Resolver to forward DNS queries to. You can specify either Ipv4 or Ipv6 addresses but not both in the same rule. Separate IP addresses with a space.</p>
     #            <p>
-    #               <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>
+    #               <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.
+    #   			You should not provide TargetIps when the Rule type is <code>DELEGATE</code>.</p>
+    #            <note>
+    #               <p>when creating a DELEGATE rule, you must not provide the <code>TargetIps</code> parameter. If you provide the <code>TargetIps</code>,
+    #   			you may receive an ERROR message similar to "Delegate resolver rules need to specify a nameserver name".
+    #   			This error means you should not provide <code>TargetIps</code>.</p>
+    #            </note>
     # @option params [String] :resolver_endpoint_id
-    #   <p>The ID of the outbound Resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify 
+    #   <p>The ID of the outbound Resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify
     #   			in <code>TargetIps</code>.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>A list of the tag keys and values that you want to associate with the endpoint.</p>
     # @option params [String] :delegation_record
     #   <p>
-    #   			DNS queries with the delegation records that match this domain name are forwarded to the resolvers on your 
+    #   			DNS queries with the delegation records that match this domain name are forwarded to the resolvers on your
     #   			network.
     #   		</p>
     # @example Request syntax with placeholder values
@@ -1116,7 +1596,9 @@ module Aws::Route53Resolver
     #       managed_owner_name: "ServicePrinciple",
     #       creator_request_id: "CreatorRequestId",
     #       creation_time: "Rfc3339TimeString",
-    #       modification_time: "Rfc3339TimeString"
+    #       modification_time: "Rfc3339TimeString",
+    #       category: "Category",
+    #       managed_list_type: "THREAT" # One of: ["THREAT", "CONTENT"]
     #     }
     #   }
     # @return [Types::DeleteFirewallDomainListResponse]
@@ -1125,7 +1607,9 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Deletes the specified firewall rule.</p>
+    # <p>Deletes the specified firewall rule. Identify the rule using either <code>FirewallDomainListId</code> (for domain-list and DNS Firewall Advanced rules) or <code>FirewallThreatProtectionId</code> (for partner-managed and DNS Firewall Advanced rules) — together with <code>FirewallRuleGroupId</code>.</p>
+    #          <p>
+    #             <code>DeleteFirewallRule</code> is the only operation that succeeds against a rule whose <code>Status</code> is <code>CREATION_FAILED</code>.</p>
     # @param [Hash, Types::DeleteFirewallRuleRequest] params
     # @option params [String] :firewall_rule_group_id
     #   <p>The unique identifier of the firewall rule group that you want to delete the rule from. </p>
@@ -1183,8 +1667,8 @@ module Aws::Route53Resolver
     #               <li>
     #                  <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be
     #   				defined as TYPENUMBER, where the
-    #   				NUMBER can be 1-65334, for
-    #   				example, TYPE28. For more information, see 
+    #   				NUMBER can be 1-65534, for
+    #   				example, TYPE28. For more information, see
     #   				<a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types">List of DNS record types</a>.</p>
     #               </li>
     #            </ul>
@@ -1216,8 +1700,25 @@ module Aws::Route53Resolver
     #       modification_time: "Rfc3339TimeString",
     #       firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
     #       qtype: "Qtype",
-    #       dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING"],
-    #       confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #       dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #       confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #       firewall_rule_type: {
+    #         partner_threat_protection: {
+    #           partner: "PartnerValue", # required
+    #         },
+    #         firewall_advanced_content_category: {
+    #           category: "FirewallAdvancedContentCategoryValue", # required
+    #         },
+    #         firewall_advanced_threat_category: {
+    #           category: "FirewallAdvancedThreatCategoryValue", # required
+    #         },
+    #         dns_threat_protection: {
+    #           value: "DnsThreatProtectionRuleTypeValue", # required
+    #           confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #         }
+    #       },
+    #       status: "FirewallRuleStatus",
+    #       status_message: "FirewallRuleStatusMessage"
     #     }
     #   }
     # @return [Types::DeleteFirewallRuleResponse]
@@ -1260,6 +1761,11 @@ module Aws::Route53Resolver
     end
 
     # <p>Deletes a Resolver on the Outpost.</p>
+    #          <note>
+    #             <p>This operation applies to first-generation Outposts only. On second-generation Outposts, Resolver
+    # 				is managed automatically by Amazon Web Services and can't be deleted directly. To opt out of Resolver on
+    # 				second-generation Outposts, contact Amazon Web Services Support.</p>
+    #          </note>
     # @param [Hash, Types::DeleteOutpostResolverRequest] params
     # @option params [String] :id
     #   <p>A unique string that identifies the Resolver on the Outpost.</p>
@@ -1292,12 +1798,12 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Deletes a Resolver endpoint. The effect of deleting a Resolver endpoint depends on whether it's an inbound or an outbound 
+    # <p>Deletes a Resolver endpoint. The effect of deleting a Resolver endpoint depends on whether it's an inbound or an outbound
     # 			Resolver endpoint:</p>
     #          <ul>
     #             <li>
     #                <p>
-    #                   <b>Inbound</b>: DNS queries from your network are no longer routed 
+    #                   <b>Inbound</b>: DNS queries from your network are no longer routed
     # 				to the DNS service for the specified VPC.</p>
     #             </li>
     #             <li>
@@ -1333,7 +1839,11 @@ module Aws::Route53Resolver
     #       outpost_arn: "OutpostArn",
     #       preferred_instance_type: "OutpostInstanceType",
     #       resolver_endpoint_type: "IPV6" # One of: ["IPV6", "IPV4", "DUALSTACK"],
-    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]]
+    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]],
+    #       rni_enhanced_metrics_enabled: false,
+    #       target_name_server_metrics_enabled: false,
+    #       dns64_enabled: false,
+    #       ipv6_internet_access_enabled: false
     #     }
     #   }
     # @return [Types::DeleteResolverEndpointResponse]
@@ -1342,14 +1852,14 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Deletes a query logging configuration. When you delete a configuration, Resolver stops logging DNS queries for all of the Amazon VPCs that are 
-    # 			associated with the configuration. This also applies if the query logging configuration is shared with other Amazon Web Services accounts, and 
+    # <p>Deletes a query logging configuration. When you delete a configuration, Resolver stops logging DNS queries for all of the Amazon VPCs that are
+    # 			associated with the configuration. This also applies if the query logging configuration is shared with other Amazon Web Services accounts, and
     # 			the other accounts have associated VPCs with the shared configuration.</p>
-    #          <p>Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. See 
+    #          <p>Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. See
     # 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverQueryLogConfig.html">DisassociateResolverQueryLogConfig</a>.</p>
-    #          <p>If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, you must stop sharing 
-    # 			the configuration before you can delete a configuration. The accounts that you shared the configuration with can first disassociate VPCs 
-    # 			that they associated with the configuration, but that's not necessary. If you stop sharing the configuration, those VPCs are automatically 
+    #          <p>If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, you must stop sharing
+    # 			the configuration before you can delete a configuration. The accounts that you shared the configuration with can first disassociate VPCs
+    # 			that they associated with the configuration, but that's not necessary. If you stop sharing the configuration, those VPCs are automatically
     # 			disassociated from the configuration.</p>
     # @param [Hash, Types::DeleteResolverQueryLogConfigRequest] params
     # @option params [String] :resolver_query_log_config_id
@@ -1382,8 +1892,8 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Deletes a Resolver rule. Before you can delete a Resolver rule, you must disassociate it from all the VPCs that you 
-    # 			associated the Resolver rule with. For more information, see 
+    # <p>Deletes a Resolver rule. Before you can delete a Resolver rule, you must disassociate it from all the VPCs that you
+    # 			associated the Resolver rule with. For more information, see
     # 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html">DisassociateResolverRule</a>.</p>
     # @param [Hash, Types::DeleteResolverRuleRequest] params
     # @option params [String] :resolver_rule_id
@@ -1464,9 +1974,9 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Removes IP addresses from an inbound or an outbound Resolver endpoint. If you want to remove more than one IP address, 
+    # <p>Removes IP addresses from an inbound or an outbound Resolver endpoint. If you want to remove more than one IP address,
     # 			submit one <code>DisassociateResolverEndpointIpAddress</code> request for each IP address.</p>
-    #          <p>To add an IP address to an endpoint, see 
+    #          <p>To add an IP address to an endpoint, see
     # 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverEndpointIpAddress.html">AssociateResolverEndpointIpAddress</a>.
     # 		</p>
     # @param [Hash, Types::DisassociateResolverEndpointIpAddressRequest] params
@@ -1505,7 +2015,11 @@ module Aws::Route53Resolver
     #       outpost_arn: "OutpostArn",
     #       preferred_instance_type: "OutpostInstanceType",
     #       resolver_endpoint_type: "IPV6" # One of: ["IPV6", "IPV4", "DUALSTACK"],
-    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]]
+    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]],
+    #       rni_enhanced_metrics_enabled: false,
+    #       target_name_server_metrics_enabled: false,
+    #       dns64_enabled: false,
+    #       ipv6_internet_access_enabled: false
     #     }
     #   }
     # @return [Types::DisassociateResolverEndpointIpAddressResponse]
@@ -1562,7 +2076,7 @@ module Aws::Route53Resolver
 
     # <p>Removes the association between a specified Resolver rule and a specified VPC.</p>
     #          <important>
-    #             <p>If you disassociate a Resolver rule from a VPC, Resolver stops forwarding DNS queries for the 
+    #             <p>If you disassociate a Resolver rule from a VPC, Resolver stops forwarding DNS queries for the
     # 				domain name that you specified in the Resolver rule. </p>
     #          </important>
     # @param [Hash, Types::DisassociateResolverRuleRequest] params
@@ -1645,7 +2159,9 @@ module Aws::Route53Resolver
     #       managed_owner_name: "ServicePrinciple",
     #       creator_request_id: "CreatorRequestId",
     #       creation_time: "Rfc3339TimeString",
-    #       modification_time: "Rfc3339TimeString"
+    #       modification_time: "Rfc3339TimeString",
+    #       category: "Category",
+    #       managed_list_type: "THREAT" # One of: ["THREAT", "CONTENT"]
     #     }
     #   }
     # @return [Types::GetFirewallDomainListResponse]
@@ -1831,7 +2347,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Gets information about a specified Resolver endpoint, such as whether it's an inbound or an outbound Resolver endpoint, and the 
+    # <p>Gets information about a specified Resolver endpoint, such as whether it's an inbound or an outbound Resolver endpoint, and the
     # 			current status of the endpoint.</p>
     # @param [Hash, Types::GetResolverEndpointRequest] params
     # @option params [String] :resolver_endpoint_id
@@ -1861,7 +2377,11 @@ module Aws::Route53Resolver
     #       outpost_arn: "OutpostArn",
     #       preferred_instance_type: "OutpostInstanceType",
     #       resolver_endpoint_type: "IPV6" # One of: ["IPV6", "IPV4", "DUALSTACK"],
-    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]]
+    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]],
+    #       rni_enhanced_metrics_enabled: false,
+    #       target_name_server_metrics_enabled: false,
+    #       dns64_enabled: false,
+    #       ipv6_internet_access_enabled: false
     #     }
     #   }
     # @return [Types::GetResolverEndpointResponse]
@@ -1870,7 +2390,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Gets information about a specified Resolver query logging configuration, such as the number of VPCs that the configuration 
+    # <p>Gets information about a specified Resolver query logging configuration, such as the number of VPCs that the configuration
     # 			is logging queries for and the location that logs are sent to. </p>
     # @param [Hash, Types::GetResolverQueryLogConfigRequest] params
     # @option params [String] :resolver_query_log_config_id
@@ -1903,7 +2423,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Gets information about a specified association between a Resolver query logging configuration and an Amazon VPC. When you associate a VPC 
+    # <p>Gets information about a specified association between a Resolver query logging configuration and an Amazon VPC. When you associate a VPC
     # 			with a query logging configuration, Resolver logs DNS queries that originate in that VPC.</p>
     # @param [Hash, Types::GetResolverQueryLogConfigAssociationRequest] params
     # @option params [String] :resolver_query_log_config_association_id
@@ -1933,7 +2453,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Gets information about a query logging policy. A query logging policy specifies the Resolver query logging 
+    # <p>Gets information about a query logging policy. A query logging policy specifies the Resolver query logging
     # 			operations and resources that you want to allow another Amazon Web Services account to be able to use.</p>
     # @param [Hash, Types::GetResolverQueryLogConfigPolicyRequest] params
     # @option params [String] :arn
@@ -1955,7 +2475,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Gets information about a specified Resolver rule, such as the domain name that the rule forwards DNS queries for and the ID of the 
+    # <p>Gets information about a specified Resolver rule, such as the domain name that the rule forwards DNS queries for and the ID of the
     # 			outbound Resolver endpoint that the rule is associated with.</p>
     # @param [Hash, Types::GetResolverRuleRequest] params
     # @option params [String] :resolver_rule_id
@@ -2001,7 +2521,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Gets information about an association between a specified Resolver rule and a VPC. You associate a Resolver rule and a VPC using 
+    # <p>Gets information about an association between a specified Resolver rule and a VPC. You associate a Resolver rule and a VPC using
     # 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html">AssociateResolverRule</a>. </p>
     # @param [Hash, Types::GetResolverRuleAssociationRequest] params
     # @option params [String] :resolver_rule_association_id
@@ -2030,7 +2550,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Gets information about the Resolver rule policy for a specified rule. A Resolver rule policy includes the rule that you want to share 
+    # <p>Gets information about the Resolver rule policy for a specified rule. A Resolver rule policy includes the rule that you want to share
     # 			with another account, the account that you want to share the rule with, and the Resolver operations that you want to allow the account to use. </p>
     # @param [Hash, Types::GetResolverRulePolicyRequest] params
     # @option params [String] :arn
@@ -2110,9 +2630,9 @@ module Aws::Route53Resolver
     #            <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>
     # @option params [String] :next_token
     #   <p>For the first call to this list request, omit this value.</p>
-    #            <p>When you request a list of objects, Resolver returns at most the number of objects 
+    #            <p>When you request a list of objects, Resolver returns at most the number of objects
     #          specified in <code>MaxResults</code>. If more objects are available for retrieval,
-    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next 
+    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2150,9 +2670,9 @@ module Aws::Route53Resolver
     #            <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>
     # @option params [String] :next_token
     #   <p>For the first call to this list request, omit this value.</p>
-    #            <p>When you request a list of objects, Resolver returns at most the number of objects 
+    #            <p>When you request a list of objects, Resolver returns at most the number of objects
     #          specified in <code>MaxResults</code>. If more objects are available for retrieval,
-    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next 
+    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2171,7 +2691,9 @@ module Aws::Route53Resolver
     #         arn: "Arn",
     #         name: "Name",
     #         creator_request_id: "CreatorRequestId",
-    #         managed_owner_name: "ServicePrinciple"
+    #         managed_owner_name: "ServicePrinciple",
+    #         managed_list_type: "THREAT" # One of: ["THREAT", "CONTENT"],
+    #         category: "Category"
     #       }
     #     ]
     #   }
@@ -2193,9 +2715,9 @@ module Aws::Route53Resolver
     #            <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>
     # @option params [String] :next_token
     #   <p>For the first call to this list request, omit this value.</p>
-    #            <p>When you request a list of objects, Resolver returns at most the number of objects 
+    #            <p>When you request a list of objects, Resolver returns at most the number of objects
     #          specified in <code>MaxResults</code>. If more objects are available for retrieval,
-    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next 
+    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2239,9 +2761,9 @@ module Aws::Route53Resolver
     #            <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>
     # @option params [String] :next_token
     #   <p>For the first call to this list request, omit this value.</p>
-    #            <p>When you request a list of objects, Resolver returns at most the number of objects 
+    #            <p>When you request a list of objects, Resolver returns at most the number of objects
     #          specified in <code>MaxResults</code>. If more objects are available for retrieval,
-    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next 
+    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2292,9 +2814,9 @@ module Aws::Route53Resolver
     #            <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>
     # @option params [String] :next_token
     #   <p>For the first call to this list request, omit this value.</p>
-    #            <p>When you request a list of objects, Resolver returns at most the number of objects 
+    #            <p>When you request a list of objects, Resolver returns at most the number of objects
     #          specified in <code>MaxResults</code>. If more objects are available for retrieval,
-    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next 
+    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2324,14 +2846,55 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Retrieves the firewall rules that you have defined for the specified firewall rule group. DNS Firewall uses the rules in a rule group to filter DNS network traffic for a VPC. </p>
-    #          <p>A single call might return only a partial list of the rules. For information, see <code>MaxResults</code>. </p>
+    # <p>Retrieves the rule-type variants that can be used in the <code>FirewallRuleType</code> field of <a>CreateFirewallRule</a> and <a>UpdateFirewallRule</a>. Each returned <a>FirewallRuleTypeDefinition</a> identifies one variant + value combination — for example, <code>FirewallAdvancedContentCategory</code> + <code>VIOLENCE_AND_HATE_SPEECH</code>, or <code>PartnerThreatProtection</code> + a partner-managed feed.</p>
+    #          <p>The supported <code>RuleType</code> filter values are <code>FirewallAdvancedContentCategory</code>, <code>FirewallAdvancedThreatCategory</code>, <code>DnsThreatProtection</code>, and <code>PartnerThreatProtection</code>. When a returned definition's variant requires an external subscription (currently only <code>PartnerThreatProtection</code>), the response also includes a <a>SubscriptionInfo</a> identifying the Amazon Web Services Marketplace product that backs it; absence of <code>SubscriptionInfo</code> means the variant is fully managed by Amazon Web Services and requires no separate subscription.</p>
+    # @param [Hash, Types::ListFirewallRuleTypesRequest] params
+    # @option params [String] :rule_type
+    #   <p>An optional filter that restricts the response to a single <a>FirewallRuleType</a> variant. Supported values: <code>FirewallAdvancedContentCategory</code>, <code>FirewallAdvancedThreatCategory</code>, <code>DnsThreatProtection</code>, and <code>PartnerThreatProtection</code>. If omitted, definitions across all variants are returned.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
+    # @option params [String] :next_token
+    #   <p>For the first call to this list request, omit this value. When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver provides a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     rule_type: "RuleTypeName",
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_firewall_rule_types(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     firewall_rule_types: [
+    #       {
+    #         rule_type: "RuleTypeName",
+    #         value: "RuleTypeValue",
+    #         display_name: "DisplayName",
+    #         description: "RuleTypeDescription",
+    #         subscription_info: {
+    #           vendor_name: "VendorName",
+    #           product_id: "ProductId"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListFirewallRuleTypesResponse]
+    def list_firewall_rule_types(params = {}, options = {})
+      request = build_request(:list_firewall_rule_types, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the firewall rules that you have defined for the specified firewall rule group. DNS Firewall uses the rules in a rule group to filter DNS network traffic for a VPC.</p>
+    #          <p>A single call might return only a partial list of the rules. For information, see <code>MaxResults</code>.</p>
+    #          <p>For rules that require asynchronous provisioning, the response includes <code>Status</code> (see <a>FirewallRuleStatus</a>) and, on failure, <code>StatusMessage</code> with the reason.</p>
     # @param [Hash, Types::ListFirewallRulesRequest] params
     # @option params [String] :firewall_rule_group_id
     #   <p>The unique identifier of the firewall rule group that you want to retrieve the rules for. </p>
     # @option params [Integer] :priority
     #   <p>Optional additional filter for the rules to retrieve.</p>
-    #            <p>The setting that determines the processing order of the rules in a rule group. DNS Firewall 
+    #            <p>The setting that determines the processing order of the rules in a rule group. DNS Firewall
     #              processes the rules in a rule group by order of priority, starting from the lowest setting.</p>
     # @option params [String] :action
     #   <p>Optional additional filter for the rules to retrieve.</p>
@@ -2357,9 +2920,9 @@ module Aws::Route53Resolver
     #            <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>
     # @option params [String] :next_token
     #   <p>For the first call to this list request, omit this value.</p>
-    #            <p>When you request a list of objects, Resolver returns at most the number of objects 
+    #            <p>When you request a list of objects, Resolver returns at most the number of objects
     #          specified in <code>MaxResults</code>. If more objects are available for retrieval,
-    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next 
+    #              Resolver returns a <code>NextToken</code> value in the response. To retrieve the next
     #                  batch of objects, use the token that was returned for the prior request in your next request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2392,8 +2955,25 @@ module Aws::Route53Resolver
     #         modification_time: "Rfc3339TimeString",
     #         firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
     #         qtype: "Qtype",
-    #         dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING"],
-    #         confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #         dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #         confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #         firewall_rule_type: {
+    #           partner_threat_protection: {
+    #             partner: "PartnerValue", # required
+    #           },
+    #           firewall_advanced_content_category: {
+    #             category: "FirewallAdvancedContentCategoryValue", # required
+    #           },
+    #           firewall_advanced_threat_category: {
+    #             category: "FirewallAdvancedThreatCategoryValue", # required
+    #           },
+    #           dns_threat_protection: {
+    #             value: "DnsThreatProtectionRuleTypeValue", # required
+    #             confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #           }
+    #         },
+    #         status: "FirewallRuleStatus",
+    #         status_message: "FirewallRuleStatusMessage"
     #       }
     #     ]
     #   }
@@ -2448,18 +3028,18 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Retrieves the Resolver configurations that you have defined. 
+    # <p>Retrieves the Resolver configurations that you have defined.
     # 			Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.</p>
     # @param [Hash, Types::ListResolverConfigsRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of Resolver configurations that you want to return in the response to 
-    #   			a <code>ListResolverConfigs</code> request. If you don't specify a value for <code>MaxResults</code>, 
+    #   <p>The maximum number of Resolver configurations that you want to return in the response to
+    #   			a <code>ListResolverConfigs</code> request. If you don't specify a value for <code>MaxResults</code>,
     #   			up to 100 Resolver configurations are returned.</p>
     # @option params [String] :next_token
-    #   <p>(Optional) If the current Amazon Web Services account has more than <code>MaxResults</code> Resolver configurations, use 
+    #   <p>(Optional) If the current Amazon Web Services account has more than <code>MaxResults</code> Resolver configurations, use
     #   			<code>NextToken</code> to get the second and subsequent pages of results.</p>
     #            <p>For the first <code>ListResolverConfigs</code> request, omit this value.</p>
-    #            <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and 
+    #            <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and
     #   			specify that value for <code>NextToken</code> in the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2491,13 +3071,13 @@ module Aws::Route53Resolver
     # @param [Hash, Types::ListResolverDnssecConfigsRequest] params
     # @option params [Integer] :max_results
     #   <p>
-    #               <i>Optional</i>: An integer that specifies the maximum number of DNSSEC configuration results that you want Amazon Route 53 to return. 
+    #               <i>Optional</i>: An integer that specifies the maximum number of DNSSEC configuration results that you want Amazon Route 53 to return.
     #   			If you don't specify a value for <code>MaxResults</code>, Route 53 returns up to 100 configuration per page.</p>
     # @option params [String] :next_token
-    #   <p>(Optional) If the current Amazon Web Services account has more than <code>MaxResults</code> DNSSEC configurations, use <code>NextToken</code> 
+    #   <p>(Optional) If the current Amazon Web Services account has more than <code>MaxResults</code> DNSSEC configurations, use <code>NextToken</code>
     #   			to get the second and subsequent pages of results.</p>
     #            <p>For the first <code>ListResolverDnssecConfigs</code> request, omit this value.</p>
-    #            <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value 
+    #            <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value
     #   			for <code>NextToken</code> in the request.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>An optional specification to return a subset of objects.</p>
@@ -2538,12 +3118,12 @@ module Aws::Route53Resolver
     # @option params [String] :resolver_endpoint_id
     #   <p>The ID of the Resolver endpoint that you want to get IP addresses for.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of IP addresses that you want to return in the response to a <code>ListResolverEndpointIpAddresses</code> request. 
+    #   <p>The maximum number of IP addresses that you want to return in the response to a <code>ListResolverEndpointIpAddresses</code> request.
     #   			If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 IP addresses. </p>
     # @option params [String] :next_token
     #   <p>For the first <code>ListResolverEndpointIpAddresses</code> request, omit this value.</p>
-    #            <p>If the specified Resolver endpoint has more than <code>MaxResults</code> IP addresses, you can submit another 
-    #   			<code>ListResolverEndpointIpAddresses</code> request to get the next group of IP addresses. In the next request, specify the value of 
+    #            <p>If the specified Resolver endpoint has more than <code>MaxResults</code> IP addresses, you can submit another
+    #   			<code>ListResolverEndpointIpAddresses</code> request to get the next group of IP addresses. In the next request, specify the value of
     #   			<code>NextToken</code> from the previous response. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2564,7 +3144,7 @@ module Aws::Route53Resolver
     #         subnet_id: "SubnetId",
     #         ip: "Ip",
     #         ipv6: "Ipv6",
-    #         status: "CREATING" # One of: ["CREATING", "FAILED_CREATION", "ATTACHING", "ATTACHED", "REMAP_DETACHING", "REMAP_ATTACHING", "DETACHING", "FAILED_RESOURCE_GONE", "DELETING", "DELETE_FAILED_FAS_EXPIRED", "UPDATING", "UPDATE_FAILED", "ISOLATED"],
+    #         status: "CREATING" # One of: ["CREATING", "FAILED_CREATION", "FAILED_CREATION_INSUFFICIENT_EC2_CAPACITY_IN_OUTPOST", "ATTACHING", "ATTACHED", "REMAP_DETACHING", "REMAP_ATTACHING", "DETACHING", "FAILED_RESOURCE_GONE", "DELETING", "DELETE_FAILED_FAS_EXPIRED", "UPDATING", "UPDATE_FAILED", "ISOLATED"],
     #         status_message: "StatusMessage",
     #         creation_time: "Rfc3339TimeString",
     #         modification_time: "Rfc3339TimeString"
@@ -2580,16 +3160,16 @@ module Aws::Route53Resolver
     # <p>Lists all the Resolver endpoints that were created using the current Amazon Web Services account.</p>
     # @param [Hash, Types::ListResolverEndpointsRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of Resolver endpoints that you want to return in the response to a <code>ListResolverEndpoints</code> request. 
+    #   <p>The maximum number of Resolver endpoints that you want to return in the response to a <code>ListResolverEndpoints</code> request.
     #   			If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 Resolver endpoints. </p>
     # @option params [String] :next_token
     #   <p>For the first <code>ListResolverEndpoints</code> request, omit this value.</p>
-    #            <p>If you have more than <code>MaxResults</code> Resolver endpoints, you can submit another <code>ListResolverEndpoints</code> request 
+    #            <p>If you have more than <code>MaxResults</code> Resolver endpoints, you can submit another <code>ListResolverEndpoints</code> request
     #   			to get the next group of Resolver endpoints. In the next request, specify the value of <code>NextToken</code> from the previous response. </p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>An optional specification to return a subset of Resolver endpoints, such as all inbound Resolver endpoints.</p>
     #            <note>
-    #               <p>If you submit a second or subsequent <code>ListResolverEndpoints</code> request and specify the <code>NextToken</code> parameter, 
+    #               <p>If you submit a second or subsequent <code>ListResolverEndpoints</code> request and specify the <code>NextToken</code> parameter,
     #   			you must use the same values for <code>Filters</code>, if any, as in the previous request.</p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -2627,7 +3207,11 @@ module Aws::Route53Resolver
     #         outpost_arn: "OutpostArn",
     #         preferred_instance_type: "OutpostInstanceType",
     #         resolver_endpoint_type: "IPV6" # One of: ["IPV6", "IPV4", "DUALSTACK"],
-    #         protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]]
+    #         protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]],
+    #         rni_enhanced_metrics_enabled: false,
+    #         target_name_server_metrics_enabled: false,
+    #         dns64_enabled: false,
+    #         ipv6_internet_access_enabled: false
     #       }
     #     ]
     #   }
@@ -2640,23 +3224,23 @@ module Aws::Route53Resolver
     # <p>Lists information about associations between Amazon VPCs and query logging configurations.</p>
     # @param [Hash, Types::ListResolverQueryLogConfigAssociationsRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of query logging associations that you want to return in the response to a <code>ListResolverQueryLogConfigAssociations</code> request. 
+    #   <p>The maximum number of query logging associations that you want to return in the response to a <code>ListResolverQueryLogConfigAssociations</code> request.
     #   			If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 query logging associations. </p>
     # @option params [String] :next_token
     #   <p>For the first <code>ListResolverQueryLogConfigAssociations</code> request, omit this value.</p>
-    #            <p>If there are more than <code>MaxResults</code> query logging associations that match the values that you specify for <code>Filters</code>, 
-    #   			you can submit another <code>ListResolverQueryLogConfigAssociations</code> request to get the next group of associations. In the next request, specify the value of 
+    #            <p>If there are more than <code>MaxResults</code> query logging associations that match the values that you specify for <code>Filters</code>,
+    #   			you can submit another <code>ListResolverQueryLogConfigAssociations</code> request to get the next group of associations. In the next request, specify the value of
     #   			<code>NextToken</code> from the previous response. </p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>An optional specification to return a subset of query logging associations.</p>
     #            <note>
-    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigAssociations</code> request and specify the <code>NextToken</code> parameter, 
+    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigAssociations</code> request and specify the <code>NextToken</code> parameter,
     #   				you must use the same values for <code>Filters</code>, if any, as in the previous request.</p>
     #            </note>
     # @option params [String] :sort_by
     #   <p>The element that you want Resolver to sort query logging associations by. </p>
     #            <note>
-    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigAssociations</code> request and specify the <code>NextToken</code> parameter, 
+    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigAssociations</code> request and specify the <code>NextToken</code> parameter,
     #   				you must use the same value for <code>SortBy</code>, if any, as in the previous request.</p>
     #            </note>
     #            <p>Valid values include the following elements:</p>
@@ -2667,7 +3251,7 @@ module Aws::Route53Resolver
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Error</code>: If the value of <code>Status</code> is <code>FAILED</code>, the value of <code>Error</code> 
+    #                     <code>Error</code>: If the value of <code>Status</code> is <code>FAILED</code>, the value of <code>Error</code>
     #   				indicates the cause: </p>
     #                  <ul>
     #                     <li>
@@ -2703,7 +3287,7 @@ module Aws::Route53Resolver
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <code>CREATED</code>: The association between an Amazon VPC and a query logging configuration 
+    #                           <code>CREATED</code>: The association between an Amazon VPC and a query logging configuration
     #   						was successfully created. Resolver is logging queries that originate in the specified VPC.</p>
     #                     </li>
     #                     <li>
@@ -2712,7 +3296,7 @@ module Aws::Route53Resolver
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <code>FAILED</code>: Resolver either couldn't create or couldn't delete the query logging association. 
+    #                           <code>FAILED</code>: Resolver either couldn't create or couldn't delete the query logging association.
     #   						Here are two common causes:</p>
     #                        <ul>
     #                           <li>
@@ -2727,10 +3311,10 @@ module Aws::Route53Resolver
     #               </li>
     #            </ul>
     # @option params [String] :sort_order
-    #   <p>If you specified a value for <code>SortBy</code>, the order that you want query logging associations to be listed in, 
+    #   <p>If you specified a value for <code>SortBy</code>, the order that you want query logging associations to be listed in,
     #   			<code>ASCENDING</code> or <code>DESCENDING</code>.</p>
     #            <note>
-    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigAssociations</code> request and specify the <code>NextToken</code> parameter, 
+    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigAssociations</code> request and specify the <code>NextToken</code> parameter,
     #   				you must use the same value for <code>SortOrder</code>, if any, as in the previous request.</p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -2772,27 +3356,27 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Lists information about the specified query logging configurations. Each configuration defines where you want Resolver to save 
+    # <p>Lists information about the specified query logging configurations. Each configuration defines where you want Resolver to save
     # 			DNS query logs and specifies the VPCs that you want to log queries for.</p>
     # @param [Hash, Types::ListResolverQueryLogConfigsRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of query logging configurations that you want to return in the response to a <code>ListResolverQueryLogConfigs</code> request. 
+    #   <p>The maximum number of query logging configurations that you want to return in the response to a <code>ListResolverQueryLogConfigs</code> request.
     #   			If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 query logging configurations. </p>
     # @option params [String] :next_token
     #   <p>For the first <code>ListResolverQueryLogConfigs</code> request, omit this value.</p>
-    #            <p>If there are more than <code>MaxResults</code> query logging configurations that match the values that you specify for <code>Filters</code>, 
-    #   			you can submit another <code>ListResolverQueryLogConfigs</code> request to get the next group of configurations. In the next request, specify the value of 
+    #            <p>If there are more than <code>MaxResults</code> query logging configurations that match the values that you specify for <code>Filters</code>,
+    #   			you can submit another <code>ListResolverQueryLogConfigs</code> request to get the next group of configurations. In the next request, specify the value of
     #   			<code>NextToken</code> from the previous response. </p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>An optional specification to return a subset of query logging configurations.</p>
     #            <note>
-    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigs</code> request and specify the <code>NextToken</code> parameter, 
+    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigs</code> request and specify the <code>NextToken</code> parameter,
     #   				you must use the same values for <code>Filters</code>, if any, as in the previous request.</p>
     #            </note>
     # @option params [String] :sort_by
     #   <p>The element that you want Resolver to sort query logging configurations by. </p>
     #            <note>
-    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigs</code> request and specify the <code>NextToken</code> parameter, 
+    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigs</code> request and specify the <code>NextToken</code> parameter,
     #   				you must use the same value for <code>SortBy</code>, if any, as in the previous request.</p>
     #            </note>
     #            <p>Valid values include the following elements:</p>
@@ -2831,7 +3415,7 @@ module Aws::Route53Resolver
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>ShareStatus</code>: Whether the configuration is shared with other Amazon Web Services accounts or shared with the current account by 
+    #                     <code>ShareStatus</code>: Whether the configuration is shared with other Amazon Web Services accounts or shared with the current account by
     #   				another Amazon Web Services account. Sharing is configured through Resource Access Manager (RAM).</p>
     #               </li>
     #               <li>
@@ -2844,7 +3428,7 @@ module Aws::Route53Resolver
     #                     </li>
     #                     <li>
     #                        <p>
-    #                           <code>CREATED</code>: The query logging configuration was successfully created. 
+    #                           <code>CREATED</code>: The query logging configuration was successfully created.
     #   						Resolver is logging queries that originate in the specified VPC.</p>
     #                     </li>
     #                     <li>
@@ -2868,10 +3452,10 @@ module Aws::Route53Resolver
     #               </li>
     #            </ul>
     # @option params [String] :sort_order
-    #   <p>If you specified a value for <code>SortBy</code>, the order that you want query logging configurations to be listed in, 
+    #   <p>If you specified a value for <code>SortBy</code>, the order that you want query logging configurations to be listed in,
     #   			<code>ASCENDING</code> or <code>DESCENDING</code>.</p>
     #            <note>
-    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigs</code> request and specify the <code>NextToken</code> parameter, 
+    #               <p>If you submit a second or subsequent <code>ListResolverQueryLogConfigs</code> request and specify the <code>NextToken</code> parameter,
     #   				you must use the same value for <code>SortOrder</code>, if any, as in the previous request.</p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -2919,16 +3503,16 @@ module Aws::Route53Resolver
     # <p>Lists the associations that were created between Resolver rules and VPCs using the current Amazon Web Services account.</p>
     # @param [Hash, Types::ListResolverRuleAssociationsRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of rule associations that you want to return in the response to a <code>ListResolverRuleAssociations</code> request. 
+    #   <p>The maximum number of rule associations that you want to return in the response to a <code>ListResolverRuleAssociations</code> request.
     #   			If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 rule associations. </p>
     # @option params [String] :next_token
     #   <p>For the first <code>ListResolverRuleAssociation</code> request, omit this value.</p>
-    #            <p>If you have more than <code>MaxResults</code> rule associations, you can submit another <code>ListResolverRuleAssociation</code> request 
+    #            <p>If you have more than <code>MaxResults</code> rule associations, you can submit another <code>ListResolverRuleAssociation</code> request
     #   			to get the next group of rule associations. In the next request, specify the value of <code>NextToken</code> from the previous response. </p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>An optional specification to return a subset of Resolver rules, such as Resolver rules that are associated with the same VPC ID.</p>
     #            <note>
-    #               <p>If you submit a second or subsequent <code>ListResolverRuleAssociations</code> request and specify the <code>NextToken</code> parameter, 
+    #               <p>If you submit a second or subsequent <code>ListResolverRuleAssociations</code> request and specify the <code>NextToken</code> parameter,
     #   			you must use the same values for <code>Filters</code>, if any, as in the previous request.</p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -2969,16 +3553,16 @@ module Aws::Route53Resolver
     # <p>Lists the Resolver rules that were created using the current Amazon Web Services account.</p>
     # @param [Hash, Types::ListResolverRulesRequest] params
     # @option params [Integer] :max_results
-    #   <p>The maximum number of Resolver rules that you want to return in the response to a <code>ListResolverRules</code> request. 
+    #   <p>The maximum number of Resolver rules that you want to return in the response to a <code>ListResolverRules</code> request.
     #   			If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 Resolver rules.</p>
     # @option params [String] :next_token
     #   <p>For the first <code>ListResolverRules</code> request, omit this value.</p>
-    #            <p>If you have more than <code>MaxResults</code> Resolver rules, you can submit another <code>ListResolverRules</code> request 
+    #            <p>If you have more than <code>MaxResults</code> Resolver rules, you can submit another <code>ListResolverRules</code> request
     #   			to get the next group of Resolver rules. In the next request, specify the value of <code>NextToken</code> from the previous response. </p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>An optional specification to return a subset of Resolver rules, such as all Resolver rules that are associated with the same Resolver endpoint.</p>
     #            <note>
-    #               <p>If you submit a second or subsequent <code>ListResolverRules</code> request and specify the <code>NextToken</code> parameter, 
+    #               <p>If you submit a second or subsequent <code>ListResolverRules</code> request and specify the <code>NextToken</code> parameter,
     #   			you must use the same values for <code>Filters</code>, if any, as in the previous request.</p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -3038,11 +3622,11 @@ module Aws::Route53Resolver
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) for the resource that you want to list tags for.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of tags that you want to return in the response to a <code>ListTagsForResource</code> request. 
+    #   <p>The maximum number of tags that you want to return in the response to a <code>ListTagsForResource</code> request.
     #   			If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 tags.</p>
     # @option params [String] :next_token
     #   <p>For the first <code>ListTagsForResource</code> request, omit this value.</p>
-    #            <p>If you have more than <code>MaxResults</code> tags, you can submit another <code>ListTagsForResource</code> request 
+    #            <p>If you have more than <code>MaxResults</code> tags, you can submit another <code>ListTagsForResource</code> request
     #   			to get the next group of tags for the resource. In the next request, specify the value of <code>NextToken</code> from the previous response. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3095,14 +3679,14 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Specifies an Amazon Web Services account that you want to share a query logging configuration with, the query logging configuration that you want to share, 
+    # <p>Specifies an Amazon Web Services account that you want to share a query logging configuration with, the query logging configuration that you want to share,
     # 			and the operations that you want the account to be able to perform on the configuration.</p>
     # @param [Hash, Types::PutResolverQueryLogConfigPolicyRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the account that you want to share rules with.</p>
     # @option params [String] :resolver_query_log_config_policy
-    #   <p>An Identity and Access Management policy statement that lists the query logging configurations that you want to share with another Amazon Web Services account 
-    #   			and the operations that you want the account to be able to perform. You can specify the following operations in the <code>Actions</code> section 
+    #   <p>An Identity and Access Management policy statement that lists the query logging configurations that you want to share with another Amazon Web Services account
+    #   			and the operations that you want the account to be able to perform. You can specify the following operations in the <code>Actions</code> section
     #   			of the statement:</p>
     #            <ul>
     #               <li>
@@ -3121,7 +3705,7 @@ module Aws::Route53Resolver
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>In the <code>Resource</code> section of the statement, you specify the ARNs for the query logging configurations that you want to share 
+    #            <p>In the <code>Resource</code> section of the statement, you specify the ARNs for the query logging configurations that you want to share
     #   			with the account that you specified in <code>Arn</code>. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3141,13 +3725,13 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Specifies an Amazon Web Services rule that you want to share with another account, the account that you want to share the rule with, 
+    # <p>Specifies an Amazon Web Services rule that you want to share with another account, the account that you want to share the rule with,
     # 			and the operations that you want the account to be able to perform on the rule.</p>
     # @param [Hash, Types::PutResolverRulePolicyRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the rule that you want to share with another account.</p>
     # @option params [String] :resolver_rule_policy
-    #   <p>An Identity and Access Management policy statement that lists the rules that you want to share with another Amazon Web Services account and the operations that you want the account 
+    #   <p>An Identity and Access Management policy statement that lists the rules that you want to share with another Amazon Web Services account and the operations that you want the account
     #   			to be able to perform. You can specify the following operations in the <code>Action</code> section of the statement:</p>
     #            <ul>
     #               <li>
@@ -3176,7 +3760,7 @@ module Aws::Route53Resolver
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>In the <code>Resource</code> section of the statement, specify the ARN for the rule that you want to share with another account. Specify the same ARN 
+    #            <p>In the <code>Resource</code> section of the statement, specify the ARN for the rule that you want to share with another account. Specify the same ARN
     #   			that you specified in <code>Arn</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -3199,7 +3783,7 @@ module Aws::Route53Resolver
     # <p>Adds one or more tags to a specified resource.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) for the resource that you want to add tags to. To get the ARN for a resource, use the applicable 
+    #   <p>The Amazon Resource Name (ARN) for the resource that you want to add tags to. To get the ARN for a resource, use the applicable
     #   			<code>Get</code> or <code>List</code> command: </p>
     #            <ul>
     #               <li>
@@ -3259,7 +3843,7 @@ module Aws::Route53Resolver
     # <p>Removes one or more tags from a specified resource.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) for the resource that you want to remove tags from. To get the ARN for a resource, use the applicable 
+    #   <p>The Amazon Resource Name (ARN) for the resource that you want to remove tags from. To get the ARN for a resource, use the applicable
     #   			<code>Get</code> or <code>List</code> command: </p>
     #            <ul>
     #               <li>
@@ -3320,11 +3904,11 @@ module Aws::Route53Resolver
     #   <p>Determines how Route 53 Resolver handles queries during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply. </p>
     #            <ul>
     #               <li>
-    #                  <p>By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. 
+    #                  <p>By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability.
     #          DNS Firewall blocks queries that it is unable to evaluate properly. </p>
     #               </li>
     #               <li>
-    #                  <p>If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it 
+    #                  <p>If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it
     #          is unable to properly evaluate them. </p>
     #               </li>
     #            </ul>
@@ -3414,7 +3998,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Updates the specified firewall rule. </p>
+    # <p>Updates the specified firewall rule. The rule's <code>FirewallRuleType</code>, <code>FirewallDomainListId</code>, and top-level <code>DnsThreatProtection</code> match source cannot be changed after creation. Rules whose <code>Status</code> is <code>CREATING</code> or <code>CREATION_FAILED</code> cannot be updated; remove a failed rule with <a>DeleteFirewallRule</a>.</p>
     # @param [Hash, Types::UpdateFirewallRuleRequest] params
     # @option params [String] :firewall_rule_group_id
     #   <p>The unique identifier of the firewall rule group for the rule. </p>
@@ -3425,10 +4009,10 @@ module Aws::Route53Resolver
     #   			The DNS Firewall Advanced rule ID.
     #   		</p>
     # @option params [Integer] :priority
-    #   <p>The setting that determines the processing order of the rule in the rule group. DNS Firewall 
+    #   <p>The setting that determines the processing order of the rule in the rule group. DNS Firewall
     #              processes the rules in a rule group by order of priority, starting from the lowest setting.</p>
-    #            <p>You must specify a unique priority for each rule in a rule group. 
-    #              To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You 
+    #            <p>You must specify a unique priority for each rule in a rule group.
+    #              To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You
     #      can change the priority setting for the rules in a rule group at any time.</p>
     # @option params [String] :action
     #   <p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list, or a threat in a DNS Firewall Advanced rule:</p>
@@ -3472,13 +4056,13 @@ module Aws::Route53Resolver
     #   <p>The name of the rule.</p>
     # @option params [String] :firewall_domain_redirection_action
     #   <p>
-    #   			How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME. 
+    #   			How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.
     #   		</p>
     #            <p>
-    #               <code>INSPECT_REDIRECTION_DOMAIN</code>: (Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be 
+    #               <code>INSPECT_REDIRECTION_DOMAIN</code>: (Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be
     #   			added to the domain list.</p>
     #            <p>
-    #               <code>TRUST_REDIRECTION_DOMAIN</code>: Inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to 
+    #               <code>TRUST_REDIRECTION_DOMAIN</code>: Inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the domain in the redirection list to
     #   			the domain list.</p>
     # @option params [String] :qtype
     #   <p>
@@ -3528,29 +4112,33 @@ module Aws::Route53Resolver
     #               <li>
     #                  <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be
     #   				defined as TYPENUMBER, where the
-    #   				NUMBER can be 1-65334, for
-    #   				example, TYPE28. For more information, see 
+    #   				NUMBER can be 1-65534, for
+    #   				example, TYPE28. For more information, see
     #   				<a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types">List of DNS record types</a>.</p>
     #                  <note>
-    #                     <p>If you set up a firewall BLOCK rule with action NXDOMAIN on query type equals AAAA, 
+    #                     <p>If you set up a firewall BLOCK rule with action NXDOMAIN on query type equals AAAA,
     #   					this action will not be applied to synthetic IPv6 addresses generated when DNS64 is enabled. </p>
     #                  </note>
     #               </li>
     #            </ul>
     # @option params [String] :dns_threat_protection
     #   <p>
-    #   			The type of the DNS Firewall Advanced rule. Valid values are:
+    #   			The type of the DNS Firewall Advanced rule. This setting is mutually exclusive with <code>FirewallDomainListId</code> and <code>FirewallRuleType</code>. Valid values are:
     #   		</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>DGA</code>: Domain generation algorithms detection. DGAs are used by attackers to generate a large number of domains 
-    #   				to to launch malware attacks.</p>
+    #                     <code>DGA</code>: Domain generation algorithms detection. DGAs are used by attackers to generate a large number of domains
+    #   				to launch malware attacks.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>DNS_TUNNELING</code>: DNS tunneling detection. DNS tunneling is used by attackers to exfiltrate data from the client by using the DNS tunnel without
     #   				making a network connection to the client.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DICTIONARY_DGA</code>: Dictionary-based domain generation algorithms detection. Dictionary DGAs use wordlists to generate domains that appear more legitimate, making them harder to detect than traditional DGAs.</p>
     #               </li>
     #            </ul>
     # @option params [String] :confidence_threshold
@@ -3572,6 +4160,27 @@ module Aws::Route53Resolver
     #                     <code>HIGH</code>: Detects only the most well corroborated threats with a low rate of false positives. </p>
     #               </li>
     #            </ul>
+    # @option params [Types::FirewallRuleType] :firewall_rule_type
+    #   <p>The rule type configuration for the firewall rule. This is a tagged union — set exactly one of its members. This setting is mutually exclusive with the top-level <code>FirewallDomainListId</code> and <code>DnsThreatProtection</code> fields. Use one of:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>FirewallAdvancedContentCategory</code> — match an Amazon Web Services-managed content category (for example, <code>VIOLENCE_AND_HATE_SPEECH</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FirewallAdvancedThreatCategory</code> — match an Amazon Web Services-managed advanced threat category (for example, <code>PHISHING</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DnsThreatProtection</code> — match a built-in DNS Firewall Advanced threat detector (<code>DGA</code>, <code>DNS_TUNNELING</code>, or <code>DICTIONARY_DGA</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PartnerThreatProtection</code> — match a third-party threat feed delivered through Amazon Web Services Marketplace. The selected partner must be an active subscription on the calling account.</p>
+    #               </li>
+    #            </ul>
+    #            <p>To enumerate the values supported in your account, call <a>ListFirewallRuleTypes</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     firewall_rule_group_id: "ResourceId", # required
@@ -3586,8 +4195,23 @@ module Aws::Route53Resolver
     #     name: "Name",
     #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
     #     qtype: "Qtype",
-    #     dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING"],
-    #     confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #     dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #     confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #     firewall_rule_type: {
+    #       partner_threat_protection: {
+    #         partner: "PartnerValue", # required
+    #       },
+    #       firewall_advanced_content_category: {
+    #         category: "FirewallAdvancedContentCategoryValue", # required
+    #       },
+    #       firewall_advanced_threat_category: {
+    #         category: "FirewallAdvancedThreatCategoryValue", # required
+    #       },
+    #       dns_threat_protection: {
+    #         value: "DnsThreatProtectionRuleTypeValue", # required
+    #         confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.update_firewall_rule(params, options)
@@ -3610,8 +4234,25 @@ module Aws::Route53Resolver
     #       modification_time: "Rfc3339TimeString",
     #       firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN" # One of: ["INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"],
     #       qtype: "Qtype",
-    #       dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING"],
-    #       confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"]
+    #       dns_threat_protection: "DGA" # One of: ["DGA", "DNS_TUNNELING", "DICTIONARY_DGA"],
+    #       confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"],
+    #       firewall_rule_type: {
+    #         partner_threat_protection: {
+    #           partner: "PartnerValue", # required
+    #         },
+    #         firewall_advanced_content_category: {
+    #           category: "FirewallAdvancedContentCategoryValue", # required
+    #         },
+    #         firewall_advanced_threat_category: {
+    #           category: "FirewallAdvancedThreatCategoryValue", # required
+    #         },
+    #         dns_threat_protection: {
+    #           value: "DnsThreatProtectionRuleTypeValue", # required
+    #           confidence_threshold: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #         }
+    #       },
+    #       status: "FirewallRuleStatus",
+    #       status_message: "FirewallRuleStatusMessage"
     #     }
     #   }
     # @return [Types::UpdateFirewallRuleResponse]
@@ -3628,8 +4269,8 @@ module Aws::Route53Resolver
     #   <p>The setting that determines the processing order of the rule group among the rule
     #   			groups that you associate with the specified VPC. DNS Firewall filters VPC traffic
     #   			starting from the rule group with the lowest numeric priority setting. </p>
-    #            <p>You must specify a unique priority for each rule group that you associate with a single VPC. 
-    #              To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You 
+    #            <p>You must specify a unique priority for each rule group that you associate with a single VPC.
+    #              To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You
     #      can change the priority setting for a rule group association after you create it.</p>
     # @option params [String] :mutation_protection
     #   <p>If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. </p>
@@ -3670,6 +4311,10 @@ module Aws::Route53Resolver
     end
 
     # <p>You can use <code>UpdateOutpostResolver</code> to  update the instance count, type, or  name of a Resolver on an Outpost.</p>
+    #          <note>
+    #             <p>This operation applies to first-generation Outposts only. On second-generation Outposts, Resolver
+    # 				is managed automatically by Amazon Web Services and can't be updated directly.</p>
+    #          </note>
     # @param [Hash, Types::UpdateOutpostResolverRequest] params
     # @option params [String] :id
     #   <p>A unique string that identifies Resolver on an Outpost.</p>
@@ -3784,7 +4429,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Updates the name, or endpoint type for an inbound or an outbound Resolver endpoint. 
+    # <p>Updates the name, or endpoint type for an inbound or an outbound Resolver endpoint.
     # 			You can only update between IPV4 and DUALSTACK, IPV6 endpoint type can't be updated to other type. </p>
     # @param [Hash, Types::UpdateResolverEndpointRequest] params
     # @option params [String] :resolver_endpoint_id
@@ -3798,7 +4443,7 @@ module Aws::Route53Resolver
     #            <p>Updating to <code>IPV6</code> type isn't currently supported.</p>
     # @option params [Array<Types::UpdateIpAddress>] :update_ip_addresses
     #   <p>
-    #   			Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to dual-stack. 
+    #   			Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to dual-stack.
     #   			If you don't specify an IPv6 address, one will be automatically chosen from your subnet.
     #   		</p>
     # @option params [Array<String>] :protocols
@@ -3850,6 +4495,37 @@ module Aws::Route53Resolver
     #   			has transferred to using the DoH protocol, or DoH-FIPS, and then remove the
     #   			Do53.</p>
     #            </important>
+    # @option params [Boolean] :rni_enhanced_metrics_enabled
+    #   <p>Updates whether RNI enhanced metrics are enabled for the Resolver endpoints.
+    #   		When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint.
+    #   		When set to false, metrics are not published.</p>
+    #            <note>
+    #               <p>Standard CloudWatch pricing and charges are applied for using the Route 53 Resolver
+    #   	endpoint RNI enhanced metrics. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html">Detailed metrics</a>.</p>
+    #            </note>
+    # @option params [Boolean] :target_name_server_metrics_enabled
+    #   <p>Updates whether target name server metrics are enabled for the outbound Resolver endpoints.
+    #   		When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint.
+    #   		When set to false, metrics are not published. This setting is not supported for inbound Resolver endpoints.</p>
+    #            <note>
+    #               <p>Standard CloudWatch pricing and charges are applied for using the Route 53 Resolver
+    #   	endpoint target name server metrics. For more information, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html">Detailed metrics</a>.</p>
+    #            </note>
+    # @option params [Boolean] :dns64_enabled
+    #   <p>Specifies whether DNS64 is enabled for the inbound Resolver endpoint. When set to <code>true</code>, Route 53 Resolver
+    #   			synthesizes AAAA (IPv6) records for IPv4-only services by prepending the <code>64:ff9b::/96</code> prefix to the IPv4 address.
+    #   			This enables IPv6-only clients that send queries through the inbound endpoint to reach IPv4-only services.
+    #   			DNS64 works with NAT64 to provide complete IPv6-to-IPv4 translation.</p>
+    # @option params [Boolean] :ipv6_internet_access_enabled
+    #   <p>Specifies whether IPv6 internet access is enabled for the outbound Resolver endpoint. When set to <code>true</code>,
+    #   			the endpoint elastic network interfaces (ENIs) can forward DNS queries to public IPv6 targets through an internet gateway.</p>
+    #            <important>
+    #               <p>When you enable IPv6 internet access, use network controls like security groups, NACLs, or egress-only internet gateways
+    #   				to protect the endpoint ENIs from unsolicited ingress traffic. Be aware that some network controls can affect DNS query
+    #   				throughput due to connection tracking. For more information, see
+    #   				<a href="https://docs.aws.amazon.com/ec2/latest/userguide/security-group-connection-tracking.html">Amazon EC2 security group connection tracking</a>
+    #   				and <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver-endpoint-scaling.html">Resolver endpoint scaling</a>.</p>
+    #            </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     resolver_endpoint_id: "ResourceId", # required
@@ -3861,7 +4537,11 @@ module Aws::Route53Resolver
     #         ipv6: "Ipv6", # required
     #       }
     #     ],
-    #     protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]]
+    #     protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]],
+    #     rni_enhanced_metrics_enabled: false,
+    #     target_name_server_metrics_enabled: false,
+    #     dns64_enabled: false,
+    #     ipv6_internet_access_enabled: false
     #   }
     #   options = {}
     #   response = client.update_resolver_endpoint(params, options)
@@ -3884,7 +4564,11 @@ module Aws::Route53Resolver
     #       outpost_arn: "OutpostArn",
     #       preferred_instance_type: "OutpostInstanceType",
     #       resolver_endpoint_type: "IPV6" # One of: ["IPV6", "IPV4", "DUALSTACK"],
-    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]]
+    #       protocols: ["DoH" # One of: ["DoH", "Do53", "DoH-FIPS"]],
+    #       rni_enhanced_metrics_enabled: false,
+    #       target_name_server_metrics_enabled: false,
+    #       dns64_enabled: false,
+    #       ipv6_internet_access_enabled: false
     #     }
     #   }
     # @return [Types::UpdateResolverEndpointResponse]
@@ -3893,7 +4577,7 @@ module Aws::Route53Resolver
       request.send_request(options)
     end
 
-    # <p>Updates settings for a specified Resolver rule. <code>ResolverRuleId</code> is required, and all other parameters are optional. 
+    # <p>Updates settings for a specified Resolver rule. <code>ResolverRuleId</code> is required, and all other parameters are optional.
     # 			If you don't specify a parameter, it retains its current value.</p>
     # @param [Hash, Types::UpdateResolverRuleRequest] params
     # @option params [String] :resolver_rule_id

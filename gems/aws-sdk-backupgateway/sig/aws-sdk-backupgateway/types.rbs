@@ -197,6 +197,8 @@ module Aws::BackupGateway
         ?maintenance_start_time: Types::MaintenanceStartTime,
         ?next_update_availability_time: Time,
         ?vpc_endpoint: String,
+        ?deprecation_date: Time,
+        ?software_version: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -208,6 +210,8 @@ module Aws::BackupGateway
       attr_accessor maintenance_start_time: Types::MaintenanceStartTime?
       attr_accessor next_update_availability_time: Time?
       attr_accessor vpc_endpoint: String?
+      attr_accessor deprecation_date: Time?
+      attr_accessor software_version: String?
     end
 
     class GetBandwidthRateLimitScheduleOperationInput

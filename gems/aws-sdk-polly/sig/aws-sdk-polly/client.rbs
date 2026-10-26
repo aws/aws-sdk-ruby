@@ -108,6 +108,30 @@ module Aws::Polly
       ?content: String
     ) -> _PutLexiconResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLexiconResponse
 
+    interface _StartSpeechSynthesisStreamResponse
+      include Smithy::Client::_Response[Types::StartSpeechSynthesisStreamOutput]
+      def event_stream: () -> Types::StartSpeechSynthesisStreamEventStream?
+    end
+    def start_speech_synthesis_stream: (
+      ?engine: String,
+      ?language_code: String,
+      ?lexicon_names: Array[String],
+      ?output_format: String,
+      ?sample_rate: String,
+      ?voice_id: String,
+      ?action_stream: {
+        text_event: {
+          text: String,
+          text_type: String,
+          flush_stream_configuration: {
+            force: bool
+          }
+        },
+        close_stream_event: {
+        }
+      }
+    ) -> _StartSpeechSynthesisStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSpeechSynthesisStreamResponse
+
     interface _StartSpeechSynthesisTaskResponse
       include Smithy::Client::_Response[Types::StartSpeechSynthesisTaskOutput]
       def synthesis_task: () -> Types::SynthesisTask?

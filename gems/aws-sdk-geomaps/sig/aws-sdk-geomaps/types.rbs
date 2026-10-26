@@ -12,6 +12,21 @@ module Aws::GeoMaps
       attr_accessor message: String?
     end
 
+    module Buildings
+      BUILDINGS_3D: String
+    end
+
+    module ColorScheme
+      LIGHT: String
+      DARK: String
+    end
+
+    module ContourDensity
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
     class GetGlyphsRequest
       include Smithy::Schema::Structure
 
@@ -151,6 +166,13 @@ module Aws::GeoMaps
         ?style: String,
         ?color_scheme: String,
         ?political_view: String,
+        ?terrain: String,
+        ?contour_density: String,
+        ?traffic: String,
+        ?travel_modes: Array[String],
+        ?buildings: String,
+        ?poi_density: String,
+        ?poi_categories: Array[String],
         ?key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -158,6 +180,13 @@ module Aws::GeoMaps
       attr_accessor style: String?
       attr_accessor color_scheme: String?
       attr_accessor political_view: String?
+      attr_accessor terrain: String?
+      attr_accessor contour_density: String?
+      attr_accessor traffic: String?
+      attr_accessor travel_modes: Array[String]?
+      attr_accessor buildings: String?
+      attr_accessor poi_density: String?
+      attr_accessor poi_categories: Array[String]?
       attr_accessor key: String?
     end
 
@@ -182,6 +211,7 @@ module Aws::GeoMaps
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?additional_features: Array[String],
         ?tileset: String,
         ?z: String,
         ?x: String,
@@ -190,6 +220,7 @@ module Aws::GeoMaps
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor additional_features: Array[String]?
       attr_accessor tileset: String?
       attr_accessor z: String?
       attr_accessor x: String?
@@ -227,6 +258,44 @@ module Aws::GeoMaps
       attr_accessor message: String?
     end
 
+    module LabelSize
+      SMALL: String
+      LARGE: String
+    end
+
+    module MapFeatureMode
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module MapStyle
+      STANDARD: String
+      MONOCHROME: String
+      HYBRID: String
+      SATELLITE: String
+    end
+
+    module PoiCategory
+      FOOD_AND_DRINK: String
+      ENTERTAINMENT: String
+      SIGHTS_AND_MUSEUMS: String
+      TRANSPORTATION: String
+      ACCOMMODATIONS: String
+      LEISURE_AND_OUTDOOR: String
+      SHOPPING: String
+      BUSINESS_AND_SERVICES: String
+      FACILITIES_AND_BUILDINGS: String
+    end
+
+    module PoiDensity
+      OFF: String
+      VERY_SPARSE: String
+      SPARSE: String
+      DEFAULT: String
+      DENSE: String
+      VERY_DENSE: String
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -238,6 +307,23 @@ module Aws::GeoMaps
       attr_accessor message: String?
     end
 
+    module ScaleBarUnit
+      KILOMETERS: String
+      KILOMETERS_MILES: String
+      MILES: String
+      MILES_KILOMETERS: String
+    end
+
+    module StaticMapStyle
+      SATELLITE: String
+      STANDARD: String
+    end
+
+    module Terrain
+      HILLSHADE: String
+      TERRAIN_3D: String
+    end
+
     class ThrottlingException
       include Smithy::Schema::Structure
 
@@ -247,6 +333,23 @@ module Aws::GeoMaps
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module TileAdditionalFeature
+      CONTOUR_LINES: String
+      HILLSHADE: String
+      LOGISTICS: String
+      TRANSIT: String
+    end
+
+    module Traffic
+      ALL: String
+      CONGESTION: String
+    end
+
+    module TravelMode
+      TRANSIT: String
+      TRUCK: String
     end
 
     class ValidationException
@@ -275,6 +378,19 @@ module Aws::GeoMaps
 
       attr_accessor name: String?
       attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      MISSING: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+      UNKNOWN_FIELD: String
+    end
+
+    module Variant
+      DEFAULT: String
     end
   end
 end

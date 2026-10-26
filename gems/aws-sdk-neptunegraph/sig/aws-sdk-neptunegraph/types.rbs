@@ -1136,11 +1136,13 @@ module Aws::NeptuneGraph
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?graph_identifier: String,
         ?next_token: String,
         ?max_results: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor graph_identifier: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
     end

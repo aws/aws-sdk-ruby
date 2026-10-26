@@ -17,6 +17,17 @@ module Aws::MedicalImaging
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The request is invalid or malformed.</p>
+    # @!attribute message
+    #   @return [String]
+    class BadRequestException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
     # @!attribute message
     #   @return [String]
@@ -209,6 +220,9 @@ module Aws::MedicalImaging
     # @!attribute lambda_authorizer_arn
     #   <p>The ARN of the authorizer's Lambda function.</p>
     #   @return [String]
+    # @!attribute lossless_storage_format
+    #   <p>The lossless storage format for the datastore.</p>
+    #   @return [String]
     class CreateDatastoreRequest < Struct.new(
       nil,
       :datastore_name,
@@ -216,6 +230,7 @@ module Aws::MedicalImaging
       :tags,
       :kms_key_arn,
       :lambda_authorizer_arn,
+      :lossless_storage_format,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -267,6 +282,9 @@ module Aws::MedicalImaging
     # @!attribute message
     #   <p>The error message thrown if an import job fails.</p>
     #   @return [String]
+    # @!attribute import_configuration
+    #   <p>The object containing <code>DicomJsonMetadataImportConfiguration</code>.</p>
+    #   @return [Types::ImportConfiguration]
     class DICOMImportJobProperties < Struct.new(
       nil,
       :job_id,
@@ -279,6 +297,7 @@ module Aws::MedicalImaging
       :input_s3_uri,
       :output_s3_uri,
       :message,
+      :import_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -450,6 +469,9 @@ module Aws::MedicalImaging
     # @!attribute lambda_authorizer_arn
     #   <p>The ARN of the authorizer's Lambda function.</p>
     #   @return [String]
+    # @!attribute lossless_storage_format
+    #   <p>The datastore's lossless storage format.</p>
+    #   @return [String]
     # @!attribute datastore_arn
     #   <p>The Amazon Resource Name (ARN) for the data store.</p>
     #   @return [String]
@@ -466,6 +488,7 @@ module Aws::MedicalImaging
       :datastore_status,
       :kms_key_arn,
       :lambda_authorizer_arn,
+      :lossless_storage_format,
       :datastore_arn,
       :created_at,
       :updated_at,
@@ -570,6 +593,38 @@ module Aws::MedicalImaging
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration parameters that are specific to DICOM JSON metadata import operations.</p>
+    # @!attribute dicom_metadata_mappings
+    #   <p>Maps DCM files to their metadata.</p>
+    #   @return [Array<Types::DicomMetadataMapping>]
+    class DicomJsonMetadataImportConfiguration < Struct.new(
+      nil,
+      :dicom_metadata_mappings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Maps DCM files to their metadata.</p>
+    # @!attribute study_instance_uid
+    #   <p>The Study Instance UID that identifies the study.</p>
+    #   @return [String]
+    # @!attribute series_instance_uid
+    #   <p>The Series Instance UID that identifies the series. This parameter is optional because the mapping might be at the study level.</p>
+    #   @return [String]
+    # @!attribute metadata_file_path
+    #   <p>The path to the JSON metadata file relative to inputS3Uri.</p>
+    #   @return [String]
+    class DicomMetadataMapping < Struct.new(
+      nil,
+      :study_instance_uid,
+      :series_instance_uid,
+      :metadata_file_path,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute datastore_id
     #   <p>The data store identifier.</p>
     #   @return [String]
@@ -641,7 +696,7 @@ module Aws::MedicalImaging
     #   <p>The blob containing the aggregated image frame information.</p>
     #   @return [String]
     # @!attribute content_type
-    #   <p>The format in which the image frame information is returned to the customer. Default is <code>application/octet-stream</code>.</p> <note> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.1</code>, the returned <code>contentType</code> is <code>application/octet-stream</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.50</code>, the returned <code>contentType</code> is <code>image/jpeg</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.91</code>, the returned <code>contentType</code> is <code>image/j2c</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is MPEG2, <code>1.2.840.10008.1.2.4.100</code>, <code>1.2.840.10008.1.2.4.100.1</code>, <code>1.2.840.10008.1.2.4.101</code>, or <code>1.2.840.10008.1.2.4.101.1</code>, the returned <code>contentType</code> is <code>video/mpeg</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is MPEG-4 AVC/H.264, UID <code>1.2.840.10008.1.2.4.102</code>, <code>1.2.840.10008.1.2.4.102.1</code>, <code>1.2.840.10008.1.2.4.103</code>, <code>1.2.840.10008.1.2.4.103.1</code>, <code>1.2.840.10008.1.2.4.104</code>, <code>1.2.840.10008.1.2.4.104.1</code>, <code>1.2.840.10008.1.2.4.105</code>, <code>1.2.840.10008.1.2.4.105.1</code>, <code>1.2.840.10008.1.2.4.106</code>, or <code>1.2.840.10008.1.2.4.106.1</code>, the returned <code>contentType</code> is <code>video/mp4</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is HEVC/H.265, UID <code>1.2.840.10008.1.2.4.107</code> or <code>1.2.840.10008.1.2.4.108</code>, the returned <code>contentType</code> is <code>video/H256</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.202</code> or if the stored transfer syntax is <i>missing</i>, the returned <code>contentType</code> is <code>image/jph</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.203</code>, the returned contentType is <code>image/jphc</code>.</p> </li> </ul> </note>
+    #   <p>The format in which the image frame information is returned to the customer. Default is <code>application/octet-stream</code>.</p> <note> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.1</code>, the returned <code>contentType</code> is <code>application/octet-stream</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.50</code>, the returned <code>contentType</code> is <code>image/jpeg</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.91</code>, the returned <code>contentType</code> is <code>image/j2c</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is MPEG2, <code>1.2.840.10008.1.2.4.100</code>, <code>1.2.840.10008.1.2.4.100.1</code>, <code>1.2.840.10008.1.2.4.101</code>, or <code>1.2.840.10008.1.2.4.101.1</code>, the returned <code>contentType</code> is <code>video/mpeg</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is MPEG-4 AVC/H.264, UID <code>1.2.840.10008.1.2.4.102</code>, <code>1.2.840.10008.1.2.4.102.1</code>, <code>1.2.840.10008.1.2.4.103</code>, <code>1.2.840.10008.1.2.4.103.1</code>, <code>1.2.840.10008.1.2.4.104</code>, <code>1.2.840.10008.1.2.4.104.1</code>, <code>1.2.840.10008.1.2.4.105</code>, <code>1.2.840.10008.1.2.4.105.1</code>, <code>1.2.840.10008.1.2.4.106</code>, or <code>1.2.840.10008.1.2.4.106.1</code>, the returned <code>contentType</code> is <code>video/mp4</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is HEVC/H.265, UID <code>1.2.840.10008.1.2.4.107</code> or <code>1.2.840.10008.1.2.4.108</code>, the returned <code>contentType</code> is <code>video/H256</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.202</code> or if the stored transfer syntax is <i>missing</i>, the returned <code>contentType</code> is <code>image/jph</code>.</p> </li> </ul> <ul> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.203</code>, the returned contentType is <code>image/jphc</code>.</p> </li> <li> <p>If the stored transfer syntax is <code>1.2.840.10008.1.2.4.112</code> the returned <code>contentType</code> is <code>image/jxl</code>.</p> </li> </ul> </note>
     #   @return [String]
     class GetImageFrameResponse < Struct.new(
       nil,
@@ -745,6 +800,12 @@ module Aws::MedicalImaging
     # @!attribute is_primary
     #   <p>The flag to determine whether the image set is primary or not.</p>
     #   @return [Boolean]
+    # @!attribute last_accessed_at
+    #   <p>When the image set was last accessed.</p>
+    #   @return [Time]
+    # @!attribute storage_tier
+    #   <p>The storage tier of the image set.</p>
+    #   @return [String]
     class GetImageSetResponse < Struct.new(
       nil,
       :datastore_id,
@@ -759,6 +820,8 @@ module Aws::MedicalImaging
       :image_set_arn,
       :overrides,
       :is_primary,
+      :last_accessed_at,
+      :storage_tier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -837,6 +900,12 @@ module Aws::MedicalImaging
     # @!attribute updated_at
     #   <p>The time an image set was last updated.</p>
     #   @return [Time]
+    # @!attribute last_accessed_at
+    #   <p>When the image set was last accessed.</p>
+    #   @return [Time]
+    # @!attribute storage_tier
+    #   <p>The image set's storage tier.</p>
+    #   @return [String]
     # @!attribute dicom_tags
     #   <p>The DICOM tags associated with the image set.</p>
     #   @return [Types::DICOMTags]
@@ -849,11 +918,28 @@ module Aws::MedicalImaging
       :version,
       :created_at,
       :updated_at,
+      :last_accessed_at,
+      :storage_tier,
       :dicom_tags,
       :is_primary,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration options for different types of import operations.</p>
+    # @!attribute dicom_json_metadata_import_configuration
+    #   <p>The configuration parameters that are specific to DICOM JSON metadata import operations.</p>
+    #   @return [Types::DicomJsonMetadataImportConfiguration]
+    class ImportConfiguration < Struct.new(
+      :dicom_json_metadata_import_configuration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DicomJsonMetadataImportConfiguration < ImportConfiguration; end
+      class Unknown < ImportConfiguration; end
     end
 
     # <p>An unexpected error occurred during processing of the request.</p>
@@ -1029,6 +1115,17 @@ module Aws::MedicalImaging
       class DICOMUpdates < MetadataUpdates; end
       class RevertToVersionId < MetadataUpdates; end
       class Unknown < MetadataUpdates; end
+    end
+
+    # <p>The request content type or accept header is not supported.</p>
+    # @!attribute message
+    #   @return [String]
+    class NotAcceptableException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the overrides used in image set modification calls to <code>CopyImageSet</code> and <code>UpdateImageSetMetadata</code>.</p>
@@ -1232,6 +1329,9 @@ module Aws::MedicalImaging
     # @!attribute input_owner_account_id
     #   <p>The account ID of the source S3 bucket owner.</p>
     #   @return [String]
+    # @!attribute import_configuration
+    #   <p>The import configuration for the import job.</p>
+    #   @return [Types::ImportConfiguration]
     class StartDICOMImportJobRequest < Struct.new(
       nil,
       :job_name,
@@ -1241,6 +1341,7 @@ module Aws::MedicalImaging
       :input_s3_uri,
       :output_s3_uri,
       :input_owner_account_id,
+      :import_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1336,6 +1437,9 @@ module Aws::MedicalImaging
     # @!attribute force
     #   <p>Setting this flag will force the <code>UpdateImageSetMetadata</code> operation for the following attributes:</p> <ul> <li> <p> <code>Tag.StudyInstanceUID</code>, <code>Tag.SeriesInstanceUID</code>, <code>Tag.SOPInstanceUID</code>, and <code>Tag.StudyID</code> </p> </li> <li> <p>Adding, removing, or updating private tags for an individual SOP Instance</p> </li> </ul>
     #   @return [Boolean]
+    # @!attribute include_study_image_sets
+    #   <p>Flag to apply the metadata updates to all image sets in the same Study as the requested image set ID.</p>
+    #   @return [Boolean]
     # @!attribute update_image_set_metadata_updates
     #   <p>Update image set metadata updates.</p>
     #   @return [Types::MetadataUpdates]
@@ -1345,6 +1449,7 @@ module Aws::MedicalImaging
       :image_set_id,
       :latest_version_id,
       :force,
+      :include_study_image_sets,
       :update_image_set_metadata_updates,
       keyword_init: true
     )

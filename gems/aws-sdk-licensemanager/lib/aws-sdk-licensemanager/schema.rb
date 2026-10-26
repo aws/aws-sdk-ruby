@@ -12,8 +12,11 @@ module Aws::LicenseManager
     ActivationOverrideBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.licensemanager#ActivationOverrideBehavior", name: "ActivationOverrideBehavior")
     AllowedOperation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.licensemanager#AllowedOperation", name: "AllowedOperation")
     AllowedOperationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#AllowedOperationList", name: "AllowedOperationList", traits: {"smithy.api#length" => {"min" => 1, "max" => 8}})
+    AndRuleStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#AndRuleStatement", name: "AndRuleStatement")
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"})
     ArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#ArnList", name: "ArnList")
+    Asset = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#Asset", name: "Asset")
+    AssetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#AssetList", name: "AssetList")
     AuthorizationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#AuthorizationException", name: "AuthorizationException", traits: {"aws.protocols#awsQueryError" => {"code" => "AuthorizationFailure", "httpResponseCode" => 403}, "smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AutomatedDiscoveryInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#AutomatedDiscoveryInformation", name: "AutomatedDiscoveryInformation")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.licensemanager#Boolean", name: "Boolean", traits: {"smithy.api#default" => false})
@@ -38,6 +41,10 @@ module Aws::LicenseManager
     CreateGrantResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateGrantResponse", name: "CreateGrantResponse")
     CreateGrantVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateGrantVersionRequest", name: "CreateGrantVersionRequest")
     CreateGrantVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateGrantVersionResponse", name: "CreateGrantVersionResponse")
+    CreateLicenseAssetGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateLicenseAssetGroupRequest", name: "CreateLicenseAssetGroupRequest")
+    CreateLicenseAssetGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateLicenseAssetGroupResponse", name: "CreateLicenseAssetGroupResponse")
+    CreateLicenseAssetRulesetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateLicenseAssetRulesetRequest", name: "CreateLicenseAssetRulesetRequest")
+    CreateLicenseAssetRulesetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateLicenseAssetRulesetResponse", name: "CreateLicenseAssetRulesetResponse")
     CreateLicenseConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateLicenseConfigurationRequest", name: "CreateLicenseConfigurationRequest")
     CreateLicenseConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateLicenseConfigurationResponse", name: "CreateLicenseConfigurationResponse")
     CreateLicenseConversionTaskForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateLicenseConversionTaskForResourceRequest", name: "CreateLicenseConversionTaskForResourceRequest")
@@ -50,10 +57,16 @@ module Aws::LicenseManager
     CreateLicenseVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateLicenseVersionResponse", name: "CreateLicenseVersionResponse")
     CreateTokenRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateTokenRequest", name: "CreateTokenRequest")
     CreateTokenResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CreateTokenResponse", name: "CreateTokenResponse")
+    CrossAccountDiscoveryServiceStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CrossAccountDiscoveryServiceStatus", name: "CrossAccountDiscoveryServiceStatus")
+    CrossRegionDiscoveryStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#CrossRegionDiscoveryStatus", name: "CrossRegionDiscoveryStatus")
     DateTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.licensemanager#DateTime", name: "DateTime")
     DatetimeRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DatetimeRange", name: "DatetimeRange")
     DeleteGrantRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DeleteGrantRequest", name: "DeleteGrantRequest")
     DeleteGrantResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DeleteGrantResponse", name: "DeleteGrantResponse")
+    DeleteLicenseAssetGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DeleteLicenseAssetGroupRequest", name: "DeleteLicenseAssetGroupRequest")
+    DeleteLicenseAssetGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DeleteLicenseAssetGroupResponse", name: "DeleteLicenseAssetGroupResponse")
+    DeleteLicenseAssetRulesetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DeleteLicenseAssetRulesetRequest", name: "DeleteLicenseAssetRulesetRequest")
+    DeleteLicenseAssetRulesetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DeleteLicenseAssetRulesetResponse", name: "DeleteLicenseAssetRulesetResponse")
     DeleteLicenseConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DeleteLicenseConfigurationRequest", name: "DeleteLicenseConfigurationRequest")
     DeleteLicenseConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DeleteLicenseConfigurationResponse", name: "DeleteLicenseConfigurationResponse")
     DeleteLicenseManagerReportGeneratorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#DeleteLicenseManagerReportGeneratorRequest", name: "DeleteLicenseManagerReportGeneratorRequest")
@@ -86,6 +99,10 @@ module Aws::LicenseManager
     GetAccessTokenResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetAccessTokenResponse", name: "GetAccessTokenResponse")
     GetGrantRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetGrantRequest", name: "GetGrantRequest")
     GetGrantResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetGrantResponse", name: "GetGrantResponse")
+    GetLicenseAssetGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetLicenseAssetGroupRequest", name: "GetLicenseAssetGroupRequest")
+    GetLicenseAssetGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetLicenseAssetGroupResponse", name: "GetLicenseAssetGroupResponse")
+    GetLicenseAssetRulesetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetLicenseAssetRulesetRequest", name: "GetLicenseAssetRulesetRequest")
+    GetLicenseAssetRulesetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetLicenseAssetRulesetResponse", name: "GetLicenseAssetRulesetResponse")
     GetLicenseConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetLicenseConfigurationRequest", name: "GetLicenseConfigurationRequest")
     GetLicenseConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetLicenseConfigurationResponse", name: "GetLicenseConfigurationResponse")
     GetLicenseConversionTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GetLicenseConversionTaskRequest", name: "GetLicenseConversionTaskRequest")
@@ -104,6 +121,7 @@ module Aws::LicenseManager
     GrantedLicense = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#GrantedLicense", name: "GrantedLicense")
     GrantedLicenseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#GrantedLicenseList", name: "GrantedLicenseList")
     ISO8601DateTime = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#ISO8601DateTime", name: "ISO8601DateTime", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}, "smithy.api#pattern" => "^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|[+-](?:2[ 0-3]|[0-1][0-9]):[0-5][0-9])+$"})
+    InstanceRuleStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#InstanceRuleStatement", name: "InstanceRuleStatement")
     Integer = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.licensemanager#Integer", name: "Integer")
     InvalidParameterValueException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#InvalidParameterValueException", name: "InvalidParameterValueException", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidParameterValueProvided", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     InvalidResourceStateException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#InvalidResourceStateException", name: "InvalidResourceStateException", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidResourceState", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -113,9 +131,24 @@ module Aws::LicenseManager
     Issuer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#Issuer", name: "Issuer")
     IssuerDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#IssuerDetails", name: "IssuerDetails")
     License = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#License", name: "License")
+    LicenseAssetGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseAssetGroup", name: "LicenseAssetGroup")
+    LicenseAssetGroupConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseAssetGroupConfiguration", name: "LicenseAssetGroupConfiguration")
+    LicenseAssetGroupConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseAssetGroupConfigurationList", name: "LicenseAssetGroupConfigurationList")
+    LicenseAssetGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseAssetGroupList", name: "LicenseAssetGroupList")
+    LicenseAssetGroupProperty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseAssetGroupProperty", name: "LicenseAssetGroupProperty")
+    LicenseAssetGroupPropertyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseAssetGroupPropertyList", name: "LicenseAssetGroupPropertyList")
+    LicenseAssetGroupStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.licensemanager#LicenseAssetGroupStatus", name: "LicenseAssetGroupStatus")
+    LicenseAssetResourceDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#LicenseAssetResourceDescription", name: "LicenseAssetResourceDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    LicenseAssetResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#LicenseAssetResourceName", name: "LicenseAssetResourceName", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
+    LicenseAssetRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseAssetRule", name: "LicenseAssetRule")
+    LicenseAssetRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseAssetRuleList", name: "LicenseAssetRuleList")
+    LicenseAssetRuleset = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseAssetRuleset", name: "LicenseAssetRuleset")
+    LicenseAssetRulesetArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseAssetRulesetArnList", name: "LicenseAssetRulesetArnList")
+    LicenseAssetRulesetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseAssetRulesetList", name: "LicenseAssetRulesetList")
     LicenseConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseConfiguration", name: "LicenseConfiguration")
     LicenseConfigurationAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseConfigurationAssociation", name: "LicenseConfigurationAssociation")
     LicenseConfigurationAssociations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseConfigurationAssociations", name: "LicenseConfigurationAssociations")
+    LicenseConfigurationRuleStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseConfigurationRuleStatement", name: "LicenseConfigurationRuleStatement")
     LicenseConfigurationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.licensemanager#LicenseConfigurationStatus", name: "LicenseConfigurationStatus")
     LicenseConfigurationUsage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseConfigurationUsage", name: "LicenseConfigurationUsage")
     LicenseConfigurationUsageList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseConfigurationUsageList", name: "LicenseConfigurationUsageList")
@@ -130,17 +163,26 @@ module Aws::LicenseManager
     LicenseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseList", name: "LicenseList")
     LicenseOperationFailure = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseOperationFailure", name: "LicenseOperationFailure")
     LicenseOperationFailureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseOperationFailureList", name: "LicenseOperationFailureList")
+    LicenseRuleStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseRuleStatement", name: "LicenseRuleStatement")
     LicenseSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseSpecification", name: "LicenseSpecification")
     LicenseSpecifications = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#LicenseSpecifications", name: "LicenseSpecifications")
     LicenseStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.licensemanager#LicenseStatus", name: "LicenseStatus")
     LicenseUsage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseUsage", name: "LicenseUsage")
     LicenseUsageException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#LicenseUsageException", name: "LicenseUsageException", traits: {"aws.protocols#awsQueryError" => {"code" => "LicenseUsageFailure", "httpResponseCode" => 412}, "smithy.api#error" => "client", "smithy.api#httpError" => 412})
+    ListAssetsForLicenseAssetGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListAssetsForLicenseAssetGroupRequest", name: "ListAssetsForLicenseAssetGroupRequest")
+    ListAssetsForLicenseAssetGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListAssetsForLicenseAssetGroupResponse", name: "ListAssetsForLicenseAssetGroupResponse")
     ListAssociationsForLicenseConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListAssociationsForLicenseConfigurationRequest", name: "ListAssociationsForLicenseConfigurationRequest")
     ListAssociationsForLicenseConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListAssociationsForLicenseConfigurationResponse", name: "ListAssociationsForLicenseConfigurationResponse")
     ListDistributedGrantsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListDistributedGrantsRequest", name: "ListDistributedGrantsRequest")
     ListDistributedGrantsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListDistributedGrantsResponse", name: "ListDistributedGrantsResponse")
     ListFailuresForLicenseConfigurationOperationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListFailuresForLicenseConfigurationOperationsRequest", name: "ListFailuresForLicenseConfigurationOperationsRequest")
     ListFailuresForLicenseConfigurationOperationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListFailuresForLicenseConfigurationOperationsResponse", name: "ListFailuresForLicenseConfigurationOperationsResponse")
+    ListLicenseAssetGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListLicenseAssetGroupsRequest", name: "ListLicenseAssetGroupsRequest")
+    ListLicenseAssetGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListLicenseAssetGroupsResponse", name: "ListLicenseAssetGroupsResponse")
+    ListLicenseAssetRulesetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListLicenseAssetRulesetsRequest", name: "ListLicenseAssetRulesetsRequest")
+    ListLicenseAssetRulesetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListLicenseAssetRulesetsResponse", name: "ListLicenseAssetRulesetsResponse")
+    ListLicenseConfigurationsForOrganizationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListLicenseConfigurationsForOrganizationRequest", name: "ListLicenseConfigurationsForOrganizationRequest")
+    ListLicenseConfigurationsForOrganizationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListLicenseConfigurationsForOrganizationResponse", name: "ListLicenseConfigurationsForOrganizationResponse")
     ListLicenseConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListLicenseConfigurationsRequest", name: "ListLicenseConfigurationsRequest")
     ListLicenseConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListLicenseConfigurationsResponse", name: "ListLicenseConfigurationsResponse")
     ListLicenseConversionTasksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ListLicenseConversionTasksRequest", name: "ListLicenseConversionTasksRequest")
@@ -173,6 +215,8 @@ module Aws::LicenseManager
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.licensemanager#Long", name: "Long")
     ManagedResourceSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ManagedResourceSummary", name: "ManagedResourceSummary")
     ManagedResourceSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#ManagedResourceSummaryList", name: "ManagedResourceSummaryList")
+    MatchingRuleStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#MatchingRuleStatement", name: "MatchingRuleStatement")
+    MatchingRuleStatementList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#MatchingRuleStatementList", name: "MatchingRuleStatementList")
     MaxSize100 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.licensemanager#MaxSize100", name: "MaxSize100", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxSize3StringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#MaxSize3StringList", name: "MaxSize3StringList", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
     Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#Message", name: "Message")
@@ -180,6 +224,7 @@ module Aws::LicenseManager
     MetadataList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#MetadataList", name: "MetadataList")
     NoEntitlementsAllowedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#NoEntitlementsAllowedException", name: "NoEntitlementsAllowedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     Options = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#Options", name: "Options")
+    OrRuleStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#OrRuleStatement", name: "OrRuleStatement")
     OrganizationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#OrganizationConfiguration", name: "OrganizationConfiguration")
     PrincipalArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#PrincipalArnList", name: "PrincipalArnList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     ProductCodeId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#ProductCodeId", name: "ProductCodeId", traits: {"smithy.api#pattern" => "^[A-Za-z0-9]{1,25}$"})
@@ -195,6 +240,8 @@ module Aws::LicenseManager
     ReceivedMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ReceivedMetadata", name: "ReceivedMetadata")
     ReceivedStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.licensemanager#ReceivedStatus", name: "ReceivedStatus")
     RedirectException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#RedirectException", name: "RedirectException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 308})
+    RegionStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#RegionStatus", name: "RegionStatus")
+    RegionStatusMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.licensemanager#RegionStatusMap", name: "RegionStatusMap")
     RejectGrantRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#RejectGrantRequest", name: "RejectGrantRequest")
     RejectGrantResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#RejectGrantResponse", name: "RejectGrantResponse")
     RenewType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.licensemanager#RenewType", name: "RenewType")
@@ -211,8 +258,12 @@ module Aws::LicenseManager
     ResourceLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ResourceLimitExceededException", name: "ResourceLimitExceededException", traits: {"aws.protocols#awsQueryError" => {"code" => "ResourceLimitExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"aws.protocols#awsQueryError" => {"code" => "InvalidResource.NotFound", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.licensemanager#ResourceType", name: "ResourceType")
+    RuleStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#RuleStatement", name: "RuleStatement")
     S3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#S3Location", name: "S3Location")
+    ScriptRuleStatement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ScriptRuleStatement", name: "ScriptRuleStatement")
+    ScriptRuleStatementList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.licensemanager#ScriptRuleStatementList", name: "ScriptRuleStatementList")
     ServerInternalException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ServerInternalException", name: "ServerInternalException", traits: {"aws.protocols#awsQueryError" => {"code" => "InternalError", "httpResponseCode" => 500}, "smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    ServiceStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#ServiceStatus", name: "ServiceStatus")
     SignedToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#SignedToken", name: "SignedToken", traits: {"smithy.api#length" => {"min" => 4096}})
     StatusReasonMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#StatusReasonMessage", name: "StatusReasonMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 400}, "smithy.api#pattern" => "^[\\s\\S]+$"})
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.licensemanager#String", name: "String")
@@ -229,6 +280,10 @@ module Aws::LicenseManager
     UnsupportedDigitalSignatureMethodException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UnsupportedDigitalSignatureMethodException", name: "UnsupportedDigitalSignatureMethodException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UntagResourceResponse", name: "UntagResourceResponse")
+    UpdateLicenseAssetGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UpdateLicenseAssetGroupRequest", name: "UpdateLicenseAssetGroupRequest")
+    UpdateLicenseAssetGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UpdateLicenseAssetGroupResponse", name: "UpdateLicenseAssetGroupResponse")
+    UpdateLicenseAssetRulesetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UpdateLicenseAssetRulesetRequest", name: "UpdateLicenseAssetRulesetRequest")
+    UpdateLicenseAssetRulesetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UpdateLicenseAssetRulesetResponse", name: "UpdateLicenseAssetRulesetResponse")
     UpdateLicenseConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UpdateLicenseConfigurationRequest", name: "UpdateLicenseConfigurationRequest")
     UpdateLicenseConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UpdateLicenseConfigurationResponse", name: "UpdateLicenseConfigurationResponse")
     UpdateLicenseManagerReportGeneratorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.licensemanager#UpdateLicenseManagerReportGeneratorRequest", name: "UpdateLicenseManagerReportGeneratorRequest")
@@ -258,7 +313,14 @@ module Aws::LicenseManager
     AllowedOperation.add_member(:list_purchased_licenses, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIST_PURCHASED_LICENSES", traits: {"smithy.api#enumValue" => "ListPurchasedLicenses"}))
     AllowedOperation.add_member(:create_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_TOKEN", traits: {"smithy.api#enumValue" => "CreateToken"}))
     AllowedOperationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AllowedOperation, name: "member"))
+    AndRuleStatement.add_member(:matching_rule_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingRuleStatementList, name: "MatchingRuleStatements"))
+    AndRuleStatement.add_member(:script_rule_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptRuleStatementList, name: "ScriptRuleStatements"))
+    AndRuleStatement.type = Types::AndRuleStatement
     ArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    Asset.add_member(:asset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AssetArn"))
+    Asset.add_member(:latest_asset_discovery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LatestAssetDiscoveryTime"))
+    Asset.type = Types::Asset
+    AssetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Asset, name: "member"))
     AuthorizationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     AuthorizationException.type = Types::AuthorizationException
     AutomatedDiscoveryInformation.add_member(:last_run_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastRunTime"))
@@ -340,6 +402,25 @@ module Aws::LicenseManager
     CreateGrantVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantStatus, name: "Status"))
     CreateGrantVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     CreateGrantVersionResponse.type = Types::CreateGrantVersionResponse
+    CreateLicenseAssetGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetResourceDescription, name: "Description"))
+    CreateLicenseAssetGroupRequest.add_member(:license_asset_group_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupConfigurationList, name: "LicenseAssetGroupConfigurations", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetGroupRequest.add_member(:associated_license_asset_ruleset_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRulesetArnList, name: "AssociatedLicenseAssetRulesetARNs", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetGroupRequest.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupPropertyList, name: "Properties"))
+    CreateLicenseAssetGroupRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateLicenseAssetGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetGroupRequest.type = Types::CreateLicenseAssetGroupRequest
+    CreateLicenseAssetGroupResponse.add_member(:license_asset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseAssetGroupArn", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetGroupResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetGroupResponse.type = Types::CreateLicenseAssetGroupResponse
+    CreateLicenseAssetRulesetRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetResourceName, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetRulesetRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetResourceDescription, name: "Description"))
+    CreateLicenseAssetRulesetRequest.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRuleList, name: "Rules", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetRulesetRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateLicenseAssetRulesetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetRulesetRequest.type = Types::CreateLicenseAssetRulesetRequest
+    CreateLicenseAssetRulesetResponse.add_member(:license_asset_ruleset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseAssetRulesetArn", traits: {"smithy.api#required" => {}}))
+    CreateLicenseAssetRulesetResponse.type = Types::CreateLicenseAssetRulesetResponse
     CreateLicenseConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
     CreateLicenseConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     CreateLicenseConfigurationRequest.add_member(:license_counting_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseCountingType, name: "LicenseCountingType", traits: {"smithy.api#required" => {}}))
@@ -349,6 +430,7 @@ module Aws::LicenseManager
     CreateLicenseConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateLicenseConfigurationRequest.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, name: "DisassociateWhenNotFound"))
     CreateLicenseConfigurationRequest.add_member(:product_information_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationList, name: "ProductInformationList"))
+    CreateLicenseConfigurationRequest.add_member(:license_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, name: "LicenseExpiry"))
     CreateLicenseConfigurationRequest.type = Types::CreateLicenseConfigurationRequest
     CreateLicenseConfigurationResponse.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationArn"))
     CreateLicenseConfigurationResponse.type = Types::CreateLicenseConfigurationResponse
@@ -397,6 +479,7 @@ module Aws::LicenseManager
     CreateLicenseVersionRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     CreateLicenseVersionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#required" => {}}))
     CreateLicenseVersionRequest.add_member(:source_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceVersion"))
+    CreateLicenseVersionRequest.add_member(:reset_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ResetUsage", traits: {"smithy.api#default" => false}))
     CreateLicenseVersionRequest.type = Types::CreateLicenseVersionRequest
     CreateLicenseVersionResponse.add_member(:license_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "LicenseArn"))
     CreateLicenseVersionResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
@@ -412,6 +495,10 @@ module Aws::LicenseManager
     CreateTokenResponse.add_member(:token_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenType, name: "TokenType"))
     CreateTokenResponse.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenString, name: "Token"))
     CreateTokenResponse.type = Types::CreateTokenResponse
+    CrossAccountDiscoveryServiceStatus.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    CrossAccountDiscoveryServiceStatus.type = Types::CrossAccountDiscoveryServiceStatus
+    CrossRegionDiscoveryStatus.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionStatusMap, name: "Message"))
+    CrossRegionDiscoveryStatus.type = Types::CrossRegionDiscoveryStatus
     DatetimeRange.add_member(:begin, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, name: "Begin", traits: {"smithy.api#required" => {}}))
     DatetimeRange.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, name: "End"))
     DatetimeRange.type = Types::DatetimeRange
@@ -423,6 +510,13 @@ module Aws::LicenseManager
     DeleteGrantResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantStatus, name: "Status"))
     DeleteGrantResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     DeleteGrantResponse.type = Types::DeleteGrantResponse
+    DeleteLicenseAssetGroupRequest.add_member(:license_asset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "LicenseAssetGroupArn", traits: {"smithy.api#required" => {}}))
+    DeleteLicenseAssetGroupRequest.type = Types::DeleteLicenseAssetGroupRequest
+    DeleteLicenseAssetGroupResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    DeleteLicenseAssetGroupResponse.type = Types::DeleteLicenseAssetGroupResponse
+    DeleteLicenseAssetRulesetRequest.add_member(:license_asset_ruleset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "LicenseAssetRulesetArn", traits: {"smithy.api#required" => {}}))
+    DeleteLicenseAssetRulesetRequest.type = Types::DeleteLicenseAssetRulesetRequest
+    DeleteLicenseAssetRulesetResponse.type = Types::DeleteLicenseAssetRulesetResponse
     DeleteLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
     DeleteLicenseConfigurationRequest.type = Types::DeleteLicenseConfigurationRequest
     DeleteLicenseConfigurationResponse.type = Types::DeleteLicenseConfigurationResponse
@@ -541,6 +635,14 @@ module Aws::LicenseManager
     GetGrantRequest.type = Types::GetGrantRequest
     GetGrantResponse.add_member(:grant, ::Smithy::Schema::Shapes::MemberShape.new(target: Grant, name: "Grant"))
     GetGrantResponse.type = Types::GetGrantResponse
+    GetLicenseAssetGroupRequest.add_member(:license_asset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "LicenseAssetGroupArn", traits: {"smithy.api#required" => {}}))
+    GetLicenseAssetGroupRequest.type = Types::GetLicenseAssetGroupRequest
+    GetLicenseAssetGroupResponse.add_member(:license_asset_group, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroup, name: "LicenseAssetGroup", traits: {"smithy.api#required" => {}}))
+    GetLicenseAssetGroupResponse.type = Types::GetLicenseAssetGroupResponse
+    GetLicenseAssetRulesetRequest.add_member(:license_asset_ruleset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "LicenseAssetRulesetArn", traits: {"smithy.api#required" => {}}))
+    GetLicenseAssetRulesetRequest.type = Types::GetLicenseAssetRulesetRequest
+    GetLicenseAssetRulesetResponse.add_member(:license_asset_ruleset, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRuleset, name: "LicenseAssetRuleset", traits: {"smithy.api#required" => {}}))
+    GetLicenseAssetRulesetResponse.type = Types::GetLicenseAssetRulesetResponse
     GetLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
     GetLicenseConfigurationRequest.type = Types::GetLicenseConfigurationRequest
     GetLicenseConfigurationResponse.add_member(:license_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationId"))
@@ -560,6 +662,7 @@ module Aws::LicenseManager
     GetLicenseConfigurationResponse.add_member(:product_information_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationList, name: "ProductInformationList"))
     GetLicenseConfigurationResponse.add_member(:automated_discovery_information, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedDiscoveryInformation, name: "AutomatedDiscoveryInformation"))
     GetLicenseConfigurationResponse.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, name: "DisassociateWhenNotFound"))
+    GetLicenseConfigurationResponse.add_member(:license_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, name: "LicenseExpiry"))
     GetLicenseConfigurationResponse.type = Types::GetLicenseConfigurationResponse
     GetLicenseConversionTaskRequest.add_member(:license_conversion_task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConversionTaskId, name: "LicenseConversionTaskId", traits: {"smithy.api#required" => {}}))
     GetLicenseConversionTaskRequest.type = Types::GetLicenseConversionTaskRequest
@@ -592,6 +695,9 @@ module Aws::LicenseManager
     GetServiceSettingsResponse.add_member(:organization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfiguration, name: "OrganizationConfiguration"))
     GetServiceSettingsResponse.add_member(:enable_cross_accounts_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, name: "EnableCrossAccountsDiscovery"))
     GetServiceSettingsResponse.add_member(:license_manager_resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseManagerResourceShareArn"))
+    GetServiceSettingsResponse.add_member(:cross_region_discovery_home_region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CrossRegionDiscoveryHomeRegion"))
+    GetServiceSettingsResponse.add_member(:cross_region_discovery_source_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "CrossRegionDiscoverySourceRegions"))
+    GetServiceSettingsResponse.add_member(:service_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceStatus, name: "ServiceStatus"))
     GetServiceSettingsResponse.type = Types::GetServiceSettingsResponse
     Grant.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "GrantArn", traits: {"smithy.api#required" => {}}))
     Grant.add_member(:grant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "GrantName", traits: {"smithy.api#required" => {}}))
@@ -632,6 +738,11 @@ module Aws::LicenseManager
     GrantedLicense.add_member(:received_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceivedMetadata, name: "ReceivedMetadata"))
     GrantedLicense.type = Types::GrantedLicense
     GrantedLicenseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GrantedLicense, name: "member"))
+    InstanceRuleStatement.add_member(:and_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: AndRuleStatement, name: "AndRuleStatement"))
+    InstanceRuleStatement.add_member(:or_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: OrRuleStatement, name: "OrRuleStatement"))
+    InstanceRuleStatement.add_member(:matching_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingRuleStatement, name: "MatchingRuleStatement"))
+    InstanceRuleStatement.add_member(:script_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptRuleStatement, name: "ScriptRuleStatement"))
+    InstanceRuleStatement.type = Types::InstanceRuleStatement
     InvalidParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     InvalidParameterValueException.type = Types::InvalidParameterValueException
     InvalidResourceStateException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -667,6 +778,38 @@ module Aws::LicenseManager
     License.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601DateTime, name: "CreateTime"))
     License.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Version"))
     License.type = Types::License
+    LicenseAssetGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
+    LicenseAssetGroup.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
+    LicenseAssetGroup.add_member(:license_asset_group_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupConfigurationList, name: "LicenseAssetGroupConfigurations"))
+    LicenseAssetGroup.add_member(:associated_license_asset_ruleset_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRulesetArnList, name: "AssociatedLicenseAssetRulesetARNs", traits: {"smithy.api#required" => {}}))
+    LicenseAssetGroup.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupPropertyList, name: "Properties"))
+    LicenseAssetGroup.add_member(:license_asset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "LicenseAssetGroupArn", traits: {"smithy.api#required" => {}}))
+    LicenseAssetGroup.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    LicenseAssetGroup.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StatusMessage"))
+    LicenseAssetGroup.add_member(:latest_usage_analysis_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LatestUsageAnalysisTime"))
+    LicenseAssetGroup.add_member(:latest_resource_discovery_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LatestResourceDiscoveryTime"))
+    LicenseAssetGroup.type = Types::LicenseAssetGroup
+    LicenseAssetGroupConfiguration.add_member(:usage_dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "UsageDimension"))
+    LicenseAssetGroupConfiguration.type = Types::LicenseAssetGroupConfiguration
+    LicenseAssetGroupConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupConfiguration, name: "member"))
+    LicenseAssetGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroup, name: "member"))
+    LicenseAssetGroupProperty.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key", traits: {"smithy.api#required" => {}}))
+    LicenseAssetGroupProperty.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
+    LicenseAssetGroupProperty.type = Types::LicenseAssetGroupProperty
+    LicenseAssetGroupPropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupProperty, name: "member"))
+    LicenseAssetGroupStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    LicenseAssetGroupStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    LicenseAssetGroupStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    LicenseAssetRule.add_member(:rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleStatement, name: "RuleStatement", traits: {"smithy.api#required" => {}}))
+    LicenseAssetRule.type = Types::LicenseAssetRule
+    LicenseAssetRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRule, name: "member"))
+    LicenseAssetRuleset.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
+    LicenseAssetRuleset.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
+    LicenseAssetRuleset.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRuleList, name: "Rules", traits: {"smithy.api#required" => {}}))
+    LicenseAssetRuleset.add_member(:license_asset_ruleset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "LicenseAssetRulesetArn", traits: {"smithy.api#required" => {}}))
+    LicenseAssetRuleset.type = Types::LicenseAssetRuleset
+    LicenseAssetRulesetArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
+    LicenseAssetRulesetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRuleset, name: "member"))
     LicenseConfiguration.add_member(:license_configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationId"))
     LicenseConfiguration.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationArn"))
     LicenseConfiguration.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
@@ -683,6 +826,7 @@ module Aws::LicenseManager
     LicenseConfiguration.add_member(:managed_resource_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummaryList, name: "ManagedResourceSummaryList"))
     LicenseConfiguration.add_member(:product_information_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationList, name: "ProductInformationList"))
     LicenseConfiguration.add_member(:automated_discovery_information, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedDiscoveryInformation, name: "AutomatedDiscoveryInformation"))
+    LicenseConfiguration.add_member(:license_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, name: "LicenseExpiry"))
     LicenseConfiguration.type = Types::LicenseConfiguration
     LicenseConfigurationAssociation.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
     LicenseConfigurationAssociation.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
@@ -691,6 +835,10 @@ module Aws::LicenseManager
     LicenseConfigurationAssociation.add_member(:ami_association_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AmiAssociationScope"))
     LicenseConfigurationAssociation.type = Types::LicenseConfigurationAssociation
     LicenseConfigurationAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationAssociation, name: "member"))
+    LicenseConfigurationRuleStatement.add_member(:and_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: AndRuleStatement, name: "AndRuleStatement"))
+    LicenseConfigurationRuleStatement.add_member(:or_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: OrRuleStatement, name: "OrRuleStatement"))
+    LicenseConfigurationRuleStatement.add_member(:matching_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingRuleStatement, name: "MatchingRuleStatement"))
+    LicenseConfigurationRuleStatement.type = Types::LicenseConfigurationRuleStatement
     LicenseConfigurationStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     LicenseConfigurationStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     LicenseConfigurationUsage.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn"))
@@ -736,6 +884,10 @@ module Aws::LicenseManager
     LicenseOperationFailure.add_member(:metadata_list, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataList, name: "MetadataList"))
     LicenseOperationFailure.type = Types::LicenseOperationFailure
     LicenseOperationFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseOperationFailure, name: "member"))
+    LicenseRuleStatement.add_member(:and_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: AndRuleStatement, name: "AndRuleStatement"))
+    LicenseRuleStatement.add_member(:or_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: OrRuleStatement, name: "OrRuleStatement"))
+    LicenseRuleStatement.add_member(:matching_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingRuleStatement, name: "MatchingRuleStatement"))
+    LicenseRuleStatement.type = Types::LicenseRuleStatement
     LicenseSpecification.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
     LicenseSpecification.add_member(:ami_association_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AmiAssociationScope"))
     LicenseSpecification.type = Types::LicenseSpecification
@@ -751,6 +903,14 @@ module Aws::LicenseManager
     LicenseUsage.type = Types::LicenseUsage
     LicenseUsageException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     LicenseUsageException.type = Types::LicenseUsageException
+    ListAssetsForLicenseAssetGroupRequest.add_member(:license_asset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseAssetGroupArn", traits: {"smithy.api#required" => {}}))
+    ListAssetsForLicenseAssetGroupRequest.add_member(:asset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AssetType", traits: {"smithy.api#required" => {}}))
+    ListAssetsForLicenseAssetGroupRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, name: "MaxResults"))
+    ListAssetsForLicenseAssetGroupRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListAssetsForLicenseAssetGroupRequest.type = Types::ListAssetsForLicenseAssetGroupRequest
+    ListAssetsForLicenseAssetGroupResponse.add_member(:assets, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetList, name: "Assets"))
+    ListAssetsForLicenseAssetGroupResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListAssetsForLicenseAssetGroupResponse.type = Types::ListAssetsForLicenseAssetGroupResponse
     ListAssociationsForLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
     ListAssociationsForLicenseConfigurationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, name: "MaxResults"))
     ListAssociationsForLicenseConfigurationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -773,6 +933,29 @@ module Aws::LicenseManager
     ListFailuresForLicenseConfigurationOperationsResponse.add_member(:license_operation_failure_list, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseOperationFailureList, name: "LicenseOperationFailureList"))
     ListFailuresForLicenseConfigurationOperationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListFailuresForLicenseConfigurationOperationsResponse.type = Types::ListFailuresForLicenseConfigurationOperationsResponse
+    ListLicenseAssetGroupsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, name: "Filters"))
+    ListLicenseAssetGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, name: "MaxResults"))
+    ListLicenseAssetGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListLicenseAssetGroupsRequest.type = Types::ListLicenseAssetGroupsRequest
+    ListLicenseAssetGroupsResponse.add_member(:license_asset_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupList, name: "LicenseAssetGroups"))
+    ListLicenseAssetGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListLicenseAssetGroupsResponse.type = Types::ListLicenseAssetGroupsResponse
+    ListLicenseAssetRulesetsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, name: "Filters"))
+    ListLicenseAssetRulesetsRequest.add_member(:show_aws_managed_license_asset_rulesets, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ShowAWSManagedLicenseAssetRulesets", traits: {"smithy.api#default" => false}))
+    ListLicenseAssetRulesetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, name: "MaxResults"))
+    ListLicenseAssetRulesetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListLicenseAssetRulesetsRequest.type = Types::ListLicenseAssetRulesetsRequest
+    ListLicenseAssetRulesetsResponse.add_member(:license_asset_rulesets, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRulesetList, name: "LicenseAssetRulesets"))
+    ListLicenseAssetRulesetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListLicenseAssetRulesetsResponse.type = Types::ListLicenseAssetRulesetsResponse
+    ListLicenseConfigurationsForOrganizationRequest.add_member(:license_configuration_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "LicenseConfigurationArns"))
+    ListLicenseConfigurationsForOrganizationRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, name: "MaxResults"))
+    ListLicenseConfigurationsForOrganizationRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListLicenseConfigurationsForOrganizationRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: Filters, name: "Filters"))
+    ListLicenseConfigurationsForOrganizationRequest.type = Types::ListLicenseConfigurationsForOrganizationRequest
+    ListLicenseConfigurationsForOrganizationResponse.add_member(:license_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurations, name: "LicenseConfigurations"))
+    ListLicenseConfigurationsForOrganizationResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListLicenseConfigurationsForOrganizationResponse.type = Types::ListLicenseConfigurationsForOrganizationResponse
     ListLicenseConfigurationsRequest.add_member(:license_configuration_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "LicenseConfigurationArns"))
     ListLicenseConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxInteger, name: "MaxResults"))
     ListLicenseConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -879,6 +1062,11 @@ module Aws::LicenseManager
     ManagedResourceSummary.add_member(:association_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, name: "AssociationCount"))
     ManagedResourceSummary.type = Types::ManagedResourceSummary
     ManagedResourceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedResourceSummary, name: "member"))
+    MatchingRuleStatement.add_member(:key_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KeyToMatch", traits: {"smithy.api#required" => {}}))
+    MatchingRuleStatement.add_member(:constraint, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Constraint", traits: {"smithy.api#required" => {}}))
+    MatchingRuleStatement.add_member(:value_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "ValueToMatch", traits: {"smithy.api#required" => {}}))
+    MatchingRuleStatement.type = Types::MatchingRuleStatement
+    MatchingRuleStatementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingRuleStatement, name: "member"))
     MaxSize3StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Metadata.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
@@ -888,6 +1076,9 @@ module Aws::LicenseManager
     NoEntitlementsAllowedException.type = Types::NoEntitlementsAllowedException
     Options.add_member(:activation_override_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationOverrideBehavior, name: "ActivationOverrideBehavior"))
     Options.type = Types::Options
+    OrRuleStatement.add_member(:matching_rule_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchingRuleStatementList, name: "MatchingRuleStatements"))
+    OrRuleStatement.add_member(:script_rule_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptRuleStatementList, name: "ScriptRuleStatements"))
+    OrRuleStatement.type = Types::OrRuleStatement
     OrganizationConfiguration.add_member(:enable_integration, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableIntegration", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
     OrganizationConfiguration.type = Types::OrganizationConfiguration
     PrincipalArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
@@ -924,6 +1115,10 @@ module Aws::LicenseManager
     RedirectException.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: Location, name: "Location", traits: {"smithy.api#httpHeader" => "Location"}))
     RedirectException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     RedirectException.type = Types::RedirectException
+    RegionStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
+    RegionStatus.type = Types::RegionStatus
+    RegionStatusMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    RegionStatusMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionStatus, name: "value"))
     RejectGrantRequest.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "GrantArn", traits: {"smithy.api#required" => {}}))
     RejectGrantRequest.type = Types::RejectGrantRequest
     RejectGrantResponse.add_member(:grant_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "GrantArn"))
@@ -933,7 +1128,10 @@ module Aws::LicenseManager
     RenewType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
     RenewType.add_member(:weekly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEEKLY", traits: {"smithy.api#enumValue" => "Weekly"}))
     RenewType.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHLY", traits: {"smithy.api#enumValue" => "Monthly"}))
-    ReportContext.add_member(:license_configuration_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "licenseConfigurationArns", traits: {"smithy.api#required" => {}}))
+    ReportContext.add_member(:license_configuration_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "licenseConfigurationArns", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    ReportContext.add_member(:license_asset_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "licenseAssetGroupArns"))
+    ReportContext.add_member(:report_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "reportStartDate"))
+    ReportContext.add_member(:report_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "reportEndDate"))
     ReportContext.type = Types::ReportContext
     ReportFrequency.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "value"))
     ReportFrequency.add_member(:period, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportFrequencyType, name: "period"))
@@ -941,6 +1139,7 @@ module Aws::LicenseManager
     ReportFrequencyType.add_member(:day, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAY", traits: {"smithy.api#enumValue" => "DAY"}))
     ReportFrequencyType.add_member(:week, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEEK", traits: {"smithy.api#enumValue" => "WEEK"}))
     ReportFrequencyType.add_member(:month, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTH", traits: {"smithy.api#enumValue" => "MONTH"}))
+    ReportFrequencyType.add_member(:one_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_TIME", traits: {"smithy.api#enumValue" => "ONE_TIME"}))
     ReportGenerator.add_member(:report_generator_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReportGeneratorName"))
     ReportGenerator.add_member(:report_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportTypeList, name: "ReportType"))
     ReportGenerator.add_member(:report_context, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportContext, name: "ReportContext"))
@@ -958,6 +1157,7 @@ module Aws::LicenseManager
     ReportGeneratorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportGenerator, name: "member"))
     ReportType.add_member(:license_configuration_summary_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LICENSE_CONFIGURATION_SUMMARY_REPORT", traits: {"smithy.api#enumValue" => "LicenseConfigurationSummaryReport"}))
     ReportType.add_member(:license_configuration_usage_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LICENSE_CONFIGURATION_USAGE_REPORT", traits: {"smithy.api#enumValue" => "LicenseConfigurationUsageReport"}))
+    ReportType.add_member(:license_asset_group_usage_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LICENSE_ASSET_GROUP_USAGE_REPORT", traits: {"smithy.api#enumValue" => "LicenseAssetGroupUsageReport"}))
     ReportTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReportType, name: "member"))
     ResourceInventory.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId"))
     ResourceInventory.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
@@ -965,6 +1165,12 @@ module Aws::LicenseManager
     ResourceInventory.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Platform"))
     ResourceInventory.add_member(:platform_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PlatformVersion"))
     ResourceInventory.add_member(:resource_owning_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceOwningAccountId"))
+    ResourceInventory.add_member(:marketplace_product_codes, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "MarketplaceProductCodes"))
+    ResourceInventory.add_member(:usage_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "UsageOperation"))
+    ResourceInventory.add_member(:ami_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AmiId"))
+    ResourceInventory.add_member(:host_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "HostId"))
+    ResourceInventory.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Region"))
+    ResourceInventory.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InstanceType"))
     ResourceInventory.type = Types::ResourceInventory
     ResourceInventoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceInventory, name: "member"))
     ResourceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -976,11 +1182,22 @@ module Aws::LicenseManager
     ResourceType.add_member(:ec2_ami, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2_AMI", traits: {"smithy.api#enumValue" => "EC2_AMI"}))
     ResourceType.add_member(:rds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RDS", traits: {"smithy.api#enumValue" => "RDS"}))
     ResourceType.add_member(:systems_manager_managed_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEMS_MANAGER_MANAGED_INSTANCE", traits: {"smithy.api#enumValue" => "SYSTEMS_MANAGER_MANAGED_INSTANCE"}))
+    RuleStatement.add_member(:license_configuration_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationRuleStatement, name: "LicenseConfigurationRuleStatement"))
+    RuleStatement.add_member(:license_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseRuleStatement, name: "LicenseRuleStatement"))
+    RuleStatement.add_member(:instance_rule_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRuleStatement, name: "InstanceRuleStatement"))
+    RuleStatement.type = Types::RuleStatement
     S3Location.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "bucket"))
     S3Location.add_member(:key_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "keyPrefix"))
     S3Location.type = Types::S3Location
+    ScriptRuleStatement.add_member(:key_to_match, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "KeyToMatch", traits: {"smithy.api#required" => {}}))
+    ScriptRuleStatement.add_member(:script, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Script", traits: {"smithy.api#required" => {}}))
+    ScriptRuleStatement.type = Types::ScriptRuleStatement
+    ScriptRuleStatementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScriptRuleStatement, name: "member"))
     ServerInternalException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ServerInternalException.type = Types::ServerInternalException
+    ServiceStatus.add_member(:cross_account_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossAccountDiscoveryServiceStatus, name: "CrossAccountDiscovery"))
+    ServiceStatus.add_member(:cross_region_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossRegionDiscoveryStatus, name: "CrossRegionDiscovery"))
+    ServiceStatus.type = Types::ServiceStatus
     StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Key"))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value"))
@@ -1007,6 +1224,26 @@ module Aws::LicenseManager
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
+    UpdateLicenseAssetGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetResourceName, name: "Name"))
+    UpdateLicenseAssetGroupRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetResourceDescription, name: "Description"))
+    UpdateLicenseAssetGroupRequest.add_member(:license_asset_group_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupConfigurationList, name: "LicenseAssetGroupConfigurations"))
+    UpdateLicenseAssetGroupRequest.add_member(:associated_license_asset_ruleset_ar_ns, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRulesetArnList, name: "AssociatedLicenseAssetRulesetARNs", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseAssetGroupRequest.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupPropertyList, name: "Properties"))
+    UpdateLicenseAssetGroupRequest.add_member(:license_asset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "LicenseAssetGroupArn", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseAssetGroupRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetGroupStatus, name: "Status"))
+    UpdateLicenseAssetGroupRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseAssetGroupRequest.type = Types::UpdateLicenseAssetGroupRequest
+    UpdateLicenseAssetGroupResponse.add_member(:license_asset_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseAssetGroupArn", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseAssetGroupResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseAssetGroupResponse.type = Types::UpdateLicenseAssetGroupResponse
+    UpdateLicenseAssetRulesetRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetResourceName, name: "Name"))
+    UpdateLicenseAssetRulesetRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetResourceDescription, name: "Description"))
+    UpdateLicenseAssetRulesetRequest.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseAssetRuleList, name: "Rules", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseAssetRulesetRequest.add_member(:license_asset_ruleset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "LicenseAssetRulesetArn", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseAssetRulesetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClientToken", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseAssetRulesetRequest.type = Types::UpdateLicenseAssetRulesetRequest
+    UpdateLicenseAssetRulesetResponse.add_member(:license_asset_ruleset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseAssetRulesetArn", traits: {"smithy.api#required" => {}}))
+    UpdateLicenseAssetRulesetResponse.type = Types::UpdateLicenseAssetRulesetResponse
     UpdateLicenseConfigurationRequest.add_member(:license_configuration_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseConfigurationArn", traits: {"smithy.api#required" => {}}))
     UpdateLicenseConfigurationRequest.add_member(:license_configuration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseConfigurationStatus, name: "LicenseConfigurationStatus"))
     UpdateLicenseConfigurationRequest.add_member(:license_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "LicenseRules"))
@@ -1016,6 +1253,7 @@ module Aws::LicenseManager
     UpdateLicenseConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
     UpdateLicenseConfigurationRequest.add_member(:product_information_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductInformationList, name: "ProductInformationList"))
     UpdateLicenseConfigurationRequest.add_member(:disassociate_when_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, name: "DisassociateWhenNotFound"))
+    UpdateLicenseConfigurationRequest.add_member(:license_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxLong, name: "LicenseExpiry"))
     UpdateLicenseConfigurationRequest.type = Types::UpdateLicenseConfigurationRequest
     UpdateLicenseConfigurationResponse.type = Types::UpdateLicenseConfigurationResponse
     UpdateLicenseManagerReportGeneratorRequest.add_member(:license_manager_report_generator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LicenseManagerReportGeneratorArn", traits: {"smithy.api#required" => {}}))
@@ -1036,6 +1274,7 @@ module Aws::LicenseManager
     UpdateServiceSettingsRequest.add_member(:sns_topic_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SnsTopicArn"))
     UpdateServiceSettingsRequest.add_member(:organization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OrganizationConfiguration, name: "OrganizationConfiguration"))
     UpdateServiceSettingsRequest.add_member(:enable_cross_accounts_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxBoolean, name: "EnableCrossAccountsDiscovery"))
+    UpdateServiceSettingsRequest.add_member(:enabled_discovery_source_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "EnabledDiscoverySourceRegions"))
     UpdateServiceSettingsRequest.type = Types::UpdateServiceSettingsRequest
     UpdateServiceSettingsResponse.type = Types::UpdateServiceSettingsResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -1045,7 +1284,7 @@ module Aws::LicenseManager
       service.id = "com.amazonaws.licensemanager#AWSLicenseManager"
       service.name = "AWSLicenseManager"
       service.version = "2018-08-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "License Manager", "arnNamespace" => "license-manager", "cloudFormationName" => "LicenseManager", "cloudTrailEventSource" => "license-manager.amazonaws.com", "endpointPrefix" => "license-manager"}, "aws.auth#sigv4" => {"name" => "license-manager"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS License Manager", "smithy.api#xmlNamespace" => {"uri" => "https://license-manager.amazonaws.com/doc/2018_08_01"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "License Manager", "arnNamespace" => "license-manager", "cloudFormationName" => "LicenseManager", "cloudTrailEventSource" => "license-manager.amazonaws.com", "endpointPrefix" => "license-manager"}, "aws.auth#sigv4" => {"name" => "license-manager"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS License Manager", "smithy.api#xmlNamespace" => {"uri" => "https://license-manager.amazonaws.com/doc/2018_08_01"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://license-manager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://license-manager-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://license-manager.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://license-manager.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:accept_grant, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#AcceptGrant"
         operation.name = "AcceptGrant"
@@ -1152,6 +1391,32 @@ module Aws::LicenseManager
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:create_license_asset_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#CreateLicenseAssetGroup"
+        operation.name = "CreateLicenseAssetGroup"
+        operation.input = CreateLicenseAssetGroupRequest
+        operation.output = CreateLicenseAssetGroupResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:create_license_asset_ruleset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#CreateLicenseAssetRuleset"
+        operation.name = "CreateLicenseAssetRuleset"
+        operation.input = CreateLicenseAssetRulesetRequest
+        operation.output = CreateLicenseAssetRulesetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:create_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#CreateLicenseConfiguration"
         operation.name = "CreateLicenseConfiguration"
@@ -1252,6 +1517,32 @@ module Aws::LicenseManager
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:delete_license_asset_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#DeleteLicenseAssetGroup"
+        operation.name = "DeleteLicenseAssetGroup"
+        operation.input = DeleteLicenseAssetGroupRequest
+        operation.output = DeleteLicenseAssetGroupResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_license_asset_ruleset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#DeleteLicenseAssetRuleset"
+        operation.name = "DeleteLicenseAssetRuleset"
+        operation.input = DeleteLicenseAssetRulesetRequest
+        operation.output = DeleteLicenseAssetRulesetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:delete_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#DeleteLicenseConfiguration"
         operation.name = "DeleteLicenseConfiguration"
@@ -1346,6 +1637,32 @@ module Aws::LicenseManager
         operation.errors << ValidationException
         operation.traits = {}
       end)
+      service.add_operation(:get_license_asset_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#GetLicenseAssetGroup"
+        operation.name = "GetLicenseAssetGroup"
+        operation.input = GetLicenseAssetGroupRequest
+        operation.output = GetLicenseAssetGroupResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:get_license_asset_ruleset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#GetLicenseAssetRuleset"
+        operation.name = "GetLicenseAssetRuleset"
+        operation.input = GetLicenseAssetRulesetRequest
+        operation.output = GetLicenseAssetRulesetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:get_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#GetLicenseConfiguration"
         operation.name = "GetLicenseConfiguration"
@@ -1409,6 +1726,19 @@ module Aws::LicenseManager
         operation.errors << ServerInternalException
         operation.traits = {}
       end)
+      service.add_operation(:list_assets_for_license_asset_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#ListAssetsForLicenseAssetGroup"
+        operation.name = "ListAssetsForLicenseAssetGroup"
+        operation.input = ListAssetsForLicenseAssetGroupRequest
+        operation.output = ListAssetsForLicenseAssetGroupResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:list_associations_for_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListAssociationsForLicenseConfiguration"
         operation.name = "ListAssociationsForLicenseConfiguration"
@@ -1448,11 +1778,50 @@ module Aws::LicenseManager
         operation.errors << ServerInternalException
         operation.traits = {}
       end)
+      service.add_operation(:list_license_asset_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#ListLicenseAssetGroups"
+        operation.name = "ListLicenseAssetGroups"
+        operation.input = ListLicenseAssetGroupsRequest
+        operation.output = ListLicenseAssetGroupsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_license_asset_rulesets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#ListLicenseAssetRulesets"
+        operation.name = "ListLicenseAssetRulesets"
+        operation.input = ListLicenseAssetRulesetsRequest
+        operation.output = ListLicenseAssetRulesetsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:list_license_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.licensemanager#ListLicenseConfigurations"
         operation.name = "ListLicenseConfigurations"
         operation.input = ListLicenseConfigurationsRequest
         operation.output = ListLicenseConfigurationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << FilterLimitExceededException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_license_configurations_for_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#ListLicenseConfigurationsForOrganization"
+        operation.name = "ListLicenseConfigurationsForOrganization"
+        operation.input = ListLicenseConfigurationsForOrganizationRequest
+        operation.output = ListLicenseConfigurationsForOrganizationResponse
         operation.errors << AccessDeniedException
         operation.errors << AuthorizationException
         operation.errors << FilterLimitExceededException
@@ -1605,6 +1974,7 @@ module Aws::LicenseManager
         operation.errors << InvalidParameterValueException
         operation.errors << RateLimitExceededException
         operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_tokens, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1656,6 +2026,7 @@ module Aws::LicenseManager
         operation.errors << InvalidParameterValueException
         operation.errors << RateLimitExceededException
         operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1668,6 +2039,33 @@ module Aws::LicenseManager
         operation.errors << InvalidParameterValueException
         operation.errors << RateLimitExceededException
         operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_license_asset_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#UpdateLicenseAssetGroup"
+        operation.name = "UpdateLicenseAssetGroup"
+        operation.input = UpdateLicenseAssetGroupRequest
+        operation.output = UpdateLicenseAssetGroupResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_license_asset_ruleset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.licensemanager#UpdateLicenseAssetRuleset"
+        operation.name = "UpdateLicenseAssetRuleset"
+        operation.input = UpdateLicenseAssetRulesetRequest
+        operation.output = UpdateLicenseAssetRulesetResponse
+        operation.errors << AccessDeniedException
+        operation.errors << AuthorizationException
+        operation.errors << InvalidParameterValueException
+        operation.errors << RateLimitExceededException
+        operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_license_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1721,9 +2119,11 @@ module Aws::LicenseManager
         operation.output = UpdateServiceSettingsResponse
         operation.errors << AccessDeniedException
         operation.errors << AuthorizationException
+        operation.errors << ConflictException
         operation.errors << InvalidParameterValueException
         operation.errors << RateLimitExceededException
         operation.errors << ServerInternalException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
     end

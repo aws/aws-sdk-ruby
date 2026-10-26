@@ -144,18 +144,18 @@ module Aws::APIGateway
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -538,7 +538,11 @@ module Aws::APIGateway
     # @option params [Hash<String, String>] :tags
     #   <p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>
     # @option params [String] :security_policy
-    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>
+    #   <p>The Transport Layer Security (TLS) version + cipher suite for this DomainName.</p>
+    # @option params [String] :endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the DomainName. Only available for DomainNames that use security policies that start with <code>SecurityPolicy_</code>.
+    #   </p>
     # @option params [Types::MutualTlsAuthenticationInput] :mutual_tls_authentication
     #   <p>The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway
     #         performs two-way authentication between the client and the server. Clients must present a
@@ -573,7 +577,8 @@ module Aws::APIGateway
     #     tags: {
     #       "String" => "String"
     #     },
-    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2"],
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
     #     mutual_tls_authentication: {
     #       truststore_uri: "String",
     #       truststore_version: "String"
@@ -604,9 +609,10 @@ module Aws::APIGateway
     #       ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"],
     #       vpc_endpoint_ids: ["String"]
     #     },
-    #     domain_name_status: "AVAILABLE" # One of: ["AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"],
+    #     domain_name_status: "AVAILABLE" # One of: ["AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION", "FAILED"],
     #     domain_name_status_message: "String",
-    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2"],
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
     #     tags: {
     #       "String" => "String"
     #     },
@@ -822,7 +828,9 @@ module Aws::APIGateway
     #           },
     #           tls_config: {
     #             insecure_skip_verification: false
-    #           }
+    #           },
+    #           response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #           integration_target: "String"
     #         },
     #         authorization_scopes: ["String"]
     #       }
@@ -864,6 +872,13 @@ module Aws::APIGateway
     #         By default, clients can invoke your API with the default
     #         <code>https://{api_id}.execute-api.{region}.amazonaws.com</code> endpoint. To require that clients use a
     #         custom domain name to invoke your API, disable the default endpoint</p>
+    # @option params [String] :security_policy
+    #   <p>
+    #   The Transport Layer Security (TLS) version + cipher suite for this RestApi.
+    #   </p>
+    # @option params [String] :endpoint_access_mode
+    #   <p>
+    #   The endpoint access mode of the RestApi. Only available for RestApis that use security policies that start with <code>SecurityPolicy_</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "String", # required
@@ -882,7 +897,9 @@ module Aws::APIGateway
     #     tags: {
     #       "String" => "String"
     #     },
-    #     disable_execute_api_endpoint: false
+    #     disable_execute_api_endpoint: false,
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"]
     #   }
     #   options = {}
     #   response = client.create_rest_api(params, options)
@@ -908,7 +925,11 @@ module Aws::APIGateway
     #       "String" => "String"
     #     },
     #     disable_execute_api_endpoint: false,
-    #     root_resource_id: "String"
+    #     root_resource_id: "String",
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
+    #     api_status: "UPDATING" # One of: ["UPDATING", "AVAILABLE", "PENDING", "FAILED"],
+    #     api_status_message: "String"
     #   }
     # @return [Types::CreateRestApiOutput]
     def create_rest_api(params = {}, options = {})
@@ -2320,9 +2341,10 @@ module Aws::APIGateway
     #       ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"],
     #       vpc_endpoint_ids: ["String"]
     #     },
-    #     domain_name_status: "AVAILABLE" # One of: ["AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"],
+    #     domain_name_status: "AVAILABLE" # One of: ["AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION", "FAILED"],
     #     domain_name_status_message: "String",
-    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2"],
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
     #     tags: {
     #       "String" => "String"
     #     },
@@ -2423,9 +2445,10 @@ module Aws::APIGateway
     #           ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"],
     #           vpc_endpoint_ids: ["String"]
     #         },
-    #         domain_name_status: "AVAILABLE" # One of: ["AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"],
+    #         domain_name_status: "AVAILABLE" # One of: ["AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION", "FAILED"],
     #         domain_name_status_message: "String",
-    #         security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2"],
+    #         security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #         endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
     #         tags: {
     #           "String" => "String"
     #         },
@@ -2609,7 +2632,9 @@ module Aws::APIGateway
     #     },
     #     tls_config: {
     #       insecure_skip_verification: false
-    #     }
+    #     },
+    #     response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #     integration_target: "String"
     #   }
     # @return [Types::GetIntegrationOutput]
     def get_integration(params = {}, options = {})
@@ -2730,7 +2755,9 @@ module Aws::APIGateway
     #       },
     #       tls_config: {
     #         insecure_skip_verification: false
-    #       }
+    #       },
+    #       response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #       integration_target: "String"
     #     },
     #     authorization_scopes: ["String"]
     #   }
@@ -3010,7 +3037,9 @@ module Aws::APIGateway
     #           },
     #           tls_config: {
     #             insecure_skip_verification: false
-    #           }
+    #           },
+    #           response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #           integration_target: "String"
     #         },
     #         authorization_scopes: ["String"]
     #       }
@@ -3108,7 +3137,9 @@ module Aws::APIGateway
     #               },
     #               tls_config: {
     #                 insecure_skip_verification: false
-    #               }
+    #               },
+    #               response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #               integration_target: "String"
     #             },
     #             authorization_scopes: ["String"]
     #           }
@@ -3155,7 +3186,11 @@ module Aws::APIGateway
     #       "String" => "String"
     #     },
     #     disable_execute_api_endpoint: false,
-    #     root_resource_id: "String"
+    #     root_resource_id: "String",
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
+    #     api_status: "UPDATING" # One of: ["UPDATING", "AVAILABLE", "PENDING", "FAILED"],
+    #     api_status_message: "String"
     #   }
     # @return [Types::GetRestApiOutput]
     def get_rest_api(params = {}, options = {})
@@ -3200,7 +3235,11 @@ module Aws::APIGateway
     #           "String" => "String"
     #         },
     #         disable_execute_api_endpoint: false,
-    #         root_resource_id: "String"
+    #         root_resource_id: "String",
+    #         security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #         endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
+    #         api_status: "UPDATING" # One of: ["UPDATING", "AVAILABLE", "PENDING", "FAILED"],
+    #         api_status_message: "String"
     #       }
     #     ],
     #     position: "String"
@@ -3868,7 +3907,11 @@ module Aws::APIGateway
     #       "String" => "String"
     #     },
     #     disable_execute_api_endpoint: false,
-    #     root_resource_id: "String"
+    #     root_resource_id: "String",
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
+    #     api_status: "UPDATING" # One of: ["UPDATING", "AVAILABLE", "PENDING", "FAILED"],
+    #     api_status_message: "String"
     #   }
     # @return [Types::ImportRestApiOutput]
     def import_rest_api(params = {}, options = {})
@@ -3974,6 +4017,14 @@ module Aws::APIGateway
     #   <p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.  You can increase the default value to longer than 29 seconds for Regional or private APIs only.</p>
     # @option params [Types::TlsConfig] :tls_config
     #   <p>Specifies the TLS configuration for an integration.</p>
+    # @option params [String] :response_transfer_mode
+    #   <p>
+    #   The response transfer mode of the integration.
+    #   </p>
+    # @option params [String] :integration_target
+    #   <p>
+    #   The ALB or NLB listener to send the request to.
+    #   </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     rest_api_id: "String", # required
@@ -3998,7 +4049,9 @@ module Aws::APIGateway
     #     timeout_in_millis: 1,
     #     tls_config: {
     #       insecure_skip_verification: false
-    #     }
+    #     },
+    #     response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #     integration_target: "String"
     #   }
     #   options = {}
     #   response = client.put_integration(params, options)
@@ -4037,7 +4090,9 @@ module Aws::APIGateway
     #     },
     #     tls_config: {
     #       insecure_skip_verification: false
-    #     }
+    #     },
+    #     response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #     integration_target: "String"
     #   }
     # @return [Types::PutIntegrationOutput]
     def put_integration(params = {}, options = {})
@@ -4204,7 +4259,9 @@ module Aws::APIGateway
     #       },
     #       tls_config: {
     #         insecure_skip_verification: false
-    #       }
+    #       },
+    #       response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #       integration_target: "String"
     #     },
     #     authorization_scopes: ["String"]
     #   }
@@ -4309,7 +4366,11 @@ module Aws::APIGateway
     #       "String" => "String"
     #     },
     #     disable_execute_api_endpoint: false,
-    #     root_resource_id: "String"
+    #     root_resource_id: "String",
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
+    #     api_status: "UPDATING" # One of: ["UPDATING", "AVAILABLE", "PENDING", "FAILED"],
+    #     api_status_message: "String"
     #   }
     # @return [Types::PutRestApiOutput]
     def put_rest_api(params = {}, options = {})
@@ -4875,9 +4936,10 @@ module Aws::APIGateway
     #       ip_address_type: "ipv4" # One of: ["ipv4", "dualstack"],
     #       vpc_endpoint_ids: ["String"]
     #     },
-    #     domain_name_status: "AVAILABLE" # One of: ["AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION"],
+    #     domain_name_status: "AVAILABLE" # One of: ["AVAILABLE", "UPDATING", "PENDING", "PENDING_CERTIFICATE_REIMPORT", "PENDING_OWNERSHIP_VERIFICATION", "FAILED"],
     #     domain_name_status_message: "String",
-    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2"],
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
     #     tags: {
     #       "String" => "String"
     #     },
@@ -5000,7 +5062,9 @@ module Aws::APIGateway
     #     },
     #     tls_config: {
     #       insecure_skip_verification: false
-    #     }
+    #     },
+    #     response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #     integration_target: "String"
     #   }
     # @return [Types::UpdateIntegrationOutput]
     def update_integration(params = {}, options = {})
@@ -5141,7 +5205,9 @@ module Aws::APIGateway
     #       },
     #       tls_config: {
     #         insecure_skip_verification: false
-    #       }
+    #       },
+    #       response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #       integration_target: "String"
     #     },
     #     authorization_scopes: ["String"]
     #   }
@@ -5360,7 +5426,9 @@ module Aws::APIGateway
     #           },
     #           tls_config: {
     #             insecure_skip_verification: false
-    #           }
+    #           },
+    #           response_transfer_mode: "BUFFERED" # One of: ["BUFFERED", "STREAM"],
+    #           integration_target: "String"
     #         },
     #         authorization_scopes: ["String"]
     #       }
@@ -5414,7 +5482,11 @@ module Aws::APIGateway
     #       "String" => "String"
     #     },
     #     disable_execute_api_endpoint: false,
-    #     root_resource_id: "String"
+    #     root_resource_id: "String",
+    #     security_policy: "TLS_1_0" # One of: ["TLS_1_0", "TLS_1_2", "SecurityPolicy_TLS13_1_3_2025_09", "SecurityPolicy_TLS13_1_3_FIPS_2025_09", "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", "SecurityPolicy_TLS13_1_2_PQ_2025_09", "SecurityPolicy_TLS13_1_2_2021_06", "SecurityPolicy_TLS13_2025_EDGE", "SecurityPolicy_TLS12_PFS_2025_EDGE", "SecurityPolicy_TLS12_2018_EDGE"],
+    #     endpoint_access_mode: "BASIC" # One of: ["BASIC", "STRICT"],
+    #     api_status: "UPDATING" # One of: ["UPDATING", "AVAILABLE", "PENDING", "FAILED"],
+    #     api_status_message: "String"
     #   }
     # @return [Types::UpdateRestApiOutput]
     def update_rest_api(params = {}, options = {})

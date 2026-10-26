@@ -15,6 +15,9 @@ module Aws::S3Tables
     class InternalServerErrorException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class MethodNotAllowedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class NotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end

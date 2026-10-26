@@ -22,6 +22,7 @@ module Aws::BCMDataExports
   #
   # ## Error Classes
   #
+  # * {AccessDeniedException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
@@ -33,8 +34,20 @@ module Aws::BCMDataExports
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>An error on the server occurred during the processing of your request. Try again
-    #       later.</p>
+    # <p>You don't have sufficient access to perform this action.</p>
+    class AccessDeniedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::BCMDataExports::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>An error on the server occurred during the processing of your request. Try again later.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDataExports::Types::InternalServerException] data
@@ -70,8 +83,7 @@ module Aws::BCMDataExports
       end
     end
 
-    # <p>You've reached the limit on the number of resources you can create, or exceeded the size
-    #       of an individual resource.</p>
+    # <p>You've reached the limit on the number of resources you can create, or exceeded the size of an individual resource.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDataExports::Types::ServiceQuotaExceededException] data
@@ -98,8 +110,7 @@ module Aws::BCMDataExports
         @data[:quota_code]
       end
 
-      # <p>The service code that exceeded quota. It will always be
-      #       “AWSBillingAndCostManagementDataExports”.</p>
+      # <p>The service code that exceeded quota. It will always be “AWSBillingAndCostManagementDataExports”.</p>
       def service_code
         @data[:service_code]
       end
@@ -122,15 +133,13 @@ module Aws::BCMDataExports
         @data[:quota_code]
       end
 
-      # <p>The service code that exceeded the throttling limit. It will always be
-      #       “AWSBillingAndCostManagementDataExports”.</p>
+      # <p>The service code that exceeded the throttling limit. It will always be “AWSBillingAndCostManagementDataExports”.</p>
       def service_code
         @data[:service_code]
       end
     end
 
-    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services
-    #       service.</p>
+    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BCMDataExports::Types::ValidationException] data

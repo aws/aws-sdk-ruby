@@ -116,6 +116,46 @@ module Aws::VerifiedPermissions
                 entity_type: untyped,
                 entity_id: untyped
               }
+            ],
+            tags: Hash[String,
+              {
+                boolean: untyped,
+                entity_identifier: untyped,
+                long: untyped,
+                string: untyped,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: untyped,
+                        decimal: untyped,
+                        datetime: untyped,
+                        duration: untyped
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
+              }
             ]
           }
         ],
@@ -239,6 +279,46 @@ module Aws::VerifiedPermissions
               {
                 entity_type: untyped,
                 entity_id: untyped
+              }
+            ],
+            tags: Hash[String,
+              {
+                boolean: untyped,
+                entity_identifier: untyped,
+                long: untyped,
+                string: untyped,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: untyped,
+                        decimal: untyped,
+                        datetime: untyped,
+                        duration: untyped
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
               }
             ]
           }
@@ -370,7 +450,8 @@ module Aws::VerifiedPermissions
           },
           resource: untyped
         }
-      }
+      },
+      ?name: String
     ) -> _CreatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyResponse
 
     interface _CreatePolicyStoreResponse
@@ -387,8 +468,28 @@ module Aws::VerifiedPermissions
       },
       ?description: String,
       ?deletion_protection: String,
+      ?encryption_settings: {
+        kms_encryption_settings: {
+          key: String,
+          encryption_context: Hash[String, String]
+        },
+        default: {
+        }
+      },
       ?tags: Hash[String, String]
     ) -> _CreatePolicyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyStoreResponse
+
+    interface _CreatePolicyStoreAliasResponse
+      include Smithy::Client::_Response[Types::CreatePolicyStoreAliasOutput]
+      def alias_name: () -> String?
+      def policy_store_id: () -> String?
+      def alias_arn: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_policy_store_alias: (
+      ?alias_name: String,
+      ?policy_store_id: String
+    ) -> _CreatePolicyStoreAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyStoreAliasResponse
 
     interface _CreatePolicyTemplateResponse
       include Smithy::Client::_Response[Types::CreatePolicyTemplateOutput]
@@ -401,7 +502,8 @@ module Aws::VerifiedPermissions
       ?client_token: String,
       ?policy_store_id: String,
       ?description: String,
-      ?statement: String
+      ?statement: String,
+      ?name: String
     ) -> _CreatePolicyTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyTemplateResponse
 
     interface _DeleteIdentitySourceResponse
@@ -426,6 +528,14 @@ module Aws::VerifiedPermissions
     def delete_policy_store: (
       ?policy_store_id: String
     ) -> _DeletePolicyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyStoreResponse
+
+    interface _DeletePolicyStoreAliasResponse
+      include Smithy::Client::_Response[Types::DeletePolicyStoreAliasOutput]
+    end
+    def delete_policy_store_alias: (
+      ?alias_name: String,
+      ?deletion_mode: String
+    ) -> _DeletePolicyStoreAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyStoreAliasResponse
 
     interface _DeletePolicyTemplateResponse
       include Smithy::Client::_Response[Types::DeletePolicyTemplateOutput]
@@ -462,6 +572,7 @@ module Aws::VerifiedPermissions
       def created_date: () -> Time?
       def last_updated_date: () -> Time?
       def effect: () -> String?
+      def name: () -> String?
     end
     def get_policy: (
       ?policy_store_id: String,
@@ -477,6 +588,7 @@ module Aws::VerifiedPermissions
       def last_updated_date: () -> Time?
       def description: () -> String?
       def deletion_protection: () -> String?
+      def encryption_state: () -> Types::EncryptionState?
       def cedar_version: () -> String?
       def tags: () -> Hash[String, String]?
     end
@@ -484,6 +596,18 @@ module Aws::VerifiedPermissions
       ?policy_store_id: String,
       ?tags: bool
     ) -> _GetPolicyStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyStoreResponse
+
+    interface _GetPolicyStoreAliasResponse
+      include Smithy::Client::_Response[Types::GetPolicyStoreAliasOutput]
+      def alias_name: () -> String?
+      def policy_store_id: () -> String?
+      def alias_arn: () -> String?
+      def created_at: () -> Time?
+      def state: () -> String?
+    end
+    def get_policy_store_alias: (
+      ?alias_name: String
+    ) -> _GetPolicyStoreAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyStoreAliasResponse
 
     interface _GetPolicyTemplateResponse
       include Smithy::Client::_Response[Types::GetPolicyTemplateOutput]
@@ -493,6 +617,7 @@ module Aws::VerifiedPermissions
       def statement: () -> String?
       def created_date: () -> Time?
       def last_updated_date: () -> Time?
+      def name: () -> String?
     end
     def get_policy_template: (
       ?policy_store_id: String,
@@ -629,6 +754,46 @@ module Aws::VerifiedPermissions
                 entity_type: untyped,
                 entity_id: untyped
               }
+            ],
+            tags: Hash[String,
+              {
+                boolean: untyped,
+                entity_identifier: untyped,
+                long: untyped,
+                string: untyped,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: untyped,
+                        decimal: untyped,
+                        datetime: untyped,
+                        duration: untyped
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
+              }
             ]
           }
         ],
@@ -753,6 +918,46 @@ module Aws::VerifiedPermissions
                 entity_type: untyped,
                 entity_id: untyped
               }
+            ],
+            tags: Hash[String,
+              {
+                boolean: untyped,
+                entity_identifier: untyped,
+                long: untyped,
+                string: untyped,
+                set: Array[
+                  {
+                    boolean: untyped,
+                    entity_identifier: untyped,
+                    long: untyped,
+                    string: untyped,
+                    set: untyped,
+                    record: Hash[String,
+                      {
+                        boolean: untyped,
+                        entity_identifier: untyped,
+                        long: untyped,
+                        string: untyped,
+                        set: untyped,
+                        record: untyped,
+                        ipaddr: untyped,
+                        decimal: untyped,
+                        datetime: untyped,
+                        duration: untyped
+                      }
+                    ],
+                    ipaddr: untyped,
+                    decimal: untyped,
+                    datetime: untyped,
+                    duration: untyped
+                  }
+                ],
+                record: untyped,
+                ipaddr: untyped,
+                decimal: untyped,
+                datetime: untyped,
+                duration: untyped
+              }
             ]
           }
         ],
@@ -798,6 +1003,19 @@ module Aws::VerifiedPermissions
         policy_template_id: String
       }
     ) -> _ListPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesResponse
+
+    interface _ListPolicyStoreAliasesResponse
+      include Smithy::Client::_Response[Types::ListPolicyStoreAliasesOutput]
+      def next_token: () -> String?
+      def policy_store_aliases: () -> Array[Types::PolicyStoreAliasItem]?
+    end
+    def list_policy_store_aliases: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filter: {
+        policy_store_id: String
+      }
+    ) -> _ListPolicyStoreAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyStoreAliasesResponse
 
     interface _ListPolicyStoresResponse
       include Smithy::Client::_Response[Types::ListPolicyStoresOutput]
@@ -918,7 +1136,8 @@ module Aws::VerifiedPermissions
           description: String,
           statement: String
         }
-      }
+      },
+      ?name: String
     ) -> _UpdatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyResponse
 
     interface _UpdatePolicyStoreResponse
@@ -948,7 +1167,8 @@ module Aws::VerifiedPermissions
       ?policy_store_id: String,
       ?policy_template_id: String,
       ?description: String,
-      ?statement: String
+      ?statement: String,
+      ?name: String
     ) -> _UpdatePolicyTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyTemplateResponse
   end
 end

@@ -51,6 +51,8 @@ module Aws::Mq
     DescribeConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#DescribeConfigurationResponse", name: "DescribeConfigurationResponse")
     DescribeConfigurationRevisionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#DescribeConfigurationRevisionRequest", name: "DescribeConfigurationRevisionRequest")
     DescribeConfigurationRevisionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#DescribeConfigurationRevisionResponse", name: "DescribeConfigurationRevisionResponse")
+    DescribeSharedResourcesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#DescribeSharedResourcesRequest", name: "DescribeSharedResourcesRequest")
+    DescribeSharedResourcesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#DescribeSharedResourcesResponse", name: "DescribeSharedResourcesResponse")
     DescribeUserRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#DescribeUserRequest", name: "DescribeUserRequest")
     DescribeUserResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#DescribeUserResponse", name: "DescribeUserResponse")
     EncryptionOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#EncryptionOptions", name: "EncryptionOptions")
@@ -80,8 +82,14 @@ module Aws::Mq
     PromoteResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#PromoteResponse", name: "PromoteResponse")
     RebootBrokerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#RebootBrokerRequest", name: "RebootBrokerRequest")
     RebootBrokerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#RebootBrokerResponse", name: "RebootBrokerResponse")
+    ResourceShareError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#ResourceShareError", name: "ResourceShareError")
     SanitizationWarning = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#SanitizationWarning", name: "SanitizationWarning")
     SanitizationWarningReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mq#SanitizationWarningReason", name: "SanitizationWarningReason")
+    SharedResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#SharedResource", name: "SharedResource")
+    SharedResourceError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#SharedResourceError", name: "SharedResourceError")
+    SharedResourceErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mq#SharedResourceErrorCode", name: "SharedResourceErrorCode")
+    SharedResourceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mq#SharedResourceStatus", name: "SharedResourceStatus")
+    SharedResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.mq#SharedResourceType", name: "SharedResourceType")
     UnauthorizedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#UnauthorizedException", name: "UnauthorizedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 401})
     UpdateBrokerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#UpdateBrokerRequest", name: "UpdateBrokerRequest")
     UpdateBrokerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.mq#UpdateBrokerResponse", name: "UpdateBrokerResponse")
@@ -107,7 +115,9 @@ module Aws::Mq
     Listofconfigurationrevision = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mq#__listOfConfigurationRevision", name: "Listofconfigurationrevision")
     Listofdeploymentmode = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mq#__listOfDeploymentMode", name: "Listofdeploymentmode")
     Listofengineversion = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mq#__listOfEngineVersion", name: "Listofengineversion")
+    Listofresourceshareerror = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mq#__listOfResourceShareError", name: "Listofresourceshareerror")
     Listofsanitizationwarning = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mq#__listOfSanitizationWarning", name: "Listofsanitizationwarning")
+    Listofsharedresource = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mq#__listOfSharedResource", name: "Listofsharedresource")
     Listofuser = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mq#__listOfUser", name: "Listofuser")
     Listofusersummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mq#__listOfUserSummary", name: "Listofusersummary")
     ListofString = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.mq#__listOf__string", name: "ListofString")
@@ -125,6 +135,7 @@ module Aws::Mq
     AvailabilityZone.type = Types::AvailabilityZone
     BadRequestException.add_member(:error_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorAttribute", traits: {"smithy.api#jsonName" => "errorAttribute"}))
     BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    BadRequestException.add_member(:resource_share_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofresourceshareerror, name: "ResourceShareErrors", traits: {"smithy.api#jsonName" => "resourceShareErrors"}))
     BadRequestException.type = Types::BadRequestException
     BrokerEngineType.add_member(:engine_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineType, name: "EngineType", traits: {"smithy.api#jsonName" => "engineType"}))
     BrokerEngineType.add_member(:engine_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofengineversion, name: "EngineVersions", traits: {"smithy.api#jsonName" => "engineVersions"}))
@@ -185,6 +196,7 @@ module Aws::Mq
     Configurations.type = Types::Configurations
     ConflictException.add_member(:error_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorAttribute", traits: {"smithy.api#jsonName" => "errorAttribute"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    ConflictException.add_member(:resource_share_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofresourceshareerror, name: "ResourceShareErrors", traits: {"smithy.api#jsonName" => "resourceShareErrors"}))
     ConflictException.type = Types::ConflictException
     CreateBrokerRequest.add_member(:authentication_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationStrategy, name: "AuthenticationStrategy", traits: {"smithy.api#jsonName" => "authenticationStrategy"}))
     CreateBrokerRequest.add_member(:auto_minor_version_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoMinorVersionUpgrade", traits: {"smithy.api#jsonName" => "autoMinorVersionUpgrade"}))
@@ -201,6 +213,7 @@ module Aws::Mq
     CreateBrokerRequest.add_member(:maintenance_window_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyStartTime, name: "MaintenanceWindowStartTime", traits: {"smithy.api#jsonName" => "maintenanceWindowStartTime"}))
     CreateBrokerRequest.add_member(:publicly_accessible, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PubliclyAccessible", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "publiclyAccessible", "smithy.api#required" => {}}))
     CreateBrokerRequest.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "SecurityGroups", traits: {"smithy.api#jsonName" => "securityGroups"}))
+    CreateBrokerRequest.add_member(:storage_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "StorageSize", traits: {"smithy.api#jsonName" => "storageSize"}))
     CreateBrokerRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrokerStorageType, name: "StorageType", traits: {"smithy.api#jsonName" => "storageType"}))
     CreateBrokerRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "SubnetIds", traits: {"smithy.api#jsonName" => "subnetIds"}))
     CreateBrokerRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
@@ -311,8 +324,10 @@ module Aws::Mq
     DescribeBrokerResponse.add_member(:pending_host_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PendingHostInstanceType", traits: {"smithy.api#jsonName" => "pendingHostInstanceType"}))
     DescribeBrokerResponse.add_member(:pending_ldap_server_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: LdapServerMetadataOutput, name: "PendingLdapServerMetadata", traits: {"smithy.api#jsonName" => "pendingLdapServerMetadata"}))
     DescribeBrokerResponse.add_member(:pending_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "PendingSecurityGroups", traits: {"smithy.api#jsonName" => "pendingSecurityGroups"}))
+    DescribeBrokerResponse.add_member(:pending_storage_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "PendingStorageSize", traits: {"smithy.api#jsonName" => "pendingStorageSize"}))
     DescribeBrokerResponse.add_member(:publicly_accessible, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PubliclyAccessible", traits: {"smithy.api#jsonName" => "publiclyAccessible"}))
     DescribeBrokerResponse.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "SecurityGroups", traits: {"smithy.api#jsonName" => "securityGroups"}))
+    DescribeBrokerResponse.add_member(:storage_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "StorageSize", traits: {"smithy.api#jsonName" => "storageSize"}))
     DescribeBrokerResponse.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BrokerStorageType, name: "StorageType", traits: {"smithy.api#jsonName" => "storageType"}))
     DescribeBrokerResponse.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "SubnetIds", traits: {"smithy.api#jsonName" => "subnetIds"}))
     DescribeBrokerResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: MapofString, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
@@ -343,6 +358,13 @@ module Aws::Mq
     DescribeConfigurationRevisionResponse.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Data", traits: {"smithy.api#jsonName" => "data"}))
     DescribeConfigurationRevisionResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description", traits: {"smithy.api#jsonName" => "description"}))
     DescribeConfigurationRevisionResponse.type = Types::DescribeConfigurationRevisionResponse
+    DescribeSharedResourcesRequest.add_member(:broker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BrokerId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeSharedResourcesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    DescribeSharedResourcesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    DescribeSharedResourcesRequest.type = Types::DescribeSharedResourcesRequest
+    DescribeSharedResourcesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
+    DescribeSharedResourcesResponse.add_member(:shared_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofsharedresource, name: "SharedResources", traits: {"smithy.api#jsonName" => "sharedResources"}))
+    DescribeSharedResourcesResponse.type = Types::DescribeSharedResourcesResponse
     DescribeUserRequest.add_member(:broker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BrokerId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeUserRequest.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Username", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeUserRequest.type = Types::DescribeUserRequest
@@ -362,9 +384,11 @@ module Aws::Mq
     EngineVersion.type = Types::EngineVersion
     ForbiddenException.add_member(:error_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorAttribute", traits: {"smithy.api#jsonName" => "errorAttribute"}))
     ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    ForbiddenException.add_member(:resource_share_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofresourceshareerror, name: "ResourceShareErrors", traits: {"smithy.api#jsonName" => "resourceShareErrors"}))
     ForbiddenException.type = Types::ForbiddenException
     InternalServerErrorException.add_member(:error_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorAttribute", traits: {"smithy.api#jsonName" => "errorAttribute"}))
     InternalServerErrorException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    InternalServerErrorException.add_member(:resource_share_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofresourceshareerror, name: "ResourceShareErrors", traits: {"smithy.api#jsonName" => "resourceShareErrors"}))
     InternalServerErrorException.type = Types::InternalServerErrorException
     LdapServerMetadataInput.add_member(:hosts, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "Hosts", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "hosts", "smithy.api#required" => {}}))
     LdapServerMetadataInput.add_member(:role_base, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RoleBase", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "roleBase", "smithy.api#required" => {}}))
@@ -435,6 +459,7 @@ module Aws::Mq
     LogsSummary.type = Types::LogsSummary
     NotFoundException.add_member(:error_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorAttribute", traits: {"smithy.api#jsonName" => "errorAttribute"}))
     NotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    NotFoundException.add_member(:resource_share_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofresourceshareerror, name: "ResourceShareErrors", traits: {"smithy.api#jsonName" => "resourceShareErrors"}))
     NotFoundException.type = Types::NotFoundException
     PendingLogs.add_member(:audit, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Audit", traits: {"smithy.api#jsonName" => "audit"}))
     PendingLogs.add_member(:general, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "General", traits: {"smithy.api#jsonName" => "general"}))
@@ -449,6 +474,10 @@ module Aws::Mq
     RebootBrokerRequest.add_member(:broker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BrokerId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RebootBrokerRequest.type = Types::RebootBrokerRequest
     RebootBrokerResponse.type = Types::RebootBrokerResponse
+    ResourceShareError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorCode", traits: {"smithy.api#jsonName" => "errorCode"}))
+    ResourceShareError.add_member(:resource_share_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceShareArn", traits: {"smithy.api#jsonName" => "resourceShareArn"}))
+    ResourceShareError.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status", traits: {"smithy.api#jsonName" => "status"}))
+    ResourceShareError.type = Types::ResourceShareError
     SanitizationWarning.add_member(:attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AttributeName", traits: {"smithy.api#jsonName" => "attributeName"}))
     SanitizationWarning.add_member(:element_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ElementName", traits: {"smithy.api#jsonName" => "elementName"}))
     SanitizationWarning.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizationWarningReason, name: "Reason", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "reason", "smithy.api#required" => {}}))
@@ -456,8 +485,34 @@ module Aws::Mq
     SanitizationWarningReason.add_member(:disallowed_element_removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISALLOWED_ELEMENT_REMOVED", traits: {"smithy.api#enumValue" => "DISALLOWED_ELEMENT_REMOVED"}))
     SanitizationWarningReason.add_member(:disallowed_attribute_removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISALLOWED_ATTRIBUTE_REMOVED", traits: {"smithy.api#enumValue" => "DISALLOWED_ATTRIBUTE_REMOVED"}))
     SanitizationWarningReason.add_member(:invalid_attribute_value_removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_ATTRIBUTE_VALUE_REMOVED", traits: {"smithy.api#enumValue" => "INVALID_ATTRIBUTE_VALUE_REMOVED"}))
+    SharedResource.add_member(:dns_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "DnsNames", traits: {"smithy.api#jsonName" => "dnsNames"}))
+    SharedResource.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedResourceError, name: "Error", traits: {"smithy.api#jsonName" => "error"}))
+    SharedResource.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "resourceArn", "smithy.api#required" => {}}))
+    SharedResource.add_member(:resource_share_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ResourceShareArns", traits: {"smithy.api#jsonName" => "resourceShareArns"}))
+    SharedResource.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedResourceStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "status", "smithy.api#required" => {}}))
+    SharedResource.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedResourceType, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "type", "smithy.api#required" => {}}))
+    SharedResource.type = Types::SharedResource
+    SharedResourceError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedResourceErrorCode, name: "Code", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "code", "smithy.api#required" => {}}))
+    SharedResourceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
+    SharedResourceError.type = Types::SharedResourceError
+    SharedResourceErrorCode.add_member(:quota_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUOTA_EXCEEDED", traits: {"smithy.api#enumValue" => "QUOTA_EXCEEDED"}))
+    SharedResourceErrorCode.add_member(:share_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARE_NOT_FOUND", traits: {"smithy.api#enumValue" => "SHARE_NOT_FOUND"}))
+    SharedResourceErrorCode.add_member(:invite_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVITE_FAILED", traits: {"smithy.api#enumValue" => "INVITE_FAILED"}))
+    SharedResourceErrorCode.add_member(:setup_incomplete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SETUP_INCOMPLETE", traits: {"smithy.api#enumValue" => "SETUP_INCOMPLETE"}))
+    SharedResourceErrorCode.add_member(:internal_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_ERROR", traits: {"smithy.api#enumValue" => "INTERNAL_ERROR"}))
+    SharedResourceErrorCode.add_member(:az_mismatch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZ_MISMATCH", traits: {"smithy.api#enumValue" => "AZ_MISMATCH"}))
+    SharedResourceErrorCode.add_member(:resource_configuration_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_CONFIGURATION_NOT_FOUND", traits: {"smithy.api#enumValue" => "RESOURCE_CONFIGURATION_NOT_FOUND"}))
+    SharedResourceStatus.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
+    SharedResourceStatus.add_member(:setup_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SETUP_IN_PROGRESS", traits: {"smithy.api#enumValue" => "SETUP_IN_PROGRESS"}))
+    SharedResourceStatus.add_member(:deletion_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETION_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETION_IN_PROGRESS"}))
+    SharedResourceStatus.add_member(:pending_create, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_CREATE", traits: {"smithy.api#enumValue" => "PENDING_CREATE"}))
+    SharedResourceStatus.add_member(:pending_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_DELETE", traits: {"smithy.api#enumValue" => "PENDING_DELETE"}))
+    SharedResourceStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    SharedResourceType.add_member(:resource_share, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_SHARE", traits: {"smithy.api#enumValue" => "RESOURCE_SHARE"}))
+    SharedResourceType.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE", traits: {"smithy.api#enumValue" => "RESOURCE"}))
     UnauthorizedException.add_member(:error_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ErrorAttribute", traits: {"smithy.api#jsonName" => "errorAttribute"}))
     UnauthorizedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    UnauthorizedException.add_member(:resource_share_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofresourceshareerror, name: "ResourceShareErrors", traits: {"smithy.api#jsonName" => "resourceShareErrors"}))
     UnauthorizedException.type = Types::UnauthorizedException
     UpdateBrokerRequest.add_member(:authentication_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationStrategy, name: "AuthenticationStrategy", traits: {"smithy.api#jsonName" => "authenticationStrategy"}))
     UpdateBrokerRequest.add_member(:auto_minor_version_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoMinorVersionUpgrade", traits: {"smithy.api#jsonName" => "autoMinorVersionUpgrade"}))
@@ -468,7 +523,9 @@ module Aws::Mq
     UpdateBrokerRequest.add_member(:ldap_server_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: LdapServerMetadataInput, name: "LdapServerMetadata", traits: {"smithy.api#jsonName" => "ldapServerMetadata"}))
     UpdateBrokerRequest.add_member(:logs, ::Smithy::Schema::Shapes::MemberShape.new(target: Logs, name: "Logs", traits: {"smithy.api#jsonName" => "logs"}))
     UpdateBrokerRequest.add_member(:maintenance_window_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyStartTime, name: "MaintenanceWindowStartTime", traits: {"smithy.api#jsonName" => "maintenanceWindowStartTime"}))
+    UpdateBrokerRequest.add_member(:resource_share_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ResourceShareArns", traits: {"smithy.api#jsonName" => "resourceShareArns"}))
     UpdateBrokerRequest.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "SecurityGroups", traits: {"smithy.api#jsonName" => "securityGroups"}))
+    UpdateBrokerRequest.add_member(:storage_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "StorageSize", traits: {"smithy.api#jsonName" => "storageSize"}))
     UpdateBrokerRequest.add_member(:data_replication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationMode, name: "DataReplicationMode", traits: {"smithy.api#jsonName" => "dataReplicationMode"}))
     UpdateBrokerRequest.type = Types::UpdateBrokerRequest
     UpdateBrokerResponse.add_member(:authentication_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationStrategy, name: "AuthenticationStrategy", traits: {"smithy.api#jsonName" => "authenticationStrategy"}))
@@ -480,11 +537,13 @@ module Aws::Mq
     UpdateBrokerResponse.add_member(:ldap_server_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: LdapServerMetadataOutput, name: "LdapServerMetadata", traits: {"smithy.api#jsonName" => "ldapServerMetadata"}))
     UpdateBrokerResponse.add_member(:logs, ::Smithy::Schema::Shapes::MemberShape.new(target: Logs, name: "Logs", traits: {"smithy.api#jsonName" => "logs"}))
     UpdateBrokerResponse.add_member(:maintenance_window_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyStartTime, name: "MaintenanceWindowStartTime", traits: {"smithy.api#jsonName" => "maintenanceWindowStartTime"}))
+    UpdateBrokerResponse.add_member(:resource_share_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ResourceShareArns", traits: {"smithy.api#jsonName" => "resourceShareArns"}))
     UpdateBrokerResponse.add_member(:security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "SecurityGroups", traits: {"smithy.api#jsonName" => "securityGroups"}))
     UpdateBrokerResponse.add_member(:data_replication_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationMetadataOutput, name: "DataReplicationMetadata", traits: {"smithy.api#jsonName" => "dataReplicationMetadata"}))
     UpdateBrokerResponse.add_member(:data_replication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationMode, name: "DataReplicationMode", traits: {"smithy.api#jsonName" => "dataReplicationMode"}))
     UpdateBrokerResponse.add_member(:pending_data_replication_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationMetadataOutput, name: "PendingDataReplicationMetadata", traits: {"smithy.api#jsonName" => "pendingDataReplicationMetadata"}))
     UpdateBrokerResponse.add_member(:pending_data_replication_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DataReplicationMode, name: "PendingDataReplicationMode", traits: {"smithy.api#jsonName" => "pendingDataReplicationMode"}))
+    UpdateBrokerResponse.add_member(:storage_size, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "StorageSize", traits: {"smithy.api#jsonName" => "storageSize"}))
     UpdateBrokerResponse.type = Types::UpdateBrokerResponse
     UpdateConfigurationRequest.add_member(:configuration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ConfigurationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateConfigurationRequest.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Data", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "data", "smithy.api#required" => {}}))
@@ -533,7 +592,9 @@ module Aws::Mq
     Listofconfigurationrevision.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRevision, name: "member"))
     Listofdeploymentmode.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentMode, name: "member"))
     Listofengineversion.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineVersion, name: "member"))
+    Listofresourceshareerror.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceShareError, name: "member"))
     Listofsanitizationwarning.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SanitizationWarning, name: "member"))
+    Listofsharedresource.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedResource, name: "member"))
     Listofuser.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: User, name: "member"))
     Listofusersummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSummary, name: "member"))
     ListofString.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
@@ -544,7 +605,7 @@ module Aws::Mq
       service.id = "com.amazonaws.mq#mq"
       service.name = "Mq"
       service.version = "2017-11-27"
-      service.traits = {"aws.api#service" => {"sdkId" => "mq", "arnNamespace" => "mq", "cloudFormationName" => "AmazonMQ", "cloudTrailEventSource" => "mq.amazonaws.com", "endpointPrefix" => "mq"}, "aws.auth#sigv4" => {"name" => "mq"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AmazonMQ"}
+      service.traits = {"aws.api#service" => {"sdkId" => "mq", "arnNamespace" => "mq", "cloudFormationName" => "AmazonMQ", "cloudTrailEventSource" => "mq.amazonaws.com", "endpointPrefix" => "mq"}, "aws.auth#sigv4" => {"name" => "mq"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AmazonMQ", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://mq-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://mq-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://mq.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://mq.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_broker, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mq#CreateBroker"
         operation.name = "CreateBroker"
@@ -688,6 +749,18 @@ module Aws::Mq
         operation.errors << InternalServerErrorException
         operation.errors << NotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/configurations/{ConfigurationId}/revisions/{ConfigurationRevision}", "code" => 200}}
+      end)
+      service.add_operation(:describe_shared_resources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mq#DescribeSharedResources"
+        operation.name = "DescribeSharedResources"
+        operation.input = DescribeSharedResourcesRequest
+        operation.output = DescribeSharedResourcesResponse
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/v1/brokers/{BrokerId}/shared-resources", "code" => 200}}
+        operation[:paginator] = Paginators::DescribeSharedResources.new
       end)
       service.add_operation(:describe_user, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mq#DescribeUser"

@@ -144,18 +144,18 @@ module Aws::S3Vectors
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,7 +209,7 @@ module Aws::S3Vectors
       super
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Creates a vector index within a vector bucket. To specify the vector bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateIndex</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Creates a vector index within a vector bucket. To specify the vector bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateIndex</code> permission to use this operation.</p> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateIndex</code> permission to create a vector index with tags.</p> </dd> </dl>
     # @param [Hash, Types::CreateIndexInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket to create the vector index in. </p>
@@ -225,6 +225,10 @@ module Aws::S3Vectors
     #   <p>The distance metric to be used for similarity search. </p>
     # @option params [Types::MetadataConfiguration] :metadata_configuration
     #   <p>The metadata configuration for the vector index. </p>
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   <p>The encryption configuration for a vector index. By default, if you don't specify, all new vectors in the vector index will use the encryption configuration of the vector bucket.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>An array of user-defined tags that you would like to apply to the vector index that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize, track costs, and control access to resources. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateIndex</code> permission to create a vector index with tags.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     vector_bucket_name: "VectorBucketName",
@@ -235,45 +239,61 @@ module Aws::S3Vectors
     #     distance_metric: "euclidean" # One of: ["euclidean", "cosine"], # required
     #     metadata_configuration: {
     #       non_filterable_metadata_keys: ["MetadataKey"], # required
+    #     },
+    #     encryption_configuration: {
+    #       sse_type: "AES256" # One of: ["AES256", "aws:kms"],
+    #       kms_key_arn: "KmsKeyArn"
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
     #     }
     #   }
     #   options = {}
     #   response = client.create_index(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
-    #   {}
+    #   {
+    #     index_arn: "IndexArn", # required
+    #   }
     # @return [Types::CreateIndexOutput]
     def create_index(params = {}, options = {})
       request = build_request(:create_index, params)
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Creates a vector bucket in the Amazon Web Services Region that you want your bucket to be in. </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateVectorBucket</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Creates a vector bucket in the Amazon Web Services Region that you want your bucket to be in. </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:CreateVectorBucket</code> permission to use this operation. </p> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateVectorBucket</code> permission to create a vector bucket with tags.</p> </dd> </dl>
     # @param [Hash, Types::CreateVectorBucketInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket to create. </p>
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
     #   <p>The encryption configuration for the vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>. </p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>An array of user-defined tags that you would like to apply to the vector bucket that you are creating. A tag is a key-value pair that you apply to your resources. Tags can help you organize and control access to resources. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p> <note> <p>You must have the <code>s3vectors:TagResource</code> permission in addition to <code>s3vectors:CreateVectorBucket</code> permission to create a vector bucket with tags.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     vector_bucket_name: "VectorBucketName", # required
     #     encryption_configuration: {
     #       sse_type: "AES256" # One of: ["AES256", "aws:kms"],
     #       kms_key_arn: "KmsKeyArn"
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
     #     }
     #   }
     #   options = {}
     #   response = client.create_vector_bucket(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
-    #   {}
+    #   {
+    #     vector_bucket_arn: "VectorBucketArn", # required
+    #   }
     # @return [Types::CreateVectorBucketOutput]
     def create_vector_bucket(params = {}, options = {})
       request = build_request(:create_vector_bucket, params)
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteIndex</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Deletes a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteIndex</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::DeleteIndexInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket that contains the vector index. </p>
@@ -298,7 +318,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes a vector bucket. All vector indexes in the vector bucket must be deleted before the vector bucket can be deleted. To perform this operation, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucket</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Deletes a vector bucket. All vector indexes in the vector bucket must be deleted before the vector bucket can be deleted. To perform this operation, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucket</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::DeleteVectorBucketInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket to delete.</p>
@@ -320,7 +340,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Deletes a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::DeleteVectorBucketPolicyInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket to delete the policy from.</p>
@@ -342,7 +362,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Deletes one or more vectors in a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectors</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Deletes one or more vectors in a vector index. To specify the vector index, you can either use both the vector bucket name and vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:DeleteVectors</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::DeleteVectorsInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket that contains the vector index. </p>
@@ -370,7 +390,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns vector index attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetIndex</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Returns vector index attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetIndex</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::GetIndexInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket that contains the vector index. </p>
@@ -399,7 +419,12 @@ module Aws::S3Vectors
     #       distance_metric: "euclidean" # One of: ["euclidean", "cosine"], # required
     #       metadata_configuration: {
     #         non_filterable_metadata_keys: ["MetadataKey"], # required
-    #       }
+    #       },
+    #       encryption_configuration: {
+    #         sse_type: "AES256" # One of: ["AES256", "aws:kms"],
+    #         kms_key_arn: "KmsKeyArn"
+    #       },
+    #       index_mode: "CLASSIC" # One of: ["CLASSIC", "ENHANCED"]
     #     }
     #   }
     # @return [Types::GetIndexOutput]
@@ -408,7 +433,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns vector bucket attributes. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucket</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Returns vector bucket attributes. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucket</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::GetVectorBucketInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket to retrieve information about.</p>
@@ -431,7 +456,8 @@ module Aws::S3Vectors
     #       encryption_configuration: {
     #         sse_type: "AES256" # One of: ["AES256", "aws:kms"],
     #         kms_key_arn: "KmsKeyArn"
-    #       }
+    #       },
+    #       default_index_mode: "CLASSIC" # One of: ["CLASSIC", "ENHANCED"]
     #     }
     #   }
     # @return [Types::GetVectorBucketOutput]
@@ -440,7 +466,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Gets details about a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Gets details about a vector bucket policy. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::GetVectorBucketPolicyInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket.</p>
@@ -464,7 +490,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns vector attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectors</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Returns vector attributes. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:GetVectors</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::GetVectorsInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket that contains the vector index. </p>
@@ -509,7 +535,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns a list of all the vector indexes within the specified vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListIndexes</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Returns a list of all the vector indexes within the specified vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListIndexes</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::ListIndexesInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket that contains the vector indexes. </p>
@@ -550,7 +576,30 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Returns a list of all the vector buckets that are owned by the authenticated sender of the request.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectorBuckets</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Lists all of the tags applied to a specified Amazon S3 Vectors resource. Each tag is a label consisting of a key and value pair. Tags can help you organize, track costs for, and control access to resources. </p> <note> <p>For a list of S3 resources that support tagging, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For vector buckets and vector indexes, you must have the <code>s3vectors:ListTagsForResource</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::ListTagsForResourceInput] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource that you want to list tags for. The tagged resource can be a vector bucket or a vector index. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceARN", # required
+    #   }
+    #   options = {}
+    #   response = client.list_tags_for_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     tags: { # required
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::ListTagsForResourceOutput]
+    def list_tags_for_resource(params = {}, options = {})
+      request = build_request(:list_tags_for_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of all the vector buckets that are owned by the authenticated sender of the request.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectorBuckets</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::ListVectorBucketsInput] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of vector buckets to be returned in the response. </p>
@@ -584,7 +633,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>List vectors in the specified vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p> <code>ListVectors</code> operations proceed sequentially; however, for faster performance on a large number of vectors in a vector index, applications can request a parallel <code>ListVectors</code> operation by providing the <code>segmentCount</code> and <code>segmentIndex</code> parameters.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:ListVectors</code> permission, you can list vector keys when <code>returnData</code> and <code>returnMetadata</code> are both set to false or not specified..</p> </li> <li> <p>If you set <code>returnData</code> or <code>returnMetadata</code> to true, you must have both <code>s3vectors:ListVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden</code> error if you request vector data or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>
+    # <p>List vectors in the specified vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p> <code>ListVectors</code> operations proceed sequentially; however, for faster performance on a large number of vectors in a vector index, applications can request a parallel <code>ListVectors</code> operation by providing the <code>segmentCount</code> and <code>segmentIndex</code> parameters.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:ListVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:ListVectors</code> permission, you can list vector keys when <code>returnData</code> and <code>returnMetadata</code> are both set to false or not specified..</p> </li> <li> <p>If you set <code>returnData</code> or <code>returnMetadata</code> to true, you must have both <code>s3vectors:ListVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden</code> error if you request vector data or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>
     # @param [Hash, Types::ListVectorsInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket. </p>
@@ -639,7 +688,32 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Creates a bucket policy for a vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Updates the default index mode for a vector bucket. The updated default applies to vector indexes that you create after the request succeeds. The operation doesn't change existing vector indexes. To specify the vector bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN).</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectorBucketDefaultIndexMode</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::PutVectorBucketDefaultIndexModeInput] params
+    # @option params [String] :vector_bucket_name
+    #   <p>The name of the vector bucket to update.</p>
+    # @option params [String] :vector_bucket_arn
+    #   <p>The Amazon Resource Name (ARN) of the vector bucket to update.</p>
+    # @option params [String] :default_index_mode
+    #   <p>The default mode to assign to new vector indexes in the vector bucket. This change doesn't affect existing vector indexes.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     vector_bucket_name: "VectorBucketName",
+    #     vector_bucket_arn: "VectorBucketArn",
+    #     default_index_mode: "CLASSIC" # One of: ["CLASSIC", "ENHANCED"], # required
+    #   }
+    #   options = {}
+    #   response = client.put_vector_bucket_default_index_mode(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::PutVectorBucketDefaultIndexModeOutput]
+    def put_vector_bucket_default_index_mode(params = {}, options = {})
+      request = build_request(:put_vector_bucket_default_index_mode, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a bucket policy for a vector bucket. To specify the bucket, you must use either the vector bucket name or the vector bucket Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectorBucketPolicy</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::PutVectorBucketPolicyInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket.</p>
@@ -664,7 +738,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Adds one or more vectors to a vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p>For more information about limits, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html">Limitations and restrictions</a> in the <i>Amazon S3 User Guide</i>.</p> <note> <p>When inserting vector data into your vector index, you must provide the vector data as <code>float32</code> (32-bit floating point) values. If you pass higher-precision values to an Amazon Web Services SDK, S3 Vectors converts the values to 32-bit floating point before storing them, and <code>GetVectors</code>, <code>ListVectors</code>, and <code>QueryVectors</code> operations return the float32 values. Different Amazon Web Services SDKs may have different default numeric types, so ensure your vectors are properly formatted as <code>float32</code> values regardless of which SDK you're using. For example, in Python, use <code>numpy.float32</code> or explicitly cast your values.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectors</code> permission to use this operation. </p> </dd> </dl>
+    # <p>Adds one or more vectors to a vector index. To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <p>For more information about limits, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html">Limitations and restrictions</a> in the <i>Amazon S3 User Guide</i>.</p> <note> <p>When inserting vector data into your vector index, you must provide the vector data as <code>float32</code> (32-bit floating point) values. If you pass higher-precision values to an Amazon Web Services SDK, S3 Vectors converts the values to 32-bit floating point before storing them, and <code>GetVectors</code>, <code>ListVectors</code>, and <code>QueryVectors</code> operations return the float32 values. Different Amazon Web Services SDKs may have different default numeric types, so ensure your vectors are properly formatted as <code>float32</code> values regardless of which SDK you're using. For example, in Python, use <code>numpy.float32</code> or explicitly cast your values.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:PutVectors</code> permission to use this operation. </p> </dd> </dl>
     # @param [Hash, Types::PutVectorsInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket that contains the vector index. </p>
@@ -701,7 +775,7 @@ module Aws::S3Vectors
       request.send_request(options)
     end
 
-    # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Performs an approximate nearest neighbor search query in a vector index using a query vector. By default, it returns the keys of approximate nearest neighbors. You can optionally include the computed distance (between the query vector and each vector in the response), the vector data, and metadata of each vector in the response. </p> <p>To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:QueryVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:QueryVectors</code> permission, you can retrieve vector keys of approximate nearest neighbors and computed distances between these vectors. This permission is sufficient only when you don't set any metadata filters and don't request vector data or metadata (by keeping the <code>returnMetadata</code> parameter set to <code>false</code> or not specified).</p> </li> <li> <p>If you specify a metadata filter or set <code>returnMetadata</code> to true, you must have both <code>s3vectors:QueryVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden error</code> if you request metadata filtering, vector data, or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>
+    # <p>Performs an approximate nearest neighbor search query in a vector index using a query vector. By default, it returns the keys of approximate nearest neighbors. You can optionally include the computed distance (between the query vector and each vector in the response) and metadata of each vector in the response.</p> <p>To specify the vector index, you can either use both the vector bucket name and the vector index name, or use the vector index Amazon Resource Name (ARN). </p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:QueryVectors</code> permission to use this operation. Additional permissions are required based on the request parameters you specify:</p> <ul> <li> <p>With only <code>s3vectors:QueryVectors</code> permission, you can retrieve vector keys of approximate nearest neighbors and computed distances between these vectors. This permission is sufficient only when you don't set any metadata filters and don't request metadata (by keeping the <code>returnMetadata</code> parameter set to <code>false</code> or not specified).</p> </li> <li> <p>If you specify a metadata filter or set <code>returnMetadata</code> to true, you must have both <code>s3vectors:QueryVectors</code> and <code>s3vectors:GetVectors</code> permissions. The request fails with a <code>403 Forbidden error</code> if you request metadata filtering or metadata without the <code>s3vectors:GetVectors</code> permission.</p> </li> </ul> </dd> </dl>
     # @param [Hash, Types::QueryVectorsInput] params
     # @option params [String] :vector_bucket_name
     #   <p>The name of the vector bucket that contains the vector index. </p>
@@ -715,10 +789,14 @@ module Aws::S3Vectors
     #   <p>The query vector. Ensure that the query vector has the same dimension as the dimension of the vector index that's being queried. For example, if your vector index contains vectors with 384 dimensions, your query vector must also have 384 dimensions. </p>
     # @option params [JSON] :filter
     #   <p>Metadata filter to apply during the query. For more information about metadata keys, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-metadata-filtering.html">Metadata filtering</a> in the <i>Amazon S3 User Guide</i>. </p>
+    # @option params [String] :query_mode
+    #   <p>The mode to use to process the query. If you don't specify a query mode, the operation uses the mode that's currently configured for the vector index.</p> <p>Valid values:</p> <ul> <li> <p> <code>CLASSIC</code> - Applies metadata filters during the vector search. You can't specify <code>CLASSIC</code> for an <code>ENHANCED</code> index.</p> </li> <li> <p> <code>ENHANCED</code> - Applies metadata filters before the vector search.</p> </li> </ul>
     # @option params [Boolean] :return_metadata
     #   <p>Indicates whether to include metadata in the response. The default value is <code>false</code>.</p>
     # @option params [Boolean] :return_distance
     #   <p>Indicates whether to include the computed distance in the response. The default value is <code>false</code>.</p>
+    # @option params [String] :next_token
+    #   <p>Pagination token from a previous request. The value of this field is empty for an initial request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     vector_bucket_name: "VectorBucketName",
@@ -730,8 +808,10 @@ module Aws::S3Vectors
     #       float32: [1.0]
     #     },
     #     filter: ""null"",
+    #     query_mode: "CLASSIC" # One of: ["CLASSIC", "ENHANCED"],
     #     return_metadata: false,
-    #     return_distance: false
+    #     return_distance: false,
+    #     next_token: "QueryVectorsNextToken"
     #   }
     #   options = {}
     #   response = client.query_vectors(params, options)
@@ -740,19 +820,91 @@ module Aws::S3Vectors
     #   {
     #     vectors: [ # required
     #       {
+    #         distance: 1.0,
     #         key: "VectorKey", # required
-    #         data: {
-    #           # One of:
-    #           float32: [1.0]
-    #         },
-    #         metadata: ""null"",
-    #         distance: 1.0
+    #         metadata: ""null""
     #       }
-    #     ]
+    #     ],
+    #     distance_metric: "euclidean" # One of: ["euclidean", "cosine"], # required
+    #     next_token: "QueryVectorsNextToken"
     #   }
     # @return [Types::QueryVectorsOutput]
     def query_vectors(params = {}, options = {})
       request = build_request(:query_vectors, params)
+      request.send_request(options)
+    end
+
+    # <p>Applies one or more user-defined tags to an Amazon S3 Vectors resource or updates existing tags. Each tag is a label consisting of a key and value pair. Tags can help you organize, track costs for, and control access to your resources. You can add up to 50 tags for each resource.</p> <note> <p>For a list of S3 resources that support tagging, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For vector buckets and vector indexes, you must have the <code>s3vectors:TagResource</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::TagResourceInput] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource that you're applying tags to. The tagged resource can be a vector bucket or a vector index. </p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The user-defined tag that you want to add to the specified S3 Vectors resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceARN", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.tag_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::TagResourceOutput]
+    def tag_resource(params = {}, options = {})
+      request = build_request(:tag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes the specified user-defined tags from an Amazon S3 Vectors resource. You can pass one or more tag keys. </p> <note> <p>For a list of S3 resources that support tagging, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html#manage-tags">Managing tags for Amazon S3 resources</a>.</p> </note> <dl> <dt>Permissions</dt> <dd> <p>For vector buckets and vector indexes, you must have the <code>s3vectors:UntagResource</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::UntagResourceInput] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon S3 Vectors resource that you're removing tags from. The tagged resource can be a vector bucket or a vector index. </p>
+    # @option params [Array<String>] :tag_keys
+    #   <p>The array of tag keys that you're removing from the S3 Vectors resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html">Tagging for cost allocation or attribute-based access control (ABAC)</a>.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourceARN", # required
+    #     tag_keys: ["TagKey"], # required
+    #   }
+    #   options = {}
+    #   response = client.untag_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UntagResourceOutput]
+    def untag_resource(params = {}, options = {})
+      request = build_request(:untag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the mode for an existing vector index. You can set the mode to <code>ENHANCED</code> for any vector index. You can set the mode to <code>CLASSIC</code> only for a vector index in a vector bucket created before September 30, 2026. This operation doesn't change the default index mode of the vector bucket or the mode of other vector indexes. Specify the vector index by using its Amazon Resource Name (ARN) or both the vector bucket name and vector index name.</p> <dl> <dt>Permissions</dt> <dd> <p>You must have the <code>s3vectors:UpdateIndexMode</code> permission to use this operation.</p> </dd> </dl>
+    # @param [Hash, Types::UpdateIndexModeInput] params
+    # @option params [String] :vector_bucket_name
+    #   <p>The name of the vector bucket that contains the vector index.</p>
+    # @option params [String] :index_name
+    #   <p>The name of the vector index to update.</p>
+    # @option params [String] :index_arn
+    #   <p>The Amazon Resource Name (ARN) of the vector index to update.</p>
+    # @option params [String] :index_mode
+    #   <p>The new mode for the vector index.</p> <p>Valid values:</p> <ul> <li> <p> <code>CLASSIC</code> - Applies metadata filters during the vector search. You can specify <code>CLASSIC</code> only for a vector index in a vector bucket created before September 30, 2026.</p> </li> <li> <p> <code>ENHANCED</code> - Applies metadata filters before the vector search.</p> </li> </ul>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     vector_bucket_name: "VectorBucketName",
+    #     index_name: "IndexName",
+    #     index_arn: "IndexArn",
+    #     index_mode: "CLASSIC" # One of: ["CLASSIC", "ENHANCED"], # required
+    #   }
+    #   options = {}
+    #   response = client.update_index_mode(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateIndexModeOutput]
+    def update_index_mode(params = {}, options = {})
+      request = build_request(:update_index_mode, params)
       request.send_request(options)
     end
 

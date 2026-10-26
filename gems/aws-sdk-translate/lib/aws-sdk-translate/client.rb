@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:translate)
@@ -123,7 +124,7 @@ module Aws::Translate
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::Translate
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -793,7 +794,7 @@ module Aws::Translate
     #       or more target languages. Batch translation translates each input document into each of the target languages.
     #       For more information, see
     #       <a href="https://docs.aws.amazon.com/translate/latest/dg/async.html">Asynchronous batch processing</a>.</p>
-    # 
+    #
     #          <p>Batch translation jobs can be described with the <a>DescribeTextTranslationJob</a> operation, listed with the <a>ListTextTranslationJobs</a> operation, and stopped with the <a>StopTextTranslationJob</a> operation.</p>
     # @param [Hash, Types::StartTextTranslationJobRequest] params
     # @option params [String] :job_name
@@ -959,14 +960,14 @@ module Aws::Translate
       request.send_request(options)
     end
 
-    # <p>Translates the input document from the source language to the target language.    
+    # <p>Translates the input document from the source language to the target language.
     #       This synchronous operation supports text, HTML, or Word documents as the input document.
-    #       
-    #       <code>TranslateDocument</code> supports translations from English to any supported language, 
+    #
+    #       <code>TranslateDocument</code> supports translations from English to any supported language,
     #       and from any supported language to English. Therefore, specify either the source language code
-    #       or the target language code as “en” (English). 
+    #       or the target language code as “en” (English).
     #     </p>
-    #          <p> If you set the <code>Formality</code> parameter, the request will fail if the target language does 
+    #          <p> If you set the <code>Formality</code> parameter, the request will fail if the target language does
     #        not support formality. For a list of target languages that support formality, see
     #        <a href="https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html">Setting formality</a>.
     #     </p>
@@ -975,7 +976,7 @@ module Aws::Translate
     #   <p>The content and content type for the document to be translated. The document size must not exceed 100 KB.</p>
     # @option params [Array<String>] :terminology_names
     #   <p>The name of a terminology list file to add to the translation job. This file
-    #         provides source terms and the desired translation for each term. 
+    #         provides source terms and the desired translation for each term.
     #         A terminology list can contain a maximum of 256 terms.
     #         You can use one custom terminology resource in your translation request.</p>
     #            <p>Use the <a>ListTerminologies</a> operation
@@ -993,7 +994,7 @@ module Aws::Translate
     #         Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported. </p>
     #            </note>
     # @option params [String] :target_language_code
-    #   <p>The language code requested for the translated document.  
+    #   <p>The language code requested for the translated document.
     #         For a list of supported language codes, see
     #         <a href="https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html">Supported languages</a>.</p>
     # @option params [Types::TranslationSettings] :settings
@@ -1065,7 +1066,7 @@ module Aws::Translate
     #         your character set, this may be fewer than 10,000 characters.</p>
     # @option params [Array<String>] :terminology_names
     #   <p>The name of a terminology list file to add to the translation job. This file
-    #         provides source terms and the desired translation for each term. 
+    #         provides source terms and the desired translation for each term.
     #         A terminology list can contain a maximum of 256 terms.
     #         You can use one custom terminology resource in your translation request.</p>
     #            <p>Use the <a>ListTerminologies</a> operation
@@ -1313,6 +1314,7 @@ module Aws::Translate
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

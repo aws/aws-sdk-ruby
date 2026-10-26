@@ -122,6 +122,8 @@ module Aws::Budgets
     PlannedBudgetLimits: MapShape
     PolicyArn: StringShape
     PolicyId: StringShape
+    ProductAttributeName: StringShape
+    ProductAttributeValues: StructureShape
     Region: StringShape
     ResourceLockedException: StructureShape
     ResourceTag: StructureShape

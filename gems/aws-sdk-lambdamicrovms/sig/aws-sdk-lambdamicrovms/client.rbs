@@ -1,0 +1,514 @@
+module Aws::LambdaMicrovms
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LambdaMicrovms::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateMicrovmAuthTokenResponse
+      include Smithy::Client::_Response[Types::CreateMicrovmAuthTokenResponse]
+      def auth_token: () -> Hash[String, String]?
+    end
+    def create_microvm_auth_token: (
+      ?microvm_identifier: String,
+      ?expiration_in_minutes: Integer,
+      ?allowed_ports: Array[
+        {
+          port: Integer,
+          range: {
+            start_port: untyped,
+            end_port: untyped
+          },
+          all_ports: {
+          }
+        }
+      ]
+    ) -> _CreateMicrovmAuthTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMicrovmAuthTokenResponse
+
+    interface _CreateMicrovmImageResponse
+      include Smithy::Client::_Response[Types::CreateMicrovmImageResponse]
+      def image_arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+      def latest_active_image_version: () -> String?
+      def latest_failed_image_version: () -> String?
+      def created_at: () -> Time?
+      def base_image_arn: () -> String?
+      def base_image_version: () -> String?
+      def build_role_arn: () -> String?
+      def description: () -> String?
+      def code_artifact: () -> Types::CodeArtifact?
+      def logging: () -> Types::Logging?
+      def egress_network_connectors: () -> Array[String]?
+      def cpu_configurations: () -> Array[Types::CpuConfiguration]?
+      def resources: () -> Array[Types::Resources]?
+      def additional_os_capabilities: () -> Array[String]?
+      def hooks: () -> Types::Hooks?
+      def environment_variables: () -> Hash[String, String]?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+      def image_version: () -> String?
+    end
+    def create_microvm_image: (
+      ?base_image_arn: String,
+      ?base_image_version: String,
+      ?build_role_arn: String,
+      ?description: String,
+      ?code_artifact: {
+        uri: String
+      },
+      ?logging: {
+        disabled: {
+        },
+        cloud_watch: {
+          log_group: String,
+          log_stream: untyped
+        }
+      },
+      ?egress_network_connectors: Array[String],
+      ?cpu_configurations: Array[
+        {
+          architecture: String
+        }
+      ],
+      ?resources: Array[
+        {
+          minimum_memory_in_mi_b: Integer
+        }
+      ],
+      ?additional_os_capabilities: Array[String],
+      ?hooks: {
+        port: Integer,
+        microvm_hooks: {
+          run: String,
+          run_timeout_in_seconds: untyped,
+          resume: untyped,
+          resume_timeout_in_seconds: untyped,
+          suspend: untyped,
+          suspend_timeout_in_seconds: untyped,
+          terminate: untyped,
+          terminate_timeout_in_seconds: untyped
+        },
+        microvm_image_hooks: {
+          ready: untyped,
+          ready_timeout_in_seconds: untyped,
+          validate: untyped,
+          validate_timeout_in_seconds: untyped
+        }
+      },
+      ?environment_variables: Hash[String, String],
+      ?name: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateMicrovmImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMicrovmImageResponse
+
+    interface _CreateMicrovmShellAuthTokenResponse
+      include Smithy::Client::_Response[Types::CreateMicrovmShellAuthTokenResponse]
+      def auth_token: () -> Hash[String, String]?
+    end
+    def create_microvm_shell_auth_token: (
+      ?microvm_identifier: String,
+      ?expiration_in_minutes: Integer
+    ) -> _CreateMicrovmShellAuthTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMicrovmShellAuthTokenResponse
+
+    interface _DeleteMicrovmImageResponse
+      include Smithy::Client::_Response[Types::DeleteMicrovmImageOutput]
+      def image_identifier: () -> String?
+      def state: () -> String?
+    end
+    def delete_microvm_image: (
+      ?image_identifier: String
+    ) -> _DeleteMicrovmImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMicrovmImageResponse
+
+    interface _DeleteMicrovmImageVersionResponse
+      include Smithy::Client::_Response[Types::DeleteMicrovmImageVersionOutput]
+      def image_identifier: () -> String?
+      def image_version: () -> String?
+      def state: () -> String?
+    end
+    def delete_microvm_image_version: (
+      ?image_identifier: String,
+      ?image_version: String
+    ) -> _DeleteMicrovmImageVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMicrovmImageVersionResponse
+
+    interface _GetMicrovmResponse
+      include Smithy::Client::_Response[Types::GetMicrovmResponse]
+      def microvm_id: () -> String?
+      def state: () -> String?
+      def endpoint: () -> String?
+      def image_arn: () -> String?
+      def image_version: () -> String?
+      def execution_role_arn: () -> String?
+      def idle_policy: () -> Types::IdlePolicy?
+      def maximum_duration_in_seconds: () -> Integer?
+      def started_at: () -> Time?
+      def terminated_at: () -> Time?
+      def state_reason: () -> String?
+      def ingress_network_connectors: () -> Array[String]?
+      def egress_network_connectors: () -> Array[String]?
+    end
+    def get_microvm: (
+      ?microvm_identifier: String
+    ) -> _GetMicrovmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMicrovmResponse
+
+    interface _GetMicrovmImageResponse
+      include Smithy::Client::_Response[Types::GetMicrovmImageOutput]
+      def image_arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+      def latest_active_image_version: () -> String?
+      def latest_failed_image_version: () -> String?
+      def created_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+    end
+    def get_microvm_image: (
+      ?image_identifier: String
+    ) -> _GetMicrovmImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMicrovmImageResponse
+
+    interface _GetMicrovmImageBuildResponse
+      include Smithy::Client::_Response[Types::GetMicrovmImageBuildOutput]
+      def image_arn: () -> String?
+      def image_version: () -> String?
+      def build_id: () -> String?
+      def build_state: () -> String?
+      def architecture: () -> String?
+      def chipset: () -> String?
+      def chipset_generation: () -> String?
+      def state_reason: () -> String?
+      def created_at: () -> Time?
+      def snapshot_build: () -> Types::SnapshotBuild?
+    end
+    def get_microvm_image_build: (
+      ?image_identifier: String,
+      ?image_version: String,
+      ?build_id: String
+    ) -> _GetMicrovmImageBuildResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMicrovmImageBuildResponse
+
+    interface _GetMicrovmImageVersionResponse
+      include Smithy::Client::_Response[Types::GetMicrovmImageVersionOutput]
+      def base_image_arn: () -> String?
+      def base_image_version: () -> String?
+      def build_role_arn: () -> String?
+      def description: () -> String?
+      def code_artifact: () -> Types::CodeArtifact?
+      def logging: () -> Types::Logging?
+      def egress_network_connectors: () -> Array[String]?
+      def cpu_configurations: () -> Array[Types::CpuConfiguration]?
+      def resources: () -> Array[Types::Resources]?
+      def additional_os_capabilities: () -> Array[String]?
+      def hooks: () -> Types::Hooks?
+      def environment_variables: () -> Hash[String, String]?
+      def image_arn: () -> String?
+      def image_version: () -> String?
+      def state: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def state_reason: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_microvm_image_version: (
+      ?image_identifier: String,
+      ?image_version: String
+    ) -> _GetMicrovmImageVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMicrovmImageVersionResponse
+
+    interface _ListManagedMicrovmImageVersionsResponse
+      include Smithy::Client::_Response[Types::ListManagedMicrovmImageVersionsOutput]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ManagedMicrovmImageVersion]?
+    end
+    def list_managed_microvm_image_versions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?image_identifier: String
+    ) -> _ListManagedMicrovmImageVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedMicrovmImageVersionsResponse
+
+    interface _ListManagedMicrovmImagesResponse
+      include Smithy::Client::_Response[Types::ListManagedMicrovmImagesOutput]
+      def next_token: () -> String?
+      def items: () -> Array[Types::ManagedMicrovmImageSummary]?
+    end
+    def list_managed_microvm_images: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListManagedMicrovmImagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedMicrovmImagesResponse
+
+    interface _ListMicrovmImageBuildsResponse
+      include Smithy::Client::_Response[Types::ListMicrovmImageBuildsOutput]
+      def next_token: () -> String?
+      def items: () -> Array[Types::MicrovmImageBuildSummary]?
+    end
+    def list_microvm_image_builds: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?image_identifier: String,
+      ?image_version: String,
+      ?architecture: String,
+      ?chipset: String,
+      ?chipset_generation: String
+    ) -> _ListMicrovmImageBuildsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMicrovmImageBuildsResponse
+
+    interface _ListMicrovmImageVersionsResponse
+      include Smithy::Client::_Response[Types::ListMicrovmImageVersionsOutput]
+      def next_token: () -> String?
+      def items: () -> Array[Types::MicrovmImageVersionSummary]?
+    end
+    def list_microvm_image_versions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?image_identifier: String
+    ) -> _ListMicrovmImageVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMicrovmImageVersionsResponse
+
+    interface _ListMicrovmImagesResponse
+      include Smithy::Client::_Response[Types::ListMicrovmImagesResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::MicrovmImageSummary]?
+    end
+    def list_microvm_images: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name_filter: String
+    ) -> _ListMicrovmImagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMicrovmImagesResponse
+
+    interface _ListMicrovmsResponse
+      include Smithy::Client::_Response[Types::ListMicrovmsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::MicrovmItem]?
+    end
+    def list_microvms: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?image_identifier: String,
+      ?image_version: String
+    ) -> _ListMicrovmsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMicrovmsResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Response[Types::ListTagsResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags: (
+      ?resource: String
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _ResumeMicrovmResponse
+      include Smithy::Client::_Response[Types::ResumeMicrovmResponse]
+    end
+    def resume_microvm: (
+      ?microvm_identifier: String
+    ) -> _ResumeMicrovmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeMicrovmResponse
+
+    interface _RunMicrovmResponse
+      include Smithy::Client::_Response[Types::RunMicrovmResponse]
+      def microvm_id: () -> String?
+      def state: () -> String?
+      def endpoint: () -> String?
+      def image_arn: () -> String?
+      def image_version: () -> String?
+      def execution_role_arn: () -> String?
+      def idle_policy: () -> Types::IdlePolicy?
+      def maximum_duration_in_seconds: () -> Integer?
+      def started_at: () -> Time?
+      def terminated_at: () -> Time?
+      def state_reason: () -> String?
+      def ingress_network_connectors: () -> Array[String]?
+      def egress_network_connectors: () -> Array[String]?
+    end
+    def run_microvm: (
+      ?ingress_network_connectors: Array[String],
+      ?egress_network_connectors: Array[String],
+      ?image_identifier: String,
+      ?image_version: String,
+      ?execution_role_arn: String,
+      ?idle_policy: {
+        max_idle_duration_seconds: Integer,
+        suspended_duration_seconds: untyped,
+        auto_resume_enabled: bool
+      },
+      ?logging: {
+        disabled: {
+        },
+        cloud_watch: {
+          log_group: String,
+          log_stream: untyped
+        }
+      },
+      ?run_hook_payload: String,
+      ?maximum_duration_in_seconds: Integer,
+      ?client_token: String
+    ) -> _RunMicrovmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RunMicrovmResponse
+
+    interface _SuspendMicrovmResponse
+      include Smithy::Client::_Response[Types::SuspendMicrovmResponse]
+    end
+    def suspend_microvm: (
+      ?microvm_identifier: String
+    ) -> _SuspendMicrovmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SuspendMicrovmResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TerminateMicrovmResponse
+      include Smithy::Client::_Response[Types::TerminateMicrovmResponse]
+    end
+    def terminate_microvm: (
+      ?microvm_identifier: String
+    ) -> _TerminateMicrovmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateMicrovmResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateMicrovmImageResponse
+      include Smithy::Client::_Response[Types::UpdateMicrovmImageResponse]
+      def image_arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+      def latest_active_image_version: () -> String?
+      def latest_failed_image_version: () -> String?
+      def created_at: () -> Time?
+      def base_image_arn: () -> String?
+      def base_image_version: () -> String?
+      def build_role_arn: () -> String?
+      def description: () -> String?
+      def code_artifact: () -> Types::CodeArtifact?
+      def logging: () -> Types::Logging?
+      def egress_network_connectors: () -> Array[String]?
+      def cpu_configurations: () -> Array[Types::CpuConfiguration]?
+      def resources: () -> Array[Types::Resources]?
+      def additional_os_capabilities: () -> Array[String]?
+      def hooks: () -> Types::Hooks?
+      def environment_variables: () -> Hash[String, String]?
+      def updated_at: () -> Time?
+      def image_version: () -> String?
+    end
+    def update_microvm_image: (
+      ?base_image_arn: String,
+      ?base_image_version: String,
+      ?build_role_arn: String,
+      ?description: String,
+      ?code_artifact: {
+        uri: String
+      },
+      ?logging: {
+        disabled: {
+        },
+        cloud_watch: {
+          log_group: String,
+          log_stream: untyped
+        }
+      },
+      ?egress_network_connectors: Array[String],
+      ?cpu_configurations: Array[
+        {
+          architecture: String
+        }
+      ],
+      ?resources: Array[
+        {
+          minimum_memory_in_mi_b: Integer
+        }
+      ],
+      ?additional_os_capabilities: Array[String],
+      ?hooks: {
+        port: Integer,
+        microvm_hooks: {
+          run: String,
+          run_timeout_in_seconds: untyped,
+          resume: untyped,
+          resume_timeout_in_seconds: untyped,
+          suspend: untyped,
+          suspend_timeout_in_seconds: untyped,
+          terminate: untyped,
+          terminate_timeout_in_seconds: untyped
+        },
+        microvm_image_hooks: {
+          ready: untyped,
+          ready_timeout_in_seconds: untyped,
+          validate: untyped,
+          validate_timeout_in_seconds: untyped
+        }
+      },
+      ?environment_variables: Hash[String, String],
+      ?image_identifier: String,
+      ?client_token: String
+    ) -> _UpdateMicrovmImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMicrovmImageResponse
+
+    interface _UpdateMicrovmImageVersionResponse
+      include Smithy::Client::_Response[Types::UpdateMicrovmImageVersionResponse]
+      def base_image_arn: () -> String?
+      def base_image_version: () -> String?
+      def build_role_arn: () -> String?
+      def description: () -> String?
+      def code_artifact: () -> Types::CodeArtifact?
+      def logging: () -> Types::Logging?
+      def egress_network_connectors: () -> Array[String]?
+      def cpu_configurations: () -> Array[Types::CpuConfiguration]?
+      def resources: () -> Array[Types::Resources]?
+      def additional_os_capabilities: () -> Array[String]?
+      def hooks: () -> Types::Hooks?
+      def environment_variables: () -> Hash[String, String]?
+      def image_arn: () -> String?
+      def image_version: () -> String?
+      def state: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def state_reason: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_microvm_image_version: (
+      ?image_identifier: String,
+      ?image_version: String,
+      ?status: String
+    ) -> _UpdateMicrovmImageVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMicrovmImageVersionResponse
+  end
+end

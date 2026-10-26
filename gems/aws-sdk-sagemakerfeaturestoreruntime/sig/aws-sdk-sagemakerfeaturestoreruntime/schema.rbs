@@ -11,6 +11,14 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchGetRecordResponse: StructureShape
     BatchGetRecordResultDetail: StructureShape
     BatchGetRecordResultDetails: ListShape
+    BatchWriteRecordEntries: ListShape
+    BatchWriteRecordEntry: StructureShape
+    BatchWriteRecordError: StructureShape
+    BatchWriteRecordErrors: ListShape
+    BatchWriteRecordRequest: StructureShape
+    BatchWriteRecordResponse: StructureShape
+    Boolean: BooleanShape
+    ConflictException: StructureShape
     DeleteRecordRequest: StructureShape
     DeletionMode: EnumShape
     ExpirationTimeResponse: EnumShape
@@ -22,9 +30,14 @@ module Aws::SageMakerFeatureStoreRuntime
     GetRecordRequest: StructureShape
     GetRecordResponse: StructureShape
     InternalFailure: StructureShape
+    ListRecordsMaxResults: IntegerShape
+    ListRecordsNextToken: StringShape
+    ListRecordsRequest: StructureShape
+    ListRecordsResponse: StructureShape
     Message: StringShape
     PutRecordRequest: StructureShape
     Record: ListShape
+    RecordIdentifierList: ListShape
     RecordIdentifiers: ListShape
     ResourceNotFound: StructureShape
     ServiceUnavailable: StructureShape
@@ -33,7 +46,9 @@ module Aws::SageMakerFeatureStoreRuntime
     TtlDuration: StructureShape
     TtlDurationUnit: EnumShape
     TtlDurationValue: IntegerShape
+    UnprocessedBatchWriteRecordEntries: ListShape
     UnprocessedIdentifiers: ListShape
+    UpdateRecordRequest: StructureShape
     ValidationError: StructureShape
     ValueAsString: StringShape
     ValueAsStringList: ListShape

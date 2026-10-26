@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:marketplaceentitlementservice)
@@ -123,7 +124,7 @@ module Aws::MarketplaceEntitlementService
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::MarketplaceEntitlementService
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -210,13 +211,7 @@ module Aws::MarketplaceEntitlementService
     end
 
     # <p>GetEntitlements retrieves entitlement values for a given product. The results can be
-    #       filtered based on customer identifier, AWS account ID, or product dimensions.</p>
-    #          <important>
-    #             <p>
-    #        The <code>CustomerIdentifier</code> parameter is on path for deprecation. Use <code>CustomerAWSAccountID</code> instead.</p>
-    #             <p>These parameters are mutually exclusive. You can't specify both <code>CustomerIdentifier</code> and <code>CustomerAWSAccountID</code> in the same request.
-    #      </p>
-    #          </important>
+    #       filtered based on customer identifier, AWS account ID, license ARN, or product dimensions.</p>
     # @param [Hash, Types::GetEntitlementsRequest] params
     # @option params [String] :product_code
     #   <p>Product code is used to uniquely identify a product in AWS Marketplace. The product code
@@ -227,8 +222,11 @@ module Aws::MarketplaceEntitlementService
     #           <i>unioned</i> for each value in the value list, and then
     #           <i>intersected</i> for each filter key.</p>
     #            <p>
-    #               <code>CustomerIdentifier</code> and <code>CustomerAWSAccountID</code> are mutually exclusive. You can't specify both in the same request.
+    #               <code>CustomerIdentifier</code> and <code>CustomerAWSAccountId</code> are mutually exclusive parameters. You must use one or the other, but not both in the same request.
     #      </p>
+    #            <note>
+    #               <p>If you're migrating an existing integration, use <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html">Account Feeds</a> to map <code>CustomerIdentifier</code> to <code>CustomerAWSAccountId</code>, and <a href="https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html">Agreements Feeds</a> to map <code>CustomerAWSAccountId</code> and <code>LicenseArn</code>.</p>
+    #            </note>
     # @option params [String] :next_token
     #   <p>For paginated calls to GetEntitlements, pass the NextToken from the previous
     #      GetEntitlementsResult.</p>
@@ -261,7 +259,8 @@ module Aws::MarketplaceEntitlementService
     #           boolean_value: false,
     #           string_value: "String"
     #         },
-    #         expiration_date: Time.now
+    #         expiration_date: Time.now,
+    #         license_arn: "String"
     #       }
     #     ],
     #     next_token: "NonEmptyString"
@@ -380,6 +379,7 @@ module Aws::MarketplaceEntitlementService
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

@@ -154,7 +154,21 @@ module Aws::ElasticBeanstalk
           key: String,
           value: String
         }
-      ]
+      ],
+      ?image_configuration: {
+        source: {
+          uri: String
+        },
+        build: {
+          type: String,
+          dockerfile_location: untyped,
+          buildpack: untyped,
+          architecture: String,
+          code_build_service_role: String,
+          compute_type: String,
+          timeout_in_minutes: Integer
+        }
+      }
     ) -> _CreateApplicationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationVersionResponse
 
     interface _CreateConfigurationTemplateResponse

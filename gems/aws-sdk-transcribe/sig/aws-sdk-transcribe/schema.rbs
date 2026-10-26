@@ -53,6 +53,7 @@ module Aws::Transcribe
     DescribeLanguageModelRequest: StructureShape
     DescribeLanguageModelResponse: StructureShape
     DurationInSeconds: FloatShape
+    EncryptionConfiguration: StructureShape
     FailureReason: StringShape
     GetCallAnalyticsCategoryRequest: StructureShape
     GetCallAnalyticsCategoryResponse: StructureShape
@@ -150,6 +151,7 @@ module Aws::Transcribe
     Phrases: ListShape
     PiiEntityType: EnumShape
     PiiEntityTypes: ListShape
+    PrintableNonEmptyString: StringShape
     Pronouns: EnumShape
     RedactionOutput: EnumShape
     RedactionType: EnumShape
@@ -204,6 +206,8 @@ module Aws::Transcribe
     UntagResourceResponse: StructureShape
     UpdateCallAnalyticsCategoryRequest: StructureShape
     UpdateCallAnalyticsCategoryResponse: StructureShape
+    UpdateLanguageModelRequest: StructureShape
+    UpdateLanguageModelResponse: StructureShape
     UpdateMedicalVocabularyRequest: StructureShape
     UpdateMedicalVocabularyResponse: StructureShape
     UpdateVocabularyFilterRequest: StructureShape

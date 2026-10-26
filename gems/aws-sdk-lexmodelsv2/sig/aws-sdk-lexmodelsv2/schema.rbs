@@ -18,6 +18,7 @@ module Aws::LexModelsV2
     AggregatedUtterancesSummaryList: ListShape
     AllowedInputTypes: StructureShape
     AmazonResourceName: StringShape
+    AnalysisScope: EnumShape
     AnalyticsBinByList: ListShape
     AnalyticsBinByName: EnumShape
     AnalyticsBinBySpecification: StructureShape
@@ -114,6 +115,7 @@ module Aws::LexModelsV2
     AnalyticsUtteranceResults: ListShape
     AnalyticsUtteranceSortByName: EnumShape
     AnswerField: StringShape
+    AssistedNluMode: EnumShape
     AssociatedTranscript: StructureShape
     AssociatedTranscriptFilter: StructureShape
     AssociatedTranscriptFilterName: EnumShape
@@ -123,6 +125,11 @@ module Aws::LexModelsV2
     AttachmentUrl: StringShape
     AudioAndDTMFInputSpecification: StructureShape
     AudioFileS3Location: StringShape
+    AudioFillerDelayInMilliseconds: IntegerShape
+    AudioFillerDeliveryDelayInMilliseconds: IntegerShape
+    AudioFillerDurationInMilliseconds: IntegerShape
+    AudioFillerSettings: StructureShape
+    AudioFillerType: EnumShape
     AudioLogDestination: StructureShape
     AudioLogSetting: StructureShape
     AudioLogSettingsList: ListShape
@@ -158,6 +165,11 @@ module Aws::LexModelsV2
     BotAliasSummary: StructureShape
     BotAliasSummaryList: ListShape
     BotAliasTestExecutionTarget: StructureShape
+    BotAnalyzerHistoryList: ListShape
+    BotAnalyzerHistorySummary: StructureShape
+    BotAnalyzerRecommendation: StructureShape
+    BotAnalyzerRecommendationList: ListShape
+    BotAnalyzerStatus: EnumShape
     BotExportSpecification: StructureShape
     BotFilter: StructureShape
     BotFilterName: EnumShape
@@ -286,6 +298,7 @@ module Aws::LexModelsV2
     CreateTestSetDiscrepancyReportResponse: StructureShape
     CreateUploadUrlRequest: StructureShape
     CreateUploadUrlResponse: StructureShape
+    CustomDisambiguationMessage: StringShape
     CustomPayload: StructureShape
     CustomPayloadValue: StringShape
     CustomVocabularyEntryId: StructureShape
@@ -299,9 +312,13 @@ module Aws::LexModelsV2
     DataPrivacy: StructureShape
     DataSourceConfiguration: StructureShape
     DateRangeFilter: StructureShape
+    DeepgramModelId: StringShape
+    DeepgramSpeechModelConfig: StructureShape
     DefaultConditionalBranch: StructureShape
     DeleteBotAliasRequest: StructureShape
     DeleteBotAliasResponse: StructureShape
+    DeleteBotAnalyzerRecommendationRequest: StructureShape
+    DeleteBotAnalyzerRecommendationResponse: StructureShape
     DeleteBotLocaleRequest: StructureShape
     DeleteBotLocaleResponse: StructureShape
     DeleteBotReplicaRequest: StructureShape
@@ -329,6 +346,8 @@ module Aws::LexModelsV2
     DeleteUtterancesResponse: StructureShape
     DescribeBotAliasRequest: StructureShape
     DescribeBotAliasResponse: StructureShape
+    DescribeBotAnalyzerRecommendationRequest: StructureShape
+    DescribeBotAnalyzerRecommendationResponse: StructureShape
     DescribeBotLocaleRequest: StructureShape
     DescribeBotLocaleResponse: StructureShape
     DescribeBotRecommendationRequest: StructureShape
@@ -370,6 +389,7 @@ module Aws::LexModelsV2
     DialogCodeHookInvocationSetting: StructureShape
     DialogCodeHookSettings: StructureShape
     DialogState: StructureShape
+    DisplayName: StringShape
     DomainEndpoint: StringShape
     DraftBotVersion: StringShape
     Effect: EnumShape
@@ -448,6 +468,7 @@ module Aws::LexModelsV2
     IntentClassificationTestResults: StructureShape
     IntentClosingSetting: StructureShape
     IntentConfirmationSetting: StructureShape
+    IntentDisambiguationSettings: StructureShape
     IntentFilter: StructureShape
     IntentFilterName: EnumShape
     IntentFilterOperator: EnumShape
@@ -466,6 +487,7 @@ module Aws::LexModelsV2
     InternalServerException: StructureShape
     InvokedIntentSample: StructureShape
     InvokedIntentSamples: ListShape
+    IssueLocation: StructureShape
     ItemId: StringShape
     KendraConfiguration: StructureShape
     KendraIndexArn: StringShape
@@ -479,6 +501,8 @@ module Aws::LexModelsV2
     ListBotAliasReplicasResponse: StructureShape
     ListBotAliasesRequest: StructureShape
     ListBotAliasesResponse: StructureShape
+    ListBotAnalyzerHistoryRequest: StructureShape
+    ListBotAnalyzerHistoryResponse: StructureShape
     ListBotLocalesRequest: StructureShape
     ListBotLocalesResponse: StructureShape
     ListBotRecommendationsRequest: StructureShape
@@ -538,6 +562,7 @@ module Aws::LexModelsV2
     LocaleId: StringShape
     LocaleName: StringShape
     LogPrefix: StringShape
+    MaxDisambiguationIntents: IntegerShape
     MaxResults: IntegerShape
     MaxUtteranceDigits: IntegerShape
     MergeStrategy: EnumShape
@@ -583,6 +608,7 @@ module Aws::LexModelsV2
     Principal: StructureShape
     PrincipalArn: StringShape
     PrincipalList: ListShape
+    Priority: EnumShape
     PriorityValue: IntegerShape
     PromptAttempt: EnumShape
     PromptAttemptSpecification: StructureShape
@@ -631,6 +657,7 @@ module Aws::LexModelsV2
     SearchAssociatedTranscriptsRequest: StructureShape
     SearchAssociatedTranscriptsResponse: StructureShape
     SearchOrder: EnumShape
+    SecretsManagerSecretArn: StringShape
     SentimentAnalysisSettings: StructureShape
     ServicePrincipal: StringShape
     ServiceQuotaExceededException: StructureShape
@@ -687,7 +714,15 @@ module Aws::LexModelsV2
     SlotValueSelectionSetting: StructureShape
     SlotValues: ListShape
     SortOrder: EnumShape
+    SpeakerDiarizationSettings: StructureShape
     Specifications: StructureShape
+    SpeechDetectionSensitivity: EnumShape
+    SpeechFoundationModel: StructureShape
+    SpeechModelConfig: StructureShape
+    SpeechModelPreference: EnumShape
+    SpeechRecognitionSettings: StructureShape
+    StartBotAnalyzerRequest: StructureShape
+    StartBotAnalyzerResponse: StructureShape
     StartBotRecommendationRequest: StructureShape
     StartBotRecommendationResponse: StructureShape
     StartBotResourceGenerationRequest: StructureShape
@@ -701,6 +736,8 @@ module Aws::LexModelsV2
     StillWaitingResponseFrequency: IntegerShape
     StillWaitingResponseSpecification: StructureShape
     StillWaitingResponseTimeout: IntegerShape
+    StopBotAnalyzerRequest: StructureShape
+    StopBotAnalyzerResponse: StructureShape
     StopBotRecommendationRequest: StructureShape
     StopBotRecommendationResponse: StructureShape
     String: StringShape
@@ -773,6 +810,8 @@ module Aws::LexModelsV2
     TranscriptSourceSetting: StructureShape
     TurnNumber: IntegerShape
     TurnSpecification: StructureShape
+    UUID: StringShape
+    UnifiedSpeechSettings: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     UpdateBotAliasRequest: StructureShape

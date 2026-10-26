@@ -7,6 +7,9 @@ module Aws::RedshiftServerless
     class ConflictException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class DryRunException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InsufficientCapacityException < Smithy::Client::ServiceError
       def message: () -> String?
       def retryable?: () -> true

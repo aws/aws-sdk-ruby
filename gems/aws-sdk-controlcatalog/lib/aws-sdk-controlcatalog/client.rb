@@ -144,18 +144,18 @@ module Aws::ControlCatalog
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -236,13 +236,16 @@ module Aws::ControlCatalog
     #       type: "ImplementationType", # required
     #       identifier: "ImplementationIdentifier"
     #     },
+    #     parameter_requirement_summary: "REQUIRED" # One of: ["REQUIRED", "OPTIONAL", "NONE"],
     #     parameters: [
     #       {
     #         name: "String", # required
+    #         requirement: "REQUIRED" # One of: ["REQUIRED", "OPTIONAL"]
     #       }
     #     ],
     #     create_time: Time.now,
-    #     governed_resources: ["GovernedResource"]
+    #     governed_resources: ["GovernedResource"],
+    #     governed_providers: ["GovernedProvider"]
     #   }
     # @return [Types::GetControlResponse]
     def get_control(params = {}, options = {})
@@ -315,7 +318,7 @@ module Aws::ControlCatalog
     #     filter: {
     #       control_arns: ["ControlArn"],
     #       common_control_arns: ["CommonControlArn"],
-    #       mapping_types: ["FRAMEWORK" # One of: ["FRAMEWORK", "COMMON_CONTROL"]]
+    #       mapping_types: ["FRAMEWORK" # One of: ["FRAMEWORK", "COMMON_CONTROL", "RELATED_CONTROL"]]
     #     }
     #   }
     #   options = {}
@@ -326,7 +329,7 @@ module Aws::ControlCatalog
     #     control_mappings: [ # required
     #       {
     #         control_arn: "ControlArn", # required
-    #         mapping_type: "FRAMEWORK" # One of: ["FRAMEWORK", "COMMON_CONTROL"], # required
+    #         mapping_type: "FRAMEWORK" # One of: ["FRAMEWORK", "COMMON_CONTROL", "RELATED_CONTROL"], # required
     #         mapping: { # required
     #           # One of:
     #           framework: {
@@ -335,6 +338,10 @@ module Aws::ControlCatalog
     #           },
     #           common_control: {
     #             common_control_arn: "CommonControlArn", # required
+    #           },
+    #           related_control: {
+    #             control_arn: "ControlArn",
+    #             relation_type: "COMPLEMENTARY" # One of: ["COMPLEMENTARY", "ALTERNATIVE", "MUTUALLY_EXCLUSIVE"], # required
     #           }
     #         }
     #       }
@@ -363,7 +370,8 @@ module Aws::ControlCatalog
     #       implementations: {
     #         types: ["ImplementationType"],
     #         identifiers: ["ImplementationIdentifier"]
-    #       }
+    #       },
+    #       governed_providers: ["GovernedProvider"]
     #     }
     #   }
     #   options = {}
@@ -379,12 +387,14 @@ module Aws::ControlCatalog
     #         description: "String", # required
     #         behavior: "PREVENTIVE" # One of: ["PREVENTIVE", "PROACTIVE", "DETECTIVE"],
     #         severity: "LOW" # One of: ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
+    #         parameter_requirement_summary: "REQUIRED" # One of: ["REQUIRED", "OPTIONAL", "NONE"],
     #         implementation: {
     #           type: "ImplementationType", # required
     #           identifier: "ImplementationIdentifier"
     #         },
     #         create_time: Time.now,
-    #         governed_resources: ["GovernedResource"]
+    #         governed_resources: ["GovernedResource"],
+    #         governed_providers: ["GovernedProvider"]
     #       }
     #     ],
     #     next_token: "PaginationToken"

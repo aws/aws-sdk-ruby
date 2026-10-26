@@ -215,6 +215,97 @@ module Aws::LicenseManager
       ]
     ) -> _CreateLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseResponse
 
+    interface _CreateLicenseAssetGroupResponse
+      include Smithy::Client::_Response[Types::CreateLicenseAssetGroupResponse]
+      def license_asset_group_arn: () -> String?
+      def status: () -> String?
+    end
+    def create_license_asset_group: (
+      ?name: String,
+      ?description: String,
+      ?license_asset_group_configurations: Array[
+        {
+          usage_dimension: String
+        }
+      ],
+      ?associated_license_asset_ruleset_ar_ns: Array[String],
+      ?properties: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateLicenseAssetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseAssetGroupResponse
+
+    interface _CreateLicenseAssetRulesetResponse
+      include Smithy::Client::_Response[Types::CreateLicenseAssetRulesetResponse]
+      def license_asset_ruleset_arn: () -> String?
+    end
+    def create_license_asset_ruleset: (
+      ?name: String,
+      ?description: String,
+      ?rules: Array[
+        {
+          rule_statement: {
+            license_configuration_rule_statement: {
+              and_rule_statement: {
+                matching_rule_statements: Array[
+                  {
+                    key_to_match: String,
+                    constraint: untyped,
+                    value_to_match: Array[String]
+                  }
+                ],
+                script_rule_statements: Array[
+                  {
+                    key_to_match: untyped,
+                    script: untyped
+                  }
+                ]
+              },
+              or_rule_statement: {
+                matching_rule_statements: untyped,
+                script_rule_statements: untyped
+              },
+              matching_rule_statement: {
+                key_to_match: untyped,
+                constraint: untyped,
+                value_to_match: untyped
+              }
+            },
+            license_rule_statement: {
+              and_rule_statement: untyped,
+              or_rule_statement: untyped,
+              matching_rule_statement: untyped
+            },
+            instance_rule_statement: {
+              and_rule_statement: untyped,
+              or_rule_statement: untyped,
+              matching_rule_statement: untyped,
+              script_rule_statement: {
+                key_to_match: untyped,
+                script: untyped
+              }
+            }
+          }
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateLicenseAssetRulesetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseAssetRulesetResponse
+
     interface _CreateLicenseConfigurationResponse
       include Smithy::Client::_Response[Types::CreateLicenseConfigurationResponse]
       def license_configuration_arn: () -> String?
@@ -244,7 +335,8 @@ module Aws::LicenseManager
             }
           ]
         }
-      ]
+      ],
+      ?license_expiry: Integer
     ) -> _CreateLicenseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseConfigurationResponse
 
     interface _CreateLicenseConversionTaskForResourceResponse
@@ -281,7 +373,10 @@ module Aws::LicenseManager
       ?report_generator_name: String,
       ?type: Array[String],
       ?report_context: {
-        license_configuration_arns: Array[String]
+        license_configuration_arns: Array[String],
+        license_asset_group_arns: untyped,
+        report_start_date: Time,
+        report_end_date: untyped
       },
       ?report_frequency: {
         value: Integer,
@@ -344,7 +439,8 @@ module Aws::LicenseManager
       },
       ?status: String,
       ?client_token: String,
-      ?source_version: String
+      ?source_version: String,
+      ?reset_usage: bool
     ) -> _CreateLicenseVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLicenseVersionResponse
 
     interface _CreateTokenResponse
@@ -382,6 +478,21 @@ module Aws::LicenseManager
       ?license_arn: String,
       ?source_version: String
     ) -> _DeleteLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLicenseResponse
+
+    interface _DeleteLicenseAssetGroupResponse
+      include Smithy::Client::_Response[Types::DeleteLicenseAssetGroupResponse]
+      def status: () -> String?
+    end
+    def delete_license_asset_group: (
+      ?license_asset_group_arn: String
+    ) -> _DeleteLicenseAssetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLicenseAssetGroupResponse
+
+    interface _DeleteLicenseAssetRulesetResponse
+      include Smithy::Client::_Response[Types::DeleteLicenseAssetRulesetResponse]
+    end
+    def delete_license_asset_ruleset: (
+      ?license_asset_ruleset_arn: String
+    ) -> _DeleteLicenseAssetRulesetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLicenseAssetRulesetResponse
 
     interface _DeleteLicenseConfigurationResponse
       include Smithy::Client::_Response[Types::DeleteLicenseConfigurationResponse]
@@ -441,6 +552,22 @@ module Aws::LicenseManager
       ?version: String
     ) -> _GetLicenseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseResponse
 
+    interface _GetLicenseAssetGroupResponse
+      include Smithy::Client::_Response[Types::GetLicenseAssetGroupResponse]
+      def license_asset_group: () -> Types::LicenseAssetGroup?
+    end
+    def get_license_asset_group: (
+      ?license_asset_group_arn: String
+    ) -> _GetLicenseAssetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseAssetGroupResponse
+
+    interface _GetLicenseAssetRulesetResponse
+      include Smithy::Client::_Response[Types::GetLicenseAssetRulesetResponse]
+      def license_asset_ruleset: () -> Types::LicenseAssetRuleset?
+    end
+    def get_license_asset_ruleset: (
+      ?license_asset_ruleset_arn: String
+    ) -> _GetLicenseAssetRulesetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLicenseAssetRulesetResponse
+
     interface _GetLicenseConfigurationResponse
       include Smithy::Client::_Response[Types::GetLicenseConfigurationResponse]
       def license_configuration_id: () -> String?
@@ -460,6 +587,7 @@ module Aws::LicenseManager
       def product_information_list: () -> Array[Types::ProductInformation]?
       def automated_discovery_information: () -> Types::AutomatedDiscoveryInformation?
       def disassociate_when_not_found: () -> bool?
+      def license_expiry: () -> Integer?
     end
     def get_license_configuration: (
       ?license_configuration_arn: String
@@ -504,8 +632,23 @@ module Aws::LicenseManager
       def organization_configuration: () -> Types::OrganizationConfiguration?
       def enable_cross_accounts_discovery: () -> bool?
       def license_manager_resource_share_arn: () -> String?
+      def cross_region_discovery_home_region: () -> String?
+      def cross_region_discovery_source_regions: () -> Array[String]?
+      def service_status: () -> Types::ServiceStatus?
     end
     def get_service_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceSettingsResponse
+
+    interface _ListAssetsForLicenseAssetGroupResponse
+      include Smithy::Client::_Response[Types::ListAssetsForLicenseAssetGroupResponse]
+      def assets: () -> Array[Types::Asset]?
+      def next_token: () -> String?
+    end
+    def list_assets_for_license_asset_group: (
+      ?license_asset_group_arn: String,
+      ?asset_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssetsForLicenseAssetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetsForLicenseAssetGroupResponse
 
     interface _ListAssociationsForLicenseConfigurationResponse
       include Smithy::Client::_Response[Types::ListAssociationsForLicenseConfigurationResponse]
@@ -546,6 +689,39 @@ module Aws::LicenseManager
       ?next_token: String
     ) -> _ListFailuresForLicenseConfigurationOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFailuresForLicenseConfigurationOperationsResponse
 
+    interface _ListLicenseAssetGroupsResponse
+      include Smithy::Client::_Response[Types::ListLicenseAssetGroupsResponse]
+      def license_asset_groups: () -> Array[Types::LicenseAssetGroup]?
+      def next_token: () -> String?
+    end
+    def list_license_asset_groups: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLicenseAssetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseAssetGroupsResponse
+
+    interface _ListLicenseAssetRulesetsResponse
+      include Smithy::Client::_Response[Types::ListLicenseAssetRulesetsResponse]
+      def license_asset_rulesets: () -> Array[Types::LicenseAssetRuleset]?
+      def next_token: () -> String?
+    end
+    def list_license_asset_rulesets: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?show_aws_managed_license_asset_rulesets: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListLicenseAssetRulesetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseAssetRulesetsResponse
+
     interface _ListLicenseConfigurationsResponse
       include Smithy::Client::_Response[Types::ListLicenseConfigurationsResponse]
       def license_configurations: () -> Array[Types::LicenseConfiguration]?
@@ -562,6 +738,23 @@ module Aws::LicenseManager
         }
       ]
     ) -> _ListLicenseConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseConfigurationsResponse
+
+    interface _ListLicenseConfigurationsForOrganizationResponse
+      include Smithy::Client::_Response[Types::ListLicenseConfigurationsForOrganizationResponse]
+      def license_configurations: () -> Array[Types::LicenseConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_license_configurations_for_organization: (
+      ?license_configuration_arns: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListLicenseConfigurationsForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLicenseConfigurationsForOrganizationResponse
 
     interface _ListLicenseConversionTasksResponse
       include Smithy::Client::_Response[Types::ListLicenseConversionTasksResponse]
@@ -791,6 +984,88 @@ module Aws::LicenseManager
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
 
+    interface _UpdateLicenseAssetGroupResponse
+      include Smithy::Client::_Response[Types::UpdateLicenseAssetGroupResponse]
+      def license_asset_group_arn: () -> String?
+      def status: () -> String?
+    end
+    def update_license_asset_group: (
+      ?name: String,
+      ?description: String,
+      ?license_asset_group_configurations: Array[
+        {
+          usage_dimension: String
+        }
+      ],
+      ?associated_license_asset_ruleset_ar_ns: Array[String],
+      ?properties: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?license_asset_group_arn: String,
+      ?status: String,
+      ?client_token: String
+    ) -> _UpdateLicenseAssetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLicenseAssetGroupResponse
+
+    interface _UpdateLicenseAssetRulesetResponse
+      include Smithy::Client::_Response[Types::UpdateLicenseAssetRulesetResponse]
+      def license_asset_ruleset_arn: () -> String?
+    end
+    def update_license_asset_ruleset: (
+      ?name: String,
+      ?description: String,
+      ?rules: Array[
+        {
+          rule_statement: {
+            license_configuration_rule_statement: {
+              and_rule_statement: {
+                matching_rule_statements: Array[
+                  {
+                    key_to_match: String,
+                    constraint: untyped,
+                    value_to_match: Array[String]
+                  }
+                ],
+                script_rule_statements: Array[
+                  {
+                    key_to_match: untyped,
+                    script: untyped
+                  }
+                ]
+              },
+              or_rule_statement: {
+                matching_rule_statements: untyped,
+                script_rule_statements: untyped
+              },
+              matching_rule_statement: {
+                key_to_match: untyped,
+                constraint: untyped,
+                value_to_match: untyped
+              }
+            },
+            license_rule_statement: {
+              and_rule_statement: untyped,
+              or_rule_statement: untyped,
+              matching_rule_statement: untyped
+            },
+            instance_rule_statement: {
+              and_rule_statement: untyped,
+              or_rule_statement: untyped,
+              matching_rule_statement: untyped,
+              script_rule_statement: {
+                key_to_match: untyped,
+                script: untyped
+              }
+            }
+          }
+        }
+      ],
+      ?license_asset_ruleset_arn: String,
+      ?client_token: String
+    ) -> _UpdateLicenseAssetRulesetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLicenseAssetRulesetResponse
+
     interface _UpdateLicenseConfigurationResponse
       include Smithy::Client::_Response[Types::UpdateLicenseConfigurationResponse]
     end
@@ -814,7 +1089,8 @@ module Aws::LicenseManager
           ]
         }
       ],
-      ?disassociate_when_not_found: bool
+      ?disassociate_when_not_found: bool,
+      ?license_expiry: Integer
     ) -> _UpdateLicenseConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLicenseConfigurationResponse
 
     interface _UpdateLicenseManagerReportGeneratorResponse
@@ -825,7 +1101,10 @@ module Aws::LicenseManager
       ?report_generator_name: String,
       ?type: Array[String],
       ?report_context: {
-        license_configuration_arns: Array[String]
+        license_configuration_arns: Array[String],
+        license_asset_group_arns: untyped,
+        report_start_date: Time,
+        report_end_date: untyped
       },
       ?report_frequency: {
         value: Integer,
@@ -863,7 +1142,8 @@ module Aws::LicenseManager
       ?organization_configuration: {
         enable_integration: bool
       },
-      ?enable_cross_accounts_discovery: bool
+      ?enable_cross_accounts_discovery: bool,
+      ?enabled_discovery_source_regions: Array[String]
     ) -> _UpdateServiceSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceSettingsResponse
   end
 end

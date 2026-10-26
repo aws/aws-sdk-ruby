@@ -3,25 +3,67 @@ module Aws::HealthLake
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AgentInputMessage: StructureShape
+    AgentInputMessageType: EnumShape
+    AgentMessageOutOfContextException: StructureShape
+    AgentMessageString: StringShape
+    AgentOutputMessage: StructureShape
+    AgentOutputMessageType: EnumShape
     AmazonResourceName: StringShape
+    AnalyticsConfiguration: StructureShape
+    AnalyticsStatus: EnumShape
     AuthorizationStrategy: EnumShape
-    Boolean: BooleanShape
+    BackupConfiguration: StructureShape
+    BackupRetentionPeriodInDays: IntegerShape
+    BackupStatus: EnumShape
+    BackupType: EnumShape
     BoundedLengthString: StringShape
+    BoundedString: StringShape
+    ChangeDescription: StringShape
+    ClientToken: StringShape
     ClientTokenString: StringShape
     CmkType: EnumShape
     ConfigurationMetadata: StringShape
     ConflictException: StructureShape
+    ContinuousBackupRestoreConfiguration: StructureShape
+    ConversationIdString: StringShape
+    ConversationNotFoundException: StructureShape
+    CreateDataTransformationProfileRequest: StructureShape
+    CreateDataTransformationProfileResponse: StructureShape
+    CreateDataTransformationProfileSource: UnionShape
     CreateFHIRDatastoreRequest: StructureShape
     CreateFHIRDatastoreResponse: StructureShape
+    DataTransformationChatOptionString: StringShape
+    DataTransformationChatOptionsList: ListShape
+    DataTransformationIamRoleArn: StringShape
+    DataTransformationJobId: StringShape
+    DataTransformationJobName: StringShape
+    DataTransformationNextToken: StringShape
+    DataTransformationProfileSummary: StructureShape
+    DataTransformationProfileSummaryList: ListShape
+    DataTransformationProfileVersionSummary: StructureShape
+    DataTransformationProfileVersionSummaryList: ListShape
+    DataTransformationS3Configuration: StructureShape
+    DataTransformationS3Uri: StringShape
+    DataTransformationTagKey: StringShape
+    DataTransformationTagValue: StringShape
     DatastoreArn: StringShape
+    DatastoreBackupStatus: StructureShape
     DatastoreFilter: StructureShape
     DatastoreId: StringShape
     DatastoreName: StringShape
     DatastoreProperties: StructureShape
     DatastorePropertiesList: ListShape
     DatastoreStatus: EnumShape
+    DateTime: TimestampShape
+    DefaultEnabledBoolean: BooleanShape
+    DefaultProfiles: ListShape
+    DeleteDataTransformationProfileRequest: StructureShape
+    DeleteDataTransformationProfileResponse: StructureShape
     DeleteFHIRDatastoreRequest: StructureShape
     DeleteFHIRDatastoreResponse: StructureShape
+    DescribeDataTransformationJobRequest: StructureShape
+    DescribeDataTransformationJobResponse: StructureShape
     DescribeFHIRDatastoreRequest: StructureShape
     DescribeFHIRDatastoreResponse: StructureShape
     DescribeFHIRExportJobRequest: StructureShape
@@ -32,11 +74,18 @@ module Aws::HealthLake
     ErrorCategory: EnumShape
     ErrorCause: StructureShape
     ErrorMessage: StringShape
+    ExistingVersionedProfileSource: StructureShape
     ExportJobProperties: StructureShape
     ExportJobPropertiesList: ListShape
     FHIRVersion: EnumShape
+    FailedDependencyException: StructureShape
     GenericDouble: FloatShape
     GenericLong: IntegerShape
+    GetDataTransformationProfileRequest: StructureShape
+    GetDataTransformationProfileResponse: StructureShape
+    HealthLakeBoolean: BooleanShape
+    HealthLakeString: StringShape
+    HealthLakeTimestamp: TimestampShape
     IamRoleArn: StringShape
     IdentityProviderConfiguration: StructureShape
     ImportJobProperties: StructureShape
@@ -48,7 +97,14 @@ module Aws::HealthLake
     JobProgressReport: StructureShape
     JobStatus: EnumShape
     KmsEncryptionConfig: StructureShape
+    KmsKeyId: StringShape
     LambdaArn: StringShape
+    ListDataTransformationJobsRequest: StructureShape
+    ListDataTransformationJobsResponse: StructureShape
+    ListDataTransformationProfileVersionsRequest: StructureShape
+    ListDataTransformationProfileVersionsResponse: StructureShape
+    ListDataTransformationProfilesRequest: StructureShape
+    ListDataTransformationProfilesResponse: StructureShape
     ListFHIRDatastoresRequest: StructureShape
     ListFHIRDatastoresResponse: StructureShape
     ListFHIRExportJobsRequest: StructureShape
@@ -57,32 +113,73 @@ module Aws::HealthLake
     ListFHIRImportJobsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    MaxResults: IntegerShape
     MaxResultsInteger: IntegerShape
     Message: StringShape
     NextToken: StringShape
+    NlpConfiguration: StructureShape
+    NlpStatus: EnumShape
+    NotImplementedOperationException: StructureShape
     OutputDataConfig: UnionShape
     PreloadDataConfig: StructureShape
     PreloadDataType: EnumShape
+    ProfileConfiguration: StructureShape
+    ProfileDescription: StringShape
+    ProfileIdString: StringShape
+    ProfileMapping: MapShape
+    ProfileMappingKey: StringShape
+    ProfileMappingSource: StructureShape
+    ProfileMappingValue: StringShape
+    ProfileNameString: StringShape
+    ProfileVersion: IntegerShape
+    PublishDataTransformationProfileRequest: StructureShape
+    PublishDataTransformationProfileResponse: StructureShape
     ResourceNotFoundException: StructureShape
+    RestoreConfiguration: UnionShape
+    RestoreFHIRDatastoreRequest: StructureShape
+    RestoreFHIRDatastoreResponse: StructureShape
     S3Configuration: StructureShape
     S3Uri: StringShape
+    SampleDataS3Uri: StringShape
+    SampleDataSource: StructureShape
+    ServiceQuotaExceededException: StructureShape
+    SourceFormat: EnumShape
     SseConfiguration: StructureShape
+    StartDataTransformationJobRequest: StructureShape
+    StartDataTransformationJobResponse: StructureShape
     StartFHIRExportJobRequest: StructureShape
     StartFHIRExportJobResponse: StructureShape
     StartFHIRImportJobRequest: StructureShape
     StartFHIRImportJobResponse: StructureShape
-    String: StringShape
+    StarterProfileSource: StructureShape
+    StringMap: MapShape
     Tag: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagList: ListShape
+    TagMap: MapShape
     TagResourceRequest: StructureShape
     TagResourceResponse: StructureShape
     TagValue: StringShape
+    TargetFormat: EnumShape
     ThrottlingException: StructureShape
-    Timestamp: TimestampShape
+    TransformationInputDataConfig: StructureShape
+    TransformationJobProgressReport: StructureShape
+    TransformationJobProperties: StructureShape
+    TransformationJobStatus: EnumShape
+    TransformationJobSummary: StructureShape
+    TransformationJobSummaryList: ListShape
+    TransformationOutputDataConfig: StructureShape
+    UnauthorizedException: StructureShape
+    UnsupportedMIMETypeException: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateDataTransformationProfileRequest: StructureShape
+    UpdateDataTransformationProfileResponse: StructureShape
+    UpdateFHIRDatastoreRequest: StructureShape
+    UpdateFHIRDatastoreResponse: StructureShape
+    UpdateProfileWithAgentRequest: StructureShape
+    UpdateProfileWithAgentResponse: StructureShape
     ValidationException: StructureShape
     ValidationLevel: EnumShape
 

@@ -5,19 +5,27 @@ module Aws::Kinesis
       ?use_dual_stack: bool,
       ?use_fips: bool,
       ?endpoint: String,
-      ?stream_arn: String,
       ?operation_type: String,
+      ?stream_id: String,
+      ?stream_arn: String,
       ?consumer_arn: String,
       ?resource_arn: String,
+      ?channel_arn: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
     attr_accessor region: String?
     attr_accessor use_dual_stack: bool?
     attr_accessor use_fips: bool?
     attr_accessor endpoint: String?
-    attr_accessor stream_arn: String?
     attr_accessor operation_type: String?
+    attr_accessor stream_id: String?
+    attr_accessor stream_arn: String?
     attr_accessor consumer_arn: String?
     attr_accessor resource_arn: String?
+    attr_accessor channel_arn: String?
+    attr_accessor account_id: String?
+    attr_accessor account_id_endpoint_mode: String?
   end
 end

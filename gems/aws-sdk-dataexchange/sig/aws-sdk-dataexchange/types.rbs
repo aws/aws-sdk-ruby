@@ -96,6 +96,17 @@ module Aws::DataExchange
       attr_accessor stage: String?
     end
 
+    class AssetConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
     class AssetDestinationEntry
       include Smithy::Schema::Structure
 
@@ -376,11 +387,13 @@ module Aws::DataExchange
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?asset_configuration: Types::AssetConfiguration,
         ?details: Types::RequestDetails,
         ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor asset_configuration: Types::AssetConfiguration?
       attr_accessor details: Types::RequestDetails?
       attr_accessor type: String?
     end
@@ -390,6 +403,7 @@ module Aws::DataExchange
 
       def initialize: (
         ?arn: String,
+        ?asset_configuration: Types::AssetConfiguration,
         ?created_at: Time,
         ?details: Types::ResponseDetails,
         ?errors: Array[Types::JobError],
@@ -401,6 +415,7 @@ module Aws::DataExchange
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
+      attr_accessor asset_configuration: Types::AssetConfiguration?
       attr_accessor created_at: Time?
       attr_accessor details: Types::ResponseDetails?
       attr_accessor errors: Array[Types::JobError]?
@@ -843,6 +858,7 @@ module Aws::DataExchange
         ?name: String,
         ?revision_id: String,
         ?source_id: String,
+        ?tags: Hash[String, String],
         ?updated_at: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -856,6 +872,7 @@ module Aws::DataExchange
       attr_accessor name: String?
       attr_accessor revision_id: String?
       attr_accessor source_id: String?
+      attr_accessor tags: Hash[String, String]?
       attr_accessor updated_at: Time?
     end
 
@@ -1001,6 +1018,7 @@ module Aws::DataExchange
 
       def initialize: (
         ?arn: String,
+        ?asset_configuration: Types::AssetConfiguration,
         ?created_at: Time,
         ?details: Types::ResponseDetails,
         ?errors: Array[Types::JobError],
@@ -1012,6 +1030,7 @@ module Aws::DataExchange
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
+      attr_accessor asset_configuration: Types::AssetConfiguration?
       attr_accessor created_at: Time?
       attr_accessor details: Types::ResponseDetails?
       attr_accessor errors: Array[Types::JobError]?
@@ -1338,6 +1357,7 @@ module Aws::DataExchange
 
       def initialize: (
         ?arn: String,
+        ?asset_configuration: Types::AssetConfiguration,
         ?created_at: Time,
         ?details: Types::ResponseDetails,
         ?errors: Array[Types::JobError],
@@ -1349,6 +1369,7 @@ module Aws::DataExchange
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
+      attr_accessor asset_configuration: Types::AssetConfiguration?
       attr_accessor created_at: Time?
       attr_accessor details: Types::ResponseDetails?
       attr_accessor errors: Array[Types::JobError]?
@@ -2198,6 +2219,19 @@ module Aws::DataExchange
 
       attr_accessor expression: Array[Types::LFTag]?
       attr_accessor permissions: Array[String]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
     end
 
     class TagResourceInput

@@ -99,6 +99,194 @@
                 },
                 "smithy.api#documentation": "<p>Welcome to the <i>Amazon Web Services Clean Rooms ML API Reference</i>.</p> <p>Amazon Web Services Clean Rooms ML provides a privacy-enhancing method for two parties to identify similar users in their data without the need to share their data with each other. The first party brings the training data to Clean Rooms so that they can create and configure an audience model (lookalike model) and associate it with a collaboration. The second party then brings their seed data to Clean Rooms and generates an audience (lookalike segment) that resembles the training data.</p> <p>To learn more about Amazon Web Services Clean Rooms ML concepts, procedures, and best practices, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/machine-learning.html\">Clean Rooms User Guide</a>.</p> <p>To learn more about SQL commands, functions, and conditions supported in Clean Rooms, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/sql-reference/sql-reference.html\">Clean Rooms SQL Reference</a>.</p> <p/>",
                 "smithy.api#title": "AWS Clean Rooms ML",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cleanrooms-ml-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cleanrooms-ml-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cleanrooms-ml.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cleanrooms-ml.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -106,27 +294,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -1827,6 +2015,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
                     }
+                },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2032,6 +2226,12 @@
                         "smithy.api#documentation": "<p>Details about the logs status for the trained model inference job.</p>"
                     }
                 },
+                "mlModelInferencePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model inference costs.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -2151,10 +2351,42 @@
                         "smithy.api#documentation": "<p>The account ID of the member that created the trained model.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides summary information about a trained model in a collaboration.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#ColumnClassificationDetails": {
+            "type": "structure",
+            "members": {
+                "columnMapping": {
+                    "target": "com.amazonaws.cleanroomsml#ColumnMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping that defines the classification of data columns for synthetic data generation and specifies how each column should be handled during the privacy-preserving data synthesis process.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains classification information for data columns, including mappings that specify how columns should be handled during synthetic data generation and privacy analysis.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#ColumnMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#SyntheticDataColumnProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5
+                }
             }
         },
         "com.amazonaws.cleanroomsml#ColumnName": {
@@ -2746,6 +2978,9 @@
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -2848,6 +3083,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -2962,6 +3200,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -3247,6 +3488,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
+                },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel. Determines which member account pays for compute and synthetic data costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3396,6 +3643,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
+                },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3437,6 +3690,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -3550,6 +3806,21 @@
                 "smithy.api#documentation": "<p>The configuration for defining custom patterns to be redacted from logs and error messages. This is for the CUSTOM config under entitiesToRedact. Both CustomEntityConfig and entitiesToRedact need to be present or not present.</p>"
             }
         },
+        "com.amazonaws.cleanroomsml#DataPrivacyScores": {
+            "type": "structure",
+            "members": {
+                "membershipInferenceAttackScores": {
+                    "target": "com.amazonaws.cleanroomsml#MembershipInferenceAttackScoreList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scores that evaluate the vulnerability of the synthetic data to membership inference attacks, which attempt to determine whether a specific individual was a member of the original dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Privacy evaluation scores that measure the privacy characteristics of the generated synthetic data, including assessments of potential privacy risks such as membership inference attacks.</p>"
+            }
+        },
         "com.amazonaws.cleanroomsml#DataSource": {
             "type": "structure",
             "members": {
@@ -3655,6 +3926,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -3701,6 +3975,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -3751,6 +4028,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -3778,6 +4058,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -3842,6 +4125,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -4124,6 +4410,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -4244,6 +4533,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -4395,6 +4687,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -4788,6 +5083,18 @@
                         "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
                     }
                 },
+                "syntheticDataConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The synthetic data configuration for this ML input channel, including parameters for generating privacy-preserving synthetic data and evaluation scores for measuring the privacy of the generated data.</p>"
+                    }
+                },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -4993,6 +5300,12 @@
                         "smithy.api#documentation": "<p>Information about the training container image.</p>"
                     }
                 },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -5037,6 +5350,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -5064,6 +5380,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -5250,6 +5569,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -5716,6 +6038,18 @@
                         "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
                     }
                 },
+                "syntheticDataConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The synthetic data configuration for this ML input channel, including parameters for generating privacy-preserving synthetic data and evaluation scores for measuring the privacy of the generated data.</p>"
+                    }
+                },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -6019,6 +6353,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
+                },
+                "mlModelInferencePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model inference costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6170,6 +6510,12 @@
                         "smithy.api#documentation": "<p>Information about the training image container.</p>"
                     }
                 },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -6236,6 +6582,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -8134,6 +8483,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -8214,6 +8566,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -8303,6 +8658,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -8839,6 +9197,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -8998,6 +9359,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -9510,6 +9874,9 @@
                     "target": "com.amazonaws.cleanroomsml#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -9874,6 +10241,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
                     }
+                },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9907,12 +10280,97 @@
                 "smithy.api#documentation": "<p>Configuration information about how the exported model artifacts are stored.</p>"
             }
         },
+        "com.amazonaws.cleanroomsml#MLSyntheticDataParameters": {
+            "type": "structure",
+            "members": {
+                "epsilon": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The epsilon value for differential privacy, which controls the privacy-utility tradeoff in synthetic data generation. Lower values provide stronger privacy guarantees but may reduce data utility.</p>",
+                        "smithy.api#range": {
+                            "min": 1.0E-4,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxMembershipInferenceAttackScore": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum acceptable score for membership inference attack vulnerability. Synthetic data generation fails if the score for the resulting data exceeds this threshold.</p>",
+                        "smithy.api#range": {
+                            "min": 0.5,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "columnClassification": {
+                    "target": "com.amazonaws.cleanroomsml#ColumnClassificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Classification details for data columns that specify how each column should be treated during synthetic data generation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameters that control the generation of synthetic data for custom model training, including privacy settings and column classification details.</p>"
+            }
+        },
         "com.amazonaws.cleanroomsml#MaxResults": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#MembershipInferenceAttackScore": {
+            "type": "structure",
+            "members": {
+                "attackVersion": {
+                    "target": "com.amazonaws.cleanroomsml#MembershipInferenceAttackVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the membership inference attack, which consists of the attack type and its version number, used to generate this privacy score.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "score": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numerical score representing the vulnerability to membership inference attacks.</p>",
+                        "smithy.api#range": {
+                            "min": 0.0,
+                            "max": 1.0
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A score that measures the vulnerability of synthetic data to membership inference attacks and provides both the numerical score and the version of the attack methodology used for evaluation.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#MembershipInferenceAttackScoreList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanroomsml#MembershipInferenceAttackScore"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#MembershipInferenceAttackVersion": {
+            "type": "enum",
+            "members": {
+                "DISTANCE_TO_CLOSEST_RECORD_V1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISTANCE_TO_CLOSEST_RECORD_V1"
+                    }
                 }
             }
         },
@@ -10138,7 +10596,19 @@
                 }
             }
         },
-        "com.amazonaws.cleanroomsml#ParameterKey": {
+        "com.amazonaws.cleanroomsml#ParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cleanroomsml#ParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.cleanroomsml#ParameterValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.cleanroomsml#ParameterName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -10148,22 +10618,33 @@
                 "smithy.api#pattern": "^[0-9a-zA-Z_]+$"
             }
         },
-        "com.amazonaws.cleanroomsml#ParameterMap": {
-            "type": "map",
-            "key": {
-                "target": "com.amazonaws.cleanroomsml#ParameterKey"
-            },
-            "value": {
-                "target": "com.amazonaws.cleanroomsml#ParameterValue"
-            }
-        },
         "com.amazonaws.cleanroomsml#ParameterValue": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 250
+                    "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.cleanroomsml#PayerConfiguration": {
+            "type": "structure",
+            "members": {
+                "computePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying compute costs.</p>"
+                    }
+                },
+                "syntheticDataPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying synthetic data generation costs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies which member accounts are responsible for paying for compute and synthetic data generation costs in a Clean Rooms ML collaboration.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#PolicyExistenceCondition": {
@@ -10309,6 +10790,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -10487,7 +10971,7 @@
                 "volumeSizeInGB": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum size of the instance that is used to train the model.</p>",
+                        "smithy.api#documentation": "<p>The volume size of the instance that is used to train the model. Please see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-volumes.html\">EC2 volume limit</a> for volume size limitations on different instance types.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 8192
@@ -10645,6 +11129,39 @@
                 }
             }
         },
+        "com.amazonaws.cleanroomsml#SparkProperties": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cleanroomsml#SparkPropertyKey"
+            },
+            "value": {
+                "target": "com.amazonaws.cleanroomsml#SparkPropertyValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#SparkPropertyKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#SparkPropertyValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.cleanroomsml#StartAudienceExportJob": {
             "type": "operation",
             "input": {
@@ -10665,6 +11182,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
@@ -11031,6 +11551,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
+                },
+                "mlModelInferencePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model inference costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11089,6 +11615,97 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The criteria used to stop model training.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?$"
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataColumnProperties": {
+            "type": "structure",
+            "members": {
+                "columnName": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data column as it appears in the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "columnType": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataColumnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the column, which determines how the synthetic data generation algorithm processes and synthesizes values for this column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isPredictiveValue": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if this column contains predictive values that should be treated as target variables in machine learning models. This affects how the synthetic data generation preserves statistical relationships.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties that define how a specific data column should be handled during synthetic data generation, including its name, type, and role in predictive modeling.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataColumnType": {
+            "type": "enum",
+            "members": {
+                "CATEGORICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CATEGORICAL"
+                    }
+                },
+                "NUMERICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMERICAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataConfiguration": {
+            "type": "structure",
+            "members": {
+                "syntheticDataParameters": {
+                    "target": "com.amazonaws.cleanroomsml#MLSyntheticDataParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that control how synthetic data is generated, including privacy settings, column classifications, and other configuration options that affect the data synthesis process.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "syntheticDataEvaluationScores": {
+                    "target": "com.amazonaws.cleanroomsml#SyntheticDataEvaluationScores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Evaluation scores that assess the quality and privacy characteristics of the generated synthetic data, providing metrics on data utility and privacy preservation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for synthetic data generation, including the parameters that control data synthesis and the evaluation scores that measure the quality and privacy characteristics of the generated synthetic data.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#SyntheticDataEvaluationScores": {
+            "type": "structure",
+            "members": {
+                "dataPrivacyScores": {
+                    "target": "com.amazonaws.cleanroomsml#DataPrivacyScores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Privacy-specific evaluation scores that measure how well the synthetic data protects individual privacy, including assessments of potential privacy risks such as membership inference attacks.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Comprehensive evaluation metrics for synthetic data that assess both the utility of the generated data for machine learning tasks and its privacy preservation characteristics.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#TagKey": {
@@ -11328,7 +11945,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0.01,
-                    "max": 10.0
+                    "max": 100.0
                 }
             }
         },
@@ -11524,7 +12141,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0.01,
-                    "max": 10.0
+                    "max": 50.0
                 }
             }
         },
@@ -11723,6 +12340,12 @@
                         "smithy.api#documentation": "<p>Details about the log status for the trained model inference job.</p>"
                     }
                 },
+                "mlModelInferencePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model inference costs.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -11802,7 +12425,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0.01,
-                    "max": 50.0
+                    "max": 100.0
                 }
             }
         },
@@ -11960,6 +12583,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configured model algorithm association that was used to create this trained model.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
                     }
                 }
             },
@@ -12212,6 +12841,9 @@
                     "target": "com.amazonaws.cleanroomsml#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.cleanroomsml#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.cleanroomsml#ValidationException"
                 }
             ],
@@ -12325,13 +12957,30 @@
                         "smithy.api#documentation": "<p>The number of compute workers that are used.</p>",
                         "smithy.api#range": {
                             "min": 2,
-                            "max": 400
+                            "max": 1024
                         }
                     }
+                },
+                "properties": {
+                    "target": "com.amazonaws.cleanroomsml#WorkerComputeConfigurationProperties"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration information about the compute workers that perform the transform job.</p>"
+            }
+        },
+        "com.amazonaws.cleanroomsml#WorkerComputeConfigurationProperties": {
+            "type": "union",
+            "members": {
+                "spark": {
+                    "target": "com.amazonaws.cleanroomsml#SparkProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Spark configuration properties for SQL workloads. This map contains key-value pairs that configure Apache Spark settings to optimize performance for your data processing jobs. You can specify up to 50 Spark properties, with each key being 1-200 characters and each value being 0-500 characters. These properties allow you to adjust compute capacity for large datasets and complex workloads.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration properties for the worker compute environment. These properties allow you to customize the compute settings for your Clean Rooms workloads.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#WorkerComputeType": {
@@ -12347,6 +12996,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CR.4X"
+                    }
+                },
+                "CR8X": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CR.8X"
                     }
                 }
             }

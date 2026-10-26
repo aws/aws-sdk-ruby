@@ -55,6 +55,7 @@ module Aws::PcaConnectorScep
     UntagResourceRequest: StructureShape
     ValidationException: StructureShape
     ValidationExceptionReason: EnumShape
+    VpcEndpointId: StringShape
 
     PcaConnectorScep: ServiceShape
   end

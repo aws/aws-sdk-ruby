@@ -11,8 +11,7 @@ module Aws::KafkaConnect
     #   <p>The bootstrap servers of the cluster.</p>
     #   @return [String]
     # @!attribute vpc
-    #   <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka
-    #            cluster.</p>
+    #   <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>
     #   @return [Types::Vpc]
     class ApacheKafkaCluster < Struct.new(
       nil,
@@ -28,8 +27,7 @@ module Aws::KafkaConnect
     #   <p>The bootstrap servers of the cluster.</p>
     #   @return [String]
     # @!attribute vpc
-    #   <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka
-    #            cluster.</p>
+    #   <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>
     #   @return [Types::VpcDescription]
     class ApacheKafkaClusterDescription < Struct.new(
       nil,
@@ -45,18 +43,20 @@ module Aws::KafkaConnect
     #   <p>The maximum number of workers allocated to the connector.</p>
     #   @return [Integer]
     # @!attribute mcu_count
-    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid
-    #            values are 1,2,4,8.</p>
+    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
     #   @return [Integer]
     # @!attribute min_worker_count
     #   <p>The minimum number of workers allocated to the connector.</p>
     #   @return [Integer]
     # @!attribute scale_in_policy
-    #   <p>The sacle-in policy for the connector.</p>
+    #   <p>The scale-in policy for the connector.</p>
     #   @return [Types::ScaleInPolicy]
     # @!attribute scale_out_policy
-    #   <p>The sacle-out policy for the connector.</p>
+    #   <p>The scale-out policy for the connector.</p>
     #   @return [Types::ScaleOutPolicy]
+    # @!attribute max_autoscaling_task_count
+    #   <p>The maximum number of tasks allocated to the connector during autoscaling operations. Must be at least equal to maxWorkerCount.</p>
+    #   @return [Integer]
     class AutoScaling < Struct.new(
       nil,
       :max_worker_count,
@@ -64,6 +64,7 @@ module Aws::KafkaConnect
       :min_worker_count,
       :scale_in_policy,
       :scale_out_policy,
+      :max_autoscaling_task_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -72,6 +73,7 @@ module Aws::KafkaConnect
         options[:max_worker_count] = 0 unless options.key?(:max_worker_count)
         options[:mcu_count] = 0 unless options.key?(:mcu_count)
         options[:min_worker_count] = 0 unless options.key?(:min_worker_count)
+        options[:max_autoscaling_task_count] = 0 unless options.key?(:max_autoscaling_task_count)
         super
       end
     end
@@ -81,18 +83,20 @@ module Aws::KafkaConnect
     #   <p>The maximum number of workers allocated to the connector.</p>
     #   @return [Integer]
     # @!attribute mcu_count
-    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid
-    #            values are 1,2,4,8.</p>
+    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
     #   @return [Integer]
     # @!attribute min_worker_count
     #   <p>The minimum number of workers allocated to the connector.</p>
     #   @return [Integer]
     # @!attribute scale_in_policy
-    #   <p>The sacle-in policy for the connector.</p>
+    #   <p>The scale-in policy for the connector.</p>
     #   @return [Types::ScaleInPolicyDescription]
     # @!attribute scale_out_policy
-    #   <p>The sacle-out policy for the connector.&gt;</p>
+    #   <p>The scale-out policy for the connector.</p>
     #   @return [Types::ScaleOutPolicyDescription]
+    # @!attribute max_autoscaling_task_count
+    #   <p>The maximum number of tasks allocated to the connector during autoscaling operations. Must be at least equal to maxWorkerCount.</p>
+    #   @return [Integer]
     class AutoScalingDescription < Struct.new(
       nil,
       :max_worker_count,
@@ -100,6 +104,7 @@ module Aws::KafkaConnect
       :min_worker_count,
       :scale_in_policy,
       :scale_out_policy,
+      :max_autoscaling_task_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -108,6 +113,7 @@ module Aws::KafkaConnect
         options[:max_worker_count] = 0 unless options.key?(:max_worker_count)
         options[:mcu_count] = 0 unless options.key?(:mcu_count)
         options[:min_worker_count] = 0 unless options.key?(:min_worker_count)
+        options[:max_autoscaling_task_count] = 0 unless options.key?(:max_autoscaling_task_count)
         super
       end
     end
@@ -117,18 +123,20 @@ module Aws::KafkaConnect
     #   <p>The target maximum number of workers allocated to the connector.</p>
     #   @return [Integer]
     # @!attribute mcu_count
-    #   <p>The target number of microcontroller units (MCUs) allocated to each connector worker.
-    #            The valid values are 1,2,4,8.</p>
+    #   <p>The target number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
     #   @return [Integer]
     # @!attribute min_worker_count
     #   <p>The target minimum number of workers allocated to the connector.</p>
     #   @return [Integer]
     # @!attribute scale_in_policy
-    #   <p>The target sacle-in policy for the connector.</p>
+    #   <p>The target scale-in policy for the connector.</p>
     #   @return [Types::ScaleInPolicyUpdate]
     # @!attribute scale_out_policy
-    #   <p>The target sacle-out policy for the connector.</p>
+    #   <p>The target scale-out policy for the connector.</p>
     #   @return [Types::ScaleOutPolicyUpdate]
+    # @!attribute max_autoscaling_task_count
+    #   <p>The maximum number of tasks allocated to the connector during autoscaling operations. Must be at least equal to maxWorkerCount.</p>
+    #   @return [Integer]
     class AutoScalingUpdate < Struct.new(
       nil,
       :max_worker_count,
@@ -136,6 +144,7 @@ module Aws::KafkaConnect
       :min_worker_count,
       :scale_in_policy,
       :scale_out_policy,
+      :max_autoscaling_task_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -144,12 +153,12 @@ module Aws::KafkaConnect
         options[:max_worker_count] = 0 unless options.key?(:max_worker_count)
         options[:mcu_count] = 0 unless options.key?(:mcu_count)
         options[:min_worker_count] = 0 unless options.key?(:min_worker_count)
+        options[:max_autoscaling_task_count] = 0 unless options.key?(:max_autoscaling_task_count)
         super
       end
     end
 
-    # <p>HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then
-    #          retry it.</p>
+    # <p>HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it.</p>
     # @!attribute message
     #   @return [String]
     class BadRequestException < Struct.new(
@@ -160,8 +169,7 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the capacity of the connector, whether it is auto scaled or
-    #          provisioned.</p>
+    # <p>Information about the capacity of the connector, whether it is auto scaled or provisioned.</p>
     # @!attribute auto_scaling
     #   <p>Information about the auto scaling parameters for the connector.</p>
     #   @return [Types::AutoScaling]
@@ -193,8 +201,7 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The target capacity for the connector. The capacity can be auto scaled or
-    #          provisioned.</p>
+    # <p>The target capacity for the connector. The capacity can be auto scaled or provisioned.</p>
     # @!attribute auto_scaling
     #   <p>The target auto scaling setting.</p>
     #   @return [Types::AutoScalingUpdate]
@@ -252,8 +259,7 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>HTTP Status Code 409: Conflict. A resource with this name already exists. Retry your
-    #          request with another name.</p>
+    # <p>HTTP Status Code 409: Conflict. A resource with this name already exists. Retry your request with another name.</p>
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
@@ -334,25 +340,25 @@ module Aws::KafkaConnect
     #   <p>The details of the Apache Kafka cluster to which the connector is connected.</p>
     #   @return [Types::KafkaClusterDescription]
     # @!attribute kafka_cluster_client_authentication
-    #   <p>The type of client authentication used to connect to the Apache Kafka cluster. The value
-    #            is NONE when no client authentication is used.</p>
+    #   <p>The type of client authentication used to connect to the Apache Kafka cluster. The value is NONE when no client authentication is used.</p>
     #   @return [Types::KafkaClusterClientAuthenticationDescription]
     # @!attribute kafka_cluster_encryption_in_transit
     #   <p>Details of encryption in transit to the Apache Kafka cluster.</p>
     #   @return [Types::KafkaClusterEncryptionInTransitDescription]
     # @!attribute kafka_connect_version
-    #   <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka
-    #            cluster's version and the plugins.</p>
+    #   <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.</p>
     #   @return [String]
     # @!attribute log_delivery
     #   <p>The settings for delivering connector logs to Amazon CloudWatch Logs.</p>
     #   @return [Types::LogDeliveryDescription]
+    # @!attribute network_type
+    #   <p>The network type of the connector. It gives connectors connectivity to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.</p>
+    #   @return [String]
     # @!attribute plugins
     #   <p>Specifies which plugins were used for this connector.</p>
     #   @return [Array<Types::PluginDescription>]
     # @!attribute service_execution_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon
-    #            Web Services resources.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon Web Services resources.</p>
     #   @return [String]
     # @!attribute worker_configuration
     #   <p>The worker configurations that are in use with the connector.</p>
@@ -371,6 +377,7 @@ module Aws::KafkaConnect
       :kafka_cluster_encryption_in_transit,
       :kafka_connect_version,
       :log_delivery,
+      :network_type,
       :plugins,
       :service_execution_role_arn,
       :worker_configuration,
@@ -399,8 +406,7 @@ module Aws::KafkaConnect
     end
 
     # @!attribute capacity
-    #   <p>Information about the capacity allocated to the connector. Exactly one of the two
-    #            properties must be specified.</p>
+    #   <p>Information about the capacity allocated to the connector. Exactly one of the two properties must be specified.</p>
     #   @return [Types::Capacity]
     # @!attribute connector_configuration
     #   <p>A map of keys to values that represent the configuration for the connector.</p>
@@ -421,23 +427,19 @@ module Aws::KafkaConnect
     #   <p>Details of encryption in transit to the Apache Kafka cluster.</p>
     #   @return [Types::KafkaClusterEncryptionInTransit]
     # @!attribute kafka_connect_version
-    #   <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka
-    #            cluster's version and the plugins.</p>
+    #   <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.</p>
     #   @return [String]
     # @!attribute log_delivery
     #   <p>Details about log delivery.</p>
     #   @return [Types::LogDelivery]
+    # @!attribute network_type
+    #   <p>The network type of the connector. It gives connectors connectivity to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.</p>
+    #   @return [String]
     # @!attribute plugins
-    #   <important>
-    #               <p>Amazon MSK Connect does not currently support specifying multiple plugins as a list. To use more than one plugin for your connector, you can create a single custom plugin using a ZIP file that bundles multiple plugins together.</p>
-    #            </important>
-    #            <p>Specifies which plugin to use for the connector. You must specify a single-element list containing one <code>customPlugin</code> object.</p>
+    #   <important> <p>Amazon MSK Connect does not currently support specifying multiple plugins as a list. To use more than one plugin for your connector, you can create a single custom plugin using a ZIP file that bundles multiple plugins together.</p> </important> <p>Specifies which plugin to use for the connector. You must specify a single-element list containing one <code>customPlugin</code> object.</p>
     #   @return [Array<Types::Plugin>]
     # @!attribute service_execution_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access the
-    #            Amazon Web Services resources that it needs. The types of resources depends on the logic of
-    #            the connector. For example, a connector that has Amazon S3 as a destination must have
-    #            permissions that allow it to write to the S3 destination bucket.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.</p>
     #   @return [String]
     # @!attribute worker_configuration
     #   <p>Specifies which worker configuration to use with the connector.</p>
@@ -456,6 +458,7 @@ module Aws::KafkaConnect
       :kafka_cluster_encryption_in_transit,
       :kafka_connect_version,
       :log_delivery,
+      :network_type,
       :plugins,
       :service_execution_role_arn,
       :worker_configuration,
@@ -614,8 +617,7 @@ module Aws::KafkaConnect
 
     # <p>Details about a custom plugin file.</p>
     # @!attribute file_md5
-    #   <p>The hex-encoded MD5 checksum of the custom plugin file. You can use it to validate the
-    #            file.</p>
+    #   <p>The hex-encoded MD5 checksum of the custom plugin file. You can use it to validate the file.</p>
     #   @return [String]
     # @!attribute file_size
     #   <p>The size in bytes of the custom plugin file. You can use it to validate the file.</p>
@@ -636,8 +638,7 @@ module Aws::KafkaConnect
 
     # <p>Information about the location of a custom plugin.</p>
     # @!attribute s3_location
-    #   <p>The S3 bucket Amazon Resource Name (ARN), file key, and object version of the plugin
-    #            file stored in Amazon S3.</p>
+    #   <p>The S3 bucket Amazon Resource Name (ARN), file key, and object version of the plugin file stored in Amazon S3.</p>
     #   @return [Types::S3Location]
     class CustomPluginLocation < Struct.new(
       nil,
@@ -649,8 +650,7 @@ module Aws::KafkaConnect
 
     # <p>Information about the location of a custom plugin.</p>
     # @!attribute s3_location
-    #   <p>The S3 bucket Amazon Resource Name (ARN), file key, and object version of the plugin
-    #            file stored in Amazon S3.</p>
+    #   <p>The S3 bucket Amazon Resource Name (ARN), file key, and object version of the plugin file stored in Amazon S3.</p>
     #   @return [Types::S3LocationDescription]
     class CustomPluginLocationDescription < Struct.new(
       nil,
@@ -878,8 +878,7 @@ module Aws::KafkaConnect
     end
 
     # @!attribute capacity
-    #   <p>Information about the capacity of the connector, whether it is auto scaled or
-    #            provisioned.</p>
+    #   <p>Information about the capacity of the connector, whether it is auto scaled or provisioned.</p>
     #   @return [Types::CapacityDescription]
     # @!attribute connector_arn
     #   <p>The Amazon Resource Name (ARN) of the connector.</p>
@@ -906,25 +905,25 @@ module Aws::KafkaConnect
     #   <p>The Apache Kafka cluster that the connector is connected to.</p>
     #   @return [Types::KafkaClusterDescription]
     # @!attribute kafka_cluster_client_authentication
-    #   <p>The type of client authentication used to connect to the Apache Kafka cluster. The value
-    #            is NONE when no client authentication is used.</p>
+    #   <p>The type of client authentication used to connect to the Apache Kafka cluster. The value is NONE when no client authentication is used.</p>
     #   @return [Types::KafkaClusterClientAuthenticationDescription]
     # @!attribute kafka_cluster_encryption_in_transit
     #   <p>Details of encryption in transit to the Apache Kafka cluster.</p>
     #   @return [Types::KafkaClusterEncryptionInTransitDescription]
     # @!attribute kafka_connect_version
-    #   <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka
-    #            cluster's version and the plugins.</p>
+    #   <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.</p>
     #   @return [String]
     # @!attribute log_delivery
     #   <p>Details about delivering logs to Amazon CloudWatch Logs.</p>
     #   @return [Types::LogDeliveryDescription]
+    # @!attribute network_type
+    #   <p>The network type of the connector. It gives connectors connectivity to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.</p>
+    #   @return [String]
     # @!attribute plugins
     #   <p>Specifies which plugins were used for this connector.</p>
     #   @return [Array<Types::PluginDescription>]
     # @!attribute service_execution_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon
-    #            Web Services resources.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon Web Services resources.</p>
     #   @return [String]
     # @!attribute worker_configuration
     #   <p>Specifies which worker configuration was used for the connector.</p>
@@ -947,6 +946,7 @@ module Aws::KafkaConnect
       :kafka_cluster_encryption_in_transit,
       :kafka_connect_version,
       :log_delivery,
+      :network_type,
       :plugins,
       :service_execution_role_arn,
       :worker_configuration,
@@ -980,8 +980,7 @@ module Aws::KafkaConnect
     #   <p>The description of the custom plugin.</p>
     #   @return [String]
     # @!attribute latest_revision
-    #   <p>The latest successfully created revision of the custom plugin. If there are no
-    #            successfully created revisions, this field will be absent.</p>
+    #   <p>The latest successfully created revision of the custom plugin. If there are no successfully created revisions, this field will be absent.</p>
     #   @return [Types::CustomPluginRevisionSummary]
     # @!attribute name
     #   <p>The name of the custom plugin.</p>
@@ -1046,8 +1045,7 @@ module Aws::KafkaConnect
     end
 
     # @!attribute worker_configuration_arn
-    #   <p>The Amazon Resource Name (ARN) of the worker configuration that you want to get
-    #            information about.</p>
+    #   <p>The Amazon Resource Name (ARN) of the worker configuration that you want to get information about.</p>
     #   @return [String]
     class DescribeWorkerConfigurationRequest < Struct.new(
       nil,
@@ -1059,8 +1057,7 @@ module Aws::KafkaConnect
 
     # <p>The settings for delivering logs to Amazon Kinesis Data Firehose.</p>
     # @!attribute delivery_stream
-    #   <p>The name of the Kinesis Data Firehose delivery stream that is the destination for log
-    #            delivery.</p>
+    #   <p>The name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.</p>
     #   @return [String]
     # @!attribute enabled
     #   <p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>
@@ -1079,11 +1076,9 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>A description of the settings for delivering logs to Amazon Kinesis Data
-    #          Firehose.</p>
+    # <p>A description of the settings for delivering logs to Amazon Kinesis Data Firehose.</p>
     # @!attribute delivery_stream
-    #   <p>The name of the Kinesis Data Firehose delivery stream that is the destination for log
-    #            delivery.</p>
+    #   <p>The name of the Kinesis Data Firehose delivery stream that is the destination for log delivery.</p>
     #   @return [String]
     # @!attribute enabled
     #   <p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>
@@ -1102,8 +1097,7 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your
-    #          request.</p>
+    # <p>HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request.</p>
     # @!attribute message
     #   @return [String]
     class ForbiddenException < Struct.new(
@@ -1114,8 +1108,7 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>HTTP Status Code 500: Unexpected internal server error. Retrying your request might
-    #          resolve the issue.</p>
+    # <p>HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue.</p>
     # @!attribute message
     #   @return [String]
     class InternalServerErrorException < Struct.new(
@@ -1138,11 +1131,9 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The client authentication information used in order to authenticate with the Apache
-    #          Kafka cluster.</p>
+    # <p>The client authentication information used in order to authenticate with the Apache Kafka cluster.</p>
     # @!attribute authentication_type
-    #   <p>The type of client authentication used to connect to the Apache Kafka cluster. Value
-    #            NONE means that no client authentication is used.</p>
+    #   <p>The type of client authentication used to connect to the Apache Kafka cluster. Value NONE means that no client authentication is used.</p>
     #   @return [String]
     class KafkaClusterClientAuthentication < Struct.new(
       nil,
@@ -1152,11 +1143,9 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The client authentication information used in order to authenticate with the Apache
-    #          Kafka cluster.</p>
+    # <p>The client authentication information used in order to authenticate with the Apache Kafka cluster.</p>
     # @!attribute authentication_type
-    #   <p>The type of client authentication used to connect to the Apache Kafka cluster. Value
-    #            NONE means that no client authentication is used.</p>
+    #   <p>The type of client authentication used to connect to the Apache Kafka cluster. Value NONE means that no client authentication is used.</p>
     #   @return [String]
     class KafkaClusterClientAuthenticationDescription < Struct.new(
       nil,
@@ -1240,9 +1229,7 @@ module Aws::KafkaConnect
     #   <p>An array of connector descriptions.</p>
     #   @return [Array<Types::ConnectorSummary>]
     # @!attribute next_token
-    #   <p>If the response of a ListConnectors operation is truncated, it will include a NextToken.
-    #            Send this NextToken in a subsequent request to continue listing from where it left
-    #            off.</p>
+    #   <p>If the response of a ListConnectors operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where it left off.</p>
     #   @return [String]
     class ListConnectorsOutput < Struct.new(
       nil,
@@ -1260,9 +1247,7 @@ module Aws::KafkaConnect
     #   <p>The maximum number of connectors to list in one response.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the response of a ListConnectors operation is truncated, it will include a NextToken.
-    #            Send this NextToken in a subsequent request to continue listing from where the previous
-    #            operation left off.</p>
+    #   <p>If the response of a ListConnectors operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
     #   @return [String]
     class ListConnectorsRequest < Struct.new(
       nil,
@@ -1278,9 +1263,7 @@ module Aws::KafkaConnect
     #   <p>An array of custom plugin descriptions.</p>
     #   @return [Array<Types::CustomPluginSummary>]
     # @!attribute next_token
-    #   <p>If the response of a ListCustomPlugins operation is truncated, it will include a
-    #            NextToken. Send this NextToken in a subsequent request to continue listing from where the
-    #            previous operation left off.</p>
+    #   <p>If the response of a ListCustomPlugins operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
     #   @return [String]
     class ListCustomPluginsOutput < Struct.new(
       nil,
@@ -1295,9 +1278,7 @@ module Aws::KafkaConnect
     #   <p>The maximum number of custom plugins to list in one response.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the response of a ListCustomPlugins operation is truncated, it will include a
-    #            NextToken. Send this NextToken in a subsequent request to continue listing from where the
-    #            previous operation left off.</p>
+    #   <p>If the response of a ListCustomPlugins operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
     #   @return [String]
     # @!attribute name_prefix
     #   <p>Lists custom plugin names that start with the specified text string.</p>
@@ -1335,9 +1316,7 @@ module Aws::KafkaConnect
     end
 
     # @!attribute next_token
-    #   <p>If the response of a ListWorkerConfigurations operation is truncated, it will include a
-    #            NextToken. Send this NextToken in a subsequent request to continue listing from where the
-    #            previous operation left off.</p>
+    #   <p>If the response of a ListWorkerConfigurations operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
     #   @return [String]
     # @!attribute worker_configurations
     #   <p>An array of worker configuration descriptions.</p>
@@ -1355,9 +1334,7 @@ module Aws::KafkaConnect
     #   <p>The maximum number of worker configurations to list in one response.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the response of a ListWorkerConfigurations operation is truncated, it will include a
-    #            NextToken. Send this NextToken in a subsequent request to continue listing from where the
-    #            previous operation left off.</p>
+    #   <p>If the response of a ListWorkerConfigurations operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
     #   @return [String]
     # @!attribute name_prefix
     #   <p>Lists worker configuration names that start with the specified text string.</p>
@@ -1374,8 +1351,7 @@ module Aws::KafkaConnect
 
     # <p>Details about log delivery.</p>
     # @!attribute worker_log_delivery
-    #   <p>The workers can send worker logs to different destination types. This configuration
-    #            specifies the details of these destinations.</p>
+    #   <p>The workers can send worker logs to different destination types. This configuration specifies the details of these destinations.</p>
     #   @return [Types::WorkerLogDelivery]
     class LogDelivery < Struct.new(
       nil,
@@ -1387,8 +1363,7 @@ module Aws::KafkaConnect
 
     # <p>The description of the log delivery settings.</p>
     # @!attribute worker_log_delivery
-    #   <p>The workers can send worker logs to different destination types. This configuration
-    #            specifies the details of these destinations.</p>
+    #   <p>The workers can send worker logs to different destination types. This configuration specifies the details of these destinations.</p>
     #   @return [Types::WorkerLogDeliveryDescription]
     class LogDeliveryDescription < Struct.new(
       nil,
@@ -1398,8 +1373,7 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>HTTP Status Code 404: Resource not found due to incorrect input. Correct your request
-    #          and then retry it.</p>
+    # <p>HTTP Status Code 404: Resource not found due to incorrect input. Correct your request and then retry it.</p>
     # @!attribute message
     #   @return [String]
     class NotFoundException < Struct.new(
@@ -1436,8 +1410,7 @@ module Aws::KafkaConnect
 
     # <p>Details about a connector's provisioned capacity.</p>
     # @!attribute mcu_count
-    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid
-    #            values are 1,2,4,8.</p>
+    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
     #   @return [Integer]
     # @!attribute worker_count
     #   <p>The number of workers that are allocated to the connector.</p>
@@ -1459,8 +1432,7 @@ module Aws::KafkaConnect
 
     # <p>The description of a connector's provisioned capacity.</p>
     # @!attribute mcu_count
-    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid
-    #            values are 1,2,4,8.</p>
+    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
     #   @return [Integer]
     # @!attribute worker_count
     #   <p>The number of workers that are allocated to the connector.</p>
@@ -1482,8 +1454,7 @@ module Aws::KafkaConnect
 
     # <p>An update to a connector's fixed capacity.</p>
     # @!attribute mcu_count
-    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid
-    #            values are 1,2,4,8.</p>
+    #   <p>The number of microcontroller units (MCUs) allocated to each connector worker. The valid values are 1,2,4,8.</p>
     #   @return [Integer]
     # @!attribute worker_count
     #   <p>The number of workers that are allocated to the connector.</p>
@@ -1501,6 +1472,36 @@ module Aws::KafkaConnect
         options[:worker_count] = 0 unless options.key?(:worker_count)
         super
       end
+    end
+
+    # @!attribute connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector that you want to restart.</p>
+    #   @return [String]
+    # @!attribute only_failed_tasks
+    #   <p>Specifies whether to restart only the connector's failed tasks. If <code>true</code>, the operation restarts only the tasks that are currently in a failed state, and healthy tasks continue running. If <code>false</code> or not specified, the operation restarts the connector and all of its tasks.</p>
+    #   @return [Boolean]
+    class RestartConnectorRequest < Struct.new(
+      nil,
+      :connector_arn,
+      :only_failed_tasks,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector.</p>
+    #   @return [String]
+    # @!attribute connector_operation_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector operation created to perform the restart.</p>
+    #   @return [String]
+    class RestartConnectorResponse < Struct.new(
+      nil,
+      :connector_arn,
+      :connector_operation_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of an object in Amazon S3.</p>
@@ -1595,8 +1596,7 @@ module Aws::KafkaConnect
 
     # <p>The scale-in policy for the connector.</p>
     # @!attribute cpu_utilization_percentage
-    #   <p>Specifies the CPU utilization percentage threshold at which you want connector scale in
-    #            to be triggered.</p>
+    #   <p>Specifies the CPU utilization percentage threshold at which you want connector scale in to be triggered.</p>
     #   @return [Integer]
     class ScaleInPolicy < Struct.new(
       nil,
@@ -1613,8 +1613,7 @@ module Aws::KafkaConnect
 
     # <p>The description of the scale-in policy for the connector.</p>
     # @!attribute cpu_utilization_percentage
-    #   <p>Specifies the CPU utilization percentage threshold at which you want connector scale in
-    #            to be triggered.</p>
+    #   <p>Specifies the CPU utilization percentage threshold at which you want connector scale in to be triggered.</p>
     #   @return [Integer]
     class ScaleInPolicyDescription < Struct.new(
       nil,
@@ -1631,8 +1630,7 @@ module Aws::KafkaConnect
 
     # <p>An update to the connector's scale-in policy.</p>
     # @!attribute cpu_utilization_percentage
-    #   <p>The target CPU utilization percentage threshold at which you want connector scale in to
-    #            be triggered.</p>
+    #   <p>The target CPU utilization percentage threshold at which you want connector scale in to be triggered.</p>
     #   @return [Integer]
     class ScaleInPolicyUpdate < Struct.new(
       nil,
@@ -1649,8 +1647,7 @@ module Aws::KafkaConnect
 
     # <p>The scale-out policy for the connector.</p>
     # @!attribute cpu_utilization_percentage
-    #   <p>The CPU utilization percentage threshold at which you want connector scale out to be
-    #            triggered.</p>
+    #   <p>The CPU utilization percentage threshold at which you want connector scale out to be triggered.</p>
     #   @return [Integer]
     class ScaleOutPolicy < Struct.new(
       nil,
@@ -1667,8 +1664,7 @@ module Aws::KafkaConnect
 
     # <p>The description of the scale-out policy for the connector.</p>
     # @!attribute cpu_utilization_percentage
-    #   <p>The CPU utilization percentage threshold at which you want connector scale out to be
-    #            triggered.</p>
+    #   <p>The CPU utilization percentage threshold at which you want connector scale out to be triggered.</p>
     #   @return [Integer]
     class ScaleOutPolicyDescription < Struct.new(
       nil,
@@ -1685,8 +1681,7 @@ module Aws::KafkaConnect
 
     # <p>An update to the connector's scale-out policy.</p>
     # @!attribute cpu_utilization_percentage
-    #   <p>The target CPU utilization percentage threshold at which you want connector scale out to
-    #            be triggered.</p>
+    #   <p>The target CPU utilization percentage threshold at which you want connector scale out to be triggered.</p>
     #   @return [Integer]
     class ScaleOutPolicyUpdate < Struct.new(
       nil,
@@ -1701,8 +1696,7 @@ module Aws::KafkaConnect
       end
     end
 
-    # <p>HTTP Status Code 503: Service Unavailable. Retrying your request in some time might
-    #          resolve the issue.</p>
+    # <p>HTTP Status Code 503: Service Unavailable. Retrying your request in some time might resolve the issue.</p>
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
@@ -1762,8 +1756,7 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be
-    #          validated.</p>
+    # <p>HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be validated.</p>
     # @!attribute message
     #   @return [String]
     class UnauthorizedException < Struct.new(
@@ -1870,8 +1863,7 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration of the workers, which are the processes that run the connector
-    #          logic.</p>
+    # <p>The configuration of the workers, which are the processes that run the connector logic.</p>
     # @!attribute revision
     #   <p>The revision of the worker configuration.</p>
     #   @return [Integer]
@@ -1999,8 +1991,7 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Workers can send worker logs to different destination types. This configuration
-    #          specifies the details of these destinations.</p>
+    # <p>Workers can send worker logs to different destination types. This configuration specifies the details of these destinations.</p>
     # @!attribute cloud_watch_logs
     #   <p>Details about delivering logs to Amazon CloudWatch Logs.</p>
     #   @return [Types::CloudWatchLogsLogDelivery]
@@ -2020,8 +2011,7 @@ module Aws::KafkaConnect
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Workers can send worker logs to different destination types. This configuration
-    #          specifies the details of these destinations.</p>
+    # <p>Workers can send worker logs to different destination types. This configuration specifies the details of these destinations.</p>
     # @!attribute cloud_watch_logs
     #   <p>Details about delivering logs to Amazon CloudWatch Logs.</p>
     #   @return [Types::CloudWatchLogsLogDeliveryDescription]

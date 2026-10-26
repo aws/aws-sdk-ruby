@@ -121,7 +121,8 @@ module Aws::MediaConnect
           media_stream_id: untyped,
           media_stream_name: untyped,
           media_stream_type: String,
-          video_format: untyped
+          video_format: untyped,
+          media_stream_tags: Hash[String, String]
         }
       ]
     ) -> _AddFlowMediaStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddFlowMediaStreamsResponse
@@ -182,7 +183,22 @@ module Aws::MediaConnect
           },
           output_status: String,
           ndi_speed_hq_quality: untyped,
-          ndi_program_name: untyped
+          ndi_program_name: untyped,
+          output_tags: Hash[String, String],
+          router_integration_state: String,
+          router_integration_transit_encryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: {
+                secret_arn: String,
+                role_arn: String
+              },
+              automatic: {
+              }
+            }
+          },
+          ndi_output_timecode_source: String,
+          ndi_audio_reference_level: Integer
         }
       ]
     ) -> _AddFlowOutputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddFlowOutputsResponse
@@ -242,6 +258,23 @@ module Aws::MediaConnect
             vpc_interface_attachment: {
               vpc_interface_name: untyped
             }
+          },
+          ndi_source_settings: {
+            source_name: untyped,
+            audio_reference_level: Integer
+          },
+          source_tags: Hash[String, String],
+          router_integration_state: String,
+          router_integration_transit_decryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: {
+                secret_arn: String,
+                role_arn: String
+              },
+              automatic: {
+              }
+            }
           }
         }
       ]
@@ -260,10 +293,38 @@ module Aws::MediaConnect
           network_interface_type: String,
           role_arn: untyped,
           security_group_ids: Array[String],
-          subnet_id: untyped
+          subnet_id: untyped,
+          vpc_interface_tags: Hash[String, String]
         }
       ]
     ) -> _AddFlowVpcInterfacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddFlowVpcInterfacesResponse
+
+    interface _BatchGetRouterInputResponse
+      include Smithy::Client::_Response[Types::BatchGetRouterInputResponse]
+      def router_inputs: () -> Array[Types::RouterInput]?
+      def errors: () -> Array[Types::BatchGetRouterInputError]?
+    end
+    def batch_get_router_input: (
+      ?arns: Array[String]
+    ) -> _BatchGetRouterInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetRouterInputResponse
+
+    interface _BatchGetRouterNetworkInterfaceResponse
+      include Smithy::Client::_Response[Types::BatchGetRouterNetworkInterfaceResponse]
+      def router_network_interfaces: () -> Array[Types::RouterNetworkInterface]?
+      def errors: () -> Array[Types::BatchGetRouterNetworkInterfaceError]?
+    end
+    def batch_get_router_network_interface: (
+      ?arns: Array[String]
+    ) -> _BatchGetRouterNetworkInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetRouterNetworkInterfaceResponse
+
+    interface _BatchGetRouterOutputResponse
+      include Smithy::Client::_Response[Types::BatchGetRouterOutputResponse]
+      def router_outputs: () -> Array[Types::RouterOutput]?
+      def errors: () -> Array[Types::BatchGetRouterOutputError]?
+    end
+    def batch_get_router_output: (
+      ?arns: Array[String]
+    ) -> _BatchGetRouterOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetRouterOutputResponse
 
     interface _CreateBridgeResponse
       include Smithy::Client::_Response[Types::CreateBridgeResponse]
@@ -345,7 +406,8 @@ module Aws::MediaConnect
           },
           entitlement_status: String,
           name: untyped,
-          subscribers: Array[String]
+          subscribers: Array[String],
+          entitlement_tags: Hash[String, String]
         }
       ],
       ?media_streams: Array[
@@ -367,7 +429,8 @@ module Aws::MediaConnect
           media_stream_id: untyped,
           media_stream_name: untyped,
           media_stream_type: String,
-          video_format: untyped
+          video_format: untyped,
+          media_stream_tags: Hash[String, String]
         }
       ],
       ?name: String,
@@ -420,7 +483,22 @@ module Aws::MediaConnect
           },
           output_status: String,
           ndi_speed_hq_quality: untyped,
-          ndi_program_name: untyped
+          ndi_program_name: untyped,
+          output_tags: Hash[String, String],
+          router_integration_state: String,
+          router_integration_transit_encryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: {
+                secret_arn: String,
+                role_arn: String
+              },
+              automatic: {
+              }
+            }
+          },
+          ndi_output_timecode_source: String,
+          ndi_audio_reference_level: Integer
         }
       ],
       ?source: {
@@ -469,6 +547,23 @@ module Aws::MediaConnect
           bridge_arn: untyped,
           vpc_interface_attachment: {
             vpc_interface_name: untyped
+          }
+        },
+        ndi_source_settings: {
+          source_name: untyped,
+          audio_reference_level: Integer
+        },
+        source_tags: Hash[String, String],
+        router_integration_state: String,
+        router_integration_transit_decryption: {
+          encryption_key_type: String,
+          encryption_key_configuration: {
+            secrets_manager: {
+              secret_arn: String,
+              role_arn: String
+            },
+            automatic: {
+            }
           }
         }
       },
@@ -528,6 +623,23 @@ module Aws::MediaConnect
             vpc_interface_attachment: {
               vpc_interface_name: untyped
             }
+          },
+          ndi_source_settings: {
+            source_name: untyped,
+            audio_reference_level: Integer
+          },
+          source_tags: Hash[String, String],
+          router_integration_state: String,
+          router_integration_transit_decryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: {
+                secret_arn: String,
+                role_arn: String
+              },
+              automatic: {
+              }
+            }
           }
         }
       ],
@@ -537,7 +649,8 @@ module Aws::MediaConnect
           network_interface_type: String,
           role_arn: untyped,
           security_group_ids: Array[String],
-          subnet_id: untyped
+          subnet_id: untyped,
+          vpc_interface_tags: Hash[String, String]
         }
       ],
       ?maintenance: {
@@ -579,7 +692,12 @@ module Aws::MediaConnect
             vpc_interface_adapter: untyped
           }
         ]
-      }
+      },
+      ?encoding_config: {
+        encoding_profile: String,
+        video_max_bitrate: Integer
+      },
+      ?flow_tags: Hash[String, String]
     ) -> _CreateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFlowResponse
 
     interface _CreateGatewayResponse
@@ -596,6 +714,256 @@ module Aws::MediaConnect
         }
       ]
     ) -> _CreateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayResponse
+
+    interface _CreateRouterInputResponse
+      include Smithy::Client::_Response[Types::CreateRouterInputResponse]
+      def router_input: () -> Types::RouterInput?
+    end
+    def create_router_input: (
+      ?name: String,
+      ?configuration: {
+        standard: {
+          network_interface_arn: String,
+          protocol_configuration: {
+            rist: {
+              port: Integer,
+              recovery_latency_milliseconds: Integer
+            },
+            srt_listener: {
+              port: untyped,
+              minimum_latency_milliseconds: untyped,
+              decryption_configuration: {
+                encryption_key: {
+                  secret_arn: String,
+                  role_arn: String
+                }
+              }
+            },
+            srt_caller: {
+              source_address: String,
+              source_port: untyped,
+              minimum_latency_milliseconds: untyped,
+              stream_id: untyped,
+              decryption_configuration: untyped
+            },
+            rtp: {
+              port: untyped,
+              forward_error_correction: String
+            }
+          },
+          protocol: String
+        },
+        media_live_channel: {
+          media_live_channel_arn: String,
+          media_live_pipeline_id: String,
+          media_live_channel_output_name: untyped,
+          source_transit_decryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: untyped,
+              automatic: {
+              }
+            }
+          }
+        },
+        failover: {
+          network_interface_arn: untyped,
+          protocol_configurations: Array[
+            {
+              rist: untyped,
+              srt_listener: untyped,
+              srt_caller: untyped,
+              rtp: untyped
+            }
+          ],
+          source_priority_mode: String,
+          primary_source_index: untyped
+        },
+        media_connect_flow: {
+          flow_arn: String,
+          flow_output_arn: String,
+          source_transit_decryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: untyped,
+              automatic: untyped
+            }
+          }
+        },
+        merge: {
+          network_interface_arn: untyped,
+          protocol_configurations: Array[
+            {
+              rtp: untyped,
+              rist: untyped
+            }
+          ],
+          merge_recovery_window_milliseconds: untyped
+        }
+      },
+      ?maximum_bitrate: Integer,
+      ?routing_scope: String,
+      ?tier: String,
+      ?region_name: String,
+      ?availability_zone: String,
+      ?transit_encryption: {
+        encryption_key_type: String,
+        encryption_key_configuration: {
+          secrets_manager: {
+            secret_arn: String,
+            role_arn: String
+          },
+          automatic: {
+          }
+        }
+      },
+      ?maintenance_configuration: {
+        preferred_day_time: {
+          day: String,
+          time: String
+        },
+        default: {
+        }
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String,
+      ?content_quality_analysis_configuration: {
+        content_level: {
+          black_frames: {
+            state: String,
+            threshold_seconds: Integer
+          },
+          frozen_frames: {
+            state: untyped,
+            threshold_seconds: untyped
+          },
+          silent_audio: {
+            state: untyped,
+            threshold_seconds: untyped
+          }
+        }
+      }
+    ) -> _CreateRouterInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRouterInputResponse
+
+    interface _CreateRouterNetworkInterfaceResponse
+      include Smithy::Client::_Response[Types::CreateRouterNetworkInterfaceResponse]
+      def router_network_interface: () -> Types::RouterNetworkInterface?
+    end
+    def create_router_network_interface: (
+      ?name: String,
+      ?configuration: {
+        public: {
+          allow_rules: Array[
+            {
+              cidr: String
+            }
+          ]
+        },
+        vpc: {
+          security_group_ids: Array[String],
+          subnet_id: untyped
+        }
+      },
+      ?region_name: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateRouterNetworkInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRouterNetworkInterfaceResponse
+
+    interface _CreateRouterOutputResponse
+      include Smithy::Client::_Response[Types::CreateRouterOutputResponse]
+      def router_output: () -> Types::RouterOutput?
+    end
+    def create_router_output: (
+      ?name: String,
+      ?configuration: {
+        standard: {
+          network_interface_arn: String,
+          protocol_configuration: {
+            rist: {
+              destination_address: String,
+              destination_port: Integer
+            },
+            srt_listener: {
+              port: untyped,
+              minimum_latency_milliseconds: Integer,
+              encryption_configuration: {
+                encryption_key: {
+                  secret_arn: String,
+                  role_arn: String
+                }
+              }
+            },
+            rtmp_push: {
+              destination_address: untyped,
+              destination_port: untyped,
+              application_name: untyped,
+              stream_name: untyped,
+              tls_encryption: {
+                encryption_type: String,
+                encryption_configuration: {
+                  public: {
+                  }
+                }
+              }
+            },
+            srt_caller: {
+              destination_address: untyped,
+              destination_port: untyped,
+              minimum_latency_milliseconds: untyped,
+              stream_id: untyped,
+              encryption_configuration: untyped
+            },
+            rtp: {
+              destination_address: untyped,
+              destination_port: untyped,
+              forward_error_correction: String
+            }
+          },
+          protocol: String
+        },
+        media_connect_flow: {
+          flow_arn: String,
+          flow_source_arn: String,
+          destination_transit_encryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: untyped,
+              automatic: {
+              }
+            }
+          }
+        },
+        media_live_input: {
+          media_live_input_arn: String,
+          media_live_pipeline_id: String,
+          destination_transit_encryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: untyped,
+              automatic: untyped
+            }
+          }
+        }
+      },
+      ?maximum_bitrate: Integer,
+      ?routing_scope: String,
+      ?tier: String,
+      ?region_name: String,
+      ?availability_zone: String,
+      ?maintenance_configuration: {
+        preferred_day_time: {
+          day: String,
+          time: String
+        },
+        default: {
+        }
+      },
+      ?tags: Hash[String, String],
+      ?fabric_configuration: {
+        recovery_latency_mode: String
+      },
+      ?client_token: String
+    ) -> _CreateRouterOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRouterOutputResponse
 
     interface _DeleteBridgeResponse
       include Smithy::Client::_Response[Types::DeleteBridgeResponse]
@@ -621,6 +989,36 @@ module Aws::MediaConnect
     def delete_gateway: (
       ?gateway_arn: String
     ) -> _DeleteGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayResponse
+
+    interface _DeleteRouterInputResponse
+      include Smithy::Client::_Response[Types::DeleteRouterInputResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def delete_router_input: (
+      ?arn: String
+    ) -> _DeleteRouterInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRouterInputResponse
+
+    interface _DeleteRouterNetworkInterfaceResponse
+      include Smithy::Client::_Response[Types::DeleteRouterNetworkInterfaceResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def delete_router_network_interface: (
+      ?arn: String
+    ) -> _DeleteRouterNetworkInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRouterNetworkInterfaceResponse
+
+    interface _DeleteRouterOutputResponse
+      include Smithy::Client::_Response[Types::DeleteRouterOutputResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def delete_router_output: (
+      ?arn: String
+    ) -> _DeleteRouterOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRouterOutputResponse
 
     interface _DeregisterGatewayInstanceResponse
       include Smithy::Client::_Response[Types::DeregisterGatewayInstanceResponse]
@@ -655,6 +1053,7 @@ module Aws::MediaConnect
       def messages: () -> Array[Types::MessageDetail]?
       def timestamp: () -> Time?
       def transport_media_info: () -> Types::TransportMediaInfo?
+      def ndi_info: () -> Types::NdiSourceMetadataInfo?
     end
     def describe_flow_source_metadata: (
       ?flow_arn: String
@@ -700,6 +1099,50 @@ module Aws::MediaConnect
       ?reservation_arn: String
     ) -> _DescribeReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservationResponse
 
+    interface _GetRouterInputResponse
+      include Smithy::Client::_Response[Types::GetRouterInputResponse]
+      def router_input: () -> Types::RouterInput?
+    end
+    def get_router_input: (
+      ?arn: String
+    ) -> _GetRouterInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRouterInputResponse
+
+    interface _GetRouterInputSourceMetadataResponse
+      include Smithy::Client::_Response[Types::GetRouterInputSourceMetadataResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def source_metadata_details: () -> Types::RouterInputSourceMetadataDetails?
+    end
+    def get_router_input_source_metadata: (
+      ?arn: String
+    ) -> _GetRouterInputSourceMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRouterInputSourceMetadataResponse
+
+    interface _GetRouterInputThumbnailResponse
+      include Smithy::Client::_Response[Types::GetRouterInputThumbnailResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def thumbnail_details: () -> Types::RouterInputThumbnailDetails?
+    end
+    def get_router_input_thumbnail: (
+      ?arn: String
+    ) -> _GetRouterInputThumbnailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRouterInputThumbnailResponse
+
+    interface _GetRouterNetworkInterfaceResponse
+      include Smithy::Client::_Response[Types::GetRouterNetworkInterfaceResponse]
+      def router_network_interface: () -> Types::RouterNetworkInterface?
+    end
+    def get_router_network_interface: (
+      ?arn: String
+    ) -> _GetRouterNetworkInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRouterNetworkInterfaceResponse
+
+    interface _GetRouterOutputResponse
+      include Smithy::Client::_Response[Types::GetRouterOutputResponse]
+      def router_output: () -> Types::RouterOutput?
+    end
+    def get_router_output: (
+      ?arn: String
+    ) -> _GetRouterOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRouterOutputResponse
+
     interface _GrantFlowEntitlementsResponse
       include Smithy::Client::_Response[Types::GrantFlowEntitlementsResponse]
       def entitlements: () -> Array[Types::Entitlement]?
@@ -723,7 +1166,8 @@ module Aws::MediaConnect
           },
           entitlement_status: String,
           name: untyped,
-          subscribers: Array[String]
+          subscribers: Array[String],
+          entitlement_tags: Hash[String, String]
         }
       ],
       ?flow_arn: String
@@ -800,6 +1244,70 @@ module Aws::MediaConnect
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListReservationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReservationsResponse
+
+    interface _ListRouterInputsResponse
+      include Smithy::Client::_Response[Types::ListRouterInputsResponse]
+      def router_inputs: () -> Array[Types::ListedRouterInput]?
+      def next_token: () -> String?
+    end
+    def list_router_inputs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name_contains: Array[String],
+          region_names: untyped,
+          network_interface_arns: Array[String],
+          routing_scopes: Array[String],
+          input_types: Array[String]
+        }
+      ]
+    ) -> _ListRouterInputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRouterInputsResponse
+
+    interface _ListRouterNetworkInterfacesResponse
+      include Smithy::Client::_Response[Types::ListRouterNetworkInterfacesResponse]
+      def router_network_interfaces: () -> Array[Types::ListedRouterNetworkInterface]?
+      def next_token: () -> String?
+    end
+    def list_router_network_interfaces: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          region_names: Array[String],
+          network_interface_types: Array[String],
+          name_contains: untyped
+        }
+      ]
+    ) -> _ListRouterNetworkInterfacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRouterNetworkInterfacesResponse
+
+    interface _ListRouterOutputsResponse
+      include Smithy::Client::_Response[Types::ListRouterOutputsResponse]
+      def router_outputs: () -> Array[Types::ListedRouterOutput]?
+      def next_token: () -> String?
+    end
+    def list_router_outputs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          region_names: Array[String],
+          network_interface_arns: Array[String],
+          routing_scopes: Array[String],
+          output_types: Array[String],
+          routed_input_arns: Array[String],
+          name_contains: untyped
+        }
+      ]
+    ) -> _ListRouterOutputsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRouterOutputsResponse
+
+    interface _ListTagsForGlobalResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForGlobalResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_global_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForGlobalResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForGlobalResourceResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
@@ -880,6 +1388,26 @@ module Aws::MediaConnect
       ?vpc_interface_name: String
     ) -> _RemoveFlowVpcInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveFlowVpcInterfaceResponse
 
+    interface _RestartRouterInputResponse
+      include Smithy::Client::_Response[Types::RestartRouterInputResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def restart_router_input: (
+      ?arn: String
+    ) -> _RestartRouterInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestartRouterInputResponse
+
+    interface _RestartRouterOutputResponse
+      include Smithy::Client::_Response[Types::RestartRouterOutputResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def restart_router_output: (
+      ?arn: String
+    ) -> _RestartRouterOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestartRouterOutputResponse
+
     interface _RevokeFlowEntitlementResponse
       include Smithy::Client::_Response[Types::RevokeFlowEntitlementResponse]
       def entitlement_arn: () -> String?
@@ -899,6 +1427,30 @@ module Aws::MediaConnect
       ?flow_arn: String
     ) -> _StartFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFlowResponse
 
+    interface _StartRouterInputResponse
+      include Smithy::Client::_Response[Types::StartRouterInputResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+      def maintenance_schedule_type: () -> String?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+    end
+    def start_router_input: (
+      ?arn: String
+    ) -> _StartRouterInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRouterInputResponse
+
+    interface _StartRouterOutputResponse
+      include Smithy::Client::_Response[Types::StartRouterOutputResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+      def maintenance_schedule_type: () -> String?
+      def maintenance_schedule: () -> Types::MaintenanceSchedule?
+    end
+    def start_router_output: (
+      ?arn: String
+    ) -> _StartRouterOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRouterOutputResponse
+
     interface _StopFlowResponse
       include Smithy::Client::_Response[Types::StopFlowResponse]
       def flow_arn: () -> String?
@@ -908,6 +1460,34 @@ module Aws::MediaConnect
       ?flow_arn: String
     ) -> _StopFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopFlowResponse
 
+    interface _StopRouterInputResponse
+      include Smithy::Client::_Response[Types::StopRouterInputResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def stop_router_input: (
+      ?arn: String
+    ) -> _StopRouterInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopRouterInputResponse
+
+    interface _StopRouterOutputResponse
+      include Smithy::Client::_Response[Types::StopRouterOutputResponse]
+      def arn: () -> String?
+      def name: () -> String?
+      def state: () -> String?
+    end
+    def stop_router_output: (
+      ?arn: String
+    ) -> _StopRouterOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopRouterOutputResponse
+
+    interface _TagGlobalResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_global_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagGlobalResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagGlobalResourceResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -915,6 +1495,27 @@ module Aws::MediaConnect
       ?resource_arn: String,
       ?tags: Hash[String, String]
     ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TakeRouterInputResponse
+      include Smithy::Client::_Response[Types::TakeRouterInputResponse]
+      def routed_state: () -> String?
+      def router_output_arn: () -> String?
+      def router_output_name: () -> String?
+      def router_input_arn: () -> String?
+      def router_input_name: () -> String?
+    end
+    def take_router_input: (
+      ?router_output_arn: String,
+      ?router_input_arn: String
+    ) -> _TakeRouterInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TakeRouterInputResponse
+
+    interface _UntagGlobalResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_global_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagGlobalResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagGlobalResourceResponse
 
     interface _UntagResourceResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -1052,6 +1653,11 @@ module Aws::MediaConnect
             vpc_interface_adapter: untyped
           }
         ]
+      },
+      ?flow_size: String,
+      ?encoding_config: {
+        encoding_profile: String,
+        video_max_bitrate: Integer
       }
     ) -> _UpdateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowResponse
 
@@ -1160,7 +1766,21 @@ module Aws::MediaConnect
       },
       ?output_status: String,
       ?ndi_program_name: String,
-      ?ndi_speed_hq_quality: Integer
+      ?ndi_speed_hq_quality: Integer,
+      ?router_integration_state: String,
+      ?router_integration_transit_encryption: {
+        encryption_key_type: String,
+        encryption_key_configuration: {
+          secrets_manager: {
+            secret_arn: String,
+            role_arn: String
+          },
+          automatic: {
+          }
+        }
+      },
+      ?ndi_output_timecode_source: String,
+      ?ndi_audio_reference_level: Integer
     ) -> _UpdateFlowOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowOutputResponse
 
     interface _UpdateFlowSourceResponse
@@ -1216,6 +1836,22 @@ module Aws::MediaConnect
         vpc_interface_attachment: {
           vpc_interface_name: untyped
         }
+      },
+      ?ndi_source_settings: {
+        source_name: String,
+        audio_reference_level: Integer
+      },
+      ?router_integration_state: String,
+      ?router_integration_transit_decryption: {
+        encryption_key_type: String,
+        encryption_key_configuration: {
+          secrets_manager: {
+            secret_arn: String,
+            role_arn: String
+          },
+          automatic: {
+          }
+        }
       }
     ) -> _UpdateFlowSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowSourceResponse
 
@@ -1228,5 +1864,247 @@ module Aws::MediaConnect
       ?bridge_placement: String,
       ?gateway_instance_arn: String
     ) -> _UpdateGatewayInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayInstanceResponse
+
+    interface _UpdateRouterInputResponse
+      include Smithy::Client::_Response[Types::UpdateRouterInputResponse]
+      def router_input: () -> Types::RouterInput?
+    end
+    def update_router_input: (
+      ?arn: String,
+      ?name: String,
+      ?configuration: {
+        standard: {
+          network_interface_arn: String,
+          protocol_configuration: {
+            rist: {
+              port: Integer,
+              recovery_latency_milliseconds: Integer
+            },
+            srt_listener: {
+              port: untyped,
+              minimum_latency_milliseconds: untyped,
+              decryption_configuration: {
+                encryption_key: {
+                  secret_arn: String,
+                  role_arn: String
+                }
+              }
+            },
+            srt_caller: {
+              source_address: String,
+              source_port: untyped,
+              minimum_latency_milliseconds: untyped,
+              stream_id: untyped,
+              decryption_configuration: untyped
+            },
+            rtp: {
+              port: untyped,
+              forward_error_correction: String
+            }
+          },
+          protocol: String
+        },
+        media_live_channel: {
+          media_live_channel_arn: String,
+          media_live_pipeline_id: String,
+          media_live_channel_output_name: untyped,
+          source_transit_decryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: untyped,
+              automatic: {
+              }
+            }
+          }
+        },
+        failover: {
+          network_interface_arn: untyped,
+          protocol_configurations: Array[
+            {
+              rist: untyped,
+              srt_listener: untyped,
+              srt_caller: untyped,
+              rtp: untyped
+            }
+          ],
+          source_priority_mode: String,
+          primary_source_index: untyped
+        },
+        media_connect_flow: {
+          flow_arn: String,
+          flow_output_arn: String,
+          source_transit_decryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: untyped,
+              automatic: untyped
+            }
+          }
+        },
+        merge: {
+          network_interface_arn: untyped,
+          protocol_configurations: Array[
+            {
+              rtp: untyped,
+              rist: untyped
+            }
+          ],
+          merge_recovery_window_milliseconds: untyped
+        }
+      },
+      ?maximum_bitrate: Integer,
+      ?routing_scope: String,
+      ?tier: String,
+      ?transit_encryption: {
+        encryption_key_type: String,
+        encryption_key_configuration: {
+          secrets_manager: {
+            secret_arn: String,
+            role_arn: String
+          },
+          automatic: {
+          }
+        }
+      },
+      ?maintenance_configuration: {
+        preferred_day_time: {
+          day: String,
+          time: String
+        },
+        default: {
+        }
+      },
+      ?content_quality_analysis_configuration: {
+        content_level: {
+          black_frames: {
+            state: String,
+            threshold_seconds: Integer
+          },
+          frozen_frames: {
+            state: untyped,
+            threshold_seconds: untyped
+          },
+          silent_audio: {
+            state: untyped,
+            threshold_seconds: untyped
+          }
+        }
+      }
+    ) -> _UpdateRouterInputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRouterInputResponse
+
+    interface _UpdateRouterNetworkInterfaceResponse
+      include Smithy::Client::_Response[Types::UpdateRouterNetworkInterfaceResponse]
+      def router_network_interface: () -> Types::RouterNetworkInterface?
+    end
+    def update_router_network_interface: (
+      ?arn: String,
+      ?name: String,
+      ?configuration: {
+        public: {
+          allow_rules: Array[
+            {
+              cidr: String
+            }
+          ]
+        },
+        vpc: {
+          security_group_ids: Array[String],
+          subnet_id: untyped
+        }
+      }
+    ) -> _UpdateRouterNetworkInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRouterNetworkInterfaceResponse
+
+    interface _UpdateRouterOutputResponse
+      include Smithy::Client::_Response[Types::UpdateRouterOutputResponse]
+      def router_output: () -> Types::RouterOutput?
+    end
+    def update_router_output: (
+      ?arn: String,
+      ?name: String,
+      ?configuration: {
+        standard: {
+          network_interface_arn: String,
+          protocol_configuration: {
+            rist: {
+              destination_address: String,
+              destination_port: Integer
+            },
+            srt_listener: {
+              port: untyped,
+              minimum_latency_milliseconds: Integer,
+              encryption_configuration: {
+                encryption_key: {
+                  secret_arn: String,
+                  role_arn: String
+                }
+              }
+            },
+            rtmp_push: {
+              destination_address: untyped,
+              destination_port: untyped,
+              application_name: untyped,
+              stream_name: untyped,
+              tls_encryption: {
+                encryption_type: String,
+                encryption_configuration: {
+                  public: {
+                  }
+                }
+              }
+            },
+            srt_caller: {
+              destination_address: untyped,
+              destination_port: untyped,
+              minimum_latency_milliseconds: untyped,
+              stream_id: untyped,
+              encryption_configuration: untyped
+            },
+            rtp: {
+              destination_address: untyped,
+              destination_port: untyped,
+              forward_error_correction: String
+            }
+          },
+          protocol: String
+        },
+        media_connect_flow: {
+          flow_arn: String,
+          flow_source_arn: String,
+          destination_transit_encryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: untyped,
+              automatic: {
+              }
+            }
+          }
+        },
+        media_live_input: {
+          media_live_input_arn: String,
+          media_live_pipeline_id: String,
+          destination_transit_encryption: {
+            encryption_key_type: String,
+            encryption_key_configuration: {
+              secrets_manager: untyped,
+              automatic: untyped
+            }
+          }
+        }
+      },
+      ?maximum_bitrate: Integer,
+      ?routing_scope: String,
+      ?tier: String,
+      ?maintenance_configuration: {
+        preferred_day_time: {
+          day: String,
+          time: String
+        },
+        default: {
+        }
+      },
+      ?fabric_configuration: {
+        recovery_latency_mode: String
+      }
+    ) -> _UpdateRouterOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRouterOutputResponse
   end
 end

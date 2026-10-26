@@ -42,7 +42,10 @@ module Aws::Athena
     CapacityReservationStatus: EnumShape
     CapacityReservationsList: ListShape
     CatalogNameString: StringShape
+    Classification: StructureShape
+    ClassificationList: ListShape
     ClientRequestToken: StringShape
+    CloudWatchLoggingConfiguration: StructureShape
     CodeBlock: StringShape
     Column: StructureShape
     ColumnInfo: StructureShape
@@ -91,6 +94,7 @@ module Aws::Athena
     DeleteWorkGroupInput: StructureShape
     DeleteWorkGroupOutput: StructureShape
     DescriptionString: StringShape
+    DpuCount: FloatShape
     EncryptionConfiguration: StructureShape
     EncryptionOption: EnumShape
     EngineConfiguration: StructureShape
@@ -137,6 +141,10 @@ module Aws::Athena
     GetQueryResultsOutput: StructureShape
     GetQueryRuntimeStatisticsInput: StructureShape
     GetQueryRuntimeStatisticsOutput: StructureShape
+    GetResourceDashboardRequest: StructureShape
+    GetResourceDashboardResponse: StructureShape
+    GetSessionEndpointRequest: StructureShape
+    GetSessionEndpointResponse: StructureShape
     GetSessionRequest: StructureShape
     GetSessionResponse: StructureShape
     GetSessionStatusRequest: StructureShape
@@ -188,7 +196,14 @@ module Aws::Athena
     ListTagsForResourceOutput: StructureShape
     ListWorkGroupsInput: StructureShape
     ListWorkGroupsOutput: StructureShape
+    LogGroupName: StringShape
+    LogStreamNamePrefix: StringShape
+    LogTypeKey: StringShape
+    LogTypeValue: StringShape
+    LogTypeValuesList: ListShape
+    LogTypesMap: MapShape
     Long: IntegerShape
+    ManagedLoggingConfiguration: StructureShape
     ManagedQueryResultsConfiguration: StructureShape
     ManagedQueryResultsConfigurationUpdates: StructureShape
     ManagedQueryResultsEncryptionConfiguration: StructureShape
@@ -210,6 +225,7 @@ module Aws::Athena
     MaxTagsCount: IntegerShape
     MaxWorkGroupsCount: IntegerShape
     MetadataException: StructureShape
+    MonitoringConfiguration: StructureShape
     NameString: StringShape
     NamedQuery: StructureShape
     NamedQueryDescriptionString: StringShape
@@ -264,6 +280,8 @@ module Aws::Athena
     Row: StructureShape
     RowList: ListShape
     S3AclOption: EnumShape
+    S3LoggingConfiguration: StructureShape
+    S3OutputLocation: StringShape
     S3Uri: StringShape
     SessionAlreadyExistsException: StructureShape
     SessionConfiguration: StructureShape

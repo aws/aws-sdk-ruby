@@ -26,6 +26,7 @@ module Aws::Glacier
   # * {InvalidParameterValueException}
   # * {LimitExceededException}
   # * {MissingParameterValueException}
+  # * {NoLongerSupportedException}
   # * {PolicyEnforcedException}
   # * {RequestTimeoutException}
   # * {ResourceNotFoundException}
@@ -131,6 +132,30 @@ module Aws::Glacier
       end
     end
 
+    # <p>Returned if the request was made by a customer with no Amazon Glacier storage. The request is denied as the API is no longer supported for new customers. Please use Amazon S3 Glacier storage classes instead.</p>
+    class NoLongerSupportedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Glacier::Types::NoLongerSupportedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>Client</p>
+      def type
+        @data[:type]
+      end
+
+      # <p>400 Bad Request</p>
+      def code
+        @data[:code]
+      end
+
+      # <p>This API is no longer supported for new accounts. Please use Amazon S3 Glacier storage classes instead.</p>
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>Returned if a retrieval job would exceed the current data policy's retrieval rate
     #          limit. For more information about data retrieval policies,</p>
     class PolicyEnforcedException < Smithy::Client::ServiceError
@@ -156,7 +181,7 @@ module Aws::Glacier
       end
     end
 
-    # <p>Returned if, when uploading an archive, Amazon S3 Glacier times out while receiving the
+    # <p>Returned if, when uploading an archive, Amazon Glacier times out while receiving the
     #          upload.</p>
     class RequestTimeoutException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -175,7 +200,7 @@ module Aws::Glacier
         @data[:code]
       end
 
-      # <p>Returned if, when uploading an archive, Amazon S3 Glacier times out while receiving the
+      # <p>Returned if, when uploading an archive, Amazon Glacier times out while receiving the
       #          upload.</p>
       def message
         @data[:message]

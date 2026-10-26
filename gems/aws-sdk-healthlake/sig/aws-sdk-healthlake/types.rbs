@@ -12,10 +12,110 @@ module Aws::HealthLake
       attr_accessor message: String?
     end
 
+    class AgentInputMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor type: String?
+    end
+
+    module AgentInputMessageType
+      NORMAL: String
+      USER_CONFIRMATION_RESPONSE: String
+    end
+
+    class AgentMessageOutOfContextException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AgentOutputMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+        ?type: String,
+        ?options_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+      attr_accessor type: String?
+      attr_accessor options_list: Array[String]?
+    end
+
+    module AgentOutputMessageType
+      INITIAL_GREETING: String
+      NORMAL: String
+      USER_CONFIRMATION_REQUEST: String
+      COMPLETE: String
+      ERROR: String
+      OPTIONS: String
+      CHOICES: String
+    end
+
+    class AnalyticsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module AnalyticsStatus
+      ENABLED: String
+      ENABLING: String
+      DISABLED: String
+      DISABLING: String
+      PAUSING: String
+      PAUSED: String
+    end
+
     module AuthorizationStrategy
       SMARTV1: String
       SMART_ON_FHIR: String
       AWS_AUTH: String
+    end
+
+    class BackupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?backup_type: String,
+        ?retention_period_in_days: Integer,
+        ?backup_tags_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor backup_type: String?
+      attr_accessor retention_period_in_days: Integer?
+      attr_accessor backup_tags_enabled: bool?
+    end
+
+    module BackupStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module BackupType
+      CONTINUOUS: String
     end
 
     module CmkType
@@ -34,6 +134,100 @@ module Aws::HealthLake
       attr_accessor message: String?
     end
 
+    class ContinuousBackupRestoreConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restore_point_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restore_point_time: Time?
+    end
+
+    class ConversationNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateDataTransformationProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_format: String,
+        ?source: Types::CreateDataTransformationProfileSource,
+        ?kms_key_id: String,
+        ?profile_description: String,
+        ?profile_name: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_format: String?
+      attr_accessor source: Types::CreateDataTransformationProfileSource?
+      attr_accessor kms_key_id: String?
+      attr_accessor profile_description: String?
+      attr_accessor profile_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateDataTransformationProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?version: Integer,
+        ?source_format: String,
+        ?target_format: String,
+        ?profile_name: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor version: Integer?
+      attr_accessor source_format: String?
+      attr_accessor target_format: String?
+      attr_accessor profile_name: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class CreateDataTransformationProfileSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?starter_profile: Types::StarterProfileSource,
+        ?existing_versioned_profile_id: Types::ExistingVersionedProfileSource,
+        ?profile_mapping: Types::ProfileMappingSource,
+        ?sample_data: Types::SampleDataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor starter_profile: Types::StarterProfileSource?
+      attr_accessor existing_versioned_profile_id: Types::ExistingVersionedProfileSource?
+      attr_accessor profile_mapping: Types::ProfileMappingSource?
+      attr_accessor sample_data: Types::SampleDataSource?
+
+      class StarterProfile < CreateDataTransformationProfileSource
+      end
+      class ExistingVersionedProfileId < CreateDataTransformationProfileSource
+      end
+      class ProfileMapping < CreateDataTransformationProfileSource
+      end
+      class SampleData < CreateDataTransformationProfileSource
+      end
+      class Unknown < CreateDataTransformationProfileSource
+      end
+    end
+
     class CreateFHIRDatastoreRequest
       include Smithy::Schema::Structure
 
@@ -45,6 +239,10 @@ module Aws::HealthLake
         ?client_token: String,
         ?tags: Array[Types::Tag],
         ?identity_provider_configuration: Types::IdentityProviderConfiguration,
+        ?analytics_configuration: Types::AnalyticsConfiguration,
+        ?nlp_configuration: Types::NlpConfiguration,
+        ?profile_configuration: Types::ProfileConfiguration,
+        ?backup_configuration: Types::BackupConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -55,6 +253,10 @@ module Aws::HealthLake
       attr_accessor client_token: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration?
+      attr_accessor analytics_configuration: Types::AnalyticsConfiguration?
+      attr_accessor nlp_configuration: Types::NlpConfiguration?
+      attr_accessor profile_configuration: Types::ProfileConfiguration?
+      attr_accessor backup_configuration: Types::BackupConfiguration?
     end
 
     class CreateFHIRDatastoreResponse
@@ -72,6 +274,84 @@ module Aws::HealthLake
       attr_accessor datastore_arn: String?
       attr_accessor datastore_status: String?
       attr_accessor datastore_endpoint: String?
+    end
+
+    class DataTransformationProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?version: Integer,
+        ?source_format: String,
+        ?target_format: String,
+        ?profile_name: String,
+        ?profile_description: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor version: Integer?
+      attr_accessor source_format: String?
+      attr_accessor target_format: String?
+      attr_accessor profile_name: String?
+      attr_accessor profile_description: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class DataTransformationProfileVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?version: Integer,
+        ?source_format: String,
+        ?target_format: String,
+        ?profile_name: String,
+        ?change_description: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor version: Integer?
+      attr_accessor source_format: String?
+      attr_accessor target_format: String?
+      attr_accessor profile_name: String?
+      attr_accessor change_description: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class DataTransformationS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class DatastoreBackupStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::BackupConfiguration,
+        ?backup_enabled_at: Time,
+        ?earliest_restore_point: Time,
+        ?latest_restore_point: Time,
+        ?scheduled_permanent_deletion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::BackupConfiguration?
+      attr_accessor backup_enabled_at: Time?
+      attr_accessor earliest_restore_point: Time?
+      attr_accessor latest_restore_point: Time?
+      attr_accessor scheduled_permanent_deletion_time: Time?
     end
 
     class DatastoreFilter
@@ -106,6 +386,10 @@ module Aws::HealthLake
         ?preload_data_config: Types::PreloadDataConfig,
         ?identity_provider_configuration: Types::IdentityProviderConfiguration,
         ?error_cause: Types::ErrorCause,
+        ?nlp_configuration: Types::NlpConfiguration,
+        ?analytics_configuration: Types::AnalyticsConfiguration,
+        ?profile_configuration: Types::ProfileConfiguration,
+        ?backup_status_info: Types::DatastoreBackupStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -120,6 +404,10 @@ module Aws::HealthLake
       attr_accessor preload_data_config: Types::PreloadDataConfig?
       attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration?
       attr_accessor error_cause: Types::ErrorCause?
+      attr_accessor nlp_configuration: Types::NlpConfiguration?
+      attr_accessor analytics_configuration: Types::AnalyticsConfiguration?
+      attr_accessor profile_configuration: Types::ProfileConfiguration?
+      attr_accessor backup_status_info: Types::DatastoreBackupStatus?
     end
 
     module DatastoreStatus
@@ -128,6 +416,34 @@ module Aws::HealthLake
       DELETING: String
       DELETED: String
       CREATE_FAILED: String
+      UPDATING: String
+      UPDATE_FAILED: String
+    end
+
+    class DeleteDataTransformationProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class DeleteDataTransformationProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?profile_name: String,
+        ?deletion_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor profile_name: String?
+      attr_accessor deletion_time: Time?
     end
 
     class DeleteFHIRDatastoreRequest
@@ -156,6 +472,28 @@ module Aws::HealthLake
       attr_accessor datastore_arn: String?
       attr_accessor datastore_status: String?
       attr_accessor datastore_endpoint: String?
+    end
+
+    class DescribeDataTransformationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeDataTransformationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformation_job_properties: Types::TransformationJobProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformation_job_properties: Types::TransformationJobProperties?
     end
 
     class DescribeFHIRDatastoreRequest
@@ -246,6 +584,19 @@ module Aws::HealthLake
       attr_accessor error_category: String?
     end
 
+    class ExistingVersionedProfileSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor version: Integer?
+    end
+
     class ExportJobProperties
       include Smithy::Schema::Structure
 
@@ -275,6 +626,57 @@ module Aws::HealthLake
 
     module FHIRVersion
       R4: String
+    end
+
+    class FailedDependencyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetDataTransformationProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?profile_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor profile_version: Integer?
+    end
+
+    class GetDataTransformationProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?version: Integer,
+        ?source_format: String,
+        ?target_format: String,
+        ?profile_mapping: Hash[String, String],
+        ?profile_name: String,
+        ?profile_description: String,
+        ?change_description: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor version: Integer?
+      attr_accessor source_format: String?
+      attr_accessor target_format: String?
+      attr_accessor profile_mapping: Hash[String, String]?
+      attr_accessor profile_name: String?
+      attr_accessor profile_description: String?
+      attr_accessor change_description: String?
+      attr_accessor last_updated_at: Time?
     end
 
     class IdentityProviderConfiguration
@@ -365,7 +767,16 @@ module Aws::HealthLake
         ?total_number_of_resources_imported: Integer,
         ?total_number_of_resources_with_customer_error: Integer,
         ?total_number_of_files_read_with_customer_error: Integer,
+        ?total_number_of_scanned_non_fhir_files: Integer,
+        ?total_size_of_scanned_non_fhir_files_in_mb: Float,
+        ?total_number_of_imported_non_fhir_files: Integer,
+        ?total_number_of_non_fhir_resources_scanned: Integer,
+        ?total_number_of_non_fhir_resources_imported: Integer,
+        ?total_number_of_non_fhir_resources_with_customer_error: Integer,
+        ?total_number_of_non_fhir_files_read_with_customer_error: Integer,
         ?throughput: Float,
+        ?total_files_converted: Integer,
+        ?total_resources_generated: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -376,7 +787,16 @@ module Aws::HealthLake
       attr_accessor total_number_of_resources_imported: Integer?
       attr_accessor total_number_of_resources_with_customer_error: Integer?
       attr_accessor total_number_of_files_read_with_customer_error: Integer?
+      attr_accessor total_number_of_scanned_non_fhir_files: Integer?
+      attr_accessor total_size_of_scanned_non_fhir_files_in_mb: Float?
+      attr_accessor total_number_of_imported_non_fhir_files: Integer?
+      attr_accessor total_number_of_non_fhir_resources_scanned: Integer?
+      attr_accessor total_number_of_non_fhir_resources_imported: Integer?
+      attr_accessor total_number_of_non_fhir_resources_with_customer_error: Integer?
+      attr_accessor total_number_of_non_fhir_files_read_with_customer_error: Integer?
       attr_accessor throughput: Float?
+      attr_accessor total_files_converted: Integer?
+      attr_accessor total_resources_generated: Integer?
     end
 
     module JobStatus
@@ -403,6 +823,96 @@ module Aws::HealthLake
 
       attr_accessor cmk_type: String?
       attr_accessor kms_key_id: String?
+    end
+
+    class ListDataTransformationJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?job_status: String,
+        ?job_name: String,
+        ?submitted_after: Time,
+        ?submitted_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor job_status: String?
+      attr_accessor job_name: String?
+      attr_accessor submitted_after: Time?
+      attr_accessor submitted_before: Time?
+    end
+
+    class ListDataTransformationJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::TransformationJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::TransformationJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataTransformationProfileVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataTransformationProfileVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::DataTransformationProfileVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::DataTransformationProfileVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataTransformationProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_format: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_format: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataTransformationProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::DataTransformationProfileSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::DataTransformationProfileSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListFHIRDatastoresRequest
@@ -527,6 +1037,35 @@ module Aws::HealthLake
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    class NlpConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module NlpStatus
+      ENABLED: String
+      ENABLING: String
+      DISABLED: String
+      DISABLING: String
+    end
+
+    class NotImplementedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class OutputDataConfig
       include Smithy::Schema::Union
 
@@ -558,6 +1097,66 @@ module Aws::HealthLake
       SYNTHEA: String
     end
 
+    class ProfileConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_profiles: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_profiles: Array[String]?
+    end
+
+    class ProfileMappingSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_mapping: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_mapping: Hash[String, String]?
+    end
+
+    class PublishDataTransformationProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?source_format: String,
+        ?from_existing_version: Integer,
+        ?change_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor source_format: String?
+      attr_accessor from_existing_version: Integer?
+      attr_accessor change_description: String?
+    end
+
+    class PublishDataTransformationProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?version: Integer,
+        ?source_format: String,
+        ?target_format: String,
+        ?profile_name: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor version: Integer?
+      attr_accessor source_format: String?
+      attr_accessor target_format: String?
+      attr_accessor profile_name: String?
+      attr_accessor last_updated_at: Time?
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -567,6 +1166,68 @@ module Aws::HealthLake
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class RestoreConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?continuous_backup_restore_configuration: Types::ContinuousBackupRestoreConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor continuous_backup_restore_configuration: Types::ContinuousBackupRestoreConfiguration?
+
+      class ContinuousBackupRestoreConfiguration < RestoreConfiguration
+      end
+      class Unknown < RestoreConfiguration
+      end
+    end
+
+    class RestoreFHIRDatastoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_datastore_id: String,
+        ?restore_configuration: Types::RestoreConfiguration,
+        ?datastore_name: String,
+        ?sse_configuration: Types::SseConfiguration,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+        ?identity_provider_configuration: Types::IdentityProviderConfiguration,
+        ?analytics_configuration: Types::AnalyticsConfiguration,
+        ?nlp_configuration: Types::NlpConfiguration,
+        ?profile_configuration: Types::ProfileConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_datastore_id: String?
+      attr_accessor restore_configuration: Types::RestoreConfiguration?
+      attr_accessor datastore_name: String?
+      attr_accessor sse_configuration: Types::SseConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration?
+      attr_accessor analytics_configuration: Types::AnalyticsConfiguration?
+      attr_accessor nlp_configuration: Types::NlpConfiguration?
+      attr_accessor profile_configuration: Types::ProfileConfiguration?
+    end
+
+    class RestoreFHIRDatastoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?datastore_arn: String,
+        ?datastore_status: String,
+        ?datastore_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor datastore_arn: String?
+      attr_accessor datastore_status: String?
+      attr_accessor datastore_endpoint: String?
     end
 
     class S3Configuration
@@ -582,6 +1243,33 @@ module Aws::HealthLake
       attr_accessor kms_key_id: String?
     end
 
+    class SampleDataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SourceFormat
+      CCDA: String
+      CSV: String
+    end
+
     class SseConfiguration
       include Smithy::Schema::Structure
 
@@ -591,6 +1279,44 @@ module Aws::HealthLake
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor kms_encryption_config: Types::KmsEncryptionConfig?
+    end
+
+    class StartDataTransformationJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_data_config: Types::TransformationInputDataConfig,
+        ?output_data_config: Types::TransformationOutputDataConfig,
+        ?data_access_role_arn: String,
+        ?client_token: String,
+        ?job_name: String,
+        ?profile_id: String,
+        ?drift_detection_enabled: bool,
+        ?provenance_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_data_config: Types::TransformationInputDataConfig?
+      attr_accessor output_data_config: Types::TransformationOutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor job_name: String?
+      attr_accessor profile_id: String?
+      attr_accessor drift_detection_enabled: bool?
+      attr_accessor provenance_enabled: bool?
+    end
+
+    class StartDataTransformationJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
     end
 
     class StartFHIRExportJobRequest
@@ -638,6 +1364,10 @@ module Aws::HealthLake
         ?data_access_role_arn: String,
         ?client_token: String,
         ?validation_level: String,
+        ?profile_id: String,
+        ?input_format: String,
+        ?drift_detection_enabled: bool,
+        ?provenance_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -648,6 +1378,10 @@ module Aws::HealthLake
       attr_accessor data_access_role_arn: String?
       attr_accessor client_token: String?
       attr_accessor validation_level: String?
+      attr_accessor profile_id: String?
+      attr_accessor input_format: String?
+      attr_accessor drift_detection_enabled: bool?
+      attr_accessor provenance_enabled: bool?
     end
 
     class StartFHIRImportJobResponse
@@ -663,6 +1397,17 @@ module Aws::HealthLake
       attr_accessor job_id: String?
       attr_accessor job_status: String?
       attr_accessor datastore_id: String?
+    end
+
+    class StarterProfileSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?starter_profile_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor starter_profile_name: String?
     end
 
     class Tag
@@ -700,7 +1445,143 @@ module Aws::HealthLake
 
     end
 
+    module TargetFormat
+      FHIR_R4: String
+    end
+
     class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TransformationInputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?source_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor source_format: String?
+    end
+
+    class TransformationJobProgressReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_files_scanned: Integer,
+        ?total_files_converted: Integer,
+        ?total_files_failed: Integer,
+        ?total_resources_generated: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_files_scanned: Integer?
+      attr_accessor total_files_converted: Integer?
+      attr_accessor total_files_failed: Integer?
+      attr_accessor total_resources_generated: Integer?
+    end
+
+    class TransformationJobProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_status: String,
+        ?input_data_config: Types::TransformationInputDataConfig,
+        ?output_data_config: Types::TransformationOutputDataConfig,
+        ?data_access_role_arn: String,
+        ?submit_time: Time,
+        ?job_name: String,
+        ?profile_id: String,
+        ?profile_name: String,
+        ?profile_version: Integer,
+        ?end_time: Time,
+        ?drift_detection_enabled: bool,
+        ?provenance_enabled: bool,
+        ?message: String,
+        ?job_progress_report: Types::TransformationJobProgressReport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor input_data_config: Types::TransformationInputDataConfig?
+      attr_accessor output_data_config: Types::TransformationOutputDataConfig?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor submit_time: Time?
+      attr_accessor job_name: String?
+      attr_accessor profile_id: String?
+      attr_accessor profile_name: String?
+      attr_accessor profile_version: Integer?
+      attr_accessor end_time: Time?
+      attr_accessor drift_detection_enabled: bool?
+      attr_accessor provenance_enabled: bool?
+      attr_accessor message: String?
+      attr_accessor job_progress_report: Types::TransformationJobProgressReport?
+    end
+
+    module TransformationJobStatus
+      SUBMITTED: String
+      QUEUED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      COMPLETED_WITH_ERRORS: String
+      FAILED: String
+    end
+
+    class TransformationJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_status: String,
+        ?submit_time: Time,
+        ?job_name: String,
+        ?end_time: Time,
+        ?source_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_status: String?
+      attr_accessor submit_time: Time?
+      attr_accessor job_name: String?
+      attr_accessor end_time: Time?
+      attr_accessor source_format: String?
+    end
+
+    class TransformationOutputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_configuration: Types::DataTransformationS3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::DataTransformationS3Configuration?
+    end
+
+    class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedMIMETypeException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -731,6 +1612,104 @@ module Aws::HealthLake
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class UpdateDataTransformationProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?profile_mapping: Hash[String, String],
+        ?change_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor profile_mapping: Hash[String, String]?
+      attr_accessor change_description: String?
+    end
+
+    class UpdateDataTransformationProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?source_format: String,
+        ?target_format: String,
+        ?profile_name: String,
+        ?last_updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor source_format: String?
+      attr_accessor target_format: String?
+      attr_accessor profile_name: String?
+      attr_accessor last_updated_at: Time?
+    end
+
+    class UpdateFHIRDatastoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_id: String,
+        ?datastore_name: String,
+        ?analytics_configuration: Types::AnalyticsConfiguration,
+        ?nlp_configuration: Types::NlpConfiguration,
+        ?profile_configuration: Types::ProfileConfiguration,
+        ?identity_provider_configuration: Types::IdentityProviderConfiguration,
+        ?backup_configuration: Types::BackupConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_id: String?
+      attr_accessor datastore_name: String?
+      attr_accessor analytics_configuration: Types::AnalyticsConfiguration?
+      attr_accessor nlp_configuration: Types::NlpConfiguration?
+      attr_accessor profile_configuration: Types::ProfileConfiguration?
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration?
+      attr_accessor backup_configuration: Types::BackupConfiguration?
+    end
+
+    class UpdateFHIRDatastoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datastore_properties: Types::DatastoreProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datastore_properties: Types::DatastoreProperties?
+    end
+
+    class UpdateProfileWithAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?source_format: String,
+        ?input_message: Types::AgentInputMessage,
+        ?conversation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor source_format: String?
+      attr_accessor input_message: Types::AgentInputMessage?
+      attr_accessor conversation_id: String?
+    end
+
+    class UpdateProfileWithAgentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_response: Types::AgentOutputMessage,
+        ?conversation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_response: Types::AgentOutputMessage?
+      attr_accessor conversation_id: String?
     end
 
     class ValidationException

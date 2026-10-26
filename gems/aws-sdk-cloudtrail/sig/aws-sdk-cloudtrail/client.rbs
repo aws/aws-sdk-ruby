@@ -194,6 +194,7 @@ module Aws::CloudTrail
       def cloud_watch_logs_role_arn: () -> String?
       def kms_key_id: () -> String?
       def is_organization_trail: () -> bool?
+      def recursive_logging: () -> bool?
     end
     def create_trail: (
       ?name: String,
@@ -212,7 +213,8 @@ module Aws::CloudTrail
           key: String,
           value: String
         }
-      ]
+      ],
+      ?recursive_logging: bool
     ) -> _CreateTrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrailResponse
 
     interface _DeleteChannelResponse
@@ -349,11 +351,14 @@ module Aws::CloudTrail
 
     interface _GetEventConfigurationResponse
       include Smithy::Client::_Response[Types::GetEventConfigurationResponse]
+      def trail_arn: () -> String?
       def event_data_store_arn: () -> String?
       def max_event_size: () -> String?
       def context_key_selectors: () -> Array[Types::ContextKeySelector]?
+      def aggregation_configurations: () -> Array[Types::AggregationConfiguration]?
     end
     def get_event_configuration: (
+      ?trail_name: String,
       ?event_data_store: String
     ) -> _GetEventConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventConfigurationResponse
 
@@ -530,8 +535,24 @@ module Aws::CloudTrail
       ?next_token: String
     ) -> _ListImportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportsResponse
 
+    interface _ListInsightsDataResponse
+      include Smithy::Client::_Response[Types::ListInsightsDataResponse]
+      def events: () -> Array[Types::Event]?
+      def next_token: () -> String?
+    end
+    def list_insights_data: (
+      ?insight_source: String,
+      ?data_type: String,
+      ?dimensions: Hash[String, String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInsightsDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInsightsDataResponse
+
     interface _ListInsightsMetricDataResponse
       include Smithy::Client::_Response[Types::ListInsightsMetricDataResponse]
+      def trail_arn: () -> String?
       def event_source: () -> String?
       def event_name: () -> String?
       def insight_type: () -> String?
@@ -541,6 +562,7 @@ module Aws::CloudTrail
       def next_token: () -> String?
     end
     def list_insights_metric_data: (
+      ?trail_name: String,
       ?event_source: String,
       ?event_name: String,
       ?insight_type: String,
@@ -618,17 +640,26 @@ module Aws::CloudTrail
 
     interface _PutEventConfigurationResponse
       include Smithy::Client::_Response[Types::PutEventConfigurationResponse]
+      def trail_arn: () -> String?
       def event_data_store_arn: () -> String?
       def max_event_size: () -> String?
       def context_key_selectors: () -> Array[Types::ContextKeySelector]?
+      def aggregation_configurations: () -> Array[Types::AggregationConfiguration]?
     end
     def put_event_configuration: (
+      ?trail_name: String,
       ?event_data_store: String,
       ?max_event_size: String,
       ?context_key_selectors: Array[
         {
           type: String,
           equals: Array[String]
+        }
+      ],
+      ?aggregation_configurations: Array[
+        {
+          templates: Array[String],
+          event_category: String
         }
       ]
     ) -> _PutEventConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEventConfigurationResponse
@@ -683,7 +714,8 @@ module Aws::CloudTrail
       ?trail_name: String,
       ?insight_selectors: Array[
         {
-          insight_type: String
+          insight_type: String,
+          event_categories: Array[String]
         }
       ],
       ?event_data_store: String,
@@ -950,6 +982,7 @@ module Aws::CloudTrail
       def cloud_watch_logs_role_arn: () -> String?
       def kms_key_id: () -> String?
       def is_organization_trail: () -> bool?
+      def recursive_logging: () -> bool?
     end
     def update_trail: (
       ?name: String,
@@ -962,7 +995,8 @@ module Aws::CloudTrail
       ?cloud_watch_logs_log_group_arn: String,
       ?cloud_watch_logs_role_arn: String,
       ?kms_key_id: String,
-      ?is_organization_trail: bool
+      ?is_organization_trail: bool,
+      ?recursive_logging: bool
     ) -> _UpdateTrailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrailResponse
   end
 end

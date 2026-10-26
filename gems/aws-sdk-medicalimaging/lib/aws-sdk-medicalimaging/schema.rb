@@ -9,6 +9,7 @@ module Aws::MedicalImaging
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#Arn", name: "Arn", traits: {"smithy.api#pattern" => "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:medical-imaging:[a-z0-9-]+:[0-9]{12}:datastore/[0-9a-z]{32}(/imageset/[0-9a-z]{32})?$"})
     AwsAccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#AwsAccountId", name: "AwsAccountId", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\d+$"})
+    BadRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#BadRequestException", name: "BadRequestException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9._-]+$"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CopiableAttributes = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#CopiableAttributes", name: "CopiableAttributes", traits: {"smithy.api#length" => {"min" => 1, "max" => 260000}, "smithy.api#sensitive" => {}})
@@ -21,27 +22,27 @@ module Aws::MedicalImaging
     CopySourceImageSetProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#CopySourceImageSetProperties", name: "CopySourceImageSetProperties")
     CreateDatastoreRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#CreateDatastoreRequest", name: "CreateDatastoreRequest")
     CreateDatastoreResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#CreateDatastoreResponse", name: "CreateDatastoreResponse")
-    DICOMAccessionNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMAccessionNumber", name: "DICOMAccessionNumber", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#sensitive" => {}})
-    DICOMAttribute = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.medicalimaging#DICOMAttribute", name: "DICOMAttribute", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}, "smithy.api#sensitive" => {}})
+    DICOMAccessionNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMAccessionNumber", name: "DICOMAccessionNumber", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#sensitive" => {}})
+    DICOMAttribute = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.medicalimaging#DICOMAttribute", name: "DICOMAttribute", traits: {"smithy.api#length" => {"min" => 1, "max" => 30000}, "smithy.api#sensitive" => {}})
     DICOMImportJobProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DICOMImportJobProperties", name: "DICOMImportJobProperties")
     DICOMImportJobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medicalimaging#DICOMImportJobSummaries", name: "DICOMImportJobSummaries")
     DICOMImportJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DICOMImportJobSummary", name: "DICOMImportJobSummary")
     DICOMNumberOfStudyRelatedInstances = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medicalimaging#DICOMNumberOfStudyRelatedInstances", name: "DICOMNumberOfStudyRelatedInstances", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 1000000}})
     DICOMNumberOfStudyRelatedSeries = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medicalimaging#DICOMNumberOfStudyRelatedSeries", name: "DICOMNumberOfStudyRelatedSeries", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 1000000}})
-    DICOMPatientBirthDate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMPatientBirthDate", name: "DICOMPatientBirthDate", traits: {"smithy.api#length" => {"min" => 0, "max" => 18}, "smithy.api#sensitive" => {}})
-    DICOMPatientId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMPatientId", name: "DICOMPatientId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#sensitive" => {}})
-    DICOMPatientName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMPatientName", name: "DICOMPatientName", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#sensitive" => {}})
+    DICOMPatientBirthDate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMPatientBirthDate", name: "DICOMPatientBirthDate", traits: {"smithy.api#length" => {"min" => 0, "max" => 36}, "smithy.api#sensitive" => {}})
+    DICOMPatientId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMPatientId", name: "DICOMPatientId", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#sensitive" => {}})
+    DICOMPatientName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMPatientName", name: "DICOMPatientName", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#sensitive" => {}})
     DICOMPatientSex = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMPatientSex", name: "DICOMPatientSex", traits: {"smithy.api#length" => {"min" => 0, "max" => 16}, "smithy.api#sensitive" => {}})
-    DICOMSeriesBodyPart = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMSeriesBodyPart", name: "DICOMSeriesBodyPart", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}, "smithy.api#sensitive" => {}})
-    DICOMSeriesInstanceUID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMSeriesInstanceUID", name: "DICOMSeriesInstanceUID", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^(?:[0-9][0-9]*|0)(\\.(?:[0-9][0-9]*|0))*$", "smithy.api#sensitive" => {}})
-    DICOMSeriesModality = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMSeriesModality", name: "DICOMSeriesModality", traits: {"smithy.api#length" => {"min" => 0, "max" => 16}, "smithy.api#sensitive" => {}})
+    DICOMSeriesBodyPart = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMSeriesBodyPart", name: "DICOMSeriesBodyPart", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#sensitive" => {}})
+    DICOMSeriesInstanceUID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMSeriesInstanceUID", name: "DICOMSeriesInstanceUID", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => "^[0-9.]+$", "smithy.api#sensitive" => {}})
+    DICOMSeriesModality = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMSeriesModality", name: "DICOMSeriesModality", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}, "smithy.api#sensitive" => {}})
     DICOMSeriesNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medicalimaging#DICOMSeriesNumber", name: "DICOMSeriesNumber", traits: {"smithy.api#range" => {"min" => -2147483648, "max" => 2147483647}, "smithy.api#sensitive" => {}})
-    DICOMStudyDate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyDate", name: "DICOMStudyDate", traits: {"smithy.api#length" => {"min" => 0, "max" => 18}, "smithy.api#sensitive" => {}})
+    DICOMStudyDate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyDate", name: "DICOMStudyDate", traits: {"smithy.api#length" => {"min" => 0, "max" => 36}, "smithy.api#sensitive" => {}})
     DICOMStudyDateAndTime = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyDateAndTime", name: "DICOMStudyDateAndTime")
-    DICOMStudyDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyDescription", name: "DICOMStudyDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#sensitive" => {}})
-    DICOMStudyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyId", name: "DICOMStudyId", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#sensitive" => {}})
-    DICOMStudyInstanceUID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyInstanceUID", name: "DICOMStudyInstanceUID", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^(?:[0-9][0-9]*|0)(\\.(?:[0-9][0-9]*|0))*$", "smithy.api#sensitive" => {}})
-    DICOMStudyTime = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyTime", name: "DICOMStudyTime", traits: {"smithy.api#length" => {"min" => 0, "max" => 28}, "smithy.api#sensitive" => {}})
+    DICOMStudyDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyDescription", name: "DICOMStudyDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#sensitive" => {}})
+    DICOMStudyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyId", name: "DICOMStudyId", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#sensitive" => {}})
+    DICOMStudyInstanceUID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyInstanceUID", name: "DICOMStudyInstanceUID", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => "^[0-9.]+$", "smithy.api#sensitive" => {}})
+    DICOMStudyTime = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DICOMStudyTime", name: "DICOMStudyTime", traits: {"smithy.api#length" => {"min" => 0, "max" => 56}, "smithy.api#sensitive" => {}})
     DICOMTags = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DICOMTags", name: "DICOMTags")
     DICOMUpdates = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DICOMUpdates", name: "DICOMUpdates")
     DatastoreId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#DatastoreId", name: "DatastoreId", traits: {"smithy.api#pattern" => "^[0-9a-z]{32}$"})
@@ -55,6 +56,9 @@ module Aws::MedicalImaging
     DeleteDatastoreResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DeleteDatastoreResponse", name: "DeleteDatastoreResponse")
     DeleteImageSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DeleteImageSetRequest", name: "DeleteImageSetRequest")
     DeleteImageSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DeleteImageSetResponse", name: "DeleteImageSetResponse")
+    DicomJsonMetadataImportConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DicomJsonMetadataImportConfiguration", name: "DicomJsonMetadataImportConfiguration")
+    DicomMetadataMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#DicomMetadataMapping", name: "DicomMetadataMapping")
+    DicomMetadataMappings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medicalimaging#DicomMetadataMappings", name: "DicomMetadataMappings", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
     GetDICOMImportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#GetDICOMImportJobRequest", name: "GetDICOMImportJobRequest")
     GetDICOMImportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#GetDICOMImportJobResponse", name: "GetDICOMImportJobResponse")
     GetDatastoreRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#GetDatastoreRequest", name: "GetDatastoreRequest")
@@ -76,6 +80,7 @@ module Aws::MedicalImaging
     ImageSetWorkflowStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medicalimaging#ImageSetWorkflowStatus", name: "ImageSetWorkflowStatus")
     ImageSetsMetadataSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medicalimaging#ImageSetsMetadataSummaries", name: "ImageSetsMetadataSummaries")
     ImageSetsMetadataSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#ImageSetsMetadataSummary", name: "ImageSetsMetadataSummary")
+    ImportConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.medicalimaging#ImportConfiguration", name: "ImportConfiguration")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     JobId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#JobId", name: "JobId", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[0-9a-z]+$"})
     JobName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#JobName", name: "JobName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9._/#-]+$"})
@@ -90,10 +95,13 @@ module Aws::MedicalImaging
     ListImageSetVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#ListImageSetVersionsResponse", name: "ListImageSetVersionsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
-    Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#Message", name: "Message", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[\\w -:]+$"})
+    LosslessStorageFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medicalimaging#LosslessStorageFormat", name: "LosslessStorageFormat")
+    Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#Message", name: "Message", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[\\w -:`]+$"})
     MetadataCopies = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#MetadataCopies", name: "MetadataCopies")
+    MetadataFilePath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#MetadataFilePath", name: "MetadataFilePath", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z0-9!-~]+([a-zA-Z0-9!-~ ]*[a-zA-Z0-9!-~]+)*$"})
     MetadataUpdates = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.medicalimaging#MetadataUpdates", name: "MetadataUpdates")
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 8192}, "smithy.api#pattern" => "^\\p{ASCII}{0,8192}$"})
+    NotAcceptableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#NotAcceptableException", name: "NotAcceptableException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 406})
     Operator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medicalimaging#Operator", name: "Operator")
     Overrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#Overrides", name: "Overrides")
     PayloadBlob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.medicalimaging#PayloadBlob", name: "PayloadBlob", traits: {"smithy.api#streaming" => {}})
@@ -113,6 +121,7 @@ module Aws::MedicalImaging
     SortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medicalimaging#SortOrder", name: "SortOrder")
     StartDICOMImportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#StartDICOMImportJobRequest", name: "StartDICOMImportJobRequest")
     StartDICOMImportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medicalimaging#StartDICOMImportJobResponse", name: "StartDICOMImportJobResponse")
+    StorageTier = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medicalimaging#StorageTier", name: "StorageTier")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medicalimaging#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:)[a-zA-Z+-=._:/]+$"})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medicalimaging#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
     TagMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.medicalimaging#TagMap", name: "TagMap")
@@ -128,6 +137,8 @@ module Aws::MedicalImaging
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
+    BadRequestException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    BadRequestException.type = Types::BadRequestException
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     CopyDestinationImageSet.add_member(:image_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetId, name: "imageSetId", traits: {"smithy.api#required" => {}}))
@@ -172,6 +183,7 @@ module Aws::MedicalImaging
     CreateDatastoreRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CreateDatastoreRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     CreateDatastoreRequest.add_member(:lambda_authorizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, name: "lambdaAuthorizerArn"))
+    CreateDatastoreRequest.add_member(:lossless_storage_format, ::Smithy::Schema::Shapes::MemberShape.new(target: LosslessStorageFormat, name: "losslessStorageFormat"))
     CreateDatastoreRequest.type = Types::CreateDatastoreRequest
     CreateDatastoreResponse.add_member(:datastore_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreId, name: "datastoreId", traits: {"smithy.api#required" => {}}))
     CreateDatastoreResponse.add_member(:datastore_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreStatus, name: "datastoreStatus", traits: {"smithy.api#required" => {}}))
@@ -186,6 +198,7 @@ module Aws::MedicalImaging
     DICOMImportJobProperties.add_member(:input_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "inputS3Uri", traits: {"smithy.api#required" => {}}))
     DICOMImportJobProperties.add_member(:output_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "outputS3Uri", traits: {"smithy.api#required" => {}}))
     DICOMImportJobProperties.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
+    DICOMImportJobProperties.add_member(:import_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportConfiguration, name: "importConfiguration"))
     DICOMImportJobProperties.type = Types::DICOMImportJobProperties
     DICOMImportJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DICOMImportJobSummary, name: "member"))
     DICOMImportJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId", traits: {"smithy.api#required" => {}}))
@@ -225,6 +238,7 @@ module Aws::MedicalImaging
     DatastoreProperties.add_member(:datastore_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreStatus, name: "datastoreStatus", traits: {"smithy.api#required" => {}}))
     DatastoreProperties.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     DatastoreProperties.add_member(:lambda_authorizer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaArn, name: "lambdaAuthorizerArn"))
+    DatastoreProperties.add_member(:lossless_storage_format, ::Smithy::Schema::Shapes::MemberShape.new(target: LosslessStorageFormat, name: "losslessStorageFormat"))
     DatastoreProperties.add_member(:datastore_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "datastoreArn"))
     DatastoreProperties.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAt"))
     DatastoreProperties.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "updatedAt"))
@@ -255,6 +269,13 @@ module Aws::MedicalImaging
     DeleteImageSetResponse.add_member(:image_set_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetState, name: "imageSetState", traits: {"smithy.api#required" => {}}))
     DeleteImageSetResponse.add_member(:image_set_workflow_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetWorkflowStatus, name: "imageSetWorkflowStatus", traits: {"smithy.api#required" => {}}))
     DeleteImageSetResponse.type = Types::DeleteImageSetResponse
+    DicomJsonMetadataImportConfiguration.add_member(:dicom_metadata_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: DicomMetadataMappings, name: "dicomMetadataMappings", traits: {"smithy.api#required" => {}}))
+    DicomJsonMetadataImportConfiguration.type = Types::DicomJsonMetadataImportConfiguration
+    DicomMetadataMapping.add_member(:study_instance_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: DICOMStudyInstanceUID, name: "studyInstanceUID", traits: {"smithy.api#required" => {}}))
+    DicomMetadataMapping.add_member(:series_instance_uid, ::Smithy::Schema::Shapes::MemberShape.new(target: DICOMSeriesInstanceUID, name: "seriesInstanceUID"))
+    DicomMetadataMapping.add_member(:metadata_file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataFilePath, name: "metadataFilePath", traits: {"smithy.api#required" => {}}))
+    DicomMetadataMapping.type = Types::DicomMetadataMapping
+    DicomMetadataMappings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DicomMetadataMapping, name: "member"))
     GetDICOMImportJobRequest.add_member(:datastore_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreId, name: "datastoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDICOMImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDICOMImportJobRequest.type = Types::GetDICOMImportJobRequest
@@ -301,6 +322,8 @@ module Aws::MedicalImaging
     GetImageSetResponse.add_member(:image_set_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "imageSetArn"))
     GetImageSetResponse.add_member(:overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: Overrides, name: "overrides"))
     GetImageSetResponse.add_member(:is_primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isPrimary"))
+    GetImageSetResponse.add_member(:last_accessed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastAccessedAt"))
+    GetImageSetResponse.add_member(:storage_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageTier, name: "storageTier"))
     GetImageSetResponse.type = Types::GetImageSetResponse
     ImageFrameInformation.add_member(:image_frame_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFrameId, name: "imageFrameId", traits: {"smithy.api#required" => {}}))
     ImageFrameInformation.type = Types::ImageFrameInformation
@@ -325,6 +348,7 @@ module Aws::MedicalImaging
     ImageSetWorkflowStatus.add_member(:copying_with_read_only_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COPYING_WITH_READ_ONLY_ACCESS", traits: {"smithy.api#enumValue" => "COPYING_WITH_READ_ONLY_ACCESS"}))
     ImageSetWorkflowStatus.add_member(:copy_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COPY_FAILED", traits: {"smithy.api#enumValue" => "COPY_FAILED"}))
     ImageSetWorkflowStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    ImageSetWorkflowStatus.add_member(:updating_for_study_consistency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING_FOR_STUDY_CONSISTENCY", traits: {"smithy.api#enumValue" => "UPDATING_FOR_STUDY_CONSISTENCY"}))
     ImageSetWorkflowStatus.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED", traits: {"smithy.api#enumValue" => "UPDATED"}))
     ImageSetWorkflowStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
     ImageSetWorkflowStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
@@ -337,9 +361,14 @@ module Aws::MedicalImaging
     ImageSetsMetadataSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "version"))
     ImageSetsMetadataSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "createdAt"))
     ImageSetsMetadataSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "updatedAt"))
+    ImageSetsMetadataSummary.add_member(:last_accessed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "lastAccessedAt"))
+    ImageSetsMetadataSummary.add_member(:storage_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageTier, name: "storageTier"))
     ImageSetsMetadataSummary.add_member(:dicom_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: DICOMTags, name: "DICOMTags"))
     ImageSetsMetadataSummary.add_member(:is_primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isPrimary"))
     ImageSetsMetadataSummary.type = Types::ImageSetsMetadataSummary
+    ImportConfiguration.add_member(:dicom_json_metadata_import_configuration, Types::ImportConfiguration::DicomJsonMetadataImportConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: DicomJsonMetadataImportConfiguration, name: "dicomJsonMetadataImportConfiguration"))
+    ImportConfiguration.add_member(:unknown, Types::ImportConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ImportConfiguration.type = Types::ImportConfiguration
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     JobStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
@@ -373,12 +402,16 @@ module Aws::MedicalImaging
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    LosslessStorageFormat.add_member(:htj2_k, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HTJ2K", traits: {"smithy.api#enumValue" => "HTJ2K"}))
+    LosslessStorageFormat.add_member(:jpeg_2000_lossless, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JPEG_2000_LOSSLESS", traits: {"smithy.api#enumValue" => "JPEG_2000_LOSSLESS"}))
     MetadataCopies.add_member(:copiable_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: CopiableAttributes, name: "copiableAttributes", traits: {"smithy.api#required" => {}}))
     MetadataCopies.type = Types::MetadataCopies
     MetadataUpdates.add_member(:dicom_updates, Types::MetadataUpdates::DICOMUpdates, ::Smithy::Schema::Shapes::MemberShape.new(target: DICOMUpdates, name: "DICOMUpdates"))
     MetadataUpdates.add_member(:revert_to_version_id, Types::MetadataUpdates::RevertToVersionId, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetExternalVersionId, name: "revertToVersionId"))
     MetadataUpdates.add_member(:unknown, Types::MetadataUpdates::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     MetadataUpdates.type = Types::MetadataUpdates
+    NotAcceptableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    NotAcceptableException.type = Types::NotAcceptableException
     Operator.add_member(:equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUAL", traits: {"smithy.api#enumValue" => "EQUAL"}))
     Operator.add_member(:between, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BETWEEN", traits: {"smithy.api#enumValue" => "BETWEEN"}))
     Overrides.add_member(:forced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "forced"))
@@ -432,12 +465,15 @@ module Aws::MedicalImaging
     StartDICOMImportJobRequest.add_member(:input_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "inputS3Uri", traits: {"smithy.api#required" => {}}))
     StartDICOMImportJobRequest.add_member(:output_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "outputS3Uri", traits: {"smithy.api#required" => {}}))
     StartDICOMImportJobRequest.add_member(:input_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "inputOwnerAccountId"))
+    StartDICOMImportJobRequest.add_member(:import_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportConfiguration, name: "importConfiguration"))
     StartDICOMImportJobRequest.type = Types::StartDICOMImportJobRequest
     StartDICOMImportJobResponse.add_member(:datastore_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatastoreId, name: "datastoreId", traits: {"smithy.api#required" => {}}))
     StartDICOMImportJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: JobId, name: "jobId", traits: {"smithy.api#required" => {}}))
     StartDICOMImportJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "jobStatus", traits: {"smithy.api#required" => {}}))
     StartDICOMImportJobResponse.add_member(:submitted_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "submittedAt", traits: {"smithy.api#required" => {}}))
     StartDICOMImportJobResponse.type = Types::StartDICOMImportJobResponse
+    StorageTier.add_member(:frequent_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQUENT_ACCESS", traits: {"smithy.api#enumValue" => "FREQUENT_ACCESS"}))
+    StorageTier.add_member(:archive_instant_access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVE_INSTANT_ACCESS", traits: {"smithy.api#enumValue" => "ARCHIVE_INSTANT_ACCESS"}))
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
@@ -455,6 +491,7 @@ module Aws::MedicalImaging
     UpdateImageSetMetadataRequest.add_member(:image_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetId, name: "imageSetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateImageSetMetadataRequest.add_member(:latest_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSetExternalVersionId, name: "latestVersionId", traits: {"smithy.api#httpQuery" => "latestVersion", "smithy.api#required" => {}}))
     UpdateImageSetMetadataRequest.add_member(:force, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "force", traits: {"smithy.api#httpQuery" => "force"}))
+    UpdateImageSetMetadataRequest.add_member(:include_study_image_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeStudyImageSets", traits: {"smithy.api#httpQuery" => "includeStudyImageSets"}))
     UpdateImageSetMetadataRequest.add_member(:update_image_set_metadata_updates, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataUpdates, name: "updateImageSetMetadataUpdates", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     UpdateImageSetMetadataRequest[:http_payload] = :update_image_set_metadata_updates
     UpdateImageSetMetadataRequest[:http_payload_member] = UpdateImageSetMetadataRequest.member(:update_image_set_metadata_updates)
@@ -475,7 +512,7 @@ module Aws::MedicalImaging
       service.id = "com.amazonaws.medicalimaging#AHIGatewayService"
       service.name = "AHIGatewayService"
       service.version = "2023-07-19"
-      service.traits = {"aws.api#service" => {"sdkId" => "Medical Imaging", "arnNamespace" => "medical-imaging", "endpointPrefix" => "medical-imaging"}, "aws.auth#sigv4" => {"name" => "medical-imaging"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair of a resource"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair that is allowed in the request"}, "aws:TagKeys" => {"type" => "String", "documentation" => "Filters access by a list of tag keys that are allowed in the request"}}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Health Imaging"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Medical Imaging", "arnNamespace" => "medical-imaging", "endpointPrefix" => "medical-imaging"}, "aws.auth#sigv4" => {"name" => "medical-imaging"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair of a resource"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair that is allowed in the request"}, "aws:TagKeys" => {"type" => "String", "documentation" => "Filters access by a list of tag keys that are allowed in the request"}}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Health Imaging", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://medical-imaging-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://medical-imaging-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://medical-imaging.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://medical-imaging.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:copy_image_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.medicalimaging#CopyImageSet"
         operation.name = "CopyImageSet"
@@ -561,8 +598,10 @@ module Aws::MedicalImaging
         operation.input = GetImageFrameRequest
         operation.output = GetImageFrameResponse
         operation.errors << AccessDeniedException
+        operation.errors << BadRequestException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << NotAcceptableException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException

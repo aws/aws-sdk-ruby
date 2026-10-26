@@ -3,6 +3,8 @@ module Aws::Synthetics
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    AddReplicaLocationInput: StructureShape
+    AddReplicaLocations: ListShape
     ArtifactConfigInput: StructureShape
     ArtifactConfigOutput: StructureShape
     AssociateResourceRequest: StructureShape
@@ -98,6 +100,8 @@ module Aws::Synthetics
     ListGroupsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    Location: StringShape
+    LocationType: EnumShape
     MaxCanaryResults: IntegerShape
     MaxFifteenMinutesInSeconds: IntegerShape
     MaxGroupResults: IntegerShape
@@ -106,10 +110,16 @@ module Aws::Synthetics
     MaxSize100: IntegerShape
     MaxSize1024: IntegerShape
     MaxSize3008: IntegerShape
+    MultiLocationConfig: StructureShape
     NotFoundException: StructureShape
     NullableBoolean: BooleanShape
     PaginationToken: StringShape
     ProvisionedResourceCleanupSetting: EnumShape
+    RemoveReplicaLocations: ListShape
+    Replica: StructureShape
+    Replicas: ListShape
+    ReplicationState: EnumShape
+    ReplicationStatus: StructureShape
     RequestEntityTooLargeException: StructureShape
     ResourceArn: StringShape
     ResourceList: ListShape

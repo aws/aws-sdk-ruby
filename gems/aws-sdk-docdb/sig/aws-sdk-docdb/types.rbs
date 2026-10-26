@@ -267,6 +267,8 @@ module Aws::DocDB
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?manage_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
+        ?network_type: String,
+        ?copy_tags_to_snapshot: bool,
         ?source_region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -295,6 +297,8 @@ module Aws::DocDB
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor manage_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
+      attr_accessor network_type: String?
+      attr_accessor copy_tags_to_snapshot: bool?
       attr_accessor source_region: String?
     end
 
@@ -541,9 +545,12 @@ module Aws::DocDB
         ?cluster_create_time: Time,
         ?enabled_cloudwatch_logs_exports: Array[String],
         ?deletion_protection: bool,
+        ?io_optimized_next_allowed_modification_time: Time,
         ?storage_type: String,
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo,
         ?master_user_secret: Types::ClusterMasterUserSecret,
+        ?network_type: String,
+        ?copy_tags_to_snapshot: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -579,9 +586,12 @@ module Aws::DocDB
       attr_accessor cluster_create_time: Time?
       attr_accessor enabled_cloudwatch_logs_exports: Array[String]?
       attr_accessor deletion_protection: bool?
+      attr_accessor io_optimized_next_allowed_modification_time: Time?
       attr_accessor storage_type: String?
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo?
       attr_accessor master_user_secret: Types::ClusterMasterUserSecret?
+      attr_accessor network_type: String?
+      attr_accessor copy_tags_to_snapshot: bool?
     end
 
     class DBClusterAlreadyExistsFault
@@ -1048,6 +1058,7 @@ module Aws::DocDB
         ?subnet_group_status: String,
         ?subnets: Array[Types::Subnet],
         ?db_subnet_group_arn: String,
+        ?supported_network_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1057,6 +1068,7 @@ module Aws::DocDB
       attr_accessor subnet_group_status: String?
       attr_accessor subnets: Array[Types::Subnet]?
       attr_accessor db_subnet_group_arn: String?
+      attr_accessor supported_network_types: Array[String]?
     end
 
     class DBSubnetGroupAlreadyExistsFault
@@ -1802,6 +1814,29 @@ module Aws::DocDB
       attr_accessor global_cluster: Types::GlobalCluster?
     end
 
+    class FailoverState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?from_db_cluster_arn: String,
+        ?to_db_cluster_arn: String,
+        ?is_data_loss_allowed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor from_db_cluster_arn: String?
+      attr_accessor to_db_cluster_arn: String?
+      attr_accessor is_data_loss_allowed: bool?
+    end
+
+    module FailoverStatus
+      PENDING: String
+      FAILING_OVER: String
+      CANCELLING: String
+    end
+
     class Filter
       include Smithy::Schema::Structure
 
@@ -1829,6 +1864,8 @@ module Aws::DocDB
         ?storage_encrypted: bool,
         ?deletion_protection: bool,
         ?global_cluster_members: Array[Types::GlobalClusterMember],
+        ?failover_state: Types::FailoverState,
+        ?tag_list: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1842,6 +1879,8 @@ module Aws::DocDB
       attr_accessor storage_encrypted: bool?
       attr_accessor deletion_protection: bool?
       attr_accessor global_cluster_members: Array[Types::GlobalClusterMember]?
+      attr_accessor failover_state: Types::FailoverState?
+      attr_accessor tag_list: Array[Types::Tag]?
     end
 
     class GlobalClusterAlreadyExistsFault
@@ -1862,12 +1901,19 @@ module Aws::DocDB
         ?db_cluster_arn: String,
         ?readers: Array[String],
         ?is_writer: bool,
+        ?synchronization_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor db_cluster_arn: String?
       attr_accessor readers: Array[String]?
       attr_accessor is_writer: bool?
+      attr_accessor synchronization_status: String?
+    end
+
+    module GlobalClusterMemberSynchronizationStatus
+      CONNECTED: String
+      PENDING_RESYNC: String
     end
 
     class GlobalClusterNotFoundFault
@@ -2139,6 +2185,8 @@ module Aws::DocDB
         ?manage_master_user_password: bool,
         ?master_user_secret_kms_key_id: String,
         ?rotate_master_user_password: bool,
+        ?network_type: String,
+        ?copy_tags_to_snapshot: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2161,6 +2209,8 @@ module Aws::DocDB
       attr_accessor manage_master_user_password: bool?
       attr_accessor master_user_secret_kms_key_id: String?
       attr_accessor rotate_master_user_password: bool?
+      attr_accessor network_type: String?
+      attr_accessor copy_tags_to_snapshot: bool?
     end
 
     class ModifyDBClusterParameterGroupMessage
@@ -2350,6 +2400,17 @@ module Aws::DocDB
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor global_cluster: Types::GlobalCluster?
+    end
+
+    class NetworkTypeNotSupported
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class OrderableDBInstanceOption
@@ -2655,6 +2716,8 @@ module Aws::DocDB
         ?db_cluster_parameter_group_name: String,
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?storage_type: String,
+        ?network_type: String,
+        ?copy_tags_to_snapshot: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2673,6 +2736,8 @@ module Aws::DocDB
       attr_accessor db_cluster_parameter_group_name: String?
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor storage_type: String?
+      attr_accessor network_type: String?
+      attr_accessor copy_tags_to_snapshot: bool?
     end
 
     class RestoreDBClusterFromSnapshotResult
@@ -2704,6 +2769,8 @@ module Aws::DocDB
         ?deletion_protection: bool,
         ?serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration,
         ?storage_type: String,
+        ?network_type: String,
+        ?copy_tags_to_snapshot: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2721,6 +2788,8 @@ module Aws::DocDB
       attr_accessor deletion_protection: bool?
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfiguration?
       attr_accessor storage_type: String?
+      attr_accessor network_type: String?
+      attr_accessor copy_tags_to_snapshot: bool?
     end
 
     class RestoreDBClusterToPointInTimeResult

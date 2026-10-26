@@ -24,7 +24,7 @@ module Aws
           x_amz_retry_after = error_info.hints[:x_amz_retry_after]
           return t_i unless x_amz_retry_after
 
-          # Clamp retry delay to t_i < delay < t_i + 5 per SEP.
+          # Keep the delay between t_i and t_i + 5 seconds, inclusive.
           delay = [t_i, x_amz_retry_after].max
           [delay, t_i + 5].min
         end

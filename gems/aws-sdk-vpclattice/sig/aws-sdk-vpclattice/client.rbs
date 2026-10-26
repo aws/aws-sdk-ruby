@@ -161,6 +161,10 @@ module Aws::VPCLattice
       def allow_association_to_shareable_service_network: () -> bool?
       def created_at: () -> Time?
       def failure_reason: () -> String?
+      def custom_domain_name: () -> String?
+      def domain_verification_id: () -> String?
+      def group_domain: () -> String?
+      def domain_verification_arn: () -> String?
     end
     def create_resource_configuration: (
       ?name: String,
@@ -179,9 +183,15 @@ module Aws::VPCLattice
         },
         arn_resource: {
           arn: String
+        },
+        cidr_resource: {
+          cidr_ranges: Array[String]
         }
       },
       ?allow_association_to_shareable_service_network: bool,
+      ?custom_domain_name: String,
+      ?group_domain: String,
+      ?domain_verification_identifier: String,
       ?client_token: String,
       ?tags: Hash[String, String]
     ) -> _CreateResourceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceConfigurationResponse
@@ -197,6 +207,7 @@ module Aws::VPCLattice
       def security_group_ids: () -> Array[String]?
       def ip_address_type: () -> String?
       def ipv4_addresses_per_eni: () -> Integer?
+      def resource_config_dns_resolution: () -> String?
     end
     def create_resource_gateway: (
       ?client_token: String,
@@ -206,6 +217,7 @@ module Aws::VPCLattice
       ?security_group_ids: Array[String],
       ?ip_address_type: String,
       ?ipv4_addresses_per_eni: Integer,
+      ?resource_config_dns_resolution: String,
       ?tags: Hash[String, String]
     ) -> _CreateResourceGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceGatewayResponse
 
@@ -272,6 +284,7 @@ module Aws::VPCLattice
       def certificate_arn: () -> String?
       def status: () -> String?
       def auth_type: () -> String?
+      def idle_timeout_seconds: () -> Integer?
       def dns_entry: () -> Types::DnsEntry?
     end
     def create_service: (
@@ -280,7 +293,8 @@ module Aws::VPCLattice
       ?tags: Hash[String, String],
       ?custom_domain_name: String,
       ?certificate_arn: String,
-      ?auth_type: String
+      ?auth_type: String,
+      ?idle_timeout_seconds: Integer
     ) -> _CreateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceResponse
 
     interface _CreateServiceNetworkResponse
@@ -307,11 +321,13 @@ module Aws::VPCLattice
       def arn: () -> String?
       def status: () -> String?
       def created_by: () -> String?
+      def private_dns_enabled: () -> bool?
     end
     def create_service_network_resource_association: (
       ?client_token: String,
       ?resource_configuration_identifier: String,
       ?service_network_identifier: String,
+      ?private_dns_enabled: bool,
       ?tags: Hash[String, String]
     ) -> _CreateServiceNetworkResourceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceNetworkResourceAssociationResponse
 
@@ -338,13 +354,20 @@ module Aws::VPCLattice
       def arn: () -> String?
       def created_by: () -> String?
       def security_group_ids: () -> Array[String]?
+      def private_dns_enabled: () -> bool?
+      def dns_options: () -> Types::DnsOptions?
     end
     def create_service_network_vpc_association: (
       ?client_token: String,
       ?service_network_identifier: String,
       ?vpc_identifier: String,
+      ?private_dns_enabled: bool,
       ?security_group_ids: Array[String],
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?dns_options: {
+        private_dns_preference: String,
+        private_dns_specified_domains: Array[String]
+      }
     ) -> _CreateServiceNetworkVpcAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceNetworkVpcAssociationResponse
 
     interface _CreateTargetGroupResponse
@@ -398,6 +421,13 @@ module Aws::VPCLattice
     def delete_auth_policy: (
       ?resource_identifier: String
     ) -> _DeleteAuthPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAuthPolicyResponse
+
+    interface _DeleteDomainVerificationResponse
+      include Smithy::Client::_Response[Types::DeleteDomainVerificationResponse]
+    end
+    def delete_domain_verification: (
+      ?domain_verification_identifier: String
+    ) -> _DeleteDomainVerificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainVerificationResponse
 
     interface _DeleteListenerResponse
       include Smithy::Client::_Response[Types::DeleteListenerOutput]
@@ -552,6 +582,21 @@ module Aws::VPCLattice
       ?resource_identifier: String
     ) -> _GetAuthPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAuthPolicyResponse
 
+    interface _GetDomainVerificationResponse
+      include Smithy::Client::_Response[Types::GetDomainVerificationResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def domain_name: () -> String?
+      def status: () -> String?
+      def txt_method_config: () -> Types::TxtMethodConfig?
+      def created_at: () -> Time?
+      def last_verified_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_domain_verification: (
+      ?domain_verification_identifier: String
+    ) -> _GetDomainVerificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainVerificationResponse
+
     interface _GetListenerResponse
       include Smithy::Client::_Response[Types::GetListenerOutput]
       def arn: () -> String?
@@ -588,6 +633,10 @@ module Aws::VPCLattice
       def amazon_managed: () -> bool?
       def failure_reason: () -> String?
       def last_updated_at: () -> Time?
+      def domain_verification_id: () -> String?
+      def domain_verification_arn: () -> String?
+      def domain_verification_status: () -> String?
+      def group_domain: () -> String?
     end
     def get_resource_configuration: (
       ?resource_configuration_identifier: String
@@ -601,9 +650,12 @@ module Aws::VPCLattice
       def status: () -> String?
       def vpc_id: () -> String?
       def subnet_ids: () -> Array[String]?
+      def service_managed: () -> bool?
+      def managed_by: () -> String?
       def security_group_ids: () -> Array[String]?
       def ip_address_type: () -> String?
       def ipv4_addresses_per_eni: () -> Integer?
+      def resource_config_dns_resolution: () -> String?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
     end
@@ -649,6 +701,7 @@ module Aws::VPCLattice
       def certificate_arn: () -> String?
       def status: () -> String?
       def auth_type: () -> String?
+      def idle_timeout_seconds: () -> Integer?
       def failure_code: () -> String?
       def failure_message: () -> String?
     end
@@ -689,8 +742,10 @@ module Aws::VPCLattice
       def failure_code: () -> String?
       def last_updated_at: () -> Time?
       def private_dns_entry: () -> Types::DnsEntry?
+      def private_dns_enabled: () -> bool?
       def dns_entry: () -> Types::DnsEntry?
       def is_managed_association: () -> bool?
+      def domain_verification_status: () -> String?
     end
     def get_service_network_resource_association: (
       ?service_network_resource_association_identifier: String
@@ -730,9 +785,11 @@ module Aws::VPCLattice
       def service_network_arn: () -> String?
       def vpc_id: () -> String?
       def security_group_ids: () -> Array[String]?
+      def private_dns_enabled: () -> bool?
       def failure_message: () -> String?
       def failure_code: () -> String?
       def last_updated_at: () -> Time?
+      def dns_options: () -> Types::DnsOptions?
     end
     def get_service_network_vpc_association: (
       ?service_network_vpc_association_identifier: String
@@ -767,6 +824,16 @@ module Aws::VPCLattice
       ?next_token: String
     ) -> _ListAccessLogSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessLogSubscriptionsResponse
 
+    interface _ListDomainVerificationsResponse
+      include Smithy::Client::_Response[Types::ListDomainVerificationsResponse]
+      def items: () -> Array[Types::DomainVerificationSummary]?
+      def next_token: () -> String?
+    end
+    def list_domain_verifications: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainVerificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainVerificationsResponse
+
     interface _ListListenersResponse
       include Smithy::Client::_Response[Types::ListListenersOutput]
       def items: () -> Array[Types::ListenerSummary]?
@@ -786,6 +853,7 @@ module Aws::VPCLattice
     def list_resource_configurations: (
       ?resource_gateway_identifier: String,
       ?resource_configuration_group_identifier: String,
+      ?domain_verification_identifier: String,
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListResourceConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceConfigurationsResponse
@@ -964,6 +1032,20 @@ module Aws::VPCLattice
       ]
     ) -> _RegisterTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterTargetsResponse
 
+    interface _StartDomainVerificationResponse
+      include Smithy::Client::_Response[Types::StartDomainVerificationResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def domain_name: () -> String?
+      def status: () -> String?
+      def txt_method_config: () -> Types::TxtMethodConfig?
+    end
+    def start_domain_verification: (
+      ?client_token: String,
+      ?domain_name: String,
+      ?tags: Hash[String, String]
+    ) -> _StartDomainVerificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDomainVerificationResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceOutput]
     end
@@ -1048,6 +1130,9 @@ module Aws::VPCLattice
         },
         arn_resource: {
           arn: String
+        },
+        cidr_resource: {
+          cidr_ranges: Array[String]
         }
       },
       ?allow_association_to_shareable_service_network: bool,
@@ -1131,11 +1216,13 @@ module Aws::VPCLattice
       def custom_domain_name: () -> String?
       def certificate_arn: () -> String?
       def auth_type: () -> String?
+      def idle_timeout_seconds: () -> Integer?
     end
     def update_service: (
       ?service_identifier: String,
       ?certificate_arn: String,
-      ?auth_type: String
+      ?auth_type: String,
+      ?idle_timeout_seconds: Integer
     ) -> _UpdateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceResponse
 
     interface _UpdateServiceNetworkResponse
@@ -1157,10 +1244,17 @@ module Aws::VPCLattice
       def status: () -> String?
       def created_by: () -> String?
       def security_group_ids: () -> Array[String]?
+      def private_dns_enabled: () -> bool?
+      def dns_options: () -> Types::DnsOptions?
     end
     def update_service_network_vpc_association: (
       ?service_network_vpc_association_identifier: String,
-      ?security_group_ids: Array[String]
+      ?security_group_ids: Array[String],
+      ?private_dns_enabled: bool,
+      ?dns_options: {
+        private_dns_preference: String,
+        private_dns_specified_domains: Array[String]
+      }
     ) -> _UpdateServiceNetworkVpcAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceNetworkVpcAssociationResponse
 
     interface _UpdateTargetGroupResponse

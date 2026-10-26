@@ -34,6 +34,8 @@ module Aws::S3Vectors
         ?dimension: Integer,
         ?distance_metric: String,
         ?metadata_configuration: Types::MetadataConfiguration,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -44,15 +46,19 @@ module Aws::S3Vectors
       attr_accessor dimension: Integer?
       attr_accessor distance_metric: String?
       attr_accessor metadata_configuration: Types::MetadataConfiguration?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateIndexOutput
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?index_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor index_arn: String?
     end
 
     class CreateVectorBucketInput
@@ -61,20 +67,24 @@ module Aws::S3Vectors
       def initialize: (
         ?vector_bucket_name: String,
         ?encryption_configuration: Types::EncryptionConfiguration,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor vector_bucket_name: String?
       attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateVectorBucketOutput
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?vector_bucket_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor vector_bucket_arn: String?
     end
 
     module DataType
@@ -326,6 +336,8 @@ module Aws::S3Vectors
         ?dimension: Integer,
         ?distance_metric: String,
         ?metadata_configuration: Types::MetadataConfiguration,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?index_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -337,6 +349,13 @@ module Aws::S3Vectors
       attr_accessor dimension: Integer?
       attr_accessor distance_metric: String?
       attr_accessor metadata_configuration: Types::MetadataConfiguration?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor index_mode: String?
+    end
+
+    module IndexMode
+      CLASSIC: String
+      ENHANCED: String
     end
 
     class IndexSummary
@@ -458,6 +477,28 @@ module Aws::S3Vectors
       attr_accessor metadata: Smithy::Schema::document?
     end
 
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
     class ListVectorBucketsInput
       include Smithy::Schema::Structure
 
@@ -563,6 +604,30 @@ module Aws::S3Vectors
       attr_accessor metadata: Smithy::Schema::document?
     end
 
+    class PutVectorBucketDefaultIndexModeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+        ?default_index_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+      attr_accessor default_index_mode: String?
+    end
+
+    class PutVectorBucketDefaultIndexModeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class PutVectorBucketPolicyInput
       include Smithy::Schema::Structure
 
@@ -617,17 +682,15 @@ module Aws::S3Vectors
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?key: String,
-        ?data: Types::VectorData,
-        ?metadata: Smithy::Schema::document,
         ?distance: Float,
+        ?key: String,
+        ?metadata: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor key: String?
-      attr_accessor data: Types::VectorData?
-      attr_accessor metadata: Smithy::Schema::document?
       attr_accessor distance: Float?
+      attr_accessor key: String?
+      attr_accessor metadata: Smithy::Schema::document?
     end
 
     class QueryVectorsInput
@@ -640,8 +703,10 @@ module Aws::S3Vectors
         ?top_k: Integer,
         ?query_vector: Types::VectorData,
         ?filter: Smithy::Schema::document,
+        ?query_mode: String,
         ?return_metadata: bool,
         ?return_distance: bool,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -651,8 +716,10 @@ module Aws::S3Vectors
       attr_accessor top_k: Integer?
       attr_accessor query_vector: Types::VectorData?
       attr_accessor filter: Smithy::Schema::document?
+      attr_accessor query_mode: String?
       attr_accessor return_metadata: bool?
       attr_accessor return_distance: bool?
+      attr_accessor next_token: String?
     end
 
     class QueryVectorsOutput
@@ -660,10 +727,25 @@ module Aws::S3Vectors
 
       def initialize: (
         ?vectors: Array[Types::QueryOutputVector],
+        ?distance_metric: String,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor vectors: Array[Types::QueryOutputVector]?
+      attr_accessor distance_metric: String?
+      attr_accessor next_token: String?
+    end
+
+    class RequestTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class ServiceQuotaExceededException
@@ -693,6 +775,28 @@ module Aws::S3Vectors
       AWS_KMS: String
     end
 
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class TooManyRequestsException
       include Smithy::Schema::Structure
 
@@ -702,6 +806,54 @@ module Aws::S3Vectors
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateIndexModeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+        ?index_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor index_mode: String?
+    end
+
+    class UpdateIndexModeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class ValidationException
@@ -738,6 +890,7 @@ module Aws::S3Vectors
         ?vector_bucket_arn: String,
         ?creation_time: Time,
         ?encryption_configuration: Types::EncryptionConfiguration,
+        ?default_index_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -745,6 +898,7 @@ module Aws::S3Vectors
       attr_accessor vector_bucket_arn: String?
       attr_accessor creation_time: Time?
       attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor default_index_mode: String?
     end
 
     class VectorBucketSummary

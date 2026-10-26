@@ -14,9 +14,12 @@ module Aws::S3Tables
     CreateTableResponse: StructureShape
     DeleteNamespaceRequest: StructureShape
     DeleteTableBucketEncryptionRequest: StructureShape
+    DeleteTableBucketMetricsConfigurationRequest: StructureShape
     DeleteTableBucketPolicyRequest: StructureShape
+    DeleteTableBucketReplicationRequest: StructureShape
     DeleteTableBucketRequest: StructureShape
     DeleteTablePolicyRequest: StructureShape
+    DeleteTableReplicationRequest: StructureShape
     DeleteTableRequest: StructureShape
     EncryptionConfiguration: StructureShape
     ErrorMessage: StringShape
@@ -27,10 +30,16 @@ module Aws::S3Tables
     GetTableBucketEncryptionResponse: StructureShape
     GetTableBucketMaintenanceConfigurationRequest: StructureShape
     GetTableBucketMaintenanceConfigurationResponse: StructureShape
+    GetTableBucketMetricsConfigurationRequest: StructureShape
+    GetTableBucketMetricsConfigurationResponse: StructureShape
     GetTableBucketPolicyRequest: StructureShape
     GetTableBucketPolicyResponse: StructureShape
+    GetTableBucketReplicationRequest: StructureShape
+    GetTableBucketReplicationResponse: StructureShape
     GetTableBucketRequest: StructureShape
     GetTableBucketResponse: StructureShape
+    GetTableBucketStorageClassRequest: StructureShape
+    GetTableBucketStorageClassResponse: StructureShape
     GetTableEncryptionRequest: StructureShape
     GetTableEncryptionResponse: StructureShape
     GetTableMaintenanceConfigurationRequest: StructureShape
@@ -41,16 +50,38 @@ module Aws::S3Tables
     GetTableMetadataLocationResponse: StructureShape
     GetTablePolicyRequest: StructureShape
     GetTablePolicyResponse: StructureShape
+    GetTableRecordExpirationConfigurationRequest: StructureShape
+    GetTableRecordExpirationConfigurationResponse: StructureShape
+    GetTableRecordExpirationJobStatusRequest: StructureShape
+    GetTableRecordExpirationJobStatusResponse: StructureShape
+    GetTableReplicationRequest: StructureShape
+    GetTableReplicationResponse: StructureShape
+    GetTableReplicationStatusRequest: StructureShape
+    GetTableReplicationStatusResponse: StructureShape
     GetTableRequest: StructureShape
     GetTableResponse: StructureShape
+    GetTableStorageClassRequest: StructureShape
+    GetTableStorageClassResponse: StructureShape
+    IAMRole: StringShape
     IcebergCompactionSettings: StructureShape
     IcebergCompactionStrategy: EnumShape
     IcebergMetadata: StructureShape
+    IcebergNullOrder: EnumShape
+    IcebergPartitionField: StructureShape
+    IcebergPartitionFieldList: ListShape
+    IcebergPartitionSpec: StructureShape
     IcebergSchema: StructureShape
+    IcebergSchemaV2: StructureShape
     IcebergSnapshotManagementSettings: StructureShape
+    IcebergSortDirection: EnumShape
+    IcebergSortField: StructureShape
+    IcebergSortFieldList: ListShape
+    IcebergSortOrder: StructureShape
     IcebergUnreferencedFileRemovalSettings: StructureShape
+    IntegerList: ListShape
     InternalServerErrorException: StructureShape
     JobStatus: EnumShape
+    LastSuccessfulReplicatedUpdate: StructureShape
     ListNamespacesLimit: IntegerShape
     ListNamespacesRequest: StructureShape
     ListNamespacesResponse: StructureShape
@@ -60,8 +91,12 @@ module Aws::S3Tables
     ListTablesLimit: IntegerShape
     ListTablesRequest: StructureShape
     ListTablesResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
     MaintenanceStatus: EnumShape
+    ManagedTableInformation: StructureShape
     MetadataLocation: StringShape
+    MethodNotAllowedException: StructureShape
     NamespaceId: StringShape
     NamespaceList: ListShape
     NamespaceName: StringShape
@@ -73,14 +108,33 @@ module Aws::S3Tables
     PositiveInteger: IntegerShape
     PutTableBucketEncryptionRequest: StructureShape
     PutTableBucketMaintenanceConfigurationRequest: StructureShape
+    PutTableBucketMetricsConfigurationRequest: StructureShape
     PutTableBucketPolicyRequest: StructureShape
+    PutTableBucketReplicationRequest: StructureShape
+    PutTableBucketReplicationResponse: StructureShape
+    PutTableBucketStorageClassRequest: StructureShape
     PutTableMaintenanceConfigurationRequest: StructureShape
     PutTablePolicyRequest: StructureShape
+    PutTableRecordExpirationConfigurationRequest: StructureShape
+    PutTableReplicationRequest: StructureShape
+    PutTableReplicationResponse: StructureShape
     RenameTableRequest: StructureShape
+    ReplicationDestination: StructureShape
+    ReplicationDestinationStatusModel: StructureShape
+    ReplicationDestinationStatuses: ListShape
+    ReplicationDestinations: ListShape
+    ReplicationInformation: StructureShape
+    ReplicationStatus: EnumShape
+    ResourceArn: StringShape
     ResourcePolicy: StringShape
     SSEAlgorithm: EnumShape
     SchemaField: StructureShape
     SchemaFieldList: ListShape
+    SchemaV2Field: StructureShape
+    SchemaV2FieldList: ListShape
+    SchemaV2FieldType: EnumShape
+    StorageClass: EnumShape
+    StorageClassConfiguration: StructureShape
     TableARN: StringShape
     TableBucketARN: StringShape
     TableBucketId: StringShape
@@ -89,6 +143,9 @@ module Aws::S3Tables
     TableBucketMaintenanceSettings: UnionShape
     TableBucketMaintenanceType: EnumShape
     TableBucketName: StringShape
+    TableBucketReplicationConfiguration: StructureShape
+    TableBucketReplicationRule: StructureShape
+    TableBucketReplicationRules: ListShape
     TableBucketSummary: StructureShape
     TableBucketSummaryList: ListShape
     TableBucketType: EnumShape
@@ -101,10 +158,27 @@ module Aws::S3Tables
     TableMaintenanceType: EnumShape
     TableMetadata: UnionShape
     TableName: StringShape
+    TableProperties: MapShape
+    TableRecordExpirationConfigurationValue: StructureShape
+    TableRecordExpirationJobMetrics: StructureShape
+    TableRecordExpirationJobStatus: EnumShape
+    TableRecordExpirationSettings: StructureShape
+    TableRecordExpirationStatus: EnumShape
+    TableReplicationConfiguration: StructureShape
+    TableReplicationRule: StructureShape
+    TableReplicationRules: ListShape
     TableSummary: StructureShape
     TableSummaryList: ListShape
     TableType: EnumShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    Tags: MapShape
     TooManyRequestsException: StructureShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
     UpdateTableMetadataLocationRequest: StructureShape
     UpdateTableMetadataLocationResponse: StructureShape
     VersionToken: StringShape

@@ -38,11 +38,14 @@ module Aws::Polly
   # * {MaxLexemeLengthExceededException}
   # * {MaxLexiconsNumberExceededException}
   # * {ServiceFailureException}
+  # * {ServiceQuotaExceededException}
   # * {SsmlMarksNotSupportedForTextTypeException}
   # * {SynthesisTaskNotFoundException}
   # * {TextLengthExceededException}
+  # * {ThrottlingException}
   # * {UnsupportedPlsAlphabetException}
   # * {UnsupportedPlsLanguageException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -276,6 +279,29 @@ module Aws::Polly
       end
     end
 
+    # <p>The request would cause a service quota to be exceeded.</p>
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Polly::Types::ServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>The quota code identifying the specific quota.</p>
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # <p>The service code identifying the originating service.</p>
+      def service_code
+        @data[:service_code]
+      end
+    end
+
     # <p>SSML speech marks are not supported for plain text-type
     #       input.</p>
     class SsmlMarksNotSupportedForTextTypeException < Smithy::Client::ServiceError
@@ -323,6 +349,24 @@ module Aws::Polly
       end
     end
 
+    # <p>The request was denied because of request throttling.</p>
+    class ThrottlingException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Polly::Types::ThrottlingException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>A list of reasons explaining why the request was throttled.</p>
+      def throttling_reasons
+        @data[:throttling_reasons]
+      end
+    end
+
     # <p>The alphabet specified by the lexicon is not a supported alphabet.
     #       Valid values are <code>x-sampa</code> and <code>ipa</code>.</p>
     class UnsupportedPlsAlphabetException < Smithy::Client::ServiceError
@@ -348,6 +392,29 @@ module Aws::Polly
 
       def message
         @data[:message]
+      end
+    end
+
+    # <p>The input fails to satisfy the constraints specified by the service.</p>
+    class ValidationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Polly::Types::ValidationException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>The reason the request failed validation.</p>
+      def reason
+        @data[:reason]
+      end
+
+      # <p>The fields that caused the validation error.</p>
+      def fields
+        @data[:fields]
       end
     end
   end

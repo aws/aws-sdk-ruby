@@ -34,9 +34,12 @@ module Aws::WAFV2
     AttributeValue: StringShape
     AttributeValues: ListShape
     BlockAction: StructureShape
+    BlockchainChain: EnumShape
     Body: StructureShape
     BodyParsingFallbackBehavior: EnumShape
     Boolean: BooleanShape
+    BotStatistics: StructureShape
+    BotStatisticsList: ListShape
     ByteMatchStatement: StructureShape
     CapacityUnit: IntegerShape
     CaptchaAction: StructureShape
@@ -71,6 +74,10 @@ module Aws::WAFV2
     CreateWebACLRequest: StructureShape
     CreateWebACLResponse: StructureShape
     CreationPathString: StringShape
+    CryptoConfig: StructureShape
+    CryptoCurrency: EnumShape
+    Currency: EnumShape
+    CurrencyMode: EnumShape
     CustomHTTPHeader: StructureShape
     CustomHTTPHeaderName: StringShape
     CustomHTTPHeaderValue: StringShape
@@ -79,6 +86,8 @@ module Aws::WAFV2
     CustomResponse: StructureShape
     CustomResponseBodies: MapShape
     CustomResponseBody: StructureShape
+    DataPointEntry: StructureShape
+    DataPointsList: ListShape
     DataProtection: StructureShape
     DataProtectionAction: EnumShape
     DataProtectionConfig: StructureShape
@@ -106,6 +115,8 @@ module Aws::WAFV2
     DescribeManagedProductsByVendorResponse: StructureShape
     DescribeManagedRuleGroupRequest: StructureShape
     DescribeManagedRuleGroupResponse: StructureShape
+    DisallowedFeature: StructureShape
+    DisallowedFeatures: ListShape
     DisassociateWebACLRequest: StructureShape
     DisassociateWebACLResponse: StructureShape
     DownloadUrl: StringShape
@@ -133,6 +144,8 @@ module Aws::WAFV2
     Filter: StructureShape
     FilterBehavior: EnumShape
     FilterRequirement: EnumShape
+    FilterSource: StructureShape
+    FilterString: StringShape
     Filters: ListShape
     FirewallManagerRuleGroup: StructureShape
     FirewallManagerRuleGroups: ListShape
@@ -159,14 +172,23 @@ module Aws::WAFV2
     GetRateBasedStatementManagedKeysResponse: StructureShape
     GetRegexPatternSetRequest: StructureShape
     GetRegexPatternSetResponse: StructureShape
+    GetRevenueStatisticsRequest: StructureShape
+    GetRevenueStatisticsResponse: StructureShape
+    GetRevenueStatisticsSummaryRequest: StructureShape
+    GetRevenueStatisticsSummaryResponse: StructureShape
+    GetRevenueStatisticsTimeSeriesRequest: StructureShape
+    GetRevenueStatisticsTimeSeriesResponse: StructureShape
     GetRuleGroupRequest: StructureShape
     GetRuleGroupResponse: StructureShape
     GetSampledRequestsRequest: StructureShape
     GetSampledRequestsResponse: StructureShape
+    GetTopPathStatisticsByTrafficRequest: StructureShape
+    GetTopPathStatisticsByTrafficResponse: StructureShape
     GetWebACLForResourceRequest: StructureShape
     GetWebACLForResourceResponse: StructureShape
     GetWebACLRequest: StructureShape
     GetWebACLResponse: StructureShape
+    GroupByType: EnumShape
     HTTPHeader: StructureShape
     HTTPHeaders: ListShape
     HTTPMethod: StringShape
@@ -189,6 +211,7 @@ module Aws::WAFV2
     IPString: StringShape
     ImmunityTimeProperty: StructureShape
     InspectionLevel: EnumShape
+    IntervalType: EnumShape
     JA3Fingerprint: StructureShape
     JA4Fingerprint: StructureShape
     JsonBody: StructureShape
@@ -227,6 +250,8 @@ module Aws::WAFV2
     ListResourcesForWebACLResponse: StructureShape
     ListRuleGroupsRequest: StructureShape
     ListRuleGroupsResponse: StructureShape
+    ListSettlementRecordsRequest: StructureShape
+    ListSettlementRecordsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     ListWebACLsRequest: StructureShape
@@ -254,12 +279,22 @@ module Aws::WAFV2
     ManagedRuleSetSummary: StructureShape
     ManagedRuleSetVersion: StructureShape
     MapMatchScope: EnumShape
+    MaxDataPoints: IntegerShape
     Method: StructureShape
     MetricName: StringShape
     MobileSdkRelease: StructureShape
+    MonetizationAmountValue: StringShape
+    MonetizationConfig: StructureShape
+    MonetizationFilter: StructureShape
+    MonetizationFilterList: ListShape
+    MonetizationFilterName: StringShape
+    MonetizationFilterValue: StringShape
+    MonetizationFilterValueList: ListShape
+    MonetizeAction: StructureShape
     NextMarker: StringShape
     NoneAction: StructureShape
     NotStatement: StructureShape
+    NumberOfTopTrafficBotsPerPath: IntegerShape
     OnSourceDDoSProtectionConfig: StructureShape
     OrStatement: StructureShape
     OutputUrl: StringShape
@@ -269,13 +304,29 @@ module Aws::WAFV2
     ParameterExceptionField: EnumShape
     ParameterExceptionParameter: StringShape
     PasswordField: StructureShape
+    PathStatistics: StructureShape
+    PathStatisticsLimit: IntegerShape
+    PathStatisticsList: ListShape
+    PathString: StringShape
     PayloadType: EnumShape
+    PaymentNetwork: StructureShape
+    PaymentNetworks: ListShape
+    PercentageValue: FloatShape
     PhoneNumberField: StructureShape
     PhoneNumberFields: ListShape
     Platform: EnumShape
     PolicyString: StringShape
     PopulationSize: IntegerShape
     PositionalConstraint: EnumShape
+    PreParseTextTransformation: StructureShape
+    PreParseTextTransformationPriority: IntegerShape
+    PreParseTextTransformationType: EnumShape
+    PreParseTextTransformations: ListShape
+    Price: StructureShape
+    PriceAmount: StringShape
+    PriceMultiplier: StringShape
+    Prices: ListShape
+    PricingPlanFeatureName: StringShape
     ProductDescription: StringShape
     ProductId: StringShape
     ProductLink: StringShape
@@ -288,6 +339,8 @@ module Aws::WAFV2
     PutPermissionPolicyRequest: StructureShape
     PutPermissionPolicyResponse: StructureShape
     QueryString: StructureShape
+    RankingSortBy: EnumShape
+    RankingStatisticType: EnumShape
     RateBasedStatement: StructureShape
     RateBasedStatementAggregateKeyType: EnumShape
     RateBasedStatementCustomKey: StructureShape
@@ -321,8 +374,10 @@ module Aws::WAFV2
     ReleaseSummary: StructureShape
     RequestBody: MapShape
     RequestBodyAssociatedResourceTypeConfig: StructureShape
+    RequestCount: IntegerShape
     RequestInspection: StructureShape
     RequestInspectionACFP: StructureShape
+    RequiredPricingPlanName: StringShape
     ResourceArn: StringShape
     ResourceArns: ListShape
     ResourceType: EnumShape
@@ -344,6 +399,9 @@ module Aws::WAFV2
     ResponseInspectionStatusCodeFailureCodes: ListShape
     ResponseInspectionStatusCodeSuccessCodes: ListShape
     ResponseStatusCode: IntegerShape
+    RevenueBreakdown: StructureShape
+    RevenuePathStatistics: StructureShape
+    RevenuePathStatisticsList: ListShape
     Rule: StructureShape
     RuleAction: StructureShape
     RuleActionOverride: StructureShape
@@ -363,6 +421,13 @@ module Aws::WAFV2
     SearchString: BlobShape
     SensitivityLevel: EnumShape
     SensitivityToAct: EnumShape
+    SettlementFilterString: StringShape
+    SettlementIdString: StringShape
+    SettlementRecord: StructureShape
+    SettlementRecordLimit: IntegerShape
+    SettlementRecordList: ListShape
+    SettlementSortBy: EnumShape
+    SettlementStatus: EnumShape
     SingleCookieName: StringShape
     SingleHeader: StructureShape
     SingleQueryArgument: StructureShape
@@ -370,6 +435,9 @@ module Aws::WAFV2
     SizeConstraintStatement: StructureShape
     SizeInspectionLimit: EnumShape
     SolveTimestamp: IntegerShape
+    SortOrder: EnumShape
+    SourceStatistics: StructureShape
+    SourceStatisticsList: ListShape
     SourceType: StringShape
     SqliMatchStatement: StructureShape
     Statement: StructureShape
@@ -389,6 +457,7 @@ module Aws::WAFV2
     TextTransformationPriority: IntegerShape
     TextTransformationType: EnumShape
     TextTransformations: ListShape
+    TimeSeriesStatisticType: EnumShape
     TimeWindow: StructureShape
     TimeWindowDay: IntegerShape
     TimeWindowSecond: IntegerShape
@@ -410,9 +479,11 @@ module Aws::WAFV2
     UpdateWebACLResponse: StructureShape
     UriFragment: StructureShape
     UriPath: StructureShape
+    UriPathPrefixString: StringShape
     UsageOfAction: EnumShape
     UsernameField: StructureShape
     VendorName: StringShape
+    VerifiedStatus: BooleanShape
     VersionKeyString: StringShape
     VersionToPublish: StructureShape
     VersionsToPublish: MapShape
@@ -421,6 +492,7 @@ module Aws::WAFV2
     WAFConfigurationWarningException: StructureShape
     WAFDuplicateItemException: StructureShape
     WAFExpiredManagedRuleGroupVersionException: StructureShape
+    WAFFeatureNotIncludedInPricingPlanException: StructureShape
     WAFInternalErrorException: StructureShape
     WAFInvalidOperationException: StructureShape
     WAFInvalidParameterException: StructureShape
@@ -436,6 +508,7 @@ module Aws::WAFV2
     WAFTagOperationInternalErrorException: StructureShape
     WAFUnavailableEntityException: StructureShape
     WAFUnsupportedAggregateKeyTypeException: StructureShape
+    WalletAddress: StringShape
     WebACL: StructureShape
     WebACLSummaries: ListShape
     WebACLSummary: StructureShape

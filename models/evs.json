@@ -1,6 +1,41 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.evs#AccountSetting": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.evs#SettingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the EVS setting. Valid values are:</p> <ul> <li> <p> <code>vcfPortedCoreCount</code> (type: numeric string) - The total number of VCF license cores ported to Amazon EVS for the account in that Region. The maximum value is 1,000,000 cores. This setting value is shared with Broadcom for record-keeping.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.evs#SettingValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the EVS setting.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A regional account-level EVS setting, represented as a name and value pair.</p>"
+            }
+        },
+        "com.amazonaws.evs#AccountSettingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evs#AccountSetting"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of regional account-level EVS settings.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.evs#AllocationId": {
             "type": "string",
             "traits": {
@@ -16,7 +51,16 @@
             "version": "2023-07-27",
             "operations": [
                 {
+                    "target": "com.amazonaws.evs#GetAccountSettings"
+                },
+                {
+                    "target": "com.amazonaws.evs#GetVersions"
+                },
+                {
                     "target": "com.amazonaws.evs#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.evs#PutAccountSettings"
                 },
                 {
                     "target": "com.amazonaws.evs#TagResource"
@@ -63,6 +107,194 @@
                 },
                 "smithy.api#documentation": "<p>Amazon Elastic VMware Service (Amazon EVS) is a service that you can use to deploy a VMware Cloud Foundation (VCF) software environment directly on EC2 bare metal instances within an Amazon Virtual Private Cloud (VPC).</p> <p>Workloads running on Amazon EVS are fully compatible with workloads running on any standard VMware vSphere environment. This means that you can migrate any VMware-based workload to Amazon EVS without workload modification.</p>",
                 "smithy.api#title": "Amazon Elastic VMware Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://evs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://evs-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://evs.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://evs.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -70,27 +302,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -685,6 +917,16 @@
                 }
             }
         },
+        "com.amazonaws.evs#ApplianceFqdn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+            }
+        },
         "com.amazonaws.evs#Arn": {
             "type": "string",
             "traits": {
@@ -786,7 +1028,13 @@
                 "type": {
                     "target": "com.amazonaws.evs#CheckType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The check type. Amazon EVS performs the following checks.</p> <ul> <li> <p> <code>KEY_REUSE</code>: checks that the VCF license key is not used by another Amazon EVS environment. This check fails if a used license is added to the environment.</p> </li> <li> <p> <code>KEY_COVERAGE</code>: checks that your VCF license key allocates sufficient vCPU cores for all deployed hosts. The check fails when any assigned hosts in the EVS environment are not covered by license keys, or when any unassigned hosts cannot be covered by available vCPU cores in keys.</p> </li> <li> <p> <code>REACHABILITY</code>: checks that the Amazon EVS control plane has a persistent connection to SDDC Manager. If Amazon EVS cannot reach the environment, this check fails.</p> </li> <li> <p> <code>HOST_COUNT</code>: Checks that your environment has a minimum of 4 hosts, which is a requirement for VCF 5.2.1.</p> <p>If this check fails, you will need to add hosts so that your environment meets this minimum requirement. Amazon EVS only supports environments with 4-16 hosts.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The check type. Amazon EVS performs the following checks:</p> <ul> <li> <p> <code>KEY_REUSE</code>: Verifies that the VCF license key is not used by another Amazon EVS environment.</p> </li> <li> <p> <code>KEY_COVERAGE</code>: Verifies that the VCF license key allocates sufficient vCPU cores for all deployed hosts.</p> </li> <li> <p> <code>REACHABILITY</code>: Verifies that the Amazon EVS control plane has a persistent connection to SDDC Manager.</p> </li> <li> <p> <code>HOST_COUNT</code>: Verifies that the environment meets the minimum host count.</p> </li> <li> <p> <code>VCENTER_REACHABILITY</code>: Verifies vCenter Server reachability through the vCenter connector.</p> </li> <li> <p> <code>VCENTER_VM_SYNC</code>: Verifies that the vCenter connector can synchronize VM inventory from vCenter Server.</p> </li> <li> <p> <code>VCENTER_VM_EVENT</code>: Verifies that the vCenter connector can receive VM lifecycle events from vCenter Server.</p> </li> <li> <p> <code>OPERATIONS_MANAGER_REACHABILITY</code>: Verifies Operations Manager reachability through the Operations Manager connector.</p> </li> <li> <p> <code>SDDC_MANAGER_REACHABILITY</code>: Verifies SDDC Manager reachability through the SDDC Manager connector.</p> </li> <li> <p> <code>SDDC_MANAGER_HOST_COUNT</code>: Verifies that the host count reported by SDDC Manager meets Amazon EVS minimum requirements.</p> </li> <li> <p> <code>SDDC_MANAGER_KEY_COVERAGE</code>: Verifies that the VCF license key configured in SDDC Manager covers all deployed hosts.</p> </li> <li> <p> <code>SDDC_MANAGER_KEY_REUSE</code>: Verifies that the VCF license key configured in SDDC Manager is not used by another Amazon EVS environment.</p> </li> <li> <p> <code>CONNECTOR_HEALTH</code>: Aggregate health across all connectors in the environment.</p> </li> </ul>"
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the check.</p>"
                     }
                 },
                 "result": {
@@ -855,6 +1103,60 @@
                     "traits": {
                         "smithy.api#enumValue": "HOST_COUNT"
                     }
+                },
+                "VCENTER_REACHABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VCENTER_REACHABILITY"
+                    }
+                },
+                "VCENTER_VM_SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VCENTER_VM_SYNC"
+                    }
+                },
+                "VCENTER_VM_EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VCENTER_VM_EVENT"
+                    }
+                },
+                "OPERATIONS_MANAGER_REACHABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATIONS_MANAGER_REACHABILITY"
+                    }
+                },
+                "SDDC_MANAGER_REACHABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SDDC_MANAGER_REACHABILITY"
+                    }
+                },
+                "SDDC_MANAGER_HOST_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SDDC_MANAGER_HOST_COUNT"
+                    }
+                },
+                "SDDC_MANAGER_KEY_COVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SDDC_MANAGER_KEY_COVERAGE"
+                    }
+                },
+                "SDDC_MANAGER_KEY_REUSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SDDC_MANAGER_KEY_REUSE"
+                    }
+                },
+                "CONNECTOR_HEALTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTOR_HEALTH"
+                    }
                 }
             }
         },
@@ -892,7 +1194,282 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX uplink VLAN for connectivity to the NSX overlay network.</p>"
+                "smithy.api#documentation": "<p>The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX uplink VLAN for connectivity to the NSX overlay network.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>"
+            }
+        },
+        "com.amazonaws.evs#Connector": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the environment that the connector belongs to.</p>"
+                    }
+                },
+                "connectorId": {
+                    "target": "com.amazonaws.evs#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the connector.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.evs#ConnectorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the connector.</p>"
+                    }
+                },
+                "applianceFqdn": {
+                    "target": "com.amazonaws.evs#ApplianceFqdn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) of the VCF appliance that the connector connects to.</p>"
+                    }
+                },
+                "secretArn": {
+                    "target": "com.amazonaws.evs#SecretIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that stores the credentials for the VCF appliance.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.evs#ConnectorState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the connector.</p>"
+                    }
+                },
+                "stateDetails": {
+                    "target": "com.amazonaws.evs#StateDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the connector state.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.evs#CheckResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the connector.</p>"
+                    }
+                },
+                "checks": {
+                    "target": "com.amazonaws.evs#ConnectorsChecksList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of checks that are run on the connector.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the connector was created.</p>"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the connector was modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents a connector for an Amazon EVS environment. A connector establishes a connection to the given appliance type using the credentials stored in Amazon Web Services Secrets Manager.</p>"
+            }
+        },
+        "com.amazonaws.evs#ConnectorCheck": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.evs#CheckType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The check type.</p>"
+                    }
+                },
+                "result": {
+                    "target": "com.amazonaws.evs#CheckResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The check result.</p>"
+                    }
+                },
+                "lastCheckAttempt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of the last check attempt.</p>"
+                    }
+                },
+                "impairedSince": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when connector health began to be impaired.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A check on a connector to identify connectivity health.</p>"
+            }
+        },
+        "com.amazonaws.evs#ConnectorId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(cnctr-[a-zA-Z0-9]{10})$"
+            }
+        },
+        "com.amazonaws.evs#ConnectorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evs#Connector"
+            }
+        },
+        "com.amazonaws.evs#ConnectorState": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evs#ConnectorType": {
+            "type": "enum",
+            "members": {
+                "OPERATIONS_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATIONS_MANAGER"
+                    }
+                },
+                "SDDC_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SDDC_MANAGER"
+                    }
+                },
+                "VCENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VCENTER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evs#ConnectorsChecksList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evs#ConnectorCheck"
+            }
+        },
+        "com.amazonaws.evs#CreateEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#CreateEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#CreateEntitlementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Windows Server License entitlement for virtual machines in an Amazon EVS environment using the provided vCenter Server connector. This is an asynchronous operation. Amazon EVS validates the specified virtual machines before starting usage tracking.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#CreateEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.evs#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the entitlement creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the environment to create the entitlement in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectorId": {
+                    "target": "com.amazonaws.evs#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the connector associated with the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entitlementType": {
+                    "target": "com.amazonaws.evs#EntitlementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entitlement to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vmIds": {
+                    "target": "com.amazonaws.evs#VmIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of VMware vSphere virtual machine managed object IDs to create entitlements for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#CreateEntitlementResponse": {
+            "type": "structure",
+            "members": {
+                "entitlements": {
+                    "target": "com.amazonaws.evs#VmEntitlementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the created entitlements.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.evs#CreateEnvironment": {
@@ -913,8 +1490,90 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "smithy.api#documentation": "<p>Creates an Amazon EVS environment that runs VCF software, such as SDDC Manager, NSX Manager, and vCenter Server.</p> <p>During environment creation, Amazon EVS performs validations on DNS settings, provisions VLAN subnets and hosts, and deploys the supplied version of VCF.</p> <p>It can take several hours to create an environment. After the deployment completes, you can configure VCF in the vSphere user interface according to your needs.</p> <note> <p>You cannot use the <code>dedicatedHostId</code> and <code>placementGroupId</code> parameters together in the same <code>CreateEnvironment</code> action. This results in a <code>ValidationException</code> response.</p> </note>",
+                "smithy.api#documentation": "<p>Creates an Amazon EVS environment that runs VCF software, such as SDDC Manager, NSX Manager, and vCenter Server.</p> <note> <p>When you specify <code>SELF_DEPLOYED</code> for <code>vcfVersion</code>, Amazon EVS provisions only the VLAN subnets; no hosts are added and no VCF installation is performed. After the environment is created, you can add hosts with <code>CreateEnvironmentHost</code> and install VCF yourself. The <code>licenseInfo</code>, <code>hosts</code>, <code>vcfHostnames</code>, <code>siteId</code>, and <code>connectivityInfo</code> parameters are not supported in this mode.</p> </note> <p>When you specify any other VCF version, Amazon EVS installs and configures VCF for you. For more information, see <a href=\"https://docs.aws.amazon.com/evs/latest/userguide/getting-started-self-deployed.html\">Self-deployed mode</a> in the <i>Amazon EVS User Guide</i>.</p> <important> <p>When Amazon EVS installs VCF, the default ESX version for the selected VCF version will be used. After a host is added with a specific ESX version, it can only be upgraded using vCenter Lifecycle Manager.</p> </important> <note> <p>You cannot use the <code>dedicatedHostId</code> and <code>placementGroupId</code> parameters together in the same <code>CreateEnvironment</code> action. This results in a <code>ValidationException</code> response.</p> </note>",
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#CreateEnvironmentConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#CreateEnvironmentConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#CreateEnvironmentConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a connector for an Amazon EVS environment. A connector allows the Amazon EVS control plane to interface with VCF appliances using a fully qualified domain name.</p> <p>You can create only one connector of each type per environment. For environments where Amazon EVS installs VCF, the <code>SDDC_MANAGER</code> connector is created automatically.</p> <note> <p>Amazon EVS requires an active connector to SDDC Manager or VCF Operations Manager to monitor environment health and license compliance.</p> </note>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#CreateEnvironmentConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.evs#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the connector creation request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the environment to create the connector in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.evs#ConnectorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of connector to create.</p> <ul> <li> <p> <code>OPERATIONS_MANAGER</code>: Connector to an Operations Manager appliance. Required for VCF 9x environments.</p> </li> <li> <p> <code>SDDC_MANAGER</code>: Connector to an SDDC Manager appliance. Required for VCF 5.x environments.</p> </li> <li> <p> <code>VCENTER</code>: Connector to a vCenter Server appliance. Required for features that depend on vCenter, such as Windows Server license-included.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applianceFqdn": {
+                    "target": "com.amazonaws.evs#ApplianceFqdn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) of the VCF appliance that the connector targets.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretIdentifier": {
+                    "target": "com.amazonaws.evs#SecretIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN or name of the Amazon Web Services Secrets Manager secret that stores the credentials for the VCF appliance. <code>SDDC_MANAGER</code> requires an <code>apiKey</code> field; <code>OPERATIONS_MANAGER</code> and <code>VCENTER</code> require <code>username</code> and <code>password</code> fields.</p> <important> <p>Do not use credentials with Administrator privileges. We recommend using a service account with read-only permissions.</p> </important>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#CreateEnvironmentConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "connector": {
+                    "target": "com.amazonaws.evs#Connector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the created connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.evs#CreateEnvironmentHost": {
@@ -934,7 +1593,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an ESXi host and adds it to an Amazon EVS environment. Amazon EVS supports 4-16 hosts per environment.</p> <p>This action can only be used after the Amazon EVS environment is deployed.</p> <p>You can use the <code>dedicatedHostId</code> parameter to specify an Amazon EC2 Dedicated Host for ESXi host creation.</p> <p> You can use the <code>placementGroupId</code> parameter to specify a cluster or partition placement group to launch EC2 instances into.</p> <note> <p>You cannot use the <code>dedicatedHostId</code> and <code>placementGroupId</code> parameters together in the same <code>CreateEnvironmentHost</code> action. This results in a <code>ValidationException</code> response.</p> </note>",
+                "smithy.api#documentation": "<p>Creates an ESX host and adds it to an Amazon EVS environment.</p> <p>This action can only be used after the Amazon EVS environment is deployed.</p> <p>You can use the <code>dedicatedHostId</code> parameter to specify an Amazon EC2 Dedicated Host for ESX host creation.</p> <p> You can use the <code>placementGroupId</code> parameter to specify a cluster or partition placement group to launch EC2 instances into.</p> <note> <p>If you don't specify an ESX version when adding hosts using <code>CreateEnvironmentHost</code> action, Amazon EVS automatically uses the default ESX version for your environment's VCF version. To find the available ESX versions for a particular VCF version, use the <code>GetVersions</code> action.</p> <p>You cannot use the <code>dedicatedHostId</code> and <code>placementGroupId</code> parameters together in the same <code>CreateEnvironmentHost</code> action. This results in a <code>ValidationException</code> response.</p> </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -960,6 +1619,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The host that is created and added to the environment.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "esxVersion": {
+                    "target": "com.amazonaws.evs#EsxVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ESX version to use for the host.</p>"
                     }
                 }
             },
@@ -1024,35 +1689,28 @@
                 "vpcId": {
                     "target": "com.amazonaws.evs#VpcId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique ID for the VPC that the environment is deployed inside.</p> <p>Amazon EVS requires that all VPC subnets exist in a single Availability Zone in a Region where the service is available.</p> <p>The VPC that you specify must have a valid DHCP option set with domain name, at least two DNS servers, and an NTP server. These settings are used to configure your VCF appliances and hosts. The VPC cannot be used with any other deployed Amazon EVS environment. Amazon EVS does not provide multi-VPC support for environments at this time.</p> <p>Amazon EVS does not support the following Amazon Web Services networking options for NSX overlay connectivity: cross-Region VPC peering, Amazon S3 gateway endpoints, or Amazon Web Services Direct Connect virtual private gateway associations.</p> <note> <p>Ensure that you specify a VPC that is adequately sized to accommodate the {evws} subnets.</p> </note>",
+                        "smithy.api#documentation": "<p>A unique ID for the VPC that the environment is deployed inside.</p> <p>Amazon EVS requires that all VPC subnets exist in a single Availability Zone in a Region where the service is available.</p> <p>The VPC that you specify must have a valid DHCP option set with domain name, at least two DNS servers, and an NTP server. These settings are used to configure your VCF appliances and hosts. The VPC cannot be used with any other deployed Amazon EVS environment. Amazon EVS does not provide multi-VPC support for environments at this time.</p> <p>Amazon EVS does not support the following Amazon Web Services networking options for NSX overlay connectivity: cross-Region VPC peering, Amazon S3 gateway endpoints, or Amazon Web Services Direct Connect virtual private gateway associations.</p> <note> <p>Ensure that you specify a VPC that is adequately sized to accommodate the Amazon EVS subnets.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "serviceAccessSubnetId": {
                     "target": "com.amazonaws.evs#SubnetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subnet that is used to establish connectivity between the Amazon EVS control plane and VPC. Amazon EVS uses this subnet to validate mandatory DNS records for your VCF appliances and hosts and create the environment.</p>",
+                        "smithy.api#documentation": "<p>The subnet that is used to establish connectivity between the Amazon EVS control plane and VPC. The Amazon EVS control plane uses this subnet to interface with your environment. This includes validating DNS records and enabling Amazon EVS Connectors.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "vcfVersion": {
                     "target": "com.amazonaws.evs#VcfVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p> The VCF version to use for the environment. Amazon EVS only supports VCF version 5.2.1 at this time.</p>",
+                        "smithy.api#documentation": "<p>The VCF version to use for the environment.</p> <ul> <li> <p> <code>SELF_DEPLOYED</code>: You install VCF yourself. The <code>licenseInfo</code>, <code>hosts</code>, <code>vcfHostnames</code>, <code>siteId</code>, and <code>connectivityInfo</code> parameters are not supported.</p> </li> <li> <p>Any other valid value: Amazon EVS installs and configures VCF for you in the version you specify.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "termsAccepted": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Customer confirmation that the customer has purchased and will continue to maintain the required number of VCF software licenses to cover all physical processor cores in the Amazon EVS environment. Information about your VCF software in Amazon EVS will be shared with Broadcom to verify license compliance. Amazon EVS does not validate license keys. To validate license keys, visit the Broadcom support portal.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "licenseInfo": {
-                    "target": "com.amazonaws.evs#LicenseInfoList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key. The VCF solution key must cover a minimum of 256 cores. The vSAN license key must provide at least 110 TiB of vSAN capacity.</p> <p>VCF licenses can be used for only one Amazon EVS environment. Amazon EVS does not support reuse of VCF licenses for multiple environments.</p> <p>VCF license information can be retrieved from the Broadcom portal.</p>",
+                        "smithy.api#documentation": "<p>Confirmation that the customer has purchased and will continue to maintain the required number of VCF software licenses to cover all physical processor cores in the Amazon EVS environment. Information about your VCF software in Amazon EVS will be shared with Broadcom to verify license compliance. Amazon EVS does not validate license keys. To validate license keys, visit the Broadcom support portal.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1063,32 +1721,34 @@
                         "smithy.api#required": {}
                     }
                 },
-                "hosts": {
-                    "target": "com.amazonaws.evs#HostInfoForCreateList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The ESXi hosts to add to the environment. Amazon EVS requires that you provide details for a minimum of 4 hosts during environment creation.</p> <p>For each host, you must provide the desired hostname, EC2 SSH keypair name, and EC2 instance type. Optionally, you can also provide a partition or cluster placement group to use, or use Amazon EC2 Dedicated Hosts.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "connectivityInfo": {
                     "target": "com.amazonaws.evs#ConnectivityInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p> The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX edges over the NSX uplink subnet, providing BGP-based dynamic routing for overlay networks.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX edges over the NSX uplink subnet, providing BGP-based dynamic routing for overlay networks.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>"
+                    }
+                },
+                "licenseInfo": {
+                    "target": "com.amazonaws.evs#LicenseInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key. The VCF solution key must meet minimum core requirements, and the vSAN license key must meet minimum capacity requirements for your selected instance type.</p> <p>For information about minimum license requirements, see <a href=\"https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html\">the VCF subscriptions section</a> in the <i>Amazon EVS User Guide</i>.</p> <p>VCF licenses can be used for only one Amazon EVS environment. Amazon EVS does not support reuse of VCF licenses for multiple environments.</p> <p>VCF license information can be retrieved from the Broadcom portal.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>"
+                    }
+                },
+                "hosts": {
+                    "target": "com.amazonaws.evs#HostInfoForCreateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ESX hosts to add to the environment. For each host, provide the desired hostname, EC2 SSH keypair name, and EC2 instance type. Optionally, provide a partition or cluster placement group, or use Amazon EC2 Dedicated Hosts.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>. In that case, you can add hosts using <code>CreateEnvironmentHost</code> after the environment is created.</p> </note>"
                     }
                 },
                 "vcfHostnames": {
                     "target": "com.amazonaws.evs#VcfHostnames",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DNS hostnames for the virtual machines that host the VCF management appliances. Amazon EVS requires that you provide DNS hostnames for the following appliances: vCenter, NSX Manager, SDDC Manager, and Cloud Builder.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The DNS hostnames for the virtual machines that host the VCF management appliances. Provide hostnames for vCenter, NSX Manager, SDDC Manager, and Cloud Builder.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>"
                     }
                 },
                 "siteId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Broadcom Site ID that is allocated to you as part of your electronic software delivery. This ID allows customer access to the Broadcom portal, and is provided to you by Broadcom at the close of your software contract or contract renewal. Amazon EVS uses the Broadcom Site ID that you provide to meet Broadcom VCF license usage reporting requirements for Amazon EVS.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Broadcom Site ID that is allocated to you as part of your electronic software delivery. This ID allows customer access to the Broadcom portal, and is provided to you by Broadcom at the close of your software contract or contract renewal. Amazon EVS uses the Broadcom Site ID that you provide to meet Broadcom VCF license usage reporting requirements for Amazon EVS.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>"
                     }
                 }
             },
@@ -1120,6 +1780,87 @@
                 "smithy.api#pattern": "^h-[a-f0-9]{8}([a-f0-9]{9})?$"
             }
         },
+        "com.amazonaws.evs#DeleteEntitlement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#DeleteEntitlementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#DeleteEntitlementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Windows Server License entitlement for virtual machines in an Amazon EVS environment. Deleting an entitlement stops usage tracking for the specified virtual machines.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#DeleteEntitlementRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.evs#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the entitlement deletion request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the environment that the entitlement belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectorId": {
+                    "target": "com.amazonaws.evs#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the connector associated with the entitlement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entitlementType": {
+                    "target": "com.amazonaws.evs#EntitlementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entitlement to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vmIds": {
+                    "target": "com.amazonaws.evs#VmIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of VMware vSphere virtual machine managed object IDs to delete entitlements for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#DeleteEntitlementResponse": {
+            "type": "structure",
+            "members": {
+                "entitlements": {
+                    "target": "com.amazonaws.evs#VmEntitlementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the deleted entitlements.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.evs#DeleteEnvironment": {
             "type": "operation",
             "input": {
@@ -1139,6 +1880,81 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an Amazon EVS environment.</p> <p>Amazon EVS environments will only be enabled for deletion once the hosts are deleted. You can delete hosts using the <code>DeleteEnvironmentHost</code> action.</p> <p>Environment deletion also deletes the associated Amazon EVS VLAN subnets and Amazon Web Services Secrets Manager secrets that Amazon EVS created. Amazon Web Services resources that you create are not deleted. These resources may continue to incur costs.</p>",
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#DeleteEnvironmentConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#DeleteEnvironmentConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#DeleteEnvironmentConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a connector from an Amazon EVS environment.</p> <note> <p>Before deleting a connector, you must remove all entitlements that are associated with the same vCenter.</p> </note>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#DeleteEnvironmentConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.evs#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the connector deletion request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the environment that the connector belongs to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectorId": {
+                    "target": "com.amazonaws.evs#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the connector to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#DeleteEnvironmentConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "connector": {
+                    "target": "com.amazonaws.evs#Connector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the deleted connector.</p>"
+                    }
+                },
+                "environmentSummary": {
+                    "target": "com.amazonaws.evs#EnvironmentSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the environment that the connector was deleted from.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.evs#DeleteEnvironmentHost": {
@@ -1355,6 +2171,58 @@
                 "target": "com.amazonaws.evs#EipAssociation"
             }
         },
+        "com.amazonaws.evs#EntitlementStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "AT_RISK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AT_RISK"
+                    }
+                },
+                "ENTITLEMENT_REMOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTITLEMENT_REMOVED"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evs#EntitlementType": {
+            "type": "enum",
+            "members": {
+                "WINDOWS_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER"
+                    }
+                }
+            }
+        },
         "com.amazonaws.evs#Environment": {
             "type": "structure",
             "members": {
@@ -1427,7 +2295,7 @@
                 "licenseInfo": {
                     "target": "com.amazonaws.evs#LicenseInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key. The VCF solution key must cover a minimum of 256 cores. The vSAN license key must provide at least 110 TiB of vSAN capacity.</p>"
+                        "smithy.api#documentation": "<p> The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key. The VCF solution key must meet minimum core requirements, and the vSAN license key must meet minimum capacity requirements for your selected instance type.</p> <p>For information about minimum license requirements, see <a href=\"https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html\">the VCF subscriptions section</a> in the <i>Amazon EVS User Guide</i>.</p>"
                     }
                 },
                 "siteId": {
@@ -1445,7 +2313,7 @@
                 "checks": {
                     "target": "com.amazonaws.evs#ChecksList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A check on the environment to identify instance health and VMware VCF licensing issues.</p>"
+                        "smithy.api#documentation": "<p>A check on the environment to identify connector health.</p>"
                     }
                 },
                 "connectivityInfo": {
@@ -1523,7 +2391,19 @@
                     "target": "com.amazonaws.evs#AssociateEipToVlan"
                 },
                 {
+                    "target": "com.amazonaws.evs#CreateEntitlement"
+                },
+                {
+                    "target": "com.amazonaws.evs#CreateEnvironmentConnector"
+                },
+                {
                     "target": "com.amazonaws.evs#CreateEnvironmentHost"
+                },
+                {
+                    "target": "com.amazonaws.evs#DeleteEntitlement"
+                },
+                {
+                    "target": "com.amazonaws.evs#DeleteEnvironmentConnector"
                 },
                 {
                     "target": "com.amazonaws.evs#DeleteEnvironmentHost"
@@ -1532,10 +2412,22 @@
                     "target": "com.amazonaws.evs#DisassociateEipFromVlan"
                 },
                 {
+                    "target": "com.amazonaws.evs#GetDepotUrl"
+                },
+                {
+                    "target": "com.amazonaws.evs#ListEnvironmentConnectors"
+                },
+                {
                     "target": "com.amazonaws.evs#ListEnvironmentHosts"
                 },
                 {
                     "target": "com.amazonaws.evs#ListEnvironmentVlans"
+                },
+                {
+                    "target": "com.amazonaws.evs#ListVmEntitlements"
+                },
+                {
+                    "target": "com.amazonaws.evs#UpdateEnvironmentConnector"
                 }
             ],
             "traits": {
@@ -1653,6 +2545,157 @@
                 "target": "com.amazonaws.evs#EnvironmentSummary"
             }
         },
+        "com.amazonaws.evs#ErrorDetail": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains error details for an entitlement.</p>"
+            }
+        },
+        "com.amazonaws.evs#EsxVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.evs#EsxVersionList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.evs#GetAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#GetAccountSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#GetAccountSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the configured EVS settings for your Amazon Web Services account in the specified Amazon Web Services Region. If no settings have been set, an empty list is returned.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.evs#GetAccountSettingsRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The request for the GetAccountSettings operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#GetAccountSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "settings": {
+                    "target": "com.amazonaws.evs#AccountSettingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regional account-level EVS settings for the account. EVS settings that have never been explicitly set are omitted from the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response for the GetAccountSettings operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.evs#GetDepotUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#GetDepotUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#GetDepotUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a URL and authentication token for accessing the Amazon EVS Custom Addon depot. Configure the depot URL as a download source in vSphere Lifecycle Manager (vLCM) to sync and install the Amazon EVS Custom Addon.</p> <p>The depot URL remains active until you rotate the authentication token by calling this action with <code>rotate</code> set to <code>true</code>.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.evs#GetDepotUrlRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amazon EVS environment to get the depot URL for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "rotate": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Revokes the current authentication token and returns a new depot URL with a new token. Previously issued depot URLs will stop working within 5 minutes of rotation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#GetDepotUrlResponse": {
+            "type": "structure",
+            "members": {
+                "depotUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for accessing the Amazon EVS Custom Addon depot. This URL includes the authentication token as a path component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "token": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication token for depot access. This token is included in the depot URL and is used to authenticate requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.evs#GetEnvironment": {
             "type": "operation",
             "input": {
@@ -1714,6 +2757,56 @@
                     "target": "com.amazonaws.evs#Environment",
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the requested environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.evs#GetVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#GetVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#GetVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about VCF versions, ESX versions and EC2 instance types provided by Amazon EVS. For each VCF version, the response also includes the default ESX version and provided EC2 instance types.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.evs#GetVersionsRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#GetVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "vcfVersions": {
+                    "target": "com.amazonaws.evs#VcfVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VCF versions with their availability status, default ESX version, and instance types.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instanceTypeEsxVersions": {
+                    "target": "com.amazonaws.evs#InstanceTypeEsxVersionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of EC2 instance types and their available ESX versions.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1798,7 +2891,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An ESXi host that runs on an Amazon EC2 bare metal instance. Four hosts are created in an Amazon EVS environment during environment creation. You can add hosts to an environment using the <code>CreateEnvironmentHost</code> operation. Amazon EVS supports 4-16 hosts per environment.</p>"
+                "smithy.api#documentation": "<p>An ESX host that runs on an Amazon EC2 bare metal instance.</p>"
             }
         },
         "com.amazonaws.evs#HostInfoForCreate": {
@@ -1934,7 +3027,7 @@
                 "vmkManagement": {
                     "target": "com.amazonaws.evs#InitialVlanInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p> The host VMkernel management VLAN subnet. This VLAN subnet carries traffic for managing ESXi hosts and communicating with VMware vCenter Server.</p>",
+                        "smithy.api#documentation": "<p> The host VMkernel management VLAN subnet. This VLAN subnet carries traffic for managing ESX hosts and communicating with VMware vCenter Server.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1955,7 +3048,7 @@
                 "vSan": {
                     "target": "com.amazonaws.evs#InitialVlanInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p> The vSAN VLAN subnet. This VLAN subnet carries the communication between ESXi hosts to implement a vSAN shared storage pool.</p>",
+                        "smithy.api#documentation": "<p> The vSAN VLAN subnet. This VLAN subnet carries the communication between ESX hosts to implement a vSAN shared storage pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1983,7 +3076,7 @@
                 "hcx": {
                     "target": "com.amazonaws.evs#InitialVlanInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HCX VLAN subnet. This VLAN subnet allows the HCX Interconnnect (IX) and HCX Network Extension (NE) to reach their peers and enable HCX Service Mesh creation.</p> <p>If you plan to use a public HCX VLAN subnet, the following requirements must be met:</p> <ul> <li> <p>Must have a /28 netmask and be allocated from the IPAM public pool. Required for HCX internet access configuration.</p> </li> <li> <p>The HCX public VLAN CIDR block must be added to the VPC as a secondary CIDR block.</p> </li> <li> <p>Must have at least three Elastic IP addresses to be allocated from the public IPAM pool for HCX components.</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The HCX VLAN subnet. This VLAN subnet allows the HCX Interconnnect (IX) and HCX Network Extension (NE) to reach their peers and enable HCX Service Mesh creation.</p> <p>If you plan to use a public HCX VLAN subnet, the following requirements must be met:</p> <ul> <li> <p>Must have a /28 netmask and be allocated from the IPAM public pool. Required for HCX internet access configuration.</p> </li> <li> <p>The HCX public VLAN CIDR block must be added to the VPC as a secondary CIDR block.</p> </li> <li> <p>Must have at least two Elastic IP addresses to be allocated from the public IPAM pool for HCX components.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2027,7 +3120,71 @@
                     "traits": {
                         "smithy.api#enumValue": "i4i.metal"
                     }
+                },
+                "I7I_METAL_24XL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i7i.metal-24xl"
+                    }
+                },
+                "I7I_METAL_48XL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i7i.metal-48xl"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.evs#InstanceTypeEsxVersionsInfo": {
+            "type": "structure",
+            "members": {
+                "instanceType": {
+                    "target": "com.amazonaws.evs#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EC2 instance type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "esxVersions": {
+                    "target": "com.amazonaws.evs#EsxVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of ESX versions offered for this instance type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about ESX versions offered for each EC2 instance type.</p>"
+            }
+        },
+        "com.amazonaws.evs#InstanceTypeEsxVersionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evs#InstanceTypeEsxVersionsInfo"
+            }
+        },
+        "com.amazonaws.evs#InstanceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evs#InstanceType"
+            }
+        },
+        "com.amazonaws.evs#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the error encountered.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal server error occurred. Retry your request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.evs#IpAddress": {
@@ -2052,14 +3209,14 @@
                 "solutionKey": {
                     "target": "com.amazonaws.evs#SolutionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p> The VCF solution key. This license unlocks VMware VCF product features, including vSphere, NSX, SDDC Manager, and vCenter Server. The VCF solution key must cover a minimum of 256 cores.</p>",
+                        "smithy.api#documentation": "<p> The VCF solution key. This license unlocks VMware VCF product features, including vSphere, NSX, SDDC Manager, and vCenter Server. The VCF solution key must meet the instance-type-specific minimum core requirements.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "vsanKey": {
                     "target": "com.amazonaws.evs#VSanLicenseKey",
                     "traits": {
-                        "smithy.api#documentation": "<p> The VSAN license key. This license unlocks vSAN features. The vSAN license key must provide at least 110 TiB of vSAN capacity.</p>",
+                        "smithy.api#documentation": "<p> The VSAN license key. This license unlocks vSAN features. The vSAN license key must meet the instance-type-specific minimum capacity requirements.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2078,6 +3235,83 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.evs#ListEnvironmentConnectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#ListEnvironmentConnectorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#ListEnvironmentConnectorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the connectors within an environment. Returns the status of each connector and its applicable checks, among other connector details.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "connectors"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.evs#ListEnvironmentConnectorsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.evs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique pagination token for each page. If <code>nextToken</code> is returned, there are more results available. Make the call again using the returned token with all other arguments unchanged to retrieve the next page. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.evs#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#ListEnvironmentConnectorsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.evs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique pagination token for next page results. Make the call again using this token to retrieve the next page.</p>"
+                    }
+                },
+                "connectors": {
+                    "target": "com.amazonaws.evs#ConnectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of connectors in the environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.evs#ListEnvironmentHosts": {
@@ -2396,6 +3630,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.evs#ListVmEntitlements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#ListVmEntitlementsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#ListVmEntitlementsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the Windows Server License entitlements for virtual machines in an Amazon EVS environment. Returns existing entitlements for virtual machines associated with the specified environment and connector.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "entitlements"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.evs#ListVmEntitlementsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.evs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique pagination token for each page. If <code>nextToken</code> is returned, there are more results available. Make the call again using the returned token with all other arguments unchanged to retrieve the next page. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.evs#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectorId": {
+                    "target": "com.amazonaws.evs#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entitlementType": {
+                    "target": "com.amazonaws.evs#EntitlementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entitlement to list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#ListVmEntitlementsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.evs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique pagination token for next page results. Make the call again using this token to retrieve the next page.</p>"
+                    }
+                },
+                "entitlements": {
+                    "target": "com.amazonaws.evs#VmEntitlementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entitlements for virtual machines in the environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.evs#MaxResults": {
             "type": "integer",
             "traits": {
@@ -2460,6 +3784,61 @@
                     "max": 25
                 },
                 "smithy.api#pattern": "^pg-[a-f0-9]{8}([a-f0-9]{9})?$"
+            }
+        },
+        "com.amazonaws.evs#PutAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#PutAccountSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#PutAccountSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates account-level EVS settings for your Amazon Web Services account in the specified Amazon Web Services Region.</p> <p>EVS settings included in the request are created or overwritten. Settings omitted from the request retain their current values.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#PutAccountSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "settings": {
+                    "target": "com.amazonaws.evs#AccountSettingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regional account-level EVS settings to create or update. Only the settings included in this list are modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request for the PutAccountSettings operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#PutAccountSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "settings": {
+                    "target": "com.amazonaws.evs#AccountSettingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regional account-level EVS settings, and their values, that were modified in this request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response for the PutAccountSettings operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.evs#RequestTagMap": {
@@ -2552,6 +3931,16 @@
                 "smithy.api#documentation": "<p>A managed secret that contains the credentials for installing vCenter Server, NSX, and SDDC Manager. During environment creation, the Amazon EVS control plane uses Amazon Web Services Secrets Manager to create, encrypt, validate, and store secrets. If you choose to delete your environment, Amazon EVS also deletes the secrets that are associated with your environment. Amazon EVS does not provide managed rotation of secrets. We recommend that you rotate secrets regularly to ensure that secrets are not long-lived.</p>"
             }
         },
+        "com.amazonaws.evs#SecretIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@!-]+|[a-zA-Z0-9/_+=.@!-]+)$"
+            }
+        },
         "com.amazonaws.evs#SecretList": {
             "type": "list",
             "member": {
@@ -2610,10 +3999,33 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.evs#SettingName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a regional account-level EVS setting, such as <code>vcfPortedCoreCount</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.evs#SettingValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The value of a regional account-level EVS setting, represented as a string.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
         "com.amazonaws.evs#SolutionKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.evs#StateDetails": {
@@ -2766,7 +4178,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation couldn't be performed because the service is throttling requests. This exception is thrown when there are too many requests accepted concurrently from the service endpoint.</p>",
+                "smithy.api#documentation": "<p>The operation could not be performed because the service is throttling requests. This exception is thrown when the service endpoint receives too many concurrent requests.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {}
@@ -2852,10 +4264,92 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.evs#UpdateEnvironmentConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#UpdateEnvironmentConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#UpdateEnvironmentConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a connector for an Amazon EVS environment. You can update the Amazon Web Services Secrets Manager secret ARN or the appliance FQDN to reconfigure the connector metadata.</p> <note> <p>You cannot update both the secret and the FQDN in the same request.</p> </note>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evs#UpdateEnvironmentConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.evs#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<note> <p>This parameter is not used in Amazon EVS currently. If you supply input for this parameter, it will have no effect.</p> </note> <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the connector update request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the environment that the connector belongs to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectorId": {
+                    "target": "com.amazonaws.evs#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the connector to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "applianceFqdn": {
+                    "target": "com.amazonaws.evs#ApplianceFqdn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new fully qualified domain name (FQDN) of the VCF appliance that the connector connects to.</p>"
+                    }
+                },
+                "secretIdentifier": {
+                    "target": "com.amazonaws.evs#SecretIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new ARN or name of the Amazon Web Services Secrets Manager secret that stores the credentials for the VCF appliance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#UpdateEnvironmentConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "connector": {
+                    "target": "com.amazonaws.evs#Connector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the updated connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.evs#VSanLicenseKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.evs#ValidationException": {
@@ -2958,7 +4452,7 @@
                 "nsx": {
                     "target": "com.amazonaws.evs#HostName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VMware NSX hostname.</p>",
+                        "smithy.api#documentation": "<p>The VMware NSX Virtual IP (VIP) hostname.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3013,7 +4507,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The DNS hostnames that Amazon EVS uses to install VMware vCenter Server, NSX, SDDC Manager, and Cloud Builder. Each hostname must be unique, and resolve to a domain name that you've registered in your DNS service of choice. Hostnames cannot be changed.</p> <p>VMware VCF requires the deployment of two NSX Edge nodes, and three NSX Manager virtual machines.</p>"
+                "smithy.api#documentation": "<p>The DNS hostnames that Amazon EVS uses to install VMware vCenter Server, NSX, SDDC Manager, and Cloud Builder. Each hostname must be unique, and resolve to a domain name that you've registered in your DNS service of choice. Hostnames cannot be changed.</p> <p>VMware VCF requires the deployment of two NSX Edge nodes, and three NSX Manager virtual machines.</p> <note> <p>Not supported when <code>vcfVersion</code> is <code>SELF_DEPLOYED</code>.</p> </note>"
             }
         },
         "com.amazonaws.evs#VcfVersion": {
@@ -3024,7 +4518,61 @@
                     "traits": {
                         "smithy.api#enumValue": "VCF-5.2.1"
                     }
+                },
+                "VCF_5_2_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VCF-5.2.2"
+                    }
+                },
+                "SELF_DEPLOYED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF_DEPLOYED"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.evs#VcfVersionInfo": {
+            "type": "structure",
+            "members": {
+                "vcfVersion": {
+                    "target": "com.amazonaws.evs#VcfVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VCF version number.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status for this VCF version. Valid values are:</p> <ul> <li> <p> <code>AVAILABLE</code> - This VCF version is available to you.</p> </li> <li> <p> <code>RESTRICTED</code> - This VCF version has limited availability.</p> </li> </ul> <note> <p> If the version you need shows RESTRICTED, and you require, check out <a href=\"https://docs.aws.amazon.com/evs/latest/userguide/versions-provided.html\">VCF versions and EC2 instance types provided by Amazon EVS</a> for more information. </p> </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultEsxVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default ESX version for this VCF version. It is based on Broadcom's Bill Of Materials (BOM).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instanceTypes": {
+                    "target": "com.amazonaws.evs#InstanceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>EC2 instance types provided by Amazon EVS for this VCF version for creating environments.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a VCF versions provided by Amazon EVS, including its status, default ESX version, and EC2 instance types.</p>"
+            }
+        },
+        "com.amazonaws.evs#VcfVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evs#VcfVersionInfo"
             }
         },
         "com.amazonaws.evs#Vlan": {
@@ -3148,6 +4696,111 @@
                     "traits": {
                         "smithy.api#enumValue": "CREATE_FAILED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.evs#VmEntitlement": {
+            "type": "structure",
+            "members": {
+                "vmId": {
+                    "target": "com.amazonaws.evs#VmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the virtual machine.</p>"
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the environment.</p>"
+                    }
+                },
+                "connectorId": {
+                    "target": "com.amazonaws.evs#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the connector associated with the entitlement.</p>"
+                    }
+                },
+                "vmName": {
+                    "target": "com.amazonaws.evs#VmName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the virtual machine.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.evs#EntitlementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entitlement.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.evs#EntitlementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the entitlement.</p>"
+                    }
+                },
+                "lastSyncedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the entitlement was last synced.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the entitlement started.</p>"
+                    }
+                },
+                "stoppedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the entitlement stopped.</p>"
+                    }
+                },
+                "errorDetail": {
+                    "target": "com.amazonaws.evs#ErrorDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error details associated with the entitlement, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents a Windows Server License entitlement for a virtual machine in an Amazon EVS environment.</p>"
+            }
+        },
+        "com.amazonaws.evs#VmEntitlementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evs#VmEntitlement"
+            }
+        },
+        "com.amazonaws.evs#VmId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^vm-[0-9]+$"
+            }
+        },
+        "com.amazonaws.evs#VmIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evs#VmId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.evs#VmName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
                 }
             }
         },

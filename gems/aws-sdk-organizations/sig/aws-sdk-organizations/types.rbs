@@ -72,6 +72,7 @@ module Aws::Organizations
         ?name: String,
         ?status: String,
         ?state: String,
+        ?paths: Array[String],
         ?joined_method: String,
         ?joined_timestamp: Time,
       ) -> void
@@ -83,6 +84,7 @@ module Aws::Organizations
       attr_accessor name: String?
       attr_accessor status: String?
       attr_accessor state: String?
+      attr_accessor paths: Array[String]?
       attr_accessor joined_method: String?
       attr_accessor joined_timestamp: Time?
     end
@@ -166,6 +168,7 @@ module Aws::Organizations
       ENABLE_ALL_FEATURES: String
       APPROVE_ALL_FEATURES: String
       ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE: String
+      TRANSFER_RESPONSIBILITY: String
     end
 
     class AlreadyInOrganizationException
@@ -327,6 +330,17 @@ module Aws::Organizations
       ACCOUNT_CREATION_NOT_COMPLETE: String
       CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR: String
       ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED: String
+      RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION: String
+      RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION: String
+      RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION: String
+      RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION: String
+      ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS: String
+      TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS: String
+      TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS: String
+      UNSUPPORTED_PRICING: String
+      UNMET_BILLING_PREREQUISITE: String
+      ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY: String
+      TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED: String
     end
 
     module CreateAccountFailureReason
@@ -558,6 +572,7 @@ module Aws::Organizations
         ?email: String,
         ?name: String,
         ?status: String,
+        ?state: String,
         ?joined_method: String,
         ?joined_timestamp: Time,
         ?delegation_enabled_date: Time,
@@ -569,6 +584,7 @@ module Aws::Organizations
       attr_accessor email: String?
       attr_accessor name: String?
       attr_accessor status: String?
+      attr_accessor state: String?
       attr_accessor joined_method: String?
       attr_accessor joined_timestamp: Time?
       attr_accessor delegation_enabled_date: Time?
@@ -778,6 +794,28 @@ module Aws::Organizations
       attr_accessor resource_policy: Types::ResourcePolicy?
     end
 
+    class DescribeResponsibilityTransferRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeResponsibilityTransferResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responsibility_transfer: Types::ResponsibilityTransfer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responsibility_transfer: Types::ResponsibilityTransfer?
+    end
+
     class DestinationParentNotFoundException
       include Smithy::Schema::Structure
 
@@ -927,6 +965,12 @@ module Aws::Organizations
       CHATBOT_POLICY: String
       DECLARATIVE_POLICY_EC2: String
       SECURITYHUB_POLICY: String
+      INSPECTOR_POLICY: String
+      UPGRADE_ROLLOUT_POLICY: String
+      BEDROCK_POLICY: String
+      S3_POLICY: String
+      NETWORK_SECURITY_DIRECTOR_POLICY: String
+      GUARDDUTY_POLICY: String
     end
 
     class EffectivePolicyValidationError
@@ -1085,6 +1129,12 @@ module Aws::Organizations
       ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: String
       ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: String
       MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED: String
+      RESPONSIBILITY_TRANSFER_ALREADY_EXISTS: String
+      SOURCE_AND_TARGET_CANNOT_MATCH: String
+      UNUSED_PREPAYMENT_BALANCE: String
+      LEGACY_PERMISSIONS_STILL_IN_USE: String
+      PAST_DUE_INVOICE: String
+      TARGET_ACCOUNT_VALIDATION_FAILURE: String
     end
 
     class HandshakeFilter
@@ -1154,6 +1204,12 @@ module Aws::Organizations
       MASTER_NAME: String
       NOTES: String
       PARENT_HANDSHAKE: String
+      RESPONSIBILITY_TRANSFER: String
+      TRANSFER_START_TIMESTAMP: String
+      TRANSFER_TYPE: String
+      MANAGEMENT_ACCOUNT: String
+      MANAGEMENT_EMAIL: String
+      MANAGEMENT_NAME: String
     end
 
     module HandshakeState
@@ -1225,6 +1281,28 @@ module Aws::Organizations
       UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY: String
       UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY: String
       NON_DETACHABLE_POLICY: String
+      CALLER_REQUIRED_FIELD_MISSING: String
+      UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER: String
+      START_DATE_NOT_BEGINNING_OF_MONTH: String
+      START_DATE_NOT_BEGINNING_OF_DAY: String
+      START_DATE_TOO_EARLY: String
+      START_DATE_TOO_LATE: String
+      INVALID_START_DATE: String
+      END_DATE_NOT_END_OF_MONTH: String
+      END_DATE_TOO_EARLY: String
+      END_DATE_TOO_LATE: String
+      INVALID_END_DATE: String
+    end
+
+    class InvalidResponsibilityTransferTransitionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class InviteAccountToOrganizationRequest
@@ -1243,6 +1321,38 @@ module Aws::Organizations
     end
 
     class InviteAccountToOrganizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?handshake: Types::Handshake,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor handshake: Types::Handshake?
+    end
+
+    class InviteOrganizationToTransferResponsibilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?target: Types::HandshakeParty,
+        ?notes: String,
+        ?start_timestamp: Time,
+        ?source_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor target: Types::HandshakeParty?
+      attr_accessor notes: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor source_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class InviteOrganizationToTransferResponsibilityResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -1571,6 +1681,36 @@ module Aws::Organizations
       attr_accessor next_token: String?
     end
 
+    class ListInboundResponsibilityTransfersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListInboundResponsibilityTransfersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responsibility_transfers: Array[Types::ResponsibilityTransfer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responsibility_transfers: Array[Types::ResponsibilityTransfer]?
+      attr_accessor next_token: String?
+    end
+
     class ListOrganizationalUnitsForParentRequest
       include Smithy::Schema::Structure
 
@@ -1596,6 +1736,34 @@ module Aws::Organizations
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor organizational_units: Array[Types::OrganizationalUnit]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOutboundResponsibilityTransfersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListOutboundResponsibilityTransfersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responsibility_transfers: Array[Types::ResponsibilityTransfer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responsibility_transfers: Array[Types::ResponsibilityTransfer]?
       attr_accessor next_token: String?
     end
 
@@ -1848,12 +2016,14 @@ module Aws::Organizations
         ?id: String,
         ?arn: String,
         ?name: String,
+        ?path: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor arn: String?
       attr_accessor name: String?
+      attr_accessor path: String?
     end
 
     class OrganizationalUnitNotEmptyException
@@ -2011,6 +2181,12 @@ module Aws::Organizations
       CHATBOT_POLICY: String
       DECLARATIVE_POLICY_EC2: String
       SECURITYHUB_POLICY: String
+      INSPECTOR_POLICY: String
+      UPGRADE_ROLLOUT_POLICY: String
+      BEDROCK_POLICY: String
+      S3_POLICY: String
+      NETWORK_SECURITY_DIRECTOR_POLICY: String
+      GUARDDUTY_POLICY: String
     end
 
     class PolicyTypeAlreadyEnabledException
@@ -2150,6 +2326,70 @@ module Aws::Organizations
       attr_accessor arn: String?
     end
 
+    class ResponsibilityTransfer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?id: String,
+        ?type: String,
+        ?status: String,
+        ?source: Types::TransferParticipant,
+        ?target: Types::TransferParticipant,
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+        ?active_handshake_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor source: Types::TransferParticipant?
+      attr_accessor target: Types::TransferParticipant?
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+      attr_accessor active_handshake_id: String?
+    end
+
+    class ResponsibilityTransferAlreadyInStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResponsibilityTransferNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResponsibilityTransferStatus
+      REQUESTED: String
+      DECLINED: String
+      CANCELED: String
+      EXPIRED: String
+      ACCEPTED: String
+      WITHDRAWN: String
+    end
+
+    module ResponsibilityTransferType
+      BILLING: String
+    end
+
     class Root
       include Smithy::Schema::Structure
 
@@ -2243,6 +2483,30 @@ module Aws::Organizations
       ROOT: String
     end
 
+    class TerminateResponsibilityTransferRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?end_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor end_timestamp: Time?
+    end
+
+    class TerminateResponsibilityTransferResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responsibility_transfer: Types::ResponsibilityTransfer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responsibility_transfer: Types::ResponsibilityTransfer?
+    end
+
     class TooManyRequestsException
       include Smithy::Schema::Structure
 
@@ -2254,6 +2518,19 @@ module Aws::Organizations
 
       attr_accessor type: String?
       attr_accessor message: String?
+    end
+
+    class TransferParticipant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?management_account_id: String,
+        ?management_account_email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor management_account_id: String?
+      attr_accessor management_account_email: String?
     end
 
     class UnsupportedAPIEndpointException
@@ -2330,6 +2607,30 @@ module Aws::Organizations
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor policy: Types::Policy?
+    end
+
+    class UpdateResponsibilityTransferRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateResponsibilityTransferResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responsibility_transfer: Types::ResponsibilityTransfer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responsibility_transfer: Types::ResponsibilityTransfer?
     end
   end
 end

@@ -56,7 +56,8 @@ module Aws::Support
           file_name: String,
           data: String
         }
-      ]
+      ],
+      ?dry_run: bool
     ) -> _AddAttachmentsToSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddAttachmentsToSetResponse
 
     interface _AddCommunicationToCaseResponse
@@ -67,8 +68,25 @@ module Aws::Support
       ?case_id: String,
       ?communication_body: String,
       ?cc_email_addresses: Array[String],
-      ?attachment_set_id: String
+      ?attachment_set_id: String,
+      ?upload_ids: Array[String],
+      ?dry_run: bool
     ) -> _AddCommunicationToCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddCommunicationToCaseResponse
+
+    interface _CompleteAttachmentUploadResponse
+      include Smithy::Client::_Response[Types::CompleteAttachmentUploadResponse]
+      def upload_status: () -> String?
+    end
+    def complete_attachment_upload: (
+      ?upload_id: String,
+      ?completed_uploads: Array[
+        {
+          part_index: Integer,
+          e_tag: String
+        }
+      ],
+      ?dry_run: bool
+    ) -> _CompleteAttachmentUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteAttachmentUploadResponse
 
     interface _CreateCaseResponse
       include Smithy::Client::_Response[Types::CreateCaseResponse]
@@ -83,7 +101,9 @@ module Aws::Support
       ?cc_email_addresses: Array[String],
       ?language: String,
       ?issue_type: String,
-      ?attachment_set_id: String
+      ?attachment_set_id: String,
+      ?upload_ids: Array[String],
+      ?dry_run: bool
     ) -> _CreateCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCaseResponse
 
     interface _DescribeAttachmentResponse
@@ -91,8 +111,20 @@ module Aws::Support
       def attachment: () -> Types::Attachment?
     end
     def describe_attachment: (
-      ?attachment_id: String
+      ?attachment_id: String,
+      ?dry_run: bool
     ) -> _DescribeAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAttachmentResponse
+
+    interface _DescribeAttachmentUploadStatusResponse
+      include Smithy::Client::_Response[Types::DescribeAttachmentUploadStatusResponse]
+      def upload_status: () -> String?
+      def file_name: () -> String?
+      def upload_progress: () -> Types::UploadProgress?
+    end
+    def describe_attachment_upload_status: (
+      ?upload_id: String,
+      ?dry_run: bool
+    ) -> _DescribeAttachmentUploadStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAttachmentUploadStatusResponse
 
     interface _DescribeCasesResponse
       include Smithy::Client::_Response[Types::DescribeCasesResponse]
@@ -108,7 +140,8 @@ module Aws::Support
       ?next_token: String,
       ?max_results: Integer,
       ?language: String,
-      ?include_communications: bool
+      ?include_communications: bool,
+      ?dry_run: bool
     ) -> _DescribeCasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCasesResponse
 
     interface _DescribeCommunicationsResponse
@@ -121,7 +154,8 @@ module Aws::Support
       ?before_time: String,
       ?after_time: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?dry_run: bool
     ) -> _DescribeCommunicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCommunicationsResponse
 
     interface _DescribeCreateCaseOptionsResponse
@@ -133,7 +167,8 @@ module Aws::Support
       ?issue_type: String,
       ?service_code: String,
       ?language: String,
-      ?category_code: String
+      ?category_code: String,
+      ?dry_run: bool
     ) -> _DescribeCreateCaseOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCreateCaseOptionsResponse
 
     interface _DescribeServicesResponse
@@ -142,7 +177,8 @@ module Aws::Support
     end
     def describe_services: (
       ?service_code_list: Array[String],
-      ?language: String
+      ?language: String,
+      ?dry_run: bool
     ) -> _DescribeServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServicesResponse
 
     interface _DescribeSeverityLevelsResponse
@@ -150,7 +186,8 @@ module Aws::Support
       def severity_levels: () -> Array[Types::SeverityLevel]?
     end
     def describe_severity_levels: (
-      ?language: String
+      ?language: String,
+      ?dry_run: bool
     ) -> _DescribeSeverityLevelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSeverityLevelsResponse
 
     interface _DescribeSupportedLanguagesResponse
@@ -160,7 +197,8 @@ module Aws::Support
     def describe_supported_languages: (
       ?issue_type: String,
       ?service_code: String,
-      ?category_code: String
+      ?category_code: String,
+      ?dry_run: bool
     ) -> _DescribeSupportedLanguagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSupportedLanguagesResponse
 
     interface _DescribeTrustedAdvisorCheckRefreshStatusesResponse
@@ -196,6 +234,35 @@ module Aws::Support
       ?language: String
     ) -> _DescribeTrustedAdvisorChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrustedAdvisorChecksResponse
 
+    interface _GetAttachmentDownloadLinkResponse
+      include Smithy::Client::_Response[Types::GetAttachmentDownloadLinkResponse]
+      def file_name: () -> String?
+      def download_url: () -> Types::DownloadUrl?
+    end
+    def get_attachment_download_link: (
+      ?attachment_id: String,
+      ?dry_run: bool
+    ) -> _GetAttachmentDownloadLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAttachmentDownloadLinkResponse
+
+    interface _GetAttachmentUploadLinksResponse
+      include Smithy::Client::_Response[Types::GetAttachmentUploadLinksResponse]
+      def upload_id: () -> String?
+      def part_size_bytes: () -> Integer?
+      def total_parts: () -> Integer?
+      def next_index: () -> Integer?
+      def upload_urls: () -> Array[Types::UploadUrl]?
+    end
+    def get_attachment_upload_links: (
+      ?file_name: String,
+      ?file_size_bytes: Integer,
+      ?upload_id: String,
+      ?upload_range: {
+        start_index: Integer,
+        end_index: Integer
+      },
+      ?dry_run: bool
+    ) -> _GetAttachmentUploadLinksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAttachmentUploadLinksResponse
+
     interface _RefreshTrustedAdvisorCheckResponse
       include Smithy::Client::_Response[Types::RefreshTrustedAdvisorCheckResponse]
       def status: () -> Types::TrustedAdvisorCheckRefreshStatus?
@@ -210,7 +277,8 @@ module Aws::Support
       def final_case_status: () -> String?
     end
     def resolve_case: (
-      ?case_id: String
+      ?case_id: String,
+      ?dry_run: bool
     ) -> _ResolveCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResolveCaseResponse
   end
 end

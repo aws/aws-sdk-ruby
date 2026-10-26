@@ -1,0 +1,1028 @@
+module Aws::Resiliencehubv2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Resiliencehubv2::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAssertionResponse
+      include Smithy::Client::_Response[Types::CreateAssertionResponse]
+      def assertion: () -> Types::Assertion?
+    end
+    def create_assertion: (
+      ?service_arn: String,
+      ?text: String,
+      ?client_token: String
+    ) -> _CreateAssertionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssertionResponse
+
+    interface _CreateInputSourceResponse
+      include Smithy::Client::_Response[Types::CreateInputSourceResponse]
+      def service_arn: () -> String?
+      def input_source_id: () -> String?
+    end
+    def create_input_source: (
+      ?service_arn: String,
+      ?resource_configuration: {
+        resource_tags: Array[
+          {
+            key: String,
+            values: Array[String]
+          }
+        ],
+        cfn_stack_arn: String,
+        tf_state_file_url: String,
+        eks: {
+          cluster_arn: untyped,
+          namespaces: Array[String],
+          label_selector: {
+            match_labels: Hash[String, String],
+            match_expressions: Array[
+              {
+                key: String,
+                operator: String,
+                values: Array[String]
+              }
+            ]
+          }
+        },
+        design_file_s3_url: untyped
+      },
+      ?client_token: String
+    ) -> _CreateInputSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInputSourceResponse
+
+    interface _CreatePolicyResponse
+      include Smithy::Client::_Response[Types::CreatePolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def create_policy: (
+      ?name: String,
+      ?description: String,
+      ?availability_slo: {
+        target: Float
+      },
+      ?multi_az: {
+        rto_in_minutes: Integer,
+        rpo_in_minutes: untyped,
+        disaster_recovery_approach: String
+      },
+      ?multi_region: {
+        rto_in_minutes: Integer,
+        rpo_in_minutes: untyped,
+        disaster_recovery_approach: String
+      },
+      ?data_recovery: {
+        time_between_backups_in_minutes: Integer
+      },
+      ?sharing_enabled: bool,
+      ?kms_key_id: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyResponse
+
+    interface _CreateReportResponse
+      include Smithy::Client::_Response[Types::CreateReportResponse]
+      def report_generation_result: () -> Types::ReportGenerationResult?
+    end
+    def create_report: (
+      ?service_arn: String,
+      ?report_type: String,
+      ?client_token: String
+    ) -> _CreateReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReportResponse
+
+    interface _CreateServiceResponse
+      include Smithy::Client::_Response[Types::CreateServiceResponse]
+      def service: () -> Types::Service?
+    end
+    def create_service: (
+      ?name: String,
+      ?description: String,
+      ?associated_systems: Array[
+        {
+          system_arn: String,
+          system_name: String,
+          user_journey_ids: Array[String]
+        }
+      ],
+      ?policy_arn: String,
+      ?regions: Array[String],
+      ?permission_model: {
+        invoker_role_name: String,
+        cross_account_roles: Array[
+          {
+            cross_account_role_arn: String,
+            external_id: String
+          }
+        ]
+      },
+      ?dependency_discovery: String,
+      ?report_configuration: {
+        report_outputs: Array[
+          {
+            s3: {
+              bucket_path: String,
+              bucket_owner: String
+            }
+          }
+        ]
+      },
+      ?kms_key_id: String,
+      ?dev_ops_agent_configuration: {
+        agent_space_arn: String
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceResponse
+
+    interface _CreateServiceFunctionResponse
+      include Smithy::Client::_Response[Types::CreateServiceFunctionResponse]
+      def service_function: () -> Types::ServiceFunction?
+    end
+    def create_service_function: (
+      ?name: String,
+      ?service_arn: String,
+      ?description: String,
+      ?criticality: String,
+      ?client_token: String
+    ) -> _CreateServiceFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceFunctionResponse
+
+    interface _CreateServiceFunctionResourcesResponse
+      include Smithy::Client::_Response[Types::CreateServiceFunctionResourcesResponse]
+      def service_arn: () -> String?
+      def service_function_id: () -> String?
+      def resources: () -> Array[String]?
+    end
+    def create_service_function_resources: (
+      ?service_arn: String,
+      ?service_function_id: String,
+      ?resources: Array[String]
+    ) -> _CreateServiceFunctionResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceFunctionResourcesResponse
+
+    interface _CreateSystemResponse
+      include Smithy::Client::_Response[Types::CreateSystemResponse]
+      def system: () -> Types::System?
+    end
+    def create_system: (
+      ?name: String,
+      ?description: String,
+      ?sharing_enabled: bool,
+      ?kms_key_id: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSystemResponse
+
+    interface _CreateTestResponse
+      include Smithy::Client::_Response[Types::CreateTestResponse]
+      def test: () -> Types::Test?
+    end
+    def create_test: (
+      ?service_arn: String,
+      ?test_template_arn: String,
+      ?logging_configuration: {
+        s3_bucket_name: String,
+        cloud_watch_log_group_arn: String,
+        log_schema_version: untyped
+      },
+      ?stop_conditions: Array[
+        {
+          source: String,
+          value: String
+        }
+      ],
+      ?role_name: String,
+      ?parameters: Hash[String,
+        Array[String]
+      ]
+    ) -> _CreateTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTestResponse
+
+    interface _CreateUserJourneyResponse
+      include Smithy::Client::_Response[Types::CreateUserJourneyResponse]
+      def user_journey: () -> Types::UserJourney?
+    end
+    def create_user_journey: (
+      ?system_arn: String,
+      ?name: String,
+      ?description: String,
+      ?policy_arn: String,
+      ?client_token: String
+    ) -> _CreateUserJourneyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserJourneyResponse
+
+    interface _DeleteAssertionResponse
+      include Smithy::Client::_Response[Types::DeleteAssertionResponse]
+      def assertion_id: () -> String?
+    end
+    def delete_assertion: (
+      ?service_arn: String,
+      ?assertion_id: String
+    ) -> _DeleteAssertionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssertionResponse
+
+    interface _DeleteInputSourceResponse
+      include Smithy::Client::_Response[Types::DeleteInputSourceResponse]
+      def service_arn: () -> String?
+      def input_source_id: () -> String?
+    end
+    def delete_input_source: (
+      ?service_arn: String,
+      ?input_source_id: String
+    ) -> _DeleteInputSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInputSourceResponse
+
+    interface _DeletePolicyResponse
+      include Smithy::Client::_Response[Types::DeletePolicyResponse]
+      def policy_arn: () -> String?
+    end
+    def delete_policy: (
+      ?policy_arn: String
+    ) -> _DeletePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyResponse
+
+    interface _DeleteServiceResponse
+      include Smithy::Client::_Response[Types::DeleteServiceResponse]
+      def service_arn: () -> String?
+    end
+    def delete_service: (
+      ?service_arn: String
+    ) -> _DeleteServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceResponse
+
+    interface _DeleteServiceFunctionResponse
+      include Smithy::Client::_Response[Types::DeleteServiceFunctionResponse]
+      def service_function_id: () -> String?
+    end
+    def delete_service_function: (
+      ?service_arn: String,
+      ?service_function_id: String
+    ) -> _DeleteServiceFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceFunctionResponse
+
+    interface _DeleteServiceFunctionResourcesResponse
+      include Smithy::Client::_Response[Types::DeleteServiceFunctionResourcesResponse]
+      def service_arn: () -> String?
+      def service_function_id: () -> String?
+      def resources: () -> Array[String]?
+    end
+    def delete_service_function_resources: (
+      ?service_arn: String,
+      ?service_function_id: String,
+      ?resources: Array[String]
+    ) -> _DeleteServiceFunctionResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceFunctionResourcesResponse
+
+    interface _DeleteSystemResponse
+      include Smithy::Client::_Response[Types::DeleteSystemResponse]
+      def system_arn: () -> String?
+    end
+    def delete_system: (
+      ?system_arn: String
+    ) -> _DeleteSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSystemResponse
+
+    interface _DeleteTestResponse
+      include Smithy::Client::_Response[Types::DeleteTestResponse]
+      def test_id: () -> String?
+    end
+    def delete_test: (
+      ?test_id: String,
+      ?service_arn: String
+    ) -> _DeleteTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTestResponse
+
+    interface _DeleteTestSourcesResponse
+      include Smithy::Client::_Response[Types::DeleteTestSourcesResponse]
+    end
+    def delete_test_sources: (
+      ?test_id: String,
+      ?service_arn: String,
+      ?test_sources: Array[
+        {
+          success_criteria_alarm: {
+            alarm_arn: String
+          },
+          observability_alarm: {
+            alarm_arn: untyped
+          }
+        }
+      ]
+    ) -> _DeleteTestSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTestSourcesResponse
+
+    interface _DeleteUserJourneyResponse
+      include Smithy::Client::_Response[Types::DeleteUserJourneyResponse]
+      def user_journey_id: () -> String?
+    end
+    def delete_user_journey: (
+      ?system_arn: String,
+      ?user_journey_id: String
+    ) -> _DeleteUserJourneyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserJourneyResponse
+
+    interface _GetDependencyInsightsResponse
+      include Smithy::Client::_Response[Types::GetDependencyInsightsResponse]
+      def overview: () -> String?
+      def insights: () -> Array[Types::DependencyInsight]?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def error_code: () -> String?
+      def error_message: () -> String?
+    end
+    def get_dependency_insights: (
+      ?service_arn: String
+    ) -> _GetDependencyInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDependencyInsightsResponse
+
+    interface _GetFailureModeFindingResponse
+      include Smithy::Client::_Response[Types::GetFailureModeFindingResponse]
+      def finding: () -> Types::Finding?
+    end
+    def get_failure_mode_finding: (
+      ?finding_id: String,
+      ?service_arn: String
+    ) -> _GetFailureModeFindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFailureModeFindingResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def get_policy: (
+      ?policy_arn: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetServiceResponse
+      include Smithy::Client::_Response[Types::GetServiceResponse]
+      def service: () -> Types::Service?
+    end
+    def get_service: (
+      ?service_arn: String
+    ) -> _GetServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceResponse
+
+    interface _GetSystemResponse
+      include Smithy::Client::_Response[Types::GetSystemResponse]
+      def system: () -> Types::System?
+    end
+    def get_system: (
+      ?system_arn: String
+    ) -> _GetSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSystemResponse
+
+    interface _GetTestResponse
+      include Smithy::Client::_Response[Types::GetTestResponse]
+      def test: () -> Types::Test?
+    end
+    def get_test: (
+      ?test_id: String,
+      ?service_arn: String
+    ) -> _GetTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTestResponse
+
+    interface _GetTestRunResponse
+      include Smithy::Client::_Response[Types::GetTestRunResponse]
+      def test_run: () -> Types::TestRun?
+    end
+    def get_test_run: (
+      ?test_run_id: String,
+      ?service_arn: String
+    ) -> _GetTestRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTestRunResponse
+
+    interface _GetTestTemplateResponse
+      include Smithy::Client::_Response[Types::GetTestTemplateResponse]
+      def test_template: () -> Types::TestTemplate?
+    end
+    def get_test_template: (
+      ?test_template_arn: String
+    ) -> _GetTestTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTestTemplateResponse
+
+    interface _GetUserJourneyResponse
+      include Smithy::Client::_Response[Types::GetUserJourneyResponse]
+      def user_journey: () -> Types::UserJourney?
+    end
+    def get_user_journey: (
+      ?system_arn: String,
+      ?user_journey_id: String
+    ) -> _GetUserJourneyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserJourneyResponse
+
+    interface _ImportAppResponse
+      include Smithy::Client::_Response[Types::ImportAppResponse]
+      def service: () -> Types::Service?
+    end
+    def import_app: (
+      ?v1_app_arn: String,
+      ?policy_arn: String,
+      ?kms_key_id: String,
+      ?skip_manually_added_resources: bool,
+      ?associated_systems: Array[
+        {
+          system_arn: String,
+          system_name: String,
+          user_journey_ids: Array[String]
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _ImportAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportAppResponse
+
+    interface _ImportPolicyResponse
+      include Smithy::Client::_Response[Types::ImportPolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def import_policy: (
+      ?v1_policy_arn: String,
+      ?kms_key_id: String,
+      ?availability_slo: {
+        target: Float
+      },
+      ?multi_az_disaster_recovery_approach: String,
+      ?multi_region_disaster_recovery_approach: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _ImportPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportPolicyResponse
+
+    interface _ListAssertionsResponse
+      include Smithy::Client::_Response[Types::ListAssertionsResponse]
+      def assertions: () -> Array[Types::Assertion]?
+      def next_token: () -> String?
+    end
+    def list_assertions: (
+      ?service_arn: String,
+      ?source: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssertionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssertionsResponse
+
+    interface _ListDependenciesResponse
+      include Smithy::Client::_Response[Types::ListDependenciesResponse]
+      def dependency_summaries: () -> Array[Types::DependencySummary]?
+      def next_token: () -> String?
+    end
+    def list_dependencies: (
+      ?service_arn: String,
+      ?query_range_start_time: Time,
+      ?query_range_end_time: Time,
+      ?query_range_granularity: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDependenciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDependenciesResponse
+
+    interface _ListFailureModeAssessmentsResponse
+      include Smithy::Client::_Response[Types::ListFailureModeAssessmentsResponse]
+      def assessment_summaries: () -> Array[Types::AssessmentSummary]?
+      def next_token: () -> String?
+    end
+    def list_failure_mode_assessments: (
+      ?service_arn: String,
+      ?assessment_statuses: Array[String],
+      ?started_after: Time,
+      ?ended_before: Time,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFailureModeAssessmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFailureModeAssessmentsResponse
+
+    interface _ListFailureModeFindingsResponse
+      include Smithy::Client::_Response[Types::ListFailureModeFindingsResponse]
+      def findings_summary: () -> Array[Types::FindingSummary]?
+      def next_token: () -> String?
+    end
+    def list_failure_mode_findings: (
+      ?service_arn: String,
+      ?severity: String,
+      ?failure_category: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFailureModeFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFailureModeFindingsResponse
+
+    interface _ListInputSourcesResponse
+      include Smithy::Client::_Response[Types::ListInputSourcesResponse]
+      def input_source_summaries: () -> Array[Types::InputSourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_input_sources: (
+      ?service_arn: String,
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInputSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInputSourcesResponse
+
+    interface _ListPoliciesResponse
+      include Smithy::Client::_Response[Types::ListPoliciesResponse]
+      def policy_summaries: () -> Array[Types::PolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_policies: (
+      ?account_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesResponse
+
+    interface _ListPolicyEventsResponse
+      include Smithy::Client::_Response[Types::ListPolicyEventsResponse]
+      def events: () -> Array[Types::PolicyEvent]?
+      def next_token: () -> String?
+    end
+    def list_policy_events: (
+      ?policy_arn: String,
+      ?event_types: Array[String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPolicyEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyEventsResponse
+
+    interface _ListReportsResponse
+      include Smithy::Client::_Response[Types::ListReportsResponse]
+      def report_generation_results: () -> Array[Types::ReportGenerationResult]?
+      def next_token: () -> String?
+    end
+    def list_reports: (
+      ?service_arn: String,
+      ?report_type: String,
+      ?test_run_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportsResponse
+
+    interface _ListResolvedTestRunTargetResourcesResponse
+      include Smithy::Client::_Response[Types::ListResolvedTestRunTargetResourcesResponse]
+      def resolved_target_resources: () -> Array[Types::ResolvedTargetResource]?
+      def next_token: () -> String?
+    end
+    def list_resolved_test_run_target_resources: (
+      ?test_run_id: String,
+      ?service_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResolvedTestRunTargetResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolvedTestRunTargetResourcesResponse
+
+    interface _ListResourcesResponse
+      include Smithy::Client::_Response[Types::ListResourcesResponse]
+      def service_function_id: () -> String?
+      def service_resources: () -> Array[Types::ServiceResource]?
+      def next_token: () -> String?
+    end
+    def list_resources: (
+      ?service_arn: String,
+      ?service_function_id: String,
+      ?aws_region: String,
+      ?resource_types: Array[String],
+      ?billable: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesResponse
+
+    interface _ListServiceEventsResponse
+      include Smithy::Client::_Response[Types::ListServiceEventsResponse]
+      def events: () -> Array[Types::ServiceEvent]?
+      def next_token: () -> String?
+    end
+    def list_service_events: (
+      ?service_arn: String,
+      ?event_types: Array[String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceEventsResponse
+
+    interface _ListServiceFunctionsResponse
+      include Smithy::Client::_Response[Types::ListServiceFunctionsResponse]
+      def service_functions: () -> Array[Types::ServiceFunction]?
+      def next_token: () -> String?
+    end
+    def list_service_functions: (
+      ?service_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceFunctionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceFunctionsResponse
+
+    interface _ListServiceTopologyEdgesResponse
+      include Smithy::Client::_Response[Types::ListServiceTopologyEdgesResponse]
+      def service_topology_edge_summaries: () -> Array[Types::ServiceTopologyEdgeSummary]?
+      def next_token: () -> String?
+    end
+    def list_service_topology_edges: (
+      ?service_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceTopologyEdgesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceTopologyEdgesResponse
+
+    interface _ListServicesResponse
+      include Smithy::Client::_Response[Types::ListServicesResponse]
+      def service_summaries: () -> Array[Types::ServiceSummary]?
+      def next_token: () -> String?
+    end
+    def list_services: (
+      ?system_arn: String,
+      ?user_journey_id: String,
+      ?ou_id: String,
+      ?account_id: String,
+      ?assessment_status: String,
+      ?policy_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicesResponse
+
+    interface _ListSystemEventsResponse
+      include Smithy::Client::_Response[Types::ListSystemEventsResponse]
+      def events: () -> Array[Types::SystemEvent]?
+      def next_token: () -> String?
+    end
+    def list_system_events: (
+      ?system_arn: String,
+      ?event_types: Array[String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSystemEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSystemEventsResponse
+
+    interface _ListSystemsResponse
+      include Smithy::Client::_Response[Types::ListSystemsResponse]
+      def system_summaries: () -> Array[Types::SystemSummary]?
+      def next_token: () -> String?
+    end
+    def list_systems: (
+      ?ou_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSystemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSystemsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTestRunDependenciesResponse
+      include Smithy::Client::_Response[Types::ListTestRunDependenciesResponse]
+      def dependencies: () -> Array[Types::TestRunDependencySummary]?
+      def next_token: () -> String?
+    end
+    def list_test_run_dependencies: (
+      ?test_run_id: String,
+      ?service_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestRunDependenciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestRunDependenciesResponse
+
+    interface _ListTestRunEventsResponse
+      include Smithy::Client::_Response[Types::ListTestRunEventsResponse]
+      def events: () -> Array[Types::TestRunEvent]?
+      def next_token: () -> String?
+    end
+    def list_test_run_events: (
+      ?test_run_id: String,
+      ?service_arn: String,
+      ?started_at: Time,
+      ?ended_at: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestRunEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestRunEventsResponse
+
+    interface _ListTestRunSourceEventsResponse
+      include Smithy::Client::_Response[Types::ListTestRunSourceEventsResponse]
+      def test_run_source_events: () -> Array[Types::TestRunSourceEvent]?
+      def next_token: () -> String?
+    end
+    def list_test_run_source_events: (
+      ?test_run_id: String,
+      ?service_arn: String,
+      ?source_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestRunSourceEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestRunSourceEventsResponse
+
+    interface _ListTestRunSourcesResponse
+      include Smithy::Client::_Response[Types::ListTestRunSourcesResponse]
+      def test_run_sources: () -> Array[Types::TestRunSourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_test_run_sources: (
+      ?test_run_id: String,
+      ?service_arn: String,
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestRunSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestRunSourcesResponse
+
+    interface _ListTestRunsResponse
+      include Smithy::Client::_Response[Types::ListTestRunsResponse]
+      def test_runs: () -> Array[Types::TestRunSummary]?
+      def next_token: () -> String?
+    end
+    def list_test_runs: (
+      ?service_arn: String,
+      ?test_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestRunsResponse
+
+    interface _ListTestSourcesResponse
+      include Smithy::Client::_Response[Types::ListTestSourcesResponse]
+      def test_sources: () -> Array[Types::TestSourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_test_sources: (
+      ?test_id: String,
+      ?service_arn: String,
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestSourcesResponse
+
+    interface _ListTestTemplatesResponse
+      include Smithy::Client::_Response[Types::ListTestTemplatesResponse]
+      def test_templates: () -> Array[Types::TestTemplateSummary]?
+    end
+    def list_test_templates: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestTemplatesResponse
+
+    interface _ListTestsResponse
+      include Smithy::Client::_Response[Types::ListTestsResponse]
+      def tests: () -> Array[Types::TestSummary]?
+      def next_token: () -> String?
+    end
+    def list_tests: (
+      ?service_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestsResponse
+
+    interface _ListUserJourneysResponse
+      include Smithy::Client::_Response[Types::ListUserJourneysResponse]
+      def user_journey_summaries: () -> Array[Types::UserJourneySummary]?
+      def next_token: () -> String?
+    end
+    def list_user_journeys: (
+      ?system_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListUserJourneysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserJourneysResponse
+
+    interface _PutTestSourcesResponse
+      include Smithy::Client::_Response[Types::PutTestSourcesResponse]
+    end
+    def put_test_sources: (
+      ?test_id: String,
+      ?service_arn: String,
+      ?test_sources: Array[
+        {
+          success_criteria_alarm: {
+            alarm_arn: String
+          },
+          observability_alarm: {
+            alarm_arn: untyped
+          }
+        }
+      ]
+    ) -> _PutTestSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTestSourcesResponse
+
+    interface _StartDependencyInsightsResponse
+      include Smithy::Client::_Response[Types::StartDependencyInsightsResponse]
+      def status: () -> String?
+    end
+    def start_dependency_insights: (
+      ?service_arn: String,
+      ?client_token: String
+    ) -> _StartDependencyInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDependencyInsightsResponse
+
+    interface _StartFailureModeAssessmentResponse
+      include Smithy::Client::_Response[Types::StartFailureModeAssessmentResponse]
+      def assessment_id: () -> String?
+      def service_arn: () -> String?
+      def assessment_status: () -> String?
+      def started_at: () -> Time?
+    end
+    def start_failure_mode_assessment: (
+      ?service_arn: String,
+      ?client_token: String
+    ) -> _StartFailureModeAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFailureModeAssessmentResponse
+
+    interface _StartTestRunResponse
+      include Smithy::Client::_Response[Types::StartTestRunResponse]
+      def test_run_id: () -> String?
+      def status: () -> String?
+      def experiment_arns: () -> Array[String]?
+    end
+    def start_test_run: (
+      ?test_id: String,
+      ?service_arn: String
+    ) -> _StartTestRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTestRunResponse
+
+    interface _StopTestRunResponse
+      include Smithy::Client::_Response[Types::StopTestRunResponse]
+      def test_run_id: () -> String?
+      def status: () -> String?
+    end
+    def stop_test_run: (
+      ?test_run_id: String,
+      ?service_arn: String
+    ) -> _StopTestRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTestRunResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAssertionResponse
+      include Smithy::Client::_Response[Types::UpdateAssertionResponse]
+      def assertion: () -> Types::Assertion?
+    end
+    def update_assertion: (
+      ?service_arn: String,
+      ?assertion_id: String,
+      ?text: String
+    ) -> _UpdateAssertionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssertionResponse
+
+    interface _UpdateDependencyResponse
+      include Smithy::Client::_Response[Types::UpdateDependencyResponse]
+      def dependency_id: () -> String?
+      def dependency_name: () -> String?
+      def location: () -> String?
+      def criticality: () -> String?
+      def comment: () -> String?
+      def provider: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_dependency: (
+      ?service_arn: String,
+      ?dependency_id: String,
+      ?criticality: String,
+      ?comment: String
+    ) -> _UpdateDependencyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDependencyResponse
+
+    interface _UpdateFailureModeFindingResponse
+      include Smithy::Client::_Response[Types::UpdateFailureModeFindingResponse]
+      def finding: () -> Types::Finding?
+    end
+    def update_failure_mode_finding: (
+      ?finding_id: String,
+      ?status: String,
+      ?service_arn: String,
+      ?comment: String
+    ) -> _UpdateFailureModeFindingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFailureModeFindingResponse
+
+    interface _UpdatePolicyResponse
+      include Smithy::Client::_Response[Types::UpdatePolicyResponse]
+      def policy: () -> Types::Policy?
+    end
+    def update_policy: (
+      ?policy_arn: String,
+      ?description: String,
+      ?availability_slo: {
+        target: Float
+      },
+      ?multi_az: {
+        rto_in_minutes: Integer,
+        rpo_in_minutes: untyped,
+        disaster_recovery_approach: String
+      },
+      ?multi_region: {
+        rto_in_minutes: Integer,
+        rpo_in_minutes: untyped,
+        disaster_recovery_approach: String
+      },
+      ?data_recovery: {
+        time_between_backups_in_minutes: Integer
+      },
+      ?sharing_enabled: bool
+    ) -> _UpdatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyResponse
+
+    interface _UpdateServiceResponse
+      include Smithy::Client::_Response[Types::UpdateServiceResponse]
+      def service: () -> Types::Service?
+    end
+    def update_service: (
+      ?service_arn: String,
+      ?description: String,
+      ?associated_systems: Array[
+        {
+          system_arn: String,
+          system_name: String,
+          user_journey_ids: Array[String]
+        }
+      ],
+      ?policy_arn: String,
+      ?regions: Array[String],
+      ?permission_model: {
+        invoker_role_name: String,
+        cross_account_roles: Array[
+          {
+            cross_account_role_arn: String,
+            external_id: String
+          }
+        ]
+      },
+      ?dependency_discovery: String,
+      ?report_configuration: {
+        report_outputs: Array[
+          {
+            s3: {
+              bucket_path: String,
+              bucket_owner: String
+            }
+          }
+        ]
+      },
+      ?dev_ops_agent_configuration: {
+        agent_space_arn: String
+      }
+    ) -> _UpdateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceResponse
+
+    interface _UpdateServiceFunctionResponse
+      include Smithy::Client::_Response[Types::UpdateServiceFunctionResponse]
+      def service_function: () -> Types::ServiceFunction?
+    end
+    def update_service_function: (
+      ?service_arn: String,
+      ?service_function_id: String,
+      ?name: String,
+      ?description: String,
+      ?criticality: String
+    ) -> _UpdateServiceFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceFunctionResponse
+
+    interface _UpdateSystemResponse
+      include Smithy::Client::_Response[Types::UpdateSystemResponse]
+      def system: () -> Types::System?
+    end
+    def update_system: (
+      ?system_arn: String,
+      ?description: String,
+      ?sharing_enabled: bool
+    ) -> _UpdateSystemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSystemResponse
+
+    interface _UpdateTestResponse
+      include Smithy::Client::_Response[Types::UpdateTestResponse]
+      def test: () -> Types::Test?
+    end
+    def update_test: (
+      ?test_id: String,
+      ?service_arn: String,
+      ?logging_configuration: {
+        s3_bucket_name: String,
+        cloud_watch_log_group_arn: String,
+        log_schema_version: untyped
+      },
+      ?stop_conditions: Array[
+        {
+          source: String,
+          value: String
+        }
+      ],
+      ?role_name: String,
+      ?parameters: Hash[String,
+        Array[String]
+      ]
+    ) -> _UpdateTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTestResponse
+
+    interface _UpdateUserJourneyResponse
+      include Smithy::Client::_Response[Types::UpdateUserJourneyResponse]
+      def user_journey: () -> Types::UserJourney?
+    end
+    def update_user_journey: (
+      ?system_arn: String,
+      ?user_journey_id: String,
+      ?name: String,
+      ?description: String,
+      ?policy_arn: String
+    ) -> _UpdateUserJourneyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserJourneyResponse
+  end
+end

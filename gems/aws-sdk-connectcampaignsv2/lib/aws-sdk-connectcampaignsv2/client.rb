@@ -144,18 +144,18 @@ module Aws::ConnectCampaignsV2
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -217,12 +217,16 @@ module Aws::ConnectCampaignsV2
     #   Amazon Connect Instance Id
     # @option params [Types::ChannelSubtypeConfig] :channel_subtype_config
     #   Campaign Channel Subtype config
+    # @option params [String] :type
+    #   The type of campaign externally exposed in APIs.
     # @option params [Types::Source] :source
     #   Source of the campaign
     # @option params [String] :connect_campaign_flow_arn
     #   Amazon Resource Names(ARN)
     # @option params [Types::Schedule] :schedule
     #   Campaign schedule
+    # @option params [Types::EntryLimitsConfig] :entry_limits_config
+    #   Campaign entry limits config
     # @option params [Types::CommunicationTimeConfig] :communication_time_config
     #   Campaign communication time config
     # @option params [Types::CommunicationLimitsConfig] :communication_limits_override
@@ -233,7 +237,7 @@ module Aws::ConnectCampaignsV2
     #   params = {
     #     name: "CampaignName", # required
     #     connect_instance_id: "InstanceId", # required
-    #     channel_subtype_config: { # required
+    #     channel_subtype_config: {
     #       telephony: {
     #         capacity: 1.0,
     #         connect_queue_id: "QueueId",
@@ -244,8 +248,24 @@ module Aws::ConnectCampaignsV2
     #           },
     #           predictive: {
     #             bandwidth_allocation: 1.0, # required
+    #             pacing_strategies: [{
+    #               # One of:
+    #               abandonment_rate: {
+    #                 target_rate: 1.0, # required
+    #                 connection_start_point: "ConnectionStartPoint", # required
+    #                 connection_threshold_seconds: 1, # required
+    #                 evaluation_window: "EvaluationWindow", # required
+    #               }
+    #             }]
     #           },
     #           agentless: {
+    #           },
+    #           preview: {
+    #             bandwidth_allocation: 1.0, # required
+    #             timeout_config: { # required
+    #               duration_in_seconds: 1, # required
+    #             },
+    #             agent_actions: ["AgentAction"]
     #           }
     #         },
     #         default_outbound_config: { # required
@@ -254,7 +274,8 @@ module Aws::ConnectCampaignsV2
     #           answer_machine_detection_config: {
     #             enable_answer_machine_detection: false, # required
     #             await_answer_machine_prompt: false
-    #           }
+    #           },
+    #           ring_timeout: 1
     #         }
     #       },
     #       sms: {
@@ -281,8 +302,21 @@ module Aws::ConnectCampaignsV2
     #           source_email_address_display_name: "EmailDisplayName",
     #           wisdom_template_arn: "Arn", # required
     #         }
+    #       },
+    #       whats_app: {
+    #         capacity: 1.0,
+    #         outbound_mode: { # required
+    #           # One of:
+    #           agentless: {
+    #           }
+    #         },
+    #         default_outbound_config: { # required
+    #           connect_source_phone_number_arn: "Arn", # required
+    #           wisdom_template_arn: "Arn", # required
+    #         }
     #       }
     #     },
+    #     type: "ExternalCampaignType",
     #     source: {
     #       # One of:
     #       customer_profiles_segment_arn: "Arn",
@@ -296,10 +330,15 @@ module Aws::ConnectCampaignsV2
     #       end_time: Time.now, # required
     #       refresh_frequency: "Iso8601Duration"
     #     },
+    #     entry_limits_config: {
+    #       max_entry_count: 1, # required
+    #       min_entry_interval: "Iso8601Duration", # required
+    #     },
     #     communication_time_config: {
     #       local_time_zone_config: { # required
     #         default_time_zone: "TimeZone",
-    #         local_time_zone_detection: ["LocalTimeZoneDetectionType"]
+    #         local_time_zone_detection: ["LocalTimeZoneDetectionType"],
+    #         local_time_zone_detection_scope: "LocalTimeZoneDetectionScope"
     #       },
     #       telephony: {
     #         open_hours: { # required
@@ -348,6 +387,29 @@ module Aws::ConnectCampaignsV2
     #         }
     #       },
     #       email: {
+    #         open_hours: { # required
+    #           # One of:
+    #           daily_hours: {
+    #             "DayOfWeek" => [
+    #               {
+    #                 start_time: "Iso8601Time", # required
+    #                 end_time: "Iso8601Time", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         restricted_periods: {
+    #           # One of:
+    #           restricted_period_list: [
+    #             {
+    #               name: "RestrictedPeriodName",
+    #               start_date: "Iso8601Date", # required
+    #               end_date: "Iso8601Date", # required
+    #             }
+    #           ]
+    #         }
+    #       },
+    #       whats_app: {
     #         open_hours: { # required
     #           # One of:
     #           daily_hours: {
@@ -490,6 +552,25 @@ module Aws::ConnectCampaignsV2
       request.send_request(options)
     end
 
+    # Deletes the entry limits config for a campaign. This API is idempotent.
+    # @param [Hash, Types::DeleteCampaignEntryLimitsRequest] params
+    # @option params [String] :id
+    #   Identifier representing a Campaign
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "CampaignId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_campaign_entry_limits(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_campaign_entry_limits(params = {}, options = {})
+      request = build_request(:delete_campaign_entry_limits, params)
+      request.send_request(options)
+    end
+
     # Deletes a connect instance config from the specified AWS account.
     # @param [Hash, Types::DeleteConnectInstanceConfigRequest] params
     # @option params [String] :connect_instance_id
@@ -528,6 +609,9 @@ module Aws::ConnectCampaignsV2
     #       },
     #       q_connect: {
     #         knowledge_base_arn: "Arn", # required
+    #       },
+    #       lambda: {
+    #         function_arn: "LambdaArn", # required
     #       }
     #     }
     #   }
@@ -579,7 +663,7 @@ module Aws::ConnectCampaignsV2
     #       arn: "CampaignArn", # required
     #       name: "CampaignName", # required
     #       connect_instance_id: "InstanceId", # required
-    #       channel_subtype_config: { # required
+    #       channel_subtype_config: {
     #         telephony: {
     #           capacity: 1.0,
     #           connect_queue_id: "QueueId",
@@ -590,8 +674,24 @@ module Aws::ConnectCampaignsV2
     #             },
     #             predictive: {
     #               bandwidth_allocation: 1.0, # required
+    #               pacing_strategies: [{
+    #                 # One of:
+    #                 abandonment_rate: {
+    #                   target_rate: 1.0, # required
+    #                   connection_start_point: "ConnectionStartPoint", # required
+    #                   connection_threshold_seconds: 1, # required
+    #                   evaluation_window: "EvaluationWindow", # required
+    #                 }
+    #               }]
     #             },
     #             agentless: {
+    #             },
+    #             preview: {
+    #               bandwidth_allocation: 1.0, # required
+    #               timeout_config: { # required
+    #                 duration_in_seconds: 1, # required
+    #               },
+    #               agent_actions: ["AgentAction"]
     #             }
     #           },
     #           default_outbound_config: { # required
@@ -600,7 +700,8 @@ module Aws::ConnectCampaignsV2
     #             answer_machine_detection_config: {
     #               enable_answer_machine_detection: false, # required
     #               await_answer_machine_prompt: false
-    #             }
+    #             },
+    #             ring_timeout: 1
     #           }
     #         },
     #         sms: {
@@ -627,8 +728,21 @@ module Aws::ConnectCampaignsV2
     #             source_email_address_display_name: "EmailDisplayName",
     #             wisdom_template_arn: "Arn", # required
     #           }
+    #         },
+    #         whats_app: {
+    #           capacity: 1.0,
+    #           outbound_mode: { # required
+    #             # One of:
+    #             agentless: {
+    #             }
+    #           },
+    #           default_outbound_config: { # required
+    #             connect_source_phone_number_arn: "Arn", # required
+    #             wisdom_template_arn: "Arn", # required
+    #           }
     #         }
     #       },
+    #       type: "ExternalCampaignType",
     #       source: {
     #         # One of:
     #         customer_profiles_segment_arn: "Arn",
@@ -642,10 +756,15 @@ module Aws::ConnectCampaignsV2
     #         end_time: Time.now, # required
     #         refresh_frequency: "Iso8601Duration"
     #       },
+    #       entry_limits_config: {
+    #         max_entry_count: 1, # required
+    #         min_entry_interval: "Iso8601Duration", # required
+    #       },
     #       communication_time_config: {
     #         local_time_zone_config: { # required
     #           default_time_zone: "TimeZone",
-    #           local_time_zone_detection: ["LocalTimeZoneDetectionType"]
+    #           local_time_zone_detection: ["LocalTimeZoneDetectionType"],
+    #           local_time_zone_detection_scope: "LocalTimeZoneDetectionScope"
     #         },
     #         telephony: {
     #           open_hours: { # required
@@ -694,6 +813,29 @@ module Aws::ConnectCampaignsV2
     #           }
     #         },
     #         email: {
+    #           open_hours: { # required
+    #             # One of:
+    #             daily_hours: {
+    #               "DayOfWeek" => [
+    #                 {
+    #                   start_time: "Iso8601Time", # required
+    #                   end_time: "Iso8601Time", # required
+    #                 }
+    #               ]
+    #             }
+    #           },
+    #           restricted_periods: {
+    #             # One of:
+    #             restricted_period_list: [
+    #               {
+    #                 name: "RestrictedPeriodName",
+    #                 start_date: "Iso8601Date", # required
+    #                 end_date: "Iso8601Date", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         whats_app: {
     #           open_hours: { # required
     #             # One of:
     #             daily_hours: {
@@ -912,10 +1054,15 @@ module Aws::ConnectCampaignsV2
     #         name: "CampaignName", # required
     #         connect_instance_id: "InstanceId", # required
     #         channel_subtypes: ["ChannelSubtype"], # required
+    #         type: "ExternalCampaignType",
     #         schedule: {
     #           start_time: Time.now, # required
     #           end_time: Time.now, # required
     #           refresh_frequency: "Iso8601Duration"
+    #         },
+    #         entry_limits_config: {
+    #           max_entry_count: 1, # required
+    #           min_entry_interval: "Iso8601Duration", # required
     #         },
     #         connect_campaign_flow_arn: "Arn"
     #       }
@@ -957,6 +1104,9 @@ module Aws::ConnectCampaignsV2
     #       },
     #       q_connect: {
     #         knowledge_base_arn: "Arn", # required
+    #       },
+    #       lambda: {
+    #         function_arn: "LambdaArn", # required
     #       }
     #     }]
     #   }
@@ -1027,6 +1177,9 @@ module Aws::ConnectCampaignsV2
     #       },
     #       q_connect: {
     #         knowledge_base_arn: "Arn", # required
+    #       },
+    #       lambda: {
+    #         function_arn: "LambdaArn", # required
     #       }
     #     }
     #   }
@@ -1098,7 +1251,8 @@ module Aws::ConnectCampaignsV2
     #             answer_machine_detection_config: {
     #               enable_answer_machine_detection: false, # required
     #               await_answer_machine_prompt: false
-    #             }
+    #             },
+    #             ring_timeout: 1
     #           },
     #           sms: {
     #             destination_phone_number: "DestinationPhoneNumber", # required
@@ -1111,6 +1265,14 @@ module Aws::ConnectCampaignsV2
     #           email: {
     #             destination_email_address: "EmailAddress", # required
     #             connect_source_email_address: "EmailAddress",
+    #             template_arn: "Arn",
+    #             template_parameters: { # required
+    #               "AttributeName" => "AttributeValue"
+    #             }
+    #           },
+    #           whats_app: {
+    #             destination_phone_number: "DestinationPhoneNumber", # required
+    #             connect_source_phone_number_arn: "Arn",
     #             template_arn: "Arn",
     #             template_parameters: { # required
     #               "AttributeName" => "AttributeValue"
@@ -1158,7 +1320,16 @@ module Aws::ConnectCampaignsV2
     #       {
     #         client_token: "ClientToken", # required
     #         profile_id: "ProfileId", # required
-    #         expiration_time: Time.now
+    #         expiration_time: Time.now,
+    #         event_trigger_context: {
+    #           source_event: "SourceEvent",
+    #           channel_context: {
+    #             web_notification_context: {
+    #               session_id: "SessionId",
+    #               browser_id: "BrowserId"
+    #             }
+    #           }
+    #         }
     #       }
     #     ]
     #   }
@@ -1345,8 +1516,24 @@ module Aws::ConnectCampaignsV2
     #           },
     #           predictive: {
     #             bandwidth_allocation: 1.0, # required
+    #             pacing_strategies: [{
+    #               # One of:
+    #               abandonment_rate: {
+    #                 target_rate: 1.0, # required
+    #                 connection_start_point: "ConnectionStartPoint", # required
+    #                 connection_threshold_seconds: 1, # required
+    #                 evaluation_window: "EvaluationWindow", # required
+    #               }
+    #             }]
     #           },
     #           agentless: {
+    #           },
+    #           preview: {
+    #             bandwidth_allocation: 1.0, # required
+    #             timeout_config: { # required
+    #               duration_in_seconds: 1, # required
+    #             },
+    #             agent_actions: ["AgentAction"]
     #           }
     #         },
     #         default_outbound_config: { # required
@@ -1355,7 +1542,8 @@ module Aws::ConnectCampaignsV2
     #           answer_machine_detection_config: {
     #             enable_answer_machine_detection: false, # required
     #             await_answer_machine_prompt: false
-    #           }
+    #           },
+    #           ring_timeout: 1
     #         }
     #       },
     #       sms: {
@@ -1380,6 +1568,18 @@ module Aws::ConnectCampaignsV2
     #         default_outbound_config: { # required
     #           connect_source_email_address: "EmailAddress", # required
     #           source_email_address_display_name: "EmailDisplayName",
+    #           wisdom_template_arn: "Arn", # required
+    #         }
+    #       },
+    #       whats_app: {
+    #         capacity: 1.0,
+    #         outbound_mode: { # required
+    #           # One of:
+    #           agentless: {
+    #           }
+    #         },
+    #         default_outbound_config: { # required
+    #           connect_source_phone_number_arn: "Arn", # required
     #           wisdom_template_arn: "Arn", # required
     #         }
     #       }
@@ -1442,7 +1642,8 @@ module Aws::ConnectCampaignsV2
     #     communication_time_config: { # required
     #       local_time_zone_config: { # required
     #         default_time_zone: "TimeZone",
-    #         local_time_zone_detection: ["LocalTimeZoneDetectionType"]
+    #         local_time_zone_detection: ["LocalTimeZoneDetectionType"],
+    #         local_time_zone_detection_scope: "LocalTimeZoneDetectionScope"
     #       },
     #       telephony: {
     #         open_hours: { # required
@@ -1512,6 +1713,29 @@ module Aws::ConnectCampaignsV2
     #             }
     #           ]
     #         }
+    #       },
+    #       whats_app: {
+    #         open_hours: { # required
+    #           # One of:
+    #           daily_hours: {
+    #             "DayOfWeek" => [
+    #               {
+    #                 start_time: "Iso8601Time", # required
+    #                 end_time: "Iso8601Time", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         restricted_periods: {
+    #           # One of:
+    #           restricted_period_list: [
+    #             {
+    #               name: "RestrictedPeriodName",
+    #               start_date: "Iso8601Date", # required
+    #               end_date: "Iso8601Date", # required
+    #             }
+    #           ]
+    #         }
     #       }
     #     }
     #   }
@@ -1523,6 +1747,31 @@ module Aws::ConnectCampaignsV2
     # @return [Smithy::Schema::EmptyStructure]
     def update_campaign_communication_time(params = {}, options = {})
       request = build_request(:update_campaign_communication_time, params)
+      request.send_request(options)
+    end
+
+    # Updates the entry limits config for a campaign. This API is idempotent.
+    # @param [Hash, Types::UpdateCampaignEntryLimitsRequest] params
+    # @option params [String] :id
+    #   Identifier representing a Campaign
+    # @option params [Types::EntryLimitsConfig] :entry_limits_config
+    #   Campaign entry limits config
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     id: "CampaignId", # required
+    #     entry_limits_config: { # required
+    #       max_entry_count: 1, # required
+    #       min_entry_interval: "Iso8601Duration", # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_campaign_entry_limits(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def update_campaign_entry_limits(params = {}, options = {})
+      request = build_request(:update_campaign_entry_limits, params)
       request.send_request(options)
     end
 

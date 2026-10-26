@@ -2,6 +2,7 @@
 
 # This is generated code!
 
+require 'smithy-cbor'
 require 'aws-sdk-core'
 require 'smithy-json'
 require 'aws-sigv4'
@@ -11,8 +12,8 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('KendraRanking', Module.new) unless Aws.const_defined?('KendraRanking')
 
 # @title Amazon Kendra Intelligent Ranking
-# <p>Amazon Kendra Intelligent Ranking uses Amazon Kendra 
-#             semantic search capabilities to intelligently re-rank a search 
+# <p>Amazon Kendra Intelligent Ranking uses Amazon Kendra
+#             semantic search capabilities to intelligently re-rank a search
 #             service's results.</p>
 module Aws::KendraRanking
   VERSION = '2.0.0.pre0'

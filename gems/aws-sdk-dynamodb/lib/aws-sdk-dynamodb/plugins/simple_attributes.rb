@@ -86,30 +86,26 @@ module Aws
       #
       # With this plugin **enabled**, `simple_attributes: true`:
       #
-      #     resp = dynamodb.get(table_name: 'aws-sdk', key: { id: 'uuid' })
+      #     resp = dynamodb.get_item(table_name: 'aws-sdk', key: { id: 'uuid' })
       #     resp.item
       #     #=> {
-      #       id: 'uuid',
-      #       age: 35,
-      #       tags: Set.new(%w(simple attributes)),
-      #       data: StringIO.new('data'),
-      #       scores: [5, 4.5, 4.9, nil],
-      #       name: {
-      #         first: 'John',
-      #         last: 'Doe',
+      #       'id' => 'uuid',
+      #       'age' => BigDecimal('35'),
+      #       'tags' => Set.new(%w(simple attributes)),
+      #       'data' => StringIO.new('data'),
+      #       'scores' => [BigDecimal('5'), BigDecimal('4.5'), BigDecimal('4.9'), nil],
+      #       'name' => {
+      #         'first' => 'John',
+      #         'last' => 'Doe',
       #       }
       #     }
       #
       # With this plugin **disabled**, `simple_attributes: false`:
       #
       #     # note that the request `:key` had to be type prefixed
-      #     resp = dynamodb.get(table_name: 'aws-sdk', key: { 'id' => { s: 'uuid' }})
-      #     resp.item
-      #     #=> {
-      #       "id"=> <struct s='uuid', n=nil, b=nil, ss=nil, ns=nil, bs=nil, m=nil, l=nil, null=nil, bool=nil>
-      #       "age"=> <struct s=nil, n="35", b=nil, ss=nil, ns=nil, bs=nil, m=nil, l=nil, null=nil, bool=nil>
-      #       ...
-      #     }
+      #     resp = dynamodb.get_item(table_name: 'aws-sdk', key: { 'id' => { s: 'uuid' }})
+      #     resp.item['id'].s #=> 'uuid'
+      #     resp.item['age'].n #=> '35'
       #
       class SimpleAttributes < Smithy::Client::Plugin
         option(

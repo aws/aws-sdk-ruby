@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:backupgateway)
@@ -123,7 +124,7 @@ module Aws::BackupGateway
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::BackupGateway
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,12 +210,10 @@ module Aws::BackupGateway
       super
     end
 
-    # <p>Associates a backup gateway with your server. After you complete the association process,
-    #       you can back up and restore your VMs through the gateway.</p>
+    # <p>Associates a backup gateway with your server. After you complete the association process, you can back up and restore your VMs through the gateway.</p>
     # @param [Hash, Types::AssociateGatewayToServerOperationInput] params
     # @option params [String] :gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation
-    #         to return a list of gateways for your account and Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     # @option params [String] :server_arn
     #   <p>The Amazon Resource Name (ARN) of the server that hosts your virtual machines.</p>
     # @example Request syntax with placeholder values
@@ -235,8 +234,7 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>Creates a backup gateway. After you create a gateway, you can associate it with a server
-    #       using the <code>AssociateGatewayToServer</code> operation.</p>
+    # <p>Creates a backup gateway. After you create a gateway, you can associate it with a server using the <code>AssociateGatewayToServer</code> operation.</p>
     # @param [Hash, Types::CreateGatewayOperationInput] params
     # @option params [String] :activation_key
     #   <p>The activation key of the created gateway.</p>
@@ -313,8 +311,7 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>Disassociates a backup gateway from the specified server. After the disassociation process
-    #       finishes, the gateway can no longer access the virtual machines on the server.</p>
+    # <p>Disassociates a backup gateway from the specified server. After the disassociation process finishes, the gateway can no longer access the virtual machines on the server.</p>
     # @param [Hash, Types::DisassociateGatewayFromServerOperationInput] params
     # @option params [String] :gateway_arn
     #   <p>The Amazon Resource Name (ARN) of the gateway to disassociate.</p>
@@ -335,17 +332,10 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>Retrieves the bandwidth rate limit schedule for a specified gateway. 
-    #       By default, gateways do not have bandwidth rate limit schedules, which means 
-    #       no bandwidth rate limiting is in effect. Use this to get a gateway's 
-    #       bandwidth rate limit schedule.</p>
+    # <p>Retrieves the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to get a gateway's bandwidth rate limit schedule.</p>
     # @param [Hash, Types::GetBandwidthRateLimitScheduleOperationInput] params
     # @option params [String] :gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the 
-    #         <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html">
-    #                  <code>ListGateways</code>
-    #               </a> operation to return a list of gateways 
-    #         for your account and Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_arn: "GatewayArn", # required
@@ -373,8 +363,7 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>By providing the ARN (Amazon Resource Name), this
-    #       API returns the gateway.</p>
+    # <p>By providing the ARN (Amazon Resource Name), this API returns the gateway.</p>
     # @param [Hash, Types::GetGatewayOperationInput] params
     # @option params [String] :gateway_arn
     #   <p>The Amazon Resource Name (ARN) of the gateway.</p>
@@ -400,7 +389,9 @@ module Aws::BackupGateway
     #         minute_of_hour: 1, # required
     #       },
     #       next_update_availability_time: Time.now,
-    #       vpc_endpoint: "VpcEndpoint"
+    #       vpc_endpoint: "VpcEndpoint",
+    #       deprecation_date: Time.now,
+    #       software_version: "Name"
     #     }
     #   }
     # @return [Types::GetGatewayOperationOutput]
@@ -409,9 +400,7 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>This action requests information about the specified hypervisor to which the gateway will connect. 
-    #       A hypervisor is hardware, software, or firmware that creates and manages virtual machines, 
-    #       and allocates resources to them.</p>
+    # <p>This action requests information about the specified hypervisor to which the gateway will connect. A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.</p>
     # @param [Hash, Types::GetHypervisorOperationInput] params
     # @option params [String] :hypervisor_arn
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
@@ -442,9 +431,7 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>This action retrieves the property mappings for the specified hypervisor. 
-    #       A hypervisor property mapping displays the relationship of entity properties 
-    #       available from the on-premises hypervisor to the properties available in Amazon Web Services.</p>
+    # <p>This action retrieves the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the hypervisor to the properties available in Amazon Web Services.</p>
     # @param [Hash, Types::GetHypervisorPropertyMappingsOperationInput] params
     # @option params [String] :hypervisor_arn
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
@@ -514,8 +501,7 @@ module Aws::BackupGateway
     # @option params [String] :name
     #   <p>The name of the hypervisor.</p>
     # @option params [String] :host
-    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified
-    #         domain name (FQDN).</p>
+    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>
     # @option params [String] :username
     #   <p>The username for the hypervisor.</p>
     # @option params [String] :password
@@ -556,10 +542,7 @@ module Aws::BackupGateway
     # @option params [Integer] :max_results
     #   <p>The maximum number of gateways to list.</p>
     # @option params [String] :next_token
-    #   <p>The next item following a partial list of returned resources. For example, if a request is
-    #         made to return <code>MaxResults</code> number of resources, <code>NextToken</code> allows you
-    #         to return more items in your list starting at the location pointed to by the next
-    #         token.</p>
+    #   <p>The next item following a partial list of returned resources. For example, if a request is made to return <code>MaxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -592,10 +575,7 @@ module Aws::BackupGateway
     # @option params [Integer] :max_results
     #   <p>The maximum number of hypervisors to list.</p>
     # @option params [String] :next_token
-    #   <p>The next item following a partial list of returned resources. For example, if a request is
-    #         made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you
-    #         to return more items in your list starting at the location pointed to by the next
-    #         token.</p>
+    #   <p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -623,8 +603,7 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>Lists the tags applied to the resource identified by its Amazon Resource Name
-    #       (ARN).</p>
+    # <p>Lists the tags applied to the resource identified by its Amazon Resource Name (ARN).</p>
     # @param [Hash, Types::ListTagsForResourceOperationInput] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource's tags to list.</p>
@@ -658,10 +637,7 @@ module Aws::BackupGateway
     # @option params [Integer] :max_results
     #   <p>The maximum number of virtual machines to list.</p>
     # @option params [String] :next_token
-    #   <p>The next item following a partial list of returned resources. For example, if a request is
-    #         made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you
-    #         to return more items in your list starting at the location pointed to by the next
-    #         token.</p>
+    #   <p>The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     hypervisor_arn: "ServerArn",
@@ -691,20 +667,12 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>This action sets the bandwidth rate limit schedule for a specified gateway. 
-    #       By default, gateways do not have a bandwidth rate limit schedule, which means 
-    #       no bandwidth rate limiting is in effect. Use this to initiate a  
-    #       gateway's bandwidth rate limit schedule.</p>
+    # <p>This action sets the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have a bandwidth rate limit schedule, which means no bandwidth rate limiting is in effect. Use this to initiate a gateway's bandwidth rate limit schedule.</p>
     # @param [Hash, Types::PutBandwidthRateLimitScheduleOperationInput] params
     # @option params [String] :gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the 
-    #         <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html">
-    #                  <code>ListGateways</code>
-    #               </a> operation to return a list of gateways 
-    #         for your account and Amazon Web Services Region.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.</p>
     # @option params [Array<Types::BandwidthRateLimitInterval>] :bandwidth_rate_limit_intervals
-    #   <p>An array containing bandwidth rate limit schedule intervals for a gateway. 
-    #         When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>
+    #   <p>An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_arn: "GatewayArn", # required
@@ -732,15 +700,12 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>This action sets the property mappings for the specified hypervisor. 
-    #       A hypervisor property mapping displays the relationship of entity properties 
-    #       available from the on-premises hypervisor to the properties available in Amazon Web Services.</p>
+    # <p>This action sets the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the hypervisor to the properties available in Amazon Web Services.</p>
     # @param [Hash, Types::PutHypervisorPropertyMappingsOperationInput] params
     # @option params [String] :hypervisor_arn
     #   <p>The Amazon Resource Name (ARN) of the hypervisor.</p>
     # @option params [Array<Types::VmwareToAwsTagMapping>] :vmware_to_aws_tag_mappings
-    #   <p>This action requests the mappings of on-premises VMware tags to the 
-    #         Amazon Web Services tags.</p>
+    #   <p>This action requests the mappings of VMware tags to the Amazon Web Services tags.</p>
     # @option params [String] :iam_role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role.</p>
     # @example Request syntax with placeholder values
@@ -772,8 +737,7 @@ module Aws::BackupGateway
     # <p>Set the maintenance start time for a gateway.</p>
     # @param [Hash, Types::PutMaintenanceStartTimeOperationInput] params
     # @option params [String] :gateway_arn
-    #   <p>The Amazon Resource Name (ARN) for the gateway, used to specify its maintenance start
-    #         time.</p>
+    #   <p>The Amazon Resource Name (ARN) for the gateway, used to specify its maintenance start time.</p>
     # @option params [Integer] :hour_of_day
     #   <p>The hour of the day to start maintenance on a gateway.</p>
     # @option params [Integer] :minute_of_hour
@@ -781,8 +745,7 @@ module Aws::BackupGateway
     # @option params [Integer] :day_of_week
     #   <p>The day of the week to start maintenance on a gateway.</p>
     # @option params [Integer] :day_of_month
-    #   <p>The day of the month start maintenance on a gateway.</p>
-    #            <p>Valid values range from <code>Sunday</code> to <code>Saturday</code>.</p>
+    #   <p>The day of the month start maintenance on a gateway.</p> <p>Valid values range from <code>Sunday</code> to <code>Saturday</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_arn: "GatewayArn", # required
@@ -854,14 +817,12 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>Tests your hypervisor configuration to validate that backup gateway can connect with the
-    #       hypervisor and its resources.</p>
+    # <p>Tests your hypervisor configuration to validate that backup gateway can connect with the hypervisor and its resources.</p>
     # @param [Hash, Types::TestHypervisorConfigurationOperationInput] params
     # @option params [String] :gateway_arn
     #   <p>The Amazon Resource Name (ARN) of the gateway to the hypervisor to test.</p>
     # @option params [String] :host
-    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified
-    #         domain name (FQDN).</p>
+    #   <p>The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>
     # @option params [String] :username
     #   <p>The username for the hypervisor.</p>
     # @option params [String] :password
@@ -908,8 +869,7 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>Updates a gateway's name. Specify which gateway to update using the Amazon Resource Name
-    #       (ARN) of the gateway in your request.</p>
+    # <p>Updates a gateway's name. Specify which gateway to update using the Amazon Resource Name (ARN) of the gateway in your request.</p>
     # @param [Hash, Types::UpdateGatewayInformationOperationInput] params
     # @option params [String] :gateway_arn
     #   <p>The Amazon Resource Name (ARN) of the gateway to update.</p>
@@ -933,17 +893,10 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>Updates the gateway virtual machine (VM) software. 
-    #       The request immediately triggers the software update.</p>
-    #          <note>
-    #             <p>When you make this request, you get a <code>200 OK</code>
-    #         success response immediately. However, it might take some 
-    #         time for the update to complete.</p>
-    #          </note>
+    # <p>Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.</p> <note> <p>When you make this request, you get a <code>200 OK</code> success response immediately. However, it might take some time for the update to complete.</p> </note>
     # @param [Hash, Types::UpdateGatewaySoftwareNowOperationInput] params
     # @option params [String] :gateway_arn
-    #   <p>The Amazon Resource Name (ARN) of the gateway
-    #         to be updated.</p>
+    #   <p>The Amazon Resource Name (ARN) of the gateway to be updated.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     gateway_arn: "GatewayArn", # required
@@ -961,15 +914,12 @@ module Aws::BackupGateway
       request.send_request(options)
     end
 
-    # <p>Updates a hypervisor metadata, including its host, username, and password. Specify which
-    #       hypervisor to update using the Amazon Resource Name (ARN) of the hypervisor in your
-    #       request.</p>
+    # <p>Updates a hypervisor metadata, including its host, username, and password. Specify which hypervisor to update using the Amazon Resource Name (ARN) of the hypervisor in your request.</p>
     # @param [Hash, Types::UpdateHypervisorOperationInput] params
     # @option params [String] :hypervisor_arn
     #   <p>The Amazon Resource Name (ARN) of the hypervisor to update.</p>
     # @option params [String] :host
-    #   <p>The updated host of the hypervisor. This can be either an IP address or a fully-qualified
-    #         domain name (FQDN).</p>
+    #   <p>The updated host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).</p>
     # @option params [String] :username
     #   <p>The updated username for the hypervisor.</p>
     # @option params [String] :password
@@ -1108,6 +1058,7 @@ module Aws::BackupGateway
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

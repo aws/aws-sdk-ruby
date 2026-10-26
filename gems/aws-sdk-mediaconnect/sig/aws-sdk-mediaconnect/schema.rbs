@@ -27,8 +27,22 @@ module Aws::MediaConnect
     AddOutputRequest: StructureShape
     Algorithm: EnumShape
     AudioMonitoringSetting: StructureShape
+    AutomaticEncryptionKeyConfiguration: StructureShape
     BadRequestException: StructureShape
+    BatchGetRouterInputError: StructureShape
+    BatchGetRouterInputErrorList: ListShape
+    BatchGetRouterInputRequest: StructureShape
+    BatchGetRouterInputResponse: StructureShape
+    BatchGetRouterNetworkInterfaceError: StructureShape
+    BatchGetRouterNetworkInterfaceErrorList: ListShape
+    BatchGetRouterNetworkInterfaceRequest: StructureShape
+    BatchGetRouterNetworkInterfaceResponse: StructureShape
+    BatchGetRouterOutputError: StructureShape
+    BatchGetRouterOutputErrorList: ListShape
+    BatchGetRouterOutputRequest: StructureShape
+    BatchGetRouterOutputResponse: StructureShape
     BlackFrames: StructureShape
+    BlackFramesConfiguration: StructureShape
     Bridge: StructureShape
     BridgeArn: StringShape
     BridgeFlowOutput: StructureShape
@@ -39,9 +53,12 @@ module Aws::MediaConnect
     BridgePlacement: EnumShape
     BridgeSource: StructureShape
     BridgeState: EnumShape
+    ClientToken: StringShape
+    ColorInformation: StructureShape
     Colorimetry: EnumShape
     ConflictException: StructureShape
     ConnectionStatus: EnumShape
+    ContentQualityAnalysisFeatureConfiguration: StructureShape
     ContentQualityAnalysisState: EnumShape
     CreateBridge420Exception: StructureShape
     CreateBridgeRequest: StructureShape
@@ -52,12 +69,26 @@ module Aws::MediaConnect
     CreateGateway420Exception: StructureShape
     CreateGatewayRequest: StructureShape
     CreateGatewayResponse: StructureShape
+    CreateRouterInputRequest: StructureShape
+    CreateRouterInputResponse: StructureShape
+    CreateRouterNetworkInterfaceRequest: StructureShape
+    CreateRouterNetworkInterfaceResponse: StructureShape
+    CreateRouterOutputRequest: StructureShape
+    CreateRouterOutputResponse: StructureShape
+    Day: EnumShape
+    DefaultMaintenanceConfiguration: StructureShape
     DeleteBridgeRequest: StructureShape
     DeleteBridgeResponse: StructureShape
     DeleteFlowRequest: StructureShape
     DeleteFlowResponse: StructureShape
     DeleteGatewayRequest: StructureShape
     DeleteGatewayResponse: StructureShape
+    DeleteRouterInputRequest: StructureShape
+    DeleteRouterInputResponse: StructureShape
+    DeleteRouterNetworkInterfaceRequest: StructureShape
+    DeleteRouterNetworkInterfaceResponse: StructureShape
+    DeleteRouterOutputRequest: StructureShape
+    DeleteRouterOutputResponse: StructureShape
     DeregisterGatewayInstanceRequest: StructureShape
     DeregisterGatewayInstanceResponse: StructureShape
     DescribeBridgeRequest: StructureShape
@@ -82,22 +113,39 @@ module Aws::MediaConnect
     DurationUnits: EnumShape
     EgressGatewayBridge: StructureShape
     EncoderProfile: EnumShape
+    EncodingConfig: StructureShape
     EncodingName: EnumShape
     EncodingParameters: StructureShape
     EncodingParametersRequest: StructureShape
+    EncodingProfile: EnumShape
     Encryption: StructureShape
     Entitlement: StructureShape
     EntitlementStatus: EnumShape
+    FabricConfiguration: StructureShape
+    FabricLatencyMode: EnumShape
     FailoverConfig: StructureShape
+    FailoverInputSourcePriorityMode: EnumShape
     FailoverMode: EnumShape
+    FailoverRouterInputConfiguration: StructureShape
+    FailoverRouterInputIndexedStreamDetails: StructureShape
+    FailoverRouterInputProtocolConfiguration: UnionShape
+    FailoverRouterInputProtocolConfigurationList: ListShape
+    FailoverRouterInputStreamDetails: StructureShape
     Flow: StructureShape
     FlowArn: StringShape
+    FlowOutputArn: StringShape
     FlowSize: EnumShape
+    FlowSourceArn: StringShape
+    FlowTransitEncryption: StructureShape
+    FlowTransitEncryptionKeyConfiguration: UnionShape
+    FlowTransitEncryptionKeyType: EnumShape
     Fmtp: StructureShape
     FmtpRequest: StructureShape
     ForbiddenException: StructureShape
+    ForwardErrorCorrectionState: EnumShape
     FrameResolution: StructureShape
     FrozenFrames: StructureShape
+    FrozenFramesConfiguration: StructureShape
     Gateway: StructureShape
     GatewayArn: StringShape
     GatewayBridgeSource: StructureShape
@@ -105,6 +153,16 @@ module Aws::MediaConnect
     GatewayInstanceArn: StringShape
     GatewayNetwork: StructureShape
     GatewayState: EnumShape
+    GetRouterInputRequest: StructureShape
+    GetRouterInputResponse: StructureShape
+    GetRouterInputSourceMetadataRequest: StructureShape
+    GetRouterInputSourceMetadataResponse: StructureShape
+    GetRouterInputThumbnailRequest: StructureShape
+    GetRouterInputThumbnailResponse: StructureShape
+    GetRouterNetworkInterfaceRequest: StructureShape
+    GetRouterNetworkInterfaceResponse: StructureShape
+    GetRouterOutputRequest: StructureShape
+    GetRouterOutputResponse: StructureShape
     GrantEntitlementRequest: StructureShape
     GrantFlowEntitlements420Exception: StructureShape
     GrantFlowEntitlementsRequest: StructureShape
@@ -131,6 +189,14 @@ module Aws::MediaConnect
     ListOfferingsResponse: StructureShape
     ListReservationsRequest: StructureShape
     ListReservationsResponse: StructureShape
+    ListRouterInputsRequest: StructureShape
+    ListRouterInputsResponse: StructureShape
+    ListRouterNetworkInterfacesRequest: StructureShape
+    ListRouterNetworkInterfacesResponse: StructureShape
+    ListRouterOutputsRequest: StructureShape
+    ListRouterOutputsResponse: StructureShape
+    ListTagsForGlobalResourceRequest: StructureShape
+    ListTagsForGlobalResourceResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     ListedBridge: StructureShape
@@ -138,9 +204,34 @@ module Aws::MediaConnect
     ListedFlow: StructureShape
     ListedGateway: StructureShape
     ListedGatewayInstance: StructureShape
+    ListedRouterInput: StructureShape
+    ListedRouterInputList: ListShape
+    ListedRouterNetworkInterface: StructureShape
+    ListedRouterNetworkInterfaceList: ListShape
+    ListedRouterOutput: StructureShape
+    ListedRouterOutputList: ListShape
     Maintenance: StructureShape
+    MaintenanceConfiguration: UnionShape
     MaintenanceDay: EnumShape
+    MaintenanceSchedule: UnionShape
+    MaintenanceScheduleType: EnumShape
+    MaintenanceType: EnumShape
     MaxResults: IntegerShape
+    MediaConnectFlowRouterInputConfiguration: StructureShape
+    MediaConnectFlowRouterInputStreamDetails: StructureShape
+    MediaConnectFlowRouterOutputConfiguration: StructureShape
+    MediaConnectFlowRouterOutputStreamDetails: StructureShape
+    MediaLiveChannelArn: StringShape
+    MediaLiveChannelPipelineId: EnumShape
+    MediaLiveChannelRouterInputConfiguration: StructureShape
+    MediaLiveChannelRouterInputStreamDetails: StructureShape
+    MediaLiveInputArn: StringShape
+    MediaLiveInputPipelineId: EnumShape
+    MediaLiveInputRouterOutputConfiguration: StructureShape
+    MediaLiveInputRouterOutputStreamDetails: StructureShape
+    MediaLiveTransitEncryption: StructureShape
+    MediaLiveTransitEncryptionKeyConfiguration: UnionShape
+    MediaLiveTransitEncryptionKeyType: EnumShape
     MediaStream: StructureShape
     MediaStreamAttributes: StructureShape
     MediaStreamAttributesRequest: StructureShape
@@ -149,21 +240,38 @@ module Aws::MediaConnect
     MediaStreamSourceConfiguration: StructureShape
     MediaStreamSourceConfigurationRequest: StructureShape
     MediaStreamType: EnumShape
+    MergeRouterInputConfiguration: StructureShape
+    MergeRouterInputIndexedStreamDetails: StructureShape
+    MergeRouterInputProtocolConfiguration: UnionShape
+    MergeRouterInputProtocolConfigurationList: ListShape
+    MergeRouterInputStreamDetails: StructureShape
     MessageDetail: StructureShape
     Messages: StructureShape
     MonitoringConfig: StructureShape
     MulticastSourceSettings: StructureShape
+    NdiAudioReferenceLevel: IntegerShape
     NdiConfig: StructureShape
     NdiDiscoveryServerConfig: StructureShape
+    NdiMediaInfo: StructureShape
+    NdiMediaStreamInfo: StructureShape
+    NdiOutputTimecodeSource: EnumShape
+    NdiSourceInfo: StructureShape
+    NdiSourceMetadataInfo: StructureShape
+    NdiSourceSettings: StructureShape
     NdiState: EnumShape
+    NetworkInterfaceRuleList: ListShape
     NetworkInterfaceType: EnumShape
     NotFoundException: StructureShape
     Offering: StructureShape
     OfferingArn: StringShape
     Output: StructureShape
     OutputStatus: EnumShape
+    PreferredDayTimeMaintenanceConfiguration: StructureShape
     PriceUnits: EnumShape
     Protocol: EnumShape
+    PublicRouterNetworkInterfaceConfiguration: StructureShape
+    PublicRouterNetworkInterfaceRule: StructureShape
+    PublicTlsEncryptionConfiguration: StructureShape
     PurchaseOfferingRequest: StructureShape
     PurchaseOfferingResponse: StructureShape
     Range: EnumShape
@@ -184,31 +292,128 @@ module Aws::MediaConnect
     ReservationState: EnumShape
     ResourceSpecification: StructureShape
     ResourceType: EnumShape
+    RestartRouterInputRequest: StructureShape
+    RestartRouterInputResponse: StructureShape
+    RestartRouterOutputRequest: StructureShape
+    RestartRouterOutputResponse: StructureShape
     RevokeFlowEntitlementRequest: StructureShape
     RevokeFlowEntitlementResponse: StructureShape
+    RistRouterInputConfiguration: StructureShape
+    RistRouterOutputConfiguration: StructureShape
+    RoleArn: StringShape
+    RouterContentQualityAnalysisConfiguration: UnionShape
+    RouterContentQualityAnalysisType: EnumShape
+    RouterCqaThresholdSeconds: IntegerShape
+    RouterInput: StructureShape
+    RouterInputArn: StringShape
+    RouterInputArnList: ListShape
+    RouterInputConfiguration: UnionShape
+    RouterInputFilter: UnionShape
+    RouterInputFilterList: ListShape
+    RouterInputList: ListShape
+    RouterInputMessage: StructureShape
+    RouterInputMessages: ListShape
+    RouterInputMetadata: UnionShape
+    RouterInputProtocol: EnumShape
+    RouterInputProtocolConfiguration: UnionShape
+    RouterInputServiceQuotaExceededException: StructureShape
+    RouterInputSourceMetadataDetails: StructureShape
+    RouterInputState: EnumShape
+    RouterInputStreamDetails: UnionShape
+    RouterInputThumbnailDetails: StructureShape
+    RouterInputTier: EnumShape
+    RouterInputTransitEncryption: StructureShape
+    RouterInputTransitEncryptionKeyConfiguration: UnionShape
+    RouterInputTransitEncryptionKeyType: EnumShape
+    RouterInputType: EnumShape
+    RouterInputTypeList: ListShape
+    RouterNetworkInterface: StructureShape
+    RouterNetworkInterfaceArn: StringShape
+    RouterNetworkInterfaceArnList: ListShape
+    RouterNetworkInterfaceConfiguration: UnionShape
+    RouterNetworkInterfaceFilter: UnionShape
+    RouterNetworkInterfaceFilterList: ListShape
+    RouterNetworkInterfaceList: ListShape
+    RouterNetworkInterfaceServiceQuotaExceededException: StructureShape
+    RouterNetworkInterfaceState: EnumShape
+    RouterNetworkInterfaceType: EnumShape
+    RouterNetworkInterfaceTypeList: ListShape
+    RouterOutput: StructureShape
+    RouterOutputArn: StringShape
+    RouterOutputArnList: ListShape
+    RouterOutputConfiguration: UnionShape
+    RouterOutputFilter: UnionShape
+    RouterOutputFilterList: ListShape
+    RouterOutputList: ListShape
+    RouterOutputMessage: StructureShape
+    RouterOutputMessages: ListShape
+    RouterOutputProtocol: EnumShape
+    RouterOutputProtocolConfiguration: UnionShape
+    RouterOutputRoutedState: EnumShape
+    RouterOutputServiceQuotaExceededException: StructureShape
+    RouterOutputState: EnumShape
+    RouterOutputStreamDetails: UnionShape
+    RouterOutputTier: EnumShape
+    RouterOutputType: EnumShape
+    RouterOutputTypeList: ListShape
+    RoutingScope: EnumShape
+    RoutingScopeList: ListShape
+    RtmpPushRouterOutputConfiguration: StructureShape
+    RtpRouterInputConfiguration: StructureShape
+    RtpRouterOutputConfiguration: StructureShape
     ScanMode: EnumShape
+    SecretArn: StringShape
+    SecretsManagerEncryptionKeyConfiguration: StructureShape
+    SecurityGroupIdList: ListShape
     ServiceUnavailableException: StructureShape
     SetGatewayBridgeSourceRequest: StructureShape
     SetSourceRequest: StructureShape
     SilentAudio: StructureShape
+    SilentAudioConfiguration: StructureShape
     Source: StructureShape
     SourcePriority: StructureShape
     SourceType: EnumShape
+    SrtCallerRouterInputConfiguration: StructureShape
+    SrtCallerRouterOutputConfiguration: StructureShape
+    SrtDecryptionConfiguration: StructureShape
+    SrtEncryptionConfiguration: StructureShape
+    SrtListenerRouterInputConfiguration: StructureShape
+    SrtListenerRouterOutputConfiguration: StructureShape
+    StandardRouterInputConfiguration: StructureShape
+    StandardRouterInputStreamDetails: StructureShape
+    StandardRouterOutputConfiguration: StructureShape
+    StandardRouterOutputStreamDetails: StructureShape
     StartFlowRequest: StructureShape
     StartFlowResponse: StructureShape
+    StartRouterInputRequest: StructureShape
+    StartRouterInputResponse: StructureShape
+    StartRouterOutputRequest: StructureShape
+    StartRouterOutputResponse: StructureShape
     State: EnumShape
     Status: EnumShape
     StopFlowRequest: StructureShape
     StopFlowResponse: StructureShape
+    StopRouterInputRequest: StructureShape
+    StopRouterInputResponse: StructureShape
+    StopRouterOutputRequest: StructureShape
+    StopRouterOutputResponse: StructureShape
+    StringList: ListShape
+    TagGlobalResourceRequest: StructureShape
     TagResourceRequest: StructureShape
+    TakeRouterInputRequest: StructureShape
+    TakeRouterInputResponse: StructureShape
     Tcs: EnumShape
     ThumbnailDetails: StructureShape
     ThumbnailState: EnumShape
+    TlsEncryption: StructureShape
+    TlsEncryptionConfiguration: UnionShape
+    TlsEncryptionType: EnumShape
     TooManyRequestsException: StructureShape
     Transport: StructureShape
     TransportMediaInfo: StructureShape
     TransportStream: StructureShape
     TransportStreamProgram: StructureShape
+    UntagGlobalResourceRequest: StructureShape
     UntagResourceRequest: StructureShape
     UpdateBridgeFlowSourceRequest: StructureShape
     UpdateBridgeNetworkOutputRequest: StructureShape
@@ -239,10 +444,21 @@ module Aws::MediaConnect
     UpdateGatewayInstanceResponse: StructureShape
     UpdateIngressGatewayBridgeRequest: StructureShape
     UpdateMaintenance: StructureShape
+    UpdateRouterInputRequest: StructureShape
+    UpdateRouterInputResponse: StructureShape
+    UpdateRouterNetworkInterfaceRequest: StructureShape
+    UpdateRouterNetworkInterfaceResponse: StructureShape
+    UpdateRouterOutputRequest: StructureShape
+    UpdateRouterOutputResponse: StructureShape
+    VideoColorimetry: EnumShape
+    VideoMatrixCoefficients: EnumShape
     VideoMonitoringSetting: StructureShape
+    VideoTransferCharacteristics: EnumShape
     VpcInterface: StructureShape
     VpcInterfaceAttachment: StructureShape
     VpcInterfaceRequest: StructureShape
+    VpcRouterNetworkInterfaceConfiguration: StructureShape
+    WindowMaintenanceSchedule: StructureShape
     Listofaddbridgeoutputrequest: ListShape
     Listofaddbridgesourcerequest: ListShape
     Listofaddmediastreamrequest: ListShape
@@ -270,6 +486,8 @@ module Aws::MediaConnect
     Listofmediastreamsourceconfigurationrequest: ListShape
     Listofmessagedetail: ListShape
     Listofndidiscoveryserverconfig: ListShape
+    Listofndimediastreaminfo: ListShape
+    Listofndisourceinfo: ListShape
     Listofoffering: ListShape
     Listofoutput: ListShape
     Listofreservation: ListShape

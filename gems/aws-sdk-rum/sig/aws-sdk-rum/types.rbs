@@ -28,6 +28,7 @@ module Aws::RUM
         ?data_storage: Types::DataStorage,
         ?custom_events: Types::CustomEvents,
         ?deobfuscation_configuration: Types::DeobfuscationConfiguration,
+        ?platform: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -43,6 +44,7 @@ module Aws::RUM
       attr_accessor data_storage: Types::DataStorage?
       attr_accessor custom_events: Types::CustomEvents?
       attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration?
+      attr_accessor platform: String?
     end
 
     class AppMonitorConfiguration
@@ -96,6 +98,7 @@ module Aws::RUM
         ?created: String,
         ?last_modified: String,
         ?state: String,
+        ?platform: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -104,6 +107,7 @@ module Aws::RUM
       attr_accessor created: String?
       attr_accessor last_modified: String?
       attr_accessor state: String?
+      attr_accessor platform: String?
     end
 
     class BatchCreateRumMetricDefinitionsError
@@ -255,6 +259,7 @@ module Aws::RUM
         ?cw_log_enabled: bool,
         ?custom_events: Types::CustomEvents,
         ?deobfuscation_configuration: Types::DeobfuscationConfiguration,
+        ?platform: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -266,6 +271,7 @@ module Aws::RUM
       attr_accessor cw_log_enabled: bool?
       attr_accessor custom_events: Types::CustomEvents?
       attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration?
+      attr_accessor platform: String?
     end
 
     class CreateAppMonitorOutput

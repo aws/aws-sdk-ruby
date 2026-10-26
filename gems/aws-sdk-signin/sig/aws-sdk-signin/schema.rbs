@@ -4,23 +4,77 @@ module Aws::Signin
 
     AccessDeniedException: StructureShape
     AccessToken: StructureShape
+    AccountId: StringShape
     AuthorizationCode: StringShape
+    BearerTokenType: StringShape
+    ClientCredentialsGrantType: StringShape
     ClientId: StringShape
+    ClientToken: StringShape
     CodeVerifier: StringShape
+    Condition: MapShape
+    ConditionBlock: MapShape
+    ConditionType: StringShape
+    ConditionValues: ListShape
+    ConflictException: StructureShape
+    ConsolePermissionMaxResults: IntegerShape
     CreateOAuth2TokenRequest: StructureShape
     CreateOAuth2TokenRequestBody: StructureShape
     CreateOAuth2TokenResponse: StructureShape
     CreateOAuth2TokenResponseBody: StructureShape
+    CreateOAuth2TokenWithIAMRequest: StructureShape
+    CreateOAuth2TokenWithIAMResponse: StructureShape
+    DeleteConsoleAuthorizationConfigurationInput: StructureShape
+    DeleteConsoleAuthorizationConfigurationOutput: StructureShape
+    DeleteResourcePermissionStatementInput: StructureShape
+    DeleteResourcePermissionStatementOutput: StructureShape
+    ExcludedPrincipal: StringShape
     ExpiresIn: IntegerShape
+    GetConsoleAuthorizationConfigurationInput: StructureShape
+    GetConsoleAuthorizationConfigurationOutput: StructureShape
+    GetResourcePolicyInput: StructureShape
+    GetResourcePolicyOutput: StructureShape
     GrantType: StringShape
     IdToken: StringShape
     InternalServerException: StructureShape
+    IntrospectOAuth2TokenWithIAMRequest: StructureShape
+    IntrospectOAuth2TokenWithIAMResponse: StructureShape
+    IntrospectedTokenType: StringShape
+    IntrospectionToken: StringShape
+    ListResourcePermissionStatementsInput: StructureShape
+    ListResourcePermissionStatementsOutput: StructureShape
+    NextToken: StringShape
     OAuth2ErrorCode: EnumShape
+    OAuthAccessToken: StringShape
+    PermissionStatementSummaries: ListShape
+    PermissionStatementSummary: StructureShape
+    PolicyActions: ListShape
+    PolicyStatement: StructureShape
+    PolicyStatements: ListShape
+    Principal: MapShape
+    PutConsoleAuthorizationConfigurationInput: StructureShape
+    PutConsoleAuthorizationConfigurationOutput: StructureShape
+    PutResourcePermissionStatementInput: StructureShape
+    PutResourcePermissionStatementOutput: StructureShape
     RedirectUri: StringShape
     RefreshToken: StringShape
+    RequestedRegion: StringShape
+    ResourceNotFoundException: StructureShape
+    RevocationToken: StringShape
+    RevokeOAuth2TokenWithIAMRequest: StructureShape
+    RevokeOAuth2TokenWithIAMResponse: StructureShape
+    ServiceQuotaExceededException: StructureShape
+    SigninResourceBasedPolicy: StructureShape
+    SourceIp: StringShape
+    SourceVpc: StringShape
+    SourceVpce: StringShape
+    StatementId: StringShape
+    TargetId: StringShape
+    TokenExpiresIn: IntegerShape
     TokenType: StringShape
+    TokenTypeHint: StringShape
     TooManyRequestsError: StructureShape
     ValidationException: StructureShape
+    VpcSourceIp: StringShape
 
     Signin: ServiceShape
   end

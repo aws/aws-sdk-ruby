@@ -30,8 +30,10 @@ module Aws::Support
   # * {CaseCreationLimitExceeded}
   # * {CaseIdNotFound}
   # * {DescribeAttachmentLimitExceeded}
+  # * {DryRunOperationException}
   # * {InternalServerError}
   # * {ThrottlingException}
+  # * {UploadIdNotFound}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -159,6 +161,20 @@ module Aws::Support
       end
     end
 
+    # <p>The request was valid, but the operation wasn't performed because <code>dryRun</code> was
+    #          set to <code>true</code>.</p>
+    class DryRunOperationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Support::Types::DryRunOperationException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>An internal server error occurred.</p>
     class InternalServerError < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
@@ -179,6 +195,24 @@ module Aws::Support
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Support::Types::ThrottlingException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+
+      # <p>A list of one or more reasons that the request was throttled.</p>
+      def throttling_reasons
+        @data[:throttling_reasons]
+      end
+    end
+
+    # <p>The specified <code>uploadId</code> couldn't be located.</p>
+    class UploadIdNotFound < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::Support::Types::UploadIdNotFound] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

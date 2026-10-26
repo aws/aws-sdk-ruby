@@ -61,27 +61,57 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
-    # Metadata used in generating the CSR
+    # @!attribute action
+    #   <p>The protected operation to associate with the MPA team. Currently, the only supported value is <code>IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE</code>.</p>
+    #   @return [String]
+    # @!attribute mpa_team_arn
+    #   <p>The ARN of the MPA team to associate with the protected operation.</p>
+    #   @return [String]
+    # @!attribute requester_comment
+    #   <p>The comment from the requester explaining the reason for the association.</p> <important> <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important>
+    #   @return [String]
+    class AssociateMpaTeamInput < Struct.new(
+      nil,
+      :action,
+      :mpa_team_arn,
+      :requester_comment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute mpa_team_association
+    #   <p>The details of the MPA team association.</p>
+    #   @return [Types::MpaTeamAssociation]
+    class AssociateMpaTeamOutput < Struct.new(
+      nil,
+      :mpa_team_association,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The metadata used to create the certificate signing request.</p>
     # @!attribute common_name
-    #   Common Name to be used in the certificate signing request
+    #   <p>The name you provide to create the certificate signing request.</p>
     #   @return [String]
     # @!attribute organization_unit
-    #   Organization Unit to be used in the certificate signing request
+    #   <p>The organization unit you provide to create the certificate signing request.</p>
     #   @return [String]
     # @!attribute organization
-    #   Organization to be used in the certificate signing request
+    #   <p>The organization you provide to create the certificate signing request.</p>
     #   @return [String]
     # @!attribute city
-    #   City to be used in the certificate signing request
+    #   <p>The city you provide to create the certificate signing request.</p>
     #   @return [String]
     # @!attribute country
-    #   Country to be used in the certificate signing request
+    #   <p>The country you provide to create the certificate signing request.</p>
     #   @return [String]
     # @!attribute state_or_province
-    #   State Or Province to be used in the certificate signing request
+    #   <p>The state or province you provide to create the certificate signing request.</p>
     #   @return [String]
     # @!attribute email_address
-    #   Email to be used in the certificate signing request
+    #   <p>The email address you provide to create the certificate signing request.</p>
     #   @return [String]
     class CertificateSubjectType < Struct.new(
       nil,
@@ -138,7 +168,7 @@ module Aws::PaymentCryptography
     #   <p>The role of the key, the algorithm it supports, and the cryptographic operations allowed with the key. This data is immutable after the key is created.</p>
     #   @return [Types::KeyAttributes]
     # @!attribute key_check_value_algorithm
-    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>
+    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>
     #   @return [String]
     # @!attribute exportable
     #   <p>Specifies whether the key is exportable from the service.</p>
@@ -224,6 +254,24 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The <code>KeyARN</code> of the key whose resource-based policy you want to delete.</p>
+    #   @return [String]
+    class DeleteResourcePolicyInput < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteResourcePolicyOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The shared information used when deriving a key using ECDH.</p>
     # @!attribute shared_information
     #   <p>A string containing information that binds the ECDH derived key to the two parties involved or to the context of the key.</p> <p>It may include details like identities of the two parties deriving the key, context of the operation, session IDs, and optionally a nonce. It must not contain zero bytes. It is not recommended to reuse shared information for multiple ECDH key derivations, as it could result in derived key material being the same across different derivations.</p>
@@ -263,9 +311,35 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute action
+    #   <p>The protected operation to disassociate from the MPA team. Currently, the only supported value is <code>IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE</code>.</p>
+    #   @return [String]
+    # @!attribute requester_comment
+    #   <p>The comment from the requester explaining the reason for the disassociation.</p> <important> <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important>
+    #   @return [String]
+    class DisassociateMpaTeamInput < Struct.new(
+      nil,
+      :action,
+      :requester_comment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute mpa_team_association
+    #   <p>The details of the MPA team association.</p>
+    #   @return [Types::MpaTeamAssociation]
+    class DisassociateMpaTeamOutput < Struct.new(
+      nil,
+      :mpa_team_association,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Input parameters for enabling default key replication regions for the account.</p>
     # @!attribute replication_regions
-    #   <p>The list of Amazon Web Services Regions to enable as default replication regions for the account.</p> <p>New keys created in this account will automatically be replicated to these regions unless explicitly overridden during key creation.</p>
+    #   <p>The list of Amazon Web Services Regions to enable as default replication regions for the Amazon Web Services account for <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html">Multi-Region key replication</a>.</p> <p>New keys created in this account will automatically be replicated to these regions unless explicitly overridden during key creation.</p>
     #   @return [Array<String>]
     class EnableDefaultKeyReplicationRegionsInput < Struct.new(
       nil,
@@ -287,12 +361,28 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Parameter information for key material export using AS2805 key cryptogram format.</p>
+    # @!attribute wrapping_key_identifier
+    #   <p>A key identifier that can be either a key ARN or an alias name. This allows flexible key identification in operations.</p> <p>When using a key ARN, it must be a fully qualified ARN in the format: <code>arn:aws:payment-cryptography:region:account:key/key-id</code>.</p> <p>When using an alias, it must begin with <code>alias/</code> followed by the alias name.</p> <important> <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important>
+    #   @return [String]
+    # @!attribute as2805_key_variant
+    #   <p>The cryptographic usage of the key under export.</p>
+    #   @return [String]
+    class ExportAs2805KeyCryptogram < Struct.new(
+      nil,
+      :wrapping_key_identifier,
+      :as2805_key_variant,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The attributes for IPEK generation during export.</p>
     # @!attribute export_dukpt_initial_key
     #   <p>Parameter information for IPEK export.</p>
     #   @return [Types::ExportDukptInitialKey]
     # @!attribute key_check_value_algorithm
-    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity. Specify KCV for IPEK export only.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>
+    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity. Specify KCV for IPEK export only.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>
     #   @return [String]
     class ExportAttributes < Struct.new(
       nil,
@@ -407,11 +497,15 @@ module Aws::PaymentCryptography
     # @!attribute diffie_hellman_tr31_key_block
     #   <p>Key derivation parameter information for key material export using asymmetric ECDH key exchange method.</p>
     #   @return [Types::ExportDiffieHellmanTr31KeyBlock]
+    # @!attribute as2805_key_cryptogram
+    #   <p>Parameter information for key material export using AS2805 key cryptogram format.</p>
+    #   @return [Types::ExportAs2805KeyCryptogram]
     class ExportKeyMaterial < Struct.new(
       :tr31_key_block,
       :tr34_key_block,
       :key_cryptogram,
       :diffie_hellman_tr31_key_block,
+      :as2805_key_cryptogram,
       :unknown,
       keyword_init: true
     )
@@ -421,6 +515,7 @@ module Aws::PaymentCryptography
       class Tr34KeyBlock < ExportKeyMaterial; end
       class KeyCryptogram < ExportKeyMaterial; end
       class DiffieHellmanTr31KeyBlock < ExportKeyMaterial; end
+      class As2805KeyCryptogram < ExportKeyMaterial; end
       class Unknown < ExportKeyMaterial; end
     end
 
@@ -462,10 +557,10 @@ module Aws::PaymentCryptography
     #   <p>The export token to initiate key export from Amazon Web Services Payment Cryptography. It also contains the signing key certificate that will sign the wrapped key during TR-34 key block generation. Call <a href="https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html">GetParametersForExport</a> to receive an export token. It expires after 30 days. You can use the same export token to export multiple keys from the same service account.</p>
     #   @return [String]
     # @!attribute signing_key_identifier
-    #   Key Identifier used for signing the export key
+    #   <p>Key Identifier used for signing the export key</p>
     #   @return [String]
     # @!attribute signing_key_certificate
-    #   Certificate used for signing the export key
+    #   <p>The certificate used to sign the TR-34 key block.</p>
     #   @return [String]
     # @!attribute key_block_format
     #   <p>The format of key block that Amazon Web Services Payment Cryptography will use during key export.</p>
@@ -519,13 +614,13 @@ module Aws::PaymentCryptography
     end
 
     # @!attribute key_identifier
-    #   Asymmetric key used for generating the certificate signing request
+    #   <p>Asymmetric key used for generating the certificate signing request</p>
     #   @return [String]
     # @!attribute signing_algorithm
-    #   Algorithm used to generate the certificate signing request
+    #   <p>The cryptographic algorithm used to sign your CSR.</p>
     #   @return [String]
     # @!attribute certificate_subject
-    #   Certificate subject data
+    #   <p>The metadata used to create the CSR.</p>
     #   @return [Types::CertificateSubjectType]
     class GetCertificateSigningRequestInput < Struct.new(
       nil,
@@ -538,7 +633,7 @@ module Aws::PaymentCryptography
     end
 
     # @!attribute certificate_signing_request
-    #   Certificate signing request
+    #   <p>The certificate signing request generated using the key pair associated with the key identifier.</p>
     #   @return [String]
     class GetCertificateSigningRequestOutput < Struct.new(
       nil,
@@ -590,16 +685,42 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute action
+    #   <p>The protected operation whose MPA team association you want to retrieve. Currently, the only supported value is <code>IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE</code>.</p>
+    #   @return [String]
+    class GetMpaTeamAssociationInput < Struct.new(
+      nil,
+      :action,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute mpa_team_association
+    #   <p>The details of the MPA team association.</p>
+    #   @return [Types::MpaTeamAssociation]
+    class GetMpaTeamAssociationOutput < Struct.new(
+      nil,
+      :mpa_team_association,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute key_material_type
     #   <p>The key block format type (for example, TR-34 or TR-31) to use during key material export. Export token is only required for a TR-34 key export, <code>TR34_KEY_BLOCK</code>. Export token is not required for TR-31 key export.</p>
     #   @return [String]
     # @!attribute signing_key_algorithm
     #   <p>The signing key algorithm to generate a signing key certificate. This certificate signs the wrapped key under export within the TR-34 key block. <code>RSA_2048</code> is the only signing key algorithm allowed.</p>
     #   @return [String]
+    # @!attribute reuse_last_generated_token
+    #   <p>Specifies whether to reuse the existing export token and signing key certificate. If set to <code>true</code> and a valid export token exists for the same key material type and signing key algorithm with at least 7 days of remaining validity, the existing token and signing key certificate are returned. Otherwise, a new export token and signing key certificate are generated. The default value is <code>false</code>, which generates a new export token and signing key certificate on every call.</p>
+    #   @return [Boolean]
     class GetParametersForExportInput < Struct.new(
       nil,
       :key_material_type,
       :signing_key_algorithm,
+      :reuse_last_generated_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -638,10 +759,14 @@ module Aws::PaymentCryptography
     # @!attribute wrapping_key_algorithm
     #   <p>The wrapping key algorithm to generate a wrapping key certificate. This certificate wraps the key under import.</p> <p>At this time, <code>RSA_2048</code> is the allowed algorithm for TR-34 WrappedKeyBlock import. Additionally, <code>RSA_2048</code>, <code>RSA_3072</code>, <code>RSA_4096</code> are the allowed algorithms for RSA WrappedKeyCryptogram import.</p>
     #   @return [String]
+    # @!attribute reuse_last_generated_token
+    #   <p>Specifies whether to reuse the existing import token and wrapping key certificate. If set to <code>true</code> and a valid import token exists for the same key material type and wrapping key algorithm with at least 7 days of remaining validity, the existing token and wrapping key certificate are returned. Otherwise, a new import token and wrapping key certificate are generated. The default value is <code>false</code>, which generates a new import token and wrapping key certificate on every call.</p>
+    #   @return [Boolean]
     class GetParametersForImportInput < Struct.new(
       nil,
       :key_material_type,
       :wrapping_key_algorithm,
+      :reuse_last_generated_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -686,7 +811,7 @@ module Aws::PaymentCryptography
     end
 
     # @!attribute key_certificate
-    #   <p>The public key component of the asymmetric key pair in a certificate PEM format (base64 encoded). It is signed by the root certificate authority (CA). The certificate expires in 90 days.</p>
+    #   <p>The public key component of the asymmetric key pair in a certificate PEM format (base64 encoded). It is signed by the root certificate authority (CA). The certificate is valid for 90 days from the time it is issued. The service returns a cached certificate if one exists with at least 30 days of remaining validity. Otherwise, a new 90-day certificate is issued.</p>
     #   @return [String]
     # @!attribute key_certificate_chain
     #   <p>The root certificate authority (CA) that signed the public key certificate in PEM format (base64 encoded) of the asymmetric key pair.</p>
@@ -695,6 +820,64 @@ module Aws::PaymentCryptography
       nil,
       :key_certificate,
       :key_certificate_chain,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The <code>KeyARN</code> of the key whose resource-based policy you want to retrieve.</p>
+    #   @return [String]
+    class GetResourcePolicyInput < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The <code>KeyARN</code> of the key.</p>
+    #   @return [String]
+    # @!attribute policy
+    #   <p>The resource-based policy attached to the key, in JSON format.</p>
+    #   @return [String]
+    class GetResourcePolicyOutput < Struct.new(
+      nil,
+      :resource_arn,
+      :policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Parameter information for key material import using AS2805 key cryptogram format.</p>
+    # @!attribute as2805_key_variant
+    #   <p>The cryptographic usage of the key under import.</p>
+    #   @return [String]
+    # @!attribute key_modes_of_use
+    #   <p>The list of cryptographic operations that you can perform using the key. The modes of use are deﬁned in section A.5.3 of the TR-31 spec.</p>
+    #   @return [Types::KeyModesOfUse]
+    # @!attribute key_algorithm
+    #   <p>The key algorithm of the key under import.</p>
+    #   @return [String]
+    # @!attribute exportable
+    #   <p>Specified whether the key is exportable. This data is immutable after the key is imported.</p>
+    #   @return [Boolean]
+    # @!attribute wrapping_key_identifier
+    #   <p>A key identifier that can be either a key ARN or an alias name. This allows flexible key identification in operations.</p> <p>When using a key ARN, it must be a fully qualified ARN in the format: <code>arn:aws:payment-cryptography:region:account:key/key-id</code>.</p> <p>When using an alias, it must begin with <code>alias/</code> followed by the alias name.</p> <important> <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important>
+    #   @return [String]
+    # @!attribute wrapped_key_cryptogram
+    #   <p>The wrapped key cryptogram under import.</p>
+    #   @return [String]
+    class ImportAs2805KeyCryptogram < Struct.new(
+      nil,
+      :as2805_key_variant,
+      :key_modes_of_use,
+      :key_algorithm,
+      :exportable,
+      :wrapping_key_identifier,
+      :wrapped_key_cryptogram,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -772,7 +955,7 @@ module Aws::PaymentCryptography
     #   <p>The key or public key certificate type to use during key material import, for example TR-34 or RootCertificatePublicKey.</p>
     #   @return [Types::ImportKeyMaterial]
     # @!attribute key_check_value_algorithm
-    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>
+    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>
     #   @return [String]
     # @!attribute enabled
     #   <p>Specifies whether import key is enabled.</p>
@@ -783,6 +966,9 @@ module Aws::PaymentCryptography
     # @!attribute replication_regions
     #   <p>A list of Amazon Web Services Regions for key replication operations.</p> <p>Each region in the list must be a valid Amazon Web Services Region identifier where Amazon Web Services Payment Cryptography is available. This list is used to specify which regions should be added to or removed from a key's replication configuration.</p>
     #   @return [Array<String>]
+    # @!attribute requester_comment
+    #   <p>The comment from the requester explaining the reason for the import.</p> <important> <p>Don't include personal, confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important>
+    #   @return [String]
     class ImportKeyInput < Struct.new(
       nil,
       :key_material,
@@ -790,6 +976,7 @@ module Aws::PaymentCryptography
       :enabled,
       :tags,
       :replication_regions,
+      :requester_comment,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -814,6 +1001,9 @@ module Aws::PaymentCryptography
     # @!attribute diffie_hellman_tr31_key_block
     #   <p>Key derivation parameter information for key material import using asymmetric ECDH key exchange method.</p>
     #   @return [Types::ImportDiffieHellmanTr31KeyBlock]
+    # @!attribute as2805_key_cryptogram
+    #   <p>Parameter information for key material import using AS2805 key cryptogram format.</p>
+    #   @return [Types::ImportAs2805KeyCryptogram]
     class ImportKeyMaterial < Struct.new(
       :root_certificate_public_key,
       :trusted_certificate_public_key,
@@ -821,6 +1011,7 @@ module Aws::PaymentCryptography
       :tr34_key_block,
       :key_cryptogram,
       :diffie_hellman_tr31_key_block,
+      :as2805_key_cryptogram,
       :unknown,
       keyword_init: true
     )
@@ -832,6 +1023,7 @@ module Aws::PaymentCryptography
       class Tr34KeyBlock < ImportKeyMaterial; end
       class KeyCryptogram < ImportKeyMaterial; end
       class DiffieHellmanTr31KeyBlock < ImportKeyMaterial; end
+      class As2805KeyCryptogram < ImportKeyMaterial; end
       class Unknown < ImportKeyMaterial; end
     end
 
@@ -873,10 +1065,10 @@ module Aws::PaymentCryptography
     #   <p>The import token that initiates key import using the asymmetric TR-34 key exchange method into Amazon Web Services Payment Cryptography. It expires after 30 days. You can use the same import token to import multiple keys to the same service account.</p>
     #   @return [String]
     # @!attribute wrapping_key_identifier
-    #   Key Identifier used for unwrapping the import key
+    #   <p>Key Identifier used for unwrapping the import key</p>
     #   @return [String]
     # @!attribute wrapping_key_certificate
-    #   Key Identifier used for unwrapping the import key
+    #   <p>The certificate used to wrap the TR-34 key block.</p>
     #   @return [String]
     # @!attribute wrapped_key_block
     #   <p>The TR-34 wrapped key block to import.</p>
@@ -929,7 +1121,7 @@ module Aws::PaymentCryptography
     #   <p>The key check value (KCV) is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>
     #   @return [String]
     # @!attribute key_check_value_algorithm
-    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>
+    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>
     #   @return [String]
     # @!attribute enabled
     #   <p>Specifies whether the key is enabled. </p>
@@ -962,17 +1154,20 @@ module Aws::PaymentCryptography
     #   <p>The cryptographic usage of an ECDH derived key as deﬁned in section A.5.2 of the TR-31 spec.</p>
     #   @return [String]
     # @!attribute multi_region_key_type
-    #   <p>Indicates whether this key is a multi-region key and its role in the multi-region key hierarchy.</p> <p>Multi-region keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a primary key (which can be replicated to other regions) or a replica key (which is a copy of a primary key in another region).</p>
+    #   <p>Indicates whether this key is a Multi-Region key and its role in the Multi-Region key hierarchy.</p> <p>Multi-Region replication keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a Primary Region key (PRK) (which can be replicated to other Amazon Web Services Regions) or a Replica Region key (RRK) (which is a copy of a PRK in another Region). For more information, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html">Multi-Region key replication</a>.</p>
     #   @return [String]
     # @!attribute primary_region
     #   <p>An Amazon Web Services Region identifier in the standard format (e.g., <code>us-east-1</code>, <code>eu-west-1</code>).</p> <p>Used to specify regions for key replication operations. The region must be a valid Amazon Web Services Region where Amazon Web Services Payment Cryptography is available.</p>
     #   @return [String]
     # @!attribute replication_status
-    #   <p>Information about the replication status of the key across different regions.</p> <p>This field provides details about the current state of key replication, including any status messages or operational information. It helps track the progress and health of key replication operations.</p>
+    #   <p>Information about the replication status of the key across different Amazon Web Services Regions.</p> <p>This field provides details about the current state of key replication, including any status messages or operational information. It helps track the progress and health of key replication operations.</p>
     #   @return [Hash<String, Types::ReplicationStatusType>]
     # @!attribute using_default_replication_regions
-    #   <p>Indicates whether this key is using the account's default replication regions configuration.</p> <p>When set to <code>true</code>, the key automatically replicates to the regions specified in the account's default replication settings. When set to <code>false</code>, the key has a custom replication configuration that overrides the account defaults.</p>
+    #   <p>Indicates whether this key is using the account's default replication regions configuration for <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html">Multi-Region key replication</a>.</p> <p>When set to <code>true</code>, the key automatically replicates to the regions specified in the account's default replication settings. When set to <code>false</code>, the key has a custom replication configuration that overrides the account defaults.</p>
     #   @return [Boolean]
+    # @!attribute mpa_status
+    #   <p>The Multi-Party Approval (MPA) status for the key, if applicable.</p>
+    #   @return [Types::MpaStatus]
     class Key < Struct.new(
       nil,
       :key_arn,
@@ -993,6 +1188,7 @@ module Aws::PaymentCryptography
       :primary_region,
       :replication_status,
       :using_default_replication_regions,
+      :mpa_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1123,7 +1319,7 @@ module Aws::PaymentCryptography
     #   <p>Specifies whether the key is enabled. </p>
     #   @return [Boolean]
     # @!attribute multi_region_key_type
-    #   <p>Indicates whether this key is a multi-region key and its role in the multi-region key hierarchy.</p> <p>Multi-region keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a primary key (which can be replicated to other regions) or a replica key (which is a copy of a primary key in another region).</p>
+    #   <p>Indicates whether this key is a Multi-Region key and its role in the Multi-Region key hierarchy.</p> <p>Multi-Region replication keys allow the same key material to be used across multiple Amazon Web Services Regions. This field specifies whether the key is a Primary Region key (PRK) (which can be replicated to other Amazon Web Services Regions) or a Replica Region key (RRK) (which is a copy of a PRK in another Region). For more information, see <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html">Multi-Region key replication</a>.</p>
     #   @return [String]
     # @!attribute primary_region
     #   <p>An Amazon Web Services Region identifier in the standard format (e.g., <code>us-east-1</code>, <code>eu-west-1</code>).</p> <p>Used to specify regions for key replication operations. The region must be a valid Amazon Web Services Region where Amazon Web Services Payment Cryptography is available.</p>
@@ -1245,6 +1441,95 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The status of an MPA session.</p>
+    # @!attribute mpa_session_arn
+    #   <p>The ARN of the MPA session.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the MPA session.</p>
+    #   @return [String]
+    # @!attribute initiation_date
+    #   <p>The date and time when the MPA session was initiated.</p>
+    #   @return [Time]
+    # @!attribute status_message
+    #   <p>The message providing additional information about the MPA session status.</p>
+    #   @return [String]
+    class MpaStatus < Struct.new(
+      nil,
+      :mpa_session_arn,
+      :status,
+      :initiation_date,
+      :status_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The details of an MPA team association with a protected operation.</p>
+    # @!attribute action
+    #   <p>The protected operation associated with the MPA team.</p>
+    #   @return [String]
+    # @!attribute mpa_team_arn
+    #   <p>The ARN of the MPA team.</p>
+    #   @return [String]
+    # @!attribute association_state
+    #   <p>The state of the MPA team association.</p>
+    #   @return [String]
+    # @!attribute mpa_status
+    #   <p>The MPA session status for the association, if applicable.</p>
+    #   @return [Types::MpaStatus]
+    class MpaTeamAssociation < Struct.new(
+      nil,
+      :action,
+      :mpa_team_arn,
+      :association_state,
+      :mpa_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The resource-based policy would grant public access to the key.</p> <p>Modify the policy to restrict access to specific principals and resubmit the request.</p>
+    # @!attribute message
+    #   @return [String]
+    class PublicPolicyException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The <code>KeyARN</code> of the key to attach the resource-based policy to.</p>
+    #   @return [String]
+    # @!attribute policy
+    #   <p>The resource-based policy to attach to the key, in JSON format.</p>
+    #   @return [String]
+    class PutResourcePolicyInput < Struct.new(
+      nil,
+      :resource_arn,
+      :policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The <code>KeyARN</code> of the key that the resource-based policy was attached to.</p>
+    #   @return [String]
+    # @!attribute policy
+    #   <p>The resource-based policy that was attached to the key.</p>
+    #   @return [String]
+    class PutResourcePolicyOutput < Struct.new(
+      nil,
+      :resource_arn,
+      :policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Input parameters for removing replication regions from a specific key.</p>
     # @!attribute key_identifier
     #   <p>The key identifier (ARN or alias) of the key from which to remove replication regions.</p> <p>This key must exist and have replication enabled in the specified regions.</p>
@@ -1273,9 +1558,9 @@ module Aws::PaymentCryptography
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents the replication status information for a key in a replication region.</p> <p>This structure contains details about the current state of key replication, including any status messages and operational information about the replication process.</p>
+    # <p>Represents the replication status information for a key in a replication region for <a href="https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html">Multi-Region key replication</a>.</p> <p>This structure contains details about the current state of key replication, including any status messages and operational information about the replication process.</p>
     # @!attribute status
-    #   <p>The current status of key replication in this region.</p> <p>This field indicates whether the key replication is in progress, completed successfully, or has encountered an error. Possible values include states such as SYNCRHONIZED, IN_PROGRESS, DELETE_IN_PROGRESS, or FAILED. This provides visibility into the replication process for monitoring and troubleshooting purposes.</p>
+    #   <p>The current status of key replication in this Amazon Web Services Region.</p> <p>This field indicates whether the key replication is in progress, completed successfully, or has encountered an error. Possible values include states such as <code>SYNCRHONIZED</code>, <code>IN_PROGRESS</code>, <code>DELETE_IN_PROGRESS</code>, or <code>FAILED</code>. This provides visibility into the replication process for monitoring and troubleshooting purposes.</p>
     #   @return [String]
     # @!attribute status_message
     #   <p>A message that provides additional information about the current replication status of the key.</p> <p>This field contains details about any issues or progress updates related to key replication operations. It may include information about replication failures, synchronization status, or other operational details.</p>
@@ -1547,7 +1832,7 @@ module Aws::PaymentCryptography
     #   <p>The key check value (KCV) is used to check if all parties holding a given key have the same key or to detect that a key has changed.</p>
     #   @return [String]
     # @!attribute key_check_value_algorithm
-    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>
+    #   <p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>
     #   @return [String]
     class WrappedKey < Struct.new(
       nil,

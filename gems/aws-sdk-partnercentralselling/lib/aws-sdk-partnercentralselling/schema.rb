@@ -8,14 +8,16 @@ module Aws::PartnerCentralSelling
 
     AcceptEngagementInvitationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AcceptEngagementInvitationRequest", name: "AcceptEngagementInvitationRequest")
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AccessDeniedExceptionErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#AccessDeniedExceptionErrorCode", name: "AccessDeniedExceptionErrorCode")
     Account = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#Account", name: "Account")
     AccountReceiver = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AccountReceiver", name: "AccountReceiver")
     AccountSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AccountSummary", name: "AccountSummary")
     Address = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#Address", name: "Address")
     AddressPart = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#AddressPart", name: "AddressPart", traits: {"smithy.api#sensitive" => {}})
     AddressSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AddressSummary", name: "AddressSummary")
-    Alias = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#Alias", name: "Alias", traits: {"smithy.api#length" => {"min" => 0, "max" => 80}, "smithy.api#sensitive" => {}})
-    Amount = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#Amount", name: "Amount", traits: {"smithy.api#pattern" => "^(0|([1-9][0-9]{0,30}))(\\.[0-9]{0,2})?$", "smithy.api#sensitive" => {}})
+    Alias = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#Alias", name: "Alias", traits: {"smithy.api#pattern" => "^(?s).{0,80}$", "smithy.api#sensitive" => {}})
+    Amount = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#Amount", name: "Amount", traits: {"smithy.api#pattern" => "^((0|([1-9][0-9]{0,30}))(\\.[0-9]{0,2})?)?$", "smithy.api#sensitive" => {}})
+    AmountMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.partnercentralselling#AmountMap", name: "AmountMap")
     ApnPrograms = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#ApnPrograms", name: "ApnPrograms")
     AssignOpportunityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AssignOpportunityRequest", name: "AssignOpportunityRequest")
     AssigneeContact = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AssigneeContact", name: "AssigneeContact")
@@ -27,6 +29,15 @@ module Aws::PartnerCentralSelling
     AwsFundingUsed = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#AwsFundingUsed", name: "AwsFundingUsed")
     AwsMarketplaceOfferIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceOfferIdentifier", name: "AwsMarketplaceOfferIdentifier", traits: {"smithy.api#pattern" => "^arn:aws:aws-marketplace:[a-z]{1,2}-[a-z]*-\\d+:\\d{12}:AWSMarketplace/Offer/.*$"})
     AwsMarketplaceOfferIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceOfferIdentifiers", name: "AwsMarketplaceOfferIdentifiers")
+    AwsMarketplaceOfferSetIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceOfferSetIdentifier", name: "AwsMarketplaceOfferSetIdentifier", traits: {"smithy.api#pattern" => "^arn:aws:aws-marketplace:[a-z]{1,2}-[a-z]*-\\d+:\\d{12}:AWSMarketplace/OfferSet/offerset-.*"})
+    AwsMarketplaceOfferSetIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceOfferSetIdentifiers", name: "AwsMarketplaceOfferSetIdentifiers")
+    AwsMarketplaceProductArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceProductArn", name: "AwsMarketplaceProductArn", traits: {"smithy.api#length" => {"min" => 4, "max" => 2048}, "smithy.api#pattern" => "^arn:.*$"})
+    AwsMarketplaceProductIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceProductIdentifiers", name: "AwsMarketplaceProductIdentifiers")
+    AwsMarketplaceSolutionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArn", name: "AwsMarketplaceSolutionArn", traits: {"smithy.api#length" => {"min" => 4, "max" => 2048}, "smithy.api#pattern" => "^arn:.*$"})
+    AwsMarketplaceSolutionArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArnList", name: "AwsMarketplaceSolutionArnList")
+    AwsMarketplaceSolutionIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifier", name: "AwsMarketplaceSolutionIdentifier", traits: {"smithy.api#length" => {"min" => 4, "max" => 2048}, "smithy.api#pattern" => "^arn:.*$"})
+    AwsMarketplaceSolutionIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifiers", name: "AwsMarketplaceSolutionIdentifiers")
+    AwsMaturity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#AwsMaturity", name: "AwsMaturity", traits: {"smithy.api#length" => {"max" => 255}})
     AwsMemberBusinessTitle = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#AwsMemberBusinessTitle", name: "AwsMemberBusinessTitle")
     AwsOpportunityCustomer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsOpportunityCustomer", name: "AwsOpportunityCustomer")
     AwsOpportunityInsights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsOpportunityInsights", name: "AwsOpportunityInsights")
@@ -34,22 +45,35 @@ module Aws::PartnerCentralSelling
     AwsOpportunityProject = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsOpportunityProject", name: "AwsOpportunityProject")
     AwsOpportunityRelatedEntities = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsOpportunityRelatedEntities", name: "AwsOpportunityRelatedEntities")
     AwsOpportunityStage = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#AwsOpportunityStage", name: "AwsOpportunityStage")
+    AwsOpportunitySummaryFullView = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsOpportunitySummaryFullView", name: "AwsOpportunitySummaryFullView")
     AwsOpportunityTeamMembersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#AwsOpportunityTeamMembersList", name: "AwsOpportunityTeamMembersList")
+    AwsPartition = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#AwsPartition", name: "AwsPartition")
+    AwsProductDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsProductDetails", name: "AwsProductDetails")
     AwsProductIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#AwsProductIdentifier", name: "AwsProductIdentifier")
     AwsProductIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#AwsProductIdentifiers", name: "AwsProductIdentifiers")
+    AwsProductInsights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsProductInsights", name: "AwsProductInsights")
+    AwsProductOptimization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsProductOptimization", name: "AwsProductOptimization")
+    AwsProductOptimizationsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#AwsProductOptimizationsList", name: "AwsProductOptimizationsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    AwsProductsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#AwsProductsList", name: "AwsProductsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    AwsProductsSpendInsightsBySource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsProductsSpendInsightsBySource", name: "AwsProductsSpendInsightsBySource")
+    AwsSoftwareRevenue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsSoftwareRevenue", name: "AwsSoftwareRevenue")
     AwsSubmission = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsSubmission", name: "AwsSubmission")
     AwsTeamMember = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#AwsTeamMember", name: "AwsTeamMember")
     CatalogIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#CatalogIdentifier", name: "CatalogIdentifier", traits: {"smithy.api#pattern" => "^[a-zA-Z]+$"})
     Channel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#Channel", name: "Channel")
     Channels = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#Channels", name: "Channels")
-    ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ClientToken", name: "ClientToken", traits: {"smithy.api#pattern" => "^[!-~]{1,64}$"})
+    ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ClientToken", name: "ClientToken", traits: {"smithy.api#pattern" => "^.{1,255}$"})
     ClosedLostReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ClosedLostReason", name: "ClosedLostReason")
-    CompanyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#CompanyName", name: "CompanyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 120}, "smithy.api#sensitive" => {}})
-    CompanyWebsiteUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#CompanyWebsiteUrl", name: "CompanyWebsiteUrl", traits: {"smithy.api#length" => {"min" => 4, "max" => 255}, "smithy.api#pattern" => "^((http|https)://)??(www[.])??([a-zA-Z0-9]|-)+?([.][a-zA-Z0-9(-|/|=|?)??]+?)+?$", "smithy.api#sensitive" => {}})
+    CompanyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#CompanyName", name: "CompanyName", traits: {"smithy.api#pattern" => "^(?s).{1,120}$", "smithy.api#sensitive" => {}})
+    CompanyWebsiteUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#CompanyWebsiteUrl", name: "CompanyWebsiteUrl", traits: {"smithy.api#pattern" => "^(?=.{4,255}$)((http|https)://)??(www[.])??([a-zA-Z0-9]|-)+?([.][a-zA-Z0-9(-|/|=|?)??]+?)+?$", "smithy.api#sensitive" => {}})
     CompetitorName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#CompetitorName", name: "CompetitorName")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     Contact = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#Contact", name: "Contact")
+    ContextIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ContextIdentifier", name: "ContextIdentifier", traits: {"smithy.api#pattern" => "^[1-9][0-9]*$"})
+    ContextIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#ContextIdentifiers", name: "ContextIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     CountryCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#CountryCode", name: "CountryCode", traits: {"smithy.api#sensitive" => {}})
+    CreateEngagementContextRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CreateEngagementContextRequest", name: "CreateEngagementContextRequest")
+    CreateEngagementContextResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CreateEngagementContextResponse", name: "CreateEngagementContextResponse")
     CreateEngagementInvitationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CreateEngagementInvitationRequest", name: "CreateEngagementInvitationRequest")
     CreateEngagementInvitationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CreateEngagementInvitationResponse", name: "CreateEngagementInvitationResponse")
     CreateEngagementRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CreateEngagementRequest", name: "CreateEngagementRequest")
@@ -60,8 +84,10 @@ module Aws::PartnerCentralSelling
     CreateResourceSnapshotJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CreateResourceSnapshotJobResponse", name: "CreateResourceSnapshotJobResponse")
     CreateResourceSnapshotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CreateResourceSnapshotRequest", name: "CreateResourceSnapshotRequest")
     CreateResourceSnapshotResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CreateResourceSnapshotResponse", name: "CreateResourceSnapshotResponse")
+    CreatedDateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CreatedDateFilter", name: "CreatedDateFilter")
     CurrencyCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#CurrencyCode", name: "CurrencyCode", traits: {"smithy.api#sensitive" => {}})
     Customer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#Customer", name: "Customer")
+    CustomerAction = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#CustomerAction", name: "CustomerAction", traits: {"smithy.api#length" => {"max" => 255}})
     CustomerContactsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#CustomerContactsList", name: "CustomerContactsList")
     CustomerProjectsContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CustomerProjectsContext", name: "CustomerProjectsContext")
     CustomerSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#CustomerSummary", name: "CustomerSummary")
@@ -72,22 +98,26 @@ module Aws::PartnerCentralSelling
     DeliveryModels = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#DeliveryModels", name: "DeliveryModels")
     DisassociateOpportunityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#DisassociateOpportunityRequest", name: "DisassociateOpportunityRequest")
     DunsNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#DunsNumber", name: "DunsNumber", traits: {"smithy.api#pattern" => "^[0-9]{9}$", "smithy.api#sensitive" => {}})
-    Email = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#Email", name: "Email", traits: {"smithy.api#length" => {"max" => 80}, "smithy.api#pattern" => "^[a-z0-9!\#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!\#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", "smithy.api#sensitive" => {}})
+    EligibleProgramsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EligibleProgramsList", name: "EligibleProgramsList")
+    Email = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#Email", name: "Email", traits: {"smithy.api#pattern" => "^(?=.{0,80}$)[a-z0-9!\#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!\#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", "smithy.api#sensitive" => {}})
     EngagementArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementArn", name: "EngagementArn", traits: {"smithy.api#pattern" => "^arn:.*"})
     EngagementArnOrIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementArnOrIdentifier", name: "EngagementArnOrIdentifier", traits: {"smithy.api#pattern" => "^(arn:.*|eng-[0-9a-z]{14})$"})
     EngagementContextDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#EngagementContextDetails", name: "EngagementContextDetails")
+    EngagementContextIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementContextIdentifier", name: "EngagementContextIdentifier", traits: {"smithy.api#pattern" => "^(?s).{1,3}$"})
     EngagementContextPayload = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.partnercentralselling#EngagementContextPayload", name: "EngagementContextPayload")
     EngagementContextType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#EngagementContextType", name: "EngagementContextType")
+    EngagementContextTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EngagementContextTypeList", name: "EngagementContextTypeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     EngagementContexts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EngagementContexts", name: "EngagementContexts", traits: {"smithy.api#length" => {"max" => 5}})
     EngagementCustomer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#EngagementCustomer", name: "EngagementCustomer")
-    EngagementCustomerBusinessProblem = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementCustomerBusinessProblem", name: "EngagementCustomerBusinessProblem", traits: {"smithy.api#length" => {"min" => 20, "max" => 255}, "smithy.api#sensitive" => {}})
+    EngagementCustomerBusinessProblem = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementCustomerBusinessProblem", name: "EngagementCustomerBusinessProblem", traits: {"smithy.api#pattern" => "^(?s).{20,2000}$", "smithy.api#sensitive" => {}})
     EngagementCustomerProjectDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#EngagementCustomerProjectDetails", name: "EngagementCustomerProjectDetails")
-    EngagementCustomerProjectTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementCustomerProjectTitle", name: "EngagementCustomerProjectTitle", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
-    EngagementDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementDescription", name: "EngagementDescription", traits: {"smithy.api#length" => {"max" => 255}})
+    EngagementCustomerProjectTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementCustomerProjectTitle", name: "EngagementCustomerProjectTitle", traits: {"smithy.api#pattern" => "^(?s).{1,255}$"})
+    EngagementDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementDescription", name: "EngagementDescription", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"})
     EngagementIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementIdentifier", name: "EngagementIdentifier", traits: {"smithy.api#pattern" => "^eng-[0-9a-z]{14}$"})
+    EngagementIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EngagementIdentifierList", name: "EngagementIdentifierList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     EngagementIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EngagementIdentifiers", name: "EngagementIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     EngagementInvitationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementInvitationArn", name: "EngagementInvitationArn", traits: {"smithy.api#pattern" => "^arn:aws:partnercentral::[0-9]{12}:[a-zA-Z]+/engagement-invitation/engi-[0-9,a-z]{13}$"})
-    EngagementInvitationArnOrIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementInvitationArnOrIdentifier", name: "EngagementInvitationArnOrIdentifier", traits: {"aws.api#arnReference" => {"resource" => "com.amazon.partnerintegrationapi.operation#EngagementInvitation"}, "smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(arn:.*|engi-[0-9a-z]{13})$"})
+    EngagementInvitationArnOrIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementInvitationArnOrIdentifier", name: "EngagementInvitationArnOrIdentifier", traits: {"aws.api#arnReference" => {"resource" => "com.amazon.partnerintegrationapi.operation#EngagementInvitation"}, "smithy.api#pattern" => "^(?=.{1,255}$)(arn:.*|engi-[0-9a-z]{13})$"})
     EngagementInvitationIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementInvitationIdentifier", name: "EngagementInvitationIdentifier", traits: {"smithy.api#pattern" => "^engi-[0-9,a-z]{13}$"})
     EngagementInvitationIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EngagementInvitationIdentifiers", name: "EngagementInvitationIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     EngagementInvitationPayloadType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#EngagementInvitationPayloadType", name: "EngagementInvitationPayloadType")
@@ -99,14 +129,22 @@ module Aws::PartnerCentralSelling
     EngagementMemberSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#EngagementMemberSummary", name: "EngagementMemberSummary")
     EngagementMembers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EngagementMembers", name: "EngagementMembers", traits: {"smithy.api#length" => {"max" => 10}})
     EngagementPageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.partnercentralselling#EngagementPageSize", name: "EngagementPageSize", traits: {"smithy.api#default" => 20, "smithy.api#range" => {"min" => 1, "max" => 100}})
+    EngagementProspectingResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#EngagementProspectingResult", name: "EngagementProspectingResult")
+    EngagementProspectingResultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EngagementProspectingResultList", name: "EngagementProspectingResultList")
     EngagementResourceAssociationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#EngagementResourceAssociationSummary", name: "EngagementResourceAssociationSummary")
     EngagementResourceAssociationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EngagementResourceAssociationSummaryList", name: "EngagementResourceAssociationSummaryList")
     EngagementScore = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#EngagementScore", name: "EngagementScore")
+    EngagementScoreLevel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementScoreLevel", name: "EngagementScoreLevel", traits: {"smithy.api#length" => {"max" => 255}})
     EngagementSort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#EngagementSort", name: "EngagementSort")
     EngagementSortName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#EngagementSortName", name: "EngagementSortName")
     EngagementSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#EngagementSummary", name: "EngagementSummary")
     EngagementSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#EngagementSummaryList", name: "EngagementSummaryList")
-    EngagementTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementTitle", name: "EngagementTitle", traits: {"smithy.api#length" => {"min" => 1, "max" => 40}})
+    EngagementTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementTitle", name: "EngagementTitle", traits: {"smithy.api#pattern" => "^(?s).{0,40}$"})
+    EngagementUseCase = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EngagementUseCase", name: "EngagementUseCase", traits: {"smithy.api#length" => {"max" => 255}})
+    EnrichmentContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#EnrichmentContext", name: "EnrichmentContext")
+    EstimationUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#EstimationUrl", name: "EstimationUrl", traits: {"smithy.api#pattern" => "^https://(calculator\\.aws|pricing\\.calculator\\.aws\\.eu)/#/estimate\\?id=[a-f0-9]{32,64}$"})
+    ExpectedContractDuration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ExpectedContractDuration", name: "ExpectedContractDuration")
+    ExpectedContractDurationTerm = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ExpectedContractDurationTerm", name: "ExpectedContractDurationTerm")
     ExpectedCustomerSpend = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ExpectedCustomerSpend", name: "ExpectedCustomerSpend")
     ExpectedCustomerSpendList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#ExpectedCustomerSpendList", name: "ExpectedCustomerSpendList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     FilterIdentifier = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#FilterIdentifier", name: "FilterIdentifier")
@@ -121,6 +159,8 @@ module Aws::PartnerCentralSelling
     GetEngagementResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#GetEngagementResponse", name: "GetEngagementResponse")
     GetOpportunityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#GetOpportunityRequest", name: "GetOpportunityRequest")
     GetOpportunityResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#GetOpportunityResponse", name: "GetOpportunityResponse")
+    GetProspectingFromEngagementTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#GetProspectingFromEngagementTaskRequest", name: "GetProspectingFromEngagementTaskRequest")
+    GetProspectingFromEngagementTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#GetProspectingFromEngagementTaskResponse", name: "GetProspectingFromEngagementTaskResponse")
     GetResourceSnapshotJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#GetResourceSnapshotJobRequest", name: "GetResourceSnapshotJobRequest")
     GetResourceSnapshotJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#GetResourceSnapshotJobResponse", name: "GetResourceSnapshotJobResponse")
     GetResourceSnapshotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#GetResourceSnapshotRequest", name: "GetResourceSnapshotRequest")
@@ -130,12 +170,35 @@ module Aws::PartnerCentralSelling
     Industry = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#Industry", name: "Industry")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     Invitation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#Invitation", name: "Invitation")
-    InvitationMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#InvitationMessage", name: "InvitationMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#sensitive" => {}})
+    InvitationMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#InvitationMessage", name: "InvitationMessage", traits: {"smithy.api#pattern" => "^(?s).{1,255}$", "smithy.api#sensitive" => {}})
+    InvitationProspectingResultAws = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#InvitationProspectingResultAws", name: "InvitationProspectingResultAws")
     InvitationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#InvitationStatus", name: "InvitationStatus")
     InvitationStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#InvitationStatusList", name: "InvitationStatusList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     InvolvementTypeChangeReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#InvolvementTypeChangeReason", name: "InvolvementTypeChangeReason")
-    JobTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#JobTitle", name: "JobTitle", traits: {"smithy.api#length" => {"max" => 80}, "smithy.api#sensitive" => {}})
+    JobTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#JobTitle", name: "JobTitle", traits: {"smithy.api#pattern" => "^(?s).{0,80}$", "smithy.api#sensitive" => {}})
     LastModifiedDate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LastModifiedDate", name: "LastModifiedDate")
+    LeadAddress = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LeadAddress", name: "LeadAddress")
+    LeadBusinessProblem = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadBusinessProblem", name: "LeadBusinessProblem", traits: {"smithy.api#length" => {"max" => 2000}, "smithy.api#sensitive" => {}})
+    LeadContact = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LeadContact", name: "LeadContact")
+    LeadContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LeadContext", name: "LeadContext")
+    LeadCountryCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadCountryCode", name: "LeadCountryCode", traits: {"smithy.api#length" => {"max" => 10}, "smithy.api#sensitive" => {}})
+    LeadCustomer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LeadCustomer", name: "LeadCustomer")
+    LeadEmail = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadEmail", name: "LeadEmail", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#sensitive" => {}})
+    LeadIndustry = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadIndustry", name: "LeadIndustry", traits: {"smithy.api#length" => {"max" => 255}})
+    LeadInsights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LeadInsights", name: "LeadInsights")
+    LeadInteraction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LeadInteraction", name: "LeadInteraction")
+    LeadInteractionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#LeadInteractionList", name: "LeadInteractionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    LeadInvitationCustomer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LeadInvitationCustomer", name: "LeadInvitationCustomer")
+    LeadInvitationInteraction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LeadInvitationInteraction", name: "LeadInvitationInteraction")
+    LeadInvitationPayload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LeadInvitationPayload", name: "LeadInvitationPayload")
+    LeadJobTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadJobTitle", name: "LeadJobTitle", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#sensitive" => {}})
+    LeadMarketSegment = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadMarketSegment", name: "LeadMarketSegment", traits: {"smithy.api#length" => {"max" => 255}})
+    LeadPhoneNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadPhoneNumber", name: "LeadPhoneNumber", traits: {"smithy.api#length" => {"max" => 255}, "smithy.api#sensitive" => {}})
+    LeadQualificationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadQualificationStatus", name: "LeadQualificationStatus", traits: {"smithy.api#default" => "Unqualified", "smithy.api#pattern" => "^(?s).{1,255}$"})
+    LeadSourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadSourceId", name: "LeadSourceId", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"})
+    LeadSourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadSourceName", name: "LeadSourceName", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"})
+    LeadSourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadSourceType", name: "LeadSourceType", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"})
+    LeadWebsiteUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#LeadWebsiteUrl", name: "LeadWebsiteUrl", traits: {"smithy.api#length" => {"max" => 255}, "smithy.api#sensitive" => {}})
     LifeCycle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LifeCycle", name: "LifeCycle")
     LifeCycleForView = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LifeCycleForView", name: "LifeCycleForView")
     LifeCycleSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#LifeCycleSummary", name: "LifeCycleSummary")
@@ -157,6 +220,12 @@ module Aws::PartnerCentralSelling
     ListEngagementsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListEngagementsResponse", name: "ListEngagementsResponse")
     ListOpportunitiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListOpportunitiesRequest", name: "ListOpportunitiesRequest")
     ListOpportunitiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListOpportunitiesResponse", name: "ListOpportunitiesResponse")
+    ListOpportunityFromEngagementTaskSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#ListOpportunityFromEngagementTaskSummaries", name: "ListOpportunityFromEngagementTaskSummaries")
+    ListOpportunityFromEngagementTaskSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListOpportunityFromEngagementTaskSummary", name: "ListOpportunityFromEngagementTaskSummary")
+    ListOpportunityFromEngagementTasksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListOpportunityFromEngagementTasksRequest", name: "ListOpportunityFromEngagementTasksRequest")
+    ListOpportunityFromEngagementTasksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListOpportunityFromEngagementTasksResponse", name: "ListOpportunityFromEngagementTasksResponse")
+    ListProspectingFromEngagementTasksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListProspectingFromEngagementTasksRequest", name: "ListProspectingFromEngagementTasksRequest")
+    ListProspectingFromEngagementTasksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListProspectingFromEngagementTasksResponse", name: "ListProspectingFromEngagementTasksResponse")
     ListResourceSnapshotJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListResourceSnapshotJobsRequest", name: "ListResourceSnapshotJobsRequest")
     ListResourceSnapshotJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListResourceSnapshotJobsResponse", name: "ListResourceSnapshotJobsResponse")
     ListResourceSnapshotsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ListResourceSnapshotsRequest", name: "ListResourceSnapshotsRequest")
@@ -169,10 +238,11 @@ module Aws::PartnerCentralSelling
     ListTasksSortName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ListTasksSortName", name: "ListTasksSortName")
     Marketing = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#Marketing", name: "Marketing")
     MarketingSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#MarketingSource", name: "MarketingSource")
-    MemberCompanyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#MemberCompanyName", name: "MemberCompanyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 120}, "smithy.api#sensitive" => {}})
+    MemberCompanyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#MemberCompanyName", name: "MemberCompanyName", traits: {"smithy.api#pattern" => "^(?s).{1,120}$", "smithy.api#sensitive" => {}})
     MemberPageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.partnercentralselling#MemberPageSize", name: "MemberPageSize", traits: {"smithy.api#default" => 5, "smithy.api#range" => {"min" => 1, "max" => 10}})
+    MonetaryAmount = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#MonetaryAmount", name: "MonetaryAmount", traits: {"smithy.api#pattern" => "^(0|([1-9][0-9]{0,30}))(\\.[0-9]{0,2})?$", "smithy.api#sensitive" => {}})
     MonetaryValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#MonetaryValue", name: "MonetaryValue")
-    Name = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#Name", name: "Name", traits: {"smithy.api#length" => {"max" => 80}, "smithy.api#sensitive" => {}})
+    Name = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#Name", name: "Name", traits: {"smithy.api#pattern" => "^(?s).{0,80}$", "smithy.api#sensitive" => {}})
     NationalSecurity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#NationalSecurity", name: "NationalSecurity")
     NextStepsHistories = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#NextStepsHistories", name: "NextStepsHistories")
     NextStepsHistory = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#NextStepsHistory", name: "NextStepsHistory")
@@ -183,6 +253,7 @@ module Aws::PartnerCentralSelling
     OpportunityIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#OpportunityIdentifiers", name: "OpportunityIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     OpportunityInvitationPayload = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#OpportunityInvitationPayload", name: "OpportunityInvitationPayload")
     OpportunityOrigin = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#OpportunityOrigin", name: "OpportunityOrigin")
+    OpportunityQuality = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#OpportunityQuality", name: "OpportunityQuality")
     OpportunitySort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#OpportunitySort", name: "OpportunitySort")
     OpportunitySortName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#OpportunitySortName", name: "OpportunitySortName")
     OpportunitySummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#OpportunitySummaries", name: "OpportunitySummaries")
@@ -191,10 +262,10 @@ module Aws::PartnerCentralSelling
     OpportunityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#OpportunityType", name: "OpportunityType")
     PageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.partnercentralselling#PageSize", name: "PageSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     ParticipantType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ParticipantType", name: "ParticipantType")
-    PartnerOpportunityTeamMembersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#PartnerOpportunityTeamMembersList", name: "PartnerOpportunityTeamMembersList", traits: {"smithy.api#length" => {"max" => 2}})
+    PartnerOpportunityTeamMembersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#PartnerOpportunityTeamMembersList", name: "PartnerOpportunityTeamMembersList", traits: {"smithy.api#length" => {"max" => 10}})
     Payload = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.partnercentralselling#Payload", name: "Payload")
     PaymentFrequency = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#PaymentFrequency", name: "PaymentFrequency")
-    PhoneNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#PhoneNumber", name: "PhoneNumber", traits: {"smithy.api#length" => {"max" => 40}, "smithy.api#pattern" => "^\\+[1-9]\\d{1,14}$", "smithy.api#sensitive" => {}})
+    PhoneNumber = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#PhoneNumber", name: "PhoneNumber", traits: {"smithy.api#pattern" => "^\\+[1-9]\\d{1,14}$", "smithy.api#sensitive" => {}})
     PiiString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#PiiString", name: "PiiString", traits: {"smithy.api#sensitive" => {}})
     PrimaryNeedFromAws = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#PrimaryNeedFromAws", name: "PrimaryNeedFromAws")
     PrimaryNeedsFromAws = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#PrimaryNeedsFromAws", name: "PrimaryNeedsFromAws")
@@ -204,12 +275,34 @@ module Aws::PartnerCentralSelling
     ProjectDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ProjectDetails", name: "ProjectDetails")
     ProjectSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ProjectSummary", name: "ProjectSummary")
     ProjectView = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ProjectView", name: "ProjectView")
+    ProspectingAccountName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingAccountName", name: "ProspectingAccountName", traits: {"smithy.api#length" => {"max" => 255}})
+    ProspectingCompanySize = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingCompanySize", name: "ProspectingCompanySize", traits: {"smithy.api#length" => {"max" => 255}})
+    ProspectingFromEngagementTaskSort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ProspectingFromEngagementTaskSort", name: "ProspectingFromEngagementTaskSort")
+    ProspectingFromEngagementTaskSortName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ProspectingFromEngagementTaskSortName", name: "ProspectingFromEngagementTaskSortName")
+    ProspectingGeo = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingGeo", name: "ProspectingGeo", traits: {"smithy.api#length" => {"max" => 255}})
+    ProspectingInsights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ProspectingInsights", name: "ProspectingInsights")
+    ProspectingPublicProfileSummary = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingPublicProfileSummary", name: "ProspectingPublicProfileSummary", traits: {"smithy.api#length" => {"max" => 5000}})
+    ProspectingRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingRegion", name: "ProspectingRegion", traits: {"smithy.api#length" => {"max" => 255}})
+    ProspectingResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ProspectingResult", name: "ProspectingResult")
+    ProspectingResultAws = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ProspectingResultAws", name: "ProspectingResultAws")
+    ProspectingResultCustomer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ProspectingResultCustomer", name: "ProspectingResultCustomer")
+    ProspectingSegment = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingSegment", name: "ProspectingSegment", traits: {"smithy.api#length" => {"max" => 255}})
+    ProspectingSubIndustry = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingSubIndustry", name: "ProspectingSubIndustry", traits: {"smithy.api#length" => {"max" => 255}})
+    ProspectingSubRegion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingSubRegion", name: "ProspectingSubRegion", traits: {"smithy.api#length" => {"max" => 255}})
+    ProspectingTaskArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingTaskArn", name: "ProspectingTaskArn", traits: {"smithy.api#pattern" => "^arn:aws:partnercentral-selling:.*:.*:catalog/.*/prospecting-from-engagement-task/task-[0-9a-z]{14}$"})
+    ProspectingTaskIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier", name: "ProspectingTaskIdentifier", traits: {"smithy.api#pattern" => "^task-[0-9a-z]{14}$"})
+    ProspectingTaskStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ProspectingTaskStatus", name: "ProspectingTaskStatus")
+    ProspectingTaskSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ProspectingTaskSummary", name: "ProspectingTaskSummary")
+    ProspectingTaskSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#ProspectingTaskSummaryList", name: "ProspectingTaskSummaryList")
     PutSellingSystemSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#PutSellingSystemSettingsRequest", name: "PutSellingSystemSettingsRequest")
     PutSellingSystemSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#PutSellingSystemSettingsResponse", name: "PutSellingSystemSettingsResponse")
     ReasonCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ReasonCode", name: "ReasonCode")
     Receiver = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.partnercentralselling#Receiver", name: "Receiver")
     ReceiverResponsibility = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ReceiverResponsibility", name: "ReceiverResponsibility")
     ReceiverResponsibilityList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#ReceiverResponsibilityList", name: "ReceiverResponsibilityList")
+    Recommendation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#Recommendation", name: "Recommendation")
+    RecommendationAttributeMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.partnercentralselling#RecommendationAttributeMap", name: "RecommendationAttributeMap", traits: {"smithy.api#length" => {"max" => 25}})
+    RecommendationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#RecommendationList", name: "RecommendationList", traits: {"smithy.api#length" => {"max" => 5}})
     RejectEngagementInvitationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#RejectEngagementInvitationRequest", name: "RejectEngagementInvitationRequest")
     RejectionReasonString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#RejectionReasonString", name: "RejectionReasonString", traits: {"smithy.api#pattern" => "^[\\u0020-\\u007E\\u00A0-\\uD7FF\\uE000-\\uFFFD]{1,80}$"})
     RelatedEntityIdentifiers = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#RelatedEntityIdentifiers", name: "RelatedEntityIdentifiers")
@@ -220,8 +313,8 @@ module Aws::PartnerCentralSelling
     ResourceSnapshotArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotArn", name: "ResourceSnapshotArn", traits: {"smithy.api#pattern" => "^arn:.*"})
     ResourceSnapshotJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotJobArn", name: "ResourceSnapshotJobArn", traits: {"smithy.api#pattern" => "^arn:.*"})
     ResourceSnapshotJobIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotJobIdentifier", name: "ResourceSnapshotJobIdentifier", traits: {"smithy.api#pattern" => "^job-[0-9a-z]{13}$"})
-    ResourceSnapshotJobRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotJobRoleArn", name: "ResourceSnapshotJobRoleArn", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws:iam::\\d{12}:role/([-+=,.@_a-zA-Z0-9]+/)*[-+=,.@_a-zA-Z0-9]{1,64}$"})
-    ResourceSnapshotJobRoleIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotJobRoleIdentifier", name: "ResourceSnapshotJobRoleIdentifier", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^(arn:aws:iam::\\d{12}:role/([-+=,.@_a-zA-Z0-9]+/)*)?[-+=,.@_a-zA-Z0-9]{1,64}$"})
+    ResourceSnapshotJobRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotJobRoleArn", name: "ResourceSnapshotJobRoleArn", traits: {"smithy.api#pattern" => "^(?=.{0,2048}$)arn:aws:iam::\\d{12}:role/([-+=,.@_a-zA-Z0-9]+/)*[-+=,.@_a-zA-Z0-9]{1,64}$"})
+    ResourceSnapshotJobRoleIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotJobRoleIdentifier", name: "ResourceSnapshotJobRoleIdentifier", traits: {"smithy.api#pattern" => "^(?=.{0,2048}$)(arn:aws:iam::\\d{12}:role/([-+=,.@_a-zA-Z0-9]+/)*)?[-+=,.@_a-zA-Z0-9]{1,64}$"})
     ResourceSnapshotJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotJobStatus", name: "ResourceSnapshotJobStatus")
     ResourceSnapshotJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotJobSummary", name: "ResourceSnapshotJobSummary")
     ResourceSnapshotJobSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#ResourceSnapshotJobSummaryList", name: "ResourceSnapshotJobSummaryList")
@@ -237,7 +330,7 @@ module Aws::PartnerCentralSelling
     SalesActivity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#SalesActivity", name: "SalesActivity")
     SalesInvolvementType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#SalesInvolvementType", name: "SalesInvolvementType")
     SenderContact = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#SenderContact", name: "SenderContact")
-    SenderContactEmail = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#SenderContactEmail", name: "SenderContactEmail", traits: {"smithy.api#length" => {"max" => 80}, "smithy.api#pattern" => "^[a-zA-Z0-9.!\#$%&'*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$", "smithy.api#sensitive" => {}})
+    SenderContactEmail = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#SenderContactEmail", name: "SenderContactEmail", traits: {"smithy.api#pattern" => "^(?=.{1,80}$)[a-zA-Z0-9.!\#$%&'*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$", "smithy.api#sensitive" => {}})
     SenderContactList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#SenderContactList", name: "SenderContactList", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     SoftwareRevenue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#SoftwareRevenue", name: "SoftwareRevenue")
@@ -257,27 +350,39 @@ module Aws::PartnerCentralSelling
     StartEngagementByAcceptingInvitationTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#StartEngagementByAcceptingInvitationTaskResponse", name: "StartEngagementByAcceptingInvitationTaskResponse")
     StartEngagementFromOpportunityTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#StartEngagementFromOpportunityTaskRequest", name: "StartEngagementFromOpportunityTaskRequest")
     StartEngagementFromOpportunityTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#StartEngagementFromOpportunityTaskResponse", name: "StartEngagementFromOpportunityTaskResponse")
+    StartOpportunityFromEngagementTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#StartOpportunityFromEngagementTaskRequest", name: "StartOpportunityFromEngagementTaskRequest")
+    StartOpportunityFromEngagementTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#StartOpportunityFromEngagementTaskResponse", name: "StartOpportunityFromEngagementTaskResponse")
+    StartProspectingFromEngagementTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#StartProspectingFromEngagementTaskRequest", name: "StartProspectingFromEngagementTaskRequest")
+    StartProspectingFromEngagementTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#StartProspectingFromEngagementTaskResponse", name: "StartProspectingFromEngagementTaskResponse")
     StartResourceSnapshotJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#StartResourceSnapshotJobRequest", name: "StartResourceSnapshotJobRequest")
     StopResourceSnapshotJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#StopResourceSnapshotJobRequest", name: "StopResourceSnapshotJobRequest")
     StringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#StringList", name: "StringList")
     SubmitOpportunityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#SubmitOpportunityRequest", name: "SubmitOpportunityRequest")
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#Tag", name: "Tag")
-    TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
+    TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TagKey", name: "TagKey", traits: {"smithy.api#pattern" => "^(?=.{1,128}$)([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#TagList", name: "TagList", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#TagResourceRequest", name: "TagResourceRequest")
     TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#TagResourceResponse", name: "TagResourceResponse")
-    TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
-    TaggableResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TaggableResourceArn", name: "TaggableResourceArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}, "smithy.api#pattern" => "^arn:[\\w+=/,.@-]+:partnercentral:[\\w+=/,.@-]*:[0-9]{12}:catalog/([a-zA-Z]+)/[\\w+=,.@-]+(/[\\w+=,.@-]+)*$"})
+    TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TagValue", name: "TagValue", traits: {"smithy.api#pattern" => "^(?=.{0,256}$)([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
+    TaggableResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TaggableResourceArn", name: "TaggableResourceArn", traits: {"smithy.api#pattern" => "^(?=.{1,1000}$)arn:[\\w+=/,.@-]+:partnercentral:[\\w+=/,.@-]*:[0-9]{12}:catalog/([a-zA-Z]+)/[\\w+=,.@-]+(/[\\w+=,.@-]+)*$"})
+    TargetCloseDateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#TargetCloseDateFilter", name: "TargetCloseDateFilter")
     TaskArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TaskArn", name: "TaskArn", traits: {"smithy.api#pattern" => "^arn:.*"})
     TaskArnOrIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TaskArnOrIdentifier", name: "TaskArnOrIdentifier", traits: {"smithy.api#pattern" => "^(arn:.*|task-[0-9a-z]{13})$"})
     TaskIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TaskIdentifier", name: "TaskIdentifier", traits: {"smithy.api#pattern" => "task-[0-9a-z]{13}$"})
+    TaskIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#TaskIdentifierList", name: "TaskIdentifierList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     TaskIdentifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#TaskIdentifiers", name: "TaskIdentifiers", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    TaskName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#TaskName", name: "TaskName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    TaskNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#TaskNameList", name: "TaskNameList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     TaskStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#TaskStatus", name: "TaskStatus")
     TaskStatuses = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#TaskStatuses", name: "TaskStatuses", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#UntagResourceResponse", name: "UntagResourceResponse")
+    UpdateEngagementContextPayload = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.partnercentralselling#UpdateEngagementContextPayload", name: "UpdateEngagementContextPayload")
+    UpdateEngagementContextRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#UpdateEngagementContextRequest", name: "UpdateEngagementContextRequest")
+    UpdateEngagementContextResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#UpdateEngagementContextResponse", name: "UpdateEngagementContextResponse")
+    UpdateLeadContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#UpdateLeadContext", name: "UpdateLeadContext")
     UpdateOpportunityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#UpdateOpportunityRequest", name: "UpdateOpportunityRequest")
     UpdateOpportunityResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.partnercentralselling#UpdateOpportunityResponse", name: "UpdateOpportunityResponse")
     UseCases = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#UseCases", name: "UseCases")
@@ -287,16 +392,18 @@ module Aws::PartnerCentralSelling
     ValidationExceptionErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.partnercentralselling#ValidationExceptionErrorList", name: "ValidationExceptionErrorList")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#ValidationExceptionReason", name: "ValidationExceptionReason")
     Visibility = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.partnercentralselling#Visibility", name: "Visibility")
-    WebsiteUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#WebsiteUrl", name: "WebsiteUrl", traits: {"smithy.api#length" => {"min" => 4, "max" => 255}, "smithy.api#sensitive" => {}})
+    WebsiteUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.partnercentralselling#WebsiteUrl", name: "WebsiteUrl", traits: {"smithy.api#pattern" => "^(?s).{4,255}$", "smithy.api#sensitive" => {}})
 
     AcceptEngagementInvitationRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     AcceptEngagementInvitationRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationArnOrIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     AcceptEngagementInvitationRequest.type = Types::AcceptEngagementInvitationRequest
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
+    AccessDeniedException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessDeniedExceptionErrorCode, name: "Reason"))
     AccessDeniedException.type = Types::AccessDeniedException
+    AccessDeniedExceptionErrorCode.add_member(:incompatible_benefit_aws_partner_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE", traits: {"smithy.api#enumValue" => "INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE"}))
     Account.add_member(:industry, ::Smithy::Schema::Shapes::MemberShape.new(target: Industry, name: "Industry"))
-    Account.add_member(:other_industry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OtherIndustry", traits: {"smithy.api#length" => {"max" => 255}}))
-    Account.add_member(:company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "CompanyName", traits: {"smithy.api#length" => {"max" => 120}, "smithy.api#required" => {}}))
+    Account.add_member(:other_industry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OtherIndustry", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
+    Account.add_member(:company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "CompanyName", traits: {"smithy.api#pattern" => "^(?s).{0,120}$", "smithy.api#required" => {}}))
     Account.add_member(:website_url, ::Smithy::Schema::Shapes::MemberShape.new(target: WebsiteUrl, name: "WebsiteUrl"))
     Account.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "AwsAccountId"))
     Account.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "Address"))
@@ -306,36 +413,39 @@ module Aws::PartnerCentralSelling
     AccountReceiver.add_member(:aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "AwsAccountId", traits: {"smithy.api#required" => {}}))
     AccountReceiver.type = Types::AccountReceiver
     AccountSummary.add_member(:industry, ::Smithy::Schema::Shapes::MemberShape.new(target: Industry, name: "Industry"))
-    AccountSummary.add_member(:other_industry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OtherIndustry", traits: {"smithy.api#length" => {"max" => 255}}))
-    AccountSummary.add_member(:company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "CompanyName", traits: {"smithy.api#length" => {"max" => 120}, "smithy.api#required" => {}}))
+    AccountSummary.add_member(:other_industry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OtherIndustry", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
+    AccountSummary.add_member(:company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "CompanyName", traits: {"smithy.api#pattern" => "^(?s).{0,120}$", "smithy.api#required" => {}}))
     AccountSummary.add_member(:website_url, ::Smithy::Schema::Shapes::MemberShape.new(target: WebsiteUrl, name: "WebsiteUrl"))
     AccountSummary.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressSummary, name: "Address"))
     AccountSummary.type = Types::AccountSummary
-    Address.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "City", traits: {"smithy.api#length" => {"max" => 255}}))
-    Address.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "PostalCode", traits: {"smithy.api#length" => {"max" => 20}}))
+    Address.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "City", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
+    Address.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "PostalCode", traits: {"smithy.api#pattern" => "^(?s).{0,20}$"}))
     Address.add_member(:state_or_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "StateOrRegion"))
     Address.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "CountryCode"))
-    Address.add_member(:street_address, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "StreetAddress", traits: {"smithy.api#length" => {"max" => 255}}))
+    Address.add_member(:street_address, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "StreetAddress", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
     Address.type = Types::Address
-    AddressSummary.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "City", traits: {"smithy.api#length" => {"max" => 255}}))
-    AddressSummary.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "PostalCode", traits: {"smithy.api#length" => {"max" => 20}}))
+    AddressSummary.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "City", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
+    AddressSummary.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "PostalCode", traits: {"smithy.api#pattern" => "^(?s).{0,20}$"}))
     AddressSummary.add_member(:state_or_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressPart, name: "StateOrRegion"))
     AddressSummary.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "CountryCode"))
     AddressSummary.type = Types::AddressSummary
+    AmountMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    AmountMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryAmount, name: "value"))
     ApnPrograms.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     AssignOpportunityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     AssignOpportunityRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Identifier"}))
     AssignOpportunityRequest.add_member(:assignee, ::Smithy::Schema::Shapes::MemberShape.new(target: AssigneeContact, name: "Assignee", traits: {"smithy.api#required" => {}}))
     AssignOpportunityRequest.type = Types::AssignOpportunityRequest
     AssigneeContact.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "Email", traits: {"smithy.api#required" => {}}))
-    AssigneeContact.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "FirstName", traits: {"smithy.api#length" => {"max" => 80}, "smithy.api#required" => {}}))
-    AssigneeContact.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "LastName", traits: {"smithy.api#length" => {"max" => 80}, "smithy.api#required" => {}}))
+    AssigneeContact.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "FirstName", traits: {"smithy.api#pattern" => "^(?s).{0,80}$", "smithy.api#required" => {}}))
+    AssigneeContact.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "LastName", traits: {"smithy.api#pattern" => "^(?s).{0,80}$", "smithy.api#required" => {}}))
+    AssigneeContact.add_member(:phone, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "Phone"))
     AssigneeContact.add_member(:business_title, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTitle, name: "BusinessTitle", traits: {"smithy.api#required" => {}}))
     AssigneeContact.type = Types::AssigneeContact
     AssociateOpportunityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     AssociateOpportunityRequest.add_member(:opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "OpportunityIdentifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Identifier"}))
     AssociateOpportunityRequest.add_member(:related_entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedEntityType, name: "RelatedEntityType", traits: {"smithy.api#required" => {}}))
-    AssociateOpportunityRequest.add_member(:related_entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RelatedEntityIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#required" => {}}))
+    AssociateOpportunityRequest.add_member(:related_entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RelatedEntityIdentifier", traits: {"smithy.api#pattern" => "^(?s).{1,255}$", "smithy.api#required" => {}}))
     AssociateOpportunityRequest.type = Types::AssociateOpportunityRequest
     AwsAccountIdOrAliasList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "member"))
     AwsAccountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "member"))
@@ -390,27 +500,38 @@ module Aws::PartnerCentralSelling
     AwsFundingUsed.add_member(:yes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YES", traits: {"smithy.api#enumValue" => "Yes"}))
     AwsFundingUsed.add_member(:no, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO", traits: {"smithy.api#enumValue" => "No"}))
     AwsMarketplaceOfferIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceOfferIdentifier, name: "member"))
+    AwsMarketplaceOfferSetIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceOfferSetIdentifier, name: "member"))
+    AwsMarketplaceProductIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceProductArn, name: "member"))
+    AwsMarketplaceSolutionArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceSolutionArn, name: "member"))
+    AwsMarketplaceSolutionIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceSolutionIdentifier, name: "member"))
     AwsMemberBusinessTitle.add_member(:aws_sales_rep, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SALES_REP", traits: {"smithy.api#enumValue" => "AWSSalesRep"}))
     AwsMemberBusinessTitle.add_member(:aws_account_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_ACCOUNT_OWNER", traits: {"smithy.api#enumValue" => "AWSAccountOwner"}))
     AwsMemberBusinessTitle.add_member(:wwpspdm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WWPSPDM", traits: {"smithy.api#enumValue" => "WWPSPDM"}))
     AwsMemberBusinessTitle.add_member(:pdm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PDM", traits: {"smithy.api#enumValue" => "PDM"}))
     AwsMemberBusinessTitle.add_member(:psm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PSM", traits: {"smithy.api#enumValue" => "PSM"}))
     AwsMemberBusinessTitle.add_member(:isvsm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ISVSM", traits: {"smithy.api#enumValue" => "ISVSM"}))
+    AwsMemberBusinessTitle.add_member(:signatory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SIGNATORY", traits: {"smithy.api#enumValue" => "Signatory"}))
     AwsOpportunityCustomer.add_member(:contacts, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerContactsList, name: "Contacts"))
     AwsOpportunityCustomer.type = Types::AwsOpportunityCustomer
     AwsOpportunityInsights.add_member(:next_best_actions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextBestActions"))
     AwsOpportunityInsights.add_member(:engagement_score, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementScore, name: "EngagementScore"))
+    AwsOpportunityInsights.add_member(:aws_products_spend_insights_by_source, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductsSpendInsightsBySource, name: "AwsProductsSpendInsightsBySource"))
+    AwsOpportunityInsights.add_member(:opportunity_quality, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityQuality, name: "OpportunityQuality"))
+    AwsOpportunityInsights.add_member(:recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationList, name: "Recommendations"))
     AwsOpportunityInsights.type = Types::AwsOpportunityInsights
     AwsOpportunityLifeCycle.add_member(:target_close_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "TargetCloseDate"))
     AwsOpportunityLifeCycle.add_member(:closed_lost_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsClosedLostReason, name: "ClosedLostReason"))
     AwsOpportunityLifeCycle.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityStage, name: "Stage"))
-    AwsOpportunityLifeCycle.add_member(:next_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "NextSteps", traits: {"smithy.api#length" => {"max" => 255}}))
+    AwsOpportunityLifeCycle.add_member(:next_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "NextSteps", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
     AwsOpportunityLifeCycle.add_member(:next_steps_history, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfileNextStepsHistories, name: "NextStepsHistory", traits: {"smithy.api#length" => {"max" => 50}}))
     AwsOpportunityLifeCycle.type = Types::AwsOpportunityLifeCycle
     AwsOpportunityProject.add_member(:expected_customer_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedCustomerSpendList, name: "ExpectedCustomerSpend"))
+    AwsOpportunityProject.add_member(:aws_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsPartition, name: "AwsPartition"))
     AwsOpportunityProject.type = Types::AwsOpportunityProject
     AwsOpportunityRelatedEntities.add_member(:aws_products, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductIdentifiers, name: "AwsProducts"))
     AwsOpportunityRelatedEntities.add_member(:solutions, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionIdentifiers, name: "Solutions"))
+    AwsOpportunityRelatedEntities.add_member(:aws_marketplace_solutions, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceSolutionIdentifiers, name: "AwsMarketplaceSolutions"))
+    AwsOpportunityRelatedEntities.add_member(:aws_marketplace_products, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceProductIdentifiers, name: "AwsMarketplaceProducts"))
     AwsOpportunityRelatedEntities.type = Types::AwsOpportunityRelatedEntities
     AwsOpportunityStage.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "Not Started"}))
     AwsOpportunityStage.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "In Progress"}))
@@ -436,14 +557,58 @@ module Aws::PartnerCentralSelling
     AwsOpportunityStage.add_member(:closed_lost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED_LOST", traits: {"smithy.api#enumValue" => "Closed Lost"}))
     AwsOpportunityStage.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
     AwsOpportunityStage.add_member(:closed_incomplete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED_INCOMPLETE", traits: {"smithy.api#enumValue" => "Closed Incomplete"}))
+    AwsOpportunitySummaryFullView.add_member(:related_opportunity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "RelatedOpportunityId"))
+    AwsOpportunitySummaryFullView.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityOrigin, name: "Origin"))
+    AwsOpportunitySummaryFullView.add_member(:involvement_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesInvolvementType, name: "InvolvementType"))
+    AwsOpportunitySummaryFullView.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
+    AwsOpportunitySummaryFullView.add_member(:life_cycle, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityLifeCycle, name: "LifeCycle"))
+    AwsOpportunitySummaryFullView.add_member(:opportunity_team, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityTeamMembersList, name: "OpportunityTeam"))
+    AwsOpportunitySummaryFullView.add_member(:insights, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityInsights, name: "Insights"))
+    AwsOpportunitySummaryFullView.add_member(:involvement_type_change_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: InvolvementTypeChangeReason, name: "InvolvementTypeChangeReason"))
+    AwsOpportunitySummaryFullView.add_member(:related_entity_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityRelatedEntities, name: "RelatedEntityIds"))
+    AwsOpportunitySummaryFullView.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityCustomer, name: "Customer"))
+    AwsOpportunitySummaryFullView.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityProject, name: "Project"))
+    AwsOpportunitySummaryFullView.add_member(:cosell_motion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CosellMotion"))
+    AwsOpportunitySummaryFullView.add_member(:software_revenue, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSoftwareRevenue, name: "SoftwareRevenue"))
+    AwsOpportunitySummaryFullView.type = Types::AwsOpportunitySummaryFullView
     AwsOpportunityTeamMembersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsTeamMember, name: "member"))
+    AwsPartition.add_member(:aws_eusc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_EUSC", traits: {"smithy.api#enumValue" => "aws-eusc"}))
+    AwsProductDetails.add_member(:product_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ProductCode", traits: {"smithy.api#required" => {}}))
+    AwsProductDetails.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ServiceCode"))
+    AwsProductDetails.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Categories", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}, "smithy.api#required" => {}}))
+    AwsProductDetails.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryAmount, name: "Amount"))
+    AwsProductDetails.add_member(:optimized_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryAmount, name: "OptimizedAmount"))
+    AwsProductDetails.add_member(:potential_savings_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryAmount, name: "PotentialSavingsAmount"))
+    AwsProductDetails.add_member(:optimizations, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductOptimizationsList, name: "Optimizations", traits: {"smithy.api#required" => {}}))
+    AwsProductDetails.type = Types::AwsProductDetails
     AwsProductIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductIdentifier, name: "member"))
+    AwsProductInsights.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "CurrencyCode", traits: {"smithy.api#required" => {}}))
+    AwsProductInsights.add_member(:frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: PaymentFrequency, name: "Frequency", traits: {"smithy.api#required" => {}}))
+    AwsProductInsights.add_member(:total_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryAmount, name: "TotalAmount"))
+    AwsProductInsights.add_member(:total_optimized_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryAmount, name: "TotalOptimizedAmount"))
+    AwsProductInsights.add_member(:total_potential_savings_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryAmount, name: "TotalPotentialSavingsAmount"))
+    AwsProductInsights.add_member(:total_amount_by_category, ::Smithy::Schema::Shapes::MemberShape.new(target: AmountMap, name: "TotalAmountByCategory", traits: {"smithy.api#required" => {}}))
+    AwsProductInsights.add_member(:aws_products, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductsList, name: "AwsProducts", traits: {"smithy.api#required" => {}}))
+    AwsProductInsights.type = Types::AwsProductInsights
+    AwsProductOptimization.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Description", traits: {"smithy.api#required" => {}}))
+    AwsProductOptimization.add_member(:savings_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryAmount, name: "SavingsAmount", traits: {"smithy.api#required" => {}}))
+    AwsProductOptimization.type = Types::AwsProductOptimization
+    AwsProductOptimizationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductOptimization, name: "member"))
+    AwsProductsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductDetails, name: "member"))
+    AwsProductsSpendInsightsBySource.add_member(:partner, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductInsights, name: "Partner"))
+    AwsProductsSpendInsightsBySource.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductInsights, name: "AWS"))
+    AwsProductsSpendInsightsBySource.type = Types::AwsProductsSpendInsightsBySource
+    AwsSoftwareRevenue.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MonetaryValue, name: "Value"))
+    AwsSoftwareRevenue.add_member(:discount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Discount"))
+    AwsSoftwareRevenue.add_member(:effective_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "EffectiveDate"))
+    AwsSoftwareRevenue.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ExpirationDate"))
+    AwsSoftwareRevenue.type = Types::AwsSoftwareRevenue
     AwsSubmission.add_member(:involvement_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesInvolvementType, name: "InvolvementType", traits: {"smithy.api#required" => {}}))
     AwsSubmission.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: Visibility, name: "Visibility"))
     AwsSubmission.type = Types::AwsSubmission
     AwsTeamMember.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "Email"))
-    AwsTeamMember.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "FirstName", traits: {"smithy.api#length" => {"max" => 80}}))
-    AwsTeamMember.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "LastName", traits: {"smithy.api#length" => {"max" => 80}}))
+    AwsTeamMember.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "FirstName", traits: {"smithy.api#pattern" => "^(?s).{0,80}$"}))
+    AwsTeamMember.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "LastName", traits: {"smithy.api#pattern" => "^(?s).{0,80}$"}))
     AwsTeamMember.add_member(:business_title, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMemberBusinessTitle, name: "BusinessTitle"))
     AwsTeamMember.type = Types::AwsTeamMember
     Channel.add_member(:aws_marketing_central, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MARKETING_CENTRAL", traits: {"smithy.api#enumValue" => "AWS Marketing Central"}))
@@ -493,11 +658,12 @@ module Aws::PartnerCentralSelling
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     ConflictException.type = Types::ConflictException
     Contact.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "Email"))
-    Contact.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "FirstName", traits: {"smithy.api#length" => {"max" => 80}}))
-    Contact.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "LastName", traits: {"smithy.api#length" => {"max" => 80}}))
+    Contact.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "FirstName", traits: {"smithy.api#pattern" => "^(?s).{0,80}$"}))
+    Contact.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "LastName", traits: {"smithy.api#pattern" => "^(?s).{0,80}$"}))
     Contact.add_member(:business_title, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTitle, name: "BusinessTitle"))
     Contact.add_member(:phone, ::Smithy::Schema::Shapes::MemberShape.new(target: PhoneNumber, name: "Phone"))
     Contact.type = Types::Contact
+    ContextIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextIdentifier, name: "member"))
     CountryCode.add_member(:us, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US", traits: {"smithy.api#enumValue" => "US"}))
     CountryCode.add_member(:af, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AF", traits: {"smithy.api#enumValue" => "AF"}))
     CountryCode.add_member(:ax, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AX", traits: {"smithy.api#enumValue" => "AX"}))
@@ -747,6 +913,17 @@ module Aws::PartnerCentralSelling
     CountryCode.add_member(:ye, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YE", traits: {"smithy.api#enumValue" => "YE"}))
     CountryCode.add_member(:zm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZM", traits: {"smithy.api#enumValue" => "ZM"}))
     CountryCode.add_member(:zw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZW", traits: {"smithy.api#enumValue" => "ZW"}))
+    CreateEngagementContextRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
+    CreateEngagementContextRequest.add_member(:engagement_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementArnOrIdentifier, name: "EngagementIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateEngagementContextRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateEngagementContextRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextType, name: "Type", traits: {"smithy.api#required" => {}}))
+    CreateEngagementContextRequest.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextPayload, name: "Payload", traits: {"smithy.api#required" => {}}))
+    CreateEngagementContextRequest.type = Types::CreateEngagementContextRequest
+    CreateEngagementContextResponse.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "EngagementId"))
+    CreateEngagementContextResponse.add_member(:engagement_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementArn, name: "EngagementArn"))
+    CreateEngagementContextResponse.add_member(:engagement_last_modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EngagementLastModifiedAt"))
+    CreateEngagementContextResponse.add_member(:context_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextIdentifier, name: "ContextId"))
+    CreateEngagementContextResponse.type = Types::CreateEngagementContextResponse
     CreateEngagementInvitationRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     CreateEngagementInvitationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateEngagementInvitationRequest.add_member(:engagement_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "EngagementIdentifier", traits: {"smithy.api#required" => {}}))
@@ -756,24 +933,25 @@ module Aws::PartnerCentralSelling
     CreateEngagementInvitationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     CreateEngagementInvitationResponse.type = Types::CreateEngagementInvitationResponse
     CreateEngagementRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
-    CreateEngagementRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#pattern" => "^[!-~]{1,64}$", "smithy.api#required" => {}}))
-    CreateEngagementRequest.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementTitle, name: "Title", traits: {"smithy.api#required" => {}}))
-    CreateEngagementRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementDescription, name: "Description", traits: {"smithy.api#required" => {}}))
+    CreateEngagementRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateEngagementRequest.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementTitle, name: "Title"))
+    CreateEngagementRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementDescription, name: "Description"))
     CreateEngagementRequest.add_member(:contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContexts, name: "Contexts"))
     CreateEngagementRequest.type = Types::CreateEngagementRequest
     CreateEngagementResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "Id"))
     CreateEngagementResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementArn, name: "Arn"))
+    CreateEngagementResponse.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "ModifiedAt"))
     CreateEngagementResponse.type = Types::CreateEngagementResponse
     CreateOpportunityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     CreateOpportunityRequest.add_member(:primary_needs_from_aws, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryNeedsFromAws, name: "PrimaryNeedsFromAws"))
     CreateOpportunityRequest.add_member(:national_security, ::Smithy::Schema::Shapes::MemberShape.new(target: NationalSecurity, name: "NationalSecurity"))
-    CreateOpportunityRequest.add_member(:partner_opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PartnerOpportunityIdentifier", traits: {"smithy.api#length" => {"max" => 64}}))
+    CreateOpportunityRequest.add_member(:partner_opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PartnerOpportunityIdentifier", traits: {"smithy.api#pattern" => "^(?s).{0,64}$"}))
     CreateOpportunityRequest.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: Customer, name: "Customer"))
     CreateOpportunityRequest.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: Project, name: "Project"))
     CreateOpportunityRequest.add_member(:opportunity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityType, name: "OpportunityType"))
     CreateOpportunityRequest.add_member(:marketing, ::Smithy::Schema::Shapes::MemberShape.new(target: Marketing, name: "Marketing"))
     CreateOpportunityRequest.add_member(:software_revenue, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareRevenue, name: "SoftwareRevenue"))
-    CreateOpportunityRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 1}, "smithy.api#required" => {}}))
+    CreateOpportunityRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateOpportunityRequest.add_member(:life_cycle, ::Smithy::Schema::Shapes::MemberShape.new(target: LifeCycle, name: "LifeCycle"))
     CreateOpportunityRequest.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityOrigin, name: "Origin"))
     CreateOpportunityRequest.add_member(:opportunity_team, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerOpportunityTeamMembersList, name: "OpportunityTeam"))
@@ -784,7 +962,7 @@ module Aws::PartnerCentralSelling
     CreateOpportunityResponse.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "LastModifiedDate"))
     CreateOpportunityResponse.type = Types::CreateOpportunityResponse
     CreateResourceSnapshotJobRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
-    CreateResourceSnapshotJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#pattern" => "^[!-~]{1,64}$", "smithy.api#required" => {}}))
+    CreateResourceSnapshotJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateResourceSnapshotJobRequest.add_member(:engagement_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "EngagementIdentifier", traits: {"smithy.api#required" => {}}))
     CreateResourceSnapshotJobRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#required" => {}}))
     CreateResourceSnapshotJobRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "ResourceIdentifier", traits: {"smithy.api#required" => {}}))
@@ -799,11 +977,14 @@ module Aws::PartnerCentralSelling
     CreateResourceSnapshotRequest.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType", traits: {"smithy.api#required" => {}}))
     CreateResourceSnapshotRequest.add_member(:resource_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "ResourceIdentifier", traits: {"smithy.api#required" => {}}))
     CreateResourceSnapshotRequest.add_member(:resource_snapshot_template_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTemplateName, name: "ResourceSnapshotTemplateIdentifier", traits: {"smithy.api#required" => {}}))
-    CreateResourceSnapshotRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#pattern" => "^[!-~]{1,64}$", "smithy.api#required" => {}}))
+    CreateResourceSnapshotRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     CreateResourceSnapshotRequest.type = Types::CreateResourceSnapshotRequest
     CreateResourceSnapshotResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "Arn"))
     CreateResourceSnapshotResponse.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotRevision, name: "Revision"))
     CreateResourceSnapshotResponse.type = Types::CreateResourceSnapshotResponse
+    CreatedDateFilter.add_member(:after_created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "AfterCreatedDate"))
+    CreatedDateFilter.add_member(:before_created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "BeforeCreatedDate"))
+    CreatedDateFilter.type = Types::CreatedDateFilter
     CurrencyCode.add_member(:usd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USD", traits: {"smithy.api#enumValue" => "USD"}))
     CurrencyCode.add_member(:eur, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EUR", traits: {"smithy.api#enumValue" => "EUR"}))
     CurrencyCode.add_member(:gbp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GBP", traits: {"smithy.api#enumValue" => "GBP"}))
@@ -994,15 +1175,22 @@ module Aws::PartnerCentralSelling
     DisassociateOpportunityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     DisassociateOpportunityRequest.add_member(:opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "OpportunityIdentifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Identifier"}))
     DisassociateOpportunityRequest.add_member(:related_entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedEntityType, name: "RelatedEntityType", traits: {"smithy.api#required" => {}}))
-    DisassociateOpportunityRequest.add_member(:related_entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RelatedEntityIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#required" => {}}))
+    DisassociateOpportunityRequest.add_member(:related_entity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "RelatedEntityIdentifier", traits: {"smithy.api#pattern" => "^(?s).{1,255}$", "smithy.api#required" => {}}))
     DisassociateOpportunityRequest.type = Types::DisassociateOpportunityRequest
+    EligibleProgramsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    EngagementContextDetails.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextIdentifier, name: "Id"))
     EngagementContextDetails.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextType, name: "Type", traits: {"smithy.api#required" => {}}))
     EngagementContextDetails.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextPayload, name: "Payload"))
     EngagementContextDetails.type = Types::EngagementContextDetails
     EngagementContextPayload.add_member(:customer_project, Types::EngagementContextPayload::CustomerProject, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProjectsContext, name: "CustomerProject"))
+    EngagementContextPayload.add_member(:lead, Types::EngagementContextPayload::Lead, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadContext, name: "Lead"))
+    EngagementContextPayload.add_member(:prospecting_result, Types::EngagementContextPayload::ProspectingResult, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingResult, name: "ProspectingResult"))
     EngagementContextPayload.add_member(:unknown, Types::EngagementContextPayload::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EngagementContextPayload.type = Types::EngagementContextPayload
     EngagementContextType.add_member(:customer_project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_PROJECT", traits: {"smithy.api#enumValue" => "CustomerProject"}))
+    EngagementContextType.add_member(:lead, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEAD", traits: {"smithy.api#enumValue" => "Lead"}))
+    EngagementContextType.add_member(:prospecting_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROSPECTING_RESULT", traits: {"smithy.api#enumValue" => "ProspectingResult"}))
+    EngagementContextTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextType, name: "member"))
     EngagementContexts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextDetails, name: "member"))
     EngagementCustomer.add_member(:industry, ::Smithy::Schema::Shapes::MemberShape.new(target: Industry, name: "Industry", traits: {"smithy.api#required" => {}}))
     EngagementCustomer.add_member(:company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CompanyName, name: "CompanyName", traits: {"smithy.api#required" => {}}))
@@ -1013,9 +1201,11 @@ module Aws::PartnerCentralSelling
     EngagementCustomerProjectDetails.add_member(:business_problem, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementCustomerBusinessProblem, name: "BusinessProblem", traits: {"smithy.api#required" => {}}))
     EngagementCustomerProjectDetails.add_member(:target_completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "TargetCompletionDate", traits: {"smithy.api#pattern" => "^[1-9][0-9]{3}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$", "smithy.api#required" => {}}))
     EngagementCustomerProjectDetails.type = Types::EngagementCustomerProjectDetails
+    EngagementIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "member"))
     EngagementIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementArnOrIdentifier, name: "member"))
     EngagementInvitationIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationArnOrIdentifier, name: "member"))
     EngagementInvitationPayloadType.add_member(:opportunity_invitation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPPORTUNITY_INVITATION", traits: {"smithy.api#enumValue" => "OpportunityInvitation"}))
+    EngagementInvitationPayloadType.add_member(:lead_invitation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEAD_INVITATION", traits: {"smithy.api#enumValue" => "LeadInvitation"}))
     EngagementInvitationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationSummary, name: "member"))
     EngagementInvitationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Arn"))
     EngagementInvitationSummary.add_member(:payload_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationPayloadType, name: "PayloadType"))
@@ -1026,7 +1216,7 @@ module Aws::PartnerCentralSelling
     EngagementInvitationSummary.add_member(:invitation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "InvitationDate"))
     EngagementInvitationSummary.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "ExpirationDate"))
     EngagementInvitationSummary.add_member(:sender_aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "SenderAwsAccountId"))
-    EngagementInvitationSummary.add_member(:sender_company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SenderCompanyName", traits: {"smithy.api#length" => {"max" => 120}}))
+    EngagementInvitationSummary.add_member(:sender_company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SenderCompanyName", traits: {"smithy.api#pattern" => "^(?s).{0,120}$"}))
     EngagementInvitationSummary.add_member(:receiver, ::Smithy::Schema::Shapes::MemberShape.new(target: Receiver, name: "Receiver"))
     EngagementInvitationSummary.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     EngagementInvitationSummary.add_member(:participant_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ParticipantType, name: "ParticipantType"))
@@ -1041,6 +1231,13 @@ module Aws::PartnerCentralSelling
     EngagementMemberSummary.add_member(:website_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "WebsiteUrl"))
     EngagementMemberSummary.type = Types::EngagementMemberSummary
     EngagementMembers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementMember, name: "member"))
+    EngagementProspectingResult.add_member(:engagement_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "EngagementIdentifier", traits: {"smithy.api#required" => {}}))
+    EngagementProspectingResult.add_member(:engagement_context_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "EngagementContextId", traits: {"smithy.api#pattern" => "^ctx-[0-9a-z]{14}$"}))
+    EngagementProspectingResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    EngagementProspectingResult.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ReasonCode"))
+    EngagementProspectingResult.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
+    EngagementProspectingResult.type = Types::EngagementProspectingResult
+    EngagementProspectingResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementProspectingResult, name: "member"))
     EngagementResourceAssociationSummary.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     EngagementResourceAssociationSummary.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "EngagementId"))
     EngagementResourceAssociationSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
@@ -1061,13 +1258,23 @@ module Aws::PartnerCentralSelling
     EngagementSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreatedAt"))
     EngagementSummary.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "CreatedBy"))
     EngagementSummary.add_member(:member_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MemberCount"))
+    EngagementSummary.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "ModifiedAt"))
+    EngagementSummary.add_member(:modified_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "ModifiedBy"))
+    EngagementSummary.add_member(:context_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextTypeList, name: "ContextTypes"))
     EngagementSummary.type = Types::EngagementSummary
     EngagementSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementSummary, name: "member"))
-    ExpectedCustomerSpend.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Amount, name: "Amount", traits: {"smithy.api#required" => {}}))
-    ExpectedCustomerSpend.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "CurrencyCode", traits: {"smithy.api#pattern" => "^USD$", "smithy.api#required" => {}}))
+    EnrichmentContext.add_member(:prospecting_result_aws, ::Smithy::Schema::Shapes::MemberShape.new(target: InvitationProspectingResultAws, name: "ProspectingResultAws"))
+    EnrichmentContext.add_member(:lead_insights, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadInsights, name: "LeadInsights"))
+    EnrichmentContext.type = Types::EnrichmentContext
+    ExpectedContractDuration.add_member(:term, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedContractDurationTerm, name: "Term", traits: {"smithy.api#required" => {}}))
+    ExpectedContractDuration.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value", traits: {"smithy.api#required" => {}}))
+    ExpectedContractDuration.type = Types::ExpectedContractDuration
+    ExpectedContractDurationTerm.add_member(:months, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHS", traits: {"smithy.api#enumValue" => "Months"}))
+    ExpectedCustomerSpend.add_member(:amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Amount, name: "Amount", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    ExpectedCustomerSpend.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "CurrencyCode", traits: {"smithy.api#required" => {}}))
     ExpectedCustomerSpend.add_member(:frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: PaymentFrequency, name: "Frequency", traits: {"smithy.api#required" => {}}))
-    ExpectedCustomerSpend.add_member(:target_company, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "TargetCompany", traits: {"smithy.api#length" => {"min" => 1, "max" => 80}, "smithy.api#required" => {}}))
-    ExpectedCustomerSpend.add_member(:estimation_url, ::Smithy::Schema::Shapes::MemberShape.new(target: WebsiteUrl, name: "EstimationUrl"))
+    ExpectedCustomerSpend.add_member(:target_company, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "TargetCompany", traits: {"smithy.api#pattern" => "^(?s).{1,80}$", "smithy.api#required" => {}}))
+    ExpectedCustomerSpend.add_member(:estimation_url, ::Smithy::Schema::Shapes::MemberShape.new(target: EstimationUrl, name: "EstimationUrl"))
     ExpectedCustomerSpend.type = Types::ExpectedCustomerSpend
     ExpectedCustomerSpendList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedCustomerSpend, name: "member"))
     FilterIdentifier.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "member"))
@@ -1077,7 +1284,6 @@ module Aws::PartnerCentralSelling
     GetAwsOpportunitySummaryRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     GetAwsOpportunitySummaryRequest.add_member(:related_opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "RelatedOpportunityIdentifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Identifier"}))
     GetAwsOpportunitySummaryRequest.type = Types::GetAwsOpportunitySummaryRequest
-    GetAwsOpportunitySummaryResponse.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     GetAwsOpportunitySummaryResponse.add_member(:related_opportunity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "RelatedOpportunityId"))
     GetAwsOpportunitySummaryResponse.add_member(:origin, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityOrigin, name: "Origin"))
     GetAwsOpportunitySummaryResponse.add_member(:involvement_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesInvolvementType, name: "InvolvementType"))
@@ -1089,6 +1295,9 @@ module Aws::PartnerCentralSelling
     GetAwsOpportunitySummaryResponse.add_member(:related_entity_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityRelatedEntities, name: "RelatedEntityIds"))
     GetAwsOpportunitySummaryResponse.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityCustomer, name: "Customer"))
     GetAwsOpportunitySummaryResponse.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunityProject, name: "Project"))
+    GetAwsOpportunitySummaryResponse.add_member(:cosell_motion, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CosellMotion"))
+    GetAwsOpportunitySummaryResponse.add_member(:software_revenue, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSoftwareRevenue, name: "SoftwareRevenue"))
+    GetAwsOpportunitySummaryResponse.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     GetAwsOpportunitySummaryResponse.type = Types::GetAwsOpportunitySummaryResponse
     GetEngagementInvitationRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     GetEngagementInvitationRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationArnOrIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
@@ -1102,7 +1311,7 @@ module Aws::PartnerCentralSelling
     GetEngagementInvitationResponse.add_member(:invitation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "InvitationDate"))
     GetEngagementInvitationResponse.add_member(:expiration_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "ExpirationDate"))
     GetEngagementInvitationResponse.add_member(:sender_aws_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "SenderAwsAccountId"))
-    GetEngagementInvitationResponse.add_member(:sender_company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SenderCompanyName", traits: {"smithy.api#length" => {"max" => 120}}))
+    GetEngagementInvitationResponse.add_member(:sender_company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SenderCompanyName", traits: {"smithy.api#pattern" => "^(?s).{0,120}$"}))
     GetEngagementInvitationResponse.add_member(:receiver, ::Smithy::Schema::Shapes::MemberShape.new(target: Receiver, name: "Receiver"))
     GetEngagementInvitationResponse.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     GetEngagementInvitationResponse.add_member(:rejection_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: RejectionReasonString, name: "RejectionReason"))
@@ -1110,6 +1319,7 @@ module Aws::PartnerCentralSelling
     GetEngagementInvitationResponse.add_member(:invitation_message, ::Smithy::Schema::Shapes::MemberShape.new(target: InvitationMessage, name: "InvitationMessage"))
     GetEngagementInvitationResponse.add_member(:engagement_description, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementDescription, name: "EngagementDescription"))
     GetEngagementInvitationResponse.add_member(:existing_members, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementMemberSummaries, name: "ExistingMembers"))
+    GetEngagementInvitationResponse.add_member(:enrichment_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentContext, name: "EnrichmentContext"))
     GetEngagementInvitationResponse.type = Types::GetEngagementInvitationResponse
     GetEngagementRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     GetEngagementRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementArnOrIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
@@ -1121,6 +1331,8 @@ module Aws::PartnerCentralSelling
     GetEngagementResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreatedAt"))
     GetEngagementResponse.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "CreatedBy"))
     GetEngagementResponse.add_member(:member_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MemberCount"))
+    GetEngagementResponse.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "ModifiedAt"))
+    GetEngagementResponse.add_member(:modified_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccount, name: "ModifiedBy"))
     GetEngagementResponse.add_member(:contexts, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContexts, name: "Contexts"))
     GetEngagementResponse.type = Types::GetEngagementResponse
     GetOpportunityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
@@ -1129,7 +1341,7 @@ module Aws::PartnerCentralSelling
     GetOpportunityResponse.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     GetOpportunityResponse.add_member(:primary_needs_from_aws, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryNeedsFromAws, name: "PrimaryNeedsFromAws"))
     GetOpportunityResponse.add_member(:national_security, ::Smithy::Schema::Shapes::MemberShape.new(target: NationalSecurity, name: "NationalSecurity"))
-    GetOpportunityResponse.add_member(:partner_opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PartnerOpportunityIdentifier", traits: {"smithy.api#length" => {"max" => 64}}))
+    GetOpportunityResponse.add_member(:partner_opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PartnerOpportunityIdentifier", traits: {"smithy.api#pattern" => "^(?s).{0,64}$"}))
     GetOpportunityResponse.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: Customer, name: "Customer"))
     GetOpportunityResponse.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: Project, name: "Project"))
     GetOpportunityResponse.add_member(:opportunity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityType, name: "OpportunityType"))
@@ -1143,6 +1355,16 @@ module Aws::PartnerCentralSelling
     GetOpportunityResponse.add_member(:life_cycle, ::Smithy::Schema::Shapes::MemberShape.new(target: LifeCycle, name: "LifeCycle"))
     GetOpportunityResponse.add_member(:opportunity_team, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerOpportunityTeamMembersList, name: "OpportunityTeam"))
     GetOpportunityResponse.type = Types::GetOpportunityResponse
+    GetProspectingFromEngagementTaskRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
+    GetProspectingFromEngagementTaskRequest.add_member(:task_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskIdentifier, name: "TaskIdentifier", traits: {"smithy.api#required" => {}}))
+    GetProspectingFromEngagementTaskRequest.type = Types::GetProspectingFromEngagementTaskRequest
+    GetProspectingFromEngagementTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskIdentifier, name: "TaskId", traits: {"smithy.api#required" => {}}))
+    GetProspectingFromEngagementTaskResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskArn, name: "TaskArn", traits: {"smithy.api#required" => {}}))
+    GetProspectingFromEngagementTaskResponse.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskName, name: "TaskName", traits: {"smithy.api#required" => {}}))
+    GetProspectingFromEngagementTaskResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime", traits: {"smithy.api#required" => {}}))
+    GetProspectingFromEngagementTaskResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EndTime"))
+    GetProspectingFromEngagementTaskResponse.add_member(:engagements, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementProspectingResultList, name: "Engagements", traits: {"smithy.api#required" => {}}))
+    GetProspectingFromEngagementTaskResponse.type = Types::GetProspectingFromEngagementTaskResponse
     GetResourceSnapshotJobRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     GetResourceSnapshotJobRequest.add_member(:resource_snapshot_job_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotJobIdentifier, name: "ResourceSnapshotJobIdentifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Identifier"}))
     GetResourceSnapshotJobRequest.type = Types::GetResourceSnapshotJobRequest
@@ -1176,6 +1398,7 @@ module Aws::PartnerCentralSelling
     GetResourceSnapshotResponse.add_member(:resource_snapshot_template_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTemplateName, name: "ResourceSnapshotTemplateName"))
     GetResourceSnapshotResponse.add_member(:revision, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotRevision, name: "Revision"))
     GetResourceSnapshotResponse.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotPayload, name: "Payload"))
+    GetResourceSnapshotResponse.add_member(:target_member_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountIdOrAliasList, name: "TargetMemberAccounts"))
     GetResourceSnapshotResponse.type = Types::GetResourceSnapshotResponse
     GetSellingSystemSettingsRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     GetSellingSystemSettingsRequest.type = Types::GetSellingSystemSettingsRequest
@@ -1216,6 +1439,9 @@ module Aws::PartnerCentralSelling
     Invitation.add_member(:receiver, ::Smithy::Schema::Shapes::MemberShape.new(target: Receiver, name: "Receiver", traits: {"smithy.api#required" => {}}))
     Invitation.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: Payload, name: "Payload", traits: {"smithy.api#required" => {}}))
     Invitation.type = Types::Invitation
+    InvitationProspectingResultAws.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingResultCustomer, name: "Customer"))
+    InvitationProspectingResultAws.add_member(:insights, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingInsights, name: "Insights"))
+    InvitationProspectingResultAws.type = Types::InvitationProspectingResultAws
     InvitationStatus.add_member(:accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCEPTED", traits: {"smithy.api#enumValue" => "ACCEPTED"}))
     InvitationStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     InvitationStatus.add_member(:rejected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REJECTED", traits: {"smithy.api#enumValue" => "REJECTED"}))
@@ -1229,9 +1455,60 @@ module Aws::PartnerCentralSelling
     LastModifiedDate.add_member(:after_last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "AfterLastModifiedDate"))
     LastModifiedDate.add_member(:before_last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "BeforeLastModifiedDate"))
     LastModifiedDate.type = Types::LastModifiedDate
+    LeadAddress.add_member(:city, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "City", traits: {"smithy.api#length" => {"max" => 255}}))
+    LeadAddress.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PostalCode", traits: {"smithy.api#length" => {"max" => 20}}))
+    LeadAddress.add_member(:state_or_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "StateOrRegion", traits: {"smithy.api#length" => {"max" => 255}}))
+    LeadAddress.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadCountryCode, name: "CountryCode"))
+    LeadAddress.type = Types::LeadAddress
+    LeadContact.add_member(:business_title, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadJobTitle, name: "BusinessTitle", traits: {"smithy.api#required" => {}}))
+    LeadContact.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadEmail, name: "Email", traits: {"smithy.api#required" => {}}))
+    LeadContact.add_member(:first_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "FirstName", traits: {"smithy.api#required" => {}}))
+    LeadContact.add_member(:last_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "LastName", traits: {"smithy.api#required" => {}}))
+    LeadContact.add_member(:phone, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadPhoneNumber, name: "Phone"))
+    LeadContact.type = Types::LeadContact
+    LeadContext.add_member(:insights, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadInsights, name: "Insights"))
+    LeadContext.add_member(:qualification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadQualificationStatus, name: "QualificationStatus", traits: {"smithy.api#default" => "Unqualified"}))
+    LeadContext.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadCustomer, name: "Customer", traits: {"smithy.api#required" => {}}))
+    LeadContext.add_member(:interactions, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadInteractionList, name: "Interactions", traits: {"smithy.api#required" => {}}))
+    LeadContext.type = Types::LeadContext
+    LeadCustomer.add_member(:industry, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadIndustry, name: "Industry"))
+    LeadCustomer.add_member(:company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CompanyName, name: "CompanyName", traits: {"smithy.api#required" => {}}))
+    LeadCustomer.add_member(:website_url, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadWebsiteUrl, name: "WebsiteUrl"))
+    LeadCustomer.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadAddress, name: "Address"))
+    LeadCustomer.add_member(:aws_maturity, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMaturity, name: "AwsMaturity"))
+    LeadCustomer.add_member(:market_segment, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadMarketSegment, name: "MarketSegment"))
+    LeadCustomer.type = Types::LeadCustomer
+    LeadInsights.add_member(:lead_readiness_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "LeadReadinessScore"))
+    LeadInsights.type = Types::LeadInsights
+    LeadInteraction.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadSourceType, name: "SourceType", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    LeadInteraction.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadSourceId, name: "SourceId", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    LeadInteraction.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadSourceName, name: "SourceName", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    LeadInteraction.add_member(:usecase, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementUseCase, name: "Usecase"))
+    LeadInteraction.add_member(:interaction_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "InteractionDate"))
+    LeadInteraction.add_member(:customer_action, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerAction, name: "CustomerAction", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    LeadInteraction.add_member(:business_problem, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadBusinessProblem, name: "BusinessProblem"))
+    LeadInteraction.add_member(:contact, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadContact, name: "Contact", traits: {"smithy.api#required" => {}}))
+    LeadInteraction.type = Types::LeadInteraction
+    LeadInteractionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadInteraction, name: "member"))
+    LeadInvitationCustomer.add_member(:industry, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadIndustry, name: "Industry"))
+    LeadInvitationCustomer.add_member(:company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CompanyName, name: "CompanyName", traits: {"smithy.api#required" => {}}))
+    LeadInvitationCustomer.add_member(:website_url, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadWebsiteUrl, name: "WebsiteUrl"))
+    LeadInvitationCustomer.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadCountryCode, name: "CountryCode", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    LeadInvitationCustomer.add_member(:aws_maturity, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMaturity, name: "AwsMaturity"))
+    LeadInvitationCustomer.add_member(:market_segment, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadMarketSegment, name: "MarketSegment"))
+    LeadInvitationCustomer.type = Types::LeadInvitationCustomer
+    LeadInvitationInteraction.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadSourceType, name: "SourceType", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    LeadInvitationInteraction.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadSourceId, name: "SourceId", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    LeadInvitationInteraction.add_member(:source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadSourceName, name: "SourceName", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    LeadInvitationInteraction.add_member(:usecase, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementUseCase, name: "Usecase"))
+    LeadInvitationInteraction.add_member(:contact_business_title, ::Smithy::Schema::Shapes::MemberShape.new(target: JobTitle, name: "ContactBusinessTitle", traits: {"smithy.api#required" => {}}))
+    LeadInvitationInteraction.type = Types::LeadInvitationInteraction
+    LeadInvitationPayload.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadInvitationCustomer, name: "Customer", traits: {"smithy.api#required" => {}}))
+    LeadInvitationPayload.add_member(:interaction, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadInvitationInteraction, name: "Interaction", traits: {"smithy.api#required" => {}}))
+    LeadInvitationPayload.type = Types::LeadInvitationPayload
     LifeCycle.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: Stage, name: "Stage"))
     LifeCycle.add_member(:closed_lost_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ClosedLostReason, name: "ClosedLostReason"))
-    LifeCycle.add_member(:next_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "NextSteps", traits: {"smithy.api#length" => {"max" => 255}}))
+    LifeCycle.add_member(:next_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "NextSteps", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
     LifeCycle.add_member(:target_close_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "TargetCloseDate"))
     LifeCycle.add_member(:review_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewStatus, name: "ReviewStatus"))
     LifeCycle.add_member(:review_comments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ReviewComments"))
@@ -1241,11 +1518,11 @@ module Aws::PartnerCentralSelling
     LifeCycleForView.add_member(:target_close_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "TargetCloseDate"))
     LifeCycleForView.add_member(:review_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewStatus, name: "ReviewStatus"))
     LifeCycleForView.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: Stage, name: "Stage"))
-    LifeCycleForView.add_member(:next_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "NextSteps", traits: {"smithy.api#length" => {"max" => 255}}))
+    LifeCycleForView.add_member(:next_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "NextSteps", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
     LifeCycleForView.type = Types::LifeCycleForView
     LifeCycleSummary.add_member(:stage, ::Smithy::Schema::Shapes::MemberShape.new(target: Stage, name: "Stage"))
     LifeCycleSummary.add_member(:closed_lost_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ClosedLostReason, name: "ClosedLostReason"))
-    LifeCycleSummary.add_member(:next_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "NextSteps", traits: {"smithy.api#length" => {"max" => 255}}))
+    LifeCycleSummary.add_member(:next_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "NextSteps", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
     LifeCycleSummary.add_member(:target_close_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "TargetCloseDate"))
     LifeCycleSummary.add_member(:review_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReviewStatus, name: "ReviewStatus"))
     LifeCycleSummary.add_member(:review_comments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ReviewComments"))
@@ -1263,7 +1540,7 @@ module Aws::PartnerCentralSelling
     ListEngagementByAcceptingInvitationTaskSummary.add_member(:engagement_invitation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationIdentifier, name: "EngagementInvitationId"))
     ListEngagementByAcceptingInvitationTaskSummary.type = Types::ListEngagementByAcceptingInvitationTaskSummary
     ListEngagementByAcceptingInvitationTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
-    ListEngagementByAcceptingInvitationTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    ListEngagementByAcceptingInvitationTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#pattern" => "^(?s).{1,2048}$"}))
     ListEngagementByAcceptingInvitationTasksRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTasksSortBase, name: "Sort"))
     ListEngagementByAcceptingInvitationTasksRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     ListEngagementByAcceptingInvitationTasksRequest.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatuses, name: "TaskStatus"))
@@ -1287,7 +1564,7 @@ module Aws::PartnerCentralSelling
     ListEngagementFromOpportunityTaskSummary.add_member(:engagement_invitation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationIdentifier, name: "EngagementInvitationId"))
     ListEngagementFromOpportunityTaskSummary.type = Types::ListEngagementFromOpportunityTaskSummary
     ListEngagementFromOpportunityTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
-    ListEngagementFromOpportunityTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}}))
+    ListEngagementFromOpportunityTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#pattern" => "^(?s).{1,2048}$"}))
     ListEngagementFromOpportunityTasksRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTasksSortBase, name: "Sort"))
     ListEngagementFromOpportunityTasksRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     ListEngagementFromOpportunityTasksRequest.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatuses, name: "TaskStatus"))
@@ -1333,6 +1610,8 @@ module Aws::PartnerCentralSelling
     ListEngagementsRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     ListEngagementsRequest.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountList, name: "CreatedBy"))
     ListEngagementsRequest.add_member(:exclude_created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountList, name: "ExcludeCreatedBy"))
+    ListEngagementsRequest.add_member(:context_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextTypeList, name: "ContextTypes"))
+    ListEngagementsRequest.add_member(:exclude_context_types, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextTypeList, name: "ExcludeContextTypes"))
     ListEngagementsRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementSort, name: "Sort"))
     ListEngagementsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementPageSize, name: "MaxResults", traits: {"smithy.api#default" => 20}))
     ListEngagementsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
@@ -1350,10 +1629,49 @@ module Aws::PartnerCentralSelling
     ListOpportunitiesRequest.add_member(:life_cycle_stage, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterLifeCycleStage, name: "LifeCycleStage", traits: {"smithy.api#length" => {"max" => 10}}))
     ListOpportunitiesRequest.add_member(:life_cycle_review_status, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterLifeCycleReviewStatus, name: "LifeCycleReviewStatus", traits: {"smithy.api#length" => {"max" => 10}}))
     ListOpportunitiesRequest.add_member(:customer_company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "CustomerCompanyName", traits: {"smithy.api#length" => {"max" => 10}}))
+    ListOpportunitiesRequest.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: CreatedDateFilter, name: "CreatedDate"))
+    ListOpportunitiesRequest.add_member(:target_close_date, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetCloseDateFilter, name: "TargetCloseDate"))
     ListOpportunitiesRequest.type = Types::ListOpportunitiesRequest
     ListOpportunitiesResponse.add_member(:opportunity_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunitySummaries, name: "OpportunitySummaries", traits: {"smithy.api#required" => {}}))
     ListOpportunitiesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
     ListOpportunitiesResponse.type = Types::ListOpportunitiesResponse
+    ListOpportunityFromEngagementTaskSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOpportunityFromEngagementTaskSummary, name: "member"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskIdentifier, name: "TaskId"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, name: "TaskArn"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, name: "TaskStatus"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonCode, name: "ReasonCode"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:opportunity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "OpportunityId"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:resource_snapshot_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotJobIdentifier, name: "ResourceSnapshotJobId"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "EngagementId"))
+    ListOpportunityFromEngagementTaskSummary.add_member(:context_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextIdentifier, name: "ContextId"))
+    ListOpportunityFromEngagementTaskSummary.type = Types::ListOpportunityFromEngagementTaskSummary
+    ListOpportunityFromEngagementTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}}))
+    ListOpportunityFromEngagementTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#pattern" => "^(?s).{1,2048}$"}))
+    ListOpportunityFromEngagementTasksRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTasksSortBase, name: "Sort"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
+    ListOpportunityFromEngagementTasksRequest.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatuses, name: "TaskStatus"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:task_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskIdentifiers, name: "TaskIdentifier"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifiers, name: "OpportunityIdentifier"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:engagement_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifiers, name: "EngagementIdentifier"))
+    ListOpportunityFromEngagementTasksRequest.add_member(:context_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextIdentifiers, name: "ContextIdentifier"))
+    ListOpportunityFromEngagementTasksRequest.type = Types::ListOpportunityFromEngagementTasksRequest
+    ListOpportunityFromEngagementTasksResponse.add_member(:task_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOpportunityFromEngagementTaskSummaries, name: "TaskSummaries"))
+    ListOpportunityFromEngagementTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
+    ListOpportunityFromEngagementTasksResponse.type = Types::ListOpportunityFromEngagementTasksResponse
+    ListProspectingFromEngagementTasksRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
+    ListProspectingFromEngagementTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults"))
+    ListProspectingFromEngagementTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
+    ListProspectingFromEngagementTasksRequest.add_member(:task_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskIdentifierList, name: "TaskIdentifier"))
+    ListProspectingFromEngagementTasksRequest.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskNameList, name: "TaskName"))
+    ListProspectingFromEngagementTasksRequest.add_member(:start_after, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartAfter"))
+    ListProspectingFromEngagementTasksRequest.add_member(:start_before, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartBefore"))
+    ListProspectingFromEngagementTasksRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingFromEngagementTaskSort, name: "Sort"))
+    ListProspectingFromEngagementTasksRequest.type = Types::ListProspectingFromEngagementTasksRequest
+    ListProspectingFromEngagementTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken", traits: {"smithy.api#pattern" => "^(?s).{1,2048}$"}))
+    ListProspectingFromEngagementTasksResponse.add_member(:task_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskSummaryList, name: "TaskSummaries", traits: {"smithy.api#required" => {}}))
+    ListProspectingFromEngagementTasksResponse.type = Types::ListProspectingFromEngagementTasksResponse
     ListResourceSnapshotJobsRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     ListResourceSnapshotJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: PageSize, name: "MaxResults", traits: {"smithy.api#default" => 100, "smithy.api#range" => {"min" => 1, "max" => 1000}}))
     ListResourceSnapshotJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
@@ -1383,6 +1701,7 @@ module Aws::PartnerCentralSelling
     ListSolutionsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterStatus, name: "Status", traits: {"smithy.api#length" => {"max" => 10}}))
     ListSolutionsRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionIdentifiers, name: "Identifier", traits: {"smithy.api#length" => {"max" => 20}}))
     ListSolutionsRequest.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "Category", traits: {"smithy.api#length" => {"max" => 10}}))
+    ListSolutionsRequest.add_member(:aws_marketplace_solution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceSolutionArnList, name: "AwsMarketplaceSolutionArn", traits: {"smithy.api#length" => {"max" => 10}}))
     ListSolutionsRequest.type = Types::ListSolutionsRequest
     ListSolutionsResponse.add_member(:solution_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionList, name: "SolutionSummaries", traits: {"smithy.api#required" => {}}))
     ListSolutionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "NextToken"))
@@ -1424,12 +1743,17 @@ module Aws::PartnerCentralSelling
     OpportunityInvitationPayload.type = Types::OpportunityInvitationPayload
     OpportunityOrigin.add_member(:aws_referral, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_REFERRAL", traits: {"smithy.api#enumValue" => "AWS Referral"}))
     OpportunityOrigin.add_member(:partner_referral, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTNER_REFERRAL", traits: {"smithy.api#enumValue" => "Partner Referral"}))
+    OpportunityQuality.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "Score", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}}))
+    OpportunityQuality.add_member(:trend, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Trend"))
+    OpportunityQuality.type = Types::OpportunityQuality
     OpportunitySort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder", traits: {"smithy.api#required" => {}}))
     OpportunitySort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunitySortName, name: "SortBy", traits: {"smithy.api#required" => {}}))
     OpportunitySort.type = Types::OpportunitySort
     OpportunitySortName.add_member(:last_modifieddate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAST_MODIFIEDDATE", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
     OpportunitySortName.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDENTIFIER", traits: {"smithy.api#enumValue" => "Identifier"}))
     OpportunitySortName.add_member(:customer_company_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_COMPANY_NAME", traits: {"smithy.api#enumValue" => "CustomerCompanyName"}))
+    OpportunitySortName.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED_DATE", traits: {"smithy.api#enumValue" => "CreatedDate"}))
+    OpportunitySortName.add_member(:target_close_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_CLOSE_DATE", traits: {"smithy.api#enumValue" => "TargetCloseDate"}))
     OpportunitySummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunitySummary, name: "member"))
     OpportunitySummary.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     OpportunitySummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "Id"))
@@ -1457,6 +1781,7 @@ module Aws::PartnerCentralSelling
     ParticipantType.add_member(:receiver, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECEIVER", traits: {"smithy.api#enumValue" => "RECEIVER"}))
     PartnerOpportunityTeamMembersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Contact, name: "member"))
     Payload.add_member(:opportunity_invitation, Types::Payload::OpportunityInvitation, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityInvitationPayload, name: "OpportunityInvitation"))
+    Payload.add_member(:lead_invitation, Types::Payload::LeadInvitation, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadInvitationPayload, name: "LeadInvitation"))
     Payload.add_member(:unknown, Types::Payload::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Payload.type = Types::Payload
     PaymentFrequency.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHLY", traits: {"smithy.api#enumValue" => "Monthly"}))
@@ -1475,31 +1800,82 @@ module Aws::PartnerCentralSelling
     ProfileNextStepsHistory.type = Types::ProfileNextStepsHistory
     Project.add_member(:delivery_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryModels, name: "DeliveryModels"))
     Project.add_member(:expected_customer_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedCustomerSpendList, name: "ExpectedCustomerSpend"))
-    Project.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "Title", traits: {"smithy.api#length" => {"max" => 255}}))
+    Project.add_member(:expected_contract_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedContractDuration, name: "ExpectedContractDuration"))
+    Project.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "Title", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
     Project.add_member(:apn_programs, ::Smithy::Schema::Shapes::MemberShape.new(target: ApnPrograms, name: "ApnPrograms"))
-    Project.add_member(:customer_business_problem, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "CustomerBusinessProblem", traits: {"smithy.api#length" => {"min" => 20, "max" => 2000}}))
+    Project.add_member(:customer_business_problem, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "CustomerBusinessProblem", traits: {"smithy.api#pattern" => "^(?s).{20,2000}$"}))
     Project.add_member(:customer_use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CustomerUseCase"))
     Project.add_member(:related_opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "RelatedOpportunityIdentifier"))
     Project.add_member(:sales_activities, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesActivities, name: "SalesActivities"))
     Project.add_member(:competitor_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CompetitorName, name: "CompetitorName"))
-    Project.add_member(:other_competitor_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OtherCompetitorNames", traits: {"smithy.api#length" => {"max" => 255}}))
-    Project.add_member(:other_solution_description, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "OtherSolutionDescription", traits: {"smithy.api#length" => {"max" => 255}}))
-    Project.add_member(:additional_comments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AdditionalComments", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}}))
+    Project.add_member(:other_competitor_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "OtherCompetitorNames", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
+    Project.add_member(:other_solution_description, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "OtherSolutionDescription", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
+    Project.add_member(:additional_comments, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AdditionalComments", traits: {"smithy.api#pattern" => "^(?s).{1,255}$"}))
+    Project.add_member(:aws_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsPartition, name: "AwsPartition"))
     Project.type = Types::Project
     ProjectDetails.add_member(:business_problem, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementCustomerBusinessProblem, name: "BusinessProblem", traits: {"smithy.api#required" => {}}))
-    ProjectDetails.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Title", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#required" => {}}))
+    ProjectDetails.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Title", traits: {"smithy.api#pattern" => "^(?s).{1,255}$", "smithy.api#required" => {}}))
     ProjectDetails.add_member(:target_completion_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "TargetCompletionDate", traits: {"smithy.api#required" => {}}))
     ProjectDetails.add_member(:expected_customer_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedCustomerSpendList, name: "ExpectedCustomerSpend", traits: {"smithy.api#required" => {}}))
     ProjectDetails.type = Types::ProjectDetails
     ProjectSummary.add_member(:delivery_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryModels, name: "DeliveryModels"))
     ProjectSummary.add_member(:expected_customer_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedCustomerSpendList, name: "ExpectedCustomerSpend"))
+    ProjectSummary.add_member(:expected_contract_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedContractDuration, name: "ExpectedContractDuration"))
     ProjectSummary.type = Types::ProjectSummary
     ProjectView.add_member(:delivery_models, ::Smithy::Schema::Shapes::MemberShape.new(target: DeliveryModels, name: "DeliveryModels"))
     ProjectView.add_member(:expected_customer_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedCustomerSpendList, name: "ExpectedCustomerSpend"))
+    ProjectView.add_member(:expected_contract_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedContractDuration, name: "ExpectedContractDuration"))
     ProjectView.add_member(:customer_use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CustomerUseCase"))
     ProjectView.add_member(:sales_activities, ::Smithy::Schema::Shapes::MemberShape.new(target: SalesActivities, name: "SalesActivities"))
-    ProjectView.add_member(:other_solution_description, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "OtherSolutionDescription", traits: {"smithy.api#length" => {"max" => 255}}))
+    ProjectView.add_member(:other_solution_description, ::Smithy::Schema::Shapes::MemberShape.new(target: PiiString, name: "OtherSolutionDescription", traits: {"smithy.api#pattern" => "^(?s).{0,255}$"}))
     ProjectView.type = Types::ProjectView
+    ProspectingFromEngagementTaskSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder", traits: {"smithy.api#required" => {}}))
+    ProspectingFromEngagementTaskSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingFromEngagementTaskSortName, name: "SortBy", traits: {"smithy.api#required" => {}}))
+    ProspectingFromEngagementTaskSort.type = Types::ProspectingFromEngagementTaskSort
+    ProspectingFromEngagementTaskSortName.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "StartTime", traits: {"smithy.api#enumValue" => "StartTime"}))
+    ProspectingFromEngagementTaskSortName.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TaskName", traits: {"smithy.api#enumValue" => "TaskName"}))
+    ProspectingFromEngagementTaskSortName.add_member(:failed_engagement_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FailedEngagementCount", traits: {"smithy.api#enumValue" => "FailedEngagementCount"}))
+    ProspectingInsights.add_member(:marketplace_engagement_score, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementScoreLevel, name: "MarketplaceEngagementScore"))
+    ProspectingInsights.add_member(:solution_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SolutionScore"))
+    ProspectingInsights.add_member(:solution_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SolutionCategory"))
+    ProspectingInsights.add_member(:solution_sub_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SolutionSubCategory"))
+    ProspectingInsights.type = Types::ProspectingInsights
+    ProspectingResult.add_member(:aws, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingResultAws, name: "Aws"))
+    ProspectingResult.type = Types::ProspectingResult
+    ProspectingResultAws.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingResultCustomer, name: "Customer"))
+    ProspectingResultAws.add_member(:insights, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingInsights, name: "Insights"))
+    ProspectingResultAws.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime"))
+    ProspectingResultAws.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EndTime"))
+    ProspectingResultAws.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskIdentifier, name: "TaskId"))
+    ProspectingResultAws.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, name: "TaskArn"))
+    ProspectingResultAws.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskName, name: "TaskName"))
+    ProspectingResultAws.type = Types::ProspectingResultAws
+    ProspectingResultCustomer.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingAccountName, name: "AccountName"))
+    ProspectingResultCustomer.add_member(:geo, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingGeo, name: "Geo"))
+    ProspectingResultCustomer.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingRegion, name: "Region"))
+    ProspectingResultCustomer.add_member(:sub_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingSubRegion, name: "SubRegion"))
+    ProspectingResultCustomer.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "Country"))
+    ProspectingResultCustomer.add_member(:industry, ::Smithy::Schema::Shapes::MemberShape.new(target: Industry, name: "Industry"))
+    ProspectingResultCustomer.add_member(:sub_industry, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingSubIndustry, name: "SubIndustry"))
+    ProspectingResultCustomer.add_member(:segment, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingSegment, name: "Segment"))
+    ProspectingResultCustomer.add_member(:company_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingCompanySize, name: "CompanySize"))
+    ProspectingResultCustomer.add_member(:eligible_programs, ::Smithy::Schema::Shapes::MemberShape.new(target: EligibleProgramsList, name: "EligiblePrograms"))
+    ProspectingResultCustomer.add_member(:public_profile_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingPublicProfileSummary, name: "PublicProfileSummary"))
+    ProspectingResultCustomer.type = Types::ProspectingResultCustomer
+    ProspectingTaskStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    ProspectingTaskStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    ProspectingTaskStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    ProspectingTaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ProspectingTaskSummary.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskIdentifier, name: "TaskId", traits: {"smithy.api#required" => {}}))
+    ProspectingTaskSummary.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskArn, name: "TaskArn", traits: {"smithy.api#required" => {}}))
+    ProspectingTaskSummary.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskName, name: "TaskName", traits: {"smithy.api#required" => {}}))
+    ProspectingTaskSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime", traits: {"smithy.api#required" => {}}))
+    ProspectingTaskSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EndTime"))
+    ProspectingTaskSummary.add_member(:total_engagement_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "TotalEngagementCount", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    ProspectingTaskSummary.add_member(:completed_engagement_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "CompletedEngagementCount", traits: {"smithy.api#required" => {}}))
+    ProspectingTaskSummary.add_member(:failed_engagement_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "FailedEngagementCount", traits: {"smithy.api#required" => {}}))
+    ProspectingTaskSummary.type = Types::ProspectingTaskSummary
+    ProspectingTaskSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskSummary, name: "member"))
     PutSellingSystemSettingsRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     PutSellingSystemSettingsRequest.add_member(:resource_snapshot_job_role_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotJobRoleIdentifier, name: "ResourceSnapshotJobRoleIdentifier"))
     PutSellingSystemSettingsRequest.type = Types::PutSellingSystemSettingsRequest
@@ -1525,6 +1901,9 @@ module Aws::PartnerCentralSelling
     ReasonCode.add_member(:resource_snapshot_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_SNAPSHOT_CONFLICT", traits: {"smithy.api#enumValue" => "ResourceSnapshotConflict"}))
     ReasonCode.add_member(:service_quota_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_QUOTA_EXCEEDED", traits: {"smithy.api#enumValue" => "ServiceQuotaExceeded"}))
     ReasonCode.add_member(:request_throttled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUEST_THROTTLED", traits: {"smithy.api#enumValue" => "RequestThrottled"}))
+    ReasonCode.add_member(:context_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTEXT_NOT_FOUND", traits: {"smithy.api#enumValue" => "ContextNotFound"}))
+    ReasonCode.add_member(:customer_project_context_not_permitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED", traits: {"smithy.api#enumValue" => "CustomerProjectContextNotPermitted"}))
+    ReasonCode.add_member(:disqualified_lead_not_permitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISQUALIFIED_LEAD_NOT_PERMITTED", traits: {"smithy.api#enumValue" => "DisqualifiedLeadNotPermitted"}))
     Receiver.add_member(:account, Types::Receiver::Account, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountReceiver, name: "Account"))
     Receiver.add_member(:unknown, Types::Receiver::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Receiver.type = Types::Receiver
@@ -1538,17 +1917,30 @@ module Aws::PartnerCentralSelling
     ReceiverResponsibility.add_member(:co_sell_facilitator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CO_SELL_FACILITATOR", traits: {"smithy.api#enumValue" => "Co-Sell Facilitator"}))
     ReceiverResponsibility.add_member(:facilitator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FACILITATOR", traits: {"smithy.api#enumValue" => "Facilitator"}))
     ReceiverResponsibilityList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReceiverResponsibility, name: "member"))
+    Recommendation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Type", traits: {"smithy.api#required" => {}}))
+    Recommendation.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Details", traits: {"smithy.api#required" => {}}))
+    Recommendation.add_member(:attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationAttributeMap, name: "Attributes"))
+    Recommendation.type = Types::Recommendation
+    RecommendationAttributeMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
+    RecommendationAttributeMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
+    RecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Recommendation, name: "member"))
     RejectEngagementInvitationRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     RejectEngagementInvitationRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationArnOrIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     RejectEngagementInvitationRequest.add_member(:rejection_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: RejectionReasonString, name: "RejectionReason"))
     RejectEngagementInvitationRequest.type = Types::RejectEngagementInvitationRequest
     RelatedEntityIdentifiers.add_member(:aws_marketplace_offers, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceOfferIdentifiers, name: "AwsMarketplaceOffers"))
+    RelatedEntityIdentifiers.add_member(:aws_marketplace_offer_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceOfferSetIdentifiers, name: "AwsMarketplaceOfferSets"))
     RelatedEntityIdentifiers.add_member(:solutions, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionIdentifiers, name: "Solutions"))
     RelatedEntityIdentifiers.add_member(:aws_products, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsProductIdentifiers, name: "AwsProducts"))
+    RelatedEntityIdentifiers.add_member(:aws_marketplace_solutions, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceSolutionIdentifiers, name: "AwsMarketplaceSolutions"))
+    RelatedEntityIdentifiers.add_member(:aws_marketplace_products, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceProductIdentifiers, name: "AwsMarketplaceProducts"))
     RelatedEntityIdentifiers.type = Types::RelatedEntityIdentifiers
     RelatedEntityType.add_member(:solutions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOLUTIONS", traits: {"smithy.api#enumValue" => "Solutions"}))
     RelatedEntityType.add_member(:aws_products, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_PRODUCTS", traits: {"smithy.api#enumValue" => "AwsProducts"}))
     RelatedEntityType.add_member(:aws_marketplace_offers, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MARKETPLACE_OFFERS", traits: {"smithy.api#enumValue" => "AwsMarketplaceOffers"}))
+    RelatedEntityType.add_member(:aws_marketplace_offer_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MARKETPLACE_OFFER_SETS", traits: {"smithy.api#enumValue" => "AwsMarketplaceOfferSets"}))
+    RelatedEntityType.add_member(:aws_marketplace_solutions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MARKETPLACE_SOLUTIONS", traits: {"smithy.api#enumValue" => "AwsMarketplaceSolutions"}))
+    RelatedEntityType.add_member(:aws_marketplace_products, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_MARKETPLACE_PRODUCTS", traits: {"smithy.api#enumValue" => "AwsMarketplaceProducts"}))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceSnapshotJobStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "Running"}))
@@ -1560,6 +1952,7 @@ module Aws::PartnerCentralSelling
     ResourceSnapshotJobSummary.type = Types::ResourceSnapshotJobSummary
     ResourceSnapshotJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotJobSummary, name: "member"))
     ResourceSnapshotPayload.add_member(:opportunity_summary, Types::ResourceSnapshotPayload::OpportunitySummary, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunitySummaryView, name: "OpportunitySummary"))
+    ResourceSnapshotPayload.add_member(:aws_opportunity_summary_full_view, Types::ResourceSnapshotPayload::AwsOpportunitySummaryFullView, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsOpportunitySummaryFullView, name: "AwsOpportunitySummaryFullView"))
     ResourceSnapshotPayload.add_member(:unknown, Types::ResourceSnapshotPayload::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ResourceSnapshotPayload.type = Types::ResourceSnapshotPayload
     ResourceSnapshotSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotArn, name: "Arn"))
@@ -1612,6 +2005,7 @@ module Aws::PartnerCentralSelling
     SolutionBase.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     SolutionBase.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Category", traits: {"smithy.api#required" => {}}))
     SolutionBase.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreatedDate", traits: {"smithy.api#required" => {}}))
+    SolutionBase.add_member(:aws_marketplace_solution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsMarketplaceSolutionArn, name: "AwsMarketplaceSolutionArn"))
     SolutionBase.type = Types::SolutionBase
     SolutionIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionIdentifier, name: "member"))
     SolutionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionBase, name: "member"))
@@ -1640,7 +2034,7 @@ module Aws::PartnerCentralSelling
     Stage.add_member(:launched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAUNCHED", traits: {"smithy.api#enumValue" => "Launched"}))
     Stage.add_member(:closed_lost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOSED_LOST", traits: {"smithy.api#enumValue" => "Closed Lost"}))
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
-    StartEngagementByAcceptingInvitationTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 1}, "smithy.api#required" => {}}))
+    StartEngagementByAcceptingInvitationTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationArnOrIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     StartEngagementByAcceptingInvitationTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     StartEngagementByAcceptingInvitationTaskRequest.type = Types::StartEngagementByAcceptingInvitationTaskRequest
@@ -1655,7 +2049,7 @@ module Aws::PartnerCentralSelling
     StartEngagementByAcceptingInvitationTaskResponse.add_member(:engagement_invitation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationIdentifier, name: "EngagementInvitationId"))
     StartEngagementByAcceptingInvitationTaskResponse.type = Types::StartEngagementByAcceptingInvitationTaskResponse
     StartEngagementFromOpportunityTaskRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
-    StartEngagementFromOpportunityTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"min" => 1}, "smithy.api#required" => {}}))
+    StartEngagementFromOpportunityTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
     StartEngagementFromOpportunityTaskRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
     StartEngagementFromOpportunityTaskRequest.add_member(:aws_submission, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsSubmission, name: "AwsSubmission", traits: {"smithy.api#required" => {}}))
     StartEngagementFromOpportunityTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
@@ -1671,6 +2065,37 @@ module Aws::PartnerCentralSelling
     StartEngagementFromOpportunityTaskResponse.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "EngagementId"))
     StartEngagementFromOpportunityTaskResponse.add_member(:engagement_invitation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementInvitationIdentifier, name: "EngagementInvitationId"))
     StartEngagementFromOpportunityTaskResponse.type = Types::StartEngagementFromOpportunityTaskResponse
+    StartOpportunityFromEngagementTaskRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
+    StartOpportunityFromEngagementTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartOpportunityFromEngagementTaskRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementArnOrIdentifier, name: "Identifier", traits: {"smithy.api#required" => {}}))
+    StartOpportunityFromEngagementTaskRequest.add_member(:context_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextIdentifier, name: "ContextIdentifier", traits: {"smithy.api#required" => {}}))
+    StartOpportunityFromEngagementTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    StartOpportunityFromEngagementTaskRequest.type = Types::StartOpportunityFromEngagementTaskRequest
+    StartOpportunityFromEngagementTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskIdentifier, name: "TaskId"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArn, name: "TaskArn"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskStatus, name: "TaskStatus"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasonCode, name: "ReasonCode"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:opportunity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityIdentifier, name: "OpportunityId"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:resource_snapshot_job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotJobIdentifier, name: "ResourceSnapshotJobId"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "EngagementId"))
+    StartOpportunityFromEngagementTaskResponse.add_member(:context_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ContextIdentifier, name: "ContextId"))
+    StartOpportunityFromEngagementTaskResponse.type = Types::StartOpportunityFromEngagementTaskResponse
+    StartProspectingFromEngagementTaskRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
+    StartProspectingFromEngagementTaskRequest.add_member(:identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifierList, name: "Identifiers", traits: {"smithy.api#required" => {}}))
+    StartProspectingFromEngagementTaskRequest.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskName, name: "TaskName", traits: {"smithy.api#required" => {}}))
+    StartProspectingFromEngagementTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartProspectingFromEngagementTaskRequest.type = Types::StartProspectingFromEngagementTaskRequest
+    StartProspectingFromEngagementTaskResponse.add_member(:identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifierList, name: "Identifiers", traits: {"smithy.api#required" => {}}))
+    StartProspectingFromEngagementTaskResponse.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskName, name: "TaskName", traits: {"smithy.api#required" => {}}))
+    StartProspectingFromEngagementTaskResponse.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
+    StartProspectingFromEngagementTaskResponse.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "ReasonCode"))
+    StartProspectingFromEngagementTaskResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "StartTime", traits: {"smithy.api#required" => {}}))
+    StartProspectingFromEngagementTaskResponse.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskIdentifier, name: "TaskId"))
+    StartProspectingFromEngagementTaskResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskArn, name: "TaskArn"))
+    StartProspectingFromEngagementTaskResponse.add_member(:task_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskStatus, name: "TaskStatus", traits: {"smithy.api#required" => {}}))
+    StartProspectingFromEngagementTaskResponse.type = Types::StartProspectingFromEngagementTaskResponse
     StartResourceSnapshotJobRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     StartResourceSnapshotJobRequest.add_member(:resource_snapshot_job_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSnapshotJobIdentifier, name: "ResourceSnapshotJobIdentifier", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Identifier"}))
     StartResourceSnapshotJobRequest.type = Types::StartResourceSnapshotJobRequest
@@ -1692,7 +2117,12 @@ module Aws::PartnerCentralSelling
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
     TagResourceResponse.type = Types::TagResourceResponse
+    TargetCloseDateFilter.add_member(:after_target_close_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "AfterTargetCloseDate"))
+    TargetCloseDateFilter.add_member(:before_target_close_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Date, name: "BeforeTargetCloseDate"))
+    TargetCloseDateFilter.type = Types::TargetCloseDateFilter
+    TaskIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingTaskIdentifier, name: "member"))
     TaskIdentifiers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskArnOrIdentifier, name: "member"))
+    TaskNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskName, name: "member"))
     TaskStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
     TaskStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
     TaskStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
@@ -1703,10 +2133,32 @@ module Aws::PartnerCentralSelling
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
+    UpdateEngagementContextPayload.add_member(:lead, Types::UpdateEngagementContextPayload::Lead, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateLeadContext, name: "Lead"))
+    UpdateEngagementContextPayload.add_member(:customer_project, Types::UpdateEngagementContextPayload::CustomerProject, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerProjectsContext, name: "CustomerProject"))
+    UpdateEngagementContextPayload.add_member(:prospecting_result, Types::UpdateEngagementContextPayload::ProspectingResult, ::Smithy::Schema::Shapes::MemberShape.new(target: ProspectingResult, name: "ProspectingResult"))
+    UpdateEngagementContextPayload.add_member(:unknown, Types::UpdateEngagementContextPayload::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    UpdateEngagementContextPayload.type = Types::UpdateEngagementContextPayload
+    UpdateEngagementContextRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextRequest.add_member(:engagement_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementArnOrIdentifier, name: "EngagementIdentifier", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextRequest.add_member(:context_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextIdentifier, name: "ContextIdentifier", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextRequest.add_member(:engagement_last_modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EngagementLastModifiedAt", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextType, name: "Type", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextRequest.add_member(:payload, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateEngagementContextPayload, name: "Payload", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextRequest.type = Types::UpdateEngagementContextRequest
+    UpdateEngagementContextResponse.add_member(:engagement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementIdentifier, name: "EngagementId", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextResponse.add_member(:engagement_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementArn, name: "EngagementArn", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextResponse.add_member(:engagement_last_modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "EngagementLastModifiedAt", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextResponse.add_member(:context_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EngagementContextIdentifier, name: "ContextId", traits: {"smithy.api#required" => {}}))
+    UpdateEngagementContextResponse.type = Types::UpdateEngagementContextResponse
+    UpdateLeadContext.add_member(:qualification_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadQualificationStatus, name: "QualificationStatus", traits: {"smithy.api#default" => "Unqualified"}))
+    UpdateLeadContext.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadCustomer, name: "Customer", traits: {"smithy.api#required" => {}}))
+    UpdateLeadContext.add_member(:interaction, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadInteraction, name: "Interaction"))
+    UpdateLeadContext.add_member(:insights, ::Smithy::Schema::Shapes::MemberShape.new(target: LeadInsights, name: "Insights"))
+    UpdateLeadContext.type = Types::UpdateLeadContext
     UpdateOpportunityRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: CatalogIdentifier, name: "Catalog", traits: {"smithy.api#required" => {}}))
     UpdateOpportunityRequest.add_member(:primary_needs_from_aws, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryNeedsFromAws, name: "PrimaryNeedsFromAws"))
     UpdateOpportunityRequest.add_member(:national_security, ::Smithy::Schema::Shapes::MemberShape.new(target: NationalSecurity, name: "NationalSecurity"))
-    UpdateOpportunityRequest.add_member(:partner_opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PartnerOpportunityIdentifier", traits: {"smithy.api#length" => {"max" => 64}}))
+    UpdateOpportunityRequest.add_member(:partner_opportunity_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PartnerOpportunityIdentifier", traits: {"smithy.api#pattern" => "^(?s).{0,64}$"}))
     UpdateOpportunityRequest.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: Customer, name: "Customer"))
     UpdateOpportunityRequest.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: Project, name: "Project"))
     UpdateOpportunityRequest.add_member(:opportunity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpportunityType, name: "OpportunityType"))
@@ -1732,6 +2184,7 @@ module Aws::PartnerCentralSelling
     ValidationExceptionErrorCode.add_member(:invalid_enum_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_ENUM_VALUE", traits: {"smithy.api#enumValue" => "INVALID_ENUM_VALUE"}))
     ValidationExceptionErrorCode.add_member(:invalid_string_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_STRING_FORMAT", traits: {"smithy.api#enumValue" => "INVALID_STRING_FORMAT"}))
     ValidationExceptionErrorCode.add_member(:invalid_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_VALUE", traits: {"smithy.api#enumValue" => "INVALID_VALUE"}))
+    ValidationExceptionErrorCode.add_member(:not_enough_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_ENOUGH_VALUES", traits: {"smithy.api#enumValue" => "NOT_ENOUGH_VALUES"}))
     ValidationExceptionErrorCode.add_member(:too_many_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOO_MANY_VALUES", traits: {"smithy.api#enumValue" => "TOO_MANY_VALUES"}))
     ValidationExceptionErrorCode.add_member(:invalid_resource_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_RESOURCE_STATE", traits: {"smithy.api#enumValue" => "INVALID_RESOURCE_STATE"}))
     ValidationExceptionErrorCode.add_member(:duplicate_key_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUPLICATE_KEY_VALUE", traits: {"smithy.api#enumValue" => "DUPLICATE_KEY_VALUE"}))
@@ -1747,7 +2200,7 @@ module Aws::PartnerCentralSelling
       service.id = "com.amazonaws.partnercentralselling#AWSPartnerCentralSelling"
       service.name = "AWSPartnerCentralSelling"
       service.version = "2022-07-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "PartnerCentral Selling", "endpointPrefix" => "partnercentral-selling", "arnNamespace" => "partnercentral", "cloudTrailEventSource" => "partnercentral-selling.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "partnercentral-selling"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.iam#defineConditionKeys" => {"partnercentral:RelatedEntityType" => {"type" => "String", "relativeDocumentation" => "page.html#RelatedEntityType", "documentation" => "Filters access by entity types for Opportunity association. Accepted values: [Solutions, AwsProducts, AwsMarketplaceOffers]"}, "partnercentral:Catalog" => {"type" => "String", "relativeDocumentation" => "page.html#Catalog", "documentation" => "Filters access by a specific Catalog. Accepted values: [AWS, Sandbox]"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tags that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tags associated with the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the tag keys that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Partner Central Selling API"}
+      service.traits = {"aws.api#service" => {"sdkId" => "PartnerCentral Selling", "endpointPrefix" => "partnercentral-selling", "arnNamespace" => "partnercentral", "cloudTrailEventSource" => "partnercentral-selling.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "partnercentral-selling"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.iam#defineConditionKeys" => {"partnercentral:RelatedEntityType" => {"type" => "String", "relativeDocumentation" => "page.html#RelatedEntityType", "documentation" => "Filters access by entity types for Opportunity association. Accepted values: [Solutions, AwsProducts, AwsMarketplaceOffers]"}, "partnercentral:Catalog" => {"type" => "String", "relativeDocumentation" => "page.html#Catalog", "documentation" => "Filters access by a specific Catalog. Accepted values: [AWS, Sandbox]"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tags that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the tags associated with the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the tag keys that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Partner Central Selling API", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://partnercentral-selling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://partnercentral-selling.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 6, "nodes" => "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"}}
       service.add_operation(:accept_engagement_invitation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.partnercentralselling#AcceptEngagementInvitation"
         operation.name = "AcceptEngagementInvitation"
@@ -1792,11 +2245,26 @@ module Aws::PartnerCentralSelling
         operation.output = CreateEngagementResponse
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to creating engagements in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/CreateEngagement", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_engagement_context, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.partnercentralselling#CreateEngagementContext"
+        operation.name = "CreateEngagementContext"
+        operation.input = CreateEngagementContextRequest
+        operation.output = CreateEngagementContextResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to create engagement contexts in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/CreateEngagementContext", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_engagement_invitation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.partnercentralselling#CreateEngagementInvitation"
@@ -1805,6 +2273,7 @@ module Aws::PartnerCentralSelling
         operation.output = CreateEngagementInvitationResponse
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
@@ -1831,6 +2300,7 @@ module Aws::PartnerCentralSelling
         operation.output = CreateResourceSnapshotResponse
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
@@ -1844,6 +2314,7 @@ module Aws::PartnerCentralSelling
         operation.output = CreateResourceSnapshotJobResponse
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
@@ -1857,6 +2328,7 @@ module Aws::PartnerCentralSelling
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -1892,6 +2364,7 @@ module Aws::PartnerCentralSelling
         operation.input = GetEngagementRequest
         operation.output = GetEngagementResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -1921,12 +2394,25 @@ module Aws::PartnerCentralSelling
         operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve details of Opportunities on AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/GetOpportunity", "code" => 200}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_prospecting_from_engagement_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.partnercentralselling#GetProspectingFromEngagementTask"
+        operation.name = "GetProspectingFromEngagementTask"
+        operation.input = GetProspectingFromEngagementTaskRequest
+        operation.output = GetProspectingFromEngagementTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to get detailed results for a prospecting task in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/GetProspectingFromEngagementTask", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_resource_snapshot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.partnercentralselling#GetResourceSnapshot"
         operation.name = "GetResourceSnapshot"
         operation.input = GetResourceSnapshotRequest
         operation.output = GetResourceSnapshotResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -1938,6 +2424,7 @@ module Aws::PartnerCentralSelling
         operation.input = GetResourceSnapshotJobRequest
         operation.output = GetResourceSnapshotJobResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -1949,10 +2436,11 @@ module Aws::PartnerCentralSelling
         operation.input = GetSellingSystemSettingsRequest
         operation.output = GetSellingSystemSettingsResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to retrieving system settings settings in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/GetSellingSystemSettings", "code" => 200}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to retrieving selling system settings in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/GetSellingSystemSettings", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:list_engagement_by_accepting_invitation_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.partnercentralselling#ListEngagementByAcceptingInvitationTasks"
@@ -1960,6 +2448,7 @@ module Aws::PartnerCentralSelling
         operation.input = ListEngagementByAcceptingInvitationTasksRequest
         operation.output = ListEngagementByAcceptingInvitationTasksResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -1972,6 +2461,7 @@ module Aws::PartnerCentralSelling
         operation.input = ListEngagementFromOpportunityTasksRequest
         operation.output = ListEngagementFromOpportunityTasksResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -1997,6 +2487,7 @@ module Aws::PartnerCentralSelling
         operation.input = ListEngagementMembersRequest
         operation.output = ListEngagementMembersResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -2009,6 +2500,7 @@ module Aws::PartnerCentralSelling
         operation.input = ListEngagementResourceAssociationsRequest
         operation.output = ListEngagementResourceAssociationsResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -2021,6 +2513,7 @@ module Aws::PartnerCentralSelling
         operation.input = ListEngagementsRequest
         operation.output = ListEngagementsResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -2040,12 +2533,38 @@ module Aws::PartnerCentralSelling
         operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to list Opportunities on AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/ListOpportunities", "code" => 200}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListOpportunitiesError", "params" => {"Catalog" => nil}, "expect" => {"failure" => {"errorId" => "com.amazonaws.partnercentralselling#ValidationException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
         operation[:paginator] = Paginators::ListOpportunities.new
       end)
+      service.add_operation(:list_opportunity_from_engagement_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.partnercentralselling#ListOpportunityFromEngagementTasks"
+        operation.name = "ListOpportunityFromEngagementTasks"
+        operation.input = ListOpportunityFromEngagementTasksRequest
+        operation.output = ListOpportunityFromEngagementTasksResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to list opportunity from engagement tasks in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/ListOpportunityFromEngagementTasks", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListOpportunityFromEngagementTasks.new
+      end)
+      service.add_operation(:list_prospecting_from_engagement_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.partnercentralselling#ListProspectingFromEngagementTasks"
+        operation.name = "ListProspectingFromEngagementTasks"
+        operation.input = ListProspectingFromEngagementTasksRequest
+        operation.output = ListProspectingFromEngagementTasksResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to list prospecting from engagement tasks in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/ListProspectingFromEngagementTasks", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListProspectingFromEngagementTasks.new
+      end)
       service.add_operation(:list_resource_snapshot_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.partnercentralselling#ListResourceSnapshotJobs"
         operation.name = "ListResourceSnapshotJobs"
         operation.input = ListResourceSnapshotJobsRequest
         operation.output = ListResourceSnapshotJobsResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -2058,6 +2577,7 @@ module Aws::PartnerCentralSelling
         operation.input = ListResourceSnapshotsRequest
         operation.output = ListResourceSnapshotsResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -2072,6 +2592,7 @@ module Aws::PartnerCentralSelling
         operation.errors << AccessDeniedException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to list Solutions on AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/ListSolutions", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSolutions.new
@@ -2094,10 +2615,11 @@ module Aws::PartnerCentralSelling
         operation.input = PutSellingSystemSettingsRequest
         operation.output = PutSellingSystemSettingsResponse
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to put system settings settings in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/PutSellingSystemSettings", "code" => 200}, "smithy.api#idempotent" => {}}
+        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to put selling system settings in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/PutSellingSystemSettings", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:reject_engagement_invitation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.partnercentralselling#RejectEngagementInvitation"
@@ -2140,12 +2662,40 @@ module Aws::PartnerCentralSelling
         operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog", "aws:RequestTag/${TagKey}", "aws:ResourceTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"requiredActions" => ["partnercentral:CreateEngagement", "partnercentral:SubmitOpportunity", "partnercentral:GetOpportunity", "partnercentral:CreateResourceSnapshotJob", "partnercentral:CreateEngagementInvitation", "partnercentral:StartResourceSnapshotJob"], "documentation" => "Grants permission to initiate tasks that start Engagements from Opportunities on AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/StartEngagementFromOpportunityTask", "code" => 200}}
       end)
+      service.add_operation(:start_opportunity_from_engagement_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.partnercentralselling#StartOpportunityFromEngagementTask"
+        operation.name = "StartOpportunityFromEngagementTask"
+        operation.input = StartOpportunityFromEngagementTaskRequest
+        operation.output = StartOpportunityFromEngagementTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog", "aws:RequestTag/${TagKey}", "aws:ResourceTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"requiredActions" => ["partnercentral:GetEngagement", "partnercentral:CreateEngagementContext", "partnercentral:CreateOpportunity", "partnercentral:CreateResourceSnapshot", "partnercentral:CreateResourceSnapshotJob", "partnercentral:StartResourceSnapshotJob"], "documentation" => "Grants permission to initiate tasks that start Opportunities from Engagements on AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/StartOpportunityFromEngagementTask", "code" => 200}}
+      end)
+      service.add_operation(:start_prospecting_from_engagement_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.partnercentralselling#StartProspectingFromEngagementTask"
+        operation.name = "StartProspectingFromEngagementTask"
+        operation.input = StartProspectingFromEngagementTaskRequest
+        operation.output = StartProspectingFromEngagementTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to start prospecting from engagement tasks in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/StartProspectingFromEngagementTask", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:start_resource_snapshot_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.partnercentralselling#StartResourceSnapshotJob"
         operation.name = "StartResourceSnapshotJob"
         operation.input = StartResourceSnapshotJobRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -2157,6 +2707,7 @@ module Aws::PartnerCentralSelling
         operation.input = StopResourceSnapshotJobRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -2199,6 +2750,20 @@ module Aws::PartnerCentralSelling
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog", "aws:ResourceTag/${TagKey}", "aws:TagKeys"], "aws.iam#iamAction" => {"documentation" => "Grants permission to remove tags from a resource. Supported resource: ResourceSnapshotJob"}, "smithy.api#http" => {"method" => "POST", "uri" => "/UntagResource", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_engagement_context, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.partnercentralselling#UpdateEngagementContext"
+        operation.name = "UpdateEngagementContext"
+        operation.input = UpdateEngagementContextRequest
+        operation.output = UpdateEngagementContextResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#conditionKeys" => ["partnercentral:Catalog"], "aws.iam#iamAction" => {"documentation" => "Grants permission to update engagement contexts in AWS Partner Central"}, "smithy.api#http" => {"method" => "POST", "uri" => "/UpdateEngagementContext", "code" => 200}}
       end)
       service.add_operation(:update_opportunity, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.partnercentralselling#UpdateOpportunity"

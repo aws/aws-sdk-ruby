@@ -44,6 +44,150 @@ module Aws::BedrockAgentRuntime
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AgenticRetrieveStreamResponse
+      include Smithy::Client::_Response[Types::AgenticRetrieveStreamResponse]
+      def stream: () -> Types::AgenticRetrieveStreamResponseOutput?
+    end
+    def agentic_retrieve_stream: (
+      ?messages: Array[
+        {
+          content: {
+            text: String
+          },
+          role: String
+        }
+      ],
+      ?retrievers: Array[
+        {
+          description: String,
+          configuration: {
+            knowledge_base: {
+              knowledge_base_id: String,
+              retrieval_overrides: {
+                filter: {
+                  equals: {
+                    key: String,
+                    value: Smithy::Schema::document
+                  },
+                  not_equals: untyped,
+                  greater_than: untyped,
+                  greater_than_or_equals: untyped,
+                  less_than: untyped,
+                  less_than_or_equals: untyped,
+                  in: untyped,
+                  not_in: untyped,
+                  starts_with: untyped,
+                  list_contains: untyped,
+                  string_contains: untyped,
+                  and_all: Array[
+                    {
+                      equals: untyped,
+                      not_equals: untyped,
+                      greater_than: untyped,
+                      greater_than_or_equals: untyped,
+                      less_than: untyped,
+                      less_than_or_equals: untyped,
+                      in: untyped,
+                      not_in: untyped,
+                      starts_with: untyped,
+                      list_contains: untyped,
+                      string_contains: untyped,
+                      and_all: untyped,
+                      or_all: untyped
+                    }
+                  ],
+                  or_all: untyped
+                },
+                max_number_of_results: Integer
+              }
+            }
+          }
+        }
+      ],
+      ?agentic_retrieve_configuration: {
+        foundation_model_type: String,
+        foundation_model_configuration: {
+          type: String,
+          bedrock_foundation_model_configuration: {
+            model_configuration: {
+              model_arn: String
+            }
+          },
+          mantle_foundation_model_configuration: {
+            model_configuration: {
+              model_arn: untyped,
+              project_id: String
+            }
+          }
+        },
+        reranking_model_type: String,
+        reranking_configuration: {
+          type: String,
+          bedrock_reranking_configuration: {
+            model_configuration: {
+              model_arn: untyped
+            }
+          }
+        },
+        max_agent_iteration: Integer
+      },
+      ?policy_configuration: {
+        bedrock_guardrail_configuration: {
+          guardrail_id: String,
+          guardrail_version: untyped
+        }
+      },
+      ?next_token: String,
+      ?user_context: {
+        user_id: String
+      },
+      ?memory_configuration: {
+        memory_id: String,
+        session_binding: {
+          actor_id: String,
+          session_id: String
+        },
+        retrieval_configs: Array[
+          {
+            namespace: String,
+            namespace_path: untyped,
+            strategy_id: String,
+            metadata_filters: Array[
+              {
+                left: {
+                  metadata_key: String
+                },
+                operator: String,
+                right: {
+                  metadata_value: {
+                    string_value: String,
+                    number_value: Float,
+                    string_list_value: Array[String],
+                    date_time_value: Time
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        persistence_mode: String
+      },
+      ?generate_response: bool
+    ) -> _AgenticRetrieveStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AgenticRetrieveStreamResponse
+
+    interface _CheckIngestedDocumentAclResponse
+      include Smithy::Client::_Response[Types::CheckIngestedDocumentAclResponse]
+      def has_access: () -> bool?
+    end
+    def check_ingested_document_acl: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?document_id: String,
+      ?user_context: {
+        user_id: String
+      }
+    ) -> _CheckIngestedDocumentAclResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckIngestedDocumentAclResponse
+
     interface _CreateInvocationResponse
       include Smithy::Client::_Response[Types::CreateInvocationResponse]
       def session_id: () -> String?
@@ -130,6 +274,22 @@ module Aws::BedrockAgentRuntime
       ?memory_id: String
     ) -> _GetAgentMemoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentMemoryResponse
 
+    interface _GetDocumentContentResponse
+      include Smithy::Client::_Response[Types::GetDocumentContentResponse]
+      def mime_type: () -> String?
+      def presigned_url: () -> String?
+      def document_content_length: () -> Integer?
+    end
+    def get_document_content: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?document_id: String,
+      ?output_format: String,
+      ?user_context: {
+        user_id: String
+      }
+    ) -> _GetDocumentContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDocumentContentResponse
+
     interface _GetExecutionFlowSnapshotResponse
       include Smithy::Client::_Response[Types::GetExecutionFlowSnapshotResponse]
       def flow_identifier: () -> String?
@@ -161,6 +321,16 @@ module Aws::BedrockAgentRuntime
       ?flow_alias_identifier: String,
       ?execution_identifier: String
     ) -> _GetFlowExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFlowExecutionResponse
+
+    interface _GetIngestedDocumentAclResponse
+      include Smithy::Client::_Response[Types::GetIngestedDocumentAclResponse]
+      def document_acl: () -> Types::DocumentAcl?
+    end
+    def get_ingested_document_acl: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?document_id: String
+    ) -> _GetIngestedDocumentAclResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIngestedDocumentAclResponse
 
     interface _GetInvocationStepResponse
       include Smithy::Client::_Response[Types::GetInvocationStepResponse]
@@ -319,6 +489,22 @@ module Aws::BedrockAgentRuntime
                     }
                   ],
                   model_arn: String
+                }
+              },
+              managed_search_configuration: {
+                number_of_results: untyped,
+                filter: untyped,
+                reranking_model_type: String,
+                reranking_configuration: {
+                  type: String,
+                  bedrock_reranking_configuration: {
+                    model_configuration: {
+                      model_arn: untyped,
+                      additional_model_request_fields: untyped
+                    },
+                    number_of_reranked_results: untyped,
+                    metadata_configuration: untyped
+                  }
                 }
               }
             }
@@ -505,6 +691,22 @@ module Aws::BedrockAgentRuntime
                   }
                 ],
                 model_arn: String
+              }
+            },
+            managed_search_configuration: {
+              number_of_results: untyped,
+              filter: untyped,
+              reranking_model_type: String,
+              reranking_configuration: {
+                type: String,
+                bedrock_reranking_configuration: {
+                  model_configuration: {
+                    model_arn: untyped,
+                    additional_model_request_fields: untyped
+                  },
+                  number_of_reranked_results: untyped,
+                  metadata_configuration: untyped
+                }
               }
             }
           }
@@ -738,6 +940,22 @@ module Aws::BedrockAgentRuntime
                     ],
                     model_arn: String
                   }
+                },
+                managed_search_configuration: {
+                  number_of_results: untyped,
+                  filter: untyped,
+                  reranking_model_type: String,
+                  reranking_configuration: {
+                    type: String,
+                    bedrock_reranking_configuration: {
+                      model_configuration: {
+                        model_arn: untyped,
+                        additional_model_request_fields: untyped
+                      },
+                      number_of_reranked_results: untyped,
+                      metadata_configuration: untyped
+                    }
+                  }
                 }
               }
             }
@@ -947,7 +1165,12 @@ module Aws::BedrockAgentRuntime
     def retrieve: (
       ?knowledge_base_id: String,
       ?retrieval_query: {
-        text: String
+        type: String,
+        text: String,
+        image: {
+          format: String,
+          inline_content: String
+        }
       },
       ?retrieval_configuration: {
         vector_search_configuration: {
@@ -1018,13 +1241,32 @@ module Aws::BedrockAgentRuntime
             ],
             model_arn: String
           }
+        },
+        managed_search_configuration: {
+          number_of_results: untyped,
+          filter: untyped,
+          reranking_model_type: String,
+          reranking_configuration: {
+            type: String,
+            bedrock_reranking_configuration: {
+              model_configuration: {
+                model_arn: untyped,
+                additional_model_request_fields: untyped
+              },
+              number_of_reranked_results: untyped,
+              metadata_configuration: untyped
+            }
+          }
         }
       },
       ?guardrail_configuration: {
         guardrail_id: String,
         guardrail_version: untyped
       },
-      ?next_token: String
+      ?next_token: String,
+      ?user_context: {
+        user_id: String
+      }
     ) -> _RetrieveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveResponse
 
     interface _RetrieveAndGenerateResponse
@@ -1113,6 +1355,22 @@ module Aws::BedrockAgentRuntime
                 ],
                 model_arn: untyped
               }
+            },
+            managed_search_configuration: {
+              number_of_results: untyped,
+              filter: untyped,
+              reranking_model_type: String,
+              reranking_configuration: {
+                type: String,
+                bedrock_reranking_configuration: {
+                  model_configuration: {
+                    model_arn: untyped,
+                    additional_model_request_fields: untyped
+                  },
+                  number_of_reranked_results: untyped,
+                  metadata_configuration: untyped
+                }
+              }
             }
           },
           generation_configuration: {
@@ -1172,6 +1430,9 @@ module Aws::BedrockAgentRuntime
       },
       ?session_configuration: {
         kms_key_arn: String
+      },
+      ?user_context: {
+        user_id: String
       }
     ) -> _RetrieveAndGenerateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveAndGenerateResponse
 
@@ -1259,6 +1520,22 @@ module Aws::BedrockAgentRuntime
                 ],
                 model_arn: untyped
               }
+            },
+            managed_search_configuration: {
+              number_of_results: untyped,
+              filter: untyped,
+              reranking_model_type: String,
+              reranking_configuration: {
+                type: String,
+                bedrock_reranking_configuration: {
+                  model_configuration: {
+                    model_arn: untyped,
+                    additional_model_request_fields: untyped
+                  },
+                  number_of_reranked_results: untyped,
+                  metadata_configuration: untyped
+                }
+              }
             }
           },
           generation_configuration: {
@@ -1318,6 +1595,9 @@ module Aws::BedrockAgentRuntime
       },
       ?session_configuration: {
         kms_key_arn: String
+      },
+      ?user_context: {
+        user_id: String
       }
     ) -> _RetrieveAndGenerateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveAndGenerateStreamResponse
 

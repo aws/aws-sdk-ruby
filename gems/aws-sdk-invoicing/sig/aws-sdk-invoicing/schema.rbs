@@ -11,27 +11,55 @@ module Aws::Invoicing
     BasicStringWithoutSpace: StringShape
     BatchGetInvoiceProfileRequest: StructureShape
     BatchGetInvoiceProfileResponse: StructureShape
+    BillSourceAccountList: ListShape
+    BillType: EnumShape
+    BillingEntity: EnumShape
     BillingPeriod: StructureShape
+    BuyerDomain: EnumShape
+    ConflictException: StructureShape
+    ConnectionTestingMethod: EnumShape
+    Contact: StructureShape
+    Contacts: ListShape
+    CountryCode: StringShape
     CreateInvoiceUnitRequest: StructureShape
     CreateInvoiceUnitResponse: StructureShape
+    CreateProcurementPortalPreferenceRequest: StructureShape
+    CreateProcurementPortalPreferenceResponse: StructureShape
     CurrencyCode: StringShape
     CurrencyExchangeDetails: StructureShape
     DateInterval: StructureShape
     DeleteInvoiceUnitRequest: StructureShape
     DeleteInvoiceUnitResponse: StructureShape
+    DeleteProcurementPortalPreferenceRequest: StructureShape
+    DeleteProcurementPortalPreferenceResponse: StructureShape
     DescriptionString: StringShape
     DiscountsBreakdown: StructureShape
     DiscountsBreakdownAmount: StructureShape
     DiscountsBreakdownAmountList: ListShape
+    EinvoiceDeliveryAttachmentType: EnumShape
+    EinvoiceDeliveryAttachmentTypes: ListShape
+    EinvoiceDeliveryDocumentType: EnumShape
+    EinvoiceDeliveryDocumentTypes: ListShape
+    EinvoiceDeliveryPreference: StructureShape
+    EinvoiceDeliveryStatus: EnumShape
+    EmailString: StringShape
     Entity: StructureShape
+    FeatureConfigurations: StructureShape
     FeesBreakdown: StructureShape
     FeesBreakdownAmount: StructureShape
     FeesBreakdownAmountList: ListShape
     Filters: StructureShape
+    GetInvoicePDFRequest: StructureShape
+    GetInvoicePDFResponse: StructureShape
     GetInvoiceUnitRequest: StructureShape
     GetInvoiceUnitResponse: StructureShape
+    GetProcurementPortalPreferenceRequest: StructureShape
+    GetProcurementPortalPreferenceResponse: StructureShape
     InternalServerException: StructureShape
+    InvoiceConfiguration: StructureShape
     InvoiceCurrencyAmount: StructureShape
+    InvoiceFrequency: EnumShape
+    InvoicePDF: StructureShape
     InvoiceProfile: StructureShape
     InvoiceSummaries: ListShape
     InvoiceSummariesFilter: StructureShape
@@ -41,6 +69,7 @@ module Aws::Invoicing
     InvoiceType: EnumShape
     InvoiceUnit: StructureShape
     InvoiceUnitArnString: StringShape
+    InvoiceUnitArns: ListShape
     InvoiceUnitName: StringShape
     InvoiceUnitNames: ListShape
     InvoiceUnitRule: StructureShape
@@ -51,38 +80,82 @@ module Aws::Invoicing
     ListInvoiceSummariesResponse: StructureShape
     ListInvoiceUnitsRequest: StructureShape
     ListInvoiceUnitsResponse: StructureShape
+    ListProcurementPortalPreferencesRequest: StructureShape
+    ListProcurementPortalPreferencesResponse: StructureShape
+    ListProcurementPortalSuppliersRequest: StructureShape
+    ListProcurementPortalSuppliersResponse: StructureShape
+    ListProcurementPortalsRequest: StructureShape
+    ListProcurementPortalsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    MarketplacePunchOutPreference: StructureShape
+    MaxResults: IntegerShape
     MaxResultsInteger: IntegerShape
     Month: IntegerShape
     NextTokenString: StringShape
+    ProcurementPortal: StructureShape
+    ProcurementPortalEnv: EnumShape
+    ProcurementPortalIdString: StringShape
+    ProcurementPortalName: EnumShape
+    ProcurementPortalPreference: StructureShape
+    ProcurementPortalPreferenceArnString: StringShape
+    ProcurementPortalPreferenceSelector: StructureShape
+    ProcurementPortalPreferenceStatus: EnumShape
+    ProcurementPortalPreferenceSummaries: ListShape
+    ProcurementPortalPreferenceSummary: StructureShape
+    ProcurementPortalSupplier: StructureShape
+    ProcurementPortalSuppliers: ListShape
+    ProcurementPortals: ListShape
     ProfileList: ListShape
+    Protocol: EnumShape
+    PurchaseOrderDataSource: StructureShape
+    PurchaseOrderDataSourceType: EnumShape
+    PurchaseOrderDataSources: ListShape
+    PutProcurementPortalPreferenceRequest: StructureShape
+    PutProcurementPortalPreferenceResponse: StructureShape
     ReceiverAddress: StructureShape
+    ReceiverRole: EnumShape
     ResourceNotFoundException: StructureShape
     ResourceTag: StructureShape
     ResourceTagKey: StringShape
     ResourceTagKeyList: ListShape
     ResourceTagList: ListShape
     ResourceTagValue: StringShape
+    RuleAccountIdList: ListShape
+    SellerOfRecords: ListShape
+    SendProcurementPortalValidationRequest: StructureShape
+    SendProcurementPortalValidationResponse: StructureShape
     SensitiveBasicStringWithoutSpace: StringShape
     ServiceQuotaExceededException: StructureShape
     StringWithoutNewLine: StringShape
+    SupplementalDocument: StructureShape
+    SupplementalDocumentType: EnumShape
+    SupplementalDocuments: ListShape
+    SupplierDomain: EnumShape
+    SupplierIdString: StringShape
     TagResourceRequest: StructureShape
     TagResourceResponse: StructureShape
     TagrisArn: StringShape
+    TaxAuthorityStatus: EnumShape
     TaxInheritanceDisabledFlag: BooleanShape
     TaxesBreakdown: StructureShape
     TaxesBreakdownAmount: StructureShape
     TaxesBreakdownAmountList: ListShape
+    TestEnvPreference: StructureShape
+    TestEnvPreferenceInput: StructureShape
     ThrottlingException: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     UpdateInvoiceUnitRequest: StructureShape
     UpdateInvoiceUnitResponse: StructureShape
+    UpdateProcurementPortalPreferenceStatusRequest: StructureShape
+    UpdateProcurementPortalPreferenceStatusResponse: StructureShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: EnumShape
+    VerifyProcurementPortalValidationRequest: StructureShape
+    VerifyProcurementPortalValidationResponse: StructureShape
     Year: IntegerShape
 
     Invoicing: ServiceShape

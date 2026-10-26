@@ -17,6 +17,7 @@ module Aws::STS
         ?token_code: String,
         ?source_identity: String,
         ?provided_contexts: Array[Types::ProvidedContext],
+        ?minimum_session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -32,6 +33,7 @@ module Aws::STS
       attr_accessor token_code: String?
       attr_accessor source_identity: String?
       attr_accessor provided_contexts: Array[Types::ProvidedContext]?
+      attr_accessor minimum_session_token_size: Integer?
     end
 
     class AssumeRoleResponse
@@ -42,6 +44,8 @@ module Aws::STS
         ?assumed_role_user: Types::AssumedRoleUser,
         ?packed_policy_size: Integer,
         ?source_identity: String,
+        ?session_token_utilization: Integer,
+        ?session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -49,6 +53,8 @@ module Aws::STS
       attr_accessor assumed_role_user: Types::AssumedRoleUser?
       attr_accessor packed_policy_size: Integer?
       attr_accessor source_identity: String?
+      attr_accessor session_token_utilization: Integer?
+      attr_accessor session_token_size: Integer?
     end
 
     class AssumeRoleWithSAMLRequest
@@ -61,6 +67,7 @@ module Aws::STS
         ?policy_arns: Array[Types::PolicyDescriptorType],
         ?policy: String,
         ?duration_seconds: Integer,
+        ?minimum_session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -70,6 +77,7 @@ module Aws::STS
       attr_accessor policy_arns: Array[Types::PolicyDescriptorType]?
       attr_accessor policy: String?
       attr_accessor duration_seconds: Integer?
+      attr_accessor minimum_session_token_size: Integer?
     end
 
     class AssumeRoleWithSAMLResponse
@@ -85,6 +93,8 @@ module Aws::STS
         ?audience: String,
         ?name_qualifier: String,
         ?source_identity: String,
+        ?session_token_utilization: Integer,
+        ?session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -97,6 +107,8 @@ module Aws::STS
       attr_accessor audience: String?
       attr_accessor name_qualifier: String?
       attr_accessor source_identity: String?
+      attr_accessor session_token_utilization: Integer?
+      attr_accessor session_token_size: Integer?
     end
 
     class AssumeRoleWithWebIdentityRequest
@@ -110,6 +122,7 @@ module Aws::STS
         ?policy_arns: Array[Types::PolicyDescriptorType],
         ?policy: String,
         ?duration_seconds: Integer,
+        ?minimum_session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -120,6 +133,7 @@ module Aws::STS
       attr_accessor policy_arns: Array[Types::PolicyDescriptorType]?
       attr_accessor policy: String?
       attr_accessor duration_seconds: Integer?
+      attr_accessor minimum_session_token_size: Integer?
     end
 
     class AssumeRoleWithWebIdentityResponse
@@ -133,6 +147,8 @@ module Aws::STS
         ?provider: String,
         ?audience: String,
         ?source_identity: String,
+        ?session_token_utilization: Integer,
+        ?session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -143,6 +159,8 @@ module Aws::STS
       attr_accessor provider: String?
       attr_accessor audience: String?
       attr_accessor source_identity: String?
+      attr_accessor session_token_utilization: Integer?
+      attr_accessor session_token_size: Integer?
     end
 
     class AssumeRootRequest
@@ -152,12 +170,14 @@ module Aws::STS
         ?target_principal: String,
         ?task_policy_arn: Types::PolicyDescriptorType,
         ?duration_seconds: Integer,
+        ?minimum_session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor target_principal: String?
       attr_accessor task_policy_arn: Types::PolicyDescriptorType?
       attr_accessor duration_seconds: Integer?
+      attr_accessor minimum_session_token_size: Integer?
     end
 
     class AssumeRootResponse
@@ -166,11 +186,15 @@ module Aws::STS
       def initialize: (
         ?credentials: Types::Credentials,
         ?source_identity: String,
+        ?session_token_utilization: Integer,
+        ?session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor credentials: Types::Credentials?
       attr_accessor source_identity: String?
+      attr_accessor session_token_utilization: Integer?
+      attr_accessor session_token_size: Integer?
     end
 
     class AssumedRoleUser
@@ -226,6 +250,17 @@ module Aws::STS
     end
 
     class ExpiredTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ExpiredTradeInTokenException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -295,6 +330,32 @@ module Aws::STS
       attr_accessor arn: String?
     end
 
+    class GetDelegatedAccessTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trade_in_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trade_in_token: String?
+    end
+
+    class GetDelegatedAccessTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::Credentials,
+        ?packed_policy_size: Integer,
+        ?assumed_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::Credentials?
+      attr_accessor packed_policy_size: Integer?
+      attr_accessor assumed_principal: String?
+    end
+
     class GetFederationTokenRequest
       include Smithy::Schema::Structure
 
@@ -304,6 +365,7 @@ module Aws::STS
         ?policy_arns: Array[Types::PolicyDescriptorType],
         ?duration_seconds: Integer,
         ?tags: Array[Types::Tag],
+        ?minimum_session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -312,6 +374,7 @@ module Aws::STS
       attr_accessor policy_arns: Array[Types::PolicyDescriptorType]?
       attr_accessor duration_seconds: Integer?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor minimum_session_token_size: Integer?
     end
 
     class GetFederationTokenResponse
@@ -321,12 +384,16 @@ module Aws::STS
         ?credentials: Types::Credentials,
         ?federated_user: Types::FederatedUser,
         ?packed_policy_size: Integer,
+        ?session_token_utilization: Integer,
+        ?session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor credentials: Types::Credentials?
       attr_accessor federated_user: Types::FederatedUser?
       attr_accessor packed_policy_size: Integer?
+      attr_accessor session_token_utilization: Integer?
+      attr_accessor session_token_size: Integer?
     end
 
     class GetSessionTokenRequest
@@ -336,12 +403,14 @@ module Aws::STS
         ?duration_seconds: Integer,
         ?serial_number: String,
         ?token_code: String,
+        ?minimum_session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor duration_seconds: Integer?
       attr_accessor serial_number: String?
       attr_accessor token_code: String?
+      attr_accessor minimum_session_token_size: Integer?
     end
 
     class GetSessionTokenResponse
@@ -349,10 +418,44 @@ module Aws::STS
 
       def initialize: (
         ?credentials: Types::Credentials,
+        ?session_token_utilization: Integer,
+        ?session_token_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor credentials: Types::Credentials?
+      attr_accessor session_token_utilization: Integer?
+      attr_accessor session_token_size: Integer?
+    end
+
+    class GetWebIdentityTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience: Array[String],
+        ?duration_seconds: Integer,
+        ?signing_algorithm: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience: Array[String]?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor signing_algorithm: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class GetWebIdentityTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_identity_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_identity_token: String?
+      attr_accessor expiration: Time?
     end
 
     class IDPCommunicationErrorException
@@ -399,7 +502,29 @@ module Aws::STS
       attr_accessor message: String?
     end
 
+    class JWTPayloadSizeExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class MalformedPolicyDocumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OutboundWebIdentityFederationDisabledException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -446,6 +571,17 @@ module Aws::STS
     end
 
     class RegionDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SessionDurationEscalationException
       include Smithy::Schema::Structure
 
       def initialize: (

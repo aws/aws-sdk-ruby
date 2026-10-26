@@ -1,0 +1,5 @@
+  module Aws
+    module Wickr
+      VERSION: String
+    end
+  end

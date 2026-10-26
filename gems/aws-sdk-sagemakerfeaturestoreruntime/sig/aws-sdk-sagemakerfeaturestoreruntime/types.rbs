@@ -89,6 +89,75 @@ module Aws::SageMakerFeatureStoreRuntime
       attr_accessor expires_at: String?
     end
 
+    class BatchWriteRecordEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_group_name: String,
+        ?record: Array[Types::FeatureValue],
+        ?target_stores: Array[String],
+        ?ttl_duration: Types::TtlDuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_group_name: String?
+      attr_accessor record: Array[Types::FeatureValue]?
+      attr_accessor target_stores: Array[String]?
+      attr_accessor ttl_duration: Types::TtlDuration?
+    end
+
+    class BatchWriteRecordError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry: Types::BatchWriteRecordEntry,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry: Types::BatchWriteRecordEntry?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchWriteRecordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::BatchWriteRecordEntry],
+        ?ttl_duration: Types::TtlDuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::BatchWriteRecordEntry]?
+      attr_accessor ttl_duration: Types::TtlDuration?
+    end
+
+    class BatchWriteRecordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchWriteRecordError],
+        ?unprocessed_entries: Array[Types::BatchWriteRecordEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchWriteRecordError]?
+      attr_accessor unprocessed_entries: Array[Types::BatchWriteRecordEntry]?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class DeleteRecordRequest
       include Smithy::Schema::Structure
 
@@ -174,6 +243,36 @@ module Aws::SageMakerFeatureStoreRuntime
       attr_accessor message: String?
     end
 
+    class ListRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_group_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?include_soft_deleted_records: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_group_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor include_soft_deleted_records: bool?
+    end
+
+    class ListRecordsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_identifiers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_identifiers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
     class PutRecordRequest
       include Smithy::Schema::Structure
 
@@ -237,6 +336,25 @@ module Aws::SageMakerFeatureStoreRuntime
       HOURS: String
       DAYS: String
       WEEKS: String
+    end
+
+    class UpdateRecordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_group_name: String,
+        ?record_identifier_value_as_string: String,
+        ?features: Array[Types::FeatureValue],
+        ?target_stores: Array[String],
+        ?ttl_duration: Types::TtlDuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_group_name: String?
+      attr_accessor record_identifier_value_as_string: String?
+      attr_accessor features: Array[Types::FeatureValue]?
+      attr_accessor target_stores: Array[String]?
+      attr_accessor ttl_duration: Types::TtlDuration?
     end
 
     class ValidationError

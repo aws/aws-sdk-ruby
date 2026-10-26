@@ -6,15 +6,18 @@ module Aws::OpenSearch
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AIConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AIConfig", name: "AIConfig")
     AIMLOptionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AIMLOptionsInput", name: "AIMLOptionsInput")
     AIMLOptionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AIMLOptionsOutput", name: "AIMLOptionsOutput")
     AIMLOptionsStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AIMLOptionsStatus", name: "AIMLOptionsStatus")
+    AMPWorkspaceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#AMPWorkspaceArn", name: "AMPWorkspaceArn", traits: {"smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:aps:[a-z0-9-]+:[0-9]{12}:workspace\\/ws-[a-z0-9-]*$"})
     ARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#ARN", name: "ARN", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => ".*"})
     AWSAccount = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#AWSAccount", name: "AWSAccount", traits: {"smithy.api#pattern" => "^[0-9]+$"})
     AWSDomainInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AWSDomainInformation", name: "AWSDomainInformation")
     AWSServicePrincipal = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#AWSServicePrincipal", name: "AWSServicePrincipal")
     AcceptInboundConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AcceptInboundConnectionRequest", name: "AcceptInboundConnectionRequest")
     AcceptInboundConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AcceptInboundConnectionResponse", name: "AcceptInboundConnectionResponse")
+    AcceptedWarningsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#AcceptedWarningsList", name: "AcceptedWarningsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccessPoliciesStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AccessPoliciesStatus", name: "AccessPoliciesStatus")
     ActionSeverity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#ActionSeverity", name: "ActionSeverity")
@@ -36,6 +39,7 @@ module Aws::OpenSearch
     AppConfigType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#AppConfigType", name: "AppConfigType")
     AppConfigValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#AppConfigValue", name: "AppConfigValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
     AppConfigs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#AppConfigs", name: "AppConfigs", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
+    ApplicationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#ApplicationId", name: "ApplicationId", traits: {"smithy.api#pattern" => "^[a-z0-9]{3,30}$"})
     ApplicationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#ApplicationName", name: "ApplicationName", traits: {"smithy.api#length" => {"min" => 3, "max" => 30}, "smithy.api#pattern" => "^[a-z][a-z0-9\\-]+$"})
     ApplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#ApplicationStatus", name: "ApplicationStatus")
     ApplicationStatuses = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#ApplicationStatuses", name: "ApplicationStatuses")
@@ -45,6 +49,8 @@ module Aws::OpenSearch
     AssociatePackageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AssociatePackageResponse", name: "AssociatePackageResponse")
     AssociatePackagesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AssociatePackagesRequest", name: "AssociatePackagesRequest")
     AssociatePackagesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AssociatePackagesResponse", name: "AssociatePackagesResponse")
+    AttachDataSourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AttachDataSourceRequest", name: "AttachDataSourceRequest")
+    AttachDataSourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AttachDataSourceResponse", name: "AttachDataSourceResponse")
     AuthorizeVpcEndpointAccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AuthorizeVpcEndpointAccessRequest", name: "AuthorizeVpcEndpointAccessRequest")
     AuthorizeVpcEndpointAccessResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AuthorizeVpcEndpointAccessResponse", name: "AuthorizeVpcEndpointAccessResponse")
     AuthorizedPrincipal = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AuthorizedPrincipal", name: "AuthorizedPrincipal")
@@ -63,6 +69,9 @@ module Aws::OpenSearch
     AutoTuneState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#AutoTuneState", name: "AutoTuneState")
     AutoTuneStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AutoTuneStatus", name: "AutoTuneStatus")
     AutoTuneType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#AutoTuneType", name: "AutoTuneType")
+    AutomatedSnapshotPauseOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AutomatedSnapshotPauseOptions", name: "AutomatedSnapshotPauseOptions")
+    AutomatedSnapshotPauseOptionsStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AutomatedSnapshotPauseOptionsStatus", name: "AutomatedSnapshotPauseOptionsStatus")
+    AutomatedSnapshotPauseRequestOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AutomatedSnapshotPauseRequestOptions", name: "AutomatedSnapshotPauseRequestOptions")
     AvailabilityZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#AvailabilityZone", name: "AvailabilityZone", traits: {"smithy.api#length" => {"min" => 1, "max" => 15}})
     AvailabilityZoneInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#AvailabilityZoneInfo", name: "AvailabilityZoneInfo")
     AvailabilityZoneInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#AvailabilityZoneInfoList", name: "AvailabilityZoneInfoList")
@@ -76,6 +85,15 @@ module Aws::OpenSearch
     CancelServiceSoftwareUpdateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CancelServiceSoftwareUpdateResponse", name: "CancelServiceSoftwareUpdateResponse")
     CancelledChangeProperty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CancelledChangeProperty", name: "CancelledChangeProperty")
     CancelledChangePropertyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#CancelledChangePropertyList", name: "CancelledChangePropertyList")
+    CapabilityBaseRequestConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.opensearch#CapabilityBaseRequestConfig", name: "CapabilityBaseRequestConfig")
+    CapabilityBaseResponseConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.opensearch#CapabilityBaseResponseConfig", name: "CapabilityBaseResponseConfig")
+    CapabilityExtendedResponseConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.opensearch#CapabilityExtendedResponseConfig", name: "CapabilityExtendedResponseConfig")
+    CapabilityFailure = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CapabilityFailure", name: "CapabilityFailure")
+    CapabilityFailureDetails = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#CapabilityFailureDetails", name: "CapabilityFailureDetails")
+    CapabilityFailureReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#CapabilityFailureReason", name: "CapabilityFailureReason")
+    CapabilityFailures = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#CapabilityFailures", name: "CapabilityFailures")
+    CapabilityName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#CapabilityName", name: "CapabilityName", traits: {"smithy.api#length" => {"min" => 3, "max" => 30}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
+    CapabilityStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#CapabilityStatus", name: "CapabilityStatus")
     ChangeProgressDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ChangeProgressDetails", name: "ChangeProgressDetails")
     ChangeProgressStage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ChangeProgressStage", name: "ChangeProgressStage")
     ChangeProgressStageList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#ChangeProgressStageList", name: "ChangeProgressStageList")
@@ -104,6 +122,8 @@ module Aws::OpenSearch
     CreateApplicationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CreateApplicationResponse", name: "CreateApplicationResponse")
     CreateDomainRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CreateDomainRequest", name: "CreateDomainRequest")
     CreateDomainResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CreateDomainResponse", name: "CreateDomainResponse")
+    CreateIndexRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CreateIndexRequest", name: "CreateIndexRequest")
+    CreateIndexResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CreateIndexResponse", name: "CreateIndexResponse")
     CreateOutboundConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CreateOutboundConnectionRequest", name: "CreateOutboundConnectionRequest")
     CreateOutboundConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CreateOutboundConnectionResponse", name: "CreateOutboundConnectionResponse")
     CreatePackageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CreatePackageRequest", name: "CreatePackageRequest")
@@ -113,6 +133,9 @@ module Aws::OpenSearch
     CreatedAt = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.opensearch#CreatedAt", name: "CreatedAt")
     CrossClusterSearchConnectionProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#CrossClusterSearchConnectionProperties", name: "CrossClusterSearchConnectionProperties")
     DataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DataSource", name: "DataSource")
+    DataSourceAttachmentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#DataSourceAttachmentStatus", name: "DataSourceAttachmentStatus")
+    DataSourceAttachmentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DataSourceAttachmentSummary", name: "DataSourceAttachmentSummary")
+    DataSourceAttachmentSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#DataSourceAttachmentSummaryList", name: "DataSourceAttachmentSummaryList")
     DataSourceDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#DataSourceDescription", name: "DataSourceDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}, "smithy.api#pattern" => "^([a-zA-Z0-9_])*[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$"})
     DataSourceDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DataSourceDetails", name: "DataSourceDetails")
     DataSourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#DataSourceList", name: "DataSourceList")
@@ -129,6 +152,8 @@ module Aws::OpenSearch
     DeleteDomainResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeleteDomainResponse", name: "DeleteDomainResponse")
     DeleteInboundConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeleteInboundConnectionRequest", name: "DeleteInboundConnectionRequest")
     DeleteInboundConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeleteInboundConnectionResponse", name: "DeleteInboundConnectionResponse")
+    DeleteIndexRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeleteIndexRequest", name: "DeleteIndexRequest")
+    DeleteIndexResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeleteIndexResponse", name: "DeleteIndexResponse")
     DeleteOutboundConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeleteOutboundConnectionRequest", name: "DeleteOutboundConnectionRequest")
     DeleteOutboundConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeleteOutboundConnectionResponse", name: "DeleteOutboundConnectionResponse")
     DeletePackageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeletePackageRequest", name: "DeletePackageRequest")
@@ -138,7 +163,14 @@ module Aws::OpenSearch
     DependencyFailureException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DependencyFailureException", name: "DependencyFailureException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 424})
     DeploymentCloseDateTimeStamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.opensearch#DeploymentCloseDateTimeStamp", name: "DeploymentCloseDateTimeStamp")
     DeploymentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#DeploymentStatus", name: "DeploymentStatus")
+    DeploymentStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#DeploymentStrategy", name: "DeploymentStrategy")
+    DeploymentStrategyOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeploymentStrategyOptions", name: "DeploymentStrategyOptions")
+    DeploymentStrategyOptionsStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeploymentStrategyOptionsStatus", name: "DeploymentStrategyOptionsStatus")
     DeploymentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#DeploymentType", name: "DeploymentType", traits: {"smithy.api#length" => {"min" => 2, "max" => 128}})
+    DeregisterCapabilityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeregisterCapabilityRequest", name: "DeregisterCapabilityRequest")
+    DeregisterCapabilityResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DeregisterCapabilityResponse", name: "DeregisterCapabilityResponse")
+    DescribeDataSourceAttachmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeDataSourceAttachmentRequest", name: "DescribeDataSourceAttachmentRequest")
+    DescribeDataSourceAttachmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeDataSourceAttachmentResponse", name: "DescribeDataSourceAttachmentResponse")
     DescribeDomainAutoTunesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeDomainAutoTunesRequest", name: "DescribeDomainAutoTunesRequest")
     DescribeDomainAutoTunesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeDomainAutoTunesResponse", name: "DescribeDomainAutoTunesResponse")
     DescribeDomainChangeProgressRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeDomainChangeProgressRequest", name: "DescribeDomainChangeProgressRequest")
@@ -157,6 +189,8 @@ module Aws::OpenSearch
     DescribeDryRunProgressResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeDryRunProgressResponse", name: "DescribeDryRunProgressResponse")
     DescribeInboundConnectionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeInboundConnectionsRequest", name: "DescribeInboundConnectionsRequest")
     DescribeInboundConnectionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeInboundConnectionsResponse", name: "DescribeInboundConnectionsResponse")
+    DescribeInsightDetailsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeInsightDetailsRequest", name: "DescribeInsightDetailsRequest")
+    DescribeInsightDetailsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeInsightDetailsResponse", name: "DescribeInsightDetailsResponse")
     DescribeInstanceTypeLimitsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeInstanceTypeLimitsRequest", name: "DescribeInstanceTypeLimitsRequest")
     DescribeInstanceTypeLimitsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeInstanceTypeLimitsResponse", name: "DescribeInstanceTypeLimitsResponse")
     DescribeOutboundConnectionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeOutboundConnectionsRequest", name: "DescribeOutboundConnectionsRequest")
@@ -175,6 +209,8 @@ module Aws::OpenSearch
     DescribeVpcEndpointsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeVpcEndpointsRequest", name: "DescribeVpcEndpointsRequest")
     DescribeVpcEndpointsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DescribeVpcEndpointsResponse", name: "DescribeVpcEndpointsResponse")
     Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#Description", name: "Description")
+    DetachDataSourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DetachDataSourceRequest", name: "DetachDataSourceRequest")
+    DetachDataSourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DetachDataSourceResponse", name: "DetachDataSourceResponse")
     DirectQueryDataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DirectQueryDataSource", name: "DirectQueryDataSource")
     DirectQueryDataSourceDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#DirectQueryDataSourceDescription", name: "DirectQueryDataSourceDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}, "smithy.api#pattern" => "^([a-zA-Z0-9_])*[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$"})
     DirectQueryDataSourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#DirectQueryDataSourceList", name: "DirectQueryDataSourceList")
@@ -211,6 +247,7 @@ module Aws::OpenSearch
     DomainState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#DomainState", name: "DomainState")
     DomainStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#DomainStatus", name: "DomainStatus")
     DomainStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#DomainStatusList", name: "DomainStatusList")
+    DomainUseCase = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#DomainUseCase", name: "DomainUseCase")
     Double = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.opensearch#Double", name: "Double")
     DryRun = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.opensearch#DryRun", name: "DryRun")
     DryRunMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#DryRunMode", name: "DryRunMode")
@@ -222,8 +259,11 @@ module Aws::OpenSearch
     EBSOptionsStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#EBSOptionsStatus", name: "EBSOptionsStatus")
     EncryptionAtRestOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#EncryptionAtRestOptions", name: "EncryptionAtRestOptions")
     EncryptionAtRestOptionsStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#EncryptionAtRestOptionsStatus", name: "EncryptionAtRestOptionsStatus")
+    EncryptionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#EncryptionMode", name: "EncryptionMode")
     Endpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#Endpoint", name: "Endpoint", traits: {"smithy.api#pattern" => "^[A-Za-z0-9\\-\\.]+$"})
     EndpointsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.opensearch#EndpointsMap", name: "EndpointsMap")
+    EngineMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#EngineMode", name: "EngineMode")
+    EngineModeStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#EngineModeStatus", name: "EngineModeStatus")
     EngineType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#EngineType", name: "EngineType")
     EngineVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#EngineVersion", name: "EngineVersion", traits: {"smithy.api#pattern" => "^Elasticsearch_[0-9]{1}\\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\\.[0-9]{1,2}$"})
     EnvironmentInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#EnvironmentInfo", name: "EnvironmentInfo")
@@ -231,20 +271,29 @@ module Aws::OpenSearch
     ErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ErrorDetails", name: "ErrorDetails")
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#ErrorMessage", name: "ErrorMessage")
     ErrorType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#ErrorType", name: "ErrorType")
+    ExportOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ExportOptions", name: "ExportOptions")
     Filter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#Filter", name: "Filter")
     FilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#FilterList", name: "FilterList")
     GUID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#GUID", name: "GUID", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}$"})
     GUIDList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#GUIDList", name: "GUIDList")
     GetApplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetApplicationRequest", name: "GetApplicationRequest")
     GetApplicationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetApplicationResponse", name: "GetApplicationResponse")
+    GetCapabilityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetCapabilityRequest", name: "GetCapabilityRequest")
+    GetCapabilityResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetCapabilityResponse", name: "GetCapabilityResponse")
     GetCompatibleVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetCompatibleVersionsRequest", name: "GetCompatibleVersionsRequest")
     GetCompatibleVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetCompatibleVersionsResponse", name: "GetCompatibleVersionsResponse")
     GetDataSourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetDataSourceRequest", name: "GetDataSourceRequest")
     GetDataSourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetDataSourceResponse", name: "GetDataSourceResponse")
+    GetDefaultApplicationSettingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetDefaultApplicationSettingRequest", name: "GetDefaultApplicationSettingRequest")
+    GetDefaultApplicationSettingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetDefaultApplicationSettingResponse", name: "GetDefaultApplicationSettingResponse")
     GetDirectQueryDataSourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetDirectQueryDataSourceRequest", name: "GetDirectQueryDataSourceRequest")
     GetDirectQueryDataSourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetDirectQueryDataSourceResponse", name: "GetDirectQueryDataSourceResponse")
     GetDomainMaintenanceStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetDomainMaintenanceStatusRequest", name: "GetDomainMaintenanceStatusRequest")
     GetDomainMaintenanceStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetDomainMaintenanceStatusResponse", name: "GetDomainMaintenanceStatusResponse")
+    GetIndexRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetIndexRequest", name: "GetIndexRequest")
+    GetIndexResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetIndexResponse", name: "GetIndexResponse")
+    GetMigrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetMigrationRequest", name: "GetMigrationRequest")
+    GetMigrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetMigrationResponse", name: "GetMigrationResponse")
     GetPackageVersionHistoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetPackageVersionHistoryRequest", name: "GetPackageVersionHistoryRequest")
     GetPackageVersionHistoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetPackageVersionHistoryResponse", name: "GetPackageVersionHistoryResponse")
     GetUpgradeHistoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#GetUpgradeHistoryRequest", name: "GetUpgradeHistoryRequest")
@@ -272,7 +321,31 @@ module Aws::OpenSearch
     InboundConnectionStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#InboundConnectionStatus", name: "InboundConnectionStatus")
     InboundConnectionStatusCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InboundConnectionStatusCode", name: "InboundConnectionStatusCode")
     InboundConnections = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#InboundConnections", name: "InboundConnections")
+    IndexName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#IndexName", name: "IndexName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(?!\\.\\.?$)[^_ ,:\"+/*\\\\|?#><A-Z-][^ ,:\"+/*\\\\|?#><A-Z]*$"})
+    IndexSchema = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.opensearch#IndexSchema", name: "IndexSchema")
+    IndexStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#IndexStatus", name: "IndexStatus")
     InitiatedBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InitiatedBy", name: "InitiatedBy")
+    Insight = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#Insight", name: "Insight")
+    InsightEntity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#InsightEntity", name: "InsightEntity")
+    InsightEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InsightEntityType", name: "InsightEntityType")
+    InsightEntityValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#InsightEntityValue", name: "InsightEntityValue", traits: {"smithy.api#length" => {"min" => 3, "max" => 28}, "smithy.api#pattern" => "^([a-z][a-z0-9\\-]+|\\d{12})$"})
+    InsightFeedbackEntity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#InsightFeedbackEntity", name: "InsightFeedbackEntity")
+    InsightFeedbackEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InsightFeedbackEntityType", name: "InsightFeedbackEntityType")
+    InsightFeedbackRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#InsightFeedbackRequest", name: "InsightFeedbackRequest")
+    InsightFeedbackResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#InsightFeedbackResponse", name: "InsightFeedbackResponse")
+    InsightFeedbackText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#InsightFeedbackText", name: "InsightFeedbackText", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
+    InsightFeedbackThumbs = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InsightFeedbackThumbs", name: "InsightFeedbackThumbs")
+    InsightField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#InsightField", name: "InsightField")
+    InsightFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#InsightFieldList", name: "InsightFieldList")
+    InsightFieldType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InsightFieldType", name: "InsightFieldType")
+    InsightList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#InsightList", name: "InsightList")
+    InsightPageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.opensearch#InsightPageSize", name: "InsightPageSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 500}})
+    InsightPriorityLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InsightPriorityLevel", name: "InsightPriorityLevel")
+    InsightResponseStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InsightResponseStatus", name: "InsightResponseStatus")
+    InsightSortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InsightSortOrder", name: "InsightSortOrder")
+    InsightStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InsightStatus", name: "InsightStatus")
+    InsightTimeRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#InsightTimeRange", name: "InsightTimeRange")
+    InsightType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#InsightType", name: "InsightType")
     InstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.opensearch#InstanceCount", name: "InstanceCount", traits: {"smithy.api#range" => {"min" => 1}})
     InstanceCountLimits = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#InstanceCountLimits", name: "InstanceCountLimits")
     InstanceLimits = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#InstanceLimits", name: "InstanceLimits")
@@ -290,7 +363,9 @@ module Aws::OpenSearch
     Issues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#Issues", name: "Issues")
     JWTOptionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#JWTOptionsInput", name: "JWTOptionsInput")
     JWTOptionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#JWTOptionsOutput", name: "JWTOptionsOutput")
+    JwksUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#JwksUrl", name: "JwksUrl", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^$|^https://(?!(?:10|127|169\\.254|192\\.168|172\\.(?:1[6-9]|2[0-9]|3[01]))\\.)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\\.[a-zA-Z]{2,}(?::[0-9]{1,5})?(?:/[a-zA-Z0-9\\-._~%!$&'()*+,;=:'@]*(?:/[a-zA-Z0-9\\-._~%!$&'()*+,;=:'@]*)*)?(?:\\?[a-zA-Z0-9\\-._~%!$&'()*+,;=:'/@?]+)?$"})
     KeyStoreAccessOption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#KeyStoreAccessOption", name: "KeyStoreAccessOption")
+    KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#KmsKeyArn", name: "KmsKeyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
     KmsKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#KmsKeyId", name: "KmsKeyId", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}, "smithy.api#pattern" => ".*"})
     LastUpdated = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.opensearch#LastUpdated", name: "LastUpdated")
     LicenseFilepath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#LicenseFilepath", name: "LicenseFilepath", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^(?!.*\\/\\.{2,})(?!.*\\.\\.)[a-zA-Z0-9_.-]+(?:\\/[a-zA-Z0-9_.-]+)*$"})
@@ -302,6 +377,8 @@ module Aws::OpenSearch
     LimitsByRole = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.opensearch#LimitsByRole", name: "LimitsByRole")
     ListApplicationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListApplicationsRequest", name: "ListApplicationsRequest")
     ListApplicationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListApplicationsResponse", name: "ListApplicationsResponse")
+    ListDataSourceAttachmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListDataSourceAttachmentsRequest", name: "ListDataSourceAttachmentsRequest")
+    ListDataSourceAttachmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListDataSourceAttachmentsResponse", name: "ListDataSourceAttachmentsResponse")
     ListDataSourcesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListDataSourcesRequest", name: "ListDataSourcesRequest")
     ListDataSourcesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListDataSourcesResponse", name: "ListDataSourcesResponse")
     ListDirectQueryDataSourcesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListDirectQueryDataSourcesRequest", name: "ListDirectQueryDataSourcesRequest")
@@ -312,8 +389,12 @@ module Aws::OpenSearch
     ListDomainNamesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListDomainNamesResponse", name: "ListDomainNamesResponse")
     ListDomainsForPackageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListDomainsForPackageRequest", name: "ListDomainsForPackageRequest")
     ListDomainsForPackageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListDomainsForPackageResponse", name: "ListDomainsForPackageResponse")
+    ListInsightsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListInsightsRequest", name: "ListInsightsRequest")
+    ListInsightsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListInsightsResponse", name: "ListInsightsResponse")
     ListInstanceTypeDetailsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListInstanceTypeDetailsRequest", name: "ListInstanceTypeDetailsRequest")
     ListInstanceTypeDetailsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListInstanceTypeDetailsResponse", name: "ListInstanceTypeDetailsResponse")
+    ListMigrationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListMigrationsRequest", name: "ListMigrationsRequest")
+    ListMigrationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListMigrationsResponse", name: "ListMigrationsResponse")
     ListPackagesForDomainRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListPackagesForDomainRequest", name: "ListPackagesForDomainRequest")
     ListPackagesForDomainResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListPackagesForDomainResponse", name: "ListPackagesForDomainResponse")
     ListScheduledActionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ListScheduledActionsRequest", name: "ListScheduledActionsRequest")
@@ -341,6 +422,12 @@ module Aws::OpenSearch
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.opensearch#MaxResults", name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"max" => 100}})
     MaximumInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.opensearch#MaximumInstanceCount", name: "MaximumInstanceCount", traits: {"smithy.api#default" => 0})
     Message = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#Message", name: "Message", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    MigrationError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#MigrationError", name: "MigrationError")
+    MigrationOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#MigrationOptions", name: "MigrationOptions")
+    MigrationSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#MigrationSource", name: "MigrationSource")
+    MigrationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#MigrationSummary", name: "MigrationSummary")
+    MigrationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#MigrationSummaryList", name: "MigrationSummaryList")
+    MigrationWorkspace = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#MigrationWorkspace", name: "MigrationWorkspace")
     MinimumInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.opensearch#MinimumInstanceCount", name: "MinimumInstanceCount", traits: {"smithy.api#default" => 0})
     ModifyingProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ModifyingProperties", name: "ModifyingProperties")
     ModifyingPropertiesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#ModifyingPropertiesList", name: "ModifyingPropertiesList")
@@ -398,6 +485,7 @@ module Aws::OpenSearch
     PackageVersionHistory = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#PackageVersionHistory", name: "PackageVersionHistory")
     PackageVersionHistoryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#PackageVersionHistoryList", name: "PackageVersionHistoryList")
     Password = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#Password", name: "Password", traits: {"smithy.api#length" => {"min" => 8, "max" => 128}, "smithy.api#pattern" => ".*", "smithy.api#sensitive" => {}})
+    PauseState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#PauseState", name: "PauseState")
     PluginClassName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#PluginClassName", name: "PluginClassName", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     PluginDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#PluginDescription", name: "PluginDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     PluginName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#PluginName", name: "PluginName", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
@@ -405,13 +493,19 @@ module Aws::OpenSearch
     PluginVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#PluginVersion", name: "PluginVersion", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     PolicyDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#PolicyDocument", name: "PolicyDocument", traits: {"smithy.api#length" => {"min" => 0, "max" => 102400}, "smithy.api#pattern" => ".*"})
     PrincipalType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#PrincipalType", name: "PrincipalType")
+    PrometheusDirectQueryDataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#PrometheusDirectQueryDataSource", name: "PrometheusDirectQueryDataSource")
     PropertyValueType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#PropertyValueType", name: "PropertyValueType")
     PurchaseReservedInstanceOfferingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#PurchaseReservedInstanceOfferingRequest", name: "PurchaseReservedInstanceOfferingRequest")
     PurchaseReservedInstanceOfferingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#PurchaseReservedInstanceOfferingResponse", name: "PurchaseReservedInstanceOfferingResponse")
+    PutDefaultApplicationSettingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#PutDefaultApplicationSettingRequest", name: "PutDefaultApplicationSettingRequest")
+    PutDefaultApplicationSettingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#PutDefaultApplicationSettingResponse", name: "PutDefaultApplicationSettingResponse")
     RecurringCharge = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#RecurringCharge", name: "RecurringCharge")
     RecurringChargeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#RecurringChargeList", name: "RecurringChargeList")
     ReferencePath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#ReferencePath", name: "ReferencePath")
     Region = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#Region", name: "Region", traits: {"smithy.api#length" => {"min" => 5, "max" => 30}, "smithy.api#pattern" => "^[a-z][a-z0-9\\-]+$"})
+    RegionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#RegionsList", name: "RegionsList")
+    RegisterCapabilityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#RegisterCapabilityRequest", name: "RegisterCapabilityRequest")
+    RegisterCapabilityResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#RegisterCapabilityResponse", name: "RegisterCapabilityResponse")
     RejectInboundConnectionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#RejectInboundConnectionRequest", name: "RejectInboundConnectionRequest")
     RejectInboundConnectionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#RejectInboundConnectionResponse", name: "RejectInboundConnectionResponse")
     RemoveTagsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#RemoveTagsRequest", name: "RemoveTagsRequest")
@@ -431,6 +525,9 @@ module Aws::OpenSearch
     RolesKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#RolesKey", name: "RolesKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     RolesKeyIdCOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#RolesKeyIdCOption", name: "RolesKeyIdCOption")
     RollbackOnDisable = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#RollbackOnDisable", name: "RollbackOnDisable")
+    RollbackServiceSoftwareOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#RollbackServiceSoftwareOptions", name: "RollbackServiceSoftwareOptions")
+    RollbackServiceSoftwareUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#RollbackServiceSoftwareUpdateRequest", name: "RollbackServiceSoftwareUpdateRequest")
+    RollbackServiceSoftwareUpdateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#RollbackServiceSoftwareUpdateResponse", name: "RollbackServiceSoftwareUpdateResponse")
     S3BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#S3BucketName", name: "S3BucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}})
     S3GlueDataCatalog = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#S3GlueDataCatalog", name: "S3GlueDataCatalog")
     S3Key = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#S3Key", name: "S3Key", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
@@ -440,6 +537,8 @@ module Aws::OpenSearch
     SAMLMetadata = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#SAMLMetadata", name: "SAMLMetadata", traits: {"smithy.api#length" => {"min" => 1, "max" => 1048576}})
     SAMLOptionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#SAMLOptionsInput", name: "SAMLOptionsInput")
     SAMLOptionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#SAMLOptionsOutput", name: "SAMLOptionsOutput")
+    SavedObjectIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#SavedObjectIdentifier", name: "SavedObjectIdentifier")
+    SavedObjectIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#SavedObjectIdentifierList", name: "SavedObjectIdentifierList")
     ScheduleAt = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#ScheduleAt", name: "ScheduleAt")
     ScheduledAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ScheduledAction", name: "ScheduledAction")
     ScheduledActionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#ScheduledActionsList", name: "ScheduledActionsList")
@@ -449,6 +548,9 @@ module Aws::OpenSearch
     ScheduledAutoTuneSeverityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#ScheduledAutoTuneSeverityType", name: "ScheduledAutoTuneSeverityType")
     ScheduledBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#ScheduledBy", name: "ScheduledBy")
     SecurityLakeDirectQueryDataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#SecurityLakeDirectQueryDataSource", name: "SecurityLakeDirectQueryDataSource")
+    ServerlessVectorAcceleration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ServerlessVectorAcceleration", name: "ServerlessVectorAcceleration")
+    ServiceOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ServiceOptions", name: "ServiceOptions")
+    ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     ServiceSoftwareOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ServiceSoftwareOptions", name: "ServiceSoftwareOptions")
     ServiceUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#ServiceUrl", name: "ServiceUrl")
     SkipUnavailableStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#SkipUnavailableStatus", name: "SkipUnavailableStatus")
@@ -461,6 +563,8 @@ module Aws::OpenSearch
     StartAt = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.opensearch#StartAt", name: "StartAt")
     StartDomainMaintenanceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#StartDomainMaintenanceRequest", name: "StartDomainMaintenanceRequest")
     StartDomainMaintenanceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#StartDomainMaintenanceResponse", name: "StartDomainMaintenanceResponse")
+    StartMigrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#StartMigrationRequest", name: "StartMigrationRequest")
+    StartMigrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#StartMigrationResponse", name: "StartMigrationResponse")
     StartServiceSoftwareUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#StartServiceSoftwareUpdateRequest", name: "StartServiceSoftwareUpdateRequest")
     StartServiceSoftwareUpdateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#StartServiceSoftwareUpdateResponse", name: "StartServiceSoftwareUpdateResponse")
     StartTimeHours = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.opensearch#StartTimeHours", name: "StartTimeHours", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 23}})
@@ -481,6 +585,7 @@ module Aws::OpenSearch
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => ".*"})
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#TagList", name: "TagList")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => ".*"})
+    ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     TimeUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#TimeUnit", name: "TimeUnit")
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.opensearch#Timestamp", name: "Timestamp")
     TotalNumberOfStages = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.opensearch#TotalNumberOfStages", name: "TotalNumberOfStages", traits: {"smithy.api#default" => 0})
@@ -494,6 +599,8 @@ module Aws::OpenSearch
     UpdateDirectQueryDataSourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UpdateDirectQueryDataSourceResponse", name: "UpdateDirectQueryDataSourceResponse")
     UpdateDomainConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UpdateDomainConfigRequest", name: "UpdateDomainConfigRequest")
     UpdateDomainConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UpdateDomainConfigResponse", name: "UpdateDomainConfigResponse")
+    UpdateIndexRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UpdateIndexRequest", name: "UpdateIndexRequest")
+    UpdateIndexResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UpdateIndexResponse", name: "UpdateIndexResponse")
     UpdatePackageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UpdatePackageRequest", name: "UpdatePackageRequest")
     UpdatePackageResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UpdatePackageResponse", name: "UpdatePackageResponse")
     UpdatePackageScopeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UpdatePackageScopeRequest", name: "UpdatePackageScopeRequest")
@@ -512,6 +619,7 @@ module Aws::OpenSearch
     UpgradeStep = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#UpgradeStep", name: "UpgradeStep")
     UpgradeStepItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UpgradeStepItem", name: "UpgradeStepItem")
     UpgradeStepsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#UpgradeStepsList", name: "UpgradeStepsList")
+    UseCaseStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#UseCaseStatus", name: "UseCaseStatus")
     UserPoolId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#UserPoolId", name: "UserPoolId", traits: {"smithy.api#length" => {"min" => 1, "max" => 55}, "smithy.api#pattern" => "^[\\w-]+_[0-9a-zA-Z]+$"})
     Username = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.opensearch#Username", name: "Username", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => ".*", "smithy.api#sensitive" => {}})
     VPCDerivedInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#VPCDerivedInfo", name: "VPCDerivedInfo")
@@ -519,6 +627,7 @@ module Aws::OpenSearch
     VPCOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#VPCOptions", name: "VPCOptions")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationFailure = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ValidationFailure", name: "ValidationFailure")
+    ValidationFailureSeverity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#ValidationFailureSeverity", name: "ValidationFailureSeverity")
     ValidationFailures = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#ValidationFailures", name: "ValidationFailures")
     ValueStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#ValueStringList", name: "ValueStringList", traits: {"smithy.api#length" => {"min" => 1}})
     VersionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#VersionList", name: "VersionList")
@@ -537,14 +646,18 @@ module Aws::OpenSearch
     VpcEndpointSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#VpcEndpointSummaryList", name: "VpcEndpointSummaryList")
     VpcEndpoints = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.opensearch#VpcEndpoints", name: "VpcEndpoints")
     WindowStartTime = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#WindowStartTime", name: "WindowStartTime")
+    WorkspaceConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#WorkspaceConfigurationInput", name: "WorkspaceConfigurationInput")
     ZoneAwarenessConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.opensearch#ZoneAwarenessConfig", name: "ZoneAwarenessConfig")
     ZoneStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.opensearch#ZoneStatus", name: "ZoneStatus")
 
+    AIConfig.type = Types::AIConfig
     AIMLOptionsInput.add_member(:natural_language_query_generation_options, ::Smithy::Schema::Shapes::MemberShape.new(target: NaturalLanguageQueryGenerationOptionsInput, name: "NaturalLanguageQueryGenerationOptions"))
     AIMLOptionsInput.add_member(:s3_vectors_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: S3VectorsEngine, name: "S3VectorsEngine"))
+    AIMLOptionsInput.add_member(:serverless_vector_acceleration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessVectorAcceleration, name: "ServerlessVectorAcceleration"))
     AIMLOptionsInput.type = Types::AIMLOptionsInput
     AIMLOptionsOutput.add_member(:natural_language_query_generation_options, ::Smithy::Schema::Shapes::MemberShape.new(target: NaturalLanguageQueryGenerationOptionsOutput, name: "NaturalLanguageQueryGenerationOptions"))
     AIMLOptionsOutput.add_member(:s3_vectors_engine, ::Smithy::Schema::Shapes::MemberShape.new(target: S3VectorsEngine, name: "S3VectorsEngine"))
+    AIMLOptionsOutput.add_member(:serverless_vector_acceleration, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessVectorAcceleration, name: "ServerlessVectorAcceleration"))
     AIMLOptionsOutput.type = Types::AIMLOptionsOutput
     AIMLOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMLOptionsOutput, name: "Options"))
     AIMLOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status"))
@@ -558,6 +671,7 @@ module Aws::OpenSearch
     AcceptInboundConnectionRequest.type = Types::AcceptInboundConnectionRequest
     AcceptInboundConnectionResponse.add_member(:connection, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundConnection, name: "Connection"))
     AcceptInboundConnectionResponse.type = Types::AcceptInboundConnectionResponse
+    AcceptedWarningsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
     AccessPoliciesStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "Options", traits: {"smithy.api#required" => {}}))
@@ -585,7 +699,8 @@ module Aws::OpenSearch
     AddDirectQueryDataSourceRequest.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceName, name: "DataSourceName", traits: {"smithy.api#required" => {}}))
     AddDirectQueryDataSourceRequest.add_member(:data_source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceType, name: "DataSourceType", traits: {"smithy.api#required" => {}}))
     AddDirectQueryDataSourceRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceDescription, name: "Description"))
-    AddDirectQueryDataSourceRequest.add_member(:open_search_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryOpenSearchARNList, name: "OpenSearchArns", traits: {"smithy.api#required" => {}}))
+    AddDirectQueryDataSourceRequest.add_member(:open_search_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryOpenSearchARNList, name: "OpenSearchArns"))
+    AddDirectQueryDataSourceRequest.add_member(:data_source_access_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "DataSourceAccessPolicy"))
     AddDirectQueryDataSourceRequest.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "TagList"))
     AddDirectQueryDataSourceRequest.type = Types::AddDirectQueryDataSourceRequest
     AddDirectQueryDataSourceResponse.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataSourceArn"))
@@ -654,14 +769,28 @@ module Aws::OpenSearch
     AssociatePackagesRequest.type = Types::AssociatePackagesRequest
     AssociatePackagesResponse.add_member(:domain_package_details_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainPackageDetailsList, name: "DomainPackageDetailsList"))
     AssociatePackagesResponse.type = Types::AssociatePackagesResponse
+    AttachDataSourceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AttachDataSourceRequest.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dataSourceArn", traits: {"smithy.api#required" => {}}))
+    AttachDataSourceRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "workspaceId"))
+    AttachDataSourceRequest.add_member(:workspace_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceConfigurationInput, name: "workspaceConfiguration"))
+    AttachDataSourceRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
+    AttachDataSourceRequest.type = Types::AttachDataSourceRequest
+    AttachDataSourceResponse.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "attachmentId"))
+    AttachDataSourceResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id"))
+    AttachDataSourceResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
+    AttachDataSourceResponse.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dataSourceArn"))
+    AttachDataSourceResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceAttachmentStatus, name: "status"))
+    AttachDataSourceResponse.type = Types::AttachDataSourceResponse
     AuthorizeVpcEndpointAccessRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AuthorizeVpcEndpointAccessRequest.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccount, name: "Account"))
     AuthorizeVpcEndpointAccessRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSServicePrincipal, name: "Service"))
+    AuthorizeVpcEndpointAccessRequest.add_member(:service_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceOptions, name: "ServiceOptions"))
     AuthorizeVpcEndpointAccessRequest.type = Types::AuthorizeVpcEndpointAccessRequest
     AuthorizeVpcEndpointAccessResponse.add_member(:authorized_principal, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedPrincipal, name: "AuthorizedPrincipal", traits: {"smithy.api#required" => {}}))
     AuthorizeVpcEndpointAccessResponse.type = Types::AuthorizeVpcEndpointAccessResponse
     AuthorizedPrincipal.add_member(:principal_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalType, name: "PrincipalType"))
     AuthorizedPrincipal.add_member(:principal, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Principal"))
+    AuthorizedPrincipal.add_member(:service_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceOptions, name: "ServiceOptions"))
     AuthorizedPrincipal.type = Types::AuthorizedPrincipal
     AuthorizedPrincipalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthorizedPrincipal, name: "member"))
     AutoTune.add_member(:auto_tune_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneType, name: "AutoTuneType"))
@@ -710,6 +839,18 @@ module Aws::OpenSearch
     AutoTuneStatus.add_member(:pending_deletion, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "PendingDeletion"))
     AutoTuneStatus.type = Types::AutoTuneStatus
     AutoTuneType.add_member(:scheduled_action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED_ACTION", traits: {"smithy.api#enumValue" => "SCHEDULED_ACTION"}))
+    AutomatedSnapshotPauseOptions.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
+    AutomatedSnapshotPauseOptions.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
+    AutomatedSnapshotPauseOptions.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    AutomatedSnapshotPauseOptions.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: PauseState, name: "State"))
+    AutomatedSnapshotPauseOptions.type = Types::AutomatedSnapshotPauseOptions
+    AutomatedSnapshotPauseOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseOptions, name: "Options", traits: {"smithy.api#required" => {}}))
+    AutomatedSnapshotPauseOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    AutomatedSnapshotPauseOptionsStatus.type = Types::AutomatedSnapshotPauseOptionsStatus
+    AutomatedSnapshotPauseRequestOptions.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
+    AutomatedSnapshotPauseRequestOptions.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
+    AutomatedSnapshotPauseRequestOptions.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    AutomatedSnapshotPauseRequestOptions.type = Types::AutomatedSnapshotPauseRequestOptions
     AvailabilityZoneInfo.add_member(:availability_zone_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "AvailabilityZoneName"))
     AvailabilityZoneInfo.add_member(:zone_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ZoneStatus, name: "ZoneStatus"))
     AvailabilityZoneInfo.add_member(:configured_data_node_count, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfNodes, name: "ConfiguredDataNodeCount"))
@@ -737,6 +878,27 @@ module Aws::OpenSearch
     CancelledChangeProperty.add_member(:active_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ActiveValue"))
     CancelledChangeProperty.type = Types::CancelledChangeProperty
     CancelledChangePropertyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CancelledChangeProperty, name: "member"))
+    CapabilityBaseRequestConfig.add_member(:ai_config, Types::CapabilityBaseRequestConfig::AiConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: AIConfig, name: "aiConfig"))
+    CapabilityBaseRequestConfig.add_member(:unknown, Types::CapabilityBaseRequestConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CapabilityBaseRequestConfig.type = Types::CapabilityBaseRequestConfig
+    CapabilityBaseResponseConfig.add_member(:ai_config, Types::CapabilityBaseResponseConfig::AiConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: AIConfig, name: "aiConfig"))
+    CapabilityBaseResponseConfig.add_member(:unknown, Types::CapabilityBaseResponseConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CapabilityBaseResponseConfig.type = Types::CapabilityBaseResponseConfig
+    CapabilityExtendedResponseConfig.add_member(:ai_config, Types::CapabilityExtendedResponseConfig::AiConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: AIConfig, name: "aiConfig"))
+    CapabilityExtendedResponseConfig.add_member(:unknown, Types::CapabilityExtendedResponseConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CapabilityExtendedResponseConfig.type = Types::CapabilityExtendedResponseConfig
+    CapabilityFailure.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityFailureReason, name: "reason"))
+    CapabilityFailure.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityFailureDetails, name: "details"))
+    CapabilityFailure.type = Types::CapabilityFailure
+    CapabilityFailureReason.add_member(:kms_key_insufficient_permission, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KMS_KEY_INSUFFICIENT_PERMISSION", traits: {"smithy.api#enumValue" => "KMS_KEY_INSUFFICIENT_PERMISSION"}))
+    CapabilityFailures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityFailure, name: "member"))
+    CapabilityStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "creating"}))
+    CapabilityStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "create_failed"}))
+    CapabilityStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "active"}))
+    CapabilityStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "updating"}))
+    CapabilityStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "update_failed"}))
+    CapabilityStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "deleting"}))
+    CapabilityStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "delete_failed"}))
     ChangeProgressDetails.add_member(:change_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "ChangeId"))
     ChangeProgressDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
     ChangeProgressDetails.add_member(:config_change_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigChangeStatus, name: "ConfigChangeStatus"))
@@ -760,6 +922,8 @@ module Aws::OpenSearch
     ChangeProgressStatusDetails.add_member(:last_updated_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "LastUpdatedTime"))
     ChangeProgressStatusDetails.add_member(:config_change_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigChangeStatus, name: "ConfigChangeStatus"))
     ChangeProgressStatusDetails.add_member(:initiated_by, ::Smithy::Schema::Shapes::MemberShape.new(target: InitiatedBy, name: "InitiatedBy"))
+    ChangeProgressStatusDetails.add_member(:validation_failures, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFailures, name: "ValidationFailures"))
+    ChangeProgressStatusDetails.add_member(:accepted_warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptedWarningsList, name: "AcceptedWarnings"))
     ChangeProgressStatusDetails.type = Types::ChangeProgressStatusDetails
     CloudWatchDirectQueryDataSource.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
     CloudWatchDirectQueryDataSource.type = Types::CloudWatchDirectQueryDataSource
@@ -815,6 +979,7 @@ module Aws::OpenSearch
     CreateApplicationRequest.add_member(:iam_identity_center_options, ::Smithy::Schema::Shapes::MemberShape.new(target: IamIdentityCenterOptionsInput, name: "iamIdentityCenterOptions"))
     CreateApplicationRequest.add_member(:app_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: AppConfigs, name: "appConfigs"))
     CreateApplicationRequest.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tagList"))
+    CreateApplicationRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     CreateApplicationRequest.type = Types::CreateApplicationRequest
     CreateApplicationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id"))
     CreateApplicationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name"))
@@ -824,6 +989,7 @@ module Aws::OpenSearch
     CreateApplicationResponse.add_member(:app_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: AppConfigs, name: "appConfigs"))
     CreateApplicationResponse.add_member(:tag_list, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tagList"))
     CreateApplicationResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
+    CreateApplicationResponse.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     CreateApplicationResponse.type = Types::CreateApplicationResponse
     CreateDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     CreateDomainRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "EngineVersion"))
@@ -846,9 +1012,19 @@ module Aws::OpenSearch
     CreateDomainRequest.add_member(:off_peak_window_options, ::Smithy::Schema::Shapes::MemberShape.new(target: OffPeakWindowOptions, name: "OffPeakWindowOptions"))
     CreateDomainRequest.add_member(:software_update_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareUpdateOptions, name: "SoftwareUpdateOptions"))
     CreateDomainRequest.add_member(:aiml_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMLOptionsInput, name: "AIMLOptions"))
+    CreateDomainRequest.add_member(:deployment_strategy_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptions, name: "DeploymentStrategyOptions"))
+    CreateDomainRequest.add_member(:automated_snapshot_pause_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseRequestOptions, name: "AutomatedSnapshotPauseOptions"))
+    CreateDomainRequest.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUseCase, name: "UseCase"))
+    CreateDomainRequest.add_member(:engine_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineMode, name: "EngineMode"))
     CreateDomainRequest.type = Types::CreateDomainRequest
     CreateDomainResponse.add_member(:domain_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, name: "DomainStatus"))
     CreateDomainResponse.type = Types::CreateDomainResponse
+    CreateIndexRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateIndexRequest.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#required" => {}}))
+    CreateIndexRequest.add_member(:index_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexSchema, name: "IndexSchema", traits: {"smithy.api#required" => {}}))
+    CreateIndexRequest.type = Types::CreateIndexRequest
+    CreateIndexResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    CreateIndexResponse.type = Types::CreateIndexResponse
     CreateOutboundConnectionRequest.add_member(:local_domain_info, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainInformationContainer, name: "LocalDomainInfo", traits: {"smithy.api#required" => {}}))
     CreateOutboundConnectionRequest.add_member(:remote_domain_info, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainInformationContainer, name: "RemoteDomainInfo", traits: {"smithy.api#required" => {}}))
     CreateOutboundConnectionRequest.add_member(:connection_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionAlias, name: "ConnectionAlias", traits: {"smithy.api#required" => {}}))
@@ -884,7 +1060,16 @@ module Aws::OpenSearch
     CrossClusterSearchConnectionProperties.type = Types::CrossClusterSearchConnectionProperties
     DataSource.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dataSourceArn"))
     DataSource.add_member(:data_source_description, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceDescription, name: "dataSourceDescription"))
+    DataSource.add_member(:iam_role_for_data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "iamRoleForDataSourceArn"))
     DataSource.type = Types::DataSource
+    DataSourceAttachmentStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    DataSourceAttachmentStatus.add_member(:attached, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATTACHED", traits: {"smithy.api#enumValue" => "ATTACHED"}))
+    DataSourceAttachmentStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DataSourceAttachmentSummary.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "attachmentId"))
+    DataSourceAttachmentSummary.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dataSourceArn"))
+    DataSourceAttachmentSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceAttachmentStatus, name: "status"))
+    DataSourceAttachmentSummary.type = Types::DataSourceAttachmentSummary
+    DataSourceAttachmentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceAttachmentSummary, name: "member"))
     DataSourceDetails.add_member(:data_source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceType, name: "DataSourceType"))
     DataSourceDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceName, name: "Name"))
     DataSourceDetails.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceDescription, name: "Description"))
@@ -915,6 +1100,11 @@ module Aws::OpenSearch
     DeleteInboundConnectionRequest.type = Types::DeleteInboundConnectionRequest
     DeleteInboundConnectionResponse.add_member(:connection, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundConnection, name: "Connection"))
     DeleteInboundConnectionResponse.type = Types::DeleteInboundConnectionResponse
+    DeleteIndexRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteIndexRequest.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteIndexRequest.type = Types::DeleteIndexRequest
+    DeleteIndexResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    DeleteIndexResponse.type = Types::DeleteIndexResponse
     DeleteOutboundConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "ConnectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteOutboundConnectionRequest.type = Types::DeleteOutboundConnectionRequest
     DeleteOutboundConnectionResponse.add_member(:connection, ::Smithy::Schema::Shapes::MemberShape.new(target: OutboundConnection, name: "Connection"))
@@ -934,9 +1124,30 @@ module Aws::OpenSearch
     DeploymentStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
     DeploymentStatus.add_member(:not_eligible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_ELIGIBLE", traits: {"smithy.api#enumValue" => "NOT_ELIGIBLE"}))
     DeploymentStatus.add_member(:eligible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ELIGIBLE", traits: {"smithy.api#enumValue" => "ELIGIBLE"}))
+    DeploymentStrategy.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "Default"}))
+    DeploymentStrategy.add_member(:capacity_optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_OPTIMIZED", traits: {"smithy.api#enumValue" => "CapacityOptimized"}))
+    DeploymentStrategyOptions.add_member(:deployment_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategy, name: "DeploymentStrategy", traits: {"smithy.api#required" => {}}))
+    DeploymentStrategyOptions.type = Types::DeploymentStrategyOptions
+    DeploymentStrategyOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptions, name: "Options", traits: {"smithy.api#required" => {}}))
+    DeploymentStrategyOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    DeploymentStrategyOptionsStatus.type = Types::DeploymentStrategyOptionsStatus
+    DeregisterCapabilityRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeregisterCapabilityRequest.add_member(:capability_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityName, name: "capabilityName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeregisterCapabilityRequest.type = Types::DeregisterCapabilityRequest
+    DeregisterCapabilityResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityStatus, name: "status"))
+    DeregisterCapabilityResponse.type = Types::DeregisterCapabilityResponse
+    DescribeDataSourceAttachmentRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeDataSourceAttachmentRequest.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dataSourceArn", traits: {"smithy.api#required" => {}}))
+    DescribeDataSourceAttachmentRequest.type = Types::DescribeDataSourceAttachmentRequest
+    DescribeDataSourceAttachmentResponse.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "attachmentId"))
+    DescribeDataSourceAttachmentResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id"))
+    DescribeDataSourceAttachmentResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
+    DescribeDataSourceAttachmentResponse.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dataSourceArn"))
+    DescribeDataSourceAttachmentResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceAttachmentStatus, name: "status"))
+    DescribeDataSourceAttachmentResponse.type = Types::DescribeDataSourceAttachmentResponse
     DescribeDomainAutoTunesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DescribeDomainAutoTunesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => 0}))
-    DescribeDomainAutoTunesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeDomainAutoTunesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
+    DescribeDomainAutoTunesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     DescribeDomainAutoTunesRequest.type = Types::DescribeDomainAutoTunesRequest
     DescribeDomainAutoTunesResponse.add_member(:auto_tunes, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTuneList, name: "AutoTunes"))
     DescribeDomainAutoTunesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -993,6 +1204,12 @@ module Aws::OpenSearch
     DescribeInboundConnectionsResponse.add_member(:connections, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundConnections, name: "Connections"))
     DescribeInboundConnectionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     DescribeInboundConnectionsResponse.type = Types::DescribeInboundConnectionsResponse
+    DescribeInsightDetailsRequest.add_member(:entity, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightEntity, name: "Entity", traits: {"smithy.api#required" => {}}))
+    DescribeInsightDetailsRequest.add_member(:insight_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "InsightId", traits: {"smithy.api#required" => {}}))
+    DescribeInsightDetailsRequest.add_member(:show_html_content, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "ShowHtmlContent"))
+    DescribeInsightDetailsRequest.type = Types::DescribeInsightDetailsRequest
+    DescribeInsightDetailsResponse.add_member(:fields, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightFieldList, name: "Fields", traits: {"smithy.api#required" => {}}))
+    DescribeInsightDetailsResponse.type = Types::DescribeInsightDetailsResponse
     DescribeInstanceTypeLimitsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpQuery" => "domainName"}))
     DescribeInstanceTypeLimitsRequest.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchPartitionInstanceType, name: "InstanceType", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeInstanceTypeLimitsRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "EngineVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1043,6 +1260,13 @@ module Aws::OpenSearch
     DescribeVpcEndpointsResponse.add_member(:vpc_endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpoints, name: "VpcEndpoints", traits: {"smithy.api#required" => {}}))
     DescribeVpcEndpointsResponse.add_member(:vpc_endpoint_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcEndpointErrorList, name: "VpcEndpointErrors", traits: {"smithy.api#required" => {}}))
     DescribeVpcEndpointsResponse.type = Types::DescribeVpcEndpointsResponse
+    DetachDataSourceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DetachDataSourceRequest.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dataSourceArn", traits: {"smithy.api#required" => {}}))
+    DetachDataSourceRequest.type = Types::DetachDataSourceRequest
+    DetachDataSourceResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id"))
+    DetachDataSourceResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn"))
+    DetachDataSourceResponse.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dataSourceArn"))
+    DetachDataSourceResponse.type = Types::DetachDataSourceResponse
     DirectQueryDataSource.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceName, name: "DataSourceName"))
     DirectQueryDataSource.add_member(:data_source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceType, name: "DataSourceType"))
     DirectQueryDataSource.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceDescription, name: "Description"))
@@ -1053,6 +1277,7 @@ module Aws::OpenSearch
     DirectQueryDataSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSource, name: "member"))
     DirectQueryDataSourceType.add_member(:cloud_watch_log, Types::DirectQueryDataSourceType::CloudWatchLog, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDirectQueryDataSource, name: "CloudWatchLog"))
     DirectQueryDataSourceType.add_member(:security_lake, Types::DirectQueryDataSourceType::SecurityLake, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityLakeDirectQueryDataSource, name: "SecurityLake"))
+    DirectQueryDataSourceType.add_member(:prometheus, Types::DirectQueryDataSourceType::Prometheus, ::Smithy::Schema::Shapes::MemberShape.new(target: PrometheusDirectQueryDataSource, name: "Prometheus"))
     DirectQueryDataSourceType.add_member(:unknown, Types::DirectQueryDataSourceType::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DirectQueryDataSourceType.type = Types::DirectQueryDataSourceType
     DirectQueryOpenSearchARNList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "member"))
@@ -1089,6 +1314,10 @@ module Aws::OpenSearch
     DomainConfig.add_member(:software_update_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareUpdateOptionsStatus, name: "SoftwareUpdateOptions"))
     DomainConfig.add_member(:modifying_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyingPropertiesList, name: "ModifyingProperties"))
     DomainConfig.add_member(:aiml_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMLOptionsStatus, name: "AIMLOptions"))
+    DomainConfig.add_member(:deployment_strategy_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptionsStatus, name: "DeploymentStrategyOptions"))
+    DomainConfig.add_member(:automated_snapshot_pause_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseOptionsStatus, name: "AutomatedSnapshotPauseOptions"))
+    DomainConfig.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: UseCaseStatus, name: "UseCase"))
+    DomainConfig.add_member(:engine_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineModeStatus, name: "EngineMode"))
     DomainConfig.type = Types::DomainConfig
     DomainEndpointOptions.add_member(:enforce_https, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnforceHTTPS"))
     DomainEndpointOptions.add_member(:tls_security_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: TLSSecurityPolicy, name: "TLSSecurityPolicy"))
@@ -1192,8 +1421,16 @@ module Aws::OpenSearch
     DomainStatus.add_member(:domain_processing_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainProcessingStatusType, name: "DomainProcessingStatus"))
     DomainStatus.add_member(:modifying_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: ModifyingPropertiesList, name: "ModifyingProperties"))
     DomainStatus.add_member(:aiml_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMLOptionsOutput, name: "AIMLOptions"))
+    DomainStatus.add_member(:deployment_strategy_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptions, name: "DeploymentStrategyOptions"))
+    DomainStatus.add_member(:automated_snapshot_pause_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseOptions, name: "AutomatedSnapshotPauseOptions"))
+    DomainStatus.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUseCase, name: "UseCase"))
+    DomainStatus.add_member(:engine_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineMode, name: "EngineMode"))
     DomainStatus.type = Types::DomainStatus
     DomainStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainStatus, name: "member"))
+    DomainUseCase.add_member(:search, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEARCH", traits: {"smithy.api#enumValue" => "SEARCH"}))
+    DomainUseCase.add_member(:vector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VECTOR", traits: {"smithy.api#enumValue" => "VECTOR"}))
+    DomainUseCase.add_member(:observability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OBSERVABILITY", traits: {"smithy.api#enumValue" => "OBSERVABILITY"}))
+    DomainUseCase.add_member(:mixed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIXED", traits: {"smithy.api#enumValue" => "MIXED"}))
     DryRunMode.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Basic", traits: {"smithy.api#enumValue" => "Basic"}))
     DryRunMode.add_member(:verbose, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Verbose", traits: {"smithy.api#enumValue" => "Verbose"}))
     DryRunProgressStatus.add_member(:dry_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "DryRunId", traits: {"smithy.api#required" => {}}))
@@ -1201,6 +1438,7 @@ module Aws::OpenSearch
     DryRunProgressStatus.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CreationDate", traits: {"smithy.api#required" => {}}))
     DryRunProgressStatus.add_member(:update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "UpdateDate", traits: {"smithy.api#required" => {}}))
     DryRunProgressStatus.add_member(:validation_failures, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFailures, name: "ValidationFailures"))
+    DryRunProgressStatus.add_member(:accepted_warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptedWarningsList, name: "AcceptedWarnings"))
     DryRunProgressStatus.type = Types::DryRunProgressStatus
     DryRunResults.add_member(:deployment_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentType, name: "DeploymentType"))
     DryRunResults.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "Message"))
@@ -1219,12 +1457,20 @@ module Aws::OpenSearch
     EBSOptionsStatus.type = Types::EBSOptionsStatus
     EncryptionAtRestOptions.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
     EncryptionAtRestOptions.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId"))
+    EncryptionAtRestOptions.add_member(:encryption_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionMode, name: "EncryptionMode"))
     EncryptionAtRestOptions.type = Types::EncryptionAtRestOptions
     EncryptionAtRestOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionAtRestOptions, name: "Options", traits: {"smithy.api#required" => {}}))
     EncryptionAtRestOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     EncryptionAtRestOptionsStatus.type = Types::EncryptionAtRestOptionsStatus
+    EncryptionMode.add_member(:disk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disk", traits: {"smithy.api#enumValue" => "DISK"}))
+    EncryptionMode.add_member(:native, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Native", traits: {"smithy.api#enumValue" => "NATIVE"}))
     EndpointsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
     EndpointsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceUrl, name: "value"))
+    EngineMode.add_member(:general, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERAL", traits: {"smithy.api#enumValue" => "GENERAL"}))
+    EngineMode.add_member(:optimized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPTIMIZED", traits: {"smithy.api#enumValue" => "OPTIMIZED"}))
+    EngineModeStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineMode, name: "Options", traits: {"smithy.api#required" => {}}))
+    EngineModeStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    EngineModeStatus.type = Types::EngineModeStatus
     EngineType.add_member(:open_search, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OpenSearch", traits: {"smithy.api#enumValue" => "OpenSearch"}))
     EngineType.add_member(:elasticsearch, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Elasticsearch", traits: {"smithy.api#enumValue" => "Elasticsearch"}))
     EnvironmentInfo.add_member(:availability_zone_information, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneInfoList, name: "AvailabilityZoneInformation"))
@@ -1233,6 +1479,10 @@ module Aws::OpenSearch
     ErrorDetails.add_member(:error_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorType, name: "ErrorType"))
     ErrorDetails.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "ErrorMessage"))
     ErrorDetails.type = Types::ErrorDetails
+    ExportOptions.add_member(:types, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "types"))
+    ExportOptions.add_member(:objects, ::Smithy::Schema::Shapes::MemberShape.new(target: SavedObjectIdentifierList, name: "objects"))
+    ExportOptions.add_member(:include_references_deep, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "includeReferencesDeep"))
+    ExportOptions.type = Types::ExportOptions
     Filter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "Name"))
     Filter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueStringList, name: "Values"))
     Filter.type = Types::Filter
@@ -1250,7 +1500,17 @@ module Aws::OpenSearch
     GetApplicationResponse.add_member(:app_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: AppConfigs, name: "appConfigs"))
     GetApplicationResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt"))
     GetApplicationResponse.add_member(:last_updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdatedAt"))
+    GetApplicationResponse.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     GetApplicationResponse.type = Types::GetApplicationResponse
+    GetCapabilityRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCapabilityRequest.add_member(:capability_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityName, name: "capabilityName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCapabilityRequest.type = Types::GetCapabilityRequest
+    GetCapabilityResponse.add_member(:capability_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityName, name: "capabilityName"))
+    GetCapabilityResponse.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId"))
+    GetCapabilityResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityStatus, name: "status"))
+    GetCapabilityResponse.add_member(:capability_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityExtendedResponseConfig, name: "capabilityConfig"))
+    GetCapabilityResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityFailures, name: "failures"))
+    GetCapabilityResponse.type = Types::GetCapabilityResponse
     GetCompatibleVersionsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpQuery" => "domainName"}))
     GetCompatibleVersionsRequest.type = Types::GetCompatibleVersionsRequest
     GetCompatibleVersionsResponse.add_member(:compatible_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: CompatibleVersionsList, name: "CompatibleVersions"))
@@ -1263,12 +1523,16 @@ module Aws::OpenSearch
     GetDataSourceResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceDescription, name: "Description"))
     GetDataSourceResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceStatus, name: "Status"))
     GetDataSourceResponse.type = Types::GetDataSourceResponse
+    GetDefaultApplicationSettingRequest.type = Types::GetDefaultApplicationSettingRequest
+    GetDefaultApplicationSettingResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "applicationArn"))
+    GetDefaultApplicationSettingResponse.type = Types::GetDefaultApplicationSettingResponse
     GetDirectQueryDataSourceRequest.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceName, name: "DataSourceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDirectQueryDataSourceRequest.type = Types::GetDirectQueryDataSourceRequest
     GetDirectQueryDataSourceResponse.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceName, name: "DataSourceName"))
     GetDirectQueryDataSourceResponse.add_member(:data_source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceType, name: "DataSourceType"))
     GetDirectQueryDataSourceResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceDescription, name: "Description"))
     GetDirectQueryDataSourceResponse.add_member(:open_search_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryOpenSearchARNList, name: "OpenSearchArns"))
+    GetDirectQueryDataSourceResponse.add_member(:data_source_access_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "DataSourceAccessPolicy"))
     GetDirectQueryDataSourceResponse.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataSourceArn"))
     GetDirectQueryDataSourceResponse.type = Types::GetDirectQueryDataSourceResponse
     GetDomainMaintenanceStatusRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1281,6 +1545,23 @@ module Aws::OpenSearch
     GetDomainMaintenanceStatusResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "CreatedAt"))
     GetDomainMaintenanceStatusResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "UpdatedAt"))
     GetDomainMaintenanceStatusResponse.type = Types::GetDomainMaintenanceStatusResponse
+    GetIndexRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetIndexRequest.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetIndexRequest.type = Types::GetIndexRequest
+    GetIndexResponse.add_member(:index_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexSchema, name: "IndexSchema", traits: {"smithy.api#required" => {}}))
+    GetIndexResponse.type = Types::GetIndexResponse
+    GetMigrationRequest.add_member(:migration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "migrationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetMigrationRequest.type = Types::GetMigrationRequest
+    GetMigrationResponse.add_member(:migration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "migrationId"))
+    GetMigrationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
+    GetMigrationResponse.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId"))
+    GetMigrationResponse.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSource, name: "source"))
+    GetMigrationResponse.add_member(:exported_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "exportedCount", traits: {"smithy.api#default" => 0}))
+    GetMigrationResponse.add_member(:imported_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "importedCount", traits: {"smithy.api#default" => 0}))
+    GetMigrationResponse.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationError, name: "error"))
+    GetMigrationResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "createdAt"))
+    GetMigrationResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "updatedAt"))
+    GetMigrationResponse.type = Types::GetMigrationResponse
     GetPackageVersionHistoryRequest.add_member(:package_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageID, name: "PackageID", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetPackageVersionHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
     GetPackageVersionHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -1326,6 +1607,7 @@ module Aws::OpenSearch
     IamIdentityCenterOptionsInput.type = Types::IamIdentityCenterOptionsInput
     IdentityCenterOptions.add_member(:enabled_api_access, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnabledAPIAccess"))
     IdentityCenterOptions.add_member(:identity_center_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceARN, name: "IdentityCenterInstanceARN"))
+    IdentityCenterOptions.add_member(:identity_center_instance_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "IdentityCenterInstanceRegion"))
     IdentityCenterOptions.add_member(:subject_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectKeyIdCOption, name: "SubjectKey"))
     IdentityCenterOptions.add_member(:roles_key, ::Smithy::Schema::Shapes::MemberShape.new(target: RolesKeyIdCOption, name: "RolesKey"))
     IdentityCenterOptions.add_member(:identity_center_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterApplicationARN, name: "IdentityCenterApplicationARN"))
@@ -1333,6 +1615,7 @@ module Aws::OpenSearch
     IdentityCenterOptions.type = Types::IdentityCenterOptions
     IdentityCenterOptionsInput.add_member(:enabled_api_access, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnabledAPIAccess"))
     IdentityCenterOptionsInput.add_member(:identity_center_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityCenterInstanceARN, name: "IdentityCenterInstanceARN"))
+    IdentityCenterOptionsInput.add_member(:identity_center_instance_region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "IdentityCenterInstanceRegion"))
     IdentityCenterOptionsInput.add_member(:subject_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectKeyIdCOption, name: "SubjectKey"))
     IdentityCenterOptionsInput.add_member(:roles_key, ::Smithy::Schema::Shapes::MemberShape.new(target: RolesKeyIdCOption, name: "RolesKey"))
     IdentityCenterOptionsInput.type = Types::IdentityCenterOptionsInput
@@ -1357,8 +1640,62 @@ module Aws::OpenSearch
     InboundConnectionStatusCode.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     InboundConnectionStatusCode.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     InboundConnections.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundConnection, name: "member"))
+    IndexStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    IndexStatus.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED", traits: {"smithy.api#enumValue" => "UPDATED"}))
+    IndexStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     InitiatedBy.add_member(:customer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER", traits: {"smithy.api#enumValue" => "CUSTOMER"}))
     InitiatedBy.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
+    Insight.add_member(:insight_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "InsightId"))
+    Insight.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DisplayName"))
+    Insight.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightType, name: "Type"))
+    Insight.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightPriorityLevel, name: "Priority"))
+    Insight.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightStatus, name: "Status"))
+    Insight.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "CreationTime"))
+    Insight.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "UpdateTime"))
+    Insight.add_member(:is_experimental, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsExperimental"))
+    Insight.type = Types::Insight
+    InsightEntity.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightEntityType, name: "Type", traits: {"smithy.api#required" => {}}))
+    InsightEntity.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightEntityValue, name: "Value"))
+    InsightEntity.type = Types::InsightEntity
+    InsightEntityType.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT", traits: {"smithy.api#enumValue" => "Account"}))
+    InsightEntityType.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN", traits: {"smithy.api#enumValue" => "DomainName"}))
+    InsightFeedbackEntity.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightFeedbackEntityType, name: "Type", traits: {"smithy.api#required" => {}}))
+    InsightFeedbackEntity.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightEntityValue, name: "Value", traits: {"smithy.api#required" => {}}))
+    InsightFeedbackEntity.type = Types::InsightFeedbackEntity
+    InsightFeedbackEntityType.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOMAIN", traits: {"smithy.api#enumValue" => "DomainName"}))
+    InsightFeedbackRequest.add_member(:entity, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightFeedbackEntity, name: "Entity", traits: {"smithy.api#required" => {}}))
+    InsightFeedbackRequest.add_member(:insight_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "InsightId", traits: {"smithy.api#required" => {}}))
+    InsightFeedbackRequest.add_member(:thumbs, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightFeedbackThumbs, name: "Thumbs", traits: {"smithy.api#required" => {}}))
+    InsightFeedbackRequest.add_member(:feedback_text, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightFeedbackText, name: "FeedbackText"))
+    InsightFeedbackRequest.type = Types::InsightFeedbackRequest
+    InsightFeedbackResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightResponseStatus, name: "Status"))
+    InsightFeedbackResponse.type = Types::InsightFeedbackResponse
+    InsightFeedbackThumbs.add_member(:up, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UP", traits: {"smithy.api#enumValue" => "Up"}))
+    InsightFeedbackThumbs.add_member(:down, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOWN", traits: {"smithy.api#enumValue" => "Down"}))
+    InsightField.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#required" => {}}))
+    InsightField.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightFieldType, name: "Type", traits: {"smithy.api#required" => {}}))
+    InsightField.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#required" => {}}))
+    InsightField.type = Types::InsightField
+    InsightFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightField, name: "member"))
+    InsightFieldType.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXT", traits: {"smithy.api#enumValue" => "text"}))
+    InsightFieldType.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METRIC", traits: {"smithy.api#enumValue" => "metric"}))
+    InsightList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Insight, name: "member"))
+    InsightPriorityLevel.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRITICAL", traits: {"smithy.api#enumValue" => "CRITICAL"}))
+    InsightPriorityLevel.add_member(:high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH", traits: {"smithy.api#enumValue" => "HIGH"}))
+    InsightPriorityLevel.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
+    InsightPriorityLevel.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
+    InsightResponseStatus.add_member(:success, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCESS", traits: {"smithy.api#enumValue" => "SUCCESS"}))
+    InsightResponseStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
+    InsightSortOrder.add_member(:asc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASC", traits: {"smithy.api#enumValue" => "ASC"}))
+    InsightSortOrder.add_member(:desc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESC", traits: {"smithy.api#enumValue" => "DESC"}))
+    InsightStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    InsightStatus.add_member(:resolved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOLVED", traits: {"smithy.api#enumValue" => "RESOLVED"}))
+    InsightStatus.add_member(:dismissed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISMISSED", traits: {"smithy.api#enumValue" => "DISMISSED"}))
+    InsightTimeRange.add_member(:from, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "From", traits: {"smithy.api#required" => {}}))
+    InsightTimeRange.add_member(:to, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "To", traits: {"smithy.api#required" => {}}))
+    InsightTimeRange.type = Types::InsightTimeRange
+    InsightType.add_member(:event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT", traits: {"smithy.api#enumValue" => "EVENT"}))
+    InsightType.add_member(:recommendation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RECOMMENDATION", traits: {"smithy.api#enumValue" => "RECOMMENDATION"}))
     InstanceCountLimits.add_member(:minimum_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MinimumInstanceCount, name: "MinimumInstanceCount", traits: {"smithy.api#default" => 0}))
     InstanceCountLimits.add_member(:maximum_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumInstanceCount, name: "MaximumInstanceCount", traits: {"smithy.api#default" => 0}))
     InstanceCountLimits.type = Types::InstanceCountLimits
@@ -1385,11 +1722,13 @@ module Aws::OpenSearch
     JWTOptionsInput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
     JWTOptionsInput.add_member(:subject_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectKey, name: "SubjectKey"))
     JWTOptionsInput.add_member(:roles_key, ::Smithy::Schema::Shapes::MemberShape.new(target: RolesKey, name: "RolesKey"))
+    JWTOptionsInput.add_member(:jwks_url, ::Smithy::Schema::Shapes::MemberShape.new(target: JwksUrl, name: "JwksUrl"))
     JWTOptionsInput.add_member(:public_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PublicKey"))
     JWTOptionsInput.type = Types::JWTOptionsInput
     JWTOptionsOutput.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
     JWTOptionsOutput.add_member(:subject_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SubjectKey"))
     JWTOptionsOutput.add_member(:roles_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RolesKey"))
+    JWTOptionsOutput.add_member(:jwks_url, ::Smithy::Schema::Shapes::MemberShape.new(target: JwksUrl, name: "JwksUrl"))
     JWTOptionsOutput.add_member(:public_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PublicKey"))
     JWTOptionsOutput.type = Types::JWTOptionsOutput
     KeyStoreAccessOption.add_member(:key_access_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "KeyAccessRoleArn"))
@@ -1411,6 +1750,13 @@ module Aws::OpenSearch
     ListApplicationsResponse.add_member(:application_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummaries, name: "ApplicationSummaries"))
     ListApplicationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListApplicationsResponse.type = Types::ListApplicationsResponse
+    ListDataSourceAttachmentsRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListDataSourceAttachmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListDataSourceAttachmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxResults", traits: {"smithy.api#default" => 0}))
+    ListDataSourceAttachmentsRequest.type = Types::ListDataSourceAttachmentsRequest
+    ListDataSourceAttachmentsResponse.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceAttachmentSummaryList, name: "attachments"))
+    ListDataSourceAttachmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListDataSourceAttachmentsResponse.type = Types::ListDataSourceAttachmentsResponse
     ListDataSourcesRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListDataSourcesRequest.type = Types::ListDataSourcesRequest
     ListDataSourcesResponse.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceList, name: "DataSources"))
@@ -1440,6 +1786,15 @@ module Aws::OpenSearch
     ListDomainsForPackageResponse.add_member(:domain_package_details_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainPackageDetailsList, name: "DomainPackageDetailsList"))
     ListDomainsForPackageResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListDomainsForPackageResponse.type = Types::ListDomainsForPackageResponse
+    ListInsightsRequest.add_member(:entity, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightEntity, name: "Entity", traits: {"smithy.api#required" => {}}))
+    ListInsightsRequest.add_member(:time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightTimeRange, name: "TimeRange"))
+    ListInsightsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightSortOrder, name: "SortOrder"))
+    ListInsightsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightPageSize, name: "MaxResults"))
+    ListInsightsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListInsightsRequest.type = Types::ListInsightsRequest
+    ListInsightsResponse.add_member(:insights, ::Smithy::Schema::Shapes::MemberShape.new(target: InsightList, name: "Insights"))
+    ListInsightsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListInsightsResponse.type = Types::ListInsightsResponse
     ListInstanceTypeDetailsRequest.add_member(:engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "EngineVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListInstanceTypeDetailsRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpQuery" => "domainName"}))
     ListInstanceTypeDetailsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
@@ -1450,6 +1805,14 @@ module Aws::OpenSearch
     ListInstanceTypeDetailsResponse.add_member(:instance_type_details, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeDetailsList, name: "InstanceTypeDetails"))
     ListInstanceTypeDetailsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListInstanceTypeDetailsResponse.type = Types::ListInstanceTypeDetailsResponse
+    ListMigrationsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpQuery" => "applicationId", "smithy.api#required" => {}}))
+    ListMigrationsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListMigrationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "maxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
+    ListMigrationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListMigrationsRequest.type = Types::ListMigrationsRequest
+    ListMigrationsResponse.add_member(:migrations, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSummaryList, name: "migrations"))
+    ListMigrationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "nextToken"))
+    ListMigrationsResponse.type = Types::ListMigrationsResponse
     ListPackagesForDomainRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListPackagesForDomainRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#default" => 0, "smithy.api#httpQuery" => "maxResults"}))
     ListPackagesForDomainRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -1517,6 +1880,32 @@ module Aws::OpenSearch
     MasterUserOptions.add_member(:master_user_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Username, name: "MasterUserName"))
     MasterUserOptions.add_member(:master_user_password, ::Smithy::Schema::Shapes::MemberShape.new(target: Password, name: "MasterUserPassword"))
     MasterUserOptions.type = Types::MasterUserOptions
+    MigrationError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "code"))
+    MigrationError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
+    MigrationError.type = Types::MigrationError
+    MigrationOptions.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSource, name: "source", traits: {"smithy.api#required" => {}}))
+    MigrationOptions.add_member(:workspace, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationWorkspace, name: "workspace", traits: {"smithy.api#required" => {}}))
+    MigrationOptions.add_member(:export_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportOptions, name: "exportOptions"))
+    MigrationOptions.add_member(:conflict_resolution, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "conflictResolution"))
+    MigrationOptions.type = Types::MigrationOptions
+    MigrationSource.add_member(:datasource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "datasourceArn", traits: {"smithy.api#required" => {}}))
+    MigrationSource.type = Types::MigrationSource
+    MigrationSummary.add_member(:migration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "migrationId"))
+    MigrationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
+    MigrationSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId"))
+    MigrationSummary.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSource, name: "source"))
+    MigrationSummary.add_member(:exported_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "exportedCount", traits: {"smithy.api#default" => 0}))
+    MigrationSummary.add_member(:imported_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "importedCount", traits: {"smithy.api#default" => 0}))
+    MigrationSummary.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationError, name: "error"))
+    MigrationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "createdAt"))
+    MigrationSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateTimestamp, name: "updatedAt"))
+    MigrationSummary.type = Types::MigrationSummary
+    MigrationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationSummary, name: "member"))
+    MigrationWorkspace.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "workspaceId"))
+    MigrationWorkspace.add_member(:create_workspace, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "createWorkspace"))
+    MigrationWorkspace.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
+    MigrationWorkspace.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "type"))
+    MigrationWorkspace.type = Types::MigrationWorkspace
     ModifyingProperties.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name"))
     ModifyingProperties.add_member(:active_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ActiveValue"))
     ModifyingProperties.add_member(:pending_value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PendingValue"))
@@ -1557,6 +1946,7 @@ module Aws::OpenSearch
     NodeType.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Data", traits: {"smithy.api#enumValue" => "Data"}))
     NodeType.add_member(:ultrawarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Ultrawarm", traits: {"smithy.api#enumValue" => "Ultrawarm"}))
     NodeType.add_member(:master, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Master", traits: {"smithy.api#enumValue" => "Master"}))
+    NodeType.add_member(:warm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Warm", traits: {"smithy.api#enumValue" => "Warm"}))
     OffPeakWindow.add_member(:window_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: WindowStartTime, name: "WindowStartTime"))
     OffPeakWindow.type = Types::OffPeakWindow
     OffPeakWindowOptions.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
@@ -1768,6 +2158,10 @@ module Aws::OpenSearch
     PackageVersionHistory.add_member(:package_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageConfiguration, name: "PackageConfiguration"))
     PackageVersionHistory.type = Types::PackageVersionHistory
     PackageVersionHistoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageVersionHistory, name: "member"))
+    PauseState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
+    PauseState.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    PauseState.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "Scheduled"}))
+    PauseState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
     PluginProperties.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginName, name: "Name"))
     PluginProperties.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginDescription, name: "Description"))
     PluginProperties.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: PluginVersion, name: "Version"))
@@ -1776,6 +2170,9 @@ module Aws::OpenSearch
     PluginProperties.type = Types::PluginProperties
     PrincipalType.add_member(:aws_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_ACCOUNT", traits: {"smithy.api#enumValue" => "AWS_ACCOUNT"}))
     PrincipalType.add_member(:aws_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SERVICE", traits: {"smithy.api#enumValue" => "AWS_SERVICE"}))
+    PrometheusDirectQueryDataSource.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
+    PrometheusDirectQueryDataSource.add_member(:workspace_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AMPWorkspaceArn, name: "WorkspaceArn", traits: {"smithy.api#required" => {}}))
+    PrometheusDirectQueryDataSource.type = Types::PrometheusDirectQueryDataSource
     PropertyValueType.add_member(:plain_text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLAIN_TEXT", traits: {"smithy.api#enumValue" => "PLAIN_TEXT"}))
     PropertyValueType.add_member(:stringified_json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRINGIFIED_JSON", traits: {"smithy.api#enumValue" => "STRINGIFIED_JSON"}))
     PurchaseReservedInstanceOfferingRequest.add_member(:reserved_instance_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "ReservedInstanceOfferingId", traits: {"smithy.api#required" => {}}))
@@ -1785,10 +2182,25 @@ module Aws::OpenSearch
     PurchaseReservedInstanceOfferingResponse.add_member(:reserved_instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GUID, name: "ReservedInstanceId"))
     PurchaseReservedInstanceOfferingResponse.add_member(:reservation_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationToken, name: "ReservationName"))
     PurchaseReservedInstanceOfferingResponse.type = Types::PurchaseReservedInstanceOfferingResponse
+    PutDefaultApplicationSettingRequest.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "applicationArn", traits: {"smithy.api#required" => {}}))
+    PutDefaultApplicationSettingRequest.add_member(:set_as_default, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "setAsDefault", traits: {"smithy.api#required" => {}}))
+    PutDefaultApplicationSettingRequest.type = Types::PutDefaultApplicationSettingRequest
+    PutDefaultApplicationSettingResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "applicationArn"))
+    PutDefaultApplicationSettingResponse.type = Types::PutDefaultApplicationSettingResponse
     RecurringCharge.add_member(:recurring_charge_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "RecurringChargeAmount"))
     RecurringCharge.add_member(:recurring_charge_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RecurringChargeFrequency"))
     RecurringCharge.type = Types::RecurringCharge
     RecurringChargeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RecurringCharge, name: "member", traits: {"smithy.api#xmlName" => "RecurringCharge"}))
+    RegionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "member"))
+    RegisterCapabilityRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    RegisterCapabilityRequest.add_member(:capability_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityName, name: "capabilityName", traits: {"smithy.api#required" => {}}))
+    RegisterCapabilityRequest.add_member(:capability_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityBaseRequestConfig, name: "capabilityConfig", traits: {"smithy.api#required" => {}}))
+    RegisterCapabilityRequest.type = Types::RegisterCapabilityRequest
+    RegisterCapabilityResponse.add_member(:capability_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityName, name: "capabilityName"))
+    RegisterCapabilityResponse.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId"))
+    RegisterCapabilityResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityStatus, name: "status"))
+    RegisterCapabilityResponse.add_member(:capability_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityBaseResponseConfig, name: "capabilityConfig"))
+    RegisterCapabilityResponse.type = Types::RegisterCapabilityResponse
     RejectInboundConnectionRequest.add_member(:connection_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionId, name: "ConnectionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RejectInboundConnectionRequest.type = Types::RejectInboundConnectionRequest
     RejectInboundConnectionResponse.add_member(:connection, ::Smithy::Schema::Shapes::MemberShape.new(target: InboundConnection, name: "Connection"))
@@ -1835,12 +2247,22 @@ module Aws::OpenSearch
     RevokeVpcEndpointAccessRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RevokeVpcEndpointAccessRequest.add_member(:account, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSAccount, name: "Account"))
     RevokeVpcEndpointAccessRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: AWSServicePrincipal, name: "Service"))
+    RevokeVpcEndpointAccessRequest.add_member(:service_options, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceOptions, name: "ServiceOptions"))
     RevokeVpcEndpointAccessRequest.type = Types::RevokeVpcEndpointAccessRequest
     RevokeVpcEndpointAccessResponse.type = Types::RevokeVpcEndpointAccessResponse
     RolesKeyIdCOption.add_member(:group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GroupName", traits: {"smithy.api#enumValue" => "GroupName"}))
     RolesKeyIdCOption.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GroupId", traits: {"smithy.api#enumValue" => "GroupId"}))
     RollbackOnDisable.add_member(:no_rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_ROLLBACK", traits: {"smithy.api#enumValue" => "NO_ROLLBACK"}))
     RollbackOnDisable.add_member(:default_rollback, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT_ROLLBACK", traits: {"smithy.api#enumValue" => "DEFAULT_ROLLBACK"}))
+    RollbackServiceSoftwareOptions.add_member(:current_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CurrentVersion"))
+    RollbackServiceSoftwareOptions.add_member(:new_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NewVersion"))
+    RollbackServiceSoftwareOptions.add_member(:rollback_available, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "RollbackAvailable"))
+    RollbackServiceSoftwareOptions.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Description"))
+    RollbackServiceSoftwareOptions.type = Types::RollbackServiceSoftwareOptions
+    RollbackServiceSoftwareUpdateRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
+    RollbackServiceSoftwareUpdateRequest.type = Types::RollbackServiceSoftwareUpdateRequest
+    RollbackServiceSoftwareUpdateResponse.add_member(:rollback_service_software_options, ::Smithy::Schema::Shapes::MemberShape.new(target: RollbackServiceSoftwareOptions, name: "RollbackServiceSoftwareOptions"))
+    RollbackServiceSoftwareUpdateResponse.type = Types::RollbackServiceSoftwareUpdateResponse
     S3GlueDataCatalog.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     S3GlueDataCatalog.type = Types::S3GlueDataCatalog
     S3VectorsEngine.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
@@ -1862,6 +2284,10 @@ module Aws::OpenSearch
     SAMLOptionsOutput.add_member(:roles_key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RolesKey"))
     SAMLOptionsOutput.add_member(:session_timeout_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerClass, name: "SessionTimeoutMinutes"))
     SAMLOptionsOutput.type = Types::SAMLOptionsOutput
+    SavedObjectIdentifier.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "type", traits: {"smithy.api#required" => {}}))
+    SavedObjectIdentifier.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "id", traits: {"smithy.api#required" => {}}))
+    SavedObjectIdentifier.type = Types::SavedObjectIdentifier
+    SavedObjectIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SavedObjectIdentifier, name: "member"))
     ScheduleAt.add_member(:now, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOW", traits: {"smithy.api#enumValue" => "NOW"}))
     ScheduleAt.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
     ScheduleAt.add_member(:off_peak_window, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF_PEAK_WINDOW", traits: {"smithy.api#enumValue" => "OFF_PEAK_WINDOW"}))
@@ -1890,6 +2316,12 @@ module Aws::OpenSearch
     ScheduledBy.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM", traits: {"smithy.api#enumValue" => "SYSTEM"}))
     SecurityLakeDirectQueryDataSource.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
     SecurityLakeDirectQueryDataSource.type = Types::SecurityLakeDirectQueryDataSource
+    ServerlessVectorAcceleration.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled"))
+    ServerlessVectorAcceleration.type = Types::ServerlessVectorAcceleration
+    ServiceOptions.add_member(:supported_regions, ::Smithy::Schema::Shapes::MemberShape.new(target: RegionsList, name: "SupportedRegions"))
+    ServiceOptions.type = Types::ServiceOptions
+    ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
+    ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     ServiceSoftwareOptions.add_member(:current_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CurrentVersion"))
     ServiceSoftwareOptions.add_member(:new_version, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NewVersion"))
     ServiceSoftwareOptions.add_member(:update_available, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "UpdateAvailable"))
@@ -1911,6 +2343,7 @@ module Aws::OpenSearch
     SnapshotOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     SnapshotOptionsStatus.type = Types::SnapshotOptionsStatus
     SoftwareUpdateOptions.add_member(:auto_software_update_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutoSoftwareUpdateEnabled"))
+    SoftwareUpdateOptions.add_member(:use_latest_service_software_for_blue_green, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "UseLatestServiceSoftwareForBlueGreen"))
     SoftwareUpdateOptions.type = Types::SoftwareUpdateOptions
     SoftwareUpdateOptionsStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareUpdateOptions, name: "Options"))
     SoftwareUpdateOptionsStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status"))
@@ -1921,6 +2354,13 @@ module Aws::OpenSearch
     StartDomainMaintenanceRequest.type = Types::StartDomainMaintenanceRequest
     StartDomainMaintenanceResponse.add_member(:maintenance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestId, name: "MaintenanceId"))
     StartDomainMaintenanceResponse.type = Types::StartDomainMaintenanceResponse
+    StartMigrationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "applicationId", traits: {"smithy.api#required" => {}}))
+    StartMigrationRequest.add_member(:migration_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MigrationOptions, name: "migrationOptions", traits: {"smithy.api#required" => {}}))
+    StartMigrationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
+    StartMigrationRequest.type = Types::StartMigrationRequest
+    StartMigrationResponse.add_member(:migration_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "migrationId"))
+    StartMigrationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "status"))
+    StartMigrationResponse.type = Types::StartMigrationResponse
     StartServiceSoftwareUpdateRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#required" => {}}))
     StartServiceSoftwareUpdateRequest.add_member(:schedule_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleAt, name: "ScheduleAt"))
     StartServiceSoftwareUpdateRequest.add_member(:desired_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Long, name: "DesiredStartTime"))
@@ -1943,14 +2383,18 @@ module Aws::OpenSearch
     TLSSecurityPolicy.add_member(:policy_min_tls_1_0_2019_07, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_0_2019_07", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-0-2019-07"}))
     TLSSecurityPolicy.add_member(:policy_min_tls_1_2_2019_07, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_2_2019_07", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-2-2019-07"}))
     TLSSecurityPolicy.add_member(:policy_min_tls_1_2_pfs_2023_10, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_2_PFS_2023_10", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-2-PFS-2023-10"}))
+    TLSSecurityPolicy.add_member(:policy_min_tls_1_2_rfc9151_fips_2024_08, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MIN_TLS_1_2_RFC9151_FIPS_2024_08", traits: {"smithy.api#enumValue" => "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"}))
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
     TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tag, name: "member"))
+    ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
+    ThrottlingException.type = Types::ThrottlingException
     TimeUnit.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOURS", traits: {"smithy.api#enumValue" => "HOURS"}))
     UpdateApplicationRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateApplicationRequest.add_member(:data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSources, name: "dataSources"))
     UpdateApplicationRequest.add_member(:app_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: AppConfigs, name: "appConfigs"))
+    UpdateApplicationRequest.add_member(:iam_identity_center_options, ::Smithy::Schema::Shapes::MemberShape.new(target: IamIdentityCenterOptionsInput, name: "iamIdentityCenterOptions"))
     UpdateApplicationRequest.type = Types::UpdateApplicationRequest
     UpdateApplicationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "id"))
     UpdateApplicationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name"))
@@ -1972,7 +2416,8 @@ module Aws::OpenSearch
     UpdateDirectQueryDataSourceRequest.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceName, name: "DataSourceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateDirectQueryDataSourceRequest.add_member(:data_source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceType, name: "DataSourceType", traits: {"smithy.api#required" => {}}))
     UpdateDirectQueryDataSourceRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryDataSourceDescription, name: "Description"))
-    UpdateDirectQueryDataSourceRequest.add_member(:open_search_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryOpenSearchARNList, name: "OpenSearchArns", traits: {"smithy.api#required" => {}}))
+    UpdateDirectQueryDataSourceRequest.add_member(:open_search_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectQueryOpenSearchARNList, name: "OpenSearchArns"))
+    UpdateDirectQueryDataSourceRequest.add_member(:data_source_access_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyDocument, name: "DataSourceAccessPolicy"))
     UpdateDirectQueryDataSourceRequest.type = Types::UpdateDirectQueryDataSourceRequest
     UpdateDirectQueryDataSourceResponse.add_member(:data_source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DataSourceArn"))
     UpdateDirectQueryDataSourceResponse.type = Types::UpdateDirectQueryDataSourceResponse
@@ -1997,11 +2442,22 @@ module Aws::OpenSearch
     UpdateDomainConfigRequest.add_member(:off_peak_window_options, ::Smithy::Schema::Shapes::MemberShape.new(target: OffPeakWindowOptions, name: "OffPeakWindowOptions"))
     UpdateDomainConfigRequest.add_member(:software_update_options, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareUpdateOptions, name: "SoftwareUpdateOptions"))
     UpdateDomainConfigRequest.add_member(:aiml_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMLOptionsInput, name: "AIMLOptions"))
+    UpdateDomainConfigRequest.add_member(:deployment_strategy_options, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyOptions, name: "DeploymentStrategyOptions"))
+    UpdateDomainConfigRequest.add_member(:automated_snapshot_pause_options, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomatedSnapshotPauseRequestOptions, name: "AutomatedSnapshotPauseOptions"))
+    UpdateDomainConfigRequest.add_member(:use_case, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUseCase, name: "UseCase"))
+    UpdateDomainConfigRequest.add_member(:engine_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineMode, name: "EngineMode"))
+    UpdateDomainConfigRequest.add_member(:accepted_warnings, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptedWarningsList, name: "AcceptedWarnings"))
     UpdateDomainConfigRequest.type = Types::UpdateDomainConfigRequest
     UpdateDomainConfigResponse.add_member(:domain_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainConfig, name: "DomainConfig", traits: {"smithy.api#required" => {}}))
     UpdateDomainConfigResponse.add_member(:dry_run_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRunResults, name: "DryRunResults"))
     UpdateDomainConfigResponse.add_member(:dry_run_progress_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DryRunProgressStatus, name: "DryRunProgressStatus"))
     UpdateDomainConfigResponse.type = Types::UpdateDomainConfigResponse
+    UpdateIndexRequest.add_member(:domain_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainName, name: "DomainName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateIndexRequest.add_member(:index_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexName, name: "IndexName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateIndexRequest.add_member(:index_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexSchema, name: "IndexSchema", traits: {"smithy.api#required" => {}}))
+    UpdateIndexRequest.type = Types::UpdateIndexRequest
+    UpdateIndexResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: IndexStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    UpdateIndexResponse.type = Types::UpdateIndexResponse
     UpdatePackageRequest.add_member(:package_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageID, name: "PackageID", traits: {"smithy.api#required" => {}}))
     UpdatePackageRequest.add_member(:package_source, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageSource, name: "PackageSource", traits: {"smithy.api#required" => {}}))
     UpdatePackageRequest.add_member(:package_description, ::Smithy::Schema::Shapes::MemberShape.new(target: PackageDescription, name: "PackageDescription"))
@@ -2063,22 +2519,30 @@ module Aws::OpenSearch
     UpgradeStepItem.add_member(:progress_percent, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "ProgressPercent"))
     UpgradeStepItem.type = Types::UpgradeStepItem
     UpgradeStepsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpgradeStepItem, name: "member"))
+    UseCaseStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainUseCase, name: "Options", traits: {"smithy.api#required" => {}}))
+    UseCaseStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    UseCaseStatus.type = Types::UseCaseStatus
     VPCDerivedInfo.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VPCId"))
     VPCDerivedInfo.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SubnetIds"))
     VPCDerivedInfo.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "AvailabilityZones"))
     VPCDerivedInfo.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SecurityGroupIds"))
+    VPCDerivedInfo.add_member(:egress_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EgressEnabled"))
     VPCDerivedInfo.type = Types::VPCDerivedInfo
     VPCDerivedInfoStatus.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: VPCDerivedInfo, name: "Options", traits: {"smithy.api#required" => {}}))
     VPCDerivedInfoStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionStatus, name: "Status", traits: {"smithy.api#required" => {}}))
     VPCDerivedInfoStatus.type = Types::VPCDerivedInfoStatus
     VPCOptions.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SubnetIds"))
     VPCOptions.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "SecurityGroupIds"))
+    VPCOptions.add_member(:egress_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EgressEnabled"))
     VPCOptions.type = Types::VPCOptions
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     ValidationException.type = Types::ValidationException
     ValidationFailure.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Code"))
     ValidationFailure.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    ValidationFailure.add_member(:severity, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFailureSeverity, name: "Severity"))
     ValidationFailure.type = Types::ValidationFailure
+    ValidationFailureSeverity.add_member(:critical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRITICAL", traits: {"smithy.api#enumValue" => "Critical"}))
+    ValidationFailureSeverity.add_member(:warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARNING", traits: {"smithy.api#enumValue" => "Warning"}))
     ValidationFailures.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFailure, name: "member"))
     ValueStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
     VersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionString, name: "member"))
@@ -2121,6 +2585,9 @@ module Aws::OpenSearch
     WindowStartTime.add_member(:hours, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTimeHours, name: "Hours", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     WindowStartTime.add_member(:minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: StartTimeMinutes, name: "Minutes", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
     WindowStartTime.type = Types::WindowStartTime
+    WorkspaceConfigurationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name", traits: {"smithy.api#required" => {}}))
+    WorkspaceConfigurationInput.add_member(:workspace_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "workspaceType", traits: {"smithy.api#required" => {}}))
+    WorkspaceConfigurationInput.type = Types::WorkspaceConfigurationInput
     ZoneAwarenessConfig.add_member(:availability_zone_count, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerClass, name: "AvailabilityZoneCount"))
     ZoneAwarenessConfig.type = Types::ZoneAwarenessConfig
     ZoneStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Active", traits: {"smithy.api#enumValue" => "Active"}))
@@ -2131,7 +2598,7 @@ module Aws::OpenSearch
       service.id = "com.amazonaws.opensearch#AmazonOpenSearchService"
       service.name = "AmazonOpenSearchService"
       service.version = "2021-01-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "OpenSearch", "arnNamespace" => "es", "cloudFormationName" => "OpenSearch", "cloudTrailEventSource" => "opensearch.amazonaws.com", "endpointPrefix" => "es"}, "aws.auth#sigv4" => {"name" => "es"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon OpenSearch Service", "smithy.api#xmlNamespace" => {"uri" => "http://es.amazonaws.com/doc/2021-01-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "OpenSearch", "arnNamespace" => "es", "cloudFormationName" => "OpenSearch", "cloudTrailEventSource" => "opensearch.amazonaws.com", "endpointPrefix" => "es"}, "aws.auth#sigv4" => {"name" => "es"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon OpenSearch Service", "smithy.api#xmlNamespace" => {"uri" => "http://es.amazonaws.com/doc/2021-01-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-cn"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://es-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://es-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://aos.{Region}.api.aws", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://aos.{Region}.api.amazonwebservices.com.cn", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://es.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://es.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 16, "nodes" => "/////wAAAAH/////AAAAAAAAAA8AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAsAAAAGAAAABAAAAAcF9eEMAAAABQAAAAgF9eELAAAABwX14QgAAAAJAAAACAX14QkAAAAKAAAACQX14QgF9eEKAAAABAAAAA0AAAAMAAAABgX14QYF9eEHAAAABQAAAA4F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAQAAAABAX14QIF9eED"}}
       service.add_operation(:accept_inbound_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#AcceptInboundConnection"
         operation.name = "AcceptInboundConnection"
@@ -2206,6 +2673,19 @@ module Aws::OpenSearch
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/packages/associateMultiple", "code" => 200}}
       end)
+      service.add_operation(:attach_data_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#AttachDataSource"
+        operation.name = "AttachDataSource"
+        operation.input = AttachDataSourceRequest
+        operation.output = AttachDataSourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/application/{id}/attachDataSource", "code" => 200}}
+      end)
       service.add_operation(:authorize_vpc_endpoint_access, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#AuthorizeVpcEndpointAccess"
         operation.name = "AuthorizeVpcEndpointAccess"
@@ -2268,6 +2748,21 @@ module Aws::OpenSearch
         operation.errors << ResourceAlreadyExistsException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/domain", "code" => 200}}
+      end)
+      service.add_operation(:create_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#CreateIndex"
+        operation.name = "CreateIndex"
+        operation.input = CreateIndexRequest
+        operation.output = CreateIndexResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DependencyFailureException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceAlreadyExistsException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/domain/{DomainName}/index", "code" => 200}}
       end)
       service.add_operation(:create_outbound_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#CreateOutboundConnection"
@@ -2366,6 +2861,20 @@ module Aws::OpenSearch
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2021-01-01/opensearch/cc/inboundConnection/{ConnectionId}", "code" => 200}}
       end)
+      service.add_operation(:delete_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#DeleteIndex"
+        operation.name = "DeleteIndex"
+        operation.input = DeleteIndexRequest
+        operation.output = DeleteIndexResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DependencyFailureException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}", "code" => 200}}
+      end)
       service.add_operation(:delete_outbound_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#DeleteOutboundConnection"
         operation.name = "DeleteOutboundConnection"
@@ -2398,6 +2907,31 @@ module Aws::OpenSearch
         operation.errors << InternalException
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2021-01-01/opensearch/vpcEndpoints/{VpcEndpointId}", "code" => 200}}
+      end)
+      service.add_operation(:deregister_capability, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#DeregisterCapability"
+        operation.name = "DeregisterCapability"
+        operation.input = DeregisterCapabilityRequest
+        operation.output = DeregisterCapabilityResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/2021-01-01/opensearch/application/{applicationId}/capability/deregister/{capabilityName}", "code" => 200}}
+      end)
+      service.add_operation(:describe_data_source_attachment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#DescribeDataSourceAttachment"
+        operation.name = "DescribeDataSourceAttachment"
+        operation.input = DescribeDataSourceAttachmentRequest
+        operation.output = DescribeDataSourceAttachmentResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/application/{id}/describeDataSourceAttachment", "code" => 200}}
       end)
       service.add_operation(:describe_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#DescribeDomain"
@@ -2501,6 +3035,19 @@ module Aws::OpenSearch
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/cc/inboundConnection/search", "code" => 200}}
         operation[:paginator] = Paginators::DescribeInboundConnections.new
       end)
+      service.add_operation(:describe_insight_details, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#DescribeInsightDetails"
+        operation.name = "DescribeInsightDetails"
+        operation.input = DescribeInsightDetailsRequest
+        operation.output = DescribeInsightDetailsResponse
+        operation.errors << BaseException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/insight-details", "code" => 200}}
+      end)
       service.add_operation(:describe_instance_type_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#DescribeInstanceTypeLimits"
         operation.name = "DescribeInstanceTypeLimits"
@@ -2572,6 +3119,19 @@ module Aws::OpenSearch
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/vpcEndpoints/describe", "code" => 200}}
       end)
+      service.add_operation(:detach_data_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#DetachDataSource"
+        operation.name = "DetachDataSource"
+        operation.input = DetachDataSourceRequest
+        operation.output = DetachDataSourceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/application/{id}/detachDataSource", "code" => 200}}
+      end)
       service.add_operation(:dissociate_package, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#DissociatePackage"
         operation.name = "DissociatePackage"
@@ -2611,6 +3171,18 @@ module Aws::OpenSearch
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/application/{id}", "code" => 200}}
       end)
+      service.add_operation(:get_capability, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#GetCapability"
+        operation.name = "GetCapability"
+        operation.input = GetCapabilityRequest
+        operation.output = GetCapabilityResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/application/{applicationId}/capability/{capabilityName}", "code" => 200}}
+      end)
       service.add_operation(:get_compatible_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#GetCompatibleVersions"
         operation.name = "GetCompatibleVersions"
@@ -2636,6 +3208,17 @@ module Aws::OpenSearch
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}", "code" => 200}}
       end)
+      service.add_operation(:get_default_application_setting, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#GetDefaultApplicationSetting"
+        operation.name = "GetDefaultApplicationSetting"
+        operation.input = GetDefaultApplicationSettingRequest
+        operation.output = GetDefaultApplicationSettingResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/defaultApplicationSetting", "code" => 200}}
+      end)
       service.add_operation(:get_direct_query_data_source, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#GetDirectQueryDataSource"
         operation.name = "GetDirectQueryDataSource"
@@ -2659,6 +3242,32 @@ module Aws::OpenSearch
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance", "code" => 200}}
+      end)
+      service.add_operation(:get_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#GetIndex"
+        operation.name = "GetIndex"
+        operation.input = GetIndexRequest
+        operation.output = GetIndexResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DependencyFailureException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}", "code" => 200}}
+      end)
+      service.add_operation(:get_migration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#GetMigration"
+        operation.name = "GetMigration"
+        operation.input = GetMigrationRequest
+        operation.output = GetMigrationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/app-migrations/{migrationId}", "code" => 200}}
       end)
       service.add_operation(:get_package_version_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#GetPackageVersionHistory"
@@ -2698,6 +3307,19 @@ module Aws::OpenSearch
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/upgradeDomain/{DomainName}/status", "code" => 200}}
       end)
+      service.add_operation(:insight_feedback, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#InsightFeedback"
+        operation.name = "InsightFeedback"
+        operation.input = InsightFeedbackRequest
+        operation.output = InsightFeedbackResponse
+        operation.errors << BaseException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/insight-feedback", "code" => 200}}
+      end)
       service.add_operation(:list_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#ListApplications"
         operation.name = "ListApplications"
@@ -2711,6 +3333,18 @@ module Aws::OpenSearch
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/list-applications", "code" => 200}}
         operation[:paginator] = Paginators::ListApplications.new
+      end)
+      service.add_operation(:list_data_source_attachments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#ListDataSourceAttachments"
+        operation.name = "ListDataSourceAttachments"
+        operation.input = ListDataSourceAttachmentsRequest
+        operation.output = ListDataSourceAttachmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/application/{id}/listDataSourceAttachments", "code" => 200}}
       end)
       service.add_operation(:list_data_sources, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#ListDataSources"
@@ -2772,6 +3406,19 @@ module Aws::OpenSearch
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/packages/{PackageID}/domains", "code" => 200}}
         operation[:paginator] = Paginators::ListDomainsForPackage.new
       end)
+      service.add_operation(:list_insights, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#ListInsights"
+        operation.name = "ListInsights"
+        operation.input = ListInsightsRequest
+        operation.output = ListInsightsResponse
+        operation.errors << BaseException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/insights", "code" => 200}}
+      end)
       service.add_operation(:list_instance_type_details, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#ListInstanceTypeDetails"
         operation.name = "ListInstanceTypeDetails"
@@ -2783,6 +3430,17 @@ module Aws::OpenSearch
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/instanceTypeDetails/{EngineVersion}", "code" => 200}}
         operation[:paginator] = Paginators::ListInstanceTypeDetails.new
+      end)
+      service.add_operation(:list_migrations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#ListMigrations"
+        operation.name = "ListMigrations"
+        operation.input = ListMigrationsRequest
+        operation.output = ListMigrationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/2021-01-01/opensearch/app-migrations", "code" => 200}}
       end)
       service.add_operation(:list_packages_for_domain, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#ListPackagesForDomain"
@@ -2878,6 +3536,31 @@ module Aws::OpenSearch
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/purchaseReservedInstanceOffering", "code" => 200}}
       end)
+      service.add_operation(:put_default_application_setting, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#PutDefaultApplicationSetting"
+        operation.name = "PutDefaultApplicationSetting"
+        operation.input = PutDefaultApplicationSettingRequest
+        operation.output = PutDefaultApplicationSettingResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/2021-01-01/opensearch/defaultApplicationSetting", "code" => 200}}
+      end)
+      service.add_operation(:register_capability, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#RegisterCapability"
+        operation.name = "RegisterCapability"
+        operation.input = RegisterCapabilityRequest
+        operation.output = RegisterCapabilityResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/application/{applicationId}/capability/register", "code" => 200}}
+      end)
       service.add_operation(:reject_inbound_connection, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#RejectInboundConnection"
         operation.name = "RejectInboundConnection"
@@ -2909,6 +3592,18 @@ module Aws::OpenSearch
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/domain/{DomainName}/revokeVpcEndpointAccess", "code" => 200}}
       end)
+      service.add_operation(:rollback_service_software_update, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#RollbackServiceSoftwareUpdate"
+        operation.name = "RollbackServiceSoftwareUpdate"
+        operation.input = RollbackServiceSoftwareUpdateRequest
+        operation.output = RollbackServiceSoftwareUpdateResponse
+        operation.errors << BaseException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/serviceSoftwareUpdate/rollback", "code" => 200}}
+      end)
       service.add_operation(:start_domain_maintenance, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#StartDomainMaintenance"
         operation.name = "StartDomainMaintenance"
@@ -2920,6 +3615,19 @@ module Aws::OpenSearch
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance", "code" => 200}}
+      end)
+      service.add_operation(:start_migration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#StartMigration"
+        operation.name = "StartMigration"
+        operation.input = StartMigrationRequest
+        operation.output = StartMigrationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/app-migrations", "code" => 200}}
       end)
       service.add_operation(:start_service_software_update, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#StartServiceSoftwareUpdate"
@@ -2967,6 +3675,7 @@ module Aws::OpenSearch
         operation.errors << BaseException
         operation.errors << DisabledOperationException
         operation.errors << InternalException
+        operation.errors << LimitExceededException
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/2021-01-01/opensearch/directQueryDataSource/{DataSourceName}", "code" => 200}}
@@ -2983,6 +3692,20 @@ module Aws::OpenSearch
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2021-01-01/opensearch/domain/{DomainName}/config", "code" => 200}}
+      end)
+      service.add_operation(:update_index, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.opensearch#UpdateIndex"
+        operation.name = "UpdateIndex"
+        operation.input = UpdateIndexRequest
+        operation.output = UpdateIndexResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DependencyFailureException
+        operation.errors << DisabledOperationException
+        operation.errors << InternalException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}", "code" => 200}}
       end)
       service.add_operation(:update_package, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.opensearch#UpdatePackage"

@@ -132,6 +132,123 @@ module Aws::Route53Resolver
       USE_LOCAL_RESOURCE_SETTING: String
     end
 
+    class BatchCreateFirewallRuleError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule: Types::CreateFirewallRuleEntry,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule: Types::CreateFirewallRuleEntry?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchCreateFirewallRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_firewall_rule_entries: Array[Types::CreateFirewallRuleEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_firewall_rule_entries: Array[Types::CreateFirewallRuleEntry]?
+    end
+
+    class BatchCreateFirewallRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_firewall_rules: Array[Types::FirewallRule],
+        ?create_errors: Array[Types::BatchCreateFirewallRuleError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_firewall_rules: Array[Types::FirewallRule]?
+      attr_accessor create_errors: Array[Types::BatchCreateFirewallRuleError]?
+    end
+
+    class BatchDeleteFirewallRuleError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule: Types::DeleteFirewallRuleEntry,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule: Types::DeleteFirewallRuleEntry?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchDeleteFirewallRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delete_firewall_rule_entries: Array[Types::DeleteFirewallRuleEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delete_firewall_rule_entries: Array[Types::DeleteFirewallRuleEntry]?
+    end
+
+    class BatchDeleteFirewallRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted_firewall_rules: Array[Types::FirewallRule],
+        ?delete_errors: Array[Types::BatchDeleteFirewallRuleError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted_firewall_rules: Array[Types::FirewallRule]?
+      attr_accessor delete_errors: Array[Types::BatchDeleteFirewallRuleError]?
+    end
+
+    class BatchUpdateFirewallRuleError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule: Types::UpdateFirewallRuleEntry,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule: Types::UpdateFirewallRuleEntry?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchUpdateFirewallRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_firewall_rule_entries: Array[Types::UpdateFirewallRuleEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_firewall_rule_entries: Array[Types::UpdateFirewallRuleEntry]?
+    end
+
+    class BatchUpdateFirewallRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?updated_firewall_rules: Array[Types::FirewallRule],
+        ?update_errors: Array[Types::BatchUpdateFirewallRuleError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor updated_firewall_rules: Array[Types::FirewallRule]?
+      attr_accessor update_errors: Array[Types::BatchUpdateFirewallRuleError]?
+    end
+
     module BlockOverrideDnsType
       CNAME: String
     end
@@ -185,6 +302,45 @@ module Aws::Route53Resolver
       attr_accessor firewall_domain_list: Types::FirewallDomainList?
     end
 
+    class CreateFirewallRuleEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creator_request_id: String,
+        ?firewall_rule_group_id: String,
+        ?firewall_domain_list_id: String,
+        ?priority: Integer,
+        ?action: String,
+        ?block_response: String,
+        ?block_override_domain: String,
+        ?block_override_dns_type: String,
+        ?block_override_ttl: Integer,
+        ?name: String,
+        ?firewall_domain_redirection_action: String,
+        ?qtype: String,
+        ?dns_threat_protection: String,
+        ?confidence_threshold: String,
+        ?firewall_rule_type: Types::FirewallRuleType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creator_request_id: String?
+      attr_accessor firewall_rule_group_id: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor action: String?
+      attr_accessor block_response: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor name: String?
+      attr_accessor firewall_domain_redirection_action: String?
+      attr_accessor qtype: String?
+      attr_accessor dns_threat_protection: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor firewall_rule_type: Types::FirewallRuleType?
+    end
+
     class CreateFirewallRuleGroupRequest
       include Smithy::Schema::Structure
 
@@ -229,6 +385,7 @@ module Aws::Route53Resolver
         ?qtype: String,
         ?dns_threat_protection: String,
         ?confidence_threshold: String,
+        ?firewall_rule_type: Types::FirewallRuleType,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -246,6 +403,7 @@ module Aws::Route53Resolver
       attr_accessor qtype: String?
       attr_accessor dns_threat_protection: String?
       attr_accessor confidence_threshold: String?
+      attr_accessor firewall_rule_type: Types::FirewallRuleType?
     end
 
     class CreateFirewallRuleResponse
@@ -305,6 +463,10 @@ module Aws::Route53Resolver
         ?tags: Array[Types::Tag],
         ?resolver_endpoint_type: String,
         ?protocols: Array[String],
+        ?rni_enhanced_metrics_enabled: bool,
+        ?target_name_server_metrics_enabled: bool,
+        ?dns64_enabled: bool,
+        ?ipv6_internet_access_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -318,6 +480,10 @@ module Aws::Route53Resolver
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor resolver_endpoint_type: String?
       attr_accessor protocols: Array[String]?
+      attr_accessor rni_enhanced_metrics_enabled: bool?
+      attr_accessor target_name_server_metrics_enabled: bool?
+      attr_accessor dns64_enabled: bool?
+      attr_accessor ipv6_internet_access_enabled: bool?
     end
 
     class CreateResolverEndpointResponse
@@ -415,6 +581,23 @@ module Aws::Route53Resolver
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor firewall_domain_list: Types::FirewallDomainList?
+    end
+
+    class DeleteFirewallRuleEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule_group_id: String,
+        ?firewall_domain_list_id: String,
+        ?firewall_threat_protection_id: String,
+        ?qtype: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule_group_id: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor firewall_threat_protection_id: String?
+      attr_accessor qtype: String?
     end
 
     class DeleteFirewallRuleGroupRequest
@@ -652,6 +835,25 @@ module Aws::Route53Resolver
     module DnsThreatProtection
       DGA: String
       DNS_TUNNELING: String
+      DICTIONARY_DGA: String
+    end
+
+    class DnsThreatProtectionRuleTypeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?confidence_threshold: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor confidence_threshold: String?
+    end
+
+    module DomainListType
+      THREAT: String
+      CONTENT: String
     end
 
     class Filter
@@ -665,6 +867,28 @@ module Aws::Route53Resolver
 
       attr_accessor name: String?
       attr_accessor values: Array[String]?
+    end
+
+    class FirewallAdvancedContentCategoryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+    end
+
+    class FirewallAdvancedThreatCategoryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
     end
 
     class FirewallConfig
@@ -702,6 +926,8 @@ module Aws::Route53Resolver
         ?creator_request_id: String,
         ?creation_time: String,
         ?modification_time: String,
+        ?category: String,
+        ?managed_list_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -715,6 +941,8 @@ module Aws::Route53Resolver
       attr_accessor creator_request_id: String?
       attr_accessor creation_time: String?
       attr_accessor modification_time: String?
+      attr_accessor category: String?
+      attr_accessor managed_list_type: String?
     end
 
     class FirewallDomainListMetadata
@@ -726,6 +954,8 @@ module Aws::Route53Resolver
         ?name: String,
         ?creator_request_id: String,
         ?managed_owner_name: String,
+        ?managed_list_type: String,
+        ?category: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -734,6 +964,8 @@ module Aws::Route53Resolver
       attr_accessor name: String?
       attr_accessor creator_request_id: String?
       attr_accessor managed_owner_name: String?
+      attr_accessor managed_list_type: String?
+      attr_accessor category: String?
     end
 
     module FirewallDomainListStatus
@@ -782,6 +1014,9 @@ module Aws::Route53Resolver
         ?qtype: String,
         ?dns_threat_protection: String,
         ?confidence_threshold: String,
+        ?firewall_rule_type: Types::FirewallRuleType,
+        ?status: String,
+        ?status_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -802,6 +1037,9 @@ module Aws::Route53Resolver
       attr_accessor qtype: String?
       attr_accessor dns_threat_protection: String?
       attr_accessor confidence_threshold: String?
+      attr_accessor firewall_rule_type: Types::FirewallRuleType?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
     end
 
     class FirewallRuleGroup
@@ -901,6 +1139,42 @@ module Aws::Route53Resolver
       COMPLETE: String
       DELETING: String
       UPDATING: String
+    end
+
+    class FirewallRuleType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partner_threat_protection: Types::PartnerThreatProtectionConfig,
+        ?firewall_advanced_content_category: Types::FirewallAdvancedContentCategoryConfig,
+        ?firewall_advanced_threat_category: Types::FirewallAdvancedThreatCategoryConfig,
+        ?dns_threat_protection: Types::DnsThreatProtectionRuleTypeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partner_threat_protection: Types::PartnerThreatProtectionConfig?
+      attr_accessor firewall_advanced_content_category: Types::FirewallAdvancedContentCategoryConfig?
+      attr_accessor firewall_advanced_threat_category: Types::FirewallAdvancedThreatCategoryConfig?
+      attr_accessor dns_threat_protection: Types::DnsThreatProtectionRuleTypeConfig?
+    end
+
+    class FirewallRuleTypeDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_type: String,
+        ?value: String,
+        ?display_name: String,
+        ?description: String,
+        ?subscription_info: Types::SubscriptionInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_type: String?
+      attr_accessor value: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor subscription_info: Types::SubscriptionInfo?
     end
 
     class GetFirewallConfigRequest
@@ -1376,6 +1650,7 @@ module Aws::Route53Resolver
     module IpAddressStatus
       Creating: String
       FailedCreation: String
+      FailedCreationInsufficientEC2CapacityInOutpost: String
       Attaching: String
       Attached: String
       RemapDetaching: String
@@ -1557,6 +1832,34 @@ module Aws::Route53Resolver
 
       attr_accessor next_token: String?
       attr_accessor firewall_rule_groups: Array[Types::FirewallRuleGroupMetadata]?
+    end
+
+    class ListFirewallRuleTypesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFirewallRuleTypesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule_types: Array[Types::FirewallRuleTypeDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule_types: Array[Types::FirewallRuleTypeDefinition]?
+      attr_accessor next_token: String?
     end
 
     class ListFirewallRulesRequest
@@ -1939,6 +2242,17 @@ module Aws::Route53Resolver
       FAILED_DELETION: String
     end
 
+    class PartnerThreatProtectionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partner: String?
+    end
+
     module Protocol
       DOH: String
       DO53: String
@@ -2089,6 +2403,10 @@ module Aws::Route53Resolver
         ?preferred_instance_type: String,
         ?resolver_endpoint_type: String,
         ?protocols: Array[String],
+        ?rni_enhanced_metrics_enabled: bool,
+        ?target_name_server_metrics_enabled: bool,
+        ?dns64_enabled: bool,
+        ?ipv6_internet_access_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2108,6 +2426,10 @@ module Aws::Route53Resolver
       attr_accessor preferred_instance_type: String?
       attr_accessor resolver_endpoint_type: String?
       attr_accessor protocols: Array[String]?
+      attr_accessor rni_enhanced_metrics_enabled: bool?
+      attr_accessor target_name_server_metrics_enabled: bool?
+      attr_accessor dns64_enabled: bool?
+      attr_accessor ipv6_internet_access_enabled: bool?
     end
 
     module ResolverEndpointDirection
@@ -2376,6 +2698,19 @@ module Aws::Route53Resolver
       Descending: String
     end
 
+    class SubscriptionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vendor_name: String,
+        ?product_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vendor_name: String?
+      attr_accessor product_id: String?
+    end
+
     class Tag
       include Smithy::Schema::Structure
 
@@ -2530,6 +2865,45 @@ module Aws::Route53Resolver
       attr_accessor status_message: String?
     end
 
+    class UpdateFirewallRuleEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule_group_id: String,
+        ?firewall_domain_list_id: String,
+        ?firewall_threat_protection_id: String,
+        ?priority: Integer,
+        ?action: String,
+        ?block_response: String,
+        ?block_override_domain: String,
+        ?block_override_dns_type: String,
+        ?block_override_ttl: Integer,
+        ?name: String,
+        ?firewall_domain_redirection_action: String,
+        ?qtype: String,
+        ?dns_threat_protection: String,
+        ?confidence_threshold: String,
+        ?firewall_rule_type: Types::FirewallRuleType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule_group_id: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor firewall_threat_protection_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor action: String?
+      attr_accessor block_response: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor name: String?
+      attr_accessor firewall_domain_redirection_action: String?
+      attr_accessor qtype: String?
+      attr_accessor dns_threat_protection: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor firewall_rule_type: Types::FirewallRuleType?
+    end
+
     class UpdateFirewallRuleGroupAssociationRequest
       include Smithy::Schema::Structure
 
@@ -2576,6 +2950,7 @@ module Aws::Route53Resolver
         ?qtype: String,
         ?dns_threat_protection: String,
         ?confidence_threshold: String,
+        ?firewall_rule_type: Types::FirewallRuleType,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2593,6 +2968,7 @@ module Aws::Route53Resolver
       attr_accessor qtype: String?
       attr_accessor dns_threat_protection: String?
       attr_accessor confidence_threshold: String?
+      attr_accessor firewall_rule_type: Types::FirewallRuleType?
     end
 
     class UpdateFirewallRuleResponse
@@ -2704,6 +3080,10 @@ module Aws::Route53Resolver
         ?resolver_endpoint_type: String,
         ?update_ip_addresses: Array[Types::UpdateIpAddress],
         ?protocols: Array[String],
+        ?rni_enhanced_metrics_enabled: bool,
+        ?target_name_server_metrics_enabled: bool,
+        ?dns64_enabled: bool,
+        ?ipv6_internet_access_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2712,6 +3092,10 @@ module Aws::Route53Resolver
       attr_accessor resolver_endpoint_type: String?
       attr_accessor update_ip_addresses: Array[Types::UpdateIpAddress]?
       attr_accessor protocols: Array[String]?
+      attr_accessor rni_enhanced_metrics_enabled: bool?
+      attr_accessor target_name_server_metrics_enabled: bool?
+      attr_accessor dns64_enabled: bool?
+      attr_accessor ipv6_internet_access_enabled: bool?
     end
 
     class UpdateResolverEndpointResponse

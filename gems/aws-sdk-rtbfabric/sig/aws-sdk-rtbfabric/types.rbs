@@ -1,0 +1,1874 @@
+module Aws::RTBFabric
+  module Types
+
+    class AcceptLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?attributes: Types::LinkAttributes,
+        ?log_settings: Types::LinkLogSettings,
+        ?timeout_in_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor timeout_in_millis: Integer?
+    end
+
+    class AcceptLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?peer_gateway_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?direction: String,
+        ?flow_modules: Array[Types::ModuleConfiguration],
+        ?pending_flow_modules: Array[Types::ModuleConfiguration],
+        ?attributes: Types::LinkAttributes,
+        ?log_settings: Types::LinkLogSettings,
+        ?connectivity_type: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor peer_gateway_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor direction: String?
+      attr_accessor flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor pending_flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor connectivity_type: String?
+      attr_accessor link_id: String?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Action
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?no_bid: Types::NoBidAction,
+        ?header_tag: Types::HeaderTagAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor no_bid: Types::NoBidAction?
+      attr_accessor header_tag: Types::HeaderTagAction?
+
+      class NoBid < Action
+      end
+      class HeaderTag < Action
+      end
+      class Unknown < Action
+      end
+    end
+
+    class AssociateCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?acm_certificate_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor acm_certificate_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?acm_certificate_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor acm_certificate_arn: String?
+      attr_accessor status: String?
+    end
+
+    class AutoScalingGroupsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_scaling_group_names: Array[String],
+        ?role_arn: String,
+        ?health_check_config: Types::HealthCheckConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_group_names: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor health_check_config: Types::HealthCheckConfig?
+    end
+
+    module CertificateAssociationStatus
+      PENDING_ASSOCIATION: String
+      ASSOCIATED: String
+      PENDING_DISASSOCIATION: String
+      DISASSOCIATED: String
+      FAILED: String
+    end
+
+    class CertificateAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?acm_certificate_arn: String,
+        ?status: String,
+        ?associated_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor acm_certificate_arn: String?
+      attr_accessor status: String?
+      attr_accessor associated_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module ClientRoutingPolicy
+      AVAILABILITY_ZONE_AFFINITY: String
+      ANY_AVAILABILITY_ZONE: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ConnectivityType
+      DEFAULT: String
+      PUBLIC_INGRESS: String
+      PUBLIC_EGRESS: String
+      EXTERNAL_INBOUND: String
+    end
+
+    class CreateInboundExternalLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?gateway_id: String,
+        ?attributes: Types::LinkAttributes,
+        ?log_settings: Types::LinkLogSettings,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor gateway_id: String?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateInboundExternalLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?status: String,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor status: String?
+      attr_accessor domain_name: String?
+    end
+
+    class CreateLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?peer_gateway_id: String,
+        ?attributes: Types::LinkAttributes,
+        ?http_responder_allowed: bool,
+        ?tags: Hash[String, String],
+        ?log_settings: Types::LinkLogSettings,
+        ?timeout_in_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor peer_gateway_id: String?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor http_responder_allowed: bool?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor timeout_in_millis: Integer?
+    end
+
+    class CreateLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?peer_gateway_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?direction: String,
+        ?flow_modules: Array[Types::ModuleConfiguration],
+        ?pending_flow_modules: Array[Types::ModuleConfiguration],
+        ?attributes: Types::LinkAttributes,
+        ?log_settings: Types::LinkLogSettings,
+        ?connectivity_type: String,
+        ?link_id: String,
+        ?customer_provided_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor peer_gateway_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor direction: String?
+      attr_accessor flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor pending_flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor connectivity_type: String?
+      attr_accessor link_id: String?
+      attr_accessor customer_provided_id: String?
+    end
+
+    class CreateLinkRoutingRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?gateway_id: String,
+        ?link_id: String,
+        ?priority: Integer,
+        ?conditions: Types::RuleCondition,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor conditions: Types::RuleCondition?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLinkRoutingRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?status: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+    end
+
+    class CreateOutboundExternalLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?gateway_id: String,
+        ?attributes: Types::LinkAttributes,
+        ?public_endpoint: String,
+        ?log_settings: Types::LinkLogSettings,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor gateway_id: String?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor public_endpoint: String?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateOutboundExternalLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor status: String?
+    end
+
+    class CreateRequesterGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?client_token: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRequesterGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?domain_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor domain_name: String?
+      attr_accessor status: String?
+    end
+
+    class CreateResponderGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?domain_name: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?listener_config: Types::ListenerConfig,
+        ?trust_store_configuration: Types::TrustStoreConfiguration,
+        ?managed_endpoint_configuration: Types::ManagedEndpointConfiguration,
+        ?client_token: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?gateway_type: String,
+        ?client_routing_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor domain_name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor listener_config: Types::ListenerConfig?
+      attr_accessor trust_store_configuration: Types::TrustStoreConfiguration?
+      attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor gateway_type: String?
+      attr_accessor client_routing_policy: String?
+    end
+
+    class CreateResponderGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?status: String,
+        ?listener_config: Types::ListenerConfig,
+        ?external_inbound_endpoint: String,
+        ?client_routing_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor status: String?
+      attr_accessor listener_config: Types::ListenerConfig?
+      attr_accessor external_inbound_endpoint: String?
+      attr_accessor client_routing_policy: String?
+    end
+
+    class DeleteInboundExternalLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class DeleteInboundExternalLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_id: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class DeleteLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_id: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteLinkRoutingRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor rule_id: String?
+    end
+
+    class DeleteLinkRoutingRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteOutboundExternalLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class DeleteOutboundExternalLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_id: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteRequesterGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+    end
+
+    class DeleteRequesterGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteResponderGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+    end
+
+    class DeleteResponderGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor status: String?
+    end
+
+    class DisassociateCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?acm_certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor acm_certificate_arn: String?
+    end
+
+    class DisassociateCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?acm_certificate_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor acm_certificate_arn: String?
+      attr_accessor status: String?
+    end
+
+    class EksEndpointsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoints_resource_name: String,
+        ?endpoints_resource_namespace: String,
+        ?cluster_api_server_endpoint_uri: String,
+        ?cluster_api_server_ca_certificate_chain: String,
+        ?cluster_name: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoints_resource_name: String?
+      attr_accessor endpoints_resource_namespace: String?
+      attr_accessor cluster_api_server_endpoint_uri: String?
+      attr_accessor cluster_api_server_ca_certificate_chain: String?
+      attr_accessor cluster_name: String?
+      attr_accessor role_arn: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?criteria: Array[Types::FilterCriterion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor criteria: Array[Types::FilterCriterion]?
+    end
+
+    class FilterCriterion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module FilterType
+      INCLUDE: String
+      EXCLUDE: String
+    end
+
+    module GatewayType
+      EXTERNAL: String
+      INTERNAL: String
+    end
+
+    class GetCertificateAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?acm_certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor acm_certificate_arn: String?
+    end
+
+    class GetCertificateAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?acm_certificate_arn: String,
+        ?status: String,
+        ?associated_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor acm_certificate_arn: String?
+      attr_accessor status: String?
+      attr_accessor associated_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetInboundExternalLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class GetInboundExternalLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?status: String,
+        ?domain_name: String,
+        ?flow_modules: Array[Types::ModuleConfiguration],
+        ?pending_flow_modules: Array[Types::ModuleConfiguration],
+        ?attributes: Types::LinkAttributes,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+        ?log_settings: Types::LinkLogSettings,
+        ?connectivity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor status: String?
+      attr_accessor domain_name: String?
+      attr_accessor flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor pending_flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor connectivity_type: String?
+    end
+
+    class GetLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class GetLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?peer_gateway_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?direction: String,
+        ?flow_modules: Array[Types::ModuleConfiguration],
+        ?pending_flow_modules: Array[Types::ModuleConfiguration],
+        ?attributes: Types::LinkAttributes,
+        ?log_settings: Types::LinkLogSettings,
+        ?connectivity_type: String,
+        ?link_id: String,
+        ?tags: Hash[String, String],
+        ?http_responder_allowed: bool,
+        ?timeout_in_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor peer_gateway_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor direction: String?
+      attr_accessor flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor pending_flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor connectivity_type: String?
+      attr_accessor link_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor http_responder_allowed: bool?
+      attr_accessor timeout_in_millis: Integer?
+    end
+
+    class GetLinkRoutingRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor rule_id: String?
+    end
+
+    class GetLinkRoutingRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?rule_id: String,
+        ?priority: Integer,
+        ?conditions: Types::RuleCondition,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor rule_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor conditions: Types::RuleCondition?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetOutboundExternalLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class GetOutboundExternalLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?status: String,
+        ?public_endpoint: String,
+        ?flow_modules: Array[Types::ModuleConfiguration],
+        ?pending_flow_modules: Array[Types::ModuleConfiguration],
+        ?attributes: Types::LinkAttributes,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+        ?log_settings: Types::LinkLogSettings,
+        ?connectivity_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor status: String?
+      attr_accessor public_endpoint: String?
+      attr_accessor flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor pending_flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor connectivity_type: String?
+    end
+
+    class GetRequesterGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+    end
+
+    class GetRequesterGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?domain_name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?gateway_id: String,
+        ?tags: Hash[String, String],
+        ?active_links_count: Integer,
+        ?total_links_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor domain_name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor gateway_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor active_links_count: Integer?
+      attr_accessor total_links_count: Integer?
+    end
+
+    class GetResponderGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+    end
+
+    class GetResponderGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?status: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?domain_name: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?listener_config: Types::ListenerConfig,
+        ?trust_store_configuration: Types::TrustStoreConfiguration,
+        ?managed_endpoint_configuration: Types::ManagedEndpointConfiguration,
+        ?gateway_id: String,
+        ?tags: Hash[String, String],
+        ?active_links_count: Integer,
+        ?total_links_count: Integer,
+        ?links_requested_count: Integer,
+        ?gateway_type: String,
+        ?external_inbound_endpoint: String,
+        ?client_routing_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor domain_name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor listener_config: Types::ListenerConfig?
+      attr_accessor trust_store_configuration: Types::TrustStoreConfiguration?
+      attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration?
+      attr_accessor gateway_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor active_links_count: Integer?
+      attr_accessor total_links_count: Integer?
+      attr_accessor links_requested_count: Integer?
+      attr_accessor gateway_type: String?
+      attr_accessor external_inbound_endpoint: String?
+      attr_accessor client_routing_policy: String?
+    end
+
+    class HeaderTagAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class HealthCheckConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?path: String,
+        ?protocol: String,
+        ?timeout_ms: Integer,
+        ?interval_seconds: Integer,
+        ?status_code_matcher: String,
+        ?healthy_threshold_count: Integer,
+        ?unhealthy_threshold_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor path: String?
+      attr_accessor protocol: String?
+      attr_accessor timeout_ms: Integer?
+      attr_accessor interval_seconds: Integer?
+      attr_accessor status_code_matcher: String?
+      attr_accessor healthy_threshold_count: Integer?
+      attr_accessor unhealthy_threshold_count: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LinkApplicationLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sampling: Types::LinkApplicationLogSampling,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sampling: Types::LinkApplicationLogSampling?
+    end
+
+    class LinkApplicationLogSampling
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_log: Float,
+        ?filter_log: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_log: Float?
+      attr_accessor filter_log: Float?
+    end
+
+    class LinkAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responder_error_masking: Array[Types::ResponderErrorMaskingForHttpCode],
+        ?customer_provided_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responder_error_masking: Array[Types::ResponderErrorMaskingForHttpCode]?
+      attr_accessor customer_provided_id: String?
+    end
+
+    module LinkDirection
+      RESPONSE: String
+      REQUEST: String
+    end
+
+    class LinkLogSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_logs: Types::LinkApplicationLogConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_logs: Types::LinkApplicationLogConfiguration?
+    end
+
+    class LinkRoutingRuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?priority: Integer,
+        ?conditions: Types::RuleCondition,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor conditions: Types::RuleCondition?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module LinkStatus
+      PENDING_CREATION: String
+      PENDING_REQUEST: String
+      REQUESTED: String
+      ACCEPTED: String
+      ACTIVE: String
+      REJECTED: String
+      FAILED: String
+      PENDING_DELETION: String
+      DELETED: String
+      PENDING_UPDATE: String
+      PENDING_ISOLATION: String
+      ISOLATED: String
+      PENDING_RESTORATION: String
+    end
+
+    class ListCertificateAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCertificateAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_associations: Array[Types::CertificateAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_associations: Array[Types::CertificateAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLinkRoutingRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLinkRoutingRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::LinkRoutingRuleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::LinkRoutingRuleSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLinksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLinksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?links: Array[Types::ListLinksResponseStructure],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor links: Array[Types::ListLinksResponseStructure]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLinksResponseStructure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?peer_gateway_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?direction: String,
+        ?flow_modules: Array[Types::ModuleConfiguration],
+        ?pending_flow_modules: Array[Types::ModuleConfiguration],
+        ?attributes: Types::LinkAttributes,
+        ?log_settings: Types::LinkLogSettings,
+        ?connectivity_type: String,
+        ?link_id: String,
+        ?tags: Hash[String, String],
+        ?public_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor peer_gateway_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor direction: String?
+      attr_accessor flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor pending_flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor connectivity_type: String?
+      attr_accessor link_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor public_endpoint: String?
+    end
+
+    class ListRequesterGatewaysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRequesterGatewaysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResponderGatewaysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResponderGatewaysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListenerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocols: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocols: Array[String]?
+    end
+
+    class ManagedEndpointConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?auto_scaling_groups: Types::AutoScalingGroupsConfiguration,
+        ?eks_endpoints: Types::EksEndpointsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_scaling_groups: Types::AutoScalingGroupsConfiguration?
+      attr_accessor eks_endpoints: Types::EksEndpointsConfiguration?
+
+      class AutoScalingGroups < ManagedEndpointConfiguration
+      end
+      class EksEndpoints < ManagedEndpointConfiguration
+      end
+      class Unknown < ManagedEndpointConfiguration
+      end
+    end
+
+    class ModuleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?name: String,
+        ?depends_on: Array[String],
+        ?module_parameters: Types::ModuleParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor name: String?
+      attr_accessor depends_on: Array[String]?
+      attr_accessor module_parameters: Types::ModuleParameters?
+    end
+
+    class ModuleParameters
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?no_bid: Types::NoBidModuleParameters,
+        ?open_rtb_attribute: Types::OpenRtbAttributeModuleParameters,
+        ?rate_limiter: Types::RateLimiterModuleParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor no_bid: Types::NoBidModuleParameters?
+      attr_accessor open_rtb_attribute: Types::OpenRtbAttributeModuleParameters?
+      attr_accessor rate_limiter: Types::RateLimiterModuleParameters?
+
+      class NoBid < ModuleParameters
+      end
+      class OpenRtbAttribute < ModuleParameters
+      end
+      class RateLimiter < ModuleParameters
+      end
+      class Unknown < ModuleParameters
+      end
+    end
+
+    class NoBidAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?no_bid_reason_code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor no_bid_reason_code: Integer?
+    end
+
+    class NoBidModuleParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?reason_code: Integer,
+        ?pass_through_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor reason_code: Integer?
+      attr_accessor pass_through_percentage: Float?
+    end
+
+    class OpenRtbAttributeModuleParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_type: String,
+        ?filter_configuration: Array[Types::Filter],
+        ?action: Types::Action,
+        ?holdback_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_type: String?
+      attr_accessor filter_configuration: Array[Types::Filter]?
+      attr_accessor action: Types::Action?
+      attr_accessor holdback_percentage: Float?
+    end
+
+    module Protocol
+      HTTP: String
+      HTTPS: String
+    end
+
+    class QueryStringKeyValuePair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class RateLimiterModuleParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tps: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tps: Float?
+    end
+
+    class RejectLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class RejectLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?peer_gateway_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?direction: String,
+        ?flow_modules: Array[Types::ModuleConfiguration],
+        ?pending_flow_modules: Array[Types::ModuleConfiguration],
+        ?attributes: Types::LinkAttributes,
+        ?log_settings: Types::LinkLogSettings,
+        ?connectivity_type: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor peer_gateway_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor direction: String?
+      attr_accessor flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor pending_flow_modules: Array[Types::ModuleConfiguration]?
+      attr_accessor attributes: Types::LinkAttributes?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor connectivity_type: String?
+      attr_accessor link_id: String?
+    end
+
+    module RequesterGatewayStatus
+      PENDING_CREATION: String
+      ACTIVE: String
+      PENDING_DELETION: String
+      DELETED: String
+      ERROR: String
+      PENDING_UPDATE: String
+      ISOLATED: String
+      PENDING_ISOLATION: String
+      PENDING_RESTORATION: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResponderErrorMaskingAction
+      NO_BID: String
+      PASSTHROUGH: String
+    end
+
+    class ResponderErrorMaskingForHttpCode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?http_code: String,
+        ?action: String,
+        ?logging_types: Array[String],
+        ?response_logging_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor http_code: String?
+      attr_accessor action: String?
+      attr_accessor logging_types: Array[String]?
+      attr_accessor response_logging_percentage: Float?
+    end
+
+    module ResponderErrorMaskingLoggingType
+      NONE: String
+      METRIC: String
+      RESPONSE: String
+    end
+
+    module ResponderGatewayStatus
+      PENDING_CREATION: String
+      ACTIVE: String
+      PENDING_DELETION: String
+      DELETED: String
+      ERROR: String
+      PENDING_UPDATE: String
+      ISOLATED: String
+      PENDING_ISOLATION: String
+      PENDING_RESTORATION: String
+    end
+
+    class RuleCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_header: String,
+        ?host_header_wildcard: String,
+        ?path_prefix: String,
+        ?path_exact: String,
+        ?query_string_equals: Types::QueryStringKeyValuePair,
+        ?query_string_exists: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_header: String?
+      attr_accessor host_header_wildcard: String?
+      attr_accessor path_prefix: String?
+      attr_accessor path_exact: String?
+      attr_accessor query_string_equals: Types::QueryStringKeyValuePair?
+      attr_accessor query_string_exists: String?
+    end
+
+    module RuleStatus
+      CREATION_IN_PROGRESS: String
+      ACTIVE: String
+      UPDATE_IN_PROGRESS: String
+      DELETION_IN_PROGRESS: String
+      DELETED: String
+      FAILED: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrustStoreConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_certificates: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_certificates: Array[String]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLinkModuleFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?gateway_id: String,
+        ?link_id: String,
+        ?modules: Array[Types::ModuleConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor modules: Array[Types::ModuleConfiguration]?
+    end
+
+    class UpdateLinkModuleFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?log_settings: Types::LinkLogSettings,
+        ?timeout_in_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor log_settings: Types::LinkLogSettings?
+      attr_accessor timeout_in_millis: Integer?
+    end
+
+    class UpdateLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateLinkRoutingRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?link_id: String,
+        ?rule_id: String,
+        ?priority: Integer,
+        ?conditions: Types::RuleCondition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor link_id: String?
+      attr_accessor rule_id: String?
+      attr_accessor priority: Integer?
+      attr_accessor conditions: Types::RuleCondition?
+    end
+
+    class UpdateLinkRoutingRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateRequesterGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?gateway_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor gateway_id: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateRequesterGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateResponderGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?listener_config: Types::ListenerConfig,
+        ?trust_store_configuration: Types::TrustStoreConfiguration,
+        ?managed_endpoint_configuration: Types::ManagedEndpointConfiguration,
+        ?client_token: String,
+        ?gateway_id: String,
+        ?description: String,
+        ?client_routing_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor listener_config: Types::ListenerConfig?
+      attr_accessor trust_store_configuration: Types::TrustStoreConfiguration?
+      attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor gateway_id: String?
+      attr_accessor description: String?
+      attr_accessor client_routing_policy: String?
+    end
+
+    class UpdateResponderGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gateway_id: String,
+        ?status: String,
+        ?client_routing_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gateway_id: String?
+      attr_accessor status: String?
+      attr_accessor client_routing_policy: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

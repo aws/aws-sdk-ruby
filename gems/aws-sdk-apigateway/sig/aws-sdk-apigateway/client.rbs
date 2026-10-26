@@ -185,6 +185,7 @@ module Aws::APIGateway
       def domain_name_status: () -> String?
       def domain_name_status_message: () -> String?
       def security_policy: () -> String?
+      def endpoint_access_mode: () -> String?
       def tags: () -> Hash[String, String]?
       def mutual_tls_authentication: () -> Types::MutualTlsAuthentication?
       def ownership_verification_certificate_arn: () -> String?
@@ -208,6 +209,7 @@ module Aws::APIGateway
       },
       ?tags: Hash[String, String],
       ?security_policy: String,
+      ?endpoint_access_mode: String,
       ?mutual_tls_authentication: {
         truststore_uri: String,
         truststore_version: untyped
@@ -292,6 +294,10 @@ module Aws::APIGateway
       def tags: () -> Hash[String, String]?
       def disable_execute_api_endpoint: () -> bool?
       def root_resource_id: () -> String?
+      def security_policy: () -> String?
+      def endpoint_access_mode: () -> String?
+      def api_status: () -> String?
+      def api_status_message: () -> String?
     end
     def create_rest_api: (
       ?name: String,
@@ -308,7 +314,9 @@ module Aws::APIGateway
       },
       ?policy: String,
       ?tags: Hash[String, String],
-      ?disable_execute_api_endpoint: bool
+      ?disable_execute_api_endpoint: bool,
+      ?security_policy: String,
+      ?endpoint_access_mode: String
     ) -> _CreateRestApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRestApiResponse
 
     interface _CreateStageResponse
@@ -832,6 +840,7 @@ module Aws::APIGateway
       def domain_name_status: () -> String?
       def domain_name_status_message: () -> String?
       def security_policy: () -> String?
+      def endpoint_access_mode: () -> String?
       def tags: () -> Hash[String, String]?
       def mutual_tls_authentication: () -> Types::MutualTlsAuthentication?
       def ownership_verification_certificate_arn: () -> String?
@@ -921,6 +930,8 @@ module Aws::APIGateway
       def cache_key_parameters: () -> Array[String]?
       def integration_responses: () -> Hash[String, Types::IntegrationResponse]?
       def tls_config: () -> Types::TlsConfig?
+      def response_transfer_mode: () -> String?
+      def integration_target: () -> String?
     end
     def get_integration: (
       ?rest_api_id: String,
@@ -1075,6 +1086,10 @@ module Aws::APIGateway
       def tags: () -> Hash[String, String]?
       def disable_execute_api_endpoint: () -> bool?
       def root_resource_id: () -> String?
+      def security_policy: () -> String?
+      def endpoint_access_mode: () -> String?
+      def api_status: () -> String?
+      def api_status_message: () -> String?
     end
     def get_rest_api: (
       ?rest_api_id: String
@@ -1297,6 +1312,10 @@ module Aws::APIGateway
       def tags: () -> Hash[String, String]?
       def disable_execute_api_endpoint: () -> bool?
       def root_resource_id: () -> String?
+      def security_policy: () -> String?
+      def endpoint_access_mode: () -> String?
+      def api_status: () -> String?
+      def api_status_message: () -> String?
     end
     def import_rest_api: (
       ?fail_on_warnings: bool,
@@ -1337,6 +1356,8 @@ module Aws::APIGateway
       def cache_key_parameters: () -> Array[String]?
       def integration_responses: () -> Hash[String, Types::IntegrationResponse]?
       def tls_config: () -> Types::TlsConfig?
+      def response_transfer_mode: () -> String?
+      def integration_target: () -> String?
     end
     def put_integration: (
       ?rest_api_id: String,
@@ -1357,7 +1378,9 @@ module Aws::APIGateway
       ?timeout_in_millis: Integer,
       ?tls_config: {
         insecure_skip_verification: bool
-      }
+      },
+      ?response_transfer_mode: String,
+      ?integration_target: String
     ) -> _PutIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutIntegrationResponse
 
     interface _PutIntegrationResponseResponse
@@ -1438,6 +1461,10 @@ module Aws::APIGateway
       def tags: () -> Hash[String, String]?
       def disable_execute_api_endpoint: () -> bool?
       def root_resource_id: () -> String?
+      def security_policy: () -> String?
+      def endpoint_access_mode: () -> String?
+      def api_status: () -> String?
+      def api_status_message: () -> String?
     end
     def put_rest_api: (
       ?rest_api_id: String,
@@ -1703,6 +1730,7 @@ module Aws::APIGateway
       def domain_name_status: () -> String?
       def domain_name_status_message: () -> String?
       def security_policy: () -> String?
+      def endpoint_access_mode: () -> String?
       def tags: () -> Hash[String, String]?
       def mutual_tls_authentication: () -> Types::MutualTlsAuthentication?
       def ownership_verification_certificate_arn: () -> String?
@@ -1761,6 +1789,8 @@ module Aws::APIGateway
       def cache_key_parameters: () -> Array[String]?
       def integration_responses: () -> Hash[String, Types::IntegrationResponse]?
       def tls_config: () -> Types::TlsConfig?
+      def response_transfer_mode: () -> String?
+      def integration_target: () -> String?
     end
     def update_integration: (
       ?rest_api_id: String,
@@ -1926,6 +1956,10 @@ module Aws::APIGateway
       def tags: () -> Hash[String, String]?
       def disable_execute_api_endpoint: () -> bool?
       def root_resource_id: () -> String?
+      def security_policy: () -> String?
+      def endpoint_access_mode: () -> String?
+      def api_status: () -> String?
+      def api_status_message: () -> String?
     end
     def update_rest_api: (
       ?rest_api_id: String,

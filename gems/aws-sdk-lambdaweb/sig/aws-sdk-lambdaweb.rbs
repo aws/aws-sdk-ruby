@@ -1,0 +1,5 @@
+  module Aws
+    module LambdaWeb
+      VERSION: String
+    end
+  end

@@ -860,6 +860,14 @@ module Aws::Route53
       ?comment: String
     ) -> _UpdateHostedZoneCommentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHostedZoneCommentResponse
 
+    interface _UpdateHostedZoneFeaturesResponse
+      include Smithy::Client::_Response[Types::UpdateHostedZoneFeaturesResponse]
+    end
+    def update_hosted_zone_features: (
+      ?hosted_zone_id: String,
+      ?enable_accelerated_recovery: bool
+    ) -> _UpdateHostedZoneFeaturesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHostedZoneFeaturesResponse
+
     interface _UpdateTrafficPolicyCommentResponse
       include Smithy::Client::_Response[Types::UpdateTrafficPolicyCommentResponse]
       def traffic_policy: () -> Types::TrafficPolicy?

@@ -67,6 +67,11 @@ module Aws::ECS
       attr_accessor message: String?
     end
 
+    module AccessType
+      PUBLIC: String
+      PRIVATE: String
+    end
+
     class AdvancedConfiguration
       include Smithy::Schema::Structure
 
@@ -162,6 +167,22 @@ module Aws::ECS
       attr_accessor message: String?
     end
 
+    module AutoRepairActionsStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AutoRepairConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actions_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actions_status: String?
+    end
+
     class AutoScalingGroupProvider
       include Smithy::Schema::Structure
 
@@ -255,6 +276,25 @@ module Aws::ECS
       ARM64: String
     end
 
+    class CanaryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canary_percent: Float,
+        ?canary_bake_time_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canary_percent: Float?
+      attr_accessor canary_bake_time_in_minutes: Integer?
+    end
+
+    module CapacityOptionType
+      ON_DEMAND: String
+      SPOT: String
+      RESERVED: String
+    end
+
     class CapacityProvider
       include Smithy::Schema::Structure
 
@@ -327,6 +367,25 @@ module Aws::ECS
       UPDATE_IN_PROGRESS: String
       UPDATE_COMPLETE: String
       UPDATE_FAILED: String
+    end
+
+    module CapacityReservationPreference
+      RESERVATIONS_ONLY: String
+      RESERVATIONS_FIRST: String
+      RESERVATIONS_EXCLUDED: String
+    end
+
+    class CapacityReservationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reservation_group_arn: String,
+        ?reservation_preference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reservation_group_arn: String?
+      attr_accessor reservation_preference: String?
     end
 
     class ClientException
@@ -542,6 +601,7 @@ module Aws::ECS
         ?memory: String,
         ?memory_reservation: String,
         ?gpu_ids: Array[String],
+        ?neuron_device_ids: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -562,6 +622,7 @@ module Aws::ECS
       attr_accessor memory: String?
       attr_accessor memory_reservation: String?
       attr_accessor gpu_ids: Array[String]?
+      attr_accessor neuron_device_ids: Array[String]?
     end
 
     module ContainerCondition
@@ -826,6 +887,32 @@ module Aws::ECS
       attr_accessor status: String?
     end
 
+    class ContinueServiceDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_deployment_arn: String,
+        ?hook_id: String,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_deployment_arn: String?
+      attr_accessor hook_id: String?
+      attr_accessor action: String?
+    end
+
+    class ContinueServiceDeploymentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_deployment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_deployment_arn: String?
+    end
+
     module CpuManufacturer
       INTEL: String
       AMD: String
@@ -896,6 +983,102 @@ module Aws::ECS
       attr_accessor cluster: Types::Cluster?
     end
 
+    class CreateDaemonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_name: String,
+        ?cluster_arn: String,
+        ?daemon_task_definition_arn: String,
+        ?capacity_provider_arns: Array[String],
+        ?deployment_configuration: Types::DaemonDeploymentConfiguration,
+        ?tags: Array[Types::Tag],
+        ?propagate_tags: String,
+        ?enable_ecs_managed_tags: bool,
+        ?enable_execute_command: bool,
+        ?client_token: String,
+        ?critical: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_name: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor daemon_task_definition_arn: String?
+      attr_accessor capacity_provider_arns: Array[String]?
+      attr_accessor deployment_configuration: Types::DaemonDeploymentConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor propagate_tags: String?
+      attr_accessor enable_ecs_managed_tags: bool?
+      attr_accessor enable_execute_command: bool?
+      attr_accessor client_token: String?
+      attr_accessor critical: bool?
+    end
+
+    class CreateDaemonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?deployment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor deployment_arn: String?
+    end
+
+    class CreateExpressGatewayServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_role_arn: String,
+        ?infrastructure_role_arn: String,
+        ?service_name: String,
+        ?cluster: String,
+        ?health_check_path: String,
+        ?primary_container: Types::ExpressGatewayContainer,
+        ?task_role_arn: String,
+        ?network_configuration: Types::ExpressGatewayServiceNetworkConfiguration,
+        ?cpu: String,
+        ?memory: String,
+        ?cpu_architecture: String,
+        ?scaling_target: Types::ExpressGatewayScalingTarget,
+        ?tags: Array[Types::Tag],
+        ?task_definition_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_role_arn: String?
+      attr_accessor infrastructure_role_arn: String?
+      attr_accessor service_name: String?
+      attr_accessor cluster: String?
+      attr_accessor health_check_path: String?
+      attr_accessor primary_container: Types::ExpressGatewayContainer?
+      attr_accessor task_role_arn: String?
+      attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration?
+      attr_accessor cpu: String?
+      attr_accessor memory: String?
+      attr_accessor cpu_architecture: String?
+      attr_accessor scaling_target: Types::ExpressGatewayScalingTarget?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor task_definition_arn: String?
+    end
+
+    class CreateExpressGatewayServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::ECSExpressGatewayService,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::ECSExpressGatewayService?
+    end
+
     class CreateManagedInstancesProviderConfiguration
       include Smithy::Schema::Structure
 
@@ -903,12 +1086,16 @@ module Aws::ECS
         ?infrastructure_role_arn: String,
         ?instance_launch_template: Types::InstanceLaunchTemplate,
         ?propagate_tags: String,
+        ?infrastructure_optimization: Types::InfrastructureOptimization,
+        ?auto_repair_configuration: Types::AutoRepairConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor infrastructure_role_arn: String?
       attr_accessor instance_launch_template: Types::InstanceLaunchTemplate?
       attr_accessor propagate_tags: String?
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization?
+      attr_accessor auto_repair_configuration: Types::AutoRepairConfiguration?
     end
 
     class CreateServiceRequest
@@ -941,6 +1128,7 @@ module Aws::ECS
         ?service_connect_configuration: Types::ServiceConnectConfiguration,
         ?volume_configurations: Array[Types::ServiceVolumeConfiguration],
         ?vpc_lattice_configurations: Array[Types::VpcLatticeConfiguration],
+        ?monitoring: Types::MonitoringConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -970,6 +1158,7 @@ module Aws::ECS
       attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration?
       attr_accessor volume_configurations: Array[Types::ServiceVolumeConfiguration]?
       attr_accessor vpc_lattice_configurations: Array[Types::VpcLatticeConfiguration]?
+      attr_accessor monitoring: Types::MonitoringConfiguration?
     end
 
     class CreateServiceResponse
@@ -1040,6 +1229,530 @@ module Aws::ECS
 
       attr_accessor before: Time?
       attr_accessor after: Time?
+    end
+
+    class DaemonAlarmConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_names: Array[String],
+        ?enable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_names: Array[String]?
+      attr_accessor enable: bool?
+    end
+
+    class DaemonCapacityProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?running_count: Integer,
+        ?without_daemon_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor running_count: Integer?
+      attr_accessor without_daemon_count: Integer?
+    end
+
+    class DaemonCircuitBreaker
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_count: Integer,
+        ?status: String,
+        ?threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_count: Integer?
+      attr_accessor status: String?
+      attr_accessor threshold: Integer?
+    end
+
+    class DaemonContainerDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?image: String,
+        ?memory: Integer,
+        ?memory_reservation: Integer,
+        ?repository_credentials: Types::RepositoryCredentials,
+        ?health_check: Types::HealthCheck,
+        ?cpu: Integer,
+        ?essential: bool,
+        ?entry_point: Array[String],
+        ?command: Array[String],
+        ?working_directory: String,
+        ?environment_files: Array[Types::EnvironmentFile],
+        ?environment: Array[Types::KeyValuePair],
+        ?secrets: Array[Types::Secret],
+        ?readonly_root_filesystem: bool,
+        ?mount_points: Array[Types::MountPoint],
+        ?log_configuration: Types::LogConfiguration,
+        ?firelens_configuration: Types::FirelensConfiguration,
+        ?privileged: bool,
+        ?user: String,
+        ?ulimits: Array[Types::Ulimit],
+        ?linux_parameters: Types::DaemonLinuxParameters,
+        ?depends_on: Array[Types::ContainerDependency],
+        ?start_timeout: Integer,
+        ?stop_timeout: Integer,
+        ?system_controls: Array[Types::SystemControl],
+        ?interactive: bool,
+        ?pseudo_terminal: bool,
+        ?restart_policy: Types::ContainerRestartPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor image: String?
+      attr_accessor memory: Integer?
+      attr_accessor memory_reservation: Integer?
+      attr_accessor repository_credentials: Types::RepositoryCredentials?
+      attr_accessor health_check: Types::HealthCheck?
+      attr_accessor cpu: Integer?
+      attr_accessor essential: bool?
+      attr_accessor entry_point: Array[String]?
+      attr_accessor command: Array[String]?
+      attr_accessor working_directory: String?
+      attr_accessor environment_files: Array[Types::EnvironmentFile]?
+      attr_accessor environment: Array[Types::KeyValuePair]?
+      attr_accessor secrets: Array[Types::Secret]?
+      attr_accessor readonly_root_filesystem: bool?
+      attr_accessor mount_points: Array[Types::MountPoint]?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor firelens_configuration: Types::FirelensConfiguration?
+      attr_accessor privileged: bool?
+      attr_accessor user: String?
+      attr_accessor ulimits: Array[Types::Ulimit]?
+      attr_accessor linux_parameters: Types::DaemonLinuxParameters?
+      attr_accessor depends_on: Array[Types::ContainerDependency]?
+      attr_accessor start_timeout: Integer?
+      attr_accessor stop_timeout: Integer?
+      attr_accessor system_controls: Array[Types::SystemControl]?
+      attr_accessor interactive: bool?
+      attr_accessor pseudo_terminal: bool?
+      attr_accessor restart_policy: Types::ContainerRestartPolicy?
+    end
+
+    class DaemonContainerImage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?image_digest: String,
+        ?image: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor image_digest: String?
+      attr_accessor image: String?
+    end
+
+    class DaemonDeployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_deployment_arn: String,
+        ?cluster_arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?target_daemon_revision: Types::DaemonDeploymentRevisionDetail,
+        ?source_daemon_revisions: Array[Types::DaemonDeploymentRevisionDetail],
+        ?circuit_breaker: Types::DaemonCircuitBreaker,
+        ?alarms: Types::DaemonDeploymentAlarms,
+        ?rollback: Types::DaemonRollback,
+        ?deployment_configuration: Types::DaemonDeploymentConfiguration,
+        ?created_at: Time,
+        ?started_at: Time,
+        ?stopped_at: Time,
+        ?finished_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_deployment_arn: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor target_daemon_revision: Types::DaemonDeploymentRevisionDetail?
+      attr_accessor source_daemon_revisions: Array[Types::DaemonDeploymentRevisionDetail]?
+      attr_accessor circuit_breaker: Types::DaemonCircuitBreaker?
+      attr_accessor alarms: Types::DaemonDeploymentAlarms?
+      attr_accessor rollback: Types::DaemonRollback?
+      attr_accessor deployment_configuration: Types::DaemonDeploymentConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor stopped_at: Time?
+      attr_accessor finished_at: Time?
+    end
+
+    class DaemonDeploymentAlarms
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?alarm_names: Array[String],
+        ?triggered_alarm_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor alarm_names: Array[String]?
+      attr_accessor triggered_alarm_names: Array[String]?
+    end
+
+    class DaemonDeploymentCapacityProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?running_instance_count: Integer,
+        ?without_daemon_instance_count: Integer,
+        ?draining_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor running_instance_count: Integer?
+      attr_accessor without_daemon_instance_count: Integer?
+      attr_accessor draining_instance_count: Integer?
+    end
+
+    class DaemonDeploymentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?drain_percent: Float,
+        ?alarms: Types::DaemonAlarmConfiguration,
+        ?bake_time_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor drain_percent: Float?
+      attr_accessor alarms: Types::DaemonAlarmConfiguration?
+      attr_accessor bake_time_in_minutes: Integer?
+    end
+
+    class DaemonDeploymentRevisionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?capacity_providers: Array[Types::DaemonDeploymentCapacityProvider],
+        ?total_running_instance_count: Integer,
+        ?total_without_daemon_instance_count: Integer,
+        ?total_draining_instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor capacity_providers: Array[Types::DaemonDeploymentCapacityProvider]?
+      attr_accessor total_running_instance_count: Integer?
+      attr_accessor total_without_daemon_instance_count: Integer?
+      attr_accessor total_draining_instance_count: Integer?
+    end
+
+    module DaemonDeploymentRollbackMonitorsStatus
+      TRIGGERED: String
+      MONITORING: String
+      MONITORING_COMPLETE: String
+      DISABLED: String
+    end
+
+    module DaemonDeploymentStatus
+      PENDING: String
+      SUCCESSFUL: String
+      STOPPED: String
+      STOP_REQUESTED: String
+      IN_PROGRESS: String
+      ROLLBACK_IN_PROGRESS: String
+      ROLLBACK_SUCCESSFUL: String
+      ROLLBACK_FAILED: String
+    end
+
+    class DaemonDeploymentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_deployment_arn: String,
+        ?daemon_arn: String,
+        ?cluster_arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?target_daemon_revision_arn: String,
+        ?created_at: Time,
+        ?started_at: Time,
+        ?stopped_at: Time,
+        ?finished_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_deployment_arn: String?
+      attr_accessor daemon_arn: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor target_daemon_revision_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor stopped_at: Time?
+      attr_accessor finished_at: Time?
+    end
+
+    class DaemonDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_arn: String,
+        ?cluster_arn: String,
+        ?status: String,
+        ?current_revisions: Array[Types::DaemonRevisionDetail],
+        ?deployment_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_arn: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor status: String?
+      attr_accessor current_revisions: Array[Types::DaemonRevisionDetail]?
+      attr_accessor deployment_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module DaemonIpcMode
+      NONE: String
+      SHARED: String
+    end
+
+    class DaemonLinuxParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capabilities: Types::KernelCapabilities,
+        ?devices: Array[Types::Device],
+        ?init_process_enabled: bool,
+        ?tmpfs: Array[Types::Tmpfs],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capabilities: Types::KernelCapabilities?
+      attr_accessor devices: Array[Types::Device]?
+      attr_accessor init_process_enabled: bool?
+      attr_accessor tmpfs: Array[Types::Tmpfs]?
+    end
+
+    class DaemonNotActiveException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DaemonNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module DaemonPidMode
+      NONE: String
+      SHARED: String
+    end
+
+    module DaemonPropagateTags
+      DAEMON: String
+      NONE: String
+    end
+
+    class DaemonRevision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_revision_arn: String,
+        ?cluster_arn: String,
+        ?daemon_arn: String,
+        ?daemon_task_definition_arn: String,
+        ?created_at: Time,
+        ?container_images: Array[Types::DaemonContainerImage],
+        ?propagate_tags: String,
+        ?enable_ecs_managed_tags: bool,
+        ?enable_execute_command: bool,
+        ?critical: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_revision_arn: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor daemon_arn: String?
+      attr_accessor daemon_task_definition_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor container_images: Array[Types::DaemonContainerImage]?
+      attr_accessor propagate_tags: String?
+      attr_accessor enable_ecs_managed_tags: bool?
+      attr_accessor enable_execute_command: bool?
+      attr_accessor critical: bool?
+    end
+
+    class DaemonRevisionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?capacity_providers: Array[Types::DaemonCapacityProvider],
+        ?total_running_count: Integer,
+        ?total_without_daemon_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor capacity_providers: Array[Types::DaemonCapacityProvider]?
+      attr_accessor total_running_count: Integer?
+      attr_accessor total_without_daemon_count: Integer?
+    end
+
+    class DaemonRollback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?started_at: Time,
+        ?rollback_target_daemon_revision_arn: String,
+        ?rollback_capacity_providers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor started_at: Time?
+      attr_accessor rollback_target_daemon_revision_arn: String?
+      attr_accessor rollback_capacity_providers: Array[String]?
+    end
+
+    module DaemonStatus
+      ACTIVE: String
+      DELETE_IN_PROGRESS: String
+    end
+
+    class DaemonSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class DaemonTaskDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_task_definition_arn: String,
+        ?family: String,
+        ?revision: Integer,
+        ?task_role_arn: String,
+        ?execution_role_arn: String,
+        ?container_definitions: Array[Types::DaemonContainerDefinition],
+        ?volumes: Array[Types::DaemonVolume],
+        ?cpu: String,
+        ?memory: String,
+        ?status: String,
+        ?registered_at: Time,
+        ?delete_requested_at: Time,
+        ?registered_by: String,
+        ?pid_mode: String,
+        ?ipc_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_task_definition_arn: String?
+      attr_accessor family: String?
+      attr_accessor revision: Integer?
+      attr_accessor task_role_arn: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor container_definitions: Array[Types::DaemonContainerDefinition]?
+      attr_accessor volumes: Array[Types::DaemonVolume]?
+      attr_accessor cpu: String?
+      attr_accessor memory: String?
+      attr_accessor status: String?
+      attr_accessor registered_at: Time?
+      attr_accessor delete_requested_at: Time?
+      attr_accessor registered_by: String?
+      attr_accessor pid_mode: String?
+      attr_accessor ipc_mode: String?
+    end
+
+    module DaemonTaskDefinitionRevisionFilter
+      LAST_REGISTERED: String
+    end
+
+    module DaemonTaskDefinitionStatus
+      ACTIVE: String
+      DELETE_IN_PROGRESS: String
+      DELETED: String
+    end
+
+    module DaemonTaskDefinitionStatusFilter
+      ACTIVE: String
+      DELETE_IN_PROGRESS: String
+      ALL: String
+    end
+
+    class DaemonTaskDefinitionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?registered_at: Time,
+        ?registered_by: String,
+        ?delete_requested_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor registered_at: Time?
+      attr_accessor registered_by: String?
+      attr_accessor delete_requested_at: Time?
+      attr_accessor status: String?
+    end
+
+    class DaemonVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?host: Types::HostVolumeProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor host: Types::HostVolumeProperties?
     end
 
     class DeleteAccountSettingRequest
@@ -1134,6 +1847,80 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cluster: Types::Cluster?
+    end
+
+    class DeleteDaemonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_arn: String?
+    end
+
+    class DeleteDaemonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?deployment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor deployment_arn: String?
+    end
+
+    class DeleteDaemonTaskDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_task_definition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_task_definition: String?
+    end
+
+    class DeleteDaemonTaskDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_task_definition_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_task_definition_arn: String?
+    end
+
+    class DeleteExpressGatewayServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+    end
+
+    class DeleteExpressGatewayServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::ECSExpressGatewayService,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::ECSExpressGatewayService?
     end
 
     class DeleteServiceRequest
@@ -1286,11 +2073,15 @@ module Aws::ECS
       def initialize: (
         ?enable: bool,
         ?rollback: bool,
+        ?reset_on_healthy_task: bool,
+        ?threshold_configuration: Types::ThresholdConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enable: bool?
       attr_accessor rollback: bool?
+      attr_accessor reset_on_healthy_task: bool?
+      attr_accessor threshold_configuration: Types::ThresholdConfiguration?
     end
 
     class DeploymentConfiguration
@@ -1304,6 +2095,9 @@ module Aws::ECS
         ?strategy: String,
         ?bake_time_in_minutes: Integer,
         ?lifecycle_hooks: Array[Types::DeploymentLifecycleHook],
+        ?linear_configuration: Types::LinearConfiguration,
+        ?canary_configuration: Types::CanaryConfiguration,
+        ?early_success_criteria: Types::DeploymentEarlySuccessCriteria,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1314,6 +2108,9 @@ module Aws::ECS
       attr_accessor strategy: String?
       attr_accessor bake_time_in_minutes: Integer?
       attr_accessor lifecycle_hooks: Array[Types::DeploymentLifecycleHook]?
+      attr_accessor linear_configuration: Types::LinearConfiguration?
+      attr_accessor canary_configuration: Types::CanaryConfiguration?
+      attr_accessor early_success_criteria: Types::DeploymentEarlySuccessCriteria?
     end
 
     class DeploymentController
@@ -1333,6 +2130,21 @@ module Aws::ECS
       EXTERNAL: String
     end
 
+    class DeploymentEarlySuccessCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable: bool,
+        ?healthy_percent: Integer,
+        ?source_service_revision_cleanup: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable: bool?
+      attr_accessor healthy_percent: Integer?
+      attr_accessor source_service_revision_cleanup: String?
+    end
+
     class DeploymentEphemeralStorage
       include Smithy::Schema::Structure
 
@@ -1348,17 +2160,47 @@ module Aws::ECS
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?target_type: String,
         ?hook_target_arn: String,
         ?role_arn: String,
         ?lifecycle_stages: Array[String],
         ?hook_details: Smithy::Schema::document,
+        ?timeout_configuration: Types::DeploymentLifecycleHookTimeoutConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor target_type: String?
       attr_accessor hook_target_arn: String?
       attr_accessor role_arn: String?
       attr_accessor lifecycle_stages: Array[String]?
       attr_accessor hook_details: Smithy::Schema::document?
+      attr_accessor timeout_configuration: Types::DeploymentLifecycleHookTimeoutConfiguration?
+    end
+
+    module DeploymentLifecycleHookAction
+      ROLLBACK: String
+      CONTINUE: String
+    end
+
+    class DeploymentLifecycleHookDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hook_id: String,
+        ?target_type: String,
+        ?target_arn: String,
+        ?status: String,
+        ?expires_at: Time,
+        ?timeout_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hook_id: String?
+      attr_accessor target_type: String?
+      attr_accessor target_arn: String?
+      attr_accessor status: String?
+      attr_accessor expires_at: Time?
+      attr_accessor timeout_action: String?
     end
 
     module DeploymentLifecycleHookStage
@@ -1367,8 +2209,35 @@ module Aws::ECS
       POST_SCALE_UP: String
       TEST_TRAFFIC_SHIFT: String
       POST_TEST_TRAFFIC_SHIFT: String
+      PRE_PRODUCTION_TRAFFIC_SHIFT: String
       PRODUCTION_TRAFFIC_SHIFT: String
       POST_PRODUCTION_TRAFFIC_SHIFT: String
+    end
+
+    module DeploymentLifecycleHookStatus
+      AWAITING_ACTION: String
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+      TIMED_OUT: String
+    end
+
+    module DeploymentLifecycleHookTargetType
+      AWS_LAMBDA: String
+      PAUSE: String
+    end
+
+    class DeploymentLifecycleHookTimeoutConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_in_minutes: Integer,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_in_minutes: Integer?
+      attr_accessor action: String?
     end
 
     module DeploymentRolloutState
@@ -1380,6 +2249,8 @@ module Aws::ECS
     module DeploymentStrategy
       ROLLING: String
       BLUE_GREEN: String
+      LINEAR: String
+      CANARY: String
     end
 
     class DeregisterContainerInstanceRequest
@@ -1516,6 +2387,122 @@ module Aws::ECS
 
       attr_accessor container_instances: Array[Types::ContainerInstance]?
       attr_accessor failures: Array[Types::Failure]?
+    end
+
+    class DescribeDaemonDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_deployment_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_deployment_arns: Array[String]?
+    end
+
+    class DescribeDaemonDeploymentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failures: Array[Types::Failure],
+        ?daemon_deployments: Array[Types::DaemonDeployment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failures: Array[Types::Failure]?
+      attr_accessor daemon_deployments: Array[Types::DaemonDeployment]?
+    end
+
+    class DescribeDaemonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_arn: String?
+    end
+
+    class DescribeDaemonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon: Types::DaemonDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon: Types::DaemonDetail?
+    end
+
+    class DescribeDaemonRevisionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_revision_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_revision_arns: Array[String]?
+    end
+
+    class DescribeDaemonRevisionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_revisions: Array[Types::DaemonRevision],
+        ?failures: Array[Types::Failure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_revisions: Array[Types::DaemonRevision]?
+      attr_accessor failures: Array[Types::Failure]?
+    end
+
+    class DescribeDaemonTaskDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_task_definition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_task_definition: String?
+    end
+
+    class DescribeDaemonTaskDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_task_definition: Types::DaemonTaskDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_task_definition: Types::DaemonTaskDefinition?
+    end
+
+    class DescribeExpressGatewayServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?include: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor include: Array[String]?
+    end
+
+    class DescribeExpressGatewayServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::ECSExpressGatewayService,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::ECSExpressGatewayService?
     end
 
     class DescribeServiceDeploymentsRequest
@@ -1771,6 +2758,54 @@ module Aws::ECS
       attr_accessor propagate_tags: String?
     end
 
+    class ECSExpressGatewayService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: String,
+        ?service_name: String,
+        ?service_arn: String,
+        ?infrastructure_role_arn: String,
+        ?status: Types::ExpressGatewayServiceStatus,
+        ?current_deployment: String,
+        ?active_configurations: Array[Types::ExpressGatewayServiceConfiguration],
+        ?tags: Array[Types::Tag],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: String?
+      attr_accessor service_name: String?
+      attr_accessor service_arn: String?
+      attr_accessor infrastructure_role_arn: String?
+      attr_accessor status: Types::ExpressGatewayServiceStatus?
+      attr_accessor current_deployment: String?
+      attr_accessor active_configurations: Array[Types::ExpressGatewayServiceConfiguration]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ECSManagedResources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_paths: Array[Types::ManagedIngressPath],
+        ?auto_scaling: Types::ManagedAutoScaling,
+        ?metric_alarms: Array[Types::ManagedMetricAlarm],
+        ?service_security_groups: Array[Types::ManagedSecurityGroup],
+        ?log_groups: Array[Types::ManagedLogGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_paths: Array[Types::ManagedIngressPath]?
+      attr_accessor auto_scaling: Types::ManagedAutoScaling?
+      attr_accessor metric_alarms: Array[Types::ManagedMetricAlarm]?
+      attr_accessor service_security_groups: Array[Types::ManagedSecurityGroup]?
+      attr_accessor log_groups: Array[Types::ManagedLogGroup]?
+    end
+
     class EFSAuthorizationConfig
       include Smithy::Schema::Structure
 
@@ -1919,6 +2954,152 @@ module Aws::ECS
       attr_accessor interactive: bool?
       attr_accessor session: Types::Session?
       attr_accessor task_arn: String?
+    end
+
+    module ExpressCpuArchitecture
+      X86_64: String
+      ARM64: String
+    end
+
+    class ExpressGatewayContainer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image: String,
+        ?container_port: Integer,
+        ?aws_logs_configuration: Types::ExpressGatewayServiceAwsLogsConfiguration,
+        ?repository_credentials: Types::ExpressGatewayRepositoryCredentials,
+        ?command: Array[String],
+        ?environment: Array[Types::KeyValuePair],
+        ?secrets: Array[Types::Secret],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image: String?
+      attr_accessor container_port: Integer?
+      attr_accessor aws_logs_configuration: Types::ExpressGatewayServiceAwsLogsConfiguration?
+      attr_accessor repository_credentials: Types::ExpressGatewayRepositoryCredentials?
+      attr_accessor command: Array[String]?
+      attr_accessor environment: Array[Types::KeyValuePair]?
+      attr_accessor secrets: Array[Types::Secret]?
+    end
+
+    class ExpressGatewayRepositoryCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials_parameter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials_parameter: String?
+    end
+
+    class ExpressGatewayScalingTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_task_count: Integer,
+        ?max_task_count: Integer,
+        ?auto_scaling_metric: String,
+        ?auto_scaling_target_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_task_count: Integer?
+      attr_accessor max_task_count: Integer?
+      attr_accessor auto_scaling_metric: String?
+      attr_accessor auto_scaling_target_value: Integer?
+    end
+
+    class ExpressGatewayServiceAwsLogsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group: String,
+        ?log_stream_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group: String?
+      attr_accessor log_stream_prefix: String?
+    end
+
+    class ExpressGatewayServiceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_revision_arn: String,
+        ?execution_role_arn: String,
+        ?task_role_arn: String,
+        ?task_definition_arn: String,
+        ?cpu: String,
+        ?memory: String,
+        ?cpu_architecture: String,
+        ?network_configuration: Types::ExpressGatewayServiceNetworkConfiguration,
+        ?health_check_path: String,
+        ?primary_container: Types::ExpressGatewayContainer,
+        ?scaling_target: Types::ExpressGatewayScalingTarget,
+        ?ingress_paths: Array[Types::IngressPathSummary],
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_revision_arn: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor task_role_arn: String?
+      attr_accessor task_definition_arn: String?
+      attr_accessor cpu: String?
+      attr_accessor memory: String?
+      attr_accessor cpu_architecture: String?
+      attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration?
+      attr_accessor health_check_path: String?
+      attr_accessor primary_container: Types::ExpressGatewayContainer?
+      attr_accessor scaling_target: Types::ExpressGatewayScalingTarget?
+      attr_accessor ingress_paths: Array[Types::IngressPathSummary]?
+      attr_accessor created_at: Time?
+    end
+
+    module ExpressGatewayServiceInclude
+      TAGS: String
+    end
+
+    class ExpressGatewayServiceNetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_groups: Array[String],
+        ?subnets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_groups: Array[String]?
+      attr_accessor subnets: Array[String]?
+    end
+
+    module ExpressGatewayServiceScalingMetric
+      AverageCPUUtilization: String
+      AverageMemoryUtilization: String
+      RequestCountPerTarget: String
+    end
+
+    class ExpressGatewayServiceStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: String?
+      attr_accessor status_reason: String?
+    end
+
+    module ExpressGatewayServiceStatusCode
+      ACTIVE: String
+      DRAINING: String
+      INACTIVE: String
     end
 
     class FSxWindowsFileServerAuthorizationConfig
@@ -2083,6 +3264,30 @@ module Aws::ECS
       attr_accessor device_type: String?
     end
 
+    class InfrastructureOptimization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scale_in_after: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scale_in_after: Integer?
+    end
+
+    class IngressPathSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_type: String,
+        ?endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_type: String?
+      attr_accessor endpoint: String?
+    end
+
     module InstanceGeneration
       CURRENT: String
       PREVIOUS: String
@@ -2094,6 +3299,7 @@ module Aws::ECS
       def initialize: (
         ?type: String,
         ?status: String,
+        ?status_reason: String,
         ?last_updated: Time,
         ?last_status_change: Time,
       ) -> void
@@ -2101,6 +3307,7 @@ module Aws::ECS
 
       attr_accessor type: String?
       attr_accessor status: String?
+      attr_accessor status_reason: String?
       attr_accessor last_updated: Time?
       attr_accessor last_status_change: Time?
     end
@@ -2114,6 +3321,9 @@ module Aws::ECS
 
     module InstanceHealthCheckType
       CONTAINER_RUNTIME: String
+      ACCELERATED_COMPUTE: String
+      DAEMON: String
+      AGENT_CONNECTIVITY: String
     end
 
     class InstanceLaunchTemplate
@@ -2123,16 +3333,26 @@ module Aws::ECS
         ?ec2_instance_profile_arn: String,
         ?network_configuration: Types::ManagedInstancesNetworkConfiguration,
         ?storage_configuration: Types::ManagedInstancesStorageConfiguration,
+        ?local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration,
         ?monitoring: String,
+        ?capacity_option_type: String,
+        ?instance_metadata_tags_propagation: bool,
         ?instance_requirements: Types::InstanceRequirementsRequest,
+        ?fips_enabled: bool,
+        ?capacity_reservations: Types::CapacityReservationRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ec2_instance_profile_arn: String?
       attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration?
       attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration?
+      attr_accessor local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration?
       attr_accessor monitoring: String?
+      attr_accessor capacity_option_type: String?
+      attr_accessor instance_metadata_tags_propagation: bool?
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest?
+      attr_accessor fips_enabled: bool?
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest?
     end
 
     class InstanceLaunchTemplateUpdate
@@ -2142,16 +3362,22 @@ module Aws::ECS
         ?ec2_instance_profile_arn: String,
         ?network_configuration: Types::ManagedInstancesNetworkConfiguration,
         ?storage_configuration: Types::ManagedInstancesStorageConfiguration,
+        ?instance_metadata_tags_propagation: bool,
+        ?local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration,
         ?monitoring: String,
         ?instance_requirements: Types::InstanceRequirementsRequest,
+        ?capacity_reservations: Types::CapacityReservationRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ec2_instance_profile_arn: String?
       attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration?
       attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration?
+      attr_accessor instance_metadata_tags_propagation: bool?
+      attr_accessor local_storage_configuration: Types::ManagedInstancesLocalStorageConfiguration?
       attr_accessor monitoring: String?
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest?
+      attr_accessor capacity_reservations: Types::CapacityReservationRequest?
     end
 
     class InstanceRequirementsRequest
@@ -2270,6 +3496,19 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class LinearConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_percent: Float,
+        ?step_bake_time_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_percent: Float?
+      attr_accessor step_bake_time_in_minutes: Integer?
     end
 
     class LinuxParameters
@@ -2421,6 +3660,104 @@ module Aws::ECS
       attr_accessor next_token: String?
     end
 
+    class ListDaemonDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_arn: String,
+        ?status: Array[String],
+        ?created_at: Types::CreatedAt,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_arn: String?
+      attr_accessor status: Array[String]?
+      attr_accessor created_at: Types::CreatedAt?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDaemonDeploymentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?daemon_deployments: Array[Types::DaemonDeploymentSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor daemon_deployments: Array[Types::DaemonDeploymentSummary]?
+    end
+
+    class ListDaemonTaskDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?family_prefix: String,
+        ?family: String,
+        ?revision: String,
+        ?status: String,
+        ?sort: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor family_prefix: String?
+      attr_accessor family: String?
+      attr_accessor revision: String?
+      attr_accessor status: String?
+      attr_accessor sort: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDaemonTaskDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_task_definitions: Array[Types::DaemonTaskDefinitionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_task_definitions: Array[Types::DaemonTaskDefinitionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDaemonsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?capacity_provider_arns: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor capacity_provider_arns: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDaemonsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_summaries_list: Array[Types::DaemonSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_summaries_list: Array[Types::DaemonSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListServiceDeploymentsRequest
       include Smithy::Schema::Structure
 
@@ -2492,6 +3829,7 @@ module Aws::ECS
         ?max_results: Integer,
         ?launch_type: String,
         ?scheduling_strategy: String,
+        ?resource_management_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2500,6 +3838,7 @@ module Aws::ECS
       attr_accessor max_results: Integer?
       attr_accessor launch_type: String?
       attr_accessor scheduling_strategy: String?
+      attr_accessor resource_management_type: String?
     end
 
     class ListServicesResponse
@@ -2612,6 +3951,7 @@ module Aws::ECS
         ?service_name: String,
         ?desired_status: String,
         ?launch_type: String,
+        ?daemon_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2624,6 +3964,7 @@ module Aws::ECS
       attr_accessor service_name: String?
       attr_accessor desired_status: String?
       attr_accessor launch_type: String?
+      attr_accessor daemon_name: String?
     end
 
     class ListTasksResponse
@@ -2733,9 +4074,100 @@ module Aws::ECS
       attr_accessor reason: String?
     end
 
+    class ManagedApplicationAutoScalingPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+        ?policy_type: String,
+        ?target_value: Float,
+        ?metric: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+      attr_accessor policy_type: String?
+      attr_accessor target_value: Float?
+      attr_accessor metric: String?
+    end
+
+    class ManagedAutoScaling
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scalable_target: Types::ManagedScalableTarget,
+        ?application_auto_scaling_policies: Array[Types::ManagedApplicationAutoScalingPolicy],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scalable_target: Types::ManagedScalableTarget?
+      attr_accessor application_auto_scaling_policies: Array[Types::ManagedApplicationAutoScalingPolicy]?
+    end
+
+    class ManagedCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+        ?domain_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+      attr_accessor domain_name: String?
+    end
+
     module ManagedDraining
       ENABLED: String
       DISABLED: String
+    end
+
+    class ManagedIngressPath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_type: String,
+        ?endpoint: String,
+        ?load_balancer: Types::ManagedLoadBalancer,
+        ?load_balancer_security_groups: Array[Types::ManagedSecurityGroup],
+        ?certificate: Types::ManagedCertificate,
+        ?listener: Types::ManagedListener,
+        ?rule: Types::ManagedListenerRule,
+        ?target_groups: Array[Types::ManagedTargetGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_type: String?
+      attr_accessor endpoint: String?
+      attr_accessor load_balancer: Types::ManagedLoadBalancer?
+      attr_accessor load_balancer_security_groups: Array[Types::ManagedSecurityGroup]?
+      attr_accessor certificate: Types::ManagedCertificate?
+      attr_accessor listener: Types::ManagedListener?
+      attr_accessor rule: Types::ManagedListenerRule?
+      attr_accessor target_groups: Array[Types::ManagedTargetGroup]?
+    end
+
+    class ManagedInstancesLocalStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?use_local_storage: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor use_local_storage: bool?
     end
 
     module ManagedInstancesMonitoringOptions
@@ -2763,12 +4195,16 @@ module Aws::ECS
         ?infrastructure_role_arn: String,
         ?instance_launch_template: Types::InstanceLaunchTemplate,
         ?propagate_tags: String,
+        ?infrastructure_optimization: Types::InfrastructureOptimization,
+        ?auto_repair_configuration: Types::AutoRepairConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor infrastructure_role_arn: String?
       attr_accessor instance_launch_template: Types::InstanceLaunchTemplate?
       attr_accessor propagate_tags: String?
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization?
+      attr_accessor auto_repair_configuration: Types::AutoRepairConfiguration?
     end
 
     class ManagedInstancesStorageConfiguration
@@ -2780,6 +4216,128 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor storage_size_gi_b: Integer?
+    end
+
+    class ManagedListener
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class ManagedListenerRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class ManagedLoadBalancer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+        ?scheme: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+      attr_accessor scheme: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class ManagedLogGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+      attr_accessor log_group_name: String?
+    end
+
+    class ManagedMetricAlarm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+    end
+
+    module ManagedResourceStatus
+      PROVISIONING: String
+      ACTIVE: String
+      DEPROVISIONING: String
+      DELETED: String
+      FAILED: String
+    end
+
+    class ManagedScalableTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+        ?min_capacity: Integer,
+        ?max_capacity: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+      attr_accessor min_capacity: Integer?
+      attr_accessor max_capacity: Integer?
     end
 
     class ManagedScaling
@@ -2806,6 +4364,23 @@ module Aws::ECS
       DISABLED: String
     end
 
+    class ManagedSecurityGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+    end
+
     class ManagedStorageConfiguration
       include Smithy::Schema::Structure
 
@@ -2817,6 +4392,29 @@ module Aws::ECS
 
       attr_accessor kms_key_id: String?
       attr_accessor fargate_ephemeral_storage_kms_key_id: String?
+    end
+
+    class ManagedTargetGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+        ?health_check_path: String,
+        ?health_check_port: Integer,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+      attr_accessor health_check_path: String?
+      attr_accessor health_check_port: Integer?
+      attr_accessor port: Integer?
     end
 
     module ManagedTerminationProtection
@@ -2850,6 +4448,19 @@ module Aws::ECS
       attr_accessor max: Integer?
     end
 
+    class MetricConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_names: Array[String],
+        ?resolution_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_names: Array[String]?
+      attr_accessor resolution_seconds: Integer?
+    end
+
     class MissingVersionException
       include Smithy::Schema::Structure
 
@@ -2859,6 +4470,17 @@ module Aws::ECS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class MonitoringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_configurations: Array[Types::MetricConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_configurations: Array[Types::MetricConfiguration]?
     end
 
     class MountPoint
@@ -3048,6 +4670,7 @@ module Aws::ECS
 
     module PlatformDeviceType
       GPU: String
+      NEURON_DEVICE: String
     end
 
     class PlatformTaskDefinitionIncompatibilityException
@@ -3276,6 +4899,46 @@ module Aws::ECS
       attr_accessor container_instance: Types::ContainerInstance?
     end
 
+    class RegisterDaemonTaskDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?family: String,
+        ?task_role_arn: String,
+        ?execution_role_arn: String,
+        ?container_definitions: Array[Types::DaemonContainerDefinition],
+        ?cpu: String,
+        ?memory: String,
+        ?volumes: Array[Types::DaemonVolume],
+        ?tags: Array[Types::Tag],
+        ?pid_mode: String,
+        ?ipc_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor family: String?
+      attr_accessor task_role_arn: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor container_definitions: Array[Types::DaemonContainerDefinition]?
+      attr_accessor cpu: String?
+      attr_accessor memory: String?
+      attr_accessor volumes: Array[Types::DaemonVolume]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor pid_mode: String?
+      attr_accessor ipc_mode: String?
+    end
+
+    class RegisterDaemonTaskDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_task_definition_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_task_definition_arn: String?
+    end
+
     class RegisterTaskDefinitionRequest
       include Smithy::Schema::Structure
 
@@ -3350,10 +5013,12 @@ module Aws::ECS
 
       def initialize: (
         ?load_balancers: Array[Types::ServiceRevisionLoadBalancer],
+        ?vpc_lattice_configurations: Array[Types::ServiceRevisionVpcLatticeConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor load_balancers: Array[Types::ServiceRevisionLoadBalancer]?
+      attr_accessor vpc_lattice_configurations: Array[Types::ServiceRevisionVpcLatticeConfiguration]?
     end
 
     class Resource
@@ -3388,6 +5053,11 @@ module Aws::ECS
       attr_accessor message: String?
     end
 
+    module ResourceManagementType
+      CUSTOMER: String
+      ECS: String
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -3415,6 +5085,7 @@ module Aws::ECS
     module ResourceType
       GPU: String
       INFERENCE_ACCELERATOR: String
+      NEURON_DEVICE: String
     end
 
     class Rollback
@@ -3505,6 +5176,34 @@ module Aws::ECS
       attr_accessor operating_system_family: String?
     end
 
+    class RuntimePlatformOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cpu_architecture: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cpu_architecture: String?
+    end
+
+    class S3FilesVolumeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_arn: String,
+        ?root_directory: String,
+        ?transit_encryption_port: Integer,
+        ?access_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_arn: String?
+      attr_accessor root_directory: String?
+      attr_accessor transit_encryption_port: Integer?
+      attr_accessor access_point_arn: String?
+    end
+
     class Scale
       include Smithy::Schema::Structure
 
@@ -3580,6 +5279,8 @@ module Aws::ECS
         ?role_arn: String,
         ?events: Array[Types::ServiceEvent],
         ?created_at: Time,
+        ?current_service_deployment: String,
+        ?current_service_revisions: Array[Types::ServiceCurrentRevisionSummary],
         ?placement_constraints: Array[Types::PlacementConstraint],
         ?placement_strategy: Array[Types::PlacementStrategy],
         ?network_configuration: Types::NetworkConfiguration,
@@ -3592,6 +5293,7 @@ module Aws::ECS
         ?propagate_tags: String,
         ?enable_execute_command: bool,
         ?availability_zone_rebalancing: String,
+        ?resource_management_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3615,6 +5317,8 @@ module Aws::ECS
       attr_accessor role_arn: String?
       attr_accessor events: Array[Types::ServiceEvent]?
       attr_accessor created_at: Time?
+      attr_accessor current_service_deployment: String?
+      attr_accessor current_service_revisions: Array[Types::ServiceCurrentRevisionSummary]?
       attr_accessor placement_constraints: Array[Types::PlacementConstraint]?
       attr_accessor placement_strategy: Array[Types::PlacementStrategy]?
       attr_accessor network_configuration: Types::NetworkConfiguration?
@@ -3627,6 +5331,25 @@ module Aws::ECS
       attr_accessor propagate_tags: String?
       attr_accessor enable_execute_command: bool?
       attr_accessor availability_zone_rebalancing: String?
+      attr_accessor resource_management_type: String?
+    end
+
+    class ServiceConnectAccessLogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?include_query_parameters: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor include_query_parameters: String?
+    end
+
+    module ServiceConnectAccessLoggingFormat
+      TEXT: String
+      JSON: String
     end
 
     class ServiceConnectClientAlias
@@ -3652,6 +5375,7 @@ module Aws::ECS
         ?namespace: String,
         ?services: Array[Types::ServiceConnectService],
         ?log_configuration: Types::LogConfiguration,
+        ?access_log_configuration: Types::ServiceConnectAccessLogConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3659,6 +5383,12 @@ module Aws::ECS
       attr_accessor namespace: String?
       attr_accessor services: Array[Types::ServiceConnectService]?
       attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor access_log_configuration: Types::ServiceConnectAccessLogConfiguration?
+    end
+
+    module ServiceConnectIncludeQueryParameters
+      DISABLED: String
+      ENABLED: String
     end
 
     class ServiceConnectService
@@ -3756,6 +5486,23 @@ module Aws::ECS
       attr_accessor role_arn: String?
     end
 
+    class ServiceCurrentRevisionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?requested_task_count: Integer,
+        ?running_task_count: Integer,
+        ?pending_task_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor requested_task_count: Integer?
+      attr_accessor running_task_count: Integer?
+      attr_accessor pending_task_count: Integer?
+    end
+
     class ServiceDeployment
       include Smithy::Schema::Structure
 
@@ -3773,6 +5520,7 @@ module Aws::ECS
         ?status: String,
         ?status_reason: String,
         ?lifecycle_stage: String,
+        ?lifecycle_hook_details: Array[Types::DeploymentLifecycleHookDetail],
         ?deployment_configuration: Types::DeploymentConfiguration,
         ?rollback: Types::Rollback,
         ?deployment_circuit_breaker: Types::ServiceDeploymentCircuitBreaker,
@@ -3793,6 +5541,7 @@ module Aws::ECS
       attr_accessor status: String?
       attr_accessor status_reason: String?
       attr_accessor lifecycle_stage: String?
+      attr_accessor lifecycle_hook_details: Array[Types::DeploymentLifecycleHookDetail]?
       attr_accessor deployment_configuration: Types::DeploymentConfiguration?
       attr_accessor rollback: Types::Rollback?
       attr_accessor deployment_circuit_breaker: Types::ServiceDeploymentCircuitBreaker?
@@ -4011,6 +5760,9 @@ module Aws::ECS
         ?created_at: Time,
         ?vpc_lattice_configurations: Array[Types::VpcLatticeConfiguration],
         ?resolved_configuration: Types::ResolvedConfiguration,
+        ?ecs_managed_resources: Types::ECSManagedResources,
+        ?overrides: Types::ServiceRevisionOverrides,
+        ?monitoring: Types::MonitoringConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4033,6 +5785,14 @@ module Aws::ECS
       attr_accessor created_at: Time?
       attr_accessor vpc_lattice_configurations: Array[Types::VpcLatticeConfiguration]?
       attr_accessor resolved_configuration: Types::ResolvedConfiguration?
+      attr_accessor ecs_managed_resources: Types::ECSManagedResources?
+      attr_accessor overrides: Types::ServiceRevisionOverrides?
+      attr_accessor monitoring: Types::MonitoringConfiguration?
+    end
+
+    module ServiceRevisionCleanup
+      BLOCKING: String
+      DEFERRED: String
     end
 
     class ServiceRevisionLoadBalancer
@@ -4048,6 +5808,17 @@ module Aws::ECS
       attr_accessor production_listener_rule: String?
     end
 
+    class ServiceRevisionOverrides
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?runtime_platform: Types::RuntimePlatformOverride,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor runtime_platform: Types::RuntimePlatformOverride?
+    end
+
     class ServiceRevisionSummary
       include Smithy::Schema::Structure
 
@@ -4056,6 +5827,8 @@ module Aws::ECS
         ?requested_task_count: Integer,
         ?running_task_count: Integer,
         ?pending_task_count: Integer,
+        ?requested_test_traffic_weight: Float,
+        ?requested_production_traffic_weight: Float,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4063,6 +5836,21 @@ module Aws::ECS
       attr_accessor requested_task_count: Integer?
       attr_accessor running_task_count: Integer?
       attr_accessor pending_task_count: Integer?
+      attr_accessor requested_test_traffic_weight: Float?
+      attr_accessor requested_production_traffic_weight: Float?
+    end
+
+    class ServiceRevisionVpcLatticeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_group_arn: String,
+        ?production_listener_rule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_group_arn: String?
+      attr_accessor production_listener_rule: String?
     end
 
     class ServiceVolumeConfiguration
@@ -4121,6 +5909,7 @@ module Aws::ECS
       FARGATE_TASK_RETIREMENT_WAIT_PERIOD: String
       GUARD_DUTY_ACTIVATE: String
       DEFAULT_LOG_DRIVER_MODE: String
+      FARGATE_EVENT_WINDOWS: String
     end
 
     module SettingType
@@ -4524,6 +6313,7 @@ module Aws::ECS
         ?proxy_configuration: Types::ProxyConfiguration,
         ?registered_at: Time,
         ?deregistered_at: Time,
+        ?delete_requested_at: Time,
         ?registered_by: String,
         ?ephemeral_storage: Types::EphemeralStorage,
         ?enable_fault_injection: bool,
@@ -4552,6 +6342,7 @@ module Aws::ECS
       attr_accessor proxy_configuration: Types::ProxyConfiguration?
       attr_accessor registered_at: Time?
       attr_accessor deregistered_at: Time?
+      attr_accessor delete_requested_at: Time?
       attr_accessor registered_by: String?
       attr_accessor ephemeral_storage: Types::EphemeralStorage?
       attr_accessor enable_fault_injection: bool?
@@ -4762,6 +6553,7 @@ module Aws::ECS
       SERVICE_SCHEDULER_INITIATED: String
       SPOT_INTERRUPTION: String
       TERMINATION_NOTICE: String
+      INFRASTRUCTURE_HEALTH: String
     end
 
     class TaskVolumeConfiguration
@@ -4775,6 +6567,25 @@ module Aws::ECS
 
       attr_accessor name: String?
       attr_accessor managed_ebs_volume: Types::TaskManagedEBSVolumeConfiguration?
+    end
+
+    class ThresholdConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    module ThresholdType
+      COUNT: String
+      BOUNDED_PERCENT: String
+      UNBOUNDED_PERCENT: String
     end
 
     class TimeoutConfiguration
@@ -5021,6 +6832,92 @@ module Aws::ECS
       attr_accessor failures: Array[Types::Failure]?
     end
 
+    class UpdateDaemonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_arn: String,
+        ?daemon_task_definition_arn: String,
+        ?capacity_provider_arns: Array[String],
+        ?deployment_configuration: Types::DaemonDeploymentConfiguration,
+        ?propagate_tags: String,
+        ?enable_ecs_managed_tags: bool,
+        ?enable_execute_command: bool,
+        ?critical: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_arn: String?
+      attr_accessor daemon_task_definition_arn: String?
+      attr_accessor capacity_provider_arns: Array[String]?
+      attr_accessor deployment_configuration: Types::DaemonDeploymentConfiguration?
+      attr_accessor propagate_tags: String?
+      attr_accessor enable_ecs_managed_tags: bool?
+      attr_accessor enable_execute_command: bool?
+      attr_accessor critical: bool?
+    end
+
+    class UpdateDaemonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?daemon_arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?deployment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daemon_arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor deployment_arn: String?
+    end
+
+    class UpdateExpressGatewayServiceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?execution_role_arn: String,
+        ?health_check_path: String,
+        ?primary_container: Types::ExpressGatewayContainer,
+        ?task_role_arn: String,
+        ?network_configuration: Types::ExpressGatewayServiceNetworkConfiguration,
+        ?cpu: String,
+        ?memory: String,
+        ?cpu_architecture: String,
+        ?scaling_target: Types::ExpressGatewayScalingTarget,
+        ?task_definition_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor health_check_path: String?
+      attr_accessor primary_container: Types::ExpressGatewayContainer?
+      attr_accessor task_role_arn: String?
+      attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration?
+      attr_accessor cpu: String?
+      attr_accessor memory: String?
+      attr_accessor cpu_architecture: String?
+      attr_accessor scaling_target: Types::ExpressGatewayScalingTarget?
+      attr_accessor task_definition_arn: String?
+    end
+
+    class UpdateExpressGatewayServiceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::UpdatedExpressGatewayService,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::UpdatedExpressGatewayService?
+    end
+
     class UpdateInProgressException
       include Smithy::Schema::Structure
 
@@ -5039,12 +6936,16 @@ module Aws::ECS
         ?infrastructure_role_arn: String,
         ?instance_launch_template: Types::InstanceLaunchTemplateUpdate,
         ?propagate_tags: String,
+        ?infrastructure_optimization: Types::InfrastructureOptimization,
+        ?auto_repair_configuration: Types::AutoRepairConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor infrastructure_role_arn: String?
       attr_accessor instance_launch_template: Types::InstanceLaunchTemplateUpdate?
       attr_accessor propagate_tags: String?
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization?
+      attr_accessor auto_repair_configuration: Types::AutoRepairConfiguration?
     end
 
     class UpdateServicePrimaryTaskSetRequest
@@ -5099,6 +7000,7 @@ module Aws::ECS
         ?service_connect_configuration: Types::ServiceConnectConfiguration,
         ?volume_configurations: Array[Types::ServiceVolumeConfiguration],
         ?vpc_lattice_configurations: Array[Types::VpcLatticeConfiguration],
+        ?monitoring: Types::MonitoringConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5124,6 +7026,7 @@ module Aws::ECS
       attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration?
       attr_accessor volume_configurations: Array[Types::ServiceVolumeConfiguration]?
       attr_accessor vpc_lattice_configurations: Array[Types::VpcLatticeConfiguration]?
+      attr_accessor monitoring: Types::MonitoringConfiguration?
     end
 
     class UpdateServiceResponse
@@ -5195,6 +7098,29 @@ module Aws::ECS
       attr_accessor task_set: Types::TaskSet?
     end
 
+    class UpdatedExpressGatewayService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_arn: String,
+        ?cluster: String,
+        ?service_name: String,
+        ?status: Types::ExpressGatewayServiceStatus,
+        ?target_configuration: Types::ExpressGatewayServiceConfiguration,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_arn: String?
+      attr_accessor cluster: String?
+      attr_accessor service_name: String?
+      attr_accessor status: Types::ExpressGatewayServiceStatus?
+      attr_accessor target_configuration: Types::ExpressGatewayServiceConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     class VCpuCountRangeRequest
       include Smithy::Schema::Structure
 
@@ -5236,6 +7162,7 @@ module Aws::ECS
         ?host: Types::HostVolumeProperties,
         ?docker_volume_configuration: Types::DockerVolumeConfiguration,
         ?efs_volume_configuration: Types::EFSVolumeConfiguration,
+        ?s3files_volume_configuration: Types::S3FilesVolumeConfiguration,
         ?fsx_windows_file_server_volume_configuration: Types::FSxWindowsFileServerVolumeConfiguration,
         ?configured_at_launch: bool,
       ) -> void
@@ -5245,6 +7172,7 @@ module Aws::ECS
       attr_accessor host: Types::HostVolumeProperties?
       attr_accessor docker_volume_configuration: Types::DockerVolumeConfiguration?
       attr_accessor efs_volume_configuration: Types::EFSVolumeConfiguration?
+      attr_accessor s3files_volume_configuration: Types::S3FilesVolumeConfiguration?
       attr_accessor fsx_windows_file_server_volume_configuration: Types::FSxWindowsFileServerVolumeConfiguration?
       attr_accessor configured_at_launch: bool?
     end
@@ -5262,6 +7190,21 @@ module Aws::ECS
       attr_accessor read_only: bool?
     end
 
+    class VpcLatticeAdvancedConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alternate_target_group_arn: String,
+        ?production_listener_rule: String,
+        ?test_listener_rule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alternate_target_group_arn: String?
+      attr_accessor production_listener_rule: String?
+      attr_accessor test_listener_rule: String?
+    end
+
     class VpcLatticeConfiguration
       include Smithy::Schema::Structure
 
@@ -5269,12 +7212,14 @@ module Aws::ECS
         ?role_arn: String,
         ?target_group_arn: String,
         ?port_name: String,
+        ?advanced_configuration: Types::VpcLatticeAdvancedConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor role_arn: String?
       attr_accessor target_group_arn: String?
       attr_accessor port_name: String?
+      attr_accessor advanced_configuration: Types::VpcLatticeAdvancedConfiguration?
     end
   end
 end

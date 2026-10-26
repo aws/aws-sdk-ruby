@@ -1,0 +1,1852 @@
+module Aws::AgentRegistryControl
+  module Types
+
+    class A2aAgentCardDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?data_schema_version: String,
+        ?source: Types::DescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor data_schema_version: String?
+      attr_accessor source: Types::DescriptorSource?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AgUiDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::DescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::DescriptorSource?
+    end
+
+    module AgentCoreGatewayProtocolType
+      MCP: String
+    end
+
+    class AgentCoreGatewaySourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol_type: String,
+        ?authorizer_type: String,
+        ?authorizer_configuration: Types::AuthorizerConfiguration,
+        ?workload_identity_details: Types::WorkloadIdentityDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol_type: String?
+      attr_accessor authorizer_type: String?
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration?
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails?
+    end
+
+    class AgentCoreRuntimeProtocolConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_protocol: String?
+    end
+
+    module AgentCoreRuntimeServerProtocol
+      HTTP: String
+      A2A: String
+      MCP: String
+      AGUI: String
+    end
+
+    class AgentCoreRuntimeSourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol_configuration: Types::AgentCoreRuntimeProtocolConfiguration,
+        ?authorizer_configuration: Types::AuthorizerConfiguration,
+        ?workload_identity_details: Types::WorkloadIdentityDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol_configuration: Types::AgentCoreRuntimeProtocolConfiguration?
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration?
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails?
+    end
+
+    class AgentSkillsAdditionalData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?skill_md: Types::AgentSkillsMdDescriptor,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor skill_md: Types::AgentSkillsMdDescriptor?
+    end
+
+    class AgentSkillsDefinitionDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?data_schema_version: String,
+        ?additional_data: Types::AgentSkillsAdditionalData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor data_schema_version: String?
+      attr_accessor additional_data: Types::AgentSkillsAdditionalData?
+    end
+
+    class AgentSkillsMdDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?data_schema_version: String,
+        ?source: Types::DescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor data_schema_version: String?
+      attr_accessor source: Types::DescriptorSource?
+    end
+
+    class ApprovalConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_approval_rules: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_approval_rules: Array[String]?
+    end
+
+    class AuthorizerConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?custom_jwt_authorizer: Types::CustomJWTAuthorizerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_jwt_authorizer: Types::CustomJWTAuthorizerConfiguration?
+
+      class CustomJWTAuthorizer < AuthorizerConfiguration
+      end
+      class Unknown < AuthorizerConfiguration
+      end
+    end
+
+    class AuthorizingClaimMatchValueType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?claim_match_value: Types::ClaimMatchValueType,
+        ?claim_match_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor claim_match_value: Types::ClaimMatchValueType?
+      attr_accessor claim_match_operator: String?
+    end
+
+    module AutoApprovalRule
+      APPROVE_ALL: String
+    end
+
+    class AutoDetection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::AutoDetectionConfiguration,
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::AutoDetectionConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class AutoDetectionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor enabled: bool?
+    end
+
+    module AutoDetectionScope
+      ORGANIZATION: String
+    end
+
+    module AutoDetectionStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    module ClaimMatchOperatorType
+      EQUALS: String
+      CONTAINS: String
+      CONTAINS_ANY: String
+    end
+
+    class ClaimMatchValueType
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?match_value_string: String,
+        ?match_value_string_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor match_value_string: String?
+      attr_accessor match_value_string_list: Array[String]?
+
+      class MatchValueString < ClaimMatchValueType
+      end
+      class MatchValueStringList < ClaimMatchValueType
+      end
+      class Unknown < ClaimMatchValueType
+      end
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateRegistryRecordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?record_type: String,
+        ?descriptors: Types::Descriptors,
+        ?record_version: String,
+        ?client_token: String,
+        ?provenance: Array[Types::Provenance],
+        ?custom_metadata: Smithy::Schema::document,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor record_type: String?
+      attr_accessor descriptors: Types::Descriptors?
+      attr_accessor record_version: String?
+      attr_accessor client_token: String?
+      attr_accessor provenance: Array[Types::Provenance]?
+      attr_accessor custom_metadata: Smithy::Schema::document?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRegistryRecordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_arn: String?
+      attr_accessor status: String?
+    end
+
+    class CreateRegistryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?discovery_configuration: Types::DiscoveryConfiguration,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+        ?approval_configuration: Types::ApprovalConfiguration,
+        ?custom_metadata_schema_configuration: Types::CustomMetadataSchemaConfiguration,
+        ?auto_detection_configuration: Types::AutoDetectionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor discovery_configuration: Types::DiscoveryConfiguration?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor approval_configuration: Types::ApprovalConfiguration?
+      attr_accessor custom_metadata_schema_configuration: Types::CustomMetadataSchemaConfiguration?
+      attr_accessor auto_detection_configuration: Types::AutoDetectionConfiguration?
+    end
+
+    class CreateRegistryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_arn: String?
+    end
+
+    class CustomClaimValidationType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inbound_token_claim_name: String,
+        ?inbound_token_claim_value_type: String,
+        ?authorizing_claim_match_value: Types::AuthorizingClaimMatchValueType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inbound_token_claim_name: String?
+      attr_accessor inbound_token_claim_value_type: String?
+      attr_accessor authorizing_claim_match_value: Types::AuthorizingClaimMatchValueType?
+    end
+
+    class CustomDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+    end
+
+    class CustomJWTAuthorizerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discovery_url: String,
+        ?allowed_audience: Array[String],
+        ?allowed_clients: Array[String],
+        ?allowed_scopes: Array[String],
+        ?custom_claims: Array[Types::CustomClaimValidationType],
+        ?private_endpoint: Types::PrivateEndpoint,
+        ?private_endpoint_overrides: Array[Types::PrivateEndpointOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discovery_url: String?
+      attr_accessor allowed_audience: Array[String]?
+      attr_accessor allowed_clients: Array[String]?
+      attr_accessor allowed_scopes: Array[String]?
+      attr_accessor custom_claims: Array[Types::CustomClaimValidationType]?
+      attr_accessor private_endpoint: Types::PrivateEndpoint?
+      attr_accessor private_endpoint_overrides: Array[Types::PrivateEndpointOverride]?
+    end
+
+    module CustomMetadataSchemaComplianceStatus
+      COMPLIANT: String
+      NON_COMPLIANT: String
+    end
+
+    class CustomMetadataSchemaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_schema: String,
+        ?record_type_schema_overrides: Array[Types::RecordTypeSchemaOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_schema: String?
+      attr_accessor record_type_schema_overrides: Array[Types::RecordTypeSchemaOverride]?
+    end
+
+    class DeleteRegistryRecordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?record_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor record_id: String?
+    end
+
+    class DeleteRegistryRecordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRegistryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+    end
+
+    class DeleteRegistryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DescriptorSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_url: Types::DescriptorSourceFromUrl,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_url: Types::DescriptorSourceFromUrl?
+    end
+
+    class DescriptorSourceFromUrl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?credential_provider_configurations: Array[Types::RegistryRecordCredentialProviderConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor credential_provider_configurations: Array[Types::RegistryRecordCredentialProviderConfiguration]?
+    end
+
+    class Descriptors
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mcp_server: Types::McpServerDescriptor,
+        ?a2a_agent_card: Types::A2aAgentCardDescriptor,
+        ?agent_skills_definition: Types::AgentSkillsDefinitionDescriptor,
+        ?custom: Types::CustomDescriptor,
+        ?http: Types::HttpDescriptor,
+        ?agui: Types::AgUiDescriptor,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mcp_server: Types::McpServerDescriptor?
+      attr_accessor a2a_agent_card: Types::A2aAgentCardDescriptor?
+      attr_accessor agent_skills_definition: Types::AgentSkillsDefinitionDescriptor?
+      attr_accessor custom: Types::CustomDescriptor?
+      attr_accessor http: Types::HttpDescriptor?
+      attr_accessor agui: Types::AgUiDescriptor?
+    end
+
+    class DiscoveryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorizer_configuration: Types::AuthorizerConfiguration,
+        ?authorizer_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration?
+      attr_accessor authorizer_type: String?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+    end
+
+    module EndpointIpAddressType
+      IPV4: String
+      IPV6: String
+    end
+
+    class GetRegistryRecordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?record_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor record_id: String?
+    end
+
+    class GetRegistryRecordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_arn: String,
+        ?record_arn: String,
+        ?record_id: String,
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?record_type: String,
+        ?descriptors: Types::Descriptors,
+        ?record_version: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status_reason: String,
+        ?provenance: Array[Types::Provenance],
+        ?created_by_auto_detection: bool,
+        ?created_by: String,
+        ?custom_metadata: Smithy::Schema::document,
+        ?custom_metadata_schema_compliance_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_arn: String?
+      attr_accessor record_arn: String?
+      attr_accessor record_id: String?
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor record_type: String?
+      attr_accessor descriptors: Types::Descriptors?
+      attr_accessor record_version: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status_reason: String?
+      attr_accessor provenance: Array[Types::Provenance]?
+      attr_accessor created_by_auto_detection: bool?
+      attr_accessor created_by: String?
+      attr_accessor custom_metadata: Smithy::Schema::document?
+      attr_accessor custom_metadata_schema_compliance_status: String?
+    end
+
+    class GetRegistryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+    end
+
+    class GetRegistryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?registry_id: String,
+        ?registry_arn: String,
+        ?discovery_configuration: Types::DiscoveryConfiguration,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?approval_configuration: Types::ApprovalConfiguration,
+        ?custom_metadata_schema_configuration: Types::CustomMetadataSchemaConfiguration,
+        ?status: String,
+        ?status_reason: String,
+        ?auto_detection: Types::AutoDetection,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor registry_id: String?
+      attr_accessor registry_arn: String?
+      attr_accessor discovery_configuration: Types::DiscoveryConfiguration?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor approval_configuration: Types::ApprovalConfiguration?
+      attr_accessor custom_metadata_schema_configuration: Types::CustomMetadataSchemaConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor auto_detection: Types::AutoDetection?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class HttpDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::DescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::DescriptorSource?
+    end
+
+    module InboundTokenClaimValueType
+      STRING: String
+      STRING_ARRAY: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListRegistriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::RegistryFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::RegistryFilter]?
+    end
+
+    class ListRegistriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registries: Array[Types::RegistrySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registries: Array[Types::RegistrySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRegistryRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::RegistryRecordFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::RegistryRecordFilter]?
+    end
+
+    class ListRegistryRecordsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_records: Array[Types::RegistryRecordSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_records: Array[Types::RegistryRecordSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ManagedVpcResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_identifier: String,
+        ?subnet_ids: Array[String],
+        ?endpoint_ip_address_type: String,
+        ?security_group_ids: Array[String],
+        ?tags: Hash[String, String],
+        ?routing_domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_identifier: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor endpoint_ip_address_type: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor routing_domain: String?
+    end
+
+    class McpServerAdditionalData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tools: Types::McpToolsDescriptor,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tools: Types::McpToolsDescriptor?
+    end
+
+    class McpServerDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?data_schema_version: String,
+        ?additional_data: Types::McpServerAdditionalData,
+        ?source: Types::DescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor data_schema_version: String?
+      attr_accessor additional_data: Types::McpServerAdditionalData?
+      attr_accessor source: Types::DescriptorSource?
+    end
+
+    class McpToolsDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?data_schema_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor data_schema_version: String?
+    end
+
+    class PrivateEndpoint
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?self_managed_lattice_resource: Types::SelfManagedLatticeResource,
+        ?managed_vpc_resource: Types::ManagedVpcResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor self_managed_lattice_resource: Types::SelfManagedLatticeResource?
+      attr_accessor managed_vpc_resource: Types::ManagedVpcResource?
+
+      class SelfManagedLatticeResource < PrivateEndpoint
+      end
+      class ManagedVpcResource < PrivateEndpoint
+      end
+      class Unknown < PrivateEndpoint
+      end
+    end
+
+    class PrivateEndpointOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?private_endpoint: Types::PrivateEndpoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor private_endpoint: Types::PrivateEndpoint?
+    end
+
+    class Provenance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relation: String,
+        ?source_id: String,
+        ?source_type: String,
+        ?source_details: Types::SourceDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relation: String?
+      attr_accessor source_id: String?
+      attr_accessor source_type: String?
+      attr_accessor source_details: Types::SourceDetails?
+    end
+
+    module ProvenanceRelation
+      DETECTED_FROM: String
+    end
+
+    class ProvenanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relation: String,
+        ?source_id: String,
+        ?source_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relation: String?
+      attr_accessor source_id: String?
+      attr_accessor source_type: String?
+    end
+
+    module RecordType
+      MCP: String
+      AGENT: String
+      CUSTOM: String
+      SKILL: String
+      GATEWAY: String
+    end
+
+    class RecordTypeSchemaOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_type: String,
+        ?schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_type: String?
+      attr_accessor schema: String?
+    end
+
+    module RegistryAuthorizerType
+      CUSTOM_JWT: String
+      AWS_IAM: String
+    end
+
+    class RegistryFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module RegistryFilterName
+      STATUS: String
+      DISCOVERY_CONFIGURATION_AUTHORIZER_TYPE: String
+    end
+
+    class RegistryRecordCredentialProviderConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credential_provider_type: String,
+        ?credential_provider: Types::RegistryRecordCredentialProviderUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credential_provider_type: String?
+      attr_accessor credential_provider: Types::RegistryRecordCredentialProviderUnion?
+    end
+
+    module RegistryRecordCredentialProviderType
+      OAUTH: String
+      IAM: String
+    end
+
+    class RegistryRecordCredentialProviderUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?oauth_credential_provider: Types::RegistryRecordOAuthCredentialProvider,
+        ?iam_credential_provider: Types::RegistryRecordIamCredentialProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oauth_credential_provider: Types::RegistryRecordOAuthCredentialProvider?
+      attr_accessor iam_credential_provider: Types::RegistryRecordIamCredentialProvider?
+
+      class OauthCredentialProvider < RegistryRecordCredentialProviderUnion
+      end
+      class IamCredentialProvider < RegistryRecordCredentialProviderUnion
+      end
+      class Unknown < RegistryRecordCredentialProviderUnion
+      end
+    end
+
+    class RegistryRecordFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module RegistryRecordFilterName
+      NAME: String
+      STATUS: String
+      RECORD_TYPE: String
+    end
+
+    class RegistryRecordIamCredentialProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?service: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor service: String?
+      attr_accessor region: String?
+    end
+
+    class RegistryRecordOAuthCredentialProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_arn: String,
+        ?grant_type: String,
+        ?scopes: Array[String],
+        ?custom_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_arn: String?
+      attr_accessor grant_type: String?
+      attr_accessor scopes: Array[String]?
+      attr_accessor custom_parameters: Hash[String, String]?
+    end
+
+    module RegistryRecordOAuthGrantType
+      CLIENT_CREDENTIALS: String
+    end
+
+    module RegistryRecordStatus
+      DRAFT: String
+      PENDING_APPROVAL: String
+      APPROVED: String
+      REJECTED: String
+      DEPRECATED: String
+      CREATING: String
+      UPDATING: String
+      CREATE_FAILED: String
+      UPDATE_FAILED: String
+    end
+
+    class RegistryRecordSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_arn: String,
+        ?record_arn: String,
+        ?record_id: String,
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?record_type: String,
+        ?record_version: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?created_by_auto_detection: bool,
+        ?created_by: String,
+        ?provenance_summary_list: Array[Types::ProvenanceSummary],
+        ?custom_metadata_schema_compliance_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_arn: String?
+      attr_accessor record_arn: String?
+      attr_accessor record_id: String?
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor record_type: String?
+      attr_accessor record_version: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor created_by_auto_detection: bool?
+      attr_accessor created_by: String?
+      attr_accessor provenance_summary_list: Array[Types::ProvenanceSummary]?
+      attr_accessor custom_metadata_schema_compliance_status: String?
+    end
+
+    module RegistryStatus
+      CREATING: String
+      READY: String
+      UPDATING: String
+      CREATE_FAILED: String
+      UPDATE_FAILED: String
+      DELETING: String
+      DELETE_FAILED: String
+    end
+
+    class RegistrySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?registry_id: String,
+        ?registry_arn: String,
+        ?discovery_configuration: Types::DiscoveryConfiguration,
+        ?status: String,
+        ?status_reason: String,
+        ?auto_detection: Types::AutoDetection,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor registry_id: String?
+      attr_accessor registry_arn: String?
+      attr_accessor discovery_configuration: Types::DiscoveryConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor auto_detection: Types::AutoDetection?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SelfManagedLatticeResource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?resource_configuration_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_identifier: String?
+
+      class ResourceConfigurationIdentifier < SelfManagedLatticeResource
+      end
+      class Unknown < SelfManagedLatticeResource
+      end
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SourceDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?agentcore_runtime: Types::AgentCoreRuntimeSourceDetails,
+        ?agentcore_gateway: Types::AgentCoreGatewaySourceDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agentcore_runtime: Types::AgentCoreRuntimeSourceDetails?
+      attr_accessor agentcore_gateway: Types::AgentCoreGatewaySourceDetails?
+
+      class AgentcoreRuntime < SourceDetails
+      end
+      class AgentcoreGateway < SourceDetails
+      end
+      class Unknown < SourceDetails
+      end
+    end
+
+    module SourceType
+      AWS_BEDROCK_AGENTCORE_RUNTIME: String
+      AWS_BEDROCK_AGENTCORE_GATEWAY: String
+    end
+
+    class SubmitRegistryRecordForApprovalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?record_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor record_id: String?
+    end
+
+    class SubmitRegistryRecordForApprovalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_arn: String,
+        ?record_arn: String,
+        ?record_id: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_arn: String?
+      attr_accessor record_arn: String?
+      attr_accessor record_id: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRegistryRecordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?record_id: String,
+        ?name: String,
+        ?display_name: Types::UpdatedDisplayName,
+        ?description: Types::UpdatedDescription,
+        ?record_type: String,
+        ?descriptors: Types::UpdatedDescriptors,
+        ?record_version: String,
+        ?custom_metadata: Types::UpdatedCustomMetadataMap,
+        ?trigger_synchronization: bool,
+        ?provenance: Array[Types::Provenance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor record_id: String?
+      attr_accessor name: String?
+      attr_accessor display_name: Types::UpdatedDisplayName?
+      attr_accessor description: Types::UpdatedDescription?
+      attr_accessor record_type: String?
+      attr_accessor descriptors: Types::UpdatedDescriptors?
+      attr_accessor record_version: String?
+      attr_accessor custom_metadata: Types::UpdatedCustomMetadataMap?
+      attr_accessor trigger_synchronization: bool?
+      attr_accessor provenance: Array[Types::Provenance]?
+    end
+
+    class UpdateRegistryRecordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_arn: String,
+        ?record_arn: String,
+        ?record_id: String,
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?record_type: String,
+        ?descriptors: Types::Descriptors,
+        ?record_version: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status_reason: String,
+        ?provenance: Array[Types::Provenance],
+        ?created_by_auto_detection: bool,
+        ?created_by: String,
+        ?custom_metadata: Smithy::Schema::document,
+        ?custom_metadata_schema_compliance_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_arn: String?
+      attr_accessor record_arn: String?
+      attr_accessor record_id: String?
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor record_type: String?
+      attr_accessor descriptors: Types::Descriptors?
+      attr_accessor record_version: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status_reason: String?
+      attr_accessor provenance: Array[Types::Provenance]?
+      attr_accessor created_by_auto_detection: bool?
+      attr_accessor created_by: String?
+      attr_accessor custom_metadata: Smithy::Schema::document?
+      attr_accessor custom_metadata_schema_compliance_status: String?
+    end
+
+    class UpdateRegistryRecordStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?record_id: String,
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor record_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class UpdateRegistryRecordStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_arn: String,
+        ?record_arn: String,
+        ?record_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_arn: String?
+      attr_accessor record_arn: String?
+      attr_accessor record_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateRegistryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?name: String,
+        ?description: Types::UpdatedDescription,
+        ?discovery_configuration: Types::UpdatedDiscoveryConfiguration,
+        ?approval_configuration: Types::UpdatedApprovalConfiguration,
+        ?custom_metadata_schema_configuration: Types::UpdatedCustomMetadataSchemaConfiguration,
+        ?auto_detection_configuration: Types::UpdatedAutoDetectionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor name: String?
+      attr_accessor description: Types::UpdatedDescription?
+      attr_accessor discovery_configuration: Types::UpdatedDiscoveryConfiguration?
+      attr_accessor approval_configuration: Types::UpdatedApprovalConfiguration?
+      attr_accessor custom_metadata_schema_configuration: Types::UpdatedCustomMetadataSchemaConfiguration?
+      attr_accessor auto_detection_configuration: Types::UpdatedAutoDetectionConfiguration?
+    end
+
+    class UpdateRegistryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?registry_id: String,
+        ?registry_arn: String,
+        ?discovery_configuration: Types::DiscoveryConfiguration,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?approval_configuration: Types::ApprovalConfiguration,
+        ?custom_metadata_schema_configuration: Types::CustomMetadataSchemaConfiguration,
+        ?status: String,
+        ?status_reason: String,
+        ?auto_detection: Types::AutoDetection,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor registry_id: String?
+      attr_accessor registry_arn: String?
+      attr_accessor discovery_configuration: Types::DiscoveryConfiguration?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor approval_configuration: Types::ApprovalConfiguration?
+      attr_accessor custom_metadata_schema_configuration: Types::CustomMetadataSchemaConfiguration?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor auto_detection: Types::AutoDetection?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdatedA2aAgentCardDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedA2aAgentCardDescriptorFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedA2aAgentCardDescriptorFields?
+    end
+
+    class UpdatedA2aAgentCardDescriptorFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Types::UpdatedDescriptorData,
+        ?data_schema_version: Types::UpdatedDataSchemaVersion,
+        ?source: Types::UpdatedDescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Types::UpdatedDescriptorData?
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion?
+      attr_accessor source: Types::UpdatedDescriptorSource?
+    end
+
+    class UpdatedAgUiDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedAgUiDescriptorFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedAgUiDescriptorFields?
+    end
+
+    class UpdatedAgUiDescriptorFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::UpdatedDescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::UpdatedDescriptorSource?
+    end
+
+    class UpdatedAgentSkillsAdditionalData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedAgentSkillsAdditionalDataFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedAgentSkillsAdditionalDataFields?
+    end
+
+    class UpdatedAgentSkillsAdditionalDataFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?skill_md: Types::UpdatedAgentSkillsMdDescriptor,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor skill_md: Types::UpdatedAgentSkillsMdDescriptor?
+    end
+
+    class UpdatedAgentSkillsDefinitionDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedAgentSkillsDefinitionDescriptorFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedAgentSkillsDefinitionDescriptorFields?
+    end
+
+    class UpdatedAgentSkillsDefinitionDescriptorFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Types::UpdatedDescriptorData,
+        ?data_schema_version: Types::UpdatedDataSchemaVersion,
+        ?additional_data: Types::UpdatedAgentSkillsAdditionalData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Types::UpdatedDescriptorData?
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion?
+      attr_accessor additional_data: Types::UpdatedAgentSkillsAdditionalData?
+    end
+
+    class UpdatedAgentSkillsMdDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedAgentSkillsMdDescriptorFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedAgentSkillsMdDescriptorFields?
+    end
+
+    class UpdatedAgentSkillsMdDescriptorFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Types::UpdatedDescriptorData,
+        ?data_schema_version: Types::UpdatedDataSchemaVersion,
+        ?source: Types::UpdatedDescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Types::UpdatedDescriptorData?
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion?
+      attr_accessor source: Types::UpdatedDescriptorSource?
+    end
+
+    class UpdatedApprovalConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::ApprovalConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::ApprovalConfiguration?
+    end
+
+    class UpdatedAuthorizerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::AuthorizerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::AuthorizerConfiguration?
+    end
+
+    class UpdatedAutoDetectionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::AutoDetectionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::AutoDetectionConfiguration?
+    end
+
+    class UpdatedCustomDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedCustomDescriptorFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedCustomDescriptorFields?
+    end
+
+    class UpdatedCustomDescriptorFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Types::UpdatedDescriptorData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Types::UpdatedDescriptorData?
+    end
+
+    class UpdatedCustomMetadataMap
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Smithy::Schema::document?
+    end
+
+    class UpdatedCustomMetadataSchemaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::CustomMetadataSchemaConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::CustomMetadataSchemaConfiguration?
+    end
+
+    class UpdatedDataSchemaVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: String?
+    end
+
+    class UpdatedDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: String?
+    end
+
+    class UpdatedDescriptorData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: String?
+    end
+
+    class UpdatedDescriptorSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::DescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::DescriptorSource?
+    end
+
+    class UpdatedDescriptors
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedDescriptorsFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedDescriptorsFields?
+    end
+
+    class UpdatedDescriptorsFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mcp_server: Types::UpdatedMcpServerDescriptor,
+        ?a2a_agent_card: Types::UpdatedA2aAgentCardDescriptor,
+        ?agent_skills_definition: Types::UpdatedAgentSkillsDefinitionDescriptor,
+        ?custom: Types::UpdatedCustomDescriptor,
+        ?http: Types::UpdatedHttpDescriptor,
+        ?agui: Types::UpdatedAgUiDescriptor,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mcp_server: Types::UpdatedMcpServerDescriptor?
+      attr_accessor a2a_agent_card: Types::UpdatedA2aAgentCardDescriptor?
+      attr_accessor agent_skills_definition: Types::UpdatedAgentSkillsDefinitionDescriptor?
+      attr_accessor custom: Types::UpdatedCustomDescriptor?
+      attr_accessor http: Types::UpdatedHttpDescriptor?
+      attr_accessor agui: Types::UpdatedAgUiDescriptor?
+    end
+
+    class UpdatedDiscoveryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorizer_configuration: Types::UpdatedAuthorizerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorizer_configuration: Types::UpdatedAuthorizerConfiguration?
+    end
+
+    class UpdatedDisplayName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: String?
+    end
+
+    class UpdatedHttpDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedHttpDescriptorFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedHttpDescriptorFields?
+    end
+
+    class UpdatedHttpDescriptorFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::UpdatedDescriptorSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::UpdatedDescriptorSource?
+    end
+
+    class UpdatedMcpServerAdditionalData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedMcpServerAdditionalDataFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedMcpServerAdditionalDataFields?
+    end
+
+    class UpdatedMcpServerAdditionalDataFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tools: Types::UpdatedMcpToolsDescriptor,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tools: Types::UpdatedMcpToolsDescriptor?
+    end
+
+    class UpdatedMcpServerDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedMcpServerDescriptorFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedMcpServerDescriptorFields?
+    end
+
+    class UpdatedMcpServerDescriptorFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Types::UpdatedDescriptorData,
+        ?data_schema_version: Types::UpdatedDataSchemaVersion,
+        ?source: Types::UpdatedDescriptorSource,
+        ?additional_data: Types::UpdatedMcpServerAdditionalData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Types::UpdatedDescriptorData?
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion?
+      attr_accessor source: Types::UpdatedDescriptorSource?
+      attr_accessor additional_data: Types::UpdatedMcpServerAdditionalData?
+    end
+
+    class UpdatedMcpToolsDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?optional_value: Types::UpdatedMcpToolsDescriptorFields,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor optional_value: Types::UpdatedMcpToolsDescriptorFields?
+    end
+
+    class UpdatedMcpToolsDescriptorFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: Types::UpdatedDescriptorData,
+        ?data_schema_version: Types::UpdatedDataSchemaVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: Types::UpdatedDescriptorData?
+      attr_accessor data_schema_version: Types::UpdatedDataSchemaVersion?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION: String
+      ROOT_EVENT_IN_OTHER_SESSION: String
+      RESOURCE_CONFLICT: String
+    end
+
+    class WorkloadIdentityDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_identity_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_identity_arn: String?
+    end
+  end
+end

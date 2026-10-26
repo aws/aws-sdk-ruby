@@ -10,12 +10,10 @@ module Aws::GuardDuty
     #   <p>The unique ID of the detector of the GuardDuty member account.</p>
     #   @return [String]
     # @!attribute administrator_id
-    #   <p>The account ID of the GuardDuty administrator account whose invitation you're
-    #         accepting.</p>
+    #   <p>The account ID of the GuardDuty administrator account whose invitation you're accepting.</p>
     #   @return [String]
     # @!attribute invitation_id
-    #   <p>The value that is used to validate the administrator account to the member
-    #         account.</p>
+    #   <p>The value that is used to validate the administrator account to the member account.</p>
     #   @return [String]
     class AcceptAdministratorInvitationRequest < Struct.new(
       nil,
@@ -37,17 +35,13 @@ module Aws::GuardDuty
     # @deprecated
     #   This input is deprecated, use AcceptAdministratorInvitationRequest instead
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty member account.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty member account.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute master_id
-    #   <p>The account ID of the GuardDuty administrator account whose invitation you're
-    #         accepting.</p>
+    #   <p>The account ID of the GuardDuty administrator account whose invitation you're accepting.</p>
     #   @return [String]
     # @!attribute invitation_id
-    #   <p>The value that is used to validate the administrator account to the member
-    #         account.</p>
+    #   <p>The value that is used to validate the administrator account to the member account.</p>
     #   @return [String]
     class AcceptInvitationRequest < Struct.new(
       nil,
@@ -70,12 +64,10 @@ module Aws::GuardDuty
 
     # <p>Contains information on the current access control policies for the bucket.</p>
     # @!attribute allows_public_read_access
-    #   <p>A value that indicates whether public read access for the bucket is enabled through an
-    #         Access Control List (ACL).</p>
+    #   <p>A value that indicates whether public read access for the bucket is enabled through an Access Control List (ACL).</p>
     #   @return [Boolean]
     # @!attribute allows_public_write_access
-    #   <p>A value that indicates whether public write access for the bucket is enabled through an
-    #         Access Control List (ACL).</p>
+    #   <p>A value that indicates whether public write access for the bucket is enabled through an Access Control List (ACL).</p>
     #   @return [Boolean]
     class AccessControlList < Struct.new(
       nil,
@@ -146,9 +138,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the account.</p>
+    # <p>Contains information about the Amazon Web Services account within which the activity took place.</p>
     # @!attribute uid
-    #   <p>ID of the member's Amazon Web Services account</p>
+    #   <p>The Amazon Web Services account ID within which the activity took place. This may differ from the account that owns the user identity.</p>
     #   @return [String]
     # @!attribute name
     #   <p>Name of the member's Amazon Web Services account.</p>
@@ -167,35 +159,7 @@ module Aws::GuardDuty
     #   <p>The member account ID.</p>
     #   @return [String]
     # @!attribute email
-    #   <p>The email address of the member account. The following list includes the
-    #         rules for a valid email address:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>The email address must be a minimum of 6 and a maximum of 64 characters long.</p>
-    #               </li>
-    #               <li>
-    #                  <p>All characters must be 7-bit ASCII characters.</p>
-    #               </li>
-    #               <li>
-    #                  <p>There must be one and only one @ symbol, which separates the local name from the domain name.</p>
-    #               </li>
-    #               <li>
-    #                  <p>The local name can't contain any of the following characters:</p>
-    #                  <p>whitespace, " ' ( ) < > [ ] : ' , \ | % &</p>
-    #               </li>
-    #               <li>
-    #                  <p>The local name can't begin with a dot (.).</p>
-    #               </li>
-    #               <li>
-    #                  <p>The domain name can consist of only the characters [a-z], [A-Z], [0-9], hyphen (-), or dot (.).</p>
-    #               </li>
-    #               <li>
-    #                  <p>The domain name can't begin or end with a dot (.) or hyphen (-).</p>
-    #               </li>
-    #               <li>
-    #                  <p>The domain name must contain at least one dot. </p>
-    #               </li>
-    #            </ul>
+    #   <p>The email address of the member account. The following list includes the rules for a valid email address:</p> <ul> <li> <p>The email address must be a minimum of 6 and a maximum of 64 characters long.</p> </li> <li> <p>All characters must be 7-bit ASCII characters.</p> </li> <li> <p>There must be one and only one @ symbol, which separates the local name from the domain name.</p> </li> <li> <p>The local name can't contain any of the following characters:</p> <p>whitespace, " ' ( ) &lt; &gt; [ ] : ' , \ | % &amp;</p> </li> <li> <p>The local name can't begin with a dot (.).</p> </li> <li> <p>The domain name can consist of only the characters [a-z], [A-Z], [0-9], hyphen (-), or dot (.).</p> </li> <li> <p>The domain name can't begin or end with a dot (.) or hyphen (-).</p> </li> <li> <p>The domain name must contain at least one dot. </p> </li> </ul>
     #   @return [String]
     class AccountDetail < Struct.new(
       nil,
@@ -279,9 +243,6 @@ module Aws::GuardDuty
     # @!attribute kubernetes_api_call_action
     #   <p>Information about the Kubernetes API call action described in this finding.</p>
     #   @return [Types::KubernetesApiCallAction]
-    # @!attribute rds_login_attempt_action
-    #   <p>Information about <code>RDS_LOGIN_ATTEMPT</code> action described in this finding.</p>
-    #   @return [Types::RdsLoginAttemptAction]
     # @!attribute kubernetes_permission_checked_details
     #   <p>Information whether the user has the permission to use a specific Kubernetes API.</p>
     #   @return [Types::KubernetesPermissionCheckedDetails]
@@ -291,6 +252,9 @@ module Aws::GuardDuty
     # @!attribute kubernetes_role_details
     #   <p>Information about the Kubernetes role name and role type.</p>
     #   @return [Types::KubernetesRoleDetails]
+    # @!attribute rds_login_attempt_action
+    #   <p>Information about <code>RDS_LOGIN_ATTEMPT</code> action described in this finding.</p>
+    #   @return [Types::RdsLoginAttemptAction]
     class Action < Struct.new(
       nil,
       :action_type,
@@ -299,10 +263,26 @@ module Aws::GuardDuty
       :network_connection_action,
       :port_probe_action,
       :kubernetes_api_call_action,
-      :rds_login_attempt_action,
       :kubernetes_permission_checked_details,
       :kubernetes_role_binding_details,
       :kubernetes_role_details,
+      :rds_login_attempt_action,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about an activity, such as an API call, that was observed for a signal.</p>
+    # @!attribute type
+    #   <p>The type of the observed activity.</p>
+    #   @return [String]
+    # @!attribute api
+    #   <p>Contains information about the API call that was observed, when the activity type is <code>API_CALL</code>.</p>
+    #   @return [Types::ApiCall]
+    class Activity < Struct.new(
+      nil,
+      :type,
+      :api,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -319,9 +299,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the user session where the activity initiated.</p>
     #   @return [Types::Session]
     # @!attribute process
-    #   <p>Contains information about the process associated with the threat actor.
-    #         This includes details such as process name, path, execution time, and
-    #         unique identifiers that help track the actor's activities within the system.</p>
+    #   <p>Contains information about the process associated with the threat actor. This includes details such as process name, path, execution time, and unique identifiers that help track the actor's activities within the system.</p>
     #   @return [Types::ActorProcess]
     class Actor < Struct.new(
       nil,
@@ -334,8 +312,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about a process involved in a GuardDuty finding, including process identification,
-    #       execution details, and file information.</p>
+    # <p>Contains information about a process involved in a GuardDuty finding, including process identification, execution details, and file information.</p>
     # @!attribute name
     #   <p>The name of the process as it appears in the system.</p>
     #   @return [String]
@@ -343,14 +320,29 @@ module Aws::GuardDuty
     #   <p>The full file path to the process executable on the system.</p>
     #   @return [String]
     # @!attribute sha256
-    #   <p>The SHA256 hash of the process executable file, which can be used for identification
-    #         and verification purposes.</p>
+    #   <p>The SHA256 hash of the process executable file, which can be used for identification and verification purposes.</p>
     #   @return [String]
     class ActorProcess < Struct.new(
       nil,
       :name,
       :path,
       :sha256,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains additional information about the detected threat.</p>
+    # @!attribute version_id
+    #   <p>The version ID of the S3 object, if applicable.</p>
+    #   @return [String]
+    # @!attribute device_name
+    #   <p>The device name of the EBS volume, if applicable.</p>
+    #   @return [String]
+    class AdditionalInfo < Struct.new(
+      nil,
+      :version_id,
+      :device_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -372,8 +364,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The account within the organization specified as the GuardDuty delegated
-    #       administrator.</p>
+    # <p>The account within the organization specified as the GuardDuty delegated administrator.</p>
     # @!attribute admin_account_id
     #   <p>The Amazon Web Services account ID for the account.</p>
     #   @return [String]
@@ -394,8 +385,7 @@ module Aws::GuardDuty
     #   <p>The ID of the account used as the administrator account.</p>
     #   @return [String]
     # @!attribute invitation_id
-    #   <p>The value that is used to validate the administrator account to the member
-    #         account.</p>
+    #   <p>The value that is used to validate the administrator account to the member account.</p>
     #   @return [String]
     # @!attribute relationship_status
     #   <p>The status of the relationship between the administrator and member accounts.</p>
@@ -464,8 +454,7 @@ module Aws::GuardDuty
 
     # <p>Contains information about the behavior of the anomaly that is new to GuardDuty.</p>
     # @!attribute behavior
-    #   <p>The behavior of the anomalous activity that caused GuardDuty to 
-    #         generate the finding.</p>
+    #   <p>The behavior of the anomalous activity that caused GuardDuty to generate the finding.</p>
     #   @return [Hash<String, Hash<String, Types::AnomalyObject>>]
     class AnomalyUnusual < Struct.new(
       nil,
@@ -475,11 +464,32 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about an API call that was observed as part of an activity.</p>
+    # @!attribute operation
+    #   <p>The name of the API operation that was invoked.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The service that the API operation was invoked against.</p>
+    #   @return [String]
+    # @!attribute error
+    #   <p>The error code that was returned, if the API call failed.</p>
+    #   @return [String]
+    # @!attribute user_agent
+    #   <p>User agent in the request to the API operation</p>
+    #   @return [String]
+    class ApiCall < Struct.new(
+      nil,
+      :operation,
+      :service,
+      :error,
+      :user_agent,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute detector_id
-    #   <p>The ID of the detector that specifies the GuardDuty service whose findings you want to
-    #         archive.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector that specifies the GuardDuty service whose findings you want to archive.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute finding_ids
     #   <p>The IDs of the findings that you want to archive.</p>
@@ -500,8 +510,83 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the Autonomous System (AS) associated with the network 
-    #        endpoints involved in an attack sequence.</p>
+    # <p>Contains the full details of a custom detection rule association.</p>
+    # @!attribute association_id
+    #   <p>The unique identifier for the association.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the association.</p>
+    #   @return [String]
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The Amazon Web Services account ID associated with this rule association.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The rule execution mode. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the association was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the association was last updated.</p>
+    #   @return [Time]
+    # @!attribute expires_at
+    #   <p>The timestamp when the association expires.</p>
+    #   @return [Time]
+    class AssociationDetail < Struct.new(
+      nil,
+      :association_id,
+      :arn,
+      :rule_id,
+      :account_id,
+      :mode,
+      :created_at,
+      :updated_at,
+      :expires_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a custom detection rule association.</p>
+    # @!attribute association_id
+    #   <p>The unique identifier for the association.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the association.</p>
+    #   @return [String]
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The rule execution mode. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the association was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the association was last updated.</p>
+    #   @return [Time]
+    # @!attribute expires_at
+    #   <p>The timestamp when the association expires.</p>
+    #   @return [Time]
+    class AssociationSummary < Struct.new(
+      nil,
+      :association_id,
+      :arn,
+      :rule_id,
+      :mode,
+      :created_at,
+      :updated_at,
+      :expires_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the Autonomous System (AS) associated with the network endpoints involved in an attack sequence.</p>
     # @!attribute name
     #   <p>Name associated with the Autonomous System (AS).</p>
     #   @return [String]
@@ -512,6 +597,18 @@ module Aws::GuardDuty
       nil,
       :name,
       :number,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the Auto Scaling Group involved in a GuardDuty finding, including unique identifiers of the Amazon EC2 instances.</p>
+    # @!attribute ec2_instance_uids
+    #   <p>A list of unique identifiers for the compromised Amazon EC2 instances that are part of the same Auto Scaling Group.</p>
+    #   @return [Array<String>]
+    class AutoscalingAutoScalingGroup < Struct.new(
+      nil,
+      :ec2_instance_uids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -540,12 +637,10 @@ module Aws::GuardDuty
     #   <p>The Amazon Web Services service name whose API was invoked.</p>
     #   @return [String]
     # @!attribute remote_account_details
-    #   <p>The details of the Amazon Web Services account that made the API call. This field appears if the call
-    #         was made from outside your account.</p>
+    #   <p>The details of the Amazon Web Services account that made the API call. This field appears if the call was made from outside your account.</p>
     #   @return [Types::RemoteAccountDetails]
     # @!attribute affected_resources
-    #   <p>The details of the Amazon Web Services account that made the API call. This field identifies the
-    #         resources that were affected by this API call.</p>
+    #   <p>The details of the Amazon Web Services account that made the API call. This field identifies the resources that were affected by this API call.</p>
     #   @return [Hash<String, String>]
     class AwsApiCallAction < Struct.new(
       nil,
@@ -579,9 +674,81 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information on how the bucker owner's S3 Block Public Access settings are being
-    #       applied to the S3 bucket. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">S3 Block Public
-    #         Access</a> for more information. </p>
+    # <p>Contains information about a Bedrock guardrail associated with a finding.</p>
+    # @!attribute arn
+    #   <p>The ARN of the Bedrock guardrail.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The version of the Bedrock guardrail.</p>
+    #   @return [String]
+    class BedrockGuardrail < Struct.new(
+      nil,
+      :arn,
+      :version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the Bedrock guardrail that was involved in a finding.</p>
+    # @!attribute guardrail_arn
+    #   <p>The ARN of the Bedrock guardrail. This field is deprecated. Use the <code>guardrails</code> list instead.</p>
+    #   @deprecated
+    #     Use guardrails list instead
+    #     Since: 2026-07-13
+    #   @return [String]
+    # @!attribute guardrail_version
+    #   <p>The version of the Bedrock guardrail. This field is deprecated. Use the <code>guardrails</code> list instead.</p>
+    #   @deprecated
+    #     Use guardrails list instead
+    #     Since: 2026-07-13
+    #   @return [String]
+    # @!attribute guardrails
+    #   <p>The list of Bedrock guardrails associated with the finding.</p>
+    #   @return [Array<Types::BedrockGuardrail>]
+    # @!attribute guardrail_action
+    #   <p>Indicates whether the guardrail intervened or not.</p>
+    #   @return [String]
+    # @!attribute guardrail_source
+    #   <p>Indicates whether the guardrail was applied on the input or output of the model invocation.</p>
+    #   @return [String]
+    # @!attribute content_policy_filters
+    #   <p>The list of content policy filters that matched during the guardrail evaluation.</p>
+    #   @return [Array<Types::ContentPolicyFilter>]
+    class BedrockGuardrailDetails < Struct.new(
+      nil,
+      :guardrail_arn,
+      :guardrail_version,
+      :guardrails,
+      :guardrail_action,
+      :guardrail_source,
+      :content_policy_filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains details about an Amazon Bedrock guardrail evaluated during a model invocation.</p>
+    # @!attribute version
+    #   <p>The version of the Amazon Bedrock guardrail. Valid values are a numeric version, <code>DRAFT</code>, or <code>ENFORCED</code>.</p>
+    #   @return [String]
+    # @!attribute guardrail_action
+    #   <p>Indicates whether the guardrail intervened during the model invocation.</p>
+    #   @return [String]
+    # @!attribute guardrail_source
+    #   <p>Indicates whether the guardrail was applied on the input or output of the model invocation.</p>
+    #   @return [String]
+    class BedrockGuardrailResource < Struct.new(
+      nil,
+      :version,
+      :guardrail_action,
+      :guardrail_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information on how the bucker owner's S3 Block Public Access settings are being applied to the S3 bucket. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">S3 Block Public Access</a> for more information. </p>
     # @!attribute ignore_public_acls
     #   <p>Indicates if S3 Block Public Access is set to <code>IgnorePublicAcls</code>.</p>
     #   @return [Boolean]
@@ -613,8 +780,7 @@ module Aws::GuardDuty
     #   <p>Contains information on the bucket policies for the S3 bucket.</p>
     #   @return [Types::BucketPolicy]
     # @!attribute block_public_access
-    #   <p>Contains information on which account level S3 Block Public Access settings are applied to
-    #         the S3 bucket.</p>
+    #   <p>Contains information on which account level S3 Block Public Access settings are applied to the S3 bucket.</p>
     #   @return [Types::BlockPublicAccess]
     class BucketLevelPermissions < Struct.new(
       nil,
@@ -628,12 +794,10 @@ module Aws::GuardDuty
 
     # <p>Contains information on the current bucket policies for the S3 bucket.</p>
     # @!attribute allows_public_read_access
-    #   <p>A value that indicates whether public read access for the bucket is enabled through a
-    #         bucket policy.</p>
+    #   <p>A value that indicates whether public read access for the bucket is enabled through a bucket policy.</p>
     #   @return [Boolean]
     # @!attribute allows_public_write_access
-    #   <p>A value that indicates whether public write access for the bucket is enabled through a
-    #         bucket policy.</p>
+    #   <p>A value that indicates whether public write access for the bucket is enabled through a bucket policy.</p>
     #   @return [Boolean]
     class BucketPolicy < Struct.new(
       nil,
@@ -656,6 +820,26 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains details about the cloud environment associated with an investigation.</p>
+    # @!attribute provider
+    #   <p>The cloud provider. Currently, only <code>AWS</code> is supported.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>The Amazon Web Services Region in which the investigated resource resides.</p>
+    #   @return [String]
+    # @!attribute account
+    #   <p>The Amazon Web Services account ID of the investigated resource.</p>
+    #   @return [String]
+    class CloudDetails < Struct.new(
+      nil,
+      :provider,
+      :region,
+      :account,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information on the status of CloudTrail as a data source for the detector.</p>
     # @!attribute status
     #   <p>Describes whether CloudTrail is enabled as a data source for the detector.</p>
@@ -668,63 +852,67 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about the CloudFormation stack involved in a GuardDuty finding, including unique identifiers of the Amazon EC2 instances.</p>
+    # @!attribute ec2_instance_uids
+    #   <p>A list of unique identifiers for the compromised Amazon EC2 instances that were created as part of the same CloudFormation stack.</p>
+    #   @return [Array<String>]
+    class CloudformationStack < Struct.new(
+      nil,
+      :ec2_instance_uids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the condition.</p>
     # @!attribute eq
-    #   <p>Represents the <i>equal</i> condition to be applied to a single field when
-    #         querying for findings.</p>
+    #   <p>Represents the <i>equal</i> condition to be applied to a single field when querying for findings.</p> <p>Max values: 50</p>
     #   @deprecated
     #   @return [Array<String>]
     # @!attribute neq
-    #   <p>Represents the <i>not equal</i> condition to be applied to a single field
-    #         when querying for findings.</p>
+    #   <p>Represents the <i>not equal</i> condition to be applied to a single field when querying for findings.</p> <p>Max values: 50</p>
     #   @deprecated
     #   @return [Array<String>]
     # @!attribute gt
-    #   <p>Represents a <i>greater than</i> condition to be applied to a single field
-    #         when querying for findings.</p>
+    #   <p>Represents a <i>greater than</i> condition to be applied to a single field when querying for findings.</p>
     #   @deprecated
     #   @return [Integer]
     # @!attribute gte
-    #   <p>Represents a <i>greater than or equal</i> condition to be applied to a
-    #         single field when querying for findings.</p>
+    #   <p>Represents a <i>greater than or equal</i> condition to be applied to a single field when querying for findings.</p>
     #   @deprecated
     #   @return [Integer]
     # @!attribute lt
-    #   <p>Represents a <i>less than</i> condition to be applied to a single field when
-    #         querying for findings.</p>
+    #   <p>Represents a <i>less than</i> condition to be applied to a single field when querying for findings.</p>
     #   @deprecated
     #   @return [Integer]
     # @!attribute lte
-    #   <p>Represents a <i>less than or equal</i> condition to be applied to a single
-    #         field when querying for findings.</p>
+    #   <p>Represents a <i>less than or equal</i> condition to be applied to a single field when querying for findings.</p>
     #   @deprecated
     #   @return [Integer]
     # @!attribute equals
-    #   <p>Represents an <i>equal</i>
-    #               <b></b> condition to be applied to
-    #         a single field when querying for findings.</p>
+    #   <p>Represents an <i>equal</i> <b/> condition to be applied to a single field when querying for findings.</p> <p>Max values: 50</p>
     #   @return [Array<String>]
     # @!attribute not_equals
-    #   <p>Represents a <i>not equal</i>
-    #               <b></b> condition to be applied
-    #         to a single field when querying for findings.</p>
+    #   <p>Represents a <i>not equal</i> <b/> condition to be applied to a single field when querying for findings.</p> <p>Max values: 50</p>
     #   @return [Array<String>]
     # @!attribute greater_than
-    #   <p>Represents a <i>greater than</i> condition to be applied to a single field
-    #         when querying for findings.</p>
+    #   <p>Represents a <i>greater than</i> condition to be applied to a single field when querying for findings.</p>
     #   @return [Integer]
     # @!attribute greater_than_or_equal
-    #   <p>Represents a <i>greater than or equal</i> condition to be applied to a
-    #         single field when querying for findings.</p>
+    #   <p>Represents a <i>greater than or equal</i> condition to be applied to a single field when querying for findings.</p>
     #   @return [Integer]
     # @!attribute less_than
-    #   <p>Represents a <i>less than</i> condition to be applied to a single field when
-    #         querying for findings.</p>
+    #   <p>Represents a <i>less than</i> condition to be applied to a single field when querying for findings.</p>
     #   @return [Integer]
     # @!attribute less_than_or_equal
-    #   <p>Represents a <i>less than or equal</i> condition to be applied to a single
-    #         field when querying for findings.</p>
+    #   <p>Represents a <i>less than or equal</i> condition to be applied to a single field when querying for findings.</p>
     #   @return [Integer]
+    # @!attribute matches
+    #   <p>Represents the <i>match</i> condition to be applied to a single field when querying for findings. </p> <note> <p> The <i>matches</i> condition is available only for create-filter and update-filter APIs. </p> </note>
+    #   @return [Array<String>]
+    # @!attribute not_matches
+    #   <p>Represents the <i>not match</i> condition to be applied to a single field when querying for findings. </p> <note> <p> The <i>not-matches</i> condition is available only for create-filter and update-filter APIs. </p> </note>
+    #   @return [Array<String>]
     class Condition < Struct.new(
       nil,
       :eq,
@@ -739,6 +927,8 @@ module Aws::GuardDuty
       :greater_than_or_equal,
       :less_than,
       :less_than_or_equal,
+      :matches,
+      :not_matches,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -774,9 +964,7 @@ module Aws::GuardDuty
     #   <p>Container image.</p>
     #   @return [String]
     # @!attribute image_prefix
-    #   <p>Part of the image name before the last slash. For example, imagePrefix for
-    #         public.ecr.aws/amazonlinux/amazonlinux:latest would be public.ecr.aws/amazonlinux. If the
-    #         image name is relative and does not have a slash, this field is empty.</p>
+    #   <p>Part of the image name before the last slash. For example, imagePrefix for public.ecr.aws/amazonlinux/amazonlinux:latest would be public.ecr.aws/amazonlinux. If the image name is relative and does not have a slash, this field is empty.</p>
     #   @return [String]
     # @!attribute volume_mounts
     #   <p>Container volume mounts.</p>
@@ -798,12 +986,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about container resources involved in a GuardDuty finding.
-    #       This structure provides details about containers that were identified as part of
-    #       suspicious or malicious activity.</p>
+    # <p>Contains information about container resources involved in a GuardDuty finding. This structure provides details about containers that were identified as part of suspicious or malicious activity.</p>
     # @!attribute image
-    #   <p>The container image information, including the image name and tag used to run the container
-    #         that was involved in the finding.</p>
+    #   <p>The container image information, including the image name and tag used to run the container that was involved in the finding.</p>
     #   @return [String]
     # @!attribute image_uid
     #   <p>The unique ID associated with the container image.</p>
@@ -817,11 +1002,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the Amazon EC2 instance that is running 
-    #     the Amazon ECS container.</p>
+    # <p>Contains information about the Amazon EC2 instance that is running the Amazon ECS container.</p>
     # @!attribute covered_container_instances
-    #   <p>Represents the nodes in the Amazon ECS cluster that has a <code>HEALTHY</code>
-    #         coverage status.</p>
+    #   <p>Represents the nodes in the Amazon ECS cluster that has a <code>HEALTHY</code> coverage status.</p>
     #   @return [Integer]
     # @!attribute compatible_container_instances
     #   <p>Represents total number of nodes in the Amazon ECS cluster.</p>
@@ -830,6 +1013,42 @@ module Aws::GuardDuty
       nil,
       :covered_container_instances,
       :compatible_container_instances,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a content policy filter that matched during a guardrail evaluation.</p>
+    # @!attribute type
+    #   <p>The type of content that was filtered by the guardrail.</p>
+    #   @return [String]
+    # @!attribute confidence
+    #   <p>The confidence level that the content matched the filter.</p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>The action taken by the guardrail filter.</p>
+    #   @return [String]
+    class ContentPolicyFilter < Struct.new(
+      nil,
+      :type,
+      :confidence,
+      :action,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the time range within the continuous backup in Amazon Web Services Backup to scan for a point-in-time recovery resource.</p>
+    # @!attribute start_time
+    #   <p>The timestamp representing the start of the time range to scan. Reserved for internal use.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The timestamp representing the end of the time range to scan.</p>
+    #   @return [Time]
+    class ContinuousScanDetails < Struct.new(
+      nil,
+      :start_time,
+      :end_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -851,8 +1070,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the Amazon EC2 instance runtime 
-    #     coverage details.</p>
+    # <p>Contains information about the Amazon EC2 instance runtime coverage details.</p>
     # @!attribute instance_id
     #   <p>The Amazon EC2 instance ID.</p>
     #   @return [String]
@@ -860,29 +1078,13 @@ module Aws::GuardDuty
     #   <p>The instance type of the Amazon EC2 instance.</p>
     #   @return [String]
     # @!attribute cluster_arn
-    #   <p>The cluster ARN of the Amazon ECS cluster running on 
-    #       the Amazon EC2 instance.</p>
+    #   <p>The cluster ARN of the Amazon ECS cluster running on the Amazon EC2 instance.</p>
     #   @return [String]
     # @!attribute agent_details
     #   <p>Information about the installed security agent.</p>
     #   @return [Types::AgentDetails]
     # @!attribute management_type
-    #   <p>Indicates how the GuardDuty security agent is managed for this resource.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>MANUAL</code> indicates that you are responsible to deploy, update, and manage the GuardDuty 
-    #             security agent updates for this resource.</p>
-    #               </li>
-    #            </ul>
-    #            <note>
-    #               <p>The <code>DISABLED</code> status doesn't apply to Amazon 
-    #       EC2 instances and Amazon EKS clusters.</p>
-    #            </note>
+    #   <p>Indicates how the GuardDuty security agent is managed for this resource.</p> <ul> <li> <p> <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p> </li> <li> <p> <code>MANUAL</code> indicates that you are responsible to deploy, update, and manage the GuardDuty security agent updates for this resource.</p> </li> </ul> <note> <p>The <code>DISABLED</code> status doesn't apply to Amazon EC2 instances and Amazon EKS clusters.</p> </note>
     #   @return [String]
     class CoverageEc2InstanceDetails < Struct.new(
       nil,
@@ -901,12 +1103,10 @@ module Aws::GuardDuty
     #   <p>The name of the Amazon ECS cluster.</p>
     #   @return [String]
     # @!attribute fargate_details
-    #   <p>Information about the Fargate details associated with the Amazon 
-    #         ECS cluster.</p>
+    #   <p>Information about the Fargate details associated with the Amazon ECS cluster.</p>
     #   @return [Types::FargateDetails]
     # @!attribute container_instance_details
-    #   <p>Information about the Amazon ECS container running on Amazon EC2 
-    #         instance.</p>
+    #   <p>Information about the Amazon ECS container running on Amazon EC2 instance.</p>
     #   @return [Types::ContainerInstanceDetails]
     class CoverageEcsClusterDetails < Struct.new(
       nil,
@@ -923,8 +1123,7 @@ module Aws::GuardDuty
     #   <p>Name of the EKS cluster.</p>
     #   @return [String]
     # @!attribute covered_nodes
-    #   <p>Represents the nodes within the EKS cluster that have a <code>HEALTHY</code> coverage
-    #         status.</p>
+    #   <p>Represents the nodes within the EKS cluster that have a <code>HEALTHY</code> coverage status.</p>
     #   @return [Integer]
     # @!attribute compatible_nodes
     #   <p>Represents all the nodes within the EKS cluster in your account.</p>
@@ -933,12 +1132,7 @@ module Aws::GuardDuty
     #   <p>Information about the installed EKS add-on.</p>
     #   @return [Types::AddonDetails]
     # @!attribute management_type
-    #   <p>Indicates how the Amazon EKS add-on GuardDuty agent is managed for this EKS cluster.</p>
-    #            <p>
-    #               <code>AUTO_MANAGED</code> indicates GuardDuty deploys and manages updates for this resource.</p>
-    #            <p>
-    #               <code>MANUAL</code> indicates that you are responsible to deploy, update, and manage 
-    #         the Amazon EKS add-on GuardDuty agent for this resource.</p>
+    #   <p>Indicates how the Amazon EKS add-on GuardDuty agent is managed for this EKS cluster.</p> <p> <code>AUTO_MANAGED</code> indicates GuardDuty deploys and manages updates for this resource.</p> <p> <code>MANUAL</code> indicates that you are responsible to deploy, update, and manage the Amazon EKS add-on GuardDuty agent for this resource.</p>
     #   @return [String]
     class CoverageEksClusterDetails < Struct.new(
       nil,
@@ -952,15 +1146,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a condition that when matched will be added to the response of the
-    #       operation.</p>
+    # <p>Represents a condition that when matched will be added to the response of the operation.</p>
     # @!attribute equals
-    #   <p>Represents an equal condition that is applied to a single field while retrieving the
-    #         coverage details.</p>
+    #   <p>Represents an equal condition that is applied to a single field while retrieving the coverage details.</p>
     #   @return [Array<String>]
     # @!attribute not_equals
-    #   <p>Represents a not equal condition that is applied to a single field while retrieving the
-    #         coverage details.</p>
+    #   <p>Represents a not equal condition that is applied to a single field while retrieving the coverage details.</p>
     #   @return [Array<String>]
     class CoverageFilterCondition < Struct.new(
       nil,
@@ -973,8 +1164,7 @@ module Aws::GuardDuty
 
     # <p>Represents the criteria used in the filter.</p>
     # @!attribute filter_criterion
-    #   <p>Represents a condition that when matched will be added to the response of the
-    #         operation.</p>
+    #   <p>Represents a condition that when matched will be added to the response of the operation.</p>
     #   @return [Array<Types::CoverageFilterCriterion>]
     class CoverageFilterCriteria < Struct.new(
       nil,
@@ -984,14 +1174,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a condition that when matched will be added to the response of the
-    #       operation.</p>
+    # <p>Represents a condition that when matched will be added to the response of the operation.</p>
     # @!attribute criterion_key
-    #   <p>An enum value representing possible filter fields.</p>
-    #            <note>
-    #               <p>Replace the enum value <code>CLUSTER_NAME</code> with <code>EKS_CLUSTER_NAME</code>.
-    #         <code>CLUSTER_NAME</code> has been deprecated.</p>
-    #            </note>
+    #   <p>An enum value representing possible filter fields.</p> <note> <p>Replace the enum value <code>CLUSTER_NAME</code> with <code>EKS_CLUSTER_NAME</code>. <code>CLUSTER_NAME</code> has been deprecated.</p> </note>
     #   @return [String]
     # @!attribute filter_condition
     #   <p>Contains information about the condition.</p>
@@ -1022,12 +1207,10 @@ module Aws::GuardDuty
     #   <p>Represents the status of the EKS cluster coverage.</p>
     #   @return [String]
     # @!attribute issue
-    #   <p>Represents the reason why a coverage status was <code>UNHEALTHY</code> for the EKS
-    #         cluster.</p>
+    #   <p>Represents the reason why a coverage status was <code>UNHEALTHY</code> for the EKS cluster.</p>
     #   @return [String]
     # @!attribute updated_at
-    #   <p>The timestamp at which the coverage details for the resource were last updated. This is in
-    #         UTC format.</p>
+    #   <p>The timestamp at which the coverage details for the resource were last updated. This is in UTC format.</p>
     #   @return [Time]
     class CoverageResource < Struct.new(
       nil,
@@ -1047,23 +1230,21 @@ module Aws::GuardDuty
     # @!attribute eks_cluster_details
     #   <p>EKS cluster details involved in the coverage statistics.</p>
     #   @return [Types::CoverageEksClusterDetails]
+    # @!attribute ecs_cluster_details
+    #   <p>Information about the Amazon ECS cluster that is assessed for runtime coverage.</p>
+    #   @return [Types::CoverageEcsClusterDetails]
+    # @!attribute ec2_instance_details
+    #   <p>Information about the Amazon EC2 instance assessed for runtime coverage.</p>
+    #   @return [Types::CoverageEc2InstanceDetails]
     # @!attribute resource_type
     #   <p>The type of Amazon Web Services resource.</p>
     #   @return [String]
-    # @!attribute ecs_cluster_details
-    #   <p>Information about the Amazon ECS cluster that is assessed for 
-    #       runtime coverage.</p>
-    #   @return [Types::CoverageEcsClusterDetails]
-    # @!attribute ec2_instance_details
-    #   <p>Information about the Amazon EC2 instance assessed 
-    #         for runtime coverage.</p>
-    #   @return [Types::CoverageEc2InstanceDetails]
     class CoverageResourceDetails < Struct.new(
       nil,
       :eks_cluster_details,
-      :resource_type,
       :ecs_cluster_details,
       :ec2_instance_details,
+      :resource_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1071,11 +1252,7 @@ module Aws::GuardDuty
 
     # <p>Information about the sorting criteria used in the coverage statistics.</p>
     # @!attribute attribute_name
-    #   <p>Represents the field name used to sort the coverage details.</p>
-    #            <note>
-    #               <p>Replace the enum value <code>CLUSTER_NAME</code> with <code>EKS_CLUSTER_NAME</code>.
-    #         <code>CLUSTER_NAME</code> has been deprecated.</p>
-    #            </note>
+    #   <p>Represents the field name used to sort the coverage details.</p> <note> <p>Replace the enum value <code>CLUSTER_NAME</code> with <code>EKS_CLUSTER_NAME</code>. <code>CLUSTER_NAME</code> has been deprecated.</p> </note>
     #   @return [String]
     # @!attribute order_by
     #   <p>The order in which the sorted findings are to be displayed.</p>
@@ -1105,6 +1282,74 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The rule execution mode. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. Maximum 64 characters.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to be added to the new custom detection rule association resource.</p>
+    #   @return [Hash<String, String>]
+    class CreateCustomDetectionRuleAssociationRequest < Struct.new(
+      nil,
+      :rule_id,
+      :mode,
+      :client_token,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_association
+    #   <p>The details of the newly created custom detection rule association.</p>
+    #   @return [Types::AssociationDetail]
+    class CreateCustomDetectionRuleAssociationResponse < Struct.new(
+      nil,
+      :rule_association,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The execution mode of the organization configuration. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>
+    #   @return [String]
+    # @!attribute include_account_ids
+    #   <p>The account IDs to include in the organization configuration. Mutually exclusive with <code>ExcludeAccountIds</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute exclude_account_ids
+    #   <p>The account IDs to exclude from the organization configuration. Mutually exclusive with <code>IncludeAccountIds</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time.</p>
+    #   @return [String]
+    class CreateCustomDetectionRuleOrgConfigurationRequest < Struct.new(
+      nil,
+      :rule_id,
+      :mode,
+      :include_account_ids,
+      :exclude_account_ids,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class CreateCustomDetectionRuleOrgConfigurationResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute enable
     #   <p>A Boolean value that specifies whether the detector is to be enabled.</p>
     #   @return [Boolean]
@@ -1115,10 +1360,7 @@ module Aws::GuardDuty
     #   <p>A value that specifies how frequently updated findings are exported.</p>
     #   @return [String]
     # @!attribute data_sources
-    #   <p>Describes which data sources will be enabled for the detector.</p>
-    #            <p>There might be regional differences because some data sources might not be 
-    #         available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more 
-    #         information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>
+    #   <p>Describes which data sources will be enabled for the detector.</p> <p>There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>
     #   @deprecated
     #     This parameter is deprecated, use Features instead
     #   @return [Types::DataSourceConfigurations]
@@ -1145,8 +1387,7 @@ module Aws::GuardDuty
     #   <p>The unique ID of the created detector.</p>
     #   @return [String]
     # @!attribute unprocessed_data_sources
-    #   <p>Specifies the data sources that couldn't be enabled when GuardDuty was enabled for the
-    #         first time.</p>
+    #   <p>Specifies the data sources that couldn't be enabled when GuardDuty was enabled for the first time.</p>
     #   @return [Types::UnprocessedDataSourcesResult]
     class CreateDetectorResponse < Struct.new(
       nil,
@@ -1158,349 +1399,22 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The detector ID associated with the GuardDuty account for which you want to create a filter.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The detector ID associated with the GuardDuty account for which you want to create a filter.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the filter. Valid characters include period (.), underscore (_), dash (-), and
-    #         alphanumeric characters. A whitespace is considered to be an invalid character.</p>
+    #   <p>The name of the filter. Valid characters include period (.), underscore (_), dash (-), and alphanumeric characters. A whitespace is considered to be an invalid character.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description of the filter. Valid characters include alphanumeric characters, and
-    #         special characters such as hyphen, period, colon, underscore, parentheses (<code>{ }</code>,
-    #           <code>[ ]</code>, and <code>( )</code>), forward slash, horizontal tab, vertical tab,
-    #         newline, form feed, return, and whitespace.</p>
+    #   <p>The description of the filter. Valid characters include alphanumeric characters, and special characters such as hyphen, period, colon, underscore, parentheses (<code>{ }</code>, <code>[ ]</code>, and <code>( )</code>), forward slash, horizontal tab, vertical tab, newline, form feed, return, and whitespace.</p>
     #   @return [String]
     # @!attribute action
-    #   <p>Specifies the action that is to be applied to the findings that match the filter.</p>
+    #   <p>Specifies the action that is to be applied to the findings that match the filter.</p> <p>Default: NOOP</p>
     #   @return [String]
     # @!attribute rank
-    #   <p>Specifies the position of the filter in the list of current filters. Also specifies the
-    #         order in which this filter is applied to the findings.</p>
+    #   <p>Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.</p>
     #   @return [Integer]
     # @!attribute finding_criteria
-    #   <p>Represents the criteria to be used in the filter for querying findings.</p>
-    #            <p>You can only use the following attributes to query findings:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>accountId</p>
-    #               </li>
-    #               <li>
-    #                  <p>id</p>
-    #               </li>
-    #               <li>
-    #                  <p>region</p>
-    #               </li>
-    #               <li>
-    #                  <p>severity</p>
-    #                  <p>To filter on the basis of severity, the API and CLI use the following input list for
-    #             the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html">FindingCriteria</a>
-    #             condition:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <b>Low</b>: <code>["1", "2", "3"]</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <b>Medium</b>: <code>["4", "5", "6"]</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <b>High</b>: <code>["7", "8"]</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <b>Critical</b>: <code>["9", "10"]</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #                  <p>For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html">Findings severity levels</a>
-    #             in the <i>Amazon GuardDuty User Guide</i>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>type</p>
-    #               </li>
-    #               <li>
-    #                  <p>updatedAt</p>
-    #                  <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ
-    #             depending on whether the value contains milliseconds.</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.accessKeyDetails.accessKeyId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.accessKeyDetails.principalId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.accessKeyDetails.userName</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.accessKeyDetails.userType</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.iamInstanceProfile.id</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.imageId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.instanceId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.tags.key</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.tags.value</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.publicIp</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.subnetId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.vpcId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.outpostArn</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.resourceType</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.s3BucketDetails.publicAccess.effectivePermissions</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.s3BucketDetails.name</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.s3BucketDetails.tags.key</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.s3BucketDetails.tags.value</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.s3BucketDetails.type</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.actionType</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.api</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.callerType</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.errorCode</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV6</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.serviceName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.dnsRequestAction.domain</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.dnsRequestAction.domainWithSuffix</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.dnsRequestAction.vpcOwnerAccountId</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.blocked</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.connectionDirection</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.localPortDetails.port</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.protocol</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV6</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remotePortDetails.port</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteAccountDetails.affiliated</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.kubernetesApiCallAction.namespace</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.kubernetesApiCallAction.requestUri</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.kubernetesApiCallAction.statusCode</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.localIpDetails.ipAddressV6</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.protocol</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.serviceName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteAccountDetails.accountId</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.additionalInfo.threatListName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.resourceRole</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.eksClusterDetails.name</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.kubernetesDetails.kubernetesWorkloadDetails.name</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.kubernetesDetails.kubernetesWorkloadDetails.namespace</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.kubernetesDetails.kubernetesUserDetails.username</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.ebsVolumeScanDetails.scanId</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.severity</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.ecsClusterDetails.name</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.ecsClusterDetails.taskDetails.containers.image</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.ecsClusterDetails.taskDetails.definitionArn</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.containerDetails.image</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.rdsDbInstanceDetails.dbInstanceIdentifier</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.rdsDbInstanceDetails.dbClusterIdentifier</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.rdsDbInstanceDetails.engine</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.rdsDbUserDetails.user</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.rdsDbInstanceDetails.tags.key</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.rdsDbInstanceDetails.tags.value</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.runtimeDetails.process.executableSha256</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.runtimeDetails.process.name</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.runtimeDetails.process.executablePath</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.lambdaDetails.functionName</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.lambdaDetails.functionArn</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.lambdaDetails.tags.key</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.lambdaDetails.tags.value</p>
-    #               </li>
-    #            </ul>
+    #   <p>Represents the criteria to be used in the filter for querying findings. The following fields are available for filtering:</p> <ul> <li> <p>accountId</p> </li> <li> <p>arn</p> </li> <li> <p>associatedAttackSequenceArn</p> </li> <li> <p>confidence</p> </li> <li> <p>createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>id</p> </li> <li> <p>partition</p> </li> <li> <p>region</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.accountId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.arn</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.principalId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.attributes.mfaAuthenticated</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.ec2RoleDelivery</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.invokedBy</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.accountId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.arn</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.principalId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.type</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.userName</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sourceIdentity</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.webIdFederationData.attributes</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.webIdFederationData.federatedProvider</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.type</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.userName</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.bedrockGuardrailDetails.guardrailArn</p> </li> <li> <p>resource.bedrockGuardrailDetails.guardrailVersion</p> </li> <li> <p>resource.containerDetails.containerRuntime</p> </li> <li> <p>resource.containerDetails.id</p> </li> <li> <p>resource.containerDetails.image</p> </li> <li> <p>resource.containerDetails.imagePrefix</p> </li> <li> <p>resource.containerDetails.name</p> </li> <li> <p>resource.containerDetails.securityContext.allowPrivilegeEscalation</p> </li> <li> <p>resource.containerDetails.securityContext.privileged</p> </li> <li> <p>resource.containerDetails.volumeMounts.mountPath</p> </li> <li> <p>resource.containerDetails.volumeMounts.name</p> </li> <li> <p>resource.ebsSnapshotDetails.snapshotArn</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.deviceName</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.encryptionType</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.kmsKeyArn</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.snapshotArn</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.volumeArn</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.volumeSizeInGB</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.volumeType</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.deviceName</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.encryptionType</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.kmsKeyArn</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.snapshotArn</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.volumeArn</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.volumeSizeInGB</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.volumeType</p> </li> <li> <p>resource.ec2ImageDetails.imageArn</p> </li> <li> <p>resource.ecsClusterDetails.activeServicesCount</p> </li> <li> <p>resource.ecsClusterDetails.arn</p> </li> <li> <p>resource.ecsClusterDetails.name</p> </li> <li> <p>resource.ecsClusterDetails.registeredContainerInstancesCount</p> </li> <li> <p>resource.ecsClusterDetails.runningTasksCount</p> </li> <li> <p>resource.ecsClusterDetails.status</p> </li> <li> <p>resource.ecsClusterDetails.tags.key</p> </li> <li> <p>resource.ecsClusterDetails.tags.value</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.arn</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.containerRuntime</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.id</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.image</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.imagePrefix</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.name</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.securityContext.allowPrivilegeEscalation</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.securityContext.privileged</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.volumeMounts.mountPath</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.volumeMounts.name</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.definitionArn</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.group</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.launchType</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.startedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.startedBy</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.tags.key</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.tags.value</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.version</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.volumes.hostPath.path</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.volumes.name</p> </li> <li> <p>resource.eksClusterDetails.arn</p> </li> <li> <p>resource.eksClusterDetails.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.eksClusterDetails.name</p> </li> <li> <p>resource.eksClusterDetails.status</p> </li> <li> <p>resource.eksClusterDetails.tags.key</p> </li> <li> <p>resource.eksClusterDetails.tags.value</p> </li> <li> <p>resource.eksClusterDetails.vpcId</p> </li> <li> <p>resource.instanceDetails.availabilityZone</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.arn</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageDescription</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.instanceState</p> </li> <li> <p>resource.instanceDetails.instanceType</p> </li> <li> <p>resource.instanceDetails.launchTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.networkInterfaceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.platform</p> </li> <li> <p>resource.instanceDetails.productCodes.productCodeId</p> </li> <li> <p>resource.instanceDetails.productCodes.productCodeType</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.groups</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.impersonatedUser.groups</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.impersonatedUser.username</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.sessionName</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.uid</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.username</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.containerRuntime</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.id</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.securityContext.allowPrivilegeEscalation</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.securityContext.privileged</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.volumeMounts.mountPath</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.volumeMounts.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.hostIpc</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.hostNetwork</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.hostPid</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.namespace</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.serviceAccountName</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.type</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.uid</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.volumes.hostPath.path</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.volumes.name</p> </li> <li> <p>resource.lambdaDetails.description</p> </li> <li> <p>resource.lambdaDetails.functionArn</p> </li> <li> <p>resource.lambdaDetails.functionName</p> </li> <li> <p>resource.lambdaDetails.functionVersion</p> </li> <li> <p>resource.lambdaDetails.lastModifiedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.lambdaDetails.revisionId</p> </li> <li> <p>resource.lambdaDetails.role</p> </li> <li> <p>resource.lambdaDetails.tags.key</p> </li> <li> <p>resource.lambdaDetails.tags.value</p> </li> <li> <p>resource.lambdaDetails.vpcConfig.securityGroups.groupId</p> </li> <li> <p>resource.lambdaDetails.vpcConfig.securityGroups.groupName</p> </li> <li> <p>resource.lambdaDetails.vpcConfig.subnetIds</p> </li> <li> <p>resource.lambdaDetails.vpcConfig.vpcId</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbClusterIdentifier</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbInstanceArn</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbInstanceIdentifier</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbSecurityGroups.name</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbSecurityGroups.status</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbiResourceId</p> </li> <li> <p>resource.rdsDbInstanceDetails.engine</p> </li> <li> <p>resource.rdsDbInstanceDetails.engineVersion</p> </li> <li> <p>resource.rdsDbInstanceDetails.iamDatabaseAuthenticationEnabled</p> </li> <li> <p>resource.rdsDbInstanceDetails.publiclyAccessible</p> </li> <li> <p>resource.rdsDbInstanceDetails.vpcId</p> </li> <li> <p>resource.rdsDbInstanceDetails.vpcSecurityGroups.status</p> </li> <li> <p>resource.rdsDbInstanceDetails.vpcSecurityGroups.vpcSecurityGroupId</p> </li> <li> <p>resource.rdsDbUserDetails.application</p> </li> <li> <p>resource.rdsDbUserDetails.authMethod</p> </li> <li> <p>resource.rdsDbUserDetails.database</p> </li> <li> <p>resource.rdsDbUserDetails.ssl</p> </li> <li> <p>resource.rdsDbUserDetails.user</p> </li> <li> <p>resource.rdsLimitlessDbDetails.dbClusterIdentifier</p> </li> <li> <p>resource.rdsLimitlessDbDetails.dbShardGroupArn</p> </li> <li> <p>resource.rdsLimitlessDbDetails.dbShardGroupIdentifier</p> </li> <li> <p>resource.rdsLimitlessDbDetails.dbShardGroupResourceId</p> </li> <li> <p>resource.rdsLimitlessDbDetails.engine</p> </li> <li> <p>resource.rdsLimitlessDbDetails.engineVersion</p> </li> <li> <p>resource.rdsLimitlessDbDetails.tags.key</p> </li> <li> <p>resource.rdsLimitlessDbDetails.tags.value</p> </li> <li> <p>resource.recoveryPointDetails.backupVaultName</p> </li> <li> <p>resource.recoveryPointDetails.recoveryPointArn</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>resource.s3BucketDetails.arn</p> </li> <li> <p>resource.s3BucketDetails.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.s3BucketDetails.defaultServerSideEncryption.encryptionType</p> </li> <li> <p>resource.s3BucketDetails.defaultServerSideEncryption.kmsMasterKeyArn</p> </li> <li> <p>resource.s3BucketDetails.name</p> </li> <li> <p>resource.s3BucketDetails.owner.id</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.effectivePermission</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.accountLevelPermissions.blockPublicAccess.blockPublicAcls</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.accountLevelPermissions.blockPublicAccess.blockPublicPolicy</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.accountLevelPermissions.blockPublicAccess.ignorePublicAcls</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.accountLevelPermissions.blockPublicAccess.restrictPublicBuckets</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.accessControlList.allowsPublicReadAccess</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.accessControlList.allowsPublicWriteAccess</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.blockPublicAccess.blockPublicAcls</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.blockPublicAccess.blockPublicPolicy</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.blockPublicAccess.ignorePublicAcls</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.blockPublicAccess.restrictPublicBuckets</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.bucketPolicy.allowsPublicReadAccess</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.bucketPolicy.allowsPublicWriteAccess</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.eTag</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.hash</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.key</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.objectArn</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.versionId</p> </li> <li> <p>resource.s3BucketDetails.tags.key</p> </li> <li> <p>resource.s3BucketDetails.tags.value</p> </li> <li> <p>resource.s3BucketDetails.type</p> </li> <li> <p>schemaVersion</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.domainDetails.domain</p> </li> <li> <p>service.action.awsApiCallAction.errorCode</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.accountId</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.affiliated</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.awsServiceName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.org</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.awsApiCallAction.userAgent</p> </li> <li> <p>service.action.dnsRequestAction.blocked</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.dnsRequestAction.domainWithSuffix</p> </li> <li> <p>service.action.dnsRequestAction.protocol</p> </li> <li> <p>service.action.dnsRequestAction.vpcOwnerAccountId</p> </li> <li> <p>service.action.kubernetesApiCallAction.namespace</p> </li> <li> <p>service.action.kubernetesApiCallAction.parameters</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.org</p> </li> <li> <p>service.action.kubernetesApiCallAction.requestUri</p> </li> <li> <p>service.action.kubernetesApiCallAction.resource</p> </li> <li> <p>service.action.kubernetesApiCallAction.resourceName</p> </li> <li> <p>service.action.kubernetesApiCallAction.sourceIPs</p> </li> <li> <p>service.action.kubernetesApiCallAction.statusCode</p> </li> <li> <p>service.action.kubernetesApiCallAction.subresource</p> </li> <li> <p>service.action.kubernetesApiCallAction.userAgent</p> </li> <li> <p>service.action.kubernetesApiCallAction.verb</p> </li> <li> <p>service.action.kubernetesPermissionCheckedDetails.allowed</p> </li> <li> <p>service.action.kubernetesPermissionCheckedDetails.namespace</p> </li> <li> <p>service.action.kubernetesPermissionCheckedDetails.resource</p> </li> <li> <p>service.action.kubernetesPermissionCheckedDetails.verb</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.kind</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.name</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.roleRefKind</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.roleRefName</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.uid</p> </li> <li> <p>service.action.kubernetesRoleDetails.kind</p> </li> <li> <p>service.action.kubernetesRoleDetails.name</p> </li> <li> <p>service.action.kubernetesRoleDetails.uid</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV6</p> </li> <li> <p>service.action.networkConnectionAction.localNetworkInterface</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.portName</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.org</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.portName</p> </li> <li> <p>service.action.portProbeAction.blocked</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.localIpDetails.ipAddressV6</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.localPortDetails.port</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.localPortDetails.portName</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.organization.org</p> </li> <li> <p>service.action.rdsLoginAttemptAction.loginAttributes.application</p> </li> <li> <p>service.action.rdsLoginAttemptAction.loginAttributes.failedLoginAttempts</p> </li> <li> <p>service.action.rdsLoginAttemptAction.loginAttributes.successfulLoginAttempts</p> </li> <li> <p>service.action.rdsLoginAttemptAction.loginAttributes.user</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.organization.org</p> </li> <li> <p>service.additionalInfo.agentDetails.agentId</p> </li> <li> <p>service.additionalInfo.agentDetails.agentVersion</p> </li> <li> <p>service.additionalInfo.anomalies.anomalousAPIs</p> </li> <li> <p>service.additionalInfo.authenticationMethod</p> </li> <li> <p>service.additionalInfo.averagePacketSizeIn</p> </li> <li> <p>service.additionalInfo.averagePacketSizeOut</p> </li> <li> <p>service.additionalInfo.context</p> </li> <li> <p>service.additionalInfo.domain</p> </li> <li> <p>service.additionalInfo.inBytes</p> </li> <li> <p>service.additionalInfo.localNetworkInterfaceOwner</p> </li> <li> <p>service.additionalInfo.localPort</p> </li> <li> <p>service.additionalInfo.outBytes</p> </li> <li> <p>service.additionalInfo.packetsIn</p> </li> <li> <p>service.additionalInfo.packetsOut</p> </li> <li> <p>service.additionalInfo.policyArn</p> </li> <li> <p>service.additionalInfo.policyName</p> </li> <li> <p>service.additionalInfo.remotePort</p> </li> <li> <p>service.additionalInfo.sample</p> </li> <li> <p>service.additionalInfo.scannedPort</p> </li> <li> <p>service.additionalInfo.threatFileSha256</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.additionalInfo.threatName</p> </li> <li> <p>service.additionalInfo.totalBytesIn</p> </li> <li> <p>service.additionalInfo.totalBytesOut</p> </li> <li> <p>service.additionalInfo.type</p> </li> <li> <p>service.additionalInfo.unusual.asnOrg</p> </li> <li> <p>service.additionalInfo.unusual.port</p> </li> <li> <p>service.additionalInfo.unusualProtocol</p> </li> <li> <p>service.additionalInfo.userAgent.fullUserAgent</p> </li> <li> <p>service.additionalInfo.userAgent.userAgentCategory</p> </li> <li> <p>service.additionalInfo.value</p> </li> <li> <p>service.additionalInfo.vpcOwnerAccountId</p> </li> <li> <p>service.archived</p> </li> <li> <p>service.count</p> </li> <li> <p>service.detection.sequence.actors.id</p> </li> <li> <p>service.detection.sequence.actors.process.name</p> </li> <li> <p>service.detection.sequence.actors.process.path</p> </li> <li> <p>service.detection.sequence.actors.process.sha256</p> </li> <li> <p>service.detection.sequence.actors.session.createdTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.actors.session.issuer</p> </li> <li> <p>service.detection.sequence.actors.session.mfaStatus</p> </li> <li> <p>service.detection.sequence.actors.session.uid</p> </li> <li> <p>service.detection.sequence.actors.user.account.account</p> </li> <li> <p>service.detection.sequence.actors.user.account.uid</p> </li> <li> <p>service.detection.sequence.actors.user.credentialUid</p> </li> <li> <p>service.detection.sequence.actors.user.name</p> </li> <li> <p>service.detection.sequence.actors.user.type</p> </li> <li> <p>service.detection.sequence.actors.user.uid</p> </li> <li> <p>service.detection.sequence.additionalSequenceTypes</p> </li> <li> <p>service.detection.sequence.description</p> </li> <li> <p>service.detection.sequence.endpoints.autonomousSystem.name</p> </li> <li> <p>service.detection.sequence.endpoints.autonomousSystem.number</p> </li> <li> <p>service.detection.sequence.endpoints.connection.direction</p> </li> <li> <p>service.detection.sequence.endpoints.domain</p> </li> <li> <p>service.detection.sequence.endpoints.id</p> </li> <li> <p>service.detection.sequence.endpoints.ip</p> </li> <li> <p>service.detection.sequence.endpoints.location.city</p> </li> <li> <p>service.detection.sequence.endpoints.location.country</p> </li> <li> <p>service.detection.sequence.endpoints.location.lat</p> </li> <li> <p>service.detection.sequence.endpoints.location.lon</p> </li> <li> <p>service.detection.sequence.endpoints.port</p> </li> <li> <p>service.detection.sequence.resources.accountId</p> </li> <li> <p>service.detection.sequence.resources.cloudPartition</p> </li> <li> <p>service.detection.sequence.resources.data.accessKey.principalId</p> </li> <li> <p>service.detection.sequence.resources.data.accessKey.userName</p> </li> <li> <p>service.detection.sequence.resources.data.accessKey.userType</p> </li> <li> <p>service.detection.sequence.resources.data.autoscalingAutoScalingGroup.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.cloudformationStack.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.container.image</p> </li> <li> <p>service.detection.sequence.resources.data.container.imageUid</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Image.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.availabilityZone</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.ec2NetworkInterfaceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.iamInstanceProfile.arn</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.iamInstanceProfile.id</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.imageDescription</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.instanceState</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.instanceType</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.outpostArn</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.platform</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.productCodes.productCodeId</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.productCodes.productCodeType</p> </li> <li> <p>service.detection.sequence.resources.data.ec2LaunchTemplate.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ec2LaunchTemplate.version</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.ipv6Addresses</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.privateIpAddresses.privateDnsName</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.privateIpAddresses.privateIpAddress</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.publicIp</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.securityGroups.groupId</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.securityGroups.groupName</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.subNetId</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.vpcId</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Vpc.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ecsCluster.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ecsCluster.status</p> </li> <li> <p>service.detection.sequence.resources.data.ecsTask.containerUids</p> </li> <li> <p>service.detection.sequence.resources.data.ecsTask.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.resources.data.ecsTask.launchType</p> </li> <li> <p>service.detection.sequence.resources.data.ecsTask.taskDefinitionArn</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.arn</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.status</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.vpcId</p> </li> <li> <p>service.detection.sequence.resources.data.iamInstanceProfile.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.iamInstanceProfile.id</p> </li> <li> <p>service.detection.sequence.resources.data.kubernetesWorkload.containerUids</p> </li> <li> <p>service.detection.sequence.resources.data.kubernetesWorkload.namespace</p> </li> <li> <p>service.detection.sequence.resources.data.kubernetesWorkload.type</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.accountPublicAccess.publicAclAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.accountPublicAccess.publicAclIgnoreBehavior</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.accountPublicAccess.publicBucketRestrictBehavior</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.accountPublicAccess.publicPolicyAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.bucketPublicAccess.publicAclAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.bucketPublicAccess.publicAclIgnoreBehavior</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.bucketPublicAccess.publicBucketRestrictBehavior</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.bucketPublicAccess.publicPolicyAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.effectivePermission</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.encryptionKeyArn</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.encryptionType</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.ownerId</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.publicReadAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.publicWriteAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.s3ObjectUids</p> </li> <li> <p>service.detection.sequence.resources.data.s3Object.eTag</p> </li> <li> <p>service.detection.sequence.resources.data.s3Object.key</p> </li> <li> <p>service.detection.sequence.resources.data.s3Object.versionId</p> </li> <li> <p>service.detection.sequence.resources.name</p> </li> <li> <p>service.detection.sequence.resources.region</p> </li> <li> <p>service.detection.sequence.resources.resourceType</p> </li> <li> <p>service.detection.sequence.resources.service</p> </li> <li> <p>service.detection.sequence.resources.tags.key</p> </li> <li> <p>service.detection.sequence.resources.tags.value</p> </li> <li> <p>service.detection.sequence.resources.uid</p> </li> <li> <p>service.detection.sequence.sequenceIndicators.key</p> </li> <li> <p>service.detection.sequence.sequenceIndicators.title</p> </li> <li> <p>service.detection.sequence.sequenceIndicators.values</p> </li> <li> <p>service.detection.sequence.signals.actorIds</p> </li> <li> <p>service.detection.sequence.signals.count</p> </li> <li> <p>service.detection.sequence.signals.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.signals.description</p> </li> <li> <p>service.detection.sequence.signals.endpointIds</p> </li> <li> <p>service.detection.sequence.signals.firstSeenAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.signals.lastSeenAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.signals.name</p> </li> <li> <p>service.detection.sequence.signals.resourceUids</p> </li> <li> <p>service.detection.sequence.signals.severity</p> </li> <li> <p>service.detection.sequence.signals.signalIndicators.key</p> </li> <li> <p>service.detection.sequence.signals.signalIndicators.title</p> </li> <li> <p>service.detection.sequence.signals.signalIndicators.values</p> </li> <li> <p>service.detection.sequence.signals.type</p> </li> <li> <p>service.detection.sequence.signals.uid</p> </li> <li> <p>service.detection.sequence.signals.updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.uid</p> </li> <li> <p>service.detectorId</p> </li> <li> <p>service.ebsVolumeScanDetails.scanCompletedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.highestSeverityThreatDetails.count</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.highestSeverityThreatDetails.severity</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.highestSeverityThreatDetails.threatName</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.scannedItemCount.files</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.scannedItemCount.totalGb</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.scannedItemCount.volumes</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.itemCount</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.shortened</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.fileName</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.filePath</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.volumeArn</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.itemCount</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.severity</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.uniqueThreatNameCount</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatsDetectedItemCount.files</p> </li> <li> <p>service.ebsVolumeScanDetails.scanId</p> </li> <li> <p>service.ebsVolumeScanDetails.scanStartedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.ebsVolumeScanDetails.scanType</p> </li> <li> <p>service.ebsVolumeScanDetails.sources</p> </li> <li> <p>service.ebsVolumeScanDetails.triggerFindingId</p> </li> <li> <p>service.eventFirstSeen</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.eventLastSeen</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.evidence.threatIntelligenceDetails.threatFileSha256</p> </li> <li> <p>service.evidence.threatIntelligenceDetails.threatListName</p> </li> <li> <p>service.evidence.threatIntelligenceDetails.threatNames</p> </li> <li> <p>service.featureName</p> </li> <li> <p>service.malwareScanDetails.scanCategory</p> </li> <li> <p>service.malwareScanDetails.scanConfiguration.incrementalScanDetails.baselineResourceArn</p> </li> <li> <p>service.malwareScanDetails.scanConfiguration.triggerType</p> </li> <li> <p>service.malwareScanDetails.scanId</p> </li> <li> <p>service.malwareScanDetails.scanType</p> </li> <li> <p>service.malwareScanDetails.threats.count</p> </li> <li> <p>service.malwareScanDetails.threats.hash</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.additionalInfo.deviceName</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.additionalInfo.versionId</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.hash</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.itemPath</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.resourceArn</p> </li> <li> <p>service.malwareScanDetails.threats.itemPaths.hash</p> </li> <li> <p>service.malwareScanDetails.threats.itemPaths.nestedItemPath</p> </li> <li> <p>service.malwareScanDetails.threats.name</p> </li> <li> <p>service.malwareScanDetails.threats.source</p> </li> <li> <p>service.malwareScanDetails.uniqueThreatCount</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>service.runtimeDetails.context.addressFamily</p> </li> <li> <p>service.runtimeDetails.context.commandLineExample</p> </li> <li> <p>service.runtimeDetails.context.fileOperation</p> </li> <li> <p>service.runtimeDetails.context.filePath</p> </li> <li> <p>service.runtimeDetails.context.fileSystemType</p> </li> <li> <p>service.runtimeDetails.context.flags</p> </li> <li> <p>service.runtimeDetails.context.ianaProtocolNumber</p> </li> <li> <p>service.runtimeDetails.context.ldPreloadValue</p> </li> <li> <p>service.runtimeDetails.context.libraryPath</p> </li> <li> <p>service.runtimeDetails.context.memoryRegions</p> </li> <li> <p>service.runtimeDetails.context.modifiedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.euid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.executablePath</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.executableSha256</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.euid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.executablePath</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.name</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.namespacePid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.parentUuid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.pid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.userId</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.uuid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.name</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.namespacePid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.parentUuid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.pid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.pwd</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.user</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.userId</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.uuid</p> </li> <li> <p>service.runtimeDetails.context.moduleFilePath</p> </li> <li> <p>service.runtimeDetails.context.moduleName</p> </li> <li> <p>service.runtimeDetails.context.moduleSha256</p> </li> <li> <p>service.runtimeDetails.context.mountSource</p> </li> <li> <p>service.runtimeDetails.context.mountTarget</p> </li> <li> <p>service.runtimeDetails.context.relatedFilePaths</p> </li> <li> <p>service.runtimeDetails.context.releaseAgentPath</p> </li> <li> <p>service.runtimeDetails.context.runcBinaryPath</p> </li> <li> <p>service.runtimeDetails.context.scriptPath</p> </li> <li> <p>service.runtimeDetails.context.serviceName</p> </li> <li> <p>service.runtimeDetails.context.shellHistoryFilePath</p> </li> <li> <p>service.runtimeDetails.context.socketPath</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.euid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.executablePath</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.executableSha256</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.euid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.executablePath</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.name</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.namespacePid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.parentUuid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.pid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.userId</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.uuid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.name</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.namespacePid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.parentUuid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.pid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.pwd</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.user</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.userId</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.uuid</p> </li> <li> <p>service.runtimeDetails.context.threatFilePath</p> </li> <li> <p>service.runtimeDetails.context.toolCategory</p> </li> <li> <p>service.runtimeDetails.context.toolName</p> </li> <li> <p>service.runtimeDetails.process.euid</p> </li> <li> <p>service.runtimeDetails.process.executablePath</p> </li> <li> <p>service.runtimeDetails.process.executableSha256</p> </li> <li> <p>service.runtimeDetails.process.lineage.euid</p> </li> <li> <p>service.runtimeDetails.process.lineage.executablePath</p> </li> <li> <p>service.runtimeDetails.process.lineage.name</p> </li> <li> <p>service.runtimeDetails.process.lineage.namespacePid</p> </li> <li> <p>service.runtimeDetails.process.lineage.parentUuid</p> </li> <li> <p>service.runtimeDetails.process.lineage.pid</p> </li> <li> <p>service.runtimeDetails.process.lineage.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.process.lineage.userId</p> </li> <li> <p>service.runtimeDetails.process.lineage.uuid</p> </li> <li> <p>service.runtimeDetails.process.name</p> </li> <li> <p>service.runtimeDetails.process.namespacePid</p> </li> <li> <p>service.runtimeDetails.process.parentUuid</p> </li> <li> <p>service.runtimeDetails.process.pid</p> </li> <li> <p>service.runtimeDetails.process.pwd</p> </li> <li> <p>service.runtimeDetails.process.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.process.user</p> </li> <li> <p>service.runtimeDetails.process.userId</p> </li> <li> <p>service.runtimeDetails.process.uuid</p> </li> <li> <p>service.serviceName</p> </li> <li> <p>service.userFeedback</p> </li> <li> <p>severity</p> <p>To configure severity based filters, use the following for the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html">FindingCriteria</a> condition:</p> <ul> <li> <p> <b>Low</b>: <code>["1", "2", "3"]</code> </p> </li> <li> <p> <b>Medium</b>: <code>["4", "5", "6"]</code> </p> </li> <li> <p> <b>High</b>: <code>["7", "8"]</code> </p> </li> <li> <p> <b>Critical</b>: <code>["9", "10"]</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html">Findings severity levels</a> in the <i>Amazon GuardDuty User Guide</i>.</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> </ul>
     #   @return [Types::FindingCriteria]
     # @!attribute client_token
     #   <p>The idempotency token for the create request.</p>
@@ -1535,13 +1449,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create an IPSet.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create an IPSet.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The user-friendly name to identify the IPSet.</p>
-    #            <p> Allowed characters are alphanumeric, whitespace, dash (-), and underscores (_).</p>
+    #   <p>The user-friendly name to identify the IPSet.</p> <p> Allowed characters are alphanumeric, whitespace, dash (-), and underscores (_).</p>
     #   @return [String]
     # @!attribute format
     #   <p>The format of the file that contains the IPSet.</p>
@@ -1550,8 +1461,7 @@ module Aws::GuardDuty
     #   <p>The URI of the file that contains the IPSet. </p>
     #   @return [String]
     # @!attribute activate
-    #   <p>A Boolean value that indicates whether GuardDuty is to start using the uploaded
-    #         IPSet.</p>
+    #   <p>A Boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.</p>
     #   @return [Boolean]
     # @!attribute client_token
     #   <p>The idempotency token for the create request.</p>
@@ -1588,17 +1498,44 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute detector_id
+    #   <p>The unique ID of the GuardDuty detector for the account in which the investigation is created.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute trigger_prompt
+    #   <p>A natural-language description of what to investigate. For example:</p> <ul> <li> <p> <code>"Investigate finding 1ab2c3d4e5f6a7b8c9d0e1f2a3b4c5d6 in account 123456789012"</code> </p> </li> <li> <p> <code>"Analyze findings in account with id 123456789012"</code> </p> </li> <li> <p> <code>"Analyze findings in my organization"</code> </p> </li> </ul>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>The idempotency token for the create request.</p>
+    #   @return [String]
+    class CreateInvestigationRequest < Struct.new(
+      nil,
+      :detector_id,
+      :trigger_prompt,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute investigation_id
+    #   <p>The unique identifier of the newly created investigation.</p>
+    #   @return [String]
+    class CreateInvestigationResponse < Struct.new(
+      nil,
+      :investigation_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute client_token
     #   <p>The idempotency token for the create request.</p>
     #   @return [String]
     # @!attribute role
-    #   <p>Amazon Resource Name (ARN) of the IAM role that has the permissions to scan and add tags to the associated
-    #         protected resource.</p>
+    #   <p>Amazon Resource Name (ARN) of the IAM role that has the permissions to scan and add tags to the associated protected resource.</p>
     #   @return [String]
     # @!attribute protected_resource
-    #   <p>Information about the protected resource that is associated with the created 
-    #         Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported 
-    #         protected resource.</p>
+    #   <p>Information about the protected resource that is associated with the created Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported protected resource.</p>
     #   @return [Types::CreateProtectedResource]
     # @!attribute actions
     #   <p>Information about whether the tags will be added to the S3 object after scanning.</p>
@@ -1630,14 +1567,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty account for which you want to associate member
-    #         accounts.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty account for which you want to associate member accounts.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute account_details
-    #   <p>A list of account ID and email address pairs of the accounts that you want to associate
-    #         with the GuardDuty administrator account.</p>
+    #   <p>A list of account ID and email address pairs of the accounts that you want to associate with the GuardDuty administrator account.</p>
     #   @return [Array<Types::AccountDetail>]
     class CreateMembersRequest < Struct.new(
       nil,
@@ -1649,8 +1582,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute unprocessed_accounts
-    #   <p>A list of objects that include the <code>accountIds</code> of the unprocessed accounts and
-    #         a result string that explains why each was unprocessed.</p>
+    #   <p>A list of objects that include the <code>accountIds</code> of the unprocessed accounts and a result string that explains why each was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class CreateMembersResponse < Struct.new(
       nil,
@@ -1660,10 +1592,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the protected resource that
-    #       is associated with the created Malware Protection plan.
-    #       Presently, <code>S3Bucket</code> is the only supported 
-    #       protected resource.</p>
+    # <p>Information about the protected resource that is associated with the created Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported protected resource.</p>
     # @!attribute s3_bucket
     #   <p>Information about the protected S3 bucket resource.</p>
     #   @return [Types::CreateS3BucketResource]
@@ -1676,27 +1605,27 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the GuardDuty detector associated with the publishing destination.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the GuardDuty detector associated with the publishing destination.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute destination_type
-    #   <p>The type of resource for the publishing destination. Currently only Amazon S3 buckets are
-    #         supported.</p>
+    #   <p>The type of resource for the publishing destination. Currently only Amazon S3 buckets are supported.</p>
     #   @return [String]
     # @!attribute destination_properties
-    #   <p>The properties of the publishing destination, including the ARNs for the destination and
-    #         the KMS key used for encryption.</p>
+    #   <p>The properties of the publishing destination, including the ARNs for the destination and the KMS key used for encryption.</p>
     #   @return [Types::DestinationProperties]
     # @!attribute client_token
     #   <p>The idempotency token for the request.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>The tags to be added to a new publishing destination resource.</p>
+    #   @return [Hash<String, String>]
     class CreatePublishingDestinationRequest < Struct.new(
       nil,
       :detector_id,
       :destination_type,
       :destination_properties,
       :client_token,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1718,8 +1647,7 @@ module Aws::GuardDuty
     #   <p>Name of the S3 bucket.</p>
     #   @return [String]
     # @!attribute object_prefixes
-    #   <p>Information about the specified object prefixes. The S3 object will be scanned only 
-    #         if it belongs to any of the specified object prefixes.</p>
+    #   <p>Information about the specified object prefixes. The S3 object will be scanned only if it belongs to any of the specified object prefixes.</p>
     #   @return [Array<String>]
     class CreateS3BucketResource < Struct.new(
       nil,
@@ -1731,9 +1659,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the detector for which you need to create sample findings.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector for which you need to create sample findings.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute finding_types
     #   <p>The types of sample findings to generate.</p>
@@ -1755,30 +1681,22 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a threat entity set.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a threat entity set.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>A user-friendly name to identify the threat entity set.</p>
-    #            <p>The name of your list can include 
-    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    #   <p>A user-friendly name to identify the threat entity set.</p> <p>The name of your list can include lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
     #   @return [String]
     # @!attribute format
     #   <p>The format of the file that contains the threat entity set.</p>
     #   @return [String]
     # @!attribute location
-    #   <p>The URI of the file that contains the threat entity set. The format of the <code>Location</code> URL must be a valid
-    #          Amazon S3 URL format. Invalid URL formats will result in an error, regardless of whether you activate the entity set or not. For more information about
-    #          format of the location URLs, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html">Format of location URL under Step 2: Adding trusted or threat intelligence data</a>
-    #        in the <i>Amazon GuardDuty User Guide</i>.</p>
+    #   <p>The URI of the file that contains the threat entity set. The format of the <code>Location</code> URL must be a valid Amazon S3 URL format. Invalid URL formats will result in an error, regardless of whether you activate the entity set or not. For more information about format of the location URLs, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html">Format of location URL under Step 2: Adding trusted or threat intelligence data</a> in the <i>Amazon GuardDuty User Guide</i>.</p>
     #   @return [String]
     # @!attribute expected_bucket_owner
     #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     # @!attribute activate
-    #   <p>A boolean value that indicates whether GuardDuty should start using the uploaded threat entity set to
-    #           generate findings.</p>
+    #   <p>A boolean value that indicates whether GuardDuty should start using the uploaded threat entity set to generate findings.</p>
     #   @return [Boolean]
     # @!attribute client_token
     #   <p>The idempotency token for the create request.</p>
@@ -1813,14 +1731,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a
-    #         <code>threatIntelSet</code>.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a <code>threatIntelSet</code>.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>A user-friendly ThreatIntelSet name displayed in all findings that are generated by
-    #         activity that involves IP addresses included in this ThreatIntelSet.</p>
+    #   <p>A user-friendly ThreatIntelSet name displayed in all findings that are generated by activity that involves IP addresses included in this ThreatIntelSet.</p>
     #   @return [String]
     # @!attribute format
     #   <p>The format of the file that contains the ThreatIntelSet.</p>
@@ -1829,8 +1743,7 @@ module Aws::GuardDuty
     #   <p>The URI of the file that contains the ThreatIntelSet. </p>
     #   @return [String]
     # @!attribute activate
-    #   <p>A Boolean value that indicates whether GuardDuty is to start using the uploaded
-    #         ThreatIntelSet.</p>
+    #   <p>A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.</p>
     #   @return [Boolean]
     # @!attribute client_token
     #   <p>The idempotency token for the create request.</p>
@@ -1868,28 +1781,19 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a trusted
-    #         entity set.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a trusted entity set.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>A user-friendly name to identify the trusted entity set.</p>
-    #            <p>The name of your list can include 
-    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    #   <p>A user-friendly name to identify the trusted entity set.</p> <p>The name of your list can include lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
     #   @return [String]
     # @!attribute format
     #   <p>The format of the file that contains the trusted entity set.</p>
     #   @return [String]
     # @!attribute location
-    #   <p>The URI of the file that contains the threat entity set. The format of the <code>Location</code> URL must be a valid
-    #          Amazon S3 URL format. Invalid URL formats will result in an error, regardless of whether you activate the entity set or not. For more information about
-    #          format of the location URLs, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html">Format of location URL under Step 2: Adding trusted or threat intelligence data</a>
-    #          in the <i>Amazon GuardDuty User Guide</i>.</p>
+    #   <p>The URI of the file that contains the threat entity set. The format of the <code>Location</code> URL must be a valid Amazon S3 URL format. Invalid URL formats will result in an error, regardless of whether you activate the entity set or not. For more information about format of the location URLs, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html">Format of location URL under Step 2: Adding trusted or threat intelligence data</a> in the <i>Amazon GuardDuty User Guide</i>.</p>
     #   @return [String]
     # @!attribute expected_bucket_owner
-    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
-    #         parameter.</p>
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     # @!attribute activate
     #   <p>A boolean value that indicates whether GuardDuty is to start using the uploaded trusted entity set.</p>
@@ -1966,12 +1870,10 @@ module Aws::GuardDuty
     #   <p>An object that contains information on the status of DNS logs as a data source.</p>
     #   @return [Types::DNSLogsConfigurationResult]
     # @!attribute flow_logs
-    #   <p>An object that contains information on the status of VPC flow logs as a data
-    #         source.</p>
+    #   <p>An object that contains information on the status of VPC flow logs as a data source.</p>
     #   @return [Types::FlowLogsConfigurationResult]
     # @!attribute s3_logs
-    #   <p>An object that contains information on the status of S3 Data event logs as a data
-    #         source.</p>
+    #   <p>An object that contains information on the status of S3 Data event logs as a data source.</p>
     #   @return [Types::S3LogsConfigurationResult]
     # @!attribute kubernetes
     #   <p>An object that contains information on the status of all Kubernetes data sources.</p>
@@ -1992,8 +1894,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about which data sources are enabled for the GuardDuty member
-    #       account.</p>
+    # <p>Contains information about which data sources are enabled for the GuardDuty member account.</p>
     # @!attribute free_trial_days_remaining
     #   <p>A value that specifies the number of days left to use each enabled data source.</p>
     #   @return [Integer]
@@ -2005,8 +1906,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about which data sources are enabled for the GuardDuty member
-    #       account.</p>
+    # <p>Contains information about which data sources are enabled for the GuardDuty member account.</p>
     # @!attribute cloud_trail
     #   <p>Describes whether any Amazon Web Services CloudTrail management event logs are enabled as data sources.</p>
     #   @return [Types::DataSourceFreeTrial]
@@ -2040,9 +1940,7 @@ module Aws::GuardDuty
 
     # <p>Represents list a map of dates with a count of total findings generated on each date.</p>
     # @!attribute date
-    #   <p>The timestamp when the total findings count is observed.</p>
-    #            <p>For example, <code>Date</code> would look like <code>"2024-09-05T17:00:00-07:00"</code>
-    #         whereas <code>LastGeneratedAt</code> would look like 2024-09-05T17:12:29-07:00".</p>
+    #   <p>The timestamp when the total findings count is observed.</p> <p>For example, <code>Date</code> would look like <code>"2024-09-05T17:00:00-07:00"</code> whereas <code>LastGeneratedAt</code> would look like 2024-09-05T17:12:29-07:00".</p>
     #   @return [Time]
     # @!attribute last_generated_at
     #   <p>The timestamp at which the last finding in the findings count, was generated.</p>
@@ -2065,8 +1963,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute account_ids
-    #   <p>A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member
-    #         account that you want to decline invitations from.</p>
+    #   <p>A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to decline invitations from.</p>
     #   @return [Array<String>]
     class DeclineInvitationsRequest < Struct.new(
       nil,
@@ -2077,8 +1974,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute unprocessed_accounts
-    #   <p>A list of objects that contain the unprocessed account and a result string that explains
-    #         why it was unprocessed.</p>
+    #   <p>A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DeclineInvitationsResponse < Struct.new(
       nil,
@@ -2088,15 +1984,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information on the server side encryption method used in the S3 bucket. See
-    #         <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">S3
-    #         Server-Side Encryption</a> for more information.</p>
+    # <p>Contains information on the server side encryption method used in the S3 bucket. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">S3 Server-Side Encryption</a> for more information.</p>
     # @!attribute encryption_type
     #   <p>The type of encryption used for objects within the S3 bucket.</p>
     #   @return [String]
     # @!attribute kms_master_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the bucket
-    #           <code>EncryptionType</code> is <code>aws:kms</code>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the bucket <code>EncryptionType</code> is <code>aws:kms</code>.</p>
     #   @return [String]
     class DefaultServerSideEncryption < Struct.new(
       nil,
@@ -2107,10 +2000,52 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute association_id
+    #   <p>The unique identifier for the association to delete.</p>
+    #   @return [String]
+    class DeleteCustomDetectionRuleAssociationRequest < Struct.new(
+      nil,
+      :rule_id,
+      :association_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteCustomDetectionRuleAssociationResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The execution mode of the organization configuration to delete. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>
+    #   @return [String]
+    class DeleteCustomDetectionRuleOrgConfigurationRequest < Struct.new(
+      nil,
+      :rule_id,
+      :mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteCustomDetectionRuleOrgConfigurationResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that you want to delete.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that you want to delete.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     class DeleteDetectorRequest < Struct.new(
       nil,
@@ -2128,9 +2063,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with the filter.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with the filter.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute filter_name
     #   <p>The name of the filter that you want to delete.</p>
@@ -2152,9 +2085,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector associated with the IPSet.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector associated with the IPSet.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute ip_set_id
     #   <p>The unique ID of the IPSet to delete.</p>
@@ -2176,8 +2107,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute account_ids
-    #   <p>A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member
-    #         account that you want to delete invitations from.</p>
+    #   <p>A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to delete invitations from.</p>
     #   @return [Array<String>]
     class DeleteInvitationsRequest < Struct.new(
       nil,
@@ -2188,8 +2118,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute unprocessed_accounts
-    #   <p>A list of objects that contain the unprocessed account and a result string that explains
-    #         why it was unprocessed.</p>
+    #   <p>A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DeleteInvitationsResponse < Struct.new(
       nil,
@@ -2211,10 +2140,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty account whose members you want to
-    #         delete.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty account whose members you want to delete.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute account_ids
     #   <p>A list of account IDs of the GuardDuty member accounts that you want to delete.</p>
@@ -2240,9 +2166,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector associated with the publishing destination to delete.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector associated with the publishing destination to delete.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute destination_id
     #   <p>The ID of the publishing destination to delete.</p>
@@ -2264,9 +2188,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector associated with the threat entity set resource.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector associated with the threat entity set resource.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute threat_entity_set_id
     #   <p>The unique ID that helps GuardDuty identify which threat entity set needs to be deleted.</p>
@@ -2288,9 +2210,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with the threatIntelSet.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with the threatIntelSet.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute threat_intel_set_id
     #   <p>The unique ID of the threatIntelSet that you want to delete.</p>
@@ -2312,9 +2232,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector associated with the trusted entity set resource.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector associated with the trusted entity set resource.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute trusted_entity_set_id
     #   <p>The unique ID that helps GuardDuty identify which trusted entity set needs to be deleted.</p>
@@ -2336,28 +2254,19 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that the request is associated with.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that the request is associated with.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value of this parameter to
-    #         null on your first call to the list action. For subsequent calls to the action, fill nextToken
-    #         in the request with the value of NextToken from the previous response to continue listing
-    #         data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of items that you want in the
-    #         response. The default value is 50. The maximum value is 50.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.</p>
     #   @return [Integer]
     # @!attribute filter_criteria
     #   <p>Represents the criteria to be used in the filter for describing scan entries.</p>
     #   @return [Types::FilterCriteria]
     # @!attribute sort_criteria
-    #   <p>Represents the criteria used for sorting scan entries. The <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_SortCriteria.html#guardduty-Type-SortCriteria-attributeName">
-    #                  <code>attributeName</code>
-    #               </a> is required and it must be
-    #         <code>scanStartTime</code>.</p>
+    #   <p>Represents the criteria used for sorting scan entries. The <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_SortCriteria.html#guardduty-Type-SortCriteria-attributeName"> <code>attributeName</code> </a> is required and it must be <code>scanStartTime</code>.</p>
     #   @return [Types::SortCriteria]
     class DescribeMalwareScansRequest < Struct.new(
       nil,
@@ -2375,8 +2284,7 @@ module Aws::GuardDuty
     #   <p>Contains information about malware scans associated with GuardDuty Malware Protection for EC2.</p>
     #   @return [Array<Types::Scan>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class DescribeMalwareScansResponse < Struct.new(
       nil,
@@ -2388,19 +2296,13 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The detector ID of the delegated administrator for which you need to retrieve the information.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The detector ID of the delegated administrator for which you need to retrieve the information.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of items that you want in the
-    #         response.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items that you want in the response.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value of this parameter to
-    #         null on your first call to the list action. For subsequent calls to the action, fill
-    #           <code>nextToken</code> in the request with the value of <code>NextToken</code> from the
-    #         previous response to continue listing data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill <code>nextToken</code> in the request with the value of <code>NextToken</code> from the previous response to continue listing data.</p>
     #   @return [String]
     class DescribeOrganizationConfigurationRequest < Struct.new(
       nil,
@@ -2413,16 +2315,12 @@ module Aws::GuardDuty
     end
 
     # @!attribute auto_enable
-    #   <p>Indicates whether GuardDuty is automatically enabled for accounts added to the
-    #         organization.</p>
-    #            <p>Even though this is still supported, we recommend using
-    #           <code>AutoEnableOrganizationMembers</code> to achieve the similar results.</p>
+    #   <p>Indicates whether GuardDuty is automatically enabled for accounts added to the organization.</p> <p>Even though this is still supported, we recommend using <code>AutoEnableOrganizationMembers</code> to achieve the similar results.</p>
     #   @deprecated
     #     This field is deprecated, use AutoEnableOrganizationMembers instead
     #   @return [Boolean]
     # @!attribute member_account_limit_reached
-    #   <p>Indicates whether the maximum number of allowed member accounts are already associated
-    #         with the delegated administrator account for your organization.</p>
+    #   <p>Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator account for your organization.</p>
     #   @return [Boolean]
     # @!attribute data_sources
     #   <p>Describes which data sources are enabled automatically for member accounts.</p>
@@ -2433,37 +2331,10 @@ module Aws::GuardDuty
     #   <p>A list of features that are configured for this organization.</p>
     #   @return [Array<Types::OrganizationFeatureConfigurationResult>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     # @!attribute auto_enable_organization_members
-    #   <p>Indicates the auto-enablement configuration of GuardDuty or any of the corresponding protection plans for the member accounts in the
-    #         organization.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NEW</code>: Indicates that when a new account joins the organization, they will
-    #             have GuardDuty or any of the corresponding protection plans enabled automatically. </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty and any of the corresponding 
-    #             protection plans enabled automatically. This includes <code>NEW</code> accounts that join the organization
-    #             and accounts that may have been suspended or removed from the organization in
-    #             GuardDuty.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: Indicates that GuardDuty or any of the corresponding protection plans 
-    #             will not be automatically enabled for any
-    #             account in the organization. The administrator must manage GuardDuty for each account in 
-    #             the organization individually.</p>
-    #                  <p>When you update the auto-enable setting from <code>ALL</code> or <code>NEW</code> to 
-    #           <code>NONE</code>, this action doesn't disable the corresponding option for your existing accounts. This
-    #           configuration will apply to the new accounts that join the organization. After you update the auto-enable settings,
-    #           no new account will have the corresponding option as enabled.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Indicates the auto-enablement configuration of GuardDuty or any of the corresponding protection plans for the member accounts in the organization.</p> <ul> <li> <p> <code>NEW</code>: Indicates that when a new account joins the organization, they will have GuardDuty or any of the corresponding protection plans enabled automatically. </p> </li> <li> <p> <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty and any of the corresponding protection plans enabled automatically. This includes <code>NEW</code> accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.</p> </li> <li> <p> <code>NONE</code>: Indicates that GuardDuty or any of the corresponding protection plans will not be automatically enabled for any account in the organization. The administrator must manage GuardDuty for each account in the organization individually.</p> <p>When you update the auto-enable setting from <code>ALL</code> or <code>NEW</code> to <code>NONE</code>, this action doesn't disable the corresponding option for your existing accounts. This configuration will apply to the new accounts that join the organization. After you update the auto-enable settings, no new account will have the corresponding option as enabled.</p> </li> </ul>
     #   @return [String]
     class DescribeOrganizationConfigurationResponse < Struct.new(
       nil,
@@ -2479,10 +2350,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector associated with the publishing destination to
-    #         retrieve.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector associated with the publishing destination to retrieve.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute destination_id
     #   <p>The ID of the publishing destination to retrieve.</p>
@@ -2500,20 +2368,20 @@ module Aws::GuardDuty
     #   <p>The ID of the publishing destination.</p>
     #   @return [String]
     # @!attribute destination_type
-    #   <p>The type of publishing destination. Currently, only Amazon S3 buckets are
-    #         supported.</p>
+    #   <p>The type of publishing destination. Currently, only Amazon S3 buckets are supported.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the publishing destination.</p>
     #   @return [String]
     # @!attribute publishing_failure_start_timestamp
-    #   <p>The time, in epoch millisecond format, at which GuardDuty was first unable to publish
-    #         findings to the destination.</p>
+    #   <p>The time, in epoch millisecond format, at which GuardDuty was first unable to publish findings to the destination.</p>
     #   @return [Integer]
     # @!attribute destination_properties
-    #   <p>A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code>
-    #         and <code>KmsKeyArn</code> of the publishing destination.</p>
+    #   <p>A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code> and <code>KmsKeyArn</code> of the publishing destination.</p>
     #   @return [Types::DestinationProperties]
+    # @!attribute tags
+    #   <p>The tags of the publishing destination resource.</p>
+    #   @return [Hash<String, String>]
     class DescribePublishingDestinationResponse < Struct.new(
       nil,
       :destination_id,
@@ -2521,19 +2389,18 @@ module Aws::GuardDuty
       :status,
       :publishing_failure_start_timestamp,
       :destination_properties,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the publishing destination, including the ID, type, and
-    #       status.</p>
+    # <p>Contains information about the publishing destination, including the ID, type, and status.</p>
     # @!attribute destination_id
     #   <p>The unique ID of the publishing destination.</p>
     #   @return [String]
     # @!attribute destination_type
-    #   <p>The type of resource used for the publishing destination. Currently, only Amazon S3
-    #         buckets are supported.</p>
+    #   <p>The type of resource used for the publishing destination. Currently, only Amazon S3 buckets are supported.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the publishing destination.</p>
@@ -2548,13 +2415,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains the Amazon Resource Name (ARN) of the resource to publish to, such as an S3
-    #       bucket, and the ARN of the KMS key to use to encrypt published findings.</p>
+    # <p>Contains the Amazon Resource Name (ARN) of the resource to publish to, such as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.</p>
     # @!attribute destination_arn
-    #   <p>The ARN of the resource to publish to.</p>
-    #            <p>To specify an S3 bucket folder use the following format:
-    #           <code>arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/</code>
-    #            </p>
+    #   <p>The ARN of the resource to publish to.</p> <p>To specify an S3 bucket folder use the following format: <code>arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/</code> </p>
     #   @return [String]
     # @!attribute kms_key_arn
     #   <p>The ARN of the KMS key to use for encryption.</p>
@@ -2570,8 +2433,7 @@ module Aws::GuardDuty
 
     # <p>Contains information about the detected behavior.</p>
     # @!attribute anomaly
-    #   <p>The details about the anomalous activity that caused GuardDuty to 
-    #         generate the finding.</p>
+    #   <p>The details about the anomalous activity that caused GuardDuty to generate the finding.</p>
     #   @return [Types::Anomaly]
     # @!attribute sequence
     #   <p>The details about the attack sequence.</p>
@@ -2580,6 +2442,174 @@ module Aws::GuardDuty
       nil,
       :anomaly,
       :sequence,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The requirements for running a Runtime Monitoring custom detection rule on Amazon EC2.</p>
+    # @!attribute min_agent_version
+    #   <p>The minimum GuardDuty agent version required to run the rule on Amazon EC2.</p>
+    #   @return [String]
+    class DetectionRuleEc2Requirements < Struct.new(
+      nil,
+      :min_agent_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The requirements for running a Runtime Monitoring custom detection rule on Amazon ECS with the Fargate launch type.</p>
+    # @!attribute min_agent_version
+    #   <p>The minimum GuardDuty agent version required to run the rule on Amazon ECS with the Fargate launch type.</p>
+    #   @return [String]
+    class DetectionRuleEcsFargateRequirements < Struct.new(
+      nil,
+      :min_agent_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The requirements for running a Runtime Monitoring custom detection rule on Amazon EKS.</p>
+    # @!attribute min_agent_version
+    #   <p>The minimum GuardDuty agent version required to run the rule on Amazon EKS.</p>
+    #   @return [String]
+    class DetectionRuleEksRequirements < Struct.new(
+      nil,
+      :min_agent_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains filter criteria for listing custom detection rules or associations.</p>
+    # @!attribute name
+    #   <p>The name of the field to filter by.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The values to match against the specified filter name.</p>
+    #   @return [Array<String>]
+    # @!attribute condition
+    #   <p>The condition to apply to the filter. For example, <code>EQUALS</code> or <code>CONTAINS</code>.</p>
+    #   @return [String]
+    class DetectionRuleFilter < Struct.new(
+      nil,
+      :name,
+      :values,
+      :condition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the organization-level configuration for a custom detection rule.</p>
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The execution mode of the organization configuration. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The configuration status. Valid values: <code>ACTIVE</code> | <code>PROCESSING</code> | <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>The reason for the current configuration status.</p>
+    #   @return [String]
+    # @!attribute include_account_ids
+    #   <p>A list of member account IDs included in the organization configuration. Mutually exclusive with <code>ExcludeAccountIds</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute exclude_account_ids
+    #   <p>A list of member account IDs excluded from the organization configuration. Mutually exclusive with <code>IncludeAccountIds</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute created_at
+    #   <p>The timestamp when the organization configuration was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the organization configuration was last updated.</p>
+    #   @return [Time]
+    # @!attribute expires_at
+    #   <p>The timestamp when the organization configuration expires.</p>
+    #   @return [Time]
+    class DetectionRuleOrgConfiguration < Struct.new(
+      nil,
+      :rule_id,
+      :mode,
+      :status,
+      :status_reason,
+      :include_account_ids,
+      :exclude_account_ids,
+      :created_at,
+      :updated_at,
+      :expires_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about an organization-level configuration for a custom detection rule.</p>
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The rule execution mode.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The configuration status.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>The reason for the current configuration status.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the organization configuration was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the organization configuration was last updated.</p>
+    #   @return [Time]
+    # @!attribute expires_at
+    #   <p>The timestamp when the organization configuration expires.</p>
+    #   @return [Time]
+    class DetectionRuleOrgConfigurationSummary < Struct.new(
+      nil,
+      :rule_id,
+      :mode,
+      :status,
+      :status_reason,
+      :created_at,
+      :updated_at,
+      :expires_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains Runtime Monitoring-specific details for a custom detection rule.</p>
+    # @!attribute platforms
+    #   <p>The platforms on which the rule can run. The presence of a platform member indicates that the rule is supported on that platform; the absence of a member indicates that the rule cannot run on that platform at any agent version.</p>
+    #   @return [Types::DetectionRuleRuntimePlatforms]
+    class DetectionRuleRuntimeMonitoringDetails < Struct.new(
+      nil,
+      :platforms,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The platforms on which a Runtime Monitoring custom detection rule can run. A member's presence is the support statement: when present, the rule runs on that platform and <code>minAgentVersion</code> is the minimum GuardDuty agent version required there. When absent, the rule cannot run on that platform at any agent version.</p>
+    # @!attribute eks
+    #   <p>The requirements for running the rule on Amazon EKS.</p>
+    #   @return [Types::DetectionRuleEksRequirements]
+    # @!attribute ec2
+    #   <p>The requirements for running the rule on Amazon EC2.</p>
+    #   @return [Types::DetectionRuleEc2Requirements]
+    # @!attribute ecs_fargate
+    #   <p>The requirements for running the rule on Amazon ECS with the Fargate launch type.</p>
+    #   @return [Types::DetectionRuleEcsFargateRequirements]
+    class DetectionRuleRuntimePlatforms < Struct.new(
+      nil,
+      :eks,
+      :ec2,
+      :ecs_fargate,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2609,25 +2639,23 @@ module Aws::GuardDuty
     #   <p>Status of the additional configuration.</p>
     #   @return [String]
     # @!attribute updated_at
-    #   <p>The timestamp at which the additional configuration was last updated. This is in UTC
-    #         format.</p>
+    #   <p>The timestamp at which the additional configuration was last updated. This is in UTC format.</p>
     #   @return [Time]
+    # @!attribute managed_by
+    #   <p>Indicates what manages the additional configuration. A value of <code>GUARDDUTY_POLICY</code> means a GuardDuty policy manages the additional configuration.</p>
+    #   @return [String]
     class DetectorAdditionalConfigurationResult < Struct.new(
       nil,
       :name,
       :status,
       :updated_at,
+      :managed_by,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about a GuardDuty feature.</p>
-    #          <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>)
-    #       and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. 
-    #       You can add only one of these two features because Runtime Monitoring already includes the 
-    #       threat detection for Amazon EKS resources. For more information, see
-    #       <a href="https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html">Runtime Monitoring</a>.</p>
+    # <p>Contains information about a GuardDuty feature.</p> <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>) and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html">Runtime Monitoring</a>.</p>
     # @!attribute name
     #   <p>The name of the feature.</p>
     #   @return [String]
@@ -2647,12 +2675,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about a GuardDuty feature.</p>
-    #          <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>)
-    #       and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. 
-    #       You can add only one of these two features because Runtime Monitoring already includes the 
-    #       threat detection for Amazon EKS resources. For more information, see
-    #       <a href="https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html">Runtime Monitoring</a>.</p>
+    # <p>Contains information about a GuardDuty feature.</p> <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>) and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. You can add only one of these two features because Runtime Monitoring already includes the threat detection for Amazon EKS resources. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html">Runtime Monitoring</a>.</p>
     # @!attribute name
     #   <p>Indicates the name of the feature that can be enabled for the detector.</p>
     #   @return [String]
@@ -2665,20 +2688,23 @@ module Aws::GuardDuty
     # @!attribute additional_configuration
     #   <p>Additional configuration for a resource.</p>
     #   @return [Array<Types::DetectorAdditionalConfigurationResult>]
+    # @!attribute managed_by
+    #   <p>Indicates what manages the feature. A value of <code>GUARDDUTY_POLICY</code> means a GuardDuty policy manages the feature.</p>
+    #   @return [String]
     class DetectorFeatureConfigurationResult < Struct.new(
       nil,
       :name,
       :status,
       :updated_at,
       :additional_configuration,
+      :managed_by,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
-    #   <p>The Amazon Web Services Account ID for the organizations account to be disabled as a GuardDuty delegated
-    #         administrator.</p>
+    #   <p>The Amazon Web Services Account ID for the organizations account to be disabled as a GuardDuty delegated administrator.</p>
     #   @return [String]
     class DisableOrganizationAdminAccountRequest < Struct.new(
       nil,
@@ -2736,12 +2762,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty account whose members you want to
-    #         disassociate from the administrator account.</p>
+    #   <p>The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the administrator account.</p>
     #   @return [String]
     # @!attribute account_ids
-    #   <p>A list of account IDs of the GuardDuty member accounts that you want to disassociate from
-    #         the administrator account.</p>
+    #   <p>A list of account IDs of the GuardDuty member accounts that you want to disassociate from the administrator account.</p>
     #   @return [Array<String>]
     class DisassociateMembersRequest < Struct.new(
       nil,
@@ -2753,8 +2777,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute unprocessed_accounts
-    #   <p>A list of objects that contain the unprocessed account and a result string that explains
-    #         why it was unprocessed.</p>
+    #   <p>A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class DisassociateMembersResponse < Struct.new(
       nil,
@@ -2769,16 +2792,13 @@ module Aws::GuardDuty
     #   <p>The domain information for the DNS query.</p>
     #   @return [String]
     # @!attribute protocol
-    #   <p>The network connection protocol observed in the activity that prompted GuardDuty to
-    #         generate the finding.</p>
+    #   <p>The network connection protocol observed in the activity that prompted GuardDuty to generate the finding.</p>
     #   @return [String]
     # @!attribute blocked
     #   <p>Indicates whether the targeted port is blocked.</p>
     #   @return [Boolean]
     # @!attribute domain_with_suffix
-    #   <p>The second and top level domain involved in the 
-    #         activity that potentially prompted GuardDuty to generate this finding.
-    #         For a list of top-level and second-level domains, see <a href="https://publicsuffix.org/">public suffix list</a>.</p>
+    #   <p>The second and top level domain involved in the activity that potentially prompted GuardDuty to generate this finding. For a list of top-level and second-level domains, see <a href="https://publicsuffix.org/">public suffix list</a>.</p>
     #   @return [String]
     # @!attribute vpc_owner_account_id
     #   <p>The Amazon Web Services account ID that owns the VPC through which the DNS request was made.</p>
@@ -2802,6 +2822,30 @@ module Aws::GuardDuty
     class DomainDetails < Struct.new(
       nil,
       :domain,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about an EBS snapshot that was scanned for malware.</p>
+    # @!attribute device_name
+    #   <p>The device name of the EBS snapshot that was scanned.</p>
+    #   @return [String]
+    class EbsSnapshot < Struct.new(
+      nil,
+      :device_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains details about the EBS snapshot that was scanned for malware.</p>
+    # @!attribute snapshot_arn
+    #   <p>The Amazon Resource Name (ARN) of the EBS snapshot.</p>
+    #   @return [String]
+    class EbsSnapshotDetails < Struct.new(
+      nil,
+      :snapshot_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2864,8 +2908,7 @@ module Aws::GuardDuty
     #   <p>Describes whether scanning EBS volumes is enabled as a data source.</p>
     #   @return [String]
     # @!attribute reason
-    #   <p>Specifies the reason why scanning EBS volumes (Malware Protection) was not enabled as a
-    #         data source.</p>
+    #   <p>Specifies the reason why scanning EBS volumes (Malware Protection) was not enabled as a data source.</p>
     #   @return [String]
     class EbsVolumesResult < Struct.new(
       nil,
@@ -2876,19 +2919,39 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about the Amazon EC2 Image involved in a GuardDuty finding, including unique identifiers of the Amazon EC2 instances.</p>
+    # @!attribute ec2_instance_uids
+    #   <p>A list of unique identifiers for the compromised Amazon EC2 instances that were launched with the same Amazon Machine Image (AMI).</p>
+    #   @return [Array<String>]
+    class Ec2Image < Struct.new(
+      nil,
+      :ec2_instance_uids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains details about the EC2 AMI that was scanned.</p>
+    # @!attribute image_arn
+    #   <p>The Amazon Resource Name (ARN) of the EC2 AMI.</p>
+    #   @return [String]
+    class Ec2ImageDetails < Struct.new(
+      nil,
+      :image_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details about the potentially impacted Amazon EC2 instance resource.</p>
     # @!attribute availability_zone
-    #   <p>The availability zone of the Amazon EC2 instance. For more information, see
-    #          <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones">Availability zones</a>
-    #          in the <i>Amazon EC2 User Guide</i>.</p>
+    #   <p>The availability zone of the Amazon EC2 instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones">Availability zones</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     # @!attribute image_description
     #   <p>The image description of the Amazon EC2 instance.</p>
     #   @return [String]
     # @!attribute instance_state
-    #   <p>The state of the Amazon EC2 instance. For more information, see
-    #          <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html">Amazon EC2 instance state changes</a>
-    #          in the <i>Amazon EC2 User Guide</i>.</p>
+    #   <p>The state of the Amazon EC2 instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html">Amazon EC2 instance state changes</a> in the <i>Amazon EC2 User Guide</i>.</p>
     #   @return [String]
     # @!attribute iam_instance_profile
     #   <p>Contains information about the EC2 instance profile.</p>
@@ -2924,6 +2987,22 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about the Amazon EC2 launch template involved in a GuardDuty finding, including unique identifiers of the Amazon EC2 instances.</p>
+    # @!attribute ec2_instance_uids
+    #   <p>A list of unique identifiers for the compromised Amazon EC2 instances that share the same Amazon EC2 launch template.</p>
+    #   @return [Array<String>]
+    # @!attribute version
+    #   <p>Version of the EC2 launch template.</p>
+    #   @return [String]
+    class Ec2LaunchTemplate < Struct.new(
+      nil,
+      :ec2_instance_uids,
+      :version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the elastic network interface of the Amazon EC2 instance.</p>
     # @!attribute ipv6_addresses
     #   <p>A list of IPv6 addresses for the Amazon EC2 instance.</p>
@@ -2951,6 +3030,34 @@ module Aws::GuardDuty
       :security_groups,
       :sub_net_id,
       :vpc_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the Amazon EC2 VPC involved in a GuardDuty finding, including unique identifiers of the Amazon EC2 instances.</p>
+    # @!attribute ec2_instance_uids
+    #   <p>A list of unique identifiers for the compromised Amazon EC2 instances that were launched within the same Virtual Private Cloud (VPC).</p>
+    #   @return [Array<String>]
+    class Ec2Vpc < Struct.new(
+      nil,
+      :ec2_instance_uids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the Amazon ECS cluster involved in a GuardDuty finding, including cluster identification and status.</p>
+    # @!attribute status
+    #   <p>The current status of the Amazon ECS cluster.</p>
+    #   @return [String]
+    # @!attribute ec2_instance_uids
+    #   <p>A list of unique identifiers for the Amazon EC2 instances that serve as container instances in the Amazon ECS cluster.</p>
+    #   @return [Array<String>]
+    class EcsCluster < Struct.new(
+      nil,
+      :status,
+      :ec2_instance_uids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2991,6 +3098,30 @@ module Aws::GuardDuty
       :running_tasks_count,
       :tags,
       :task_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about Amazon ECS task involved in a GuardDuty finding, including task definition and container identifiers.</p>
+    # @!attribute created_at
+    #   <p>The timestamp indicating when the Amazon ECS task was created, in UTC format.</p>
+    #   @return [Time]
+    # @!attribute task_definition_arn
+    #   <p>The ARN of task definition which describes the container and volume definitions of the Amazon ECS task.</p>
+    #   @return [String]
+    # @!attribute launch_type
+    #   <p>The infrastructure type on which the Amazon ECS task runs.</p>
+    #   @return [String]
+    # @!attribute container_uids
+    #   <p>A list of unique identifiers for the containers associated with the Amazon ECS task.</p>
+    #   @return [Array<String>]
+    class EcsTask < Struct.new(
+      nil,
+      :created_at,
+      :task_definition_arn,
+      :launch_type,
+      :container_uids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3048,8 +3179,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the Amazon EKS cluster involved in a GuardDuty finding,
-    #       including cluster identification, status, and network configuration.</p>
+    # <p>Contains information about the Amazon EKS cluster involved in a GuardDuty finding, including cluster identification, status, and network configuration.</p>
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the Amazon EKS cluster involved in the finding.</p>
     #   @return [String]
@@ -3110,8 +3240,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute admin_account_id
-    #   <p>The Amazon Web Services account ID for the organization account to be enabled as a GuardDuty delegated
-    #         administrator.</p>
+    #   <p>The Amazon Web Services account ID for the organization account to be enabled as a GuardDuty delegated administrator.</p>
     #   @return [String]
     class EnableOrganizationAdminAccountRequest < Struct.new(
       nil,
@@ -3140,26 +3269,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about Amazon Web Services Fargate details associated with 
-    #       an Amazon ECS cluster.</p>
+    # <p>Contains information about Amazon Web Services Fargate details associated with an Amazon ECS cluster.</p>
     # @!attribute issues
     #   <p>Runtime coverage issues identified for the resource running on Amazon Web Services Fargate.</p>
     #   @return [Array<String>]
     # @!attribute management_type
-    #   <p>Indicates how the GuardDuty security agent is managed for this resource.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>DISABLED</code> indicates that the deployment of the GuardDuty security agent is disabled for this resource.</p>
-    #               </li>
-    #            </ul>
-    #            <note>
-    #               <p>The <code>MANUAL</code> status doesn't apply to the Amazon Web Services Fargate (Amazon ECS only) woprkloads.</p>
-    #            </note>
+    #   <p>Indicates how the GuardDuty security agent is managed for this resource.</p> <ul> <li> <p> <code>AUTO_MANAGED</code> indicates that GuardDuty deploys and manages updates for this resource.</p> </li> <li> <p> <code>DISABLED</code> indicates that the deployment of the GuardDuty security agent is disabled for this resource.</p> </li> </ul> <note> <p>The <code>MANUAL</code> status doesn't apply to the Amazon Web Services Fargate (Amazon ECS only) woprkloads.</p> </note>
     #   @return [String]
     class FargateDetails < Struct.new(
       nil,
@@ -3172,17 +3287,13 @@ module Aws::GuardDuty
 
     # <p>Contains information about the condition.</p>
     # @!attribute equals_value
-    #   <p>Represents an <i>equal</i>
-    #               <b></b> condition to be applied to
-    #         a single field when querying for scan entries.</p>
+    #   <p>Represents an <i>equal</i> <b/> condition to be applied to a single field when querying for scan entries.</p>
     #   @return [String]
     # @!attribute greater_than
-    #   <p>Represents a <i>greater than</i> condition to be applied to a single field
-    #         when querying for scan entries.</p>
+    #   <p>Represents a <i>greater than</i> condition to be applied to a single field when querying for scan entries.</p>
     #   @return [Integer]
     # @!attribute less_than
-    #   <p>Represents a <i>less than</i> condition to be applied to a single field when
-    #         querying for scan entries.</p>
+    #   <p>Represents a <i>less than</i> condition to be applied to a single field when querying for scan entries.</p>
     #   @return [Integer]
     class FilterCondition < Struct.new(
       nil,
@@ -3196,8 +3307,7 @@ module Aws::GuardDuty
 
     # <p>Represents the criteria to be used in the filter for describing scan entries.</p>
     # @!attribute filter_criterion
-    #   <p>Represents a condition that when matched will be added to the response of the
-    #         operation.</p>
+    #   <p>Represents a condition that when matched will be added to the response of the operation.</p>
     #   @return [Array<Types::FilterCriterion>]
     class FilterCriteria < Struct.new(
       nil,
@@ -3207,13 +3317,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a condition that when matched will be added to the response of the operation.
-    #       Irrespective of using any filter criteria, an administrator account can view the scan entries
-    #       for all of its member accounts. However, each member account can view the scan entries only
-    #       for their own account.</p>
+    # <p>Represents a condition that when matched will be added to the response of the operation. Irrespective of using any filter criteria, an administrator account can view the scan entries for all of its member accounts. However, each member account can view the scan entries only for their own account.</p>
     # @!attribute criterion_key
-    #   <p>An enum value representing possible scan properties to match with given scan
-    #         entries.</p>
+    #   <p>An enum value representing possible scan properties to match with given scan entries.</p>
     #   @return [String]
     # @!attribute filter_condition
     #   <p>Contains information about the condition.</p>
@@ -3227,8 +3333,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the finding that is generated when abnormal or suspicious
-    #       activity is detected.</p>
+    # <p>Contains information about the finding that is generated when abnormal or suspicious activity is detected.</p>
     # @!attribute account_id
     #   <p>The ID of the account in which the finding was generated.</p>
     #   @return [String]
@@ -3251,15 +3356,10 @@ module Aws::GuardDuty
     #   <p>The partition associated with the finding.</p>
     #   @return [String]
     # @!attribute region
-    #   <p>The Region where the finding was generated. For findings generated
-    #         from <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-global-service-events">Global Service Events</a>, the Region value in the finding might differ from the Region where
-    #         GuardDuty identifies the potential threat. For more information,
-    #         see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html#cloudtrail_global">How GuardDuty
-    #           handles Amazon Web Services CloudTrail global events</a> in the <i>Amazon GuardDuty User Guide</i>.</p>
+    #   <p>The Region where the finding was generated. For findings generated from <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-global-service-events">Global Service Events</a>, the Region value in the finding might differ from the Region where GuardDuty identifies the potential threat. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html#cloudtrail_global">How GuardDuty handles Amazon Web Services CloudTrail global events</a> in the <i>Amazon GuardDuty User Guide</i>.</p>
     #   @return [String]
     # @!attribute resource
-    #   <p>Contains information about the Amazon Web Services resource associated with the activity that prompted
-    #         GuardDuty to generate a finding.</p>
+    #   <p>Contains information about the Amazon Web Services resource associated with the activity that prompted GuardDuty to generate a finding.</p>
     #   @return [Types::Resource]
     # @!attribute schema_version
     #   <p>The version of the schema used for the finding.</p>
@@ -3282,6 +3382,9 @@ module Aws::GuardDuty
     # @!attribute associated_attack_sequence_arn
     #   <p>Amazon Resource Name (ARN) associated with the attack sequence finding.</p>
     #   @return [String]
+    # @!attribute custom_detection_rule_name
+    #   <p>The name of the custom detection rule that generated this finding.</p>
+    #   @return [String]
     class Finding < Struct.new(
       nil,
       :account_id,
@@ -3300,6 +3403,7 @@ module Aws::GuardDuty
       :type,
       :updated_at,
       :associated_attack_sequence_arn,
+      :custom_detection_rule_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3307,8 +3411,7 @@ module Aws::GuardDuty
 
     # <p>Contains information about the criteria used for querying findings.</p>
     # @!attribute criterion
-    #   <p>Represents a map of finding properties that match specified conditions and values when
-    #         querying findings.</p>
+    #   <p>Represents a map of finding properties that match specified conditions and values when querying findings.</p>
     #   @return [Hash<String, Types::Condition>]
     class FindingCriteria < Struct.new(
       nil,
@@ -3331,12 +3434,7 @@ module Aws::GuardDuty
     #   <p>Represents a list of map of dates with a count of total findings generated on each date per severity level.</p>
     #   @return [Array<Types::DateStatistics>]
     # @!attribute grouped_by_finding_type
-    #   <p>Represents a list of map of finding types with a count of total findings generated for each type. </p>
-    #            <p>Based on the <code>orderBy</code>
-    #       parameter, this request returns either the most occurring finding types or the least occurring finding types. If the
-    #       <code>orderBy</code> parameter is <code>ASC</code>, this will represent the least occurring finding types in
-    #       your account; otherwise, this will represent the most occurring finding types. The default
-    #       value of <code>orderBy</code> is <code>DESC</code>.</p>
+    #   <p>Represents a list of map of finding types with a count of total findings generated for each type. </p> <p>Based on the <code>orderBy</code> parameter, this request returns either the most occurring finding types or the least occurring finding types. If the <code>orderBy</code> parameter is <code>ASC</code>, this will represent the least occurring finding types in your account; otherwise, this will represent the most occurring finding types. The default value of <code>orderBy</code> is <code>DESC</code>.</p>
     #   @return [Array<Types::FindingTypeStatistics>]
     # @!attribute grouped_by_resource
     #   <p>Represents a list of map of top resources with a count of total findings.</p>
@@ -3357,8 +3455,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about each finding type associated with the 
-    #       <code>groupedByFindingType</code> statistics.</p>
+    # <p>Information about each finding type associated with the <code>groupedByFindingType</code> statistics.</p>
     # @!attribute finding_type
     #   <p>Name of the finding type.</p>
     #   @return [String]
@@ -3406,8 +3503,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the location of the remote IP address. By default, GuardDuty
-    #     returns <code>Geolocation</code> with <code>Lat</code> and <code>Lon</code> as <code>0.0</code>.</p>
+    # <p>Contains information about the location of the remote IP address. By default, GuardDuty returns <code>Geolocation</code> with <code>Lat</code> and <code>Lon</code> as <code>0.0</code>.</p>
     # @!attribute lat
     #   <p>The latitude information of the remote IP address.</p>
     #   @return [Float]
@@ -3446,9 +3542,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the GuardDuty detector.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the GuardDuty detector.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute filter_criteria
     #   <p>Represents the criteria used to filter the coverage statistics.</p>
@@ -3467,8 +3561,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute coverage_statistics
-    #   <p>Represents the count aggregated by the <code>statusCode</code> and
-    #           <code>resourceType</code>.</p>
+    #   <p>Represents the count aggregated by the <code>statusCode</code> and <code>resourceType</code>.</p>
     #   @return [Types::CoverageStatistics]
     class GetCoverageStatisticsResponse < Struct.new(
       nil,
@@ -3478,10 +3571,86 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute association_id
+    #   <p>The unique identifier for the association.</p>
+    #   @return [String]
+    class GetCustomDetectionRuleAssociationRequest < Struct.new(
+      nil,
+      :rule_id,
+      :association_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_association
+    #   <p>The details of the custom detection rule association.</p>
+    #   @return [Types::AssociationDetail]
+    # @!attribute tags
+    #   <p>The tags associated with the custom detection rule association resource.</p>
+    #   @return [Hash<String, String>]
+    class GetCustomDetectionRuleAssociationResponse < Struct.new(
+      nil,
+      :rule_association,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The execution mode of the organization configuration to retrieve. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>
+    #   @return [String]
+    class GetCustomDetectionRuleOrgConfigurationRequest < Struct.new(
+      nil,
+      :rule_id,
+      :mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute configuration
+    #   <p>The details of the organization configuration.</p>
+    #   @return [Types::DetectionRuleOrgConfiguration]
+    class GetCustomDetectionRuleOrgConfigurationResponse < Struct.new(
+      nil,
+      :configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    class GetCustomDetectionRuleRequest < Struct.new(
+      nil,
+      :rule_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule
+    #   <p>The details of the custom detection rule.</p>
+    #   @return [Types::RuleDetail]
+    class GetCustomDetectionRuleResponse < Struct.new(
+      nil,
+      :rule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that you want to get.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that you want to get.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     class GetDetectorRequest < Struct.new(
       nil,
@@ -3533,9 +3702,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with this filter.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with this filter.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute filter_name
     #   <p>The name of the filter you want to get.</p>
@@ -3559,8 +3726,7 @@ module Aws::GuardDuty
     #   <p>Specifies the action that is to be applied to the findings that match the filter.</p>
     #   @return [String]
     # @!attribute rank
-    #   <p>Specifies the position of the filter in the list of current filters. Also specifies the
-    #         order in which this filter is applied to the findings.</p>
+    #   <p>Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.</p>
     #   @return [Integer]
     # @!attribute finding_criteria
     #   <p>Represents the criteria to be used in the filter for querying findings.</p>
@@ -3568,6 +3734,15 @@ module Aws::GuardDuty
     # @!attribute tags
     #   <p>The tags of the filter resource.</p>
     #   @return [Hash<String, String>]
+    # @!attribute created_at
+    #   <p>The timestamp when the filter was created. This field is not available for filters that were created before the lifecycle metadata feature was enabled (legacy filters).</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the filter was last updated. For legacy filters, this field is present only after the filter has been updated at least once since the lifecycle metadata feature was enabled.</p>
+    #   @return [Time]
+    # @!attribute version
+    #   <p>The version of the filter. Every time the filter is updated, the version increments by 1. This field is not available for legacy filters that were created before the lifecycle metadata feature was enabled.</p>
+    #   @return [Integer]
     class GetFilterResponse < Struct.new(
       nil,
       :name,
@@ -3576,16 +3751,16 @@ module Aws::GuardDuty
       :rank,
       :finding_criteria,
       :tags,
+      :created_at,
+      :updated_at,
+      :version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the detector that specifies the GuardDuty service whose findings you want to
-    #         retrieve.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector that specifies the GuardDuty service whose findings you want to retrieve.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute finding_ids
     #   <p>The IDs of the findings that you want to retrieve.</p>
@@ -3615,10 +3790,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the detector whose findings statistics you
-    #         want to retrieve.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector whose findings statistics you want to retrieve.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute finding_statistic_types
     #   <p>The types of finding statistics to retrieve.</p>
@@ -3632,13 +3804,10 @@ module Aws::GuardDuty
     #   <p>Displays the findings statistics grouped by one of the listed valid values.</p>
     #   @return [String]
     # @!attribute order_by
-    #   <p>Displays the sorted findings in the requested order. The default
-    #         value of <code>orderBy</code> is <code>DESC</code>.</p>
-    #            <p>You can use this parameter only with the <code>groupBy</code> parameter.</p>
+    #   <p>Displays the sorted findings in the requested order. The default value of <code>orderBy</code> is <code>DESC</code>.</p> <p>You can use this parameter only with the <code>groupBy</code> parameter.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to be returned in the response. The default value is 25.</p>
-    #            <p>You can use this parameter only with the <code>groupBy</code> parameter.</p>
+    #   <p>The maximum number of results to be returned in the response. The default value is 25.</p> <p>You can use this parameter only with the <code>groupBy</code> parameter.</p>
     #   @return [Integer]
     class GetFindingsStatisticsRequest < Struct.new(
       nil,
@@ -3657,8 +3826,7 @@ module Aws::GuardDuty
     #   <p>The finding statistics object.</p>
     #   @return [Types::FindingStatistics]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
-    #            <p>This parameter is currently not supported.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p> <p>This parameter is currently not supported.</p>
     #   @return [String]
     class GetFindingsStatisticsResponse < Struct.new(
       nil,
@@ -3670,9 +3838,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with the IPSet.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with the IPSet.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute ip_set_id
     #   <p>The unique ID of the IPSet to retrieve.</p>
@@ -3702,8 +3868,7 @@ module Aws::GuardDuty
     #   <p>The tags of the IPSet resource.</p>
     #   @return [Hash<String, String>]
     # @!attribute expected_bucket_owner
-    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter. This field appears 
-    #         in the response only if it was provided during IPSet creation or update.</p>
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter. This field appears in the response only if it was provided during IPSet creation or update.</p>
     #   @return [String]
     class GetIPSetResponse < Struct.new(
       nil,
@@ -3713,6 +3878,32 @@ module Aws::GuardDuty
       :status,
       :tags,
       :expected_bucket_owner,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
+    #   <p>The unique ID of the GuardDuty detector associated with the investigation.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute investigation_id
+    #   <p>The unique identifier of the investigation to retrieve.</p>
+    #   @return [String]
+    class GetInvestigationRequest < Struct.new(
+      nil,
+      :detector_id,
+      :investigation_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute investigation
+    #   <p>The details and results of the requested investigation.</p>
+    #   @return [Types::Investigation]
+    class GetInvestigationResponse < Struct.new(
+      nil,
+      :investigation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3751,13 +3942,10 @@ module Aws::GuardDuty
     #   <p>Amazon Resource Name (ARN) of the protected resource.</p>
     #   @return [String]
     # @!attribute role
-    #   <p>Amazon Resource Name (ARN) of the IAM role that includes the permissions to scan and 
-    #         add tags to the associated protected resource.</p>
+    #   <p>Amazon Resource Name (ARN) of the IAM role that includes the permissions to scan and add tags to the associated protected resource.</p>
     #   @return [String]
     # @!attribute protected_resource
-    #   <p>Information about the protected resource that is associated with the created 
-    #         Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported 
-    #         protected resource.</p>
+    #   <p>Information about the protected resource that is associated with the created Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported protected resource.</p>
     #   @return [Types::CreateProtectedResource]
     # @!attribute actions
     #   <p>Information about whether the tags will be added to the S3 object after scanning.</p>
@@ -3769,8 +3957,7 @@ module Aws::GuardDuty
     #   <p>Malware Protection plan status.</p>
     #   @return [String]
     # @!attribute status_reasons
-    #   <p>Information about the issue code and message associated to the status of
-    #       your Malware Protection plan.</p>
+    #   <p>Information about the issue code and message associated to the status of your Malware Protection plan.</p>
     #   @return [Array<Types::MalwareProtectionPlanStatusReason>]
     # @!attribute tags
     #   <p>Tags added to the Malware Protection plan resource.</p>
@@ -3790,10 +3977,134 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute scan_id
+    #   <p>A unique identifier that gets generated when you invoke the API without any error. Each malware scan has a corresponding scan ID. Using this scan ID, you can monitor the status of your malware scan.</p>
+    #   @return [String]
+    class GetMalwareScanRequest < Struct.new(
+      nil,
+      :scan_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scan_id
+    #   <p>A unique identifier associated with the malware scan. Each malware scan has a corresponding scan ID. Using this scan ID, you can monitor the status of your malware scan.</p>
+    #   @return [String]
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with this scan.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with the request, if it belongs to an account which is a GuardDuty customer.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute admin_detector_id
+    #   <p>The unique detector ID of the administrator account that the request is associated with. If the account is an administrator, the <code>AdminDetectorId</code> will be the same as the one used for <code>DetectorId. If the customer is not a GuardDuty customer, this field will not be present.</code>.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute resource_arn
+    #   <p>Amazon Resource Name (ARN) of the resource on which a malware scan was invoked.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of resource that was scanned for malware.</p>
+    #   @return [String]
+    # @!attribute scanned_resources_count
+    #   <p>The total number of resources that were successfully scanned. This is dependent on the resource type.</p>
+    #   @return [Integer]
+    # @!attribute skipped_resources_count
+    #   <p>The total number of resources that were skipped during the scan.</p>
+    #   @return [Integer]
+    # @!attribute failed_resources_count
+    #   <p>The total number of resources that failed to be scanned.</p>
+    #   @return [Integer]
+    # @!attribute scanned_resources
+    #   <p>A list of resources along with their metadata that were scanned as part of the malware scan operation.</p>
+    #   @return [Array<Types::ScannedResource>]
+    # @!attribute scan_configuration
+    #   <p>Information about the scan configuration used for the malware scan.</p>
+    #   @return [Types::ScanConfiguration]
+    # @!attribute scan_category
+    #   <p>The category of the malware scan, indicating the type of scan performed.</p>
+    #   @return [String]
+    # @!attribute scan_status
+    #   <p>A value representing the current status of the malware scan.</p>
+    #   @return [String]
+    # @!attribute scan_status_reason
+    #   <p>Represents the reason for the current scan status, if applicable.</p>
+    #   @return [String]
+    # @!attribute scan_type
+    #   <p>A value representing the initiator of the scan.</p>
+    #   @return [String]
+    # @!attribute scan_started_at
+    #   <p>The timestamp representing when the malware scan was started.</p>
+    #   @return [Time]
+    # @!attribute scan_completed_at
+    #   <p>The timestamp representing when the malware scan was completed.</p>
+    #   @return [Time]
+    # @!attribute scan_result_details
+    #   <p>Detailed information about the results of the malware scan, if the scan completed.</p>
+    #   @return [Types::GetMalwareScanResultDetails]
+    class GetMalwareScanResponse < Struct.new(
+      nil,
+      :scan_id,
+      :detector_id,
+      :admin_detector_id,
+      :resource_arn,
+      :resource_type,
+      :scanned_resources_count,
+      :skipped_resources_count,
+      :failed_resources_count,
+      :scanned_resources,
+      :scan_configuration,
+      :scan_category,
+      :scan_status,
+      :scan_status_reason,
+      :scan_type,
+      :scan_started_at,
+      :scan_completed_at,
+      :scan_result_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the results of the malware scan.</p>
+    # @!attribute scan_result_status
+    #   <p>Status indicating whether threats were found for a completed scan.</p>
+    #   @return [String]
+    # @!attribute skipped_file_count
+    #   <p>The total number of files that were skipped during the scan.</p>
+    #   @return [Integer]
+    # @!attribute failed_file_count
+    #   <p>The total number of files that failed to be scanned.</p>
+    #   @return [Integer]
+    # @!attribute threat_found_file_count
+    #   <p>The total number of files in which threats were detected.</p>
+    #   @return [Integer]
+    # @!attribute total_file_count
+    #   <p>The total number of files that were processed during the scan.</p>
+    #   @return [Integer]
+    # @!attribute total_bytes
+    #   <p>The total number of bytes that were scanned.</p>
+    #   @return [Integer]
+    # @!attribute unique_threat_count
+    #   <p>The total number of unique threats that were detected during the scan.</p>
+    #   @return [Integer]
+    # @!attribute threats
+    #   <p>The threats that were detected during the malware scan.</p>
+    #   @return [Array<Types::ScanResultThreat>]
+    class GetMalwareScanResultDetails < Struct.new(
+      nil,
+      :scan_result_status,
+      :skipped_file_count,
+      :failed_file_count,
+      :threat_found_file_count,
+      :total_file_count,
+      :total_bytes,
+      :unique_threat_count,
+      :threats,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
+    #   <p>The unique ID of the detector that is associated with this scan.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     class GetMalwareScanSettingsRequest < Struct.new(
       nil,
@@ -3821,9 +4132,7 @@ module Aws::GuardDuty
     # @deprecated
     #   This input is deprecated, use GetAdministratorAccountRequest instead
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty member account.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty member account.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     class GetMasterAccountRequest < Struct.new(
       nil,
@@ -3847,9 +4156,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The detector ID for the administrator account.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The detector ID for the administrator account.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute account_ids
     #   <p>A list of member account IDs.</p>
@@ -3867,8 +4174,7 @@ module Aws::GuardDuty
     #   <p>An object that describes which data sources are enabled for a member account.</p>
     #   @return [Array<Types::MemberDataSourceConfiguration>]
     # @!attribute unprocessed_accounts
-    #   <p>A list of member account IDs that were unable to be processed along with an explanation
-    #         for why they were not processed.</p>
+    #   <p>A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class GetMemberDetectorsResponse < Struct.new(
       nil,
@@ -3880,10 +4186,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty account whose members you want to
-    #         retrieve.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty account whose members you want to retrieve.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute account_ids
     #   <p>A list of account IDs of the GuardDuty member accounts that you want to describe.</p>
@@ -3901,8 +4204,7 @@ module Aws::GuardDuty
     #   <p>A list of members.</p>
     #   @return [Array<Types::Member>]
     # @!attribute unprocessed_accounts
-    #   <p>A list of objects that contain the unprocessed account and a result string that explains
-    #         why it was unprocessed.</p>
+    #   <p>A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class GetMembersResponse < Struct.new(
       nil,
@@ -3925,9 +4227,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty member account.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty member account.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute account_ids
     #   <p>A list of account identifiers of the GuardDuty member account.</p>
@@ -3942,12 +4242,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute accounts
-    #   <p>The member accounts which were included in a request and were processed
-    #         successfully.</p>
+    #   <p>The member accounts which were included in a request and were processed successfully.</p>
     #   @return [Array<Types::AccountFreeTrialInfo>]
     # @!attribute unprocessed_accounts
-    #   <p>The member account that was included in a request but for which the request could not be
-    #         processed.</p>
+    #   <p>The member account that was included in a request but for which the request could not be processed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class GetRemainingFreeTrialDaysResponse < Struct.new(
       nil,
@@ -3959,9 +4257,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector associated with the threat entity set resource.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector associated with the threat entity set resource.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute threat_entity_set_id
     #   <p>The unique ID that helps GuardDuty identify the threat entity set.</p>
@@ -3985,8 +4281,7 @@ module Aws::GuardDuty
     #   <p>The URI of the file that contains the threat entity set.</p>
     #   @return [String]
     # @!attribute expected_bucket_owner
-    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
-    #          parameter.</p>
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the associated threat entity set.</p>
@@ -4020,9 +4315,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with the threatIntelSet.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with the threatIntelSet.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute threat_intel_set_id
     #   <p>The unique ID of the threatIntelSet that you want to get.</p>
@@ -4037,8 +4330,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute name
-    #   <p>A user-friendly ThreatIntelSet name displayed in all findings that are generated by
-    #         activity that involves IP addresses included in this ThreatIntelSet.</p>
+    #   <p>A user-friendly ThreatIntelSet name displayed in all findings that are generated by activity that involves IP addresses included in this ThreatIntelSet.</p>
     #   @return [String]
     # @!attribute format
     #   <p>The format of the threatIntelSet.</p>
@@ -4053,8 +4345,7 @@ module Aws::GuardDuty
     #   <p>The tags of the threat list resource.</p>
     #   @return [Hash<String, String>]
     # @!attribute expected_bucket_owner
-    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter. 
-    #         This field appears in the response only if it was provided during ThreatIntelSet creation or update.</p>
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter. This field appears in the response only if it was provided during ThreatIntelSet creation or update.</p>
     #   @return [String]
     class GetThreatIntelSetResponse < Struct.new(
       nil,
@@ -4094,8 +4385,7 @@ module Aws::GuardDuty
     #   <p>The URI of the file that contains the trusted entity set.</p>
     #   @return [String]
     # @!attribute expected_bucket_owner
-    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
-    #          parameter.</p>
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The status of the associated trusted entity set.</p>
@@ -4129,10 +4419,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the detector that specifies the GuardDuty service whose usage statistics you
-    #         want to retrieve.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector that specifies the GuardDuty service whose usage statistics you want to retrieve.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute usage_statistic_type
     #   <p>The type of usage statistics to retrieve.</p>
@@ -4141,17 +4428,13 @@ module Aws::GuardDuty
     #   <p>Represents the criteria used for querying usage.</p>
     #   @return [Types::UsageCriteria]
     # @!attribute unit
-    #   <p>The currency unit you would like to view your usage statistics in. Current valid values
-    #         are USD.</p>
+    #   <p>The currency unit you would like to view your usage statistics in. Current valid values are USD.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to use for paginating results that are returned in the response. Set the value of
-    #         this parameter to null for the first request to a list action. For subsequent calls, use the
-    #         NextToken value returned from the previous request to continue listing results after the first
-    #         page.</p>
+    #   <p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.</p>
     #   @return [String]
     class GetUsageStatisticsRequest < Struct.new(
       nil,
@@ -4167,12 +4450,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute usage_statistics
-    #   <p>The usage statistics object. If a UsageStatisticType was provided, the objects
-    #         representing other types will be null.</p>
+    #   <p>The usage statistics object. If a UsageStatisticType was provided, the objects representing other types will be null.</p>
     #   @return [Types::UsageStatistics]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class GetUsageStatisticsResponse < Struct.new(
       nil,
@@ -4183,8 +4464,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains details of the highest severity threat detected during scan and number of
-    #       infected files.</p>
+    # <p>Contains details of the highest severity threat detected during scan and number of infected files.</p>
     # @!attribute severity
     #   <p>Severity level of the highest severity threat detected.</p>
     #   @return [String]
@@ -4204,8 +4484,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a pre-existing file or directory on the host machine that the volume maps
-    #       to.</p>
+    # <p>Represents a pre-existing file or directory on the host machine that the volume maps to.</p>
     # @!attribute path
     #   <p>Path of the file or directory on the host that the volume maps to.</p>
     #   @return [String]
@@ -4233,6 +4512,18 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about the IAM instance profile involved in a GuardDuty finding, including unique identifiers of the Amazon EC2 instances.</p>
+    # @!attribute ec2_instance_uids
+    #   <p>A list of unique identifiers for the compromised Amazon EC2 instances that share the same IAM instance profile.</p>
+    #   @return [Array<String>]
+    class IamInstanceProfileV2 < Struct.new(
+      nil,
+      :ec2_instance_uids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the impersonated user.</p>
     # @!attribute username
     #   <p>Information about the <code>username</code> that was being impersonated.</p>
@@ -4249,16 +4540,24 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the indicators that include a set of 
-    #        signals observed in an attack sequence.</p>
+    # <p>Contains information about the incremental scan configuration.</p>
+    # @!attribute baseline_resource_arn
+    #   <p>Amazon Resource Name (ARN) of the baseline resource used for incremental scanning. The scan will only process changes since this baseline resource was created.</p>
+    #   @return [String]
+    class IncrementalScanDetails < Struct.new(
+      nil,
+      :baseline_resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the indicators that include a set of signals observed in an attack sequence.</p>
     # @!attribute key
-    #   <p>Specific indicator keys observed in the attack sequence. For description of the valid values for key,
-    #           see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#guardduty-extended-threat-detection-attack-sequence-finding-details">Attack sequence finding details</a> in the <i>Amazon GuardDuty User Guide</i>.</p>
+    #   <p>Specific indicator keys observed in the attack sequence. For description of the valid values for key, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-summary.html#guardduty-extended-threat-detection-attack-sequence-finding-details">Attack sequence finding details</a> in the <i>Amazon GuardDuty User Guide</i>.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>Values associated with each indicator key. For example, if the indicator key is
-    #           <code>SUSPICIOUS_NETWORK</code>, then the value will be the name of the network. If
-    #           the indicator key is <code>ATTACK_TACTIC</code>, then the value will be one of the MITRE tactics. </p>
+    #   <p>Values associated with each indicator key. For example, if the indicator key is <code>SUSPICIOUS_NETWORK</code>, then the value will be the name of the network. If the indicator key is <code>ATTACK_TACTIC</code>, then the value will be one of the MITRE tactics. </p>
     #   @return [Array<String>]
     # @!attribute title
     #   <p>Title describing the indicator.</p>
@@ -4296,8 +4595,7 @@ module Aws::GuardDuty
     #   <p>The type of the EC2 instance.</p>
     #   @return [String]
     # @!attribute outpost_arn
-    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Outpost. Only applicable to Amazon Web Services Outposts
-    #         instances.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Outpost. Only applicable to Amazon Web Services Outposts instances.</p>
     #   @return [String]
     # @!attribute launch_time
     #   <p>The launch time of the EC2 instance.</p>
@@ -4350,13 +4648,148 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the details and results of a GuardDuty investigation.</p>
+    # @!attribute investigation_id
+    #   <p>The unique identifier of the investigation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the investigation. Possible values are <code>RUNNING</code>, <code>COMPLETED</code>, and <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute trigger_prompt
+    #   <p>The natural-language prompt that initiated this investigation.</p>
+    #   @return [String]
+    # @!attribute triggered_by
+    #   <p>The account that initiated the investigation.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>Metadata about the product and version that produced the investigation.</p>
+    #   @return [Types::InvestigationMetadata]
+    # @!attribute cloud
+    #   <p>Details about the cloud environment in which the investigation was performed, including the provider, region, and account.</p>
+    #   @return [Types::CloudDetails]
+    # @!attribute risk_level
+    #   <p>The assessed risk level of the investigated threat. Possible values are <code>Info</code>, <code>Low</code>, <code>Medium</code>, <code>High</code>, and <code>Critical</code>.</p>
+    #   @return [String]
+    # @!attribute risk
+    #   <p>A human-readable description of the assessed risk.</p>
+    #   @return [String]
+    # @!attribute confidence
+    #   <p>The confidence level of the investigation's assessment. Possible values are <code>Unknown</code>, <code>Low</code>, <code>Medium</code>, and <code>High</code>.</p>
+    #   @return [String]
+    # @!attribute summary
+    #   <p>A structured summary of the investigation findings, including affected resources, threat assessment, and recommended remediation steps.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The timestamp at which the investigation started.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The timestamp at which the investigation completed.</p>
+    #   @return [Time]
+    # @!attribute error
+    #   <p>Details about the error if the investigation status is <code>FAILED</code>.</p>
+    #   @return [String]
+    class Investigation < Struct.new(
+      nil,
+      :investigation_id,
+      :status,
+      :trigger_prompt,
+      :triggered_by,
+      :metadata,
+      :cloud,
+      :risk_level,
+      :risk,
+      :confidence,
+      :summary,
+      :start_time,
+      :end_time,
+      :error,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata about the product and version that produced an investigation.</p>
+    # @!attribute version
+    #   <p>The version of the investigation engine that produced the results.</p>
+    #   @return [String]
+    # @!attribute product
+    #   <p>Information about the product that produced the investigation.</p>
+    #   @return [Types::Product]
+    class InvestigationMetadata < Struct.new(
+      nil,
+      :version,
+      :product,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the criteria used for sorting investigations.</p>
+    # @!attribute attribute_name
+    #   <p>The attribute by which to sort investigations.</p>
+    #   @return [String]
+    # @!attribute order_by
+    #   <p>The order in which the sorted results are to be displayed.</p>
+    #   @return [String]
+    class InvestigationSortCriteria < Struct.new(
+      nil,
+      :attribute_name,
+      :order_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a GuardDuty investigation.</p>
+    # @!attribute investigation_id
+    #   <p>The unique identifier of the investigation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the investigation.</p>
+    #   @return [String]
+    # @!attribute trigger_prompt
+    #   <p>The natural-language prompt that initiated this investigation.</p>
+    #   @return [String]
+    # @!attribute risk_level
+    #   <p>The assessed risk level of the investigated threat.</p>
+    #   @return [String]
+    # @!attribute confidence
+    #   <p>The confidence level of the investigation's assessment.</p>
+    #   @return [String]
+    # @!attribute title
+    #   <p>A short title summarizing the investigation.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The Amazon Web Services account ID associated with the investigation.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The timestamp at which the investigation started.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The timestamp at which the investigation completed.</p>
+    #   @return [Time]
+    class InvestigationSummary < Struct.new(
+      nil,
+      :investigation_id,
+      :status,
+      :trigger_prompt,
+      :risk_level,
+      :confidence,
+      :title,
+      :account_id,
+      :start_time,
+      :end_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the invitation to become a member account.</p>
     # @!attribute account_id
     #   <p>The ID of the account that the invitation was sent from.</p>
     #   @return [String]
     # @!attribute invitation_id
-    #   <p>The ID of the invitation. This value is used to validate the inviter account to the member
-    #         account.</p>
+    #   <p>The ID of the invitation. This value is used to validate the inviter account to the member account.</p>
     #   @return [String]
     # @!attribute relationship_status
     #   <p>The status of the relationship between the inviter and invitee accounts.</p>
@@ -4376,21 +4809,16 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty account with which you want to invite members.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty account with which you want to invite members.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute account_ids
-    #   <p>A list of account IDs of the accounts that you want to invite to GuardDuty as
-    #         members.</p>
+    #   <p>A list of account IDs of the accounts that you want to invite to GuardDuty as members.</p>
     #   @return [Array<String>]
     # @!attribute disable_email_notification
-    #   <p>A Boolean value that specifies whether you want to disable email notification to the
-    #         accounts that you are inviting to GuardDuty as members.</p>
+    #   <p>A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.</p>
     #   @return [Boolean]
     # @!attribute message
-    #   <p>The invitation message that you want to send to the accounts that you're inviting to
-    #         GuardDuty as members.</p>
+    #   <p>The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.</p>
     #   @return [String]
     class InviteMembersRequest < Struct.new(
       nil,
@@ -4404,8 +4832,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute unprocessed_accounts
-    #   <p>A list of objects that contain the unprocessed account and a result string that explains
-    #         why it was unprocessed.</p>
+    #   <p>A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class InviteMembersResponse < Struct.new(
       nil,
@@ -4415,8 +4842,31 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the nested item path and hash of the protected
-    #       resource.</p>
+    # <p>Contains detailed information about where a threat was detected.</p>
+    # @!attribute resource_arn
+    #   <p>Amazon Resource Name (ARN) of the resource where the threat was detected.</p>
+    #   @return [String]
+    # @!attribute item_path
+    #   <p>The path where the threat was detected.</p>
+    #   @return [String]
+    # @!attribute hash
+    #   <p>The hash value of the infected item.</p>
+    #   @return [String]
+    # @!attribute additional_info
+    #   <p>Additional information about the detected threat item.</p>
+    #   @return [Types::AdditionalInfo]
+    class ItemDetails < Struct.new(
+      nil,
+      :resource_arn,
+      :item_path,
+      :hash,
+      :additional_info,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about the nested item path and hash of the protected resource.</p>
     # @!attribute nested_item_path
     #   <p>The nested item path where the infected file was found.</p>
     #   @return [String]
@@ -4439,9 +4889,20 @@ module Aws::GuardDuty
     # @!attribute verb
     #   <p>The Kubernetes API request HTTP verb.</p>
     #   @return [String]
+    # @!attribute resource
+    #   <p>The resource component in the Kubernetes API call action.</p>
+    #   @return [String]
+    # @!attribute subresource
+    #   <p>The name of the sub-resource in the Kubernetes API call action.</p>
+    #   @return [String]
+    # @!attribute namespace
+    #   <p>The name of the namespace where the Kubernetes API call action takes place.</p>
+    #   @return [String]
+    # @!attribute resource_name
+    #   <p>The name of the resource in the Kubernetes API call action.</p>
+    #   @return [String]
     # @!attribute source_ips
-    #   <p>The IP of the Kubernetes API caller and the IPs of any proxies or load balancers between
-    #         the caller and the API endpoint.</p>
+    #   <p>The IP of the Kubernetes API caller and the IPs of any proxies or load balancers between the caller and the API endpoint.</p>
     #   @return [Array<String>]
     # @!attribute user_agent
     #   <p>The user agent of the caller of the Kubernetes API.</p>
@@ -4455,31 +4916,19 @@ module Aws::GuardDuty
     # @!attribute parameters
     #   <p>Parameters related to the Kubernetes API call action.</p>
     #   @return [String]
-    # @!attribute resource
-    #   <p>The resource component in the Kubernetes API call action.</p>
-    #   @return [String]
-    # @!attribute subresource
-    #   <p>The name of the sub-resource in the Kubernetes API call action.</p>
-    #   @return [String]
-    # @!attribute namespace
-    #   <p>The name of the namespace where the Kubernetes API call action takes place.</p>
-    #   @return [String]
-    # @!attribute resource_name
-    #   <p>The name of the resource in the Kubernetes API call action.</p>
-    #   @return [String]
     class KubernetesApiCallAction < Struct.new(
       nil,
       :request_uri,
       :verb,
+      :resource,
+      :subresource,
+      :namespace,
+      :resource_name,
       :source_ips,
       :user_agent,
       :remote_ip_details,
       :status_code,
       :parameters,
-      :resource,
-      :subresource,
-      :namespace,
-      :resource_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4533,8 +4982,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides details about the Kubernetes resources when it is enabled as a data
-    #       source.</p>
+    # <p>Provides details about the Kubernetes resources when it is enabled as a data source.</p>
     # @!attribute audit_logs
     #   <p>Describes whether Kubernetes audit logs are enabled as a data source.</p>
     #   @return [Types::DataSourceFreeTrial]
@@ -4546,8 +4994,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Details about Kubernetes resources such as a Kubernetes user or workload resource involved
-    #       in a Kubernetes finding.</p>
+    # <p>Details about Kubernetes resources such as a Kubernetes user or workload resource involved in a Kubernetes finding.</p>
     # @!attribute kubernetes_user_details
     #   <p>Details about the Kubernetes user involved in a Kubernetes finding.</p>
     #   @return [Types::KubernetesUserDetails]
@@ -4565,8 +5012,7 @@ module Aws::GuardDuty
 
     # <p>Information about the Kubernetes API for which you check if you have permission to call.</p>
     # @!attribute verb
-    #   <p>The verb component of the Kubernetes API call. For example, when you check whether or not you have the permission
-    #       to call the <code>CreatePod</code> API, the verb component will be <code>Create</code>.</p>
+    #   <p>The verb component of the Kubernetes API call. For example, when you check whether or not you have the permission to call the <code>CreatePod</code> API, the verb component will be <code>Create</code>.</p>
     #   @return [String]
     # @!attribute resource
     #   <p>The Kubernetes resource with which your Kubernetes API call will interact.</p>
@@ -4599,12 +5045,10 @@ module Aws::GuardDuty
     #   <p>The unique identifier of the role binding.</p>
     #   @return [String]
     # @!attribute role_ref_name
-    #   <p>The name of the role being referenced. This must match the name of the <code>Role</code>
-    #       or <code>ClusterRole</code> that you want to bind to.</p>
+    #   <p>The name of the role being referenced. This must match the name of the <code>Role</code> or <code>ClusterRole</code> that you want to bind to.</p>
     #   @return [String]
     # @!attribute role_ref_kind
-    #   <p>The type of the role being referenced. This could be either <code>Role</code> or 
-    #       <code>ClusterRole</code>.</p>
+    #   <p>The type of the role being referenced. This could be either <code>Role</code> or <code>ClusterRole</code>.</p>
     #   @return [String]
     class KubernetesRoleBindingDetails < Struct.new(
       nil,
@@ -4649,8 +5093,7 @@ module Aws::GuardDuty
     #   <p>The groups that include the user who called the Kubernetes API.</p>
     #   @return [Array<String>]
     # @!attribute session_name
-    #   <p>Entity that assumes the IAM role 
-    #         when Kubernetes RBAC permissions are assigned to that role.</p>
+    #   <p>Entity that assumes the IAM role when Kubernetes RBAC permissions are assigned to that role.</p>
     #   @return [Array<String>]
     # @!attribute impersonated_user
     #   <p>Information about the impersonated user.</p>
@@ -4667,8 +5110,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about Kubernetes workloads involved in a GuardDuty finding,
-    #       including pods, deployments, and other Kubernetes resources.</p>
+    # <p>Contains information about Kubernetes workloads involved in a GuardDuty finding, including pods, deployments, and other Kubernetes resources.</p>
     # @!attribute container_uids
     #   <p>A list of unique identifiers for the containers that are part of the Kubernetes workload.</p>
     #   @return [Array<String>]
@@ -4704,15 +5146,15 @@ module Aws::GuardDuty
     # @!attribute host_network
     #   <p>Whether the hostNetwork flag is enabled for the pods included in the workload.</p>
     #   @return [Boolean]
+    # @!attribute service_account_name
+    #   <p>The service account name that is associated with a Kubernetes workload.</p>
+    #   @return [String]
     # @!attribute containers
     #   <p>Containers running as part of the Kubernetes workload.</p>
     #   @return [Array<Types::Container>]
     # @!attribute volumes
     #   <p>Volumes used by the Kubernetes workload.</p>
     #   @return [Array<Types::Volume>]
-    # @!attribute service_account_name
-    #   <p>The service account name that is associated with a Kubernetes workload.</p>
-    #   @return [String]
     # @!attribute host_ipc
     #   <p>Whether the host IPC flag is enabled for the pods in the workload.</p>
     #   @return [Boolean]
@@ -4726,9 +5168,9 @@ module Aws::GuardDuty
       :uid,
       :namespace,
       :host_network,
+      :service_account_name,
       :containers,
       :volumes,
-      :service_account_name,
       :host_ipc,
       :host_pid,
       keyword_init: true
@@ -4747,8 +5189,7 @@ module Aws::GuardDuty
     #   <p>Description of the Lambda function.</p>
     #   @return [String]
     # @!attribute last_modified_at
-    #   <p>The timestamp when the Lambda function was last modified. This field is in the UTC date string 
-    #         format <code>(2023-03-22T19:37:20.168Z)</code>.</p>
+    #   <p>The timestamp when the Lambda function was last modified. This field is in the UTC date string format <code>(2023-03-22T19:37:20.168Z)</code>.</p>
     #   @return [Time]
     # @!attribute revision_id
     #   <p>The revision ID of the Lambda function version.</p>
@@ -4763,8 +5204,7 @@ module Aws::GuardDuty
     #   <p>Amazon Virtual Private Cloud configuration details associated with your Lambda function.</p>
     #   @return [Types::VpcConfig]
     # @!attribute tags
-    #   <p>A list of tags attached to this resource, listed in the format of 
-    #         <code>key</code>:<code>value</code> pair.</p>
+    #   <p>A list of tags attached to this resource, listed in the format of <code>key</code>:<code>value</code> pair.</p>
     #   @return [Array<Types::Tag>]
     class LambdaDetails < Struct.new(
       nil,
@@ -4808,8 +5248,7 @@ module Aws::GuardDuty
     #   <p>The effective user ID that was used to execute the process.</p>
     #   @return [Integer]
     # @!attribute parent_uuid
-    #   <p>The unique ID of the parent process. This ID is assigned to the parent process by
-    #         GuardDuty.</p>
+    #   <p>The unique ID of the parent process. This ID is assigned to the parent process by GuardDuty.</p>
     #   @return [String]
     class LineageObject < Struct.new(
       nil,
@@ -4828,15 +5267,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector whose coverage details you want to retrieve.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector whose coverage details you want to retrieve.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A token to use for paginating results that are returned in the response. Set the value of
-    #         this parameter to null for the first request to a list action. For subsequent calls, use the
-    #         NextToken value returned from the previous request to continue listing results after the first
-    #         page.</p>
+    #   <p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return in the response.</p>
@@ -4863,8 +5297,7 @@ module Aws::GuardDuty
     #   <p>A list of resources and their attributes providing cluster details.</p>
     #   @return [Array<Types::CoverageResource>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListCoverageResponse < Struct.new(
       nil,
@@ -4876,14 +5309,116 @@ module Aws::GuardDuty
     end
 
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of items that you want in the
-    #         response. The default value is 50. The maximum value is 50.</p>
+    #   <p>The maximum number of results to return in a single page. Minimum value of 1, maximum value of 100.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value of this parameter to
-    #         null on your first call to the list action. For subsequent calls to the action, fill nextToken
-    #         in the request with the value of NextToken from the previous response to continue listing
-    #         data.</p>
+    #   <p>A pagination token from a previous response. Use this token to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule to filter associations by.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The rule execution mode to filter associations by.</p>
+    #   @return [String]
+    class ListCustomDetectionRuleAssociationsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :rule_id,
+      :mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_associations
+    #   <p>A list of custom detection rule association summaries.</p>
+    #   @return [Array<Types::AssociationSummary>]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next page of results. If this field is empty, there are no additional results.</p>
+    #   @return [String]
+    class ListCustomDetectionRuleAssociationsResponse < Struct.new(
+      nil,
+      :rule_associations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single page. Minimum value of 1, maximum value of 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A pagination token from a previous response. Use this token to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The configuration status to filter by.</p>
+    #   @return [String]
+    class ListCustomDetectionRuleOrgConfigurationsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute configurations
+    #   <p>A list of organization configurations for custom detection rules.</p>
+    #   @return [Array<Types::DetectionRuleOrgConfigurationSummary>]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next page of results. If this field is empty, there are no additional results.</p>
+    #   @return [String]
+    class ListCustomDetectionRuleOrgConfigurationsResponse < Struct.new(
+      nil,
+      :configurations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single page. Minimum value of 1, maximum value of 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A pagination token from a previous response. Use this token to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>A list of filter criteria to apply when listing custom detection rules.</p>
+    #   @return [Array<Types::DetectionRuleFilter>]
+    class ListCustomDetectionRulesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rules
+    #   <p>A list of custom detection rule summaries.</p>
+    #   @return [Array<Types::RuleSummary>]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next page of results. If this field is empty, there are no additional results.</p>
+    #   @return [String]
+    class ListCustomDetectionRulesResponse < Struct.new(
+      nil,
+      :rules,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListDetectorsRequest < Struct.new(
       nil,
@@ -4898,8 +5433,7 @@ module Aws::GuardDuty
     #   <p>A list of detector IDs.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListDetectorsResponse < Struct.new(
       nil,
@@ -4911,19 +5445,13 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with the filter.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with the filter.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of items that you want in the
-    #         response. The default value is 50. The maximum value is 50.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value of this parameter to
-    #         null on your first call to the list action. For subsequent calls to the action, fill nextToken
-    #         in the request with the value of NextToken from the previous response to continue listing
-    #         data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListFiltersRequest < Struct.new(
       nil,
@@ -4939,8 +5467,7 @@ module Aws::GuardDuty
     #   <p>A list of filter names.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListFiltersResponse < Struct.new(
       nil,
@@ -4952,182 +5479,19 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the detector that specifies the GuardDuty service whose findings you want to
-    #         list.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector that specifies the GuardDuty service whose findings you want to list.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute finding_criteria
-    #   <p>Represents the criteria used for querying findings. Valid values include:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>JSON field name</p>
-    #               </li>
-    #               <li>
-    #                  <p>accountId</p>
-    #               </li>
-    #               <li>
-    #                  <p>region</p>
-    #               </li>
-    #               <li>
-    #                  <p>confidence</p>
-    #               </li>
-    #               <li>
-    #                  <p>id</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.accessKeyDetails.accessKeyId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.accessKeyDetails.principalId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.accessKeyDetails.userName</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.accessKeyDetails.userType</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.iamInstanceProfile.id</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.imageId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.instanceId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.publicDnsName</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.publicIp</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.subnetId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.networkInterfaces.vpcId</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.tags.key</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.instanceDetails.tags.value</p>
-    #               </li>
-    #               <li>
-    #                  <p>resource.resourceType</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.actionType</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.api</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.callerType</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.awsApiCallAction.serviceName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.dnsRequestAction.domain</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.dnsRequestAction.domainWithSuffix</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.blocked</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.connectionDirection</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.localPortDetails.port</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.protocol</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.action.networkConnectionAction.remotePortDetails.port</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.additionalInfo.threatListName</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.archived</p>
-    #                  <p>When this attribute is set to 'true', only archived findings are listed. When it's set
-    #             to 'false', only unarchived findings are listed. When this attribute is not set, all
-    #             existing findings are listed.</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.ebsVolumeScanDetails.scanId</p>
-    #               </li>
-    #               <li>
-    #                  <p>service.resourceRole</p>
-    #               </li>
-    #               <li>
-    #                  <p>severity</p>
-    #               </li>
-    #               <li>
-    #                  <p>type</p>
-    #               </li>
-    #               <li>
-    #                  <p>updatedAt</p>
-    #                  <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p>
-    #               </li>
-    #            </ul>
+    #   <p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.dnsRequestAction.domainWithSuffix</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.ebsVolumeScanDetails.scanId</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>
     #   @return [Types::FindingCriteria]
     # @!attribute sort_criteria
     #   <p>Represents the criteria used for sorting findings.</p>
     #   @return [Types::SortCriteria]
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of items you want in the
-    #         response. The default value is 50. The maximum value is 50.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value of this parameter to
-    #         null on your first call to the list action. For subsequent calls to the action, fill nextToken
-    #         in the request with the value of NextToken from the previous response to continue listing
-    #         data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListFindingsRequest < Struct.new(
       nil,
@@ -5145,8 +5509,7 @@ module Aws::GuardDuty
     #   <p>The IDs of the findings that you're listing.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListFindingsResponse < Struct.new(
       nil,
@@ -5158,19 +5521,13 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with IPSet.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with IPSet.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of items you want in the
-    #         response. The default value is 50. The maximum value is 50.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value of this parameter to
-    #         null on your first call to the list action. For subsequent calls to the action, fill nextToken
-    #         in the request with the value of NextToken from the previous response to continue listing
-    #         data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListIPSetsRequest < Struct.new(
       nil,
@@ -5186,8 +5543,7 @@ module Aws::GuardDuty
     #   <p>The IDs of the IPSet resources.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListIPSetsResponse < Struct.new(
       nil,
@@ -5198,15 +5554,49 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute detector_id
+    #   <p>The unique ID of the GuardDuty detector whose investigations you want to list.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute sort_criteria
+    #   <p>Represents the criteria used for sorting investigations.</p>
+    #   @return [Types::InvestigationSortCriteria]
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of items that you want in the
-    #         response. The default value is 50. The maximum value is 50.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value of this parameter to
-    #         null on your first call to the list action. For subsequent calls to the action, fill nextToken
-    #         in the request with the value of NextToken from the previous response to continue listing
-    #         data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
+    #   @return [String]
+    class ListInvestigationsRequest < Struct.new(
+      nil,
+      :detector_id,
+      :sort_criteria,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute investigations
+    #   <p>A list of investigation summaries associated with the specified detector.</p>
+    #   @return [Array<Types::InvestigationSummary>]
+    # @!attribute next_token
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
+    #   @return [String]
+    class ListInvestigationsResponse < Struct.new(
+      nil,
+      :investigations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListInvitationsRequest < Struct.new(
       nil,
@@ -5221,8 +5611,7 @@ module Aws::GuardDuty
     #   <p>A list of invitation descriptions.</p>
     #   @return [Array<Types::Invitation>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListInvitationsResponse < Struct.new(
       nil,
@@ -5234,11 +5623,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value 
-    #         of this parameter to null on your first call to the list action. 
-    #         For subsequent calls to the action, fill nextToken in the request 
-    #         with the value of <code>NextToken</code> from the previous response to 
-    #         continue listing data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of <code>NextToken</code> from the previous response to continue listing data. The default page size is 100 plans.</p>
     #   @return [String]
     class ListMalwareProtectionPlansRequest < Struct.new(
       nil,
@@ -5252,11 +5637,7 @@ module Aws::GuardDuty
     #   <p>A list of unique identifiers associated with each Malware Protection plan.</p>
     #   @return [Array<Types::MalwareProtectionPlanSummary>]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value 
-    #         of this parameter to null on your first call to the list action. 
-    #         For subsequent calls to the action, fill nextToken in the request 
-    #         with the value of <code>NextToken</code> from the previous response to 
-    #         continue listing data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of <code>NextToken</code> from the previous response to continue listing data.</p>
     #   @return [String]
     class ListMalwareProtectionPlansResponse < Struct.new(
       nil,
@@ -5267,28 +5648,83 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with the member.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # <p>Represents the criteria used to filter the malware scan entries.</p>
+    # @!attribute list_malware_scans_filter_criterion
+    #   <p>Represents a condition that when matched will be added to the response of the operation.</p>
+    #   @return [Array<Types::ListMalwareScansFilterCriterion>]
+    class ListMalwareScansFilterCriteria < Struct.new(
+      nil,
+      :list_malware_scans_filter_criterion,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a condition that when matched will be added to the response of the operation. Irrespective of using any filter criteria, an administrator account can view the scan entries for all of its member accounts. However, each member account can view the scan entries only for their own account.</p>
+    # @!attribute list_malware_scans_criterion_key
+    #   <p>An enum value representing possible scan properties to match with given scan entries.</p>
     #   @return [String]
+    # @!attribute filter_condition
+    #   <p>Contains information about the condition.</p>
+    #   @return [Types::FilterCondition]
+    class ListMalwareScansFilterCriterion < Struct.new(
+      nil,
+      :list_malware_scans_criterion_key,
+      :filter_condition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of items you want in the
-    #         response. The default value is 50. The maximum value is 50.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value of this parameter to
-    #         null on your first call to the list action. For subsequent calls to the action, fill nextToken
-    #         in the request with the value of NextToken from the previous response to continue listing
-    #         data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing results.</p>
+    #   @return [String]
+    # @!attribute filter_criteria
+    #   <p>Represents the criteria used to filter the malware scan entries.</p>
+    #   @return [Types::ListMalwareScansFilterCriteria]
+    # @!attribute sort_criteria
+    #   <p>Represents the criteria used for sorting malware scan entries.</p>
+    #   @return [Types::SortCriteria]
+    class ListMalwareScansRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :filter_criteria,
+      :sort_criteria,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute scans
+    #   <p>The list of malware scans associated with the provided input parameters.</p>
+    #   @return [Array<Types::MalwareScan>]
+    # @!attribute next_token
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more scans.</p>
+    #   @return [String]
+    class ListMalwareScansResponse < Struct.new(
+      nil,
+      :scans,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute detector_id
+    #   <p>The unique ID of the detector that is associated with the member.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     # @!attribute only_associated
-    #   <p>Specifies whether to only return associated members or to return all members (including
-    #         members who haven't been invited yet or have been disassociated). Member accounts must have
-    #         been previously associated with the GuardDuty administrator account using <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html">
-    #                  <code>Create
-    #             Members</code>
-    #               </a>. </p>
+    #   <p>Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated). Member accounts must have been previously associated with the GuardDuty administrator account using <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html"> <code>Create Members</code> </a>. </p>
     #   @return [String]
     class ListMembersRequest < Struct.new(
       nil,
@@ -5302,15 +5738,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute members
-    #   <p>A list of members.</p>
-    #            <note>
-    #               <p>The values for <code>email</code> and <code>invitedAt</code> are available
-    #       only if the member accounts are added by invitation.</p>
-    #            </note>
+    #   <p>A list of members.</p> <note> <p>The values for <code>email</code> and <code>invitedAt</code> are available only if the member accounts are added by invitation.</p> </note>
     #   @return [Array<Types::Member>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListMembersResponse < Struct.new(
       nil,
@@ -5325,10 +5756,7 @@ module Aws::GuardDuty
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to use for paginating results that are returned in the response. Set the value of
-    #         this parameter to null for the first request to a list action. For subsequent calls, use the
-    #           <code>NextToken</code> value returned from the previous request to continue listing results
-    #         after the first page.</p>
+    #   <p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.</p>
     #   @return [String]
     class ListOrganizationAdminAccountsRequest < Struct.new(
       nil,
@@ -5343,8 +5771,7 @@ module Aws::GuardDuty
     #   <p>A list of accounts configured as GuardDuty delegated administrators.</p>
     #   @return [Array<Types::AdminAccount>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListOrganizationAdminAccountsResponse < Struct.new(
       nil,
@@ -5356,18 +5783,13 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The detector ID for which you want to retrieve the publishing destination.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The detector ID for which you want to retrieve the publishing destination.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return in the response.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>A token to use for paginating results that are returned in the response. Set the value of
-    #         this parameter to null for the first request to a list action. For subsequent calls, use the
-    #           <code>NextToken</code> value returned from the previous request to continue listing results
-    #         after the first page.</p>
+    #   <p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.</p>
     #   @return [String]
     class ListPublishingDestinationsRequest < Struct.new(
       nil,
@@ -5380,14 +5802,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute destinations
-    #   <p>A <code>Destinations</code> object that includes information about each publishing
-    #         destination returned.</p>
+    #   <p>A <code>Destinations</code> object that includes information about each publishing destination returned.</p>
     #   @return [Array<Types::Destination>]
     # @!attribute next_token
-    #   <p>A token to use for paginating results that are returned in the response. Set the value of
-    #         this parameter to null for the first request to a list action. For subsequent calls, use the
-    #           <code>NextToken</code> value returned from the previous request to continue listing results
-    #         after the first page.</p>
+    #   <p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.</p>
     #   @return [String]
     class ListPublishingDestinationsResponse < Struct.new(
       nil,
@@ -5421,19 +5839,13 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of 
-    #          items you want in the response. The default value is 50.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value 
-    #          of this parameter to null on your first call to the list action. For
-    #          subsequent calls to the action, fill nextToken in the request 
-    #          with the value of NextToken from the previous response to continue listing data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListThreatEntitySetsRequest < Struct.new(
       nil,
@@ -5461,19 +5873,13 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with the threatIntelSet.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with the threatIntelSet.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of items that you want in the
-    #         response. The default value is 50. The maximum value is 50.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter to paginate results in the response. Set the value of this
-    #         parameter to null on your first call to the list action. For subsequent calls to the action,
-    #         fill nextToken in the request with the value of NextToken from the previous response to
-    #         continue listing data.</p>
+    #   <p>You can use this parameter to paginate results in the response. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListThreatIntelSetsRequest < Struct.new(
       nil,
@@ -5489,8 +5895,7 @@ module Aws::GuardDuty
     #   <p>The IDs of the ThreatIntelSet resources.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>The pagination parameter to be used on the next list operation to retrieve more
-    #         items.</p>
+    #   <p>The pagination parameter to be used on the next list operation to retrieve more items.</p>
     #   @return [String]
     class ListThreatIntelSetsResponse < Struct.new(
       nil,
@@ -5502,19 +5907,13 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>You can use this parameter to indicate the maximum number of 
-    #          items you want in the response. The default value is 50.</p>
+    #   <p>You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>You can use this parameter when paginating results. Set the value 
-    #          of this parameter to null on your first call to the list action. For
-    #          subsequent calls to the action, fill nextToken in the request 
-    #          with the value of NextToken from the previous response to continue listing data.</p>
+    #   <p>You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.</p>
     #   @return [String]
     class ListTrustedEntitySetsRequest < Struct.new(
       nil,
@@ -5581,12 +5980,10 @@ module Aws::GuardDuty
     #   <p>Indicates the application name used to attempt log in.</p>
     #   @return [String]
     # @!attribute failed_login_attempts
-    #   <p>Represents the sum of failed (unsuccessful) login attempts made to establish a connection
-    #         to the database instance.</p>
+    #   <p>Represents the sum of failed (unsuccessful) login attempts made to establish a connection to the database instance.</p>
     #   @return [Integer]
     # @!attribute successful_login_attempts
-    #   <p>Represents the sum of successful connections (a correct combination of login attributes)
-    #         made to the database instance by the actor.</p>
+    #   <p>Represents the sum of successful connections (a correct combination of login attributes) made to the database instance by the actor.</p>
     #   @return [Integer]
     class LoginAttribute < Struct.new(
       nil,
@@ -5611,8 +6008,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information on the status of all Malware Protection data
-    #       sources.</p>
+    # <p>An object that contains information on the status of all Malware Protection data sources.</p>
     # @!attribute scan_ec2_instance_with_findings
     #   <p>Describes the configuration of Malware Protection for EC2 instances with findings.</p>
     #   @return [Types::ScanEc2InstanceWithFindingsResult]
@@ -5630,12 +6026,27 @@ module Aws::GuardDuty
 
     # <p>Provides details about Malware Protection when it is enabled as a data source.</p>
     # @!attribute scan_ec2_instance_with_findings
-    #   <p>Describes whether Malware Protection for EC2 instances with findings is enabled as a data
-    #         source.</p>
+    #   <p>Describes whether Malware Protection for EC2 instances with findings is enabled as a data source.</p>
     #   @return [Types::DataSourceFreeTrial]
     class MalwareProtectionDataSourceFreeTrial < Struct.new(
       nil,
       :scan_ec2_instance_with_findings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains finding configuration details about the malware scan.</p>
+    # @!attribute trigger_type
+    #   <p>The event that triggered the malware scan.</p>
+    #   @return [String]
+    # @!attribute incremental_scan_details
+    #   <p>Contains information about the incremental scan configuration.</p>
+    #   @return [Types::IncrementalScanDetails]
+    class MalwareProtectionFindingsScanConfiguration < Struct.new(
+      nil,
+      :trigger_type,
+      :incremental_scan_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5653,16 +6064,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the issue code and message associated to the status of
-    #       your Malware Protection plan.</p>
+    # <p>Information about the issue code and message associated to the status of your Malware Protection plan.</p>
     # @!attribute code
     #   <p>Issue code.</p>
     #   @return [String]
     # @!attribute message
-    #   <p>Issue message that specifies the reason. For information
-    #         about potential troubleshooting steps, see
-    #         <a href="https://docs.aws.amazon.com/guardduty/latest/ug/troubleshoot-s3-malware-protection-status-errors.html">Troubleshooting Malware Protection for S3 status issues</a> in the 
-    #         <i>Amazon GuardDuty User Guide</i>.</p>
+    #   <p>Issue message that specifies the reason. For information about potential troubleshooting steps, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/troubleshoot-s3-malware-protection-status-errors.html">Troubleshooting Malware Protection for S3 status issues</a> in the <i>Amazon GuardDuty User Guide</i>.</p>
     #   @return [String]
     class MalwareProtectionPlanStatusReason < Struct.new(
       nil,
@@ -5697,14 +6104,73 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about a particular malware scan.</p>
+    # @!attribute resource_arn
+    #   <p>Amazon Resource Name (ARN) of the resource for the given malware scan.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of resource that was scanned for malware.</p>
+    #   @return [String]
+    # @!attribute scan_id
+    #   <p>A unique identifier that gets generated when you invoke the API without any error. Each malware scan has a corresponding scan ID. Using this scan ID, you can monitor the status of your malware scan.</p>
+    #   @return [String]
+    # @!attribute scan_status
+    #   <p>An enum value representing the current status of the malware scan.</p>
+    #   @return [String]
+    # @!attribute scan_result_status
+    #   <p>An enum value representing the result of the malware scan.</p>
+    #   @return [String]
+    # @!attribute scan_type
+    #   <p>An enum value representing the type of scan that was initiated.</p>
+    #   @return [String]
+    # @!attribute scan_started_at
+    #   <p>The timestamp representing when the malware scan was started.</p>
+    #   @return [Time]
+    # @!attribute scan_completed_at
+    #   <p>The timestamp representing when the malware scan was completed.</p>
+    #   @return [Time]
+    class MalwareScan < Struct.new(
+      nil,
+      :resource_arn,
+      :resource_type,
+      :scan_id,
+      :scan_status,
+      :scan_result_status,
+      :scan_type,
+      :scan_started_at,
+      :scan_completed_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about the malware scan that generated a GuardDuty finding.</p>
     # @!attribute threats
-    #   <p>Information about the detected threats associated with the
-    #         generated GuardDuty finding.</p>
+    #   <p>Information about the detected threats associated with the generated GuardDuty finding.</p>
     #   @return [Array<Types::Threat>]
+    # @!attribute scan_id
+    #   <p>The unique identifier for the malware scan.</p>
+    #   @return [String]
+    # @!attribute scan_type
+    #   <p>The type of malware scan performed.</p>
+    #   @return [String]
+    # @!attribute scan_category
+    #   <p>The category of the malware scan.</p>
+    #   @return [String]
+    # @!attribute scan_configuration
+    #   <p>The configuration settings used for the malware scan.</p>
+    #   @return [Types::MalwareProtectionFindingsScanConfiguration]
+    # @!attribute unique_threat_count
+    #   <p>The number of unique malware threats detected during the scan.</p>
+    #   @return [Integer]
     class MalwareScanDetails < Struct.new(
       nil,
       :threats,
+      :scan_id,
+      :scan_type,
+      :scan_category,
+      :scan_configuration,
+      :unique_threat_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5792,22 +6258,23 @@ module Aws::GuardDuty
 
     # <p>Information about the additional configuration for the member account.</p>
     # @!attribute name
-    #   <p>Indicates the name of the additional configuration that is set for the member
-    #         account.</p>
+    #   <p>Indicates the name of the additional configuration that is set for the member account.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>Indicates the status of the additional configuration that is set for the member
-    #         account.</p>
+    #   <p>Indicates the status of the additional configuration that is set for the member account.</p>
     #   @return [String]
     # @!attribute updated_at
-    #   <p>The timestamp at which the additional configuration was set for the member account. This
-    #         is in UTC format.</p>
+    #   <p>The timestamp at which the additional configuration was set for the member account. This is in UTC format.</p>
     #   @return [Time]
+    # @!attribute managed_by
+    #   <p>Indicates what manages the additional configuration. A value of <code>GUARDDUTY_POLICY</code> means a GuardDuty policy manages the additional configuration.</p>
+    #   @return [String]
     class MemberAdditionalConfigurationResult < Struct.new(
       nil,
       :name,
       :status,
       :updated_at,
+      :managed_by,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5866,15 +6333,30 @@ module Aws::GuardDuty
     #   <p>The timestamp at which the feature object was updated.</p>
     #   @return [Time]
     # @!attribute additional_configuration
-    #   <p>Indicates the additional configuration of the feature that is configured for the member
-    #         account.</p>
+    #   <p>Indicates the additional configuration of the feature that is configured for the member account.</p>
     #   @return [Array<Types::MemberAdditionalConfigurationResult>]
+    # @!attribute managed_by
+    #   <p>Indicates what manages the feature. A value of <code>GUARDDUTY_POLICY</code> means a GuardDuty policy manages the feature.</p>
+    #   @return [String]
     class MemberFeaturesConfigurationResult < Struct.new(
       nil,
       :name,
       :status,
       :updated_at,
       :additional_configuration,
+      :managed_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the AI model involved in a finding.</p>
+    # @!attribute model_id
+    #   <p>The identifier of the AI model.</p>
+    #   @return [String]
+    class ModelDetail < Struct.new(
+      nil,
+      :model_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6044,9 +6526,13 @@ module Aws::GuardDuty
     # @!attribute text
     #   <p>The text that was unusual.</p>
     #   @return [Array<String>]
+    # @!attribute number
+    #   <p>The numeric values that were unusual.</p>
+    #   @return [Array<Integer>]
     class Observations < Struct.new(
       nil,
       :text,
+      :number,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6054,8 +6540,7 @@ module Aws::GuardDuty
 
     # <p>Contains information about the ISP organization of the remote IP address.</p>
     # @!attribute asn
-    #   <p>The Autonomous System Number (ASN) of the internet provider of the remote IP
-    #         address.</p>
+    #   <p>The Autonomous System Number (ASN) of the internet provider of the remote IP address.</p>
     #   @return [String]
     # @!attribute asn_org
     #   <p>The organization that registered this ASN.</p>
@@ -6077,39 +6562,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A list of additional configurations which will be configured for the organization. </p>
-    #          <p>Additional configuration applies to only GuardDuty Runtime Monitoring protection plan.</p>
+    # <p>A list of additional configurations which will be configured for the organization. </p> <p>Additional configuration applies to only GuardDuty Runtime Monitoring protection plan.</p>
     # @!attribute name
-    #   <p>The name of the additional configuration that will be configured for the
-    #         organization. These values are applicable to only Runtime Monitoring protection plan.</p>
+    #   <p>The name of the additional configuration that will be configured for the organization. These values are applicable to only Runtime Monitoring protection plan.</p>
     #   @return [String]
     # @!attribute auto_enable
-    #   <p>The status of the additional configuration that will be configured for the
-    #         organization. Use one of the following 
-    #         values to configure the feature status for the entire organization:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NEW</code>: Indicates that when a new account joins the organization, they will
-    #             have the additional configuration enabled automatically. </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ALL</code>: Indicates that all accounts in the organization have 
-    #             the additional configuration
-    #             enabled automatically. This includes <code>NEW</code> accounts that join the organization
-    #             and accounts that may have been suspended or removed from the organization in
-    #             GuardDuty.</p>
-    #                  <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: Indicates that the additional configuration will not be 
-    #             automatically enabled for any
-    #             account in the organization. The administrator must manage the additional configuration 
-    #             for each account individually.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The status of the additional configuration that will be configured for the organization. Use one of the following values to configure the feature status for the entire organization:</p> <ul> <li> <p> <code>NEW</code>: Indicates that when a new account joins the organization, they will have the additional configuration enabled automatically. </p> </li> <li> <p> <code>ALL</code>: Indicates that all accounts in the organization have the additional configuration enabled automatically. This includes <code>NEW</code> accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.</p> <p>It may take up to 24 hours to update the configuration for all the member accounts.</p> </li> <li> <p> <code>NONE</code>: Indicates that the additional configuration will not be automatically enabled for any account in the organization. The administrator must manage the additional configuration for each account individually.</p> </li> </ul>
     #   @return [String]
     class OrganizationAdditionalConfiguration < Struct.new(
       nil,
@@ -6122,36 +6580,10 @@ module Aws::GuardDuty
 
     # <p>A list of additional configuration which will be configured for the organization.</p>
     # @!attribute name
-    #   <p>The name of the additional configuration that is configured for the member accounts within
-    #         the organization. These values are applicable to only Runtime Monitoring protection plan.</p>
+    #   <p>The name of the additional configuration that is configured for the member accounts within the organization. These values are applicable to only Runtime Monitoring protection plan.</p>
     #   @return [String]
     # @!attribute auto_enable
-    #   <p>Describes the status of the additional configuration that is configured for the
-    #         member accounts within the organization. One of the following 
-    #       values is the status for the entire organization:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NEW</code>: Indicates that when a new account joins the organization, they will
-    #             have the additional configuration enabled automatically. </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ALL</code>: Indicates that all accounts in the organization have 
-    #             the additional configuration
-    #             enabled automatically. This includes <code>NEW</code> accounts that join the organization
-    #             and accounts that may have been suspended or removed from the organization in
-    #             GuardDuty.</p>
-    #                  <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: Indicates that the additional configuration will not be 
-    #             automatically enabled for any
-    #             account in the organization. The administrator must manage the additional configuration 
-    #             for each account individually.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Describes the status of the additional configuration that is configured for the member accounts within the organization. One of the following values is the status for the entire organization:</p> <ul> <li> <p> <code>NEW</code>: Indicates that when a new account joins the organization, they will have the additional configuration enabled automatically. </p> </li> <li> <p> <code>ALL</code>: Indicates that all accounts in the organization have the additional configuration enabled automatically. This includes <code>NEW</code> accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.</p> <p>It may take up to 24 hours to update the configuration for all the member accounts.</p> </li> <li> <p> <code>NONE</code>: Indicates that the additional configuration will not be automatically enabled for any account in the organization. The administrator must manage the additional configuration for each account individually.</p> </li> </ul>
     #   @return [String]
     class OrganizationAdditionalConfigurationResult < Struct.new(
       nil,
@@ -6162,19 +6594,15 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information on which data sources will be configured to be
-    #       automatically enabled for new members within the organization.</p>
+    # <p>An object that contains information on which data sources will be configured to be automatically enabled for new members within the organization.</p>
     # @!attribute s3_logs
-    #   <p>Describes whether S3 data event logs are enabled for new members of the
-    #         organization.</p>
+    #   <p>Describes whether S3 data event logs are enabled for new members of the organization.</p>
     #   @return [Types::OrganizationS3LogsConfiguration]
     # @!attribute kubernetes
-    #   <p>Describes the configuration of Kubernetes data sources for new members of the
-    #         organization.</p>
+    #   <p>Describes the configuration of Kubernetes data sources for new members of the organization.</p>
     #   @return [Types::OrganizationKubernetesConfiguration]
     # @!attribute malware_protection
-    #   <p>Describes the configuration of Malware Protection for new members of the
-    #         organization.</p>
+    #   <p>Describes the configuration of Malware Protection for new members of the organization.</p>
     #   @return [Types::OrganizationMalwareProtectionConfiguration]
     class OrganizationDataSourceConfigurations < Struct.new(
       nil,
@@ -6186,8 +6614,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information on which data sources are automatically enabled for
-    #       new members within the organization.</p>
+    # <p>An object that contains information on which data sources are automatically enabled for new members within the organization.</p>
     # @!attribute s3_logs
     #   <p>Describes whether S3 data event logs are enabled as a data source.</p>
     #   @return [Types::OrganizationS3LogsConfigurationResult]
@@ -6207,16 +6634,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about GuardDuty coverage statistics for members
-    #       in your Amazon Web Services organization.</p>
+    # <p>Information about GuardDuty coverage statistics for members in your Amazon Web Services organization.</p>
     # @!attribute updated_at
-    #   <p>The timestamp at which the organization statistics
-    #         was last updated. This is in
-    #         UTC format.</p>
+    #   <p>The timestamp at which the organization statistics was last updated. This is in UTC format.</p>
     #   @return [Time]
     # @!attribute organization_statistics
-    #   <p>Information about the GuardDuty coverage statistics 
-    #         for members in your Amazon Web Services organization.</p>
+    #   <p>Information about the GuardDuty coverage statistics for members in your Amazon Web Services organization.</p>
     #   @return [Types::OrganizationStatistics]
     class OrganizationDetails < Struct.new(
       nil,
@@ -6229,8 +6652,7 @@ module Aws::GuardDuty
 
     # <p>Organization-wide EBS volumes scan configuration.</p>
     # @!attribute auto_enable
-    #   <p>Whether scanning EBS volumes should be auto-enabled for new members joining the
-    #         organization.</p>
+    #   <p>Whether scanning EBS volumes should be auto-enabled for new members joining the organization.</p>
     #   @return [Boolean]
     class OrganizationEbsVolumes < Struct.new(
       nil,
@@ -6240,11 +6662,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information on the status of whether EBS volumes scanning will be
-    #       enabled as a data source for an organization.</p>
+    # <p>An object that contains information on the status of whether EBS volumes scanning will be enabled as a data source for an organization.</p>
     # @!attribute auto_enable
-    #   <p>An object that contains the status of whether scanning EBS volumes should be auto-enabled
-    #         for new members joining the organization.</p>
+    #   <p>An object that contains the status of whether scanning EBS volumes should be auto-enabled for new members joining the organization.</p>
     #   @return [Boolean]
     class OrganizationEbsVolumesResult < Struct.new(
       nil,
@@ -6259,31 +6679,7 @@ module Aws::GuardDuty
     #   <p>The name of the feature that will be configured for the organization.</p>
     #   @return [String]
     # @!attribute auto_enable
-    #   <p>Describes the status of the feature that is configured for the
-    #         member accounts within the organization. One of the following 
-    #         values is the status for the entire organization:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NEW</code>: Indicates that when a new account joins the organization, they will
-    #             have the feature enabled automatically. </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ALL</code>: Indicates that all accounts in the organization have the feature
-    #             enabled automatically. This includes <code>NEW</code> accounts that join the organization
-    #             and accounts that may have been suspended or removed from the organization in
-    #             GuardDuty.</p>
-    #                  <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: Indicates that the feature will not be 
-    #             automatically enabled for any
-    #             account in the organization. The administrator must manage the feature
-    #             for each account individually.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Describes the status of the feature that is configured for the member accounts within the organization. One of the following values is the status for the entire organization:</p> <ul> <li> <p> <code>NEW</code>: Indicates that when a new account joins the organization, they will have the feature enabled automatically. </p> </li> <li> <p> <code>ALL</code>: Indicates that all accounts in the organization have the feature enabled automatically. This includes <code>NEW</code> accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.</p> <p>It may take up to 24 hours to update the configuration for all the member accounts.</p> </li> <li> <p> <code>NONE</code>: Indicates that the feature will not be automatically enabled for any account in the organization. The administrator must manage the feature for each account individually.</p> </li> </ul>
     #   @return [String]
     # @!attribute additional_configuration
     #   <p>The additional information that will be configured for the organization.</p>
@@ -6300,37 +6696,13 @@ module Aws::GuardDuty
 
     # <p>A list of features which will be configured for the organization.</p>
     # @!attribute name
-    #   <p>The name of the feature that is configured for the member accounts within the
-    #         organization.</p>
+    #   <p>The name of the feature that is configured for the member accounts within the organization.</p>
     #   @return [String]
     # @!attribute auto_enable
-    #   <p>Describes the status of the feature that is configured for the member accounts within
-    #         the organization.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NEW</code>: Indicates that when a new account joins the organization, they will
-    #             have the feature enabled automatically. </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ALL</code>: Indicates that all accounts in the organization have the feature 
-    #             enabled automatically. This includes <code>NEW</code> accounts that join the organization
-    #             and accounts that may have been suspended or removed from the organization in
-    #             GuardDuty.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: Indicates that the feature will not be automatically enabled for any
-    #             account in the organization. In this case, each account will be managed individually 
-    #             by the
-    #             administrator.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Describes the status of the feature that is configured for the member accounts within the organization.</p> <ul> <li> <p> <code>NEW</code>: Indicates that when a new account joins the organization, they will have the feature enabled automatically. </p> </li> <li> <p> <code>ALL</code>: Indicates that all accounts in the organization have the feature enabled automatically. This includes <code>NEW</code> accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.</p> </li> <li> <p> <code>NONE</code>: Indicates that the feature will not be automatically enabled for any account in the organization. In this case, each account will be managed individually by the administrator.</p> </li> </ul>
     #   @return [String]
     # @!attribute additional_configuration
-    #   <p>The additional configuration that is configured for the member accounts within the
-    #         organization.</p>
+    #   <p>The additional configuration that is configured for the member accounts within the organization.</p>
     #   @return [Array<Types::OrganizationAdditionalConfigurationResult>]
     class OrganizationFeatureConfigurationResult < Struct.new(
       nil,
@@ -6342,14 +6714,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the number of accounts
-    #       that have enabled a specific feature.</p>
+    # <p>Information about the number of accounts that have enabled a specific feature.</p>
     # @!attribute name
     #   <p>Name of the feature.</p>
     #   @return [String]
     # @!attribute enabled_accounts_count
-    #   <p>Total number of accounts that have enabled a specific
-    #         feature.</p>
+    #   <p>Total number of accounts that have enabled a specific feature.</p>
     #   @return [Integer]
     # @!attribute additional_configuration
     #   <p>Name of the additional configuration.</p>
@@ -6364,15 +6734,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the coverage 
-    #       statistic for the additional 
-    #     configuration of the feature.</p>
+    # <p>Information about the coverage statistic for the additional configuration of the feature.</p>
     # @!attribute name
     #   <p>Name of the additional configuration within a feature.</p>
     #   @return [String]
     # @!attribute enabled_accounts_count
-    #   <p>Total number of accounts that have enabled the additional
-    #         configuration.</p>
+    #   <p>Total number of accounts that have enabled the additional configuration.</p>
     #   @return [Integer]
     class OrganizationFeatureStatisticsAdditionalConfiguration < Struct.new(
       nil,
@@ -6385,8 +6752,7 @@ module Aws::GuardDuty
 
     # <p>Organization-wide Kubernetes audit logs configuration.</p>
     # @!attribute auto_enable
-    #   <p>A value that contains information on whether Kubernetes audit logs should be enabled
-    #         automatically as a data source for the organization.</p>
+    #   <p>A value that contains information on whether Kubernetes audit logs should be enabled automatically as a data source for the organization.</p>
     #   @return [Boolean]
     class OrganizationKubernetesAuditLogsConfiguration < Struct.new(
       nil,
@@ -6396,11 +6762,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The current configuration of Kubernetes audit logs as a data source for the
-    #       organization.</p>
+    # <p>The current configuration of Kubernetes audit logs as a data source for the organization.</p>
     # @!attribute auto_enable
-    #   <p>Whether Kubernetes audit logs data source should be auto-enabled for new members joining
-    #         the organization.</p>
+    #   <p>Whether Kubernetes audit logs data source should be auto-enabled for new members joining the organization.</p>
     #   @return [Boolean]
     class OrganizationKubernetesAuditLogsConfigurationResult < Struct.new(
       nil,
@@ -6412,8 +6776,7 @@ module Aws::GuardDuty
 
     # <p>Organization-wide Kubernetes data sources configurations.</p>
     # @!attribute audit_logs
-    #   <p>Whether Kubernetes audit logs data source should be auto-enabled for new members joining
-    #         the organization.</p>
+    #   <p>Whether Kubernetes audit logs data source should be auto-enabled for new members joining the organization.</p>
     #   @return [Types::OrganizationKubernetesAuditLogsConfiguration]
     class OrganizationKubernetesConfiguration < Struct.new(
       nil,
@@ -6425,8 +6788,7 @@ module Aws::GuardDuty
 
     # <p>The current configuration of all Kubernetes data sources for the organization.</p>
     # @!attribute audit_logs
-    #   <p>The current configuration of Kubernetes audit logs as a data source for the
-    #         organization.</p>
+    #   <p>The current configuration of Kubernetes audit logs as a data source for the organization.</p>
     #   @return [Types::OrganizationKubernetesAuditLogsConfigurationResult]
     class OrganizationKubernetesConfigurationResult < Struct.new(
       nil,
@@ -6438,8 +6800,7 @@ module Aws::GuardDuty
 
     # <p>Organization-wide Malware Protection configurations.</p>
     # @!attribute scan_ec2_instance_with_findings
-    #   <p>Whether Malware Protection for EC2 instances with findings should be auto-enabled for new
-    #         members joining the organization.</p>
+    #   <p>Whether Malware Protection for EC2 instances with findings should be auto-enabled for new members joining the organization.</p>
     #   @return [Types::OrganizationScanEc2InstanceWithFindings]
     class OrganizationMalwareProtectionConfiguration < Struct.new(
       nil,
@@ -6449,11 +6810,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information on the status of all Malware Protection data source
-    #       for an organization.</p>
+    # <p>An object that contains information on the status of all Malware Protection data source for an organization.</p>
     # @!attribute scan_ec2_instance_with_findings
-    #   <p>Describes the configuration for scanning EC2 instances with findings for an
-    #         organization.</p>
+    #   <p>Describes the configuration for scanning EC2 instances with findings for an organization.</p>
     #   @return [Types::OrganizationScanEc2InstanceWithFindingsResult]
     class OrganizationMalwareProtectionConfigurationResult < Struct.new(
       nil,
@@ -6463,11 +6822,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes whether S3 data event logs will be automatically enabled for new members of the
-    #       organization.</p>
+    # <p>Describes whether S3 data event logs will be automatically enabled for new members of the organization.</p>
     # @!attribute auto_enable
-    #   <p>A value that contains information on whether S3 data event logs will be enabled
-    #         automatically as a data source for the organization.</p>
+    #   <p>A value that contains information on whether S3 data event logs will be enabled automatically as a data source for the organization.</p>
     #   @return [Boolean]
     class OrganizationS3LogsConfiguration < Struct.new(
       nil,
@@ -6477,11 +6834,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The current configuration of S3 data event logs as a data source for the
-    #       organization.</p>
+    # <p>The current configuration of S3 data event logs as a data source for the organization.</p>
     # @!attribute auto_enable
-    #   <p>A value that describes whether S3 data event logs are automatically enabled for new
-    #         members of the organization.</p>
+    #   <p>A value that describes whether S3 data event logs are automatically enabled for new members of the organization.</p>
     #   @return [Boolean]
     class OrganizationS3LogsConfigurationResult < Struct.new(
       nil,
@@ -6493,8 +6848,7 @@ module Aws::GuardDuty
 
     # <p>Organization-wide EC2 instances with findings scan configuration.</p>
     # @!attribute ebs_volumes
-    #   <p>Whether scanning EBS volumes should be auto-enabled for new members joining the
-    #         organization.</p>
+    #   <p>Whether scanning EBS volumes should be auto-enabled for new members joining the organization.</p>
     #   @return [Types::OrganizationEbsVolumes]
     class OrganizationScanEc2InstanceWithFindings < Struct.new(
       nil,
@@ -6504,8 +6858,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information on the status of scanning EC2 instances with findings
-    #       for an organization.</p>
+    # <p>An object that contains information on the status of scanning EC2 instances with findings for an organization.</p>
     # @!attribute ebs_volumes
     #   <p>Describes the configuration for scanning EBS volumes for an organization.</p>
     #   @return [Types::OrganizationEbsVolumesResult]
@@ -6517,29 +6870,21 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the coverage statistics of the 
-    #       features for the entire 
-    #       Amazon Web Services organization.</p>
-    #          <p>When you create a new Amazon Web Services organization, it might 
-    #       take up to 24 hours to 
-    #       generate the statistics summary for this organization.</p>
+    # <p>Information about the coverage statistics of the features for the entire Amazon Web Services organization.</p> <p>When you create a new Amazon Web Services organization, it might take up to 24 hours to generate the statistics summary for this organization.</p>
     # @!attribute total_accounts_count
     #   <p>Total number of accounts in your Amazon Web Services organization.</p>
     #   @return [Integer]
     # @!attribute member_accounts_count
-    #   <p>Total number of accounts in your Amazon Web Services organization 
-    #         that are associated with GuardDuty.</p>
+    #   <p>Total number of accounts in your Amazon Web Services organization that are associated with GuardDuty.</p>
     #   @return [Integer]
     # @!attribute active_accounts_count
-    #   <p>Total number of active accounts in your Amazon Web Services 
-    #         organization that are associated with GuardDuty.</p>
+    #   <p>Total number of active accounts in your Amazon Web Services organization that are associated with GuardDuty.</p>
     #   @return [Integer]
     # @!attribute enabled_accounts_count
     #   <p>Total number of accounts that have enabled GuardDuty.</p>
     #   @return [Integer]
     # @!attribute count_by_feature
-    #   <p>Retrieves the coverage 
-    #         statistics for each feature.</p>
+    #   <p>Retrieves the coverage statistics for each feature.</p>
     #   @return [Array<Types::OrganizationFeatureStatistics>]
     class OrganizationStatistics < Struct.new(
       nil,
@@ -6555,10 +6900,7 @@ module Aws::GuardDuty
 
     # <p>Contains information on the owner of the bucket.</p>
     # @!attribute id
-    #   <p>The canonical user ID of the bucket owner. For information about locating your canonical
-    #         user ID see <a href="https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId">Finding Your Account
-    #           Canonical User ID.</a>
-    #            </p>
+    #   <p>The canonical user ID of the bucket owner. For information about locating your canonical user ID see <a href="https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId">Finding Your Account Canonical User ID.</a> </p>
     #   @return [String]
     class Owner < Struct.new(
       nil,
@@ -6662,8 +7004,7 @@ module Aws::GuardDuty
     #   <p>The unique ID assigned to the process by GuardDuty.</p>
     #   @return [String]
     # @!attribute parent_uuid
-    #   <p>The unique ID of the parent process. This ID is assigned to the parent process by
-    #         GuardDuty.</p>
+    #   <p>The unique ID of the parent process. This ID is assigned to the parent process by GuardDuty.</p>
     #   @return [String]
     # @!attribute user
     #   <p>The user that executed the process.</p>
@@ -6697,6 +7038,22 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about the product that produced an investigation.</p>
+    # @!attribute name
+    #   <p>The name of the product.</p>
+    #   @return [String]
+    # @!attribute feature
+    #   <p>The specific feature within the product that produced the investigation.</p>
+    #   @return [String]
+    class Product < Struct.new(
+      nil,
+      :name,
+      :feature,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the product code for the EC2 instance.</p>
     # @!attribute code
     #   <p>The product code information.</p>
@@ -6718,8 +7075,7 @@ module Aws::GuardDuty
     #   <p>Contains information about how permissions are configured for the S3 bucket.</p>
     #   @return [Types::PermissionConfiguration]
     # @!attribute effective_permission
-    #   <p>Describes the effective permission on this bucket after factoring all attached
-    #         policies.</p>
+    #   <p>Describes the effective permission on this bucket after factoring all attached policies.</p>
     #   @return [String]
     class PublicAccess < Struct.new(
       nil,
@@ -6730,19 +7086,15 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes public access policies that apply to the Amazon S3 bucket.</p>
-    #          <p>For information about each of the following settings, see
-    #        <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">Blocking public access to your Amazon S3 storage</a> in the <i>Amazon S3 User Guide</i>.</p>
+    # <p>Describes public access policies that apply to the Amazon S3 bucket.</p> <p>For information about each of the following settings, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">Blocking public access to your Amazon S3 storage</a> in the <i>Amazon S3 User Guide</i>.</p>
     # @!attribute public_acl_access
-    #   <p>Indicates whether or not there is a setting that allows public access to the Amazon S3 buckets through access
-    #          control lists (ACLs).</p>
+    #   <p>Indicates whether or not there is a setting that allows public access to the Amazon S3 buckets through access control lists (ACLs).</p>
     #   @return [String]
     # @!attribute public_policy_access
     #   <p>Indicates whether or not there is a setting that allows public access to the Amazon S3 bucket policy.</p>
     #   @return [String]
     # @!attribute public_acl_ignore_behavior
-    #   <p>Indicates whether or not there is a setting that ignores all public access control lists (ACLs)
-    #          on the Amazon S3 bucket and the objects that it contains.</p>
+    #   <p>Indicates whether or not there is a setting that ignores all public access control lists (ACLs) on the Amazon S3 bucket and the objects that it contains.</p>
     #   @return [String]
     # @!attribute public_bucket_restrict_behavior
     #   <p>Indicates whether or not there is a setting that restricts access to the bucket with specified policies.</p>
@@ -6758,11 +7110,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the resource type <code>RDSDBInstance</code> involved in a
-    #       GuardDuty finding.</p>
+    # <p>Contains information about the resource type <code>RDSDBInstance</code> involved in a GuardDuty finding.</p>
     # @!attribute db_instance_identifier
-    #   <p>The identifier associated to the database instance that was involved in the
-    #         finding.</p>
+    #   <p>The identifier associated to the database instance that was involved in the finding.</p>
     #   @return [String]
     # @!attribute engine
     #   <p>The database engine of the database instance involved in the finding.</p>
@@ -6771,12 +7121,13 @@ module Aws::GuardDuty
     #   <p>The version of the database engine that was involved in the finding.</p>
     #   @return [String]
     # @!attribute db_cluster_identifier
-    #   <p>The identifier of the database cluster that contains the database instance ID involved in
-    #         the finding.</p>
+    #   <p>The identifier of the database cluster that contains the database instance ID involved in the finding.</p>
     #   @return [String]
     # @!attribute db_instance_arn
-    #   <p>The Amazon Resource Name (ARN) that identifies the database instance involved in the
-    #         finding.</p>
+    #   <p>The Amazon Resource Name (ARN) that identifies the database instance involved in the finding.</p>
+    #   @return [String]
+    # @!attribute dbi_resource_id
+    #   <p>The unique ID of the database resource involved in the activity that prompted GuardDuty to generate the finding.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>Information about the tag key-value pairs.</p>
@@ -6788,14 +7139,14 @@ module Aws::GuardDuty
       :engine_version,
       :db_cluster_identifier,
       :db_instance_arn,
+      :dbi_resource_id,
       :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the user and authentication details for a database instance
-    #       involved in the finding.</p>
+    # <p>Contains information about the user and authentication details for a database instance involved in the finding.</p>
     # @!attribute user
     #   <p>The user name used in the anomalous login attempt.</p>
     #   @return [String]
@@ -6823,8 +7174,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the resource type <code>RDSLimitlessDB</code> that is involved in a GuardDuty
-    #     finding.</p>
+    # <p>Contains information about the resource type <code>RDSLimitlessDB</code> that is involved in a GuardDuty finding.</p>
     # @!attribute db_shard_group_identifier
     #   <p>The name associated with the Limitless DB shard group.</p>
     #   @return [String]
@@ -6860,8 +7210,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Indicates that a login attempt was made to the potentially compromised database from a
-    #       remote IP address.</p>
+    # <p>Indicates that a login attempt was made to the potentially compromised database from a remote IP address.</p>
     # @!attribute remote_ip_details
     #   <p>Contains information about the remote IP address of the connection.</p>
     #   @return [Types::RemoteIpDetails]
@@ -6877,20 +7226,57 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about the recovery point configuration for scanning backup data from Amazon Web Services Backup.</p>
+    # @!attribute backup_vault_name
+    #   <p>The name of the Amazon Web Services Backup vault that contains the name of the recovery point to be scanned.</p>
+    #   @return [String]
+    # @!attribute continuous_scan_details
+    #   <p>Contains information about the time range within the continuous backup in Amazon Web Services Backup to scan.</p>
+    #   @return [Types::ContinuousScanDetails]
+    class RecoveryPoint < Struct.new(
+      nil,
+      :backup_vault_name,
+      :continuous_scan_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains details about the backup recovery point.</p>
+    # @!attribute recovery_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the recovery point.</p>
+    #   @return [String]
+    # @!attribute backup_vault_name
+    #   <p>The name of the backup vault containing the recovery point.</p>
+    #   @return [String]
+    # @!attribute continuous_scan_details
+    #   <p>Contains information about the time range within the continuous backup in Amazon Web Services Backup that was scanned for a point-in-time recovery resource.</p>
+    #   @return [Types::ScanConfigurationContinuousScanDetails]
+    class RecoveryPointDetails < Struct.new(
+      nil,
+      :recovery_point_arn,
+      :backup_vault_name,
+      :continuous_scan_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains details about the remote Amazon Web Services account that made the API call.</p>
     # @!attribute account_id
     #   <p>The Amazon Web Services account ID of the remote API caller.</p>
     #   @return [String]
     # @!attribute affiliated
-    #   <p>Details on whether the Amazon Web Services account of the remote API caller is related to your GuardDuty
-    #         environment. If this value is <code>True</code> the API caller is affiliated to your account
-    #         in some way. If it is <code>False</code> the API caller is from outside your
-    #         environment.</p>
+    #   <p>Details on whether the Amazon Web Services account of the remote API caller is related to your GuardDuty environment. If this value is <code>True</code> the API caller is affiliated to your account in some way. If it is <code>False</code> the API caller is from outside your environment.</p>
     #   @return [Boolean]
+    # @!attribute aws_service_name
+    #   <p>If the remote account belongs to an Amazon Web Services service, this field indicates which service the remote account belongs to.</p>
+    #   @return [String]
     class RemoteAccountDetails < Struct.new(
       nil,
       :account_id,
       :affiliated,
+      :aws_service_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6944,18 +7330,15 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the Amazon Web Services resource associated with the activity that prompted
-    #       GuardDuty to generate a finding.</p>
+    # <p>Contains information about the Amazon Web Services resource associated with the activity that prompted GuardDuty to generate a finding.</p>
     # @!attribute access_key_details
-    #   <p>The IAM access key details (user information) of a user that engaged in the activity that
-    #         prompted GuardDuty to generate a finding.</p>
+    #   <p>The IAM access key details (user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding.</p>
     #   @return [Types::AccessKeyDetails]
     # @!attribute s3_bucket_details
     #   <p>Contains information on the S3 bucket.</p>
     #   @return [Array<Types::S3BucketDetail>]
     # @!attribute instance_details
-    #   <p>The information about the EC2 instance associated with the activity that prompted
-    #         GuardDuty to generate a finding.</p>
+    #   <p>The information about the EC2 instance associated with the activity that prompted GuardDuty to generate a finding.</p>
     #   @return [Types::InstanceDetails]
     # @!attribute eks_cluster_details
     #   <p>Details about the EKS cluster involved in a Kubernetes finding.</p>
@@ -6975,20 +7358,33 @@ module Aws::GuardDuty
     # @!attribute container_details
     #   <p>Details of a container.</p>
     #   @return [Types::Container]
+    # @!attribute lambda_details
+    #   <p>Contains information about the Lambda function that was involved in a finding.</p>
+    #   @return [Types::LambdaDetails]
     # @!attribute rds_db_instance_details
-    #   <p>Contains information about the database instance to which an anomalous login attempt was
-    #         made.</p>
+    #   <p>Contains information about the database instance to which an anomalous login attempt was made.</p>
     #   @return [Types::RdsDbInstanceDetails]
     # @!attribute rds_limitless_db_details
     #   <p>Contains information about the RDS Limitless database that was involved in a GuardDuty finding.</p>
     #   @return [Types::RdsLimitlessDbDetails]
     # @!attribute rds_db_user_details
-    #   <p>Contains information about the user details through which anomalous login attempt was
-    #         made.</p>
+    #   <p>Contains information about the user details through which anomalous login attempt was made.</p>
     #   @return [Types::RdsDbUserDetails]
-    # @!attribute lambda_details
-    #   <p>Contains information about the Lambda function that was involved in a finding.</p>
-    #   @return [Types::LambdaDetails]
+    # @!attribute ebs_snapshot_details
+    #   <p>Contains details about the EBS snapshot that was scanned.</p>
+    #   @return [Types::EbsSnapshotDetails]
+    # @!attribute ec2_image_details
+    #   <p>Contains details about the EC2 image that was scanned.</p>
+    #   @return [Types::Ec2ImageDetails]
+    # @!attribute recovery_point_details
+    #   <p>Contains details about the backup recovery point that was scanned.</p>
+    #   @return [Types::RecoveryPointDetails]
+    # @!attribute bedrock_guardrail_details
+    #   <p>Contains information about the Bedrock guardrail that was involved in a finding.</p>
+    #   @return [Types::BedrockGuardrailDetails]
+    # @!attribute model_details
+    #   <p>Contains information about the AI models involved in a finding.</p>
+    #   @return [Array<Types::ModelDetail>]
     class Resource < Struct.new(
       nil,
       :access_key_details,
@@ -7000,17 +7396,21 @@ module Aws::GuardDuty
       :ebs_volume_details,
       :ecs_cluster_details,
       :container_details,
+      :lambda_details,
       :rds_db_instance_details,
       :rds_limitless_db_details,
       :rds_db_user_details,
-      :lambda_details,
+      :ebs_snapshot_details,
+      :ec2_image_details,
+      :recovery_point_details,
+      :bedrock_guardrail_details,
+      :model_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about the Amazon Web Services resource that is associated with the activity that prompted
-    #        GuardDuty to generate a finding.</p>
+    # <p>Contains information about the Amazon Web Services resource that is associated with the activity that prompted GuardDuty to generate a finding.</p>
     # @!attribute s3_bucket
     #   <p>Contains information about the Amazon S3 bucket.</p>
     #   @return [Types::S3Bucket]
@@ -7027,17 +7427,41 @@ module Aws::GuardDuty
     #   <p>Contains information about the Amazon S3 object.</p>
     #   @return [Types::S3Object]
     # @!attribute eks_cluster
-    #   <p>Contains detailed information about the Amazon EKS cluster associated with the activity that
-    #         prompted GuardDuty to generate a finding.</p>
+    #   <p>Contains detailed information about the Amazon EKS cluster associated with the activity that prompted GuardDuty to generate a finding.</p>
     #   @return [Types::EksCluster]
     # @!attribute kubernetes_workload
-    #   <p>Contains detailed information about the Kubernetes workload associated with the activity that
-    #         prompted GuardDuty to generate a finding.</p>
+    #   <p>Contains detailed information about the Kubernetes workload associated with the activity that prompted GuardDuty to generate a finding.</p>
     #   @return [Types::KubernetesWorkload]
     # @!attribute container
-    #   <p>Contains detailed information about the container associated with the activity that
-    #         prompted GuardDuty to generate a finding.</p>
+    #   <p>Contains detailed information about the container associated with the activity that prompted GuardDuty to generate a finding.</p>
     #   @return [Types::ContainerFindingResource]
+    # @!attribute ecs_cluster
+    #   <p>Contains detailed information about the Amazon ECS cluster associated with the activity that prompted GuardDuty to generate a finding.</p>
+    #   @return [Types::EcsCluster]
+    # @!attribute ecs_task
+    #   <p>Contains detailed information about the Amazon ECS task associated with the activity that prompted GuardDuty to generate a finding.</p>
+    #   @return [Types::EcsTask]
+    # @!attribute iam_instance_profile
+    #   <p>Contains detailed information about the IAM instance profile associated with the activity that prompted GuardDuty to generate a finding.</p>
+    #   @return [Types::IamInstanceProfileV2]
+    # @!attribute autoscaling_auto_scaling_group
+    #   <p>Contains detailed information about the Auto Scaling Group associated with the activity that prompted GuardDuty to generate a finding.</p>
+    #   @return [Types::AutoscalingAutoScalingGroup]
+    # @!attribute ec2_launch_template
+    #   <p>Contains detailed information about the EC2 launch template associated with the activity that prompted GuardDuty to generate a finding.</p>
+    #   @return [Types::Ec2LaunchTemplate]
+    # @!attribute ec2_vpc
+    #   <p>Contains detailed information about the EC2 VPC associated with the activity that prompted GuardDuty to generate a finding.</p>
+    #   @return [Types::Ec2Vpc]
+    # @!attribute ec2_image
+    #   <p>Contains detailed information about the EC2 Image associated with the activity that prompted GuardDuty to generate a finding.</p>
+    #   @return [Types::Ec2Image]
+    # @!attribute cloudformation_stack
+    #   <p>Contains detailed information about the CloudFormation stack associated with the activity that prompted GuardDuty to generate a finding.</p>
+    #   @return [Types::CloudformationStack]
+    # @!attribute bedrock_guardrail
+    #   <p>Contains detailed information about the Amazon Bedrock guardrail associated with the activity that prompted GuardDuty to generate a finding.</p>
+    #   @return [Types::BedrockGuardrailResource]
     class ResourceData < Struct.new(
       nil,
       :s3_bucket,
@@ -7048,6 +7472,15 @@ module Aws::GuardDuty
       :eks_cluster,
       :kubernetes_workload,
       :container,
+      :ecs_cluster,
+      :ecs_task,
+      :iam_instance_profile,
+      :autoscaling_auto_scaling_group,
+      :ec2_launch_template,
+      :ec2_vpc,
+      :ec2_image,
+      :cloudformation_stack,
+      :bedrock_guardrail,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7081,8 +7514,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about each resource type associated with the 
-    #       <code>groupedByResource</code> statistics.</p>
+    # <p>Information about each resource type associated with the <code>groupedByResource</code> statistics.</p>
     # @!attribute account_id
     #   <p>The ID of the Amazon Web Services account.</p>
     #   @return [String]
@@ -7090,53 +7522,7 @@ module Aws::GuardDuty
     #   <p>The timestamp at which the statistics for this resource was last generated.</p>
     #   @return [Time]
     # @!attribute resource_id
-    #   <p>ID associated with each resource. The following list provides the mapping of the resource type
-    #       and resource ID.</p>
-    #            <p class="title">
-    #               <b>Mapping of resource and resource ID</b>
-    #            </p>
-    #            <ul>
-    #               <li>
-    #                  <p>AccessKey - <code>resource.accessKeyDetails.accessKeyId</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>Container - <code>resource.containerDetails.id</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>ECSCluster - <code>resource.ecsClusterDetails.name</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>EKSCluster - <code>resource.eksClusterDetails.name</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>Instance - <code>resource.instanceDetails.instanceId</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>KubernetesCluster - <code>resource.kubernetesDetails.kubernetesWorkloadDetails.name</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>Lambda - <code>resource.lambdaDetails.functionName</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>RDSDBInstance - <code>resource.rdsDbInstanceDetails.dbInstanceIdentifier</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>S3Bucket - <code>resource.s3BucketDetails.name</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>S3Object - <code>resource.s3BucketDetails.name</code>
-    #                  </p>
-    #               </li>
-    #            </ul>
+    #   <p>ID associated with each resource. The following list provides the mapping of the resource type and resource ID.</p> <p class="title"> <b>Mapping of resource and resource ID</b> </p> <ul> <li> <p>AccessKey - <code>resource.accessKeyDetails.accessKeyId</code> </p> </li> <li> <p>Container - <code>resource.containerDetails.id</code> </p> </li> <li> <p>ECSCluster - <code>resource.ecsClusterDetails.name</code> </p> </li> <li> <p>EKSCluster - <code>resource.eksClusterDetails.name</code> </p> </li> <li> <p>Instance - <code>resource.instanceDetails.instanceId</code> </p> </li> <li> <p>KubernetesCluster - <code>resource.kubernetesDetails.kubernetesWorkloadDetails.name</code> </p> </li> <li> <p>Lambda - <code>resource.lambdaDetails.functionName</code> </p> </li> <li> <p>RDSDBInstance - <code>resource.rdsDbInstanceDetails.dbInstanceIdentifier</code> </p> </li> <li> <p>S3Bucket - <code>resource.s3BucketDetails.name</code> </p> </li> <li> <p>S3Object - <code>resource.s3BucketDetails.name</code> </p> </li> </ul>
     #   @return [String]
     # @!attribute resource_type
     #   <p>The type of resource.</p>
@@ -7182,8 +7568,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the tags associated with the resource.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute data
-    #   <p>Contains information about the Amazon Web Services resource associated with the activity that prompted
-    #          GuardDuty to generate a finding.</p>
+    #   <p>Contains information about the Amazon Web Services resource associated with the activity that prompted GuardDuty to generate a finding.</p>
     #   @return [Types::ResourceData]
     class ResourceV2 < Struct.new(
       nil,
@@ -7201,14 +7586,152 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the detection logic for a custom detection rule.</p>
+    # @!attribute expression
+    #   <p>The detection logic expression for the rule.</p>
+    #   @return [String]
+    class RuleDefinition < Struct.new(
+      nil,
+      :expression,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the full details of a custom detection rule, including its detection logic.</p>
+    # @!attribute rule_id
+    #   <p>The unique identifier for the rule.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the rule.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the rule.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of what the rule detects.</p>
+    #   @return [String]
+    # @!attribute severity
+    #   <p>The severity level assigned to findings generated by this rule.</p>
+    #   @return [String]
+    # @!attribute data_source
+    #   <p>The data source that the rule analyzes.</p>
+    #   @return [String]
+    # @!attribute tactic
+    #   <p>The MITRE ATT&amp;CK tactic associated with the rule.</p>
+    #   @return [String]
+    # @!attribute technique
+    #   <p>The MITRE ATT&amp;CK technique associated with the rule.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The Amazon Web Services service associated with the rule.</p>
+    #   @return [String]
+    # @!attribute definition
+    #   <p>The detection logic definition for the rule.</p>
+    #   @return [Types::RuleDefinition]
+    # @!attribute language
+    #   <p>The language used for the detection logic expression.</p>
+    #   @return [String]
+    # @!attribute schema
+    #   <p>The schema version used by the rule definition.</p>
+    #   @return [String]
+    # @!attribute runtime_monitoring_details
+    #   <p>Runtime Monitoring-specific details for the rule, including the platforms on which the rule can run and the minimum GuardDuty agent version required on each.</p>
+    #   @return [Types::DetectionRuleRuntimeMonitoringDetails]
+    # @!attribute created_at
+    #   <p>The timestamp when the rule was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the rule was last updated.</p>
+    #   @return [Time]
+    class RuleDetail < Struct.new(
+      nil,
+      :rule_id,
+      :arn,
+      :name,
+      :description,
+      :severity,
+      :data_source,
+      :tactic,
+      :technique,
+      :service,
+      :definition,
+      :language,
+      :schema,
+      :runtime_monitoring_details,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a custom detection rule.</p>
+    # @!attribute rule_id
+    #   <p>The unique identifier for the rule.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the rule.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The display name of the rule.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of what the rule detects.</p>
+    #   @return [String]
+    # @!attribute severity
+    #   <p>The severity level assigned to findings generated by this rule.</p>
+    #   @return [String]
+    # @!attribute data_source
+    #   <p>The data source that the rule analyzes.</p>
+    #   @return [String]
+    # @!attribute tactic
+    #   <p>The MITRE ATT&amp;CK tactic associated with the rule.</p>
+    #   @return [String]
+    # @!attribute technique
+    #   <p>The MITRE ATT&amp;CK technique associated with the rule.</p>
+    #   @return [String]
+    # @!attribute service
+    #   <p>The Amazon Web Services service associated with the rule.</p>
+    #   @return [String]
+    # @!attribute language
+    #   <p>The language used for the detection logic expression.</p>
+    #   @return [String]
+    # @!attribute schema
+    #   <p>The schema version used by the rule definition.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the rule was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp when the rule was last updated.</p>
+    #   @return [Time]
+    class RuleSummary < Struct.new(
+      nil,
+      :rule_id,
+      :arn,
+      :name,
+      :description,
+      :severity,
+      :data_source,
+      :tactic,
+      :technique,
+      :service,
+      :language,
+      :schema,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Additional information about the suspicious activity.</p>
     # @!attribute modifying_process
-    #   <p>Information about the process that modified the current process. This is available for
-    #         multiple finding types.</p>
+    #   <p>Information about the process that modified the current process. This is available for multiple finding types.</p>
     #   @return [Types::ProcessDetails]
     # @!attribute modified_at
-    #   <p>The timestamp at which the process modified the current process. The timestamp is in UTC date string
-    #         format.</p>
+    #   <p>The timestamp at which the process modified the current process. The timestamp is in UTC date string format.</p>
     #   @return [Time]
     # @!attribute script_path
     #   <p>The path to the script that was executed.</p>
@@ -7238,8 +7761,7 @@ module Aws::GuardDuty
     #   <p>Represents the type of mounted fileSystem.</p>
     #   @return [String]
     # @!attribute flags
-    #   <p>Represents options that control the behavior of a runtime operation or action. For
-    #         example, a filesystem mount operation may contain a read-only flag.</p>
+    #   <p>Represents options that control the behavior of a runtime operation or action. For example, a filesystem mount operation may contain a read-only flag.</p>
     #   @return [Array<String>]
     # @!attribute module_name
     #   <p>The name of the module loaded into the kernel.</p>
@@ -7257,13 +7779,10 @@ module Aws::GuardDuty
     #   <p>Information about the process that had its memory overwritten by the current process.</p>
     #   @return [Types::ProcessDetails]
     # @!attribute address_family
-    #   <p>Represents the communication protocol associated with the address. For example, the address
-    #         family <code>AF_INET</code> is used for IP version of 4 protocol.</p>
+    #   <p>Represents the communication protocol associated with the address. For example, the address family <code>AF_INET</code> is used for IP version of 4 protocol.</p>
     #   @return [String]
     # @!attribute iana_protocol_number
-    #   <p>Specifies a particular protocol within the address family. Usually there is a single
-    #         protocol in address families. For example, the address family <code>AF_INET</code> only has
-    #         the IP protocol.</p>
+    #   <p>Specifies a particular protocol within the address family. Usually there is a single protocol in address families. For example, the address family <code>AF_INET</code> only has the IP protocol.</p>
     #   @return [Integer]
     # @!attribute memory_regions
     #   <p>Specifies the Region of a process's address space such as stack and heap.</p>
@@ -7272,8 +7791,7 @@ module Aws::GuardDuty
     #   <p>Name of the potentially suspicious tool.</p>
     #   @return [String]
     # @!attribute tool_category
-    #   <p>Category that the tool belongs to. Some of the examples
-    #       are Backdoor Tool, Pentest Tool, Network Scanner, and Network Sniffer.</p>
+    #   <p>Category that the tool belongs to. Some of the examples are Backdoor Tool, Pentest Tool, Network Scanner, and Network Sniffer.</p>
     #   @return [String]
     # @!attribute service_name
     #   <p>Name of the security service that has been potentially disabled.</p>
@@ -7284,6 +7802,15 @@ module Aws::GuardDuty
     # @!attribute threat_file_path
     #   <p>The suspicious file path for which the threat intelligence details were found.</p>
     #   @return [String]
+    # @!attribute file_operation
+    #   <p>Represents the type of file operation that triggered the finding, such as Write, Delete, Rename, Link, or Symlink.</p>
+    #   @return [String]
+    # @!attribute file_path
+    #   <p>The path of the sensitive file that was modified. Modification includes write, delete, rename, link, or symlink operations. This field is indexed for filtering.</p>
+    #   @return [String]
+    # @!attribute related_file_paths
+    #   <p>All file paths modified by the same process that triggered the finding, up to a maximum of 25 paths.</p>
+    #   @return [Array<String>]
     class RuntimeContext < Struct.new(
       nil,
       :modifying_process,
@@ -7311,13 +7838,15 @@ module Aws::GuardDuty
       :service_name,
       :command_line_example,
       :threat_file_path,
+      :file_operation,
+      :file_path,
+      :related_file_paths,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the process and any required context values for a specific
-    #       finding.</p>
+    # <p>Information about the process and any required context values for a specific finding.</p>
     # @!attribute process
     #   <p>Information about the observed process.</p>
     #   @return [Types::ProcessDetails]
@@ -7341,9 +7870,7 @@ module Aws::GuardDuty
     #   <p>The timestamp at which the Amazon S3 bucket was created.</p>
     #   @return [Time]
     # @!attribute encryption_type
-    #   <p>The type of encryption used for the Amazon S3 buckets and its objects. For more information,
-    #          see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html">Protecting data with server-side encryption</a>
-    #          in the <i>Amazon S3 User Guide</i>.</p>
+    #   <p>The type of encryption used for the Amazon S3 buckets and its objects. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html">Protecting data with server-side encryption</a> in the <i>Amazon S3 User Guide</i>.</p>
     #   @return [String]
     # @!attribute encryption_key_arn
     #   <p>The Amazon Resource Name (ARN) of the encryption key that is used to encrypt the Amazon S3 bucket and its objects.</p>
@@ -7441,8 +7968,7 @@ module Aws::GuardDuty
 
     # <p>Describes whether S3 data event logs will be enabled as a data source.</p>
     # @!attribute status
-    #   <p>A value that describes whether S3 data event logs are automatically enabled for new
-    #         members of the organization.</p>
+    #   <p>A value that describes whether S3 data event logs are automatically enabled for new members of the organization.</p>
     #   @return [String]
     class S3LogsConfigurationResult < Struct.new(
       nil,
@@ -7454,8 +7980,7 @@ module Aws::GuardDuty
 
     # <p>Contains information about the Amazon S3 object.</p>
     # @!attribute e_tag
-    #   <p>The entity tag is a hash of the Amazon S3 object. The ETag reflects changes only to the
-    #          contents of an object, and not its metadata.</p>
+    #   <p>The entity tag is a hash of the Amazon S3 object. The ETag reflects changes only to the contents of an object, and not its metadata.</p>
     #   @return [String]
     # @!attribute key
     #   <p>The key of the Amazon S3 object.</p>
@@ -7481,8 +8006,7 @@ module Aws::GuardDuty
     #   <p>Key of the S3 object.</p>
     #   @return [String]
     # @!attribute e_tag
-    #   <p>The entity tag is a hash of the S3 object. The ETag reflects changes only to the contents of 
-    #       an object, and not its metadata.</p>
+    #   <p>The entity tag is a hash of the S3 object. The ETag reflects changes only to the contents of an object, and not its metadata.</p>
     #   @return [String]
     # @!attribute hash
     #   <p>Hash of the threat detected in this finding.</p>
@@ -7502,18 +8026,32 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The S3 object path to initiate a scan, including bucket name, object key, and optional version ID.</p>
+    # @!attribute bucket
+    #   <p>The name of the S3 bucket containing the object to scan. The bucket must have GuardDuty Malware Protection enabled.</p>
+    #   @return [String]
+    # @!attribute key
+    #   <p>The key (name) of the S3 object to scan for malware. This must be the full key path of the object within the bucket.</p>
+    #   @return [String]
+    # @!attribute version_id
+    #   <p>The version ID of the S3 object to scan. If not specified, the latest version of the object is scanned.</p>
+    #   @return [String]
+    class S3ObjectForSendObjectMalwareScan < Struct.new(
+      nil,
+      :bucket,
+      :key,
+      :version_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about malware scans associated with GuardDuty Malware Protection for EC2.</p>
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that is associated with the request.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that is associated with the request.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute admin_detector_id
-    #   <p>The unique detector ID of the administrator account that the request is associated with.
-    #         If the account is an administrator, the <code>AdminDetectorId</code> will be the same as the one used for 
-    #         <code>DetectorId</code>.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique detector ID of the administrator account that the request is associated with. If the account is an administrator, the <code>AdminDetectorId</code> will be the same as the one used for <code>DetectorId</code>.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute scan_id
     #   <p>The unique scan ID associated with a scan entry.</p>
@@ -7578,9 +8116,7 @@ module Aws::GuardDuty
 
     # <p>Contains information about the condition.</p>
     # @!attribute map_equals
-    #   <p>Represents an <i>mapEqual</i>
-    #               <b></b> condition to be applied
-    #         to a single field when triggering for malware scan.</p>
+    #   <p>Represents an <i>mapEqual</i> <b/> condition to be applied to a single field when triggering for malware scan.</p>
     #   @return [Array<Types::ScanConditionPair>]
     class ScanCondition < Struct.new(
       nil,
@@ -7595,14 +8131,68 @@ module Aws::GuardDuty
     #   <p>Represents the <b>key</b> in the map condition.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>Represents optional <b>value</b> in the map
-    #         condition. If not specified, only the <b>key</b> will be
-    #         matched.</p>
+    #   <p>Represents optional <b>value</b> in the map condition. If not specified, only the <b>key</b> will be matched.</p>
     #   @return [String]
     class ScanConditionPair < Struct.new(
       nil,
       :key,
       :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the configuration used for the malware scan.</p>
+    # @!attribute role
+    #   <p>Amazon Resource Name (ARN) of the IAM role that should contain the required permissions for the scan.</p>
+    #   @return [String]
+    # @!attribute trigger_details
+    #   <p>Information about the entity that triggered the malware scan.</p>
+    #   @return [Types::TriggerDetails]
+    # @!attribute incremental_scan_details
+    #   <p>Information about the incremental scan configuration, if applicable.</p>
+    #   @return [Types::IncrementalScanDetails]
+    # @!attribute recovery_point
+    #   <p>Information about the recovery point configuration used for the scan, if applicable.</p>
+    #   @return [Types::ScanConfigurationRecoveryPoint]
+    class ScanConfiguration < Struct.new(
+      nil,
+      :role,
+      :trigger_details,
+      :incremental_scan_details,
+      :recovery_point,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the time range within the continuous backup in Amazon Web Services Backup that was scanned for a point-in-time recovery resource.</p>
+    # @!attribute start_time
+    #   <p>The timestamp representing the start of the time range that was scanned.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The timestamp representing the end of the time range that was scanned.</p>
+    #   @return [Time]
+    class ScanConfigurationContinuousScanDetails < Struct.new(
+      nil,
+      :start_time,
+      :end_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about the recovery point configuration used in the scan.</p>
+    # @!attribute backup_vault_name
+    #   <p>The name of the Amazon Web Services Backup vault that contains the recovery point for the scanned.</p>
+    #   @return [String]
+    # @!attribute continuous_scan_details
+    #   <p>The time range within the continuous backup in Amazon Web Services Backup that was scanned for a point-in-time recovery resource.</p>
+    #   @return [Types::ScanConfigurationContinuousScanDetails]
+    class ScanConfigurationRecoveryPoint < Struct.new(
+      nil,
+      :backup_vault_name,
+      :continuous_scan_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7616,8 +8206,7 @@ module Aws::GuardDuty
     #   <p>Total number of infected files.</p>
     #   @return [Types::ThreatsDetectedItemCount]
     # @!attribute highest_severity_threat_details
-    #   <p>Details of the highest severity threat detected during malware scan and number of infected
-    #         files.</p>
+    #   <p>Details of the highest severity threat detected during malware scan and number of infected files.</p>
     #   @return [Types::HighestSeverityThreatDetails]
     # @!attribute threat_detected_by_name
     #   <p>Contains details about identified threats organized by threat name.</p>
@@ -7633,8 +8222,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes whether Malware Protection for EC2 instances with findings will be enabled as a
-    #       data source.</p>
+    # <p>Describes whether Malware Protection for EC2 instances with findings will be enabled as a data source.</p>
     # @!attribute ebs_volumes
     #   <p>Describes the configuration for scanning EBS volumes as data source.</p>
     #   @return [Boolean]
@@ -7646,8 +8234,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information on the status of whether Malware Protection for EC2
-    #       instances with findings will be enabled as a data source.</p>
+    # <p>An object that contains information on the status of whether Malware Protection for EC2 instances with findings will be enabled as a data source.</p>
     # @!attribute ebs_volumes
     #   <p>Describes the configuration of scanning EBS volumes as a data source.</p>
     #   @return [Types::EbsVolumesResult]
@@ -7683,15 +8270,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information about criteria used to filter resources before triggering malware
-    #       scan.</p>
+    # <p>Contains information about criteria used to filter resources before triggering malware scan.</p>
     # @!attribute include
-    #   <p>Represents condition that when matched will allow a malware scan for a certain
-    #         resource.</p>
+    #   <p>Represents condition that when matched will allow a malware scan for a certain resource.</p>
     #   @return [Hash<String, Types::ScanCondition>]
     # @!attribute exclude
-    #   <p>Represents condition that when matched will prevent a malware scan for a certain
-    #         resource.</p>
+    #   <p>Represents condition that when matched will prevent a malware scan for a certain resource.</p>
     #   @return [Hash<String, Types::ScanCondition>]
     class ScanResourceCriteria < Struct.new(
       nil,
@@ -7714,8 +8298,35 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains files infected with the given threat providing details of malware name and
-    #       severity.</p>
+    # <p>Contains information about a specific threat that was detected during the malware scan.</p>
+    # @!attribute name
+    #   <p>The name of the detected threat.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source that detected this threat.</p>
+    #   @return [String]
+    # @!attribute count
+    #   <p>The number of instances of this threat that were detected.</p>
+    #   @return [Integer]
+    # @!attribute hash
+    #   <p>The hash value associated with the detected threat.</p>
+    #   @return [String]
+    # @!attribute item_details
+    #   <p>Additional information about where this threat was detected.</p>
+    #   @return [Array<Types::ItemDetails>]
+    class ScanResultThreat < Struct.new(
+      nil,
+      :name,
+      :source,
+      :count,
+      :hash,
+      :item_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains files infected with the given threat providing details of malware name and severity.</p>
     # @!attribute name
     #   <p>The name of the identified threat.</p>
     #   @return [String]
@@ -7759,6 +8370,50 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about a resource that was scanned as part of the malware scan operation.</p>
+    # @!attribute scanned_resource_arn
+    #   <p>Amazon Resource Name (ARN) of the scanned resource.</p>
+    #   @return [String]
+    # @!attribute scanned_resource_type
+    #   <p>The resource type of the scanned resource.</p>
+    #   @return [String]
+    # @!attribute scanned_resource_status
+    #   <p>The status of the scanned resource.</p>
+    #   @return [String]
+    # @!attribute scan_status_reason
+    #   <p>The reason for the scan status of this particular resource, if applicable.</p>
+    #   @return [String]
+    # @!attribute resource_details
+    #   <p>Information about the scanned resource.</p>
+    #   @return [Types::ScannedResourceDetails]
+    class ScannedResource < Struct.new(
+      nil,
+      :scanned_resource_arn,
+      :scanned_resource_type,
+      :scanned_resource_status,
+      :scan_status_reason,
+      :resource_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains additional information about a resource that was scanned.</p>
+    # @!attribute ebs_volume
+    #   <p>Contains information about the EBS volume that was scanned.</p>
+    #   @return [Types::VolumeDetail]
+    # @!attribute ebs_snapshot
+    #   <p>Contains information about the EBS snapshot that was scanned.</p>
+    #   @return [Types::EbsSnapshot]
+    class ScannedResourceDetails < Struct.new(
+      nil,
+      :ebs_volume,
+      :ebs_snapshot,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Container security context.</p>
     # @!attribute privileged
     #   <p>Whether the container is privileged.</p>
@@ -7791,6 +8446,24 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute s3_object
+    #   <p>The S3 object information for the object you want to scan. The bucket must have a Malware Protection plan configured to use this API.</p>
+    #   @return [Types::S3ObjectForSendObjectMalwareScan]
+    class SendObjectMalwareScanRequest < Struct.new(
+      nil,
+      :s3_object,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class SendObjectMalwareScanResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about the GuardDuty attack sequence finding.</p>
     # @!attribute uid
     #   <p>Unique identifier of the attack sequence.</p>
@@ -7814,8 +8487,7 @@ module Aws::GuardDuty
     #   <p>Contains information about the indicators observed in the attack sequence.</p>
     #   @return [Array<Types::Indicator>]
     # @!attribute additional_sequence_types
-    #   <p>Additional types of sequences that may be associated with the attack sequence finding,
-    #         providing further context about the nature of the detected threat.</p>
+    #   <p>Additional types of sequences that may be associated with the attack sequence finding, providing further context about the nature of the detected threat.</p>
     #   @return [Array<String>]
     class Sequence < Struct.new(
       nil,
@@ -7849,12 +8521,10 @@ module Aws::GuardDuty
     #   <p>The detector ID for the GuardDuty service.</p>
     #   @return [String]
     # @!attribute event_first_seen
-    #   <p>The first-seen timestamp of the activity that prompted GuardDuty to generate this
-    #         finding.</p>
+    #   <p>The first-seen timestamp of the activity that prompted GuardDuty to generate this finding.</p>
     #   @return [String]
     # @!attribute event_last_seen
-    #   <p>The last-seen timestamp of the activity that prompted GuardDuty to generate this
-    #         finding.</p>
+    #   <p>The last-seen timestamp of the activity that prompted GuardDuty to generate this finding.</p>
     #   @return [String]
     # @!attribute resource_role
     #   <p>The resource role information for this finding.</p>
@@ -7875,8 +8545,7 @@ module Aws::GuardDuty
     #   <p>Returns details from the malware scan that created a finding.</p>
     #   @return [Types::EbsVolumeScanDetails]
     # @!attribute runtime_details
-    #   <p>Information about the process and any required context values for a specific
-    #         finding</p>
+    #   <p>Information about the process and any required context values for a specific finding</p>
     #   @return [Types::RuntimeDetails]
     # @!attribute detection
     #   <p>Contains information about the detected unusual behavior.</p>
@@ -7928,16 +8597,13 @@ module Aws::GuardDuty
     #   <p>The unique identifier of the session.</p>
     #   @return [String]
     # @!attribute mfa_status
-    #   <p>Indicates whether or not multi-factor authencation (MFA) was used during authentication.</p>
-    #            <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.attributes.mfaAuthenticated</code>.</p>
+    #   <p>Indicates whether or not multi-factor authencation (MFA) was used during authentication.</p> <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.attributes.mfaAuthenticated</code>.</p>
     #   @return [String]
     # @!attribute created_time
-    #   <p>The timestamp for when the session was created.</p>
-    #            <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.attributes.creationDate</code>.</p>
+    #   <p>The timestamp for when the session was created.</p> <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.attributes.creationDate</code>.</p>
     #   @return [Time]
     # @!attribute issuer
-    #   <p>Identifier of the session issuer.</p>
-    #            <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.sessionIssuer.arn</code>.</p>
+    #   <p>Identifier of the session issuer.</p> <p>In Amazon Web Services CloudTrail, you can find this value as <code>userIdentity.sessionContext.sessionIssuer.arn</code>.</p>
     #   @return [String]
     class Session < Struct.new(
       nil,
@@ -7975,37 +8641,13 @@ module Aws::GuardDuty
     #   <p>The unique identifier of the signal.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of the signal used to identify an attack sequence.</p>
-    #            <p>Signals can be GuardDuty findings or activities observed in data sources that GuardDuty monitors. For
-    #          more information, see 
-    #          <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html">Foundational data sources</a> in the
-    #        <i>Amazon GuardDuty User Guide</i>.</p>
-    #            <p>A signal type can be one of the valid values listed in this API. Here are the related descriptions:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>FINDING</code> - Individually generated GuardDuty finding.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>CLOUD_TRAIL</code> - Activity observed from CloudTrail logs</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>S3_DATA_EVENTS</code> - Activity observed from CloudTrail data events for S3. Activities associated
-    #              with this type will show up only when
-    #              you have enabled GuardDuty S3 Protection feature in your account. For more information about S3 Protection and
-    #              steps to enable it, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html">S3 Protection</a> in the
-    #              <i>Amazon GuardDuty User Guide</i>.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The type of the signal used to identify an attack sequence.</p> <p>Signals can be GuardDuty findings or activities observed in data sources that GuardDuty monitors. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html">Foundational data sources</a> in the <i>Amazon GuardDuty User Guide</i>.</p> <p>A signal type can be one of the valid values listed in this API. Here are the related descriptions:</p> <ul> <li> <p> <code>FINDING</code> - Individually generated GuardDuty finding.</p> </li> <li> <p> <code>CLOUD_TRAIL</code> - Activity observed from CloudTrail logs</p> </li> <li> <p> <code>S3_DATA_EVENTS</code> - Activity observed from CloudTrail data events for S3. Activities associated with this type will show up only when you have enabled GuardDuty S3 Protection feature in your account. For more information about S3 Protection and steps to enable it, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html">S3 Protection</a> in the <i>Amazon GuardDuty User Guide</i>.</p> </li> </ul>
     #   @return [String]
     # @!attribute description
     #   <p>The description of the signal.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the signal. For example, when signal type is <code>FINDING</code>, 
-    #          the signal name is the name of the finding.</p>
+    #   <p>The name of the signal. For example, when signal type is <code>FINDING</code>, the signal name is the name of the finding.</p>
     #   @return [String]
     # @!attribute created_at
     #   <p>The timestamp when the first finding or activity related to this signal was observed.</p>
@@ -8020,9 +8662,7 @@ module Aws::GuardDuty
     #   <p>The timestamp when the last finding or activity related to this signal was observed.</p>
     #   @return [Time]
     # @!attribute severity
-    #   <p>The severity associated with the signal. For more information about severity, see 
-    #          <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html">Findings severity levels</a>
-    #        in the <i>Amazon GuardDuty User Guide</i>.</p>
+    #   <p>The severity associated with the signal. For more information about severity, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html">Findings severity levels</a> in the <i>Amazon GuardDuty User Guide</i>.</p>
     #   @return [Float]
     # @!attribute count
     #   <p>The number of times this signal was observed.</p>
@@ -8039,6 +8679,9 @@ module Aws::GuardDuty
     # @!attribute signal_indicators
     #   <p>Contains information about the indicators associated with the signals.</p>
     #   @return [Array<Types::Indicator>]
+    # @!attribute activities
+    #   <p>Contains information about the activities, such as API calls, that were observed for this signal.</p>
+    #   @return [Array<Types::Activity>]
     class Signal < Struct.new(
       nil,
       :uid,
@@ -8055,6 +8698,7 @@ module Aws::GuardDuty
       :actor_ids,
       :endpoint_ids,
       :signal_indicators,
+      :activities,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8062,8 +8706,7 @@ module Aws::GuardDuty
 
     # <p>Contains information about the criteria used for sorting findings.</p>
     # @!attribute attribute_name
-    #   <p>Represents the finding attribute, such as <code>accountId</code>, that sorts the
-    #         findings.</p>
+    #   <p>Represents the finding attribute, such as <code>accountId</code>, that sorts the findings.</p>
     #   @return [String]
     # @!attribute order_by
     #   <p>The order by which the sorted findings are to be displayed.</p>
@@ -8077,20 +8720,47 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about the configuration to be used for the malware scan.</p>
+    # @!attribute role
+    #   <p>Amazon Resource Name (ARN) of the IAM role that is used for scanning the resource.</p>
+    #   @return [String]
+    # @!attribute incremental_scan_details
+    #   <p>Contains information about the incremental scan configuration. When specified, the scan will only process changes since the baseline resource.</p>
+    #   @return [Types::IncrementalScanDetails]
+    # @!attribute recovery_point
+    #   <p>Contains information about the recovery point configuration for the requested scan.</p>
+    #   @return [Types::RecoveryPoint]
+    class StartMalwareScanConfiguration < Struct.new(
+      nil,
+      :role,
+      :incremental_scan_details,
+      :recovery_point,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>Amazon Resource Name (ARN) of the resource for which you invoked the API.</p>
     #   @return [String]
+    # @!attribute client_token
+    #   <p>The idempotency token for the create request.</p>
+    #   @return [String]
+    # @!attribute scan_configuration
+    #   <p>Contains information about the configuration to be used for the malware scan.</p>
+    #   @return [Types::StartMalwareScanConfiguration]
     class StartMalwareScanRequest < Struct.new(
       nil,
       :resource_arn,
+      :client_token,
+      :scan_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_id
-    #   <p>A unique identifier that gets generated when you invoke the API without any error. Each malware scan has 
-    #         a corresponding scan ID. Using this scan ID, you can monitor the status of your malware scan.</p>
+    #   <p>A unique identifier that gets generated when you invoke the API without any error. Each malware scan has a corresponding scan ID. Using this scan ID, you can monitor the status of your malware scan.</p>
     #   @return [String]
     class StartMalwareScanResponse < Struct.new(
       nil,
@@ -8101,10 +8771,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector of the GuardDuty administrator account associated with the
-    #         member accounts to monitor.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute account_ids
     #   <p>A list of account IDs of the GuardDuty member accounts to start monitoring.</p>
@@ -8119,8 +8786,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute unprocessed_accounts
-    #   <p>A list of objects that contain the unprocessed account and a result string that explains
-    #         why it was unprocessed.</p>
+    #   <p>A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class StartMonitoringMembersResponse < Struct.new(
       nil,
@@ -8131,10 +8797,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector associated with the GuardDuty administrator account that is
-    #         monitoring member accounts.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector associated with the GuardDuty administrator account that is monitoring member accounts.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute account_ids
     #   <p>A list of account IDs for the member accounts to stop monitoring.</p>
@@ -8149,8 +8812,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute unprocessed_accounts
-    #   <p>A list of objects that contain an accountId for each account that could not be processed,
-    #         and a result string that indicates why the account was not processed. </p>
+    #   <p>A list of objects that contain an accountId for each account that could not be processed, and a result string that indicates why the account was not processed. </p>
     #   @return [Array<Types::UnprocessedAccount>]
     class StopMonitoringMembersResponse < Struct.new(
       nil,
@@ -8198,8 +8860,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the detected threats associated with the
-    #       generated finding.</p>
+    # <p>Information about the detected threats associated with the generated finding.</p>
     # @!attribute name
     #   <p>Name of the detected threat that caused GuardDuty to generate this finding.</p>
     #   @return [String]
@@ -8207,14 +8868,25 @@ module Aws::GuardDuty
     #   <p>Source of the threat that generated this finding.</p>
     #   @return [String]
     # @!attribute item_paths
-    #   <p>Information about the nested item path and 
-    #         hash of the protected resource.</p>
+    #   <p>Information about the nested item path and hash of the protected resource.</p>
     #   @return [Array<Types::ItemPath>]
+    # @!attribute count
+    #   <p>The number of occurrences of this specific threat detected during the scan.</p>
+    #   @return [Integer]
+    # @!attribute hash
+    #   <p>The hash identifier of the detected malware threat.</p>
+    #   @return [String]
+    # @!attribute item_details
+    #   <p>Detailed information about the detected malware threat.</p>
+    #   @return [Array<Types::ItemDetails>]
     class Threat < Struct.new(
       nil,
       :name,
       :source,
       :item_paths,
+      :count,
+      :hash,
+      :item_details,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8228,8 +8900,7 @@ module Aws::GuardDuty
     #   <p>Total number of unique threats by name identified, as part of the malware scan.</p>
     #   @return [Integer]
     # @!attribute shortened
-    #   <p>Flag to determine if the finding contains every single infected file-path and/or every
-    #         threat.</p>
+    #   <p>Flag to determine if the finding contains every single infected file-path and/or every threat.</p>
     #   @return [Boolean]
     # @!attribute threat_names
     #   <p>List of identified threats with details, organized by threat name.</p>
@@ -8245,14 +8916,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An instance of a threat intelligence detail that constitutes evidence for the
-    #       finding.</p>
+    # <p>An instance of a threat intelligence detail that constitutes evidence for the finding.</p>
     # @!attribute threat_list_name
     #   <p>The name of the threat intelligence list that triggered the finding.</p>
     #   @return [String]
     # @!attribute threat_names
-    #   <p>A list of names of the threats in the threat intelligence list that triggered the
-    #         finding.</p>
+    #   <p>A list of names of the threats in the threat intelligence list that triggered the finding.</p>
     #   @return [Array<String>]
     # @!attribute threat_file_sha256
     #   <p>SHA256 of the file that generated the finding.</p>
@@ -8302,19 +8971,21 @@ module Aws::GuardDuty
     # @!attribute description
     #   <p>The description of the scan trigger.</p>
     #   @return [String]
+    # @!attribute trigger_type
+    #   <p>Specifies the trigger type that started the malware scan.</p>
+    #   @return [String]
     class TriggerDetails < Struct.new(
       nil,
       :guard_duty_finding_id,
       :description,
+      :trigger_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the detector associated with the findings to unarchive.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector associated with the findings to unarchive.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute finding_ids
     #   <p>The IDs of the findings to unarchive.</p>
@@ -8353,8 +9024,7 @@ module Aws::GuardDuty
 
     # <p>Specifies the names of the data sources that couldn't be enabled.</p>
     # @!attribute malware_protection
-    #   <p>An object that contains information on the status of all Malware Protection data
-    #         sources.</p>
+    #   <p>An object that contains information on the status of all Malware Protection data sources.</p>
     #   @return [Types::MalwareProtectionConfigurationResult]
     class UnprocessedDataSourcesResult < Struct.new(
       nil,
@@ -8386,23 +9056,73 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute association_id
+    #   <p>The unique identifier for the association to update.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The rule execution mode. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>
+    #   @return [String]
+    class UpdateCustomDetectionRuleAssociationRequest < Struct.new(
+      nil,
+      :rule_id,
+      :association_id,
+      :mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateCustomDetectionRuleAssociationResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute rule_id
+    #   <p>The unique identifier for the custom detection rule.</p>
+    #   @return [String]
+    # @!attribute mode
+    #   <p>The execution mode of the organization configuration. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>
+    #   @return [String]
+    # @!attribute include_account_ids
+    #   <p>The account IDs to include in the organization configuration. Mutually exclusive with <code>ExcludeAccountIds</code>.</p>
+    #   @return [Array<String>]
+    # @!attribute exclude_account_ids
+    #   <p>The account IDs to exclude from the organization configuration. Mutually exclusive with <code>IncludeAccountIds</code>.</p>
+    #   @return [Array<String>]
+    class UpdateCustomDetectionRuleOrgConfigurationRequest < Struct.new(
+      nil,
+      :rule_id,
+      :mode,
+      :include_account_ids,
+      :exclude_account_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateCustomDetectionRuleOrgConfigurationResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute detector_id
-    #   <p>The unique ID of the detector to update.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector to update.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute enable
     #   <p>Specifies whether the detector is enabled or not enabled.</p>
     #   @return [Boolean]
     # @!attribute finding_publishing_frequency
-    #   <p>An enum value that specifies how frequently findings are exported, such as to CloudWatch
-    #         Events.</p>
+    #   <p>An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.</p>
     #   @return [String]
     # @!attribute data_sources
-    #   <p>Describes which data sources will be updated.</p>
-    #            <p>There might be regional differences because some data sources might not be 
-    #         available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more 
-    #         information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>
+    #   <p>Describes which data sources will be updated.</p> <p>There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html">Regions and endpoints</a>.</p>
     #   @deprecated
     #     This parameter is deprecated, use Features instead
     #   @return [Types::DataSourceConfigurations]
@@ -8429,29 +9149,22 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that specifies the GuardDuty service where you want to
-    #         update a filter.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that specifies the GuardDuty service where you want to update a filter.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute filter_name
     #   <p>The name of the filter.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>The description of the filter. Valid characters include alphanumeric characters, and
-    #         special characters such as hyphen, period, colon, underscore, parentheses (<code>{ }</code>,
-    #           <code>[ ]</code>, and <code>( )</code>), forward slash, horizontal tab, vertical tab,
-    #         newline, form feed, return, and whitespace.</p>
+    #   <p>The description of the filter. Valid characters include alphanumeric characters, and special characters such as hyphen, period, colon, underscore, parentheses (<code>{ }</code>, <code>[ ]</code>, and <code>( )</code>), forward slash, horizontal tab, vertical tab, newline, form feed, return, and whitespace.</p>
     #   @return [String]
     # @!attribute action
-    #   <p>Specifies the action that is to be applied to the findings that match the filter.</p>
+    #   <p>Specifies the action that is to be applied to the findings that match the filter.</p> <p>Default: NOOP</p>
     #   @return [String]
     # @!attribute rank
-    #   <p>Specifies the position of the filter in the list of current filters. Also specifies the
-    #         order in which this filter is applied to the findings.</p>
+    #   <p>Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.</p>
     #   @return [Integer]
     # @!attribute finding_criteria
-    #   <p>Represents the criteria to be used in the filter for querying findings.</p>
+    #   <p>Represents the criteria to be used in the filter for querying findings. The following fields are available for filtering:</p> <ul> <li> <p>accountId</p> </li> <li> <p>arn</p> </li> <li> <p>associatedAttackSequenceArn</p> </li> <li> <p>confidence</p> </li> <li> <p>createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>id</p> </li> <li> <p>partition</p> </li> <li> <p>region</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.accountId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.arn</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.principalId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.attributes.mfaAuthenticated</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.ec2RoleDelivery</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.invokedBy</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.accountId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.arn</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.principalId</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.type</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sessionIssuer.userName</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.sourceIdentity</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.webIdFederationData.attributes</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.sessionContext.webIdFederationData.federatedProvider</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.type</p> </li> <li> <p>resource.accessKeyDetails.userIdentity.userName</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.bedrockGuardrailDetails.guardrailArn</p> </li> <li> <p>resource.bedrockGuardrailDetails.guardrailVersion</p> </li> <li> <p>resource.containerDetails.containerRuntime</p> </li> <li> <p>resource.containerDetails.id</p> </li> <li> <p>resource.containerDetails.image</p> </li> <li> <p>resource.containerDetails.imagePrefix</p> </li> <li> <p>resource.containerDetails.name</p> </li> <li> <p>resource.containerDetails.securityContext.allowPrivilegeEscalation</p> </li> <li> <p>resource.containerDetails.securityContext.privileged</p> </li> <li> <p>resource.containerDetails.volumeMounts.mountPath</p> </li> <li> <p>resource.containerDetails.volumeMounts.name</p> </li> <li> <p>resource.ebsSnapshotDetails.snapshotArn</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.deviceName</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.encryptionType</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.kmsKeyArn</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.snapshotArn</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.volumeArn</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.volumeSizeInGB</p> </li> <li> <p>resource.ebsVolumeDetails.scannedVolumeDetails.volumeType</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.deviceName</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.encryptionType</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.kmsKeyArn</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.snapshotArn</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.volumeArn</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.volumeSizeInGB</p> </li> <li> <p>resource.ebsVolumeDetails.skippedVolumeDetails.volumeType</p> </li> <li> <p>resource.ec2ImageDetails.imageArn</p> </li> <li> <p>resource.ecsClusterDetails.activeServicesCount</p> </li> <li> <p>resource.ecsClusterDetails.arn</p> </li> <li> <p>resource.ecsClusterDetails.name</p> </li> <li> <p>resource.ecsClusterDetails.registeredContainerInstancesCount</p> </li> <li> <p>resource.ecsClusterDetails.runningTasksCount</p> </li> <li> <p>resource.ecsClusterDetails.status</p> </li> <li> <p>resource.ecsClusterDetails.tags.key</p> </li> <li> <p>resource.ecsClusterDetails.tags.value</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.arn</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.containerRuntime</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.id</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.image</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.imagePrefix</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.name</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.securityContext.allowPrivilegeEscalation</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.securityContext.privileged</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.volumeMounts.mountPath</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.containers.volumeMounts.name</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.definitionArn</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.group</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.launchType</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.startedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.startedBy</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.tags.key</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.tags.value</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.version</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.volumes.hostPath.path</p> </li> <li> <p>resource.ecsClusterDetails.taskDetails.volumes.name</p> </li> <li> <p>resource.eksClusterDetails.arn</p> </li> <li> <p>resource.eksClusterDetails.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.eksClusterDetails.name</p> </li> <li> <p>resource.eksClusterDetails.status</p> </li> <li> <p>resource.eksClusterDetails.tags.key</p> </li> <li> <p>resource.eksClusterDetails.tags.value</p> </li> <li> <p>resource.eksClusterDetails.vpcId</p> </li> <li> <p>resource.instanceDetails.availabilityZone</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.arn</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageDescription</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.instanceState</p> </li> <li> <p>resource.instanceDetails.instanceType</p> </li> <li> <p>resource.instanceDetails.launchTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.networkInterfaceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.platform</p> </li> <li> <p>resource.instanceDetails.productCodes.productCodeId</p> </li> <li> <p>resource.instanceDetails.productCodes.productCodeType</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.groups</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.impersonatedUser.groups</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.impersonatedUser.username</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.sessionName</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.uid</p> </li> <li> <p>resource.kubernetesDetails.kubernetesUserDetails.username</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.containerRuntime</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.id</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.securityContext.allowPrivilegeEscalation</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.securityContext.privileged</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.volumeMounts.mountPath</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.containers.volumeMounts.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.hostIpc</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.hostNetwork</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.hostPid</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.name</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.namespace</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.serviceAccountName</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.type</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.uid</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.volumes.hostPath.path</p> </li> <li> <p>resource.kubernetesDetails.kubernetesWorkloadDetails.volumes.name</p> </li> <li> <p>resource.lambdaDetails.description</p> </li> <li> <p>resource.lambdaDetails.functionArn</p> </li> <li> <p>resource.lambdaDetails.functionName</p> </li> <li> <p>resource.lambdaDetails.functionVersion</p> </li> <li> <p>resource.lambdaDetails.lastModifiedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.lambdaDetails.revisionId</p> </li> <li> <p>resource.lambdaDetails.role</p> </li> <li> <p>resource.lambdaDetails.tags.key</p> </li> <li> <p>resource.lambdaDetails.tags.value</p> </li> <li> <p>resource.lambdaDetails.vpcConfig.securityGroups.groupId</p> </li> <li> <p>resource.lambdaDetails.vpcConfig.securityGroups.groupName</p> </li> <li> <p>resource.lambdaDetails.vpcConfig.subnetIds</p> </li> <li> <p>resource.lambdaDetails.vpcConfig.vpcId</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbClusterIdentifier</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbInstanceArn</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbInstanceIdentifier</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbSecurityGroups.name</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbSecurityGroups.status</p> </li> <li> <p>resource.rdsDbInstanceDetails.dbiResourceId</p> </li> <li> <p>resource.rdsDbInstanceDetails.engine</p> </li> <li> <p>resource.rdsDbInstanceDetails.engineVersion</p> </li> <li> <p>resource.rdsDbInstanceDetails.iamDatabaseAuthenticationEnabled</p> </li> <li> <p>resource.rdsDbInstanceDetails.publiclyAccessible</p> </li> <li> <p>resource.rdsDbInstanceDetails.vpcId</p> </li> <li> <p>resource.rdsDbInstanceDetails.vpcSecurityGroups.status</p> </li> <li> <p>resource.rdsDbInstanceDetails.vpcSecurityGroups.vpcSecurityGroupId</p> </li> <li> <p>resource.rdsDbUserDetails.application</p> </li> <li> <p>resource.rdsDbUserDetails.authMethod</p> </li> <li> <p>resource.rdsDbUserDetails.database</p> </li> <li> <p>resource.rdsDbUserDetails.ssl</p> </li> <li> <p>resource.rdsDbUserDetails.user</p> </li> <li> <p>resource.rdsLimitlessDbDetails.dbClusterIdentifier</p> </li> <li> <p>resource.rdsLimitlessDbDetails.dbShardGroupArn</p> </li> <li> <p>resource.rdsLimitlessDbDetails.dbShardGroupIdentifier</p> </li> <li> <p>resource.rdsLimitlessDbDetails.dbShardGroupResourceId</p> </li> <li> <p>resource.rdsLimitlessDbDetails.engine</p> </li> <li> <p>resource.rdsLimitlessDbDetails.engineVersion</p> </li> <li> <p>resource.rdsLimitlessDbDetails.tags.key</p> </li> <li> <p>resource.rdsLimitlessDbDetails.tags.value</p> </li> <li> <p>resource.recoveryPointDetails.backupVaultName</p> </li> <li> <p>resource.recoveryPointDetails.recoveryPointArn</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>resource.s3BucketDetails.arn</p> </li> <li> <p>resource.s3BucketDetails.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>resource.s3BucketDetails.defaultServerSideEncryption.encryptionType</p> </li> <li> <p>resource.s3BucketDetails.defaultServerSideEncryption.kmsMasterKeyArn</p> </li> <li> <p>resource.s3BucketDetails.name</p> </li> <li> <p>resource.s3BucketDetails.owner.id</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.effectivePermission</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.accountLevelPermissions.blockPublicAccess.blockPublicAcls</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.accountLevelPermissions.blockPublicAccess.blockPublicPolicy</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.accountLevelPermissions.blockPublicAccess.ignorePublicAcls</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.accountLevelPermissions.blockPublicAccess.restrictPublicBuckets</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.accessControlList.allowsPublicReadAccess</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.accessControlList.allowsPublicWriteAccess</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.blockPublicAccess.blockPublicAcls</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.blockPublicAccess.blockPublicPolicy</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.blockPublicAccess.ignorePublicAcls</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.blockPublicAccess.restrictPublicBuckets</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.bucketPolicy.allowsPublicReadAccess</p> </li> <li> <p>resource.s3BucketDetails.publicAccess.permissionConfiguration.bucketLevelPermissions.bucketPolicy.allowsPublicWriteAccess</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.eTag</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.hash</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.key</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.objectArn</p> </li> <li> <p>resource.s3BucketDetails.s3ObjectDetails.versionId</p> </li> <li> <p>resource.s3BucketDetails.tags.key</p> </li> <li> <p>resource.s3BucketDetails.tags.value</p> </li> <li> <p>resource.s3BucketDetails.type</p> </li> <li> <p>schemaVersion</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.domainDetails.domain</p> </li> <li> <p>service.action.awsApiCallAction.errorCode</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.accountId</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.affiliated</p> </li> <li> <p>service.action.awsApiCallAction.remoteAccountDetails.awsServiceName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.org</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.awsApiCallAction.userAgent</p> </li> <li> <p>service.action.dnsRequestAction.blocked</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.dnsRequestAction.domainWithSuffix</p> </li> <li> <p>service.action.dnsRequestAction.protocol</p> </li> <li> <p>service.action.dnsRequestAction.vpcOwnerAccountId</p> </li> <li> <p>service.action.kubernetesApiCallAction.namespace</p> </li> <li> <p>service.action.kubernetesApiCallAction.parameters</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.kubernetesApiCallAction.remoteIpDetails.organization.org</p> </li> <li> <p>service.action.kubernetesApiCallAction.requestUri</p> </li> <li> <p>service.action.kubernetesApiCallAction.resource</p> </li> <li> <p>service.action.kubernetesApiCallAction.resourceName</p> </li> <li> <p>service.action.kubernetesApiCallAction.sourceIPs</p> </li> <li> <p>service.action.kubernetesApiCallAction.statusCode</p> </li> <li> <p>service.action.kubernetesApiCallAction.subresource</p> </li> <li> <p>service.action.kubernetesApiCallAction.userAgent</p> </li> <li> <p>service.action.kubernetesApiCallAction.verb</p> </li> <li> <p>service.action.kubernetesPermissionCheckedDetails.allowed</p> </li> <li> <p>service.action.kubernetesPermissionCheckedDetails.namespace</p> </li> <li> <p>service.action.kubernetesPermissionCheckedDetails.resource</p> </li> <li> <p>service.action.kubernetesPermissionCheckedDetails.verb</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.kind</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.name</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.roleRefKind</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.roleRefName</p> </li> <li> <p>service.action.kubernetesRoleBindingDetails.uid</p> </li> <li> <p>service.action.kubernetesRoleDetails.kind</p> </li> <li> <p>service.action.kubernetesRoleDetails.name</p> </li> <li> <p>service.action.kubernetesRoleDetails.uid</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV6</p> </li> <li> <p>service.action.networkConnectionAction.localNetworkInterface</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.portName</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.org</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.portName</p> </li> <li> <p>service.action.portProbeAction.blocked</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.localIpDetails.ipAddressV6</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.localPortDetails.port</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.localPortDetails.portName</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.portProbeAction.portProbeDetails.remoteIpDetails.organization.org</p> </li> <li> <p>service.action.rdsLoginAttemptAction.loginAttributes.application</p> </li> <li> <p>service.action.rdsLoginAttemptAction.loginAttributes.failedLoginAttempts</p> </li> <li> <p>service.action.rdsLoginAttemptAction.loginAttributes.successfulLoginAttempts</p> </li> <li> <p>service.action.rdsLoginAttemptAction.loginAttributes.user</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.country.countryCode</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.geoLocation.lat</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.geoLocation.lon</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.ipAddressV6</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.organization.isp</p> </li> <li> <p>service.action.rdsLoginAttemptAction.remoteIpDetails.organization.org</p> </li> <li> <p>service.additionalInfo.agentDetails.agentId</p> </li> <li> <p>service.additionalInfo.agentDetails.agentVersion</p> </li> <li> <p>service.additionalInfo.anomalies.anomalousAPIs</p> </li> <li> <p>service.additionalInfo.authenticationMethod</p> </li> <li> <p>service.additionalInfo.averagePacketSizeIn</p> </li> <li> <p>service.additionalInfo.averagePacketSizeOut</p> </li> <li> <p>service.additionalInfo.context</p> </li> <li> <p>service.additionalInfo.domain</p> </li> <li> <p>service.additionalInfo.inBytes</p> </li> <li> <p>service.additionalInfo.localNetworkInterfaceOwner</p> </li> <li> <p>service.additionalInfo.localPort</p> </li> <li> <p>service.additionalInfo.outBytes</p> </li> <li> <p>service.additionalInfo.packetsIn</p> </li> <li> <p>service.additionalInfo.packetsOut</p> </li> <li> <p>service.additionalInfo.policyArn</p> </li> <li> <p>service.additionalInfo.policyName</p> </li> <li> <p>service.additionalInfo.remotePort</p> </li> <li> <p>service.additionalInfo.sample</p> </li> <li> <p>service.additionalInfo.scannedPort</p> </li> <li> <p>service.additionalInfo.threatFileSha256</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.additionalInfo.threatName</p> </li> <li> <p>service.additionalInfo.totalBytesIn</p> </li> <li> <p>service.additionalInfo.totalBytesOut</p> </li> <li> <p>service.additionalInfo.type</p> </li> <li> <p>service.additionalInfo.unusual.asnOrg</p> </li> <li> <p>service.additionalInfo.unusual.port</p> </li> <li> <p>service.additionalInfo.unusualProtocol</p> </li> <li> <p>service.additionalInfo.userAgent.fullUserAgent</p> </li> <li> <p>service.additionalInfo.userAgent.userAgentCategory</p> </li> <li> <p>service.additionalInfo.value</p> </li> <li> <p>service.additionalInfo.vpcOwnerAccountId</p> </li> <li> <p>service.archived</p> </li> <li> <p>service.count</p> </li> <li> <p>service.detection.sequence.actors.id</p> </li> <li> <p>service.detection.sequence.actors.process.name</p> </li> <li> <p>service.detection.sequence.actors.process.path</p> </li> <li> <p>service.detection.sequence.actors.process.sha256</p> </li> <li> <p>service.detection.sequence.actors.session.createdTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.actors.session.issuer</p> </li> <li> <p>service.detection.sequence.actors.session.mfaStatus</p> </li> <li> <p>service.detection.sequence.actors.session.uid</p> </li> <li> <p>service.detection.sequence.actors.user.account.account</p> </li> <li> <p>service.detection.sequence.actors.user.account.uid</p> </li> <li> <p>service.detection.sequence.actors.user.credentialUid</p> </li> <li> <p>service.detection.sequence.actors.user.name</p> </li> <li> <p>service.detection.sequence.actors.user.type</p> </li> <li> <p>service.detection.sequence.actors.user.uid</p> </li> <li> <p>service.detection.sequence.additionalSequenceTypes</p> </li> <li> <p>service.detection.sequence.description</p> </li> <li> <p>service.detection.sequence.endpoints.autonomousSystem.name</p> </li> <li> <p>service.detection.sequence.endpoints.autonomousSystem.number</p> </li> <li> <p>service.detection.sequence.endpoints.connection.direction</p> </li> <li> <p>service.detection.sequence.endpoints.domain</p> </li> <li> <p>service.detection.sequence.endpoints.id</p> </li> <li> <p>service.detection.sequence.endpoints.ip</p> </li> <li> <p>service.detection.sequence.endpoints.location.city</p> </li> <li> <p>service.detection.sequence.endpoints.location.country</p> </li> <li> <p>service.detection.sequence.endpoints.location.lat</p> </li> <li> <p>service.detection.sequence.endpoints.location.lon</p> </li> <li> <p>service.detection.sequence.endpoints.port</p> </li> <li> <p>service.detection.sequence.resources.accountId</p> </li> <li> <p>service.detection.sequence.resources.cloudPartition</p> </li> <li> <p>service.detection.sequence.resources.data.accessKey.principalId</p> </li> <li> <p>service.detection.sequence.resources.data.accessKey.userName</p> </li> <li> <p>service.detection.sequence.resources.data.accessKey.userType</p> </li> <li> <p>service.detection.sequence.resources.data.autoscalingAutoScalingGroup.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.cloudformationStack.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.container.image</p> </li> <li> <p>service.detection.sequence.resources.data.container.imageUid</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Image.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.availabilityZone</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.ec2NetworkInterfaceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.iamInstanceProfile.arn</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.iamInstanceProfile.id</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.imageDescription</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.instanceState</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.instanceType</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.outpostArn</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.platform</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.productCodes.productCodeId</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Instance.productCodes.productCodeType</p> </li> <li> <p>service.detection.sequence.resources.data.ec2LaunchTemplate.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ec2LaunchTemplate.version</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.ipv6Addresses</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.privateIpAddresses.privateDnsName</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.privateIpAddresses.privateIpAddress</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.publicIp</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.securityGroups.groupId</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.securityGroups.groupName</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.subNetId</p> </li> <li> <p>service.detection.sequence.resources.data.ec2NetworkInterface.vpcId</p> </li> <li> <p>service.detection.sequence.resources.data.ec2Vpc.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ecsCluster.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.ecsCluster.status</p> </li> <li> <p>service.detection.sequence.resources.data.ecsTask.containerUids</p> </li> <li> <p>service.detection.sequence.resources.data.ecsTask.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.resources.data.ecsTask.launchType</p> </li> <li> <p>service.detection.sequence.resources.data.ecsTask.taskDefinitionArn</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.arn</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.status</p> </li> <li> <p>service.detection.sequence.resources.data.eksCluster.vpcId</p> </li> <li> <p>service.detection.sequence.resources.data.iamInstanceProfile.ec2InstanceUids</p> </li> <li> <p>service.detection.sequence.resources.data.iamInstanceProfile.id</p> </li> <li> <p>service.detection.sequence.resources.data.kubernetesWorkload.containerUids</p> </li> <li> <p>service.detection.sequence.resources.data.kubernetesWorkload.namespace</p> </li> <li> <p>service.detection.sequence.resources.data.kubernetesWorkload.type</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.accountPublicAccess.publicAclAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.accountPublicAccess.publicAclIgnoreBehavior</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.accountPublicAccess.publicBucketRestrictBehavior</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.accountPublicAccess.publicPolicyAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.bucketPublicAccess.publicAclAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.bucketPublicAccess.publicAclIgnoreBehavior</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.bucketPublicAccess.publicBucketRestrictBehavior</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.bucketPublicAccess.publicPolicyAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.effectivePermission</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.encryptionKeyArn</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.encryptionType</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.ownerId</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.publicReadAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.publicWriteAccess</p> </li> <li> <p>service.detection.sequence.resources.data.s3Bucket.s3ObjectUids</p> </li> <li> <p>service.detection.sequence.resources.data.s3Object.eTag</p> </li> <li> <p>service.detection.sequence.resources.data.s3Object.key</p> </li> <li> <p>service.detection.sequence.resources.data.s3Object.versionId</p> </li> <li> <p>service.detection.sequence.resources.name</p> </li> <li> <p>service.detection.sequence.resources.region</p> </li> <li> <p>service.detection.sequence.resources.resourceType</p> </li> <li> <p>service.detection.sequence.resources.service</p> </li> <li> <p>service.detection.sequence.resources.tags.key</p> </li> <li> <p>service.detection.sequence.resources.tags.value</p> </li> <li> <p>service.detection.sequence.resources.uid</p> </li> <li> <p>service.detection.sequence.sequenceIndicators.key</p> </li> <li> <p>service.detection.sequence.sequenceIndicators.title</p> </li> <li> <p>service.detection.sequence.sequenceIndicators.values</p> </li> <li> <p>service.detection.sequence.signals.actorIds</p> </li> <li> <p>service.detection.sequence.signals.count</p> </li> <li> <p>service.detection.sequence.signals.createdAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.signals.description</p> </li> <li> <p>service.detection.sequence.signals.endpointIds</p> </li> <li> <p>service.detection.sequence.signals.firstSeenAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.signals.lastSeenAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.signals.name</p> </li> <li> <p>service.detection.sequence.signals.resourceUids</p> </li> <li> <p>service.detection.sequence.signals.severity</p> </li> <li> <p>service.detection.sequence.signals.signalIndicators.key</p> </li> <li> <p>service.detection.sequence.signals.signalIndicators.title</p> </li> <li> <p>service.detection.sequence.signals.signalIndicators.values</p> </li> <li> <p>service.detection.sequence.signals.type</p> </li> <li> <p>service.detection.sequence.signals.uid</p> </li> <li> <p>service.detection.sequence.signals.updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.detection.sequence.uid</p> </li> <li> <p>service.detectorId</p> </li> <li> <p>service.ebsVolumeScanDetails.scanCompletedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.highestSeverityThreatDetails.count</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.highestSeverityThreatDetails.severity</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.highestSeverityThreatDetails.threatName</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.scannedItemCount.files</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.scannedItemCount.totalGb</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.scannedItemCount.volumes</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.itemCount</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.shortened</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.fileName</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.filePath</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.volumeArn</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.itemCount</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.severity</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.uniqueThreatNameCount</p> </li> <li> <p>service.ebsVolumeScanDetails.scanDetections.threatsDetectedItemCount.files</p> </li> <li> <p>service.ebsVolumeScanDetails.scanId</p> </li> <li> <p>service.ebsVolumeScanDetails.scanStartedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.ebsVolumeScanDetails.scanType</p> </li> <li> <p>service.ebsVolumeScanDetails.sources</p> </li> <li> <p>service.ebsVolumeScanDetails.triggerFindingId</p> </li> <li> <p>service.eventFirstSeen</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.eventLastSeen</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.evidence.threatIntelligenceDetails.threatFileSha256</p> </li> <li> <p>service.evidence.threatIntelligenceDetails.threatListName</p> </li> <li> <p>service.evidence.threatIntelligenceDetails.threatNames</p> </li> <li> <p>service.featureName</p> </li> <li> <p>service.malwareScanDetails.scanCategory</p> </li> <li> <p>service.malwareScanDetails.scanConfiguration.incrementalScanDetails.baselineResourceArn</p> </li> <li> <p>service.malwareScanDetails.scanConfiguration.triggerType</p> </li> <li> <p>service.malwareScanDetails.scanId</p> </li> <li> <p>service.malwareScanDetails.scanType</p> </li> <li> <p>service.malwareScanDetails.threats.count</p> </li> <li> <p>service.malwareScanDetails.threats.hash</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.additionalInfo.deviceName</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.additionalInfo.versionId</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.hash</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.itemPath</p> </li> <li> <p>service.malwareScanDetails.threats.itemDetails.resourceArn</p> </li> <li> <p>service.malwareScanDetails.threats.itemPaths.hash</p> </li> <li> <p>service.malwareScanDetails.threats.itemPaths.nestedItemPath</p> </li> <li> <p>service.malwareScanDetails.threats.name</p> </li> <li> <p>service.malwareScanDetails.threats.source</p> </li> <li> <p>service.malwareScanDetails.uniqueThreatCount</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>service.runtimeDetails.context.addressFamily</p> </li> <li> <p>service.runtimeDetails.context.commandLineExample</p> </li> <li> <p>service.runtimeDetails.context.fileOperation</p> </li> <li> <p>service.runtimeDetails.context.filePath</p> </li> <li> <p>service.runtimeDetails.context.fileSystemType</p> </li> <li> <p>service.runtimeDetails.context.flags</p> </li> <li> <p>service.runtimeDetails.context.ianaProtocolNumber</p> </li> <li> <p>service.runtimeDetails.context.ldPreloadValue</p> </li> <li> <p>service.runtimeDetails.context.libraryPath</p> </li> <li> <p>service.runtimeDetails.context.memoryRegions</p> </li> <li> <p>service.runtimeDetails.context.modifiedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.euid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.executablePath</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.executableSha256</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.euid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.executablePath</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.name</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.namespacePid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.parentUuid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.pid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.userId</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.lineage.uuid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.name</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.namespacePid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.parentUuid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.pid</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.pwd</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.user</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.userId</p> </li> <li> <p>service.runtimeDetails.context.modifyingProcess.uuid</p> </li> <li> <p>service.runtimeDetails.context.moduleFilePath</p> </li> <li> <p>service.runtimeDetails.context.moduleName</p> </li> <li> <p>service.runtimeDetails.context.moduleSha256</p> </li> <li> <p>service.runtimeDetails.context.mountSource</p> </li> <li> <p>service.runtimeDetails.context.mountTarget</p> </li> <li> <p>service.runtimeDetails.context.relatedFilePaths</p> </li> <li> <p>service.runtimeDetails.context.releaseAgentPath</p> </li> <li> <p>service.runtimeDetails.context.runcBinaryPath</p> </li> <li> <p>service.runtimeDetails.context.scriptPath</p> </li> <li> <p>service.runtimeDetails.context.serviceName</p> </li> <li> <p>service.runtimeDetails.context.shellHistoryFilePath</p> </li> <li> <p>service.runtimeDetails.context.socketPath</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.euid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.executablePath</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.executableSha256</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.euid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.executablePath</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.name</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.namespacePid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.parentUuid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.pid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.userId</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.lineage.uuid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.name</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.namespacePid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.parentUuid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.pid</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.pwd</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.user</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.userId</p> </li> <li> <p>service.runtimeDetails.context.targetProcess.uuid</p> </li> <li> <p>service.runtimeDetails.context.threatFilePath</p> </li> <li> <p>service.runtimeDetails.context.toolCategory</p> </li> <li> <p>service.runtimeDetails.context.toolName</p> </li> <li> <p>service.runtimeDetails.process.euid</p> </li> <li> <p>service.runtimeDetails.process.executablePath</p> </li> <li> <p>service.runtimeDetails.process.executableSha256</p> </li> <li> <p>service.runtimeDetails.process.lineage.euid</p> </li> <li> <p>service.runtimeDetails.process.lineage.executablePath</p> </li> <li> <p>service.runtimeDetails.process.lineage.name</p> </li> <li> <p>service.runtimeDetails.process.lineage.namespacePid</p> </li> <li> <p>service.runtimeDetails.process.lineage.parentUuid</p> </li> <li> <p>service.runtimeDetails.process.lineage.pid</p> </li> <li> <p>service.runtimeDetails.process.lineage.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.process.lineage.userId</p> </li> <li> <p>service.runtimeDetails.process.lineage.uuid</p> </li> <li> <p>service.runtimeDetails.process.name</p> </li> <li> <p>service.runtimeDetails.process.namespacePid</p> </li> <li> <p>service.runtimeDetails.process.parentUuid</p> </li> <li> <p>service.runtimeDetails.process.pid</p> </li> <li> <p>service.runtimeDetails.process.pwd</p> </li> <li> <p>service.runtimeDetails.process.startTime</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> <li> <p>service.runtimeDetails.process.user</p> </li> <li> <p>service.runtimeDetails.process.userId</p> </li> <li> <p>service.runtimeDetails.process.uuid</p> </li> <li> <p>service.serviceName</p> </li> <li> <p>service.userFeedback</p> </li> <li> <p>severity</p> <p>To configure severity based filters, use the following for the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_FindingCriteria.html">FindingCriteria</a> condition:</p> <ul> <li> <p> <b>Low</b>: <code>["1", "2", "3"]</code> </p> </li> <li> <p> <b>Medium</b>: <code>["4", "5", "6"]</code> </p> </li> <li> <p> <b>High</b>: <code>["7", "8"]</code> </p> </li> <li> <p> <b>Critical</b>: <code>["9", "10"]</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html">Findings severity levels</a> in the <i>Amazon GuardDuty User Guide</i>.</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000</p> </li> </ul>
     #   @return [Types::FindingCriteria]
     class UpdateFilterRequest < Struct.new(
       nil,
@@ -8478,10 +9191,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the detector that is associated with the findings for which you want to update 
-    #         the feedback.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector that is associated with the findings for which you want to update the feedback.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute finding_ids
     #   <p>The IDs of the findings that you want to mark as useful or not useful.</p>
@@ -8511,9 +9221,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The detectorID that specifies the GuardDuty service whose IPSet you want to update.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The detectorID that specifies the GuardDuty service whose IPSet you want to update.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute ip_set_id
     #   <p>The unique ID that specifies the IPSet that you want to update.</p>
@@ -8554,16 +9262,13 @@ module Aws::GuardDuty
     #   <p>A unique identifier associated with the Malware Protection plan.</p>
     #   @return [String]
     # @!attribute role
-    #   <p>Amazon Resource Name (ARN) of the IAM role with permissions to scan and add tags to 
-    #         the associated protected resource.</p>
+    #   <p>Amazon Resource Name (ARN) of the IAM role with permissions to scan and add tags to the associated protected resource.</p>
     #   @return [String]
     # @!attribute actions
     #   <p>Information about whether the tags will be added to the S3 object after scanning.</p>
     #   @return [Types::MalwareProtectionPlanActions]
     # @!attribute protected_resource
-    #   <p>Information about the protected resource that is associated 
-    #         with the created Malware Protection plan. Presently, <code>S3Bucket</code>
-    #         is the only supported protected resource.</p>
+    #   <p>Information about the protected resource that is associated with the created Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported protected resource.</p>
     #   @return [Types::UpdateProtectedResource]
     class UpdateMalwareProtectionPlanRequest < Struct.new(
       nil,
@@ -8577,10 +9282,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the detector that specifies the GuardDuty service where you want to
-    #         update scan settings.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the detector that specifies the GuardDuty service where you want to update scan settings.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute scan_resource_criteria
     #   <p>Represents the criteria to be used in the filter for selecting resources to scan.</p>
@@ -8606,9 +9308,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The detector ID of the administrator account.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The detector ID of the administrator account.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute account_ids
     #   <p>A list of member account IDs to be updated.</p>
@@ -8633,8 +9333,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute unprocessed_accounts
-    #   <p>A list of member account IDs that were unable to be processed along with an explanation
-    #         for why they were not processed.</p>
+    #   <p>A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.</p>
     #   @return [Array<Types::UnprocessedAccount>]
     class UpdateMemberDetectorsResponse < Struct.new(
       nil,
@@ -8645,17 +9344,10 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the detector that configures the delegated administrator.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector that configures the delegated administrator.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute auto_enable
-    #   <p>Represents whether to automatically enable member accounts in the organization. This
-    #       applies to only new member accounts, not the existing member accounts. When a new account joins the organization,
-    #       the chosen features will be enabled for them by default.</p>
-    #            <p>Even though this is still supported, we recommend using
-    #      <code>AutoEnableOrganizationMembers</code> to achieve the similar results. You must provide a 
-    #       value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>.</p>
+    #   <p>Represents whether to automatically enable member accounts in the organization. This applies to only new member accounts, not the existing member accounts. When a new account joins the organization, the chosen features will be enabled for them by default.</p> <p>Even though this is still supported, we recommend using <code>AutoEnableOrganizationMembers</code> to achieve the similar results. You must provide a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>.</p>
     #   @deprecated
     #     This field is deprecated, use AutoEnableOrganizationMembers instead
     #   @return [Boolean]
@@ -8668,34 +9360,7 @@ module Aws::GuardDuty
     #   <p>A list of features that will be configured for the organization.</p>
     #   @return [Array<Types::OrganizationFeatureConfiguration>]
     # @!attribute auto_enable_organization_members
-    #   <p>Indicates the auto-enablement configuration of GuardDuty for the member accounts in the
-    #         organization. You must provide a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>. </p>
-    #            <p>Use one of the 
-    #       following configuration values for <code>autoEnableOrganizationMembers</code>:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>NEW</code>: Indicates that when a new account joins the organization, they will
-    #             have GuardDuty enabled automatically. </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty
-    #             enabled automatically. This includes <code>NEW</code> accounts that join the organization
-    #             and accounts that may have been suspended or removed from the organization in
-    #             GuardDuty.</p>
-    #                  <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>NONE</code>: Indicates that GuardDuty will not be automatically enabled for any
-    #             account in the organization. The administrator must manage GuardDuty for each account in the organization individually.</p>
-    #                  <p>When you update the auto-enable setting from <code>ALL</code> or <code>NEW</code> to 
-    #             <code>NONE</code>, this action doesn't disable the corresponding option for your existing accounts. This
-    #             configuration will apply to the new accounts that join the organization. After you update the auto-enable settings,
-    #             no new account will have the corresponding option as enabled.</p>
-    #               </li>
-    #            </ul>
+    #   <p>Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization. You must provide a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>. </p> <p>Use one of the following configuration values for <code>autoEnableOrganizationMembers</code>:</p> <ul> <li> <p> <code>NEW</code>: Indicates that when a new account joins the organization, they will have GuardDuty enabled automatically. </p> </li> <li> <p> <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty enabled automatically. This includes <code>NEW</code> accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.</p> <p>It may take up to 24 hours to update the configuration for all the member accounts.</p> </li> <li> <p> <code>NONE</code>: Indicates that GuardDuty will not be automatically enabled for any account in the organization. The administrator must manage GuardDuty for each account in the organization individually.</p> <p>When you update the auto-enable setting from <code>ALL</code> or <code>NEW</code> to <code>NONE</code>, this action doesn't disable the corresponding option for your existing accounts. This configuration will apply to the new accounts that join the organization. After you update the auto-enable settings, no new account will have the corresponding option as enabled.</p> </li> </ul>
     #   @return [String]
     class UpdateOrganizationConfigurationRequest < Struct.new(
       nil,
@@ -8716,9 +9381,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the protected resource 
-    #       that is associated with the created Malware Protection plan. 
-    #       Presently, <code>S3Bucket</code> is the only supported protected resource.</p>
+    # <p>Information about the protected resource that is associated with the created Malware Protection plan. Presently, <code>S3Bucket</code> is the only supported protected resource.</p>
     # @!attribute s3_bucket
     #   <p>Information about the protected S3 bucket resource.</p>
     #   @return [Types::UpdateS3BucketResource]
@@ -8731,16 +9394,13 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The ID of the detector associated with the publishing destinations to update.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The ID of the detector associated with the publishing destinations to update.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute destination_id
     #   <p>The ID of the publishing destination to update.</p>
     #   @return [String]
     # @!attribute destination_properties
-    #   <p>A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code>
-    #         and <code>KmsKeyArn</code> of the publishing destination.</p>
+    #   <p>A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code> and <code>KmsKeyArn</code> of the publishing destination.</p>
     #   @return [Types::DestinationProperties]
     class UpdatePublishingDestinationRequest < Struct.new(
       nil,
@@ -8761,8 +9421,7 @@ module Aws::GuardDuty
 
     # <p>Information about the protected S3 bucket resource.</p>
     # @!attribute object_prefixes
-    #   <p>Information about the specified object prefixes. The S3 object will be scanned only 
-    #         if it belongs to any of the specified object prefixes.</p>
+    #   <p>Information about the specified object prefixes. The S3 object will be scanned only if it belongs to any of the specified object prefixes.</p>
     #   @return [Array<String>]
     class UpdateS3BucketResource < Struct.new(
       nil,
@@ -8773,30 +9432,22 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to
-    #         update.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to update.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute threat_entity_set_id
     #   <p>The ID returned by GuardDuty after updating the threat entity set resource.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>A user-friendly name to identify the trusted entity set.</p>
-    #            <p>The name of your list can include 
-    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    #   <p>A user-friendly name to identify the trusted entity set.</p> <p>The name of your list can include lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
     #   @return [String]
     # @!attribute location
     #   <p>The URI of the file that contains the trusted entity set.</p>
     #   @return [String]
     # @!attribute expected_bucket_owner
-    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
-    #          parameter.</p>
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     # @!attribute activate
-    #   <p>A boolean value that indicates whether GuardDuty is to start using this updated threat entity set. After you
-    #         update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated
-    #         entity set to be effective.</p>
+    #   <p>A boolean value that indicates whether GuardDuty is to start using this updated threat entity set. After you update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated entity set to be effective.</p>
     #   @return [Boolean]
     class UpdateThreatEntitySetRequest < Struct.new(
       nil,
@@ -8819,10 +9470,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to
-    #         update.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to update.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute threat_intel_set_id
     #   <p>The unique ID that specifies the ThreatIntelSet that you want to update.</p>
@@ -8834,8 +9482,7 @@ module Aws::GuardDuty
     #   <p>The updated URI of the file that contains the ThreateIntelSet.</p>
     #   @return [String]
     # @!attribute activate
-    #   <p>The updated Boolean value that specifies whether the ThreateIntelSet is active or
-    #         not.</p>
+    #   <p>The updated Boolean value that specifies whether the ThreateIntelSet is active or not.</p>
     #   @return [Boolean]
     # @!attribute expected_bucket_owner
     #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
@@ -8861,30 +9508,22 @@ module Aws::GuardDuty
     end
 
     # @!attribute detector_id
-    #   <p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to
-    #            update.</p>
-    #            <p>To find the <code>detectorId</code> in the current Region, see the
-    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    #   <p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to update.</p> <p>To find the <code>detectorId</code> in the current Region, see the Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     #   @return [String]
     # @!attribute trusted_entity_set_id
     #   <p>The ID returned by GuardDuty after updating the trusted entity set resource.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>A user-friendly name to identify the trusted entity set.</p>
-    #            <p>The name of your list can include 
-    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    #   <p>A user-friendly name to identify the trusted entity set.</p> <p>The name of your list can include lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
     #   @return [String]
     # @!attribute location
     #   <p>The URI of the file that contains the trusted entity set.</p>
     #   @return [String]
     # @!attribute expected_bucket_owner
-    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
-    #          parameter.</p>
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
     #   @return [String]
     # @!attribute activate
-    #   <p>A boolean value that indicates whether GuardDuty is to start using this updated trusted entity set. After you
-    #          update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated
-    #          entity set to be effective.</p>
+    #   <p>A boolean value that indicates whether GuardDuty is to start using this updated trusted entity set. After you update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated entity set to be effective.</p>
     #   @return [Boolean]
     class UpdateTrustedEntitySetRequest < Struct.new(
       nil,
@@ -8932,8 +9571,7 @@ module Aws::GuardDuty
     #     This parameter is deprecated, use Features instead
     #   @return [Array<String>]
     # @!attribute resources
-    #   <p>The resources to aggregate usage statistics from. Only accepts exact resource
-    #         names.</p>
+    #   <p>The resources to aggregate usage statistics from. Only accepts exact resource names.</p>
     #   @return [Array<String>]
     # @!attribute features
     #   <p>The features to aggregate usage statistics from.</p>
@@ -8997,15 +9635,12 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for
-    #       other types will be null. </p>
+    # <p>Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for other types will be null. </p>
     # @!attribute sum_by_account
     #   <p>The usage statistic sum organized by account ID.</p>
     #   @return [Array<Types::UsageAccountResult>]
     # @!attribute top_accounts_by_feature
-    #   <p>Lists the top 50 accounts by feature that have generated the most
-    #         GuardDuty usage, in the order from most to least expensive.</p>
-    #            <p>Currently, this doesn't support <code>RDS_LOGIN_EVENTS</code>.</p>
+    #   <p>Lists the top 50 accounts by feature that have generated the most GuardDuty usage, in the order from most to least expensive.</p> <p>Currently, this doesn't support <code>RDS_LOGIN_EVENTS</code>.</p>
     #   @return [Array<Types::UsageTopAccountsResult>]
     # @!attribute sum_by_data_source
     #   <p>The usage statistic sum organized by on data source.</p>
@@ -9014,8 +9649,7 @@ module Aws::GuardDuty
     #   <p>The usage statistic sum organized by resource.</p>
     #   @return [Array<Types::UsageResourceResult>]
     # @!attribute top_resources
-    #   <p>Lists the top 50 resources that have generated the most GuardDuty usage, in order from
-    #         most to least expensive.</p>
+    #   <p>Lists the top 50 resources that have generated the most GuardDuty usage, in order from most to least expensive.</p>
     #   @return [Array<Types::UsageResourceResult>]
     # @!attribute sum_by_feature
     #   <p>The usage statistic sum organized by feature.</p>
@@ -9033,8 +9667,7 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains information on the total of usage based on the topmost 50 
-    #       account IDs.</p>
+    # <p>Contains information on the total of usage based on the topmost 50 account IDs.</p>
     # @!attribute account_id
     #   <p>The unique account ID.</p>
     #   @return [String]
@@ -9050,13 +9683,9 @@ module Aws::GuardDuty
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Information about the usage statistics, calculated
-    #       by top accounts by feature.</p>
+    # <p>Information about the usage statistics, calculated by top accounts by feature.</p>
     # @!attribute feature
-    #   <p>Features by which you can generate the usage statistics.</p>
-    #            <p>
-    #               <code>RDS_LOGIN_EVENTS</code> is currently not supported 
-    #         with <code>topAccountsByFeature</code>.</p>
+    #   <p>Features by which you can generate the usage statistics.</p> <p> <code>RDS_LOGIN_EVENTS</code> is currently not supported with <code>topAccountsByFeature</code>.</p>
     #   @return [String]
     # @!attribute accounts
     #   <p>The accounts that contributed to the total usage cost.</p>
@@ -9084,7 +9713,7 @@ module Aws::GuardDuty
     #   <p>The credentials of the user ID.</p>
     #   @return [String]
     # @!attribute account
-    #   <p>Contains information about the Amazon Web Services account.</p>
+    #   <p>Contains information about the Amazon Web Services account within which the activity took place. This is not necessarily the account that owns the user identity.</p>
     #   @return [Types::Account]
     class User < Struct.new(
       nil,
@@ -9103,8 +9732,7 @@ module Aws::GuardDuty
     #   <p>Volume name.</p>
     #   @return [String]
     # @!attribute host_path
-    #   <p>Represents a pre-existing file or directory on the host machine that the volume maps
-    #         to.</p>
+    #   <p>Represents a pre-existing file or directory on the host machine that the volume maps to.</p>
     #   @return [Types::HostPath]
     class Volume < Struct.new(
       nil,

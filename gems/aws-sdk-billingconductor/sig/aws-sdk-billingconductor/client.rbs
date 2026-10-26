@@ -99,7 +99,8 @@ module Aws::Billingconductor
       ?name: String,
       ?account_grouping: {
         linked_account_ids: Array[String],
-        auto_associate: bool
+        auto_associate: bool,
+        responsibility_transfer_arn: String
       },
       ?computation_preference: {
         pricing_plan_arn: String
@@ -136,11 +137,16 @@ module Aws::Billingconductor
           {
             attribute: String,
             match_option: String,
-            values: Array[String]
+            values: Array[String],
+            attribute_values: Array[String]
           }
         ]
       },
-      ?account_id: String
+      ?account_id: String,
+      ?computation_rule: String,
+      ?presentation_details: {
+        service: String
+      }
     ) -> _CreateCustomLineItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomLineItemResponse
 
     interface _CreatePricingPlanResponse
@@ -172,7 +178,14 @@ module Aws::Billingconductor
       ?tiering: {
         free_tier: {
           activated: bool
-        }
+        },
+        custom_tiers: Array[
+          {
+            begin_range_inclusive: Float,
+            end_range_exclusive: Float,
+            rate_value: Float
+          }
+        ]
       },
       ?usage_type: String,
       ?operation: String
@@ -248,6 +261,16 @@ module Aws::Billingconductor
       ?next_token: String
     ) -> _GetBillingGroupCostReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBillingGroupCostReportResponse
 
+    interface _GetBillingTransferPreferenceResponse
+      include Smithy::Client::_Response[Types::GetBillingTransferPreferenceOutput]
+      def responsibility_transfer_arn: () -> String?
+      def auto_billing_transfer_billing_group_creation: () -> Types::AutoTransferBillingGroupCreationPreference?
+      def last_modified_time: () -> Integer?
+    end
+    def get_billing_transfer_preference: (
+      ?responsibility_transfer_arn: String
+    ) -> _GetBillingTransferPreferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBillingTransferPreferenceResponse
+
     interface _ListAccountAssociationsResponse
       include Smithy::Client::_Response[Types::ListAccountAssociationsOperationOutput]
       def linked_accounts: () -> Array[Types::AccountAssociationsListElement]?
@@ -290,7 +313,16 @@ module Aws::Billingconductor
         arns: Array[String],
         pricing_plan: String,
         statuses: Array[String],
-        auto_associate: bool
+        auto_associate: bool,
+        primary_account_ids: Array[String],
+        billing_group_types: Array[String],
+        names: Array[
+          {
+            search_option: String,
+            search_value: String
+          }
+        ],
+        responsibility_transfer_arns: Array[String]
       }
     ) -> _ListBillingGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBillingGroupsResponse
 
@@ -448,9 +480,25 @@ module Aws::Billingconductor
       },
       ?description: String,
       ?account_grouping: {
-        auto_associate: bool
+        auto_associate: bool,
+        responsibility_transfer_arn: String
       }
     ) -> _UpdateBillingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBillingGroupResponse
+
+    interface _UpdateBillingTransferPreferenceResponse
+      include Smithy::Client::_Response[Types::UpdateBillingTransferPreferenceOutput]
+      def responsibility_transfer_arn: () -> String?
+      def auto_billing_transfer_billing_group_creation: () -> Types::AutoTransferBillingGroupCreationPreference?
+      def last_modified_time: () -> Integer?
+    end
+    def update_billing_transfer_preference: (
+      ?client_token: String,
+      ?responsibility_transfer_arn: String,
+      ?auto_billing_transfer_billing_group_creation: {
+        enabled: bool,
+        pricing_plan_arn: String
+      }
+    ) -> _UpdateBillingTransferPreferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBillingTransferPreferenceResponse
 
     interface _UpdateCustomLineItemResponse
       include Smithy::Client::_Response[Types::UpdateCustomLineItemOperationOutput]
@@ -477,7 +525,8 @@ module Aws::Billingconductor
           {
             attribute: String,
             match_option: String,
-            values: Array[String]
+            values: Array[String],
+            attribute_values: Array[String]
           }
         ]
       },
@@ -526,7 +575,14 @@ module Aws::Billingconductor
       ?tiering: {
         free_tier: {
           activated: bool
-        }
+        },
+        custom_tiers: Array[
+          {
+            begin_range_inclusive: Float,
+            end_range_exclusive: Float,
+            rate_value: Float
+          }
+        ]
       }
     ) -> _UpdatePricingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePricingRuleResponse
   end

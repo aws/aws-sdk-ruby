@@ -53,6 +53,7 @@ module Aws::BCMDashboards
       ?description: String,
       ?widgets: Array[
         {
+          id: String,
           title: String,
           description: String,
           width: Integer,
@@ -154,6 +155,43 @@ module Aws::BCMDashboards
       ]
     ) -> _CreateDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDashboardResponse
 
+    interface _CreateScheduledReportResponse
+      include Smithy::Client::_Response[Types::CreateScheduledReportResponse]
+      def arn: () -> String?
+    end
+    def create_scheduled_report: (
+      ?scheduled_report: {
+        name: String,
+        dashboard_arn: String,
+        scheduled_report_execution_role_arn: String,
+        schedule_config: {
+          schedule_expression: String,
+          schedule_expression_time_zone: untyped,
+          schedule_period: {
+            start_time: Time,
+            end_time: untyped
+          },
+          state: String
+        },
+        description: String,
+        widget_ids: Array[String],
+        widget_date_range_override: {
+          start_time: {
+            type: String,
+            value: untyped
+          },
+          end_time: untyped
+        }
+      },
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateScheduledReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScheduledReportResponse
+
     interface _DeleteDashboardResponse
       include Smithy::Client::_Response[Types::DeleteDashboardResponse]
       def arn: () -> String?
@@ -161,6 +199,25 @@ module Aws::BCMDashboards
     def delete_dashboard: (
       ?arn: String
     ) -> _DeleteDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDashboardResponse
+
+    interface _DeleteScheduledReportResponse
+      include Smithy::Client::_Response[Types::DeleteScheduledReportResponse]
+      def arn: () -> String?
+    end
+    def delete_scheduled_report: (
+      ?arn: String
+    ) -> _DeleteScheduledReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScheduledReportResponse
+
+    interface _ExecuteScheduledReportResponse
+      include Smithy::Client::_Response[Types::ExecuteScheduledReportResponse]
+      def health_status: () -> Types::HealthStatus?
+      def execution_triggered: () -> bool?
+    end
+    def execute_scheduled_report: (
+      ?arn: String,
+      ?client_token: String,
+      ?dry_run: bool
+    ) -> _ExecuteScheduledReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteScheduledReportResponse
 
     interface _GetDashboardResponse
       include Smithy::Client::_Response[Types::GetDashboardResponse]
@@ -185,6 +242,14 @@ module Aws::BCMDashboards
       ?resource_arn: String
     ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
 
+    interface _GetScheduledReportResponse
+      include Smithy::Client::_Response[Types::GetScheduledReportResponse]
+      def scheduled_report: () -> Types::ScheduledReport?
+    end
+    def get_scheduled_report: (
+      ?arn: String
+    ) -> _GetScheduledReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetScheduledReportResponse
+
     interface _ListDashboardsResponse
       include Smithy::Client::_Response[Types::ListDashboardsResponse]
       def dashboards: () -> Array[Types::DashboardReference]?
@@ -194,6 +259,16 @@ module Aws::BCMDashboards
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListDashboardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDashboardsResponse
+
+    interface _ListScheduledReportsResponse
+      include Smithy::Client::_Response[Types::ListScheduledReportsResponse]
+      def scheduled_reports: () -> Array[Types::ScheduledReportSummary]?
+      def next_token: () -> String?
+    end
+    def list_scheduled_reports: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListScheduledReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScheduledReportsResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
@@ -234,6 +309,7 @@ module Aws::BCMDashboards
       ?description: String,
       ?widgets: Array[
         {
+          id: String,
           title: String,
           description: String,
           width: Integer,
@@ -328,5 +404,36 @@ module Aws::BCMDashboards
         }
       ]
     ) -> _UpdateDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDashboardResponse
+
+    interface _UpdateScheduledReportResponse
+      include Smithy::Client::_Response[Types::UpdateScheduledReportResponse]
+      def arn: () -> String?
+    end
+    def update_scheduled_report: (
+      ?arn: String,
+      ?name: String,
+      ?description: String,
+      ?dashboard_arn: String,
+      ?scheduled_report_execution_role_arn: String,
+      ?schedule_config: {
+        schedule_expression: String,
+        schedule_expression_time_zone: untyped,
+        schedule_period: {
+          start_time: Time,
+          end_time: untyped
+        },
+        state: String
+      },
+      ?widget_ids: Array[String],
+      ?widget_date_range_override: {
+        start_time: {
+          type: String,
+          value: String
+        },
+        end_time: untyped
+      },
+      ?clear_widget_ids: bool,
+      ?clear_widget_date_range_override: bool
+    ) -> _UpdateScheduledReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScheduledReportResponse
   end
 end

@@ -70,6 +70,157 @@ module Aws::Amp
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for the anomaly detection algorithm.</p>
+    # @!attribute random_cut_forest
+    #   <p>The Random Cut Forest algorithm configuration for anomaly detection.</p>
+    #   @return [Types::RandomCutForestConfiguration]
+    class AnomalyDetectorConfiguration < Struct.new(
+      :random_cut_forest,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class RandomCutForest < AnomalyDetectorConfiguration; end
+      class Unknown < AnomalyDetectorConfiguration; end
+    end
+
+    # <p>Detailed information about an anomaly detector.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the anomaly detector.</p>
+    #   @return [String]
+    # @!attribute anomaly_detector_id
+    #   <p>The unique identifier of the anomaly detector.</p>
+    #   @return [String]
+    # @!attribute alias
+    #   <p>The user-friendly name of the anomaly detector.</p>
+    #   @return [String]
+    # @!attribute evaluation_interval_in_seconds
+    #   <p>The frequency, in seconds, at which the anomaly detector evaluates metrics.</p>
+    #   @return [Integer]
+    # @!attribute missing_data_action
+    #   <p>The action taken when data is missing during evaluation.</p>
+    #   @return [Types::AnomalyDetectorMissingDataAction]
+    # @!attribute configuration
+    #   <p>The algorithm configuration of the anomaly detector.</p>
+    #   @return [Types::AnomalyDetectorConfiguration]
+    # @!attribute labels
+    #   <p>The Amazon Managed Service for Prometheus metric labels associated with the anomaly detector.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute status
+    #   <p>The current status of the anomaly detector.</p>
+    #   @return [Types::AnomalyDetectorStatus]
+    # @!attribute created_at
+    #   <p>The timestamp when the anomaly detector was created.</p>
+    #   @return [Time]
+    # @!attribute modified_at
+    #   <p>The timestamp when the anomaly detector was last modified.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The tags applied to the anomaly detector.</p>
+    #   @return [Hash<String, String>]
+    class AnomalyDetectorDescription < Struct.new(
+      nil,
+      :arn,
+      :anomaly_detector_id,
+      :alias,
+      :evaluation_interval_in_seconds,
+      :missing_data_action,
+      :configuration,
+      :labels,
+      :status,
+      :created_at,
+      :modified_at,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the action to take when data is missing during anomaly detection evaluation.</p>
+    # @!attribute mark_as_anomaly
+    #   <p>Marks missing data points as anomalies.</p>
+    #   @return [Boolean]
+    # @!attribute skip
+    #   <p>Skips evaluation when data is missing.</p>
+    #   @return [Boolean]
+    class AnomalyDetectorMissingDataAction < Struct.new(
+      :mark_as_anomaly,
+      :skip,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class MarkAsAnomaly < AnomalyDetectorMissingDataAction; end
+      class Skip < AnomalyDetectorMissingDataAction; end
+      class Unknown < AnomalyDetectorMissingDataAction; end
+    end
+
+    # <p>The status information of an anomaly detector.</p>
+    # @!attribute status_code
+    #   <p>The status code of the anomaly detector.</p>
+    #   @return [String]
+    # @!attribute status_reason
+    #   <p>A description of the current status of the anomaly detector.</p>
+    #   @return [String]
+    class AnomalyDetectorStatus < Struct.new(
+      nil,
+      :status_code,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about an anomaly detector for list operations.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the anomaly detector.</p>
+    #   @return [String]
+    # @!attribute anomaly_detector_id
+    #   <p>The unique identifier of the anomaly detector.</p>
+    #   @return [String]
+    # @!attribute alias
+    #   <p>The user-friendly name of the anomaly detector.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the anomaly detector.</p>
+    #   @return [Types::AnomalyDetectorStatus]
+    # @!attribute created_at
+    #   <p>The timestamp when the anomaly detector was created.</p>
+    #   @return [Time]
+    # @!attribute modified_at
+    #   <p>The timestamp when the anomaly detector was last modified.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The tags applied to the anomaly detector.</p>
+    #   @return [Hash<String, String>]
+    class AnomalyDetectorSummary < Struct.new(
+      nil,
+      :arn,
+      :anomaly_detector_id,
+      :alias,
+      :status,
+      :created_at,
+      :modified_at,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration identifies the CloudWatch dataset used as a scraper destination.</p>
+    # @!attribute dataset_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudWatch dataset. To use the default dataset, specify <code>arn:aws:cloudwatch:&lt;region&gt;:&lt;account-id&gt;:dataset/default</code>.</p>
+    #   @return [String]
+    class CloudWatchConfiguration < Struct.new(
+      nil,
+      :dataset_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Configuration details for logging to CloudWatch Logs.</p>
     # @!attribute log_group_arn
     #   <p>The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist prior to calling this operation.</p>
@@ -141,6 +292,68 @@ module Aws::Amp
     class CreateAlertManagerDefinitionOutput < Struct.new(
       nil,
       :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_id
+    #   <p>The identifier of the workspace where the anomaly detector will be created.</p>
+    #   @return [String]
+    # @!attribute alias
+    #   <p>A user-friendly name for the anomaly detector.</p>
+    #   @return [String]
+    # @!attribute evaluation_interval_in_seconds
+    #   <p>The frequency, in seconds, at which the anomaly detector evaluates metrics. The default value is 60 seconds.</p>
+    #   @return [Integer]
+    # @!attribute missing_data_action
+    #   <p>Specifies the action to take when data is missing during evaluation.</p>
+    #   @return [Types::AnomalyDetectorMissingDataAction]
+    # @!attribute configuration
+    #   <p>The algorithm configuration for the anomaly detector.</p>
+    #   @return [Types::AnomalyDetectorConfiguration]
+    # @!attribute labels
+    #   <p>The Amazon Managed Service for Prometheus metric labels to associate with the anomaly detector.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The metadata to apply to the anomaly detector to assist with categorization and organization.</p>
+    #   @return [Hash<String, String>]
+    class CreateAnomalyDetectorRequest < Struct.new(
+      nil,
+      :workspace_id,
+      :alias,
+      :evaluation_interval_in_seconds,
+      :missing_data_action,
+      :configuration,
+      :labels,
+      :client_token,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute anomaly_detector_id
+    #   <p>The unique identifier of the created anomaly detector.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the created anomaly detector.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status information of the created anomaly detector.</p>
+    #   @return [Types::AnomalyDetectorStatus]
+    # @!attribute tags
+    #   <p>The tags applied to the created anomaly detector.</p>
+    #   @return [Hash<String, String>]
+    class CreateAnomalyDetectorResponse < Struct.new(
+      nil,
+      :anomaly_detector_id,
+      :arn,
+      :status,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -268,10 +481,10 @@ module Aws::Amp
     #   <p>The configuration file to use in the new scraper. For more information, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration">Scraper configuration</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>
     #   @return [Types::ScrapeConfiguration]
     # @!attribute source
-    #   <p>The Amazon EKS cluster from which the scraper will collect metrics.</p>
+    #   <p>The Amazon EKS or Amazon Web Services cluster from which the scraper will collect metrics.</p>
     #   @return [Types::Source]
     # @!attribute destination
-    #   <p>The Amazon Managed Service for Prometheus workspace to send metrics to.</p>
+    #   <p>The destination where the scraper sends the collected metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>
     #   @return [Types::Destination]
     # @!attribute role_configuration
     #   <p>Use this structure to enable cross-account access, so that you can use a target account to access Prometheus metrics from source accounts.</p>
@@ -282,6 +495,9 @@ module Aws::Amp
     # @!attribute tags
     #   <p>(Optional) The list of tag keys and values to associate with the scraper.</p>
     #   @return [Hash<String, String>]
+    # @!attribute exporters
+    #   <p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the scraper is created without an exporter configuration.</p>
+    #   @return [Array<Types::ExporterConfiguration>]
     class CreateScraperRequest < Struct.new(
       nil,
       :alias,
@@ -291,6 +507,7 @@ module Aws::Amp
       :role_configuration,
       :client_token,
       :tags,
+      :exporters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -382,6 +599,25 @@ module Aws::Amp
     class DeleteAlertManagerDefinitionInput < Struct.new(
       nil,
       :workspace_id,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_id
+    #   <p>The identifier of the workspace containing the anomaly detector to delete.</p>
+    #   @return [String]
+    # @!attribute anomaly_detector_id
+    #   <p>The identifier of the anomaly detector to delete.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class DeleteAnomalyDetectorRequest < Struct.new(
+      nil,
+      :workspace_id,
+      :anomaly_detector_id,
       :client_token,
       keyword_init: true
     )
@@ -540,6 +776,32 @@ module Aws::Amp
     class DescribeAlertManagerDefinitionOutput < Struct.new(
       nil,
       :alert_manager_definition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_id
+    #   <p>The identifier of the workspace containing the anomaly detector.</p>
+    #   @return [String]
+    # @!attribute anomaly_detector_id
+    #   <p>The identifier of the anomaly detector to describe.</p>
+    #   @return [String]
+    class DescribeAnomalyDetectorRequest < Struct.new(
+      nil,
+      :workspace_id,
+      :anomaly_detector_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute anomaly_detector
+    #   <p>The detailed information about the anomaly detector.</p>
+    #   @return [Types::AnomalyDetectorDescription]
+    class DescribeAnomalyDetectorResponse < Struct.new(
+      nil,
+      :anomaly_detector,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -761,14 +1023,19 @@ module Aws::Amp
     # @!attribute amp_configuration
     #   <p>The Amazon Managed Service for Prometheus workspace to send metrics to.</p>
     #   @return [Types::AmpConfiguration]
+    # @!attribute cloud_watch_configuration
+    #   <p>The CloudWatch dataset to send metrics to.</p>
+    #   @return [Types::CloudWatchConfiguration]
     class Destination < Struct.new(
       :amp_configuration,
+      :cloud_watch_configuration,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class AmpConfiguration < Destination; end
+      class CloudWatchConfiguration < Destination; end
       class Unknown < Destination; end
     end
 
@@ -792,6 +1059,21 @@ module Aws::Amp
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the configuration for an exporter managed by the scraper.</p>
+    # @!attribute open_search_configuration
+    #   <p>The configuration that the scraper uses to export metrics to an Amazon OpenSearch Service domain.</p>
+    #   @return [Types::OpenSearchExporterConfiguration]
+    class ExporterConfiguration < Struct.new(
+      :open_search_configuration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class OpenSearchConfiguration < ExporterConfiguration; end
+      class Unknown < ExporterConfiguration; end
+    end
+
     # <p>Represents the input of a <code>GetDefaultScraperConfiguration</code> operation.</p>
     class GetDefaultScraperConfigurationRequest < Struct.new(
       nil,
@@ -810,6 +1092,26 @@ module Aws::Amp
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for threshold settings that determine when values near expected values should be ignored during anomaly detection.</p>
+    # @!attribute amount
+    #   <p>The absolute amount by which values can differ from expected values before being considered anomalous.</p>
+    #   @return [Float]
+    # @!attribute ratio
+    #   <p>The ratio by which values can differ from expected values before being considered anomalous.</p>
+    #   @return [Float]
+    class IgnoreNearExpected < Struct.new(
+      :amount,
+      :ratio,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Amount < IgnoreNearExpected; end
+      class Ratio < IgnoreNearExpected; end
+      class Unknown < IgnoreNearExpected; end
     end
 
     # <p>An unexpected error occurred during the processing of the request.</p>
@@ -851,6 +1153,44 @@ module Aws::Amp
     class LimitsPerLabelSetEntry < Struct.new(
       nil,
       :max_series,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_id
+    #   <p>The identifier of the workspace containing the anomaly detectors to list.</p>
+    #   @return [String]
+    # @!attribute alias
+    #   <p>Filters the results to anomaly detectors with the specified alias.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. Valid range is 1 to 1000.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token to continue retrieving results.</p>
+    #   @return [String]
+    class ListAnomalyDetectorsRequest < Struct.new(
+      nil,
+      :workspace_id,
+      :alias,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute anomaly_detectors
+    #   <p>The list of anomaly detectors in the workspace.</p>
+    #   @return [Array<Types::AnomalyDetectorSummary>]
+    # @!attribute next_token
+    #   <p>The pagination token to retrieve the next set of results.</p>
+    #   @return [String]
+    class ListAnomalyDetectorsResponse < Struct.new(
+      nil,
+      :anomaly_detectors,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1062,6 +1402,18 @@ module Aws::Amp
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for exporting metrics to an Amazon OpenSearch Service domain.</p>
+    # @!attribute domain_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon OpenSearch Service domain.</p>
+    #   @return [String]
+    class OpenSearchExporterConfiguration < Struct.new(
+      nil,
+      :domain_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents the input of a <code>PutAlertManagerDefinition</code> operation.</p>
     # @!attribute workspace_id
     #   <p>The ID of the workspace to update the alert manager definition in.</p>
@@ -1089,6 +1441,64 @@ module Aws::Amp
     class PutAlertManagerDefinitionOutput < Struct.new(
       nil,
       :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workspace_id
+    #   <p>The identifier of the workspace containing the anomaly detector to update.</p>
+    #   @return [String]
+    # @!attribute anomaly_detector_id
+    #   <p>The identifier of the anomaly detector to update.</p>
+    #   @return [String]
+    # @!attribute evaluation_interval_in_seconds
+    #   <p>The frequency, in seconds, at which the anomaly detector evaluates metrics.</p>
+    #   @return [Integer]
+    # @!attribute missing_data_action
+    #   <p>Specifies the action to take when data is missing during evaluation.</p>
+    #   @return [Types::AnomalyDetectorMissingDataAction]
+    # @!attribute configuration
+    #   <p>The algorithm configuration for the anomaly detector.</p>
+    #   @return [Types::AnomalyDetectorConfiguration]
+    # @!attribute labels
+    #   <p>The Amazon Managed Service for Prometheus metric labels to associate with the anomaly detector.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class PutAnomalyDetectorRequest < Struct.new(
+      nil,
+      :workspace_id,
+      :anomaly_detector_id,
+      :evaluation_interval_in_seconds,
+      :missing_data_action,
+      :configuration,
+      :labels,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute anomaly_detector_id
+    #   <p>The unique identifier of the updated anomaly detector.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the updated anomaly detector.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status information of the updated anomaly detector.</p>
+    #   @return [Types::AnomalyDetectorStatus]
+    # @!attribute tags
+    #   <p>The tags applied to the updated anomaly detector.</p>
+    #   @return [Hash<String, String>]
+    class PutAnomalyDetectorResponse < Struct.new(
+      nil,
+      :anomaly_detector_id,
+      :arn,
+      :status,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1222,6 +1632,40 @@ module Aws::Amp
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for the Random Cut Forest algorithm used for anomaly detection in time-series data.</p>
+    # @!attribute query
+    #   <p>The Prometheus query used to retrieve the time-series data for anomaly detection.</p> <important> <p>Random Cut Forest queries must be wrapped by a supported PromQL aggregation operator. For more information, see <a href="https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators">Aggregation operators</a> on the <i>Prometheus docs</i> website.</p> <p> <b>Supported PromQL aggregation operators</b>: <code>avg</code>, <code>count</code>, <code>group</code>, <code>max</code>, <code>min</code>, <code>quantile</code>, <code>stddev</code>, <code>stdvar</code>, and <code>sum</code>.</p> </important>
+    #   @return [String]
+    # @!attribute shingle_size
+    #   <p>The number of consecutive data points used to create a shingle for the Random Cut Forest algorithm. The default number is 8 consecutive data points.</p>
+    #   @return [Integer]
+    # @!attribute sample_size
+    #   <p>The number of data points sampled from the input stream for the Random Cut Forest algorithm. The default number is 256 consecutive data points.</p>
+    #   @return [Integer]
+    # @!attribute ignore_near_expected_from_above
+    #   <p>Configuration for ignoring values that are near expected values from above during anomaly detection.</p>
+    #   @return [Types::IgnoreNearExpected]
+    # @!attribute ignore_near_expected_from_below
+    #   <p>Configuration for ignoring values that are near expected values from below during anomaly detection.</p>
+    #   @return [Types::IgnoreNearExpected]
+    class RandomCutForestConfiguration < Struct.new(
+      nil,
+      :query,
+      :shingle_size,
+      :sample_size,
+      :ignore_near_expected_from_above,
+      :ignore_near_expected_from_below,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:shingle_size] = 8 unless options.key?(:shingle_size)
+        options[:sample_size] = 256 unless options.key?(:sample_size)
+        super
+      end
     end
 
     # <p>The request references a resources that doesn't exist.</p>
@@ -1410,11 +1854,14 @@ module Aws::Amp
     #   <p>The Amazon EKS cluster from which the scraper collects metrics.</p>
     #   @return [Types::Source]
     # @!attribute destination
-    #   <p>The Amazon Managed Service for Prometheus workspace the scraper sends metrics to.</p>
+    #   <p>The destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>
     #   @return [Types::Destination]
     # @!attribute role_configuration
     #   <p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>
     #   @return [Types::RoleConfiguration]
+    # @!attribute exporters
+    #   <p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>
+    #   @return [Array<Types::ExporterConfiguration>]
     class ScraperDescription < Struct.new(
       nil,
       :alias,
@@ -1430,6 +1877,7 @@ module Aws::Amp
       :source,
       :destination,
       :role_configuration,
+      :exporters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1510,11 +1958,14 @@ module Aws::Amp
     #   <p>The Amazon EKS cluster from which the scraper collects metrics.</p>
     #   @return [Types::Source]
     # @!attribute destination
-    #   <p>The Amazon Managed Service for Prometheus workspace the scraper sends metrics to.</p>
+    #   <p>The destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>
     #   @return [Types::Destination]
     # @!attribute role_configuration
     #   <p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>
     #   @return [Types::RoleConfiguration]
+    # @!attribute exporters
+    #   <p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>
+    #   @return [Array<Types::ExporterConfiguration>]
     class ScraperSummary < Struct.new(
       nil,
       :alias,
@@ -1529,6 +1980,7 @@ module Aws::Amp
       :source,
       :destination,
       :role_configuration,
+      :exporters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1566,14 +2018,19 @@ module Aws::Amp
     # @!attribute eks_configuration
     #   <p>The Amazon EKS cluster from which a scraper collects metrics.</p>
     #   @return [Types::EksConfiguration]
+    # @!attribute vpc_configuration
+    #   <p>The Amazon VPC configuration for the Prometheus collector when connecting to Amazon MSK clusters. This configuration enables secure, private network connectivity between the collector and your Amazon MSK cluster within your Amazon VPC.</p>
+    #   @return [Types::VpcConfiguration]
     class Source < Struct.new(
       :eks_configuration,
+      :vpc_configuration,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class EksConfiguration < Source; end
+      class VpcConfiguration < Source; end
       class Unknown < Source; end
     end
 
@@ -1747,7 +2204,7 @@ module Aws::Amp
     #   <p>Contains the base-64 encoded YAML configuration for the scraper.</p> <note> <p>For more information about configuring a scraper, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>
     #   @return [Types::ScrapeConfiguration]
     # @!attribute destination
-    #   <p>The new Amazon Managed Service for Prometheus workspace to send metrics to.</p>
+    #   <p>The new destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>
     #   @return [Types::Destination]
     # @!attribute role_configuration
     #   <p>Use this structure to enable cross-account access, so that you can use a target account to access Prometheus metrics from source accounts.</p>
@@ -1755,6 +2212,9 @@ module Aws::Amp
     # @!attribute client_token
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
     #   @return [String]
+    # @!attribute exporters
+    #   <p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the existing exporter configuration remains unchanged.</p>
+    #   @return [Array<Types::ExporterConfiguration>]
     class UpdateScraperRequest < Struct.new(
       nil,
       :scraper_id,
@@ -1763,6 +2223,7 @@ module Aws::Amp
       :destination,
       :role_configuration,
       :client_token,
+      :exporters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1823,12 +2284,20 @@ module Aws::Amp
     # @!attribute retention_period_in_days
     #   <p>Specifies how many days that metrics will be retained in the workspace.</p>
     #   @return [Integer]
+    # @!attribute out_of_order_time_window_in_seconds
+    #   <p>Specifies the time window in seconds for accepting out of order samples. Out of order samples older than this window are rejected.</p>
+    #   @return [Integer]
+    # @!attribute rule_query_offset_in_seconds
+    #   <p>Specifies the duration in seconds to offset rule evaluation queries into the past. This allows ingested samples to be available before rule evaluation.</p>
+    #   @return [Integer]
     class UpdateWorkspaceConfigurationRequest < Struct.new(
       nil,
       :workspace_id,
       :client_token,
       :limits_per_label_set,
       :retention_period_in_days,
+      :out_of_order_time_window_in_seconds,
+      :rule_query_offset_in_seconds,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1881,6 +2350,22 @@ module Aws::Amp
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The Amazon VPC configuration that specifies the network settings for a Prometheus collector to securely connect to Amazon MSK clusters. This configuration includes the security groups and subnets that control network access and placement for the collector.</p>
+    # @!attribute security_group_ids
+    #   <p>The security group IDs that control network access for the Prometheus collector. These security groups must allow the collector to communicate with your Amazon MSK cluster on the required ports.</p>
+    #   @return [Array<String>]
+    # @!attribute subnet_ids
+    #   <p>The subnet IDs where the Prometheus collector will be deployed. The subnets must be in the same Amazon VPC as your Amazon MSK cluster and have network connectivity to the cluster.</p>
+    #   @return [Array<String>]
+    class VpcConfiguration < Struct.new(
+      nil,
+      :security_group_ids,
+      :subnet_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This structure contains the description of the workspace configuration.</p>
     # @!attribute status
     #   <p>This structure displays the current status of the workspace configuration, and might also contain a reason for that status.</p>
@@ -1891,11 +2376,19 @@ module Aws::Amp
     # @!attribute retention_period_in_days
     #   <p>This field displays how many days that metrics are retained in the workspace.</p>
     #   @return [Integer]
+    # @!attribute out_of_order_time_window_in_seconds
+    #   <p>This field displays the out of order time window in seconds for accepting out of order samples.</p>
+    #   @return [Integer]
+    # @!attribute rule_query_offset_in_seconds
+    #   <p>This field displays the duration in seconds that rule evaluation queries are offset into the past.</p>
+    #   @return [Integer]
     class WorkspaceConfigurationDescription < Struct.new(
       nil,
       :status,
       :limits_per_label_set,
       :retention_period_in_days,
+      :out_of_order_time_window_in_seconds,
+      :rule_query_offset_in_seconds,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

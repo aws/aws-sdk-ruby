@@ -31,6 +31,12 @@ module Aws::ECS
       def resource_ids: () -> Array[String]?
       def message: () -> String?
     end
+    class DaemonNotActiveException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DaemonNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InvalidParameterException < Smithy::Client::ServiceError
       def message: () -> String?
     end

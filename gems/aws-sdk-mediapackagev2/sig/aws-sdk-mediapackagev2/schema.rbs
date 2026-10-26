@@ -5,6 +5,7 @@ module Aws::MediaPackageV2
     AccessDeniedException: StructureShape
     AdMarkerDash: EnumShape
     AdMarkerHls: EnumShape
+    AttachedMultiviewChannelList: ListShape
     CancelHarvestJobRequest: StructureShape
     CancelHarvestJobResponse: StructureShape
     CdnAuthConfiguration: StructureShape
@@ -18,6 +19,8 @@ module Aws::MediaPackageV2
     ConflictException: StructureShape
     ConflictExceptionType: EnumShape
     ContainerType: EnumShape
+    ContentKeyPeriodConfiguration: StructureShape
+    ContentKeyPeriodTiming: EnumShape
     CreateChannelGroupRequest: StructureShape
     CreateChannelGroupResponse: StructureShape
     CreateChannelRequest: StructureShape
@@ -34,6 +37,10 @@ module Aws::MediaPackageV2
     CreateMssManifests: ListShape
     CreateOriginEndpointRequest: StructureShape
     CreateOriginEndpointResponse: StructureShape
+    CustomAdType: EnumShape
+    CustomAdTypeList: ListShape
+    DashAudioTimelinePattern: EnumShape
+    DashAvailabilityStartTimeConfiguration: UnionShape
     DashBaseUrl: StructureShape
     DashBaseUrls: ListShape
     DashCompactness: EnumShape
@@ -133,9 +140,16 @@ module Aws::MediaPackageV2
     ListTagsForResourceResponse: StructureShape
     ManifestName: StringShape
     MssManifestLayout: EnumShape
+    MultiviewConfiguration: StructureShape
+    MultiviewFilterConfiguration: StructureShape
+    MultiviewLayoutList: ListShape
+    MultiviewLayoutType: EnumShape
+    MultiviewSourceList: ListShape
     OriginEndpointListConfiguration: StructureShape
     OriginEndpointsList: ListShape
     OutputHeaderConfiguration: StructureShape
+    OutputLockingMode: EnumShape
+    OutputTimestampMode: EnumShape
     PolicyText: StringShape
     PresetSpeke20Audio: EnumShape
     PresetSpeke20Video: EnumShape
@@ -159,10 +173,14 @@ module Aws::MediaPackageV2
     ScteFilter: EnumShape
     ScteFilterList: ListShape
     ScteHls: StructureShape
+    ScteInManifests: EnumShape
+    ScteInSegments: EnumShape
     Segment: StructureShape
     ServiceQuotaExceededException: StructureShape
     SpekeKeyProvider: StructureShape
+    SpekeVersion: EnumShape
     StartTag: StructureShape
+    StreamNameOutputMode: EnumShape
     TagArn: StringShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -178,6 +196,8 @@ module Aws::MediaPackageV2
     UpdateChannelResponse: StructureShape
     UpdateOriginEndpointRequest: StructureShape
     UpdateOriginEndpointResponse: StructureShape
+    UriPathType: EnumShape
+    UriSeparator: EnumShape
     ValidationException: StructureShape
     ValidationExceptionType: EnumShape
 

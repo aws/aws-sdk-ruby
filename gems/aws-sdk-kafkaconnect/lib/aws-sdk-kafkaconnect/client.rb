@@ -144,18 +144,18 @@ module Aws::KafkaConnect
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -212,8 +212,7 @@ module Aws::KafkaConnect
     # <p>Creates a connector using the specified properties. </p>
     # @param [Hash, Types::CreateConnectorRequest] params
     # @option params [Types::Capacity] :capacity
-    #   <p>Information about the capacity allocated to the connector. Exactly one of the two
-    #            properties must be specified.</p>
+    #   <p>Information about the capacity allocated to the connector. Exactly one of the two properties must be specified.</p>
     # @option params [Hash<String, String>] :connector_configuration
     #   <p>A map of keys to values that represent the configuration for the connector.</p>
     # @option params [String] :connector_description
@@ -227,20 +226,15 @@ module Aws::KafkaConnect
     # @option params [Types::KafkaClusterEncryptionInTransit] :kafka_cluster_encryption_in_transit
     #   <p>Details of encryption in transit to the Apache Kafka cluster.</p>
     # @option params [String] :kafka_connect_version
-    #   <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka
-    #            cluster's version and the plugins.</p>
+    #   <p>The version of Kafka Connect. It has to be compatible with both the Apache Kafka cluster's version and the plugins.</p>
     # @option params [Types::LogDelivery] :log_delivery
     #   <p>Details about log delivery.</p>
+    # @option params [String] :network_type
+    #   <p>The network type of the connector. It gives connectors connectivity to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to IPV4.</p>
     # @option params [Array<Types::Plugin>] :plugins
-    #   <important>
-    #               <p>Amazon MSK Connect does not currently support specifying multiple plugins as a list. To use more than one plugin for your connector, you can create a single custom plugin using a ZIP file that bundles multiple plugins together.</p>
-    #            </important>
-    #            <p>Specifies which plugin to use for the connector. You must specify a single-element list containing one <code>customPlugin</code> object.</p>
+    #   <important> <p>Amazon MSK Connect does not currently support specifying multiple plugins as a list. To use more than one plugin for your connector, you can create a single custom plugin using a ZIP file that bundles multiple plugins together.</p> </important> <p>Specifies which plugin to use for the connector. You must specify a single-element list containing one <code>customPlugin</code> object.</p>
     # @option params [String] :service_execution_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access the
-    #            Amazon Web Services resources that it needs. The types of resources depends on the logic of
-    #            the connector. For example, a connector that has Amazon S3 as a destination must have
-    #            permissions that allow it to write to the S3 destination bucket.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM role used by the connector to access the Amazon Web Services resources that it needs. The types of resources depends on the logic of the connector. For example, a connector that has Amazon S3 as a destination must have permissions that allow it to write to the S3 destination bucket.</p>
     # @option params [Types::WorkerConfiguration] :worker_configuration
     #   <p>Specifies which worker configuration to use with the connector.</p>
     # @option params [Hash<String, String>] :tags
@@ -257,7 +251,8 @@ module Aws::KafkaConnect
     #         },
     #         scale_out_policy: {
     #           cpu_utilization_percentage: 1, # required
-    #         }
+    #         },
+    #         max_autoscaling_task_count: 1
     #       },
     #       provisioned_capacity: {
     #         mcu_count: 1, # required
@@ -302,6 +297,7 @@ module Aws::KafkaConnect
     #         }
     #       }
     #     },
+    #     network_type: "NetworkType",
     #     plugins: [ # required
     #       {
     #         custom_plugin: { # required
@@ -510,7 +506,8 @@ module Aws::KafkaConnect
     #         },
     #         scale_out_policy: {
     #           cpu_utilization_percentage: 1
-    #         }
+    #         },
+    #         max_autoscaling_task_count: 1
     #       },
     #       provisioned_capacity: {
     #         mcu_count: 1,
@@ -559,6 +556,7 @@ module Aws::KafkaConnect
     #         }
     #       }
     #     },
+    #     network_type: "NetworkType",
     #     plugins: [
     #       {
     #         custom_plugin: {
@@ -617,7 +615,8 @@ module Aws::KafkaConnect
     #           },
     #           scale_out_policy: {
     #             cpu_utilization_percentage: 1
-    #           }
+    #           },
+    #           max_autoscaling_task_count: 1
     #         },
     #         provisioned_capacity: {
     #           mcu_count: 1,
@@ -639,7 +638,8 @@ module Aws::KafkaConnect
     #           },
     #           scale_out_policy: {
     #             cpu_utilization_percentage: 1
-    #           }
+    #           },
+    #           max_autoscaling_task_count: 1
     #         },
     #         provisioned_capacity: {
     #           mcu_count: 1,
@@ -712,8 +712,7 @@ module Aws::KafkaConnect
     # <p>Returns information about a worker configuration.</p>
     # @param [Hash, Types::DescribeWorkerConfigurationRequest] params
     # @option params [String] :worker_configuration_arn
-    #   <p>The Amazon Resource Name (ARN) of the worker configuration that you want to get
-    #            information about.</p>
+    #   <p>The Amazon Resource Name (ARN) of the worker configuration that you want to get information about.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     worker_configuration_arn: "__string", # required
@@ -777,18 +776,14 @@ module Aws::KafkaConnect
       request.send_request(options)
     end
 
-    # <p>Returns a list of all the connectors in this account and Region. The list is limited to
-    #          connectors whose name starts with the specified prefix. The response also includes a
-    #          description of each of the listed connectors.</p>
+    # <p>Returns a list of all the connectors in this account and Region. The list is limited to connectors whose name starts with the specified prefix. The response also includes a description of each of the listed connectors.</p>
     # @param [Hash, Types::ListConnectorsRequest] params
     # @option params [String] :connector_name_prefix
     #   <p>The name prefix that you want to use to search for and list connectors.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of connectors to list in one response.</p>
     # @option params [String] :next_token
-    #   <p>If the response of a ListConnectors operation is truncated, it will include a NextToken.
-    #            Send this NextToken in a subsequent request to continue listing from where the previous
-    #            operation left off.</p>
+    #   <p>If the response of a ListConnectors operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     connector_name_prefix: "__string",
@@ -812,7 +807,8 @@ module Aws::KafkaConnect
     #             },
     #             scale_out_policy: {
     #               cpu_utilization_percentage: 1
-    #             }
+    #             },
+    #             max_autoscaling_task_count: 1
     #           },
     #           provisioned_capacity: {
     #             mcu_count: 1,
@@ -858,6 +854,7 @@ module Aws::KafkaConnect
     #             }
     #           }
     #         },
+    #         network_type: "NetworkType",
     #         plugins: [
     #           {
     #             custom_plugin: {
@@ -886,9 +883,7 @@ module Aws::KafkaConnect
     # @option params [Integer] :max_results
     #   <p>The maximum number of custom plugins to list in one response.</p>
     # @option params [String] :next_token
-    #   <p>If the response of a ListCustomPlugins operation is truncated, it will include a
-    #            NextToken. Send this NextToken in a subsequent request to continue listing from where the
-    #            previous operation left off.</p>
+    #   <p>If the response of a ListCustomPlugins operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
     # @option params [String] :name_prefix
     #   <p>Lists custom plugin names that start with the specified text string.</p>
     # @example Request syntax with placeholder values
@@ -964,9 +959,7 @@ module Aws::KafkaConnect
     # @option params [Integer] :max_results
     #   <p>The maximum number of worker configurations to list in one response.</p>
     # @option params [String] :next_token
-    #   <p>If the response of a ListWorkerConfigurations operation is truncated, it will include a
-    #            NextToken. Send this NextToken in a subsequent request to continue listing from where the
-    #            previous operation left off.</p>
+    #   <p>If the response of a ListWorkerConfigurations operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>
     # @option params [String] :name_prefix
     #   <p>Lists worker configuration names that start with the specified text string.</p>
     # @example Request syntax with placeholder values
@@ -999,6 +992,31 @@ module Aws::KafkaConnect
     # @return [Types::ListWorkerConfigurationsOutput]
     def list_worker_configurations(params = {}, options = {})
       request = build_request(:list_worker_configurations, params)
+      request.send_request(options)
+    end
+
+    # <p>Restarts the specified connector. By default, this operation restarts the connector and all of its tasks. This operation is asynchronous and returns a connector operation ARN that you can pass to <code>DescribeConnectorOperation</code> to track the state of the restart.</p>
+    # @param [Hash, Types::RestartConnectorRequest] params
+    # @option params [String] :connector_arn
+    #   <p>The Amazon Resource Name (ARN) of the connector that you want to restart.</p>
+    # @option params [Boolean] :only_failed_tasks
+    #   <p>Specifies whether to restart only the connector's failed tasks. If <code>true</code>, the operation restarts only the tasks that are currently in a failed state, and healthy tasks continue running. If <code>false</code> or not specified, the operation restarts the connector and all of its tasks.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     connector_arn: "__string", # required
+    #     only_failed_tasks: false
+    #   }
+    #   options = {}
+    #   response = client.restart_connector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     connector_arn: "__string",
+    #     connector_operation_arn: "__string"
+    #   }
+    # @return [Types::RestartConnectorResponse]
+    def restart_connector(params = {}, options = {})
+      request = build_request(:restart_connector, params)
       request.send_request(options)
     end
 
@@ -1048,7 +1066,7 @@ module Aws::KafkaConnect
       request.send_request(options)
     end
 
-    # <p>Updates the specified connector.</p>
+    # <p>Updates the specified connector. For request body, specify only one parameter: either <code>capacity</code> or <code>connectorConfiguration</code>.</p>
     # @param [Hash, Types::UpdateConnectorRequest] params
     # @option params [Types::CapacityUpdate] :capacity
     #   <p>The target capacity.</p>
@@ -1070,7 +1088,8 @@ module Aws::KafkaConnect
     #         },
     #         scale_out_policy: { # required
     #           cpu_utilization_percentage: 1, # required
-    #         }
+    #         },
+    #         max_autoscaling_task_count: 1
     #       },
     #       provisioned_capacity: {
     #         mcu_count: 1, # required

@@ -220,6 +220,44 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The <code>Annotation</code> data type.</p>
+    #          <p>A <code>GetHookResult</code> call returns detailed information and remediation guidance from
+    #    Control Tower, Guard, Lambda, or custom Hooks for a Hook invocation result.</p>
+    # @!attribute annotation_name
+    #   <p>An identifier for the evaluation logic that was used when invoking the Hook. For Control Tower,
+    #      this is the control ID. For Guard, this is the rule ID. For Lambda and custom Hooks,
+    #      this is a user-defined identifier.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the Hook invocation from the downstream service.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>The explanation for the specific status assigned to this Hook invocation. For example,
+    #      "Bucket does not block public access".</p>
+    #   @return [String]
+    # @!attribute remediation_message
+    #   <p>Suggests what to change if your Hook returns a <code>FAILED</code> status. For example,
+    #      "Block public access to the bucket".</p>
+    #   @return [String]
+    # @!attribute remediation_link
+    #   <p>A URL that you can access for additional remediation guidance.</p>
+    #   @return [String]
+    # @!attribute severity_level
+    #   <p>The relative risk associated with any violations of this type.</p>
+    #   @return [String]
+    class Annotation < Struct.new(
+      nil,
+      :annotation_name,
+      :status,
+      :status_message,
+      :remediation_message,
+      :remediation_link,
+      :severity_level,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes whether StackSets automatically deploys to Organizations accounts that are
     #    added to a target organization or organizational unit (OU). For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-manage-auto-deployment.html">Enable or
     #     disable automatic deployments for StackSets in Organizations</a> in the
@@ -235,10 +273,16 @@ module Aws::CloudFormation
     #      target organization or OU. If set to <code>false</code>, stack resources are deleted. Specify
     #      only if <code>Enabled</code> is set to <code>True</code>.</p>
     #   @return [Boolean]
+    # @!attribute depends_on
+    #   <p>A list of StackSet ARNs that this StackSet depends on for auto-deployment operations.
+    #      When auto-deployment is triggered, operations will be sequenced to ensure all dependencies
+    #      complete successfully before this StackSet's operation begins.</p>
+    #   @return [Array<String>]
     class AutoDeployment < Struct.new(
       nil,
       :enabled,
       :retain_stacks_on_account_removal,
+      :depends_on,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -319,9 +363,9 @@ module Aws::CloudFormation
     #           resource-level permissions and avoid returning a response when no parameter is sent in the
     #           request:</p>
     #               <p>
-    #                  <code>{ "Version": "2012-10-17", "Statement": [{ "Effect": "Deny", "Action":
-    #             "cloudformation:DescribeStacks", "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }]
-    #             }</code>
+    #                  <code>{ "Version": "2012-10-17",		 	 	  "Statement": [{ "Effect": "Deny",
+    #             "Action": "cloudformation:DescribeStacks", "NotResource":
+    #             "arn:aws:cloudformation:*:*:stack/*/*" }] }</code>
     #               </p>
     #            </note>
     #            <p>The name or the unique stack ID that's associated with the stack.</p>
@@ -370,14 +414,12 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the resource, the Hook, and the Hook version to be
-    #    invoked.</p>
+    # <p>Specifies the resource, the Hook, and the Hook version to be invoked.</p>
     # @!attribute invocation_point
     #   <p>The specific point in the provisioning process where the Hook is invoked.</p>
     #   @return [String]
     # @!attribute failure_mode
-    #   <p>Specify the Hook failure mode for non-compliant resources in the followings
-    #      ways.</p>
+    #   <p>Specify the Hook failure mode for non-compliant resources in the followings ways.</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -390,11 +432,11 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     # @!attribute type_name
-    #   <p>The unique name for your Hook. Specifies a three-part namespace for your
-    #      Hook, with a recommended pattern of <code>Organization::Service::Hook</code>.</p>
+    #   <p>The unique name for your Hook. Specifies a three-part namespace for your Hook, with a
+    #      recommended pattern of <code>Organization::Service::Hook</code>.</p>
     #            <note>
-    #               <p>The following organization namespaces are reserved and can't be used in your Hook
-    #       type names:</p>
+    #               <p>The following organization namespaces are reserved and can't be used in your Hook type
+    #       names:</p>
     #               <ul>
     #                  <li>
     #                     <p>
@@ -478,7 +520,7 @@ module Aws::CloudFormation
 
     # <p>Specifies target details for an activated Hook.</p>
     # @!attribute target_type
-    #   <p>The name of the type.</p>
+    #   <p>The Hook target type.</p>
     #   @return [String]
     # @!attribute resource_target_details
     #   <p>Required if <code>TargetType</code> is <code>RESOURCE</code>.</p>
@@ -640,12 +682,33 @@ module Aws::CloudFormation
     #           <code>ContinueUpdateRollback</code> requests to ensure that CloudFormation successfully received
     #         them.</p>
     #   @return [String]
+    # @!attribute force_rollback
+    #   <p>Specifies whether CloudFormation forces the rollback to continue by skipping resources
+    #         currently in the <code>UPDATE_FAILED</code> state. Use this instead of listing each resource
+    #         individually in <code>ResourcesToSkip</code>. Only resources that entered the
+    #           <code>UPDATE_FAILED</code> state because a rollback failed are skipped. If you don't specify
+    #         a value, the default is <code>false</code> and CloudFormation doesn't skip any resources.</p>
+    #            <p>
+    #               <code>ForceRollback</code> and <code>ResourcesToSkip</code> are mutually exclusive.
+    #         Specifying both in the same request returns a validation error.</p>
+    #            <important>
+    #               <p>We recommend that you <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed">troubleshoot</a> resources before skipping them. CloudFormation sets the status of the
+    #           skipped resources to <code>UPDATE_COMPLETE</code> and continues to roll back the stack,
+    #           including resources in nested stacks. After the rollback completes, the skipped resources no
+    #           longer match the resources in the stack template. Before performing another stack update,
+    #           you must update the stack or resources to be consistent with each other. If you don't,
+    #           subsequent stack updates might fail, and the stack will become unrecoverable.</p>
+    #               <p>Drift detection reports skipped resources as <code>NOT_CHECKED</code>. For guidance,
+    #           see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>.</p>
+    #            </important>
+    #   @return [Boolean]
     class ContinueUpdateRollbackInput < Struct.new(
       nil,
       :stack_name,
       :role_arn,
       :resources_to_skip,
       :client_request_token,
+      :force_rollback,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -669,8 +732,9 @@ module Aws::CloudFormation
     #   <p>A structure that contains the body of the revised template, with a minimum length of 1
     #         byte and a maximum length of 51,200 bytes. CloudFormation generates the change set by comparing
     #         this template with the template of the stack that you specified.</p>
-    #            <p>Conditional: You must specify only <code>TemplateBody</code> or
-    #         <code>TemplateURL</code>.</p>
+    #            <p>Conditional: You must specify only one of the following parameters:
+    #           <code>TemplateBody</code>, <code>TemplateURL</code>, or set the
+    #           <code>UsePreviousTemplate</code> to <code>true</code>.</p>
     #   @return [String]
     # @!attribute template_url
     #   <p>The URL of the file that contains the revised template. The URL must point to a template
@@ -678,12 +742,19 @@ module Aws::CloudFormation
     #         generates the change set by comparing this template with the stack that you specified. The
     #         location for an Amazon S3 bucket must start with <code>https://</code>. URLs from S3 static
     #         websites are not supported.</p>
-    #            <p>Conditional: You must specify only <code>TemplateBody</code> or
-    #         <code>TemplateURL</code>.</p>
+    #            <p>Conditional: You must specify only one of the following parameters:
+    #           <code>TemplateBody</code>, <code>TemplateURL</code>, or set the
+    #           <code>UsePreviousTemplate</code> to <code>true</code>.</p>
     #   @return [String]
     # @!attribute use_previous_template
     #   <p>Whether to reuse the template that's associated with the stack to create the change
     #         set.</p>
+    #            <p>When using templates with the <code>AWS::LanguageExtensions</code> transform, provide the
+    #         template instead of using <code>UsePreviousTemplate</code> to ensure new parameter values and
+    #         Systems Manager parameter updates are applied correctly. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html">AWS::LanguageExtensions transform</a>.</p>
+    #            <p>Conditional: You must specify only one of the following parameters:
+    #           <code>TemplateBody</code>, <code>TemplateURL</code>, or set the
+    #           <code>UsePreviousTemplate</code> to <code>true</code>.</p>
     #   @return [Boolean]
     # @!attribute parameters
     #   <p>A list of <code>Parameter</code> structures that specify input parameters for the change
@@ -698,7 +769,7 @@ module Aws::CloudFormation
     #                     <code>CAPABILITY_IAM</code> and <code>CAPABILITY_NAMED_IAM</code>
     #                  </p>
     #                  <p>Some stack templates might include resources that can affect permissions in your
-    #             Amazon Web Services account; for example, by creating new IAM users. For those stacks, you must
+    #             Amazon Web Services account, for example, by creating new IAM users. For those stacks, you must
     #             explicitly acknowledge this by specifying one of these capabilities.</p>
     #                  <p>The following IAM resources require you to specify either the
     #               <code>CAPABILITY_IAM</code> or <code>CAPABILITY_NAMED_IAM</code> capability.</p>
@@ -796,14 +867,13 @@ module Aws::CloudFormation
     #            </note>
     #   @return [Array<String>]
     # @!attribute resource_types
-    #   <p>The template resource types that you have permissions to work with if you execute this
-    #         change set, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or
-    #           <code>Custom::MyCustomInstance</code>.</p>
+    #   <p>Specifies which resource types you can work with, such as <code>AWS::EC2::Instance</code>
+    #         or <code>Custom::MyCustomInstance</code>.</p>
     #            <p>If the list of resource types doesn't include a resource type that you're updating, the
     #         stack update fails. By default, CloudFormation grants permissions to all resource types. IAM
     #         uses this parameter for condition keys in IAM policies for CloudFormation. For more information,
-    #         see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control access with
-    #           Identity and Access Management</a> in the <i>CloudFormation User Guide</i>.</p>
+    #         see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control CloudFormation
+    #           access with Identity and Access Management</a> in the <i>CloudFormation User Guide</i>.</p>
     #            <note>
     #               <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can
     #           be specified.</p>
@@ -907,6 +977,31 @@ module Aws::CloudFormation
     #           instead.</p>
     #            </note>
     #   @return [Boolean]
+    # @!attribute deployment_mode
+    #   <p>Determines how CloudFormation handles configuration drift during deployment.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>REVERT_DRIFT</code> – Creates a drift-aware change set that brings actual
+    #             resource states in line with template definitions. Provides a three-way comparison between
+    #             actual state, previous deployment state, and desired state.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/drift-aware-change-sets.html">Using drift-aware
+    #           change sets</a> in the <i>CloudFormation User Guide</i>.</p>
+    #   @return [String]
+    # @!attribute deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
+    #   @return [Types::DeploymentConfig]
+    # @!attribute disable_validation
+    #   <p>
+    #       Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.
+    #       </p>
+    #            <p>
+    #       Default: <code>false</code>
+    #            </p>
+    #   @return [Boolean]
     class CreateChangeSetInput < Struct.new(
       nil,
       :stack_name,
@@ -928,6 +1023,9 @@ module Aws::CloudFormation
       :include_nested_stacks,
       :on_stack_failure,
       :import_existing_resources,
+      :deployment_mode,
+      :deployment_config,
+      :disable_validation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1141,21 +1239,13 @@ module Aws::CloudFormation
     #            </note>
     #   @return [Array<String>]
     # @!attribute resource_types
-    #   <p>The template resource types that you have permissions to work with for this create stack
-    #         action, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or
-    #           <code>Custom::MyCustomInstance</code>. Use the following syntax to describe template
-    #         resource types: <code>AWS::*</code> (for all Amazon Web Services resources), <code>Custom::*</code> (for all
-    #         custom resources), <code>Custom::<i>logical_ID</i>
-    #               </code> (for a specific custom resource),
-    #           <code>AWS::<i>service_name</i>::*</code> (for all resources of a particular
-    #         Amazon Web Services service), and
-    #             <code>AWS::<i>service_name</i>::<i>resource_logical_ID</i>
-    #               </code> (for a specific Amazon Web Services resource).</p>
+    #   <p>Specifies which resource types you can work with, such as <code>AWS::EC2::Instance</code>
+    #         or <code>Custom::MyCustomInstance</code>.</p>
     #            <p>If the list of resource types doesn't include a resource that you're creating, the stack
     #         creation fails. By default, CloudFormation grants permissions to all resource types. IAM uses
     #         this parameter for CloudFormation-specific condition keys in IAM policies. For more information,
-    #         see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control access with
-    #           Identity and Access Management</a>.</p>
+    #         see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control CloudFormation
+    #           access with Identity and Access Management</a>.</p>
     #            <note>
     #               <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can
     #           be specified.</p>
@@ -1235,6 +1325,18 @@ module Aws::CloudFormation
     #            <p>Default: <code>false</code>
     #            </p>
     #   @return [Boolean]
+    # @!attribute deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
+    #   @return [Types::DeploymentConfig]
+    # @!attribute disable_validation
+    #   <p>
+    #       Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.
+    #       </p>
+    #            <p>
+    #       Default: <code>false</code>
+    #            </p>
+    #   @return [Boolean]
     class CreateStackInput < Struct.new(
       nil,
       :stack_name,
@@ -1255,6 +1357,8 @@ module Aws::CloudFormation
       :client_request_token,
       :enable_termination_protection,
       :retain_except_on_create,
+      :deployment_config,
+      :disable_validation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1373,9 +1477,14 @@ module Aws::CloudFormation
     # @!attribute stack_id
     #   <p>Unique identifier of the stack.</p>
     #   @return [String]
+    # @!attribute operation_id
+    #   <p>A unique identifier for this stack operation that can be used to track the operation's
+    #         progress and events.</p>
+    #   @return [String]
     class CreateStackOutput < Struct.new(
       nil,
       :stack_id,
+      :operation_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1791,6 +1900,10 @@ module Aws::CloudFormation
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
+    #   @return [Types::DeploymentConfig]
     class DeleteStackInput < Struct.new(
       nil,
       :stack_name,
@@ -1798,6 +1911,7 @@ module Aws::CloudFormation
       :role_arn,
       :client_request_token,
       :deletion_mode,
+      :deployment_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1925,6 +2039,38 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The deployment configuration for a stack operation, including the deployment mode.</p>
+    # @!attribute mode
+    #   <p>Specifies the deployment mode for the stack operation. Possible values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>STANDARD</code> - Use the standard deployment behavior, ensuring resources are
+    #        ready to serve traffic before completing the operation. This is the default. You do not need
+    #        to specify this value explicitly.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EXPRESS</code> - Complete the stack operation when resource configuration is
+    #        applied, without waiting for resources to become ready to serve traffic. Resources continue
+    #        becoming ready in the background.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute disable_rollback
+    #   <p>Specifies whether to disable rollback of the stack if the stack operation fails.</p>
+    #            <p>Default: <code>false</code>
+    #            </p>
+    #   @return [Boolean]
+    class DeploymentConfig < Struct.new(
+      nil,
+      :mode,
+      :disable_rollback,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies the Organizations accounts where you want to create, update, or delete
     #    stack instances. You can target either your entire organization or specific accounts using
     #    organizational units (OUs) and account filter options.</p>
@@ -2033,7 +2179,8 @@ module Aws::CloudFormation
 
     # <p>The input for the <a>DescribeAccountLimits</a> action.</p>
     # @!attribute next_token
-    #   <p>A string that identifies the next page of limits that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class DescribeAccountLimitsInput < Struct.new(
       nil,
@@ -2069,8 +2216,8 @@ module Aws::CloudFormation
     #         change set you want to describe.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string, provided by the <code>DescribeChangeSetHooks</code> response output, that
-    #         identifies the next page of information that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute logical_resource_id
     #   <p>If specified, lists only the Hooks related to the specified
@@ -2097,7 +2244,7 @@ module Aws::CloudFormation
     #   <p>List of Hook objects.</p>
     #   @return [Array<Types::ChangeSetHook>]
     # @!attribute status
-    #   <p>Provides the status of the change set hook.</p>
+    #   <p>Provides the status of the change set Hook.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>Pagination token, <code>null</code> or empty if no more results.</p>
@@ -2131,8 +2278,8 @@ module Aws::CloudFormation
     #         change set you want to describe.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string (provided by the <a>DescribeChangeSet</a> response output) that
-    #         identifies the next page of information that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute include_property_values
     #   <p>If <code>true</code>, the returned changes include detailed changes in the property
@@ -2185,6 +2332,28 @@ module Aws::CloudFormation
     # @!attribute status_reason
     #   <p>A description of the change set's status. For example, if your attempt to create a change
     #         set failed, CloudFormation shows the error message.</p>
+    #   @return [String]
+    # @!attribute stack_drift_status
+    #   <p>The drift status of the stack when the change set was created. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DRIFTED</code> – The stack has drifted from its last deployment.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IN_SYNC</code> – The stack is in sync with its last deployment.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NOT_CHECKED</code> – CloudFormation doesn’t currently return this value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UNKNOWN</code> – The drift status could not be determined.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Only present for drift-aware change sets.</p>
     #   @return [String]
     # @!attribute notification_ar_ns
     #   <p>The ARNs of the Amazon SNS topics that will be associated with the stack if you execute the
@@ -2254,6 +2423,13 @@ module Aws::CloudFormation
     #           feature instead.</p>
     #            </note>
     #   @return [Boolean]
+    # @!attribute deployment_mode
+    #   <p>The deployment mode specified when the change set was created. Valid value is
+    #           <code>REVERT_DRIFT</code>. Only present for drift-aware change sets.</p>
+    #   @return [String]
+    # @!attribute deployment_config
+    #   <p>The deployment configuration specified when the change set was created.</p>
+    #   @return [Types::DeploymentConfig]
     class DescribeChangeSetOutput < Struct.new(
       nil,
       :change_set_name,
@@ -2266,6 +2442,7 @@ module Aws::CloudFormation
       :execution_status,
       :status,
       :status_reason,
+      :stack_drift_status,
       :notification_ar_ns,
       :rollback_configuration,
       :capabilities,
@@ -2277,6 +2454,57 @@ module Aws::CloudFormation
       :root_change_set_id,
       :on_stack_failure,
       :import_existing_resources,
+      :deployment_mode,
+      :deployment_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute stack_name
+    #   <p>The name or unique stack ID for which you want to retrieve events. If you specified the
+    #         name of a change set, specify the stack name or ID (ARN) of the change set you want to
+    #         describe.</p>
+    #   @return [String]
+    # @!attribute change_set_name
+    #   <p>The name or Amazon Resource Name (ARN) of the change set for which you want to retrieve
+    #         events.</p>
+    #   @return [String]
+    # @!attribute operation_id
+    #   <p>The unique identifier of the operation for which you want to retrieve events.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when retrieving events.</p>
+    #   @return [Types::EventFilter]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
+    #   @return [String]
+    class DescribeEventsInput < Struct.new(
+      nil,
+      :stack_name,
+      :change_set_name,
+      :operation_id,
+      :filters,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute operation_events
+    #   <p>A list of operation events that match the specified criteria.</p>
+    #   @return [Array<Types::OperationEvent>]
+    # @!attribute next_token
+    #   <p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to
+    #         a token. To retrieve the next set of results, call <code>DescribeEvents</code> again and
+    #         assign that token to the request object's <code>NextToken</code> parameter. If the request
+    #         returns all results, <code>NextToken</code> is set to <code>null</code>.</p>
+    #   @return [String]
+    class DescribeEventsOutput < Struct.new(
+      nil,
+      :operation_events,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2485,33 +2713,33 @@ module Aws::CloudFormation
     #   <p>Status of the resource scan.</p>
     #            <dl>
     #               <dt>
-    #             
+    #
     #               IN_PROGRESS
-    #             
+    #
     #           </dt>
     #               <dd>
     #                  <p>The resource scan is still in progress.</p>
     #               </dd>
     #               <dt>
-    #             
+    #
     #               COMPLETE
-    #             
+    #
     #           </dt>
     #               <dd>
     #                  <p>The resource scan is complete.</p>
     #               </dd>
     #               <dt>
-    #             
+    #
     #               EXPIRED
-    #             
+    #
     #           </dt>
     #               <dd>
     #                  <p>The resource scan has expired.</p>
     #               </dd>
     #               <dt>
-    #             
+    #
     #               FAILED
-    #             
+    #
     #           </dt>
     #               <dd>
     #                  <p>The resource scan has failed.</p>
@@ -2681,7 +2909,8 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string that identifies the next page of events that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class DescribeStackEventsInput < Struct.new(
       nil,
@@ -2840,7 +3069,8 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>A string that identifies the next page of stack resource drift results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
@@ -3071,7 +3301,7 @@ module Aws::CloudFormation
     #               <p>The IAM policy below can be added to IAM policies when you want to limit
     #           resource-level permissions and avoid returning a response when no parameter is sent in the
     #           request:</p>
-    #               <p>{ "Version": "2012-10-17", "Statement": [{ "Effect": "Deny", "Action":
+    #               <p>{ "Version": "2012-10-17",		 	 	  "Statement": [{ "Effect": "Deny", "Action":
     #           "cloudformation:DescribeStacks", "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }]
     #           }</p>
     #            </note>
@@ -3087,7 +3317,8 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string that identifies the next page of stacks that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class DescribeStacksInput < Struct.new(
       nil,
@@ -3224,8 +3455,7 @@ module Aws::CloudFormation
     # @!attribute schema
     #   <p>The schema that defines the extension.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html">Resource type
-    #           schema</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i> and the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html">CloudFormation
-    #           Hooks User Guide</a>.</p>
+    #           schema</a> in the <i>CloudFormation Command Line Interface (CLI) User Guide</i> and the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html">CloudFormation Hooks User Guide</a>.</p>
     #   @return [String]
     # @!attribute provisioning_type
     #   <p>For resource type extensions, the provisioning behavior of the resource type. CloudFormation
@@ -3611,6 +3841,19 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Event filter allows you to focus on specific events in an operation.</p>
+    # @!attribute failed_events
+    #   <p>When set to true, only returns failed events within the operation. This helps quickly
+    #      identify root causes for a failed operation.</p>
+    #   @return [Boolean]
+    class EventFilter < Struct.new(
+      nil,
+      :failed_events,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The input for the <a>ExecuteChangeSet</a> action.</p>
     # @!attribute change_set_name
     #   <p>The name or Amazon Resource Name (ARN) of the change set that you want use to update the
@@ -3801,6 +4044,102 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute hook_result_id
+    #   <p>The unique identifier (ID) of the Hook invocation result that you want details about.
+    #         You can get the ID from the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListHookResults.html">ListHookResults</a>
+    #         operation.</p>
+    #   @return [String]
+    class GetHookResultInput < Struct.new(
+      nil,
+      :hook_result_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute hook_result_id
+    #   <p>The unique identifier of the Hook result.</p>
+    #   @return [String]
+    # @!attribute invocation_point
+    #   <p>The specific point in the provisioning process where the Hook is invoked.</p>
+    #   @return [String]
+    # @!attribute failure_mode
+    #   <p>The failure mode of the invocation.</p>
+    #   @return [String]
+    # @!attribute type_name
+    #   <p>The name of the Hook that was invoked.</p>
+    #   @return [String]
+    # @!attribute original_type_name
+    #   <p>The original public type name of the Hook when an alias is used.</p>
+    #            <p>For example, if you activate <code>AWS::Hooks::GuardHook</code> with alias
+    #           <code>MyCompany::Custom::GuardHook</code>, then <code>TypeName</code> will be
+    #           <code>MyCompany::Custom::GuardHook</code> and <code>OriginalTypeName</code> will be
+    #           <code>AWS::Hooks::GuardHook</code>. </p>
+    #   @return [String]
+    # @!attribute type_version_id
+    #   <p>The version identifier of the Hook that was invoked.</p>
+    #   @return [String]
+    # @!attribute type_configuration_version_id
+    #   <p>The version identifier of the Hook configuration data that was used during
+    #         invocation.</p>
+    #   @return [String]
+    # @!attribute type_arn
+    #   <p>The Amazon Resource Name (ARN) of the Hook.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the Hook invocation. The following statuses are possible:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>HOOK_IN_PROGRESS</code>: The Hook is currently running.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HOOK_COMPLETE_SUCCEEDED</code>: The Hook completed successfully.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed validation.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HOOK_FAILED</code>: The Hook encountered an error during execution.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute hook_status_reason
+    #   <p>A message that provides additional details about the Hook invocation status.</p>
+    #   @return [String]
+    # @!attribute invoked_at
+    #   <p>The timestamp when the Hook was invoked.</p>
+    #   @return [Time]
+    # @!attribute target
+    #   <p>Information about the target of the Hook invocation.</p>
+    #   @return [Types::HookTarget]
+    # @!attribute annotations
+    #   <p>A list of objects with additional information and guidance that can help you resolve a
+    #         failed Hook invocation.</p>
+    #   @return [Array<Types::Annotation>]
+    class GetHookResultOutput < Struct.new(
+      nil,
+      :hook_result_id,
+      :invocation_point,
+      :failure_mode,
+      :type_name,
+      :original_type_name,
+      :type_version_id,
+      :type_configuration_version_id,
+      :type_arn,
+      :status,
+      :hook_status_reason,
+      :invoked_at,
+      :target,
+      :annotations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The input for the <a>GetStackPolicy</a> action.</p>
     # @!attribute stack_name
     #   <p>The name or unique stack ID that's associated with the stack whose policy you want to
@@ -3816,8 +4155,8 @@ module Aws::CloudFormation
 
     # <p>The output for the <a>GetStackPolicy</a> action.</p>
     # @!attribute stack_policy_body
-    #   <p>Structure that contains the stack policy body. (For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html">Prevent updates to stack resources</a> in the
-    #         <i>CloudFormation User Guide</i>.)</p>
+    #   <p>Structure that contains the stack policy body. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html">Prevent updates to stack resources</a> in the
+    #         <i>CloudFormation User Guide</i>.</p>
     #   @return [String]
     class GetStackPolicyOutput < Struct.new(
       nil,
@@ -4020,7 +4359,7 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes a Hook invocation, its status, and the reason for its status.</p>
+    # <p>A <code>ListHookResults</code> call returns a summary of a Hook invocation.</p>
     # @!attribute hook_result_id
     #   <p>The unique identifier for this Hook invocation result.</p>
     #   @return [String]
@@ -4052,8 +4391,7 @@ module Aws::CloudFormation
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed
-    #        validation.</p>
+    #                     <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed validation.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -4062,8 +4400,8 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     # @!attribute hook_status_reason
-    #   <p>A description of the Hook results status. For example, if the Hook
-    #      result is in a failed state, this may contain additional information for the failed state.</p>
+    #   <p>A description of the Hook results status. For example, if the Hook result is in a failed
+    #      state, this may contain additional information for the failed state.</p>
     #   @return [String]
     # @!attribute invoked_at
     #   <p>The timestamp when the Hook was invoked.</p>
@@ -4080,7 +4418,8 @@ module Aws::CloudFormation
     #   <p>The ARN of the Hook that was invoked.</p>
     #   @return [String]
     # @!attribute hook_execution_target
-    #   <p>The ARN of the target stack or request token of the Cloud Control API operation.</p>
+    #   <p>The Amazon Resource Name (ARN) of the target stack or request token of the Cloud Control API
+    #      operation.</p>
     #            <p>Only shown in responses when the request does not specify <code>TargetType</code> and
     #       <code>TargetId</code> filters.</p>
     #   @return [String]
@@ -4099,6 +4438,30 @@ module Aws::CloudFormation
       :target_id,
       :type_arn,
       :hook_execution_target,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The <code>HookTarget</code> data type.</p>
+    # @!attribute target_type
+    #   <p>The target type.</p>
+    #   @return [String]
+    # @!attribute target_type_name
+    #   <p>The target name, for example, <code>AWS::S3::Bucket</code>.</p>
+    #   @return [String]
+    # @!attribute target_id
+    #   <p>The unique identifier of the Hook invocation target.</p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>The action that invoked the Hook.</p>
+    #   @return [String]
+    class HookTarget < Struct.new(
+      nil,
+      :target_type,
+      :target_type_name,
+      :target_id,
+      :action,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4231,8 +4594,8 @@ module Aws::CloudFormation
     #         sets.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string (provided by the <a>ListChangeSets</a> response output) that
-    #         identifies the next page of change sets that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class ListChangeSetsInput < Struct.new(
       nil,
@@ -4262,8 +4625,8 @@ module Aws::CloudFormation
     end
 
     # @!attribute next_token
-    #   <p>A string (provided by the <a>ListExports</a> response output) that identifies
-    #         the next page of exported output values that you asked to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class ListExportsInput < Struct.new(
       nil,
@@ -4290,7 +4653,8 @@ module Aws::CloudFormation
     end
 
     # @!attribute next_token
-    #   <p>A string that identifies the next page of resource scan results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>If the number of available results exceeds this maximum, the response includes a
@@ -4343,8 +4707,8 @@ module Aws::CloudFormation
     #           <code>Status</code>.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>Filters results by the status of Hook invocations. Can only be used in
-    #         combination with <code>TypeArn</code>. Valid values are:</p>
+    #   <p>Filters results by the status of Hook invocations. Can only be used in combination with
+    #           <code>TypeArn</code>. Valid values are:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -4352,23 +4716,21 @@ module Aws::CloudFormation
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>HOOK_COMPLETE_SUCCEEDED</code>: The Hook completed
-    #             successfully.</p>
+    #                     <code>HOOK_COMPLETE_SUCCEEDED</code>: The Hook completed successfully.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed
-    #             validation.</p>
+    #                     <code>HOOK_COMPLETE_FAILED</code>: The Hook completed but failed validation.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>HOOK_FAILED</code>: The Hook encountered an error during
-    #             execution.</p>
+    #                     <code>HOOK_FAILED</code>: The Hook encountered an error during execution.</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string that identifies the next page of events that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class ListHookResultsInput < Struct.new(
       nil,
@@ -4389,9 +4751,8 @@ module Aws::CloudFormation
     #   <p>The unique identifier of the Hook invocation target.</p>
     #   @return [String]
     # @!attribute hook_results
-    #   <p>A list of <code>HookResultSummary</code> structures that provides the status and
-    #         Hook status reason for each Hook invocation for the specified
-    #         target.</p>
+    #   <p>A list of <code>HookResultSummary</code> structures that provides the status and Hook
+    #         status reason for each Hook invocation for the specified target.</p>
     #   @return [Array<Types::HookResultSummary>]
     # @!attribute next_token
     #   <p>Pagination token, <code>null</code> or empty if no more results.</p>
@@ -4412,8 +4773,8 @@ module Aws::CloudFormation
     #         importing this value.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string (provided by the <a>ListImports</a> response output) that identifies
-    #         the next page of stacks that are importing the specified exported output value.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class ListImportsInput < Struct.new(
       nil,
@@ -4448,7 +4809,8 @@ module Aws::CloudFormation
     #         can be provided.</p>
     #   @return [Array<Types::ScannedResourceIdentifier>]
     # @!attribute next_token
-    #   <p>A string that identifies the next page of resource scan results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>If the number of available results exceeds this maximum, the response includes a
@@ -4505,7 +4867,8 @@ module Aws::CloudFormation
     #   <p>If specified, the returned resources will have a matching tag value.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string that identifies the next page of resource scan results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>If the number of available results exceeds this maximum, the response includes a
@@ -4547,7 +4910,8 @@ module Aws::CloudFormation
     end
 
     # @!attribute next_token
-    #   <p>A string that identifies the next page of resource scan results.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>If the number of available results exceeds this maximum, the response includes a
@@ -4590,11 +4954,7 @@ module Aws::CloudFormation
     #   <p>The name or unique ID of the StackSet that you want to list drifted resources for.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If the previous paginated request didn't return all of the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call this action again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
@@ -4693,11 +5053,7 @@ module Aws::CloudFormation
     #   <p>The name or unique ID of the StackSet that you want to list stack instances for.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If the previous request didn't return all the remaining results, the response's
-    #           <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call <code>ListStackInstances</code> again and assign that token to the request
-    #         object's <code>NextToken</code> parameter. If there are no remaining results, the previous
-    #         response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
@@ -4770,10 +5126,8 @@ module Aws::CloudFormation
     #   <p>The ID associated with the stack refactor created from the <a>CreateStackRefactor</a> action.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to
-    #         a token. To retrieve the next set of results, call this action again and assign that token to
-    #         the request object's <code>NextToken</code> parameter. If the request returns all results,
-    #           <code>NextToken</code> is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
@@ -4814,10 +5168,8 @@ module Aws::CloudFormation
     #         only stack refactors with the specified execution status codes.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>If the request doesn't return all the remaining results, <code>NextToken</code> is set to
-    #         a token. To retrieve the next set of results, call this action again and assign that token to
-    #         the request object's <code>NextToken</code> parameter. If the request returns all results,
-    #           <code>NextToken</code> is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
@@ -4899,8 +5251,8 @@ module Aws::CloudFormation
     #            </ul>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string that identifies the next page of stack resources that you want to
-    #         retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class ListStackResourcesInput < Struct.new(
       nil,
@@ -4933,8 +5285,7 @@ module Aws::CloudFormation
     #         for.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>A string that identifies the next page of deployment targets that you want to
-    #         retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
@@ -4995,12 +5346,7 @@ module Aws::CloudFormation
     #   <p>The ID of the StackSet operation.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If the previous request didn't return all the remaining results, the response object's
-    #           <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call <code>ListStackSetOperationResults</code> again and assign that token to the
-    #         request object's <code>NextToken</code> parameter. If there are no remaining results, the
-    #         previous response object's <code>NextToken</code> parameter is set to
-    #         <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
@@ -5067,11 +5413,7 @@ module Aws::CloudFormation
     #   <p>The name or unique ID of the StackSet that you want to get operation summaries for.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If the previous paginated request didn't return all of the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call <code>ListStackSetOperations</code> again and assign that token to the request
-    #         object's <code>NextToken</code> parameter. If there are no remaining results, the previous
-    #         response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
@@ -5129,11 +5471,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute next_token
-    #   <p>If the previous paginated request didn't return all the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call <code>ListStackSets</code> again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous call.)</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be returned with a single call. If the number of
@@ -5195,7 +5533,8 @@ module Aws::CloudFormation
 
     # <p>The input for <a>ListStacks</a> action.</p>
     # @!attribute next_token
-    #   <p>A string that identifies the next page of stacks that you want to retrieve.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute stack_status_filter
     #   <p>Stack status to use as a filter. Specify one or more stack status codes to list only
@@ -5255,11 +5594,8 @@ module Aws::CloudFormation
     #         results.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the previous paginated request didn't return all the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call this action again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class ListTypeRegistrationsInput < Struct.new(
       nil,
@@ -5317,11 +5653,8 @@ module Aws::CloudFormation
     #         results.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the previous paginated request didn't return all of the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call this action again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     # @!attribute deprecated_status
     #   <p>The deprecation status of the extension versions that you want to get summary information
@@ -5462,11 +5795,8 @@ module Aws::CloudFormation
     #         results.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>If the previous paginated request didn't return all the remaining results, the response
-    #         object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of
-    #         results, call this action again and assign that token to the request object's
-    #           <code>NextToken</code> parameter. If there are no remaining results, the previous response
-    #         object's <code>NextToken</code> parameter is set to <code>null</code>.</p>
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #         call.)</p>
     #   @return [String]
     class ListTypesInput < Struct.new(
       nil,
@@ -5496,6 +5826,27 @@ module Aws::CloudFormation
       nil,
       :type_summaries,
       :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains drift information for a resource property, including actual value, previous
+    #    deployment value, and drift detection timestamp.</p>
+    # @!attribute previous_value
+    #   <p>The configuration value from the previous CloudFormation deployment.</p>
+    #   @return [String]
+    # @!attribute actual_value
+    #   <p>The current live configuration value of the resource property.</p>
+    #   @return [String]
+    # @!attribute drift_detection_timestamp
+    #   <p>The timestamp when drift was detected for this resource property.</p>
+    #   @return [Time]
+    class LiveResourceDrift < Struct.new(
+      nil,
+      :previous_value,
+      :actual_value,
+      :drift_detection_timestamp,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5589,6 +5940,140 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains information about a CloudFormation operation.</p>
+    # @!attribute operation_type
+    #   <p>The type of operation.</p>
+    #   @return [String]
+    # @!attribute operation_id
+    #   <p>The unique identifier for the operation.</p>
+    #   @return [String]
+    class OperationEntry < Struct.new(
+      nil,
+      :operation_type,
+      :operation_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains detailed information about an event that occurred during a CloudFormation
+    #    operation.</p>
+    # @!attribute event_id
+    #   <p>A unique identifier for this event.</p>
+    #   @return [String]
+    # @!attribute stack_id
+    #   <p>The unique ID name of the instance of the stack.</p>
+    #   @return [String]
+    # @!attribute operation_id
+    #   <p>The unique identifier of the operation this event belongs to.</p>
+    #   @return [String]
+    # @!attribute operation_type
+    #   <p>The type of operation.</p>
+    #   @return [String]
+    # @!attribute operation_status
+    #   <p>The current status of the operation.</p>
+    #   @return [String]
+    # @!attribute event_type
+    #   <p>The type of event.</p>
+    #   @return [String]
+    # @!attribute logical_resource_id
+    #   <p>The logical name of the resource as specified in the template.</p>
+    #   @return [String]
+    # @!attribute physical_resource_id
+    #   <p>The name or unique identifier that corresponds to a physical instance ID of a
+    #      resource.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>Type of resource.</p>
+    #   @return [String]
+    # @!attribute timestamp
+    #   <p>Time the status was updated.</p>
+    #   @return [Time]
+    # @!attribute start_time
+    #   <p>The time when the event started.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The time when the event ended.</p>
+    #   @return [Time]
+    # @!attribute resource_status
+    #   <p>Current status of the resource.</p>
+    #   @return [String]
+    # @!attribute resource_status_reason
+    #   <p>Success or failure message associated with the resource.</p>
+    #   @return [String]
+    # @!attribute resource_properties
+    #   <p>The properties used to create the resource.</p>
+    #   @return [String]
+    # @!attribute client_request_token
+    #   <p>A unique identifier for the request that initiated this operation.</p>
+    #   @return [String]
+    # @!attribute hook_type
+    #   <p>The type name of the Hook that was invoked.</p>
+    #   @return [String]
+    # @!attribute hook_status
+    #   <p>The status of the Hook invocation. </p>
+    #   @return [String]
+    # @!attribute hook_status_reason
+    #   <p>Additional information about the Hook status.</p>
+    #   @return [String]
+    # @!attribute hook_invocation_point
+    #   <p>The point in the operation lifecycle when the Hook was invoked.</p>
+    #   @return [String]
+    # @!attribute hook_failure_mode
+    #   <p>Specifies how Hook failures are handled.</p>
+    #   @return [String]
+    # @!attribute detailed_status
+    #   <p>Additional status information about the operation.</p>
+    #   @return [String]
+    # @!attribute validation_failure_mode
+    #   <p>Specifies how validation failures are handled.</p>
+    #   @return [String]
+    # @!attribute validation_name
+    #   <p>The name of the validation that was performed.</p>
+    #   @return [String]
+    # @!attribute validation_status
+    #   <p>The status of the validation.</p>
+    #   @return [String]
+    # @!attribute validation_status_reason
+    #   <p>Additional information about the validation status.</p>
+    #   @return [String]
+    # @!attribute validation_path
+    #   <p>The path within the resource where the validation was applied.</p>
+    #   @return [String]
+    class OperationEvent < Struct.new(
+      nil,
+      :event_id,
+      :stack_id,
+      :operation_id,
+      :operation_type,
+      :operation_status,
+      :event_type,
+      :logical_resource_id,
+      :physical_resource_id,
+      :resource_type,
+      :timestamp,
+      :start_time,
+      :end_time,
+      :resource_status,
+      :resource_status_reason,
+      :resource_properties,
+      :client_request_token,
+      :hook_type,
+      :hook_status,
+      :hook_status_reason,
+      :hook_invocation_point,
+      :hook_failure_mode,
+      :detailed_status,
+      :validation_failure_mode,
+      :validation_name,
+      :validation_status,
+      :validation_status_reason,
+      :validation_path,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified operation ID already exists.</p>
     # @!attribute message
     #   @return [String]
@@ -5651,7 +6136,7 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Output data type.</p>
+    # <p>The <code>Output</code> data type.</p>
     # @!attribute output_key
     #   <p>The key associated with the output.</p>
     #   @return [String]
@@ -5675,7 +6160,7 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Parameter data type.</p>
+    # <p>The <code>Parameter</code> data type.</p>
     # @!attribute parameter_key
     #   <p>The key associated with the parameter. If you don't specify a key and value for a particular
     #      parameter, CloudFormation uses the default value that's specified in your template.</p>
@@ -5718,7 +6203,7 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The ParameterDeclaration data type.</p>
+    # <p>The <code>ParameterDeclaration</code> data type.</p>
     # @!attribute parameter_key
     #   <p>The name that's associated with the parameter.</p>
     #   @return [String]
@@ -6138,8 +6623,9 @@ module Aws::CloudFormation
     # @!attribute action
     #   <p>The action that CloudFormation takes on the resource, such as <code>Add</code> (adds a new
     #      resource), <code>Modify</code> (changes a resource), <code>Remove</code> (deletes a resource),
-    #       <code>Import</code> (imports a resource), or <code>Dynamic</code> (exact action for the resource
-    #      can't be determined).</p>
+    #       <code>Import</code> (imports a resource), <code>Dynamic</code> (exact action for the resource
+    #      can't be determined), or <code>SyncWithActual</code> (resource will not be changed, only
+    #      CloudFormation metadata will change).</p>
     #   @return [String]
     # @!attribute logical_resource_id
     #   <p>The resource's logical ID, which is defined in the stack's template.</p>
@@ -6170,6 +6656,39 @@ module Aws::CloudFormation
     #      update, such as a change in the resource attribute's <code>Metadata</code>,
     #       <code>Properties</code>, or <code>Tags</code>.</p>
     #   @return [Array<String>]
+    # @!attribute resource_drift_status
+    #   <p>The drift status of the resource. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IN_SYNC</code> – The resource matches its template definition.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>MODIFIED</code> – Resource properties were modified outside CloudFormation.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DELETED</code> – The resource was deleted outside CloudFormation.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NOT_CHECKED</code> – CloudFormation doesn’t currently return this value.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UNKNOWN</code> – Drift status could not be determined.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UNSUPPORTED</code> – Resource type does not support actual state comparison.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Only present for drift-aware change sets.</p>
+    #   @return [String]
+    # @!attribute resource_drift_ignored_attributes
+    #   <p>List of resource attributes for which drift was ignored.</p>
+    #   @return [Array<Types::ResourceDriftIgnoredAttribute>]
     # @!attribute details
     #   <p>For the <code>Modify</code> action, a list of <code>ResourceChangeDetail</code> structures
     #      that describes the changes that CloudFormation will make to the resource.</p>
@@ -6189,6 +6708,9 @@ module Aws::CloudFormation
     #   <p>An encoded JSON string that contains the context of the resource after the change is
     #      executed.</p>
     #   @return [String]
+    # @!attribute previous_deployment_context
+    #   <p>Information about the resource's state from the previous CloudFormation deployment.</p>
+    #   @return [String]
     class ResourceChange < Struct.new(
       nil,
       :policy_action,
@@ -6198,11 +6720,14 @@ module Aws::CloudFormation
       :resource_type,
       :replacement,
       :scope,
+      :resource_drift_status,
+      :resource_drift_ignored_attributes,
       :details,
       :change_set_id,
       :module_info,
       :before_context,
       :after_context,
+      :previous_deployment_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6261,6 +6786,11 @@ module Aws::CloudFormation
     #         <code>ChangeSource</code> to <code>Automatic</code> because the nested stack's template might
     #        have changed. Changes to a nested stack's template aren't visible to CloudFormation until you run
     #        an update on the parent stack.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NoModification</code> entities are changes made to the template that matches the actual
+    #        state of the resource.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -6337,33 +6867,33 @@ module Aws::CloudFormation
     #   <p>Status of the processing of a resource in a generated template.</p>
     #            <dl>
     #               <dt>
-    #        
+    #
     #         InProgress
-    #        
+    #
     #       </dt>
     #               <dd>
     #                  <p>The resource processing is still in progress.</p>
     #               </dd>
     #               <dt>
-    #        
+    #
     #         Complete
-    #        
+    #
     #       </dt>
     #               <dd>
     #                  <p>The resource processing is complete.</p>
     #               </dd>
     #               <dt>
-    #        
+    #
     #         Pending
-    #        
+    #
     #       </dt>
     #               <dd>
     #                  <p>The resource processing is pending.</p>
     #               </dd>
     #               <dt>
-    #        
+    #
     #         Failed
-    #        
+    #
     #       </dt>
     #               <dd>
     #                  <p>The resource processing has failed.</p>
@@ -6384,6 +6914,38 @@ module Aws::CloudFormation
       :resource_status,
       :resource_status_reason,
       :warnings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The <code>ResourceDriftIgnoredAttribute</code> data type.</p>
+    # @!attribute path
+    #   <p>Path of the resource attribute for which drift was ignored.</p>
+    #   @return [String]
+    # @!attribute reason
+    #   <p>Reason why drift was ignored for the attribute, can have 3 possible values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>WRITE_ONLY_PROPERTY</code> – Property is not included in read response for the
+    #        resource’s live state.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>MANAGED_BY_AWS</code> – Property is managed by an Amazon Web Services service and is expected to be
+    #        dynamically modified.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SENSITIVE_PROPERTY</code> – Property has a sensitive value, such as an Amazon Web Services Secrets Manager value.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class ResourceDriftIgnoredAttribute < Struct.new(
+      nil,
+      :path,
+      :reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6504,33 +7066,33 @@ module Aws::CloudFormation
     #   <p>Status of the resource scan.</p>
     #            <dl>
     #               <dt>
-    #        
+    #
     #         IN_PROGRESS
-    #        
+    #
     #       </dt>
     #               <dd>
     #                  <p>The resource scan is still in progress.</p>
     #               </dd>
     #               <dt>
-    #        
+    #
     #         COMPLETE
-    #        
+    #
     #       </dt>
     #               <dd>
     #                  <p>The resource scan is complete.</p>
     #               </dd>
     #               <dt>
-    #        
+    #
     #         EXPIRED
-    #        
+    #
     #       </dt>
     #               <dd>
     #                  <p>The resource scan has expired.</p>
     #               </dd>
     #               <dt>
-    #        
+    #
     #         FAILED
-    #        
+    #
     #       </dt>
     #               <dd>
     #                  <p>The resource scan has failed.</p>
@@ -6595,6 +7157,35 @@ module Aws::CloudFormation
     #   <p>The value of the property after the change is executed. Large values can be
     #      truncated.</p>
     #   @return [String]
+    # @!attribute before_value_from
+    #   <p>Indicates the source of the before value. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ACTUAL_STATE</code> – The before value represents current actual state.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PREVIOUS_DEPLOYMENT_STATE</code> – The before value represents the previous
+    #        CloudFormation deployment state.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Only present for drift-aware change sets.</p>
+    #   @return [String]
+    # @!attribute after_value_from
+    #   <p>Indicates the source of the after value. Valid value:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>TEMPLATE</code> – The after value comes from the new template.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Only present for drift-aware change sets.</p>
+    #   @return [String]
+    # @!attribute drift
+    #   <p>Detailed drift information for the resource property, including actual values, previous
+    #      deployment values, and drift detection timestamps.</p>
+    #   @return [Types::LiveResourceDrift]
     # @!attribute attribute_change_type
     #   <p>The type of change to be made to the property if the change is executed.</p>
     #            <ul>
@@ -6610,6 +7201,11 @@ module Aws::CloudFormation
     #                  <p>
     #                     <code>Modify</code> The item will be modified.</p>
     #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SyncWithActual</code> The drift status of this item will be reset but the item will
+    #        not be modified.</p>
+    #               </li>
     #            </ul>
     #   @return [String]
     class ResourceTargetDefinition < Struct.new(
@@ -6620,6 +7216,9 @@ module Aws::CloudFormation
       :path,
       :before_value,
       :after_value,
+      :before_value_from,
+      :after_value_from,
+      :drift,
       :attribute_change_type,
       keyword_init: true
     )
@@ -6719,12 +7318,17 @@ module Aws::CloudFormation
     #            <p>Default: <code>false</code>
     #            </p>
     #   @return [Boolean]
+    # @!attribute deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
+    #   @return [Types::DeploymentConfig]
     class RollbackStackInput < Struct.new(
       nil,
       :stack_name,
       :role_arn,
       :client_request_token,
       :retain_except_on_create,
+      :deployment_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6733,9 +7337,14 @@ module Aws::CloudFormation
     # @!attribute stack_id
     #   <p>Unique identifier of the stack.</p>
     #   @return [String]
+    # @!attribute operation_id
+    #   <p>A unique identifier for this rollback operation that can be used to track the operation's
+    #         progress and events.</p>
+    #   @return [String]
     class RollbackStackOutput < Struct.new(
       nil,
       :stack_id,
+      :operation_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6984,7 +7593,7 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Stack data type.</p>
+    # <p>The <code>Stack</code> data type.</p>
     # @!attribute stack_id
     #   <p>Unique identifier of the stack.</p>
     #   @return [String]
@@ -7033,6 +7642,10 @@ module Aws::CloudFormation
     #               </li>
     #            </ul>
     #   @return [Boolean]
+    # @!attribute deployment_config
+    #   <p>The deployment configuration for the stack, including the deployment mode used for stack
+    #      operations.</p>
+    #   @return [Types::DeploymentConfig]
     # @!attribute notification_ar_ns
     #   <p>Amazon SNS topic Amazon Resource Names (ARNs) to which stack related events are published.</p>
     #   @return [Array<String>]
@@ -7106,6 +7719,9 @@ module Aws::CloudFormation
     #      resources in the stack have reached that event. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html">Understand
     #       CloudFormation stack creation events</a> in the <i>CloudFormation User Guide</i>.</p>
     #   @return [String]
+    # @!attribute last_operations
+    #   <p>Information about the most recent operations performed on this stack.</p>
+    #   @return [Array<Types::OperationEntry>]
     class Stack < Struct.new(
       nil,
       :stack_id,
@@ -7120,6 +7736,7 @@ module Aws::CloudFormation
       :stack_status,
       :stack_status_reason,
       :disable_rollback,
+      :deployment_config,
       :notification_ar_ns,
       :timeout_in_minutes,
       :capabilities,
@@ -7133,6 +7750,7 @@ module Aws::CloudFormation
       :retain_except_on_create,
       :deletion_mode,
       :detailed_status,
+      :last_operations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7244,7 +7862,7 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The StackEvent data type.</p>
+    # <p>The <code>StackEvent</code> data type.</p>
     # @!attribute stack_id
     #   <p>The unique ID name of the instance of the stack.</p>
     #   @return [String]
@@ -7253,6 +7871,9 @@ module Aws::CloudFormation
     #   @return [String]
     # @!attribute stack_name
     #   <p>The name associated with a stack.</p>
+    #   @return [String]
+    # @!attribute operation_id
+    #   <p>The unique identifier of the operation that generated this stack event.</p>
     #   @return [String]
     # @!attribute logical_resource_id
     #   <p>The logical name of the resource specified in the template.</p>
@@ -7305,8 +7926,7 @@ module Aws::CloudFormation
     #   <p>The unique identifier of the Hook invocation.</p>
     #   @return [String]
     # @!attribute hook_failure_mode
-    #   <p>Specify the Hook failure mode for non-compliant resources in the followings
-    #      ways.</p>
+    #   <p>Specify the Hook failure mode for non-compliant resources in the followings ways.</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -7343,6 +7963,7 @@ module Aws::CloudFormation
       :stack_id,
       :event_id,
       :stack_name,
+      :operation_id,
       :logical_resource_id,
       :physical_resource_id,
       :resource_type,
@@ -7886,7 +8507,7 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The StackResource data type.</p>
+    # <p>The <code>StackResource</code> data type.</p>
     # @!attribute stack_name
     #   <p>The name associated with the stack.</p>
     #   @return [String]
@@ -8174,9 +8795,11 @@ module Aws::CloudFormation
     #        expected configuration.</p>
     #                  <p>Any resources that don't currently support drift detection have a status of
     #         <code>NOT_CHECKED</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html">Resource
-    #         type support for imports and drift detection</a>. If you performed an <a>ContinueUpdateRollback</a> operation on a stack, any resources included in
-    #         <code>ResourcesToSkip</code> will also have a status of <code>NOT_CHECKED</code>. For more
-    #        information about skipping resources during rollback operations, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>.</p>
+    #         type support for imports and drift detection</a>. If you performed a <a>ContinueUpdateRollback</a> operation on a stack, resources skipped using
+    #         <code>ResourcesToSkip</code> or <code>ForceRollback</code> also have a status of
+    #         <code>NOT_CHECKED</code>. To detect whether a skipped resource actually differs from the
+    #         template, run <a>DetectStackResourceDrift</a>. For more information about
+    #         skipping resources during rollback operations, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -8965,7 +9588,7 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The StackSummary Data Type</p>
+    # <p>The <code>StackSummary</code> Data Type</p>
     # @!attribute stack_id
     #   <p>Unique stack identifier.</p>
     #   @return [String]
@@ -9009,6 +9632,9 @@ module Aws::CloudFormation
     #      and any values specified as template parameters. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detect
     #       unmanaged configuration changes to stacks and resources with drift detection</a>.</p>
     #   @return [Types::StackDriftInformationSummary]
+    # @!attribute last_operations
+    #   <p>Information about the most recent operations performed on this stack.</p>
+    #   @return [Array<Types::OperationEntry>]
     class StackSummary < Struct.new(
       nil,
       :stack_id,
@@ -9022,6 +9648,7 @@ module Aws::CloudFormation
       :parent_id,
       :root_id,
       :drift_information,
+      :last_operations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9114,13 +9741,12 @@ module Aws::CloudFormation
     # <p>The Tag type enables you to specify a key-value pair that can be used to store information
     #    about an CloudFormation stack.</p>
     # @!attribute key
-    #   <p>A string used to identify this tag. You can specify a maximum of
-    #      128 characters for a tag key. Tags owned by Amazon Web Services have the reserved prefix:
-    #      <code>aws:</code>.</p>
+    #   <p>A string used to identify this tag. You can specify a maximum of 128 characters for a tag
+    #      key. Tags owned by Amazon Web Services have the reserved prefix: <code>aws:</code>.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>A string that contains the value for this tag. You can specify a
-    #      maximum of 256 characters for a tag value.</p>
+    #   <p>A string that contains the value for this tag. You can specify a maximum of 256 characters
+    #      for a tag value.</p>
     #   @return [String]
     class Tag < Struct.new(
       nil,
@@ -9174,7 +9800,7 @@ module Aws::CloudFormation
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The TemplateParameter data type.</p>
+    # <p>The <code>TemplateParameter</code> data type.</p>
     # @!attribute parameter_key
     #   <p>The name associated with the parameter.</p>
     #   @return [String]
@@ -9767,6 +10393,9 @@ module Aws::CloudFormation
     # @!attribute use_previous_template
     #   <p>Reuse the existing template that is associated with the stack that you are
     #         updating.</p>
+    #            <p>When using templates with the <code>AWS::LanguageExtensions</code> transform, provide the
+    #         template instead of using <code>UsePreviousTemplate</code> to ensure new parameter values and
+    #         Systems Manager parameter updates are applied correctly. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html">AWS::LanguageExtensions transform</a>.</p>
     #            <p>Conditional: You must specify only one of the following parameters:
     #           <code>TemplateBody</code>, <code>TemplateURL</code>, or set the
     #           <code>UsePreviousTemplate</code> to <code>true</code>.</p>
@@ -9904,14 +10533,13 @@ module Aws::CloudFormation
     #            </note>
     #   @return [Array<String>]
     # @!attribute resource_types
-    #   <p>The template resource types that you have permissions to work with for this update stack
-    #         action, such as <code>AWS::EC2::Instance</code>, <code>AWS::EC2::*</code>, or
-    #           <code>Custom::MyCustomInstance</code>.</p>
+    #   <p>Specifies which resource types you can work with, such as <code>AWS::EC2::Instance</code>
+    #         or <code>Custom::MyCustomInstance</code>.</p>
     #            <p>If the list of resource types doesn't include a resource that you're updating, the stack
     #         update fails. By default, CloudFormation grants permissions to all resource types. IAM uses this
     #         parameter for CloudFormation-specific condition keys in IAM policies. For more information, see
-    #           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control access with
-    #           Identity and Access Management</a>.</p>
+    #           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html">Control CloudFormation
+    #           access with Identity and Access Management</a>.</p>
     #            <note>
     #               <p>Only one of the <code>Capabilities</code> and <code>ResourceType</code> parameters can
     #           be specified.</p>
@@ -9989,6 +10617,18 @@ module Aws::CloudFormation
     #            <p>Default: <code>false</code>
     #            </p>
     #   @return [Boolean]
+    # @!attribute deployment_config
+    #   <p>The deployment configuration for this stack operation, including the deployment
+    #         mode.</p>
+    #   @return [Types::DeploymentConfig]
+    # @!attribute disable_validation
+    #   <p>
+    #       Set to <code>true</code> to disable pre-deployment validations in changeset or stack operations.
+    #       </p>
+    #            <p>
+    #       Default: <code>false</code>
+    #            </p>
+    #   @return [Boolean]
     class UpdateStackInput < Struct.new(
       nil,
       :stack_name,
@@ -10009,6 +10649,8 @@ module Aws::CloudFormation
       :disable_rollback,
       :client_request_token,
       :retain_except_on_create,
+      :deployment_config,
+      :disable_validation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10134,9 +10776,14 @@ module Aws::CloudFormation
     # @!attribute stack_id
     #   <p>Unique identifier of the stack.</p>
     #   @return [String]
+    # @!attribute operation_id
+    #   <p>A unique identifier for this update operation that can be used to track the operation's
+    #         progress and events.</p>
+    #   @return [String]
     class UpdateStackOutput < Struct.new(
       nil,
       :stack_id,
+      :operation_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

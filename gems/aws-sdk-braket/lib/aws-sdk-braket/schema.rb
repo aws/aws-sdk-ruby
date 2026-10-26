@@ -25,7 +25,11 @@ module Aws::Braket
     CreateJobOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#CreateJobOutput", name: "CreateJobOutput")
     CreateQuantumTaskInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#CreateQuantumTaskInput", name: "CreateQuantumTaskInput")
     CreateQuantumTaskOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#CreateQuantumTaskOutput", name: "CreateQuantumTaskOutput")
+    CreateSpendingLimitRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#CreateSpendingLimitRequest", name: "CreateSpendingLimitRequest")
+    CreateSpendingLimitResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#CreateSpendingLimitResponse", name: "CreateSpendingLimitResponse")
     DataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#DataSource", name: "DataSource")
+    DeleteSpendingLimitRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#DeleteSpendingLimitRequest", name: "DeleteSpendingLimitRequest")
+    DeleteSpendingLimitResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#DeleteSpendingLimitResponse", name: "DeleteSpendingLimitResponse")
     DeviceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#DeviceArn", name: "DeviceArn", traits: {"aws.api#arnReference" => {"service" => "com.amazonaws.braket#Braket", "resource" => "com.amazonaws.braket#DeviceResource"}, "smithy.api#length" => {"min" => 1, "max" => 256}})
     DeviceConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#DeviceConfig", name: "DeviceConfig")
     DeviceOfflineException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#DeviceOfflineException", name: "DeviceOfflineException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 424})
@@ -36,6 +40,8 @@ module Aws::Braket
     DeviceSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#DeviceSummary", name: "DeviceSummary")
     DeviceSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.braket#DeviceSummaryList", name: "DeviceSummaryList")
     DeviceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#DeviceType", name: "DeviceType", traits: {"smithy.api#enum" => [{"value" => "QPU", "name" => "QPU"}, {"value" => "SIMULATOR", "name" => "SIMULATOR"}]})
+    ExperimentalCapabilities = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.braket#ExperimentalCapabilities", name: "ExperimentalCapabilities")
+    ExperimentalCapabilitiesEnablementType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#ExperimentalCapabilitiesEnablementType", name: "ExperimentalCapabilitiesEnablementType", traits: {"smithy.api#enum" => [{"value" => "ALL", "name" => "ALL"}, {"value" => "NONE", "name" => "NONE"}]})
     GetDeviceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#GetDeviceInput", name: "GetDeviceInput")
     GetDeviceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#GetDeviceOutput", name: "GetDeviceOutput")
     GetJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#GetJobInput", name: "GetJobInput")
@@ -49,7 +55,7 @@ module Aws::Braket
     InputConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.braket#InputConfigList", name: "InputConfigList")
     InputFileConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#InputFileConfig", name: "InputFileConfig")
     InstanceConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#InstanceConfig", name: "InstanceConfig")
-    InstanceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#InstanceType", name: "InstanceType", traits: {"smithy.api#enum" => [{"value" => "ml.m4.xlarge", "name" => "ML_M4_XLARGE"}, {"value" => "ml.m4.2xlarge", "name" => "ML_M4_2XLARGE"}, {"value" => "ml.m4.4xlarge", "name" => "ML_M4_4XLARGE"}, {"value" => "ml.m4.10xlarge", "name" => "ML_M4_10XLARGE"}, {"value" => "ml.m4.16xlarge", "name" => "ML_M4_16XLARGE"}, {"value" => "ml.g4dn.xlarge", "name" => "ML_G4DN_XLARGE"}, {"value" => "ml.g4dn.2xlarge", "name" => "ML_G4DN_2XLARGE"}, {"value" => "ml.g4dn.4xlarge", "name" => "ML_G4DN_4XLARGE"}, {"value" => "ml.g4dn.8xlarge", "name" => "ML_G4DN_8XLARGE"}, {"value" => "ml.g4dn.12xlarge", "name" => "ML_G4DN_12XLARGE"}, {"value" => "ml.g4dn.16xlarge", "name" => "ML_G4DN_16XLARGE"}, {"value" => "ml.m5.large", "name" => "ML_M5_LARGE"}, {"value" => "ml.m5.xlarge", "name" => "ML_M5_XLARGE"}, {"value" => "ml.m5.2xlarge", "name" => "ML_M5_2XLARGE"}, {"value" => "ml.m5.4xlarge", "name" => "ML_M5_4XLARGE"}, {"value" => "ml.m5.12xlarge", "name" => "ML_M5_12XLARGE"}, {"value" => "ml.m5.24xlarge", "name" => "ML_M5_24XLARGE"}, {"value" => "ml.c4.xlarge", "name" => "ML_C4_XLARGE"}, {"value" => "ml.c4.2xlarge", "name" => "ML_C4_2XLARGE"}, {"value" => "ml.c4.4xlarge", "name" => "ML_C4_4XLARGE"}, {"value" => "ml.c4.8xlarge", "name" => "ML_C4_8XLARGE"}, {"value" => "ml.p2.xlarge", "name" => "ML_P2_XLARGE"}, {"value" => "ml.p2.8xlarge", "name" => "ML_P2_8XLARGE"}, {"value" => "ml.p2.16xlarge", "name" => "ML_P2_16XLARGE"}, {"value" => "ml.p3.2xlarge", "name" => "ML_P3_2XLARGE"}, {"value" => "ml.p3.8xlarge", "name" => "ML_P3_8XLARGE"}, {"value" => "ml.p3.16xlarge", "name" => "ML_P3_16XLARGE"}, {"value" => "ml.p3dn.24xlarge", "name" => "ML_P3DN_24XLARGE"}, {"value" => "ml.p4d.24xlarge", "name" => "ML_P4D_24XLARGE"}, {"value" => "ml.c5.xlarge", "name" => "ML_C5_XLARGE"}, {"value" => "ml.c5.2xlarge", "name" => "ML_C5_2XLARGE"}, {"value" => "ml.c5.4xlarge", "name" => "ML_C5_4XLARGE"}, {"value" => "ml.c5.9xlarge", "name" => "ML_C5_9XLARGE"}, {"value" => "ml.c5.18xlarge", "name" => "ML_C5_18XLARGE"}, {"value" => "ml.c5n.xlarge", "name" => "ML_C5N_XLARGE"}, {"value" => "ml.c5n.2xlarge", "name" => "ML_C5N_2XLARGE"}, {"value" => "ml.c5n.4xlarge", "name" => "ML_C5N_4XLARGE"}, {"value" => "ml.c5n.9xlarge", "name" => "ML_C5N_9XLARGE"}, {"value" => "ml.c5n.18xlarge", "name" => "ML_C5N_18XLARGE"}]})
+    InstanceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#InstanceType", name: "InstanceType", traits: {"smithy.api#enum" => [{"value" => "ml.t3.large", "name" => "ML_T3_LARGE"}, {"value" => "ml.t3.xlarge", "name" => "ML_T3_XLARGE"}, {"value" => "ml.t3.2xlarge", "name" => "ML_T3_2XLARGE"}, {"value" => "ml.m4.xlarge", "name" => "ML_M4_XLARGE"}, {"value" => "ml.m4.2xlarge", "name" => "ML_M4_2XLARGE"}, {"value" => "ml.m4.4xlarge", "name" => "ML_M4_4XLARGE"}, {"value" => "ml.m4.10xlarge", "name" => "ML_M4_10XLARGE"}, {"value" => "ml.m4.16xlarge", "name" => "ML_M4_16XLARGE"}, {"value" => "ml.m5.large", "name" => "ML_M5_LARGE"}, {"value" => "ml.m5.xlarge", "name" => "ML_M5_XLARGE"}, {"value" => "ml.m5.2xlarge", "name" => "ML_M5_2XLARGE"}, {"value" => "ml.m5.4xlarge", "name" => "ML_M5_4XLARGE"}, {"value" => "ml.m5.12xlarge", "name" => "ML_M5_12XLARGE"}, {"value" => "ml.m5.24xlarge", "name" => "ML_M5_24XLARGE"}, {"value" => "ml.c4.xlarge", "name" => "ML_C4_XLARGE"}, {"value" => "ml.c4.2xlarge", "name" => "ML_C4_2XLARGE"}, {"value" => "ml.c4.4xlarge", "name" => "ML_C4_4XLARGE"}, {"value" => "ml.c4.8xlarge", "name" => "ML_C4_8XLARGE"}, {"value" => "ml.c5.xlarge", "name" => "ML_C5_XLARGE"}, {"value" => "ml.c5.2xlarge", "name" => "ML_C5_2XLARGE"}, {"value" => "ml.c5.4xlarge", "name" => "ML_C5_4XLARGE"}, {"value" => "ml.c5.9xlarge", "name" => "ML_C5_9XLARGE"}, {"value" => "ml.c5.18xlarge", "name" => "ML_C5_18XLARGE"}, {"value" => "ml.c5n.xlarge", "name" => "ML_C5N_XLARGE"}, {"value" => "ml.c5n.2xlarge", "name" => "ML_C5N_2XLARGE"}, {"value" => "ml.c5n.4xlarge", "name" => "ML_C5N_4XLARGE"}, {"value" => "ml.c5n.9xlarge", "name" => "ML_C5N_9XLARGE"}, {"value" => "ml.c5n.18xlarge", "name" => "ML_C5N_18XLARGE"}, {"value" => "ml.p2.xlarge", "name" => "ML_P2_XLARGE"}, {"value" => "ml.p2.8xlarge", "name" => "ML_P2_8XLARGE"}, {"value" => "ml.p2.16xlarge", "name" => "ML_P2_16XLARGE"}, {"value" => "ml.p3.2xlarge", "name" => "ML_P3_2XLARGE"}, {"value" => "ml.p3.8xlarge", "name" => "ML_P3_8XLARGE"}, {"value" => "ml.p3.16xlarge", "name" => "ML_P3_16XLARGE"}, {"value" => "ml.p3dn.24xlarge", "name" => "ML_P3DN_24XLARGE"}, {"value" => "ml.p4d.24xlarge", "name" => "ML_P4D_24XLARGE"}, {"value" => "ml.g4dn.xlarge", "name" => "ML_G4DN_XLARGE"}, {"value" => "ml.g4dn.2xlarge", "name" => "ML_G4DN_2XLARGE"}, {"value" => "ml.g4dn.4xlarge", "name" => "ML_G4DN_4XLARGE"}, {"value" => "ml.g4dn.8xlarge", "name" => "ML_G4DN_8XLARGE"}, {"value" => "ml.g4dn.12xlarge", "name" => "ML_G4DN_12XLARGE"}, {"value" => "ml.g4dn.16xlarge", "name" => "ML_G4DN_16XLARGE"}, {"value" => "ml.g6.xlarge", "name" => "ML_G6_XLARGE"}, {"value" => "ml.g6.2xlarge", "name" => "ML_G6_2XLARGE"}, {"value" => "ml.g6.4xlarge", "name" => "ML_G6_4XLARGE"}, {"value" => "ml.g6.8xlarge", "name" => "ML_G6_8XLARGE"}, {"value" => "ml.g6.12xlarge", "name" => "ML_G6_12XLARGE"}, {"value" => "ml.g6.16xlarge", "name" => "ML_G6_16XLARGE"}, {"value" => "ml.g6.24xlarge", "name" => "ML_G6_24XLARGE"}, {"value" => "ml.g6.48xlarge", "name" => "ML_G6_48XLARGE"}, {"value" => "ml.g6e.xlarge", "name" => "ML_G6E_XLARGE"}, {"value" => "ml.g6e.2xlarge", "name" => "ML_G6E_2XLARGE"}, {"value" => "ml.g6e.4xlarge", "name" => "ML_G6E_4XLARGE"}, {"value" => "ml.g6e.8xlarge", "name" => "ML_G6E_8XLARGE"}, {"value" => "ml.g6e.12xlarge", "name" => "ML_G6E_12XLARGE"}, {"value" => "ml.g6e.16xlarge", "name" => "ML_G6E_16XLARGE"}, {"value" => "ml.g6e.24xlarge", "name" => "ML_G6E_24XLARGE"}, {"value" => "ml.g6e.48xlarge", "name" => "ML_G6E_48XLARGE"}]})
     InternalServiceException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#InternalServiceException", name: "InternalServiceException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     JobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#JobArn", name: "JobArn", traits: {"aws.api#arnReference" => {"service" => "com.amazonaws.braket#Braket", "resource" => "com.amazonaws.braket#JobResource"}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:braket:[a-z0-9\\-]+:[0-9]{12}:job/.*$"})
     JobCheckpointConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#JobCheckpointConfig", name: "JobCheckpointConfig")
@@ -96,7 +102,15 @@ module Aws::Braket
     SearchQuantumTasksFilterOperator = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#SearchQuantumTasksFilterOperator", name: "SearchQuantumTasksFilterOperator", traits: {"smithy.api#enum" => [{"value" => "LT", "name" => "LT"}, {"value" => "LTE", "name" => "LTE"}, {"value" => "EQUAL", "name" => "EQUAL"}, {"value" => "GT", "name" => "GT"}, {"value" => "GTE", "name" => "GTE"}, {"value" => "BETWEEN", "name" => "BETWEEN"}]})
     SearchQuantumTasksInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#SearchQuantumTasksInput", name: "SearchQuantumTasksInput")
     SearchQuantumTasksOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#SearchQuantumTasksOutput", name: "SearchQuantumTasksOutput")
+    SearchSpendingLimitsFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#SearchSpendingLimitsFilter", name: "SearchSpendingLimitsFilter")
+    SearchSpendingLimitsFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.braket#SearchSpendingLimitsFilterList", name: "SearchSpendingLimitsFilterList")
+    SearchSpendingLimitsFilterOperator = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#SearchSpendingLimitsFilterOperator", name: "SearchSpendingLimitsFilterOperator", traits: {"smithy.api#enum" => [{"value" => "EQUAL", "name" => "EQUAL"}]})
+    SearchSpendingLimitsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#SearchSpendingLimitsRequest", name: "SearchSpendingLimitsRequest")
+    SearchSpendingLimitsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#SearchSpendingLimitsResponse", name: "SearchSpendingLimitsResponse")
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    SpendingLimitArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#SpendingLimitArn", name: "SpendingLimitArn", traits: {"aws.api#arnReference" => {"service" => "com.amazonaws.braket#Braket", "resource" => "com.amazonaws.braket#SpendingLimitResource"}, "smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:braket:[a-z0-9\\-]+:[0-9]{12}:spending-limit/.*$"})
+    SpendingLimitSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#SpendingLimitSummary", name: "SpendingLimitSummary")
+    SpendingLimitSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.braket#SpendingLimitSummaryList", name: "SpendingLimitSummaryList")
     String1024 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#String1024", name: "String1024", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     String2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#String2048", name: "String2048", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     String256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#String256", name: "String256", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
@@ -108,8 +122,11 @@ module Aws::Braket
     TagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#TagResourceOutput", name: "TagResourceOutput")
     TagsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.braket#TagsMap", name: "TagsMap")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TimePeriod = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#TimePeriod", name: "TimePeriod")
     UntagResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#UntagResourceInput", name: "UntagResourceInput")
     UntagResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#UntagResourceOutput", name: "UntagResourceOutput")
+    UpdateSpendingLimitRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#UpdateSpendingLimitRequest", name: "UpdateSpendingLimitRequest")
+    UpdateSpendingLimitResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#UpdateSpendingLimitResponse", name: "UpdateSpendingLimitResponse")
     Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#Uri", name: "Uri", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^\\d{10,14}\\.dkr\\.ecr.[a-z0-9-]+\\.amazonaws\\.com\\/.+(@sha256)?:.+$"})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.braket#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.braket#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"value" => "ProgramSetValidationFailed", "name" => "PROGRAM_SET_VALIDATION_FAILED"}]})
@@ -168,11 +185,23 @@ module Aws::Braket
     CreateQuantumTaskInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
     CreateQuantumTaskInput.add_member(:job_token, ::Smithy::Schema::Shapes::MemberShape.new(target: JobToken, name: "jobToken"))
     CreateQuantumTaskInput.add_member(:associations, ::Smithy::Schema::Shapes::MemberShape.new(target: Associations, name: "associations", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}}))
+    CreateQuantumTaskInput.add_member(:experimental_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentalCapabilities, name: "experimentalCapabilities"))
     CreateQuantumTaskInput.type = Types::CreateQuantumTaskInput
     CreateQuantumTaskOutput.add_member(:quantum_task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: QuantumTaskArn, name: "quantumTaskArn", traits: {"smithy.api#required" => {}}))
     CreateQuantumTaskOutput.type = Types::CreateQuantumTaskOutput
+    CreateSpendingLimitRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateSpendingLimitRequest.add_member(:device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceArn, name: "deviceArn", traits: {"smithy.api#required" => {}}))
+    CreateSpendingLimitRequest.add_member(:spending_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "spendingLimit", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^\\d+(\\.\\d{1,2})?$", "smithy.api#required" => {}}))
+    CreateSpendingLimitRequest.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: TimePeriod, name: "timePeriod"))
+    CreateSpendingLimitRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    CreateSpendingLimitRequest.type = Types::CreateSpendingLimitRequest
+    CreateSpendingLimitResponse.add_member(:spending_limit_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SpendingLimitArn, name: "spendingLimitArn", traits: {"smithy.api#required" => {}}))
+    CreateSpendingLimitResponse.type = Types::CreateSpendingLimitResponse
     DataSource.add_member(:s3_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataSource, name: "s3DataSource", traits: {"smithy.api#required" => {}}))
     DataSource.type = Types::DataSource
+    DeleteSpendingLimitRequest.add_member(:spending_limit_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SpendingLimitArn, name: "spendingLimitArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteSpendingLimitRequest.type = Types::DeleteSpendingLimitRequest
+    DeleteSpendingLimitResponse.type = Types::DeleteSpendingLimitResponse
     DeviceConfig.add_member(:device, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "device", traits: {"smithy.api#required" => {}}))
     DeviceConfig.type = Types::DeviceConfig
     DeviceOfflineException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
@@ -191,6 +220,9 @@ module Aws::Braket
     DeviceSummary.add_member(:device_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceStatus, name: "deviceStatus", traits: {"smithy.api#required" => {}}))
     DeviceSummary.type = Types::DeviceSummary
     DeviceSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceSummary, name: "member"))
+    ExperimentalCapabilities.add_member(:enabled, Types::ExperimentalCapabilities::Enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentalCapabilitiesEnablementType, name: "enabled"))
+    ExperimentalCapabilities.add_member(:unknown, Types::ExperimentalCapabilities::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ExperimentalCapabilities.type = Types::ExperimentalCapabilities
     GetDeviceInput.add_member(:device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceArn, name: "deviceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDeviceInput.type = Types::GetDeviceInput
     GetDeviceOutput.add_member(:device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceArn, name: "deviceArn", traits: {"smithy.api#required" => {}}))
@@ -245,6 +277,7 @@ module Aws::Braket
     GetQuantumTaskOutput.add_member(:associations, ::Smithy::Schema::Shapes::MemberShape.new(target: Associations, name: "associations"))
     GetQuantumTaskOutput.add_member(:num_successful_shots, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "numSuccessfulShots"))
     GetQuantumTaskOutput.add_member(:action_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionMetadata, name: "actionMetadata"))
+    GetQuantumTaskOutput.add_member(:experimental_capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentalCapabilities, name: "experimentalCapabilities"))
     GetQuantumTaskOutput.type = Types::GetQuantumTaskOutput
     HybridJobAdditionalAttributeNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HybridJobAdditionalAttributeName, name: "member"))
     HybridJobQueueInfo.add_member(:queue, ::Smithy::Schema::Shapes::MemberShape.new(target: QueueName, name: "queue", traits: {"smithy.api#required" => {}}))
@@ -357,8 +390,31 @@ module Aws::Braket
     SearchQuantumTasksOutput.add_member(:quantum_tasks, ::Smithy::Schema::Shapes::MemberShape.new(target: QuantumTaskSummaryList, name: "quantumTasks", traits: {"smithy.api#required" => {}}))
     SearchQuantumTasksOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     SearchQuantumTasksOutput.type = Types::SearchQuantumTasksOutput
+    SearchSpendingLimitsFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, name: "name", traits: {"smithy.api#required" => {}}))
+    SearchSpendingLimitsFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: String256List, name: "values", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#required" => {}}))
+    SearchSpendingLimitsFilter.add_member(:operator, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSpendingLimitsFilterOperator, name: "operator", traits: {"smithy.api#required" => {}}))
+    SearchSpendingLimitsFilter.type = Types::SearchSpendingLimitsFilter
+    SearchSpendingLimitsFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSpendingLimitsFilter, name: "member"))
+    SearchSpendingLimitsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
+    SearchSpendingLimitsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
+    SearchSpendingLimitsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSpendingLimitsFilterList, name: "filters", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}}))
+    SearchSpendingLimitsRequest.type = Types::SearchSpendingLimitsRequest
+    SearchSpendingLimitsResponse.add_member(:spending_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: SpendingLimitSummaryList, name: "spendingLimits", traits: {"smithy.api#required" => {}}))
+    SearchSpendingLimitsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
+    SearchSpendingLimitsResponse.type = Types::SearchSpendingLimitsResponse
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    SpendingLimitSummary.add_member(:spending_limit_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SpendingLimitArn, name: "spendingLimitArn", traits: {"smithy.api#required" => {}}))
+    SpendingLimitSummary.add_member(:device_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceArn, name: "deviceArn", traits: {"smithy.api#required" => {}}))
+    SpendingLimitSummary.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: TimePeriod, name: "timePeriod", traits: {"smithy.api#required" => {}}))
+    SpendingLimitSummary.add_member(:spending_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "spendingLimit", traits: {"smithy.api#required" => {}}))
+    SpendingLimitSummary.add_member(:queued_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "queuedSpend", traits: {"smithy.api#required" => {}}))
+    SpendingLimitSummary.add_member(:total_spend, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "totalSpend", traits: {"smithy.api#required" => {}}))
+    SpendingLimitSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    SpendingLimitSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
+    SpendingLimitSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
+    SpendingLimitSummary.type = Types::SpendingLimitSummary
+    SpendingLimitSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SpendingLimitSummary, name: "member"))
     String256List.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "member"))
     TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     TagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -369,10 +425,19 @@ module Aws::Braket
     TagsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "value"))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
+    TimePeriod.add_member(:start_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "epoch-seconds"}))
+    TimePeriod.add_member(:end_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endAt", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "epoch-seconds"}))
+    TimePeriod.type = Types::TimePeriod
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "tagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
+    UpdateSpendingLimitRequest.add_member(:spending_limit_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SpendingLimitArn, name: "spendingLimitArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateSpendingLimitRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    UpdateSpendingLimitRequest.add_member(:spending_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "spendingLimit", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^\\d+(\\.\\d{1,2})?$"}))
+    UpdateSpendingLimitRequest.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: TimePeriod, name: "timePeriod"))
+    UpdateSpendingLimitRequest.type = Types::UpdateSpendingLimitRequest
+    UpdateSpendingLimitResponse.type = Types::UpdateSpendingLimitResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason"))
     ValidationException.add_member(:program_set_validation_failures, ::Smithy::Schema::Shapes::MemberShape.new(target: ProgramSetValidationFailuresList, name: "programSetValidationFailures"))
@@ -382,7 +447,7 @@ module Aws::Braket
       service.id = "com.amazonaws.braket#Braket"
       service.name = "Braket"
       service.version = "2019-09-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Braket", "cloudTrailEventSource" => "braket.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "braket"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id", "x-amzn-errormessage", "x-amzn-trace-id", "x-amz-apigw-id", "date"]}, "smithy.api#title" => "Braket"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Braket", "cloudTrailEventSource" => "braket.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "braket"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id", "x-amzn-errormessage", "x-amzn-trace-id", "x-amz-apigw-id", "date"]}, "smithy.api#title" => "Braket", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://braket-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://braket-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://braket.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://braket.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:cancel_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.braket#CancelJob"
         operation.name = "CancelJob"
@@ -437,6 +502,30 @@ module Aws::Braket
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/quantum-task", "method" => "POST", "code" => 201}}
+      end)
+      service.add_operation(:create_spending_limit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.braket#CreateSpendingLimit"
+        operation.name = "CreateSpendingLimit"
+        operation.input = CreateSpendingLimitRequest
+        operation.output = CreateSpendingLimitResponse
+        operation.errors << AccessDeniedException
+        operation.errors << DeviceRetiredException
+        operation.errors << InternalServiceException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/spending-limit", "method" => "POST", "code" => 201}}
+      end)
+      service.add_operation(:delete_spending_limit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.braket#DeleteSpendingLimit"
+        operation.name = "DeleteSpendingLimit"
+        operation.input = DeleteSpendingLimitRequest
+        operation.output = DeleteSpendingLimitResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/spending-limit/{spendingLimitArn}/delete", "method" => "DELETE", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:get_device, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.braket#GetDevice"
@@ -520,6 +609,18 @@ module Aws::Braket
         operation.traits = {"smithy.api#http" => {"uri" => "/quantum-tasks", "method" => "POST"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::SearchQuantumTasks.new
       end)
+      service.add_operation(:search_spending_limits, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.braket#SearchSpendingLimits"
+        operation.name = "SearchSpendingLimits"
+        operation.input = SearchSpendingLimitsRequest
+        operation.output = SearchSpendingLimitsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/spending-limits", "method" => "POST"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::SearchSpendingLimits.new
+      end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.braket#TagResource"
         operation.name = "TagResource"
@@ -539,6 +640,18 @@ module Aws::Braket
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_spending_limit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.braket#UpdateSpendingLimit"
+        operation.name = "UpdateSpendingLimit"
+        operation.input = UpdateSpendingLimitRequest
+        operation.output = UpdateSpendingLimitResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/spending-limit/{spendingLimitArn}/update", "method" => "PATCH", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
     end
 

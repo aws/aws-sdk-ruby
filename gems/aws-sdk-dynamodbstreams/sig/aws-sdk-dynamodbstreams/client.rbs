@@ -77,7 +77,8 @@ module Aws::DynamoDBStreams
       ?stream_arn: String,
       ?shard_id: String,
       ?shard_iterator_type: String,
-      ?sequence_number: String
+      ?sequence_number: String,
+      ?timestamp: Time
     ) -> _GetShardIteratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetShardIteratorResponse
 
     interface _ListStreamsResponse

@@ -144,18 +144,18 @@ module Aws::GeoPlaces
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,26 +209,26 @@ module Aws::GeoPlaces
       super
     end
 
-    # <p> <code>Autocomplete</code> completes potential places and addresses as the user types, based on the partial input. The API enhances the efficiency and accuracy of address by completing query based on a few entered keystrokes. It helps you by completing partial queries with valid address completion. Also, the API supports the filtering of results based on geographic location, country, or specific place types, and can be tailored using optional parameters like language and political views.</p>
+    # <p> <code>Autocomplete</code> completes potential places and addresses as the user types, based on the partial input. The API enhances the efficiency and accuracy of address by completing query based on a few entered keystrokes. It helps you by completing partial queries with valid address completion. Also, the API supports the filtering of results based on geographic location, country, or specific place types, and can be tailored using optional parameters like language and political views. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html">Autocomplete</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @param [Hash, Types::AutocompleteRequest] params
     # @option params [String] :query_text
     #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
     # @option params [Integer] :max_results
-    #   <p>An optional limit for the number of results returned in a single call. </p>
+    #   <p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 5</p>
     # @option params [Array<Float>] :bias_position
-    #   <p>The position in longitude and latitude that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
+    #   <p>The position in longitude and latitude that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
     # @option params [Types::AutocompleteFilter] :filter
     #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
     # @option params [String] :postal_code_mode
-    #   <p>The <code>PostalCodeMode</code> affects how postal code results are returned. If a postal code spans multiple localities and this value is empty, partial district or locality information may be returned under a single postal code result entry. If it's populated with the value <code>EnumerateSpannedLocalities</code>, all cities in that postal code are returned.</p>
+    #   <p>The <code>PostalCodeMode</code> affects how postal code results are returned. If a postal code spans multiple localities and this value is empty, partial district or locality information may be returned under a single postal code result entry. If it's populated with the value <code>EnumerateSpannedLocalities</code>, all cities in that postal code are returned. If it's populated with the value <code>EnumerateSpannedDistricts</code>, all combinations of the postal code with the corresponding district and city names are returned.</p>
     # @option params [Array<String>] :additional_features
     #   <p>A list of optional additional parameters that can be requested for each result.</p>
     # @option params [String] :language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
     # @option params [String] :political_view
     #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p> <p>The following political views are currently supported:</p> <ul> <li> <p> <code>ARG</code>: Argentina's view on the Southern Patagonian Ice Field and Tierra Del Fuego, including the Falkland Islands, South Georgia, and South Sandwich Islands</p> </li> <li> <p> <code>EGY</code>: Egypt's view on Bir Tawil</p> </li> <li> <p> <code>IND</code>: India's view on Gilgit-Baltistan</p> </li> <li> <p> <code>KEN</code>: Kenya's view on the Ilemi Triangle</p> </li> <li> <p> <code>MAR</code>: Morocco's view on Western Sahara</p> </li> <li> <p> <code>RUS</code>: Russia's view on Crimea</p> </li> <li> <p> <code>SDN</code>: Sudan's view on the Halaib Triangle</p> </li> <li> <p> <code>SRB</code>: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands</p> </li> <li> <p> <code>SUR</code>: Suriname's view on the Courantyne Headwaters and Lawa Headwaters</p> </li> <li> <p> <code>SYR</code>: Syria's view on the Golan Heights</p> </li> <li> <p> <code>TUR</code>: Turkey's view on Cyprus and Northern Cyprus</p> </li> <li> <p> <code>TZA</code>: Tanzania's view on Lake Malawi</p> </li> <li> <p> <code>URY</code>: Uruguay's view on Rincon de Artigas</p> </li> <li> <p> <code>VNM</code>: Vietnam's view on the Paracel Islands and Spratly Islands</p> </li> </ul>
     # @option params [String] :intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Currently, <code>Autocomplete</code> does not support storage of results. </p>
     # @option params [String] :key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
     # @example Request syntax with placeholder values
@@ -243,13 +243,13 @@ module Aws::GeoPlaces
     #         radius: 1, # required
     #       },
     #       include_countries: ["CountryCode"],
-    #       include_place_types: ["AutocompleteFilterPlaceType"]
+    #       include_place_types: ["Locality" # One of: ["Locality", "PostalCode", "Street", "Intersection", "PointAddress", "InterpolatedAddress", "Country", "Region"]]
     #     },
-    #     postal_code_mode: "PostalCodeMode",
-    #     additional_features: ["AutocompleteAdditionalFeature"],
+    #     postal_code_mode: "MergeAllSpannedLocalities" # One of: ["MergeAllSpannedLocalities", "EnumerateSpannedLocalities", "EnumerateSpannedDistricts"],
+    #     additional_features: ["Core" # One of: ["Core"]],
     #     language: "LanguageTag",
     #     political_view: "CountryCode",
-    #     intended_use: "AutocompleteIntendedUse",
+    #     intended_use: "SingleUse" # One of: ["SingleUse"],
     #     key: "ApiKey"
     #   }
     #   options = {}
@@ -261,7 +261,7 @@ module Aws::GeoPlaces
     #     result_items: [
     #       {
     #         place_id: "SensitiveString", # required
-    #         place_type: "PlaceType", # required
+    #         place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
     #         title: "SensitiveString", # required
     #         address: {
     #           label: "SensitiveString",
@@ -290,7 +290,7 @@ module Aws::GeoPlaces
     #             {
     #               base_name: "SensitiveString",
     #               type: "SensitiveString",
-    #               type_placement: "TypePlacement",
+    #               type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #               type_separator: "TypeSeparator",
     #               prefix: "SensitiveString",
     #               suffix: "SensitiveString",
@@ -303,6 +303,7 @@ module Aws::GeoPlaces
     #           secondary_address_components: [
     #             {
     #               number: "SensitiveString", # required
+    #               designator: "SensitiveString"
     #             }
     #           ]
     #         },
@@ -446,7 +447,8 @@ module Aws::GeoPlaces
     #               }
     #             ]
     #           }
-    #         }
+    #         },
+    #         estimated_point_address: false
     #       }
     #     ]
     #   }
@@ -456,28 +458,34 @@ module Aws::GeoPlaces
       request.send_request(options)
     end
 
-    # <p> <code>Geocode</code> converts a textual address or place into geographic coordinates. You can obtain geographic coordinates, address component, and other related information. It supports flexible queries, including free-form text or structured queries with components like street names, postal codes, and regions. The Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p>
+    # <p> <code>Geocode</code> converts a textual address or place into geographic coordinates. You can obtain geographic coordinates, address component, and other related information. It supports flexible queries, including free-form text or structured queries with components like street names, postal codes, and regions. The Geocode API can also provide additional features such as time zone information and the inclusion of political views. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/geocode.html">Geocode</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @param [Hash, Types::GeocodeRequest] params
     # @option params [String] :query_text
-    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
+    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p>
     # @option params [Types::GeocodeQueryComponents] :query_components
     #   <p>A structured free text query allows you to search for places by the name or text representation of specific properties of the place. </p>
     # @option params [Integer] :max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
+    #   <p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>
     # @option params [Array<Float>] :bias_position
-    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
+    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p>
     # @option params [Types::GeocodeFilter] :filter
     #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
     # @option params [Array<String>] :additional_features
     #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>
     # @option params [String] :language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
     # @option params [String] :political_view
     #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
     # @option params [String] :intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an Geocode query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>When storing <code>Geocode</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
     # @option params [String] :key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
+    # @option params [String] :postal_code_mode
+    #   <p>The <code>PostalCodeMode</code> affects how postal code results are returned. If a postal code spans multiple localities and this value is empty, partial district or locality information may be returned under a single postal code result entry. If it's populated with the value <code>EnumerateSpannedLocalities</code>, all cities in that postal code are returned. If it's populated with the value <code>EnumerateSpannedDistricts</code>, all combinations of the postal code with the corresponding district and city names are returned.</p>
+    # @option params [Array<String>] :address_translations
+    #   <p>Specifies which address components to include translations for. Translations include all name variants and alternative names for the requested fields in all available languages. Valid values are <code>District</code>, <code>Locality</code>, <code>Region</code>, and <code>SubRegion</code>.</p>
+    # @option params [String] :address_names_mode
+    #   <p>Specifies how address names are returned. If not set, the service returns normalized (official) names by default. When set to <code>Matched</code>, address names in the response are based on the input query rather than official names. When set to <code>Administrative</code>, the service returns the official administrative names for address components. <code>Administrative</code> currently applies only to addresses in the United States.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     query_text: "SensitiveString",
@@ -495,13 +503,16 @@ module Aws::GeoPlaces
     #     bias_position: [1.0],
     #     filter: {
     #       include_countries: ["CountryCode"],
-    #       include_place_types: ["GeocodeFilterPlaceType"]
+    #       include_place_types: ["Locality" # One of: ["Locality", "PostalCode", "Intersection", "Street", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "PointOfInterest", "Country", "Region"]]
     #     },
-    #     additional_features: ["GeocodeAdditionalFeature"],
+    #     additional_features: ["TimeZone" # One of: ["TimeZone", "Access", "SecondaryAddresses", "Intersections"]],
     #     language: "LanguageTag",
     #     political_view: "CountryCode",
-    #     intended_use: "GeocodeIntendedUse",
-    #     key: "ApiKey"
+    #     intended_use: "SingleUse" # One of: ["SingleUse", "Storage"],
+    #     key: "ApiKey",
+    #     postal_code_mode: "MergeAllSpannedLocalities" # One of: ["MergeAllSpannedLocalities", "EnumerateSpannedLocalities", "EnumerateSpannedDistricts"],
+    #     address_translations: ["District" # One of: ["District", "Locality", "Region", "SubRegion"]],
+    #     address_names_mode: "Matched" # One of: ["Matched", "Administrative"]
     #   }
     #   options = {}
     #   response = client.geocode(params, options)
@@ -512,7 +523,7 @@ module Aws::GeoPlaces
     #     result_items: [
     #       {
     #         place_id: "SensitiveString", # required
-    #         place_type: "PlaceType", # required
+    #         place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
     #         title: "SensitiveString", # required
     #         address: {
     #           label: "SensitiveString",
@@ -541,7 +552,7 @@ module Aws::GeoPlaces
     #             {
     #               base_name: "SensitiveString",
     #               type: "SensitiveString",
-    #               type_placement: "TypePlacement",
+    #               type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #               type_separator: "TypeSeparator",
     #               prefix: "SensitiveString",
     #               suffix: "SensitiveString",
@@ -554,6 +565,7 @@ module Aws::GeoPlaces
     #           secondary_address_components: [
     #             {
     #               number: "SensitiveString", # required
+    #               designator: "SensitiveString"
     #             }
     #           ]
     #         },
@@ -561,13 +573,13 @@ module Aws::GeoPlaces
     #         postal_code_details: [
     #           {
     #             postal_code: "SensitiveString",
-    #             postal_authority: "PostalAuthority",
-    #             postal_code_type: "PostalCodeType",
+    #             postal_authority: "Usps" # One of: ["Usps"],
+    #             postal_code_type: "UspsZip" # One of: ["UspsZip", "UspsZipPlus4"],
     #             usps_zip: {
-    #               zip_classification_code: "ZipClassificationCode"
+    #               zip_classification_code: "Military" # One of: ["Military", "PostOfficeBoxes", "Unique"]
     #             },
     #             usps_zip_plus4: {
-    #               record_type_code: "RecordTypeCode"
+    #               record_type_code: "Firm" # One of: ["Firm", "General", "HighRise", "PostOfficeBox", "Rural", "Street"]
     #             }
     #           }
     #         ],
@@ -591,7 +603,10 @@ module Aws::GeoPlaces
     #         ],
     #         access_points: [
     #           {
-    #             position: [1.0]
+    #             position: [1.0],
+    #             type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #             primary: false,
+    #             label: "SensitiveString"
     #           }
     #         ],
     #         time_zone: {
@@ -739,6 +754,14 @@ module Aws::GeoPlaces
     #                 number: "SensitiveString", # required
     #                 designator: "SensitiveString", # required
     #               }
+    #             ],
+    #             other_components: [
+    #               {
+    #                 start_index: 1,
+    #                 end_index: 1,
+    #                 value: "SensitiveString",
+    #                 query_component: "SensitiveString"
+    #               }
     #             ]
     #           }
     #         },
@@ -773,7 +796,7 @@ module Aws::GeoPlaces
     #                 {
     #                   base_name: "SensitiveString",
     #                   type: "SensitiveString",
-    #                   type_placement: "TypePlacement",
+    #                   type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #                   type_separator: "TypeSeparator",
     #                   prefix: "SensitiveString",
     #                   suffix: "SensitiveString",
@@ -786,6 +809,7 @@ module Aws::GeoPlaces
     #               secondary_address_components: [
     #                 {
     #                   number: "SensitiveString", # required
+    #                   designator: "SensitiveString"
     #                 }
     #               ]
     #             },
@@ -795,14 +819,17 @@ module Aws::GeoPlaces
     #             map_view: [1.0],
     #             access_points: [
     #               {
-    #                 position: [1.0]
+    #                 position: [1.0],
+    #                 type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #                 primary: false,
+    #                 label: "SensitiveString"
     #               }
     #             ]
     #           }
     #         ],
     #         main_address: {
     #           place_id: "SensitiveString", # required
-    #           place_type: "PlaceType", # required
+    #           place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
     #           title: "SensitiveString", # required
     #           address: {
     #             label: "SensitiveString",
@@ -831,7 +858,7 @@ module Aws::GeoPlaces
     #               {
     #                 base_name: "SensitiveString",
     #                 type: "SensitiveString",
-    #                 type_placement: "TypePlacement",
+    #                 type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #                 type_separator: "TypeSeparator",
     #                 prefix: "SensitiveString",
     #                 suffix: "SensitiveString",
@@ -844,20 +871,24 @@ module Aws::GeoPlaces
     #             secondary_address_components: [
     #               {
     #                 number: "SensitiveString", # required
+    #                 designator: "SensitiveString"
     #               }
     #             ]
     #           },
     #           position: [1.0],
     #           access_points: [
     #             {
-    #               position: [1.0]
+    #               position: [1.0],
+    #               type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #               primary: false,
+    #               label: "SensitiveString"
     #             }
     #           ]
     #         },
     #         secondary_addresses: [
     #           {
     #             place_id: "SensitiveString", # required
-    #             place_type: "PlaceType", # required
+    #             place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
     #             title: "SensitiveString", # required
     #             address: {
     #               label: "SensitiveString",
@@ -886,7 +917,7 @@ module Aws::GeoPlaces
     #                 {
     #                   base_name: "SensitiveString",
     #                   type: "SensitiveString",
-    #                   type_placement: "TypePlacement",
+    #                   type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #                   type_separator: "TypeSeparator",
     #                   prefix: "SensitiveString",
     #                   suffix: "SensitiveString",
@@ -899,17 +930,80 @@ module Aws::GeoPlaces
     #               secondary_address_components: [
     #                 {
     #                   number: "SensitiveString", # required
+    #                   designator: "SensitiveString"
     #                 }
     #               ]
     #             },
     #             position: [1.0],
     #             access_points: [
     #               {
-    #                 position: [1.0]
+    #                 position: [1.0],
+    #                 type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #                 primary: false,
+    #                 label: "SensitiveString"
     #               }
     #             ]
     #           }
-    #         ]
+    #         ],
+    #         translations: {
+    #           locality: [
+    #             {
+    #               names: [ # required
+    #                 {
+    #                   value: "SensitiveString", # required
+    #                   language: "LanguageTag",
+    #                   type: "Abbreviation" # One of: ["Abbreviation", "AreaCode", "BaseName", "Exonym", "Shortened", "Synonym"], # required
+    #                   primary: false,
+    #                   transliterated: false
+    #                 }
+    #               ],
+    #               preference: "Alternative" # One of: ["Alternative", "Primary"]
+    #             }
+    #           ],
+    #           region: [
+    #             {
+    #               names: [ # required
+    #                 {
+    #                   value: "SensitiveString", # required
+    #                   language: "LanguageTag",
+    #                   type: "Abbreviation" # One of: ["Abbreviation", "AreaCode", "BaseName", "Exonym", "Shortened", "Synonym"], # required
+    #                   primary: false,
+    #                   transliterated: false
+    #                 }
+    #               ],
+    #               preference: "Alternative" # One of: ["Alternative", "Primary"]
+    #             }
+    #           ],
+    #           district: [
+    #             {
+    #               names: [ # required
+    #                 {
+    #                   value: "SensitiveString", # required
+    #                   language: "LanguageTag",
+    #                   type: "Abbreviation" # One of: ["Abbreviation", "AreaCode", "BaseName", "Exonym", "Shortened", "Synonym"], # required
+    #                   primary: false,
+    #                   transliterated: false
+    #                 }
+    #               ],
+    #               preference: "Alternative" # One of: ["Alternative", "Primary"]
+    #             }
+    #           ],
+    #           sub_region: [
+    #             {
+    #               names: [ # required
+    #                 {
+    #                   value: "SensitiveString", # required
+    #                   language: "LanguageTag",
+    #                   type: "Abbreviation" # One of: ["Abbreviation", "AreaCode", "BaseName", "Exonym", "Shortened", "Synonym"], # required
+    #                   primary: false,
+    #                   transliterated: false
+    #                 }
+    #               ],
+    #               preference: "Alternative" # One of: ["Alternative", "Primary"]
+    #             }
+    #           ]
+    #         },
+    #         estimated_point_address: false
     #       }
     #     ]
     #   }
@@ -919,28 +1013,31 @@ module Aws::GeoPlaces
       request.send_request(options)
     end
 
-    # <p> <code>GetPlace</code> finds a place by its unique ID. A <code>PlaceId</code> is returned by other place operations.</p>
+    # <p> <code>GetPlace</code> finds a place by its unique ID. A <code>PlaceId</code> is returned by other place operations.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/get-place.html">GetPlace</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @param [Hash, Types::GetPlaceRequest] params
     # @option params [String] :place_id
     #   <p>The <code>PlaceId</code> of the place you wish to receive the information for.</p>
     # @option params [Array<String>] :additional_features
-    #   <p>A list of optional additional parameters such as time zone that can be requested for each result.</p>
+    #   <p> A list of optional additional parameters such as time zone that can be requested for each result. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>TimeZone</code> value. </p>
     # @option params [String] :language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p> A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>
     # @option params [String] :political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    #   <p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [String] :intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an GetPlace query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>When storing <code>GetPlace</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
     # @option params [String] :key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
+    # @option params [String] :address_names_mode
+    #   <p>Specifies how address names are returned. When set to <code>Administrative</code>, the service returns the official administrative names for address components. <code>Administrative</code> currently applies only to addresses in the United States.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     place_id: "SensitiveString", # required
-    #     additional_features: ["GetPlaceAdditionalFeature"],
+    #     additional_features: ["TimeZone" # One of: ["TimeZone", "Phonemes", "Access", "Contact", "SecondaryAddresses", "CrossReferences"]],
     #     language: "LanguageTag",
     #     political_view: "CountryCode",
-    #     intended_use: "GetPlaceIntendedUse",
-    #     key: "ApiKey"
+    #     intended_use: "SingleUse" # One of: ["SingleUse", "Storage"],
+    #     key: "ApiKey",
+    #     address_names_mode: "Administrative" # One of: ["Administrative"]
     #   }
     #   options = {}
     #   response = client.get_place(params, options)
@@ -948,7 +1045,7 @@ module Aws::GeoPlaces
     #   response.to_h #=>
     #   {
     #     place_id: "SensitiveString", # required
-    #     place_type: "PlaceType", # required
+    #     place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
     #     title: "SensitiveString", # required
     #     pricing_bucket: "String", # required
     #     address: {
@@ -978,7 +1075,7 @@ module Aws::GeoPlaces
     #         {
     #           base_name: "SensitiveString",
     #           type: "SensitiveString",
-    #           type_placement: "TypePlacement",
+    #           type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #           type_separator: "TypeSeparator",
     #           prefix: "SensitiveString",
     #           suffix: "SensitiveString",
@@ -991,6 +1088,7 @@ module Aws::GeoPlaces
     #       secondary_address_components: [
     #         {
     #           number: "SensitiveString", # required
+    #           designator: "SensitiveString"
     #         }
     #       ]
     #     },
@@ -998,13 +1096,13 @@ module Aws::GeoPlaces
     #     postal_code_details: [
     #       {
     #         postal_code: "SensitiveString",
-    #         postal_authority: "PostalAuthority",
-    #         postal_code_type: "PostalCodeType",
+    #         postal_authority: "Usps" # One of: ["Usps"],
+    #         postal_code_type: "UspsZip" # One of: ["UspsZip", "UspsZipPlus4"],
     #         usps_zip: {
-    #           zip_classification_code: "ZipClassificationCode"
+    #           zip_classification_code: "Military" # One of: ["Military", "PostOfficeBoxes", "Unique"]
     #         },
     #         usps_zip_plus4: {
-    #           record_type_code: "RecordTypeCode"
+    #           record_type_code: "Firm" # One of: ["Firm", "General", "HighRise", "PostOfficeBox", "Rural", "Street"]
     #         }
     #       }
     #     ],
@@ -1112,7 +1210,10 @@ module Aws::GeoPlaces
     #     ],
     #     access_points: [
     #       {
-    #         position: [1.0]
+    #         position: [1.0],
+    #         type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #         primary: false,
+    #         label: "SensitiveString"
     #       }
     #     ],
     #     access_restrictions: [
@@ -1210,7 +1311,7 @@ module Aws::GeoPlaces
     #     },
     #     main_address: {
     #       place_id: "SensitiveString", # required
-    #       place_type: "PlaceType", # required
+    #       place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
     #       title: "SensitiveString", # required
     #       address: {
     #         label: "SensitiveString",
@@ -1239,7 +1340,7 @@ module Aws::GeoPlaces
     #           {
     #             base_name: "SensitiveString",
     #             type: "SensitiveString",
-    #             type_placement: "TypePlacement",
+    #             type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #             type_separator: "TypeSeparator",
     #             prefix: "SensitiveString",
     #             suffix: "SensitiveString",
@@ -1252,20 +1353,24 @@ module Aws::GeoPlaces
     #         secondary_address_components: [
     #           {
     #             number: "SensitiveString", # required
+    #             designator: "SensitiveString"
     #           }
     #         ]
     #       },
     #       position: [1.0],
     #       access_points: [
     #         {
-    #           position: [1.0]
+    #           position: [1.0],
+    #           type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #           primary: false,
+    #           label: "SensitiveString"
     #         }
     #       ]
     #     },
     #     secondary_addresses: [
     #       {
     #         place_id: "SensitiveString", # required
-    #         place_type: "PlaceType", # required
+    #         place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
     #         title: "SensitiveString", # required
     #         address: {
     #           label: "SensitiveString",
@@ -1294,7 +1399,7 @@ module Aws::GeoPlaces
     #             {
     #               base_name: "SensitiveString",
     #               type: "SensitiveString",
-    #               type_placement: "TypePlacement",
+    #               type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #               type_separator: "TypeSeparator",
     #               prefix: "SensitiveString",
     #               suffix: "SensitiveString",
@@ -1307,13 +1412,33 @@ module Aws::GeoPlaces
     #           secondary_address_components: [
     #             {
     #               number: "SensitiveString", # required
+    #               designator: "SensitiveString"
     #             }
     #           ]
     #         },
     #         position: [1.0],
     #         access_points: [
     #           {
-    #             position: [1.0]
+    #             position: [1.0],
+    #             type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #             primary: false,
+    #             label: "SensitiveString"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     place_attributes: ["DriveThrough" # One of: ["DriveThrough"]],
+    #     estimated_point_address: false,
+    #     cross_references: [
+    #       {
+    #         source: "SensitiveString", # required
+    #         source_place_id: "SensitiveString", # required
+    #         source_categories: [
+    #           {
+    #             id: "SensitiveString", # required
+    #             name: "SensitiveString", # required
+    #             localized_name: "SensitiveString",
+    #             primary: false
     #           }
     #         ]
     #       }
@@ -1325,39 +1450,45 @@ module Aws::GeoPlaces
       request.send_request(options)
     end
 
-    # <p> <code>ReverseGeocode</code> converts geographic coordinates into a human-readable address or place. You can obtain address component, and other related information such as place type, category, street information. The Reverse Geocode API supports filtering to on place type so that you can refine result based on your need. Also, The Reverse Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p>
+    # <p> <code>ReverseGeocode</code> converts geographic coordinates into a human-readable address or place. You can obtain address component, and other related information such as place type, category, street information. The Reverse Geocode API supports filtering to on place type so that you can refine result based on your need. Also, The Reverse Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/reverse-geocode.html">Reverse Geocode</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
     # @param [Hash, Types::ReverseGeocodeRequest] params
     # @option params [Array<Float>] :query_position
-    #   <p>The position, in <code>[lng, lat]</code> for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude] for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>
     # @option params [Integer] :query_radius
-    #   <p>The maximum distance in meters from the QueryPosition from which a result will be returned.</p>
+    #   <p> The maximum distance in meters from the QueryPosition from which a result will be returned. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only up to a maximum value of 100,000. </p>
     # @option params [Integer] :max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
+    #   <p> An optional limit for the number of results returned in a single call.</p> <p>Default value: 1</p>
     # @option params [Types::ReverseGeocodeFilter] :filter
     #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
     # @option params [Array<String>] :additional_features
-    #   <p>A list of optional additional parameters, such as time zone that can be requested for each result.</p>
+    #   <p> A list of optional additional parameters, such as time zone that can be requested for each result. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>TimeZone</code> value. </p>
     # @option params [String] :language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    #   <p> A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>
     # @option params [String] :political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    #   <p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
     # @option params [String] :intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an ReverseGeocode query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). </p> <note> <p>When storing <code>ReverseGeocode</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
     # @option params [String] :key
     #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
+    # @option params [Float] :heading
+    #   <p>The heading in degrees from true north in a navigation context. The heading is measured as the angle clockwise from the North direction.</p> <p>Example: North is <code>0</code> degrees, East is <code>90</code> degrees, South is <code>180</code> degrees, and West is <code>270</code> degrees.</p>
+    # @option params [String] :address_names_mode
+    #   <p>Specifies how address names are returned. When set to <code>Administrative</code>, the service returns the official administrative names for address components. <code>Administrative</code> currently applies only to addresses in the United States.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     query_position: [1.0], # required
     #     query_radius: 1,
     #     max_results: 1,
     #     filter: {
-    #       include_place_types: ["ReverseGeocodeFilterPlaceType"]
+    #       include_place_types: ["Locality" # One of: ["Locality", "Intersection", "Street", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "PointOfInterest"]]
     #     },
-    #     additional_features: ["ReverseGeocodeAdditionalFeature"],
+    #     additional_features: ["TimeZone" # One of: ["TimeZone", "Access", "Intersections"]],
     #     language: "LanguageTag",
     #     political_view: "CountryCode",
-    #     intended_use: "ReverseGeocodeIntendedUse",
-    #     key: "ApiKey"
+    #     intended_use: "SingleUse" # One of: ["SingleUse", "Storage"],
+    #     key: "ApiKey",
+    #     heading: 1.0,
+    #     address_names_mode: "Administrative" # One of: ["Administrative"]
     #   }
     #   options = {}
     #   response = client.reverse_geocode(params, options)
@@ -1368,7 +1499,7 @@ module Aws::GeoPlaces
     #     result_items: [
     #       {
     #         place_id: "SensitiveString", # required
-    #         place_type: "PlaceType", # required
+    #         place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
     #         title: "SensitiveString", # required
     #         address: {
     #           label: "SensitiveString",
@@ -1397,7 +1528,7 @@ module Aws::GeoPlaces
     #             {
     #               base_name: "SensitiveString",
     #               type: "SensitiveString",
-    #               type_placement: "TypePlacement",
+    #               type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #               type_separator: "TypeSeparator",
     #               prefix: "SensitiveString",
     #               suffix: "SensitiveString",
@@ -1410,6 +1541,7 @@ module Aws::GeoPlaces
     #           secondary_address_components: [
     #             {
     #               number: "SensitiveString", # required
+    #               designator: "SensitiveString"
     #             }
     #           ]
     #         },
@@ -1417,13 +1549,13 @@ module Aws::GeoPlaces
     #         postal_code_details: [
     #           {
     #             postal_code: "SensitiveString",
-    #             postal_authority: "PostalAuthority",
-    #             postal_code_type: "PostalCodeType",
+    #             postal_authority: "Usps" # One of: ["Usps"],
+    #             postal_code_type: "UspsZip" # One of: ["UspsZip", "UspsZipPlus4"],
     #             usps_zip: {
-    #               zip_classification_code: "ZipClassificationCode"
+    #               zip_classification_code: "Military" # One of: ["Military", "PostOfficeBoxes", "Unique"]
     #             },
     #             usps_zip_plus4: {
-    #               record_type_code: "RecordTypeCode"
+    #               record_type_code: "Firm" # One of: ["Firm", "General", "HighRise", "PostOfficeBox", "Rural", "Street"]
     #             }
     #           }
     #         ],
@@ -1447,7 +1579,10 @@ module Aws::GeoPlaces
     #         ],
     #         access_points: [
     #           {
-    #             position: [1.0]
+    #             position: [1.0],
+    #             type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #             primary: false,
+    #             label: "SensitiveString"
     #           }
     #         ],
     #         time_zone: {
@@ -1487,7 +1622,7 @@ module Aws::GeoPlaces
     #                 {
     #                   base_name: "SensitiveString",
     #                   type: "SensitiveString",
-    #                   type_placement: "TypePlacement",
+    #                   type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #                   type_separator: "TypeSeparator",
     #                   prefix: "SensitiveString",
     #                   suffix: "SensitiveString",
@@ -1500,6 +1635,7 @@ module Aws::GeoPlaces
     #               secondary_address_components: [
     #                 {
     #                   number: "SensitiveString", # required
+    #                   designator: "SensitiveString"
     #                 }
     #               ]
     #             },
@@ -1509,696 +1645,18 @@ module Aws::GeoPlaces
     #             map_view: [1.0],
     #             access_points: [
     #               {
-    #                 position: [1.0]
-    #               }
-    #             ]
-    #           }
-    #         ]
-    #       }
-    #     ]
-    #   }
-    # @return [Types::ReverseGeocodeResponse]
-    def reverse_geocode(params = {}, options = {})
-      request = build_request(:reverse_geocode, params)
-      request.send_request(options)
-    end
-
-    # <p> <code>SearchNearby</code> queries for points of interest within a radius from a central coordinates, returning place results with optional filters such as categories, business chains, food types and more. The API returns details such as a place name, address, phone, category, food type, contact, opening hours. Also, the API can return phonemes, time zones and more based on requested parameters.</p>
-    # @param [Hash, Types::SearchNearbyRequest] params
-    # @option params [Array<Float>] :query_position
-    #   <p>The position, in <code>[lng, lat]</code> for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>
-    # @option params [Integer] :query_radius
-    #   <p>The maximum distance in meters from the QueryPosition from which a result will be returned.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
-    # @option params [Integer] :max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
-    # @option params [Types::SearchNearbyFilter] :filter
-    #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
-    # @option params [Array<String>] :additional_features
-    #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>
-    # @option params [String] :language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
-    # @option params [String] :political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
-    # @option params [String] :intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an SearchNearby query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
-    # @option params [String] :next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. </p>
-    # @option params [String] :key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
-    # @example Request syntax with placeholder values
-    #   params = {
-    #     query_position: [1.0], # required
-    #     query_radius: 1,
-    #     max_results: 1,
-    #     filter: {
-    #       bounding_box: [1.0],
-    #       include_countries: ["CountryCode"],
-    #       include_categories: ["SensitiveString"],
-    #       exclude_categories: ["SensitiveString"],
-    #       include_business_chains: ["SensitiveString"],
-    #       exclude_business_chains: ["SensitiveString"],
-    #       include_food_types: ["SensitiveString"],
-    #       exclude_food_types: ["SensitiveString"]
-    #     },
-    #     additional_features: ["SearchNearbyAdditionalFeature"],
-    #     language: "LanguageTag",
-    #     political_view: "CountryCode",
-    #     intended_use: "SearchNearbyIntendedUse",
-    #     next_token: "Token",
-    #     key: "ApiKey"
-    #   }
-    #   options = {}
-    #   response = client.search_nearby(params, options)
-    # @example Response structure with placeholder values
-    #   response.to_h #=>
-    #   {
-    #     pricing_bucket: "String", # required
-    #     result_items: [
-    #       {
-    #         place_id: "SensitiveString", # required
-    #         place_type: "PlaceType", # required
-    #         title: "SensitiveString", # required
-    #         address: {
-    #           label: "SensitiveString",
-    #           country: {
-    #             code2: "CountryCode2",
-    #             code3: "CountryCode3",
-    #             name: "SensitiveString"
-    #           },
-    #           region: {
-    #             code: "SensitiveString",
-    #             name: "SensitiveString"
-    #           },
-    #           sub_region: {
-    #             code: "SensitiveString",
-    #             name: "SensitiveString"
-    #           },
-    #           locality: "SensitiveString",
-    #           district: "SensitiveString",
-    #           sub_district: "SensitiveString",
-    #           postal_code: "SensitiveString",
-    #           block: "SensitiveString",
-    #           sub_block: "SensitiveString",
-    #           intersection: ["IntersectionStreet"],
-    #           street: "SensitiveString",
-    #           street_components: [
-    #             {
-    #               base_name: "SensitiveString",
-    #               type: "SensitiveString",
-    #               type_placement: "TypePlacement",
-    #               type_separator: "TypeSeparator",
-    #               prefix: "SensitiveString",
-    #               suffix: "SensitiveString",
-    #               direction: "SensitiveString",
-    #               language: "LanguageTag"
-    #             }
-    #           ],
-    #           address_number: "SensitiveString",
-    #           building: "SensitiveString",
-    #           secondary_address_components: [
-    #             {
-    #               number: "SensitiveString", # required
-    #             }
-    #           ]
-    #         },
-    #         address_number_corrected: false,
-    #         position: [1.0],
-    #         distance: 1,
-    #         map_view: [1.0],
-    #         categories: [
-    #           {
-    #             id: "SensitiveString", # required
-    #             name: "SensitiveString", # required
-    #             localized_name: "SensitiveString",
-    #             primary: false
-    #           }
-    #         ],
-    #         food_types: [
-    #           {
-    #             localized_name: "SensitiveString", # required
-    #             id: "SensitiveString",
-    #             primary: false
-    #           }
-    #         ],
-    #         business_chains: [
-    #           {
-    #             name: "SensitiveString",
-    #             id: "SensitiveString"
-    #           }
-    #         ],
-    #         contacts: {
-    #           phones: [
-    #             {
-    #               label: "SensitiveString",
-    #               value: "SensitiveString",
-    #               categories: [
-    #                 {
-    #                   id: "SensitiveString", # required
-    #                   name: "SensitiveString", # required
-    #                   localized_name: "SensitiveString",
-    #                   primary: false
-    #                 }
-    #               ]
-    #             }
-    #           ],
-    #           faxes: [
-    #             {
-    #               label: "SensitiveString",
-    #               value: "SensitiveString",
-    #               categories: [
-    #                 {
-    #                   id: "SensitiveString", # required
-    #                   name: "SensitiveString", # required
-    #                   localized_name: "SensitiveString",
-    #                   primary: false
-    #                 }
-    #               ]
-    #             }
-    #           ],
-    #           websites: [
-    #             {
-    #               label: "SensitiveString",
-    #               value: "SensitiveString",
-    #               categories: [
-    #                 {
-    #                   id: "SensitiveString", # required
-    #                   name: "SensitiveString", # required
-    #                   localized_name: "SensitiveString",
-    #                   primary: false
-    #                 }
-    #               ]
-    #             }
-    #           ],
-    #           emails: [
-    #             {
-    #               label: "SensitiveString",
-    #               value: "SensitiveString",
-    #               categories: [
-    #                 {
-    #                   id: "SensitiveString", # required
-    #                   name: "SensitiveString", # required
-    #                   localized_name: "SensitiveString",
-    #                   primary: false
-    #                 }
-    #               ]
-    #             }
-    #           ]
-    #         },
-    #         opening_hours: [
-    #           {
-    #             display: ["OpeningHoursDisplay"],
-    #             open_now: false,
-    #             components: [
-    #               {
-    #                 open_time: "SensitiveString",
-    #                 open_duration: "SensitiveString",
-    #                 recurrence: "SensitiveString"
-    #               }
-    #             ],
-    #             categories: [
-    #               {
-    #                 id: "SensitiveString", # required
-    #                 name: "SensitiveString", # required
-    #                 localized_name: "SensitiveString",
-    #                 primary: false
+    #                 position: [1.0],
+    #                 type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #                 primary: false,
+    #                 label: "SensitiveString"
     #               }
     #             ]
     #           }
     #         ],
-    #         access_points: [
-    #           {
-    #             position: [1.0]
-    #           }
-    #         ],
-    #         access_restrictions: [
-    #           {
-    #             restricted: false,
-    #             categories: [
-    #               {
-    #                 id: "SensitiveString", # required
-    #                 name: "SensitiveString", # required
-    #                 localized_name: "SensitiveString",
-    #                 primary: false
-    #               }
-    #             ]
-    #           }
-    #         ],
-    #         time_zone: {
-    #           name: "SensitiveString", # required
-    #           offset: "SensitiveString",
-    #           offset_seconds: 1
-    #         },
-    #         political_view: "CountryCode3",
-    #         phonemes: {
-    #           title: [
-    #             {
-    #               value: "SensitiveString",
-    #               language: "LanguageTag",
-    #               preferred: false
-    #             }
-    #           ],
-    #           address: {
-    #             country: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             region: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             sub_region: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             locality: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             district: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             sub_district: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             block: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             sub_block: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             street: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ]
-    #           }
-    #         }
-    #       }
-    #     ],
-    #     next_token: "Token"
-    #   }
-    # @return [Types::SearchNearbyResponse]
-    def search_nearby(params = {}, options = {})
-      request = build_request(:search_nearby, params)
-      request.send_request(options)
-    end
-
-    # <p> <code>SearchText</code> searches for geocode and place information. You can then complete a follow-up query suggested from the <code>Suggest</code> API via a query id.</p>
-    # @param [Hash, Types::SearchTextRequest] params
-    # @option params [String] :query_text
-    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
-    # @option params [String] :query_id
-    #   <p>The query Id returned by the suggest API. If passed in the request, the SearchText API will preform a SearchText query with the improved query terms for the original query made to the suggest API.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
-    # @option params [Integer] :max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
-    # @option params [Array<Float>] :bias_position
-    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
-    # @option params [Types::SearchTextFilter] :filter
-    #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
-    # @option params [Array<String>] :additional_features
-    #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>
-    # @option params [String] :language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
-    # @option params [String] :political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
-    # @option params [String] :intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an SearchText query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
-    # @option params [String] :next_token
-    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. </p>
-    # @option params [String] :key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
-    # @example Request syntax with placeholder values
-    #   params = {
-    #     query_text: "SensitiveString",
-    #     query_id: "SensitiveString",
-    #     max_results: 1,
-    #     bias_position: [1.0],
-    #     filter: {
-    #       bounding_box: [1.0],
-    #       circle: {
-    #         center: [1.0], # required
-    #         radius: 1, # required
-    #       },
-    #       include_countries: ["CountryCode"]
-    #     },
-    #     additional_features: ["SearchTextAdditionalFeature"],
-    #     language: "LanguageTag",
-    #     political_view: "CountryCode",
-    #     intended_use: "SearchTextIntendedUse",
-    #     next_token: "Token",
-    #     key: "ApiKey"
-    #   }
-    #   options = {}
-    #   response = client.search_text(params, options)
-    # @example Response structure with placeholder values
-    #   response.to_h #=>
-    #   {
-    #     pricing_bucket: "String", # required
-    #     result_items: [
-    #       {
-    #         place_id: "SensitiveString", # required
-    #         place_type: "PlaceType", # required
-    #         title: "SensitiveString", # required
-    #         address: {
-    #           label: "SensitiveString",
-    #           country: {
-    #             code2: "CountryCode2",
-    #             code3: "CountryCode3",
-    #             name: "SensitiveString"
-    #           },
-    #           region: {
-    #             code: "SensitiveString",
-    #             name: "SensitiveString"
-    #           },
-    #           sub_region: {
-    #             code: "SensitiveString",
-    #             name: "SensitiveString"
-    #           },
-    #           locality: "SensitiveString",
-    #           district: "SensitiveString",
-    #           sub_district: "SensitiveString",
-    #           postal_code: "SensitiveString",
-    #           block: "SensitiveString",
-    #           sub_block: "SensitiveString",
-    #           intersection: ["IntersectionStreet"],
-    #           street: "SensitiveString",
-    #           street_components: [
-    #             {
-    #               base_name: "SensitiveString",
-    #               type: "SensitiveString",
-    #               type_placement: "TypePlacement",
-    #               type_separator: "TypeSeparator",
-    #               prefix: "SensitiveString",
-    #               suffix: "SensitiveString",
-    #               direction: "SensitiveString",
-    #               language: "LanguageTag"
-    #             }
-    #           ],
-    #           address_number: "SensitiveString",
-    #           building: "SensitiveString",
-    #           secondary_address_components: [
-    #             {
-    #               number: "SensitiveString", # required
-    #             }
-    #           ]
-    #         },
-    #         address_number_corrected: false,
-    #         position: [1.0],
-    #         distance: 1,
-    #         map_view: [1.0],
-    #         categories: [
-    #           {
-    #             id: "SensitiveString", # required
-    #             name: "SensitiveString", # required
-    #             localized_name: "SensitiveString",
-    #             primary: false
-    #           }
-    #         ],
-    #         food_types: [
-    #           {
-    #             localized_name: "SensitiveString", # required
-    #             id: "SensitiveString",
-    #             primary: false
-    #           }
-    #         ],
-    #         business_chains: [
-    #           {
-    #             name: "SensitiveString",
-    #             id: "SensitiveString"
-    #           }
-    #         ],
-    #         contacts: {
-    #           phones: [
-    #             {
-    #               label: "SensitiveString",
-    #               value: "SensitiveString",
-    #               categories: [
-    #                 {
-    #                   id: "SensitiveString", # required
-    #                   name: "SensitiveString", # required
-    #                   localized_name: "SensitiveString",
-    #                   primary: false
-    #                 }
-    #               ]
-    #             }
-    #           ],
-    #           faxes: [
-    #             {
-    #               label: "SensitiveString",
-    #               value: "SensitiveString",
-    #               categories: [
-    #                 {
-    #                   id: "SensitiveString", # required
-    #                   name: "SensitiveString", # required
-    #                   localized_name: "SensitiveString",
-    #                   primary: false
-    #                 }
-    #               ]
-    #             }
-    #           ],
-    #           websites: [
-    #             {
-    #               label: "SensitiveString",
-    #               value: "SensitiveString",
-    #               categories: [
-    #                 {
-    #                   id: "SensitiveString", # required
-    #                   name: "SensitiveString", # required
-    #                   localized_name: "SensitiveString",
-    #                   primary: false
-    #                 }
-    #               ]
-    #             }
-    #           ],
-    #           emails: [
-    #             {
-    #               label: "SensitiveString",
-    #               value: "SensitiveString",
-    #               categories: [
-    #                 {
-    #                   id: "SensitiveString", # required
-    #                   name: "SensitiveString", # required
-    #                   localized_name: "SensitiveString",
-    #                   primary: false
-    #                 }
-    #               ]
-    #             }
-    #           ]
-    #         },
-    #         opening_hours: [
-    #           {
-    #             display: ["OpeningHoursDisplay"],
-    #             open_now: false,
-    #             components: [
-    #               {
-    #                 open_time: "SensitiveString",
-    #                 open_duration: "SensitiveString",
-    #                 recurrence: "SensitiveString"
-    #               }
-    #             ],
-    #             categories: [
-    #               {
-    #                 id: "SensitiveString", # required
-    #                 name: "SensitiveString", # required
-    #                 localized_name: "SensitiveString",
-    #                 primary: false
-    #               }
-    #             ]
-    #           }
-    #         ],
-    #         access_points: [
-    #           {
-    #             position: [1.0]
-    #           }
-    #         ],
-    #         access_restrictions: [
-    #           {
-    #             restricted: false,
-    #             categories: [
-    #               {
-    #                 id: "SensitiveString", # required
-    #                 name: "SensitiveString", # required
-    #                 localized_name: "SensitiveString",
-    #                 primary: false
-    #               }
-    #             ]
-    #           }
-    #         ],
-    #         time_zone: {
-    #           name: "SensitiveString", # required
-    #           offset: "SensitiveString",
-    #           offset_seconds: 1
-    #         },
-    #         political_view: "CountryCode3",
-    #         phonemes: {
-    #           title: [
-    #             {
-    #               value: "SensitiveString",
-    #               language: "LanguageTag",
-    #               preferred: false
-    #             }
-    #           ],
-    #           address: {
-    #             country: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             region: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             sub_region: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             locality: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             district: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             sub_district: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             block: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             sub_block: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ],
-    #             street: [
-    #               {
-    #                 value: "SensitiveString",
-    #                 language: "LanguageTag",
-    #                 preferred: false
-    #               }
-    #             ]
-    #           }
-    #         }
-    #       }
-    #     ],
-    #     next_token: "Token"
-    #   }
-    # @return [Types::SearchTextResponse]
-    def search_text(params = {}, options = {})
-      request = build_request(:search_text, params)
-      request.send_request(options)
-    end
-
-    # <p> <code>Suggest</code> provides intelligent predictions or recommendations based on the user's input or context, such as relevant places, points of interest, query terms or search category. It is designed to help users find places or point of interests candidates or identify a follow on query based on incomplete or misspelled queries. It returns a list of possible matches or refinements that can be used to formulate a more accurate query. Users can select the most appropriate suggestion and use it for further searching. The API provides options for filtering results by location and other attributes, and allows for additional features like phonemes and timezones. The response includes refined query terms and detailed place information.</p>
-    # @param [Hash, Types::SuggestRequest] params
-    # @option params [String] :query_text
-    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
-    # @option params [Integer] :max_results
-    #   <p>An optional limit for the number of results returned in a single call.</p>
-    # @option params [Integer] :max_query_refinements
-    #   <p>Maximum number of query terms to be returned for use with a search text query.</p>
-    # @option params [Array<Float>] :bias_position
-    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WSG84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
-    # @option params [Types::SuggestFilter] :filter
-    #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
-    # @option params [Array<String>] :additional_features
-    #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>
-    # @option params [String] :language
-    #   <p>A list of <a href="https://en.wikipedia.org/wiki/IETF_language_tag">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
-    # @option params [String] :political_view
-    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
-    # @option params [String] :intended_use
-    #   <p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p>
-    # @option params [String] :key
-    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
-    # @example Request syntax with placeholder values
-    #   params = {
-    #     query_text: "SensitiveString", # required
-    #     max_results: 1,
-    #     max_query_refinements: 1,
-    #     bias_position: [1.0],
-    #     filter: {
-    #       bounding_box: [1.0],
-    #       circle: {
-    #         center: [1.0], # required
-    #         radius: 1, # required
-    #       },
-    #       include_countries: ["CountryCode"]
-    #     },
-    #     additional_features: ["SuggestAdditionalFeature"],
-    #     language: "LanguageTag",
-    #     political_view: "CountryCode",
-    #     intended_use: "SuggestIntendedUse",
-    #     key: "ApiKey"
-    #   }
-    #   options = {}
-    #   response = client.suggest(params, options)
-    # @example Response structure with placeholder values
-    #   response.to_h #=>
-    #   {
-    #     pricing_bucket: "String", # required
-    #     result_items: [
-    #       {
-    #         title: "SensitiveString", # required
-    #         suggest_result_item_type: "SuggestResultItemType", # required
-    #         place: {
-    #           place_id: "SensitiveString",
-    #           place_type: "PlaceType",
+    #         main_address: {
+    #           place_id: "SensitiveString", # required
+    #           place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
+    #           title: "SensitiveString", # required
     #           address: {
     #             label: "SensitiveString",
     #             country: {
@@ -2226,7 +1684,7 @@ module Aws::GeoPlaces
     #               {
     #                 base_name: "SensitiveString",
     #                 type: "SensitiveString",
-    #                 type_placement: "TypePlacement",
+    #                 type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
     #                 type_separator: "TypeSeparator",
     #                 prefix: "SensitiveString",
     #                 suffix: "SensitiveString",
@@ -2239,6 +1697,791 @@ module Aws::GeoPlaces
     #             secondary_address_components: [
     #               {
     #                 number: "SensitiveString", # required
+    #                 designator: "SensitiveString"
+    #               }
+    #             ]
+    #           },
+    #           position: [1.0],
+    #           access_points: [
+    #             {
+    #               position: [1.0],
+    #               type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #               primary: false,
+    #               label: "SensitiveString"
+    #             }
+    #           ]
+    #         },
+    #         estimated_point_address: false
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ReverseGeocodeResponse]
+    def reverse_geocode(params = {}, options = {})
+      request = build_request(:reverse_geocode, params)
+      request.send_request(options)
+    end
+
+    # <p> <code>SearchNearby</code> queries for points of interest within a radius from a central coordinates, returning place results with optional filters such as categories, business chains, food types and more. The API returns details such as a place name, address, phone, category, food type, contact, opening hours. Also, the API can return phonemes, time zones and more based on requested parameters. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html">Search Nearby</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
+    # @param [Hash, Types::SearchNearbyRequest] params
+    # @option params [Array<Float>] :query_position
+    #   <p>The position in World Geodetic System (WGS 84) format: [longitude, latitude] for which you are querying nearby results for. Results closer to the position will be ranked higher then results further away from the position</p>
+    # @option params [Integer] :query_radius
+    #   <p>The maximum distance in meters from the QueryPosition from which a result will be returned.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>
+    # @option params [Integer] :max_results
+    #   <p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>
+    # @option params [Types::SearchNearbyFilter] :filter
+    #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
+    # @option params [Array<String>] :additional_features
+    #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>
+    # @option params [String] :language
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>
+    # @option params [String] :political_view
+    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>
+    # @option params [String] :intended_use
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p> <note> <p>When storing <code>SearchNearby</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    # @option params [String] :next_token
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. </p>
+    # @option params [String] :key
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     query_position: [1.0], # required
+    #     query_radius: 1,
+    #     max_results: 1,
+    #     filter: {
+    #       bounding_box: [1.0],
+    #       include_countries: ["CountryCode"],
+    #       include_categories: ["SensitiveString"],
+    #       exclude_categories: ["SensitiveString"],
+    #       include_business_chains: ["SensitiveString"],
+    #       exclude_business_chains: ["SensitiveString"],
+    #       include_food_types: ["SensitiveString"],
+    #       exclude_food_types: ["SensitiveString"]
+    #     },
+    #     additional_features: ["TimeZone" # One of: ["TimeZone", "Phonemes", "Access", "Contact", "CrossReferences"]],
+    #     language: "LanguageTag",
+    #     political_view: "CountryCode",
+    #     intended_use: "SingleUse" # One of: ["SingleUse", "Storage"],
+    #     next_token: "Token",
+    #     key: "ApiKey"
+    #   }
+    #   options = {}
+    #   response = client.search_nearby(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pricing_bucket: "String", # required
+    #     result_items: [
+    #       {
+    #         place_id: "SensitiveString", # required
+    #         place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
+    #         title: "SensitiveString", # required
+    #         address: {
+    #           label: "SensitiveString",
+    #           country: {
+    #             code2: "CountryCode2",
+    #             code3: "CountryCode3",
+    #             name: "SensitiveString"
+    #           },
+    #           region: {
+    #             code: "SensitiveString",
+    #             name: "SensitiveString"
+    #           },
+    #           sub_region: {
+    #             code: "SensitiveString",
+    #             name: "SensitiveString"
+    #           },
+    #           locality: "SensitiveString",
+    #           district: "SensitiveString",
+    #           sub_district: "SensitiveString",
+    #           postal_code: "SensitiveString",
+    #           block: "SensitiveString",
+    #           sub_block: "SensitiveString",
+    #           intersection: ["IntersectionStreet"],
+    #           street: "SensitiveString",
+    #           street_components: [
+    #             {
+    #               base_name: "SensitiveString",
+    #               type: "SensitiveString",
+    #               type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
+    #               type_separator: "TypeSeparator",
+    #               prefix: "SensitiveString",
+    #               suffix: "SensitiveString",
+    #               direction: "SensitiveString",
+    #               language: "LanguageTag"
+    #             }
+    #           ],
+    #           address_number: "SensitiveString",
+    #           building: "SensitiveString",
+    #           secondary_address_components: [
+    #             {
+    #               number: "SensitiveString", # required
+    #               designator: "SensitiveString"
+    #             }
+    #           ]
+    #         },
+    #         address_number_corrected: false,
+    #         position: [1.0],
+    #         distance: 1,
+    #         map_view: [1.0],
+    #         categories: [
+    #           {
+    #             id: "SensitiveString", # required
+    #             name: "SensitiveString", # required
+    #             localized_name: "SensitiveString",
+    #             primary: false
+    #           }
+    #         ],
+    #         food_types: [
+    #           {
+    #             localized_name: "SensitiveString", # required
+    #             id: "SensitiveString",
+    #             primary: false
+    #           }
+    #         ],
+    #         business_chains: [
+    #           {
+    #             name: "SensitiveString",
+    #             id: "SensitiveString"
+    #           }
+    #         ],
+    #         contacts: {
+    #           phones: [
+    #             {
+    #               label: "SensitiveString",
+    #               value: "SensitiveString",
+    #               categories: [
+    #                 {
+    #                   id: "SensitiveString", # required
+    #                   name: "SensitiveString", # required
+    #                   localized_name: "SensitiveString",
+    #                   primary: false
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           faxes: [
+    #             {
+    #               label: "SensitiveString",
+    #               value: "SensitiveString",
+    #               categories: [
+    #                 {
+    #                   id: "SensitiveString", # required
+    #                   name: "SensitiveString", # required
+    #                   localized_name: "SensitiveString",
+    #                   primary: false
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           websites: [
+    #             {
+    #               label: "SensitiveString",
+    #               value: "SensitiveString",
+    #               categories: [
+    #                 {
+    #                   id: "SensitiveString", # required
+    #                   name: "SensitiveString", # required
+    #                   localized_name: "SensitiveString",
+    #                   primary: false
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           emails: [
+    #             {
+    #               label: "SensitiveString",
+    #               value: "SensitiveString",
+    #               categories: [
+    #                 {
+    #                   id: "SensitiveString", # required
+    #                   name: "SensitiveString", # required
+    #                   localized_name: "SensitiveString",
+    #                   primary: false
+    #                 }
+    #               ]
+    #             }
+    #           ]
+    #         },
+    #         opening_hours: [
+    #           {
+    #             display: ["OpeningHoursDisplay"],
+    #             open_now: false,
+    #             components: [
+    #               {
+    #                 open_time: "SensitiveString",
+    #                 open_duration: "SensitiveString",
+    #                 recurrence: "SensitiveString"
+    #               }
+    #             ],
+    #             categories: [
+    #               {
+    #                 id: "SensitiveString", # required
+    #                 name: "SensitiveString", # required
+    #                 localized_name: "SensitiveString",
+    #                 primary: false
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         access_points: [
+    #           {
+    #             position: [1.0],
+    #             type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #             primary: false,
+    #             label: "SensitiveString"
+    #           }
+    #         ],
+    #         access_restrictions: [
+    #           {
+    #             restricted: false,
+    #             categories: [
+    #               {
+    #                 id: "SensitiveString", # required
+    #                 name: "SensitiveString", # required
+    #                 localized_name: "SensitiveString",
+    #                 primary: false
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         time_zone: {
+    #           name: "SensitiveString", # required
+    #           offset: "SensitiveString",
+    #           offset_seconds: 1
+    #         },
+    #         political_view: "CountryCode3",
+    #         phonemes: {
+    #           title: [
+    #             {
+    #               value: "SensitiveString",
+    #               language: "LanguageTag",
+    #               preferred: false
+    #             }
+    #           ],
+    #           address: {
+    #             country: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             region: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             sub_region: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             locality: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             district: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             sub_district: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             block: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             sub_block: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             street: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         place_attributes: ["DriveThrough" # One of: ["DriveThrough"]],
+    #         cross_references: [
+    #           {
+    #             source: "SensitiveString", # required
+    #             source_place_id: "SensitiveString", # required
+    #             source_categories: [
+    #               {
+    #                 id: "SensitiveString", # required
+    #                 name: "SensitiveString", # required
+    #                 localized_name: "SensitiveString",
+    #                 primary: false
+    #               }
+    #             ]
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::SearchNearbyResponse]
+    def search_nearby(params = {}, options = {})
+      request = build_request(:search_nearby, params)
+      request.send_request(options)
+    end
+
+    # <p> <code>SearchText</code> searches for geocode and place information. You can then complete a follow-up query suggested from the <code>Suggest</code> API via a query id.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/search-text.html">Search Text</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
+    # @param [Hash, Types::SearchTextRequest] params
+    # @option params [String] :query_text
+    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>Exactly one of the following fields must be set: <code>QueryText</code> or <code>QueryId</code>.</p> </note>
+    # @option params [String] :query_id
+    #   <p>The query Id returned by the suggest API. If passed in the request, the SearchText API will preform a SearchText query with the improved query terms for the original query made to the suggest API. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers.</p> <note> <p>Exactly one of the following fields must be set: <code>QueryText</code> or <code>QueryId</code>.</p> </note>
+    # @option params [Integer] :max_results
+    #   <p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>
+    # @option params [Array<Float>] :bias_position
+    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p> <note> <p>Exactly one of the following fields must be set: <code>BiasPosition</code>, <code>Filter.BoundingBox</code>, or <code>Filter.Circle</code>.</p> </note>
+    # @option params [Types::SearchTextFilter] :filter
+    #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
+    # @option params [Array<String>] :additional_features
+    #   <p>A list of optional additional parameters, such as time zone, that can be requested for each result. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>TimeZone</code> value.</p>
+    # @option params [String] :language
+    #   <p>A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>
+    # @option params [String] :political_view
+    #   <p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers.</p>
+    # @option params [String] :intended_use
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). </p> <note> <p>When storing <code>SearchText</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href="https://aws.amazon.com/location/sla/">user agreement</a> and <a href="https://aws.amazon.com/location/pricing/">service pricing structure</a> to determine the correct setting for your use case.</p> </note>
+    # @option params [String] :next_token
+    #   <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. </p>
+    # @option params [String] :travel_mode
+    #   <p>Indicates the mode of mobility used by the end user. This is used to improve the relevance of search results. Valid values are <code>Car</code>, <code>Scooter</code>, and <code>Truck</code>.</p>
+    # @option params [String] :key
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     query_text: "SensitiveString",
+    #     query_id: "SensitiveString",
+    #     max_results: 1,
+    #     bias_position: [1.0],
+    #     filter: {
+    #       bounding_box: [1.0],
+    #       circle: {
+    #         center: [1.0], # required
+    #         radius: 1, # required
+    #       },
+    #       include_countries: ["CountryCode"]
+    #     },
+    #     additional_features: ["TimeZone" # One of: ["TimeZone", "Phonemes", "Access", "Contact", "CrossReferences"]],
+    #     language: "LanguageTag",
+    #     political_view: "CountryCode",
+    #     intended_use: "SingleUse" # One of: ["SingleUse", "Storage"],
+    #     next_token: "Token",
+    #     travel_mode: "Car" # One of: ["Car", "Scooter", "Truck"],
+    #     key: "ApiKey"
+    #   }
+    #   options = {}
+    #   response = client.search_text(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pricing_bucket: "String", # required
+    #     result_items: [
+    #       {
+    #         place_id: "SensitiveString", # required
+    #         place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"], # required
+    #         title: "SensitiveString", # required
+    #         address: {
+    #           label: "SensitiveString",
+    #           country: {
+    #             code2: "CountryCode2",
+    #             code3: "CountryCode3",
+    #             name: "SensitiveString"
+    #           },
+    #           region: {
+    #             code: "SensitiveString",
+    #             name: "SensitiveString"
+    #           },
+    #           sub_region: {
+    #             code: "SensitiveString",
+    #             name: "SensitiveString"
+    #           },
+    #           locality: "SensitiveString",
+    #           district: "SensitiveString",
+    #           sub_district: "SensitiveString",
+    #           postal_code: "SensitiveString",
+    #           block: "SensitiveString",
+    #           sub_block: "SensitiveString",
+    #           intersection: ["IntersectionStreet"],
+    #           street: "SensitiveString",
+    #           street_components: [
+    #             {
+    #               base_name: "SensitiveString",
+    #               type: "SensitiveString",
+    #               type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
+    #               type_separator: "TypeSeparator",
+    #               prefix: "SensitiveString",
+    #               suffix: "SensitiveString",
+    #               direction: "SensitiveString",
+    #               language: "LanguageTag"
+    #             }
+    #           ],
+    #           address_number: "SensitiveString",
+    #           building: "SensitiveString",
+    #           secondary_address_components: [
+    #             {
+    #               number: "SensitiveString", # required
+    #               designator: "SensitiveString"
+    #             }
+    #           ]
+    #         },
+    #         address_number_corrected: false,
+    #         position: [1.0],
+    #         distance: 1,
+    #         map_view: [1.0],
+    #         categories: [
+    #           {
+    #             id: "SensitiveString", # required
+    #             name: "SensitiveString", # required
+    #             localized_name: "SensitiveString",
+    #             primary: false
+    #           }
+    #         ],
+    #         food_types: [
+    #           {
+    #             localized_name: "SensitiveString", # required
+    #             id: "SensitiveString",
+    #             primary: false
+    #           }
+    #         ],
+    #         business_chains: [
+    #           {
+    #             name: "SensitiveString",
+    #             id: "SensitiveString"
+    #           }
+    #         ],
+    #         contacts: {
+    #           phones: [
+    #             {
+    #               label: "SensitiveString",
+    #               value: "SensitiveString",
+    #               categories: [
+    #                 {
+    #                   id: "SensitiveString", # required
+    #                   name: "SensitiveString", # required
+    #                   localized_name: "SensitiveString",
+    #                   primary: false
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           faxes: [
+    #             {
+    #               label: "SensitiveString",
+    #               value: "SensitiveString",
+    #               categories: [
+    #                 {
+    #                   id: "SensitiveString", # required
+    #                   name: "SensitiveString", # required
+    #                   localized_name: "SensitiveString",
+    #                   primary: false
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           websites: [
+    #             {
+    #               label: "SensitiveString",
+    #               value: "SensitiveString",
+    #               categories: [
+    #                 {
+    #                   id: "SensitiveString", # required
+    #                   name: "SensitiveString", # required
+    #                   localized_name: "SensitiveString",
+    #                   primary: false
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           emails: [
+    #             {
+    #               label: "SensitiveString",
+    #               value: "SensitiveString",
+    #               categories: [
+    #                 {
+    #                   id: "SensitiveString", # required
+    #                   name: "SensitiveString", # required
+    #                   localized_name: "SensitiveString",
+    #                   primary: false
+    #                 }
+    #               ]
+    #             }
+    #           ]
+    #         },
+    #         opening_hours: [
+    #           {
+    #             display: ["OpeningHoursDisplay"],
+    #             open_now: false,
+    #             components: [
+    #               {
+    #                 open_time: "SensitiveString",
+    #                 open_duration: "SensitiveString",
+    #                 recurrence: "SensitiveString"
+    #               }
+    #             ],
+    #             categories: [
+    #               {
+    #                 id: "SensitiveString", # required
+    #                 name: "SensitiveString", # required
+    #                 localized_name: "SensitiveString",
+    #                 primary: false
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         access_points: [
+    #           {
+    #             position: [1.0],
+    #             type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #             primary: false,
+    #             label: "SensitiveString"
+    #           }
+    #         ],
+    #         access_restrictions: [
+    #           {
+    #             restricted: false,
+    #             categories: [
+    #               {
+    #                 id: "SensitiveString", # required
+    #                 name: "SensitiveString", # required
+    #                 localized_name: "SensitiveString",
+    #                 primary: false
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         time_zone: {
+    #           name: "SensitiveString", # required
+    #           offset: "SensitiveString",
+    #           offset_seconds: 1
+    #         },
+    #         political_view: "CountryCode3",
+    #         phonemes: {
+    #           title: [
+    #             {
+    #               value: "SensitiveString",
+    #               language: "LanguageTag",
+    #               preferred: false
+    #             }
+    #           ],
+    #           address: {
+    #             country: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             region: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             sub_region: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             locality: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             district: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             sub_district: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             block: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             sub_block: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ],
+    #             street: [
+    #               {
+    #                 value: "SensitiveString",
+    #                 language: "LanguageTag",
+    #                 preferred: false
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         place_attributes: ["DriveThrough" # One of: ["DriveThrough"]],
+    #         cross_references: [
+    #           {
+    #             source: "SensitiveString", # required
+    #             source_place_id: "SensitiveString", # required
+    #             source_categories: [
+    #               {
+    #                 id: "SensitiveString", # required
+    #                 name: "SensitiveString", # required
+    #                 localized_name: "SensitiveString",
+    #                 primary: false
+    #               }
+    #             ]
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::SearchTextResponse]
+    def search_text(params = {}, options = {})
+      request = build_request(:search_text, params)
+      request.send_request(options)
+    end
+
+    # <p> <code>Suggest</code> provides intelligent predictions or recommendations based on the user's input or context, such as relevant places, points of interest, query terms or search category. It is designed to help users find places or point of interests candidates or identify a follow on query based on incomplete or misspelled queries. It returns a list of possible matches or refinements that can be used to formulate a more accurate query. Users can select the most appropriate suggestion and use it for further searching. The API provides options for filtering results by location and other attributes, and allows for additional features like phonemes and timezones. The response includes refined query terms and detailed place information.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/suggest.html">Suggest</a> in the <i>Amazon Location Service Developer Guide</i>.</p>
+    # @param [Hash, Types::SuggestRequest] params
+    # @option params [String] :query_text
+    #   <p>The free-form text query to match addresses against. This is usually a partially typed address from an end user in an address box or form.</p> <note> <p>The fields <code>QueryText</code> and <code>QueryID</code> are mutually exclusive.</p> </note>
+    # @option params [Integer] :max_results
+    #   <p> An optional limit for the number of results returned in a single call. </p> <p>Default value: 20</p>
+    # @option params [Integer] :max_query_refinements
+    #   <p> Maximum number of query terms to be returned for use with a search text query. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
+    # @option params [Array<Float>] :bias_position
+    #   <p>The position, in longitude and latitude, that the results should be close to. Typically, place results returned are ranked higher the closer they are to this position. Stored in <code>[lng, lat]</code> and in the WGS 84 format.</p> <note> <p>The fields <code>BiasPosition</code>, <code>FilterBoundingBox</code>, and <code>FilterCircle</code> are mutually exclusive.</p> </note>
+    # @option params [Types::SuggestFilter] :filter
+    #   <p>A structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
+    # @option params [Array<String>] :additional_features
+    #   <p> A list of optional additional parameters, such as time zone, that can be requested for each result. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>Core</code> and <code>TimeZone</code> values. </p>
+    # @option params [String] :language
+    #   <p> A list of <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>
+    # @option params [String] :political_view
+    #   <p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href="https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html">GrabMaps</a> customers. </p>
+    # @option params [String] :intended_use
+    #   <p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Currently, <code>Suggest</code> does not support storage of results. </p>
+    # @option params [String] :travel_mode
+    #   <p>Indicates the mode of mobility used by the end user. This is used to improve the relevance of search results. Valid values are <code>Car</code>, <code>Scooter</code>, and <code>Truck</code>.</p>
+    # @option params [String] :key
+    #   <p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     query_text: "SensitiveString", # required
+    #     max_results: 1,
+    #     max_query_refinements: 1,
+    #     bias_position: [1.0],
+    #     filter: {
+    #       bounding_box: [1.0],
+    #       circle: {
+    #         center: [1.0], # required
+    #         radius: 1, # required
+    #       },
+    #       include_countries: ["CountryCode"]
+    #     },
+    #     additional_features: ["Core" # One of: ["Core", "TimeZone", "Phonemes", "Access", "CrossReferences"]],
+    #     language: "LanguageTag",
+    #     political_view: "CountryCode",
+    #     intended_use: "SingleUse" # One of: ["SingleUse"],
+    #     travel_mode: "Car" # One of: ["Car", "Scooter", "Truck"],
+    #     key: "ApiKey"
+    #   }
+    #   options = {}
+    #   response = client.suggest(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pricing_bucket: "String", # required
+    #     result_items: [
+    #       {
+    #         title: "SensitiveString", # required
+    #         suggest_result_item_type: "Place" # One of: ["Place", "Query"], # required
+    #         place: {
+    #           place_id: "SensitiveString",
+    #           place_type: "Country" # One of: ["Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"],
+    #           address: {
+    #             label: "SensitiveString",
+    #             country: {
+    #               code2: "CountryCode2",
+    #               code3: "CountryCode3",
+    #               name: "SensitiveString"
+    #             },
+    #             region: {
+    #               code: "SensitiveString",
+    #               name: "SensitiveString"
+    #             },
+    #             sub_region: {
+    #               code: "SensitiveString",
+    #               name: "SensitiveString"
+    #             },
+    #             locality: "SensitiveString",
+    #             district: "SensitiveString",
+    #             sub_district: "SensitiveString",
+    #             postal_code: "SensitiveString",
+    #             block: "SensitiveString",
+    #             sub_block: "SensitiveString",
+    #             intersection: ["IntersectionStreet"],
+    #             street: "SensitiveString",
+    #             street_components: [
+    #               {
+    #                 base_name: "SensitiveString",
+    #                 type: "SensitiveString",
+    #                 type_placement: "BeforeBaseName" # One of: ["BeforeBaseName", "AfterBaseName"],
+    #                 type_separator: "TypeSeparator",
+    #                 prefix: "SensitiveString",
+    #                 suffix: "SensitiveString",
+    #                 direction: "SensitiveString",
+    #                 language: "LanguageTag"
+    #               }
+    #             ],
+    #             address_number: "SensitiveString",
+    #             building: "SensitiveString",
+    #             secondary_address_components: [
+    #               {
+    #                 number: "SensitiveString", # required
+    #                 designator: "SensitiveString"
     #               }
     #             ]
     #           },
@@ -2268,7 +2511,10 @@ module Aws::GeoPlaces
     #           ],
     #           access_points: [
     #             {
-    #               position: [1.0]
+    #               position: [1.0],
+    #               type: "Delivery" # One of: ["Delivery", "Emergency", "Entrance", "Loading", "Other", "Parking", "Taxi"],
+    #               primary: false,
+    #               label: "SensitiveString"
     #             }
     #           ],
     #           access_restrictions: [
@@ -2363,11 +2609,26 @@ module Aws::GeoPlaces
     #                 }
     #               ]
     #             }
-    #           }
+    #           },
+    #           place_attributes: ["DriveThrough" # One of: ["DriveThrough"]],
+    #           cross_references: [
+    #             {
+    #               source: "SensitiveString", # required
+    #               source_place_id: "SensitiveString", # required
+    #               source_categories: [
+    #                 {
+    #                   id: "SensitiveString", # required
+    #                   name: "SensitiveString", # required
+    #                   localized_name: "SensitiveString",
+    #                   primary: false
+    #                 }
+    #               ]
+    #             }
+    #           ]
     #         },
     #         query: {
     #           query_id: "SensitiveString",
-    #           query_type: "QueryType"
+    #           query_type: "Category" # One of: ["Category", "BusinessChain"]
     #         },
     #         highlights: {
     #           title: [

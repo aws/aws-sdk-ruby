@@ -1127,6 +1127,12 @@ module Aws::BCMPricingCalculator
     # @!attribute failure_message
     #   <p> An error message if the bill scenario creation or processing failed. </p>
     #   @return [String]
+    # @!attribute group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
+    #   @return [String]
     class BillScenarioSummary < Struct.new(
       nil,
       :id,
@@ -1136,6 +1142,8 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       :failure_message,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1287,6 +1295,15 @@ module Aws::BCMPricingCalculator
     # @!attribute expires_at
     #   <p> The timestamp of when the Bill estimate will expire. A Bill estimate becomes inaccessible after expiration. </p>
     #   @return [Time]
+    # @!attribute group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_effective_date
+    #   <p>Timestamp of the effective date of the cost category used in the group sharing settings.</p>
+    #   @return [Time]
     class CreateBillEstimateResponse < Struct.new(
       nil,
       :id,
@@ -1297,6 +1314,9 @@ module Aws::BCMPricingCalculator
       :cost_summary,
       :created_at,
       :expires_at,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
+      :cost_category_group_sharing_preference_effective_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1311,11 +1331,19 @@ module Aws::BCMPricingCalculator
     # @!attribute tags
     #   <p> The tags to apply to the bill scenario. </p>
     #   @return [Hash<String, String>]
+    # @!attribute group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
+    #   @return [String]
     class CreateBillScenarioRequest < Struct.new(
       nil,
       :name,
       :client_token,
       :tags,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1342,6 +1370,12 @@ module Aws::BCMPricingCalculator
     # @!attribute failure_message
     #   <p> An error message if the bill scenario creation failed. </p>
     #   @return [String]
+    # @!attribute group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
+    #   @return [String]
     class CreateBillScenarioResponse < Struct.new(
       nil,
       :id,
@@ -1351,6 +1385,8 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       :failure_message,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1595,6 +1631,15 @@ module Aws::BCMPricingCalculator
     # @!attribute expires_at
     #   <p> The timestamp when the bill estimate will expire. </p>
     #   @return [Time]
+    # @!attribute group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_effective_date
+    #   <p>Timestamp of the effective date of the cost category used in the group sharing settings.</p>
+    #   @return [Time]
     class GetBillEstimateResponse < Struct.new(
       nil,
       :id,
@@ -1605,6 +1650,9 @@ module Aws::BCMPricingCalculator
       :cost_summary,
       :created_at,
       :expires_at,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
+      :cost_category_group_sharing_preference_effective_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1642,6 +1690,12 @@ module Aws::BCMPricingCalculator
     # @!attribute failure_message
     #   <p> An error message if the bill scenario retrieval failed. </p>
     #   @return [String]
+    # @!attribute group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
+    #   @return [String]
     class GetBillScenarioResponse < Struct.new(
       nil,
       :id,
@@ -1651,6 +1705,8 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       :failure_message,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2474,6 +2530,15 @@ module Aws::BCMPricingCalculator
     # @!attribute expires_at
     #   <p> The updated expiration timestamp for the bill estimate. </p>
     #   @return [Time]
+    # @!attribute group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_effective_date
+    #   <p>Timestamp of the effective date of the cost category used in the group sharing settings.</p>
+    #   @return [Time]
     class UpdateBillEstimateResponse < Struct.new(
       nil,
       :id,
@@ -2484,6 +2549,9 @@ module Aws::BCMPricingCalculator
       :cost_summary,
       :created_at,
       :expires_at,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
+      :cost_category_group_sharing_preference_effective_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2498,11 +2566,19 @@ module Aws::BCMPricingCalculator
     # @!attribute expires_at
     #   <p> The new expiration date for the bill scenario. </p>
     #   @return [Time]
+    # @!attribute group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
+    #   @return [String]
     class UpdateBillScenarioRequest < Struct.new(
       nil,
       :identifier,
       :name,
       :expires_at,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2529,6 +2605,12 @@ module Aws::BCMPricingCalculator
     # @!attribute failure_message
     #   <p> An error message if the bill scenario update failed. </p>
     #   @return [String]
+    # @!attribute group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    #   @return [String]
+    # @!attribute cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
+    #   @return [String]
     class UpdateBillScenarioResponse < Struct.new(
       nil,
       :id,
@@ -2538,6 +2620,8 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       :failure_message,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

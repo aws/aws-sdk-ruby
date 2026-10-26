@@ -3989,7 +3989,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4021,7 +4021,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4053,7 +4053,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4086,7 +4086,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4100,7 +4100,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4114,7 +4114,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4128,7 +4128,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4142,7 +4142,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4249,7 +4249,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4281,7 +4281,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4455,7 +4455,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4487,7 +4487,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4519,7 +4519,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4605,7 +4605,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4637,7 +4637,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4669,7 +4669,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4702,7 +4702,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4716,7 +4716,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4730,7 +4730,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4744,7 +4744,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4758,7 +4758,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4859,7 +4859,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -4891,7 +4891,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5052,7 +5052,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.api.aws"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5084,7 +5084,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://333333333333.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -5116,7 +5116,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=us-east-1}" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.ddb.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -7580,19 +7580,6 @@ module Aws::DynamoDB
       end
     end
 
-    context "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}" do
-      let(:expected) do
-        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{endpoint: "https://dynamodb.us-west-2.api.aws", region: "us-west-2"})
-        expect do
-          subject.resolve(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1}" do
       let(:expected) do
         {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
@@ -7669,6 +7656,4993 @@ module Aws::DynamoDB
         params = EndpointParameters.new(**{endpoint: "https://dynamodb.eu-west-1.api.aws", region: "eu-west-1"})
         expect do
           subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2}" do
+      let(:expected) do
+        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://dynamodb.us-west-2.api.aws", region: "us-west-2"})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1}" do
+      let(:expected) do
+        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://dynamodb.us-east-1.api.aws/", region: "us-east-1"})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'preferred',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'preferred',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "preferred", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'disabled',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'disabled',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'disabled',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'disabled',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'disabled',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "disabled", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and custom endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1, Endpoint=https://example.com, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "required", region: "us-east-1", endpoint: "https://example.com", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://example.com',
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "preferred", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "disabled", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: FIPS and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: Dualstack and local endpoint are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=local, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "required", region: "local", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'local',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.search-ddb.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.search-ddb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Credentials-sourced account ID parameter is invalid"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'preferred',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.search-ddb.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.search-ddb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "preferred", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.search-ddb.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://111111111111.search-ddb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Credentials-sourced account ID parameter is invalid"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.search-ddb.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://222222222222.search-ddb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "required", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required and FIPS is enabled, but FIPS account endpoints are not supported"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "required", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'required',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: true,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "disabled", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'disabled',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.cn-north-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.cn-north-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "preferred", region: "cn-north-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'cn-north-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-iso-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-iso-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-iso-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-iso-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-iso-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-iso-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "preferred", region: "us-iso-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-iso-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-gov-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '111111111111',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id: "", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-gov-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id: '',
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb-fips.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-gov-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:dynamodb:us-west-2:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-gov-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:s3:us-west-2:222222222222:stream/testStream", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-gov-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, resource_arn: "", account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://search-dynamodb.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: false, account_id_endpoint_mode: "preferred", region: "us-gov-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          region: 'us-gov-east-1',
+          use_fips_endpoint: false,
+          use_dualstack_endpoint: false,
+          account_id_endpoint_mode: 'preferred',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{Endpoint=https://dynamodb.cn-north-1.api.amazonwebservices.com.cn, Region=cn-north-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://dynamodb.cn-north-1.api.amazonwebservices.com.cn", region: "cn-north-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://dynamodb.cn-north-1.api.amazonwebservices.com.cn',
+          region: 'cn-north-1',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{Endpoint=https://dynamodb.us-gov-east-1.api.aws, Region=us-gov-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://dynamodb.us-gov-east-1.api.aws", region: "us-gov-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://dynamodb.us-gov-east-1.api.aws',
+          region: 'us-gov-east-1',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{Endpoint=https://dynamodb.us-east-1.api.aws, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://dynamodb.us-east-1.api.aws", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://dynamodb.us-east-1.api.aws',
+          region: 'us-east-1',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{Endpoint=https://111111111111.ddb.us-east-1.api.aws, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://111111111111.ddb.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://111111111111.ddb.us-east-1.api.aws", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://111111111111.ddb.us-east-1.api.aws',
+          region: 'us-east-1',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{Endpoint=https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws", region: "us-east-1", is_search_operation: true})
+        endpoint = subject.resolve(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://vpce-1a2b3c4d-5e6f.dynamodb.us-east-1.vpce.api.aws',
+          region: 'us-east-1',
+        )
+        response = client.search_vectors(
+          table_name: 'test-table',
+          index_name: 'test-index',
+          search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+          top_k: 10,
+        )
+        resolved_endpoint = response.context[:resolved_endpoint]
+        expect(resolved_endpoint.url).to eq(expected['endpoint']['url'])
+        expect(resolved_endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(resolved_endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "{Endpoint=https://dynamodb.eu-west-1.api.aws, Region=eu-west-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://dynamodb.eu-west-1.api.aws", region: "eu-west-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://dynamodb.eu-west-1.api.aws',
+          region: 'eu-west-1',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{Endpoint=https://dynamodb.us-west-2.api.aws, Region=us-west-2, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://dynamodb.us-west-2.api.aws", region: "us-west-2", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://dynamodb.us-west-2.api.aws',
+          region: 'us-west-2',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "{Endpoint=https://dynamodb.us-east-1.api.aws/, Region=us-east-1, IsSearchOperation=true}" do
+      let(:expected) do
+        {"error" => "Endpoint override is not supported for dual-stack endpoints. Please enable dual-stack functionality by enabling the configuration. For more details, see: https://docs.aws.amazon.com/sdkref/latest/guide/feature-endpoints.html"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{endpoint: "https://dynamodb.us-east-1.api.aws/", region: "us-east-1", is_search_operation: true})
+        expect do
+          subject.resolve(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+
+      it 'produces the correct output from the client when calling search_vectors' do
+        client = Client.new(
+          stub_responses: true,
+          endpoint_provider: subject,
+          endpoint: 'https://dynamodb.us-east-1.api.aws/',
+          region: 'us-east-1',
+        )
+        expect do
+          client.search_vectors(
+            table_name: 'test-table',
+            index_name: 'test-index',
+            search_vector: [{n: "1.0"}, {n: "2.0"}, {n: "3.0"}],
+            top_k: 10,
+          )
         end.to raise_error(ArgumentError, expected['error'])
       end
     end

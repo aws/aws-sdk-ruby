@@ -118,12 +118,24 @@ module Aws::BedrockDataAutomationRuntime
     # @!attribute output_configuration
     #   Output configuration.
     #   @return [Types::OutputConfiguration]
+    # @!attribute job_submission_time
+    #   Job Submission time.
+    #   @return [Time]
+    # @!attribute job_completion_time
+    #   Job completion time.
+    #   @return [Time]
+    # @!attribute job_duration_in_seconds
+    #   Job duration in seconds.
+    #   @return [Integer]
     class GetDataAutomationStatusResponse < Struct.new(
       nil,
       :status,
       :error_type,
       :error_message,
       :output_configuration,
+      :job_submission_time,
+      :job_completion_time,
+      :job_duration_in_seconds,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -212,6 +224,63 @@ module Aws::BedrockDataAutomationRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # Invoke Data Automation Request
+    # @!attribute input_configuration
+    #   Input configuration.
+    #   @return [Types::SyncInputConfiguration]
+    # @!attribute data_automation_configuration
+    #   Data automation configuration.
+    #   @return [Types::DataAutomationConfiguration]
+    # @!attribute blueprints
+    #   Blueprint list.
+    #   @return [Array<Types::Blueprint>]
+    # @!attribute data_automation_profile_arn
+    #   Data automation profile ARN
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   Encryption configuration.
+    #   @return [Types::EncryptionConfiguration]
+    # @!attribute output_configuration
+    #   Output configuration.
+    #   @return [Types::OutputConfiguration]
+    class InvokeDataAutomationRequest < Struct.new(
+      nil,
+      :input_configuration,
+      :data_automation_configuration,
+      :blueprints,
+      :data_automation_profile_arn,
+      :encryption_configuration,
+      :output_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Invoke Data Automation Response
+    # @!attribute output_configuration
+    #   Output configuration
+    #   @return [Types::OutputConfiguration]
+    # @!attribute semantic_modality
+    #   Detected semantic modality
+    #   @return [String]
+    # @!attribute output_segments
+    #   List of outputs for each logical sub-doc
+    #   @return [Array<Types::OutputSegment>]
+    class InvokeDataAutomationResponse < Struct.new(
+      nil,
+      :output_configuration,
+      :semantic_modality,
+      :output_segments,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:output_segments] = [] unless options.key?(:output_segments)
+        super
+      end
+    end
+
     # @!attribute resource_arn
     #   ARN of a taggable resource
     #   @return [String]
@@ -258,6 +327,26 @@ module Aws::BedrockDataAutomationRuntime
       include ::Smithy::Schema::Structure
     end
 
+    # Results for an output segment
+    # @!attribute custom_output_status
+    #   Status of blueprint match
+    #   @return [String]
+    # @!attribute custom_output
+    #   Custom output response
+    #   @return [String]
+    # @!attribute standard_output
+    #   Standard output response
+    #   @return [String]
+    class OutputSegment < Struct.new(
+      nil,
+      :custom_output_status,
+      :custom_output,
+      :standard_output,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # This exception will be thrown when resource provided from customer not found.
     # @!attribute message
     #   @return [String]
@@ -275,6 +364,33 @@ module Aws::BedrockDataAutomationRuntime
     class ServiceQuotaExceededException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # This exception will be thrown when service is temporarily unavailable.
+    # @!attribute message
+    #   @return [String]
+    class ServiceUnavailableException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # Input configuration for synchronous API
+    # @!attribute bytes
+    #   Input data as bytes
+    #   @return [String]
+    # @!attribute s3_uri
+    #   S3 URI of the input data
+    #   @return [String]
+    class SyncInputConfiguration < Struct.new(
+      nil,
+      :bytes,
+      :s3_uri,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

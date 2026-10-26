@@ -81,9 +81,13 @@ module Aws::IoTManagedIntegrations
     # @!attribute o_auth
     #   <p>The OAuth configuration settings used for authentication with the third-party service.</p>
     #   @return [Types::OAuthConfig]
+    # @!attribute general_authorization
+    #   <p>The authorization materials for General Authorization.</p>
+    #   @return [Array<Types::AuthMaterial>]
     class AuthConfig < Struct.new(
       nil,
       :o_auth,
+      :general_authorization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -93,9 +97,29 @@ module Aws::IoTManagedIntegrations
     # @!attribute o_auth_update
     #   <p>The updated OAuth configuration settings for the authentication configuration.</p>
     #   @return [Types::OAuthUpdate]
+    # @!attribute general_authorization_update
+    #   <p>The General Authorization update information containing authorization materials to add or update.</p>
+    #   @return [Types::GeneralAuthorizationUpdate]
     class AuthConfigUpdate < Struct.new(
       nil,
       :o_auth_update,
+      :general_authorization_update,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The authorization material containing the Secrets Manager arn and version.</p>
+    # @!attribute secrets_manager
+    #   <p>Configuration for AWS Secrets Manager, used to securely store and manage sensitive information for connector destinations.</p>
+    #   @return [Types::SecretsManager]
+    # @!attribute auth_material_name
+    #   <p>The name of the authorization material.</p>
+    #   @return [String]
+    class AuthMaterial < Struct.new(
+      nil,
+      :secrets_manager,
+      :auth_material_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -379,6 +403,9 @@ module Aws::IoTManagedIntegrations
     # @!attribute tags
     #   <p>A set of key/value pairs that are used to manage the account association.</p>
     #   @return [Hash<String, String>]
+    # @!attribute general_authorization
+    #   <p>The General Authorization reference by authorization material name.</p>
+    #   @return [Types::GeneralAuthorizationName]
     class CreateAccountAssociationRequest < Struct.new(
       nil,
       :client_token,
@@ -386,13 +413,14 @@ module Aws::IoTManagedIntegrations
       :name,
       :description,
       :tags,
+      :general_authorization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute o_auth_authorization_url
-    #   <p>Third-party IoT platform OAuth authorization server URL backed with all the required parameters to perform end-user authentication.</p>
+    #   <p>Third-party IoT platform OAuth authorization server URL backed with all the required parameters to perform end-user authentication. This field will be empty when using General Authorization flows that do not require OAuth.</p>
     #   @return [String]
     # @!attribute account_association_id
     #   <p>The identifier for the account association request.</p>
@@ -412,6 +440,11 @@ module Aws::IoTManagedIntegrations
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:o_auth_authorization_url] = '' unless options.key?(:o_auth_authorization_url)
+        super
+      end
     end
 
     # @!attribute name
@@ -629,11 +662,14 @@ module Aws::IoTManagedIntegrations
     #   <p>The identifier of the credential for the managed thing.</p>
     #   @return [String]
     # @!attribute authentication_material
-    #   <p>The authentication material defining the device connectivity setup requests. The authentication materials used are the device bar code.</p>
+    #   <p>The authentication material defining the device connectivity setup requests. The authorization materials used are the device bar code.</p>
     #   @return [String]
     # @!attribute authentication_material_type
     #   <p>The type of authentication material used for device connectivity setup requests.</p>
     #   @return [String]
+    # @!attribute wi_fi_simple_setup_configuration
+    #   <p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>
+    #   @return [Types::WiFiSimpleSetupConfiguration]
     # @!attribute serial_number
     #   <p>The serial number of the device.</p>
     #   @return [String]
@@ -654,6 +690,9 @@ module Aws::IoTManagedIntegrations
     #   @return [Array<Types::CapabilitySchemaItem>]
     # @!attribute capabilities
     #   <p>The capabilities of the device such as light bulb.</p>
+    #   @deprecated
+    #     Capabilities has been deprecated, use CapabilityReport instead
+    #     Since: 06-25-2025
     #   @return [String]
     # @!attribute client_token
     #   <p>An idempotency token. If you retry a request that completed successfully initially using the same client token and parameters, then the retry attempt will succeed without performing any further actions.</p>
@@ -674,6 +713,7 @@ module Aws::IoTManagedIntegrations
       :credential_locker_id,
       :authentication_material,
       :authentication_material_type,
+      :wi_fi_simple_setup_configuration,
       :serial_number,
       :brand,
       :model,
@@ -858,10 +898,13 @@ module Aws::IoTManagedIntegrations
     #   <p>The type of provisioning workflow the device uses for onboarding to IoT managed integrations.</p>
     #   @return [String]
     # @!attribute ca_certificate
-    #   <p>The id of the certificate authority (CA) certificate.</p>
+    #   <p>The body of the PEM-encoded certificate authority (CA) certificate.</p>
+    #   @return [String]
+    # @!attribute claim_certificate
+    #   <p>The body of the PEM-encoded claim certificate. If a claim certificate is provided, it will be used for the provisioning profile. Otherwise, a claim certificate will be generated.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the provisioning template.</p>
+    #   <p>The name of the provisioning profile.</p>
     #   @return [String]
     # @!attribute client_token
     #   <p>An idempotency token. If you retry a request that completed successfully initially using the same client token and parameters, then the retry attempt will succeed without performing any further actions.</p>
@@ -873,6 +916,7 @@ module Aws::IoTManagedIntegrations
       nil,
       :provisioning_type,
       :ca_certificate,
+      :claim_certificate,
       :name,
       :client_token,
       :tags,
@@ -882,10 +926,10 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute arn
-    #   <p>The Amazon Resource Name (ARN) of the provisioning template used in the provisioning profile.</p>
+    #   <p>The Amazon Resource Name (ARN) of the provisioning profile.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the provisioning template.</p>
+    #   <p>The name of the provisioning profile.</p>
     #   @return [String]
     # @!attribute provisioning_type
     #   <p>The type of provisioning workflow the device uses for onboarding to IoT managed integrations.</p>
@@ -893,11 +937,14 @@ module Aws::IoTManagedIntegrations
     # @!attribute id
     #   <p>The identifier of the provisioning profile.</p>
     #   @return [String]
+    # @!attribute status
+    #   <p>The status of a provisioning profile.</p>
+    #   @return [String]
     # @!attribute claim_certificate
-    #   <p>The id of the claim certificate.</p>
+    #   <p>The body of the PEM-encoded claim certificate.</p>
     #   @return [String]
     # @!attribute claim_certificate_private_key
-    #   <p>The private key of the claim certificate. This is stored securely on the device for validating the connection endpoint with IoT managed integrations using the public key.</p>
+    #   <p>The private key of the claim certificate. This may be stored securely on the device for validating the connection endpoint with IoT managed integrations using the public key.</p>
     #   @return [String]
     class CreateProvisioningProfileResponse < Struct.new(
       nil,
@@ -905,6 +952,7 @@ module Aws::IoTManagedIntegrations
       :name,
       :provisioning_type,
       :id,
+      :status,
       :claim_certificate,
       :claim_certificate_private_key,
       keyword_init: true
@@ -1051,7 +1099,7 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute identifier
-    #   <p>The name of the provisioning template.</p>
+    #   <p>The id of the provisioning profile.</p>
     #   @return [String]
     class DeleteProvisioningProfileRequest < Struct.new(
       nil,
@@ -1253,6 +1301,34 @@ module Aws::IoTManagedIntegrations
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The General Authorization reference by authorization material name.</p>
+    # @!attribute auth_material_name
+    #   <p>The name of the authorization material.</p>
+    #   @return [String]
+    class GeneralAuthorizationName < Struct.new(
+      nil,
+      :auth_material_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The General Authorization update information containing authorization materials to add or update.</p>
+    # @!attribute auth_materials_to_add
+    #   <p>The authorization materials to add.</p>
+    #   @return [Array<Types::AuthMaterial>]
+    # @!attribute auth_materials_to_update
+    #   <p>The authorization materials to update.</p>
+    #   @return [Array<Types::AuthMaterial>]
+    class GeneralAuthorizationUpdate < Struct.new(
+      nil,
+      :auth_materials_to_add,
+      :auth_materials_to_update,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute account_association_id
     #   <p>The unique identifier of the account association to retrieve.</p>
     #   @return [String]
@@ -1286,11 +1362,14 @@ module Aws::IoTManagedIntegrations
     #   <p>The Amazon Resource Name (ARN) of the account association.</p>
     #   @return [String]
     # @!attribute o_auth_authorization_url
-    #   <p>Third party IoT platform OAuth authorization server URL backed with all the required parameters to perform end-user authentication.</p>
+    #   <p>Third party IoT platform OAuth authorization server URL backed with all the required parameters to perform end-user authentication. This field will be empty when using General Authorization flows that do not require OAuth.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>A set of key/value pairs that are used to manage the account association.</p>
     #   @return [Hash<String, String>]
+    # @!attribute general_authorization
+    #   <p>The General Authorization reference by authorization material name.</p>
+    #   @return [Types::GeneralAuthorizationName]
     class GetAccountAssociationResponse < Struct.new(
       nil,
       :account_association_id,
@@ -1302,9 +1381,15 @@ module Aws::IoTManagedIntegrations
       :arn,
       :o_auth_authorization_url,
       :tags,
+      :general_authorization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:o_auth_authorization_url] = '' unless options.key?(:o_auth_authorization_url)
+        super
+      end
     end
 
     # @!attribute identifier
@@ -1670,6 +1755,9 @@ module Aws::IoTManagedIntegrations
     #   @return [String]
     # @!attribute capabilities
     #   <p>The capabilities of the device such as light bulb.</p>
+    #   @deprecated
+    #     Capabilities has been deprecated, use CapabilityReport instead
+    #     Since: 06-25-2025
     #   @return [String]
     # @!attribute capability_report
     #   <p>A report of the capabilities for the managed thing.</p>
@@ -1679,6 +1767,32 @@ module Aws::IoTManagedIntegrations
       :managed_thing_id,
       :capabilities,
       :capability_report,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The identifier of the managed thing.</p>
+    #   @return [String]
+    class GetManagedThingCertificateRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute managed_thing_id
+    #   <p>The identifier of the managed thing.</p>
+    #   @return [String]
+    # @!attribute certificate_pem
+    #   <p>The PEM-encoded certificate for the managed thing.</p>
+    #   @return [String]
+    class GetManagedThingCertificateResponse < Struct.new(
+      nil,
+      :managed_thing_id,
+      :certificate_pem,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1774,7 +1888,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The type of device used. This will be the Amazon Web Services hub controller, cloud device, or IoT device.</p>
     #   @return [String]
     # @!attribute provisioning_status
-    #   <p>The provisioning status of the device in the provisioning workflow for onboarding to IoT managed integrations.</p>
+    #   <p>The provisioning status of the device in the provisioning workflow for onboarding to IoT managed integrations. For more information, see <a href="https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html">Device Provisioning</a>.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the managed thing representing the physical device.</p>
@@ -1836,6 +1950,9 @@ module Aws::IoTManagedIntegrations
     # @!attribute tags
     #   <p>A set of key/value pairs that are used to manage the managed thing.</p>
     #   @return [Hash<String, String>]
+    # @!attribute wi_fi_simple_setup_configuration
+    #   <p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>
+    #   @return [Types::WiFiSimpleSetupConfiguration]
     class GetManagedThingResponse < Struct.new(
       nil,
       :id,
@@ -1864,6 +1981,7 @@ module Aws::IoTManagedIntegrations
       :hub_network_mode,
       :meta_data,
       :tags,
+      :wi_fi_simple_setup_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2057,7 +2175,7 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute identifier
-    #   <p>The provisioning template the device uses for the provisioning process.</p>
+    #   <p>The id of a provisioning profile.</p>
     #   @return [String]
     class GetProvisioningProfileRequest < Struct.new(
       nil,
@@ -2068,19 +2186,22 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute arn
-    #   <p>The Amazon Resource Name (ARN) of the provisioning template used in the provisioning profile.</p>
+    #   <p>The Amazon Resource Name (ARN) of the provisioning profile.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the provisioning template.</p>
+    #   <p>The name of the provisioning profile.</p>
     #   @return [String]
     # @!attribute provisioning_type
     #   <p>The type of provisioning workflow the device uses for onboarding to IoT managed integrations.</p>
     #   @return [String]
     # @!attribute id
-    #   <p>The provisioning profile id..</p>
+    #   <p>The provisioning profile id.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of a provisioning profile.</p>
     #   @return [String]
     # @!attribute claim_certificate
-    #   <p>The id of the claim certificate.</p>
+    #   <p>The body of the PEM-encoded claim certificate.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>A set of key/value pairs that are used to manage the provisioning profile.</p>
@@ -2091,6 +2212,7 @@ module Aws::IoTManagedIntegrations
       :name,
       :provisioning_type,
       :id,
+      :status,
       :claim_certificate,
       :tags,
       keyword_init: true
@@ -2610,7 +2732,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Filter on the serial number of the device.</p>
     #   @return [String]
     # @!attribute provisioning_status_filter
-    #   <p>Filter on the status of the device.</p>
+    #   <p>Filter on the status of the device. For more information, see <a href="https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html">Device Provisioning</a>.</p>
     #   @return [String]
     # @!attribute next_token
     #   <p>A token that can be used to retrieve the next set of results.</p>
@@ -2856,7 +2978,7 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute resource_arn
-    #   The ARN of the resource for which to list tags.
+    #   <p>The Amazon Resource Name (ARN) of the resource for which to list tags.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       nil,
@@ -2867,7 +2989,7 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute tags
-    #   A set of key/value pairs that are used to manage the resource.
+    #   <p>A set of key/value pairs that are used to manage the resource.</p>
     #   @return [Hash<String, String>]
     class ListTagsForResourceResponse < Struct.new(
       nil,
@@ -2884,10 +3006,14 @@ module Aws::IoTManagedIntegrations
     # @!attribute account_association_id
     #   <p>The identifier of the account association in the association.</p>
     #   @return [String]
+    # @!attribute managed_thing_association_status
+    #   <p>The status of the registration between the managed thing and the account association. Indicates whether the device is pre-associated or fully associated with the account association.</p>
+    #   @return [String]
     class ManagedThingAssociation < Struct.new(
       nil,
       :managed_thing_id,
       :account_association_id,
+      :managed_thing_association_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2957,7 +3083,7 @@ module Aws::IoTManagedIntegrations
     #   <p>Id of the controller device used for the discovery job.</p>
     #   @return [String]
     # @!attribute provisioning_status
-    #   <p>The provisioning status of the device in the provisioning workflow for onboarding to IoT managed integrations.</p>
+    #   <p>The provisioning status of the device in the provisioning workflow for onboarding to IoT managed integrations. For more information, see <a href="https://docs.aws.amazon.com/iot-mi/latest/devguide/device-provisioning.html">Device Provisioning</a>.</p>
     #   @return [String]
     # @!attribute role
     #   <p>The type of device used. This will be the Amazon Web Services hub controller, cloud device, or IoT device.</p>
@@ -3422,16 +3548,19 @@ module Aws::IoTManagedIntegrations
 
     # <p>Structure describing a provisioning profile. </p>
     # @!attribute name
-    #   <p>The name of the provisioning template.</p>
+    #   <p>The name of the provisioning profile.</p>
     #   @return [String]
     # @!attribute id
     #   <p>The identifier of the provisioning profile.</p>
     #   @return [String]
     # @!attribute arn
-    #   <p>The Amazon Resource Name (ARN) of the provisioning template used in the provisioning profile.</p>
+    #   <p>The Amazon Resource Name (ARN) of the provisioning profile.</p>
     #   @return [String]
     # @!attribute provisioning_type
     #   <p>The type of provisioning workflow the device uses for onboarding to IoT managed integrations.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of a provisioning profile.</p>
     #   @return [String]
     class ProvisioningProfileSummary < Struct.new(
       nil,
@@ -3439,6 +3568,7 @@ module Aws::IoTManagedIntegrations
       :id,
       :arn,
       :provisioning_type,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3782,7 +3912,7 @@ module Aws::IoTManagedIntegrations
     #   <p>The third-party device id as defined by the connector. This device id must not contain personal identifiable information (PII).</p> <note> <p>This parameter is used for cloud-to-cloud devices only.</p> </note>
     #   @return [String]
     # @!attribute trace_id
-    #   <p>The trace request identifier used to correlate a command request and response. This is specified by the device owner, but will be generated by IoT managed integrations if not provided by the device owner.</p>
+    #   <p>The trace request identifier. This is generated by IoT managed integrations and can be used to trace this command and its related operations in CloudWatch.</p>
     #   @return [String]
     # @!attribute devices
     #   <p>The list of devices.</p>
@@ -3846,7 +3976,7 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute trace_id
-    #   <p>The trace request identifier. This is specified by the device owner, but will be generated by IoT managed integrations if not provided by the device owner.</p>
+    #   <p>The trace request identifier. This is generated by IoT managed integrations and can be used to trace this command and its related operations in CloudWatch.</p>
     #   @return [String]
     class SendManagedThingCommandResponse < Struct.new(
       nil,
@@ -3890,7 +4020,7 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute o_auth_authorization_url
-    #   <p>Third-party IoT platform OAuth authorization server URL with all required parameters to perform end-user authentication during the refresh process.</p>
+    #   <p>Third-party IoT platform OAuth authorization server URL with all required parameters to perform end-user authentication during the refresh process. This field will be empty when using General Authorization flows that do not require OAuth.</p>
     #   @return [String]
     class StartAccountAssociationRefreshResponse < Struct.new(
       nil,
@@ -3898,6 +4028,11 @@ module Aws::IoTManagedIntegrations
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:o_auth_authorization_url] = '' unless options.key?(:o_auth_authorization_url)
+        super
+      end
     end
 
     # @!attribute discovery_type
@@ -3933,6 +4068,15 @@ module Aws::IoTManagedIntegrations
     #     Tags have been deprecated from this api
     #     Since: 06-25-2025
     #   @return [Hash<String, String>]
+    # @!attribute connector_device_id_list
+    #   <p>Used as a filter for PLA discoveries.</p>
+    #   @return [Array<String>]
+    # @!attribute protocol
+    #   <p>The protocol type for capability rediscovery (ZWAVE, ZIGBEE, or CUSTOM).</p> <note> <p>This parameter is only available when the discovery type is CONTROLLER_CAPABILITY_REDISCOVERY.</p> </note>
+    #   @return [String]
+    # @!attribute end_device_identifier
+    #   <p>The unique id of the end device for capability rediscovery.</p> <note> <p>This parameter is only available when the discovery type is CONTROLLER_CAPABILITY_REDISCOVERY.</p> </note>
+    #   @return [String]
     class StartDeviceDiscoveryRequest < Struct.new(
       nil,
       :discovery_type,
@@ -3944,6 +4088,9 @@ module Aws::IoTManagedIntegrations
       :authentication_material_type,
       :client_token,
       :tags,
+      :connector_device_id_list,
+      :protocol,
+      :end_device_identifier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4005,10 +4152,10 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute resource_arn
-    #   The ARN of the resource to which to add tags.
+    #   <p>The Amazon Resource Name (ARN) of the resource to which to add tags.</p>
     #   @return [String]
     # @!attribute tags
-    #   A set of key/value pairs that are used to manage the resource
+    #   <p>A set of key/value pairs that are used to manage the resource.</p>
     #   @return [Hash<String, String>]
     class TagResourceRequest < Struct.new(
       nil,
@@ -4093,10 +4240,10 @@ module Aws::IoTManagedIntegrations
     end
 
     # @!attribute resource_arn
-    #   The ARN of the resource to which to add tags.
+    #   <p>The Amazon Resource Name (ARN) of the resource from which to remove tags.</p>
     #   @return [String]
     # @!attribute tag_keys
-    #   A list of tag keys to remove from the resource.
+    #   <p>A list of tag keys to remove from the resource.</p>
     #   @return [Array<String>]
     class UntagResourceRequest < Struct.new(
       nil,
@@ -4237,6 +4384,9 @@ module Aws::IoTManagedIntegrations
     # @!attribute serial_number
     #   <p>The serial number of the device.</p>
     #   @return [String]
+    # @!attribute wi_fi_simple_setup_configuration
+    #   <p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>
+    #   @return [Types::WiFiSimpleSetupConfiguration]
     # @!attribute brand
     #   <p>The brand of the device.</p>
     #   @return [String]
@@ -4254,6 +4404,9 @@ module Aws::IoTManagedIntegrations
     #   @return [Array<Types::CapabilitySchemaItem>]
     # @!attribute capabilities
     #   <p>The capabilities of the device such as light bulb.</p>
+    #   @deprecated
+    #     Capabilities has been deprecated, use CapabilityReport instead
+    #     Since: 06-25-2025
     #   @return [String]
     # @!attribute classification
     #   <p>The classification of the managed thing such as light bulb or thermostat.</p>
@@ -4270,6 +4423,7 @@ module Aws::IoTManagedIntegrations
       :owner,
       :credential_locker_id,
       :serial_number,
+      :wi_fi_simple_setup_configuration,
       :brand,
       :model,
       :name,
@@ -4324,6 +4478,26 @@ module Aws::IoTManagedIntegrations
     class ValidationException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.</p>
+    # @!attribute enable_as_provisioner
+    #   <p>Indicates whether the device can act as a provisioner in Wi-Fi Simple Setup, allowing it to configure other devices.</p>
+    #   @return [Boolean]
+    # @!attribute enable_as_provisionee
+    #   <p>Indicates whether the device can act as a provisionee in Wi-Fi Simple Setup, allowing it to be configured by other devices.</p>
+    #   @return [Boolean]
+    # @!attribute timeout_in_minutes
+    #   <p>The timeout duration in minutes for Wi-Fi Simple Setup. Valid range is 5 to 15 minutes.</p>
+    #   @return [Integer]
+    class WiFiSimpleSetupConfiguration < Struct.new(
+      nil,
+      :enable_as_provisioner,
+      :enable_as_provisionee,
+      :timeout_in_minutes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -282,6 +282,19 @@ module Aws::EntityResolution
       attr_accessor mapped_input_fields: Array[Types::SchemaInputAttribute]?
     end
 
+    class CustomerProfilesIntegrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_arn: String,
+        ?object_type_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_arn: String?
+      attr_accessor object_type_arn: String?
+    end
+
     class DeleteIdMappingWorkflowInput
       include Smithy::Schema::Structure
 
@@ -962,13 +975,13 @@ module Aws::EntityResolution
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?output_s3_path: String,
         ?kms_arn: String,
+        ?output_s3_path: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor output_s3_path: String?
       attr_accessor kms_arn: String?
+      attr_accessor output_s3_path: String?
     end
 
     module IdMappingWorkflowRuleDefinitionType
@@ -1419,6 +1432,17 @@ module Aws::EntityResolution
       attr_accessor record_id: String?
     end
 
+    class MatchingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_transitive_matching: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_transitive_matching: bool?
+    end
+
     class MatchingWorkflowSummary
       include Smithy::Schema::Structure
 
@@ -1485,17 +1509,19 @@ module Aws::EntityResolution
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?output_s3_path: String,
         ?kms_arn: String,
+        ?output_s3_path: String,
         ?output: Array[Types::OutputAttribute],
         ?apply_normalization: bool,
+        ?customer_profiles_integration_config: Types::CustomerProfilesIntegrationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor output_s3_path: String?
       attr_accessor kms_arn: String?
+      attr_accessor output_s3_path: String?
       attr_accessor output: Array[Types::OutputAttribute]?
       attr_accessor apply_normalization: bool?
+      attr_accessor customer_profiles_integration_config: Types::CustomerProfilesIntegrationConfig?
     end
 
     module ProcessingType
@@ -1686,6 +1712,7 @@ module Aws::EntityResolution
         ?resolution_type: String,
         ?rule_based_properties: Types::RuleBasedProperties,
         ?rule_condition_properties: Types::RuleConditionProperties,
+        ?enable_real_time_matching: bool,
         ?provider_properties: Types::ProviderProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1693,6 +1720,7 @@ module Aws::EntityResolution
       attr_accessor resolution_type: String?
       attr_accessor rule_based_properties: Types::RuleBasedProperties?
       attr_accessor rule_condition_properties: Types::RuleConditionProperties?
+      attr_accessor enable_real_time_matching: bool?
       attr_accessor provider_properties: Types::ProviderProperties?
     end
 
@@ -1759,10 +1787,12 @@ module Aws::EntityResolution
 
       def initialize: (
         ?rules: Array[Types::RuleCondition],
+        ?matching_config: Types::MatchingConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor rules: Array[Types::RuleCondition]?
+      attr_accessor matching_config: Types::MatchingConfig?
     end
 
     module SchemaAttributeType

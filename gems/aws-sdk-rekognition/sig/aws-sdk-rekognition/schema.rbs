@@ -189,6 +189,10 @@ module Aws::Rekognition
     FaceRecordList: ListShape
     FaceSearchSettings: StructureShape
     FaceSearchSortBy: EnumShape
+    FeedbackCode: EnumShape
+    FeedbackItem: StructureShape
+    FeedbackList: ListShape
+    FeedbackMessage: StringShape
     Float: FloatShape
     FlowDefinitionArn: StringShape
     Gender: StructureShape
@@ -404,6 +408,7 @@ module Aws::Rekognition
     S3Object: StructureShape
     S3ObjectName: StringShape
     S3ObjectVersion: StringShape
+    SDKTypeString: StringShape
     SNSTopicArn: StringShape
     SearchFacesByImageRequest: StructureShape
     SearchFacesByImageResponse: StructureShape
@@ -424,6 +429,7 @@ module Aws::Rekognition
     SegmentTypes: ListShape
     SegmentTypesInfo: ListShape
     ServiceQuotaExceededException: StructureShape
+    SessionMetadata: StructureShape
     SessionNotFoundException: StructureShape
     ShotSegment: StructureShape
     Smile: StructureShape

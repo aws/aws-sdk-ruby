@@ -144,18 +144,18 @@ module Aws::Billingconductor
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,18 +209,12 @@ module Aws::Billingconductor
       super
     end
 
-    # <p>Connects an array of account IDs in a consolidated billing family to a predefined
-    #       billing group. The account IDs must be a part of the consolidated billing family during the
-    #       current month, and not already associated with another billing group. The maximum number of
-    #       accounts that can be associated in one call is 30. </p>
+    # <p>Connects an array of account IDs in a consolidated billing family to a predefined billing group. The account IDs must be a part of the consolidated billing family during the current month, and not already associated with another billing group. The maximum number of accounts that can be associated in one call is 30. </p>
     # @param [Hash, Types::AssociateAccountsOperationInput] params
     # @option params [String] :arn
-    #   <p> The Amazon Resource Name (ARN) of the billing group that associates the array of
-    #         account IDs. </p>
+    #   <p> The Amazon Resource Name (ARN) of the billing group that associates the array of account IDs. </p>
     # @option params [Array<String>] :account_ids
-    #   <p>
-    #         The associating array of account IDs.
-    #       </p>
+    #   <p> The associating array of account IDs. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "BillingGroupArn", # required
@@ -239,17 +233,12 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>Connects an array of <code>PricingRuleArns</code> to a defined <code>PricingPlan</code>.
-    #       The maximum number <code>PricingRuleArn</code> that can be associated in one call is 30. </p>
+    # <p>Connects an array of <code>PricingRuleArns</code> to a defined <code>PricingPlan</code>. The maximum number <code>PricingRuleArn</code> that can be associated in one call is 30. </p>
     # @param [Hash, Types::AssociatePricingRulesOperationInput] params
     # @option params [String] :arn
-    #   <p>
-    #         The <code>PricingPlanArn</code> that the <code>PricingRuleArns</code> are associated with.
-    #       </p>
+    #   <p> The <code>PricingPlanArn</code> that the <code>PricingRuleArns</code> are associated with. </p>
     # @option params [Array<String>] :pricing_rule_arns
-    #   <p>
-    #         The <code>PricingRuleArns</code> that are associated with the Pricing Plan.
-    #       </p>
+    #   <p> The <code>PricingRuleArns</code> that are associated with the Pricing Plan. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "PricingPlanArn", # required
@@ -268,18 +257,12 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Associates a batch of resources to a percentage custom line item.
-    #     </p>
+    # <p> Associates a batch of resources to a percentage custom line item. </p>
     # @param [Hash, Types::BatchAssociateResourcesToCustomLineItemOperationInput] params
     # @option params [String] :target_arn
-    #   <p>
-    #         A percentage custom line item ARN to associate the resources to.
-    #       </p>
+    #   <p> A percentage custom line item ARN to associate the resources to. </p>
     # @option params [Array<String>] :resource_arns
-    #   <p>
-    #         A list containing the ARNs of the resources to be associated.
-    #       </p>
+    #   <p> A list containing the ARNs of the resources to be associated. </p>
     # @option params [Types::CustomLineItemBillingPeriodRange] :billing_period_range
     #   <p>The billing period range in which the custom line item request will be applied.</p>
     # @example Request syntax with placeholder values
@@ -301,7 +284,7 @@ module Aws::Billingconductor
     #         arn: "CustomLineItemAssociationElement",
     #         error: {
     #           message: "String",
-    #           reason: "AssociateResourceErrorReason"
+    #           reason: "INVALID_ARN" # One of: ["INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION", "INVALID_BILLING_PERIOD_RANGE"]
     #         }
     #       }
     #     ],
@@ -310,7 +293,7 @@ module Aws::Billingconductor
     #         arn: "CustomLineItemAssociationElement",
     #         error: {
     #           message: "String",
-    #           reason: "AssociateResourceErrorReason"
+    #           reason: "INVALID_ARN" # One of: ["INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION", "INVALID_BILLING_PERIOD_RANGE"]
     #         }
     #       }
     #     ]
@@ -321,18 +304,12 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Disassociates a batch of resources from a percentage custom line item.
-    #     </p>
+    # <p> Disassociates a batch of resources from a percentage custom line item. </p>
     # @param [Hash, Types::BatchDisassociateResourcesFromCustomLineItemOperationInput] params
     # @option params [String] :target_arn
-    #   <p>
-    #         A percentage custom line item ARN to disassociate the resources from.
-    #       </p>
+    #   <p> A percentage custom line item ARN to disassociate the resources from. </p>
     # @option params [Array<String>] :resource_arns
-    #   <p>
-    #         A list containing the ARNs of resources to be disassociated.
-    #       </p>
+    #   <p> A list containing the ARNs of resources to be disassociated. </p>
     # @option params [Types::CustomLineItemBillingPeriodRange] :billing_period_range
     #   <p>The billing period range in which the custom line item request will be applied.</p>
     # @example Request syntax with placeholder values
@@ -354,7 +331,7 @@ module Aws::Billingconductor
     #         arn: "CustomLineItemAssociationElement",
     #         error: {
     #           message: "String",
-    #           reason: "AssociateResourceErrorReason"
+    #           reason: "INVALID_ARN" # One of: ["INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION", "INVALID_BILLING_PERIOD_RANGE"]
     #         }
     #       }
     #     ],
@@ -363,7 +340,7 @@ module Aws::Billingconductor
     #         arn: "CustomLineItemAssociationElement",
     #         error: {
     #           message: "String",
-    #           reason: "AssociateResourceErrorReason"
+    #           reason: "INVALID_ARN" # One of: ["INVALID_ARN", "SERVICE_LIMIT_EXCEEDED", "ILLEGAL_CUSTOMLINEITEM", "INTERNAL_SERVER_EXCEPTION", "INVALID_BILLING_PERIOD_RANGE"]
     #         }
     #       }
     #     ]
@@ -374,40 +351,30 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Creates a billing group that resembles a consolidated billing family that Amazon Web Services charges, based off of the predefined pricing plan computation.
-    #     </p>
+    # <p> Creates a billing group that resembles a consolidated billing family that Amazon Web Services charges, based off of the predefined pricing plan computation. </p>
     # @param [Hash, Types::CreateBillingGroupOperationInput] params
     # @option params [String] :client_token
-    #   <p>
-    #         The token that is needed to support idempotency. Idempotency isn't currently supported, but will be implemented in a future update. 
-    #       </p>
+    #   <p>A unique, case-sensitive identifier that you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. With an idempotent request, if the original request completes successfully, any subsequent retries complete successfully without performing any further actions.</p>
     # @option params [String] :name
-    #   <p>
-    #         The billing group name. The names must be unique.
-    #       </p>
+    #   <p> The billing group name. The names must be unique. </p>
     # @option params [Types::AccountGrouping] :account_grouping
-    #   <p>
-    #         The set of accounts that will be under the billing group. The set of accounts resemble the linked accounts in a consolidated billing family.
-    #       </p>
+    #   <p> The set of accounts that will be under the billing group. The set of accounts resemble the linked accounts in a consolidated billing family. </p>
     # @option params [Types::ComputationPreference] :computation_preference
-    #   <p>
-    #         The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.
-    #       </p>
+    #   <p> The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group. </p>
     # @option params [String] :primary_account_id
     #   <p> The account ID that serves as the main account in a billing group. </p>
     # @option params [String] :description
     #   <p>The description of the billing group. </p>
     # @option params [Hash<String, String>] :tags
-    #   <p> A map that contains tag keys and tag values that are attached to a billing group. This
-    #         feature isn't available during the beta. </p>
+    #   <p> A map that contains tag keys and tag values that are attached to a billing group. This feature isn't available during the beta. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
     #     name: "BillingGroupName", # required
     #     account_grouping: { # required
-    #       linked_account_ids: ["AccountId"], # required
-    #       auto_associate: false
+    #       linked_account_ids: ["AccountId"],
+    #       auto_associate: false,
+    #       responsibility_transfer_arn: "ResponsibilityTransferArn"
     #     },
     #     computation_preference: { # required
     #       pricing_plan_arn: "PricingPlanFullArn", # required
@@ -431,35 +398,28 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>Creates a custom line item that can be used to create a one-time fixed charge that can be
-    #       applied to a single billing group for the current or previous billing period. The one-time
-    #       fixed charge is either a fee or discount. </p>
+    # <p>Creates a custom line item that can be used to create a one-time fixed charge that can be applied to a single billing group for the current or previous billing period. The one-time fixed charge is either a fee or discount. </p>
     # @param [Hash, Types::CreateCustomLineItemOperationInput] params
     # @option params [String] :client_token
-    #   <p>
-    #         The token that is needed to support idempotency. Idempotency isn't currently supported, but will be implemented in a future update. 
-    #       </p>
+    #   <p>A unique, case-sensitive identifier that you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. With an idempotent request, if the original request completes successfully, any subsequent retries complete successfully without performing any further actions.</p>
     # @option params [String] :name
-    #   <p>
-    #         The name of the custom line item.
-    #       </p>
+    #   <p> The name of the custom line item. </p>
     # @option params [String] :description
-    #   <p>
-    #         The description of the custom line item. This is shown on the Bills page in association with the charge value.
-    #       </p>
+    #   <p> The description of the custom line item. This is shown on the Bills page in association with the charge value. </p>
     # @option params [String] :billing_group_arn
-    #   <p> The Amazon Resource Name (ARN) that references the billing group where the custom line
-    #         item applies to. </p>
+    #   <p> The Amazon Resource Name (ARN) that references the billing group where the custom line item applies to. </p>
     # @option params [Types::CustomLineItemBillingPeriodRange] :billing_period_range
     #   <p> A time range for which the custom line item is effective. </p>
     # @option params [Hash<String, String>] :tags
     #   <p> A map that contains tag keys and tag values that are attached to a custom line item. </p>
     # @option params [Types::CustomLineItemChargeDetails] :charge_details
-    #   <p>
-    #         A <code>CustomLineItemChargeDetails</code> that describes the charge details for a custom line item.
-    #       </p>
+    #   <p> A <code>CustomLineItemChargeDetails</code> that describes the charge details for a custom line item. </p>
     # @option params [String] :account_id
     #   <p>The Amazon Web Services account in which this custom line item will be applied to.</p>
+    # @option params [String] :computation_rule
+    #   <p> Specifies how the custom line item charges are computed. </p>
+    # @option params [Types::PresentationObject] :presentation_details
+    #   <p> Details controlling how the custom line item charges are presented in the bill. Contains specifications for which service the charges will be shown under. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -481,16 +441,21 @@ module Aws::Billingconductor
     #         percentage_value: 1.0, # required
     #         associated_values: ["CustomLineItemAssociationElement"]
     #       },
-    #       type: "CustomLineItemType", # required
+    #       type: "CREDIT" # One of: ["CREDIT", "FEE"], # required
     #       line_item_filters: [
     #         {
-    #           attribute: "LineItemFilterAttributeName", # required
-    #           match_option: "MatchOption", # required
-    #           values: ["LineItemFilterValue"], # required
+    #           attribute: "LINE_ITEM_TYPE" # One of: ["LINE_ITEM_TYPE", "SERVICE"], # required
+    #           match_option: "NOT_EQUAL" # One of: ["NOT_EQUAL", "EQUAL"], # required
+    #           values: ["SAVINGS_PLAN_NEGATION" # One of: ["SAVINGS_PLAN_NEGATION"]],
+    #           attribute_values: ["AttributeValue"]
     #         }
     #       ]
     #     },
-    #     account_id: "AccountId"
+    #     account_id: "AccountId",
+    #     computation_rule: "ITEMIZED" # One of: ["ITEMIZED", "CONSOLIDATED"],
+    #     presentation_details: {
+    #       service: "Service", # required
+    #     }
     #   }
     #   options = {}
     #   response = client.create_custom_line_item(params, options)
@@ -505,13 +470,10 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>Creates a pricing plan that is used for computing Amazon Web Services charges for billing groups.
-    #     </p>
+    # <p>Creates a pricing plan that is used for computing Amazon Web Services charges for billing groups. </p>
     # @param [Hash, Types::CreatePricingPlanOperationInput] params
     # @option params [String] :client_token
-    #   <p>
-    #         The token that is needed to support idempotency. Idempotency isn't currently supported, but will be implemented in a future update. 
-    #       </p>
+    #   <p>A unique, case-sensitive identifier that you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. With an idempotent request, if the original request completes successfully, any subsequent retries complete successfully without performing any further actions.</p>
     # @option params [String] :name
     #   <p>The name of the pricing plan. The names must be unique to each pricing plan. </p>
     # @option params [String] :description
@@ -519,9 +481,7 @@ module Aws::Billingconductor
     # @option params [Array<String>] :pricing_rule_arns
     #   <p> A list of Amazon Resource Names (ARNs) that define the pricing plan parameters. </p>
     # @option params [Hash<String, String>] :tags
-    #   <p>
-    #         A map that contains tag keys and tag values that are attached to a pricing plan.
-    #       </p>
+    #   <p> A map that contains tag keys and tag values that are attached to a pricing plan. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
@@ -545,64 +505,39 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Creates a pricing rule can be associated to a pricing plan, or a set of pricing plans.
-    #     </p>
+    # <p> Creates a pricing rule can be associated to a pricing plan, or a set of pricing plans. </p>
     # @param [Hash, Types::CreatePricingRuleOperationInput] params
     # @option params [String] :client_token
-    #   <p> The token that's needed to support idempotency. Idempotency isn't currently supported,
-    #         but will be implemented in a future update. </p>
+    #   <p>A unique, case-sensitive identifier that you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. With an idempotent request, if the original request completes successfully, any subsequent retries complete successfully without performing any further actions.</p>
     # @option params [String] :name
-    #   <p>
-    #         The pricing rule name. The names must be unique to each pricing rule.
-    #       </p>
+    #   <p> The pricing rule name. The names must be unique to each pricing rule. </p>
     # @option params [String] :description
-    #   <p>
-    #         The pricing rule description.
-    #       </p>
+    #   <p> The pricing rule description. </p>
     # @option params [String] :scope
-    #   <p> The scope of pricing rule that indicates if it's globally applicable, or it's
-    #         service-specific. </p>
+    #   <p> The scope of pricing rule that indicates if it's globally applicable, or it's service-specific. </p>
     # @option params [String] :type
-    #   <p>
-    #         The type of pricing rule.
-    #       </p>
+    #   <p> The type of pricing rule. </p>
     # @option params [Float] :modifier_percentage
-    #   <p> A percentage modifier that's applied on the public pricing rates. </p>
+    #   <p>A percentage modifier that's applied on the public pricing rates. Your entry will be rounded to the nearest 2 decimal places.</p>
     # @option params [String] :service
-    #   <p>
-    #         If the <code>Scope</code> attribute is set to <code>SERVICE</code> or <code>SKU</code>, the attribute indicates which service the <code>PricingRule</code> is applicable for.
-    #       </p>
+    #   <p> If the <code>Scope</code> attribute is set to <code>SERVICE</code> or <code>SKU</code>, the attribute indicates which service the <code>PricingRule</code> is applicable for. </p>
     # @option params [Hash<String, String>] :tags
-    #   <p>
-    #         A map that contains tag keys and tag values that are attached to a pricing rule.
-    #       </p>
+    #   <p> A map that contains tag keys and tag values that are attached to a pricing rule. </p>
     # @option params [String] :billing_entity
-    #   <p>
-    #         The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace.
-    #       </p>
+    #   <p> The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. </p>
     # @option params [Types::CreateTieringInput] :tiering
-    #   <p>
-    #         The set of tiering configurations for the pricing rule.
-    #       </p>
+    #   <p> The set of tiering configurations for the pricing rule. </p>
     # @option params [String] :usage_type
-    #   <p>
-    #         Usage type is the unit that each service uses to measure the usage of a specific type of resource.</p>
-    #            <p>If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which usage type the <code>PricingRule</code> is modifying. For example, <code>USW2-BoxUsage:m2.2xlarge</code> describes an<code> M2 High Memory Double Extra Large</code> instance in the US West (Oregon) Region. 
-    #         
-    #       </p>
+    #   <p> Usage type is the unit that each service uses to measure the usage of a specific type of resource.</p> <p>If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which usage type the <code>PricingRule</code> is modifying. For example, <code>USW2-BoxUsage:m2.2xlarge</code> describes an<code> M2 High Memory Double Extra Large</code> instance in the US West (Oregon) Region. </p>
     # @option params [String] :operation
-    #   <p>
-    #         Operation is the specific Amazon Web Services action covered by this line item. This describes the specific usage of the line item.</p>
-    #            <p>
-    #           If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which operation the <code>PricingRule</code> is modifying. For example, a value of <code>RunInstances:0202</code> indicates the operation of running an Amazon EC2 instance.</p>
+    #   <p> Operation is the specific Amazon Web Services action covered by this line item. This describes the specific usage of the line item.</p> <p> If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which operation the <code>PricingRule</code> is modifying. For example, a value of <code>RunInstances:0202</code> indicates the operation of running an Amazon EC2 instance.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientToken",
     #     name: "PricingRuleName", # required
     #     description: "PricingRuleDescription",
-    #     scope: "PricingRuleScope", # required
-    #     type: "PricingRuleType", # required
+    #     scope: "GLOBAL" # One of: ["GLOBAL", "SERVICE", "BILLING_ENTITY", "SKU"], # required
+    #     type: "MARKUP" # One of: ["MARKUP", "DISCOUNT", "TIERING"], # required
     #     modifier_percentage: 1.0,
     #     service: "Service",
     #     tags: {
@@ -610,9 +545,16 @@ module Aws::Billingconductor
     #     },
     #     billing_entity: "BillingEntity",
     #     tiering: {
-    #       free_tier: { # required
+    #       free_tier: {
     #         activated: false, # required
-    #       }
+    #       },
+    #       custom_tiers: [
+    #         {
+    #           begin_range_inclusive: 1.0, # required
+    #           end_range_exclusive: 1.0,
+    #           rate_value: 1.0, # required
+    #         }
+    #       ]
     #     },
     #     usage_type: "UsageType",
     #     operation: "Operation"
@@ -630,9 +572,7 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Deletes a billing group.
-    #     </p>
+    # <p> Deletes a billing group. </p>
     # @param [Hash, Types::DeleteBillingGroupOperationInput] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the billing group that you're deleting.</p>
@@ -653,14 +593,10 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Deletes the custom line item identified by the given ARN in the current, or previous billing period.
-    #     </p>
+    # <p> Deletes the custom line item identified by the given ARN in the current, or previous billing period. </p>
     # @param [Hash, Types::DeleteCustomLineItemOperationInput] params
     # @option params [String] :arn
-    #   <p>
-    #         The ARN of the custom line item to be deleted.
-    #       </p>
+    #   <p> The ARN of the custom line item to be deleted. </p>
     # @option params [Types::CustomLineItemBillingPeriodRange] :billing_period_range
     #   <p>The billing period range in which the custom line item request will be applied.</p>
     # @example Request syntax with placeholder values
@@ -684,8 +620,7 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>Deletes a pricing plan. The pricing plan must not be associated with any billing groups to
-    #       delete successfully.</p>
+    # <p>Deletes a pricing plan. The pricing plan must not be associated with any billing groups to delete successfully.</p>
     # @param [Hash, Types::DeletePricingPlanOperationInput] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the pricing plan that you're deleting. </p>
@@ -730,11 +665,9 @@ module Aws::Billingconductor
     # <p>Removes the specified list of account IDs from the given billing group. </p>
     # @param [Hash, Types::DisassociateAccountsOperationInput] params
     # @option params [String] :arn
-    #   <p>The Amazon Resource Name (ARN) of the billing group that the array of account IDs will
-    #         disassociate from. </p>
+    #   <p>The Amazon Resource Name (ARN) of the billing group that the array of account IDs will disassociate from. </p>
     # @option params [Array<String>] :account_ids
-    #   <p>The array of account IDs to disassociate.
-    #       </p>
+    #   <p>The array of account IDs to disassociate. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "BillingGroupArn", # required
@@ -753,15 +686,12 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Disassociates a list of pricing rules from a pricing plan.
-    #     </p>
+    # <p> Disassociates a list of pricing rules from a pricing plan. </p>
     # @param [Hash, Types::DisassociatePricingRulesOperationInput] params
     # @option params [String] :arn
     #   <p> The pricing plan Amazon Resource Name (ARN) to disassociate pricing rules from. </p>
     # @option params [Array<String>] :pricing_rule_arns
-    #   <p> A list containing the Amazon Resource Name (ARN) of the pricing rules that will be
-    #         disassociated. </p>
+    #   <p> A list containing the Amazon Resource Name (ARN) of the pricing rules that will be disassociated. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "PricingPlanArn", # required
@@ -780,17 +710,14 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>Retrieves the margin summary report, which includes the Amazon Web Services cost and charged 
-    #       amount (pro forma cost) by Amazon Web Service for a specific billing group.</p>
+    # <p>Retrieves the margin summary report, which includes the Amazon Web Services cost and charged amount (pro forma cost) by Amazon Web Services service for a specific billing group.</p>
     # @param [Hash, Types::GetBillingGroupCostReportInput] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Number (ARN) that uniquely identifies the billing group.</p>
     # @option params [Types::BillingPeriodRange] :billing_period_range
     #   <p>A time range for which the margin summary is effective. You can specify up to 12 months.</p>
     # @option params [Array<String>] :group_by
-    #   <p>A list of strings that specify the attributes that are used to break down costs in the
-    #         margin summary reports for the billing group. For example, you can view your costs by the
-    #         Amazon Web Service name or the billing period.</p>
+    #   <p>A list of strings that specify the attributes that are used to break down costs in the margin summary reports for the billing group. For example, you can view your costs by the Amazon Web Services service name or the billing period.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of margin summary reports to retrieve.</p>
     # @option params [String] :next_token
@@ -802,7 +729,7 @@ module Aws::Billingconductor
     #       inclusive_start_billing_period: "BillingPeriod", # required
     #       exclusive_end_billing_period: "BillingPeriod", # required
     #     },
-    #     group_by: ["GroupByAttributeName"],
+    #     group_by: ["PRODUCT_NAME" # One of: ["PRODUCT_NAME", "BILLING_PERIOD"]],
     #     max_results: 1,
     #     next_token: "Token"
     #   }
@@ -835,28 +762,40 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p> This is a paginated call to list linked accounts that are linked to the payer account for
-    #       the specified time period. If no information is provided, the current billing period is used.
-    #       The response will optionally include the billing group that's associated with the linked
-    #       account.</p>
+    # <p>Retrieves the auto billing group creation preference for a billing transfer.</p>
+    # @param [Hash, Types::GetBillingTransferPreferenceInput] params
+    # @option params [String] :responsibility_transfer_arn
+    #   <p>The Amazon Resource Name (ARN) of the billing transfer whose preference you want to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     responsibility_transfer_arn: "ResponsibilityTransferArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_billing_transfer_preference(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     responsibility_transfer_arn: "ResponsibilityTransferArn", # required
+    #     auto_billing_transfer_billing_group_creation: { # required
+    #       enabled: false, # required
+    #       pricing_plan_arn: "PricingPlanArn"
+    #     },
+    #     last_modified_time: 1
+    #   }
+    # @return [Types::GetBillingTransferPreferenceOutput]
+    def get_billing_transfer_preference(params = {}, options = {})
+      request = build_request(:get_billing_transfer_preference, params)
+      request.send_request(options)
+    end
+
+    # <p> This is a paginated call to list linked accounts that are linked to the payer account for the specified time period. If no information is provided, the current billing period is used. The response will optionally include the billing group that's associated with the linked account.</p>
     # @param [Hash, Types::ListAccountAssociationsOperationInput] params
     # @option params [String] :billing_period
-    #   <p>
-    #         The preferred billing period to get account associations.
-    #       </p>
+    #   <p> The preferred billing period to get account associations. </p>
     # @option params [Types::ListAccountAssociationsFilter] :filters
-    #   <p>The filter on the account ID of the linked account, or any of the following:</p>
-    #            <p>
-    #               <code>MONITORED</code>: linked accounts that are associated to billing groups.</p>
-    #            <p>
-    #               <code>UNMONITORED</code>: linked accounts that aren't associated to billing groups.</p>
-    #            <p>
-    #               <code>Billing Group Arn</code>: linked accounts that are associated to the provided
-    #         billing group Arn. </p>
+    #   <p>The filter on the account ID of the linked account, or any of the following:</p> <p> <code>MONITORED</code>: linked accounts that are associated to billing groups.</p> <p> <code>UNMONITORED</code>: linked accounts that aren't associated to billing groups.</p> <p> <code>Billing Group Arn</code>: linked accounts that are associated to the provided billing group Arn. </p>
     # @option params [String] :next_token
-    #   <p>
-    #         The pagination token that's used on subsequent calls to retrieve accounts.
-    #       </p>
+    #   <p> The pagination token that's used on subsequent calls to retrieve accounts. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     billing_period: "BillingPeriod",
@@ -888,21 +827,16 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>A paginated call to retrieve a summary report of actual Amazon Web Services charges and the calculated
-    #       Amazon Web Services charges based on the associated pricing plan of a billing group.</p>
+    # <p>A paginated call to retrieve a summary report of actual Amazon Web Services charges and the calculated Amazon Web Services charges based on the associated pricing plan of a billing group.</p>
     # @param [Hash, Types::ListBillingGroupCostReportsOperationInput] params
     # @option params [String] :billing_period
-    #   <p>The preferred billing period for your report.
-    #       </p>
+    #   <p>The preferred billing period for your report. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of reports to retrieve.
-    #       </p>
+    #   <p>The maximum number of reports to retrieve. </p>
     # @option params [String] :next_token
-    #   <p>The pagination token that's used on subsequent calls to get reports.
-    #       </p>
+    #   <p>The pagination token that's used on subsequent calls to get reports. </p>
     # @option params [Types::ListBillingGroupCostReportsFilter] :filters
-    #   <p>A <code>ListBillingGroupCostReportsFilter</code> to specify billing groups to retrieve reports from.
-    #       </p>
+    #   <p>A <code>ListBillingGroupCostReportsFilter</code> to specify billing groups to retrieve reports from. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     billing_period: "BillingPeriod",
@@ -938,17 +872,13 @@ module Aws::Billingconductor
     # <p>A paginated call to retrieve a list of billing groups for the given billing period. If you don't provide a billing group, the current billing period is used.</p>
     # @param [Hash, Types::ListBillingGroupsOperationInput] params
     # @option params [String] :billing_period
-    #   <p>The preferred billing period to get billing groups.
-    #       </p>
+    #   <p>The preferred billing period to get billing groups. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of billing groups to retrieve.
-    #       </p>
+    #   <p>The maximum number of billing groups to retrieve. </p>
     # @option params [String] :next_token
-    #   <p>The pagination token that's used on subsequent calls to get billing groups.
-    #       </p>
+    #   <p>The pagination token that's used on subsequent calls to get billing groups. </p>
     # @option params [Types::ListBillingGroupsFilter] :filters
-    #   <p>A <code>ListBillingGroupsFilter</code> that specifies the billing group and pricing plan to retrieve billing group information.
-    #       </p>
+    #   <p>A <code>ListBillingGroupsFilter</code> that specifies the billing group and pricing plan to retrieve billing group information. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     billing_period: "BillingPeriod",
@@ -957,8 +887,17 @@ module Aws::Billingconductor
     #     filters: {
     #       arns: ["BillingGroupArn"],
     #       pricing_plan: "PricingPlanFullArn",
-    #       statuses: ["BillingGroupStatus"],
-    #       auto_associate: false
+    #       statuses: ["ACTIVE" # One of: ["ACTIVE", "PRIMARY_ACCOUNT_MISSING", "PENDING"]],
+    #       auto_associate: false,
+    #       primary_account_ids: ["AccountId"],
+    #       billing_group_types: ["STANDARD" # One of: ["STANDARD", "TRANSFER_BILLING"]],
+    #       names: [
+    #         {
+    #           search_option: "STARTS_WITH" # One of: ["STARTS_WITH"], # required
+    #           search_value: "SearchValue", # required
+    #         }
+    #       ],
+    #       responsibility_transfer_arns: ["ResponsibilityTransferArn"]
     #     }
     #   }
     #   options = {}
@@ -978,11 +917,13 @@ module Aws::Billingconductor
     #         size: 1,
     #         creation_time: 1,
     #         last_modified_time: 1,
-    #         status: "BillingGroupStatus",
+    #         status: "ACTIVE" # One of: ["ACTIVE", "PRIMARY_ACCOUNT_MISSING", "PENDING"],
     #         status_reason: "BillingGroupStatusReason",
     #         account_grouping: {
-    #           auto_associate: false
-    #         }
+    #           auto_associate: false,
+    #           responsibility_transfer_arn: "ResponsibilityTransferArn"
+    #         },
+    #         billing_group_type: "STANDARD" # One of: ["STANDARD", "TRANSFER_BILLING"]
     #       }
     #     ],
     #     next_token: "Token"
@@ -1030,16 +971,17 @@ module Aws::Billingconductor
     #           percentage: {
     #             percentage_value: 1.0, # required
     #           },
-    #           type: "CustomLineItemType", # required
+    #           type: "CREDIT" # One of: ["CREDIT", "FEE"], # required
     #           line_item_filters: [
     #             {
-    #               attribute: "LineItemFilterAttributeName", # required
-    #               match_option: "MatchOption", # required
-    #               values: ["LineItemFilterValue"], # required
+    #               attribute: "LINE_ITEM_TYPE" # One of: ["LINE_ITEM_TYPE", "SERVICE"], # required
+    #               match_option: "NOT_EQUAL" # One of: ["NOT_EQUAL", "EQUAL"], # required
+    #               values: ["SAVINGS_PLAN_NEGATION" # One of: ["SAVINGS_PLAN_NEGATION"]],
+    #               attribute_values: ["AttributeValue"]
     #             }
     #           ]
     #         },
-    #         currency_code: "CurrencyCode",
+    #         currency_code: "USD" # One of: ["USD", "CNY"],
     #         description: "CustomLineItemDescription",
     #         product_code: "CustomLineItemProductCode",
     #         billing_group_arn: "BillingGroupArn",
@@ -1050,7 +992,11 @@ module Aws::Billingconductor
     #         end_billing_period: "BillingPeriod",
     #         arn: "CustomLineItemArn",
     #         start_time: 1,
-    #         account_id: "AccountId"
+    #         account_id: "AccountId",
+    #         computation_rule: "ITEMIZED" # One of: ["ITEMIZED", "CONSOLIDATED"],
+    #         presentation_details: {
+    #           service: "Service", # required
+    #         }
     #       }
     #     ],
     #     next_token: "Token"
@@ -1061,25 +1007,16 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       A paginated call to get a list of all custom line items (FFLIs) for the given billing period. If you don't provide a billing period, the current billing period is used.
-    #     </p>
+    # <p> A paginated call to get a list of all custom line items (FFLIs) for the given billing period. If you don't provide a billing period, the current billing period is used. </p>
     # @param [Hash, Types::ListCustomLineItemsOperationInput] params
     # @option params [String] :billing_period
-    #   <p>
-    #         The preferred billing period to get custom line items (FFLIs).
-    #       </p>
+    #   <p> The preferred billing period to get custom line items (FFLIs). </p>
     # @option params [Integer] :max_results
-    #   <p>
-    #         The maximum number of billing groups to retrieve.
-    #       </p>
+    #   <p> The maximum number of billing groups to retrieve. </p>
     # @option params [String] :next_token
-    #   <p>
-    #         The pagination token that's used on subsequent calls to get custom line items (FFLIs).
-    #       </p>
+    #   <p> The pagination token that's used on subsequent calls to get custom line items (FFLIs). </p>
     # @option params [Types::ListCustomLineItemsFilter] :filters
-    #   <p>A <code>ListCustomLineItemsFilter</code> that specifies the custom line item names
-    #         and/or billing group Amazon Resource Names (ARNs) to retrieve FFLI information.</p>
+    #   <p>A <code>ListCustomLineItemsFilter</code> that specifies the custom line item names and/or billing group Amazon Resource Names (ARNs) to retrieve FFLI information.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     billing_period: "BillingPeriod",
@@ -1108,23 +1045,28 @@ module Aws::Billingconductor
     #           percentage: {
     #             percentage_value: 1.0, # required
     #           },
-    #           type: "CustomLineItemType", # required
+    #           type: "CREDIT" # One of: ["CREDIT", "FEE"], # required
     #           line_item_filters: [
     #             {
-    #               attribute: "LineItemFilterAttributeName", # required
-    #               match_option: "MatchOption", # required
-    #               values: ["LineItemFilterValue"], # required
+    #               attribute: "LINE_ITEM_TYPE" # One of: ["LINE_ITEM_TYPE", "SERVICE"], # required
+    #               match_option: "NOT_EQUAL" # One of: ["NOT_EQUAL", "EQUAL"], # required
+    #               values: ["SAVINGS_PLAN_NEGATION" # One of: ["SAVINGS_PLAN_NEGATION"]],
+    #               attribute_values: ["AttributeValue"]
     #             }
     #           ]
     #         },
-    #         currency_code: "CurrencyCode",
+    #         currency_code: "USD" # One of: ["USD", "CNY"],
     #         description: "CustomLineItemDescription",
     #         product_code: "CustomLineItemProductCode",
     #         billing_group_arn: "BillingGroupArn",
     #         creation_time: 1,
     #         last_modified_time: 1,
     #         association_size: 1,
-    #         account_id: "AccountId"
+    #         account_id: "AccountId",
+    #         computation_rule: "ITEMIZED" # One of: ["ITEMIZED", "CONSOLIDATED"],
+    #         presentation_details: {
+    #           service: "Service", # required
+    #         }
     #       }
     #     ],
     #     next_token: "Token"
@@ -1135,20 +1077,16 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>A paginated call to get pricing plans for the given billing period. If you don't provide a billing period, the current billing period is used.
-    #     </p>
+    # <p>A paginated call to get pricing plans for the given billing period. If you don't provide a billing period, the current billing period is used. </p>
     # @param [Hash, Types::ListPricingPlansOperationInput] params
     # @option params [String] :billing_period
-    #   <p>The preferred billing period to get pricing plan.
-    #       </p>
+    #   <p>The preferred billing period to get pricing plan. </p>
     # @option params [Types::ListPricingPlansFilter] :filters
-    #   <p>A <code>ListPricingPlansFilter</code> that specifies the Amazon Resource Name (ARNs)
-    #         of pricing plans to retrieve pricing plans information.</p>
+    #   <p>A <code>ListPricingPlansFilter</code> that specifies the Amazon Resource Name (ARNs) of pricing plans to retrieve pricing plans information.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of pricing plans to retrieve.</p>
     # @option params [String] :next_token
-    #   <p>The pagination token that's used on subsequent call to get pricing plans.
-    #       </p>
+    #   <p>The pagination token that's used on subsequent call to get pricing plans. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     billing_period: "BillingPeriod",
@@ -1182,24 +1120,16 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       A list of the pricing plans that are associated with a pricing rule.
-    #     </p>
+    # <p> A list of the pricing plans that are associated with a pricing rule. </p>
     # @param [Hash, Types::ListPricingPlansAssociatedWithPricingRuleOperationInput] params
     # @option params [String] :billing_period
-    #   <p>
-    #         The pricing plan billing period for which associations will be listed.
-    #       </p>
+    #   <p> The pricing plan billing period for which associations will be listed. </p>
     # @option params [String] :pricing_rule_arn
     #   <p> The pricing rule Amazon Resource Name (ARN) for which associations will be listed. </p>
     # @option params [Integer] :max_results
-    #   <p>
-    #         The optional maximum number of pricing rule associations to retrieve. 
-    #       </p>
+    #   <p> The optional maximum number of pricing rule associations to retrieve. </p>
     # @option params [String] :next_token
-    #   <p>
-    #         The optional pagination token returned by a previous call.
-    #       </p>
+    #   <p> The optional pagination token returned by a previous call. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     billing_period: "BillingPeriod",
@@ -1223,25 +1153,16 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Describes a pricing rule that can be associated to a pricing plan, or set of pricing plans.
-    #     </p>
+    # <p> Describes a pricing rule that can be associated to a pricing plan, or set of pricing plans. </p>
     # @param [Hash, Types::ListPricingRulesOperationInput] params
     # @option params [String] :billing_period
-    #   <p>
-    #         The preferred billing period to get the pricing plan.
-    #       </p>
+    #   <p> The preferred billing period to get the pricing plan. </p>
     # @option params [Types::ListPricingRulesFilter] :filters
-    #   <p> A <code>DescribePricingRuleFilter</code> that specifies the Amazon Resource Name (ARNs)
-    #         of pricing rules to retrieve pricing rules information. </p>
+    #   <p> A <code>DescribePricingRuleFilter</code> that specifies the Amazon Resource Name (ARNs) of pricing rules to retrieve pricing rules information. </p>
     # @option params [Integer] :max_results
-    #   <p>
-    #         The maximum number of pricing rules to retrieve.
-    #       </p>
+    #   <p> The maximum number of pricing rules to retrieve. </p>
     # @option params [String] :next_token
-    #   <p>
-    #         The pagination token that's used on subsequent call to get pricing rules.
-    #       </p>
+    #   <p> The pagination token that's used on subsequent call to get pricing rules. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     billing_period: "BillingPeriod",
@@ -1262,8 +1183,8 @@ module Aws::Billingconductor
     #         name: "PricingRuleName",
     #         arn: "PricingRuleArn",
     #         description: "PricingRuleDescription",
-    #         scope: "PricingRuleScope",
-    #         type: "PricingRuleType",
+    #         scope: "GLOBAL" # One of: ["GLOBAL", "SERVICE", "BILLING_ENTITY", "SKU"],
+    #         type: "MARKUP" # One of: ["MARKUP", "DISCOUNT", "TIERING"],
     #         modifier_percentage: 1.0,
     #         service: "Service",
     #         associated_pricing_plan_count: 1,
@@ -1271,9 +1192,16 @@ module Aws::Billingconductor
     #         last_modified_time: 1,
     #         billing_entity: "BillingEntity",
     #         tiering: {
-    #           free_tier: { # required
+    #           free_tier: {
     #             activated: false, # required
-    #           }
+    #           },
+    #           custom_tiers: [
+    #             {
+    #               begin_range_inclusive: 1.0, # required
+    #               end_range_exclusive: 1.0,
+    #               rate_value: 1.0, # required
+    #             }
+    #           ]
     #         },
     #         usage_type: "UsageType",
     #         operation: "Operation"
@@ -1287,23 +1215,16 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Lists the pricing rules that are associated with a pricing plan.
-    #     </p>
+    # <p> Lists the pricing rules that are associated with a pricing plan. </p>
     # @param [Hash, Types::ListPricingRulesAssociatedToPricingPlanOperationInput] params
     # @option params [String] :billing_period
-    #   <p>
-    #         The billing period for which the pricing rule associations are to be listed.
-    #       </p>
+    #   <p> The billing period for which the pricing rule associations are to be listed. </p>
     # @option params [String] :pricing_plan_arn
-    #   <p> The Amazon Resource Name (ARN) of the pricing plan for which associations are to be
-    #         listed.</p>
+    #   <p> The Amazon Resource Name (ARN) of the pricing plan for which associations are to be listed.</p>
     # @option params [Integer] :max_results
     #   <p>The optional maximum number of pricing rule associations to retrieve.</p>
     # @option params [String] :next_token
-    #   <p>
-    #         The optional pagination token returned by a previous call.
-    #       </p>
+    #   <p> The optional pagination token returned by a previous call. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     billing_period: "BillingPeriod",
@@ -1327,28 +1248,18 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       List the resources that are associated to a custom line item.
-    #     </p>
+    # <p> List the resources that are associated to a custom line item. </p>
     # @param [Hash, Types::ListResourcesAssociatedToCustomLineItemOperationInput] params
     # @option params [String] :billing_period
-    #   <p>
-    #         The billing period for which the resource associations will be listed.
-    #       </p>
+    #   <p> The billing period for which the resource associations will be listed. </p>
     # @option params [String] :arn
-    #   <p>
-    #         The ARN of the custom line item for which the resource associations will be listed.
-    #       </p>
+    #   <p> The ARN of the custom line item for which the resource associations will be listed. </p>
     # @option params [Integer] :max_results
-    #   <p>
-    #         (Optional) The maximum number of resource associations to be retrieved.
-    #       </p>
+    #   <p> (Optional) The maximum number of resource associations to be retrieved. </p>
     # @option params [String] :next_token
     #   <p> (Optional) The pagination token that's returned by a previous request. </p>
     # @option params [Types::ListResourcesAssociatedToCustomLineItemFilter] :filters
-    #   <p>
-    #         (Optional) A <code>ListResourcesAssociatedToCustomLineItemFilter</code> that can specify the types of resources that should be retrieved. 
-    #       </p>
+    #   <p> (Optional) A <code>ListResourcesAssociatedToCustomLineItemFilter</code> that can specify the types of resources that should be retrieved. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     billing_period: "BillingPeriod",
@@ -1356,7 +1267,7 @@ module Aws::Billingconductor
     #     max_results: 1,
     #     next_token: "Token",
     #     filters: {
-    #       relationship: "CustomLineItemRelationship"
+    #       relationship: "PARENT" # One of: ["PARENT", "CHILD"]
     #     }
     #   }
     #   options = {}
@@ -1368,7 +1279,7 @@ module Aws::Billingconductor
     #     associated_resources: [
     #       {
     #         arn: "CustomLineItemAssociationElement",
-    #         relationship: "CustomLineItemRelationship",
+    #         relationship: "PARENT" # One of: ["PARENT", "CHILD"],
     #         end_billing_period: "BillingPeriod"
     #       }
     #     ],
@@ -1380,14 +1291,10 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       A list the tags for a resource.
-    #     </p>
+    # <p> A list the tags for a resource. </p>
     # @param [Hash, Types::ListTagsForResourceInput] params
     # @option params [String] :resource_arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) that identifies the resource to list the tags.
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) that identifies the resource to list the tags. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -1407,18 +1314,12 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p> Associates the specified tags to a resource with the specified <code>resourceArn</code>.
-    #       If existing tags on a resource are not specified in the request parameters, they are not
-    #       changed. </p>
+    # <p> Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. </p>
     # @param [Hash, Types::TagResourceInput] params
     # @option params [String] :resource_arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) of the resource to which to add tags.
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) of the resource to which to add tags. </p>
     # @option params [Hash<String, String>] :tags
-    #   <p>
-    #         The tags to add to the resource as a list of key-value pairs.
-    #       </p>
+    #   <p> The tags to add to the resource as a list of key-value pairs. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -1437,18 +1338,12 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Deletes specified tags from a resource.
-    #     </p>
+    # <p> Deletes specified tags from a resource. </p>
     # @param [Hash, Types::UntagResourceInput] params
     # @option params [String] :resource_arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) of the resource to which to delete tags.
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) of the resource to which to delete tags. </p>
     # @option params [Array<String>] :tag_keys
-    #   <p>
-    #         The tags to delete from the resource as a list of key-value pairs.
-    #       </p>
+    #   <p> The tags to delete from the resource as a list of key-value pairs. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -1465,38 +1360,32 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>This updates an existing billing group.
-    #     </p>
+    # <p>This updates an existing billing group. </p>
     # @param [Hash, Types::UpdateBillingGroupOperationInput] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the billing group being updated. </p>
     # @option params [String] :name
-    #   <p>The name of the billing group. The names must be unique to each billing group.
-    #       </p>
+    #   <p>The name of the billing group. The names must be unique to each billing group. </p>
     # @option params [String] :status
-    #   <p>The status of the billing group. Only one of the valid values can be used.
-    #       </p>
+    #   <p>The status of the billing group. Only one of the valid values can be used. </p>
     # @option params [Types::ComputationPreference] :computation_preference
-    #   <p>
-    #         The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.
-    #       </p>
+    #   <p> The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group. </p>
     # @option params [String] :description
-    #   <p>A description of the billing group. 
-    #       </p>
+    #   <p>A description of the billing group. </p>
     # @option params [Types::UpdateBillingGroupAccountGrouping] :account_grouping
-    #   <p>Specifies if the billing group has automatic account
-    #   association (<code>AutoAssociate</code>) enabled.</p>
+    #   <p>Specifies if the billing group has automatic account association (<code>AutoAssociate</code>) enabled.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "BillingGroupArn", # required
     #     name: "BillingGroupName",
-    #     status: "BillingGroupStatus",
+    #     status: "ACTIVE" # One of: ["ACTIVE", "PRIMARY_ACCOUNT_MISSING", "PENDING"],
     #     computation_preference: {
     #       pricing_plan_arn: "PricingPlanFullArn", # required
     #     },
     #     description: "BillingGroupDescription",
     #     account_grouping: {
-    #       auto_associate: false
+    #       auto_associate: false,
+    #       responsibility_transfer_arn: "ResponsibilityTransferArn"
     #     }
     #   }
     #   options = {}
@@ -1511,10 +1400,11 @@ module Aws::Billingconductor
     #     pricing_plan_arn: "PricingPlanArn",
     #     size: 1,
     #     last_modified_time: 1,
-    #     status: "BillingGroupStatus",
+    #     status: "ACTIVE" # One of: ["ACTIVE", "PRIMARY_ACCOUNT_MISSING", "PENDING"],
     #     status_reason: "BillingGroupStatusReason",
     #     account_grouping: {
-    #       auto_associate: false
+    #       auto_associate: false,
+    #       responsibility_transfer_arn: "ResponsibilityTransferArn"
     #     }
     #   }
     # @return [Types::UpdateBillingGroupOperationOutput]
@@ -1523,26 +1413,51 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Update an existing custom line item in the current or previous billing period.
-    #     </p>
+    # <p>Sets the auto billing group creation preference for a billing transfer. When the preference is enabled, Billing Conductor automatically creates an indirect billing transfer billing group in your account, with the pricing plan that you specify, for each account that transfers its bill to the bill source account of this billing transfer. The preference applies only to billing groups that are created after you enable it.</p> <p>Enabling the preference requires the <code>iam:CreateServiceLinkedRole</code> permission. While a pricing plan is specified in an enabled preference, you can't delete that pricing plan.</p>
+    # @param [Hash, Types::UpdateBillingTransferPreferenceInput] params
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. With an idempotent request, if the original request completes successfully, any subsequent retries complete successfully without performing any further actions.</p>
+    # @option params [String] :responsibility_transfer_arn
+    #   <p>The Amazon Resource Name (ARN) of the billing transfer whose preference you want to set.</p>
+    # @option params [Types::AutoTransferBillingGroupCreationPreference] :auto_billing_transfer_billing_group_creation
+    #   <p>The auto billing group creation preference to set for the billing transfer.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "ClientToken",
+    #     responsibility_transfer_arn: "ResponsibilityTransferArn", # required
+    #     auto_billing_transfer_billing_group_creation: { # required
+    #       enabled: false, # required
+    #       pricing_plan_arn: "PricingPlanArn"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_billing_transfer_preference(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     responsibility_transfer_arn: "ResponsibilityTransferArn", # required
+    #     auto_billing_transfer_billing_group_creation: { # required
+    #       enabled: false, # required
+    #       pricing_plan_arn: "PricingPlanArn"
+    #     },
+    #     last_modified_time: 1, # required
+    #   }
+    # @return [Types::UpdateBillingTransferPreferenceOutput]
+    def update_billing_transfer_preference(params = {}, options = {})
+      request = build_request(:update_billing_transfer_preference, params)
+      request.send_request(options)
+    end
+
+    # <p> Update an existing custom line item in the current or previous billing period. </p>
     # @param [Hash, Types::UpdateCustomLineItemOperationInput] params
     # @option params [String] :arn
-    #   <p>
-    #         The ARN of the custom line item to be updated.
-    #       </p>
+    #   <p> The ARN of the custom line item to be updated. </p>
     # @option params [String] :name
-    #   <p>
-    #         The new name for the custom line item.
-    #       </p>
+    #   <p> The new name for the custom line item. </p>
     # @option params [String] :description
-    #   <p>
-    #         The new line item description of the custom line item.
-    #       </p>
+    #   <p> The new line item description of the custom line item. </p>
     # @option params [Types::UpdateCustomLineItemChargeDetails] :charge_details
-    #   <p>
-    #         A <code>ListCustomLineItemChargeDetails</code> containing the new charge details for the custom line item.
-    #       </p>
+    #   <p> A <code>ListCustomLineItemChargeDetails</code> containing the new charge details for the custom line item. </p>
     # @option params [Types::CustomLineItemBillingPeriodRange] :billing_period_range
     #   <p>The billing period range in which the custom line item request will be applied.</p>
     # @example Request syntax with placeholder values
@@ -1559,9 +1474,10 @@ module Aws::Billingconductor
     #       },
     #       line_item_filters: [
     #         {
-    #           attribute: "LineItemFilterAttributeName", # required
-    #           match_option: "MatchOption", # required
-    #           values: ["LineItemFilterValue"], # required
+    #           attribute: "LINE_ITEM_TYPE" # One of: ["LINE_ITEM_TYPE", "SERVICE"], # required
+    #           match_option: "NOT_EQUAL" # One of: ["NOT_EQUAL", "EQUAL"], # required
+    #           values: ["SAVINGS_PLAN_NEGATION" # One of: ["SAVINGS_PLAN_NEGATION"]],
+    #           attribute_values: ["AttributeValue"]
     #         }
     #       ]
     #     },
@@ -1586,12 +1502,13 @@ module Aws::Billingconductor
     #       percentage: {
     #         percentage_value: 1.0, # required
     #       },
-    #       type: "CustomLineItemType", # required
+    #       type: "CREDIT" # One of: ["CREDIT", "FEE"], # required
     #       line_item_filters: [
     #         {
-    #           attribute: "LineItemFilterAttributeName", # required
-    #           match_option: "MatchOption", # required
-    #           values: ["LineItemFilterValue"], # required
+    #           attribute: "LINE_ITEM_TYPE" # One of: ["LINE_ITEM_TYPE", "SERVICE"], # required
+    #           match_option: "NOT_EQUAL" # One of: ["NOT_EQUAL", "EQUAL"], # required
+    #           values: ["SAVINGS_PLAN_NEGATION" # One of: ["SAVINGS_PLAN_NEGATION"]],
+    #           attribute_values: ["AttributeValue"]
     #         }
     #       ]
     #     },
@@ -1604,14 +1521,12 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>This updates an existing pricing plan.
-    #     </p>
+    # <p>This updates an existing pricing plan. </p>
     # @param [Hash, Types::UpdatePricingPlanOperationInput] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the pricing plan that you're updating. </p>
     # @option params [String] :name
-    #   <p>The name of the pricing plan. The name must be unique to each pricing plan.
-    #       </p>
+    #   <p>The name of the pricing plan. The name must be unique to each pricing plan. </p>
     # @option params [String] :description
     #   <p>The description of the pricing plan. </p>
     # @example Request syntax with placeholder values
@@ -1637,43 +1552,38 @@ module Aws::Billingconductor
       request.send_request(options)
     end
 
-    # <p>
-    #       Updates an existing pricing rule.
-    #     </p>
+    # <p> Updates an existing pricing rule. </p>
     # @param [Hash, Types::UpdatePricingRuleOperationInput] params
     # @option params [String] :arn
     #   <p> The Amazon Resource Name (ARN) of the pricing rule to update. </p>
     # @option params [String] :name
-    #   <p>
-    #         The new name of the pricing rule. The name must be unique to each pricing rule.
-    #       </p>
+    #   <p> The new name of the pricing rule. The name must be unique to each pricing rule. </p>
     # @option params [String] :description
-    #   <p>
-    #         The new description for the pricing rule.
-    #       </p>
+    #   <p> The new description for the pricing rule. </p>
     # @option params [String] :type
-    #   <p>
-    #         The new pricing rule type.
-    #       </p>
+    #   <p> The new pricing rule type. </p>
     # @option params [Float] :modifier_percentage
-    #   <p>
-    #         The new modifier to show pricing plan rates as a percentage.
-    #       </p>
+    #   <p> The new modifier to show pricing plan rates as a percentage. Your entry will be rounded to the nearest 2 decimal places. </p>
     # @option params [Types::UpdateTieringInput] :tiering
-    #   <p>
-    #         The set of tiering configurations for the pricing rule.
-    #       </p>
+    #   <p> The set of tiering configurations for the pricing rule. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "PricingRuleArn", # required
     #     name: "PricingRuleName",
     #     description: "PricingRuleDescription",
-    #     type: "PricingRuleType",
+    #     type: "MARKUP" # One of: ["MARKUP", "DISCOUNT", "TIERING"],
     #     modifier_percentage: 1.0,
     #     tiering: {
-    #       free_tier: { # required
+    #       free_tier: {
     #         activated: false, # required
-    #       }
+    #       },
+    #       custom_tiers: [
+    #         {
+    #           begin_range_inclusive: 1.0, # required
+    #           end_range_exclusive: 1.0,
+    #           rate_value: 1.0, # required
+    #         }
+    #       ]
     #     }
     #   }
     #   options = {}
@@ -1684,17 +1594,24 @@ module Aws::Billingconductor
     #     arn: "PricingRuleArn",
     #     name: "PricingRuleName",
     #     description: "PricingRuleDescription",
-    #     scope: "PricingRuleScope",
-    #     type: "PricingRuleType",
+    #     scope: "GLOBAL" # One of: ["GLOBAL", "SERVICE", "BILLING_ENTITY", "SKU"],
+    #     type: "MARKUP" # One of: ["MARKUP", "DISCOUNT", "TIERING"],
     #     modifier_percentage: 1.0,
     #     service: "Service",
     #     associated_pricing_plan_count: 1,
     #     last_modified_time: 1,
     #     billing_entity: "BillingEntity",
     #     tiering: {
-    #       free_tier: { # required
+    #       free_tier: {
     #         activated: false, # required
-    #       }
+    #       },
+    #       custom_tiers: [
+    #         {
+    #           begin_range_inclusive: 1.0, # required
+    #           end_range_exclusive: 1.0,
+    #           rate_value: 1.0, # required
+    #         }
+    #       ]
     #     },
     #     usage_type: "UsageType",
     #     operation: "Operation"

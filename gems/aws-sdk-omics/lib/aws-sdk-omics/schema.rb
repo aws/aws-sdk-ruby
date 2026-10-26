@@ -34,11 +34,23 @@ module Aws::Omics
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:([^:\n]*):([^:\n]*):([^:\n]*):([0-9]{12}):([^:\n]*)$"})
     ArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#ArnList", name: "ArnList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#uniqueItems" => {}})
     AwsAccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#AwsAccountId", name: "AwsAccountId", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^[0-9]+$"})
+    BatchArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#BatchArn", name: "BatchArn", traits: {"aws.api#arnReference" => {"type" => "AWS::Omics::RunBatch"}, "smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:.+$"})
     BatchDeleteReadSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#BatchDeleteReadSetRequest", name: "BatchDeleteReadSetRequest")
     BatchDeleteReadSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#BatchDeleteReadSetResponse", name: "BatchDeleteReadSetResponse")
+    BatchId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#BatchId", name: "BatchId", traits: {"smithy.api#length" => {"min" => 1, "max" => 18}, "smithy.api#pattern" => "^[0-9]+$"})
+    BatchList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#BatchList", name: "BatchList")
+    BatchListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#BatchListItem", name: "BatchListItem")
+    BatchName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#BatchName", name: "BatchName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    BatchRequestId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#BatchRequestId", name: "BatchRequestId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    BatchRunSettings = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.omics#BatchRunSettings", name: "BatchRunSettings")
+    BatchStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#BatchStatus", name: "BatchStatus", traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING"}, {"name" => "PENDING", "value" => "PENDING"}, {"name" => "SUBMITTING", "value" => "SUBMITTING"}, {"name" => "INPROGRESS", "value" => "INPROGRESS"}, {"name" => "STOPPING", "value" => "STOPPING"}, {"name" => "CANCELLED", "value" => "CANCELLED"}, {"name" => "FAILED", "value" => "FAILED"}, {"name" => "PROCESSED", "value" => "PROCESSED"}, {"name" => "RUNS_DELETING", "value" => "RUNS_DELETING"}, {"name" => "RUNS_DELETE_FAILED", "value" => "RUNS_DELETE_FAILED"}, {"name" => "RUNS_DELETED", "value" => "RUNS_DELETED"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
+    BatchTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.omics#BatchTimestamp", name: "BatchTimestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
+    BatchUuid = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#BatchUuid", name: "BatchUuid", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     CacheBehavior = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#CacheBehavior", name: "CacheBehavior", traits: {"smithy.api#enum" => [{"name" => "CACHE_ON_FAILURE", "value" => "CACHE_ON_FAILURE"}, {"name" => "CACHE_ALWAYS", "value" => "CACHE_ALWAYS"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
     CancelAnnotationImportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CancelAnnotationImportRequest", name: "CancelAnnotationImportRequest")
     CancelAnnotationImportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CancelAnnotationImportResponse", name: "CancelAnnotationImportResponse")
+    CancelRunBatchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CancelRunBatchRequest", name: "CancelRunBatchRequest")
+    CancelRunBatchResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CancelRunBatchResponse", name: "CancelRunBatchResponse")
     CancelRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CancelRunRequest", name: "CancelRunRequest")
     CancelVariantImportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CancelVariantImportRequest", name: "CancelVariantImportRequest")
     CancelVariantImportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CancelVariantImportResponse", name: "CancelVariantImportResponse")
@@ -49,6 +61,17 @@ module Aws::Omics
     CompleteReadSetUploadPartList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#CompleteReadSetUploadPartList", name: "CompleteReadSetUploadPartList")
     CompleteReadSetUploadPartListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CompleteReadSetUploadPartListItem", name: "CompleteReadSetUploadPartListItem")
     CompletionTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.omics#CompletionTime", name: "CompletionTime", traits: {"smithy.api#timestampFormat" => "date-time"})
+    ConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ConfigurationArn", name: "ConfigurationArn", traits: {"aws.api#arnReference" => {"type" => "AWS::Omics::Configuration"}, "smithy.api#length" => {"min" => 1, "max" => 190}, "smithy.api#pattern" => "^arn:.+$"})
+    ConfigurationDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ConfigurationDescription", name: "ConfigurationDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    ConfigurationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ConfigurationDetails", name: "ConfigurationDetails")
+    ConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#ConfigurationList", name: "ConfigurationList")
+    ConfigurationListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ConfigurationListItem", name: "ConfigurationListItem")
+    ConfigurationListToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ConfigurationListToken", name: "ConfigurationListToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    ConfigurationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ConfigurationName", name: "ConfigurationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9][A-Za-z0-9\\-\\._]*$"})
+    ConfigurationRequestId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ConfigurationRequestId", name: "ConfigurationRequestId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    ConfigurationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ConfigurationStatus", name: "ConfigurationStatus", traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING"}, {"name" => "ACTIVE", "value" => "ACTIVE"}, {"name" => "UPDATING", "value" => "UPDATING"}, {"name" => "DELETING", "value" => "DELETING"}, {"name" => "DELETED", "value" => "DELETED"}, {"name" => "FAILED", "value" => "FAILED"}]})
+    ConfigurationTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.omics#ConfigurationTimestamp", name: "ConfigurationTimestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
+    ConfigurationUuid = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ConfigurationUuid", name: "ConfigurationUuid", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConnectionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ConnectionArn", name: "ConnectionArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+$"})
     ContainerRegistryMap = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ContainerRegistryMap", name: "ContainerRegistryMap")
@@ -56,6 +79,8 @@ module Aws::Omics
     CreateAnnotationStoreResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CreateAnnotationStoreResponse", name: "CreateAnnotationStoreResponse")
     CreateAnnotationStoreVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CreateAnnotationStoreVersionRequest", name: "CreateAnnotationStoreVersionRequest")
     CreateAnnotationStoreVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CreateAnnotationStoreVersionResponse", name: "CreateAnnotationStoreVersionResponse")
+    CreateConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CreateConfigurationRequest", name: "CreateConfigurationRequest")
+    CreateConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CreateConfigurationResponse", name: "CreateConfigurationResponse")
     CreateMultipartReadSetUploadRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CreateMultipartReadSetUploadRequest", name: "CreateMultipartReadSetUploadRequest")
     CreateMultipartReadSetUploadResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CreateMultipartReadSetUploadResponse", name: "CreateMultipartReadSetUploadResponse")
     CreateReferenceStoreRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#CreateReferenceStoreRequest", name: "CreateReferenceStoreRequest")
@@ -77,16 +102,21 @@ module Aws::Omics
     CreationJobId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#CreationJobId", name: "CreationJobId", traits: {"smithy.api#length" => {"min" => 1, "max" => 127}, "smithy.api#pattern" => "^[a-zA-Z0-9]+$"})
     CreationTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.omics#CreationTime", name: "CreationTime", traits: {"smithy.api#timestampFormat" => "date-time"})
     CreationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#CreationType", name: "CreationType", traits: {"smithy.api#enum" => [{"value" => "IMPORT", "name" => "IMPORT"}, {"value" => "UPLOAD", "name" => "UPLOAD"}]})
+    DefaultRunSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DefaultRunSetting", name: "DefaultRunSetting")
     DefinitionRepository = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DefinitionRepository", name: "DefinitionRepository")
     DefinitionRepositoryDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DefinitionRepositoryDetails", name: "DefinitionRepositoryDetails")
     DeleteAnnotationStoreRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteAnnotationStoreRequest", name: "DeleteAnnotationStoreRequest")
     DeleteAnnotationStoreResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteAnnotationStoreResponse", name: "DeleteAnnotationStoreResponse")
     DeleteAnnotationStoreVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteAnnotationStoreVersionsRequest", name: "DeleteAnnotationStoreVersionsRequest")
     DeleteAnnotationStoreVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteAnnotationStoreVersionsResponse", name: "DeleteAnnotationStoreVersionsResponse")
+    DeleteBatchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteBatchRequest", name: "DeleteBatchRequest")
+    DeleteConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteConfigurationRequest", name: "DeleteConfigurationRequest")
     DeleteReferenceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteReferenceRequest", name: "DeleteReferenceRequest")
     DeleteReferenceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteReferenceResponse", name: "DeleteReferenceResponse")
     DeleteReferenceStoreRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteReferenceStoreRequest", name: "DeleteReferenceStoreRequest")
     DeleteReferenceStoreResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteReferenceStoreResponse", name: "DeleteReferenceStoreResponse")
+    DeleteRunBatchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteRunBatchRequest", name: "DeleteRunBatchRequest")
+    DeleteRunBatchResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteRunBatchResponse", name: "DeleteRunBatchResponse")
     DeleteRunCacheRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteRunCacheRequest", name: "DeleteRunCacheRequest")
     DeleteRunGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteRunGroupRequest", name: "DeleteRunGroupRequest")
     DeleteRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#DeleteRunRequest", name: "DeleteRunRequest")
@@ -108,6 +138,7 @@ module Aws::Omics
     Encoding = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#Encoding", name: "Encoding", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     EncryptionType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#EncryptionType", name: "EncryptionType", traits: {"smithy.api#enum" => [{"value" => "KMS", "name" => "KMS", "documentation" => "KMS"}]})
     EngineLogStream = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#EngineLogStream", name: "EngineLogStream", traits: {"smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    EngineSettings = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.omics#EngineSettings", name: "EngineSettings")
     EngineVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#EngineVersion", name: "EngineVersion", traits: {"smithy.api#pattern" => "^[0-9]{2}.[0-9]{2}.[0-9]$"})
     EscapeChar = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#EscapeChar", name: "EscapeChar", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     EscapeQuotes = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.omics#EscapeQuotes", name: "EscapeQuotes", traits: {"smithy.api#default" => false})
@@ -135,6 +166,10 @@ module Aws::Omics
     GetAnnotationStoreResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetAnnotationStoreResponse", name: "GetAnnotationStoreResponse")
     GetAnnotationStoreVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetAnnotationStoreVersionRequest", name: "GetAnnotationStoreVersionRequest")
     GetAnnotationStoreVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetAnnotationStoreVersionResponse", name: "GetAnnotationStoreVersionResponse")
+    GetBatchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetBatchRequest", name: "GetBatchRequest")
+    GetBatchResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetBatchResponse", name: "GetBatchResponse")
+    GetConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetConfigurationRequest", name: "GetConfigurationRequest")
+    GetConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetConfigurationResponse", name: "GetConfigurationResponse")
     GetReadSetActivationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetReadSetActivationJobRequest", name: "GetReadSetActivationJobRequest")
     GetReadSetActivationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetReadSetActivationJobResponse", name: "GetReadSetActivationJobResponse")
     GetReadSetExportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#GetReadSetExportJobRequest", name: "GetReadSetExportJobRequest")
@@ -191,6 +226,8 @@ module Aws::Omics
     ImportReferenceJobList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#ImportReferenceJobList", name: "ImportReferenceJobList")
     ImportReferenceSourceItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ImportReferenceSourceItem", name: "ImportReferenceSourceItem")
     ImportReferenceSourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#ImportReferenceSourceList", name: "ImportReferenceSourceList")
+    InlineSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#InlineSetting", name: "InlineSetting")
+    InlineSettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#InlineSettings", name: "InlineSettings", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
     JobStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#JobStatus", name: "JobStatus", traits: {"smithy.api#enum" => [{"value" => "SUBMITTED", "name" => "SUBMITTED", "documentation" => "The Job has been submitted to run"}, {"value" => "IN_PROGRESS", "name" => "IN_PROGRESS", "documentation" => "The Job is executing"}, {"value" => "CANCELLED", "name" => "CANCELLED", "documentation" => "The Job was cancelled"}, {"value" => "COMPLETED", "name" => "COMPLETED", "documentation" => "The Job has completed"}, {"value" => "FAILED", "name" => "FAILED", "documentation" => "The Job failed"}, {"value" => "COMPLETED_WITH_FAILURES", "name" => "COMPLETED_WITH_FAILURES", "documentation" => "The Job completed with failed runs"}]})
     JobStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#JobStatusMessage", name: "JobStatusMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 127}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
@@ -205,6 +242,10 @@ module Aws::Omics
     ListAnnotationStoresFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListAnnotationStoresFilter", name: "ListAnnotationStoresFilter")
     ListAnnotationStoresRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListAnnotationStoresRequest", name: "ListAnnotationStoresRequest")
     ListAnnotationStoresResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListAnnotationStoresResponse", name: "ListAnnotationStoresResponse")
+    ListBatchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListBatchRequest", name: "ListBatchRequest")
+    ListBatchResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListBatchResponse", name: "ListBatchResponse")
+    ListConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListConfigurationsRequest", name: "ListConfigurationsRequest")
+    ListConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListConfigurationsResponse", name: "ListConfigurationsResponse")
     ListMultipartReadSetUploadsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListMultipartReadSetUploadsRequest", name: "ListMultipartReadSetUploadsRequest")
     ListMultipartReadSetUploadsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListMultipartReadSetUploadsResponse", name: "ListMultipartReadSetUploadsResponse")
     ListReadSetActivationJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListReadSetActivationJobsRequest", name: "ListReadSetActivationJobsRequest")
@@ -229,6 +270,8 @@ module Aws::Omics
     ListRunGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListRunGroupsResponse", name: "ListRunGroupsResponse")
     ListRunTasksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListRunTasksRequest", name: "ListRunTasksRequest")
     ListRunTasksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListRunTasksResponse", name: "ListRunTasksResponse")
+    ListRunsInBatchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListRunsInBatchRequest", name: "ListRunsInBatchRequest")
+    ListRunsInBatchResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListRunsInBatchResponse", name: "ListRunsInBatchResponse")
     ListRunsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListRunsRequest", name: "ListRunsRequest")
     ListRunsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListRunsResponse", name: "ListRunsResponse")
     ListSequenceStoresRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ListSequenceStoresRequest", name: "ListSequenceStoresRequest")
@@ -251,6 +294,7 @@ module Aws::Omics
     Md5 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#Md5", name: "Md5", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\p{L}||\\p{N}]+$"})
     MultipartReadSetUploadList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#MultipartReadSetUploadList", name: "MultipartReadSetUploadList")
     MultipartReadSetUploadListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#MultipartReadSetUploadListItem", name: "MultipartReadSetUploadListItem")
+    NetworkingMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#NetworkingMode", name: "NetworkingMode", traits: {"smithy.api#enum" => [{"name" => "RESTRICTED", "value" => "RESTRICTED"}, {"name" => "VPC", "value" => "VPC"}]})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 6144}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     NotSupportedOperationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#NotSupportedOperationException", name: "NotSupportedOperationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 405})
     NumericIdInArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#NumericIdInArn", name: "NumericIdInArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 18}, "smithy.api#pattern" => "^[0-9]+$"})
@@ -325,6 +369,8 @@ module Aws::Omics
     ResourceOwner = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ResourceOwner", name: "ResourceOwner", traits: {"smithy.api#enum" => [{"value" => "SELF", "name" => "SELF", "documentation" => "The resource owner is the calling account"}, {"value" => "OTHER", "name" => "OTHER", "documentation" => "The resource owner is an account other than the caller"}]})
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RoleArn", name: "RoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:.*"})
     RunArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunArn", name: "RunArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:.+$"})
+    RunBatchList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#RunBatchList", name: "RunBatchList")
+    RunBatchListItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#RunBatchListItem", name: "RunBatchListItem")
     RunCacheArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunCacheArn", name: "RunCacheArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:.+$"})
     RunCacheId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunCacheId", name: "RunCacheId", traits: {"smithy.api#length" => {"min" => 1, "max" => 18}, "smithy.api#pattern" => "^[0-9]+$"})
     RunCacheList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#RunCacheList", name: "RunCacheList")
@@ -332,6 +378,8 @@ module Aws::Omics
     RunCacheRequestId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunCacheRequestId", name: "RunCacheRequestId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     RunCacheStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunCacheStatus", name: "RunCacheStatus", traits: {"smithy.api#enum" => [{"name" => "ACTIVE", "value" => "ACTIVE"}, {"name" => "DELETED", "value" => "DELETED"}, {"name" => "FAILED", "value" => "FAILED"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
     RunCacheTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.omics#RunCacheTimestamp", name: "RunCacheTimestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
+    RunConfigurations = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#RunConfigurations", name: "RunConfigurations")
+    RunConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#RunConfigurationsResponse", name: "RunConfigurationsResponse")
     RunExport = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunExport", name: "RunExport", traits: {"smithy.api#enum" => [{"name" => "DEFINITION", "value" => "DEFINITION"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
     RunExportList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#RunExportList", name: "RunExportList", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}})
     RunFailureReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunFailureReason", name: "RunFailureReason", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
@@ -360,9 +408,11 @@ module Aws::Omics
     RunResourceDigests = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.omics#RunResourceDigests", name: "RunResourceDigests")
     RunRetentionMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunRetentionMode", name: "RunRetentionMode", traits: {"smithy.api#enum" => [{"name" => "RETAIN", "value" => "RETAIN"}, {"name" => "REMOVE", "value" => "REMOVE"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
     RunRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunRoleArn", name: "RunRoleArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:.+$"})
+    RunSettingId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunSettingId", name: "RunSettingId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     RunStartedBy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunStartedBy", name: "RunStartedBy", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     RunStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunStatus", name: "RunStatus", traits: {"smithy.api#enum" => [{"name" => "PENDING", "value" => "PENDING"}, {"name" => "STARTING", "value" => "STARTING"}, {"name" => "RUNNING", "value" => "RUNNING"}, {"name" => "STOPPING", "value" => "STOPPING"}, {"name" => "COMPLETED", "value" => "COMPLETED"}, {"name" => "DELETED", "value" => "DELETED"}, {"name" => "CANCELLED", "value" => "CANCELLED"}, {"name" => "FAILED", "value" => "FAILED"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
     RunStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunStatusMessage", name: "RunStatusMessage", traits: {"smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    RunSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#RunSummary", name: "RunSummary")
     RunTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.omics#RunTimestamp", name: "RunTimestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
     RunUuid = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#RunUuid", name: "RunUuid", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     S3AccessConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#S3AccessConfig", name: "S3AccessConfig")
@@ -372,10 +422,15 @@ module Aws::Omics
     S3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#S3Uri", name: "S3Uri", traits: {"smithy.api#pattern" => "^s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/(.{1,1024})$"})
     S3UriForBucketOrObject = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#S3UriForBucketOrObject", name: "S3UriForBucketOrObject", traits: {"smithy.api#pattern" => "^s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])(/(.{0,1024}))?$"})
     S3UriForObject = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#S3UriForObject", name: "S3UriForObject", traits: {"smithy.api#pattern" => "^s3://([a-z0-9][a-z0-9-.]{1,61}[a-z0-9])/((.{1,1024}))$"})
+    S3UriSettings = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#S3UriSettings", name: "S3UriSettings", traits: {"smithy.api#length" => {"min" => 1, "max" => 750}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     SampleId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SampleId", name: "SampleId", traits: {"smithy.api#length" => {"min" => 1, "max" => 127}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     Schema = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#Schema", name: "Schema")
     SchemaItem = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.omics#SchemaItem", name: "SchemaItem", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     SchemaValueType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SchemaValueType", name: "SchemaValueType", traits: {"smithy.api#enum" => [{"value" => "LONG", "name" => "LONG", "documentation" => "LONG type"}, {"value" => "INT", "name" => "INT", "documentation" => "INT type"}, {"value" => "STRING", "name" => "STRING", "documentation" => "STRING type"}, {"value" => "FLOAT", "name" => "FLOAT", "documentation" => "FLOAT type"}, {"value" => "DOUBLE", "name" => "DOUBLE", "documentation" => "DOUBLE type"}, {"value" => "BOOLEAN", "name" => "BOOLEAN", "documentation" => "BOOLEAN type"}]})
+    ScratchStorageMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ScratchStorageMode", name: "ScratchStorageMode", traits: {"smithy.api#enum" => [{"name" => "LOCAL", "value" => "LOCAL"}, {"name" => "SHARED", "value" => "SHARED"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
+    SecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SecretArn", name: "SecretArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-\\w+)*:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9\\/_+=.@-]+$"})
+    SecurityGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SecurityGroupId", name: "SecurityGroupId", traits: {"smithy.api#length" => {"min" => 4, "max" => 128}, "smithy.api#pattern" => "^sg-[0-9a-f]+$"})
+    SecurityGroupIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#SecurityGroupIds", name: "SecurityGroupIds")
     Separator = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#Separator", name: "Separator", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     SequenceInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#SequenceInformation", name: "SequenceInformation")
     SequenceStoreArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SequenceStoreArn", name: "SequenceStoreArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 127}, "smithy.api#pattern" => "^arn:.+$"})
@@ -389,6 +444,7 @@ module Aws::Omics
     SequenceStoreStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SequenceStoreStatus", name: "SequenceStoreStatus", traits: {"smithy.api#enum" => [{"value" => "CREATING", "name" => "CREATING"}, {"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "UPDATING", "name" => "UPDATING"}, {"value" => "DELETING", "name" => "DELETING"}, {"value" => "FAILED", "name" => "FAILED"}]})
     SequenceStoreStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SequenceStoreStatusMessage", name: "SequenceStoreStatusMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 127}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
+    SessionPolicy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SessionPolicy", name: "SessionPolicy", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\t\\n\\r]+$"})
     ShareDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ShareDetails", name: "ShareDetails")
     ShareDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#ShareDetailsList", name: "ShareDetailsList")
     ShareName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#ShareName", name: "ShareName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
@@ -415,6 +471,8 @@ module Aws::Omics
     StartReferenceImportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#StartReferenceImportJobResponse", name: "StartReferenceImportJobResponse")
     StartReferenceImportJobSourceItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#StartReferenceImportJobSourceItem", name: "StartReferenceImportJobSourceItem")
     StartReferenceImportJobSourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#StartReferenceImportJobSourceList", name: "StartReferenceImportJobSourceList")
+    StartRunBatchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#StartRunBatchRequest", name: "StartRunBatchRequest")
+    StartRunBatchResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#StartRunBatchResponse", name: "StartRunBatchResponse")
     StartRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#StartRunRequest", name: "StartRunRequest")
     StartRunResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#StartRunResponse", name: "StartRunResponse")
     StartVariantImportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#StartVariantImportRequest", name: "StartVariantImportRequest")
@@ -429,6 +487,12 @@ module Aws::Omics
     StoreStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#StoreStatus", name: "StoreStatus", traits: {"smithy.api#enum" => [{"value" => "CREATING", "name" => "CREATING", "documentation" => "The Store is being created"}, {"value" => "UPDATING", "name" => "UPDATING", "documentation" => "The Store is updating"}, {"value" => "DELETING", "name" => "DELETING", "documentation" => "The Store is deleting"}, {"value" => "ACTIVE", "name" => "ACTIVE", "documentation" => "The Store is active"}, {"value" => "FAILED", "name" => "FAILED", "documentation" => "The Store creation failed"}]})
     StoreType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.omics#StoreType", name: "StoreType")
     SubjectId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SubjectId", name: "SubjectId", traits: {"smithy.api#length" => {"min" => 1, "max" => 127}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    SubmissionFailureMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SubmissionFailureMessage", name: "SubmissionFailureMessage", traits: {"smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    SubmissionFailureReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SubmissionFailureReason", name: "SubmissionFailureReason", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
+    SubmissionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SubmissionStatus", name: "SubmissionStatus", traits: {"smithy.api#enum" => [{"name" => "SUCCESS", "value" => "SUCCESS"}, {"name" => "FAILED", "value" => "FAILED"}, {"name" => "CANCEL_SUCCESS", "value" => "CANCEL_SUCCESS"}, {"name" => "CANCEL_FAILED", "value" => "CANCEL_FAILED"}, {"name" => "DELETE_SUCCESS", "value" => "DELETE_SUCCESS"}, {"name" => "DELETE_FAILED", "value" => "DELETE_FAILED"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
+    SubmissionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#SubmissionSummary", name: "SubmissionSummary")
+    SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#SubnetId", name: "SubnetId", traits: {"smithy.api#length" => {"min" => 8, "max" => 128}, "smithy.api#pattern" => "^subnet-[0-9a-f]+$"})
+    SubnetIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#SubnetIds", name: "SubnetIds")
     TagArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#TagArn", name: "TagArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 150}, "smithy.api#pattern" => "^arn:.+$"})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
@@ -448,6 +512,7 @@ module Aws::Omics
     TaskStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#TaskStatus", name: "TaskStatus", traits: {"smithy.api#enum" => [{"name" => "PENDING", "value" => "PENDING"}, {"name" => "STARTING", "value" => "STARTING"}, {"name" => "RUNNING", "value" => "RUNNING"}, {"name" => "STOPPING", "value" => "STOPPING"}, {"name" => "COMPLETED", "value" => "COMPLETED"}, {"name" => "CANCELLED", "value" => "CANCELLED"}, {"name" => "FAILED", "value" => "FAILED"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
     TaskStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#TaskStatusMessage", name: "TaskStatusMessage", traits: {"smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     TaskTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.omics#TaskTimestamp", name: "TaskTimestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
+    TaskUuid = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#TaskUuid", name: "TaskUuid", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {"throttling" => true}})
     TsvOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#TsvOptions", name: "TsvOptions")
     TsvStoreOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#TsvStoreOptions", name: "TsvStoreOptions")
@@ -491,12 +556,15 @@ module Aws::Omics
     VersionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#VersionName", name: "VersionName", traits: {"smithy.api#length" => {"min" => 3, "max" => 255}, "smithy.api#pattern" => "^([a-z]){1}([a-z0-9_]){2,254}$"})
     VersionOptions = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.omics#VersionOptions", name: "VersionOptions")
     VersionStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#VersionStatus", name: "VersionStatus", traits: {"smithy.api#enum" => [{"value" => "CREATING", "name" => "CREATING", "documentation" => "The Version is being created"}, {"value" => "UPDATING", "name" => "UPDATING", "documentation" => "The Version is updating"}, {"value" => "DELETING", "name" => "DELETING", "documentation" => "The Version is deleting"}, {"value" => "ACTIVE", "name" => "ACTIVE", "documentation" => "The Version is active"}, {"value" => "FAILED", "name" => "FAILED", "documentation" => "The Version creation failed"}]})
+    VpcConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#VpcConfig", name: "VpcConfig")
+    VpcConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#VpcConfigResponse", name: "VpcConfigResponse")
+    VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#VpcId", name: "VpcId", traits: {"smithy.api#length" => {"min" => 5, "max" => 128}, "smithy.api#pattern" => "^vpc-[0-9a-f]+$"})
     WorkflowArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowArn", name: "WorkflowArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:.+$"})
     WorkflowBucketOwnerId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowBucketOwnerId", name: "WorkflowBucketOwnerId", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     WorkflowDefinition = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowDefinition", name: "WorkflowDefinition", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     WorkflowDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowDescription", name: "WorkflowDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     WorkflowDigest = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowDigest", name: "WorkflowDigest", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
-    WorkflowEngine = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowEngine", name: "WorkflowEngine", traits: {"smithy.api#enum" => [{"name" => "WDL", "value" => "WDL"}, {"name" => "NEXTFLOW", "value" => "NEXTFLOW"}, {"name" => "CWL", "value" => "CWL"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
+    WorkflowEngine = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowEngine", name: "WorkflowEngine", traits: {"smithy.api#enum" => [{"name" => "WDL", "value" => "WDL"}, {"name" => "NEXTFLOW", "value" => "NEXTFLOW"}, {"name" => "CWL", "value" => "CWL"}, {"name" => "WDL_LENIENT", "value" => "WDL_LENIENT"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
     WorkflowExport = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowExport", name: "WorkflowExport", traits: {"smithy.api#enum" => [{"name" => "DEFINITION", "value" => "DEFINITION"}, {"name" => "README", "value" => "README"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
     WorkflowExportList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#WorkflowExportList", name: "WorkflowExportList", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}})
     WorkflowId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowId", name: "WorkflowId", traits: {"smithy.api#length" => {"min" => 1, "max" => 18}, "smithy.api#pattern" => "^[0-9]+$"})
@@ -512,7 +580,10 @@ module Aws::Omics
     WorkflowParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.omics#WorkflowParameter", name: "WorkflowParameter")
     WorkflowParameterDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowParameterDescription", name: "WorkflowParameterDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     WorkflowParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowParameterName", name: "WorkflowParameterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
-    WorkflowParameterTemplate = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.omics#WorkflowParameterTemplate", name: "WorkflowParameterTemplate", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
+    WorkflowParameterTemplate = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.omics#WorkflowParameterTemplate", name: "WorkflowParameterTemplate", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
+    WorkflowProfileList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.omics#WorkflowProfileList", name: "WorkflowProfileList")
+    WorkflowProfileName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowProfileName", name: "WorkflowProfileName")
+    WorkflowProfileParameterTemplates = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.omics#WorkflowProfileParameterTemplates", name: "WorkflowProfileParameterTemplates")
     WorkflowRequestId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowRequestId", name: "WorkflowRequestId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
     WorkflowStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowStatus", name: "WorkflowStatus", traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING"}, {"name" => "ACTIVE", "value" => "ACTIVE"}, {"name" => "UPDATING", "value" => "UPDATING"}, {"name" => "DELETED", "value" => "DELETED"}, {"name" => "FAILED", "value" => "FAILED"}, {"name" => "INACTIVE", "value" => "INACTIVE"}], "smithy.api#length" => {"min" => 1, "max" => 64}})
     WorkflowStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.omics#WorkflowStatusMessage", name: "WorkflowStatusMessage", traits: {"smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"})
@@ -606,9 +677,24 @@ module Aws::Omics
     BatchDeleteReadSetRequest.type = Types::BatchDeleteReadSetRequest
     BatchDeleteReadSetResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetBatchErrorList, name: "errors"))
     BatchDeleteReadSetResponse.type = Types::BatchDeleteReadSetResponse
+    BatchList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchListItem, name: "member"))
+    BatchListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "id"))
+    BatchListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchName, name: "name"))
+    BatchListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStatus, name: "status"))
+    BatchListItem.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchTimestamp, name: "createdAt"))
+    BatchListItem.add_member(:total_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalRuns"))
+    BatchListItem.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "workflowId"))
+    BatchListItem.type = Types::BatchListItem
+    BatchRunSettings.add_member(:inline_settings, Types::BatchRunSettings::InlineSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineSettings, name: "inlineSettings"))
+    BatchRunSettings.add_member(:s3_uri_settings, Types::BatchRunSettings::S3UriSettings, ::Smithy::Schema::Shapes::MemberShape.new(target: S3UriSettings, name: "s3UriSettings"))
+    BatchRunSettings.add_member(:unknown, Types::BatchRunSettings::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    BatchRunSettings.type = Types::BatchRunSettings
     CancelAnnotationImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelAnnotationImportRequest.type = Types::CancelAnnotationImportRequest
     CancelAnnotationImportResponse.type = Types::CancelAnnotationImportResponse
+    CancelRunBatchRequest.add_member(:batch_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "batchId", traits: {"smithy.api#required" => {}}))
+    CancelRunBatchRequest.type = Types::CancelRunBatchRequest
+    CancelRunBatchResponse.type = Types::CancelRunBatchResponse
     CancelRunRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CancelRunRequest.type = Types::CancelRunRequest
     CancelVariantImportRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -625,6 +711,17 @@ module Aws::Omics
     CompleteReadSetUploadPartListItem.add_member(:part_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadSetPartSource, name: "partSource", traits: {"smithy.api#required" => {}}))
     CompleteReadSetUploadPartListItem.add_member(:checksum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "checksum", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$", "smithy.api#required" => {}}))
     CompleteReadSetUploadPartListItem.type = Types::CompleteReadSetUploadPartListItem
+    ConfigurationDetails.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, name: "name"))
+    ConfigurationDetails.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationArn, name: "arn"))
+    ConfigurationDetails.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationUuid, name: "uuid"))
+    ConfigurationDetails.type = Types::ConfigurationDetails
+    ConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationListItem, name: "member"))
+    ConfigurationListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationArn, name: "arn"))
+    ConfigurationListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, name: "name"))
+    ConfigurationListItem.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDescription, name: "description"))
+    ConfigurationListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStatus, name: "status"))
+    ConfigurationListItem.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTimestamp, name: "creationTime"))
+    ConfigurationListItem.type = Types::ConfigurationListItem
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ConflictException.type = Types::ConflictException
     ContainerRegistryMap.add_member(:registry_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryMappingsList, name: "registryMappings"))
@@ -662,6 +759,21 @@ module Aws::Omics
     CreateAnnotationStoreVersionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionStatus, name: "status", traits: {"smithy.api#required" => {}}))
     CreateAnnotationStoreVersionResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "creationTime", traits: {"smithy.api#required" => {}}))
     CreateAnnotationStoreVersionResponse.type = Types::CreateAnnotationStoreVersionResponse
+    CreateConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateConfigurationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDescription, name: "description"))
+    CreateConfigurationRequest.add_member(:run_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: RunConfigurations, name: "runConfigurations", traits: {"smithy.api#required" => {}}))
+    CreateConfigurationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateConfigurationRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationRequestId, name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    CreateConfigurationRequest.type = Types::CreateConfigurationRequest
+    CreateConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationArn, name: "arn"))
+    CreateConfigurationResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationUuid, name: "uuid"))
+    CreateConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, name: "name"))
+    CreateConfigurationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDescription, name: "description"))
+    CreateConfigurationResponse.add_member(:run_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: RunConfigurationsResponse, name: "runConfigurations"))
+    CreateConfigurationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStatus, name: "status"))
+    CreateConfigurationResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTimestamp, name: "creationTime"))
+    CreateConfigurationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateConfigurationResponse.type = Types::CreateConfigurationResponse
     CreateMultipartReadSetUploadRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateMultipartReadSetUploadRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken"))
     CreateMultipartReadSetUploadRequest.add_member(:source_file_type, ::Smithy::Schema::Shapes::MemberShape.new(target: FileType, name: "sourceFileType", traits: {"smithy.api#required" => {}}))
@@ -822,6 +934,30 @@ module Aws::Omics
     CreateWorkflowVersionResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     CreateWorkflowVersionResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowUuid, name: "uuid"))
     CreateWorkflowVersionResponse.type = Types::CreateWorkflowVersionResponse
+    DefaultRunSetting.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "workflowId", traits: {"smithy.api#required" => {}}))
+    DefaultRunSetting.add_member(:workflow_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, name: "workflowType"))
+    DefaultRunSetting.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunRoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
+    DefaultRunSetting.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunName, name: "name"))
+    DefaultRunSetting.add_member(:cache_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NumericIdInArn, name: "cacheId"))
+    DefaultRunSetting.add_member(:cache_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, name: "cacheBehavior"))
+    DefaultRunSetting.add_member(:run_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, name: "runGroupId"))
+    DefaultRunSetting.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    DefaultRunSetting.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RunParameters, name: "parameters"))
+    DefaultRunSetting.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    DefaultRunSetting.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RunOutputUri, name: "outputUri"))
+    DefaultRunSetting.add_member(:log_level, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLogLevel, name: "logLevel"))
+    DefaultRunSetting.add_member(:run_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "runTags"))
+    DefaultRunSetting.add_member(:retention_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: RunRetentionMode, name: "retentionMode"))
+    DefaultRunSetting.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "storageType"))
+    DefaultRunSetting.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowOwnerId, name: "workflowOwnerId"))
+    DefaultRunSetting.add_member(:output_bucket_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "outputBucketOwnerId"))
+    DefaultRunSetting.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, name: "workflowVersionName"))
+    DefaultRunSetting.add_member(:networking_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkingMode, name: "networkingMode"))
+    DefaultRunSetting.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, name: "configurationName"))
+    DefaultRunSetting.add_member(:session_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionPolicy, name: "sessionPolicy"))
+    DefaultRunSetting.add_member(:engine_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineSettings, name: "engineSettings"))
+    DefaultRunSetting.add_member(:scratch_storage_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScratchStorageMode, name: "scratchStorageMode"))
+    DefaultRunSetting.type = Types::DefaultRunSetting
     DefinitionRepository.add_member(:connection_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionArn, name: "connectionArn", traits: {"smithy.api#required" => {}}))
     DefinitionRepository.add_member(:full_repository_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FullRepositoryId, name: "fullRepositoryId", traits: {"smithy.api#required" => {}}))
     DefinitionRepository.add_member(:source_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceReference, name: "sourceReference"))
@@ -844,6 +980,10 @@ module Aws::Omics
     DeleteAnnotationStoreVersionsRequest.type = Types::DeleteAnnotationStoreVersionsRequest
     DeleteAnnotationStoreVersionsResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionDeleteErrorList, name: "errors"))
     DeleteAnnotationStoreVersionsResponse.type = Types::DeleteAnnotationStoreVersionsResponse
+    DeleteBatchRequest.add_member(:batch_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "batchId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteBatchRequest.type = Types::DeleteBatchRequest
+    DeleteConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConfigurationRequest.type = Types::DeleteConfigurationRequest
     DeleteReferenceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceId"}))
     DeleteReferenceRequest.add_member(:reference_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, name: "referenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteReferenceRequest.type = Types::DeleteReferenceRequest
@@ -851,6 +991,9 @@ module Aws::Omics
     DeleteReferenceStoreRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceStoreId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "referenceStoreId"}))
     DeleteReferenceStoreRequest.type = Types::DeleteReferenceStoreRequest
     DeleteReferenceStoreResponse.type = Types::DeleteReferenceStoreResponse
+    DeleteRunBatchRequest.add_member(:batch_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "batchId", traits: {"smithy.api#required" => {}}))
+    DeleteRunBatchRequest.type = Types::DeleteRunBatchRequest
+    DeleteRunBatchResponse.type = Types::DeleteRunBatchResponse
     DeleteRunCacheRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteRunCacheRequest.type = Types::DeleteRunCacheRequest
     DeleteRunGroupRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -968,6 +1111,35 @@ module Aws::Omics
     GetAnnotationStoreVersionResponse.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusMessage, name: "statusMessage", traits: {"smithy.api#required" => {}}))
     GetAnnotationStoreVersionResponse.add_member(:version_size_bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "versionSizeBytes", traits: {"smithy.api#required" => {}}))
     GetAnnotationStoreVersionResponse.type = Types::GetAnnotationStoreVersionResponse
+    GetBatchRequest.add_member(:batch_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "batchId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetBatchRequest.type = Types::GetBatchRequest
+    GetBatchResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "id"))
+    GetBatchResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchArn, name: "arn"))
+    GetBatchResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUuid, name: "uuid"))
+    GetBatchResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchName, name: "name"))
+    GetBatchResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStatus, name: "status"))
+    GetBatchResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    GetBatchResponse.add_member(:total_runs, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalRuns"))
+    GetBatchResponse.add_member(:default_run_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultRunSetting, name: "defaultRunSetting"))
+    GetBatchResponse.add_member(:submission_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmissionSummary, name: "submissionSummary"))
+    GetBatchResponse.add_member(:run_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: RunSummary, name: "runSummary"))
+    GetBatchResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchTimestamp, name: "creationTime"))
+    GetBatchResponse.add_member(:submitted_time, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchTimestamp, name: "submittedTime"))
+    GetBatchResponse.add_member(:processed_time, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchTimestamp, name: "processedTime"))
+    GetBatchResponse.add_member(:failed_time, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchTimestamp, name: "failedTime"))
+    GetBatchResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureReason"))
+    GetBatchResponse.type = Types::GetBatchResponse
+    GetConfigurationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, name: "name", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetConfigurationRequest.type = Types::GetConfigurationRequest
+    GetConfigurationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationArn, name: "arn"))
+    GetConfigurationResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationUuid, name: "uuid"))
+    GetConfigurationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, name: "name"))
+    GetConfigurationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDescription, name: "description"))
+    GetConfigurationResponse.add_member(:run_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: RunConfigurationsResponse, name: "runConfigurations"))
+    GetConfigurationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStatus, name: "status"))
+    GetConfigurationResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTimestamp, name: "creationTime"))
+    GetConfigurationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    GetConfigurationResponse.type = Types::GetConfigurationResponse
     GetReadSetActivationJobRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationJobId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetReadSetActivationJobRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetReadSetActivationJobRequest.type = Types::GetReadSetActivationJobRequest
@@ -1120,6 +1292,7 @@ module Aws::Omics
     GetRunResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunRoleArn, name: "roleArn"))
     GetRunResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunName, name: "name"))
     GetRunResponse.add_member(:run_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, name: "runGroupId"))
+    GetRunResponse.add_member(:batch_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "batchId"))
     GetRunResponse.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
     GetRunResponse.add_member(:definition, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDefinition, name: "definition"))
     GetRunResponse.add_member(:digest, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowDigest, name: "digest"))
@@ -1144,6 +1317,12 @@ module Aws::Omics
     GetRunResponse.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowOwnerId, name: "workflowOwnerId"))
     GetRunResponse.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, name: "workflowVersionName"))
     GetRunResponse.add_member(:workflow_uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowUuid, name: "workflowUuid"))
+    GetRunResponse.add_member(:networking_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkingMode, name: "networkingMode"))
+    GetRunResponse.add_member(:scratch_storage_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScratchStorageMode, name: "scratchStorageMode"))
+    GetRunResponse.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDetails, name: "configuration"))
+    GetRunResponse.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigResponse, name: "vpcConfig"))
+    GetRunResponse.add_member(:engine_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineSettings, name: "engineSettings"))
+    GetRunResponse.add_member(:session_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionPolicy, name: "sessionPolicy"))
     GetRunResponse.type = Types::GetRunResponse
     GetRunTaskRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetRunTaskRequest.add_member(:task_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskId, name: "taskId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1164,6 +1343,7 @@ module Aws::Omics
     GetRunTaskResponse.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskInstanceType, name: "instanceType"))
     GetRunTaskResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskFailureReason, name: "failureReason"))
     GetRunTaskResponse.add_member(:image_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDetails, name: "imageDetails"))
+    GetRunTaskResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskUuid, name: "uuid"))
     GetRunTaskResponse.type = Types::GetRunTaskResponse
     GetS3AccessPolicyRequest.add_member(:s3_access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointArn, name: "s3AccessPointArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetS3AccessPolicyRequest.type = Types::GetS3AccessPolicyRequest
@@ -1250,6 +1430,8 @@ module Aws::Omics
     GetWorkflowResponse.add_member(:readme, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmeS3PresignedUrl, name: "readme", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     GetWorkflowResponse.add_member(:definition_repository_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DefinitionRepositoryDetails, name: "definitionRepositoryDetails"))
     GetWorkflowResponse.add_member(:readme_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmePath, name: "readmePath"))
+    GetWorkflowResponse.add_member(:profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowProfileList, name: "profiles"))
+    GetWorkflowResponse.add_member(:profile_parameter_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowProfileParameterTemplates, name: "profileParameterTemplates"))
     GetWorkflowResponse.type = Types::GetWorkflowResponse
     GetWorkflowVersionRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "workflowId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "id"}))
     GetWorkflowVersionRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, name: "versionName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1281,6 +1463,8 @@ module Aws::Omics
     GetWorkflowVersionResponse.add_member(:readme, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmeS3PresignedUrl, name: "readme", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     GetWorkflowVersionResponse.add_member(:definition_repository_details, ::Smithy::Schema::Shapes::MemberShape.new(target: DefinitionRepositoryDetails, name: "definitionRepositoryDetails"))
     GetWorkflowVersionResponse.add_member(:readme_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ReadmePath, name: "readmePath"))
+    GetWorkflowVersionResponse.add_member(:profiles, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowProfileList, name: "profiles"))
+    GetWorkflowVersionResponse.add_member(:profile_parameter_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowProfileParameterTemplates, name: "profileParameterTemplates"))
     GetWorkflowVersionResponse.type = Types::GetWorkflowVersionResponse
     IdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceIdentifier, name: "member"))
     ImageDetails.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "image"))
@@ -1338,6 +1522,16 @@ module Aws::Omics
     ImportReferenceSourceItem.add_member(:reference_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceId, name: "referenceId"))
     ImportReferenceSourceItem.type = Types::ImportReferenceSourceItem
     ImportReferenceSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImportReferenceSourceItem, name: "member"))
+    InlineSetting.add_member(:run_setting_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunSettingId, name: "runSettingId", traits: {"smithy.api#required" => {}}))
+    InlineSetting.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunName, name: "name"))
+    InlineSetting.add_member(:output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RunOutputUri, name: "outputUri"))
+    InlineSetting.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
+    InlineSetting.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: RunParameters, name: "parameters"))
+    InlineSetting.add_member(:output_bucket_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "outputBucketOwnerId"))
+    InlineSetting.add_member(:run_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "runTags"))
+    InlineSetting.add_member(:engine_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineSettings, name: "engineSettings"))
+    InlineSetting.type = Types::InlineSetting
+    InlineSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineSetting, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListAnnotationImportJobsFilter.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "status"))
@@ -1371,6 +1565,21 @@ module Aws::Omics
     ListAnnotationStoresResponse.add_member(:annotation_stores, ::Smithy::Schema::Shapes::MemberShape.new(target: AnnotationStoreItems, name: "annotationStores"))
     ListAnnotationStoresResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
     ListAnnotationStoresResponse.type = Types::ListAnnotationStoresResponse
+    ListBatchRequest.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxItems", traits: {"smithy.api#httpQuery" => "maxItems", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListBatchRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListToken, name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
+    ListBatchRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStatus, name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListBatchRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchName, name: "name", traits: {"smithy.api#httpQuery" => "name"}))
+    ListBatchRequest.add_member(:run_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, name: "runGroupId", traits: {"smithy.api#httpQuery" => "runGroupId"}))
+    ListBatchRequest.type = Types::ListBatchRequest
+    ListBatchResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchList, name: "items"))
+    ListBatchResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListToken, name: "nextToken"))
+    ListBatchResponse.type = Types::ListBatchResponse
+    ListConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 10}}))
+    ListConfigurationsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationListToken, name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
+    ListConfigurationsRequest.type = Types::ListConfigurationsRequest
+    ListConfigurationsResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationList, name: "items"))
+    ListConfigurationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationListToken, name: "nextToken"))
+    ListConfigurationsResponse.type = Types::ListConfigurationsResponse
     ListMultipartReadSetUploadsRequest.add_member(:sequence_store_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceStoreId, name: "sequenceStoreId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListMultipartReadSetUploadsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListMultipartReadSetUploadsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -1464,8 +1673,19 @@ module Aws::Omics
     ListRunTasksResponse.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskList, name: "items"))
     ListRunTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskListToken, name: "nextToken"))
     ListRunTasksResponse.type = Types::ListRunTasksResponse
+    ListRunsInBatchRequest.add_member(:batch_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "batchId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListRunsInBatchRequest.add_member(:max_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxItems", traits: {"smithy.api#httpQuery" => "maxItems", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListRunsInBatchRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListToken, name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
+    ListRunsInBatchRequest.add_member(:submission_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmissionStatus, name: "submissionStatus", traits: {"smithy.api#httpQuery" => "submissionStatus"}))
+    ListRunsInBatchRequest.add_member(:run_setting_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "runSettingId", traits: {"smithy.api#httpQuery" => "runSettingId"}))
+    ListRunsInBatchRequest.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "runId", traits: {"smithy.api#httpQuery" => "runId"}))
+    ListRunsInBatchRequest.type = Types::ListRunsInBatchRequest
+    ListRunsInBatchResponse.add_member(:runs, ::Smithy::Schema::Shapes::MemberShape.new(target: RunBatchList, name: "runs"))
+    ListRunsInBatchResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListToken, name: "nextToken"))
+    ListRunsInBatchResponse.type = Types::ListRunsInBatchResponse
     ListRunsRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunName, name: "name", traits: {"smithy.api#httpQuery" => "name"}))
     ListRunsRequest.add_member(:run_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupId, name: "runGroupId", traits: {"smithy.api#httpQuery" => "runGroupId"}))
+    ListRunsRequest.add_member(:batch_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "batchId", traits: {"smithy.api#httpQuery" => "batchId"}))
     ListRunsRequest.add_member(:starting_token, ::Smithy::Schema::Shapes::MemberShape.new(target: RunListToken, name: "startingToken", traits: {"smithy.api#httpQuery" => "startingToken"}))
     ListRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListRunsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunStatus, name: "status", traits: {"smithy.api#httpQuery" => "status"}))
@@ -1649,16 +1869,26 @@ module Aws::Omics
     ReferenceStoreFilter.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAfter", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ReferenceStoreFilter.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdBefore", traits: {"smithy.api#timestampFormat" => "date-time"}))
     ReferenceStoreFilter.type = Types::ReferenceStoreFilter
-    RegistryMapping.add_member(:upstream_registry_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "upstreamRegistryUrl"))
-    RegistryMapping.add_member(:ecr_repository_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: EcrRepositoryPrefix, name: "ecrRepositoryPrefix"))
+    RegistryMapping.add_member(:upstream_registry_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "upstreamRegistryUrl", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RegistryMapping.add_member(:ecr_repository_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: EcrRepositoryPrefix, name: "ecrRepositoryPrefix", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RegistryMapping.add_member(:upstream_repository_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: UpstreamRepositoryPrefix, name: "upstreamRepositoryPrefix"))
     RegistryMapping.add_member(:ecr_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "ecrAccountId"))
+    RegistryMapping.add_member(:credential_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "credentialArn"))
     RegistryMapping.type = Types::RegistryMapping
     RegistryMappingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryMapping, name: "member"))
     RequestTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     RequestTimeoutException.type = Types::RequestTimeoutException
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    RunBatchList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunBatchListItem, name: "member"))
+    RunBatchListItem.add_member(:run_setting_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunSettingId, name: "runSettingId"))
+    RunBatchListItem.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, name: "runId"))
+    RunBatchListItem.add_member(:run_internal_uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: RunUuid, name: "runInternalUuid"))
+    RunBatchListItem.add_member(:run_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunArn, name: "runArn"))
+    RunBatchListItem.add_member(:submission_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmissionStatus, name: "submissionStatus"))
+    RunBatchListItem.add_member(:submission_failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmissionFailureReason, name: "submissionFailureReason"))
+    RunBatchListItem.add_member(:submission_failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: SubmissionFailureMessage, name: "submissionFailureMessage"))
+    RunBatchListItem.type = Types::RunBatchListItem
     RunCacheList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheListItem, name: "member"))
     RunCacheListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheArn, name: "arn"))
     RunCacheListItem.add_member(:cache_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheBehavior, name: "cacheBehavior"))
@@ -1668,6 +1898,10 @@ module Aws::Omics
     RunCacheListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: UserCustomName, name: "name"))
     RunCacheListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunCacheStatus, name: "status"))
     RunCacheListItem.type = Types::RunCacheListItem
+    RunConfigurations.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "vpcConfig"))
+    RunConfigurations.type = Types::RunConfigurations
+    RunConfigurationsResponse.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfigResponse, name: "vpcConfig"))
+    RunConfigurationsResponse.type = Types::RunConfigurationsResponse
     RunExportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunExport, name: "member"))
     RunGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupListItem, name: "member"))
     RunGroupListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunGroupArn, name: "arn"))
@@ -1684,6 +1918,7 @@ module Aws::Omics
     RunListItem.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, name: "id"))
     RunListItem.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: RunStatus, name: "status"))
     RunListItem.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "workflowId"))
+    RunListItem.add_member(:batch_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "batchId"))
     RunListItem.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RunName, name: "name"))
     RunListItem.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "priority", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
     RunListItem.add_member(:storage_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "storageCapacity", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000}}))
@@ -1692,17 +1927,28 @@ module Aws::Omics
     RunListItem.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RunTimestamp, name: "stopTime"))
     RunListItem.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "storageType"))
     RunListItem.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, name: "workflowVersionName"))
+    RunListItem.add_member(:workflow_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowName, name: "workflowName"))
     RunListItem.type = Types::RunListItem
     RunLogLocation.add_member(:engine_log_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineLogStream, name: "engineLogStream"))
     RunLogLocation.add_member(:run_log_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: RunLogStream, name: "runLogStream"))
     RunLogLocation.type = Types::RunLogLocation
     RunResourceDigests.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: RunResourceDigestKey, name: "key"))
     RunResourceDigests.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: RunResourceDigest, name: "value"))
+    RunSummary.add_member(:pending_run_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "pendingRunCount"))
+    RunSummary.add_member(:starting_run_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "startingRunCount"))
+    RunSummary.add_member(:running_run_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "runningRunCount"))
+    RunSummary.add_member(:stopping_run_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "stoppingRunCount"))
+    RunSummary.add_member(:completed_run_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "completedRunCount"))
+    RunSummary.add_member(:deleted_run_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "deletedRunCount"))
+    RunSummary.add_member(:failed_run_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "failedRunCount"))
+    RunSummary.add_member(:cancelled_run_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "cancelledRunCount"))
+    RunSummary.type = Types::RunSummary
     S3AccessConfig.add_member(:access_log_location, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessLogLocation, name: "accessLogLocation"))
     S3AccessConfig.type = Types::S3AccessConfig
     Schema.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaItem, name: "member"))
     SchemaItem.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key", traits: {"smithy.api#pattern" => "^[a-z0-9_]{1,255}$"}))
     SchemaItem.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaValueType, name: "value"))
+    SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
     SequenceInformation.add_member(:total_read_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "totalReadCount"))
     SequenceInformation.add_member(:total_base_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "totalBaseCount"))
     SequenceInformation.add_member(:generated_from, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneratedFrom, name: "generatedFrom"))
@@ -1828,6 +2074,18 @@ module Aws::Omics
     StartReferenceImportJobSourceItem.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     StartReferenceImportJobSourceItem.type = Types::StartReferenceImportJobSourceItem
     StartReferenceImportJobSourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StartReferenceImportJobSourceItem, name: "member"))
+    StartRunBatchRequest.add_member(:batch_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchName, name: "batchName"))
+    StartRunBatchRequest.add_member(:request_id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchRequestId, name: "requestId", traits: {"smithy.api#idempotencyToken" => {}, "smithy.api#required" => {}}))
+    StartRunBatchRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    StartRunBatchRequest.add_member(:default_run_setting, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultRunSetting, name: "defaultRunSetting", traits: {"smithy.api#required" => {}}))
+    StartRunBatchRequest.add_member(:batch_run_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchRunSettings, name: "batchRunSettings", traits: {"smithy.api#required" => {}}))
+    StartRunBatchRequest.type = Types::StartRunBatchRequest
+    StartRunBatchResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchId, name: "id"))
+    StartRunBatchResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchArn, name: "arn"))
+    StartRunBatchResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchStatus, name: "status"))
+    StartRunBatchResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchUuid, name: "uuid"))
+    StartRunBatchResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    StartRunBatchResponse.type = Types::StartRunBatchResponse
     StartRunRequest.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "workflowId"))
     StartRunRequest.add_member(:workflow_type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowType, name: "workflowType"))
     StartRunRequest.add_member(:run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, name: "runId"))
@@ -1847,6 +2105,11 @@ module Aws::Omics
     StartRunRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "storageType"))
     StartRunRequest.add_member(:workflow_owner_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowOwnerId, name: "workflowOwnerId"))
     StartRunRequest.add_member(:workflow_version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionName, name: "workflowVersionName"))
+    StartRunRequest.add_member(:networking_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkingMode, name: "networkingMode"))
+    StartRunRequest.add_member(:scratch_storage_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ScratchStorageMode, name: "scratchStorageMode"))
+    StartRunRequest.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationName, name: "configurationName"))
+    StartRunRequest.add_member(:session_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionPolicy, name: "sessionPolicy"))
+    StartRunRequest.add_member(:engine_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EngineSettings, name: "engineSettings"))
     StartRunRequest.type = Types::StartRunRequest
     StartRunResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RunArn, name: "arn"))
     StartRunResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: RunId, name: "id"))
@@ -1854,6 +2117,8 @@ module Aws::Omics
     StartRunResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     StartRunResponse.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: RunUuid, name: "uuid"))
     StartRunResponse.add_member(:run_output_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: RunOutputUri, name: "runOutputUri"))
+    StartRunResponse.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationDetails, name: "configuration"))
+    StartRunResponse.add_member(:networking_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "networkingMode"))
     StartRunResponse.type = Types::StartRunResponse
     StartVariantImportRequest.add_member(:destination_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StoreName, name: "destinationName", traits: {"smithy.api#required" => {}}))
     StartVariantImportRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "roleArn", traits: {"smithy.api#required" => {}}))
@@ -1869,6 +2134,15 @@ module Aws::Omics
     StoreOptions.type = Types::StoreOptions
     StoreType.add_member(:sequence_store, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEQUENCE_STORE", traits: {"smithy.api#enumValue" => "SEQUENCE_STORE"}))
     StoreType.add_member(:reference_store, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFERENCE_STORE", traits: {"smithy.api#enumValue" => "REFERENCE_STORE"}))
+    SubmissionSummary.add_member(:successful_start_submission_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "successfulStartSubmissionCount"))
+    SubmissionSummary.add_member(:failed_start_submission_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "failedStartSubmissionCount"))
+    SubmissionSummary.add_member(:pending_start_submission_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "pendingStartSubmissionCount"))
+    SubmissionSummary.add_member(:successful_cancel_submission_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "successfulCancelSubmissionCount"))
+    SubmissionSummary.add_member(:failed_cancel_submission_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "failedCancelSubmissionCount"))
+    SubmissionSummary.add_member(:successful_delete_submission_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "successfulDeleteSubmissionCount"))
+    SubmissionSummary.add_member(:failed_delete_submission_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "failedDeleteSubmissionCount"))
+    SubmissionSummary.type = Types::SubmissionSummary
+    SubnetIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
@@ -1889,6 +2163,7 @@ module Aws::Omics
     TaskListItem.add_member(:stop_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskTimestamp, name: "stopTime"))
     TaskListItem.add_member(:gpus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "gpus", traits: {"smithy.api#range" => {"min" => 0}}))
     TaskListItem.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskInstanceType, name: "instanceType"))
+    TaskListItem.add_member(:uuid, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskUuid, name: "uuid"))
     TaskListItem.type = Types::TaskListItem
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
@@ -2047,6 +2322,15 @@ module Aws::Omics
     VersionOptions.add_member(:tsv_version_options, Types::VersionOptions::TsvVersionOptions, ::Smithy::Schema::Shapes::MemberShape.new(target: TsvVersionOptions, name: "tsvVersionOptions"))
     VersionOptions.add_member(:unknown, Types::VersionOptions::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VersionOptions.type = Types::VersionOptions
+    VpcConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds", traits: {"smithy.api#length" => {"max" => 5}}))
+    VpcConfig.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds", traits: {"smithy.api#length" => {"max" => 16}}))
+    VpcConfig.add_member(:vpc_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "vpcOwnerAccountId"))
+    VpcConfig.type = Types::VpcConfig
+    VpcConfigResponse.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds"))
+    VpcConfigResponse.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds"))
+    VpcConfigResponse.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
+    VpcConfigResponse.add_member(:vpc_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AwsAccountId, name: "vpcOwnerAccountId"))
+    VpcConfigResponse.type = Types::VpcConfigResponse
     WorkflowExportList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowExport, name: "member"))
     WorkflowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowListItem, name: "member"))
     WorkflowListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowArn, name: "arn"))
@@ -2065,6 +2349,9 @@ module Aws::Omics
     WorkflowParameter.type = Types::WorkflowParameter
     WorkflowParameterTemplate.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterName, name: "key"))
     WorkflowParameterTemplate.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameter, name: "value"))
+    WorkflowProfileList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowProfileName, name: "member"))
+    WorkflowProfileParameterTemplates.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowProfileName, name: "key"))
+    WorkflowProfileParameterTemplates.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowParameterTemplate, name: "value"))
     WorkflowVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionListItem, name: "member"))
     WorkflowVersionListItem.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowVersionArn, name: "arn"))
     WorkflowVersionListItem.add_member(:workflow_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkflowId, name: "workflowId"))
@@ -2081,7 +2368,7 @@ module Aws::Omics
       service.id = "com.amazonaws.omics#Omics"
       service.name = "Omics"
       service.version = "2022-11-28"
-      service.traits = {"aws.api#service" => {"sdkId" => "Omics", "arnNamespace" => "omics", "cloudTrailEventSource" => "omics.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "omics"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the presence of tag key-value pairs attached to the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the presence of tag key-value pairs in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the presence of tag keys in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Omics"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Omics", "arnNamespace" => "omics", "cloudTrailEventSource" => "omics.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "omics"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the presence of tag key-value pairs attached to the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by the presence of tag key-value pairs in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by the presence of tag keys in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.iam#supportedPrincipalTypes" => ["Root", "IAMUser", "IAMRole", "FederatedUser"], "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Omics", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://omics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://omics-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://omics.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://omics.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:abort_multipart_read_set_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#AbortMultipartReadSetUpload"
         operation.name = "AbortMultipartReadSetUpload"
@@ -2151,6 +2438,21 @@ module Aws::Omics
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/run/{id}/cancel", "code" => 202}}
       end)
+      service.add_operation(:cancel_run_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#CancelRunBatch"
+        operation.name = "CancelRunBatch"
+        operation.input = CancelRunBatchRequest
+        operation.output = CancelRunBatchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/runBatch/cancel", "code" => 202}}
+      end)
       service.add_operation(:cancel_variant_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CancelVariantImportJob"
         operation.name = "CancelVariantImportJob"
@@ -2205,6 +2507,21 @@ module Aws::Omics
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStore/{name}/version", "code" => 200}}
+      end)
+      service.add_operation(:create_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#CreateConfiguration"
+        operation.name = "CreateConfiguration"
+        operation.input = CreateConfigurationRequest
+        operation.output = CreateConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/configuration", "code" => 201}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_multipart_read_set_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#CreateMultipartReadSetUpload"
@@ -2361,6 +2678,36 @@ module Aws::Omics
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStore/{name}/versions/delete", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:delete_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#DeleteBatch"
+        operation.name = "DeleteBatch"
+        operation.input = DeleteBatchRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/runBatch/{batchId}", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#DeleteConfiguration"
+        operation.name = "DeleteConfiguration"
+        operation.input = DeleteConfigurationRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/configuration/{name}", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_reference, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteReference"
         operation.name = "DeleteReference"
@@ -2403,6 +2750,21 @@ module Aws::Omics
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/run/{id}", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_run_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#DeleteRunBatch"
+        operation.name = "DeleteRunBatch"
+        operation.input = DeleteRunBatchRequest
+        operation.output = DeleteRunBatchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/runBatch/delete", "code" => 202}}
       end)
       service.add_operation(:delete_run_cache, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#DeleteRunCache"
@@ -2554,6 +2916,34 @@ module Aws::Omics
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/annotationStore/{name}/version/{versionName}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#GetBatch"
+        operation.name = "GetBatch"
+        operation.input = GetBatchRequest
+        operation.output = GetBatchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/runBatch/{batchId}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#GetConfiguration"
+        operation.name = "GetConfiguration"
+        operation.input = GetConfigurationRequest
+        operation.output = GetConfigurationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/configuration/{name}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_read_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#GetReadSet"
@@ -2870,6 +3260,35 @@ module Aws::Omics
         operation.traits = {"aws.iam#iamAction" => {"documentation" => "Grants permission to retrieve a list of information about Annotation Stores"}, "smithy.api#endpoint" => {"hostPrefix" => "analytics-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/annotationStores", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAnnotationStores.new
       end)
+      service.add_operation(:list_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#ListBatch"
+        operation.name = "ListBatch"
+        operation.input = ListBatchRequest
+        operation.output = ListBatchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/runBatch", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListBatch.new
+      end)
+      service.add_operation(:list_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#ListConfigurations"
+        operation.name = "ListConfigurations"
+        operation.input = ListConfigurationsRequest
+        operation.output = ListConfigurationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/configuration", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListConfigurations.new
+      end)
       service.add_operation(:list_multipart_read_set_uploads, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListMultipartReadSetUploads"
         operation.name = "ListMultipartReadSetUploads"
@@ -3062,6 +3481,22 @@ module Aws::Omics
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/run", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListRuns.new
+      end)
+      service.add_operation(:list_runs_in_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#ListRunsInBatch"
+        operation.name = "ListRunsInBatch"
+        operation.input = ListRunsInBatchRequest
+        operation.output = ListRunsInBatchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "GET", "uri" => "/runBatch/{batchId}/run", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListRunsInBatch.new
       end)
       service.add_operation(:list_sequence_stores, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#ListSequenceStores"
@@ -3261,6 +3696,21 @@ module Aws::Omics
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/run", "code" => 201}}
+      end)
+      service.add_operation(:start_run_batch, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.omics#StartRunBatch"
+        operation.name = "StartRunBatch"
+        operation.input = StartRunBatchRequest
+        operation.output = StartRunBatchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << RequestTimeoutException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "workflows-"}, "smithy.api#http" => {"method" => "POST", "uri" => "/runBatch", "code" => 201}}
       end)
       service.add_operation(:start_variant_import_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.omics#StartVariantImportJob"

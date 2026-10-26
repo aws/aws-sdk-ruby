@@ -159,7 +159,7 @@ module Aws::Signer
     end
 
     # <p>The request was denied due to request throttling.</p>
-    # 		       <p>Instead of this error, <code>TooManyRequestsException</code> should be used.</p>
+    #          <p>Instead of this error, <code>TooManyRequestsException</code> should be used.</p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::ThrottlingException] data
@@ -177,7 +177,7 @@ module Aws::Signer
     end
 
     # <p>The allowed number of job-signing requests has been exceeded.</p>
-    # 		       <p>This error supersedes the error <code>ThrottlingException</code>.</p>
+    #          <p>This error supersedes the error <code>ThrottlingException</code>.</p>
     class TooManyRequestsException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Signer::Types::TooManyRequestsException] data

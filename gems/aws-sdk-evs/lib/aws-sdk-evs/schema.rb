@@ -6,7 +6,10 @@ module Aws::Evs
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AccountSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#AccountSetting", name: "AccountSetting")
+    AccountSettingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#AccountSettingList", name: "AccountSettingList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     AllocationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#AllocationId", name: "AllocationId", traits: {"smithy.api#length" => {"min" => 9, "max" => 26}, "smithy.api#pattern" => "^eipalloc-[a-zA-Z0-9_-]+$"})
+    ApplianceFqdn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#ApplianceFqdn", name: "ApplianceFqdn", traits: {"smithy.api#length" => {"min" => 1, "max" => 253}, "smithy.api#pattern" => "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"})
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}, "smithy.api#pattern" => "^arn:aws:evs:[a-z]{2}-[a-z]+-[0-9]:[0-9]{12}:environment/[a-zA-Z0-9_-]+$"})
     AssociateEipToVlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#AssociateEipToVlanRequest", name: "AssociateEipToVlanRequest")
     AssociateEipToVlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#AssociateEipToVlanResponse", name: "AssociateEipToVlanResponse")
@@ -18,11 +21,26 @@ module Aws::Evs
     Cidr = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#Cidr", name: "Cidr", traits: {"smithy.api#pattern" => "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$"})
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[!-~]+$"})
     ConnectivityInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ConnectivityInfo", name: "ConnectivityInfo")
+    Connector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#Connector", name: "Connector")
+    ConnectorCheck = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ConnectorCheck", name: "ConnectorCheck")
+    ConnectorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#ConnectorId", name: "ConnectorId", traits: {"smithy.api#pattern" => "^(cnctr-[a-zA-Z0-9]{10})$"})
+    ConnectorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#ConnectorList", name: "ConnectorList")
+    ConnectorState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.evs#ConnectorState", name: "ConnectorState")
+    ConnectorType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.evs#ConnectorType", name: "ConnectorType")
+    ConnectorsChecksList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#ConnectorsChecksList", name: "ConnectorsChecksList")
+    CreateEntitlementRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#CreateEntitlementRequest", name: "CreateEntitlementRequest")
+    CreateEntitlementResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#CreateEntitlementResponse", name: "CreateEntitlementResponse")
+    CreateEnvironmentConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#CreateEnvironmentConnectorRequest", name: "CreateEnvironmentConnectorRequest")
+    CreateEnvironmentConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#CreateEnvironmentConnectorResponse", name: "CreateEnvironmentConnectorResponse")
     CreateEnvironmentHostRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#CreateEnvironmentHostRequest", name: "CreateEnvironmentHostRequest")
     CreateEnvironmentHostResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#CreateEnvironmentHostResponse", name: "CreateEnvironmentHostResponse")
     CreateEnvironmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#CreateEnvironmentRequest", name: "CreateEnvironmentRequest")
     CreateEnvironmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#CreateEnvironmentResponse", name: "CreateEnvironmentResponse")
     DedicatedHostId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#DedicatedHostId", name: "DedicatedHostId", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#pattern" => "^h-[a-f0-9]{8}([a-f0-9]{9})?$"})
+    DeleteEntitlementRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#DeleteEntitlementRequest", name: "DeleteEntitlementRequest")
+    DeleteEntitlementResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#DeleteEntitlementResponse", name: "DeleteEntitlementResponse")
+    DeleteEnvironmentConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#DeleteEnvironmentConnectorRequest", name: "DeleteEnvironmentConnectorRequest")
+    DeleteEnvironmentConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#DeleteEnvironmentConnectorResponse", name: "DeleteEnvironmentConnectorResponse")
     DeleteEnvironmentHostRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#DeleteEnvironmentHostRequest", name: "DeleteEnvironmentHostRequest")
     DeleteEnvironmentHostResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#DeleteEnvironmentHostResponse", name: "DeleteEnvironmentHostResponse")
     DeleteEnvironmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#DeleteEnvironmentRequest", name: "DeleteEnvironmentRequest")
@@ -31,6 +49,8 @@ module Aws::Evs
     DisassociateEipFromVlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#DisassociateEipFromVlanResponse", name: "DisassociateEipFromVlanResponse")
     EipAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#EipAssociation", name: "EipAssociation")
     EipAssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#EipAssociationList", name: "EipAssociationList")
+    EntitlementStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.evs#EntitlementStatus", name: "EntitlementStatus")
+    EntitlementType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.evs#EntitlementType", name: "EntitlementType")
     Environment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#Environment", name: "Environment")
     EnvironmentId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#EnvironmentId", name: "EnvironmentId", traits: {"smithy.api#pattern" => "^(env-[a-zA-Z0-9]{10})$"})
     EnvironmentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#EnvironmentName", name: "EnvironmentName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
@@ -38,8 +58,17 @@ module Aws::Evs
     EnvironmentStateList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#EnvironmentStateList", name: "EnvironmentStateList")
     EnvironmentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#EnvironmentSummary", name: "EnvironmentSummary")
     EnvironmentSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#EnvironmentSummaryList", name: "EnvironmentSummaryList")
+    ErrorDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ErrorDetail", name: "ErrorDetail")
+    EsxVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#EsxVersion", name: "EsxVersion", traits: {"smithy.api#length" => {"max" => 128}})
+    EsxVersionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#EsxVersionList", name: "EsxVersionList")
+    GetAccountSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#GetAccountSettingsRequest", name: "GetAccountSettingsRequest")
+    GetAccountSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#GetAccountSettingsResponse", name: "GetAccountSettingsResponse")
+    GetDepotUrlRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#GetDepotUrlRequest", name: "GetDepotUrlRequest")
+    GetDepotUrlResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#GetDepotUrlResponse", name: "GetDepotUrlResponse")
     GetEnvironmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#GetEnvironmentRequest", name: "GetEnvironmentRequest")
     GetEnvironmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#GetEnvironmentResponse", name: "GetEnvironmentResponse")
+    GetVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#GetVersionsRequest", name: "GetVersionsRequest")
+    GetVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#GetVersionsResponse", name: "GetVersionsResponse")
     Host = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#Host", name: "Host")
     HostInfoForCreate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#HostInfoForCreate", name: "HostInfoForCreate")
     HostInfoForCreateList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#HostInfoForCreateList", name: "HostInfoForCreateList", traits: {"smithy.api#length" => {"min" => 4, "max" => 4}})
@@ -49,10 +78,16 @@ module Aws::Evs
     InitialVlanInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#InitialVlanInfo", name: "InitialVlanInfo")
     InitialVlans = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#InitialVlans", name: "InitialVlans")
     InstanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.evs#InstanceType", name: "InstanceType")
+    InstanceTypeEsxVersionsInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#InstanceTypeEsxVersionsInfo", name: "InstanceTypeEsxVersionsInfo")
+    InstanceTypeEsxVersionsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#InstanceTypeEsxVersionsList", name: "InstanceTypeEsxVersionsList")
+    InstanceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#InstanceTypeList", name: "InstanceTypeList")
+    InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
     IpAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#IpAddress", name: "IpAddress", traits: {"smithy.api#pattern" => "^(\\d{1,3}\\.){3}\\d{1,3}$"})
     KeyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#KeyName", name: "KeyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
     LicenseInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#LicenseInfo", name: "LicenseInfo")
     LicenseInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#LicenseInfoList", name: "LicenseInfoList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    ListEnvironmentConnectorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListEnvironmentConnectorsRequest", name: "ListEnvironmentConnectorsRequest")
+    ListEnvironmentConnectorsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListEnvironmentConnectorsResponse", name: "ListEnvironmentConnectorsResponse")
     ListEnvironmentHostsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListEnvironmentHostsRequest", name: "ListEnvironmentHostsRequest")
     ListEnvironmentHostsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListEnvironmentHostsResponse", name: "ListEnvironmentHostsResponse")
     ListEnvironmentVlansRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListEnvironmentVlansRequest", name: "ListEnvironmentVlansRequest")
@@ -61,6 +96,8 @@ module Aws::Evs
     ListEnvironmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListEnvironmentsResponse", name: "ListEnvironmentsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListTagsForResourceRequest", name: "ListTagsForResourceRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.evs#EnvironmentResource", "ids" => {"environmentId" => "resourceArn"}}]})
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
+    ListVmEntitlementsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListVmEntitlementsRequest", name: "ListVmEntitlementsRequest")
+    ListVmEntitlementsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ListVmEntitlementsResponse", name: "ListVmEntitlementsResponse")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.evs#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     NetworkAclId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#NetworkAclId", name: "NetworkAclId", traits: {"smithy.api#length" => {"min" => 4, "max" => 21}, "smithy.api#pattern" => "^acl-[a-zA-Z0-9_-]+$"})
     NetworkInterface = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#NetworkInterface", name: "NetworkInterface")
@@ -68,18 +105,23 @@ module Aws::Evs
     NetworkInterfaceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#NetworkInterfaceList", name: "NetworkInterfaceList", traits: {"smithy.api#length" => {"max" => 2}})
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#PaginationToken", name: "PaginationToken")
     PlacementGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#PlacementGroupId", name: "PlacementGroupId", traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#pattern" => "^pg-[a-f0-9]{8}([a-f0-9]{9})?$"})
+    PutAccountSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#PutAccountSettingsRequest", name: "PutAccountSettingsRequest")
+    PutAccountSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#PutAccountSettingsResponse", name: "PutAccountSettingsResponse")
     RequestTagMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.evs#RequestTagMap", name: "RequestTagMap", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResponseTagMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.evs#ResponseTagMap", name: "ResponseTagMap")
     RouteServerPeering = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#RouteServerPeering", name: "RouteServerPeering", traits: {"smithy.api#length" => {"min" => 3, "max" => 21}})
     RouteServerPeeringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#RouteServerPeeringList", name: "RouteServerPeeringList", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
     Secret = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#Secret", name: "Secret")
+    SecretIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#SecretIdentifier", name: "SecretIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@!-]+|[a-zA-Z0-9/_+=.@!-]+)$"})
     SecretList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#SecretList", name: "SecretList")
     SecurityGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#SecurityGroupId", name: "SecurityGroupId", traits: {"smithy.api#length" => {"min" => 3, "max" => 25}, "smithy.api#pattern" => "^sg-[0-9a-zA-Z]*$"})
     SecurityGroups = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#SecurityGroups", name: "SecurityGroups", traits: {"smithy.api#length" => {"max" => 2}})
     ServiceAccessSecurityGroups = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ServiceAccessSecurityGroups", name: "ServiceAccessSecurityGroups")
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
-    SolutionKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#SolutionKey", name: "SolutionKey", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$"})
+    SettingName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#SettingName", name: "SettingName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9]+$"})
+    SettingValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#SettingValue", name: "SettingValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9]+$"})
+    SolutionKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#SolutionKey", name: "SolutionKey", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$", "smithy.api#sensitive" => {}})
     StateDetails = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#StateDetails", name: "StateDetails")
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#SubnetId", name: "SubnetId", traits: {"smithy.api#length" => {"min" => 15, "max" => 24}, "smithy.api#pattern" => "^subnet-[a-f0-9]{8}([a-f0-9]{9})?$"})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w.:/=+-@]+$"})
@@ -92,19 +134,32 @@ module Aws::Evs
     TooManyTagsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#TooManyTagsException", name: "TooManyTagsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#UntagResourceRequest", name: "UntagResourceRequest", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.evs#EnvironmentResource", "ids" => {"environmentId" => "resourceArn"}}]})
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#UntagResourceResponse", name: "UntagResourceResponse")
-    VSanLicenseKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#VSanLicenseKey", name: "VSanLicenseKey", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$"})
+    UpdateEnvironmentConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#UpdateEnvironmentConnectorRequest", name: "UpdateEnvironmentConnectorRequest")
+    UpdateEnvironmentConnectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#UpdateEnvironmentConnectorResponse", name: "UpdateEnvironmentConnectorResponse")
+    VSanLicenseKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#VSanLicenseKey", name: "VSanLicenseKey", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$", "smithy.api#sensitive" => {}})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.evs#ValidationExceptionReason", name: "ValidationExceptionReason")
     VcfHostnames = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#VcfHostnames", name: "VcfHostnames")
     VcfVersion = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.evs#VcfVersion", name: "VcfVersion")
+    VcfVersionInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#VcfVersionInfo", name: "VcfVersionInfo")
+    VcfVersionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#VcfVersionList", name: "VcfVersionList")
     Vlan = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#Vlan", name: "Vlan")
     VlanId = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.evs#VlanId", name: "VlanId")
     VlanList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#VlanList", name: "VlanList")
     VlanState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.evs#VlanState", name: "VlanState")
+    VmEntitlement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.evs#VmEntitlement", name: "VmEntitlement")
+    VmEntitlementList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#VmEntitlementList", name: "VmEntitlementList")
+    VmId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#VmId", name: "VmId", traits: {"smithy.api#length" => {"min" => 4, "max" => 1024}, "smithy.api#pattern" => "^vm-[0-9]+$"})
+    VmIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.evs#VmIdList", name: "VmIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    VmName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#VmName", name: "VmName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.evs#VpcId", name: "VpcId", traits: {"smithy.api#length" => {"min" => 12, "max" => 21}, "smithy.api#pattern" => "^vpc-[a-f0-9]{8}([a-f0-9]{9})?$"})
 
+    AccountSetting.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SettingName, name: "name", traits: {"smithy.api#required" => {}}))
+    AccountSetting.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SettingValue, name: "value", traits: {"smithy.api#required" => {}}))
+    AccountSetting.type = Types::AccountSetting
+    AccountSettingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSetting, name: "member"))
     AssociateEipToVlanRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     AssociateEipToVlanRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#required" => {}}))
     AssociateEipToVlanRequest.add_member(:vlan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "vlanName", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
@@ -113,6 +168,7 @@ module Aws::Evs
     AssociateEipToVlanResponse.add_member(:vlan, ::Smithy::Schema::Shapes::MemberShape.new(target: Vlan, name: "vlan"))
     AssociateEipToVlanResponse.type = Types::AssociateEipToVlanResponse
     Check.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckType, name: "type"))
+    Check.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "id"))
     Check.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckResult, name: "result"))
     Check.add_member(:impaired_since, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "impairedSince"))
     Check.type = Types::Check
@@ -123,12 +179,67 @@ module Aws::Evs
     CheckType.add_member(:key_coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEY_COVERAGE", traits: {"smithy.api#enumValue" => "KEY_COVERAGE"}))
     CheckType.add_member(:reachability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REACHABILITY", traits: {"smithy.api#enumValue" => "REACHABILITY"}))
     CheckType.add_member(:host_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST_COUNT", traits: {"smithy.api#enumValue" => "HOST_COUNT"}))
+    CheckType.add_member(:vcenter_reachability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VCENTER_REACHABILITY", traits: {"smithy.api#enumValue" => "VCENTER_REACHABILITY"}))
+    CheckType.add_member(:vcenter_vm_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VCENTER_VM_SYNC", traits: {"smithy.api#enumValue" => "VCENTER_VM_SYNC"}))
+    CheckType.add_member(:vcenter_vm_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VCENTER_VM_EVENT", traits: {"smithy.api#enumValue" => "VCENTER_VM_EVENT"}))
+    CheckType.add_member(:operations_manager_reachability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPERATIONS_MANAGER_REACHABILITY", traits: {"smithy.api#enumValue" => "OPERATIONS_MANAGER_REACHABILITY"}))
+    CheckType.add_member(:sddc_manager_reachability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SDDC_MANAGER_REACHABILITY", traits: {"smithy.api#enumValue" => "SDDC_MANAGER_REACHABILITY"}))
+    CheckType.add_member(:sddc_manager_host_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SDDC_MANAGER_HOST_COUNT", traits: {"smithy.api#enumValue" => "SDDC_MANAGER_HOST_COUNT"}))
+    CheckType.add_member(:sddc_manager_key_coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SDDC_MANAGER_KEY_COVERAGE", traits: {"smithy.api#enumValue" => "SDDC_MANAGER_KEY_COVERAGE"}))
+    CheckType.add_member(:sddc_manager_key_reuse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SDDC_MANAGER_KEY_REUSE", traits: {"smithy.api#enumValue" => "SDDC_MANAGER_KEY_REUSE"}))
+    CheckType.add_member(:connector_health, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTOR_HEALTH", traits: {"smithy.api#enumValue" => "CONNECTOR_HEALTH"}))
     ChecksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Check, name: "member"))
     ConnectivityInfo.add_member(:private_route_server_peerings, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteServerPeeringList, name: "privateRouteServerPeerings", traits: {"smithy.api#required" => {}}))
     ConnectivityInfo.type = Types::ConnectivityInfo
+    Connector.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
+    Connector.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "connectorId"))
+    Connector.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, name: "type"))
+    Connector.add_member(:appliance_fqdn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplianceFqdn, name: "applianceFqdn"))
+    Connector.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdentifier, name: "secretArn"))
+    Connector.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorState, name: "state"))
+    Connector.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StateDetails, name: "stateDetails"))
+    Connector.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckResult, name: "status"))
+    Connector.add_member(:checks, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorsChecksList, name: "checks"))
+    Connector.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt"))
+    Connector.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "modifiedAt"))
+    Connector.type = Types::Connector
+    ConnectorCheck.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckType, name: "type"))
+    ConnectorCheck.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckResult, name: "result"))
+    ConnectorCheck.add_member(:last_check_attempt, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastCheckAttempt"))
+    ConnectorCheck.add_member(:impaired_since, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "impairedSince"))
+    ConnectorCheck.type = Types::ConnectorCheck
+    ConnectorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Connector, name: "member"))
+    ConnectorState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ConnectorState.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    ConnectorState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ConnectorState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    ConnectorState.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    ConnectorState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ConnectorState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    ConnectorType.add_member(:operations_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPERATIONS_MANAGER", traits: {"smithy.api#enumValue" => "OPERATIONS_MANAGER"}))
+    ConnectorType.add_member(:sddc_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SDDC_MANAGER", traits: {"smithy.api#enumValue" => "SDDC_MANAGER"}))
+    ConnectorType.add_member(:vcenter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VCENTER", traits: {"smithy.api#enumValue" => "VCENTER"}))
+    ConnectorsChecksList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorCheck, name: "member"))
+    CreateEntitlementRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateEntitlementRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#required" => {}}))
+    CreateEntitlementRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "connectorId", traits: {"smithy.api#required" => {}}))
+    CreateEntitlementRequest.add_member(:entitlement_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementType, name: "entitlementType", traits: {"smithy.api#required" => {}}))
+    CreateEntitlementRequest.add_member(:vm_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VmIdList, name: "vmIds", traits: {"smithy.api#required" => {}}))
+    CreateEntitlementRequest.type = Types::CreateEntitlementRequest
+    CreateEntitlementResponse.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: VmEntitlementList, name: "entitlements"))
+    CreateEntitlementResponse.type = Types::CreateEntitlementResponse
+    CreateEnvironmentConnectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateEnvironmentConnectorRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateEnvironmentConnectorRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorType, name: "type", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentConnectorRequest.add_member(:appliance_fqdn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplianceFqdn, name: "applianceFqdn", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentConnectorRequest.add_member(:secret_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdentifier, name: "secretIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentConnectorRequest.type = Types::CreateEnvironmentConnectorRequest
+    CreateEnvironmentConnectorResponse.add_member(:connector, ::Smithy::Schema::Shapes::MemberShape.new(target: Connector, name: "connector"))
+    CreateEnvironmentConnectorResponse.type = Types::CreateEnvironmentConnectorResponse
     CreateEnvironmentHostRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateEnvironmentHostRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentHostRequest.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: HostInfoForCreate, name: "host", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentHostRequest.add_member(:esx_version, ::Smithy::Schema::Shapes::MemberShape.new(target: EsxVersion, name: "esxVersion"))
     CreateEnvironmentHostRequest.type = Types::CreateEnvironmentHostRequest
     CreateEnvironmentHostResponse.add_member(:environment_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "environmentSummary"))
     CreateEnvironmentHostResponse.add_member(:host, ::Smithy::Schema::Shapes::MemberShape.new(target: Host, name: "host"))
@@ -142,15 +253,30 @@ module Aws::Evs
     CreateEnvironmentRequest.add_member(:service_access_subnet_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "serviceAccessSubnetId", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentRequest.add_member(:vcf_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VcfVersion, name: "vcfVersion", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentRequest.add_member(:terms_accepted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "termsAccepted", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentRequest.add_member(:license_info, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseInfoList, name: "licenseInfo", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentRequest.add_member(:initial_vlans, ::Smithy::Schema::Shapes::MemberShape.new(target: InitialVlans, name: "initialVlans", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentRequest.add_member(:hosts, ::Smithy::Schema::Shapes::MemberShape.new(target: HostInfoForCreateList, name: "hosts", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentRequest.add_member(:connectivity_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectivityInfo, name: "connectivityInfo", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentRequest.add_member(:vcf_hostnames, ::Smithy::Schema::Shapes::MemberShape.new(target: VcfHostnames, name: "vcfHostnames", traits: {"smithy.api#required" => {}}))
-    CreateEnvironmentRequest.add_member(:site_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "siteId", traits: {"smithy.api#required" => {}}))
+    CreateEnvironmentRequest.add_member(:connectivity_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectivityInfo, name: "connectivityInfo"))
+    CreateEnvironmentRequest.add_member(:license_info, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseInfoList, name: "licenseInfo"))
+    CreateEnvironmentRequest.add_member(:hosts, ::Smithy::Schema::Shapes::MemberShape.new(target: HostInfoForCreateList, name: "hosts"))
+    CreateEnvironmentRequest.add_member(:vcf_hostnames, ::Smithy::Schema::Shapes::MemberShape.new(target: VcfHostnames, name: "vcfHostnames"))
+    CreateEnvironmentRequest.add_member(:site_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "siteId"))
     CreateEnvironmentRequest.type = Types::CreateEnvironmentRequest
     CreateEnvironmentResponse.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "environment"))
     CreateEnvironmentResponse.type = Types::CreateEnvironmentResponse
+    DeleteEntitlementRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteEntitlementRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#required" => {}}))
+    DeleteEntitlementRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "connectorId", traits: {"smithy.api#required" => {}}))
+    DeleteEntitlementRequest.add_member(:entitlement_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementType, name: "entitlementType", traits: {"smithy.api#required" => {}}))
+    DeleteEntitlementRequest.add_member(:vm_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: VmIdList, name: "vmIds", traits: {"smithy.api#required" => {}}))
+    DeleteEntitlementRequest.type = Types::DeleteEntitlementRequest
+    DeleteEntitlementResponse.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: VmEntitlementList, name: "entitlements"))
+    DeleteEntitlementResponse.type = Types::DeleteEntitlementResponse
+    DeleteEnvironmentConnectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteEnvironmentConnectorRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEnvironmentConnectorRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "connectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEnvironmentConnectorRequest.type = Types::DeleteEnvironmentConnectorRequest
+    DeleteEnvironmentConnectorResponse.add_member(:connector, ::Smithy::Schema::Shapes::MemberShape.new(target: Connector, name: "connector"))
+    DeleteEnvironmentConnectorResponse.add_member(:environment_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "environmentSummary"))
+    DeleteEnvironmentConnectorResponse.type = Types::DeleteEnvironmentConnectorResponse
     DeleteEnvironmentHostRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DeleteEnvironmentHostRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#required" => {}}))
     DeleteEnvironmentHostRequest.add_member(:host_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HostName, name: "hostName", traits: {"smithy.api#required" => {}}))
@@ -175,6 +301,13 @@ module Aws::Evs
     EipAssociation.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "ipAddress"))
     EipAssociation.type = Types::EipAssociation
     EipAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EipAssociation, name: "member"))
+    EntitlementStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    EntitlementStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    EntitlementStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
+    EntitlementStatus.add_member(:at_risk, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AT_RISK", traits: {"smithy.api#enumValue" => "AT_RISK"}))
+    EntitlementStatus.add_member(:entitlement_removed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENTITLEMENT_REMOVED", traits: {"smithy.api#enumValue" => "ENTITLEMENT_REMOVED"}))
+    EntitlementStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    EntitlementType.add_member(:windows_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WINDOWS_SERVER", traits: {"smithy.api#enumValue" => "WINDOWS_SERVER"}))
     Environment.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
     Environment.add_member(:environment_state, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentState, name: "environmentState"))
     Environment.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StateDetails, name: "stateDetails"))
@@ -212,10 +345,27 @@ module Aws::Evs
     EnvironmentSummary.add_member(:environment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "environmentArn"))
     EnvironmentSummary.type = Types::EnvironmentSummary
     EnvironmentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentSummary, name: "member"))
+    ErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorCode", traits: {"smithy.api#required" => {}}))
+    ErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "errorMessage", traits: {"smithy.api#required" => {}}))
+    ErrorDetail.type = Types::ErrorDetail
+    EsxVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
+    GetAccountSettingsRequest.type = Types::GetAccountSettingsRequest
+    GetAccountSettingsResponse.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingList, name: "settings"))
+    GetAccountSettingsResponse.type = Types::GetAccountSettingsResponse
+    GetDepotUrlRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDepotUrlRequest.add_member(:rotate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "rotate"))
+    GetDepotUrlRequest.type = Types::GetDepotUrlRequest
+    GetDepotUrlResponse.add_member(:depot_url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "depotUrl", traits: {"smithy.api#required" => {}}))
+    GetDepotUrlResponse.add_member(:token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "token", traits: {"smithy.api#required" => {}}))
+    GetDepotUrlResponse.type = Types::GetDepotUrlResponse
     GetEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEnvironmentRequest.type = Types::GetEnvironmentRequest
     GetEnvironmentResponse.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: Environment, name: "environment"))
     GetEnvironmentResponse.type = Types::GetEnvironmentResponse
+    GetVersionsRequest.type = Types::GetVersionsRequest
+    GetVersionsResponse.add_member(:vcf_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: VcfVersionList, name: "vcfVersions", traits: {"smithy.api#required" => {}}))
+    GetVersionsResponse.add_member(:instance_type_esx_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeEsxVersionsList, name: "instanceTypeEsxVersions", traits: {"smithy.api#required" => {}}))
+    GetVersionsResponse.type = Types::GetVersionsResponse
     Host.add_member(:host_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HostName, name: "hostName"))
     Host.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddress, name: "ipAddress"))
     Host.add_member(:key_name, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyName, name: "keyName"))
@@ -260,10 +410,26 @@ module Aws::Evs
     InitialVlans.add_member(:hcx_network_acl_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkAclId, name: "hcxNetworkAclId"))
     InitialVlans.type = Types::InitialVlans
     InstanceType.add_member(:i4_i_metal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "I4I_METAL", traits: {"smithy.api#enumValue" => "i4i.metal"}))
+    InstanceType.add_member(:i7_i_metal_24_xl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "I7I_METAL_24XL", traits: {"smithy.api#enumValue" => "i7i.metal-24xl"}))
+    InstanceType.add_member(:i7_i_metal_48_xl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "I7I_METAL_48XL", traits: {"smithy.api#enumValue" => "i7i.metal-48xl"}))
+    InstanceTypeEsxVersionsInfo.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType", traits: {"smithy.api#required" => {}}))
+    InstanceTypeEsxVersionsInfo.add_member(:esx_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: EsxVersionList, name: "esxVersions", traits: {"smithy.api#required" => {}}))
+    InstanceTypeEsxVersionsInfo.type = Types::InstanceTypeEsxVersionsInfo
+    InstanceTypeEsxVersionsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeEsxVersionsInfo, name: "member"))
+    InstanceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "member"))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    InternalServerException.type = Types::InternalServerException
     LicenseInfo.add_member(:solution_key, ::Smithy::Schema::Shapes::MemberShape.new(target: SolutionKey, name: "solutionKey", traits: {"smithy.api#required" => {}}))
     LicenseInfo.add_member(:vsan_key, ::Smithy::Schema::Shapes::MemberShape.new(target: VSanLicenseKey, name: "vsanKey", traits: {"smithy.api#required" => {}}))
     LicenseInfo.type = Types::LicenseInfo
     LicenseInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LicenseInfo, name: "member"))
+    ListEnvironmentConnectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListEnvironmentConnectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListEnvironmentConnectorsRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListEnvironmentConnectorsRequest.type = Types::ListEnvironmentConnectorsRequest
+    ListEnvironmentConnectorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListEnvironmentConnectorsResponse.add_member(:connectors, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorList, name: "connectors"))
+    ListEnvironmentConnectorsResponse.type = Types::ListEnvironmentConnectorsResponse
     ListEnvironmentHostsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListEnvironmentHostsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListEnvironmentHostsRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -289,9 +455,22 @@ module Aws::Evs
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseTagMap, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    ListVmEntitlementsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListVmEntitlementsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListVmEntitlementsRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#required" => {}}))
+    ListVmEntitlementsRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "connectorId", traits: {"smithy.api#required" => {}}))
+    ListVmEntitlementsRequest.add_member(:entitlement_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementType, name: "entitlementType", traits: {"smithy.api#required" => {}}))
+    ListVmEntitlementsRequest.type = Types::ListVmEntitlementsRequest
+    ListVmEntitlementsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListVmEntitlementsResponse.add_member(:entitlements, ::Smithy::Schema::Shapes::MemberShape.new(target: VmEntitlementList, name: "entitlements"))
+    ListVmEntitlementsResponse.type = Types::ListVmEntitlementsResponse
     NetworkInterface.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceId, name: "networkInterfaceId"))
     NetworkInterface.type = Types::NetworkInterface
     NetworkInterfaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterface, name: "member"))
+    PutAccountSettingsRequest.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingList, name: "settings", traits: {"smithy.api#required" => {}}))
+    PutAccountSettingsRequest.type = Types::PutAccountSettingsRequest
+    PutAccountSettingsResponse.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingList, name: "settings"))
+    PutAccountSettingsResponse.type = Types::PutAccountSettingsResponse
     RequestTagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     RequestTagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
@@ -325,6 +504,14 @@ module Aws::Evs
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeys, name: "tagKeys", traits: {"aws.iam#conditionKeyValue" => "aws:TagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
+    UpdateEnvironmentConnectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateEnvironmentConnectorRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateEnvironmentConnectorRequest.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "connectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateEnvironmentConnectorRequest.add_member(:appliance_fqdn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplianceFqdn, name: "applianceFqdn"))
+    UpdateEnvironmentConnectorRequest.add_member(:secret_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretIdentifier, name: "secretIdentifier"))
+    UpdateEnvironmentConnectorRequest.type = Types::UpdateEnvironmentConnectorRequest
+    UpdateEnvironmentConnectorResponse.add_member(:connector, ::Smithy::Schema::Shapes::MemberShape.new(target: Connector, name: "connector"))
+    UpdateEnvironmentConnectorResponse.type = Types::UpdateEnvironmentConnectorResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "fieldList"))
@@ -348,6 +535,14 @@ module Aws::Evs
     VcfHostnames.add_member(:cloud_builder, ::Smithy::Schema::Shapes::MemberShape.new(target: HostName, name: "cloudBuilder", traits: {"smithy.api#required" => {}}))
     VcfHostnames.type = Types::VcfHostnames
     VcfVersion.add_member(:vcf_5_2_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VCF_5_2_1", traits: {"smithy.api#enumValue" => "VCF-5.2.1"}))
+    VcfVersion.add_member(:vcf_5_2_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VCF_5_2_2", traits: {"smithy.api#enumValue" => "VCF-5.2.2"}))
+    VcfVersion.add_member(:self_deployed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_DEPLOYED", traits: {"smithy.api#enumValue" => "SELF_DEPLOYED"}))
+    VcfVersionInfo.add_member(:vcf_version, ::Smithy::Schema::Shapes::MemberShape.new(target: VcfVersion, name: "vcfVersion", traits: {"smithy.api#required" => {}}))
+    VcfVersionInfo.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "status", traits: {"smithy.api#required" => {}}))
+    VcfVersionInfo.add_member(:default_esx_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "defaultEsxVersion", traits: {"smithy.api#required" => {}}))
+    VcfVersionInfo.add_member(:instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceTypeList, name: "instanceTypes", traits: {"smithy.api#required" => {}}))
+    VcfVersionInfo.type = Types::VcfVersionInfo
+    VcfVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VcfVersionInfo, name: "member"))
     Vlan.add_member(:vlan_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VlanId, name: "vlanId"))
     Vlan.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: Cidr, name: "cidr"))
     Vlan.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "availabilityZone"))
@@ -367,17 +562,40 @@ module Aws::Evs
     VlanState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
     VlanState.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "DELETED"}))
     VlanState.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    VmEntitlement.add_member(:vm_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VmId, name: "vmId"))
+    VmEntitlement.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentId, name: "environmentId"))
+    VmEntitlement.add_member(:connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorId, name: "connectorId"))
+    VmEntitlement.add_member(:vm_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VmName, name: "vmName"))
+    VmEntitlement.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementType, name: "type"))
+    VmEntitlement.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitlementStatus, name: "status"))
+    VmEntitlement.add_member(:last_synced_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "lastSyncedAt"))
+    VmEntitlement.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAt"))
+    VmEntitlement.add_member(:stopped_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "stoppedAt"))
+    VmEntitlement.add_member(:error_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "errorDetail"))
+    VmEntitlement.type = Types::VmEntitlement
+    VmEntitlementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VmEntitlement, name: "member"))
+    VmIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: VmId, name: "member"))
 
     AmazonElasticVMwareService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.evs#AmazonElasticVMwareService"
       service.name = "AmazonElasticVMwareService"
       service.version = "2023-07-27"
-      service.traits = {"aws.api#service" => {"sdkId" => "evs", "arnNamespace" => "evs"}, "aws.auth#sigv4" => {"name" => "evs"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair of a resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair that is allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by a list of tag keys that are allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.protocols#awsJson1_0" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"]}, "smithy.api#title" => "Amazon Elastic VMware Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "evs", "arnNamespace" => "evs"}, "aws.auth#sigv4" => {"name" => "evs"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair of a resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access by a tag key and value pair that is allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "ArrayOfString", "documentation" => "Filters access by a list of tag keys that are allowed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.protocols#awsJson1_0" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"]}, "smithy.api#title" => "Amazon Elastic VMware Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://evs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://evs-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://evs.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://evs.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_eip_to_vlan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.evs#AssociateEipToVlan"
         operation.name = "AssociateEipToVlan"
         operation.input = AssociateEipToVlanRequest
         operation.output = AssociateEipToVlanResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_entitlement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#CreateEntitlement"
+        operation.name = "CreateEntitlement"
+        operation.input = CreateEntitlementRequest
+        operation.output = CreateEntitlementResponse
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
@@ -391,11 +609,31 @@ module Aws::Evs
         operation.errors << ValidationException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:RequestTag/${TagKey}", "aws:TagKeys"], "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:create_environment_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#CreateEnvironmentConnector"
+        operation.name = "CreateEnvironmentConnector"
+        operation.input = CreateEnvironmentConnectorRequest
+        operation.output = CreateEnvironmentConnectorResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:create_environment_host, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.evs#CreateEnvironmentHost"
         operation.name = "CreateEnvironmentHost"
         operation.input = CreateEnvironmentHostRequest
         operation.output = CreateEnvironmentHostResponse
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_entitlement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#DeleteEntitlement"
+        operation.name = "DeleteEntitlement"
+        operation.input = DeleteEntitlementRequest
+        operation.output = DeleteEntitlementResponse
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
@@ -406,6 +644,16 @@ module Aws::Evs
         operation.input = DeleteEnvironmentRequest
         operation.output = DeleteEnvironmentResponse
         operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_environment_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#DeleteEnvironmentConnector"
+        operation.name = "DeleteEnvironmentConnector"
+        operation.input = DeleteEnvironmentConnectorRequest
+        operation.output = DeleteEnvironmentConnectorResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
@@ -428,6 +676,26 @@ module Aws::Evs
         operation.errors << ValidationException
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:get_account_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#GetAccountSettings"
+        operation.name = "GetAccountSettings"
+        operation.input = GetAccountSettingsRequest
+        operation.output = GetAccountSettingsResponse
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_depot_url, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#GetDepotUrl"
+        operation.name = "GetDepotUrl"
+        operation.input = GetDepotUrlRequest
+        operation.output = GetDepotUrlResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_environment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.evs#GetEnvironment"
         operation.name = "GetEnvironment"
@@ -436,6 +704,25 @@ module Aws::Evs
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GetEnvironment_ResourceNotFoundException", "params" => {"environmentId" => "env-a1B2c3D4e5"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.evs#ResourceNotFoundException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-2"}}]}
+      end)
+      service.add_operation(:get_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#GetVersions"
+        operation.name = "GetVersions"
+        operation.input = GetVersionsRequest
+        operation.output = GetVersionsResponse
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_environment_connectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#ListEnvironmentConnectors"
+        operation.name = "ListEnvironmentConnectors"
+        operation.input = ListEnvironmentConnectorsRequest
+        operation.output = ListEnvironmentConnectorsResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListEnvironmentConnectors.new
       end)
       service.add_operation(:list_environment_hosts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.evs#ListEnvironmentHosts"
@@ -474,6 +761,26 @@ module Aws::Evs
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#readonly" => {}}
       end)
+      service.add_operation(:list_vm_entitlements, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#ListVmEntitlements"
+        operation.name = "ListVmEntitlements"
+        operation.input = ListVmEntitlementsRequest
+        operation.output = ListVmEntitlementsResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListVmEntitlements.new
+      end)
+      service.add_operation(:put_account_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#PutAccountSettings"
+        operation.name = "PutAccountSettings"
+        operation.input = PutAccountSettingsRequest
+        operation.output = PutAccountSettingsResponse
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.evs#TagResource"
         operation.name = "TagResource"
@@ -493,6 +800,16 @@ module Aws::Evs
         operation.errors << ResourceNotFoundException
         operation.errors << TagPolicyException
         operation.traits = {"aws.iam#conditionKeys" => ["aws:ResourceTag/${TagKey}", "aws:TagKeys"], "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_environment_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.evs#UpdateEnvironmentConnector"
+        operation.name = "UpdateEnvironmentConnector"
+        operation.input = UpdateEnvironmentConnectorRequest
+        operation.output = UpdateEnvironmentConnectorResponse
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#idempotent" => {}}
       end)
     end
 

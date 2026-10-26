@@ -6,35 +6,40 @@ module Aws::LaunchWizard
   # This module contains the types returned by client operations.
   module Types
 
+    # A constraint on which AWS account a deployment can be initiated from. Specify one of the supported constraint types.
+    # @!attribute management_account
+    #   The deployment must be initiated from the AWS Organizations management account.
+    #   @return [Types::ManagementAccountConstraint]
+    # @!attribute delegated_admin
+    #   The deployment must be initiated from a delegated administrator account for the specified service principal.
+    #   @return [Types::DelegatedAdminConstraint]
+    class AccountConstraint < Struct.new(
+      :management_account,
+      :delegated_admin,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ManagementAccount < AccountConstraint; end
+      class DelegatedAdmin < AccountConstraint; end
+      class Unknown < AccountConstraint; end
+    end
+
     # @!attribute workload_name
-    #   <p>The name of the workload. You can use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html">
-    #                  <code>ListWorkloads</code>
-    #               </a> operation to discover supported
-    #            values for this parameter.</p>
+    #   <p>The name of the workload. You can use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html"> <code>ListWorkloads</code> </a> operation to discover supported values for this parameter.</p>
     #   @return [String]
     # @!attribute deployment_pattern_name
-    #   <p>The name of the deployment pattern supported by a given workload. You can use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html">
-    #                  <code>ListWorkloadDeploymentPatterns</code>
-    #               </a> operation to discover supported
-    #            values for this parameter. </p>
+    #   <p>The name of the deployment pattern supported by a given workload. You can use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html"> <code>ListWorkloadDeploymentPatterns</code> </a> operation to discover supported values for this parameter. </p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the deployment.</p>
     #   @return [String]
     # @!attribute specifications
-    #   <p>The settings specified for the deployment. These settings define how to deploy and configure your
-    #            resources created by the deployment. For more information about the specifications
-    #            required for creating a deployment for a SAP workload, see <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html">SAP deployment
-    #            specifications</a>. To retrieve the specifications required to create a deployment for other workloads,
-    #            use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html">
-    #                  <code>GetWorkloadDeploymentPattern</code>
-    #               </a> operation.</p>
+    #   <p>The settings specified for the deployment. These settings define how to deploy and configure your resources created by the deployment. For more information about the specifications required for creating a deployment for a SAP workload, see <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html">SAP deployment specifications</a>. To retrieve the specifications required to create a deployment for other workloads, use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html"> <code>GetWorkloadDeploymentPattern</code> </a> operation.</p>
     #   @return [Hash<String, String>]
     # @!attribute dry_run
-    #   <p>Checks whether you have the required permissions for the action, without actually making
-    #            the request, and provides an error response. If you have the required permissions, the
-    #            error response is <code>DryRunOperation</code>. Otherwise, it is
-    #               <code>UnauthorizedOperation</code>.</p>
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
     #   @return [Boolean]
     # @!attribute tags
     #   <p>The tags to add to the deployment.</p>
@@ -58,6 +63,18 @@ module Aws::LaunchWizard
     class CreateDeploymentOutput < Struct.new(
       nil,
       :deployment_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # The deployment must be initiated from a delegated administrator account for the specified service principal.
+    # @!attribute service_principal
+    #   The service principal for which the account must be a delegated administrator. For example, `stacksets.cloudformation.amazonaws.com`.
+    #   @return [String]
+    class DelegatedAdminConstraint < Struct.new(
+      nil,
+      :service_principal,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -97,9 +114,7 @@ module Aws::LaunchWizard
     #   <p>The value of the condition.</p>
     #   @return [String]
     # @!attribute comparator
-    #   <p>The comparator of the condition.</p>
-    #            <p>Valid values: <code>Equal | NotEqual</code>
-    #            </p>
+    #   <p>The comparator of the condition.</p> <p>Valid values: <code>Equal | NotEqual</code> </p>
     #   @return [String]
     class DeploymentConditionalField < Struct.new(
       nil,
@@ -130,14 +145,11 @@ module Aws::LaunchWizard
     # @!attribute created_at
     #   <p>The time the deployment was created.</p>
     #   @return [Time]
+    # @!attribute modified_at
+    #   <p>The time the deployment was last modified.</p>
+    #   @return [Time]
     # @!attribute specifications
-    #   <p>The settings specified for the deployment. These settings define how to deploy and configure your
-    #            resources created by the deployment. For more information about the specifications
-    #            required for creating a deployment for a SAP workload, see <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html">SAP deployment
-    #            specifications</a>. To retrieve the specifications required to create a deployment for other workloads,
-    #            use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html">
-    #                  <code>GetWorkloadDeploymentPattern</code>
-    #               </a> operation.</p>
+    #   <p>The settings specified for the deployment. These settings define how to deploy and configure your resources created by the deployment. For more information about the specifications required for creating a deployment for a SAP workload, see <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html">SAP deployment specifications</a>. To retrieve the specifications required to create a deployment for other workloads, use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html"> <code>GetWorkloadDeploymentPattern</code> </a> operation.</p>
     #   @return [Hash<String, String>]
     # @!attribute resource_group
     #   <p>The resource group of the deployment.</p>
@@ -159,6 +171,7 @@ module Aws::LaunchWizard
       :pattern_name,
       :status,
       :created_at,
+      :modified_at,
       :specifications,
       :resource_group,
       :deleted_at,
@@ -188,6 +201,9 @@ module Aws::LaunchWizard
     # @!attribute created_at
     #   <p>The time the deployment was created.</p>
     #   @return [Time]
+    # @!attribute modified_at
+    #   <p>The time the deployment was last modified.</p>
+    #   @return [Time]
     class DeploymentDataSummary < Struct.new(
       nil,
       :name,
@@ -196,6 +212,7 @@ module Aws::LaunchWizard
       :pattern_name,
       :status,
       :created_at,
+      :modified_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -217,6 +234,10 @@ module Aws::LaunchWizard
     # @!attribute timestamp
     #   <p>The timestamp of the deployment event.</p>
     #   @return [Time]
+    # @!attribute metadata
+    #   A map of metadata key-value pairs associated with a deployment event.
+    #   For error detection events, contains workload context and log excerpts used for troubleshooting.
+    #   @return [Hash<String, String>]
     class DeploymentEventDataSummary < Struct.new(
       nil,
       :name,
@@ -224,23 +245,64 @@ module Aws::LaunchWizard
       :status,
       :status_reason,
       :timestamp,
+      :metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A filter name and value pair that is used to return more specific results from a
-    #          describe operation. Filters can be used to match a set of resources by specific
-    #          criteria.</p>
+    # <p>A filter name and value pair that is used to return more specific results from a describe operation. Filters can be used to match a set of resources by specific criteria.</p>
     # @!attribute name
     #   <p>The name of the filter. Filter names are case-sensitive.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>The filter values. Filter values are case-sensitive. If you specify multiple values for
-    #            a filter, the values are joined with an <code>OR</code>, and the request returns all
-    #            results that match any of the specified values.</p>
+    #   <p>The filter values. Filter values are case-sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>
     #   @return [Array<String>]
     class DeploymentFilter < Struct.new(
+      nil,
+      :name,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes a deployment pattern version summary.</p>
+    # @!attribute deployment_pattern_version_name
+    #   <p>The name of the deployment pattern version.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the deployment pattern version.</p>
+    #   @return [String]
+    # @!attribute documentation_url
+    #   <p>The URL of the documentation for the deployment pattern version.</p>
+    #   @return [String]
+    # @!attribute workload_name
+    #   <p>The name of the workload.</p>
+    #   @return [String]
+    # @!attribute deployment_pattern_name
+    #   <p>The name of the deployment pattern.</p>
+    #   @return [String]
+    class DeploymentPatternVersionDataSummary < Struct.new(
+      nil,
+      :deployment_pattern_version_name,
+      :description,
+      :documentation_url,
+      :workload_name,
+      :deployment_pattern_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter for deployment pattern versions. Use this filter to specify criteria for querying deployment pattern versions in Launch Wizard.</p>
+    # @!attribute name
+    #   <p>The name of the filter attribute. Specifies which attribute to filter on when querying deployment pattern versions.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The values to filter by. Contains the specific values to match against when filtering deployment pattern versions.</p>
+    #   @return [Array<String>]
+    class DeploymentPatternVersionFilter < Struct.new(
       nil,
       :name,
       :values,
@@ -300,6 +362,36 @@ module Aws::LaunchWizard
     end
 
     # @!attribute workload_name
+    #   <p>The name of the workload. You can use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html"> <code>ListWorkloads</code> </a> operation to discover supported values for this parameter.</p>
+    #   @return [String]
+    # @!attribute deployment_pattern_name
+    #   <p>The name of the deployment pattern. You can use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html"> <code>ListWorkloadDeploymentPatterns</code> </a> operation to discover supported values for this parameter.</p>
+    #   @return [String]
+    # @!attribute deployment_pattern_version_name
+    #   <p>The name of the deployment pattern version.</p>
+    #   @return [String]
+    class GetDeploymentPatternVersionInput < Struct.new(
+      nil,
+      :workload_name,
+      :deployment_pattern_name,
+      :deployment_pattern_version_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute deployment_pattern_version
+    #   <p>The deployment pattern version.</p>
+    #   @return [Types::DeploymentPatternVersionDataSummary]
+    class GetDeploymentPatternVersionOutput < Struct.new(
+      nil,
+      :deployment_pattern_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute workload_name
     #   <p>The name of the workload.</p>
     #   @return [String]
     # @!attribute deployment_pattern_name
@@ -347,8 +439,7 @@ module Aws::LaunchWizard
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An internal error has occurred. Retry your request, but if the problem persists, contact
-    #          us with details by posting a question on <a href="https://repost.aws/">re:Post</a>.</p>
+    # <p>An internal error has occurred. Retry your request, but if the problem persists, contact us with details by posting a question on <a href="https://repost.aws/">re:Post</a>.</p>
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
@@ -363,12 +454,10 @@ module Aws::LaunchWizard
     #   <p>The ID of the deployment.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items,
-    #            make another request with the token returned in the output.</p>
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token returned from a previous paginated request. Pagination continues from the end
-    #            of the items returned by the previous request.</p>
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class ListDeploymentEventsInput < Struct.new(
       nil,
@@ -384,8 +473,7 @@ module Aws::LaunchWizard
     #   <p>Lists the deployment events.</p>
     #   @return [Array<Types::DeploymentEventDataSummary>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items. This value is
-    #               <code>null</code> when there are no more items to return.</p>
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListDeploymentEventsOutput < Struct.new(
       nil,
@@ -396,30 +484,56 @@ module Aws::LaunchWizard
       include ::Smithy::Schema::Structure
     end
 
-    # @!attribute filters
-    #   <p>Filters to scope the results. The following filters are supported:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>WORKLOAD_NAME</code> - The name used in deployments.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>DEPLOYMENT_STATUS</code> - <code>COMPLETED</code> | <code>CREATING</code> |
-    #                     <code>DELETE_IN_PROGRESS</code> | <code>DELETE_INITIATING</code> |
-    #                     <code>DELETE_FAILED</code> | <code>DELETED</code> | <code>FAILED</code> |
-    #                     <code>IN_PROGRESS</code> | <code>VALIDATING</code>
-    #                  </p>
-    #               </li>
-    #            </ul>
-    #   @return [Array<Types::DeploymentFilter>]
+    # @!attribute workload_name
+    #   <p>The name of the workload. You can use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html"> <code>ListWorkloads</code> </a> operation to discover supported values for this parameter.</p>
+    #   @return [String]
+    # @!attribute deployment_pattern_name
+    #   <p>The name of the deployment pattern. You can use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html"> <code>ListWorkloadDeploymentPatterns</code> </a> operation to discover supported values for this parameter.</p>
+    #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items,
-    #            make another request with the token returned in the output.</p>
+    #   <p>The maximum number of deployment pattern versions to list.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token returned from a previous paginated request. Pagination continues from the end
-    #            of the items returned by the previous request.</p>
+    #   <p>The token for the next set of results.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>Filters to apply when listing deployment pattern versions.</p>
+    #   @return [Array<Types::DeploymentPatternVersionFilter>]
+    class ListDeploymentPatternVersionsInput < Struct.new(
+      nil,
+      :workload_name,
+      :deployment_pattern_name,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute deployment_pattern_versions
+    #   <p>The deployment pattern versions.</p>
+    #   @return [Array<Types::DeploymentPatternVersionDataSummary>]
+    # @!attribute next_token
+    #   <p>The token for the next set of results.</p>
+    #   @return [String]
+    class ListDeploymentPatternVersionsOutput < Struct.new(
+      nil,
+      :deployment_pattern_versions,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filters
+    #   <p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>WORKLOAD_NAME</code> - The name used in deployments.</p> </li> <li> <p> <code>DEPLOYMENT_STATUS</code> - <code>COMPLETED</code> | <code>CREATING</code> | <code>DELETE_IN_PROGRESS</code> | <code>DELETE_INITIATING</code> | <code>DELETE_FAILED</code> | <code>DELETED</code> | <code>FAILED</code> | <code>IN_PROGRESS</code> | <code>VALIDATING</code> </p> </li> </ul>
+    #   @return [Array<Types::DeploymentFilter>]
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class ListDeploymentsInput < Struct.new(
       nil,
@@ -435,8 +549,7 @@ module Aws::LaunchWizard
     #   <p>Lists the deployments.</p>
     #   @return [Array<Types::DeploymentDataSummary>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items. This value is
-    #               <code>null</code> when there are no more items to return.</p>
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListDeploymentsOutput < Struct.new(
       nil,
@@ -473,12 +586,10 @@ module Aws::LaunchWizard
     #   <p>The name of the workload.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items,
-    #            make another request with the token returned in the output.</p>
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token returned from a previous paginated request. Pagination continues from the end
-    #            of the items returned by the previous request.</p>
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class ListWorkloadDeploymentPatternsInput < Struct.new(
       nil,
@@ -494,8 +605,7 @@ module Aws::LaunchWizard
     #   <p>Describes the workload deployment patterns.</p>
     #   @return [Array<Types::WorkloadDeploymentPatternDataSummary>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items. This value is
-    #               <code>null</code> when there are no more items to return.</p>
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListWorkloadDeploymentPatternsOutput < Struct.new(
       nil,
@@ -507,12 +617,10 @@ module Aws::LaunchWizard
     end
 
     # @!attribute max_results
-    #   <p>The maximum number of items to return for this request. To get the next page of items,
-    #            make another request with the token returned in the output.</p>
+    #   <p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token returned from a previous paginated request. Pagination continues from the end
-    #            of the items returned by the previous request.</p>
+    #   <p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>
     #   @return [String]
     class ListWorkloadsInput < Struct.new(
       nil,
@@ -527,8 +635,7 @@ module Aws::LaunchWizard
     #   <p>Information about the workloads.</p>
     #   @return [Array<Types::WorkloadDataSummary>]
     # @!attribute next_token
-    #   <p>The token to include in another request to get the next page of items. This value is
-    #               <code>null</code> when there are no more items to return.</p>
+    #   <p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>
     #   @return [String]
     class ListWorkloadsOutput < Struct.new(
       nil,
@@ -539,8 +646,15 @@ module Aws::LaunchWizard
       include ::Smithy::Schema::Structure
     end
 
-    # <p>You have exceeded an Launch Wizard resource limit. For example, you might have too many
-    #          deployments in progress.</p>
+    # The deployment must be initiated from the AWS Organizations management account.
+    class ManagementAccountConstraint < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>You have exceeded an Launch Wizard resource limit. For example, you might have too many deployments in progress.</p>
     # @!attribute message
     #   @return [String]
     class ResourceLimitException < Struct.new(
@@ -606,6 +720,48 @@ module Aws::LaunchWizard
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute deployment_id
+    #   <p>The ID of the deployment.</p>
+    #   @return [String]
+    # @!attribute specifications
+    #   <p>The settings specified for the deployment. These settings define how to deploy and configure your resources created by the deployment. For more information about the specifications required for creating a deployment for a SAP workload, see <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html">SAP deployment specifications</a>. To retrieve the specifications required to create a deployment for other workloads, use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html"> <code>GetWorkloadDeploymentPattern</code> </a> operation.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute workload_version_name
+    #   <p>The name of the workload version.</p>
+    #   @return [String]
+    # @!attribute deployment_pattern_version_name
+    #   <p>The name of the deployment pattern version.</p>
+    #   @return [String]
+    # @!attribute dry_run
+    #   <p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>
+    #   @return [Boolean]
+    # @!attribute force
+    #   <p>Forces the update even if validation warnings are present.</p>
+    #   @return [Boolean]
+    class UpdateDeploymentInput < Struct.new(
+      nil,
+      :deployment_id,
+      :specifications,
+      :workload_version_name,
+      :deployment_pattern_version_name,
+      :dry_run,
+      :force,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute deployment
+    #   <p>The deployment.</p>
+    #   @return [Types::DeploymentDataSummary]
+    class UpdateDeploymentOutput < Struct.new(
+      nil,
+      :deployment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     # @!attribute message
     #   @return [String]
@@ -624,6 +780,12 @@ module Aws::LaunchWizard
     # @!attribute display_name
     #   <p>The display name of a workload.</p>
     #   @return [String]
+    # @!attribute status
+    #   <p>The status of a workload.</p> <p> <i>You can list deployments in the <code>DISABLED</code> status.</i> </p>
+    #   @return [String]
+    # @!attribute account_constraints
+    #   Optional list of constraints describing what kind of AWS account is allowed to deploy this workload or deployment pattern. Within a single list the semantics are OR: an account satisfies the list if it satisfies any entry. Workload-level and pattern-level lists combine with AND at deployment time. An absent or empty list at this level means no constraint at this level.
+    #   @return [Array<Types::AccountConstraint>]
     # @!attribute description
     #   <p>The description of a workload.</p>
     #   @return [String]
@@ -633,9 +795,6 @@ module Aws::LaunchWizard
     # @!attribute icon_url
     #   <p>The URL of a workload icon.</p>
     #   @return [String]
-    # @!attribute status
-    #   <p>The status of a workload.</p>
-    #   @return [String]
     # @!attribute status_message
     #   <p>The message about a workload's status.</p>
     #   @return [String]
@@ -643,10 +802,11 @@ module Aws::LaunchWizard
       nil,
       :workload_name,
       :display_name,
+      :status,
+      :account_constraints,
       :description,
       :documentation_url,
       :icon_url,
-      :status,
       :status_message,
       keyword_init: true
     )
@@ -660,10 +820,18 @@ module Aws::LaunchWizard
     # @!attribute display_name
     #   <p>The display name of the workload data.</p>
     #   @return [String]
+    # @!attribute status
+    #   <p>The status of the workload.</p>
+    #   @return [String]
+    # @!attribute account_constraints
+    #   Optional list of constraints describing what kind of AWS account is allowed to deploy this workload or deployment pattern. Within a single list the semantics are OR: an account satisfies the list if it satisfies any entry. Workload-level and pattern-level lists combine with AND at deployment time. An absent or empty list at this level means no constraint at this level.
+    #   @return [Array<Types::AccountConstraint>]
     class WorkloadDataSummary < Struct.new(
       nil,
       :workload_name,
       :display_name,
+      :status,
+      :account_constraints,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -679,6 +847,9 @@ module Aws::LaunchWizard
     # @!attribute workload_version_name
     #   <p>The workload version name of the deployment pattern.</p>
     #   @return [String]
+    # @!attribute deployment_pattern_version_name
+    #   <p>The version name of the deployment pattern.</p>
+    #   @return [String]
     # @!attribute display_name
     #   <p>The display name of the deployment pattern.</p>
     #   @return [String]
@@ -691,24 +862,23 @@ module Aws::LaunchWizard
     # @!attribute status_message
     #   <p>The status message of the deployment pattern.</p>
     #   @return [String]
+    # @!attribute account_constraints
+    #   Optional list of constraints describing what kind of AWS account is allowed to deploy this workload or deployment pattern. Within a single list the semantics are OR: an account satisfies the list if it satisfies any entry. Workload-level and pattern-level lists combine with AND at deployment time. An absent or empty list at this level means no constraint at this level.
+    #   @return [Array<Types::AccountConstraint>]
     # @!attribute specifications
-    #   <p>The settings specified for the deployment. These settings define how to deploy and configure your
-    #            resources created by the deployment. For more information about the specifications
-    #            required for creating a deployment for a SAP workload, see <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html">SAP deployment
-    #            specifications</a>. To retrieve the specifications required to create a deployment for other workloads,
-    #            use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html">
-    #                  <code>GetWorkloadDeploymentPattern</code>
-    #               </a> operation.</p>
+    #   <p>The settings specified for the deployment. These settings define how to deploy and configure your resources created by the deployment. For more information about the specifications required for creating a deployment for a SAP workload, see <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html">SAP deployment specifications</a>. To retrieve the specifications required to create a deployment for other workloads, use the <a href="https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html"> <code>GetWorkloadDeploymentPattern</code> </a> operation.</p>
     #   @return [Array<Types::DeploymentSpecificationsField>]
     class WorkloadDeploymentPatternData < Struct.new(
       nil,
       :workload_name,
       :deployment_pattern_name,
       :workload_version_name,
+      :deployment_pattern_version_name,
       :display_name,
       :description,
       :status,
       :status_message,
+      :account_constraints,
       :specifications,
       keyword_init: true
     )
@@ -725,6 +895,9 @@ module Aws::LaunchWizard
     # @!attribute workload_version_name
     #   <p>The name of the workload deployment pattern version.</p>
     #   @return [String]
+    # @!attribute deployment_pattern_version_name
+    #   <p>The version name of a workload deployment pattern.</p>
+    #   @return [String]
     # @!attribute display_name
     #   <p>The display name of a workload deployment pattern.</p>
     #   @return [String]
@@ -737,15 +910,20 @@ module Aws::LaunchWizard
     # @!attribute status_message
     #   <p>A message about a workload deployment pattern's status.</p>
     #   @return [String]
+    # @!attribute account_constraints
+    #   Optional list of constraints describing what kind of AWS account is allowed to deploy this workload or deployment pattern. Within a single list the semantics are OR: an account satisfies the list if it satisfies any entry. Workload-level and pattern-level lists combine with AND at deployment time. An absent or empty list at this level means no constraint at this level.
+    #   @return [Array<Types::AccountConstraint>]
     class WorkloadDeploymentPatternDataSummary < Struct.new(
       nil,
       :workload_name,
       :deployment_pattern_name,
       :workload_version_name,
+      :deployment_pattern_version_name,
       :display_name,
       :description,
       :status,
       :status_message,
+      :account_constraints,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

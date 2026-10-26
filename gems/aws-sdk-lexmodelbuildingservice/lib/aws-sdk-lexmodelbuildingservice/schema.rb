@@ -43,22 +43,22 @@ module Aws::LexModelBuildingService
     ConversationLogsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#ConversationLogsRequest", name: "ConversationLogsRequest")
     ConversationLogsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#ConversationLogsResponse", name: "ConversationLogsResponse")
     Count = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelbuildingservice#Count", name: "Count")
-    CreateBotVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateBotVersionRequest", name: "CreateBotVersionRequest")
-    CreateBotVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateBotVersionResponse", name: "CreateBotVersionResponse")
-    CreateIntentVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateIntentVersionRequest", name: "CreateIntentVersionRequest")
-    CreateIntentVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateIntentVersionResponse", name: "CreateIntentVersionResponse")
-    CreateSlotTypeVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateSlotTypeVersionRequest", name: "CreateSlotTypeVersionRequest")
-    CreateSlotTypeVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateSlotTypeVersionResponse", name: "CreateSlotTypeVersionResponse")
+    CreateBotVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateBotVersionRequest", name: "CreateBotVersionRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    CreateBotVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateBotVersionResponse", name: "CreateBotVersionResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    CreateIntentVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateIntentVersionRequest", name: "CreateIntentVersionRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    CreateIntentVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateIntentVersionResponse", name: "CreateIntentVersionResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    CreateSlotTypeVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateSlotTypeVersionRequest", name: "CreateSlotTypeVersionRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    CreateSlotTypeVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#CreateSlotTypeVersionResponse", name: "CreateSlotTypeVersionResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
     CustomOrBuiltinSlotTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#CustomOrBuiltinSlotTypeName", name: "CustomOrBuiltinSlotTypeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^((AMAZON\\.)_?|[A-Za-z]_?)+$"})
-    DeleteBotAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteBotAliasRequest", name: "DeleteBotAliasRequest")
-    DeleteBotChannelAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteBotChannelAssociationRequest", name: "DeleteBotChannelAssociationRequest")
-    DeleteBotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteBotRequest", name: "DeleteBotRequest")
-    DeleteBotVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteBotVersionRequest", name: "DeleteBotVersionRequest")
-    DeleteIntentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteIntentRequest", name: "DeleteIntentRequest")
-    DeleteIntentVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteIntentVersionRequest", name: "DeleteIntentVersionRequest")
-    DeleteSlotTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteSlotTypeRequest", name: "DeleteSlotTypeRequest")
-    DeleteSlotTypeVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteSlotTypeVersionRequest", name: "DeleteSlotTypeVersionRequest")
-    DeleteUtterancesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteUtterancesRequest", name: "DeleteUtterancesRequest")
+    DeleteBotAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteBotAliasRequest", name: "DeleteBotAliasRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    DeleteBotChannelAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteBotChannelAssociationRequest", name: "DeleteBotChannelAssociationRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    DeleteBotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteBotRequest", name: "DeleteBotRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    DeleteBotVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteBotVersionRequest", name: "DeleteBotVersionRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    DeleteIntentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteIntentRequest", name: "DeleteIntentRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    DeleteIntentVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteIntentVersionRequest", name: "DeleteIntentVersionRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    DeleteSlotTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteSlotTypeRequest", name: "DeleteSlotTypeRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    DeleteSlotTypeVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteSlotTypeVersionRequest", name: "DeleteSlotTypeVersionRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    DeleteUtterancesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#DeleteUtterancesRequest", name: "DeleteUtterancesRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
     Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#Description", name: "Description", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
     Destination = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#Destination", name: "Destination")
     EnumerationValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#EnumerationValue", name: "EnumerationValue")
@@ -68,48 +68,48 @@ module Aws::LexModelBuildingService
     FollowUpPrompt = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#FollowUpPrompt", name: "FollowUpPrompt")
     FulfillmentActivity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#FulfillmentActivity", name: "FulfillmentActivity")
     FulfillmentActivityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#FulfillmentActivityType", name: "FulfillmentActivityType")
-    GetBotAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotAliasRequest", name: "GetBotAliasRequest")
-    GetBotAliasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotAliasResponse", name: "GetBotAliasResponse")
-    GetBotAliasesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotAliasesRequest", name: "GetBotAliasesRequest")
-    GetBotAliasesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotAliasesResponse", name: "GetBotAliasesResponse")
-    GetBotChannelAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationRequest", name: "GetBotChannelAssociationRequest")
-    GetBotChannelAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationResponse", name: "GetBotChannelAssociationResponse")
-    GetBotChannelAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationsRequest", name: "GetBotChannelAssociationsRequest")
-    GetBotChannelAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationsResponse", name: "GetBotChannelAssociationsResponse")
-    GetBotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotRequest", name: "GetBotRequest")
-    GetBotResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotResponse", name: "GetBotResponse")
-    GetBotVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotVersionsRequest", name: "GetBotVersionsRequest")
-    GetBotVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotVersionsResponse", name: "GetBotVersionsResponse")
-    GetBotsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotsRequest", name: "GetBotsRequest")
-    GetBotsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotsResponse", name: "GetBotsResponse")
-    GetBuiltinIntentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentRequest", name: "GetBuiltinIntentRequest")
-    GetBuiltinIntentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentResponse", name: "GetBuiltinIntentResponse")
-    GetBuiltinIntentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentsRequest", name: "GetBuiltinIntentsRequest")
-    GetBuiltinIntentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentsResponse", name: "GetBuiltinIntentsResponse")
-    GetBuiltinSlotTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinSlotTypesRequest", name: "GetBuiltinSlotTypesRequest")
-    GetBuiltinSlotTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinSlotTypesResponse", name: "GetBuiltinSlotTypesResponse")
-    GetExportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetExportRequest", name: "GetExportRequest")
-    GetExportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetExportResponse", name: "GetExportResponse")
-    GetImportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetImportRequest", name: "GetImportRequest")
-    GetImportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetImportResponse", name: "GetImportResponse")
-    GetIntentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentRequest", name: "GetIntentRequest")
-    GetIntentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentResponse", name: "GetIntentResponse")
-    GetIntentVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentVersionsRequest", name: "GetIntentVersionsRequest")
-    GetIntentVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentVersionsResponse", name: "GetIntentVersionsResponse")
-    GetIntentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentsRequest", name: "GetIntentsRequest")
-    GetIntentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentsResponse", name: "GetIntentsResponse")
-    GetMigrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetMigrationRequest", name: "GetMigrationRequest")
-    GetMigrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetMigrationResponse", name: "GetMigrationResponse")
-    GetMigrationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetMigrationsRequest", name: "GetMigrationsRequest")
-    GetMigrationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetMigrationsResponse", name: "GetMigrationsResponse")
-    GetSlotTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypeRequest", name: "GetSlotTypeRequest")
-    GetSlotTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypeResponse", name: "GetSlotTypeResponse")
-    GetSlotTypeVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypeVersionsRequest", name: "GetSlotTypeVersionsRequest")
-    GetSlotTypeVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypeVersionsResponse", name: "GetSlotTypeVersionsResponse")
-    GetSlotTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypesRequest", name: "GetSlotTypesRequest")
-    GetSlotTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypesResponse", name: "GetSlotTypesResponse")
-    GetUtterancesViewRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetUtterancesViewRequest", name: "GetUtterancesViewRequest")
-    GetUtterancesViewResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetUtterancesViewResponse", name: "GetUtterancesViewResponse")
+    GetBotAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotAliasRequest", name: "GetBotAliasRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotAliasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotAliasResponse", name: "GetBotAliasResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotAliasesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotAliasesRequest", name: "GetBotAliasesRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotAliasesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotAliasesResponse", name: "GetBotAliasesResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotChannelAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationRequest", name: "GetBotChannelAssociationRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotChannelAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationResponse", name: "GetBotChannelAssociationResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotChannelAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationsRequest", name: "GetBotChannelAssociationsRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotChannelAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociationsResponse", name: "GetBotChannelAssociationsResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotRequest", name: "GetBotRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotResponse", name: "GetBotResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotVersionsRequest", name: "GetBotVersionsRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotVersionsResponse", name: "GetBotVersionsResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotsRequest", name: "GetBotsRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBotsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBotsResponse", name: "GetBotsResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBuiltinIntentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentRequest", name: "GetBuiltinIntentRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBuiltinIntentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentResponse", name: "GetBuiltinIntentResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBuiltinIntentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentsRequest", name: "GetBuiltinIntentsRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBuiltinIntentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntentsResponse", name: "GetBuiltinIntentsResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBuiltinSlotTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinSlotTypesRequest", name: "GetBuiltinSlotTypesRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetBuiltinSlotTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetBuiltinSlotTypesResponse", name: "GetBuiltinSlotTypesResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetExportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetExportRequest", name: "GetExportRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetExportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetExportResponse", name: "GetExportResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetImportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetImportRequest", name: "GetImportRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetImportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetImportResponse", name: "GetImportResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetIntentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentRequest", name: "GetIntentRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetIntentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentResponse", name: "GetIntentResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetIntentVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentVersionsRequest", name: "GetIntentVersionsRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetIntentVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentVersionsResponse", name: "GetIntentVersionsResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetIntentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentsRequest", name: "GetIntentsRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetIntentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetIntentsResponse", name: "GetIntentsResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetMigrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetMigrationRequest", name: "GetMigrationRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetMigrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetMigrationResponse", name: "GetMigrationResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetMigrationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetMigrationsRequest", name: "GetMigrationsRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetMigrationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetMigrationsResponse", name: "GetMigrationsResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetSlotTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypeRequest", name: "GetSlotTypeRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetSlotTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypeResponse", name: "GetSlotTypeResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetSlotTypeVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypeVersionsRequest", name: "GetSlotTypeVersionsRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetSlotTypeVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypeVersionsResponse", name: "GetSlotTypeVersionsResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetSlotTypesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypesRequest", name: "GetSlotTypesRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetSlotTypesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetSlotTypesResponse", name: "GetSlotTypesResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetUtterancesViewRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetUtterancesViewRequest", name: "GetUtterancesViewRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    GetUtterancesViewResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#GetUtterancesViewResponse", name: "GetUtterancesViewResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
     GroupNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelbuildingservice#GroupNumber", name: "GroupNumber", traits: {"smithy.api#range" => {"min" => 1, "max" => 5}})
     IamRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#IamRoleArn", name: "IamRoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[\\w\\-]+:iam::[\\d]{12}:role/.+$"})
     ImportStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#ImportStatus", name: "ImportStatus")
@@ -129,8 +129,8 @@ module Aws::LexModelBuildingService
     LambdaARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#LambdaARN", name: "LambdaARN", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-zA-Z-]*:lambda:[a-z]+-[a-z]+(-[a-z]+)*-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?$"})
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     ListOfUtterance = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelbuildingservice#ListOfUtterance", name: "ListOfUtterance")
-    ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
-    ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
+    ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#ListTagsForResourceRequest", name: "ListTagsForResourceRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#ListTagsForResourceResponse", name: "ListTagsForResourceResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
     ListsOfUtterances = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelbuildingservice#ListsOfUtterances", name: "ListsOfUtterances")
     Locale = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#Locale", name: "Locale")
     LocaleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelbuildingservice#LocaleList", name: "LocaleList")
@@ -171,14 +171,14 @@ module Aws::LexModelBuildingService
     ProcessBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#ProcessBehavior", name: "ProcessBehavior")
     Prompt = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#Prompt", name: "Prompt")
     PromptMaxAttempts = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.lexmodelbuildingservice#PromptMaxAttempts", name: "PromptMaxAttempts", traits: {"smithy.api#range" => {"min" => 1, "max" => 5}})
-    PutBotAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutBotAliasRequest", name: "PutBotAliasRequest")
-    PutBotAliasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutBotAliasResponse", name: "PutBotAliasResponse")
-    PutBotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutBotRequest", name: "PutBotRequest")
-    PutBotResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutBotResponse", name: "PutBotResponse")
-    PutIntentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutIntentRequest", name: "PutIntentRequest")
-    PutIntentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutIntentResponse", name: "PutIntentResponse")
-    PutSlotTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutSlotTypeRequest", name: "PutSlotTypeRequest")
-    PutSlotTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutSlotTypeResponse", name: "PutSlotTypeResponse")
+    PutBotAliasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutBotAliasRequest", name: "PutBotAliasRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    PutBotAliasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutBotAliasResponse", name: "PutBotAliasResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    PutBotRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutBotRequest", name: "PutBotRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    PutBotResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutBotResponse", name: "PutBotResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    PutIntentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutIntentRequest", name: "PutIntentRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    PutIntentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutIntentResponse", name: "PutIntentResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    PutSlotTypeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutSlotTypeRequest", name: "PutSlotTypeRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    PutSlotTypeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#PutSlotTypeResponse", name: "PutSlotTypeResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
     QueryFilterString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#QueryFilterString", name: "QueryFilterString", traits: {"smithy.api#length" => {"min" => 0}})
     ReferenceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#ReferenceType", name: "ReferenceType")
     RegexPattern = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#RegexPattern", name: "RegexPattern", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
@@ -206,10 +206,10 @@ module Aws::LexModelBuildingService
     SlotUtteranceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelbuildingservice#SlotUtteranceList", name: "SlotUtteranceList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     SlotValueSelectionStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#SlotValueSelectionStrategy", name: "SlotValueSelectionStrategy")
     SortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#SortOrder", name: "SortOrder")
-    StartImportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#StartImportRequest", name: "StartImportRequest")
-    StartImportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#StartImportResponse", name: "StartImportResponse")
-    StartMigrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#StartMigrationRequest", name: "StartMigrationRequest")
-    StartMigrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#StartMigrationResponse", name: "StartMigrationResponse")
+    StartImportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#StartImportRequest", name: "StartImportRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    StartImportResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#StartImportResponse", name: "StartImportResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    StartMigrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#StartMigrationRequest", name: "StartMigrationRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    StartMigrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#StartMigrationResponse", name: "StartMigrationResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
     Statement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#Statement", name: "Statement")
     Status = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#Status", name: "Status")
     StatusType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.lexmodelbuildingservice#StatusType", name: "StatusType")
@@ -220,12 +220,12 @@ module Aws::LexModelBuildingService
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelbuildingservice#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.lexmodelbuildingservice#TagList", name: "TagList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
-    TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#TagResourceRequest", name: "TagResourceRequest")
-    TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#TagResourceResponse", name: "TagResourceResponse")
+    TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#TagResourceRequest", name: "TagResourceRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#TagResourceResponse", name: "TagResourceResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.lexmodelbuildingservice#Timestamp", name: "Timestamp")
-    UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#UntagResourceRequest", name: "UntagResourceRequest")
-    UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#UntagResourceResponse", name: "UntagResourceResponse")
+    UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#UntagResourceRequest", name: "UntagResourceRequest", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
+    UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#UntagResourceResponse", name: "UntagResourceResponse", traits: {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}})
     UserId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#UserId", name: "UserId", traits: {"smithy.api#length" => {"min" => 2, "max" => 100}})
     Utterance = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.lexmodelbuildingservice#Utterance", name: "Utterance", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     UtteranceData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.lexmodelbuildingservice#UtteranceData", name: "UtteranceData")
@@ -969,7 +969,7 @@ module Aws::LexModelBuildingService
       service.id = "com.amazonaws.lexmodelbuildingservice#AWSDeepSenseModelBuildingService"
       service.name = "AWSDeepSenseModelBuildingService"
       service.version = "2017-04-19"
-      service.traits = {"aws.api#service" => {"sdkId" => "Lex Model Building Service", "arnNamespace" => "lex", "cloudFormationName" => "LexModelBuildingService", "cloudTrailEventSource" => "lexmodelbuildingservice.amazonaws.com", "docId" => "lex-models-2017-04-19", "endpointPrefix" => "models.lex"}, "aws.auth#sigv4" => {"name" => "lex"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Lex Model Building Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Lex Model Building Service", "arnNamespace" => "lex", "cloudFormationName" => "LexModelBuildingService", "cloudTrailEventSource" => "lexmodelbuildingservice.amazonaws.com", "docId" => "lex-models-2017-04-19", "endpointPrefix" => "models.lex"}, "aws.auth#sigv4" => {"name" => "lex"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Lex Model Building Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://models.lex-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://models-fips.lex.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://models.lex-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://models.lex.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://models.lex.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://models.lex.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 17, "nodes" => "/////wAAAAH/////AAAAAAAAABAAAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAoAAAAGAAAABAAAAAkAAAAHAAAABwX14QsAAAAIAAAACAX14QsF9eEMAAAABQX14QkF9eEKAAAABAAAAA4AAAALAAAABgAAAAwF9eEIAAAABwX14QYAAAANAAAACAX14QYF9eEHAAAABQAAAA8F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAARAAAABAX14QIF9eED"}}
       service.add_operation(:create_bot_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#CreateBotVersion"
         operation.name = "CreateBotVersion"
@@ -981,7 +981,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << PreconditionFailedException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/bots/{name}/versions", "code" => 201}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "POST", "uri" => "/bots/{name}/versions", "code" => 201}}
       end)
       service.add_operation(:create_intent_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#CreateIntentVersion"
@@ -994,7 +994,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << PreconditionFailedException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/intents/{name}/versions", "code" => 201}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "POST", "uri" => "/intents/{name}/versions", "code" => 201}}
       end)
       service.add_operation(:create_slot_type_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#CreateSlotTypeVersion"
@@ -1007,7 +1007,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << PreconditionFailedException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/slottypes/{name}/versions", "code" => 201}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "POST", "uri" => "/slottypes/{name}/versions", "code" => 201}}
       end)
       service.add_operation(:delete_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteBot"
@@ -1020,7 +1020,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << ResourceInUseException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{name}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_bot_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteBotAlias"
@@ -1033,7 +1033,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << ResourceInUseException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botName}/aliases/{name}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botName}/aliases/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_bot_channel_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteBotChannelAssociation"
@@ -1045,7 +1045,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botName}/aliases/{botAlias}/channels/{name}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botName}/aliases/{botAlias}/channels/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_bot_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteBotVersion"
@@ -1058,7 +1058,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << ResourceInUseException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{name}/versions/{version}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{name}/versions/{version}", "code" => 204}}
       end)
       service.add_operation(:delete_intent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteIntent"
@@ -1071,7 +1071,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << ResourceInUseException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/intents/{name}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/intents/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_intent_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteIntentVersion"
@@ -1084,7 +1084,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << ResourceInUseException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/intents/{name}/versions/{version}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/intents/{name}/versions/{version}", "code" => 204}}
       end)
       service.add_operation(:delete_slot_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteSlotType"
@@ -1097,7 +1097,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << ResourceInUseException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/slottypes/{name}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/slottypes/{name}", "code" => 204}}
       end)
       service.add_operation(:delete_slot_type_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteSlotTypeVersion"
@@ -1110,7 +1110,7 @@ module Aws::LexModelBuildingService
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
         operation.errors << ResourceInUseException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/slottypes/{name}/version/{version}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/slottypes/{name}/version/{version}", "code" => 204}}
       end)
       service.add_operation(:delete_utterances, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#DeleteUtterances"
@@ -1121,7 +1121,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botName}/utterances/{userId}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/bots/{botName}/utterances/{userId}", "code" => 204}}
       end)
       service.add_operation(:get_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBot"
@@ -1132,7 +1132,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{name}/versions/{versionOrAlias}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/bots/{name}/versions/{versionOrAlias}", "code" => 200}}
       end)
       service.add_operation(:get_bot_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBotAlias"
@@ -1143,7 +1143,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases/{name}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases/{name}", "code" => 200}}
       end)
       service.add_operation(:get_bot_aliases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBotAliases"
@@ -1153,7 +1153,7 @@ module Aws::LexModelBuildingService
         operation.errors << BadRequestException
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases", "code" => 200}}
         operation[:paginator] = Paginators::GetBotAliases.new
       end)
       service.add_operation(:get_bot_channel_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1165,7 +1165,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases/{botAlias}/channels/{name}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases/{botAlias}/channels/{name}", "code" => 200}}
       end)
       service.add_operation(:get_bot_channel_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBotChannelAssociations"
@@ -1175,7 +1175,7 @@ module Aws::LexModelBuildingService
         operation.errors << BadRequestException
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases/{botAlias}/channels", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/aliases/{botAlias}/channels", "code" => 200}}
         operation[:paginator] = Paginators::GetBotChannelAssociations.new
       end)
       service.add_operation(:get_bot_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1187,7 +1187,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{name}/versions", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/bots/{name}/versions", "code" => 200}}
         operation[:paginator] = Paginators::GetBotVersions.new
       end)
       service.add_operation(:get_bots, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1199,7 +1199,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/bots", "code" => 200}}
         operation[:paginator] = Paginators::GetBots.new
       end)
       service.add_operation(:get_builtin_intent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1211,7 +1211,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/builtins/intents/{signature}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/builtins/intents/{signature}", "code" => 200}}
       end)
       service.add_operation(:get_builtin_intents, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetBuiltinIntents"
@@ -1221,7 +1221,7 @@ module Aws::LexModelBuildingService
         operation.errors << BadRequestException
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/builtins/intents", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/builtins/intents", "code" => 200}}
         operation[:paginator] = Paginators::GetBuiltinIntents.new
       end)
       service.add_operation(:get_builtin_slot_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1232,7 +1232,7 @@ module Aws::LexModelBuildingService
         operation.errors << BadRequestException
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/builtins/slottypes", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/builtins/slottypes", "code" => 200}}
         operation[:paginator] = Paginators::GetBuiltinSlotTypes.new
       end)
       service.add_operation(:get_export, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1244,7 +1244,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/exports", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/exports", "code" => 200}}
       end)
       service.add_operation(:get_import, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetImport"
@@ -1255,7 +1255,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/imports/{importId}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/imports/{importId}", "code" => 200}}
       end)
       service.add_operation(:get_intent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetIntent"
@@ -1266,7 +1266,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/intents/{name}/versions/{version}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/intents/{name}/versions/{version}", "code" => 200}}
       end)
       service.add_operation(:get_intent_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetIntentVersions"
@@ -1277,7 +1277,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/intents/{name}/versions", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/intents/{name}/versions", "code" => 200}}
         operation[:paginator] = Paginators::GetIntentVersions.new
       end)
       service.add_operation(:get_intents, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1289,7 +1289,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/intents", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/intents", "code" => 200}}
         operation[:paginator] = Paginators::GetIntents.new
       end)
       service.add_operation(:get_migration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1301,7 +1301,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/migrations/{migrationId}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/migrations/{migrationId}", "code" => 200}}
       end)
       service.add_operation(:get_migrations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetMigrations"
@@ -1311,7 +1311,7 @@ module Aws::LexModelBuildingService
         operation.errors << BadRequestException
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/migrations", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/migrations", "code" => 200}}
         operation[:paginator] = Paginators::GetMigrations.new
       end)
       service.add_operation(:get_slot_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1323,7 +1323,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/slottypes/{name}/versions/{version}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/slottypes/{name}/versions/{version}", "code" => 200}}
       end)
       service.add_operation(:get_slot_type_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#GetSlotTypeVersions"
@@ -1334,7 +1334,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/slottypes/{name}/versions", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/slottypes/{name}/versions", "code" => 200}}
         operation[:paginator] = Paginators::GetSlotTypeVersions.new
       end)
       service.add_operation(:get_slot_types, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1346,7 +1346,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/slottypes", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/slottypes", "code" => 200}}
         operation[:paginator] = Paginators::GetSlotTypes.new
       end)
       service.add_operation(:get_utterances_view, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1357,7 +1357,7 @@ module Aws::LexModelBuildingService
         operation.errors << BadRequestException
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/utterances?view=aggregation", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/bots/{botName}/utterances?view=aggregation", "code" => 200}}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#ListTagsForResource"
@@ -1368,7 +1368,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "GET", "uri" => "/tags/{resourceArn}", "code" => 200}}
       end)
       service.add_operation(:put_bot, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#PutBot"
@@ -1380,7 +1380,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << PreconditionFailedException
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/bots/{name}/versions/$LATEST", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/bots/{name}/versions/$LATEST", "code" => 200}}
       end)
       service.add_operation(:put_bot_alias, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#PutBotAlias"
@@ -1392,7 +1392,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << PreconditionFailedException
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/bots/{botName}/aliases/{name}", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/bots/{botName}/aliases/{name}", "code" => 200}}
       end)
       service.add_operation(:put_intent, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#PutIntent"
@@ -1404,7 +1404,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << PreconditionFailedException
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/intents/{name}/versions/$LATEST", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/intents/{name}/versions/$LATEST", "code" => 200}}
       end)
       service.add_operation(:put_slot_type, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#PutSlotType"
@@ -1416,7 +1416,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << PreconditionFailedException
-        operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/slottypes/{name}/versions/$LATEST", "code" => 200}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/slottypes/{name}/versions/$LATEST", "code" => 200}}
       end)
       service.add_operation(:start_import, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#StartImport"
@@ -1426,7 +1426,7 @@ module Aws::LexModelBuildingService
         operation.errors << BadRequestException
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/imports", "code" => 201}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "POST", "uri" => "/imports", "code" => 201}}
       end)
       service.add_operation(:start_migration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#StartMigration"
@@ -1438,7 +1438,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/migrations", "code" => 202}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "POST", "uri" => "/migrations", "code" => 202}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#TagResource"
@@ -1450,7 +1450,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "POST", "uri" => "/tags/{resourceArn}", "code" => 204}}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.lexmodelbuildingservice#UntagResource"
@@ -1462,7 +1462,7 @@ module Aws::LexModelBuildingService
         operation.errors << InternalFailureException
         operation.errors << LimitExceededException
         operation.errors << NotFoundException
-        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 204}}
+        operation.traits = {"smithy.api#deprecated" => {"since" => "2025-09-08", "message" => "Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/tags/{resourceArn}", "code" => 204}}
       end)
     end
 

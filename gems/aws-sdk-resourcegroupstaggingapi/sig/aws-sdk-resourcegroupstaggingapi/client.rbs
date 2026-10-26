@@ -108,6 +108,16 @@ module Aws::ResourceGroupsTaggingAPI
       ?key: String
     ) -> _GetTagValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTagValuesResponse
 
+    interface _ListRequiredTagsResponse
+      include Smithy::Client::_Response[Types::ListRequiredTagsOutput]
+      def required_tags: () -> Array[Types::RequiredTag]?
+      def next_token: () -> String?
+    end
+    def list_required_tags: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRequiredTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRequiredTagsResponse
+
     interface _StartReportCreationResponse
       include Smithy::Client::_Response[Types::StartReportCreationOutput]
     end

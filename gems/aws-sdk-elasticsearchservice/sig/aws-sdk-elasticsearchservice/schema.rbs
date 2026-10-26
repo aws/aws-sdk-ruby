@@ -36,6 +36,9 @@ module Aws::ElasticsearchService
     AutoTuneState: EnumShape
     AutoTuneStatus: StructureShape
     AutoTuneType: EnumShape
+    AutomatedSnapshotPauseOptions: StructureShape
+    AutomatedSnapshotPauseOptionsStatus: StructureShape
+    AutomatedSnapshotPauseRequestOptions: StructureShape
     BackendRole: StringShape
     BaseException: StructureShape
     Boolean: BooleanShape
@@ -85,6 +88,9 @@ module Aws::ElasticsearchService
     DeleteVpcEndpointResponse: StructureShape
     DeploymentCloseDateTimeStamp: TimestampShape
     DeploymentStatus: EnumShape
+    DeploymentStrategy: EnumShape
+    DeploymentStrategyOptions: StructureShape
+    DeploymentStrategyOptionsStatus: StructureShape
     DeploymentType: StringShape
     DescribeDomainAutoTunesRequest: StructureShape
     DescribeDomainAutoTunesResponse: StructureShape
@@ -123,6 +129,7 @@ module Aws::ElasticsearchService
     DomainArn: StringShape
     DomainEndpointOptions: StructureShape
     DomainEndpointOptionsStatus: StructureShape
+    DomainEngineMode: EnumShape
     DomainId: StringShape
     DomainInfo: StructureShape
     DomainInfoList: ListShape
@@ -134,6 +141,7 @@ module Aws::ElasticsearchService
     DomainPackageDetailsList: ListShape
     DomainPackageStatus: EnumShape
     DomainProcessingStatusType: EnumShape
+    DomainUseCase: EnumShape
     Double: FloatShape
     DryRun: BooleanShape
     DryRunResults: StructureShape
@@ -156,6 +164,7 @@ module Aws::ElasticsearchService
     EncryptionAtRestOptionsStatus: StructureShape
     Endpoint: StringShape
     EndpointsMap: MapShape
+    EngineModeStatus: StructureShape
     EngineType: EnumShape
     ErrorDetails: StructureShape
     ErrorMessage: StringShape
@@ -250,6 +259,7 @@ module Aws::ElasticsearchService
     PackageVersionHistory: StructureShape
     PackageVersionHistoryList: ListShape
     Password: StringShape
+    PauseState: EnumShape
     PolicyDocument: StringShape
     PrincipalType: EnumShape
     PropertyValueType: EnumShape
@@ -325,6 +335,7 @@ module Aws::ElasticsearchService
     UpgradeStep: EnumShape
     UpgradeStepItem: StructureShape
     UpgradeStepsList: ListShape
+    UseCaseStatus: StructureShape
     UserPoolId: StringShape
     Username: StringShape
     VPCDerivedInfo: StructureShape

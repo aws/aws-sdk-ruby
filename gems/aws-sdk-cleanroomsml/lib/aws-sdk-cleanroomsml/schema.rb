@@ -50,6 +50,8 @@ module Aws::CleanRoomsML
     CollaborationTrainedModelInferenceJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#CollaborationTrainedModelInferenceJobSummary", name: "CollaborationTrainedModelInferenceJobSummary")
     CollaborationTrainedModelList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#CollaborationTrainedModelList", name: "CollaborationTrainedModelList")
     CollaborationTrainedModelSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#CollaborationTrainedModelSummary", name: "CollaborationTrainedModelSummary")
+    ColumnClassificationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#ColumnClassificationDetails", name: "ColumnClassificationDetails")
+    ColumnMappingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#ColumnMappingList", name: "ColumnMappingList", traits: {"smithy.api#length" => {"min" => 5}})
     ColumnName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#ColumnName", name: "ColumnName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$"})
     ColumnSchema = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#ColumnSchema", name: "ColumnSchema")
     ColumnType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#ColumnType", name: "ColumnType")
@@ -90,6 +92,7 @@ module Aws::CleanRoomsML
     CustomDataIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#CustomDataIdentifier", name: "CustomDataIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^[a-zA-Z0-9\\_\\#\\=\\@/\\;\\,\\-\\ \\^\\$\\?\\[\\]\\{\\}\\|\\\\\\*\\+\\.\\(\\)]+$"})
     CustomDataIdentifierList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#CustomDataIdentifierList", name: "CustomDataIdentifierList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#uniqueItems" => {}})
     CustomEntityConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#CustomEntityConfig", name: "CustomEntityConfig")
+    DataPrivacyScores = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#DataPrivacyScores", name: "DataPrivacyScores")
     DataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#DataSource", name: "DataSource")
     Dataset = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#Dataset", name: "Dataset")
     DatasetInputConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#DatasetInputConfig", name: "DatasetInputConfig")
@@ -205,7 +208,11 @@ module Aws::CleanRoomsML
     MLInputChannelSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#MLInputChannelSummary", name: "MLInputChannelSummary")
     MLInputChannelsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#MLInputChannelsList", name: "MLInputChannelsList")
     MLOutputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#MLOutputConfiguration", name: "MLOutputConfiguration")
+    MLSyntheticDataParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#MLSyntheticDataParameters", name: "MLSyntheticDataParameters")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.cleanroomsml#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    MembershipInferenceAttackScore = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#MembershipInferenceAttackScore", name: "MembershipInferenceAttackScore")
+    MembershipInferenceAttackScoreList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#MembershipInferenceAttackScoreList", name: "MembershipInferenceAttackScoreList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    MembershipInferenceAttackVersion = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#MembershipInferenceAttackVersion", name: "MembershipInferenceAttackVersion")
     MetricDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#MetricDefinition", name: "MetricDefinition")
     MetricDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#MetricDefinitionList", name: "MetricDefinitionList", traits: {"smithy.api#length" => {"min" => 0, "max" => 40}})
     MetricName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#MetricName", name: "MetricName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^.+$"})
@@ -221,9 +228,10 @@ module Aws::CleanRoomsML
     NameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#NameString", name: "NameString", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$"})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 10240}})
     NoiseLevelType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#NoiseLevelType", name: "NoiseLevelType")
-    ParameterKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#ParameterKey", name: "ParameterKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[0-9a-zA-Z_]+$"})
-    ParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cleanroomsml#ParameterMap", name: "ParameterMap")
-    ParameterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#ParameterValue", name: "ParameterValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 250}})
+    ParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cleanroomsml#ParameterMap", name: "ParameterMap", traits: {"smithy.api#sensitive" => {}})
+    ParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#ParameterName", name: "ParameterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[0-9a-zA-Z_]+$"})
+    ParameterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#ParameterValue", name: "ParameterValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
+    PayerConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#PayerConfiguration", name: "PayerConfiguration")
     PolicyExistenceCondition = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#PolicyExistenceCondition", name: "PolicyExistenceCondition")
     PrivacyBudgets = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanroomsml#PrivacyBudgets", name: "PrivacyBudgets")
     PrivacyConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#PrivacyConfiguration", name: "PrivacyConfiguration")
@@ -245,6 +253,9 @@ module Aws::CleanRoomsML
     S3Path = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#S3Path", name: "S3Path", traits: {"smithy.api#length" => {"min" => 1, "max" => 1285}, "smithy.api#pattern" => "^s3://.+$"})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     SharedAudienceMetrics = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#SharedAudienceMetrics", name: "SharedAudienceMetrics")
+    SparkProperties = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cleanroomsml#SparkProperties", name: "SparkProperties", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    SparkPropertyKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#SparkPropertyKey", name: "SparkPropertyKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
+    SparkPropertyValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#SparkPropertyValue", name: "SparkPropertyValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}})
     StartAudienceExportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#StartAudienceExportJobRequest", name: "StartAudienceExportJobRequest")
     StartAudienceGenerationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#StartAudienceGenerationJobRequest", name: "StartAudienceGenerationJobRequest")
     StartAudienceGenerationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#StartAudienceGenerationJobResponse", name: "StartAudienceGenerationJobResponse")
@@ -253,6 +264,11 @@ module Aws::CleanRoomsML
     StartTrainedModelInferenceJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#StartTrainedModelInferenceJobResponse", name: "StartTrainedModelInferenceJobResponse")
     StatusDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#StatusDetails", name: "StatusDetails")
     StoppingCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#StoppingCondition", name: "StoppingCondition")
+    SyntheticDataColumnName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#SyntheticDataColumnName", name: "SyntheticDataColumnName", traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?$"})
+    SyntheticDataColumnProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#SyntheticDataColumnProperties", name: "SyntheticDataColumnProperties")
+    SyntheticDataColumnType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#SyntheticDataColumnType", name: "SyntheticDataColumnType")
+    SyntheticDataConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#SyntheticDataConfiguration", name: "SyntheticDataConfiguration")
+    SyntheticDataEvaluationScores = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#SyntheticDataEvaluationScores", name: "SyntheticDataEvaluationScores")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     TagKeys = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#TagKeys", name: "TagKeys", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
     TagMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.cleanroomsml#TagMap", name: "TagMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
@@ -265,7 +281,7 @@ module Aws::CleanRoomsML
     TrainedModelArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelArn", name: "TrainedModelArn", traits: {"aws.api#arnReference" => {"service" => "com.amazonaws.cleanroomsml#AWSStarkControlService", "resource" => "com.amazonaws.cleanroomsml#TrainedModel"}, "smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/trained-model/[-a-zA-Z0-9_/.]+$"})
     TrainedModelArtifactMaxSize = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSize", name: "TrainedModelArtifactMaxSize")
     TrainedModelArtifactMaxSizeUnitType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSizeUnitType", name: "TrainedModelArtifactMaxSizeUnitType")
-    TrainedModelArtifactMaxSizeValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSizeValue", name: "TrainedModelArtifactMaxSizeValue", traits: {"smithy.api#range" => {"min" => 0.01, "max" => 10.0}})
+    TrainedModelArtifactMaxSizeValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelArtifactMaxSizeValue", name: "TrainedModelArtifactMaxSizeValue", traits: {"smithy.api#range" => {"min" => 0.01, "max" => 100.0}})
     TrainedModelExportFileType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelExportFileType", name: "TrainedModelExportFileType")
     TrainedModelExportFileTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelExportFileTypeList", name: "TrainedModelExportFileTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}, "smithy.api#uniqueItems" => {}})
     TrainedModelExportJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelExportJobStatus", name: "TrainedModelExportJobStatus")
@@ -275,7 +291,7 @@ module Aws::CleanRoomsML
     TrainedModelExportsConfigurationPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelExportsConfigurationPolicy", name: "TrainedModelExportsConfigurationPolicy")
     TrainedModelExportsMaxSize = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelExportsMaxSize", name: "TrainedModelExportsMaxSize")
     TrainedModelExportsMaxSizeUnitType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelExportsMaxSizeUnitType", name: "TrainedModelExportsMaxSizeUnitType")
-    TrainedModelExportsMaxSizeValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelExportsMaxSizeValue", name: "TrainedModelExportsMaxSizeValue", traits: {"smithy.api#range" => {"min" => 0.01, "max" => 10.0}})
+    TrainedModelExportsMaxSizeValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelExportsMaxSizeValue", name: "TrainedModelExportsMaxSizeValue", traits: {"smithy.api#range" => {"min" => 0.01, "max" => 50.0}})
     TrainedModelInferenceJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelInferenceJobArn", name: "TrainedModelInferenceJobArn", traits: {"aws.api#arnReference" => {"service" => "com.amazonaws.cleanroomsml#AWSStarkControlService", "resource" => "com.amazonaws.cleanroomsml#TrainedModelInferenceJob"}, "smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/trained-model-inference-job/[-a-zA-Z0-9_/.]+$"})
     TrainedModelInferenceJobList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelInferenceJobList", name: "TrainedModelInferenceJobList")
     TrainedModelInferenceJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelInferenceJobStatus", name: "TrainedModelInferenceJobStatus")
@@ -283,7 +299,7 @@ module Aws::CleanRoomsML
     TrainedModelInferenceJobsConfigurationPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelInferenceJobsConfigurationPolicy", name: "TrainedModelInferenceJobsConfigurationPolicy")
     TrainedModelInferenceMaxOutputSize = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelInferenceMaxOutputSize", name: "TrainedModelInferenceMaxOutputSize")
     TrainedModelInferenceMaxOutputSizeUnitType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelInferenceMaxOutputSizeUnitType", name: "TrainedModelInferenceMaxOutputSizeUnitType")
-    TrainedModelInferenceMaxOutputSizeValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelInferenceMaxOutputSizeValue", name: "TrainedModelInferenceMaxOutputSizeValue", traits: {"smithy.api#range" => {"min" => 0.01, "max" => 50.0}})
+    TrainedModelInferenceMaxOutputSizeValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelInferenceMaxOutputSizeValue", name: "TrainedModelInferenceMaxOutputSizeValue", traits: {"smithy.api#range" => {"min" => 0.01, "max" => 100.0}})
     TrainedModelList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelList", name: "TrainedModelList")
     TrainedModelStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelStatus", name: "TrainedModelStatus")
     TrainedModelSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#TrainedModelSummary", name: "TrainedModelSummary")
@@ -300,6 +316,7 @@ module Aws::CleanRoomsML
     UpdateConfiguredAudienceModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#UpdateConfiguredAudienceModelResponse", name: "UpdateConfiguredAudienceModelResponse")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     WorkerComputeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.cleanroomsml#WorkerComputeConfiguration", name: "WorkerComputeConfiguration")
+    WorkerComputeConfigurationProperties = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.cleanroomsml#WorkerComputeConfigurationProperties", name: "WorkerComputeConfigurationProperties")
     WorkerComputeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.cleanroomsml#WorkerComputeType", name: "WorkerComputeType")
 
     AccessBudget.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BudgetedResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
@@ -420,6 +437,7 @@ module Aws::CleanRoomsML
     CollaborationMLInputChannelSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MLInputChannelStatus, name: "status", traits: {"smithy.api#required" => {}}))
     CollaborationMLInputChannelSummary.add_member(:creator_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "creatorAccountId", traits: {"smithy.api#required" => {}}))
     CollaborationMLInputChannelSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    CollaborationMLInputChannelSummary.add_member(:payer_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PayerConfiguration, name: "payerConfiguration"))
     CollaborationMLInputChannelSummary.type = Types::CollaborationMLInputChannelSummary
     CollaborationMLInputChannelsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationMLInputChannelSummary, name: "member"))
     CollaborationTrainedModelExportJobList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CollaborationTrainedModelExportJobSummary, name: "member"))
@@ -451,6 +469,7 @@ module Aws::CleanRoomsML
     CollaborationTrainedModelInferenceJobSummary.add_member(:metrics_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "metricsStatusDetails"))
     CollaborationTrainedModelInferenceJobSummary.add_member(:logs_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LogsStatus, name: "logsStatus"))
     CollaborationTrainedModelInferenceJobSummary.add_member(:logs_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "logsStatusDetails"))
+    CollaborationTrainedModelInferenceJobSummary.add_member(:ml_model_inference_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "mlModelInferencePayerAccountId"))
     CollaborationTrainedModelInferenceJobSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CollaborationTrainedModelInferenceJobSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     CollaborationTrainedModelInferenceJobSummary.add_member(:creator_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "creatorAccountId", traits: {"smithy.api#required" => {}}))
@@ -468,7 +487,11 @@ module Aws::CleanRoomsML
     CollaborationTrainedModelSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelStatus, name: "status", traits: {"smithy.api#required" => {}}))
     CollaborationTrainedModelSummary.add_member(:configured_model_algorithm_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmAssociationArn, name: "configuredModelAlgorithmAssociationArn", traits: {"smithy.api#required" => {}}))
     CollaborationTrainedModelSummary.add_member(:creator_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "creatorAccountId", traits: {"smithy.api#required" => {}}))
+    CollaborationTrainedModelSummary.add_member(:ml_model_training_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "mlModelTrainingPayerAccountId"))
     CollaborationTrainedModelSummary.type = Types::CollaborationTrainedModelSummary
+    ColumnClassificationDetails.add_member(:column_mapping, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMappingList, name: "columnMapping", traits: {"smithy.api#required" => {}}))
+    ColumnClassificationDetails.type = Types::ColumnClassificationDetails
+    ColumnMappingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataColumnProperties, name: "member"))
     ColumnSchema.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnName, name: "columnName", traits: {"smithy.api#required" => {}}))
     ColumnSchema.add_member(:column_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnTypeList, name: "columnTypes", traits: {"smithy.api#required" => {}}))
     ColumnSchema.type = Types::ColumnSchema
@@ -571,6 +594,7 @@ module Aws::CleanRoomsML
     CreateMLInputChannelRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
     CreateMLInputChannelRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     CreateMLInputChannelRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateMLInputChannelRequest.add_member(:payer_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PayerConfiguration, name: "payerConfiguration"))
     CreateMLInputChannelRequest.type = Types::CreateMLInputChannelRequest
     CreateMLInputChannelResponse.add_member(:ml_input_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MLInputChannelArn, name: "mlInputChannelArn", traits: {"smithy.api#required" => {}}))
     CreateMLInputChannelResponse.type = Types::CreateMLInputChannelResponse
@@ -587,6 +611,7 @@ module Aws::CleanRoomsML
     CreateTrainedModelRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
     CreateTrainedModelRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     CreateTrainedModelRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateTrainedModelRequest.add_member(:ml_model_training_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "mlModelTrainingPayerAccountId"))
     CreateTrainedModelRequest.type = Types::CreateTrainedModelRequest
     CreateTrainedModelResponse.add_member(:trained_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelArn, name: "trainedModelArn", traits: {"smithy.api#required" => {}}))
     CreateTrainedModelResponse.add_member(:version_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "versionIdentifier"))
@@ -602,6 +627,8 @@ module Aws::CleanRoomsML
     CustomDataIdentifierList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDataIdentifier, name: "member"))
     CustomEntityConfig.add_member(:custom_data_identifiers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomDataIdentifierList, name: "customDataIdentifiers", traits: {"smithy.api#required" => {}}))
     CustomEntityConfig.type = Types::CustomEntityConfig
+    DataPrivacyScores.add_member(:membership_inference_attack_scores, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipInferenceAttackScoreList, name: "membershipInferenceAttackScores", traits: {"smithy.api#required" => {}}))
+    DataPrivacyScores.type = Types::DataPrivacyScores
     DataSource.add_member(:glue_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: GlueDataSource, name: "glueDataSource", traits: {"smithy.api#required" => {}}))
     DataSource.type = Types::DataSource
     Dataset.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetType, name: "type", traits: {"smithy.api#required" => {}}))
@@ -706,6 +733,8 @@ module Aws::CleanRoomsML
     GetCollaborationMLInputChannelResponse.add_member(:number_of_records, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "numberOfRecords", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000000000}}))
     GetCollaborationMLInputChannelResponse.add_member(:privacy_budgets, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivacyBudgets, name: "privacyBudgets"))
     GetCollaborationMLInputChannelResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    GetCollaborationMLInputChannelResponse.add_member(:synthetic_data_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataConfiguration, name: "syntheticDataConfiguration"))
+    GetCollaborationMLInputChannelResponse.add_member(:payer_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PayerConfiguration, name: "payerConfiguration"))
     GetCollaborationMLInputChannelResponse.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     GetCollaborationMLInputChannelResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     GetCollaborationMLInputChannelResponse.add_member(:creator_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "creatorAccountId", traits: {"smithy.api#required" => {}}))
@@ -732,6 +761,7 @@ module Aws::CleanRoomsML
     GetCollaborationTrainedModelResponse.add_member(:logs_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LogsStatus, name: "logsStatus"))
     GetCollaborationTrainedModelResponse.add_member(:logs_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "logsStatusDetails"))
     GetCollaborationTrainedModelResponse.add_member(:training_container_image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "trainingContainerImageDigest"))
+    GetCollaborationTrainedModelResponse.add_member(:ml_model_training_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "mlModelTrainingPayerAccountId"))
     GetCollaborationTrainedModelResponse.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     GetCollaborationTrainedModelResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     GetCollaborationTrainedModelResponse.add_member(:creator_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "creatorAccountId", traits: {"smithy.api#required" => {}}))
@@ -806,6 +836,8 @@ module Aws::CleanRoomsML
     GetMLInputChannelResponse.add_member(:number_of_records, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "numberOfRecords", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000000000}}))
     GetMLInputChannelResponse.add_member(:privacy_budgets, ::Smithy::Schema::Shapes::MemberShape.new(target: PrivacyBudgets, name: "privacyBudgets"))
     GetMLInputChannelResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    GetMLInputChannelResponse.add_member(:synthetic_data_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataConfiguration, name: "syntheticDataConfiguration"))
+    GetMLInputChannelResponse.add_member(:payer_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PayerConfiguration, name: "payerConfiguration"))
     GetMLInputChannelResponse.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     GetMLInputChannelResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     GetMLInputChannelResponse.add_member(:input_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: InputChannel, name: "inputChannel", traits: {"smithy.api#required" => {}}))
@@ -841,6 +873,7 @@ module Aws::CleanRoomsML
     GetTrainedModelInferenceJobResponse.add_member(:logs_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LogsStatus, name: "logsStatus"))
     GetTrainedModelInferenceJobResponse.add_member(:logs_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "logsStatusDetails"))
     GetTrainedModelInferenceJobResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    GetTrainedModelInferenceJobResponse.add_member(:ml_model_inference_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "mlModelInferencePayerAccountId"))
     GetTrainedModelInferenceJobResponse.type = Types::GetTrainedModelInferenceJobResponse
     GetTrainedModelRequest.add_member(:trained_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelArn, name: "trainedModelArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetTrainedModelRequest.add_member(:membership_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "membershipIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -864,6 +897,7 @@ module Aws::CleanRoomsML
     GetTrainedModelResponse.add_member(:logs_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LogsStatus, name: "logsStatus"))
     GetTrainedModelResponse.add_member(:logs_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "logsStatusDetails"))
     GetTrainedModelResponse.add_member(:training_container_image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "trainingContainerImageDigest"))
+    GetTrainedModelResponse.add_member(:ml_model_training_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "mlModelTrainingPayerAccountId"))
     GetTrainedModelResponse.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     GetTrainedModelResponse.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     GetTrainedModelResponse.add_member(:hyperparameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HyperParameters, name: "hyperparameters"))
@@ -1302,11 +1336,21 @@ module Aws::CleanRoomsML
     MLInputChannelSummary.add_member(:ml_input_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MLInputChannelArn, name: "mlInputChannelArn", traits: {"smithy.api#required" => {}}))
     MLInputChannelSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MLInputChannelStatus, name: "status", traits: {"smithy.api#required" => {}}))
     MLInputChannelSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDescription, name: "description"))
+    MLInputChannelSummary.add_member(:payer_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: PayerConfiguration, name: "payerConfiguration"))
     MLInputChannelSummary.type = Types::MLInputChannelSummary
     MLInputChannelsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MLInputChannelSummary, name: "member"))
     MLOutputConfiguration.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination"))
     MLOutputConfiguration.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "roleArn", traits: {"smithy.api#required" => {}}))
     MLOutputConfiguration.type = Types::MLOutputConfiguration
+    MLSyntheticDataParameters.add_member(:epsilon, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "epsilon", traits: {"smithy.api#range" => {"min" => 0.0001, "max" => 10}, "smithy.api#required" => {}}))
+    MLSyntheticDataParameters.add_member(:max_membership_inference_attack_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "maxMembershipInferenceAttackScore", traits: {"smithy.api#range" => {"min" => 0.5, "max" => 1}, "smithy.api#required" => {}}))
+    MLSyntheticDataParameters.add_member(:column_classification, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnClassificationDetails, name: "columnClassification"))
+    MLSyntheticDataParameters.type = Types::MLSyntheticDataParameters
+    MembershipInferenceAttackScore.add_member(:attack_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipInferenceAttackVersion, name: "attackVersion", traits: {"smithy.api#required" => {}}))
+    MembershipInferenceAttackScore.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "score", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}, "smithy.api#required" => {}}))
+    MembershipInferenceAttackScore.type = Types::MembershipInferenceAttackScore
+    MembershipInferenceAttackScoreList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MembershipInferenceAttackScore, name: "member"))
+    MembershipInferenceAttackVersion.add_member(:distance_to_closest_record_v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTANCE_TO_CLOSEST_RECORD_V1", traits: {"smithy.api#enumValue" => "DISTANCE_TO_CLOSEST_RECORD_V1"}))
     MetricDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricName, name: "name", traits: {"smithy.api#required" => {}}))
     MetricDefinition.add_member(:regex, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricRegex, name: "regex", traits: {"smithy.api#required" => {}}))
     MetricDefinition.type = Types::MetricDefinition
@@ -1327,8 +1371,11 @@ module Aws::CleanRoomsML
     NoiseLevelType.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
     NoiseLevelType.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     NoiseLevelType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
-    ParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "key"))
+    ParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "key"))
     ParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value"))
+    PayerConfiguration.add_member(:compute_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "computePayerAccountId"))
+    PayerConfiguration.add_member(:synthetic_data_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "syntheticDataPayerAccountId"))
+    PayerConfiguration.type = Types::PayerConfiguration
     PolicyExistenceCondition.add_member(:policy_must_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MUST_EXIST", traits: {"smithy.api#enumValue" => "POLICY_MUST_EXIST"}))
     PolicyExistenceCondition.add_member(:policy_must_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POLICY_MUST_NOT_EXIST", traits: {"smithy.api#enumValue" => "POLICY_MUST_NOT_EXIST"}))
     PrivacyBudgets.add_member(:access_budgets, Types::PrivacyBudgets::AccessBudgets, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessBudgets, name: "accessBudgets"))
@@ -1381,6 +1428,8 @@ module Aws::CleanRoomsML
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     SharedAudienceMetrics.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
     SharedAudienceMetrics.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    SparkProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkPropertyKey, name: "key"))
+    SparkProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkPropertyValue, name: "value"))
     StartAudienceExportJobRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameString, name: "name", traits: {"smithy.api#required" => {}}))
     StartAudienceExportJobRequest.add_member(:audience_generation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceGenerationJobArn, name: "audienceGenerationJobArn", traits: {"smithy.api#required" => {}}))
     StartAudienceExportJobRequest.add_member(:audience_size, ::Smithy::Schema::Shapes::MemberShape.new(target: AudienceSize, name: "audienceSize", traits: {"smithy.api#required" => {}}))
@@ -1416,6 +1465,7 @@ module Aws::CleanRoomsML
     StartTrainedModelInferenceJobRequest.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceEnvironmentMap, name: "environment"))
     StartTrainedModelInferenceJobRequest.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyArn, name: "kmsKeyArn"))
     StartTrainedModelInferenceJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    StartTrainedModelInferenceJobRequest.add_member(:ml_model_inference_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "mlModelInferencePayerAccountId"))
     StartTrainedModelInferenceJobRequest.type = Types::StartTrainedModelInferenceJobRequest
     StartTrainedModelInferenceJobResponse.add_member(:trained_model_inference_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelInferenceJobArn, name: "trainedModelInferenceJobArn", traits: {"smithy.api#required" => {}}))
     StartTrainedModelInferenceJobResponse.type = Types::StartTrainedModelInferenceJobResponse
@@ -1424,6 +1474,17 @@ module Aws::CleanRoomsML
     StatusDetails.type = Types::StatusDetails
     StoppingCondition.add_member(:max_runtime_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxRuntimeInSeconds", traits: {"smithy.api#default" => 86400, "smithy.api#range" => {"min" => 1, "max" => 2419200}}))
     StoppingCondition.type = Types::StoppingCondition
+    SyntheticDataColumnProperties.add_member(:column_name, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataColumnName, name: "columnName", traits: {"smithy.api#required" => {}}))
+    SyntheticDataColumnProperties.add_member(:column_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataColumnType, name: "columnType", traits: {"smithy.api#required" => {}}))
+    SyntheticDataColumnProperties.add_member(:is_predictive_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "isPredictiveValue", traits: {"smithy.api#required" => {}}))
+    SyntheticDataColumnProperties.type = Types::SyntheticDataColumnProperties
+    SyntheticDataColumnType.add_member(:categorical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CATEGORICAL", traits: {"smithy.api#enumValue" => "CATEGORICAL"}))
+    SyntheticDataColumnType.add_member(:numerical, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUMERICAL", traits: {"smithy.api#enumValue" => "NUMERICAL"}))
+    SyntheticDataConfiguration.add_member(:synthetic_data_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: MLSyntheticDataParameters, name: "syntheticDataParameters", traits: {"smithy.api#required" => {}}))
+    SyntheticDataConfiguration.add_member(:synthetic_data_evaluation_scores, ::Smithy::Schema::Shapes::MemberShape.new(target: SyntheticDataEvaluationScores, name: "syntheticDataEvaluationScores"))
+    SyntheticDataConfiguration.type = Types::SyntheticDataConfiguration
+    SyntheticDataEvaluationScores.add_member(:data_privacy_scores, ::Smithy::Schema::Shapes::MemberShape.new(target: DataPrivacyScores, name: "dataPrivacyScores", traits: {"smithy.api#required" => {}}))
+    SyntheticDataEvaluationScores.type = Types::SyntheticDataEvaluationScores
     TagKeys.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
@@ -1481,6 +1542,7 @@ module Aws::CleanRoomsML
     TrainedModelInferenceJobSummary.add_member(:metrics_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "metricsStatusDetails"))
     TrainedModelInferenceJobSummary.add_member(:logs_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LogsStatus, name: "logsStatus"))
     TrainedModelInferenceJobSummary.add_member(:logs_status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "logsStatusDetails"))
+    TrainedModelInferenceJobSummary.add_member(:ml_model_inference_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "mlModelInferencePayerAccountId"))
     TrainedModelInferenceJobSummary.add_member(:create_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     TrainedModelInferenceJobSummary.add_member(:update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updateTime", traits: {"smithy.api#required" => {}, "smithy.api#timestampFormat" => "date-time"}))
     TrainedModelInferenceJobSummary.type = Types::TrainedModelInferenceJobSummary
@@ -1514,6 +1576,7 @@ module Aws::CleanRoomsML
     TrainedModelSummary.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "collaborationIdentifier", traits: {"smithy.api#required" => {}}))
     TrainedModelSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainedModelStatus, name: "status", traits: {"smithy.api#required" => {}}))
     TrainedModelSummary.add_member(:configured_model_algorithm_association_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfiguredModelAlgorithmAssociationArn, name: "configuredModelAlgorithmAssociationArn", traits: {"smithy.api#required" => {}}))
+    TrainedModelSummary.add_member(:ml_model_training_payer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "mlModelTrainingPayerAccountId"))
     TrainedModelSummary.type = Types::TrainedModelSummary
     TrainedModelsConfigurationPolicy.add_member(:container_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: LogsConfigurationPolicyList, name: "containerLogs"))
     TrainedModelsConfigurationPolicy.add_member(:container_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsConfigurationPolicy, name: "containerMetrics"))
@@ -1548,16 +1611,21 @@ module Aws::CleanRoomsML
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationException.type = Types::ValidationException
     WorkerComputeConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerComputeType, name: "type", traits: {"smithy.api#default" => "CR.1X"}))
-    WorkerComputeConfiguration.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "number", traits: {"smithy.api#default" => 16, "smithy.api#range" => {"min" => 2, "max" => 400}}))
+    WorkerComputeConfiguration.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "number", traits: {"smithy.api#default" => 16, "smithy.api#range" => {"min" => 2, "max" => 1024}}))
+    WorkerComputeConfiguration.add_member(:properties, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkerComputeConfigurationProperties, name: "properties"))
     WorkerComputeConfiguration.type = Types::WorkerComputeConfiguration
+    WorkerComputeConfigurationProperties.add_member(:spark, Types::WorkerComputeConfigurationProperties::Spark, ::Smithy::Schema::Shapes::MemberShape.new(target: SparkProperties, name: "spark"))
+    WorkerComputeConfigurationProperties.add_member(:unknown, Types::WorkerComputeConfigurationProperties::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    WorkerComputeConfigurationProperties.type = Types::WorkerComputeConfigurationProperties
     WorkerComputeType.add_member(:cr1_x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CR1X", traits: {"smithy.api#enumValue" => "CR.1X"}))
     WorkerComputeType.add_member(:cr4_x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CR4X", traits: {"smithy.api#enumValue" => "CR.4X"}))
+    WorkerComputeType.add_member(:cr8_x, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CR8X", traits: {"smithy.api#enumValue" => "CR.8X"}))
 
     AWSStarkControlService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.cleanroomsml#AWSStarkControlService"
       service.name = "AWSStarkControlService"
       service.version = "2023-09-06"
-      service.traits = {"aws.api#service" => {"sdkId" => "CleanRoomsML", "arnNamespace" => "cleanrooms-ml", "cloudTrailEventSource" => "cleanrooms-ml.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "cleanrooms-ml"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"], "maxAge" => 86400}, "smithy.api#title" => "AWS Clean Rooms ML"}
+      service.traits = {"aws.api#service" => {"sdkId" => "CleanRoomsML", "arnNamespace" => "cleanrooms-ml", "cloudTrailEventSource" => "cleanrooms-ml.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "cleanrooms-ml"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id"], "maxAge" => 86400}, "smithy.api#title" => "AWS Clean Rooms ML", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cleanrooms-ml-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cleanrooms-ml-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cleanrooms-ml.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cleanrooms-ml.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:cancel_trained_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanroomsml#CancelTrainedModel"
         operation.name = "CancelTrainedModel"
@@ -1591,6 +1659,7 @@ module Aws::CleanRoomsML
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/audience-model"}, "smithy.api#idempotent" => {}}
       end)
@@ -1603,6 +1672,7 @@ module Aws::CleanRoomsML
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/configured-audience-model"}, "smithy.api#idempotent" => {}}
       end)
@@ -1614,6 +1684,7 @@ module Aws::CleanRoomsML
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/configured-model-algorithms"}, "smithy.api#idempotent" => {}}
       end)
@@ -1664,6 +1735,7 @@ module Aws::CleanRoomsML
         operation.output = CreateTrainingDatasetResponse
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/training-dataset"}, "smithy.api#idempotent" => {}}
       end)
@@ -1675,6 +1747,7 @@ module Aws::CleanRoomsML
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/audience-generation-job/{audienceGenerationJobArn}"}, "smithy.api#idempotent" => {}}
       end)
@@ -1686,6 +1759,7 @@ module Aws::CleanRoomsML
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "uri" => "/audience-model/{audienceModelArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
@@ -1697,6 +1771,7 @@ module Aws::CleanRoomsML
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "uri" => "/configured-audience-model/{configuredAudienceModelArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
@@ -1707,6 +1782,7 @@ module Aws::CleanRoomsML
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << AccessDeniedException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/configured-audience-model/{configuredAudienceModelArn}/policy"}, "smithy.api#idempotent" => {}}
       end)
@@ -1718,6 +1794,7 @@ module Aws::CleanRoomsML
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "uri" => "/configured-model-algorithms/{configuredModelAlgorithmArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
@@ -1776,6 +1853,7 @@ module Aws::CleanRoomsML
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/training-dataset/{trainingDatasetArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
       end)
@@ -1786,6 +1864,7 @@ module Aws::CleanRoomsML
         operation.output = GetAudienceGenerationJobResponse
         operation.errors << AccessDeniedException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/audience-generation-job/{audienceGenerationJobArn}"}, "smithy.api#readonly" => {}}
       end)
@@ -1796,6 +1875,7 @@ module Aws::CleanRoomsML
         operation.output = GetAudienceModelResponse
         operation.errors << AccessDeniedException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/audience-model/{audienceModelArn}"}, "smithy.api#readonly" => {}}
       end)
@@ -1839,6 +1919,7 @@ module Aws::CleanRoomsML
         operation.output = GetConfiguredAudienceModelResponse
         operation.errors << AccessDeniedException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/configured-audience-model/{configuredAudienceModelArn}"}, "smithy.api#readonly" => {}}
       end)
@@ -1849,6 +1930,7 @@ module Aws::CleanRoomsML
         operation.output = GetConfiguredAudienceModelPolicyResponse
         operation.errors << AccessDeniedException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/configured-audience-model/{configuredAudienceModelArn}/policy"}, "smithy.api#readonly" => {}}
       end)
@@ -1859,6 +1941,7 @@ module Aws::CleanRoomsML
         operation.output = GetConfiguredModelAlgorithmResponse
         operation.errors << AccessDeniedException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/configured-model-algorithms/{configuredModelAlgorithmArn}"}, "smithy.api#readonly" => {}}
       end)
@@ -1924,6 +2007,7 @@ module Aws::CleanRoomsML
         operation.output = GetTrainingDatasetResponse
         operation.errors << AccessDeniedException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/training-dataset/{trainingDatasetArn}"}, "smithy.api#readonly" => {}}
       end)
@@ -1933,6 +2017,7 @@ module Aws::CleanRoomsML
         operation.input = ListAudienceExportJobsRequest
         operation.output = ListAudienceExportJobsResponse
         operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/audience-export-job"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAudienceExportJobs.new
@@ -1943,6 +2028,7 @@ module Aws::CleanRoomsML
         operation.input = ListAudienceGenerationJobsRequest
         operation.output = ListAudienceGenerationJobsResponse
         operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/audience-generation-job"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAudienceGenerationJobs.new
@@ -1953,6 +2039,7 @@ module Aws::CleanRoomsML
         operation.input = ListAudienceModelsRequest
         operation.output = ListAudienceModelsResponse
         operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/audience-model"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListAudienceModels.new
@@ -2018,6 +2105,7 @@ module Aws::CleanRoomsML
         operation.input = ListConfiguredAudienceModelsRequest
         operation.output = ListConfiguredAudienceModelsResponse
         operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/configured-audience-model"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListConfiguredAudienceModels.new
@@ -2039,6 +2127,7 @@ module Aws::CleanRoomsML
         operation.input = ListConfiguredModelAlgorithmsRequest
         operation.output = ListConfiguredModelAlgorithmsResponse
         operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/configured-model-algorithms"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListConfiguredModelAlgorithms.new
@@ -2104,6 +2193,7 @@ module Aws::CleanRoomsML
         operation.input = ListTrainingDatasetsRequest
         operation.output = ListTrainingDatasetsResponse
         operation.errors << AccessDeniedException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/training-dataset"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTrainingDatasets.new
@@ -2115,6 +2205,7 @@ module Aws::CleanRoomsML
         operation.output = PutConfiguredAudienceModelPolicyResponse
         operation.errors << AccessDeniedException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/configured-audience-model/{configuredAudienceModelArn}/policy"}, "smithy.api#idempotent" => {}}
       end)
@@ -2137,6 +2228,7 @@ module Aws::CleanRoomsML
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/audience-export-job"}, "smithy.api#idempotent" => {}}
       end)
@@ -2206,6 +2298,7 @@ module Aws::CleanRoomsML
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/configured-audience-model/{configuredAudienceModelArn}"}, "smithy.api#idempotent" => {}}
       end)

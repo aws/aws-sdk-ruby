@@ -144,18 +144,18 @@ module Aws::MPA
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -239,7 +239,7 @@ module Aws::MPA
     # @option params [String] :description
     #   <p>Description for the team.</p>
     # @option params [Array<Types::PolicyReference>] :policies
-    #   <p>An array of <code>PolicyReference</code> objects. Contains a list of policies that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    #   <p>An array of <code>PolicyReference</code> objects. Contains a list of policies that define the permissions for team resources.</p>
     # @option params [String] :name
     #   <p>Name of the team.</p>
     # @option params [Hash<String, String>] :tags
@@ -390,7 +390,16 @@ module Aws::MPA
     #         response_time: Time.now,
     #         primary_identity_id: "IdentityId",
     #         primary_identity_source_arn: "String",
-    #         primary_identity_status: "PENDING" # One of: ["PENDING", "ACCEPTED", "REJECTED", "INVALID"]
+    #         primary_identity_status: "PENDING" # One of: ["PENDING", "ACCEPTED", "REJECTED", "INVALID"],
+    #         last_activity: "VOTED" # One of: ["VOTED", "BASELINED", "RESPONDED_TO_INVITATION"],
+    #         last_activity_time: Time.now,
+    #         pending_baseline_session_arn: "SessionArn",
+    #         mfa_methods: [
+    #           {
+    #             type: "EMAIL_OTP" # One of: ["EMAIL_OTP"], # required
+    #             sync_status: "IN_SYNC" # One of: ["IN_SYNC", "OUT_OF_SYNC"], # required
+    #           }
+    #         ]
     #       }
     #     ],
     #     arn: "String",
@@ -426,7 +435,16 @@ module Aws::MPA
     #           response_time: Time.now,
     #           primary_identity_id: "IdentityId",
     #           primary_identity_source_arn: "String",
-    #           primary_identity_status: "PENDING" # One of: ["PENDING", "ACCEPTED", "REJECTED", "INVALID"]
+    #           primary_identity_status: "PENDING" # One of: ["PENDING", "ACCEPTED", "REJECTED", "INVALID"],
+    #           last_activity: "VOTED" # One of: ["VOTED", "BASELINED", "RESPONDED_TO_INVITATION"],
+    #           last_activity_time: Time.now,
+    #           pending_baseline_session_arn: "SessionArn",
+    #           mfa_methods: [
+    #             {
+    #               type: "EMAIL_OTP" # One of: ["EMAIL_OTP"], # required
+    #               sync_status: "IN_SYNC" # One of: ["IN_SYNC", "OUT_OF_SYNC"], # required
+    #             }
+    #           ]
     #         }
     #       ],
     #       update_initiation_time: Time.now
@@ -472,7 +490,7 @@ module Aws::MPA
       request.send_request(options)
     end
 
-    # <p>Returns details for the version of a policy. Policies define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    # <p>Returns details for the version of a policy. Policies define the permissions for team resources.</p>
     # @param [Hash, Types::GetPolicyVersionRequest] params
     # @option params [String] :policy_version_arn
     #   <p>Amazon Resource Name (ARN) for the policy.</p>
@@ -567,7 +585,7 @@ module Aws::MPA
     #       "SessionKey" => "SessionValue"
     #     },
     #     status: "PENDING" # One of: ["PENDING", "CANCELLED", "APPROVED", "FAILED", "CREATING"],
-    #     status_code: "REJECTED" # One of: ["REJECTED", "EXPIRED", "CONFIGURATION_CHANGED"],
+    #     status_code: "REJECTED" # One of: ["REJECTED", "EXPIRED", "CONFIGURATION_CHANGED", "ALL_APPROVERS_IN_SESSION"],
     #     status_message: "Message",
     #     execution_status: "EXECUTED" # One of: ["EXECUTED", "FAILED", "PENDING"],
     #     action_name: "ActionName",
@@ -585,7 +603,8 @@ module Aws::MPA
     #         response: "APPROVED" # One of: ["APPROVED", "REJECTED", "NO_RESPONSE"],
     #         response_time: Time.now
     #       }
-    #     ]
+    #     ],
+    #     additional_security_requirements: ["APPROVER_VERIFICATION_REQUIRED" # One of: ["APPROVER_VERIFICATION_REQUIRED"]]
     #   }
     # @return [Types::GetSessionResponse]
     def get_session(params = {}, options = {})
@@ -677,7 +696,7 @@ module Aws::MPA
       request.send_request(options)
     end
 
-    # <p>Returns a list of policies. Policies define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    # <p>Returns a list of policies. Policies define the permissions for team resources.</p>
     # @param [Hash, Types::ListPoliciesRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -709,7 +728,7 @@ module Aws::MPA
       request.send_request(options)
     end
 
-    # <p>Returns a list of the versions for policies. Policies define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
+    # <p>Returns a list of the versions for policies. Policies define the permissions for team resources.</p>
     # @param [Hash, Types::ListPolicyVersionsRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -828,9 +847,10 @@ module Aws::MPA
     #         requester_region: "Region",
     #         requester_account_id: "AccountId",
     #         status: "PENDING" # One of: ["PENDING", "CANCELLED", "APPROVED", "FAILED", "CREATING"],
-    #         status_code: "REJECTED" # One of: ["REJECTED", "EXPIRED", "CONFIGURATION_CHANGED"],
+    #         status_code: "REJECTED" # One of: ["REJECTED", "EXPIRED", "CONFIGURATION_CHANGED", "ALL_APPROVERS_IN_SESSION"],
     #         status_message: "Message",
-    #         action_completion_strategy: "AUTO_COMPLETION_UPON_APPROVAL" # One of: ["AUTO_COMPLETION_UPON_APPROVAL"]
+    #         action_completion_strategy: "AUTO_COMPLETION_UPON_APPROVAL" # One of: ["AUTO_COMPLETION_UPON_APPROVAL"],
+    #         additional_security_requirements: ["APPROVER_VERIFICATION_REQUIRED" # One of: ["APPROVER_VERIFICATION_REQUIRED"]]
     #       }
     #     ]
     #   }
@@ -885,6 +905,30 @@ module Aws::MPA
     # @return [Types::StartActiveApprovalTeamDeletionResponse]
     def start_active_approval_team_deletion(params = {}, options = {})
       request = build_request(:start_active_approval_team_deletion, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a baseline session for specified approvers on an <code>ACTIVE</code> approval team.</p>
+    # @param [Hash, Types::StartApprovalTeamBaselineRequest] params
+    # @option params [String] :arn
+    #   <p>Amazon Resource Name (ARN) for the approval team.</p>
+    # @option params [Array<String>] :approver_ids
+    #   <p>Array of approver IDs.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     arn: "ApprovalTeamArn", # required
+    #     approver_ids: ["ParticipantId"]
+    #   }
+    #   options = {}
+    #   response = client.start_approval_team_baseline(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     baseline_session_arn: "SessionArn"
+    #   }
+    # @return [Types::StartApprovalTeamBaselineResponse]
+    def start_approval_team_baseline(params = {}, options = {})
+      request = build_request(:start_approval_team_baseline, params)
       request.send_request(options)
     end
 
@@ -944,6 +988,8 @@ module Aws::MPA
     #   <p>Description for the team.</p>
     # @option params [String] :arn
     #   <p>Amazon Resource Name (ARN) for the team.</p>
+    # @option params [Array<String>] :update_actions
+    #   <p>A list of <code>UpdateAction</code> to perform when updating the team.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     approval_strategy: {
@@ -960,6 +1006,7 @@ module Aws::MPA
     #     ],
     #     description: "Description",
     #     arn: "ApprovalTeamArn", # required
+    #     update_actions: ["SYNCHRONIZE_MFA_DEVICES" # One of: ["SYNCHRONIZE_MFA_DEVICES"]]
     #   }
     #   options = {}
     #   response = client.update_approval_team(params, options)

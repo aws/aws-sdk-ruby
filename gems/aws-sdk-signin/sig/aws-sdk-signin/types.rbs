@@ -29,6 +29,19 @@ module Aws::Signin
       attr_accessor session_token: String?
     end
 
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor message: String?
+    end
+
     class CreateOAuth2TokenRequest
       include Smithy::Schema::Structure
 
@@ -91,6 +104,128 @@ module Aws::Signin
       attr_accessor id_token: String?
     end
 
+    class CreateOAuth2TokenWithIAMRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_type: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_type: String?
+      attr_accessor resource: String?
+    end
+
+    class CreateOAuth2TokenWithIAMResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?token_type: String,
+        ?expires_in: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor token_type: String?
+      attr_accessor expires_in: Integer?
+    end
+
+    class DeleteConsoleAuthorizationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: String?
+    end
+
+    class DeleteConsoleAuthorizationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: String,
+        ?scope: String,
+        ?console_authorization_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: String?
+      attr_accessor scope: String?
+      attr_accessor console_authorization_enabled: bool?
+    end
+
+    class DeleteResourcePermissionStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteResourcePermissionStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetConsoleAuthorizationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: String?
+    end
+
+    class GetConsoleAuthorizationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: String,
+        ?scope: String,
+        ?console_authorization_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: String?
+      attr_accessor scope: String?
+      attr_accessor console_authorization_enabled: bool?
+    end
+
+    class GetResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signin_resource_based_policy: Types::SigninResourceBasedPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signin_resource_based_policy: Types::SigninResourceBasedPolicy?
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
@@ -104,6 +239,82 @@ module Aws::Signin
       attr_accessor message: String?
     end
 
+    class IntrospectOAuth2TokenWithIAMRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+        ?token_type_hint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+      attr_accessor token_type_hint: String?
+    end
+
+    class IntrospectOAuth2TokenWithIAMResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active: bool,
+        ?client_id: String,
+        ?user_id: String,
+        ?token_type: String,
+        ?exp: Integer,
+        ?iat: Integer,
+        ?nbf: Integer,
+        ?sub: String,
+        ?aud: String,
+        ?iss: String,
+        ?jti: String,
+        ?account_id: String,
+        ?signin_session: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active: bool?
+      attr_accessor client_id: String?
+      attr_accessor user_id: String?
+      attr_accessor token_type: String?
+      attr_accessor exp: Integer?
+      attr_accessor iat: Integer?
+      attr_accessor nbf: Integer?
+      attr_accessor sub: String?
+      attr_accessor aud: String?
+      attr_accessor iss: String?
+      attr_accessor jti: String?
+      attr_accessor account_id: String?
+      attr_accessor signin_session: String?
+      attr_accessor resource: String?
+    end
+
+    class ListResourcePermissionStatementsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcePermissionStatementsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_statements: Array[Types::PermissionStatementSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_statements: Array[Types::PermissionStatementSummary]?
+      attr_accessor next_token: String?
+    end
+
     module OAuth2ErrorCode
       TOKEN_EXPIRED: String
       USER_CREDENTIALS_CHANGED: String
@@ -111,6 +322,162 @@ module Aws::Signin
       AUTHCODE_EXPIRED: String
       SERVER_ERROR: String
       INVALID_REQUEST: String
+      RESOURCE_NOT_FOUND: String
+      CONFLICT: String
+      SERVICE_QUOTA_EXCEEDED: String
+    end
+
+    class PermissionStatementSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sid: String,
+        ?condition: Hash[String, Hash[String, Array[String]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sid: String?
+      attr_accessor condition: Hash[String, Hash[String, Array[String]]]?
+    end
+
+    class PolicyStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?effect: String,
+        ?principal: Hash[String, String],
+        ?action: Array[String],
+        ?resource: String,
+        ?condition: Hash[String, Hash[String, Array[String]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor effect: String?
+      attr_accessor principal: Hash[String, String]?
+      attr_accessor action: Array[String]?
+      attr_accessor resource: String?
+      attr_accessor condition: Hash[String, Hash[String, Array[String]]]?
+    end
+
+    class PutConsoleAuthorizationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: String?
+    end
+
+    class PutConsoleAuthorizationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: String,
+        ?scope: String,
+        ?console_authorization_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: String?
+      attr_accessor scope: String?
+      attr_accessor console_authorization_enabled: bool?
+    end
+
+    class PutResourcePermissionStatementInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_vpc: String,
+        ?signin_source_vpce: String,
+        ?console_source_vpce: String,
+        ?vpc_source_ip: String,
+        ?source_ip: String,
+        ?requested_region: String,
+        ?excluded_principal: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_vpc: String?
+      attr_accessor signin_source_vpce: String?
+      attr_accessor console_source_vpce: String?
+      attr_accessor vpc_source_ip: String?
+      attr_accessor source_ip: String?
+      attr_accessor requested_region: String?
+      attr_accessor excluded_principal: String?
+      attr_accessor client_token: String?
+    end
+
+    class PutResourcePermissionStatementOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor message: String?
+    end
+
+    class RevokeOAuth2TokenWithIAMRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token: String?
+    end
+
+    class RevokeOAuth2TokenWithIAMResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor message: String?
+    end
+
+    class SigninResourceBasedPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?statement: Array[Types::PolicyStatement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor statement: Array[Types::PolicyStatement]?
     end
 
     class TooManyRequestsError

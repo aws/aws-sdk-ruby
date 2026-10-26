@@ -73,6 +73,14 @@ module Aws::SageMakerRuntime
     # @!attribute input_location
     #   <p>The Amazon S3 URI where the inference request payload is stored.</p>
     #   @return [String]
+    # @!attribute s3_output_path_extension
+    #   <p>The path extension that is appended to the Amazon S3 output path where the inference
+    #               response payload is stored.</p>
+    #   @return [String]
+    # @!attribute filename
+    #   <p>The filename for the inference response payload stored in Amazon S3. If not
+    #               specified, Amazon SageMaker AI generates a filename based on the inference ID.</p>
+    #   @return [String]
     # @!attribute request_ttl_seconds
     #   <p>Maximum age in seconds a request can be in the queue before it is marked as expired.
     #               The default is 6 hours, or 21,600 seconds.</p>
@@ -81,6 +89,18 @@ module Aws::SageMakerRuntime
     #   <p>Maximum amount of time in seconds a request can be processed before it is marked as
     #               expired. The default is 15 minutes, or 900 seconds.</p>
     #   @return [Integer]
+    # @!attribute body
+    #   <p>Provides inline input data for the inference request, in the format specified in the
+    #                   <code>ContentType</code> request header. Use this parameter to send the request
+    #               payload directly in the API call instead of uploading it to Amazon S3 and
+    #               referencing it with <code>InputLocation</code>. The inline payload can be up to 128,000
+    #               bytes.</p>
+    #            <p>
+    #               <code>Body</code> and <code>InputLocation</code> are mutually exclusive. Provide
+    #               exactly one of them.</p>
+    #            <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data
+    #               Formats-Inference</a>.</p>
+    #   @return [String]
     class InvokeEndpointAsyncInput < Struct.new(
       nil,
       :endpoint_name,
@@ -89,8 +109,11 @@ module Aws::SageMakerRuntime
       :custom_attributes,
       :inference_id,
       :input_location,
+      :s3_output_path_extension,
+      :filename,
       :request_ttl_seconds,
       :invocation_timeout_seconds,
+      :body,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -199,6 +222,15 @@ module Aws::SageMakerRuntime
     #               request. You can get the ID and timestamp from the <code>NewSessionId</code> response
     #               parameter. For any subsequent request where you specify that session ID, SageMaker AI routes the request to the same instance that supports the session.</p>
     #   @return [String]
+    # @!attribute prefix_aware_id
+    #   <p>An optional, stable identifier that serves as a routing hint for prefix-aware routing.
+    #           The service routes requests with the same prefix and the same identifier to the same
+    #           instance. If requests from different applications might have the same prompt prefix, set
+    #           a different identifier for each application to differentiate their routing
+    #           decisions.</p>
+    #            <p>Applies only to endpoints configured with a
+    #           <code>RoutingStrategy</code> of <code>PREFIX_AWARE</code>.</p>
+    #   @return [String]
     class InvokeEndpointInput < Struct.new(
       nil,
       :endpoint_name,
@@ -213,6 +245,7 @@ module Aws::SageMakerRuntime
       :enable_explanations,
       :inference_component_name,
       :session_id,
+      :prefix_aware_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -333,6 +366,15 @@ module Aws::SageMakerRuntime
     #               response to that request provides the session ID for the <code>NewSessionId</code>
     #               response parameter.</p>
     #   @return [String]
+    # @!attribute prefix_aware_id
+    #   <p>An optional, stable identifier that serves as a routing hint for prefix-aware routing.
+    #           The service routes requests with the same prefix and the same identifier to the same
+    #           instance. If requests from different applications might have the same prompt prefix, set
+    #           a different identifier for each application to differentiate their routing
+    #           decisions.</p>
+    #            <p>Applies only to endpoints configured with a
+    #           <code>RoutingStrategy</code> of <code>PREFIX_AWARE</code>.</p>
+    #   @return [String]
     class InvokeEndpointWithResponseStreamInput < Struct.new(
       nil,
       :endpoint_name,
@@ -345,6 +387,7 @@ module Aws::SageMakerRuntime
       :inference_id,
       :inference_component_name,
       :session_id,
+      :prefix_aware_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

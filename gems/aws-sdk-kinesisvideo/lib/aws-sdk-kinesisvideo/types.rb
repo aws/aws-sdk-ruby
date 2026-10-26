@@ -118,7 +118,8 @@ module Aws::KinesisVideo
     #   @return [String]
     # @!attribute single_master_configuration
     #   <p>A structure containing the configuration for the <code>SINGLE_MASTER</code> channel
-    #               type. </p>
+    #               type. The default configuration for the channel message's time to live is 60 seconds (1
+    #               minute).</p>
     #   @return [Types::SingleMasterConfiguration]
     # @!attribute tags
     #   <p>A set of tags (key-value pairs) that you want to associate with this channel.</p>
@@ -148,8 +149,7 @@ module Aws::KinesisVideo
     # @!attribute device_name
     #   <p>The name of the device that is writing to the stream. </p>
     #            <note>
-    #               <p>In the current implementation, Kinesis Video Streams does not use this
-    #                   name.</p>
+    #               <p>In the current implementation, Kinesis Video Streams doesn't use this name.</p>
     #            </note>
     #   @return [String]
     # @!attribute stream_name
@@ -170,12 +170,13 @@ module Aws::KinesisVideo
     #   <p>The ID of the Key Management Service (KMS) key that you want Kinesis Video
     #               Streams to use to encrypt stream data.</p>
     #            <p>If no key ID is specified, the default, Kinesis Video-managed key
-    #               (<code>Amazon Web Services/kinesisvideo</code>) is used.</p>
+    #               (<code>aws/kinesisvideo</code>) is used.</p>
     #            <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>
     #   @return [String]
     # @!attribute data_retention_in_hours
     #   <p>The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p>
-    #            <p>The default value is 0, indicating that the stream does not persist data.</p>
+    #            <p>The default value is 0, indicating that the stream does not persist data. The minimum
+    #               is 1 hour.</p>
     #            <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume
     #               the fragments that remain in the service host buffer, which has a retention time limit
     #               of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the
@@ -185,6 +186,10 @@ module Aws::KinesisVideo
     #   <p>A list of tags to associate with the specified stream. Each tag is a key-value pair
     #               (the value is optional).</p>
     #   @return [Hash<String, String>]
+    # @!attribute stream_storage_configuration
+    #   <p>The configuration for the stream's storage, including the default storage tier for stream data. This configuration determines how stream data is stored and accessed, with different tiers offering varying levels of performance and cost optimization.</p>
+    #            <p>If not specified, the stream will use the default storage configuration with HOT tier for optimal performance.</p>
+    #   @return [Types::StreamStorageConfiguration]
     class CreateStreamInput < Struct.new(
       nil,
       :device_name,
@@ -193,6 +198,7 @@ module Aws::KinesisVideo
       :kms_key_id,
       :data_retention_in_hours,
       :tags,
+      :stream_storage_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -291,12 +297,12 @@ module Aws::KinesisVideo
     #   <p>The value of the local size required in order to delete the edge configuration.</p>
     #   @return [Types::LocalSizeConfig]
     # @!attribute delete_after_upload
-    #   <p>The <code>boolean</code> value used to indicate whether or not you want to mark the media for deletion, once it has been uploaded to 
-    #               the Kinesis Video Stream cloud. The media files can be deleted if any of the deletion configuration values are 
+    #   <p>The <code>boolean</code> value used to indicate whether or not you want to mark the media for deletion, once it has been uploaded to
+    #               the Kinesis Video Stream cloud. The media files can be deleted if any of the deletion configuration values are
     #               set to <code>true</code>, such as when the limit for the <code>EdgeRetentionInHours</code>, or the
-    #               <code>MaxLocalMediaSizeInMB</code>, has been reached. 
+    #               <code>MaxLocalMediaSizeInMB</code>, has been reached.
     #           </p>
-    #            <p>Since the default value is set to <code>true</code>, configure the uploader schedule such 
+    #            <p>Since the default value is set to <code>true</code>, configure the uploader schedule such
     #               that the media files are not being deleted before they are initially uploaded to the  Amazon Web Services cloud.</p>
     #   @return [Boolean]
     class DeletionConfig < Struct.new(
@@ -310,7 +316,7 @@ module Aws::KinesisVideo
     end
 
     # @!attribute stream_name
-    #   <p>The name of the stream whose edge configuration you want to update. Specify either the <code>StreamName</code> or 
+    #   <p>The name of the stream whose edge configuration you want to update. Specify either the <code>StreamName</code> or
     #               the <code>StreamARN</code>.
     #           </p>
     #   @return [String]
@@ -345,7 +351,7 @@ module Aws::KinesisVideo
     #   <p>A description of the generated failure status.</p>
     #   @return [String]
     # @!attribute edge_config
-    #   <p>A description of the stream's edge configuration that will be used to sync 
+    #   <p>A description of the stream's edge configuration that will be used to sync
     #               with the Edge Agent IoT Greengrass component. The Edge Agent component will run
     #               on an IoT Hub Device setup at your premise.</p>
     #   @return [Types::EdgeConfig]
@@ -536,6 +542,40 @@ module Aws::KinesisVideo
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute stream_name
+    #   <p>The name of the stream for which you want to retrieve the storage configuration.</p>
+    #   @return [String]
+    # @!attribute stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the stream for which you want to retrieve the storage configuration.</p>
+    #   @return [String]
+    class DescribeStreamStorageConfigurationInput < Struct.new(
+      nil,
+      :stream_name,
+      :stream_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute stream_name
+    #   <p>The name of the stream.</p>
+    #   @return [String]
+    # @!attribute stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the stream.</p>
+    #   @return [String]
+    # @!attribute stream_storage_configuration
+    #   <p>The current storage configuration for the stream, including the default storage tier and other storage-related settings.</p>
+    #   @return [Types::StreamStorageConfiguration]
+    class DescribeStreamStorageConfigurationOutput < Struct.new(
+      nil,
+      :stream_name,
+      :stream_arn,
+      :stream_storage_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Not implemented.
     #             </p>
     # @!attribute message
@@ -564,14 +604,14 @@ module Aws::KinesisVideo
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A description of the stream's edge configuration that will be used to sync 
+    # <p>A description of the stream's edge configuration that will be used to sync
     #             with the Edge Agent IoT Greengrass component. The Edge Agent component will run
     #             on an IoT Hub Device setup at your premise.</p>
     # @!attribute hub_device_arn
     #   <p>The "<b>Internet of Things (IoT) Thing</b>" Arn of the stream.</p>
     #   @return [String]
     # @!attribute recorder_config
-    #   <p>The recorder configuration consists of the local <code>MediaSourceConfig</code> details, that are used as 
+    #   <p>The recorder configuration consists of the local <code>MediaSourceConfig</code> details, that are used as
     #               credentials to access the local media files streamed on the camera. </p>
     #   @return [Types::RecorderConfig]
     # @!attribute uploader_config
@@ -666,7 +706,7 @@ module Aws::KinesisVideo
     #   <p>The structure that contains the information required to deliver images to a customer.</p>
     #   @return [Types::ImageGenerationDestinationConfig]
     # @!attribute sampling_interval
-    #   <p>The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 200 ms. If the timestamp range is less than the sampling interval, the 
+    #   <p>The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 200 ms. If the timestamp range is less than the sampling interval, the
     #               Image from the <code>StartTimestamp</code> will be returned if available. </p>
     #   @return [Integer]
     # @!attribute format
@@ -674,19 +714,19 @@ module Aws::KinesisVideo
     #   @return [String]
     # @!attribute format_config
     #   <p>The list of a key-value pair structure that contains extra parameters that can be applied when the image is generated.
-    #               The <code>FormatConfig</code> key is the <code>JPEGQuality</code>, which indicates the JPEG quality key to be used to generate the image. 
-    #               The <code>FormatConfig</code> value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression. 
+    #               The <code>FormatConfig</code> key is the <code>JPEGQuality</code>, which indicates the JPEG quality key to be used to generate the image.
+    #               The <code>FormatConfig</code> value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression.
     #               If the value is 100, the image will be generated with the best quality and less compression. If no value is provided, the default value of the <code>JPEGQuality</code>
     #               key will be set to 80.</p>
     #   @return [Hash<String, String>]
     # @!attribute width_pixels
-    #   <p>The width of the output image that is used in conjunction with the <code>HeightPixels</code> parameter. When both <code>WidthPixels</code> and 
-    #               <code>HeightPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>WidthPixels</code> parameter is 
+    #   <p>The width of the output image that is used in conjunction with the <code>HeightPixels</code> parameter. When both <code>WidthPixels</code> and
+    #               <code>HeightPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>WidthPixels</code> parameter is
     #               provided, its original aspect ratio will be used to calculate the <code>HeightPixels</code> ratio. If neither parameter is provided, the original image size will be returned.</p>
     #   @return [Integer]
     # @!attribute height_pixels
     #   <p>The height of the output image that is used in conjunction with the <code>WidthPixels</code> parameter. When both
-    #               <code>HeightPixels</code> and <code>WidthPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. 
+    #               <code>HeightPixels</code> and <code>WidthPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio.
     #               If only the <code>HeightPixels</code> parameter is provided, its original aspect ratio will be used to calculate the <code>WidthPixels</code> ratio.
     #               If neither parameter is provided, the original image size will be returned.</p>
     #   @return [Integer]
@@ -822,7 +862,7 @@ module Aws::KinesisVideo
     #   <p>A description of the generated failure status.</p>
     #   @return [String]
     # @!attribute edge_config
-    #   <p>A description of the stream's edge configuration that will be used to sync 
+    #   <p>A description of the stream's edge configuration that will be used to sync
     #               with the Edge Agent IoT Greengrass component. The Edge Agent component will run
     #               on an IoT Hub Device setup at your premise.</p>
     #   @return [Types::EdgeConfig]
@@ -1025,7 +1065,7 @@ module Aws::KinesisVideo
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration details that include the maximum size of the media 
+    # <p>The configuration details that include the maximum size of the media
     #             (<code>MaxLocalMediaSizeInMB</code>) that you want to
     #             store for a stream on the Edge Agent, as well as the strategy that should be used (<code>StrategyOnFullSize</code>) when a stream's
     #             maximum size has been reached.</p>
@@ -1060,14 +1100,14 @@ module Aws::KinesisVideo
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration details that consist of the credentials required 
-    #             (<code>MediaUriSecretArn</code> and <code>MediaUriType</code>) to access the media files that are 
+    # <p>The configuration details that consist of the credentials required
+    #             (<code>MediaUriSecretArn</code> and <code>MediaUriType</code>) to access the media files that are
     #             streamed to the camera.</p>
     # @!attribute media_uri_secret_arn
     #   <p>The Amazon Web Services Secrets Manager ARN for the username and password of the camera, or a local media file location.</p>
     #   @return [String]
     # @!attribute media_uri_type
-    #   <p>The Uniform Resource Identifier (URI) type. The <code>FILE_URI</code> value can be used to stream 
+    #   <p>The Uniform Resource Identifier (URI) type. The <code>FILE_URI</code> value can be used to stream
     #               local media files.</p>
     #            <note>
     #               <p>Preview only supports the <code>RTSP_URI</code> media source URI format .</p>
@@ -1132,7 +1172,11 @@ module Aws::KinesisVideo
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The structure that contains the notification information for the KVS images delivery. If this parameter is null, the configuration will be deleted from the stream.</p>
+    # <p>Use this API to configure Amazon Simple Notification Service (Amazon SNS)
+    #             notifications for when fragments become available in a stream. If this parameter is
+    #             null, the configuration will be deleted from the stream.</p>
+    #          <p>See <a href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/notifications.html">Notifications in Kinesis
+    #                 Video Streams</a> for more information.</p>
     # @!attribute status
     #   <p>Indicates if a notification configuration is enabled or disabled.</p>
     #   @return [String]
@@ -1160,16 +1204,16 @@ module Aws::KinesisVideo
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The recorder configuration consists of the local <code>MediaSourceConfig</code> details that are used as 
-    #             credentials to accesss the local media files streamed on the camera. </p>
+    # <p>The recorder configuration consists of the local <code>MediaSourceConfig</code> details that are used as
+    #             credentials to access the local media files streamed on the camera. </p>
     # @!attribute media_source_config
-    #   <p>The configuration details that consist of the credentials required 
-    #               (<code>MediaUriSecretArn</code> and <code>MediaUriType</code>) to access the media files 
+    #   <p>The configuration details that consist of the credentials required
+    #               (<code>MediaUriSecretArn</code> and <code>MediaUriType</code>) to access the media files
     #               streamed to the camera.
     #               </p>
     #   @return [Types::MediaSourceConfig]
     # @!attribute schedule_config
-    #   <p>The configuration that consists of the <code>ScheduleExpression</code> and the 
+    #   <p>The configuration that consists of the <code>ScheduleExpression</code> and the
     #               <code>DurationInMinutes</code> details that specify the scheduling to record from a camera, or
     #           local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> attribute is not provided,
     #           then the Edge Agent will always be set to recording mode.</p>
@@ -1209,11 +1253,11 @@ module Aws::KinesisVideo
     #             or <code>ChannelARN</code> is not in Active status, try one of the following : </p>
     #          <ol>
     #             <li>
-    #                <p>The <code>DescribeMediaStorageConfiguration</code> API to determine what the stream given channel is mapped to. 
+    #                <p>The <code>DescribeMediaStorageConfiguration</code> API to determine what the stream given channel is mapped to.
     #             </p>
     #             </li>
     #             <li>
-    #                <p>The <code>DescribeMappedResourceConfiguration</code> API to determine the channel that the given stream is mapped to. 
+    #                <p>The <code>DescribeMappedResourceConfiguration</code> API to determine the channel that the given stream is mapped to.
     #             </p>
     #             </li>
     #             <li>
@@ -1243,7 +1287,7 @@ module Aws::KinesisVideo
     end
 
     # <p>This API enables you to specify the duration that the camera,
-    #             or local media file, should record onto the Edge Agent. The <code>ScheduleConfig</code> consists of the <code>ScheduleExpression</code> and the 
+    #             or local media file, should record onto the Edge Agent. The <code>ScheduleConfig</code> consists of the <code>ScheduleExpression</code> and the
     #             <code>DurationInMinutes</code> attributes. </p>
     #          <p>If the <code>ScheduleConfig</code> is not provided in the <code>RecorderConfig</code>,
     #                 then the Edge Agent will always be set to recording mode.</p>
@@ -1253,8 +1297,8 @@ module Aws::KinesisVideo
     #   <p>The Quartz cron expression that takes care of scheduling jobs to record from the
     #               camera, or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> is not provided for the <code>RecorderConfig</code>,
     #               then the Edge Agent will always be set to recording mode.</p>
-    #            <p>For more information about Quartz, refer to the 
-    #               <a href="http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html">
+    #            <p>For more information about Quartz, refer to the
+    #               <a href="https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html">
     #                  <i>Cron Trigger Tutorial</i>
     #               </a> page to understand the valid expressions and its use.</p>
     #   @return [String]
@@ -1299,8 +1343,9 @@ module Aws::KinesisVideo
     # <p>A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel
     #             type.</p>
     # @!attribute message_ttl_seconds
-    #   <p>The period of time a signaling channel retains undelivered messages before they are
-    #               discarded.</p>
+    #   <p>The period of time (in seconds) a signaling channel retains undelivered messages
+    #               before they are discarded. Use  to update
+    #               this value.</p>
     #   @return [Integer]
     class SingleMasterConfiguration < Struct.new(
       nil,
@@ -1315,7 +1360,7 @@ module Aws::KinesisVideo
     #               or the <code>StreamARN</code>.</p>
     #   @return [String]
     # @!attribute stream_arn
-    #   <p> The Amazon Resource Name (ARN) of the stream. Specify either the 
+    #   <p> The Amazon Resource Name (ARN) of the stream. Specify either the
     #               <code>StreamName</code> or the <code>StreamARN</code>.</p>
     #   @return [String]
     # @!attribute edge_config
@@ -1352,7 +1397,7 @@ module Aws::KinesisVideo
     #   <p>A description of the generated failure status.</p>
     #   @return [String]
     # @!attribute edge_config
-    #   <p>A description of the stream's edge configuration that will be used to sync 
+    #   <p>A description of the stream's edge configuration that will be used to sync
     #               with the Edge Agent IoT Greengrass component. The Edge Agent component will run
     #               on an IoT Hub Device setup at your premise.</p>
     #   @return [Types::EdgeConfig]
@@ -1442,6 +1487,29 @@ module Aws::KinesisVideo
       nil,
       :comparison_operator,
       :comparison_value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for stream storage, including the default storage tier for stream data. This configuration determines how stream data is stored and accessed, with different tiers offering varying levels of performance and cost optimization.</p>
+    # @!attribute default_storage_tier
+    #   <p>The default storage tier for the stream data. This setting determines the storage class used for stream data, affecting both performance characteristics and storage costs.</p>
+    #            <p>Available storage tiers:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>HOT</code> - Optimized for frequent access with the lowest latency and highest performance. Ideal for real-time applications and frequently accessed data.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>WARM</code> - Balanced performance and cost for moderately accessed data. Suitable for data that is accessed regularly but not continuously.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class StreamStorageConfiguration < Struct.new(
+      nil,
+      :default_storage_tier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1619,7 +1687,7 @@ module Aws::KinesisVideo
     #   <p>The name of the stream from which to update the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>
     #   @return [String]
     # @!attribute stream_arn
-    #   <p>The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the image generation configuration. You must specify either the <code>StreamName</code> 
+    #   <p>The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the image generation configuration. You must specify either the <code>StreamName</code>
     #               or the <code>StreamARN</code>.</p>
     #   @return [String]
     # @!attribute image_generation_configuration
@@ -1699,7 +1767,9 @@ module Aws::KinesisVideo
     #   @return [String]
     # @!attribute single_master_configuration
     #   <p>The structure containing the configuration for the <code>SINGLE_MASTER</code> type of
-    #               the signaling channel that you want to update. </p>
+    #               the signaling channel that you want to update. This parameter and the channel message's
+    #               time-to-live are required for channels with the <code>SINGLE_MASTER</code> channel
+    #               type.</p>
     #   @return [Types::SingleMasterConfiguration]
     class UpdateSignalingChannelInput < Struct.new(
       nil,
@@ -1765,13 +1835,46 @@ module Aws::KinesisVideo
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute stream_name
+    #   <p>The name of the stream for which you want to update the storage configuration.</p>
+    #   @return [String]
+    # @!attribute stream_arn
+    #   <p>The Amazon Resource Name (ARN) of the stream for which you want to update the storage configuration.</p>
+    #   @return [String]
+    # @!attribute current_version
+    #   <p>The version of the stream whose storage configuration you want to change. To get the
+    #               version, call either the <code>DescribeStream</code> or the <code>ListStreams</code>
+    #               API.</p>
+    #   @return [String]
+    # @!attribute stream_storage_configuration
+    #   <p>The new storage configuration for the stream. This includes the default storage tier that determines how stream data is stored and accessed.</p>
+    #            <p>Different storage tiers offer varying levels of performance and cost optimization to match your specific use case requirements.</p>
+    #   @return [Types::StreamStorageConfiguration]
+    class UpdateStreamStorageConfigurationInput < Struct.new(
+      nil,
+      :stream_name,
+      :stream_arn,
+      :current_version,
+      :stream_storage_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateStreamStorageConfigurationOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration that consists of the <code>ScheduleExpression</code>
     #             and the <code>DurationInMinutes</code> details that specify the scheduling to record from a camera,
     #             or local media file, onto the Edge Agent. If the <code>ScheduleConfig</code>
     #             is not provided in the <code>UploaderConfig</code>, then the Edge Agent will upload at regular intervals (every 1 hour).
     #         </p>
     # @!attribute schedule_config
-    #   <p>The configuration that consists of the <code>ScheduleExpression</code> and the 
+    #   <p>The configuration that consists of the <code>ScheduleExpression</code> and the
     #               <code>DurationInMinutes</code> details that specify the scheduling to record from a camera, or
     #               local media file, onto the Edge Agent. If the <code>ScheduleConfig</code> is not provided in this <code>UploaderConfig</code>,
     #               then the Edge Agent will upload at regular intervals (every 1 hour).</p>

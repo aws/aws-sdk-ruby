@@ -9,20 +9,26 @@ module Aws::GeoPlaces
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AccessPoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AccessPoint", name: "AccessPoint")
     AccessPointList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#AccessPointList", name: "AccessPointList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    AccessPointType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#AccessPointType", name: "AccessPointType")
     AccessRestriction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AccessRestriction", name: "AccessRestriction")
     AccessRestrictionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#AccessRestrictionList", name: "AccessRestrictionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     Address = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#Address", name: "Address")
     AddressComponentMatchScores = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AddressComponentMatchScores", name: "AddressComponentMatchScores")
     AddressComponentPhonemes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AddressComponentPhonemes", name: "AddressComponentPhonemes")
+    AddressTranslationComponent = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#AddressTranslationComponent", name: "AddressTranslationComponent")
+    AddressTranslationComponentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#AddressTranslationComponentList", name: "AddressTranslationComponentList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}, "smithy.api#uniqueItems" => {}})
+    AdminNames = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AdminNames", name: "AdminNames")
+    AdminNamesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#AdminNamesList", name: "AdminNamesList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    AdminNamesPreference = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#AdminNamesPreference", name: "AdminNamesPreference")
     ApiKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#ApiKey", name: "ApiKey", traits: {"smithy.api#externalDocumentation" => {"Implementation Guide" => "https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/03-Algorithm-Lucidity.md"}, "smithy.api#length" => {"max" => 1000}, "smithy.api#sensitive" => {}})
-    AutocompleteAdditionalFeature = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#AutocompleteAdditionalFeature", name: "AutocompleteAdditionalFeature", traits: {"smithy.api#enum" => [{"name" => "CORE", "value" => "Core"}]})
+    AutocompleteAdditionalFeature = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#AutocompleteAdditionalFeature", name: "AutocompleteAdditionalFeature")
     AutocompleteAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#AutocompleteAdditionalFeatureList", name: "AutocompleteAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}, "smithy.api#uniqueItems" => {}})
     AutocompleteAddressHighlights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AutocompleteAddressHighlights", name: "AutocompleteAddressHighlights")
     AutocompleteFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AutocompleteFilter", name: "AutocompleteFilter")
-    AutocompleteFilterPlaceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#AutocompleteFilterPlaceType", name: "AutocompleteFilterPlaceType", traits: {"smithy.api#enum" => [{"name" => "LOCALITY", "value" => "Locality"}, {"name" => "POSTAL_CODE", "value" => "PostalCode"}]})
-    AutocompleteFilterPlaceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#AutocompleteFilterPlaceTypeList", name: "AutocompleteFilterPlaceTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}, "smithy.api#uniqueItems" => {}})
+    AutocompleteFilterPlaceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#AutocompleteFilterPlaceType", name: "AutocompleteFilterPlaceType")
+    AutocompleteFilterPlaceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#AutocompleteFilterPlaceTypeList", name: "AutocompleteFilterPlaceTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 8}, "smithy.api#uniqueItems" => {}})
     AutocompleteHighlights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AutocompleteHighlights", name: "AutocompleteHighlights")
-    AutocompleteIntendedUse = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#AutocompleteIntendedUse", name: "AutocompleteIntendedUse", traits: {"smithy.api#enum" => [{"name" => "SINGLE_USE", "value" => "SingleUse", "documentation" => "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."}]})
+    AutocompleteIntendedUse = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#AutocompleteIntendedUse", name: "AutocompleteIntendedUse")
     AutocompleteRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AutocompleteRequest", name: "AutocompleteRequest")
     AutocompleteResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AutocompleteResponse", name: "AutocompleteResponse")
     AutocompleteResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#AutocompleteResultItem", name: "AutocompleteResultItem")
@@ -42,6 +48,8 @@ module Aws::GeoPlaces
     CountryCode3 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#CountryCode3", name: "CountryCode3", traits: {"smithy.api#length" => {"min" => 3, "max" => 3}, "smithy.api#pattern" => "^[A-Z]{3}$", "smithy.api#sensitive" => {}})
     CountryCodeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#CountryCodeList", name: "CountryCodeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#uniqueItems" => {}})
     CountryHighlights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#CountryHighlights", name: "CountryHighlights")
+    CrossReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#CrossReference", name: "CrossReference")
+    CrossReferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#CrossReferenceList", name: "CrossReferenceList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     DistanceMeters = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.geoplaces#DistanceMeters", name: "DistanceMeters", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 4294967295}, "smithy.api#sensitive" => {}})
     DurationSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.geoplaces#DurationSeconds", name: "DurationSeconds", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 4294967295}, "smithy.api#sensitive" => {}})
     FilterBusinessChainList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#FilterBusinessChainList", name: "FilterBusinessChainList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
@@ -50,12 +58,13 @@ module Aws::GeoPlaces
     FilterFoodTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#FilterFoodTypeList", name: "FilterFoodTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     FoodType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#FoodType", name: "FoodType")
     FoodTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#FoodTypeList", name: "FoodTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
-    GeocodeAdditionalFeature = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#GeocodeAdditionalFeature", name: "GeocodeAdditionalFeature", traits: {"smithy.api#enum" => [{"name" => "TIME_ZONE", "value" => "TimeZone"}, {"name" => "ACCESS", "value" => "Access"}, {"name" => "SECONDARY_ADDRESSES", "value" => "SecondaryAddresses"}, {"name" => "INTERSECTIONS", "value" => "Intersections"}]})
-    GeocodeAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#GeocodeAdditionalFeatureList", name: "GeocodeAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}, "smithy.api#uniqueItems" => {}})
+    GeocodeAdditionalFeature = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#GeocodeAdditionalFeature", name: "GeocodeAdditionalFeature")
+    GeocodeAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#GeocodeAdditionalFeatureList", name: "GeocodeAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}, "smithy.api#uniqueItems" => {}})
+    GeocodeAddressNamesMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#GeocodeAddressNamesMode", name: "GeocodeAddressNamesMode")
     GeocodeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#GeocodeFilter", name: "GeocodeFilter")
-    GeocodeFilterPlaceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#GeocodeFilterPlaceType", name: "GeocodeFilterPlaceType", traits: {"smithy.api#enum" => [{"name" => "LOCALITY", "value" => "Locality"}, {"name" => "POSTAL_CODE", "value" => "PostalCode"}, {"name" => "INTERSECTION", "value" => "Intersection"}, {"name" => "STREET", "value" => "Street"}, {"name" => "POINT_ADDRESS", "value" => "PointAddress"}, {"name" => "INTERPOLATED_ADDRESS", "value" => "InterpolatedAddress"}], "smithy.api#sensitive" => {}})
-    GeocodeFilterPlaceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#GeocodeFilterPlaceTypeList", name: "GeocodeFilterPlaceTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 6}, "smithy.api#uniqueItems" => {}})
-    GeocodeIntendedUse = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#GeocodeIntendedUse", name: "GeocodeIntendedUse", traits: {"smithy.api#enum" => [{"name" => "SINGLE_USE", "value" => "SingleUse", "documentation" => "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."}, {"name" => "STORAGE", "value" => "Storage", "documentation" => "Indicates that results of the operation may be stored locally."}]})
+    GeocodeFilterPlaceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#GeocodeFilterPlaceType", name: "GeocodeFilterPlaceType", traits: {"smithy.api#sensitive" => {}})
+    GeocodeFilterPlaceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#GeocodeFilterPlaceTypeList", name: "GeocodeFilterPlaceTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#uniqueItems" => {}})
+    GeocodeIntendedUse = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#GeocodeIntendedUse", name: "GeocodeIntendedUse")
     GeocodeParsedQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#GeocodeParsedQuery", name: "GeocodeParsedQuery")
     GeocodeParsedQueryAddressComponents = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#GeocodeParsedQueryAddressComponents", name: "GeocodeParsedQueryAddressComponents")
     GeocodeQueryComponents = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#GeocodeQueryComponents", name: "GeocodeQueryComponents")
@@ -63,11 +72,13 @@ module Aws::GeoPlaces
     GeocodeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#GeocodeResponse", name: "GeocodeResponse")
     GeocodeResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#GeocodeResultItem", name: "GeocodeResultItem")
     GeocodeResultItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#GeocodeResultItemList", name: "GeocodeResultItemList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
-    GetPlaceAdditionalFeature = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#GetPlaceAdditionalFeature", name: "GetPlaceAdditionalFeature", traits: {"smithy.api#enum" => [{"name" => "TIME_ZONE", "value" => "TimeZone"}, {"name" => "PHONEMES", "value" => "Phonemes"}, {"name" => "ACCESS", "value" => "Access"}, {"name" => "CONTACT", "value" => "Contact"}, {"name" => "SECONDARY_ADDRESSES", "value" => "SecondaryAddresses"}]})
-    GetPlaceAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#GetPlaceAdditionalFeatureList", name: "GetPlaceAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}, "smithy.api#uniqueItems" => {}})
-    GetPlaceIntendedUse = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#GetPlaceIntendedUse", name: "GetPlaceIntendedUse", traits: {"smithy.api#enum" => [{"name" => "SINGLE_USE", "value" => "SingleUse", "documentation" => "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."}, {"name" => "STORAGE", "value" => "Storage", "documentation" => "Indicates that results of the operation may be stored locally."}]})
+    GetPlaceAdditionalFeature = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#GetPlaceAdditionalFeature", name: "GetPlaceAdditionalFeature")
+    GetPlaceAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#GetPlaceAdditionalFeatureList", name: "GetPlaceAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 6}, "smithy.api#uniqueItems" => {}})
+    GetPlaceAddressNamesMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#GetPlaceAddressNamesMode", name: "GetPlaceAddressNamesMode")
+    GetPlaceIntendedUse = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#GetPlaceIntendedUse", name: "GetPlaceIntendedUse")
     GetPlaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#GetPlaceRequest", name: "GetPlaceRequest")
     GetPlaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#GetPlaceResponse", name: "GetPlaceResponse")
+    Heading = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.geoplaces#Heading", name: "Heading", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0.0, "max" => 360.0}, "smithy.api#sensitive" => {}})
     Highlight = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#Highlight", name: "Highlight")
     HighlightList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#HighlightList", name: "HighlightList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
@@ -93,49 +104,53 @@ module Aws::GeoPlaces
     PhonemeDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#PhonemeDetails", name: "PhonemeDetails")
     PhonemeTranscription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#PhonemeTranscription", name: "PhonemeTranscription")
     PhonemeTranscriptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#PhonemeTranscriptionList", name: "PhonemeTranscriptionList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
-    PlaceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#PlaceType", name: "PlaceType", traits: {"smithy.api#enum" => [{"name" => "COUNTRY", "value" => "Country"}, {"name" => "REGION", "value" => "Region"}, {"name" => "SUB_REGION", "value" => "SubRegion"}, {"name" => "LOCALITY", "value" => "Locality"}, {"name" => "DISTRICT", "value" => "District"}, {"name" => "SUB_DISTRICT", "value" => "SubDistrict"}, {"name" => "POSTAL_CODE", "value" => "PostalCode"}, {"name" => "BLOCK", "value" => "Block"}, {"name" => "SUB_BLOCK", "value" => "SubBlock"}, {"name" => "INTERSECTION", "value" => "Intersection"}, {"name" => "STREET", "value" => "Street"}, {"name" => "POINT_OF_INTEREST", "value" => "PointOfInterest"}, {"name" => "POINT_ADDRESS", "value" => "PointAddress"}, {"name" => "INTERPOLATED_ADDRESS", "value" => "InterpolatedAddress"}, {"name" => "SECONDARY_ADDRESS", "value" => "SecondaryAddress"}], "smithy.api#sensitive" => {}})
+    PlaceAttribute = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#PlaceAttribute", name: "PlaceAttribute", traits: {"smithy.api#sensitive" => {}})
+    PlaceAttributeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#PlaceAttributeList", name: "PlaceAttributeList", traits: {"smithy.api#length" => {"max" => 1}, "smithy.api#uniqueItems" => {}})
+    PlaceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#PlaceType", name: "PlaceType", traits: {"smithy.api#sensitive" => {}})
     Position = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#Position", name: "Position", traits: {"smithy.api#externalDocumentation" => {"Documentation" => "https://tools.ietf.org/html/rfc7946#section-3.1.1"}, "smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#sensitive" => {}})
-    PostalAuthority = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#PostalAuthority", name: "PostalAuthority", traits: {"smithy.api#enum" => [{"name" => "USPS", "value" => "Usps"}], "smithy.api#sensitive" => {}})
+    PostalAuthority = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#PostalAuthority", name: "PostalAuthority", traits: {"smithy.api#sensitive" => {}})
     PostalCodeDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#PostalCodeDetails", name: "PostalCodeDetails")
     PostalCodeDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#PostalCodeDetailsList", name: "PostalCodeDetailsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
-    PostalCodeMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#PostalCodeMode", name: "PostalCodeMode", traits: {"smithy.api#enum" => [{"name" => "MERGE_ALL_SPANNED_LOCALITIES", "value" => "MergeAllSpannedLocalities"}, {"name" => "ENUMERATE_SPANNED_LOCALITIES", "value" => "EnumerateSpannedLocalities"}]})
-    PostalCodeType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#PostalCodeType", name: "PostalCodeType", traits: {"smithy.api#enum" => [{"name" => "USPS_ZIP", "value" => "UspsZip"}, {"name" => "USPS_ZIP_PLUS_4", "value" => "UspsZipPlus4"}], "smithy.api#sensitive" => {}})
+    PostalCodeMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#PostalCodeMode", name: "PostalCodeMode")
+    PostalCodeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#PostalCodeType", name: "PostalCodeType", traits: {"smithy.api#sensitive" => {}})
     QueryRefinement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#QueryRefinement", name: "QueryRefinement")
     QueryRefinementList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#QueryRefinementList", name: "QueryRefinementList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
-    QueryType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#QueryType", name: "QueryType", traits: {"smithy.api#enum" => [{"name" => "CATEGORY", "value" => "Category"}, {"name" => "BUSINESS_CHAIN", "value" => "BusinessChain"}]})
-    RecordTypeCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#RecordTypeCode", name: "RecordTypeCode", traits: {"smithy.api#enum" => [{"name" => "FIRM", "value" => "Firm"}, {"name" => "GENERAL", "value" => "General"}, {"name" => "HIGH_RISE", "value" => "HighRise"}, {"name" => "POST_OFFICE_BOX", "value" => "PostOfficeBox"}, {"name" => "RURAL", "value" => "Rural"}, {"name" => "STREET", "value" => "Street"}], "smithy.api#sensitive" => {}})
+    QueryType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#QueryType", name: "QueryType")
+    RecordTypeCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#RecordTypeCode", name: "RecordTypeCode", traits: {"smithy.api#sensitive" => {}})
     Region = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#Region", name: "Region")
     RegionHighlights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#RegionHighlights", name: "RegionHighlights")
     RelatedPlace = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#RelatedPlace", name: "RelatedPlace")
     RelatedPlaceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#RelatedPlaceList", name: "RelatedPlaceList", traits: {"smithy.api#length" => {"min" => 1}})
-    ReverseGeocodeAdditionalFeature = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeAdditionalFeature", name: "ReverseGeocodeAdditionalFeature", traits: {"smithy.api#enum" => [{"name" => "TIME_ZONE", "value" => "TimeZone"}, {"name" => "ACCESS", "value" => "Access"}, {"name" => "INTERSECTIONS", "value" => "Intersections"}]})
-    ReverseGeocodeAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeAdditionalFeatureList", name: "ReverseGeocodeAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}, "smithy.api#uniqueItems" => {}})
+    ReverseGeocodeAdditionalFeature = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeAdditionalFeature", name: "ReverseGeocodeAdditionalFeature")
+    ReverseGeocodeAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeAdditionalFeatureList", name: "ReverseGeocodeAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}, "smithy.api#uniqueItems" => {}})
+    ReverseGeocodeAddressNamesMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeAddressNamesMode", name: "ReverseGeocodeAddressNamesMode")
     ReverseGeocodeFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeFilter", name: "ReverseGeocodeFilter")
-    ReverseGeocodeFilterPlaceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeFilterPlaceType", name: "ReverseGeocodeFilterPlaceType", traits: {"smithy.api#enum" => [{"name" => "LOCALITY", "value" => "Locality"}, {"name" => "INTERSECTION", "value" => "Intersection"}, {"name" => "STREET", "value" => "Street"}, {"name" => "POINT_ADDRESS", "value" => "PointAddress"}, {"name" => "INTERPOLATED_ADDRESS", "value" => "InterpolatedAddress"}]})
-    ReverseGeocodeFilterPlaceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeFilterPlaceTypeList", name: "ReverseGeocodeFilterPlaceTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#uniqueItems" => {}})
-    ReverseGeocodeIntendedUse = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeIntendedUse", name: "ReverseGeocodeIntendedUse", traits: {"smithy.api#enum" => [{"name" => "SINGLE_USE", "value" => "SingleUse", "documentation" => "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."}, {"name" => "STORAGE", "value" => "Storage", "documentation" => "Indicates that results of the operation may be stored locally."}]})
+    ReverseGeocodeFilterPlaceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeFilterPlaceType", name: "ReverseGeocodeFilterPlaceType")
+    ReverseGeocodeFilterPlaceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeFilterPlaceTypeList", name: "ReverseGeocodeFilterPlaceTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 7}, "smithy.api#uniqueItems" => {}})
+    ReverseGeocodeIntendedUse = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeIntendedUse", name: "ReverseGeocodeIntendedUse")
     ReverseGeocodeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeRequest", name: "ReverseGeocodeRequest")
     ReverseGeocodeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeResponse", name: "ReverseGeocodeResponse")
     ReverseGeocodeResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeResultItem", name: "ReverseGeocodeResultItem")
     ReverseGeocodeResultItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#ReverseGeocodeResultItemList", name: "ReverseGeocodeResultItemList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
-    SearchNearbyAdditionalFeature = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#SearchNearbyAdditionalFeature", name: "SearchNearbyAdditionalFeature", traits: {"smithy.api#enum" => [{"name" => "TIME_ZONE", "value" => "TimeZone"}, {"name" => "PHONEMES", "value" => "Phonemes"}, {"name" => "ACCESS", "value" => "Access"}, {"name" => "CONTACT", "value" => "Contact"}]})
-    SearchNearbyAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SearchNearbyAdditionalFeatureList", name: "SearchNearbyAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}, "smithy.api#uniqueItems" => {}})
+    SearchNearbyAdditionalFeature = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#SearchNearbyAdditionalFeature", name: "SearchNearbyAdditionalFeature")
+    SearchNearbyAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SearchNearbyAdditionalFeatureList", name: "SearchNearbyAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#uniqueItems" => {}})
     SearchNearbyFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SearchNearbyFilter", name: "SearchNearbyFilter")
-    SearchNearbyIntendedUse = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#SearchNearbyIntendedUse", name: "SearchNearbyIntendedUse", traits: {"smithy.api#enum" => [{"name" => "SINGLE_USE", "value" => "SingleUse", "documentation" => "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."}, {"name" => "STORAGE", "value" => "Storage", "documentation" => "Indicates that results of the operation may be stored locally."}]})
+    SearchNearbyIntendedUse = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#SearchNearbyIntendedUse", name: "SearchNearbyIntendedUse")
     SearchNearbyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SearchNearbyRequest", name: "SearchNearbyRequest")
     SearchNearbyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SearchNearbyResponse", name: "SearchNearbyResponse")
     SearchNearbyResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SearchNearbyResultItem", name: "SearchNearbyResultItem")
     SearchNearbyResultItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SearchNearbyResultItemList", name: "SearchNearbyResultItemList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
-    SearchTextAdditionalFeature = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#SearchTextAdditionalFeature", name: "SearchTextAdditionalFeature", traits: {"smithy.api#enum" => [{"name" => "TIME_ZONE", "value" => "TimeZone"}, {"name" => "PHONEMES", "value" => "Phonemes"}, {"name" => "ACCESS", "value" => "Access"}, {"name" => "CONTACT", "value" => "Contact"}]})
-    SearchTextAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SearchTextAdditionalFeatureList", name: "SearchTextAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}, "smithy.api#uniqueItems" => {}})
+    SearchTextAdditionalFeature = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#SearchTextAdditionalFeature", name: "SearchTextAdditionalFeature")
+    SearchTextAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SearchTextAdditionalFeatureList", name: "SearchTextAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#uniqueItems" => {}})
     SearchTextFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SearchTextFilter", name: "SearchTextFilter")
-    SearchTextIntendedUse = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#SearchTextIntendedUse", name: "SearchTextIntendedUse", traits: {"smithy.api#enum" => [{"name" => "SINGLE_USE", "value" => "SingleUse", "documentation" => "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."}, {"name" => "STORAGE", "value" => "Storage", "documentation" => "Indicates that results of the operation may be stored locally."}]})
+    SearchTextIntendedUse = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#SearchTextIntendedUse", name: "SearchTextIntendedUse")
     SearchTextRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SearchTextRequest", name: "SearchTextRequest")
     SearchTextResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SearchTextResponse", name: "SearchTextResponse")
     SearchTextResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SearchTextResultItem", name: "SearchTextResultItem")
     SearchTextResultItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SearchTextResultItemList", name: "SearchTextResultItemList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    SearchTextTravelMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#SearchTextTravelMode", name: "SearchTextTravelMode")
     SecondaryAddressComponent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SecondaryAddressComponent", name: "SecondaryAddressComponent")
-    SecondaryAddressComponentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SecondaryAddressComponentList", name: "SecondaryAddressComponentList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
+    SecondaryAddressComponentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SecondaryAddressComponentList", name: "SecondaryAddressComponentList", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
     SecondaryAddressComponentMatchScore = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SecondaryAddressComponentMatchScore", name: "SecondaryAddressComponentMatchScore")
     SecondaryAddressComponentMatchScoreList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SecondaryAddressComponentMatchScoreList", name: "SecondaryAddressComponentMatchScoreList")
     SensitiveBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.geoplaces#SensitiveBoolean", name: "SensitiveBoolean", traits: {"smithy.api#sensitive" => {}})
@@ -144,37 +159,52 @@ module Aws::GeoPlaces
     StreetComponentsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#StreetComponentsList", name: "StreetComponentsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     SubRegion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SubRegion", name: "SubRegion")
     SubRegionHighlights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SubRegionHighlights", name: "SubRegionHighlights")
-    SuggestAdditionalFeature = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#SuggestAdditionalFeature", name: "SuggestAdditionalFeature", traits: {"smithy.api#enum" => [{"name" => "CORE", "value" => "Core"}, {"name" => "TIME_ZONE", "value" => "TimeZone"}, {"name" => "PHONEMES", "value" => "Phonemes"}, {"name" => "ACCESS", "value" => "Access"}]})
-    SuggestAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SuggestAdditionalFeatureList", name: "SuggestAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}, "smithy.api#uniqueItems" => {}})
+    SuggestAdditionalFeature = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#SuggestAdditionalFeature", name: "SuggestAdditionalFeature")
+    SuggestAdditionalFeatureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SuggestAdditionalFeatureList", name: "SuggestAdditionalFeatureList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#uniqueItems" => {}})
     SuggestAddressHighlights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SuggestAddressHighlights", name: "SuggestAddressHighlights")
     SuggestFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SuggestFilter", name: "SuggestFilter")
     SuggestHighlights = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SuggestHighlights", name: "SuggestHighlights")
-    SuggestIntendedUse = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#SuggestIntendedUse", name: "SuggestIntendedUse", traits: {"smithy.api#enum" => [{"name" => "SINGLE_USE", "value" => "SingleUse", "documentation" => "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."}]})
+    SuggestIntendedUse = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#SuggestIntendedUse", name: "SuggestIntendedUse")
     SuggestPlaceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SuggestPlaceResult", name: "SuggestPlaceResult")
     SuggestQueryResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SuggestQueryResult", name: "SuggestQueryResult")
     SuggestRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SuggestRequest", name: "SuggestRequest")
     SuggestResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SuggestResponse", name: "SuggestResponse")
     SuggestResultItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#SuggestResultItem", name: "SuggestResultItem")
     SuggestResultItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#SuggestResultItemList", name: "SuggestResultItemList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
-    SuggestResultItemType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#SuggestResultItemType", name: "SuggestResultItemType", traits: {"smithy.api#enum" => [{"name" => "PLACE", "value" => "Place"}, {"name" => "QUERY", "value" => "Query"}]})
+    SuggestResultItemType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#SuggestResultItemType", name: "SuggestResultItemType")
+    SuggestTravelMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#SuggestTravelMode", name: "SuggestTravelMode")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {}})
     TimeZone = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#TimeZone", name: "TimeZone")
     Token = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#Token", name: "Token", traits: {"smithy.api#length" => {"min" => 1, "max" => 2000}})
-    TypePlacement = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#TypePlacement", name: "TypePlacement", traits: {"smithy.api#enum" => [{"name" => "BEFORE_BASE_NAME", "value" => "BeforeBaseName"}, {"name" => "AFTER_BASE_NAME", "value" => "AfterBaseName"}]})
+    TranslationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#TranslationDetails", name: "TranslationDetails")
+    TranslationName = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#TranslationName", name: "TranslationName")
+    TranslationNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#TranslationNameList", name: "TranslationNameList", traits: {"smithy.api#length" => {"min" => 1}})
+    TranslationNameType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#TranslationNameType", name: "TranslationNameType")
+    TypePlacement = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#TypePlacement", name: "TypePlacement")
     TypeSeparator = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#TypeSeparator", name: "TypeSeparator", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}, "smithy.api#pattern" => "^$|^ $"})
     UspsZip = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#UspsZip", name: "UspsZip")
     UspsZipPlus4 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#UspsZipPlus4", name: "UspsZipPlus4")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.geoplaces#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.geoplaces#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
-    ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"name" => "UNKNOWN_OPERATION", "value" => "UnknownOperation", "documentation" => "No such operation is supported."}, {"name" => "MISSING", "value" => "Missing", "documentation" => "The required input is missing."}, {"name" => "CANNOT_PARSE", "value" => "CannotParse", "documentation" => "    The input cannot be parsed. For example a required JSON document, ARN identifier,\n    date value, or numeric field cannot be parsed.\n"}, {"name" => "FIELD_VALIDATION_FAILED", "value" => "FieldValidationFailed", "documentation" => "    The input is present and parsable, but it is otherwise invalid. For example, a\n    required numeric argument is outside the allowed range.\n"}, {"name" => "OTHER", "value" => "Other", "documentation" => "The input is invalid but no more specific reason is applicable."}, {"name" => "UNKNOWN_FIELD", "value" => "UnknownField", "documentation" => "No such field is supported."}]})
-    ZipClassificationCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.geoplaces#ZipClassificationCode", name: "ZipClassificationCode", traits: {"smithy.api#enum" => [{"name" => "MILITARY", "value" => "Military"}, {"name" => "POST_OFFICE_BOXES", "value" => "PostOfficeBoxes"}, {"name" => "UNIQUE", "value" => "Unique"}], "smithy.api#sensitive" => {}})
+    ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#ValidationExceptionReason", name: "ValidationExceptionReason")
+    ZipClassificationCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.geoplaces#ZipClassificationCode", name: "ZipClassificationCode", traits: {"smithy.api#sensitive" => {}})
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
     AccessPoint.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Position"))
+    AccessPoint.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointType, name: "Type"))
+    AccessPoint.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Primary"))
+    AccessPoint.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Label"))
     AccessPoint.type = Types::AccessPoint
     AccessPointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPoint, name: "member"))
+    AccessPointType.add_member(:delivery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELIVERY", traits: {"smithy.api#enumValue" => "Delivery"}))
+    AccessPointType.add_member(:emergency, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMERGENCY", traits: {"smithy.api#enumValue" => "Emergency"}))
+    AccessPointType.add_member(:entrance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENTRANCE", traits: {"smithy.api#enumValue" => "Entrance"}))
+    AccessPointType.add_member(:loading, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOADING", traits: {"smithy.api#enumValue" => "Loading"}))
+    AccessPointType.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "Other"}))
+    AccessPointType.add_member(:parking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARKING", traits: {"smithy.api#enumValue" => "Parking"}))
+    AccessPointType.add_member(:taxi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAXI", traits: {"smithy.api#enumValue" => "Taxi"}))
     AccessRestriction.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Restricted"))
     AccessRestriction.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryList, name: "Categories"))
     AccessRestriction.type = Types::AccessRestriction
@@ -220,6 +250,18 @@ module Aws::GeoPlaces
     AddressComponentPhonemes.add_member(:sub_block, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeTranscriptionList, name: "SubBlock"))
     AddressComponentPhonemes.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeTranscriptionList, name: "Street"))
     AddressComponentPhonemes.type = Types::AddressComponentPhonemes
+    AddressTranslationComponent.add_member(:district, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTRICT", traits: {"smithy.api#enumValue" => "District"}))
+    AddressTranslationComponent.add_member(:locality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCALITY", traits: {"smithy.api#enumValue" => "Locality"}))
+    AddressTranslationComponent.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "Region"}))
+    AddressTranslationComponent.add_member(:sub_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUB_REGION", traits: {"smithy.api#enumValue" => "SubRegion"}))
+    AddressTranslationComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressTranslationComponent, name: "member"))
+    AdminNames.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationNameList, name: "Names", traits: {"smithy.api#required" => {}}))
+    AdminNames.add_member(:preference, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminNamesPreference, name: "Preference"))
+    AdminNames.type = Types::AdminNames
+    AdminNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminNames, name: "member"))
+    AdminNamesPreference.add_member(:alternative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALTERNATIVE", traits: {"smithy.api#enumValue" => "Alternative"}))
+    AdminNamesPreference.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY", traits: {"smithy.api#enumValue" => "Primary"}))
+    AutocompleteAdditionalFeature.add_member(:core, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CORE", traits: {"smithy.api#enumValue" => "Core"}))
     AutocompleteAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteAdditionalFeature, name: "member"))
     AutocompleteAddressHighlights.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Label"))
     AutocompleteAddressHighlights.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryHighlights, name: "Country"))
@@ -241,10 +283,19 @@ module Aws::GeoPlaces
     AutocompleteFilter.add_member(:include_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCodeList, name: "IncludeCountries"))
     AutocompleteFilter.add_member(:include_place_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteFilterPlaceTypeList, name: "IncludePlaceTypes"))
     AutocompleteFilter.type = Types::AutocompleteFilter
+    AutocompleteFilterPlaceType.add_member(:locality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCALITY", traits: {"smithy.api#enumValue" => "Locality"}))
+    AutocompleteFilterPlaceType.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POSTAL_CODE", traits: {"smithy.api#enumValue" => "PostalCode"}))
+    AutocompleteFilterPlaceType.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREET", traits: {"smithy.api#enumValue" => "Street"}))
+    AutocompleteFilterPlaceType.add_member(:intersection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERSECTION", traits: {"smithy.api#enumValue" => "Intersection"}))
+    AutocompleteFilterPlaceType.add_member(:point_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POINT_ADDRESS", traits: {"smithy.api#enumValue" => "PointAddress"}))
+    AutocompleteFilterPlaceType.add_member(:interpolated_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERPOLATED_ADDRESS", traits: {"smithy.api#enumValue" => "InterpolatedAddress"}))
+    AutocompleteFilterPlaceType.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNTRY", traits: {"smithy.api#enumValue" => "Country"}))
+    AutocompleteFilterPlaceType.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "Region"}))
     AutocompleteFilterPlaceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteFilterPlaceType, name: "member"))
     AutocompleteHighlights.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Title"))
     AutocompleteHighlights.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteAddressHighlights, name: "Address"))
     AutocompleteHighlights.type = Types::AutocompleteHighlights
+    AutocompleteIntendedUse.add_member(:single_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_USE", traits: {"smithy.api#enumValue" => "SingleUse"}))
     AutocompleteRequest.add_member(:query_text, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "QueryText", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
     AutocompleteRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 20}}))
     AutocompleteRequest.add_member(:bias_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "BiasPosition"))
@@ -267,6 +318,7 @@ module Aws::GeoPlaces
     AutocompleteResultItem.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "Language"))
     AutocompleteResultItem.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     AutocompleteResultItem.add_member(:highlights, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteHighlights, name: "Highlights"))
+    AutocompleteResultItem.add_member(:estimated_point_address, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "EstimatedPointAddress"))
     AutocompleteResultItem.type = Types::AutocompleteResultItem
     AutocompleteResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutocompleteResultItem, name: "member"))
     BoundingBox.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
@@ -301,6 +353,11 @@ module Aws::GeoPlaces
     CountryHighlights.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Code"))
     CountryHighlights.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Name"))
     CountryHighlights.type = Types::CountryHighlights
+    CrossReference.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Source", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
+    CrossReference.add_member(:source_place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "SourcePlaceId", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#required" => {}}))
+    CrossReference.add_member(:source_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: CategoryList, name: "SourceCategories"))
+    CrossReference.type = Types::CrossReference
+    CrossReferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossReference, name: "member"))
     FilterBusinessChainList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     FilterCategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}}))
     FilterCircle.add_member(:center, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "Center", traits: {"smithy.api#required" => {}}))
@@ -312,11 +369,29 @@ module Aws::GeoPlaces
     FoodType.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Primary"))
     FoodType.type = Types::FoodType
     FoodTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FoodType, name: "member"))
+    GeocodeAdditionalFeature.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME_ZONE", traits: {"smithy.api#enumValue" => "TimeZone"}))
+    GeocodeAdditionalFeature.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS", traits: {"smithy.api#enumValue" => "Access"}))
+    GeocodeAdditionalFeature.add_member(:secondary_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDARY_ADDRESSES", traits: {"smithy.api#enumValue" => "SecondaryAddresses"}))
+    GeocodeAdditionalFeature.add_member(:intersections, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERSECTIONS", traits: {"smithy.api#enumValue" => "Intersections"}))
     GeocodeAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeAdditionalFeature, name: "member"))
+    GeocodeAddressNamesMode.add_member(:matched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MATCHED", traits: {"smithy.api#enumValue" => "Matched"}))
+    GeocodeAddressNamesMode.add_member(:administrative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADMINISTRATIVE", traits: {"smithy.api#enumValue" => "Administrative"}))
     GeocodeFilter.add_member(:include_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCodeList, name: "IncludeCountries"))
     GeocodeFilter.add_member(:include_place_types, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeFilterPlaceTypeList, name: "IncludePlaceTypes"))
     GeocodeFilter.type = Types::GeocodeFilter
+    GeocodeFilterPlaceType.add_member(:locality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCALITY", traits: {"smithy.api#enumValue" => "Locality"}))
+    GeocodeFilterPlaceType.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POSTAL_CODE", traits: {"smithy.api#enumValue" => "PostalCode"}))
+    GeocodeFilterPlaceType.add_member(:intersection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERSECTION", traits: {"smithy.api#enumValue" => "Intersection"}))
+    GeocodeFilterPlaceType.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREET", traits: {"smithy.api#enumValue" => "Street"}))
+    GeocodeFilterPlaceType.add_member(:point_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POINT_ADDRESS", traits: {"smithy.api#enumValue" => "PointAddress"}))
+    GeocodeFilterPlaceType.add_member(:interpolated_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERPOLATED_ADDRESS", traits: {"smithy.api#enumValue" => "InterpolatedAddress"}))
+    GeocodeFilterPlaceType.add_member(:secondary_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDARY_ADDRESS", traits: {"smithy.api#enumValue" => "SecondaryAddress"}))
+    GeocodeFilterPlaceType.add_member(:point_of_interest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POINT_OF_INTEREST", traits: {"smithy.api#enumValue" => "PointOfInterest"}))
+    GeocodeFilterPlaceType.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNTRY", traits: {"smithy.api#enumValue" => "Country"}))
+    GeocodeFilterPlaceType.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "Region"}))
     GeocodeFilterPlaceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeFilterPlaceType, name: "member"))
+    GeocodeIntendedUse.add_member(:single_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_USE", traits: {"smithy.api#enumValue" => "SingleUse"}))
+    GeocodeIntendedUse.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STORAGE", traits: {"smithy.api#enumValue" => "Storage"}))
     GeocodeParsedQuery.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQueryComponentList, name: "Title"))
     GeocodeParsedQuery.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeParsedQueryAddressComponents, name: "Address"))
     GeocodeParsedQuery.type = Types::GeocodeParsedQuery
@@ -333,6 +408,7 @@ module Aws::GeoPlaces
     GeocodeParsedQueryAddressComponents.add_member(:address_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQueryComponentList, name: "AddressNumber"))
     GeocodeParsedQueryAddressComponents.add_member(:building, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQueryComponentList, name: "Building"))
     GeocodeParsedQueryAddressComponents.add_member(:secondary_address_components, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQuerySecondaryAddressComponentList, name: "SecondaryAddressComponents"))
+    GeocodeParsedQueryAddressComponents.add_member(:other_components, ::Smithy::Schema::Shapes::MemberShape.new(target: ParsedQueryComponentList, name: "OtherComponents"))
     GeocodeParsedQueryAddressComponents.type = Types::GeocodeParsedQueryAddressComponents
     GeocodeQueryComponents.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Country", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[^;]+$"}))
     GeocodeQueryComponents.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Region", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[^;]+$"}))
@@ -353,6 +429,9 @@ module Aws::GeoPlaces
     GeocodeRequest.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "PoliticalView"))
     GeocodeRequest.add_member(:intended_use, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeIntendedUse, name: "IntendedUse"))
     GeocodeRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "Key", traits: {"smithy.api#httpQuery" => "key"}))
+    GeocodeRequest.add_member(:postal_code_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: PostalCodeMode, name: "PostalCodeMode"))
+    GeocodeRequest.add_member(:address_translations, ::Smithy::Schema::Shapes::MemberShape.new(target: AddressTranslationComponentList, name: "AddressTranslations"))
+    GeocodeRequest.add_member(:address_names_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeAddressNamesMode, name: "AddressNamesMode"))
     GeocodeRequest.type = Types::GeocodeRequest
     GeocodeResponse.add_member(:pricing_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PricingBucket", traits: {"smithy.api#httpHeader" => "x-amz-geo-pricing-bucket", "smithy.api#required" => {}}))
     GeocodeResponse.add_member(:result_items, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeResultItemList, name: "ResultItems"))
@@ -376,15 +455,27 @@ module Aws::GeoPlaces
     GeocodeResultItem.add_member(:intersections, ::Smithy::Schema::Shapes::MemberShape.new(target: IntersectionList, name: "Intersections"))
     GeocodeResultItem.add_member(:main_address, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlace, name: "MainAddress"))
     GeocodeResultItem.add_member(:secondary_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlaceList, name: "SecondaryAddresses"))
+    GeocodeResultItem.add_member(:translations, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationDetails, name: "Translations"))
+    GeocodeResultItem.add_member(:estimated_point_address, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "EstimatedPointAddress"))
     GeocodeResultItem.type = Types::GeocodeResultItem
     GeocodeResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GeocodeResultItem, name: "member"))
+    GetPlaceAdditionalFeature.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME_ZONE", traits: {"smithy.api#enumValue" => "TimeZone"}))
+    GetPlaceAdditionalFeature.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONEMES", traits: {"smithy.api#enumValue" => "Phonemes"}))
+    GetPlaceAdditionalFeature.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS", traits: {"smithy.api#enumValue" => "Access"}))
+    GetPlaceAdditionalFeature.add_member(:contact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTACT", traits: {"smithy.api#enumValue" => "Contact"}))
+    GetPlaceAdditionalFeature.add_member(:secondary_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDARY_ADDRESSES", traits: {"smithy.api#enumValue" => "SecondaryAddresses"}))
+    GetPlaceAdditionalFeature.add_member(:cross_references, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_REFERENCES", traits: {"smithy.api#enumValue" => "CrossReferences"}))
     GetPlaceAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GetPlaceAdditionalFeature, name: "member"))
+    GetPlaceAddressNamesMode.add_member(:administrative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADMINISTRATIVE", traits: {"smithy.api#enumValue" => "Administrative"}))
+    GetPlaceIntendedUse.add_member(:single_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_USE", traits: {"smithy.api#enumValue" => "SingleUse"}))
+    GetPlaceIntendedUse.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STORAGE", traits: {"smithy.api#enumValue" => "Storage"}))
     GetPlaceRequest.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PlaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#length" => {"max" => 500}, "smithy.api#required" => {}}))
     GetPlaceRequest.add_member(:additional_features, ::Smithy::Schema::Shapes::MemberShape.new(target: GetPlaceAdditionalFeatureList, name: "AdditionalFeatures", traits: {"smithy.api#httpQuery" => "additional-features"}))
     GetPlaceRequest.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "Language", traits: {"smithy.api#httpQuery" => "language"}))
     GetPlaceRequest.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "PoliticalView", traits: {"smithy.api#httpQuery" => "political-view"}))
     GetPlaceRequest.add_member(:intended_use, ::Smithy::Schema::Shapes::MemberShape.new(target: GetPlaceIntendedUse, name: "IntendedUse", traits: {"smithy.api#httpQuery" => "intended-use"}))
     GetPlaceRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "Key", traits: {"smithy.api#httpQuery" => "key"}))
+    GetPlaceRequest.add_member(:address_names_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: GetPlaceAddressNamesMode, name: "AddressNamesMode", traits: {"smithy.api#httpQuery" => "address-names-mode"}))
     GetPlaceRequest.type = Types::GetPlaceRequest
     GetPlaceResponse.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PlaceId", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}, "smithy.api#required" => {}}))
     GetPlaceResponse.add_member(:place_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceType, name: "PlaceType", traits: {"smithy.api#required" => {}}))
@@ -407,6 +498,9 @@ module Aws::GeoPlaces
     GetPlaceResponse.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeDetails, name: "Phonemes"))
     GetPlaceResponse.add_member(:main_address, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlace, name: "MainAddress"))
     GetPlaceResponse.add_member(:secondary_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlaceList, name: "SecondaryAddresses"))
+    GetPlaceResponse.add_member(:place_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceAttributeList, name: "PlaceAttributes"))
+    GetPlaceResponse.add_member(:estimated_point_address, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "EstimatedPointAddress"))
+    GetPlaceResponse.add_member(:cross_references, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossReferenceList, name: "CrossReferences"))
     GetPlaceResponse.type = Types::GetPlaceResponse
     Highlight.add_member(:start_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "StartIndex", traits: {"smithy.api#range" => {"min" => 0}}))
     Highlight.add_member(:end_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "EndIndex", traits: {"smithy.api#range" => {"min" => 0}}))
@@ -464,7 +558,26 @@ module Aws::GeoPlaces
     PhonemeTranscription.add_member(:preferred, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Preferred"))
     PhonemeTranscription.type = Types::PhonemeTranscription
     PhonemeTranscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeTranscription, name: "member"))
+    PlaceAttribute.add_member(:drive_through, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRIVE_THROUGH", traits: {"smithy.api#enumValue" => "DriveThrough"}))
+    PlaceAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceAttribute, name: "member"))
+    PlaceType.add_member(:country, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COUNTRY", traits: {"smithy.api#enumValue" => "Country"}))
+    PlaceType.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "Region"}))
+    PlaceType.add_member(:sub_region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUB_REGION", traits: {"smithy.api#enumValue" => "SubRegion"}))
+    PlaceType.add_member(:locality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCALITY", traits: {"smithy.api#enumValue" => "Locality"}))
+    PlaceType.add_member(:district, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISTRICT", traits: {"smithy.api#enumValue" => "District"}))
+    PlaceType.add_member(:sub_district, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUB_DISTRICT", traits: {"smithy.api#enumValue" => "SubDistrict"}))
+    PlaceType.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POSTAL_CODE", traits: {"smithy.api#enumValue" => "PostalCode"}))
+    PlaceType.add_member(:block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLOCK", traits: {"smithy.api#enumValue" => "Block"}))
+    PlaceType.add_member(:sub_block, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUB_BLOCK", traits: {"smithy.api#enumValue" => "SubBlock"}))
+    PlaceType.add_member(:intersection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERSECTION", traits: {"smithy.api#enumValue" => "Intersection"}))
+    PlaceType.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREET", traits: {"smithy.api#enumValue" => "Street"}))
+    PlaceType.add_member(:point_of_interest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POINT_OF_INTEREST", traits: {"smithy.api#enumValue" => "PointOfInterest"}))
+    PlaceType.add_member(:point_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POINT_ADDRESS", traits: {"smithy.api#enumValue" => "PointAddress"}))
+    PlaceType.add_member(:interpolated_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERPOLATED_ADDRESS", traits: {"smithy.api#enumValue" => "InterpolatedAddress"}))
+    PlaceType.add_member(:secondary_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDARY_ADDRESS", traits: {"smithy.api#enumValue" => "SecondaryAddress"}))
+    PlaceType.add_member(:inferred_secondary_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFERRED_SECONDARY_ADDRESS", traits: {"smithy.api#enumValue" => "InferredSecondaryAddress"}))
     Position.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "member"))
+    PostalAuthority.add_member(:usps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USPS", traits: {"smithy.api#enumValue" => "Usps"}))
     PostalCodeDetails.add_member(:postal_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PostalCode", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}}))
     PostalCodeDetails.add_member(:postal_authority, ::Smithy::Schema::Shapes::MemberShape.new(target: PostalAuthority, name: "PostalAuthority"))
     PostalCodeDetails.add_member(:postal_code_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PostalCodeType, name: "PostalCodeType"))
@@ -472,12 +585,25 @@ module Aws::GeoPlaces
     PostalCodeDetails.add_member(:usps_zip_plus4, ::Smithy::Schema::Shapes::MemberShape.new(target: UspsZipPlus4, name: "UspsZipPlus4"))
     PostalCodeDetails.type = Types::PostalCodeDetails
     PostalCodeDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PostalCodeDetails, name: "member"))
+    PostalCodeMode.add_member(:merge_all_spanned_localities, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MERGE_ALL_SPANNED_LOCALITIES", traits: {"smithy.api#enumValue" => "MergeAllSpannedLocalities"}))
+    PostalCodeMode.add_member(:enumerate_spanned_localities, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENUMERATE_SPANNED_LOCALITIES", traits: {"smithy.api#enumValue" => "EnumerateSpannedLocalities"}))
+    PostalCodeMode.add_member(:enumerate_spanned_districts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENUMERATE_SPANNED_DISTRICTS", traits: {"smithy.api#enumValue" => "EnumerateSpannedDistricts"}))
+    PostalCodeType.add_member(:usps_zip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USPS_ZIP", traits: {"smithy.api#enumValue" => "UspsZip"}))
+    PostalCodeType.add_member(:usps_zip_plus_4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USPS_ZIP_PLUS_4", traits: {"smithy.api#enumValue" => "UspsZipPlus4"}))
     QueryRefinement.add_member(:refined_term, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "RefinedTerm", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#required" => {}}))
     QueryRefinement.add_member(:original_term, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "OriginalTerm", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#required" => {}}))
     QueryRefinement.add_member(:start_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "StartIndex", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     QueryRefinement.add_member(:end_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "EndIndex", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     QueryRefinement.type = Types::QueryRefinement
     QueryRefinementList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRefinement, name: "member"))
+    QueryType.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CATEGORY", traits: {"smithy.api#enumValue" => "Category"}))
+    QueryType.add_member(:business_chain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BUSINESS_CHAIN", traits: {"smithy.api#enumValue" => "BusinessChain"}))
+    RecordTypeCode.add_member(:firm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIRM", traits: {"smithy.api#enumValue" => "Firm"}))
+    RecordTypeCode.add_member(:general, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERAL", traits: {"smithy.api#enumValue" => "General"}))
+    RecordTypeCode.add_member(:high_rise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HIGH_RISE", traits: {"smithy.api#enumValue" => "HighRise"}))
+    RecordTypeCode.add_member(:post_office_box, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_OFFICE_BOX", traits: {"smithy.api#enumValue" => "PostOfficeBox"}))
+    RecordTypeCode.add_member(:rural, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RURAL", traits: {"smithy.api#enumValue" => "Rural"}))
+    RecordTypeCode.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREET", traits: {"smithy.api#enumValue" => "Street"}))
     Region.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Code", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}}))
     Region.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}}))
     Region.type = Types::Region
@@ -492,10 +618,23 @@ module Aws::GeoPlaces
     RelatedPlace.add_member(:access_points, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPointList, name: "AccessPoints"))
     RelatedPlace.type = Types::RelatedPlace
     RelatedPlaceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlace, name: "member"))
+    ReverseGeocodeAdditionalFeature.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME_ZONE", traits: {"smithy.api#enumValue" => "TimeZone"}))
+    ReverseGeocodeAdditionalFeature.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS", traits: {"smithy.api#enumValue" => "Access"}))
+    ReverseGeocodeAdditionalFeature.add_member(:intersections, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERSECTIONS", traits: {"smithy.api#enumValue" => "Intersections"}))
     ReverseGeocodeAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeAdditionalFeature, name: "member"))
+    ReverseGeocodeAddressNamesMode.add_member(:administrative, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADMINISTRATIVE", traits: {"smithy.api#enumValue" => "Administrative"}))
     ReverseGeocodeFilter.add_member(:include_place_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeFilterPlaceTypeList, name: "IncludePlaceTypes"))
     ReverseGeocodeFilter.type = Types::ReverseGeocodeFilter
+    ReverseGeocodeFilterPlaceType.add_member(:locality, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOCALITY", traits: {"smithy.api#enumValue" => "Locality"}))
+    ReverseGeocodeFilterPlaceType.add_member(:intersection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERSECTION", traits: {"smithy.api#enumValue" => "Intersection"}))
+    ReverseGeocodeFilterPlaceType.add_member(:street, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREET", traits: {"smithy.api#enumValue" => "Street"}))
+    ReverseGeocodeFilterPlaceType.add_member(:point_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POINT_ADDRESS", traits: {"smithy.api#enumValue" => "PointAddress"}))
+    ReverseGeocodeFilterPlaceType.add_member(:interpolated_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERPOLATED_ADDRESS", traits: {"smithy.api#enumValue" => "InterpolatedAddress"}))
+    ReverseGeocodeFilterPlaceType.add_member(:secondary_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDARY_ADDRESS", traits: {"smithy.api#enumValue" => "SecondaryAddress"}))
+    ReverseGeocodeFilterPlaceType.add_member(:point_of_interest, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POINT_OF_INTEREST", traits: {"smithy.api#enumValue" => "PointOfInterest"}))
     ReverseGeocodeFilterPlaceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeFilterPlaceType, name: "member"))
+    ReverseGeocodeIntendedUse.add_member(:single_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_USE", traits: {"smithy.api#enumValue" => "SingleUse"}))
+    ReverseGeocodeIntendedUse.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STORAGE", traits: {"smithy.api#enumValue" => "Storage"}))
     ReverseGeocodeRequest.add_member(:query_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "QueryPosition", traits: {"smithy.api#required" => {}}))
     ReverseGeocodeRequest.add_member(:query_radius, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "QueryRadius", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 21000000}}))
     ReverseGeocodeRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
@@ -505,6 +644,8 @@ module Aws::GeoPlaces
     ReverseGeocodeRequest.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "PoliticalView"))
     ReverseGeocodeRequest.add_member(:intended_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeIntendedUse, name: "IntendedUse"))
     ReverseGeocodeRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "Key", traits: {"smithy.api#httpQuery" => "key"}))
+    ReverseGeocodeRequest.add_member(:heading, ::Smithy::Schema::Shapes::MemberShape.new(target: Heading, name: "Heading", traits: {"smithy.api#default" => 0}))
+    ReverseGeocodeRequest.add_member(:address_names_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeAddressNamesMode, name: "AddressNamesMode"))
     ReverseGeocodeRequest.type = Types::ReverseGeocodeRequest
     ReverseGeocodeResponse.add_member(:pricing_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PricingBucket", traits: {"smithy.api#httpHeader" => "x-amz-geo-pricing-bucket", "smithy.api#required" => {}}))
     ReverseGeocodeResponse.add_member(:result_items, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeResultItemList, name: "ResultItems"))
@@ -524,8 +665,15 @@ module Aws::GeoPlaces
     ReverseGeocodeResultItem.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZone, name: "TimeZone"))
     ReverseGeocodeResultItem.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     ReverseGeocodeResultItem.add_member(:intersections, ::Smithy::Schema::Shapes::MemberShape.new(target: IntersectionList, name: "Intersections"))
+    ReverseGeocodeResultItem.add_member(:main_address, ::Smithy::Schema::Shapes::MemberShape.new(target: RelatedPlace, name: "MainAddress"))
+    ReverseGeocodeResultItem.add_member(:estimated_point_address, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "EstimatedPointAddress"))
     ReverseGeocodeResultItem.type = Types::ReverseGeocodeResultItem
     ReverseGeocodeResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReverseGeocodeResultItem, name: "member"))
+    SearchNearbyAdditionalFeature.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME_ZONE", traits: {"smithy.api#enumValue" => "TimeZone"}))
+    SearchNearbyAdditionalFeature.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONEMES", traits: {"smithy.api#enumValue" => "Phonemes"}))
+    SearchNearbyAdditionalFeature.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS", traits: {"smithy.api#enumValue" => "Access"}))
+    SearchNearbyAdditionalFeature.add_member(:contact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTACT", traits: {"smithy.api#enumValue" => "Contact"}))
+    SearchNearbyAdditionalFeature.add_member(:cross_references, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_REFERENCES", traits: {"smithy.api#enumValue" => "CrossReferences"}))
     SearchNearbyAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchNearbyAdditionalFeature, name: "member"))
     SearchNearbyFilter.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     SearchNearbyFilter.add_member(:include_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCodeList, name: "IncludeCountries"))
@@ -536,6 +684,8 @@ module Aws::GeoPlaces
     SearchNearbyFilter.add_member(:include_food_types, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterFoodTypeList, name: "IncludeFoodTypes"))
     SearchNearbyFilter.add_member(:exclude_food_types, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterFoodTypeList, name: "ExcludeFoodTypes"))
     SearchNearbyFilter.type = Types::SearchNearbyFilter
+    SearchNearbyIntendedUse.add_member(:single_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_USE", traits: {"smithy.api#enumValue" => "SingleUse"}))
+    SearchNearbyIntendedUse.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STORAGE", traits: {"smithy.api#enumValue" => "Storage"}))
     SearchNearbyRequest.add_member(:query_position, ::Smithy::Schema::Shapes::MemberShape.new(target: Position, name: "QueryPosition", traits: {"smithy.api#required" => {}}))
     SearchNearbyRequest.add_member(:query_radius, ::Smithy::Schema::Shapes::MemberShape.new(target: DistanceMeters, name: "QueryRadius", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 21000000}}))
     SearchNearbyRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
@@ -569,13 +719,22 @@ module Aws::GeoPlaces
     SearchNearbyResultItem.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZone, name: "TimeZone"))
     SearchNearbyResultItem.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     SearchNearbyResultItem.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeDetails, name: "Phonemes"))
+    SearchNearbyResultItem.add_member(:place_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceAttributeList, name: "PlaceAttributes"))
+    SearchNearbyResultItem.add_member(:cross_references, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossReferenceList, name: "CrossReferences"))
     SearchNearbyResultItem.type = Types::SearchNearbyResultItem
     SearchNearbyResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchNearbyResultItem, name: "member"))
+    SearchTextAdditionalFeature.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME_ZONE", traits: {"smithy.api#enumValue" => "TimeZone"}))
+    SearchTextAdditionalFeature.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONEMES", traits: {"smithy.api#enumValue" => "Phonemes"}))
+    SearchTextAdditionalFeature.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS", traits: {"smithy.api#enumValue" => "Access"}))
+    SearchTextAdditionalFeature.add_member(:contact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTACT", traits: {"smithy.api#enumValue" => "Contact"}))
+    SearchTextAdditionalFeature.add_member(:cross_references, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_REFERENCES", traits: {"smithy.api#enumValue" => "CrossReferences"}))
     SearchTextAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTextAdditionalFeature, name: "member"))
     SearchTextFilter.add_member(:bounding_box, ::Smithy::Schema::Shapes::MemberShape.new(target: BoundingBox, name: "BoundingBox"))
     SearchTextFilter.add_member(:circle, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCircle, name: "Circle"))
     SearchTextFilter.add_member(:include_countries, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCodeList, name: "IncludeCountries"))
     SearchTextFilter.type = Types::SearchTextFilter
+    SearchTextIntendedUse.add_member(:single_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_USE", traits: {"smithy.api#enumValue" => "SingleUse"}))
+    SearchTextIntendedUse.add_member(:storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STORAGE", traits: {"smithy.api#enumValue" => "Storage"}))
     SearchTextRequest.add_member(:query_text, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "QueryText", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}}))
     SearchTextRequest.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "QueryId", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}}))
     SearchTextRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "MaxResults", traits: {"smithy.api#default" => nil, "smithy.api#range" => {"min" => 1, "max" => 100}}))
@@ -586,6 +745,7 @@ module Aws::GeoPlaces
     SearchTextRequest.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "PoliticalView"))
     SearchTextRequest.add_member(:intended_use, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTextIntendedUse, name: "IntendedUse"))
     SearchTextRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
+    SearchTextRequest.add_member(:travel_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTextTravelMode, name: "TravelMode"))
     SearchTextRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "Key", traits: {"smithy.api#httpQuery" => "key"}))
     SearchTextRequest.type = Types::SearchTextRequest
     SearchTextResponse.add_member(:pricing_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PricingBucket", traits: {"smithy.api#httpHeader" => "x-amz-geo-pricing-bucket", "smithy.api#required" => {}}))
@@ -610,9 +770,15 @@ module Aws::GeoPlaces
     SearchTextResultItem.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZone, name: "TimeZone"))
     SearchTextResultItem.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     SearchTextResultItem.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeDetails, name: "Phonemes"))
+    SearchTextResultItem.add_member(:place_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceAttributeList, name: "PlaceAttributes"))
+    SearchTextResultItem.add_member(:cross_references, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossReferenceList, name: "CrossReferences"))
     SearchTextResultItem.type = Types::SearchTextResultItem
     SearchTextResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTextResultItem, name: "member"))
+    SearchTextTravelMode.add_member(:car, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAR", traits: {"smithy.api#enumValue" => "Car"}))
+    SearchTextTravelMode.add_member(:scooter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCOOTER", traits: {"smithy.api#enumValue" => "Scooter"}))
+    SearchTextTravelMode.add_member(:truck, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRUCK", traits: {"smithy.api#enumValue" => "Truck"}))
     SecondaryAddressComponent.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Number", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}, "smithy.api#required" => {}}))
+    SecondaryAddressComponent.add_member(:designator, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Designator", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}}))
     SecondaryAddressComponent.type = Types::SecondaryAddressComponent
     SecondaryAddressComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryAddressComponent, name: "member"))
     SecondaryAddressComponentMatchScore.add_member(:number, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchScore, name: "Number", traits: {"smithy.api#default" => 0}))
@@ -634,6 +800,11 @@ module Aws::GeoPlaces
     SubRegionHighlights.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Code"))
     SubRegionHighlights.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Name"))
     SubRegionHighlights.type = Types::SubRegionHighlights
+    SuggestAdditionalFeature.add_member(:core, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CORE", traits: {"smithy.api#enumValue" => "Core"}))
+    SuggestAdditionalFeature.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIME_ZONE", traits: {"smithy.api#enumValue" => "TimeZone"}))
+    SuggestAdditionalFeature.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONEMES", traits: {"smithy.api#enumValue" => "Phonemes"}))
+    SuggestAdditionalFeature.add_member(:access, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCESS", traits: {"smithy.api#enumValue" => "Access"}))
+    SuggestAdditionalFeature.add_member(:cross_references, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_REFERENCES", traits: {"smithy.api#enumValue" => "CrossReferences"}))
     SuggestAdditionalFeatureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestAdditionalFeature, name: "member"))
     SuggestAddressHighlights.add_member(:label, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Label"))
     SuggestAddressHighlights.type = Types::SuggestAddressHighlights
@@ -644,6 +815,7 @@ module Aws::GeoPlaces
     SuggestHighlights.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: HighlightList, name: "Title"))
     SuggestHighlights.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestAddressHighlights, name: "Address"))
     SuggestHighlights.type = Types::SuggestHighlights
+    SuggestIntendedUse.add_member(:single_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_USE", traits: {"smithy.api#enumValue" => "SingleUse"}))
     SuggestPlaceResult.add_member(:place_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "PlaceId", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}}))
     SuggestPlaceResult.add_member(:place_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceType, name: "PlaceType"))
     SuggestPlaceResult.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: Address, name: "Address"))
@@ -658,6 +830,8 @@ module Aws::GeoPlaces
     SuggestPlaceResult.add_member(:time_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeZone, name: "TimeZone"))
     SuggestPlaceResult.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode3, name: "PoliticalView"))
     SuggestPlaceResult.add_member(:phonemes, ::Smithy::Schema::Shapes::MemberShape.new(target: PhonemeDetails, name: "Phonemes"))
+    SuggestPlaceResult.add_member(:place_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: PlaceAttributeList, name: "PlaceAttributes"))
+    SuggestPlaceResult.add_member(:cross_references, ::Smithy::Schema::Shapes::MemberShape.new(target: CrossReferenceList, name: "CrossReferences"))
     SuggestPlaceResult.type = Types::SuggestPlaceResult
     SuggestQueryResult.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "QueryId", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}}))
     SuggestQueryResult.add_member(:query_type, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryType, name: "QueryType"))
@@ -671,6 +845,7 @@ module Aws::GeoPlaces
     SuggestRequest.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "Language"))
     SuggestRequest.add_member(:political_view, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "PoliticalView"))
     SuggestRequest.add_member(:intended_use, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestIntendedUse, name: "IntendedUse"))
+    SuggestRequest.add_member(:travel_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestTravelMode, name: "TravelMode"))
     SuggestRequest.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ApiKey, name: "Key", traits: {"smithy.api#httpQuery" => "key"}))
     SuggestRequest.type = Types::SuggestRequest
     SuggestResponse.add_member(:pricing_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "PricingBucket", traits: {"smithy.api#httpHeader" => "x-amz-geo-pricing-bucket", "smithy.api#required" => {}}))
@@ -684,12 +859,37 @@ module Aws::GeoPlaces
     SuggestResultItem.add_member(:highlights, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestHighlights, name: "Highlights"))
     SuggestResultItem.type = Types::SuggestResultItem
     SuggestResultItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SuggestResultItem, name: "member"))
+    SuggestResultItemType.add_member(:place, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLACE", traits: {"smithy.api#enumValue" => "Place"}))
+    SuggestResultItemType.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUERY", traits: {"smithy.api#enumValue" => "Query"}))
+    SuggestTravelMode.add_member(:car, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAR", traits: {"smithy.api#enumValue" => "Car"}))
+    SuggestTravelMode.add_member(:scooter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCOOTER", traits: {"smithy.api#enumValue" => "Scooter"}))
+    SuggestTravelMode.add_member(:truck, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRUCK", traits: {"smithy.api#enumValue" => "Truck"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     TimeZone.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Name", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#required" => {}}))
     TimeZone.add_member(:offset, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Offset", traits: {"smithy.api#length" => {"min" => 0, "max" => 6}}))
     TimeZone.add_member(:offset_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: DurationSeconds, name: "OffsetSeconds", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}}))
     TimeZone.type = Types::TimeZone
+    TranslationDetails.add_member(:locality, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminNamesList, name: "Locality"))
+    TranslationDetails.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminNamesList, name: "Region"))
+    TranslationDetails.add_member(:district, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminNamesList, name: "District"))
+    TranslationDetails.add_member(:sub_region, ::Smithy::Schema::Shapes::MemberShape.new(target: AdminNamesList, name: "SubRegion"))
+    TranslationDetails.type = Types::TranslationDetails
+    TranslationName.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveString, name: "Value", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
+    TranslationName.add_member(:language, ::Smithy::Schema::Shapes::MemberShape.new(target: LanguageTag, name: "Language"))
+    TranslationName.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationNameType, name: "Type", traits: {"smithy.api#required" => {}}))
+    TranslationName.add_member(:primary, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Primary"))
+    TranslationName.add_member(:transliterated, ::Smithy::Schema::Shapes::MemberShape.new(target: SensitiveBoolean, name: "Transliterated"))
+    TranslationName.type = Types::TranslationName
+    TranslationNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TranslationName, name: "member"))
+    TranslationNameType.add_member(:abbreviation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ABBREVIATION", traits: {"smithy.api#enumValue" => "Abbreviation"}))
+    TranslationNameType.add_member(:area_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AREA_CODE", traits: {"smithy.api#enumValue" => "AreaCode"}))
+    TranslationNameType.add_member(:base_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASE_NAME", traits: {"smithy.api#enumValue" => "BaseName"}))
+    TranslationNameType.add_member(:exonym, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXONYM", traits: {"smithy.api#enumValue" => "Exonym"}))
+    TranslationNameType.add_member(:shortened, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHORTENED", traits: {"smithy.api#enumValue" => "Shortened"}))
+    TranslationNameType.add_member(:synonym, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNONYM", traits: {"smithy.api#enumValue" => "Synonym"}))
+    TypePlacement.add_member(:before_base_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEFORE_BASE_NAME", traits: {"smithy.api#enumValue" => "BeforeBaseName"}))
+    TypePlacement.add_member(:after_base_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AFTER_BASE_NAME", traits: {"smithy.api#enumValue" => "AfterBaseName"}))
     UspsZip.add_member(:zip_classification_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ZipClassificationCode, name: "ZipClassificationCode"))
     UspsZip.type = Types::UspsZip
     UspsZipPlus4.add_member(:record_type_code, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordTypeCode, name: "RecordTypeCode"))
@@ -702,12 +902,21 @@ module Aws::GeoPlaces
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message", traits: {"smithy.api#jsonName" => "message", "smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
     ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UnknownOperation"}))
+    ValidationExceptionReason.add_member(:missing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING", traits: {"smithy.api#enumValue" => "Missing"}))
+    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CannotParse"}))
+    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FieldValidationFailed"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "Other"}))
+    ValidationExceptionReason.add_member(:unknown_field, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_FIELD", traits: {"smithy.api#enumValue" => "UnknownField"}))
+    ZipClassificationCode.add_member(:military, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MILITARY", traits: {"smithy.api#enumValue" => "Military"}))
+    ZipClassificationCode.add_member(:post_office_boxes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "POST_OFFICE_BOXES", traits: {"smithy.api#enumValue" => "PostOfficeBoxes"}))
+    ZipClassificationCode.add_member(:unique, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNIQUE", traits: {"smithy.api#enumValue" => "Unique"}))
 
     PlacesService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.geoplaces#PlacesService"
       service.name = "PlacesService"
       service.version = "2020-11-19"
-      service.traits = {"aws.api#service" => {"sdkId" => "Geo Places", "arnNamespace" => "geo-places", "cloudTrailEventSource" => "geo-places.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "geo-places"}, "aws.endpoints#standardRegionalEndpoints" => {"partitionSpecialCases" => {"aws" => [{"endpoint" => "https://places.geo.{region}.{dnsSuffix}/v2"}, {"endpoint" => "https://places.geo-fips.{region}.{dualStackDnsSuffix}/v2", "fips" => true, "dualStack" => true}, {"endpoint" => "https://places.geo-fips.{region}.{dnsSuffix}/v2", "fips" => true, "dualStack" => false}, {"endpoint" => "https://places.geo.{region}.{dualStackDnsSuffix}/v2", "fips" => false, "dualStack" => true}], "aws-us-gov" => [{"endpoint" => "https://places.geo.{region}.{dnsSuffix}/v2"}, {"endpoint" => "https://places.geo-fips.{region}.{dualStackDnsSuffix}/v2", "fips" => true, "dualStack" => true}, {"endpoint" => "https://places.geo-fips.{region}.{dnsSuffix}/v2", "fips" => true, "dualStack" => false}, {"endpoint" => "https://places.geo.{region}.{dualStackDnsSuffix}/v2", "fips" => false, "dualStack" => true}]}}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["x-amz-content-sha256", "x-amz-user-agent", "content-type"]}, "smithy.api#title" => "Amazon Location Service Places V2"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Geo Places", "arnNamespace" => "geo-places", "cloudTrailEventSource" => "geo-places.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "geo-places"}, "aws.endpoints#standardRegionalEndpoints" => {"partitionSpecialCases" => {"aws" => [{"endpoint" => "https://places.geo.{region}.{dnsSuffix}"}, {"endpoint" => "https://places.geo-fips.{region}.{dualStackDnsSuffix}", "fips" => true, "dualStack" => true}, {"endpoint" => "https://places.geo-fips.{region}.{dnsSuffix}", "fips" => true, "dualStack" => false}, {"endpoint" => "https://places.geo.{region}.{dualStackDnsSuffix}", "fips" => false, "dualStack" => true}], "aws-us-gov" => [{"endpoint" => "https://places.geo.{region}.{dnsSuffix}"}, {"endpoint" => "https://places.geo-fips.{region}.{dualStackDnsSuffix}", "fips" => true, "dualStack" => true}, {"endpoint" => "https://places.geo-fips.{region}.{dnsSuffix}", "fips" => true, "dualStack" => false}, {"endpoint" => "https://places.geo.{region}.{dualStackDnsSuffix}", "fips" => false, "dualStack" => true}]}}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["x-amz-content-sha256", "x-amz-user-agent", "content-type"]}, "smithy.api#title" => "Amazon Location Service Places V2", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://places.geo.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://places.geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://places.geo-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://places.geo.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://geo-places-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://geo-places-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://geo-places.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://geo-places.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 18, "nodes" => "/////wAAAAH/////AAAAAAAAABEAAAADAAAAAQAAAAQF9eEPAAAAAgAAAAUF9eEPAAAAAwAAAA4AAAAGAAAABAAAAA4AAAAHAAAABQAAAAoAAAAIAAAABwAAAAkF9eEOAAAACAX14QwF9eENAAAABgAAAAwAAAALAAAABwX14QkF9eELAAAABwAAAA0F9eEKAAAACAX14QgF9eEJAAAABQAAABAAAAAPAAAABwX14QcF9eEEAAAABwX14QUF9eEGAAAABQX14QEAAAASAAAABwX14QIF9eED"}}
       service.add_operation(:autocomplete, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.geoplaces#Autocomplete"
         operation.name = "Autocomplete"
@@ -717,7 +926,7 @@ module Aws::GeoPlaces
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/autocomplete", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "AutocompleteSuccess", "params" => {"QueryText" => "Star"}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
+        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/v2/autocomplete", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "AutocompleteSuccess", "params" => {"QueryText" => "Star"}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:geocode, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.geoplaces#Geocode"
@@ -728,7 +937,7 @@ module Aws::GeoPlaces
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/geocode", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GeocodeSuccess", "params" => {"QueryText" => "Starbucks"}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
+        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/v2/geocode", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GeocodeSuccess", "params" => {"QueryText" => "Starbucks"}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:get_place, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.geoplaces#GetPlace"
@@ -739,7 +948,7 @@ module Aws::GeoPlaces
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/place/{PlaceId}", "method" => "GET"}, "smithy.api#readonly" => {}}
+        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/v2/place/{PlaceId}", "method" => "GET"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:reverse_geocode, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.geoplaces#ReverseGeocode"
@@ -750,7 +959,7 @@ module Aws::GeoPlaces
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/reverse-geocode", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ReverseGeocodeSuccess", "params" => {"QueryPosition" => [2.2945, 48.85824]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
+        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/v2/reverse-geocode", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ReverseGeocodeSuccess", "params" => {"QueryPosition" => [2.2945, 48.85824]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:search_nearby, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.geoplaces#SearchNearby"
@@ -761,7 +970,7 @@ module Aws::GeoPlaces
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/search-nearby", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "SearchNearbySuccess", "params" => {"QueryPosition" => [2.2945, 48.85824]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
+        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/v2/search-nearby", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "SearchNearbySuccess", "params" => {"QueryPosition" => [2.2945, 48.85824]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:search_text, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.geoplaces#SearchText"
@@ -772,7 +981,7 @@ module Aws::GeoPlaces
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/search-text", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "SearchTextSuccess", "params" => {"QueryText" => "Taj Mahal", "BiasPosition" => [78.0421, 27.1753]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
+        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/v2/search-text", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "SearchTextSuccess", "params" => {"QueryText" => "Taj Mahal", "BiasPosition" => [78.0421, 27.1753]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
       service.add_operation(:suggest, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.geoplaces#Suggest"
@@ -783,7 +992,7 @@ module Aws::GeoPlaces
         operation.errors << InternalServerException
         operation.errors << ThrottlingException
         operation.errors << ValidationException
-        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/suggest", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "SuggestSuccess", "params" => {"QueryText" => "Taj Mahal", "BiasPosition" => [78.0421, 27.1753]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
+        operation.traits = {"aws.api#dataPlane" => {}, "smithy.api#http" => {"uri" => "/v2/suggest", "method" => "POST"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "SuggestSuccess", "params" => {"QueryText" => "Taj Mahal", "BiasPosition" => [78.0421, 27.1753]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-west-2"}}]}
       end)
     end
 

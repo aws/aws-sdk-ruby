@@ -144,18 +144,18 @@ module Aws::LexModelBuildingService
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -285,6 +285,9 @@ module Aws::LexModelBuildingService
     #     enable_model_improvements: false,
     #     detect_sentiment: false
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::CreateBotVersionResponse]
     def create_bot_version(params = {}, options = {})
       request = build_request(:create_bot_version, params)
@@ -448,6 +451,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::CreateIntentVersionResponse]
     def create_intent_version(params = {}, options = {})
       request = build_request(:create_intent_version, params)
@@ -511,6 +517,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::CreateSlotTypeVersionResponse]
     def create_slot_type_version(params = {}, options = {})
       request = build_request(:create_slot_type_version, params)
@@ -545,6 +554,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Smithy::Schema::EmptyStructure]
     def delete_bot(params = {}, options = {})
       request = build_request(:delete_bot, params)
@@ -576,6 +588,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Smithy::Schema::EmptyStructure]
     def delete_bot_alias(params = {}, options = {})
       request = build_request(:delete_bot_alias, params)
@@ -605,6 +620,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Smithy::Schema::EmptyStructure]
     def delete_bot_channel_association(params = {}, options = {})
       request = build_request(:delete_bot_channel_association, params)
@@ -633,6 +651,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Smithy::Schema::EmptyStructure]
     def delete_bot_version(params = {}, options = {})
       request = build_request(:delete_bot_version, params)
@@ -668,6 +689,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Smithy::Schema::EmptyStructure]
     def delete_intent(params = {}, options = {})
       request = build_request(:delete_intent, params)
@@ -696,6 +720,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Smithy::Schema::EmptyStructure]
     def delete_intent_version(params = {}, options = {})
       request = build_request(:delete_intent_version, params)
@@ -731,6 +758,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Smithy::Schema::EmptyStructure]
     def delete_slot_type(params = {}, options = {})
       request = build_request(:delete_slot_type, params)
@@ -759,6 +789,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Smithy::Schema::EmptyStructure]
     def delete_slot_type_version(params = {}, options = {})
       request = build_request(:delete_slot_type_version, params)
@@ -794,6 +827,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Smithy::Schema::EmptyStructure]
     def delete_utterances(params = {}, options = {})
       request = build_request(:delete_utterances, params)
@@ -914,6 +950,9 @@ module Aws::LexModelBuildingService
     #     child_directed: false,
     #     detect_sentiment: false
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBotResponse]
     def get_bot(params = {}, options = {})
       request = build_request(:get_bot, params)
@@ -959,6 +998,9 @@ module Aws::LexModelBuildingService
     #       iam_role_arn: "IamRoleArn"
     #     }
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBotAliasResponse]
     def get_bot_alias(params = {}, options = {})
       request = build_request(:get_bot_alias, params)
@@ -1020,6 +1062,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBotAliasesResponse]
     def get_bot_aliases(params = {}, options = {})
       request = build_request(:get_bot_aliases, params)
@@ -1062,6 +1107,9 @@ module Aws::LexModelBuildingService
     #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "CREATED", "FAILED"],
     #     failure_reason: "String"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBotChannelAssociationResponse]
     def get_bot_channel_association(params = {}, options = {})
       request = build_request(:get_bot_channel_association, params)
@@ -1123,6 +1171,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBotChannelAssociationsResponse]
     def get_bot_channel_associations(params = {}, options = {})
       request = build_request(:get_bot_channel_associations, params)
@@ -1175,6 +1226,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBotVersionsResponse]
     def get_bot_versions(params = {}, options = {})
       request = build_request(:get_bot_versions, params)
@@ -1253,6 +1307,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBotsResponse]
     def get_bots(params = {}, options = {})
       request = build_request(:get_bots, params)
@@ -1284,6 +1341,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBuiltinIntentResponse]
     def get_builtin_intent(params = {}, options = {})
       request = build_request(:get_builtin_intent, params)
@@ -1331,6 +1391,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBuiltinIntentsResponse]
     def get_builtin_intents(params = {}, options = {})
       request = build_request(:get_builtin_intents, params)
@@ -1378,6 +1441,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetBuiltinSlotTypesResponse]
     def get_builtin_slot_types(params = {}, options = {})
       request = build_request(:get_builtin_slot_types, params)
@@ -1415,6 +1481,9 @@ module Aws::LexModelBuildingService
     #     failure_reason: "String",
     #     url: "String"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetExportResponse]
     def get_export(params = {}, options = {})
       request = build_request(:get_export, params)
@@ -1443,6 +1512,9 @@ module Aws::LexModelBuildingService
     #     failure_reason: ["String"],
     #     created_date: Time.now
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetImportResponse]
     def get_import(params = {}, options = {})
       request = build_request(:get_import, params)
@@ -1732,6 +1804,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetIntentResponse]
     def get_intent(params = {}, options = {})
       request = build_request(:get_intent, params)
@@ -1783,6 +1858,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetIntentVersionsResponse]
     def get_intent_versions(params = {}, options = {})
       request = build_request(:get_intent_versions, params)
@@ -1859,6 +1937,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetIntentsResponse]
     def get_intents(params = {}, options = {})
       request = build_request(:get_intents, params)
@@ -1899,6 +1980,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetMigrationResponse]
     def get_migration(params = {}, options = {})
       request = build_request(:get_migration, params)
@@ -1955,6 +2039,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetMigrationsResponse]
     def get_migrations(params = {}, options = {})
       request = build_request(:get_migrations, params)
@@ -2028,6 +2115,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetSlotTypeResponse]
     def get_slot_type(params = {}, options = {})
       request = build_request(:get_slot_type, params)
@@ -2079,6 +2169,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetSlotTypeVersionsResponse]
     def get_slot_type_versions(params = {}, options = {})
       request = build_request(:get_slot_type_versions, params)
@@ -2169,6 +2262,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetSlotTypesResponse]
     def get_slot_types(params = {}, options = {})
       request = build_request(:get_slot_types, params)
@@ -2237,6 +2333,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::GetUtterancesViewResponse]
     def get_utterances_view(params = {}, options = {})
       request = build_request(:get_utterances_view, params)
@@ -2265,6 +2364,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::ListTagsForResourceResponse]
     def list_tags_for_resource(params = {}, options = {})
       request = build_request(:list_tags_for_resource, params)
@@ -2706,6 +2808,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::PutBotResponse]
     def put_bot(params = {}, options = {})
       request = build_request(:put_bot, params)
@@ -2803,6 +2908,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::PutBotAliasResponse]
     def put_bot_alias(params = {}, options = {})
       request = build_request(:put_bot_alias, params)
@@ -3515,6 +3623,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::PutIntentResponse]
     def put_intent(params = {}, options = {})
       request = build_request(:put_intent, params)
@@ -3691,6 +3802,9 @@ module Aws::LexModelBuildingService
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::PutSlotTypeResponse]
     def put_slot_type(params = {}, options = {})
       request = build_request(:put_slot_type, params)
@@ -3764,6 +3878,9 @@ module Aws::LexModelBuildingService
     #     ],
     #     created_date: Time.now
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::StartImportResponse]
     def start_import(params = {}, options = {})
       request = build_request(:start_import, params)
@@ -3833,6 +3950,9 @@ module Aws::LexModelBuildingService
     #     migration_strategy: "CREATE_NEW" # One of: ["CREATE_NEW", "UPDATE_EXISTING"],
     #     migration_timestamp: Time.now
     #   }
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::StartMigrationResponse]
     def start_migration(params = {}, options = {})
       request = build_request(:start_migration, params)
@@ -3863,6 +3983,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::TagResourceResponse]
     def tag_resource(params = {}, options = {})
       request = build_request(:tag_resource, params)
@@ -3887,6 +4010,9 @@ module Aws::LexModelBuildingService
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+    #   Since: 2025-09-08
     # @return [Types::UntagResourceResponse]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)

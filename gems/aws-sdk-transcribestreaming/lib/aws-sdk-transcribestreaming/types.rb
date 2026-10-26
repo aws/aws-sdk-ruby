@@ -15,7 +15,7 @@ module Aws::TranscribeStreaming
     #   <p>Contains words, phrases, or punctuation marks in your transcription output.</p>
     #   @return [Array<Types::Item>]
     # @!attribute entities
-    #   <p>Contains entities identified as personally identifiable information (PII) in your transcription 
+    #   <p>Contains entities identified as personally identifiable information (PII) in your transcription
     #         output.</p>
     #   @return [Array<Types::Entity>]
     class Alternative < Struct.new(
@@ -34,7 +34,7 @@ module Aws::TranscribeStreaming
     # @!attribute audio_chunk
     #   <p>
     #       An audio blob containing the next segment of audio from your application,
-    #       with a maximum duration of 1 second. 
+    #       with a maximum duration of 1 second.
     #       The maximum size in bytes varies based on audio properties.
     #     </p>
     #            <p>Find recommended size in <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#best-practices">Transcribing streaming best practices</a>.
@@ -43,11 +43,11 @@ module Aws::TranscribeStreaming
     #       Size calculation: <code>Duration (s) * Sample Rate (Hz) * Number of Channels * 2 (Bytes per Sample)</code>
     #            </p>
     #            <p>
-    #       For example, a 1-second chunk of 16 kHz, 2-channel, 16-bit audio would be 
+    #       For example, a 1-second chunk of 16 kHz, 2-channel, 16-bit audio would be
     #       <code>1 * 16000 * 2 * 2 = 64000 bytes</code>.
     #     </p>
     #            <p>
-    #       For 8 kHz, 1-channel, 16-bit audio, a 1-second chunk would be 
+    #       For 8 kHz, 1-channel, 16-bit audio, a 1-second chunk would be
     #       <code>1 * 8000 * 1 * 2 = 16000 bytes</code>.
     #     </p>
     #   @return [String]
@@ -59,7 +59,7 @@ module Aws::TranscribeStreaming
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket 
+    # <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket
     #       data frames.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html">Transcribing streaming audio</a>.</p>
     # @!attribute audio_event
@@ -83,9 +83,9 @@ module Aws::TranscribeStreaming
       class Unknown < AudioStream; end
     end
 
-    # <p>One or more arguments to the <code>StartStreamTranscription</code>, 
-    #       <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code> 
-    #       operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code> 
+    # <p>One or more arguments to the <code>StartStreamTranscription</code>,
+    #       <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code>
+    #       operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code>
     #       used unsupported values. Check the specified parameters and try your request again.</p>
     # @!attribute message
     #   @return [String]
@@ -110,7 +110,7 @@ module Aws::TranscribeStreaming
     #   <p>The category of information identified. For example, <code>PII</code>.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of PII identified. For example, <code>NAME</code> or 
+    #   <p>The type of PII identified. For example, <code>NAME</code> or
     #         <code>CREDIT_DEBIT_NUMBER</code>.</p>
     #   @return [String]
     # @!attribute content
@@ -135,7 +135,7 @@ module Aws::TranscribeStreaming
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A word, phrase, or punctuation mark in your Call Analytics transcription output, along with various 
+    # <p>A word, phrase, or punctuation mark in your Call Analytics transcription output, along with various
     #       associated attributes, such as confidence score, type, and start and end times.</p>
     # @!attribute begin_offset_millis
     #   <p>The time, in milliseconds, from the beginning of the audio stream to the start of the identified item.</p>
@@ -160,8 +160,8 @@ module Aws::TranscribeStreaming
     #         your Call Analytics request. If <code>true</code>, there is a vocabulary filter match.</p>
     #   @return [Boolean]
     # @!attribute stable
-    #   <p>If partial result stabilization is enabled, <code>Stable</code> indicates whether the specified 
-    #         item is stable (<code>true</code>) or if it may change when the segment is complete 
+    #   <p>If partial result stabilization is enabled, <code>Stable</code> indicates whether the specified
+    #         item is stable (<code>true</code>) or if it may change when the segment is complete
     #         (<code>false</code>).</p>
     #   @return [Boolean]
     class CallAnalyticsItem < Struct.new(
@@ -205,29 +205,32 @@ module Aws::TranscribeStreaming
       end
     end
 
-    # <p>Contains detailed information about your real-time Call Analytics session. These details are 
+    # <p>Contains detailed information about your real-time Call Analytics session. These details are
     #       provided in the <code>UtteranceEvent</code> and <code>CategoryEvent</code> objects.</p>
     # @!attribute utterance_event
-    #   <p>Contains set of transcription results from one or more audio segments, along with additional 
+    #   <p>Contains set of transcription results from one or more audio segments, along with additional
     #         information per your request parameters. This can include information relating to channel definitions,
     #         partial result stabilization, sentiment, issue detection, and other transcription-related data.</p>
     #   @return [Types::UtteranceEvent]
     # @!attribute category_event
-    #   <p>Provides information on matched categories that were used to generate real-time supervisor 
+    #   <p>Provides information on matched categories that were used to generate real-time supervisor
     #         alerts.</p>
     #   @return [Types::CategoryEvent]
     # @!attribute bad_request_exception
-    #   <p>One or more arguments to the <code>StartStreamTranscription</code>, 
-    #         <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code> 
-    #         operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code> 
+    #   <p>One or more arguments to the <code>StartStreamTranscription</code>,
+    #         <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code>
+    #         operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code>
     #         used unsupported values. Check the specified parameters and try your request again.</p>
     #   @return [Types::BadRequestException]
     # @!attribute limit_exceeded_exception
-    #   <p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length
-    #         limit. Break your audio stream into smaller chunks and try your request again.</p>
+    #   <p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream
+    #         service quota. This error can also occur if a stream exceeds the maximum session duration. In rare
+    #         cases, this error can also occur if you increase your number of concurrent streams too quickly.
+    #         Reduce your number of concurrent streams and try your request again using an exponential backoff
+    #         strategy.</p>
     #   @return [Types::LimitExceededException]
     # @!attribute internal_failure_exception
-    #   <p>A problem occurred while processing the audio. Amazon Transcribe terminated 
+    #   <p>A problem occurred while processing the audio. Amazon Transcribe terminated
     #         processing.</p>
     #   @return [Types::InternalFailureException]
     # @!attribute conflict_exception
@@ -259,7 +262,7 @@ module Aws::TranscribeStreaming
       class Unknown < CallAnalyticsTranscriptResultStream; end
     end
 
-    # <p>Provides information on any <code>TranscriptFilterType</code> categories that matched your 
+    # <p>Provides information on any <code>TranscriptFilterType</code> categories that matched your
     #       transcription output. Matches are identified for each segment upon completion of that segment.</p>
     # @!attribute matched_categories
     #   <p>Lists the categories that were matched in your audio segment.</p>
@@ -301,14 +304,14 @@ module Aws::TranscribeStreaming
       end
     end
 
-    # <p>Provides the location, using character count, in your transcript where a match is identified. For example, 
+    # <p>Provides the location, using character count, in your transcript where a match is identified. For example,
     #       the location of an issue or a category match within a segment.</p>
     # @!attribute begin
     #   <p>Provides the character count of the first character where a match is identified. For example, the first
     #         character associated with an issue or a category match in a segment transcript.</p>
     #   @return [Integer]
     # @!attribute end
-    #   <p>Provides the character count of the last character where a match is identified. For example, the last 
+    #   <p>Provides the character count of the last character where a match is identified. For example, the last
     #         character associated with an issue or a category match in a segment transcript.</p>
     #   @return [Integer]
     class CharacterOffsets < Struct.new(
@@ -425,11 +428,11 @@ module Aws::TranscribeStreaming
     #   <p>Indicates which speaker is on which audio channel.</p>
     #   @return [Array<Types::ChannelDefinition>]
     # @!attribute post_call_analytics_settings
-    #   <p>Provides additional optional settings for your Call Analytics post-call request, including 
+    #   <p>Provides additional optional settings for your Call Analytics post-call request, including
     #         encryption and output locations for your redacted transcript.</p>
     #            <p>
-    #               <code>PostCallAnalyticsSettings</code> provides you with the same insights as a 
-    #         Call Analytics post-call transcription. Refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html">Post-call analytics</a> for more information 
+    #               <code>PostCallAnalyticsSettings</code> provides you with the same insights as a
+    #         Call Analytics post-call transcription. Refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html">Post-call analytics</a> for more information
     #         on this feature.</p>
     #   @return [Types::PostCallAnalyticsSettings]
     class ConfigurationEvent < Struct.new(
@@ -465,7 +468,7 @@ module Aws::TranscribeStreaming
     #   <p>The category of information identified. The only category is <code>PII</code>.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of PII identified. For example, <code>NAME</code> or 
+    #   <p>The type of PII identified. For example, <code>NAME</code> or
     #         <code>CREDIT_DEBIT_NUMBER</code>.</p>
     #   @return [String]
     # @!attribute content
@@ -518,7 +521,7 @@ module Aws::TranscribeStreaming
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A problem occurred while processing the audio. Amazon Transcribe terminated 
+    # <p>A problem occurred while processing the audio. Amazon Transcribe terminated
     #       processing.</p>
     # @!attribute message
     #   @return [String]
@@ -571,8 +574,8 @@ module Aws::TranscribeStreaming
     #         probability that the identified item correctly matches the item spoken in your media.</p>
     #   @return [Float]
     # @!attribute stable
-    #   <p>If partial result stabilization is enabled, <code>Stable</code> indicates whether the specified 
-    #         item is stable (<code>true</code>) or if it may change when the segment is complete 
+    #   <p>If partial result stabilization is enabled, <code>Stable</code> indicates whether the specified
+    #         item is stable (<code>true</code>) or if it may change when the segment is complete
     #         (<code>false</code>).</p>
     #   @return [Boolean]
     class Item < Struct.new(
@@ -598,7 +601,7 @@ module Aws::TranscribeStreaming
     end
 
     # <p>The language code that represents the language identified in your audio, including the associated
-    #       confidence score. If you enabled channel identification in your request and each channel contained a 
+    #       confidence score. If you enabled channel identification in your request and each channel contained a
     #       different language, you will have more than one <code>LanguageWithScore</code> result.</p>
     # @!attribute language_code
     #   <p>The language code of the identified language.</p>
@@ -621,8 +624,11 @@ module Aws::TranscribeStreaming
       end
     end
 
-    # <p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length
-    #       limit. Break your audio stream into smaller chunks and try your request again.</p>
+    # <p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream
+    #       service quota. This error can also occur if a stream exceeds the maximum session duration. In rare
+    #       cases, this error can also occur if you increase your number of concurrent streams too quickly.
+    #       Reduce your number of concurrent streams and try your request again using an exponential backoff
+    #       strategy.</p>
     # @!attribute message
     #   @return [String]
     class LimitExceededException < Struct.new(
@@ -643,7 +649,7 @@ module Aws::TranscribeStreaming
     #   <p>Contains words, phrases, or punctuation marks in your transcription output.</p>
     #   @return [Array<Types::MedicalItem>]
     # @!attribute entities
-    #   <p>Contains entities identified as personal health information (PHI) in your transcription 
+    #   <p>Contains entities identified as personal health information (PHI) in your transcription
     #               output.</p>
     #   @return [Array<Types::MedicalEntity>]
     class MedicalAlternative < Struct.new(
@@ -695,7 +701,7 @@ module Aws::TranscribeStreaming
       end
     end
 
-    # <p>A word, phrase, or punctuation mark in your transcription output, along with various 
+    # <p>A word, phrase, or punctuation mark in your transcription output, along with various
     #             associated attributes, such as confidence score, type, and start and end times.</p>
     # @!attribute start_time
     #   <p>The start time, in seconds, of the transcribed item.</p>
@@ -704,7 +710,7 @@ module Aws::TranscribeStreaming
     #   <p>The end time, in seconds, of the transcribed item.</p>
     #   @return [Float]
     # @!attribute type
-    #   <p>The type of item identified. Options are: <code>PRONUNCIATION</code> (spoken 
+    #   <p>The type of item identified. Options are: <code>PRONUNCIATION</code> (spoken
     #               words) and <code>PUNCTUATION</code>.</p>
     #   @return [String]
     # @!attribute content
@@ -739,11 +745,11 @@ module Aws::TranscribeStreaming
       end
     end
 
-    # <p>The <code>Result</code> associated with a 
+    # <p>The <code>Result</code> associated with a
     #             <code></code>.</p>
     #          <p>Contains a set of transcription results from one or more audio segments, along with
     #             additional information per your request parameters. This can include information relating to
-    #             alternative transcriptions, channel identification, partial result stabilization, language 
+    #             alternative transcriptions, channel identification, partial result stabilization, language
     #             identification, and other transcription-related data.</p>
     # @!attribute result_id
     #   <p>Provides a unique identifier for the <code>Result</code>.</p>
@@ -760,7 +766,7 @@ module Aws::TranscribeStreaming
     #                   <code>IsPartial</code> is <code>false</code>, the segment is complete.</p>
     #   @return [Boolean]
     # @!attribute alternatives
-    #   <p>A list of possible alternative transcriptions for the input audio. Each alternative may 
+    #   <p>A list of possible alternative transcriptions for the input audio. Each alternative may
     #               contain one or more of <code>Items</code>, <code>Entities</code>, or
     #               <code>Transcript</code>.</p>
     #   @return [Array<Types::MedicalAlternative>]
@@ -793,7 +799,7 @@ module Aws::TranscribeStreaming
     # @!attribute audio_chunk
     #   <p>
     #       An audio blob containing the next segment of audio from your application,
-    #       with a maximum duration of 1 second. 
+    #       with a maximum duration of 1 second.
     #       The maximum size in bytes varies based on audio properties.
     #     </p>
     #            <p>Find recommended size in <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#best-practices">Transcribing streaming best practices</a>.
@@ -802,11 +808,11 @@ module Aws::TranscribeStreaming
     #       Size calculation: <code>Duration (s) * Sample Rate (Hz) * Number of Channels * 2 (Bytes per Sample)</code>
     #            </p>
     #            <p>
-    #       For example, a 1-second chunk of 16 kHz, 2-channel, 16-bit audio would be 
+    #       For example, a 1-second chunk of 16 kHz, 2-channel, 16-bit audio would be
     #       <code>1 * 16000 * 2 * 2 = 64000 bytes</code>.
     #     </p>
     #            <p>
-    #       For 8 kHz, 1-channel, 16-bit audio, a 1-second chunk would be 
+    #       For 8 kHz, 1-channel, 16-bit audio, a 1-second chunk would be
     #       <code>1 * 8000 * 1 * 2 = 16000 bytes</code>.
     #     </p>
     #   @return [String]
@@ -855,7 +861,7 @@ module Aws::TranscribeStreaming
     # <p>Specify details to configure the streaming session, including channel definitions, encryption settings, post-stream analytics
     #       settings, resource access role ARN and vocabulary settings.
     #     </p>
-    #          <p>Whether you are starting a new session or resuming an existing session, 
+    #          <p>Whether you are starting a new session or resuming an existing session,
     #       your first event must be a <code>MedicalScribeConfigurationEvent</code>.
     #       If you are resuming a session, then this event must have the same configurations that you provided to start the session.
     #     </p>
@@ -951,7 +957,7 @@ module Aws::TranscribeStreaming
     #   @return [Hash<String, String>]
     # @!attribute kms_key_id
     #   <p>The ID of the KMS key you want to use for your streaming session. You
-    #         can specify its KMS key ID, key Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>. 
+    #         can specify its KMS key ID, key Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>.
     #         To specify a KMS key in a different Amazon Web Services account, you must use the key ARN or alias ARN.</p>
     #            <p>For example:</p>
     #            <ul>
@@ -967,13 +973,13 @@ module Aws::TranscribeStreaming
     #               </li>
     #               <li>
     #                  <p>
-    #             Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias  
+    #             Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
     #           </p>
     #               </li>
     #            </ul>
     #            <p>
-    #         To get the key ID and key ARN for a KMS key, use the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ListKeys.html">ListKeys</a> or <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html">DescribeKey</a> KMS API operations. 
-    #         To get the alias name and alias ARN, use <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ListAliases.html">ListKeys</a> API operation.     
+    #         To get the key ID and key ARN for a KMS key, use the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ListKeys.html">ListKeys</a> or <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html">DescribeKey</a> KMS API operations.
+    #         To get the alias name and alias ARN, use <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ListAliases.html">ListKeys</a> API operation.
     #       </p>
     #   @return [String]
     class MedicalScribeEncryptionSettings < Struct.new(
@@ -1016,7 +1022,7 @@ module Aws::TranscribeStreaming
     #   <p>Specify additional streaming session configurations beyond those provided in your initial start request headers. For example, specify
     #         channel definitions, encryption settings, and post-stream analytics settings.
     #       </p>
-    #            <p>Whether you are starting a new session or resuming an existing session, 
+    #            <p>Whether you are starting a new session or resuming an existing session,
     #         your first event must be a <code>MedicalScribeConfigurationEvent</code>.
     #       </p>
     #   @return [Types::MedicalScribeConfigurationEvent]
@@ -1081,17 +1087,20 @@ module Aws::TranscribeStreaming
     #       </p>
     #   @return [Types::MedicalScribeTranscriptEvent]
     # @!attribute bad_request_exception
-    #   <p>One or more arguments to the <code>StartStreamTranscription</code>, 
-    #         <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code> 
-    #         operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code> 
+    #   <p>One or more arguments to the <code>StartStreamTranscription</code>,
+    #         <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code>
+    #         operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code>
     #         used unsupported values. Check the specified parameters and try your request again.</p>
     #   @return [Types::BadRequestException]
     # @!attribute limit_exceeded_exception
-    #   <p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length
-    #         limit. Break your audio stream into smaller chunks and try your request again.</p>
+    #   <p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream
+    #         service quota. This error can also occur if a stream exceeds the maximum session duration. In rare
+    #         cases, this error can also occur if you increase your number of concurrent streams too quickly.
+    #         Reduce your number of concurrent streams and try your request again using an exponential backoff
+    #         strategy.</p>
     #   @return [Types::LimitExceededException]
     # @!attribute internal_failure_exception
-    #   <p>A problem occurred while processing the audio. Amazon Transcribe terminated 
+    #   <p>A problem occurred while processing the audio. Amazon Transcribe terminated
     #         processing.</p>
     #   @return [Types::InternalFailureException]
     # @!attribute conflict_exception
@@ -1133,7 +1142,7 @@ module Aws::TranscribeStreaming
     #             send an END_OF_SESSION event, Amazon Web Services HealthScribe starts the post-stream analytics.
     #             The session can't be resumed after this event is sent. After Amazon Web Services HealthScribe processes the event, the real-time <code>StreamStatus</code> is <code>COMPLETED</code>.
     #             You get the <code>StreamStatus</code> and other stream details with the <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_GetMedicalScribeStream.html">GetMedicalScribeStream</a> API operation.
-    #             For more information about different streaming statuses, see the <code>StreamStatus</code> description in the <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_MedicalScribeStreamDetails.html">MedicalScribeStreamDetails</a>.      
+    #             For more information about different streaming statuses, see the <code>StreamStatus</code> description in the <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_MedicalScribeStreamDetails.html">MedicalScribeStreamDetails</a>.
     #           </p>
     #               </li>
     #            </ul>
@@ -1212,7 +1221,7 @@ module Aws::TranscribeStreaming
     #               <p>This status is specific to real-time streaming.
     #         A <code>COMPLETED</code> status doesn't mean that the post-stream analytics is complete.
     #         To get status of an analytics result, check the <code>Status</code> field for the analytics result within the
-    #         <code>MedicalScribePostStreamAnalyticsResult</code>. For example, you can view the status of the 
+    #         <code>MedicalScribePostStreamAnalyticsResult</code>. For example, you can view the status of the
     #         <code>ClinicalNoteGenerationResult</code>.
     #       </p>
     #            </note>
@@ -1362,16 +1371,16 @@ module Aws::TranscribeStreaming
       end
     end
 
-    # <p>The <code>MedicalTranscript</code> associated with a 
+    # <p>The <code>MedicalTranscript</code> associated with a
     #             <code></code>.</p>
     #          <p>
-    #             <code>MedicalTranscript</code> contains <code>Results</code>, which contains a set of 
-    #             transcription results from one or more audio segments, along with additional information per your 
+    #             <code>MedicalTranscript</code> contains <code>Results</code>, which contains a set of
+    #             transcription results from one or more audio segments, along with additional information per your
     #             request parameters.</p>
     # @!attribute results
-    #   <p>Contains a set of transcription results from one or more audio segments, along with 
-    #               additional information per your request parameters. This can include information relating to 
-    #               alternative transcriptions, channel identification, partial result stabilization, language 
+    #   <p>Contains a set of transcription results from one or more audio segments, along with
+    #               additional information per your request parameters. This can include information relating to
+    #               alternative transcriptions, channel identification, partial result stabilization, language
     #               identification, and other transcription-related data.</p>
     #   @return [Array<Types::MedicalResult>]
     class MedicalTranscript < Struct.new(
@@ -1382,14 +1391,14 @@ module Aws::TranscribeStreaming
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The <code>MedicalTranscriptEvent</code> associated with a 
+    # <p>The <code>MedicalTranscriptEvent</code> associated with a
     #             <code>MedicalTranscriptResultStream</code>.</p>
-    #          <p>Contains a set of transcription results from one or more audio segments, along with additional 
+    #          <p>Contains a set of transcription results from one or more audio segments, along with additional
     #             information per your request parameters.</p>
     # @!attribute transcript
-    #   <p>Contains <code>Results</code>, which contains a set of transcription results from one or 
+    #   <p>Contains <code>Results</code>, which contains a set of transcription results from one or
     #               more audio segments, along with additional information per your request parameters. This can
-    #               include information relating to alternative transcriptions, channel identification, partial result 
+    #               include information relating to alternative transcriptions, channel identification, partial result
     #               stabilization, language identification, and other transcription-related data.</p>
     #   @return [Types::MedicalTranscript]
     class MedicalTranscriptEvent < Struct.new(
@@ -1402,25 +1411,28 @@ module Aws::TranscribeStreaming
 
     # <p>Contains detailed information about your streaming session.</p>
     # @!attribute transcript_event
-    #   <p>The <code>MedicalTranscriptEvent</code> associated with a 
+    #   <p>The <code>MedicalTranscriptEvent</code> associated with a
     #               <code>MedicalTranscriptResultStream</code>.</p>
-    #            <p>Contains a set of transcription results from one or more audio segments, along with 
+    #            <p>Contains a set of transcription results from one or more audio segments, along with
     #               additional information per your request parameters. This can include information relating to
-    #               alternative transcriptions, channel identification, partial result stabilization, language 
+    #               alternative transcriptions, channel identification, partial result stabilization, language
     #               identification, and other transcription-related data.</p>
     #   @return [Types::MedicalTranscriptEvent]
     # @!attribute bad_request_exception
-    #   <p>One or more arguments to the <code>StartStreamTranscription</code>, 
-    #         <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code> 
-    #         operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code> 
+    #   <p>One or more arguments to the <code>StartStreamTranscription</code>,
+    #         <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code>
+    #         operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code>
     #         used unsupported values. Check the specified parameters and try your request again.</p>
     #   @return [Types::BadRequestException]
     # @!attribute limit_exceeded_exception
-    #   <p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length
-    #         limit. Break your audio stream into smaller chunks and try your request again.</p>
+    #   <p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream
+    #         service quota. This error can also occur if a stream exceeds the maximum session duration. In rare
+    #         cases, this error can also occur if you increase your number of concurrent streams too quickly.
+    #         Reduce your number of concurrent streams and try your request again using an exponential backoff
+    #         strategy.</p>
     #   @return [Types::LimitExceededException]
     # @!attribute internal_failure_exception
-    #   <p>A problem occurred while processing the audio. Amazon Transcribe terminated 
+    #   <p>A problem occurred while processing the audio. Amazon Transcribe terminated
     #         processing.</p>
     #   @return [Types::InternalFailureException]
     # @!attribute conflict_exception
@@ -1462,19 +1474,19 @@ module Aws::TranscribeStreaming
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Allows you to specify additional settings for your Call Analytics post-call request, 
-    #       including output locations for your redacted transcript, which IAM role to use, 
+    # <p>Allows you to specify additional settings for your Call Analytics post-call request,
+    #       including output locations for your redacted transcript, which IAM role to use,
     #       and which encryption key to use.</p>
     #          <p>
-    #             <code>DataAccessRoleArn</code> and <code>OutputLocation</code> are required 
+    #             <code>DataAccessRoleArn</code> and <code>OutputLocation</code> are required
     #       fields.</p>
     #          <p>
-    #             <code>PostCallAnalyticsSettings</code> provides you with the same insights as a 
-    #       Call Analytics post-call transcription. Refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html">Post-call analytics</a> for more information 
+    #             <code>PostCallAnalyticsSettings</code> provides you with the same insights as a
+    #       Call Analytics post-call transcription. Refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html">Post-call analytics</a> for more information
     #       on this feature.</p>
     # @!attribute output_location
-    #   <p>The Amazon S3 location where you want your Call Analytics post-call 
-    #         transcription output stored. You can use any of the following formats to specify the output 
+    #   <p>The Amazon S3 location where you want your Call Analytics post-call
+    #         transcription output stored. You can use any of the following formats to specify the output
     #         location:</p>
     #            <ol>
     #               <li>
@@ -1491,7 +1503,7 @@ module Aws::TranscribeStreaming
     # @!attribute data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #         access the Amazon S3 bucket that contains your input files. If the role that you
-    #         specify doesn’t have the appropriate permissions to access the specified Amazon S3 
+    #         specify doesn’t have the appropriate permissions to access the specified Amazon S3
     #         location, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #         <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
@@ -1499,10 +1511,10 @@ module Aws::TranscribeStreaming
     #           ARNs</a>.</p>
     #   @return [String]
     # @!attribute content_redaction_output
-    #   <p>Specify whether you want only a redacted transcript or both a redacted and an unredacted 
-    #         transcript. If you choose redacted and unredacted, two JSON files are generated and stored in the 
+    #   <p>Specify whether you want only a redacted transcript or both a redacted and an unredacted
+    #         transcript. If you choose redacted and unredacted, two JSON files are generated and stored in the
     #         Amazon S3 output location you specify.</p>
-    #            <p>Note that to include <code>ContentRedactionOutput</code> in your request, you must 
+    #            <p>Note that to include <code>ContentRedactionOutput</code> in your request, you must
     #         enable content redaction (<code>ContentRedactionType</code>).</p>
     #   @return [String]
     # @!attribute output_encryption_kms_key_id
@@ -1543,7 +1555,7 @@ module Aws::TranscribeStreaming
     #             <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
     #               </li>
     #            </ol>
-    #            <p>Note that the role making the 
+    #            <p>Note that the role making the
     #         request must have permission to use the specified KMS key.</p>
     #   @return [String]
     class PostCallAnalyticsSettings < Struct.new(
@@ -1568,9 +1580,9 @@ module Aws::TranscribeStreaming
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The <code>Result</code> associated with a 
+    # <p>The <code>Result</code> associated with a
     #       <code></code>.</p>
-    #          <p>Contains a set of transcription results from one or more audio segments, along with additional 
+    #          <p>Contains a set of transcription results from one or more audio segments, along with additional
     #       information per your request parameters. This can include information relating to alternative
     #       transcriptions, channel identification, partial result stabilization, language identification, and other
     #       transcription-related data.</p>
@@ -1638,8 +1650,8 @@ module Aws::TranscribeStreaming
 
     # @!attribute language_code
     #   <p>Specify the language code that represents the language spoken in your audio.</p>
-    #            <p>For a list of languages supported with real-time Call Analytics, refer to the 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported 
+    #            <p>For a list of languages supported with real-time Call Analytics, refer to the
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported
     #           languages</a> table.</p>
     #   @return [String]
     # @!attribute media_sample_rate_hertz
@@ -1674,7 +1686,7 @@ module Aws::TranscribeStreaming
     #         in your request, Amazon Transcribe generates an ID and returns it in the response.</p>
     #   @return [String]
     # @!attribute audio_stream
-    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket 
+    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket
     #         data frames.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html">Transcribing streaming audio</a>.</p>
     #   @return [Types::AudioStream]
@@ -1683,7 +1695,7 @@ module Aws::TranscribeStreaming
     #         transcription. Note that vocabulary filter names are case sensitive.</p>
     #            <p>If the language of the specified custom vocabulary filter doesn't match the language identified in
     #         your media, the vocabulary filter is not applied to your transcription.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted
     #         words</a>.</p>
     #   @return [String]
     # @!attribute vocabulary_filter_method
@@ -1696,30 +1708,30 @@ module Aws::TranscribeStreaming
     #   <p>Specify the name of the custom language model that you want to use when processing your
     #         transcription. Note that language model names are case sensitive.</p>
     #            <p>The language of the specified language model must match the language code you specify
-    #         in your transcription request. If the languages don't match, the custom language model isn't applied. 
+    #         in your transcription request. If the languages don't match, the custom language model isn't applied.
     #         There are no errors or warnings associated with a language mismatch.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">Custom language models</a>.</p>
     #   @return [String]
     # @!attribute identify_language
     #   <p>Enables automatic language identification for your Call Analytics transcription.</p>
     #            <p>If you include <code>IdentifyLanguage</code>, you must include a list of
-    #         language codes, using <code>LanguageOptions</code>, that you think may be present in 
+    #         language codes, using <code>LanguageOptions</code>, that you think may be present in
     #         your audio stream. You must provide a minimum of two language selections.</p>
-    #            <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a 
-    #         preferred language can help Amazon Transcribe identify the language faster than if you omit this 
+    #            <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a
+    #         preferred language can help Amazon Transcribe identify the language faster than if you omit this
     #         parameter.</p>
-    #            <p>Note that you must include either <code>LanguageCode</code> or 
+    #            <p>Note that you must include either <code>LanguageCode</code> or
     #         <code>IdentifyLanguage</code> in your request. If you include both parameters, your transcription job
     #         fails.</p>
     #   @return [Boolean]
     # @!attribute language_options
-    #   <p>Specify two or more language codes that represent the languages you think may be present 
+    #   <p>Specify two or more language codes that represent the languages you think may be present
     #         in your media.</p>
     #            <p>Including language options can improve the accuracy of language identification.</p>
-    #            <p>If you include <code>LanguageOptions</code> in your request, you must also include 
+    #            <p>If you include <code>LanguageOptions</code> in your request, you must also include
     #         <code>IdentifyLanguage</code>.</p>
-    #            <p>For a list of languages supported with Call Analytics streaming, refer to the 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported 
+    #            <p>For a list of languages supported with Call Analytics streaming, refer to the
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported
     #           languages</a> table.</p>
     #            <important>
     #               <p>You can only include one language dialect per language per stream. For example, you
@@ -1727,7 +1739,7 @@ module Aws::TranscribeStreaming
     #            </important>
     #   @return [String]
     # @!attribute preferred_language
-    #   <p>Specify a preferred language from the subset of languages codes you specified in 
+    #   <p>Specify a preferred language from the subset of languages codes you specified in
     #         <code>LanguageOptions</code>.</p>
     #            <p>You can only use this parameter if you've included <code>IdentifyLanguage</code> and
     #           <code>LanguageOptions</code> in your request.</p>
@@ -1749,31 +1761,31 @@ module Aws::TranscribeStreaming
     #         your Call Analytics transcription. Note that vocabulary filter names are case sensitive.</p>
     #            <p>These filters serve to customize the transcript output.</p>
     #            <important>
-    #               <p>This parameter is only intended for use <b>with</b> 
-    #           the <code>IdentifyLanguage</code> parameter. If you're <b>not</b> 
-    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter 
+    #               <p>This parameter is only intended for use <b>with</b>
+    #           the <code>IdentifyLanguage</code> parameter. If you're <b>not</b>
+    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter
     #           with your transcription, use the <code>VocabularyFilterName</code> parameter instead.</p>
     #            </important>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted
     #         words</a>.</p>
     #   @return [String]
     # @!attribute enable_partial_results_stabilization
     #   <p>Enables partial result stabilization for your transcription. Partial result stabilization can reduce
-    #         latency in your output, but may impact accuracy. For more information, see 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result 
+    #         latency in your output, but may impact accuracy. For more information, see
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result
     #           stabilization</a>.</p>
     #   @return [Boolean]
     # @!attribute partial_results_stability
-    #   <p>Specify the level of stability to use when you enable partial results stabilization 
+    #   <p>Specify the level of stability to use when you enable partial results stabilization
     #         (<code>EnablePartialResultsStabilization</code>).</p>
     #            <p>Low stability provides the highest accuracy. High stability transcribes faster, but with slightly
     #         lower accuracy.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result
     #         stabilization</a>.</p>
     #   @return [String]
     # @!attribute content_identification_type
     #   <p>Labels all personally identifiable information (PII) identified in your transcript.</p>
-    #            <p>Content identification is performed at the segment level; PII specified in 
+    #            <p>Content identification is performed at the segment level; PII specified in
     #         <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment. If you don't
     #         include <code>PiiEntityTypes</code> in your request, all PII is identified.</p>
     #            <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>
@@ -1784,7 +1796,7 @@ module Aws::TranscribeStreaming
     #   @return [String]
     # @!attribute content_redaction_type
     #   <p>Redacts all personally identifiable information (PII) identified in your transcript.</p>
-    #            <p>Content redaction is performed at the segment level; PII specified in 
+    #            <p>Content redaction is performed at the segment level; PII specified in
     #         <code>PiiEntityTypes</code> is redacted upon complete transcription of an audio segment. If you don't
     #         include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>
     #            <p>You can’t set <code>ContentRedactionType</code> and <code>ContentIdentificationType</code>
@@ -1793,19 +1805,19 @@ module Aws::TranscribeStreaming
     #         information</a>.</p>
     #   @return [String]
     # @!attribute pii_entity_types
-    #   <p>Specify which types of personally identifiable information (PII) you want to redact in your 
-    #         transcript. You can include as many types as you'd like, or you can select 
+    #   <p>Specify which types of personally identifiable information (PII) you want to redact in your
+    #         transcript. You can include as many types as you'd like, or you can select
     #         <code>ALL</code>.</p>
-    #            <p>Values must be comma-separated and can include: <code>ADDRESS</code>, 
+    #            <p>Values must be comma-separated and can include: <code>ADDRESS</code>,
     #         <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,
     #         <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,
-    #         <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, 
-    #         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, 
+    #         <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>,
+    #         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>,
     #         <code>SSN</code>, or <code>ALL</code>.</p>
-    #            <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include 
+    #            <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include
     #         <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>
-    #            <p>If you include <code>ContentRedactionType</code> or 
-    #         <code>ContentIdentificationType</code> in your request, but do not include 
+    #            <p>If you include <code>ContentRedactionType</code> or
+    #         <code>ContentIdentificationType</code> in your request, but do not include
     #         <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>
     #   @return [String]
     class StartCallAnalyticsStreamTranscriptionRequest < Struct.new(
@@ -1863,7 +1875,7 @@ module Aws::TranscribeStreaming
     #   <p>Provides the vocabulary filtering method used in your Call Analytics transcription.</p>
     #   @return [String]
     # @!attribute language_model_name
-    #   <p>Provides the name of the custom language model that you specified in your Call Analytics 
+    #   <p>Provides the name of the custom language model that you specified in your Call Analytics
     #         request.</p>
     #   @return [String]
     # @!attribute identify_language
@@ -2059,7 +2071,7 @@ module Aws::TranscribeStreaming
     #   <p>Specify the medical specialty contained in your audio.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>Specify the type of input audio. For example, choose <code>DICTATION</code> for a 
+    #   <p>Specify the type of input audio. For example, choose <code>DICTATION</code> for a
     #               provider dictating patient notes and <code>CONVERSATION</code> for a dialogue between a
     #               patient and a medical professional.</p>
     #   @return [String]
@@ -2069,12 +2081,12 @@ module Aws::TranscribeStreaming
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html">Partitioning speakers (diarization)</a>.</p>
     #   @return [Boolean]
     # @!attribute session_id
-    #   <p>Specify a name for your transcription session. If you don't include this parameter in 
+    #   <p>Specify a name for your transcription session. If you don't include this parameter in
     #               your request, Amazon Transcribe Medical generates an ID and returns it in the
     #               response.</p>
     #   @return [String]
     # @!attribute audio_stream
-    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket 
+    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket
     #         data frames.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html">Transcribing streaming audio</a>.</p>
     #   @return [Types::AudioStream]
@@ -2082,17 +2094,17 @@ module Aws::TranscribeStreaming
     #   <p>Enables channel identification in multi-channel audio.</p>
     #            <p>Channel identification transcribes the audio on each channel independently, then appends
     #               the output for each channel into one transcript.</p>
-    #            <p>If you have multi-channel audio and do not enable channel identification, your audio is 
+    #            <p>If you have multi-channel audio and do not enable channel identification, your audio is
     #               transcribed in a continuous manner and your transcript is not separated by channel.</p>
-    #            <p>If you include <code>EnableChannelIdentification</code> in your request, you must also 
+    #            <p>If you include <code>EnableChannelIdentification</code> in your request, you must also
     #               include <code>NumberOfChannels</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html">Transcribing multi-channel audio</a>.</p>
     #   @return [Boolean]
     # @!attribute number_of_channels
-    #   <p>Specify the number of channels in your audio stream. This value must be 
-    #               <code>2</code>, as only two channels are supported. If your audio doesn't contain 
+    #   <p>Specify the number of channels in your audio stream. This value must be
+    #               <code>2</code>, as only two channels are supported. If your audio doesn't contain
     #               multiple channels, do not include this parameter in your request.</p>
-    #            <p>If you include <code>NumberOfChannels</code> in your request, you must also 
+    #            <p>If you include <code>NumberOfChannels</code> in your request, you must also
     #               include <code>EnableChannelIdentification</code>.</p>
     #   @return [Integer]
     # @!attribute content_identification_type
@@ -2189,10 +2201,10 @@ module Aws::TranscribeStreaming
 
     # @!attribute language_code
     #   <p>Specify the language code that represents the language spoken in your audio.</p>
-    #            <p>If you're unsure of the language spoken in your audio, consider using 
+    #            <p>If you're unsure of the language spoken in your audio, consider using
     #         <code>IdentifyLanguage</code> to enable automatic language identification.</p>
-    #            <p>For a list of languages supported with Amazon Transcribe streaming, refer to the 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported 
+    #            <p>For a list of languages supported with Amazon Transcribe streaming, refer to the
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported
     #           languages</a> table.</p>
     #   @return [String]
     # @!attribute media_sample_rate_hertz
@@ -2229,11 +2241,11 @@ module Aws::TranscribeStreaming
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html">Custom vocabularies</a>.</p>
     #   @return [String]
     # @!attribute session_id
-    #   <p>Specify a name for your transcription session. If you don't include this parameter in your request, 
+    #   <p>Specify a name for your transcription session. If you don't include this parameter in your request,
     #         Amazon Transcribe generates an ID and returns it in the response.</p>
     #   @return [String]
     # @!attribute audio_stream
-    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket 
+    #   <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket
     #         data frames.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html">Transcribing streaming audio</a>.</p>
     #   @return [Types::AudioStream]
@@ -2248,7 +2260,7 @@ module Aws::TranscribeStreaming
     #           in your request and want to use one or more vocabulary filters with your transcription, use
     #           the <code>VocabularyFilterNames</code> parameter instead.</p>
     #            </important>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted
     #         words</a>.</p>
     #   @return [String]
     # @!attribute vocabulary_filter_method
@@ -2258,44 +2270,44 @@ module Aws::TranscribeStreaming
     #            <p>To flag words without changing them, choose <code>tag</code>.</p>
     #   @return [String]
     # @!attribute show_speaker_label
-    #   <p>Enables speaker partitioning (diarization) in your transcription output. Speaker partitioning 
+    #   <p>Enables speaker partitioning (diarization) in your transcription output. Speaker partitioning
     #         labels the speech from individual speakers in your media file.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html">Partitioning speakers (diarization)</a>.</p>
     #   @return [Boolean]
     # @!attribute enable_channel_identification
     #   <p>Enables channel identification in multi-channel audio.</p>
-    #            <p>Channel identification transcribes the audio on each channel independently, then appends the 
+    #            <p>Channel identification transcribes the audio on each channel independently, then appends the
     #         output for each channel into one transcript.</p>
-    #            <p>If you have multi-channel audio and do not enable channel identification, your audio is 
+    #            <p>If you have multi-channel audio and do not enable channel identification, your audio is
     #         transcribed in a continuous manner and your transcript is not separated by channel.</p>
-    #            <p>If you include <code>EnableChannelIdentification</code> in your request, you must also 
+    #            <p>If you include <code>EnableChannelIdentification</code> in your request, you must also
     #         include <code>NumberOfChannels</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html">Transcribing multi-channel audio</a>.</p>
     #   @return [Boolean]
     # @!attribute number_of_channels
-    #   <p>Specify the number of channels in your audio stream. This value must be 
-    #         <code>2</code>, as only two channels are supported. If your audio doesn't contain 
+    #   <p>Specify the number of channels in your audio stream. This value must be
+    #         <code>2</code>, as only two channels are supported. If your audio doesn't contain
     #         multiple channels, do not include this parameter in your request.</p>
-    #            <p>If you include <code>NumberOfChannels</code> in your request, you must also 
+    #            <p>If you include <code>NumberOfChannels</code> in your request, you must also
     #         include <code>EnableChannelIdentification</code>.</p>
     #   @return [Integer]
     # @!attribute enable_partial_results_stabilization
     #   <p>Enables partial result stabilization for your transcription. Partial result stabilization can reduce
-    #         latency in your output, but may impact accuracy. For more information, see 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result 
+    #         latency in your output, but may impact accuracy. For more information, see
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result
     #         stabilization</a>.</p>
     #   @return [Boolean]
     # @!attribute partial_results_stability
-    #   <p>Specify the level of stability to use when you enable partial results stabilization 
+    #   <p>Specify the level of stability to use when you enable partial results stabilization
     #         (<code>EnablePartialResultsStabilization</code>).</p>
     #            <p>Low stability provides the highest accuracy. High stability transcribes faster, but with slightly
     #         lower accuracy.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html#streaming-partial-result-stabilization">Partial-result
     #         stabilization</a>.</p>
     #   @return [String]
     # @!attribute content_identification_type
     #   <p>Labels all personally identifiable information (PII) identified in your transcript.</p>
-    #            <p>Content identification is performed at the segment level; PII specified in 
+    #            <p>Content identification is performed at the segment level; PII specified in
     #         <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment. If you don't
     #         include <code>PiiEntityTypes</code> in your request, all PII is identified.</p>
     #            <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>
@@ -2306,7 +2318,7 @@ module Aws::TranscribeStreaming
     #   @return [String]
     # @!attribute content_redaction_type
     #   <p>Redacts all personally identifiable information (PII) identified in your transcript.</p>
-    #            <p>Content redaction is performed at the segment level; PII specified in 
+    #            <p>Content redaction is performed at the segment level; PII specified in
     #         <code>PiiEntityTypes</code> is redacted upon complete transcription of an audio segment. If you don't
     #         include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>
     #            <p>You can’t set <code>ContentRedactionType</code> and <code>ContentIdentificationType</code>
@@ -2315,54 +2327,56 @@ module Aws::TranscribeStreaming
     #         information</a>.</p>
     #   @return [String]
     # @!attribute pii_entity_types
-    #   <p>Specify which types of personally identifiable information (PII) you want to redact in your 
-    #         transcript. You can include as many types as you'd like, or you can select 
+    #   <p>Specify which types of personally identifiable information (PII) you want to redact in your
+    #         transcript. You can include as many types as you'd like, or you can select
     #         <code>ALL</code>.</p>
-    #            <p>Values must be comma-separated and can include: <code>ADDRESS</code>, 
+    #            <p>Values must be comma-separated and can include: <code>ADDRESS</code>,
     #         <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,
     #         <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,
-    #         <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, 
-    #         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, 
-    #         <code>SSN</code>, or <code>ALL</code>.</p>
-    #            <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include 
+    #         <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>,
+    #         <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>,
+    #         <code>SSN</code>, <code>AGE</code>, <code>DATE_TIME</code>,
+    #         <code>LICENSE_PLATE</code>, <code>PASSPORT_NUMBER</code>,
+    #         <code>PASSWORD</code>, <code>USERNAME</code>, <code>VEHICLE_IDENTIFICATION_NUMBER</code>, or <code>ALL</code>.</p>
+    #            <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include
     #         <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>
-    #            <p>If you include <code>ContentRedactionType</code> or 
-    #         <code>ContentIdentificationType</code> in your request, but do not include 
+    #            <p>If you include <code>ContentRedactionType</code> or
+    #         <code>ContentIdentificationType</code> in your request, but do not include
     #         <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>
     #   @return [String]
     # @!attribute language_model_name
     #   <p>Specify the name of the custom language model that you want to use when processing your
     #         transcription. Note that language model names are case sensitive.</p>
     #            <p>The language of the specified language model must match the language code you specify
-    #         in your transcription request. If the languages don't match, the custom language model isn't applied. 
+    #         in your transcription request. If the languages don't match, the custom language model isn't applied.
     #         There are no errors or warnings associated with a language mismatch.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">Custom language models</a>.</p>
     #   @return [String]
     # @!attribute identify_language
     #   <p>Enables automatic language identification for your transcription.</p>
     #            <p>If you include <code>IdentifyLanguage</code>, you must include a list of
-    #         language codes, using <code>LanguageOptions</code>, that you think may be present in 
+    #         language codes, using <code>LanguageOptions</code>, that you think may be present in
     #         your audio stream. </p>
-    #            <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a 
-    #         preferred language can help Amazon Transcribe identify the language faster than if you omit this 
+    #            <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a
+    #         preferred language can help Amazon Transcribe identify the language faster than if you omit this
     #         parameter.</p>
-    #            <p>If you have multi-channel audio that contains different languages on each channel, and you've 
-    #         enabled channel identification, automatic language identification identifies the dominant language on 
+    #            <p>If you have multi-channel audio that contains different languages on each channel, and you've
+    #         enabled channel identification, automatic language identification identifies the dominant language on
     #         each audio channel.</p>
-    #            <p>Note that you must include either <code>LanguageCode</code> or 
+    #            <p>Note that you must include either <code>LanguageCode</code> or
     #         <code>IdentifyLanguage</code> or <code>IdentifyMultipleLanguages</code> in your request. If you include more than one of these parameters, your transcription job
     #         fails.</p>
-    #            <p>Streaming language identification can't be combined with custom language models or 
+    #            <p>Streaming language identification can't be combined with custom language models or
     #         redaction.</p>
     #   @return [Boolean]
     # @!attribute language_options
-    #   <p>Specify two or more language codes that represent the languages you think may be present 
+    #   <p>Specify two or more language codes that represent the languages you think may be present
     #         in your media; including more than five is not recommended.</p>
     #            <p>Including language options can improve the accuracy of language identification.</p>
-    #            <p>If you include <code>LanguageOptions</code> in your request, you must also include 
+    #            <p>If you include <code>LanguageOptions</code> in your request, you must also include
     #         <code>IdentifyLanguage</code> or <code>IdentifyMultipleLanguages</code>.</p>
-    #            <p>For a list of languages supported with Amazon Transcribe streaming, refer to the 
-    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported 
+    #            <p>For a list of languages supported with Amazon Transcribe streaming, refer to the
+    #         <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported
     #           languages</a> table.</p>
     #            <important>
     #               <p>You can only include one language dialect per language per stream. For example, you
@@ -2370,7 +2384,7 @@ module Aws::TranscribeStreaming
     #            </important>
     #   @return [String]
     # @!attribute preferred_language
-    #   <p>Specify a preferred language from the subset of languages codes you specified in 
+    #   <p>Specify a preferred language from the subset of languages codes you specified in
     #         <code>LanguageOptions</code>.</p>
     #            <p>You can only use this parameter if you've included <code>IdentifyLanguage</code> and
     #           <code>LanguageOptions</code> in your request.</p>
@@ -2384,7 +2398,7 @@ module Aws::TranscribeStreaming
     # @!attribute vocabulary_names
     #   <p>Specify the names of the custom vocabularies that you want to use when processing your
     #         transcription. Note that vocabulary names are case sensitive.</p>
-    #            <p>If none of the languages of the specified custom vocabularies match the language identified in 
+    #            <p>If none of the languages of the specified custom vocabularies match the language identified in
     #         your media, your job fails.</p>
     #            <important>
     #               <p>This parameter is only intended for use <b>with</b> the
@@ -2400,13 +2414,37 @@ module Aws::TranscribeStreaming
     #            <p>If none of the languages of the specified custom vocabulary filters match the language identified
     #         in your media, your job fails.</p>
     #            <important>
-    #               <p>This parameter is only intended for use <b>with</b> 
-    #           the <code>IdentifyLanguage</code> parameter. If you're <b>not</b> 
-    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter 
+    #               <p>This parameter is only intended for use <b>with</b>
+    #           the <code>IdentifyLanguage</code> parameter. If you're <b>not</b>
+    #           including <code>IdentifyLanguage</code> in your request and want to use a custom vocabulary filter
     #           with your transcription, use the <code>VocabularyFilterName</code> parameter instead.</p>
     #            </important>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted 
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted
     #         words</a>.</p>
+    #   @return [String]
+    # @!attribute session_resume_window
+    #   <p>Specify the time window, in minutes, during which your transcription session can be resumed,
+    #          measured from the stream start time. This optional parameter accepts integer values from 1 to 300 (5 hours).</p>
+    #            <p> For example, if your stream starts at 1 PM and you specify a <code>SessionResumeWindow</code> of 30 minutes,
+    #         you can reconnect to the session as many times as you want until 1:30 PM. </p>
+    #   @return [Integer]
+    # @!attribute transcript_format
+    #   <p>Specify how numbers, dates, and other alphanumeric entities are rendered in your
+    #         transcription results.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>WRITTEN</code> renders these entities in their standard written form
+    #           (for example, <code>$50</code>, <code>10:30 AM</code>, and <code>101</code>).</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SPOKEN</code> renders these entities as words, exactly as they were
+    #           spoken (for example, <code>fifty dollars</code>, <code>ten thirty a m</code>, and
+    #           <code>one oh one</code>).</p>
+    #               </li>
+    #            </ul>
+    #            <p>If you don't specify a value, Amazon Transcribe uses <code>WRITTEN</code> by default.</p>
     #   @return [String]
     class StartStreamTranscriptionRequest < Struct.new(
       nil,
@@ -2433,6 +2471,8 @@ module Aws::TranscribeStreaming
       :identify_multiple_languages,
       :vocabulary_names,
       :vocabulary_filter_names,
+      :session_resume_window,
+      :transcript_format,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2494,7 +2534,7 @@ module Aws::TranscribeStreaming
     #   <p>Provides the name of the custom language model that you specified in your request.</p>
     #   @return [String]
     # @!attribute identify_language
-    #   <p>Shows whether automatic language identification was enabled for your 
+    #   <p>Shows whether automatic language identification was enabled for your
     #         transcription.</p>
     #   @return [Boolean]
     # @!attribute language_options
@@ -2512,6 +2552,12 @@ module Aws::TranscribeStreaming
     # @!attribute vocabulary_filter_names
     #   <p>Provides the names of the custom vocabulary filters that you specified in your
     #         request.</p>
+    #   @return [String]
+    # @!attribute session_resume_window
+    #   <p>Provides the session resume window, in minutes, that you specified in your request.</p>
+    #   @return [Integer]
+    # @!attribute transcript_format
+    #   <p>Provides the transcript format that you specified in your request.</p>
     #   @return [String]
     class StartStreamTranscriptionResponse < Struct.new(
       nil,
@@ -2539,6 +2585,8 @@ module Aws::TranscribeStreaming
       :identify_multiple_languages,
       :vocabulary_names,
       :vocabulary_filter_names,
+      :session_resume_window,
+      :transcript_format,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2555,11 +2603,11 @@ module Aws::TranscribeStreaming
 
     # <p>Contains the timestamp range (start time through end time) of a matched category.</p>
     # @!attribute begin_offset_millis
-    #   <p>The time, in milliseconds, from the beginning of the audio stream to the start of the category 
+    #   <p>The time, in milliseconds, from the beginning of the audio stream to the start of the category
     #         match.</p>
     #   @return [Integer]
     # @!attribute end_offset_millis
-    #   <p>The time, in milliseconds, from the beginning of the audio stream to the end of the category 
+    #   <p>The time, in milliseconds, from the beginning of the audio stream to the end of the category
     #         match.</p>
     #   @return [Integer]
     class TimestampRange < Struct.new(
@@ -2571,14 +2619,14 @@ module Aws::TranscribeStreaming
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The <code>Transcript</code> associated with a 
+    # <p>The <code>Transcript</code> associated with a
     #       <code></code>.</p>
     #          <p>
     #             <code>Transcript</code> contains <code>Results</code>, which contains a set of transcription
-    #       results from one or more audio segments, along with additional information per your request 
+    #       results from one or more audio segments, along with additional information per your request
     #       parameters.</p>
     # @!attribute results
-    #   <p>Contains a set of transcription results from one or more audio segments, along with additional 
+    #   <p>Contains a set of transcription results from one or more audio segments, along with additional
     #         information per your request parameters. This can include information relating to alternative
     #         transcriptions, channel identification, partial result stabilization, language identification, and other
     #         transcription-related data.</p>
@@ -2591,9 +2639,9 @@ module Aws::TranscribeStreaming
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The <code>TranscriptEvent</code> associated with a 
+    # <p>The <code>TranscriptEvent</code> associated with a
     #       <code>TranscriptResultStream</code>.</p>
-    #          <p>Contains a set of transcription results from one or more audio segments, along with additional 
+    #          <p>Contains a set of transcription results from one or more audio segments, along with additional
     #       information per your request parameters.</p>
     # @!attribute transcript
     #   <p>Contains <code>Results</code>, which contains a set of transcription results from one or
@@ -2611,9 +2659,9 @@ module Aws::TranscribeStreaming
 
     # <p>Contains detailed information about your streaming session.</p>
     # @!attribute transcript_event
-    #   <p>Contains <code>Transcript</code>, which contains <code>Results</code>. The 
-    #         <code></code> object contains a set of transcription 
-    #         results from one or more audio segments, along with additional information per your request 
+    #   <p>Contains <code>Transcript</code>, which contains <code>Results</code>. The
+    #         <code></code> object contains a set of transcription
+    #         results from one or more audio segments, along with additional information per your request
     #         parameters.</p>
     #   @return [Types::TranscriptEvent]
     # @!attribute bad_request_exception
@@ -2621,11 +2669,14 @@ module Aws::TranscribeStreaming
     #         and try your request again.</p>
     #   @return [Types::BadRequestException]
     # @!attribute limit_exceeded_exception
-    #   <p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length
-    #         limit. Break your audio stream into smaller chunks and try your request again.</p>
+    #   <p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream
+    #         service quota. This error can also occur if a stream exceeds the maximum session duration. In rare
+    #         cases, this error can also occur if you increase your number of concurrent streams too quickly.
+    #         Reduce your number of concurrent streams and try your request again using an exponential backoff
+    #         strategy.</p>
     #   @return [Types::LimitExceededException]
     # @!attribute internal_failure_exception
-    #   <p>A problem occurred while processing the audio. Amazon Transcribe terminated 
+    #   <p>A problem occurred while processing the audio. Amazon Transcribe terminated
     #         processing.</p>
     #   @return [Types::InternalFailureException]
     # @!attribute conflict_exception
@@ -2656,18 +2707,18 @@ module Aws::TranscribeStreaming
       class Unknown < TranscriptResultStream; end
     end
 
-    # <p>Contains set of transcription results from one or more audio segments, along with additional 
-    #       information about the parameters included in your request. For example, channel definitions, partial result 
+    # <p>Contains set of transcription results from one or more audio segments, along with additional
+    #       information about the parameters included in your request. For example, channel definitions, partial result
     #       stabilization, sentiment, and issue detection.</p>
     # @!attribute utterance_id
     #   <p>The unique identifier that is associated with the specified <code>UtteranceEvent</code>.</p>
     #   @return [String]
     # @!attribute is_partial
-    #   <p>Indicates whether the segment in the <code>UtteranceEvent</code> is complete 
+    #   <p>Indicates whether the segment in the <code>UtteranceEvent</code> is complete
     #         (<code>FALSE</code>) or partial (<code>TRUE</code>).</p>
     #   @return [Boolean]
     # @!attribute participant_role
-    #   <p>Provides the role of the speaker for each audio channel, either <code>CUSTOMER</code> or 
+    #   <p>Provides the role of the speaker for each audio channel, either <code>CUSTOMER</code> or
     #         <code>AGENT</code>.</p>
     #   @return [String]
     # @!attribute begin_offset_millis
@@ -2675,18 +2726,18 @@ module Aws::TranscribeStreaming
     #         <code>UtteranceEvent</code>.</p>
     #   @return [Integer]
     # @!attribute end_offset_millis
-    #   <p>The time, in milliseconds, from the beginning of the audio stream to the start of the 
+    #   <p>The time, in milliseconds, from the beginning of the audio stream to the start of the
     #         <code>UtteranceEvent</code>.</p>
     #   @return [Integer]
     # @!attribute transcript
     #   <p>Contains transcribed text.</p>
     #   @return [String]
     # @!attribute items
-    #   <p>Contains words, phrases, or punctuation marks that are associated with the specified 
+    #   <p>Contains words, phrases, or punctuation marks that are associated with the specified
     #         <code>UtteranceEvent</code>.</p>
     #   @return [Array<Types::CallAnalyticsItem>]
     # @!attribute entities
-    #   <p>Contains entities identified as personally identifiable information (PII) in your transcription 
+    #   <p>Contains entities identified as personally identifiable information (PII) in your transcription
     #         output.</p>
     #   @return [Array<Types::CallAnalyticsEntity>]
     # @!attribute sentiment

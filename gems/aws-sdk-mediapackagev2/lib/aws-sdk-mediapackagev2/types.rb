@@ -115,8 +115,17 @@ module Aws::MediaPackageV2
     #   <p>Any descriptive information that you want to add to the channel for future identification purposes.</p>
     #   @return [String]
     # @!attribute input_type
-    #   <p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>
+    #   <p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>
     #   @return [String]
+    # @!attribute output_locking_mode
+    #   <p>The output locking mode configured for the channel.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>EPOCH_LOCKED</code> - The channel uses epoch-locked behavior with deterministic sequence numbering and fixed segment boundaries aligned to epoch time.</p> </li> <li> <p> <code>NON_EPOCH_LOCKED</code> - The channel uses non-epoch-locked behavior with duration-based segment combining and monotonically increasing sequence numbers starting from 0.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute multiview_configuration
+    #   <p>The multiview configuration for the channel. This is present only when <code>InputType</code> is <code>MULTIVIEW</code>.</p>
+    #   @return [Types::MultiviewConfiguration]
+    # @!attribute attached_multiview_channels
+    #   <p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field.</p>
+    #   @return [Array<String>]
     class ChannelListConfiguration < Struct.new(
       nil,
       :arn,
@@ -126,6 +135,9 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :input_type,
+      :output_locking_mode,
+      :multiview_configuration,
+      :attached_multiview_channels,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -141,6 +153,18 @@ module Aws::MediaPackageV2
       nil,
       :message,
       :conflict_exception_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration that controls the content key period timing information that MediaPackage signals to your DRM key provider.</p>
+    # @!attribute content_key_period_timing
+    #   <p>Specifies what timing information MediaPackage signals in the <code>ContentKeyPeriod</code> to your DRM key provider. If you don't specify a value, the default is <code>INDEX_ONLY</code>. Signaling start and end times (<code>START_END_ONLY</code> or <code>INDEX_WITH_START_END</code>) also requires key rotation to be enabled.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>INDEX_ONLY</code> - Signals only the content key index. This is the default and matches the current behavior. It's supported for both SPEKE Version 2.0 and 2.1.</p> </li> <li> <p> <code>START_END_ONLY</code> - Signals only the start and end times the key is used for. Requires <code>SpekeVersion</code> <code>V2_1</code>.</p> </li> <li> <p> <code>INDEX_WITH_START_END</code> - Signals both the content key index and the start and end times the key is used for. Requires <code>SpekeVersion</code> <code>V2_1</code>.</p> </li> </ul>
+    #   @return [String]
+    class ContentKeyPeriodConfiguration < Struct.new(
+      nil,
+      :content_key_period_timing,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -218,7 +242,7 @@ module Aws::MediaPackageV2
     #   <p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>
     #   @return [String]
     # @!attribute input_type
-    #   <p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>
+    #   <p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>
     #   @return [String]
     # @!attribute description
     #   <p>Enter any descriptive text that helps you to identify the channel.</p>
@@ -229,6 +253,12 @@ module Aws::MediaPackageV2
     # @!attribute output_header_configuration
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Types::OutputHeaderConfiguration]
+    # @!attribute multiview_configuration
+    #   <p>The multiview configuration for the channel. This setting is required when <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type.</p>
+    #   @return [Types::MultiviewConfiguration]
+    # @!attribute output_locking_mode
+    #   <p>The output locking mode for the channel. This setting is only valid when <code>InputType</code> is <code>CMAF</code>. This value is immutable after channel creation. If you don't specify a value, the default is <code>EPOCH_LOCKED</code>.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>EPOCH_LOCKED</code> - The channel uses epoch-locked behavior with deterministic sequence numbering and fixed segment boundaries aligned to epoch time. This mode supports cross-region synchronization and failover.</p> </li> <li> <p> <code>NON_EPOCH_LOCKED</code> - The channel uses non-epoch-locked behavior with duration-based segment combining and monotonically increasing sequence numbers starting from 0. This mode does not support cross-region synchronization or failover.</p> </li> </ul>
+    #   @return [String]
     # @!attribute tags
     #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     #   @return [Hash<String, String>]
@@ -241,12 +271,20 @@ module Aws::MediaPackageV2
       :description,
       :input_switch_configuration,
       :output_header_configuration,
+      :multiview_configuration,
+      :output_locking_mode,
       :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute multiview_configuration
+    #   <p>The multiview configuration for the channel. This is present only when <code>InputType</code> is <code>MULTIVIEW</code>.</p>
+    #   @return [Types::MultiviewConfiguration]
+    # @!attribute attached_multiview_channels
+    #   <p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.</p>
+    #   @return [Array<String>]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) associated with the resource.</p>
     #   @return [String]
@@ -269,7 +307,7 @@ module Aws::MediaPackageV2
     #   <p>The list of ingest endpoints.</p>
     #   @return [Array<Types::IngestEndpoint>]
     # @!attribute input_type
-    #   <p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>
+    #   <p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>
     #   @return [String]
     # @!attribute e_tag
     #   <p>The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.</p>
@@ -283,8 +321,13 @@ module Aws::MediaPackageV2
     # @!attribute output_header_configuration
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Types::OutputHeaderConfiguration]
+    # @!attribute output_locking_mode
+    #   <p>The output locking mode configured for the channel.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>EPOCH_LOCKED</code> - The channel uses epoch-locked behavior with deterministic sequence numbering and fixed segment boundaries aligned to epoch time.</p> </li> <li> <p> <code>NON_EPOCH_LOCKED</code> - The channel uses non-epoch-locked behavior with duration-based segment combining and monotonically increasing sequence numbers starting from 0.</p> </li> </ul>
+    #   @return [String]
     class CreateChannelResponse < Struct.new(
       nil,
+      :multiview_configuration,
+      :attached_multiview_channels,
       :arn,
       :channel_name,
       :channel_group_name,
@@ -297,6 +340,7 @@ module Aws::MediaPackageV2
       :tags,
       :input_switch_configuration,
       :output_header_configuration,
+      :output_locking_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -351,9 +395,18 @@ module Aws::MediaPackageV2
     # @!attribute compactness
     #   <p>The layout of the DASH manifest that MediaPackage produces. <code>STANDARD</code> indicates a default manifest, which is compacted. <code>NONE</code> indicates a full manifest.</p> <p>For information about compactness, see <a href="https://docs.aws.amazon.com/mediapackage/latest/userguide/compacted.html">DASH manifest compactness</a> in the <i>Elemental MediaPackage v2 User Guide</i>.</p>
     #   @return [String]
+    # @!attribute audio_timeline_pattern
+    #   <p>How MediaPackage represents the audio timeline in the DASH manifest. This setting applies DASH Segment Duration Patternization, as defined in the MPEG-DASH specification, to audio adaptation sets. When set to <code>PATTERNED</code>, MediaPackage uses a pattern-based segment template for audio, which reduces manifest size by expressing repeating segment durations as a pattern instead of listing each segment individually. When set to <code>NONE</code>, the manifest contains an explicit timeline that lists each audio segment.</p> <p>Valid values: <code>NONE</code> | <code>PATTERNED</code> </p> <p>For information about audio timeline patterns, see <a href="https://docs.aws.amazon.com/mediapackage/latest/userguide/dash-audio-timeline-pattern.html">DASH audio timeline pattern</a> in the <i>Elemental MediaPackage v2 User Guide</i>.</p>
+    #   @return [String]
     # @!attribute subtitle_configuration
     #   <p>The configuration for DASH subtitles.</p>
     #   @return [Types::DashSubtitleConfiguration]
+    # @!attribute uri_path_type
+    #   <p>The type of path to use in manifest URIs. <code>LEAF</code> uses leaf-relative paths (for example, <code>index_1.mpd</code>). <code>ROOT</code> uses root-relative paths that include the full path from root (for example, <code>/out/v1/channel-group/channel/endpoint/index_1.mpd</code>). If you don't specify a value, the default is <code>LEAF</code>.</p>
+    #   @return [String]
+    # @!attribute availability_start_time_configuration
+    #   <p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). If you don't specify a value, MediaPackage uses the default availability start time of <code>2024-01-01T00:00:00Z</code>.</p>
+    #   @return [Types::DashAvailabilityStartTimeConfiguration]
     class CreateDashManifestConfiguration < Struct.new(
       nil,
       :manifest_name,
@@ -372,7 +425,10 @@ module Aws::MediaPackageV2
       :program_information,
       :dvb_settings,
       :compactness,
+      :audio_timeline_pattern,
       :subtitle_configuration,
+      :uri_path_type,
+      :availability_start_time_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -519,6 +575,9 @@ module Aws::MediaPackageV2
     # @!attribute url_encode_child_manifest
     #   <p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
     #   @return [Boolean]
+    # @!attribute uri_path_type
+    #   <p>The type of path to use in manifest URIs. <code>LEAF</code> uses leaf-relative paths (for example, <code>index_1.m3u8</code>). <code>ROOT</code> uses root-relative paths that include the full path from root (for example, <code>/out/v1/channel-group/channel/endpoint/index_1.m3u8</code>). If you don't specify a value, the default is <code>LEAF</code>.</p>
+    #   @return [String]
     class CreateHlsManifestConfiguration < Struct.new(
       nil,
       :manifest_name,
@@ -529,6 +588,7 @@ module Aws::MediaPackageV2
       :program_date_time_interval_seconds,
       :filter_configuration,
       :url_encode_child_manifest,
+      :uri_path_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -559,6 +619,9 @@ module Aws::MediaPackageV2
     # @!attribute url_encode_child_manifest
     #   <p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
     #   @return [Boolean]
+    # @!attribute uri_path_type
+    #   <p>The type of path to use in manifest URIs. <code>LEAF</code> uses leaf-relative paths (for example, <code>index_1.m3u8</code>). <code>ROOT</code> uses root-relative paths that include the full path from root (for example, <code>/out/v1/channel-group/channel/endpoint/index_1.m3u8</code>). If you don't specify a value, the default is <code>LEAF</code>.</p>
+    #   @return [String]
     class CreateLowLatencyHlsManifestConfiguration < Struct.new(
       nil,
       :manifest_name,
@@ -569,6 +632,7 @@ module Aws::MediaPackageV2
       :program_date_time_interval_seconds,
       :filter_configuration,
       :url_encode_child_manifest,
+      :uri_path_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -637,6 +701,12 @@ module Aws::MediaPackageV2
     # @!attribute force_endpoint_error_configuration
     #   <p>The failover settings for the endpoint.</p>
     #   @return [Types::ForceEndpointErrorConfiguration]
+    # @!attribute uri_separator
+    #   <p>The separator character to use in generated URIs for this origin endpoint. This setting applies to all manifest types on the endpoint. If you don't specify a value, the default is <code>UNDERSCORE</code>.</p>
+    #   @return [String]
+    # @!attribute stream_name_output_mode
+    #   <p>The output mode for stream names in egress manifests. This setting is valid only when the associated channel's <code>InputType</code> is <code>HLS</code>. You can't change the stream name output mode after you create the endpoint.</p> <p> <code>INDEX</code> uses numeric indices for stream names (for example, 1, 2, 3). <code>PASSTHROUGH_NAME</code> uses the stream names from the input manifest. If you don't specify a value, the default is <code>INDEX</code>.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>
     #   @return [Hash<String, String>]
@@ -655,6 +725,8 @@ module Aws::MediaPackageV2
       :dash_manifests,
       :mss_manifests,
       :force_endpoint_error_configuration,
+      :uri_separator,
+      :stream_name_output_mode,
       :tags,
       keyword_init: true
     )
@@ -706,6 +778,12 @@ module Aws::MediaPackageV2
     # @!attribute force_endpoint_error_configuration
     #   <p>The failover settings for the endpoint.</p>
     #   @return [Types::ForceEndpointErrorConfiguration]
+    # @!attribute uri_separator
+    #   <p>The separator character used in generated URIs for this origin endpoint.</p>
+    #   @return [String]
+    # @!attribute stream_name_output_mode
+    #   <p>The output mode for stream names in egress manifests for this origin endpoint.</p>
+    #   @return [String]
     # @!attribute e_tag
     #   <p>The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.</p>
     #   @return [String]
@@ -729,11 +807,28 @@ module Aws::MediaPackageV2
       :dash_manifests,
       :mss_manifests,
       :force_endpoint_error_configuration,
+      :uri_separator,
+      :stream_name_output_mode,
       :e_tag,
       :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p>
+    # @!attribute fixed_availability_start_time
+    #   <p>The fixed availability start time for the DASH manifest, in ISO 8601 date-time format. The value must have hourly granularity, meaning that the minutes, seconds, and fractional seconds must be zero. The value must be on or after <code>2024-01-01T00:00:00Z</code> and must be at least 14 days before the current time.</p>
+    #   @return [Time]
+    class DashAvailabilityStartTimeConfiguration < Struct.new(
+      :fixed_availability_start_time,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class FixedAvailabilityStartTime < DashAvailabilityStartTimeConfiguration; end
+      class Unknown < DashAvailabilityStartTimeConfiguration; end
     end
 
     # <p>The base URLs to use for retrieving segments. You can specify multiple locations and indicate the priority and weight for when each should be used, for use in mutli-CDN workflows.</p>
@@ -1074,6 +1169,9 @@ module Aws::MediaPackageV2
     # @!attribute manifest_filter
     #   <p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>
     #   @return [String]
+    # @!attribute drm_settings
+    #   <p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>
+    #   @return [String]
     # @!attribute start
     #   <p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>
     #   @return [Time]
@@ -1086,13 +1184,18 @@ module Aws::MediaPackageV2
     # @!attribute clip_start_time
     #   <p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>
     #   @return [Time]
+    # @!attribute multiview
+    #   <p>Optionally pin this manifest to a single multiview combination, so that players request it without an <code>aws.multiview</code> query parameter. When you pin a combination, note that you cannot use the <code>aws.multiview</code> query parameter for this manifest's endpoint URL, even when that parameter requests the same combination.</p> <p>This setting is valid only on an origin endpoint whose channel has an <code>InputType</code> of <code>MULTIVIEW</code>.</p>
+    #   @return [Types::MultiviewFilterConfiguration]
     class FilterConfiguration < Struct.new(
       nil,
       :manifest_filter,
+      :drm_settings,
       :start,
       :end,
       :time_delay_seconds,
       :clip_start_time,
+      :multiview,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1209,6 +1312,12 @@ module Aws::MediaPackageV2
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute multiview_configuration
+    #   <p>The multiview configuration for the channel. This is present only when <code>InputType</code> is <code>MULTIVIEW</code>.</p>
+    #   @return [Types::MultiviewConfiguration]
+    # @!attribute attached_multiview_channels
+    #   <p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.</p>
+    #   @return [Array<String>]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) associated with the resource.</p>
     #   @return [String]
@@ -1234,7 +1343,7 @@ module Aws::MediaPackageV2
     #   <p>The list of ingest endpoints.</p>
     #   @return [Array<Types::IngestEndpoint>]
     # @!attribute input_type
-    #   <p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>
+    #   <p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>
     #   @return [String]
     # @!attribute e_tag
     #   <p>The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.</p>
@@ -1248,8 +1357,13 @@ module Aws::MediaPackageV2
     # @!attribute output_header_configuration
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Types::OutputHeaderConfiguration]
+    # @!attribute output_locking_mode
+    #   <p>The output locking mode configured for the channel.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>EPOCH_LOCKED</code> - The channel uses epoch-locked behavior with deterministic sequence numbering and fixed segment boundaries aligned to epoch time.</p> </li> <li> <p> <code>NON_EPOCH_LOCKED</code> - The channel uses non-epoch-locked behavior with duration-based segment combining and monotonically increasing sequence numbers starting from 0.</p> </li> </ul>
+    #   @return [String]
     class GetChannelResponse < Struct.new(
       nil,
+      :multiview_configuration,
+      :attached_multiview_channels,
       :arn,
       :channel_name,
       :channel_group_name,
@@ -1263,6 +1377,7 @@ module Aws::MediaPackageV2
       :tags,
       :input_switch_configuration,
       :output_header_configuration,
+      :output_locking_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1320,9 +1435,18 @@ module Aws::MediaPackageV2
     # @!attribute compactness
     #   <p>The layout of the DASH manifest that MediaPackage produces. <code>STANDARD</code> indicates a default manifest, which is compacted. <code>NONE</code> indicates a full manifest.</p>
     #   @return [String]
+    # @!attribute audio_timeline_pattern
+    #   <p>How MediaPackage represents the audio timeline in the DASH manifest, using DASH Segment Duration Patternization for audio adaptation sets. <code>PATTERNED</code> indicates that MediaPackage uses a pattern-based segment template for audio, reducing manifest size. <code>NONE</code> indicates that the manifest contains an explicit timeline for each audio segment.</p>
+    #   @return [String]
     # @!attribute subtitle_configuration
     #   <p>The configuration for DASH subtitles.</p>
     #   @return [Types::DashSubtitleConfiguration]
+    # @!attribute uri_path_type
+    #   <p>The type of path used in manifest URIs. <code>LEAF</code> indicates leaf-relative paths. <code>ROOT</code> indicates root-relative paths that include the full path from root.</p>
+    #   @return [String]
+    # @!attribute availability_start_time_configuration
+    #   <p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD).</p>
+    #   @return [Types::DashAvailabilityStartTimeConfiguration]
     class GetDashManifestConfiguration < Struct.new(
       nil,
       :manifest_name,
@@ -1342,7 +1466,10 @@ module Aws::MediaPackageV2
       :program_information,
       :dvb_settings,
       :compactness,
+      :audio_timeline_pattern,
       :subtitle_configuration,
+      :uri_path_type,
+      :availability_start_time_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1468,6 +1595,9 @@ module Aws::MediaPackageV2
     # @!attribute url_encode_child_manifest
     #   <p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
     #   @return [Boolean]
+    # @!attribute uri_path_type
+    #   <p>The type of path used in manifest URIs. <code>LEAF</code> indicates leaf-relative paths. <code>ROOT</code> indicates root-relative paths that include the full path from root.</p>
+    #   @return [String]
     class GetHlsManifestConfiguration < Struct.new(
       nil,
       :manifest_name,
@@ -1479,6 +1609,7 @@ module Aws::MediaPackageV2
       :filter_configuration,
       :start_tag,
       :url_encode_child_manifest,
+      :uri_path_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1512,6 +1643,9 @@ module Aws::MediaPackageV2
     # @!attribute url_encode_child_manifest
     #   <p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
     #   @return [Boolean]
+    # @!attribute uri_path_type
+    #   <p>The type of path used in manifest URIs. <code>LEAF</code> indicates leaf-relative paths. <code>ROOT</code> indicates root-relative paths that include the full path from root.</p>
+    #   @return [String]
     class GetLowLatencyHlsManifestConfiguration < Struct.new(
       nil,
       :manifest_name,
@@ -1523,6 +1657,7 @@ module Aws::MediaPackageV2
       :filter_configuration,
       :start_tag,
       :url_encode_child_manifest,
+      :uri_path_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1669,6 +1804,12 @@ module Aws::MediaPackageV2
     # @!attribute force_endpoint_error_configuration
     #   <p>The failover settings for the endpoint.</p>
     #   @return [Types::ForceEndpointErrorConfiguration]
+    # @!attribute uri_separator
+    #   <p>The separator character used in generated URIs for this origin endpoint.</p>
+    #   @return [String]
+    # @!attribute stream_name_output_mode
+    #   <p>The output mode for stream names in egress manifests for this origin endpoint.</p>
+    #   @return [String]
     # @!attribute e_tag
     #   <p>The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.</p>
     #   @return [String]
@@ -1693,6 +1834,8 @@ module Aws::MediaPackageV2
       :dash_manifests,
       :mss_manifests,
       :force_endpoint_error_configuration,
+      :uri_separator,
+      :stream_name_output_mode,
       :e_tag,
       :tags,
       keyword_init: true
@@ -1854,7 +1997,7 @@ module Aws::MediaPackageV2
 
     # <p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p>
     # @!attribute mqcs_input_switching
-    #   <p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
+    #   <p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is false. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Boolean]
     # @!attribute preferred_input
     #   <p>For CMAF inputs, indicates which input MediaPackage should prefer when both inputs have equal MQCS scores. Select <code>1</code> to prefer the first ingest endpoint, or <code>2</code> to prefer the second ingest endpoint. If you don't specify a preferred input, MediaPackage uses its default switching behavior when MQCS scores are equal.</p>
@@ -2123,6 +2266,38 @@ module Aws::MediaPackageV2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The multiview configuration for a channel. A multiview channel composites video from several source channels into a single tiled output stream. Players receive one standard HLS or DASH stream instead of several separate streams. This setting is required when <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type.</p>
+    # @!attribute available_sources
+    #   <p>The channels that players can use as tiles in this multiview channel's output. Each source channel must be in the same channel group as the multiview channel, and must have an <code>InputType</code> of <code>CMAF</code>. Only the channels that you list here are available as tiles.</p>
+    #   @return [Array<String>]
+    # @!attribute available_layouts
+    #   <p>The tile layouts that players can request from this multiview channel's origin endpoints. Only the layouts that you list here are available. Each layout must appear at most once.</p>
+    #   @return [Array<String>]
+    class MultiviewConfiguration < Struct.new(
+      nil,
+      :available_sources,
+      :available_layouts,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The multiview combination for a pinned manifest. MediaPackage serves the manifest with this layout and these sources, so players request it without an <code>aws.multiview</code> query parameter.</p> <p>If a request for a pinned manifest also includes an <code>aws.multiview</code> query parameter, MediaPackage rejects the request, even when that parameter requests the same combination.</p>
+    # @!attribute layout
+    #   <p>The layout that MediaPackage uses to composite the tiles into a single output. This layout must be one of the <code>AvailableLayouts</code> of the channel that this origin endpoint is on.</p>
+    #   @return [String]
+    # @!attribute sources
+    #   <p>The source channels to composite, in tile order. Each channel must be one of the <code>AvailableSources</code> of the channel that this origin endpoint is on, and the number of channels must equal the number of tiles in <code>Layout</code>.</p>
+    #   @return [Array<String>]
+    class MultiviewFilterConfiguration < Struct.new(
+      nil,
+      :layout,
+      :sources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration of the origin endpoint.</p>
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) associated with the resource.</p>
@@ -2163,6 +2338,12 @@ module Aws::MediaPackageV2
     # @!attribute force_endpoint_error_configuration
     #   <p>The failover settings for the endpoint.</p>
     #   @return [Types::ForceEndpointErrorConfiguration]
+    # @!attribute uri_separator
+    #   <p>The separator character used in generated URIs for this origin endpoint.</p>
+    #   @return [String]
+    # @!attribute stream_name_output_mode
+    #   <p>The output mode for stream names in egress manifests for this origin endpoint.</p>
+    #   @return [String]
     class OriginEndpointListConfiguration < Struct.new(
       nil,
       :arn,
@@ -2178,6 +2359,8 @@ module Aws::MediaPackageV2
       :dash_manifests,
       :mss_manifests,
       :force_endpoint_error_configuration,
+      :uri_separator,
+      :stream_name_output_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2374,9 +2557,17 @@ module Aws::MediaPackageV2
     # @!attribute scte_filter
     #   <p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>
     #   @return [Array<String>]
+    # @!attribute scte_in_segments
+    #   <p>Controls whether SCTE-35 messages are included in segment files.</p> <ul> <li> <p>None – SCTE-35 messages are not included in segments (default)</p> </li> <li> <p>All – SCTE-35 messages are embedded in segment data</p> </li> <li> <p>MatchesFilter – SCTE-35 messages which match the ScteFilter are embedded in segment data</p> </li> </ul> <p> For DASH manifests, when set to <code>All</code> or <code>MatchesFilter</code>, an <code>InbandEventStream</code> tag signals that SCTE messages are present in segments. This setting works independently of manifest ad markers.</p>
+    #   @return [String]
+    # @!attribute custom_ad_types
+    #   <p>A list of additional non-Ad SCTE-35 event types to treat as advertisements. When configured, events matching these types produce ad markers (such as <code>SCTE35-OUT</code> and <code>SCTE35-IN</code> in HLS DATERANGE tags) in manifests.</p> <p>Valid values: <code>PROGRAM</code> | <code>CHAPTER</code> | <code>UNSCHEDULED_EVENT</code> | <code>ALTERNATE_CONTENT_OPPORTUNITY</code> | <code>NETWORK</code> </p> <p>If you don't specify any values, the default is empty (only default ad types are used).</p>
+    #   @return [Array<String>]
     class Scte < Struct.new(
       nil,
       :scte_filter,
+      :scte_in_segments,
+      :custom_ad_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2386,9 +2577,13 @@ module Aws::MediaPackageV2
     # @!attribute ad_marker_dash
     #   <p>Choose how ad markers are included in the packaged content. If you include ad markers in the content stream in your upstream encoders, then you need to inform MediaPackage what to do with the ad markers in the output.</p> <p>Value description:</p> <ul> <li> <p> <code>Binary</code> - The SCTE-35 marker is expressed as a hex-string (Base64 string) rather than full XML.</p> </li> <li> <p> <code>XML</code> - The SCTE marker is expressed fully in XML.</p> </li> </ul>
     #   @return [String]
+    # @!attribute scte_in_manifests
+    #   <p>Controls which SCTE-35 events appear in DASH manifests. <code>ALL</code> includes all non-implicit SCTE-35 events. <code>MATCHES_FILTER</code> includes only events whose type matches the configured <code>ScteFilter</code>.</p> <p>If you don't specify a value, the default is <code>ALL</code>.</p>
+    #   @return [String]
     class ScteDash < Struct.new(
       nil,
       :ad_marker_dash,
+      :scte_in_manifests,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2396,11 +2591,15 @@ module Aws::MediaPackageV2
 
     # <p>The SCTE configuration.</p>
     # @!attribute ad_marker_hls
-    #   <p>Ad markers indicate when ads should be inserted during playback. If you include ad markers in the content stream in your upstream encoders, then you need to inform MediaPackage what to do with the ad markers in the output. Choose what you want MediaPackage to do with the ad markers.</p> <p>Value description: </p> <ul> <li> <p>DATERANGE - Insert EXT-X-DATERANGE tags to signal ad and program transition events in TS and CMAF manifests. If you use DATERANGE, you must set a programDateTimeIntervalSeconds value of 1 or higher. To learn more about DATERANGE, see <a href="http://docs.aws.amazon.com/mediapackage/latest/ug/scte-35-ad-marker-ext-x-daterange.html">SCTE-35 Ad Marker EXT-X-DATERANGE</a>.</p> </li> </ul>
+    #   <p>Ad markers indicate when ads should be inserted during playback. If you include ad markers in the content stream in your upstream encoders, then you need to inform MediaPackage what to do with the ad markers in the output. Choose what you want MediaPackage to do with the ad markers.</p> <p>Value description: </p> <ul> <li> <p>SCTE35_ENHANCED - Generate industry-standard CUE tag ad markers in HLS manifests based on SCTE-35 input messages from the input stream.</p> </li> <li> <p>DATERANGE - Insert EXT-X-DATERANGE tags to signal ad and program transition events in TS and CMAF manifests. If you use DATERANGE, you must set a programDateTimeIntervalSeconds value of 1 or higher. To learn more about DATERANGE, see <a href="http://docs.aws.amazon.com/mediapackage/latest/ug/scte-35-ad-marker-ext-x-daterange.html">SCTE-35 Ad Marker EXT-X-DATERANGE</a>.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute scte_in_manifests
+    #   <p>Controls which SCTE-35 events appear in HLS manifests. <code>ALL</code> includes all non-implicit SCTE-35 events. <code>MATCHES_FILTER</code> includes only events whose type matches the configured <code>ScteFilter</code>.</p> <p>If you don't specify a value, the default is <code>ALL</code>.</p>
     #   @return [String]
     class ScteHls < Struct.new(
       nil,
       :ad_marker_hls,
+      :scte_in_manifests,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2428,6 +2627,9 @@ module Aws::MediaPackageV2
     # @!attribute encryption
     #   <p>The parameters for encrypting content.</p>
     #   @return [Types::Encryption]
+    # @!attribute output_timestamp_mode
+    #   <p>The output timestamp mode for the origin endpoint's segments. This setting is only configurable on channels with <code>OutputLockingMode</code> set to <code>NON_EPOCH_LOCKED</code>. This value is immutable after endpoint creation. If you don't specify a value, the default is <code>PASSTHROUGH</code>.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>PASSTHROUGH</code> - Output PTS (Presentation Timestamp) values pass through unchanged from the input.</p> </li> <li> <p> <code>REBASED_TO_CHANNEL_START</code> - Output PTS is rebased relative to the channel start time.</p> </li> </ul>
+    #   @return [String]
     class Segment < Struct.new(
       nil,
       :segment_duration_seconds,
@@ -2437,6 +2639,7 @@ module Aws::MediaPackageV2
       :ts_include_dvb_subtitles,
       :scte,
       :encryption,
+      :output_timestamp_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2469,6 +2672,15 @@ module Aws::MediaPackageV2
     # @!attribute url
     #   <p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>
     #   @return [String]
+    # @!attribute certificate_arn
+    #   <p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>
+    #   @return [String]
+    # @!attribute speke_version
+    #   <p>Specifies the SPEKE version used with your DRM key provider. If you don't specify a value, the default is <code>V2_0</code>.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>V2_0</code> - Follows the SPEKE Version 2.0 contract and signals only the content key index in key requests. This is the default.</p> </li> <li> <p> <code>V2_1</code> - Follows the SPEKE Version 2.1 contract and additionally supports signaling the start and end times a content key is used for, using <code>ContentKeyPeriodConfiguration</code>.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/speke/latest/documentation/standard-payload-components-v2.html">SPEKE Version 2.0 payload</a>.</p>
+    #   @return [String]
+    # @!attribute content_key_period_configuration
+    #   <p>The configuration that controls whether MediaPackage signals the start and end times a content key is used for, in the <code>ContentKeyPeriod</code> sent to your DRM key provider. Signaling this timing is supported only when key rotation is enabled (<code>KeyRotationIntervalSeconds</code> is set to a non-zero value) and <code>SpekeVersion</code> is <code>V2_1</code>. You can update these settings on an existing origin endpoint.</p>
+    #   @return [Types::ContentKeyPeriodConfiguration]
     class SpekeKeyProvider < Struct.new(
       nil,
       :encryption_contract_configuration,
@@ -2476,6 +2688,9 @@ module Aws::MediaPackageV2
       :drm_systems,
       :role_arn,
       :url,
+      :certificate_arn,
+      :speke_version,
+      :content_key_period_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2614,6 +2829,9 @@ module Aws::MediaPackageV2
     # @!attribute output_header_configuration
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Types::OutputHeaderConfiguration]
+    # @!attribute multiview_configuration
+    #   <p>The multiview configuration for the channel. This setting is required when the channel's <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type. Because <code>InputType</code> is immutable, you can change a multiview channel's sources and layouts. You can't add or remove the multiview configuration itself.</p>
+    #   @return [Types::MultiviewConfiguration]
     class UpdateChannelRequest < Struct.new(
       nil,
       :channel_group_name,
@@ -2622,11 +2840,18 @@ module Aws::MediaPackageV2
       :description,
       :input_switch_configuration,
       :output_header_configuration,
+      :multiview_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute multiview_configuration
+    #   <p>The multiview configuration for the channel. This is present only when <code>InputType</code> is <code>MULTIVIEW</code>.</p>
+    #   @return [Types::MultiviewConfiguration]
+    # @!attribute attached_multiview_channels
+    #   <p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.</p>
+    #   @return [Array<String>]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) associated with the resource.</p>
     #   @return [String]
@@ -2649,7 +2874,7 @@ module Aws::MediaPackageV2
     #   <p>The list of ingest endpoints.</p>
     #   @return [Array<Types::IngestEndpoint>]
     # @!attribute input_type
-    #   <p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>
+    #   <p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>
     #   @return [String]
     # @!attribute e_tag
     #   <p>The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.</p>
@@ -2663,8 +2888,13 @@ module Aws::MediaPackageV2
     # @!attribute output_header_configuration
     #   <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
     #   @return [Types::OutputHeaderConfiguration]
+    # @!attribute output_locking_mode
+    #   <p>The output locking mode configured for the channel. This value is immutable after channel creation.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>EPOCH_LOCKED</code> - The channel uses epoch-locked behavior with deterministic sequence numbering and fixed segment boundaries aligned to epoch time.</p> </li> <li> <p> <code>NON_EPOCH_LOCKED</code> - The channel uses non-epoch-locked behavior with duration-based segment combining and monotonically increasing sequence numbers starting from 0.</p> </li> </ul>
+    #   @return [String]
     class UpdateChannelResponse < Struct.new(
       nil,
+      :multiview_configuration,
+      :attached_multiview_channels,
       :arn,
       :channel_name,
       :channel_group_name,
@@ -2677,6 +2907,7 @@ module Aws::MediaPackageV2
       :tags,
       :input_switch_configuration,
       :output_header_configuration,
+      :output_locking_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2718,6 +2949,12 @@ module Aws::MediaPackageV2
     # @!attribute force_endpoint_error_configuration
     #   <p>The failover settings for the endpoint.</p>
     #   @return [Types::ForceEndpointErrorConfiguration]
+    # @!attribute uri_separator
+    #   <p>The separator character to use in generated URIs for this origin endpoint. This setting applies to all manifest types on the endpoint. If you don't specify a value in the update request, the current value is preserved.</p>
+    #   @return [String]
+    # @!attribute stream_name_output_mode
+    #   <p>The output mode for stream names in egress manifests. If you provide a value, it must match the current value. You can't change the stream name output mode after you create the endpoint.</p>
+    #   @return [String]
     # @!attribute e_tag
     #   <p>The expected current Entity Tag (ETag) for the resource. If the specified ETag does not match the resource's current entity tag, the update request will be rejected.</p>
     #   @return [String]
@@ -2735,6 +2972,8 @@ module Aws::MediaPackageV2
       :dash_manifests,
       :mss_manifests,
       :force_endpoint_error_configuration,
+      :uri_separator,
+      :stream_name_output_mode,
       :e_tag,
       keyword_init: true
     )
@@ -2783,6 +3022,12 @@ module Aws::MediaPackageV2
     # @!attribute force_endpoint_error_configuration
     #   <p>The failover settings for the endpoint.</p>
     #   @return [Types::ForceEndpointErrorConfiguration]
+    # @!attribute uri_separator
+    #   <p>The separator character used in generated URIs for this origin endpoint.</p>
+    #   @return [String]
+    # @!attribute stream_name_output_mode
+    #   <p>The output mode for stream names in egress manifests for this origin endpoint.</p>
+    #   @return [String]
     # @!attribute e_tag
     #   <p>The current Entity Tag (ETag) associated with this resource. The entity tag can be used to safely make concurrent updates to the resource.</p>
     #   @return [String]
@@ -2808,6 +3053,8 @@ module Aws::MediaPackageV2
       :low_latency_hls_manifests,
       :mss_manifests,
       :force_endpoint_error_configuration,
+      :uri_separator,
+      :stream_name_output_mode,
       :e_tag,
       :tags,
       :dash_manifests,

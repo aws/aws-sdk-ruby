@@ -14,6 +14,10 @@ module Aws::RDS
     AddSourceIdentifierToSubscriptionMessage: StructureShape
     AddSourceIdentifierToSubscriptionResult: StructureShape
     AddTagsToResourceMessage: StructureShape
+    AdditionalStorageVolume: StructureShape
+    AdditionalStorageVolumeOutput: StructureShape
+    AdditionalStorageVolumesList: ListShape
+    AdditionalStorageVolumesOutputList: ListShape
     ApplyMethod: EnumShape
     ApplyPendingMaintenanceActionMessage: StructureShape
     ApplyPendingMaintenanceActionResult: StructureShape
@@ -31,6 +35,8 @@ module Aws::RDS
     AvailabilityZone: StructureShape
     AvailabilityZoneList: ListShape
     AvailabilityZones: ListShape
+    AvailableAdditionalStorageVolumesOption: StructureShape
+    AvailableAdditionalStorageVolumesOptionList: ListShape
     AvailableProcessorFeature: StructureShape
     AvailableProcessorFeatureList: ListShape
     AwsBackupRecoveryPointArn: StringShape
@@ -129,8 +135,11 @@ module Aws::RDS
     CustomEngineName: StringShape
     CustomEngineVersion: StringShape
     CustomEngineVersionStatus: EnumShape
+    DBAndClusterArn: StringShape
     DBCluster: StructureShape
     DBClusterAlreadyExistsFault: StructureShape
+    DBClusterAssociatedRole: StructureShape
+    DBClusterAssociatedRoles: ListShape
     DBClusterAutomatedBackup: StructureShape
     DBClusterAutomatedBackupList: ListShape
     DBClusterAutomatedBackupMessage: StructureShape
@@ -374,6 +383,7 @@ module Aws::RDS
     DescribePendingMaintenanceActionsMessage: StructureShape
     DescribeReservedDBInstancesMessage: StructureShape
     DescribeReservedDBInstancesOfferingsMessage: StructureShape
+    DescribeServerlessV2PlatformVersionsMessage: StructureShape
     DescribeSourceRegionsMessage: StructureShape
     DescribeTenantDatabasesMessage: StructureShape
     DescribeValidDBInstanceModificationsMessage: StructureShape
@@ -443,6 +453,7 @@ module Aws::RDS
     GlobalClusterQuotaExceededFault: StructureShape
     GlobalClustersMessage: StructureShape
     IAMAuthMode: EnumShape
+    IAMRoleArn: StringShape
     IPRange: StructureShape
     IPRangeList: ListShape
     IamRoleMissingPermissionsFault: StructureShape
@@ -524,6 +535,8 @@ module Aws::RDS
     MinimumEngineVersionPerAllowedValueList: ListShape
     ModifyActivityStreamRequest: StructureShape
     ModifyActivityStreamResponse: StructureShape
+    ModifyAdditionalStorageVolume: StructureShape
+    ModifyAdditionalStorageVolumesList: ListShape
     ModifyCertificatesMessage: StructureShape
     ModifyCertificatesResult: StructureShape
     ModifyCurrentDBClusterCapacityMessage: StructureShape
@@ -568,6 +581,7 @@ module Aws::RDS
     ModifyTenantDatabaseMessage: StructureShape
     ModifyTenantDatabaseResult: StructureShape
     NetworkTypeNotSupported: StructureShape
+    OperatorSensitiveString: StringShape
     Option: StructureShape
     OptionConfiguration: StructureShape
     OptionConfigurationList: ListShape
@@ -690,6 +704,9 @@ module Aws::RDS
     ScalingConfigurationInfo: StructureShape
     SensitiveString: StringShape
     ServerlessV2FeaturesSupport: StructureShape
+    ServerlessV2PlatformVersionInfo: StructureShape
+    ServerlessV2PlatformVersionList: ListShape
+    ServerlessV2PlatformVersionsMessage: StructureShape
     ServerlessV2ScalingConfiguration: StructureShape
     ServerlessV2ScalingConfigurationInfo: StructureShape
     SharedSnapshotQuotaExceededFault: StructureShape
@@ -721,6 +738,7 @@ module Aws::RDS
     StopDBInstanceAutomatedBackupsReplicationResult: StructureShape
     StopDBInstanceMessage: StructureShape
     StopDBInstanceResult: StructureShape
+    StorageEncryptionType: EnumShape
     StorageQuotaExceededFault: StructureShape
     StorageTypeNotAvailableFault: StructureShape
     StorageTypeNotSupportedFault: StructureShape
@@ -752,6 +770,8 @@ module Aws::RDS
     Tag: StructureShape
     TagList: ListShape
     TagListMessage: StructureShape
+    TagSpecification: StructureShape
+    TagSpecificationList: ListShape
     TargetConnectionNetworkType: EnumShape
     TargetDBClusterParameterGroupName: StringShape
     TargetDBInstanceClass: StringShape
@@ -761,6 +781,8 @@ module Aws::RDS
     TargetHealth: StructureShape
     TargetHealthReason: EnumShape
     TargetList: ListShape
+    TargetResourceConfiguration: StructureShape
+    TargetResourceConfigurationList: ListShape
     TargetRole: EnumShape
     TargetState: EnumShape
     TargetStorageType: StringShape
@@ -774,15 +796,20 @@ module Aws::RDS
     TenantDatabasesMessage: StructureShape
     Timezone: StructureShape
     UnsupportedDBEngineVersionFault: StructureShape
+    UpgradeRolloutOrder: EnumShape
     UpgradeTarget: StructureShape
     UserAuthConfig: StructureShape
     UserAuthConfigInfo: StructureShape
     UserAuthConfigInfoList: ListShape
     UserAuthConfigList: ListShape
+    ValidAdditionalStorageOptions: StructureShape
     ValidDBInstanceModificationsMessage: StructureShape
     ValidStorageOptions: StructureShape
     ValidStorageOptionsList: ListShape
     ValidUpgradeTargetList: ListShape
+    ValidVolumeOptions: StructureShape
+    ValidVolumeOptionsList: ListShape
+    VpcEncryptionControlViolationException: StructureShape
     VpcSecurityGroupIdList: ListShape
     VpcSecurityGroupMembership: StructureShape
     VpcSecurityGroupMembershipList: ListShape

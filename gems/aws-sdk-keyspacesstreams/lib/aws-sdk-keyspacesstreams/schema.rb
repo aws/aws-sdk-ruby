@@ -15,6 +15,8 @@ module Aws::KeyspacesStreams
     GetStreamInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.keyspacesstreams#GetStreamInput", name: "GetStreamInput")
     GetStreamOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.keyspacesstreams#GetStreamOutput", name: "GetStreamOutput")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.keyspacesstreams#InternalServerException", name: "InternalServerException", traits: {"aws.protocols#awsQueryError" => {"code" => "InternalServerException", "httpResponseCode" => 500}, "smithy.api#error" => "server", "smithy.api#httpError" => 500})
+    IteratorDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.keyspacesstreams#IteratorDescription", name: "IteratorDescription")
+    IteratorPosition = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.keyspacesstreams#IteratorPosition", name: "IteratorPosition")
     KeyspaceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.keyspacesstreams#KeyspaceName", name: "KeyspaceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 48}, "smithy.api#pattern" => "^[a-zA-Z0-9][a-zA-Z0-9_]{0,47}$"})
     KeyspacesCell = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.keyspacesstreams#KeyspacesCell", name: "KeyspacesCell")
     KeyspacesCellList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.keyspacesstreams#KeyspacesCellList", name: "KeyspacesCellList")
@@ -61,6 +63,7 @@ module Aws::KeyspacesStreams
     GetRecordsInput.type = Types::GetRecordsInput
     GetRecordsOutput.add_member(:change_records, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordList, name: "changeRecords"))
     GetRecordsOutput.add_member(:next_shard_iterator, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardIterator, name: "nextShardIterator"))
+    GetRecordsOutput.add_member(:iterator_description, ::Smithy::Schema::Shapes::MemberShape.new(target: IteratorDescription, name: "iteratorDescription"))
     GetRecordsOutput.type = Types::GetRecordsOutput
     GetShardIteratorInput.add_member(:stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StreamArn, name: "streamArn", traits: {"smithy.api#required" => {}}))
     GetShardIteratorInput.add_member(:shard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ShardId, name: "shardId", traits: {"smithy.api#required" => {}}))
@@ -86,6 +89,10 @@ module Aws::KeyspacesStreams
     GetStreamOutput.type = Types::GetStreamOutput
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     InternalServerException.type = Types::InternalServerException
+    IteratorDescription.add_member(:iterator_position, ::Smithy::Schema::Shapes::MemberShape.new(target: IteratorPosition, name: "iteratorPosition"))
+    IteratorDescription.type = Types::IteratorDescription
+    IteratorPosition.add_member(:at_tip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AT_TIP", traits: {"smithy.api#enumValue" => "AT_TIP"}))
+    IteratorPosition.add_member(:behind_tip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BEHIND_TIP", traits: {"smithy.api#enumValue" => "BEHIND_TIP"}))
     KeyspacesCell.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesCellValue, name: "value"))
     KeyspacesCell.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyspacesMetadata, name: "metadata"))
     KeyspacesCell.type = Types::KeyspacesCell
@@ -103,6 +110,7 @@ module Aws::KeyspacesStreams
     KeyspacesCellValue.add_member(:date_t, Types::KeyspacesCellValue::DateT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "dateT"))
     KeyspacesCellValue.add_member(:decimal_t, Types::KeyspacesCellValue::DecimalT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "decimalT"))
     KeyspacesCellValue.add_member(:double_t, Types::KeyspacesCellValue::DoubleT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "doubleT"))
+    KeyspacesCellValue.add_member(:duration_t, Types::KeyspacesCellValue::DurationT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "durationT"))
     KeyspacesCellValue.add_member(:float_t, Types::KeyspacesCellValue::FloatT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "floatT"))
     KeyspacesCellValue.add_member(:inet_t, Types::KeyspacesCellValue::InetT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "inetT"))
     KeyspacesCellValue.add_member(:int_t, Types::KeyspacesCellValue::IntT, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "intT"))
@@ -203,7 +211,7 @@ module Aws::KeyspacesStreams
       service.id = "com.amazonaws.keyspacesstreams#KeyspacesStreams"
       service.name = "KeyspacesStreams"
       service.version = "2024-09-09"
-      service.traits = {"aws.api#service" => {"sdkId" => "KeyspacesStreams", "arnNamespace" => "cassandra", "cloudTrailEventSource" => "cassandra-streams.amazonaws.com", "endpointPrefix" => "cassandra-streams"}, "aws.auth#sigv4" => {"name" => "cassandra"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Amazon Keyspaces Streams"}
+      service.traits = {"aws.api#service" => {"sdkId" => "KeyspacesStreams", "arnNamespace" => "cassandra", "cloudTrailEventSource" => "cassandra-streams.amazonaws.com", "endpointPrefix" => "cassandra-streams"}, "aws.auth#sigv4" => {"name" => "cassandra"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Amazon Keyspaces Streams", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cassandra-streams-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cassandra-streams.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 6, "nodes" => "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"}}
       service.add_operation(:get_records, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.keyspacesstreams#GetRecords"
         operation.name = "GetRecords"

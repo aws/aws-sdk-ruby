@@ -72,6 +72,9 @@ module Aws::ConfigService
     class MaxNumberOfConformancePacksExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class MaxNumberOfConnectorsExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class MaxNumberOfDeliveryChannelsExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end

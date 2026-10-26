@@ -144,18 +144,18 @@ module Aws::Amp
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -239,6 +239,81 @@ module Aws::Amp
       request.send_request(options)
     end
 
+    # <p>Creates an anomaly detector within a workspace using the Random Cut Forest algorithm for time-series analysis. The anomaly detector analyzes Amazon Managed Service for Prometheus metrics to identify unusual patterns and behaviors.</p>
+    # @param [Hash, Types::CreateAnomalyDetectorRequest] params
+    # @option params [String] :workspace_id
+    #   <p>The identifier of the workspace where the anomaly detector will be created.</p>
+    # @option params [String] :alias
+    #   <p>A user-friendly name for the anomaly detector.</p>
+    # @option params [Integer] :evaluation_interval_in_seconds
+    #   <p>The frequency, in seconds, at which the anomaly detector evaluates metrics. The default value is 60 seconds.</p>
+    # @option params [Types::AnomalyDetectorMissingDataAction] :missing_data_action
+    #   <p>Specifies the action to take when data is missing during evaluation.</p>
+    # @option params [Types::AnomalyDetectorConfiguration] :configuration
+    #   <p>The algorithm configuration for the anomaly detector.</p>
+    # @option params [Hash<String, String>] :labels
+    #   <p>The Amazon Managed Service for Prometheus metric labels to associate with the anomaly detector.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The metadata to apply to the anomaly detector to assist with categorization and organization.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_id: "WorkspaceId", # required
+    #     alias: "AnomalyDetectorAlias", # required
+    #     evaluation_interval_in_seconds: 1,
+    #     missing_data_action: {
+    #       # One of:
+    #       mark_as_anomaly: false,
+    #       skip: false
+    #     },
+    #     configuration: { # required
+    #       # One of:
+    #       random_cut_forest: {
+    #         query: "RandomCutForestQuery", # required
+    #         shingle_size: 1,
+    #         sample_size: 1,
+    #         ignore_near_expected_from_above: {
+    #           # One of:
+    #           amount: 1.0,
+    #           ratio: 1.0
+    #         },
+    #         ignore_near_expected_from_below: {
+    #           # One of:
+    #           amount: 1.0,
+    #           ratio: 1.0
+    #         }
+    #       }
+    #     },
+    #     labels: {
+    #       "PrometheusMetricLabelKey" => "PrometheusMetricLabelValue"
+    #     },
+    #     client_token: "IdempotencyToken",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_anomaly_detector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     anomaly_detector_id: "AnomalyDetectorId", # required
+    #     arn: "AnomalyDetectorArn", # required
+    #     status: { # required
+    #       status_code: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"], # required
+    #       status_reason: "String"
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::CreateAnomalyDetectorResponse]
+    def create_anomaly_detector(params = {}, options = {})
+      request = build_request(:create_anomaly_detector, params)
+      request.send_request(options)
+    end
+
     # <p>The <code>CreateLoggingConfiguration</code> operation creates rules and alerting logging configuration for the workspace. Use this operation to set the CloudWatch log group to which the logs will be published to.</p> <note> <p>These logging configurations are only for rules and alerting logs.</p> </note>
     # @param [Hash, Types::CreateLoggingConfigurationInput] params
     # @option params [String] :workspace_id
@@ -308,7 +383,7 @@ module Aws::Amp
       request.send_request(options)
     end
 
-    # <p>The <code>CreateRuleGroupsNamespace</code> operation creates a rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces.</p> <p>Use this operation only to create new rule groups namespaces. To update an existing rule groups namespace, use <code>PutRuleGroupsNamespace</code>.</p>
+    # <p>The <code>CreateRuleGroupsNamespace</code> operation creates a rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces.</p> <important> <p>The combined length of a rule group namespace and a rule group name cannot exceed 721 UTF-8 bytes.</p> </important> <p>Use this operation only to create new rule groups namespaces. To update an existing rule groups namespace, use <code>PutRuleGroupsNamespace</code>.</p>
     # @param [Hash, Types::CreateRuleGroupsNamespaceInput] params
     # @option params [String] :workspace_id
     #   <p>The ID of the workspace to add the rule groups namespace.</p>
@@ -351,22 +426,24 @@ module Aws::Amp
       request.send_request(options)
     end
 
-    # <p>The <code>CreateScraper</code> operation creates a scraper to collect metrics. A scraper pulls metrics from Prometheus-compatible sources within an Amazon EKS cluster, and sends them to your Amazon Managed Service for Prometheus workspace. Scrapers are flexible, and can be configured to control what metrics are collected, the frequency of collection, what transformations are applied to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your cluster. You must configure this role with a policy that allows it to scrape metrics from your cluster. For more information, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the base-64 encoded YAML configuration for the scraper.</p> <p>When creating a scraper, the service creates a <code>Network Interface</code> in each <b>Availability Zone</b> that are passed into <code>CreateScraper</code> through subnets. These network interfaces are used to connect to the Amazon EKS cluster within the VPC for scraping metrics.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>
+    # <p>Creates a scraper to collect metrics from Prometheus-compatible sources. The scraper sends the collected metrics to Amazon Managed Service for Prometheus workspaces or CloudWatch datasets. You can configure scrapers to collect metrics from Amazon EKS clusters, Amazon MSK clusters, or from VPC-based sources that support DNS-based service discovery. Scrapers are flexible. You can configure a scraper to control which metrics to collect, the frequency of collection, which transformations to apply to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your source. You must configure this role with a policy that allows it to scrape metrics from your source. For Amazon EKS sources, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the base-64 encoded YAML configuration for the scraper.</p> <p>When creating a scraper, the service creates a <code>Network Interface</code> in each <b>Availability Zone</b> that are passed into <code>CreateScraper</code> through subnets. These network interfaces are used to connect to your source within the VPC for scraping metrics.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>
     # @param [Hash, Types::CreateScraperRequest] params
     # @option params [String] :alias
     #   <p>(optional) An alias to associate with the scraper. This is for your use, and does not need to be unique.</p>
     # @option params [Types::ScrapeConfiguration] :scrape_configuration
     #   <p>The configuration file to use in the new scraper. For more information, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration">Scraper configuration</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>
     # @option params [Types::Source] :source
-    #   <p>The Amazon EKS cluster from which the scraper will collect metrics.</p>
+    #   <p>The Amazon EKS or Amazon Web Services cluster from which the scraper will collect metrics.</p>
     # @option params [Types::Destination] :destination
-    #   <p>The Amazon Managed Service for Prometheus workspace to send metrics to.</p>
+    #   <p>The destination where the scraper sends the collected metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>
     # @option params [Types::RoleConfiguration] :role_configuration
     #   <p>Use this structure to enable cross-account access, so that you can use a target account to access Prometheus metrics from source accounts.</p>
     # @option params [String] :client_token
     #   <p>(Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>(Optional) The list of tag keys and values to associate with the scraper.</p>
+    # @option params [Array<Types::ExporterConfiguration>] :exporters
+    #   <p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the scraper is created without an exporter configuration.</p>
     # @example CreateScraper with optional alias input, optional clientToken input, and one set of tags
     #   # Example operation for create_scraper
     #   params = {
@@ -377,6 +454,42 @@ module Aws::Amp
     #     source: {
     #     "eksConfiguration" => {
     #       "clusterArn" => arn:aws:eks:us-west-2:123456789012:cluster/example,
+    #       "securityGroupIds" => [sg-abc123],
+    #       "subnetIds" => [subnet-abc123]
+    #     }
+    #   },
+    #     destination: {
+    #     "ampConfiguration" => {
+    #       "workspaceArn" => arn:aws:aps:us-west-2:123456789012:workspace/ws-ogh2u499-ce12-hg89-v6c7-123412341234
+    #     }
+    #   },
+    #     client_token: "token",
+    #     tags: {
+    #       "exampleTag" => "exampleValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_scraper(params, options)
+    #   response.to_h #=>
+    #   {
+    #     scraper_id: "scraper-123",
+    #     arn: "arn:aws:aps:us-west-2:123456789012:scraper/scraper-123",
+    #     status: {
+    #       status_code: "CREATING"
+    #     },
+    #     tags: {
+    #       "exampleTag" => "exampleValue"
+    #     }
+    #   }
+    # @example CreateScraper with generic VPC config with mandatory securityGroupIds and subnetIds
+    #   # Example operation for create_scraper
+    #   params = {
+    #     alias: "alias",
+    #     scrape_configuration: {
+    #     "configurationBlob" => blob
+    #   },
+    #     source: {
+    #     "vpcConfiguration" => {
     #       "securityGroupIds" => [sg-abc123],
     #       "subnetIds" => [subnet-abc123]
     #     }
@@ -417,12 +530,19 @@ module Aws::Amp
     #         cluster_arn: "ClusterArn", # required
     #         security_group_ids: ["SecurityGroupId"],
     #         subnet_ids: ["SubnetId"], # required
+    #       },
+    #       vpc_configuration: {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnet_ids: ["SubnetId"], # required
     #       }
     #     },
     #     destination: { # required
     #       # One of:
     #       amp_configuration: {
     #         workspace_arn: "WorkspaceArn", # required
+    #       },
+    #       cloud_watch_configuration: {
+    #         dataset_arn: "CloudWatchDatasetArn", # required
     #       }
     #     },
     #     role_configuration: {
@@ -432,7 +552,13 @@ module Aws::Amp
     #     client_token: "IdempotencyToken",
     #     tags: {
     #       "TagKey" => "TagValue"
-    #     }
+    #     },
+    #     exporters: [{
+    #       # One of:
+    #       open_search_configuration: {
+    #         domain_arn: "OpenSearchDomainArn", # required
+    #       }
+    #     }]
     #   }
     #   options = {}
     #   response = client.create_scraper(params, options)
@@ -513,6 +639,31 @@ module Aws::Amp
     # @return [Smithy::Schema::EmptyStructure]
     def delete_alert_manager_definition(params = {}, options = {})
       request = build_request(:delete_alert_manager_definition, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes an anomaly detector from a workspace. This operation is idempotent.</p>
+    # @param [Hash, Types::DeleteAnomalyDetectorRequest] params
+    # @option params [String] :workspace_id
+    #   <p>The identifier of the workspace containing the anomaly detector to delete.</p>
+    # @option params [String] :anomaly_detector_id
+    #   <p>The identifier of the anomaly detector to delete.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_id: "WorkspaceId", # required
+    #     anomaly_detector_id: "AnomalyDetectorId", # required
+    #     client_token: "IdempotencyToken"
+    #   }
+    #   options = {}
+    #   response = client.delete_anomaly_detector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Smithy::Schema::EmptyStructure]
+    def delete_anomaly_detector(params = {}, options = {})
+      request = build_request(:delete_anomaly_detector, params)
       request.send_request(options)
     end
 
@@ -725,6 +876,70 @@ module Aws::Amp
       request.send_request(options)
     end
 
+    # <p>Retrieves detailed information about a specific anomaly detector, including its status and configuration.</p>
+    # @param [Hash, Types::DescribeAnomalyDetectorRequest] params
+    # @option params [String] :workspace_id
+    #   <p>The identifier of the workspace containing the anomaly detector.</p>
+    # @option params [String] :anomaly_detector_id
+    #   <p>The identifier of the anomaly detector to describe.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_id: "WorkspaceId", # required
+    #     anomaly_detector_id: "AnomalyDetectorId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_anomaly_detector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     anomaly_detector: { # required
+    #       arn: "AnomalyDetectorArn", # required
+    #       anomaly_detector_id: "AnomalyDetectorId", # required
+    #       alias: "AnomalyDetectorAlias", # required
+    #       evaluation_interval_in_seconds: 1,
+    #       missing_data_action: {
+    #         # One of:
+    #         mark_as_anomaly: false,
+    #         skip: false
+    #       },
+    #       configuration: {
+    #         # One of:
+    #         random_cut_forest: {
+    #           query: "RandomCutForestQuery", # required
+    #           shingle_size: 1,
+    #           sample_size: 1,
+    #           ignore_near_expected_from_above: {
+    #             # One of:
+    #             amount: 1.0,
+    #             ratio: 1.0
+    #           },
+    #           ignore_near_expected_from_below: {
+    #             # One of:
+    #             amount: 1.0,
+    #             ratio: 1.0
+    #           }
+    #         }
+    #       },
+    #       labels: {
+    #         "PrometheusMetricLabelKey" => "PrometheusMetricLabelValue"
+    #       },
+    #       status: { # required
+    #         status_code: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"], # required
+    #         status_reason: "String"
+    #       },
+    #       created_at: Time.now, # required
+    #       modified_at: Time.now, # required
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::DescribeAnomalyDetectorResponse]
+    def describe_anomaly_detector(params = {}, options = {})
+      request = build_request(:describe_anomaly_detector, params)
+      request.send_request(options)
+    end
+
     # <p>Returns complete information about the current rules and alerting logging configuration of the workspace.</p> <note> <p>These logging configurations are only for rules and alerting logs.</p> </note>
     # @param [Hash, Types::DescribeLoggingConfigurationInput] params
     # @option params [String] :workspace_id
@@ -930,18 +1145,31 @@ module Aws::Amp
     #           cluster_arn: "ClusterArn", # required
     #           security_group_ids: ["SecurityGroupId"],
     #           subnet_ids: ["SubnetId"], # required
+    #         },
+    #         vpc_configuration: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnet_ids: ["SubnetId"], # required
     #         }
     #       },
     #       destination: { # required
     #         # One of:
     #         amp_configuration: {
     #           workspace_arn: "WorkspaceArn", # required
+    #         },
+    #         cloud_watch_configuration: {
+    #           dataset_arn: "CloudWatchDatasetArn", # required
     #         }
     #       },
     #       role_configuration: {
     #         source_role_arn: "IamRoleArn",
     #         target_role_arn: "IamRoleArn"
-    #       }
+    #       },
+    #       exporters: [{
+    #         # One of:
+    #         open_search_configuration: {
+    #           domain_arn: "OpenSearchDomainArn", # required
+    #         }
+    #       }]
     #     }
     #   }
     # @return [Types::DescribeScraperResponse]
@@ -1054,7 +1282,9 @@ module Aws::Amp
     #           }
     #         }
     #       ],
-    #       retention_period_in_days: 1
+    #       retention_period_in_days: 1,
+    #       out_of_order_time_window_in_seconds: 1,
+    #       rule_query_offset_in_seconds: 1
     #     }
     #   }
     # @return [Types::DescribeWorkspaceConfigurationResponse]
@@ -1086,6 +1316,52 @@ module Aws::Amp
     # @return [Types::GetDefaultScraperConfigurationResponse]
     def get_default_scraper_configuration(params = {}, options = {})
       request = build_request(:get_default_scraper_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a paginated list of anomaly detectors for a workspace with optional filtering by alias.</p>
+    # @param [Hash, Types::ListAnomalyDetectorsRequest] params
+    # @option params [String] :workspace_id
+    #   <p>The identifier of the workspace containing the anomaly detectors to list.</p>
+    # @option params [String] :alias
+    #   <p>Filters the results to anomaly detectors with the specified alias.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call. Valid range is 1 to 1000.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token to continue retrieving results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_id: "WorkspaceId", # required
+    #     alias: "AnomalyDetectorAlias",
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_anomaly_detectors(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     anomaly_detectors: [ # required
+    #       {
+    #         arn: "AnomalyDetectorArn", # required
+    #         anomaly_detector_id: "AnomalyDetectorId", # required
+    #         alias: "AnomalyDetectorAlias", # required
+    #         status: { # required
+    #           status_code: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"], # required
+    #           status_reason: "String"
+    #         },
+    #         created_at: Time.now, # required
+    #         modified_at: Time.now, # required
+    #         tags: {
+    #           "TagKey" => "TagValue"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListAnomalyDetectorsResponse]
+    def list_anomaly_detectors(params = {}, options = {})
+      request = build_request(:list_anomaly_detectors, params)
       request.send_request(options)
     end
 
@@ -1289,18 +1565,31 @@ module Aws::Amp
     #             cluster_arn: "ClusterArn", # required
     #             security_group_ids: ["SecurityGroupId"],
     #             subnet_ids: ["SubnetId"], # required
+    #           },
+    #           vpc_configuration: {
+    #             security_group_ids: ["SecurityGroupId"], # required
+    #             subnet_ids: ["SubnetId"], # required
     #           }
     #         },
     #         destination: { # required
     #           # One of:
     #           amp_configuration: {
     #             workspace_arn: "WorkspaceArn", # required
+    #           },
+    #           cloud_watch_configuration: {
+    #             dataset_arn: "CloudWatchDatasetArn", # required
     #           }
     #         },
     #         role_configuration: {
     #           source_role_arn: "IamRoleArn",
     #           target_role_arn: "IamRoleArn"
-    #         }
+    #         },
+    #         exporters: [{
+    #           # One of:
+    #           open_search_configuration: {
+    #             domain_arn: "OpenSearchDomainArn", # required
+    #           }
+    #         }]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -1406,6 +1695,76 @@ module Aws::Amp
       request.send_request(options)
     end
 
+    # <p>When you call <code>PutAnomalyDetector</code>, the operation creates a new anomaly detector if one doesn't exist, or updates an existing one. Each call to this operation triggers a complete retraining of the detector, which includes querying the minimum required samples and backfilling the detector with historical data. This process occurs regardless of whether you're making a minor change like updating the evaluation interval or making more substantial modifications. The operation serves as the single method for creating, updating, and retraining anomaly detectors.</p>
+    # @param [Hash, Types::PutAnomalyDetectorRequest] params
+    # @option params [String] :workspace_id
+    #   <p>The identifier of the workspace containing the anomaly detector to update.</p>
+    # @option params [String] :anomaly_detector_id
+    #   <p>The identifier of the anomaly detector to update.</p>
+    # @option params [Integer] :evaluation_interval_in_seconds
+    #   <p>The frequency, in seconds, at which the anomaly detector evaluates metrics.</p>
+    # @option params [Types::AnomalyDetectorMissingDataAction] :missing_data_action
+    #   <p>Specifies the action to take when data is missing during evaluation.</p>
+    # @option params [Types::AnomalyDetectorConfiguration] :configuration
+    #   <p>The algorithm configuration for the anomaly detector.</p>
+    # @option params [Hash<String, String>] :labels
+    #   <p>The Amazon Managed Service for Prometheus metric labels to associate with the anomaly detector.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_id: "WorkspaceId", # required
+    #     anomaly_detector_id: "AnomalyDetectorId", # required
+    #     evaluation_interval_in_seconds: 1,
+    #     missing_data_action: {
+    #       # One of:
+    #       mark_as_anomaly: false,
+    #       skip: false
+    #     },
+    #     configuration: { # required
+    #       # One of:
+    #       random_cut_forest: {
+    #         query: "RandomCutForestQuery", # required
+    #         shingle_size: 1,
+    #         sample_size: 1,
+    #         ignore_near_expected_from_above: {
+    #           # One of:
+    #           amount: 1.0,
+    #           ratio: 1.0
+    #         },
+    #         ignore_near_expected_from_below: {
+    #           # One of:
+    #           amount: 1.0,
+    #           ratio: 1.0
+    #         }
+    #       }
+    #     },
+    #     labels: {
+    #       "PrometheusMetricLabelKey" => "PrometheusMetricLabelValue"
+    #     },
+    #     client_token: "IdempotencyToken"
+    #   }
+    #   options = {}
+    #   response = client.put_anomaly_detector(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     anomaly_detector_id: "AnomalyDetectorId", # required
+    #     arn: "AnomalyDetectorArn", # required
+    #     status: { # required
+    #       status_code: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"], # required
+    #       status_reason: "String"
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::PutAnomalyDetectorResponse]
+    def put_anomaly_detector(params = {}, options = {})
+      request = build_request(:put_anomaly_detector, params)
+      request.send_request(options)
+    end
+
     # <p>Creates or updates a resource-based policy for an Amazon Managed Service for Prometheus workspace. Use resource-based policies to grant permissions to other AWS accounts or services to access your workspace.</p> <p>Only Prometheus-compatible APIs can be used for workspace sharing. You can add non-Prometheus-compatible APIs to the policy, but they will be ignored. For more information, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-APIReference-Prometheus-Compatible-Apis.html">Prometheus-compatible APIs</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>If your workspace uses customer-managed KMS keys for encryption, you must grant the principals in your resource-based policy access to those KMS keys. You can do this by creating KMS grants. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html">CreateGrant</a> in the <i>AWS Key Management Service API Reference</i> and <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/encryption-at-rest-Amazon-Service-Prometheus.html">Encryption at rest</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>For more information about working with IAM, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/security_iam_service-with-iam.html">Using Amazon Managed Service for Prometheus with IAM</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>
     # @param [Hash, Types::PutResourcePolicyRequest] params
     # @option params [String] :workspace_id
@@ -1437,7 +1796,7 @@ module Aws::Amp
       request.send_request(options)
     end
 
-    # <p>Updates an existing rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces.</p> <p>Use this operation only to update existing rule groups namespaces. To create a new rule groups namespace, use <code>CreateRuleGroupsNamespace</code>.</p> <p>You can't use this operation to add tags to an existing rule groups namespace. Instead, use <code>TagResource</code>.</p>
+    # <p>Updates an existing rule groups namespace within a workspace. A rule groups namespace is associated with exactly one rules file. A workspace can have multiple rule groups namespaces.</p> <important> <p>The combined length of a rule group namespace and a rule group name cannot exceed 721 UTF-8 bytes.</p> </important> <p>Use this operation only to update existing rule groups namespaces. To create a new rule groups namespace, use <code>CreateRuleGroupsNamespace</code>.</p> <p>You can't use this operation to add tags to an existing rule groups namespace. Instead, use <code>TagResource</code>.</p>
     # @param [Hash, Types::PutRuleGroupsNamespaceInput] params
     # @option params [String] :workspace_id
     #   <p>The ID of the workspace where you are updating the rule groups namespace.</p>
@@ -1599,11 +1958,13 @@ module Aws::Amp
     # @option params [Types::ScrapeConfiguration] :scrape_configuration
     #   <p>Contains the base-64 encoded YAML configuration for the scraper.</p> <note> <p>For more information about configuring a scraper, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>
     # @option params [Types::Destination] :destination
-    #   <p>The new Amazon Managed Service for Prometheus workspace to send metrics to.</p>
+    #   <p>The new destination where the scraper sends metrics. Valid destinations are Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.</p>
     # @option params [Types::RoleConfiguration] :role_configuration
     #   <p>Use this structure to enable cross-account access, so that you can use a target account to access Prometheus metrics from source accounts.</p>
     # @option params [String] :client_token
     #   <p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>
+    # @option params [Array<Types::ExporterConfiguration>] :exporters
+    #   <p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the existing exporter configuration remains unchanged.</p>
     # @example UpdateScraper with all optional parameters
     #   # Example operation for update_scraper
     #   params = {
@@ -1644,13 +2005,22 @@ module Aws::Amp
     #       # One of:
     #       amp_configuration: {
     #         workspace_arn: "WorkspaceArn", # required
+    #       },
+    #       cloud_watch_configuration: {
+    #         dataset_arn: "CloudWatchDatasetArn", # required
     #       }
     #     },
     #     role_configuration: {
     #       source_role_arn: "IamRoleArn",
     #       target_role_arn: "IamRoleArn"
     #     },
-    #     client_token: "IdempotencyToken"
+    #     client_token: "IdempotencyToken",
+    #     exporters: [{
+    #       # One of:
+    #       open_search_configuration: {
+    #         domain_arn: "OpenSearchDomainArn", # required
+    #       }
+    #     }]
     #   }
     #   options = {}
     #   response = client.update_scraper(params, options)
@@ -1751,6 +2121,10 @@ module Aws::Amp
     #   <p>This is an array of structures, where each structure defines a label set for the workspace, and defines the active time series limit for each of those label sets. Each label name in a label set must be unique.</p>
     # @option params [Integer] :retention_period_in_days
     #   <p>Specifies how many days that metrics will be retained in the workspace.</p>
+    # @option params [Integer] :out_of_order_time_window_in_seconds
+    #   <p>Specifies the time window in seconds for accepting out of order samples. Out of order samples older than this window are rejected.</p>
+    # @option params [Integer] :rule_query_offset_in_seconds
+    #   <p>Specifies the duration in seconds to offset rule evaluation queries into the past. This allows ingested samples to be available before rule evaluation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workspace_id: "WorkspaceId", # required
@@ -1765,7 +2139,9 @@ module Aws::Amp
     #         }
     #       }
     #     ],
-    #     retention_period_in_days: 1
+    #     retention_period_in_days: 1,
+    #     out_of_order_time_window_in_seconds: 1,
+    #     rule_query_offset_in_seconds: 1
     #   }
     #   options = {}
     #   response = client.update_workspace_configuration(params, options)
@@ -1867,6 +2243,8 @@ module Aws::Amp
 
     def waiters
       {
+        anomaly_detector_active: Waiters::AnomalyDetectorActive,
+        anomaly_detector_deleted: Waiters::AnomalyDetectorDeleted,
         scraper_active: Waiters::ScraperActive,
         scraper_deleted: Waiters::ScraperDeleted,
         workspace_active: Waiters::WorkspaceActive,

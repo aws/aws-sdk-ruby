@@ -23,6 +23,17 @@ module Aws::RedshiftData
       attr_accessor message: String?
     end
 
+    class ActiveWaitingRequestsExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class BatchExecuteStatementException
       include Smithy::Schema::Structure
 
@@ -47,11 +58,14 @@ module Aws::RedshiftData
         ?database: String,
         ?with_event: bool,
         ?statement_name: String,
+        ?parameters: Array[Types::SqlParameter],
         ?workgroup_name: String,
         ?client_token: String,
+        ?result_format: String,
         ?session_keep_alive_seconds: Integer,
         ?session_id: String,
-        ?result_format: String,
+        ?execution_mode: String,
+        ?wait_time_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -62,11 +76,14 @@ module Aws::RedshiftData
       attr_accessor database: String?
       attr_accessor with_event: bool?
       attr_accessor statement_name: String?
+      attr_accessor parameters: Array[Types::SqlParameter]?
       attr_accessor workgroup_name: String?
       attr_accessor client_token: String?
+      attr_accessor result_format: String?
       attr_accessor session_keep_alive_seconds: Integer?
       attr_accessor session_id: String?
-      attr_accessor result_format: String?
+      attr_accessor execution_mode: String?
+      attr_accessor wait_time_seconds: Integer?
     end
 
     class BatchExecuteStatementOutput
@@ -82,6 +99,9 @@ module Aws::RedshiftData
         ?secret_arn: String,
         ?workgroup_name: String,
         ?session_id: String,
+        ?status: String,
+        ?redshift_pid: Integer,
+        ?has_result_set: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -94,6 +114,9 @@ module Aws::RedshiftData
       attr_accessor secret_arn: String?
       attr_accessor workgroup_name: String?
       attr_accessor session_id: String?
+      attr_accessor status: String?
+      attr_accessor redshift_pid: Integer?
+      attr_accessor has_result_set: bool?
     end
 
     class CancelStatementRequest
@@ -169,10 +192,12 @@ module Aws::RedshiftData
 
       def initialize: (
         ?id: String,
+        ?wait_time_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
+      attr_accessor wait_time_seconds: Integer?
     end
 
     class DescribeStatementResponse
@@ -198,8 +223,9 @@ module Aws::RedshiftData
         ?query_parameters: Array[Types::SqlParameter],
         ?sub_statements: Array[Types::SubStatementData],
         ?workgroup_name: String,
-        ?session_id: String,
         ?result_format: String,
+        ?session_id: String,
+        ?execution_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -222,8 +248,9 @@ module Aws::RedshiftData
       attr_accessor query_parameters: Array[Types::SqlParameter]?
       attr_accessor sub_statements: Array[Types::SubStatementData]?
       attr_accessor workgroup_name: String?
-      attr_accessor session_id: String?
       attr_accessor result_format: String?
+      attr_accessor session_id: String?
+      attr_accessor execution_mode: String?
     end
 
     class DescribeTableRequest
@@ -297,9 +324,10 @@ module Aws::RedshiftData
         ?parameters: Array[Types::SqlParameter],
         ?workgroup_name: String,
         ?client_token: String,
+        ?result_format: String,
         ?session_keep_alive_seconds: Integer,
         ?session_id: String,
-        ?result_format: String,
+        ?wait_time_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -313,9 +341,10 @@ module Aws::RedshiftData
       attr_accessor parameters: Array[Types::SqlParameter]?
       attr_accessor workgroup_name: String?
       attr_accessor client_token: String?
+      attr_accessor result_format: String?
       attr_accessor session_keep_alive_seconds: Integer?
       attr_accessor session_id: String?
-      attr_accessor result_format: String?
+      attr_accessor wait_time_seconds: Integer?
     end
 
     class ExecuteStatementOutput
@@ -331,6 +360,9 @@ module Aws::RedshiftData
         ?secret_arn: String,
         ?workgroup_name: String,
         ?session_id: String,
+        ?status: String,
+        ?redshift_pid: Integer,
+        ?has_result_set: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -343,6 +375,9 @@ module Aws::RedshiftData
       attr_accessor secret_arn: String?
       attr_accessor workgroup_name: String?
       attr_accessor session_id: String?
+      attr_accessor status: String?
+      attr_accessor redshift_pid: Integer?
+      attr_accessor has_result_set: bool?
     end
 
     class Field
@@ -387,11 +422,13 @@ module Aws::RedshiftData
       def initialize: (
         ?id: String,
         ?next_token: String,
+        ?wait_time_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor next_token: String?
+      attr_accessor wait_time_seconds: Integer?
     end
 
     class GetStatementResultResponse
@@ -417,11 +454,13 @@ module Aws::RedshiftData
       def initialize: (
         ?id: String,
         ?next_token: String,
+        ?wait_time_seconds: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor next_token: String?
+      attr_accessor wait_time_seconds: Integer?
     end
 
     class GetStatementResultV2Response
@@ -527,6 +566,44 @@ module Aws::RedshiftData
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor schemas: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?session_id: String,
+        ?status: String,
+        ?role_level: bool,
+        ?cluster_identifier: String,
+        ?workgroup_name: String,
+        ?database: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor session_id: String?
+      attr_accessor status: String?
+      attr_accessor role_level: bool?
+      attr_accessor cluster_identifier: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor database: String?
+    end
+
+    class ListSessionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sessions: Array[Types::SessionData],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sessions: Array[Types::SessionData]?
       attr_accessor next_token: String?
     end
 
@@ -648,6 +725,37 @@ module Aws::RedshiftData
 
       attr_accessor message: String?
       attr_accessor resource_id: String?
+    end
+
+    class SessionData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?database: String,
+        ?db_user: String,
+        ?cluster_identifier: String,
+        ?workgroup_name: String,
+        ?session_alive_seconds: Integer,
+        ?session_ttl: Time,
+        ?current_statement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor database: String?
+      attr_accessor db_user: String?
+      attr_accessor cluster_identifier: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor session_alive_seconds: Integer?
+      attr_accessor session_ttl: Time?
+      attr_accessor current_statement_id: String?
     end
 
     class SqlParameter

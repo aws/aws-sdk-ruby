@@ -8,9 +8,11 @@ module Aws::Account
     AccountCreatedDate: TimestampShape
     AccountId: StringShape
     AccountName: StringShape
+    AccountState: StringShape
     AddressLine: StringShape
     AlternateContact: StructureShape
     AlternateContactType: StringShape
+    AwsAccountState: StringShape
     City: StringShape
     CompanyName: StringShape
     ConflictException: StructureShape
@@ -29,8 +31,12 @@ module Aws::Account
     GetAlternateContactResponse: StructureShape
     GetContactInformationRequest: StructureShape
     GetContactInformationResponse: StructureShape
+    GetGovCloudAccountInformationRequest: StructureShape
+    GetGovCloudAccountInformationResponse: StructureShape
     GetPrimaryEmailRequest: StructureShape
     GetPrimaryEmailResponse: StructureShape
+    GetPrimaryEmailUpdateStatusRequest: StructureShape
+    GetPrimaryEmailUpdateStatusResponse: StructureShape
     GetRegionOptStatusRequest: StructureShape
     GetRegionOptStatusResponse: StructureShape
     InternalServerException: StructureShape
@@ -39,6 +45,7 @@ module Aws::Account
     Name: StringShape
     Otp: StringShape
     PhoneNumber: StringShape
+    PhoneNumberVerificationStatus: StringShape
     PostalCode: StringShape
     PrimaryEmailAddress: StringShape
     PrimaryEmailUpdateStatus: StringShape
@@ -51,6 +58,9 @@ module Aws::Account
     RegionOptStatus: StringShape
     RegionOptStatusList: ListShape
     ResourceNotFoundException: StructureShape
+    ResourceUnavailableException: StructureShape
+    SendPhoneNumberVerificationRequest: StructureShape
+    SendPhoneNumberVerificationResponse: StructureShape
     SensitiveString: StringShape
     StartPrimaryEmailUpdateRequest: StructureShape
     StartPrimaryEmailUpdateResponse: StructureShape
@@ -61,6 +71,8 @@ module Aws::Account
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: StringShape
+    VerifyPhoneNumberRequest: StructureShape
+    VerifyPhoneNumberResponse: StructureShape
     WebsiteUrl: StringShape
 
     Account: ServiceShape

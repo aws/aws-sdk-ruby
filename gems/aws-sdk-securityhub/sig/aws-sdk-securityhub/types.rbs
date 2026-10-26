@@ -1,6 +1,37 @@
 module Aws::SecurityHub
   module Types
 
+    class AIDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_resource_guid: String,
+        ?host_resource_type: String,
+        ?canonical_id: String,
+        ?self_hosted_ai_model_resource_count: Integer,
+        ?self_hosted_ai_agent_resource_count: Integer,
+        ?self_hosted_ai_model_serving_resource_count: Integer,
+        ?self_hosted_ai_external_endpoint_resource_count: Integer,
+        ?self_hosted_ai_development_resource_count: Integer,
+        ?self_hosted_ai_agent_framework_resource_count: Integer,
+        ?self_hosted_ai_agent_tools_and_identity_resource_count: Integer,
+        ?self_hosted_total_ai_resource_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_resource_guid: String?
+      attr_accessor host_resource_type: String?
+      attr_accessor canonical_id: String?
+      attr_accessor self_hosted_ai_model_resource_count: Integer?
+      attr_accessor self_hosted_ai_agent_resource_count: Integer?
+      attr_accessor self_hosted_ai_model_serving_resource_count: Integer?
+      attr_accessor self_hosted_ai_external_endpoint_resource_count: Integer?
+      attr_accessor self_hosted_ai_development_resource_count: Integer?
+      attr_accessor self_hosted_ai_agent_framework_resource_count: Integer?
+      attr_accessor self_hosted_ai_agent_tools_and_identity_resource_count: Integer?
+      attr_accessor self_hosted_total_ai_resource_count: Integer?
+    end
+
     class AcceptAdministratorInvitationRequest
       include Smithy::Schema::Structure
 
@@ -69,6 +100,21 @@ module Aws::SecurityHub
 
       attr_accessor account_id: String?
       attr_accessor email: String?
+    end
+
+    class AccountFreeTrialStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?evaluated_at: Time,
+        ?free_trial_statuses: Array[Types::FreeTrialStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor evaluated_at: Time?
+      attr_accessor free_trial_statuses: Array[Types::FreeTrialStatus]?
     end
 
     class Action
@@ -370,6 +416,7 @@ module Aws::SecurityHub
     module AutomationRulesActionTypeV2
       FINDING_FIELDS_UPDATE: String
       EXTERNAL_INTEGRATION: String
+      RESOURCE_FIELDS_UPDATE: String
     end
 
     class AutomationRulesActionV2
@@ -379,12 +426,14 @@ module Aws::SecurityHub
         ?type: String,
         ?finding_fields_update: Types::AutomationRulesFindingFieldsUpdateV2,
         ?external_integration_configuration: Types::ExternalIntegrationConfiguration,
+        ?resource_fields_update: Types::AutomationRulesResourceFieldsUpdateV2,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
       attr_accessor finding_fields_update: Types::AutomationRulesFindingFieldsUpdateV2?
       attr_accessor external_integration_configuration: Types::ExternalIntegrationConfiguration?
+      attr_accessor resource_fields_update: Types::AutomationRulesResourceFieldsUpdateV2?
     end
 
     class AutomationRulesConfig
@@ -502,6 +551,9 @@ module Aws::SecurityHub
         ?resource_application_arn: Array[Types::StringFilter],
         ?resource_application_name: Array[Types::StringFilter],
         ?aws_account_name: Array[Types::StringFilter],
+        ?resource_provider: Array[Types::StringFilter],
+        ?resource_owner_account_id: Array[Types::StringFilter],
+        ?resource_owner_org_id: Array[Types::StringFilter],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -543,6 +595,9 @@ module Aws::SecurityHub
       attr_accessor resource_application_arn: Array[Types::StringFilter]?
       attr_accessor resource_application_name: Array[Types::StringFilter]?
       attr_accessor aws_account_name: Array[Types::StringFilter]?
+      attr_accessor resource_provider: Array[Types::StringFilter]?
+      attr_accessor resource_owner_account_id: Array[Types::StringFilter]?
+      attr_accessor resource_owner_org_id: Array[Types::StringFilter]?
     end
 
     class AutomationRulesMetadata
@@ -597,6 +652,17 @@ module Aws::SecurityHub
       attr_accessor actions: Array[Types::AutomationRulesActionTypeObjectV2]?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+    end
+
+    class AutomationRulesResourceFieldsUpdateV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?criticality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor criticality: String?
     end
 
     class AvailabilityZone
@@ -7162,6 +7228,19 @@ module Aws::SecurityHub
       attr_accessor subnet_ids: Array[String]?
     end
 
+    class AwsOrganizationScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?organizational_unit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor organizational_unit_id: String?
+    end
+
     class AwsRdsDbClusterAssociatedRole
       include Smithy::Schema::Structure
 
@@ -9047,6 +9126,9 @@ module Aws::SecurityHub
         ?aws_account_name: Array[Types::StringFilter],
         ?resource_application_name: Array[Types::StringFilter],
         ?resource_application_arn: Array[Types::StringFilter],
+        ?resource_owner_account_id: Array[Types::StringFilter],
+        ?resource_owner_org_id: Array[Types::StringFilter],
+        ?resource_provider: Array[Types::StringFilter],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -9154,6 +9236,9 @@ module Aws::SecurityHub
       attr_accessor aws_account_name: Array[Types::StringFilter]?
       attr_accessor resource_application_name: Array[Types::StringFilter]?
       attr_accessor resource_application_arn: Array[Types::StringFilter]?
+      attr_accessor resource_owner_account_id: Array[Types::StringFilter]?
+      attr_accessor resource_owner_org_id: Array[Types::StringFilter]?
+      attr_accessor resource_provider: Array[Types::StringFilter]?
     end
 
     class AwsSecurityFindingIdentifier
@@ -9932,6 +10017,62 @@ module Aws::SecurityHub
       attr_accessor type: String?
     end
 
+    class AzureDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_config_connector_arn: String,
+        ?scope_configuration: Types::AzureScopeConfiguration,
+        ?azure_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_config_connector_arn: String?
+      attr_accessor scope_configuration: Types::AzureScopeConfiguration?
+      attr_accessor azure_regions: Array[String]?
+    end
+
+    class AzureProviderConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_config_connector_arn: String,
+        ?scope_configuration: Types::AzureScopeConfiguration,
+        ?azure_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_config_connector_arn: String?
+      attr_accessor scope_configuration: Types::AzureScopeConfiguration?
+      attr_accessor azure_regions: Array[String]?
+    end
+
+    class AzureScopeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_type: String,
+        ?scope_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_type: String?
+      attr_accessor scope_values: Array[String]?
+    end
+
+    class AzureUpdateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_configuration: Types::AzureScopeConfiguration,
+        ?azure_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_configuration: Types::AzureScopeConfiguration?
+      attr_accessor azure_regions: Array[String]?
+    end
+
     class BatchDeleteAutomationRulesRequest
       include Smithy::Schema::Structure
 
@@ -10316,6 +10457,30 @@ module Aws::SecurityHub
       attr_accessor value: bool?
     end
 
+    class CancelExportJobV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_id: String?
+    end
+
+    class CancelExportJobV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_id: String?
+      attr_accessor status: String?
+    end
+
     class Cell
       include Smithy::Schema::Structure
 
@@ -10391,6 +10556,11 @@ module Aws::SecurityHub
 
       attr_accessor code: String?
       attr_accessor reason: String?
+    end
+
+    module CloudProviderName
+      AZURE: String
+      AWS: String
     end
 
     class CloudWatchLogsLogGroupArnConfigDetails
@@ -10477,6 +10647,8 @@ module Aws::SecurityHub
         ?boolean_filters: Array[Types::OcsfBooleanFilter],
         ?number_filters: Array[Types::OcsfNumberFilter],
         ?map_filters: Array[Types::OcsfMapFilter],
+        ?ip_filters: Array[Types::OcsfIpFilter],
+        ?nested_composite_filters: Array[Types::CompositeFilter],
         ?operator: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -10486,6 +10658,8 @@ module Aws::SecurityHub
       attr_accessor boolean_filters: Array[Types::OcsfBooleanFilter]?
       attr_accessor number_filters: Array[Types::OcsfNumberFilter]?
       attr_accessor map_filters: Array[Types::OcsfMapFilter]?
+      attr_accessor ip_filters: Array[Types::OcsfIpFilter]?
+      attr_accessor nested_composite_filters: Array[Types::CompositeFilter]?
       attr_accessor operator: String?
     end
 
@@ -10620,39 +10794,16 @@ module Aws::SecurityHub
     module ConnectorProviderName
       JIRA_CLOUD: String
       SERVICENOW: String
-    end
-
-    class ConnectorRegistrationsV2Request
-      include Smithy::Schema::Structure
-
-      def initialize: (
-        ?auth_code: String,
-        ?auth_state: String,
-      ) -> void
-      | (?Hash[Symbol, untyped]) -> void
-
-      attr_accessor auth_code: String?
-      attr_accessor auth_state: String?
-    end
-
-    class ConnectorRegistrationsV2Response
-      include Smithy::Schema::Structure
-
-      def initialize: (
-        ?connector_arn: String,
-        ?connector_id: String,
-      ) -> void
-      | (?Hash[Symbol, untyped]) -> void
-
-      attr_accessor connector_arn: String?
-      attr_accessor connector_id: String?
+      AZURE: String
     end
 
     module ConnectorStatus
       CONNECTED: String
+      DEGRADED: String
       FAILED_TO_CONNECT: String
-      PENDING_CONFIGURATION: String
       PENDING_AUTHORIZATION: String
+      PENDING_CONFIGURATION: String
+      UNKNOWN: String
     end
 
     class ConnectorSummary
@@ -10665,6 +10816,8 @@ module Aws::SecurityHub
         ?description: String,
         ?provider_summary: Types::ProviderSummary,
         ?created_at: Time,
+        ?enablement_status: String,
+        ?enablement_status_reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10674,6 +10827,8 @@ module Aws::SecurityHub
       attr_accessor description: String?
       attr_accessor provider_summary: Types::ProviderSummary?
       attr_accessor created_at: Time?
+      attr_accessor enablement_status: String?
+      attr_accessor enablement_status_reason: String?
     end
 
     class ContainerDetails
@@ -10896,6 +11051,42 @@ module Aws::SecurityHub
       attr_accessor configuration_policy: Types::Policy?
     end
 
+    class CreateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?provider: Types::CspmProviderConfiguration,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor provider: Types::CspmProviderConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?connector_id: String,
+        ?connector_status: String,
+        ?enablement_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor connector_id: String?
+      attr_accessor connector_status: String?
+      attr_accessor enablement_status: String?
+    end
+
     class CreateConnectorV2Request
       include Smithy::Schema::Structure
 
@@ -10924,12 +11115,16 @@ module Aws::SecurityHub
         ?connector_arn: String,
         ?connector_id: String,
         ?auth_url: String,
+        ?connector_status: String,
+        ?enablement_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connector_arn: String?
       attr_accessor connector_id: String?
       attr_accessor auth_url: String?
+      attr_accessor connector_status: String?
+      attr_accessor enablement_status: String?
     end
 
     class CreateFindingAggregatorRequest
@@ -11017,12 +11212,14 @@ module Aws::SecurityHub
         ?connector_id: String,
         ?finding_metadata_uid: String,
         ?client_token: String,
+        ?mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connector_id: String?
       attr_accessor finding_metadata_uid: String?
       attr_accessor client_token: String?
+      attr_accessor mode: String?
     end
 
     class CreateTicketV2Response
@@ -11043,14 +11240,160 @@ module Aws::SecurityHub
 
       def initialize: (
         ?ocsf_finding_criteria: Types::OcsfFindingFilters,
+        ?resource_criteria: Types::ResourcesFilters,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ocsf_finding_criteria: Types::OcsfFindingFilters?
+      attr_accessor resource_criteria: Types::ResourcesFilters?
 
       class OcsfFindingCriteria < Criteria
       end
+      class ResourceCriteria < Criteria
+      end
       class Unknown < Criteria
+      end
+    end
+
+    class CriticalitySource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor reason: String?
+    end
+
+    module CriticalitySourceType
+      AUTOMATION_RULE: String
+      RESOURCE_NAME: String
+      TAG_INFERENCE: String
+    end
+
+    module CspmConnectorProviderName
+      AZURE: String
+    end
+
+    module CspmConnectorStatus
+      CONNECTED: String
+      DEGRADED: String
+      FAILED_TO_CONNECT: String
+      UNKNOWN: String
+    end
+
+    class CspmConnectorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?connector_id: String,
+        ?name: String,
+        ?description: String,
+        ?provider_summary: Types::CspmProviderSummary,
+        ?created_at: Time,
+        ?created_by: String,
+        ?enablement_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor connector_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor provider_summary: Types::CspmProviderSummary?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor enablement_status: String?
+    end
+
+    module CspmEnablementStatus
+      ENABLED: String
+      PENDING_ENABLEMENT: String
+      PENDING_UPDATE: String
+      PENDING_DELETION: String
+    end
+
+    class CspmHealthCheck
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_status: String,
+        ?message: String,
+        ?last_checked_at: Time,
+        ?issues: Array[Types::HealthIssue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_status: String?
+      attr_accessor message: String?
+      attr_accessor last_checked_at: Time?
+      attr_accessor issues: Array[Types::HealthIssue]?
+    end
+
+    class CspmProviderConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?azure: Types::AzureProviderConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor azure: Types::AzureProviderConfiguration?
+
+      class Azure < CspmProviderConfiguration
+      end
+      class Unknown < CspmProviderConfiguration
+      end
+    end
+
+    class CspmProviderDetail
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?azure: Types::AzureDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor azure: Types::AzureDetail?
+
+      class Azure < CspmProviderDetail
+      end
+      class Unknown < CspmProviderDetail
+      end
+    end
+
+    class CspmProviderSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_name: String,
+        ?connector_status: String,
+        ?provider_configuration: Types::CspmProviderDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_name: String?
+      attr_accessor connector_status: String?
+      attr_accessor provider_configuration: Types::CspmProviderDetail?
+    end
+
+    class CspmProviderUpdateConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?azure: Types::AzureUpdateConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor azure: Types::AzureUpdateConfiguration?
+
+      class Azure < CspmProviderUpdateConfiguration
+      end
+      class Unknown < CspmProviderUpdateConfiguration
       end
     end
 
@@ -11137,11 +11480,18 @@ module Aws::SecurityHub
       def initialize: (
         ?value: Integer,
         ?unit: String,
+        ?comparison: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor value: Integer?
       attr_accessor unit: String?
+      attr_accessor comparison: String?
+    end
+
+    module DateRangeComparison
+      WITHIN: String
+      OLDER_THAN: String
     end
 
     module DateRangeUnit
@@ -11252,6 +11602,28 @@ module Aws::SecurityHub
 
     end
 
+    class DeleteConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+    end
+
+    class DeleteConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enablement_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enablement_status: String?
+    end
+
     class DeleteConnectorV2Request
       include Smithy::Schema::Structure
 
@@ -11267,9 +11639,11 @@ module Aws::SecurityHub
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?enablement_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor enablement_status: String?
     end
 
     class DeleteFindingAggregatorRequest
@@ -11509,11 +11883,13 @@ module Aws::SecurityHub
       def initialize: (
         ?hub_v2_arn: String,
         ?subscribed_at: String,
+        ?features: Hash[String, Types::FeatureDetail],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor hub_v2_arn: String?
       attr_accessor subscribed_at: String?
+      attr_accessor features: Hash[String, Types::FeatureDetail]?
     end
 
     class DescribeStandardsControlsRequest
@@ -11550,11 +11926,13 @@ module Aws::SecurityHub
       def initialize: (
         ?next_token: String,
         ?max_results: Integer,
+        ?providers: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor providers: Array[String]?
     end
 
     class DescribeStandardsResponse
@@ -11615,6 +11993,26 @@ module Aws::SecurityHub
     end
 
     class DisableOrganizationAdminAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableSecurityHubFeatureV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_name: String?
+    end
+
+    class DisableSecurityHubFeatureV2Response
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -11715,6 +12113,11 @@ module Aws::SecurityHub
 
     end
 
+    module DiscoveryType
+      MANAGED: String
+      SELF_HOSTED: String
+    end
+
     class DnsRequestAction
       include Smithy::Schema::Structure
 
@@ -11793,6 +12196,26 @@ module Aws::SecurityHub
       attr_accessor feature: String?
     end
 
+    class EnableSecurityHubFeatureV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_name: String?
+    end
+
+    class EnableSecurityHubFeatureV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class EnableSecurityHubRequest
       include Smithy::Schema::Structure
 
@@ -11839,6 +12262,16 @@ module Aws::SecurityHub
       attr_accessor hub_v2_arn: String?
     end
 
+    module EnablementStatus
+      ENABLED: String
+      PENDING_ENABLEMENT: String
+      FAILED_TO_ENABLE: String
+      PENDING_UPDATE: String
+      FAILED_TO_UPDATE: String
+      PENDING_DELETION: String
+      FAILED_TO_DELETE: String
+    end
+
     class EnumConfigurationOptions
       include Smithy::Schema::Structure
 
@@ -11867,6 +12300,146 @@ module Aws::SecurityHub
       attr_accessor allowed_values: Array[String]?
     end
 
+    module ExportDataType
+      FINDINGS: String
+    end
+
+    class ExportDestination
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::S3ExportDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3ExportDestination?
+
+      class S3 < ExportDestination
+      end
+      class Unknown < ExportDestination
+      end
+    end
+
+    module ExportFailureCode
+      ACCESS_DENIED: String
+      RESOURCE_NOT_FOUND: String
+      INTERNAL_ERROR: String
+    end
+
+    class ExportOutput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?findings: Types::FindingsOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor findings: Types::FindingsOutput?
+
+      class Findings < ExportOutput
+      end
+      class Unknown < ExportOutput
+      end
+    end
+
+    class ExportOutputSummary
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?findings: Types::FindingsOutputSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor findings: Types::FindingsOutputSummary?
+
+      class Findings < ExportOutputSummary
+      end
+      class Unknown < ExportOutputSummary
+      end
+    end
+
+    class ExportScopes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_organizations: Array[Types::AwsOrganizationScope],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_organizations: Array[Types::AwsOrganizationScope]?
+    end
+
+    module ExportStatus
+      RUNNING: String
+      SUCCEEDED: String
+      FAILED: String
+      CANCELLED: String
+    end
+
+    class ExportSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_id: String,
+        ?name: String,
+        ?status: String,
+        ?data_type: String,
+        ?output_configuration: Types::ExportOutputSummary,
+        ?scopes: Types::ExportScopes,
+        ?destination: Types::ExportDestination,
+        ?failure_code: String,
+        ?failure_message: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor data_type: String?
+      attr_accessor output_configuration: Types::ExportOutputSummary?
+      attr_accessor scopes: Types::ExportScopes?
+      attr_accessor destination: Types::ExportDestination?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+    end
+
+    class ExposureFinding
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_uid: String,
+        ?title: String,
+        ?previous_severity: String,
+        ?projected_severity: String,
+        ?impact: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_uid: String?
+      attr_accessor title: String?
+      attr_accessor previous_severity: String?
+      attr_accessor projected_severity: String?
+      attr_accessor impact: String?
+    end
+
+    module ExposureImpact
+      REDUCES: String
+      RESOLVES: String
+      UNCHANGED: String
+    end
+
+    module ExposureSeverity
+      INFORMATIONAL: String
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+      CRITICAL: String
+    end
+
     class ExternalIntegrationConfiguration
       include Smithy::Schema::Structure
 
@@ -11876,6 +12449,28 @@ module Aws::SecurityHub
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connector_arn: String?
+    end
+
+    class FeatureDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    module FeatureName
+      NETWORK_SCANNING: String
+    end
+
+    module FeatureStatus
+      ENABLED: String
+      DISABLED: String
     end
 
     class FilePaths
@@ -11992,6 +12587,218 @@ module Aws::SecurityHub
       attr_accessor original: String?
     end
 
+    class FindingScopes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_organizations: Array[Types::AwsOrganizationScope],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_organizations: Array[Types::AwsOrganizationScope]?
+    end
+
+    module FindingsExportFormat
+      CSV: String
+      OCSF_JSON: String
+    end
+
+    class FindingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?filters: Types::OcsfFindingFilters,
+        ?selected_fields: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor filters: Types::OcsfFindingFilters?
+      attr_accessor selected_fields: Array[String]?
+    end
+
+    class FindingsOutputSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+    end
+
+    module FindingsSelectableField
+      METADATA_UID: String
+      ACTIVITY_NAME: String
+      CLOUD_ACCOUNT_NAME: String
+      CLOUD_ACCOUNT_UID: String
+      CLOUD_PROVIDER: String
+      CLOUD_REGION: String
+      COMPLIANCE_ASSESSMENTS_CATEGORY: String
+      COMPLIANCE_ASSESSMENTS_NAME: String
+      COMPLIANCE_CONTROL: String
+      COMPLIANCE_STATUS: String
+      COMPLIANCE_STANDARDS: String
+      FINDING_INFO_DESC: String
+      FINDING_INFO_SRC_URL: String
+      FINDING_INFO_TITLE: String
+      FINDING_INFO_TYPES: String
+      FINDING_INFO_UID: String
+      FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY: String
+      FINDING_INFO_RELATED_EVENTS_UID: String
+      FINDING_INFO_RELATED_EVENTS_PRODUCT_UID: String
+      FINDING_INFO_RELATED_EVENTS_TITLE: String
+      METADATA_PRODUCT_FEATURE_UID: String
+      METADATA_PRODUCT_NAME: String
+      METADATA_PRODUCT_UID: String
+      METADATA_PRODUCT_VENDOR_NAME: String
+      REMEDIATION_DESC: String
+      REMEDIATION_REFERENCES: String
+      RESOURCES_CLOUD_PARTITION: String
+      RESOURCES_NAME: String
+      RESOURCES_OWNER_ACCOUNT_UID: String
+      RESOURCES_OWNER_ORG_UID: String
+      RESOURCES_OWNER_ACCOUNT_NAME: String
+      RESOURCES_PROVIDER: String
+      RESOURCES_REGION: String
+      RESOURCES_TYPE: String
+      RESOURCES_UID: String
+      SEVERITY: String
+      STATUS: String
+      COMMENT: String
+      VULNERABILITIES_FIX_COVERAGE: String
+      CLASS_NAME: String
+      DATABUCKET_ENCRYPTION_DETAILS_ALGORITHM: String
+      DATABUCKET_ENCRYPTION_DETAILS_KEY_UID: String
+      DATABUCKET_FILE_DATA_CLASSIFICATIONS_CLASSIFIER_DETAILS_TYPE: String
+      EVIDENCES_ACTOR_USER_ACCOUNT_UID: String
+      EVIDENCES_API_OPERATION: String
+      EVIDENCES_API_RESPONSE_ERROR_MESSAGE: String
+      EVIDENCES_API_SERVICE_NAME: String
+      EVIDENCES_CONNECTION_INFO_DIRECTION: String
+      EVIDENCES_CONNECTION_INFO_PROTOCOL_NAME: String
+      EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NAME: String
+      EVIDENCES_DST_ENDPOINT_LOCATION_CITY: String
+      EVIDENCES_DST_ENDPOINT_LOCATION_COUNTRY: String
+      EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NAME: String
+      EVIDENCES_SRC_ENDPOINT_HOSTNAME: String
+      EVIDENCES_SRC_ENDPOINT_LOCATION_CITY: String
+      EVIDENCES_SRC_ENDPOINT_LOCATION_COUNTRY: String
+      FINDING_INFO_ANALYTIC_NAME: String
+      MALWARE_NAME: String
+      MALWARE_SCAN_INFO_UID: String
+      MALWARE_SEVERITY: String
+      RESOURCES_CLOUD_FUNCTION_LAYERS_UID_ALT: String
+      RESOURCES_CLOUD_FUNCTION_RUNTIME: String
+      RESOURCES_CLOUD_FUNCTION_USER_UID: String
+      RESOURCES_DEVICE_ENCRYPTION_DETAILS_KEY_UID: String
+      RESOURCES_DEVICE_IMAGE_UID: String
+      RESOURCES_IMAGE_ARCHITECTURE: String
+      RESOURCES_IMAGE_REGISTRY_UID: String
+      RESOURCES_IMAGE_REPOSITORY_NAME: String
+      RESOURCES_IMAGE_UID: String
+      RESOURCES_SUBNET_INFO_UID: String
+      RESOURCES_VPC_UID: String
+      VULNERABILITIES_AFFECTED_CODE_FILE_PATH: String
+      VULNERABILITIES_AFFECTED_PACKAGES_NAME: String
+      VULNERABILITIES_CVE_CVSS_VENDOR_NAME: String
+      VULNERABILITIES_CVE_CVSS_VERSION: String
+      VULNERABILITIES_CVE_EPSS_SCORE: String
+      VULNERABILITIES_CVE_UID: String
+      VULNERABILITIES_RELATED_VULNERABILITIES: String
+      VENDOR_ATTRIBUTES_SEVERITY: String
+      ACTIVITY_ID: String
+      COMPLIANCE_STATUS_ID: String
+      CONFIDENCE_SCORE: String
+      SEVERITY_ID: String
+      STATUS_ID: String
+      FINDING_INFO_RELATED_EVENTS_COUNT: String
+      EVIDENCES_API_RESPONSE_CODE: String
+      EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER: String
+      EVIDENCES_DST_ENDPOINT_PORT: String
+      EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER: String
+      EVIDENCES_SRC_ENDPOINT_PORT: String
+      RESOURCES_IMAGE_IN_USE_COUNT: String
+      VULNERABILITIES_CVE_CVSS_BASE_SCORE: String
+      VENDOR_ATTRIBUTES_SEVERITY_ID: String
+      FINDING_INFO_CREATED_TIME_DT: String
+      FINDING_INFO_FIRST_SEEN_TIME_DT: String
+      FINDING_INFO_LAST_SEEN_TIME_DT: String
+      FINDING_INFO_MODIFIED_TIME_DT: String
+      RESOURCES_IMAGE_CREATED_TIME_DT: String
+      RESOURCES_IMAGE_LAST_USED_TIME_DT: String
+      RESOURCES_MODIFIED_TIME_DT: String
+      COMPLIANCE_ASSESSMENTS_MEETS_CRITERIA: String
+      VULNERABILITIES_IS_EXPLOIT_AVAILABLE: String
+      VULNERABILITIES_IS_FIX_AVAILABLE: String
+      RESOURCES_TAGS: String
+      COMPLIANCE_CONTROL_PARAMETERS: String
+      DATABUCKET_TAGS: String
+      FINDING_INFO_TAGS: String
+      EVIDENCES_DST_ENDPOINT_IP: String
+      EVIDENCES_SRC_ENDPOINT_IP: String
+    end
+
+    class FindingsTrendsCompositeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_filters: Array[Types::FindingsTrendsStringFilter],
+        ?nested_composite_filters: Array[Types::FindingsTrendsCompositeFilter],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_filters: Array[Types::FindingsTrendsStringFilter]?
+      attr_accessor nested_composite_filters: Array[Types::FindingsTrendsCompositeFilter]?
+      attr_accessor operator: String?
+    end
+
+    class FindingsTrendsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?composite_filters: Array[Types::FindingsTrendsCompositeFilter],
+        ?composite_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor composite_filters: Array[Types::FindingsTrendsCompositeFilter]?
+      attr_accessor composite_operator: String?
+    end
+
+    module FindingsTrendsStringField
+      ACCOUNT_ID: String
+      REGION: String
+      FINDING_TYPE: String
+      FINDING_STATUS: String
+      CVE_ID: String
+      COMPLIANCE_STATUS: String
+      COMPLIANCE_CONTROL: String
+      FINDING_CLASS: String
+      PROVIDER_NAME: String
+      FINDING_ACTIVITY_NAME: String
+      RESOURCE_CLOUD_PROVIDERS: String
+      RESOURCE_REGIONS: String
+      RESOURCE_OWNER_IDS: String
+      RESOURCE_OWNER_ORGANIZATION_IDS: String
+    end
+
+    class FindingsTrendsStringFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?filter: Types::StringFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor filter: Types::StringFilter?
+    end
+
     class FirewallPolicyDetails
       include Smithy::Schema::Structure
 
@@ -12046,6 +12853,53 @@ module Aws::SecurityHub
 
       attr_accessor priority: Integer?
       attr_accessor resource_arn: String?
+    end
+
+    class FreeTrialStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_type: String,
+        ?status: String,
+        ?started_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_type: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    module FreeTrialStatusValue
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    module FreeTrialType
+      SECURITY_HUB_V2: String
+      SECURITY_HUB_V2_MULTI_CLOUD_AZURE: String
+    end
+
+    class GenerateRecommendedPolicyV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_uid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_uid: String?
+    end
+
+    class GenerateRecommendedPolicyV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class GeneratorDetails
@@ -12232,6 +13086,46 @@ module Aws::SecurityHub
       attr_accessor configuration_policy: Types::Policy?
     end
 
+    class GetConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+    end
+
+    class GetConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?connector_id: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?health: Types::CspmHealthCheck,
+        ?provider_detail: Types::CspmProviderDetail,
+        ?created_by: String,
+        ?enablement_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor connector_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor health: Types::CspmHealthCheck?
+      attr_accessor provider_detail: Types::CspmProviderDetail?
+      attr_accessor created_by: String?
+      attr_accessor enablement_status: String?
+    end
+
     class GetConnectorV2Request
       include Smithy::Schema::Structure
 
@@ -12256,6 +13150,8 @@ module Aws::SecurityHub
         ?last_updated_at: Time,
         ?health: Types::HealthCheck,
         ?provider_detail: Types::ProviderDetail,
+        ?enablement_status: String,
+        ?enablement_status_reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -12268,6 +13164,8 @@ module Aws::SecurityHub
       attr_accessor last_updated_at: Time?
       attr_accessor health: Types::HealthCheck?
       attr_accessor provider_detail: Types::ProviderDetail?
+      attr_accessor enablement_status: String?
+      attr_accessor enablement_status_reason: String?
     end
 
     class GetEnabledStandardsRequest
@@ -12277,12 +13175,14 @@ module Aws::SecurityHub
         ?standards_subscription_arns: Array[String],
         ?next_token: String,
         ?max_results: Integer,
+        ?providers: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor standards_subscription_arns: Array[String]?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor providers: Array[String]?
     end
 
     class GetEnabledStandardsResponse
@@ -12296,6 +13196,48 @@ module Aws::SecurityHub
 
       attr_accessor standards_subscriptions: Array[Types::StandardsSubscription]?
       attr_accessor next_token: String?
+    end
+
+    class GetExportJobV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_id: String?
+    end
+
+    class GetExportJobV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_id: String,
+        ?name: String,
+        ?status: String,
+        ?data_type: String,
+        ?output_configuration: Types::ExportOutput,
+        ?scopes: Types::ExportScopes,
+        ?destination: Types::ExportDestination,
+        ?failure_code: String,
+        ?failure_message: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor data_type: String?
+      attr_accessor output_configuration: Types::ExportOutput?
+      attr_accessor scopes: Types::ExportScopes?
+      attr_accessor destination: Types::ExportDestination?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
     end
 
     class GetFindingAggregatorRequest
@@ -12363,12 +13305,14 @@ module Aws::SecurityHub
 
       def initialize: (
         ?group_by_rules: Array[Types::GroupByRule],
+        ?scopes: Types::FindingScopes,
         ?sort_order: String,
         ?max_statistic_results: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor group_by_rules: Array[Types::GroupByRule]?
+      attr_accessor scopes: Types::FindingScopes?
       attr_accessor sort_order: String?
       attr_accessor max_statistic_results: Integer?
     end
@@ -12414,11 +13358,46 @@ module Aws::SecurityHub
       attr_accessor next_token: String?
     end
 
+    class GetFindingsTrendsV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::FindingsTrendsFilters,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::FindingsTrendsFilters?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetFindingsTrendsV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?granularity: String,
+        ?trends_metrics: Array[Types::TrendsMetricsResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor granularity: String?
+      attr_accessor trends_metrics: Array[Types::TrendsMetricsResult]?
+      attr_accessor next_token: String?
+    end
+
     class GetFindingsV2Request
       include Smithy::Schema::Structure
 
       def initialize: (
         ?filters: Types::OcsfFindingFilters,
+        ?scopes: Types::FindingScopes,
         ?sort_criteria: Array[Types::SortCriterion],
         ?next_token: String,
         ?max_results: Integer,
@@ -12426,6 +13405,7 @@ module Aws::SecurityHub
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor filters: Types::OcsfFindingFilters?
+      attr_accessor scopes: Types::FindingScopes?
       attr_accessor sort_criteria: Array[Types::SortCriterion]?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
@@ -12558,17 +13538,91 @@ module Aws::SecurityHub
       attr_accessor unprocessed_accounts: Array[Types::Result]?
     end
 
+    class GetRecommendedPolicyV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_uid: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_uid: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetRecommendedPolicyV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?recommendation_type: String,
+        ?recommendation_steps: Array[Types::RecommendationStep],
+        ?error: Types::RecommendationError,
+        ?status: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor recommendation_type: String?
+      attr_accessor recommendation_steps: Array[Types::RecommendationStep]?
+      attr_accessor error: Types::RecommendationError?
+      attr_accessor status: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class GetRemediationsV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_uid: String,
+        ?metadata_uid: String,
+        ?filters: Types::RemediationFilters,
+        ?show_guidance: bool,
+        ?guidance_format: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_uid: String?
+      attr_accessor metadata_uid: String?
+      attr_accessor filters: Types::RemediationFilters?
+      attr_accessor show_guidance: bool?
+      attr_accessor guidance_format: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetRemediationsV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::RemediationV2Item],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::RemediationV2Item]?
+      attr_accessor next_token: String?
+    end
+
     class GetResourcesStatisticsV2Request
       include Smithy::Schema::Structure
 
       def initialize: (
         ?group_by_rules: Array[Types::ResourceGroupByRule],
+        ?scopes: Types::ResourceScopes,
         ?sort_order: String,
         ?max_statistic_results: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor group_by_rules: Array[Types::ResourceGroupByRule]?
+      attr_accessor scopes: Types::ResourceScopes?
       attr_accessor sort_order: String?
       attr_accessor max_statistic_results: Integer?
     end
@@ -12584,11 +13638,46 @@ module Aws::SecurityHub
       attr_accessor group_by_results: Array[Types::GroupByResult]?
     end
 
+    class GetResourcesTrendsV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ResourcesTrendsFilters,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ResourcesTrendsFilters?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetResourcesTrendsV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?granularity: String,
+        ?trends_metrics: Array[Types::ResourcesTrendsMetricsResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor granularity: String?
+      attr_accessor trends_metrics: Array[Types::ResourcesTrendsMetricsResult]?
+      attr_accessor next_token: String?
+    end
+
     class GetResourcesV2Request
       include Smithy::Schema::Structure
 
       def initialize: (
         ?filters: Types::ResourcesFilters,
+        ?scopes: Types::ResourceScopes,
         ?sort_criteria: Array[Types::SortCriterion],
         ?next_token: String,
         ?max_results: Integer,
@@ -12596,6 +13685,7 @@ module Aws::SecurityHub
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor filters: Types::ResourcesFilters?
+      attr_accessor scopes: Types::ResourceScopes?
       attr_accessor sort_criteria: Array[Types::SortCriterion]?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
@@ -12636,6 +13726,12 @@ module Aws::SecurityHub
       attr_accessor security_control_definition: Types::SecurityControlDefinition?
     end
 
+    module GranularityField
+      DAILY: String
+      WEEKLY: String
+      MONTHLY: String
+    end
+
     module GroupByField
       ACTIVITY_NAME: String
       CLOUD_ACCOUNT_UID: String
@@ -12645,15 +13741,32 @@ module Aws::SecurityHub
       COMPLIANCE_STATUS: String
       COMPLIANCE_CONTROL: String
       FINDING_INFO_TITLE: String
+      FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY: String
       FINDING_INFO_TYPES: String
+      IMPACT: String
+      LIKELIHOOD: String
       METADATA_PRODUCT_NAME: String
       METADATA_PRODUCT_UID: String
       RESOURCES_TYPE: String
+      RESOURCES_CLOUD_PARTITION: String
+      RESOURCES_CRITICALITY: String
+      RESOURCES_NAME: String
+      RESOURCES_OWNER_ACCOUNT_UID: String
+      RESOURCES_OWNER_ORG_UID: String
+      RESOURCES_OWNER_ACCOUNT_NAME: String
+      RESOURCES_PROVIDER: String
+      RESOURCES_REGION: String
       RESOURCES_UID: String
       SEVERITY: String
       STATUS: String
       VULNERABILITIES_FIX_COVERAGE: String
       CLASS_NAME: String
+      VULNERABILITIES_AFFECTED_PACKAGES_NAME: String
+      FINDING_INFO_ANALYTIC_NAME: String
+      COMPLIANCE_STANDARDS: String
+      CLOUD_ACCOUNT_NAME: String
+      VENDOR_ATTRIBUTES_SEVERITY: String
+      METADATA_PRODUCT_VENDOR_NAME: String
     end
 
     class GroupByResult
@@ -12695,6 +13808,18 @@ module Aws::SecurityHub
       attr_accessor count: Integer?
     end
 
+    module GuidanceFormat
+      ALL: String
+      AWS_CLI: String
+      CLI: String
+      PYTHON: String
+      TERRAFORM: String
+      CDK: String
+      CLOUDFORMATION: String
+      IAC: String
+      TEMPLATE: String
+    end
+
     class HealthCheck
       include Smithy::Schema::Structure
 
@@ -12702,12 +13827,37 @@ module Aws::SecurityHub
         ?connector_status: String,
         ?message: String,
         ?last_checked_at: Time,
+        ?issues: Array[Types::HealthIssue],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connector_status: String?
       attr_accessor message: String?
       attr_accessor last_checked_at: Time?
+      attr_accessor issues: Array[Types::HealthIssue]?
+    end
+
+    class HealthIssue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module HealthIssueCode
+      AUTHENTICATION_FAILURE: String
+      STREAM_AUTHORIZATION_FAILURE: String
+      DISCOVERY_FAILURE: String
+      STREAM_LIMIT_EXCEEDED: String
+      STREAM_DISCONNECTED: String
+      RECORDING_FAILURE: String
+      NO_HEALTH_DATA: String
     end
 
     class IcmpTypeCode
@@ -12842,6 +13992,7 @@ module Aws::SecurityHub
       SEND_FINDINGS_TO_SECURITY_HUB: String
       RECEIVE_FINDINGS_FROM_SECURITY_HUB: String
       UPDATE_FINDINGS_IN_SECURITY_HUB: String
+      EXTENDED_PLAN: String
     end
 
     class InternalException
@@ -13019,6 +14170,19 @@ module Aws::SecurityHub
       attr_accessor project_key: String?
     end
 
+    class KbArticle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor url: String?
+    end
+
     class KeywordFilter
       include Smithy::Schema::Structure
 
@@ -13175,6 +14339,38 @@ module Aws::SecurityHub
       attr_accessor next_token: String?
     end
 
+    class ListConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?provider_name: String,
+        ?connector_status: String,
+        ?enablement_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor provider_name: String?
+      attr_accessor connector_status: String?
+      attr_accessor enablement_status: String?
+    end
+
+    class ListConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?connectors: Array[Types::CspmConnectorSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor connectors: Array[Types::CspmConnectorSummary]?
+    end
+
     class ListConnectorsV2Request
       include Smithy::Schema::Structure
 
@@ -13183,6 +14379,7 @@ module Aws::SecurityHub
         ?max_results: Integer,
         ?provider_name: String,
         ?connector_status: String,
+        ?enablement_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -13190,6 +14387,7 @@ module Aws::SecurityHub
       attr_accessor max_results: Integer?
       attr_accessor provider_name: String?
       attr_accessor connector_status: String?
+      attr_accessor enablement_status: String?
     end
 
     class ListConnectorsV2Response
@@ -13231,6 +14429,72 @@ module Aws::SecurityHub
       attr_accessor next_token: String?
     end
 
+    class ListExportJobsV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?data_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor data_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExportJobsV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExportSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExportSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExposuresByRemediationV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_uid: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_uid: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExposuresByRemediationV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExposureFinding],
+        ?target_uid: String,
+        ?resource: Types::RemediationResource,
+        ?total_count: Integer,
+        ?trait: Types::RemediationTrait,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExposureFinding]?
+      attr_accessor target_uid: String?
+      attr_accessor resource: Types::RemediationResource?
+      attr_accessor total_count: Integer?
+      attr_accessor trait: Types::RemediationTrait?
+      attr_accessor next_token: String?
+    end
+
     class ListFindingAggregatorsRequest
       include Smithy::Schema::Structure
 
@@ -13254,6 +14518,36 @@ module Aws::SecurityHub
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor finding_aggregators: Array[Types::FindingAggregator]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFreeTrialStatusesV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_ids: Array[String],
+        ?statuses: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_ids: Array[String]?
+      attr_accessor statuses: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFreeTrialStatusesV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_free_trial_statuses: Array[Types::AccountFreeTrialStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_free_trial_statuses: Array[Types::AccountFreeTrialStatus]?
       attr_accessor next_token: String?
     end
 
@@ -13348,12 +14642,14 @@ module Aws::SecurityHub
         ?standards_arn: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?providers: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor standards_arn: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor providers: Array[String]?
     end
 
     class ListSecurityControlDefinitionsResponse
@@ -13776,6 +15072,9 @@ module Aws::SecurityHub
       FINDING_INFO_FIRST_SEEN_TIME_DT: String
       FINDING_INFO_LAST_SEEN_TIME_DT: String
       FINDING_INFO_MODIFIED_TIME_DT: String
+      RESOURCES_IMAGE_CREATED_TIME_DT: String
+      RESOURCES_IMAGE_LAST_USED_TIME_DT: String
+      RESOURCES_MODIFIED_TIME_DT: String
     end
 
     class OcsfDateFilter
@@ -13819,8 +15118,29 @@ module Aws::SecurityHub
       attr_accessor metadata_product_uid: String?
     end
 
+    module OcsfIpField
+      EVIDENCES_DST_ENDPOINT_IP: String
+      EVIDENCES_SRC_ENDPOINT_IP: String
+    end
+
+    class OcsfIpFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?filter: Types::IpFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor filter: Types::IpFilter?
+    end
+
     module OcsfMapField
       RESOURCES_TAGS: String
+      COMPLIANCE_CONTROL_PARAMETERS: String
+      DATABUCKET_TAGS: String
+      FINDING_INFO_TAGS: String
     end
 
     class OcsfMapFilter
@@ -13843,6 +15163,14 @@ module Aws::SecurityHub
       SEVERITY_ID: String
       STATUS_ID: String
       FINDING_INFO_RELATED_EVENTS_COUNT: String
+      EVIDENCES_API_RESPONSE_CODE: String
+      EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER: String
+      EVIDENCES_DST_ENDPOINT_PORT: String
+      EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NUMBER: String
+      EVIDENCES_SRC_ENDPOINT_PORT: String
+      RESOURCES_IMAGE_IN_USE_COUNT: String
+      VULNERABILITIES_CVE_CVSS_BASE_SCORE: String
+      VENDOR_ATTRIBUTES_SEVERITY_ID: String
     end
 
     class OcsfNumberFilter
@@ -13874,15 +15202,24 @@ module Aws::SecurityHub
       FINDING_INFO_TITLE: String
       FINDING_INFO_TYPES: String
       FINDING_INFO_UID: String
+      FINDING_INFO_RELATED_EVENTS_TRAITS_CATEGORY: String
       FINDING_INFO_RELATED_EVENTS_UID: String
       FINDING_INFO_RELATED_EVENTS_PRODUCT_UID: String
       FINDING_INFO_RELATED_EVENTS_TITLE: String
+      IMPACT: String
+      LIKELIHOOD: String
       METADATA_PRODUCT_NAME: String
       METADATA_PRODUCT_UID: String
       METADATA_PRODUCT_VENDOR_NAME: String
       REMEDIATION_DESC: String
       REMEDIATION_REFERENCES: String
       RESOURCES_CLOUD_PARTITION: String
+      RESOURCES_CRITICALITY: String
+      RESOURCES_NAME: String
+      RESOURCES_OWNER_ACCOUNT_UID: String
+      RESOURCES_OWNER_ORG_UID: String
+      RESOURCES_OWNER_ACCOUNT_NAME: String
+      RESOURCES_PROVIDER: String
       RESOURCES_REGION: String
       RESOURCES_TYPE: String
       RESOURCES_UID: String
@@ -13891,6 +15228,44 @@ module Aws::SecurityHub
       COMMENT: String
       VULNERABILITIES_FIX_COVERAGE: String
       CLASS_NAME: String
+      DATABUCKET_ENCRYPTION_DETAILS_ALGORITHM: String
+      DATABUCKET_ENCRYPTION_DETAILS_KEY_UID: String
+      DATABUCKET_FILE_DATA_CLASSIFICATIONS_CLASSIFIER_DETAILS_TYPE: String
+      EVIDENCES_ACTOR_USER_ACCOUNT_UID: String
+      EVIDENCES_API_OPERATION: String
+      EVIDENCES_API_RESPONSE_ERROR_MESSAGE: String
+      EVIDENCES_API_SERVICE_NAME: String
+      EVIDENCES_CONNECTION_INFO_DIRECTION: String
+      EVIDENCES_CONNECTION_INFO_PROTOCOL_NAME: String
+      EVIDENCES_DST_ENDPOINT_AUTONOMOUS_SYSTEM_NAME: String
+      EVIDENCES_DST_ENDPOINT_LOCATION_CITY: String
+      EVIDENCES_DST_ENDPOINT_LOCATION_COUNTRY: String
+      EVIDENCES_SRC_ENDPOINT_AUTONOMOUS_SYSTEM_NAME: String
+      EVIDENCES_SRC_ENDPOINT_HOSTNAME: String
+      EVIDENCES_SRC_ENDPOINT_LOCATION_CITY: String
+      EVIDENCES_SRC_ENDPOINT_LOCATION_COUNTRY: String
+      FINDING_INFO_ANALYTIC_NAME: String
+      MALWARE_NAME: String
+      MALWARE_SCAN_INFO_UID: String
+      MALWARE_SEVERITY: String
+      RESOURCES_CLOUD_FUNCTION_LAYERS_UID_ALT: String
+      RESOURCES_CLOUD_FUNCTION_RUNTIME: String
+      RESOURCES_CLOUD_FUNCTION_USER_UID: String
+      RESOURCES_DEVICE_ENCRYPTION_DETAILS_KEY_UID: String
+      RESOURCES_DEVICE_IMAGE_UID: String
+      RESOURCES_IMAGE_ARCHITECTURE: String
+      RESOURCES_IMAGE_REGISTRY_UID: String
+      RESOURCES_IMAGE_REPOSITORY_NAME: String
+      RESOURCES_IMAGE_UID: String
+      RESOURCES_SUBNET_INFO_UID: String
+      RESOURCES_VPC_UID: String
+      VULNERABILITIES_AFFECTED_CODE_FILE_PATH: String
+      VULNERABILITIES_AFFECTED_PACKAGES_NAME: String
+      VULNERABILITIES_CVE_EPSS_SCORE: String
+      VULNERABILITIES_CVE_UID: String
+      VULNERABILITIES_RELATED_VULNERABILITIES: String
+      CLOUD_ACCOUNT_NAME: String
+      VENDOR_ATTRIBUTES_SEVERITY: String
     end
 
     class OcsfStringFilter
@@ -13930,6 +15305,32 @@ module Aws::SecurityHub
       PENDING: String
       ENABLED: String
       FAILED: String
+    end
+
+    class OrganizationNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class OrganizationalUnitNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
     end
 
     class Page
@@ -14026,6 +15427,9 @@ module Aws::SecurityHub
       AWS: String
       AWS_CN: String
       AWS_US_GOV: String
+      AWS_US_ISO: String
+      AWS_US_ISO_B: String
+      AZURE_CLOUD: String
     end
 
     class PatchSummary
@@ -14188,6 +15592,7 @@ module Aws::SecurityHub
         ?integration_v2_types: Array[String],
         ?marketplace_url: String,
         ?activation_url: String,
+        ?marketplace_product_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -14198,6 +15603,7 @@ module Aws::SecurityHub
       attr_accessor integration_v2_types: Array[String]?
       attr_accessor marketplace_url: String?
       attr_accessor activation_url: String?
+      attr_accessor marketplace_product_id: String?
     end
 
     class PropagatingVgwSetDetails
@@ -14217,15 +15623,19 @@ module Aws::SecurityHub
       def initialize: (
         ?jira_cloud: Types::JiraCloudProviderConfiguration,
         ?service_now: Types::ServiceNowProviderConfiguration,
+        ?azure: Types::AzureProviderConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor jira_cloud: Types::JiraCloudProviderConfiguration?
       attr_accessor service_now: Types::ServiceNowProviderConfiguration?
+      attr_accessor azure: Types::AzureProviderConfiguration?
 
       class JiraCloud < ProviderConfiguration
       end
       class ServiceNow < ProviderConfiguration
+      end
+      class Azure < ProviderConfiguration
       end
       class Unknown < ProviderConfiguration
       end
@@ -14237,15 +15647,19 @@ module Aws::SecurityHub
       def initialize: (
         ?jira_cloud: Types::JiraCloudDetail,
         ?service_now: Types::ServiceNowDetail,
+        ?azure: Types::AzureDetail,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor jira_cloud: Types::JiraCloudDetail?
       attr_accessor service_now: Types::ServiceNowDetail?
+      attr_accessor azure: Types::AzureDetail?
 
       class JiraCloud < ProviderDetail
       end
       class ServiceNow < ProviderDetail
+      end
+      class Azure < ProviderDetail
       end
       class Unknown < ProviderDetail
       end
@@ -14257,11 +15671,13 @@ module Aws::SecurityHub
       def initialize: (
         ?provider_name: String,
         ?connector_status: String,
+        ?provider_configuration: Types::ProviderDetail,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor provider_name: String?
       attr_accessor connector_status: String?
+      attr_accessor provider_configuration: Types::ProviderDetail?
     end
 
     class ProviderUpdateConfiguration
@@ -14269,12 +15685,20 @@ module Aws::SecurityHub
 
       def initialize: (
         ?jira_cloud: Types::JiraCloudUpdateConfiguration,
+        ?service_now: Types::ServiceNowUpdateConfiguration,
+        ?azure: Types::AzureUpdateConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor jira_cloud: Types::JiraCloudUpdateConfiguration?
+      attr_accessor service_now: Types::ServiceNowUpdateConfiguration?
+      attr_accessor azure: Types::AzureUpdateConfiguration?
 
       class JiraCloud < ProviderUpdateConfiguration
+      end
+      class ServiceNow < ProviderUpdateConfiguration
+      end
+      class Azure < ProviderUpdateConfiguration
       end
       class Unknown < ProviderUpdateConfiguration
       end
@@ -14308,6 +15732,45 @@ module Aws::SecurityHub
       attr_accessor url: String?
     end
 
+    class RecommendationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module RecommendationStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    class RecommendationStep
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?unused_permissions: Types::UnusedPermissionsRecommendationStep,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unused_permissions: Types::UnusedPermissionsRecommendationStep?
+
+      class UnusedPermissions < RecommendationStep
+      end
+      class Unknown < RecommendationStep
+      end
+    end
+
+    module RecommendationType
+      UNUSED_PERMISSION_RECOMMENDATION: String
+    end
+
     class Record
       include Smithy::Schema::Structure
 
@@ -14329,6 +15792,32 @@ module Aws::SecurityHub
     module RegionAvailabilityStatus
       AVAILABLE: String
       UNAVAILABLE: String
+    end
+
+    class RegisterConnectorV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_code: String,
+        ?auth_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_code: String?
+      attr_accessor auth_state: String?
+    end
+
+    class RegisterConnectorV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor connector_id: String?
     end
 
     class RelatedFinding
@@ -14355,6 +15844,328 @@ module Aws::SecurityHub
       attr_accessor recommendation: Types::Recommendation?
     end
 
+    class RemediationCompositeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_filters: Array[Types::RemediationStringFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_filters: Array[Types::RemediationStringFilter]?
+    end
+
+    class RemediationFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?composite_filters: Array[Types::RemediationCompositeFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor composite_filters: Array[Types::RemediationCompositeFilter]?
+    end
+
+    class RemediationGuidance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_type_name: String,
+        ?pattern: String,
+        ?version: String,
+        ?context: Types::RemediationGuidanceContext,
+        ?specification: Types::RemediationGuidanceSpecification,
+        ?examples: Types::RemediationGuidanceExamples,
+        ?metadata: Types::RemediationGuidanceMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_type_name: String?
+      attr_accessor pattern: String?
+      attr_accessor version: String?
+      attr_accessor context: Types::RemediationGuidanceContext?
+      attr_accessor specification: Types::RemediationGuidanceSpecification?
+      attr_accessor examples: Types::RemediationGuidanceExamples?
+      attr_accessor metadata: Types::RemediationGuidanceMetadata?
+    end
+
+    class RemediationGuidanceContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?problem_statement: String,
+        ?risk_assessment: String,
+        ?affected_scope: String,
+        ?prerequisites: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor problem_statement: String?
+      attr_accessor risk_assessment: String?
+      attr_accessor affected_scope: String?
+      attr_accessor prerequisites: Array[String]?
+    end
+
+    class RemediationGuidanceExamples
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_cli: String,
+        ?cli: String,
+        ?python: String,
+        ?terraform: String,
+        ?cdk: String,
+        ?cloud_formation: String,
+        ?ia_c: String,
+        ?template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_cli: String?
+      attr_accessor cli: String?
+      attr_accessor python: String?
+      attr_accessor terraform: String?
+      attr_accessor cdk: String?
+      attr_accessor cloud_formation: String?
+      attr_accessor ia_c: String?
+      attr_accessor template: String?
+    end
+
+    class RemediationGuidanceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?exposure_type: String,
+        ?trait_titles: Array[String],
+        ?reversibility: String,
+        ?fix_effect: String,
+        ?risk_level: String,
+        ?automation_level: String,
+        ?human_review_required: bool,
+        ?generated_at: Time,
+        ?verification_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor exposure_type: String?
+      attr_accessor trait_titles: Array[String]?
+      attr_accessor reversibility: String?
+      attr_accessor fix_effect: String?
+      attr_accessor risk_level: String?
+      attr_accessor automation_level: String?
+      attr_accessor human_review_required: bool?
+      attr_accessor generated_at: Time?
+      attr_accessor verification_status: String?
+    end
+
+    class RemediationGuidanceSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameters: Array[Types::RemediationParameter],
+        ?steps: Array[Types::RemediationStep],
+        ?expected_end_state: String,
+        ?required_permissions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameters: Array[Types::RemediationParameter]?
+      attr_accessor steps: Array[Types::RemediationStep]?
+      attr_accessor expected_end_state: String?
+      attr_accessor required_permissions: Array[String]?
+    end
+
+    class RemediationOutcome
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolved_findings_count: Integer,
+        ?severity_reduction_findings_count: Integer,
+        ?severity_unchanged_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolved_findings_count: Integer?
+      attr_accessor severity_reduction_findings_count: Integer?
+      attr_accessor severity_unchanged_count: Integer?
+    end
+
+    class RemediationParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?description: String,
+        ?required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor required: bool?
+    end
+
+    module RemediationPriority
+      CRITICAL: String
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+    end
+
+    class RemediationResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?region: String,
+        ?resource_owner_account_id: String,
+        ?resource_owner_org_id: String,
+        ?type: String,
+        ?name: String,
+        ?id: String,
+        ?resource_guid: String,
+        ?resource_region: String,
+        ?cloud_provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor region: String?
+      attr_accessor resource_owner_account_id: String?
+      attr_accessor resource_owner_org_id: String?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor resource_guid: String?
+      attr_accessor resource_region: String?
+      attr_accessor cloud_provider: String?
+    end
+
+    module RemediationStatus
+      NEW: String
+      UPDATED: String
+      RESOLVED: String
+    end
+
+    class RemediationStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phase: String,
+        ?description: String,
+        ?service: String,
+        ?action: String,
+        ?logic: String,
+        ?inverse: String,
+        ?verify_after: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phase: String?
+      attr_accessor description: String?
+      attr_accessor service: String?
+      attr_accessor action: String?
+      attr_accessor logic: String?
+      attr_accessor inverse: String?
+      attr_accessor verify_after: String?
+    end
+
+    module RemediationStringField
+      RESOURCE_TYPE: String
+      PRIORITY: String
+      STATUS: String
+      RESOURCE_ID: String
+      RESOURCE_OWNER_ACCOUNT_ID: String
+      RESOURCE_CLOUD_PROVIDER: String
+    end
+
+    class RemediationStringFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?filter: Types::RemediationStringFilterCondition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor filter: Types::RemediationStringFilterCondition?
+    end
+
+    class RemediationStringFilterCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+    end
+
+    class RemediationSummaryDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?description: String,
+        ?is_immediate: bool,
+        ?post_remediation_steps: Array[String],
+        ?kb_articles: Array[Types::KbArticle],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor description: String?
+      attr_accessor is_immediate: bool?
+      attr_accessor post_remediation_steps: Array[String]?
+      attr_accessor kb_articles: Array[Types::KbArticle]?
+    end
+
+    class RemediationTrait
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor title: String?
+    end
+
+    class RemediationV2Item
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_uid: String,
+        ?outcome: Types::RemediationOutcome,
+        ?priority: String,
+        ?remediation_summary: Types::RemediationSummaryDetail,
+        ?resource: Types::RemediationResource,
+        ?status: String,
+        ?trait: Types::RemediationTrait,
+        ?guidance: Types::RemediationGuidance,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_uid: String?
+      attr_accessor outcome: Types::RemediationOutcome?
+      attr_accessor priority: String?
+      attr_accessor remediation_summary: Types::RemediationSummaryDetail?
+      attr_accessor resource: Types::RemediationResource?
+      attr_accessor status: String?
+      attr_accessor trait: Types::RemediationTrait?
+      attr_accessor guidance: Types::RemediationGuidance?
+      attr_accessor updated_at: Time?
+    end
+
     class Resource
       include Smithy::Schema::Structure
 
@@ -14363,6 +16174,8 @@ module Aws::SecurityHub
         ?id: String,
         ?partition: String,
         ?region: String,
+        ?provider: String,
+        ?owner: Types::ResourceOwner,
         ?resource_role: String,
         ?tags: Hash[String, String],
         ?data_classification: Types::DataClassificationDetails,
@@ -14376,6 +16189,8 @@ module Aws::SecurityHub
       attr_accessor id: String?
       attr_accessor partition: String?
       attr_accessor region: String?
+      attr_accessor provider: String?
+      attr_accessor owner: Types::ResourceOwner?
       attr_accessor resource_role: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor data_classification: Types::DataClassificationDetails?
@@ -14392,6 +16207,7 @@ module Aws::SecurityHub
       AI_ML: String
       IDENTITY: String
       NETWORK: String
+      MESSAGING: String
       OTHER: String
     end
 
@@ -14406,6 +16222,14 @@ module Aws::SecurityHub
 
       attr_accessor message: String?
       attr_accessor code: String?
+    end
+
+    module ResourceCriticality
+      VERY_HIGH: String
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+      UNKNOWN: String
     end
 
     class ResourceDetails
@@ -14512,6 +16336,7 @@ module Aws::SecurityHub
         ?aws_s3_access_point: Types::AwsS3AccessPointDetails,
         ?aws_ec2_client_vpn_endpoint: Types::AwsEc2ClientVpnEndpointDetails,
         ?code_repository: Types::CodeRepositoryDetails,
+        ?azure_resource: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -14615,6 +16440,7 @@ module Aws::SecurityHub
       attr_accessor aws_s3_access_point: Types::AwsS3AccessPointDetails?
       attr_accessor aws_ec2_client_vpn_endpoint: Types::AwsEc2ClientVpnEndpointDetails?
       attr_accessor code_repository: Types::CodeRepositoryDetails?
+      attr_accessor azure_resource: Smithy::Schema::document?
     end
 
     class ResourceFindingsSummary
@@ -14636,11 +16462,22 @@ module Aws::SecurityHub
 
     module ResourceGroupByField
       ACCOUNT_ID: String
+      ACCOUNT_NAME: String
       REGION: String
+      RESOURCE_PROVIDER: String
+      RESOURCE_OWNER_ACCOUNT_ID: String
+      RESOURCE_OWNER_ORG_ID: String
+      RESOURCE_CLOUD_PARTITION: String
+      RESOURCE_REGION: String
       RESOURCE_CATEGORY: String
       RESOURCE_TYPE: String
       RESOURCE_NAME: String
       FINDING_TYPE: String
+      RESOURCE_SUB_CATEGORY: String
+      DISCOVERY_TYPE: String
+      HOST_RESOURCE_TYPE: String
+      CANONICAL_ID: String
+      RESOURCE_CRITICALITY: String
     end
 
     class ResourceGroupByRule
@@ -14669,6 +16506,17 @@ module Aws::SecurityHub
       attr_accessor code: String?
     end
 
+    class ResourceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ai_details: Types::AIDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ai_details: Types::AIDetails?
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -14682,14 +16530,55 @@ module Aws::SecurityHub
       attr_accessor code: String?
     end
 
+    class ResourceOwner
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: Types::ResourceOwnerAccount,
+        ?org: Types::ResourceOwnerOrg,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: Types::ResourceOwnerAccount?
+      attr_accessor org: Types::ResourceOwnerOrg?
+    end
+
+    class ResourceOwnerAccount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ResourceOwnerOrg
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
     class ResourceResult
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?resource_arn: String,
+        ?resource_guid: String,
         ?resource_id: String,
         ?account_id: String,
+        ?account_name: String,
         ?region: String,
+        ?resource_provider: String,
+        ?resource_owner_account_id: String,
+        ?resource_owner_org_id: String,
+        ?resource_cloud_partition: String,
+        ?resource_region: String,
         ?resource_category: String,
         ?resource_type: String,
         ?resource_name: String,
@@ -14698,13 +16587,24 @@ module Aws::SecurityHub
         ?findings_summary: Array[Types::ResourceFindingsSummary],
         ?resource_tags: Array[Types::ResourceTag],
         ?resource_config: Smithy::Schema::document,
+        ?resource_sub_category: String,
+        ?discovery_type: String,
+        ?resource_info: Types::ResourceInfo,
+        ?resource_criticality: String,
+        ?criticality_sources: Array[Types::CriticalitySource],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor resource_arn: String?
+      attr_accessor resource_guid: String?
       attr_accessor resource_id: String?
       attr_accessor account_id: String?
+      attr_accessor account_name: String?
       attr_accessor region: String?
+      attr_accessor resource_provider: String?
+      attr_accessor resource_owner_account_id: String?
+      attr_accessor resource_owner_org_id: String?
+      attr_accessor resource_cloud_partition: String?
+      attr_accessor resource_region: String?
       attr_accessor resource_category: String?
       attr_accessor resource_type: String?
       attr_accessor resource_name: String?
@@ -14713,6 +16613,22 @@ module Aws::SecurityHub
       attr_accessor findings_summary: Array[Types::ResourceFindingsSummary]?
       attr_accessor resource_tags: Array[Types::ResourceTag]?
       attr_accessor resource_config: Smithy::Schema::document?
+      attr_accessor resource_sub_category: String?
+      attr_accessor discovery_type: String?
+      attr_accessor resource_info: Types::ResourceInfo?
+      attr_accessor resource_criticality: String?
+      attr_accessor criticality_sources: Array[Types::CriticalitySource]?
+    end
+
+    class ResourceScopes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_organizations: Array[Types::AwsOrganizationScope],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_organizations: Array[Types::AwsOrganizationScope]?
     end
 
     class ResourceSeverityBreakdown
@@ -14740,6 +16656,20 @@ module Aws::SecurityHub
       attr_accessor unknown: Integer?
     end
 
+    module ResourceSubCategory
+      MODEL: String
+      MODEL_SERVING: String
+      AGENT: String
+      AGENT_FRAMEWORK: String
+      AGENT_TOOLS_AND_IDENTITY: String
+      SAFETY_AND_GUARDRAIL: String
+      KNOWLEDGE_AND_DATA: String
+      ORCHESTRATION_AND_PIPELINE: String
+      EXTERNAL_ENDPOINT: String
+      DEVELOPMENT: String
+      OTHER: String
+    end
+
     class ResourceTag
       include Smithy::Schema::Structure
 
@@ -14761,6 +16691,7 @@ module Aws::SecurityHub
         ?date_filters: Array[Types::ResourcesDateFilter],
         ?number_filters: Array[Types::ResourcesNumberFilter],
         ?map_filters: Array[Types::ResourcesMapFilter],
+        ?nested_composite_filters: Array[Types::ResourcesCompositeFilter],
         ?operator: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -14769,7 +16700,19 @@ module Aws::SecurityHub
       attr_accessor date_filters: Array[Types::ResourcesDateFilter]?
       attr_accessor number_filters: Array[Types::ResourcesNumberFilter]?
       attr_accessor map_filters: Array[Types::ResourcesMapFilter]?
+      attr_accessor nested_composite_filters: Array[Types::ResourcesCompositeFilter]?
       attr_accessor operator: String?
+    end
+
+    class ResourcesCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all_resources: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_resources: Integer?
     end
 
     module ResourcesDateField
@@ -14830,6 +16773,14 @@ module Aws::SecurityHub
       SEVERITY_LOW: String
       SEVERITY_INFORMATIONAL: String
       SEVERITY_UNKNOWN: String
+      SELF_HOSTED_AI_MODEL_RESOURCE_COUNT: String
+      SELF_HOSTED_AI_AGENT_RESOURCE_COUNT: String
+      SELF_HOSTED_AI_MODEL_SERVING_RESOURCE_COUNT: String
+      SELF_HOSTED_AI_EXTERNAL_ENDPOINT_RESOURCE_COUNT: String
+      SELF_HOSTED_AI_DEVELOPMENT_RESOURCE_COUNT: String
+      SELF_HOSTED_AI_AGENT_FRAMEWORK_RESOURCE_COUNT: String
+      SELF_HOSTED_AI_AGENT_TOOLS_AND_IDENTITY_RESOURCE_COUNT: String
+      SELF_HOSTED_TOTAL_AI_RESOURCE_COUNT: String
     end
 
     class ResourcesNumberFilter
@@ -14846,15 +16797,27 @@ module Aws::SecurityHub
     end
 
     module ResourcesStringField
-      RESOURCE_ARN: String
+      RESOURCE_GUID: String
       RESOURCE_ID: String
       ACCOUNT_ID: String
+      ACCOUNT_NAME: String
       REGION: String
+      RESOURCE_PROVIDER: String
+      RESOURCE_OWNER_ACCOUNT_ID: String
+      RESOURCE_OWNER_ORG_ID: String
+      RESOURCE_CLOUD_PARTITION: String
+      RESOURCE_REGION: String
       RESOURCE_CATEGORY: String
       RESOURCE_TYPE: String
       RESOURCE_NAME: String
       FINDING_TYPE: String
       PRODUCT_NAME: String
+      RESOURCE_SUB_CATEGORY: String
+      DISCOVERY_TYPE: String
+      HOST_RESOURCE_GUID: String
+      HOST_RESOURCE_TYPE: String
+      CANONICAL_ID: String
+      RESOURCE_CRITICALITY: String
     end
 
     class ResourcesStringFilter
@@ -14868,6 +16831,82 @@ module Aws::SecurityHub
 
       attr_accessor field_name: String?
       attr_accessor filter: Types::StringFilter?
+    end
+
+    class ResourcesTrendsCompositeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_filters: Array[Types::ResourcesTrendsStringFilter],
+        ?nested_composite_filters: Array[Types::ResourcesTrendsCompositeFilter],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_filters: Array[Types::ResourcesTrendsStringFilter]?
+      attr_accessor nested_composite_filters: Array[Types::ResourcesTrendsCompositeFilter]?
+      attr_accessor operator: String?
+    end
+
+    class ResourcesTrendsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?composite_filters: Array[Types::ResourcesTrendsCompositeFilter],
+        ?composite_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor composite_filters: Array[Types::ResourcesTrendsCompositeFilter]?
+      attr_accessor composite_operator: String?
+    end
+
+    class ResourcesTrendsMetricsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?trends_values: Types::ResourcesTrendsValues,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor trends_values: Types::ResourcesTrendsValues?
+    end
+
+    module ResourcesTrendsStringField
+      ACCOUNT_ID: String
+      REGION: String
+      RESOURCE_TYPE: String
+      RESOURCE_CATEGORY: String
+      RESOURCE_CLOUD_PROVIDER: String
+      RESOURCE_REGION: String
+      RESOURCE_OWNER_ID: String
+      RESOURCE_OWNER_ORGANIZATION_ID: String
+    end
+
+    class ResourcesTrendsStringFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?filter: Types::StringFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor filter: Types::StringFilter?
+    end
+
+    class ResourcesTrendsValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources_count: Types::ResourcesCount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources_count: Types::ResourcesCount?
     end
 
     class Result
@@ -15197,6 +17236,26 @@ module Aws::SecurityHub
       DISABLED: String
     end
 
+    class S3ExportDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?kms_key_arn: String,
+        ?object_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor object_prefix: String?
+    end
+
+    module ScopeType
+      TENANT: String
+      SUBSCRIPTION: String
+    end
+
     class SecurityControl
       include Smithy::Schema::Structure
 
@@ -15211,6 +17270,7 @@ module Aws::SecurityHub
         ?update_status: String,
         ?parameters: Hash[String, Types::ParameterConfiguration],
         ?last_update_reason: String,
+        ?provider: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -15224,6 +17284,7 @@ module Aws::SecurityHub
       attr_accessor update_status: String?
       attr_accessor parameters: Hash[String, Types::ParameterConfiguration]?
       attr_accessor last_update_reason: String?
+      attr_accessor provider: String?
     end
 
     class SecurityControlCustomParameter
@@ -15251,6 +17312,7 @@ module Aws::SecurityHub
         ?current_region_availability: String,
         ?customizable_properties: Array[String],
         ?parameter_definitions: Hash[String, Types::ParameterDefinition],
+        ?provider: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -15262,6 +17324,7 @@ module Aws::SecurityHub
       attr_accessor current_region_availability: String?
       attr_accessor customizable_properties: Array[String]?
       attr_accessor parameter_definitions: Hash[String, Types::ParameterDefinition]?
+      attr_accessor provider: String?
     end
 
     class SecurityControlParameter
@@ -15294,6 +17357,11 @@ module Aws::SecurityHub
       attr_accessor enabled_security_control_identifiers: Array[String]?
       attr_accessor disabled_security_control_identifiers: Array[String]?
       attr_accessor security_control_custom_parameters: Array[Types::SecurityControlCustomParameter]?
+    end
+
+    module SecurityControlsProvider
+      AWS: String
+      Azure: String
     end
 
     module SecurityHubFeature
@@ -15370,13 +17438,13 @@ module Aws::SecurityHub
 
       def initialize: (
         ?instance_name: String,
-        ?client_id: String,
+        ?secret_arn: String,
         ?auth_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_name: String?
-      attr_accessor client_id: String?
+      attr_accessor secret_arn: String?
       attr_accessor auth_status: String?
     end
 
@@ -15385,14 +17453,36 @@ module Aws::SecurityHub
 
       def initialize: (
         ?instance_name: String,
-        ?client_id: String,
-        ?client_secret: String,
+        ?secret_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_name: String?
-      attr_accessor client_id: String?
-      attr_accessor client_secret: String?
+      attr_accessor secret_arn: String?
+    end
+
+    class ServiceNowUpdateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
     end
 
     class Severity
@@ -15425,6 +17515,31 @@ module Aws::SecurityHub
       MEDIUM: String
       HIGH: String
       CRITICAL: String
+    end
+
+    class SeverityTrendsCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unknown: Integer,
+        ?informational: Integer,
+        ?low: Integer,
+        ?medium: Integer,
+        ?high: Integer,
+        ?critical: Integer,
+        ?fatal: Integer,
+        ?other: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unknown: Integer?
+      attr_accessor informational: Integer?
+      attr_accessor low: Integer?
+      attr_accessor medium: Integer?
+      attr_accessor high: Integer?
+      attr_accessor critical: Integer?
+      attr_accessor fatal: Integer?
+      attr_accessor other: Integer?
     end
 
     class SeverityUpdate
@@ -15538,6 +17653,7 @@ module Aws::SecurityHub
         ?name: String,
         ?description: String,
         ?enabled_by_default: bool,
+        ?provider: String,
         ?standards_managed_by: Types::StandardsManagedBy,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -15546,6 +17662,7 @@ module Aws::SecurityHub
       attr_accessor name: String?
       attr_accessor description: String?
       attr_accessor enabled_by_default: bool?
+      attr_accessor provider: String?
       attr_accessor standards_managed_by: Types::StandardsManagedBy?
     end
 
@@ -15682,6 +17799,11 @@ module Aws::SecurityHub
       attr_accessor product: String?
     end
 
+    module StandardsProvider
+      AWS: String
+      Azure: String
+    end
+
     module StandardsStatus
       PENDING: String
       READY: String
@@ -15711,6 +17833,7 @@ module Aws::SecurityHub
         ?standards_status: String,
         ?standards_controls_updatable: String,
         ?standards_status_reason: Types::StandardsStatusReason,
+        ?provider: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -15720,6 +17843,7 @@ module Aws::SecurityHub
       attr_accessor standards_status: String?
       attr_accessor standards_controls_updatable: String?
       attr_accessor standards_status_reason: Types::StandardsStatusReason?
+      attr_accessor provider: String?
     end
 
     class StandardsSubscriptionRequest
@@ -15793,6 +17917,36 @@ module Aws::SecurityHub
 
     end
 
+    class StartExportJobV2Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?destination: Types::ExportDestination,
+        ?output_configuration: Types::ExportOutput,
+        ?scopes: Types::ExportScopes,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor destination: Types::ExportDestination?
+      attr_accessor output_configuration: Types::ExportOutput?
+      attr_accessor scopes: Types::ExportScopes?
+      attr_accessor client_token: String?
+    end
+
+    class StartExportJobV2Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_id: String?
+    end
+
     class StatelessCustomActionDefinition
       include Smithy::Schema::Structure
 
@@ -15842,6 +17996,7 @@ module Aws::SecurityHub
     module StatusReasonCode
       NO_AVAILABLE_CONFIGURATION_RECORDER: String
       MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED: String
+      NO_AVAILABLE_MULTICLOUD_CONNECTOR: String
       INTERNAL_ERROR: String
     end
 
@@ -16026,6 +18181,34 @@ module Aws::SecurityHub
       attr_accessor code: String?
     end
 
+    module TicketCreationMode
+      DRYRUN: String
+    end
+
+    class TrendsMetricsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?trends_values: Types::TrendsValues,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor trends_values: Types::TrendsValues?
+    end
+
+    class TrendsValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?severity_trends: Types::SeverityTrendsCount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor severity_trends: Types::SeverityTrendsCount?
+    end
+
     class UnprocessedAutomationRule
       include Smithy::Schema::Structure
 
@@ -16129,6 +18312,25 @@ module Aws::SecurityHub
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class UnusedPermissionsRecommendationStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommended_action: String,
+        ?existing_policy: String,
+        ?existing_policy_id: String,
+        ?policy_updated_at: Time,
+        ?recommended_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommended_action: String?
+      attr_accessor existing_policy: String?
+      attr_accessor existing_policy_id: String?
+      attr_accessor policy_updated_at: Time?
+      attr_accessor recommended_policy: String?
     end
 
     class UpdateActionTargetRequest
@@ -16286,19 +18488,45 @@ module Aws::SecurityHub
       attr_accessor configuration_policy: Types::Policy?
     end
 
+    class UpdateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?description: String,
+        ?provider: Types::CspmProviderUpdateConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor description: String?
+      attr_accessor provider: Types::CspmProviderUpdateConfiguration?
+    end
+
+    class UpdateConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_status: String,
+        ?enablement_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_status: String?
+      attr_accessor enablement_status: String?
+    end
+
     class UpdateConnectorV2Request
       include Smithy::Schema::Structure
 
       def initialize: (
         ?connector_id: String,
-        ?client_secret: String,
         ?description: String,
         ?provider: Types::ProviderUpdateConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connector_id: String?
-      attr_accessor client_secret: String?
       attr_accessor description: String?
       attr_accessor provider: Types::ProviderUpdateConfiguration?
     end
@@ -16307,9 +18535,13 @@ module Aws::SecurityHub
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?connector_status: String,
+        ?enablement_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor connector_status: String?
+      attr_accessor enablement_status: String?
     end
 
     class UpdateFindingAggregatorRequest

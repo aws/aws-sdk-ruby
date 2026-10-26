@@ -80,6 +80,7 @@ module Aws::KMS
       ?xks_proxy_uri_endpoint: String,
       ?xks_proxy_uri_path: String,
       ?xks_proxy_vpc_endpoint_service_name: String,
+      ?xks_proxy_vpc_endpoint_service_owner: String,
       ?xks_proxy_authentication_credential: {
         access_key_id: String,
         raw_secret_access_key: String
@@ -99,11 +100,14 @@ module Aws::KMS
       ?operations: Array[String],
       ?constraints: {
         encryption_context_subset: Hash[String, String],
-        encryption_context_equals: untyped
+        encryption_context_equals: untyped,
+        source_arn: String
       },
       ?grant_tokens: Array[String],
       ?name: String,
-      ?dry_run: bool
+      ?dry_run: bool,
+      ?grantee_service_principal: String,
+      ?retiring_service_principal: String
     ) -> _CreateGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGrantResponse
 
     interface _CreateKeyResponse
@@ -147,7 +151,8 @@ module Aws::KMS
         key_encryption_algorithm: String,
         attestation_document: String
       },
-      ?dry_run: bool
+      ?dry_run: bool,
+      ?dry_run_modifiers: Array[String]
     ) -> _DecryptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DecryptResponse
 
     interface _DeleteAliasResponse
@@ -369,6 +374,17 @@ module Aws::KMS
       }
     ) -> _GenerateRandomResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateRandomResponse
 
+    interface _GetKeyLastUsageResponse
+      include Smithy::Client::_Response[Types::GetKeyLastUsageResponse]
+      def key_id: () -> String?
+      def key_last_usage: () -> Types::KeyLastUsageData?
+      def tracking_start_date: () -> Time?
+      def key_creation_date: () -> Time?
+    end
+    def get_key_last_usage: (
+      ?key_id: String
+    ) -> _GetKeyLastUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyLastUsageResponse
+
     interface _GetKeyPolicyResponse
       include Smithy::Client::_Response[Types::GetKeyPolicyResponse]
       def policy: () -> String?
@@ -459,7 +475,8 @@ module Aws::KMS
       ?marker: String,
       ?key_id: String,
       ?grant_id: String,
-      ?grantee_principal: String
+      ?grantee_principal: String,
+      ?grantee_service_principal: String
     ) -> _ListGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGrantsResponse
 
     interface _ListKeyPoliciesResponse
@@ -519,7 +536,8 @@ module Aws::KMS
     def list_retirable_grants: (
       ?limit: Integer,
       ?marker: String,
-      ?retiring_principal: String
+      ?retiring_principal: String,
+      ?retiring_service_principal: String
     ) -> _ListRetirableGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRetirableGrantsResponse
 
     interface _PutKeyPolicyResponse
@@ -551,7 +569,8 @@ module Aws::KMS
       ?source_encryption_algorithm: String,
       ?destination_encryption_algorithm: String,
       ?grant_tokens: Array[String],
-      ?dry_run: bool
+      ?dry_run: bool,
+      ?dry_run_modifiers: Array[String]
     ) -> _ReEncryptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReEncryptResponse
 
     interface _ReplicateKeyResponse
@@ -668,6 +687,7 @@ module Aws::KMS
       ?xks_proxy_uri_endpoint: String,
       ?xks_proxy_uri_path: String,
       ?xks_proxy_vpc_endpoint_service_name: String,
+      ?xks_proxy_vpc_endpoint_service_owner: String,
       ?xks_proxy_authentication_credential: {
         access_key_id: String,
         raw_secret_access_key: String

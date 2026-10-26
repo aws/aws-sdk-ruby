@@ -18,7 +18,7 @@ module Aws::IoTManagedIntegrations
     AccountAssociationItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#AccountAssociationItem", name: "AccountAssociationItem")
     AccountAssociationListDefinition = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#AccountAssociationListDefinition", name: "AccountAssociationListDefinition")
     AccountAssociationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#AccountAssociationName", name: "AccountAssociationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9-_ ]+$"})
-    ActionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ActionName", name: "ActionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[/a-zA-Z0-9\\._ ]+$"})
+    ActionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ActionName", name: "ActionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[/a-zA-Z0-9\\._ -]+$"})
     ActionReference = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ActionReference", name: "ActionReference", traits: {"smithy.api#pattern" => "^[a-zA-Z.]+$"})
     ActionTraceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ActionTraceId", name: "ActionTraceId", traits: {"smithy.api#length" => {"min" => 16, "max" => 20}, "smithy.api#pattern" => "^[a-zA-Z0-9]+=(?:_[0-9]+)?$"})
     AdvertisedProductId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#AdvertisedProductId", name: "AdvertisedProductId", traits: {"smithy.api#length" => {"min" => 5, "max" => 5}, "smithy.api#pattern" => "^([A-Za-z0-9!\#$%&()*\\+\\-;<=>?@^_`{|}~])+$"})
@@ -27,8 +27,11 @@ module Aws::IoTManagedIntegrations
     AttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#AttributeValue", name: "AttributeValue", traits: {"smithy.api#length" => {"max" => 800}, "smithy.api#pattern" => "[a-zA-Z0-9_.,@/:#-]*"})
     AuthConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#AuthConfig", name: "AuthConfig")
     AuthConfigUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#AuthConfigUpdate", name: "AuthConfigUpdate")
+    AuthMaterial = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#AuthMaterial", name: "AuthMaterial")
+    AuthMaterialName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#AuthMaterialName", name: "AuthMaterialName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[a-zA-Z0-9=_+/-]+$"})
     AuthMaterialString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#AuthMaterialString", name: "AuthMaterialString", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[0-9A-Za-z!\#$%&()*\\+\\-;<=>?@^_`{|}~\\/: {},\\\\\"]+$", "smithy.api#sensitive" => {}})
     AuthMaterialType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#AuthMaterialType", name: "AuthMaterialType")
+    AuthMaterials = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#AuthMaterials", name: "AuthMaterials", traits: {"smithy.api#length" => {"max" => 3}})
     AuthType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#AuthType", name: "AuthType")
     AuthUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#AuthUrl", name: "AuthUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}([-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"})
     BaseRatePerMinute = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotmanagedintegrations#BaseRatePerMinute", name: "BaseRatePerMinute", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
@@ -39,7 +42,7 @@ module Aws::IoTManagedIntegrations
     CapabilityActionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilityActionName", name: "CapabilityActionName", traits: {"smithy.api#pattern" => "^[/a-zA-Z]+$"})
     CapabilityActions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilityActions", name: "CapabilityActions", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     CapabilityId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilityId", name: "CapabilityId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9./]+(@\\d+\\.\\d+)?$"})
-    CapabilityName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilityName", name: "CapabilityName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[/a-zA-Z0-9\\._ ]+$"})
+    CapabilityName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilityName", name: "CapabilityName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[/a-zA-Z0-9\\._ -]+$"})
     CapabilityProperties = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilityProperties", name: "CapabilityProperties", traits: {"smithy.api#sensitive" => {}})
     CapabilityReport = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilityReport", name: "CapabilityReport")
     CapabilityReportActions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilityReportActions", name: "CapabilityReportActions", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
@@ -53,6 +56,7 @@ module Aws::IoTManagedIntegrations
     CapabilitySchemaItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilitySchemaItem", name: "CapabilitySchemaItem")
     CapabilitySchemas = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilitySchemas", name: "CapabilitySchemas", traits: {"smithy.api#length" => {"min" => 0, "max" => 40}})
     CapabilityVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#CapabilityVersion", name: "CapabilityVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^(0|[1-9][0-9]*)$"})
+    CertificatePem = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#CertificatePem", name: "CertificatePem", traits: {"smithy.api#length" => {"min" => 1, "max" => 65536}, "smithy.api#pattern" => "^[\\s\\S]*$"})
     ClaimCertificate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ClaimCertificate", name: "ClaimCertificate", traits: {"smithy.api#sensitive" => {}})
     ClaimCertificatePrivateKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ClaimCertificatePrivateKey", name: "ClaimCertificatePrivateKey", traits: {"smithy.api#sensitive" => {}})
     Classification = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#Classification", name: "Classification", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#sensitive" => {}})
@@ -80,11 +84,12 @@ module Aws::IoTManagedIntegrations
     ConnectorDestinationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorDestinationName", name: "ConnectorDestinationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9-_ ]+$"})
     ConnectorDestinationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorDestinationSummary", name: "ConnectorDestinationSummary")
     ConnectorDeviceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorDeviceId", name: "ConnectorDeviceId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9_.,@-]+$", "smithy.api#sensitive" => {}})
-    ConnectorDeviceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorDeviceName", name: "ConnectorDeviceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}\\p{N} ._-]+$", "smithy.api#sensitive" => {}})
+    ConnectorDeviceIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorDeviceIdList", name: "ConnectorDeviceIdList", traits: {"smithy.api#length" => {"max" => 100}})
+    ConnectorDeviceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorDeviceName", name: "ConnectorDeviceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}\\p{N} ._-]+$"})
     ConnectorEventMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorEventMessage", name: "ConnectorEventMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\sa-zA-Z0-9_.,@-]+$", "smithy.api#sensitive" => {}})
     ConnectorEventOperation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorEventOperation", name: "ConnectorEventOperation")
-    ConnectorEventOperationVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorEventOperationVersion", name: "ConnectorEventOperationVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 6}, "smithy.api#pattern" => "^[0-9.]+$", "smithy.api#sensitive" => {}})
-    ConnectorEventStatusCode = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorEventStatusCode", name: "ConnectorEventStatusCode", traits: {"smithy.api#range" => {"min" => 100, "max" => 550}, "smithy.api#sensitive" => {}})
+    ConnectorEventOperationVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorEventOperationVersion", name: "ConnectorEventOperationVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 6}, "smithy.api#pattern" => "^[0-9.]+$"})
+    ConnectorEventStatusCode = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorEventStatusCode", name: "ConnectorEventStatusCode", traits: {"smithy.api#range" => {"min" => 100, "max" => 550}})
     ConnectorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorId", name: "ConnectorId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$"})
     ConnectorItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorItem", name: "ConnectorItem")
     ConnectorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#ConnectorList", name: "ConnectorList")
@@ -167,6 +172,8 @@ module Aws::IoTManagedIntegrations
     DiscoveryType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#DiscoveryType", name: "DiscoveryType")
     DisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#DisplayName", name: "DisplayName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9-_ ]+$"})
     DurationInMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotmanagedintegrations#DurationInMinutes", name: "DurationInMinutes", traits: {"smithy.api#range" => {"min" => 1, "max" => 1430}})
+    EnableAsProvisionee = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iotmanagedintegrations#EnableAsProvisionee", name: "EnableAsProvisionee")
+    EnableAsProvisioner = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iotmanagedintegrations#EnableAsProvisioner", name: "EnableAsProvisioner")
     EncryptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#EncryptionType", name: "EncryptionType")
     EndTime = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#EndTime", name: "EndTime")
     EndpointAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#EndpointAddress", name: "EndpointAddress", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9._@-]+$"})
@@ -179,11 +186,13 @@ module Aws::IoTManagedIntegrations
     ErrorResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ErrorResourceType", name: "ErrorResourceType")
     EventLogConfigurationListDefinition = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#EventLogConfigurationListDefinition", name: "EventLogConfigurationListDefinition")
     EventLogConfigurationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#EventLogConfigurationSummary", name: "EventLogConfigurationSummary")
-    EventName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#EventName", name: "EventName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[/a-zA-Z0-9\\._ ]+$"})
+    EventName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#EventName", name: "EventName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[/a-zA-Z0-9\\._ -]+$"})
     EventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#EventType", name: "EventType")
     ExecutionNumber = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotmanagedintegrations#ExecutionNumber", name: "ExecutionNumber")
     ExponentialRolloutRate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#ExponentialRolloutRate", name: "ExponentialRolloutRate")
     ExtrinsicSchemaId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ExtrinsicSchemaId", name: "ExtrinsicSchemaId", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#pattern" => "^0[xX][0-9a-fA-F]+$|^[0-9]+$"})
+    GeneralAuthorizationName = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GeneralAuthorizationName", name: "GeneralAuthorizationName")
+    GeneralAuthorizationUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GeneralAuthorizationUpdate", name: "GeneralAuthorizationUpdate")
     GetAccountAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetAccountAssociationRequest", name: "GetAccountAssociationRequest")
     GetAccountAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetAccountAssociationResponse", name: "GetAccountAssociationResponse")
     GetCloudConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetCloudConnectorRequest", name: "GetCloudConnectorRequest")
@@ -206,6 +215,8 @@ module Aws::IoTManagedIntegrations
     GetHubConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetHubConfigurationResponse", name: "GetHubConfigurationResponse")
     GetManagedThingCapabilitiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetManagedThingCapabilitiesRequest", name: "GetManagedThingCapabilitiesRequest")
     GetManagedThingCapabilitiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetManagedThingCapabilitiesResponse", name: "GetManagedThingCapabilitiesResponse")
+    GetManagedThingCertificateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetManagedThingCertificateRequest", name: "GetManagedThingCertificateRequest")
+    GetManagedThingCertificateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetManagedThingCertificateResponse", name: "GetManagedThingCertificateResponse")
     GetManagedThingConnectivityDataRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetManagedThingConnectivityDataRequest", name: "GetManagedThingConnectivityDataRequest")
     GetManagedThingConnectivityDataResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetManagedThingConnectivityDataResponse", name: "GetManagedThingConnectivityDataResponse")
     GetManagedThingMetaDataRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#GetManagedThingMetaDataRequest", name: "GetManagedThingMetaDataRequest")
@@ -286,6 +297,7 @@ module Aws::IoTManagedIntegrations
     ManagedThingArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ManagedThingArn", name: "ManagedThingArn", traits: {"aws.api#arnReference" => {}, "smithy.api#length" => {"min" => 32, "max" => 1011}, "smithy.api#pattern" => "^arn:aws:iotmanagedintegrations:[0-9a-zA-Z-]+:[0-9]+:managed-thing/([0-9a-zA-Z:_-])+$"})
     ManagedThingAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#ManagedThingAssociation", name: "ManagedThingAssociation")
     ManagedThingAssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#ManagedThingAssociationList", name: "ManagedThingAssociationList")
+    ManagedThingAssociationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#ManagedThingAssociationStatus", name: "ManagedThingAssociationStatus")
     ManagedThingId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ManagedThingId", name: "ManagedThingId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9:_-]*$"})
     ManagedThingListDefinition = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#ManagedThingListDefinition", name: "ManagedThingListDefinition")
     ManagedThingSchemaListDefinition = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#ManagedThingSchemaListDefinition", name: "ManagedThingSchemaListDefinition")
@@ -333,7 +345,7 @@ module Aws::IoTManagedIntegrations
     NotificationConfigurationUpdatedAt = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.iotmanagedintegrations#NotificationConfigurationUpdatedAt", name: "NotificationConfigurationUpdatedAt")
     NumberOfNotifiedThings = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotmanagedintegrations#NumberOfNotifiedThings", name: "NumberOfNotifiedThings", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     NumberOfSucceededThings = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotmanagedintegrations#NumberOfSucceededThings", name: "NumberOfSucceededThings", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
-    OAuthAuthorizationUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrl", name: "OAuthAuthorizationUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^(https)://.*$", "smithy.api#sensitive" => {}})
+    OAuthAuthorizationUrlOutput = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#OAuthAuthorizationUrlOutput", name: "OAuthAuthorizationUrlOutput", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^$|^(https):\\/\\/.*$", "smithy.api#sensitive" => {}})
     OAuthCompleteRedirectUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#OAuthCompleteRedirectUrl", name: "OAuthCompleteRedirectUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^(http|https)://.*$"})
     OAuthConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#OAuthConfig", name: "OAuthConfig")
     OAuthUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#OAuthUpdate", name: "OAuthUpdate")
@@ -364,11 +376,13 @@ module Aws::IoTManagedIntegrations
     Owner = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#Owner", name: "Owner", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_.,@-]+$", "smithy.api#sensitive" => {}})
     ParentControllerId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ParentControllerId", name: "ParentControllerId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9]+$"})
     ProactiveRefreshTokenRenewal = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#ProactiveRefreshTokenRenewal", name: "ProactiveRefreshTokenRenewal")
-    PropertyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#PropertyName", name: "PropertyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[/a-zA-Z0-9\\._ ]+$"})
+    PropertyName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#PropertyName", name: "PropertyName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[/a-zA-Z0-9\\._ -]+$"})
+    ProtocolType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#ProtocolType", name: "ProtocolType")
     ProvisioningProfileArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ProvisioningProfileArn", name: "ProvisioningProfileArn", traits: {"aws.api#arnReference" => {"service" => "com.amazon.services.iotsmarthomeservice#IotSmartHomeService", "resource" => "com.amazonaws.iotmanagedintegrations#ProvisioningProfileResource"}, "smithy.api#length" => {"min" => 32, "max" => 64}, "smithy.api#pattern" => "^arn:aws:iotmanagedintegrations:[0-9a-zA-Z-]+:[0-9]+:provisioning-profile/[0-9a-zA-Z]+$"})
     ProvisioningProfileId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ProvisioningProfileId", name: "ProvisioningProfileId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9-_]+$"})
     ProvisioningProfileListDefinition = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotmanagedintegrations#ProvisioningProfileListDefinition", name: "ProvisioningProfileListDefinition")
     ProvisioningProfileName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ProvisioningProfileName", name: "ProvisioningProfileName", traits: {"smithy.api#length" => {"min" => 1, "max" => 36}, "smithy.api#pattern" => "^[0-9A-Za-z_-]+$"})
+    ProvisioningProfileStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#ProvisioningProfileStatus", name: "ProvisioningProfileStatus")
     ProvisioningProfileSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#ProvisioningProfileSummary", name: "ProvisioningProfileSummary")
     ProvisioningStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#ProvisioningStatus", name: "ProvisioningStatus")
     ProvisioningType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#ProvisioningType", name: "ProvisioningType")
@@ -443,6 +457,7 @@ module Aws::IoTManagedIntegrations
     ThirdPartyUserId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#ThirdPartyUserId", name: "ThirdPartyUserId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_.,@-]+$", "smithy.api#sensitive" => {}})
     ThresholdPercentage = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.iotmanagedintegrations#ThresholdPercentage", name: "ThresholdPercentage", traits: {"smithy.api#range" => {"max" => 100}})
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TimeoutInMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotmanagedintegrations#TimeoutInMinutes", name: "TimeoutInMinutes", traits: {"smithy.api#range" => {"min" => 5, "max" => 15}})
     TokenEndpointAuthenticationScheme = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotmanagedintegrations#TokenEndpointAuthenticationScheme", name: "TokenEndpointAuthenticationScheme")
     TokenUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#TokenUrl", name: "TokenUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}([-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"})
     TraceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotmanagedintegrations#TraceId", name: "TraceId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9:=_-]+$"})
@@ -463,6 +478,7 @@ module Aws::IoTManagedIntegrations
     UploadPeriodMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotmanagedintegrations#UploadPeriodMinutes", name: "UploadPeriodMinutes")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationSchema = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.iotmanagedintegrations#ValidationSchema", name: "ValidationSchema")
+    WiFiSimpleSetupConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotmanagedintegrations#WiFiSimpleSetupConfiguration", name: "WiFiSimpleSetupConfiguration")
 
     AbortConfigCriteria.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: AbortCriteriaAction, name: "Action"))
     AbortConfigCriteria.add_member(:failure_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AbortCriteriaFailureType, name: "FailureType"))
@@ -492,14 +508,21 @@ module Aws::IoTManagedIntegrations
     AssociationState.add_member(:association_deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATION_DELETING", traits: {"smithy.api#enumValue" => "ASSOCIATION_DELETING"}))
     AssociationState.add_member(:refresh_token_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REFRESH_TOKEN_EXPIRED", traits: {"smithy.api#enumValue" => "REFRESH_TOKEN_EXPIRED"}))
     AuthConfig.add_member(:o_auth, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthConfig, name: "oAuth"))
+    AuthConfig.add_member(:general_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMaterials, name: "GeneralAuthorization"))
     AuthConfig.type = Types::AuthConfig
     AuthConfigUpdate.add_member(:o_auth_update, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthUpdate, name: "oAuthUpdate"))
+    AuthConfigUpdate.add_member(:general_authorization_update, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralAuthorizationUpdate, name: "GeneralAuthorizationUpdate"))
     AuthConfigUpdate.type = Types::AuthConfigUpdate
+    AuthMaterial.add_member(:secrets_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManager, name: "SecretsManager", traits: {"smithy.api#required" => {}}))
+    AuthMaterial.add_member(:auth_material_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMaterialName, name: "AuthMaterialName", traits: {"smithy.api#required" => {}}))
+    AuthMaterial.type = Types::AuthMaterial
     AuthMaterialType.add_member(:custom_protocol_qr_bar_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_PROTOCOL_QR_BAR_CODE", traits: {"smithy.api#enumValue" => "CUSTOM_PROTOCOL_QR_BAR_CODE"}))
     AuthMaterialType.add_member(:wifi_setup_qr_bar_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WIFI_SETUP_QR_BAR_CODE", traits: {"smithy.api#enumValue" => "WIFI_SETUP_QR_BAR_CODE"}))
     AuthMaterialType.add_member(:zwave_qr_bar_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZWAVE_QR_BAR_CODE", traits: {"smithy.api#enumValue" => "ZWAVE_QR_BAR_CODE"}))
     AuthMaterialType.add_member(:zigbee_qr_bar_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZIGBEE_QR_BAR_CODE", traits: {"smithy.api#enumValue" => "ZIGBEE_QR_BAR_CODE"}))
     AuthMaterialType.add_member(:discovered_device, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCOVERED_DEVICE", traits: {"smithy.api#enumValue" => "DISCOVERED_DEVICE"}))
+    AuthMaterialType.add_member(:pre_onboarded_cloud, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_ONBOARDED_CLOUD", traits: {"smithy.api#enumValue" => "PRE_ONBOARDED_CLOUD"}))
+    AuthMaterials.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMaterial, name: "member"))
     AuthType.add_member(:oauth, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OAUTH", traits: {"smithy.api#enumValue" => "OAUTH"}))
     CapabilityAction.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityActionName, name: "name", traits: {"smithy.api#required" => {}}))
     CapabilityAction.add_member(:ref, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionReference, name: "ref"))
@@ -563,6 +586,7 @@ module Aws::IoTManagedIntegrations
     ConnectorDestinationSummary.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId"))
     ConnectorDestinationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDestinationId, name: "Id"))
     ConnectorDestinationSummary.type = Types::ConnectorDestinationSummary
+    ConnectorDeviceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDeviceId, name: "member"))
     ConnectorEventOperation.add_member(:device_command_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_COMMAND_RESPONSE", traits: {"smithy.api#enumValue" => "DEVICE_COMMAND_RESPONSE"}))
     ConnectorEventOperation.add_member(:device_discovery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_DISCOVERY", traits: {"smithy.api#enumValue" => "DEVICE_DISCOVERY"}))
     ConnectorEventOperation.add_member(:device_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_EVENT", traits: {"smithy.api#enumValue" => "DEVICE_EVENT"}))
@@ -580,8 +604,9 @@ module Aws::IoTManagedIntegrations
     CreateAccountAssociationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationName, name: "Name", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateAccountAssociationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationDescription, name: "Description", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateAccountAssociationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    CreateAccountAssociationRequest.add_member(:general_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralAuthorizationName, name: "GeneralAuthorization"))
     CreateAccountAssociationRequest.type = Types::CreateAccountAssociationRequest
-    CreateAccountAssociationResponse.add_member(:o_auth_authorization_url, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthAuthorizationUrl, name: "OAuthAuthorizationUrl", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}}))
+    CreateAccountAssociationResponse.add_member(:o_auth_authorization_url, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthAuthorizationUrlOutput, name: "OAuthAuthorizationUrl", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     CreateAccountAssociationResponse.add_member(:account_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationId, name: "AccountAssociationId", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}}))
     CreateAccountAssociationResponse.add_member(:association_state, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationState, name: "AssociationState", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}}))
     CreateAccountAssociationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationArn, name: "Arn", traits: {"aws.cloudformation#cfnMutability" => "read"}))
@@ -597,9 +622,9 @@ module Aws::IoTManagedIntegrations
     CreateConnectorDestinationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDestinationName, name: "Name"))
     CreateConnectorDestinationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDestinationDescription, name: "Description"))
     CreateConnectorDestinationRequest.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId", traits: {"smithy.api#required" => {}}))
-    CreateConnectorDestinationRequest.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "AuthType", traits: {"smithy.api#required" => {}}))
+    CreateConnectorDestinationRequest.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthType, name: "AuthType"))
     CreateConnectorDestinationRequest.add_member(:auth_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthConfig, name: "AuthConfig", traits: {"smithy.api#required" => {}}))
-    CreateConnectorDestinationRequest.add_member(:secrets_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManager, name: "SecretsManager", traits: {"smithy.api#required" => {}}))
+    CreateConnectorDestinationRequest.add_member(:secrets_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretsManager, name: "SecretsManager"))
     CreateConnectorDestinationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateConnectorDestinationRequest.type = Types::CreateConnectorDestinationRequest
     CreateConnectorDestinationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDestinationId, name: "Id"))
@@ -634,13 +659,14 @@ module Aws::IoTManagedIntegrations
     CreateManagedThingRequest.add_member(:credential_locker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialLockerId, name: "CredentialLockerId", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateManagedThingRequest.add_member(:authentication_material, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMaterialString, name: "AuthenticationMaterial", traits: {"aws.cloudformation#cfnMutability" => "create", "smithy.api#required" => {}}))
     CreateManagedThingRequest.add_member(:authentication_material_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMaterialType, name: "AuthenticationMaterialType", traits: {"aws.cloudformation#cfnMutability" => "create", "smithy.api#required" => {}}))
+    CreateManagedThingRequest.add_member(:wi_fi_simple_setup_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WiFiSimpleSetupConfiguration, name: "WiFiSimpleSetupConfiguration"))
     CreateManagedThingRequest.add_member(:serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SerialNumber, name: "SerialNumber", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
     CreateManagedThingRequest.add_member(:brand, ::Smithy::Schema::Shapes::MemberShape.new(target: Brand, name: "Brand", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateManagedThingRequest.add_member(:model, ::Smithy::Schema::Shapes::MemberShape.new(target: Model, name: "Model", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateManagedThingRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateManagedThingRequest.add_member(:capability_report, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityReport, name: "CapabilityReport", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateManagedThingRequest.add_member(:capability_schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilitySchemas, name: "CapabilitySchemas", traits: {"aws.cloudformation#cfnMutability" => "full"}))
-    CreateManagedThingRequest.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Capabilities, name: "Capabilities", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    CreateManagedThingRequest.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Capabilities, name: "Capabilities", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#deprecated" => {"message" => "Capabilities has been deprecated, use CapabilityReport instead", "since" => "06-25-2025"}}))
     CreateManagedThingRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
     CreateManagedThingRequest.add_member(:classification, ::Smithy::Schema::Shapes::MemberShape.new(target: Classification, name: "Classification", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateManagedThingRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
@@ -683,6 +709,7 @@ module Aws::IoTManagedIntegrations
     CreateOtaTaskResponse.type = Types::CreateOtaTaskResponse
     CreateProvisioningProfileRequest.add_member(:provisioning_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningType, name: "ProvisioningType", traits: {"aws.cloudformation#cfnMutability" => "create-and-read", "smithy.api#required" => {}}))
     CreateProvisioningProfileRequest.add_member(:ca_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: CaCertificate, name: "CaCertificate", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    CreateProvisioningProfileRequest.add_member(:claim_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ClaimCertificate, name: "ClaimCertificate", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
     CreateProvisioningProfileRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileName, name: "Name", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
     CreateProvisioningProfileRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#idempotencyToken" => {}}))
     CreateProvisioningProfileRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
@@ -691,6 +718,7 @@ module Aws::IoTManagedIntegrations
     CreateProvisioningProfileResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileName, name: "Name", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateProvisioningProfileResponse.add_member(:provisioning_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningType, name: "ProvisioningType", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     CreateProvisioningProfileResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileId, name: "Id", traits: {"aws.cloudformation#cfnMutability" => "read"}))
+    CreateProvisioningProfileResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileStatus, name: "Status", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     CreateProvisioningProfileResponse.add_member(:claim_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ClaimCertificate, name: "ClaimCertificate", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     CreateProvisioningProfileResponse.add_member(:claim_certificate_private_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ClaimCertificatePrivateKey, name: "ClaimCertificatePrivateKey", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     CreateProvisioningProfileResponse.type = Types::CreateProvisioningProfileResponse
@@ -787,6 +815,7 @@ module Aws::IoTManagedIntegrations
     DiscoveryType.add_member(:zigbee, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZIGBEE", traits: {"smithy.api#enumValue" => "ZIGBEE"}))
     DiscoveryType.add_member(:cloud, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD", traits: {"smithy.api#enumValue" => "CLOUD"}))
     DiscoveryType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
+    DiscoveryType.add_member(:controller_capability_rediscovery, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTROLLER_CAPABILITY_REDISCOVERY", traits: {"smithy.api#enumValue" => "CONTROLLER_CAPABILITY_REDISCOVERY"}))
     EncryptionType.add_member(:managed_integrations_default_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION", traits: {"smithy.api#enumValue" => "MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION"}))
     EncryptionType.add_member(:customer_key_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOMER_KEY_ENCRYPTION", traits: {"smithy.api#enumValue" => "CUSTOMER_KEY_ENCRYPTION"}))
     EndpointConfig.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaConfig, name: "lambda"))
@@ -805,6 +834,7 @@ module Aws::IoTManagedIntegrations
     EventType.add_member(:device_life_cycle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_LIFE_CYCLE", traits: {"smithy.api#enumValue" => "DEVICE_LIFE_CYCLE"}))
     EventType.add_member(:device_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_STATE", traits: {"smithy.api#enumValue" => "DEVICE_STATE"}))
     EventType.add_member(:device_ota, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_OTA", traits: {"smithy.api#enumValue" => "DEVICE_OTA"}))
+    EventType.add_member(:device_wss, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEVICE_WSS", traits: {"smithy.api#enumValue" => "DEVICE_WSS"}))
     EventType.add_member(:connector_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTOR_ASSOCIATION", traits: {"smithy.api#deprecated" => {"message" => "CONNECTOR_ASSOCIATION is deprecated", "since" => "2025-06-25"}, "smithy.api#enumValue" => "CONNECTOR_ASSOCIATION"}))
     EventType.add_member(:account_association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ASSOCIATION", traits: {"smithy.api#enumValue" => "ACCOUNT_ASSOCIATION"}))
     EventType.add_member(:connector_error_report, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTOR_ERROR_REPORT", traits: {"smithy.api#enumValue" => "CONNECTOR_ERROR_REPORT"}))
@@ -812,6 +842,11 @@ module Aws::IoTManagedIntegrations
     ExponentialRolloutRate.add_member(:increment_factor, ::Smithy::Schema::Shapes::MemberShape.new(target: IncrementFactor, name: "IncrementFactor"))
     ExponentialRolloutRate.add_member(:rate_increase_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: RolloutRateIncreaseCriteria, name: "RateIncreaseCriteria"))
     ExponentialRolloutRate.type = Types::ExponentialRolloutRate
+    GeneralAuthorizationName.add_member(:auth_material_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMaterialName, name: "AuthMaterialName"))
+    GeneralAuthorizationName.type = Types::GeneralAuthorizationName
+    GeneralAuthorizationUpdate.add_member(:auth_materials_to_add, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMaterials, name: "AuthMaterialsToAdd"))
+    GeneralAuthorizationUpdate.add_member(:auth_materials_to_update, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthMaterials, name: "AuthMaterialsToUpdate"))
+    GeneralAuthorizationUpdate.type = Types::GeneralAuthorizationUpdate
     GetAccountAssociationRequest.add_member(:account_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationId, name: "AccountAssociationId", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAccountAssociationRequest.type = Types::GetAccountAssociationRequest
     GetAccountAssociationResponse.add_member(:account_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationId, name: "AccountAssociationId", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#required" => {}}))
@@ -821,8 +856,9 @@ module Aws::IoTManagedIntegrations
     GetAccountAssociationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationName, name: "Name", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     GetAccountAssociationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationDescription, name: "Description", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     GetAccountAssociationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationArn, name: "Arn", traits: {"aws.cloudformation#cfnMutability" => "read"}))
-    GetAccountAssociationResponse.add_member(:o_auth_authorization_url, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthAuthorizationUrl, name: "OAuthAuthorizationUrl", traits: {"smithy.api#required" => {}}))
+    GetAccountAssociationResponse.add_member(:o_auth_authorization_url, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthAuthorizationUrlOutput, name: "OAuthAuthorizationUrl", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     GetAccountAssociationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    GetAccountAssociationResponse.add_member(:general_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: GeneralAuthorizationName, name: "GeneralAuthorization"))
     GetAccountAssociationResponse.type = Types::GetAccountAssociationResponse
     GetCloudConnectorRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetCloudConnectorRequest.type = Types::GetCloudConnectorRequest
@@ -898,9 +934,14 @@ module Aws::IoTManagedIntegrations
     GetManagedThingCapabilitiesRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingId, name: "Identifier", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetManagedThingCapabilitiesRequest.type = Types::GetManagedThingCapabilitiesRequest
     GetManagedThingCapabilitiesResponse.add_member(:managed_thing_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingId, name: "ManagedThingId", traits: {"aws.cloudformation#cfnMutability" => "read"}))
-    GetManagedThingCapabilitiesResponse.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Capabilities, name: "Capabilities", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    GetManagedThingCapabilitiesResponse.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Capabilities, name: "Capabilities", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#deprecated" => {"message" => "Capabilities has been deprecated, use CapabilityReport instead", "since" => "06-25-2025"}}))
     GetManagedThingCapabilitiesResponse.add_member(:capability_report, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityReport, name: "CapabilityReport", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     GetManagedThingCapabilitiesResponse.type = Types::GetManagedThingCapabilitiesResponse
+    GetManagedThingCertificateRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingId, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetManagedThingCertificateRequest.type = Types::GetManagedThingCertificateRequest
+    GetManagedThingCertificateResponse.add_member(:managed_thing_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingId, name: "ManagedThingId"))
+    GetManagedThingCertificateResponse.add_member(:certificate_pem, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificatePem, name: "CertificatePem"))
+    GetManagedThingCertificateResponse.type = Types::GetManagedThingCertificateResponse
     GetManagedThingConnectivityDataRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingId, name: "Identifier", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetManagedThingConnectivityDataRequest.type = Types::GetManagedThingConnectivityDataRequest
     GetManagedThingConnectivityDataResponse.add_member(:managed_thing_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingId, name: "ManagedThingId", traits: {"aws.cloudformation#cfnMutability" => "read"}))
@@ -941,6 +982,7 @@ module Aws::IoTManagedIntegrations
     GetManagedThingResponse.add_member(:hub_network_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HubNetworkMode, name: "HubNetworkMode"))
     GetManagedThingResponse.add_member(:meta_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaData, name: "MetaData"))
     GetManagedThingResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
+    GetManagedThingResponse.add_member(:wi_fi_simple_setup_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WiFiSimpleSetupConfiguration, name: "WiFiSimpleSetupConfiguration"))
     GetManagedThingResponse.type = Types::GetManagedThingResponse
     GetManagedThingStateRequest.add_member(:managed_thing_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingId, name: "ManagedThingId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetManagedThingStateRequest.type = Types::GetManagedThingStateRequest
@@ -988,6 +1030,7 @@ module Aws::IoTManagedIntegrations
     GetProvisioningProfileResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileName, name: "Name", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     GetProvisioningProfileResponse.add_member(:provisioning_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningType, name: "ProvisioningType", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     GetProvisioningProfileResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileId, name: "Id", traits: {"aws.cloudformation#cfnMutability" => "read"}))
+    GetProvisioningProfileResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileStatus, name: "Status", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     GetProvisioningProfileResponse.add_member(:claim_certificate, ::Smithy::Schema::Shapes::MemberShape.new(target: ClaimCertificate, name: "ClaimCertificate", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     GetProvisioningProfileResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags"))
     GetProvisioningProfileResponse.type = Types::GetProvisioningProfileResponse
@@ -1159,8 +1202,11 @@ module Aws::IoTManagedIntegrations
     LogLevel.add_member(:warn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARN", traits: {"smithy.api#enumValue" => "WARN"}))
     ManagedThingAssociation.add_member(:managed_thing_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingId, name: "ManagedThingId"))
     ManagedThingAssociation.add_member(:account_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationId, name: "AccountAssociationId"))
+    ManagedThingAssociation.add_member(:managed_thing_association_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingAssociationStatus, name: "ManagedThingAssociationStatus"))
     ManagedThingAssociation.type = Types::ManagedThingAssociation
     ManagedThingAssociationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingAssociation, name: "member"))
+    ManagedThingAssociationStatus.add_member(:pre_associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_ASSOCIATED", traits: {"smithy.api#enumValue" => "PRE_ASSOCIATED"}))
+    ManagedThingAssociationStatus.add_member(:associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATED", traits: {"smithy.api#enumValue" => "ASSOCIATED"}))
     ManagedThingListDefinition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingSummary, name: "member"))
     ManagedThingSchemaListDefinition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingSchemaListItem, name: "member"))
     ManagedThingSchemaListItem.add_member(:endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointId, name: "EndpointId"))
@@ -1310,11 +1356,20 @@ module Aws::IoTManagedIntegrations
     ProactiveRefreshTokenRenewal.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "enabled"))
     ProactiveRefreshTokenRenewal.add_member(:days_before_renewal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "DaysBeforeRenewal", traits: {"smithy.api#range" => {"min" => 30}}))
     ProactiveRefreshTokenRenewal.type = Types::ProactiveRefreshTokenRenewal
+    ProtocolType.add_member(:zwave, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZWAVE", traits: {"smithy.api#enumValue" => "ZWAVE"}))
+    ProtocolType.add_member(:zigbee, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZIGBEE", traits: {"smithy.api#enumValue" => "ZIGBEE"}))
+    ProtocolType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
     ProvisioningProfileListDefinition.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileSummary, name: "member"))
+    ProvisioningProfileStatus.add_member(:create_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "CREATE_IN_PROGRESS"}))
+    ProvisioningProfileStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CREATE_FAILED"}))
+    ProvisioningProfileStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "CREATED"}))
+    ProvisioningProfileStatus.add_member(:delete_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "DELETE_IN_PROGRESS"}))
+    ProvisioningProfileStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
     ProvisioningProfileSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileName, name: "Name", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     ProvisioningProfileSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileId, name: "Id", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     ProvisioningProfileSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileArn, name: "Arn", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     ProvisioningProfileSummary.add_member(:provisioning_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningType, name: "ProvisioningType", traits: {"aws.cloudformation#cfnMutability" => "read"}))
+    ProvisioningProfileSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisioningProfileStatus, name: "Status", traits: {"aws.cloudformation#cfnMutability" => "read"}))
     ProvisioningProfileSummary.type = Types::ProvisioningProfileSummary
     ProvisioningStatus.add_member(:unassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNASSOCIATED", traits: {"smithy.api#enumValue" => "UNASSOCIATED"}))
     ProvisioningStatus.add_member(:pre_associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRE_ASSOCIATED", traits: {"smithy.api#enumValue" => "PRE_ASSOCIATED"}))
@@ -1434,7 +1489,7 @@ module Aws::IoTManagedIntegrations
     ServiceUnavailableException.type = Types::ServiceUnavailableException
     StartAccountAssociationRefreshRequest.add_member(:account_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountAssociationId, name: "AccountAssociationId", traits: {"aws.cloudformation#cfnMutability" => "read", "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartAccountAssociationRefreshRequest.type = Types::StartAccountAssociationRefreshRequest
-    StartAccountAssociationRefreshResponse.add_member(:o_auth_authorization_url, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthAuthorizationUrl, name: "OAuthAuthorizationUrl", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#required" => {}}))
+    StartAccountAssociationRefreshResponse.add_member(:o_auth_authorization_url, ::Smithy::Schema::Shapes::MemberShape.new(target: OAuthAuthorizationUrlOutput, name: "OAuthAuthorizationUrl", traits: {"aws.cloudformation#cfnMutability" => "full", "smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     StartAccountAssociationRefreshResponse.type = Types::StartAccountAssociationRefreshResponse
     StartDeviceDiscoveryRequest.add_member(:discovery_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveryType, name: "DiscoveryType", traits: {"smithy.api#required" => {}}))
     StartDeviceDiscoveryRequest.add_member(:custom_protocol_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomProtocolDetail, name: "CustomProtocolDetail"))
@@ -1445,6 +1500,9 @@ module Aws::IoTManagedIntegrations
     StartDeviceDiscoveryRequest.add_member(:authentication_material_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveryAuthMaterialType, name: "AuthenticationMaterialType"))
     StartDeviceDiscoveryRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken"))
     StartDeviceDiscoveryRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "Tags", traits: {"smithy.api#deprecated" => {"message" => "Tags have been deprecated from this api", "since" => "06-25-2025"}}))
+    StartDeviceDiscoveryRequest.add_member(:connector_device_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectorDeviceIdList, name: "ConnectorDeviceIdList"))
+    StartDeviceDiscoveryRequest.add_member(:protocol, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolType, name: "Protocol"))
+    StartDeviceDiscoveryRequest.add_member(:end_device_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedThingId, name: "EndDeviceIdentifier"))
     StartDeviceDiscoveryRequest.type = Types::StartDeviceDiscoveryRequest
     StartDeviceDiscoveryResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeviceDiscoveryId, name: "Id"))
     StartDeviceDiscoveryResponse.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DiscoveryStartedAt, name: "StartedAt"))
@@ -1515,12 +1573,13 @@ module Aws::IoTManagedIntegrations
     UpdateManagedThingRequest.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: Owner, name: "Owner", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdateManagedThingRequest.add_member(:credential_locker_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialLockerId, name: "CredentialLockerId", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdateManagedThingRequest.add_member(:serial_number, ::Smithy::Schema::Shapes::MemberShape.new(target: SerialNumber, name: "SerialNumber", traits: {"aws.cloudformation#cfnMutability" => "create-and-read"}))
+    UpdateManagedThingRequest.add_member(:wi_fi_simple_setup_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WiFiSimpleSetupConfiguration, name: "WiFiSimpleSetupConfiguration"))
     UpdateManagedThingRequest.add_member(:brand, ::Smithy::Schema::Shapes::MemberShape.new(target: Brand, name: "Brand", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdateManagedThingRequest.add_member(:model, ::Smithy::Schema::Shapes::MemberShape.new(target: Model, name: "Model", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdateManagedThingRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdateManagedThingRequest.add_member(:capability_report, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilityReport, name: "CapabilityReport", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdateManagedThingRequest.add_member(:capability_schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: CapabilitySchemas, name: "CapabilitySchemas", traits: {"aws.cloudformation#cfnMutability" => "full"}))
-    UpdateManagedThingRequest.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Capabilities, name: "Capabilities", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
+    UpdateManagedThingRequest.add_member(:capabilities, ::Smithy::Schema::Shapes::MemberShape.new(target: Capabilities, name: "Capabilities", traits: {"aws.cloudformation#cfnExcludeProperty" => {}, "smithy.api#deprecated" => {"message" => "Capabilities has been deprecated, use CapabilityReport instead", "since" => "06-25-2025"}}))
     UpdateManagedThingRequest.add_member(:classification, ::Smithy::Schema::Shapes::MemberShape.new(target: Classification, name: "Classification", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdateManagedThingRequest.add_member(:hub_network_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: HubNetworkMode, name: "HubNetworkMode", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     UpdateManagedThingRequest.add_member(:meta_data, ::Smithy::Schema::Shapes::MemberShape.new(target: MetaData, name: "MetaData", traits: {"aws.cloudformation#cfnMutability" => "full"}))
@@ -1534,12 +1593,16 @@ module Aws::IoTManagedIntegrations
     UpdateOtaTaskRequest.type = Types::UpdateOtaTaskRequest
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
     ValidationException.type = Types::ValidationException
+    WiFiSimpleSetupConfiguration.add_member(:enable_as_provisioner, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableAsProvisioner, name: "EnableAsProvisioner"))
+    WiFiSimpleSetupConfiguration.add_member(:enable_as_provisionee, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableAsProvisionee, name: "EnableAsProvisionee"))
+    WiFiSimpleSetupConfiguration.add_member(:timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutInMinutes, name: "TimeoutInMinutes"))
+    WiFiSimpleSetupConfiguration.type = Types::WiFiSimpleSetupConfiguration
 
     IotManagedIntegrations = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.iotmanagedintegrations#IotManagedIntegrations"
       service.name = "IotManagedIntegrations"
       service.version = "2025-03-03"
-      service.traits = {"aws.api#service" => {"sdkId" => "IoT Managed Integrations", "arnNamespace" => "iotmanagedintegrations", "endpointPrefix" => "api.iotmanagedintegrations"}, "aws.auth#sigv4" => {"name" => "iotmanagedintegrations"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Managed integrations for AWS IoT Device Management"}
+      service.traits = {"aws.api#service" => {"sdkId" => "IoT Managed Integrations", "arnNamespace" => "iotmanagedintegrations", "endpointPrefix" => "api.iotmanagedintegrations"}, "aws.auth#sigv4" => {"name" => "iotmanagedintegrations"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardRegionalEndpoints" => {}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"origin" => "*", "maxAge" => 86400, "additionalAllowedHeaders" => ["x-amz-content-sha256", "x-amz-user-agent", "content-type"]}, "smithy.api#title" => "Managed integrations for AWS IoT Device Management", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.iotmanagedintegrations-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.iotmanagedintegrations.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 6, "nodes" => "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"}}
       service.add_operation(:create_account_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotmanagedintegrations#CreateAccountAssociation"
         operation.name = "CreateAccountAssociation"
@@ -1551,6 +1614,7 @@ module Aws::IoTManagedIntegrations
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/account-associations", "code" => 201}}
       end)
@@ -1574,7 +1638,9 @@ module Aws::IoTManagedIntegrations
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/connector-destinations", "code" => 201}}
       end)
@@ -1707,6 +1773,7 @@ module Aws::IoTManagedIntegrations
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/cloud-connectors/{Identifier}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
@@ -1817,6 +1884,7 @@ module Aws::IoTManagedIntegrations
         operation.input = DeleteProvisioningProfileRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
@@ -1831,6 +1899,7 @@ module Aws::IoTManagedIntegrations
         operation.input = DeregisterAccountAssociationRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
@@ -1993,6 +2062,20 @@ module Aws::IoTManagedIntegrations
         operation.errors << UnauthorizedException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/managed-things-capabilities/{Identifier}", "code" => 200}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GetManagedThingCapabilitiesNotFound", "params" => {"Identifier" => "nonExistentId"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.iotmanagedintegrations#ResourceNotFoundException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
+      end)
+      service.add_operation(:get_managed_thing_certificate, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotmanagedintegrations#GetManagedThingCertificate"
+        operation.name = "GetManagedThingCertificate"
+        operation.input = GetManagedThingCertificateRequest
+        operation.output = GetManagedThingCertificateResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/managed-things-certificate/{Identifier}", "code" => 200}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "GetManagedThingCertificateNotFound", "params" => {"Identifier" => "nonExistentId"}, "expect" => {"failure" => {"errorId" => "com.amazonaws.iotmanagedintegrations#ResourceNotFoundException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
       end)
       service.add_operation(:get_managed_thing_connectivity_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotmanagedintegrations#GetManagedThingConnectivityData"
@@ -2456,6 +2539,7 @@ module Aws::IoTManagedIntegrations
         operation.input = StartAccountAssociationRefreshRequest
         operation.output = StartAccountAssociationRefreshResponse
         operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
@@ -2488,7 +2572,7 @@ module Aws::IoTManagedIntegrations
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << UnauthorizedException
-        operation.traits = {"smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "POST"}, "smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "POST"}, "smithy.api#idempotent" => {}, "smithy.test#smokeTests" => [{"id" => "TagResourceNotFound", "params" => {"ResourceArn" => "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent", "Tags" => {"key1" => "value1"}}, "expect" => {"failure" => {"errorId" => "com.amazonaws.iotmanagedintegrations#ResourceNotFoundException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}, {"id" => "TagResourceSuccess", "params" => {"ResourceArn" => "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123", "Tags" => {"key1" => "value1", "key2" => "value2"}}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
       end)
       service.add_operation(:untag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotmanagedintegrations#UntagResource"
@@ -2500,7 +2584,7 @@ module Aws::IoTManagedIntegrations
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.errors << UnauthorizedException
-        operation.traits = {"smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}}
+        operation.traits = {"smithy.api#http" => {"uri" => "/tags/{ResourceArn}", "method" => "DELETE"}, "smithy.api#idempotent" => {}, "smithy.test#smokeTests" => [{"id" => "UntagResourceNotFound", "params" => {"ResourceArn" => "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/nonexistent", "TagKeys" => ["key1"]}, "expect" => {"failure" => {"errorId" => "com.amazonaws.iotmanagedintegrations#ResourceNotFoundException"}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}, {"id" => "UntagResourceSuccess", "params" => {"ResourceArn" => "arn:aws:iotmanagedintegrations:us-east-1:123456789012:managed-thing/test123", "TagKeys" => ["key1", "key2"]}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
       end)
       service.add_operation(:update_account_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotmanagedintegrations#UpdateAccountAssociation"
@@ -2525,6 +2609,7 @@ module Aws::IoTManagedIntegrations
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
+        operation.errors << UnauthorizedException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/cloud-connectors/{Identifier}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)

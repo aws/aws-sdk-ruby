@@ -62,6 +62,67 @@ module Aws::IoTDataPlane
       attr_accessor message: String?
     end
 
+    class GatewayTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?include_socket_information: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor include_socket_information: bool?
+    end
+
+    class GetConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connected: bool,
+        ?thing_name: String,
+        ?clean_session: bool,
+        ?source_ip: String,
+        ?source_port: Integer,
+        ?target_ip: String,
+        ?target_port: Integer,
+        ?keep_alive_duration: Integer,
+        ?connected_since: Integer,
+        ?disconnected_since: Integer,
+        ?disconnect_reason: String,
+        ?session_expiry: Integer,
+        ?client_id: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connected: bool?
+      attr_accessor thing_name: String?
+      attr_accessor clean_session: bool?
+      attr_accessor source_ip: String?
+      attr_accessor source_port: Integer?
+      attr_accessor target_ip: String?
+      attr_accessor target_port: Integer?
+      attr_accessor keep_alive_duration: Integer?
+      attr_accessor connected_since: Integer?
+      attr_accessor disconnected_since: Integer?
+      attr_accessor disconnect_reason: String?
+      attr_accessor session_expiry: Integer?
+      attr_accessor client_id: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
     class GetRetainedMessageRequest
       include Smithy::Schema::Structure
 
@@ -194,6 +255,34 @@ module Aws::IoTDataPlane
       attr_accessor next_token: String?
     end
 
+    class ListSubscriptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSubscriptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriptions: Array[Types::SubscriptionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriptions: Array[Types::SubscriptionSummary]?
+      attr_accessor next_token: String?
+    end
+
     class MethodNotAllowedException
       include Smithy::Schema::Structure
 
@@ -278,6 +367,48 @@ module Aws::IoTDataPlane
       attr_accessor last_modified_time: Integer?
     end
 
+    class SendDirectMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?topic: String,
+        ?content_type: String,
+        ?response_topic: String,
+        ?confirmation: bool,
+        ?timeout: Integer,
+        ?payload: String,
+        ?user_properties: String,
+        ?payload_format_indicator: String,
+        ?correlation_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor topic: String?
+      attr_accessor content_type: String?
+      attr_accessor response_topic: String?
+      attr_accessor confirmation: bool?
+      attr_accessor timeout: Integer?
+      attr_accessor payload: String?
+      attr_accessor user_properties: String?
+      attr_accessor payload_format_indicator: String?
+      attr_accessor correlation_data: String?
+    end
+
+    class SendDirectMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?trace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor trace_id: String?
+    end
+
     class ServiceUnavailableException
       include Smithy::Schema::Structure
 
@@ -287,6 +418,19 @@ module Aws::IoTDataPlane
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class SubscriptionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_filter: String,
+        ?qos: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_filter: String?
+      attr_accessor qos: Integer?
     end
 
     class ThrottlingException

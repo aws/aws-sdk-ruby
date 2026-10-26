@@ -4,6 +4,7 @@ module Aws::DSQL
 
     AccessDeniedException: StructureShape
     Arn: StringShape
+    BypassPolicyLockoutSafetyCheck: BooleanShape
     ClientToken: StringShape
     ClusterArn: StringShape
     ClusterArnList: ListShape
@@ -12,38 +13,70 @@ module Aws::DSQL
     ClusterList: ListShape
     ClusterStatus: EnumShape
     ClusterSummary: StructureShape
+    ClusterVpcEndpoint: StringShape
     ConflictException: StructureShape
     CreateClusterInput: StructureShape
     CreateClusterOutput: StructureShape
+    CreateStreamInput: StructureShape
+    CreateStreamOutput: StructureShape
     DeleteClusterInput: StructureShape
     DeleteClusterOutput: StructureShape
+    DeleteClusterPolicyInput: StructureShape
+    DeleteClusterPolicyOutput: StructureShape
+    DeleteStreamInput: StructureShape
+    DeleteStreamOutput: StructureShape
     DeletionProtectionEnabled: BooleanShape
     EncryptionDetails: StructureShape
     EncryptionStatus: EnumShape
     EncryptionType: EnumShape
+    Endpoint: StringShape
     GetClusterInput: StructureShape
     GetClusterOutput: StructureShape
+    GetClusterPolicyInput: StructureShape
+    GetClusterPolicyOutput: StructureShape
+    GetStreamInput: StructureShape
+    GetStreamOutput: StructureShape
     GetVpcEndpointServiceNameInput: StructureShape
     GetVpcEndpointServiceNameOutput: StructureShape
     InternalServerException: StructureShape
+    KinesisStreamArn: StringShape
+    KinesisTargetDefinition: StructureShape
     KmsEncryptionKey: StringShape
     KmsKeyArn: StringShape
     ListClustersInput: StructureShape
     ListClustersOutput: StructureShape
+    ListStreamsInput: StructureShape
+    ListStreamsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
     MaxResults: IntegerShape
     MultiRegionProperties: StructureShape
     NextToken: StringShape
+    PolicyDocument: StringShape
+    PolicyVersion: StringShape
+    PutClusterPolicyInput: StructureShape
+    PutClusterPolicyOutput: StructureShape
     Region: StringShape
     ResourceNotFoundException: StructureShape
+    RoleArn: StringShape
     ServiceName: StringShape
     ServiceQuotaExceededException: StructureShape
+    StatusReason: StructureShape
+    StreamArn: StringShape
+    StreamCreationTime: TimestampShape
+    StreamFailureErrorCode: EnumShape
+    StreamFormat: EnumShape
+    StreamId: StringShape
+    StreamList: ListShape
+    StreamOrdering: EnumShape
+    StreamStatus: EnumShape
+    StreamSummary: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagMap: MapShape
     TagResourceInput: StructureShape
     TagValue: StringShape
+    TargetDefinition: UnionShape
     ThrottlingException: StructureShape
     UntagResourceInput: StructureShape
     UpdateClusterInput: StructureShape

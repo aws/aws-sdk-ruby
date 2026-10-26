@@ -6,7 +6,9 @@ module Aws::BCMDataExports
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
-    Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdataexports#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:[-a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"})
+    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdataexports#AccountId", name: "AccountId", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^[0-9]{12}$"})
+    Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdataexports#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:(bcm-data-exports):[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"})
     Column = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#Column", name: "Column")
     ColumnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdataexports#ColumnList", name: "ColumnList")
     CompressionOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdataexports#CompressionOption", name: "CompressionOption")
@@ -22,7 +24,7 @@ module Aws::BCMDataExports
     ExecutionStatusCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdataexports#ExecutionStatusCode", name: "ExecutionStatusCode")
     ExecutionStatusReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdataexports#ExecutionStatusReason", name: "ExecutionStatusReason")
     Export = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#Export", name: "Export")
-    ExportName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdataexports#ExportName", name: "ExportName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[0-9A-Za-z!\\-_.*\\'()]+$"})
+    ExportName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdataexports#ExportName", name: "ExportName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[0-9A-Za-z\\-_]+$"})
     ExportReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#ExportReference", name: "ExportReference")
     ExportReferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdataexports#ExportReferenceList", name: "ExportReferenceList")
     ExportStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#ExportStatus", name: "ExportStatus")
@@ -46,7 +48,7 @@ module Aws::BCMDataExports
     ListTablesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#ListTablesResponse", name: "ListTablesResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
-    MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bcmdataexports#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1}})
+    MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bcmdataexports#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 300}})
     NextPageToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdataexports#NextPageToken", name: "NextPageToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 8192}, "smithy.api#pattern" => "^[\\S\\s]*$"})
     OverwriteOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdataexports#OverwriteOption", name: "OverwriteOption")
     QueryStatement = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdataexports#QueryStatement", name: "QueryStatement", traits: {"smithy.api#length" => {"min" => 1, "max" => 36000}, "smithy.api#pattern" => "^[\\S\\s]*$"})
@@ -69,6 +71,7 @@ module Aws::BCMDataExports
     TableProperty = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdataexports#TableProperty", name: "TableProperty", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]*$"})
     TablePropertyDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#TablePropertyDescription", name: "TablePropertyDescription")
     TablePropertyDescriptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdataexports#TablePropertyDescriptionList", name: "TablePropertyDescriptionList")
+    TablePropertyGenericString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bcmdataexports#TablePropertyGenericString", name: "TablePropertyGenericString", traits: {"smithy.api#length" => {"min" => 0, "max" => 16384}, "smithy.api#pattern" => "^[\\S\\s]*$"})
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#TagResourceRequest", name: "TagResourceRequest")
     TagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#TagResourceResponse", name: "TagResourceResponse")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bcmdataexports#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
@@ -81,6 +84,8 @@ module Aws::BCMDataExports
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bcmdataexports#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bcmdataexports#ValidationExceptionReason", name: "ValidationExceptionReason")
 
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Message", traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.type = Types::AccessDeniedException
     Column.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Name"))
     Column.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Type"))
     Column.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Description"))
@@ -88,8 +93,9 @@ module Aws::BCMDataExports
     ColumnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Column, name: "member"))
     CompressionOption.add_member(:gzip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GZIP", traits: {"smithy.api#enumValue" => "GZIP"}))
     CompressionOption.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARQUET", traits: {"smithy.api#enumValue" => "PARQUET"}))
+    CompressionOption.add_member(:zip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ZIP", traits: {"smithy.api#enumValue" => "ZIP"}))
     CreateExportRequest.add_member(:export, ::Smithy::Schema::Shapes::MemberShape.new(target: Export, name: "Export", traits: {"smithy.api#required" => {}}))
-    CreateExportRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "ResourceTags"))
+    CreateExportRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "ResourceTags", traits: {"aws.cloudformation#cfnMutability" => "full", "aws.cloudformation#cfnName" => "Tags"}))
     CreateExportRequest.type = Types::CreateExportRequest
     CreateExportResponse.add_member(:export_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExportArn"))
     CreateExportResponse.type = Types::CreateExportResponse
@@ -122,6 +128,7 @@ module Aws::BCMDataExports
     ExecutionStatusReason.add_member(:insufficient_permission, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_PERMISSION", traits: {"smithy.api#enumValue" => "INSUFFICIENT_PERMISSION"}))
     ExecutionStatusReason.add_member(:bill_owner_changed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BILL_OWNER_CHANGED", traits: {"smithy.api#enumValue" => "BILL_OWNER_CHANGED"}))
     ExecutionStatusReason.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
+    ExecutionStatusReason.add_member(:deprecated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPRECATED", traits: {"smithy.api#enumValue" => "DEPRECATED"}))
     Export.add_member(:export_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExportArn"))
     Export.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportName, name: "Name", traits: {"smithy.api#required" => {}}))
     Export.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Description"))
@@ -156,7 +163,7 @@ module Aws::BCMDataExports
     GetExportRequest.add_member(:export_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExportArn", traits: {"smithy.api#required" => {}}))
     GetExportRequest.type = Types::GetExportRequest
     GetExportResponse.add_member(:export, ::Smithy::Schema::Shapes::MemberShape.new(target: Export, name: "Export"))
-    GetExportResponse.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "ExportStatus"))
+    GetExportResponse.add_member(:export_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportStatus, name: "ExportStatus", traits: {"aws.cloudformation#cfnExcludeProperty" => {}}))
     GetExportResponse.type = Types::GetExportResponse
     GetTableRequest.add_member(:table_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TableName, name: "TableName", traits: {"smithy.api#required" => {}}))
     GetTableRequest.add_member(:table_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: TableProperties, name: "TableProperties"))
@@ -208,6 +215,7 @@ module Aws::BCMDataExports
     ResourceTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member"))
     ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
     S3Destination.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "S3Bucket", traits: {"smithy.api#required" => {}}))
+    S3Destination.add_member(:s3_bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "S3BucketOwner"))
     S3Destination.add_member(:s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "S3Prefix", traits: {"smithy.api#required" => {}}))
     S3Destination.add_member(:s3_region, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "S3Region", traits: {"smithy.api#required" => {}}))
     S3Destination.add_member(:s3_output_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: S3OutputConfigurations, name: "S3OutputConfigurations", traits: {"smithy.api#required" => {}}))
@@ -218,6 +226,8 @@ module Aws::BCMDataExports
     S3OutputConfigurations.add_member(:overwrite, ::Smithy::Schema::Shapes::MemberShape.new(target: OverwriteOption, name: "Overwrite", traits: {"smithy.api#required" => {}}))
     S3OutputConfigurations.type = Types::S3OutputConfigurations
     S3OutputType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
+    S3OutputType.add_member(:athena, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATHENA", traits: {"smithy.api#enumValue" => "ATHENA"}))
+    S3OutputType.add_member(:redshift, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDSHIFT", traits: {"smithy.api#enumValue" => "REDSHIFT"}))
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Message", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "ResourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "ResourceType"))
@@ -232,7 +242,7 @@ module Aws::BCMDataExports
     TableConfigurations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TableProperties, name: "value"))
     TableList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Table, name: "member"))
     TableProperties.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TableProperty, name: "key"))
-    TableProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "value"))
+    TableProperties.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TablePropertyGenericString, name: "value"))
     TablePropertyDescription.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Name"))
     TablePropertyDescription.add_member(:valid_values, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericStringList, name: "ValidValues"))
     TablePropertyDescription.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "DefaultValue"))
@@ -273,12 +283,13 @@ module Aws::BCMDataExports
       service.id = "com.amazonaws.bcmdataexports#AWSBillingAndCostManagementDataExports"
       service.name = "AWSBillingAndCostManagementDataExports"
       service.version = "2023-11-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "BCM Data Exports", "arnNamespace" => "bcm-data-exports", "cloudTrailEventSource" => "bcm-data-exports.amazonaws.com", "endpointPrefix" => "bcm-data-exports"}, "aws.auth#sigv4" => {"name" => "bcm-data-exports"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Billing and Cost Management Data Exports"}
+      service.traits = {"aws.api#service" => {"sdkId" => "BCM Data Exports", "arnNamespace" => "bcm-data-exports", "cloudFormationName" => "BCMDataExports", "cloudTrailEventSource" => "bcm-data-exports.amazonaws.com", "endpointPrefix" => "bcm-data-exports"}, "aws.auth#sigv4" => {"name" => "bcm-data-exports"}, "aws.endpoints#dualStackOnlyEndpoints" => {}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix", "partitionEndpointSpecialCases" => {"aws-iso" => [{"endpoint" => "https://bcm-data-exports.us-iso-east-1.c2s.ic.gov", "region" => "us-iso-east-1", "dualStack" => false}], "aws-iso-b" => [{"endpoint" => "https://bcm-data-exports.us-isob-east-1.sc2s.sgov.gov", "region" => "us-isob-east-1", "dualStack" => false}], "aws-iso-e" => [{"endpoint" => "https://bcm-data-exports.eu-isoe-west-1.cloud.adc-e.uk", "region" => "eu-isoe-west-1", "dualStack" => false}], "aws-iso-f" => [{"endpoint" => "https://bcm-data-exports.us-isof-south-1.csp.hci.ic.gov", "region" => "us-isof-south-1", "dualStack" => false}]}}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Billing and Cost Management Data Exports", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-b"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-e"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-f"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-data-exports.us-iso-east-1.c2s.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-data-exports.us-isob-east-1.sc2s.sgov.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-data-exports.eu-isoe-west-1.cloud.adc-e.uk", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-data-exports.us-isof-south-1.csp.hci.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-data-exports-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bcm-data-exports.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 10, "nodes" => "/////wAAAAH/////AAAAAAAAAAoAAAADAAAAAQAAAAQF9eEJAAAAAgAAAAUF9eEJAAAAAwX14QcAAAAGAAAABAX14QMAAAAHAAAABQX14QQAAAAIAAAABgX14QUAAAAJAAAABwX14QYF9eEIAAAAAwX14QEF9eEC"}}
       service.add_operation(:create_export, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bcmdataexports#CreateExport"
         operation.name = "CreateExport"
         operation.input = CreateExportRequest
         operation.output = CreateExportResponse
+        operation.errors << AccessDeniedException
         operation.errors << InternalServerException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
@@ -367,6 +378,7 @@ module Aws::BCMDataExports
         operation.name = "ListTagsForResource"
         operation.input = ListTagsForResourceRequest
         operation.output = ListTagsForResourceResponse
+        operation.errors << AccessDeniedException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
@@ -378,6 +390,7 @@ module Aws::BCMDataExports
         operation.name = "TagResource"
         operation.input = TagResourceRequest
         operation.output = TagResourceResponse
+        operation.errors << AccessDeniedException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
@@ -389,6 +402,7 @@ module Aws::BCMDataExports
         operation.name = "UntagResource"
         operation.input = UntagResourceRequest
         operation.output = UntagResourceResponse
+        operation.errors << AccessDeniedException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException

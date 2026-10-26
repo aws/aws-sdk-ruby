@@ -15,6 +15,11 @@ module Aws::ResourceGroupsTaggingAPI
     #   <p>These are keys defined in the effective policy that are on the resource with either
     #               incorrect case treatment or noncompliant values. </p>
     #   @return [Array<String>]
+    # @!attribute missing_tag_keys
+    #   <p>These tag keys are defined as required in the
+    #               <code>report_required_tag_for</code> block of the effective tag policy, but are
+    #               missing from the resource.</p>
+    #   @return [Array<String>]
     # @!attribute compliance_status
     #   <p>Whether a resource is compliant with the effective tag policy.</p>
     #   @return [Boolean]
@@ -22,14 +27,15 @@ module Aws::ResourceGroupsTaggingAPI
       nil,
       :noncompliant_keys,
       :keys_with_noncompliant_values,
+      :missing_tag_keys,
       :compliance_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The target of the operation is currently being modified by a different request. Try
-    #             again later.</p>
+    # <p>The request failed because the target of the operation is currently being modified by
+    #             a different request. Try again later.</p>
     # @!attribute message
     #   @return [String]
     class ConcurrentModificationException < Struct.new(
@@ -40,15 +46,13 @@ module Aws::ResourceGroupsTaggingAPI
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request was denied because performing this operation violates a constraint. </p>
+    # <p>The request failed because performing the operation would violate a constraint.</p>
     #          <p>Some of the reasons in the following list might not apply to this specific
     #             operation.</p>
     #          <ul>
     #             <li>
     #                <p>You must meet the prerequisites for using tag policies. For information, see
-    #                         <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html">Prerequisites and Permissions for Using Tag Policies</a> in the
-    #                         <i>Organizations User Guide.</i>
-    #                </p>
+    #                         <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#tag-policies-prereqs">Prerequisites and permissions</a> in the <i>Tagging Amazon Web Services resources and Tag Editor</i> user guide. </p>
     #             </li>
     #             <li>
     #                <p>You must enable the tag policies service principal
@@ -215,6 +219,14 @@ module Aws::ResourceGroupsTaggingAPI
     #                           (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
     #               </li>
     #            </ul>
+    #            <note>
+    #               <p>For the list of services whose resources you can tag using the Resource Groups Tagging API, see
+    #                       <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html">Services that support the Resource Groups Tagging API</a>. If an Amazon Web Services
+    #                   service isn't listed on that page, you might still be able to tag that service's
+    #                   resources by using that service's native tagging operations instead of using
+    #                   Resource Groups Tagging API operations. All tagged resources, whether the tagging used the Resource Groups Tagging API
+    #                   or not, are returned by the <code>Get*</code> operation.</p>
+    #            </note>
     #            <p>You can specify multiple resource types by using a comma separated array. The array
     #               can include up to 100 items. Note that the length constraint requirement applies to each
     #               resource type filter. </p>
@@ -229,14 +241,14 @@ module Aws::ResourceGroupsTaggingAPI
     #               supplied, the counts are sorted by those attributes.</p>
     #   @return [Array<String>]
     # @!attribute max_results
-    #   <p>Specifies the maximum number of results to be returned in each page. A 
+    #   <p>Specifies the maximum number of results to be returned in each page. A
     #       query can return fewer than this maximum, even if there are more results still to return. You
     #       should always check the <code>PaginationToken</code> response value to see if there are more
     #       results. You can specify a minimum of 1 and a maximum value of 100.</p>
     #   @return [Integer]
     # @!attribute pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a 
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
+    #   <p>Specifies a <code>PaginationToken</code> response value from a
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty
     #       in your initial request.</p>
     #   @return [String]
     class GetComplianceSummaryInput < Struct.new(
@@ -258,7 +270,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [Array<Types::Summary>]
     # @!attribute pagination_token
     #   <p>A string that indicates that there is more data available than this
-    #       response contains. To receive the next part of the response, specify this response value 
+    #       response contains. To receive the next part of the response, specify this response value
     #       as the <code>PaginationToken</code> value in the request for the next page.</p>
     #   @return [String]
     class GetComplianceSummaryOutput < Struct.new(
@@ -271,8 +283,8 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # @!attribute pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a 
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
+    #   <p>Specifies a <code>PaginationToken</code> response value from a
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty
     #       in your initial request.</p>
     #   @return [String]
     # @!attribute tag_filters
@@ -280,13 +292,17 @@ module Aws::ResourceGroupsTaggingAPI
     #               resources that have tags with the specified keys and, if included, the specified values.
     #               Each <code>TagFilter</code> must contain a key with values optional. A request can
     #               include up to 50 keys, and each key can include up to 20 values. </p>
+    #            <p>You can't specify both this parameter and the <code>ResourceArnList</code> parameter
+    #               in the same request. If you do, you get an <code>Invalid Parameter</code>
+    #               exception.</p>
     #            <p>Note the following when deciding how to use TagFilters:</p>
     #            <ul>
     #               <li>
     #                  <p>If you <i>don't</i> specify a <code>TagFilter</code>, the
     #                       response includes all resources that are currently tagged or ever had a tag.
-    #                       Resources that currently don't have tags are shown with an empty tag set, like
-    #                       this: <code>"Tags": []</code>.</p>
+    #                       Resources that were previously tagged, <i>but do not currently</i>
+    #                       have tags, are shown with an empty tag set, like this: <code>"Tags":
+    #                       []</code>.</p>
     #               </li>
     #               <li>
     #                  <p>If you specify more than one filter in a single request, the response returns
@@ -300,9 +316,9 @@ module Aws::ResourceGroupsTaggingAPI
     #               <li>
     #                  <p>If you don't specify a value for a key, the response returns all resources
     #                       that are tagged with that key, with any or no value.</p>
-    #                  <p>For example, for the following filters: <code>filter1= {keyA,{value1}}</code>,
-    #                           <code>filter2={keyB,{value2,value3,value4}}</code>, <code>filter3=
-    #                           {keyC}</code>:</p>
+    #                  <p>For example, for the following filters: <code>filter1= {key1,{value1}}</code>,
+    #                           <code>filter2={key2,{value2,value3,value4}}</code>, <code>filter3=
+    #                           {key3}</code>:</p>
     #                  <ul>
     #                     <li>
     #                        <p>
@@ -334,7 +350,7 @@ module Aws::ResourceGroupsTaggingAPI
     #            </ul>
     #   @return [Array<Types::TagFilter>]
     # @!attribute resources_per_page
-    #   <p>Specifies the maximum number of results to be returned in each page. A 
+    #   <p>Specifies the maximum number of results to be returned in each page. A
     #       query can return fewer than this maximum, even if there are more results still to return. You
     #       should always check the <code>PaginationToken</code> response value to see if there are more
     #       results. You can specify a minimum of 1 and a maximum value of 100.</p>
@@ -360,12 +376,21 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute resource_type_filters
     #   <p>Specifies the resource types that you want included in the response. The format of
     #               each resource type is <code>service[:resourceType]</code>. For example, specifying a
-    #               resource type of <code>ec2</code> returns all Amazon EC2 resources (which includes EC2
-    #               instances). Specifying a resource type of <code>ec2:instance</code> returns only EC2
-    #               instances. </p>
+    #               service of <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances).
+    #               Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p>
+    #            <p>You can't specify both this parameter and the <code>ResourceArnList</code> parameter
+    #               in the same request. If you do, you get an <code>Invalid Parameter</code>
+    #               exception.</p>
     #            <p>The string for each service name and resource type is the same as that embedded in a
-    #               resource's Amazon Resource Name (ARN). For the list of services whose resources you can
-    #               use in this parameter, see <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html">Services that support the Resource Groups Tagging API</a>.</p>
+    #               resource's Amazon Resource Name (ARN).</p>
+    #            <note>
+    #               <p>For the list of services whose resources you can tag using the Resource Groups Tagging API, see
+    #                       <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html">Services that support the Resource Groups Tagging API</a>. If an Amazon Web Services
+    #                   service isn't listed on that page, you might still be able to tag that service's
+    #                   resources by using that service's native tagging operations instead of using
+    #                   Resource Groups Tagging API operations. All tagged resources, whether the tagging used the Resource Groups Tagging API
+    #                   or not, are returned by the <code>Get*</code> operation.</p>
+    #            </note>
     #            <p>You can specify multiple resource types by using an array. The array can include up to
     #               100 items. Note that the length constraint requirement applies to each resource type
     #               filter. For example, the following string would limit the response to only Amazon EC2
@@ -387,10 +412,15 @@ module Aws::ResourceGroupsTaggingAPI
     #               is also set to <code>true</code>.</p>
     #   @return [Boolean]
     # @!attribute resource_arn_list
-    #   <p>Specifies a list of ARNs of resources for which you want to retrieve tag data. You
-    #               can't specify both this parameter and any of the pagination parameters
+    #   <p>Specifies a list of ARNs of resources for which you want to retrieve tag data.</p>
+    #            <p>You can't specify both this parameter and the <code>ResourceTypeFilters</code>
+    #               parameter in the same request. If you do, you get an <code>Invalid Parameter</code>
+    #               exception.</p>
+    #            <p>You can't specify both this parameter and the <code>TagFilters</code> parameter in the
+    #               same request. If you do, you get an <code>Invalid Parameter</code> exception.</p>
+    #            <p>You can't specify both this parameter and any of the pagination parameters
     #                   (<code>ResourcesPerPage</code>, <code>TagsPerPage</code>,
-    #                   <code>PaginationToken</code>) in the same request. If you specify both, you get an
+    #                   <code>PaginationToken</code>) in the same request. If you do, you get an
     #                   <code>Invalid Parameter</code> exception.</p>
     #            <p>If a resource specified by this parameter doesn't exist, it doesn't generate an error;
     #               it simply isn't included in the response.</p>
@@ -416,11 +446,11 @@ module Aws::ResourceGroupsTaggingAPI
 
     # @!attribute pagination_token
     #   <p>A string that indicates that there is more data available than this
-    #       response contains. To receive the next part of the response, specify this response value 
+    #       response contains. To receive the next part of the response, specify this response value
     #       as the <code>PaginationToken</code> value in the request for the next page.</p>
     #   @return [String]
     # @!attribute resource_tag_mapping_list
-    #   <p>A list of resource ARNs and the tags (keys and values) associated with 
+    #   <p>A list of resource ARNs and the tags (keys and values) associated with
     #       each.</p>
     #   @return [Array<Types::ResourceTagMapping>]
     class GetResourcesOutput < Struct.new(
@@ -433,8 +463,8 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # @!attribute pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a 
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
+    #   <p>Specifies a <code>PaginationToken</code> response value from a
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty
     #       in your initial request.</p>
     #   @return [String]
     class GetTagKeysInput < Struct.new(
@@ -447,7 +477,7 @@ module Aws::ResourceGroupsTaggingAPI
 
     # @!attribute pagination_token
     #   <p>A string that indicates that there is more data available than this
-    #       response contains. To receive the next part of the response, specify this response value 
+    #       response contains. To receive the next part of the response, specify this response value
     #       as the <code>PaginationToken</code> value in the request for the next page.</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -463,8 +493,8 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # @!attribute pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a 
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
+    #   <p>Specifies a <code>PaginationToken</code> response value from a
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty
     #       in your initial request.</p>
     #   @return [String]
     # @!attribute key
@@ -482,7 +512,7 @@ module Aws::ResourceGroupsTaggingAPI
 
     # @!attribute pagination_token
     #   <p>A string that indicates that there is more data available than this
-    #       response contains. To receive the next part of the response, specify this response value 
+    #       response contains. To receive the next part of the response, specify this response value
     #       as the <code>PaginationToken</code> value in the request for the next page.</p>
     #   @return [String]
     # @!attribute tag_values
@@ -510,25 +540,28 @@ module Aws::ResourceGroupsTaggingAPI
       include ::Smithy::Schema::Structure
     end
 
-    # <p>This error indicates one of the following:</p>
+    # <p>The request failed because of one of the following reasons:</p>
     #          <ul>
     #             <li>
-    #                <p>A parameter is missing.</p>
+    #                <p>A required parameter is missing.</p>
     #             </li>
     #             <li>
-    #                <p>A malformed string was supplied for the request parameter.</p>
+    #                <p>A provided string parameter is malformed.</p>
     #             </li>
     #             <li>
-    #                <p>An out-of-range value was supplied for the request parameter.</p>
+    #                <p>An provided parameter value is out of range.</p>
     #             </li>
     #             <li>
     #                <p>The target ID is invalid, unsupported, or doesn't exist.</p>
     #             </li>
     #             <li>
     #                <p>You can't access the Amazon S3 bucket for report storage. For more information, see
-    #                         <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report">Additional Requirements for Organization-wide Tag Compliance
-    #                         Reports</a> in the <i>Organizations User Guide.</i>
-    #                </p>
+    #                         <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#bucket-policy">Amazon S3 bucket policy for report storage</a> in the <i>Tagging Amazon Web Services resources and Tag Editor</i> user guide. </p>
+    #             </li>
+    #             <li>
+    #                <p>The partition specified in an ARN parameter in the request doesn't match the
+    #                     partition where you invoked the operation. The partition is specified by the
+    #                     second field of the ARN.</p>
     #             </li>
     #          </ul>
     # @!attribute message
@@ -541,13 +574,69 @@ module Aws::ResourceGroupsTaggingAPI
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A <code>PaginationToken</code> is valid for a maximum of 15 minutes. Your request was
-    #             denied because the specified <code>PaginationToken</code> has expired.</p>
+    # @!attribute next_token
+    #   <p>A token for requesting another page of required tags if the <code>NextToken</code> response element
+    #               indicates that more required tags are available. Use the value of the returned <code>NextToken</code>
+    #               element in your request until the token comes back as null. Pass null if this is the
+    #               first call.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of required tags.</p>
+    #   @return [Integer]
+    class ListRequiredTagsInput < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute required_tags
+    #   <p>The required tags.</p>
+    #   @return [Array<Types::RequiredTag>]
+    # @!attribute next_token
+    #   <p>A token for requesting another page of required tags if the <code>NextToken</code> response element
+    #               indicates that more required tags are available. Use the value of the returned <code>NextToken</code>
+    #               element in your request until the token comes back as null. Pass null if this is the
+    #               first call.</p>
+    #   @return [String]
+    class ListRequiredTagsOutput < Struct.new(
+      nil,
+      :required_tags,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The request failed because the specified <code>PaginationToken</code> has expired. A
+    #                 <code>PaginationToken</code> is valid for a maximum of 15 minutes.</p>
     # @!attribute message
     #   @return [String]
     class PaginationTokenExpiredException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information that describes the required tags for a given resource type.</p>
+    # @!attribute resource_type
+    #   <p>Describes the resource type for the required tag keys.</p>
+    #   @return [String]
+    # @!attribute cloud_formation_resource_types
+    #   <p>Describes the CloudFormation resource type assigned the required tag keys.</p>
+    #   @return [Array<String>]
+    # @!attribute reporting_tag_keys
+    #   <p>These tag keys are marked as <code>required</code> in the <code>report_required_tag_for</code> block of the effective tag policy.</p>
+    #   @return [Array<String>]
+    class RequiredTag < Struct.new(
+      nil,
+      :resource_type,
+      :cloud_formation_resource_types,
+      :reporting_tag_keys,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -578,10 +667,10 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute s3_bucket
     #   <p>The name of the Amazon S3 bucket where the report will be stored; for example:</p>
     #            <p>
-    #               <code>awsexamplebucket</code>
+    #               <code>amzn-s3-demo-bucket</code>
     #            </p>
     #            <p>For more information on S3 bucket requirements, including an example bucket policy,
-    #               see the example S3 bucket policy on this page.</p>
+    #               see the example Amazon S3 bucket policy on this page.</p>
     #   @return [String]
     class StartReportCreationInput < Struct.new(
       nil,
@@ -640,11 +729,11 @@ module Aws::ResourceGroupsTaggingAPI
     #             them. Each tag consists of a key and a value, both of which you define. For more
     #             information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
     # @!attribute key
-    #   <p>One part of a key-value pair that makes up a tag. A key is a general label 
+    #   <p>One part of a key-value pair that makes up a tag. A key is a general label
     #       that acts like a category for more specific tag values.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>One part of a key-value pair that make up a tag. A value acts as a 
+    #   <p>One part of a key-value pair that make up a tag. A value acts as a
     #       descriptor within a tag category (key). The value can be empty or null.</p>
     #   @return [String]
     class Tag < Struct.new(
@@ -659,11 +748,11 @@ module Aws::ResourceGroupsTaggingAPI
     # <p>A list of tags (keys and values) that are used to specify the associated
     #             resources.</p>
     # @!attribute key
-    #   <p>One part of a key-value pair that makes up a tag. A key is a general label 
+    #   <p>One part of a key-value pair that makes up a tag. A key is a general label
     #       that acts like a category for more specific tag values.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>One part of a key-value pair that make up a tag. A value acts as a 
+    #   <p>One part of a key-value pair that make up a tag. A value acts as a
     #       descriptor within a tag category (key). The value can be empty or null.</p>
     #   @return [Array<String>]
     class TagFilter < Struct.new(
@@ -709,7 +798,8 @@ module Aws::ResourceGroupsTaggingAPI
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request was denied to limit the frequency of submitted requests.</p>
+    # <p>The request failed because it exceeded the allowed frequency of submitted
+    #             requests.</p>
     # @!attribute message
     #   @return [String]
     class ThrottledException < Struct.new(

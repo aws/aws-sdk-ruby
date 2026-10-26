@@ -144,18 +144,18 @@ module Aws::Mgn
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -369,7 +369,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -398,7 +408,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -468,7 +479,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -608,6 +619,10 @@ module Aws::Mgn
     #   <p>Small volume config.</p>
     # @option params [Types::LaunchTemplateDiskConf] :large_volume_conf
     #   <p>Large volume config.</p>
+    # @option params [Boolean] :enable_parameters_encryption
+    #   <p>Enable parameters encryption.</p>
+    # @option params [String] :parameters_encryption_key
+    #   <p>Parameters encryption key.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     post_launch_actions: {
@@ -656,13 +671,19 @@ module Aws::Mgn
     #     small_volume_conf: {
     #       volume_type: "VolumeType",
     #       iops: 1,
-    #       throughput: 1
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false
     #     },
     #     large_volume_conf: {
     #       volume_type: "VolumeType",
     #       iops: 1,
-    #       throughput: 1
-    #     }
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false
+    #     },
+    #     enable_parameters_encryption: false,
+    #     parameters_encryption_key: "KmsKeyArn"
     #   }
     #   options = {}
     #   response = client.create_launch_configuration_template(params, options)
@@ -718,17 +739,191 @@ module Aws::Mgn
     #     small_volume_conf: {
     #       volume_type: "VolumeType",
     #       iops: 1,
-    #       throughput: 1
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false
     #     },
     #     large_volume_conf: {
     #       volume_type: "VolumeType",
     #       iops: 1,
-    #       throughput: 1
-    #     }
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false
+    #     },
+    #     enable_parameters_encryption: false,
+    #     parameters_encryption_key: "ARN"
     #   }
     # @return [Types::CreateLaunchConfigurationTemplateOutput]
     def create_launch_configuration_template(params = {}, options = {})
       request = build_request(:create_launch_configuration_template, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new network migration definition that specifies the source and target network configuration for a migration.</p>
+    # @param [Hash, Types::CreateNetworkMigrationDefinitionRequest] params
+    # @option params [String] :name
+    #   <p>The name of the network migration definition.</p>
+    # @option params [String] :description
+    #   <p>A description of the network migration definition.</p>
+    # @option params [Array<Types::SourceConfiguration>] :source_configurations
+    #   <p>A list of source configurations for the network migration.</p>
+    # @option params [Types::TargetS3Configuration] :target_s3_configuration
+    #   <p>The S3 configuration for storing the target network artifacts.</p>
+    # @option params [Types::TargetNetwork] :target_network
+    #   <p>The target network configuration including topology and CIDR ranges.</p>
+    # @option params [String] :target_deployment
+    #   <p>The target deployment configuration for the migrated network.</p>
+    # @option params [String] :vpc_provisioning_strategy
+    #   <p>Specifies whether to create new target VPCs or use existing ones. Set to <code>CREATE_NEW</code> to provision new target VPCs as part of the migration, or <code>USE_EXISTING</code> to migrate into existing VPCs in the target account.</p>
+    # @option params [Array<Types::CidrMapping>] :cidr_mappings
+    #   <p>A list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges. CIDR mappings can be provided only when <code>vpcProvisioningStrategy</code> is set to <code>USE_EXISTING</code>.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Tags to assign to the network migration definition.</p>
+    # @option params [Hash<String, String>] :scope_tags
+    #   <p>Scope tags for the network migration definition to control access and organization.</p>
+    # @example Sample CreateNetworkMigrationDefinition call
+    #   # Example operation for create_network_migration_definition
+    #   params = {
+    #     name: "network1",
+    #     description: "network 1 description",
+    #     target_deployment: "SINGLE_ACCOUNT",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX",
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket",
+    #           s3_key: "source_key",
+    #           s3_bucket_owner: "012345678901"
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket",
+    #       s3_bucket_owner: "012345678901"
+    #     },
+    #     target_network: {
+    #       topology: "ISOLATED_VPC",
+    #       inbound_cidr: "192.168.1.0/24"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_network_migration_definition(params, options)
+    #   response.to_h #=>
+    #   {
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     name: "network1",
+    #     description: "network 1 description",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX",
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket",
+    #           s3_key: "source_key",
+    #           s3_bucket_owner: "012345678901"
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket",
+    #       s3_bucket_owner: "012345678901"
+    #     },
+    #     target_network: {
+    #       topology: "ISOLATED_VPC",
+    #       inbound_cidr: "192.168.1.0/24"
+    #     },
+    #     created_at: Time.parse(1735334198),
+    #     updated_at: Time.parse(1735334198),
+    #     tags: {
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "NetworkMigrationDefinitionName", # required
+    #     description: "NetworkMigrationDefinitionDescription",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "SourceEnvironment", # required
+    #         source_s3_configuration: { # required
+    #           s3_bucket: "S3BucketName", # required
+    #           s3_bucket_owner: "AccountID", # required
+    #           s3_key: "S3KeyName", # required
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: { # required
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID", # required
+    #     },
+    #     target_network: { # required
+    #       topology: "TargetNetworkTopology", # required
+    #       inbound_cidr: "Cidr",
+    #       outbound_cidr: "Cidr",
+    #       inspection_cidr: "Cidr"
+    #     },
+    #     target_deployment: "TargetDeployment",
+    #     vpc_provisioning_strategy: "VpcProvisioningStrategy",
+    #     cidr_mappings: [
+    #       {
+    #         original_cidr: "Cidr", # required
+    #         updated_cidr: "Cidr", # required
+    #       }
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_network_migration_definition(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "ARN",
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #     name: "NetworkMigrationDefinitionName",
+    #     description: "NetworkMigrationDefinitionDescription",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "SourceEnvironment", # required
+    #         source_s3_configuration: { # required
+    #           s3_bucket: "S3BucketName", # required
+    #           s3_bucket_owner: "AccountID", # required
+    #           s3_key: "S3KeyName", # required
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID", # required
+    #     },
+    #     target_network: {
+    #       topology: "TargetNetworkTopology", # required
+    #       inbound_cidr: "Cidr",
+    #       outbound_cidr: "Cidr",
+    #       inspection_cidr: "Cidr"
+    #     },
+    #     target_deployment: "TargetDeployment",
+    #     vpc_provisioning_strategy: "VpcProvisioningStrategy",
+    #     cidr_mappings: [
+    #       {
+    #         original_cidr: "Cidr", # required
+    #         updated_cidr: "Cidr", # required
+    #       }
+    #     ],
+    #     created_at: Time.now,
+    #     updated_at: Time.now,
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue"
+    #     }
+    #   }
+    # @return [Types::CreateNetworkMigrationDefinitionOutput]
+    def create_network_migration_definition(params = {}, options = {})
+      request = build_request(:create_network_migration_definition, params)
       request.send_request(options)
     end
 
@@ -753,7 +948,7 @@ module Aws::Mgn
     # @option params [Integer] :bandwidth_throttling
     #   <p>Request to configure bandwidth throttling during Replication Settings template creation.</p>
     # @option params [String] :data_plane_routing
-    #   <p>Request to configure  data plane routing during Replication Settings template creation.</p>
+    #   <p>Request to configure data plane routing during Replication Settings template creation.</p>
     # @option params [Boolean] :create_public_ip
     #   <p>Request to create Public IP during Replication Settings template creation.</p>
     # @option params [Hash<String, String>] :staging_area_tags
@@ -762,6 +957,12 @@ module Aws::Mgn
     #   <p>Request to use Fips Endpoint during Replication Settings template creation.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Request to configure tags during Replication Settings template creation.</p>
+    # @option params [String] :internet_protocol
+    #   <p>Request to configure the internet protocol to IPv4 or IPv6.</p>
+    # @option params [Boolean] :store_snapshot_on_local_zone
+    #   <p>Request to store snapshot on local zone during Replication Settings template creation.</p>
+    # @option params [Types::StorageConfiguration] :storage_configuration
+    #   <p>Request to configure storage during Replication Settings template creation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     staging_area_subnet_id: "SubnetID", # required
@@ -781,6 +982,15 @@ module Aws::Mgn
     #     use_fips_endpoint: false,
     #     tags: {
     #       "TagKey" => "TagValue"
+    #     },
+    #     internet_protocol: "InternetProtocol",
+    #     store_snapshot_on_local_zone: false,
+    #     storage_configuration: {
+    #       storage_type: "StorageType", # required
+    #       fsx_ontap_configuration: {
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #       }
     #     }
     #   }
     #   options = {}
@@ -807,6 +1017,15 @@ module Aws::Mgn
     #     use_fips_endpoint: false,
     #     tags: {
     #       "TagKey" => "TagValue"
+    #     },
+    #     internet_protocol: "InternetProtocol",
+    #     store_snapshot_on_local_zone: false,
+    #     storage_configuration: {
+    #       storage_type: "StorageType", # required
+    #       fsx_ontap_configuration: {
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #       }
     #     }
     #   }
     # @return [Types::CreateReplicationConfigurationTemplateOutput]
@@ -945,6 +1164,34 @@ module Aws::Mgn
       request.send_request(options)
     end
 
+    # <p>Deletes a network migration definition. This operation removes the migration definition and all associated metadata.</p>
+    # @param [Hash, Types::DeleteNetworkMigrationDefinitionRequest] params
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition to delete.</p>
+    # @example Sample DeleteNetworkMigrationDefinition call
+    #   # Example operation for delete_network_migration_definition
+    #   params = {
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.delete_network_migration_definition(params, options)
+    #   response.to_h #=>
+    #   {}
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_network_migration_definition(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteNetworkMigrationDefinitionResponse]
+    def delete_network_migration_definition(params = {}, options = {})
+      request = build_request(:delete_network_migration_definition, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a single Replication Configuration Template by ID</p>
     # @param [Hash, Types::DeleteReplicationConfigurationTemplateInput] params
     # @option params [String] :replication_configuration_template_id
@@ -1057,7 +1304,9 @@ module Aws::Mgn
     #           source_server_id: "SourceServerID",
     #           conversion_server_id: "EC2InstanceID",
     #           target_instance_id: "EC2InstanceID",
-    #           raw_error: "LargeBoundedString"
+    #           raw_error: "LargeBoundedString",
+    #           attempt_count: 1,
+    #           max_attempts_count: 1
     #         }
     #       }
     #     ],
@@ -1069,7 +1318,7 @@ module Aws::Mgn
       request.send_request(options)
     end
 
-    # <p>Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normally created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.</p>
+    # <p>Returns a list of Jobs. Use the jobIDs and fromDate and toDate filters to limit which jobs are returned. The response is sorted by creationDateTime - latest date first. Jobs are normally created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.</p>
     # @param [Hash, Types::DescribeJobsInput] params
     # @option params [Types::DescribeJobsRequestFilters] :filters
     #   <p>Request to describe Job log filters.</p>
@@ -1225,13 +1474,19 @@ module Aws::Mgn
     #         small_volume_conf: {
     #           volume_type: "VolumeType",
     #           iops: 1,
-    #           throughput: 1
+    #           throughput: 1,
+    #           volume_initialization_rate: 1,
+    #           delete_on_termination: false
     #         },
     #         large_volume_conf: {
     #           volume_type: "VolumeType",
     #           iops: 1,
-    #           throughput: 1
-    #         }
+    #           throughput: 1,
+    #           volume_initialization_rate: 1,
+    #           delete_on_termination: false
+    #         },
+    #         enable_parameters_encryption: false,
+    #         parameters_encryption_key: "ARN"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -1242,7 +1497,7 @@ module Aws::Mgn
       request.send_request(options)
     end
 
-    # <p>Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.</p>
+    # <p>Lists all ReplicationConfigurationTemplates, filtered by replication configuration template IDs.</p>
     # @param [Hash, Types::DescribeReplicationConfigurationTemplatesInput] params
     # @option params [Array<String>] :replication_configuration_template_i_ds
     #   <p>Request to describe Replication Configuration template by template IDs.</p>
@@ -1282,6 +1537,15 @@ module Aws::Mgn
     #         use_fips_endpoint: false,
     #         tags: {
     #           "TagKey" => "TagValue"
+    #         },
+    #         internet_protocol: "InternetProtocol",
+    #         store_snapshot_on_local_zone: false,
+    #         storage_configuration: {
+    #           storage_type: "StorageType", # required
+    #           fsx_ontap_configuration: {
+    #             storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #             credentials_secret_arn: "SecretArn", # required
+    #           }
     #         }
     #       }
     #     ],
@@ -1302,7 +1566,7 @@ module Aws::Mgn
     # @option params [String] :next_token
     #   <p>Request to filter Source Servers list by next token.</p>
     # @option params [String] :account_id
-    #   <p>Request to filter Source Servers list by Accoun ID.</p>
+    #   <p>Request to filter Source Servers list by Account ID.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     filters: {
@@ -1332,7 +1596,17 @@ module Aws::Mgn
     #         launched_instance: {
     #           ec2_instance_id: "EC2InstanceID",
     #           job_id: "JobID",
-    #           first_boot: "FirstBoot"
+    #           first_boot: "FirstBoot",
+    #           last_known_checks: [
+    #             {
+    #               type: "LastKnownCheckType",
+    #               name: "BoundedString",
+    #               status: "LastKnownCheckStatus",
+    #               error: "BoundedString",
+    #               checked_at: Time.now
+    #             }
+    #           ],
+    #           last_known_fsx_checks_status: "LastKnownCheckStatus"
     #         },
     #         data_replication_info: {
     #           lag_duration: "ISO8601DurationString",
@@ -1361,7 +1635,8 @@ module Aws::Mgn
     #             error: "DataReplicationErrorString",
     #             raw_error: "LargeBoundedString"
     #           },
-    #           last_snapshot_date_time: "ISO8601DatetimeString"
+    #           last_snapshot_date_time: "ISO8601DatetimeString",
+    #           replicator_id: "ReplicatorID"
     #         },
     #         life_cycle: {
     #           added_to_service_date_time: "ISO8601DatetimeString",
@@ -1431,7 +1706,7 @@ module Aws::Mgn
     #         replication_type: "ReplicationType",
     #         vcenter_client_id: "VcenterClientID",
     #         application_id: "ApplicationID",
-    #         user_provided_id: "BoundedString",
+    #         user_provided_id: "UserProvidedId",
     #         fqdn_for_action_framework: "BoundedString",
     #         connector_action: {
     #           credentials_secret_arn: "SecretArn",
@@ -1537,7 +1812,7 @@ module Aws::Mgn
       request.send_request(options)
     end
 
-    # <p>Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communicating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>
+    # <p>Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communicating with Application Migration Service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>
     # @param [Hash, Types::DisconnectFromServiceInput] params
     # @option params [String] :source_server_id
     #   <p>Request to disconnect Source Server from service by Server ID.</p>
@@ -1562,7 +1837,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -1591,7 +1876,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -1661,7 +1947,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -1674,7 +1960,7 @@ module Aws::Mgn
       request.send_request(options)
     end
 
-    # <p>Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be changed to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>
+    # <p>Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be changed to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>
     # @param [Hash, Types::FinalizeCutoverInput] params
     # @option params [String] :source_server_id
     #   <p>Request to finalize Cutover by Source Server ID.</p>
@@ -1699,7 +1985,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -1728,7 +2024,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -1798,7 +2095,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -1875,6 +2172,170 @@ module Aws::Mgn
       request.send_request(options)
     end
 
+    # <p>Retrieves the details of a network migration definition including source and target configurations.</p>
+    # @param [Hash, Types::GetNetworkMigrationDefinitionRequest] params
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition to retrieve.</p>
+    # @example Sample GetNetworkMigrationDefinition call
+    #   # Example operation for get_network_migration_definition
+    #   params = {
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.get_network_migration_definition(params, options)
+    #   response.to_h #=>
+    #   {
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     name: "network1",
+    #     description: "network 1 description",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX",
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket",
+    #           s3_key: "source_key",
+    #           s3_bucket_owner: "012345678901"
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket",
+    #       s3_bucket_owner: "012345678901"
+    #     },
+    #     target_network: {
+    #       topology: "ISOLATED_VPC",
+    #       inbound_cidr: "192.168.1.0/24"
+    #     },
+    #     created_at: Time.parse(1735334198),
+    #     updated_at: Time.parse(1735334198),
+    #     tags: {
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #   }
+    #   options = {}
+    #   response = client.get_network_migration_definition(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "ARN",
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #     name: "NetworkMigrationDefinitionName",
+    #     description: "NetworkMigrationDefinitionDescription",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "SourceEnvironment", # required
+    #         source_s3_configuration: { # required
+    #           s3_bucket: "S3BucketName", # required
+    #           s3_bucket_owner: "AccountID", # required
+    #           s3_key: "S3KeyName", # required
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID", # required
+    #     },
+    #     target_network: {
+    #       topology: "TargetNetworkTopology", # required
+    #       inbound_cidr: "Cidr",
+    #       outbound_cidr: "Cidr",
+    #       inspection_cidr: "Cidr"
+    #     },
+    #     target_deployment: "TargetDeployment",
+    #     vpc_provisioning_strategy: "VpcProvisioningStrategy",
+    #     cidr_mappings: [
+    #       {
+    #         original_cidr: "Cidr", # required
+    #         updated_cidr: "Cidr", # required
+    #       }
+    #     ],
+    #     created_at: Time.now,
+    #     updated_at: Time.now,
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue"
+    #     }
+    #   }
+    # @return [Types::GetNetworkMigrationDefinitionOutput]
+    def get_network_migration_definition(params = {}, options = {})
+      request = build_request(:get_network_migration_definition, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves detailed information about a specific construct within a mapper segment, including its properties and configuration data.</p>
+    # @param [Hash, Types::GetNetworkMigrationMapperSegmentConstructRequest] params
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :segment_id
+    #   <p>The unique identifier of the mapper segment.</p>
+    # @option params [String] :construct_id
+    #   <p>The unique identifier of the construct within the segment.</p>
+    # @example Sample GetNetworkMigrationMapperSegmentConstruct call
+    #   # Example operation for get_network_migration_mapper_segment_construct
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab",
+    #     construct_id: "abc45678-abcd-abcd-efab-012345678abc"
+    #   }
+    #   options = {}
+    #   response = client.get_network_migration_mapper_segment_construct(params, options)
+    #   response.to_h #=>
+    #   {
+    #     construct: {
+    #       construct_id: "abc45678-abcd-abcd-efab-012345678abc",
+    #       construct_type: "AWS::EC2::VPC",
+    #       name: "SegmentConstructName",
+    #       description: "Segment construct description",
+    #       logical_id: "logical-id1",
+    #       created_at: Time.parse(1735334198),
+    #       updated_at: Time.parse(1735334198),
+    #       properties: {
+    #         "MapPublicIpOnLaunch" => "False",
+    #         "CidrBlock" => "192.168.101.0/24",
+    #         "Tags" => "[{'Key': 'Name', 'Value': '/infra/tier-1s/cgw/segments/Lab1-veeam-test-192.168.101.0/24'}]"
+    #       }
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     segment_id: "SegmentID", # required
+    #     construct_id: "ConstructID", # required
+    #   }
+    #   options = {}
+    #   response = client.get_network_migration_mapper_segment_construct(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     construct: {
+    #       construct_id: "ConstructID",
+    #       construct_type: "NetworkMigrationMapperSegmentConstructType",
+    #       name: "SegmentConstructName",
+    #       description: "SegmentConstructDescription",
+    #       logical_id: "LogicalID",
+    #       excluded: false,
+    #       created_at: Time.now,
+    #       updated_at: Time.now,
+    #       properties: {
+    #         "ConstructPropertyKey" => "MarshalledResourceDefinition"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetNetworkMigrationMapperSegmentConstructResponse]
+    def get_network_migration_mapper_segment_construct(params = {}, options = {})
+      request = build_request(:get_network_migration_mapper_segment_construct, params)
+      request.send_request(options)
+    end
+
     # <p>Lists all ReplicationConfigurations, filtered by Source Server ID.</p>
     # @param [Hash, Types::GetReplicationConfigurationInput] params
     # @option params [String] :source_server_id
@@ -1916,7 +2377,16 @@ module Aws::Mgn
     #     staging_area_tags: {
     #       "TagKey" => "TagValue"
     #     },
-    #     use_fips_endpoint: false
+    #     use_fips_endpoint: false,
+    #     internet_protocol: "InternetProtocol",
+    #     store_snapshot_on_local_zone: false,
+    #     storage_configuration: {
+    #       storage_type: "StorageType", # required
+    #       fsx_ontap_configuration: {
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #       }
+    #     }
     #   }
     # @return [Types::GetReplicationConfigurationOutput]
     def get_replication_configuration(params = {}, options = {})
@@ -2099,6 +2569,7 @@ module Aws::Mgn
     #     items: [
     #       {
     #         export_id: "ExportID",
+    #         arn: "ARN",
     #         s3_bucket: "S3BucketName",
     #         s3_key: "S3Key",
     #         s3_bucket_owner: "AccountID",
@@ -2110,6 +2581,9 @@ module Aws::Mgn
     #           servers_count: 1,
     #           applications_count: 1,
     #           waves_count: 1
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue"
     #         }
     #       }
     #     ],
@@ -2163,6 +2637,83 @@ module Aws::Mgn
       request.send_request(options)
     end
 
+    # <p>Lists import file enrichment jobs with optional filtering by job IDs.</p>
+    # @param [Hash, Types::ListImportFileEnrichmentsRequest] params
+    # @option params [Types::ListImportFileEnrichmentsFilters] :filters
+    #   <p>Filters to apply when listing import file enrichment jobs.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListImportFileEnrichments call
+    #   # Example operation for list_import_file_enrichments
+    #   params = {
+    #     filters: {
+    #       job_i_ds: [
+    #         "01234567-abcd-abcd-efab-0123456789ab"
+    #       ]
+    #     },
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_import_file_enrichments(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #         created_at: Time.parse(1735334198),
+    #         ended_at: Time.parse(1735334258),
+    #         status: "SUCCEEDED",
+    #         status_details: "Import file enrichment completed successfully",
+    #         s3_bucket_target: {
+    #           s3_bucket: "my-target-bucket",
+    #           s3_bucket_owner: "123456789012",
+    #           s3_key: "enriched/output.csv"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filters: {
+    #       job_i_ds: ["ImportFileEnrichmentJobID"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_import_file_enrichments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "ImportFileEnrichmentJobID",
+    #         created_at: Time.now,
+    #         ended_at: Time.now,
+    #         status: "ImportFileEnrichmentStatus",
+    #         status_details: "LargeBoundedString",
+    #         checksum: {
+    #           encryption_algorithm: "EncryptionAlgorithm",
+    #           hash: "Hash"
+    #         },
+    #         s3_bucket_target: {
+    #           s3_bucket: "S3BucketName", # required
+    #           s3_bucket_owner: "AccountID", # required
+    #           s3_key: "S3KeyName", # required
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListImportFileEnrichmentsResponse]
+    def list_import_file_enrichments(params = {}, options = {})
+      request = build_request(:list_import_file_enrichments, params)
+      request.send_request(options)
+    end
+
     # <p>List imports.</p>
     # @param [Hash, Types::ListImportsInput] params
     # @option params [Types::ListImportsRequestFilters] :filters
@@ -2187,6 +2738,7 @@ module Aws::Mgn
     #     items: [
     #       {
     #         import_id: "ImportID",
+    #         arn: "ARN",
     #         s3_bucket_source: {
     #           s3_bucket: "S3BucketName", # required
     #           s3_key: "S3Key", # required
@@ -2209,6 +2761,9 @@ module Aws::Mgn
     #             created_count: 1,
     #             modified_count: 1
     #           }
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue"
     #         }
     #       }
     #     ],
@@ -2246,6 +2801,958 @@ module Aws::Mgn
     # @return [Types::ListManagedAccountsResponse]
     def list_managed_accounts(params = {}, options = {})
       request = build_request(:list_managed_accounts, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists network migration analysis jobs for a specified execution. Returns information about analysis job status and results.</p>
+    # @param [Hash, Types::ListNetworkMigrationAnalysesRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution to list analyses for.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Types::ListNetworkMigrationAnalysesFilters] :filters
+    #   <p>Filters to apply when listing analysis jobs.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationAnalyses call
+    #   # Example operation for list_network_migration_analyses
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_analyses(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         created_at: Time.parse(1735334198),
+    #         ended_at: Time.parse(1735334258),
+    #         status: "SUCCEEDED",
+    #         status_details: "Job status details"
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_analyses(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "NetworkMigrationJobID",
+    #         network_migration_execution_id: "NetworkMigrationExecutionID",
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         created_at: Time.now,
+    #         ended_at: Time.now,
+    #         status: "NetworkMigrationJobStatus",
+    #         status_details: "LargeBoundedString"
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationAnalysesResponse]
+    def list_network_migration_analyses(params = {}, options = {})
+      request = build_request(:list_network_migration_analyses, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the results of network migration analyses, showing connectivity and compatibility findings for migrated resources.</p>
+    # @param [Hash, Types::ListNetworkMigrationAnalysisResultsRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Types::ListNetworkMigrationAnalysisResultsFilters] :filters
+    #   <p>Filters to apply when listing analysis results, such as VPC IDs.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationAnalysisResults call
+    #   # Example operation for list_network_migration_analysis_results
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_analysis_results(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         analyzer_type: "REACHABILITY_ANALYZER",
+    #         source: {
+    #           vpc_id: "vpc-12345678",
+    #           subnet_id: "subnet-12345678"
+    #         },
+    #         target: {
+    #           vpc_id: "vpc-01234567",
+    #           subnet_id: "subnet-01234567"
+    #         },
+    #         status: "SUCCEEDED",
+    #         analysis_result: "analysis result"
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       vpc_i_ds: ["VpcID"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_analysis_results(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "NetworkMigrationJobID",
+    #         network_migration_execution_id: "NetworkMigrationExecutionID",
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         analyzer_type: "AnalyzerType",
+    #         source: {
+    #           vpc_id: "VpcID",
+    #           subnet_id: "SubnetID"
+    #         },
+    #         target: {
+    #           vpc_id: "VpcID",
+    #           subnet_id: "SubnetID"
+    #         },
+    #         status: "NetworkMigrationAnalysisResultStatus",
+    #         analysis_result: "String"
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationAnalysisResultsResponse]
+    def list_network_migration_analysis_results(params = {}, options = {})
+      request = build_request(:list_network_migration_analysis_results, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists code generation segments, which represent individual infrastructure components generated as code templates.</p>
+    # @param [Hash, Types::ListNetworkMigrationCodeGenerationSegmentsRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Types::ListNetworkMigrationCodeGenerationSegmentsFilters] :filters
+    #   <p>Filters to apply when listing code generation segments.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationCodeGenerationSegments call
+    #   # Example operation for list_network_migration_code_generation_segments
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_code_generation_segments(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab",
+    #         segment_type: "WORKLOAD",
+    #         logical_id: "logical-id1",
+    #         mapper_segment_id: "12345678-abcd-abcd-efab-0123456789ab",
+    #         artifacts: [
+    #           {
+    #             artifact_id: "a2345678-abcd-abcd-efab-0123456789ab",
+    #             artifact_type: "CDK_TYPESCRIPT",
+    #             artifact_sub_type: "STACK",
+    #             logical_id: "logical-id2",
+    #             output_s3_configuration: {
+    #               s3_bucket: "s3_bucket",
+    #               s3_bucket_owner: "012345678901",
+    #               s3_key: "S3KeyName"
+    #             },
+    #             checksum: {
+    #               encryption_algorithm: "SHA256",
+    #               hash: "0123456789aAbBcCdDeEfF0123456789"
+    #             },
+    #             created_at: Time.parse(1735334198)
+    #           }
+    #         ],
+    #         created_at: Time.parse(1735334198)
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       segment_i_ds: ["SegmentID"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_code_generation_segments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "NetworkMigrationJobID",
+    #         network_migration_execution_id: "NetworkMigrationExecutionID",
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         segment_id: "SegmentID",
+    #         segment_type: "NetworkMigrationCodeGenerationSegmentType",
+    #         logical_id: "LogicalID",
+    #         mapper_segment_id: "SegmentID",
+    #         artifacts: [
+    #           {
+    #             artifact_id: "NetworkMigrationCodeGenerationArtifactID",
+    #             artifact_type: "NetworkMigrationCodeGenerationArtifactType",
+    #             artifact_sub_type: "NetworkMigrationCodeGenerationArtifactSubType",
+    #             logical_id: "LogicalID",
+    #             output_s3_configuration: {
+    #               s3_bucket: "S3BucketName",
+    #               s3_bucket_owner: "AccountID",
+    #               s3_key: "S3KeyName"
+    #             },
+    #             checksum: {
+    #               encryption_algorithm: "EncryptionAlgorithm",
+    #               hash: "Hash"
+    #             },
+    #             created_at: Time.now
+    #           }
+    #         ],
+    #         referenced_segments: ["SegmentID"],
+    #         created_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationCodeGenerationSegmentsResponse]
+    def list_network_migration_code_generation_segments(params = {}, options = {})
+      request = build_request(:list_network_migration_code_generation_segments, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists network migration code generation jobs, which convert network mappings into infrastructure-as-code templates.</p>
+    # @param [Hash, Types::ListNetworkMigrationCodeGenerationsRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Types::ListNetworkMigrationCodeGenerationsFilters] :filters
+    #   <p>Filters to apply when listing code generation jobs.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationCodeGenerations call
+    #   # Example operation for list_network_migration_code_generations
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_code_generations(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         created_at: Time.parse(1735334198),
+    #         ended_at: Time.parse(1735334258),
+    #         status: "SUCCEEDED",
+    #         status_details: "Job status details"
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_code_generations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "NetworkMigrationJobID",
+    #         network_migration_execution_id: "NetworkMigrationExecutionID",
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         created_at: Time.now,
+    #         ended_at: Time.now,
+    #         status: "NetworkMigrationJobStatus",
+    #         status_details: "LargeBoundedString",
+    #         code_generation_output_format_status_details_map: {
+    #           "CodeGenerationOutputFormatType" => {
+    #             status: "CodeGenerationOutputFormatStatus",
+    #             status_detail_list: "LargeBoundedString"
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationCodeGenerationsResponse]
+    def list_network_migration_code_generations(params = {}, options = {})
+      request = build_request(:list_network_migration_code_generations, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all network migration definitions in the account, with optional filtering.</p>
+    # @param [Hash, Types::ListNetworkMigrationDefinitionsRequest] params
+    # @option params [Types::ListNetworkMigrationDefinitionsRequestFilters] :filters
+    #   <p>Filters to apply when listing network migration definitions.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @example Sample ListNetworkMigrationDefinitions call
+    #   # Example operation for list_network_migration_definitions
+    #   params = {
+    #     filters: {
+    #       network_migration_definition_i_ds: [
+    #         "nmd-01234567891234567"
+    #       ]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_definitions(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         name: "network1",
+    #         source_environment: "NSX"
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filters: {
+    #       network_migration_definition_i_ds: ["NetworkMigrationDefinitionID"]
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_definitions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         name: "NetworkMigrationDefinitionName",
+    #         source_environment: "SourceEnvironment",
+    #         arn: "ARN",
+    #         tags: {
+    #           "TagKey" => "TagValue"
+    #         },
+    #         scope_tags: {
+    #           "ScopeTagKey" => "ScopeTagValue"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationDefinitionsResponse]
+    def list_network_migration_definitions(params = {}, options = {})
+      request = build_request(:list_network_migration_definitions, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists CloudFormation stacks that have been deployed as part of the network migration.</p>
+    # @param [Hash, Types::ListNetworkMigrationDeployedStacksRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationDeployedStacks call
+    #   # Example operation for list_network_migration_deployed_stacks
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_deployed_stacks(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         status: "CREATE_STARTED",
+    #         stack_physical_id: "arn:aws:cloudformation:us-east-1:012345678901:stack/ExampleStack/b2345678-abcd-abcd-efab-0123456789ab",
+    #         stack_logical_id: "logical-id1",
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab",
+    #         target_account: "234567890123",
+    #         failed_resources: [
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_deployed_stacks(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         status: "NetworkMigrationDeployedStackStatus",
+    #         stack_physical_id: "PhysicalID",
+    #         stack_logical_id: "LogicalID",
+    #         segment_id: "SegmentID",
+    #         target_account: "AccountID",
+    #         failed_resources: [
+    #           {
+    #             logical_id: "LogicalID",
+    #             status: "NetworkMigrationFailedResourceStatus",
+    #             status_reason: "LargeBoundedString"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationDeployedStacksResponse]
+    def list_network_migration_deployed_stacks(params = {}, options = {})
+      request = build_request(:list_network_migration_deployed_stacks, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists network migration deployment jobs and their current status.</p>
+    # @param [Hash, Types::ListNetworkMigrationDeploymentsRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Types::ListNetworkMigrationDeployerJobFilters] :filters
+    #   <p>Filters to apply when listing deployment jobs.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationDeployments call
+    #   # Example operation for list_network_migration_deployments
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_deployments(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         created_at: Time.parse(1735334198),
+    #         ended_at: Time.parse(1735334258),
+    #         status: "SUCCEEDED",
+    #         status_details: "Job status details"
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_deployments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "NetworkMigrationJobID",
+    #         network_migration_execution_id: "NetworkMigrationExecutionID",
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         created_at: Time.now,
+    #         ended_at: Time.now,
+    #         status: "NetworkMigrationJobStatus",
+    #         status_details: "LargeBoundedString"
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationDeploymentsOutput]
+    def list_network_migration_deployments(params = {}, options = {})
+      request = build_request(:list_network_migration_deployments, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists network migration execution instances for a given definition, showing the status and progress of each execution.</p>
+    # @param [Hash, Types::ListNetworkMigrationExecutionsRequest] params
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition to list executions for.</p>
+    # @option params [Types::ListNetworkMigrationExecutionRequestFilters] :filters
+    #   <p>Filters to apply when listing executions, such as status or execution ID.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @example Sample ListNetworkMigrationExecutions call
+    #   # Example operation for list_network_migration_executions
+    #   params = {
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_executions(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         status: "SUCCEEDED",
+    #         stage: "CODE_GENERATION",
+    #         activity: "CODE_GENERATION",
+    #         created_at: Time.parse(1735334198),
+    #         updated_at: Time.parse(1735334198),
+    #         tags: {
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       network_migration_execution_i_ds: ["NetworkMigrationExecutionID"],
+    #       network_migration_execution_statuses: ["ExecutionStatus"]
+    #     },
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_executions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         network_migration_execution_id: "NetworkMigrationExecutionID",
+    #         status: "ExecutionStatus",
+    #         stage: "ExecutionStage",
+    #         activity: "ExecutionStageActivity",
+    #         created_at: Time.now,
+    #         updated_at: Time.now,
+    #         tags: {
+    #           "TagKey" => "TagValue"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationExecutionsResponse]
+    def list_network_migration_executions(params = {}, options = {})
+      request = build_request(:list_network_migration_executions, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists constructs within a mapper segment, representing individual infrastructure components like VPCs, subnets, or security groups.</p>
+    # @param [Hash, Types::ListNetworkMigrationMapperSegmentConstructsRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [String] :segment_id
+    #   <p>The unique identifier of the segment to list constructs for.</p>
+    # @option params [Types::ListNetworkMigrationMapperSegmentConstructsFilters] :filters
+    #   <p>Filters to apply when listing constructs, such as construct type or ID.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationMapperSegmentConstructs call with properties enabled
+    #   # Example operation for list_network_migration_mapper_segment_constructs
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_mapper_segment_constructs(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         construct_id: "abc45678-abcd-abcd-efab-012345678abc",
+    #         construct_type: "AWS::EC2::VPC",
+    #         name: "SegmentConstructName",
+    #         description: "Segment construct description",
+    #         logical_id: "logical-id1",
+    #         created_at: Time.parse(1735334198),
+    #         updated_at: Time.parse(1735334198),
+    #         properties: {
+    #           "MapPublicIpOnLaunch" => "False",
+    #           "CidrBlock" => "192.168.101.0/24",
+    #           "Tags" => "[{'Key': 'Name', 'Value': '/infra/tier-1s/cgw/segments/Lab1-veeam-test-192.168.101.0/24'}]"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Sample ListNetworkMigrationMapperSegmentConstructs call with properties disabled (default)
+    #   # Example operation for list_network_migration_mapper_segment_constructs
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_mapper_segment_constructs(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         construct_id: "abc45678-abcd-abcd-efab-012345678abc",
+    #         construct_type: "AWS::EC2::VPC",
+    #         name: "SegmentConstructName",
+    #         description: "Segment construct description",
+    #         logical_id: "logical-id1",
+    #         created_at: Time.parse(1735334198),
+    #         updated_at: Time.parse(1735334198)
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     segment_id: "SegmentID", # required
+    #     filters: {
+    #       construct_i_ds: ["ConstructID"],
+    #       construct_types: ["NetworkMigrationMapperSegmentConstructType"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_mapper_segment_constructs(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         construct_id: "ConstructID",
+    #         construct_type: "NetworkMigrationMapperSegmentConstructType",
+    #         name: "SegmentConstructName",
+    #         description: "SegmentConstructDescription",
+    #         logical_id: "LogicalID",
+    #         excluded: false,
+    #         created_at: Time.now,
+    #         updated_at: Time.now,
+    #         properties: {
+    #           "ConstructPropertyKey" => "MarshalledResourceDefinition"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationMapperSegmentConstructsResponse]
+    def list_network_migration_mapper_segment_constructs(params = {}, options = {})
+      request = build_request(:list_network_migration_mapper_segment_constructs, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists mapper segments, which represent logical groupings of network resources to be migrated together.</p>
+    # @param [Hash, Types::ListNetworkMigrationMapperSegmentsRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Types::ListNetworkMigrationMapperSegmentsFilters] :filters
+    #   <p>Filters to apply when listing segments.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationMapperSegments call
+    #   # Example operation for list_network_migration_mapper_segments
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_mapper_segments(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab",
+    #         segment_type: "WORKLOAD",
+    #         name: "SegmentName",
+    #         description: "Segment description",
+    #         logical_id: "logical-id1",
+    #         checksum: {
+    #           encryption_algorithm: "SHA256",
+    #           hash: "0123456789aAbBcCdDeEfF0123456789"
+    #         },
+    #         output_s3_configuration: {
+    #           s3_bucket: "s3_bucket",
+    #           s3_bucket_owner: "012345678901",
+    #           s3_key: "S3KeyName"
+    #         },
+    #         created_at: Time.parse(1735334198),
+    #         updated_at: Time.parse(1735334198)
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       segment_i_ds: ["SegmentID"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_mapper_segments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "NetworkMigrationJobID",
+    #         network_migration_execution_id: "NetworkMigrationExecutionID",
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         segment_id: "SegmentID",
+    #         segment_type: "NetworkMigrationMapperSegmentType",
+    #         name: "SegmentName",
+    #         description: "SegmentDescription",
+    #         logical_id: "LogicalID",
+    #         checksum: {
+    #           encryption_algorithm: "EncryptionAlgorithm",
+    #           hash: "Hash"
+    #         },
+    #         output_s3_configuration: {
+    #           s3_bucket: "S3BucketName",
+    #           s3_bucket_owner: "AccountID",
+    #           s3_key: "S3KeyName"
+    #         },
+    #         created_at: Time.now,
+    #         updated_at: Time.now,
+    #         scope_tags: {
+    #           "ScopeTagKey" => "ScopeTagValue"
+    #         },
+    #         target_account: "AccountID",
+    #         referenced_segments: ["SegmentID"]
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationMapperSegmentsResponse]
+    def list_network_migration_mapper_segments(params = {}, options = {})
+      request = build_request(:list_network_migration_mapper_segments, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists mapping update jobs, which apply customer modifications to the generated network mappings.</p>
+    # @param [Hash, Types::ListNetworkMigrationMappingUpdatesRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Types::ListNetworkMigrationMappingUpdatesFilters] :filters
+    #   <p>Filters to apply when listing mapping update jobs.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationMappingUpdates call
+    #   # Example operation for list_network_migration_mapping_updates
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_mapping_updates(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         created_at: Time.parse(1735334198),
+    #         ended_at: Time.parse(1735334258),
+    #         status: "SUCCEEDED",
+    #         status_details: "Job status details"
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_mapping_updates(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "NetworkMigrationJobID",
+    #         network_migration_execution_id: "NetworkMigrationExecutionID",
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         created_at: Time.now,
+    #         ended_at: Time.now,
+    #         status: "NetworkMigrationJobStatus",
+    #         status_details: "LargeBoundedString"
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationMappingUpdatesResponse]
+    def list_network_migration_mapping_updates(params = {}, options = {})
+      request = build_request(:list_network_migration_mapping_updates, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists network migration mapping jobs, which analyze and create relationships between source and target network resources.</p>
+    # @param [Hash, Types::ListNetworkMigrationMappingsRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Types::ListNetworkMigrationMappingsFilters] :filters
+    #   <p>Filters to apply when listing mapping jobs.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Sample ListNetworkMigrationMappings call
+    #   # Example operation for list_network_migration_mappings
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_mappings(params, options)
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #         network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #         network_migration_definition_id: "nmd-01234567891234567",
+    #         created_at: Time.parse(1735334198),
+    #         ended_at: Time.parse(1735334258),
+    #         status: "SUCCEEDED",
+    #         status_details: "Job status details"
+    #       }
+    #     ],
+    #     next_token: "NextTokenId"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     filters: {
+    #       job_i_ds: ["NetworkMigrationJobID"]
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_network_migration_mappings(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         job_id: "NetworkMigrationJobID",
+    #         network_migration_execution_id: "NetworkMigrationExecutionID",
+    #         network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #         created_at: Time.now,
+    #         ended_at: Time.now,
+    #         status: "NetworkMigrationJobStatus",
+    #         status_details: "LargeBoundedString"
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNetworkMigrationMappingsResponse]
+    def list_network_migration_mappings(params = {}, options = {})
+      request = build_request(:list_network_migration_mappings, params)
       request.send_request(options)
     end
 
@@ -2450,7 +3957,7 @@ module Aws::Mgn
       request.send_request(options)
     end
 
-    # <p>Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle. state which equals DISCONNECTED or CUTOVER.</p>
+    # <p>Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle state that equals DISCONNECTED or CUTOVER.</p>
     # @param [Hash, Types::MarkAsArchivedInput] params
     # @option params [String] :source_server_id
     #   <p>Mark as archived by Source Server ID.</p>
@@ -2475,7 +3982,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -2504,7 +4021,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -2574,7 +4092,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -2612,7 +4130,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -2641,7 +4169,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -2711,7 +4240,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -2987,7 +4516,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -3016,7 +4555,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -3086,7 +4626,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -3124,7 +4664,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -3153,7 +4703,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -3223,7 +4774,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -3322,11 +4873,16 @@ module Aws::Mgn
     #   <p>Start export request s3key.</p>
     # @option params [String] :s3_bucket_owner
     #   <p>Start export request s3 bucket owner.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Start export request tags.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     s3_bucket: "S3BucketName", # required
     #     s3_key: "S3Key", # required
-    #     s3_bucket_owner: "AccountID"
+    #     s3_bucket_owner: "AccountID",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
     #   }
     #   options = {}
     #   response = client.start_export(params, options)
@@ -3335,6 +4891,7 @@ module Aws::Mgn
     #   {
     #     export_task: {
     #       export_id: "ExportID",
+    #       arn: "ARN",
     #       s3_bucket: "S3BucketName",
     #       s3_key: "S3Key",
     #       s3_bucket_owner: "AccountID",
@@ -3346,6 +4903,9 @@ module Aws::Mgn
     #         servers_count: 1,
     #         applications_count: 1,
     #         waves_count: 1
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue"
     #       }
     #     }
     #   }
@@ -3361,6 +4921,8 @@ module Aws::Mgn
     #   <p>Start import request client token.</p>
     # @option params [Types::S3BucketSource] :s3_bucket_source
     #   <p>Start import request s3 bucket source.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Start import request tags.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     client_token: "ClientIdempotencyToken",
@@ -3368,6 +4930,9 @@ module Aws::Mgn
     #       s3_bucket: "S3BucketName", # required
     #       s3_key: "S3Key", # required
     #       s3_bucket_owner: "AccountID"
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
     #     }
     #   }
     #   options = {}
@@ -3377,6 +4942,7 @@ module Aws::Mgn
     #   {
     #     import_task: {
     #       import_id: "ImportID",
+    #       arn: "ARN",
     #       s3_bucket_source: {
     #         s3_bucket: "S3BucketName", # required
     #         s3_key: "S3Key", # required
@@ -3399,6 +4965,9 @@ module Aws::Mgn
     #           created_count: 1,
     #           modified_count: 1
     #         }
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue"
     #       }
     #     }
     #   }
@@ -3408,7 +4977,323 @@ module Aws::Mgn
       request.send_request(options)
     end
 
-    # <p>Starts replication for SNAPSHOT_SHIPPING agents.</p>
+    # <p>Starts an import file enrichment job to process and enrich network migration import files with additional metadata and IP assignment strategies.</p>
+    # @param [Hash, Types::StartImportFileEnrichmentRequest] params
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @option params [Types::EnrichmentSourceS3Configuration] :s3_bucket_source
+    #   <p>The S3 configuration specifying the source location of the import file to be enriched.</p>
+    # @option params [Types::EnrichmentTargetS3Configuration] :s3_bucket_target
+    #   <p>The S3 configuration specifying the target location where the enriched import file will be stored.</p>
+    # @option params [String] :ip_assignment_strategy
+    #   <p>The IP assignment strategy to use when enriching the import file. Can be STATIC or DYNAMIC.</p>
+    # @example Sample StartImportFileEnrichment call
+    #   # Example operation for start_import_file_enrichment
+    #   params = {
+    #     s3_bucket_source: {
+    #       s3_bucket: "my-source-bucket",
+    #       s3_bucket_owner: "123456789012",
+    #       s3_key: "imports/source-file.csv"
+    #     },
+    #     s3_bucket_target: {
+    #       s3_bucket: "my-target-bucket",
+    #       s3_bucket_owner: "123456789012",
+    #       s3_key: "enriched/output.csv"
+    #     },
+    #     ip_assignment_strategy: "STATIC"
+    #   }
+    #   options = {}
+    #   response = client.start_import_file_enrichment(params, options)
+    #   response.to_h #=>
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "ClientIdempotencyToken",
+    #     s3_bucket_source: { # required
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID", # required
+    #       s3_key: "S3KeyName", # required
+    #     },
+    #     s3_bucket_target: { # required
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID", # required
+    #       s3_key: "S3KeyName", # required
+    #     },
+    #     ip_assignment_strategy: "IpAssignmentStrategy"
+    #   }
+    #   options = {}
+    #   response = client.start_import_file_enrichment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "ImportFileEnrichmentJobID"
+    #   }
+    # @return [Types::StartImportFileEnrichmentResponse]
+    def start_import_file_enrichment(params = {}, options = {})
+      request = build_request(:start_import_file_enrichment, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a network migration analysis job to evaluate connectivity and compatibility of the migration mappings.</p>
+    # @param [Hash, Types::StartNetworkMigrationAnalysisRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution to analyze.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @example Sample StartNetworkMigrationAnalysis call
+    #   # Example operation for start_network_migration_analysis
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_analysis(params, options)
+    #   response.to_h #=>
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_analysis(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "NetworkMigrationJobID"
+    #   }
+    # @return [Types::StartNetworkMigrationAnalysisResponse]
+    def start_network_migration_analysis(params = {}, options = {})
+      request = build_request(:start_network_migration_analysis, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a code generation job to convert network migration mappings into infrastructure-as-code templates.</p>
+    # @param [Hash, Types::StartNetworkMigrationCodeGenerationRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Array<String>] :code_generation_output_format_types
+    #   <p>The output format types for code generation, such as CloudFormation or Terraform.</p>
+    # @example Sample StartNetworkMigrationCodeGeneration call
+    #   # Example operation for start_network_migration_code_generation
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_code_generation(params, options)
+    #   response.to_h #=>
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     code_generation_output_format_types: ["CodeGenerationOutputFormatType"]
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_code_generation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "NetworkMigrationJobID"
+    #   }
+    # @return [Types::StartNetworkMigrationCodeGenerationResponse]
+    def start_network_migration_code_generation(params = {}, options = {})
+      request = build_request(:start_network_migration_code_generation, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a deployment job to create the target network infrastructure based on the generated code templates.</p>
+    # @param [Hash, Types::StartNetworkMigrationDeploymentRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @example Sample StartNetworkMigrationDeployment call
+    #   # Example operation for start_network_migration_deployment
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_deployment(params, options)
+    #   response.to_h #=>
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_deployment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "NetworkMigrationJobID"
+    #   }
+    # @return [Types::StartNetworkMigrationDeploymentOutput]
+    def start_network_migration_deployment(params = {}, options = {})
+      request = build_request(:start_network_migration_deployment, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts the network migration mapping process for a given network migration execution.</p>
+    # @param [Hash, Types::StartNetworkMigrationMappingRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [String] :security_group_mapping_strategy
+    #   <p>The security group mapping strategy to use.</p>
+    # @example Sample StartNetworkMigrationMapping call
+    #   # Example operation for start_network_migration_mapping
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567"
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_mapping(params, options)
+    #   response.to_h #=>
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     security_group_mapping_strategy: "SecurityGroupMappingStrategy"
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_mapping(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "NetworkMigrationJobID"
+    #   }
+    # @return [Types::StartNetworkMigrationMappingResponse]
+    def start_network_migration_mapping(params = {}, options = {})
+      request = build_request(:start_network_migration_mapping, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a job to apply customer modifications to network migration mappings, such as changing properties.</p>
+    # @param [Hash, Types::StartNetworkMigrationMappingUpdateRequest] params
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [Array<Types::StartNetworkMigrationMappingUpdateConstruct>] :constructs
+    #   <p>A list of construct updates to apply.</p>
+    # @option params [Array<Types::StartNetworkMigrationMappingUpdateSegment>] :segments
+    #   <p>A list of segment updates to apply.</p>
+    # @example Sample StartNetworkMigrationMappingUpdate call
+    #   # Example operation for start_network_migration_mapping_update
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     constructs: [
+    #       {
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab",
+    #         construct_id: "abc45678-abcd-abcd-efab-012345678abc",
+    #         construct_type: "AWS::EC2::VPC",
+    #         operation: {
+    #     "update" => {
+    #       "properties" => {
+    #         "CidrBlock" => 10.31.0.0/22
+    #       }
+    #     }
+    #   }
+    #       }
+    #     ],
+    #     segments: [
+    #       {
+    #         segment_id: "12345678-abcd-abcd-efab-0123456789ab",
+    #         target_account: "234567890123",
+    #         scope_tags: {
+    #           "key1" => "val1",
+    #           "key2" => "val2"
+    #         }
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_mapping_update(params, options)
+    #   response.to_h #=>
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     constructs: [
+    #       {
+    #         segment_id: "SegmentID", # required
+    #         construct_id: "ConstructID", # required
+    #         construct_type: "NetworkMigrationMapperSegmentConstructType", # required
+    #         operation: {
+    #           # One of:
+    #           merge: {
+    #             merge_constructs: [
+    #               {
+    #                 segment_id: "SegmentID",
+    #                 construct_id: "ConstructID"
+    #               }
+    #             ]
+    #           },
+    #           split: {
+    #             split_constructs: [
+    #               {
+    #                 cidr_block: "CidrBlock"
+    #               }
+    #             ]
+    #           },
+    #           delete: {
+    #           },
+    #           update: {
+    #             name: "SegmentConstructName",
+    #             excluded: false,
+    #             properties: {
+    #               "ConstructPropertyKey" => "MarshalledResourceDefinition"
+    #             }
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     segments: [
+    #       {
+    #         segment_id: "SegmentID", # required
+    #         target_account: "AccountID",
+    #         scope_tags: {
+    #           "ScopeTagKey" => "ScopeTagValue"
+    #         }
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.start_network_migration_mapping_update(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "NetworkMigrationJobID"
+    #   }
+    # @return [Types::StartNetworkMigrationMappingUpdateResponse]
+    def start_network_migration_mapping_update(params = {}, options = {})
+      request = build_request(:start_network_migration_mapping_update, params)
+      request.send_request(options)
+    end
+
+    # <p>Start replication for source server irrespective of its replication type.</p>
     # @param [Hash, Types::StartReplicationInput] params
     # @option params [String] :source_server_id
     #   <p>ID of source server on which to start replication.</p>
@@ -3433,7 +5318,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -3462,7 +5357,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -3532,7 +5428,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -3648,7 +5544,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -3677,7 +5583,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -3747,7 +5654,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -4054,11 +5961,7 @@ module Aws::Mgn
       request.send_request(options)
     end
 
-    # <p>Updates multiple LaunchConfigurations by Source Server ID.</p>
-    #         <note>
-    #             <p>bootMode valid values are <code>LEGACY_BIOS | UEFI</code>
-    #             </p>
-    #          </note>
+    # <p>Updates multiple LaunchConfigurations by Source Server ID.</p> <note> <p>bootMode valid values are <code>LEGACY_BIOS | UEFI | USE_SOURCE</code> </p> </note>
     # @param [Hash, Types::UpdateLaunchConfigurationInput] params
     # @option params [String] :source_server_id
     #   <p>Update Launch configuration by Source Server ID request.</p>
@@ -4077,7 +5980,7 @@ module Aws::Mgn
     # @option params [String] :boot_mode
     #   <p>Update Launch configuration boot mode request.</p>
     # @option params [Types::PostLaunchActions] :post_launch_actions
-    #   <p>Post Launch Actions to executed on the Test or Cutover instance.</p>
+    #   <p>Post Launch Actions to be executed on the Test or Cutover instance.</p>
     # @option params [Boolean] :enable_map_auto_tagging
     #   <p>Enable map auto tagging.</p>
     # @option params [String] :map_auto_tagging_mpe_id
@@ -4211,6 +6114,10 @@ module Aws::Mgn
     #   <p>Small volume config.</p>
     # @option params [Types::LaunchTemplateDiskConf] :large_volume_conf
     #   <p>Large volume config.</p>
+    # @option params [Boolean] :enable_parameters_encryption
+    #   <p>Enable parameters encryption.</p>
+    # @option params [String] :parameters_encryption_key
+    #   <p>Parameters encryption key.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
@@ -4257,13 +6164,19 @@ module Aws::Mgn
     #     small_volume_conf: {
     #       volume_type: "VolumeType",
     #       iops: 1,
-    #       throughput: 1
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false
     #     },
     #     large_volume_conf: {
     #       volume_type: "VolumeType",
     #       iops: 1,
-    #       throughput: 1
-    #     }
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false
+    #     },
+    #     enable_parameters_encryption: false,
+    #     parameters_encryption_key: "ARN"
     #   }
     #   options = {}
     #   response = client.update_launch_configuration_template(params, options)
@@ -4319,17 +6232,275 @@ module Aws::Mgn
     #     small_volume_conf: {
     #       volume_type: "VolumeType",
     #       iops: 1,
-    #       throughput: 1
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false
     #     },
     #     large_volume_conf: {
     #       volume_type: "VolumeType",
     #       iops: 1,
-    #       throughput: 1
-    #     }
+    #       throughput: 1,
+    #       volume_initialization_rate: 1,
+    #       delete_on_termination: false
+    #     },
+    #     enable_parameters_encryption: false,
+    #     parameters_encryption_key: "ARN"
     #   }
     # @return [Types::UpdateLaunchConfigurationTemplateOutput]
     def update_launch_configuration_template(params = {}, options = {})
       request = build_request(:update_launch_configuration_template, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an existing network migration definition with new source or target configurations.</p>
+    # @param [Hash, Types::UpdateNetworkMigrationDefinitionRequest] params
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition to update.</p>
+    # @option params [String] :name
+    #   <p>The updated name of the network migration definition.</p>
+    # @option params [String] :description
+    #   <p>The updated description of the network migration definition.</p>
+    # @option params [Array<Types::SourceConfiguration>] :source_configurations
+    #   <p>The updated list of source configurations.</p>
+    # @option params [Types::TargetS3ConfigurationUpdate] :target_s3_configuration
+    #   <p>The updated S3 configuration for storing the target network artifacts.</p>
+    # @option params [Types::TargetNetworkUpdate] :target_network
+    #   <p>The updated target network configuration.</p>
+    # @option params [String] :target_deployment
+    #   <p>The updated target deployment configuration.</p>
+    # @option params [String] :vpc_provisioning_strategy
+    #   <p>Updates whether the migration creates new target VPCs or uses existing ones. Set to <code>USE_EXISTING</code> to migrate into existing VPCs in the target account, or to <code>CREATE_NEW</code> to provision new target VPCs.</p>
+    # @option params [Array<Types::CidrMapping>] :cidr_mappings
+    #   <p>The updated list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges. CIDR mappings can be provided only when <code>vpcProvisioningStrategy</code> is set to <code>USE_EXISTING</code>.</p>
+    # @option params [Hash<String, String>] :scope_tags
+    #   <p>The updated scope tags for the network migration definition.</p>
+    # @example Sample UpdateNetworkMigrationDefinition call
+    #   # Example operation for update_network_migration_definition
+    #   params = {
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     name: "network1",
+    #     description: "network 1 description",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX",
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket",
+    #           s3_key: "source_key",
+    #           s3_bucket_owner: "012345678901"
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket",
+    #       s3_bucket_owner: "012345678901"
+    #     },
+    #     target_network: {
+    #       topology: "ISOLATED_VPC",
+    #       inbound_cidr: "192.168.1.0/24"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_network_migration_definition(params, options)
+    #   response.to_h #=>
+    #   {
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     name: "network1",
+    #     description: "network 1 description",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "NSX",
+    #         source_s3_configuration: {
+    #           s3_bucket: "source_bucket",
+    #           s3_key: "source_key",
+    #           s3_bucket_owner: "012345678901"
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "target_bucket",
+    #       s3_bucket_owner: "012345678901"
+    #     },
+    #     target_network: {
+    #       topology: "ISOLATED_VPC",
+    #       inbound_cidr: "192.168.1.0/24"
+    #     },
+    #     created_at: Time.parse(1735334198),
+    #     updated_at: Time.parse(1735680998),
+    #     tags: {
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     name: "NetworkMigrationDefinitionName",
+    #     description: "NetworkMigrationDefinitionDescription",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "SourceEnvironment", # required
+    #         source_s3_configuration: { # required
+    #           s3_bucket: "S3BucketName", # required
+    #           s3_bucket_owner: "AccountID", # required
+    #           s3_key: "S3KeyName", # required
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "S3BucketName",
+    #       s3_bucket_owner: "AccountID"
+    #     },
+    #     target_network: {
+    #       topology: "TargetNetworkTopology",
+    #       inbound_cidr: "Cidr",
+    #       outbound_cidr: "Cidr",
+    #       inspection_cidr: "Cidr"
+    #     },
+    #     target_deployment: "TargetDeployment",
+    #     vpc_provisioning_strategy: "VpcProvisioningStrategy",
+    #     cidr_mappings: [
+    #       {
+    #         original_cidr: "Cidr", # required
+    #         updated_cidr: "Cidr", # required
+    #       }
+    #     ],
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_network_migration_definition(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "ARN",
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #     name: "NetworkMigrationDefinitionName",
+    #     description: "NetworkMigrationDefinitionDescription",
+    #     source_configurations: [
+    #       {
+    #         source_environment: "SourceEnvironment", # required
+    #         source_s3_configuration: { # required
+    #           s3_bucket: "S3BucketName", # required
+    #           s3_bucket_owner: "AccountID", # required
+    #           s3_key: "S3KeyName", # required
+    #         }
+    #       }
+    #     ],
+    #     target_s3_configuration: {
+    #       s3_bucket: "S3BucketName", # required
+    #       s3_bucket_owner: "AccountID", # required
+    #     },
+    #     target_network: {
+    #       topology: "TargetNetworkTopology", # required
+    #       inbound_cidr: "Cidr",
+    #       outbound_cidr: "Cidr",
+    #       inspection_cidr: "Cidr"
+    #     },
+    #     target_deployment: "TargetDeployment",
+    #     vpc_provisioning_strategy: "VpcProvisioningStrategy",
+    #     cidr_mappings: [
+    #       {
+    #         original_cidr: "Cidr", # required
+    #         updated_cidr: "Cidr", # required
+    #       }
+    #     ],
+    #     created_at: Time.now,
+    #     updated_at: Time.now,
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue"
+    #     }
+    #   }
+    # @return [Types::UpdateNetworkMigrationDefinitionOutput]
+    def update_network_migration_definition(params = {}, options = {})
+      request = build_request(:update_network_migration_definition, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a mapper segment's configuration, such as changing its scope tags.</p>
+    # @param [Hash, Types::UpdateNetworkMigrationMapperSegmentRequest] params
+    # @option params [String] :network_migration_definition_id
+    #   <p>The unique identifier of the network migration definition.</p>
+    # @option params [String] :network_migration_execution_id
+    #   <p>The unique identifier of the network migration execution.</p>
+    # @option params [String] :segment_id
+    #   <p>The unique identifier of the segment to update.</p>
+    # @option params [Hash<String, String>] :scope_tags
+    #   <p>The updated scope tags for the segment.</p>
+    # @example Sample UpdateNetworkMigrationMapperSegment call
+    #   # Example operation for update_network_migration_mapper_segment
+    #   params = {
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab"
+    #   }
+    #   options = {}
+    #   response = client.update_network_migration_mapper_segment(params, options)
+    #   response.to_h #=>
+    #   {
+    #     job_id: "01234567-abcd-abcd-efab-0123456789ab",
+    #     network_migration_execution_id: "01234567-abcd-abcd-abcd-0123456789ab",
+    #     network_migration_definition_id: "nmd-01234567891234567",
+    #     segment_id: "12345678-abcd-abcd-efab-0123456789ab",
+    #     segment_type: "WORKLOAD",
+    #     name: "SegmentName",
+    #     description: "Segment description",
+    #     logical_id: "logical-id1",
+    #     checksum: {
+    #       encryption_algorithm: "SHA256",
+    #       hash: "0123456789aAbBcCdDeEfF0123456789"
+    #     },
+    #     output_s3_configuration: {
+    #       s3_bucket: "s3_bucket",
+    #       s3_bucket_owner: "012345678901",
+    #       s3_key: "S3KeyName"
+    #     },
+    #     created_at: Time.parse(1735334198),
+    #     updated_at: Time.parse(1735334198)
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
+    #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
+    #     segment_id: "SegmentID", # required
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_network_migration_mapper_segment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "NetworkMigrationJobID",
+    #     network_migration_execution_id: "NetworkMigrationExecutionID",
+    #     network_migration_definition_id: "NetworkMigrationDefinitionID",
+    #     segment_id: "SegmentID",
+    #     segment_type: "NetworkMigrationMapperSegmentType",
+    #     name: "SegmentName",
+    #     description: "SegmentDescription",
+    #     logical_id: "LogicalID",
+    #     checksum: {
+    #       encryption_algorithm: "EncryptionAlgorithm",
+    #       hash: "Hash"
+    #     },
+    #     output_s3_configuration: {
+    #       s3_bucket: "S3BucketName",
+    #       s3_bucket_owner: "AccountID",
+    #       s3_key: "S3KeyName"
+    #     },
+    #     created_at: Time.now,
+    #     updated_at: Time.now,
+    #     scope_tags: {
+    #       "ScopeTagKey" => "ScopeTagValue"
+    #     },
+    #     target_account: "AccountID",
+    #     referenced_segments: ["SegmentID"]
+    #   }
+    # @return [Types::UpdateNetworkMigrationMapperSegmentOutput]
+    def update_network_migration_mapper_segment(params = {}, options = {})
+      request = build_request(:update_network_migration_mapper_segment, params)
       request.send_request(options)
     end
 
@@ -4369,6 +6540,12 @@ module Aws::Mgn
     #   <p>Update replication configuration use Fips Endpoint.</p>
     # @option params [String] :account_id
     #   <p>Update replication configuration Account ID request.</p>
+    # @option params [String] :internet_protocol
+    #   <p>Update replication configuration internet protocol.</p>
+    # @option params [Boolean] :store_snapshot_on_local_zone
+    #   <p>Update replication configuration store snapshot on local zone.</p>
+    # @option params [Types::StorageConfiguration] :storage_configuration
+    #   <p>Update replication configuration storage configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_server_id: "SourceServerID", # required
@@ -4397,7 +6574,16 @@ module Aws::Mgn
     #       "TagKey" => "TagValue"
     #     },
     #     use_fips_endpoint: false,
-    #     account_id: "AccountID"
+    #     account_id: "AccountID",
+    #     internet_protocol: "InternetProtocol",
+    #     store_snapshot_on_local_zone: false,
+    #     storage_configuration: {
+    #       storage_type: "StorageType", # required
+    #       fsx_ontap_configuration: {
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.update_replication_configuration(params, options)
@@ -4429,7 +6615,16 @@ module Aws::Mgn
     #     staging_area_tags: {
     #       "TagKey" => "TagValue"
     #     },
-    #     use_fips_endpoint: false
+    #     use_fips_endpoint: false,
+    #     internet_protocol: "InternetProtocol",
+    #     store_snapshot_on_local_zone: false,
+    #     storage_configuration: {
+    #       storage_type: "StorageType", # required
+    #       fsx_ontap_configuration: {
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #       }
+    #     }
     #   }
     # @return [Types::UpdateReplicationConfigurationOutput]
     def update_replication_configuration(params = {}, options = {})
@@ -4437,7 +6632,7 @@ module Aws::Mgn
       request.send_request(options)
     end
 
-    # <p>Updates multiple ReplicationConfigurationTemplates by ID.</p>
+    # <p>Updates a ReplicationConfigurationTemplate by ID.</p>
     # @param [Hash, Types::UpdateReplicationConfigurationTemplateInput] params
     # @option params [String] :replication_configuration_template_id
     #   <p>Update replication configuration template template ID request.</p>
@@ -4469,6 +6664,12 @@ module Aws::Mgn
     #   <p>Update replication configuration template Staging Area Tags request.</p>
     # @option params [Boolean] :use_fips_endpoint
     #   <p>Update replication configuration template use Fips Endpoint request.</p>
+    # @option params [String] :internet_protocol
+    #   <p>Update replication configuration template internet protocol request.</p>
+    # @option params [Boolean] :store_snapshot_on_local_zone
+    #   <p>Update replication configuration template store snapshot on local zone request.</p>
+    # @option params [Types::StorageConfiguration] :storage_configuration
+    #   <p>Update replication configuration template storage configuration request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
@@ -4487,7 +6688,16 @@ module Aws::Mgn
     #     staging_area_tags: {
     #       "TagKey" => "TagValue"
     #     },
-    #     use_fips_endpoint: false
+    #     use_fips_endpoint: false,
+    #     internet_protocol: "InternetProtocol",
+    #     store_snapshot_on_local_zone: false,
+    #     storage_configuration: {
+    #       storage_type: "StorageType", # required
+    #       fsx_ontap_configuration: {
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.update_replication_configuration_template(params, options)
@@ -4513,6 +6723,15 @@ module Aws::Mgn
     #     use_fips_endpoint: false,
     #     tags: {
     #       "TagKey" => "TagValue"
+    #     },
+    #     internet_protocol: "InternetProtocol",
+    #     store_snapshot_on_local_zone: false,
+    #     storage_configuration: {
+    #       storage_type: "StorageType", # required
+    #       fsx_ontap_configuration: {
+    #         storage_virtual_machine_id: "StorageVirtualMachineId", # required
+    #         credentials_secret_arn: "SecretArn", # required
+    #       }
     #     }
     #   }
     # @return [Types::UpdateReplicationConfigurationTemplateOutput]
@@ -4529,6 +6748,12 @@ module Aws::Mgn
     #   <p>Update Source Server request source server ID.</p>
     # @option params [Types::SourceServerConnectorAction] :connector_action
     #   <p>Update Source Server request connector action.</p>
+    # @option params [String] :user_provided_id
+    #   <p>Update Source Server request user provided ID.</p>
+    # @option params [String] :fqdn_for_action_framework
+    #   <p>Update Source Server request FQDN for action framework.</p>
+    # @option params [String] :platform
+    #   <p>Update Source Server request platform operating system.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     account_id: "AccountID",
@@ -4536,7 +6761,10 @@ module Aws::Mgn
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
     #       connector_arn: "ConnectorArn"
-    #     }
+    #     },
+    #     user_provided_id: "UserProvidedId",
+    #     fqdn_for_action_framework: "FqdnForActionFramework",
+    #     platform: "OperatingSystemString"
     #   }
     #   options = {}
     #   response = client.update_source_server(params, options)
@@ -4552,7 +6780,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -4581,7 +6819,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -4651,7 +6890,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",
@@ -4664,7 +6903,7 @@ module Aws::Mgn
       request.send_request(options)
     end
 
-    # <p>Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type.</p>
+    # <p>Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type. </p> <p>SNAPSHOT_SHIPPING should be used for agentless replication.</p>
     # @param [Hash, Types::UpdateSourceServerReplicationTypeInput] params
     # @option params [String] :source_server_id
     #   <p>ID of source server on which to update replication type.</p>
@@ -4692,7 +6931,17 @@ module Aws::Mgn
     #     launched_instance: {
     #       ec2_instance_id: "EC2InstanceID",
     #       job_id: "JobID",
-    #       first_boot: "FirstBoot"
+    #       first_boot: "FirstBoot",
+    #       last_known_checks: [
+    #         {
+    #           type: "LastKnownCheckType",
+    #           name: "BoundedString",
+    #           status: "LastKnownCheckStatus",
+    #           error: "BoundedString",
+    #           checked_at: Time.now
+    #         }
+    #       ],
+    #       last_known_fsx_checks_status: "LastKnownCheckStatus"
     #     },
     #     data_replication_info: {
     #       lag_duration: "ISO8601DurationString",
@@ -4721,7 +6970,8 @@ module Aws::Mgn
     #         error: "DataReplicationErrorString",
     #         raw_error: "LargeBoundedString"
     #       },
-    #       last_snapshot_date_time: "ISO8601DatetimeString"
+    #       last_snapshot_date_time: "ISO8601DatetimeString",
+    #       replicator_id: "ReplicatorID"
     #     },
     #     life_cycle: {
     #       added_to_service_date_time: "ISO8601DatetimeString",
@@ -4791,7 +7041,7 @@ module Aws::Mgn
     #     replication_type: "ReplicationType",
     #     vcenter_client_id: "VcenterClientID",
     #     application_id: "ApplicationID",
-    #     user_provided_id: "BoundedString",
+    #     user_provided_id: "UserProvidedId",
     #     fqdn_for_action_framework: "BoundedString",
     #     connector_action: {
     #       credentials_secret_arn: "SecretArn",

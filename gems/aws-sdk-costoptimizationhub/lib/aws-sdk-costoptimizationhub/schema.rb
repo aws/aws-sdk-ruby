@@ -14,16 +14,18 @@ module Aws::CostOptimizationHub
     ActionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#ActionType", name: "ActionType")
     ActionTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costoptimizationhub#ActionTypeList", name: "ActionTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     AllocationStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#AllocationStrategy", name: "AllocationStrategy")
-    AuroraDbClusterStorage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#AuroraDbClusterStorage", name: "AuroraDbClusterStorage", traits: {"smithy.api#tags" => ["aurora"]})
-    AuroraDbClusterStorageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#AuroraDbClusterStorageConfiguration", name: "AuroraDbClusterStorageConfiguration", traits: {"smithy.api#tags" => ["aurora"]})
+    AuroraDbClusterStorage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#AuroraDbClusterStorage", name: "AuroraDbClusterStorage")
+    AuroraDbClusterStorageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#AuroraDbClusterStorageConfiguration", name: "AuroraDbClusterStorageConfiguration")
     BlockStoragePerformanceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#BlockStoragePerformanceConfiguration", name: "BlockStoragePerformanceConfiguration")
     ComputeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ComputeConfiguration", name: "ComputeConfiguration")
     ComputeSavingsPlans = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ComputeSavingsPlans", name: "ComputeSavingsPlans")
     ComputeSavingsPlansConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ComputeSavingsPlansConfiguration", name: "ComputeSavingsPlansConfiguration")
     Datetime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.costoptimizationhub#Datetime", name: "Datetime")
     DbInstanceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#DbInstanceConfiguration", name: "DbInstanceConfiguration")
+    DocumentDbCluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#DocumentDbCluster", name: "DocumentDbCluster", traits: {"smithy.api#tags" => ["idle_bulk"]})
     DynamoDbReservedCapacity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#DynamoDbReservedCapacity", name: "DynamoDbReservedCapacity")
     DynamoDbReservedCapacityConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#DynamoDbReservedCapacityConfiguration", name: "DynamoDbReservedCapacityConfiguration")
+    DynamoDbTable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#DynamoDbTable", name: "DynamoDbTable", traits: {"smithy.api#tags" => ["idle_bulk"]})
     EbsVolume = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#EbsVolume", name: "EbsVolume")
     EbsVolumeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#EbsVolumeConfiguration", name: "EbsVolumeConfiguration")
     Ec2AutoScalingGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#Ec2AutoScalingGroup", name: "Ec2AutoScalingGroup")
@@ -37,6 +39,9 @@ module Aws::CostOptimizationHub
     Ec2ReservedInstancesConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#Ec2ReservedInstancesConfiguration", name: "Ec2ReservedInstancesConfiguration")
     EcsService = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#EcsService", name: "EcsService")
     EcsServiceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#EcsServiceConfiguration", name: "EcsServiceConfiguration")
+    EfficiencyMetricsByGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#EfficiencyMetricsByGroup", name: "EfficiencyMetricsByGroup", traits: {"smithy.api#tags" => ["cost_efficiency"]})
+    EfficiencyMetricsByGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costoptimizationhub#EfficiencyMetricsByGroupList", name: "EfficiencyMetricsByGroupList", traits: {"smithy.api#tags" => ["cost_efficiency"]})
+    ElastiCacheCluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ElastiCacheCluster", name: "ElastiCacheCluster", traits: {"smithy.api#tags" => ["idle_bulk"]})
     ElastiCacheReservedInstances = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ElastiCacheReservedInstances", name: "ElastiCacheReservedInstances")
     ElastiCacheReservedInstancesConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ElastiCacheReservedInstancesConfiguration", name: "ElastiCacheReservedInstancesConfiguration")
     EnrollmentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#EnrollmentStatus", name: "EnrollmentStatus")
@@ -46,12 +51,15 @@ module Aws::CostOptimizationHub
     GetPreferencesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#GetPreferencesResponse", name: "GetPreferencesResponse")
     GetRecommendationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#GetRecommendationRequest", name: "GetRecommendationRequest")
     GetRecommendationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#GetRecommendationResponse", name: "GetRecommendationResponse")
+    GranularityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#GranularityType", name: "GranularityType", traits: {"smithy.api#tags" => ["cost_efficiency"]})
     ImplementationEffort = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#ImplementationEffort", name: "ImplementationEffort")
     ImplementationEffortList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costoptimizationhub#ImplementationEffortList", name: "ImplementationEffortList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     InstanceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#InstanceConfiguration", name: "InstanceConfiguration")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     LambdaFunction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#LambdaFunction", name: "LambdaFunction")
     LambdaFunctionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#LambdaFunctionConfiguration", name: "LambdaFunctionConfiguration")
+    ListEfficiencyMetricsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ListEfficiencyMetricsRequest", name: "ListEfficiencyMetricsRequest", traits: {"smithy.api#tags" => ["cost_efficiency"]})
+    ListEfficiencyMetricsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ListEfficiencyMetricsResponse", name: "ListEfficiencyMetricsResponse", traits: {"smithy.api#tags" => ["cost_efficiency"]})
     ListEnrollmentStatusesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ListEnrollmentStatusesRequest", name: "ListEnrollmentStatusesRequest")
     ListEnrollmentStatusesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ListEnrollmentStatusesResponse", name: "ListEnrollmentStatusesResponse")
     ListRecommendationSummariesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ListRecommendationSummariesRequest", name: "ListRecommendationSummariesRequest")
@@ -60,16 +68,21 @@ module Aws::CostOptimizationHub
     ListRecommendationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ListRecommendationsResponse", name: "ListRecommendationsResponse")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.costoptimizationhub#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
     MemberAccountDiscountVisibility = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#MemberAccountDiscountVisibility", name: "MemberAccountDiscountVisibility")
+    MemoryDbCluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#MemoryDbCluster", name: "MemoryDbCluster", traits: {"smithy.api#tags" => ["idle_bulk"]})
     MemoryDbReservedInstances = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#MemoryDbReservedInstances", name: "MemoryDbReservedInstances")
     MemoryDbReservedInstancesConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#MemoryDbReservedInstancesConfiguration", name: "MemoryDbReservedInstancesConfiguration")
+    MetricsByTime = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#MetricsByTime", name: "MetricsByTime", traits: {"smithy.api#tags" => ["cost_efficiency"]})
+    MetricsByTimeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costoptimizationhub#MetricsByTimeList", name: "MetricsByTimeList", traits: {"smithy.api#tags" => ["cost_efficiency"]})
     MixedInstanceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#MixedInstanceConfiguration", name: "MixedInstanceConfiguration")
     MixedInstanceConfigurationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costoptimizationhub#MixedInstanceConfigurationList", name: "MixedInstanceConfigurationList")
+    NatGateway = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#NatGateway", name: "NatGateway", traits: {"smithy.api#tags" => ["nat_gateway"]})
+    NatGatewayConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#NatGatewayConfiguration", name: "NatGatewayConfiguration", traits: {"smithy.api#tags" => ["nat_gateway"]})
     OpenSearchReservedInstances = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#OpenSearchReservedInstances", name: "OpenSearchReservedInstances")
     OpenSearchReservedInstancesConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#OpenSearchReservedInstancesConfiguration", name: "OpenSearchReservedInstancesConfiguration")
     Order = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#Order", name: "Order")
     OrderBy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#OrderBy", name: "OrderBy")
     PaymentOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#PaymentOption", name: "PaymentOption")
-    PreferredCommitment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#PreferredCommitment", name: "PreferredCommitment", traits: {"smithy.api#tags" => ["commitmentPreferences"]})
+    PreferredCommitment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#PreferredCommitment", name: "PreferredCommitment")
     RdsDbInstance = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#RdsDbInstance", name: "RdsDbInstance")
     RdsDbInstanceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#RdsDbInstanceConfiguration", name: "RdsDbInstanceConfiguration")
     RdsDbInstanceStorage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#RdsDbInstanceStorage", name: "RdsDbInstanceStorage")
@@ -94,6 +107,7 @@ module Aws::CostOptimizationHub
     ResourcePricing = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ResourcePricing", name: "ResourcePricing")
     ResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#ResourceType", name: "ResourceType")
     ResourceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costoptimizationhub#ResourceTypeList", name: "ResourceTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    SageMakerEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#SageMakerEndpoint", name: "SageMakerEndpoint", traits: {"smithy.api#tags" => ["idle_bulk"]})
     SageMakerSavingsPlans = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#SageMakerSavingsPlans", name: "SageMakerSavingsPlans")
     SageMakerSavingsPlansConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#SageMakerSavingsPlansConfiguration", name: "SageMakerSavingsPlansConfiguration")
     SavingsEstimationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#SavingsEstimationMode", name: "SavingsEstimationMode")
@@ -108,6 +122,7 @@ module Aws::CostOptimizationHub
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costoptimizationhub#TagList", name: "TagList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     Term = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#Term", name: "Term")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
+    TimePeriod = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#TimePeriod", name: "TimePeriod", traits: {"smithy.api#tags" => ["cost_efficiency"]})
     UpdateEnrollmentStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#UpdateEnrollmentStatusRequest", name: "UpdateEnrollmentStatusRequest")
     UpdateEnrollmentStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#UpdateEnrollmentStatusResponse", name: "UpdateEnrollmentStatusResponse")
     UpdatePreferencesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#UpdatePreferencesRequest", name: "UpdatePreferencesRequest")
@@ -118,6 +133,7 @@ module Aws::CostOptimizationHub
     ValidationExceptionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#ValidationExceptionDetail", name: "ValidationExceptionDetail")
     ValidationExceptionDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costoptimizationhub#ValidationExceptionDetails", name: "ValidationExceptionDetails")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costoptimizationhub#ValidationExceptionReason", name: "ValidationExceptionReason")
+    WorkSpaces = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costoptimizationhub#WorkSpaces", name: "WorkSpaces", traits: {"smithy.api#tags" => ["idle_bulk"]})
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
@@ -162,6 +178,8 @@ module Aws::CostOptimizationHub
     ComputeSavingsPlansConfiguration.type = Types::ComputeSavingsPlansConfiguration
     DbInstanceConfiguration.add_member(:db_instance_class, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "dbInstanceClass"))
     DbInstanceConfiguration.type = Types::DbInstanceConfiguration
+    DocumentDbCluster.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCostCalculation, name: "costCalculation"))
+    DocumentDbCluster.type = Types::DocumentDbCluster
     DynamoDbReservedCapacity.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamoDbReservedCapacityConfiguration, name: "configuration"))
     DynamoDbReservedCapacity.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedInstancesCostCalculation, name: "costCalculation"))
     DynamoDbReservedCapacity.type = Types::DynamoDbReservedCapacity
@@ -175,6 +193,8 @@ module Aws::CostOptimizationHub
     DynamoDbReservedCapacityConfiguration.add_member(:number_of_capacity_units_to_purchase, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "numberOfCapacityUnitsToPurchase"))
     DynamoDbReservedCapacityConfiguration.add_member(:capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "capacityUnits"))
     DynamoDbReservedCapacityConfiguration.type = Types::DynamoDbReservedCapacityConfiguration
+    DynamoDbTable.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCostCalculation, name: "costCalculation"))
+    DynamoDbTable.type = Types::DynamoDbTable
     EbsVolume.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EbsVolumeConfiguration, name: "configuration"))
     EbsVolume.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCostCalculation, name: "costCalculation"))
     EbsVolume.type = Types::EbsVolume
@@ -232,6 +252,13 @@ module Aws::CostOptimizationHub
     EcsService.type = Types::EcsService
     EcsServiceConfiguration.add_member(:compute, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeConfiguration, name: "compute"))
     EcsServiceConfiguration.type = Types::EcsServiceConfiguration
+    EfficiencyMetricsByGroup.add_member(:metrics_by_time, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsByTimeList, name: "metricsByTime"))
+    EfficiencyMetricsByGroup.add_member(:group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "group"))
+    EfficiencyMetricsByGroup.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
+    EfficiencyMetricsByGroup.type = Types::EfficiencyMetricsByGroup
+    EfficiencyMetricsByGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EfficiencyMetricsByGroup, name: "member"))
+    ElastiCacheCluster.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCostCalculation, name: "costCalculation"))
+    ElastiCacheCluster.type = Types::ElastiCacheCluster
     ElastiCacheReservedInstances.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ElastiCacheReservedInstancesConfiguration, name: "configuration"))
     ElastiCacheReservedInstances.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedInstancesCostCalculation, name: "costCalculation"))
     ElastiCacheReservedInstances.type = Types::ElastiCacheReservedInstances
@@ -270,7 +297,7 @@ module Aws::CostOptimizationHub
     GetPreferencesRequest.type = Types::GetPreferencesRequest
     GetPreferencesResponse.add_member(:savings_estimation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsEstimationMode, name: "savingsEstimationMode"))
     GetPreferencesResponse.add_member(:member_account_discount_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountDiscountVisibility, name: "memberAccountDiscountVisibility"))
-    GetPreferencesResponse.add_member(:preferred_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferredCommitment, name: "preferredCommitment", traits: {"smithy.api#tags" => ["commitmentPreferences"]}))
+    GetPreferencesResponse.add_member(:preferred_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferredCommitment, name: "preferredCommitment"))
     GetPreferencesResponse.type = Types::GetPreferencesResponse
     GetRecommendationRequest.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recommendationId", traits: {"smithy.api#required" => {}}))
     GetRecommendationRequest.type = Types::GetRecommendationRequest
@@ -298,6 +325,8 @@ module Aws::CostOptimizationHub
     GetRecommendationResponse.add_member(:recommended_resource_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceDetails, name: "recommendedResourceDetails"))
     GetRecommendationResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
     GetRecommendationResponse.type = Types::GetRecommendationResponse
+    GranularityType.add_member(:daily, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAILY", traits: {"smithy.api#enumValue" => "Daily"}))
+    GranularityType.add_member(:monthly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MONTHLY", traits: {"smithy.api#enumValue" => "Monthly"}))
     ImplementationEffort.add_member(:very_low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERY_LOW", traits: {"smithy.api#enumValue" => "VeryLow"}))
     ImplementationEffort.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "Low"}))
     ImplementationEffort.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "Medium"}))
@@ -313,6 +342,16 @@ module Aws::CostOptimizationHub
     LambdaFunction.type = Types::LambdaFunction
     LambdaFunctionConfiguration.add_member(:compute, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeConfiguration, name: "compute"))
     LambdaFunctionConfiguration.type = Types::LambdaFunctionConfiguration
+    ListEfficiencyMetricsRequest.add_member(:group_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "groupBy"))
+    ListEfficiencyMetricsRequest.add_member(:granularity, ::Smithy::Schema::Shapes::MemberShape.new(target: GranularityType, name: "granularity", traits: {"smithy.api#required" => {}}))
+    ListEfficiencyMetricsRequest.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: TimePeriod, name: "timePeriod", traits: {"smithy.api#required" => {}}))
+    ListEfficiencyMetricsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#range" => {"min" => 0, "max" => 1000}}))
+    ListEfficiencyMetricsRequest.add_member(:order_by, ::Smithy::Schema::Shapes::MemberShape.new(target: OrderBy, name: "orderBy"))
+    ListEfficiencyMetricsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
+    ListEfficiencyMetricsRequest.type = Types::ListEfficiencyMetricsRequest
+    ListEfficiencyMetricsResponse.add_member(:efficiency_metrics_by_group, ::Smithy::Schema::Shapes::MemberShape.new(target: EfficiencyMetricsByGroupList, name: "efficiencyMetricsByGroup"))
+    ListEfficiencyMetricsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
+    ListEfficiencyMetricsResponse.type = Types::ListEfficiencyMetricsResponse
     ListEnrollmentStatusesRequest.add_member(:include_organization_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::PrimitiveBoolean, name: "includeOrganizationInfo", traits: {"smithy.api#default" => false}))
     ListEnrollmentStatusesRequest.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "accountId"))
     ListEnrollmentStatusesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "nextToken"))
@@ -346,6 +385,8 @@ module Aws::CostOptimizationHub
     ListRecommendationsResponse.type = Types::ListRecommendationsResponse
     MemberAccountDiscountVisibility.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "All"}))
     MemberAccountDiscountVisibility.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
+    MemoryDbCluster.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCostCalculation, name: "costCalculation"))
+    MemoryDbCluster.type = Types::MemoryDbCluster
     MemoryDbReservedInstances.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryDbReservedInstancesConfiguration, name: "configuration"))
     MemoryDbReservedInstances.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedInstancesCostCalculation, name: "costCalculation"))
     MemoryDbReservedInstances.type = Types::MemoryDbReservedInstances
@@ -363,9 +404,22 @@ module Aws::CostOptimizationHub
     MemoryDbReservedInstancesConfiguration.add_member(:size_flex_eligible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "sizeFlexEligible"))
     MemoryDbReservedInstancesConfiguration.add_member(:current_generation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "currentGeneration"))
     MemoryDbReservedInstancesConfiguration.type = Types::MemoryDbReservedInstancesConfiguration
+    MetricsByTime.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "score"))
+    MetricsByTime.add_member(:savings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "savings"))
+    MetricsByTime.add_member(:spend, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "spend"))
+    MetricsByTime.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "timestamp"))
+    MetricsByTime.type = Types::MetricsByTime
+    MetricsByTimeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsByTime, name: "member"))
     MixedInstanceConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type"))
     MixedInstanceConfiguration.type = Types::MixedInstanceConfiguration
     MixedInstanceConfigurationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MixedInstanceConfiguration, name: "member"))
+    NatGateway.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: NatGatewayConfiguration, name: "configuration"))
+    NatGateway.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCostCalculation, name: "costCalculation"))
+    NatGateway.type = Types::NatGateway
+    NatGatewayConfiguration.add_member(:active_connection_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "activeConnectionCount"))
+    NatGatewayConfiguration.add_member(:packets_in_from_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "packetsInFromSource"))
+    NatGatewayConfiguration.add_member(:packets_in_from_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "packetsInFromDestination"))
+    NatGatewayConfiguration.type = Types::NatGatewayConfiguration
     OpenSearchReservedInstances.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchReservedInstancesConfiguration, name: "configuration"))
     OpenSearchReservedInstances.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedInstancesCostCalculation, name: "costCalculation"))
     OpenSearchReservedInstances.type = Types::OpenSearchReservedInstances
@@ -500,9 +554,16 @@ module Aws::CostOptimizationHub
     ResourceDetails.add_member(:sage_maker_savings_plans, Types::ResourceDetails::SageMakerSavingsPlans, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerSavingsPlans, name: "sageMakerSavingsPlans"))
     ResourceDetails.add_member(:rds_db_instance, Types::ResourceDetails::RdsDbInstance, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbInstance, name: "rdsDbInstance"))
     ResourceDetails.add_member(:rds_db_instance_storage, Types::ResourceDetails::RdsDbInstanceStorage, ::Smithy::Schema::Shapes::MemberShape.new(target: RdsDbInstanceStorage, name: "rdsDbInstanceStorage"))
-    ResourceDetails.add_member(:aurora_db_cluster_storage, Types::ResourceDetails::AuroraDbClusterStorage, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraDbClusterStorage, name: "auroraDbClusterStorage", traits: {"smithy.api#tags" => ["aurora"]}))
+    ResourceDetails.add_member(:aurora_db_cluster_storage, Types::ResourceDetails::AuroraDbClusterStorage, ::Smithy::Schema::Shapes::MemberShape.new(target: AuroraDbClusterStorage, name: "auroraDbClusterStorage"))
     ResourceDetails.add_member(:dynamo_db_reserved_capacity, Types::ResourceDetails::DynamoDbReservedCapacity, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamoDbReservedCapacity, name: "dynamoDbReservedCapacity"))
     ResourceDetails.add_member(:memory_db_reserved_instances, Types::ResourceDetails::MemoryDbReservedInstances, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryDbReservedInstances, name: "memoryDbReservedInstances"))
+    ResourceDetails.add_member(:nat_gateway, Types::ResourceDetails::NatGateway, ::Smithy::Schema::Shapes::MemberShape.new(target: NatGateway, name: "natGateway", traits: {"smithy.api#tags" => ["nat_gateway"]}))
+    ResourceDetails.add_member(:dynamo_db_table, Types::ResourceDetails::DynamoDbTable, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamoDbTable, name: "dynamoDbTable", traits: {"smithy.api#tags" => ["idle_bulk"]}))
+    ResourceDetails.add_member(:elasti_cache_cluster, Types::ResourceDetails::ElastiCacheCluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ElastiCacheCluster, name: "elastiCacheCluster", traits: {"smithy.api#tags" => ["idle_bulk"]}))
+    ResourceDetails.add_member(:memory_db_cluster, Types::ResourceDetails::MemoryDbCluster, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryDbCluster, name: "memoryDbCluster", traits: {"smithy.api#tags" => ["idle_bulk"]}))
+    ResourceDetails.add_member(:document_db_cluster, Types::ResourceDetails::DocumentDbCluster, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentDbCluster, name: "documentDbCluster", traits: {"smithy.api#tags" => ["idle_bulk"]}))
+    ResourceDetails.add_member(:work_spaces, Types::ResourceDetails::WorkSpaces, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkSpaces, name: "workSpaces", traits: {"smithy.api#tags" => ["idle_bulk"]}))
+    ResourceDetails.add_member(:sage_maker_endpoint, Types::ResourceDetails::SageMakerEndpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerEndpoint, name: "sageMakerEndpoint", traits: {"smithy.api#tags" => ["idle_bulk"]}))
     ResourceDetails.add_member(:unknown, Types::ResourceDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ResourceDetails.type = Types::ResourceDetails
     ResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
@@ -529,10 +590,19 @@ module Aws::CostOptimizationHub
     ResourceType.add_member(:elasti_cache_reserved_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ELASTI_CACHE_RESERVED_INSTANCES", traits: {"smithy.api#enumValue" => "ElastiCacheReservedInstances"}))
     ResourceType.add_member(:rds_db_instance_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RDS_DB_INSTANCE_STORAGE", traits: {"smithy.api#enumValue" => "RdsDbInstanceStorage"}))
     ResourceType.add_member(:rds_db_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RDS_DB_INSTANCE", traits: {"smithy.api#enumValue" => "RdsDbInstance"}))
-    ResourceType.add_member(:aurora_db_cluster_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AURORA_DB_CLUSTER_STORAGE", traits: {"smithy.api#enumValue" => "AuroraDbClusterStorage", "smithy.api#tags" => ["aurora"]}))
+    ResourceType.add_member(:aurora_db_cluster_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AURORA_DB_CLUSTER_STORAGE", traits: {"smithy.api#enumValue" => "AuroraDbClusterStorage"}))
     ResourceType.add_member(:dynamo_db_reserved_capacity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DYNAMO_DB_RESERVED_CAPACITY", traits: {"smithy.api#enumValue" => "DynamoDbReservedCapacity"}))
     ResourceType.add_member(:memory_db_reserved_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMORY_DB_RESERVED_INSTANCES", traits: {"smithy.api#enumValue" => "MemoryDbReservedInstances"}))
+    ResourceType.add_member(:nat_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAT_GATEWAY", traits: {"smithy.api#enumValue" => "NatGateway", "smithy.api#tags" => ["nat_gateway"]}))
+    ResourceType.add_member(:dynamo_db_table, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DYNAMO_DB_TABLE", traits: {"smithy.api#enumValue" => "DynamoDBTable", "smithy.api#tags" => ["idle_bulk"]}))
+    ResourceType.add_member(:elasti_cache_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ELASTI_CACHE_CLUSTER", traits: {"smithy.api#enumValue" => "ElastiCacheCluster", "smithy.api#tags" => ["idle_bulk"]}))
+    ResourceType.add_member(:memory_db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEMORY_DB_CLUSTER", traits: {"smithy.api#enumValue" => "MemoryDBCluster", "smithy.api#tags" => ["idle_bulk"]}))
+    ResourceType.add_member(:document_db_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOCUMENT_DB_CLUSTER", traits: {"smithy.api#enumValue" => "DocumentDBCluster", "smithy.api#tags" => ["idle_bulk"]}))
+    ResourceType.add_member(:work_spaces, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WORK_SPACES", traits: {"smithy.api#enumValue" => "WorkSpaces", "smithy.api#tags" => ["idle_bulk"]}))
+    ResourceType.add_member(:sage_maker_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAGE_MAKER_ENDPOINT", traits: {"smithy.api#enumValue" => "SageMakerEndpoint", "smithy.api#tags" => ["idle_bulk"]}))
     ResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
+    SageMakerEndpoint.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCostCalculation, name: "costCalculation"))
+    SageMakerEndpoint.type = Types::SageMakerEndpoint
     SageMakerSavingsPlans.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerSavingsPlansConfiguration, name: "configuration"))
     SageMakerSavingsPlans.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansCostCalculation, name: "costCalculation"))
     SageMakerSavingsPlans.type = Types::SageMakerSavingsPlans
@@ -567,6 +637,9 @@ module Aws::CostOptimizationHub
     Term.add_member(:three_years, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THREE_YEARS", traits: {"smithy.api#enumValue" => "ThreeYears"}))
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
     ThrottlingException.type = Types::ThrottlingException
+    TimePeriod.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "start", traits: {"smithy.api#required" => {}}))
+    TimePeriod.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "end", traits: {"smithy.api#required" => {}}))
+    TimePeriod.type = Types::TimePeriod
     UpdateEnrollmentStatusRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrollmentStatus, name: "status", traits: {"smithy.api#required" => {}}))
     UpdateEnrollmentStatusRequest.add_member(:include_member_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "includeMemberAccounts"))
     UpdateEnrollmentStatusRequest.type = Types::UpdateEnrollmentStatusRequest
@@ -574,11 +647,11 @@ module Aws::CostOptimizationHub
     UpdateEnrollmentStatusResponse.type = Types::UpdateEnrollmentStatusResponse
     UpdatePreferencesRequest.add_member(:savings_estimation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsEstimationMode, name: "savingsEstimationMode"))
     UpdatePreferencesRequest.add_member(:member_account_discount_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountDiscountVisibility, name: "memberAccountDiscountVisibility"))
-    UpdatePreferencesRequest.add_member(:preferred_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferredCommitment, name: "preferredCommitment", traits: {"smithy.api#tags" => ["commitmentPreferences"]}))
+    UpdatePreferencesRequest.add_member(:preferred_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferredCommitment, name: "preferredCommitment"))
     UpdatePreferencesRequest.type = Types::UpdatePreferencesRequest
     UpdatePreferencesResponse.add_member(:savings_estimation_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsEstimationMode, name: "savingsEstimationMode"))
     UpdatePreferencesResponse.add_member(:member_account_discount_visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: MemberAccountDiscountVisibility, name: "memberAccountDiscountVisibility"))
-    UpdatePreferencesResponse.add_member(:preferred_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferredCommitment, name: "preferredCommitment", traits: {"smithy.api#tags" => ["commitmentPreferences"]}))
+    UpdatePreferencesResponse.add_member(:preferred_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: PreferredCommitment, name: "preferredCommitment"))
     UpdatePreferencesResponse.type = Types::UpdatePreferencesResponse
     Usage.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "usageType"))
     Usage.add_member(:usage_amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "usageAmount"))
@@ -597,12 +670,14 @@ module Aws::CostOptimizationHub
     ValidationExceptionDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionDetail, name: "member"))
     ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FieldValidationFailed"}))
     ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "Other"}))
+    WorkSpaces.add_member(:cost_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceCostCalculation, name: "costCalculation"))
+    WorkSpaces.type = Types::WorkSpaces
 
     CostOptimizationHubService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.costoptimizationhub#CostOptimizationHubService"
       service.name = "CostOptimizationHubService"
       service.version = "2022-07-26"
-      service.traits = {"aws.api#service" => {"sdkId" => "Cost Optimization Hub", "endpointPrefix" => "cost-optimization-hub"}, "aws.auth#sigv4" => {"name" => "cost-optimization-hub"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Cost Optimization Hub"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Cost Optimization Hub", "endpointPrefix" => "cost-optimization-hub"}, "aws.auth#sigv4" => {"name" => "cost-optimization-hub"}, "aws.protocols#awsJson1_0" => {}, "smithy.api#title" => "Cost Optimization Hub", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://cost-optimization-hub-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cost-optimization-hub-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cost-optimization-hub.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://cost-optimization-hub.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:get_preferences, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.costoptimizationhub#GetPreferences"
         operation.name = "GetPreferences"
@@ -625,6 +700,18 @@ module Aws::CostOptimizationHub
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:list_efficiency_metrics, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.costoptimizationhub#ListEfficiencyMetrics"
+        operation.name = "ListEfficiencyMetrics"
+        operation.input = ListEfficiencyMetricsRequest
+        operation.output = ListEfficiencyMetricsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}, "smithy.api#tags" => ["cost_efficiency"]}
+        operation[:paginator] = Paginators::ListEfficiencyMetrics.new
       end)
       service.add_operation(:list_enrollment_statuses, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.costoptimizationhub#ListEnrollmentStatuses"

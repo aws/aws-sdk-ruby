@@ -15,13 +15,24 @@ module Aws::SESv2
             if Smithy::Client::EndpointRules.set?(parameters.endpoint)
               return Smithy::Client::EndpointRules::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]})
             end
-            if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+              if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
+                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.endpoint_id}.endpoints.email.us-gov.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]})
+              end
+              raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+            end
+            if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov")
+              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.endpoint_id}.endpoints.email.us-gov.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]})
+            end
+            if Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov")) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
               if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
                 return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.endpoint_id}.endpoints.email.global.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]})
               end
               raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
             end
-            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.endpoint_id}.endpoints.email.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]})
+            if Smithy::Client::EndpointRules.not?(Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov"))
+              return Smithy::Client::EndpointRules::Endpoint.new(url: "https://#{parameters.endpoint_id}.endpoints.email.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "ses", "signingRegionSet" => ["*"]}]})
+            end
           end
           raise ArgumentError, "Invalid Configuration: FIPS is not supported with multi-region endpoints"
         end

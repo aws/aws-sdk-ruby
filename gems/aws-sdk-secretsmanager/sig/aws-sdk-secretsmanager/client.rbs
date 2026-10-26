@@ -98,7 +98,8 @@ module Aws::SecretsManager
           kms_key_id: String
         }
       ],
-      ?force_overwrite_replica_secret: bool
+      ?force_overwrite_replica_secret: bool,
+      ?type: String
     ) -> _CreateSecretResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecretResponse
 
     interface _DeleteResourcePolicyResponse
@@ -126,11 +127,14 @@ module Aws::SecretsManager
       include Smithy::Client::_Response[Types::DescribeSecretResponse]
       def arn: () -> String?
       def name: () -> String?
+      def type: () -> String?
       def description: () -> String?
       def kms_key_id: () -> String?
       def rotation_enabled: () -> bool?
       def rotation_lambda_arn: () -> String?
       def rotation_rules: () -> Types::RotationRulesType?
+      def external_secret_rotation_metadata: () -> Array[Types::ExternalSecretRotationMetadataItem]?
+      def external_secret_rotation_role_arn: () -> String?
       def last_rotated_date: () -> Time?
       def last_changed_date: () -> Time?
       def last_accessed_date: () -> Time?
@@ -217,7 +221,8 @@ module Aws::SecretsManager
           values: Array[String]
         }
       ],
-      ?sort_order: String
+      ?sort_order: String,
+      ?sort_by: String
     ) -> _ListSecretsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecretsResponse
 
     interface _PutResourcePolicyResponse
@@ -297,6 +302,13 @@ module Aws::SecretsManager
         duration: String,
         schedule_expression: String
       },
+      ?external_secret_rotation_metadata: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?external_secret_rotation_role_arn: String,
       ?rotate_immediately: bool
     ) -> _RotateSecretResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RotateSecretResponse
 
@@ -341,7 +353,8 @@ module Aws::SecretsManager
       ?description: String,
       ?kms_key_id: String,
       ?secret_binary: String,
-      ?secret_string: String
+      ?secret_string: String,
+      ?type: String
     ) -> _UpdateSecretResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSecretResponse
 
     interface _UpdateSecretVersionStageResponse

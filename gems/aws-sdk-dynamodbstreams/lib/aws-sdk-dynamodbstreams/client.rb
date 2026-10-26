@@ -148,18 +148,18 @@ module Aws::DynamoDBStreams
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -402,7 +402,7 @@ module Aws::DynamoDBStreams
 
     # <p>Returns a shard iterator. A shard iterator provides information
     #       about how to retrieve the stream records from within a shard.  Use
-    #       the shard iterator in a subsequent 
+    #       the shard iterator in a subsequent
     #       <code>GetRecords</code> request to read the stream records
     #       from the shard.</p>
     #          <note>
@@ -438,9 +438,22 @@ module Aws::DynamoDBStreams
     #                     <code>LATEST</code> - Start reading just after the most recent stream record in the
     #             shard, so that you always read the most recent data in the shard.</p>
     #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AT_TIMESTAMP</code> - Start reading from the position denoted by a specific timestamp, provided in the parameter <code>Timestamp</code>.</p>
+    #               </li>
     #            </ul>
     # @option params [String] :sequence_number
     #   <p>The sequence number of a stream record in the shard from which to start reading.</p>
+    # @option params [Time] :timestamp
+    #   <p>The timestamp of the stream record from which to start reading. Used with shard
+    #         iterator type <code>AT_TIMESTAMP</code>. A timestamp is the Unix epoch date with precision in
+    #         milliseconds. For example, <code>1791316726.480</code>. The iterator points to the first stream record whose
+    #         <code>ApproximateCreationDateTime</code> is at or after the specified timestamp. If no record
+    #         with that exact timestamp exists, the iterator points to the next (later) record. If the
+    #         timestamp is older than the current trim horizon, the iterator points to the oldest
+    #         untrimmed stream record (<code>TRIM_HORIZON</code>). If the timestamp is in the future,
+    #         the request returns a <code>ValidationException</code>.</p>
     # @example To obtain a shard iterator for the provided stream ARN and shard ID
     #   # The following example returns a shard iterator for the provided stream ARN and shard ID.
     #   params = {
@@ -458,8 +471,9 @@ module Aws::DynamoDBStreams
     #   params = {
     #     stream_arn: "StreamArn", # required
     #     shard_id: "ShardId", # required
-    #     shard_iterator_type: "TRIM_HORIZON" # One of: ["TRIM_HORIZON", "LATEST", "AT_SEQUENCE_NUMBER", "AFTER_SEQUENCE_NUMBER"], # required
-    #     sequence_number: "SequenceNumber"
+    #     shard_iterator_type: "TRIM_HORIZON" # One of: ["TRIM_HORIZON", "LATEST", "AT_SEQUENCE_NUMBER", "AFTER_SEQUENCE_NUMBER", "AT_TIMESTAMP"], # required
+    #     sequence_number: "SequenceNumber",
+    #     timestamp: Time.now
     #   }
     #   options = {}
     #   response = client.get_shard_iterator(params, options)
@@ -489,7 +503,7 @@ module Aws::DynamoDBStreams
     #   <p>The ARN (Amazon Resource Name) of the first item that this operation will evaluate. Use the
     #         value that was returned for <code>LastEvaluatedStreamArn</code> in the previous operation.
     #       </p>
-    # @example To list all of the stream ARNs 
+    # @example To list all of the stream ARNs
     #   # The following example lists all of the stream ARNs.
     #   params = {}
     #   options = {}

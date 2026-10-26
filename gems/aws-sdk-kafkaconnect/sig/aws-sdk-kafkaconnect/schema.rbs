@@ -78,12 +78,15 @@ module Aws::KafkaConnect
     LogDelivery: StructureShape
     LogDeliveryDescription: StructureShape
     MaxResults: IntegerShape
+    NetworkType: StringShape
     NotFoundException: StructureShape
     Plugin: StructureShape
     PluginDescription: StructureShape
     ProvisionedCapacity: StructureShape
     ProvisionedCapacityDescription: StructureShape
     ProvisionedCapacityUpdate: StructureShape
+    RestartConnectorRequest: StructureShape
+    RestartConnectorResponse: StructureShape
     S3Location: StructureShape
     S3LocationDescription: StructureShape
     S3LogDelivery: StructureShape

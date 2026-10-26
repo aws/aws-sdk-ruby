@@ -61,6 +61,35 @@ module Aws::SageMakerFeatureStoreRuntime
       ?expiration_time_response: String
     ) -> _BatchGetRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetRecordResponse
 
+    interface _BatchWriteRecordResponse
+      include Smithy::Client::_Response[Types::BatchWriteRecordResponse]
+      def errors: () -> Array[Types::BatchWriteRecordError]?
+      def unprocessed_entries: () -> Array[Types::BatchWriteRecordEntry]?
+    end
+    def batch_write_record: (
+      ?entries: Array[
+        {
+          feature_group_name: String,
+          record: Array[
+            {
+              feature_name: String,
+              value_as_string: String,
+              value_as_string_list: Array[String]
+            }
+          ],
+          target_stores: Array[String],
+          ttl_duration: {
+            unit: String,
+            value: Integer
+          }
+        }
+      ],
+      ?ttl_duration: {
+        unit: String,
+        value: Integer
+      }
+    ) -> _BatchWriteRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchWriteRecordResponse
+
     interface _DeleteRecordResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -84,6 +113,18 @@ module Aws::SageMakerFeatureStoreRuntime
       ?expiration_time_response: String
     ) -> _GetRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecordResponse
 
+    interface _ListRecordsResponse
+      include Smithy::Client::_Response[Types::ListRecordsResponse]
+      def record_identifiers: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_records: (
+      ?feature_group_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?include_soft_deleted_records: bool
+    ) -> _ListRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecordsResponse
+
     interface _PutRecordResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -102,5 +143,25 @@ module Aws::SageMakerFeatureStoreRuntime
         value: Integer
       }
     ) -> _PutRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRecordResponse
+
+    interface _UpdateRecordResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_record: (
+      ?feature_group_name: String,
+      ?record_identifier_value_as_string: String,
+      ?features: Array[
+        {
+          feature_name: String,
+          value_as_string: String,
+          value_as_string_list: Array[String]
+        }
+      ],
+      ?target_stores: Array[String],
+      ?ttl_duration: {
+        unit: String,
+        value: Integer
+      }
+    ) -> _UpdateRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecordResponse
   end
 end

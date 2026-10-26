@@ -60,6 +60,91 @@ module Aws::WellArchitected
       ?profile_arns: Array[String]
     ) -> _AssociateProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateProfilesResponse
 
+    interface _CreateAgentContextResponse
+      include Smithy::Client::_Response[Types::CreateAgentContextResponse]
+      def context: () -> Types::ContextSummary?
+    end
+    def create_agent_context: (
+      ?client_token: String,
+      ?profile_arn: String,
+      ?title: String,
+      ?context_type: String,
+      ?content: {
+        account_ids: Array[String],
+        regions: Array[String],
+        aws_services: Array[String],
+        resource_types: Array[String],
+        resource_tags: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ],
+        application_overview: String,
+        industry: untyped,
+        application_type: String,
+        criticality: String,
+        architecture_overview: untyped,
+        additional_context: untyped
+      }
+    ) -> _CreateAgentContextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentContextResponse
+
+    interface _CreateAgentGoalResponse
+      include Smithy::Client::_Response[Types::CreateAgentGoalResponse]
+      def goal: () -> Types::GoalSummary?
+    end
+    def create_agent_goal: (
+      ?client_token: String,
+      ?profile_arn: String,
+      ?pillars: Array[String],
+      ?title: String,
+      ?description: String
+    ) -> _CreateAgentGoalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentGoalResponse
+
+    interface _CreateAgentProfileResponse
+      include Smithy::Client::_Response[Types::CreateAgentProfileResponse]
+      def name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def business_overview: () -> String?
+      def pillars: () -> Array[String]?
+      def deletion_protection: () -> bool?
+      def execution_role_arn: () -> String?
+      def aggregation_configuration: () -> Array[Types::AggregationConfiguration]?
+      def arn: () -> String?
+      def eligible_for_scheduled_generation: () -> bool?
+      def eligible_for_architecture_generation: () -> bool?
+      def field_errors: () -> Hash[String, String]?
+      def tags: () -> Array[Types::Tag]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_modified_by: () -> String?
+      def last_modified_at: () -> Time?
+    end
+    def create_agent_profile: (
+      ?name: String,
+      ?display_name: String,
+      ?description: String,
+      ?business_overview: String,
+      ?pillars: Array[String],
+      ?deletion_protection: bool,
+      ?execution_role_arn: String,
+      ?aggregation_configuration: Array[
+        {
+          account_id: String,
+          regions: Array[String],
+          access_role_arn: String
+        }
+      ],
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _CreateAgentProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentProfileResponse
+
     interface _CreateLensShareResponse
       include Smithy::Client::_Response[Types::CreateLensShareOutput]
       def share_id: () -> String?
@@ -193,6 +278,29 @@ module Aws::WellArchitected
       ?client_request_token: String
     ) -> _CreateWorkloadShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkloadShareResponse
 
+    interface _DeleteAgentContextResponse
+      include Smithy::Client::_Response[Types::DeleteAgentContextResponse]
+    end
+    def delete_agent_context: (
+      ?profile_arn: String,
+      ?id: String
+    ) -> _DeleteAgentContextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentContextResponse
+
+    interface _DeleteAgentGoalResponse
+      include Smithy::Client::_Response[Types::DeleteAgentGoalResponse]
+    end
+    def delete_agent_goal: (
+      ?profile_arn: String,
+      ?id: String
+    ) -> _DeleteAgentGoalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentGoalResponse
+
+    interface _DeleteAgentProfileResponse
+      include Smithy::Client::_Response[Types::DeleteAgentProfileResponse]
+    end
+    def delete_agent_profile: (
+      ?profile_arn: String
+    ) -> _DeleteAgentProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentProfileResponse
+
     interface _DeleteLensResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -286,6 +394,111 @@ module Aws::WellArchitected
       ?lens_alias: String,
       ?lens_version: String
     ) -> _ExportLensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportLensResponse
+
+    interface _GetAgentContextResponse
+      include Smithy::Client::_Response[Types::GetAgentContextResponse]
+      def context: () -> Types::ContextSummary?
+    end
+    def get_agent_context: (
+      ?profile_arn: String,
+      ?id: String
+    ) -> _GetAgentContextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentContextResponse
+
+    interface _GetAgentGoalResponse
+      include Smithy::Client::_Response[Types::GetAgentGoalResponse]
+      def goal: () -> Types::GoalSummary?
+    end
+    def get_agent_goal: (
+      ?profile_arn: String,
+      ?id: String
+    ) -> _GetAgentGoalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentGoalResponse
+
+    interface _GetAgentProfileResponse
+      include Smithy::Client::_Response[Types::GetAgentProfileResponse]
+      def name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def business_overview: () -> String?
+      def pillars: () -> Array[String]?
+      def deletion_protection: () -> bool?
+      def execution_role_arn: () -> String?
+      def aggregation_configuration: () -> Array[Types::AggregationConfiguration]?
+      def arn: () -> String?
+      def eligible_for_scheduled_generation: () -> bool?
+      def eligible_for_architecture_generation: () -> bool?
+      def field_errors: () -> Hash[String, String]?
+      def tags: () -> Array[Types::Tag]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_modified_by: () -> String?
+      def last_modified_at: () -> Time?
+    end
+    def get_agent_profile: (
+      ?profile_arn: String
+    ) -> _GetAgentProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentProfileResponse
+
+    interface _GetAgentRecommendationResponse
+      include Smithy::Client::_Response[Types::GetAgentRecommendationResponse]
+      def recommendation_arn: () -> String?
+      def profile_arn: () -> String?
+      def generation_id: () -> String?
+      def title: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def pillar: () -> String?
+      def priority: () -> String?
+      def effort: () -> String?
+      def status: () -> String?
+      def state: () -> String?
+      def update_reason: () -> String?
+      def impact: () -> String?
+      def roi: () -> Types::Roi?
+      def number_of_resources: () -> Integer?
+      def aws_services: () -> Array[String]?
+      def business_units: () -> Array[String]?
+      def applications: () -> Array[String]?
+      def impact_details: () -> Array[String]?
+      def insights: () -> Array[Types::Insight]?
+      def highlights: () -> Array[String]?
+      def remediation_summary: () -> Types::RemediationSummary?
+      def cross_pillar_benefits: () -> Array[Types::CrossPillarBenefit]?
+      def trade_offs: () -> Array[Types::TradeOff]?
+      def sources: () -> Array[String]?
+      def goals: () -> Array[Types::RecommendationGoal]?
+      def tags: () -> Array[Types::Tag]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_modified_by: () -> String?
+      def last_modified_at: () -> Time?
+      def remediations: () -> Array[Types::AgentRecommendationRemediation]?
+    end
+    def get_agent_recommendation: (
+      ?recommendation_arn: String,
+      ?remediation_type: String
+    ) -> _GetAgentRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentRecommendationResponse
+
+    interface _GetAgentRecommendationGenerationResponse
+      include Smithy::Client::_Response[Types::GetAgentRecommendationGenerationResponse]
+      def id: () -> String?
+      def profile_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def estimated_completion_time: () -> Time?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_modified_by: () -> String?
+      def last_modified_at: () -> Time?
+      def additional_context: () -> Smithy::Schema::document?
+      def scope: () -> Types::Scope?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+      def progress: () -> Types::Progress?
+      def error_details: () -> Types::ErrorDetails?
+    end
+    def get_agent_recommendation_generation: (
+      ?profile_arn: String,
+      ?generation_id: String
+    ) -> _GetAgentRecommendationGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentRecommendationGenerationResponse
 
     interface _GetAnswerResponse
       include Smithy::Client::_Response[Types::GetAnswerOutput]
@@ -445,6 +658,75 @@ module Aws::WellArchitected
       ?client_request_token: String,
       ?tags: Hash[String, String]
     ) -> _ImportLensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportLensResponse
+
+    interface _ListAgentContextsResponse
+      include Smithy::Client::_Response[Types::ListAgentContextsResponse]
+      def items: () -> Array[Types::ContextSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_contexts: (
+      ?profile_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentContextsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentContextsResponse
+
+    interface _ListAgentGoalsResponse
+      include Smithy::Client::_Response[Types::ListAgentGoalsResponse]
+      def items: () -> Array[Types::GoalSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_goals: (
+      ?profile_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentGoalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentGoalsResponse
+
+    interface _ListAgentProfilesResponse
+      include Smithy::Client::_Response[Types::ListAgentProfilesResponse]
+      def items: () -> Array[Types::AgentProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_profiles: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentProfilesResponse
+
+    interface _ListAgentRecommendationGenerationsResponse
+      include Smithy::Client::_Response[Types::ListAgentRecommendationGenerationsResponse]
+      def items: () -> Array[Types::AgentRecommendationGenerationSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_recommendation_generations: (
+      ?profile_arn: String,
+      ?recommendation_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentRecommendationGenerationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentRecommendationGenerationsResponse
+
+    interface _ListAgentRecommendationItemsResponse
+      include Smithy::Client::_Response[Types::ListAgentRecommendationItemsResponse]
+      def items: () -> Array[Types::AgentRecommendationItemSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_recommendation_items: (
+      ?recommendation_arn: String,
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentRecommendationItemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentRecommendationItemsResponse
+
+    interface _ListAgentRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListAgentRecommendationsResponse]
+      def items: () -> Array[Types::AgentRecommendationSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_recommendations: (
+      ?profile_arn: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?state: String,
+      ?pillar: String
+    ) -> _ListAgentRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentRecommendationsResponse
 
     interface _ListAnswersResponse
       include Smithy::Client::_Response[Types::ListAnswersOutput]
@@ -701,6 +983,45 @@ module Aws::WellArchitected
       ?max_results: Integer
     ) -> _ListWorkloadsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkloadsResponse
 
+    interface _PutAgentRecommendationFeedbackResponse
+      include Smithy::Client::_Response[Types::PutAgentRecommendationFeedbackResponse]
+    end
+    def put_agent_recommendation_feedback: (
+      ?recommendation_arn: String,
+      ?type: String,
+      ?feedback_category: String,
+      ?comments: String
+    ) -> _PutAgentRecommendationFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAgentRecommendationFeedbackResponse
+
+    interface _StartAgentRecommendationGenerationResponse
+      include Smithy::Client::_Response[Types::StartAgentRecommendationGenerationResponse]
+      def id: () -> String?
+      def profile_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def estimated_completion_time: () -> Time?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_modified_by: () -> String?
+      def last_modified_at: () -> Time?
+    end
+    def start_agent_recommendation_generation: (
+      ?profile_arn: String,
+      ?types: Array[String],
+      ?name: String,
+      ?additional_context: Smithy::Schema::document,
+      ?scope: {
+        pillars: Array[String],
+        goal_ids: Array[String],
+        items: Array[
+          {
+            pillar: String,
+            ids: Array[String]
+          }
+        ]
+      }
+    ) -> _StartAgentRecommendationGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAgentRecommendationGenerationResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceOutput]
     end
@@ -716,6 +1037,95 @@ module Aws::WellArchitected
       ?workload_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAgentContextResponse
+      include Smithy::Client::_Response[Types::UpdateAgentContextResponse]
+      def context: () -> Types::ContextSummary?
+    end
+    def update_agent_context: (
+      ?client_token: String,
+      ?profile_arn: String,
+      ?id: String,
+      ?title: String,
+      ?content: {
+        account_ids: Array[String],
+        regions: Array[String],
+        aws_services: Array[String],
+        resource_types: Array[String],
+        resource_tags: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ],
+        application_overview: String,
+        industry: untyped,
+        application_type: String,
+        criticality: String,
+        architecture_overview: untyped,
+        additional_context: untyped
+      }
+    ) -> _UpdateAgentContextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentContextResponse
+
+    interface _UpdateAgentGoalResponse
+      include Smithy::Client::_Response[Types::UpdateAgentGoalResponse]
+      def goal: () -> Types::GoalSummary?
+    end
+    def update_agent_goal: (
+      ?client_token: String,
+      ?profile_arn: String,
+      ?id: String,
+      ?pillars: Array[String],
+      ?title: String,
+      ?description: String
+    ) -> _UpdateAgentGoalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentGoalResponse
+
+    interface _UpdateAgentProfileResponse
+      include Smithy::Client::_Response[Types::UpdateAgentProfileResponse]
+      def name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def business_overview: () -> String?
+      def pillars: () -> Array[String]?
+      def deletion_protection: () -> bool?
+      def execution_role_arn: () -> String?
+      def aggregation_configuration: () -> Array[Types::AggregationConfiguration]?
+      def arn: () -> String?
+      def eligible_for_scheduled_generation: () -> bool?
+      def eligible_for_architecture_generation: () -> bool?
+      def field_errors: () -> Hash[String, String]?
+      def tags: () -> Array[Types::Tag]?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def last_modified_by: () -> String?
+      def last_modified_at: () -> Time?
+    end
+    def update_agent_profile: (
+      ?client_token: String,
+      ?profile_arn: String,
+      ?display_name: String,
+      ?description: String,
+      ?execution_role_arn: String,
+      ?aggregation_configuration: Array[
+        {
+          account_id: String,
+          regions: Array[String],
+          access_role_arn: String
+        }
+      ],
+      ?business_overview: String,
+      ?pillars: Array[String],
+      ?deletion_protection: bool
+    ) -> _UpdateAgentProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentProfileResponse
+
+    interface _UpdateAgentRecommendationStatusResponse
+      include Smithy::Client::_Response[Types::UpdateAgentRecommendationStatusResponse]
+    end
+    def update_agent_recommendation_status: (
+      ?recommendation_arn: String,
+      ?status: String,
+      ?update_reason: String
+    ) -> _UpdateAgentRecommendationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentRecommendationStatusResponse
 
     interface _UpdateAnswerResponse
       include Smithy::Client::_Response[Types::UpdateAnswerOutput]

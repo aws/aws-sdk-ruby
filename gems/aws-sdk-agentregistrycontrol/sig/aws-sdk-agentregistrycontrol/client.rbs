@@ -1,0 +1,688 @@
+module Aws::AgentRegistryControl
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AgentRegistryControl::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateRegistryResponse
+      include Smithy::Client::_Response[Types::CreateRegistryResponse]
+      def registry_arn: () -> String?
+    end
+    def create_registry: (
+      ?name: String,
+      ?description: String,
+      ?encryption_configuration: {
+        kms_key_arn: String
+      },
+      ?discovery_configuration: {
+        authorizer_configuration: {
+          custom_jwt_authorizer: {
+            discovery_url: String,
+            allowed_audience: Array[String],
+            allowed_clients: Array[String],
+            allowed_scopes: Array[String],
+            custom_claims: Array[
+              {
+                inbound_token_claim_name: String,
+                inbound_token_claim_value_type: String,
+                authorizing_claim_match_value: {
+                  claim_match_value: {
+                    match_value_string: String,
+                    match_value_string_list: Array[String]
+                  },
+                  claim_match_operator: String
+                }
+              }
+            ],
+            private_endpoint: {
+              self_managed_lattice_resource: {
+                resource_configuration_identifier: String
+              },
+              managed_vpc_resource: {
+                vpc_identifier: String,
+                subnet_ids: Array[String],
+                endpoint_ip_address_type: String,
+                security_group_ids: Array[String],
+                tags: Hash[String, String],
+                routing_domain: String
+              }
+            },
+            private_endpoint_overrides: Array[
+              {
+                domain: String,
+                private_endpoint: untyped
+              }
+            ]
+          }
+        },
+        authorizer_type: String
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?approval_configuration: {
+        auto_approval_rules: Array[String]
+      },
+      ?custom_metadata_schema_configuration: {
+        default_schema: String,
+        record_type_schema_overrides: Array[
+          {
+            record_type: String,
+            schema: untyped
+          }
+        ]
+      },
+      ?auto_detection_configuration: {
+        scope: String,
+        enabled: bool
+      }
+    ) -> _CreateRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistryResponse
+
+    interface _CreateRegistryRecordResponse
+      include Smithy::Client::_Response[Types::CreateRegistryRecordResponse]
+      def record_arn: () -> String?
+      def status: () -> String?
+    end
+    def create_registry_record: (
+      ?registry_id: String,
+      ?name: String,
+      ?display_name: String,
+      ?description: String,
+      ?record_type: String,
+      ?descriptors: {
+        mcp_server: {
+          data: String,
+          data_schema_version: String,
+          additional_data: {
+            tools: {
+              data: untyped,
+              data_schema_version: untyped
+            }
+          },
+          source: {
+            from_url: {
+              url: String,
+              credential_provider_configurations: Array[
+                {
+                  credential_provider_type: String,
+                  credential_provider: {
+                    oauth_credential_provider: {
+                      provider_arn: String,
+                      grant_type: String,
+                      scopes: Array[String],
+                      custom_parameters: Hash[String, String]
+                    },
+                    iam_credential_provider: {
+                      role_arn: String,
+                      service: String,
+                      region: String
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        a2a_agent_card: {
+          data: untyped,
+          data_schema_version: untyped,
+          source: untyped
+        },
+        agent_skills_definition: {
+          data: untyped,
+          data_schema_version: untyped,
+          additional_data: {
+            skill_md: {
+              data: untyped,
+              data_schema_version: untyped,
+              source: untyped
+            }
+          }
+        },
+        custom: {
+          data: untyped
+        },
+        http: {
+          source: untyped
+        },
+        agui: {
+          source: untyped
+        }
+      },
+      ?record_version: String,
+      ?client_token: String,
+      ?provenance: Array[
+        {
+          relation: String,
+          source_id: String,
+          source_type: String,
+          source_details: {
+            agentcore_runtime: {
+              protocol_configuration: {
+                server_protocol: String
+              },
+              authorizer_configuration: {
+                custom_jwt_authorizer: {
+                  discovery_url: String,
+                  allowed_audience: Array[String],
+                  allowed_clients: Array[String],
+                  allowed_scopes: Array[String],
+                  custom_claims: Array[
+                    {
+                      inbound_token_claim_name: String,
+                      inbound_token_claim_value_type: String,
+                      authorizing_claim_match_value: {
+                        claim_match_value: {
+                          match_value_string: String,
+                          match_value_string_list: Array[String]
+                        },
+                        claim_match_operator: String
+                      }
+                    }
+                  ],
+                  private_endpoint: {
+                    self_managed_lattice_resource: {
+                      resource_configuration_identifier: String
+                    },
+                    managed_vpc_resource: {
+                      vpc_identifier: String,
+                      subnet_ids: Array[String],
+                      endpoint_ip_address_type: String,
+                      security_group_ids: Array[String],
+                      tags: Hash[String, String],
+                      routing_domain: String
+                    }
+                  },
+                  private_endpoint_overrides: Array[
+                    {
+                      domain: String,
+                      private_endpoint: untyped
+                    }
+                  ]
+                }
+              },
+              workload_identity_details: {
+                workload_identity_arn: String
+              }
+            },
+            agentcore_gateway: {
+              protocol_type: String,
+              authorizer_type: untyped,
+              authorizer_configuration: untyped,
+              workload_identity_details: untyped
+            }
+          }
+        }
+      ],
+      ?custom_metadata: Smithy::Schema::document,
+      ?tags: Hash[String, String]
+    ) -> _CreateRegistryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistryRecordResponse
+
+    interface _DeleteRegistryResponse
+      include Smithy::Client::_Response[Types::DeleteRegistryResponse]
+      def status: () -> String?
+    end
+    def delete_registry: (
+      ?registry_id: String
+    ) -> _DeleteRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegistryResponse
+
+    interface _DeleteRegistryRecordResponse
+      include Smithy::Client::_Response[Types::DeleteRegistryRecordResponse]
+    end
+    def delete_registry_record: (
+      ?registry_id: String,
+      ?record_id: String
+    ) -> _DeleteRegistryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRegistryRecordResponse
+
+    interface _GetRegistryResponse
+      include Smithy::Client::_Response[Types::GetRegistryResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def registry_id: () -> String?
+      def registry_arn: () -> String?
+      def discovery_configuration: () -> Types::DiscoveryConfiguration?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+      def approval_configuration: () -> Types::ApprovalConfiguration?
+      def custom_metadata_schema_configuration: () -> Types::CustomMetadataSchemaConfiguration?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def auto_detection: () -> Types::AutoDetection?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_registry: (
+      ?registry_id: String
+    ) -> _GetRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegistryResponse
+
+    interface _GetRegistryRecordResponse
+      include Smithy::Client::_Response[Types::GetRegistryRecordResponse]
+      def registry_arn: () -> String?
+      def record_arn: () -> String?
+      def record_id: () -> String?
+      def name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def record_type: () -> String?
+      def descriptors: () -> Types::Descriptors?
+      def record_version: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status_reason: () -> String?
+      def provenance: () -> Array[Types::Provenance]?
+      def created_by_auto_detection: () -> bool?
+      def created_by: () -> String?
+      def custom_metadata: () -> Smithy::Schema::document?
+      def custom_metadata_schema_compliance_status: () -> String?
+    end
+    def get_registry_record: (
+      ?registry_id: String,
+      ?record_id: String
+    ) -> _GetRegistryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegistryRecordResponse
+
+    interface _ListRegistriesResponse
+      include Smithy::Client::_Response[Types::ListRegistriesResponse]
+      def registries: () -> Array[Types::RegistrySummary]?
+      def next_token: () -> String?
+    end
+    def list_registries: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListRegistriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegistriesResponse
+
+    interface _ListRegistryRecordsResponse
+      include Smithy::Client::_Response[Types::ListRegistryRecordsResponse]
+      def registry_records: () -> Array[Types::RegistryRecordSummary]?
+      def next_token: () -> String?
+    end
+    def list_registry_records: (
+      ?registry_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListRegistryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegistryRecordsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _SubmitRegistryRecordForApprovalResponse
+      include Smithy::Client::_Response[Types::SubmitRegistryRecordForApprovalResponse]
+      def registry_arn: () -> String?
+      def record_arn: () -> String?
+      def record_id: () -> String?
+      def status: () -> String?
+      def updated_at: () -> Time?
+    end
+    def submit_registry_record_for_approval: (
+      ?registry_id: String,
+      ?record_id: String
+    ) -> _SubmitRegistryRecordForApprovalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitRegistryRecordForApprovalResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateRegistryResponse
+      include Smithy::Client::_Response[Types::UpdateRegistryResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def registry_id: () -> String?
+      def registry_arn: () -> String?
+      def discovery_configuration: () -> Types::DiscoveryConfiguration?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+      def approval_configuration: () -> Types::ApprovalConfiguration?
+      def custom_metadata_schema_configuration: () -> Types::CustomMetadataSchemaConfiguration?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def auto_detection: () -> Types::AutoDetection?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_registry: (
+      ?registry_id: String,
+      ?name: String,
+      ?description: {
+        optional_value: String
+      },
+      ?discovery_configuration: {
+        authorizer_configuration: {
+          optional_value: {
+            custom_jwt_authorizer: {
+              discovery_url: String,
+              allowed_audience: Array[String],
+              allowed_clients: Array[String],
+              allowed_scopes: Array[String],
+              custom_claims: Array[
+                {
+                  inbound_token_claim_name: String,
+                  inbound_token_claim_value_type: String,
+                  authorizing_claim_match_value: {
+                    claim_match_value: {
+                      match_value_string: String,
+                      match_value_string_list: Array[String]
+                    },
+                    claim_match_operator: String
+                  }
+                }
+              ],
+              private_endpoint: {
+                self_managed_lattice_resource: {
+                  resource_configuration_identifier: String
+                },
+                managed_vpc_resource: {
+                  vpc_identifier: String,
+                  subnet_ids: Array[String],
+                  endpoint_ip_address_type: String,
+                  security_group_ids: Array[String],
+                  tags: Hash[String, String],
+                  routing_domain: String
+                }
+              },
+              private_endpoint_overrides: Array[
+                {
+                  domain: String,
+                  private_endpoint: untyped
+                }
+              ]
+            }
+          }
+        }
+      },
+      ?approval_configuration: {
+        optional_value: {
+          auto_approval_rules: Array[String]
+        }
+      },
+      ?custom_metadata_schema_configuration: {
+        optional_value: {
+          default_schema: String,
+          record_type_schema_overrides: Array[
+            {
+              record_type: String,
+              schema: untyped
+            }
+          ]
+        }
+      },
+      ?auto_detection_configuration: {
+        optional_value: {
+          scope: String,
+          enabled: bool
+        }
+      }
+    ) -> _UpdateRegistryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegistryResponse
+
+    interface _UpdateRegistryRecordResponse
+      include Smithy::Client::_Response[Types::UpdateRegistryRecordResponse]
+      def registry_arn: () -> String?
+      def record_arn: () -> String?
+      def record_id: () -> String?
+      def name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def record_type: () -> String?
+      def descriptors: () -> Types::Descriptors?
+      def record_version: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def status_reason: () -> String?
+      def provenance: () -> Array[Types::Provenance]?
+      def created_by_auto_detection: () -> bool?
+      def created_by: () -> String?
+      def custom_metadata: () -> Smithy::Schema::document?
+      def custom_metadata_schema_compliance_status: () -> String?
+    end
+    def update_registry_record: (
+      ?registry_id: String,
+      ?record_id: String,
+      ?name: String,
+      ?display_name: {
+        optional_value: String
+      },
+      ?description: {
+        optional_value: String
+      },
+      ?record_type: String,
+      ?descriptors: {
+        optional_value: {
+          mcp_server: {
+            optional_value: {
+              data: {
+                optional_value: String
+              },
+              data_schema_version: {
+                optional_value: String
+              },
+              source: {
+                optional_value: {
+                  from_url: {
+                    url: String,
+                    credential_provider_configurations: Array[
+                      {
+                        credential_provider_type: String,
+                        credential_provider: {
+                          oauth_credential_provider: {
+                            provider_arn: String,
+                            grant_type: String,
+                            scopes: Array[String],
+                            custom_parameters: Hash[String, String]
+                          },
+                          iam_credential_provider: {
+                            role_arn: String,
+                            service: String,
+                            region: String
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              additional_data: {
+                optional_value: {
+                  tools: {
+                    optional_value: {
+                      data: untyped,
+                      data_schema_version: untyped
+                    }
+                  }
+                }
+              }
+            }
+          },
+          a2a_agent_card: {
+            optional_value: {
+              data: untyped,
+              data_schema_version: untyped,
+              source: untyped
+            }
+          },
+          agent_skills_definition: {
+            optional_value: {
+              data: untyped,
+              data_schema_version: untyped,
+              additional_data: {
+                optional_value: {
+                  skill_md: {
+                    optional_value: {
+                      data: untyped,
+                      data_schema_version: untyped,
+                      source: untyped
+                    }
+                  }
+                }
+              }
+            }
+          },
+          custom: {
+            optional_value: {
+              data: untyped
+            }
+          },
+          http: {
+            optional_value: {
+              source: untyped
+            }
+          },
+          agui: {
+            optional_value: {
+              source: untyped
+            }
+          }
+        }
+      },
+      ?record_version: String,
+      ?custom_metadata: {
+        optional_value: Smithy::Schema::document
+      },
+      ?trigger_synchronization: bool,
+      ?provenance: Array[
+        {
+          relation: String,
+          source_id: String,
+          source_type: String,
+          source_details: {
+            agentcore_runtime: {
+              protocol_configuration: {
+                server_protocol: String
+              },
+              authorizer_configuration: {
+                custom_jwt_authorizer: {
+                  discovery_url: String,
+                  allowed_audience: Array[String],
+                  allowed_clients: Array[String],
+                  allowed_scopes: Array[String],
+                  custom_claims: Array[
+                    {
+                      inbound_token_claim_name: String,
+                      inbound_token_claim_value_type: String,
+                      authorizing_claim_match_value: {
+                        claim_match_value: {
+                          match_value_string: String,
+                          match_value_string_list: Array[String]
+                        },
+                        claim_match_operator: String
+                      }
+                    }
+                  ],
+                  private_endpoint: {
+                    self_managed_lattice_resource: {
+                      resource_configuration_identifier: String
+                    },
+                    managed_vpc_resource: {
+                      vpc_identifier: String,
+                      subnet_ids: Array[String],
+                      endpoint_ip_address_type: String,
+                      security_group_ids: Array[String],
+                      tags: Hash[String, String],
+                      routing_domain: String
+                    }
+                  },
+                  private_endpoint_overrides: Array[
+                    {
+                      domain: String,
+                      private_endpoint: untyped
+                    }
+                  ]
+                }
+              },
+              workload_identity_details: {
+                workload_identity_arn: String
+              }
+            },
+            agentcore_gateway: {
+              protocol_type: String,
+              authorizer_type: untyped,
+              authorizer_configuration: untyped,
+              workload_identity_details: untyped
+            }
+          }
+        }
+      ]
+    ) -> _UpdateRegistryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegistryRecordResponse
+
+    interface _UpdateRegistryRecordStatusResponse
+      include Smithy::Client::_Response[Types::UpdateRegistryRecordStatusResponse]
+      def registry_arn: () -> String?
+      def record_arn: () -> String?
+      def record_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_registry_record_status: (
+      ?registry_id: String,
+      ?record_id: String,
+      ?status: String,
+      ?status_reason: String
+    ) -> _UpdateRegistryRecordStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegistryRecordStatusResponse
+  end
+end

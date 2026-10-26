@@ -3,6 +3,7 @@ module Aws::CognitoIdentityProvider
     include Smithy::Schema::Shapes
 
     AWSAccountIdType: StringShape
+    AccessDeniedException: StructureShape
     AccessTokenValidityType: IntegerShape
     AccountRecoverySettingType: StructureShape
     AccountTakeoverActionNotifyType: BooleanShape
@@ -10,8 +11,16 @@ module Aws::CognitoIdentityProvider
     AccountTakeoverActionsType: StructureShape
     AccountTakeoverEventActionType: EnumShape
     AccountTakeoverRiskConfigurationType: StructureShape
+    AcrConfigurationType: MapShape
+    AcrLevelConfigType: StructureShape
+    AcrLevelKeyType: StringShape
+    AcrMappingKeyType: StringShape
+    AcrMappingType: MapShape
+    AcrValueType: StringShape
     AddCustomAttributesRequest: StructureShape
     AddCustomAttributesResponse: StructureShape
+    AddUserPoolClientSecretRequest: StructureShape
+    AddUserPoolClientSecretResponse: StructureShape
     AdminAddUserToGroupRequest: StructureShape
     AdminConfirmSignUpRequest: StructureShape
     AdminConfirmSignUpResponse: StructureShape
@@ -19,6 +28,8 @@ module Aws::CognitoIdentityProvider
     AdminCreateUserRequest: StructureShape
     AdminCreateUserResponse: StructureShape
     AdminCreateUserUnusedAccountValidityDaysType: IntegerShape
+    AdminDeleteSoftwareTokenRequest: StructureShape
+    AdminDeleteSoftwareTokenResponse: StructureShape
     AdminDeleteUserAttributesRequest: StructureShape
     AdminDeleteUserAttributesResponse: StructureShape
     AdminDeleteUserRequest: StructureShape
@@ -31,6 +42,8 @@ module Aws::CognitoIdentityProvider
     AdminForgetDeviceRequest: StructureShape
     AdminGetDeviceRequest: StructureShape
     AdminGetDeviceResponse: StructureShape
+    AdminGetUserAuthFactorsRequest: StructureShape
+    AdminGetUserAuthFactorsResponse: StructureShape
     AdminGetUserRequest: StructureShape
     AdminGetUserResponse: StructureShape
     AdminInitiateAuthRequest: StructureShape
@@ -110,11 +123,15 @@ module Aws::CognitoIdentityProvider
     ChallengeResponsesType: MapShape
     ChangePasswordRequest: StructureShape
     ChangePasswordResponse: StructureShape
+    ClientAuthenticationResultType: StructureShape
     ClientIdType: StringShape
     ClientMetadataType: MapShape
     ClientNameType: StringShape
     ClientPermissionListType: ListShape
     ClientPermissionType: StringShape
+    ClientSecretDescriptorListType: ListShape
+    ClientSecretDescriptorType: StructureShape
+    ClientSecretIdType: StringShape
     ClientSecretType: StringShape
     CloudWatchLogsConfigurationType: StructureShape
     CodeDeliveryDetailsListType: ListShape
@@ -154,6 +171,8 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolClientResponse: StructureShape
     CreateUserPoolDomainRequest: StructureShape
     CreateUserPoolDomainResponse: StructureShape
+    CreateUserPoolReplicaRequest: StructureShape
+    CreateUserPoolReplicaResponse: StructureShape
     CreateUserPoolRequest: StructureShape
     CreateUserPoolResponse: StructureShape
     CustomAttributeNameType: StringShape
@@ -173,8 +192,12 @@ module Aws::CognitoIdentityProvider
     DeleteUserAttributesRequest: StructureShape
     DeleteUserAttributesResponse: StructureShape
     DeleteUserPoolClientRequest: StructureShape
+    DeleteUserPoolClientSecretRequest: StructureShape
+    DeleteUserPoolClientSecretResponse: StructureShape
     DeleteUserPoolDomainRequest: StructureShape
     DeleteUserPoolDomainResponse: StructureShape
+    DeleteUserPoolReplicaRequest: StructureShape
+    DeleteUserPoolReplicaResponse: StructureShape
     DeleteUserPoolRequest: StructureShape
     DeleteUserRequest: StructureShape
     DeleteWebAuthnCredentialRequest: StructureShape
@@ -192,6 +215,8 @@ module Aws::CognitoIdentityProvider
     DescribeResourceServerResponse: StructureShape
     DescribeRiskConfigurationRequest: StructureShape
     DescribeRiskConfigurationResponse: StructureShape
+    DescribeTermsByClientRequest: StructureShape
+    DescribeTermsByClientResponse: StructureShape
     DescribeTermsRequest: StructureShape
     DescribeTermsResponse: StructureShape
     DescribeUserImportJobRequest: StructureShape
@@ -232,6 +257,9 @@ module Aws::CognitoIdentityProvider
     EmailVerificationSubjectByLinkType: StringShape
     EmailVerificationSubjectType: StringShape
     EnableSoftwareTokenMFAException: StructureShape
+    EncryptionKeyArnType: StringShape
+    EncryptionKeyType: EnumShape
+    EumsSmsConfigurationType: StructureShape
     EventContextDataType: StructureShape
     EventFeedbackType: StructureShape
     EventFilterType: EnumShape
@@ -244,6 +272,7 @@ module Aws::CognitoIdentityProvider
     ExpiredCodeException: StructureShape
     ExplicitAuthFlowsListType: ListShape
     ExplicitAuthFlowsType: EnumShape
+    FailoverType: StructureShape
     FeatureType: EnumShape
     FeatureUnavailableInTierException: StructureShape
     FeedbackValueType: EnumShape
@@ -256,6 +285,8 @@ module Aws::CognitoIdentityProvider
     GenerateSecret: BooleanShape
     GetCSVHeaderRequest: StructureShape
     GetCSVHeaderResponse: StructureShape
+    GetClientTokenRequest: StructureShape
+    GetClientTokenResponse: StructureShape
     GetDeviceRequest: StructureShape
     GetDeviceResponse: StructureShape
     GetGroupRequest: StructureShape
@@ -264,6 +295,8 @@ module Aws::CognitoIdentityProvider
     GetIdentityProviderByIdentifierResponse: StructureShape
     GetLogDeliveryConfigurationRequest: StructureShape
     GetLogDeliveryConfigurationResponse: StructureShape
+    GetProvisionedLimitRequest: StructureShape
+    GetProvisionedLimitResponse: StructureShape
     GetSigningCertificateRequest: StructureShape
     GetSigningCertificateResponse: StructureShape
     GetTokensFromRefreshTokenRequest: StructureShape
@@ -284,6 +317,7 @@ module Aws::CognitoIdentityProvider
     GroupListType: ListShape
     GroupNameType: StringShape
     GroupType: StructureShape
+    HealthCheckIdType: StringShape
     HexStringType: StringShape
     HttpHeader: StructureShape
     HttpHeaderList: ListShape
@@ -294,10 +328,13 @@ module Aws::CognitoIdentityProvider
     IdpIdentifiersListType: ListShape
     ImageFileType: BlobShape
     ImageUrlType: StringShape
+    InboundFederationLambdaType: StructureShape
+    InboundFederationLambdaVersionType: EnumShape
     InitiateAuthRequest: StructureShape
     InitiateAuthResponse: StructureShape
     IntegerType: IntegerShape
     InternalErrorException: StructureShape
+    InternalServerException: StructureShape
     InvalidEmailRoleAccessPolicyException: StructureShape
     InvalidLambdaResponseException: StructureShape
     InvalidOAuthFlowException: StructureShape
@@ -307,9 +344,15 @@ module Aws::CognitoIdentityProvider
     InvalidSmsRoleAccessPolicyException: StructureShape
     InvalidSmsRoleTrustRelationshipException: StructureShape
     InvalidUserPoolConfigurationException: StructureShape
+    IssuerConfigurationType: StructureShape
+    IssuerType: EnumShape
+    KeyConfigurationType: StructureShape
     LambdaConfigType: StructureShape
     LanguageIdType: StringShape
+    LimitClass: EnumShape
+    LimitDefinitionType: StructureShape
     LimitExceededException: StructureShape
+    LimitType: StructureShape
     LinkUrlType: StringShape
     LinksType: MapShape
     ListDevicesRequest: StructureShape
@@ -330,8 +373,12 @@ module Aws::CognitoIdentityProvider
     ListTermsResponse: StructureShape
     ListUserImportJobsRequest: StructureShape
     ListUserImportJobsResponse: StructureShape
+    ListUserPoolClientSecretsRequest: StructureShape
+    ListUserPoolClientSecretsResponse: StructureShape
     ListUserPoolClientsRequest: StructureShape
     ListUserPoolClientsResponse: StructureShape
+    ListUserPoolReplicasRequest: StructureShape
+    ListUserPoolReplicasResponse: StructureShape
     ListUserPoolsRequest: StructureShape
     ListUserPoolsResponse: StructureShape
     ListUsersInGroupRequest: StructureShape
@@ -362,8 +409,11 @@ module Aws::CognitoIdentityProvider
     NumberAttributeConstraintsType: StructureShape
     OAuthFlowType: EnumShape
     OAuthFlowsType: ListShape
+    OperationNotEnabledException: StructureShape
+    OptionalArnType: StringShape
     PaginationKey: StringShape
     PaginationKeyType: StringShape
+    PasswordHashingAlgorithmType: EnumShape
     PasswordHistoryPolicyViolationException: StructureShape
     PasswordHistorySizeType: IntegerShape
     PasswordPolicyMinLengthType: IntegerShape
@@ -394,7 +444,11 @@ module Aws::CognitoIdentityProvider
     RefreshTokenRotationType: StructureShape
     RefreshTokenValidityType: IntegerShape
     RegionCodeType: StringShape
+    RegionNameType: StringShape
     RelyingPartyIdType: StringShape
+    ReplicaRegionsType: ListShape
+    ReplicaRoleType: EnumShape
+    ReplicaStatusType: EnumShape
     ResendConfirmationCodeRequest: StructureShape
     ResendConfirmationCodeResponse: StructureShape
     ResourceIdType: StringShape
@@ -416,6 +470,7 @@ module Aws::CognitoIdentityProvider
     RiskDecisionType: EnumShape
     RiskExceptionConfigurationType: StructureShape
     RiskLevelType: EnumShape
+    RoutingType: StructureShape
     S3ArnType: StringShape
     S3BucketType: StringShape
     S3ConfigurationType: StructureShape
@@ -430,6 +485,8 @@ module Aws::CognitoIdentityProvider
     SearchedAttributeNamesListType: ListShape
     SecretCodeType: StringShape
     SecretHashType: StringShape
+    SecurityPolicyType: EnumShape
+    ServiceQuotaExceededException: StructureShape
     SessionType: StringShape
     SetLogDeliveryConfigurationRequest: StructureShape
     SetLogDeliveryConfigurationResponse: StructureShape
@@ -463,6 +520,7 @@ module Aws::CognitoIdentityProvider
     StopUserImportJobRequest: StructureShape
     StopUserImportJobResponse: StructureShape
     StringAttributeConstraintsType: StructureShape
+    StringToStringMapType: MapShape
     StringType: StringShape
     SupportedIdentityProvidersListType: ListShape
     TagKeysType: StringShape
@@ -503,6 +561,9 @@ module Aws::CognitoIdentityProvider
     UpdateIdentityProviderResponse: StructureShape
     UpdateManagedLoginBrandingRequest: StructureShape
     UpdateManagedLoginBrandingResponse: StructureShape
+    UpdateProvisionedLimitRequest: StructureShape
+    UpdateProvisionedLimitResponse: StructureShape
+    UpdateReplicaStatusType: EnumShape
     UpdateResourceServerRequest: StructureShape
     UpdateResourceServerResponse: StructureShape
     UpdateTermsRequest: StructureShape
@@ -513,6 +574,8 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolClientResponse: StructureShape
     UpdateUserPoolDomainRequest: StructureShape
     UpdateUserPoolDomainResponse: StructureShape
+    UpdateUserPoolReplicaRequest: StructureShape
+    UpdateUserPoolReplicaResponse: StructureShape
     UpdateUserPoolRequest: StructureShape
     UpdateUserPoolResponse: StructureShape
     UserAttributeUpdateSettingsType: StructureShape
@@ -539,6 +602,8 @@ module Aws::CognitoIdentityProvider
     UserPoolMfaType: EnumShape
     UserPoolNameType: StringShape
     UserPoolPolicyType: StructureShape
+    UserPoolReplicaListType: ListShape
+    UserPoolReplicaType: StructureShape
     UserPoolTaggingException: StructureShape
     UserPoolTagsListType: ListShape
     UserPoolTagsType: MapShape
@@ -572,6 +637,8 @@ module Aws::CognitoIdentityProvider
     WebAuthnCredentialDescriptionListType: ListShape
     WebAuthnCredentialNotSupportedException: StructureShape
     WebAuthnCredentialsQueryLimitType: IntegerShape
+    WebAuthnFactorConfigurationType: EnumShape
+    WebAuthnMfaSettingsType: StructureShape
     WebAuthnNotEnabledException: StructureShape
     WebAuthnOriginNotAllowedException: StructureShape
     WebAuthnRelyingPartyMismatchException: StructureShape

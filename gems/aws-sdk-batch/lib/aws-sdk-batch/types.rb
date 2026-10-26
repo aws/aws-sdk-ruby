@@ -23,6 +23,9 @@ module Aws::Batch
     #   <p>A summary of the number of array job children in each available job status. This parameter
     #      is returned for parent array jobs.</p>
     #   @return [Hash<String, Integer>]
+    # @!attribute status_summary_last_updated_at
+    #   <p>The Unix timestamp (in milliseconds) for when the <code>statusSummary</code> was last updated.</p>
+    #   @return [Integer]
     # @!attribute size
     #   <p>The size of the array job. This parameter is returned for parent array jobs.</p>
     #   @return [Integer]
@@ -33,6 +36,7 @@ module Aws::Batch
     class ArrayPropertiesDetail < Struct.new(
       nil,
       :status_summary,
+      :status_summary_last_updated_at,
       :size,
       :index,
       keyword_init: true
@@ -48,10 +52,19 @@ module Aws::Batch
     #   <p>The job index within the array that's associated with this job. This parameter is returned
     #      for children of array jobs.</p>
     #   @return [Integer]
+    # @!attribute status_summary
+    #   <p>A summary of the number of array job children in each available job status. This parameter
+    #      is returned for parent array jobs.</p>
+    #   @return [Hash<String, Integer>]
+    # @!attribute status_summary_last_updated_at
+    #   <p>The Unix timestamp (in milliseconds) for when the <code>statusSummary</code> was last updated.</p>
+    #   @return [Integer]
     class ArrayPropertiesSummary < Struct.new(
       nil,
       :size,
       :index,
+      :status_summary,
+      :status_summary_last_updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -182,10 +195,10 @@ module Aws::Batch
     #   <p>The Batch job ID of the job to cancel.</p>
     #   @return [String]
     # @!attribute reason
-    #   <p>A message to attach to the job that explains the reason for canceling it. This message is
+    #   <p>A message to attach to the job that explains the reason for cancelling it. This message is
     #         returned by future <a>DescribeJobs</a> operations on the job. It is also
     #         recorded in the Batch activity logs.</p>
-    #            <p>This parameter has as limit of 1024 characters.</p>
+    #            <p>This parameter has a limit of 1024 characters.</p>
     #   @return [String]
     class CancelJobRequest < Struct.new(
       nil,
@@ -203,21 +216,138 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Defines the capacity limit for a service environment. This structure specifies the maximum amount of resources that can be used by service jobs in the environment.</p>
+    # <p>An object that contains the details of a job that couldn't be cancelled by a
+    #         <code>CancelJobs</code> operation.</p>
+    # @!attribute job
+    #   <p>The Batch job ID of the job that couldn't be cancelled.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>An error code that identifies the reason the job couldn't be cancelled. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ValidationException</code> – A job identifier in the request is malformed or isn't valid.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ClientException</code> – The request failed because of a client error.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ThrottlingException</code> – The request was throttled. Retry the request.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ServerException</code> – An internal error occurred. Retry the request.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AccessDenied</code> – The caller isn't authorized to perform the action on the specified job.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message that describes the reason the job couldn't be cancelled.</p>
+    #   @return [String]
+    class CancelJobsErrorDetail < Struct.new(
+      nil,
+      :job,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the jobs to cancel and the reason for the cancellation.</p>
+    # @!attribute jobs
+    #   <p>An array of up to 50 Batch job IDs of the jobs to cancel.</p>
+    #   @return [Array<String>]
+    # @!attribute reason
+    #   <p>A message to attach to the job that explains the reason for cancelling it. This message is
+    #         returned by future <a>DescribeJobs</a> operations on the job. It is also
+    #         recorded in the Batch activity logs.</p>
+    #            <p>This parameter has a limit of 1024 characters.</p>
+    #   @return [String]
+    class CancelJobsRequest < Struct.new(
+      nil,
+      :jobs,
+      :reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The result of a <code>CancelJobs</code> request, including the jobs whose cancellation
+    #       request was accepted and the errors for jobs that couldn't be cancelled.</p>
+    # @!attribute successful
+    #   <p>A list of the job IDs whose cancellation request was accepted.</p>
+    #   @return [Array<String>]
+    # @!attribute errors
+    #   <p>A list of <code>CancelJobsErrorDetail</code> items, one for each job that couldn't be
+    #         cancelled. Each item includes the job ID along with a code and message that describe why the
+    #         job wasn't cancelled.</p>
+    #   @return [Array<Types::CancelJobsErrorDetail>]
+    class CancelJobsResponse < Struct.new(
+      nil,
+      :successful,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the type and maximum quantity of resources that can be allocated to service jobs in a service environment.</p>
     # @!attribute max_capacity
-    #   <p>The maximum capacity available for the service environment. This value represents the maximum amount of resources that can be allocated to service jobs.</p>
-    #            <p>For example, <code>maxCapacity=50</code>, <code>capacityUnit=NUM_INSTANCES</code>. This indicates that the
-    #               maximum number of instances that can be run on this service environment is 50. You could
-    #               then run 5 SageMaker Training jobs that each use 10 instances. However, if you submit another job that
-    #               requires 10 instances, it will wait in the queue.</p>
+    #   <p>The maximum capacity available for the service environment. For a quota management enabled service environment, this value represents
+    #         the maximum quantity of a particular resource type (specified by <code>capacityUnit</code>) that can be allocated to service jobs.
+    #         For other service environments, this value represents the maximum quantity of all resources that can be allocated to service jobs.</p>
+    #            <p>For example, if <code>maxCapacity=50</code> and <code>capacityUnit=NUM_INSTANCES</code>, you can run up to 50 instances concurrently.
+    #         If you run 5 SageMaker Training jobs that each use 10 instances, a subsequent job requiring 10 instances waits in the queue until
+    #         capacity is available. In a quota management enabled service environment with <code>capacityUnit=ml.m5.large</code>, only
+    #         <code>ml.m5.large</code> instances count against this limit, and jobs requiring other instance types wait until a matching capacity limit is configured.</p>
     #   @return [Integer]
     # @!attribute capacity_unit
-    #   <p>The unit of measure for the capacity limit. This defines how the maxCapacity value should be interpreted. For <code>SAGEMAKER_TRAINING</code> jobs, use <code>NUM_INSTANCES</code>.</p>
+    #   <p>The unit of measure for the capacity limit, which defines how <code>maxCapacity</code> is interpreted. For <code>SAGEMAKER_TRAINING</code> jobs in a quota management
+    #         enabled service environment, specify the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceConfig.html#sagemaker-Type-ResourceConfig-InstanceType">instance type</a>
+    #         (for example, <code>ml.m5.large</code>). Otherwise, use <code>NUM_INSTANCES</code>.</p>
     #   @return [String]
     class CapacityLimit < Struct.new(
       nil,
       :max_capacity,
       :capacity_unit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The capacity reservation configuration for Amazon ECS Managed Instances. Use this to target
+    #    On-Demand Capacity Reservations or Reserved Instances.</p>
+    # @!attribute reservation_group_arn
+    #   <p>The Amazon Resource Name (ARN) of the capacity reservation group to target.</p>
+    #   @return [String]
+    # @!attribute reservation_preference
+    #   <p>The capacity reservation preference. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>RESERVATIONS_ONLY</code> — Use only capacity reservations.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>RESERVATIONS_FIRST</code> — Prefer capacity reservations but fall back to
+    #        On-Demand if unavailable.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>RESERVATIONS_EXCLUDED</code> — Do not use capacity reservations.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class CapacityReservationRequest < Struct.new(
+      nil,
+      :reservation_group_arn,
+      :reservation_preference,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -270,8 +400,7 @@ module Aws::Batch
     #      don't scale out. </p>
     #            <note>
     #               <p>Compute environments in a <code>DISABLED</code> state may continue to incur billing
-    #       charges. To prevent additional charges, turn off and then delete the compute environment. For
-    #       more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state">State</a> in the <i>Batch User Guide</i>.</p>
+    #       charges, for example, if they have running instances due to jobs that are still executing or a non-zero <code>minvCpus</code> setting. To prevent additional charges, disable and delete the compute environment.</p>
     #            </note>
     #            <p>When an instance is idle, the instance scales down to the <code>minvCpus</code> value.
     #      However, the instance size doesn't change. For example, consider a <code>c5.8xlarge</code>
@@ -315,6 +444,10 @@ module Aws::Batch
     # @!attribute context
     #   <p>Reserved.</p>
     #   @return [String]
+    # @!attribute ecs_settings
+    #   <p>The Amazon ECS settings for the compute environment. These settings control CloudWatch
+    #      Container Insights collection.</p>
+    #   @return [Types::EcsSettings]
     class ComputeEnvironmentDetail < Struct.new(
       nil,
       :compute_environment_name,
@@ -333,6 +466,7 @@ module Aws::Batch
       :container_orchestration_type,
       :uuid,
       :context,
+      :ecs_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -371,22 +505,35 @@ module Aws::Batch
     #    the <i>Batch User Guide</i>.</p>
     # @!attribute type
     #   <p>The type of compute environment: <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>,
-    #      or <code>FARGATE_SPOT</code>. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute environments</a> in the
-    #       <i>Batch User Guide</i>.</p>
+    #      <code>FARGATE_SPOT</code>, or <code>ECS_MANAGED_INSTANCES</code>. For more information, see
+    #      <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute
+    #       environments</a> in the <i>Batch User Guide</i>.</p>
     #            <p> If you choose <code>SPOT</code>, you must also specify an Amazon EC2 Spot Fleet role with the
     #       <code>spotIamFleetRole</code> parameter. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 spot fleet role</a> in the
     #       <i>Batch User Guide</i>.</p>
+    #            <p>If you choose <code>ECS_MANAGED_INSTANCES</code>, you must also specify a
+    #      <code>managedInstancesProvider</code> configuration. To use Spot capacity, set
+    #      <code>capacityOptionType</code> to <code>SPOT</code> in the
+    #      <code>managedInstancesProvider.instanceLaunchTemplate</code> configuration. For more
+    #      information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html">Amazon ECS Managed Instances compute
+    #       environments</a> in the <i>Batch User Guide</i>.</p>
     #            <note>
-    #               <p>Multi-node parallel jobs aren't supported on Spot Instances.</p>
+    #               <p>Multi-node parallel jobs aren't supported on Spot Instances or Amazon ECS Managed
+    #       Instances.</p>
     #            </note>
     #   @return [String]
     # @!attribute allocation_strategy
     #   <p>The allocation strategy to use for the compute resource if not enough instances of the best
-    #      fitting instance type can be allocated. This might be because of availability of the instance
-    #      type in the Region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. For more
-    #      information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html">Allocation strategies</a> in the <i>Batch User Guide</i>.</p>
+    #    fitting instance type can be allocated. This might be because of availability of the instance
+    #    type in the Region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. For more
+    #    information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html">Allocation strategies</a> in the <i>Batch User Guide</i>.</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
+    #            </note>
+    #            <note>
+    #               <p>This parameter is required for Amazon EKS compute environments. For Amazon ECS compute environments,
+    #        if this parameter isn't specified, the <code>BEST_FIT</code> allocation strategy is used by
+    #        default.</p>
     #            </note>
     #            <dl>
     #               <dt>BEST_FIT (default)</dt>
@@ -409,6 +556,27 @@ module Aws::Batch
     #         additional instances of the previously selected instance types aren't available, Batch
     #         selects new instance types.</p>
     #               </dd>
+    #               <dt>BEST_FIT_PROGRESSIVE_ORDERED</dt>
+    #               <dd>
+    #                  <important>
+    #                     <p>This is an advanced allocation strategy only for customers who want to control which
+    #          instance types are preferred during scaling.</p>
+    #                     <p>Placing large instance types at the top of the list may result in <b>over-provisioning</b> for
+    #          small jobs. Placing small instance types at the top may cause the compute environment to
+    #          reach Amazon EC2 instance count limits before reaching <code>maxvCpus</code>.</p>
+    #                  </important>
+    #                  <p>Batch selects instance types in the order they appear in the
+    #         <code>instanceTypes</code> list. When an instance family is specified, sizes within that
+    #         family are expanded using <code>BEST_FIT_PROGRESSIVE</code> logic—preferring sizes that
+    #         best fit the jobs, with larger sizes as fallback. Instance types that cannot meet the resource
+    #         requirements of the jobs are skipped. This strategy is only available for On-Demand Instance
+    #         (<code>EC2</code>) compute resources.</p>
+    #                  <p>If an instance family and an explicit instance type from that family both appear in
+    #         <code>instanceTypes</code>, the explicit type takes its listed position and is excluded from
+    #         the family expansion. For example, in <code>["m7a.4xlarge", "m7a", "m6a"]</code>,
+    #         <code>m7a.4xlarge</code> is always placed first and is excluded from the <code>m7a</code>
+    #         family expansion.</p>
+    #               </dd>
     #               <dt>SPOT_CAPACITY_OPTIMIZED</dt>
     #               <dd>
     #                  <p>Batch selects one or more instance types that are large enough to meet the requirements
@@ -423,15 +591,33 @@ module Aws::Batch
     #         possible price. This allocation strategy is only available for Spot Instance compute
     #         resources.</p>
     #               </dd>
+    #               <dt>SPOT_CAPACITY_OPTIMIZED_PRIORITIZED</dt>
+    #               <dd>
+    #                  <important>
+    #                     <p>This is an advanced allocation strategy for customers who want to influence instance
+    #          type selection during scaling. This strategy optimizes for <b>capacity
+    #          first</b>, and honors instance type priorities on a best-effort basis (priorities are
+    #          honored when they do not significantly reduce available Spot capacity).</p>
+    #                     <p>Placing large instance types at the top of the list may result in <b>over-provisioning</b> for
+    #          small jobs. Placing small instance types at the top may cause the compute environment to
+    #          reach Amazon EC2 instance count limits before reaching <code>maxvCpus</code>.</p>
+    #                  </important>
+    #                  <p>Batch selects instance types in the order they appear in the
+    #         <code>instanceTypes</code> list, but <b>optimizes for capacity
+    #         first</b>. The customer-defined priority is honored on a best-effort basis. When Spot
+    #         Instance capacity pools are similarly available, priority order is respected. When capacity is
+    #         constrained, Batch selects from the most available pools regardless of priority to minimize
+    #         the likelihood of Spot Instance interruptions. This strategy is only available for Spot
+    #         Instance compute resources.</p>
+    #               </dd>
     #            </dl>
-    #            <p>With <code>BEST_FIT_PROGRESSIVE</code>,<code>SPOT_CAPACITY_OPTIMIZED</code> and
-    #       <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code> (recommended) strategies using On-Demand or Spot 
-    #       Instances, and the <code>BEST_FIT</code> strategy using Spot Instances, Batch might need to 
-    #       exceed <code>maxvCpus</code> to meet your capacity requirements. In this event, Batch never 
-    #       exceeds <code>maxvCpus</code> by more than a single instance.</p>
+    #            <p>With any allocation strategy except <code>BEST_FIT</code> using On-Demand
+    #       (<code>EC2</code>) compute resources, Batch might need to exceed <code>maxvCpus</code> to meet your
+    #       capacity requirements. In this event, Batch never exceeds <code>maxvCpus</code> by more than
+    #       a single instance.</p>
     #   @return [String]
     # @!attribute minv_cpus
-    #   <p>The minimum number of vCPUs that a compute environment should maintain (even if the compute 
+    #   <p>The minimum number of vCPUs that a compute environment should maintain (even if the compute
     #      environment is <code>DISABLED</code>).</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
@@ -440,15 +626,14 @@ module Aws::Batch
     # @!attribute maxv_cpus
     #   <p>The maximum number of vCPUs that a compute environment can support.</p>
     #            <note>
-    #               <p>With <code>BEST_FIT_PROGRESSIVE</code>,<code>SPOT_CAPACITY_OPTIMIZED</code> and
-    #        <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code> (recommended) strategies using On-Demand or Spot Instances, 
-    #        and the <code>BEST_FIT</code> strategy using Spot Instances, Batch might need to exceed
-    #        <code>maxvCpus</code> to meet your capacity requirements. In this event, Batch never exceeds
-    #        <code>maxvCpus</code> by more than a single instance.</p>
+    #               <p>With any allocation strategy except <code>BEST_FIT</code> using On-Demand
+    #        (<code>EC2</code>) compute resources, Batch might need to exceed <code>maxvCpus</code> to meet your
+    #        capacity requirements. In this event, Batch never exceeds <code>maxvCpus</code> by more than
+    #        a single instance.</p>
     #            </note>
     #   @return [Integer]
     # @!attribute desiredv_cpus
-    #   <p>The desired number of vCPUS in the compute environment. Batch modifies this value between 
+    #   <p>The desired number of vCPUS in the compute environment. Batch modifies this value between
     #      the minimum and maximum values based on job queue demand.</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
@@ -457,15 +642,9 @@ module Aws::Batch
     # @!attribute instance_types
     #   <p>The instances types that can be launched. You can specify instance families to launch any
     #      instance type within those families (for example, <code>c5</code> or <code>p3</code>), or you can
-    #      specify specific sizes within a family (such as <code>c5.8xlarge</code>). </p>
+    #      specify specific sizes within a family (such as <code>c5.8xlarge</code>).</p>
     #            <p>Batch can select the instance type for you if you choose one of the following:</p>
     #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>optimal</code> to select instance types (from the <code>c4</code>, <code>m4</code>,
-    #       <code>r4</code>, <code>c5</code>, <code>m5</code>, and <code>r5</code>
-    #       instance families) that match the demand of your job queues. </p>
-    #               </li>
     #               <li>
     #                  <p>
     #                     <code>default_x86_64</code> to choose x86 based instance types (from the <code>m6i</code>,
@@ -473,34 +652,27 @@ module Aws::Batch
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>default_arm64</code> to choose x86 based instance types (from the <code>m6g</code>,
+    #                     <code>default_arm64</code> to choose ARM based instance types (from the <code>m6g</code>,
     #        <code>c6g</code>, <code>r6g</code>, and <code>c7g</code> instance families) that matches the resource demands of the job queue.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>optimal</code> Semantically equivalent to <code>default_x86_64</code>, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/optimal-default-instance-troubleshooting.html">Optimal instance type configuration to receive automatic instance family
+    #       updates</a> for details.</p>
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Starting on 11/01/2025 the behavior of <code>optimal</code> is going to be changed to
-    #       match <code>default_x86_64</code>.
-    #       
-    #       During the change your instance families could be updated to a newer
-    #       generation.
-    #       You do not need to perform any actions for the upgrade to
-    #       happen. For more information about change, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/optimal-default-instance-troubleshooting.html">Optimal instance type configuration to
-    #        receive automatic instance family updates</a>.</p>
-    #            </note>
-    #            <note>
-    #               <p>Instance family availability varies by
-    #       Amazon Web Services Region.
-    #       For example, some Amazon Web Services Regions may not have any fourth generation instance families
-    #       but have fifth and sixth generation instance families.</p>
-    #               <p>When using <code>default_x86_64</code> or <code>default_arm64</code>
-    #       instance bundles, Batch selects instance families based on a balance of
-    #       cost-effectiveness and performance. While newer generation instances often provide
-    #       better price-performance, Batch may choose an earlier generation instance family
-    #       if it provides the optimal combination of availability, cost, and performance for
-    #       your workload. For example, in an
-    #       Amazon Web Services Region
-    #       where both c6i and c7i instances are available, Batch might select c6i instances
-    #       if they offer better cost-effectiveness for your specific job requirements. For more information on Batch instance types and Amazon Web Services Region availability, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/instance-type-compute-table.html">Instance type compute table</a> in the <i>Batch User Guide</i>.</p>
+    #               <p>Instance family availability varies by Amazon Web Services Region. For example, some Amazon Web Services Regions may not have any fourth generation instance families but have fifth and
+    #       sixth generation instance families.</p>
+    #               <p>When using <code>default_x86_64</code> or <code>default_arm64</code> instance bundles,
+    #       Batch selects instance families based on a balance of cost-effectiveness and performance.
+    #       While newer generation instances often provide better price-performance, Batch may choose an
+    #       earlier generation instance family if it provides the optimal combination of availability, cost,
+    #       and performance for your workload. For example, in an Amazon Web Services Region where both c6i
+    #       and c7i instances are available, Batch might select c6i instances if they offer better
+    #       cost-effectiveness for your specific job requirements. For more information on Batch instance
+    #       types and Amazon Web Services Region availability, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/instance-type-compute-table.html">Instance
+    #        type compute table</a> in the <i>Batch User Guide</i>.</p>
     #               <p>Batch periodically updates your instances in default bundles to newer,
     #       more cost-effective options. Updates happen automatically without requiring any
     #       action from you. Your workloads continue running during updates with no interruption
@@ -526,8 +698,8 @@ module Aws::Batch
     #               <p>The AMI that you choose for a compute environment must match the architecture of the instance types that
     #       you intend to use for that compute environment. For example, if your compute environment uses A1 instance types,
     #       the compute resource AMI that you choose must support ARM instances. Amazon ECS vends both x86 and ARM versions of the
-    #       Amazon ECS-optimized Amazon Linux 2 AMI. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html">Amazon ECS-optimized
-    #       Amazon Linux 2 AMI</a>
+    #       Amazon ECS-optimized Amazon Linux 2023 AMI. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html">Amazon ECS-optimized
+    #       Amazon Linux 2023 AMI</a>
     #       in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #            </note>
     #   @deprecated
@@ -537,7 +709,9 @@ module Aws::Batch
     #   <p>The VPC subnets where the compute resources are launched. These subnets must be within the
     #      same VPC. Fargate compute resources can contain up to 16 subnets. For more information, see
     #       <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and subnets</a>
-    #      in the <i>Amazon VPC User Guide</i>.</p>
+    #      in the <i>Amazon VPC User Guide</i>. This parameter is required for compute
+    #      environments using <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>, or
+    #      <code>FARGATE_SPOT</code> compute resources.</p>
     #            <note>
     #               <p>Batch on Amazon EC2 and Batch on Amazon EKS support Local Zones. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-local-zones"> Local
     #        Zones</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>, <a href="https://docs.aws.amazon.com/eks/latest/userguide/local-zones.html">Amazon EKS and Amazon Web Services Local
@@ -640,12 +814,35 @@ module Aws::Batch
     # @!attribute ec2_configuration
     #   <p>Provides information that's used to select Amazon Machine Images (AMIs) for Amazon EC2 instances
     #      in the compute environment. If <code>Ec2Configuration</code> isn't specified, the default is
-    #       <code>ECS_AL2</code>.</p>
+    #       <code>ECS_AL2023</code> for EC2 (ECS) compute environments and <code>EKS_AL2023</code> for EKS compute environments.</p>
     #            <p>One or two values can be provided.</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
     #            </note>
     #   @return [Array<Types::Ec2Configuration>]
+    # @!attribute scaling_policy
+    #   <p>The scaling policy configuration for the compute environment.</p>
+    #            <note>
+    #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
+    #            </note>
+    #   @return [Types::ComputeScalingPolicy]
+    # @!attribute managed_instances_provider
+    #   <p>The configuration for the Amazon ECS Managed Instances capacity provider. This parameter is
+    #      required when <code>computeResources.type</code> is <code>ECS_MANAGED_INSTANCES</code> and must
+    #      not be specified for other compute environment types.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html">Amazon ECS
+    #      Managed Instances compute environments</a> in the
+    #      <i>Batch User Guide</i>.</p>
+    #   @return [Types::ManagedInstancesProvider]
+    # @!attribute capacity_tags
+    #   <p>The tags to apply to the Amazon ECS capacity provider and Amazon EC2 instances launched by the
+    #      compute environment. These tags are separate from the compute environment resource tags (the
+    #      top-level <code>tags</code> parameter). Use <code>capacityTags</code> for cost allocation and
+    #      organization of the underlying infrastructure resources.</p>
+    #            <p>This parameter is only valid for <code>ECS_MANAGED_INSTANCES</code> compute environments.
+    #      You must have the <code>batch:SetCapacityTags</code> permission on the
+    #      compute environment resource to use this parameter.</p>
+    #   @return [Hash<String, String>]
     class ComputeResource < Struct.new(
       nil,
       :type,
@@ -665,6 +862,9 @@ module Aws::Batch
       :spot_iam_fleet_role,
       :launch_template,
       :ec2_configuration,
+      :scaling_policy,
+      :managed_instances_provider,
+      :capacity_tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -674,7 +874,7 @@ module Aws::Batch
     #    more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute environments</a> in the
     #     <i>Batch User Guide</i>.</p>
     # @!attribute minv_cpus
-    #   <p>The minimum number of vCPUs that an environment should maintain (even if the compute environment 
+    #   <p>The minimum number of vCPUs that an environment should maintain (even if the compute environment
     #      is <code>DISABLED</code>).</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
@@ -683,15 +883,14 @@ module Aws::Batch
     # @!attribute maxv_cpus
     #   <p>The maximum number of Amazon EC2 vCPUs that an environment can reach.</p>
     #            <note>
-    #               <p>With <code>BEST_FIT_PROGRESSIVE</code>,<code>SPOT_CAPACITY_OPTIMIZED</code> and
-    #        <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code> (recommended) strategies using On-Demand or Spot 
-    #        Instances, and the <code>BEST_FIT</code> strategy using Spot Instances, Batch might need to 
-    #        exceed <code>maxvCpus</code> to meet your capacity requirements. In this event, Batch never 
-    #        exceeds <code>maxvCpus</code> by more than a single instance.</p>
+    #               <p>With any allocation strategy except <code>BEST_FIT</code> using On-Demand
+    #        (<code>EC2</code>) compute resources, Batch might need to exceed <code>maxvCpus</code> to meet your
+    #        capacity requirements. In this event, Batch never exceeds <code>maxvCpus</code> by more than
+    #        a single instance.</p>
     #            </note>
     #   @return [Integer]
     # @!attribute desiredv_cpus
-    #   <p>The desired number of vCPUS in the compute environment. Batch modifies this value between 
+    #   <p>The desired number of vCPUS in the compute environment. Batch modifies this value between
     #      the minimum and maximum values based on job queue demand.</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
@@ -739,13 +938,13 @@ module Aws::Batch
     #   @return [Array<String>]
     # @!attribute allocation_strategy
     #   <p>The allocation strategy to use for the compute resource if there's not enough instances of
-    #      the best fitting instance type that can be allocated. This might be because of availability of
-    #      the instance type in the Region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. For more
-    #      information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html">Allocation strategies</a> in the <i>Batch User Guide</i>.</p>
+    #    the best fitting instance type that can be allocated. This might be because of availability of
+    #    the instance type in the Region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. For more
+    #    information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html">Allocation strategies</a> in the <i>Batch User Guide</i>.</p>
     #            <p>When updating a compute environment, changing the allocation strategy requires an
-    #      infrastructure update of the compute environment. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute
-    #       environments</a> in the <i>Batch User Guide</i>. <code>BEST_FIT</code> isn't
-    #      supported when updating a compute environment.</p>
+    #    infrastructure update of the compute environment. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute
+    #    environments</a> in the <i>Batch User Guide</i>. <code>BEST_FIT</code> isn't
+    #    supported when updating a compute environment.</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
     #            </note>
@@ -756,6 +955,27 @@ module Aws::Batch
     #         of the jobs in the queue. Its preference is for instance types with lower cost vCPUs. If
     #         additional instances of the previously selected instance types aren't available, Batch
     #         selects new instance types.</p>
+    #               </dd>
+    #               <dt>BEST_FIT_PROGRESSIVE_ORDERED</dt>
+    #               <dd>
+    #                  <important>
+    #                     <p>This is an advanced allocation strategy only for customers who want to control which
+    #          instance types are preferred during scaling.</p>
+    #                     <p>Placing large instance types at the top of the list may result in <b>over-provisioning</b> for
+    #          small jobs. Placing small instance types at the top may cause the compute environment to
+    #          reach Amazon EC2 instance count limits before reaching <code>maxvCpus</code>.</p>
+    #                  </important>
+    #                  <p>Batch selects instance types in the order they appear in the
+    #         <code>instanceTypes</code> list. When an instance family is specified, sizes within that
+    #         family are expanded using <code>BEST_FIT_PROGRESSIVE</code> logic—preferring sizes that
+    #         best fit the jobs, with larger sizes as fallback. Instance types that cannot meet the resource
+    #         requirements of the jobs are skipped. This strategy is only available for On-Demand Instance
+    #         (<code>EC2</code>) compute resources.</p>
+    #                  <p>If an instance family and an explicit instance type from that family both appear in
+    #         <code>instanceTypes</code>, the explicit type takes its listed position and is excluded from
+    #         the family expansion. For example, in <code>["m7a.4xlarge", "m7a", "m6a"]</code>,
+    #         <code>m7a.4xlarge</code> is always placed first and is excluded from the <code>m7a</code>
+    #         family expansion.</p>
     #               </dd>
     #               <dt>SPOT_CAPACITY_OPTIMIZED</dt>
     #               <dd>
@@ -771,12 +991,30 @@ module Aws::Batch
     #         possible price. This allocation strategy is only available for Spot Instance compute
     #         resources.</p>
     #               </dd>
+    #               <dt>SPOT_CAPACITY_OPTIMIZED_PRIORITIZED</dt>
+    #               <dd>
+    #                  <important>
+    #                     <p>This is an advanced allocation strategy for customers who want to influence instance
+    #          type selection during scaling. This strategy optimizes for <b>capacity
+    #          first</b>, and honors instance type priorities on a best-effort basis (priorities are
+    #          honored when they do not significantly reduce available Spot capacity).</p>
+    #                     <p>Placing large instance types at the top of the list may result in <b>over-provisioning</b> for
+    #          small jobs. Placing small instance types at the top may cause the compute environment to
+    #          reach Amazon EC2 instance count limits before reaching <code>maxvCpus</code>.</p>
+    #                  </important>
+    #                  <p>Batch selects instance types in the order they appear in the
+    #         <code>instanceTypes</code> list, but <b>optimizes for capacity
+    #         first</b>. The customer-defined priority is honored on a best-effort basis. When Spot
+    #         Instance capacity pools are similarly available, priority order is respected. When capacity is
+    #         constrained, Batch selects from the most available pools regardless of priority to minimize
+    #         the likelihood of Spot Instance interruptions. This strategy is only available for Spot
+    #         Instance compute resources.</p>
+    #               </dd>
     #            </dl>
-    #            <p>With <code>BEST_FIT_PROGRESSIVE</code>,<code>SPOT_CAPACITY_OPTIMIZED</code> and
-    #       <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code> (recommended) strategies using On-Demand or Spot Instances, 
-    #       and the <code>BEST_FIT</code> strategy using Spot Instances, Batch might need to exceed
-    #       <code>maxvCpus</code> to meet your capacity requirements. In this event, Batch never exceeds
-    #       <code>maxvCpus</code> by more than a single instance.</p>
+    #            <p>With any allocation strategy except <code>BEST_FIT</code> using On-Demand
+    #       (<code>EC2</code>) compute resources, Batch might need to exceed <code>maxvCpus</code> to meet your
+    #       capacity requirements. In this event, Batch never exceeds <code>maxvCpus</code> by more than
+    #       a single instance.</p>
     #   @return [String]
     # @!attribute instance_types
     #   <p>The instances types that can be launched. You can specify instance families to launch any
@@ -802,29 +1040,24 @@ module Aws::Batch
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Starting on 11/01/2025 the behavior of <code>optimal</code> is going to be changed to
-    #       match <code>default_x86_64</code>.
-    #       
-    #       During the change your instance families could be updated to a newer
-    #       generation.
-    #       You do not need to perform any actions for the upgrade to
-    #       happen. For more information about change, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/optimal-default-instance-troubleshooting.html">Optimal instance type configuration to
-    #        receive automatic instance family updates</a>.</p>
+    #               <p>Starting on 11/01/2025 the behavior of <code>optimal</code> is going to be changed to match
+    #        <code>default_x86_64</code>.  During the change your instance families could be updated to a
+    #       newer generation. You do not need to perform any actions for the upgrade to happen. For more
+    #       information about change, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/optimal-default-instance-troubleshooting.html">Optimal instance type configuration to receive automatic instance family
+    #       updates</a>.</p>
     #            </note>
     #            <note>
-    #               <p>Instance family availability varies by
-    #       Amazon Web Services Region.
-    #       For example, some Amazon Web Services Regions may not have any fourth generation instance families
-    #       but have fifth and sixth generation instance families.</p>
-    #               <p>When using <code>default_x86_64</code> or <code>default_arm64</code>
-    #       instance bundles, Batch selects instance families based on a balance of
-    #       cost-effectiveness and performance. While newer generation instances often provide
-    #       better price-performance, Batch may choose an earlier generation instance family
-    #       if it provides the optimal combination of availability, cost, and performance for
-    #       your workload. For example, in an
-    #       Amazon Web Services Region
-    #       where both c6i and c7i instances are available, Batch might select c6i instances
-    #       if they offer better cost-effectiveness for your specific job requirements. For more information on Batch instance types and Amazon Web Services Region availability, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/instance-type-compute-table.html">Instance type compute table</a> in the <i>Batch User Guide</i>.</p>
+    #               <p>Instance family availability varies by Amazon Web Services Region. For example, some Amazon Web Services Regions may not have any fourth generation instance families but have fifth and
+    #       sixth generation instance families.</p>
+    #               <p>When using <code>default_x86_64</code> or <code>default_arm64</code> instance bundles,
+    #       Batch selects instance families based on a balance of cost-effectiveness and performance.
+    #       While newer generation instances often provide better price-performance, Batch may choose an
+    #       earlier generation instance family if it provides the optimal combination of availability, cost,
+    #       and performance for your workload. For example, in an Amazon Web Services Region where both c6i
+    #       and c7i instances are available, Batch might select c6i instances if they offer better
+    #       cost-effectiveness for your specific job requirements. For more information on Batch instance
+    #       types and Amazon Web Services Region availability, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/instance-type-compute-table.html">Instance
+    #        type compute table</a> in the <i>Batch User Guide</i>.</p>
     #               <p>Batch periodically updates your instances in default bundles to newer,
     #       more cost-effective options. Updates happen automatically without requiring any
     #       action from you. Your workloads continue running during updates with no interruption
@@ -927,7 +1160,7 @@ module Aws::Batch
     # @!attribute ec2_configuration
     #   <p>Provides information used to select Amazon Machine Images (AMIs) for Amazon EC2 instances in the
     #      compute environment. If <code>Ec2Configuration</code> isn't specified, the default is
-    #       <code>ECS_AL2</code>.</p>
+    #       <code>ECS_AL2023</code> for EC2 (ECS) compute environments and <code>EKS_AL2023</code> for EKS compute environments.</p>
     #            <p>When updating a compute environment, changing this setting requires an infrastructure update
     #      of the compute environment. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute environments</a> in the
     #       <i>Batch User Guide</i>. To remove the Amazon EC2 configuration and any custom AMI ID
@@ -955,14 +1188,16 @@ module Aws::Batch
     #   @return [Boolean]
     # @!attribute type
     #   <p>The type of compute environment: <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>,
-    #      or <code>FARGATE_SPOT</code>. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute environments</a> in the
-    #       <i>Batch User Guide</i>.</p>
+    #      <code>FARGATE_SPOT</code>, or <code>ECS_MANAGED_INSTANCES</code>. For more information, see
+    #      <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute
+    #       environments</a> in the <i>Batch User Guide</i>.</p>
     #            <p> If you choose <code>SPOT</code>, you must also specify an Amazon EC2 Spot Fleet role with the
     #       <code>spotIamFleetRole</code> parameter. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 spot fleet role</a> in the
     #       <i>Batch User Guide</i>.</p>
     #            <p>When updating a compute environment, changing the type of a compute environment requires an
     #      infrastructure update of the compute environment. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute
     #       environments</a> in the <i>Batch User Guide</i>.</p>
+    #            <p>You cannot change the type to or from <code>ECS_MANAGED_INSTANCES</code>.</p>
     #   @return [String]
     # @!attribute image_id
     #   <p>The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
@@ -979,11 +1214,28 @@ module Aws::Batch
     #               <p>The AMI that you choose for a compute environment must match the architecture of the instance types that
     #       you intend to use for that compute environment. For example, if your compute environment uses A1 instance types,
     #       the compute resource AMI that you choose must support ARM instances. Amazon ECS vends both x86 and ARM versions of the
-    #       Amazon ECS-optimized Amazon Linux 2 AMI. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html">Amazon ECS-optimized
-    #       Amazon Linux 2 AMI</a>
+    #       Amazon ECS-optimized Amazon Linux 2023 AMI. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html">Amazon ECS-optimized
+    #       Amazon Linux 2023 AMI</a>
     #       in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #            </note>
     #   @return [String]
+    # @!attribute scaling_policy
+    #   <p>The scaling policy configuration for the compute environment.</p>
+    #            <note>
+    #               <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>
+    #            </note>
+    #   @return [Types::ComputeScalingPolicy]
+    # @!attribute managed_instances_provider
+    #   <p>The updated configuration for the Amazon ECS Managed Instances capacity provider. This parameter
+    #      is only valid when the compute environment type is <code>ECS_MANAGED_INSTANCES</code>. You
+    #      cannot change <code>capacityOptionType</code> or <code>fipsEnabled</code> on update.</p>
+    #   @return [Types::UpdateManagedInstancesProviderConfiguration]
+    # @!attribute capacity_tags
+    #   <p>The updated tags to apply to the Amazon ECS capacity provider and Amazon EC2 instances. This
+    #      parameter is only valid for <code>ECS_MANAGED_INSTANCES</code> compute environments. You must
+    #      have the <code>batch:SetCapacityTags</code> permission on the compute environment resource to
+    #      use this parameter.</p>
+    #   @return [Hash<String, String>]
     class ComputeResourceUpdate < Struct.new(
       nil,
       :minv_cpus,
@@ -1003,6 +1255,42 @@ module Aws::Batch
       :update_to_latest_image_version,
       :type,
       :image_id,
+      :scaling_policy,
+      :managed_instances_provider,
+      :capacity_tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that represents a scaling policy for a compute environment.</p>
+    # @!attribute min_scale_down_delay_minutes
+    #   <p>The minimum time (in minutes) that Batch keeps instances running in the compute environment
+    #      after their jobs complete. For each instance, the delay period begins when the last job finishes.
+    #      If no new jobs are placed on the instance during this delay, Batch terminates the instance once
+    #      the delay expires.</p>
+    #            <p>Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to unset and disable the scale down delay.</p>
+    #            <note>
+    #               <p>Idle instances retained during the scale-down delay period are billable at standard EC2 pricing.</p>
+    #            </note>
+    #            <note>
+    #               <p>The scale down delay does not apply to:</p>
+    #               <ul>
+    #                  <li>
+    #                     <p>Instances being replaced during infrastructure updates</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Newly launched instances that have not yet run any jobs</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Spot instances reclaimed due to interruption</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    class ComputeScalingPolicy < Struct.new(
+      nil,
+      :min_scale_down_delay_minutes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1050,7 +1338,7 @@ module Aws::Batch
     #   <p>The amount of the consumable resource that is currently in use.</p>
     #   @return [Integer]
     # @!attribute resource_type
-    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be 
+    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be
     #               one of: </p>
     #            <ul>
     #               <li>
@@ -1086,7 +1374,7 @@ module Aws::Batch
     #      can specify the vCPU requirement for the job using <code>resourceRequirements</code>, but you
     #      can't specify the vCPU requirements in both the <code>vcpus</code> and
     #       <code>resourceRequirements</code> object. This parameter maps to <code>CpuShares</code> in the
-    #      <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the
+    #      <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the
     #       <code>--cpu-shares</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. Each
     #      vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU. This is required but
     #      can be specified in several places. It must be specified for each node at least once.</p>
@@ -1128,7 +1416,7 @@ module Aws::Batch
     # @!attribute readonly_root_filesystem
     #   <p>When this parameter is true, the container is given read-only access to its root file
     #      system. This parameter maps to <code>ReadonlyRootfs</code> in the
-    #      <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the
+    #      <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the
     #       <code>--read-only</code> option to <a href="https://docs.docker.com/engine/reference/commandline/run/">
     #                  <code>docker
     #      run</code>
@@ -1136,7 +1424,7 @@ module Aws::Batch
     #   @return [Boolean]
     # @!attribute ulimits
     #   <p>A list of <code>ulimit</code> values to set in the container. This parameter maps to
-    #       <code>Ulimits</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a>
+    #       <code>Ulimits</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a>
     #      and the <code>--ulimit</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker
     #      run</a>.</p>
     #            <note>
@@ -1154,7 +1442,7 @@ module Aws::Batch
     #   @return [Boolean]
     # @!attribute user
     #   <p>The user name to use inside the container. This parameter maps to <code>User</code> in the
-    #      <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--user</code>
+    #      <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>--user</code>
     #      option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p>
     #   @return [String]
     # @!attribute exit_code
@@ -1195,8 +1483,8 @@ module Aws::Batch
     #   @return [Types::LinuxParameters]
     # @!attribute log_configuration
     #   <p>The log configuration specification for the container.</p>
-    #            <p>This parameter maps to <code>LogConfig</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a>
-    #      section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--log-driver</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. By default, containers use the same logging
+    #            <p>This parameter maps to <code>LogConfig</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a>
+    #      section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>--log-driver</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. By default, containers use the same logging
     #      driver that the Docker daemon uses. However, the container might use a different logging driver
     #      than the Docker daemon by specifying a log driver with this parameter in the container
     #      definition. To use a different logging driver for a container, the log system must be configured
@@ -1358,7 +1646,7 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Container properties are used for Amazon ECS based job definitions. These properties to describe the 
+    # <p>Container properties are used for Amazon ECS based job definitions. These properties to describe the
     #    container that's launched as part of a job.</p>
     # @!attribute image
     #   <p>Required. The image used to start a container. This string is passed directly to the
@@ -1369,7 +1657,7 @@ module Aws::Batch
     #               </code>.
     #      It can be 255 characters long. It can contain uppercase and lowercase letters, numbers,
     #    hyphens (-), underscores (_), colons (:), periods (.), forward slashes (/), and number signs (#). This parameter maps to <code>Image</code> in the
-    #      <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>IMAGE</code>
+    #      <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>IMAGE</code>
     #      parameter of <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p>
     #            <note>
     #               <p>Docker image architecture must match the processor architecture of the compute resources
@@ -1407,7 +1695,7 @@ module Aws::Batch
     #      For jobs running on Amazon EC2 resources, it specifies the number of vCPUs reserved for the
     #      job.</p>
     #            <p>Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to <code>CpuShares</code>
-    #      in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the
+    #      in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the
     #       <code>--cpu-shares</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. The
     #      number of vCPUs must be specified but can be specified in several places. You must specify it at
     #      least once for each node.</p>
@@ -1426,7 +1714,7 @@ module Aws::Batch
     #   @return [Integer]
     # @!attribute command
     #   <p>The command that's passed to the container. This parameter maps to <code>Cmd</code> in the
-    #      <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>COMMAND</code>
+    #      <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>COMMAND</code>
     #      parameter to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. For more information, see
     #       <a href="https://docs.docker.com/engine/reference/builder/#cmd">https://docs.docker.com/engine/reference/builder/#cmd</a>.</p>
     #   @return [Array<String>]
@@ -1445,7 +1733,7 @@ module Aws::Batch
     #   @return [Array<Types::Volume>]
     # @!attribute environment
     #   <p>The environment variables to pass to a container. This parameter maps to <code>Env</code> in
-    #      the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the
+    #      the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the
     #       <code>--env</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p>
     #            <important>
     #               <p>We don't recommend using plaintext environment variables for sensitive information, such as
@@ -1458,21 +1746,21 @@ module Aws::Batch
     #   @return [Array<Types::KeyValuePair>]
     # @!attribute mount_points
     #   <p>The mount points for data volumes in your container. This parameter maps to
-    #       <code>Volumes</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a>
+    #       <code>Volumes</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a>
     #      and the <code>--volume</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker
     #      run</a>.</p>
     #   @return [Array<Types::MountPoint>]
     # @!attribute readonly_root_filesystem
     #   <p>When this parameter is true, the container is given read-only access to its root file
     #      system. This parameter maps to <code>ReadonlyRootfs</code> in the
-    #      <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the
+    #      <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the
     #       <code>--read-only</code> option to <code>docker run</code>.</p>
     #   @return [Boolean]
     # @!attribute privileged
     #   <p>When this parameter is true, the container is given elevated permissions on the host
     #      container instance (similar to the <code>root</code> user). This parameter maps to
-    #       <code>Privileged</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the
-    #      <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--privileged</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. The default value is false.</p>
+    #       <code>Privileged</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the
+    #      <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>--privileged</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. The default value is false.</p>
     #            <note>
     #               <p>This parameter isn't applicable to jobs that are running on Fargate resources and
     #       shouldn't be provided, or specified as false.</p>
@@ -1480,7 +1768,7 @@ module Aws::Batch
     #   @return [Boolean]
     # @!attribute ulimits
     #   <p>A list of <code>ulimits</code> to set in the container. This parameter maps to
-    #       <code>Ulimits</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a>
+    #       <code>Ulimits</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a>
     #      and the <code>--ulimit</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker
     #      run</a>.</p>
     #            <note>
@@ -1490,7 +1778,7 @@ module Aws::Batch
     #   @return [Array<Types::Ulimit>]
     # @!attribute user
     #   <p>The user name to use inside the container. This parameter maps to <code>User</code> in the
-    #      <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--user</code>
+    #      <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>--user</code>
     #      option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p>
     #   @return [String]
     # @!attribute instance_type
@@ -1511,8 +1799,8 @@ module Aws::Batch
     #   @return [Types::LinuxParameters]
     # @!attribute log_configuration
     #   <p>The log configuration specification for the container.</p>
-    #            <p>This parameter maps to <code>LogConfig</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a>
-    #      section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--log-driver</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. By default, containers use the same logging
+    #            <p>This parameter maps to <code>LogConfig</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a>
+    #      section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>--log-driver</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. By default, containers use the same logging
     #      driver that the Docker daemon uses. However the container might use a different logging driver
     #      than the Docker daemon by specifying a log driver with this parameter in the container
     #      definition. To use a different logging driver for a container, the log system must be configured
@@ -1621,7 +1909,9 @@ module Aws::Batch
     #         more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the <i>Batch User Guide</i>.</p>
     #   @return [String]
     # @!attribute state
-    #   <p>The state of the compute environment. If the state is <code>ENABLED</code>, then the
+    #   <p>The state of the compute environment. A compute environment must be created in the
+    #         <code>ENABLED</code> state.</p>
+    #            <p>If the state is <code>ENABLED</code>, then the
     #         compute environment accepts jobs from a queue and can scale out automatically based on
     #         queues.</p>
     #            <p>If the state is <code>ENABLED</code>, then the Batch scheduler can attempt to place jobs
@@ -1634,8 +1924,7 @@ module Aws::Batch
     #         don't scale out. </p>
     #            <note>
     #               <p>Compute environments in a <code>DISABLED</code> state may continue to incur billing
-    #           charges. To prevent additional charges, turn off and then delete the compute environment.
-    #           For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state">State</a> in the <i>Batch User Guide</i>.</p>
+    #           charges, for example, if they have running instances due to jobs that are still executing or a non-zero <code>minvCpus</code> setting. To prevent additional charges, disable and delete the compute environment.</p>
     #            </note>
     #            <p>When an instance is idle, the instance scales down to the <code>minvCpus</code> value.
     #         However, the instance size doesn't change. For example, consider a <code>c5.8xlarge</code>
@@ -1666,6 +1955,9 @@ module Aws::Batch
     #           default for your compute environment unless you specify a different role here. If the
     #           Batch service-linked role doesn't exist in your account, and no role is specified here,
     #           the service attempts to create the Batch service-linked role in your account.</p>
+    #               <p>This automatic service-linked role creation only applies to <code>MANAGED</code> compute
+    #           environments. For <code>UNMANAGED</code> compute environments, you must explicitly specify a
+    #           <code>serviceRole</code>.</p>
     #            </important>
     #            <p>If your specified role has a path other than <code>/</code>, then you must specify either
     #         the full role ARN (recommended) or prefix the role name with the path. For example, if a
@@ -1692,12 +1984,18 @@ module Aws::Batch
     #   <p>The details for the Amazon EKS cluster that supports the compute environment.</p>
     #            <note>
     #               <p>To create a compute environment that uses EKS resources, the caller must have
-    #           permissions to call <code>eks:DescribeCluster</code>.</p>
+    #           permissions to call <code>eks:DescribeCluster</code>. Additional Amazon EKS permissions are
+    #           required for Batch to manage an access entry on the cluster; see <a href="https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html">Amazon EKS access entry
+    #           authentication</a> in the <i>Batch User Guide</i>.</p>
     #            </note>
     #   @return [Types::EksConfiguration]
     # @!attribute context
     #   <p>Reserved.</p>
     #   @return [String]
+    # @!attribute ecs_settings
+    #   <p>The Amazon ECS settings for the compute environment. These settings control CloudWatch
+    #         Container Insights collection for the compute environment.</p>
+    #   @return [Types::EcsSettings]
     class CreateComputeEnvironmentRequest < Struct.new(
       nil,
       :compute_environment_name,
@@ -1709,6 +2007,7 @@ module Aws::Batch
       :tags,
       :eks_configuration,
       :context,
+      :ecs_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1737,7 +2036,7 @@ module Aws::Batch
     #   <p>The total amount of the consumable resource that is available. Must be non-negative.</p>
     #   @return [Integer]
     # @!attribute resource_type
-    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be 
+    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be
     #               one of: </p>
     #            <ul>
     #               <li>
@@ -1868,13 +2167,74 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute quota_share_name
+    #   <p>The name of the quota share. It can be up to 128 characters long. It can contain uppercase and
+    #         lowercase letters, numbers, hyphens (-), and underscores (_).</p>
+    #   @return [String]
+    # @!attribute job_queue
+    #   <p>The Batch job queue associated with the quota share. This can be the job queue name or ARN.
+    #       A job queue must be in the <code>VALID</code> state before you can associate it with a quota share.</p>
+    #   @return [String]
+    # @!attribute capacity_limits
+    #   <p>A list that specifies the quantity and type of compute capacity allocated to the quota share. </p>
+    #   @return [Array<Types::QuotaShareCapacityLimit>]
+    # @!attribute resource_sharing_configuration
+    #   <p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>
+    #   @return [Types::QuotaShareResourceSharingConfiguration]
+    # @!attribute preemption_configuration
+    #   <p>Specifies the preemption behavior for jobs in a quota share.</p>
+    #   @return [Types::QuotaSharePreemptionConfiguration]
+    # @!attribute state
+    #   <p>The state of the quota share. If the quota share is <code>ENABLED</code>, it is able to accept jobs.
+    #       If the quota share is <code>DISABLED</code>, new jobs won't be accepted but jobs already submitted can finish.
+    #       The default state is <code>ENABLED</code>.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags that you apply to the quota share to help you categorize and organize your
+    #         resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html">Tagging your Batch resources</a>
+    #         in <i>Batch User Guide</i>.</p>
+    #   @return [Hash<String, String>]
+    class CreateQuotaShareRequest < Struct.new(
+      nil,
+      :quota_share_name,
+      :job_queue,
+      :capacity_limits,
+      :resource_sharing_configuration,
+      :preemption_configuration,
+      :state,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quota_share_name
+    #   <p>The name of the quota share.</p>
+    #   @return [String]
+    # @!attribute quota_share_arn
+    #   <p>The Amazon Resource Name (ARN) of the quota share.</p>
+    #   @return [String]
+    class CreateQuotaShareResponse < Struct.new(
+      nil,
+      :quota_share_name,
+      :quota_share_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains the parameters for <code>CreateSchedulingPolicy</code>.</p>
     # @!attribute name
     #   <p>The name of the fair-share scheduling policy. It can be up to 128 letters long. It can contain
     #         uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).</p>
     #   @return [String]
+    # @!attribute quota_share_policy
+    #   <p>The quota share scheduling policy details. Only one of fairsharePolicy or quotaSharePolicy can be set.
+    #           Once set, this policy type cannot be removed or changed to a fairSharePolicy.</p>
+    #   @return [Types::QuotaSharePolicy]
     # @!attribute fairshare_policy
-    #   <p>The fair-share scheduling policy details.</p>
+    #   <p>The fair-share scheduling policy details. Only one of fairsharePolicy or quotaSharePolicy can be set.
+    #       Once set, this policy type cannot be removed or changed to a quotaSharePolicy.</p>
     #   @return [Types::FairsharePolicy]
     # @!attribute tags
     #   <p>The tags that you apply to the scheduling policy to help you categorize and organize your
@@ -1885,6 +2245,7 @@ module Aws::Batch
     class CreateSchedulingPolicyRequest < Struct.new(
       nil,
       :name,
+      :quota_share_policy,
       :fairshare_policy,
       :tags,
       keyword_init: true
@@ -2003,6 +2364,24 @@ module Aws::Batch
     end
 
     class DeleteJobQueueResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quota_share_arn
+    #   <p>The Amazon Resource Name (ARN) of the quota share.</p>
+    #   @return [String]
+    class DeleteQuotaShareRequest < Struct.new(
+      nil,
+      :quota_share_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteQuotaShareResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -2147,7 +2526,7 @@ module Aws::Batch
     #   <p>The amount of the consumable resource that is currently available to use.</p>
     #   @return [Integer]
     # @!attribute resource_type
-    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be 
+    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be
     #               one of: </p>
     #            <ul>
     #               <li>
@@ -2326,6 +2705,60 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute quota_share_arn
+    #   <p>The Amazon Resource Name (ARN) of the quota share.</p>
+    #   @return [String]
+    class DescribeQuotaShareRequest < Struct.new(
+      nil,
+      :quota_share_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quota_share_name
+    #   <p>The name of the quota share.</p>
+    #   @return [String]
+    # @!attribute quota_share_arn
+    #   <p>The Amazon Resource Name (ARN) of the quota share.</p>
+    #   @return [String]
+    # @!attribute job_queue_arn
+    #   <p>The ARN of the job queue associated with the quota share.</p>
+    #   @return [String]
+    # @!attribute capacity_limits
+    #   <p>A list that specifies the quantity and type of compute capacity allocated to the quota share.</p>
+    #   @return [Array<Types::QuotaShareCapacityLimit>]
+    # @!attribute resource_sharing_configuration
+    #   <p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>
+    #   @return [Types::QuotaShareResourceSharingConfiguration]
+    # @!attribute preemption_configuration
+    #   <p>Specifies the preemption behavior for jobs in a quota share.</p>
+    #   @return [Types::QuotaSharePreemptionConfiguration]
+    # @!attribute state
+    #   <p>The state of the quota share.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the quota share.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The tags applied to the quota share.</p>
+    #   @return [Hash<String, String>]
+    class DescribeQuotaShareResponse < Struct.new(
+      nil,
+      :quota_share_name,
+      :quota_share_arn,
+      :job_queue_arn,
+      :capacity_limits,
+      :resource_sharing_configuration,
+      :preemption_configuration,
+      :state,
+      :status,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains the parameters for <code>DescribeSchedulingPolicies</code>.</p>
     # @!attribute arns
     #   <p>A list of up to 100 scheduling policy Amazon Resource Name (ARN) entries.</p>
@@ -2401,6 +2834,11 @@ module Aws::Batch
     # @!attribute attempts
     #   <p>A list of job attempts associated with the service job.</p>
     #   @return [Array<Types::ServiceJobAttemptDetail>]
+    # @!attribute capacity_usage
+    #   <p>The configured capacity for the service job, such as the number of instances. The
+    #               number of instances should be the same value as the
+    #                   <code>serviceRequestPayload.InstanceCount</code> field.</p>
+    #   @return [Array<Types::ServiceJobCapacityUsageDetail>]
     # @!attribute created_at
     #   <p>The Unix timestamp (in milliseconds) for when the service job was created.</p>
     #   @return [Integer]
@@ -2425,6 +2863,11 @@ module Aws::Batch
     # @!attribute retry_strategy
     #   <p>The retry strategy to use for failed service jobs that are submitted with this service job.</p>
     #   @return [Types::ServiceJobRetryStrategy]
+    # @!attribute scheduled_at
+    #   <p>The Unix timestamp (in milliseconds) for when the service job was scheduled. This
+    #               represents when the service job was dispatched to SageMaker and the service job transitioned to the
+    #                   <code>SCHEDULED</code> state.</p>
+    #   @return [Integer]
     # @!attribute scheduling_priority
     #   <p>The scheduling priority of the service job. </p>
     #   @return [Integer]
@@ -2437,6 +2880,16 @@ module Aws::Batch
     # @!attribute share_identifier
     #   <p>The share identifier for the service job. This is used for fair-share scheduling.</p>
     #   @return [String]
+    # @!attribute quota_share_name
+    #   <p>The name of the quota share that the service job is associated with.</p>
+    #   @return [String]
+    # @!attribute preemption_configuration
+    #   <p>Specifies the service job behavior when preempted.</p>
+    #   @return [Types::ServiceJobPreemptionConfiguration]
+    # @!attribute preemption_summary
+    #   <p>Summarizes the preemptions of the service job. This field appears on a service job
+    #           when it has been preempted.</p>
+    #   @return [Types::ServiceJobPreemptionSummary]
     # @!attribute started_at
     #   <p>The Unix timestamp (in milliseconds) for when the service job was started.</p>
     #   @return [Integer]
@@ -2458,6 +2911,7 @@ module Aws::Batch
     class DescribeServiceJobResponse < Struct.new(
       nil,
       :attempts,
+      :capacity_usage,
       :created_at,
       :is_terminated,
       :job_arn,
@@ -2466,10 +2920,14 @@ module Aws::Batch
       :job_queue,
       :latest_attempt,
       :retry_strategy,
+      :scheduled_at,
       :scheduling_priority,
       :service_request_payload,
       :service_job_type,
       :share_identifier,
+      :quota_share_name,
+      :preemption_configuration,
+      :preemption_summary,
       :started_at,
       :status,
       :status_reason,
@@ -2581,7 +3039,8 @@ module Aws::Batch
 
     # <p>Provides information used to select Amazon Machine Images (AMIs) for instances in the
     #    compute environment. If <code>Ec2Configuration</code> isn't specified, the default is
-    #     <code>ECS_AL2</code> (<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami">Amazon Linux 2</a>).</p>
+    #     <code>ECS_AL2023</code> (<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Amazon Linux 2023</a>) for EC2 (ECS) compute environments and <code>EKS_AL2023</code> (<a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html">Amazon EKS-optimized Amazon Linux 2023
+    #     AMI</a>) for EKS compute environments.</p>
     #          <note>
     #             <p>This object isn't applicable to jobs that are running on Fargate resources.</p>
     #          </note>
@@ -2591,36 +3050,38 @@ module Aws::Batch
     #            <dl>
     #               <dt>ECS</dt>
     #               <dd>
-    #                  <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami">Amazon ECS-optimized Amazon Linux 2 AMI</a> (<code>ECS_AL2</code>) is used. If a new image type is
+    #                  <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Amazon Linux 2023 AMI</a> (<code>ECS_AL2023</code>) is used. If a new image type is
     #         specified in an update, but neither an <code>imageId</code> nor a <code>imageIdOverride</code>
     #         parameter is specified, then the latest Amazon ECS optimized AMI for that image type that's
     #         supported by Batch is used.</p>
     #                  <important>
-    #                     <p>Amazon Web Services will end support for Amazon ECS optimized AL2-optimized and AL2-accelerated AMIs. Starting in January 2026, Batch will change
-    #          the default AMI for new Amazon ECS compute environments from Amazon Linux 2 to Amazon Linux 2023.
-    #          We recommend migrating Batch Amazon ECS compute environments to Amazon Linux 2023 to maintain
-    #          optimal performance and security. For more information on upgrading from AL2 to AL2023, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/ecs-migration-2023.html">How to migrate
+    #                     <p>Amazon Web Services is ending support for Amazon ECS Amazon Linux 2-optimized and accelerated AMIs on June 30,
+    #          2026. On January 12, 2026, Batch changed the default AMI for new Amazon ECS compute environments
+    #          from Amazon Linux 2 to Amazon Linux 2023. Effective June 30, 2026, Batch will block creation
+    #          of new Amazon ECS compute environments using Batch-provided Amazon Linux 2 AMIs. We strongly recommend
+    #          migrating your existing Batch Amazon ECS compute environments to Amazon Linux 2023 prior to June 30,
+    #          2026. For more information on upgrading from AL2 to AL2023, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/ecs-migration-2023.html">How to migrate
     #           from ECS AL2 to ECS AL2023</a> in the <i>Batch User Guide</i>.</p>
     #                  </important>
     #                  <dl>
     #                     <dt>ECS_AL2</dt>
     #                     <dd>
     #                        <p>
-    #                           <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami">Amazon Linux
-    #            2</a>: Default for all non-GPU instance families.</p>
+    #                           <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon Linux
+    #            2</a>: Used for non-GPU instance families.</p>
     #                     </dd>
     #                     <dt>ECS_AL2_NVIDIA</dt>
     #                     <dd>
     #                        <p>
     #                           <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami">Amazon Linux 2
-    #             (GPU)</a>: Default for all GPU instance families (for example <code>P4</code> and
-    #             <code>G4</code>) and can be used for all non Amazon Web Services Graviton-based instance types.</p>
+    #             (GPU)</a>: Used for GPU instance families (for example <code>P4</code> and
+    #             <code>G4</code>) and non Amazon Web Services Graviton-based instance types.</p>
     #                     </dd>
     #                     <dt>ECS_AL2023</dt>
     #                     <dd>
     #                        <p>
-    #                           <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon Linux 2023</a>: Batch
-    #            supports Amazon Linux 2023.</p>
+    #                           <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon Linux 2023</a>: Default
+    #            for all non-GPU instance families.</p>
     #                        <note>
     #                           <p>Amazon Linux 2023 does not support <code>A1</code> instances.</p>
     #                        </note>
@@ -2629,7 +3090,7 @@ module Aws::Batch
     #                     <dd>
     #                        <p>
     #                           <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami">Amazon Linux 2023
-    #             (GPU)</a>: For all GPU instance families and can be used for all non Amazon Web Services Graviton-based instance types.</p>
+    #             (GPU)</a>: Default for all GPU instance families and can be used for all non Amazon Web Services Graviton-based instance types.</p>
     #                        <note>
     #                           <p>ECS_AL2023_NVIDIA doesn't support <code>p3</code> and <code>g3</code> instance types.</p>
     #                        </note>
@@ -2638,34 +3099,30 @@ module Aws::Batch
     #               </dd>
     #               <dt>EKS</dt>
     #               <dd>
-    #                  <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html">Amazon EKS-optimized Amazon Linux
-    #          AMI</a> (<code>EKS_AL2</code>) is used. If a new image type is specified in an update,
+    #                  <p>If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html">Amazon EKS-optimized Amazon Linux 2023
+    #          AMI</a> (<code>EKS_AL2023</code>) is used. If a new image type is specified in an update,
     #         but neither an <code>imageId</code> nor a <code>imageIdOverride</code> parameter is specified,
     #         then the latest Amazon EKS optimized AMI for that image type that Batch supports is used.</p>
     #                  <important>
-    #                     <p>Starting end of October 2025 Amazon EKS optimized Amazon Linux 2023 AMIs will be the
-    #          default on Batch for EKS versions prior to 1.33. Starting from Kubernetes version 1.33,
-    #          EKS optimized Amazon Linux 2023 AMIs will be the default when it becomes supported on
-    #          Batch.</p>
-    #                     <p>Amazon Web Services will end
-    #          support for Amazon EKS AL2-optimized and AL2-accelerated AMIs, starting 11/26/25. You can continue
-    #          using Batch-provided Amazon EKS optimized Amazon Linux 2 AMIs on your Amazon EKS compute
-    #          environments beyond the 11/26/25 end-of-support date, these compute environments will no
-    #          longer receive any new software updates, security patches, or bug fixes from
-    #          Amazon Web Services. For more information on upgrading from AL2 to AL2023, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/eks-migration-2023.html">How to upgrade from EKS AL2 to EKS AL2023</a> in the <i>Batch User Guide</i>.</p>
+    #                     <p>Amazon Linux 2023 AMIs are the
+    #          default on Batch for Amazon EKS.</p>
+    #                     <p>Amazon Web Services ended support for Amazon EKS AL2-optimized and AL2-accelerated AMIs on November 26,
+    #          2025. Batch Amazon EKS compute environments using Amazon Linux 2 will no longer receive software
+    #          updates, security patches, or bug fixes from Amazon Web Services. We recommend migrating to Amazon Linux
+    #          2023. For more information on upgrading from AL2 to AL2023, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/eks-migration-2023.html">How to upgrade from EKS AL2 to EKS AL2023</a> in the <i>Batch User Guide</i>.</p>
     #                  </important>
     #                  <dl>
     #                     <dt>EKS_AL2</dt>
     #                     <dd>
     #                        <p>
     #                           <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html">Amazon
-    #             Linux 2</a>: Default for all non-GPU instance families.</p>
+    #             Linux 2</a>: Used for non-GPU instance families.</p>
     #                     </dd>
     #                     <dt>EKS_AL2_NVIDIA</dt>
     #                     <dd>
     #                        <p>
     #                           <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html">Amazon
-    #             Linux 2 (accelerated)</a>: Default for all GPU instance families (for example,
+    #             Linux 2 (accelerated)</a>: Used for GPU instance families (for example,
     #             <code>P4</code> and <code>G4</code>) and can be used for all non Amazon Web Services Graviton-based
     #            instance types.</p>
     #                     </dd>
@@ -2673,7 +3130,7 @@ module Aws::Batch
     #                     <dd>
     #                        <p>
     #                           <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html">Amazon
-    #             Linux 2023</a>: Batch supports Amazon Linux 2023.</p>
+    #            Linux 2023</a>: Default for non-GPU instance families.</p>
     #                        <note>
     #                           <p>Amazon Linux 2023 does not support <code>A1</code> instances.</p>
     #                        </note>
@@ -2682,7 +3139,7 @@ module Aws::Batch
     #                     <dd>
     #                        <p>
     #                           <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html">Amazon
-    #             Linux 2023 (accelerated)</a>: GPU instance families and can be used for all non Amazon Web Services
+    #             Linux 2023 (accelerated)</a>: Default for GPU instance families and can be used for all non Amazon Web Services
     #            Graviton-based instance types.</p>
     #                     </dd>
     #                  </dl>
@@ -2697,10 +3154,45 @@ module Aws::Batch
     #               <p>The AMI that you choose for a compute environment must match the architecture of the instance types that
     #       you intend to use for that compute environment. For example, if your compute environment uses A1 instance types,
     #       the compute resource AMI that you choose must support ARM instances. Amazon ECS vends both x86 and ARM versions of the
-    #       Amazon ECS-optimized Amazon Linux 2 AMI. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html">Amazon ECS-optimized
-    #       Amazon Linux 2 AMI</a>
+    #       Amazon ECS-optimized Amazon Linux 2023 AMI. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html">Amazon ECS-optimized
+    #       Amazon Linux 2023 AMI</a>
     #       in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     #            </note>
+    #   @return [String]
+    # @!attribute batch_image_status
+    #   <p>The status of the Batch-provided default AMIs associated with the <code>imageType</code>.</p>
+    #            <p>The field only appears after the compute environment has begun scaling instances using the <code>imageType</code>. The field is not present when an image is specified in
+    #               <code>ComputeResources.imageId</code> (deprecated), the default launch template, or
+    #               <code>Ec2Configuration.imageIdOverride</code>. The field is also not present when the compute environment has a launch template override.
+    #
+    #
+    #               For more information on image selection, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/ami-selection-order.html">AMI selection order</a>.</p>
+    #            <note>
+    #               <p>This field is read-only and only appears in the <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_DescribeComputeEnvironments.html">DescribeComputeEnvironments</a> response.</p>
+    #            </note>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>LATEST</code> − Using the most recent AMI supported</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UPDATE_AVAILABLE</code> − An updated AMI is available</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>If a compute environment has multiple AMIs for the <code>imageType</code> and any one AMI has <code>UPDATE_AVAILABLE</code>, the status shows <code>UPDATE_AVAILABLE</code>.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>For compute environments that use <code>BEST_FIT</code> as their allocation strategy,
+    #                       you can perform a <a href="https://docs.aws.amazon.com/batch/latest/userguide/blue-green-updates.html">blue/green update</a> to update the AMI.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>For all other compute environments, you can perform an
+    #                       <a href="https://docs.aws.amazon.com/batch/latest/userguide/managing-ami-versions.html#updating-ami-versions">AMI version update</a> to update the AMI to the latest version.</p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute image_kubernetes_version
     #   <p>The Kubernetes version for the compute environment. If you don't specify a value, the latest
@@ -2710,6 +3202,7 @@ module Aws::Batch
       nil,
       :image_type,
       :image_id_override,
+      :batch_image_status,
       :image_kubernetes_version,
       keyword_init: true
     )
@@ -2753,6 +3246,40 @@ module Aws::Batch
     class EcsPropertiesOverride < Struct.new(
       nil,
       :task_properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon ECS settings for a compute environment, including the CloudWatch Container Insights
+    #    mode. Use this structure with <code>CreateComputeEnvironment</code> and
+    #    <code>UpdateComputeEnvironment</code>.</p>
+    # @!attribute container_insights
+    #   <p>Specifies the CloudWatch Container Insights mode for the compute environment. Valid values
+    #      are:</p>
+    #            <dl>
+    #               <dt>ENABLED</dt>
+    #               <dd>
+    #                  <p>Turns on standard Container Insights, which collects CPU, memory, disk, and network
+    #         utilization metrics for the compute environment.</p>
+    #               </dd>
+    #               <dt>ENHANCED</dt>
+    #               <dd>
+    #                  <p>Turns on enhanced Container Insights, which collects the standard metrics along with
+    #         additional per-task observability metrics.</p>
+    #               </dd>
+    #               <dt>DISABLED</dt>
+    #               <dd>
+    #                  <p>Turns off Container Insights for the compute environment.</p>
+    #               </dd>
+    #            </dl>
+    #            <p>If you don't specify a value, the default is <code>DISABLED</code>. For more information,
+    #      see <a href="https://docs.aws.amazon.com/batch/latest/userguide/cloudwatch-container-insights.html">Container Insights</a> in the
+    #      <i>Batch User Guide</i>.</p>
+    #   @return [String]
+    class EcsSettings < Struct.new(
+      nil,
+      :container_insights,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2802,7 +3329,8 @@ module Aws::Batch
     #   @return [Types::NetworkConfiguration]
     # @!attribute runtime_platform
     #   <p>An object that represents the compute environment architecture for Batch jobs on
-    #      Fargate.</p>
+    #      Fargate or Amazon ECS Managed Instances. Contains the operating system family and CPU architecture
+    #      of the task.</p>
     #   @return [Types::RuntimePlatform]
     # @!attribute volumes
     #   <p>A list of data volumes used in a job.</p>
@@ -2811,6 +3339,11 @@ module Aws::Batch
     #   <p>Determines whether execute command functionality is turned on for this task. If <code>true</code>, execute
     #               command functionality is turned on all the containers in the task.</p>
     #   @return [Boolean]
+    # @!attribute network_mode
+    #   <p>The network mode configured for the task. This field is populated for jobs running on Amazon ECS
+    #      Managed Instances (<code>MANAGED_INSTANCES</code> platform capability) and always returns
+    #      <code>host</code>.</p>
+    #   @return [String]
     class EcsTaskDetails < Struct.new(
       nil,
       :containers,
@@ -2826,6 +3359,7 @@ module Aws::Batch
       :runtime_platform,
       :volumes,
       :enable_execute_command,
+      :network_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2867,6 +3401,9 @@ module Aws::Batch
     #            <p>If no value is specified, then the IPC resource namespace sharing depends on the Docker
     #      daemon setting on the container instance. For more information, see <a href="https://docs.docker.com/engine/reference/run/#ipc-settings---ipc">IPC settings</a> in
     #      the Docker run reference.</p>
+    #            <note>
+    #               <p>This parameter is not supported for jobs that run on Fargate resources.</p>
+    #            </note>
     #   @return [String]
     # @!attribute task_role_arn
     #   <p>The Amazon Resource Name (ARN) that's associated with the Amazon ECS task.</p>
@@ -2889,11 +3426,16 @@ module Aws::Batch
     #   @return [String]
     # @!attribute network_configuration
     #   <p>The network configuration for jobs that are running on Fargate resources. Jobs that are
-    #      running on Amazon EC2 resources must not specify this parameter.</p>
+    #      running on Amazon EC2 resources or Amazon ECS Managed Instances must not specify this parameter.</p>
     #   @return [Types::NetworkConfiguration]
     # @!attribute runtime_platform
     #   <p>An object that represents the compute environment architecture for Batch jobs on
-    #      Fargate.</p>
+    #      Fargate or Amazon ECS Managed Instances. Use this to specify the operating system family
+    #      (<code>operatingSystemFamily</code>) and CPU architecture
+    #      (<code>cpuArchitecture</code>).</p>
+    #            <p>For Amazon ECS Managed Instances, the valid value for <code>operatingSystemFamily</code> is
+    #      <code>LINUX</code> (default). The valid values for <code>cpuArchitecture</code> are
+    #      <code>X86_64</code> and <code>ARM64</code>.</p>
     #   @return [Types::RuntimePlatform]
     # @!attribute volumes
     #   <p>A list of volumes that are associated with the job.</p>
@@ -2902,6 +3444,17 @@ module Aws::Batch
     #   <p>Determines whether execute command functionality is turned on for this task. If <code>true</code>, execute
     #               command functionality is turned on all the containers in the task.</p>
     #   @return [Boolean]
+    # @!attribute network_mode
+    #   <p>The network mode to use for the task. Valid values: <code>host</code>. When not specified,
+    #      the default is <code>host</code>.</p>
+    #            <p>With <code>host</code> mode, the container shares the host instance's network stack
+    #      directly. When running tasks that use the <code>host</code> network mode, do not run containers
+    #      using the root user (UID 0). Running as root grants unrestricted access to host resources and
+    #      increases the attack surface.</p>
+    #            <p>This parameter only applies to jobs running on Amazon ECS Managed Instances
+    #      (<code>MANAGED_INSTANCES</code> platform capability). It cannot be specified for Fargate or
+    #      Amazon EC2 platform job definitions.</p>
+    #   @return [String]
     class EcsTaskProperties < Struct.new(
       nil,
       :containers,
@@ -2915,6 +3468,62 @@ module Aws::Batch
       :runtime_platform,
       :volumes,
       :enable_execute_command,
+      :network_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configures whether Batch manages an Amazon EKS access entry on the cluster for the compute
+    #    environment. For information on how the fields interact with the cluster's
+    #     <code>authenticationMode</code> and with other compute environments that share the cluster,
+    #    see <a href="https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html">Amazon EKS access entry
+    #     authentication</a> in the <i>Batch User Guide</i>.</p>
+    #          <note>
+    #             <p>Setting <code>desiredState=ENABLED</code> on a single compute environment does not guarantee that Batch creates an access
+    #     entry, and setting <code>desiredState=DISABLED</code> on a single compute environment does not guarantee that Batch deletes
+    #     one. Batch compares the <code>desiredState</code> across all compute environments that
+    #     target the same cluster. The Batch-managed access entry is created only when all compute environments have
+    #      <code>desiredState=ENABLED</code>, and deleted only when all have
+    #      <code>desiredState=DISABLED</code>. If you have multiple compute environments on the same
+    #     cluster, set <code>desiredState</code> consistently across all of them to avoid uncertainty.
+    #     For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html#eks-access-entries-reconciliation">Reconciling
+    #      desiredState across compute environments</a> in the
+    #      <i>Batch User Guide</i>.</p>
+    #          </note>
+    # @!attribute desired_state
+    #   <p>The desired access entry state for the compute environment. Valid values:</p>
+    #            <dl>
+    #               <dt>ENABLED</dt>
+    #               <dd>
+    #                  <p>Batch manages an access entry on the cluster for the compute environment.</p>
+    #               </dd>
+    #               <dt>DISABLED</dt>
+    #               <dd>
+    #                  <p>Batch deletes the Batch-managed access entry for the cluster. This value is rejected if the cluster's
+    #          <code>authenticationMode</code> is <code>API</code>, because such a cluster doesn't support
+    #         the <code>aws-auth</code> ConfigMap.</p>
+    #               </dd>
+    #               <dt>INHERIT_FROM_CLUSTER</dt>
+    #               <dd>
+    #                  <p>Batch defers to the cluster's current access entry <code>status</code>. On a cluster whose
+    #         authentication mode is <code>API</code>, Batch creates and manages an access entry. On a
+    #         cluster whose authentication mode is <code>API_AND_CONFIG_MAP</code> or
+    #          <code>CONFIG_MAP</code>, Batch neither adds nor removes an access entry.</p>
+    #               </dd>
+    #            </dl>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The observed state of the access entry on the cluster. <code>ACTIVE</code> means that an
+    #      access entry for the compute environment exists on the cluster and takes
+    #      precedence over the <code>aws-auth</code> ConfigMap. <code>INACTIVE</code> means that no
+    #      Batch-managed access entry is present. This is a read-only field returned by
+    #       <code>DescribeComputeEnvironments</code>.</p>
+    #   @return [String]
+    class EksAccessEntry < Struct.new(
+      nil,
+      :desired_state,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3010,10 +3619,49 @@ module Aws::Batch
     #       <code>default</code>, can't start with "<code>kube-</code>," and must match this regular
     #      expression: <code>^[a-z0-9]([-a-z0-9]*[a-z0-9])?$</code>. For more information, see <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespaces</a> in the Kubernetes documentation.</p>
     #   @return [String]
+    # @!attribute access_entry
+    #   <p>The Batch-managed Amazon EKS access entry for the compute environment. Set
+    #       <code>desiredState</code> to declare whether Batch manages an access entry on the cluster. In
+    #      a <code>DescribeComputeEnvironments</code> response, <code>desiredState</code> is the value that
+    #      Batch recorded for the compute environment and <code>status</code> is the observed state of
+    #      the access entry on the cluster. To change the access entry on an existing compute environment,
+    #      use <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_EksConfigurationUpdate.html#Batch-Type-EksConfigurationUpdate-accessEntry">
+    #                  <code>EksConfigurationUpdate.accessEntry</code>
+    #               </a>.</p>
+    #            <p>Whether the entry is provisioned on the cluster depends on the cluster's
+    #       <code>authenticationMode</code> and the <code>desiredState</code> recorded for each Batch compute
+    #      environment targeting the cluster. For more information,
+    #      see <a href="https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html">Amazon EKS access entry
+    #       authentication</a> in the <i>Batch User Guide</i>.</p>
+    #            <p>If you don't specify this field, Batch doesn't record a <code>desiredState</code> for the
+    #      compute environment and <code>DescribeComputeEnvironments</code> doesn't return one. For the
+    #      purpose of provisioning the access entry, Batch behaves as it does for
+    #       <code>INHERIT_FROM_CLUSTER</code>.</p>
+    #   @return [Types::EksAccessEntry]
     class EksConfiguration < Struct.new(
       nil,
       :eks_cluster_arn,
       :kubernetes_namespace,
+      :access_entry,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that represents the attributes of an Batch compute environment's Amazon EKS
+    #    configuration that can be updated. Currently <code>accessEntry</code> is the only attribute that you can
+    #    change after the compute environment is created. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html">Amazon EKS access entry
+    #     authentication</a> in the <i>Batch User Guide</i>.</p>
+    # @!attribute access_entry
+    #   <p>The updated access entry configuration for the compute environment. Set
+    #       <code>desiredState</code> to declare whether Batch will manage an access entry on the cluster.
+    #      For the accepted values, see <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_EksAccessEntry.html">
+    #                  <code>EksAccessEntry</code>
+    #               </a>.</p>
+    #   @return [Types::EksAccessEntry]
+    class EksConfigurationUpdate < Struct.new(
+      nil,
+      :access_entry,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3477,18 +4125,18 @@ module Aws::Batch
     #      unique for a given object.</p>
     #   @return [Hash<String, String>]
     # @!attribute annotations
-    #   <p>Key-value pairs used to attach arbitrary, non-identifying metadata to Kubernetes objects. 
-    #           Valid annotation keys have two segments: an optional prefix and a name, separated by a 
+    #   <p>Key-value pairs used to attach arbitrary, non-identifying metadata to Kubernetes objects.
+    #           Valid annotation keys have two segments: an optional prefix and a name, separated by a
     #           slash (/). </p>
     #            <ul>
     #               <li>
-    #                  <p>The prefix is optional and must be 253 characters or less. If specified, the prefix 
-    #                   must be a DNS subdomain− a series of DNS labels separated by dots (.), and it must 
+    #                  <p>The prefix is optional and must be 253 characters or less. If specified, the prefix
+    #                   must be a DNS subdomain− a series of DNS labels separated by dots (.), and it must
     #                   end with a slash (/).</p>
     #               </li>
     #               <li>
-    #                  <p>The name segment is required and must be 63 characters or less. It can include alphanumeric 
-    #                   characters ([a-z0-9A-Z]), dashes (-), underscores (_), and dots (.), but must begin and end 
+    #                  <p>The name segment is required and must be 63 characters or less. It can include alphanumeric
+    #                   characters ([a-z0-9A-Z]), dashes (-), underscores (_), and dots (.), but must begin and end
     #                   with an alphanumeric character.</p>
     #               </li>
     #            </ul>
@@ -3498,9 +4146,9 @@ module Aws::Batch
     #            <p>Annotations can be added or modified at any time. Each resource can have multiple annotations. </p>
     #   @return [Hash<String, String>]
     # @!attribute namespace
-    #   <p>The namespace of the Amazon EKS cluster. In Kubernetes, namespaces provide a mechanism for isolating 
-    #         groups of resources within a single cluster. Names of resources need to be unique within a namespace, 
-    #         but not across namespaces. Batch places Batch Job pods in this namespace. If this field is provided, 
+    #   <p>The namespace of the Amazon EKS cluster. In Kubernetes, namespaces provide a mechanism for isolating
+    #         groups of resources within a single cluster. Names of resources need to be unique within a namespace,
+    #         but not across namespaces. Batch places Batch Job pods in this namespace. If this field is provided,
     #         the value can't be empty or null. It must meet the following requirements:</p>
     #            <ul>
     #               <li>
@@ -3520,10 +4168,10 @@ module Aws::Batch
     #               </li>
     #            </ul>
     #            <p>
-    #      For more information, see 
-    #      <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespaces</a> in the <i>Kubernetes documentation</i>. This namespace can be 
-    #      different from the <code>kubernetesNamespace</code> set in the compute environment's 
-    #      <code>EksConfiguration</code>, but must have identical role-based access control (RBAC) roles as 
+    #      For more information, see
+    #      <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespaces</a> in the <i>Kubernetes documentation</i>. This namespace can be
+    #      different from the <code>kubernetesNamespace</code> set in the compute environment's
+    #      <code>EksConfiguration</code>, but must have identical role-based access control (RBAC) roles as
     #      the compute environment's <code>kubernetesNamespace</code>. For multi-node parallel jobs,
     #      the same value must be provided across all the node ranges.</p>
     #   @return [String]
@@ -3538,11 +4186,11 @@ module Aws::Batch
     end
 
     # <p>A <code>persistentVolumeClaim</code> volume is used to mount a <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">PersistentVolume</a>
-    #          into a Pod. PersistentVolumeClaims are a way for users to "claim" durable storage without knowing 
+    #          into a Pod. PersistentVolumeClaims are a way for users to "claim" durable storage without knowing
     #          the details of the particular cloud environment. See the information about <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">PersistentVolumes</a>
     #          in the <i>Kubernetes documentation</i>.</p>
     # @!attribute claim_name
-    #   <p>The name of the <code>persistentVolumeClaim</code> bounded to a <code>persistentVolume</code>. 
+    #   <p>The name of the <code>persistentVolumeClaim</code> bounded to a <code>persistentVolume</code>.
     #            For more information, see <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims">
     #            Persistent Volume Claims</a> in the <i>Kubernetes documentation</i>.</p>
     #   @return [String]
@@ -3814,7 +4462,7 @@ module Aws::Batch
     #       <i>Kubernetes documentation</i>.</p>
     #   @return [Types::EksSecret]
     # @!attribute persistent_volume_claim
-    #   <p>Specifies the configuration of a Kubernetes <code>persistentVolumeClaim</code> bounded to a 
+    #   <p>Specifies the configuration of a Kubernetes <code>persistentVolumeClaim</code> bounded to a
     #           <code>persistentVolume</code>. For more information, see <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims">
     #           Persistent Volume Claims</a> in the <i>Kubernetes documentation</i>.</p>
     #   @return [Types::EksPersistentVolumeClaim]
@@ -3852,7 +4500,7 @@ module Aws::Batch
     # @!attribute on_status_reason
     #   <p>Contains a glob pattern to match against the <code>StatusReason</code> returned for a job.
     #      The pattern can contain up to 512 characters. It can contain letters, numbers, periods (.),
-    #      colons (:), and white spaces (including spaces or tabs). It can optionally end with an asterisk (*) 
+    #      colons (:), and white spaces (including spaces or tabs). It can optionally end with an asterisk (*)
     #      so that only the start of the string needs to be an exact match.</p>
     #   @return [String]
     # @!attribute on_reason
@@ -3884,13 +4532,49 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The capacity usage for a fairshare scheduling job queue.</p>
+    # @!attribute capacity_unit
+    #   <p>The unit of measure for the capacity usage. For compute jobs, this is
+    #                   <code>VCPU</code> for Amazon EC2 and <code>cpu</code> for Amazon EKS. For service jobs, this is the instance type.</p>
+    #   @return [String]
+    # @!attribute quantity
+    #   <p>The quantity of capacity being used, measured in the units specified by
+    #                   <code>capacityUnit</code>.</p>
+    #   @return [Float]
+    class FairshareCapacityUsage < Struct.new(
+      nil,
+      :capacity_unit,
+      :quantity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The capacity utilization for a specific share in a fairshare scheduling job queue, including the share identifier and its current usage.</p>
+    # @!attribute share_identifier
+    #   <p>The share identifier for the fairshare scheduling job queue.</p>
+    #   @return [String]
+    # @!attribute capacity_usage
+    #   <p>The capacity usage information for this share, including the unit of measure and
+    #               quantity being used. This is
+    #               <code>VCPU</code> for Amazon EC2 and <code>cpu</code> for Amazon EKS.</p>
+    #   @return [Array<Types::FairshareCapacityUsage>]
+    class FairshareCapacityUtilization < Struct.new(
+      nil,
+      :share_identifier,
+      :capacity_usage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The fair-share scheduling policy details.</p>
     # @!attribute share_decay_seconds
-    #   <p>The amount of time (in seconds) to use to calculate a fair-share percentage for each 
+    #   <p>The amount of time (in seconds) to use to calculate a fair-share percentage for each
     #      share identifier in use. A value of zero (0) indicates the default minimum time window (600 seconds).
     #      The maximum supported value is 604800 (1 week).</p>
-    #            <p>The decay allows for more recently run jobs to have more weight than jobs that ran earlier. 
-    #      Consider adjusting this number if you have jobs that (on average) run longer than ten minutes, 
+    #            <p>The decay allows for more recently run jobs to have more weight than jobs that ran earlier.
+    #      Consider adjusting this number if you have jobs that (on average) run longer than ten minutes,
     #      or a large difference in job count or job run times between share identifiers, and the allocation
     #      of resources doesn't meet your needs.</p>
     #   @return [Integer]
@@ -3913,7 +4597,7 @@ module Aws::Batch
     #            <p>The minimum value is 0 and the maximum value is 99.</p>
     #   @return [Integer]
     # @!attribute share_distribution
-    #   <p>An array of <code>SharedIdentifier</code> objects that contain the weights for the 
+    #   <p>An array of <code>SharedIdentifier</code> objects that contain the weights for the
     #      share identifiers for the fair-share policy. Share identifiers that aren't included have a
     #      default weight of <code>1.0</code>.</p>
     #   @return [Array<Types::ShareAttributes>]
@@ -3922,6 +4606,25 @@ module Aws::Batch
       :share_decay_seconds,
       :compute_reservation,
       :share_distribution,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The fairshare utilization for a job queue, including the number
+    #             of active shares and top capacity utilization.</p>
+    # @!attribute active_share_count
+    #   <p>The total number of active shares in the fairshare scheduling job queue that are
+    #               currently utilizing capacity.</p>
+    #   @return [Integer]
+    # @!attribute top_capacity_utilization
+    #   <p>A list of the top 20 shares with the highest capacity utilization, ordered by usage
+    #               amount.</p>
+    #   @return [Array<Types::FairshareCapacityUtilization>]
+    class FairshareUtilizationDetail < Struct.new(
+      nil,
+      :active_share_count,
+      :top_capacity_utilization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4000,6 +4703,38 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An object that represents summary details for the first <code>RUNNABLE</code> job in a quota share.</p>
+    # @!attribute job_arn
+    #   <p>The ARN for a job in a named quota share.</p>
+    #   @return [String]
+    # @!attribute earliest_time_at_position
+    #   <p>The Unix timestamp (in milliseconds) for when the job transitioned to its current position in the quota share.</p>
+    #   @return [Integer]
+    class FrontOfQuotaShareJobSummary < Struct.new(
+      nil,
+      :job_arn,
+      :earliest_time_at_position,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that represents the details of the first <code>RUNNABLE</code> job in each named quota share associated with a single job queue.</p>
+    # @!attribute quota_shares
+    #   <p>Contains a list of the first <code>RUNNABLE</code> job in each named quota share.</p>
+    #   @return [Hash<String, Array<Types::FrontOfQuotaShareJobSummary>>]
+    # @!attribute last_updated_at
+    #   <p>The Unix timestamp (in milliseconds) for when the first <code>RUNNABLE</code> job per quota share were all last updated.</p>
+    #   @return [Integer]
+    class FrontOfQuotaSharesDetail < Struct.new(
+      nil,
+      :quota_shares,
+      :last_updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute job_queue
     #   <p>The job queue’s name or full queue Amazon Resource Name (ARN).</p>
     #   @return [String]
@@ -4012,11 +4747,23 @@ module Aws::Batch
     end
 
     # @!attribute front_of_queue
-    #   <p>The list of the first 100 <code>RUNNABLE</code> jobs in each job queue. For first-in-first-out (FIFO) job queues, jobs are ordered based on their submission time. For fair-share scheduling (FSS) job queues, jobs are ordered based on their job priority and share usage.</p>
+    #   <p>The list of the first 100 <code>RUNNABLE</code> jobs in each job queue. For
+    #         first-in-first-out (FIFO) job queues, jobs are ordered based on their submission time. For job queues with an attached
+    #         fair-share scheduling (FSS) or quota-share policy, jobs are ordered based on their job priority and share
+    #         usage.</p>
     #   @return [Types::FrontOfQueueDetail]
+    # @!attribute front_of_quota_shares
+    #   <p>The first <code>RUNNABLE</code> job in each quota share. Jobs are ordered based on their job priority and share usage.</p>
+    #   @return [Types::FrontOfQuotaSharesDetail]
+    # @!attribute queue_utilization
+    #   <p>The job queue's capacity utilization, including total usage and
+    #               breakdown per given share.</p>
+    #   @return [Types::QueueSnapshotUtilizationDetail]
     class GetJobQueueSnapshotResponse < Struct.new(
       nil,
       :front_of_queue,
+      :front_of_quota_shares,
+      :queue_utilization,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4056,6 +4803,173 @@ module Aws::Batch
     class ImagePullSecret < Struct.new(
       nil,
       :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The infrastructure optimization configuration for an Amazon ECS Managed Instances capacity
+    #    provider. Specifies the idle-instance scale-in behavior.</p>
+    # @!attribute scale_in_after
+    #   <p>The number of seconds an instance can remain idle before it is terminated. Valid
+    #      values are <code>-1</code> or <code>0</code> to <code>3600</code>. Use <code>-1</code> as a
+    #      special value to disable scale-in (instances are never terminated for being idle). If not
+    #      specified, a default value applies.</p>
+    #   @return [Integer]
+    class InfrastructureOptimization < Struct.new(
+      nil,
+      :scale_in_after,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The instance launch configuration for an Amazon ECS Managed Instances capacity provider.
+    #    Specifies the instance profile, networking, instance selection constraints, capacity pricing
+    #    model, storage, and monitoring settings.</p>
+    # @!attribute ec2_instance_profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon EC2 instance profile for the managed instances. The instance profile
+    #      must use the <code>AmazonECSInstanceRolePolicyForManagedInstances</code> managed policy with a
+    #      trust policy for <code>ec2.amazonaws.com</code>.</p>
+    #   @return [String]
+    # @!attribute network_configuration
+    #   <p>The network configuration for the managed instances. Specifies the VPC subnets and security
+    #      groups where instances are launched.</p>
+    #   @return [Types::ManagedInstancesNetworkConfiguration]
+    # @!attribute instance_requirements
+    #   <p>The instance type requirements for the capacity provider. Use this to constrain which Amazon EC2
+    #      instance types Amazon ECS can launch. If not specified, all available instance types are
+    #      eligible.</p>
+    #   @return [Types::InstanceRequirementsRequest]
+    # @!attribute capacity_option_type
+    #   <p>The capacity pricing model for the managed instances. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ON_DEMAND</code> (default) — On-Demand pricing.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SPOT</code> — Spot Instances, which can provide significant cost savings
+    #        for fault-tolerant workloads.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute storage_configuration
+    #   <p>The storage configuration for the managed instances. Configures the root EBS volume size.
+    #      If not specified, the service uses the default EBS volume size for the instance type.</p>
+    #   @return [Types::ManagedInstancesStorageConfiguration]
+    # @!attribute monitoring
+    #   <p>The level of CloudWatch monitoring for the managed instances. Valid values are
+    #      <code>BASIC</code> and <code>DETAILED</code>.</p>
+    #   @return [String]
+    # @!attribute fips_enabled
+    #   <p>Specifies whether FIPS 140-2 validated cryptographic modules are enabled on the managed
+    #      instances. Not available in all Regions.</p>
+    #   @return [Boolean]
+    # @!attribute capacity_reservations
+    #   <p>The capacity reservation configuration for the managed instances. Use this to target
+    #      On-Demand Capacity Reservations or Reserved Instances for predictable capacity and cost
+    #      optimization.</p>
+    #   @return [Types::CapacityReservationRequest]
+    # @!attribute instance_metadata_tags_propagation
+    #   <p>Specifies whether instance tags are accessible from the instance metadata service (IMDS).
+    #      If not specified, instance tags are not accessible from IMDS.</p>
+    #   @return [Boolean]
+    # @!attribute local_storage_configuration
+    #   <p>The local storage configuration for the managed instances. If not specified, instance store
+    #      volumes are not available to containers.</p>
+    #   @return [Types::ManagedInstancesLocalStorageConfiguration]
+    class InstanceLaunchTemplate < Struct.new(
+      nil,
+      :ec2_instance_profile_arn,
+      :network_configuration,
+      :instance_requirements,
+      :capacity_option_type,
+      :storage_configuration,
+      :monitoring,
+      :fips_enabled,
+      :capacity_reservations,
+      :instance_metadata_tags_propagation,
+      :local_storage_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The instance launch configuration for updating an Amazon ECS Managed Instances capacity
+    #    provider. You cannot change <code>capacityOptionType</code> or <code>fipsEnabled</code> after
+    #    the compute environment is created.</p>
+    # @!attribute ec2_instance_profile_arn
+    #   <p>The updated Amazon Resource Name (ARN) of the Amazon EC2 instance profile for the managed instances.</p>
+    #   @return [String]
+    # @!attribute network_configuration
+    #   <p>The updated network configuration for the managed instances.</p>
+    #   @return [Types::ManagedInstancesNetworkConfiguration]
+    # @!attribute instance_requirements
+    #   <p>The updated instance type requirements for the capacity provider.</p>
+    #   @return [Types::InstanceRequirementsRequest]
+    # @!attribute storage_configuration
+    #   <p>The updated storage configuration for the managed instances.</p>
+    #   @return [Types::ManagedInstancesStorageConfiguration]
+    # @!attribute monitoring
+    #   <p>The updated monitoring level. Valid values are <code>BASIC</code> and
+    #      <code>DETAILED</code>.</p>
+    #   @return [String]
+    # @!attribute capacity_reservations
+    #   <p>The updated capacity reservation configuration.</p>
+    #   @return [Types::CapacityReservationRequest]
+    # @!attribute instance_metadata_tags_propagation
+    #   <p>Specifies whether instance tags are accessible from the instance metadata service
+    #      (IMDS).</p>
+    #   @return [Boolean]
+    # @!attribute local_storage_configuration
+    #   <p>The updated local storage configuration.</p>
+    #   @return [Types::ManagedInstancesLocalStorageConfiguration]
+    class InstanceLaunchTemplateUpdate < Struct.new(
+      nil,
+      :ec2_instance_profile_arn,
+      :network_configuration,
+      :instance_requirements,
+      :storage_configuration,
+      :monitoring,
+      :capacity_reservations,
+      :instance_metadata_tags_propagation,
+      :local_storage_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The instance type requirements for the Amazon ECS Managed Instances capacity provider. Use this
+    #    to specify which Amazon EC2 instance types or instance families Amazon ECS can launch.</p>
+    # @!attribute allowed_instance_types
+    #   <p>A list of specific instance types or instance families that Amazon ECS can launch (for example,
+    #      <code>m5.large</code> or <code>g5</code>). When specified, only these instance types are
+    #      used.</p>
+    #   @return [Array<String>]
+    class InstanceRequirementsRequest < Struct.new(
+      nil,
+      :allowed_instance_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The capacity usage for a job, including the unit of measure
+    #             and quantity of resources being used.</p>
+    # @!attribute capacity_unit
+    #   <p>The unit of measure for the capacity usage. This is
+    #               <code>VCPU</code> for Amazon EC2 and <code>cpu</code> for Amazon EKS.</p>
+    #   @return [String]
+    # @!attribute quantity
+    #   <p>The quantity of capacity being used by the job, measured in the units specified by
+    #                   <code>capacityUnit</code>.</p>
+    #   @return [Float]
+    class JobCapacityUsageSummary < Struct.new(
+      nil,
+      :capacity_unit,
+      :quantity,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4128,7 +5042,8 @@ module Aws::Batch
     # @!attribute platform_capabilities
     #   <p>The platform capabilities required by the job definition. If no value is specified, it
     #      defaults to <code>EC2</code>. Jobs run on Fargate resources specify
-    #      <code>FARGATE</code>.</p>
+    #      <code>FARGATE</code>. Jobs run on Amazon ECS Managed Instances specify
+    #      <code>MANAGED_INSTANCES</code>.</p>
     #   @return [Array<String>]
     # @!attribute ecs_properties
     #   <p>An object that contains the properties for the Amazon ECS resources of a job.When
@@ -4311,7 +5226,8 @@ module Aws::Batch
     # @!attribute platform_capabilities
     #   <p>The platform capabilities required by the job definition. If no value is specified, it
     #      defaults to <code>EC2</code>. Jobs run on Fargate resources specify
-    #      <code>FARGATE</code>.</p>
+    #      <code>FARGATE</code>. Jobs run on Amazon ECS Managed Instances specify
+    #      <code>MANAGED_INSTANCES</code>.</p>
     #   @return [Array<String>]
     # @!attribute eks_properties
     #   <p>An object with various properties that are specific to Amazon EKS based jobs. </p>
@@ -4323,7 +5239,7 @@ module Aws::Batch
     #   <p>An object with properties that are specific to Amazon ECS-based jobs. </p>
     #   @return [Types::EcsPropertiesDetail]
     # @!attribute is_cancelled
-    #   <p>Indicates whether the job is canceled.</p>
+    #   <p>Indicates whether the job is cancelled.</p>
     #   @return [Boolean]
     # @!attribute is_terminated
     #   <p>Indicates whether the job is terminated.</p>
@@ -4396,24 +5312,24 @@ module Aws::Batch
     #      job queue.</p>
     #   @return [String]
     # @!attribute priority
-    #   <p>The priority of the job queue. Job queue priority determines the order 
-    #      that job queues are evaluated when multiple queues dispatch jobs within a 
+    #   <p>The priority of the job queue. Job queue priority determines the order
+    #      that job queues are evaluated when multiple queues dispatch jobs within a
     #      shared compute environment. A higher value for <code>priority</code> indicates
     #      a higher priority. Queues are evaluated in cycles, in descending order by
-    #      priority. For example, a job queue with a priority value of <code>10</code> is 
-    #      evaluated before a queue with a priority value of <code>1</code>. All of the 
+    #      priority. For example, a job queue with a priority value of <code>10</code> is
+    #      evaluated before a queue with a priority value of <code>1</code>. All of the
     #      compute environments must be either Amazon EC2 (<code>EC2</code> or <code>SPOT</code>)
-    #      or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>). Amazon EC2 and 
+    #      or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>). Amazon EC2 and
     #      Fargate compute environments can't be mixed.</p>
     #            <note>
-    #               <p>Job queue priority doesn't guarantee that a particular job executes before 
-    #       a job in a lower priority queue. Jobs added to higher priority queues during the 
-    #       queue evaluation cycle might not be evaluated until the next cycle. A job is 
-    #       dispatched from a queue only if resources are available when the queue is evaluated. 
-    #       If there are insufficient resources available at that time, the cycle proceeds to the 
-    #       next queue. This means that jobs added to higher priority queues might have to wait 
-    #       for jobs in multiple lower priority queues to complete before they are dispatched. 
-    #       You can use job dependencies to control the order for jobs from queues with different 
+    #               <p>Job queue priority doesn't guarantee that a particular job executes before
+    #       a job in a lower priority queue. Jobs added to higher priority queues during the
+    #       queue evaluation cycle might not be evaluated until the next cycle. A job is
+    #       dispatched from a queue only if resources are available when the queue is evaluated.
+    #       If there are insufficient resources available at that time, the cycle proceeds to the
+    #       next queue. This means that jobs added to higher priority queues might have to wait
+    #       for jobs in multiple lower priority queues to complete before they are dispatched.
+    #       You can use job dependencies to control the order for jobs from queues with different
     #       priorities. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_dependencies.html">Job Dependencies</a>
     #       in the <i>Batch User Guide</i>.</p>
     #            </note>
@@ -4467,7 +5383,8 @@ module Aws::Batch
     #   @return [Integer]
     # @!attribute action
     #   <p>The action to take when a job is at the head of the job queue in the specified state for the specified period of
-    #      time. The only supported value is <code>CANCEL</code>, which will cancel the job.</p>
+    #      time. For job queues connected to a <code>ECS</code>, <code>FARGATE</code> or <code>EKS</code> compute environment, the only supported value is <code>CANCEL</code>, which will cancel the job.
+    #      For job queues connected to a <code>SAGEMAKER_TRAINING</code> service environment, the only supported value is <code>TERMINATE</code>, which will terminate the job.</p>
     #   @return [String]
     class JobStateTimeLimitAction < Struct.new(
       nil,
@@ -4490,6 +5407,10 @@ module Aws::Batch
     # @!attribute job_name
     #   <p>The job name.</p>
     #   @return [String]
+    # @!attribute capacity_usage
+    #   <p>The configured capacity usage information for this job, including the unit of measure and
+    #               quantity of resources.</p>
+    #   @return [Array<Types::JobCapacityUsageSummary>]
     # @!attribute created_at
     #   <p>The Unix timestamp (in milliseconds) for when the job was created. For non-array jobs and
     #      parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time
@@ -4497,6 +5418,14 @@ module Aws::Batch
     #      was called). For array child jobs, this is when the child job was spawned by its parent and
     #      entered the <code>PENDING</code> state.</p>
     #   @return [Integer]
+    # @!attribute scheduled_at
+    #   <p>The Unix timestamp (in milliseconds) for when the job was scheduled for
+    #               execution. For more information on job statues, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/service-job-status.html">Service job status</a> in the <i>Batch User Guide</i>.</p>
+    #   @return [Integer]
+    # @!attribute share_identifier
+    #   <p>The share identifier for the fairshare scheduling queue that this job is
+    #               associated with.</p>
+    #   @return [String]
     # @!attribute status
     #   <p>The current status for the job.</p>
     #   @return [String]
@@ -4529,12 +5458,21 @@ module Aws::Batch
     # @!attribute job_definition
     #   <p>The Amazon Resource Name (ARN) of the job definition.</p>
     #   @return [String]
+    # @!attribute is_cancelled
+    #   <p>Indicates whether a cancellation request has been accepted for the job. This field is only present when the value is <code>true</code>.</p>
+    #   @return [Boolean]
+    # @!attribute is_terminated
+    #   <p>Indicates whether a termination request has been accepted for the job. This field is only present when the value is <code>true</code>.</p>
+    #   @return [Boolean]
     class JobSummary < Struct.new(
       nil,
       :job_arn,
       :job_id,
       :job_name,
+      :capacity_usage,
       :created_at,
+      :scheduled_at,
+      :share_identifier,
       :status,
       :status_reason,
       :started_at,
@@ -4543,6 +5481,8 @@ module Aws::Batch
       :array_properties,
       :node_properties,
       :job_definition,
+      :is_cancelled,
+      :is_terminated,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4629,7 +5569,7 @@ module Aws::Batch
     #   <p>The name of the launch template.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The version number of the launch template, 
+    #   <p>The version number of the launch template,
     #      <code>$Default</code>, or <code>$Latest</code>.</p>
     #            <p>If the value is <code>$Default</code>, the default version of the launch template is used. If the value is <code>$Latest</code>, the latest version of the launch template is used. </p>
     #            <important>
@@ -4698,7 +5638,7 @@ module Aws::Batch
     #               <b>Note:</b> If you specify the <code>launchTemplateName</code> you can't specify the <code>launchTemplateId</code> as well.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The version number of the launch template, 
+    #   <p>The version number of the launch template,
     #      <code>$Default</code>, or <code>$Latest</code>.</p>
     #            <p>If the value is <code>$Default</code>, the default version of the launch template is used. If the value is <code>$Latest</code>, the latest version of the launch template is used. </p>
     #            <important>
@@ -4762,7 +5702,7 @@ module Aws::Batch
     #    mappings.</p>
     # @!attribute devices
     #   <p>Any of the host devices to expose to the container. This parameter maps to
-    #       <code>Devices</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a>
+    #       <code>Devices</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a>
     #      and the <code>--device</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker
     #      run</a>.</p>
     #            <note>
@@ -4864,14 +5804,14 @@ module Aws::Batch
     end
 
     # @!attribute filters
-    #   <p>The filters to apply to the consumable resource list query. If used, only those consumable 
+    #   <p>The filters to apply to the consumable resource list query. If used, only those consumable
     #               resources that match the filter are listed. Filter names and values can be:</p>
     #            <ul>
     #               <li>
     #                  <p>name: <code>CONSUMABLE_RESOURCE_NAME </code>
     #                  </p>
-    #                  <p>values: case-insensitive matches for the consumable resource name. If a filter 
-    #                       value ends with an asterisk (*), it matches any consumable resource name that begins 
+    #                  <p>values: case-insensitive matches for the consumable resource name. If a filter
+    #                       value ends with an asterisk (*), it matches any consumable resource name that begins
     #                       with the string before the '*'.</p>
     #               </li>
     #            </ul>
@@ -4887,10 +5827,10 @@ module Aws::Batch
     #               a <code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The <code>nextToken</code> value returned from a previous paginated 
-    #               <code>ListConsumableResources</code> request where <code>maxResults</code> was used and the 
-    #               results exceeded the value of that parameter. Pagination continues from the end of the previous 
-    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when 
+    #   <p>The <code>nextToken</code> value returned from a previous paginated
+    #               <code>ListConsumableResources</code> request where <code>maxResults</code> was used and the
+    #               results exceeded the value of that parameter. Pagination continues from the end of the previous
+    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when
     #               there are no more results to return.</p>
     #            <note>
     #               <p>Treat this token as an opaque identifier that's only used to
@@ -4911,9 +5851,9 @@ module Aws::Batch
     #   <p>A list of consumable resources that match the request.</p>
     #   @return [Array<Types::ConsumableResourceSummary>]
     # @!attribute next_token
-    #   <p>The <code>nextToken</code> value to include in a future <code>ListConsumableResources</code> 
-    #               request. When the results of a <code>ListConsumableResources</code> request exceed <code>maxResults</code>, 
-    #               this value can be used to retrieve the next page of results. This value is <code>null</code> 
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListConsumableResources</code>
+    #               request. When the results of a <code>ListConsumableResources</code> request exceed <code>maxResults</code>,
+    #               this value can be used to retrieve the next page of results. This value is <code>null</code>
     #               when there are no more results to return.</p>
     #   @return [String]
     class ListConsumableResourcesResponse < Struct.new(
@@ -4929,7 +5869,7 @@ module Aws::Batch
     #   <p>The name or ARN of the consumable resource.</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>The filters to apply to the job list query. If used, only those jobs requiring the specified 
+    #   <p>The filters to apply to the job list query. If used, only those jobs requiring the specified
     #               consumable resource (<code>consumableResource</code>) and that match the value of the filters
     #               are listed. The filter names and values can be:</p>
     #            <ul>
@@ -4942,8 +5882,8 @@ module Aws::Batch
     #               <li>
     #                  <p>name: <code>JOB_NAME </code>
     #                  </p>
-    #                  <p>The values are case-insensitive matches for the job name. If a filter value ends 
-    #                       with an asterisk (*), it matches any job name that begins with the string before 
+    #                  <p>The values are case-insensitive matches for the job name. If a filter value ends
+    #                       with an asterisk (*), it matches any job name that begins with the string before
     #                       the '*'.</p>
     #               </li>
     #            </ul>
@@ -4955,14 +5895,14 @@ module Aws::Batch
     #               element. The remaining results of the initial request can be seen by sending another
     #               <code>ListJobsByConsumableResource</code> request with the returned <code>nextToken</code> value.
     #               This value can be between 1 and 100. If this parameter isn't
-    #               used, then <code>ListJobsByConsumableResource</code> returns up to 100 results 
+    #               used, then <code>ListJobsByConsumableResource</code> returns up to 100 results
     #               and a <code>nextToken</code> value if applicable.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The <code>nextToken</code> value returned from a previous paginated 
-    #               <code>ListJobsByConsumableResource</code> request where <code>maxResults</code> was used and the 
-    #               results exceeded the value of that parameter. Pagination continues from the end of the previous 
-    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when 
+    #   <p>The <code>nextToken</code> value returned from a previous paginated
+    #               <code>ListJobsByConsumableResource</code> request where <code>maxResults</code> was used and the
+    #               results exceeded the value of that parameter. Pagination continues from the end of the previous
+    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when
     #               there are no more results to return.</p>
     #            <note>
     #               <p>Treat this token as an opaque identifier that's only used to
@@ -4984,9 +5924,9 @@ module Aws::Batch
     #   <p>The list of jobs that require the specified consumable resources.</p>
     #   @return [Array<Types::ListJobsByConsumableResourceSummary>]
     # @!attribute next_token
-    #   <p>The <code>nextToken</code> value to include in a future <code>ListJobsByConsumableResource</code> 
-    #               request. When the results of a <code>ListJobsByConsumableResource</code> request exceed 
-    #               <code>maxResults</code>, this value can be used to retrieve the next page of results. This 
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListJobsByConsumableResource</code>
+    #               request. When the results of a <code>ListJobsByConsumableResource</code> request exceed
+    #               <code>maxResults</code>, this value can be used to retrieve the next page of results. This
     #               value is <code>null</code> when there are no more results to return.</p>
     #   @return [String]
     class ListJobsByConsumableResourceResponse < Struct.new(
@@ -5012,7 +5952,7 @@ module Aws::Batch
     #   <p>The Amazon Resource Name (ARN) of the job definition.</p>
     #   @return [String]
     # @!attribute share_identifier
-    #   <p>The fair-share scheduling policy identifier for the job.</p>
+    #   <p>The fair-share scheduling identifier for the job.</p>
     #   @return [String]
     # @!attribute job_status
     #   <p>The status of the job. Can be one of:</p>
@@ -5061,7 +6001,7 @@ module Aws::Batch
     #   <p>A short, human-readable string to provide more details for the current status of the job.</p>
     #   @return [String]
     # @!attribute started_at
-    #   <p>The Unix timestamp for when the job was started. More specifically, it's when the job transitioned 
+    #   <p>The Unix timestamp for when the job was started. More specifically, it's when the job transitioned
     #               from the <code>STARTING</code> state to the <code>RUNNING</code> state.</p>
     #   @return [Integer]
     # @!attribute created_at
@@ -5103,8 +6043,11 @@ module Aws::Batch
     # @!attribute job_status
     #   <p>The job status used to filter jobs in the specified queue. If the <code>filters</code>
     #         parameter is specified, the <code>jobStatus</code> parameter is ignored and jobs with any
-    #         status are returned. If you don't specify a status, only <code>RUNNING</code> jobs are
+    #         status are returned. The exception is the <code>SHARE_IDENTIFIER</code> filter and <code>jobStatus</code> can be used together. If you don't specify a status, only <code>RUNNING</code> jobs are
     #         returned.</p>
+    #            <note>
+    #               <p>Array job parents are updated to <code>PENDING</code> when any child job is updated to <code>RUNNABLE</code> and remain in <code>PENDING</code> status while child jobs are running. To view these jobs, filter by <code>PENDING</code> status until all child jobs reach a terminal state.</p>
+    #            </note>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results returned by <code>ListJobs</code> in a paginated output. When this parameter is used, <code>ListJobs</code> returns up to <code>maxResults</code> results in a single page and a <code>nextToken</code> response element, if applicable. The remaining results of the initial request can be seen by sending another <code>ListJobs</code> request with the returned <code>nextToken</code> value.</p>
@@ -5138,9 +6081,12 @@ module Aws::Batch
     #   @return [String]
     # @!attribute filters
     #   <p>The filter to apply to the query. Only one filter can be used at a time. When the filter
-    #         is used, <code>jobStatus</code> is ignored. The filter doesn't apply to child jobs in an array
+    #         is used, <code>jobStatus</code> is ignored with the exception that <code>SHARE_IDENTIFIER</code> and <code>jobStatus</code> can be used together. The filter doesn't apply to child jobs in an array
     #         or multi-node parallel (MNP) jobs. The results are sorted by the <code>createdAt</code> field,
     #         with the most recent jobs being first.</p>
+    #            <note>
+    #               <p>The <code>SHARE_IDENTIFIER</code> filter and the <code>jobStatus</code> field can be used together to filter results.</p>
+    #            </note>
     #            <dl>
     #               <dt>JOB_NAME</dt>
     #               <dd>
@@ -5179,6 +6125,10 @@ module Aws::Batch
     #               corresponds to the <code>createdAt</code> value. The value is a string representation of
     #               the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>
     #               </dd>
+    #               <dt>SHARE_IDENTIFIER</dt>
+    #               <dd>
+    #                  <p>The value for the filter is the fairshare scheduling share identifier.</p>
+    #               </dd>
     #            </dl>
     #   @return [Array<Types::KeyValuesPair>]
     class ListJobsRequest < Struct.new(
@@ -5207,6 +6157,59 @@ module Aws::Batch
     class ListJobsResponse < Struct.new(
       nil,
       :job_summary_list,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_queue
+    #   <p>The name or full Amazon Resource Name (ARN) of the job queue used to list quota shares.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results returned by <code>ListQuotaShares</code> in
+    #         paginated output. When this parameter is used, <code>ListQuotaShares</code> only
+    #         returns <code>maxResults</code> results in a single page and a <code>nextToken</code> response
+    #         element. You can see the remaining results of the initial request by sending another
+    #           <code>ListQuotaShares</code> request with the returned <code>nextToken</code> value.
+    #         This value can be between 1 and 100. If this parameter isn't
+    #         used, <code>ListQuotaShares</code> returns up to 100 results and a
+    #           <code>nextToken</code> value if applicable.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value that's returned from a previous paginated
+    #           <code>ListQuotaShares</code> request where <code>maxResults</code> was used and the
+    #         results exceeded the value of that parameter. Pagination continues from the end of the
+    #         previous results that returned the <code>nextToken</code> value. This value is
+    #           <code>null</code> when there are no more results to return.</p>
+    #            <note>
+    #               <p>Treat this token as an opaque identifier that's only used to
+    #    retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    class ListQuotaSharesRequest < Struct.new(
+      nil,
+      :job_queue,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quota_shares
+    #   <p>A list of quota shares that match the request.</p>
+    #   @return [Array<Types::QuotaShareDetail>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future
+    #           <code>ListQuotaShares</code> request. When the results of a
+    #           <code>ListQuotaShares</code> request exceed <code>maxResults</code>, this value can
+    #         be used to retrieve the next page of results. This value is <code>null</code> when there are
+    #         no more results to return.</p>
+    #   @return [String]
+    class ListQuotaSharesResponse < Struct.new(
+      nil,
+      :quota_shares,
       :next_token,
       keyword_init: true
     )
@@ -5267,7 +6270,14 @@ module Aws::Batch
     #   <p>The name or ARN of the job queue with which to list service jobs.</p>
     #   @return [String]
     # @!attribute job_status
-    #   <p>The job status with which to filter service jobs. </p>
+    #   <p>The job status used to filter service jobs in the specified queue. If the <code>filters</code>
+    #   	            parameter is specified, the <code>jobStatus</code> parameter is ignored and jobs with any
+    #   	            status are returned. The exceptions are the <code>SHARE_IDENTIFIER</code> filter and <code>QUOTA_SHARE_NAME</code> filter, which
+    #                   can be used with <code>jobStatus</code>. If you don't specify a status, only <code>RUNNING</code> jobs are
+    #   	            returned.</p>
+    #            <note>
+    #               <p>The <code>SHARE_IDENTIFIER</code> filter or <code>QUOTA_SHARE_NAME</code> filter can be used with the <code>jobStatus</code> field to filter results.</p>
+    #            </note>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results returned by <code>ListServiceJobs</code> in paginated output. When this parameter is used, <code>ListServiceJobs</code> only returns <code>maxResults</code> results in a single page and a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListServiceJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter isn't used, then <code>ListServiceJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>
@@ -5280,9 +6290,12 @@ module Aws::Batch
     #            </note>
     #   @return [String]
     # @!attribute filters
-    #   <p>The filter to apply to the query. Only one filter can be used at a time. When the filter
-    #              is used, <code>jobStatus</code> is ignored. The results are sorted by the <code>createdAt</code> field,
-    #              with the most recent jobs being first.</p>
+    #   <p>The filter to apply to the query. Only one filter can be used at a time. When the
+    #   	            filter is used, <code>jobStatus</code> is ignored with the exception that <code>SHARE_IDENTIFIER</code> or <code>QUOTA_SHARE_NAME</code> and <code>jobStatus</code> can be used together. The results are sorted by the
+    #   	                <code>createdAt</code> field, with the most recent jobs being first.</p>
+    #            <note>
+    #               <p>The <code>SHARE_IDENTIFIER</code> or <code>QUOTA_SHARE_NAME</code> filter and the <code>jobStatus</code> field can be used together to filter results.</p>
+    #            </note>
     #            <dl>
     #               <dt>JOB_NAME</dt>
     #               <dd>
@@ -5305,6 +6318,14 @@ module Aws::Batch
     #                  <p>The value for the filter is the time that's after the job was created. This
     #                          corresponds to the <code>createdAt</code> value. The value is a string representation of
     #                          the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.</p>
+    #               </dd>
+    #               <dt>SHARE_IDENTIFIER</dt>
+    #               <dd>
+    #                  <p>The value for the filter is the fairshare scheduling share identifier.</p>
+    #               </dd>
+    #               <dt>QUOTA_SHARE_NAME</dt>
+    #               <dd>
+    #                  <p>The value for the filter is the quota management share name.</p>
     #               </dd>
     #            </dl>
     #   @return [Array<Types::KeyValuesPair>]
@@ -5453,8 +6474,95 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The local storage configuration for Amazon ECS Managed Instances.</p>
+    # @!attribute use_local_storage
+    #   <p>Specifies whether instance store volumes (local NVMe SSDs) are available to containers.
+    #      When enabled, containers can use the instance store for high-performance temporary
+    #      storage.</p>
+    #   @return [Boolean]
+    class ManagedInstancesLocalStorageConfiguration < Struct.new(
+      nil,
+      :use_local_storage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The network configuration for Amazon ECS Managed Instances. Specifies the VPC subnets and
+    #    security groups where instances are launched.</p>
+    # @!attribute subnets
+    #   <p>The VPC subnets where managed instances are launched. If your subnets don't provide public
+    #      IP addresses, they must have a NAT gateway for outbound internet access.</p>
+    #   @return [Array<String>]
+    # @!attribute security_groups
+    #   <p>The VPC security groups to associate with the managed instances.</p>
+    #   @return [Array<String>]
+    class ManagedInstancesNetworkConfiguration < Struct.new(
+      nil,
+      :subnets,
+      :security_groups,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for an Amazon ECS Managed Instances capacity provider. This object is required
+    #    when creating a compute environment with <code>computeResources.type</code> set to
+    #    <code>ECS_MANAGED_INSTANCES</code>.</p>
+    # @!attribute propagate_tags
+    #   <p>Specifies whether tags on the capacity provider are propagated to the Amazon EC2 instances it
+    #      launches. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>CAPACITY_PROVIDER</code> — Propagates tags to instances.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code> (default) — Does not propagate tags to instances.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute infrastructure_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that Amazon ECS assumes to manage Amazon EC2 instances on your behalf.
+    #      This role must have a trust policy for <code>ecs.amazonaws.com</code>. You must have the
+    #      <code>iam:PassRole</code> permission for this role with the condition
+    #      <code>iam:PassedToService: ecs.amazonaws.com</code>.</p>
+    #   @return [String]
+    # @!attribute instance_launch_template
+    #   <p>The instance launch configuration for the Amazon ECS Managed Instances capacity provider.
+    #      Contains networking, instance profile, instance requirements, capacity type, storage, and
+    #      monitoring configuration.</p>
+    #   @return [Types::InstanceLaunchTemplate]
+    # @!attribute infrastructure_optimization
+    #   <p>The infrastructure optimization configuration for the capacity provider. Specifies the
+    #      idle-instance scale-in behavior.</p>
+    #   @return [Types::InfrastructureOptimization]
+    class ManagedInstancesProvider < Struct.new(
+      nil,
+      :propagate_tags,
+      :infrastructure_role_arn,
+      :instance_launch_template,
+      :infrastructure_optimization,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The storage configuration for Amazon ECS Managed Instances.</p>
+    # @!attribute storage_size_gi_b
+    #   <p>The size of the root EBS volume in GiB for the managed instances.</p>
+    #   @return [Integer]
+    class ManagedInstancesStorageConfiguration < Struct.new(
+      nil,
+      :storage_size_gi_b,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details for a Docker volume mount point that's used in a job's container properties. This
-    #    parameter maps to <code>Volumes</code> in the <a href="https://docs.docker.com/engine/api/v1.43/#tag/Container/operation/ContainerCreate">Create a
+    #    parameter maps to <code>Volumes</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
     #     container</a> section of the <i>Docker Remote API</i> and the
     #     <code>--volume</code> option to docker run.</p>
     # @!attribute container_path
@@ -5700,6 +6808,202 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configured capacity usage for a job queue snapshot, including the unit of
+    #             measure and quantity of resources being used.</p>
+    # @!attribute capacity_unit
+    #   <p>The unit of measure for the capacity usage. For compute jobs, this is
+    #               <code>VCPU</code> for Amazon EC2 and <code>cpu</code> for Amazon EKS. For service jobs, this is the instance type.</p>
+    #   @return [String]
+    # @!attribute quantity
+    #   <p>The quantity of capacity being used in the queue snapshot, measured in the units
+    #               specified by <code>capacityUnit</code>.</p>
+    #   @return [Float]
+    class QueueSnapshotCapacityUsage < Struct.new(
+      nil,
+      :capacity_unit,
+      :quantity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The job queue utilization at a specific point in time,
+    #             including total capacity usage, and quota share or fairshare utilization breakdown
+    #             depending on the job queue scheduling policy.</p>
+    # @!attribute total_capacity_usage
+    #   <p>The total capacity usage for the entire job queue.</p>
+    #   @return [Array<Types::QueueSnapshotCapacityUsage>]
+    # @!attribute fairshare_utilization
+    #   <p>The utilization information for a fairshare scheduling job queues, including
+    #               active share count and top capacity utilization by share.</p>
+    #   @return [Types::FairshareUtilizationDetail]
+    # @!attribute quota_share_utilization
+    #   <p>The utilization information for a job queue with a quota share scheduling policy.</p>
+    #   @return [Types::QuotaShareUtilizationDetail]
+    # @!attribute last_updated_at
+    #   <p>The Unix timestamp (in milliseconds) for when the queue utilization information was
+    #               last updated.</p>
+    #   @return [Integer]
+    class QueueSnapshotUtilizationDetail < Struct.new(
+      nil,
+      :total_capacity_usage,
+      :fairshare_utilization,
+      :quota_share_utilization,
+      :last_updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines the capacity limit for a quota share, or the type and maximum quantity of a particular resource that can be allocated to jobs in the quota share
+    #        without borrowing. </p>
+    # @!attribute max_capacity
+    #   <p>The maximum capacity available for the quota share. This value represents the maximum quantity of a resource that can be allocated to jobs in the quota share
+    #          without borrowing.</p>
+    #   @return [Integer]
+    # @!attribute capacity_unit
+    #   <p>The unit of compute capacity for the capacityLimit. For example, <code>ml.m5.large</code>.</p>
+    #   @return [String]
+    class QuotaShareCapacityLimit < Struct.new(
+      nil,
+      :max_capacity,
+      :capacity_unit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The capacity usage for a quota share, including units of compute capacity and quantity of resources being used.</p>
+    # @!attribute capacity_unit
+    #   <p>The unit of compute capacity for the capacity usage.</p>
+    #   @return [String]
+    # @!attribute quantity
+    #   <p>The quantity of capacity being used.</p>
+    #   @return [Float]
+    class QuotaShareCapacityUsage < Struct.new(
+      nil,
+      :capacity_unit,
+      :quantity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The capacity utilization for a specific quota share, including the quota share name and its current usage.</p>
+    # @!attribute quota_share_name
+    #   <p>The name of the quota share.</p>
+    #   @return [String]
+    # @!attribute capacity_usage
+    #   <p>The capacity usage information for this quota share, including the units of compute capacity and quantity being used.</p>
+    #   @return [Array<Types::QuotaShareCapacityUsage>]
+    class QuotaShareCapacityUtilization < Struct.new(
+      nil,
+      :quota_share_name,
+      :capacity_usage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Detailed information about a quota share, including its configuration, state, and capacity limits.</p>
+    # @!attribute quota_share_name
+    #   <p>The name of the quota share.</p>
+    #   @return [String]
+    # @!attribute quota_share_arn
+    #   <p>The Amazon Resource Name (ARN) of the quota share.</p>
+    #   @return [String]
+    # @!attribute job_queue_arn
+    #   <p>The Amazon Resource Name (ARN) of the job queue associated with the quota share.</p>
+    #   @return [String]
+    # @!attribute capacity_limits
+    #   <p>A list that specifies the quantity and type of compute capacity allocated to the quota share.</p>
+    #   @return [Array<Types::QuotaShareCapacityLimit>]
+    # @!attribute resource_sharing_configuration
+    #   <p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>
+    #   @return [Types::QuotaShareResourceSharingConfiguration]
+    # @!attribute preemption_configuration
+    #   <p>Specifies the preemption behavior for jobs in a quota share.</p>
+    #   @return [Types::QuotaSharePreemptionConfiguration]
+    # @!attribute state
+    #   <p>The state of the quota share.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the quota share.</p>
+    #   @return [String]
+    class QuotaShareDetail < Struct.new(
+      nil,
+      :quota_share_name,
+      :quota_share_arn,
+      :job_queue_arn,
+      :capacity_limits,
+      :resource_sharing_configuration,
+      :preemption_configuration,
+      :state,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The quota share scheduling policy details for a job queue.</p>
+    # @!attribute idle_resource_assignment_strategy
+    #   <p>The strategy that determines how idle resources are assigned to quota shares
+    #          that are borrowing capacity. Currently, only <code>FIFO</code> is supported.</p>
+    #   @return [String]
+    class QuotaSharePolicy < Struct.new(
+      nil,
+      :idle_resource_assignment_strategy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the preemption behavior for jobs in a quota share.</p>
+    # @!attribute in_share_preemption
+    #   <p>Specifies whether jobs within a quota share can be preempted by another, higher priority job in the same quota share.</p>
+    #   @return [String]
+    class QuotaSharePreemptionConfiguration < Struct.new(
+      nil,
+      :in_share_preemption,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>
+    # @!attribute strategy
+    #   <p>The resource sharing strategy for the quota share. The <code>RESERVE</code> strategy allows a quota share to reserve idle capacity for itself.
+    #         <code>LEND</code> configures the share to lend its idle capacity to another share in need of capacity.
+    #         The <code>LEND_AND_BORROW</code> strategy configures the share to borrow idle capacity from an underutilized share, as well as lend to another share.</p>
+    #   @return [String]
+    # @!attribute borrow_limit
+    #   <p>The maximum percentage of additional capacity that the quota share can borrow from other shares. <code>borrowLimit</code> can only be applied to quota shares with a strategy of <code>LEND_AND_BORROW</code>.
+    #           This value is expressed as a percentage of the quota share's configured <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_QuotaShareCapacityLimit.html">CapacityLimits</a>.</p>
+    #            <p>The <code>borrowLimit</code> is applied uniformly across all capacity units.
+    #           For example, if the <code>borrowLimit</code> is 200, the quota
+    #           share can borrow up to 200% of its configured <code>maxCapacity</code> for each capacity unit. The default <code>borrowLimit</code> is -1, which indicates unlimited borrowing.</p>
+    #   @return [Integer]
+    class QuotaShareResourceSharingConfiguration < Struct.new(
+      nil,
+      :strategy,
+      :borrow_limit,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that represents the capacity utilization details of all quota shares associated with a single job queue.</p>
+    # @!attribute top_capacity_utilization
+    #   <p>A list of the top capacity utilizations across quota shares associated with a job queue.</p>
+    #   @return [Array<Types::QuotaShareCapacityUtilization>]
+    class QuotaShareUtilizationDetail < Struct.new(
+      nil,
+      :top_capacity_utilization,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains the parameters for <code>RegisterJobDefinition</code>.</p>
     # @!attribute job_definition_name
     #   <p>The name of the job definition to register. It can be up to 128 letters long. It can
@@ -5787,7 +7091,11 @@ module Aws::Batch
     # @!attribute platform_capabilities
     #   <p>The platform capabilities required by the job definition. If no value is specified, it
     #         defaults to <code>EC2</code>. To run the job on Fargate resources, specify
-    #           <code>FARGATE</code>.</p>
+    #         <code>FARGATE</code>. To run the job on Amazon ECS Managed Instances, specify
+    #         <code>MANAGED_INSTANCES</code>.</p>
+    #            <p>Jobs with the <code>MANAGED_INSTANCES</code> platform capability must use
+    #         <code>ecsProperties</code> (not <code>containerProperties</code>) and do not support
+    #         multi-node parallel jobs.</p>
     #            <note>
     #               <p>If the job runs on Amazon EKS resources, then you must not specify
     #             <code>platformCapabilities</code>.</p>
@@ -5877,12 +7185,12 @@ module Aws::Batch
     #                  <p>The memory hard limit (in MiB) present to the container. This parameter is supported for
     #         jobs that are running on Amazon EC2 resources. If your container attempts to exceed the memory
     #         specified, the container is terminated. This parameter maps to <code>Memory</code> in the
-    #         <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the
+    #         <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the
     #          <code>--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. You
     #         must specify at least 4 MiB of memory for a job. This is required but can be specified in
     #         several places for multi-node parallel (MNP) jobs. It must be specified for each node at least
-    #         once. This parameter maps to <code>Memory</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a>
-    #         section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p>
+    #         once. This parameter maps to <code>Memory</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a>
+    #         section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p>
     #                  <note>
     #                     <p>If you're trying to maximize your resource utilization by providing your jobs as much
     #          memory as possible for a particular instance type, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html">Memory management</a> in the
@@ -5947,28 +7255,43 @@ module Aws::Batch
     #                        <p>
     #                           <code>VCPU</code> = 4 or 8</p>
     #                     </dd>
-    #                     <dt>value = 36864, 45056, 53248, or 61440</dt>
+    #                     <dt>value = 36864, 45056, or 53248</dt>
     #                     <dd>
     #                        <p>
     #                           <code>VCPU</code> = 8</p>
+    #                     </dd>
+    #                     <dt>value = 61440</dt>
+    #                     <dd>
+    #                        <p>
+    #                           <code>VCPU</code> = 8 or 32</p>
     #                     </dd>
     #                     <dt>value = 32768, 40960, 49152, or 57344</dt>
     #                     <dd>
     #                        <p>
     #                           <code>VCPU</code> = 8 or 16</p>
     #                     </dd>
-    #                     <dt>value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880</dt>
+    #                     <dt>value = 65536, 73728, 81920, 90112, 98304, 106496, or 114688</dt>
     #                     <dd>
     #                        <p>
     #                           <code>VCPU</code> = 16</p>
+    #                     </dd>
+    #                     <dt>value = 122880</dt>
+    #                     <dd>
+    #                        <p>
+    #                           <code>VCPU</code> = 16 or 32</p>
+    #                     </dd>
+    #                     <dt>value = 249856</dt>
+    #                     <dd>
+    #                        <p>
+    #                           <code>VCPU</code> = 32</p>
     #                     </dd>
     #                  </dl>
     #               </dd>
     #               <dt>type="VCPU"</dt>
     #               <dd>
     #                  <p>The number of vCPUs reserved for the container. This parameter maps to
-    #          <code>CpuShares</code> in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the
-    #         <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares.
+    #          <code>CpuShares</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the
+    #         <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares.
     #         For Amazon EC2 resources, you must specify at least one vCPU. This is required but can be specified
     #         in several places; it must be specified for each node at least once.</p>
     #                  <p>The default for the Fargate On-Demand vCPU resource count quota is 6 vCPUs. For more
@@ -5976,8 +7299,8 @@ module Aws::Batch
     #         in the <i>Amazon Web Services General Reference</i>.</p>
     #                  <p>For jobs that are running on Fargate resources, then <code>value</code> must match one
     #         of the supported values and the <code>MEMORY</code> values must be one of the values supported
-    #         for that <code>VCPU</code> value. The supported values are 0.25, 0.5, 1, 2, 4, 8, and
-    #         16</p>
+    #         for that <code>VCPU</code> value. The supported values are 0.25, 0.5, 1, 2, 4, 8, 16, and
+    #         32.</p>
     #                  <dl>
     #                     <dt>value = 0.25</dt>
     #                     <dd>
@@ -6016,6 +7339,11 @@ module Aws::Batch
     #                        <p>
     #                           <code>MEMORY</code> = 32768, 40960, 49152, 57344, 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880
     #   </p>
+    #                     </dd>
+    #                     <dt>value = 32</dt>
+    #                     <dd>
+    #                        <p>
+    #                           <code>MEMORY</code> = 61440, 122880, or 249856</p>
     #                     </dd>
     #                  </dl>
     #               </dd>
@@ -6068,15 +7396,15 @@ module Aws::Batch
     #        <code>readonlyRootFilesystem</code>, and <code>efsVolumeConfiguration</code>.</p>
     #            </note>
     #            <note>
-    #               <p>The Batch Scheduler checks the compute environments that are attached to the job queue before 
-    #       registering a task definition with Fargate. In this scenario, the job queue is where the job is 
-    #       submitted. If the job requires a Windows container and the first compute environment is <code>LINUX</code>, 
-    #       the compute environment is skipped and the next compute environment is checked until a Windows-based 
+    #               <p>The Batch Scheduler checks the compute environments that are attached to the job queue before
+    #       registering a task definition with Fargate. In this scenario, the job queue is where the job is
+    #       submitted. If the job requires a Windows container and the first compute environment is <code>LINUX</code>,
+    #       the compute environment is skipped and the next compute environment is checked until a Windows-based
     #       compute environment is found.</p>
     #            </note>
     #            <note>
-    #               <p>Fargate Spot is not supported on Windows-based containers on Fargate. 
-    #       A job queue will be blocked if a Windows job is submitted to a job 
+    #               <p>Fargate Spot is not supported on Windows-based containers on Fargate.
+    #       A job queue will be blocked if a Windows job is submitted to a job
     #       queue with only Fargate Spot compute environments. However, you can attach both <code>FARGATE</code> and
     #        <code>FARGATE_SPOT</code> compute environments to the same job queue.</p>
     #            </note>
@@ -6104,6 +7432,31 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>This is used when you're using an S3Files file system for job storage.</p>
+    # @!attribute file_system_arn
+    #   <p>The Amazon Resource Name (ARN) of the S3Files file system to use.</p>
+    #   @return [String]
+    # @!attribute root_directory
+    #   <p>The directory within the S3Files file system to mount as the root directory.</p>
+    #   @return [String]
+    # @!attribute transit_encryption_port
+    #   <p>The port to use when sending encrypted data between the Amazon ECS host and the S3Files file system
+    #      server.</p>
+    #   @return [Integer]
+    # @!attribute access_point_arn
+    #   <p>The Amazon Resource Name (ARN) of the S3Files access point to use.</p>
+    #   @return [String]
+    class S3FilesVolumeConfiguration < Struct.new(
+      nil,
+      :file_system_arn,
+      :root_directory,
+      :transit_encryption_port,
+      :access_point_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object that represents a scheduling policy.</p>
     # @!attribute name
     #   <p>The name of the fair-share scheduling policy.</p>
@@ -6113,6 +7466,9 @@ module Aws::Batch
     #        <code>arn:<i>aws</i>:batch:<i>us-east-1</i>:<i>123456789012</i>:scheduling-policy/<i>HighPriority</i>
     #               </code>.</p>
     #   @return [String]
+    # @!attribute quota_share_policy
+    #   <p>The quota share scheduling policy details.</p>
+    #   @return [Types::QuotaSharePolicy]
     # @!attribute fairshare_policy
     #   <p>The fair-share scheduling policy details.</p>
     #   @return [Types::FairsharePolicy]
@@ -6125,6 +7481,7 @@ module Aws::Batch
       nil,
       :name,
       :arn,
+      :quota_share_policy,
       :fairshare_policy,
       :tags,
       keyword_init: true
@@ -6267,6 +7624,44 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The capacity usage for a service job, including the unit of
+    #             measure and quantity of resources being consumed.</p>
+    # @!attribute capacity_unit
+    #   <p>The unit of measure for the service job capacity usage. For service jobs, this is the
+    #                   instance type.</p>
+    #   @return [String]
+    # @!attribute quantity
+    #   <p>The quantity of capacity being used by the service job, measured in the units
+    #               specified by <code>capacityUnit</code>.</p>
+    #   @return [Float]
+    class ServiceJobCapacityUsageDetail < Struct.new(
+      nil,
+      :capacity_unit,
+      :quantity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The capacity usage for a service job, including the unit of
+    #             measure and quantity of resources being used.</p>
+    # @!attribute capacity_unit
+    #   <p>The unit of measure for the service job capacity usage. For service jobs, this is the
+    #                   instance type.</p>
+    #   @return [String]
+    # @!attribute quantity
+    #   <p>The quantity of capacity being used by the service job, measured in the units
+    #               specified by <code>capacityUnit</code>.</p>
+    #   @return [Float]
+    class ServiceJobCapacityUsageSummary < Struct.new(
+      nil,
+      :capacity_unit,
+      :quantity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies conditions for when to exit or retry a service job based on the exit status or status reason.</p>
     # @!attribute action
     #   <p>The action to take if the service job exits with the specified condition. Valid values are <code>RETRY</code> and <code>EXIT</code>.</p>
@@ -6278,6 +7673,60 @@ module Aws::Batch
       nil,
       :action,
       :on_status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Detailed information about a preempted attempt of a service job.</p>
+    # @!attribute service_resource_id
+    #   <p>The service resource identifier associated with the service job attempt.</p>
+    #   @return [Types::ServiceResourceId]
+    # @!attribute started_at
+    #   <p>The Unix timestamp (in milliseconds) for when the service job attempt was started.</p>
+    #   @return [Integer]
+    # @!attribute stopped_at
+    #   <p>The Unix timestamp (in milliseconds) for when the service job attempt stopped running.</p>
+    #   @return [Integer]
+    # @!attribute status_reason
+    #   <p>A string that provides additional details for the current status of the service job attempt.</p>
+    #   @return [String]
+    class ServiceJobPreemptedAttempt < Struct.new(
+      nil,
+      :service_resource_id,
+      :started_at,
+      :stopped_at,
+      :status_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the service job behavior when preempted.</p>
+    # @!attribute preemption_retries_before_termination
+    #   <p>The number of times a service job can be retried after it is preempted.  A job will be terminated when preemption retries have been exhausted.
+    #         If this field is unset, preempted jobs will be requeued an unlimited number of times. </p>
+    #   @return [Integer]
+    class ServiceJobPreemptionConfiguration < Struct.new(
+      nil,
+      :preemption_retries_before_termination,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summarizes the preemptions of the service job. This field appears on a service job
+    #         when it has been preempted.</p>
+    # @!attribute preempted_attempt_count
+    #   <p>The total number of times the service job has been preempted.</p>
+    #   @return [Integer]
+    # @!attribute recent_preempted_attempts
+    #   <p>A list of the most recent preemption attempts for the service job.</p>
+    #   @return [Array<Types::ServiceJobPreemptedAttempt>]
+    class ServiceJobPreemptionSummary < Struct.new(
+      nil,
+      :preempted_attempt_count,
+      :recent_preempted_attempts,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6303,6 +7752,10 @@ module Aws::Batch
     # @!attribute latest_attempt
     #   <p>Information about the latest attempt for the service job.</p>
     #   @return [Types::LatestServiceJobAttempt]
+    # @!attribute capacity_usage
+    #   <p>The capacity usage information for this service job, including the unit of measure and
+    #               quantity of resources being used.</p>
+    #   @return [Array<Types::ServiceJobCapacityUsageSummary>]
     # @!attribute created_at
     #   <p>The Unix timestamp (in milliseconds) for when the service job was created.</p>
     #   @return [Integer]
@@ -6315,11 +7768,18 @@ module Aws::Batch
     # @!attribute job_name
     #   <p>The name of the service job.</p>
     #   @return [String]
+    # @!attribute scheduled_at
+    #   <p>The Unix timestamp (in milliseconds) for when the service job was scheduled for
+    #               execution.</p>
+    #   @return [Integer]
     # @!attribute service_job_type
     #   <p>The type of service job. For SageMaker Training jobs, this value is <code>SAGEMAKER_TRAINING</code>.</p>
     #   @return [String]
     # @!attribute share_identifier
     #   <p>The share identifier for the job.</p>
+    #   @return [String]
+    # @!attribute quota_share_name
+    #   <p>The quota share for the service job.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The current status of the service job. </p>
@@ -6333,19 +7793,26 @@ module Aws::Batch
     # @!attribute stopped_at
     #   <p>The Unix timestamp (in milliseconds) for when the service job stopped running.</p>
     #   @return [Integer]
+    # @!attribute is_terminated
+    #   <p>Indicates whether a termination request has been accepted for the service job. This field is only present when the value is <code>true</code>.</p>
+    #   @return [Boolean]
     class ServiceJobSummary < Struct.new(
       nil,
       :latest_attempt,
+      :capacity_usage,
       :created_at,
       :job_arn,
       :job_id,
       :job_name,
+      :scheduled_at,
       :service_job_type,
       :share_identifier,
+      :quota_share_name,
       :status,
       :status_reason,
       :started_at,
       :stopped_at,
+      :is_terminated,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6425,9 +7892,9 @@ module Aws::Batch
     #         (*).</p>
     #   @return [String]
     # @!attribute scheduling_priority_override
-    #   <p>The scheduling priority for the job. This only affects jobs in job queues with a 
+    #   <p>The scheduling priority for the job. This only affects jobs in job queues with a
     #         fair-share policy. Jobs with a higher scheduling priority are scheduled before jobs with a lower
-    #         scheduling priority. This overrides any scheduling priority in the job definition and works only 
+    #         scheduling priority. This overrides any scheduling priority in the job definition and works only
     #         within a single share identifier.</p>
     #            <p>The minimum supported value is 0 and the maximum supported value is 9999.</p>
     #   @return [Integer]
@@ -6579,6 +8046,14 @@ module Aws::Batch
     #               queue doesn't have a fair-share scheduling policy. If the job queue has a fair-share
     #               scheduling policy, then this parameter must be specified.</p>
     #   @return [String]
+    # @!attribute quota_share_name
+    #   <p>The quota share for the service job. Don't specify this parameter if the job queue
+    #           doesn't have a quota share scheduling policy. If the job queue has a quota share scheduling policy,
+    #           then this parameter must be specified.</p>
+    #   @return [String]
+    # @!attribute preemption_configuration
+    #   <p>Specifies the service job behavior when preempted.</p>
+    #   @return [Types::ServiceJobPreemptionConfiguration]
     # @!attribute timeout_config
     #   <p>The timeout configuration for the service job. If none is specified, Batch defers to the default timeout of the underlying service handling the job.</p>
     #   @return [Types::ServiceJobTimeout]
@@ -6597,6 +8072,8 @@ module Aws::Batch
       :service_request_payload,
       :service_job_type,
       :share_identifier,
+      :quota_share_name,
+      :preemption_configuration,
       :timeout_config,
       :tags,
       :client_token,
@@ -6691,7 +8168,7 @@ module Aws::Batch
     # <p>The details for the container in this task attempt.</p>
     # @!attribute command
     #   <p>The command that's passed to the container. This parameter maps to <code>Cmd</code> in the
-    #      <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>COMMAND</code>
+    #      <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the <code>COMMAND</code>
     #      parameter to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. For more information, see
     #       <a href="https://docs.docker.com/engine/reference/builder/#cmd">https://docs.docker.com/engine/reference/builder/#cmd</a>.</p>
     #   @return [Array<String>]
@@ -6700,7 +8177,7 @@ module Aws::Batch
     #   @return [Array<Types::TaskContainerDependency>]
     # @!attribute environment
     #   <p>The environment variables to pass to a container. This parameter maps to <code>Env</code> in
-    #      the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the
+    #      the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a> and the
     #       <code>--env</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p>
     #            <important>
     #               <p>We don't recommend using plaintext environment variables for sensitive information, such as
@@ -6729,8 +8206,8 @@ module Aws::Batch
     #      default, images in the Docker Hub registry are available. Other repositories are specified with
     #      either <code>repository-url/image:tag</code> or <code>repository-url/image@digest</code>. Up to
     #      255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward
-    #      slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #      slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>IMAGE</code> parameter of the <a href="https://docs.docker.com/engine/reference/run/#security-configuration">
     #                  <i>docker
     #        run</i>
@@ -6745,8 +8222,8 @@ module Aws::Batch
     #   @return [Types::LinuxParameters]
     # @!attribute log_configuration
     #   <p>The log configuration specification for the container.</p>
-    #            <p>This parameter maps to <code>LogConfig</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #            <p>This parameter maps to <code>LogConfig</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>--log-driver</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <p>By default, containers use the same logging driver that the Docker daemon uses. However the
@@ -6776,8 +8253,8 @@ module Aws::Batch
     #   @return [Types::LogConfiguration]
     # @!attribute mount_points
     #   <p>The mount points for data volumes in your container.</p>
-    #            <p>This parameter maps to <code>Volumes</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #            <p>This parameter maps to <code>Volumes</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <a href="">--volume</a> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <p>Windows containers can mount whole directories on the same drive as
@@ -6790,8 +8267,8 @@ module Aws::Batch
     # @!attribute privileged
     #   <p>When this parameter is <code>true</code>, the container is given elevated privileges on the
     #      host container instance (similar to the <code>root</code> user). This parameter maps to
-    #       <code>Privileged</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #       <code>Privileged</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>--privileged</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <note>
@@ -6800,8 +8277,8 @@ module Aws::Batch
     #   @return [Boolean]
     # @!attribute readonly_root_filesystem
     #   <p>When this parameter is true, the container is given read-only access to its root file
-    #      system. This parameter maps to <code>ReadonlyRootfs</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #      system. This parameter maps to <code>ReadonlyRootfs</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>--read-only</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <note>
@@ -6822,8 +8299,8 @@ module Aws::Batch
     # @!attribute ulimits
     #   <p>A list of <code>ulimits</code> to set in the container. If a <code>ulimit</code> value is
     #      specified in a task definition, it overrides the default values set by Docker. This parameter
-    #      maps to <code>Ulimits</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #      maps to <code>Ulimits</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>--ulimit</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <p>Amazon ECS tasks hosted on Fargate use the default resource limit values set by the operating
@@ -6890,6 +8367,21 @@ module Aws::Batch
     #               <p>This parameter is not supported for Windows containers.</p>
     #            </note>
     #   @return [String]
+    # @!attribute start_timeout
+    #   <p>Time duration (in seconds) to wait before giving up on resolving dependencies for a
+    #      container. The minimum value is 2 seconds and the maximum value for Fargate is 120
+    #      seconds.</p>
+    #   @return [Integer]
+    # @!attribute stop_timeout
+    #   <p>Time duration (in seconds) to wait before the container is forcefully killed if it doesn't
+    #      exit normally on its own. The minimum value is 2 seconds and the maximum value for Fargate is
+    #      120 seconds. If the parameter is not specified, the default value of 30 seconds is used. For
+    #      tasks that use the EC2 launch type, if the <code>stopTimeout</code> parameter isn't specified,
+    #      the value set for the Amazon ECS container agent configuration variable
+    #       <code>ECS_CONTAINER_STOP_TIMEOUT</code> is used. If neither the <code>stopTimeout</code>
+    #      parameter nor the <code>ECS_CONTAINER_STOP_TIMEOUT</code> agent configuration variable are set,
+    #      then the default value of 30 seconds is used.</p>
+    #   @return [Integer]
     # @!attribute exit_code
     #   <p>The exit code returned upon completion.</p>
     #   @return [Integer]
@@ -6924,6 +8416,8 @@ module Aws::Batch
       :secrets,
       :ulimits,
       :user,
+      :start_timeout,
+      :stop_timeout,
       :exit_code,
       :reason,
       :log_stream_name,
@@ -6976,8 +8470,8 @@ module Aws::Batch
     #    the container that's launched as part of a job.</p>
     # @!attribute command
     #   <p>The command that's passed to the container. This parameter maps to <code>Cmd</code> in the
-    #       <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker
+    #       <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>COMMAND</code> parameter to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. For more information,
     #      see <a href="https://docs.docker.com/engine/reference/builder/#cmd">Dockerfile reference:
     #       CMD</a>.</p>
@@ -6986,8 +8480,8 @@ module Aws::Batch
     #   <p>A list of containers that this container depends on.</p>
     #   @return [Array<Types::TaskContainerDependency>]
     # @!attribute environment
-    #   <p>The environment variables to pass to a container. This parameter maps to Env in the <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a>
-    #      section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a>
+    #   <p>The environment variables to pass to a container. This parameter maps to Env in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a container</a>
+    #      section of the <a href="https://docs.docker.com/engine/api/latest/">Docker Remote API</a>
     #      and the <code>--env</code> parameter to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. </p>
     #            <important>
     #               <p>We don't recommend using plaintext environment variables for sensitive information, such as
@@ -7020,8 +8514,8 @@ module Aws::Batch
     #      default, images in the Docker Hub registry are available. Other repositories are specified with
     #      either <code>repository-url/image:tag</code> or <code>repository-url/image@digest</code>. Up to
     #      255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward
-    #      slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #      slashes, and number signs are allowed. This parameter maps to <code>Image</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>IMAGE</code> parameter of the <a href="https://docs.docker.com/engine/reference/run/#security-configuration">
     #                  <i>docker
     #        run</i>
@@ -7033,8 +8527,8 @@ module Aws::Batch
     #   @return [Types::LinuxParameters]
     # @!attribute log_configuration
     #   <p>The log configuration specification for the container.</p>
-    #            <p>This parameter maps to <code>LogConfig</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #            <p>This parameter maps to <code>LogConfig</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>--log-driver</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <p>By default, containers use the same logging driver that the Docker daemon uses. However the
@@ -7064,8 +8558,8 @@ module Aws::Batch
     #   @return [Types::LogConfiguration]
     # @!attribute mount_points
     #   <p>The mount points for data volumes in your container.</p>
-    #            <p>This parameter maps to <code>Volumes</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #            <p>This parameter maps to <code>Volumes</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <a href="">--volume</a> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <p>Windows containers can mount whole directories on the same drive as
@@ -7079,8 +8573,8 @@ module Aws::Batch
     # @!attribute privileged
     #   <p>When this parameter is <code>true</code>, the container is given elevated privileges on the
     #      host container instance (similar to the <code>root</code> user). This parameter maps to
-    #       <code>Privileged</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #       <code>Privileged</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>--privileged</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <note>
@@ -7089,8 +8583,8 @@ module Aws::Batch
     #   @return [Boolean]
     # @!attribute readonly_root_filesystem
     #   <p>When this parameter is true, the container is given read-only access to its root file
-    #      system. This parameter maps to <code>ReadonlyRootfs</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #      system. This parameter maps to <code>ReadonlyRootfs</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>--read-only</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <note>
@@ -7101,8 +8595,8 @@ module Aws::Batch
     #   <p>The private repository authentication credentials to use.</p>
     #   @return [Types::RepositoryCredentials]
     # @!attribute resource_requirements
-    #   <p>The type and amount of a resource to assign to a container. The only supported resource is a
-    #      GPU.</p>
+    #   <p>The type and amount of a resource to assign to a container. The supported resources include
+    #      <code>GPU</code>, <code>MEMORY</code>, and <code>VCPU</code>.</p>
     #   @return [Array<Types::ResourceRequirement>]
     # @!attribute secrets
     #   <p>The secrets to pass to the container. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html">Specifying Sensitive
@@ -7111,8 +8605,8 @@ module Aws::Batch
     # @!attribute ulimits
     #   <p>A list of <code>ulimits</code> to set in the container. If a <code>ulimit</code> value is
     #      specified in a task definition, it overrides the default values set by Docker. This parameter
-    #      maps to <code>Ulimits</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a
-    #       container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker
+    #      maps to <code>Ulimits</code> in the <a href="https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate">Create a
+    #       container</a> section of the <a href="https://docs.docker.com/engine/api/latest/">Docker
     #       Remote API</a> and the <code>--ulimit</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration">docker
     #      run</a>.</p>
     #            <p>Amazon ECS tasks hosted on Fargate use the default resource limit values set by the operating
@@ -7174,6 +8668,21 @@ module Aws::Batch
     #               <p>This parameter is not supported for Windows containers.</p>
     #            </note>
     #   @return [String]
+    # @!attribute start_timeout
+    #   <p>Time duration (in seconds) to wait before giving up on resolving dependencies for a
+    #      container. The minimum value is 2 seconds and the maximum value for Fargate is 120
+    #      seconds.</p>
+    #   @return [Integer]
+    # @!attribute stop_timeout
+    #   <p>Time duration (in seconds) to wait before the container is forcefully killed if it doesn't
+    #      exit normally on its own. The minimum value is 2 seconds and the maximum value for Fargate is
+    #      120 seconds. If the parameter is not specified, the default value of 30 seconds is used. For
+    #      tasks that use the EC2 launch type, if the <code>stopTimeout</code> parameter isn't specified,
+    #      the value set for the Amazon ECS container agent configuration variable
+    #       <code>ECS_CONTAINER_STOP_TIMEOUT</code> is used. If neither the <code>stopTimeout</code>
+    #      parameter nor the <code>ECS_CONTAINER_STOP_TIMEOUT</code> agent configuration variable are set,
+    #      then the default value of 30 seconds is used.</p>
+    #   @return [Integer]
     class TaskContainerProperties < Struct.new(
       nil,
       :command,
@@ -7193,6 +8702,8 @@ module Aws::Batch
       :secrets,
       :ulimits,
       :user,
+      :start_timeout,
+      :stop_timeout,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7215,10 +8726,10 @@ module Aws::Batch
     #   <p>The Batch job ID of the job to terminate.</p>
     #   @return [String]
     # @!attribute reason
-    #   <p>A message to attach to the job that explains the reason for canceling it. This message is
+    #   <p>A message to attach to the job that explains the reason for terminating it. This message is
     #         returned by future <a>DescribeJobs</a> operations on the job. It is also
     #         recorded in the Batch activity logs.</p>
-    #            <p>This parameter has as limit of 1024 characters.</p>
+    #            <p>This parameter has a limit of 1024 characters.</p>
     #   @return [String]
     class TerminateJobRequest < Struct.new(
       nil,
@@ -7236,11 +8747,92 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An object that contains the details of a job that couldn't be terminated by a
+    #         <code>TerminateJobs</code> operation.</p>
+    # @!attribute job
+    #   <p>The Batch job ID of the job that couldn't be terminated.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>An error code that identifies the reason the job couldn't be terminated. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ValidationException</code> – A job identifier in the request is malformed or isn't valid.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ClientException</code> – The request failed because of a client error.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ThrottlingException</code> – The request was throttled. Retry the request.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ServerException</code> – An internal error occurred. Retry the request.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AccessDenied</code> – The caller isn't authorized to perform the action on the specified job.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message that describes the reason the job couldn't be terminated.</p>
+    #   @return [String]
+    class TerminateJobsErrorDetail < Struct.new(
+      nil,
+      :job,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the jobs to terminate and the reason for the termination.</p>
+    # @!attribute jobs
+    #   <p>An array of up to 50 Batch job IDs of the jobs to terminate.</p>
+    #   @return [Array<String>]
+    # @!attribute reason
+    #   <p>A message to attach to the job that explains the reason for terminating it. This message is
+    #         returned by future <a>DescribeJobs</a> operations on the job. It is also
+    #         recorded in the Batch activity logs.</p>
+    #            <p>This parameter has a limit of 1024 characters.</p>
+    #   @return [String]
+    class TerminateJobsRequest < Struct.new(
+      nil,
+      :jobs,
+      :reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The result of a <code>TerminateJobs</code> request, including the jobs whose termination
+    #       request was accepted and the errors for jobs that couldn't be terminated.</p>
+    # @!attribute successful
+    #   <p>A list of the job IDs whose termination request was accepted.</p>
+    #   @return [Array<String>]
+    # @!attribute errors
+    #   <p>A list of <code>TerminateJobsErrorDetail</code> items, one for each job that couldn't be
+    #         terminated. Each item includes the job ID along with a code and message that describe why the
+    #         job wasn't terminated.</p>
+    #   @return [Array<Types::TerminateJobsErrorDetail>]
+    class TerminateJobsResponse < Struct.new(
+      nil,
+      :successful,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute job_id
     #   <p>The service job ID of the service job to terminate.</p>
     #   @return [String]
     # @!attribute reason
-    #   <p>A message to attach to the service job that explains the reason for canceling it. This message is returned by <code>DescribeServiceJob</code> operations on the service job.</p>
+    #   <p>A message to attach to the service job that explains the reason for terminating it. This message is returned by <code>DescribeServiceJob</code> operations on the service job.</p>
     #   @return [String]
     class TerminateServiceJobRequest < Struct.new(
       nil,
@@ -7253,6 +8845,80 @@ module Aws::Batch
 
     class TerminateServiceJobResponse < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that contains the details of a service job that couldn't be terminated by a <code>TerminateServiceJobs</code> operation.</p>
+    # @!attribute job
+    #   <p>The service job ID of the service job that couldn't be terminated.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>An error code that identifies the reason the service job couldn't be terminated. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ValidationException</code> – A service job identifier in the request is malformed or isn't valid.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ClientException</code> – The request failed because of a client error.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ThrottlingException</code> – The request was throttled. Retry the request.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ServerException</code> – An internal error occurred. Retry the request.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>AccessDenied</code> – The caller isn't authorized to perform the action on the specified service job.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message that describes the reason the service job couldn't be terminated.</p>
+    #   @return [String]
+    class TerminateServiceJobsErrorDetail < Struct.new(
+      nil,
+      :job,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the service jobs to terminate and the reason for the termination.</p>
+    # @!attribute jobs
+    #   <p>An array of up to 50 service job IDs of the service jobs to terminate.</p>
+    #   @return [Array<String>]
+    # @!attribute reason
+    #   <p>A message to attach to the service job that explains the reason for terminating it. This message is returned by <code>DescribeServiceJob</code> operations on the service job.</p>
+    #   @return [String]
+    class TerminateServiceJobsRequest < Struct.new(
+      nil,
+      :jobs,
+      :reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The result of a <code>TerminateServiceJobs</code> request, including the service jobs whose termination request was accepted and the errors for service jobs that couldn't be terminated.</p>
+    # @!attribute successful
+    #   <p>A list of the service job IDs whose termination request was accepted.</p>
+    #   @return [Array<String>]
+    # @!attribute errors
+    #   <p>A list of <code>TerminateServiceJobsErrorDetail</code> items, one for each service job that couldn't be terminated. Each item includes the service job ID along with a code and message that describe why the service job wasn't terminated.</p>
+    #   @return [Array<Types::TerminateServiceJobsErrorDetail>]
+    class TerminateServiceJobsResponse < Struct.new(
+      nil,
+      :successful,
+      :errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7361,8 +9027,7 @@ module Aws::Batch
     #         don't scale out. </p>
     #            <note>
     #               <p>Compute environments in a <code>DISABLED</code> state may continue to incur billing
-    #           charges. To prevent additional charges, turn off and then delete the compute environment.
-    #           For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state">State</a> in the <i>Batch User Guide</i>.</p>
+    #           charges, for example, if they have running instances due to jobs that are still executing or a non-zero <code>minvCpus</code> setting. To prevent additional charges, disable and delete the compute environment.</p>
     #            </note>
     #            <p>When an instance is idle, the instance scales down to the <code>minvCpus</code> value.
     #         However, the instance size doesn't change. For example, consider a <code>c5.8xlarge</code>
@@ -7411,6 +9076,17 @@ module Aws::Batch
     # @!attribute context
     #   <p>Reserved.</p>
     #   @return [String]
+    # @!attribute ecs_settings
+    #   <p>The Amazon ECS settings for the compute environment. These settings control CloudWatch
+    #         Container Insights collection for the compute environment.</p>
+    #   @return [Types::EcsSettings]
+    # @!attribute eks_configuration
+    #   <p>Updates the Amazon EKS configuration for the compute environment. Only specify this
+    #         parameter if the compute environment's <code>containerOrchestrationType</code> is
+    #         <code>EKS</code>. Currently, the <code>accessEntry</code> setting is the only Amazon EKS configuration that
+    #         you can change after the compute environment is created. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html">Amazon EKS access entry
+    #         authentication</a> in the <i>Batch User Guide</i>.</p>
+    #   @return [Types::EksConfigurationUpdate]
     class UpdateComputeEnvironmentRequest < Struct.new(
       nil,
       :compute_environment,
@@ -7420,6 +9096,8 @@ module Aws::Batch
       :service_role,
       :update_policy,
       :context,
+      :ecs_settings,
+      :eks_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7473,11 +9151,11 @@ module Aws::Batch
     # @!attribute quantity
     #   <p>The change in the total quantity of the consumable resource. The <code>operation</code>
     #               parameter determines whether the value specified here will be the new total quantity, or
-    #               the amount by which the total quantity will be increased or reduced. Must be a non-negative 
+    #               the amount by which the total quantity will be increased or reduced. Must be a non-negative
     #               value.</p>
     #   @return [Integer]
     # @!attribute client_token
-    #   <p>If this parameter is specified and two update requests with identical payloads and 
+    #   <p>If this parameter is specified and two update requests with identical payloads and
     #             <code>clientToken</code>s are received, these requests are considered the same request. Both requests will succeed, but the update will only happen once. A <code>clientToken</code> is valid for 8 hours.</p>
     #   @return [String]
     class UpdateConsumableResourceRequest < Struct.new(
@@ -7584,16 +9262,66 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for updating an Amazon ECS Managed Instances capacity provider. Used in
+    #    <code>UpdateComputeEnvironment</code> requests. The <code>capacityOptionType</code> and
+    #    <code>fipsEnabled</code> fields cannot be changed on update.</p>
+    # @!attribute propagate_tags
+    #   <p>Specifies whether tags on the capacity provider are propagated to the Amazon EC2 instances it
+    #      launches. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>CAPACITY_PROVIDER</code> — Propagates tags to instances.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code> — Does not propagate tags to instances.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute infrastructure_role_arn
+    #   <p>The updated Amazon Resource Name (ARN) of the IAM role that Amazon ECS assumes to manage Amazon EC2 instances on
+    #      your behalf.</p>
+    #   @return [String]
+    # @!attribute instance_launch_template
+    #   <p>The updated instance launch configuration for the Amazon ECS Managed Instances capacity
+    #      provider.</p>
+    #   @return [Types::InstanceLaunchTemplateUpdate]
+    # @!attribute infrastructure_optimization
+    #   <p>The updated infrastructure optimization configuration.</p>
+    #   @return [Types::InfrastructureOptimization]
+    class UpdateManagedInstancesProviderConfiguration < Struct.new(
+      nil,
+      :propagate_tags,
+      :infrastructure_role_arn,
+      :instance_launch_template,
+      :infrastructure_optimization,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies the infrastructure update policy for the Amazon EC2 compute environment. For more information
     #    about infrastructure updates, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute environments</a> in the
     #     <i>Batch User Guide</i>.</p>
+    #          <important>
+    #             <p>The <code>updatePolicy</code> property applies only to Amazon EC2 managed compute environments.
+    #     Batch doesn't support <code>updatePolicy</code> for Fargate compute environments. If you
+    #     specify it for a Fargate compute environment, Batch ignores it.</p>
+    #          </important>
     # @!attribute terminate_jobs_on_update
     #   <p>Specifies whether jobs are automatically terminated when the compute environment
     #      infrastructure is updated. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute job_execution_timeout_minutes
     #   <p>Specifies the job timeout (in minutes) when the compute environment infrastructure is
-    #      updated. The default value is 30.</p>
+    #      updated. The default value is 30. The maximum value is 7200.</p>
+    #            <note>
+    #               <p>Increasing <code>jobExecutionTimeoutMinutes</code> during infrastructure updates delays
+    #       the replacement of instances with new instances that include updates such as security patches,
+    #       but provides more time for jobs to execute. Consider the security implications of this tradeoff
+    #       when setting timeout values.</p>
+    #            </note>
     #   @return [Integer]
     class UpdatePolicy < Struct.new(
       nil,
@@ -7604,16 +9332,63 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains the parameters for <code>UpdateSchedulingPolicy</code>.</p>
+    # @!attribute quota_share_arn
+    #   <p>The Amazon Resource Name (ARN) of the quota share to update.</p>
+    #   @return [String]
+    # @!attribute capacity_limits
+    #   <p>A list that specifies the quantity and type of compute capacity allocated to the quota share.</p>
+    #   @return [Array<Types::QuotaShareCapacityLimit>]
+    # @!attribute resource_sharing_configuration
+    #   <p>Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.</p>
+    #   @return [Types::QuotaShareResourceSharingConfiguration]
+    # @!attribute preemption_configuration
+    #   <p>Specifies the preemption behavior for jobs in a quota share.</p>
+    #   @return [Types::QuotaSharePreemptionConfiguration]
+    # @!attribute state
+    #   <p>The state of the quota share. If the quota share is <code>ENABLED</code>, it is able to accept jobs.
+    #       If the quota share is <code>DISABLED</code>, new jobs won't be accepted but jobs already submitted can finish.</p>
+    #   @return [String]
+    class UpdateQuotaShareRequest < Struct.new(
+      nil,
+      :quota_share_arn,
+      :capacity_limits,
+      :resource_sharing_configuration,
+      :preemption_configuration,
+      :state,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quota_share_name
+    #   <p>The name of the quota share.</p>
+    #   @return [String]
+    # @!attribute quota_share_arn
+    #   <p>The Amazon Resource Name (ARN) of the quota share.</p>
+    #   @return [String]
+    class UpdateQuotaShareResponse < Struct.new(
+      nil,
+      :quota_share_name,
+      :quota_share_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the parameters for <code>UpdateSchedulingPolicy</code>. </p>
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the scheduling policy to update.</p>
     #   @return [String]
+    # @!attribute quota_share_policy
+    #   <p>The quota share scheduling policy details. Once set during creation, a quotaSharePolicy cannot be removed or changed to a fairsharePolicy.</p>
+    #   @return [Types::QuotaSharePolicy]
     # @!attribute fairshare_policy
-    #   <p>The fair-share policy scheduling details.</p>
+    #   <p>The fair-share policy scheduling details. Once set during creation, a fairsharePolicy cannot be removed or changed to a quotaSharePolicy.</p>
     #   @return [Types::FairsharePolicy]
     class UpdateSchedulingPolicyRequest < Struct.new(
       nil,
       :arn,
+      :quota_share_policy,
       :fairshare_policy,
       keyword_init: true
     )
@@ -7661,6 +9436,43 @@ module Aws::Batch
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute job_id
+    #   <p>The Batch job ID of the job to update.</p>
+    #   @return [String]
+    # @!attribute scheduling_priority
+    #   <p>The scheduling priority for the job. This only affects jobs in job queues with a
+    #         quota-share or fair-share scheduling policy. Jobs with a higher scheduling priority are scheduled before jobs with a lower
+    #         scheduling priority within a share.</p>
+    #            <p>The minimum supported value is 0 and the maximum supported value is 9999.</p>
+    #   @return [Integer]
+    class UpdateServiceJobRequest < Struct.new(
+      nil,
+      :job_id,
+      :scheduling_priority,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_arn
+    #   <p>The Amazon Resource Name (ARN) for the job.</p>
+    #   @return [String]
+    # @!attribute job_name
+    #   <p>The name of the job.</p>
+    #   @return [String]
+    # @!attribute job_id
+    #   <p>The unique identifier for the job.</p>
+    #   @return [String]
+    class UpdateServiceJobResponse < Struct.new(
+      nil,
+      :job_arn,
+      :job_name,
+      :job_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A data volume that's used in a job's container properties.</p>
     # @!attribute host
     #   <p>The contents of the <code>host</code> parameter determine whether your data volume persists
@@ -7682,11 +9494,15 @@ module Aws::Batch
     #      that are running on Fargate resources must specify a <code>platformVersion</code> of at least
     #       <code>1.4.0</code>.</p>
     #   @return [Types::EFSVolumeConfiguration]
+    # @!attribute s3files_volume_configuration
+    #   <p>This parameter is specified when you're using an S3Files file system for job storage.</p>
+    #   @return [Types::S3FilesVolumeConfiguration]
     class Volume < Struct.new(
       nil,
       :host,
       :name,
       :efs_volume_configuration,
+      :s3files_volume_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

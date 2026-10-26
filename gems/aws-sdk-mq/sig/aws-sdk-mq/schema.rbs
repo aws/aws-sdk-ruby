@@ -47,6 +47,8 @@ module Aws::Mq
     DescribeConfigurationResponse: StructureShape
     DescribeConfigurationRevisionRequest: StructureShape
     DescribeConfigurationRevisionResponse: StructureShape
+    DescribeSharedResourcesRequest: StructureShape
+    DescribeSharedResourcesResponse: StructureShape
     DescribeUserRequest: StructureShape
     DescribeUserResponse: StructureShape
     EncryptionOptions: StructureShape
@@ -76,8 +78,14 @@ module Aws::Mq
     PromoteResponse: StructureShape
     RebootBrokerRequest: StructureShape
     RebootBrokerResponse: StructureShape
+    ResourceShareError: StructureShape
     SanitizationWarning: StructureShape
     SanitizationWarningReason: EnumShape
+    SharedResource: StructureShape
+    SharedResourceError: StructureShape
+    SharedResourceErrorCode: EnumShape
+    SharedResourceStatus: EnumShape
+    SharedResourceType: EnumShape
     UnauthorizedException: StructureShape
     UpdateBrokerRequest: StructureShape
     UpdateBrokerResponse: StructureShape
@@ -103,7 +111,9 @@ module Aws::Mq
     Listofconfigurationrevision: ListShape
     Listofdeploymentmode: ListShape
     Listofengineversion: ListShape
+    Listofresourceshareerror: ListShape
     Listofsanitizationwarning: ListShape
+    Listofsharedresource: ListShape
     Listofuser: ListShape
     Listofusersummary: ListShape
     ListofString: ListShape

@@ -92,6 +92,9 @@ module Aws::Inspector2
         ?lambda_layer_aggregation: Types::LambdaLayerAggregation,
         ?lambda_function_aggregation: Types::LambdaFunctionAggregation,
         ?code_repository_aggregation: Types::CodeRepositoryAggregation,
+        ?vm_instance_aggregation: Types::VmInstanceAggregation,
+        ?container_image_aggregation: Types::ContainerImageAggregation,
+        ?serverless_function_aggregation: Types::ServerlessFunctionAggregation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -107,6 +110,9 @@ module Aws::Inspector2
       attr_accessor lambda_layer_aggregation: Types::LambdaLayerAggregation?
       attr_accessor lambda_function_aggregation: Types::LambdaFunctionAggregation?
       attr_accessor code_repository_aggregation: Types::CodeRepositoryAggregation?
+      attr_accessor vm_instance_aggregation: Types::VmInstanceAggregation?
+      attr_accessor container_image_aggregation: Types::ContainerImageAggregation?
+      attr_accessor serverless_function_aggregation: Types::ServerlessFunctionAggregation?
 
       class AccountAggregation < AggregationRequest
       end
@@ -132,6 +138,12 @@ module Aws::Inspector2
       end
       class CodeRepositoryAggregation < AggregationRequest
       end
+      class VmInstanceAggregation < AggregationRequest
+      end
+      class ContainerImageAggregation < AggregationRequest
+      end
+      class ServerlessFunctionAggregation < AggregationRequest
+      end
       class Unknown < AggregationRequest
       end
     end
@@ -152,6 +164,9 @@ module Aws::Inspector2
         ?lambda_layer_aggregation: Types::LambdaLayerAggregationResponse,
         ?lambda_function_aggregation: Types::LambdaFunctionAggregationResponse,
         ?code_repository_aggregation: Types::CodeRepositoryAggregationResponse,
+        ?vm_instance_aggregation: Types::VmInstanceAggregationResponse,
+        ?container_image_aggregation: Types::ContainerImageAggregationResponse,
+        ?serverless_function_aggregation: Types::ServerlessFunctionAggregationResponse,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -167,6 +182,9 @@ module Aws::Inspector2
       attr_accessor lambda_layer_aggregation: Types::LambdaLayerAggregationResponse?
       attr_accessor lambda_function_aggregation: Types::LambdaFunctionAggregationResponse?
       attr_accessor code_repository_aggregation: Types::CodeRepositoryAggregationResponse?
+      attr_accessor vm_instance_aggregation: Types::VmInstanceAggregationResponse?
+      attr_accessor container_image_aggregation: Types::ContainerImageAggregationResponse?
+      attr_accessor serverless_function_aggregation: Types::ServerlessFunctionAggregationResponse?
 
       class AccountAggregation < AggregationResponse
       end
@@ -191,6 +209,12 @@ module Aws::Inspector2
       class LambdaFunctionAggregation < AggregationResponse
       end
       class CodeRepositoryAggregation < AggregationResponse
+      end
+      class VmInstanceAggregation < AggregationResponse
+      end
+      class ContainerImageAggregation < AggregationResponse
+      end
+      class ServerlessFunctionAggregation < AggregationResponse
       end
       class Unknown < AggregationResponse
       end
@@ -217,6 +241,11 @@ module Aws::Inspector2
       def initialize: (
         ?ami: String,
         ?account_id: String,
+        ?cloud_provider: String,
+        ?cloud_partition: String,
+        ?cloud_region: String,
+        ?cloud_org_id: String,
+        ?cloud_account_id: String,
         ?severity_counts: Types::SeverityCounts,
         ?affected_instances: Integer,
       ) -> void
@@ -224,6 +253,11 @@ module Aws::Inspector2
 
       attr_accessor ami: String?
       attr_accessor account_id: String?
+      attr_accessor cloud_provider: String?
+      attr_accessor cloud_partition: String?
+      attr_accessor cloud_region: String?
+      attr_accessor cloud_org_id: String?
+      attr_accessor cloud_account_id: String?
       attr_accessor severity_counts: Types::SeverityCounts?
       attr_accessor affected_instances: Integer?
     end
@@ -306,6 +340,23 @@ module Aws::Inspector2
       attr_accessor lambda: bool?
       attr_accessor lambda_code: bool?
       attr_accessor code_repository: bool?
+    end
+
+    module AwsConfigConnectorArnComparison
+      EQUALS: String
+    end
+
+    class AwsConfigConnectorArnFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison: String?
+      attr_accessor value: String?
     end
 
     class AwsEc2InstanceDetails
@@ -486,6 +537,68 @@ module Aws::Inspector2
       attr_accessor package_type: String?
       attr_accessor architectures: Array[String]?
       attr_accessor last_modified_at: Time?
+    end
+
+    class AzureProviderDetailCreate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_config_connector_arn: String,
+        ?scope_configuration: Types::AzureScopeConfigurationInput,
+        ?azure_regions: Array[String],
+        ?auto_install_vm_scanner: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_config_connector_arn: String?
+      attr_accessor scope_configuration: Types::AzureScopeConfigurationInput?
+      attr_accessor azure_regions: Array[String]?
+      attr_accessor auto_install_vm_scanner: bool?
+    end
+
+    class AzureProviderDetailUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?azure_regions: Array[String],
+        ?scope_configuration: Types::AzureScopeConfigurationInput,
+        ?auto_install_vm_scanner: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor azure_regions: Array[String]?
+      attr_accessor scope_configuration: Types::AzureScopeConfigurationInput?
+      attr_accessor auto_install_vm_scanner: bool?
+    end
+
+    class AzureScopeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vm_scanning: Types::ScopeConfiguration,
+        ?container_image_scanning: Types::ScopeConfiguration,
+        ?serverless_scanning: Types::ScopeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vm_scanning: Types::ScopeConfiguration?
+      attr_accessor container_image_scanning: Types::ScopeConfiguration?
+      attr_accessor serverless_scanning: Types::ScopeConfiguration?
+    end
+
+    class AzureScopeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vm_scanning: Types::ScopeConfigurationInput,
+        ?container_image_scanning: Types::ScopeConfigurationInput,
+        ?serverless_scanning: Types::ScopeConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vm_scanning: Types::ScopeConfigurationInput?
+      attr_accessor container_image_scanning: Types::ScopeConfigurationInput?
+      attr_accessor serverless_scanning: Types::ScopeConfigurationInput?
     end
 
     class BadRequestException
@@ -1416,7 +1529,6 @@ module Aws::Inspector2
         ?status_reason: String,
         ?created_on: Time,
         ?last_update_on: Time,
-        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1427,7 +1539,6 @@ module Aws::Inspector2
       attr_accessor status_reason: String?
       attr_accessor created_on: Time?
       attr_accessor last_update_on: Time?
-      attr_accessor tags: Hash[String, String]?
     end
 
     class CodeSecurityResource
@@ -1484,7 +1595,6 @@ module Aws::Inspector2
         ?continuous_integration_scan_supported_events: Array[String],
         ?rule_set_categories: Array[String],
         ?scope_settings: Types::ScopeSettings,
-        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1496,7 +1606,6 @@ module Aws::Inspector2
       attr_accessor continuous_integration_scan_supported_events: Array[String]?
       attr_accessor rule_set_categories: Array[String]?
       attr_accessor scope_settings: Types::ScopeSettings?
-      attr_accessor tags: Hash[String, String]?
     end
 
     class CodeSnippetError
@@ -1593,6 +1702,291 @@ module Aws::Inspector2
       attr_accessor resource_type: String?
     end
 
+    class Connector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?name: String,
+        ?description: String,
+        ?provider: String,
+        ?enablement_status: String,
+        ?enablement_status_reason: String,
+        ?health: Types::ConnectorHealth,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?azure_regions: Array[String],
+        ?aws_config_connector_arn: String,
+        ?scope_configuration: Types::AzureScopeConfiguration,
+        ?tags: Hash[String, String],
+        ?auto_install_vm_scanner: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor provider: String?
+      attr_accessor enablement_status: String?
+      attr_accessor enablement_status_reason: String?
+      attr_accessor health: Types::ConnectorHealth?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor azure_regions: Array[String]?
+      attr_accessor aws_config_connector_arn: String?
+      attr_accessor scope_configuration: Types::AzureScopeConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor auto_install_vm_scanner: bool?
+    end
+
+    module ConnectorArnComparison
+      EQUALS: String
+    end
+
+    class ConnectorArnFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison: String?
+      attr_accessor value: String?
+    end
+
+    module ConnectorCloudProvider
+      AZURE: String
+    end
+
+    class ConnectorContainerImageScanConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?push_duration: String,
+        ?pull_duration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor push_duration: String?
+      attr_accessor pull_duration: String?
+    end
+
+    class ConnectorFilterCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arns: Array[Types::ConnectorArnFilter],
+        ?accounts: Array[Types::StringFilter],
+        ?aws_config_connector_arns: Array[Types::AwsConfigConnectorArnFilter],
+        ?connector_type: Array[Types::ConnectorTypeFilter],
+        ?provider: Array[Types::ProviderFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arns: Array[Types::ConnectorArnFilter]?
+      attr_accessor accounts: Array[Types::StringFilter]?
+      attr_accessor aws_config_connector_arns: Array[Types::AwsConfigConnectorArnFilter]?
+      attr_accessor connector_type: Array[Types::ConnectorTypeFilter]?
+      attr_accessor provider: Array[Types::ProviderFilter]?
+    end
+
+    class ConnectorHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_status: String,
+        ?last_checked_at: Time,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_status: String?
+      attr_accessor last_checked_at: Time?
+      attr_accessor message: String?
+    end
+
+    module ConnectorHealthStatus
+      CONNECTED: String
+      DEGRADED: String
+      FAILED_TO_CONNECT: String
+      PENDING_AUTHORIZATION: String
+      PENDING_CONFIGURATION: String
+      UNKNOWN: String
+    end
+
+    class ConnectorScanConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_image_scanning: Types::ConnectorContainerImageScanConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_image_scanning: Types::ConnectorContainerImageScanConfiguration?
+    end
+
+    class ConnectorScanConfigurationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_config_connector_arn: String,
+        ?connector_arns: Array[String],
+        ?scan_configuration: Types::ConnectorScanConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_config_connector_arn: String?
+      attr_accessor connector_arns: Array[String]?
+      attr_accessor scan_configuration: Types::ConnectorScanConfiguration?
+    end
+
+    module ConnectorType
+      CUSTOMER_MANAGED: String
+      SERVICE_LINKED: String
+    end
+
+    module ConnectorTypeComparison
+      EQUALS: String
+    end
+
+    class ConnectorTypeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison: String?
+      attr_accessor value: String?
+    end
+
+    class ContainerImageAggregation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_ids: Array[Types::StringFilter],
+        ?image_digests: Array[Types::StringFilter],
+        ?repositories: Array[Types::StringFilter],
+        ?registries: Array[Types::StringFilter],
+        ?architectures: Array[Types::StringFilter],
+        ?image_tags: Array[Types::StringFilter],
+        ?cloud_providers: Array[Types::StringFilter],
+        ?cloud_partitions: Array[Types::StringFilter],
+        ?cloud_regions: Array[Types::StringFilter],
+        ?cloud_org_ids: Array[Types::StringFilter],
+        ?cloud_account_ids: Array[Types::StringFilter],
+        ?last_in_use_at: Array[Types::DateFilter],
+        ?in_use_count: Array[Types::NumberFilter],
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_ids: Array[Types::StringFilter]?
+      attr_accessor image_digests: Array[Types::StringFilter]?
+      attr_accessor repositories: Array[Types::StringFilter]?
+      attr_accessor registries: Array[Types::StringFilter]?
+      attr_accessor architectures: Array[Types::StringFilter]?
+      attr_accessor image_tags: Array[Types::StringFilter]?
+      attr_accessor cloud_providers: Array[Types::StringFilter]?
+      attr_accessor cloud_partitions: Array[Types::StringFilter]?
+      attr_accessor cloud_regions: Array[Types::StringFilter]?
+      attr_accessor cloud_org_ids: Array[Types::StringFilter]?
+      attr_accessor cloud_account_ids: Array[Types::StringFilter]?
+      attr_accessor last_in_use_at: Array[Types::DateFilter]?
+      attr_accessor in_use_count: Array[Types::NumberFilter]?
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    class ContainerImageAggregationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?cloud_provider: String,
+        ?cloud_account_id: String,
+        ?cloud_partition: String,
+        ?cloud_region: String,
+        ?cloud_org_id: String,
+        ?image_digest: String,
+        ?repository: String,
+        ?registry: String,
+        ?architecture: String,
+        ?image_tags: Array[String],
+        ?account_id: String,
+        ?severity_counts: Types::SeverityCounts,
+        ?last_in_use_at: Time,
+        ?in_use_count: Integer,
+        ?exploit_available_active_findings_count: Integer,
+        ?fix_available_active_findings_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor cloud_provider: String?
+      attr_accessor cloud_account_id: String?
+      attr_accessor cloud_partition: String?
+      attr_accessor cloud_region: String?
+      attr_accessor cloud_org_id: String?
+      attr_accessor image_digest: String?
+      attr_accessor repository: String?
+      attr_accessor registry: String?
+      attr_accessor architecture: String?
+      attr_accessor image_tags: Array[String]?
+      attr_accessor account_id: String?
+      attr_accessor severity_counts: Types::SeverityCounts?
+      attr_accessor last_in_use_at: Time?
+      attr_accessor in_use_count: Integer?
+      attr_accessor exploit_available_active_findings_count: Integer?
+      attr_accessor fix_available_active_findings_count: Integer?
+    end
+
+    class ContainerImageMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_tags: Array[String],
+        ?image_pulled_at: Time,
+        ?last_in_use_at: Time,
+        ?in_use_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_tags: Array[String]?
+      attr_accessor image_pulled_at: Time?
+      attr_accessor last_in_use_at: Time?
+      attr_accessor in_use_count: Integer?
+    end
+
+    class ContainerRegistryMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class ContainerRepositoryMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scan_frequency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scan_frequency: String?
+    end
+
     class ContinuousIntegrationScanConfiguration
       include Smithy::Schema::Structure
 
@@ -1660,6 +2054,17 @@ module Aws::Inspector2
         ?code_repository_provider_type: Array[Types::CoverageStringFilter],
         ?code_repository_provider_type_visibility: Array[Types::CoverageStringFilter],
         ?last_scanned_commit_id: Array[Types::CoverageStringFilter],
+        ?cloud_provider: Array[Types::CoverageStringFilter],
+        ?cloud_provider_account_id: Array[Types::CoverageStringFilter],
+        ?cloud_provider_region: Array[Types::CoverageStringFilter],
+        ?cloud_vm_instance_tags: Array[Types::CoverageMapFilter],
+        ?cloud_container_image_tags: Array[Types::CoverageStringFilter],
+        ?cloud_container_repository_name: Array[Types::CoverageStringFilter],
+        ?cloud_container_registry_name: Array[Types::CoverageStringFilter],
+        ?cloud_serverless_function_name: Array[Types::CoverageStringFilter],
+        ?cloud_serverless_function_runtime: Array[Types::CoverageStringFilter],
+        ?cloud_serverless_function_tags: Array[Types::CoverageMapFilter],
+        ?cloud_provider_org_id: Array[Types::CoverageStringFilter],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1684,6 +2089,17 @@ module Aws::Inspector2
       attr_accessor code_repository_provider_type: Array[Types::CoverageStringFilter]?
       attr_accessor code_repository_provider_type_visibility: Array[Types::CoverageStringFilter]?
       attr_accessor last_scanned_commit_id: Array[Types::CoverageStringFilter]?
+      attr_accessor cloud_provider: Array[Types::CoverageStringFilter]?
+      attr_accessor cloud_provider_account_id: Array[Types::CoverageStringFilter]?
+      attr_accessor cloud_provider_region: Array[Types::CoverageStringFilter]?
+      attr_accessor cloud_vm_instance_tags: Array[Types::CoverageMapFilter]?
+      attr_accessor cloud_container_image_tags: Array[Types::CoverageStringFilter]?
+      attr_accessor cloud_container_repository_name: Array[Types::CoverageStringFilter]?
+      attr_accessor cloud_container_registry_name: Array[Types::CoverageStringFilter]?
+      attr_accessor cloud_serverless_function_name: Array[Types::CoverageStringFilter]?
+      attr_accessor cloud_serverless_function_runtime: Array[Types::CoverageStringFilter]?
+      attr_accessor cloud_serverless_function_tags: Array[Types::CoverageMapFilter]?
+      attr_accessor cloud_provider_org_id: Array[Types::CoverageStringFilter]?
     end
 
     class CoverageMapFilter
@@ -1739,6 +2155,11 @@ module Aws::Inspector2
         ?resource_metadata: Types::ResourceScanMetadata,
         ?last_scanned_at: Time,
         ?scan_mode: String,
+        ?provider: String,
+        ?provider_account_id: String,
+        ?provider_org_id: String,
+        ?provider_region: String,
+        ?provider_partition: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1750,6 +2171,11 @@ module Aws::Inspector2
       attr_accessor resource_metadata: Types::ResourceScanMetadata?
       attr_accessor last_scanned_at: Time?
       attr_accessor scan_mode: String?
+      attr_accessor provider: String?
+      attr_accessor provider_account_id: String?
+      attr_accessor provider_org_id: String?
+      attr_accessor provider_region: String?
+      attr_accessor provider_partition: String?
     end
 
     class CreateCisScanConfigurationRequest
@@ -1855,6 +2281,38 @@ module Aws::Inspector2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor scan_configuration_arn: String?
+    end
+
+    class CreateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?name: String,
+        ?provider: String,
+        ?description: String,
+        ?provider_detail: Types::ProviderDetailCreate,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor provider: String?
+      attr_accessor description: String?
+      attr_accessor provider_detail: Types::ProviderDetailCreate?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
     end
 
     class CreateFilterInput
@@ -2186,6 +2644,26 @@ module Aws::Inspector2
       attr_accessor scan_configuration_arn: String?
     end
 
+    class DeleteConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class DeleteConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteFilterInput
       include Smithy::Schema::Structure
 
@@ -2333,10 +2811,12 @@ module Aws::Inspector2
 
       def initialize: (
         ?scan_mode: String,
+        ?activate_vm_scanner: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor scan_mode: String?
+      attr_accessor activate_vm_scanner: bool?
     end
 
     class Ec2ConfigurationState
@@ -2344,10 +2824,12 @@ module Aws::Inspector2
 
       def initialize: (
         ?scan_mode_state: Types::Ec2ScanModeState,
+        ?vm_scanner_state: Types::VMScannerState,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor scan_mode_state: Types::Ec2ScanModeState?
+      attr_accessor vm_scanner_state: Types::VMScannerState?
     end
 
     class Ec2InstanceAggregation
@@ -2549,6 +3031,17 @@ module Aws::Inspector2
       attr_accessor failed_accounts: Array[Types::FailedAccount]?
     end
 
+    module EnablementStatus
+      ENABLED: String
+      PENDING_ENABLEMENT: String
+      FAILED_TO_ENABLE: String
+      PENDING_UPDATE: String
+      FAILED_TO_UPDATE: String
+      PENDING_DELETION: String
+      DELETED: String
+      FAILED_TO_DELETE: String
+    end
+
     class Epss
       include Smithy::Schema::Structure
 
@@ -2740,6 +3233,25 @@ module Aws::Inspector2
         ?epss_score: Array[Types::NumberFilter],
         ?code_repository_project_name: Array[Types::StringFilter],
         ?code_repository_provider_type: Array[Types::StringFilter],
+        ?cloud_provider: Array[Types::StringFilter],
+        ?cloud_provider_region: Array[Types::StringFilter],
+        ?cloud_provider_account_id: Array[Types::StringFilter],
+        ?cloud_provider_org_id: Array[Types::StringFilter],
+        ?cloud_vm_image_reference: Array[Types::StringFilter],
+        ?cloud_vm_network_id: Array[Types::StringFilter],
+        ?cloud_vm_subnet_ids: Array[Types::StringFilter],
+        ?cloud_image_repository_name: Array[Types::StringFilter],
+        ?cloud_image_registry: Array[Types::StringFilter],
+        ?cloud_image_digest: Array[Types::StringFilter],
+        ?cloud_image_tags: Array[Types::StringFilter],
+        ?cloud_image_pushed_at: Array[Types::DateFilter],
+        ?cloud_image_architecture: Array[Types::StringFilter],
+        ?cloud_image_last_in_use_at: Array[Types::DateFilter],
+        ?cloud_image_in_use_count: Array[Types::NumberFilter],
+        ?cloud_serverless_function_name: Array[Types::StringFilter],
+        ?cloud_serverless_function_runtime: Array[Types::StringFilter],
+        ?cloud_serverless_function_last_modified_at: Array[Types::DateFilter],
+        ?cloud_serverless_function_execution_role: Array[Types::StringFilter],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2789,6 +3301,25 @@ module Aws::Inspector2
       attr_accessor epss_score: Array[Types::NumberFilter]?
       attr_accessor code_repository_project_name: Array[Types::StringFilter]?
       attr_accessor code_repository_provider_type: Array[Types::StringFilter]?
+      attr_accessor cloud_provider: Array[Types::StringFilter]?
+      attr_accessor cloud_provider_region: Array[Types::StringFilter]?
+      attr_accessor cloud_provider_account_id: Array[Types::StringFilter]?
+      attr_accessor cloud_provider_org_id: Array[Types::StringFilter]?
+      attr_accessor cloud_vm_image_reference: Array[Types::StringFilter]?
+      attr_accessor cloud_vm_network_id: Array[Types::StringFilter]?
+      attr_accessor cloud_vm_subnet_ids: Array[Types::StringFilter]?
+      attr_accessor cloud_image_repository_name: Array[Types::StringFilter]?
+      attr_accessor cloud_image_registry: Array[Types::StringFilter]?
+      attr_accessor cloud_image_digest: Array[Types::StringFilter]?
+      attr_accessor cloud_image_tags: Array[Types::StringFilter]?
+      attr_accessor cloud_image_pushed_at: Array[Types::DateFilter]?
+      attr_accessor cloud_image_architecture: Array[Types::StringFilter]?
+      attr_accessor cloud_image_last_in_use_at: Array[Types::DateFilter]?
+      attr_accessor cloud_image_in_use_count: Array[Types::NumberFilter]?
+      attr_accessor cloud_serverless_function_name: Array[Types::StringFilter]?
+      attr_accessor cloud_serverless_function_runtime: Array[Types::StringFilter]?
+      attr_accessor cloud_serverless_function_last_modified_at: Array[Types::DateFilter]?
+      attr_accessor cloud_serverless_function_execution_role: Array[Types::StringFilter]?
     end
 
     class Finding
@@ -2911,6 +3442,11 @@ module Aws::Inspector2
         ?severity_counts: Types::SeverityCounts,
         ?exploit_available_count: Integer,
         ?fix_available_count: Integer,
+        ?cloud_provider: String,
+        ?cloud_account_id: String,
+        ?cloud_org_id: String,
+        ?cloud_region: String,
+        ?cloud_partition: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2918,6 +3454,11 @@ module Aws::Inspector2
       attr_accessor severity_counts: Types::SeverityCounts?
       attr_accessor exploit_available_count: Integer?
       attr_accessor fix_available_count: Integer?
+      attr_accessor cloud_provider: String?
+      attr_accessor cloud_account_id: String?
+      attr_accessor cloud_org_id: String?
+      attr_accessor cloud_region: String?
+      attr_accessor cloud_partition: String?
     end
 
     class FreeTrialAccountInfo
@@ -2941,6 +3482,7 @@ module Aws::Inspector2
         ?start: Time,
         ?end: Time,
         ?status: String,
+        ?cloud_provider: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2948,6 +3490,7 @@ module Aws::Inspector2
       attr_accessor start: Time?
       attr_accessor end: Time?
       attr_accessor status: String?
+      attr_accessor cloud_provider: String?
     end
 
     class FreeTrialInfoError
@@ -3083,8 +3626,8 @@ module Aws::Inspector2
         ?status_reason: String,
         ?created_on: Time,
         ?last_update_on: Time,
-        ?tags: Hash[String, String],
         ?authorization_url: String,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3095,8 +3638,8 @@ module Aws::Inspector2
       attr_accessor status_reason: String?
       attr_accessor created_on: Time?
       attr_accessor last_update_on: Time?
-      attr_accessor tags: Hash[String, String]?
       attr_accessor authorization_url: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class GetCodeSecurityScanConfigurationRequest
@@ -3177,9 +3720,11 @@ module Aws::Inspector2
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor account_id: String?
     end
 
     class GetConfigurationOutput
@@ -3353,6 +3898,35 @@ module Aws::Inspector2
       attr_accessor filter_criteria: Types::ResourceFilterCriteria?
     end
 
+    class Image
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?registry: String,
+        ?image_tags: Array[String],
+        ?image_digest: String,
+        ?pushed_at: Time,
+        ?architecture: String,
+        ?author: String,
+        ?in_use_count: Integer,
+        ?last_in_use_at: Time,
+        ?platform: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor registry: String?
+      attr_accessor image_tags: Array[String]?
+      attr_accessor image_digest: String?
+      attr_accessor pushed_at: Time?
+      attr_accessor architecture: String?
+      attr_accessor author: String?
+      attr_accessor in_use_count: Integer?
+      attr_accessor last_in_use_at: Time?
+      attr_accessor platform: String?
+    end
+
     class ImageLayerAggregation
       include Smithy::Schema::Structure
 
@@ -3360,6 +3934,11 @@ module Aws::Inspector2
         ?repositories: Array[Types::StringFilter],
         ?resource_ids: Array[Types::StringFilter],
         ?layer_hashes: Array[Types::StringFilter],
+        ?cloud_providers: Array[Types::StringFilter],
+        ?cloud_account_ids: Array[Types::StringFilter],
+        ?cloud_org_ids: Array[Types::StringFilter],
+        ?cloud_regions: Array[Types::StringFilter],
+        ?cloud_partitions: Array[Types::StringFilter],
         ?sort_order: String,
         ?sort_by: String,
       ) -> void
@@ -3368,6 +3947,11 @@ module Aws::Inspector2
       attr_accessor repositories: Array[Types::StringFilter]?
       attr_accessor resource_ids: Array[Types::StringFilter]?
       attr_accessor layer_hashes: Array[Types::StringFilter]?
+      attr_accessor cloud_providers: Array[Types::StringFilter]?
+      attr_accessor cloud_account_ids: Array[Types::StringFilter]?
+      attr_accessor cloud_org_ids: Array[Types::StringFilter]?
+      attr_accessor cloud_regions: Array[Types::StringFilter]?
+      attr_accessor cloud_partitions: Array[Types::StringFilter]?
       attr_accessor sort_order: String?
       attr_accessor sort_by: String?
     end
@@ -3380,6 +3964,11 @@ module Aws::Inspector2
         ?resource_id: String,
         ?layer_hash: String,
         ?account_id: String,
+        ?cloud_provider: String,
+        ?cloud_account_id: String,
+        ?cloud_org_id: String,
+        ?cloud_region: String,
+        ?cloud_partition: String,
         ?severity_counts: Types::SeverityCounts,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3388,6 +3977,11 @@ module Aws::Inspector2
       attr_accessor resource_id: String?
       attr_accessor layer_hash: String?
       attr_accessor account_id: String?
+      attr_accessor cloud_provider: String?
+      attr_accessor cloud_account_id: String?
+      attr_accessor cloud_org_id: String?
+      attr_accessor cloud_region: String?
+      attr_accessor cloud_partition: String?
       attr_accessor severity_counts: Types::SeverityCounts?
     end
 
@@ -3837,6 +4431,62 @@ module Aws::Inspector2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor configurations: Array[Types::CodeSecurityScanConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorScanConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_config_connector_arns: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_config_connector_arns: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorScanConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scan_configurations: Array[Types::ConnectorScanConfigurationItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scan_configurations: Array[Types::ConnectorScanConfigurationItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter_criteria: Types::ConnectorFilterCriteria,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter_criteria: Types::ConnectorFilterCriteria?
+    end
+
+    class ListConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Connector],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Connector]?
       attr_accessor next_token: String?
     end
 
@@ -4402,6 +5052,55 @@ module Aws::Inspector2
       ALL: String
     end
 
+    module ProviderComparison
+      EQUALS: String
+    end
+
+    class ProviderDetailCreate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?azure: Types::AzureProviderDetailCreate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor azure: Types::AzureProviderDetailCreate?
+
+      class Azure < ProviderDetailCreate
+      end
+      class Unknown < ProviderDetailCreate
+      end
+    end
+
+    class ProviderDetailUpdate
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?azure: Types::AzureProviderDetailUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor azure: Types::AzureProviderDetailUpdate?
+
+      class Azure < ProviderDetailUpdate
+      end
+      class Unknown < ProviderDetailUpdate
+      end
+    end
+
+    class ProviderFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison: String?
+      attr_accessor value: String?
+    end
+
     class Recommendation
       include Smithy::Schema::Structure
 
@@ -4447,6 +5146,11 @@ module Aws::Inspector2
       def initialize: (
         ?repository: String,
         ?account_id: String,
+        ?cloud_provider: String,
+        ?cloud_partition: String,
+        ?cloud_region: String,
+        ?cloud_org_id: String,
+        ?cloud_account_id: String,
         ?severity_counts: Types::SeverityCounts,
         ?affected_images: Integer,
       ) -> void
@@ -4454,6 +5158,11 @@ module Aws::Inspector2
 
       attr_accessor repository: String?
       attr_accessor account_id: String?
+      attr_accessor cloud_provider: String?
+      attr_accessor cloud_partition: String?
+      attr_accessor cloud_region: String?
+      attr_accessor cloud_org_id: String?
+      attr_accessor cloud_account_id: String?
       attr_accessor severity_counts: Types::SeverityCounts?
       attr_accessor affected_images: Integer?
     end
@@ -4490,6 +5199,9 @@ module Aws::Inspector2
         ?region: String,
         ?tags: Hash[String, String],
         ?details: Types::ResourceDetails,
+        ?provider: String,
+        ?provider_account_id: String,
+        ?provider_org_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4499,6 +5211,9 @@ module Aws::Inspector2
       attr_accessor region: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor details: Types::ResourceDetails?
+      attr_accessor provider: String?
+      attr_accessor provider_account_id: String?
+      attr_accessor provider_org_id: String?
     end
 
     class ResourceDetails
@@ -4509,6 +5224,9 @@ module Aws::Inspector2
         ?aws_ecr_container_image: Types::AwsEcrContainerImageDetails,
         ?aws_lambda_function: Types::AwsLambdaFunctionDetails,
         ?code_repository: Types::CodeRepositoryDetails,
+        ?vm: Types::Vm,
+        ?image: Types::Image,
+        ?serverless_function: Types::ServerlessFunction,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4516,6 +5234,9 @@ module Aws::Inspector2
       attr_accessor aws_ecr_container_image: Types::AwsEcrContainerImageDetails?
       attr_accessor aws_lambda_function: Types::AwsLambdaFunctionDetails?
       attr_accessor code_repository: Types::CodeRepositoryDetails?
+      attr_accessor vm: Types::Vm?
+      attr_accessor image: Types::Image?
+      attr_accessor serverless_function: Types::ServerlessFunction?
     end
 
     class ResourceFilterCriteria
@@ -4530,6 +5251,17 @@ module Aws::Inspector2
         ?ecr_image_tags: Array[Types::ResourceStringFilter],
         ?ec2_instance_tags: Array[Types::ResourceMapFilter],
         ?lambda_function_tags: Array[Types::ResourceMapFilter],
+        ?cloud_provider: Array[Types::ResourceStringFilter],
+        ?cloud_provider_account_id: Array[Types::ResourceStringFilter],
+        ?cloud_provider_org_id: Array[Types::ResourceStringFilter],
+        ?cloud_provider_region: Array[Types::ResourceStringFilter],
+        ?cloud_vm_instance_tags: Array[Types::ResourceMapFilter],
+        ?cloud_container_image_tags: Array[Types::ResourceStringFilter],
+        ?cloud_container_repository_name: Array[Types::ResourceStringFilter],
+        ?cloud_container_registry_name: Array[Types::ResourceStringFilter],
+        ?cloud_serverless_function_name: Array[Types::ResourceStringFilter],
+        ?cloud_serverless_function_runtime: Array[Types::ResourceStringFilter],
+        ?cloud_serverless_function_tags: Array[Types::ResourceMapFilter],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4541,6 +5273,17 @@ module Aws::Inspector2
       attr_accessor ecr_image_tags: Array[Types::ResourceStringFilter]?
       attr_accessor ec2_instance_tags: Array[Types::ResourceMapFilter]?
       attr_accessor lambda_function_tags: Array[Types::ResourceMapFilter]?
+      attr_accessor cloud_provider: Array[Types::ResourceStringFilter]?
+      attr_accessor cloud_provider_account_id: Array[Types::ResourceStringFilter]?
+      attr_accessor cloud_provider_org_id: Array[Types::ResourceStringFilter]?
+      attr_accessor cloud_provider_region: Array[Types::ResourceStringFilter]?
+      attr_accessor cloud_vm_instance_tags: Array[Types::ResourceMapFilter]?
+      attr_accessor cloud_container_image_tags: Array[Types::ResourceStringFilter]?
+      attr_accessor cloud_container_repository_name: Array[Types::ResourceStringFilter]?
+      attr_accessor cloud_container_registry_name: Array[Types::ResourceStringFilter]?
+      attr_accessor cloud_serverless_function_name: Array[Types::ResourceStringFilter]?
+      attr_accessor cloud_serverless_function_runtime: Array[Types::ResourceStringFilter]?
+      attr_accessor cloud_serverless_function_tags: Array[Types::ResourceMapFilter]?
     end
 
     class ResourceMapFilter
@@ -4578,6 +5321,11 @@ module Aws::Inspector2
         ?ec2: Types::Ec2Metadata,
         ?lambda_function: Types::LambdaFunctionMetadata,
         ?code_repository: Types::CodeRepositoryMetadata,
+        ?vm_instance: Types::VmInstanceMetadata,
+        ?container_image: Types::ContainerImageMetadata,
+        ?container_repository: Types::ContainerRepositoryMetadata,
+        ?container_registry: Types::ContainerRegistryMetadata,
+        ?serverless_function: Types::ServerlessFunctionMetadata,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4586,6 +5334,11 @@ module Aws::Inspector2
       attr_accessor ec2: Types::Ec2Metadata?
       attr_accessor lambda_function: Types::LambdaFunctionMetadata?
       attr_accessor code_repository: Types::CodeRepositoryMetadata?
+      attr_accessor vm_instance: Types::VmInstanceMetadata?
+      attr_accessor container_image: Types::ContainerImageMetadata?
+      attr_accessor container_repository: Types::ContainerRepositoryMetadata?
+      attr_accessor container_registry: Types::ContainerRegistryMetadata?
+      attr_accessor serverless_function: Types::ServerlessFunctionMetadata?
     end
 
     class ResourceState
@@ -4686,6 +5439,36 @@ module Aws::Inspector2
       end
     end
 
+    class ScopeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_type: String,
+        ?scope_values: Array[String],
+        ?state: String,
+        ?state_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_type: String?
+      attr_accessor scope_values: Array[String]?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+    end
+
+    class ScopeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_type: String,
+        ?scope_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_type: String?
+      attr_accessor scope_values: Array[String]?
+    end
+
     class ScopeSettings
       include Smithy::Schema::Structure
 
@@ -4695,6 +5478,18 @@ module Aws::Inspector2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor project_selection_scope: String?
+    end
+
+    module ScopeState
+      ACTIVE: String
+      PENDING: String
+      ERROR: String
+      DISABLED: String
+    end
+
+    module ScopeType
+      TENANT: String
+      SUBSCRIPTION: String
     end
 
     class SearchVulnerabilitiesFilterCriteria
@@ -4780,6 +5575,122 @@ module Aws::Inspector2
 
     end
 
+    class ServerlessFunction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_function_name: String,
+        ?runtime: String,
+        ?version: String,
+        ?code_digest: String,
+        ?last_modified_at: Time,
+        ?network_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?execution_role: String,
+        ?package_type: String,
+        ?architectures: Array[String],
+        ?layers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_function_name: String?
+      attr_accessor runtime: String?
+      attr_accessor version: String?
+      attr_accessor code_digest: String?
+      attr_accessor last_modified_at: Time?
+      attr_accessor network_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor execution_role: String?
+      attr_accessor package_type: String?
+      attr_accessor architectures: Array[String]?
+      attr_accessor layers: Array[String]?
+    end
+
+    class ServerlessFunctionAggregation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_ids: Array[Types::StringFilter],
+        ?function_names: Array[Types::StringFilter],
+        ?runtimes: Array[Types::StringFilter],
+        ?function_tags: Array[Types::MapFilter],
+        ?cloud_providers: Array[Types::StringFilter],
+        ?cloud_partitions: Array[Types::StringFilter],
+        ?cloud_regions: Array[Types::StringFilter],
+        ?cloud_org_ids: Array[Types::StringFilter],
+        ?cloud_account_ids: Array[Types::StringFilter],
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_ids: Array[Types::StringFilter]?
+      attr_accessor function_names: Array[Types::StringFilter]?
+      attr_accessor runtimes: Array[Types::StringFilter]?
+      attr_accessor function_tags: Array[Types::MapFilter]?
+      attr_accessor cloud_providers: Array[Types::StringFilter]?
+      attr_accessor cloud_partitions: Array[Types::StringFilter]?
+      attr_accessor cloud_regions: Array[Types::StringFilter]?
+      attr_accessor cloud_org_ids: Array[Types::StringFilter]?
+      attr_accessor cloud_account_ids: Array[Types::StringFilter]?
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    class ServerlessFunctionAggregationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?cloud_provider: String,
+        ?cloud_account_id: String,
+        ?cloud_partition: String,
+        ?cloud_region: String,
+        ?cloud_org_id: String,
+        ?function_name: String,
+        ?runtime: String,
+        ?tags: Hash[String, String],
+        ?account_id: String,
+        ?severity_counts: Types::SeverityCounts,
+        ?last_modified_at: Time,
+        ?exploit_available_active_findings_count: Integer,
+        ?fix_available_active_findings_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor cloud_provider: String?
+      attr_accessor cloud_account_id: String?
+      attr_accessor cloud_partition: String?
+      attr_accessor cloud_region: String?
+      attr_accessor cloud_org_id: String?
+      attr_accessor function_name: String?
+      attr_accessor runtime: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor account_id: String?
+      attr_accessor severity_counts: Types::SeverityCounts?
+      attr_accessor last_modified_at: Time?
+      attr_accessor exploit_available_active_findings_count: Integer?
+      attr_accessor fix_available_active_findings_count: Integer?
+    end
+
+    class ServerlessFunctionMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serverless_function_name: String,
+        ?runtime: String,
+        ?function_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serverless_function_name: String?
+      attr_accessor runtime: String?
+      attr_accessor function_tags: Hash[String, String]?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -4801,6 +5712,9 @@ module Aws::Inspector2
         ?medium: Integer,
         ?high: Integer,
         ?critical: Integer,
+        ?low: Integer,
+        ?informational: Integer,
+        ?untriaged: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4808,6 +5722,9 @@ module Aws::Inspector2
       attr_accessor medium: Integer?
       attr_accessor high: Integer?
       attr_accessor critical: Integer?
+      attr_accessor low: Integer?
+      attr_accessor informational: Integer?
+      attr_accessor untriaged: Integer?
     end
 
     class SortCriteria
@@ -5117,18 +6034,18 @@ module Aws::Inspector2
         ?titles: Array[Types::StringFilter],
         ?vulnerability_ids: Array[Types::StringFilter],
         ?resource_type: String,
+        ?finding_type: String,
         ?sort_order: String,
         ?sort_by: String,
-        ?finding_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor titles: Array[Types::StringFilter]?
       attr_accessor vulnerability_ids: Array[Types::StringFilter]?
       attr_accessor resource_type: String?
+      attr_accessor finding_type: String?
       attr_accessor sort_order: String?
       attr_accessor sort_by: String?
-      attr_accessor finding_type: String?
     end
 
     class TitleAggregationResponse
@@ -5263,20 +6180,85 @@ module Aws::Inspector2
       attr_accessor scan_configuration_arn: String?
     end
 
+    class UpdateConfigurationInheritance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_configuration: String,
+        ?ecr_configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_configuration: String?
+      attr_accessor ecr_configuration: String?
+    end
+
     class UpdateConfigurationInput
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?account_id: String,
         ?ecr_configuration: Types::EcrConfiguration,
         ?ec2_configuration: Types::Ec2Configuration,
+        ?update_configuration_inheritance: Types::UpdateConfigurationInheritance,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor account_id: String?
       attr_accessor ecr_configuration: Types::EcrConfiguration?
       attr_accessor ec2_configuration: Types::Ec2Configuration?
+      attr_accessor update_configuration_inheritance: Types::UpdateConfigurationInheritance?
     end
 
     class UpdateConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+        ?description: String,
+        ?provider_detail: Types::ProviderDetailUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+      attr_accessor description: String?
+      attr_accessor provider_detail: Types::ProviderDetailUpdate?
+    end
+
+    class UpdateConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class UpdateConnectorScanConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_config_connector_arn: String,
+        ?scan_configuration: Types::ConnectorScanConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_config_connector_arn: String?
+      attr_accessor scan_configuration: Types::ConnectorScanConfiguration?
+    end
+
+    class UpdateConnectorScanConfigurationResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -5465,6 +6447,7 @@ module Aws::Inspector2
         ?total: Float,
         ?estimated_monthly_cost: Float,
         ?currency: String,
+        ?cloud_provider: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5472,6 +6455,7 @@ module Aws::Inspector2
       attr_accessor total: Float?
       attr_accessor estimated_monthly_cost: Float?
       attr_accessor currency: String?
+      attr_accessor cloud_provider: String?
     end
 
     class UsageTotal
@@ -5485,6 +6469,21 @@ module Aws::Inspector2
 
       attr_accessor account_id: String?
       attr_accessor usage: Array[Types::Usage]?
+    end
+
+    class VMScannerState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activated: bool,
+        ?activated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activated: bool?
+      attr_accessor activated_at: Time?
+      attr_accessor status: String?
     end
 
     class ValidationException
@@ -5513,6 +6512,124 @@ module Aws::Inspector2
 
       attr_accessor name: String?
       attr_accessor message: String?
+    end
+
+    class Vm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?vm_name: String,
+        ?vm_image_reference: String,
+        ?ip_v4_addresses: Array[String],
+        ?ip_v6_addresses: Array[String],
+        ?network_id: String,
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?launched_at: Time,
+        ?platform: String,
+        ?execution_role: String,
+        ?key_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor vm_name: String?
+      attr_accessor vm_image_reference: String?
+      attr_accessor ip_v4_addresses: Array[String]?
+      attr_accessor ip_v6_addresses: Array[String]?
+      attr_accessor network_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor launched_at: Time?
+      attr_accessor platform: String?
+      attr_accessor execution_role: String?
+      attr_accessor key_name: String?
+    end
+
+    class VmInstanceAggregation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_ids: Array[Types::StringFilter],
+        ?operating_systems: Array[Types::StringFilter],
+        ?instance_tags: Array[Types::MapFilter],
+        ?vm_image_references: Array[Types::StringFilter],
+        ?cloud_providers: Array[Types::StringFilter],
+        ?cloud_partitions: Array[Types::StringFilter],
+        ?cloud_regions: Array[Types::StringFilter],
+        ?cloud_org_ids: Array[Types::StringFilter],
+        ?cloud_account_ids: Array[Types::StringFilter],
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_ids: Array[Types::StringFilter]?
+      attr_accessor operating_systems: Array[Types::StringFilter]?
+      attr_accessor instance_tags: Array[Types::MapFilter]?
+      attr_accessor vm_image_references: Array[Types::StringFilter]?
+      attr_accessor cloud_providers: Array[Types::StringFilter]?
+      attr_accessor cloud_partitions: Array[Types::StringFilter]?
+      attr_accessor cloud_regions: Array[Types::StringFilter]?
+      attr_accessor cloud_org_ids: Array[Types::StringFilter]?
+      attr_accessor cloud_account_ids: Array[Types::StringFilter]?
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    class VmInstanceAggregationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?cloud_provider: String,
+        ?cloud_account_id: String,
+        ?cloud_partition: String,
+        ?cloud_region: String,
+        ?cloud_org_id: String,
+        ?vm_image_reference: String,
+        ?operating_system: String,
+        ?tags: Hash[String, String],
+        ?account_id: String,
+        ?severity_counts: Types::SeverityCounts,
+        ?network_findings: Integer,
+        ?exploit_available_active_findings_count: Integer,
+        ?fix_available_active_findings_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor cloud_provider: String?
+      attr_accessor cloud_account_id: String?
+      attr_accessor cloud_partition: String?
+      attr_accessor cloud_region: String?
+      attr_accessor cloud_org_id: String?
+      attr_accessor vm_image_reference: String?
+      attr_accessor operating_system: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor account_id: String?
+      attr_accessor severity_counts: Types::SeverityCounts?
+      attr_accessor network_findings: Integer?
+      attr_accessor exploit_available_active_findings_count: Integer?
+      attr_accessor fix_available_active_findings_count: Integer?
+    end
+
+    class VmInstanceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+        ?platform: String,
+        ?inventory_hash: String,
+        ?vm_image_reference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor platform: String?
+      attr_accessor inventory_hash: String?
+      attr_accessor vm_image_reference: String?
     end
 
     class Vulnerability

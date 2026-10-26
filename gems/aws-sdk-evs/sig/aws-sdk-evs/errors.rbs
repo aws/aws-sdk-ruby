@@ -1,5 +1,9 @@
 module Aws::Evs
   module Errors
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
       def resource_id: () -> String?

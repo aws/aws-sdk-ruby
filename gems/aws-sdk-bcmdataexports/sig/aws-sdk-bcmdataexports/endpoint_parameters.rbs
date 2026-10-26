@@ -1,13 +1,13 @@
 module Aws::BCMDataExports
   class EndpointParameters
     def initialize: (
-      ?region: String,
       ?use_fips: bool,
       ?endpoint: String,
+      ?region: String,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
-    attr_accessor region: String?
     attr_accessor use_fips: bool?
     attr_accessor endpoint: String?
+    attr_accessor region: String?
   end
 end

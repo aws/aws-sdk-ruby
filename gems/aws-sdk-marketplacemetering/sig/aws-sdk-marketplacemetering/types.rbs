@@ -71,6 +71,17 @@ module Aws::MarketplaceMetering
       attr_accessor message: String?
     end
 
+    class IdempotencyConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class InternalServiceErrorException
       include Smithy::Schema::Structure
 
@@ -94,6 +105,17 @@ module Aws::MarketplaceMetering
     end
 
     class InvalidEndpointRegionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidLicenseException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -181,6 +203,17 @@ module Aws::MarketplaceMetering
       attr_accessor message: String?
     end
 
+    class Metadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+    end
+
     class MeterUsageRequest
       include Smithy::Schema::Structure
 
@@ -191,6 +224,7 @@ module Aws::MarketplaceMetering
         ?usage_quantity: Integer,
         ?dry_run: bool,
         ?usage_allocations: Array[Types::UsageAllocation],
+        ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -200,6 +234,7 @@ module Aws::MarketplaceMetering
       attr_accessor usage_quantity: Integer?
       attr_accessor dry_run: bool?
       attr_accessor usage_allocations: Array[Types::UsageAllocation]?
+      attr_accessor client_token: String?
     end
 
     class MeterUsageResult
@@ -270,12 +305,16 @@ module Aws::MarketplaceMetering
         ?customer_identifier: String,
         ?product_code: String,
         ?customer_aws_account_id: String,
+        ?license_arn: String,
+        ?metadata: Types::Metadata,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor customer_identifier: String?
       attr_accessor product_code: String?
       attr_accessor customer_aws_account_id: String?
+      attr_accessor license_arn: String?
+      attr_accessor metadata: Types::Metadata?
     end
 
     class Tag
@@ -336,6 +375,7 @@ module Aws::MarketplaceMetering
         ?quantity: Integer,
         ?usage_allocations: Array[Types::UsageAllocation],
         ?customer_aws_account_id: String,
+        ?license_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -345,6 +385,7 @@ module Aws::MarketplaceMetering
       attr_accessor quantity: Integer?
       attr_accessor usage_allocations: Array[Types::UsageAllocation]?
       attr_accessor customer_aws_account_id: String?
+      attr_accessor license_arn: String?
     end
 
     class UsageRecordResult

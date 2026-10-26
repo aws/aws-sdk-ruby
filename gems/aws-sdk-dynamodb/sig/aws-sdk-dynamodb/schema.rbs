@@ -98,6 +98,7 @@ module Aws::DynamoDB
     CreateReplicationGroupMemberAction: StructureShape
     CreateTableInput: StructureShape
     CreateTableOutput: StructureShape
+    CreateVectorIndexAction: StructureShape
     CsvDelimiter: StringShape
     CsvHeader: StringShape
     CsvHeaderList: ListShape
@@ -117,6 +118,7 @@ module Aws::DynamoDB
     DeleteResourcePolicyOutput: StructureShape
     DeleteTableInput: StructureShape
     DeleteTableOutput: StructureShape
+    DeleteVectorIndexAction: StructureShape
     DeletionProtectionEnabled: BooleanShape
     DescribeBackupInput: StructureShape
     DescribeBackupOutput: StructureShape
@@ -191,6 +193,7 @@ module Aws::DynamoDB
     FailureException: StructureShape
     FailureMessage: StringShape
     FilterConditionMap: MapShape
+    FilterSpecification: StructureShape
     Get: StructureShape
     GetItemInput: StructureShape
     GetItemOutput: StructureShape
@@ -215,6 +218,7 @@ module Aws::DynamoDB
     GlobalTableGlobalSecondaryIndexSettingsUpdateList: ListShape
     GlobalTableList: ListShape
     GlobalTableNotFoundException: StructureShape
+    GlobalTableSettingsReplicationMode: EnumShape
     GlobalTableStatus: EnumShape
     GlobalTableWitnessDescription: StructureShape
     GlobalTableWitnessDescriptionList: ListShape
@@ -412,6 +416,15 @@ module Aws::DynamoDB
     ScanOutput: StructureShape
     ScanSegment: IntegerShape
     ScanTotalSegments: IntegerShape
+    ScoreNumber: FloatShape
+    SearchResultItem: StructureShape
+    SearchResultList: ListShape
+    SearchSchema: ListShape
+    SearchSchemaElement: StructureShape
+    SearchSchemaElementType: EnumShape
+    SearchVectorList: ListShape
+    SearchVectorsInput: StructureShape
+    SearchVectorsOutput: StructureShape
     SecondaryIndexesCapacityMap: MapShape
     Select: EnumShape
     SourceTableDetails: StructureShape
@@ -454,6 +467,7 @@ module Aws::DynamoDB
     TimeToLiveEnabled: BooleanShape
     TimeToLiveSpecification: StructureShape
     TimeToLiveStatus: EnumShape
+    TopKInteger: IntegerShape
     TransactGetItem: StructureShape
     TransactGetItemList: ListShape
     TransactGetItemsInput: StructureShape
@@ -489,6 +503,19 @@ module Aws::DynamoDB
     UpdateTableReplicaAutoScalingOutput: StructureShape
     UpdateTimeToLiveInput: StructureShape
     UpdateTimeToLiveOutput: StructureShape
+    VectorAttributeDefinition: StructureShape
+    VectorAttributeName: StringShape
+    VectorCapacity: StructureShape
+    VectorDistanceFunction: EnumShape
+    VectorIndex: StructureShape
+    VectorIndexDescription: StructureShape
+    VectorIndexDescriptionList: ListShape
+    VectorIndexInfo: StructureShape
+    VectorIndexList: ListShape
+    VectorIndexUpdate: StructureShape
+    VectorIndexUpdateList: ListShape
+    VectorIndexes: ListShape
+    VectorIndexesCapacityMap: MapShape
     WarmThroughput: StructureShape
     WitnessStatus: EnumShape
     WriteRequest: StructureShape

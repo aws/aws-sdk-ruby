@@ -1,0 +1,77 @@
+module Aws::Uxc
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Uxc::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetAccountCustomizationsResponse
+      include Smithy::Client::_Response[Types::GetAccountCustomizationsOutput]
+      def account_color: () -> String?
+      def visible_services: () -> Array[String]?
+      def visible_regions: () -> Array[String]?
+    end
+    def get_account_customizations: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountCustomizationsResponse
+
+    interface _ListServicesResponse
+      include Smithy::Client::_Response[Types::ListServicesOutput]
+      def next_token: () -> String?
+      def services: () -> Array[String]?
+    end
+    def list_services: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicesResponse
+
+    interface _UpdateAccountCustomizationsResponse
+      include Smithy::Client::_Response[Types::UpdateAccountCustomizationsOutput]
+      def account_color: () -> String?
+      def visible_services: () -> Array[String]?
+      def visible_regions: () -> Array[String]?
+    end
+    def update_account_customizations: (
+      ?account_color: String,
+      ?visible_services: Array[String],
+      ?visible_regions: Array[String]
+    ) -> _UpdateAccountCustomizationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountCustomizationsResponse
+  end
+end

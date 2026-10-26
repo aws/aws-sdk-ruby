@@ -3,6 +3,9 @@ module Aws::AppStream
     class ConcurrentModificationException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class DryRunOperationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class EntitlementAlreadyExistsException < Smithy::Client::ServiceError
       def message: () -> String?
     end

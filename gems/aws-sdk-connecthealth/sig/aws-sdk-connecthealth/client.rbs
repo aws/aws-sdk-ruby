@@ -1,0 +1,318 @@
+module Aws::ConnectHealth
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ConnectHealth::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ActivateSubscriptionResponse
+      include Smithy::Client::_Response[Types::ActivateSubscriptionOutput]
+      def subscription: () -> Types::SubscriptionDescription?
+    end
+    def activate_subscription: (
+      ?domain_id: String,
+      ?subscription_id: String
+    ) -> _ActivateSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateSubscriptionResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainOutput]
+      def domain_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def kms_key_arn: () -> String?
+      def encryption_context: () -> Types::EncryptionContext?
+      def status: () -> String?
+      def web_app_url: () -> String?
+      def web_app_configuration: () -> Types::WebAppConfiguration?
+      def created_at: () -> Time?
+    end
+    def create_domain: (
+      ?name: String,
+      ?kms_key_arn: String,
+      ?web_app_setup_configuration: {
+        ehr_role: String,
+        idc_instance_id: untyped,
+        idc_region: untyped
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreateSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateSubscriptionOutput]
+      def domain_id: () -> String?
+      def subscription_id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def activated_at: () -> Time?
+      def deactivated_at: () -> Time?
+    end
+    def create_subscription: (
+      ?domain_id: String
+    ) -> _CreateSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionResponse
+
+    interface _DeactivateSubscriptionResponse
+      include Smithy::Client::_Response[Types::DeactivateSubscriptionOutput]
+      def subscription: () -> Types::SubscriptionDescription?
+    end
+    def deactivate_subscription: (
+      ?domain_id: String,
+      ?subscription_id: String
+    ) -> _DeactivateSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivateSubscriptionResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainOutput]
+      def domain_id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_domain: (
+      ?domain_id: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _GetDomainResponse
+      include Smithy::Client::_Response[Types::GetDomainOutput]
+      def domain_id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def kms_key_arn: () -> String?
+      def encryption_context: () -> Types::EncryptionContext?
+      def status: () -> String?
+      def web_app_url: () -> String?
+      def web_app_configuration: () -> Types::WebAppConfiguration?
+      def created_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_domain: (
+      ?domain_id: String
+    ) -> _GetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainResponse
+
+    interface _GetMedicalScribeListeningSessionResponse
+      include Smithy::Client::_Response[Types::GetMedicalScribeListeningSessionOutput]
+      def medical_scribe_listening_session_details: () -> Types::MedicalScribeListeningSessionDetails?
+    end
+    def get_medical_scribe_listening_session: (
+      ?session_id: String,
+      ?domain_id: String,
+      ?subscription_id: String
+    ) -> _GetMedicalScribeListeningSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMedicalScribeListeningSessionResponse
+
+    interface _GetPatientInsightsJobResponse
+      include Smithy::Client::_Response[Types::GetPatientInsightsJobResponse]
+      def job_id: () -> String?
+      def job_arn: () -> String?
+      def job_status: () -> String?
+      def creation_time: () -> Time?
+      def updated_time: () -> Time?
+      def insights_output: () -> Types::InsightsOutput?
+      def status_details: () -> String?
+      def patient_context: () -> Types::PatientInsightsPatientContext?
+      def insights_context: () -> Types::InsightsContext?
+      def encounter_context: () -> Types::PatientInsightsEncounterContext?
+      def user_context: () -> Types::UserContext?
+      def input_data_config: () -> Types::InputDataConfig?
+      def output_data_config: () -> Types::OutputDataConfig?
+    end
+    def get_patient_insights_job: (
+      ?domain_id: String,
+      ?job_id: String
+    ) -> _GetPatientInsightsJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPatientInsightsJobResponse
+
+    interface _GetSubscriptionResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionOutput]
+      def subscription: () -> Types::SubscriptionDescription?
+    end
+    def get_subscription: (
+      ?domain_id: String,
+      ?subscription_id: String
+    ) -> _GetSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsOutput]
+      def domains: () -> Array[Types::DomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_domains: (
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionsOutput]
+      def subscriptions: () -> Array[Types::SubscriptionDescription]?
+      def next_token: () -> String?
+    end
+    def list_subscriptions: (
+      ?domain_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartMedicalScribeListeningSessionResponse
+      include Smithy::Client::_Response[Types::StartMedicalScribeListeningSessionOutput]
+      def session_id: () -> String?
+      def domain_id: () -> String?
+      def subscription_id: () -> String?
+      def request_id: () -> String?
+      def language_code: () -> String?
+      def media_sample_rate_hertz: () -> Integer?
+      def media_encoding: () -> String?
+      def response_stream: () -> Types::MedicalScribeOutputStream?
+    end
+    def start_medical_scribe_listening_session: (
+      ?session_id: String,
+      ?domain_id: String,
+      ?subscription_id: String,
+      ?language_code: String,
+      ?media_sample_rate_hertz: Integer,
+      ?media_encoding: String,
+      ?input_stream: {
+        audio_event: {
+          audio_chunk: String
+        },
+        binary_audio_event: {
+          audio_chunk: untyped
+        },
+        session_control_event: {
+          type: String
+        },
+        configuration_event: {
+          post_stream_action_settings: {
+            output_s3_uri: String,
+            clinical_note_generation_settings: {
+              note_template_settings: {
+                managed_template: {
+                  template_type: String
+                },
+                custom_template: {
+                  template_type: String,
+                  template_instructions: Array[
+                    {
+                      section_header: String,
+                      section_instruction: String
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          channel_definitions: Array[
+            {
+              channel_id: Integer,
+              participant_role: String
+            }
+          ],
+          encounter_context: {
+            unstructured_context: untyped
+          }
+        }
+      }
+    ) -> _StartMedicalScribeListeningSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMedicalScribeListeningSessionResponse
+
+    interface _StartPatientInsightsJobResponse
+      include Smithy::Client::_Response[Types::StartPatientInsightsJobResponse]
+      def job_arn: () -> String?
+      def job_id: () -> String?
+      def creation_time: () -> Time?
+    end
+    def start_patient_insights_job: (
+      ?domain_id: String,
+      ?patient_context: {
+        patient_id: String,
+        date_of_birth: String,
+        pronouns: String
+      },
+      ?insights_context: {
+        insights_type: String
+      },
+      ?encounter_context: {
+        encounter_reason: String
+      },
+      ?user_context: {
+        role: String,
+        user_id: String,
+        specialty: String
+      },
+      ?input_data_config: {
+        fhir_server: {
+          fhir_endpoint: String,
+          oauth_token: String
+        },
+        s3_sources: Array[
+          {
+            uri: String
+          }
+        ]
+      },
+      ?output_data_config: {
+        s3_output_path: String
+      },
+      ?client_token: String
+    ) -> _StartPatientInsightsJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPatientInsightsJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

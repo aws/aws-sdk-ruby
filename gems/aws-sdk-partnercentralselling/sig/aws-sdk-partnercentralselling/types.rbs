@@ -19,10 +19,16 @@ module Aws::PartnerCentralSelling
 
       def initialize: (
         ?message: String,
+        ?reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AccessDeniedExceptionErrorCode
+      INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE: String
     end
 
     class Account
@@ -138,6 +144,7 @@ module Aws::PartnerCentralSelling
         ?email: String,
         ?first_name: String,
         ?last_name: String,
+        ?phone: String,
         ?business_title: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -145,6 +152,7 @@ module Aws::PartnerCentralSelling
       attr_accessor email: String?
       attr_accessor first_name: String?
       attr_accessor last_name: String?
+      attr_accessor phone: String?
       attr_accessor business_title: String?
     end
 
@@ -228,6 +236,7 @@ module Aws::PartnerCentralSelling
       PDM: String
       PSM: String
       ISVSM: String
+      SIGNATORY: String
     end
 
     class AwsOpportunityCustomer
@@ -247,11 +256,17 @@ module Aws::PartnerCentralSelling
       def initialize: (
         ?next_best_actions: String,
         ?engagement_score: String,
+        ?aws_products_spend_insights_by_source: Types::AwsProductsSpendInsightsBySource,
+        ?opportunity_quality: Types::OpportunityQuality,
+        ?recommendations: Array[Types::Recommendation],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_best_actions: String?
       attr_accessor engagement_score: String?
+      attr_accessor aws_products_spend_insights_by_source: Types::AwsProductsSpendInsightsBySource?
+      attr_accessor opportunity_quality: Types::OpportunityQuality?
+      attr_accessor recommendations: Array[Types::Recommendation]?
     end
 
     class AwsOpportunityLifeCycle
@@ -278,10 +293,12 @@ module Aws::PartnerCentralSelling
 
       def initialize: (
         ?expected_customer_spend: Array[Types::ExpectedCustomerSpend],
+        ?aws_partition: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor expected_customer_spend: Array[Types::ExpectedCustomerSpend]?
+      attr_accessor aws_partition: String?
     end
 
     class AwsOpportunityRelatedEntities
@@ -290,11 +307,15 @@ module Aws::PartnerCentralSelling
       def initialize: (
         ?aws_products: Array[String],
         ?solutions: Array[String],
+        ?aws_marketplace_solutions: Array[String],
+        ?aws_marketplace_products: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor aws_products: Array[String]?
       attr_accessor solutions: Array[String]?
+      attr_accessor aws_marketplace_solutions: Array[String]?
+      attr_accessor aws_marketplace_products: Array[String]?
     end
 
     module AwsOpportunityStage
@@ -322,6 +343,134 @@ module Aws::PartnerCentralSelling
       CLOSED_LOST: String
       COMPLETED: String
       CLOSED_INCOMPLETE: String
+    end
+
+    class AwsOpportunitySummaryFullView
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?related_opportunity_id: String,
+        ?origin: String,
+        ?involvement_type: String,
+        ?visibility: String,
+        ?life_cycle: Types::AwsOpportunityLifeCycle,
+        ?opportunity_team: Array[Types::AwsTeamMember],
+        ?insights: Types::AwsOpportunityInsights,
+        ?involvement_type_change_reason: String,
+        ?related_entity_ids: Types::AwsOpportunityRelatedEntities,
+        ?customer: Types::AwsOpportunityCustomer,
+        ?project: Types::AwsOpportunityProject,
+        ?cosell_motion: String,
+        ?software_revenue: Types::AwsSoftwareRevenue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor related_opportunity_id: String?
+      attr_accessor origin: String?
+      attr_accessor involvement_type: String?
+      attr_accessor visibility: String?
+      attr_accessor life_cycle: Types::AwsOpportunityLifeCycle?
+      attr_accessor opportunity_team: Array[Types::AwsTeamMember]?
+      attr_accessor insights: Types::AwsOpportunityInsights?
+      attr_accessor involvement_type_change_reason: String?
+      attr_accessor related_entity_ids: Types::AwsOpportunityRelatedEntities?
+      attr_accessor customer: Types::AwsOpportunityCustomer?
+      attr_accessor project: Types::AwsOpportunityProject?
+      attr_accessor cosell_motion: String?
+      attr_accessor software_revenue: Types::AwsSoftwareRevenue?
+    end
+
+    module AwsPartition
+      AWS_EUSC: String
+    end
+
+    class AwsProductDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_code: String,
+        ?service_code: String,
+        ?categories: Array[String],
+        ?amount: String,
+        ?optimized_amount: String,
+        ?potential_savings_amount: String,
+        ?optimizations: Array[Types::AwsProductOptimization],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_code: String?
+      attr_accessor service_code: String?
+      attr_accessor categories: Array[String]?
+      attr_accessor amount: String?
+      attr_accessor optimized_amount: String?
+      attr_accessor potential_savings_amount: String?
+      attr_accessor optimizations: Array[Types::AwsProductOptimization]?
+    end
+
+    class AwsProductInsights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency_code: String,
+        ?frequency: String,
+        ?total_amount: String,
+        ?total_optimized_amount: String,
+        ?total_potential_savings_amount: String,
+        ?total_amount_by_category: Hash[String, String],
+        ?aws_products: Array[Types::AwsProductDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency_code: String?
+      attr_accessor frequency: String?
+      attr_accessor total_amount: String?
+      attr_accessor total_optimized_amount: String?
+      attr_accessor total_potential_savings_amount: String?
+      attr_accessor total_amount_by_category: Hash[String, String]?
+      attr_accessor aws_products: Array[Types::AwsProductDetails]?
+    end
+
+    class AwsProductOptimization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?savings_amount: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor savings_amount: String?
+    end
+
+    class AwsProductsSpendInsightsBySource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partner: Types::AwsProductInsights,
+        ?aws: Types::AwsProductInsights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partner: Types::AwsProductInsights?
+      attr_accessor aws: Types::AwsProductInsights?
+    end
+
+    class AwsSoftwareRevenue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Types::MonetaryValue,
+        ?discount: String,
+        ?effective_date: String,
+        ?expiration_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Types::MonetaryValue?
+      attr_accessor discount: String?
+      attr_accessor effective_date: String?
+      attr_accessor expiration_date: String?
     end
 
     class AwsSubmission
@@ -688,6 +837,42 @@ module Aws::PartnerCentralSelling
       ZW: String
     end
 
+    class CreateEngagementContextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?engagement_identifier: String,
+        ?client_token: String,
+        ?type: String,
+        ?payload: Types::EngagementContextPayload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor engagement_identifier: String?
+      attr_accessor client_token: String?
+      attr_accessor type: String?
+      attr_accessor payload: Types::EngagementContextPayload?
+    end
+
+    class CreateEngagementContextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_id: String,
+        ?engagement_arn: String,
+        ?engagement_last_modified_at: Time,
+        ?context_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_id: String?
+      attr_accessor engagement_arn: String?
+      attr_accessor engagement_last_modified_at: Time?
+      attr_accessor context_id: String?
+    end
+
     class CreateEngagementInvitationRequest
       include Smithy::Schema::Structure
 
@@ -743,11 +928,13 @@ module Aws::PartnerCentralSelling
       def initialize: (
         ?id: String,
         ?arn: String,
+        ?modified_at: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor id: String?
       attr_accessor arn: String?
+      attr_accessor modified_at: Time?
     end
 
     class CreateOpportunityRequest
@@ -870,6 +1057,19 @@ module Aws::PartnerCentralSelling
 
       attr_accessor arn: String?
       attr_accessor revision: Integer?
+    end
+
+    class CreatedDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_created_date: Time,
+        ?before_created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_created_date: Time?
+      attr_accessor before_created_date: Time?
     end
 
     module CurrencyCode
@@ -1123,11 +1323,13 @@ module Aws::PartnerCentralSelling
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?id: String,
         ?type: String,
         ?payload: Types::EngagementContextPayload,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor id: String?
       attr_accessor type: String?
       attr_accessor payload: Types::EngagementContextPayload?
     end
@@ -1137,12 +1339,20 @@ module Aws::PartnerCentralSelling
 
       def initialize: (
         ?customer_project: Types::CustomerProjectsContext,
+        ?lead: Types::LeadContext,
+        ?prospecting_result: Types::ProspectingResult,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor customer_project: Types::CustomerProjectsContext?
+      attr_accessor lead: Types::LeadContext?
+      attr_accessor prospecting_result: Types::ProspectingResult?
 
       class CustomerProject < EngagementContextPayload
+      end
+      class Lead < EngagementContextPayload
+      end
+      class ProspectingResult < EngagementContextPayload
       end
       class Unknown < EngagementContextPayload
       end
@@ -1150,6 +1360,8 @@ module Aws::PartnerCentralSelling
 
     module EngagementContextType
       CUSTOMER_PROJECT: String
+      LEAD: String
+      PROSPECTING_RESULT: String
     end
 
     class EngagementCustomer
@@ -1186,6 +1398,7 @@ module Aws::PartnerCentralSelling
 
     module EngagementInvitationPayloadType
       OPPORTUNITY_INVITATION: String
+      LEAD_INVITATION: String
     end
 
     class EngagementInvitationSummary
@@ -1251,6 +1464,25 @@ module Aws::PartnerCentralSelling
       attr_accessor website_url: String?
     end
 
+    class EngagementProspectingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_identifier: String,
+        ?engagement_context_id: String,
+        ?status: String,
+        ?reason_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_identifier: String?
+      attr_accessor engagement_context_id: String?
+      attr_accessor status: String?
+      attr_accessor reason_code: String?
+      attr_accessor message: String?
+    end
+
     class EngagementResourceAssociationSummary
       include Smithy::Schema::Structure
 
@@ -1303,6 +1535,9 @@ module Aws::PartnerCentralSelling
         ?created_at: Time,
         ?created_by: String,
         ?member_count: Integer,
+        ?modified_at: Time,
+        ?modified_by: String,
+        ?context_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1312,6 +1547,39 @@ module Aws::PartnerCentralSelling
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor member_count: Integer?
+      attr_accessor modified_at: Time?
+      attr_accessor modified_by: String?
+      attr_accessor context_types: Array[String]?
+    end
+
+    class EnrichmentContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prospecting_result_aws: Types::InvitationProspectingResultAws,
+        ?lead_insights: Types::LeadInsights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prospecting_result_aws: Types::InvitationProspectingResultAws?
+      attr_accessor lead_insights: Types::LeadInsights?
+    end
+
+    class ExpectedContractDuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?term: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor term: String?
+      attr_accessor value: String?
+    end
+
+    module ExpectedContractDurationTerm
+      MONTHS: String
     end
 
     class ExpectedCustomerSpend
@@ -1350,7 +1618,6 @@ module Aws::PartnerCentralSelling
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?catalog: String,
         ?related_opportunity_id: String,
         ?origin: String,
         ?involvement_type: String,
@@ -1362,10 +1629,12 @@ module Aws::PartnerCentralSelling
         ?related_entity_ids: Types::AwsOpportunityRelatedEntities,
         ?customer: Types::AwsOpportunityCustomer,
         ?project: Types::AwsOpportunityProject,
+        ?cosell_motion: String,
+        ?software_revenue: Types::AwsSoftwareRevenue,
+        ?catalog: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor catalog: String?
       attr_accessor related_opportunity_id: String?
       attr_accessor origin: String?
       attr_accessor involvement_type: String?
@@ -1377,6 +1646,9 @@ module Aws::PartnerCentralSelling
       attr_accessor related_entity_ids: Types::AwsOpportunityRelatedEntities?
       attr_accessor customer: Types::AwsOpportunityCustomer?
       attr_accessor project: Types::AwsOpportunityProject?
+      attr_accessor cosell_motion: String?
+      attr_accessor software_revenue: Types::AwsSoftwareRevenue?
+      attr_accessor catalog: String?
     end
 
     class GetEngagementInvitationRequest
@@ -1413,6 +1685,7 @@ module Aws::PartnerCentralSelling
         ?invitation_message: String,
         ?engagement_description: String,
         ?existing_members: Array[Types::EngagementMemberSummary],
+        ?enrichment_context: Types::EnrichmentContext,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1433,6 +1706,7 @@ module Aws::PartnerCentralSelling
       attr_accessor invitation_message: String?
       attr_accessor engagement_description: String?
       attr_accessor existing_members: Array[Types::EngagementMemberSummary]?
+      attr_accessor enrichment_context: Types::EnrichmentContext?
     end
 
     class GetEngagementRequest
@@ -1459,6 +1733,8 @@ module Aws::PartnerCentralSelling
         ?created_at: Time,
         ?created_by: String,
         ?member_count: Integer,
+        ?modified_at: Time,
+        ?modified_by: String,
         ?contexts: Array[Types::EngagementContextDetails],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1470,6 +1746,8 @@ module Aws::PartnerCentralSelling
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor member_count: Integer?
+      attr_accessor modified_at: Time?
+      attr_accessor modified_by: String?
       attr_accessor contexts: Array[Types::EngagementContextDetails]?
     end
 
@@ -1525,6 +1803,40 @@ module Aws::PartnerCentralSelling
       attr_accessor related_entity_identifiers: Types::RelatedEntityIdentifiers?
       attr_accessor life_cycle: Types::LifeCycle?
       attr_accessor opportunity_team: Array[Types::Contact]?
+    end
+
+    class GetProspectingFromEngagementTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?task_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor task_identifier: String?
+    end
+
+    class GetProspectingFromEngagementTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?task_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?engagements: Array[Types::EngagementProspectingResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor task_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor engagements: Array[Types::EngagementProspectingResult]?
     end
 
     class GetResourceSnapshotJobRequest
@@ -1608,6 +1920,7 @@ module Aws::PartnerCentralSelling
         ?resource_snapshot_template_name: String,
         ?revision: Integer,
         ?payload: Types::ResourceSnapshotPayload,
+        ?target_member_accounts: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1621,6 +1934,7 @@ module Aws::PartnerCentralSelling
       attr_accessor resource_snapshot_template_name: String?
       attr_accessor revision: Integer?
       attr_accessor payload: Types::ResourceSnapshotPayload?
+      attr_accessor target_member_accounts: Array[String]?
     end
 
     class GetSellingSystemSettingsRequest
@@ -1704,6 +2018,19 @@ module Aws::PartnerCentralSelling
       attr_accessor payload: Types::Payload?
     end
 
+    class InvitationProspectingResultAws
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer: Types::ProspectingResultCustomer,
+        ?insights: Types::ProspectingInsights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer: Types::ProspectingResultCustomer?
+      attr_accessor insights: Types::ProspectingInsights?
+    end
+
     module InvitationStatus
       ACCEPTED: String
       PENDING: String
@@ -1730,6 +2057,169 @@ module Aws::PartnerCentralSelling
 
       attr_accessor after_last_modified_date: Time?
       attr_accessor before_last_modified_date: Time?
+    end
+
+    class LeadAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?city: String,
+        ?postal_code: String,
+        ?state_or_region: String,
+        ?country_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor city: String?
+      attr_accessor postal_code: String?
+      attr_accessor state_or_region: String?
+      attr_accessor country_code: String?
+    end
+
+    class LeadContact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?business_title: String,
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?phone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_title: String?
+      attr_accessor email: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor phone: String?
+    end
+
+    class LeadContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insights: Types::LeadInsights,
+        ?qualification_status: String,
+        ?customer: Types::LeadCustomer,
+        ?interactions: Array[Types::LeadInteraction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insights: Types::LeadInsights?
+      attr_accessor qualification_status: String?
+      attr_accessor customer: Types::LeadCustomer?
+      attr_accessor interactions: Array[Types::LeadInteraction]?
+    end
+
+    class LeadCustomer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?industry: String,
+        ?company_name: String,
+        ?website_url: String,
+        ?address: Types::LeadAddress,
+        ?aws_maturity: String,
+        ?market_segment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor industry: String?
+      attr_accessor company_name: String?
+      attr_accessor website_url: String?
+      attr_accessor address: Types::LeadAddress?
+      attr_accessor aws_maturity: String?
+      attr_accessor market_segment: String?
+    end
+
+    class LeadInsights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lead_readiness_score: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lead_readiness_score: String?
+    end
+
+    class LeadInteraction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?source_id: String,
+        ?source_name: String,
+        ?usecase: String,
+        ?interaction_date: Time,
+        ?customer_action: String,
+        ?business_problem: String,
+        ?contact: Types::LeadContact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor source_id: String?
+      attr_accessor source_name: String?
+      attr_accessor usecase: String?
+      attr_accessor interaction_date: Time?
+      attr_accessor customer_action: String?
+      attr_accessor business_problem: String?
+      attr_accessor contact: Types::LeadContact?
+    end
+
+    class LeadInvitationCustomer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?industry: String,
+        ?company_name: String,
+        ?website_url: String,
+        ?country_code: String,
+        ?aws_maturity: String,
+        ?market_segment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor industry: String?
+      attr_accessor company_name: String?
+      attr_accessor website_url: String?
+      attr_accessor country_code: String?
+      attr_accessor aws_maturity: String?
+      attr_accessor market_segment: String?
+    end
+
+    class LeadInvitationInteraction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?source_id: String,
+        ?source_name: String,
+        ?usecase: String,
+        ?contact_business_title: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor source_id: String?
+      attr_accessor source_name: String?
+      attr_accessor usecase: String?
+      attr_accessor contact_business_title: String?
+    end
+
+    class LeadInvitationPayload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer: Types::LeadInvitationCustomer,
+        ?interaction: Types::LeadInvitationInteraction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer: Types::LeadInvitationCustomer?
+      attr_accessor interaction: Types::LeadInvitationInteraction?
     end
 
     class LifeCycle
@@ -2042,6 +2532,8 @@ module Aws::PartnerCentralSelling
         ?catalog: String,
         ?created_by: Array[String],
         ?exclude_created_by: Array[String],
+        ?context_types: Array[String],
+        ?exclude_context_types: Array[String],
         ?sort: Types::EngagementSort,
         ?max_results: Integer,
         ?next_token: String,
@@ -2052,6 +2544,8 @@ module Aws::PartnerCentralSelling
       attr_accessor catalog: String?
       attr_accessor created_by: Array[String]?
       attr_accessor exclude_created_by: Array[String]?
+      attr_accessor context_types: Array[String]?
+      attr_accessor exclude_context_types: Array[String]?
       attr_accessor sort: Types::EngagementSort?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
@@ -2084,6 +2578,8 @@ module Aws::PartnerCentralSelling
         ?life_cycle_stage: Array[String],
         ?life_cycle_review_status: Array[String],
         ?customer_company_name: Array[String],
+        ?created_date: Types::CreatedDateFilter,
+        ?target_close_date: Types::TargetCloseDateFilter,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2096,6 +2592,8 @@ module Aws::PartnerCentralSelling
       attr_accessor life_cycle_stage: Array[String]?
       attr_accessor life_cycle_review_status: Array[String]?
       attr_accessor customer_company_name: Array[String]?
+      attr_accessor created_date: Types::CreatedDateFilter?
+      attr_accessor target_close_date: Types::TargetCloseDateFilter?
     end
 
     class ListOpportunitiesResponse
@@ -2109,6 +2607,113 @@ module Aws::PartnerCentralSelling
 
       attr_accessor opportunity_summaries: Array[Types::OpportunitySummary]?
       attr_accessor next_token: String?
+    end
+
+    class ListOpportunityFromEngagementTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?start_time: Time,
+        ?task_status: String,
+        ?message: String,
+        ?reason_code: String,
+        ?opportunity_id: String,
+        ?resource_snapshot_job_id: String,
+        ?engagement_id: String,
+        ?context_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor task_status: String?
+      attr_accessor message: String?
+      attr_accessor reason_code: String?
+      attr_accessor opportunity_id: String?
+      attr_accessor resource_snapshot_job_id: String?
+      attr_accessor engagement_id: String?
+      attr_accessor context_id: String?
+    end
+
+    class ListOpportunityFromEngagementTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?sort: Types::ListTasksSortBase,
+        ?catalog: String,
+        ?task_status: Array[String],
+        ?task_identifier: Array[String],
+        ?opportunity_identifier: Array[String],
+        ?engagement_identifier: Array[String],
+        ?context_identifier: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor sort: Types::ListTasksSortBase?
+      attr_accessor catalog: String?
+      attr_accessor task_status: Array[String]?
+      attr_accessor task_identifier: Array[String]?
+      attr_accessor opportunity_identifier: Array[String]?
+      attr_accessor engagement_identifier: Array[String]?
+      attr_accessor context_identifier: Array[String]?
+    end
+
+    class ListOpportunityFromEngagementTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_summaries: Array[Types::ListOpportunityFromEngagementTaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_summaries: Array[Types::ListOpportunityFromEngagementTaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProspectingFromEngagementTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?task_identifier: Array[String],
+        ?task_name: Array[String],
+        ?start_after: Time,
+        ?start_before: Time,
+        ?sort: Types::ProspectingFromEngagementTaskSort,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor task_identifier: Array[String]?
+      attr_accessor task_name: Array[String]?
+      attr_accessor start_after: Time?
+      attr_accessor start_before: Time?
+      attr_accessor sort: Types::ProspectingFromEngagementTaskSort?
+    end
+
+    class ListProspectingFromEngagementTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?task_summaries: Array[Types::ProspectingTaskSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor task_summaries: Array[Types::ProspectingTaskSummary]?
     end
 
     class ListResourceSnapshotJobsRequest
@@ -2194,6 +2799,7 @@ module Aws::PartnerCentralSelling
         ?status: Array[String],
         ?identifier: Array[String],
         ?category: Array[String],
+        ?aws_marketplace_solution_arn: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2204,6 +2810,7 @@ module Aws::PartnerCentralSelling
       attr_accessor status: Array[String]?
       attr_accessor identifier: Array[String]?
       attr_accessor category: Array[String]?
+      attr_accessor aws_marketplace_solution_arn: Array[String]?
     end
 
     class ListSolutionsResponse
@@ -2352,6 +2959,19 @@ module Aws::PartnerCentralSelling
       PARTNER_REFERRAL: String
     end
 
+    class OpportunityQuality
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?score: Integer,
+        ?trend: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor score: Integer?
+      attr_accessor trend: String?
+    end
+
     class OpportunitySort
       include Smithy::Schema::Structure
 
@@ -2369,6 +2989,8 @@ module Aws::PartnerCentralSelling
       LAST_MODIFIEDDATE: String
       IDENTIFIER: String
       CUSTOMER_COMPANY_NAME: String
+      CREATED_DATE: String
+      TARGET_CLOSE_DATE: String
     end
 
     class OpportunitySummary
@@ -2439,12 +3061,16 @@ module Aws::PartnerCentralSelling
 
       def initialize: (
         ?opportunity_invitation: Types::OpportunityInvitationPayload,
+        ?lead_invitation: Types::LeadInvitationPayload,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor opportunity_invitation: Types::OpportunityInvitationPayload?
+      attr_accessor lead_invitation: Types::LeadInvitationPayload?
 
       class OpportunityInvitation < Payload
+      end
+      class LeadInvitation < Payload
       end
       class Unknown < Payload
       end
@@ -2484,6 +3110,7 @@ module Aws::PartnerCentralSelling
       def initialize: (
         ?delivery_models: Array[String],
         ?expected_customer_spend: Array[Types::ExpectedCustomerSpend],
+        ?expected_contract_duration: Types::ExpectedContractDuration,
         ?title: String,
         ?apn_programs: Array[String],
         ?customer_business_problem: String,
@@ -2494,11 +3121,13 @@ module Aws::PartnerCentralSelling
         ?other_competitor_names: String,
         ?other_solution_description: String,
         ?additional_comments: String,
+        ?aws_partition: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor delivery_models: Array[String]?
       attr_accessor expected_customer_spend: Array[Types::ExpectedCustomerSpend]?
+      attr_accessor expected_contract_duration: Types::ExpectedContractDuration?
       attr_accessor title: String?
       attr_accessor apn_programs: Array[String]?
       attr_accessor customer_business_problem: String?
@@ -2509,6 +3138,7 @@ module Aws::PartnerCentralSelling
       attr_accessor other_competitor_names: String?
       attr_accessor other_solution_description: String?
       attr_accessor additional_comments: String?
+      attr_accessor aws_partition: String?
     end
 
     class ProjectDetails
@@ -2534,11 +3164,13 @@ module Aws::PartnerCentralSelling
       def initialize: (
         ?delivery_models: Array[String],
         ?expected_customer_spend: Array[Types::ExpectedCustomerSpend],
+        ?expected_contract_duration: Types::ExpectedContractDuration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor delivery_models: Array[String]?
       attr_accessor expected_customer_spend: Array[Types::ExpectedCustomerSpend]?
+      attr_accessor expected_contract_duration: Types::ExpectedContractDuration?
     end
 
     class ProjectView
@@ -2547,6 +3179,7 @@ module Aws::PartnerCentralSelling
       def initialize: (
         ?delivery_models: Array[String],
         ?expected_customer_spend: Array[Types::ExpectedCustomerSpend],
+        ?expected_contract_duration: Types::ExpectedContractDuration,
         ?customer_use_case: String,
         ?sales_activities: Array[String],
         ?other_solution_description: String,
@@ -2555,9 +3188,143 @@ module Aws::PartnerCentralSelling
 
       attr_accessor delivery_models: Array[String]?
       attr_accessor expected_customer_spend: Array[Types::ExpectedCustomerSpend]?
+      attr_accessor expected_contract_duration: Types::ExpectedContractDuration?
       attr_accessor customer_use_case: String?
       attr_accessor sales_activities: Array[String]?
       attr_accessor other_solution_description: String?
+    end
+
+    class ProspectingFromEngagementTaskSort
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sort_order: String,
+        ?sort_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sort_order: String?
+      attr_accessor sort_by: String?
+    end
+
+    module ProspectingFromEngagementTaskSortName
+      StartTime: String
+      TaskName: String
+      FailedEngagementCount: String
+    end
+
+    class ProspectingInsights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marketplace_engagement_score: String,
+        ?solution_score: String,
+        ?solution_category: String,
+        ?solution_sub_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marketplace_engagement_score: String?
+      attr_accessor solution_score: String?
+      attr_accessor solution_category: String?
+      attr_accessor solution_sub_category: String?
+    end
+
+    class ProspectingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws: Types::ProspectingResultAws,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws: Types::ProspectingResultAws?
+    end
+
+    class ProspectingResultAws
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer: Types::ProspectingResultCustomer,
+        ?insights: Types::ProspectingInsights,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?task_id: String,
+        ?task_arn: String,
+        ?task_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer: Types::ProspectingResultCustomer?
+      attr_accessor insights: Types::ProspectingInsights?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor task_name: String?
+    end
+
+    class ProspectingResultCustomer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_name: String,
+        ?geo: String,
+        ?region: String,
+        ?sub_region: String,
+        ?country: String,
+        ?industry: String,
+        ?sub_industry: String,
+        ?segment: String,
+        ?company_size: String,
+        ?eligible_programs: Array[String],
+        ?public_profile_summary: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_name: String?
+      attr_accessor geo: String?
+      attr_accessor region: String?
+      attr_accessor sub_region: String?
+      attr_accessor country: String?
+      attr_accessor industry: String?
+      attr_accessor sub_industry: String?
+      attr_accessor segment: String?
+      attr_accessor company_size: String?
+      attr_accessor eligible_programs: Array[String]?
+      attr_accessor public_profile_summary: String?
+    end
+
+    module ProspectingTaskStatus
+      PENDING: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class ProspectingTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?task_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?total_engagement_count: Integer,
+        ?completed_engagement_count: Integer,
+        ?failed_engagement_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor task_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor total_engagement_count: Integer?
+      attr_accessor completed_engagement_count: Integer?
+      attr_accessor failed_engagement_count: Integer?
     end
 
     class PutSellingSystemSettingsRequest
@@ -2606,6 +3373,9 @@ module Aws::PartnerCentralSelling
       RESOURCE_SNAPSHOT_CONFLICT: String
       SERVICE_QUOTA_EXCEEDED: String
       REQUEST_THROTTLED: String
+      CONTEXT_NOT_FOUND: String
+      CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED: String
+      DISQUALIFIED_LEAD_NOT_PERMITTED: String
     end
 
     class Receiver
@@ -2636,6 +3406,21 @@ module Aws::PartnerCentralSelling
       FACILITATOR: String
     end
 
+    class Recommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?details: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor details: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
     class RejectEngagementInvitationRequest
       include Smithy::Schema::Structure
 
@@ -2656,20 +3441,29 @@ module Aws::PartnerCentralSelling
 
       def initialize: (
         ?aws_marketplace_offers: Array[String],
+        ?aws_marketplace_offer_sets: Array[String],
         ?solutions: Array[String],
         ?aws_products: Array[String],
+        ?aws_marketplace_solutions: Array[String],
+        ?aws_marketplace_products: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor aws_marketplace_offers: Array[String]?
+      attr_accessor aws_marketplace_offer_sets: Array[String]?
       attr_accessor solutions: Array[String]?
       attr_accessor aws_products: Array[String]?
+      attr_accessor aws_marketplace_solutions: Array[String]?
+      attr_accessor aws_marketplace_products: Array[String]?
     end
 
     module RelatedEntityType
       SOLUTIONS: String
       AWS_PRODUCTS: String
       AWS_MARKETPLACE_OFFERS: String
+      AWS_MARKETPLACE_OFFER_SETS: String
+      AWS_MARKETPLACE_SOLUTIONS: String
+      AWS_MARKETPLACE_PRODUCTS: String
     end
 
     class ResourceNotFoundException
@@ -2710,12 +3504,16 @@ module Aws::PartnerCentralSelling
 
       def initialize: (
         ?opportunity_summary: Types::OpportunitySummaryView,
+        ?aws_opportunity_summary_full_view: Types::AwsOpportunitySummaryFullView,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor opportunity_summary: Types::OpportunitySummaryView?
+      attr_accessor aws_opportunity_summary_full_view: Types::AwsOpportunitySummaryFullView?
 
       class OpportunitySummary < ResourceSnapshotPayload
+      end
+      class AwsOpportunitySummaryFullView < ResourceSnapshotPayload
       end
       class Unknown < ResourceSnapshotPayload
       end
@@ -2835,6 +3633,7 @@ module Aws::PartnerCentralSelling
         ?status: String,
         ?category: String,
         ?created_date: Time,
+        ?aws_marketplace_solution_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2845,6 +3644,7 @@ module Aws::PartnerCentralSelling
       attr_accessor status: String?
       attr_accessor category: String?
       attr_accessor created_date: Time?
+      attr_accessor aws_marketplace_solution_arn: String?
     end
 
     class SolutionSort
@@ -2998,6 +3798,96 @@ module Aws::PartnerCentralSelling
       attr_accessor engagement_invitation_id: String?
     end
 
+    class StartOpportunityFromEngagementTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?client_token: String,
+        ?identifier: String,
+        ?context_identifier: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor client_token: String?
+      attr_accessor identifier: String?
+      attr_accessor context_identifier: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class StartOpportunityFromEngagementTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_arn: String,
+        ?start_time: Time,
+        ?task_status: String,
+        ?message: String,
+        ?reason_code: String,
+        ?opportunity_id: String,
+        ?resource_snapshot_job_id: String,
+        ?engagement_id: String,
+        ?context_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor task_status: String?
+      attr_accessor message: String?
+      attr_accessor reason_code: String?
+      attr_accessor opportunity_id: String?
+      attr_accessor resource_snapshot_job_id: String?
+      attr_accessor engagement_id: String?
+      attr_accessor context_id: String?
+    end
+
+    class StartProspectingFromEngagementTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?identifiers: Array[String],
+        ?task_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor identifiers: Array[String]?
+      attr_accessor task_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartProspectingFromEngagementTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifiers: Array[String],
+        ?task_name: String,
+        ?message: String,
+        ?reason_code: String,
+        ?start_time: Time,
+        ?task_id: String,
+        ?task_arn: String,
+        ?task_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifiers: Array[String]?
+      attr_accessor task_name: String?
+      attr_accessor message: String?
+      attr_accessor reason_code: String?
+      attr_accessor start_time: Time?
+      attr_accessor task_id: String?
+      attr_accessor task_arn: String?
+      attr_accessor task_status: String?
+    end
+
     class StartResourceSnapshotJobRequest
       include Smithy::Schema::Structure
 
@@ -3076,6 +3966,19 @@ module Aws::PartnerCentralSelling
 
     end
 
+    class TargetCloseDateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_target_close_date: String,
+        ?before_target_close_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_target_close_date: String?
+      attr_accessor before_target_close_date: String?
+    end
+
     module TaskStatus
       IN_PROGRESS: String
       COMPLETE: String
@@ -3113,6 +4016,85 @@ module Aws::PartnerCentralSelling
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class UpdateEngagementContextPayload
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?lead: Types::UpdateLeadContext,
+        ?customer_project: Types::CustomerProjectsContext,
+        ?prospecting_result: Types::ProspectingResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lead: Types::UpdateLeadContext?
+      attr_accessor customer_project: Types::CustomerProjectsContext?
+      attr_accessor prospecting_result: Types::ProspectingResult?
+
+      class Lead < UpdateEngagementContextPayload
+      end
+      class CustomerProject < UpdateEngagementContextPayload
+      end
+      class ProspectingResult < UpdateEngagementContextPayload
+      end
+      class Unknown < UpdateEngagementContextPayload
+      end
+    end
+
+    class UpdateEngagementContextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: String,
+        ?engagement_identifier: String,
+        ?context_identifier: String,
+        ?engagement_last_modified_at: Time,
+        ?type: String,
+        ?payload: Types::UpdateEngagementContextPayload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: String?
+      attr_accessor engagement_identifier: String?
+      attr_accessor context_identifier: String?
+      attr_accessor engagement_last_modified_at: Time?
+      attr_accessor type: String?
+      attr_accessor payload: Types::UpdateEngagementContextPayload?
+    end
+
+    class UpdateEngagementContextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_id: String,
+        ?engagement_arn: String,
+        ?engagement_last_modified_at: Time,
+        ?context_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_id: String?
+      attr_accessor engagement_arn: String?
+      attr_accessor engagement_last_modified_at: Time?
+      attr_accessor context_id: String?
+    end
+
+    class UpdateLeadContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?qualification_status: String,
+        ?customer: Types::LeadCustomer,
+        ?interaction: Types::LeadInteraction,
+        ?insights: Types::LeadInsights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor qualification_status: String?
+      attr_accessor customer: Types::LeadCustomer?
+      attr_accessor interaction: Types::LeadInteraction?
+      attr_accessor insights: Types::LeadInsights?
     end
 
     class UpdateOpportunityRequest
@@ -3196,6 +4178,7 @@ module Aws::PartnerCentralSelling
       INVALID_ENUM_VALUE: String
       INVALID_STRING_FORMAT: String
       INVALID_VALUE: String
+      NOT_ENOUGH_VALUES: String
       TOO_MANY_VALUES: String
       INVALID_RESOURCE_STATE: String
       DUPLICATE_KEY_VALUE: String

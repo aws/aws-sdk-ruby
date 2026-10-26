@@ -58,7 +58,7 @@ module Aws::RDSData
       end
     end
 
-    # <p>There is an error in the call or in a SQL statement. (This error only appears in calls from Aurora Serverless v1 databases.)</p>
+    # <p>There is an error in the call or in a SQL statement. This exception is deprecated.</p>
     class BadRequestException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::BadRequestException] data
@@ -98,9 +98,7 @@ module Aws::RDSData
       end
     end
 
-    # <p>A request was cancelled because the Aurora Serverless v2 DB instance was paused.
-    #          The Data API request automatically resumes the DB instance. Wait a few seconds and
-    #          try again.</p>
+    # <p>A request was cancelled because the Aurora Serverless DB instance was paused. The Data API request automatically resumes the DB instance. Wait a few seconds and try again.</p>
     class DatabaseResumingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::DatabaseResumingException] data
@@ -198,18 +196,7 @@ module Aws::RDSData
       end
     end
 
-    # <p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p>
-    #          <ul>
-    #             <li>
-    #                <p>RDS Data API timed out retrieving the secret.</p>
-    #             </li>
-    #             <li>
-    #                <p>The secret provided wasn't found.</p>
-    #             </li>
-    #             <li>
-    #                <p>The secret couldn't be decrypted.</p>
-    #             </li>
-    #          </ul>
+    # <p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p> <ul> <li> <p>RDS Data API timed out retrieving the secret.</p> </li> <li> <p>The secret provided wasn't found.</p> </li> <li> <p>The secret couldn't be decrypted.</p> </li> </ul>
     class SecretsErrorException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::SecretsErrorException] data
@@ -222,8 +209,7 @@ module Aws::RDSData
       end
     end
 
-    # <p>The service specified by the <code>resourceArn</code> parameter isn't
-    #             available.</p>
+    # <p>The service specified by the <code>resourceArn</code> parameter isn't available.</p>
     class ServiceUnavailableError < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::ServiceUnavailableError] data
@@ -264,18 +250,7 @@ module Aws::RDSData
       end
     end
 
-    # <p>There was a problem with the result because of one of the following conditions:</p>
-    #          <ul>
-    #             <li>
-    #                <p>It contained an unsupported data type.</p>
-    #             </li>
-    #             <li>
-    #                <p>It contained a multidimensional array.</p>
-    #             </li>
-    #             <li>
-    #                <p>The size was too large.</p>
-    #             </li>
-    #          </ul>
+    # <p>There was a problem with the result because of one of the following conditions:</p> <ul> <li> <p>It contained an unsupported data type.</p> </li> <li> <p>It contained a multidimensional array.</p> </li> <li> <p>The size was too large.</p> </li> </ul>
     class UnsupportedResultException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDSData::Types::UnsupportedResultException] data

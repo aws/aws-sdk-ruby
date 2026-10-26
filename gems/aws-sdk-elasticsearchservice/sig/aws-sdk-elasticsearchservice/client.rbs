@@ -208,7 +208,17 @@ module Aws::ElasticsearchService
           key: String,
           value: String
         }
-      ]
+      ],
+      ?deployment_strategy_options: {
+        deployment_strategy: String
+      },
+      ?automated_snapshot_pause_options: {
+        enabled: bool,
+        start_time: Time,
+        end_time: untyped
+      },
+      ?use_case: String,
+      ?engine_mode: String
     ) -> _CreateElasticsearchDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateElasticsearchDomainResponse
 
     interface _CreateOutboundCrossClusterSearchConnectionResponse
@@ -722,7 +732,17 @@ module Aws::ElasticsearchService
           }
         ]
       },
-      ?dry_run: bool
+      ?dry_run: bool,
+      ?deployment_strategy_options: {
+        deployment_strategy: String
+      },
+      ?automated_snapshot_pause_options: {
+        enabled: bool,
+        start_time: Time,
+        end_time: untyped
+      },
+      ?use_case: String,
+      ?engine_mode: String
     ) -> _UpdateElasticsearchDomainConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateElasticsearchDomainConfigResponse
 
     interface _UpdatePackageResponse

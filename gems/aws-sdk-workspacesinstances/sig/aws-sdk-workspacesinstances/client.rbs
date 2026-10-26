@@ -118,7 +118,8 @@ module Aws::WorkspacesInstances
         cpu_options: {
           amd_sev_snp: String,
           core_count: untyped,
-          threads_per_core: untyped
+          threads_per_core: untyped,
+          nested_virtualization: String
         },
         credit_specification: {
           cpu_credits: String
@@ -257,6 +258,9 @@ module Aws::WorkspacesInstances
           }
         ],
         user_data: String
+      },
+      ?billing_configuration: {
+        billing_mode: String
       }
     ) -> _CreateWorkspaceInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceInstanceResponse
 
@@ -291,6 +295,7 @@ module Aws::WorkspacesInstances
       def provision_state: () -> String?
       def workspace_instance_id: () -> String?
       def ec2_managed_instance: () -> Types::EC2ManagedInstance?
+      def billing_configuration: () -> Types::BillingConfiguration?
     end
     def get_workspace_instance: (
       ?workspace_instance_id: String
@@ -303,7 +308,12 @@ module Aws::WorkspacesInstances
     end
     def list_instance_types: (
       ?max_results: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?instance_configuration_filter: {
+        billing_mode: String,
+        platform_type: String,
+        tenancy: String
+      }
     ) -> _ListInstanceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceTypesResponse
 
     interface _ListRegionsResponse

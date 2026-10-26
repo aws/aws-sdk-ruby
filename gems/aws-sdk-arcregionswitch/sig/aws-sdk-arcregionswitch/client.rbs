@@ -83,7 +83,8 @@ module Aws::ARCRegionswitch
                     {
                       cross_account_role: String,
                       external_id: untyped,
-                      arn: String
+                      arn: String,
+                      payload: String
                     }
                   ],
                   retry_interval_minutes: Float,
@@ -105,7 +106,8 @@ module Aws::ARCRegionswitch
                     minimum_success_percentage: untyped
                   },
                   target_percent: untyped,
-                  capacity_monitoring_approach: String
+                  capacity_monitoring_approach: String,
+                  wait_elb_target_group_healthy: String
                 },
                 execution_approval_config: {
                   timeout_minutes: untyped,
@@ -157,7 +159,8 @@ module Aws::ARCRegionswitch
                     minimum_success_percentage: untyped
                   },
                   target_percent: untyped,
-                  capacity_monitoring_approach: String
+                  capacity_monitoring_approach: String,
+                  wait_elb_target_group_healthy: untyped
                 },
                 eks_resource_scaling_config: {
                   timeout_minutes: untyped,
@@ -201,6 +204,103 @@ module Aws::ARCRegionswitch
                       region: String
                     }
                   ]
+                },
+                document_db_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  behavior: String,
+                  ungraceful: {
+                    ungraceful: String
+                  },
+                  global_cluster_identifier: String,
+                  database_cluster_arns: Array[String]
+                },
+                rds_promote_read_replica_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  db_instance_arn_map: Hash[String, String]
+                },
+                rds_create_cross_region_read_replica_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  db_instance_arn_map: untyped
+                },
+                lambda_event_source_mapping_config: {
+                  timeout_minutes: untyped,
+                  action: String,
+                  region_event_source_mappings: Hash[String,
+                    {
+                      cross_account_role: untyped,
+                      external_id: untyped,
+                      arn: String
+                    }
+                  ],
+                  ungraceful: {
+                    behavior: String
+                  }
+                },
+                aurora_serverless_scaling_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  global_cluster_identifier: untyped,
+                  region_database_cluster_arns: Hash[String, String],
+                  target_percent: untyped
+                },
+                aurora_provisioned_scaling_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  global_cluster_identifier: untyped,
+                  region_database_cluster_arns: untyped,
+                  instance_arns: Hash[String, String]
+                },
+                neptune_global_database_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  behavior: String,
+                  ungraceful: {
+                    ungraceful: String
+                  },
+                  global_cluster_identifier: String,
+                  region_database_cluster_arns: Hash[String, String]
+                },
+                rds_switchover_read_replica_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  db_instance_arn_map: untyped,
+                  ungraceful: {
+                    ungraceful: String
+                  }
+                },
+                ssm_send_command_config: {
+                  timeout_minutes: untyped,
+                  region_documents: Hash[String,
+                    {
+                      cross_account_role: untyped,
+                      external_id: untyped,
+                      document_arn: String,
+                      targets: Array[
+                        {
+                          key: String,
+                          values: Array[String]
+                        }
+                      ],
+                      parameters: Hash[String,
+                        Array[String]
+                      ],
+                      document_version: String
+                    }
+                  ],
+                  retry_interval_minutes: untyped,
+                  ungraceful: {
+                    behavior: String
+                  }
                 }
               },
               execution_block_type: String
@@ -235,6 +335,17 @@ module Aws::ARCRegionswitch
           min_delay_minutes_between_executions: Integer
         }
       ],
+      ?report_configuration: {
+        report_output: Array[
+          {
+            s3_configuration: {
+              bucket_path: String,
+              bucket_owner: String
+            }
+          }
+        ]
+      },
+      ?service_quota_checks_enabled: bool,
       ?name: String,
       ?regions: Array[String],
       ?recovery_approach: String,
@@ -286,9 +397,11 @@ module Aws::ARCRegionswitch
       def execution_state: () -> String?
       def execution_action: () -> String?
       def execution_region: () -> String?
+      def recovery_execution_id: () -> String?
       def step_states: () -> Array[Types::StepState]?
       def plan: () -> Types::Plan?
       def actual_recovery_time: () -> String?
+      def generated_report_details: () -> Array[Types::GeneratedReport]?
       def next_token: () -> String?
     end
     def get_plan_execution: (
@@ -364,6 +477,30 @@ module Aws::ARCRegionswitch
       ?next_token: String
     ) -> _ListRoute53HealthChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoute53HealthChecksResponse
 
+    interface _ListRoute53HealthChecksInRegionResponse
+      include Smithy::Client::_Response[Types::ListRoute53HealthChecksInRegionResponse]
+      def health_checks: () -> Array[Types::Route53HealthCheck]?
+      def next_token: () -> String?
+    end
+    def list_route53_health_checks_in_region: (
+      ?arn: String,
+      ?hosted_zone_id: String,
+      ?record_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRoute53HealthChecksInRegionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoute53HealthChecksInRegionResponse
+
+    interface _ListServiceQuotaWarningsResponse
+      include Smithy::Client::_Response[Types::ListServiceQuotaWarningsResponse]
+      def service_quota_warning_summaries: () -> Array[Types::ServiceQuotaWarningSummary]?
+      def next_token: () -> String?
+    end
+    def list_service_quota_warnings: (
+      ?plan_arns: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServiceQuotaWarningsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceQuotaWarningsResponse
+
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
       def resource_tags: () -> Hash[String, String]?
@@ -386,7 +523,9 @@ module Aws::ARCRegionswitch
       ?action: String,
       ?mode: String,
       ?comment: String,
-      ?latest_version: String
+      ?latest_version: String,
+      ?recovery_execution_id: String,
+      ?client_token: String
     ) -> _StartPlanExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartPlanExecutionResponse
 
     interface _TagResourceResponse
@@ -425,7 +564,8 @@ module Aws::ARCRegionswitch
                     {
                       cross_account_role: String,
                       external_id: untyped,
-                      arn: String
+                      arn: String,
+                      payload: String
                     }
                   ],
                   retry_interval_minutes: Float,
@@ -447,7 +587,8 @@ module Aws::ARCRegionswitch
                     minimum_success_percentage: untyped
                   },
                   target_percent: untyped,
-                  capacity_monitoring_approach: String
+                  capacity_monitoring_approach: String,
+                  wait_elb_target_group_healthy: String
                 },
                 execution_approval_config: {
                   timeout_minutes: untyped,
@@ -499,7 +640,8 @@ module Aws::ARCRegionswitch
                     minimum_success_percentage: untyped
                   },
                   target_percent: untyped,
-                  capacity_monitoring_approach: String
+                  capacity_monitoring_approach: String,
+                  wait_elb_target_group_healthy: untyped
                 },
                 eks_resource_scaling_config: {
                   timeout_minutes: untyped,
@@ -543,6 +685,103 @@ module Aws::ARCRegionswitch
                       region: String
                     }
                   ]
+                },
+                document_db_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  behavior: String,
+                  ungraceful: {
+                    ungraceful: String
+                  },
+                  global_cluster_identifier: String,
+                  database_cluster_arns: Array[String]
+                },
+                rds_promote_read_replica_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  db_instance_arn_map: Hash[String, String]
+                },
+                rds_create_cross_region_read_replica_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  db_instance_arn_map: untyped
+                },
+                lambda_event_source_mapping_config: {
+                  timeout_minutes: untyped,
+                  action: String,
+                  region_event_source_mappings: Hash[String,
+                    {
+                      cross_account_role: untyped,
+                      external_id: untyped,
+                      arn: String
+                    }
+                  ],
+                  ungraceful: {
+                    behavior: String
+                  }
+                },
+                aurora_serverless_scaling_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  global_cluster_identifier: untyped,
+                  region_database_cluster_arns: Hash[String, String],
+                  target_percent: untyped
+                },
+                aurora_provisioned_scaling_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  global_cluster_identifier: untyped,
+                  region_database_cluster_arns: untyped,
+                  instance_arns: Hash[String, String]
+                },
+                neptune_global_database_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  behavior: String,
+                  ungraceful: {
+                    ungraceful: String
+                  },
+                  global_cluster_identifier: String,
+                  region_database_cluster_arns: Hash[String, String]
+                },
+                rds_switchover_read_replica_config: {
+                  timeout_minutes: untyped,
+                  cross_account_role: untyped,
+                  external_id: untyped,
+                  db_instance_arn_map: untyped,
+                  ungraceful: {
+                    ungraceful: String
+                  }
+                },
+                ssm_send_command_config: {
+                  timeout_minutes: untyped,
+                  region_documents: Hash[String,
+                    {
+                      cross_account_role: untyped,
+                      external_id: untyped,
+                      document_arn: String,
+                      targets: Array[
+                        {
+                          key: String,
+                          values: Array[String]
+                        }
+                      ],
+                      parameters: Hash[String,
+                        Array[String]
+                      ],
+                      document_version: String
+                    }
+                  ],
+                  retry_interval_minutes: untyped,
+                  ungraceful: {
+                    behavior: String
+                  }
                 }
               },
               execution_block_type: String
@@ -576,7 +815,18 @@ module Aws::ARCRegionswitch
           ],
           min_delay_minutes_between_executions: Integer
         }
-      ]
+      ],
+      ?report_configuration: {
+        report_output: Array[
+          {
+            s3_configuration: {
+              bucket_path: String,
+              bucket_owner: String
+            }
+          }
+        ]
+      },
+      ?service_quota_checks_enabled: bool
     ) -> _UpdatePlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePlanResponse
 
     interface _UpdatePlanExecutionResponse

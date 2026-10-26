@@ -144,18 +144,18 @@ module Aws::Pricing
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,23 +209,12 @@ module Aws::Pricing
       super
     end
 
-    # <p>Returns the metadata for one service or a list of the metadata for all services. Use
-    #          this without a service code to get the service codes for all services.
-    #          Use it with a service code, such as <code>AmazonEC2</code>, to get information specific to 
-    #          that service, such as the attribute 
-    #          names available for that service. For example, some of the attribute names available for EC2 are 
-    #          <code>volumeType</code>, <code>maxIopsVolume</code>, <code>operation</code>,
-    #          <code>locationType</code>, and <code>instanceCapacity10xlarge</code>.</p>
+    # <p>Returns the metadata for one service or a list of the metadata for all services. Use this without a service code to get the service codes for all services. Use it with a service code, such as <code>AmazonEC2</code>, to get information specific to that service, such as the attribute names available for that service. For example, some of the attribute names available for EC2 are <code>volumeType</code>, <code>maxIopsVolume</code>, <code>operation</code>, <code>locationType</code>, and <code>instanceCapacity10xlarge</code>.</p>
     # @param [Hash, Types::DescribeServicesRequest] params
     # @option params [String] :service_code
-    #   <p>The code for the service whose information you want to retrieve, such as <code>AmazonEC2</code>.
-    #             You can use 
-    #            the <code>ServiceCode</code> to filter the results in a <code>GetProducts</code> call.
-    #         To retrieve a list of all services, leave this blank.</p>
+    #   <p>The code for the service whose information you want to retrieve, such as <code>AmazonEC2</code>. You can use the <code>ServiceCode</code> to filter the results in a <code>GetProducts</code> call. To retrieve a list of all services, leave this blank.</p>
     # @option params [String] :format_version
-    #   <p>The format version that you want the response to be in.</p>
-    #            <p>Valid values are: <code>aws_v1</code>
-    #            </p>
+    #   <p>The format version that you want the response to be in.</p> <p>Valid values are: <code>aws_v1</code> </p>
     # @option params [String] :next_token
     #   <p>The pagination token that indicates the next set of results that you want to retrieve.</p>
     # @option params [Integer] :max_results
@@ -283,14 +272,10 @@ module Aws::Pricing
       request.send_request(options)
     end
 
-    # <p>Returns a list of attribute values. Attributes are similar to the details 
-    #           in a Price List API offer file. For a list of available attributes, see 
-    #          <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs">Offer File Definitions</a>
-    #          in the <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html">Billing and Cost Management User Guide</a>.</p>
+    # <p>Returns a list of attribute values. Attributes are similar to the details in a Price List API offer file. For a list of available attributes, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs">Offer File Definitions</a> in the <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html">Billing and Cost Management User Guide</a>.</p>
     # @param [Hash, Types::GetAttributeValuesRequest] params
     # @option params [String] :service_code
-    #   <p>The service code for the service whose attributes you want to retrieve. For example, if you want 
-    #             the retrieve an EC2 attribute, use <code>AmazonEC2</code>.</p>
+    #   <p>The service code for the service whose attributes you want to retrieve. For example, if you want the retrieve an EC2 attribute, use <code>AmazonEC2</code>.</p>
     # @option params [String] :attribute_name
     #   <p>The name of the attribute that you want to retrieve the values for, such as <code>volumeType</code>.</p>
     # @option params [String] :next_token
@@ -343,21 +328,12 @@ module Aws::Pricing
       request.send_request(options)
     end
 
-    # <p>
-    #             <i>
-    #                <b>This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">Amazon Web Services Service Terms</a> (Section 1.10).</b>
-    #             </i>
-    #          </p>
-    #          <p>This returns the URL that you can retrieve your Price List file from. This URL is based
-    #          on the <code>PriceListArn</code> and <code>FileFormat</code> that you retrieve from the
-    #             <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html">ListPriceLists</a> response. </p>
+    # <p> <i> <b>This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">Amazon Web Services Service Terms</a> (Section 1.10).</b> </i> </p> <p>This returns the URL that you can retrieve your Price List file from. This URL is based on the <code>PriceListArn</code> and <code>FileFormat</code> that you retrieve from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html">ListPriceLists</a> response. </p>
     # @param [Hash, Types::GetPriceListFileUrlRequest] params
     # @option params [String] :price_list_arn
-    #   <p>The unique identifier that maps to where your Price List files are located.
-    #               <code>PriceListArn</code> can be obtained from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html">ListPriceLists</a> response. </p>
+    #   <p>The unique identifier that maps to where your Price List files are located. <code>PriceListArn</code> can be obtained from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html">ListPriceLists</a> response. </p>
     # @option params [String] :file_format
-    #   <p>The format that you want to retrieve your Price List files in. The
-    #               <code>FileFormat</code> can be obtained from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html">ListPriceLists</a> response. </p>
+    #   <p>The format that you want to retrieve your Price List files in. The <code>FileFormat</code> can be obtained from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html">ListPriceLists</a> response. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     price_list_arn: "PriceListArn", # required
@@ -381,12 +357,9 @@ module Aws::Pricing
     # @option params [String] :service_code
     #   <p>The code for the service whose products you want to retrieve. </p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>The list of filters that limit the returned products. only products that match all filters
-    #            are returned.</p>
+    #   <p>The list of filters that limit the returned products. only products that match all filters are returned.</p>
     # @option params [String] :format_version
-    #   <p>The format version that you want the response to be in.</p>
-    #            <p>Valid values are: <code>aws_v1</code>
-    #            </p>
+    #   <p>The format version that you want the response to be in.</p> <p>Valid values are: <code>aws_v1</code> </p>
     # @option params [String] :next_token
     #   <p>The pagination token that indicates the next set of results that you want to retrieve.</p>
     # @option params [Integer] :max_results
@@ -420,43 +393,20 @@ module Aws::Pricing
       request.send_request(options)
     end
 
-    # <p>
-    #             <i>
-    #                <b>This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">Amazon Web Services Service Terms</a> (Section 1.10).</b>
-    #             </i>
-    #          </p>
-    #          <p>This returns a list of Price List references that the requester if authorized to view,
-    #          given a <code>ServiceCode</code>, <code>CurrencyCode</code>, and an
-    #             <code>EffectiveDate</code>. Use without a <code>RegionCode</code> filter to list Price
-    #          List references from all available Amazon Web Services Regions. Use with a
-    #             <code>RegionCode</code> filter to get the Price List reference that's specific to a
-    #          specific Amazon Web Services Region. You can use the <code>PriceListArn</code> from the
-    #          response to get your preferred Price List files through the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetPriceListFileUrl.html">GetPriceListFileUrl</a> API.</p>
+    # <p> <i> <b>This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">Amazon Web Services Service Terms</a> (Section 1.10).</b> </i> </p> <p>This returns a list of Price List references that the requester if authorized to view, given a <code>ServiceCode</code>, <code>CurrencyCode</code>, and an <code>EffectiveDate</code>. Use without a <code>RegionCode</code> filter to list Price List references from all available Amazon Web Services Regions. Use with a <code>RegionCode</code> filter to get the Price List reference that's specific to a specific Amazon Web Services Region. You can use the <code>PriceListArn</code> from the response to get your preferred Price List files through the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetPriceListFileUrl.html">GetPriceListFileUrl</a> API.</p>
     # @param [Hash, Types::ListPriceListsRequest] params
     # @option params [String] :service_code
-    #   <p>The service code or the Savings Plan service code for the attributes that
-    #            you want to retrieve. For example, to get the list of applicable Amazon EC2 price
-    #            lists, use <code>AmazonEC2</code>. For a full list of service codes containing On-Demand
-    #            and Reserved Instance (RI) pricing, use the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion">DescribeServices</a> API.</p>
-    #            <p>To retrieve the Reserved Instance and Compute Savings Plan price lists,
-    #            use <code>ComputeSavingsPlans</code>. </p>
-    #            <p>To retrieve Machine Learning Savings Plans price lists, use
-    #               <code>MachineLearningSavingsPlans</code>. </p>
+    #   <p>The service code or the Savings Plans service code for the attributes that you want to retrieve. For example, to get the list of applicable Amazon EC2 price lists, use <code>AmazonEC2</code>. For a full list of service codes containing On-Demand and Reserved Instance (RI) pricing, use the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion">DescribeServices</a> API.</p> <p>To retrieve the Reserved Instance and Compute Savings Plans price lists, use <code>ComputeSavingsPlans</code>. </p> <p>To retrieve Machine Learning Savings Plans price lists, use <code>MachineLearningSavingsPlans</code>. </p>
     # @option params [Time] :effective_date
     #   <p>The date that the Price List file prices are effective from. </p>
     # @option params [String] :region_code
-    #   <p>This is used to filter the Price List by Amazon Web Services Region. For example, to get
-    #            the price list only for the <code>US East (N. Virginia)</code> Region, use
-    #               <code>us-east-1</code>. If nothing is specified, you retrieve price lists for all
-    #            applicable Regions. The available <code>RegionCode</code> list can be retrieved from <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html">GetAttributeValues</a> API.</p>
+    #   <p>This is used to filter the Price List by Amazon Web Services Region. For example, to get the price list only for the <code>US East (N. Virginia)</code> Region, use <code>us-east-1</code>. If nothing is specified, you retrieve price lists for all applicable Regions. The available <code>RegionCode</code> list can be retrieved from <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html">GetAttributeValues</a> API.</p>
     # @option params [String] :currency_code
-    #   <p>The three alphabetical character ISO-4217 currency code that the Price List files are
-    #            denominated in. </p>
+    #   <p>The three alphabetical character ISO-4217 currency code that the Price List files are denominated in. </p>
     # @option params [String] :next_token
     #   <p>The pagination token that indicates the next set of results that you want to retrieve. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in the response.
-    #         </p>
+    #   <p>The maximum number of results to return in the response. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     service_code: "ServiceCode", # required

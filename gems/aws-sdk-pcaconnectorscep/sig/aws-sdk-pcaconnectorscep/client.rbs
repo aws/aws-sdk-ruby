@@ -66,6 +66,7 @@ module Aws::PcaConnectorScep
           domain: String
         }
       },
+      ?vpc_endpoint_id: String,
       ?client_token: String,
       ?tags: Hash[String, String]
     ) -> _CreateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorResponse

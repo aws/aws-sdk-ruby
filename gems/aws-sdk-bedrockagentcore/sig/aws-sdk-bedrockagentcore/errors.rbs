@@ -6,6 +6,9 @@ module Aws::BedrockAgentCore
     class ConflictException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class DuplicateIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InternalServerException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -15,6 +18,10 @@ module Aws::BedrockAgentCore
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class RetryableConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
     class RuntimeClientError < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -23,6 +30,11 @@ module Aws::BedrockAgentCore
     end
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       def message: () -> String?
+    end
+    class SubscriptionRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def subscription_url: () -> String?
+      def product_name: () -> String?
     end
     class ThrottledException < Smithy::Client::ServiceError
       def message: () -> String?

@@ -12,12 +12,16 @@ module Aws::AppIntegrations
     ApplicationSourceConfig: StructureShape
     ApplicationSummary: StructureShape
     ApplicationTrustedSource: StringShape
+    ApplicationType: EnumShape
     ApplicationsList: ListShape
     Arn: StringShape
     ArnOrUUID: StringShape
+    AuthConfig: StructureShape
+    AuthType: EnumShape
     Boolean: BooleanShape
     ClientAssociationMetadata: MapShape
     ClientId: StringShape
+    ConflictException: StructureShape
     ContactHandling: StructureShape
     ContactHandlingScope: EnumShape
     CreateApplicationRequest: StructureShape

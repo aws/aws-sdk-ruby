@@ -32,8 +32,7 @@ module Aws::InspectorScan
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>You do not have sufficient access to perform this action.
-    #   </p>
+    # <p>You do not have sufficient access to perform this action. </p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InspectorScan::Types::AccessDeniedException] data
@@ -46,9 +45,7 @@ module Aws::InspectorScan
       end
     end
 
-    # <p>The request processing has failed because of an unknown error, exception or failure.
-    #    
-    #   </p>
+    # <p>The request processing has failed because of an unknown error, exception or failure. </p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InspectorScan::Types::InternalServerException] data
@@ -75,9 +72,7 @@ module Aws::InspectorScan
       end
     end
 
-    # <p>The request was denied due to request throttling.
-    #    
-    #   </p>
+    # <p>The request was denied due to request throttling. </p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::InspectorScan::Types::ThrottlingException] data

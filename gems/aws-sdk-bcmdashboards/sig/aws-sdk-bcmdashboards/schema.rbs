@@ -3,10 +3,14 @@ module Aws::BCMDashboards
     include Smithy::Schema::Shapes
 
     AccessDeniedException: StructureShape
+    ClientToken: StringShape
+    ConflictException: StructureShape
     CostAndUsageQuery: StructureShape
     CostCategoryValues: StructureShape
     CreateDashboardRequest: StructureShape
     CreateDashboardResponse: StructureShape
+    CreateScheduledReportRequest: StructureShape
+    CreateScheduledReportResponse: StructureShape
     DashboardArn: StringShape
     DashboardName: StringShape
     DashboardReference: StructureShape
@@ -17,10 +21,14 @@ module Aws::BCMDashboards
     DateTimeValue: StructureShape
     DeleteDashboardRequest: StructureShape
     DeleteDashboardResponse: StructureShape
+    DeleteScheduledReportRequest: StructureShape
+    DeleteScheduledReportResponse: StructureShape
     Description: StringShape
     Dimension: EnumShape
     DimensionValues: StructureShape
     DisplayConfig: UnionShape
+    ExecuteScheduledReportRequest: StructureShape
+    ExecuteScheduledReportResponse: StructureShape
     Expression: StructureShape
     Expressions: ListShape
     GenericString: StringShape
@@ -29,15 +37,21 @@ module Aws::BCMDashboards
     GetDashboardResponse: StructureShape
     GetResourcePolicyRequest: StructureShape
     GetResourcePolicyResponse: StructureShape
+    GetScheduledReportRequest: StructureShape
+    GetScheduledReportResponse: StructureShape
     Granularity: EnumShape
     GraphDisplayConfig: StructureShape
     GraphDisplayConfigMap: MapShape
     GroupDefinition: StructureShape
     GroupDefinitionType: EnumShape
     GroupDefinitions: ListShape
+    HealthStatus: StructureShape
+    HealthStatusCode: EnumShape
     InternalServerException: StructureShape
     ListDashboardsRequest: StructureShape
     ListDashboardsResponse: StructureShape
+    ListScheduledReportsRequest: StructureShape
+    ListScheduledReportsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     MatchOption: EnumShape
@@ -49,6 +63,7 @@ module Aws::BCMDashboards
     QueryParameters: UnionShape
     ReservationCoverageQuery: StructureShape
     ReservationUtilizationQuery: StructureShape
+    ResourceArn: StringShape
     ResourceNotFoundException: StructureShape
     ResourceTag: StructureShape
     ResourceTagKey: StringShape
@@ -57,7 +72,19 @@ module Aws::BCMDashboards
     ResourceTagValue: StringShape
     SavingsPlansCoverageQuery: StructureShape
     SavingsPlansUtilizationQuery: StructureShape
+    ScheduleConfig: StructureShape
+    SchedulePeriod: StructureShape
+    ScheduleState: EnumShape
+    ScheduledReport: StructureShape
+    ScheduledReportArn: StringShape
+    ScheduledReportInput: StructureShape
+    ScheduledReportName: StringShape
+    ScheduledReportSummary: StructureShape
+    ScheduledReportSummaryList: ListShape
     ServiceQuotaExceededException: StructureShape
+    ServiceRoleArn: StringShape
+    StatusReason: EnumShape
+    StatusReasonList: ListShape
     StringList: ListShape
     TableDisplayConfigStruct: StructureShape
     TagResourceRequest: StructureShape
@@ -68,12 +95,16 @@ module Aws::BCMDashboards
     UntagResourceResponse: StructureShape
     UpdateDashboardRequest: StructureShape
     UpdateDashboardResponse: StructureShape
+    UpdateScheduledReportRequest: StructureShape
+    UpdateScheduledReportResponse: StructureShape
     ValidationException: StructureShape
     VisualType: EnumShape
     Widget: StructureShape
     WidgetConfig: StructureShape
     WidgetConfigList: ListShape
     WidgetHeight: IntegerShape
+    WidgetId: StringShape
+    WidgetIdList: ListShape
     WidgetList: ListShape
     WidgetTitle: StringShape
     WidgetWidth: IntegerShape

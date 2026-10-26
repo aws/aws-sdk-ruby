@@ -30,11 +30,23 @@ module Aws::Omics
     Arn: StringShape
     ArnList: ListShape
     AwsAccountId: StringShape
+    BatchArn: StringShape
     BatchDeleteReadSetRequest: StructureShape
     BatchDeleteReadSetResponse: StructureShape
+    BatchId: StringShape
+    BatchList: ListShape
+    BatchListItem: StructureShape
+    BatchName: StringShape
+    BatchRequestId: StringShape
+    BatchRunSettings: UnionShape
+    BatchStatus: StringShape
+    BatchTimestamp: TimestampShape
+    BatchUuid: StringShape
     CacheBehavior: StringShape
     CancelAnnotationImportRequest: StructureShape
     CancelAnnotationImportResponse: StructureShape
+    CancelRunBatchRequest: StructureShape
+    CancelRunBatchResponse: StructureShape
     CancelRunRequest: StructureShape
     CancelVariantImportRequest: StructureShape
     CancelVariantImportResponse: StructureShape
@@ -45,6 +57,17 @@ module Aws::Omics
     CompleteReadSetUploadPartList: ListShape
     CompleteReadSetUploadPartListItem: StructureShape
     CompletionTime: TimestampShape
+    ConfigurationArn: StringShape
+    ConfigurationDescription: StringShape
+    ConfigurationDetails: StructureShape
+    ConfigurationList: ListShape
+    ConfigurationListItem: StructureShape
+    ConfigurationListToken: StringShape
+    ConfigurationName: StringShape
+    ConfigurationRequestId: StringShape
+    ConfigurationStatus: StringShape
+    ConfigurationTimestamp: TimestampShape
+    ConfigurationUuid: StringShape
     ConflictException: StructureShape
     ConnectionArn: StringShape
     ContainerRegistryMap: StructureShape
@@ -52,6 +75,8 @@ module Aws::Omics
     CreateAnnotationStoreResponse: StructureShape
     CreateAnnotationStoreVersionRequest: StructureShape
     CreateAnnotationStoreVersionResponse: StructureShape
+    CreateConfigurationRequest: StructureShape
+    CreateConfigurationResponse: StructureShape
     CreateMultipartReadSetUploadRequest: StructureShape
     CreateMultipartReadSetUploadResponse: StructureShape
     CreateReferenceStoreRequest: StructureShape
@@ -73,16 +98,21 @@ module Aws::Omics
     CreationJobId: StringShape
     CreationTime: TimestampShape
     CreationType: StringShape
+    DefaultRunSetting: StructureShape
     DefinitionRepository: StructureShape
     DefinitionRepositoryDetails: StructureShape
     DeleteAnnotationStoreRequest: StructureShape
     DeleteAnnotationStoreResponse: StructureShape
     DeleteAnnotationStoreVersionsRequest: StructureShape
     DeleteAnnotationStoreVersionsResponse: StructureShape
+    DeleteBatchRequest: StructureShape
+    DeleteConfigurationRequest: StructureShape
     DeleteReferenceRequest: StructureShape
     DeleteReferenceResponse: StructureShape
     DeleteReferenceStoreRequest: StructureShape
     DeleteReferenceStoreResponse: StructureShape
+    DeleteRunBatchRequest: StructureShape
+    DeleteRunBatchResponse: StructureShape
     DeleteRunCacheRequest: StructureShape
     DeleteRunGroupRequest: StructureShape
     DeleteRunRequest: StructureShape
@@ -104,6 +134,7 @@ module Aws::Omics
     Encoding: StringShape
     EncryptionType: StringShape
     EngineLogStream: StringShape
+    EngineSettings: DocumentShape
     EngineVersion: StringShape
     EscapeChar: StringShape
     EscapeQuotes: BooleanShape
@@ -131,6 +162,10 @@ module Aws::Omics
     GetAnnotationStoreResponse: StructureShape
     GetAnnotationStoreVersionRequest: StructureShape
     GetAnnotationStoreVersionResponse: StructureShape
+    GetBatchRequest: StructureShape
+    GetBatchResponse: StructureShape
+    GetConfigurationRequest: StructureShape
+    GetConfigurationResponse: StructureShape
     GetReadSetActivationJobRequest: StructureShape
     GetReadSetActivationJobResponse: StructureShape
     GetReadSetExportJobRequest: StructureShape
@@ -187,6 +222,8 @@ module Aws::Omics
     ImportReferenceJobList: ListShape
     ImportReferenceSourceItem: StructureShape
     ImportReferenceSourceList: ListShape
+    InlineSetting: StructureShape
+    InlineSettings: ListShape
     InternalServerException: StructureShape
     JobStatus: StringShape
     JobStatusMessage: StringShape
@@ -201,6 +238,10 @@ module Aws::Omics
     ListAnnotationStoresFilter: StructureShape
     ListAnnotationStoresRequest: StructureShape
     ListAnnotationStoresResponse: StructureShape
+    ListBatchRequest: StructureShape
+    ListBatchResponse: StructureShape
+    ListConfigurationsRequest: StructureShape
+    ListConfigurationsResponse: StructureShape
     ListMultipartReadSetUploadsRequest: StructureShape
     ListMultipartReadSetUploadsResponse: StructureShape
     ListReadSetActivationJobsRequest: StructureShape
@@ -225,6 +266,8 @@ module Aws::Omics
     ListRunGroupsResponse: StructureShape
     ListRunTasksRequest: StructureShape
     ListRunTasksResponse: StructureShape
+    ListRunsInBatchRequest: StructureShape
+    ListRunsInBatchResponse: StructureShape
     ListRunsRequest: StructureShape
     ListRunsResponse: StructureShape
     ListSequenceStoresRequest: StructureShape
@@ -247,6 +290,7 @@ module Aws::Omics
     Md5: StringShape
     MultipartReadSetUploadList: ListShape
     MultipartReadSetUploadListItem: StructureShape
+    NetworkingMode: StringShape
     NextToken: StringShape
     NotSupportedOperationException: StructureShape
     NumericIdInArn: StringShape
@@ -321,6 +365,8 @@ module Aws::Omics
     ResourceOwner: StringShape
     RoleArn: StringShape
     RunArn: StringShape
+    RunBatchList: ListShape
+    RunBatchListItem: StructureShape
     RunCacheArn: StringShape
     RunCacheId: StringShape
     RunCacheList: ListShape
@@ -328,6 +374,8 @@ module Aws::Omics
     RunCacheRequestId: StringShape
     RunCacheStatus: StringShape
     RunCacheTimestamp: TimestampShape
+    RunConfigurations: StructureShape
+    RunConfigurationsResponse: StructureShape
     RunExport: StringShape
     RunExportList: ListShape
     RunFailureReason: StringShape
@@ -356,9 +404,11 @@ module Aws::Omics
     RunResourceDigests: MapShape
     RunRetentionMode: StringShape
     RunRoleArn: StringShape
+    RunSettingId: StringShape
     RunStartedBy: StringShape
     RunStatus: StringShape
     RunStatusMessage: StringShape
+    RunSummary: StructureShape
     RunTimestamp: TimestampShape
     RunUuid: StringShape
     S3AccessConfig: StructureShape
@@ -368,10 +418,15 @@ module Aws::Omics
     S3Uri: StringShape
     S3UriForBucketOrObject: StringShape
     S3UriForObject: StringShape
+    S3UriSettings: StringShape
     SampleId: StringShape
     Schema: ListShape
     SchemaItem: MapShape
     SchemaValueType: StringShape
+    ScratchStorageMode: StringShape
+    SecretArn: StringShape
+    SecurityGroupId: StringShape
+    SecurityGroupIds: ListShape
     Separator: StringShape
     SequenceInformation: StructureShape
     SequenceStoreArn: StringShape
@@ -385,6 +440,7 @@ module Aws::Omics
     SequenceStoreStatus: StringShape
     SequenceStoreStatusMessage: StringShape
     ServiceQuotaExceededException: StructureShape
+    SessionPolicy: StringShape
     ShareDetails: StructureShape
     ShareDetailsList: ListShape
     ShareName: StringShape
@@ -411,6 +467,8 @@ module Aws::Omics
     StartReferenceImportJobResponse: StructureShape
     StartReferenceImportJobSourceItem: StructureShape
     StartReferenceImportJobSourceList: ListShape
+    StartRunBatchRequest: StructureShape
+    StartRunBatchResponse: StructureShape
     StartRunRequest: StructureShape
     StartRunResponse: StructureShape
     StartVariantImportRequest: StructureShape
@@ -425,6 +483,12 @@ module Aws::Omics
     StoreStatus: StringShape
     StoreType: EnumShape
     SubjectId: StringShape
+    SubmissionFailureMessage: StringShape
+    SubmissionFailureReason: StringShape
+    SubmissionStatus: StringShape
+    SubmissionSummary: StructureShape
+    SubnetId: StringShape
+    SubnetIds: ListShape
     TagArn: StringShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -444,6 +508,7 @@ module Aws::Omics
     TaskStatus: StringShape
     TaskStatusMessage: StringShape
     TaskTimestamp: TimestampShape
+    TaskUuid: StringShape
     ThrottlingException: StructureShape
     TsvOptions: StructureShape
     TsvStoreOptions: StructureShape
@@ -487,6 +552,9 @@ module Aws::Omics
     VersionName: StringShape
     VersionOptions: UnionShape
     VersionStatus: StringShape
+    VpcConfig: StructureShape
+    VpcConfigResponse: StructureShape
+    VpcId: StringShape
     WorkflowArn: StringShape
     WorkflowBucketOwnerId: StringShape
     WorkflowDefinition: StringShape
@@ -509,6 +577,9 @@ module Aws::Omics
     WorkflowParameterDescription: StringShape
     WorkflowParameterName: StringShape
     WorkflowParameterTemplate: MapShape
+    WorkflowProfileList: ListShape
+    WorkflowProfileName: StringShape
+    WorkflowProfileParameterTemplates: MapShape
     WorkflowRequestId: StringShape
     WorkflowStatus: StringShape
     WorkflowStatusMessage: StringShape

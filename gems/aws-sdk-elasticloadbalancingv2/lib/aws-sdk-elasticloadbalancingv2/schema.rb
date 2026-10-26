@@ -166,6 +166,7 @@ module Aws::ElasticLoadBalancingV2
     HealthCheckTimeoutSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.elasticloadbalancingv2#HealthCheckTimeoutSeconds", name: "HealthCheckTimeoutSeconds", traits: {"smithy.api#range" => {"min" => 2, "max" => 120}})
     HealthUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#HealthUnavailableException", name: "HealthUnavailableException", traits: {"aws.protocols#awsQueryError" => {"code" => "HealthUnavailable", "httpResponseCode" => 500}, "smithy.api#error" => "server", "smithy.api#httpError" => 500})
     HostHeaderConditionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#HostHeaderConditionConfig", name: "HostHeaderConditionConfig")
+    HostHeaderRewriteConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#HostHeaderRewriteConfig", name: "HostHeaderRewriteConfig")
     HttpCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#HttpCode", name: "HttpCode")
     HttpHeaderConditionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#HttpHeaderConditionConfig", name: "HttpHeaderConditionConfig")
     HttpHeaderConditionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#HttpHeaderConditionName", name: "HttpHeaderConditionName")
@@ -187,6 +188,15 @@ module Aws::ElasticLoadBalancingV2
     IpamPoolId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#IpamPoolId", name: "IpamPoolId", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}, "smithy.api#pattern" => "^(ipam-pool-)[a-zA-Z0-9]+$"})
     IpamPools = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#IpamPools", name: "IpamPools")
     IsDefault = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.elasticloadbalancingv2#IsDefault", name: "IsDefault")
+    JwtValidationActionAdditionalClaim = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaim", name: "JwtValidationActionAdditionalClaim")
+    JwtValidationActionAdditionalClaimFormatEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimFormatEnum", name: "JwtValidationActionAdditionalClaimFormatEnum")
+    JwtValidationActionAdditionalClaimName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimName", name: "JwtValidationActionAdditionalClaimName")
+    JwtValidationActionAdditionalClaimValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimValue", name: "JwtValidationActionAdditionalClaimValue")
+    JwtValidationActionAdditionalClaimValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaimValues", name: "JwtValidationActionAdditionalClaimValues")
+    JwtValidationActionAdditionalClaims = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#JwtValidationActionAdditionalClaims", name: "JwtValidationActionAdditionalClaims")
+    JwtValidationActionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#JwtValidationActionConfig", name: "JwtValidationActionConfig")
+    JwtValidationActionIssuer = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#JwtValidationActionIssuer", name: "JwtValidationActionIssuer")
+    JwtValidationActionJwksEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#JwtValidationActionJwksEndpoint", name: "JwtValidationActionJwksEndpoint")
     LastModifiedTime = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.elasticloadbalancingv2#LastModifiedTime", name: "LastModifiedTime")
     Limit = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#Limit", name: "Limit")
     Limits = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#Limits", name: "Limits")
@@ -262,6 +272,7 @@ module Aws::ElasticLoadBalancingV2
     QueryStringConditionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#QueryStringConditionConfig", name: "QueryStringConditionConfig")
     QueryStringKeyValuePair = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#QueryStringKeyValuePair", name: "QueryStringKeyValuePair")
     QueryStringKeyValuePairList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#QueryStringKeyValuePairList", name: "QueryStringKeyValuePairList")
+    QuicServerId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#QuicServerId", name: "QuicServerId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     RedirectActionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#RedirectActionConfig", name: "RedirectActionConfig")
     RedirectActionHost = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#RedirectActionHost", name: "RedirectActionHost", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     RedirectActionPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#RedirectActionPath", name: "RedirectActionPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -280,6 +291,7 @@ module Aws::ElasticLoadBalancingV2
     RemoveTrustStoreRevocationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#RemoveTrustStoreRevocationsInput", name: "RemoveTrustStoreRevocationsInput")
     RemoveTrustStoreRevocationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#RemoveTrustStoreRevocationsOutput", name: "RemoveTrustStoreRevocationsOutput")
     ResetCapacityReservation = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.elasticloadbalancingv2#ResetCapacityReservation", name: "ResetCapacityReservation")
+    ResetTransforms = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.elasticloadbalancingv2#ResetTransforms", name: "ResetTransforms")
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#ResourceArn", name: "ResourceArn")
     ResourceArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#ResourceArns", name: "ResourceArns")
     ResourceInUseException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#ResourceInUseException", name: "ResourceInUseException", traits: {"aws.protocols#awsQueryError" => {"code" => "ResourceInUse", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -291,6 +303,8 @@ module Aws::ElasticLoadBalancingV2
     RevocationIdNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#RevocationIdNotFoundException", name: "RevocationIdNotFoundException", traits: {"aws.protocols#awsQueryError" => {"code" => "RevocationIdNotFound", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     RevocationIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#RevocationIds", name: "RevocationIds")
     RevocationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticloadbalancingv2#RevocationType", name: "RevocationType")
+    RewriteConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#RewriteConfig", name: "RewriteConfig")
+    RewriteConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#RewriteConfigList", name: "RewriteConfigList")
     Rule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#Rule", name: "Rule")
     RuleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#RuleArn", name: "RuleArn")
     RuleArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#RuleArns", name: "RuleArns")
@@ -300,6 +314,8 @@ module Aws::ElasticLoadBalancingV2
     RulePriority = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.elasticloadbalancingv2#RulePriority", name: "RulePriority", traits: {"smithy.api#range" => {"min" => 1, "max" => 50000}})
     RulePriorityList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#RulePriorityList", name: "RulePriorityList")
     RulePriorityPair = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#RulePriorityPair", name: "RulePriorityPair")
+    RuleTransform = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#RuleTransform", name: "RuleTransform")
+    RuleTransformList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#RuleTransformList", name: "RuleTransformList")
     Rules = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#Rules", name: "Rules")
     S3Bucket = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#S3Bucket", name: "S3Bucket")
     S3Key = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#S3Key", name: "S3Key")
@@ -315,6 +331,7 @@ module Aws::ElasticLoadBalancingV2
     SetSecurityGroupsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#SetSecurityGroupsOutput", name: "SetSecurityGroupsOutput")
     SetSubnetsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#SetSubnetsInput", name: "SetSubnetsInput")
     SetSubnetsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#SetSubnetsOutput", name: "SetSubnetsOutput")
+    SourceIpAddressTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticloadbalancingv2#SourceIpAddressTypeEnum", name: "SourceIpAddressTypeEnum")
     SourceIpConditionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#SourceIpConditionConfig", name: "SourceIpConditionConfig")
     SourceNatIpv6Prefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#SourceNatIpv6Prefix", name: "SourceNatIpv6Prefix")
     SourceNatIpv6Prefixes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#SourceNatIpv6Prefixes", name: "SourceNatIpv6Prefixes")
@@ -341,6 +358,7 @@ module Aws::ElasticLoadBalancingV2
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
     TargetAdministrativeOverrideReasonEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticloadbalancingv2#TargetAdministrativeOverrideReasonEnum", name: "TargetAdministrativeOverrideReasonEnum")
     TargetAdministrativeOverrideStateEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticloadbalancingv2#TargetAdministrativeOverrideStateEnum", name: "TargetAdministrativeOverrideStateEnum")
+    TargetControlPort = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.elasticloadbalancingv2#TargetControlPort", name: "TargetControlPort", traits: {"smithy.api#range" => {"min" => 1, "max" => 65535}})
     TargetDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#TargetDescription", name: "TargetDescription")
     TargetDescriptions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#TargetDescriptions", name: "TargetDescriptions")
     TargetGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#TargetGroup", name: "TargetGroup")
@@ -382,6 +400,7 @@ module Aws::ElasticLoadBalancingV2
     TooManyTrustStoresException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#TooManyTrustStoresException", name: "TooManyTrustStoresException", traits: {"aws.protocols#awsQueryError" => {"code" => "TooManyTrustStores", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     TooManyUniqueTargetGroupsPerLoadBalancerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#TooManyUniqueTargetGroupsPerLoadBalancerException", name: "TooManyUniqueTargetGroupsPerLoadBalancerException", traits: {"aws.protocols#awsQueryError" => {"code" => "TooManyUniqueTargetGroupsPerLoadBalancer", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     TotalRevokedEntries = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.elasticloadbalancingv2#TotalRevokedEntries", name: "TotalRevokedEntries")
+    TransformTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticloadbalancingv2#TransformTypeEnum", name: "TransformTypeEnum")
     TrustStore = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#TrustStore", name: "TrustStore")
     TrustStoreArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#TrustStoreArn", name: "TrustStoreArn")
     TrustStoreArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#TrustStoreArns", name: "TrustStoreArns")
@@ -400,6 +419,7 @@ module Aws::ElasticLoadBalancingV2
     TrustStoreStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticloadbalancingv2#TrustStoreStatus", name: "TrustStoreStatus")
     TrustStores = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#TrustStores", name: "TrustStores")
     UnsupportedProtocolException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#UnsupportedProtocolException", name: "UnsupportedProtocolException", traits: {"aws.protocols#awsQueryError" => {"code" => "UnsupportedProtocol", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    UrlRewriteConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#UrlRewriteConfig", name: "UrlRewriteConfig")
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticloadbalancingv2#VpcId", name: "VpcId")
     ZonalCapacityReservationState = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticloadbalancingv2#ZonalCapacityReservationState", name: "ZonalCapacityReservationState")
     ZonalCapacityReservationStates = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticloadbalancingv2#ZonalCapacityReservationStates", name: "ZonalCapacityReservationStates")
@@ -415,12 +435,14 @@ module Aws::ElasticLoadBalancingV2
     Action.add_member(:redirect_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RedirectActionConfig, name: "RedirectConfig"))
     Action.add_member(:fixed_response_config, ::Smithy::Schema::Shapes::MemberShape.new(target: FixedResponseActionConfig, name: "FixedResponseConfig"))
     Action.add_member(:forward_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ForwardActionConfig, name: "ForwardConfig"))
+    Action.add_member(:jwt_validation_config, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtValidationActionConfig, name: "JwtValidationConfig"))
     Action.type = Types::Action
     ActionTypeEnum.add_member(:forward, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FORWARD", traits: {"smithy.api#enumValue" => "forward"}))
     ActionTypeEnum.add_member(:authenticate_oidc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHENTICATE_OIDC", traits: {"smithy.api#enumValue" => "authenticate-oidc"}))
     ActionTypeEnum.add_member(:authenticate_cognito, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTHENTICATE_COGNITO", traits: {"smithy.api#enumValue" => "authenticate-cognito"}))
     ActionTypeEnum.add_member(:redirect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REDIRECT", traits: {"smithy.api#enumValue" => "redirect"}))
     ActionTypeEnum.add_member(:fixed_response, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIXED_RESPONSE", traits: {"smithy.api#enumValue" => "fixed-response"}))
+    ActionTypeEnum.add_member(:jwt_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JWT_VALIDATION", traits: {"smithy.api#enumValue" => "jwt-validation"}))
     Actions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Action, name: "member"))
     AddListenerCertificatesInput.add_member(:listener_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ListenerArn, name: "ListenerArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AddListenerCertificatesInput.add_member(:certificates, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateList, name: "Certificates", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -547,6 +569,7 @@ module Aws::ElasticLoadBalancingV2
     CreateRuleInput.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriority, name: "Priority", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateRuleInput.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: Actions, name: "Actions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateRuleInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateRuleInput.add_member(:transforms, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTransformList, name: "Transforms"))
     CreateRuleInput.type = Types::CreateRuleInput
     CreateRuleOutput.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: Rules, name: "Rules"))
     CreateRuleOutput.type = Types::CreateRuleOutput
@@ -567,6 +590,7 @@ module Aws::ElasticLoadBalancingV2
     CreateTargetGroupInput.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTypeEnum, name: "TargetType"))
     CreateTargetGroupInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateTargetGroupInput.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupIpAddressTypeEnum, name: "IpAddressType"))
+    CreateTargetGroupInput.add_member(:target_control_port, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetControlPort, name: "TargetControlPort"))
     CreateTargetGroupInput.type = Types::CreateTargetGroupInput
     CreateTargetGroupOutput.add_member(:target_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroups, name: "TargetGroups"))
     CreateTargetGroupOutput.type = Types::CreateTargetGroupOutput
@@ -754,9 +778,13 @@ module Aws::ElasticLoadBalancingV2
     HealthUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     HealthUnavailableException.type = Types::HealthUnavailableException
     HostHeaderConditionConfig.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "Values"))
+    HostHeaderConditionConfig.add_member(:regex_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "RegexValues"))
     HostHeaderConditionConfig.type = Types::HostHeaderConditionConfig
+    HostHeaderRewriteConfig.add_member(:rewrites, ::Smithy::Schema::Shapes::MemberShape.new(target: RewriteConfigList, name: "Rewrites"))
+    HostHeaderRewriteConfig.type = Types::HostHeaderRewriteConfig
     HttpHeaderConditionConfig.add_member(:http_header_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpHeaderConditionName, name: "HttpHeaderName"))
     HttpHeaderConditionConfig.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "Values"))
+    HttpHeaderConditionConfig.add_member(:regex_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "RegexValues"))
     HttpHeaderConditionConfig.type = Types::HttpHeaderConditionConfig
     HttpRequestMethodConditionConfig.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "Values"))
     HttpRequestMethodConditionConfig.type = Types::HttpRequestMethodConditionConfig
@@ -785,6 +813,19 @@ module Aws::ElasticLoadBalancingV2
     IpAddressType.add_member(:dualstack_without_public_ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUALSTACK_WITHOUT_PUBLIC_IPV4", traits: {"smithy.api#enumValue" => "dualstack-without-public-ipv4"}))
     IpamPools.add_member(:ipv4_ipam_pool_id, ::Smithy::Schema::Shapes::MemberShape.new(target: IpamPoolId, name: "Ipv4IpamPoolId"))
     IpamPools.type = Types::IpamPools
+    JwtValidationActionAdditionalClaim.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtValidationActionAdditionalClaimFormatEnum, name: "Format", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JwtValidationActionAdditionalClaim.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtValidationActionAdditionalClaimName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JwtValidationActionAdditionalClaim.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtValidationActionAdditionalClaimValues, name: "Values", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JwtValidationActionAdditionalClaim.type = Types::JwtValidationActionAdditionalClaim
+    JwtValidationActionAdditionalClaimFormatEnum.add_member(:single_string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_STRING", traits: {"smithy.api#enumValue" => "single-string"}))
+    JwtValidationActionAdditionalClaimFormatEnum.add_member(:string_array, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING_ARRAY", traits: {"smithy.api#enumValue" => "string-array"}))
+    JwtValidationActionAdditionalClaimFormatEnum.add_member(:space_separated_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPACE_SEPARATED_VALUES", traits: {"smithy.api#enumValue" => "space-separated-values"}))
+    JwtValidationActionAdditionalClaimValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtValidationActionAdditionalClaimValue, name: "member"))
+    JwtValidationActionAdditionalClaims.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtValidationActionAdditionalClaim, name: "member"))
+    JwtValidationActionConfig.add_member(:jwks_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtValidationActionJwksEndpoint, name: "JwksEndpoint", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JwtValidationActionConfig.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtValidationActionIssuer, name: "Issuer", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JwtValidationActionConfig.add_member(:additional_claims, ::Smithy::Schema::Shapes::MemberShape.new(target: JwtValidationActionAdditionalClaims, name: "AdditionalClaims"))
+    JwtValidationActionConfig.type = Types::JwtValidationActionConfig
     Limit.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     Limit.add_member(:max, ::Smithy::Schema::Shapes::MemberShape.new(target: Max, name: "Max"))
     Limit.type = Types::Limit
@@ -899,6 +940,8 @@ module Aws::ElasticLoadBalancingV2
     ModifyRuleInput.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "RuleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyRuleInput.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConditionList, name: "Conditions"))
     ModifyRuleInput.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: Actions, name: "Actions"))
+    ModifyRuleInput.add_member(:transforms, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTransformList, name: "Transforms"))
+    ModifyRuleInput.add_member(:reset_transforms, ::Smithy::Schema::Shapes::MemberShape.new(target: ResetTransforms, name: "ResetTransforms"))
     ModifyRuleInput.type = Types::ModifyRuleInput
     ModifyRuleOutput.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: Rules, name: "Rules"))
     ModifyRuleOutput.type = Types::ModifyRuleOutput
@@ -936,6 +979,7 @@ module Aws::ElasticLoadBalancingV2
     OperationNotPermittedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     OperationNotPermittedException.type = Types::OperationNotPermittedException
     PathPatternConditionConfig.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "Values"))
+    PathPatternConditionConfig.add_member(:regex_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "RegexValues"))
     PathPatternConditionConfig.type = Types::PathPatternConditionConfig
     PriorRequestNotCompleteException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     PriorRequestNotCompleteException.type = Types::PriorRequestNotCompleteException
@@ -948,6 +992,8 @@ module Aws::ElasticLoadBalancingV2
     ProtocolEnum.add_member(:udp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UDP", traits: {"smithy.api#enumValue" => "UDP"}))
     ProtocolEnum.add_member(:tcp_udp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP_UDP", traits: {"smithy.api#enumValue" => "TCP_UDP"}))
     ProtocolEnum.add_member(:geneve, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENEVE", traits: {"smithy.api#enumValue" => "GENEVE"}))
+    ProtocolEnum.add_member(:quic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUIC", traits: {"smithy.api#enumValue" => "QUIC"}))
+    ProtocolEnum.add_member(:tcp_quic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TCP_QUIC", traits: {"smithy.api#enumValue" => "TCP_QUIC"}))
     QueryStringConditionConfig.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringKeyValuePairList, name: "Values"))
     QueryStringConditionConfig.type = Types::QueryStringConditionConfig
     QueryStringKeyValuePair.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "Key"))
@@ -998,11 +1044,16 @@ module Aws::ElasticLoadBalancingV2
     RevocationIdNotFoundException.type = Types::RevocationIdNotFoundException
     RevocationIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RevocationId, name: "member"))
     RevocationType.add_member(:crl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRL", traits: {"smithy.api#enumValue" => "CRL"}))
+    RewriteConfig.add_member(:regex, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "Regex", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RewriteConfig.add_member(:replace, ::Smithy::Schema::Shapes::MemberShape.new(target: StringValue, name: "Replace", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RewriteConfig.type = Types::RewriteConfig
+    RewriteConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RewriteConfig, name: "member"))
     Rule.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "RuleArn"))
     Rule.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Priority"))
     Rule.add_member(:conditions, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleConditionList, name: "Conditions"))
     Rule.add_member(:actions, ::Smithy::Schema::Shapes::MemberShape.new(target: Actions, name: "Actions"))
     Rule.add_member(:is_default, ::Smithy::Schema::Shapes::MemberShape.new(target: IsDefault, name: "IsDefault"))
+    Rule.add_member(:transforms, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTransformList, name: "Transforms"))
     Rule.type = Types::Rule
     RuleArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "member"))
     RuleCondition.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: ConditionFieldName, name: "Field"))
@@ -1013,6 +1064,7 @@ module Aws::ElasticLoadBalancingV2
     RuleCondition.add_member(:query_string_config, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStringConditionConfig, name: "QueryStringConfig"))
     RuleCondition.add_member(:http_request_method_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HttpRequestMethodConditionConfig, name: "HttpRequestMethodConfig"))
     RuleCondition.add_member(:source_ip_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceIpConditionConfig, name: "SourceIpConfig"))
+    RuleCondition.add_member(:regex_values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "RegexValues"))
     RuleCondition.type = Types::RuleCondition
     RuleConditionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleCondition, name: "member"))
     RuleNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
@@ -1021,6 +1073,11 @@ module Aws::ElasticLoadBalancingV2
     RulePriorityPair.add_member(:rule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleArn, name: "RuleArn"))
     RulePriorityPair.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: RulePriority, name: "Priority"))
     RulePriorityPair.type = Types::RulePriorityPair
+    RuleTransform.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformTypeEnum, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RuleTransform.add_member(:host_header_rewrite_config, ::Smithy::Schema::Shapes::MemberShape.new(target: HostHeaderRewriteConfig, name: "HostHeaderRewriteConfig"))
+    RuleTransform.add_member(:url_rewrite_config, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlRewriteConfig, name: "UrlRewriteConfig"))
+    RuleTransform.type = Types::RuleTransform
+    RuleTransformList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleTransform, name: "member"))
     Rules.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "member"))
     SSLPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     SSLPolicyNotFoundException.type = Types::SSLPolicyNotFoundException
@@ -1051,7 +1108,10 @@ module Aws::ElasticLoadBalancingV2
     SetSubnetsOutput.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IpAddressType, name: "IpAddressType"))
     SetSubnetsOutput.add_member(:enable_prefix_for_ipv6_source_nat, ::Smithy::Schema::Shapes::MemberShape.new(target: EnablePrefixForIpv6SourceNatEnum, name: "EnablePrefixForIpv6SourceNat"))
     SetSubnetsOutput.type = Types::SetSubnetsOutput
+    SourceIpAddressTypeEnum.add_member(:ipv4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV4", traits: {"smithy.api#enumValue" => "ipv4"}))
+    SourceIpAddressTypeEnum.add_member(:ipv6, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IPV6", traits: {"smithy.api#enumValue" => "ipv6"}))
     SourceIpConditionConfig.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ListOfString, name: "Values"))
+    SourceIpConditionConfig.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceIpAddressTypeEnum, name: "IpAddressType"))
     SourceIpConditionConfig.type = Types::SourceIpConditionConfig
     SourceNatIpv6Prefixes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceNatIpv6Prefix, name: "member"))
     SslPolicies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SslPolicy, name: "member"))
@@ -1092,6 +1152,7 @@ module Aws::ElasticLoadBalancingV2
     TargetDescription.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetId, name: "Id", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TargetDescription.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: Port, name: "Port"))
     TargetDescription.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ZoneName, name: "AvailabilityZone"))
+    TargetDescription.add_member(:quic_server_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QuicServerId, name: "QuicServerId"))
     TargetDescription.type = Types::TargetDescription
     TargetDescriptions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetDescription, name: "member"))
     TargetGroup.add_member(:target_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupArn, name: "TargetGroupArn"))
@@ -1112,6 +1173,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroup.add_member(:target_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetTypeEnum, name: "TargetType"))
     TargetGroup.add_member(:protocol_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ProtocolVersion, name: "ProtocolVersion"))
     TargetGroup.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupIpAddressTypeEnum, name: "IpAddressType"))
+    TargetGroup.add_member(:target_control_port, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetControlPort, name: "TargetControlPort"))
     TargetGroup.type = Types::TargetGroup
     TargetGroupArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetGroupArn, name: "member"))
     TargetGroupAssociationLimitException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
@@ -1191,6 +1253,8 @@ module Aws::ElasticLoadBalancingV2
     TooManyTrustStoresException.type = Types::TooManyTrustStoresException
     TooManyUniqueTargetGroupsPerLoadBalancerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     TooManyUniqueTargetGroupsPerLoadBalancerException.type = Types::TooManyUniqueTargetGroupsPerLoadBalancerException
+    TransformTypeEnum.add_member(:host_header_rewrite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HOST_HEADER_REWRITE", traits: {"smithy.api#enumValue" => "host-header-rewrite"}))
+    TransformTypeEnum.add_member(:url_rewrite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL_REWRITE", traits: {"smithy.api#enumValue" => "url-rewrite"}))
     TrustStore.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreName, name: "Name"))
     TrustStore.add_member(:trust_store_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreArn, name: "TrustStoreArn"))
     TrustStore.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStoreStatus, name: "Status"))
@@ -1223,6 +1287,8 @@ module Aws::ElasticLoadBalancingV2
     TrustStores.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrustStore, name: "member"))
     UnsupportedProtocolException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDescription, name: "Message"))
     UnsupportedProtocolException.type = Types::UnsupportedProtocolException
+    UrlRewriteConfig.add_member(:rewrites, ::Smithy::Schema::Shapes::MemberShape.new(target: RewriteConfigList, name: "Rewrites"))
+    UrlRewriteConfig.type = Types::UrlRewriteConfig
     ZonalCapacityReservationState.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservationStatus, name: "State"))
     ZonalCapacityReservationState.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ZoneName, name: "AvailabilityZone"))
     ZonalCapacityReservationState.add_member(:effective_capacity_units, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityUnitsDouble, name: "EffectiveCapacityUnits"))
@@ -1233,7 +1299,7 @@ module Aws::ElasticLoadBalancingV2
       service.id = "com.amazonaws.elasticloadbalancingv2#ElasticLoadBalancing_v10"
       service.name = "ElasticLoadBalancingV10"
       service.version = "2015-12-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Elastic Load Balancing v2", "arnNamespace" => "elasticloadbalancing", "cloudFormationName" => "ElasticLoadBalancingV2", "cloudTrailEventSource" => "elasticloadbalancing.amazonaws.com", "docId" => "elasticloadbalancingv2-2015-12-01", "endpointPrefix" => "elasticloadbalancing"}, "aws.auth#sigv4" => {"name" => "elasticloadbalancing"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Elastic Load Balancing", "smithy.api#xmlNamespace" => {"uri" => "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Elastic Load Balancing v2", "arnNamespace" => "elasticloadbalancing", "cloudFormationName" => "ElasticLoadBalancingV2", "cloudTrailEventSource" => "elasticloadbalancing.amazonaws.com", "docId" => "elasticloadbalancingv2-2015-12-01", "endpointPrefix" => "elasticloadbalancing"}, "aws.auth#sigv4" => {"name" => "elasticloadbalancing"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "Elastic Load Balancing", "smithy.api#xmlNamespace" => {"uri" => "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticloadbalancing-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticloadbalancing.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticloadbalancing-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticloadbalancing.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticloadbalancing.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:add_listener_certificates, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elasticloadbalancingv2#AddListenerCertificates"
         operation.name = "AddListenerCertificates"

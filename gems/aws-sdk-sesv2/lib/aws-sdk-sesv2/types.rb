@@ -90,6 +90,40 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A request to associate an S/MIME certificate with an email identity.</p>
+    # @!attribute email_identity
+    #   <p>The email identity, either an email address or a domain, to associate the certificate
+    #               with.</p>
+    #   @return [String]
+    # @!attribute from_address
+    #   <p>The email address that the certificate applies to. This value is required when the
+    #               email identity is a domain, and the address must belong to that domain or one of its
+    #               subdomains. When the email identity is an email address, this value is optional. If you
+    #               specify it, it must exactly match the email identity.</p>
+    #   @return [String]
+    # @!attribute certificate_arn
+    #   <p>The Amazon Resource Name (ARN) of the Certificate Manager (ACM) certificate to
+    #               associate with the email identity.</p>
+    #   @return [String]
+    class AssociateEmailIdentityCertificateRequest < Struct.new(
+      nil,
+      :email_identity,
+      :from_address,
+      :certificate_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An HTTP 200 response if the request succeeds, or an error message if the request
+    #             fails.</p>
+    class AssociateEmailIdentityCertificateResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> Contains metadata and attachment raw content.</p>
     # @!attribute raw_content
     #   <p> The raw data of the attachment. It needs to be base64-encoded if you are accessing Amazon SES
@@ -546,7 +580,7 @@ module Aws::SESv2
     #                       underscores (_), or dashes (-).</p>
     #               </li>
     #               <li>
-    #                  <p>It can contain no more than 256 characters.</p>
+    #                  <p>It can contain no more than 255 characters.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -567,7 +601,7 @@ module Aws::SESv2
     #                       underscores (_), or dashes (-), at signs (@), and periods (.).</p>
     #               </li>
     #               <li>
-    #                  <p>It can contain no more than 256 characters.</p>
+    #                  <p>It can contain no more than 255 characters.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -609,6 +643,25 @@ module Aws::SESv2
     class ConcurrentModificationException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that overrides settings for a single email sending request. An override
+    #             applies only to the message or messages in the request that contains it. It doesn't
+    #             change your account-level settings, and it doesn't change the configuration set that the
+    #             request uses.</p>
+    #          <p>A setting that you don't override keeps the value that would otherwise apply to the
+    #             message. Depending on the setting, that value comes from the configuration set that the
+    #             message uses, from your account-level settings, or from the Amazon SES default.</p>
+    # @!attribute tracking
+    #   <p>An object that overrides the open and click tracking settings that would otherwise
+    #               apply to the message.</p>
+    #   @return [Types::TrackingConfigurationOverrides]
+    class ConfigurationOverrides < Struct.new(
+      nil,
+      :tracking,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -777,8 +830,9 @@ module Aws::SESv2
     #               configuration set.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute suppression_options
-    #   <p>An object that contains information about the suppression list preferences for your
-    #               account.</p>
+    #   <p>An object that contains information about the suppression list preferences for the
+    #               configuration set. You can optionally include a <code>SuppressionScope</code> to override the
+    #               tenant or account suppression scope for emails sent using this configuration set.</p>
     #   @return [Types::SuppressionOptions]
     # @!attribute vdm_options
     #   <p>An object that defines the VDM options for emails that you send using the
@@ -788,6 +842,10 @@ module Aws::SESv2
     #   <p>An object that defines the MailManager archiving options for emails that you send
     #               using the configuration set.</p>
     #   @return [Types::ArchivingOptions]
+    # @!attribute message_security_options
+    #   <p>The message security options to apply to the configuration set, such as the signing
+    #               scheme used for messages that you send with the configuration set.</p>
+    #   @return [Types::MessageSecurityOptions]
     class CreateConfigurationSetRequest < Struct.new(
       nil,
       :configuration_set_name,
@@ -799,6 +857,7 @@ module Aws::SESv2
       :suppression_options,
       :vdm_options,
       :archiving_options,
+      :message_security_options,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -895,6 +954,10 @@ module Aws::SESv2
     #               information, see <a href="https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq">Custom verification email frequently asked questions</a> in the <i>Amazon SES
     #                   Developer Guide</i>.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>An array of objects that define the tags (keys and values) to associate with the
+    #               custom verification email template.</p>
+    #   @return [Array<Types::Tag>]
     # @!attribute success_redirection_url
     #   <p>The URL that the recipient of the verification email is sent to if his or her address
     #               is successfully verified.</p>
@@ -909,6 +972,7 @@ module Aws::SESv2
       :from_email_address,
       :template_subject,
       :template_content,
+      :tags,
       :success_redirection_url,
       :failure_redirection_url,
       keyword_init: true
@@ -1112,10 +1176,14 @@ module Aws::SESv2
     #   <p>The content of the email template, composed of a subject line, an HTML part, and a
     #               text-only part.</p>
     #   @return [Types::EmailTemplateContent]
+    # @!attribute tags
+    #   <p>An array of objects that define the tags (keys and values) to associate with the email template.</p>
+    #   @return [Array<Types::Tag>]
     class CreateEmailTemplateRequest < Struct.new(
       nil,
       :template_name,
       :template_content,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1136,7 +1204,9 @@ module Aws::SESv2
     #   <p>The data source for the export job.</p>
     #   @return [Types::ExportDataSource]
     # @!attribute export_destination
-    #   <p>The destination for the export job.</p>
+    #   <p>The destination for the export job. Specify only <code>DataFormat</code>. Do not
+    #               include <code>S3Url</code> in this request. SES writes the export file to a
+    #               location that it manages and returns the download URL in <code>GetExportJob</code>.</p>
     #   @return [Types::ExportDestination]
     class CreateExportJobRequest < Struct.new(
       nil,
@@ -1258,10 +1328,15 @@ module Aws::SESv2
     # @!attribute tags
     #   <p>An array of objects that define the tags (keys and values) to associate with the tenant</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute suppression_attributes
+    #   <p>An object that contains information about the suppression list preferences for the tenant.
+    #               Use this to configure tenant-level suppression at creation time.</p>
+    #   @return [Types::TenantSuppressionAttributes]
     class CreateTenantRequest < Struct.new(
       nil,
       :tenant_name,
       :tags,
+      :suppression_attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1314,6 +1389,9 @@ module Aws::SESv2
     # @!attribute sending_status
     #   <p>The status of email sending capability for the tenant.</p>
     #   @return [String]
+    # @!attribute suppression_attributes
+    #   <p>An object that contains the suppression list preferences for a tenant.</p>
+    #   @return [Types::TenantSuppressionAttributes]
     class CreateTenantResponse < Struct.new(
       nil,
       :tenant_name,
@@ -1322,6 +1400,7 @@ module Aws::SESv2
       :created_timestamp,
       :tags,
       :sending_status,
+      :suppression_attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1512,6 +1591,15 @@ module Aws::SESv2
       nil,
       :pool_name,
       :scaling_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the default signing scheme, in which Amazon SES API v2 doesn't apply S/MIME signing to
+    #             messages sent with the configuration set.</p>
+    class DefaultSigningScheme < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1763,14 +1851,21 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A request to remove an email address from the suppression list for your
-    #             account.</p>
+    # <p>A request to remove an email address from the suppression list for your account or
+    #             for a specific tenant.</p>
     # @!attribute email_address
-    #   <p>The suppressed email destination to remove from the account suppression list.</p>
+    #   <p>The suppressed email destination to remove from the suppression list for your account
+    #               or for the specified tenant.</p>
+    #   @return [String]
+    # @!attribute tenant_name
+    #   <p>The name of the tenant whose suppression list you want to remove the address from. If
+    #               you omit this parameter, the address is removed from the account-level suppression
+    #               list.</p>
     #   @return [String]
     class DeleteSuppressedDestinationRequest < Struct.new(
       nil,
       :email_address,
+      :tenant_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1935,6 +2030,34 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A request to remove the association between an S/MIME certificate and an email
+    #             identity.</p>
+    # @!attribute email_identity
+    #   <p>The email identity whose certificate association you want to remove.</p>
+    #   @return [String]
+    # @!attribute from_address
+    #   <p>The email address whose certificate association you want to remove. This value is
+    #               required when the email identity is a domain. When the email identity is an email
+    #               address, this value is optional.</p>
+    #   @return [String]
+    class DisassociateEmailIdentityCertificateRequest < Struct.new(
+      nil,
+      :email_identity,
+      :from_address,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An HTTP 200 response if the request succeeds, or an error message if the request
+    #             fails.</p>
+    class DisassociateEmailIdentityCertificateResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object that contains information about the DKIM authentication status for an email
     #             identity.</p>
     #          <p>Amazon SES determines the authentication status by searching for specific records in the
@@ -1993,6 +2116,27 @@ module Aws::SESv2
     #            <p>Regardless of the DKIM authentication method you use, Amazon SES searches for the
     #               appropriate records in the DNS configuration of the domain for up to 72 hours.</p>
     #   @return [Array<String>]
+    # @!attribute signing_hosted_zone
+    #   <p>The hosted zone where Amazon SES publishes the DKIM public key TXT records for this email identity.
+    #           This value indicates the DNS zone that customers must reference when configuring their CNAME records for DKIM authentication.</p>
+    #            <p>When configuring DKIM for your domain, create CNAME records in your DNS that point to the selectors in this hosted zone.
+    #           For example:</p>
+    #            <p>
+    #               <code>
+    #               selector1._domainkey.yourdomain.com CNAME selector1.<SigningHostedZone>
+    #           </code>
+    #            </p>
+    #            <p>
+    #               <code>
+    #               selector2._domainkey.yourdomain.com CNAME selector2.<SigningHostedZone>
+    #           </code>
+    #            </p>
+    #            <p>
+    #               <code>
+    #               selector3._domainkey.yourdomain.com CNAME selector3.<SigningHostedZone>
+    #           </code>
+    #            </p>
+    #   @return [String]
     # @!attribute signing_attributes_origin
     #   <p>A string that indicates how DKIM was configured for the identity. These are the
     #               possible values:</p>
@@ -2009,167 +2153,15 @@ module Aws::SESv2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>AWS_SES_AF_SOUTH_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Africa (Cape Town) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_NORTH_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Europe (Stockholm) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTH_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTH_2</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Asia Pacific (Hyderabad) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_WEST_3</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_WEST_2</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Europe (London) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_SOUTH_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_WEST_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_NORTHEAST_3</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_NORTHEAST_2</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_ME_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Middle East (UAE) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_ME_SOUTH_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Middle East (Bahrain) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_NORTHEAST_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_IL_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_SA_EAST_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in South America (São Paulo) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_CA_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTHEAST_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTHEAST_2</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTHEAST_3</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_CENTRAL_2</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in Europe (Zurich) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_US_EAST_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in US East (N. Virginia) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_US_EAST_2</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_US_WEST_1</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in US West (N. California) region using Deterministic Easy-DKIM
-    #                       (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_US_WEST_2</code> – Indicates that DKIM was configured for the identity by
-    #                       replicating signing attributes from a parent identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
+    #                     <code>AWS_SES_<REGION></code> – Indicates that DKIM was configured
+    #                       for the identity by replicating the signing attributes of a parent identity in
+    #                       another Amazon Web Services Region, using <a href="https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-deed.html">Deterministic
+    #                           Easy-DKIM (DEED)</a>. <code><REGION></code> is the
+    #                       Amazon Web Services Region of the parent identity, in uppercase with each hyphen
+    #                       replaced by an underscore. Amazon SES uses this format for every
+    #                       Amazon Web Services Region in which it supports DEED. For example, a parent
+    #                       identity in <code>us-east-1</code> is reported as
+    #                       <code>AWS_SES_US_EAST_1</code>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -2188,6 +2180,7 @@ module Aws::SESv2
       :signing_enabled,
       :status,
       :tokens,
+      :signing_hosted_zone,
       :signing_attributes_origin,
       :next_signing_key_length,
       :current_signing_key_length,
@@ -2263,153 +2256,18 @@ module Aws::SESv2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>AWS_SES_AF_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Africa (Cape Town) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_NORTH_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Europe (Stockholm) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTH_2</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Asia Pacific (Hyderabad) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_WEST_3</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_WEST_2</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Europe (London) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_WEST_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_NORTHEAST_3</code> – Configure DKIM for the identity by replicating from a
-    #                       parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_NORTHEAST_2</code> – Configure DKIM for the identity by replicating from a
-    #                       parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_ME_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Middle East (UAE) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_ME_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Middle East (Bahrain) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_NORTHEAST_1</code> – Configure DKIM for the identity by replicating from a
-    #                       parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_IL_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a
-    #                       parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_SA_EAST_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in South America (São Paulo) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_CA_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a
-    #                       parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTHEAST_1</code> – Configure DKIM for the identity by replicating from a
-    #                       parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTHEAST_2</code> – Configure DKIM for the identity by replicating from a
-    #                       parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_AP_SOUTHEAST_3</code> – Configure DKIM for the identity by replicating from a
-    #                       parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a
-    #                       parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_EU_CENTRAL_2</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in Europe (Zurich) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_US_EAST_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in US East (N. Virginia) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_US_EAST_2</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_US_WEST_1</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in US West (N. California) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>AWS_SES_US_WEST_2</code> – Configure DKIM for the identity by replicating from a parent
-    #                       identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).
-    #                   </p>
+    #                     <code>AWS_SES_<REGION></code> – Configure DKIM for the identity by
+    #                       replicating the signing attributes of a parent identity in another
+    #                       Amazon Web Services Region, using <a href="https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-deed.html">Deterministic
+    #                           Easy-DKIM (DEED)</a>. Replace <code><REGION></code> with the
+    #                       Amazon Web Services Region of the parent identity, in uppercase with each hyphen
+    #                       replaced by an underscore. You can specify any Amazon Web Services Region in which
+    #                       Amazon SES supports DEED. For example, to replicate from a parent identity in
+    #                       <code>us-east-1</code>, specify <code>AWS_SES_US_EAST_1</code>.</p>
+    #                  <note>
+    #                     <p>The parent identity must already exist in the specified
+    #                           Amazon Web Services Region and have Easy DKIM configured.</p>
+    #                  </note>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -2558,6 +2416,50 @@ module Aws::SESv2
       :spam_raw_count,
       :inbox_percentage,
       :spam_percentage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains individual validation checks performed on an email address.</p>
+    # @!attribute has_valid_syntax
+    #   <p>Checks that the email address follows proper RFC standards and contains valid characters in the correct format.</p>
+    #   @return [Types::EmailAddressInsightsVerdict]
+    # @!attribute has_valid_dns_records
+    #   <p>Checks that the domain exists, has valid DNS records, and is conﬁgured to receive email.</p>
+    #   @return [Types::EmailAddressInsightsVerdict]
+    # @!attribute mailbox_exists
+    #   <p>Checks that the mailbox exists and can receive messages without actually sending an email.</p>
+    #   @return [Types::EmailAddressInsightsVerdict]
+    # @!attribute is_role_address
+    #   <p>Identiﬁes role-based addresses (such as admin@, support@, or info@) that may have lower engagement rates.</p>
+    #   @return [Types::EmailAddressInsightsVerdict]
+    # @!attribute is_disposable
+    #   <p>Checks disposable or temporary email addresses that could negatively impact your sender reputation.</p>
+    #   @return [Types::EmailAddressInsightsVerdict]
+    # @!attribute is_random_input
+    #   <p>Checks if the input appears to be random text.</p>
+    #   @return [Types::EmailAddressInsightsVerdict]
+    class EmailAddressInsightsMailboxEvaluations < Struct.new(
+      nil,
+      :has_valid_syntax,
+      :has_valid_dns_records,
+      :mailbox_exists,
+      :is_role_address,
+      :is_disposable,
+      :is_random_input,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the overall validation verdict for an email address.</p>
+    # @!attribute confidence_verdict
+    #   <p>The confidence level of the validation verdict.</p>
+    #   @return [String]
+    class EmailAddressInsightsVerdict < Struct.new(
+      nil,
+      :confidence_verdict,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2910,6 +2812,11 @@ module Aws::SESv2
     end
 
     # <p>An object that contains details about the destination of the export job.</p>
+    #          <p>When you create an export job, specify only <code>DataFormat</code>. SES
+    #             writes the export file to a location that it manages. After the job completes, call
+    #                 <code>GetExportJob</code> and use the <code>S3Url</code> that's returned to download
+    #             the file. To store a copy in your own Amazon S3 bucket, upload the downloaded file to your
+    #             bucket. Do not include <code>S3Url</code> in the <code>CreateExportJob</code> request.</p>
     # @!attribute data_format
     #   <p>The data format of the final export job file, can be one of the following:</p>
     #            <ul>
@@ -2925,6 +2832,11 @@ module Aws::SESv2
     #   @return [String]
     # @!attribute s3_url
     #   <p>An Amazon S3 pre-signed URL that points to the generated export file.</p>
+    #            <p>SES sets this value. It's returned only in the <code>GetExportJob</code>
+    #               response, after the export job status is <code>COMPLETED</code>. The URL expires five
+    #               minutes after <code>GetExportJob</code> returns it. Call <code>GetExportJob</code> again
+    #               to get a new URL. If you include this field in a <code>CreateExportJob</code> request,
+    #               the request fails with a <code>BadRequestException</code>.</p>
     #   @return [String]
     class ExportDestination < Struct.new(
       nil,
@@ -3156,6 +3068,10 @@ module Aws::SESv2
     # @!attribute vdm_attributes
     #   <p>The VDM attributes that apply to your Amazon SES account.</p>
     #   @return [Types::VdmAttributes]
+    # @!attribute pricing_attributes
+    #   <p>The pricing attributes that apply to your Amazon SES account, including the currently active
+    #               pricing plan and any scheduled change.</p>
+    #   @return [Types::PricingAttributes]
     class GetAccountResponse < Struct.new(
       nil,
       :dedicated_ip_auto_warmup_enabled,
@@ -3166,6 +3082,7 @@ module Aws::SESv2
       :suppression_attributes,
       :details,
       :vdm_attributes,
+      :pricing_attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3270,7 +3187,7 @@ module Aws::SESv2
     #   @return [Array<Types::Tag>]
     # @!attribute suppression_options
     #   <p>An object that contains information about the suppression list preferences for your
-    #               account.</p>
+    #               account or for a specific tenant.</p>
     #   @return [Types::SuppressionOptions]
     # @!attribute vdm_options
     #   <p>An object that contains information about the VDM preferences for your configuration
@@ -3280,6 +3197,10 @@ module Aws::SESv2
     #   <p>An object that defines the MailManager archive where sent emails are archived that you send
     #               using the configuration set.</p>
     #   @return [Types::ArchivingOptions]
+    # @!attribute message_security_options
+    #   <p>The message security options that are applied to the configuration set, such as the
+    #               signing scheme used for messages that you send with the configuration set.</p>
+    #   @return [Types::MessageSecurityOptions]
     class GetConfigurationSetResponse < Struct.new(
       nil,
       :configuration_set_name,
@@ -3291,6 +3212,7 @@ module Aws::SESv2
       :suppression_options,
       :vdm_options,
       :archiving_options,
+      :message_security_options,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3425,6 +3347,10 @@ module Aws::SESv2
     # @!attribute template_content
     #   <p>The content of the custom verification email.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>An array of objects that define the tags (keys and values) that are associated with
+    #               the custom verification email template.</p>
+    #   @return [Array<Types::Tag>]
     # @!attribute success_redirection_url
     #   <p>The URL that the recipient of the verification email is sent to if his or her address
     #               is successfully verified.</p>
@@ -3439,6 +3365,7 @@ module Aws::SESv2
       :from_email_address,
       :template_subject,
       :template_content,
+      :tags,
       :success_redirection_url,
       :failure_redirection_url,
       keyword_init: true
@@ -3713,6 +3640,30 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A request to return validation insights about an email address.</p>
+    # @!attribute email_address
+    #   <p>The email address to analyze for validation insights.</p>
+    #   @return [String]
+    class GetEmailAddressInsightsRequest < Struct.new(
+      nil,
+      :email_address,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Validation insights about an email address.</p>
+    # @!attribute mailbox_validation
+    #   <p>Detailed validation results for the email address.</p>
+    #   @return [Types::MailboxValidation]
+    class GetEmailAddressInsightsResponse < Struct.new(
+      nil,
+      :mailbox_validation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A request to return the policies of an email identity.</p>
     # @!attribute email_identity
     #   <p>The email identity.</p>
@@ -3863,10 +3814,15 @@ module Aws::SESv2
     #   <p>The content of the email template, composed of a subject line, an HTML part, and a
     #               text-only part.</p>
     #   @return [Types::EmailTemplateContent]
+    # @!attribute tags
+    #   <p>An array of objects that define the tags (keys and values) that are associated with
+    #               the email template.</p>
+    #   @return [Array<Types::Tag>]
     class GetEmailTemplateResponse < Struct.new(
       nil,
       :template_name,
       :template_content,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3897,7 +3853,9 @@ module Aws::SESv2
     #   <p>The status of the export job.</p>
     #   @return [String]
     # @!attribute export_destination
-    #   <p>The destination of the export job.</p>
+    #   <p>The destination of the export job. When <code>JobStatus</code> is
+    #                   <code>COMPLETED</code>, this object includes <code>S3Url</code>, a pre-signed URL
+    #               that you use to download the export file.</p>
     #   @return [Types::ExportDestination]
     # @!attribute export_data_source
     #   <p>The data source of the export job.</p>
@@ -4100,7 +4058,7 @@ module Aws::SESv2
 
     # <p>Represents a request to retrieve information about a specific reputation entity.</p>
     # @!attribute reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
+    #   <p>The unique identifier for the reputation entity. For resource-type entities,
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     # @!attribute reputation_entity_type
@@ -4117,7 +4075,7 @@ module Aws::SESv2
 
     # <p>Information about the requested reputation entity.</p>
     # @!attribute reputation_entity
-    #   <p>The reputation entity information, including status records, policy configuration, 
+    #   <p>The reputation entity information, including status records, policy configuration,
     #               and reputation impact.</p>
     #   @return [Types::ReputationEntity]
     class GetReputationEntityResponse < Struct.new(
@@ -4129,13 +4087,19 @@ module Aws::SESv2
     end
 
     # <p>A request to retrieve information about an email address that's on the suppression
-    #             list for your account.</p>
+    #             list for your account or for a specific tenant.</p>
     # @!attribute email_address
-    #   <p>The email address that's on the account suppression list.</p>
+    #   <p>The email address that's on the suppression list for your account or for the
+    #               specified tenant.</p>
+    #   @return [String]
+    # @!attribute tenant_name
+    #   <p>The name of the tenant whose suppression list you want to query. If you omit this
+    #               parameter, the operation targets the account-level suppression list.</p>
     #   @return [String]
     class GetSuppressedDestinationRequest < Struct.new(
       nil,
       :email_address,
+      :tenant_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4224,6 +4188,33 @@ module Aws::SESv2
     class GuardianOptions < Struct.new(
       nil,
       :optimized_shared_delivery,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that contains information about an S/MIME certificate that's associated with
+    #             an email identity.</p>
+    # @!attribute from_address
+    #   <p>The email address that the certificate applies to.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the certificate association. A status of <code>ACTIVE</code> indicates
+    #               that the certificate is ready to use for signing.</p>
+    #   @return [String]
+    # @!attribute certificate_arn
+    #   <p>The Amazon Resource Name (ARN) of the Certificate Manager (ACM) certificate that's
+    #               associated with the email identity.</p>
+    #   @return [String]
+    # @!attribute certificate_expiry_time
+    #   <p>The timestamp after which the certificate is no longer valid.</p>
+    #   @return [Time]
+    class IdentityCertificate < Struct.new(
+      nil,
+      :from_address,
+      :status,
+      :certificate_arn,
+      :certificate_expiry_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4531,6 +4522,10 @@ module Aws::SESv2
 
     # <p>A request to obtain a list of configuration sets for your Amazon SES account in the current
     #             Amazon Web Services Region.</p>
+    # @!attribute filter
+    #   <p>An object that contains filters to apply when listing configuration sets.
+    #               You can filter by a substring of the configuration set name.</p>
+    #   @return [Hash<String, String>]
     # @!attribute next_token
     #   <p>A token returned from a previous call to <code>ListConfigurationSets</code> to
     #               indicate the position in the list of configuration sets.</p>
@@ -4543,6 +4538,7 @@ module Aws::SESv2
     #   @return [Integer]
     class ListConfigurationSetsRequest < Struct.new(
       nil,
+      :filter,
       :next_token,
       :page_size,
       keyword_init: true
@@ -4859,6 +4855,11 @@ module Aws::SESv2
     # <p>A request to list all of the email identities associated with your Amazon Web Services account. This
     #             list includes identities that you've already verified, identities that are unverified,
     #             and identities that were verified in the past, but are no longer verified.</p>
+    # @!attribute filter
+    #   <p>An object that contains filters to apply when listing email identities.
+    #               You can filter by a substring of the identity name, by identity type, or by
+    #               verification status.</p>
+    #   @return [Hash<String, String>]
     # @!attribute next_token
     #   <p>A token returned from a previous call to <code>ListEmailIdentities</code> to indicate
     #               the position in the list of identities.</p>
@@ -4872,6 +4873,7 @@ module Aws::SESv2
     #   @return [Integer]
     class ListEmailIdentitiesRequest < Struct.new(
       nil,
+      :filter,
       :next_token,
       :page_size,
       keyword_init: true
@@ -4894,6 +4896,53 @@ module Aws::SESv2
     class ListEmailIdentitiesResponse < Struct.new(
       nil,
       :email_identities,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A request to list the S/MIME certificates that are associated with an email
+    #             identity.</p>
+    # @!attribute email_identity
+    #   <p>The email identity whose certificate associations you want to list.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>A token returned from a previous call to <code>ListEmailIdentityCertificates</code> to
+    #               indicate the position in the list of certificates.</p>
+    #   @return [String]
+    # @!attribute page_size
+    #   <p>The number of results to show in a single call to
+    #               <code>ListEmailIdentityCertificates</code>. If the number of results is larger than the
+    #               number you specified in this parameter, then the response includes a
+    #               <code>NextToken</code> element, which you can use to obtain additional results.</p>
+    #   @return [Integer]
+    class ListEmailIdentityCertificatesRequest < Struct.new(
+      nil,
+      :email_identity,
+      :next_token,
+      :page_size,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about the S/MIME certificates that are associated with an email
+    #             identity.</p>
+    # @!attribute certificates
+    #   <p>An array that contains the certificate associations for the email identity. Each entry
+    #               includes the from address, the certificate's status, its Amazon Resource Name (ARN),
+    #               and its expiry time.</p>
+    #   @return [Array<Types::IdentityCertificate>]
+    # @!attribute next_token
+    #   <p>A token that indicates that there are additional certificates to list. To view
+    #               additional certificates, issue another request to
+    #               <code>ListEmailIdentityCertificates</code>, and pass this token in the
+    #               <code>NextToken</code> parameter.</p>
+    #   @return [String]
+    class ListEmailIdentityCertificatesResponse < Struct.new(
+      nil,
+      :certificates,
       :next_token,
       keyword_init: true
     )
@@ -5145,18 +5194,18 @@ module Aws::SESv2
 
     # <p>Represents a request to list reputation entities with optional filtering.</p>
     # @!attribute filter
-    #   <p>An object that contains filters to apply when listing reputation entities. 
-    #               You can filter by entity type, reputation impact, sending status, or entity 
+    #   <p>An object that contains filters to apply when listing reputation entities.
+    #               You can filter by entity type, reputation impact, sending status, or entity
     #               reference prefix.</p>
     #   @return [Hash<String, String>]
     # @!attribute next_token
-    #   <p>A token returned from a previous call to <code>ListReputationEntities</code> to indicate 
+    #   <p>A token returned from a previous call to <code>ListReputationEntities</code> to indicate
     #               the position in the list of reputation entities.</p>
     #   @return [String]
     # @!attribute page_size
-    #   <p>The number of results to show in a single call to <code>ListReputationEntities</code>. 
-    #               If the number of results is larger than the number you specified in this parameter, 
-    #               then the response includes a <code>NextToken</code> element, which you can use to obtain 
+    #   <p>The number of results to show in a single call to <code>ListReputationEntities</code>.
+    #               If the number of results is larger than the number you specified in this parameter,
+    #               then the response includes a <code>NextToken</code> element, which you can use to obtain
     #               additional results.</p>
     #   @return [Integer]
     class ListReputationEntitiesRequest < Struct.new(
@@ -5174,8 +5223,8 @@ module Aws::SESv2
     #   <p>An array that contains information about the reputation entities in your account.</p>
     #   @return [Array<Types::ReputationEntity>]
     # @!attribute next_token
-    #   <p>A token that indicates that there are additional reputation entities to list. 
-    #               To view additional reputation entities, issue another request to <code>ListReputationEntities</code>, 
+    #   <p>A token that indicates that there are additional reputation entities to list.
+    #               To view additional reputation entities, issue another request to <code>ListReputationEntities</code>,
     #               and pass this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListReputationEntitiesResponse < Struct.new(
@@ -5227,9 +5276,14 @@ module Aws::SESv2
     end
 
     # <p>A request to obtain a list of email destinations that are on the suppression list for
-    #             your account.</p>
+    #             your account or for a specific tenant.</p>
+    # @!attribute tenant_name
+    #   <p>The name of the tenant whose suppression list you want to retrieve. If you omit this
+    #               parameter, the operation targets the account-level suppression list.</p>
+    #   @return [String]
     # @!attribute reasons
-    #   <p>The factors that caused the email address to be added to .</p>
+    #   <p>The factors that caused the email address to be added to the suppression list for
+    #               your account or for a specific tenant.</p>
     #   @return [Array<String>]
     # @!attribute start_date
     #   <p>Used to filter the list of suppressed email destinations so that it only includes
@@ -5252,6 +5306,7 @@ module Aws::SESv2
     #   @return [Integer]
     class ListSuppressedDestinationsRequest < Struct.new(
       nil,
+      :tenant_name,
       :reasons,
       :start_date,
       :end_date,
@@ -5269,9 +5324,9 @@ module Aws::SESv2
     #   @return [Array<Types::SuppressedDestinationSummary>]
     # @!attribute next_token
     #   <p>A token that indicates that there are additional email addresses on the suppression
-    #               list for your account. To view additional suppressed addresses, issue another request to
-    #                   <code>ListSuppressedDestinations</code>, and pass this token in the
-    #                   <code>NextToken</code> parameter.</p>
+    #               list for your account or for the specified tenant. To view additional suppressed
+    #               addresses, issue another request to <code>ListSuppressedDestinations</code>, and pass
+    #               this token in the <code>NextToken</code> parameter.</p>
     #   @return [String]
     class ListSuppressedDestinationsResponse < Struct.new(
       nil,
@@ -5352,6 +5407,10 @@ module Aws::SESv2
     end
 
     # <p>Represents a request to list all tenants associated with your account in the current Amazon Web Services Region.</p>
+    # @!attribute filter
+    #   <p>An object that contains filters to apply when listing tenants. You can filter
+    #               by a substring of the tenant name or by sending status.</p>
+    #   @return [Hash<String, String>]
     # @!attribute next_token
     #   <p>A token returned from a previous call to <code>ListTenants</code> to indicate the position in the list of tenants.</p>
     #   @return [String]
@@ -5362,6 +5421,7 @@ module Aws::SESv2
     #   @return [Integer]
     class ListTenantsRequest < Struct.new(
       nil,
+      :filter,
       :next_token,
       :page_size,
       keyword_init: true
@@ -5447,6 +5507,22 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains detailed validation information about an email address.</p>
+    # @!attribute is_valid
+    #   <p>Overall validity assessment with a conﬁdence verdict.</p>
+    #   @return [Types::EmailAddressInsightsVerdict]
+    # @!attribute evaluations
+    #   <p>Specific validation checks performed on the email address.</p>
+    #   @return [Types::EmailAddressInsightsMailboxEvaluations]
+    class MailboxValidation < Struct.new(
+      nil,
+      :is_valid,
+      :evaluations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents the email message that you're sending. The <code>Message</code> object
     #             consists of a subject line and a message body.</p>
     # @!attribute subject
@@ -5496,7 +5572,10 @@ module Aws::SESv2
     #                  <p>Can contain any printable ASCII character.</p>
     #               </li>
     #               <li>
-    #                  <p>Can contain no more than 870 characters.</p>
+    #                  <p>Can contain no more than 995 characters.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The combined length of the header name and value must not exceed 996 characters.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -5524,6 +5603,10 @@ module Aws::SESv2
     #   @return [Types::MessageInsightsFilters]
     # @!attribute max_results
     #   <p>The maximum number of results.</p>
+    #            <note>
+    #               <p>If you don't specify <code>MaxResults</code>, the export returns a maximum of
+    #                   1,000 results.</p>
+    #            </note>
     #   @return [Integer]
     class MessageInsightsDataSource < Struct.new(
       nil,
@@ -5560,6 +5643,9 @@ module Aws::SESv2
     #   <p>The recipient's ISP (e.g., <code>Gmail</code>, <code>Yahoo</code>,
     #               etc.).</p>
     #   @return [Array<String>]
+    # @!attribute tenant_name
+    #   <p>The name of the tenant used when sending the message.</p>
+    #   @return [Array<String>]
     # @!attribute last_delivery_event
     #   <p>
     #               The last delivery-related event for the email, where the ordering is as follows:
@@ -5582,6 +5668,7 @@ module Aws::SESv2
       :destination,
       :subject,
       :isp,
+      :tenant_name,
       :last_delivery_event,
       :last_engagement_event,
       keyword_init: true
@@ -5595,6 +5682,22 @@ module Aws::SESv2
     class MessageRejected < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that defines the message-level security options that apply to messages that
+    #             you send using the configuration set. Currently, these options determine whether Amazon SES API v2
+    #             adds an S/MIME signature to your messages and, if so, the format of that
+    #             signature.</p>
+    # @!attribute signing_scheme
+    #   <p>The signing scheme that Amazon SES API v2 applies to messages sent with the configuration
+    #               set.</p>
+    #   @return [Types::SigningScheme]
+    class MessageSecurityOptions < Struct.new(
+      nil,
+      :signing_scheme,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5851,6 +5954,25 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The pricing attributes that apply to your Amazon SES account, including the currently active
+    #             pricing plan and any scheduled change.</p>
+    # @!attribute current_plan
+    #   <p>The pricing plan that is currently active on your Amazon SES account.</p>
+    #   @return [String]
+    # @!attribute next_plan
+    #   <p>The pricing plan that will become active at the start of the next monthly cycle, if a
+    #               scheduled change has been requested. This field is empty when no scheduled change is
+    #               pending.</p>
+    #   @return [String]
+    class PricingAttributes < Struct.new(
+      nil,
+      :current_plan,
+      :next_plan,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A request to enable or disable the automatic IP address warm-up feature.</p>
     # @!attribute auto_warmup_enabled
     #   <p>Enables or disables the automatic warm-up feature for dedicated IP addresses that are
@@ -5926,6 +6048,50 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A request to set the pricing plan for your Amazon SES account.</p>
+    # @!attribute plan
+    #   <p>The pricing plan to apply to your Amazon SES account. For details about each plan, see <a href="http://aws.amazon.com/ses/pricing/">Amazon SES Pricing</a>. Can be one of the
+    #               following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ESSENTIALS</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PRO</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ENTERPRISE</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class PutAccountPricingAttributesRequest < Struct.new(
+      nil,
+      :plan,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An HTTP 200 response if the request succeeds, or an error response if the request
+    #             fails.</p>
+    class PutAccountPricingAttributesResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A request to change the ability of your account to send email.</p>
     # @!attribute sending_enabled
     #   <p>Enables or disables your account's ability to send email. Set to <code>true</code> to
@@ -5972,16 +6138,20 @@ module Aws::SESv2
     #               </li>
     #            </ul>
     #   @return [Array<String>]
+    # @!attribute validation_attributes
+    #   <p>An object that contains additional suppression attributes for your account.</p>
+    #   @return [Types::SuppressionValidationAttributes]
     class PutAccountSuppressionAttributesRequest < Struct.new(
       nil,
       :suppressed_reasons,
+      :validation_attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
-    #             fails.</p>
+    #         fails.</p>
     class PutAccountSuppressionAttributesResponse < Struct.new(
       nil,
       keyword_init: true
@@ -6128,35 +6298,55 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A request to change the account suppression list preferences for a specific
+    # <p>A request to change the suppression list preferences for a specific
     #             configuration set.</p>
     # @!attribute configuration_set_name
     #   <p>The name of the configuration set to change the suppression list preferences
     #               for.</p>
     #   @return [String]
+    # @!attribute suppression_scope
+    #   <p>The suppression scope for the configuration set. This overrides the tenant or account
+    #               suppression scope for emails sent using this configuration set. Can be one of the
+    #               following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>TENANT</code> – Use the tenant's suppression list.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ACCOUNT</code> – Use the account-level suppression list.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     # @!attribute suppressed_reasons
     #   <p>A list that contains the reasons that email addresses are automatically added to the
-    #               suppression list for your account. This list can contain any or all of the
+    #               suppression list for your account or for a specific tenant. This list can contain any or all of the
     #               following:</p>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression
-    #                       list for your account when a message sent to that address results in a
+    #                       list for your account or for a specific tenant when a message sent to that address results in a
     #                       complaint.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>BOUNCE</code> – Amazon SES adds an email address to the suppression
-    #                       list for your account when a message sent to that address results in a hard
+    #                       list for your account or for a specific tenant when a message sent to that address results in a hard
     #                       bounce.</p>
     #               </li>
     #            </ul>
     #   @return [Array<String>]
+    # @!attribute validation_options
+    #   <p>An object that contains information about the email address suppression preferences for the configuration set in the current Amazon Web Services Region.</p>
+    #   @return [Types::SuppressionValidationOptions]
     class PutConfigurationSetSuppressionOptionsRequest < Struct.new(
       nil,
       :configuration_set_name,
+      :suppression_scope,
       :suppressed_reasons,
+      :validation_options,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6486,10 +6676,32 @@ module Aws::SESv2
     #            <p>Regardless of the DKIM authentication method you use, Amazon SES searches for the
     #               appropriate records in the DNS configuration of the domain for up to 72 hours.</p>
     #   @return [Array<String>]
+    # @!attribute signing_hosted_zone
+    #   <p>The hosted zone where Amazon SES publishes the DKIM public key TXT records for this email identity.
+    #           This value indicates the DNS zone that customers must reference when configuring their CNAME records for DKIM authentication.</p>
+    #            <p>When configuring DKIM for your domain, create CNAME records in your DNS that point to the selectors in this hosted zone.
+    #           For example:</p>
+    #            <p>
+    #               <code>
+    #               selector1._domainkey.yourdomain.com CNAME selector1.<SigningHostedZone>
+    #           </code>
+    #            </p>
+    #            <p>
+    #               <code>
+    #               selector2._domainkey.yourdomain.com CNAME selector2.<SigningHostedZone>
+    #           </code>
+    #            </p>
+    #            <p>
+    #               <code>
+    #               selector3._domainkey.yourdomain.com CNAME selector3.<SigningHostedZone>
+    #           </code>
+    #            </p>
+    #   @return [String]
     class PutEmailIdentityDkimSigningAttributesResponse < Struct.new(
       nil,
       :dkim_status,
       :dkim_tokens,
+      :signing_hosted_zone,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6578,19 +6790,25 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A request to add an email destination to the suppression list for your account.</p>
+    # <p>A request to add an email destination to the suppression list for your account or
+    #             for a specific tenant.</p>
     # @!attribute email_address
-    #   <p>The email address that should be added to the suppression list for your
-    #               account.</p>
+    #   <p>The email address that should be added to the suppression list for your account or
+    #               for the specified tenant.</p>
     #   @return [String]
     # @!attribute reason
     #   <p>The factors that should cause the email address to be added to the suppression list
-    #               for your account.</p>
+    #               for your account or for the specified tenant.</p>
+    #   @return [String]
+    # @!attribute tenant_name
+    #   <p>The name of the tenant whose suppression list you want to add the address to. If you
+    #               omit this parameter, the address is added to the account-level suppression list.</p>
     #   @return [String]
     class PutSuppressedDestinationRequest < Struct.new(
       nil,
       :email_address,
       :reason,
+      :tenant_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6599,6 +6817,53 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutSuppressedDestinationResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A request to configure the suppression list preferences for a tenant.</p>
+    # @!attribute tenant_name
+    #   <p>The name of the tenant to configure suppression list preferences for.</p>
+    #   @return [String]
+    # @!attribute suppressed_reasons
+    #   <p>A list that contains the reasons that email addresses are automatically added to the
+    #               suppression list for the tenant. This list can contain any or all of the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression
+    #                       list when a message sent to that address results in a complaint.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>BOUNCE</code> – Amazon SES adds an email address to the suppression
+    #                       list when a message sent to that address results in a hard bounce.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    # @!attribute suppression_scope
+    #   <p>The suppression scope for the tenant. Specify <code>TENANT</code> to use the tenant's
+    #               own suppression list, or <code>ACCOUNT</code> to use the account-level suppression list.</p>
+    #            <note>
+    #               <p>If you don't specify a suppression scope, the tenant defaults to <code>ACCOUNT</code> scope
+    #                   and uses the account-level suppression list.</p>
+    #            </note>
+    #   @return [String]
+    class PutTenantSuppressionAttributesRequest < Struct.new(
+      nil,
+      :tenant_name,
+      :suppressed_reasons,
+      :suppression_scope,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>If the action is successful, the service sends back an HTTP 200 response with an empty
+    #             HTTP body.</p>
+    class PutTenantSuppressionAttributesResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -6717,25 +6982,25 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains information about a reputation entity, including its 
+    # <p>An object that contains information about a reputation entity, including its
     #             reference, type, policy, status records, and reputation impact.</p>
     # @!attribute reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
+    #   <p>The unique identifier for the reputation entity. For resource-type entities,
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     # @!attribute reputation_entity_type
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     #   @return [String]
     # @!attribute reputation_management_policy
-    #   <p>The Amazon Resource Name (ARN) of the reputation management policy applied to 
+    #   <p>The Amazon Resource Name (ARN) of the reputation management policy applied to
     #               this entity. This is an Amazon Web Services Amazon SES-managed policy.</p>
     #   @return [String]
     # @!attribute customer_managed_status
-    #   <p>The customer-managed status record for this reputation entity, including the 
+    #   <p>The customer-managed status record for this reputation entity, including the
     #               current status, cause description, and last updated timestamp.</p>
     #   @return [Types::StatusRecord]
     # @!attribute aws_ses_managed_status
-    #   <p>The Amazon Web Services Amazon SES-managed status record for this reputation entity, including the 
+    #   <p>The Amazon Web Services Amazon SES-managed status record for this reputation entity, including the
     #               current status, cause description, and last updated timestamp.</p>
     #   @return [Types::StatusRecord]
     # @!attribute sending_status_aggregate
@@ -6749,8 +7014,8 @@ module Aws::SESv2
     #               The entity can only send emails when both statuses permit sending.</p>
     #   @return [String]
     # @!attribute reputation_impact
-    #   <p>The reputation impact level for this entity, representing the highest impact 
-    #               reputation finding currently active. Reputation findings can be retrieved using 
+    #   <p>The reputation impact level for this entity, representing the highest impact
+    #               reputation finding currently active. Reputation findings can be retrieved using
     #               the <code>ListRecommendations</code> operation.</p>
     #   @return [String]
     class ReputationEntity < Struct.new(
@@ -6974,6 +7239,11 @@ module Aws::SESv2
     #               </p>
     #            </note>
     #   @return [String]
+    # @!attribute configuration_overrides
+    #   <p>An object that overrides, for the messages in this request only, settings that would
+    #               otherwise apply to them. The overrides apply to every message in the request. Each
+    #               setting that you don't override keeps the value that already applies.</p>
+    #   @return [Types::ConfigurationOverrides]
     class SendBulkEmailRequest < Struct.new(
       nil,
       :from_email_address,
@@ -6987,6 +7257,7 @@ module Aws::SESv2
       :configuration_set_name,
       :endpoint_id,
       :tenant_name,
+      :configuration_overrides,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7115,6 +7386,10 @@ module Aws::SESv2
     #   <p>An object used to specify a list or topic to which an email belongs, which will be
     #               used when a contact chooses to unsubscribe.</p>
     #   @return [Types::ListManagementOptions]
+    # @!attribute configuration_overrides
+    #   <p>An object that overrides, for this message only, settings that would otherwise apply to
+    #               it. Each setting that you don't override keeps the value that already applies.</p>
+    #   @return [Types::ConfigurationOverrides]
     class SendEmailRequest < Struct.new(
       nil,
       :from_email_address,
@@ -7129,6 +7404,7 @@ module Aws::SESv2
       :endpoint_id,
       :tenant_name,
       :list_management_options,
+      :configuration_overrides,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7217,6 +7493,43 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies the signing scheme to apply to messages sent with a configuration set. This
+    #             is a union type, so you specify exactly one of its members.</p>
+    # @!attribute default_scheme
+    #   <p>Use the default signing behavior. When you select this option, Amazon SES API v2 doesn't add an
+    #               S/MIME signature to messages sent with the configuration set.</p>
+    #   @return [Types::DefaultSigningScheme]
+    # @!attribute smime_scheme
+    #   <p>Sign messages sent with the configuration set using S/MIME. For signing to apply, the
+    #               email identity used to send a message must have an active S/MIME certificate
+    #               association.</p>
+    #   @return [Types::SmimeSigningScheme]
+    class SigningScheme < Struct.new(
+      :default_scheme,
+      :smime_scheme,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class DefaultScheme < SigningScheme; end
+      class SmimeScheme < SigningScheme; end
+      class Unknown < SigningScheme; end
+    end
+
+    # <p>Specifies that Amazon SES API v2 signs messages sent with the configuration set using
+    #             S/MIME.</p>
+    # @!attribute signature_format
+    #   <p>The format of the S/MIME signature that Amazon SES API v2 applies to messages.</p>
+    #   @return [String]
+    class SmimeSigningScheme < Struct.new(
+      nil,
+      :signature_format,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to
     #             send notifications when certain email events occur.</p>
     # @!attribute topic_arn
@@ -7231,7 +7544,7 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An object that contains status information for a reputation entity, including 
+    # <p>An object that contains status information for a reputation entity, including
     #             the current status, cause description, and timestamp.</p>
     # @!attribute status
     #   <p>The current sending status. This can be one of the following:</p>
@@ -7251,7 +7564,7 @@ module Aws::SESv2
     #            </ul>
     #   @return [String]
     # @!attribute cause
-    #   <p>A description of the reason for the current status, or null if no specific 
+    #   <p>A description of the reason for the current status, or null if no specific
     #               cause is available.</p>
     #   @return [String]
     # @!attribute last_updated_timestamp
@@ -7268,12 +7581,14 @@ module Aws::SESv2
     end
 
     # <p>An object that contains information about an email address that is on the suppression
-    #             list for your account.</p>
+    #             list for your account or for a specific tenant.</p>
     # @!attribute email_address
-    #   <p>The email address that is on the suppression list for your account.</p>
+    #   <p>The email address that is on the suppression list for your account or for a specific
+    #               tenant.</p>
     #   @return [String]
     # @!attribute reason
-    #   <p>The reason that the address was added to the suppression list for your account.</p>
+    #   <p>The reason that the address was added to the suppression list for your account or for
+    #               a specific tenant.</p>
     #   @return [String]
     # @!attribute last_update_time
     #   <p>The date and time when the suppressed destination was last updated, shown in Unix time
@@ -7281,28 +7596,34 @@ module Aws::SESv2
     #   @return [Time]
     # @!attribute attributes
     #   <p>An optional value that can contain additional information about the reasons that the
-    #               address was added to the suppression list for your account.</p>
+    #               address was added to the suppression list for your account or for a specific
+    #               tenant.</p>
     #   @return [Types::SuppressedDestinationAttributes]
+    # @!attribute tenant_name
+    #   <p>The name of the tenant that the suppressed destination belongs to. This field is
+    #               present only when the suppressed destination is on a tenant's suppression list.</p>
+    #   @return [String]
     class SuppressedDestination < Struct.new(
       nil,
       :email_address,
       :reason,
       :last_update_time,
       :attributes,
+      :tenant_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains additional attributes that are related an email address that
-    #             is on the suppression list for your account.</p>
+    #             is on the suppression list for your account or for a specific tenant.</p>
     # @!attribute message_id
     #   <p>The unique identifier of the email message that caused the email address to be added
-    #               to the suppression list for your account.</p>
+    #               to the suppression list for your account or for a specific tenant.</p>
     #   @return [String]
     # @!attribute feedback_id
     #   <p>A unique identifier that's generated when an email address is added to the suppression
-    #               list for your account.</p>
+    #               list for your account or for a specific tenant.</p>
     #   @return [String]
     class SuppressedDestinationAttributes < Struct.new(
       nil,
@@ -7315,10 +7636,12 @@ module Aws::SESv2
 
     # <p>A summary that describes the suppressed email address.</p>
     # @!attribute email_address
-    #   <p>The email address that's on the suppression list for your account.</p>
+    #   <p>The email address that's on the suppression list for your account or for a specific
+    #               tenant.</p>
     #   @return [String]
     # @!attribute reason
-    #   <p>The reason that the address was added to the suppression list for your account.</p>
+    #   <p>The reason that the address was added to the suppression list for your account or for
+    #               a specific tenant.</p>
     #   @return [String]
     # @!attribute last_update_time
     #   <p>The date and time when the suppressed destination was last updated, shown in Unix time
@@ -7355,9 +7678,44 @@ module Aws::SESv2
     #               </li>
     #            </ul>
     #   @return [Array<String>]
+    # @!attribute validation_attributes
+    #   <p>Structure containing validation attributes used for suppressing sending to specific destination on account level.</p>
+    #   @return [Types::SuppressionValidationAttributes]
     class SuppressionAttributes < Struct.new(
       nil,
       :suppressed_reasons,
+      :validation_attributes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains Auto Validation settings, allowing you to suppress sending to specific destination(s)
+    #             if they do not meet required threshold. For details on Auto Validation, see <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/email-validation.html">Auto Validation</a>.</p>
+    # @!attribute condition_threshold_enabled
+    #   <p>Indicates whether Auto Validation is enabled for suppression. Set to <code>ENABLED</code>
+    #               to enable the Auto Validation feature, or set to <code>DISABLED</code> to disable
+    #               it.</p>
+    #   @return [String]
+    # @!attribute overall_confidence_threshold
+    #   <p>The overall confidence threshold used to determine suppression decisions.</p>
+    #   @return [Types::SuppressionConfidenceThreshold]
+    class SuppressionConditionThreshold < Struct.new(
+      nil,
+      :condition_threshold_enabled,
+      :overall_confidence_threshold,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the confidence threshold settings for Auto Validation.</p>
+    # @!attribute confidence_verdict_threshold
+    #   <p>The confidence level threshold for suppression decisions.</p>
+    #   @return [String]
+    class SuppressionConfidenceThreshold < Struct.new(
+      nil,
+      :confidence_verdict_threshold,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7385,29 +7743,73 @@ module Aws::SESv2
     end
 
     # <p>An object that contains information about the suppression list preferences for your
-    #             account.</p>
+    #             account or for a specific tenant.</p>
     # @!attribute suppressed_reasons
     #   <p>A list that contains the reasons that email addresses are automatically added to the
-    #               suppression list for your account. This list can contain any or all of the
+    #               suppression list for your account or for a specific tenant. This list can contain any or all of the
     #               following:</p>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression
-    #                       list for your account when a message sent to that address results in a
+    #                       list for your account or for a specific tenant when a message sent to that address results in a
     #                       complaint.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>BOUNCE</code> – Amazon SES adds an email address to the suppression
-    #                       list for your account when a message sent to that address results in a hard
+    #                       list for your account or for a specific tenant when a message sent to that address results in a hard
     #                       bounce.</p>
     #               </li>
     #            </ul>
     #   @return [Array<String>]
+    # @!attribute suppression_scope
+    #   <p>The suppression scope for the configuration set. This overrides the tenant or account
+    #               suppression scope for emails sent using this configuration set. Can be one of the
+    #               following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>TENANT</code> – Use the tenant's suppression list.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ACCOUNT</code> – Use the account-level suppression list.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute validation_options
+    #   <p>Contains validation options for email address suppression.</p>
+    #   @return [Types::SuppressionValidationOptions]
     class SuppressionOptions < Struct.new(
       nil,
       :suppressed_reasons,
+      :suppression_scope,
+      :validation_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Structure containing validation attributes used for suppressing sending to specific destination on account level.</p>
+    # @!attribute condition_threshold
+    #   <p>Specifies the condition threshold settings for account-level suppression.</p>
+    #   @return [Types::SuppressionConditionThreshold]
+    class SuppressionValidationAttributes < Struct.new(
+      nil,
+      :condition_threshold,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains validation options for email address suppression.</p>
+    # @!attribute condition_threshold
+    #   <p>Specifies the condition threshold settings for suppression validation.</p>
+    #   @return [Types::SuppressionConditionThreshold]
+    class SuppressionValidationOptions < Struct.new(
+      nil,
+      :condition_threshold,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7494,8 +7896,8 @@ module Aws::SESv2
     # <p>An object that defines the email template to use for an email message, and the values
     #             to use for any message variables in that template. An <i>email
     #                 template</i> is a type of message template that contains content that you
-    #             want to reuse in email messages that you send. You can specifiy the email template by providing 
-    #             the name or ARN of an <i>email template</i> 
+    #             want to reuse in email messages that you send. You can specifiy the email template by providing
+    #             the name or ARN of an <i>email template</i>
     #             previously saved in your Amazon SES account or by providing the full template content.</p>
     # @!attribute template_name
     #   <p>The name of the template. You will refer to this name when you send email using the
@@ -7508,8 +7910,8 @@ module Aws::SESv2
     # @!attribute template_content
     #   <p>The content of the template.</p>
     #            <note>
-    #               <p>Amazon SES supports only simple substitions when you send email using the  
-    #                   <code>SendEmail</code> or <code>SendBulkEmail</code> operations and 
+    #               <p>Amazon SES supports only simple substitions when you send email using the
+    #                   <code>SendEmail</code> or <code>SendBulkEmail</code> operations and
     #                   you provide the full template content in the request.</p>
     #            </note>
     #   @return [Types::EmailTemplateContent]
@@ -7554,8 +7956,25 @@ module Aws::SESv2
     #   <p>An array of objects that define the tags (keys and values) associated with the tenant.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute sending_status
-    #   <p>The status of sending capability for the tenant.</p>
+    #   <p>The status of sending capability for the tenant:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED</code> – Sending is allowed for the tenant.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLED</code> – Sending is prevented for the tenant.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>REINSTATED</code> – Sending is allowed even if there are active reputation findings.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
+    # @!attribute suppression_attributes
+    #   <p>An object that contains information about the suppression list preferences for the tenant.</p>
+    #   @return [Types::TenantSuppressionAttributes]
     class Tenant < Struct.new(
       nil,
       :tenant_name,
@@ -7564,6 +7983,7 @@ module Aws::SESv2
       :created_timestamp,
       :tags,
       :sending_status,
+      :suppression_attributes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7582,12 +8002,30 @@ module Aws::SESv2
     # @!attribute created_timestamp
     #   <p>The date and time when the tenant was created.</p>
     #   @return [Time]
+    # @!attribute sending_status
+    #   <p>The status of sending capability for the tenant:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED</code> – Sending is allowed for the tenant.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLED</code> – Sending is prevented for the tenant.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>REINSTATED</code> – Sending is allowed even if there are active reputation findings.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class TenantInfo < Struct.new(
       nil,
       :tenant_name,
       :tenant_id,
       :tenant_arn,
       :created_timestamp,
+      :sending_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7605,6 +8043,49 @@ module Aws::SESv2
       nil,
       :resource_type,
       :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that contains the suppression list preferences for a tenant.</p>
+    # @!attribute suppressed_reasons
+    #   <p>A list that contains the reasons that email addresses are automatically added to the
+    #               suppression list for the tenant. This list can contain any or all of the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression
+    #                       list when a message sent to that address results in a complaint.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>BOUNCE</code> – Amazon SES adds an email address to the suppression
+    #                       list when a message sent to that address results in a hard bounce.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
+    # @!attribute suppression_scope
+    #   <p>The suppression scope for the tenant. Can be one of the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>TENANT</code> – The tenant uses its own suppression list.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ACCOUNT</code> – The tenant uses the account-level suppression list.</p>
+    #               </li>
+    #            </ul>
+    #            <note>
+    #               <p>If you don't specify a suppression scope, the tenant defaults to <code>ACCOUNT</code> scope
+    #                   and uses the account-level suppression list.</p>
+    #            </note>
+    #   @return [String]
+    class TenantSuppressionAttributes < Struct.new(
+      nil,
+      :suppressed_reasons,
+      :suppression_scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7719,6 +8200,77 @@ module Aws::SESv2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An object that overrides, for a single email sending request, the engagement tracking
+    #             settings that would otherwise apply. Use these overrides to turn open tracking or click
+    #             tracking on or off for an individual message, for example to suppress tracking in a
+    #             transactional message that you send from an account or a configuration set that has
+    #             tracking enabled.</p>
+    #          <p>Without an override, engagement tracking is determined by your account-level
+    #             <code>EngagementMetrics</code> setting, which you configure using the
+    #                 <code>PutAccountVdmAttributes</code> operation, by the
+    #                 <code>EngagementMetrics</code> setting of the configuration set that the message
+    #             uses, which you configure using the <code>PutConfigurationSetVdmOptions</code> operation,
+    #             and by whether that configuration set has an event destination whose
+    #                 <code>MatchingEventTypes</code> include the <code>OPEN</code> or <code>CLICK</code>
+    #             event types.</p>
+    #          <p>For more information about tracking open and click events, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/event-publishing.html">Amazon SES
+    #                 Developer Guide</a>.</p>
+    # @!attribute open_tracking_enabled
+    #   <p>Specifies whether Amazon SES tracks when the recipient opens this message. Can be one of the
+    #               following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED</code> – Amazon SES tracks opens for this message, even when
+    #                       your account-level and configuration set settings don't enable open
+    #                       tracking.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLED</code> – Amazon SES doesn't track opens for this message, even
+    #                       when your account-level or configuration set settings enable open tracking. Amazon SES
+    #                       doesn't add the tracking image to the message.</p>
+    #               </li>
+    #            </ul>
+    #            <p>If you don't specify this value, Amazon SES uses the open tracking setting that would
+    #               otherwise apply to the message.</p>
+    #   @return [String]
+    # @!attribute click_tracking_enabled
+    #   <p>Specifies whether Amazon SES tracks when the recipient clicks a link in this message. Can be
+    #               one of the following:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ENABLED</code> – Amazon SES tracks clicks for this message, even when
+    #                       your account-level and configuration set settings don't enable click
+    #                       tracking.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DISABLED</code> – Amazon SES doesn't track clicks for this message, even
+    #                       when your account-level or configuration set settings enable click tracking.
+    #                       Amazon SES doesn't rewrite the links in the message.</p>
+    #               </li>
+    #            </ul>
+    #            <p>If you don't specify this value, Amazon SES uses the click tracking setting that would
+    #               otherwise apply to the message.</p>
+    #            <note>
+    #               <p>Enabling open or click tracking with an override doesn't create an event
+    #                   destination. Amazon SES records the resulting open and click events in VDM, where you can
+    #                   review them using VDM metrics and Message Insights. To also receive these events at
+    #                   a destination that you own, the configuration set that the message uses must have an
+    #                   event destination that publishes open and click events.</p>
+    #            </note>
+    #   @return [String]
+    class TrackingConfigurationOverrides < Struct.new(
+      nil,
+      :open_tracking_enabled,
+      :click_tracking_enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object that defines the tracking options for a configuration set. When you use the
     #             Amazon SES API v2 to send an email, it contains an invisible image that's used to track when
     #             recipients open your email. If your email contains links, those links are changed
@@ -7795,6 +8347,32 @@ module Aws::SESv2
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A request to update the configuration of an existing configuration set.</p>
+    # @!attribute configuration_set_name
+    #   <p>The name of the configuration set to update.</p>
+    #   @return [String]
+    # @!attribute message_security_options
+    #   <p>The security options that apply to the MIME message itself for messages sent with the
+    #               configuration set.</p>
+    #   @return [Types::MessageSecurityOptions]
+    class UpdateConfigurationSetRequest < Struct.new(
+      nil,
+      :configuration_set_name,
+      :message_security_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An HTTP 200 response if the request succeeds, or an error message if the request
+    #             fails.</p>
+    class UpdateConfigurationSetResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -7976,7 +8554,7 @@ module Aws::SESv2
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     #   @return [String]
     # @!attribute reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
+    #   <p>The unique identifier for the reputation entity. For resource-type entities,
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     # @!attribute sending_status
@@ -8019,11 +8597,11 @@ module Aws::SESv2
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     #   @return [String]
     # @!attribute reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
+    #   <p>The unique identifier for the reputation entity. For resource-type entities,
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     #   @return [String]
     # @!attribute reputation_entity_policy
-    #   <p>The Amazon Resource Name (ARN) of the reputation management policy to apply 
+    #   <p>The Amazon Resource Name (ARN) of the reputation management policy to apply
     #               to this entity. This is an Amazon Web Services Amazon SES-managed policy.</p>
     #   @return [String]
     class UpdateReputationEntityPolicyRequest < Struct.new(

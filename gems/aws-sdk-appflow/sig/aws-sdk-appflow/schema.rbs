@@ -44,6 +44,7 @@ module Aws::Appflow
     ClientSecret: StringShape
     ClientToken: StringShape
     ClusterIdentifier: StringShape
+    CodeVerifier: StringShape
     ConflictException: StructureShape
     ConnectionMode: EnumShape
     ConnectorAuthenticationException: StructureShape
@@ -267,6 +268,7 @@ module Aws::Appflow
     PrivateConnectionProvisioningFailureMessage: StringShape
     PrivateConnectionProvisioningState: StructureShape
     PrivateConnectionProvisioningStatus: EnumShape
+    PrivateKey: StringShape
     PrivateLinkServiceName: StringShape
     ProfilePropertiesMap: MapShape
     ProfilePropertyKey: StringShape

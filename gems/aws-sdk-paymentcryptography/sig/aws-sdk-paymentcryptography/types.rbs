@@ -49,6 +49,39 @@ module Aws::PaymentCryptography
       attr_accessor key_arn: String?
     end
 
+    module As2805KeyVariant
+      TERMINAL_MAJOR_KEY_VARIANT_00: String
+      PIN_ENCRYPTION_KEY_VARIANT_28: String
+      MESSAGE_AUTHENTICATION_KEY_VARIANT_24: String
+      DATA_ENCRYPTION_KEY_VARIANT_22: String
+    end
+
+    class AssociateMpaTeamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?mpa_team_arn: String,
+        ?requester_comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor mpa_team_arn: String?
+      attr_accessor requester_comment: String?
+    end
+
+    class AssociateMpaTeamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mpa_team_association: Types::MpaTeamAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mpa_team_association: Types::MpaTeamAssociation?
+    end
+
     class CertificateSubjectType
       include Smithy::Schema::Structure
 
@@ -185,6 +218,26 @@ module Aws::PaymentCryptography
       attr_accessor key: Types::Key?
     end
 
+    class DeleteResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DiffieHellmanDerivationData
       include Smithy::Schema::Union
 
@@ -223,6 +276,30 @@ module Aws::PaymentCryptography
       attr_accessor enabled_replication_regions: Array[String]?
     end
 
+    class DisassociateMpaTeamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?requester_comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor requester_comment: String?
+    end
+
+    class DisassociateMpaTeamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mpa_team_association: Types::MpaTeamAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mpa_team_association: Types::MpaTeamAssociation?
+    end
+
     class EnableDefaultKeyReplicationRegionsInput
       include Smithy::Schema::Structure
 
@@ -243,6 +320,19 @@ module Aws::PaymentCryptography
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enabled_replication_regions: Array[String]?
+    end
+
+    class ExportAs2805KeyCryptogram
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapping_key_identifier: String,
+        ?as2805_key_variant: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapping_key_identifier: String?
+      attr_accessor as2805_key_variant: String?
     end
 
     class ExportAttributes
@@ -332,6 +422,7 @@ module Aws::PaymentCryptography
         ?tr34_key_block: Types::ExportTr34KeyBlock,
         ?key_cryptogram: Types::ExportKeyCryptogram,
         ?diffie_hellman_tr31_key_block: Types::ExportDiffieHellmanTr31KeyBlock,
+        ?as2805_key_cryptogram: Types::ExportAs2805KeyCryptogram,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -339,6 +430,7 @@ module Aws::PaymentCryptography
       attr_accessor tr34_key_block: Types::ExportTr34KeyBlock?
       attr_accessor key_cryptogram: Types::ExportKeyCryptogram?
       attr_accessor diffie_hellman_tr31_key_block: Types::ExportDiffieHellmanTr31KeyBlock?
+      attr_accessor as2805_key_cryptogram: Types::ExportAs2805KeyCryptogram?
 
       class Tr31KeyBlock < ExportKeyMaterial
       end
@@ -347,6 +439,8 @@ module Aws::PaymentCryptography
       class KeyCryptogram < ExportKeyMaterial
       end
       class DiffieHellmanTr31KeyBlock < ExportKeyMaterial
+      end
+      class As2805KeyCryptogram < ExportKeyMaterial
       end
       class Unknown < ExportKeyMaterial
       end
@@ -491,17 +585,41 @@ module Aws::PaymentCryptography
       attr_accessor key: Types::Key?
     end
 
+    class GetMpaTeamAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+    end
+
+    class GetMpaTeamAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mpa_team_association: Types::MpaTeamAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mpa_team_association: Types::MpaTeamAssociation?
+    end
+
     class GetParametersForExportInput
       include Smithy::Schema::Structure
 
       def initialize: (
         ?key_material_type: String,
         ?signing_key_algorithm: String,
+        ?reuse_last_generated_token: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor key_material_type: String?
       attr_accessor signing_key_algorithm: String?
+      attr_accessor reuse_last_generated_token: bool?
     end
 
     class GetParametersForExportOutput
@@ -529,11 +647,13 @@ module Aws::PaymentCryptography
       def initialize: (
         ?key_material_type: String,
         ?wrapping_key_algorithm: String,
+        ?reuse_last_generated_token: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor key_material_type: String?
       attr_accessor wrapping_key_algorithm: String?
+      attr_accessor reuse_last_generated_token: bool?
     end
 
     class GetParametersForImportOutput
@@ -577,6 +697,51 @@ module Aws::PaymentCryptography
 
       attr_accessor key_certificate: String?
       attr_accessor key_certificate_chain: String?
+    end
+
+    class GetResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class ImportAs2805KeyCryptogram
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?as2805_key_variant: String,
+        ?key_modes_of_use: Types::KeyModesOfUse,
+        ?key_algorithm: String,
+        ?exportable: bool,
+        ?wrapping_key_identifier: String,
+        ?wrapped_key_cryptogram: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor as2805_key_variant: String?
+      attr_accessor key_modes_of_use: Types::KeyModesOfUse?
+      attr_accessor key_algorithm: String?
+      attr_accessor exportable: bool?
+      attr_accessor wrapping_key_identifier: String?
+      attr_accessor wrapped_key_cryptogram: String?
     end
 
     class ImportDiffieHellmanTr31KeyBlock
@@ -632,6 +797,7 @@ module Aws::PaymentCryptography
         ?enabled: bool,
         ?tags: Array[Types::Tag],
         ?replication_regions: Array[String],
+        ?requester_comment: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -640,6 +806,7 @@ module Aws::PaymentCryptography
       attr_accessor enabled: bool?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor replication_regions: Array[String]?
+      attr_accessor requester_comment: String?
     end
 
     class ImportKeyMaterial
@@ -652,6 +819,7 @@ module Aws::PaymentCryptography
         ?tr34_key_block: Types::ImportTr34KeyBlock,
         ?key_cryptogram: Types::ImportKeyCryptogram,
         ?diffie_hellman_tr31_key_block: Types::ImportDiffieHellmanTr31KeyBlock,
+        ?as2805_key_cryptogram: Types::ImportAs2805KeyCryptogram,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -661,6 +829,7 @@ module Aws::PaymentCryptography
       attr_accessor tr34_key_block: Types::ImportTr34KeyBlock?
       attr_accessor key_cryptogram: Types::ImportKeyCryptogram?
       attr_accessor diffie_hellman_tr31_key_block: Types::ImportDiffieHellmanTr31KeyBlock?
+      attr_accessor as2805_key_cryptogram: Types::ImportAs2805KeyCryptogram?
 
       class RootCertificatePublicKey < ImportKeyMaterial
       end
@@ -673,6 +842,8 @@ module Aws::PaymentCryptography
       class KeyCryptogram < ImportKeyMaterial
       end
       class DiffieHellmanTr31KeyBlock < ImportKeyMaterial
+      end
+      class As2805KeyCryptogram < ImportKeyMaterial
       end
       class Unknown < ImportKeyMaterial
       end
@@ -760,6 +931,7 @@ module Aws::PaymentCryptography
         ?primary_region: String,
         ?replication_status: Hash[String, Types::ReplicationStatusType],
         ?using_default_replication_regions: bool,
+        ?mpa_status: Types::MpaStatus,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -781,6 +953,7 @@ module Aws::PaymentCryptography
       attr_accessor primary_region: String?
       attr_accessor replication_status: Hash[String, Types::ReplicationStatusType]?
       attr_accessor using_default_replication_regions: bool?
+      attr_accessor mpa_status: Types::MpaStatus?
     end
 
     class KeyAttributes
@@ -962,6 +1135,77 @@ module Aws::PaymentCryptography
 
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor next_token: String?
+    end
+
+    class MpaStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mpa_session_arn: String,
+        ?status: String,
+        ?initiation_date: Time,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mpa_session_arn: String?
+      attr_accessor status: String?
+      attr_accessor initiation_date: Time?
+      attr_accessor status_message: String?
+    end
+
+    class MpaTeamAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?mpa_team_arn: String,
+        ?association_state: String,
+        ?mpa_status: Types::MpaStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor mpa_team_arn: String?
+      attr_accessor association_state: String?
+      attr_accessor mpa_status: Types::MpaStatus?
+    end
+
+    class PublicPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
     end
 
     class RemoveKeyReplicationRegionsInput

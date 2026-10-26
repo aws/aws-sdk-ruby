@@ -144,18 +144,18 @@ module Aws::EMR
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -459,6 +459,12 @@ module Aws::EMR
     #           jar: "XmlString", # required
     #           main_class: "XmlString",
     #           args: ["XmlString"]
+    #         },
+    #         step_monitoring_configuration: {
+    #           s3_monitoring_configuration: {
+    #             log_uri: "XmlString",
+    #             encryption_key_arn: "XmlString"
+    #           }
     #         }
     #       }
     #     ],
@@ -490,6 +496,8 @@ module Aws::EMR
     #   <p>A list of tags to associate with a resource. Tags are user-defined key-value pairs that
     #            consist of a required key string with a maximum of 128 characters, and an optional value
     #            string with a maximum of 256 characters.</p>
+    # @option params [String] :cluster_id
+    #   <p>The ID of the cluster that scopes the tag operation. Required when the resource being tagged is a session-scoped resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_id: "ResourceId", # required
@@ -498,7 +506,8 @@ module Aws::EMR
     #         key: "String",
     #         value: "String"
     #       }
-    #     ]
+    #     ],
+    #     cluster_id: "ClusterId"
     #   }
     #   options = {}
     #   response = client.add_tags(params, options)
@@ -956,7 +965,24 @@ module Aws::EMR
     #       os_release_label: "String",
     #       ebs_root_volume_iops: 1,
     #       ebs_root_volume_throughput: 1,
-    #       extended_support: false
+    #       extended_support: false,
+    #       monitoring_configuration: {
+    #         cloud_watch_log_configuration: {
+    #           enabled: false, # required
+    #           log_group_name: "XmlString",
+    #           log_stream_name_prefix: "XmlString",
+    #           encryption_key_arn: "XmlString",
+    #           log_types: {
+    #             "XmlString" => ["XmlString"]
+    #           }
+    #         },
+    #         s3_logging_configuration: {
+    #           log_type_upload_policy: {
+    #             "LogType" => "emr-managed" # One of: ["emr-managed", "on-customer-s3only", "disabled"]
+    #           }
+    #         }
+    #       },
+    #       session_enabled: false
     #     }
     #   }
     # @return [Types::DescribeClusterOutput]
@@ -1074,6 +1100,12 @@ module Aws::EMR
     #                 jar: "XmlString", # required
     #                 main_class: "XmlString",
     #                 args: ["XmlString"]
+    #               },
+    #               step_monitoring_configuration: {
+    #                 s3_monitoring_configuration: {
+    #                   log_uri: "XmlString",
+    #                   encryption_key_arn: "XmlString"
+    #                 }
     #               }
     #             },
     #             execution_status_detail: { # required
@@ -1314,7 +1346,9 @@ module Aws::EMR
     #           end_date_time: Time.now
     #         }
     #       },
-    #       execution_role_arn: "OptionalArnType"
+    #       execution_role_arn: "OptionalArnType",
+    #       log_uri: "String",
+    #       encryption_key_arn: "String"
     #     }
     #   }
     # @return [Types::DescribeStepOutput]
@@ -1522,7 +1556,7 @@ module Aws::EMR
     # @option params [Boolean] :dry_run
     #   <p>Determines if the user interface presigned URL is for a dry run.</p>
     # @option params [String] :execution_role_arn
-    #   <p>The execution role ARN associated with the cluster's application user interface 
+    #   <p>The execution role ARN associated with the cluster's application user interface
     #            presigned URL.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1577,6 +1611,120 @@ module Aws::EMR
     # @return [Types::GetPersistentAppUIPresignedURLOutput]
     def get_persistent_app_ui_presigned_url(params = {}, options = {})
       request = build_request(:get_persistent_app_ui_presigned_url, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns detailed information about a session.</p>
+    # @param [Hash, Types::GetSessionInput] params
+    # @option params [String] :cluster_id
+    #   <p>The ID of the cluster that the session belongs to.</p>
+    # @option params [String] :session_id
+    #   <p>The ID of the session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cluster_id: "ClusterId", # required
+    #     session_id: "SessionId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_session(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     session: { # required
+    #       id: "SessionId", # required
+    #       cluster_id: "ClusterId", # required
+    #       name: "XmlStringMaxLen256",
+    #       arn: "ArnType", # required
+    #       state: "SUBMITTED" # One of: ["SUBMITTED", "STARTING", "STARTED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "FAILED"], # required
+    #       state_change_reason: "XmlString",
+    #       release_label: "XmlStringMaxLen256",
+    #       execution_role_arn: "IAMRoleArn",
+    #       account_id: "XmlStringMaxLen256",
+    #       created_at: Time.now,
+    #       updated_at: Time.now,
+    #       started_at: Time.now,
+    #       ended_at: Time.now,
+    #       idle_since: Time.now,
+    #       engine_configurations: [
+    #         {
+    #           classification: "String",
+    #           configurations: {
+    #             # recursive ConfigurationList
+    #           },
+    #           properties: {
+    #             "String" => "String"
+    #           }
+    #         }
+    #       ],
+    #       monitoring_configuration: {
+    #         cloud_watch_logging_configuration: {
+    #           enabled: false,
+    #           log_group: "XmlString",
+    #           log_stream_name_prefix: "XmlString",
+    #           encryption_key_arn: "XmlString",
+    #           log_types: {
+    #             "XmlString" => ["XmlString"]
+    #           }
+    #         },
+    #         managed_logging_configuration: {
+    #           enabled: false,
+    #           encryption_key_arn: "XmlString"
+    #         },
+    #         s3_logging_configuration: {
+    #           enabled: false,
+    #           log_uri: "XmlString",
+    #           encryption_key_arn: "XmlString",
+    #           log_types: {
+    #             "XmlString" => ["XmlString"]
+    #           }
+    #         }
+    #       },
+    #       session_idle_timeout_in_minutes: 1,
+    #       server_url: "XmlString",
+    #       tags: [
+    #         {
+    #           key: "String",
+    #           value: "String"
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetSessionOutput]
+    def get_session(params = {}, options = {})
+      request = build_request(:get_session, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the Spark Connect endpoint URL and a time-limited authentication token for the specified session. Use the endpoint and token to connect a PySpark client to the session. Call this operation again when the token expires to obtain a new one.</p>
+    # @param [Hash, Types::GetSessionEndpointInput] params
+    # @option params [String] :cluster_id
+    #   <p>The ID of the cluster that the session belongs to.</p>
+    # @option params [String] :session_id
+    #   <p>The ID of the session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cluster_id: "ClusterId", # required
+    #     session_id: "SessionId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_session_endpoint(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     endpoint: "XmlString", # required
+    #     auth_token: "SensitiveString",
+    #     auth_token_expiration_time: Time.now,
+    #     credentials: {
+    #       # One of:
+    #       username_password: {
+    #         username: "XmlStringMaxLen256",
+    #         password: "XmlStringMaxLen256"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetSessionEndpointOutput]
+    def get_session_endpoint(params = {}, options = {})
+      request = build_request(:get_session_endpoint, params)
       request.send_request(options)
     end
 
@@ -1747,7 +1895,7 @@ module Aws::EMR
     #         id: "InstanceFleetId",
     #         name: "XmlStringMaxLen256",
     #         status: {
-    #           state: "PROVISIONING" # One of: ["PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED"],
+    #           state: "PROVISIONING" # One of: ["PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RESIZING", "RECONFIGURING", "SUSPENDED", "TERMINATING", "TERMINATED"],
     #           state_change_reason: {
     #             code: "INTERNAL_ERROR" # One of: ["INTERNAL_ERROR", "VALIDATION_ERROR", "INSTANCE_FAILURE", "CLUSTER_TERMINATED"],
     #             message: "String"
@@ -2230,6 +2378,96 @@ module Aws::EMR
       request.send_request(options)
     end
 
+    # <p>Lists the sessions on a cluster. You can filter the results by session state. Newer sessions are returned first.</p>
+    # @param [Hash, Types::ListSessionsInput] params
+    # @option params [String] :cluster_id
+    #   <p>The ID of the cluster to list sessions for.</p>
+    # @option params [Array<String>] :session_states
+    #   <p>An optional filter that limits the results to sessions in the specified states.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token returned by a previous <code>ListSessions</code> call. Use it to retrieve the next page of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of sessions to return in each page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cluster_id: "ClusterId", # required
+    #     session_states: ["SUBMITTED" # One of: ["SUBMITTED", "STARTING", "STARTED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "FAILED"]],
+    #     next_token: "String",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_sessions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     sessions: [
+    #       {
+    #         id: "SessionId", # required
+    #         cluster_id: "ClusterId", # required
+    #         name: "XmlStringMaxLen256",
+    #         arn: "ArnType", # required
+    #         state: "SUBMITTED" # One of: ["SUBMITTED", "STARTING", "STARTED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "FAILED"], # required
+    #         state_change_reason: "XmlString",
+    #         release_label: "XmlStringMaxLen256",
+    #         execution_role_arn: "IAMRoleArn",
+    #         account_id: "XmlStringMaxLen256",
+    #         created_at: Time.now,
+    #         updated_at: Time.now,
+    #         started_at: Time.now,
+    #         ended_at: Time.now,
+    #         idle_since: Time.now,
+    #         engine_configurations: [
+    #           {
+    #             classification: "String",
+    #             configurations: {
+    #               # recursive ConfigurationList
+    #             },
+    #             properties: {
+    #               "String" => "String"
+    #             }
+    #           }
+    #         ],
+    #         monitoring_configuration: {
+    #           cloud_watch_logging_configuration: {
+    #             enabled: false,
+    #             log_group: "XmlString",
+    #             log_stream_name_prefix: "XmlString",
+    #             encryption_key_arn: "XmlString",
+    #             log_types: {
+    #               "XmlString" => ["XmlString"]
+    #             }
+    #           },
+    #           managed_logging_configuration: {
+    #             enabled: false,
+    #             encryption_key_arn: "XmlString"
+    #           },
+    #           s3_logging_configuration: {
+    #             enabled: false,
+    #             log_uri: "XmlString",
+    #             encryption_key_arn: "XmlString",
+    #             log_types: {
+    #               "XmlString" => ["XmlString"]
+    #             }
+    #           }
+    #         },
+    #         session_idle_timeout_in_minutes: 1,
+    #         server_url: "XmlString",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListSessionsOutput]
+    def list_sessions(params = {}, options = {})
+      request = build_request(:list_sessions, params)
+      request.send_request(options)
+    end
+
     # <p>Provides a list of steps for the cluster in reverse order unless you specify
     #             <code>stepIds</code> with the request or filter by <code>StepStates</code>. You can
     #          specify a maximum of 10 <code>stepIDs</code>. The CLI automatically
@@ -2291,7 +2529,9 @@ module Aws::EMR
     #             start_date_time: Time.now,
     #             end_date_time: Time.now
     #           }
-    #         }
+    #         },
+    #         log_uri: "String",
+    #         encryption_key_arn: "String"
     #       }
     #     ],
     #     marker: "Marker"
@@ -2904,10 +3144,13 @@ module Aws::EMR
     #            a cluster identifier or an Amazon EMR Studio ID.</p>
     # @option params [Array<String>] :tag_keys
     #   <p>A list of tag keys to remove from the resource.</p>
+    # @option params [String] :cluster_id
+    #   <p>The ID of the cluster that scopes the tag operation. Required when the resource being untagged is a session-scoped resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["String"], # required
+    #     cluster_id: "ClusterId"
     #   }
     #   options = {}
     #   response = client.remove_tags(params, options)
@@ -2969,6 +3212,15 @@ module Aws::EMR
     #   <p>A specification of the number and type of Amazon EC2 instances.</p>
     # @option params [Array<Types::StepConfig>] :steps
     #   <p>A list of steps to run.</p>
+    # @option params [String] :step_execution_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the runtime role for steps specified in the
+    #            RunJobFlow request. The runtime role can be a cross-account IAM role.
+    #            The runtime role ARN is a combination of account ID, role name, and role type using the
+    #            following format: <code>arn:partition:iam::account-id:role/role-name</code>.</p>
+    #            <p>For example, <code>arn:aws:iam::1234567890:role/ReadOnly</code> is a correctly formatted
+    #            runtime role ARN.</p>
+    #            <p>This parameter applies only to steps included in the <code>Steps</code> parameter of this
+    #            RunJobFlow request. It does not apply to steps added later to the cluster.</p>
     # @option params [Array<Types::BootstrapActionConfig>] :bootstrap_actions
     #   <p>A list of bootstrap actions to run before Hadoop starts on the cluster nodes.</p>
     # @option params [Array<String>] :supported_products
@@ -3125,6 +3377,10 @@ module Aws::EMR
     #               later.</p>
     # @option params [Boolean] :extended_support
     #   <p>Reserved.</p>
+    # @option params [Types::MonitoringConfiguration] :monitoring_configuration
+    #   <p>Contains CloudWatch log configuration metadata and settings.</p>
+    # @option params [Boolean] :session_enabled
+    #   <p>Indicates whether Spark Connect sessions are enabled on the cluster. When set to <code>true</code>, you can start Spark Connect sessions using the <code>StartSession</code> operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "XmlStringMaxLen256", # required
@@ -3317,9 +3573,16 @@ module Aws::EMR
     #           jar: "XmlString", # required
     #           main_class: "XmlString",
     #           args: ["XmlString"]
+    #         },
+    #         step_monitoring_configuration: {
+    #           s3_monitoring_configuration: {
+    #             log_uri: "XmlString",
+    #             encryption_key_arn: "XmlString"
+    #           }
     #         }
     #       }
     #     ],
+    #     step_execution_role_arn: "ArnType",
     #     bootstrap_actions: [
     #       {
     #         name: "XmlStringMaxLen256", # required
@@ -3403,7 +3666,24 @@ module Aws::EMR
     #     os_release_label: "XmlStringMaxLen256",
     #     ebs_root_volume_iops: 1,
     #     ebs_root_volume_throughput: 1,
-    #     extended_support: false
+    #     extended_support: false,
+    #     monitoring_configuration: {
+    #       cloud_watch_log_configuration: {
+    #         enabled: false, # required
+    #         log_group_name: "XmlString",
+    #         log_stream_name_prefix: "XmlString",
+    #         encryption_key_arn: "XmlString",
+    #         log_types: {
+    #           "XmlString" => ["XmlString"]
+    #         }
+    #       },
+    #       s3_logging_configuration: {
+    #         log_type_upload_policy: {
+    #           "LogType" => "emr-managed" # One of: ["emr-managed", "on-customer-s3only", "disabled"]
+    #         }
+    #       }
+    #     },
+    #     session_enabled: false
     #   }
     #   options = {}
     #   response = client.run_job_flow(params, options)
@@ -3419,14 +3699,14 @@ module Aws::EMR
       request.send_request(options)
     end
 
-    # <p>You can use the <code>SetKeepJobFlowAliveWhenNoSteps</code> to configure a cluster (job flow) to terminate after the step execution, i.e., all your 
-    #          steps are executed. If you want a transient cluster that shuts down after the last of the current executing steps are completed, 
+    # <p>You can use the <code>SetKeepJobFlowAliveWhenNoSteps</code> to configure a cluster (job flow) to terminate after the step execution, i.e., all your
+    #          steps are executed. If you want a transient cluster that shuts down after the last of the current executing steps are completed,
     #          you can configure <code>SetKeepJobFlowAliveWhenNoSteps</code> to false. If you want a long running cluster, configure <code>SetKeepJobFlowAliveWhenNoSteps</code> to true.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html">Managing Cluster Termination</a> in the <i>Amazon EMR Management Guide</i>.</p>
     # @param [Hash, Types::SetKeepJobFlowAliveWhenNoStepsInput] params
     # @option params [Array<String>] :job_flow_ids
-    #   <p>A list of strings that uniquely identify the clusters to protect. This identifier is returned by 
-    #            <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html">RunJobFlow</a> and can also 
+    #   <p>A list of strings that uniquely identify the clusters to protect. This identifier is returned by
+    #            <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html">RunJobFlow</a> and can also
     #            be obtained from <a href="https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html">DescribeJobFlows</a>.</p>
     # @option params [Boolean] :keep_job_flow_alive_when_no_steps
     #   <p>A Boolean that indicates whether to terminate the cluster after all steps are executed.</p>
@@ -3486,22 +3766,22 @@ module Aws::EMR
       request.send_request(options)
     end
 
-    # <p>Specify whether to enable unhealthy node replacement, which lets Amazon EMR gracefully 
-    #          replace core nodes on a cluster if any nodes become unhealthy. For example, a node becomes 
-    #          unhealthy if disk usage is above 90%. If unhealthy node replacement is on and <code>TerminationProtected</code> are off, 
-    #          Amazon EMR immediately terminates the unhealthy core nodes. To use unhealthy node replacement 
+    # <p>Specify whether to enable unhealthy node replacement, which lets Amazon EMR gracefully
+    #          replace core nodes on a cluster if any nodes become unhealthy. For example, a node becomes
+    #          unhealthy if disk usage is above 90%. If unhealthy node replacement is on and <code>TerminationProtected</code> are off,
+    #          Amazon EMR immediately terminates the unhealthy core nodes. To use unhealthy node replacement
     #          and retain unhealthy core nodes, use  to turn on
-    #          termination protection. In such cases, Amazon EMR adds 
+    #          termination protection. In such cases, Amazon EMR adds
     #          the unhealthy nodes to a denylist, reducing job interruptions and failures.</p>
-    #          <p>If unhealthy node replacement is on, Amazon EMR 
-    #          notifies YARN and other applications on the cluster to stop scheduling tasks 
+    #          <p>If unhealthy node replacement is on, Amazon EMR
+    #          notifies YARN and other applications on the cluster to stop scheduling tasks
     #          with these nodes, moves the data, and then terminates the nodes.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html">graceful 
+    #          <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html">graceful
     #          node replacement</a> in the <i>Amazon EMR Management Guide</i>.</p>
     # @param [Hash, Types::SetUnhealthyNodeReplacementInput] params
     # @option params [Array<String>] :job_flow_ids
-    #   <p>The list of strings that uniquely identify the clusters for which to turn on 
-    #            unhealthy node replacement. You can get these identifiers by running the 
+    #   <p>The list of strings that uniquely identify the clusters for which to turn on
+    #            unhealthy node replacement. You can get these identifiers by running the
     #            <a>RunJobFlow</a> or the <a>DescribeJobFlows</a> operations.</p>
     # @option params [Boolean] :unhealthy_node_replacement
     #   <p>Indicates whether to turn on or turn off graceful unhealthy node replacement.</p>
@@ -3645,6 +3925,89 @@ module Aws::EMR
       request.send_request(options)
     end
 
+    # <p>Creates and starts a new Spark Connect session on the specified cluster. The cluster must be in the <code>RUNNING</code> or <code>WAITING</code> state and have sessions enabled. This operation is supported in Amazon EMR Spark 8.0.0 and later.</p>
+    # @param [Hash, Types::StartSessionInput] params
+    # @option params [String] :name
+    #   <p>An optional name for the session.</p>
+    # @option params [String] :cluster_id
+    #   <p>The ID of the cluster on which to start the session.</p>
+    # @option params [String] :execution_role_arn
+    #   <p>The execution role ARN for the session. Amazon EMR uses this role to access Amazon Web Services resources on your behalf during session execution.</p>
+    # @option params [Array<Types::Configuration>] :engine_configurations
+    #   <p>The configuration overrides for the session. Only runtime configuration overrides are supported.</p>
+    # @option params [Types::SessionMonitoringConfiguration] :monitoring_configuration
+    #   <p>The monitoring configuration that controls where session logs are published, such as Amazon S3, CloudWatch, or managed logging.</p>
+    # @option params [Integer] :session_idle_timeout_in_minutes
+    #   <p>The idle timeout, in minutes. If the session is idle for this duration, Amazon EMR EC2 automatically terminates it.</p>
+    # @option params [String] :client_request_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client request token, the service returns the original response without performing the operation again.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>The tags to assign to the session.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "XmlStringMaxLen256",
+    #     cluster_id: "ClusterId", # required
+    #     execution_role_arn: "IAMRoleArn",
+    #     engine_configurations: [
+    #       {
+    #         classification: "String",
+    #         configurations: {
+    #           # recursive ConfigurationList
+    #         },
+    #         properties: {
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
+    #     monitoring_configuration: {
+    #       cloud_watch_logging_configuration: {
+    #         enabled: false,
+    #         log_group: "XmlString",
+    #         log_stream_name_prefix: "XmlString",
+    #         encryption_key_arn: "XmlString",
+    #         log_types: {
+    #           "XmlString" => ["XmlString"]
+    #         }
+    #       },
+    #       managed_logging_configuration: {
+    #         enabled: false,
+    #         encryption_key_arn: "XmlString"
+    #       },
+    #       s3_logging_configuration: {
+    #         enabled: false,
+    #         log_uri: "XmlString",
+    #         encryption_key_arn: "XmlString",
+    #         log_types: {
+    #           "XmlString" => ["XmlString"]
+    #         }
+    #       }
+    #     },
+    #     session_idle_timeout_in_minutes: 1,
+    #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.start_session(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "SessionId", # required
+    #     cluster_id: "ClusterId",
+    #     arn: "ArnType",
+    #     account_id: "XmlStringMaxLen256",
+    #     state: "SUBMITTED" # One of: ["SUBMITTED", "STARTING", "STARTED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "FAILED"]
+    #   }
+    # @return [Types::StartSessionOutput]
+    def start_session(params = {}, options = {})
+      request = build_request(:start_session, params)
+      request.send_request(options)
+    end
+
     # <p>Stops a notebook execution.</p>
     # @param [Hash, Types::StopNotebookExecutionInput] params
     # @option params [String] :notebook_execution_id
@@ -3686,6 +4049,32 @@ module Aws::EMR
     # @return [Smithy::Schema::EmptyStructure]
     def terminate_job_flows(params = {}, options = {})
       request = build_request(:terminate_job_flows, params)
+      request.send_request(options)
+    end
+
+    # <p>Terminates an active session. After you call this operation, the session enters the <code>TERMINATING</code> state and then transitions to <code>TERMINATED</code>.</p>
+    # @param [Hash, Types::TerminateSessionInput] params
+    # @option params [String] :cluster_id
+    #   <p>The ID of the cluster that the session belongs to.</p>
+    # @option params [String] :session_id
+    #   <p>The ID of the session to terminate.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cluster_id: "ClusterId", # required
+    #     session_id: "SessionId", # required
+    #   }
+    #   options = {}
+    #   response = client.terminate_session(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     cluster_id: "ClusterId", # required
+    #     session_id: "SessionId", # required
+    #     state: "SUBMITTED" # One of: ["SUBMITTED", "STARTING", "STARTED", "IDLE", "BUSY", "TERMINATING", "TERMINATED", "FAILED"], # required
+    #   }
+    # @return [Types::TerminateSessionOutput]
+    def terminate_session(params = {}, options = {})
+      request = build_request(:terminate_session, params)
       request.send_request(options)
     end
 

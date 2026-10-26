@@ -22,10 +22,12 @@ module Aws::Notifications
     AssociateManagedNotificationAdditionalChannelResponse: StructureShape
     AssociateOrganizationalUnitRequest: StructureShape
     AssociateOrganizationalUnitResponse: StructureShape
+    AttachmentContentType: StringShape
+    AttachmentDisplayName: StringShape
     ChannelArn: StringShape
     ChannelAssociationOverrideOption: StringShape
     ChannelIdentifier: StringShape
-    ChannelType: StringShape
+    ChannelType: EnumShape
     Channels: ListShape
     ConflictException: StructureShape
     CreateEventRuleRequest: StructureShape
@@ -106,6 +108,7 @@ module Aws::Notifications
     LocaleCode: StringShape
     ManagedNotificationChannelAssociationSummary: StructureShape
     ManagedNotificationChannelAssociations: ListShape
+    ManagedNotificationChannelIdentifier: StringShape
     ManagedNotificationChildEvent: StructureShape
     ManagedNotificationChildEventArn: StringShape
     ManagedNotificationChildEventOverview: StructureShape
@@ -142,6 +145,8 @@ module Aws::Notifications
     NotificationConfigurationSubtype: StringShape
     NotificationConfigurations: ListShape
     NotificationEventArn: StringShape
+    NotificationEventAttachment: StructureShape
+    NotificationEventAttachmentList: ListShape
     NotificationEventId: StringShape
     NotificationEventOverview: StructureShape
     NotificationEventSchema: StructureShape
@@ -168,6 +173,7 @@ module Aws::Notifications
     Resources: ListShape
     SampleAggregationDimensionValues: ListShape
     SchemaVersion: StringShape
+    SensitiveUrl: StringShape
     ServiceCode: StringShape
     ServiceQuotaExceededException: StructureShape
     Source: StringShape
@@ -196,6 +202,8 @@ module Aws::Notifications
     UntagResourceResponse: StructureShape
     UpdateEventRuleRequest: StructureShape
     UpdateEventRuleResponse: StructureShape
+    UpdateManagedNotificationChannelAssociationRequest: StructureShape
+    UpdateManagedNotificationChannelAssociationResponse: StructureShape
     UpdateNotificationConfigurationRequest: StructureShape
     UpdateNotificationConfigurationResponse: StructureShape
     Url: StringShape

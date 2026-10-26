@@ -12,6 +12,10 @@ module Aws::WAFV2
     class WAFExpiredManagedRuleGroupVersionException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class WAFFeatureNotIncludedInPricingPlanException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def disallowed_features: () -> Array[Types::DisallowedFeature]?
+    end
     class WAFInternalErrorException < Smithy::Client::ServiceError
       def message: () -> String?
     end

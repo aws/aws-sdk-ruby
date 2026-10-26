@@ -71,6 +71,11 @@ module Aws::TaxSettings
         ?egypt_additional_info: Types::EgyptAdditionalInfo,
         ?greece_additional_info: Types::GreeceAdditionalInfo,
         ?uzbekistan_additional_info: Types::UzbekistanAdditionalInfo,
+        ?philippines_additional_info: Types::PhilippinesAdditionalInfo,
+        ?belgium_additional_info: Types::BelgiumAdditionalInfo,
+        ?chile_additional_info: Types::ChileAdditionalInfo,
+        ?france_additional_info: Types::FranceAdditionalInfo,
+        ?monaco_additional_info: Types::MonacoAdditionalInfo,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -93,6 +98,11 @@ module Aws::TaxSettings
       attr_accessor egypt_additional_info: Types::EgyptAdditionalInfo?
       attr_accessor greece_additional_info: Types::GreeceAdditionalInfo?
       attr_accessor uzbekistan_additional_info: Types::UzbekistanAdditionalInfo?
+      attr_accessor philippines_additional_info: Types::PhilippinesAdditionalInfo?
+      attr_accessor belgium_additional_info: Types::BelgiumAdditionalInfo?
+      attr_accessor chile_additional_info: Types::ChileAdditionalInfo?
+      attr_accessor france_additional_info: Types::FranceAdditionalInfo?
+      attr_accessor monaco_additional_info: Types::MonacoAdditionalInfo?
     end
 
     class AdditionalInfoResponse
@@ -120,6 +130,11 @@ module Aws::TaxSettings
         ?egypt_additional_info: Types::EgyptAdditionalInfo,
         ?greece_additional_info: Types::GreeceAdditionalInfo,
         ?uzbekistan_additional_info: Types::UzbekistanAdditionalInfo,
+        ?philippines_additional_info: Types::PhilippinesAdditionalInfo,
+        ?belgium_additional_info: Types::BelgiumAdditionalInfo,
+        ?chile_additional_info: Types::ChileAdditionalInfo,
+        ?france_additional_info: Types::FranceAdditionalInfo,
+        ?monaco_additional_info: Types::MonacoAdditionalInfo,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -144,6 +159,11 @@ module Aws::TaxSettings
       attr_accessor egypt_additional_info: Types::EgyptAdditionalInfo?
       attr_accessor greece_additional_info: Types::GreeceAdditionalInfo?
       attr_accessor uzbekistan_additional_info: Types::UzbekistanAdditionalInfo?
+      attr_accessor philippines_additional_info: Types::PhilippinesAdditionalInfo?
+      attr_accessor belgium_additional_info: Types::BelgiumAdditionalInfo?
+      attr_accessor chile_additional_info: Types::ChileAdditionalInfo?
+      attr_accessor france_additional_info: Types::FranceAdditionalInfo?
+      attr_accessor monaco_additional_info: Types::MonacoAdditionalInfo?
     end
 
     class Address
@@ -303,6 +323,19 @@ module Aws::TaxSettings
       attr_accessor errors: Array[Types::BatchPutTaxRegistrationError]?
     end
 
+    class BelgiumAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?peppol_id: String,
+        ?is_mercurius_box_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor peppol_id: String?
+      attr_accessor is_mercurius_box_enabled: bool?
+    end
+
     class BrazilAdditionalInfo
       include Smithy::Schema::Structure
 
@@ -344,6 +377,24 @@ module Aws::TaxSettings
       attr_accessor message: String?
     end
 
+    class ChileAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_type: String,
+        ?business_activity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_type: String?
+      attr_accessor business_activity: String?
+    end
+
+    module ChileDocumentType
+      INVOICE: String
+      RECEIPT: String
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -355,6 +406,11 @@ module Aws::TaxSettings
 
       attr_accessor message: String?
       attr_accessor error_code: String?
+    end
+
+    module CustomerType
+      BUSINESS: String
+      INDIVIDUAL: String
     end
 
     class DeleteSupplementalTaxRegistrationRequest
@@ -452,6 +508,19 @@ module Aws::TaxSettings
 
       attr_accessor document_name: String?
       attr_accessor document_file: String?
+    end
+
+    class FranceAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?siren_number: String,
+        ?e_invoice_routing_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor siren_number: String?
+      attr_accessor e_invoice_routing_code: String?
     end
 
     class GeorgiaAdditionalInfo
@@ -655,6 +724,7 @@ module Aws::TaxSettings
         ?cig_number: String,
         ?cup_number: String,
         ?tax_code: String,
+        ?customer_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -662,6 +732,7 @@ module Aws::TaxSettings
       attr_accessor cig_number: String?
       attr_accessor cup_number: String?
       attr_accessor tax_code: String?
+      attr_accessor customer_type: String?
     end
 
     class Jurisdiction
@@ -788,10 +859,32 @@ module Aws::TaxSettings
       TRAINING_OR_COACHING: String
     end
 
+    class MonacoAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?business_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_number: String?
+    end
+
     module PersonType
       LEGAL_PERSON: String
       PHYSICAL_PERSON: String
       BUSINESS: String
+    end
+
+    class PhilippinesAdditionalInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_vat_registered: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_vat_registered: bool?
     end
 
     class PolandAdditionalInfo
@@ -800,11 +893,19 @@ module Aws::TaxSettings
       def initialize: (
         ?individual_registration_number: String,
         ?is_group_vat_enabled: bool,
+        ?tax_registration_number_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor individual_registration_number: String?
       attr_accessor is_group_vat_enabled: bool?
+      attr_accessor tax_registration_number_type: String?
+    end
+
+    module PolandTaxRegistrationNumberType
+      EU_TAX_REGISTRATION_NUMBER: String
+      LOCAL_TAX_REGISTRATION_NUMBER: String
+      LOCAL_REGISTRATION_NUMBER: String
     end
 
     class PutSupplementalTaxRegistrationRequest
@@ -1213,6 +1314,8 @@ module Aws::TaxSettings
       SST: String
       TIN: String
       NRIC: String
+      PAN: String
+      NIP: String
     end
 
     class TaxRegistrationWithJurisdiction
@@ -1314,6 +1417,8 @@ module Aws::TaxSettings
       INVALID_TOKEN: String
       FIELD_VALIDATION_FAILED: String
       MISSING_INPUT: String
+      NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN: String
+      GST_EXISTENCE_BLOCK_SET_PAN: String
     end
 
     class ValidationExceptionField

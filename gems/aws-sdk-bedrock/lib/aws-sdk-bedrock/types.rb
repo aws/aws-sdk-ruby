@@ -17,6 +17,141 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Account-level enforced guardrail input configuration.</p>
+    # @!attribute guardrail_identifier
+    #   <p>Identifier for the guardrail, could be the ID or the ARN.</p>
+    #   @return [String]
+    # @!attribute guardrail_version
+    #   <p>Numerical guardrail version.</p>
+    #   @return [String]
+    # @!attribute selective_content_guarding
+    #   <p>Selective content guarding controls for enforced guardrails.</p>
+    #   @return [Types::SelectiveContentGuarding]
+    # @!attribute model_enforcement
+    #   <p>Model-specific information for the enforced guardrail configuration. If not present, the configuration is enforced on all models</p>
+    #   @return [Types::ModelEnforcement]
+    class AccountEnforcedGuardrailInferenceInputConfiguration < Struct.new(
+      nil,
+      :guardrail_identifier,
+      :guardrail_version,
+      :selective_content_guarding,
+      :model_enforcement,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Account enforced guardrail output configuration.</p>
+    # @!attribute config_id
+    #   <p>Unique ID for the account enforced configuration.</p>
+    #   @return [String]
+    # @!attribute guardrail_arn
+    #   <p>ARN representation for the guardrail.</p>
+    #   @return [String]
+    # @!attribute guardrail_id
+    #   <p>Unique ID for the guardrail.</p>
+    #   @return [String]
+    # @!attribute input_tags
+    #   <p>Whether to honor or ignore input tags at runtime.</p>
+    #   @deprecated
+    #     This field is being deprecated and will be removed once customers transition their existing policies to the new schema.
+    #     Since: 2026-04-03
+    #   @return [String]
+    # @!attribute selective_content_guarding
+    #   <p>Selective content guarding controls for enforced guardrails.</p>
+    #   @return [Types::SelectiveContentGuarding]
+    # @!attribute guardrail_version
+    #   <p>Numerical guardrail version.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>Timestamp.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The ARN of the role used to update the configuration.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>Timestamp.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The ARN of the role used to update the configuration.</p>
+    #   @return [String]
+    # @!attribute owner
+    #   <p>Configuration owner type.</p>
+    #   @return [String]
+    # @!attribute model_enforcement
+    #   <p>Model-specific information for the enforced guardrail configuration.</p>
+    #   @return [Types::ModelEnforcement]
+    class AccountEnforcedGuardrailOutputConfiguration < Struct.new(
+      nil,
+      :config_id,
+      :guardrail_arn,
+      :guardrail_id,
+      :input_tags,
+      :selective_content_guarding,
+      :guardrail_version,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :owner,
+      :model_enforcement,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the input data configuration for an advanced prompt optimization job.</p>
+    # @!attribute s3_uri
+    #   <p>The S3 URI of the JSONL input file containing prompt templates and evaluation samples.</p>
+    #   @return [String]
+    class AdvancedPromptOptimizationInputConfig < Struct.new(
+      nil,
+      :s3_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains a summary of an advanced prompt optimization job.</p>
+    # @!attribute job_arn
+    #   <p>The Amazon Resource Name (ARN) of the job.</p>
+    #   @return [String]
+    # @!attribute job_name
+    #   <p>The name of the job.</p>
+    #   @return [String]
+    # @!attribute job_status
+    #   <p>The status of the job.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The time at which the job was created.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The time at which the job was last modified.</p>
+    #   @return [Time]
+    class AdvancedPromptOptimizationJobSummary < Struct.new(
+      nil,
+      :job_arn,
+      :job_name,
+      :job_status,
+      :creation_time,
+      :last_modified_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the output data configuration for an advanced prompt optimization job.</p>
+    # @!attribute s3_uri
+    #   <p>The S3 URI prefix where the optimization results will be written.</p>
+    #   @return [String]
+    class AdvancedPromptOptimizationOutputConfig < Struct.new(
+      nil,
+      :s3_uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about the agreement availability</p>
     # @!attribute status
     #   <p>Status of the agreement.</p>
@@ -481,6 +616,53 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents a portion of a source document with line number annotations. Chunks help organize document content for easier navigation and reference.</p>
+    # @!attribute page_number
+    #   <p>The page number where this chunk begins, if the document is divided into pages.</p>
+    #   @return [Integer]
+    # @!attribute content
+    #   <p>The lines of text contained within this chunk, each annotated with its line number.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyAnnotatedContent>]
+    class AutomatedReasoningPolicyAnnotatedChunk < Struct.new(
+      nil,
+      :page_number,
+      :content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a content element within an annotated chunk. This union type allows for different types of content elements to be included in document chunks, such as individual lines of text with their line numbers.</p>
+    # @!attribute line
+    #   <p>An annotated line of text from the source document, including both the line number and the text content.</p>
+    #   @return [Types::AutomatedReasoningPolicyAnnotatedLine]
+    class AutomatedReasoningPolicyAnnotatedContent < Struct.new(
+      :line,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Line < AutomatedReasoningPolicyAnnotatedContent; end
+      class Unknown < AutomatedReasoningPolicyAnnotatedContent; end
+    end
+
+    # <p>Represents a single line of text from a source document, annotated with its line number for precise referencing.</p>
+    # @!attribute line_number
+    #   <p>The line number of this text within the source document.</p>
+    #   @return [Integer]
+    # @!attribute line_text
+    #   <p>The actual text content of this line from the source document.</p>
+    #   @return [String]
+    class AutomatedReasoningPolicyAnnotatedLine < Struct.new(
+      nil,
+      :line_number,
+      :line_text,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains the various operations that can be performed on an Automated Reasoning policy, including adding, updating, and deleting rules, variables, and types.</p>
     # @!attribute add_type
     #   <p>An operation to add a new custom type to the policy, defining a set of possible values for policy variables.</p>
@@ -556,6 +738,26 @@ module Aws::Bedrock
       class Unknown < AutomatedReasoningPolicyAnnotation; end
     end
 
+    # <p>Represents a single, indivisible statement extracted from a source document. Atomic statements are the fundamental units used to ground policy rules and variables to their source material.</p>
+    # @!attribute id
+    #   <p>A unique identifier for this atomic statement within the fidelity report.</p>
+    #   @return [String]
+    # @!attribute text
+    #   <p>The actual text content of the atomic statement as extracted from the source document.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>Information about where this statement appears in the source document, including line numbers.</p>
+    #   @return [Types::AutomatedReasoningPolicyStatementLocation]
+    class AutomatedReasoningPolicyAtomicStatement < Struct.new(
+      nil,
+      :id,
+      :text,
+      :location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains detailed logging information about the policy build process, including steps taken, decisions made, and any issues encountered.</p>
     # @!attribute entries
     #   <p>A list of log entries documenting each step in the policy build process, including timestamps, status, and detailed messages.</p>
@@ -588,7 +790,39 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains the various assets generated during a policy build workflow, including logs, quality reports, and the final policy definition.</p>
+    # <p>A catalog of all artifacts produced by a build workflow, providing a comprehensive list of available assets including their types and identifiers.</p>
+    # @!attribute entries
+    #   <p>The list of asset entries in the manifest, each describing an available artifact that can be retrieved.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyBuildResultAssetManifestEntry>]
+    class AutomatedReasoningPolicyBuildResultAssetManifest < Struct.new(
+      nil,
+      :entries,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a single entry in the asset manifest, describing one artifact produced by the build workflow.</p>
+    # @!attribute asset_type
+    #   <p>The type of asset (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT, ASSET_MANIFEST, SOURCE_DOCUMENT).</p>
+    #   @return [String]
+    # @!attribute asset_name
+    #   <p>A human-readable name for the asset, if applicable. This helps identify specific documents or reports within the workflow results.</p>
+    #   @return [String]
+    # @!attribute asset_id
+    #   <p>A unique identifier for the asset, if applicable. Use this ID when requesting specific assets through the API.</p>
+    #   @return [String]
+    class AutomatedReasoningPolicyBuildResultAssetManifestEntry < Struct.new(
+      nil,
+      :asset_type,
+      :asset_name,
+      :asset_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the various assets generated during a policy build workflow, including logs, quality reports, test cases, and the final policy definition.</p>
     # @!attribute policy_definition
     #   <p>The complete policy definition generated by the build workflow, containing all rules, variables, and custom types extracted from the source documents.</p>
     #   @return [Types::AutomatedReasoningPolicyDefinition]
@@ -598,10 +832,30 @@ module Aws::Bedrock
     # @!attribute build_log
     #   <p>The complete build log containing detailed information about each step in the policy generation process.</p>
     #   @return [Types::AutomatedReasoningPolicyBuildLog]
+    # @!attribute generated_test_cases
+    #   <p>A comprehensive test suite generated by the build workflow, providing validation capabilities for automated reasoning policies.</p>
+    #   @return [Types::AutomatedReasoningPolicyGeneratedTestCases]
+    # @!attribute policy_scenarios
+    #   <p>An entity encompassing all the policy scenarios generated by the build workflow, which can be used to validate an Automated Reasoning policy. </p>
+    #   @return [Types::AutomatedReasoningPolicyScenarios]
+    # @!attribute asset_manifest
+    #   <p>A manifest listing all available artifacts produced by the build workflow. This provides a catalog of all assets that can be retrieved, including their types, names, and identifiers.</p>
+    #   @return [Types::AutomatedReasoningPolicyBuildResultAssetManifest]
+    # @!attribute document
+    #   <p>A source document that was used as input during the build workflow. This allows you to retrieve the original documents that were processed to generate the policy.</p>
+    #   @return [Types::AutomatedReasoningPolicySourceDocument]
+    # @!attribute fidelity_report
+    #   <p>A comprehensive fidelity report that measures how accurately the generated policy represents the source documents. The report includes coverage and accuracy scores, along with detailed grounding information for rules and variables.</p>
+    #   @return [Types::AutomatedReasoningPolicyFidelityReport]
     class AutomatedReasoningPolicyBuildResultAssets < Struct.new(
       :policy_definition,
       :quality_report,
       :build_log,
+      :generated_test_cases,
+      :policy_scenarios,
+      :asset_manifest,
+      :document,
+      :fidelity_report,
       :unknown,
       keyword_init: true
     )
@@ -610,6 +864,11 @@ module Aws::Bedrock
       class PolicyDefinition < AutomatedReasoningPolicyBuildResultAssets; end
       class QualityReport < AutomatedReasoningPolicyBuildResultAssets; end
       class BuildLog < AutomatedReasoningPolicyBuildResultAssets; end
+      class GeneratedTestCases < AutomatedReasoningPolicyBuildResultAssets; end
+      class PolicyScenarios < AutomatedReasoningPolicyBuildResultAssets; end
+      class AssetManifest < AutomatedReasoningPolicyBuildResultAssets; end
+      class Document < AutomatedReasoningPolicyBuildResultAssets; end
+      class FidelityReport < AutomatedReasoningPolicyBuildResultAssets; end
       class Unknown < AutomatedReasoningPolicyBuildResultAssets; end
     end
 
@@ -1039,6 +1298,81 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A comprehensive analysis report that measures how accurately a generated policy represents the source documents. The report includes coverage and accuracy scores, detailed grounding information linking policy elements to source statements, and annotated document content.</p>
+    # @!attribute coverage_score
+    #   <p>A score from 0.0 to 1.0 indicating how well the policy covers the statements in the source documents. A higher score means more of the source content is represented in the policy.</p>
+    #   @return [Float]
+    # @!attribute accuracy_score
+    #   <p>A score from 0.0 to 1.0 indicating how accurate the policy rules are relative to the source documents. A higher score means the policy rules more faithfully represent the source material.</p>
+    #   @return [Float]
+    # @!attribute rule_reports
+    #   <p>A mapping from rule identifiers to detailed fidelity reports for each rule, showing which source statements ground each rule and how accurate it is.</p>
+    #   @return [Hash<String, Types::AutomatedReasoningPolicyRuleReport>]
+    # @!attribute variable_reports
+    #   <p>A mapping from variable names to detailed fidelity reports for each variable, showing which source statements ground each variable and how accurate it is.</p>
+    #   @return [Hash<String, Types::AutomatedReasoningPolicyVariableReport>]
+    # @!attribute document_sources
+    #   <p>A list of source documents with their content broken down into atomic statements and annotated with line numbers for precise referencing.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyReportSourceDocument>]
+    class AutomatedReasoningPolicyFidelityReport < Struct.new(
+      nil,
+      :coverage_score,
+      :accuracy_score,
+      :rule_reports,
+      :variable_reports,
+      :document_sources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for generating a fidelity report, which can either analyze new documents or update an existing fidelity report with a new policy definition.</p>
+    # @!attribute documents
+    #   <p>Source documents to analyze for generating a new fidelity report. The documents will be processed to create atomic statements and grounding information.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyBuildWorkflowDocument>]
+    class AutomatedReasoningPolicyGenerateFidelityReportContent < Struct.new(
+      :documents,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Documents < AutomatedReasoningPolicyGenerateFidelityReportContent; end
+      class Unknown < AutomatedReasoningPolicyGenerateFidelityReportContent; end
+    end
+
+    # <p>Represents a generated test case, consisting of query content, guard content, and expected results.</p>
+    # @!attribute query_content
+    #   <p>The input query or prompt that generated the content. This provides context for the validation.</p>
+    #   @return [String]
+    # @!attribute guard_content
+    #   <p>The output content that's validated by the Automated Reasoning policy. This represents the foundation model response that will be checked for accuracy.</p>
+    #   @return [String]
+    # @!attribute expected_aggregated_findings_result
+    #   <p>The expected results of the generated test case. Possible values include:</p> <ul> <li> <p> <code>VALID</code> - The claims are true. The claims are implied by the premises and the Automated Reasoning policy. Given the Automated Reasoning policy and premises, it is not possible for these claims to be false. In other words, there are no alternative answers that are true that contradict the claims.</p> </li> <li> <p> <code>INVALID</code> - The claims are false. The claims are not implied by the premises and Automated Reasoning policy. Furthermore, there exists different claims that are consistent with the premises and Automated Reasoning policy.</p> </li> <li> <p> <code>SATISFIABLE</code> - The claims can be true or false. It depends on what assumptions are made for the claim to be implied from the premises and Automated Reasoning policy rules. In this situation, different assumptions can make input claims false and alternative claims true.</p> </li> <li> <p> <code>IMPOSSIBLE</code> - Automated Reasoning can’t make a statement about the claims. This can happen if the premises are logically incorrect, or if there is a conflict within the Automated Reasoning policy itself.</p> </li> </ul>
+    #   @return [String]
+    class AutomatedReasoningPolicyGeneratedTestCase < Struct.new(
+      nil,
+      :query_content,
+      :guard_content,
+      :expected_aggregated_findings_result,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains a comprehensive test suite generated by the build workflow, providing validation capabilities for automated reasoning policies.</p>
+    # @!attribute generated_test_cases
+    #   <p>Represents a collection of generated test cases.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyGeneratedTestCase>]
+    class AutomatedReasoningPolicyGeneratedTestCases < Struct.new(
+      nil,
+      :generated_test_cases,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An annotation for processing and incorporating new content into an Automated Reasoning policy.</p>
     # @!attribute content
     #   <p>The new content to be analyzed and incorporated into the policy, such as additional documents or rule descriptions.</p>
@@ -1046,6 +1380,22 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyIngestContentAnnotation < Struct.new(
       nil,
       :content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for an iterative policy refinement workflow, including source documents to process and optional feedback to guide the refinement.</p>
+    # @!attribute documents
+    #   <p>Source documents used for iterative policy refinement. These documents provide context for refining the policy definition.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyBuildWorkflowDocument>]
+    # @!attribute feedback
+    #   <p>Optional feedback to guide the iterative refinement workflow. Provide specific instructions or constraints for policy refinement.</p>
+    #   @return [String]
+    class AutomatedReasoningPolicyIterativeRefinementContent < Struct.new(
+      nil,
+      :documents,
+      :feedback,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1114,6 +1464,62 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents a source document that was analyzed during fidelity report generation, including the document's metadata and its content broken down into atomic statements.</p>
+    # @!attribute document_name
+    #   <p>The name of the source document that was analyzed.</p>
+    #   @return [String]
+    # @!attribute document_hash
+    #   <p>A SHA-256 hash of the document content, used for verification and ensuring the document hasn't changed since analysis.</p>
+    #   @return [String]
+    # @!attribute document_id
+    #   <p>A unique identifier for this document within the fidelity report.</p>
+    #   @return [String]
+    # @!attribute atomic_statements
+    #   <p>The list of atomic statements extracted from this document, representing the fundamental units of meaning used for grounding.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyAtomicStatement>]
+    # @!attribute document_content
+    #   <p>The document's content organized into annotated chunks with line number information for precise referencing.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyAnnotatedChunk>]
+    class AutomatedReasoningPolicyReportSourceDocument < Struct.new(
+      nil,
+      :document_name,
+      :document_hash,
+      :document_id,
+      :atomic_statements,
+      :document_content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides detailed fidelity analysis for a specific policy rule, including which source document statements support it and how accurate the rule is.</p>
+    # @!attribute rule
+    #   <p>The identifier of the policy rule being analyzed in this report.</p>
+    #   @return [String]
+    # @!attribute grounding_statements
+    #   <p>References to statements from the source documents that provide the basis or justification for this rule.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyStatementReference>]
+    # @!attribute grounding_justifications
+    #   <p>Explanations describing how the source statements support and justify this specific rule.</p>
+    #   @return [Array<String>]
+    # @!attribute accuracy_score
+    #   <p>A score from 0.0 to 1.0 indicating how accurately this rule represents the source material.</p>
+    #   @return [Float]
+    # @!attribute accuracy_justification
+    #   <p>A textual explanation of the accuracy score, describing why the rule received this particular accuracy rating.</p>
+    #   @return [String]
+    class AutomatedReasoningPolicyRuleReport < Struct.new(
+      nil,
+      :rule,
+      :grounding_statements,
+      :grounding_justifications,
+      :accuracy_score,
+      :accuracy_justification,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents a test scenario used to validate an Automated Reasoning policy, including the test conditions and expected outcomes.</p>
     # @!attribute expression
     #   <p>The logical expression or condition that defines this test scenario.</p>
@@ -1121,18 +1527,86 @@ module Aws::Bedrock
     # @!attribute alternate_expression
     #   <p>An alternative way to express the same test scenario, used for validation and comparison purposes.</p>
     #   @return [String]
-    # @!attribute rule_ids
-    #   <p>The list of rule identifiers that are expected to be triggered or evaluated by this test scenario.</p>
-    #   @return [Array<String>]
     # @!attribute expected_result
     #   <p>The expected outcome when this scenario is evaluated against the policy (e.g., PASS, FAIL, VIOLATION).</p>
     #   @return [String]
+    # @!attribute rule_ids
+    #   <p>The list of rule identifiers that are expected to be triggered or evaluated by this test scenario.</p>
+    #   @return [Array<String>]
     class AutomatedReasoningPolicyScenario < Struct.new(
       nil,
       :expression,
       :alternate_expression,
-      :rule_ids,
       :expected_result,
+      :rule_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains a comprehensive entity encompassing all the scenarios generated by the build workflow, which can be used to validate an Automated Reasoning policy.</p>
+    # @!attribute policy_scenarios
+    #   <p>Represents a collection of generated policy scenarios.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyScenario>]
+    class AutomatedReasoningPolicyScenarios < Struct.new(
+      nil,
+      :policy_scenarios,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a source document that was processed during a build workflow. Contains the document content, metadata, and a hash for verification.</p>
+    # @!attribute document
+    #   <p>The raw content of the source document as a binary blob.</p>
+    #   @return [String]
+    # @!attribute document_content_type
+    #   <p>The MIME type of the document (e.g., application/pdf, text/plain).</p>
+    #   @return [String]
+    # @!attribute document_name
+    #   <p>The name of the source document for identification purposes.</p>
+    #   @return [String]
+    # @!attribute document_description
+    #   <p>An optional description providing context about the document's content and purpose.</p>
+    #   @return [String]
+    # @!attribute document_hash
+    #   <p>A SHA-256 hash of the document content, used for verification and integrity checking.</p>
+    #   @return [String]
+    class AutomatedReasoningPolicySourceDocument < Struct.new(
+      nil,
+      :document,
+      :document_content_type,
+      :document_name,
+      :document_description,
+      :document_hash,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes the location of a statement within a source document using line numbers.</p>
+    # @!attribute lines
+    #   <p>The line numbers in the source document where this statement appears.</p>
+    #   @return [Array<Integer>]
+    class AutomatedReasoningPolicyStatementLocation < Struct.new(
+      nil,
+      :lines,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>References a specific atomic statement within a source document, used to link policy elements back to their source material.</p>
+    # @!attribute document_id
+    #   <p>The unique identifier of the document containing the referenced statement.</p>
+    #   @return [String]
+    # @!attribute statement_id
+    #   <p>The unique identifier of the specific atomic statement being referenced.</p>
+    #   @return [String]
+    class AutomatedReasoningPolicyStatementReference < Struct.new(
+      nil,
+      :document_id,
+      :statement_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1423,6 +1897,34 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Provides detailed fidelity analysis for a specific policy variable, including which source document statements support it and how accurate the variable definition is.</p>
+    # @!attribute policy_variable
+    #   <p>The name of the policy variable being analyzed in this report.</p>
+    #   @return [String]
+    # @!attribute grounding_statements
+    #   <p>References to statements from the source documents that provide the basis or justification for this variable.</p>
+    #   @return [Array<Types::AutomatedReasoningPolicyStatementReference>]
+    # @!attribute grounding_justifications
+    #   <p>Explanations describing how the source statements support and justify this specific variable definition.</p>
+    #   @return [Array<String>]
+    # @!attribute accuracy_score
+    #   <p>A score from 0.0 to 1.0 indicating how accurately this variable represents concepts from the source material.</p>
+    #   @return [Float]
+    # @!attribute accuracy_justification
+    #   <p>A textual explanation of the accuracy score, describing why the variable received this particular accuracy rating.</p>
+    #   @return [String]
+    class AutomatedReasoningPolicyVariableReport < Struct.new(
+      nil,
+      :policy_variable,
+      :grounding_statements,
+      :grounding_justifications,
+      :accuracy_score,
+      :accuracy_justification,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines the content and configuration for different types of policy build workflows.</p>
     # @!attribute documents
     #   <p>The list of documents to be processed in a document ingestion workflow.</p>
@@ -1430,9 +1932,17 @@ module Aws::Bedrock
     # @!attribute policy_repair_assets
     #   <p>The assets and instructions needed for a policy repair workflow, including repair annotations and guidance.</p>
     #   @return [Types::AutomatedReasoningPolicyBuildWorkflowRepairContent]
+    # @!attribute generate_fidelity_report_content
+    #   <p>The content configuration for generating a fidelity report workflow. This can include source documents to analyze or an existing fidelity report to update with a new policy definition.</p>
+    #   @return [Types::AutomatedReasoningPolicyGenerateFidelityReportContent]
+    # @!attribute iterative_refinement_content
+    #   <p>Content configuration to start an iterative policy refinement workflow that uses generative AI to automatically make changes to the policy based on test results and the optional feedback provided.</p>
+    #   @return [Types::AutomatedReasoningPolicyIterativeRefinementContent]
     class AutomatedReasoningPolicyWorkflowTypeContent < Struct.new(
       :documents,
       :policy_repair_assets,
+      :generate_fidelity_report_content,
+      :iterative_refinement_content,
       :unknown,
       keyword_init: true
     )
@@ -1440,7 +1950,73 @@ module Aws::Bedrock
 
       class Documents < AutomatedReasoningPolicyWorkflowTypeContent; end
       class PolicyRepairAssets < AutomatedReasoningPolicyWorkflowTypeContent; end
+      class GenerateFidelityReportContent < AutomatedReasoningPolicyWorkflowTypeContent; end
+      class IterativeRefinementContent < AutomatedReasoningPolicyWorkflowTypeContent; end
       class Unknown < AutomatedReasoningPolicyWorkflowTypeContent; end
+    end
+
+    # <p>Contains information about an error that occurred when deleting an advanced prompt optimization job.</p>
+    # @!attribute job_identifier
+    #   <p>The identifier of the job that could not be deleted.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The error code for the deletion failure.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message describing the error.</p>
+    #   @return [String]
+    class BatchDeleteAdvancedPromptOptimizationJobError < Struct.new(
+      nil,
+      :job_identifier,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains information about a successfully deleted advanced prompt optimization job.</p>
+    # @!attribute job_identifier
+    #   <p>The identifier of the deleted job.</p>
+    #   @return [String]
+    # @!attribute job_status
+    #   <p>The status of the deleted job.</p>
+    #   @return [String]
+    class BatchDeleteAdvancedPromptOptimizationJobItem < Struct.new(
+      nil,
+      :job_identifier,
+      :job_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Batch Delete Advanced Prompt Optimization Jobs Request</p>
+    # @!attribute job_identifiers
+    #   <p>A list of advanced prompt optimization job identifiers (ARNs or IDs) to delete.</p>
+    #   @return [Array<String>]
+    class BatchDeleteAdvancedPromptOptimizationJobRequest < Struct.new(
+      nil,
+      :job_identifiers,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Batch Delete Advanced Prompt Optimization Jobs Response</p>
+    # @!attribute errors
+    #   <p>A list of errors encountered during batch deletion.</p>
+    #   @return [Array<Types::BatchDeleteAdvancedPromptOptimizationJobError>]
+    # @!attribute advanced_prompt_optimization_jobs
+    #   <p>A list of successfully deleted advanced prompt optimization jobs.</p>
+    #   @return [Array<Types::BatchDeleteAdvancedPromptOptimizationJobItem>]
+    class BatchDeleteAdvancedPromptOptimizationJobResponse < Struct.new(
+      nil,
+      :errors,
+      :advanced_prompt_optimization_jobs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON array that provides the status of the evaluation jobs being deleted.</p>
@@ -1590,6 +2166,58 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Create Advanced Prompt Optimization Job Request</p>
+    # @!attribute job_name
+    #   <p>A name for the advanced prompt optimization job.</p>
+    #   @return [String]
+    # @!attribute job_description
+    #   <p>A description of the advanced prompt optimization job.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but does not return an error.</p>
+    #   @return [String]
+    # @!attribute input_config
+    #   <p>Specifies the S3 location of your JSONL input file containing prompt templates and evaluation samples.</p>
+    #   @return [Types::AdvancedPromptOptimizationInputConfig]
+    # @!attribute output_config
+    #   <p>Specifies the S3 location where optimization results will be stored.</p>
+    #   @return [Types::AdvancedPromptOptimizationOutputConfig]
+    # @!attribute encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used for encrypting the output data. If not specified, the output is encrypted with an Amazon-owned KMS key.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags to associate with the advanced prompt optimization job.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute model_configurations
+    #   <p>A list of model configurations specifying the target models for prompt optimization. You can specify up to 5 models.</p>
+    #   @return [Array<Types::ModelConfiguration>]
+    class CreateAdvancedPromptOptimizationJobRequest < Struct.new(
+      nil,
+      :job_name,
+      :job_description,
+      :client_token,
+      :input_config,
+      :output_config,
+      :encryption_key_arn,
+      :tags,
+      :model_configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Create Advanced Prompt Optimization Job Response</p>
+    # @!attribute job_arn
+    #   <p>The Amazon Resource Name (ARN) of the created advanced prompt optimization job.</p>
+    #   @return [String]
+    class CreateAdvancedPromptOptimizationJobResponse < Struct.new(
+      nil,
+      :job_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>A unique name for the Automated Reasoning policy. The name must be between 1 and 63 characters and can contain letters, numbers, hyphens, and underscores.</p>
     #   @return [String]
@@ -1602,6 +2230,9 @@ module Aws::Bedrock
     # @!attribute policy_definition
     #   <p>The policy definition that contains the formal logic rules, variables, and custom variable types used to validate foundation model responses in your application.</p>
     #   @return [Types::AutomatedReasoningPolicyDefinition]
+    # @!attribute kms_key_id
+    #   <p>The identifier of the KMS key to use for encrypting the automated reasoning policy and its associated artifacts. If you don't specify a KMS key, Amazon Bedrock uses an KMS managed key for encryption. For enhanced security and control, you can specify a customer managed KMS key.</p>
+    #   @return [String]
     # @!attribute tags
     #   <p>A list of tags to associate with the Automated Reasoning policy. Tags help you organize and manage your policies.</p>
     #   @return [Array<Types::Tag>]
@@ -1611,6 +2242,7 @@ module Aws::Bedrock
       :description,
       :client_request_token,
       :policy_definition,
+      :kms_key_id,
       :tags,
       keyword_init: true
     )
@@ -1796,11 +2428,14 @@ module Aws::Bedrock
     # @!attribute model_source_config
     #   <p>The data source for the model. The Amazon S3 URI in the model source must be for the Amazon-managed Amazon S3 bucket containing your model artifacts.</p>
     #   @return [Types::ModelDataSource]
+    # @!attribute custom_model_data_source
+    #   <p>The data source for the custom model. Use this field to specify a SageMaker AI model package ARN as the source for your custom model. Amazon Bedrock resolves the model package to retrieve the model artifacts.</p> <p>You can specify either <code>customModelDataSource</code> or <code>modelSourceConfig</code>, but not both.</p>
+    #   @return [Types::CustomModelDataSource]
     # @!attribute model_kms_key_arn
     #   <p>The Amazon Resource Name (ARN) of the customer managed KMS key to encrypt the custom model. If you don't provide a KMS key, Amazon Bedrock uses an Amazon Web Services-managed KMS key to encrypt the model. </p> <p>If you provide a customer managed KMS key, your Amazon Bedrock service role must have permissions to use it. For more information see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/encryption-import-model.html">Encryption of imported models</a>. </p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock assumes to perform tasks on your behalf. This role must have permissions to access the Amazon S3 bucket containing your model artifacts and the KMS key (if specified). For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html">Setting up an IAM service role for importing models</a> in the Amazon Bedrock User Guide.</p>
+    #   <p>The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock assumes to perform tasks on your behalf. This role must have permissions to access the Amazon S3 bucket containing your model artifacts and the KMS key (if specified). For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html">Setting up an IAM service role for importing models</a> in the Amazon Bedrock User Guide.</p> <p>This field is required when you use <code>modelSourceConfig</code> with an Amazon S3 data source. It is not required when you use <code>customModelDataSource</code> with a model package ARN, because Amazon Bedrock uses its own credentials to access the model artifacts.</p>
     #   @return [String]
     # @!attribute model_tags
     #   <p>A list of key-value pairs to associate with the custom model resource. You can use these tags to organize and identify your resources.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html">Tagging resources</a> in the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html">Amazon Bedrock User Guide</a>.</p>
@@ -1812,6 +2447,7 @@ module Aws::Bedrock
       nil,
       :model_name,
       :model_source_config,
+      :custom_model_data_source,
       :model_kms_key_arn,
       :role_arn,
       :model_tags,
@@ -2317,6 +2953,9 @@ module Aws::Bedrock
     # @!attribute tags
     #   <p>Any tags to associate with the batch inference job. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html">Tagging Amazon Bedrock resources</a>.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute model_invocation_type
+    #   <p>The invocation endpoint for ModelInvocationJob</p>
+    #   @return [String]
     class CreateModelInvocationJobRequest < Struct.new(
       nil,
       :job_name,
@@ -2328,6 +2967,7 @@ module Aws::Bedrock
       :vpc_config,
       :timeout_duration_in_hours,
       :tags,
+      :model_invocation_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2477,6 +3117,21 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The data source for a custom model. This is a union type that supports the following member:</p> <ul> <li> <p> <code>modelPackageArnDataSource</code> — Specifies a SageMaker AI model package as the data source.</p> </li> </ul>
+    # @!attribute model_package_arn_data_source
+    #   <p>A SageMaker AI model package ARN as the data source for the custom model. When you specify a model package ARN, Amazon Bedrock resolves the model package to retrieve the model artifacts.</p>
+    #   @return [Types::ModelPackageArnDataSource]
+    class CustomModelDataSource < Struct.new(
+      :model_package_arn_data_source,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class ModelPackageArnDataSource < CustomModelDataSource; end
+      class Unknown < CustomModelDataSource; end
+    end
+
     # <p>Contains summary information about a custom model deployment, including its ARN, name, status, and associated custom model.</p>
     # @!attribute custom_model_deployment_arn
     #   <p>The Amazon Resource Name (ARN) of the custom model deployment.</p>
@@ -2508,6 +3163,22 @@ module Aws::Bedrock
       :status,
       :last_updated_at,
       :failure_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Details about an update to a custom model deployment, including the new custom model resource ARN and current update status. </p>
+    # @!attribute model_arn
+    #   <p> ARN of the new custom model being deployed as part of the update. </p>
+    #   @return [String]
+    # @!attribute update_status
+    #   <p> Current status of the deployment update. </p>
+    #   @return [String]
+    class CustomModelDeploymentUpdateDetails < Struct.new(
+      nil,
+      :model_arn,
+      :update_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2573,14 +3244,19 @@ module Aws::Bedrock
     # @!attribute distillation_config
     #   <p>The Distillation configuration for the custom model.</p>
     #   @return [Types::DistillationConfig]
+    # @!attribute rft_config
+    #   <p> Configuration settings for reinforcement fine-tuning (RFT) model customization, including grader configuration and hyperparameters. </p>
+    #   @return [Types::RFTConfig]
     class CustomizationConfig < Struct.new(
       :distillation_config,
+      :rft_config,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class DistillationConfig < CustomizationConfig; end
+      class RftConfig < CustomizationConfig; end
       class Unknown < CustomizationConfig; end
     end
 
@@ -2633,9 +3309,13 @@ module Aws::Bedrock
     # @!attribute policy_arn
     #   <p>The Amazon Resource Name (ARN) of the Automated Reasoning policy to delete.</p>
     #   @return [String]
+    # @!attribute force
+    #   <p>Specifies whether to force delete the automated reasoning policy even if it has active resources. When <code>false</code>, Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When <code>true</code>, Amazon Bedrock will delete the policy and all its artifacts without validation. Default is <code>false</code>. </p>
+    #   @return [Boolean]
     class DeleteAutomatedReasoningPolicyRequest < Struct.new(
       nil,
       :policy_arn,
+      :force,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2704,6 +3384,24 @@ module Aws::Bedrock
     end
 
     class DeleteCustomModelResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute config_id
+    #   <p>Unique ID for the account enforced configuration.</p>
+    #   @return [String]
+    class DeleteEnforcedGuardrailConfigurationRequest < Struct.new(
+      nil,
+      :config_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteEnforcedGuardrailConfigurationResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -2848,6 +3546,24 @@ module Aws::Bedrock
     end
 
     class DeleteProvisionedModelThroughputResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The ARN of the Bedrock resource to which this resource policy applies.</p>
+    #   @return [String]
+    class DeleteResourcePolicyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteResourcePolicyResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -3423,9 +4139,25 @@ module Aws::Bedrock
     # @!attribute status
     #   <p>Specifies whether a model version is available (<code>ACTIVE</code>) or deprecated (<code>LEGACY</code>.</p>
     #   @return [String]
+    # @!attribute start_of_life_time
+    #   <p>Launch time when the model first becomes available</p>
+    #   @return [Time]
+    # @!attribute end_of_life_time
+    #   <p>Time when the model is no longer available for use</p>
+    #   @return [Time]
+    # @!attribute legacy_time
+    #   <p>Time when the model enters legacy state. Models in legacy state can still be used, but users should plan to transition to an Active model before the end of life time</p>
+    #   @return [Time]
+    # @!attribute public_extended_access_time
+    #   <p>Public extended access portion of the legacy period, when users should expect higher pricing</p>
+    #   @return [Time]
     class FoundationModelLifecycle < Struct.new(
       nil,
       :status,
+      :start_of_life_time,
+      :end_of_life_time,
+      :legacy_time,
+      :public_extended_access_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3498,6 +4230,92 @@ module Aws::Bedrock
       :guardrail_configuration,
       :kb_inference_config,
       :additional_model_request_fields,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class GetAccountDataRetentionRequest < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute mode
+    #   <p>The data retention mode configured for the account.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The time at which the data retention mode was last updated.</p>
+    #   @return [Time]
+    class GetAccountDataRetentionResponse < Struct.new(
+      nil,
+      :mode,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Get Advanced Prompt Optimization Job Request</p>
+    # @!attribute job_identifier
+    #   <p>The ARN or ID of the advanced prompt optimization job.</p>
+    #   @return [String]
+    class GetAdvancedPromptOptimizationJobRequest < Struct.new(
+      nil,
+      :job_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Get Advanced Prompt Optimization Job Response</p>
+    # @!attribute job_arn
+    #   <p>The Amazon Resource Name (ARN) of the advanced prompt optimization job.</p>
+    #   @return [String]
+    # @!attribute job_name
+    #   <p>The name of the advanced prompt optimization job.</p>
+    #   @return [String]
+    # @!attribute job_description
+    #   <p>The description of the advanced prompt optimization job.</p>
+    #   @return [String]
+    # @!attribute job_status
+    #   <p>The status of the advanced prompt optimization job.</p>
+    #   @return [String]
+    # @!attribute input_config
+    #   <p>The input data configuration for the optimization job.</p>
+    #   @return [Types::AdvancedPromptOptimizationInputConfig]
+    # @!attribute output_config
+    #   <p>The output data configuration for the optimization job.</p>
+    #   @return [Types::AdvancedPromptOptimizationOutputConfig]
+    # @!attribute encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the output data.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The time at which the advanced prompt optimization job was created.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The time at which the advanced prompt optimization job was last modified.</p>
+    #   @return [Time]
+    # @!attribute failure_message
+    #   <p>If the job failed, a message describing the reason for the failure.</p>
+    #   @return [String]
+    # @!attribute model_configurations
+    #   <p>The model configurations used in the optimization job.</p>
+    #   @return [Array<Types::ModelConfiguration>]
+    class GetAdvancedPromptOptimizationJobResponse < Struct.new(
+      nil,
+      :job_arn,
+      :job_name,
+      :job_description,
+      :job_status,
+      :input_config,
+      :output_config,
+      :encryption_key_arn,
+      :creation_time,
+      :last_modified_time,
+      :failure_message,
+      :model_configurations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3614,13 +4432,17 @@ module Aws::Bedrock
     #   <p>The unique identifier of the build workflow whose result assets you want to retrieve.</p>
     #   @return [String]
     # @!attribute asset_type
-    #   <p>The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION).</p>
+    #   <p>The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT, ASSET_MANIFEST, SOURCE_DOCUMENT).</p>
+    #   @return [String]
+    # @!attribute asset_id
+    #   <p>The unique identifier of the specific asset to retrieve when multiple assets of the same type exist. This is required when retrieving SOURCE_DOCUMENT assets, as multiple source documents may have been used in the workflow. The asset ID can be obtained from the asset manifest.</p>
     #   @return [String]
     class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest < Struct.new(
       nil,
       :policy_arn,
       :build_workflow_id,
       :asset_type,
+      :asset_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3704,6 +4526,9 @@ module Aws::Bedrock
     # @!attribute definition_hash
     #   <p>The hash of the policy definition used as a concurrency token.</p>
     #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the automated reasoning policy and its associated artifacts. If a KMS key is not provided during the initial CreateAutomatedReasoningPolicyRequest, the kmsKeyArn won't be included in the GetAutomatedReasoningPolicyResponse. </p>
+    #   @return [String]
     # @!attribute created_at
     #   <p>The timestamp when the policy was created.</p>
     #   @return [Time]
@@ -3718,6 +4543,7 @@ module Aws::Bedrock
       :policy_id,
       :description,
       :definition_hash,
+      :kms_key_arn,
       :created_at,
       :updated_at,
       keyword_init: true
@@ -3814,6 +4640,9 @@ module Aws::Bedrock
     # @!attribute description
     #   <p>The description of the custom model deployment.</p>
     #   @return [String]
+    # @!attribute update_details
+    #   <p> Details about any pending or completed updates to the custom model deployment, including the new model ARN and update status. </p>
+    #   @return [Types::CustomModelDeploymentUpdateDetails]
     # @!attribute failure_message
     #   <p>If the deployment status is <code>FAILED</code>, this field contains a message describing the failure reason.</p>
     #   @return [String]
@@ -3828,6 +4657,7 @@ module Aws::Bedrock
       :created_at,
       :status,
       :description,
+      :update_details,
       :failure_message,
       :last_updated_at,
       keyword_init: true
@@ -4560,7 +5390,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference. You can use the console to create a default service role or follow the steps at <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html">Create a service role for batch inference</a>.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of the batch inference job.</p> <p>The following statuses are possible:</p> <ul> <li> <p>Submitted – This job has been submitted to a queue for validation.</p> </li> <li> <p>Validating – This job is being validated for the requirements described in <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html">Format and upload your batch inference data</a>. The criteria include the following:</p> <ul> <li> <p>Your IAM service role has access to the Amazon S3 buckets containing your files.</p> </li> <li> <p>Your files are .jsonl files and each individual record is a JSON object in the correct format. Note that validation doesn't check if the <code>modelInput</code> value matches the request body for the model.</p> </li> <li> <p>Your files fulfill the requirements for file size and number of records. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html">Quotas for Amazon Bedrock</a>.</p> </li> </ul> </li> <li> <p>Scheduled – This job has been validated and is now in a queue. The job will automatically start when it reaches its turn.</p> </li> <li> <p>Expired – This job timed out because it was scheduled but didn't begin before the set timeout duration. Submit a new job request.</p> </li> <li> <p>InProgress – This job has begun. You can start viewing the results in the output S3 location.</p> </li> <li> <p>Completed – This job has successfully completed. View the output files in the output S3 location.</p> </li> <li> <p>PartiallyCompleted – This job has partially completed. Not all of your records could be processed in time. View the output files in the output S3 location.</p> </li> <li> <p>Failed – This job has failed. Check the failure message for any further details. For further assistance, reach out to the <a href="https://console.aws.amazon.com/support/home/">Amazon Web ServicesSupport Center</a>.</p> </li> <li> <p>Stopped – This job was stopped by a user.</p> </li> <li> <p>Stopping – This job is being stopped by a user.</p> </li> </ul>
+    #   <p>The status of the batch inference job.</p> <p>The following statuses are possible:</p> <ul> <li> <p>Submitted – This job has been submitted to a queue for validation.</p> </li> <li> <p>Validating – This job is being validated for the requirements described in <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html">Format and upload your batch inference data</a>. The criteria include the following:</p> <ul> <li> <p>Your IAM service role has access to the Amazon S3 buckets containing your files.</p> </li> <li> <p>Your files are .jsonl files and each individual record is a JSON object in the correct format. Note that validation doesn't check if the <code>modelInput</code> value matches the request body for the model.</p> </li> <li> <p>Your files fulfill the requirements for file size and number of records. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html">Quotas for Amazon Bedrock</a>.</p> </li> </ul> </li> <li> <p>Scheduled – This job has been validated and is now in a queue. The job will automatically start when it reaches its turn.</p> </li> <li> <p>Expired – This job timed out because it was scheduled but didn't begin before the set timeout duration. Submit a new job request.</p> </li> <li> <p>InProgress – This job has begun. You can start viewing the results in the output S3 location.</p> </li> <li> <p>Completed – This job has successfully completed. View the output files in the output S3 location.</p> </li> <li> <p>PartiallyCompleted – This job has partially completed. Not all of your records could be processed in time. View the output files in the output S3 location.</p> </li> <li> <p>Failed – This job has failed. Check the failure message for any further details. For further assistance, reach out to the <a href="https://console.aws.amazon.com/support/home/">Amazon Web Services Support Center</a>.</p> </li> <li> <p>Stopped – This job was stopped by a user.</p> </li> <li> <p>Stopping – This job is being stopped by a user.</p> </li> </ul>
     #   @return [String]
     # @!attribute message
     #   <p>If the batch inference job failed, this field contains a message describing why the job failed.</p>
@@ -4589,6 +5419,21 @@ module Aws::Bedrock
     # @!attribute job_expiration_time
     #   <p>The time at which the batch inference job times or timed out.</p>
     #   @return [Time]
+    # @!attribute model_invocation_type
+    #   <p>The invocation endpoint for ModelInvocationJob</p>
+    #   @return [String]
+    # @!attribute total_record_count
+    #   <p>The total number of records in the batch inference job.</p>
+    #   @return [Integer]
+    # @!attribute processed_record_count
+    #   <p>The number of records that have been processed in the batch inference job.</p>
+    #   @return [Integer]
+    # @!attribute success_record_count
+    #   <p>The number of records that were successfully processed in the batch inference job.</p>
+    #   @return [Integer]
+    # @!attribute error_record_count
+    #   <p>The number of records that failed to process in the batch inference job.</p>
+    #   @return [Integer]
     class GetModelInvocationJobResponse < Struct.new(
       nil,
       :job_arn,
@@ -4606,6 +5451,11 @@ module Aws::Bedrock
       :vpc_config,
       :timeout_duration_in_hours,
       :job_expiration_time,
+      :model_invocation_type,
+      :total_record_count,
+      :processed_record_count,
+      :success_record_count,
+      :error_record_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4757,6 +5607,28 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The ARN of the Bedrock resource to which this resource policy applies.</p>
+    #   @return [String]
+    class GetResourcePolicyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_policy
+    #   <p>The JSON string representing the Bedrock resource policy.</p>
+    #   @return [String]
+    class GetResourcePolicyResponse < Struct.new(
+      nil,
+      :resource_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     class GetUseCaseForModelAccessRequest < Struct.new(
       nil,
       keyword_init: true
@@ -4773,6 +5645,21 @@ module Aws::Bedrock
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p> Configuration for the grader used in reinforcement fine-tuning to evaluate model responses and provide reward signals. </p>
+    # @!attribute lambda_grader
+    #   <p> Configuration for using an AWS Lambda function as the grader for evaluating model responses and provide reward signals in reinforcement fine-tuning. </p>
+    #   @return [Types::LambdaGraderConfig]
+    class GraderConfig < Struct.new(
+      :lambda_grader,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class LambdaGrader < GraderConfig; end
+      class Unknown < GraderConfig; end
     end
 
     # <p>Represents the configuration of Automated Reasoning policies within a Amazon Bedrock Guardrail, including the policies to apply and confidence thresholds.</p>
@@ -5667,6 +6554,30 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Base inference parameters to pass to a model. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html">Inference parameters for foundation models</a>.</p>
+    # @!attribute max_tokens
+    #   <p>The maximum number of tokens to allow in the generated response. The default value is the maximum allowed value for the model that you are using.</p>
+    #   @return [Integer]
+    # @!attribute temperature
+    #   <p>The likelihood of the model selecting higher-probability options while generating a response. A lower value makes the model more likely to choose higher-probability options, while a higher value makes the model more likely to choose lower-probability options.</p>
+    #   @return [Float]
+    # @!attribute top_p
+    #   <p>The percentage of most-likely candidates that the model considers for the next token. For example, if you choose a value of 0.8 for <code>topP</code>, the model selects from the top 80% of the probability distribution of tokens that could be next in the sequence.</p>
+    #   @return [Float]
+    # @!attribute stop_sequences
+    #   <p>A list of stop sequences. A stop sequence is a sequence of characters that causes the model to stop generating the response.</p>
+    #   @return [Array<String>]
+    class InferenceConfiguration < Struct.new(
+      nil,
+      :max_tokens,
+      :temperature,
+      :top_p,
+      :stop_sequences,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains information about a model.</p>
     # @!attribute model_arn
     #   <p>The Amazon Resource Name (ARN) of the model.</p>
@@ -5889,6 +6800,18 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p> Configuration for using an AWS Lambda function to grade model responses during reinforcement fine-tuning training. </p>
+    # @!attribute lambda_arn
+    #   <p> ARN of the AWS Lambda function that will evaluate model responses and return reward scores for RFT training. </p>
+    #   @return [String]
+    class LambdaGraderConfig < Struct.new(
+      nil,
+      :lambda_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The legal term of the agreement.</p>
     # @!attribute url
     #   <p>URL to the legal term document.</p>
@@ -5896,6 +6819,46 @@ module Aws::Bedrock
     class LegalTerm < Struct.new(
       nil,
       :url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>List Advanced Prompt Optimization Jobs Request</p>
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token in a subsequent request to get the next set of results.</p>
+    #   @return [String]
+    # @!attribute sort_by
+    #   <p>The field to sort the results by.</p>
+    #   @return [String]
+    # @!attribute sort_order
+    #   <p>The sort order for the results.</p>
+    #   @return [String]
+    class ListAdvancedPromptOptimizationJobsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>List Advanced Prompt Optimization Jobs Response</p>
+    # @!attribute job_summaries
+    #   <p>A list of advanced prompt optimization job summaries.</p>
+    #   @return [Array<Types::AdvancedPromptOptimizationJobSummary>]
+    # @!attribute next_token
+    #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token in a subsequent request to get the next set of results.</p>
+    #   @return [String]
+    class ListAdvancedPromptOptimizationJobsResponse < Struct.new(
+      nil,
+      :job_summaries,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6160,6 +7123,32 @@ module Aws::Bedrock
       nil,
       :next_token,
       :model_summaries,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>Opaque continuation token of previous paginated response.</p>
+    #   @return [String]
+    class ListEnforcedGuardrailsConfigurationRequest < Struct.new(
+      nil,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute guardrails_config
+    #   <p>Array of AccountEnforcedGuardrailOutputConfiguration objects.</p>
+    #   @return [Array<Types::AccountEnforcedGuardrailOutputConfiguration>]
+    # @!attribute next_token
+    #   <p>Opaque continuation token of previous paginated response.</p>
+    #   @return [String]
+    class ListEnforcedGuardrailsConfigurationResponse < Struct.new(
+      nil,
+      :guardrails_config,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6616,7 +7605,7 @@ module Aws::Bedrock
     #   <p>Specify a time to filter for batch inference jobs that were submitted before the time you specify.</p>
     #   @return [Time]
     # @!attribute status_equals
-    #   <p>Specify a status to filter for batch inference jobs whose statuses match the string you specify.</p> <p>The following statuses are possible:</p> <ul> <li> <p>Submitted – This job has been submitted to a queue for validation.</p> </li> <li> <p>Validating – This job is being validated for the requirements described in <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html">Format and upload your batch inference data</a>. The criteria include the following:</p> <ul> <li> <p>Your IAM service role has access to the Amazon S3 buckets containing your files.</p> </li> <li> <p>Your files are .jsonl files and each individual record is a JSON object in the correct format. Note that validation doesn't check if the <code>modelInput</code> value matches the request body for the model.</p> </li> <li> <p>Your files fulfill the requirements for file size and number of records. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html">Quotas for Amazon Bedrock</a>.</p> </li> </ul> </li> <li> <p>Scheduled – This job has been validated and is now in a queue. The job will automatically start when it reaches its turn.</p> </li> <li> <p>Expired – This job timed out because it was scheduled but didn't begin before the set timeout duration. Submit a new job request.</p> </li> <li> <p>InProgress – This job has begun. You can start viewing the results in the output S3 location.</p> </li> <li> <p>Completed – This job has successfully completed. View the output files in the output S3 location.</p> </li> <li> <p>PartiallyCompleted – This job has partially completed. Not all of your records could be processed in time. View the output files in the output S3 location.</p> </li> <li> <p>Failed – This job has failed. Check the failure message for any further details. For further assistance, reach out to the <a href="https://console.aws.amazon.com/support/home/">Amazon Web ServicesSupport Center</a>.</p> </li> <li> <p>Stopped – This job was stopped by a user.</p> </li> <li> <p>Stopping – This job is being stopped by a user.</p> </li> </ul>
+    #   <p>Specify a status to filter for batch inference jobs whose statuses match the string you specify.</p> <p>The following statuses are possible:</p> <ul> <li> <p>Submitted – This job has been submitted to a queue for validation.</p> </li> <li> <p>Validating – This job is being validated for the requirements described in <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html">Format and upload your batch inference data</a>. The criteria include the following:</p> <ul> <li> <p>Your IAM service role has access to the Amazon S3 buckets containing your files.</p> </li> <li> <p>Your files are .jsonl files and each individual record is a JSON object in the correct format. Note that validation doesn't check if the <code>modelInput</code> value matches the request body for the model.</p> </li> <li> <p>Your files fulfill the requirements for file size and number of records. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html">Quotas for Amazon Bedrock</a>.</p> </li> </ul> </li> <li> <p>Scheduled – This job has been validated and is now in a queue. The job will automatically start when it reaches its turn.</p> </li> <li> <p>Expired – This job timed out because it was scheduled but didn't begin before the set timeout duration. Submit a new job request.</p> </li> <li> <p>InProgress – This job has begun. You can start viewing the results in the output S3 location.</p> </li> <li> <p>Completed – This job has successfully completed. View the output files in the output S3 location.</p> </li> <li> <p>PartiallyCompleted – This job has partially completed. Not all of your records could be processed in time. View the output files in the output S3 location.</p> </li> <li> <p>Failed – This job has failed. Check the failure message for any further details. For further assistance, reach out to the <a href="https://console.aws.amazon.com/support/home/">Amazon Web Services Support Center</a>.</p> </li> <li> <p>Stopped – This job was stopped by a user.</p> </li> <li> <p>Stopping – This job is being stopped by a user.</p> </li> </ul>
     #   @return [String]
     # @!attribute name_contains
     #   <p>Specify a string to filter for batch inference jobs whose names contain the string.</p>
@@ -6796,6 +7785,9 @@ module Aws::Bedrock
     # @!attribute video_data_delivery_enabled
     #   <p>Set to include video data in the log delivery.</p>
     #   @return [Boolean]
+    # @!attribute audio_data_delivery_enabled
+    #   <p>Set to include audio data in the log delivery.</p>
+    #   @return [Boolean]
     class LoggingConfig < Struct.new(
       nil,
       :cloud_watch_config,
@@ -6804,6 +7796,7 @@ module Aws::Bedrock
       :image_data_delivery_enabled,
       :embedding_data_delivery_enabled,
       :video_data_delivery_enabled,
+      :audio_data_delivery_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6917,6 +7910,26 @@ module Aws::Bedrock
       nil,
       :selection_mode,
       :selective_mode_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration for a model used in an advanced prompt optimization job, including the model ID and inference parameters.</p>
+    # @!attribute model_id
+    #   <p>The model to use for optimization. The value depends on the resource that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html">Models at a glance</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a cross-Region (system-defined) inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html">Supported Regions and models for inference profiles</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an application inference profile, specify its full ARN, including the account ID and Region.</p> </li> </ul>
+    #   @return [String]
+    # @!attribute inference_config
+    #   <p>The inference configuration for the model, including parameters such as maximum tokens, temperature, and top-p.</p>
+    #   @return [Types::InferenceConfiguration]
+    # @!attribute additional_model_request_fields
+    #   <p>Additional model request fields. Use this to pass model-specific parameters that are not included in the standard inference configuration.</p>
+    #   @return [Hash<String, JSON>]
+    class ModelConfiguration < Struct.new(
+      nil,
+      :model_id,
+      :inference_config,
+      :additional_model_request_fields,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7039,6 +8052,22 @@ module Aws::Bedrock
 
       class S3DataSource < ModelDataSource; end
       class Unknown < ModelDataSource; end
+    end
+
+    # <p>Model-specific information for the enforced guardrail configuration.</p>
+    # @!attribute included_models
+    #   <p>Models to enforce the guardrail on.</p>
+    #   @return [Array<String>]
+    # @!attribute excluded_models
+    #   <p>Models to exclude from enforcement of the guardrail.</p>
+    #   @return [Array<String>]
+    class ModelEnforcement < Struct.new(
+      nil,
+      :included_models,
+      :excluded_models,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the import job.</p>
@@ -7168,7 +8197,7 @@ module Aws::Bedrock
     #   <p>The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference. You can use the console to create a default service role or follow the steps at <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-iam-sr.html">Create a service role for batch inference</a>.</p>
     #   @return [String]
     # @!attribute status
-    #   <p>The status of the batch inference job.</p> <p>The following statuses are possible:</p> <ul> <li> <p>Submitted – This job has been submitted to a queue for validation.</p> </li> <li> <p>Validating – This job is being validated for the requirements described in <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html">Format and upload your batch inference data</a>. The criteria include the following:</p> <ul> <li> <p>Your IAM service role has access to the Amazon S3 buckets containing your files.</p> </li> <li> <p>Your files are .jsonl files and each individual record is a JSON object in the correct format. Note that validation doesn't check if the <code>modelInput</code> value matches the request body for the model.</p> </li> <li> <p>Your files fulfill the requirements for file size and number of records. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html">Quotas for Amazon Bedrock</a>.</p> </li> </ul> </li> <li> <p>Scheduled – This job has been validated and is now in a queue. The job will automatically start when it reaches its turn.</p> </li> <li> <p>Expired – This job timed out because it was scheduled but didn't begin before the set timeout duration. Submit a new job request.</p> </li> <li> <p>InProgress – This job has begun. You can start viewing the results in the output S3 location.</p> </li> <li> <p>Completed – This job has successfully completed. View the output files in the output S3 location.</p> </li> <li> <p>PartiallyCompleted – This job has partially completed. Not all of your records could be processed in time. View the output files in the output S3 location.</p> </li> <li> <p>Failed – This job has failed. Check the failure message for any further details. For further assistance, reach out to the <a href="https://console.aws.amazon.com/support/home/">Amazon Web ServicesSupport Center</a>.</p> </li> <li> <p>Stopped – This job was stopped by a user.</p> </li> <li> <p>Stopping – This job is being stopped by a user.</p> </li> </ul>
+    #   <p>The status of the batch inference job.</p> <p>The following statuses are possible:</p> <ul> <li> <p>Submitted – This job has been submitted to a queue for validation.</p> </li> <li> <p>Validating – This job is being validated for the requirements described in <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html">Format and upload your batch inference data</a>. The criteria include the following:</p> <ul> <li> <p>Your IAM service role has access to the Amazon S3 buckets containing your files.</p> </li> <li> <p>Your files are .jsonl files and each individual record is a JSON object in the correct format. Note that validation doesn't check if the <code>modelInput</code> value matches the request body for the model.</p> </li> <li> <p>Your files fulfill the requirements for file size and number of records. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html">Quotas for Amazon Bedrock</a>.</p> </li> </ul> </li> <li> <p>Scheduled – This job has been validated and is now in a queue. The job will automatically start when it reaches its turn.</p> </li> <li> <p>Expired – This job timed out because it was scheduled but didn't begin before the set timeout duration. Submit a new job request.</p> </li> <li> <p>InProgress – This job has begun. You can start viewing the results in the output S3 location.</p> </li> <li> <p>Completed – This job has successfully completed. View the output files in the output S3 location.</p> </li> <li> <p>PartiallyCompleted – This job has partially completed. Not all of your records could be processed in time. View the output files in the output S3 location.</p> </li> <li> <p>Failed – This job has failed. Check the failure message for any further details. For further assistance, reach out to the <a href="https://console.aws.amazon.com/support/home/">Amazon Web Services Support Center</a>.</p> </li> <li> <p>Stopped – This job was stopped by a user.</p> </li> <li> <p>Stopping – This job is being stopped by a user.</p> </li> </ul>
     #   @return [String]
     # @!attribute message
     #   <p>If the batch inference job failed, this field contains a message describing why the job failed.</p>
@@ -7197,6 +8226,21 @@ module Aws::Bedrock
     # @!attribute job_expiration_time
     #   <p>The time at which the batch inference job times or timed out.</p>
     #   @return [Time]
+    # @!attribute model_invocation_type
+    #   <p>The invocation endpoint for ModelInvocationJob</p>
+    #   @return [String]
+    # @!attribute total_record_count
+    #   <p>The total number of records in the batch inference job.</p>
+    #   @return [Integer]
+    # @!attribute processed_record_count
+    #   <p>The number of records that have been processed in the batch inference job.</p>
+    #   @return [Integer]
+    # @!attribute success_record_count
+    #   <p>The number of records that were successfully processed in the batch inference job.</p>
+    #   @return [Integer]
+    # @!attribute error_record_count
+    #   <p>The number of records that failed to process in the batch inference job.</p>
+    #   @return [Integer]
     class ModelInvocationJobSummary < Struct.new(
       nil,
       :job_arn,
@@ -7214,6 +8258,23 @@ module Aws::Bedrock
       :vpc_config,
       :timeout_duration_in_hours,
       :job_expiration_time,
+      :model_invocation_type,
+      :total_record_count,
+      :processed_record_count,
+      :success_record_count,
+      :error_record_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the Amazon Resource Name (ARN) of a SageMaker AI model package to use as the data source for a custom model.</p>
+    # @!attribute model_package_arn
+    #   <p>The Amazon Resource Name (ARN) of the SageMaker AI model package. The ARN must be for a model package of <code>restricted</code> type.</p> <p>To use a model package ARN, you must have the <code>sagemaker:DescribeModelPackage</code> and <code>sagemaker:AccessModelPackageData</code> permissions on the model package resource.</p>
+    #   @return [String]
+    class ModelPackageArnDataSource < Struct.new(
+      nil,
+      :model_package_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7415,6 +8476,66 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute mode
+    #   <p>The data retention mode to set for the account.</p>
+    #   @return [String]
+    class PutAccountDataRetentionRequest < Struct.new(
+      nil,
+      :mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute mode
+    #   <p>The data retention mode set for the account.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The time at which the data retention mode was last updated.</p>
+    #   @return [Time]
+    class PutAccountDataRetentionResponse < Struct.new(
+      nil,
+      :mode,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute config_id
+    #   <p>Unique ID for the account enforced configuration.</p>
+    #   @return [String]
+    # @!attribute guardrail_inference_config
+    #   <p>Account-level enforced guardrail input configuration.</p>
+    #   @return [Types::AccountEnforcedGuardrailInferenceInputConfiguration]
+    class PutEnforcedGuardrailConfigurationRequest < Struct.new(
+      nil,
+      :config_id,
+      :guardrail_inference_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute config_id
+    #   <p>Unique ID for the account enforced configuration.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>Timestamp.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The ARN of the role used to update the configuration.</p>
+    #   @return [String]
+    class PutEnforcedGuardrailConfigurationResponse < Struct.new(
+      nil,
+      :config_id,
+      :updated_at,
+      :updated_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute logging_config
     #   <p>The logging configuration values to set.</p>
     #   @return [Types::LoggingConfig]
@@ -7428,6 +8549,32 @@ module Aws::Bedrock
 
     class PutModelInvocationLoggingConfigurationResponse < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The ARN of the Bedrock resource to which this resource policy applies.</p>
+    #   @return [String]
+    # @!attribute resource_policy
+    #   <p>The JSON string representing the Bedrock resource policy.</p>
+    #   @return [String]
+    class PutResourcePolicyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :resource_policy,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The ARN of the Bedrock resource to which this resource policy applies.</p>
+    #   @return [String]
+    class PutResourcePolicyResponse < Struct.new(
+      nil,
+      :resource_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7481,6 +8628,62 @@ module Aws::Bedrock
       class KnowledgeBaseConfig < RAGConfig; end
       class PrecomputedRagSourceConfig < RAGConfig; end
       class Unknown < RAGConfig; end
+    end
+
+    # <p> Configuration settings for reinforcement fine-tuning (RFT), including grader configuration and training hyperparameters. </p>
+    # @!attribute grader_config
+    #   <p> Configuration for the grader that evaluates model responses and provides reward signals during RFT training. </p>
+    #   @return [Types::GraderConfig]
+    # @!attribute hyper_parameters
+    #   <p> Hyperparameters that control the reinforcement fine-tuning training process, including learning rate, batch size, and epoch count. </p>
+    #   @return [Types::RFTHyperParameters]
+    class RFTConfig < Struct.new(
+      nil,
+      :grader_config,
+      :hyper_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p> Hyperparameters for controlling the reinforcement fine-tuning training process, including learning settings and evaluation intervals. </p>
+    # @!attribute epoch_count
+    #   <p> Number of training epochs to run during reinforcement fine-tuning. Higher values may improve performance but increase training time. </p>
+    #   @return [Integer]
+    # @!attribute batch_size
+    #   <p> Number of training samples processed in each batch during reinforcement fine-tuning (RFT) training. Larger batches may improve training stability. </p>
+    #   @return [Integer]
+    # @!attribute learning_rate
+    #   <p> Learning rate for the reinforcement fine-tuning. Controls how quickly the model adapts to reward signals. </p>
+    #   @return [Float]
+    # @!attribute max_prompt_length
+    #   <p> Maximum length of input prompts during RFT training, measured in tokens. Longer prompts allow more context but increase memory usage and training-time. </p>
+    #   @return [Integer]
+    # @!attribute training_sample_per_prompt
+    #   <p> Number of response samples generated per prompt during RFT training. More samples provide better reward signal estimation. </p>
+    #   @return [Integer]
+    # @!attribute inference_max_tokens
+    #   <p> Maximum number of tokens the model can generate in response to each prompt during RFT training. </p>
+    #   @return [Integer]
+    # @!attribute reasoning_effort
+    #   <p> Level of reasoning effort applied during RFT training. Higher values may improve response quality but increase training time. </p>
+    #   @return [String]
+    # @!attribute eval_interval
+    #   <p> Interval between evaluation runs during RFT training, measured in training steps. More frequent evaluation provides better monitoring. </p>
+    #   @return [Integer]
+    class RFTHyperParameters < Struct.new(
+      nil,
+      :epoch_count,
+      :batch_size,
+      :learning_rate,
+      :max_prompt_length,
+      :training_sample_per_prompt,
+      :inference_max_tokens,
+      :reasoning_effort,
+      :eval_interval,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the value and corresponding definition for one rating in a custom metric rating scale.</p>
@@ -7825,6 +9028,22 @@ module Aws::Bedrock
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Selective content guarding controls for enforced guardrails.</p>
+    # @!attribute system
+    #   <p>Selective guarding mode for system prompts."</p>
+    #   @return [String]
+    # @!attribute messages
+    #   <p>Selective guarding mode for user messages.</p>
+    #   @return [String]
+    class SelectiveContentGuarding < Struct.new(
+      nil,
+      :system,
+      :messages,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The number of requests exceeds the service quota. Resubmit your request later.</p>
     # @!attribute message
     #   @return [String]
@@ -7934,6 +9153,26 @@ module Aws::Bedrock
       :validation_details,
       :data_processing_details,
       :training_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Stop Advanced Prompt Optimization Job Request</p>
+    # @!attribute job_identifier
+    #   <p>The ARN or ID of the advanced prompt optimization job to stop.</p>
+    #   @return [String]
+    class StopAdvancedPromptOptimizationJobRequest < Struct.new(
+      nil,
+      :job_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Stop Advanced Prompt Optimization Job Response</p>
+    class StopAdvancedPromptOptimizationJobResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8344,6 +9583,32 @@ module Aws::Bedrock
       nil,
       :policy_arn,
       :test_case_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute model_arn
+    #   <p> ARN of the new custom model to deploy. This replaces the currently deployed model. </p>
+    #   @return [String]
+    # @!attribute custom_model_deployment_identifier
+    #   <p> Identifier of the custom model deployment to update with the new custom model. </p>
+    #   @return [String]
+    class UpdateCustomModelDeploymentRequest < Struct.new(
+      nil,
+      :model_arn,
+      :custom_model_deployment_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute custom_model_deployment_arn
+    #   <p> ARN of the custom model deployment being updated. </p>
+    #   @return [String]
+    class UpdateCustomModelDeploymentResponse < Struct.new(
+      nil,
+      :custom_model_deployment_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

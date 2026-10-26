@@ -1,0 +1,149 @@
+module Aws::PricingPlanManager
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PricingPlanManager::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ApprovePaidSubscriptionResponse
+      include Smithy::Client::_Response[Types::ApprovePaidSubscriptionOutput]
+      def subscription: () -> Types::Subscription?
+      def e_tag: () -> String?
+    end
+    def approve_paid_subscription: (
+      ?arn: String,
+      ?if_match: String,
+      ?client_token: String
+    ) -> _ApprovePaidSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ApprovePaidSubscriptionResponse
+
+    interface _AssociateResourcesToSubscriptionResponse
+      include Smithy::Client::_Response[Types::AssociateResourcesToSubscriptionOutput]
+      def subscription: () -> Types::Subscription?
+      def e_tag: () -> String?
+    end
+    def associate_resources_to_subscription: (
+      ?arn: String,
+      ?resource_arns: Array[String],
+      ?if_match: String,
+      ?client_token: String
+    ) -> _AssociateResourcesToSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResourcesToSubscriptionResponse
+
+    interface _CancelSubscriptionResponse
+      include Smithy::Client::_Response[Types::CancelSubscriptionOutput]
+      def subscription: () -> Types::Subscription?
+      def e_tag: () -> String?
+    end
+    def cancel_subscription: (
+      ?arn: String,
+      ?if_match: String,
+      ?client_token: String
+    ) -> _CancelSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSubscriptionResponse
+
+    interface _CancelSubscriptionChangeResponse
+      include Smithy::Client::_Response[Types::CancelSubscriptionChangeOutput]
+      def subscription: () -> Types::Subscription?
+      def e_tag: () -> String?
+    end
+    def cancel_subscription_change: (
+      ?arn: String,
+      ?if_match: String,
+      ?client_token: String
+    ) -> _CancelSubscriptionChangeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelSubscriptionChangeResponse
+
+    interface _CreateSubscriptionResponse
+      include Smithy::Client::_Response[Types::CreateSubscriptionOutput]
+      def subscription: () -> Types::Subscription?
+      def e_tag: () -> String?
+    end
+    def create_subscription: (
+      ?plan_family: String,
+      ?plan_tier: String,
+      ?usage_level: String,
+      ?resource_arns: Array[String],
+      ?approval_mode: String,
+      ?client_token: String
+    ) -> _CreateSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionResponse
+
+    interface _DisassociateResourcesFromSubscriptionResponse
+      include Smithy::Client::_Response[Types::DisassociateResourcesFromSubscriptionOutput]
+      def subscription: () -> Types::Subscription?
+      def e_tag: () -> String?
+    end
+    def disassociate_resources_from_subscription: (
+      ?arn: String,
+      ?resource_arns: Array[String],
+      ?if_match: String,
+      ?client_token: String
+    ) -> _DisassociateResourcesFromSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResourcesFromSubscriptionResponse
+
+    interface _GetSubscriptionResponse
+      include Smithy::Client::_Response[Types::GetSubscriptionOutput]
+      def subscription: () -> Types::Subscription?
+      def e_tag: () -> String?
+    end
+    def get_subscription: (
+      ?arn: String
+    ) -> _GetSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubscriptionResponse
+
+    interface _ListSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListSubscriptionsOutput]
+      def subscription_summaries: () -> Array[Types::SubscriptionSummary]?
+      def next_token: () -> String?
+    end
+    def list_subscriptions: (
+      ?next_token: String
+    ) -> _ListSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubscriptionsResponse
+
+    interface _UpdateSubscriptionResponse
+      include Smithy::Client::_Response[Types::UpdateSubscriptionOutput]
+      def subscription: () -> Types::Subscription?
+      def e_tag: () -> String?
+    end
+    def update_subscription: (
+      ?arn: String,
+      ?plan_tier: String,
+      ?usage_level: String,
+      ?if_match: String,
+      ?client_token: String
+    ) -> _UpdateSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriptionResponse
+  end
+end

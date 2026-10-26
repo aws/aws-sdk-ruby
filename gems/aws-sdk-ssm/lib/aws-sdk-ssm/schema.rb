@@ -48,6 +48,7 @@ module Aws::SSM
     AssociationComplianceSeverity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#AssociationComplianceSeverity", name: "AssociationComplianceSeverity")
     AssociationDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#AssociationDescription", name: "AssociationDescription")
     AssociationDescriptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#AssociationDescriptionList", name: "AssociationDescriptionList")
+    AssociationDispatchAssumeRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AssociationDispatchAssumeRoleArn", name: "AssociationDispatchAssumeRoleArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"})
     AssociationDoesNotExist = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#AssociationDoesNotExist", name: "AssociationDoesNotExist", traits: {"aws.protocols#awsQueryError" => {"code" => "AssociationDoesNotExist", "httpResponseCode" => 404}, "smithy.api#error" => "client"})
     AssociationExecution = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#AssociationExecution", name: "AssociationExecution")
     AssociationExecutionDoesNotExist = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#AssociationExecutionDoesNotExist", name: "AssociationExecutionDoesNotExist", traits: {"aws.protocols#awsQueryError" => {"code" => "AssociationExecutionDoesNotExist", "httpResponseCode" => 404}, "smithy.api#error" => "client"})
@@ -80,7 +81,7 @@ module Aws::SSM
     AssociationStatusAggregatedCount = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.ssm#AssociationStatusAggregatedCount", name: "AssociationStatusAggregatedCount")
     AssociationStatusName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#AssociationStatusName", name: "AssociationStatusName")
     AssociationSyncCompliance = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#AssociationSyncCompliance", name: "AssociationSyncCompliance")
-    AssociationVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AssociationVersion", name: "AssociationVersion", traits: {"smithy.api#pattern" => "^([$]LATEST)|([1-9][0-9]*)$"})
+    AssociationVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AssociationVersion", name: "AssociationVersion", traits: {"smithy.api#pattern" => "^(([$]LATEST)|([1-9][0-9]*))$"})
     AssociationVersionInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#AssociationVersionInfo", name: "AssociationVersionInfo")
     AssociationVersionLimitExceeded = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#AssociationVersionLimitExceeded", name: "AssociationVersionLimitExceeded", traits: {"aws.protocols#awsQueryError" => {"code" => "AssociationVersionLimitExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client"})
     AssociationVersionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#AssociationVersionList", name: "AssociationVersionList", traits: {"smithy.api#length" => {"min" => 1}})
@@ -125,7 +126,19 @@ module Aws::SSM
     AutomationStepNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#AutomationStepNotFoundException", name: "AutomationStepNotFoundException", traits: {"aws.protocols#awsQueryError" => {"code" => "AutomationStepNotFoundException", "httpResponseCode" => 404}, "smithy.api#error" => "client"})
     AutomationSubtype = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#AutomationSubtype", name: "AutomationSubtype")
     AutomationTargetParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AutomationTargetParameterName", name: "AutomationTargetParameterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    AutomationTargets = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#AutomationTargets", name: "AutomationTargets", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     AutomationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#AutomationType", name: "AutomationType")
+    AvailabilityZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AvailabilityZone", name: "AvailabilityZone", traits: {"smithy.api#length" => {"min" => 0, "max" => 120}})
+    AvailabilityZoneId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AvailabilityZoneId", name: "AvailabilityZoneId", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    AzureApplicationDisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AzureApplicationDisplayName", name: "AzureApplicationDisplayName", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"})
+    AzureApplicationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AzureApplicationId", name: "AzureApplicationId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"})
+    AzureConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#AzureConfiguration", name: "AzureConfiguration")
+    AzureSubscription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#AzureSubscription", name: "AzureSubscription")
+    AzureSubscriptionDisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AzureSubscriptionDisplayName", name: "AzureSubscriptionDisplayName", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"})
+    AzureSubscriptionId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AzureSubscriptionId", name: "AzureSubscriptionId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"})
+    AzureSubscriptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#AzureSubscriptionList", name: "AzureSubscriptionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 75}})
+    AzureTenantDisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AzureTenantDisplayName", name: "AzureTenantDisplayName", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"})
+    AzureTenantId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#AzureTenantId", name: "AzureTenantId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"})
     BaselineDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#BaselineDescription", name: "BaselineDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     BaselineId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#BaselineId", name: "BaselineId", traits: {"smithy.api#length" => {"min" => 20, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\-:/]{20,128}$"})
     BaselineName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#BaselineName", name: "BaselineName", traits: {"smithy.api#length" => {"min" => 3, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\-.]{3,128}$"})
@@ -145,6 +158,19 @@ module Aws::SSM
     ChangeDetailsValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ChangeDetailsValue", name: "ChangeDetailsValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 32768}})
     ChangeRequestName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ChangeRequestName", name: "ChangeRequestName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
+    CloudConnectorArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#CloudConnectorArn", name: "CloudConnectorArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov)?:ssm:([^:]+):\\d{12}:cloud-connector/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    CloudConnectorConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.ssm#CloudConnectorConfiguration", name: "CloudConnectorConfiguration")
+    CloudConnectorDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#CloudConnectorDescription", name: "CloudConnectorDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"})
+    CloudConnectorFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CloudConnectorFilter", name: "CloudConnectorFilter")
+    CloudConnectorFilterKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#CloudConnectorFilterKey", name: "CloudConnectorFilterKey")
+    CloudConnectorFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#CloudConnectorFilterList", name: "CloudConnectorFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    CloudConnectorFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#CloudConnectorFilterValue", name: "CloudConnectorFilterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    CloudConnectorFilterValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#CloudConnectorFilterValues", name: "CloudConnectorFilterValues", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    CloudConnectorIamRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#CloudConnectorIamRoleArn", name: "CloudConnectorIamRoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z0-9-]*:iam::\\d{12}:role\\/[\\w-\\/.@+=,]{1,1017}$"})
+    CloudConnectorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#CloudConnectorId", name: "CloudConnectorId", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    CloudConnectorMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ssm#CloudConnectorMaxResults", name: "CloudConnectorMaxResults", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 10}})
+    CloudConnectorSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CloudConnectorSummary", name: "CloudConnectorSummary")
+    CloudConnectorSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#CloudConnectorSummaryList", name: "CloudConnectorSummaryList")
     CloudWatchLogGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#CloudWatchLogGroupName", name: "CloudWatchLogGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     CloudWatchOutputConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CloudWatchOutputConfig", name: "CloudWatchOutputConfig")
     CloudWatchOutputEnabled = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.ssm#CloudWatchOutputEnabled", name: "CloudWatchOutputEnabled", traits: {"smithy.api#default" => false})
@@ -194,10 +220,13 @@ module Aws::SSM
     ComplianceSummaryItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ComplianceSummaryItem", name: "ComplianceSummaryItem")
     ComplianceSummaryItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#ComplianceSummaryItemList", name: "ComplianceSummaryItemList")
     ComplianceTypeCountLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ComplianceTypeCountLimitExceededException", name: "ComplianceTypeCountLimitExceededException", traits: {"aws.protocols#awsQueryError" => {"code" => "ComplianceTypeCountLimitExceeded", "httpResponseCode" => 400}, "smithy.api#error" => "client"})
-    ComplianceTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ComplianceTypeName", name: "ComplianceTypeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^[A-Za-z0-9_\\-]\\w+|Custom:[a-zA-Z0-9_\\-]\\w+$"})
+    ComplianceTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ComplianceTypeName", name: "ComplianceTypeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^([A-Za-z0-9_\\-]\\w+|Custom:[a-zA-Z0-9_\\-]\\w+)$"})
     ComplianceUploadType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#ComplianceUploadType", name: "ComplianceUploadType")
     CompliantSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CompliantSummary", name: "CompliantSummary")
     ComputerName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ComputerName", name: "ComputerName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    ConfigConnectorArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ConfigConnectorArn", name: "ConfigConnectorArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov)?:config:([^:]+):\\d{12}:connector/.+$"})
+    ConfigurationTargets = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.ssm#ConfigurationTargets", name: "ConfigurationTargets")
+    ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ConflictException", name: "ConflictException", traits: {"aws.protocols#awsQueryError" => {"code" => "ConflictException", "httpResponseCode" => 409}, "smithy.api#error" => "client"})
     ConnectionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#ConnectionStatus", name: "ConnectionStatus")
     ContentLength = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ssm#ContentLength", name: "ContentLength", traits: {"smithy.api#default" => 0})
     CreateActivationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CreateActivationRequest", name: "CreateActivationRequest")
@@ -208,6 +237,8 @@ module Aws::SSM
     CreateAssociationBatchResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CreateAssociationBatchResult", name: "CreateAssociationBatchResult")
     CreateAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CreateAssociationRequest", name: "CreateAssociationRequest")
     CreateAssociationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CreateAssociationResult", name: "CreateAssociationResult")
+    CreateCloudConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CreateCloudConnectorRequest", name: "CreateCloudConnectorRequest")
+    CreateCloudConnectorResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CreateCloudConnectorResult", name: "CreateCloudConnectorResult")
     CreateDocumentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CreateDocumentRequest", name: "CreateDocumentRequest")
     CreateDocumentResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CreateDocumentResult", name: "CreateDocumentResult")
     CreateMaintenanceWindowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#CreateMaintenanceWindowRequest", name: "CreateMaintenanceWindowRequest")
@@ -230,6 +261,8 @@ module Aws::SSM
     DeleteActivationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteActivationResult", name: "DeleteActivationResult")
     DeleteAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteAssociationRequest", name: "DeleteAssociationRequest")
     DeleteAssociationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteAssociationResult", name: "DeleteAssociationResult")
+    DeleteCloudConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteCloudConnectorRequest", name: "DeleteCloudConnectorRequest")
+    DeleteCloudConnectorResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteCloudConnectorResult", name: "DeleteCloudConnectorResult")
     DeleteDocumentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteDocumentRequest", name: "DeleteDocumentRequest")
     DeleteDocumentResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteDocumentResult", name: "DeleteDocumentResult")
     DeleteInventoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteInventoryRequest", name: "DeleteInventoryRequest")
@@ -250,6 +283,7 @@ module Aws::SSM
     DeleteResourceDataSyncResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteResourceDataSyncResult", name: "DeleteResourceDataSyncResult")
     DeleteResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteResourcePolicyRequest", name: "DeleteResourcePolicyRequest")
     DeleteResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeleteResourcePolicyResponse", name: "DeleteResourcePolicyResponse")
+    DeletionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#DeletionMode", name: "DeletionMode")
     DeliveryTimedOutCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ssm#DeliveryTimedOutCount", name: "DeliveryTimedOutCount", traits: {"smithy.api#default" => 0})
     DeregisterManagedInstanceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeregisterManagedInstanceRequest", name: "DeregisterManagedInstanceRequest")
     DeregisterManagedInstanceResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DeregisterManagedInstanceResult", name: "DeregisterManagedInstanceResult")
@@ -332,6 +366,7 @@ module Aws::SSM
     DescriptionInDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#DescriptionInDocument", name: "DescriptionInDocument")
     DisassociateOpsItemRelatedItemRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DisassociateOpsItemRelatedItemRequest", name: "DisassociateOpsItemRelatedItemRequest")
     DisassociateOpsItemRelatedItemResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DisassociateOpsItemRelatedItemResponse", name: "DisassociateOpsItemRelatedItemResponse")
+    DisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#DisplayName", name: "DisplayName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"})
     DocumentARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#DocumentARN", name: "DocumentARN", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9_\\-.:/]{3,128}$"})
     DocumentAlreadyExists = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#DocumentAlreadyExists", name: "DocumentAlreadyExists", traits: {"aws.protocols#awsQueryError" => {"code" => "DocumentAlreadyExists", "httpResponseCode" => 400}, "smithy.api#error" => "client"})
     DocumentAuthor = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#DocumentAuthor", name: "DocumentAuthor")
@@ -398,7 +433,7 @@ module Aws::SSM
     EffectivePatch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#EffectivePatch", name: "EffectivePatch")
     EffectivePatchList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#EffectivePatchList", name: "EffectivePatchList")
     ErrorCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ssm#ErrorCount", name: "ErrorCount", traits: {"smithy.api#default" => 0})
-    ExcludeAccount = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ExcludeAccount", name: "ExcludeAccount", traits: {"smithy.api#length" => {"min" => 6, "max" => 68}, "smithy.api#pattern" => "^(ou-[a-z0-9]{4,32}-[a-z0-9]{8,32})|(\\d{12})$"})
+    ExcludeAccount = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ExcludeAccount", name: "ExcludeAccount", traits: {"smithy.api#length" => {"min" => 6, "max" => 68}, "smithy.api#pattern" => "^((ou-[a-z0-9]{4,32}-[a-z0-9]{8,32})|(\\d{12}))$"})
     ExcludeAccounts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#ExcludeAccounts", name: "ExcludeAccounts", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000}})
     ExecutionInputs = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.ssm#ExecutionInputs", name: "ExecutionInputs")
     ExecutionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#ExecutionMode", name: "ExecutionMode")
@@ -419,6 +454,8 @@ module Aws::SSM
     GetAutomationExecutionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#GetAutomationExecutionResult", name: "GetAutomationExecutionResult")
     GetCalendarStateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#GetCalendarStateRequest", name: "GetCalendarStateRequest")
     GetCalendarStateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#GetCalendarStateResponse", name: "GetCalendarStateResponse")
+    GetCloudConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#GetCloudConnectorRequest", name: "GetCloudConnectorRequest")
+    GetCloudConnectorResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#GetCloudConnectorResult", name: "GetCloudConnectorResult")
     GetCommandInvocationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#GetCommandInvocationRequest", name: "GetCommandInvocationRequest")
     GetCommandInvocationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#GetCommandInvocationResult", name: "GetCommandInvocationResult")
     GetConnectionStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#GetConnectionStatusRequest", name: "GetConnectionStatusRequest")
@@ -646,6 +683,8 @@ module Aws::SSM
     ListAssociationVersionsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ListAssociationVersionsResult", name: "ListAssociationVersionsResult")
     ListAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ListAssociationsRequest", name: "ListAssociationsRequest")
     ListAssociationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ListAssociationsResult", name: "ListAssociationsResult")
+    ListCloudConnectorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ListCloudConnectorsRequest", name: "ListCloudConnectorsRequest")
+    ListCloudConnectorsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ListCloudConnectorsResult", name: "ListCloudConnectorsResult")
     ListCommandInvocationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ListCommandInvocationsRequest", name: "ListCommandInvocationsRequest")
     ListCommandInvocationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ListCommandInvocationsResult", name: "ListCommandInvocationsResult")
     ListCommandsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ListCommandsRequest", name: "ListCommandsRequest")
@@ -762,6 +801,7 @@ module Aws::SSM
     ModifyDocumentPermissionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ModifyDocumentPermissionRequest", name: "ModifyDocumentPermissionRequest")
     ModifyDocumentPermissionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ModifyDocumentPermissionResponse", name: "ModifyDocumentPermissionResponse")
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#NextToken", name: "NextToken")
+    NoLongerSupportedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#NoLongerSupportedException", name: "NoLongerSupportedException", traits: {"aws.protocols#awsQueryError" => {"code" => "NoLongerSupported", "httpResponseCode" => 400}, "smithy.api#error" => "client"})
     Node = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#Node", name: "Node")
     NodeAccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#NodeAccountId", name: "NodeAccountId", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     NodeAggregator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#NodeAggregator", name: "NodeAggregator")
@@ -777,6 +817,7 @@ module Aws::SSM
     NodeFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#NodeFilterValueList", name: "NodeFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     NodeId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#NodeId", name: "NodeId", traits: {"smithy.api#pattern" => "^(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)$"})
     NodeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#NodeList", name: "NodeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    NodeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#NodeName", name: "NodeName", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
     NodeOrganizationalUnitId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#NodeOrganizationalUnitId", name: "NodeOrganizationalUnitId", traits: {"smithy.api#length" => {"min" => 1, "max" => 68}, "smithy.api#pattern" => "^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$"})
     NodeOrganizationalUnitPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#NodeOrganizationalUnitPath", name: "NodeOrganizationalUnitPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
     NodeOwnerInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#NodeOwnerInfo", name: "NodeOwnerInfo")
@@ -924,7 +965,7 @@ module Aws::SSM
     ParameterPolicies = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ParameterPolicies", name: "ParameterPolicies", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
     ParameterPolicyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#ParameterPolicyList", name: "ParameterPolicyList")
     ParameterStringFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ParameterStringFilter", name: "ParameterStringFilter")
-    ParameterStringFilterKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ParameterStringFilterKey", name: "ParameterStringFilterKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 132}, "smithy.api#pattern" => "^tag:.+|Name|Type|KeyId|Path|Label|Tier|DataType$"})
+    ParameterStringFilterKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ParameterStringFilterKey", name: "ParameterStringFilterKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 132}, "smithy.api#pattern" => "^(tag:.+|Name|Type|KeyId|Path|Label|Tier|DataType)$"})
     ParameterStringFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#ParameterStringFilterList", name: "ParameterStringFilterList")
     ParameterStringFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ParameterStringFilterValue", name: "ParameterStringFilterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     ParameterStringFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#ParameterStringFilterValueList", name: "ParameterStringFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
@@ -1179,6 +1220,7 @@ module Aws::SSM
     SnapshotDownloadUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#SnapshotDownloadUrl", name: "SnapshotDownloadUrl")
     SnapshotId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#SnapshotId", name: "SnapshotId", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"})
     SourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#SourceId", name: "SourceId", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9:_-]*$"})
+    SourceLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#SourceLocation", name: "SourceLocation", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^.{1,128}$"})
     SourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#SourceType", name: "SourceType")
     StandardErrorContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#StandardErrorContent", name: "StandardErrorContent", traits: {"smithy.api#length" => {"min" => 0, "max" => 8000}})
     StandardOutputContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#StandardOutputContent", name: "StandardOutputContent", traits: {"smithy.api#length" => {"min" => 0, "max" => 24000}})
@@ -1264,6 +1306,8 @@ module Aws::SSM
     UpdateAssociationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#UpdateAssociationResult", name: "UpdateAssociationResult")
     UpdateAssociationStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#UpdateAssociationStatusRequest", name: "UpdateAssociationStatusRequest")
     UpdateAssociationStatusResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#UpdateAssociationStatusResult", name: "UpdateAssociationStatusResult")
+    UpdateCloudConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#UpdateCloudConnectorRequest", name: "UpdateCloudConnectorRequest")
+    UpdateCloudConnectorResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#UpdateCloudConnectorResult", name: "UpdateCloudConnectorResult")
     UpdateDocumentDefaultVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#UpdateDocumentDefaultVersionRequest", name: "UpdateDocumentDefaultVersionRequest")
     UpdateDocumentDefaultVersionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#UpdateDocumentDefaultVersionResult", name: "UpdateDocumentDefaultVersionResult")
     UpdateDocumentMetadataRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#UpdateDocumentMetadataRequest", name: "UpdateDocumentMetadataRequest")
@@ -1291,7 +1335,16 @@ module Aws::SSM
     Url = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#Url", name: "Url")
     ValidNextStep = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#ValidNextStep", name: "ValidNextStep", traits: {"smithy.api#length" => {"min" => 1, "max" => 65535}})
     ValidNextStepList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#ValidNextStepList", name: "ValidNextStepList")
+    ValidateCloudConnectorMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ssm#ValidateCloudConnectorMaxResults", name: "ValidateCloudConnectorMaxResults", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 75}})
+    ValidateCloudConnectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ValidateCloudConnectorRequest", name: "ValidateCloudConnectorRequest")
+    ValidateCloudConnectorResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ValidateCloudConnectorResult", name: "ValidateCloudConnectorResult")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ValidationException", name: "ValidationException", traits: {"aws.protocols#awsQueryError" => {"code" => "ValidationException", "httpResponseCode" => 400}, "smithy.api#error" => "client"})
+    ValidationFinding = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ValidationFinding", name: "ValidationFinding")
+    ValidationFindingCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#ValidationFindingCode", name: "ValidationFindingCode")
+    ValidationFindingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ssm#ValidationFindingList", name: "ValidationFindingList")
+    ValidationFindingScope = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ssm#ValidationFindingScope", name: "ValidationFindingScope")
+    ValidationFindingScopeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#ValidationFindingScopeType", name: "ValidationFindingScopeType")
+    ValidationFindingType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ssm#ValidationFindingType", name: "ValidationFindingType")
     Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ssm#Version", name: "Version", traits: {"smithy.api#pattern" => "^[0-9]{1,6}(\\.[0-9]{1,6}){2,3}$"})
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
@@ -1395,6 +1448,7 @@ module Aws::SSM
     AssociationDescription.add_member(:target_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetMaps, name: "TargetMaps"))
     AssociationDescription.add_member(:alarm_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmConfiguration, name: "AlarmConfiguration"))
     AssociationDescription.add_member(:triggered_alarms, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmStateInformationList, name: "TriggeredAlarms"))
+    AssociationDescription.add_member(:association_dispatch_assume_role, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationDispatchAssumeRoleArn, name: "AssociationDispatchAssumeRole"))
     AssociationDescription.type = Types::AssociationDescription
     AssociationDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationDescription, name: "member", traits: {"smithy.api#xmlName" => "AssociationDescription"}))
     AssociationDoesNotExist.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
@@ -1450,6 +1504,7 @@ module Aws::SSM
     AssociationFilterKey.add_member(:last_executed_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastExecutedAfter", traits: {"smithy.api#enumValue" => "LastExecutedAfter"}))
     AssociationFilterKey.add_member(:association_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AssociationName", traits: {"smithy.api#enumValue" => "AssociationName"}))
     AssociationFilterKey.add_member(:resource_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResourceGroupName", traits: {"smithy.api#enumValue" => "ResourceGroupName"}))
+    AssociationFilterKey.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CloudConnectorId", traits: {"smithy.api#enumValue" => "CloudConnectorId"}))
     AssociationFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationFilter, name: "member", traits: {"smithy.api#xmlName" => "AssociationFilter"}))
     AssociationFilterOperatorType.add_member(:equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Equal", traits: {"smithy.api#enumValue" => "EQUAL"}))
     AssociationFilterOperatorType.add_member(:less_than, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LessThan", traits: {"smithy.api#enumValue" => "LESS_THAN"}))
@@ -1493,6 +1548,7 @@ module Aws::SSM
     AssociationVersionInfo.add_member(:schedule_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleOffset, name: "ScheduleOffset"))
     AssociationVersionInfo.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "Duration"))
     AssociationVersionInfo.add_member(:target_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetMaps, name: "TargetMaps"))
+    AssociationVersionInfo.add_member(:association_dispatch_assume_role, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationDispatchAssumeRoleArn, name: "AssociationDispatchAssumeRole"))
     AssociationVersionInfo.type = Types::AssociationVersionInfo
     AssociationVersionLimitExceeded.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     AssociationVersionLimitExceeded.type = Types::AssociationVersionLimitExceeded
@@ -1534,6 +1590,7 @@ module Aws::SSM
     AutomationExecution.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationParameterMap, name: "Parameters"))
     AutomationExecution.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationParameterMap, name: "Outputs"))
     AutomationExecution.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureMessage"))
+    AutomationExecution.add_member(:warning_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "WarningMessage"))
     AutomationExecution.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionMode, name: "Mode"))
     AutomationExecution.add_member(:parent_automation_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationExecutionId, name: "ParentAutomationExecutionId"))
     AutomationExecution.add_member(:executed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ExecutedBy"))
@@ -1578,7 +1635,7 @@ module Aws::SSM
     AutomationExecutionFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationExecutionFilterValue, name: "member"))
     AutomationExecutionInputs.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationParameterMap, name: "Parameters"))
     AutomationExecutionInputs.add_member(:target_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationParameterKey, name: "TargetParameterName"))
-    AutomationExecutionInputs.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: Targets, name: "Targets"))
+    AutomationExecutionInputs.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationTargets, name: "Targets"))
     AutomationExecutionInputs.add_member(:target_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetMaps, name: "TargetMaps"))
     AutomationExecutionInputs.add_member(:target_locations, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetLocations, name: "TargetLocations"))
     AutomationExecutionInputs.add_member(:target_locations_url, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetLocationsURL, name: "TargetLocationsURL"))
@@ -1599,6 +1656,7 @@ module Aws::SSM
     AutomationExecutionMetadata.add_member(:current_step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CurrentStepName"))
     AutomationExecutionMetadata.add_member(:current_action, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CurrentAction"))
     AutomationExecutionMetadata.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureMessage"))
+    AutomationExecutionMetadata.add_member(:warning_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "WarningMessage"))
     AutomationExecutionMetadata.add_member(:target_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationParameterKey, name: "TargetParameterName"))
     AutomationExecutionMetadata.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: Targets, name: "Targets"))
     AutomationExecutionMetadata.add_member(:target_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetMaps, name: "TargetMaps"))
@@ -1651,8 +1709,19 @@ module Aws::SSM
     AutomationStepNotFoundException.type = Types::AutomationStepNotFoundException
     AutomationSubtype.add_member(:change_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ChangeRequest", traits: {"smithy.api#enumValue" => "ChangeRequest"}))
     AutomationSubtype.add_member(:access_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AccessRequest", traits: {"smithy.api#enumValue" => "AccessRequest"}))
+    AutomationTargets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Target, name: "member"))
     AutomationType.add_member(:cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CrossAccount", traits: {"smithy.api#enumValue" => "CrossAccount"}))
     AutomationType.add_member(:local, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Local", traits: {"smithy.api#enumValue" => "Local"}))
+    AzureConfiguration.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureTenantId, name: "TenantId", traits: {"smithy.api#required" => {}}))
+    AzureConfiguration.add_member(:tenant_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureTenantDisplayName, name: "TenantDisplayName"))
+    AzureConfiguration.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureApplicationId, name: "ApplicationId", traits: {"smithy.api#required" => {}}))
+    AzureConfiguration.add_member(:application_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureApplicationDisplayName, name: "ApplicationDisplayName"))
+    AzureConfiguration.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationTargets, name: "Targets"))
+    AzureConfiguration.type = Types::AzureConfiguration
+    AzureSubscription.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureSubscriptionId, name: "Id", traits: {"smithy.api#required" => {}}))
+    AzureSubscription.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureSubscriptionDisplayName, name: "DisplayName"))
+    AzureSubscription.type = Types::AzureSubscription
+    AzureSubscriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureSubscription, name: "member"))
     BaselineOverride.add_member(:operating_system, ::Smithy::Schema::Shapes::MemberShape.new(target: OperatingSystem, name: "OperatingSystem"))
     BaselineOverride.add_member(:global_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: PatchFilterGroup, name: "GlobalFilters"))
     BaselineOverride.add_member(:approval_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: PatchRuleGroup, name: "ApprovalRules"))
@@ -1677,6 +1746,24 @@ module Aws::SSM
     CancelMaintenanceWindowExecutionResult.type = Types::CancelMaintenanceWindowExecutionResult
     CategoryEnumList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member"))
     CategoryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member"))
+    CloudConnectorConfiguration.add_member(:azure_configuration, Types::CloudConnectorConfiguration::AzureConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureConfiguration, name: "AzureConfiguration"))
+    CloudConnectorConfiguration.add_member(:unknown, Types::CloudConnectorConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CloudConnectorConfiguration.type = Types::CloudConnectorConfiguration
+    CloudConnectorFilter.add_member(:filter_key, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorFilterKey, name: "FilterKey"))
+    CloudConnectorFilter.add_member(:filter_values, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorFilterValues, name: "FilterValues"))
+    CloudConnectorFilter.type = Types::CloudConnectorFilter
+    CloudConnectorFilterKey.add_member(:subscription_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SubscriptionId", traits: {"smithy.api#enumValue" => "SubscriptionId"}))
+    CloudConnectorFilterKey.add_member(:tenant_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TenantId", traits: {"smithy.api#enumValue" => "TenantId"}))
+    CloudConnectorFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorFilter, name: "member"))
+    CloudConnectorFilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorFilterValue, name: "member"))
+    CloudConnectorSummary.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId"))
+    CloudConnectorSummary.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "DisplayName"))
+    CloudConnectorSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorDescription, name: "Description"))
+    CloudConnectorSummary.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorIamRoleArn, name: "RoleArn"))
+    CloudConnectorSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreatedAt"))
+    CloudConnectorSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "UpdatedAt"))
+    CloudConnectorSummary.type = Types::CloudConnectorSummary
+    CloudConnectorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorSummary, name: "member"))
     CloudWatchOutputConfig.add_member(:cloud_watch_log_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchLogGroupName, name: "CloudWatchLogGroupName"))
     CloudWatchOutputConfig.add_member(:cloud_watch_output_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchOutputEnabled, name: "CloudWatchOutputEnabled", traits: {"smithy.api#default" => false}))
     CloudWatchOutputConfig.type = Types::CloudWatchOutputConfig
@@ -1827,6 +1914,11 @@ module Aws::SSM
     CompliantSummary.add_member(:compliant_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ComplianceSummaryCount, name: "CompliantCount", traits: {"smithy.api#default" => 0}))
     CompliantSummary.add_member(:severity_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: SeveritySummary, name: "SeveritySummary"))
     CompliantSummary.type = Types::CompliantSummary
+    ConfigurationTargets.add_member(:subscriptions, Types::ConfigurationTargets::Subscriptions, ::Smithy::Schema::Shapes::MemberShape.new(target: AzureSubscriptionList, name: "Subscriptions"))
+    ConfigurationTargets.add_member(:unknown, Types::ConfigurationTargets::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ConfigurationTargets.type = Types::ConfigurationTargets
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    ConflictException.type = Types::ConflictException
     ConnectionStatus.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTED", traits: {"smithy.api#enumValue" => "connected"}))
     ConnectionStatus.add_member(:not_connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_CONNECTED", traits: {"smithy.api#enumValue" => "notconnected"}))
     CreateActivationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationDescription, name: "Description"))
@@ -1841,6 +1933,7 @@ module Aws::SSM
     CreateActivationResult.add_member(:activation_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ActivationCode, name: "ActivationCode"))
     CreateActivationResult.type = Types::CreateActivationResult
     CreateAssociationBatchRequest.add_member(:entries, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAssociationBatchRequestEntries, name: "Entries", traits: {"smithy.api#required" => {}}))
+    CreateAssociationBatchRequest.add_member(:association_dispatch_assume_role, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationDispatchAssumeRoleArn, name: "AssociationDispatchAssumeRole"))
     CreateAssociationBatchRequest.type = Types::CreateAssociationBatchRequest
     CreateAssociationBatchRequestEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateAssociationBatchRequestEntry, name: "member", traits: {"smithy.api#xmlName" => "entries"}))
     CreateAssociationBatchRequestEntry.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentARN, name: "Name", traits: {"smithy.api#required" => {}}))
@@ -1888,9 +1981,19 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:target_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetMaps, name: "TargetMaps"))
     CreateAssociationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateAssociationRequest.add_member(:alarm_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmConfiguration, name: "AlarmConfiguration"))
+    CreateAssociationRequest.add_member(:association_dispatch_assume_role, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationDispatchAssumeRoleArn, name: "AssociationDispatchAssumeRole"))
     CreateAssociationRequest.type = Types::CreateAssociationRequest
     CreateAssociationResult.add_member(:association_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationDescription, name: "AssociationDescription"))
     CreateAssociationResult.type = Types::CreateAssociationResult
+    CreateCloudConnectorRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "DisplayName", traits: {"smithy.api#required" => {}}))
+    CreateCloudConnectorRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorIamRoleArn, name: "RoleArn", traits: {"smithy.api#required" => {}}))
+    CreateCloudConnectorRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorDescription, name: "Description"))
+    CreateCloudConnectorRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorConfiguration, name: "Configuration", traits: {"smithy.api#required" => {}}))
+    CreateCloudConnectorRequest.add_member(:config_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigConnectorArn, name: "ConfigConnectorArn", traits: {"smithy.api#required" => {}}))
+    CreateCloudConnectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateCloudConnectorRequest.type = Types::CreateCloudConnectorRequest
+    CreateCloudConnectorResult.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId"))
+    CreateCloudConnectorResult.type = Types::CreateCloudConnectorResult
     CreateDocumentRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentContent, name: "Content", traits: {"smithy.api#required" => {}}))
     CreateDocumentRequest.add_member(:requires, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentRequiresList, name: "Requires"))
     CreateDocumentRequest.add_member(:attachments, ::Smithy::Schema::Shapes::MemberShape.new(target: AttachmentsSourceList, name: "Attachments"))
@@ -1983,6 +2086,10 @@ module Aws::SSM
     DeleteAssociationRequest.add_member(:association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationId, name: "AssociationId"))
     DeleteAssociationRequest.type = Types::DeleteAssociationRequest
     DeleteAssociationResult.type = Types::DeleteAssociationResult
+    DeleteCloudConnectorRequest.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId", traits: {"smithy.api#required" => {}}))
+    DeleteCloudConnectorRequest.type = Types::DeleteCloudConnectorRequest
+    DeleteCloudConnectorResult.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId"))
+    DeleteCloudConnectorResult.type = Types::DeleteCloudConnectorResult
     DeleteDocumentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentName, name: "Name", traits: {"smithy.api#required" => {}}))
     DeleteDocumentRequest.add_member(:document_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentVersion, name: "DocumentVersion"))
     DeleteDocumentRequest.add_member(:version_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentVersionName, name: "VersionName"))
@@ -2027,8 +2134,11 @@ module Aws::SSM
     DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArnString, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     DeleteResourcePolicyRequest.add_member(:policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyId, name: "PolicyId", traits: {"smithy.api#required" => {}}))
     DeleteResourcePolicyRequest.add_member(:policy_hash, ::Smithy::Schema::Shapes::MemberShape.new(target: PolicyHash, name: "PolicyHash", traits: {"smithy.api#required" => {}}))
+    DeleteResourcePolicyRequest.add_member(:deletion_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionMode, name: "DeletionMode"))
     DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
     DeleteResourcePolicyResponse.type = Types::DeleteResourcePolicyResponse
+    DeletionMode.add_member(:remove_sharing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RemoveSharing", traits: {"smithy.api#enumValue" => "RemoveSharing"}))
+    DeletionMode.add_member(:rollback_migration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RollbackMigration", traits: {"smithy.api#enumValue" => "RollbackMigration"}))
     DeregisterManagedInstanceRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
     DeregisterManagedInstanceRequest.type = Types::DeregisterManagedInstanceRequest
     DeregisterManagedInstanceResult.type = Types::DeregisterManagedInstanceResult
@@ -2532,6 +2642,17 @@ module Aws::SSM
     GetCalendarStateResponse.add_member(:at_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601String, name: "AtTime"))
     GetCalendarStateResponse.add_member(:next_transition_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ISO8601String, name: "NextTransitionTime"))
     GetCalendarStateResponse.type = Types::GetCalendarStateResponse
+    GetCloudConnectorRequest.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId", traits: {"smithy.api#required" => {}}))
+    GetCloudConnectorRequest.type = Types::GetCloudConnectorRequest
+    GetCloudConnectorResult.add_member(:cloud_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorArn, name: "CloudConnectorArn"))
+    GetCloudConnectorResult.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "DisplayName"))
+    GetCloudConnectorResult.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorDescription, name: "Description"))
+    GetCloudConnectorResult.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorIamRoleArn, name: "RoleArn"))
+    GetCloudConnectorResult.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorConfiguration, name: "Configuration"))
+    GetCloudConnectorResult.add_member(:config_connector_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigConnectorArn, name: "ConfigConnectorArn"))
+    GetCloudConnectorResult.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "CreatedAt"))
+    GetCloudConnectorResult.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTime, name: "UpdatedAt"))
+    GetCloudConnectorResult.type = Types::GetCloudConnectorResult
     GetCommandInvocationRequest.add_member(:command_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandId, name: "CommandId", traits: {"smithy.api#required" => {}}))
     GetCommandInvocationRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId", traits: {"smithy.api#required" => {}}))
     GetCommandInvocationRequest.add_member(:plugin_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandPluginName, name: "PluginName"))
@@ -2843,10 +2964,16 @@ module Aws::SSM
     InstanceInfo.add_member(:instance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceStatus, name: "InstanceStatus"))
     InstanceInfo.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddress, name: "IpAddress"))
     InstanceInfo.add_member(:managed_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedStatus, name: "ManagedStatus"))
+    InstanceInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeName, name: "Name"))
     InstanceInfo.add_member(:platform_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformType, name: "PlatformType"))
     InstanceInfo.add_member(:platform_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformName, name: "PlatformName"))
     InstanceInfo.add_member(:platform_version, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformVersion, name: "PlatformVersion"))
     InstanceInfo.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "ResourceType"))
+    InstanceInfo.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceType, name: "SourceType"))
+    InstanceInfo.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceId, name: "SourceId"))
+    InstanceInfo.add_member(:source_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLocation, name: "SourceLocation"))
+    InstanceInfo.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "AvailabilityZone"))
+    InstanceInfo.add_member(:availability_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneId, name: "AvailabilityZoneId"))
     InstanceInfo.type = Types::InstanceInfo
     InstanceInformation.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
     InstanceInformation.add_member(:ping_status, ::Smithy::Schema::Shapes::MemberShape.new(target: PingStatus, name: "PingStatus"))
@@ -2869,6 +2996,7 @@ module Aws::SSM
     InstanceInformation.add_member(:association_overview, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceAggregatedAssociationOverview, name: "AssociationOverview"))
     InstanceInformation.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceId, name: "SourceId"))
     InstanceInformation.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceType, name: "SourceType"))
+    InstanceInformation.add_member(:source_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLocation, name: "SourceLocation"))
     InstanceInformation.type = Types::InstanceInformation
     InstanceInformationFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceInformationFilterKey, name: "key", traits: {"smithy.api#required" => {}}))
     InstanceInformationFilter.add_member(:value_set, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceInformationFilterValueSet, name: "valueSet", traits: {"smithy.api#required" => {}}))
@@ -2951,6 +3079,8 @@ module Aws::SSM
     InstanceProperty.add_member(:association_overview, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceAggregatedAssociationOverview, name: "AssociationOverview"))
     InstanceProperty.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceId, name: "SourceId"))
     InstanceProperty.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceType, name: "SourceType"))
+    InstanceProperty.add_member(:source_location, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceLocation, name: "SourceLocation"))
+    InstanceProperty.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "AvailabilityZone"))
     InstanceProperty.type = Types::InstanceProperty
     InstancePropertyFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePropertyFilterKey, name: "key", traits: {"smithy.api#required" => {}}))
     InstancePropertyFilter.add_member(:value_set, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePropertyFilterValueSet, name: "valueSet", traits: {"smithy.api#required" => {}}))
@@ -3184,6 +3314,13 @@ module Aws::SSM
     ListAssociationsResult.add_member(:associations, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationList, name: "Associations"))
     ListAssociationsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListAssociationsResult.type = Types::ListAssociationsResult
+    ListCloudConnectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorMaxResults, name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    ListCloudConnectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListCloudConnectorsRequest.add_member(:filters, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorFilterList, name: "Filters"))
+    ListCloudConnectorsRequest.type = Types::ListCloudConnectorsRequest
+    ListCloudConnectorsResult.add_member(:cloud_connectors, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorSummaryList, name: "CloudConnectors"))
+    ListCloudConnectorsResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListCloudConnectorsResult.type = Types::ListCloudConnectorsResult
     ListCommandInvocationsRequest.add_member(:command_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandId, name: "CommandId"))
     ListCommandInvocationsRequest.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceId, name: "InstanceId"))
     ListCommandInvocationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandMaxResults, name: "MaxResults"))
@@ -3473,6 +3610,8 @@ module Aws::SSM
     ModifyDocumentPermissionRequest.add_member(:shared_document_version, ::Smithy::Schema::Shapes::MemberShape.new(target: SharedDocumentVersion, name: "SharedDocumentVersion"))
     ModifyDocumentPermissionRequest.type = Types::ModifyDocumentPermissionRequest
     ModifyDocumentPermissionResponse.type = Types::ModifyDocumentPermissionResponse
+    NoLongerSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    NoLongerSupportedException.type = Types::NoLongerSupportedException
     Node.add_member(:capture_time, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeCaptureTime, name: "CaptureTime"))
     Node.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeId, name: "Id"))
     Node.add_member(:owner, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeOwnerInfo, name: "Owner"))
@@ -3492,6 +3631,8 @@ module Aws::SSM
     NodeAttributeName.add_member(:platform_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLATFORM_VERSION", traits: {"smithy.api#enumValue" => "PlatformVersion"}))
     NodeAttributeName.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "Region"}))
     NodeAttributeName.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_TYPE", traits: {"smithy.api#enumValue" => "ResourceType"}))
+    NodeAttributeName.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_TYPE", traits: {"smithy.api#enumValue" => "SourceType"}))
+    NodeAttributeName.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABILITY_ZONE", traits: {"smithy.api#enumValue" => "AvailabilityZone"}))
     NodeFilter.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeFilterKey, name: "Key", traits: {"smithy.api#required" => {}}))
     NodeFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeFilterValueList, name: "Values", traits: {"smithy.api#required" => {}}))
     NodeFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeFilterOperatorType, name: "Type"))
@@ -3511,6 +3652,11 @@ module Aws::SSM
     NodeFilterKey.add_member(:organizational_unit_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATIONAL_UNIT_PATH", traits: {"smithy.api#enumValue" => "OrganizationalUnitPath"}))
     NodeFilterKey.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGION", traits: {"smithy.api#enumValue" => "Region"}))
     NodeFilterKey.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ID", traits: {"smithy.api#enumValue" => "AccountId"}))
+    NodeFilterKey.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_TYPE", traits: {"smithy.api#enumValue" => "SourceType"}))
+    NodeFilterKey.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_ID", traits: {"smithy.api#enumValue" => "SourceId"}))
+    NodeFilterKey.add_member(:source_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_LOCATION", traits: {"smithy.api#enumValue" => "SourceLocation"}))
+    NodeFilterKey.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABILITY_ZONE", traits: {"smithy.api#enumValue" => "AvailabilityZone"}))
+    NodeFilterKey.add_member(:availability_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABILITY_ZONE_ID", traits: {"smithy.api#enumValue" => "AvailabilityZoneId"}))
     NodeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeFilter, name: "member", traits: {"smithy.api#xmlName" => "NodeFilter"}))
     NodeFilterOperatorType.add_member(:equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUAL", traits: {"smithy.api#enumValue" => "Equal"}))
     NodeFilterOperatorType.add_member(:not_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUAL", traits: {"smithy.api#enumValue" => "NotEqual"}))
@@ -4241,6 +4387,7 @@ module Aws::SSM
     ResourceTypeForTagging.add_member(:opsmetadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPSMETADATA", traits: {"smithy.api#enumValue" => "OpsMetadata"}))
     ResourceTypeForTagging.add_member(:automation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOMATION", traits: {"smithy.api#enumValue" => "Automation"}))
     ResourceTypeForTagging.add_member(:association, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATION", traits: {"smithy.api#enumValue" => "Association"}))
+    ResourceTypeForTagging.add_member(:cloud_connector, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD_CONNECTOR", traits: {"smithy.api#enumValue" => "CloudConnector"}))
     ResultAttribute.add_member(:type_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InventoryItemTypeName, name: "TypeName", traits: {"smithy.api#required" => {}}))
     ResultAttribute.type = Types::ResultAttribute
     ResultAttributeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultAttribute, name: "member", traits: {"smithy.api#xmlName" => "ResultAttribute"}))
@@ -4377,6 +4524,7 @@ module Aws::SSM
     SourceType.add_member(:aws_ec2_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_EC2_INSTANCE", traits: {"smithy.api#enumValue" => "AWS::EC2::Instance"}))
     SourceType.add_member(:aws_iot_thing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_IOT_THING", traits: {"smithy.api#enumValue" => "AWS::IoT::Thing"}))
     SourceType.add_member(:aws_ssm_managedinstance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SSM_MANAGEDINSTANCE", traits: {"smithy.api#enumValue" => "AWS::SSM::ManagedInstance"}))
+    SourceType.add_member(:azure_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZURE_INSTANCE", traits: {"smithy.api#enumValue" => "Microsoft.Compute/virtualMachines"}))
     StartAccessRequestRequest.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: String1to256, name: "Reason", traits: {"smithy.api#required" => {}}))
     StartAccessRequestRequest.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: Targets, name: "Targets", traits: {"smithy.api#required" => {}}))
     StartAccessRequestRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
@@ -4392,7 +4540,7 @@ module Aws::SSM
     StartAutomationExecutionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "ClientToken"))
     StartAutomationExecutionRequest.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionMode, name: "Mode"))
     StartAutomationExecutionRequest.add_member(:target_parameter_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationParameterKey, name: "TargetParameterName"))
-    StartAutomationExecutionRequest.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: Targets, name: "Targets"))
+    StartAutomationExecutionRequest.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationTargets, name: "Targets"))
     StartAutomationExecutionRequest.add_member(:target_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetMaps, name: "TargetMaps"))
     StartAutomationExecutionRequest.add_member(:max_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrency, name: "MaxConcurrency"))
     StartAutomationExecutionRequest.add_member(:max_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxErrors, name: "MaxErrors"))
@@ -4446,6 +4594,7 @@ module Aws::SSM
     StepExecution.add_member(:outputs, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationParameterMap, name: "Outputs"))
     StepExecution.add_member(:response, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Response"))
     StepExecution.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureMessage"))
+    StepExecution.add_member(:warning_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "WarningMessage"))
     StepExecution.add_member(:failure_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureDetails, name: "FailureDetails"))
     StepExecution.add_member(:step_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StepExecutionId"))
     StepExecution.add_member(:overridden_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationParameterMap, name: "OverriddenParameters"))
@@ -4501,7 +4650,7 @@ module Aws::SSM
     TargetLocation.add_member(:target_location_alarm_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmConfiguration, name: "TargetLocationAlarmConfiguration"))
     TargetLocation.add_member(:include_child_organization_units, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludeChildOrganizationUnits", traits: {"smithy.api#default" => false}))
     TargetLocation.add_member(:exclude_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeAccounts, name: "ExcludeAccounts"))
-    TargetLocation.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: Targets, name: "Targets"))
+    TargetLocation.add_member(:targets, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomationTargets, name: "Targets"))
     TargetLocation.add_member(:targets_max_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrency, name: "TargetsMaxConcurrency"))
     TargetLocation.add_member(:targets_max_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxErrors, name: "TargetsMaxErrors"))
     TargetLocation.type = Types::TargetLocation
@@ -4577,6 +4726,7 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:duration, ::Smithy::Schema::Shapes::MemberShape.new(target: Duration, name: "Duration"))
     UpdateAssociationRequest.add_member(:target_maps, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetMaps, name: "TargetMaps"))
     UpdateAssociationRequest.add_member(:alarm_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AlarmConfiguration, name: "AlarmConfiguration"))
+    UpdateAssociationRequest.add_member(:association_dispatch_assume_role, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationDispatchAssumeRoleArn, name: "AssociationDispatchAssumeRole"))
     UpdateAssociationRequest.type = Types::UpdateAssociationRequest
     UpdateAssociationResult.add_member(:association_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationDescription, name: "AssociationDescription"))
     UpdateAssociationResult.type = Types::UpdateAssociationResult
@@ -4586,6 +4736,13 @@ module Aws::SSM
     UpdateAssociationStatusRequest.type = Types::UpdateAssociationStatusRequest
     UpdateAssociationStatusResult.add_member(:association_description, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationDescription, name: "AssociationDescription"))
     UpdateAssociationStatusResult.type = Types::UpdateAssociationStatusResult
+    UpdateCloudConnectorRequest.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId", traits: {"smithy.api#required" => {}}))
+    UpdateCloudConnectorRequest.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DisplayName, name: "DisplayName"))
+    UpdateCloudConnectorRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorConfiguration, name: "Configuration"))
+    UpdateCloudConnectorRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorDescription, name: "Description"))
+    UpdateCloudConnectorRequest.type = Types::UpdateCloudConnectorRequest
+    UpdateCloudConnectorResult.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId"))
+    UpdateCloudConnectorResult.type = Types::UpdateCloudConnectorResult
     UpdateDocumentDefaultVersionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentName, name: "Name", traits: {"smithy.api#required" => {}}))
     UpdateDocumentDefaultVersionRequest.add_member(:document_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentVersionNumber, name: "DocumentVersion", traits: {"smithy.api#required" => {}}))
     UpdateDocumentDefaultVersionRequest.type = Types::UpdateDocumentDefaultVersionRequest
@@ -4750,15 +4907,46 @@ module Aws::SSM
     UpdateServiceSettingRequest.type = Types::UpdateServiceSettingRequest
     UpdateServiceSettingResult.type = Types::UpdateServiceSettingResult
     ValidNextStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidNextStep, name: "member"))
+    ValidateCloudConnectorRequest.add_member(:cloud_connector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudConnectorId, name: "CloudConnectorId", traits: {"smithy.api#required" => {}}))
+    ValidateCloudConnectorRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidateCloudConnectorMaxResults, name: "MaxResults", traits: {"smithy.api#default" => nil}))
+    ValidateCloudConnectorRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ValidateCloudConnectorRequest.type = Types::ValidateCloudConnectorRequest
+    ValidateCloudConnectorResult.add_member(:validation_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFindingList, name: "ValidationFindings"))
+    ValidateCloudConnectorResult.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ValidateCloudConnectorResult.type = Types::ValidateCloudConnectorResult
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ValidationException.add_member(:reason_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReasonCode"))
     ValidationException.type = Types::ValidationException
+    ValidationFinding.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFindingType, name: "Type"))
+    ValidationFinding.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFindingCode, name: "Code"))
+    ValidationFinding.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    ValidationFinding.add_member(:provider_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProviderMessage"))
+    ValidationFinding.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFindingScope, name: "Scope"))
+    ValidationFinding.type = Types::ValidationFinding
+    ValidationFindingCode.add_member(:target_inaccessible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_INACCESSIBLE", traits: {"smithy.api#enumValue" => "TargetInaccessible"}))
+    ValidationFindingCode.add_member(:target_unusable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_UNUSABLE", traits: {"smithy.api#enumValue" => "TargetUnusable"}))
+    ValidationFindingCode.add_member(:target_state_warning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_STATE_WARNING", traits: {"smithy.api#enumValue" => "TargetStateWarning"}))
+    ValidationFindingCode.add_member(:aws_role_assumption_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_ROLE_ASSUMPTION_FAILED", traits: {"smithy.api#enumValue" => "AwsRoleAssumptionFailed"}))
+    ValidationFindingCode.add_member(:web_identity_token_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEB_IDENTITY_TOKEN_FAILED", traits: {"smithy.api#enumValue" => "WebIdentityTokenFailed"}))
+    ValidationFindingCode.add_member(:outbound_web_identity_federation_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUTBOUND_WEB_IDENTITY_FEDERATION_DISABLED", traits: {"smithy.api#enumValue" => "OutboundWebIdentityFederationDisabled"}))
+    ValidationFindingCode.add_member(:provider_credential_creation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROVIDER_CREDENTIAL_CREATION_FAILED", traits: {"smithy.api#enumValue" => "ProviderCredentialCreationFailed"}))
+    ValidationFindingCode.add_member(:tenant_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TENANT_SUMMARY", traits: {"smithy.api#enumValue" => "TenantSummary"}))
+    ValidationFindingCode.add_member(:subscription_accessible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBSCRIPTION_ACCESSIBLE", traits: {"smithy.api#enumValue" => "SubscriptionAccessible"}))
+    ValidationFindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFinding, name: "member"))
+    ValidationFindingScope.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationFindingScopeType, name: "Type"))
+    ValidationFindingScope.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id"))
+    ValidationFindingScope.type = Types::ValidationFindingScope
+    ValidationFindingScopeType.add_member(:azure_tenant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZURE_TENANT", traits: {"smithy.api#enumValue" => "azure:tenant"}))
+    ValidationFindingScopeType.add_member(:azure_subscription, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AZURE_SUBSCRIPTION", traits: {"smithy.api#enumValue" => "azure:subscription"}))
+    ValidationFindingType.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFO", traits: {"smithy.api#enumValue" => "INFO"}))
+    ValidationFindingType.add_member(:warn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARN", traits: {"smithy.api#enumValue" => "WARN"}))
+    ValidationFindingType.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
 
     AmazonSSM = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.ssm#AmazonSSM"
       service.name = "AmazonSSM"
       service.version = "2014-11-06"
-      service.traits = {"aws.api#service" => {"sdkId" => "SSM", "arnNamespace" => "ssm", "cloudFormationName" => "SSM", "cloudTrailEventSource" => "ssm.amazonaws.com", "endpointPrefix" => "ssm"}, "aws.auth#sigv4" => {"name" => "ssm"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Simple Systems Manager (SSM)", "smithy.api#xmlNamespace" => {"uri" => "http://ssm.amazonaws.com/doc/2014-11-06/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "SSM", "arnNamespace" => "ssm", "cloudFormationName" => "SSM", "cloudTrailEventSource" => "ssm.amazonaws.com", "endpointPrefix" => "ssm"}, "aws.auth#sigv4" => {"name" => "ssm"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Simple Systems Manager (SSM)", "smithy.api#xmlNamespace" => {"uri" => "http://ssm.amazonaws.com/doc/2014-11-06/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ssm-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ssm.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ssm-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ssm.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ssm.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:add_tags_to_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssm#AddTagsToResource"
         operation.name = "AddTagsToResource"
@@ -4852,6 +5040,16 @@ module Aws::SSM
         operation.errors << UnsupportedPlatformType
         operation.traits = {}
       end)
+      service.add_operation(:create_cloud_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssm#CreateCloudConnector"
+        operation.name = "CreateCloudConnector"
+        operation.input = CreateCloudConnectorRequest
+        operation.output = CreateCloudConnectorResult
+        operation.errors << ConflictException
+        operation.errors << InternalServerError
+        operation.errors << ServiceQuotaExceededException
+        operation.traits = {}
+      end)
       service.add_operation(:create_document, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssm#CreateDocument"
         operation.name = "CreateDocument"
@@ -4863,6 +5061,7 @@ module Aws::SSM
         operation.errors << InvalidDocumentContent
         operation.errors << InvalidDocumentSchemaVersion
         operation.errors << MaxDocumentSizeExceeded
+        operation.errors << NoLongerSupportedException
         operation.errors << TooManyUpdates
         operation.traits = {}
       end)
@@ -4942,6 +5141,16 @@ module Aws::SSM
         operation.errors << InvalidDocument
         operation.errors << InvalidInstanceId
         operation.errors << TooManyUpdates
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_cloud_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssm#DeleteCloudConnector"
+        operation.name = "DeleteCloudConnector"
+        operation.input = DeleteCloudConnectorRequest
+        operation.output = DeleteCloudConnectorResult
+        operation.errors << ConflictException
+        operation.errors << InternalServerError
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:delete_document, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -5479,6 +5688,15 @@ module Aws::SSM
         operation.errors << UnsupportedCalendarException
         operation.traits = {}
       end)
+      service.add_operation(:get_cloud_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssm#GetCloudConnector"
+        operation.name = "GetCloudConnector"
+        operation.input = GetCloudConnectorRequest
+        operation.output = GetCloudConnectorResult
+        operation.errors << InternalServerError
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_command_invocation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssm#GetCommandInvocation"
         operation.name = "GetCommandInvocation"
@@ -5757,6 +5975,15 @@ module Aws::SSM
         operation.errors << InvalidNextToken
         operation.traits = {}
         operation[:paginator] = Paginators::ListAssociations.new
+      end)
+      service.add_operation(:list_cloud_connectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssm#ListCloudConnectors"
+        operation.name = "ListCloudConnectors"
+        operation.input = ListCloudConnectorsRequest
+        operation.output = ListCloudConnectorsResult
+        operation.errors << InternalServerError
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListCloudConnectors.new
       end)
       service.add_operation(:list_command_invocations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssm#ListCommandInvocations"
@@ -6177,6 +6404,7 @@ module Aws::SSM
         operation.errors << IdempotentParameterMismatch
         operation.errors << InternalServerError
         operation.errors << InvalidAutomationExecutionParametersException
+        operation.errors << NoLongerSupportedException
         operation.traits = {}
       end)
       service.add_operation(:start_execution_preview, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -6258,6 +6486,16 @@ module Aws::SSM
         operation.errors << InvalidInstanceId
         operation.errors << StatusUnchanged
         operation.errors << TooManyUpdates
+        operation.traits = {}
+      end)
+      service.add_operation(:update_cloud_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssm#UpdateCloudConnector"
+        operation.name = "UpdateCloudConnector"
+        operation.input = UpdateCloudConnectorRequest
+        operation.output = UpdateCloudConnectorResult
+        operation.errors << ConflictException
+        operation.errors << InternalServerError
+        operation.errors << ResourceNotFoundException
         operation.traits = {}
       end)
       service.add_operation(:update_document, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -6391,6 +6629,16 @@ module Aws::SSM
         operation.errors << ServiceSettingNotFound
         operation.errors << TooManyUpdates
         operation.traits = {}
+      end)
+      service.add_operation(:validate_cloud_connector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssm#ValidateCloudConnector"
+        operation.name = "ValidateCloudConnector"
+        operation.input = ValidateCloudConnectorRequest
+        operation.output = ValidateCloudConnectorResult
+        operation.errors << InternalServerError
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ValidateCloudConnector.new
       end)
     end
 

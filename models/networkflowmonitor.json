@@ -1831,20 +1831,20 @@
                 "type": {
                     "target": "com.amazonaws.networkflowmonitor#MonitorLocalResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the local resource. Valid values are <code>AWS::EC2::VPC</code> <code>AWS::AvailabilityZone</code>, <code>AWS::EC2::Subnet</code>, or <code>AWS::Region</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of the local resource. Valid values are <code>AWS::EC2::VPC</code> <code>AWS::AvailabilityZone</code>, <code>AWS::EC2::Subnet</code>, <code>AWS::EKS::Cluster</code>, or <code>AWS::Region</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "identifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the local resource. For a VPC or subnet, this identifier is the VPC Amazon Resource Name (ARN) or subnet ARN. For an Availability Zone, this identifier is the AZ name, for example, us-west-2b.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the local resource. The values you can specify are the following:</p> <ul> <li> <p>For a VPC, subnet or EKS cluster, this identifier is the VPC Amazon Resource Name (ARN), subnet ARN or cluster ARN.</p> </li> <li> <p>For an Availability Zone, this identifier is the AZ name, for example, us-west-2b.</p> </li> <li> <p>For a Region, this identifier is the Region name, for example, us-west-2.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A local resource is the host where the agent is installed. Local resources can be a a subnet, a VPC, an Availability Zone, or an Amazon Web Services service.</p>"
+                "smithy.api#documentation": "<p>A local resource is the host where the agent is installed. Local resources can be a a subnet, a VPC, an Availability Zone, an EKS cluster or an Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.networkflowmonitor#MonitorLocalResourceType": {
@@ -1872,6 +1872,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS::Region"
+                    }
+                },
+                "EKS_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EKS::Cluster"
                     }
                 }
             }
@@ -1930,7 +1936,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A remote resource is the other endpoint in a network flow. That is, one endpoint is the local resource and the other is the remote resource. Remote resources can be a a subnet, a VPC, an Availability Zone, an Amazon Web Services service, or an Amazon Web Services Region.</p> <p>When a remote resource is an Amazon Web Services Region, Network Flow Monitor provides network performance measurements up to the edge of the Region that you specify.</p>"
+                "smithy.api#documentation": "<p>A remote resource is the other endpoint in a network flow. That is, one endpoint is the local resource and the other is the remote resource. The values you can specify are the following:</p> <ul> <li> <p>For a VPC or subnet, this identifier is the VPC Amazon Resource Name (ARN) or subnet ARN.</p> </li> <li> <p>For a service, this identifier is one of the following strings: <code>S3</code> or <code>DynamoDB</code>.</p> </li> <li> <p>For an Availability Zone, this identifier is the AZ name, for example, us-west-2b.</p> </li> <li> <p>For a Region, this identifier is the Region name, for example, us-west-2.</p> </li> </ul> <p>When a remote resource is an Amazon Web Services Region, Network Flow Monitor provides network performance measurements up to the edge of the Region that you specify.</p>"
             }
         },
         "com.amazonaws.networkflowmonitor#MonitorRemoteResourceType": {
@@ -2316,6 +2322,110 @@
                 },
                 "smithy.api#documentation": "<p>Network Flow Monitor is a feature of Amazon CloudWatch Network Monitoring that provides visibility into the performance of network flows for your Amazon Web Services workloads, between instances in subnets, as well as to and from Amazon Web Services. Lightweight agents that you install on the instances capture performance metrics for your network flows, such as packet loss and latency, and send them to the Network Flow Monitor backend. Then, you can view and analyze metrics from the top contributors for each metric type, to help troubleshoot issues.</p> <p>In addition, when you create a monitor, Network Flow Monitor provides a network health indicator (NHI) that informs you whether there were Amazon Web Services network issues for one or more of the network flows tracked by a monitor, during a time period that you choose. By using this value, you can independently determine if the Amazon Web Services network is impacting your workload during a specific time frame, to help you focus troubleshooting efforts.</p> <p>To learn more about Network Flow Monitor, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-NetworkFlowMonitor.html\">Network Flow Monitor User Guide</a> in the Amazon CloudWatch User Guide.</p>",
                 "smithy.api#title": "Network Flow Monitor",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://networkflowmonitor-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://networkflowmonitor.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 6,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -2324,19 +2434,19 @@
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         },
                         "Region": {
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [

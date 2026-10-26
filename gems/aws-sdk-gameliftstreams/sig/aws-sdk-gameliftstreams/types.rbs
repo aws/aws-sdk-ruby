@@ -49,6 +49,7 @@ module Aws::GameLiftStreams
     module ApplicationStatusReason
       INTERNAL_ERROR: String
       ACCESS_DENIED: String
+      SOURCE_MODIFIED: String
     end
 
     class ApplicationSummary
@@ -208,6 +209,7 @@ module Aws::GameLiftStreams
         ?status_reason: String,
         ?last_updated_at: Time,
         ?created_at: Time,
+        ?expires_at: Time,
         ?associated_applications: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -222,7 +224,36 @@ module Aws::GameLiftStreams
       attr_accessor status_reason: String?
       attr_accessor last_updated_at: Time?
       attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
       attr_accessor associated_applications: Array[String]?
+    end
+
+    class CreateStreamSessionAdminShellInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?stream_session_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor stream_session_identifier: String?
+    end
+
+    class CreateStreamSessionAdminShellOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?stream_url: String,
+        ?token_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor stream_url: String?
+      attr_accessor token_value: String?
     end
 
     class CreateStreamSessionConnectionInput
@@ -251,6 +282,88 @@ module Aws::GameLiftStreams
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor signal_response: String?
+    end
+
+    class CreateStreamUrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?application_identifier: String,
+        ?protocol: String,
+        ?url_expires_after_minutes: Integer,
+        ?usage_limit: Integer,
+        ?description: String,
+        ?locations: Array[String],
+        ?session_length_seconds: Integer,
+        ?additional_launch_args: Array[String],
+        ?additional_environment_variables: Hash[String, String],
+        ?role_arn: String,
+        ?display_configuration: Types::DisplayConfiguration,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor protocol: String?
+      attr_accessor url_expires_after_minutes: Integer?
+      attr_accessor usage_limit: Integer?
+      attr_accessor description: String?
+      attr_accessor locations: Array[String]?
+      attr_accessor session_length_seconds: Integer?
+      attr_accessor additional_launch_args: Array[String]?
+      attr_accessor additional_environment_variables: Hash[String, String]?
+      attr_accessor role_arn: String?
+      attr_accessor display_configuration: Types::DisplayConfiguration?
+      attr_accessor client_token: String?
+    end
+
+    class CreateStreamUrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?stream_url_id: String,
+        ?stream_url: String,
+        ?status: String,
+        ?status_reason: String,
+        ?expires_at: Time,
+        ?created_at: Time,
+        ?usage_limit: Integer,
+        ?remaining_uses: Integer,
+        ?stream_group_arn: String,
+        ?application_arn: String,
+        ?protocol: String,
+        ?locations: Array[String],
+        ?session_length_seconds: Integer,
+        ?description: String,
+        ?additional_launch_args: Array[String],
+        ?additional_environment_variables: Hash[String, String],
+        ?role_arn: String,
+        ?display_configuration: Types::DisplayConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor stream_url_id: String?
+      attr_accessor stream_url: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor expires_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor usage_limit: Integer?
+      attr_accessor remaining_uses: Integer?
+      attr_accessor stream_group_arn: String?
+      attr_accessor application_arn: String?
+      attr_accessor protocol: String?
+      attr_accessor locations: Array[String]?
+      attr_accessor session_length_seconds: Integer?
+      attr_accessor description: String?
+      attr_accessor additional_launch_args: Array[String]?
+      attr_accessor additional_environment_variables: Hash[String, String]?
+      attr_accessor role_arn: String?
+      attr_accessor display_configuration: Types::DisplayConfiguration?
     end
 
     class DefaultApplication
@@ -312,6 +425,17 @@ module Aws::GameLiftStreams
 
       attr_accessor arn: String?
       attr_accessor application_arns: Array[String]?
+    end
+
+    class DisplayConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolution: Types::Resolution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolution: Types::Resolution?
     end
 
     class ExportFilesMetadata
@@ -432,6 +556,7 @@ module Aws::GameLiftStreams
         ?status_reason: String,
         ?last_updated_at: Time,
         ?created_at: Time,
+        ?expires_at: Time,
         ?associated_applications: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -446,6 +571,7 @@ module Aws::GameLiftStreams
       attr_accessor status_reason: String?
       attr_accessor last_updated_at: Time?
       attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
       attr_accessor associated_applications: Array[String]?
     end
 
@@ -480,12 +606,15 @@ module Aws::GameLiftStreams
         ?session_length_seconds: Integer,
         ?additional_launch_args: Array[String],
         ?additional_environment_variables: Hash[String, String],
+        ?performance_stats_configuration: Types::PerformanceStatsConfiguration,
         ?log_file_location_uri: String,
         ?web_sdk_protocol_url: String,
         ?last_updated_at: Time,
         ?created_at: Time,
         ?application_arn: String,
         ?export_files_metadata: Types::ExportFilesMetadata,
+        ?role_arn: String,
+        ?display_configuration: Types::DisplayConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -503,12 +632,77 @@ module Aws::GameLiftStreams
       attr_accessor session_length_seconds: Integer?
       attr_accessor additional_launch_args: Array[String]?
       attr_accessor additional_environment_variables: Hash[String, String]?
+      attr_accessor performance_stats_configuration: Types::PerformanceStatsConfiguration?
       attr_accessor log_file_location_uri: String?
       attr_accessor web_sdk_protocol_url: String?
       attr_accessor last_updated_at: Time?
       attr_accessor created_at: Time?
       attr_accessor application_arn: String?
       attr_accessor export_files_metadata: Types::ExportFilesMetadata?
+      attr_accessor role_arn: String?
+      attr_accessor display_configuration: Types::DisplayConfiguration?
+    end
+
+    class GetStreamUrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?stream_url_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor stream_url_identifier: String?
+    end
+
+    class GetStreamUrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?stream_url_id: String,
+        ?stream_url: String,
+        ?status: String,
+        ?status_reason: String,
+        ?expires_at: Time,
+        ?created_at: Time,
+        ?usage_limit: Integer,
+        ?remaining_uses: Integer,
+        ?stream_group_arn: String,
+        ?application_arn: String,
+        ?protocol: String,
+        ?locations: Array[String],
+        ?session_length_seconds: Integer,
+        ?description: String,
+        ?additional_launch_args: Array[String],
+        ?additional_environment_variables: Hash[String, String],
+        ?role_arn: String,
+        ?display_configuration: Types::DisplayConfiguration,
+        ?stream_sessions: Array[Types::StreamSessionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor stream_url_id: String?
+      attr_accessor stream_url: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor expires_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor usage_limit: Integer?
+      attr_accessor remaining_uses: Integer?
+      attr_accessor stream_group_arn: String?
+      attr_accessor application_arn: String?
+      attr_accessor protocol: String?
+      attr_accessor locations: Array[String]?
+      attr_accessor session_length_seconds: Integer?
+      attr_accessor description: String?
+      attr_accessor additional_launch_args: Array[String]?
+      attr_accessor additional_environment_variables: Hash[String, String]?
+      attr_accessor role_arn: String?
+      attr_accessor display_configuration: Types::DisplayConfiguration?
+      attr_accessor stream_sessions: Array[Types::StreamSessionSummary]?
     end
 
     class InternalServerException
@@ -520,6 +714,28 @@ module Aws::GameLiftStreams
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ListApplicationShaderCachesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class ListApplicationShaderCachesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ShaderCacheSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ShaderCacheSummary]?
     end
 
     class ListApplicationsInput
@@ -636,6 +852,36 @@ module Aws::GameLiftStreams
       attr_accessor next_token: String?
     end
 
+    class ListStreamUrlsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?stream_group_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor stream_group_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListStreamUrlsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::StreamUrlSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::StreamUrlSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListTagsForResourceRequest
       include Smithy::Schema::Structure
 
@@ -665,12 +911,18 @@ module Aws::GameLiftStreams
         ?location_name: String,
         ?always_on_capacity: Integer,
         ?on_demand_capacity: Integer,
+        ?target_idle_capacity: Integer,
+        ?maximum_capacity: Integer,
+        ?vpc_transit_configuration: Types::VpcTransitConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor location_name: String?
       attr_accessor always_on_capacity: Integer?
       attr_accessor on_demand_capacity: Integer?
+      attr_accessor target_idle_capacity: Integer?
+      attr_accessor maximum_capacity: Integer?
+      attr_accessor vpc_transit_configuration: Types::VpcTransitConfiguration?
     end
 
     class LocationState
@@ -681,9 +933,13 @@ module Aws::GameLiftStreams
         ?status: String,
         ?always_on_capacity: Integer,
         ?on_demand_capacity: Integer,
+        ?target_idle_capacity: Integer,
+        ?maximum_capacity: Integer,
         ?requested_capacity: Integer,
         ?allocated_capacity: Integer,
         ?idle_capacity: Integer,
+        ?internal_vpc_ipv4_cidr_block: String,
+        ?vpc_transit_configuration: Types::VpcTransitConfigurationResponse,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -691,9 +947,24 @@ module Aws::GameLiftStreams
       attr_accessor status: String?
       attr_accessor always_on_capacity: Integer?
       attr_accessor on_demand_capacity: Integer?
+      attr_accessor target_idle_capacity: Integer?
+      attr_accessor maximum_capacity: Integer?
       attr_accessor requested_capacity: Integer?
       attr_accessor allocated_capacity: Integer?
       attr_accessor idle_capacity: Integer?
+      attr_accessor internal_vpc_ipv4_cidr_block: String?
+      attr_accessor vpc_transit_configuration: Types::VpcTransitConfigurationResponse?
+    end
+
+    class PerformanceStatsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_with_client: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_with_client: bool?
     end
 
     module Protocol
@@ -731,6 +1002,19 @@ module Aws::GameLiftStreams
       COMPLETED: String
     end
 
+    class Resolution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?width: Integer,
+        ?height: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor width: Integer?
+      attr_accessor height: Integer?
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -740,6 +1024,26 @@ module Aws::GameLiftStreams
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module RevocationMode
+      REVOKE_URL: String
+      REVOKE_AND_TERMINATE_SESSIONS: String
+    end
+
+    class RevokeStreamUrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?stream_url_identifier: String,
+        ?revocation_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor stream_url_identifier: String?
+      attr_accessor revocation_mode: String?
     end
 
     class RuntimeEnvironment
@@ -772,6 +1076,35 @@ module Aws::GameLiftStreams
       attr_accessor message: String?
     end
 
+    module ShaderCacheStatus
+      INITIALIZED: String
+      PROCESSING: String
+      READY: String
+      DELETING: String
+      ERROR: String
+    end
+
+    class ShaderCacheSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?application_arn: String,
+        ?status: String,
+        ?last_updated_at: Time,
+        ?storage_bytes: Integer,
+        ?associated_stream_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor application_arn: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor storage_bytes: Integer?
+      attr_accessor associated_stream_groups: Array[String]?
+    end
+
     class StartStreamSessionInput
       include Smithy::Schema::Structure
 
@@ -788,6 +1121,9 @@ module Aws::GameLiftStreams
         ?session_length_seconds: Integer,
         ?additional_launch_args: Array[String],
         ?additional_environment_variables: Hash[String, String],
+        ?performance_stats_configuration: Types::PerformanceStatsConfiguration,
+        ?role_arn: String,
+        ?display_configuration: Types::DisplayConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -803,6 +1139,9 @@ module Aws::GameLiftStreams
       attr_accessor session_length_seconds: Integer?
       attr_accessor additional_launch_args: Array[String]?
       attr_accessor additional_environment_variables: Hash[String, String]?
+      attr_accessor performance_stats_configuration: Types::PerformanceStatsConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor display_configuration: Types::DisplayConfiguration?
     end
 
     class StartStreamSessionOutput
@@ -823,12 +1162,15 @@ module Aws::GameLiftStreams
         ?session_length_seconds: Integer,
         ?additional_launch_args: Array[String],
         ?additional_environment_variables: Hash[String, String],
+        ?performance_stats_configuration: Types::PerformanceStatsConfiguration,
         ?log_file_location_uri: String,
         ?web_sdk_protocol_url: String,
         ?last_updated_at: Time,
         ?created_at: Time,
         ?application_arn: String,
         ?export_files_metadata: Types::ExportFilesMetadata,
+        ?role_arn: String,
+        ?display_configuration: Types::DisplayConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -846,12 +1188,15 @@ module Aws::GameLiftStreams
       attr_accessor session_length_seconds: Integer?
       attr_accessor additional_launch_args: Array[String]?
       attr_accessor additional_environment_variables: Hash[String, String]?
+      attr_accessor performance_stats_configuration: Types::PerformanceStatsConfiguration?
       attr_accessor log_file_location_uri: String?
       attr_accessor web_sdk_protocol_url: String?
       attr_accessor last_updated_at: Time?
       attr_accessor created_at: Time?
       attr_accessor application_arn: String?
       attr_accessor export_files_metadata: Types::ExportFilesMetadata?
+      attr_accessor role_arn: String?
+      attr_accessor display_configuration: Types::DisplayConfiguration?
     end
 
     module StreamClass
@@ -861,6 +1206,17 @@ module Aws::GameLiftStreams
       gen5n_high: String
       gen5n_ultra: String
       gen5n_win2022: String
+      gen6n_small: String
+      gen6n_medium: String
+      gen6n_high: String
+      gen6n_ultra: String
+      gen6n_ultra_win2022: String
+      gen6n_pro: String
+      gen6n_pro_win2022: String
+      gen6n_small_win2022: String
+      gen6n_medium_win2022: String
+      gen6e_pro: String
+      gen6e_pro_win2022: String
     end
 
     module StreamGroupLocationStatus
@@ -877,6 +1233,7 @@ module Aws::GameLiftStreams
       ACTIVE_WITH_ERRORS: String
       ERROR: String
       DELETING: String
+      EXPIRED: String
     end
 
     module StreamGroupStatusReason
@@ -896,6 +1253,7 @@ module Aws::GameLiftStreams
         ?status: String,
         ?created_at: Time,
         ?last_updated_at: Time,
+        ?expires_at: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -907,6 +1265,18 @@ module Aws::GameLiftStreams
       attr_accessor status: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    class StreamSessionAccessNotReadyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     module StreamSessionStatus
@@ -925,6 +1295,13 @@ module Aws::GameLiftStreams
       INVALID_SIGNAL_REQUEST: String
       PLACEMENT_TIMEOUT: String
       APP_LOG_S3_DESTINATION_ERROR: String
+      ASSUME_ROLE_FAILED: String
+      APPLICATION_EXIT: String
+      CONNECTION_TIMEOUT: String
+      RECONNECTION_TIMEOUT: String
+      MAX_SESSION_LENGTH_TIMEOUT: String
+      IDLE_TIMEOUT: String
+      API_TERMINATED: String
     end
 
     class StreamSessionSummary
@@ -934,24 +1311,78 @@ module Aws::GameLiftStreams
         ?arn: String,
         ?user_id: String,
         ?status: String,
+        ?status_reason: String,
         ?protocol: String,
         ?last_updated_at: Time,
         ?created_at: Time,
         ?application_arn: String,
         ?export_files_metadata: Types::ExportFilesMetadata,
         ?location: String,
+        ?role_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
       attr_accessor user_id: String?
       attr_accessor status: String?
+      attr_accessor status_reason: String?
       attr_accessor protocol: String?
       attr_accessor last_updated_at: Time?
       attr_accessor created_at: Time?
       attr_accessor application_arn: String?
       attr_accessor export_files_metadata: Types::ExportFilesMetadata?
       attr_accessor location: String?
+      attr_accessor role_arn: String?
+    end
+
+    module StreamUrlStatus
+      ACTIVE: String
+      EXPIRED: String
+      REVOKED: String
+      LIMIT_REACHED: String
+    end
+
+    module StreamUrlStatusReason
+      USER_REVOKED: String
+      REVOKED_AND_TERMINATING_SESSIONS: String
+      REVOKED_AND_SESSIONS_TERMINATED: String
+      STREAM_GROUP_DELETED: String
+      APPLICATION_DELETED: String
+    end
+
+    class StreamUrlSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?stream_url_id: String,
+        ?stream_url: String,
+        ?status: String,
+        ?status_reason: String,
+        ?expires_at: Time,
+        ?created_at: Time,
+        ?usage_limit: Integer,
+        ?remaining_uses: Integer,
+        ?stream_group_arn: String,
+        ?application_arn: String,
+        ?session_length_seconds: Integer,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor stream_url_id: String?
+      attr_accessor stream_url: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor expires_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor usage_limit: Integer?
+      attr_accessor remaining_uses: Integer?
+      attr_accessor stream_group_arn: String?
+      attr_accessor application_arn: String?
+      attr_accessor session_length_seconds: Integer?
+      attr_accessor description: String?
     end
 
     class TagResourceRequest
@@ -1107,6 +1538,7 @@ module Aws::GameLiftStreams
         ?status_reason: String,
         ?last_updated_at: Time,
         ?created_at: Time,
+        ?expires_at: Time,
         ?associated_applications: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1121,6 +1553,7 @@ module Aws::GameLiftStreams
       attr_accessor status_reason: String?
       attr_accessor last_updated_at: Time?
       attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
       attr_accessor associated_applications: Array[String]?
     end
 
@@ -1133,6 +1566,36 @@ module Aws::GameLiftStreams
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class VpcTransitConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?ipv4_cidr_blocks: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor ipv4_cidr_blocks: Array[String]?
+    end
+
+    class VpcTransitConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?ipv4_cidr_blocks: Array[String],
+        ?transit_gateway_id: String,
+        ?transit_gateway_resource_share_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor ipv4_cidr_blocks: Array[String]?
+      attr_accessor transit_gateway_id: String?
+      attr_accessor transit_gateway_resource_share_arn: String?
     end
   end
 end

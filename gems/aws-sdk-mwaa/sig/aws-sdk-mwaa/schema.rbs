@@ -73,6 +73,7 @@ module Aws::MWAA
     Schedulers: IntegerShape
     SecurityGroupId: StringShape
     SecurityGroupList: ListShape
+    ServiceUnavailableException: StructureShape
     StatisticSet: StructureShape
     SubnetId: StringShape
     SubnetList: ListShape

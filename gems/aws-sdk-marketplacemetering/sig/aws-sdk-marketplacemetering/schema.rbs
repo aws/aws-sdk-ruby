@@ -2,19 +2,23 @@ module Aws::MarketplaceMetering
   module Schema
     include Smithy::Schema::Shapes
 
+    AgreementId: StringShape
     AllocatedUsageQuantity: IntegerShape
     BatchMeterUsageRequest: StructureShape
     BatchMeterUsageResult: StructureShape
     Boolean: BooleanShape
+    ClientToken: StringShape
     CustomerAWSAccountId: StringShape
     CustomerIdentifier: StringShape
     CustomerNotEntitledException: StructureShape
     DisabledApiException: StructureShape
     DuplicateRequestException: StructureShape
     ExpiredTokenException: StructureShape
+    IdempotencyConflictException: StructureShape
     InternalServiceErrorException: StructureShape
     InvalidCustomerIdentifierException: StructureShape
     InvalidEndpointRegionException: StructureShape
+    InvalidLicenseException: StructureShape
     InvalidProductCodeException: StructureShape
     InvalidPublicKeyVersionException: StructureShape
     InvalidRegionException: StructureShape
@@ -22,6 +26,8 @@ module Aws::MarketplaceMetering
     InvalidTokenException: StructureShape
     InvalidUsageAllocationsException: StructureShape
     InvalidUsageDimensionException: StructureShape
+    LicenseArn: StringShape
+    Metadata: StructureShape
     MeterUsageRequest: StructureShape
     MeterUsageResult: StructureShape
     NonEmptyString: StringShape

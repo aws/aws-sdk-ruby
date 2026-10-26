@@ -546,6 +546,40 @@ module Aws::PI
       attr_accessor next_token: String?
     end
 
+    class ListPerformanceAnalysisReportRecommendationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_type: String,
+        ?identifier: String,
+        ?analysis_report_id: String,
+        ?recommendation_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_type: String?
+      attr_accessor identifier: String?
+      attr_accessor analysis_report_id: String?
+      attr_accessor recommendation_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPerformanceAnalysisReportRecommendationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendations: Array[Types::Recommendation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendations: Array[Types::Recommendation]?
+      attr_accessor next_token: String?
+    end
+
     class ListPerformanceAnalysisReportsRequest
       include Smithy::Schema::Structure
 
@@ -684,11 +718,13 @@ module Aws::PI
       def initialize: (
         ?recommendation_id: String,
         ?recommendation_description: String,
+        ?recommendation_details: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor recommendation_id: String?
       attr_accessor recommendation_description: String?
+      attr_accessor recommendation_details: String?
     end
 
     class ResponsePartitionKey

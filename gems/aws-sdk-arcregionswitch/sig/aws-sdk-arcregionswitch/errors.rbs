@@ -3,6 +3,11 @@ module Aws::ARCRegionswitch
     class AccessDeniedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_id: () -> String?
+      def resource_type: () -> String?
+    end
     class IllegalArgumentException < Smithy::Client::ServiceError
       def message: () -> String?
     end

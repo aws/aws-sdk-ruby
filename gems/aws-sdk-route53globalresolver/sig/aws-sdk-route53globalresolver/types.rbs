@@ -1,0 +1,2581 @@
+module Aws::Route53GlobalResolver
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessSourcesItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cidr: String,
+        ?created_at: Time,
+        ?id: String,
+        ?ip_address_type: String,
+        ?name: String,
+        ?dns_view_id: String,
+        ?protocol: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cidr: String?
+      attr_accessor created_at: Time?
+      attr_accessor id: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor name: String?
+      attr_accessor dns_view_id: String?
+      attr_accessor protocol: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class AccessTokenItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?dns_view_id: String,
+        ?expires_at: Time,
+        ?global_resolver_id: String,
+        ?name: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor dns_view_id: String?
+      attr_accessor expires_at: Time?
+      attr_accessor global_resolver_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class AssociateHostedZoneInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?resource_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor name: String?
+    end
+
+    class AssociateHostedZoneOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?resource_arn: String,
+        ?hosted_zone_id: String,
+        ?hosted_zone_name: String,
+        ?name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor hosted_zone_name: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class BatchCreateFirewallRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rules: Array[Types::BatchCreateFirewallRuleInputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rules: Array[Types::BatchCreateFirewallRuleInputItem]?
+    end
+
+    class BatchCreateFirewallRuleInputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?client_token: String,
+        ?confidence_threshold: String,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_domain_list_id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?dns_view_id: String,
+        ?q_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor client_token: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor dns_view_id: String?
+      attr_accessor q_type: String?
+    end
+
+    class BatchCreateFirewallRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failures: Array[Types::BatchCreateFirewallRuleOutputItem],
+        ?successes: Array[Types::BatchCreateFirewallRuleOutputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failures: Array[Types::BatchCreateFirewallRuleOutputItem]?
+      attr_accessor successes: Array[Types::BatchCreateFirewallRuleOutputItem]?
+    end
+
+    class BatchCreateFirewallRuleOutputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule: Types::BatchCreateFirewallRuleResult,
+        ?code: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule: Types::BatchCreateFirewallRuleResult?
+      attr_accessor code: Integer?
+      attr_accessor message: String?
+    end
+
+    class BatchCreateFirewallRuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?client_token: String,
+        ?confidence_threshold: String,
+        ?created_at: Time,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_domain_list_id: String,
+        ?id: String,
+        ?managed_domain_list_name: String,
+        ?name: String,
+        ?priority: Integer,
+        ?dns_view_id: String,
+        ?query_type: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor client_token: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor id: String?
+      attr_accessor managed_domain_list_name: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor dns_view_id: String?
+      attr_accessor query_type: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class BatchDeleteFirewallRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rules: Array[Types::BatchDeleteFirewallRuleInputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rules: Array[Types::BatchDeleteFirewallRuleInputItem]?
+    end
+
+    class BatchDeleteFirewallRuleInputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule_id: String?
+    end
+
+    class BatchDeleteFirewallRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failures: Array[Types::BatchDeleteFirewallRuleOutputItem],
+        ?successes: Array[Types::BatchDeleteFirewallRuleOutputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failures: Array[Types::BatchDeleteFirewallRuleOutputItem]?
+      attr_accessor successes: Array[Types::BatchDeleteFirewallRuleOutputItem]?
+    end
+
+    class BatchDeleteFirewallRuleOutputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule: Types::BatchDeleteFirewallRuleResult,
+        ?code: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule: Types::BatchDeleteFirewallRuleResult?
+      attr_accessor code: Integer?
+      attr_accessor message: String?
+    end
+
+    class BatchDeleteFirewallRuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?id: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class BatchUpdateFirewallRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rules: Array[Types::BatchUpdateFirewallRuleInputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rules: Array[Types::BatchUpdateFirewallRuleInputItem]?
+    end
+
+    class BatchUpdateFirewallRuleInputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?confidence_threshold: String,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_rule_id: String,
+        ?name: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+    end
+
+    class BatchUpdateFirewallRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failures: Array[Types::BatchUpdateFirewallRuleOutputItem],
+        ?successes: Array[Types::BatchUpdateFirewallRuleOutputItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failures: Array[Types::BatchUpdateFirewallRuleOutputItem]?
+      attr_accessor successes: Array[Types::BatchUpdateFirewallRuleOutputItem]?
+    end
+
+    class BatchUpdateFirewallRuleOutputItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule: Types::BatchUpdateFirewallRuleResult,
+        ?code: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule: Types::BatchUpdateFirewallRuleResult?
+      attr_accessor code: Integer?
+      attr_accessor message: String?
+    end
+
+    class BatchUpdateFirewallRuleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?client_token: String,
+        ?confidence_threshold: String,
+        ?created_at: Time,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_domain_list_id: String,
+        ?id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?dns_view_id: String,
+        ?query_type: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor client_token: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor dns_view_id: String?
+      attr_accessor query_type: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    module BlockOverrideDnsQueryType
+      CNAME: String
+    end
+
+    module CRResourceStatus
+      CREATING: String
+      OPERATIONAL: String
+      UPDATING: String
+      DELETING: String
+    end
+
+    module ConfidenceThreshold
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateAccessSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+        ?client_token: String,
+        ?ip_address_type: String,
+        ?name: String,
+        ?dns_view_id: String,
+        ?protocol: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+      attr_accessor client_token: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor name: String?
+      attr_accessor dns_view_id: String?
+      attr_accessor protocol: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAccessSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cidr: String,
+        ?created_at: Time,
+        ?id: String,
+        ?ip_address_type: String,
+        ?name: String,
+        ?dns_view_id: String,
+        ?protocol: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cidr: String?
+      attr_accessor created_at: Time?
+      attr_accessor id: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor name: String?
+      attr_accessor dns_view_id: String?
+      attr_accessor protocol: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateAccessTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?dns_view_id: String,
+        ?expires_at: Time,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor dns_view_id: String?
+      attr_accessor expires_at: Time?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAccessTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?created_at: Time,
+        ?dns_view_id: String,
+        ?expires_at: Time,
+        ?name: String,
+        ?status: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor created_at: Time?
+      attr_accessor dns_view_id: String?
+      attr_accessor expires_at: Time?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor value: String?
+    end
+
+    class CreateDNSViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_resolver_id: String,
+        ?client_token: String,
+        ?name: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_resolver_id: String?
+      attr_accessor client_token: String?
+      attr_accessor name: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDNSViewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+        ?name: String,
+        ?description: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class CreateFirewallDomainListInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?global_resolver_id: String,
+        ?description: String,
+        ?name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor description: String?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateFirewallDomainListOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?description: String,
+        ?domain_count: Integer,
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor domain_count: Integer?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateFirewallRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?client_token: String,
+        ?confidence_threshold: String,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_domain_list_id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?dns_view_id: String,
+        ?q_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor client_token: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor dns_view_id: String?
+      attr_accessor q_type: String?
+    end
+
+    class CreateFirewallRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?confidence_threshold: String,
+        ?created_at: Time,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_domain_list_id: String,
+        ?id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?dns_view_id: String,
+        ?query_type: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor dns_view_id: String?
+      attr_accessor query_type: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class CreateGlobalResolverInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?description: String,
+        ?ip_address_type: String,
+        ?name: String,
+        ?observability_region: String,
+        ?regions: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor name: String?
+      attr_accessor observability_region: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateGlobalResolverOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?created_at: Time,
+        ?description: String,
+        ?dns_name: String,
+        ?ip_address_type: String,
+        ?ipv4_addresses: Array[String],
+        ?ipv6_addresses: Array[String],
+        ?name: String,
+        ?observability_region: String,
+        ?regions: Array[String],
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor dns_name: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor ipv4_addresses: Array[String]?
+      attr_accessor ipv6_addresses: Array[String]?
+      attr_accessor name: String?
+      attr_accessor observability_region: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class DNSViewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+        ?name: String,
+        ?description: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class DeleteAccessSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_source_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_source_id: String?
+    end
+
+    class DeleteAccessSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cidr: String,
+        ?created_at: Time,
+        ?id: String,
+        ?ip_address_type: String,
+        ?name: String,
+        ?dns_view_id: String,
+        ?protocol: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cidr: String?
+      attr_accessor created_at: Time?
+      attr_accessor id: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor name: String?
+      attr_accessor dns_view_id: String?
+      attr_accessor protocol: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class DeleteAccessTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token_id: String?
+    end
+
+    class DeleteAccessTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?status: String,
+        ?deleted_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor status: String?
+      attr_accessor deleted_at: Time?
+    end
+
+    class DeleteDNSViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_view_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_view_id: String?
+    end
+
+    class DeleteDNSViewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+        ?name: String,
+        ?description: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class DeleteFirewallDomainListInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_domain_list_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_domain_list_id: String?
+    end
+
+    class DeleteFirewallDomainListOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteFirewallRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule_id: String?
+    end
+
+    class DeleteFirewallRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?confidence_threshold: String,
+        ?created_at: Time,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_domain_list_id: String,
+        ?id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?dns_view_id: String,
+        ?query_type: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor dns_view_id: String?
+      attr_accessor query_type: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class DeleteGlobalResolverInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_resolver_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_resolver_id: String?
+    end
+
+    class DeleteGlobalResolverOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dns_name: String,
+        ?observability_region: String,
+        ?name: String,
+        ?description: String,
+        ?regions: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+        ?ipv4_addresses: Array[String],
+        ?ipv6_addresses: Array[String],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dns_name: String?
+      attr_accessor observability_region: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+      attr_accessor ipv4_addresses: Array[String]?
+      attr_accessor ipv6_addresses: Array[String]?
+      attr_accessor ip_address_type: String?
+    end
+
+    class DisableDNSViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_view_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_view_id: String?
+    end
+
+    class DisableDNSViewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+        ?name: String,
+        ?description: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class DisassociateHostedZoneInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class DisassociateHostedZoneOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?resource_arn: String,
+        ?hosted_zone_id: String,
+        ?hosted_zone_name: String,
+        ?name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor hosted_zone_name: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    module DnsAdvancedProtection
+      DGA: String
+      DNS_TUNNELING: String
+      DICTIONARY_DGA: String
+    end
+
+    module DnsProtocol
+      DO53: String
+      DOH: String
+      DOT: String
+    end
+
+    module DnsSecValidationType
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module EdnsClientSubnetType
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class EnableDNSViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_view_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_view_id: String?
+    end
+
+    class EnableDNSViewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+        ?name: String,
+        ?description: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    module FirewallBlockResponse
+      NODATA: String
+      NXDOMAIN: String
+      OVERRIDE: String
+    end
+
+    class FirewallDomainListsItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?description: String,
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    module FirewallRuleAction
+      ALLOW: String
+      ALERT: String
+      BLOCK: String
+    end
+
+    module FirewallRulesFailOpenType
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class FirewallRulesItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?confidence_threshold: String,
+        ?created_at: Time,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_domain_list_id: String,
+        ?id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?dns_view_id: String,
+        ?query_type: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor dns_view_id: String?
+      attr_accessor query_type: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetAccessSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_source_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_source_id: String?
+    end
+
+    class GetAccessSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cidr: String,
+        ?created_at: Time,
+        ?id: String,
+        ?ip_address_type: String,
+        ?name: String,
+        ?dns_view_id: String,
+        ?protocol: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cidr: String?
+      attr_accessor created_at: Time?
+      attr_accessor id: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor name: String?
+      attr_accessor dns_view_id: String?
+      attr_accessor protocol: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetAccessTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token_id: String?
+    end
+
+    class GetAccessTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?created_at: Time,
+        ?dns_view_id: String,
+        ?expires_at: Time,
+        ?global_resolver_id: String,
+        ?name: String,
+        ?status: String,
+        ?updated_at: Time,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor created_at: Time?
+      attr_accessor dns_view_id: String?
+      attr_accessor expires_at: Time?
+      attr_accessor global_resolver_id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+      attr_accessor value: String?
+    end
+
+    class GetDNSViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_view_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_view_id: String?
+    end
+
+    class GetDNSViewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+        ?name: String,
+        ?description: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class GetFirewallDomainListInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_domain_list_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_domain_list_id: String?
+    end
+
+    class GetFirewallDomainListOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?global_resolver_id: String,
+        ?client_token: String,
+        ?created_at: Time,
+        ?description: String,
+        ?domain_count: Integer,
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?status_message: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor client_token: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor domain_count: Integer?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetFirewallRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?firewall_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor firewall_rule_id: String?
+    end
+
+    class GetFirewallRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?confidence_threshold: String,
+        ?created_at: Time,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_domain_list_id: String,
+        ?id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?dns_view_id: String,
+        ?query_type: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor dns_view_id: String?
+      attr_accessor query_type: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetGlobalResolverInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_resolver_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_resolver_id: String?
+    end
+
+    class GetGlobalResolverOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dns_name: String,
+        ?observability_region: String,
+        ?name: String,
+        ?description: String,
+        ?regions: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+        ?ipv4_addresses: Array[String],
+        ?ipv6_addresses: Array[String],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dns_name: String?
+      attr_accessor observability_region: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+      attr_accessor ipv4_addresses: Array[String]?
+      attr_accessor ipv6_addresses: Array[String]?
+      attr_accessor ip_address_type: String?
+    end
+
+    class GetHostedZoneAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_association_id: String?
+    end
+
+    class GetHostedZoneAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?resource_arn: String,
+        ?hosted_zone_id: String,
+        ?hosted_zone_name: String,
+        ?name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor hosted_zone_name: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class GetManagedFirewallDomainListInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_firewall_domain_list_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_firewall_domain_list_id: String?
+    end
+
+    class GetManagedFirewallDomainListOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?id: String,
+        ?name: String,
+        ?managed_list_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor managed_list_type: String?
+    end
+
+    module GlobalResolverIpAddressType
+      IPV4: String
+      DUAL_STACK: String
+    end
+
+    class GlobalResolversItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dns_name: String,
+        ?observability_region: String,
+        ?name: String,
+        ?description: String,
+        ?regions: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+        ?ipv4_addresses: Array[String],
+        ?ipv6_addresses: Array[String],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dns_name: String?
+      attr_accessor observability_region: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+      attr_accessor ipv4_addresses: Array[String]?
+      attr_accessor ipv6_addresses: Array[String]?
+      attr_accessor ip_address_type: String?
+    end
+
+    module HostedZoneAssociationStatus
+      CREATING: String
+      OPERATIONAL: String
+      DELETING: String
+    end
+
+    class HostedZoneAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?resource_arn: String,
+        ?hosted_zone_id: String,
+        ?hosted_zone_name: String,
+        ?name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor hosted_zone_name: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class ImportFirewallDomainsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_file_url: String,
+        ?firewall_domain_list_id: String,
+        ?operation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_file_url: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor operation: String?
+    end
+
+    class ImportFirewallDomainsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    module IpAddressType
+      IPV4: String
+      IPV6: String
+    end
+
+    class ListAccessSourcesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Hash[String, Array[String]]?
+    end
+
+    class ListAccessSourcesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?access_sources: Array[Types::AccessSourcesItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor access_sources: Array[Types::AccessSourcesItem]?
+    end
+
+    class ListAccessTokensInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?dns_view_id: String,
+        ?filters: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor dns_view_id: String?
+      attr_accessor filters: Hash[String, Array[String]]?
+    end
+
+    class ListAccessTokensOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?access_tokens: Array[Types::AccessTokenItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor access_tokens: Array[Types::AccessTokenItem]?
+    end
+
+    class ListDNSViewsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?global_resolver_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor global_resolver_id: String?
+    end
+
+    class ListDNSViewsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?dns_views: Array[Types::DNSViewSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor dns_views: Array[Types::DNSViewSummary]?
+    end
+
+    class ListFirewallDomainListsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?global_resolver_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor global_resolver_id: String?
+    end
+
+    class ListFirewallDomainListsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?firewall_domain_lists: Array[Types::FirewallDomainListsItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor firewall_domain_lists: Array[Types::FirewallDomainListsItem]?
+    end
+
+    class ListFirewallDomainsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?firewall_domain_list_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor firewall_domain_list_id: String?
+    end
+
+    class ListFirewallDomainsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?domains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor domains: Array[String]?
+    end
+
+    class ListFirewallRulesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?dns_view_id: String,
+        ?filters: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor dns_view_id: String?
+      attr_accessor filters: Hash[String, Array[String]]?
+    end
+
+    class ListFirewallRulesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?firewall_rules: Array[Types::FirewallRulesItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor firewall_rules: Array[Types::FirewallRulesItem]?
+    end
+
+    class ListGlobalResolversInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGlobalResolversOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?global_resolvers: Array[Types::GlobalResolversItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor global_resolvers: Array[Types::GlobalResolversItem]?
+    end
+
+    class ListHostedZoneAssociationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ListHostedZoneAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?hosted_zone_associations: Array[Types::HostedZoneAssociationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor hosted_zone_associations: Array[Types::HostedZoneAssociationSummary]?
+    end
+
+    class ListManagedFirewallDomainListsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?managed_firewall_domain_list_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor managed_firewall_domain_list_type: String?
+    end
+
+    class ListManagedFirewallDomainListsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?managed_firewall_domain_lists: Array[Types::ManagedFirewallDomainListsItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor managed_firewall_domain_lists: Array[Types::ManagedFirewallDomainListsItem]?
+    end
+
+    class ListSharedDNSViewsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSharedDNSViewsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?dns_views: Array[Types::SharedDNSViewSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor dns_views: Array[Types::SharedDNSViewSummary]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ManagedFirewallDomainListsItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?id: String,
+        ?name: String,
+        ?managed_list_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor managed_list_type: String?
+    end
+
+    module ProfileResourceStatus
+      CREATING: String
+      OPERATIONAL: String
+      UPDATING: String
+      ENABLING: String
+      DISABLING: String
+      DISABLED: String
+      DELETING: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SharedDNSViewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+        ?name: String,
+        ?description: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+        ?owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+      attr_accessor owner_account_id: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    module TokenStatus
+      CREATING: String
+      OPERATIONAL: String
+      DELETING: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAccessSourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_source_id: String,
+        ?cidr: String,
+        ?ip_address_type: String,
+        ?name: String,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_source_id: String?
+      attr_accessor cidr: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor name: String?
+      attr_accessor protocol: String?
+    end
+
+    class UpdateAccessSourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cidr: String,
+        ?created_at: Time,
+        ?id: String,
+        ?ip_address_type: String,
+        ?name: String,
+        ?dns_view_id: String,
+        ?protocol: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cidr: String?
+      attr_accessor created_at: Time?
+      attr_accessor id: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor name: String?
+      attr_accessor dns_view_id: String?
+      attr_accessor protocol: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateAccessTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateAccessTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateDNSViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_view_id: String,
+        ?name: String,
+        ?description: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_view_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+    end
+
+    class UpdateDNSViewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dnssec_validation: String,
+        ?edns_client_subnet: String,
+        ?firewall_rules_fail_open: String,
+        ?name: String,
+        ?description: String,
+        ?global_resolver_id: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dnssec_validation: String?
+      attr_accessor edns_client_subnet: String?
+      attr_accessor firewall_rules_fail_open: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor global_resolver_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class UpdateFirewallDomainsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domains: Array[String],
+        ?firewall_domain_list_id: String,
+        ?operation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domains: Array[String]?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor operation: String?
+    end
+
+    class UpdateFirewallDomainsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateFirewallRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?client_token: String,
+        ?confidence_threshold: String,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_rule_id: String,
+        ?name: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor client_token: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_rule_id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+    end
+
+    class UpdateFirewallRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?block_override_dns_type: String,
+        ?block_override_domain: String,
+        ?block_override_ttl: Integer,
+        ?block_response: String,
+        ?confidence_threshold: String,
+        ?created_at: Time,
+        ?description: String,
+        ?dns_advanced_protection: String,
+        ?firewall_domain_list_id: String,
+        ?id: String,
+        ?name: String,
+        ?priority: Integer,
+        ?dns_view_id: String,
+        ?query_type: String,
+        ?status: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor block_override_dns_type: String?
+      attr_accessor block_override_domain: String?
+      attr_accessor block_override_ttl: Integer?
+      attr_accessor block_response: String?
+      attr_accessor confidence_threshold: String?
+      attr_accessor created_at: Time?
+      attr_accessor description: String?
+      attr_accessor dns_advanced_protection: String?
+      attr_accessor firewall_domain_list_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+      attr_accessor dns_view_id: String?
+      attr_accessor query_type: String?
+      attr_accessor status: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateGlobalResolverInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_resolver_id: String,
+        ?name: String,
+        ?observability_region: String,
+        ?description: String,
+        ?ip_address_type: String,
+        ?regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_resolver_id: String?
+      attr_accessor name: String?
+      attr_accessor observability_region: String?
+      attr_accessor description: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor regions: Array[String]?
+    end
+
+    class UpdateGlobalResolverOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?client_token: String,
+        ?dns_name: String,
+        ?observability_region: String,
+        ?name: String,
+        ?description: String,
+        ?regions: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+        ?ipv4_addresses: Array[String],
+        ?ipv6_addresses: Array[String],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor client_token: String?
+      attr_accessor dns_name: String?
+      attr_accessor observability_region: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+      attr_accessor ipv4_addresses: Array[String]?
+      attr_accessor ipv6_addresses: Array[String]?
+      attr_accessor ip_address_type: String?
+    end
+
+    class UpdateHostedZoneAssociationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_association_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_association_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateHostedZoneAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?resource_arn: String,
+        ?hosted_zone_id: String,
+        ?hosted_zone_name: String,
+        ?name: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor hosted_zone_name: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor status: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+  end
+end

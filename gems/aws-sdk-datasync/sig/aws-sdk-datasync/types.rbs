@@ -292,6 +292,8 @@ module Aws::DataSync
         ?user: String,
         ?domain: String,
         ?password: String,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -302,6 +304,8 @@ module Aws::DataSync
       attr_accessor user: String?
       attr_accessor domain: String?
       attr_accessor password: String?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
     end
 
     class CreateLocationFsxWindowsResponse
@@ -332,6 +336,8 @@ module Aws::DataSync
         ?kerberos_krb5_conf: String,
         ?agent_arns: Array[String],
         ?tags: Array[Types::TagListEntry],
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -348,6 +354,8 @@ module Aws::DataSync
       attr_accessor kerberos_krb5_conf: String?
       attr_accessor agent_arns: Array[String]?
       attr_accessor tags: Array[Types::TagListEntry]?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
     end
 
     class CreateLocationHdfsResponse
@@ -476,6 +484,8 @@ module Aws::DataSync
         ?user: String,
         ?domain: String,
         ?password: String,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
         ?agent_arns: Array[String],
         ?mount_options: Types::SmbMountOptions,
         ?tags: Array[Types::TagListEntry],
@@ -492,6 +502,8 @@ module Aws::DataSync
       attr_accessor user: String?
       attr_accessor domain: String?
       attr_accessor password: String?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
       attr_accessor agent_arns: Array[String]?
       attr_accessor mount_options: Types::SmbMountOptions?
       attr_accessor tags: Array[Types::TagListEntry]?
@@ -853,6 +865,9 @@ module Aws::DataSync
         ?creation_time: Time,
         ?user: String,
         ?domain: String,
+        ?managed_secret_config: Types::ManagedSecretConfig,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -862,6 +877,9 @@ module Aws::DataSync
       attr_accessor creation_time: Time?
       attr_accessor user: String?
       attr_accessor domain: String?
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
     end
 
     class DescribeLocationHdfsRequest
@@ -891,6 +909,9 @@ module Aws::DataSync
         ?kerberos_principal: String,
         ?agent_arns: Array[String],
         ?creation_time: Time,
+        ?managed_secret_config: Types::ManagedSecretConfig,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -906,6 +927,9 @@ module Aws::DataSync
       attr_accessor kerberos_principal: String?
       attr_accessor agent_arns: Array[String]?
       attr_accessor creation_time: Time?
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
     end
 
     class DescribeLocationNfsRequest
@@ -1037,6 +1061,9 @@ module Aws::DataSync
         ?dns_ip_addresses: Array[String],
         ?kerberos_principal: String,
         ?authentication_type: String,
+        ?managed_secret_config: Types::ManagedSecretConfig,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1050,6 +1077,9 @@ module Aws::DataSync
       attr_accessor dns_ip_addresses: Array[String]?
       attr_accessor kerberos_principal: String?
       attr_accessor authentication_type: String?
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
     end
 
     class DescribeTaskExecutionRequest
@@ -1091,6 +1121,15 @@ module Aws::DataSync
         ?files_prepared: Integer,
         ?files_listed: Types::TaskExecutionFilesListedDetail,
         ?files_failed: Types::TaskExecutionFilesFailedDetail,
+        ?estimated_folders_to_delete: Integer,
+        ?estimated_folders_to_transfer: Integer,
+        ?folders_skipped: Integer,
+        ?folders_prepared: Integer,
+        ?folders_transferred: Integer,
+        ?folders_verified: Integer,
+        ?folders_deleted: Integer,
+        ?folders_listed: Types::TaskExecutionFoldersListedDetail,
+        ?folders_failed: Types::TaskExecutionFoldersFailedDetail,
         ?launch_time: Time,
         ?end_time: Time,
       ) -> void
@@ -1120,6 +1159,15 @@ module Aws::DataSync
       attr_accessor files_prepared: Integer?
       attr_accessor files_listed: Types::TaskExecutionFilesListedDetail?
       attr_accessor files_failed: Types::TaskExecutionFilesFailedDetail?
+      attr_accessor estimated_folders_to_delete: Integer?
+      attr_accessor estimated_folders_to_transfer: Integer?
+      attr_accessor folders_skipped: Integer?
+      attr_accessor folders_prepared: Integer?
+      attr_accessor folders_transferred: Integer?
+      attr_accessor folders_verified: Integer?
+      attr_accessor folders_deleted: Integer?
+      attr_accessor folders_listed: Types::TaskExecutionFoldersListedDetail?
+      attr_accessor folders_failed: Types::TaskExecutionFoldersFailedDetail?
       attr_accessor launch_time: Time?
       attr_accessor end_time: Time?
     end
@@ -1258,6 +1306,9 @@ module Aws::DataSync
         ?mount_options: Types::SmbMountOptions,
         ?password: String,
         ?user: String,
+        ?managed_secret_config: Types::ManagedSecretConfig,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1265,6 +1316,9 @@ module Aws::DataSync
       attr_accessor mount_options: Types::SmbMountOptions?
       attr_accessor password: String?
       attr_accessor user: String?
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
     end
 
     class FsxUpdateProtocol
@@ -1288,6 +1342,8 @@ module Aws::DataSync
         ?mount_options: Types::SmbMountOptions,
         ?password: String,
         ?user: String,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1295,6 +1351,8 @@ module Aws::DataSync
       attr_accessor mount_options: Types::SmbMountOptions?
       attr_accessor password: String?
       attr_accessor user: String?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
     end
 
     module Gid
@@ -1597,6 +1655,12 @@ module Aws::DataSync
       NFS3: String
       NFS4_0: String
       NFS4_1: String
+      NFS4_2: String
+    end
+
+    module ObjectMetadata
+      PRESERVE: String
+      NONE: String
     end
 
     module ObjectStorageServerProtocol
@@ -1657,6 +1721,7 @@ module Aws::DataSync
         ?transfer_mode: String,
         ?security_descriptor_copy_flags: String,
         ?object_tags: String,
+        ?object_metadata: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1675,6 +1740,7 @@ module Aws::DataSync
       attr_accessor transfer_mode: String?
       attr_accessor security_descriptor_copy_flags: String?
       attr_accessor object_tags: String?
+      attr_accessor object_metadata: String?
     end
 
     module OverwriteMode
@@ -2000,6 +2066,38 @@ module Aws::DataSync
     end
 
     class TaskExecutionFilesListedDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?at_source: Integer,
+        ?at_destination_for_delete: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor at_source: Integer?
+      attr_accessor at_destination_for_delete: Integer?
+    end
+
+    class TaskExecutionFoldersFailedDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?list: Integer,
+        ?prepare: Integer,
+        ?transfer: Integer,
+        ?verify: Integer,
+        ?delete: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list: Integer?
+      attr_accessor prepare: Integer?
+      attr_accessor transfer: Integer?
+      attr_accessor verify: Integer?
+      attr_accessor delete: Integer?
+    end
+
+    class TaskExecutionFoldersListedDetail
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2366,6 +2464,8 @@ module Aws::DataSync
         ?domain: String,
         ?user: String,
         ?password: String,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2374,6 +2474,8 @@ module Aws::DataSync
       attr_accessor domain: String?
       attr_accessor user: String?
       attr_accessor password: String?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
     end
 
     class UpdateLocationFsxWindowsResponse
@@ -2402,6 +2504,8 @@ module Aws::DataSync
         ?kerberos_keytab: String,
         ?kerberos_krb5_conf: String,
         ?agent_arns: Array[String],
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2418,6 +2522,8 @@ module Aws::DataSync
       attr_accessor kerberos_keytab: String?
       attr_accessor kerberos_krb5_conf: String?
       attr_accessor agent_arns: Array[String]?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
     end
 
     class UpdateLocationHdfsResponse
@@ -2533,6 +2639,8 @@ module Aws::DataSync
         ?user: String,
         ?domain: String,
         ?password: String,
+        ?cmk_secret_config: Types::CmkSecretConfig,
+        ?custom_secret_config: Types::CustomSecretConfig,
         ?agent_arns: Array[String],
         ?mount_options: Types::SmbMountOptions,
         ?authentication_type: String,
@@ -2549,6 +2657,8 @@ module Aws::DataSync
       attr_accessor user: String?
       attr_accessor domain: String?
       attr_accessor password: String?
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig?
+      attr_accessor custom_secret_config: Types::CustomSecretConfig?
       attr_accessor agent_arns: Array[String]?
       attr_accessor mount_options: Types::SmbMountOptions?
       attr_accessor authentication_type: String?

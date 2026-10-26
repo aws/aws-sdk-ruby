@@ -936,6 +936,64 @@ module Aws::MemoryDB
       attr_accessor multi_region_clusters: Array[Types::MultiRegionCluster]?
     end
 
+    class DescribeMultiRegionParameterGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multi_region_parameter_group_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multi_region_parameter_group_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMultiRegionParameterGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?multi_region_parameter_groups: Array[Types::MultiRegionParameterGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor multi_region_parameter_groups: Array[Types::MultiRegionParameterGroup]?
+    end
+
+    class DescribeMultiRegionParametersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multi_region_parameter_group_name: String,
+        ?source: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multi_region_parameter_group_name: String?
+      attr_accessor source: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMultiRegionParametersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?multi_region_parameters: Array[Types::MultiRegionParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor multi_region_parameters: Array[Types::MultiRegionParameter]?
+    end
+
     class DescribeParameterGroupsRequest
       include Smithy::Schema::Structure
 
@@ -1577,6 +1635,46 @@ module Aws::MemoryDB
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class MultiRegionParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?description: String,
+        ?source: String,
+        ?data_type: String,
+        ?allowed_values: String,
+        ?minimum_engine_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor description: String?
+      attr_accessor source: String?
+      attr_accessor data_type: String?
+      attr_accessor allowed_values: String?
+      attr_accessor minimum_engine_version: String?
+    end
+
+    class MultiRegionParameterGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?family: String,
+        ?description: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor family: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
     end
 
     class MultiRegionParameterGroupNotFoundFault

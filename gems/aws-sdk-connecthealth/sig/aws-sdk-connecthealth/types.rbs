@@ -1,0 +1,1235 @@
+module Aws::ConnectHealth
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActivateSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?subscription_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor subscription_id: String?
+    end
+
+    class ActivateSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::SubscriptionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::SubscriptionDescription?
+    end
+
+    class ArtifactDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_location: String,
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_location: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class ClinicalNoteGenerationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?note_result: Types::ArtifactDetails,
+        ?transcript_result: Types::ArtifactDetails,
+        ?after_visit_summary_result: Types::ArtifactDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor note_result: Types::ArtifactDetails?
+      attr_accessor transcript_result: Types::ArtifactDetails?
+      attr_accessor after_visit_summary_result: Types::ArtifactDetails?
+    end
+
+    class ClinicalNoteGenerationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?note_template_settings: Types::NoteTemplateSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor note_template_settings: Types::NoteTemplateSettings?
+    end
+
+    class ClinicalNoteGenerationSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?note_template_settings: Types::NoteTemplateSettingsResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor note_template_settings: Types::NoteTemplateSettingsResponse?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?kms_key_arn: String,
+        ?web_app_setup_configuration: Types::CreateWebAppConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor web_app_setup_configuration: Types::CreateWebAppConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?arn: String,
+        ?name: String,
+        ?kms_key_arn: String,
+        ?encryption_context: Types::EncryptionContext,
+        ?status: String,
+        ?web_app_url: String,
+        ?web_app_configuration: Types::WebAppConfiguration,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor encryption_context: Types::EncryptionContext?
+      attr_accessor status: String?
+      attr_accessor web_app_url: String?
+      attr_accessor web_app_configuration: Types::WebAppConfiguration?
+      attr_accessor created_at: Time?
+    end
+
+    class CreateSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+    end
+
+    class CreateSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?subscription_id: String,
+        ?arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?activated_at: Time,
+        ?deactivated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor subscription_id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor activated_at: Time?
+      attr_accessor deactivated_at: Time?
+    end
+
+    class CreateWebAppConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ehr_role: String,
+        ?idc_instance_id: String,
+        ?idc_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ehr_role: String?
+      attr_accessor idc_instance_id: String?
+      attr_accessor idc_region: String?
+    end
+
+    class CustomTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_type: String,
+        ?template_instructions: Array[Types::TemplateSectionInstruction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_type: String?
+      attr_accessor template_instructions: Array[Types::TemplateSectionInstruction]?
+    end
+
+    module CustomTemplateBase
+      HISTORY_AND_PHYSICAL: String
+      GIRPP: String
+      DAP: String
+      SIRP: String
+      BIRP: String
+      BEHAVIORAL_SOAP: String
+    end
+
+    class CustomTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_type: String?
+    end
+
+    class DeactivateSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?subscription_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor subscription_id: String?
+    end
+
+    class DeactivateSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::SubscriptionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::SubscriptionDescription?
+    end
+
+    class DeleteDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+    end
+
+    class DeleteDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+    end
+
+    module DomainStatus
+      ACTIVE: String
+      DELETING: String
+      DELETED: String
+    end
+
+    class DomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+    end
+
+    class EncounterContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unstructured_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unstructured_context: String?
+    end
+
+    class EncryptionContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    module EncryptionType
+      AWS_OWNED_KEY: String
+      CUSTOMER_MANAGED_KEY: String
+    end
+
+    class FHIRServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fhir_endpoint: String,
+        ?oauth_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fhir_endpoint: String?
+      attr_accessor oauth_token: String?
+    end
+
+    class GetDomainInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+    end
+
+    class GetDomainOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?arn: String,
+        ?name: String,
+        ?kms_key_arn: String,
+        ?encryption_context: Types::EncryptionContext,
+        ?status: String,
+        ?web_app_url: String,
+        ?web_app_configuration: Types::WebAppConfiguration,
+        ?created_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor encryption_context: Types::EncryptionContext?
+      attr_accessor status: String?
+      attr_accessor web_app_url: String?
+      attr_accessor web_app_configuration: Types::WebAppConfiguration?
+      attr_accessor created_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetMedicalScribeListeningSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?domain_id: String,
+        ?subscription_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor subscription_id: String?
+    end
+
+    class GetMedicalScribeListeningSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?medical_scribe_listening_session_details: Types::MedicalScribeListeningSessionDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor medical_scribe_listening_session_details: Types::MedicalScribeListeningSessionDetails?
+    end
+
+    class GetPatientInsightsJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class GetPatientInsightsJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_arn: String,
+        ?job_status: String,
+        ?creation_time: Time,
+        ?updated_time: Time,
+        ?insights_output: Types::InsightsOutput,
+        ?status_details: String,
+        ?patient_context: Types::PatientInsightsPatientContext,
+        ?insights_context: Types::InsightsContext,
+        ?encounter_context: Types::PatientInsightsEncounterContext,
+        ?user_context: Types::UserContext,
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_arn: String?
+      attr_accessor job_status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor updated_time: Time?
+      attr_accessor insights_output: Types::InsightsOutput?
+      attr_accessor status_details: String?
+      attr_accessor patient_context: Types::PatientInsightsPatientContext?
+      attr_accessor insights_context: Types::InsightsContext?
+      attr_accessor encounter_context: Types::PatientInsightsEncounterContext?
+      attr_accessor user_context: Types::UserContext?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+    end
+
+    class GetSubscriptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?subscription_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor subscription_id: String?
+    end
+
+    class GetSubscriptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription: Types::SubscriptionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription: Types::SubscriptionDescription?
+    end
+
+    class InputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fhir_server: Types::FHIRServer,
+        ?s3_sources: Array[Types::S3Source],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fhir_server: Types::FHIRServer?
+      attr_accessor s3_sources: Array[Types::S3Source]?
+    end
+
+    class InsightsContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insights_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insights_type: String?
+    end
+
+    class InsightsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+    end
+
+    module InsightsType
+      PRE_VISIT: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module JobStatus
+      SUBMITTED: String
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCEEDED: String
+    end
+
+    class ListDomainsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domains: Array[Types::DomainSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domains: Array[Types::DomainSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscriptionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscriptionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriptions: Array[Types::SubscriptionDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriptions: Array[Types::SubscriptionDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module ManagedNoteTemplate
+      HISTORY_AND_PHYSICAL: String
+      GIRPP: String
+      DAP: String
+      SIRP: String
+      BIRP: String
+      BEHAVIORAL_SOAP: String
+      PHYSICAL_SOAP: String
+    end
+
+    class ManagedTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_type: String?
+    end
+
+    class ManagedTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_type: String?
+    end
+
+    class MedicalScribeAudioEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_chunk: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_chunk: String?
+    end
+
+    class MedicalScribeBinaryAudioEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_chunk: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_chunk: String?
+    end
+
+    class MedicalScribeChannelDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: Integer,
+        ?participant_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: Integer?
+      attr_accessor participant_role: String?
+    end
+
+    class MedicalScribeConfigurationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?post_stream_action_settings: Types::MedicalScribePostStreamActionSettings,
+        ?channel_definitions: Array[Types::MedicalScribeChannelDefinition],
+        ?encounter_context: Types::EncounterContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor post_stream_action_settings: Types::MedicalScribePostStreamActionSettings?
+      attr_accessor channel_definitions: Array[Types::MedicalScribeChannelDefinition]?
+      attr_accessor encounter_context: Types::EncounterContext?
+    end
+
+    class MedicalScribeInputStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?audio_event: Types::MedicalScribeAudioEvent,
+        ?binary_audio_event: Types::MedicalScribeBinaryAudioEvent,
+        ?session_control_event: Types::MedicalScribeSessionControlEvent,
+        ?configuration_event: Types::MedicalScribeConfigurationEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_event: Types::MedicalScribeAudioEvent?
+      attr_accessor binary_audio_event: Types::MedicalScribeBinaryAudioEvent?
+      attr_accessor session_control_event: Types::MedicalScribeSessionControlEvent?
+      attr_accessor configuration_event: Types::MedicalScribeConfigurationEvent?
+
+      class AudioEvent < MedicalScribeInputStream
+      end
+      class BinaryAudioEvent < MedicalScribeInputStream
+      end
+      class SessionControlEvent < MedicalScribeInputStream
+      end
+      class ConfigurationEvent < MedicalScribeInputStream
+      end
+      class Unknown < MedicalScribeInputStream
+      end
+    end
+
+    module MedicalScribeLanguageCode
+      EN_US: String
+      MULTI: String
+    end
+
+    class MedicalScribeListeningSessionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?domain_id: String,
+        ?subscription_id: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?channel_definitions: Array[Types::MedicalScribeChannelDefinition],
+        ?post_stream_action_settings: Types::MedicalScribePostStreamActionSettingsResponse,
+        ?post_stream_action_result: Types::MedicalScribePostStreamActionsResult,
+        ?encounter_context_provided: bool,
+        ?stream_status: String,
+        ?stream_creation_time: Time,
+        ?stream_end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor subscription_id: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor channel_definitions: Array[Types::MedicalScribeChannelDefinition]?
+      attr_accessor post_stream_action_settings: Types::MedicalScribePostStreamActionSettingsResponse?
+      attr_accessor post_stream_action_result: Types::MedicalScribePostStreamActionsResult?
+      attr_accessor encounter_context_provided: bool?
+      attr_accessor stream_status: String?
+      attr_accessor stream_creation_time: Time?
+      attr_accessor stream_end_time: Time?
+    end
+
+    module MedicalScribeMediaEncoding
+      PCM: String
+      FLAC: String
+    end
+
+    class MedicalScribeOutputStream
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?transcript_event: Types::MedicalScribeTranscriptEvent,
+        ?internal_failure_exception: Types::InternalServerException,
+        ?validation_exception: Types::ValidationException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_event: Types::MedicalScribeTranscriptEvent?
+      attr_accessor internal_failure_exception: Types::InternalServerException?
+      attr_accessor validation_exception: Types::ValidationException?
+
+      class TranscriptEvent < MedicalScribeOutputStream
+      end
+      class InternalFailureException < MedicalScribeOutputStream
+      end
+      class ValidationException < MedicalScribeOutputStream
+      end
+      class Unknown < MedicalScribeOutputStream
+      end
+    end
+
+    module MedicalScribeParticipantRole
+      PATIENT: String
+      CLINICIAN: String
+    end
+
+    class MedicalScribePostStreamActionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_s3_uri: String,
+        ?clinical_note_generation_settings: Types::ClinicalNoteGenerationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_s3_uri: String?
+      attr_accessor clinical_note_generation_settings: Types::ClinicalNoteGenerationSettings?
+    end
+
+    class MedicalScribePostStreamActionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_s3_uri: String,
+        ?clinical_note_generation_settings: Types::ClinicalNoteGenerationSettingsResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_s3_uri: String?
+      attr_accessor clinical_note_generation_settings: Types::ClinicalNoteGenerationSettingsResponse?
+    end
+
+    class MedicalScribePostStreamActionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clinical_note_generation_result: Types::ClinicalNoteGenerationResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clinical_note_generation_result: Types::ClinicalNoteGenerationResult?
+    end
+
+    class MedicalScribeSessionControlEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module MedicalScribeSessionControlEventType
+      END_OF_SESSION: String
+    end
+
+    module MedicalScribeStreamStatus
+      IN_PROGRESS: String
+      PAUSED: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class MedicalScribeTranscriptEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transcript_segment: Types::MedicalScribeTranscriptSegment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transcript_segment: Types::MedicalScribeTranscriptSegment?
+    end
+
+    class MedicalScribeTranscriptSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_id: String,
+        ?audio_begin_offset: Float,
+        ?audio_end_offset: Float,
+        ?is_partial: bool,
+        ?channel_id: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_id: String?
+      attr_accessor audio_begin_offset: Float?
+      attr_accessor audio_end_offset: Float?
+      attr_accessor is_partial: bool?
+      attr_accessor channel_id: String?
+      attr_accessor content: String?
+    end
+
+    class NoteTemplateSettings
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?managed_template: Types::ManagedTemplate,
+        ?custom_template: Types::CustomTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_template: Types::ManagedTemplate?
+      attr_accessor custom_template: Types::CustomTemplate?
+
+      class ManagedTemplate < NoteTemplateSettings
+      end
+      class CustomTemplate < NoteTemplateSettings
+      end
+      class Unknown < NoteTemplateSettings
+      end
+    end
+
+    class NoteTemplateSettingsResponse
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?managed_template: Types::ManagedTemplateResponse,
+        ?custom_template: Types::CustomTemplateResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_template: Types::ManagedTemplateResponse?
+      attr_accessor custom_template: Types::CustomTemplateResponse?
+
+      class ManagedTemplate < NoteTemplateSettingsResponse
+      end
+      class CustomTemplate < NoteTemplateSettingsResponse
+      end
+      class Unknown < NoteTemplateSettingsResponse
+      end
+    end
+
+    class OutputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_output_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_output_path: String?
+    end
+
+    class PatientInsightsEncounterContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encounter_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encounter_reason: String?
+    end
+
+    class PatientInsightsPatientContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?patient_id: String,
+        ?date_of_birth: String,
+        ?pronouns: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor patient_id: String?
+      attr_accessor date_of_birth: String?
+      attr_accessor pronouns: String?
+    end
+
+    module PostStreamArtifactGenerationStatus
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    module Pronouns
+      HE_HIM: String
+      SHE_HER: String
+      THEY_THEM: String
+    end
+
+    module ProviderRole
+      CLINICIAN: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Specialty
+      PRIMARY_CARE: String
+    end
+
+    class StartMedicalScribeListeningSessionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?domain_id: String,
+        ?subscription_id: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?input_stream: Types::MedicalScribeInputStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor subscription_id: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor input_stream: Types::MedicalScribeInputStream?
+    end
+
+    class StartMedicalScribeListeningSessionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+        ?domain_id: String,
+        ?subscription_id: String,
+        ?request_id: String,
+        ?language_code: String,
+        ?media_sample_rate_hertz: Integer,
+        ?media_encoding: String,
+        ?response_stream: Types::MedicalScribeOutputStream,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+      attr_accessor domain_id: String?
+      attr_accessor subscription_id: String?
+      attr_accessor request_id: String?
+      attr_accessor language_code: String?
+      attr_accessor media_sample_rate_hertz: Integer?
+      attr_accessor media_encoding: String?
+      attr_accessor response_stream: Types::MedicalScribeOutputStream?
+    end
+
+    class StartPatientInsightsJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?patient_context: Types::PatientInsightsPatientContext,
+        ?insights_context: Types::InsightsContext,
+        ?encounter_context: Types::PatientInsightsEncounterContext,
+        ?user_context: Types::UserContext,
+        ?input_data_config: Types::InputDataConfig,
+        ?output_data_config: Types::OutputDataConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor patient_context: Types::PatientInsightsPatientContext?
+      attr_accessor insights_context: Types::InsightsContext?
+      attr_accessor encounter_context: Types::PatientInsightsEncounterContext?
+      attr_accessor user_context: Types::UserContext?
+      attr_accessor input_data_config: Types::InputDataConfig?
+      attr_accessor output_data_config: Types::OutputDataConfig?
+      attr_accessor client_token: String?
+    end
+
+    class StartPatientInsightsJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?job_id: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor job_id: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class SubscriptionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_id: String,
+        ?subscription_id: String,
+        ?arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?activated_at: Time,
+        ?deactivated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_id: String?
+      attr_accessor subscription_id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor activated_at: Time?
+      attr_accessor deactivated_at: Time?
+    end
+
+    module SubscriptionStatus
+      ACTIVE: String
+      INACTIVE: String
+      DELETED: String
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TemplateSectionInstruction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?section_header: String,
+        ?section_instruction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor section_header: String?
+      attr_accessor section_instruction: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UserContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?user_id: String,
+        ?specialty: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor user_id: String?
+      attr_accessor specialty: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WebAppConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ehr_role: String,
+        ?idc_application_id: String,
+        ?idc_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ehr_role: String?
+      attr_accessor idc_application_id: String?
+      attr_accessor idc_region: String?
+    end
+  end
+end

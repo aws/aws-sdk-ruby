@@ -6,8 +6,43 @@ module Aws::Odb
     AcceptMarketplaceRegistrationOutput: StructureShape
     Access: EnumShape
     AccessDeniedException: StructureShape
+    AdminPasswordSource: EnumShape
+    AdminPasswordSourceConfiguration: UnionShape
+    AdminPasswordSourceConfigurationInput: UnionShape
+    AdminPasswordSourceSummary: StructureShape
+    Arn: StringShape
+    AssociateIamRoleToResourceInput: StructureShape
+    AssociateIamRoleToResourceOutput: StructureShape
+    AssociateVirtualMachinesToExadbVmClusterInput: StructureShape
+    AssociateVirtualMachinesToExadbVmClusterOutput: StructureShape
+    AutonomousDatabase: StructureShape
+    AutonomousDatabaseApex: StructureShape
+    AutonomousDatabaseBackup: StructureShape
+    AutonomousDatabaseBackupList: ListShape
+    AutonomousDatabaseBackupStatus: EnumShape
+    AutonomousDatabaseBackupSummary: StructureShape
+    AutonomousDatabaseBackupType: EnumShape
+    AutonomousDatabaseCharacterSetList: ListShape
+    AutonomousDatabaseCharacterSetSummary: StructureShape
+    AutonomousDatabaseConnectionStrings: StructureShape
+    AutonomousDatabaseConnectionUrls: StructureShape
+    AutonomousDatabaseList: ListShape
+    AutonomousDatabasePeerList: ListShape
+    AutonomousDatabasePeerSummary: StructureShape
+    AutonomousDatabaseResourceStatus: EnumShape
+    AutonomousDatabaseSummary: StructureShape
+    AutonomousDatabaseVersionList: ListShape
+    AutonomousDatabaseVersionSummary: StructureShape
+    AutonomousDatabaseWalletDetails: StructureShape
+    AutonomousDatabaseWalletFile: BlobShape
+    AutonomousDatabaseWalletStatus: EnumShape
+    AutonomousMaintenanceScheduleType: EnumShape
     AutonomousVirtualMachineList: ListShape
     AutonomousVirtualMachineSummary: StructureShape
+    AwsEncryptionKeyConfiguration: StructureShape
+    AwsEncryptionKeyConfigurationInput: StructureShape
+    CloneToRefreshableConfiguration: StructureShape
+    CloneType: EnumShape
     CloudAutonomousVmCluster: StructureShape
     CloudAutonomousVmClusterList: ListShape
     CloudAutonomousVmClusterResourceDetails: StructureShape
@@ -20,21 +55,50 @@ module Aws::Odb
     CloudVmCluster: StructureShape
     CloudVmClusterList: ListShape
     CloudVmClusterSummary: StructureShape
+    ClusterName: StringShape
     ComputeModel: EnumShape
     ConflictException: StructureShape
+    CreateAutonomousDatabaseBackupInput: StructureShape
+    CreateAutonomousDatabaseBackupOutput: StructureShape
+    CreateAutonomousDatabaseInput: StructureShape
+    CreateAutonomousDatabaseOutput: StructureShape
+    CreateAutonomousDatabaseWalletInput: StructureShape
+    CreateAutonomousDatabaseWalletOutput: StructureShape
     CreateCloudAutonomousVmClusterInput: StructureShape
     CreateCloudAutonomousVmClusterOutput: StructureShape
     CreateCloudExadataInfrastructureInput: StructureShape
     CreateCloudExadataInfrastructureOutput: StructureShape
     CreateCloudVmClusterInput: StructureShape
     CreateCloudVmClusterOutput: StructureShape
+    CreateExadbVmClusterInput: StructureShape
+    CreateExadbVmClusterOutput: StructureShape
+    CreateExascaleDbStorageVaultInput: StructureShape
+    CreateExascaleDbStorageVaultOutput: StructureShape
     CreateOdbNetworkInput: StructureShape
     CreateOdbNetworkOutput: StructureShape
     CreateOdbPeeringConnectionInput: StructureShape
     CreateOdbPeeringConnectionOutput: StructureShape
+    CrossRegionDataGuardConfiguration: StructureShape
+    CrossRegionDisasterRecoveryConfiguration: StructureShape
+    CrossRegionS3RestoreSourcesAccess: StructureShape
+    CrossRegionS3RestoreSourcesAccessList: ListShape
     CustomerContact: StructureShape
     CustomerContacts: ListShape
+    CustomerManagedAwsSecretConfiguration: StructureShape
+    CustomerManagedAwsSecretConfigurationInput: StructureShape
     DataCollectionOptions: StructureShape
+    DataGuardRole: EnumShape
+    DataSafeStatus: EnumShape
+    DatabaseCloneConfiguration: StructureShape
+    DatabaseConnectionStringMap: MapShape
+    DatabaseConnectionStringProfile: StructureShape
+    DatabaseConnectionStringProfileList: ListShape
+    DatabaseEdition: EnumShape
+    DatabaseManagementStatus: EnumShape
+    DatabaseStandbySummary: StructureShape
+    DatabaseTool: StructureShape
+    DatabaseToolList: ListShape
+    DatabaseType: EnumShape
     DayOfWeek: StructureShape
     DayOfWeekName: EnumShape
     DaysOfWeek: ListShape
@@ -52,19 +116,58 @@ module Aws::Odb
     DbServerSummary: StructureShape
     DbSystemShapeList: ListShape
     DbSystemShapeSummary: StructureShape
+    DbWorkload: EnumShape
+    DeleteAutonomousDatabaseBackupInput: StructureShape
+    DeleteAutonomousDatabaseBackupOutput: StructureShape
+    DeleteAutonomousDatabaseInput: StructureShape
+    DeleteAutonomousDatabaseOutput: StructureShape
     DeleteCloudAutonomousVmClusterInput: StructureShape
     DeleteCloudAutonomousVmClusterOutput: StructureShape
     DeleteCloudExadataInfrastructureInput: StructureShape
     DeleteCloudExadataInfrastructureOutput: StructureShape
     DeleteCloudVmClusterInput: StructureShape
     DeleteCloudVmClusterOutput: StructureShape
+    DeleteExadbVmClusterInput: StructureShape
+    DeleteExadbVmClusterOutput: StructureShape
+    DeleteExascaleDbStorageVaultInput: StructureShape
+    DeleteExascaleDbStorageVaultOutput: StructureShape
     DeleteOdbNetworkInput: StructureShape
     DeleteOdbNetworkOutput: StructureShape
     DeleteOdbPeeringConnectionInput: StructureShape
     DeleteOdbPeeringConnectionOutput: StructureShape
+    DisassociateIamRoleFromResourceInput: StructureShape
+    DisassociateIamRoleFromResourceOutput: StructureShape
+    DisassociateVirtualMachinesFromExadbVmClusterInput: StructureShape
+    DisassociateVirtualMachinesFromExadbVmClusterOutput: StructureShape
+    DisasterRecoveryConfiguration: StructureShape
+    DisasterRecoveryType: EnumShape
     DiskRedundancy: EnumShape
+    EncryptionKeyConfiguration: UnionShape
+    EncryptionKeyConfigurationInput: UnionShape
+    EncryptionKeyProvider: EnumShape
+    EncryptionKeyProviderInput: EnumShape
+    EncryptionSummary: StructureShape
     ExadataIormConfig: StructureShape
+    ExadbVmCluster: StructureShape
+    ExadbVmClusterList: ListShape
+    ExadbVmClusterStorageDetails: StructureShape
+    ExadbVmClusterSummary: StructureShape
+    ExascaleDbStorageDetails: StructureShape
+    ExascaleDbStorageVault: StructureShape
+    ExascaleDbStorageVaultList: ListShape
+    ExascaleDbStorageVaultSummary: StructureShape
+    ExternalIdType: EnumShape
+    FailoverAutonomousDatabaseInput: StructureShape
+    FailoverAutonomousDatabaseOutput: StructureShape
+    FlexComponentList: ListShape
+    FlexComponentSummary: StructureShape
     GeneralInputString: StringShape
+    GetAutonomousDatabaseBackupInput: StructureShape
+    GetAutonomousDatabaseBackupOutput: StructureShape
+    GetAutonomousDatabaseInput: StructureShape
+    GetAutonomousDatabaseOutput: StructureShape
+    GetAutonomousDatabaseWalletDetailsInput: StructureShape
+    GetAutonomousDatabaseWalletDetailsOutput: StructureShape
     GetCloudAutonomousVmClusterInput: StructureShape
     GetCloudAutonomousVmClusterOutput: StructureShape
     GetCloudExadataInfrastructureInput: StructureShape
@@ -77,20 +180,47 @@ module Aws::Odb
     GetDbNodeOutput: StructureShape
     GetDbServerInput: StructureShape
     GetDbServerOutput: StructureShape
+    GetExadbVmClusterInput: StructureShape
+    GetExadbVmClusterOutput: StructureShape
+    GetExascaleDbStorageVaultInput: StructureShape
+    GetExascaleDbStorageVaultOutput: StructureShape
     GetOciOnboardingStatusInput: StructureShape
     GetOciOnboardingStatusOutput: StructureShape
     GetOdbNetworkInput: StructureShape
     GetOdbNetworkOutput: StructureShape
     GetOdbPeeringConnectionInput: StructureShape
     GetOdbPeeringConnectionOutput: StructureShape
+    GiMinorVersionList: ListShape
+    GiMinorVersionSummary: StructureShape
     GiVersionList: ListShape
     GiVersionSummary: StructureShape
+    GridImageType: EnumShape
+    HardwareType: EnumShape
+    Hostname: StringShape
     HoursOfDay: ListShape
+    IamRole: StructureShape
+    IamRoleList: ListShape
+    IamRoleStatus: EnumShape
     InitializeServiceInput: StructureShape
     InitializeServiceOutput: StructureShape
+    IntegerList: ListShape
     InternalServerException: StructureShape
     IormLifecycleState: EnumShape
+    KmsAccess: StructureShape
+    KmsKeyIdOrArn: StringShape
     LicenseModel: EnumShape
+    ListAutonomousDatabaseBackupsInput: StructureShape
+    ListAutonomousDatabaseBackupsOutput: StructureShape
+    ListAutonomousDatabaseCharacterSetsInput: StructureShape
+    ListAutonomousDatabaseCharacterSetsOutput: StructureShape
+    ListAutonomousDatabaseClonesInput: StructureShape
+    ListAutonomousDatabaseClonesOutput: StructureShape
+    ListAutonomousDatabasePeersInput: StructureShape
+    ListAutonomousDatabasePeersOutput: StructureShape
+    ListAutonomousDatabaseVersionsInput: StructureShape
+    ListAutonomousDatabaseVersionsOutput: StructureShape
+    ListAutonomousDatabasesInput: StructureShape
+    ListAutonomousDatabasesOutput: StructureShape
     ListAutonomousVirtualMachinesInput: StructureShape
     ListAutonomousVirtualMachinesOutput: StructureShape
     ListCloudAutonomousVmClustersInput: StructureShape
@@ -105,6 +235,14 @@ module Aws::Odb
     ListDbServersOutput: StructureShape
     ListDbSystemShapesInput: StructureShape
     ListDbSystemShapesOutput: StructureShape
+    ListExadbVmClustersInput: StructureShape
+    ListExadbVmClustersOutput: StructureShape
+    ListExascaleDbStorageVaultsInput: StructureShape
+    ListExascaleDbStorageVaultsOutput: StructureShape
+    ListFlexComponentsInput: StructureShape
+    ListFlexComponentsOutput: StructureShape
+    ListGiMinorVersionsInput: StructureShape
+    ListGiMinorVersionsOutput: StructureShape
     ListGiVersionsInput: StructureShape
     ListGiVersionsOutput: StructureShape
     ListOdbNetworksInput: StructureShape
@@ -115,6 +253,7 @@ module Aws::Odb
     ListSystemVersionsOutput: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    LongTermBackupSchedule: StructureShape
     MaintenanceWindow: StructureShape
     ManagedResourceStatus: EnumShape
     ManagedS3BackupAccess: StructureShape
@@ -122,9 +261,16 @@ module Aws::Odb
     Month: StructureShape
     MonthName: EnumShape
     Months: ListShape
+    NetServicesArchitecture: EnumShape
     Objective: EnumShape
+    OciAwsIntegration: EnumShape
     OciDnsForwardingConfig: StructureShape
     OciDnsForwardingConfigList: ListShape
+    OciEncryptionKeyConfiguration: StructureShape
+    OciIamRole: StructureShape
+    OciIamRoleList: ListShape
+    OciIamRoleStatus: EnumShape
+    OciIdentityDomain: StructureShape
     OciOnboardingStatus: EnumShape
     OdbNetwork: StructureShape
     OdbNetworkList: ListShape
@@ -132,30 +278,71 @@ module Aws::Odb
     OdbPeeringConnection: StructureShape
     OdbPeeringConnectionList: ListShape
     OdbPeeringConnectionSummary: StructureShape
+    OkvEncryptionKeyConfiguration: StructureShape
+    OpenMode: EnumShape
+    OperationsInsightsStatus: EnumShape
     PatchingModeType: EnumShape
+    PeerNetworkRouteTableId: StringShape
+    PeerNetworkRouteTableIdList: ListShape
+    PeeredCidr: StringShape
+    PeeredCidrList: ListShape
+    PermissionLevel: EnumShape
+    PointInTimeRestoreConfiguration: StructureShape
     PolicyDocument: StringShape
     PreferenceType: EnumShape
+    RebootAutonomousDatabaseInput: StructureShape
+    RebootAutonomousDatabaseOutput: StructureShape
     RebootDbNodeInput: StructureShape
     RebootDbNodeOutput: StructureShape
+    RefreshableMode: EnumShape
+    RefreshableStatus: EnumShape
+    RepeatCadence: EnumShape
     RequestTagMap: MapShape
     ResourceArn: StringShape
+    ResourceArnList: ListShape
     ResourceDisplayName: StringShape
     ResourceId: StringShape
+    ResourceIdList: ListShape
     ResourceIdOrArn: StringShape
     ResourceNotFoundException: StructureShape
+    ResourcePoolSummary: StructureShape
     ResourceStatus: EnumShape
     ResponseTagMap: MapShape
+    RestoreAutonomousDatabaseInput: StructureShape
+    RestoreAutonomousDatabaseOutput: StructureShape
+    RestoreFromBackupConfiguration: StructureShape
+    RoleArn: StringShape
     S3Access: StructureShape
+    ScheduledOperationDetails: StructureShape
+    ScheduledOperationDetailsList: ListShape
+    SecretIdOrArn: StringShape
     SensitiveString: StringShape
     SensitiveStringList: ListShape
     ServiceNetworkEndpoint: StructureShape
     ServiceQuotaExceededException: StructureShape
+    ShapeAttribute: EnumShape
+    ShapeAttributeList: ListShape
     ShapeType: EnumShape
+    ShrinkAutonomousDatabaseInput: StructureShape
+    ShrinkAutonomousDatabaseOutput: StructureShape
+    SourceConfiguration: UnionShape
+    SourceType: EnumShape
+    StandbyAllowlistedIpsSource: EnumShape
+    StartAutonomousDatabaseInput: StructureShape
+    StartAutonomousDatabaseOutput: StructureShape
     StartDbNodeInput: StructureShape
     StartDbNodeOutput: StructureShape
+    StopAutonomousDatabaseInput: StructureShape
+    StopAutonomousDatabaseOutput: StructureShape
     StopDbNodeInput: StructureShape
     StopDbNodeOutput: StructureShape
     StringList: ListShape
+    StsAccess: StructureShape
+    SubscriptionError: StructureShape
+    SubscriptionErrors: ListShape
+    SupportedAwsIntegration: EnumShape
+    SwitchoverAutonomousDatabaseInput: StructureShape
+    SwitchoverAutonomousDatabaseOutput: StructureShape
     SystemVersionList: ListShape
     SystemVersionSummary: StructureShape
     TagKey: StringShape
@@ -164,19 +351,37 @@ module Aws::Odb
     TagResourceResponse: StructureShape
     TagValue: StringShape
     ThrottlingException: StructureShape
+    TransportableTablespace: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateAction: EnumShape
+    UpdateAutonomousDatabaseBackupInput: StructureShape
+    UpdateAutonomousDatabaseBackupOutput: StructureShape
+    UpdateAutonomousDatabaseInput: StructureShape
+    UpdateAutonomousDatabaseOutput: StructureShape
     UpdateCloudExadataInfrastructureInput: StructureShape
     UpdateCloudExadataInfrastructureOutput: StructureShape
+    UpdateExadbVmClusterInput: StructureShape
+    UpdateExadbVmClusterOutput: StructureShape
+    UpdateExascaleDbStorageVaultInput: StructureShape
+    UpdateExascaleDbStorageVaultOutput: StructureShape
     UpdateOdbNetworkInput: StructureShape
     UpdateOdbNetworkOutput: StructureShape
+    UpdateOdbPeeringConnectionInput: StructureShape
+    UpdateOdbPeeringConnectionOutput: StructureShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: EnumShape
     VpcEndpointType: EnumShape
+    WalletPasswordSource: EnumShape
+    WalletPasswordSourceConfiguration: UnionShape
+    WalletPasswordSourceConfigurationInput: UnionShape
+    WalletPasswordSourceSummary: StructureShape
+    WalletType: EnumShape
     WeeksOfMonth: ListShape
     ZeroEtlAccess: StructureShape
+    CharacterSetType: EnumShape
 
     Odb: ServiceShape
   end

@@ -632,6 +632,31 @@ module Aws::RDS
     end
 
     # @api private
+    class DescribeEngineDefaultClusterParameters
+      def next_tokens(data)
+        next_token = data.engine_defaults.marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.engine_defaults.parameters
+      end
+    end
+
+    # @api private
     class DescribeEngineDefaultParameters
       def next_tokens(data)
         next_token = data.engine_defaults.marker
@@ -928,6 +953,31 @@ module Aws::RDS
 
       def items(data)
         data.reserved_db_instances_offerings
+      end
+    end
+
+    # @api private
+    class DescribeServerlessV2PlatformVersions
+      def next_tokens(data)
+        next_token = data.marker
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:marker]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:marker] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.serverless_v2_platform_versions
       end
     end
 

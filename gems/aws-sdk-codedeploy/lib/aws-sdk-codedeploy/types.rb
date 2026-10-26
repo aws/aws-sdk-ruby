@@ -982,6 +982,41 @@ module Aws::CodeDeploy
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute deployment_mode
+    #   <p>The type of deployment to create. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>STANDARD</code>: Deploys the specified revision. This is the default
+    #                       behavior if <code>deploymentMode</code> is not specified.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>RESTART</code>: Restarts the application on the target instances using
+    #                       the revision from the deployment group's last successful deployment, without
+    #                       downloading a new revision. <code>RESTART</code> is supported only for
+    #                       EC2/On-premises in-place deployments.</p>
+    #                  <p>When <code>deploymentMode</code> is <code>RESTART</code>, the following
+    #                       apply:</p>
+    #                  <ul>
+    #                     <li>
+    #                        <p>The call is rejected for Amazon ECS and Lambda
+    #                               deployments.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>The <code>revision</code> parameter (including its
+    #                                   <code>s3Location</code> and <code>gitHubLocation</code>) must not be
+    #                               specified, and is rejected if provided. The revision is resolved by the
+    #                               service from the deployment group's last successful deployment.</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>The <code>updateOutdatedInstancesOnly</code> parameter must not be
+    #                               set to <code>true</code>, and is rejected if provided.</p>
+    #                     </li>
+    #                  </ul>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     # @!attribute override_alarm_configuration
     #   <p>Allows you to specify information about alarms associated with a deployment. The alarm
     #               configuration that you specify here will override the alarm configuration at the
@@ -1010,6 +1045,7 @@ module Aws::CodeDeploy
       :auto_rollback_configuration,
       :update_outdated_instances_only,
       :file_exists_behavior,
+      :deployment_mode,
       :override_alarm_configuration,
       keyword_init: true
     )
@@ -1591,6 +1627,25 @@ module Aws::CodeDeploy
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute deployment_mode
+    #   <p>The deployment's type. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>STANDARD</code>: The deployment installed the specified revision.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>RESTART</code>: The deployment restarted the application on the target
+    #                       instances using the revision from the deployment group's last successful
+    #                       deployment, without downloading a new revision.</p>
+    #               </li>
+    #            </ul>
+    #            <p>This field is absent for deployments created before <code>deploymentMode</code>
+    #               existed, and for <code>STANDARD</code> deployments. An absent value must not be
+    #               interpreted as <code>STANDARD</code>; it simply means no value was recorded either
+    #               way.</p>
+    #   @return [String]
     # @!attribute deployment_status_messages
     #   <p>Messages that contain information about the status of a deployment.</p>
     #   @return [Array<String>]
@@ -1635,6 +1690,7 @@ module Aws::CodeDeploy
       :load_balancer_info,
       :additional_deployment_status_info,
       :file_exists_behavior,
+      :deployment_mode,
       :deployment_status_messages,
       :compute_platform,
       :external_id,

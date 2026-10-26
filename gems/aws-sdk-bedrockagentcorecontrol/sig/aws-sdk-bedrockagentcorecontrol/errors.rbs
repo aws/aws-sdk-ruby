@@ -24,12 +24,21 @@ module Aws::BedrockAgentCoreControl
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class RetryableConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
     class ServiceException < Smithy::Client::ServiceError
       def message: () -> String?
       def retryable?: () -> true
     end
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       def message: () -> String?
+    end
+    class SubscriptionRequiredException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def subscription_url: () -> String?
+      def product_name: () -> String?
     end
     class ThrottledException < Smithy::Client::ServiceError
       def message: () -> String?

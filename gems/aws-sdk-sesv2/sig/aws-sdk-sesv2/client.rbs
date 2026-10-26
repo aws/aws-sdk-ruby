@@ -44,6 +44,15 @@ module Aws::SESv2
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AssociateEmailIdentityCertificateResponse
+      include Smithy::Client::_Response[Types::AssociateEmailIdentityCertificateResponse]
+    end
+    def associate_email_identity_certificate: (
+      ?email_identity: String,
+      ?from_address: String,
+      ?certificate_arn: String
+    ) -> _AssociateEmailIdentityCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateEmailIdentityCertificateResponse
+
     interface _BatchGetMetricDataResponse
       include Smithy::Client::_Response[Types::BatchGetMetricDataResponse]
       def results: () -> Array[Types::MetricDataResult]?
@@ -97,7 +106,16 @@ module Aws::SESv2
         }
       ],
       ?suppression_options: {
-        suppressed_reasons: Array[String]
+        suppressed_reasons: Array[String],
+        suppression_scope: String,
+        validation_options: {
+          condition_threshold: {
+            condition_threshold_enabled: String,
+            overall_confidence_threshold: {
+              confidence_verdict_threshold: String
+            }
+          }
+        }
       },
       ?vdm_options: {
         dashboard_options: {
@@ -109,6 +127,15 @@ module Aws::SESv2
       },
       ?archiving_options: {
         archive_arn: String
+      },
+      ?message_security_options: {
+        signing_scheme: {
+          default_scheme: {
+          },
+          smime_scheme: {
+            signature_format: String
+          }
+        }
       }
     ) -> _CreateConfigurationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationSetResponse
 
@@ -192,6 +219,12 @@ module Aws::SESv2
       ?from_email_address: String,
       ?template_subject: String,
       ?template_content: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
       ?success_redirection_url: String,
       ?failure_redirection_url: String
     ) -> _CreateCustomVerificationEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomVerificationEmailTemplateResponse
@@ -311,7 +344,13 @@ module Aws::SESv2
         subject: String,
         text: String,
         html: String
-      }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
     ) -> _CreateEmailTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEmailTemplateResponse
 
     interface _CreateExportJobResponse
@@ -342,6 +381,7 @@ module Aws::SESv2
             destination: untyped,
             subject: Array[String],
             isp: Array[String],
+            tenant_name: Array[String],
             last_delivery_event: Array[String],
             last_engagement_event: Array[String]
           },
@@ -405,6 +445,7 @@ module Aws::SESv2
       def created_timestamp: () -> Time?
       def tags: () -> Array[Types::Tag]?
       def sending_status: () -> String?
+      def suppression_attributes: () -> Types::TenantSuppressionAttributes?
     end
     def create_tenant: (
       ?tenant_name: String,
@@ -413,7 +454,11 @@ module Aws::SESv2
           key: String,
           value: String
         }
-      ]
+      ],
+      ?suppression_attributes: {
+        suppressed_reasons: Array[String],
+        suppression_scope: String
+      }
     ) -> _CreateTenantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTenantResponse
 
     interface _CreateTenantResourceAssociationResponse
@@ -502,7 +547,8 @@ module Aws::SESv2
       include Smithy::Client::_Response[Types::DeleteSuppressedDestinationResponse]
     end
     def delete_suppressed_destination: (
-      ?email_address: String
+      ?email_address: String,
+      ?tenant_name: String
     ) -> _DeleteSuppressedDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSuppressedDestinationResponse
 
     interface _DeleteTenantResponse
@@ -520,6 +566,14 @@ module Aws::SESv2
       ?resource_arn: String
     ) -> _DeleteTenantResourceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTenantResourceAssociationResponse
 
+    interface _DisassociateEmailIdentityCertificateResponse
+      include Smithy::Client::_Response[Types::DisassociateEmailIdentityCertificateResponse]
+    end
+    def disassociate_email_identity_certificate: (
+      ?email_identity: String,
+      ?from_address: String
+    ) -> _DisassociateEmailIdentityCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateEmailIdentityCertificateResponse
+
     interface _GetAccountResponse
       include Smithy::Client::_Response[Types::GetAccountResponse]
       def dedicated_ip_auto_warmup_enabled: () -> bool?
@@ -530,6 +584,7 @@ module Aws::SESv2
       def suppression_attributes: () -> Types::SuppressionAttributes?
       def details: () -> Types::AccountDetails?
       def vdm_attributes: () -> Types::VdmAttributes?
+      def pricing_attributes: () -> Types::PricingAttributes?
     end
     def get_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountResponse
 
@@ -552,6 +607,7 @@ module Aws::SESv2
       def suppression_options: () -> Types::SuppressionOptions?
       def vdm_options: () -> Types::VdmOptions?
       def archiving_options: () -> Types::ArchivingOptions?
+      def message_security_options: () -> Types::MessageSecurityOptions?
     end
     def get_configuration_set: (
       ?configuration_set_name: String
@@ -600,6 +656,7 @@ module Aws::SESv2
       def from_email_address: () -> String?
       def template_subject: () -> String?
       def template_content: () -> String?
+      def tags: () -> Array[Types::Tag]?
       def success_redirection_url: () -> String?
       def failure_redirection_url: () -> String?
     end
@@ -675,6 +732,14 @@ module Aws::SESv2
       ?end_date: Time
     ) -> _GetDomainStatisticsReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainStatisticsReportResponse
 
+    interface _GetEmailAddressInsightsResponse
+      include Smithy::Client::_Response[Types::GetEmailAddressInsightsResponse]
+      def mailbox_validation: () -> Types::MailboxValidation?
+    end
+    def get_email_address_insights: (
+      ?email_address: String
+    ) -> _GetEmailAddressInsightsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEmailAddressInsightsResponse
+
     interface _GetEmailIdentityResponse
       include Smithy::Client::_Response[Types::GetEmailIdentityResponse]
       def identity_type: () -> String?
@@ -704,6 +769,7 @@ module Aws::SESv2
       include Smithy::Client::_Response[Types::GetEmailTemplateResponse]
       def template_name: () -> String?
       def template_content: () -> Types::EmailTemplateContent?
+      def tags: () -> Array[Types::Tag]?
     end
     def get_email_template: (
       ?template_name: String
@@ -780,7 +846,8 @@ module Aws::SESv2
       def suppressed_destination: () -> Types::SuppressedDestination?
     end
     def get_suppressed_destination: (
-      ?email_address: String
+      ?email_address: String,
+      ?tenant_name: String
     ) -> _GetSuppressedDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSuppressedDestinationResponse
 
     interface _GetTenantResponse
@@ -797,6 +864,7 @@ module Aws::SESv2
       def next_token: () -> String?
     end
     def list_configuration_sets: (
+      ?filter: Hash[String, String],
       ?next_token: String,
       ?page_size: Integer
     ) -> _ListConfigurationSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationSetsResponse
@@ -878,9 +946,21 @@ module Aws::SESv2
       def next_token: () -> String?
     end
     def list_email_identities: (
+      ?filter: Hash[String, String],
       ?next_token: String,
       ?page_size: Integer
     ) -> _ListEmailIdentitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEmailIdentitiesResponse
+
+    interface _ListEmailIdentityCertificatesResponse
+      include Smithy::Client::_Response[Types::ListEmailIdentityCertificatesResponse]
+      def certificates: () -> Array[Types::IdentityCertificate]?
+      def next_token: () -> String?
+    end
+    def list_email_identity_certificates: (
+      ?email_identity: String,
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListEmailIdentityCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEmailIdentityCertificatesResponse
 
     interface _ListEmailTemplatesResponse
       include Smithy::Client::_Response[Types::ListEmailTemplatesResponse]
@@ -964,6 +1044,7 @@ module Aws::SESv2
       def next_token: () -> String?
     end
     def list_suppressed_destinations: (
+      ?tenant_name: String,
       ?reasons: Array[String],
       ?start_date: Time,
       ?end_date: Time,
@@ -997,6 +1078,7 @@ module Aws::SESv2
       def next_token: () -> String?
     end
     def list_tenants: (
+      ?filter: Hash[String, String],
       ?next_token: String,
       ?page_size: Integer
     ) -> _ListTenantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTenantsResponse
@@ -1020,6 +1102,13 @@ module Aws::SESv2
       ?production_access_enabled: bool
     ) -> _PutAccountDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountDetailsResponse
 
+    interface _PutAccountPricingAttributesResponse
+      include Smithy::Client::_Response[Types::PutAccountPricingAttributesResponse]
+    end
+    def put_account_pricing_attributes: (
+      ?plan: String
+    ) -> _PutAccountPricingAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountPricingAttributesResponse
+
     interface _PutAccountSendingAttributesResponse
       include Smithy::Client::_Response[Types::PutAccountSendingAttributesResponse]
     end
@@ -1031,7 +1120,15 @@ module Aws::SESv2
       include Smithy::Client::_Response[Types::PutAccountSuppressionAttributesResponse]
     end
     def put_account_suppression_attributes: (
-      ?suppressed_reasons: Array[String]
+      ?suppressed_reasons: Array[String],
+      ?validation_attributes: {
+        condition_threshold: {
+          condition_threshold_enabled: String,
+          overall_confidence_threshold: {
+            confidence_verdict_threshold: String
+          }
+        }
+      }
     ) -> _PutAccountSuppressionAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountSuppressionAttributesResponse
 
     interface _PutAccountVdmAttributesResponse
@@ -1088,7 +1185,16 @@ module Aws::SESv2
     end
     def put_configuration_set_suppression_options: (
       ?configuration_set_name: String,
-      ?suppressed_reasons: Array[String]
+      ?suppression_scope: String,
+      ?suppressed_reasons: Array[String],
+      ?validation_options: {
+        condition_threshold: {
+          condition_threshold_enabled: String,
+          overall_confidence_threshold: {
+            confidence_verdict_threshold: String
+          }
+        }
+      }
     ) -> _PutConfigurationSetSuppressionOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConfigurationSetSuppressionOptionsResponse
 
     interface _PutConfigurationSetTrackingOptionsResponse
@@ -1176,6 +1282,7 @@ module Aws::SESv2
       include Smithy::Client::_Response[Types::PutEmailIdentityDkimSigningAttributesResponse]
       def dkim_status: () -> String?
       def dkim_tokens: () -> Array[String]?
+      def signing_hosted_zone: () -> String?
     end
     def put_email_identity_dkim_signing_attributes: (
       ?email_identity: String,
@@ -1210,8 +1317,18 @@ module Aws::SESv2
     end
     def put_suppressed_destination: (
       ?email_address: String,
-      ?reason: String
+      ?reason: String,
+      ?tenant_name: String
     ) -> _PutSuppressedDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSuppressedDestinationResponse
+
+    interface _PutTenantSuppressionAttributesResponse
+      include Smithy::Client::_Response[Types::PutTenantSuppressionAttributesResponse]
+    end
+    def put_tenant_suppression_attributes: (
+      ?tenant_name: String,
+      ?suppressed_reasons: Array[String],
+      ?suppression_scope: String
+    ) -> _PutTenantSuppressionAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTenantSuppressionAttributesResponse
 
     interface _SendBulkEmailResponse
       include Smithy::Client::_Response[Types::SendBulkEmailResponse]
@@ -1286,7 +1403,13 @@ module Aws::SESv2
       ],
       ?configuration_set_name: String,
       ?endpoint_id: String,
-      ?tenant_name: String
+      ?tenant_name: String,
+      ?configuration_overrides: {
+        tracking: {
+          open_tracking_enabled: String,
+          click_tracking_enabled: untyped
+        }
+      }
     ) -> _SendBulkEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendBulkEmailResponse
 
     interface _SendCustomVerificationEmailResponse
@@ -1370,6 +1493,12 @@ module Aws::SESv2
       ?list_management_options: {
         contact_list_name: String,
         topic_name: String
+      },
+      ?configuration_overrides: {
+        tracking: {
+          open_tracking_enabled: String,
+          click_tracking_enabled: untyped
+        }
       }
     ) -> _SendEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendEmailResponse
 
@@ -1402,6 +1531,22 @@ module Aws::SESv2
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConfigurationSetResponse
+      include Smithy::Client::_Response[Types::UpdateConfigurationSetResponse]
+    end
+    def update_configuration_set: (
+      ?configuration_set_name: String,
+      ?message_security_options: {
+        signing_scheme: {
+          default_scheme: {
+          },
+          smime_scheme: {
+            signature_format: String
+          }
+        }
+      }
+    ) -> _UpdateConfigurationSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationSetResponse
 
     interface _UpdateConfigurationSetEventDestinationResponse
       include Smithy::Client::_Response[Types::UpdateConfigurationSetEventDestinationResponse]

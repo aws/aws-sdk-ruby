@@ -32,6 +32,8 @@ module Aws::ECS
   # * {ClusterContainsTasksException}
   # * {ClusterNotFoundException}
   # * {ConflictException}
+  # * {DaemonNotActiveException}
+  # * {DaemonNotFoundException}
   # * {InvalidParameterException}
   # * {LimitExceededException}
   # * {MissingVersionException}
@@ -70,9 +72,7 @@ module Aws::ECS
       end
     end
 
-    # <p>You can apply up to 10 custom attributes for each resource. You can view the
-    # 			attributes of a resource with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListAttributes.html">ListAttributes</a>.
-    # 			You can remove existing attributes on a resource with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteAttributes.html">DeleteAttributes</a>.</p>
+    # <p>You can apply up to 10 custom attributes for each resource. You can view the attributes of a resource with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListAttributes.html">ListAttributes</a>. You can remove existing attributes on a resource with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteAttributes.html">DeleteAttributes</a>.</p>
     class AttributeLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::AttributeLimitExceededException] data
@@ -86,8 +86,7 @@ module Aws::ECS
       end
     end
 
-    # <p>Your Amazon Web Services account was blocked. For more information, contact <a href="http://aws.amazon.com/contact-us/">
-    # 				Amazon Web Services Support</a>.</p>
+    # <p>Your Amazon Web Services account was blocked. For more information, contact <a href="http://aws.amazon.com/contact-us/"> Amazon Web Services Support</a>.</p>
     class BlockedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::BlockedException] data
@@ -101,9 +100,7 @@ module Aws::ECS
       end
     end
 
-    # <p>These errors are usually caused by a client action. This client action might be using
-    # 			an action or resource on behalf of a user that doesn't have permissions to use the
-    # 			action or resource. Or, it might be specifying an identifier that isn't valid.</p>
+    # <p>These errors are usually caused by a client action. This client action might be using an action or resource on behalf of a user that doesn't have permissions to use the action or resource. Or, it might be specifying an identifier that isn't valid.</p>
     class ClientException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ClientException] data
@@ -131,9 +128,7 @@ module Aws::ECS
       end
     end
 
-    # <p>You can't delete a cluster that has registered container instances. First, deregister
-    # 			the container instances before you can delete the cluster. For more information, see
-    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html">DeregisterContainerInstance</a>.</p>
+    # <p>You can't delete a cluster that has registered container instances. First, deregister the container instances before you can delete the cluster. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterContainerInstance.html">DeregisterContainerInstance</a>.</p>
     class ClusterContainsContainerInstancesException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ClusterContainsContainerInstancesException] data
@@ -147,10 +142,7 @@ module Aws::ECS
       end
     end
 
-    # <p>You can't delete a cluster that contains services. First, update the service to reduce
-    # 			its desired task count to 0, and then delete the service. For more information, see
-    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html">UpdateService</a> and
-    # 				<a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteService.html">DeleteService</a>.</p>
+    # <p>You can't delete a cluster that contains services. First, update the service to reduce its desired task count to 0, and then delete the service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html">UpdateService</a> and <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteService.html">DeleteService</a>.</p>
     class ClusterContainsServicesException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ClusterContainsServicesException] data
@@ -200,8 +192,7 @@ module Aws::ECS
         super
       end
 
-      # <p>The existing task ARNs which are already associated with the
-      # 				<code>clientToken</code>.</p>
+      # <p>The existing task ARNs which are already associated with the <code>clientToken</code>.</p>
       def resource_ids
         @data[:resource_ids]
       end
@@ -212,10 +203,35 @@ module Aws::ECS
       end
     end
 
-    # <p>The specified parameter isn't valid. Review the available parameters for the API
-    # 			request.</p>
-    #          <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service
-    # 				event messages</a>. </p>
+    # <p>The specified daemon isn't active. You can't update a daemon that's inactive. If you have previously deleted a daemon, you can re-create it with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateDaemon.html">CreateDaemon</a>.</p>
+    class DaemonNotActiveException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECS::Types::DaemonNotActiveException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p> Message that describes the cause of the exception.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified daemon wasn't found. You can view your available daemons with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListDaemons.html">ListDaemons</a>. Amazon ECS daemons are cluster specific and Region specific.</p>
+    class DaemonNotFoundException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ECS::Types::DaemonNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p> Message that describes the cause of the exception.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The specified parameter isn't valid. Review the available parameters for the API request.</p> <p>For more information about service event errors, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-event-messages-list.html">Amazon ECS service event messages</a>. </p>
     class InvalidParameterException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::InvalidParameterException] data
@@ -243,10 +259,7 @@ module Aws::ECS
       end
     end
 
-    # <p>Amazon ECS can't determine the current version of the Amazon ECS container agent on the
-    # 			container instance and doesn't have enough information to proceed with an update. This
-    # 			could be because the agent running on the container instance is a previous or custom
-    # 			version that doesn't use our version information.</p>
+    # <p>Amazon ECS can't determine the current version of the Amazon ECS container agent on the container instance and doesn't have enough information to proceed with an update. This could be because the agent running on the container instance is a previous or custom version that doesn't use our version information.</p>
     class MissingVersionException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::MissingVersionException] data
@@ -274,9 +287,7 @@ module Aws::ECS
       end
     end
 
-    # <p>There's no update available for this Amazon ECS container agent. This might be because the
-    # 			agent is already running the latest version or because it's so old that there's no
-    # 			update path to the current version.</p>
+    # <p>There's no update available for this Amazon ECS container agent. This might be because the agent is already running the latest version or because it's so old that there's no update path to the current version.</p>
     class NoUpdateAvailableException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::NoUpdateAvailableException] data
@@ -290,8 +301,7 @@ module Aws::ECS
       end
     end
 
-    # <p>The specified platform version doesn't satisfy the required capabilities of the task
-    # 			definition.</p>
+    # <p>The specified platform version doesn't satisfy the required capabilities of the task definition.</p>
     class PlatformTaskDefinitionIncompatibilityException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::PlatformTaskDefinitionIncompatibilityException] data
@@ -361,7 +371,7 @@ module Aws::ECS
       end
     end
 
-    # <p>The service deploy ARN that you specified in the <code>StopServiceDeployment</code> doesn't exist. You can use <code>ListServiceDeployments</code> to retrieve the service deployment ARNs.</p>
+    # <p>The service deploy ARN that you specified in the <code>ContinueServiceDeployment</code> doesn't exist. You can use <code>ListServiceDeployments</code> to retrieve the service deployment ARNs.</p>
     class ServiceDeploymentNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ServiceDeploymentNotFoundException] data
@@ -375,8 +385,7 @@ module Aws::ECS
       end
     end
 
-    # <p>The specified service isn't active. You can't update a service that's inactive. If you
-    # 			have previously deleted a service, you can re-create it with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html">CreateService</a>.</p>
+    # <p>The specified service isn't active. You can't update a service that's inactive. If you have previously deleted a service, you can re-create it with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html">CreateService</a>.</p>
     class ServiceNotActiveException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ServiceNotActiveException] data
@@ -390,8 +399,7 @@ module Aws::ECS
       end
     end
 
-    # <p>The specified service wasn't found. You can view your available services with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html">ListServices</a>. Amazon ECS services are cluster specific and Region
-    # 			specific.</p>
+    # <p>The specified service wasn't found. You can view your available services with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html">ListServices</a>. Amazon ECS services are cluster specific and Region specific.</p>
     class ServiceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::ServiceNotFoundException] data
@@ -405,22 +413,7 @@ module Aws::ECS
       end
     end
 
-    # <p>The execute command cannot run. This error can be caused by any of the following
-    # 			configuration issues:</p>
-    #          <ul>
-    #             <li>
-    #                <p>Incorrect IAM permissions</p>
-    #             </li>
-    #             <li>
-    #                <p>The SSM agent is not installed or is not running</p>
-    #             </li>
-    #             <li>
-    #                <p> There is an interface Amazon VPC endpoint for Amazon ECS, but there is not one for
-    # 					Systems Manager Session Manager</p>
-    #             </li>
-    #          </ul>
-    #          <p>For information about how to troubleshoot the issues, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html">Troubleshooting issues with ECS
-    # 				Exec</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+    # <p>The execute command cannot run. This error can be caused by any of the following configuration issues:</p> <ul> <li> <p>Incorrect IAM permissions</p> </li> <li> <p>The SSM agent is not installed or is not running</p> </li> <li> <p> There is an interface Amazon VPC endpoint for Amazon ECS, but there is not one for Systems Manager Session Manager</p> </li> </ul> <p>For information about how to troubleshoot the issues, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html">Troubleshooting issues with ECS Exec</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     class TargetNotConnectedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::TargetNotConnectedException] data
@@ -434,9 +427,7 @@ module Aws::ECS
       end
     end
 
-    # <p>The specified target wasn't found. You can view your available container instances
-    # 			with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListContainerInstances.html">ListContainerInstances</a>. Amazon ECS container instances are cluster-specific and
-    # 			Region-specific.</p>
+    # <p>The specified target wasn't found. You can view your available container instances with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListContainerInstances.html">ListContainerInstances</a>. Amazon ECS container instances are cluster-specific and Region-specific.</p>
     class TargetNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::TargetNotFoundException] data
@@ -450,8 +441,7 @@ module Aws::ECS
       end
     end
 
-    # <p>The specified task set wasn't found. You can view your available task sets with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskSets.html">DescribeTaskSets</a>. Task sets are specific to each cluster, service and
-    # 			Region.</p>
+    # <p>The specified task set wasn't found. You can view your available task sets with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskSets.html">DescribeTaskSets</a>. Task sets are specific to each cluster, service and Region.</p>
     class TaskSetNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::TaskSetNotFoundException] data
@@ -479,11 +469,7 @@ module Aws::ECS
       end
     end
 
-    # <p>There's already a current Amazon ECS container agent update in progress on the container
-    # 			instance that's specified. If the container agent becomes disconnected while it's in a
-    # 			transitional stage, such as <code>PENDING</code> or <code>STAGING</code>, the update
-    # 			process can get stuck in that state. However, when the agent reconnects, it resumes
-    # 			where it stopped previously.</p>
+    # <p>There's already a current Amazon ECS container agent update in progress on the container instance that's specified. If the container agent becomes disconnected while it's in a transitional stage, such as <code>PENDING</code> or <code>STAGING</code>, the update process can get stuck in that state. However, when the agent reconnects, it resumes where it stopped previously.</p>
     class UpdateInProgressException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::UpdateInProgressException] data

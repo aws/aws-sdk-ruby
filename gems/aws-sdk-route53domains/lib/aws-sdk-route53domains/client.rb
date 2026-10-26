@@ -144,18 +144,18 @@ module Aws::Route53Domains
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -347,7 +347,12 @@ module Aws::Route53Domains
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     availability: "AVAILABLE" # One of: ["AVAILABLE", "AVAILABLE_RESERVED", "AVAILABLE_PREORDER", "UNAVAILABLE", "UNAVAILABLE_PREMIUM", "UNAVAILABLE_RESTRICTED", "RESERVED", "DONT_KNOW", "INVALID_NAME_FOR_TLD", "PENDING"]
+    #     availability: "AVAILABLE" # One of: ["AVAILABLE", "AVAILABLE_RESERVED", "AVAILABLE_PREORDER", "UNAVAILABLE", "UNAVAILABLE_PREMIUM", "UNAVAILABLE_RESTRICTED", "RESERVED", "DONT_KNOW", "INVALID_NAME_FOR_TLD", "PENDING"],
+    #     price: {
+    #       price: 1.0, # required
+    #       currency: "Currency", # required
+    #       price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
+    #     }
     #   }
     # @return [Types::CheckDomainAvailabilityResponse]
     def check_domain_availability(params = {}, options = {})
@@ -395,9 +400,14 @@ module Aws::Route53Domains
     #   response.to_h #=>
     #   {
     #     transferability: {
-    #       transferable: "TRANSFERABLE" # One of: ["TRANSFERABLE", "UNTRANSFERABLE", "DONT_KNOW", "DOMAIN_IN_OWN_ACCOUNT", "DOMAIN_IN_ANOTHER_ACCOUNT", "PREMIUM_DOMAIN"]
+    #       transferable: "TRANSFERABLE" # One of: ["TRANSFERABLE", "UNTRANSFERABLE", "DONT_KNOW", "DOMAIN_IN_OWN_ACCOUNT", "DOMAIN_IN_ANOTHER_ACCOUNT", "PREMIUM_DOMAIN", "PENDING"]
     #     },
-    #     message: "Message"
+    #     message: "Message",
+    #     price: {
+    #       price: 1.0, # required
+    #       currency: "Currency", # required
+    #       price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
+    #     }
     #   }
     # @return [Types::CheckDomainTransferabilityResponse]
     def check_domain_transferability(params = {}, options = {})
@@ -424,7 +434,8 @@ module Aws::Route53Domains
     #                <p>When the registration has been deleted, we'll send you a confirmation to the
     # 					registrant contact. The email will come from
     # 						<code>noreply@domainnameverification.net</code> or
-    # 						<code>noreply@registrar.amazon.com</code>.</p>
+    # 						<code>noreply@emailverification.info</code> or
+    # 						<code>noreply@registrar.amazon</code>.</p>
     #             </li>
     #          </ol>
     # @param [Hash, Types::DeleteDomainRequest] params
@@ -762,6 +773,74 @@ module Aws::Route53Domains
       request.send_request(options)
     end
 
+    # <p>Returns the following prices for the specified domain:</p>
+    #          <ul>
+    #             <li>
+    #                <p>Registration</p>
+    #             </li>
+    #             <li>
+    #                <p>Transfer</p>
+    #             </li>
+    #             <li>
+    #                <p>Owner change</p>
+    #             </li>
+    #             <li>
+    #                <p>Renewal</p>
+    #             </li>
+    #             <li>
+    #                <p>Restoration</p>
+    #             </li>
+    #          </ul>
+    #          <p>For most domains, the prices match the standard prices for the TLD that the <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListPrices.html">ListPrices</a> operation returns. For a premium domain, the registry sets the
+    # 			price individually. Premium prices might differ from the standard prices and can change
+    # 			over time.</p>
+    # @param [Hash, Types::GetDomainPricesRequest] params
+    # @option params [String] :domain_name
+    #   <p>The name of the domain that you want to get the prices for.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_name: "DomainName", # required
+    #   }
+    #   options = {}
+    #   response = client.get_domain_prices(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     domain_price: {
+    #       name: "DomainPriceName",
+    #       registration_price: {
+    #         price: 1.0, # required
+    #         currency: "Currency", # required
+    #         price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
+    #       },
+    #       transfer_price: {
+    #         price: 1.0, # required
+    #         currency: "Currency", # required
+    #         price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
+    #       },
+    #       renewal_price: {
+    #         price: 1.0, # required
+    #         currency: "Currency", # required
+    #         price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
+    #       },
+    #       change_ownership_price: {
+    #         price: 1.0, # required
+    #         currency: "Currency", # required
+    #         price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
+    #       },
+    #       restoration_price: {
+    #         price: 1.0, # required
+    #         currency: "Currency", # required
+    #         price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetDomainPricesResponse]
+    def get_domain_prices(params = {}, options = {})
+      request = build_request(:get_domain_prices, params)
+      request.send_request(options)
+    end
+
     # <p>The GetDomainSuggestions operation returns a list of suggested domain names.</p>
     # @param [Hash, Types::GetDomainSuggestionsRequest] params
     # @option params [String] :domain_name
@@ -793,18 +872,26 @@ module Aws::Route53Domains
     #   				Register with Amazon Route 53</a>. </p>
     # @option params [Integer] :suggestion_count
     #   <p>The number of suggested domain names that you want Route 53 to return. Specify a value
-    #   			between 1 and 50.</p>
+    #   			between 1 and 50. Note that fewer than the requested number might be returned.</p>
     # @option params [Boolean] :only_available
     #   <p>If <code>OnlyAvailable</code> is <code>true</code>, Route 53 returns only domain names
     #   			that are available. If <code>OnlyAvailable</code> is <code>false</code>, Route 53
     #   			returns domain names without checking whether they're available to be registered. To
-    #   			determine whether the domain is available, you can call
-    #   				<code>checkDomainAvailability</code> for each suggestion.</p>
+    #   			determine whether the domain is available, call <code>checkDomainAvailability</code> for
+    #   			each suggestion.</p>
+    #            <p>If <code>OnlyAvailable</code> is <code>false</code>, Route 53 does not return pricing
+    #   			information for the suggested domain names.</p>
+    # @option params [Boolean] :only_standard_prices
+    #   <p>If <code>true</code>, Route 53 returns only domain names that are priced at the
+    #   			standard registration rate for their TLD. If <code>false</code>, Route 53 includes
+    #   			domain names with premium pricing in the suggestions list. The default is
+    #   			<code>true</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_name: "DomainName", # required
     #     suggestion_count: 1, # required
     #     only_available: false, # required
+    #     only_standard_prices: false
     #   }
     #   options = {}
     #   response = client.get_domain_suggestions(params, options)
@@ -814,7 +901,12 @@ module Aws::Route53Domains
     #     suggestions_list: [
     #       {
     #         domain_name: "DomainName",
-    #         availability: "String"
+    #         availability: "String",
+    #         price: {
+    #           price: 1.0, # required
+    #           currency: "Currency", # required
+    #           price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
+    #         }
     #       }
     #     ]
     #   }
@@ -986,12 +1078,18 @@ module Aws::Route53Domains
     #                <p>Owner change</p>
     #             </li>
     #             <li>
-    #                <p>Domain renewal</p>
+    #                <p>Renewal</p>
     #             </li>
     #             <li>
-    #                <p>Domain restoration</p>
+    #                <p>Restoration</p>
     #             </li>
     #          </ul>
+    #          <note>
+    #             <p>The prices that <code>ListPrices</code> returns are the standard rates for a TLD.
+    # 					<code>ListPrices</code> doesn't return registry premium prices, which apply to
+    # 				individual domain names rather than to a TLD. To get accurate pricing for a specific
+    # 				domain name, including premium prices, call <code>GetDomainPrices</code>.</p>
+    #          </note>
     # @param [Hash, Types::ListPricesRequest] params
     # @option params [String] :tld
     #   <p>The TLD for which you want to receive the pricing information. For example.
@@ -1028,22 +1126,27 @@ module Aws::Route53Domains
     #         registration_price: {
     #           price: 1.0, # required
     #           currency: "Currency", # required
+    #           price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
     #         },
     #         transfer_price: {
     #           price: 1.0, # required
     #           currency: "Currency", # required
+    #           price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
     #         },
     #         renewal_price: {
     #           price: 1.0, # required
     #           currency: "Currency", # required
+    #           price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
     #         },
     #         change_ownership_price: {
     #           price: 1.0, # required
     #           currency: "Currency", # required
+    #           price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
     #         },
     #         restoration_price: {
     #           price: 1.0, # required
     #           currency: "Currency", # required
+    #           price_type: "STANDARD" # One of: ["STANDARD", "REGISTRY_PREMIUM"]
     #         }
     #       }
     #     ],
@@ -1247,6 +1350,11 @@ module Aws::Route53Domains
     #               <p>You must specify the same privacy setting for the administrative, billing, registrant, and
     #   				technical contacts.</p>
     #            </note>
+    # @option params [Types::Consent] :consent
+    #   <p>Specifies the maximum price that you agree to pay to register the domain name. This element is
+    #   			required if the domain has registry premium pricing, and optional if the domain
+    #   			is priced at the standard rate for its TLD. If you include it and the registration
+    #   			price is more than <code>MaxPrice</code>, the request fails.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_name: "DomainName", # required
@@ -1340,7 +1448,11 @@ module Aws::Route53Domains
     #         }
     #       ]
     #     },
-    #     privacy_protect_billing_contact: false
+    #     privacy_protect_billing_contact: false,
+    #     consent: {
+    #       max_price: 1.0, # required
+    #       currency: "Currency", # required
+    #     }
     #   }
     #   options = {}
     #   response = client.register_domain(params, options)
@@ -1400,11 +1512,20 @@ module Aws::Route53Domains
     # @option params [Integer] :current_expiry_year
     #   <p>The year when the registration for the domain is set to expire. This value must match
     #   			the current expiration date for the domain.</p>
+    # @option params [Types::Consent] :consent
+    #   <p>Specifies the maximum price that you agree to pay to renew the domain name. This element is
+    #   			required if the domain has registry premium pricing, and optional if the domain
+    #   			is priced at the standard rate for its TLD. If you include it and the renewal
+    #   			price is more than <code>MaxPrice</code>, the request fails.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_name: "DomainName", # required
     #     duration_in_years: 1,
     #     current_expiry_year: 1, # required
+    #     consent: {
+    #       max_price: 1.0, # required
+    #       currency: "Currency", # required
+    #     }
     #   }
     #   options = {}
     #   response = client.renew_domain(params, options)
@@ -1504,8 +1625,8 @@ module Aws::Route53Domains
     #             </li>
     #          </ul>
     #          <important>
-    #             <p>During the transfer of any country code top-level domains (ccTLDs) to Route 53, except for .cc and .tv, 
-    # 			updates to the owner contact are ignored and the owner contact data from the registry is used. 
+    #             <p>During the transfer of any country code top-level domains (ccTLDs) to Route 53, except for .cc and .tv,
+    # 			updates to the owner contact are ignored and the owner contact data from the registry is used.
     # 			You can
     # 			update the owner contact after the transfer is complete. For more information, see
     # 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_UpdateDomainContact.html">UpdateDomainContact</a>.</p>
@@ -1551,8 +1672,8 @@ module Aws::Route53Domains
     # @option params [String] :idn_lang_code
     #   <p>Reserved for future use.</p>
     # @option params [Integer] :duration_in_years
-    #   <p>The number of years that you want to register the domain for. Domains are registered
-    #   			for a minimum of one year. The maximum period depends on the top-level domain.</p>
+    #   <p>Reserved for future use.</p>
+    #            <p>Currently, the effect of a domain transfer on the registration period varies by TLD. For information about how transferring a domain affects the expiration date, see the Transfer Term column in the pricing information at <a href="http://aws.amazon.com/route53/pricing/">Amazon Route 53 Pricing</a>.</p>
     #            <p>Default: 1</p>
     # @option params [Array<Types::Nameserver>] :nameservers
     #   <p>Contains details for the host and glue IP addresses.</p>
@@ -1618,11 +1739,16 @@ module Aws::Route53Domains
     #               <p>You must specify the same privacy setting for the administrative, billing, registrant, and
     #   				technical contacts.</p>
     #            </note>
+    # @option params [Types::Consent] :consent
+    #   <p>Specifies the maximum price that you agree to pay to transfer the domain name to Route 53. This element is
+    #   			required if the domain has registry premium pricing, and optional if the domain
+    #   			is priced at the standard rate for its TLD. If you include it and the transfer
+    #   			price is more than <code>MaxPrice</code>, the request fails.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_name: "DomainName", # required
     #     idn_lang_code: "LangCode",
-    #     duration_in_years: 1, # required
+    #     duration_in_years: 1,
     #     nameservers: [
     #       {
     #         name: "HostName", # required
@@ -1718,7 +1844,11 @@ module Aws::Route53Domains
     #         }
     #       ]
     #     },
-    #     privacy_protect_billing_contact: false
+    #     privacy_protect_billing_contact: false,
+    #     consent: {
+    #       max_price: 1.0, # required
+    #       currency: "Currency", # required
+    #     }
     #   }
     #   options = {}
     #   response = client.transfer_domain(params, options)
@@ -1799,7 +1929,7 @@ module Aws::Route53Domains
     # @option params [Types::ContactDetail] :tech_contact
     #   <p>Provides detailed contact information.</p>
     # @option params [Types::Consent] :consent
-    #   <p> Customer's consent for the owner change request. Required if the domain is not free (consent price is more than $0.00).</p>
+    #   <p> The maximum amount that you agree to pay for the owner change. Required if the domain is not free (consent price is more than USD $0.00).</p>
     # @option params [Types::ContactDetail] :billing_contact
     #   <p>Provides detailed contact information.</p>
     # @example Request syntax with placeholder values

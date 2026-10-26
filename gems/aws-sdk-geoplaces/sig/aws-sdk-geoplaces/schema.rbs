@@ -5,20 +5,26 @@ module Aws::GeoPlaces
     AccessDeniedException: StructureShape
     AccessPoint: StructureShape
     AccessPointList: ListShape
+    AccessPointType: EnumShape
     AccessRestriction: StructureShape
     AccessRestrictionList: ListShape
     Address: StructureShape
     AddressComponentMatchScores: StructureShape
     AddressComponentPhonemes: StructureShape
+    AddressTranslationComponent: EnumShape
+    AddressTranslationComponentList: ListShape
+    AdminNames: StructureShape
+    AdminNamesList: ListShape
+    AdminNamesPreference: EnumShape
     ApiKey: StringShape
-    AutocompleteAdditionalFeature: StringShape
+    AutocompleteAdditionalFeature: EnumShape
     AutocompleteAdditionalFeatureList: ListShape
     AutocompleteAddressHighlights: StructureShape
     AutocompleteFilter: StructureShape
-    AutocompleteFilterPlaceType: StringShape
+    AutocompleteFilterPlaceType: EnumShape
     AutocompleteFilterPlaceTypeList: ListShape
     AutocompleteHighlights: StructureShape
-    AutocompleteIntendedUse: StringShape
+    AutocompleteIntendedUse: EnumShape
     AutocompleteRequest: StructureShape
     AutocompleteResponse: StructureShape
     AutocompleteResultItem: StructureShape
@@ -38,6 +44,8 @@ module Aws::GeoPlaces
     CountryCode3: StringShape
     CountryCodeList: ListShape
     CountryHighlights: StructureShape
+    CrossReference: StructureShape
+    CrossReferenceList: ListShape
     DistanceMeters: IntegerShape
     DurationSeconds: IntegerShape
     FilterBusinessChainList: ListShape
@@ -46,12 +54,13 @@ module Aws::GeoPlaces
     FilterFoodTypeList: ListShape
     FoodType: StructureShape
     FoodTypeList: ListShape
-    GeocodeAdditionalFeature: StringShape
+    GeocodeAdditionalFeature: EnumShape
     GeocodeAdditionalFeatureList: ListShape
+    GeocodeAddressNamesMode: EnumShape
     GeocodeFilter: StructureShape
-    GeocodeFilterPlaceType: StringShape
+    GeocodeFilterPlaceType: EnumShape
     GeocodeFilterPlaceTypeList: ListShape
-    GeocodeIntendedUse: StringShape
+    GeocodeIntendedUse: EnumShape
     GeocodeParsedQuery: StructureShape
     GeocodeParsedQueryAddressComponents: StructureShape
     GeocodeQueryComponents: StructureShape
@@ -59,11 +68,13 @@ module Aws::GeoPlaces
     GeocodeResponse: StructureShape
     GeocodeResultItem: StructureShape
     GeocodeResultItemList: ListShape
-    GetPlaceAdditionalFeature: StringShape
+    GetPlaceAdditionalFeature: EnumShape
     GetPlaceAdditionalFeatureList: ListShape
-    GetPlaceIntendedUse: StringShape
+    GetPlaceAddressNamesMode: EnumShape
+    GetPlaceIntendedUse: EnumShape
     GetPlaceRequest: StructureShape
     GetPlaceResponse: StructureShape
+    Heading: FloatShape
     Highlight: StructureShape
     HighlightList: ListShape
     InternalServerException: StructureShape
@@ -89,47 +100,51 @@ module Aws::GeoPlaces
     PhonemeDetails: StructureShape
     PhonemeTranscription: StructureShape
     PhonemeTranscriptionList: ListShape
-    PlaceType: StringShape
+    PlaceAttribute: EnumShape
+    PlaceAttributeList: ListShape
+    PlaceType: EnumShape
     Position: ListShape
-    PostalAuthority: StringShape
+    PostalAuthority: EnumShape
     PostalCodeDetails: StructureShape
     PostalCodeDetailsList: ListShape
-    PostalCodeMode: StringShape
-    PostalCodeType: StringShape
+    PostalCodeMode: EnumShape
+    PostalCodeType: EnumShape
     QueryRefinement: StructureShape
     QueryRefinementList: ListShape
-    QueryType: StringShape
-    RecordTypeCode: StringShape
+    QueryType: EnumShape
+    RecordTypeCode: EnumShape
     Region: StructureShape
     RegionHighlights: StructureShape
     RelatedPlace: StructureShape
     RelatedPlaceList: ListShape
-    ReverseGeocodeAdditionalFeature: StringShape
+    ReverseGeocodeAdditionalFeature: EnumShape
     ReverseGeocodeAdditionalFeatureList: ListShape
+    ReverseGeocodeAddressNamesMode: EnumShape
     ReverseGeocodeFilter: StructureShape
-    ReverseGeocodeFilterPlaceType: StringShape
+    ReverseGeocodeFilterPlaceType: EnumShape
     ReverseGeocodeFilterPlaceTypeList: ListShape
-    ReverseGeocodeIntendedUse: StringShape
+    ReverseGeocodeIntendedUse: EnumShape
     ReverseGeocodeRequest: StructureShape
     ReverseGeocodeResponse: StructureShape
     ReverseGeocodeResultItem: StructureShape
     ReverseGeocodeResultItemList: ListShape
-    SearchNearbyAdditionalFeature: StringShape
+    SearchNearbyAdditionalFeature: EnumShape
     SearchNearbyAdditionalFeatureList: ListShape
     SearchNearbyFilter: StructureShape
-    SearchNearbyIntendedUse: StringShape
+    SearchNearbyIntendedUse: EnumShape
     SearchNearbyRequest: StructureShape
     SearchNearbyResponse: StructureShape
     SearchNearbyResultItem: StructureShape
     SearchNearbyResultItemList: ListShape
-    SearchTextAdditionalFeature: StringShape
+    SearchTextAdditionalFeature: EnumShape
     SearchTextAdditionalFeatureList: ListShape
     SearchTextFilter: StructureShape
-    SearchTextIntendedUse: StringShape
+    SearchTextIntendedUse: EnumShape
     SearchTextRequest: StructureShape
     SearchTextResponse: StructureShape
     SearchTextResultItem: StructureShape
     SearchTextResultItemList: ListShape
+    SearchTextTravelMode: EnumShape
     SecondaryAddressComponent: StructureShape
     SecondaryAddressComponentList: ListShape
     SecondaryAddressComponentMatchScore: StructureShape
@@ -140,31 +155,36 @@ module Aws::GeoPlaces
     StreetComponentsList: ListShape
     SubRegion: StructureShape
     SubRegionHighlights: StructureShape
-    SuggestAdditionalFeature: StringShape
+    SuggestAdditionalFeature: EnumShape
     SuggestAdditionalFeatureList: ListShape
     SuggestAddressHighlights: StructureShape
     SuggestFilter: StructureShape
     SuggestHighlights: StructureShape
-    SuggestIntendedUse: StringShape
+    SuggestIntendedUse: EnumShape
     SuggestPlaceResult: StructureShape
     SuggestQueryResult: StructureShape
     SuggestRequest: StructureShape
     SuggestResponse: StructureShape
     SuggestResultItem: StructureShape
     SuggestResultItemList: ListShape
-    SuggestResultItemType: StringShape
+    SuggestResultItemType: EnumShape
+    SuggestTravelMode: EnumShape
     ThrottlingException: StructureShape
     TimeZone: StructureShape
     Token: StringShape
-    TypePlacement: StringShape
+    TranslationDetails: StructureShape
+    TranslationName: StructureShape
+    TranslationNameList: ListShape
+    TranslationNameType: EnumShape
+    TypePlacement: EnumShape
     TypeSeparator: StringShape
     UspsZip: StructureShape
     UspsZipPlus4: StructureShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
-    ValidationExceptionReason: StringShape
-    ZipClassificationCode: StringShape
+    ValidationExceptionReason: EnumShape
+    ZipClassificationCode: EnumShape
 
     PlacesService: ServiceShape
   end

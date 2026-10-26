@@ -203,6 +203,194 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>Amazon FSx is a fully managed service that makes it easy for storage and\n            application administrators to launch and use shared file storage.</p>",
                 "smithy.api#title": "Amazon FSx",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://fsx-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://fsx-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://fsx.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://fsx.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -210,27 +398,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -2553,6 +2741,30 @@
                 "smithy.api#documentation": "<p>Creates an S3 access point and attaches it to an Amazon FSx volume. For FSx for OpenZFS file systems, the \n         volume must be hosted on a high-availability file system, either Single-AZ or Multi-AZ. For more information,\n         see <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/s3accesspoints-for-FSx.html\">Accessing your data using Amazon S3 access points</a>.\n         in the Amazon FSx for OpenZFS User Guide.\n      </p>\n         <p>The requester requires the following permissions to perform these actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>fsx:CreateAndAttachS3AccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:CreateAccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:GetAccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:PutAccessPointPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:DeleteAccessPoint</code>\n               </p>\n            </li>\n         </ul>\n         <p>The following actions are related to <code>CreateAndAttachS3AccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeS3AccessPointAttachments</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DetachAndDeleteS3AccessPoint</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.fsx#CreateAndAttachS3AccessPointOntapConfiguration": {
+            "type": "structure",
+            "members": {
+                "VolumeId": {
+                    "target": "com.amazonaws.fsx#VolumeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the FSx for ONTAP volume to which you want the S3 access point attached.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileSystemIdentity": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemIdentity",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the file system user identity to use for authorizing file read and write requests that are made using this S3 access point.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the FSx for ONTAP volume that the S3 access point will be attached to, and the file system user identity.</p>"
+            }
+        },
         "com.amazonaws.fsx#CreateAndAttachS3AccessPointOpenZFSConfiguration": {
             "type": "structure",
             "members": {
@@ -2607,6 +2819,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the configuration to use when creating and attaching an S3 access point to an FSx for OpenZFS volume.</p>"
                     }
+                },
+                "OntapConfiguration": {
+                    "target": "com.amazonaws.fsx#CreateAndAttachS3AccessPointOntapConfiguration"
                 },
                 "S3AccessPoint": {
                     "target": "com.amazonaws.fsx#CreateAndAttachS3AccessPointS3Configuration",
@@ -3788,6 +4003,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system.\n        By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional\n        IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.</p>"
                     }
+                },
+                "FsrmConfiguration": {
+                    "target": "com.amazonaws.fsx#WindowsFsrmConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The File Server Resource Manager (FSRM) configuration that Amazon FSx for Windows File Server uses for the file system. FSRM is disabled by default.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4404,6 +4625,16 @@
             "type": "timestamp",
             "traits": {
                 "smithy.api#documentation": "<p>The time that the resource was created, in seconds (since 1970-01-01T00:00:00Z),\n            also known as Unix time.</p>"
+            }
+        },
+        "com.amazonaws.fsx#CustomerSecretsManagerARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 64,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:[^:]{1,63}:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+-[a-zA-Z0-9]{6}$"
             }
         },
         "com.amazonaws.fsx#DNSName": {
@@ -8218,7 +8449,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 2400000
+                    "max": 2147483647
                 }
             }
         },
@@ -8724,7 +8955,7 @@
                 "smithy.api#documentation": "<p>The sustained throughput of an Amazon FSx file system in Megabytes per second (MBps).</p>",
                 "smithy.api#range": {
                     "min": 8,
-                    "max": 100000
+                    "max": 2147483647
                 }
             }
         },
@@ -9048,6 +9279,77 @@
                 "smithy.api#documentation": "<p>Configuration for the FSx for NetApp ONTAP file system.</p>"
             }
         },
+        "com.amazonaws.fsx#OntapFileSystemIdentity": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemUserType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the FSx for ONTAP user identity type. Valid values are <code>UNIX</code> and <code>WINDOWS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnixUser": {
+                    "target": "com.amazonaws.fsx#OntapUnixFileSystemUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the UNIX user identity for file system operations.</p>"
+                    }
+                },
+                "WindowsUser": {
+                    "target": "com.amazonaws.fsx#OntapWindowsFileSystemUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Windows user identity for file system operations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the file system user identity that will be used for authorizing all file access requests that are made using the S3 access point. The identity can be either a UNIX user or a Windows user.</p>"
+            }
+        },
+        "com.amazonaws.fsx#OntapFileSystemUserName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,256}$"
+            }
+        },
+        "com.amazonaws.fsx#OntapFileSystemUserType": {
+            "type": "enum",
+            "members": {
+                "UNIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNIX"
+                    }
+                },
+                "WINDOWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fsx#OntapUnixFileSystemUser": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemUserName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the UNIX user. The name can be up to 256 characters long.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The FSx for ONTAP UNIX file system user that is used for authorizing all file access requests that are made using the S3 access point.</p>"
+            }
+        },
         "com.amazonaws.fsx#OntapVolumeConfiguration": {
             "type": "structure",
             "members": {
@@ -9173,6 +9475,22 @@
                         "smithy.api#enumValue": "LS"
                     }
                 }
+            }
+        },
+        "com.amazonaws.fsx#OntapWindowsFileSystemUser": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemUserName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the Windows user. The name can be up to 256 characters long and supports Active Directory users.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The FSx for ONTAP Windows file system user that is used for authorizing all file access requests that are made using the S3 access point.</p>"
             }
         },
         "com.amazonaws.fsx#OpenZFSClientConfiguration": {
@@ -10341,6 +10659,12 @@
                         "smithy.api#documentation": "<p>The OpenZFSConfiguration of the S3 access point attachment.</p>"
                     }
                 },
+                "OntapConfiguration": {
+                    "target": "com.amazonaws.fsx#S3AccessPointOntapConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ONTAP configuration of the S3 access point attachment.</p>"
+                    }
+                },
                 "S3AccessPoint": {
                     "target": "com.amazonaws.fsx#S3AccessPoint",
                     "traits": {
@@ -10383,6 +10707,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "MISCONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISCONFIGURED"
                     }
                 }
             }
@@ -10428,6 +10758,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OPENZFS"
+                    }
+                },
+                "ONTAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONTAP"
                     }
                 }
             }
@@ -10519,6 +10855,26 @@
                     "min": 0,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.fsx#S3AccessPointOntapConfiguration": {
+            "type": "structure",
+            "members": {
+                "VolumeId": {
+                    "target": "com.amazonaws.fsx#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the FSx for ONTAP volume that the S3 access point is attached to.</p>"
+                    }
+                },
+                "FileSystemIdentity": {
+                    "target": "com.amazonaws.fsx#OntapFileSystemIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file system identity used to authorize file access requests made using the S3 access point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the FSx for ONTAP attachment configuration of an S3 access point attachment.</p>"
             }
         },
         "com.amazonaws.fsx#S3AccessPointOpenZFSConfiguration": {
@@ -10654,6 +11010,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
                     }
+                },
+                "DomainJoinServiceAccountSecret": {
+                    "target": "com.amazonaws.fsx#CustomerSecretsManagerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the service account credentials used to join the file system to your self-managed Active Directory domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10686,17 +11048,13 @@
                 "UserName": {
                     "target": "com.amazonaws.fsx#DirectoryUserName",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain. This account must have the permission to join\n            computers to the domain in the organizational unit provided in\n                <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your\n            AD domain.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain. This account must have the permission to join\n            computers to the domain in the organizational unit provided in\n                <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your\n            AD domain.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.fsx#DirectoryPassword",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The password for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The password for the service account on your self-managed AD domain that Amazon FSx\n            will use to join to your AD domain.</p>"
                     }
                 },
                 "DnsIps": {
@@ -10705,6 +11063,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DomainJoinServiceAccountSecret": {
+                    "target": "com.amazonaws.fsx#CustomerSecretsManagerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the self-managed Active Directory domain join service account credentials. \n            When provided, Amazon FSx uses the credentials stored in this secret to join the file system to your self-managed Active Directory domain.</p>\n         <p>The secret must contain two key-value pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOMER_MANAGED_ACTIVE_DIRECTORY_USERNAME</code> - The username for the service account</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOMER_MANAGED_ACTIVE_DIRECTORY_PASSWORD</code> - The password for the service account</p>\n            </li>\n         </ul>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-manage-prereqs.html\">\n                Using Amazon FSx for Windows with your self-managed Microsoft Active Directory</a> or \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/self-manage-prereqs.html\">\n                Using Amazon FSx for ONTAP with your self-managed Microsoft Active Directory</a>.</p>"
                     }
                 }
             },
@@ -10749,6 +11113,12 @@
                     "target": "com.amazonaws.fsx#FileSystemAdministratorsGroupName",
                     "traits": {
                         "smithy.api#documentation": "<p>For FSx for ONTAP file systems only - Specifies the updated name of the self-managed Active Directory domain group whose members are granted administrative privileges\n            for the Amazon FSx resource.</p>"
+                    }
+                },
+                "DomainJoinServiceAccountSecret": {
+                    "target": "com.amazonaws.fsx#CustomerSecretsManagerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the updated Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the self-managed Active Directory domain join service account credentials. \n            Amazon FSx uses this account to join to your self-managed Active Directory domain.</p>"
                     }
                 }
             },
@@ -11917,7 +12287,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 128,
-                    "max": 6144
+                    "max": 2147483647
                 }
             }
         },
@@ -12662,6 +13032,12 @@
                     "target": "com.amazonaws.fsx#DiskIopsConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system.\n            By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional\n            IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.</p>"
+                    }
+                },
+                "FsrmConfiguration": {
+                    "target": "com.amazonaws.fsx#WindowsFsrmConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The File Server Resource Manager (FSRM) configuration that Amazon FSx for Windows File Server uses for the file system. FSRM is disabled by default.</p>"
                     }
                 }
             },
@@ -13692,10 +14068,38 @@
                     "traits": {
                         "smithy.api#documentation": "<p>For MULTI_AZ_1 deployment types, the IPv6 address of the primary, or preferred, file server.\n            Use this IP address when mounting the file system on Linux SMB clients or Windows SMB clients\n            that are not joined to a Microsoft Active Directory. Applicable for all Windows file system\n            deployment types. This IPv6 address is temporarily unavailable when the file system is undergoing\n            maintenance. For Linux and Windows SMB clients that are joined to an Active Directory, use the\n            file system's DNSName instead.</p>"
                     }
+                },
+                "FsrmConfiguration": {
+                    "target": "com.amazonaws.fsx#WindowsFsrmConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The File Server Resource Manager (FSRM) configuration that Amazon FSx for Windows File Server uses for the file system. FSRM is disabled by default.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration for this Microsoft Windows file system.</p>"
+            }
+        },
+        "com.amazonaws.fsx#WindowsFsrmConfiguration": {
+            "type": "structure",
+            "members": {
+                "FsrmServiceEnabled": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies whether FSRM is enabled or disabled on the file system.  When <code>TRUE</code>, the FSRM service is enabled and monitor file operations according to \n            configured policies. When <code>FALSE</code> or omitted, FSRM is disabled. The default value is <code>FALSE</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventLogDestination": {
+                    "target": "com.amazonaws.fsx#GeneralARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the destination of the FSRM event logs.\n            The destination can be any Amazon CloudWatch Logs log group ARN or\n            Amazon Kinesis Data Firehose delivery stream ARN.</p>\n         <p>The name of the Amazon CloudWatch Logs log group must begin with\n            the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data\n            Firehose delivery stream must begin with the <code>aws-fsx</code> prefix.</p>\n         <p>The destination ARN (either CloudWatch Logs log group or Kinesis\n            Data Firehose delivery stream) must be in the same Amazon Web Services partition,\n            Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The File Server Resource Manager (FSRM) configuration that Amazon FSx for Windows File Server uses for the file system. When FSRM is enabled, you can \n            manage and monitor storage quotas, file screening, storage reports, and file classification.</p>"
             }
         }
     }

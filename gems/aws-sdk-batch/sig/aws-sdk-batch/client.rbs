@@ -52,6 +52,16 @@ module Aws::Batch
       ?reason: String
     ) -> _CancelJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelJobResponse
 
+    interface _CancelJobsResponse
+      include Smithy::Client::_Response[Types::CancelJobsResponse]
+      def successful: () -> Array[String]?
+      def errors: () -> Array[Types::CancelJobsErrorDetail]?
+    end
+    def cancel_jobs: (
+      ?jobs: Array[String],
+      ?reason: String
+    ) -> _CancelJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelJobsResponse
+
     interface _CreateComputeEnvironmentResponse
       include Smithy::Client::_Response[Types::CreateComputeEnvironmentResponse]
       def compute_environment_name: () -> String?
@@ -97,17 +107,60 @@ module Aws::Batch
           {
             image_type: String,
             image_id_override: String,
+            batch_image_status: untyped,
             image_kubernetes_version: String
           }
-        ]
+        ],
+        scaling_policy: {
+          min_scale_down_delay_minutes: untyped
+        },
+        managed_instances_provider: {
+          propagate_tags: untyped,
+          infrastructure_role_arn: untyped,
+          instance_launch_template: {
+            ec2_instance_profile_arn: untyped,
+            network_configuration: {
+              subnets: untyped,
+              security_groups: untyped
+            },
+            instance_requirements: {
+              allowed_instance_types: untyped
+            },
+            capacity_option_type: untyped,
+            storage_configuration: {
+              storage_size_gi_b: untyped
+            },
+            monitoring: untyped,
+            fips_enabled: bool,
+            capacity_reservations: {
+              reservation_group_arn: untyped,
+              reservation_preference: untyped
+            },
+            instance_metadata_tags_propagation: untyped,
+            local_storage_configuration: {
+              use_local_storage: untyped
+            }
+          },
+          infrastructure_optimization: {
+            scale_in_after: untyped
+          }
+        },
+        capacity_tags: Hash[String, String]
       },
       ?service_role: String,
       ?tags: Hash[String, String],
       ?eks_configuration: {
         eks_cluster_arn: String,
-        kubernetes_namespace: untyped
+        kubernetes_namespace: untyped,
+        access_entry: {
+          desired_state: String,
+          status: String
+        }
       },
-      ?context: String
+      ?context: String,
+      ?ecs_settings: {
+        container_insights: String
+      }
     ) -> _CreateComputeEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComputeEnvironmentResponse
 
     interface _CreateConsumableResourceResponse
@@ -156,6 +209,31 @@ module Aws::Batch
       ]
     ) -> _CreateJobQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJobQueueResponse
 
+    interface _CreateQuotaShareResponse
+      include Smithy::Client::_Response[Types::CreateQuotaShareResponse]
+      def quota_share_name: () -> String?
+      def quota_share_arn: () -> String?
+    end
+    def create_quota_share: (
+      ?quota_share_name: String,
+      ?job_queue: String,
+      ?capacity_limits: Array[
+        {
+          max_capacity: Integer,
+          capacity_unit: String
+        }
+      ],
+      ?resource_sharing_configuration: {
+        strategy: String,
+        borrow_limit: Integer
+      },
+      ?preemption_configuration: {
+        in_share_preemption: String
+      },
+      ?state: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateQuotaShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQuotaShareResponse
+
     interface _CreateSchedulingPolicyResponse
       include Smithy::Client::_Response[Types::CreateSchedulingPolicyResponse]
       def name: () -> String?
@@ -163,6 +241,9 @@ module Aws::Batch
     end
     def create_scheduling_policy: (
       ?name: String,
+      ?quota_share_policy: {
+        idle_resource_assignment_strategy: String
+      },
       ?fairshare_policy: {
         share_decay_seconds: Integer,
         compute_reservation: untyped,
@@ -214,6 +295,13 @@ module Aws::Batch
     def delete_job_queue: (
       ?job_queue: String
     ) -> _DeleteJobQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteJobQueueResponse
+
+    interface _DeleteQuotaShareResponse
+      include Smithy::Client::_Response[Types::DeleteQuotaShareResponse]
+    end
+    def delete_quota_share: (
+      ?quota_share_arn: String
+    ) -> _DeleteQuotaShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQuotaShareResponse
 
     interface _DeleteSchedulingPolicyResponse
       include Smithy::Client::_Response[Types::DeleteSchedulingPolicyResponse]
@@ -294,6 +382,22 @@ module Aws::Batch
       ?jobs: Array[String]
     ) -> _DescribeJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobsResponse
 
+    interface _DescribeQuotaShareResponse
+      include Smithy::Client::_Response[Types::DescribeQuotaShareResponse]
+      def quota_share_name: () -> String?
+      def quota_share_arn: () -> String?
+      def job_queue_arn: () -> String?
+      def capacity_limits: () -> Array[Types::QuotaShareCapacityLimit]?
+      def resource_sharing_configuration: () -> Types::QuotaShareResourceSharingConfiguration?
+      def preemption_configuration: () -> Types::QuotaSharePreemptionConfiguration?
+      def state: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_quota_share: (
+      ?quota_share_arn: String
+    ) -> _DescribeQuotaShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQuotaShareResponse
+
     interface _DescribeSchedulingPoliciesResponse
       include Smithy::Client::_Response[Types::DescribeSchedulingPoliciesResponse]
       def scheduling_policies: () -> Array[Types::SchedulingPolicyDetail]?
@@ -316,6 +420,7 @@ module Aws::Batch
     interface _DescribeServiceJobResponse
       include Smithy::Client::_Response[Types::DescribeServiceJobResponse]
       def attempts: () -> Array[Types::ServiceJobAttemptDetail]?
+      def capacity_usage: () -> Array[Types::ServiceJobCapacityUsageDetail]?
       def created_at: () -> Integer?
       def is_terminated: () -> bool?
       def job_arn: () -> String?
@@ -324,10 +429,14 @@ module Aws::Batch
       def job_queue: () -> String?
       def latest_attempt: () -> Types::LatestServiceJobAttempt?
       def retry_strategy: () -> Types::ServiceJobRetryStrategy?
+      def scheduled_at: () -> Integer?
       def scheduling_priority: () -> Integer?
       def service_request_payload: () -> String?
       def service_job_type: () -> String?
       def share_identifier: () -> String?
+      def quota_share_name: () -> String?
+      def preemption_configuration: () -> Types::ServiceJobPreemptionConfiguration?
+      def preemption_summary: () -> Types::ServiceJobPreemptionSummary?
       def started_at: () -> Integer?
       def status: () -> String?
       def status_reason: () -> String?
@@ -342,6 +451,8 @@ module Aws::Batch
     interface _GetJobQueueSnapshotResponse
       include Smithy::Client::_Response[Types::GetJobQueueSnapshotResponse]
       def front_of_queue: () -> Types::FrontOfQueueDetail?
+      def front_of_quota_shares: () -> Types::FrontOfQuotaSharesDetail?
+      def queue_utilization: () -> Types::QueueSnapshotUtilizationDetail?
     end
     def get_job_queue_snapshot: (
       ?job_queue: String
@@ -399,6 +510,17 @@ module Aws::Batch
       ?max_results: Integer,
       ?next_token: String
     ) -> _ListJobsByConsumableResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsByConsumableResourceResponse
+
+    interface _ListQuotaSharesResponse
+      include Smithy::Client::_Response[Types::ListQuotaSharesResponse]
+      def quota_shares: () -> Array[Types::QuotaShareDetail]?
+      def next_token: () -> String?
+    end
+    def list_quota_shares: (
+      ?job_queue: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListQuotaSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQuotaSharesResponse
 
     interface _ListSchedulingPoliciesResponse
       include Smithy::Client::_Response[Types::ListSchedulingPoliciesResponse]
@@ -469,6 +591,12 @@ module Aws::Batch
                 access_point_id: untyped,
                 iam: String
               }
+            },
+            s3files_volume_configuration: {
+              file_system_arn: untyped,
+              root_directory: untyped,
+              transit_encryption_port: untyped,
+              access_point_arn: untyped
             }
           }
         ],
@@ -579,6 +707,12 @@ module Aws::Batch
                       access_point_id: untyped,
                       iam: String
                     }
+                  },
+                  s3files_volume_configuration: {
+                    file_system_arn: untyped,
+                    root_directory: untyped,
+                    transit_encryption_port: untyped,
+                    access_point_arn: untyped
                   }
                 }
               ],
@@ -691,7 +825,9 @@ module Aws::Batch
                       resource_requirements: untyped,
                       secrets: untyped,
                       ulimits: untyped,
-                      user: untyped
+                      user: untyped,
+                      start_timeout: untyped,
+                      stop_timeout: untyped
                     }
                   ],
                   ephemeral_storage: untyped,
@@ -703,7 +839,8 @@ module Aws::Batch
                   network_configuration: untyped,
                   runtime_platform: untyped,
                   volumes: untyped,
-                  enable_execute_command: untyped
+                  enable_execute_command: untyped,
+                  network_mode: untyped
                 }
               ]
             },
@@ -964,7 +1101,9 @@ module Aws::Batch
                     soft_limit: untyped
                   }
                 ],
-                user: untyped
+                user: untyped,
+                start_timeout: untyped,
+                stop_timeout: untyped
               }
             ],
             ephemeral_storage: {
@@ -997,10 +1136,17 @@ module Aws::Batch
                     access_point_id: untyped,
                     iam: String
                   }
+                },
+                s3files_volume_configuration: {
+                  file_system_arn: untyped,
+                  root_directory: untyped,
+                  transit_encryption_port: untyped,
+                  access_point_arn: untyped
                 }
               }
             ],
-            enable_execute_command: untyped
+            enable_execute_command: untyped,
+            network_mode: untyped
           }
         ]
       },
@@ -1231,6 +1377,10 @@ module Aws::Batch
       ?service_request_payload: String,
       ?service_job_type: String,
       ?share_identifier: String,
+      ?quota_share_name: String,
+      ?preemption_configuration: {
+        preemption_retries_before_termination: Integer
+      },
       ?timeout_config: {
         attempt_duration_seconds: Integer
       },
@@ -1254,6 +1404,16 @@ module Aws::Batch
       ?reason: String
     ) -> _TerminateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateJobResponse
 
+    interface _TerminateJobsResponse
+      include Smithy::Client::_Response[Types::TerminateJobsResponse]
+      def successful: () -> Array[String]?
+      def errors: () -> Array[Types::TerminateJobsErrorDetail]?
+    end
+    def terminate_jobs: (
+      ?jobs: Array[String],
+      ?reason: String
+    ) -> _TerminateJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateJobsResponse
+
     interface _TerminateServiceJobResponse
       include Smithy::Client::_Response[Types::TerminateServiceJobResponse]
     end
@@ -1261,6 +1421,16 @@ module Aws::Batch
       ?job_id: String,
       ?reason: String
     ) -> _TerminateServiceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateServiceJobResponse
+
+    interface _TerminateServiceJobsResponse
+      include Smithy::Client::_Response[Types::TerminateServiceJobsResponse]
+      def successful: () -> Array[String]?
+      def errors: () -> Array[Types::TerminateServiceJobsErrorDetail]?
+    end
+    def terminate_service_jobs: (
+      ?jobs: Array[String],
+      ?reason: String
+    ) -> _TerminateServiceJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateServiceJobsResponse
 
     interface _UntagResourceResponse
       include Smithy::Client::_Response[Types::UntagResourceResponse]
@@ -1311,19 +1481,62 @@ module Aws::Batch
           {
             image_type: String,
             image_id_override: String,
+            batch_image_status: untyped,
             image_kubernetes_version: String
           }
         ],
         update_to_latest_image_version: bool,
         type: String,
-        image_id: untyped
+        image_id: untyped,
+        scaling_policy: {
+          min_scale_down_delay_minutes: untyped
+        },
+        managed_instances_provider: {
+          propagate_tags: untyped,
+          infrastructure_role_arn: untyped,
+          instance_launch_template: {
+            ec2_instance_profile_arn: untyped,
+            network_configuration: {
+              subnets: untyped,
+              security_groups: untyped
+            },
+            instance_requirements: {
+              allowed_instance_types: untyped
+            },
+            storage_configuration: {
+              storage_size_gi_b: untyped
+            },
+            monitoring: untyped,
+            capacity_reservations: {
+              reservation_group_arn: untyped,
+              reservation_preference: untyped
+            },
+            instance_metadata_tags_propagation: untyped,
+            local_storage_configuration: {
+              use_local_storage: untyped
+            }
+          },
+          infrastructure_optimization: {
+            scale_in_after: untyped
+          }
+        },
+        capacity_tags: Hash[String, String]
       },
       ?service_role: String,
       ?update_policy: {
         terminate_jobs_on_update: bool,
         job_execution_timeout_minutes: Integer
       },
-      ?context: String
+      ?context: String,
+      ?ecs_settings: {
+        container_insights: String
+      },
+      ?eks_configuration: {
+        access_entry: {
+          desired_state: String,
+          status: String
+        }
+      }
     ) -> _UpdateComputeEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComputeEnvironmentResponse
 
     interface _UpdateConsumableResourceResponse
@@ -1371,11 +1584,37 @@ module Aws::Batch
       ]
     ) -> _UpdateJobQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateJobQueueResponse
 
+    interface _UpdateQuotaShareResponse
+      include Smithy::Client::_Response[Types::UpdateQuotaShareResponse]
+      def quota_share_name: () -> String?
+      def quota_share_arn: () -> String?
+    end
+    def update_quota_share: (
+      ?quota_share_arn: String,
+      ?capacity_limits: Array[
+        {
+          max_capacity: Integer,
+          capacity_unit: String
+        }
+      ],
+      ?resource_sharing_configuration: {
+        strategy: String,
+        borrow_limit: Integer
+      },
+      ?preemption_configuration: {
+        in_share_preemption: String
+      },
+      ?state: String
+    ) -> _UpdateQuotaShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQuotaShareResponse
+
     interface _UpdateSchedulingPolicyResponse
       include Smithy::Client::_Response[Types::UpdateSchedulingPolicyResponse]
     end
     def update_scheduling_policy: (
       ?arn: String,
+      ?quota_share_policy: {
+        idle_resource_assignment_strategy: String
+      },
       ?fairshare_policy: {
         share_decay_seconds: Integer,
         compute_reservation: untyped,
@@ -1403,5 +1642,16 @@ module Aws::Batch
         }
       ]
     ) -> _UpdateServiceEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceEnvironmentResponse
+
+    interface _UpdateServiceJobResponse
+      include Smithy::Client::_Response[Types::UpdateServiceJobResponse]
+      def job_arn: () -> String?
+      def job_name: () -> String?
+      def job_id: () -> String?
+    end
+    def update_service_job: (
+      ?job_id: String,
+      ?scheduling_priority: Integer
+    ) -> _UpdateServiceJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceJobResponse
   end
 end

@@ -26,12 +26,18 @@ module Aws::WorkSpacesWeb
     AssociateUserSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#AssociateUserSettingsRequest", name: "AssociateUserSettingsRequest")
     AssociateUserSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#AssociateUserSettingsResponse", name: "AssociateUserSettingsResponse")
     AuthenticationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#AuthenticationType", name: "AuthenticationType", traits: {"smithy.api#enum" => [{"value" => "Standard", "name" => "STANDARD"}, {"value" => "IAM_Identity_Center", "name" => "IAM_IDENTITY_CENTER"}]})
+    BlockedCategories = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#BlockedCategories", name: "BlockedCategories", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#uniqueItems" => {}})
+    BrandingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#BrandingConfiguration", name: "BrandingConfiguration")
+    BrandingConfigurationCreateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#BrandingConfigurationCreateInput", name: "BrandingConfigurationCreateInput")
+    BrandingConfigurationUpdateInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#BrandingConfigurationUpdateInput", name: "BrandingConfigurationUpdateInput")
+    BrandingSafeStringType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#BrandingSafeStringType", name: "BrandingSafeStringType", traits: {"smithy.api#pattern" => "^[^<>&'`~\\\\]*$"})
     BrowserPolicy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#BrowserPolicy", name: "BrowserPolicy", traits: {"smithy.api#length" => {"min" => 2, "max" => 131072}, "smithy.api#pattern" => "^\\{[\\S\\s]*\\}\\s*$", "smithy.api#sensitive" => {}})
     BrowserSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#BrowserSettings", name: "BrowserSettings")
     BrowserSettingsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#BrowserSettingsList", name: "BrowserSettingsList")
     BrowserSettingsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#BrowserSettingsSummary", name: "BrowserSettingsSummary")
     BrowserType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#BrowserType", name: "BrowserType", traits: {"smithy.api#enum" => [{"value" => "Chrome", "name" => "CHROME"}]})
     BuiltInPatternId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#BuiltInPatternId", name: "BuiltInPatternId", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[_\\-\\d\\w]+$", "smithy.api#sensitive" => {}})
+    Category = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesweb#Category", name: "Category")
     Certificate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#Certificate", name: "Certificate")
     CertificateAuthorityBody = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.workspacesweb#CertificateAuthorityBody", name: "CertificateAuthorityBody", traits: {"smithy.api#length" => {"min" => 1, "max" => 32768}})
     CertificateList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#CertificateList", name: "CertificateList")
@@ -41,8 +47,10 @@ module Aws::WorkSpacesWeb
     CertificateThumbprint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#CertificateThumbprint", name: "CertificateThumbprint", traits: {"smithy.api#length" => {"min" => 64, "max" => 64}, "smithy.api#pattern" => "^[A-Fa-f0-9]{64}$"})
     CertificateThumbprintList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#CertificateThumbprintList", name: "CertificateThumbprintList")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}})
+    ColorTheme = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesweb#ColorTheme", name: "ColorTheme")
     ConfidenceLevel = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.workspacesweb#ConfidenceLevel", name: "ConfidenceLevel", traits: {"smithy.api#range" => {"min" => 1, "max" => 3}})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ContactLinkUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#ContactLinkUrl", name: "ContactLinkUrl", traits: {"smithy.api#pattern" => "^(https://|mailto:).*$"})
     CookieDomain = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#CookieDomain", name: "CookieDomain", traits: {"smithy.api#length" => {"min" => 0, "max" => 253}, "smithy.api#pattern" => "^(\\.?)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)*[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$", "smithy.api#sensitive" => {}})
     CookieName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#CookieName", name: "CookieName", traits: {"smithy.api#length" => {"min" => 0, "max" => 4096}, "smithy.api#sensitive" => {}})
     CookiePath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#CookiePath", name: "CookiePath", traits: {"smithy.api#length" => {"min" => 0, "max" => 2000}, "smithy.api#pattern" => "^/(\\S)*$", "smithy.api#sensitive" => {}})
@@ -152,6 +160,8 @@ module Aws::WorkSpacesWeb
     GetUserSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#GetUserSettingsResponse", name: "GetUserSettingsResponse")
     GlobalInlineRedactionUrls = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#GlobalInlineRedactionUrls", name: "GlobalInlineRedactionUrls", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     HiddenToolbarItemList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#HiddenToolbarItemList", name: "HiddenToolbarItemList")
+    IconImage = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.workspacesweb#IconImage", name: "IconImage", traits: {"smithy.api#length" => {"max" => 102400}, "smithy.api#mediaType" => "image/*"})
+    IconImageInput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.workspacesweb#IconImageInput", name: "IconImageInput")
     IdentityProvider = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#IdentityProvider", name: "IdentityProvider")
     IdentityProviderDetails = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.workspacesweb#IdentityProviderDetails", name: "IdentityProviderDetails", traits: {"smithy.api#sensitive" => {}})
     IdentityProviderList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#IdentityProviderList", name: "IdentityProviderList")
@@ -159,6 +169,7 @@ module Aws::WorkSpacesWeb
     IdentityProviderSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#IdentityProviderSummary", name: "IdentityProviderSummary")
     IdentityProviderType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#IdentityProviderType", name: "IdentityProviderType", traits: {"smithy.api#enum" => [{"value" => "SAML", "name" => "SAML"}, {"value" => "Facebook", "name" => "Facebook"}, {"value" => "Google", "name" => "Google"}, {"value" => "LoginWithAmazon", "name" => "LoginWithAmazon"}, {"value" => "SignInWithApple", "name" => "SignInWithApple"}, {"value" => "OIDC", "name" => "OIDC"}]})
     IdleDisconnectTimeoutInMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.workspacesweb#IdleDisconnectTimeoutInMinutes", name: "IdleDisconnectTimeoutInMinutes", traits: {"smithy.api#range" => {"min" => 0, "max" => 60}})
+    ImageMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#ImageMetadata", name: "ImageMetadata")
     InlineRedactionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#InlineRedactionConfiguration", name: "InlineRedactionConfiguration")
     InlineRedactionPattern = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#InlineRedactionPattern", name: "InlineRedactionPattern")
     InlineRedactionPatterns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#InlineRedactionPatterns", name: "InlineRedactionPatterns", traits: {"smithy.api#length" => {"min" => 0, "max" => 150}})
@@ -171,7 +182,7 @@ module Aws::WorkSpacesWeb
     IpAccessSettingsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#IpAccessSettingsSummary", name: "IpAccessSettingsSummary")
     IpAddress = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#IpAddress", name: "IpAddress", traits: {"smithy.api#length" => {"min" => 1, "max" => 15}, "smithy.api#pattern" => "^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))$|^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$", "smithy.api#sensitive" => {}})
     IpAddressList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#IpAddressList", name: "IpAddressList", traits: {"smithy.api#length" => {"min" => 1, "max" => 45}})
-    IpRange = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#IpRange", name: "IpRange", traits: {"smithy.api#pattern" => "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(?:/([0-9]|[12][0-9]|3[0-2])|)$", "smithy.api#sensitive" => {}})
+    IpRange = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#IpRange", name: "IpRange", traits: {"smithy.api#sensitive" => {}})
     IpRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#IpRule", name: "IpRule")
     IpRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#IpRuleList", name: "IpRuleList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#sensitive" => {}})
     KinesisStreamArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#KinesisStreamArn", name: "KinesisStreamArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[\\w+=/,.@-]+:kinesis:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:stream/.+$"})
@@ -201,18 +212,24 @@ module Aws::WorkSpacesWeb
     ListUserAccessLoggingSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#ListUserAccessLoggingSettingsResponse", name: "ListUserAccessLoggingSettingsResponse")
     ListUserSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#ListUserSettingsRequest", name: "ListUserSettingsRequest")
     ListUserSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#ListUserSettingsResponse", name: "ListUserSettingsResponse")
+    Locale = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesweb#Locale", name: "Locale")
+    LocalizedBrandingStringMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.workspacesweb#LocalizedBrandingStringMap", name: "LocalizedBrandingStringMap")
+    LocalizedBrandingStrings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#LocalizedBrandingStrings", name: "LocalizedBrandingStrings")
     LogConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#LogConfiguration", name: "LogConfiguration")
     LogFileFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesweb#LogFileFormat", name: "LogFileFormat")
+    Markdown = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#Markdown", name: "Markdown", traits: {"smithy.api#length" => {"max" => 153600}, "smithy.api#mediaType" => "text/markdown", "smithy.api#sensitive" => {}})
     MaxConcurrentSessions = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.workspacesweb#MaxConcurrentSessions", name: "MaxConcurrentSessions", traits: {"smithy.api#range" => {"min" => 1, "max" => 5000}})
     MaxDisplayResolution = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#MaxDisplayResolution", name: "MaxDisplayResolution", traits: {"smithy.api#enum" => [{"value" => "size4096X2160", "name" => "RESOLUTION_DCI_4K"}, {"value" => "size3840X2160", "name" => "RESOLUTION_UHD_4K"}, {"value" => "size3440X1440", "name" => "RESOLUTION_1440P_ULTRA_WIDE"}, {"value" => "size2560X1440", "name" => "RESOLUTION_1440P"}, {"value" => "size1920X1080", "name" => "RESOLUTION_1080P"}, {"value" => "size1280X720", "name" => "RESOLUTION_720P"}, {"value" => "size1024X768", "name" => "RESOLUTION_768P"}, {"value" => "size800X600", "name" => "RESOLUTION_600P"}]})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.workspacesweb#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1}})
+    MimeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.workspacesweb#MimeType", name: "MimeType")
     NetworkSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#NetworkSettings", name: "NetworkSettings")
     NetworkSettingsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#NetworkSettingsList", name: "NetworkSettingsList")
     NetworkSettingsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#NetworkSettingsSummary", name: "NetworkSettingsSummary")
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^\\S+$"})
     PatternName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#PatternName", name: "PatternName", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#pattern" => "^[_\\-\\d\\w]+$", "smithy.api#sensitive" => {}})
     Portal = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#Portal", name: "Portal", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.workspacesweb#SessionLoggerResource"}]})
-    PortalEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#PortalEndpoint", name: "PortalEndpoint", traits: {"smithy.api#length" => {"min" => 1, "max" => 253}, "smithy.api#pattern" => "^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\\.)+[a-zA-Z0-9]+$"})
+    PortalCustomDomain = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#PortalCustomDomain", name: "PortalCustomDomain", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}, "smithy.api#pattern" => "^(|[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\\.)+[a-zA-Z0-9]+)$"})
+    PortalEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#PortalEndpoint", name: "PortalEndpoint", traits: {"smithy.api#length" => {"min" => 1, "max" => 253}, "smithy.api#pattern" => "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"})
     PortalId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#PortalId", name: "PortalId", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-]+$"})
     PortalList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#PortalList", name: "PortalList")
     PortalStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#PortalStatus", name: "PortalStatus", traits: {"smithy.api#enum" => [{"value" => "Incomplete", "name" => "INCOMPLETE"}, {"value" => "Pending", "name" => "PENDING"}, {"value" => "Active", "name" => "ACTIVE"}]})
@@ -231,6 +248,7 @@ module Aws::WorkSpacesWeb
     S3BucketOwner = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#S3BucketOwner", name: "S3BucketOwner", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     S3KeyPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#S3KeyPrefix", name: "S3KeyPrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\d\\w\\-_/!().*']+$", "smithy.api#sensitive" => {}})
     S3LogConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#S3LogConfiguration", name: "S3LogConfiguration")
+    S3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#S3Uri", name: "S3Uri", traits: {"smithy.api#pattern" => "^s3://[a-z0-9][a-z0-9\\.\\-]{1,61}[a-z0-9]/.+$"})
     SamlMetadata = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#SamlMetadata", name: "SamlMetadata", traits: {"smithy.api#length" => {"min" => 1, "max" => 204800}, "smithy.api#pattern" => "^.+$"})
     SecurityGroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#SecurityGroupId", name: "SecurityGroupId", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+\\-]+$"})
     SecurityGroupIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#SecurityGroupIdList", name: "SecurityGroupIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
@@ -289,6 +307,8 @@ module Aws::WorkSpacesWeb
     UpdateUserAccessLoggingSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#UpdateUserAccessLoggingSettingsResponse", name: "UpdateUserAccessLoggingSettingsResponse")
     UpdateUserSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#UpdateUserSettingsRequest", name: "UpdateUserSettingsRequest")
     UpdateUserSettingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#UpdateUserSettingsResponse", name: "UpdateUserSettingsResponse")
+    UrlPattern = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#UrlPattern", name: "UrlPattern", traits: {"smithy.api#pattern" => "^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$", "smithy.api#sensitive" => {}})
+    UrlPatternList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#UrlPatternList", name: "UrlPatternList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
     UserAccessLoggingSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#UserAccessLoggingSettings", name: "UserAccessLoggingSettings")
     UserAccessLoggingSettingsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.workspacesweb#UserAccessLoggingSettingsList", name: "UserAccessLoggingSettingsList")
     UserAccessLoggingSettingsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#UserAccessLoggingSettingsSummary", name: "UserAccessLoggingSettingsSummary")
@@ -302,6 +322,9 @@ module Aws::WorkSpacesWeb
     ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"value" => "unknownOperation", "name" => "UNKNOWN_OPERATION"}, {"value" => "cannotParse", "name" => "CANNOT_PARSE"}, {"value" => "fieldValidationFailed", "name" => "FIELD_VALIDATION_FAILED"}, {"value" => "other", "name" => "OTHER"}]})
     VisualMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#VisualMode", name: "VisualMode", traits: {"smithy.api#enum" => [{"value" => "Dark", "name" => "DARK"}, {"value" => "Light", "name" => "LIGHT"}]})
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#VpcId", name: "VpcId", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^vpc-[0-9a-z]*$"})
+    WallpaperImage = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.workspacesweb#WallpaperImage", name: "WallpaperImage", traits: {"smithy.api#length" => {"max" => 5242880}, "smithy.api#mediaType" => "image/*"})
+    WallpaperImageInput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.workspacesweb#WallpaperImageInput", name: "WallpaperImageInput")
+    WebContentFilteringPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.workspacesweb#WebContentFilteringPolicy", name: "WebContentFilteringPolicy")
     KeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.workspacesweb#keyArn", name: "KeyArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:[\\w+=\\/,.@-]+:kms:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:key\\/[a-zA-Z0-9-]+$"})
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -355,15 +378,65 @@ module Aws::WorkSpacesWeb
     AssociateUserSettingsResponse.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "portalArn", traits: {"smithy.api#required" => {}}))
     AssociateUserSettingsResponse.add_member(:user_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "userSettingsArn", traits: {"smithy.api#required" => {}}))
     AssociateUserSettingsResponse.type = Types::AssociateUserSettingsResponse
+    BlockedCategories.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Category, name: "member"))
+    BrandingConfiguration.add_member(:logo, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageMetadata, name: "logo", traits: {"smithy.api#required" => {}}))
+    BrandingConfiguration.add_member(:wallpaper, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageMetadata, name: "wallpaper"))
+    BrandingConfiguration.add_member(:favicon, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageMetadata, name: "favicon", traits: {"smithy.api#required" => {}}))
+    BrandingConfiguration.add_member(:localized_strings, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedBrandingStringMap, name: "localizedStrings", traits: {"smithy.api#required" => {}}))
+    BrandingConfiguration.add_member(:color_theme, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorTheme, name: "colorTheme", traits: {"smithy.api#required" => {}}))
+    BrandingConfiguration.add_member(:terms_of_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Markdown, name: "termsOfService"))
+    BrandingConfiguration.type = Types::BrandingConfiguration
+    BrandingConfigurationCreateInput.add_member(:logo, ::Smithy::Schema::Shapes::MemberShape.new(target: IconImageInput, name: "logo", traits: {"smithy.api#required" => {}}))
+    BrandingConfigurationCreateInput.add_member(:wallpaper, ::Smithy::Schema::Shapes::MemberShape.new(target: WallpaperImageInput, name: "wallpaper"))
+    BrandingConfigurationCreateInput.add_member(:favicon, ::Smithy::Schema::Shapes::MemberShape.new(target: IconImageInput, name: "favicon", traits: {"smithy.api#required" => {}}))
+    BrandingConfigurationCreateInput.add_member(:localized_strings, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedBrandingStringMap, name: "localizedStrings", traits: {"smithy.api#required" => {}}))
+    BrandingConfigurationCreateInput.add_member(:color_theme, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorTheme, name: "colorTheme", traits: {"smithy.api#required" => {}}))
+    BrandingConfigurationCreateInput.add_member(:terms_of_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Markdown, name: "termsOfService"))
+    BrandingConfigurationCreateInput.type = Types::BrandingConfigurationCreateInput
+    BrandingConfigurationUpdateInput.add_member(:logo, ::Smithy::Schema::Shapes::MemberShape.new(target: IconImageInput, name: "logo"))
+    BrandingConfigurationUpdateInput.add_member(:wallpaper, ::Smithy::Schema::Shapes::MemberShape.new(target: WallpaperImageInput, name: "wallpaper"))
+    BrandingConfigurationUpdateInput.add_member(:favicon, ::Smithy::Schema::Shapes::MemberShape.new(target: IconImageInput, name: "favicon"))
+    BrandingConfigurationUpdateInput.add_member(:localized_strings, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedBrandingStringMap, name: "localizedStrings"))
+    BrandingConfigurationUpdateInput.add_member(:color_theme, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorTheme, name: "colorTheme"))
+    BrandingConfigurationUpdateInput.add_member(:terms_of_service, ::Smithy::Schema::Shapes::MemberShape.new(target: Markdown, name: "termsOfService"))
+    BrandingConfigurationUpdateInput.type = Types::BrandingConfigurationUpdateInput
     BrowserSettings.add_member(:browser_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "browserSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "browserSettingsArn"}))
     BrowserSettings.add_member(:associated_portal_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "associatedPortalArns"))
     BrowserSettings.add_member(:browser_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserPolicy, name: "browserPolicy"))
     BrowserSettings.add_member(:customer_managed_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "customerManagedKey"))
     BrowserSettings.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "additionalEncryptionContext"))
+    BrowserSettings.add_member(:web_content_filtering_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: WebContentFilteringPolicy, name: "webContentFilteringPolicy"))
     BrowserSettings.type = Types::BrowserSettings
     BrowserSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSettingsSummary, name: "member"))
     BrowserSettingsSummary.add_member(:browser_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "browserSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "browserSettingsArn"}))
     BrowserSettingsSummary.type = Types::BrowserSettingsSummary
+    Category.add_member(:cults, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CULTS", traits: {"smithy.api#enumValue" => "Cults"}))
+    Category.add_member(:gambling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GAMBLING", traits: {"smithy.api#enumValue" => "Gambling"}))
+    Category.add_member(:nudity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NUDITY", traits: {"smithy.api#enumValue" => "Nudity"}))
+    Category.add_member(:pornography, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PORNOGRAPHY", traits: {"smithy.api#enumValue" => "Pornography"}))
+    Category.add_member(:sex_education, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEX_EDUCATION", traits: {"smithy.api#enumValue" => "SexEducation"}))
+    Category.add_member(:tasteless, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TASTELESS", traits: {"smithy.api#enumValue" => "Tasteless"}))
+    Category.add_member(:violence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIOLENCE", traits: {"smithy.api#enumValue" => "Violence"}))
+    Category.add_member(:download_sites, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOWNLOAD_SITES", traits: {"smithy.api#enumValue" => "DownloadSites"}))
+    Category.add_member(:image_sharing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE_SHARING", traits: {"smithy.api#enumValue" => "ImageSharing"}))
+    Category.add_member(:peer_to_peer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PEER_TO_PEER", traits: {"smithy.api#enumValue" => "PeerToPeer"}))
+    Category.add_member(:streaming_media_and_downloads, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STREAMING_MEDIA_AND_DOWNLOADS", traits: {"smithy.api#enumValue" => "StreamingMediaAndDownloads"}))
+    Category.add_member(:generative_ai, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERATIVE_AI", traits: {"smithy.api#enumValue" => "GenerativeAI"}))
+    Category.add_member(:criminal_activity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CRIMINAL_ACTIVITY", traits: {"smithy.api#enumValue" => "CriminalActivity"}))
+    Category.add_member(:hacking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HACKING", traits: {"smithy.api#enumValue" => "Hacking"}))
+    Category.add_member(:hate_and_intolerance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HATE_AND_INTOLERANCE", traits: {"smithy.api#enumValue" => "HateAndIntolerance"}))
+    Category.add_member(:illegal_drug, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_DRUG", traits: {"smithy.api#enumValue" => "IllegalDrug"}))
+    Category.add_member(:illegal_software, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_SOFTWARE", traits: {"smithy.api#enumValue" => "IllegalSoftware"}))
+    Category.add_member(:school_cheating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHOOL_CHEATING", traits: {"smithy.api#enumValue" => "SchoolCheating"}))
+    Category.add_member(:self_harm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_HARM", traits: {"smithy.api#enumValue" => "SelfHarm"}))
+    Category.add_member(:weapons, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEAPONS", traits: {"smithy.api#enumValue" => "Weapons"}))
+    Category.add_member(:chat, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHAT", traits: {"smithy.api#enumValue" => "Chat"}))
+    Category.add_member(:games, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GAMES", traits: {"smithy.api#enumValue" => "Games"}))
+    Category.add_member(:instant_messaging, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANT_MESSAGING", traits: {"smithy.api#enumValue" => "InstantMessaging"}))
+    Category.add_member(:professional_network, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROFESSIONAL_NETWORK", traits: {"smithy.api#enumValue" => "ProfessionalNetwork"}))
+    Category.add_member(:social_networking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOCIAL_NETWORKING", traits: {"smithy.api#enumValue" => "SocialNetworking"}))
+    Category.add_member(:web_based_email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEB_BASED_EMAIL", traits: {"smithy.api#enumValue" => "WebBasedEmail"}))
+    Category.add_member(:parked_domains, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARKED_DOMAINS", traits: {"smithy.api#enumValue" => "ParkedDomains"}))
     Certificate.add_member(:thumbprint, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateThumbprint, name: "thumbprint"))
     Certificate.add_member(:subject, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificatePrincipal, name: "subject"))
     Certificate.add_member(:issuer, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificatePrincipal, name: "issuer"))
@@ -380,6 +453,8 @@ module Aws::WorkSpacesWeb
     CertificateSummary.type = Types::CertificateSummary
     CertificateSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateSummary, name: "member"))
     CertificateThumbprintList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CertificateThumbprint, name: "member"))
+    ColorTheme.add_member(:light, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIGHT", traits: {"smithy.api#enumValue" => "Light"}))
+    ColorTheme.add_member(:dark, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DARK", traits: {"smithy.api#enumValue" => "Dark"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId"))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "resourceType"))
@@ -395,8 +470,9 @@ module Aws::WorkSpacesWeb
     CreateBrowserSettingsRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags", traits: {"aws.cloudformation#cfnMutability" => "full"}))
     CreateBrowserSettingsRequest.add_member(:customer_managed_key, ::Smithy::Schema::Shapes::MemberShape.new(target: KeyArn, name: "customerManagedKey"))
     CreateBrowserSettingsRequest.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "additionalEncryptionContext"))
-    CreateBrowserSettingsRequest.add_member(:browser_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserPolicy, name: "browserPolicy", traits: {"smithy.api#required" => {}}))
+    CreateBrowserSettingsRequest.add_member(:browser_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserPolicy, name: "browserPolicy"))
     CreateBrowserSettingsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateBrowserSettingsRequest.add_member(:web_content_filtering_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: WebContentFilteringPolicy, name: "webContentFilteringPolicy"))
     CreateBrowserSettingsRequest.type = Types::CreateBrowserSettingsRequest
     CreateBrowserSettingsResponse.add_member(:browser_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "browserSettingsArn", traits: {"smithy.api#required" => {}}))
     CreateBrowserSettingsResponse.type = Types::CreateBrowserSettingsResponse
@@ -445,6 +521,7 @@ module Aws::WorkSpacesWeb
     CreatePortalRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationType, name: "authenticationType"))
     CreatePortalRequest.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType"))
     CreatePortalRequest.add_member(:max_concurrent_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrentSessions, name: "maxConcurrentSessions"))
+    CreatePortalRequest.add_member(:portal_custom_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalCustomDomain, name: "portalCustomDomain"))
     CreatePortalRequest.type = Types::CreatePortalRequest
     CreatePortalResponse.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "portalArn", traits: {"smithy.api#required" => {}}))
     CreatePortalResponse.add_member(:portal_endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalEndpoint, name: "portalEndpoint", traits: {"smithy.api#required" => {}}))
@@ -485,6 +562,8 @@ module Aws::WorkSpacesWeb
     CreateUserSettingsRequest.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "additionalEncryptionContext"))
     CreateUserSettingsRequest.add_member(:deep_link_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "deepLinkAllowed"))
     CreateUserSettingsRequest.add_member(:toolbar_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolbarConfiguration, name: "toolbarConfiguration"))
+    CreateUserSettingsRequest.add_member(:branding_configuration_input, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingConfigurationCreateInput, name: "brandingConfigurationInput", traits: {"smithy.api#notProperty" => {}}))
+    CreateUserSettingsRequest.add_member(:web_authn_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "webAuthnAllowed"))
     CreateUserSettingsRequest.type = Types::CreateUserSettingsRequest
     CreateUserSettingsResponse.add_member(:user_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "userSettingsArn", traits: {"smithy.api#required" => {}}))
     CreateUserSettingsResponse.type = Types::CreateUserSettingsResponse
@@ -580,6 +659,7 @@ module Aws::WorkSpacesWeb
     Event.add_member(:session_start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SESSION_START", traits: {"smithy.api#enumValue" => "SessionStart"}))
     Event.add_member(:session_disconnect, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SESSION_DISCONNECT", traits: {"smithy.api#enumValue" => "SessionDisconnect"}))
     Event.add_member(:session_end, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SESSION_END", traits: {"smithy.api#enumValue" => "SessionEnd"}))
+    Event.add_member(:url_block_by_content_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL_BLOCK_BY_CONTENT_FILTER", traits: {"smithy.api#enumValue" => "UrlBlockByContentFilter"}))
     EventFilter.add_member(:all, Types::EventFilter::All, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "all"))
     EventFilter.add_member(:include, Types::EventFilter::Include, ::Smithy::Schema::Shapes::MemberShape.new(target: Events, name: "include"))
     EventFilter.add_member(:unknown, Types::EventFilter::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -649,6 +729,10 @@ module Aws::WorkSpacesWeb
     GetUserSettingsResponse.type = Types::GetUserSettingsResponse
     GlobalInlineRedactionUrls.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineRedactionUrl, name: "member"))
     HiddenToolbarItemList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolbarItem, name: "member"))
+    IconImageInput.add_member(:blob, Types::IconImageInput::Blob, ::Smithy::Schema::Shapes::MemberShape.new(target: IconImage, name: "blob"))
+    IconImageInput.add_member(:s3_uri, Types::IconImageInput::S3Uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "s3Uri"))
+    IconImageInput.add_member(:unknown, Types::IconImageInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IconImageInput.type = Types::IconImageInput
     IdentityProvider.add_member(:identity_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SubresourceARN, name: "identityProviderArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "identityProviderArn"}))
     IdentityProvider.add_member(:identity_provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "identityProviderName"))
     IdentityProvider.add_member(:identity_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, name: "identityProviderType"))
@@ -661,6 +745,10 @@ module Aws::WorkSpacesWeb
     IdentityProviderSummary.add_member(:identity_provider_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderName, name: "identityProviderName"))
     IdentityProviderSummary.add_member(:identity_provider_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderType, name: "identityProviderType"))
     IdentityProviderSummary.type = Types::IdentityProviderSummary
+    ImageMetadata.add_member(:mime_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MimeType, name: "mimeType", traits: {"smithy.api#required" => {}}))
+    ImageMetadata.add_member(:file_extension, ::Smithy::Schema::Shapes::MemberShape.new(target: StringType, name: "fileExtension", traits: {"smithy.api#required" => {}}))
+    ImageMetadata.add_member(:last_upload_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUploadTimestamp", traits: {"smithy.api#required" => {}}))
+    ImageMetadata.type = Types::ImageMetadata
     InlineRedactionConfiguration.add_member(:inline_redaction_patterns, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineRedactionPatterns, name: "inlineRedactionPatterns", traits: {"smithy.api#required" => {}}))
     InlineRedactionConfiguration.add_member(:global_enforced_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalInlineRedactionUrls, name: "globalEnforcedUrls"))
     InlineRedactionConfiguration.add_member(:global_exempt_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: GlobalInlineRedactionUrls, name: "globalExemptUrls"))
@@ -782,10 +870,35 @@ module Aws::WorkSpacesWeb
     ListUserSettingsResponse.add_member(:user_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSettingsList, name: "userSettings"))
     ListUserSettingsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
     ListUserSettingsResponse.type = Types::ListUserSettingsResponse
+    Locale.add_member(:de, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DE", traits: {"smithy.api#enumValue" => "de-DE"}))
+    Locale.add_member(:en, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EN", traits: {"smithy.api#enumValue" => "en-US"}))
+    Locale.add_member(:es, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ES", traits: {"smithy.api#enumValue" => "es-ES"}))
+    Locale.add_member(:fr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FR", traits: {"smithy.api#enumValue" => "fr-FR"}))
+    Locale.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ID", traits: {"smithy.api#enumValue" => "id-ID"}))
+    Locale.add_member(:it, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IT", traits: {"smithy.api#enumValue" => "it-IT"}))
+    Locale.add_member(:jp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JP", traits: {"smithy.api#enumValue" => "ja-JP"}))
+    Locale.add_member(:kr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KR", traits: {"smithy.api#enumValue" => "ko-KR"}))
+    Locale.add_member(:br, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BR", traits: {"smithy.api#enumValue" => "pt-BR"}))
+    Locale.add_member(:cn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CN", traits: {"smithy.api#enumValue" => "zh-CN"}))
+    Locale.add_member(:tw, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TW", traits: {"smithy.api#enumValue" => "zh-TW"}))
+    LocalizedBrandingStringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Locale, name: "key"))
+    LocalizedBrandingStringMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: LocalizedBrandingStrings, name: "value"))
+    LocalizedBrandingStrings.add_member(:browser_tab_title, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingSafeStringType, name: "browserTabTitle", traits: {"smithy.api#length" => {"max" => 25}, "smithy.api#required" => {}}))
+    LocalizedBrandingStrings.add_member(:welcome_text, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingSafeStringType, name: "welcomeText", traits: {"smithy.api#length" => {"max" => 150}, "smithy.api#required" => {}}))
+    LocalizedBrandingStrings.add_member(:login_title, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingSafeStringType, name: "loginTitle", traits: {"smithy.api#length" => {"max" => 100}}))
+    LocalizedBrandingStrings.add_member(:login_description, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingSafeStringType, name: "loginDescription", traits: {"smithy.api#length" => {"max" => 250}}))
+    LocalizedBrandingStrings.add_member(:login_button_text, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingSafeStringType, name: "loginButtonText", traits: {"smithy.api#length" => {"max" => 30}}))
+    LocalizedBrandingStrings.add_member(:contact_link, ::Smithy::Schema::Shapes::MemberShape.new(target: ContactLinkUrl, name: "contactLink"))
+    LocalizedBrandingStrings.add_member(:contact_button_text, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingSafeStringType, name: "contactButtonText", traits: {"smithy.api#length" => {"max" => 30}}))
+    LocalizedBrandingStrings.add_member(:loading_text, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingSafeStringType, name: "loadingText", traits: {"smithy.api#length" => {"max" => 300}}))
+    LocalizedBrandingStrings.type = Types::LocalizedBrandingStrings
     LogConfiguration.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3LogConfiguration, name: "s3"))
     LogConfiguration.type = Types::LogConfiguration
     LogFileFormat.add_member(:json_lines, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON_LINES", traits: {"smithy.api#enumValue" => "JSONLines"}))
     LogFileFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "Json"}))
+    MimeType.add_member(:png, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PNG", traits: {"smithy.api#enumValue" => "image/png"}))
+    MimeType.add_member(:jpeg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JPEG", traits: {"smithy.api#enumValue" => "image/jpeg"}))
+    MimeType.add_member(:ico, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ICO", traits: {"smithy.api#enumValue" => "image/x-icon"}))
     NetworkSettings.add_member(:network_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "networkSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "networkSettingsArn"}))
     NetworkSettings.add_member(:associated_portal_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "associatedPortalArns"))
     NetworkSettings.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "vpcId"))
@@ -817,6 +930,7 @@ module Aws::WorkSpacesWeb
     Portal.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "additionalEncryptionContext"))
     Portal.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType"))
     Portal.add_member(:max_concurrent_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrentSessions, name: "maxConcurrentSessions"))
+    Portal.add_member(:portal_custom_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalCustomDomain, name: "portalCustomDomain"))
     Portal.type = Types::Portal
     PortalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalSummary, name: "member"))
     PortalSummary.add_member(:portal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "portalArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "portalArn"}))
@@ -837,6 +951,7 @@ module Aws::WorkSpacesWeb
     PortalSummary.add_member(:ip_access_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "ipAccessSettingsArn"))
     PortalSummary.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType"))
     PortalSummary.add_member(:max_concurrent_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrentSessions, name: "maxConcurrentSessions"))
+    PortalSummary.add_member(:portal_custom_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalCustomDomain, name: "portalCustomDomain"))
     PortalSummary.type = Types::PortalSummary
     RedactionPlaceHolder.add_member(:redaction_place_holder_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RedactionPlaceHolderType, name: "redactionPlaceHolderType", traits: {"smithy.api#required" => {}}))
     RedactionPlaceHolder.add_member(:redaction_place_holder_text, ::Smithy::Schema::Shapes::MemberShape.new(target: RedactionPlaceHolderText, name: "redactionPlaceHolderText"))
@@ -930,6 +1045,7 @@ module Aws::WorkSpacesWeb
     UpdateBrowserSettingsRequest.add_member(:browser_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "browserSettingsArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateBrowserSettingsRequest.add_member(:browser_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserPolicy, name: "browserPolicy"))
     UpdateBrowserSettingsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateBrowserSettingsRequest.add_member(:web_content_filtering_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: WebContentFilteringPolicy, name: "webContentFilteringPolicy"))
     UpdateBrowserSettingsRequest.type = Types::UpdateBrowserSettingsRequest
     UpdateBrowserSettingsResponse.add_member(:browser_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: BrowserSettings, name: "browserSettings", traits: {"smithy.api#nestedProperties" => {}, "smithy.api#required" => {}}))
     UpdateBrowserSettingsResponse.type = Types::UpdateBrowserSettingsResponse
@@ -970,6 +1086,7 @@ module Aws::WorkSpacesWeb
     UpdatePortalRequest.add_member(:authentication_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AuthenticationType, name: "authenticationType"))
     UpdatePortalRequest.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "instanceType"))
     UpdatePortalRequest.add_member(:max_concurrent_sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrentSessions, name: "maxConcurrentSessions"))
+    UpdatePortalRequest.add_member(:portal_custom_domain, ::Smithy::Schema::Shapes::MemberShape.new(target: PortalCustomDomain, name: "portalCustomDomain"))
     UpdatePortalRequest.type = Types::UpdatePortalRequest
     UpdatePortalResponse.add_member(:portal, ::Smithy::Schema::Shapes::MemberShape.new(target: Portal, name: "portal", traits: {"smithy.api#nestedProperties" => {}}))
     UpdatePortalResponse.type = Types::UpdatePortalResponse
@@ -1005,9 +1122,12 @@ module Aws::WorkSpacesWeb
     UpdateUserSettingsRequest.add_member(:cookie_synchronization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieSynchronizationConfiguration, name: "cookieSynchronizationConfiguration"))
     UpdateUserSettingsRequest.add_member(:deep_link_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "deepLinkAllowed"))
     UpdateUserSettingsRequest.add_member(:toolbar_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolbarConfiguration, name: "toolbarConfiguration"))
+    UpdateUserSettingsRequest.add_member(:branding_configuration_input, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingConfigurationUpdateInput, name: "brandingConfigurationInput", traits: {"smithy.api#notProperty" => {}}))
+    UpdateUserSettingsRequest.add_member(:web_authn_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "webAuthnAllowed"))
     UpdateUserSettingsRequest.type = Types::UpdateUserSettingsRequest
     UpdateUserSettingsResponse.add_member(:user_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSettings, name: "userSettings", traits: {"smithy.api#nestedProperties" => {}, "smithy.api#required" => {}}))
     UpdateUserSettingsResponse.type = Types::UpdateUserSettingsResponse
+    UrlPatternList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlPattern, name: "member"))
     UserAccessLoggingSettings.add_member(:user_access_logging_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "userAccessLoggingSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "userAccessLoggingSettingsArn"}))
     UserAccessLoggingSettings.add_member(:associated_portal_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnList, name: "associatedPortalArns"))
     UserAccessLoggingSettings.add_member(:kinesis_stream_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: KinesisStreamArn, name: "kinesisStreamArn"))
@@ -1030,6 +1150,8 @@ module Aws::WorkSpacesWeb
     UserSettings.add_member(:additional_encryption_context, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionContextMap, name: "additionalEncryptionContext"))
     UserSettings.add_member(:deep_link_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "deepLinkAllowed"))
     UserSettings.add_member(:toolbar_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolbarConfiguration, name: "toolbarConfiguration"))
+    UserSettings.add_member(:branding_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingConfiguration, name: "brandingConfiguration"))
+    UserSettings.add_member(:web_authn_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "webAuthnAllowed"))
     UserSettings.type = Types::UserSettings
     UserSettingsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UserSettingsSummary, name: "member"))
     UserSettingsSummary.add_member(:user_settings_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "userSettingsArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "userSettingsArn"}))
@@ -1043,6 +1165,8 @@ module Aws::WorkSpacesWeb
     UserSettingsSummary.add_member(:cookie_synchronization_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: CookieSynchronizationConfiguration, name: "cookieSynchronizationConfiguration"))
     UserSettingsSummary.add_member(:deep_link_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "deepLinkAllowed"))
     UserSettingsSummary.add_member(:toolbar_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolbarConfiguration, name: "toolbarConfiguration"))
+    UserSettingsSummary.add_member(:branding_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: BrandingConfiguration, name: "brandingConfiguration"))
+    UserSettingsSummary.add_member(:web_authn_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledType, name: "webAuthnAllowed"))
     UserSettingsSummary.type = Types::UserSettingsSummary
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "reason"))
@@ -1052,12 +1176,20 @@ module Aws::WorkSpacesWeb
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
     ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    WallpaperImageInput.add_member(:blob, Types::WallpaperImageInput::Blob, ::Smithy::Schema::Shapes::MemberShape.new(target: WallpaperImage, name: "blob"))
+    WallpaperImageInput.add_member(:s3_uri, Types::WallpaperImageInput::S3Uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "s3Uri"))
+    WallpaperImageInput.add_member(:unknown, Types::WallpaperImageInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    WallpaperImageInput.type = Types::WallpaperImageInput
+    WebContentFilteringPolicy.add_member(:blocked_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: BlockedCategories, name: "blockedCategories"))
+    WebContentFilteringPolicy.add_member(:allowed_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlPatternList, name: "allowedUrls"))
+    WebContentFilteringPolicy.add_member(:blocked_urls, ::Smithy::Schema::Shapes::MemberShape.new(target: UrlPatternList, name: "blockedUrls"))
+    WebContentFilteringPolicy.type = Types::WebContentFilteringPolicy
 
     AWSErmineControlPlaneService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.workspacesweb#AWSErmineControlPlaneService"
       service.name = "AWSErmineControlPlaneService"
       service.version = "2020-07-08"
-      service.traits = {"aws.api#service" => {"sdkId" => "WorkSpaces Web", "arnNamespace" => "workspaces-web", "cloudFormationName" => "WorkSpacesWeb", "cloudTrailEventSource" => "workspaces-web.amazonaws.com", "endpointPrefix" => "workspaces-web"}, "aws.api#tagEnabled" => {}, "aws.auth#sigv4" => {"name" => "workspaces-web"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon WorkSpaces Web"}
+      service.traits = {"aws.api#service" => {"sdkId" => "WorkSpaces Web", "arnNamespace" => "workspaces-web", "cloudFormationName" => "WorkSpacesWeb", "cloudTrailEventSource" => "workspaces-web.amazonaws.com", "endpointPrefix" => "workspaces-web"}, "aws.api#tagEnabled" => {}, "aws.auth#sigv4" => {"name" => "workspaces-web"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon WorkSpaces Web", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://workspaces-web-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://workspaces-web-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://workspaces-web.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://workspaces-web.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_browser_settings, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workspacesweb#AssociateBrowserSettings"
         operation.name = "AssociateBrowserSettings"
@@ -1291,6 +1423,7 @@ module Aws::WorkSpacesWeb
         operation.errors << AccessDeniedException
         operation.errors << ConflictException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.errors << ThrottlingException
         operation.errors << ValidationException

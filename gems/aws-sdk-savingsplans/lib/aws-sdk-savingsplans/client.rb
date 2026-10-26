@@ -144,18 +144,18 @@ module Aws::Savingsplans
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -272,7 +272,7 @@ module Aws::Savingsplans
       request.send_request(options)
     end
 
-    # <p>Describes the rates for the specified Savings Plan.</p>
+    # <p>Describes the rates for a specific, existing Savings Plan.</p>
     # @param [Hash, Types::DescribeSavingsPlanRatesRequest] params
     # @option params [String] :savings_plan_id
     #   <p>The ID of the Savings Plan.</p>
@@ -304,10 +304,10 @@ module Aws::Savingsplans
     #     search_results: [
     #       {
     #         rate: "Amount",
-    #         currency: "CNY" # One of: ["CNY", "USD"],
-    #         unit: "Hrs" # One of: ["Hrs", "Lambda-GB-Second", "Request"],
-    #         product_type: "EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker"],
-    #         service_code: "AmazonEC2" # One of: ["AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker"],
+    #         currency: "CNY" # One of: ["CNY", "USD", "EUR"],
+    #         unit: "Hrs" # One of: ["Hrs", "Lambda-GB-Second", "Request", "ACU-Hr", "ReadRequestUnits", "WriteRequestUnits", "ReadCapacityUnit-Hrs", "WriteCapacityUnit-Hrs", "ReplicatedWriteRequestUnits", "ReplicatedWriteCapacityUnit-Hrs", "GB-Hours", "DPU", "ElastiCacheProcessingUnit", "DCU-Hr", "NCU-hr", "OCU-hours", "Jobs"],
+    #         product_type: "EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"],
+    #         service_code: "AmazonEC2" # One of: ["AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker", "AmazonRDS", "AuroraDSQL", "AmazonDynamoDB", "AmazonElastiCache", "AmazonDocDB", "AmazonNeptune", "AmazonTimestream", "AmazonMCS", "AWSDatabaseMigrationSvc", "AmazonES"],
     #         usage_type: "SavingsPlanRateUsageType",
     #         operation: "SavingsPlanRateOperation",
     #         properties: [
@@ -350,7 +350,7 @@ module Aws::Savingsplans
     #     states: ["payment-pending" # One of: ["payment-pending", "payment-failed", "active", "retired", "queued", "queued-deleted", "pending-return", "returned"]],
     #     filters: [
     #       {
-    #         name: "region" # One of: ["region", "ec2-instance-family", "commitment", "upfront", "term", "savings-plan-type", "payment-option", "start", "end"],
+    #         name: "region" # One of: ["region", "ec2-instance-family", "commitment", "upfront", "term", "savings-plan-type", "payment-option", "start", "end", "instance-family"],
     #         values: ["String"]
     #       }
     #     ]
@@ -371,10 +371,10 @@ module Aws::Savingsplans
     #         state: "payment-pending" # One of: ["payment-pending", "payment-failed", "active", "retired", "queued", "queued-deleted", "pending-return", "returned"],
     #         region: "Region",
     #         ec2_instance_family: "EC2InstanceFamily",
-    #         savings_plan_type: "Compute" # One of: ["Compute", "EC2Instance", "SageMaker"],
+    #         savings_plan_type: "Compute" # One of: ["Compute", "EC2Instance", "SageMaker", "Database"],
     #         payment_option: "All Upfront" # One of: ["All Upfront", "Partial Upfront", "No Upfront"],
-    #         product_types: ["EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker"]],
-    #         currency: "CNY" # One of: ["CNY", "USD"],
+    #         product_types: ["EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"]],
+    #         currency: "CNY" # One of: ["CNY", "USD", "EUR"],
     #         commitment: "Amount",
     #         upfront_payment_amount: "Amount",
     #         recurring_payment_amount: "Amount",
@@ -393,7 +393,7 @@ module Aws::Savingsplans
       request.send_request(options)
     end
 
-    # <p>Describes the offering rates for the specified Savings Plans.</p>
+    # <p>Describes the offering rates for Savings Plans you might want to purchase.</p>
     # @param [Hash, Types::DescribeSavingsPlansOfferingRatesRequest] params
     # @option params [Array<String>] :savings_plan_offering_ids
     #   <p>The IDs of the offerings.</p>
@@ -421,9 +421,9 @@ module Aws::Savingsplans
     #   params = {
     #     savings_plan_offering_ids: ["UUID"],
     #     savings_plan_payment_options: ["All Upfront" # One of: ["All Upfront", "Partial Upfront", "No Upfront"]],
-    #     savings_plan_types: ["Compute" # One of: ["Compute", "EC2Instance", "SageMaker"]],
-    #     products: ["EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker"]],
-    #     service_codes: ["AmazonEC2" # One of: ["AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker"]],
+    #     savings_plan_types: ["Compute" # One of: ["Compute", "EC2Instance", "SageMaker", "Database"]],
+    #     products: ["EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"]],
+    #     service_codes: ["AmazonEC2" # One of: ["AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker", "AmazonRDS", "AuroraDSQL", "AmazonDynamoDB", "AmazonElastiCache", "AmazonDocDB", "AmazonNeptune", "AmazonTimestream", "AmazonMCS", "AWSDatabaseMigrationSvc", "AmazonES"]],
     #     usage_types: ["SavingsPlanRateUsageType"],
     #     operations: ["SavingsPlanRateOperation"],
     #     filters: [
@@ -445,15 +445,15 @@ module Aws::Savingsplans
     #         savings_plan_offering: {
     #           offering_id: "UUID",
     #           payment_option: "All Upfront" # One of: ["All Upfront", "Partial Upfront", "No Upfront"],
-    #           plan_type: "Compute" # One of: ["Compute", "EC2Instance", "SageMaker"],
+    #           plan_type: "Compute" # One of: ["Compute", "EC2Instance", "SageMaker", "Database"],
     #           duration_seconds: 1,
-    #           currency: "CNY" # One of: ["CNY", "USD"],
+    #           currency: "CNY" # One of: ["CNY", "USD", "EUR"],
     #           plan_description: "SavingsPlanDescription"
     #         },
     #         rate: "SavingsPlanRatePricePerUnit",
-    #         unit: "Hrs" # One of: ["Hrs", "Lambda-GB-Second", "Request"],
-    #         product_type: "EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker"],
-    #         service_code: "AmazonEC2" # One of: ["AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker"],
+    #         unit: "Hrs" # One of: ["Hrs", "Lambda-GB-Second", "Request", "ACU-Hr", "ReadRequestUnits", "WriteRequestUnits", "ReadCapacityUnit-Hrs", "WriteCapacityUnit-Hrs", "ReplicatedWriteRequestUnits", "ReplicatedWriteCapacityUnit-Hrs", "GB-Hours", "DPU", "ElastiCacheProcessingUnit", "DCU-Hr", "NCU-hr", "OCU-hours", "Jobs"],
+    #         product_type: "EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"],
+    #         service_code: "AmazonEC2" # One of: ["AmazonEC2", "AmazonECS", "AmazonEKS", "AWSLambda", "AmazonSageMaker", "AmazonRDS", "AuroraDSQL", "AmazonDynamoDB", "AmazonElastiCache", "AmazonDocDB", "AmazonNeptune", "AmazonTimestream", "AmazonMCS", "AWSDatabaseMigrationSvc", "AmazonES"],
     #         usage_type: "SavingsPlanRateUsageType",
     #         operation: "SavingsPlanRateOperation",
     #         properties: [
@@ -506,10 +506,10 @@ module Aws::Savingsplans
     #   params = {
     #     offering_ids: ["UUID"],
     #     payment_options: ["All Upfront" # One of: ["All Upfront", "Partial Upfront", "No Upfront"]],
-    #     product_type: "EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker"],
-    #     plan_types: ["Compute" # One of: ["Compute", "EC2Instance", "SageMaker"]],
+    #     product_type: "EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"],
+    #     plan_types: ["Compute" # One of: ["Compute", "EC2Instance", "SageMaker", "Database"]],
     #     durations: [1],
-    #     currencies: ["CNY" # One of: ["CNY", "USD"]],
+    #     currencies: ["CNY" # One of: ["CNY", "USD", "EUR"]],
     #     descriptions: ["SavingsPlanDescription"],
     #     service_codes: ["SavingsPlanServiceCode"],
     #     usage_types: ["SavingsPlanUsageType"],
@@ -531,12 +531,12 @@ module Aws::Savingsplans
     #     search_results: [
     #       {
     #         offering_id: "UUID",
-    #         product_types: ["EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker"]],
-    #         plan_type: "Compute" # One of: ["Compute", "EC2Instance", "SageMaker"],
+    #         product_types: ["EC2" # One of: ["EC2", "Fargate", "Lambda", "SageMaker", "RDS", "DSQL", "DynamoDB", "ElastiCache", "DocDB", "Neptune", "Timestream", "Keyspaces", "DMS", "OpenSearch"]],
+    #         plan_type: "Compute" # One of: ["Compute", "EC2Instance", "SageMaker", "Database"],
     #         description: "SavingsPlanDescription",
     #         payment_option: "All Upfront" # One of: ["All Upfront", "Partial Upfront", "No Upfront"],
     #         duration_seconds: 1,
-    #         currency: "CNY" # One of: ["CNY", "USD"],
+    #         currency: "CNY" # One of: ["CNY", "USD", "EUR"],
     #         service_code: "SavingsPlanServiceCode",
     #         usage_type: "SavingsPlanUsageType",
     #         operation: "SavingsPlanOperation",

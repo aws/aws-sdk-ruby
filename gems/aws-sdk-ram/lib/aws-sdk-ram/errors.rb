@@ -330,9 +330,10 @@ module Aws::RAM
       end
     end
 
-    # <p>The operation failed because it would exceed the limit for resource shares for your account. To
-    #             view the limits for your Amazon Web Services account, see the <a href="https://console.aws.amazon.com/servicequotas/home/services/ram/quotas">RAM page in the Service Quotas
-    #                 console</a>.</p>
+    # <p>The operation failed because it would exceed the limit for resource shares for your account. You
+    #             can associate up to 100 resources per call. To view the limits for your Amazon Web Services account,
+    #             see the <a href="https://console.aws.amazon.com/servicequotas/home/services/ram/quotas">RAM page in
+    #                 the Service Quotas console</a>.</p>
     class ResourceShareLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RAM::Types::ResourceShareLimitExceededException] data

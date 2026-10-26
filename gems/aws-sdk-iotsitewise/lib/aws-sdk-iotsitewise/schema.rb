@@ -25,6 +25,13 @@ module Aws::IoTSiteWise
     Aggregates = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Aggregates", name: "Aggregates")
     Alarms = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Alarms", name: "Alarms")
     AmazonResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#AmazonResourceName", name: "AmazonResourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 1011}})
+    Annotation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Annotation", name: "Annotation")
+    ApplicationDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ApplicationDescription", name: "ApplicationDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
+    ApplicationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ApplicationId", name: "ApplicationId", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[a-z0-9-]{36}$"})
+    ApplicationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ApplicationList", name: "ApplicationList")
+    ApplicationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ApplicationName", name: "ApplicationName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9](?:[A-Za-z0-9 ._()\\-]*[A-Za-z0-9._()\\-])?$"})
+    ApplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ApplicationStatus", name: "ApplicationStatus")
+    ApplicationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ApplicationSummary", name: "ApplicationSummary")
     AssetBindingValueFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#AssetBindingValueFilter", name: "AssetBindingValueFilter")
     AssetCompositeModel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#AssetCompositeModel", name: "AssetCompositeModel")
     AssetCompositeModelPath = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#AssetCompositeModelPath", name: "AssetCompositeModelPath")
@@ -89,14 +96,22 @@ module Aws::IoTSiteWise
     AssetSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#AssetSummaries", name: "AssetSummaries")
     AssetSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#AssetSummary", name: "AssetSummary")
     AssociateAssetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#AssociateAssetsRequest", name: "AssociateAssetsRequest")
+    AssociateDataSegmentEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#AssociateDataSegmentEntries", name: "AssociateDataSegmentEntries")
+    AssociateDataSegmentEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#AssociateDataSegmentEntry", name: "AssociateDataSegmentEntry")
     AssociateTimeSeriesToAssetPropertyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#AssociateTimeSeriesToAssetPropertyRequest", name: "AssociateTimeSeriesToAssetPropertyRequest")
     AssociatedAssetsSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#AssociatedAssetsSummaries", name: "AssociatedAssetsSummaries")
     AssociatedAssetsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#AssociatedAssetsSummary", name: "AssociatedAssetsSummary")
     Attribute = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Attribute", name: "Attribute")
     AuthMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#AuthMode", name: "AuthMode")
+    BatchAssociateDataSegmentsToDatasetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchAssociateDataSegmentsToDatasetRequest", name: "BatchAssociateDataSegmentsToDatasetRequest")
+    BatchAssociateDataSegmentsToDatasetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchAssociateDataSegmentsToDatasetResponse", name: "BatchAssociateDataSegmentsToDatasetResponse")
     BatchAssociateProjectAssetsErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#BatchAssociateProjectAssetsErrors", name: "BatchAssociateProjectAssetsErrors")
     BatchAssociateProjectAssetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchAssociateProjectAssetsRequest", name: "BatchAssociateProjectAssetsRequest")
     BatchAssociateProjectAssetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchAssociateProjectAssetsResponse", name: "BatchAssociateProjectAssetsResponse")
+    BatchDeleteDatasetDataSegmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchDeleteDatasetDataSegmentsRequest", name: "BatchDeleteDatasetDataSegmentsRequest")
+    BatchDeleteDatasetDataSegmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchDeleteDatasetDataSegmentsResponse", name: "BatchDeleteDatasetDataSegmentsResponse")
+    BatchDisassociateDataSegmentsFromDatasetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchDisassociateDataSegmentsFromDatasetRequest", name: "BatchDisassociateDataSegmentsFromDatasetRequest")
+    BatchDisassociateDataSegmentsFromDatasetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchDisassociateDataSegmentsFromDatasetResponse", name: "BatchDisassociateDataSegmentsFromDatasetResponse")
     BatchDisassociateProjectAssetsErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#BatchDisassociateProjectAssetsErrors", name: "BatchDisassociateProjectAssetsErrors")
     BatchDisassociateProjectAssetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchDisassociateProjectAssetsRequest", name: "BatchDisassociateProjectAssetsRequest")
     BatchDisassociateProjectAssetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#BatchDisassociateProjectAssetsResponse", name: "BatchDisassociateProjectAssetsResponse")
@@ -149,17 +164,32 @@ module Aws::IoTSiteWise
     BindingValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#BindingValueList", name: "BindingValueList")
     BooleanValue = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iotsitewise#BooleanValue", name: "BooleanValue")
     Bucket = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#Bucket", name: "Bucket", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}})
+    BulkImportJobName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#BulkImportJobName", name: "BulkImportJobName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\p{L}\\p{N}\\p{Zs}._:/-]+$"})
+    CancelEnrichmentJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CancelEnrichmentJobRequest", name: "CancelEnrichmentJobRequest")
+    CancelEnrichmentJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CancelEnrichmentJobResponse", name: "CancelEnrichmentJobResponse")
+    CancelPipelineExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CancelPipelineExecutionRequest", name: "CancelPipelineExecutionRequest")
+    CancelPipelineExecutionRequestReasonString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#CancelPipelineExecutionRequestReasonString", name: "CancelPipelineExecutionRequestReasonString", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    CancelPipelineExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CancelPipelineExecutionResponse", name: "CancelPipelineExecutionResponse")
+    CancelQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CancelQueryRequest", name: "CancelQueryRequest")
+    CancelQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CancelQueryResponse", name: "CancelQueryResponse")
     CapabilityConfiguration = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#CapabilityConfiguration", name: "CapabilityConfiguration", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000000}})
     CapabilityNamespace = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#CapabilityNamespace", name: "CapabilityNamespace", traits: {"smithy.api#length" => {"min" => 1, "max" => 512}, "smithy.api#pattern" => "^[a-zA-Z]+:[a-zA-Z]+:[0-9]+$"})
     CapabilitySyncStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#CapabilitySyncStatus", name: "CapabilitySyncStatus")
+    CaptureBlob = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.iotsitewise#CaptureBlob", name: "CaptureBlob")
     Citation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Citation", name: "Citation")
     Citations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#Citations", name: "Citations")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 36, "max" => 64}, "smithy.api#pattern" => "^\\S{36,64}$"})
+    ColumnDataType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ColumnDataType", name: "ColumnDataType", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     ColumnInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ColumnInfo", name: "ColumnInfo")
+    ColumnInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ColumnInformation", name: "ColumnInformation")
+    ColumnInformationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ColumnInformationList", name: "ColumnInformationList")
+    ColumnLabel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ColumnLabel", name: "ColumnLabel", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     ColumnName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ColumnName", name: "ColumnName")
     ColumnNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ColumnNames", name: "ColumnNames")
     ColumnType = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ColumnType", name: "ColumnType")
+    ColumnValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ColumnValue", name: "ColumnValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 1048576}})
     ColumnsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ColumnsList", name: "ColumnsList")
+    CommandList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#CommandList", name: "CommandList", traits: {"smithy.api#sensitive" => {}})
     CompositeModelProperty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CompositeModelProperty", name: "CompositeModelProperty")
     CompositionDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CompositionDetails", name: "CompositionDetails")
     CompositionRelationship = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#CompositionRelationship", name: "CompositionRelationship")
@@ -186,16 +216,30 @@ module Aws::IoTSiteWise
     ComputationModelType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ComputationModelType", name: "ComputationModelType")
     ComputationModelVersionFilter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ComputationModelVersionFilter", name: "ComputationModelVersionFilter", traits: {"smithy.api#pattern" => "^(LATEST|ACTIVE|[1-9]{1}\\d{0,9})$"})
     ComputeLocation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ComputeLocation", name: "ComputeLocation")
+    ComputeNode = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ComputeNode", name: "ComputeNode")
+    ComputeNodeEnvironmentVariablesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeEnvironmentVariablesMap", name: "ComputeNodeEnvironmentVariablesMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    ComputeNodeErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeErrorCode", name: "ComputeNodeErrorCode")
+    ComputeNodeExecutionDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeExecutionDetails", name: "ComputeNodeExecutionDetails")
+    ComputeNodeExecutionDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeExecutionDetailsList", name: "ComputeNodeExecutionDetailsList")
+    ComputeNodeExecutionState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeExecutionState", name: "ComputeNodeExecutionState")
+    ComputeNodeExecutionStateDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeExecutionStateDetails", name: "ComputeNodeExecutionStateDetails")
+    ComputeNodeExecutionStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeExecutionStatus", name: "ComputeNodeExecutionStatus")
+    ComputeNodeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeList", name: "ComputeNodeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    ComputeNodeMountsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeMountsMap", name: "ComputeNodeMountsMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    ComputeNodeNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ComputeNodeNameList", name: "ComputeNodeNameList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     ConfigurationErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ConfigurationErrorDetails", name: "ConfigurationErrorDetails")
     ConfigurationState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ConfigurationState", name: "ConfigurationState")
     ConfigurationStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ConfigurationStatus", name: "ConfigurationStatus")
     ConflictingOperationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ConflictingOperationException", name: "ConflictingOperationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ContainerTaskConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ContainerTaskConfiguration", name: "ContainerTaskConfiguration")
     Content = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Content", name: "Content")
     ConversationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ConversationId", name: "ConversationId", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
     CoreDeviceOperatingSystem = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#CoreDeviceOperatingSystem", name: "CoreDeviceOperatingSystem")
     CoreDeviceThingName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#CoreDeviceThingName", name: "CoreDeviceThingName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9:_-]+$"})
     CreateAccessPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateAccessPolicyRequest", name: "CreateAccessPolicyRequest")
     CreateAccessPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateAccessPolicyResponse", name: "CreateAccessPolicyResponse")
+    CreateApplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateApplicationRequest", name: "CreateApplicationRequest")
+    CreateApplicationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateApplicationResponse", name: "CreateApplicationResponse")
     CreateAssetModelCompositeModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateAssetModelCompositeModelRequest", name: "CreateAssetModelCompositeModelRequest")
     CreateAssetModelCompositeModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateAssetModelCompositeModelResponse", name: "CreateAssetModelCompositeModelResponse")
     CreateAssetModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateAssetModelRequest", name: "CreateAssetModelRequest")
@@ -208,15 +252,25 @@ module Aws::IoTSiteWise
     CreateComputationModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateComputationModelResponse", name: "CreateComputationModelResponse")
     CreateDashboardRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateDashboardRequest", name: "CreateDashboardRequest")
     CreateDashboardResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateDashboardResponse", name: "CreateDashboardResponse")
+    CreateDatasetExportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateDatasetExportJobRequest", name: "CreateDatasetExportJobRequest")
+    CreateDatasetExportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateDatasetExportJobResponse", name: "CreateDatasetExportJobResponse")
     CreateDatasetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateDatasetRequest", name: "CreateDatasetRequest")
     CreateDatasetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateDatasetResponse", name: "CreateDatasetResponse")
+    CreateEnrichmentJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateEnrichmentJobRequest", name: "CreateEnrichmentJobRequest")
+    CreateEnrichmentJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateEnrichmentJobResponse", name: "CreateEnrichmentJobResponse")
     CreateGatewayRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateGatewayRequest", name: "CreateGatewayRequest")
     CreateGatewayResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateGatewayResponse", name: "CreateGatewayResponse")
     CreateMissingProperty = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iotsitewise#CreateMissingProperty", name: "CreateMissingProperty", traits: {"smithy.api#default" => false})
+    CreatePipelineRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreatePipelineRequest", name: "CreatePipelineRequest")
+    CreatePipelineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreatePipelineResponse", name: "CreatePipelineResponse")
     CreatePortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreatePortalRequest", name: "CreatePortalRequest")
     CreatePortalResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreatePortalResponse", name: "CreatePortalResponse")
     CreateProjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateProjectRequest", name: "CreateProjectRequest")
     CreateProjectResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateProjectResponse", name: "CreateProjectResponse")
+    CreateTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateTaskRequest", name: "CreateTaskRequest")
+    CreateTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateTaskResponse", name: "CreateTaskResponse")
+    CreateWorkspaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateWorkspaceRequest", name: "CreateWorkspaceRequest")
+    CreateWorkspaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CreateWorkspaceResponse", name: "CreateWorkspaceResponse")
     Csv = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Csv", name: "Csv")
     CustomID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#CustomID", name: "CustomID", traits: {"smithy.api#length" => {"min" => 13, "max" => 139}, "smithy.api#pattern" => "^(?!00000000-0000-0000-0000-000000000000)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|^externalId:[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+$"})
     CustomerManagedS3Storage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#CustomerManagedS3Storage", name: "CustomerManagedS3Storage")
@@ -225,7 +279,24 @@ module Aws::IoTSiteWise
     DashboardSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DashboardSummary", name: "DashboardSummary")
     DataBindingValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DataBindingValue", name: "DataBindingValue")
     DataBindingValueFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DataBindingValueFilter", name: "DataBindingValueFilter")
+    DataSegmentEnrichment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DataSegmentEnrichment", name: "DataSegmentEnrichment")
+    DataSegmentErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DataSegmentErrorCode", name: "DataSegmentErrorCode")
+    DataSegmentErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#DataSegmentErrorMessage", name: "DataSegmentErrorMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    DataSegmentRelationshipSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#DataSegmentRelationshipSummaries", name: "DataSegmentRelationshipSummaries")
+    DataSegmentRelationshipSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DataSegmentRelationshipSummary", name: "DataSegmentRelationshipSummary")
+    DataSegmentSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#DataSegmentSummaries", name: "DataSegmentSummaries")
+    DataSegmentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DataSegmentSummary", name: "DataSegmentSummary")
+    DataSetIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#DataSetIdList", name: "DataSetIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     DataSetReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DataSetReference", name: "DataSetReference")
+    DatasetConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DatasetConfig", name: "DatasetConfig")
+    DatasetEnrichment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DatasetEnrichment", name: "DatasetEnrichment")
+    DatasetEnrichmentEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DatasetEnrichmentEntry", name: "DatasetEnrichmentEntry")
+    DatasetEnrichmentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DatasetEnrichmentStatus", name: "DatasetEnrichmentStatus")
+    DatasetExportJobFilter = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DatasetExportJobFilter", name: "DatasetExportJobFilter")
+    DatasetExportJobId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#DatasetExportJobId", name: "DatasetExportJobId", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    DatasetExportJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DatasetExportJobStatus", name: "DatasetExportJobStatus")
+    DatasetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#DatasetId", name: "DatasetId", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    DatasetItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DatasetItem", name: "DatasetItem")
     DatasetSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DatasetSource", name: "DatasetSource")
     DatasetSourceFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DatasetSourceFormat", name: "DatasetSourceFormat")
     DatasetSourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DatasetSourceType", name: "DatasetSourceType")
@@ -233,11 +304,14 @@ module Aws::IoTSiteWise
     DatasetStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DatasetStatus", name: "DatasetStatus")
     DatasetSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#DatasetSummaries", name: "DatasetSummaries")
     DatasetSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DatasetSummary", name: "DatasetSummary")
+    DatasetTypeEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DatasetTypeEnum", name: "DatasetTypeEnum")
     Datum = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Datum", name: "Datum")
     DatumList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#DatumList", name: "DatumList")
     DefaultValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#DefaultValue", name: "DefaultValue", traits: {"smithy.api#pattern" => "^[^\\u0000-\\u001F\\u007F]+$"})
     DeleteAccessPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteAccessPolicyRequest", name: "DeleteAccessPolicyRequest")
     DeleteAccessPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteAccessPolicyResponse", name: "DeleteAccessPolicyResponse")
+    DeleteApplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteApplicationRequest", name: "DeleteApplicationRequest")
+    DeleteApplicationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteApplicationResponse", name: "DeleteApplicationResponse")
     DeleteAssetModelCompositeModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteAssetModelCompositeModelRequest", name: "DeleteAssetModelCompositeModelRequest")
     DeleteAssetModelCompositeModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteAssetModelCompositeModelResponse", name: "DeleteAssetModelCompositeModelResponse")
     DeleteAssetModelInterfaceRelationshipRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteAssetModelInterfaceRelationshipRequest", name: "DeleteAssetModelInterfaceRelationshipRequest")
@@ -250,19 +324,29 @@ module Aws::IoTSiteWise
     DeleteComputationModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteComputationModelResponse", name: "DeleteComputationModelResponse")
     DeleteDashboardRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteDashboardRequest", name: "DeleteDashboardRequest")
     DeleteDashboardResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteDashboardResponse", name: "DeleteDashboardResponse")
+    DeleteDataSegmentEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#DeleteDataSegmentEntries", name: "DeleteDataSegmentEntries", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    DeleteDataSegmentEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteDataSegmentEntry", name: "DeleteDataSegmentEntry")
     DeleteDatasetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteDatasetRequest", name: "DeleteDatasetRequest")
     DeleteDatasetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteDatasetResponse", name: "DeleteDatasetResponse")
     DeleteFilesAfterImport = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iotsitewise#DeleteFilesAfterImport", name: "DeleteFilesAfterImport")
     DeleteGatewayRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteGatewayRequest", name: "DeleteGatewayRequest")
+    DeletePipelineRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeletePipelineRequest", name: "DeletePipelineRequest")
+    DeletePipelineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeletePipelineResponse", name: "DeletePipelineResponse")
     DeletePortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeletePortalRequest", name: "DeletePortalRequest")
     DeletePortalResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeletePortalResponse", name: "DeletePortalResponse")
     DeleteProjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteProjectRequest", name: "DeleteProjectRequest")
     DeleteProjectResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteProjectResponse", name: "DeleteProjectResponse")
+    DeleteTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteTaskRequest", name: "DeleteTaskRequest")
+    DeleteTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteTaskResponse", name: "DeleteTaskResponse")
     DeleteTimeSeriesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteTimeSeriesRequest", name: "DeleteTimeSeriesRequest")
+    DeleteWorkspaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteWorkspaceRequest", name: "DeleteWorkspaceRequest")
+    DeleteWorkspaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DeleteWorkspaceResponse", name: "DeleteWorkspaceResponse")
     DescribeAccessPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeAccessPolicyRequest", name: "DescribeAccessPolicyRequest")
     DescribeAccessPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeAccessPolicyResponse", name: "DescribeAccessPolicyResponse")
     DescribeActionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeActionRequest", name: "DescribeActionRequest")
     DescribeActionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeActionResponse", name: "DescribeActionResponse")
+    DescribeApplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeApplicationRequest", name: "DescribeApplicationRequest")
+    DescribeApplicationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeApplicationResponse", name: "DescribeApplicationResponse")
     DescribeAssetCompositeModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeAssetCompositeModelRequest", name: "DescribeAssetCompositeModelRequest")
     DescribeAssetCompositeModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeAssetCompositeModelResponse", name: "DescribeAssetCompositeModelResponse")
     DescribeAssetModelCompositeModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeAssetModelCompositeModelRequest", name: "DescribeAssetModelCompositeModelRequest")
@@ -283,10 +367,14 @@ module Aws::IoTSiteWise
     DescribeComputationModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeComputationModelResponse", name: "DescribeComputationModelResponse")
     DescribeDashboardRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeDashboardRequest", name: "DescribeDashboardRequest")
     DescribeDashboardResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeDashboardResponse", name: "DescribeDashboardResponse")
+    DescribeDatasetExportJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeDatasetExportJobRequest", name: "DescribeDatasetExportJobRequest")
+    DescribeDatasetExportJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeDatasetExportJobResponse", name: "DescribeDatasetExportJobResponse")
     DescribeDatasetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeDatasetRequest", name: "DescribeDatasetRequest")
     DescribeDatasetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeDatasetResponse", name: "DescribeDatasetResponse")
     DescribeDefaultEncryptionConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeDefaultEncryptionConfigurationRequest", name: "DescribeDefaultEncryptionConfigurationRequest")
     DescribeDefaultEncryptionConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeDefaultEncryptionConfigurationResponse", name: "DescribeDefaultEncryptionConfigurationResponse")
+    DescribeEnrichmentJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeEnrichmentJobRequest", name: "DescribeEnrichmentJobRequest")
+    DescribeEnrichmentJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeEnrichmentJobResponse", name: "DescribeEnrichmentJobResponse")
     DescribeExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeExecutionRequest", name: "DescribeExecutionRequest")
     DescribeExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeExecutionResponse", name: "DescribeExecutionResponse")
     DescribeGatewayCapabilityConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeGatewayCapabilityConfigurationRequest", name: "DescribeGatewayCapabilityConfigurationRequest")
@@ -295,31 +383,63 @@ module Aws::IoTSiteWise
     DescribeGatewayResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeGatewayResponse", name: "DescribeGatewayResponse")
     DescribeLoggingOptionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeLoggingOptionsRequest", name: "DescribeLoggingOptionsRequest")
     DescribeLoggingOptionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeLoggingOptionsResponse", name: "DescribeLoggingOptionsResponse")
+    DescribePipelineExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribePipelineExecutionRequest", name: "DescribePipelineExecutionRequest")
+    DescribePipelineExecutionRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#DescribePipelineExecutionRequestMaxResultsInteger", name: "DescribePipelineExecutionRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}})
+    DescribePipelineExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribePipelineExecutionResponse", name: "DescribePipelineExecutionResponse")
+    DescribePipelineRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribePipelineRequest", name: "DescribePipelineRequest")
+    DescribePipelineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribePipelineResponse", name: "DescribePipelineResponse")
     DescribePortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribePortalRequest", name: "DescribePortalRequest")
     DescribePortalResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribePortalResponse", name: "DescribePortalResponse")
     DescribeProjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeProjectRequest", name: "DescribeProjectRequest")
     DescribeProjectResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeProjectResponse", name: "DescribeProjectResponse")
+    DescribeQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeQueryRequest", name: "DescribeQueryRequest")
+    DescribeQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeQueryResponse", name: "DescribeQueryResponse")
+    DescribeSearchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeSearchRequest", name: "DescribeSearchRequest")
+    DescribeSearchResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeSearchResponse", name: "DescribeSearchResponse")
     DescribeStorageConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeStorageConfigurationRequest", name: "DescribeStorageConfigurationRequest")
     DescribeStorageConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeStorageConfigurationResponse", name: "DescribeStorageConfigurationResponse")
+    DescribeTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeTaskRequest", name: "DescribeTaskRequest")
+    DescribeTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeTaskResponse", name: "DescribeTaskResponse")
     DescribeTimeSeriesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeTimeSeriesRequest", name: "DescribeTimeSeriesRequest")
     DescribeTimeSeriesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeTimeSeriesResponse", name: "DescribeTimeSeriesResponse")
+    DescribeWorkspaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeWorkspaceRequest", name: "DescribeWorkspaceRequest")
+    DescribeWorkspaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DescribeWorkspaceResponse", name: "DescribeWorkspaceResponse")
     Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#Description", name: "Description", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[^\\u0000-\\u001F\\u007F]+$"})
     DetailedError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DetailedError", name: "DetailedError")
     DetailedErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DetailedErrorCode", name: "DetailedErrorCode")
+    DetailedErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#DetailedErrorList", name: "DetailedErrorList")
     DetailedErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#DetailedErrorMessage", name: "DetailedErrorMessage")
     DetailedErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#DetailedErrors", name: "DetailedErrors")
+    DetailedPipelineError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DetailedPipelineError", name: "DetailedPipelineError")
+    DetailedPipelineErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DetailedPipelineErrorCode", name: "DetailedPipelineErrorCode")
     DisallowIngestNullNaN = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iotsitewise#DisallowIngestNullNaN", name: "DisallowIngestNullNaN")
     DisassociateAssetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DisassociateAssetsRequest", name: "DisassociateAssetsRequest")
+    DisassociateDataSegmentEntries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#DisassociateDataSegmentEntries", name: "DisassociateDataSegmentEntries")
+    DisassociateDataSegmentEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DisassociateDataSegmentEntry", name: "DisassociateDataSegmentEntry")
     DisassociateTimeSeriesFromAssetPropertyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#DisassociateTimeSeriesFromAssetPropertyRequest", name: "DisassociateTimeSeriesFromAssetPropertyRequest")
     DisassociatedDataStorageState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#DisassociatedDataStorageState", name: "DisassociatedDataStorageState")
+    DnsSubdomain = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#DnsSubdomain", name: "DnsSubdomain", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"})
     ETag = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ETag", name: "ETag", traits: {"smithy.api#pattern" => "^[\\w-]{43}$"})
+    EcrUri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#EcrUri", name: "EcrUri", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^((\\d{12}\\.dkr\\.ecr\\.[a-z0-9-]+\\.[a-z.]+)|public\\.ecr\\.aws/[a-z][a-z0-9]+([._-][a-z0-9]+)*)/[a-z0-9]+((\\.||__|_|-+)[a-z0-9]+)*(/[a-z0-9]+((\\.||__|_|-+)[a-z0-9]+)*)*(:[a-zA-Z0-9._-]+|@sha256:[a-f0-9]{64})?$", "smithy.api#sensitive" => {}})
     Email = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#Email", name: "Email", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\-\\.\\+]+@[a-zA-Z0-9_\\-\\.\\+]+\\.[a-zA-Z]{2,}$", "smithy.api#sensitive" => {}})
     EncryptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#EncryptionType", name: "EncryptionType")
+    EnrichmentJobConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.iotsitewise#EnrichmentJobConfiguration", name: "EnrichmentJobConfiguration")
+    EnrichmentJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#EnrichmentJobStatus", name: "EnrichmentJobStatus")
+    EnrichmentJobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#EnrichmentJobSummaries", name: "EnrichmentJobSummaries")
+    EnrichmentJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#EnrichmentJobSummary", name: "EnrichmentJobSummary")
+    EnrichmentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#EnrichmentStatus", name: "EnrichmentStatus")
+    EnrichmentTrimSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#EnrichmentTrimSettings", name: "EnrichmentTrimSettings")
     EntryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#EntryId", name: "EntryId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
+    EnvironmentVariableName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#EnvironmentVariableName", name: "EnvironmentVariableName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(?!(?i)AWS_)[a-zA-Z_][a-zA-Z0-9_]*$"})
+    EnvironmentVariableValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#EnvironmentVariableValue", name: "EnvironmentVariableValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    EnvironmentVariablesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iotsitewise#EnvironmentVariablesMap", name: "EnvironmentVariablesMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}, "smithy.api#sensitive" => {}})
+    EphemeralStorageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#EphemeralStorageConfiguration", name: "EphemeralStorageConfiguration")
+    EphemeralStorageConfigurationStorageSizeInGiBInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#EphemeralStorageConfigurationStorageSizeInGiBInteger", name: "EphemeralStorageConfigurationStorageSizeInGiBInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 16384}})
     ErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ErrorCode", name: "ErrorCode")
     ErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ErrorDetails", name: "ErrorDetails")
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ErrorMessage", name: "ErrorMessage")
     ErrorReportLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ErrorReportLocation", name: "ErrorReportLocation")
+    EventDetection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#EventDetection", name: "EventDetection")
     ExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ExceptionMessage", name: "ExceptionMessage")
     ExcludeProperties = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iotsitewise#ExcludeProperties", name: "ExcludeProperties", traits: {"smithy.api#default" => false})
     ExecuteActionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ExecuteActionRequest", name: "ExecuteActionRequest")
@@ -331,6 +451,11 @@ module Aws::IoTSiteWise
     ExecutionDetails = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iotsitewise#ExecutionDetails", name: "ExecutionDetails")
     ExecutionDetailsKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ExecutionDetailsKey", name: "ExecutionDetailsKey", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9 _\\-\#$*!@]+$"})
     ExecutionDetailsValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ExecutionDetailsValue", name: "ExecutionDetailsValue", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9 _\\-\#$*!@]+$"})
+    ExecutionEnvironmentVariables = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ExecutionEnvironmentVariables", name: "ExecutionEnvironmentVariables", traits: {"smithy.api#sensitive" => {}})
+    ExecutionEnvironmentVariablesMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iotsitewise#ExecutionEnvironmentVariablesMap", name: "ExecutionEnvironmentVariablesMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#sensitive" => {}})
+    ExecutionEnvironmentVariablesMapKeyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ExecutionEnvironmentVariablesMapKeyString", name: "ExecutionEnvironmentVariablesMapKeyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    ExecutionEnvironmentVariablesMapValueString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ExecutionEnvironmentVariablesMapValueString", name: "ExecutionEnvironmentVariablesMapValueString", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    ExecutionPriority = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#ExecutionPriority", name: "ExecutionPriority", traits: {"smithy.api#range" => {"min" => 0, "max" => 2}})
     ExecutionResult = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iotsitewise#ExecutionResult", name: "ExecutionResult")
     ExecutionResultKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ExecutionResultKey", name: "ExecutionResultKey", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9 _\\-\#$*!@]+$"})
     ExecutionResultValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ExecutionResultValue", name: "ExecutionResultValue", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9 _\\-\#$*!@]+$"})
@@ -338,13 +463,25 @@ module Aws::IoTSiteWise
     ExecutionStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ExecutionStatus", name: "ExecutionStatus")
     ExecutionSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ExecutionSummaries", name: "ExecutionSummaries")
     ExecutionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ExecutionSummary", name: "ExecutionSummary")
+    ExportDataType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ExportDataType", name: "ExportDataType")
+    ExportDataTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ExportDataTypeList", name: "ExportDataTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
+    ExportErrorReportLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ExportErrorReportLocation", name: "ExportErrorReportLocation")
+    ExportJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ExportJobSummary", name: "ExportJobSummary")
+    ExportJobSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ExportJobSummaryList", name: "ExportJobSummaryList")
     Expression = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#Expression", name: "Expression", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     ExpressionVariable = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ExpressionVariable", name: "ExpressionVariable")
     ExpressionVariables = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ExpressionVariables", name: "ExpressionVariables")
     ExternalId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ExternalId", name: "ExternalId", traits: {"smithy.api#length" => {"min" => 2, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+$"})
+    FailedDataSegmentAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#FailedDataSegmentAssociation", name: "FailedDataSegmentAssociation")
+    FailedDataSegmentAssociations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#FailedDataSegmentAssociations", name: "FailedDataSegmentAssociations")
+    FailedDataSegmentDeletion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#FailedDataSegmentDeletion", name: "FailedDataSegmentDeletion")
+    FailedDataSegmentDeletions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#FailedDataSegmentDeletions", name: "FailedDataSegmentDeletions")
+    FailedDataSegmentDisassociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#FailedDataSegmentDisassociation", name: "FailedDataSegmentDisassociation")
+    FailedDataSegmentDisassociations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#FailedDataSegmentDisassociations", name: "FailedDataSegmentDisassociations")
     File = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#File", name: "File")
     FileFormat = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#FileFormat", name: "FileFormat")
     Files = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#Files", name: "Files")
+    FormatSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#FormatSettings", name: "FormatSettings")
     ForwardingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ForwardingConfig", name: "ForwardingConfig")
     ForwardingConfigState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ForwardingConfigState", name: "ForwardingConfigState")
     GatewayCapabilitySummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#GatewayCapabilitySummaries", name: "GatewayCapabilitySummaries")
@@ -362,10 +499,20 @@ module Aws::IoTSiteWise
     GetAssetPropertyValueHistoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetAssetPropertyValueHistoryResponse", name: "GetAssetPropertyValueHistoryResponse")
     GetAssetPropertyValueRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetAssetPropertyValueRequest", name: "GetAssetPropertyValueRequest")
     GetAssetPropertyValueResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetAssetPropertyValueResponse", name: "GetAssetPropertyValueResponse")
+    GetCaptureDataNextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#GetCaptureDataNextToken", name: "GetCaptureDataNextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    GetCaptureDataRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetCaptureDataRequest", name: "GetCaptureDataRequest")
+    GetCaptureDataResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetCaptureDataResponse", name: "GetCaptureDataResponse")
     GetInterpolatedAssetPropertyValuesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetInterpolatedAssetPropertyValuesRequest", name: "GetInterpolatedAssetPropertyValuesRequest")
     GetInterpolatedAssetPropertyValuesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetInterpolatedAssetPropertyValuesResponse", name: "GetInterpolatedAssetPropertyValuesResponse")
+    GetQueryResultsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetQueryResultsRequest", name: "GetQueryResultsRequest")
+    GetQueryResultsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetQueryResultsResponse", name: "GetQueryResultsResponse")
+    GetSearchResultsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetSearchResultsRequest", name: "GetSearchResultsRequest")
+    GetSearchResultsRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#GetSearchResultsRequestMaxResultsInteger", name: "GetSearchResultsRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
+    GetSearchResultsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GetSearchResultsResponse", name: "GetSearchResultsResponse")
     Greengrass = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Greengrass", name: "Greengrass")
     GreengrassV2 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GreengrassV2", name: "GreengrassV2")
+    GroupId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#GroupId", name: "GroupId", traits: {"smithy.api#length" => {"min" => 2, "max" => 36}, "smithy.api#pattern" => "^[a-zA-Z0-9][a-zA-Z0-9-]*$"})
+    GroupIdFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#GroupIdFilterList", name: "GroupIdFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     GroupIdentity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#GroupIdentity", name: "GroupIdentity")
     HierarchyMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#HierarchyMapping", name: "HierarchyMapping")
     HierarchyMappings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#HierarchyMappings", name: "HierarchyMappings")
@@ -374,6 +521,7 @@ module Aws::IoTSiteWise
     ID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ID", name: "ID", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^(?!00000000-0000-0000-0000-000000000000)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
     IDs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#IDs", name: "IDs", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     IamArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#IamArn", name: "IamArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 1600}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov)?:[a-zA-Z0-9-:\\/_\\.\\+=,@]+$"})
+    IamRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#IamRoleArn", name: "IamRoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov)?:iam::\\d{12}:role/[\\w+=,.@/-]+$", "smithy.api#sensitive" => {}})
     Identity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Identity", name: "Identity")
     IdentityId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#IdentityId", name: "IdentityId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^\\S+$"})
     IdentityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#IdentityType", name: "IdentityType")
@@ -405,6 +553,7 @@ module Aws::IoTSiteWise
     JobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#JobStatus", name: "JobStatus")
     JobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#JobSummaries", name: "JobSummaries")
     JobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#JobSummary", name: "JobSummary")
+    JobType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#JobType", name: "JobType")
     KendraSourceDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#KendraSourceDetail", name: "KendraSourceDetail")
     KmsKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#KmsKeyId", name: "KmsKeyId", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 410})
@@ -412,6 +561,8 @@ module Aws::IoTSiteWise
     ListAccessPoliciesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListAccessPoliciesResponse", name: "ListAccessPoliciesResponse")
     ListActionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListActionsRequest", name: "ListActionsRequest")
     ListActionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListActionsResponse", name: "ListActionsResponse")
+    ListApplicationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListApplicationsRequest", name: "ListApplicationsRequest")
+    ListApplicationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListApplicationsResponse", name: "ListApplicationsResponse")
     ListAssetModelCompositeModelsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListAssetModelCompositeModelsRequest", name: "ListAssetModelCompositeModelsRequest")
     ListAssetModelCompositeModelsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListAssetModelCompositeModelsResponse", name: "ListAssetModelCompositeModelsResponse")
     ListAssetModelPropertiesFilter = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ListAssetModelPropertiesFilter", name: "ListAssetModelPropertiesFilter")
@@ -443,25 +594,52 @@ module Aws::IoTSiteWise
     ListComputationModelsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListComputationModelsResponse", name: "ListComputationModelsResponse")
     ListDashboardsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDashboardsRequest", name: "ListDashboardsRequest")
     ListDashboardsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDashboardsResponse", name: "ListDashboardsResponse")
+    ListDatasetDataSegmentRelationshipsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDatasetDataSegmentRelationshipsRequest", name: "ListDatasetDataSegmentRelationshipsRequest")
+    ListDatasetDataSegmentRelationshipsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDatasetDataSegmentRelationshipsResponse", name: "ListDatasetDataSegmentRelationshipsResponse")
+    ListDatasetDataSegmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDatasetDataSegmentsRequest", name: "ListDatasetDataSegmentsRequest")
+    ListDatasetDataSegmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDatasetDataSegmentsResponse", name: "ListDatasetDataSegmentsResponse")
+    ListDatasetExportJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDatasetExportJobsRequest", name: "ListDatasetExportJobsRequest")
+    ListDatasetExportJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDatasetExportJobsResponse", name: "ListDatasetExportJobsResponse")
     ListDatasetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDatasetsRequest", name: "ListDatasetsRequest")
     ListDatasetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListDatasetsResponse", name: "ListDatasetsResponse")
+    ListEnrichmentJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListEnrichmentJobsRequest", name: "ListEnrichmentJobsRequest")
+    ListEnrichmentJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListEnrichmentJobsResponse", name: "ListEnrichmentJobsResponse")
     ListExecutionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListExecutionsRequest", name: "ListExecutionsRequest")
     ListExecutionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListExecutionsResponse", name: "ListExecutionsResponse")
+    ListExportJobsMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#ListExportJobsMaxResults", name: "ListExportJobsMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}})
+    ListExportJobsNextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ListExportJobsNextToken", name: "ListExportJobsNextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
     ListGatewaysRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListGatewaysRequest", name: "ListGatewaysRequest")
     ListGatewaysResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListGatewaysResponse", name: "ListGatewaysResponse")
     ListInterfaceRelationshipsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListInterfaceRelationshipsRequest", name: "ListInterfaceRelationshipsRequest")
     ListInterfaceRelationshipsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListInterfaceRelationshipsResponse", name: "ListInterfaceRelationshipsResponse")
+    ListPipelineExecutionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListPipelineExecutionsRequest", name: "ListPipelineExecutionsRequest")
+    ListPipelineExecutionsRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#ListPipelineExecutionsRequestMaxResultsInteger", name: "ListPipelineExecutionsRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}})
+    ListPipelineExecutionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListPipelineExecutionsResponse", name: "ListPipelineExecutionsResponse")
+    ListPipelinesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListPipelinesRequest", name: "ListPipelinesRequest")
+    ListPipelinesRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#ListPipelinesRequestMaxResultsInteger", name: "ListPipelinesRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}})
+    ListPipelinesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListPipelinesResponse", name: "ListPipelinesResponse")
     ListPortalsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListPortalsRequest", name: "ListPortalsRequest")
     ListPortalsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListPortalsResponse", name: "ListPortalsResponse")
     ListProjectAssetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListProjectAssetsRequest", name: "ListProjectAssetsRequest")
     ListProjectAssetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListProjectAssetsResponse", name: "ListProjectAssetsResponse")
     ListProjectsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListProjectsRequest", name: "ListProjectsRequest")
     ListProjectsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListProjectsResponse", name: "ListProjectsResponse")
+    ListQueriesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListQueriesRequest", name: "ListQueriesRequest")
+    ListQueriesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListQueriesResponse", name: "ListQueriesResponse")
+    ListSearchesFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListSearchesFilters", name: "ListSearchesFilters")
+    ListSearchesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListSearchesRequest", name: "ListSearchesRequest")
+    ListSearchesRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#ListSearchesRequestMaxResultsInteger", name: "ListSearchesRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    ListSearchesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListSearchesResponse", name: "ListSearchesResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
+    ListTasksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListTasksRequest", name: "ListTasksRequest")
+    ListTasksRequestMaxResultsInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#ListTasksRequestMaxResultsInteger", name: "ListTasksRequestMaxResultsInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 250}})
+    ListTasksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListTasksResponse", name: "ListTasksResponse")
     ListTimeSeriesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListTimeSeriesRequest", name: "ListTimeSeriesRequest")
     ListTimeSeriesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListTimeSeriesResponse", name: "ListTimeSeriesResponse")
     ListTimeSeriesType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ListTimeSeriesType", name: "ListTimeSeriesType")
+    ListWorkspacesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListWorkspacesRequest", name: "ListWorkspacesRequest")
+    ListWorkspacesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ListWorkspacesResponse", name: "ListWorkspacesResponse")
     Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Location", name: "Location")
     LoggingLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#LoggingLevel", name: "LoggingLevel")
     LoggingOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#LoggingOptions", name: "LoggingOptions")
@@ -473,12 +651,24 @@ module Aws::IoTSiteWise
     Measurement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Measurement", name: "Measurement")
     MeasurementProcessingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#MeasurementProcessingConfig", name: "MeasurementProcessingConfig")
     MessageInput = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#MessageInput", name: "MessageInput", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}, "smithy.api#sensitive" => {}})
+    Metadata = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iotsitewise#Metadata", name: "Metadata")
+    MetadataKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#MetadataKey", name: "MetadataKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    MetadataValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#MetadataValue", name: "MetadataValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
     Metric = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Metric", name: "Metric")
     MetricProcessingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#MetricProcessingConfig", name: "MetricProcessingConfig")
     MetricWindow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#MetricWindow", name: "MetricWindow")
     MonitorErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#MonitorErrorCode", name: "MonitorErrorCode")
     MonitorErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#MonitorErrorDetails", name: "MonitorErrorDetails")
     MonitorErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#MonitorErrorMessage", name: "MonitorErrorMessage")
+    Mount = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Mount", name: "Mount")
+    MountList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#MountList", name: "MountList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    MountOverrides = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#MountOverrides", name: "MountOverrides")
+    MountRelativePath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#MountRelativePath", name: "MountRelativePath", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^((?!.*(^|/)\\.\\.?(/|$))(?!.*//)[a-zA-Z0-9._-][a-zA-Z0-9._/-]*[a-zA-Z0-9._-]|[a-zA-Z0-9_-])$"})
+    MountS3AccessPointArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#MountS3AccessPointArn", name: "MountS3AccessPointArn", traits: {"smithy.api#length" => {"min" => 4, "max" => 128}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov)?:s3:[a-z0-9-]*:\\d{12}:accesspoint[/:][a-zA-Z0-9._-]+$"})
+    MountS3KeyPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#MountS3KeyPrefix", name: "MountS3KeyPrefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
+    MountSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.iotsitewise#MountSource", name: "MountSource")
+    MountStorageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#MountStorageType", name: "MountStorageType")
+    Mp4 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Mp4", name: "Mp4")
     MultiLayerStorage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#MultiLayerStorage", name: "MultiLayerStorage")
     Name = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#Name", name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[^\\u0000-\\u001F\\u007F]+$"})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}, "smithy.api#pattern" => "^[A-Za-z0-9+/=]+$"})
@@ -486,8 +676,17 @@ module Aws::IoTSiteWise
     NumberOfDays = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#NumberOfDays", name: "NumberOfDays")
     Offset = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#Offset", name: "Offset", traits: {"smithy.api#length" => {"min" => 2, "max" => 25}})
     OffsetInNanos = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#OffsetInNanos", name: "OffsetInNanos", traits: {"smithy.api#range" => {"min" => 0, "max" => 999999999}})
+    PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
     Parquet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Parquet", name: "Parquet")
     Permission = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#Permission", name: "Permission")
+    PipelineErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#PipelineErrorCode", name: "PipelineErrorCode")
+    PipelineExecutionState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#PipelineExecutionState", name: "PipelineExecutionState")
+    PipelineExecutionStateDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#PipelineExecutionStateDetails", name: "PipelineExecutionStateDetails")
+    PipelineExecutionStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#PipelineExecutionStatus", name: "PipelineExecutionStatus")
+    PipelineExecutionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#PipelineExecutionSummary", name: "PipelineExecutionSummary")
+    PipelineExecutionSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#PipelineExecutionSummaryList", name: "PipelineExecutionSummaryList")
+    PipelineSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#PipelineSummaries", name: "PipelineSummaries")
+    PipelineSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#PipelineSummary", name: "PipelineSummary")
     PortalClientId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#PortalClientId", name: "PortalClientId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[!-~]*$"})
     PortalResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#PortalResource", name: "PortalResource")
     PortalState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#PortalState", name: "PortalState")
@@ -499,7 +698,11 @@ module Aws::IoTSiteWise
     PortalTypeConfiguration = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.iotsitewise#PortalTypeConfiguration", name: "PortalTypeConfiguration")
     PortalTypeEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#PortalTypeEntry", name: "PortalTypeEntry")
     PortalTypeKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#PortalTypeKey", name: "PortalTypeKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
+    PositiveInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#PositiveInteger", name: "PositiveInteger", traits: {"smithy.api#range" => {"min" => 1}})
     PreconditionFailedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#PreconditionFailedException", name: "PreconditionFailedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 412})
+    ProcessingInput = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.iotsitewise#ProcessingInput", name: "ProcessingInput")
+    ProcessingType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ProcessingType", name: "ProcessingType")
+    ProcessingUnit = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ProcessingUnit", name: "ProcessingUnit")
     ProjectResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ProjectResource", name: "ProjectResource")
     ProjectSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#ProjectSummaries", name: "ProjectSummaries")
     ProjectSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ProjectSummary", name: "ProjectSummary")
@@ -531,7 +734,18 @@ module Aws::IoTSiteWise
     PutStorageConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#PutStorageConfigurationResponse", name: "PutStorageConfigurationResponse")
     Qualities = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#Qualities", name: "Qualities", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     Quality = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#Quality", name: "Quality")
-    QueryStatement = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#QueryStatement", name: "QueryStatement", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^[\\s\\S]+$"})
+    QueryErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#QueryErrorMessage", name: "QueryErrorMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    QueryFilter = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#QueryFilter", name: "QueryFilter", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
+    QueryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#QueryId", name: "QueryId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
+    QueryListNextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#QueryListNextToken", name: "QueryListNextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    QueryMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#QueryMaxResults", name: "QueryMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 10000}})
+    QueryNextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#QueryNextToken", name: "QueryNextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}})
+    QueryStatement = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#QueryStatement", name: "QueryStatement", traits: {"smithy.api#length" => {"min" => 1, "max" => 10000}, "smithy.api#pattern" => "^[\\s\\S]+$", "smithy.api#sensitive" => {}})
+    QueryStatistics = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#QueryStatistics", name: "QueryStatistics")
+    QueryStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#QueryStatus", name: "QueryStatus")
+    QueryString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#QueryString", name: "QueryString", traits: {"smithy.api#length" => {"min" => 1, "max" => 10240}, "smithy.api#sensitive" => {}})
+    QuerySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#QuerySummary", name: "QuerySummary")
+    QuerySummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#QuerySummaryList", name: "QuerySummaryList")
     QueryTimeoutException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#QueryTimeoutException", name: "QueryTimeoutException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     RawValueType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#RawValueType", name: "RawValueType")
     Reference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Reference", name: "Reference")
@@ -541,24 +755,52 @@ module Aws::IoTSiteWise
     Resource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Resource", name: "Resource")
     ResourceAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ResourceAlreadyExistsException", name: "ResourceAlreadyExistsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ResourceArn", name: "ResourceArn")
+    ResourceError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ResourceError", name: "ResourceError")
+    ResourceErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ResourceErrorCode", name: "ResourceErrorCode")
     ResourceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ResourceId", name: "ResourceId")
+    ResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ResourceName", name: "ResourceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResourceState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ResourceState", name: "ResourceState")
+    ResourceStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ResourceStatus", name: "ResourceStatus")
     ResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ResourceType", name: "ResourceType")
     ResponseStream = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.iotsitewise#ResponseStream", name: "ResponseStream", traits: {"smithy.api#streaming" => {}})
     RestrictedDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#RestrictedDescription", name: "RestrictedDescription", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[a-zA-Z0-9 _\\-\#$*!@]+$"})
-    RestrictedName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#RestrictedName", name: "RestrictedName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9 _\\-\#$*!@]+$"})
+    RestrictedName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#RestrictedName", name: "RestrictedName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9 _\\-\#$*!@.]+$"})
+    Result = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#Result", name: "Result", traits: {"smithy.api#sparse" => {}})
     ResultProperty = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ResultProperty", name: "ResultProperty", traits: {"smithy.api#length" => {"min" => 4, "max" => 67}, "smithy.api#pattern" => "^\\$\\{[a-z][a-z0-9_]*\\}$"})
     RetentionPeriod = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#RetentionPeriod", name: "RetentionPeriod")
     Row = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Row", name: "Row")
+    RowList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#RowList", name: "RowList")
     Rows = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#Rows", name: "Rows")
+    S3AccessPointSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#S3AccessPointSource", name: "S3AccessPointSource")
+    S3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#S3Uri", name: "S3Uri", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$"})
     SSOApplicationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#SSOApplicationId", name: "SSOApplicationId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[!-~]*$"})
     ScalarType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#ScalarType", name: "ScalarType")
     ScalarValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#ScalarValue", name: "ScalarValue")
+    SearchFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#SearchFilters", name: "SearchFilters")
+    SearchId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#SearchId", name: "SearchId", traits: {"smithy.api#length" => {"min" => 23, "max" => 36}, "smithy.api#pattern" => "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"})
+    SearchQueryStatement = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#SearchQueryStatement", name: "SearchQueryStatement", traits: {"smithy.api#length" => {"min" => 1, "max" => 5000}, "smithy.api#sensitive" => {}})
+    SearchResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#SearchResult", name: "SearchResult")
+    SearchResultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#SearchResultList", name: "SearchResultList")
+    SearchStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#SearchStatus", name: "SearchStatus")
+    SearchStatusFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#SearchStatusFilterList", name: "SearchStatusFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
+    SearchSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#SearchSummaries", name: "SearchSummaries")
+    SearchSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#SearchSummary", name: "SearchSummary")
+    SearchType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#SearchType", name: "SearchType")
+    SearchTypeFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#SearchTypeFilterList", name: "SearchTypeFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     SelectAll = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#SelectAll", name: "SelectAll", traits: {"smithy.api#pattern" => "^\\*$"})
     ServiceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ServiceUnavailableException", name: "ServiceUnavailableException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 503})
+    SessionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#SessionConfig", name: "SessionConfig")
     SiemensIE = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#SiemensIE", name: "SiemensIE")
     Source = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Source", name: "Source")
     SourceDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#SourceDetail", name: "SourceDetail")
+    StartPipelineExecutionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#StartPipelineExecutionRequest", name: "StartPipelineExecutionRequest")
+    StartPipelineExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#StartPipelineExecutionResponse", name: "StartPipelineExecutionResponse")
+    StartQueryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#StartQueryRequest", name: "StartQueryRequest")
+    StartQueryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#StartQueryResponse", name: "StartQueryResponse")
+    StartSearchRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#StartSearchRequest", name: "StartSearchRequest")
+    StartSearchResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#StartSearchResponse", name: "StartSearchResponse")
+    StorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#StorageClass", name: "StorageClass")
     StorageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#StorageType", name: "StorageType")
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#String", name: "String")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
@@ -569,13 +811,22 @@ module Aws::IoTSiteWise
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     TargetResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TargetResource", name: "TargetResource")
     TargetResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#TargetResourceType", name: "TargetResourceType")
+    TaskConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.iotsitewise#TaskConfiguration", name: "TaskConfiguration")
+    TaskSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#TaskSummaries", name: "TaskSummaries")
+    TaskSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TaskSummary", name: "TaskSummary")
     ThrottlingException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ThrottlingException", name: "ThrottlingException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429})
     TimeInNanos = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TimeInNanos", name: "TimeInNanos")
     TimeInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#TimeInSeconds", name: "TimeInSeconds", traits: {"smithy.api#range" => {"min" => 1, "max" => 9223372036854774}})
+    TimeInterval = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TimeInterval", name: "TimeInterval")
+    TimeIntervalList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#TimeIntervalList", name: "TimeIntervalList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     TimeOrdering = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#TimeOrdering", name: "TimeOrdering")
     TimeSeriesId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#TimeSeriesId", name: "TimeSeriesId", traits: {"smithy.api#length" => {"min" => 36, "max" => 73}})
+    TimeSeriesIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#TimeSeriesIdList", name: "TimeSeriesIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     TimeSeriesSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#TimeSeriesSummaries", name: "TimeSeriesSummaries")
     TimeSeriesSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TimeSeriesSummary", name: "TimeSeriesSummary")
+    TimeoutSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.iotsitewise#TimeoutSeconds", name: "TimeoutSeconds", traits: {"smithy.api#range" => {"min" => 60, "max" => 86400}})
+    TimeseriesItem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TimeseriesItem", name: "TimeseriesItem")
+    TimeseriesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#TimeseriesList", name: "TimeseriesList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.iotsitewise#Timestamp", name: "Timestamp")
     Timestamps = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#Timestamps", name: "Timestamps")
     TooManyTagsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TooManyTagsException", name: "TooManyTagsException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -584,6 +835,7 @@ module Aws::IoTSiteWise
     TransformProcessingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TransformProcessingConfig", name: "TransformProcessingConfig")
     TraversalDirection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#TraversalDirection", name: "TraversalDirection")
     TraversalType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#TraversalType", name: "TraversalType")
+    TrimSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TrimSettings", name: "TrimSettings")
     TumblingWindow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#TumblingWindow", name: "TumblingWindow")
     UnauthorizedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UnauthorizedException", name: "UnauthorizedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 401})
     Unlimited = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.iotsitewise#Unlimited", name: "Unlimited")
@@ -607,10 +859,16 @@ module Aws::IoTSiteWise
     UpdateGatewayCapabilityConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdateGatewayCapabilityConfigurationRequest", name: "UpdateGatewayCapabilityConfigurationRequest")
     UpdateGatewayCapabilityConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdateGatewayCapabilityConfigurationResponse", name: "UpdateGatewayCapabilityConfigurationResponse")
     UpdateGatewayRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdateGatewayRequest", name: "UpdateGatewayRequest")
+    UpdatePipelineRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdatePipelineRequest", name: "UpdatePipelineRequest")
+    UpdatePipelineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdatePipelineResponse", name: "UpdatePipelineResponse")
     UpdatePortalRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdatePortalRequest", name: "UpdatePortalRequest")
     UpdatePortalResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdatePortalResponse", name: "UpdatePortalResponse")
     UpdateProjectRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdateProjectRequest", name: "UpdateProjectRequest")
     UpdateProjectResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdateProjectResponse", name: "UpdateProjectResponse")
+    UpdateTaskRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdateTaskRequest", name: "UpdateTaskRequest")
+    UpdateTaskResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdateTaskResponse", name: "UpdateTaskResponse")
+    UpdateWorkspaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdateWorkspaceRequest", name: "UpdateWorkspaceRequest")
+    UpdateWorkspaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UpdateWorkspaceResponse", name: "UpdateWorkspaceResponse")
     Url = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#Url", name: "Url", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^(http|https)\\://\\S+$"})
     UserIdentity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#UserIdentity", name: "UserIdentity")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
@@ -618,8 +876,17 @@ module Aws::IoTSiteWise
     VariableValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#VariableValue", name: "VariableValue")
     Variant = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#Variant", name: "Variant")
     Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#Version", name: "Version", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#pattern" => "^(0|([1-9]{1}\\d*))$"})
+    VideoDataType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#VideoDataType", name: "VideoDataType")
     WarmTierRetentionPeriod = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#WarmTierRetentionPeriod", name: "WarmTierRetentionPeriod")
     WarmTierState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#WarmTierState", name: "WarmTierState")
+    WorkspaceEncryptionConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#WorkspaceEncryptionConfiguration", name: "WorkspaceEncryptionConfiguration")
+    WorkspaceEncryptionConfigurationInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#WorkspaceEncryptionConfigurationInfo", name: "WorkspaceEncryptionConfigurationInfo")
+    WorkspaceErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#WorkspaceErrorDetails", name: "WorkspaceErrorDetails")
+    WorkspaceName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.iotsitewise#WorkspaceName", name: "WorkspaceName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
+    WorkspaceState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.iotsitewise#WorkspaceState", name: "WorkspaceState")
+    WorkspaceStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#WorkspaceStatus", name: "WorkspaceStatus")
+    WorkspaceSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.iotsitewise#WorkspaceSummaries", name: "WorkspaceSummaries")
+    WorkspaceSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.iotsitewise#WorkspaceSummary", name: "WorkspaceSummary")
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
@@ -666,6 +933,18 @@ module Aws::IoTSiteWise
     Alarms.add_member(:alarm_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: IamArn, name: "alarmRoleArn", traits: {"smithy.api#required" => {}}))
     Alarms.add_member(:notification_lambda_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "notificationLambdaArn"))
     Alarms.type = Types::Alarms
+    Annotation.type = Types::Annotation
+    ApplicationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationSummary, name: "member"))
+    ApplicationStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ApplicationStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ApplicationStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ApplicationSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "id", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    ApplicationSummary.type = Types::ApplicationSummary
     AssetBindingValueFilter.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId", traits: {"smithy.api#required" => {}}))
     AssetBindingValueFilter.type = Types::AssetBindingValueFilter
     AssetCompositeModel.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
@@ -877,6 +1156,12 @@ module Aws::IoTSiteWise
     AssociateAssetsRequest.add_member(:child_asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "childAssetId", traits: {"smithy.api#required" => {}}))
     AssociateAssetsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     AssociateAssetsRequest.type = Types::AssociateAssetsRequest
+    AssociateDataSegmentEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateDataSegmentEntry, name: "member"))
+    AssociateDataSegmentEntry.add_member(:source_dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "sourceDatasetId", traits: {"smithy.api#required" => {}}))
+    AssociateDataSegmentEntry.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId", traits: {"smithy.api#required" => {}}))
+    AssociateDataSegmentEntry.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTimestamp", traits: {"smithy.api#required" => {}}))
+    AssociateDataSegmentEntry.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTimestamp", traits: {"smithy.api#required" => {}}))
+    AssociateDataSegmentEntry.type = Types::AssociateDataSegmentEntry
     AssociateTimeSeriesToAssetPropertyRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyAlias, name: "alias", traits: {"smithy.api#httpQuery" => "alias", "smithy.api#required" => {}}))
     AssociateTimeSeriesToAssetPropertyRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpQuery" => "assetId", "smithy.api#required" => {}}))
     AssociateTimeSeriesToAssetPropertyRequest.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "propertyId", traits: {"smithy.api#httpQuery" => "propertyId", "smithy.api#required" => {}}))
@@ -898,6 +1183,15 @@ module Aws::IoTSiteWise
     Attribute.type = Types::Attribute
     AuthMode.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM", traits: {"smithy.api#enumValue" => "IAM"}))
     AuthMode.add_member(:sso, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SSO", traits: {"smithy.api#enumValue" => "SSO"}))
+    BatchAssociateDataSegmentsToDatasetRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchAssociateDataSegmentsToDatasetRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    BatchAssociateDataSegmentsToDatasetRequest.add_member(:associate_data_segment_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateDataSegmentEntries, name: "associateDataSegmentEntries", traits: {"smithy.api#required" => {}}))
+    BatchAssociateDataSegmentsToDatasetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    BatchAssociateDataSegmentsToDatasetRequest.type = Types::BatchAssociateDataSegmentsToDatasetRequest
+    BatchAssociateDataSegmentsToDatasetResponse.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#required" => {}}))
+    BatchAssociateDataSegmentsToDatasetResponse.add_member(:dataset_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "datasetVersion", traits: {"smithy.api#required" => {}}))
+    BatchAssociateDataSegmentsToDatasetResponse.add_member(:failed_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDataSegmentAssociations, name: "failedAssociations", traits: {"smithy.api#required" => {}}))
+    BatchAssociateDataSegmentsToDatasetResponse.type = Types::BatchAssociateDataSegmentsToDatasetResponse
     BatchAssociateProjectAssetsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetErrorDetails, name: "member"))
     BatchAssociateProjectAssetsRequest.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "projectId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchAssociateProjectAssetsRequest.add_member(:asset_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IDs, name: "assetIds", traits: {"smithy.api#required" => {}}))
@@ -905,6 +1199,24 @@ module Aws::IoTSiteWise
     BatchAssociateProjectAssetsRequest.type = Types::BatchAssociateProjectAssetsRequest
     BatchAssociateProjectAssetsResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAssociateProjectAssetsErrors, name: "errors"))
     BatchAssociateProjectAssetsResponse.type = Types::BatchAssociateProjectAssetsResponse
+    BatchDeleteDatasetDataSegmentsRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchDeleteDatasetDataSegmentsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    BatchDeleteDatasetDataSegmentsRequest.add_member(:delete_data_segment_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDataSegmentEntries, name: "deleteDataSegmentEntries", traits: {"smithy.api#required" => {}}))
+    BatchDeleteDatasetDataSegmentsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    BatchDeleteDatasetDataSegmentsRequest.type = Types::BatchDeleteDatasetDataSegmentsRequest
+    BatchDeleteDatasetDataSegmentsResponse.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#required" => {}}))
+    BatchDeleteDatasetDataSegmentsResponse.add_member(:dataset_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "datasetVersion", traits: {"smithy.api#required" => {}}))
+    BatchDeleteDatasetDataSegmentsResponse.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDataSegmentDeletions, name: "errors", traits: {"smithy.api#required" => {}}))
+    BatchDeleteDatasetDataSegmentsResponse.type = Types::BatchDeleteDatasetDataSegmentsResponse
+    BatchDisassociateDataSegmentsFromDatasetRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    BatchDisassociateDataSegmentsFromDatasetRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    BatchDisassociateDataSegmentsFromDatasetRequest.add_member(:disassociate_data_segment_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateDataSegmentEntries, name: "disassociateDataSegmentEntries", traits: {"smithy.api#required" => {}}))
+    BatchDisassociateDataSegmentsFromDatasetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    BatchDisassociateDataSegmentsFromDatasetRequest.type = Types::BatchDisassociateDataSegmentsFromDatasetRequest
+    BatchDisassociateDataSegmentsFromDatasetResponse.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#required" => {}}))
+    BatchDisassociateDataSegmentsFromDatasetResponse.add_member(:dataset_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "datasetVersion", traits: {"smithy.api#required" => {}}))
+    BatchDisassociateDataSegmentsFromDatasetResponse.add_member(:failed_disassociations, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDataSegmentDisassociations, name: "failedDisassociations", traits: {"smithy.api#required" => {}}))
+    BatchDisassociateDataSegmentsFromDatasetResponse.type = Types::BatchDisassociateDataSegmentsFromDatasetResponse
     BatchDisassociateProjectAssetsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetErrorDetails, name: "member"))
     BatchDisassociateProjectAssetsRequest.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "projectId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     BatchDisassociateProjectAssetsRequest.add_member(:asset_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: IDs, name: "assetIds", traits: {"smithy.api#required" => {}}))
@@ -1052,6 +1364,25 @@ module Aws::IoTSiteWise
     BatchPutAssetPropertyValueResponse.add_member(:error_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchPutAssetPropertyErrorEntries, name: "errorEntries", traits: {"smithy.api#required" => {}}))
     BatchPutAssetPropertyValueResponse.type = Types::BatchPutAssetPropertyValueResponse
     BindingValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationModelDataBindingValue, name: "member"))
+    CancelEnrichmentJobRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelEnrichmentJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelEnrichmentJobRequest.type = Types::CancelEnrichmentJobRequest
+    CancelEnrichmentJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "jobId", traits: {"smithy.api#required" => {}}))
+    CancelEnrichmentJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentJobStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    CancelEnrichmentJobResponse.type = Types::CancelEnrichmentJobResponse
+    CancelPipelineExecutionRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelPipelineExecutionRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelPipelineExecutionRequest.add_member(:pipeline_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "pipelineExecutionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelPipelineExecutionRequest.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: CancelPipelineExecutionRequestReasonString, name: "reason"))
+    CancelPipelineExecutionRequest.type = Types::CancelPipelineExecutionRequest
+    CancelPipelineExecutionResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionState, name: "state", traits: {"smithy.api#required" => {}}))
+    CancelPipelineExecutionResponse.type = Types::CancelPipelineExecutionResponse
+    CancelQueryRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelQueryRequest.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CancelQueryRequest.type = Types::CancelQueryRequest
+    CancelQueryResponse.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId", traits: {"smithy.api#required" => {}}))
+    CancelQueryResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    CancelQueryResponse.type = Types::CancelQueryResponse
     CapabilitySyncStatus.add_member(:in_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_SYNC", traits: {"smithy.api#enumValue" => "IN_SYNC"}))
     CapabilitySyncStatus.add_member(:out_of_sync, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OUT_OF_SYNC", traits: {"smithy.api#enumValue" => "OUT_OF_SYNC"}))
     CapabilitySyncStatus.add_member(:sync_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYNC_FAILED", traits: {"smithy.api#enumValue" => "SYNC_FAILED"}))
@@ -1064,6 +1395,10 @@ module Aws::IoTSiteWise
     ColumnInfo.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "name"))
     ColumnInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnType, name: "type"))
     ColumnInfo.type = Types::ColumnInfo
+    ColumnInformation.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnLabel, name: "name", traits: {"smithy.api#required" => {}}))
+    ColumnInformation.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnDataType, name: "type", traits: {"smithy.api#required" => {}}))
+    ColumnInformation.type = Types::ColumnInformation
+    ColumnInformationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnInformation, name: "member"))
     ColumnName.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALIAS", traits: {"smithy.api#enumValue" => "ALIAS"}))
     ColumnName.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSET_ID", traits: {"smithy.api#enumValue" => "ASSET_ID"}))
     ColumnName.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROPERTY_ID", traits: {"smithy.api#enumValue" => "PROPERTY_ID"}))
@@ -1076,6 +1411,7 @@ module Aws::IoTSiteWise
     ColumnType.add_member(:scalar_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalarType, name: "scalarType"))
     ColumnType.type = Types::ColumnType
     ColumnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnInfo, name: "member"))
+    CommandList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member"))
     CompositeModelProperty.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     CompositeModelProperty.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "type", traits: {"smithy.api#required" => {}}))
     CompositeModelProperty.add_member(:asset_property, ::Smithy::Schema::Shapes::MemberShape.new(target: Property, name: "assetProperty", traits: {"smithy.api#required" => {}}))
@@ -1135,6 +1471,45 @@ module Aws::IoTSiteWise
     ComputationModelType.add_member(:anomaly_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANOMALY_DETECTION", traits: {"smithy.api#enumValue" => "ANOMALY_DETECTION"}))
     ComputeLocation.add_member(:edge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EDGE", traits: {"smithy.api#enumValue" => "EDGE"}))
     ComputeLocation.add_member(:cloud, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUD", traits: {"smithy.api#enumValue" => "CLOUD"}))
+    ComputeNode.add_member(:compute_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "computeNodeName", traits: {"smithy.api#required" => {}}))
+    ComputeNode.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "taskName", traits: {"smithy.api#required" => {}}))
+    ComputeNode.add_member(:environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariablesMap, name: "environmentVariables"))
+    ComputeNode.add_member(:depends_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeNameList, name: "dependsOn"))
+    ComputeNode.type = Types::ComputeNode
+    ComputeNodeEnvironmentVariablesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "key"))
+    ComputeNodeEnvironmentVariablesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariablesMap, name: "value"))
+    ComputeNodeErrorCode.add_member(:validation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
+    ComputeNodeErrorCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
+    ComputeNodeErrorCode.add_member(:execution_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_ERROR", traits: {"smithy.api#enumValue" => "EXECUTION_ERROR"}))
+    ComputeNodeErrorCode.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
+    ComputeNodeExecutionDetails.add_member(:compute_node_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "computeNodeName", traits: {"smithy.api#required" => {}}))
+    ComputeNodeExecutionDetails.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "taskName", traits: {"smithy.api#required" => {}}))
+    ComputeNodeExecutionDetails.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "taskArn", traits: {"smithy.api#required" => {}}))
+    ComputeNodeExecutionDetails.add_member(:task_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "taskVersion", traits: {"smithy.api#required" => {}}))
+    ComputeNodeExecutionDetails.add_member(:depends_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeNameList, name: "dependsOn", traits: {"smithy.api#required" => {}}))
+    ComputeNodeExecutionDetails.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeExecutionStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ComputeNodeExecutionDetails.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime"))
+    ComputeNodeExecutionDetails.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime"))
+    ComputeNodeExecutionDetails.add_member(:execution_environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEnvironmentVariablesMap, name: "executionEnvironmentVariables"))
+    ComputeNodeExecutionDetails.add_member(:execution_mounts, ::Smithy::Schema::Shapes::MemberShape.new(target: MountList, name: "executionMounts"))
+    ComputeNodeExecutionDetails.type = Types::ComputeNodeExecutionDetails
+    ComputeNodeExecutionDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeExecutionDetails, name: "member"))
+    ComputeNodeExecutionState.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
+    ComputeNodeExecutionState.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
+    ComputeNodeExecutionState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    ComputeNodeExecutionState.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    ComputeNodeExecutionState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ComputeNodeExecutionStateDetails.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
+    ComputeNodeExecutionStateDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    ComputeNodeExecutionStateDetails.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedErrorList, name: "details"))
+    ComputeNodeExecutionStateDetails.type = Types::ComputeNodeExecutionStateDetails
+    ComputeNodeExecutionStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeExecutionState, name: "state", traits: {"smithy.api#required" => {}}))
+    ComputeNodeExecutionStatus.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeExecutionStateDetails, name: "stateDetails"))
+    ComputeNodeExecutionStatus.type = Types::ComputeNodeExecutionStatus
+    ComputeNodeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNode, name: "member"))
+    ComputeNodeMountsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "key"))
+    ComputeNodeMountsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MountList, name: "value"))
+    ComputeNodeNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "member"))
     ConfigurationErrorDetails.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
     ConfigurationErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ConfigurationErrorDetails.type = Types::ConfigurationErrorDetails
@@ -1148,6 +1523,16 @@ module Aws::IoTSiteWise
     ConflictingOperationException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ConflictingOperationException.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     ConflictingOperationException.type = Types::ConflictingOperationException
+    ContainerTaskConfiguration.add_member(:ecr_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: EcrUri, name: "ecrUri", traits: {"smithy.api#required" => {}}))
+    ContainerTaskConfiguration.add_member(:task_execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: IamRoleArn, name: "taskExecutionRole", traits: {"smithy.api#required" => {}}))
+    ContainerTaskConfiguration.add_member(:processing_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingType, name: "processingType", traits: {"smithy.api#required" => {}}))
+    ContainerTaskConfiguration.add_member(:processing_unit, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingUnit, name: "processingUnit", traits: {"smithy.api#required" => {}}))
+    ContainerTaskConfiguration.add_member(:ephemeral_storage_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemeralStorageConfiguration, name: "ephemeralStorageConfiguration"))
+    ContainerTaskConfiguration.add_member(:command, ::Smithy::Schema::Shapes::MemberShape.new(target: CommandList, name: "command"))
+    ContainerTaskConfiguration.add_member(:timeout_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeoutSeconds, name: "timeoutSeconds"))
+    ContainerTaskConfiguration.add_member(:environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariablesMap, name: "environmentVariables"))
+    ContainerTaskConfiguration.add_member(:mounts, ::Smithy::Schema::Shapes::MemberShape.new(target: MountList, name: "mounts"))
+    ContainerTaskConfiguration.type = Types::ContainerTaskConfiguration
     Content.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "text"))
     Content.type = Types::Content
     CoreDeviceOperatingSystem.add_member(:linux_aarch64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINUX_AARCH64", traits: {"smithy.api#enumValue" => "LINUX_AARCH64"}))
@@ -1162,6 +1547,19 @@ module Aws::IoTSiteWise
     CreateAccessPolicyResponse.add_member(:access_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "accessPolicyId", traits: {"smithy.api#required" => {}}))
     CreateAccessPolicyResponse.add_member(:access_policy_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "accessPolicyArn", traits: {"smithy.api#required" => {}}))
     CreateAccessPolicyResponse.type = Types::CreateAccessPolicyResponse
+    CreateApplicationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateApplicationRequest.add_member(:idc_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "idcInstanceArn", traits: {"smithy.api#required" => {}}))
+    CreateApplicationRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    CreateApplicationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateApplicationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    CreateApplicationRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateApplicationRequest.type = Types::CreateApplicationRequest
+    CreateApplicationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
+    CreateApplicationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "id", traits: {"smithy.api#required" => {}}))
+    CreateApplicationResponse.add_member(:dns_subdomain, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsSubdomain, name: "dnsSubdomain", traits: {"smithy.api#required" => {}}))
+    CreateApplicationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name", traits: {"smithy.api#required" => {}}))
+    CreateApplicationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    CreateApplicationResponse.type = Types::CreateApplicationResponse
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "assetModelCompositeModelExternalId"))
     CreateAssetModelCompositeModelRequest.add_member(:parent_asset_model_composite_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "parentAssetModelCompositeModelId"))
@@ -1179,6 +1577,7 @@ module Aws::IoTSiteWise
     CreateAssetModelCompositeModelResponse.add_member(:asset_model_composite_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelCompositeModelId", traits: {"smithy.api#required" => {}}))
     CreateAssetModelCompositeModelResponse.add_member(:asset_model_composite_model_path, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModelPath, name: "assetModelCompositeModelPath", traits: {"smithy.api#required" => {}}))
     CreateAssetModelCompositeModelResponse.add_member(:asset_model_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelStatus, name: "assetModelStatus", traits: {"smithy.api#required" => {}}))
+    CreateAssetModelCompositeModelResponse.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelId"))
     CreateAssetModelCompositeModelResponse.type = Types::CreateAssetModelCompositeModelResponse
     CreateAssetModelRequest.add_member(:asset_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "assetModelName", traits: {"smithy.api#required" => {}}))
     CreateAssetModelRequest.add_member(:asset_model_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelType, name: "assetModelType"))
@@ -1207,16 +1606,18 @@ module Aws::IoTSiteWise
     CreateAssetResponse.add_member(:asset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "assetArn", traits: {"smithy.api#required" => {}}))
     CreateAssetResponse.add_member(:asset_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetStatus, name: "assetStatus", traits: {"smithy.api#required" => {}}))
     CreateAssetResponse.type = Types::CreateAssetResponse
-    CreateBulkImportJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "jobName", traits: {"smithy.api#required" => {}}))
+    CreateBulkImportJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BulkImportJobName, name: "jobName", traits: {"smithy.api#required" => {}}))
     CreateBulkImportJobRequest.add_member(:job_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "jobRoleArn", traits: {"smithy.api#required" => {}}))
     CreateBulkImportJobRequest.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: Files, name: "files", traits: {"smithy.api#required" => {}}))
     CreateBulkImportJobRequest.add_member(:error_report_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorReportLocation, name: "errorReportLocation", traits: {"smithy.api#required" => {}}))
-    CreateBulkImportJobRequest.add_member(:job_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfiguration, name: "jobConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateBulkImportJobRequest.add_member(:job_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfiguration, name: "jobConfiguration"))
     CreateBulkImportJobRequest.add_member(:adaptive_ingestion, ::Smithy::Schema::Shapes::MemberShape.new(target: AdaptiveIngestion, name: "adaptiveIngestion"))
     CreateBulkImportJobRequest.add_member(:delete_files_after_import, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFilesAfterImport, name: "deleteFilesAfterImport"))
+    CreateBulkImportJobRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId"))
+    CreateBulkImportJobRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName"))
     CreateBulkImportJobRequest.type = Types::CreateBulkImportJobRequest
     CreateBulkImportJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "jobId", traits: {"smithy.api#required" => {}}))
-    CreateBulkImportJobResponse.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "jobName", traits: {"smithy.api#required" => {}}))
+    CreateBulkImportJobResponse.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: BulkImportJobName, name: "jobName", traits: {"smithy.api#required" => {}}))
     CreateBulkImportJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "jobStatus", traits: {"smithy.api#required" => {}}))
     CreateBulkImportJobResponse.type = Types::CreateBulkImportJobResponse
     CreateComputationModelRequest.add_member(:computation_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedName, name: "computationModelName", traits: {"smithy.api#required" => {}}))
@@ -1240,9 +1641,22 @@ module Aws::IoTSiteWise
     CreateDashboardResponse.add_member(:dashboard_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "dashboardId", traits: {"smithy.api#required" => {}}))
     CreateDashboardResponse.add_member(:dashboard_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "dashboardArn", traits: {"smithy.api#required" => {}}))
     CreateDashboardResponse.type = Types::CreateDashboardResponse
+    CreateDatasetExportJobRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateDatasetExportJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateDatasetExportJobRequest.add_member(:destination_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "destinationS3Uri", traits: {"smithy.api#required" => {}}))
+    CreateDatasetExportJobRequest.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInput, name: "input", traits: {"smithy.api#required" => {}}))
+    CreateDatasetExportJobRequest.add_member(:error_report_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportErrorReportLocation, name: "errorReportLocation", traits: {"smithy.api#required" => {}}))
+    CreateDatasetExportJobRequest.type = Types::CreateDatasetExportJobRequest
+    CreateDatasetExportJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetExportJobId, name: "jobId", traits: {"smithy.api#required" => {}}))
+    CreateDatasetExportJobResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    CreateDatasetExportJobResponse.type = Types::CreateDatasetExportJobResponse
     CreateDatasetRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId"))
     CreateDatasetRequest.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedName, name: "datasetName", traits: {"smithy.api#required" => {}}))
-    CreateDatasetRequest.add_member(:dataset_description, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedDescription, name: "datasetDescription"))
+    CreateDatasetRequest.add_member(:dataset_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "datasetDescription"))
+    CreateDatasetRequest.add_member(:dataset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetTypeEnum, name: "datasetType"))
+    CreateDatasetRequest.add_member(:dataset_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetConfig, name: "datasetConfig"))
+    CreateDatasetRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName"))
+    CreateDatasetRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
     CreateDatasetRequest.add_member(:dataset_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSource, name: "datasetSource", traits: {"smithy.api#required" => {}}))
     CreateDatasetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateDatasetRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
@@ -1251,6 +1665,14 @@ module Aws::IoTSiteWise
     CreateDatasetResponse.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "datasetArn", traits: {"smithy.api#required" => {}}))
     CreateDatasetResponse.add_member(:dataset_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatus, name: "datasetStatus", traits: {"smithy.api#required" => {}}))
     CreateDatasetResponse.type = Types::CreateDatasetResponse
+    CreateEnrichmentJobRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateEnrichmentJobRequest.add_member(:job_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentJobConfiguration, name: "jobConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateEnrichmentJobRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateEnrichmentJobRequest.type = Types::CreateEnrichmentJobRequest
+    CreateEnrichmentJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "jobId", traits: {"smithy.api#required" => {}}))
+    CreateEnrichmentJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentJobStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    CreateEnrichmentJobResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    CreateEnrichmentJobResponse.type = Types::CreateEnrichmentJobResponse
     CreateGatewayRequest.add_member(:gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayName, name: "gatewayName", traits: {"smithy.api#required" => {}}))
     CreateGatewayRequest.add_member(:gateway_platform, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayPlatform, name: "gatewayPlatform", traits: {"smithy.api#required" => {}}))
     CreateGatewayRequest.add_member(:gateway_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayVersion, name: "gatewayVersion"))
@@ -1259,6 +1681,19 @@ module Aws::IoTSiteWise
     CreateGatewayResponse.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "gatewayId", traits: {"smithy.api#required" => {}}))
     CreateGatewayResponse.add_member(:gateway_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "gatewayArn", traits: {"smithy.api#required" => {}}))
     CreateGatewayResponse.type = Types::CreateGatewayResponse
+    CreatePipelineRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreatePipelineRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#required" => {}}))
+    CreatePipelineRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    CreatePipelineRequest.add_member(:environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariablesMap, name: "environmentVariables"))
+    CreatePipelineRequest.add_member(:computations, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeList, name: "computations", traits: {"smithy.api#required" => {}}))
+    CreatePipelineRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreatePipelineRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreatePipelineRequest.type = Types::CreatePipelineRequest
+    CreatePipelineResponse.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#required" => {}}))
+    CreatePipelineResponse.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "pipelineArn", traits: {"smithy.api#required" => {}}))
+    CreatePipelineResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
+    CreatePipelineResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    CreatePipelineResponse.type = Types::CreatePipelineResponse
     CreatePortalRequest.add_member(:portal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "portalName", traits: {"smithy.api#required" => {}}))
     CreatePortalRequest.add_member(:portal_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "portalDescription"))
     CreatePortalRequest.add_member(:portal_contact_email, ::Smithy::Schema::Shapes::MemberShape.new(target: Email, name: "portalContactEmail", traits: {"smithy.api#required" => {}}))
@@ -1287,6 +1722,28 @@ module Aws::IoTSiteWise
     CreateProjectResponse.add_member(:project_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "projectId", traits: {"smithy.api#required" => {}}))
     CreateProjectResponse.add_member(:project_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "projectArn", traits: {"smithy.api#required" => {}}))
     CreateProjectResponse.type = Types::CreateProjectResponse
+    CreateTaskRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateTaskRequest.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "taskName", traits: {"smithy.api#required" => {}}))
+    CreateTaskRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    CreateTaskRequest.add_member(:task_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskConfiguration, name: "taskConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateTaskRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateTaskRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateTaskRequest.type = Types::CreateTaskRequest
+    CreateTaskResponse.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "taskName", traits: {"smithy.api#required" => {}}))
+    CreateTaskResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "taskArn", traits: {"smithy.api#required" => {}}))
+    CreateTaskResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
+    CreateTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    CreateTaskResponse.type = Types::CreateTaskResponse
+    CreateWorkspaceRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    CreateWorkspaceRequest.add_member(:workspace_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "workspaceDescription"))
+    CreateWorkspaceRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceEncryptionConfiguration, name: "encryptionConfiguration", traits: {"smithy.api#required" => {}}))
+    CreateWorkspaceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateWorkspaceRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateWorkspaceRequest.type = Types::CreateWorkspaceRequest
+    CreateWorkspaceResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    CreateWorkspaceResponse.add_member(:workspace_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "workspaceArn", traits: {"smithy.api#required" => {}}))
+    CreateWorkspaceResponse.add_member(:workspace_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceStatus, name: "workspaceStatus", traits: {"smithy.api#required" => {}}))
+    CreateWorkspaceResponse.type = Types::CreateWorkspaceResponse
     Csv.add_member(:column_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnNames, name: "columnNames", traits: {"smithy.api#required" => {}}))
     Csv.type = Types::Csv
     CustomerManagedS3Storage.add_member(:s3_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "s3ResourceArn", traits: {"smithy.api#required" => {}}))
@@ -1307,15 +1764,67 @@ module Aws::IoTSiteWise
     DataBindingValueFilter.add_member(:asset_property, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyBindingValueFilter, name: "assetProperty"))
     DataBindingValueFilter.add_member(:asset_model_property, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelPropertyBindingValueFilter, name: "assetModelProperty"))
     DataBindingValueFilter.type = Types::DataBindingValueFilter
+    DataSegmentEnrichment.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DataSegmentEnrichment.add_member(:last_enriched_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastEnrichedAt"))
+    DataSegmentEnrichment.type = Types::DataSegmentEnrichment
+    DataSegmentErrorCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
+    DataSegmentErrorCode.add_member(:validation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
+    DataSegmentErrorCode.add_member(:resource_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_NOT_FOUND", traits: {"smithy.api#enumValue" => "RESOURCE_NOT_FOUND"}))
+    DataSegmentErrorCode.add_member(:limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "LIMIT_EXCEEDED"}))
+    DataSegmentErrorCode.add_member(:conflicting_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONFLICTING_OPERATION", traits: {"smithy.api#enumValue" => "CONFLICTING_OPERATION"}))
+    DataSegmentRelationshipSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentRelationshipSummary, name: "member"))
+    DataSegmentRelationshipSummary.add_member(:target_dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "targetDatasetId", traits: {"smithy.api#required" => {}}))
+    DataSegmentRelationshipSummary.add_member(:source_dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "sourceDatasetId", traits: {"smithy.api#required" => {}}))
+    DataSegmentRelationshipSummary.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId", traits: {"smithy.api#required" => {}}))
+    DataSegmentRelationshipSummary.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTimestamp", traits: {"smithy.api#required" => {}}))
+    DataSegmentRelationshipSummary.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTimestamp", traits: {"smithy.api#required" => {}}))
+    DataSegmentRelationshipSummary.type = Types::DataSegmentRelationshipSummary
+    DataSegmentSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentSummary, name: "member"))
+    DataSegmentSummary.add_member(:source_dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "sourceDatasetId", traits: {"smithy.api#required" => {}}))
+    DataSegmentSummary.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId", traits: {"smithy.api#required" => {}}))
+    DataSegmentSummary.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTimestamp", traits: {"smithy.api#required" => {}}))
+    DataSegmentSummary.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTimestamp", traits: {"smithy.api#required" => {}}))
+    DataSegmentSummary.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyAlias, name: "alias", traits: {"smithy.api#required" => {}}))
+    DataSegmentSummary.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyDataType, name: "dataType", traits: {"smithy.api#required" => {}}))
+    DataSegmentSummary.add_member(:enrichment, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentEnrichment, name: "enrichment"))
+    DataSegmentSummary.type = Types::DataSegmentSummary
+    DataSetIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetId, name: "member"))
     DataSetReference.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "datasetArn"))
     DataSetReference.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source"))
     DataSetReference.type = Types::DataSetReference
+    DatasetConfig.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionConfig, name: "session"))
+    DatasetConfig.type = Types::DatasetConfig
+    DatasetEnrichment.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEnrichmentEntry, name: "video"))
+    DatasetEnrichment.type = Types::DatasetEnrichment
+    DatasetEnrichmentEntry.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEnrichmentStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DatasetEnrichmentEntry.add_member(:last_enriched_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastEnrichedAt"))
+    DatasetEnrichmentEntry.type = Types::DatasetEnrichmentEntry
+    DatasetEnrichmentStatus.add_member(:fully_enriched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULLY_ENRICHED", traits: {"smithy.api#enumValue" => "FULLY_ENRICHED"}))
+    DatasetEnrichmentStatus.add_member(:partially_enriched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARTIALLY_ENRICHED", traits: {"smithy.api#enumValue" => "PARTIALLY_ENRICHED"}))
+    DatasetEnrichmentStatus.add_member(:not_enriched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_ENRICHED", traits: {"smithy.api#enumValue" => "NOT_ENRICHED"}))
+    DatasetExportJobFilter.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "ALL"}))
+    DatasetExportJobFilter.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    DatasetExportJobFilter.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    DatasetExportJobFilter.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    DatasetExportJobFilter.add_member(:completed_with_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_WITH_ERRORS", traits: {"smithy.api#enumValue" => "COMPLETED_WITH_ERRORS"}))
+    DatasetExportJobFilter.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DatasetExportJobStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    DatasetExportJobStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    DatasetExportJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    DatasetExportJobStatus.add_member(:completed_with_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_WITH_ERRORS", traits: {"smithy.api#enumValue" => "COMPLETED_WITH_ERRORS"}))
+    DatasetExportJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    DatasetItem.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetId, name: "datasetId", traits: {"smithy.api#required" => {}}))
+    DatasetItem.add_member(:trim_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TrimSettings, name: "trimSettings"))
+    DatasetItem.add_member(:export_data_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDataTypeList, name: "exportDataTypes"))
+    DatasetItem.type = Types::DatasetItem
     DatasetSource.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSourceType, name: "sourceType", traits: {"smithy.api#required" => {}}))
     DatasetSource.add_member(:source_format, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSourceFormat, name: "sourceFormat", traits: {"smithy.api#required" => {}}))
     DatasetSource.add_member(:source_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceDetail, name: "sourceDetail"))
     DatasetSource.type = Types::DatasetSource
     DatasetSourceFormat.add_member(:knowledge_base, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KNOWLEDGE_BASE", traits: {"smithy.api#enumValue" => "KNOWLEDGE_BASE"}))
+    DatasetSourceFormat.add_member(:timeseries, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESERIES", traits: {"smithy.api#enumValue" => "TIMESERIES"}))
     DatasetSourceType.add_member(:kendra, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KENDRA", traits: {"smithy.api#enumValue" => "KENDRA"}))
+    DatasetSourceType.add_member(:sitewise, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SITEWISE", traits: {"smithy.api#enumValue" => "SITEWISE"}))
     DatasetState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
     DatasetState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
     DatasetState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
@@ -1328,11 +1837,17 @@ module Aws::IoTSiteWise
     DatasetSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     DatasetSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
     DatasetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedName, name: "name", traits: {"smithy.api#required" => {}}))
-    DatasetSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedDescription, name: "description", traits: {"smithy.api#required" => {}}))
+    DatasetSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description", traits: {"smithy.api#required" => {}}))
+    DatasetSummary.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSourceType, name: "sourceType"))
+    DatasetSummary.add_member(:dataset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetTypeEnum, name: "datasetType"))
     DatasetSummary.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate", traits: {"smithy.api#required" => {}}))
     DatasetSummary.add_member(:last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdateDate", traits: {"smithy.api#required" => {}}))
     DatasetSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DatasetSummary.add_member(:enrichment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEnrichment, name: "enrichmentStatus"))
     DatasetSummary.type = Types::DatasetSummary
+    DatasetTypeEnum.add_member(:session, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SESSION", traits: {"smithy.api#enumValue" => "SESSION"}))
+    DatasetTypeEnum.add_member(:curated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURATED", traits: {"smithy.api#enumValue" => "CURATED"}))
+    DatasetTypeEnum.add_member(:external, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXTERNAL", traits: {"smithy.api#enumValue" => "EXTERNAL"}))
     Datum.add_member(:scalar_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ScalarValue, name: "scalarValue"))
     Datum.add_member(:array_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DatumList, name: "arrayValue"))
     Datum.add_member(:row_value, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "rowValue"))
@@ -1343,6 +1858,10 @@ module Aws::IoTSiteWise
     DeleteAccessPolicyRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteAccessPolicyRequest.type = Types::DeleteAccessPolicyRequest
     DeleteAccessPolicyResponse.type = Types::DeleteAccessPolicyResponse
+    DeleteApplicationRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteApplicationRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteApplicationRequest.type = Types::DeleteApplicationRequest
+    DeleteApplicationResponse.type = Types::DeleteApplicationResponse
     DeleteAssetModelCompositeModelRequest.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetModelCompositeModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAssetModelCompositeModelRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
@@ -1351,6 +1870,7 @@ module Aws::IoTSiteWise
     DeleteAssetModelCompositeModelRequest.add_member(:match_for_version_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelVersionType, name: "matchForVersionType", traits: {"smithy.api#httpHeader" => "Match-For-Version-Type"}))
     DeleteAssetModelCompositeModelRequest.type = Types::DeleteAssetModelCompositeModelRequest
     DeleteAssetModelCompositeModelResponse.add_member(:asset_model_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelStatus, name: "assetModelStatus", traits: {"smithy.api#required" => {}}))
+    DeleteAssetModelCompositeModelResponse.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelId"))
     DeleteAssetModelCompositeModelResponse.type = Types::DeleteAssetModelCompositeModelResponse
     DeleteAssetModelInterfaceRelationshipRequest.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAssetModelInterfaceRelationshipRequest.add_member(:interface_asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "interfaceAssetModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1367,11 +1887,13 @@ module Aws::IoTSiteWise
     DeleteAssetModelRequest.add_member(:if_none_match, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectAll, name: "ifNoneMatch", traits: {"smithy.api#httpHeader" => "If-None-Match"}))
     DeleteAssetModelRequest.add_member(:match_for_version_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelVersionType, name: "matchForVersionType", traits: {"smithy.api#httpHeader" => "Match-For-Version-Type"}))
     DeleteAssetModelRequest.type = Types::DeleteAssetModelRequest
+    DeleteAssetModelResponse.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelId"))
     DeleteAssetModelResponse.add_member(:asset_model_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelStatus, name: "assetModelStatus", traits: {"smithy.api#required" => {}}))
     DeleteAssetModelResponse.type = Types::DeleteAssetModelResponse
     DeleteAssetRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAssetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteAssetRequest.type = Types::DeleteAssetRequest
+    DeleteAssetResponse.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId"))
     DeleteAssetResponse.add_member(:asset_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetStatus, name: "assetStatus", traits: {"smithy.api#required" => {}}))
     DeleteAssetResponse.type = Types::DeleteAssetResponse
     DeleteComputationModelRequest.add_member(:computation_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "computationModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -1383,13 +1905,24 @@ module Aws::IoTSiteWise
     DeleteDashboardRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteDashboardRequest.type = Types::DeleteDashboardRequest
     DeleteDashboardResponse.type = Types::DeleteDashboardResponse
+    DeleteDataSegmentEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteDataSegmentEntry, name: "member"))
+    DeleteDataSegmentEntry.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "timeSeriesId", traits: {"smithy.api#required" => {}}))
+    DeleteDataSegmentEntry.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTimestamp", traits: {"smithy.api#required" => {}}))
+    DeleteDataSegmentEntry.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTimestamp", traits: {"smithy.api#required" => {}}))
+    DeleteDataSegmentEntry.type = Types::DeleteDataSegmentEntry
     DeleteDatasetRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteDatasetRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName"}))
     DeleteDatasetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteDatasetRequest.type = Types::DeleteDatasetRequest
     DeleteDatasetResponse.add_member(:dataset_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatus, name: "datasetStatus", traits: {"smithy.api#required" => {}}))
     DeleteDatasetResponse.type = Types::DeleteDatasetResponse
     DeleteGatewayRequest.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "gatewayId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteGatewayRequest.type = Types::DeleteGatewayRequest
+    DeletePipelineRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeletePipelineRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeletePipelineRequest.type = Types::DeletePipelineRequest
+    DeletePipelineResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DeletePipelineResponse.type = Types::DeletePipelineResponse
     DeletePortalRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "portalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeletePortalRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeletePortalRequest.type = Types::DeletePortalRequest
@@ -1399,11 +1932,22 @@ module Aws::IoTSiteWise
     DeleteProjectRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteProjectRequest.type = Types::DeleteProjectRequest
     DeleteProjectResponse.type = Types::DeleteProjectResponse
+    DeleteTaskRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteTaskRequest.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "taskName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteTaskRequest.type = Types::DeleteTaskRequest
+    DeleteTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DeleteTaskResponse.type = Types::DeleteTaskResponse
     DeleteTimeSeriesRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyAlias, name: "alias", traits: {"smithy.api#httpQuery" => "alias"}))
     DeleteTimeSeriesRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpQuery" => "assetId"}))
     DeleteTimeSeriesRequest.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "propertyId", traits: {"smithy.api#httpQuery" => "propertyId"}))
     DeleteTimeSeriesRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    DeleteTimeSeriesRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName"}))
     DeleteTimeSeriesRequest.type = Types::DeleteTimeSeriesRequest
+    DeleteWorkspaceRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteWorkspaceRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
+    DeleteWorkspaceRequest.type = Types::DeleteWorkspaceRequest
+    DeleteWorkspaceResponse.add_member(:workspace_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceStatus, name: "workspaceStatus", traits: {"smithy.api#required" => {}}))
+    DeleteWorkspaceResponse.type = Types::DeleteWorkspaceResponse
     DescribeAccessPolicyRequest.add_member(:access_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "accessPolicyId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAccessPolicyRequest.type = Types::DescribeAccessPolicyRequest
     DescribeAccessPolicyResponse.add_member(:access_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "accessPolicyId", traits: {"smithy.api#required" => {}}))
@@ -1423,6 +1967,20 @@ module Aws::IoTSiteWise
     DescribeActionResponse.add_member(:execution_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "executionTime", traits: {"smithy.api#required" => {}}))
     DescribeActionResponse.add_member(:resolve_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolveTo, name: "resolveTo"))
     DescribeActionResponse.type = Types::DescribeActionResponse
+    DescribeApplicationRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeApplicationRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "id", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeApplicationRequest.type = Types::DescribeApplicationRequest
+    DescribeApplicationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationResponse.add_member(:dns_subdomain, ::Smithy::Schema::Shapes::MemberShape.new(target: DnsSubdomain, name: "dnsSubdomain", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationDescription, name: "description"))
+    DescribeApplicationResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationId, name: "id", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationResponse.add_member(:idc_application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "idcApplicationArn", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "name", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    DescribeApplicationResponse.type = Types::DescribeApplicationResponse
     DescribeAssetCompositeModelRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAssetCompositeModelRequest.add_member(:asset_composite_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetCompositeModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeAssetCompositeModelRequest.type = Types::DescribeAssetCompositeModelRequest
@@ -1510,6 +2068,7 @@ module Aws::IoTSiteWise
     DescribeAssetResponse.add_member(:asset_composite_model_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetCompositeModelSummaries, name: "assetCompositeModelSummaries"))
     DescribeAssetResponse.type = Types::DescribeAssetResponse
     DescribeBulkImportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeBulkImportJobRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName"}))
     DescribeBulkImportJobRequest.type = Types::DescribeBulkImportJobRequest
     DescribeBulkImportJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "jobId", traits: {"smithy.api#required" => {}}))
     DescribeBulkImportJobResponse.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "jobName", traits: {"smithy.api#required" => {}}))
@@ -1517,11 +2076,13 @@ module Aws::IoTSiteWise
     DescribeBulkImportJobResponse.add_member(:job_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "jobRoleArn", traits: {"smithy.api#required" => {}}))
     DescribeBulkImportJobResponse.add_member(:files, ::Smithy::Schema::Shapes::MemberShape.new(target: Files, name: "files", traits: {"smithy.api#required" => {}}))
     DescribeBulkImportJobResponse.add_member(:error_report_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorReportLocation, name: "errorReportLocation", traits: {"smithy.api#required" => {}}))
-    DescribeBulkImportJobResponse.add_member(:job_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfiguration, name: "jobConfiguration", traits: {"smithy.api#required" => {}}))
+    DescribeBulkImportJobResponse.add_member(:job_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfiguration, name: "jobConfiguration"))
     DescribeBulkImportJobResponse.add_member(:job_creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "jobCreationDate", traits: {"smithy.api#required" => {}}))
     DescribeBulkImportJobResponse.add_member(:job_last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "jobLastUpdateDate", traits: {"smithy.api#required" => {}}))
     DescribeBulkImportJobResponse.add_member(:adaptive_ingestion, ::Smithy::Schema::Shapes::MemberShape.new(target: AdaptiveIngestion, name: "adaptiveIngestion"))
     DescribeBulkImportJobResponse.add_member(:delete_files_after_import, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteFilesAfterImport, name: "deleteFilesAfterImport"))
+    DescribeBulkImportJobResponse.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId"))
+    DescribeBulkImportJobResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName"))
     DescribeBulkImportJobResponse.type = Types::DescribeBulkImportJobResponse
     DescribeComputationModelExecutionSummaryRequest.add_member(:computation_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "computationModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeComputationModelExecutionSummaryRequest.add_member(:resolve_to_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolveToResourceType, name: "resolveToResourceType", traits: {"smithy.api#httpQuery" => "resolveToResourceType"}))
@@ -1557,23 +2118,56 @@ module Aws::IoTSiteWise
     DescribeDashboardResponse.add_member(:dashboard_creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "dashboardCreationDate", traits: {"smithy.api#required" => {}}))
     DescribeDashboardResponse.add_member(:dashboard_last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "dashboardLastUpdateDate", traits: {"smithy.api#required" => {}}))
     DescribeDashboardResponse.type = Types::DescribeDashboardResponse
+    DescribeDatasetExportJobRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeDatasetExportJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetExportJobId, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeDatasetExportJobRequest.type = Types::DescribeDatasetExportJobRequest
+    DescribeDatasetExportJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetExportJobId, name: "jobId", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetExportJobResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetExportJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetExportJobStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetExportJobResponse.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAt", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetExportJobResponse.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completedAt"))
+    DescribeDatasetExportJobResponse.add_member(:destination_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "destinationS3Uri", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetExportJobResponse.add_member(:error_report_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportErrorReportLocation, name: "errorReportLocation", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetExportJobResponse.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInput, name: "input", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetExportJobResponse.type = Types::DescribeDatasetExportJobResponse
     DescribeDatasetRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeDatasetRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName"}))
+    DescribeDatasetRequest.add_member(:dataset_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "datasetVersion", traits: {"smithy.api#httpQuery" => "datasetVersion"}))
     DescribeDatasetRequest.type = Types::DescribeDatasetRequest
     DescribeDatasetResponse.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#required" => {}}))
     DescribeDatasetResponse.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "datasetArn", traits: {"smithy.api#required" => {}}))
     DescribeDatasetResponse.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedName, name: "datasetName", traits: {"smithy.api#required" => {}}))
-    DescribeDatasetResponse.add_member(:dataset_description, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedDescription, name: "datasetDescription", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetResponse.add_member(:dataset_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "datasetDescription", traits: {"smithy.api#required" => {}}))
+    DescribeDatasetResponse.add_member(:dataset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetTypeEnum, name: "datasetType"))
+    DescribeDatasetResponse.add_member(:dataset_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetConfig, name: "datasetConfig"))
+    DescribeDatasetResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName"))
+    DescribeDatasetResponse.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
     DescribeDatasetResponse.add_member(:dataset_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSource, name: "datasetSource", traits: {"smithy.api#required" => {}}))
     DescribeDatasetResponse.add_member(:dataset_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetStatus, name: "datasetStatus", traits: {"smithy.api#required" => {}}))
     DescribeDatasetResponse.add_member(:dataset_creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "datasetCreationDate", traits: {"smithy.api#required" => {}}))
     DescribeDatasetResponse.add_member(:dataset_last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "datasetLastUpdateDate", traits: {"smithy.api#required" => {}}))
     DescribeDatasetResponse.add_member(:dataset_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "datasetVersion"))
+    DescribeDatasetResponse.add_member(:enrichment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetEnrichment, name: "enrichmentStatus"))
     DescribeDatasetResponse.type = Types::DescribeDatasetResponse
     DescribeDefaultEncryptionConfigurationRequest.type = Types::DescribeDefaultEncryptionConfigurationRequest
     DescribeDefaultEncryptionConfigurationResponse.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, name: "encryptionType", traits: {"smithy.api#required" => {}}))
     DescribeDefaultEncryptionConfigurationResponse.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "kmsKeyArn"))
     DescribeDefaultEncryptionConfigurationResponse.add_member(:configuration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStatus, name: "configurationStatus", traits: {"smithy.api#required" => {}}))
     DescribeDefaultEncryptionConfigurationResponse.type = Types::DescribeDefaultEncryptionConfigurationResponse
+    DescribeEnrichmentJobRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeEnrichmentJobRequest.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "jobId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeEnrichmentJobRequest.type = Types::DescribeEnrichmentJobRequest
+    DescribeEnrichmentJobResponse.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "jobId", traits: {"smithy.api#required" => {}}))
+    DescribeEnrichmentJobResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentJobStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DescribeEnrichmentJobResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    DescribeEnrichmentJobResponse.add_member(:job_type, ::Smithy::Schema::Shapes::MemberShape.new(target: JobType, name: "jobType", traits: {"smithy.api#required" => {}}))
+    DescribeEnrichmentJobResponse.add_member(:job_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentJobConfiguration, name: "jobConfiguration", traits: {"smithy.api#required" => {}}))
+    DescribeEnrichmentJobResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    DescribeEnrichmentJobResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
+    DescribeEnrichmentJobResponse.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completedAt"))
+    DescribeEnrichmentJobResponse.add_member(:cancelled_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "cancelledAt"))
+    DescribeEnrichmentJobResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "failureMessage"))
+    DescribeEnrichmentJobResponse.type = Types::DescribeEnrichmentJobResponse
     DescribeExecutionRequest.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "executionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeExecutionRequest.type = Types::DescribeExecutionRequest
     DescribeExecutionResponse.add_member(:execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "executionId", traits: {"smithy.api#required" => {}}))
@@ -1607,9 +2201,44 @@ module Aws::IoTSiteWise
     DescribeGatewayResponse.add_member(:creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "creationDate", traits: {"smithy.api#required" => {}}))
     DescribeGatewayResponse.add_member(:last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "lastUpdateDate", traits: {"smithy.api#required" => {}}))
     DescribeGatewayResponse.type = Types::DescribeGatewayResponse
+    DescribeLoggingOptionsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName"}))
     DescribeLoggingOptionsRequest.type = Types::DescribeLoggingOptionsRequest
     DescribeLoggingOptionsResponse.add_member(:logging_options, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingOptions, name: "loggingOptions", traits: {"smithy.api#required" => {}}))
     DescribeLoggingOptionsResponse.type = Types::DescribeLoggingOptionsResponse
+    DescribePipelineExecutionRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribePipelineExecutionRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribePipelineExecutionRequest.add_member(:pipeline_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "pipelineExecutionId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribePipelineExecutionRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    DescribePipelineExecutionRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePipelineExecutionRequestMaxResultsInteger, name: "maxResults", traits: {"smithy.api#default" => 50, "smithy.api#httpQuery" => "maxResults"}))
+    DescribePipelineExecutionRequest.type = Types::DescribePipelineExecutionRequest
+    DescribePipelineExecutionResponse.add_member(:pipeline_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "pipelineExecutionId", traits: {"smithy.api#required" => {}}))
+    DescribePipelineExecutionResponse.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#required" => {}}))
+    DescribePipelineExecutionResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    DescribePipelineExecutionResponse.add_member(:pipeline_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "pipelineVersion", traits: {"smithy.api#required" => {}}))
+    DescribePipelineExecutionResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DescribePipelineExecutionResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startTime"))
+    DescribePipelineExecutionResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endTime"))
+    DescribePipelineExecutionResponse.add_member(:request_environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEnvironmentVariables, name: "requestEnvironmentVariables", traits: {"smithy.api#required" => {}}))
+    DescribePipelineExecutionResponse.add_member(:request_mount_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: MountOverrides, name: "requestMountOverrides"))
+    DescribePipelineExecutionResponse.add_member(:execution_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionPriority, name: "executionPriority"))
+    DescribePipelineExecutionResponse.add_member(:compute_node_execution_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeExecutionDetailsList, name: "computeNodeExecutionDetails", traits: {"smithy.api#required" => {}}))
+    DescribePipelineExecutionResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    DescribePipelineExecutionResponse.type = Types::DescribePipelineExecutionResponse
+    DescribePipelineRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribePipelineRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribePipelineRequest.add_member(:pipeline_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "pipelineVersion", traits: {"smithy.api#httpQuery" => "version"}))
+    DescribePipelineRequest.type = Types::DescribePipelineRequest
+    DescribePipelineResponse.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#required" => {}}))
+    DescribePipelineResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    DescribePipelineResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    DescribePipelineResponse.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "pipelineArn", traits: {"smithy.api#required" => {}}))
+    DescribePipelineResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
+    DescribePipelineResponse.add_member(:environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariablesMap, name: "environmentVariables"))
+    DescribePipelineResponse.add_member(:computations, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeList, name: "computations", traits: {"smithy.api#required" => {}}))
+    DescribePipelineResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DescribePipelineResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    DescribePipelineResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    DescribePipelineResponse.type = Types::DescribePipelineResponse
     DescribePortalRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "portalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribePortalRequest.type = Types::DescribePortalRequest
     DescribePortalResponse.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "portalId", traits: {"smithy.api#required" => {}}))
@@ -1640,6 +2269,28 @@ module Aws::IoTSiteWise
     DescribeProjectResponse.add_member(:project_creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "projectCreationDate", traits: {"smithy.api#required" => {}}))
     DescribeProjectResponse.add_member(:project_last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "projectLastUpdateDate", traits: {"smithy.api#required" => {}}))
     DescribeProjectResponse.type = Types::DescribeProjectResponse
+    DescribeQueryRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeQueryRequest.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeQueryRequest.type = Types::DescribeQueryRequest
+    DescribeQueryResponse.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId", traits: {"smithy.api#required" => {}}))
+    DescribeQueryResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DescribeQueryResponse.add_member(:submitted_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "submittedAt", traits: {"smithy.api#required" => {}}))
+    DescribeQueryResponse.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completedAt"))
+    DescribeQueryResponse.add_member(:statistics, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatistics, name: "statistics"))
+    DescribeQueryResponse.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryErrorMessage, name: "errorMessage"))
+    DescribeQueryResponse.type = Types::DescribeQueryResponse
+    DescribeSearchRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeSearchRequest.add_member(:search_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchId, name: "searchId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeSearchRequest.type = Types::DescribeSearchRequest
+    DescribeSearchResponse.add_member(:search_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchId, name: "searchId", traits: {"smithy.api#required" => {}}))
+    DescribeSearchResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    DescribeSearchResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DescribeSearchResponse.add_member(:query_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQueryStatement, name: "queryStatement", traits: {"smithy.api#required" => {}}))
+    DescribeSearchResponse.add_member(:search_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchType, name: "searchType", traits: {"smithy.api#required" => {}}))
+    DescribeSearchResponse.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
+    DescribeSearchResponse.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAt"))
+    DescribeSearchResponse.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupId, name: "groupId"))
+    DescribeSearchResponse.type = Types::DescribeSearchResponse
     DescribeStorageConfigurationRequest.type = Types::DescribeStorageConfigurationRequest
     DescribeStorageConfigurationResponse.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "storageType", traits: {"smithy.api#required" => {}}))
     DescribeStorageConfigurationResponse.add_member(:multi_layer_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiLayerStorage, name: "multiLayerStorage"))
@@ -1651,9 +2302,24 @@ module Aws::IoTSiteWise
     DescribeStorageConfigurationResponse.add_member(:warm_tier_retention_period, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmTierRetentionPeriod, name: "warmTierRetentionPeriod"))
     DescribeStorageConfigurationResponse.add_member(:disallow_ingest_null_na_n, ::Smithy::Schema::Shapes::MemberShape.new(target: DisallowIngestNullNaN, name: "disallowIngestNullNaN"))
     DescribeStorageConfigurationResponse.type = Types::DescribeStorageConfigurationResponse
+    DescribeTaskRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeTaskRequest.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "taskName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeTaskRequest.add_member(:task_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "taskVersion", traits: {"smithy.api#httpQuery" => "version"}))
+    DescribeTaskRequest.type = Types::DescribeTaskRequest
+    DescribeTaskResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    DescribeTaskResponse.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "taskName", traits: {"smithy.api#required" => {}}))
+    DescribeTaskResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    DescribeTaskResponse.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "taskArn", traits: {"smithy.api#required" => {}}))
+    DescribeTaskResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
+    DescribeTaskResponse.add_member(:task_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskConfiguration, name: "taskConfiguration", traits: {"smithy.api#required" => {}}))
+    DescribeTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    DescribeTaskResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    DescribeTaskResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    DescribeTaskResponse.type = Types::DescribeTaskResponse
     DescribeTimeSeriesRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyAlias, name: "alias", traits: {"smithy.api#httpQuery" => "alias"}))
     DescribeTimeSeriesRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpQuery" => "assetId"}))
     DescribeTimeSeriesRequest.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "propertyId", traits: {"smithy.api#httpQuery" => "propertyId"}))
+    DescribeTimeSeriesRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName"}))
     DescribeTimeSeriesRequest.type = Types::DescribeTimeSeriesRequest
     DescribeTimeSeriesResponse.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId"))
     DescribeTimeSeriesResponse.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "propertyId"))
@@ -1664,18 +2330,43 @@ module Aws::IoTSiteWise
     DescribeTimeSeriesResponse.add_member(:time_series_creation_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timeSeriesCreationDate", traits: {"smithy.api#required" => {}}))
     DescribeTimeSeriesResponse.add_member(:time_series_last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timeSeriesLastUpdateDate", traits: {"smithy.api#required" => {}}))
     DescribeTimeSeriesResponse.add_member(:time_series_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "timeSeriesArn", traits: {"smithy.api#required" => {}}))
+    DescribeTimeSeriesResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName"))
     DescribeTimeSeriesResponse.type = Types::DescribeTimeSeriesResponse
+    DescribeWorkspaceRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeWorkspaceRequest.type = Types::DescribeWorkspaceRequest
+    DescribeWorkspaceResponse.add_member(:workspace_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "workspaceArn", traits: {"smithy.api#required" => {}}))
+    DescribeWorkspaceResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    DescribeWorkspaceResponse.add_member(:workspace_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "workspaceDescription"))
+    DescribeWorkspaceResponse.add_member(:workspace_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceStatus, name: "workspaceStatus", traits: {"smithy.api#required" => {}}))
+    DescribeWorkspaceResponse.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceEncryptionConfigurationInfo, name: "encryptionConfiguration"))
+    DescribeWorkspaceResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    DescribeWorkspaceResponse.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    DescribeWorkspaceResponse.type = Types::DescribeWorkspaceResponse
     DetailedError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
     DetailedError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     DetailedError.type = Types::DetailedError
     DetailedErrorCode.add_member(:incompatible_compute_location, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMPATIBLE_COMPUTE_LOCATION", traits: {"smithy.api#enumValue" => "INCOMPATIBLE_COMPUTE_LOCATION"}))
     DetailedErrorCode.add_member(:incompatible_forwarding_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMPATIBLE_FORWARDING_CONFIGURATION", traits: {"smithy.api#enumValue" => "INCOMPATIBLE_FORWARDING_CONFIGURATION"}))
+    DetailedErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedPipelineError, name: "member"))
     DetailedErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedError, name: "member"))
+    DetailedPipelineError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedPipelineErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
+    DetailedPipelineError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    DetailedPipelineError.type = Types::DetailedPipelineError
+    DetailedPipelineErrorCode.add_member(:validation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
+    DetailedPipelineErrorCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
+    DetailedPipelineErrorCode.add_member(:execution_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_ERROR", traits: {"smithy.api#enumValue" => "EXECUTION_ERROR"}))
+    DetailedPipelineErrorCode.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
     DisassociateAssetsRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateAssetsRequest.add_member(:hierarchy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "hierarchyId", traits: {"smithy.api#required" => {}}))
     DisassociateAssetsRequest.add_member(:child_asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "childAssetId", traits: {"smithy.api#required" => {}}))
     DisassociateAssetsRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     DisassociateAssetsRequest.type = Types::DisassociateAssetsRequest
+    DisassociateDataSegmentEntries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateDataSegmentEntry, name: "member"))
+    DisassociateDataSegmentEntry.add_member(:source_dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "sourceDatasetId", traits: {"smithy.api#required" => {}}))
+    DisassociateDataSegmentEntry.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId", traits: {"smithy.api#required" => {}}))
+    DisassociateDataSegmentEntry.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTimestamp", traits: {"smithy.api#required" => {}}))
+    DisassociateDataSegmentEntry.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTimestamp", traits: {"smithy.api#required" => {}}))
+    DisassociateDataSegmentEntry.type = Types::DisassociateDataSegmentEntry
     DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyAlias, name: "alias", traits: {"smithy.api#httpQuery" => "alias", "smithy.api#required" => {}}))
     DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpQuery" => "assetId", "smithy.api#required" => {}}))
     DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "propertyId", traits: {"smithy.api#httpQuery" => "propertyId", "smithy.api#required" => {}}))
@@ -1685,6 +2376,36 @@ module Aws::IoTSiteWise
     DisassociatedDataStorageState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     EncryptionType.add_member(:sitewise_default_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SITEWISE_DEFAULT_ENCRYPTION", traits: {"smithy.api#enumValue" => "SITEWISE_DEFAULT_ENCRYPTION"}))
     EncryptionType.add_member(:kms_based_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KMS_BASED_ENCRYPTION", traits: {"smithy.api#enumValue" => "KMS_BASED_ENCRYPTION"}))
+    EnrichmentJobConfiguration.add_member(:event_detection, Types::EnrichmentJobConfiguration::EventDetection, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDetection, name: "eventDetection"))
+    EnrichmentJobConfiguration.add_member(:unknown, Types::EnrichmentJobConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    EnrichmentJobConfiguration.type = Types::EnrichmentJobConfiguration
+    EnrichmentJobStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
+    EnrichmentJobStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    EnrichmentJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    EnrichmentJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    EnrichmentJobStatus.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
+    EnrichmentJobStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
+    EnrichmentJobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentJobSummary, name: "member"))
+    EnrichmentJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "jobId", traits: {"smithy.api#required" => {}}))
+    EnrichmentJobSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentJobStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    EnrichmentJobSummary.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    EnrichmentJobSummary.add_member(:job_type, ::Smithy::Schema::Shapes::MemberShape.new(target: JobType, name: "jobType", traits: {"smithy.api#required" => {}}))
+    EnrichmentJobSummary.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#required" => {}}))
+    EnrichmentJobSummary.add_member(:property_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyAlias, name: "propertyAlias"))
+    EnrichmentJobSummary.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId"))
+    EnrichmentJobSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    EnrichmentJobSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "updatedAt"))
+    EnrichmentJobSummary.type = Types::EnrichmentJobSummary
+    EnrichmentStatus.add_member(:enriched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENRICHED", traits: {"smithy.api#enumValue" => "ENRICHED"}))
+    EnrichmentStatus.add_member(:not_enriched, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_ENRICHED", traits: {"smithy.api#enumValue" => "NOT_ENRICHED"}))
+    EnrichmentTrimSettings.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTime", traits: {"smithy.api#required" => {}}))
+    EnrichmentTrimSettings.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTime", traits: {"smithy.api#required" => {}}))
+    EnrichmentTrimSettings.type = Types::EnrichmentTrimSettings
+    EnvironmentVariablesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableName, name: "key"))
+    EnvironmentVariablesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariableValue, name: "value"))
+    EphemeralStorageConfiguration.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageClass, name: "storageClass", traits: {"smithy.api#required" => {}}))
+    EphemeralStorageConfiguration.add_member(:storage_size_in_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: EphemeralStorageConfigurationStorageSizeInGiBInteger, name: "storageSizeInGiB", traits: {"smithy.api#required" => {}}))
+    EphemeralStorageConfiguration.type = Types::EphemeralStorageConfiguration
     ErrorCode.add_member(:validation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
     ErrorCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
     ErrorDetails.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
@@ -1694,6 +2415,11 @@ module Aws::IoTSiteWise
     ErrorReportLocation.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "bucket", traits: {"smithy.api#required" => {}}))
     ErrorReportLocation.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "prefix", traits: {"smithy.api#required" => {}}))
     ErrorReportLocation.type = Types::ErrorReportLocation
+    EventDetection.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#required" => {}}))
+    EventDetection.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId"))
+    EventDetection.add_member(:property_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyAlias, name: "propertyAlias"))
+    EventDetection.add_member(:trim_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentTrimSettings, name: "trimSettings", traits: {"smithy.api#required" => {}}))
+    EventDetection.type = Types::EventDetection
     ExecuteActionRequest.add_member(:target_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResource, name: "targetResource", traits: {"smithy.api#required" => {}}))
     ExecuteActionRequest.add_member(:action_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "actionDefinitionId", traits: {"smithy.api#required" => {}}))
     ExecuteActionRequest.add_member(:action_payload, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionPayload, name: "actionPayload", traits: {"smithy.api#required" => {}}))
@@ -1713,6 +2439,11 @@ module Aws::IoTSiteWise
     ExecuteQueryResponse.type = Types::ExecuteQueryResponse
     ExecutionDetails.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionDetailsKey, name: "key"))
     ExecutionDetails.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionDetailsValue, name: "value"))
+    ExecutionEnvironmentVariables.add_member(:global, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariablesMap, name: "global"))
+    ExecutionEnvironmentVariables.add_member(:compute_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeEnvironmentVariablesMap, name: "computeNodes"))
+    ExecutionEnvironmentVariables.type = Types::ExecutionEnvironmentVariables
+    ExecutionEnvironmentVariablesMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEnvironmentVariablesMapKeyString, name: "key"))
+    ExecutionEnvironmentVariablesMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEnvironmentVariablesMapValueString, name: "value"))
     ExecutionResult.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionResultKey, name: "key"))
     ExecutionResult.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionResultValue, name: "value"))
     ExecutionState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
@@ -1731,18 +2462,63 @@ module Aws::IoTSiteWise
     ExecutionSummary.add_member(:execution_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionStatus, name: "executionStatus", traits: {"smithy.api#required" => {}}))
     ExecutionSummary.add_member(:execution_entity_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "executionEntityVersion"))
     ExecutionSummary.type = Types::ExecutionSummary
+    ExportDataType.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIDEO", traits: {"smithy.api#enumValue" => "VIDEO"}))
+    ExportDataType.add_member(:telemetry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TELEMETRY", traits: {"smithy.api#enumValue" => "TELEMETRY"}))
+    ExportDataType.add_member(:annotation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANNOTATION", traits: {"smithy.api#enumValue" => "ANNOTATION"}))
+    ExportDataTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportDataType, name: "member"))
+    ExportErrorReportLocation.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "s3Uri", traits: {"smithy.api#required" => {}}))
+    ExportErrorReportLocation.type = Types::ExportErrorReportLocation
+    ExportJobSummary.add_member(:job_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetExportJobId, name: "jobId", traits: {"smithy.api#required" => {}}))
+    ExportJobSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetExportJobStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    ExportJobSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAt", traits: {"smithy.api#required" => {}}))
+    ExportJobSummary.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completedAt"))
+    ExportJobSummary.add_member(:destination_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "destinationS3Uri", traits: {"smithy.api#required" => {}}))
+    ExportJobSummary.type = Types::ExportJobSummary
+    ExportJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobSummary, name: "member"))
     ExpressionVariable.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableName, name: "name", traits: {"smithy.api#required" => {}}))
     ExpressionVariable.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: VariableValue, name: "value", traits: {"smithy.api#required" => {}}))
     ExpressionVariable.type = Types::ExpressionVariable
     ExpressionVariables.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionVariable, name: "member"))
+    FailedDataSegmentAssociation.add_member(:source_dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "sourceDatasetId", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentAssociation.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentAssociation.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTimestamp", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentAssociation.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTimestamp", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentAssociation.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentAssociation.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentAssociation.type = Types::FailedDataSegmentAssociation
+    FailedDataSegmentAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDataSegmentAssociation, name: "member"))
+    FailedDataSegmentDeletion.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "timeSeriesId", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDeletion.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTimestamp", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDeletion.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTimestamp", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDeletion.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDeletion.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDeletion.type = Types::FailedDataSegmentDeletion
+    FailedDataSegmentDeletions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDataSegmentDeletion, name: "member"))
+    FailedDataSegmentDisassociation.add_member(:source_dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "sourceDatasetId", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDisassociation.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDisassociation.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTimestamp", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDisassociation.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTimestamp", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDisassociation.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentErrorCode, name: "errorCode", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDisassociation.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentErrorMessage, name: "errorMessage", traits: {"smithy.api#required" => {}}))
+    FailedDataSegmentDisassociation.type = Types::FailedDataSegmentDisassociation
+    FailedDataSegmentDisassociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FailedDataSegmentDisassociation, name: "member"))
     File.add_member(:bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: Bucket, name: "bucket", traits: {"smithy.api#required" => {}}))
     File.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key", traits: {"smithy.api#required" => {}}))
     File.add_member(:version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "versionId"))
+    File.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyAlias, name: "alias"))
+    File.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTime"))
+    File.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat, name: "fileFormat"))
     File.type = Types::File
     FileFormat.add_member(:csv, ::Smithy::Schema::Shapes::MemberShape.new(target: Csv, name: "csv"))
     FileFormat.add_member(:parquet, ::Smithy::Schema::Shapes::MemberShape.new(target: Parquet, name: "parquet"))
+    FileFormat.add_member(:mp4, ::Smithy::Schema::Shapes::MemberShape.new(target: Mp4, name: "mp4"))
+    FileFormat.add_member(:annotation, ::Smithy::Schema::Shapes::MemberShape.new(target: Annotation, name: "annotation"))
     FileFormat.type = Types::FileFormat
     Files.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: File, name: "member"))
+    FormatSettings.add_member(:frames_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "framesPerSecond"))
+    FormatSettings.add_member(:width_in_pixels, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "widthInPixels"))
+    FormatSettings.add_member(:height_in_pixels, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "heightInPixels"))
+    FormatSettings.type = Types::FormatSettings
     ForwardingConfig.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ForwardingConfigState, name: "state", traits: {"smithy.api#required" => {}}))
     ForwardingConfig.type = Types::ForwardingConfig
     ForwardingConfigState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
@@ -1798,6 +2574,20 @@ module Aws::IoTSiteWise
     GetAssetPropertyValueRequest.type = Types::GetAssetPropertyValueRequest
     GetAssetPropertyValueResponse.add_member(:property_value, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyValue, name: "propertyValue"))
     GetAssetPropertyValueResponse.type = Types::GetAssetPropertyValueResponse
+    GetCaptureDataRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCaptureDataRequest.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTime", traits: {"smithy.api#required" => {}}))
+    GetCaptureDataRequest.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTime", traits: {"smithy.api#required" => {}}))
+    GetCaptureDataRequest.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId"))
+    GetCaptureDataRequest.add_member(:property_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyAlias, name: "propertyAlias"))
+    GetCaptureDataRequest.add_member(:format_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatSettings, name: "formatSettings"))
+    GetCaptureDataRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GetCaptureDataNextToken, name: "nextToken"))
+    GetCaptureDataRequest.type = Types::GetCaptureDataRequest
+    GetCaptureDataResponse.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptureBlob, name: "data", traits: {"smithy.api#required" => {}}))
+    GetCaptureDataResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTime", traits: {"smithy.api#required" => {}}))
+    GetCaptureDataResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTime", traits: {"smithy.api#required" => {}}))
+    GetCaptureDataResponse.add_member(:data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoDataType, name: "dataType", traits: {"smithy.api#required" => {}}))
+    GetCaptureDataResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: GetCaptureDataNextToken, name: "nextToken"))
+    GetCaptureDataResponse.type = Types::GetCaptureDataResponse
     GetInterpolatedAssetPropertyValuesRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId", traits: {"smithy.api#httpQuery" => "assetId"}))
     GetInterpolatedAssetPropertyValuesRequest.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "propertyId", traits: {"smithy.api#httpQuery" => "propertyId"}))
     GetInterpolatedAssetPropertyValuesRequest.add_member(:property_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyAlias, name: "propertyAlias", traits: {"smithy.api#httpQuery" => "propertyAlias"}))
@@ -1815,11 +2605,29 @@ module Aws::IoTSiteWise
     GetInterpolatedAssetPropertyValuesResponse.add_member(:interpolated_asset_property_values, ::Smithy::Schema::Shapes::MemberShape.new(target: InterpolatedAssetPropertyValues, name: "interpolatedAssetPropertyValues", traits: {"smithy.api#required" => {}}))
     GetInterpolatedAssetPropertyValuesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     GetInterpolatedAssetPropertyValuesResponse.type = Types::GetInterpolatedAssetPropertyValuesResponse
+    GetQueryResultsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetQueryResultsRequest.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetQueryResultsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryMaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetQueryResultsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetQueryResultsRequest.type = Types::GetQueryResultsRequest
+    GetQueryResultsResponse.add_member(:column_info, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnInformationList, name: "columnInfo"))
+    GetQueryResultsResponse.add_member(:rows, ::Smithy::Schema::Shapes::MemberShape.new(target: RowList, name: "rows"))
+    GetQueryResultsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryNextToken, name: "nextToken"))
+    GetQueryResultsResponse.type = Types::GetQueryResultsResponse
+    GetSearchResultsRequest.add_member(:search_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchId, name: "searchId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSearchResultsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetSearchResultsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: GetSearchResultsRequestMaxResultsInteger, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    GetSearchResultsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    GetSearchResultsRequest.type = Types::GetSearchResultsRequest
+    GetSearchResultsResponse.add_member(:search_results, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultList, name: "searchResults", traits: {"smithy.api#required" => {}}))
+    GetSearchResultsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    GetSearchResultsResponse.type = Types::GetSearchResultsResponse
     Greengrass.add_member(:group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "groupArn", traits: {"smithy.api#required" => {}}))
     Greengrass.type = Types::Greengrass
     GreengrassV2.add_member(:core_device_thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreDeviceThingName, name: "coreDeviceThingName", traits: {"smithy.api#required" => {}}))
     GreengrassV2.add_member(:core_device_operating_system, ::Smithy::Schema::Shapes::MemberShape.new(target: CoreDeviceOperatingSystem, name: "coreDeviceOperatingSystem"))
     GreengrassV2.type = Types::GreengrassV2
+    GroupIdFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupId, name: "member"))
     GroupIdentity.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "id", traits: {"smithy.api#required" => {}}))
     GroupIdentity.type = Types::GroupIdentity
     HierarchyMapping.add_member(:asset_model_hierarchy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelHierarchyId", traits: {"smithy.api#required" => {}}))
@@ -1879,7 +2687,7 @@ module Aws::IoTSiteWise
     InvokeAssistantResponse[:http_payload] = :body
     InvokeAssistantResponse[:http_payload_member] = InvokeAssistantResponse.member(:body)
     InvokeAssistantResponse.type = Types::InvokeAssistantResponse
-    JobConfiguration.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat, name: "fileFormat", traits: {"smithy.api#required" => {}}))
+    JobConfiguration.add_member(:file_format, ::Smithy::Schema::Shapes::MemberShape.new(target: FileFormat, name: "fileFormat"))
     JobConfiguration.type = Types::JobConfiguration
     JobStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     JobStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
@@ -1892,6 +2700,7 @@ module Aws::IoTSiteWise
     JobSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
     JobSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "status", traits: {"smithy.api#required" => {}}))
     JobSummary.type = Types::JobSummary
+    JobType.add_member(:event_detection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT_DETECTION", traits: {"smithy.api#enumValue" => "EVENT_DETECTION"}))
     KendraSourceDetail.add_member(:knowledge_base_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "knowledgeBaseArn", traits: {"smithy.api#required" => {}}))
     KendraSourceDetail.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "roleArn", traits: {"smithy.api#required" => {}}))
     KendraSourceDetail.type = Types::KendraSourceDetail
@@ -1918,6 +2727,12 @@ module Aws::IoTSiteWise
     ListActionsResponse.add_member(:action_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSummaries, name: "actionSummaries", traits: {"smithy.api#required" => {}}))
     ListActionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#required" => {}}))
     ListActionsResponse.type = Types::ListActionsResponse
+    ListApplicationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListApplicationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListApplicationsRequest.type = Types::ListApplicationsRequest
+    ListApplicationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListApplicationsResponse.add_member(:applications, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationList, name: "applications", traits: {"smithy.api#required" => {}}))
+    ListApplicationsResponse.type = Types::ListApplicationsResponse
     ListAssetModelCompositeModelsRequest.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListAssetModelCompositeModelsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListAssetModelCompositeModelsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -1993,6 +2808,7 @@ module Aws::IoTSiteWise
     ListBulkImportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListBulkImportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListBulkImportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBulkImportJobsFilter, name: "filter", traits: {"smithy.api#httpQuery" => "filter"}))
+    ListBulkImportJobsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName"}))
     ListBulkImportJobsRequest.type = Types::ListBulkImportJobsRequest
     ListBulkImportJobsResponse.add_member(:job_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummaries, name: "jobSummaries", traits: {"smithy.api#required" => {}}))
     ListBulkImportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
@@ -2032,13 +2848,55 @@ module Aws::IoTSiteWise
     ListDashboardsResponse.add_member(:dashboard_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: DashboardSummaries, name: "dashboardSummaries", traits: {"smithy.api#required" => {}}))
     ListDashboardsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListDashboardsResponse.type = Types::ListDashboardsResponse
+    ListDatasetDataSegmentRelationshipsRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListDatasetDataSegmentRelationshipsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName", "smithy.api#required" => {}}))
+    ListDatasetDataSegmentRelationshipsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListDatasetDataSegmentRelationshipsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListDatasetDataSegmentRelationshipsRequest.type = Types::ListDatasetDataSegmentRelationshipsRequest
+    ListDatasetDataSegmentRelationshipsResponse.add_member(:data_segment_relationship_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentRelationshipSummaries, name: "dataSegmentRelationshipSummaries", traits: {"smithy.api#required" => {}}))
+    ListDatasetDataSegmentRelationshipsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListDatasetDataSegmentRelationshipsResponse.type = Types::ListDatasetDataSegmentRelationshipsResponse
+    ListDatasetDataSegmentsRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListDatasetDataSegmentsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName", "smithy.api#required" => {}}))
+    ListDatasetDataSegmentsRequest.add_member(:dataset_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "datasetVersion", traits: {"smithy.api#httpQuery" => "datasetVersion"}))
+    ListDatasetDataSegmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListDatasetDataSegmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListDatasetDataSegmentsRequest.type = Types::ListDatasetDataSegmentsRequest
+    ListDatasetDataSegmentsResponse.add_member(:data_segments, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSegmentSummaries, name: "dataSegments", traits: {"smithy.api#required" => {}}))
+    ListDatasetDataSegmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListDatasetDataSegmentsResponse.type = Types::ListDatasetDataSegmentsResponse
+    ListDatasetExportJobsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListDatasetExportJobsRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetExportJobFilter, name: "filter", traits: {"smithy.api#httpQuery" => "filter"}))
+    ListDatasetExportJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListExportJobsMaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListDatasetExportJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListExportJobsNextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListDatasetExportJobsRequest.type = Types::ListDatasetExportJobsRequest
+    ListDatasetExportJobsResponse.add_member(:jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: ExportJobSummaryList, name: "jobs", traits: {"smithy.api#required" => {}}))
+    ListDatasetExportJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ListExportJobsNextToken, name: "nextToken"))
+    ListDatasetExportJobsResponse.type = Types::ListDatasetExportJobsResponse
     ListDatasetsRequest.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSourceType, name: "sourceType", traits: {"smithy.api#httpQuery" => "sourceType", "smithy.api#required" => {}}))
+    ListDatasetsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName"}))
+    ListDatasetsRequest.add_member(:dataset_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetTypeEnum, name: "datasetType", traits: {"smithy.api#httpQuery" => "datasetType"}))
     ListDatasetsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListDatasetsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListDatasetsRequest.type = Types::ListDatasetsRequest
     ListDatasetsResponse.add_member(:dataset_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSummaries, name: "datasetSummaries", traits: {"smithy.api#required" => {}}))
     ListDatasetsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListDatasetsResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName"))
     ListDatasetsResponse.type = Types::ListDatasetsResponse
+    ListEnrichmentJobsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListEnrichmentJobsRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#httpQuery" => "datasetId"}))
+    ListEnrichmentJobsRequest.add_member(:property_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyAlias, name: "propertyAlias", traits: {"smithy.api#httpQuery" => "propertyAlias"}))
+    ListEnrichmentJobsRequest.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId", traits: {"smithy.api#httpQuery" => "timeSeriesId"}))
+    ListEnrichmentJobsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentJobStatus, name: "status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListEnrichmentJobsRequest.add_member(:job_type, ::Smithy::Schema::Shapes::MemberShape.new(target: JobType, name: "jobType", traits: {"smithy.api#httpQuery" => "jobType"}))
+    ListEnrichmentJobsRequest.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startDate", traits: {"smithy.api#httpQuery" => "startDate"}))
+    ListEnrichmentJobsRequest.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "endDate", traits: {"smithy.api#httpQuery" => "endDate"}))
+    ListEnrichmentJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListEnrichmentJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListEnrichmentJobsRequest.type = Types::ListEnrichmentJobsRequest
+    ListEnrichmentJobsResponse.add_member(:jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentJobSummaries, name: "jobs", traits: {"smithy.api#required" => {}}))
+    ListEnrichmentJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListEnrichmentJobsResponse.type = Types::ListEnrichmentJobsResponse
     ListExecutionsRequest.add_member(:target_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetResourceType, name: "targetResourceType", traits: {"smithy.api#httpQuery" => "targetResourceType", "smithy.api#required" => {}}))
     ListExecutionsRequest.add_member(:target_resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "targetResourceId", traits: {"smithy.api#httpQuery" => "targetResourceId", "smithy.api#required" => {}}))
     ListExecutionsRequest.add_member(:resolve_to_resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ResolveToResourceType, name: "resolveToResourceType", traits: {"smithy.api#httpQuery" => "resolveToResourceType"}))
@@ -2063,6 +2921,26 @@ module Aws::IoTSiteWise
     ListInterfaceRelationshipsResponse.add_member(:interface_relationship_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: InterfaceRelationshipSummaries, name: "interfaceRelationshipSummaries", traits: {"smithy.api#required" => {}}))
     ListInterfaceRelationshipsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListInterfaceRelationshipsResponse.type = Types::ListInterfaceRelationshipsResponse
+    ListPipelineExecutionsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListPipelineExecutionsRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListPipelineExecutionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListPipelineExecutionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListPipelineExecutionsRequestMaxResultsInteger, name: "maxResults", traits: {"smithy.api#default" => 50, "smithy.api#httpQuery" => "maxResults"}))
+    ListPipelineExecutionsRequest.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionState, name: "state", traits: {"smithy.api#httpQuery" => "state"}))
+    ListPipelineExecutionsRequest.add_member(:start_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTimeAfter", traits: {"smithy.api#httpQuery" => "startTimeAfter"}))
+    ListPipelineExecutionsRequest.add_member(:start_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTimeBefore", traits: {"smithy.api#httpQuery" => "startTimeBefore"}))
+    ListPipelineExecutionsRequest.add_member(:end_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTimeAfter", traits: {"smithy.api#httpQuery" => "endTimeAfter"}))
+    ListPipelineExecutionsRequest.add_member(:end_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTimeBefore", traits: {"smithy.api#httpQuery" => "endTimeBefore"}))
+    ListPipelineExecutionsRequest.type = Types::ListPipelineExecutionsRequest
+    ListPipelineExecutionsResponse.add_member(:pipeline_execution_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionSummaryList, name: "pipelineExecutionSummaries", traits: {"smithy.api#required" => {}}))
+    ListPipelineExecutionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListPipelineExecutionsResponse.type = Types::ListPipelineExecutionsResponse
+    ListPipelinesRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListPipelinesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListPipelinesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListPipelinesRequestMaxResultsInteger, name: "maxResults", traits: {"smithy.api#default" => 50, "smithy.api#httpQuery" => "maxResults"}))
+    ListPipelinesRequest.type = Types::ListPipelinesRequest
+    ListPipelinesResponse.add_member(:pipeline_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineSummaries, name: "pipelineSummaries", traits: {"smithy.api#required" => {}}))
+    ListPipelinesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListPipelinesResponse.type = Types::ListPipelinesResponse
     ListPortalsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListPortalsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListPortalsRequest.type = Types::ListPortalsRequest
@@ -2083,21 +2961,58 @@ module Aws::IoTSiteWise
     ListProjectsResponse.add_member(:project_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectSummaries, name: "projectSummaries", traits: {"smithy.api#required" => {}}))
     ListProjectsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListProjectsResponse.type = Types::ListProjectsResponse
+    ListQueriesRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListQueriesRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryFilter, name: "filter", traits: {"smithy.api#httpQuery" => "filter"}))
+    ListQueriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryMaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListQueriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryListNextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListQueriesRequest.type = Types::ListQueriesRequest
+    ListQueriesResponse.add_member(:queries, ::Smithy::Schema::Shapes::MemberShape.new(target: QuerySummaryList, name: "queries", traits: {"smithy.api#required" => {}}))
+    ListQueriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryListNextToken, name: "nextToken"))
+    ListQueriesResponse.type = Types::ListQueriesResponse
+    ListSearchesFilters.add_member(:status_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchStatusFilterList, name: "statusFilter"))
+    ListSearchesFilters.add_member(:started_after, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAfter"))
+    ListSearchesFilters.add_member(:started_before, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedBefore"))
+    ListSearchesFilters.add_member(:group_id_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupIdFilterList, name: "groupIdFilter"))
+    ListSearchesFilters.add_member(:search_type_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchTypeFilterList, name: "searchTypeFilter"))
+    ListSearchesFilters.type = Types::ListSearchesFilters
+    ListSearchesRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListSearchesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSearchesRequestMaxResultsInteger, name: "maxResults"))
+    ListSearchesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListSearchesRequest.add_member(:list_searches_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: ListSearchesFilters, name: "listSearchesFilters"))
+    ListSearchesRequest.type = Types::ListSearchesRequest
+    ListSearchesResponse.add_member(:search_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSummaries, name: "searchSummaries", traits: {"smithy.api#required" => {}}))
+    ListSearchesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListSearchesResponse.type = Types::ListSearchesResponse
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
     ListTagsForResourceResponse.type = Types::ListTagsForResourceResponse
+    ListTasksRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListTasksRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListTasksRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTasksRequestMaxResultsInteger, name: "maxResults", traits: {"smithy.api#default" => 50, "smithy.api#httpQuery" => "maxResults"}))
+    ListTasksRequest.type = Types::ListTasksRequest
+    ListTasksResponse.add_member(:task_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSummaries, name: "taskSummaries", traits: {"smithy.api#required" => {}}))
+    ListTasksResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListTasksResponse.type = Types::ListTasksResponse
     ListTimeSeriesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListTimeSeriesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListTimeSeriesRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpQuery" => "assetId"}))
     ListTimeSeriesRequest.add_member(:alias_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyAlias, name: "aliasPrefix", traits: {"smithy.api#httpQuery" => "aliasPrefix"}))
     ListTimeSeriesRequest.add_member(:time_series_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ListTimeSeriesType, name: "timeSeriesType", traits: {"smithy.api#httpQuery" => "timeSeriesType"}))
+    ListTimeSeriesRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpQuery" => "workspaceName"}))
     ListTimeSeriesRequest.type = Types::ListTimeSeriesRequest
     ListTimeSeriesResponse.add_member(:time_series_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesSummaries, name: "TimeSeriesSummaries", traits: {"smithy.api#required" => {}}))
     ListTimeSeriesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListTimeSeriesResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName"))
     ListTimeSeriesResponse.type = Types::ListTimeSeriesResponse
     ListTimeSeriesType.add_member(:associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSOCIATED", traits: {"smithy.api#enumValue" => "ASSOCIATED"}))
     ListTimeSeriesType.add_member(:disassociated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISASSOCIATED", traits: {"smithy.api#enumValue" => "DISASSOCIATED"}))
+    ListWorkspacesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListWorkspacesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListWorkspacesRequest.type = Types::ListWorkspacesRequest
+    ListWorkspacesResponse.add_member(:workspace_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceSummaries, name: "workspaceSummaries", traits: {"smithy.api#required" => {}}))
+    ListWorkspacesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListWorkspacesResponse.type = Types::ListWorkspacesResponse
     Location.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "uri"))
     Location.type = Types::Location
     LoggingLevel.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "ERROR"}))
@@ -2111,6 +3026,8 @@ module Aws::IoTSiteWise
     Measurement.type = Types::Measurement
     MeasurementProcessingConfig.add_member(:forwarding_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ForwardingConfig, name: "forwardingConfig", traits: {"smithy.api#required" => {}}))
     MeasurementProcessingConfig.type = Types::MeasurementProcessingConfig
+    Metadata.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataKey, name: "key"))
+    Metadata.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MetadataValue, name: "value"))
     Metric.add_member(:expression, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "expression", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     Metric.add_member(:variables, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpressionVariables, name: "variables", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
     Metric.add_member(:window, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricWindow, name: "window", traits: {"smithy.api#required" => {}}))
@@ -2126,11 +3043,58 @@ module Aws::IoTSiteWise
     MonitorErrorDetails.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorErrorCode, name: "code"))
     MonitorErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorErrorMessage, name: "message"))
     MonitorErrorDetails.type = Types::MonitorErrorDetails
+    Mount.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "name", traits: {"smithy.api#required" => {}}))
+    Mount.add_member(:relative_path, ::Smithy::Schema::Shapes::MemberShape.new(target: MountRelativePath, name: "relativePath", traits: {"smithy.api#required" => {}}))
+    Mount.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: MountSource, name: "source", traits: {"smithy.api#required" => {}}))
+    Mount.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MountStorageType, name: "storageType", traits: {"smithy.api#required" => {}}))
+    Mount.type = Types::Mount
+    MountList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Mount, name: "member"))
+    MountOverrides.add_member(:compute_nodes, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeMountsMap, name: "computeNodes", traits: {"smithy.api#required" => {}}))
+    MountOverrides.type = Types::MountOverrides
+    MountSource.add_member(:s3_access_point, Types::MountSource::S3AccessPoint, ::Smithy::Schema::Shapes::MemberShape.new(target: S3AccessPointSource, name: "s3AccessPoint"))
+    MountSource.add_member(:unknown, Types::MountSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    MountSource.type = Types::MountSource
+    MountStorageType.add_member(:shared_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SHARED_STORAGE", traits: {"smithy.api#enumValue" => "SHARED_STORAGE"}))
+    Mp4.type = Types::Mp4
     MultiLayerStorage.add_member(:customer_managed_s3_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerManagedS3Storage, name: "customerManagedS3Storage", traits: {"smithy.api#required" => {}}))
     MultiLayerStorage.type = Types::MultiLayerStorage
     Parquet.type = Types::Parquet
     Permission.add_member(:administrator, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADMINISTRATOR", traits: {"smithy.api#enumValue" => "ADMINISTRATOR"}))
     Permission.add_member(:viewer, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIEWER", traits: {"smithy.api#enumValue" => "VIEWER"}))
+    PipelineErrorCode.add_member(:validation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
+    PipelineErrorCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
+    PipelineErrorCode.add_member(:execution_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTION_ERROR", traits: {"smithy.api#enumValue" => "EXECUTION_ERROR"}))
+    PipelineErrorCode.add_member(:timed_out, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMED_OUT", traits: {"smithy.api#enumValue" => "TIMED_OUT"}))
+    PipelineExecutionState.add_member(:not_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_STARTED", traits: {"smithy.api#enumValue" => "NOT_STARTED"}))
+    PipelineExecutionState.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    PipelineExecutionState.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    PipelineExecutionState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    PipelineExecutionState.add_member(:cancelling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLING", traits: {"smithy.api#enumValue" => "CANCELLING"}))
+    PipelineExecutionState.add_member(:cancelled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELLED", traits: {"smithy.api#enumValue" => "CANCELLED"}))
+    PipelineExecutionStateDetails.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineErrorCode, name: "code"))
+    PipelineExecutionStateDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
+    PipelineExecutionStateDetails.add_member(:details, ::Smithy::Schema::Shapes::MemberShape.new(target: DetailedErrorList, name: "details"))
+    PipelineExecutionStateDetails.type = Types::PipelineExecutionStateDetails
+    PipelineExecutionStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionState, name: "state", traits: {"smithy.api#required" => {}}))
+    PipelineExecutionStatus.add_member(:state_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionStateDetails, name: "stateDetails"))
+    PipelineExecutionStatus.type = Types::PipelineExecutionStatus
+    PipelineExecutionSummary.add_member(:pipeline_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "pipelineExecutionId", traits: {"smithy.api#required" => {}}))
+    PipelineExecutionSummary.add_member(:pipeline_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "pipelineVersion", traits: {"smithy.api#required" => {}}))
+    PipelineExecutionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    PipelineExecutionSummary.add_member(:execution_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionPriority, name: "executionPriority"))
+    PipelineExecutionSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "startTime"))
+    PipelineExecutionSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime"))
+    PipelineExecutionSummary.type = Types::PipelineExecutionSummary
+    PipelineExecutionSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionSummary, name: "member"))
+    PipelineSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineSummary, name: "member"))
+    PipelineSummary.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#required" => {}}))
+    PipelineSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    PipelineSummary.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "pipelineArn", traits: {"smithy.api#required" => {}}))
+    PipelineSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
+    PipelineSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    PipelineSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    PipelineSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    PipelineSummary.type = Types::PipelineSummary
     PortalResource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     PortalResource.type = Types::PortalResource
     PortalState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
@@ -2164,6 +3128,26 @@ module Aws::IoTSiteWise
     PreconditionFailedException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     PreconditionFailedException.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     PreconditionFailedException.type = Types::PreconditionFailedException
+    ProcessingInput.add_member(:timeseries, Types::ProcessingInput::Timeseries, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeseriesList, name: "timeseries"))
+    ProcessingInput.add_member(:dataset, Types::ProcessingInput::Dataset, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetItem, name: "dataset"))
+    ProcessingInput.add_member(:unknown, Types::ProcessingInput::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ProcessingInput.type = Types::ProcessingInput
+    ProcessingType.add_member(:generic_compute_processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GENERIC_COMPUTE_PROCESSING", traits: {"smithy.api#enumValue" => "GENERIC_COMPUTE_PROCESSING"}))
+    ProcessingType.add_member(:hardware_accelerated_processing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HARDWARE_ACCELERATED_PROCESSING", traits: {"smithy.api#enumValue" => "HARDWARE_ACCELERATED_PROCESSING"}))
+    ProcessingUnit.add_member(:units_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_2", traits: {"smithy.api#enumValue" => "UNITS_2"}))
+    ProcessingUnit.add_member(:units_4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_4", traits: {"smithy.api#enumValue" => "UNITS_4"}))
+    ProcessingUnit.add_member(:units_8, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_8", traits: {"smithy.api#enumValue" => "UNITS_8"}))
+    ProcessingUnit.add_member(:units_12, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_12", traits: {"smithy.api#enumValue" => "UNITS_12"}))
+    ProcessingUnit.add_member(:units_16, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_16", traits: {"smithy.api#enumValue" => "UNITS_16"}))
+    ProcessingUnit.add_member(:units_24, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_24", traits: {"smithy.api#enumValue" => "UNITS_24"}))
+    ProcessingUnit.add_member(:units_32, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_32", traits: {"smithy.api#enumValue" => "UNITS_32"}))
+    ProcessingUnit.add_member(:units_36, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_36", traits: {"smithy.api#enumValue" => "UNITS_36"}))
+    ProcessingUnit.add_member(:units_48, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_48", traits: {"smithy.api#enumValue" => "UNITS_48"}))
+    ProcessingUnit.add_member(:units_60, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_60", traits: {"smithy.api#enumValue" => "UNITS_60"}))
+    ProcessingUnit.add_member(:units_64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_64", traits: {"smithy.api#enumValue" => "UNITS_64"}))
+    ProcessingUnit.add_member(:units_72, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_72", traits: {"smithy.api#enumValue" => "UNITS_72"}))
+    ProcessingUnit.add_member(:units_84, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_84", traits: {"smithy.api#enumValue" => "UNITS_84"}))
+    ProcessingUnit.add_member(:units_96, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNITS_96", traits: {"smithy.api#enumValue" => "UNITS_96"}))
     ProjectResource.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "id", traits: {"smithy.api#required" => {}}))
     ProjectResource.type = Types::ProjectResource
     ProjectSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectSummary, name: "member"))
@@ -2188,6 +3172,9 @@ module Aws::IoTSiteWise
     PropertyDataType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
     PropertyDataType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "BOOLEAN"}))
     PropertyDataType.add_member(:struct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRUCT", traits: {"smithy.api#enumValue" => "STRUCT"}))
+    PropertyDataType.add_member(:video, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIDEO", traits: {"smithy.api#enumValue" => "VIDEO"}))
+    PropertyDataType.add_member(:annotation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANNOTATION", traits: {"smithy.api#enumValue" => "ANNOTATION"}))
+    PropertyDataType.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
     PropertyMapping.add_member(:asset_model_property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetModelPropertyId", traits: {"smithy.api#required" => {}}))
     PropertyMapping.add_member(:interface_asset_model_property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "interfaceAssetModelPropertyId", traits: {"smithy.api#required" => {}}))
     PropertyMapping.type = Types::PropertyMapping
@@ -2233,6 +3220,7 @@ module Aws::IoTSiteWise
     PutDefaultEncryptionConfigurationResponse.add_member(:configuration_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationStatus, name: "configurationStatus", traits: {"smithy.api#required" => {}}))
     PutDefaultEncryptionConfigurationResponse.type = Types::PutDefaultEncryptionConfigurationResponse
     PutLoggingOptionsRequest.add_member(:logging_options, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingOptions, name: "loggingOptions", traits: {"smithy.api#required" => {}}))
+    PutLoggingOptionsRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName"))
     PutLoggingOptionsRequest.type = Types::PutLoggingOptionsRequest
     PutLoggingOptionsResponse.type = Types::PutLoggingOptionsResponse
     PutStorageConfigurationRequest.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "storageType", traits: {"smithy.api#required" => {}}))
@@ -2256,6 +3244,22 @@ module Aws::IoTSiteWise
     Quality.add_member(:good, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GOOD", traits: {"smithy.api#enumValue" => "GOOD"}))
     Quality.add_member(:bad, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BAD", traits: {"smithy.api#enumValue" => "BAD"}))
     Quality.add_member(:uncertain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNCERTAIN", traits: {"smithy.api#enumValue" => "UNCERTAIN"}))
+    QueryStatistics.add_member(:row_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "rowCount", traits: {"smithy.api#required" => {}}))
+    QueryStatistics.add_member(:bytes_scanned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "bytesScanned", traits: {"smithy.api#required" => {}}))
+    QueryStatistics.add_member(:execution_time_in_millis, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "executionTimeInMillis", traits: {"smithy.api#required" => {}}))
+    QueryStatistics.type = Types::QueryStatistics
+    QueryStatus.add_member(:submitted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMITTED", traits: {"smithy.api#enumValue" => "SUBMITTED"}))
+    QueryStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    QueryStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    QueryStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    QueryStatus.add_member(:canceled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELED", traits: {"smithy.api#enumValue" => "CANCELED"}))
+    QueryStatus.add_member(:canceling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANCELING", traits: {"smithy.api#enumValue" => "CANCELING"}))
+    QuerySummary.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId", traits: {"smithy.api#required" => {}}))
+    QuerySummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    QuerySummary.add_member(:submitted_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "submittedAt", traits: {"smithy.api#required" => {}}))
+    QuerySummary.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "completedAt"))
+    QuerySummary.type = Types::QuerySummary
+    QuerySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QuerySummary, name: "member"))
     QueryTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
     QueryTimeoutException.type = Types::QueryTimeoutException
     RawValueType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE", traits: {"smithy.api#enumValue" => "D"}))
@@ -2275,8 +3279,21 @@ module Aws::IoTSiteWise
     ResourceAlreadyExistsException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceAlreadyExistsException.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     ResourceAlreadyExistsException.type = Types::ResourceAlreadyExistsException
+    ResourceError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceErrorCode, name: "code"))
+    ResourceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
+    ResourceError.type = Types::ResourceError
+    ResourceErrorCode.add_member(:validation_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION_ERROR", traits: {"smithy.api#enumValue" => "VALIDATION_ERROR"}))
+    ResourceErrorCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "INTERNAL_FAILURE"}))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    ResourceState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    ResourceState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ResourceState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    ResourceState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    ResourceState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    ResourceStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceError, name: "error"))
+    ResourceStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceState, name: "state"))
+    ResourceStatus.type = Types::ResourceStatus
     ResourceType.add_member(:portal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PORTAL", traits: {"smithy.api#enumValue" => "PORTAL"}))
     ResourceType.add_member(:project, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROJECT", traits: {"smithy.api#enumValue" => "PROJECT"}))
     ResponseStream.add_member(:trace, Types::ResponseStream::Trace, ::Smithy::Schema::Shapes::MemberShape.new(target: Trace, name: "trace"))
@@ -2290,19 +3307,59 @@ module Aws::IoTSiteWise
     ResponseStream.add_member(:throttling_exception, Types::ResponseStream::ThrottlingException, ::Smithy::Schema::Shapes::MemberShape.new(target: ThrottlingException, name: "throttlingException"))
     ResponseStream.add_member(:unknown, Types::ResponseStream::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ResponseStream.type = Types::ResponseStream
+    Result.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnValue, name: "member"))
     RetentionPeriod.add_member(:number_of_days, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfDays, name: "numberOfDays"))
     RetentionPeriod.add_member(:unlimited, ::Smithy::Schema::Shapes::MemberShape.new(target: Unlimited, name: "unlimited"))
     RetentionPeriod.type = Types::RetentionPeriod
     Row.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: DatumList, name: "data", traits: {"smithy.api#required" => {}}))
     Row.type = Types::Row
+    RowList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Result, name: "member"))
     Rows.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Row, name: "member"))
+    S3AccessPointSource.add_member(:access_point_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MountS3AccessPointArn, name: "accessPointArn", traits: {"smithy.api#required" => {}}))
+    S3AccessPointSource.add_member(:prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: MountS3KeyPrefix, name: "prefix"))
+    S3AccessPointSource.type = Types::S3AccessPointSource
     ScalarType.add_member(:boolean, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BOOLEAN", traits: {"smithy.api#enumValue" => "BOOLEAN"}))
     ScalarType.add_member(:int, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INT", traits: {"smithy.api#enumValue" => "INT"}))
     ScalarType.add_member(:double, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOUBLE", traits: {"smithy.api#enumValue" => "DOUBLE"}))
     ScalarType.add_member(:timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIMESTAMP", traits: {"smithy.api#enumValue" => "TIMESTAMP"}))
     ScalarType.add_member(:string, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRING", traits: {"smithy.api#enumValue" => "STRING"}))
+    SearchFilters.add_member(:time_series_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesIdList, name: "timeSeriesIds"))
+    SearchFilters.add_member(:dataset_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSetIdList, name: "datasetIds"))
+    SearchFilters.add_member(:time_intervals, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeIntervalList, name: "timeIntervals"))
+    SearchFilters.type = Types::SearchFilters
+    SearchResult.add_member(:search_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchId, name: "searchId", traits: {"smithy.api#required" => {}}))
+    SearchResult.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    SearchResult.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetId, name: "datasetId", traits: {"smithy.api#required" => {}}))
+    SearchResult.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId", traits: {"smithy.api#required" => {}}))
+    SearchResult.add_member(:start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTimestamp", traits: {"smithy.api#required" => {}}))
+    SearchResult.add_member(:end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTimestamp", traits: {"smithy.api#required" => {}}))
+    SearchResult.add_member(:top_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "topTimestamp", traits: {"smithy.api#required" => {}}))
+    SearchResult.add_member(:score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Float, name: "score", traits: {"smithy.api#required" => {}}))
+    SearchResult.type = Types::SearchResult
+    SearchResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResult, name: "member"))
+    SearchStatus.add_member(:queued, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUEUED", traits: {"smithy.api#enumValue" => "QUEUED"}))
+    SearchStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    SearchStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "SUCCEEDED"}))
+    SearchStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    SearchStatusFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchStatus, name: "member"))
+    SearchSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchSummary, name: "member"))
+    SearchSummary.add_member(:search_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchId, name: "searchId", traits: {"smithy.api#required" => {}}))
+    SearchSummary.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    SearchSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    SearchSummary.add_member(:query_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQueryStatement, name: "queryStatement", traits: {"smithy.api#required" => {}}))
+    SearchSummary.add_member(:search_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchType, name: "searchType", traits: {"smithy.api#required" => {}}))
+    SearchSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
+    SearchSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "startedAt"))
+    SearchSummary.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupId, name: "groupId"))
+    SearchSummary.type = Types::SearchSummary
+    SearchType.add_member(:deep, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEEP", traits: {"smithy.api#enumValue" => "DEEP"}))
+    SearchType.add_member(:quick, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "QUICK", traits: {"smithy.api#enumValue" => "QUICK"}))
+    SearchTypeFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchType, name: "member"))
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
+    SessionConfig.add_member(:session_start_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "sessionStartTimestamp", traits: {"smithy.api#required" => {}}))
+    SessionConfig.add_member(:session_end_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "sessionEndTimestamp", traits: {"smithy.api#required" => {}}))
+    SessionConfig.type = Types::SessionConfig
     SiemensIE.add_member(:iot_core_thing_name, ::Smithy::Schema::Shapes::MemberShape.new(target: IotCoreThingName, name: "iotCoreThingName", traits: {"smithy.api#required" => {}}))
     SiemensIE.type = Types::SiemensIE
     Source.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "arn"))
@@ -2310,6 +3367,38 @@ module Aws::IoTSiteWise
     Source.type = Types::Source
     SourceDetail.add_member(:kendra, ::Smithy::Schema::Shapes::MemberShape.new(target: KendraSourceDetail, name: "kendra"))
     SourceDetail.type = Types::SourceDetail
+    StartPipelineExecutionRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartPipelineExecutionRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartPipelineExecutionRequest.add_member(:execution_environment_variable_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionEnvironmentVariables, name: "executionEnvironmentVariableOverrides"))
+    StartPipelineExecutionRequest.add_member(:execution_mount_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: MountOverrides, name: "executionMountOverrides"))
+    StartPipelineExecutionRequest.add_member(:execution_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionPriority, name: "executionPriority"))
+    StartPipelineExecutionRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartPipelineExecutionRequest.type = Types::StartPipelineExecutionRequest
+    StartPipelineExecutionResponse.add_member(:pipeline_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "pipelineExecutionId", traits: {"smithy.api#required" => {}}))
+    StartPipelineExecutionResponse.type = Types::StartPipelineExecutionResponse
+    StartQueryRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartQueryRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartQueryRequest.add_member(:query_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryString, name: "queryStatement", traits: {"smithy.api#required" => {}}))
+    StartQueryRequest.type = Types::StartQueryRequest
+    StartQueryResponse.add_member(:query_id, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryId, name: "queryId", traits: {"smithy.api#required" => {}}))
+    StartQueryResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    StartQueryResponse.type = Types::StartQueryResponse
+    StartSearchRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartSearchRequest.add_member(:query_statement, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchQueryStatement, name: "queryStatement", traits: {"smithy.api#required" => {}}))
+    StartSearchRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    StartSearchRequest.add_member(:search_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchType, name: "searchType"))
+    StartSearchRequest.add_member(:search_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchFilters, name: "searchFilters"))
+    StartSearchRequest.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupId, name: "groupId"))
+    StartSearchRequest.type = Types::StartSearchRequest
+    StartSearchResponse.add_member(:search_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchId, name: "searchId", traits: {"smithy.api#required" => {}}))
+    StartSearchResponse.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#required" => {}}))
+    StartSearchResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    StartSearchResponse.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupId, name: "groupId"))
+    StartSearchResponse.type = Types::StartSearchResponse
+    StorageClass.add_member(:standard_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD_1", traits: {"smithy.api#enumValue" => "STANDARD_1"}))
+    StorageClass.add_member(:standard_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD_2", traits: {"smithy.api#enumValue" => "STANDARD_2"}))
+    StorageClass.add_member(:throughput_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THROUGHPUT_1", traits: {"smithy.api#enumValue" => "THROUGHPUT_1"}))
+    StorageClass.add_member(:throughput_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THROUGHPUT_2", traits: {"smithy.api#enumValue" => "THROUGHPUT_2"}))
     StorageType.add_member(:sitewise_default_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SITEWISE_DEFAULT_STORAGE", traits: {"smithy.api#enumValue" => "SITEWISE_DEFAULT_STORAGE"}))
     StorageType.add_member(:multi_layer_storage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI_LAYER_STORAGE", traits: {"smithy.api#enumValue" => "MULTI_LAYER_STORAGE"}))
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
@@ -2324,13 +3413,30 @@ module Aws::IoTSiteWise
     TargetResource.type = Types::TargetResource
     TargetResourceType.add_member(:asset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSET", traits: {"smithy.api#enumValue" => "ASSET"}))
     TargetResourceType.add_member(:computation_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPUTATION_MODEL", traits: {"smithy.api#enumValue" => "COMPUTATION_MODEL"}))
+    TaskConfiguration.add_member(:container_task_configuration, Types::TaskConfiguration::ContainerTaskConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerTaskConfiguration, name: "containerTaskConfiguration"))
+    TaskConfiguration.add_member(:unknown, Types::TaskConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    TaskConfiguration.type = Types::TaskConfiguration
+    TaskSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskSummary, name: "member"))
+    TaskSummary.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "taskName", traits: {"smithy.api#required" => {}}))
+    TaskSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    TaskSummary.add_member(:task_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "taskArn", traits: {"smithy.api#required" => {}}))
+    TaskSummary.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
+    TaskSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    TaskSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    TaskSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    TaskSummary.type = Types::TaskSummary
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.type = Types::ThrottlingException
     TimeInNanos.add_member(:time_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInSeconds, name: "timeInSeconds", traits: {"smithy.api#required" => {}}))
     TimeInNanos.add_member(:offset_in_nanos, ::Smithy::Schema::Shapes::MemberShape.new(target: OffsetInNanos, name: "offsetInNanos"))
     TimeInNanos.type = Types::TimeInNanos
+    TimeInterval.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTime", traits: {"smithy.api#required" => {}}))
+    TimeInterval.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTime", traits: {"smithy.api#required" => {}}))
+    TimeInterval.type = Types::TimeInterval
+    TimeIntervalList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInterval, name: "member"))
     TimeOrdering.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "ASCENDING"}))
     TimeOrdering.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "DESCENDING"}))
+    TimeSeriesIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "member"))
     TimeSeriesSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesSummary, name: "member"))
     TimeSeriesSummary.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId"))
     TimeSeriesSummary.add_member(:property_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "propertyId"))
@@ -2342,6 +3448,12 @@ module Aws::IoTSiteWise
     TimeSeriesSummary.add_member(:time_series_last_update_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "timeSeriesLastUpdateDate", traits: {"smithy.api#required" => {}}))
     TimeSeriesSummary.add_member(:time_series_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "timeSeriesArn", traits: {"smithy.api#required" => {}}))
     TimeSeriesSummary.type = Types::TimeSeriesSummary
+    TimeseriesItem.add_member(:time_series_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeSeriesId, name: "timeSeriesId"))
+    TimeseriesItem.add_member(:property_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetPropertyAlias, name: "propertyAlias"))
+    TimeseriesItem.add_member(:trim_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TrimSettings, name: "trimSettings"))
+    TimeseriesItem.add_member(:format_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: FormatSettings, name: "formatSettings"))
+    TimeseriesItem.type = Types::TimeseriesItem
+    TimeseriesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeseriesItem, name: "member"))
     Timestamps.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "member"))
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TooManyTagsException.add_member(:resource_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AmazonResourceName, name: "resourceName"))
@@ -2358,6 +3470,9 @@ module Aws::IoTSiteWise
     TraversalDirection.add_member(:parent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARENT", traits: {"smithy.api#enumValue" => "PARENT"}))
     TraversalDirection.add_member(:child, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHILD", traits: {"smithy.api#enumValue" => "CHILD"}))
     TraversalType.add_member(:path_to_root, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PATH_TO_ROOT", traits: {"smithy.api#enumValue" => "PATH_TO_ROOT"}))
+    TrimSettings.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "startTime", traits: {"smithy.api#required" => {}}))
+    TrimSettings.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: TimeInNanos, name: "endTime", traits: {"smithy.api#required" => {}}))
+    TrimSettings.type = Types::TrimSettings
     TumblingWindow.add_member(:interval, ::Smithy::Schema::Shapes::MemberShape.new(target: Interval, name: "interval", traits: {"smithy.api#required" => {}}))
     TumblingWindow.add_member(:offset, ::Smithy::Schema::Shapes::MemberShape.new(target: Offset, name: "offset"))
     TumblingWindow.type = Types::TumblingWindow
@@ -2387,6 +3502,7 @@ module Aws::IoTSiteWise
     UpdateAssetModelCompositeModelRequest.type = Types::UpdateAssetModelCompositeModelRequest
     UpdateAssetModelCompositeModelResponse.add_member(:asset_model_composite_model_path, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelCompositeModelPath, name: "assetModelCompositeModelPath", traits: {"smithy.api#required" => {}}))
     UpdateAssetModelCompositeModelResponse.add_member(:asset_model_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelStatus, name: "assetModelStatus", traits: {"smithy.api#required" => {}}))
+    UpdateAssetModelCompositeModelResponse.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelId"))
     UpdateAssetModelCompositeModelResponse.type = Types::UpdateAssetModelCompositeModelResponse
     UpdateAssetModelRequest.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateAssetModelRequest.add_member(:asset_model_external_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ExternalId, name: "assetModelExternalId"))
@@ -2400,6 +3516,7 @@ module Aws::IoTSiteWise
     UpdateAssetModelRequest.add_member(:if_none_match, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectAll, name: "ifNoneMatch", traits: {"smithy.api#httpHeader" => "If-None-Match"}))
     UpdateAssetModelRequest.add_member(:match_for_version_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelVersionType, name: "matchForVersionType", traits: {"smithy.api#httpHeader" => "Match-For-Version-Type"}))
     UpdateAssetModelRequest.type = Types::UpdateAssetModelRequest
+    UpdateAssetModelResponse.add_member(:asset_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetModelId"))
     UpdateAssetModelResponse.add_member(:asset_model_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetModelStatus, name: "assetModelStatus", traits: {"smithy.api#required" => {}}))
     UpdateAssetModelResponse.type = Types::UpdateAssetModelResponse
     UpdateAssetPropertyRequest.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomID, name: "assetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2415,6 +3532,7 @@ module Aws::IoTSiteWise
     UpdateAssetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateAssetRequest.add_member(:asset_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "assetDescription"))
     UpdateAssetRequest.type = Types::UpdateAssetRequest
+    UpdateAssetResponse.add_member(:asset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "assetId"))
     UpdateAssetResponse.add_member(:asset_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AssetStatus, name: "assetStatus", traits: {"smithy.api#required" => {}}))
     UpdateAssetResponse.type = Types::UpdateAssetResponse
     UpdateComputationModelRequest.add_member(:computation_model_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "computationModelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2434,8 +3552,11 @@ module Aws::IoTSiteWise
     UpdateDashboardRequest.type = Types::UpdateDashboardRequest
     UpdateDashboardResponse.type = Types::UpdateDashboardResponse
     UpdateDatasetRequest.add_member(:dataset_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "datasetId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateDatasetRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName"))
     UpdateDatasetRequest.add_member(:dataset_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedName, name: "datasetName", traits: {"smithy.api#required" => {}}))
-    UpdateDatasetRequest.add_member(:dataset_description, ::Smithy::Schema::Shapes::MemberShape.new(target: RestrictedDescription, name: "datasetDescription"))
+    UpdateDatasetRequest.add_member(:dataset_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "datasetDescription"))
+    UpdateDatasetRequest.add_member(:dataset_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetConfig, name: "datasetConfig"))
+    UpdateDatasetRequest.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: Metadata, name: "metadata"))
     UpdateDatasetRequest.add_member(:dataset_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSource, name: "datasetSource", traits: {"smithy.api#required" => {}}))
     UpdateDatasetRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateDatasetRequest.type = Types::UpdateDatasetRequest
@@ -2453,6 +3574,15 @@ module Aws::IoTSiteWise
     UpdateGatewayRequest.add_member(:gateway_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "gatewayId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateGatewayRequest.add_member(:gateway_name, ::Smithy::Schema::Shapes::MemberShape.new(target: GatewayName, name: "gatewayName", traits: {"smithy.api#required" => {}}))
     UpdateGatewayRequest.type = Types::UpdateGatewayRequest
+    UpdatePipelineRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdatePipelineRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "pipelineName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdatePipelineRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    UpdatePipelineRequest.add_member(:environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentVariablesMap, name: "environmentVariables"))
+    UpdatePipelineRequest.add_member(:computations, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeNodeList, name: "computations"))
+    UpdatePipelineRequest.type = Types::UpdatePipelineRequest
+    UpdatePipelineResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
+    UpdatePipelineResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    UpdatePipelineResponse.type = Types::UpdatePipelineResponse
     UpdatePortalRequest.add_member(:portal_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ID, name: "portalId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdatePortalRequest.add_member(:portal_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "portalName", traits: {"smithy.api#required" => {}}))
     UpdatePortalRequest.add_member(:portal_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "portalDescription"))
@@ -2473,6 +3603,21 @@ module Aws::IoTSiteWise
     UpdateProjectRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateProjectRequest.type = Types::UpdateProjectRequest
     UpdateProjectResponse.type = Types::UpdateProjectResponse
+    UpdateTaskRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateTaskRequest.add_member(:task_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceName, name: "taskName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateTaskRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "description"))
+    UpdateTaskRequest.add_member(:task_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskConfiguration, name: "taskConfiguration"))
+    UpdateTaskRequest.type = Types::UpdateTaskRequest
+    UpdateTaskResponse.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "version", traits: {"smithy.api#required" => {}}))
+    UpdateTaskResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    UpdateTaskResponse.type = Types::UpdateTaskResponse
+    UpdateWorkspaceRequest.add_member(:workspace_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "workspaceName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateWorkspaceRequest.add_member(:workspace_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "workspaceDescription"))
+    UpdateWorkspaceRequest.add_member(:encryption_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceEncryptionConfiguration, name: "encryptionConfiguration"))
+    UpdateWorkspaceRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateWorkspaceRequest.type = Types::UpdateWorkspaceRequest
+    UpdateWorkspaceResponse.add_member(:workspace_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceStatus, name: "workspaceStatus", traits: {"smithy.api#required" => {}}))
+    UpdateWorkspaceResponse.type = Types::UpdateWorkspaceResponse
     UserIdentity.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityId, name: "id", traits: {"smithy.api#required" => {}}))
     UserIdentity.type = Types::UserIdentity
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "message"))
@@ -2487,17 +3632,42 @@ module Aws::IoTSiteWise
     Variant.add_member(:boolean_value, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValueBooleanValue, name: "booleanValue"))
     Variant.add_member(:null_value, ::Smithy::Schema::Shapes::MemberShape.new(target: PropertyValueNullValue, name: "nullValue"))
     Variant.type = Types::Variant
+    VideoDataType.add_member(:mp4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MP4", traits: {"smithy.api#enumValue" => "VIDEO-MP4"}))
     WarmTierRetentionPeriod.add_member(:number_of_days, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfDays, name: "numberOfDays"))
     WarmTierRetentionPeriod.add_member(:unlimited, ::Smithy::Schema::Shapes::MemberShape.new(target: Unlimited, name: "unlimited"))
     WarmTierRetentionPeriod.type = Types::WarmTierRetentionPeriod
     WarmTierState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     WarmTierState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    WorkspaceEncryptionConfiguration.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, name: "encryptionType", traits: {"smithy.api#required" => {}}))
+    WorkspaceEncryptionConfiguration.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "kmsKeyId"))
+    WorkspaceEncryptionConfiguration.type = Types::WorkspaceEncryptionConfiguration
+    WorkspaceEncryptionConfigurationInfo.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EncryptionType, name: "encryptionType", traits: {"smithy.api#required" => {}}))
+    WorkspaceEncryptionConfigurationInfo.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "kmsKeyArn"))
+    WorkspaceEncryptionConfigurationInfo.type = Types::WorkspaceEncryptionConfigurationInfo
+    WorkspaceErrorDetails.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "code", traits: {"smithy.api#required" => {}}))
+    WorkspaceErrorDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "message", traits: {"smithy.api#required" => {}}))
+    WorkspaceErrorDetails.type = Types::WorkspaceErrorDetails
+    WorkspaceState.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    WorkspaceState.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    WorkspaceState.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    WorkspaceState.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    WorkspaceState.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
+    WorkspaceStatus.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceState, name: "state", traits: {"smithy.api#required" => {}}))
+    WorkspaceStatus.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceErrorDetails, name: "error"))
+    WorkspaceStatus.type = Types::WorkspaceStatus
+    WorkspaceSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceSummary, name: "member"))
+    WorkspaceSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceName, name: "name", traits: {"smithy.api#required" => {}}))
+    WorkspaceSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "arn", traits: {"smithy.api#required" => {}}))
+    WorkspaceSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    WorkspaceSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    WorkspaceSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "updatedAt", traits: {"smithy.api#required" => {}}))
+    WorkspaceSummary.type = Types::WorkspaceSummary
 
     AWSIoTSiteWise = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.iotsitewise#AWSIoTSiteWise"
       service.name = "AWSIoTSiteWise"
       service.version = "2019-12-02"
-      service.traits = {"aws.api#service" => {"sdkId" => "IoTSiteWise", "arnNamespace" => "iotsitewise", "cloudFormationName" => "IoTSiteWise", "cloudTrailEventSource" => "iotsitewise.amazonaws.com", "endpointPrefix" => "iotsitewise"}, "aws.auth#sigv4" => {"name" => "iotsitewise"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS IoT SiteWise"}
+      service.traits = {"aws.api#service" => {"sdkId" => "IoTSiteWise", "arnNamespace" => "iotsitewise", "cloudFormationName" => "IoTSiteWise", "cloudTrailEventSource" => "iotsitewise.amazonaws.com", "endpointPrefix" => "iotsitewise"}, "aws.auth#sigv4" => {"name" => "iotsitewise"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS IoT SiteWise", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://iotsitewise-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://iotsitewise-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://iotsitewise.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://iotsitewise.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:associate_assets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#AssociateAssets"
         operation.name = "AssociateAssets"
@@ -2524,6 +3694,19 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/timeseries/associate", "code" => 200}}
       end)
+      service.add_operation(:batch_associate_data_segments_to_dataset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#BatchAssociateDataSegmentsToDataset"
+        operation.name = "BatchAssociateDataSegmentsToDataset"
+        operation.input = BatchAssociateDataSegmentsToDatasetRequest
+        operation.output = BatchAssociateDataSegmentsToDatasetResponse
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/datasets/{datasetId}/data-segments/associate", "code" => 200}}
+      end)
       service.add_operation(:batch_associate_project_assets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#BatchAssociateProjectAssets"
         operation.name = "BatchAssociateProjectAssets"
@@ -2535,6 +3718,30 @@ module Aws::IoTSiteWise
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "POST", "uri" => "/projects/{projectId}/assets/associate", "code" => 200}}
+      end)
+      service.add_operation(:batch_delete_dataset_data_segments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#BatchDeleteDatasetDataSegments"
+        operation.name = "BatchDeleteDatasetDataSegments"
+        operation.input = BatchDeleteDatasetDataSegmentsRequest
+        operation.output = BatchDeleteDatasetDataSegmentsResponse
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/datasets/{datasetId}/data-segments/batch-delete", "code" => 200}}
+      end)
+      service.add_operation(:batch_disassociate_data_segments_from_dataset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#BatchDisassociateDataSegmentsFromDataset"
+        operation.name = "BatchDisassociateDataSegmentsFromDataset"
+        operation.input = BatchDisassociateDataSegmentsFromDatasetRequest
+        operation.output = BatchDisassociateDataSegmentsFromDatasetResponse
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/datasets/{datasetId}/data-segments/disassociate", "code" => 200}}
       end)
       service.add_operation(:batch_disassociate_project_assets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#BatchDisassociateProjectAssets"
@@ -2597,6 +3804,46 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/properties", "code" => 200}}
       end)
+      service.add_operation(:cancel_enrichment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#CancelEnrichmentJob"
+        operation.name = "CancelEnrichmentJob"
+        operation.input = CancelEnrichmentJobRequest
+        operation.output = CancelEnrichmentJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/enrichment-jobs/{jobId}/cancel", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:cancel_pipeline_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#CancelPipelineExecution"
+        operation.name = "CancelPipelineExecution"
+        operation.input = CancelPipelineExecutionRequest
+        operation.output = CancelPipelineExecutionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/pipelines/{pipelineName}/executions/{pipelineExecutionId}/cancel", "code" => 202}}
+      end)
+      service.add_operation(:cancel_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#CancelQuery"
+        operation.name = "CancelQuery"
+        operation.input = CancelQueryRequest
+        operation.output = CancelQueryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/queries/{queryId}/cancel", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:create_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#CreateAccessPolicy"
         operation.name = "CreateAccessPolicy"
@@ -2608,6 +3855,20 @@ module Aws::IoTSiteWise
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "POST", "uri" => "/access-policies", "code" => 201}}
+      end)
+      service.add_operation(:create_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#CreateApplication"
+        operation.name = "CreateApplication"
+        operation.input = CreateApplicationRequest
+        operation.output = CreateApplicationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/applications", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_asset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#CreateAsset"
@@ -2706,6 +3967,33 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/datasets", "code" => 202}}
       end)
+      service.add_operation(:create_dataset_export_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#CreateDatasetExportJob"
+        operation.name = "CreateDatasetExportJob"
+        operation.input = CreateDatasetExportJobRequest
+        operation.output = CreateDatasetExportJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/dataset-export-jobs", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_enrichment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#CreateEnrichmentJob"
+        operation.name = "CreateEnrichmentJob"
+        operation.input = CreateEnrichmentJobRequest
+        operation.output = CreateEnrichmentJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/enrichment-jobs", "code" => 200}}
+      end)
       service.add_operation(:create_gateway, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#CreateGateway"
         operation.name = "CreateGateway"
@@ -2717,6 +4005,20 @@ module Aws::IoTSiteWise
         operation.errors << ResourceAlreadyExistsException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/20200301/gateways", "code" => 201}}
+      end)
+      service.add_operation(:create_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#CreatePipeline"
+        operation.name = "CreatePipeline"
+        operation.input = CreatePipelineRequest
+        operation.output = CreatePipelineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/pipelines", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#CreatePortal"
@@ -2742,6 +4044,33 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "POST", "uri" => "/projects", "code" => 201}}
       end)
+      service.add_operation(:create_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#CreateTask"
+        operation.name = "CreateTask"
+        operation.input = CreateTaskRequest
+        operation.output = CreateTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/tasks", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_workspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#CreateWorkspace"
+        operation.name = "CreateWorkspace"
+        operation.input = CreateWorkspaceRequest
+        operation.output = CreateWorkspaceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces", "code" => 200}}
+      end)
       service.add_operation(:delete_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DeleteAccessPolicy"
         operation.name = "DeleteAccessPolicy"
@@ -2752,6 +4081,19 @@ module Aws::IoTSiteWise
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/access-policies/{accessPolicyId}", "code" => 204}}
+      end)
+      service.add_operation(:delete_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DeleteApplication"
+        operation.name = "DeleteApplication"
+        operation.input = DeleteApplicationRequest
+        operation.output = DeleteApplicationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/workspaces/{workspaceName}/applications/{id}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_asset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DeleteAsset"
@@ -2850,6 +4192,19 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/20200301/gateways/{gatewayId}", "code" => 200}}
       end)
+      service.add_operation(:delete_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DeletePipeline"
+        operation.name = "DeletePipeline"
+        operation.input = DeletePipelineRequest
+        operation.output = DeletePipelineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/workspaces/{workspaceName}/pipelines/{pipelineName}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DeletePortal"
         operation.name = "DeletePortal"
@@ -2873,6 +4228,19 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/projects/{projectId}", "code" => 204}}
       end)
+      service.add_operation(:delete_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DeleteTask"
+        operation.name = "DeleteTask"
+        operation.input = DeleteTaskRequest
+        operation.output = DeleteTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/workspaces/{workspaceName}/tasks/{taskName}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_time_series, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DeleteTimeSeries"
         operation.name = "DeleteTimeSeries"
@@ -2884,6 +4252,19 @@ module Aws::IoTSiteWise
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/timeseries/delete", "code" => 200}}
+      end)
+      service.add_operation(:delete_workspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DeleteWorkspace"
+        operation.name = "DeleteWorkspace"
+        operation.input = DeleteWorkspaceRequest
+        operation.output = DeleteWorkspaceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "DELETE", "uri" => "/workspaces/{workspaceName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:describe_access_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DescribeAccessPolicy"
@@ -2906,6 +4287,18 @@ module Aws::IoTSiteWise
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/actions/{actionId}", "code" => 200}}
+      end)
+      service.add_operation(:describe_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DescribeApplication"
+        operation.name = "DescribeApplication"
+        operation.input = DescribeApplicationRequest
+        operation.output = DescribeApplicationResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/applications/{id}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_asset, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DescribeAsset"
@@ -3028,6 +4421,18 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/datasets/{datasetId}", "code" => 200}}
       end)
+      service.add_operation(:describe_dataset_export_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DescribeDatasetExportJob"
+        operation.name = "DescribeDatasetExportJob"
+        operation.input = DescribeDatasetExportJobRequest
+        operation.output = DescribeDatasetExportJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/dataset-export-jobs/{jobId}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:describe_default_encryption_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DescribeDefaultEncryptionConfiguration"
         operation.name = "DescribeDefaultEncryptionConfiguration"
@@ -3035,8 +4440,23 @@ module Aws::IoTSiteWise
         operation.output = DescribeDefaultEncryptionConfigurationResponse
         operation.errors << InternalFailureException
         operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/configuration/account/encryption", "code" => 200}}
+      end)
+      service.add_operation(:describe_enrichment_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DescribeEnrichmentJob"
+        operation.name = "DescribeEnrichmentJob"
+        operation.input = DescribeEnrichmentJobRequest
+        operation.output = DescribeEnrichmentJobResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/enrichment-jobs/{jobId}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DescribeExecution"
@@ -3082,6 +4502,31 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/logging", "code" => 200}}
       end)
+      service.add_operation(:describe_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DescribePipeline"
+        operation.name = "DescribePipeline"
+        operation.input = DescribePipelineRequest
+        operation.output = DescribePipelineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/pipelines/{pipelineName}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_pipeline_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DescribePipelineExecution"
+        operation.name = "DescribePipelineExecution"
+        operation.input = DescribePipelineExecutionRequest
+        operation.output = DescribePipelineExecutionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/pipelines/{pipelineName}/executions/{pipelineExecutionId}", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::DescribePipelineExecution.new
+      end)
       service.add_operation(:describe_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DescribePortal"
         operation.name = "DescribePortal"
@@ -3104,6 +4549,30 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "GET", "uri" => "/projects/{projectId}", "code" => 200}}
       end)
+      service.add_operation(:describe_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DescribeQuery"
+        operation.name = "DescribeQuery"
+        operation.input = DescribeQueryRequest
+        operation.output = DescribeQueryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/queries/{queryId}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_search, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DescribeSearch"
+        operation.name = "DescribeSearch"
+        operation.input = DescribeSearchRequest
+        operation.output = DescribeSearchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/searches/{searchId}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:describe_storage_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DescribeStorageConfiguration"
         operation.name = "DescribeStorageConfiguration"
@@ -3117,6 +4586,18 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/configuration/account/storage", "code" => 200}}
       end)
+      service.add_operation(:describe_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DescribeTask"
+        operation.name = "DescribeTask"
+        operation.input = DescribeTaskRequest
+        operation.output = DescribeTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/tasks/{taskName}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:describe_time_series, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DescribeTimeSeries"
         operation.name = "DescribeTimeSeries"
@@ -3127,6 +4608,18 @@ module Aws::IoTSiteWise
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/timeseries/describe", "code" => 200}}
+      end)
+      service.add_operation(:describe_workspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#DescribeWorkspace"
+        operation.name = "DescribeWorkspace"
+        operation.input = DescribeWorkspaceRequest
+        operation.output = DescribeWorkspaceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}", "code" => 200}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:disassociate_assets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#DisassociateAssets"
@@ -3218,6 +4711,18 @@ module Aws::IoTSiteWise
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/properties/history", "code" => 200}}
         operation[:paginator] = Paginators::GetAssetPropertyValueHistory.new
       end)
+      service.add_operation(:get_capture_data, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#GetCaptureData"
+        operation.name = "GetCaptureData"
+        operation.input = GetCaptureDataRequest
+        operation.output = GetCaptureDataResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/get-capture-data", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_interpolated_asset_property_values, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#GetInterpolatedAssetPropertyValues"
         operation.name = "GetInterpolatedAssetPropertyValues"
@@ -3230,6 +4735,32 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/properties/interpolated", "code" => 200}}
         operation[:paginator] = Paginators::GetInterpolatedAssetPropertyValues.new
+      end)
+      service.add_operation(:get_query_results, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#GetQueryResults"
+        operation.name = "GetQueryResults"
+        operation.input = GetQueryResultsRequest
+        operation.output = GetQueryResultsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/queries/{queryId}/results", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::GetQueryResults.new
+      end)
+      service.add_operation(:get_search_results, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#GetSearchResults"
+        operation.name = "GetSearchResults"
+        operation.input = GetSearchResultsRequest
+        operation.output = GetSearchResultsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/searches/{searchId}/results", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::GetSearchResults.new
       end)
       service.add_operation(:invoke_assistant, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#InvokeAssistant"
@@ -3266,6 +4797,20 @@ module Aws::IoTSiteWise
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/actions", "code" => 200}}
+        operation[:paginator] = Paginators::ListActions.new
+      end)
+      service.add_operation(:list_applications, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListApplications"
+        operation.name = "ListApplications"
+        operation.input = ListApplicationsRequest
+        operation.output = ListApplicationsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/applications", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListApplications.new
       end)
       service.add_operation(:list_asset_model_composite_models, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#ListAssetModelCompositeModels"
@@ -3298,6 +4843,7 @@ module Aws::IoTSiteWise
         operation.output = ListAssetModelsResponse
         operation.errors << InternalFailureException
         operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/asset-models", "code" => 200}}
         operation[:paginator] = Paginators::ListAssetModels.new
@@ -3419,6 +4965,43 @@ module Aws::IoTSiteWise
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "GET", "uri" => "/dashboards", "code" => 200}}
         operation[:paginator] = Paginators::ListDashboards.new
       end)
+      service.add_operation(:list_dataset_data_segment_relationships, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListDatasetDataSegmentRelationships"
+        operation.name = "ListDatasetDataSegmentRelationships"
+        operation.input = ListDatasetDataSegmentRelationshipsRequest
+        operation.output = ListDatasetDataSegmentRelationshipsResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/datasets/{datasetId}/data-segment-relationships", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListDatasetDataSegmentRelationships.new
+      end)
+      service.add_operation(:list_dataset_data_segments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListDatasetDataSegments"
+        operation.name = "ListDatasetDataSegments"
+        operation.input = ListDatasetDataSegmentsRequest
+        operation.output = ListDatasetDataSegmentsResponse
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/datasets/{datasetId}/data-segments", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListDatasetDataSegments.new
+      end)
+      service.add_operation(:list_dataset_export_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListDatasetExportJobs"
+        operation.name = "ListDatasetExportJobs"
+        operation.input = ListDatasetExportJobsRequest
+        operation.output = ListDatasetExportJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/dataset-export-jobs", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListDatasetExportJobs.new
+      end)
       service.add_operation(:list_datasets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#ListDatasets"
         operation.name = "ListDatasets"
@@ -3426,9 +5009,25 @@ module Aws::IoTSiteWise
         operation.output = ListDatasetsResponse
         operation.errors << InternalFailureException
         operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/datasets", "code" => 200}}
         operation[:paginator] = Paginators::ListDatasets.new
+      end)
+      service.add_operation(:list_enrichment_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListEnrichmentJobs"
+        operation.name = "ListEnrichmentJobs"
+        operation.input = ListEnrichmentJobsRequest
+        operation.output = ListEnrichmentJobsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/enrichment-jobs", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListEnrichmentJobs.new
       end)
       service.add_operation(:list_executions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#ListExecutions"
@@ -3465,6 +5064,32 @@ module Aws::IoTSiteWise
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/interface/{interfaceAssetModelId}/asset-models", "code" => 200}}
         operation[:paginator] = Paginators::ListInterfaceRelationships.new
       end)
+      service.add_operation(:list_pipeline_executions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListPipelineExecutions"
+        operation.name = "ListPipelineExecutions"
+        operation.input = ListPipelineExecutionsRequest
+        operation.output = ListPipelineExecutionsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/pipelines/{pipelineName}/executions", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListPipelineExecutions.new
+      end)
+      service.add_operation(:list_pipelines, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListPipelines"
+        operation.name = "ListPipelines"
+        operation.input = ListPipelinesRequest
+        operation.output = ListPipelinesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/pipelines", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListPipelines.new
+      end)
       service.add_operation(:list_portals, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#ListPortals"
         operation.name = "ListPortals"
@@ -3498,6 +5123,32 @@ module Aws::IoTSiteWise
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "GET", "uri" => "/projects", "code" => 200}}
         operation[:paginator] = Paginators::ListProjects.new
       end)
+      service.add_operation(:list_queries, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListQueries"
+        operation.name = "ListQueries"
+        operation.input = ListQueriesRequest
+        operation.output = ListQueriesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/queries", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListQueries.new
+      end)
+      service.add_operation(:list_searches, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListSearches"
+        operation.name = "ListSearches"
+        operation.input = ListSearchesRequest
+        operation.output = ListSearchesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/searches/list", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListSearches.new
+      end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#ListTagsForResource"
         operation.name = "ListTagsForResource"
@@ -3512,6 +5163,19 @@ module Aws::IoTSiteWise
         operation.errors << UnauthorizedException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/tags", "code" => 200}}
       end)
+      service.add_operation(:list_tasks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListTasks"
+        operation.name = "ListTasks"
+        operation.input = ListTasksRequest
+        operation.output = ListTasksResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces/{workspaceName}/tasks", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListTasks.new
+      end)
       service.add_operation(:list_time_series, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#ListTimeSeries"
         operation.name = "ListTimeSeries"
@@ -3523,6 +5187,18 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/timeseries", "code" => 200}}
         operation[:paginator] = Paginators::ListTimeSeries.new
+      end)
+      service.add_operation(:list_workspaces, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#ListWorkspaces"
+        operation.name = "ListWorkspaces"
+        operation.input = ListWorkspacesRequest
+        operation.output = ListWorkspacesResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "GET", "uri" => "/workspaces", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListWorkspaces.new
       end)
       service.add_operation(:put_asset_model_interface_relationship, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#PutAssetModelInterfaceRelationship"
@@ -3546,6 +5222,7 @@ module Aws::IoTSiteWise
         operation.errors << InternalFailureException
         operation.errors << InvalidRequestException
         operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/configuration/account/encryption", "code" => 200}}
       end)
@@ -3574,6 +5251,47 @@ module Aws::IoTSiteWise
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/configuration/account/storage", "code" => 200}}
+      end)
+      service.add_operation(:start_pipeline_execution, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#StartPipelineExecution"
+        operation.name = "StartPipelineExecution"
+        operation.input = StartPipelineExecutionRequest
+        operation.output = StartPipelineExecutionResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/pipelines/{pipelineName}/executions", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_query, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#StartQuery"
+        operation.name = "StartQuery"
+        operation.input = StartQueryRequest
+        operation.output = StartQueryResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/queries", "code" => 202}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:start_search, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#StartSearch"
+        operation.name = "StartSearch"
+        operation.input = StartSearchRequest
+        operation.output = StartSearchResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "data."}, "smithy.api#http" => {"method" => "POST", "uri" => "/workspaces/{workspaceName}/searches", "code" => 202}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#TagResource"
@@ -3704,6 +5422,7 @@ module Aws::IoTSiteWise
         operation.errors << InternalFailureException
         operation.errors << InvalidRequestException
         operation.errors << LimitExceededException
+        operation.errors << ResourceAlreadyExistsException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/datasets/{datasetId}", "code" => 202}}
@@ -3733,6 +5452,20 @@ module Aws::IoTSiteWise
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "POST", "uri" => "/20200301/gateways/{gatewayId}/capability", "code" => 201}}
       end)
+      service.add_operation(:update_pipeline, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#UpdatePipeline"
+        operation.name = "UpdatePipeline"
+        operation.input = UpdatePipelineRequest
+        operation.output = UpdatePipelineResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/workspaces/{workspaceName}/pipelines/{pipelineName}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:update_portal, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.iotsitewise#UpdatePortal"
         operation.name = "UpdatePortal"
@@ -3755,6 +5488,32 @@ module Aws::IoTSiteWise
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "monitor."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/projects/{projectId}", "code" => 200}}
+      end)
+      service.add_operation(:update_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#UpdateTask"
+        operation.name = "UpdateTask"
+        operation.input = UpdateTaskRequest
+        operation.output = UpdateTaskResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/workspaces/{workspaceName}/tasks/{taskName}", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:update_workspace, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.iotsitewise#UpdateWorkspace"
+        operation.name = "UpdateWorkspace"
+        operation.input = UpdateWorkspaceRequest
+        operation.output = UpdateWorkspaceResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictingOperationException
+        operation.errors << InternalFailureException
+        operation.errors << InvalidRequestException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.traits = {"smithy.api#endpoint" => {"hostPrefix" => "api."}, "smithy.api#http" => {"method" => "PUT", "uri" => "/workspaces/{workspaceName}", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
     end
 

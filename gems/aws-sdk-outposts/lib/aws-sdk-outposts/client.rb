@@ -144,18 +144,18 @@ module Aws::Outposts
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -254,6 +254,10 @@ module Aws::Outposts
     # @param [Hash, Types::CreateOrderInput] params
     # @option params [String] :outpost_identifier
     #   <p> The ID or the Amazon Resource Name (ARN) of the Outpost. </p>
+    # @option params [String] :quote_identifier
+    #   <p>The ID of the quote to use for the order.</p>
+    # @option params [String] :quote_option_identifier
+    #   <p>The ID of the quote option to use for the order.</p>
     # @option params [Array<Types::LineItemRequest>] :line_items
     #   <p>The line items that make up the order.</p>
     # @option params [String] :payment_option
@@ -263,7 +267,9 @@ module Aws::Outposts
     # @example Request syntax with placeholder values
     #   params = {
     #     outpost_identifier: "OutpostIdentifier", # required
-    #     line_items: [ # required
+    #     quote_identifier: "QuoteIdentifier",
+    #     quote_option_identifier: "QuoteOptionIdentifier",
+    #     line_items: [
     #       {
     #         catalog_item_id: "SkuCode",
     #         quantity: 1
@@ -279,6 +285,8 @@ module Aws::Outposts
     #   {
     #     order: {
     #       outpost_id: "OutpostIdOnly",
+    #       quote_identifier: "QuoteIdentifier",
+    #       quote_option_identifier: "QuoteOptionIdentifier",
     #       order_id: "OrderId",
     #       status: "RECEIVED" # One of: ["RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "DELIVERED", "COMPLETED", "ERROR"],
     #       line_items: [
@@ -362,12 +370,289 @@ module Aws::Outposts
     #         "TagKey" => "TagValue"
     #       },
     #       site_arn: "SiteArn",
-    #       supported_hardware_type: "RACK" # One of: ["RACK", "SERVER"]
+    #       supported_hardware_type: "RACK" # One of: ["RACK", "SERVER"],
+    #       generation: "GENERATION_2" # One of: ["GENERATION_2", "GENERATION_1"],
+    #       rack_scaling_type: "SINGLE_RACK" # One of: ["SINGLE_RACK", "MULTI_RACK"]
     #     }
     #   }
     # @return [Types::CreateOutpostOutput]
     def create_outpost(params = {}, options = {})
       request = build_request(:create_outpost, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates the private connectivity configuration for the specified Outpost. Private
+    #       connectivity establishes a service link VPN connection between the Outpost and its home
+    #       Amazon Web Services Region using a VPC and subnet that you specify, which allows the service link traffic
+    #       to flow through your VPC and minimizes public internet exposure.</p>
+    # @param [Hash, Types::CreatePrivateConnectivityConfigInput] params
+    # @option params [String] :outpost_id
+    #   <p>The ID or ARN of the Outpost.</p>
+    # @option params [Array<Types::VpcInformation>] :vpc_information_list
+    #   <p>Information about the VPC used for private connectivity, including the VPC, its subnets,
+    #         and an associated VPC endpoint. You can specify at most one entry.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     outpost_id: "OutpostId", # required
+    #     vpc_information_list: [ # required
+    #       {
+    #         vpc_id: "VpcId",
+    #         subnet_ids: ["SubnetId"],
+    #         vpc_endpoint_id: "VpcEndpointId"
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_private_connectivity_config(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     private_connectivity_config: {
+    #       role_arn: "RoleArn",
+    #       private_connectivity_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #       vpc_information_list: [
+    #         {
+    #           vpc_id: "VpcId",
+    #           subnet_ids: ["SubnetId"],
+    #           vpc_endpoint_id: "VpcEndpointId"
+    #         }
+    #       ],
+    #       provisioning_role_arn: "RoleArn"
+    #     },
+    #     outpost_id: "OutpostId"
+    #   }
+    # @return [Types::CreatePrivateConnectivityConfigOutput]
+    def create_private_connectivity_config(params = {}, options = {})
+      request = build_request(:create_private_connectivity_config, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a quote for an Outpost. A quote provides pricing and configuration options based
+    #       on the requested capacity. You can optionally associate the quote with an existing Outpost or
+    #       create a standalone quote by specifying only the country code and requested capacities.</p>
+    # @param [Hash, Types::CreateQuoteInput] params
+    # @option params [String] :outpost_identifier
+    #   <p>The ID or ARN of the Outpost to associate with the quote. If not specified, the quote is
+    #         created without an Outpost association.</p>
+    # @option params [String] :country_code
+    #   <p>The country code for the Outpost site location.</p>
+    # @option params [Array<Types::QuoteCapacity>] :requested_capacities
+    #   <p>The capacity requirements for the quote. Each entry specifies a capacity type (such as
+    #         Amazon EC2), the unit, and the quantity. For Amazon EC2, the quantity is the number of additional
+    #         instances to add to the Outpost. For Amazon EBS and Amazon S3, the quantity is the total desired
+    #         end-state capacity of the Outpost.</p>
+    # @option params [Array<Types::QuoteConstraint>] :requested_constraints
+    #   <p>The physical constraints for the quote, such as maximum number of racks, maximum power
+    #         draw per rack, or maximum weight per rack.</p>
+    # @option params [Array<String>] :requested_payment_options
+    #   <p>The payment options to include in the quote pricing. If not specified, all available
+    #         payment options are returned.</p>
+    # @option params [Array<String>] :requested_payment_terms
+    #   <p>The payment terms to include in the quote pricing. If not specified, all available
+    #         payment terms are returned.</p>
+    # @option params [String] :description
+    #   <p>A description for the quote.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     outpost_identifier: "OutpostIdentifier",
+    #     country_code: "CountryCode", # required
+    #     requested_capacities: [ # required
+    #       {
+    #         quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #         unit: "String",
+    #         quantity: 1.0
+    #       }
+    #     ],
+    #     requested_constraints: [
+    #       {
+    #         quote_constraint_type: "RACK_MAXIMUM" # One of: ["RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"],
+    #         value: "ConstraintValue"
+    #       }
+    #     ],
+    #     requested_payment_options: ["ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"]],
+    #     requested_payment_terms: ["THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"]],
+    #     description: "QuoteDescription"
+    #   }
+    #   options = {}
+    #   response = client.create_quote(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     quote: {
+    #       quote_id: "QuoteId",
+    #       account_id: "AccountId",
+    #       quote_status: "CREATED" # One of: ["CREATED", "ORDER_SUBMITTED", "EXPIRED"],
+    #       status_message: "StatusMessage",
+    #       outpost_arn: "OutpostArn",
+    #       country_code: "CountryCode",
+    #       requested_capacities: [
+    #         {
+    #           quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #           unit: "String",
+    #           quantity: 1.0
+    #         }
+    #       ],
+    #       requested_constraints: [
+    #         {
+    #           quote_constraint_type: "RACK_MAXIMUM" # One of: ["RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"],
+    #           value: "ConstraintValue"
+    #         }
+    #       ],
+    #       requested_payment_options: ["ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"]],
+    #       requested_payment_terms: ["THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"]],
+    #       quote_options: [
+    #         {
+    #           quote_option_identifier: "QuoteOptionIdentifier",
+    #           capacities: [
+    #             {
+    #               quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #               unit: "String",
+    #               quantity: 1.0
+    #             }
+    #           ],
+    #           capacity_summary: {
+    #             existing_capacities: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ],
+    #             final_capacities: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ],
+    #             capacity_change: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ]
+    #           },
+    #           specifications: [
+    #             {
+    #               quote_specification_type: "UPDATED_RACK" # One of: ["UPDATED_RACK", "NEW_RACK", "EXISTING_RACK", "SERVER"],
+    #               existing_rack_specification_details: {
+    #                 rack_id: "RackId",
+    #                 rack_use: "NETWORKING" # One of: ["NETWORKING", "COMPUTE"],
+    #                 rack_power_draw_kva: 1.0,
+    #                 rack_weight_lbs: 1.0,
+    #                 rack_height_inches: 1.0,
+    #                 rack_width_inches: 1.0,
+    #                 rack_depth_inches: 1.0,
+    #                 rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                 ec2_capacities: [
+    #                   {
+    #                     family: "Family",
+    #                     max_size: "MaxSize",
+    #                     quantity: "Quantity"
+    #                   }
+    #                 ]
+    #               },
+    #               final_rack_specification_details: {
+    #                 rack_id: "RackId",
+    #                 rack_use: "NETWORKING" # One of: ["NETWORKING", "COMPUTE"],
+    #                 rack_power_draw_kva: 1.0,
+    #                 rack_weight_lbs: 1.0,
+    #                 rack_height_inches: 1.0,
+    #                 rack_width_inches: 1.0,
+    #                 rack_depth_inches: 1.0,
+    #                 rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                 ec2_capacities: [
+    #                   {
+    #                     family: "Family",
+    #                     max_size: "MaxSize",
+    #                     quantity: "Quantity"
+    #                   }
+    #                 ]
+    #               },
+    #               server_specification_details: {
+    #                 server_power_draw_kva: 1.0,
+    #                 server_weight_lbs: 1.0,
+    #                 server_height_inches: 1.0,
+    #                 server_width_inches: 1.0,
+    #                 server_depth_inches: 1.0,
+    #                 rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                 ec2_capacities: [
+    #                   {
+    #                     family: "Family",
+    #                     max_size: "MaxSize",
+    #                     quantity: "Quantity"
+    #                   }
+    #                 ]
+    #               }
+    #             }
+    #           ],
+    #           pricing_options: [
+    #             {
+    #               pricing_type: "SUBSCRIPTION" # One of: ["SUBSCRIPTION"],
+    #               subscription_pricing_details: {
+    #                 payment_option: "ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"],
+    #                 payment_term: "THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"],
+    #                 upfront_price: 1.0,
+    #                 monthly_recurring_price: 1.0,
+    #                 currency: "USD" # One of: ["USD"]
+    #               }
+    #             }
+    #           ]
+    #         }
+    #       ],
+    #       ordering_requirements: [
+    #         {
+    #           status_message: "StatusMessage",
+    #           ordering_requirement_type: "OUTPOST_ACTIVE_CHECK_ERROR" # One of: ["OUTPOST_ACTIVE_CHECK_ERROR", "MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR", "VALID_ZIP_CODE_CHECK_ERROR", "RACK_PHYSICAL_PROPERTIES_CHECK_ERROR", "OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR", "SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR", "COUNTRY_CODE_MISMATCH_CHECK_ERROR", "OUTPOST_GENERATION_MISMATCH_ERROR", "UNSUPPORTED", "OUTPOST_ID_MISSING_ON_QUOTE_ERROR", "ENTERPRISE_SUPPORT_ERROR", "SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR", "SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR", "SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR", "OUTPOST_STATE_CHANGED_ERROR", "OUTPOST_NOT_FOUND_ERROR", "OUTPOST_RENEWAL_REQUIRED_ERROR"],
+    #           status: "PASS" # One of: ["PASS", "FAIL", "EXEMPT"]
+    #         }
+    #       ],
+    #       submitted_order_id: "OrderIdentifier",
+    #       created_date: Time.now,
+    #       expiration_date: Time.now,
+    #       description: "QuoteDescription"
+    #     }
+    #   }
+    # @return [Types::CreateQuoteOutput]
+    def create_quote(params = {}, options = {})
+      request = build_request(:create_quote, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a renewal contract for the specified Outpost.</p>
+    # @param [Hash, Types::CreateRenewalInput] params
+    # @option params [String] :payment_option
+    #   <p>The payment option.</p>
+    # @option params [String] :payment_term
+    #   <p>The payment term.</p>
+    # @option params [String] :outpost_identifier
+    #   <p>The ID or ARN of the Outpost.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     payment_option: "ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"], # required
+    #     payment_term: "THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"], # required
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     client_token: "AutoFillIdempotencyToken"
+    #   }
+    #   options = {}
+    #   response = client.create_renewal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     payment_option: "ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"],
+    #     payment_term: "THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"],
+    #     outpost_id: "OutpostIdOnly",
+    #     upfront_price: 1.0,
+    #     monthly_recurring_price: 1.0,
+    #     currency: "USD" # One of: ["USD"]
+    #   }
+    # @return [Types::CreateRenewalOutput]
+    def create_renewal(params = {}, options = {})
+      request = build_request(:create_renewal, params)
       request.send_request(options)
     end
 
@@ -392,7 +677,7 @@ module Aws::Outposts
     # @option params [Types::RackPhysicalProperties] :rack_physical_properties
     #   <p> Information about the physical and logistical details for the rack at this site.
     #         For more information
-    #         about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network 
+    #         about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network
     #           readiness checklist</a> in the Amazon Web Services Outposts User Guide.
     #           </p>
     # @example Request syntax with placeholder values
@@ -497,6 +782,25 @@ module Aws::Outposts
       request.send_request(options)
     end
 
+    # <p>Deletes the specified quote.</p>
+    # @param [Hash, Types::DeleteQuoteInput] params
+    # @option params [String] :quote_identifier
+    #   <p>The ID of the quote.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     quote_identifier: "QuoteIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_quote(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteQuoteOutput]
+    def delete_quote(params = {}, options = {})
+      request = build_request(:delete_quote, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the specified site.</p>
     # @param [Hash, Types::DeleteSiteInput] params
     # @option params [String] :site_id
@@ -545,7 +849,7 @@ module Aws::Outposts
     #     instances_to_exclude: {
     #       instances: ["InstanceId"],
     #       account_ids: ["AccountId"],
-    #       services: ["AWS" # One of: ["AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]]
+    #       services: ["AWS" # One of: ["AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]]
     #     },
     #     dry_run: false,
     #     capacity_task_status: "REQUESTED" # One of: ["REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "WAITING_FOR_EVACUATION", "CANCELLATION_IN_PROGRESS", "CANCELLED"],
@@ -590,7 +894,8 @@ module Aws::Outposts
     #       power_kva: 1.0,
     #       weight_lbs: 1,
     #       supported_uplink_gbps: [1],
-    #       supported_storage: ["EBS" # One of: ["EBS", "S3"]]
+    #       supported_storage: ["EBS" # One of: ["EBS", "S3"]],
+    #       rack_scaling_type: "SINGLE_RACK" # One of: ["SINGLE_RACK", "MULTI_RACK"]
     #     }
     #   }
     # @return [Types::GetCatalogItemOutput]
@@ -605,7 +910,7 @@ module Aws::Outposts
     #          </note>
     #          <p> Gets information about the specified connection. </p>
     #          <p>
-    #       Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For 
+    #       Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For
     #       more information, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html">
     #       Amazon Web Services managed policies for Amazon Web Services Outposts</a> and <a href="https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html">
     #       Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail</a> in the <i>Amazon Web Services Outposts User Guide</i>.
@@ -653,6 +958,8 @@ module Aws::Outposts
     #   {
     #     order: {
     #       outpost_id: "OutpostIdOnly",
+    #       quote_identifier: "QuoteIdentifier",
+    #       quote_option_identifier: "QuoteOptionIdentifier",
     #       order_id: "OrderId",
     #       status: "RECEIVED" # One of: ["RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "DELIVERED", "COMPLETED", "ERROR"],
     #       line_items: [
@@ -715,7 +1022,9 @@ module Aws::Outposts
     #         "TagKey" => "TagValue"
     #       },
     #       site_arn: "SiteArn",
-    #       supported_hardware_type: "RACK" # One of: ["RACK", "SERVER"]
+    #       supported_hardware_type: "RACK" # One of: ["RACK", "SERVER"],
+    #       generation: "GENERATION_2" # One of: ["GENERATION_2", "GENERATION_1"],
+    #       rack_scaling_type: "SINGLE_RACK" # One of: ["SINGLE_RACK", "MULTI_RACK"]
     #     }
     #   }
     # @return [Types::GetOutpostOutput]
@@ -748,15 +1057,18 @@ module Aws::Outposts
     #       {
     #         subscription_id: "String",
     #         subscription_type: "ORIGINAL" # One of: ["ORIGINAL", "RENEWAL", "CAPACITY_INCREASE"],
-    #         subscription_status: "ACTIVE" # One of: ["ACTIVE", "INACTIVE", "CANCELLED"],
+    #         subscription_status: "ACTIVE" # One of: ["ACTIVE", "PENDING", "INACTIVE", "CANCELLED"],
     #         order_ids: ["String"],
     #         begin_date: Time.now,
     #         end_date: Time.now,
+    #         currency: "USD" # One of: ["USD"],
     #         monthly_recurring_price: 1.0,
     #         upfront_price: 1.0
     #       }
     #     ],
-    #     contract_end_date: "String"
+    #     contract_end_date: "String",
+    #     payment_term: "THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"],
+    #     payment_option: "ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"]
     #   }
     # @return [Types::GetOutpostBillingInformationOutput]
     def get_outpost_billing_information(params = {}, options = {})
@@ -838,6 +1150,226 @@ module Aws::Outposts
     # @return [Types::GetOutpostSupportedInstanceTypesOutput]
     def get_outpost_supported_instance_types(params = {}, options = {})
       request = build_request(:get_outpost_supported_instance_types, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the private connectivity configuration for the specified Outpost.</p>
+    # @param [Hash, Types::GetPrivateConnectivityConfigInput] params
+    # @option params [String] :outpost_id
+    #   <p>The ID or ARN of the Outpost.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     outpost_id: "OutpostId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_private_connectivity_config(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     private_connectivity_config: {
+    #       role_arn: "RoleArn",
+    #       private_connectivity_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #       vpc_information_list: [
+    #         {
+    #           vpc_id: "VpcId",
+    #           subnet_ids: ["SubnetId"],
+    #           vpc_endpoint_id: "VpcEndpointId"
+    #         }
+    #       ],
+    #       provisioning_role_arn: "RoleArn"
+    #     }
+    #   }
+    # @return [Types::GetPrivateConnectivityConfigOutput]
+    def get_private_connectivity_config(params = {}, options = {})
+      request = build_request(:get_private_connectivity_config, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets information about the specified quote.</p>
+    # @param [Hash, Types::GetQuoteInput] params
+    # @option params [String] :quote_identifier
+    #   <p>The ID of the quote.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     quote_identifier: "QuoteIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.get_quote(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     quote: {
+    #       quote_id: "QuoteId",
+    #       account_id: "AccountId",
+    #       quote_status: "CREATED" # One of: ["CREATED", "ORDER_SUBMITTED", "EXPIRED"],
+    #       status_message: "StatusMessage",
+    #       outpost_arn: "OutpostArn",
+    #       country_code: "CountryCode",
+    #       requested_capacities: [
+    #         {
+    #           quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #           unit: "String",
+    #           quantity: 1.0
+    #         }
+    #       ],
+    #       requested_constraints: [
+    #         {
+    #           quote_constraint_type: "RACK_MAXIMUM" # One of: ["RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"],
+    #           value: "ConstraintValue"
+    #         }
+    #       ],
+    #       requested_payment_options: ["ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"]],
+    #       requested_payment_terms: ["THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"]],
+    #       quote_options: [
+    #         {
+    #           quote_option_identifier: "QuoteOptionIdentifier",
+    #           capacities: [
+    #             {
+    #               quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #               unit: "String",
+    #               quantity: 1.0
+    #             }
+    #           ],
+    #           capacity_summary: {
+    #             existing_capacities: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ],
+    #             final_capacities: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ],
+    #             capacity_change: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ]
+    #           },
+    #           specifications: [
+    #             {
+    #               quote_specification_type: "UPDATED_RACK" # One of: ["UPDATED_RACK", "NEW_RACK", "EXISTING_RACK", "SERVER"],
+    #               existing_rack_specification_details: {
+    #                 rack_id: "RackId",
+    #                 rack_use: "NETWORKING" # One of: ["NETWORKING", "COMPUTE"],
+    #                 rack_power_draw_kva: 1.0,
+    #                 rack_weight_lbs: 1.0,
+    #                 rack_height_inches: 1.0,
+    #                 rack_width_inches: 1.0,
+    #                 rack_depth_inches: 1.0,
+    #                 rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                 ec2_capacities: [
+    #                   {
+    #                     family: "Family",
+    #                     max_size: "MaxSize",
+    #                     quantity: "Quantity"
+    #                   }
+    #                 ]
+    #               },
+    #               final_rack_specification_details: {
+    #                 rack_id: "RackId",
+    #                 rack_use: "NETWORKING" # One of: ["NETWORKING", "COMPUTE"],
+    #                 rack_power_draw_kva: 1.0,
+    #                 rack_weight_lbs: 1.0,
+    #                 rack_height_inches: 1.0,
+    #                 rack_width_inches: 1.0,
+    #                 rack_depth_inches: 1.0,
+    #                 rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                 ec2_capacities: [
+    #                   {
+    #                     family: "Family",
+    #                     max_size: "MaxSize",
+    #                     quantity: "Quantity"
+    #                   }
+    #                 ]
+    #               },
+    #               server_specification_details: {
+    #                 server_power_draw_kva: 1.0,
+    #                 server_weight_lbs: 1.0,
+    #                 server_height_inches: 1.0,
+    #                 server_width_inches: 1.0,
+    #                 server_depth_inches: 1.0,
+    #                 rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                 ec2_capacities: [
+    #                   {
+    #                     family: "Family",
+    #                     max_size: "MaxSize",
+    #                     quantity: "Quantity"
+    #                   }
+    #                 ]
+    #               }
+    #             }
+    #           ],
+    #           pricing_options: [
+    #             {
+    #               pricing_type: "SUBSCRIPTION" # One of: ["SUBSCRIPTION"],
+    #               subscription_pricing_details: {
+    #                 payment_option: "ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"],
+    #                 payment_term: "THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"],
+    #                 upfront_price: 1.0,
+    #                 monthly_recurring_price: 1.0,
+    #                 currency: "USD" # One of: ["USD"]
+    #               }
+    #             }
+    #           ]
+    #         }
+    #       ],
+    #       ordering_requirements: [
+    #         {
+    #           status_message: "StatusMessage",
+    #           ordering_requirement_type: "OUTPOST_ACTIVE_CHECK_ERROR" # One of: ["OUTPOST_ACTIVE_CHECK_ERROR", "MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR", "VALID_ZIP_CODE_CHECK_ERROR", "RACK_PHYSICAL_PROPERTIES_CHECK_ERROR", "OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR", "SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR", "COUNTRY_CODE_MISMATCH_CHECK_ERROR", "OUTPOST_GENERATION_MISMATCH_ERROR", "UNSUPPORTED", "OUTPOST_ID_MISSING_ON_QUOTE_ERROR", "ENTERPRISE_SUPPORT_ERROR", "SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR", "SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR", "SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR", "OUTPOST_STATE_CHANGED_ERROR", "OUTPOST_NOT_FOUND_ERROR", "OUTPOST_RENEWAL_REQUIRED_ERROR"],
+    #           status: "PASS" # One of: ["PASS", "FAIL", "EXEMPT"]
+    #         }
+    #       ],
+    #       submitted_order_id: "OrderIdentifier",
+    #       created_date: Time.now,
+    #       expiration_date: Time.now,
+    #       description: "QuoteDescription"
+    #     }
+    #   }
+    # @return [Types::GetQuoteOutput]
+    def get_quote(params = {}, options = {})
+      request = build_request(:get_quote, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets all available renewal pricing options for the specified Outpost.</p>
+    # @param [Hash, Types::GetRenewalPricingInput] params
+    # @option params [String] :outpost_identifier
+    #   <p>The ID or ARN of the Outpost.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.get_renewal_pricing(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pricing_result: "PRICED" # One of: ["PRICED", "UNABLE_TO_PRICE"],
+    #     pricing_options: [
+    #       {
+    #         pricing_type: "SUBSCRIPTION" # One of: ["SUBSCRIPTION"],
+    #         subscription_pricing_details: {
+    #           payment_option: "ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"],
+    #           payment_term: "THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"],
+    #           upfront_price: 1.0,
+    #           monthly_recurring_price: 1.0,
+    #           currency: "USD" # One of: ["USD"]
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetRenewalPricingOutput]
+    def get_renewal_pricing(params = {}, options = {})
+      request = build_request(:get_renewal_pricing, params)
       request.send_request(options)
     end
 
@@ -947,7 +1479,7 @@ module Aws::Outposts
     #     asset_id_filter: ["AssetId"],
     #     instance_type_filter: ["OutpostInstanceType"],
     #     account_id_filter: ["AccountId"],
-    #     aws_service_filter: ["AWS" # One of: ["AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]],
+    #     aws_service_filter: ["AWS" # One of: ["AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]],
     #     max_results: 1,
     #     next_token: "Token"
     #   }
@@ -962,7 +1494,7 @@ module Aws::Outposts
     #         instance_type: "OutpostInstanceType",
     #         asset_id: "AssetId",
     #         account_id: "AccountId",
-    #         aws_service_name: "AWS" # One of: ["AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]
+    #         aws_service_name: "AWS" # One of: ["AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]
     #       }
     #     ],
     #     next_token: "Token"
@@ -974,8 +1506,8 @@ module Aws::Outposts
     end
 
     # <p>Lists the hardware assets for the specified Outpost.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListAssetsInput] params
     # @option params [String] :outpost_identifier
@@ -988,13 +1520,33 @@ module Aws::Outposts
     #   <p>The pagination token.</p>
     # @option params [Array<String>] :status_filter
     #   <p>Filters the results by state.</p>
+    # @option params [Array<String>] :asset_type_filter
+    #   <p>Filters the results by asset type.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>COMPUTE - Server asset used for customer compute </p>
+    #               </li>
+    #               <li>
+    #                  <p>STORAGE - Server asset used by storage services </p>
+    #               </li>
+    #               <li>
+    #                  <p>POWERSHELF - Powershelf assets </p>
+    #               </li>
+    #               <li>
+    #                  <p>SWITCH - Switch assets </p>
+    #               </li>
+    #               <li>
+    #                  <p>NETWORKING - Asset managed by Amazon Web Services for networking purposes </p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     outpost_identifier: "OutpostIdentifier", # required
     #     host_id_filter: ["HostId"],
     #     max_results: 1,
     #     next_token: "Token",
-    #     status_filter: ["ACTIVE" # One of: ["ACTIVE", "RETIRING", "ISOLATED"]]
+    #     status_filter: ["ACTIVE" # One of: ["ACTIVE", "RETIRING", "ISOLATED", "INSTALLING"]],
+    #     asset_type_filter: ["COMPUTE" # One of: ["COMPUTE", "STORAGE", "POWERSHELF", "SWITCH", "NETWORKING"]]
     #   }
     #   options = {}
     #   response = client.list_assets(params, options)
@@ -1005,10 +1557,10 @@ module Aws::Outposts
     #       {
     #         asset_id: "AssetId",
     #         rack_id: "RackId",
-    #         asset_type: "COMPUTE" # One of: ["COMPUTE"],
+    #         asset_type: "COMPUTE" # One of: ["COMPUTE", "STORAGE", "POWERSHELF", "SWITCH", "NETWORKING"],
     #         compute_attributes: {
     #           host_id: "HostId",
-    #           state: "ACTIVE" # One of: ["ACTIVE", "ISOLATED", "RETIRING"],
+    #           state: "ACTIVE" # One of: ["ACTIVE", "ISOLATED", "RETIRING", "INSTALLING"],
     #           instance_families: ["InstanceFamilyName"],
     #           instance_type_capacities: [
     #             {
@@ -1059,7 +1611,7 @@ module Aws::Outposts
     #       {
     #         instance_id: "InstanceId",
     #         account_id: "AccountId",
-    #         aws_service_name: "AWS" # One of: ["AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]
+    #         aws_service_name: "AWS" # One of: ["AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]
     #       }
     #     ],
     #     next_token: "Token"
@@ -1071,8 +1623,8 @@ module Aws::Outposts
     end
 
     # <p>Lists the capacity tasks for your Amazon Web Services account.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListCapacityTasksInput] params
     # @option params [String] :outpost_identifier_filter
@@ -1117,8 +1669,8 @@ module Aws::Outposts
     end
 
     # <p>Lists the items in the catalog.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListCatalogItemsInput] params
     # @option params [String] :next_token
@@ -1158,7 +1710,8 @@ module Aws::Outposts
     #         power_kva: 1.0,
     #         weight_lbs: 1,
     #         supported_uplink_gbps: [1],
-    #         supported_storage: ["EBS" # One of: ["EBS", "S3"]]
+    #         supported_storage: ["EBS" # One of: ["EBS", "S3"]],
+    #         rack_scaling_type: "SINGLE_RACK" # One of: ["SINGLE_RACK", "MULTI_RACK"]
     #       }
     #     ],
     #     next_token: "Token"
@@ -1166,6 +1719,50 @@ module Aws::Outposts
     # @return [Types::ListCatalogItemsOutput]
     def list_catalog_items(params = {}, options = {})
       request = build_request(:list_catalog_items, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the instance types that can be ordered for an Outpost. You can filter the results
+    #       by Outpost generation.</p>
+    # @param [Hash, Types::ListOrderableInstanceTypesInput] params
+    # @option params [String] :outpost_generation_filter
+    #   <p>Filters the results by Outpost generation. Specify <code>GENERATION_1</code> for
+    #         first-generation rack deployments or <code>GENERATION_2</code> for second-generation rack
+    #         deployments.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum page size.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     outpost_generation_filter: "GENERATION_2" # One of: ["GENERATION_2", "GENERATION_1"],
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_orderable_instance_types(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     instance_types: [
+    #       {
+    #         instance_type: "InstanceType",
+    #         vcp_us: 1,
+    #         memory_in_mib: 1,
+    #         network_performance: "NetworkPerformance",
+    #         form_factor_configs: [
+    #           {
+    #             form_factor: "RACK" # One of: ["RACK", "SERVER"],
+    #             outpost_generation: "GENERATION_2" # One of: ["GENERATION_2", "GENERATION_1"]
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListOrderableInstanceTypesOutput]
+    def list_orderable_instance_types(params = {}, options = {})
+      request = build_request(:list_orderable_instance_types, params)
       request.send_request(options)
     end
 
@@ -1210,8 +1807,8 @@ module Aws::Outposts
     end
 
     # <p>Lists the Outposts for your Amazon Web Services account.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListOutpostsInput] params
     # @option params [String] :next_token
@@ -1252,7 +1849,9 @@ module Aws::Outposts
     #           "TagKey" => "TagValue"
     #         },
     #         site_arn: "SiteArn",
-    #         supported_hardware_type: "RACK" # One of: ["RACK", "SERVER"]
+    #         supported_hardware_type: "RACK" # One of: ["RACK", "SERVER"],
+    #         generation: "GENERATION_2" # One of: ["GENERATION_2", "GENERATION_1"],
+    #         rack_scaling_type: "SINGLE_RACK" # One of: ["SINGLE_RACK", "MULTI_RACK"]
     #       }
     #     ],
     #     next_token: "Token"
@@ -1263,10 +1862,164 @@ module Aws::Outposts
       request.send_request(options)
     end
 
+    # <p>Lists the quotes for your Amazon Web Services account.</p>
+    # @param [Hash, Types::ListQuotesInput] params
+    # @option params [String] :next_token
+    #   <p>The pagination token.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum page size.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "Token",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_quotes(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     quotes: [
+    #       {
+    #         quote_id: "QuoteId",
+    #         account_id: "AccountId",
+    #         quote_status: "CREATED" # One of: ["CREATED", "ORDER_SUBMITTED", "EXPIRED"],
+    #         status_message: "StatusMessage",
+    #         outpost_arn: "OutpostArn",
+    #         country_code: "CountryCode",
+    #         requested_capacities: [
+    #           {
+    #             quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #             unit: "String",
+    #             quantity: 1.0
+    #           }
+    #         ],
+    #         requested_constraints: [
+    #           {
+    #             quote_constraint_type: "RACK_MAXIMUM" # One of: ["RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"],
+    #             value: "ConstraintValue"
+    #           }
+    #         ],
+    #         requested_payment_options: ["ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"]],
+    #         requested_payment_terms: ["THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"]],
+    #         quote_options: [
+    #           {
+    #             quote_option_identifier: "QuoteOptionIdentifier",
+    #             capacities: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ],
+    #             capacity_summary: {
+    #               existing_capacities: [
+    #                 {
+    #                   quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                   unit: "String",
+    #                   quantity: 1.0
+    #                 }
+    #               ],
+    #               final_capacities: [
+    #                 {
+    #                   quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                   unit: "String",
+    #                   quantity: 1.0
+    #                 }
+    #               ],
+    #               capacity_change: [
+    #                 {
+    #                   quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                   unit: "String",
+    #                   quantity: 1.0
+    #                 }
+    #               ]
+    #             },
+    #             specifications: [
+    #               {
+    #                 quote_specification_type: "UPDATED_RACK" # One of: ["UPDATED_RACK", "NEW_RACK", "EXISTING_RACK", "SERVER"],
+    #                 existing_rack_specification_details: {
+    #                   rack_id: "RackId",
+    #                   rack_use: "NETWORKING" # One of: ["NETWORKING", "COMPUTE"],
+    #                   rack_power_draw_kva: 1.0,
+    #                   rack_weight_lbs: 1.0,
+    #                   rack_height_inches: 1.0,
+    #                   rack_width_inches: 1.0,
+    #                   rack_depth_inches: 1.0,
+    #                   rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                   ec2_capacities: [
+    #                     {
+    #                       family: "Family",
+    #                       max_size: "MaxSize",
+    #                       quantity: "Quantity"
+    #                     }
+    #                   ]
+    #                 },
+    #                 final_rack_specification_details: {
+    #                   rack_id: "RackId",
+    #                   rack_use: "NETWORKING" # One of: ["NETWORKING", "COMPUTE"],
+    #                   rack_power_draw_kva: 1.0,
+    #                   rack_weight_lbs: 1.0,
+    #                   rack_height_inches: 1.0,
+    #                   rack_width_inches: 1.0,
+    #                   rack_depth_inches: 1.0,
+    #                   rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                   ec2_capacities: [
+    #                     {
+    #                       family: "Family",
+    #                       max_size: "MaxSize",
+    #                       quantity: "Quantity"
+    #                     }
+    #                   ]
+    #                 },
+    #                 server_specification_details: {
+    #                   server_power_draw_kva: 1.0,
+    #                   server_weight_lbs: 1.0,
+    #                   server_height_inches: 1.0,
+    #                   server_width_inches: 1.0,
+    #                   server_depth_inches: 1.0,
+    #                   rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                   ec2_capacities: [
+    #                     {
+    #                       family: "Family",
+    #                       max_size: "MaxSize",
+    #                       quantity: "Quantity"
+    #                     }
+    #                   ]
+    #                 }
+    #               }
+    #             ],
+    #             pricing_options: [
+    #               {
+    #                 pricing_type: "SUBSCRIPTION" # One of: ["SUBSCRIPTION"],
+    #                 subscription_pricing_details: {
+    #                   payment_option: "ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"],
+    #                   payment_term: "THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"],
+    #                   upfront_price: 1.0,
+    #                   monthly_recurring_price: 1.0,
+    #                   currency: "USD" # One of: ["USD"]
+    #                 }
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         submitted_order_id: "OrderIdentifier",
+    #         created_date: Time.now,
+    #         expiration_date: Time.now,
+    #         description: "QuoteDescription"
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListQuotesOutput]
+    def list_quotes(params = {}, options = {})
+      request = build_request(:list_quotes, params)
+      request.send_request(options)
+    end
+
     # <p>Lists the Outpost sites for your Amazon Web Services account. Use filters to return specific
     #       results.</p>
-    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match 
-    #  all of the specified filters. For a filter where you can specify multiple values, the results include 
+    #          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
+    #  all of the specified filters. For a filter where you can specify multiple values, the results include
     #  items that match any of the values that you specify for the filter.</p>
     # @param [Hash, Types::ListSitesInput] params
     # @option params [String] :next_token
@@ -1397,7 +2150,7 @@ module Aws::Outposts
     #     instances_to_exclude: {
     #       instances: ["InstanceId"],
     #       account_ids: ["AccountId"],
-    #       services: ["AWS" # One of: ["AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]]
+    #       services: ["AWS" # One of: ["AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]]
     #     },
     #     dry_run: false,
     #     task_action_on_blocking_instances: "WAIT_FOR_EVACUATION" # One of: ["WAIT_FOR_EVACUATION", "FAIL_TASK"]
@@ -1420,7 +2173,7 @@ module Aws::Outposts
     #     instances_to_exclude: {
     #       instances: ["InstanceId"],
     #       account_ids: ["AccountId"],
-    #       services: ["AWS" # One of: ["AWS", "EC2", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]]
+    #       services: ["AWS" # One of: ["AWS", "EC2", "EKS", "ELASTICACHE", "ELB", "RDS", "ROUTE53"]]
     #     },
     #     dry_run: false,
     #     capacity_task_status: "REQUESTED" # One of: ["REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "WAITING_FOR_EVACUATION", "CANCELLATION_IN_PROGRESS", "CANCELLED"],
@@ -1445,7 +2198,7 @@ module Aws::Outposts
     #          </note>
     #          <p> Starts the connection required for Outpost server installation. </p>
     #          <p>
-    #       Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For 
+    #       Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For
     #       more information, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html">
     #       Amazon Web Services managed policies for Amazon Web Services Outposts</a> and <a href="https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html">
     #       Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail</a> in the <i>Amazon Web Services Outposts User Guide</i>.
@@ -1477,6 +2230,31 @@ module Aws::Outposts
     # @return [Types::StartConnectionResponse]
     def start_connection(params = {}, options = {})
       request = build_request(:start_connection, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts the decommission process to return the Outposts racks or servers.</p>
+    # @param [Hash, Types::StartOutpostDecommissionInput] params
+    # @option params [String] :outpost_identifier
+    #   <p>The ID or ARN of the Outpost that you want to decommission.</p>
+    # @option params [Boolean] :validate_only
+    #   <p>Validates the request without starting the decommission process.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     validate_only: false
+    #   }
+    #   options = {}
+    #   response = client.start_outpost_decommission(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: "SKIPPED" # One of: ["SKIPPED", "BLOCKED", "REQUESTED"],
+    #     blocking_resource_types: ["EC2_INSTANCE" # One of: ["EC2_INSTANCE", "OUTPOST_RAM_SHARE", "LGW_ROUTING_DOMAIN", "LGW_ROUTE_TABLE", "LGW_VIRTUAL_INTERFACE_GROUP", "OUTPOST_ORDER_CANCELLABLE", "OUTPOST_ORDER_INTERVENTION_REQUIRED"]]
+    #   }
+    # @return [Types::StartOutpostDecommissionOutput]
+    def start_outpost_decommission(params = {}, options = {})
+      request = build_request(:start_outpost_decommission, params)
       request.send_request(options)
     end
 
@@ -1562,12 +2340,203 @@ module Aws::Outposts
     #         "TagKey" => "TagValue"
     #       },
     #       site_arn: "SiteArn",
-    #       supported_hardware_type: "RACK" # One of: ["RACK", "SERVER"]
+    #       supported_hardware_type: "RACK" # One of: ["RACK", "SERVER"],
+    #       generation: "GENERATION_2" # One of: ["GENERATION_2", "GENERATION_1"],
+    #       rack_scaling_type: "SINGLE_RACK" # One of: ["SINGLE_RACK", "MULTI_RACK"]
     #     }
     #   }
     # @return [Types::UpdateOutpostOutput]
     def update_outpost(params = {}, options = {})
       request = build_request(:update_outpost, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the specified quote. You can modify the requested capacities, constraints,
+    #       payment options, payment terms, or Outpost association.</p>
+    # @param [Hash, Types::UpdateQuoteInput] params
+    # @option params [String] :quote_identifier
+    #   <p>The ID of the quote.</p>
+    # @option params [String] :outpost_identifier
+    #   <p>The ID or ARN of the Outpost to associate with the quote. Specify an empty string to
+    #         remove the Outpost association.</p>
+    # @option params [String] :country_code
+    #   <p>The country code for the Outpost site location.</p>
+    # @option params [Array<Types::QuoteCapacity>] :requested_capacities
+    #   <p>The updated capacity requirements for the quote.</p>
+    # @option params [Array<Types::QuoteConstraint>] :requested_constraints
+    #   <p>The updated physical constraints for the quote.</p>
+    # @option params [Array<String>] :requested_payment_options
+    #   <p>The updated payment options to include in the quote pricing.</p>
+    # @option params [Array<String>] :requested_payment_terms
+    #   <p>The updated payment terms to include in the quote pricing.</p>
+    # @option params [String] :description
+    #   <p>A description for the quote.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     quote_identifier: "QuoteIdentifier", # required
+    #     outpost_identifier: "OutpostIdentifierOrEmpty",
+    #     country_code: "CountryCode",
+    #     requested_capacities: [
+    #       {
+    #         quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #         unit: "String",
+    #         quantity: 1.0
+    #       }
+    #     ],
+    #     requested_constraints: [
+    #       {
+    #         quote_constraint_type: "RACK_MAXIMUM" # One of: ["RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"],
+    #         value: "ConstraintValue"
+    #       }
+    #     ],
+    #     requested_payment_options: ["ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"]],
+    #     requested_payment_terms: ["THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"]],
+    #     description: "QuoteDescription"
+    #   }
+    #   options = {}
+    #   response = client.update_quote(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     quote: {
+    #       quote_id: "QuoteId",
+    #       account_id: "AccountId",
+    #       quote_status: "CREATED" # One of: ["CREATED", "ORDER_SUBMITTED", "EXPIRED"],
+    #       status_message: "StatusMessage",
+    #       outpost_arn: "OutpostArn",
+    #       country_code: "CountryCode",
+    #       requested_capacities: [
+    #         {
+    #           quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #           unit: "String",
+    #           quantity: 1.0
+    #         }
+    #       ],
+    #       requested_constraints: [
+    #         {
+    #           quote_constraint_type: "RACK_MAXIMUM" # One of: ["RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"],
+    #           value: "ConstraintValue"
+    #         }
+    #       ],
+    #       requested_payment_options: ["ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"]],
+    #       requested_payment_terms: ["THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"]],
+    #       quote_options: [
+    #         {
+    #           quote_option_identifier: "QuoteOptionIdentifier",
+    #           capacities: [
+    #             {
+    #               quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #               unit: "String",
+    #               quantity: 1.0
+    #             }
+    #           ],
+    #           capacity_summary: {
+    #             existing_capacities: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ],
+    #             final_capacities: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ],
+    #             capacity_change: [
+    #               {
+    #                 quote_capacity_type: "EC2" # One of: ["EC2", "EBS", "S3"],
+    #                 unit: "String",
+    #                 quantity: 1.0
+    #               }
+    #             ]
+    #           },
+    #           specifications: [
+    #             {
+    #               quote_specification_type: "UPDATED_RACK" # One of: ["UPDATED_RACK", "NEW_RACK", "EXISTING_RACK", "SERVER"],
+    #               existing_rack_specification_details: {
+    #                 rack_id: "RackId",
+    #                 rack_use: "NETWORKING" # One of: ["NETWORKING", "COMPUTE"],
+    #                 rack_power_draw_kva: 1.0,
+    #                 rack_weight_lbs: 1.0,
+    #                 rack_height_inches: 1.0,
+    #                 rack_width_inches: 1.0,
+    #                 rack_depth_inches: 1.0,
+    #                 rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                 ec2_capacities: [
+    #                   {
+    #                     family: "Family",
+    #                     max_size: "MaxSize",
+    #                     quantity: "Quantity"
+    #                   }
+    #                 ]
+    #               },
+    #               final_rack_specification_details: {
+    #                 rack_id: "RackId",
+    #                 rack_use: "NETWORKING" # One of: ["NETWORKING", "COMPUTE"],
+    #                 rack_power_draw_kva: 1.0,
+    #                 rack_weight_lbs: 1.0,
+    #                 rack_height_inches: 1.0,
+    #                 rack_width_inches: 1.0,
+    #                 rack_depth_inches: 1.0,
+    #                 rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                 ec2_capacities: [
+    #                   {
+    #                     family: "Family",
+    #                     max_size: "MaxSize",
+    #                     quantity: "Quantity"
+    #                   }
+    #                 ]
+    #               },
+    #               server_specification_details: {
+    #                 server_power_draw_kva: 1.0,
+    #                 server_weight_lbs: 1.0,
+    #                 server_height_inches: 1.0,
+    #                 server_width_inches: 1.0,
+    #                 server_depth_inches: 1.0,
+    #                 rack_unit_height: "HEIGHT_42U" # One of: ["HEIGHT_42U", "HEIGHT_2U", "HEIGHT_1U"],
+    #                 ec2_capacities: [
+    #                   {
+    #                     family: "Family",
+    #                     max_size: "MaxSize",
+    #                     quantity: "Quantity"
+    #                   }
+    #                 ]
+    #               }
+    #             }
+    #           ],
+    #           pricing_options: [
+    #             {
+    #               pricing_type: "SUBSCRIPTION" # One of: ["SUBSCRIPTION"],
+    #               subscription_pricing_details: {
+    #                 payment_option: "ALL_UPFRONT" # One of: ["ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"],
+    #                 payment_term: "THREE_YEARS" # One of: ["THREE_YEARS", "ONE_YEAR", "FIVE_YEARS"],
+    #                 upfront_price: 1.0,
+    #                 monthly_recurring_price: 1.0,
+    #                 currency: "USD" # One of: ["USD"]
+    #               }
+    #             }
+    #           ]
+    #         }
+    #       ],
+    #       ordering_requirements: [
+    #         {
+    #           status_message: "StatusMessage",
+    #           ordering_requirement_type: "OUTPOST_ACTIVE_CHECK_ERROR" # One of: ["OUTPOST_ACTIVE_CHECK_ERROR", "MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR", "VALID_ZIP_CODE_CHECK_ERROR", "RACK_PHYSICAL_PROPERTIES_CHECK_ERROR", "OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR", "SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR", "COUNTRY_CODE_MISMATCH_CHECK_ERROR", "OUTPOST_GENERATION_MISMATCH_ERROR", "UNSUPPORTED", "OUTPOST_ID_MISSING_ON_QUOTE_ERROR", "ENTERPRISE_SUPPORT_ERROR", "SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR", "SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR", "SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR", "OUTPOST_STATE_CHANGED_ERROR", "OUTPOST_NOT_FOUND_ERROR", "OUTPOST_RENEWAL_REQUIRED_ERROR"],
+    #           status: "PASS" # One of: ["PASS", "FAIL", "EXEMPT"]
+    #         }
+    #       ],
+    #       submitted_order_id: "OrderIdentifier",
+    #       created_date: Time.now,
+    #       expiration_date: Time.now,
+    #       description: "QuoteDescription"
+    #     }
+    #   }
+    # @return [Types::UpdateQuoteOutput]
+    def update_quote(params = {}, options = {})
+      request = build_request(:update_quote, params)
       request.send_request(options)
     end
 
@@ -1682,7 +2651,7 @@ module Aws::Outposts
     end
 
     # <p>Update the physical and logistical details for a rack at a site. For more information
-    #       about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network 
+    #       about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network
     #         readiness checklist</a> in the Amazon Web Services Outposts User Guide.
     #          </p>
     #          <p>To update a rack at a site with an order of <code>IN_PROGRESS</code>, you must wait for
@@ -1767,7 +2736,7 @@ module Aws::Outposts
     #   <p>The type of optical standard that you will use to attach the Outpost to your network. This
     #         field is dependent on uplink speed, fiber type, and distance to the upstream device.
     #         For more information
-    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> 
+    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a>
     #           in the Amazon Web Services Outposts User Guide.
     #           </p>
     #            <ul>

@@ -25,18 +25,23 @@ module Aws::Outposts
     AssetLocation: StructureShape
     AssetState: EnumShape
     AssetType: EnumShape
+    AssetTypeList: ListShape
+    AutoFillIdempotencyToken: StringShape
     AvailabilityZone: StringShape
     AvailabilityZoneId: StringShape
     AvailabilityZoneIdList: ListShape
     AvailabilityZoneList: ListShape
     BlockingInstance: StructureShape
     BlockingInstancesList: ListShape
+    BlockingResourceType: EnumShape
+    BlockingResourceTypeList: ListShape
     CIDR: StringShape
     CIDRList: ListShape
     CancelCapacityTaskInput: StructureShape
     CancelCapacityTaskOutput: StructureShape
     CancelOrderInput: StructureShape
     CancelOrderOutput: StructureShape
+    CapacitySummary: StructureShape
     CapacityTaskFailure: StructureShape
     CapacityTaskFailureType: EnumShape
     CapacityTaskId: StringShape
@@ -59,6 +64,7 @@ module Aws::Outposts
     ConflictException: StructureShape
     ConnectionDetails: StructureShape
     ConnectionId: StringShape
+    ConstraintValue: StringShape
     ContactName: StringShape
     ContactPhoneNumber: StringShape
     CountryCode: StringShape
@@ -67,12 +73,24 @@ module Aws::Outposts
     CreateOrderOutput: StructureShape
     CreateOutpostInput: StructureShape
     CreateOutpostOutput: StructureShape
+    CreatePrivateConnectivityConfigInput: StructureShape
+    CreatePrivateConnectivityConfigOutput: StructureShape
+    CreateQuoteInput: StructureShape
+    CreateQuoteOutput: StructureShape
+    CreateRenewalInput: StructureShape
+    CreateRenewalOutput: StructureShape
     CreateSiteInput: StructureShape
     CreateSiteOutput: StructureShape
+    CurrencyCode: EnumShape
+    DecommissionRequestStatus: EnumShape
     DeleteOutpostInput: StructureShape
     DeleteOutpostOutput: StructureShape
+    DeleteQuoteInput: StructureShape
+    DeleteQuoteOutput: StructureShape
     DeleteSiteInput: StructureShape
     DeleteSiteOutput: StructureShape
+    DetailedInstanceTypeItem: StructureShape
+    DetailedInstanceTypeListDefinition: ListShape
     DeviceSerialNumber: StringShape
     DistrictOrCounty: StringShape
     DryRun: BooleanShape
@@ -82,6 +100,9 @@ module Aws::Outposts
     ErrorMessage: StringShape
     Family: StringShape
     FiberOpticCableType: EnumShape
+    FormFactor: EnumShape
+    FormFactorConfig: StructureShape
+    FormFactorConfigList: ListShape
     GetCapacityTaskInput: StructureShape
     GetCapacityTaskOutput: StructureShape
     GetCatalogItemInput: StructureShape
@@ -98,6 +119,12 @@ module Aws::Outposts
     GetOutpostOutput: StructureShape
     GetOutpostSupportedInstanceTypesInput: StructureShape
     GetOutpostSupportedInstanceTypesOutput: StructureShape
+    GetPrivateConnectivityConfigInput: StructureShape
+    GetPrivateConnectivityConfigOutput: StructureShape
+    GetQuoteInput: StructureShape
+    GetQuoteOutput: StructureShape
+    GetRenewalPricingInput: StructureShape
+    GetRenewalPricingOutput: StructureShape
     GetSiteAddressInput: StructureShape
     GetSiteAddressOutput: StructureShape
     GetSiteInput: StructureShape
@@ -139,10 +166,14 @@ module Aws::Outposts
     ListCapacityTasksOutput: StructureShape
     ListCatalogItemsInput: StructureShape
     ListCatalogItemsOutput: StructureShape
+    ListOrderableInstanceTypesInput: StructureShape
+    ListOrderableInstanceTypesOutput: StructureShape
     ListOrdersInput: StructureShape
     ListOrdersOutput: StructureShape
     ListOutpostsInput: StructureShape
     ListOutpostsOutput: StructureShape
+    ListQuotesInput: StructureShape
+    ListQuotesOutput: StructureShape
     ListSitesInput: StructureShape
     ListSitesOutput: StructureShape
     ListTagsForResourceRequest: StructureShape
@@ -152,42 +183,85 @@ module Aws::Outposts
     MaxResults1000: IntegerShape
     MaxSize: StringShape
     MaximumSupportedWeightLbs: EnumShape
+    MemoryInMib: IntegerShape
     Municipality: StringShape
     NetworkInterfaceDeviceIndex: IntegerShape
+    NetworkPerformance: StringShape
     NotFoundException: StructureShape
     NullableDouble: FloatShape
+    NullableFloat: FloatShape
     OpticalStandard: EnumShape
     Order: StructureShape
     OrderId: StringShape
     OrderIdList: ListShape
+    OrderIdentifier: StringShape
     OrderStatus: EnumShape
     OrderSummary: StructureShape
     OrderSummaryListDefinition: ListShape
     OrderType: EnumShape
+    OrderingRequirement: StructureShape
+    OrderingRequirementList: ListShape
+    OrderingRequirementStatus: EnumShape
+    OrderingRequirementType: EnumShape
     Outpost: StructureShape
     OutpostArn: StringShape
     OutpostDescription: StringShape
+    OutpostGeneration: EnumShape
     OutpostId: StringShape
     OutpostIdOnly: StringShape
     OutpostIdentifier: StringShape
+    OutpostIdentifierOrEmpty: StringShape
     OutpostInstanceType: StringShape
     OutpostInstanceTypeList: ListShape
     OutpostName: StringShape
     OwnerId: StringShape
     PaymentOption: EnumShape
+    PaymentOptionList: ListShape
     PaymentTerm: EnumShape
+    PaymentTermList: ListShape
     PostalCode: StringShape
     PowerConnector: EnumShape
     PowerDrawKva: EnumShape
     PowerFeedDrop: EnumShape
     PowerPhase: EnumShape
+    PricingOption: StructureShape
+    PricingOptionList: ListShape
+    PricingResult: EnumShape
+    PrivateConnectivityConfig: StructureShape
+    PrivateConnectivityStatus: EnumShape
     Quantity: StringShape
+    Quote: StructureShape
+    QuoteCapacity: StructureShape
+    QuoteCapacityList: ListShape
+    QuoteCapacityType: EnumShape
+    QuoteConstraint: StructureShape
+    QuoteConstraintList: ListShape
+    QuoteConstraintType: EnumShape
+    QuoteDescription: StringShape
+    QuoteId: StringShape
+    QuoteIdentifier: StringShape
+    QuoteOption: StructureShape
+    QuoteOptionIdentifier: StringShape
+    QuoteOptionList: ListShape
+    QuotePricingType: EnumShape
+    QuoteRackUseType: EnumShape
+    QuoteSpecification: StructureShape
+    QuoteSpecificationList: ListShape
+    QuoteSpecificationType: EnumShape
+    QuoteStatus: EnumShape
+    QuoteSummary: StructureShape
+    QuoteSummaryListDefinition: ListShape
     RackElevation: FloatShape
     RackId: StringShape
     RackPhysicalProperties: StructureShape
+    RackScalingType: EnumShape
+    RackSpecificationDetails: StructureShape
+    RackUnitHeight: EnumShape
     RequestedInstancePools: ListShape
     ResourceType: EnumShape
+    RoleArn: StringShape
     ServerEndpoint: StringShape
+    ServerSpecificationDetails: StructureShape
     ServiceQuotaExceededException: StructureShape
     ShipmentCarrier: EnumShape
     ShipmentInformation: StructureShape
@@ -202,12 +276,18 @@ module Aws::Outposts
     StartCapacityTaskOutput: StructureShape
     StartConnectionRequest: StructureShape
     StartConnectionResponse: StructureShape
+    StartOutpostDecommissionInput: StructureShape
+    StartOutpostDecommissionOutput: StructureShape
     StateOrRegion: StringShape
     StateOrRegionList: ListShape
     StatusList: ListShape
+    StatusMessage: StringShape
     String: StringShape
+    SubnetId: StringShape
+    SubnetIds: ListShape
     Subscription: StructureShape
     SubscriptionList: ListShape
+    SubscriptionPricingDetails: StructureShape
     SubscriptionStatus: EnumShape
     SubscriptionType: EnumShape
     SupportedHardwareType: EnumShape
@@ -229,6 +309,8 @@ module Aws::Outposts
     UntagResourceResponse: StructureShape
     UpdateOutpostInput: StructureShape
     UpdateOutpostOutput: StructureShape
+    UpdateQuoteInput: StructureShape
+    UpdateQuoteOutput: StructureShape
     UpdateSiteAddressInput: StructureShape
     UpdateSiteAddressOutput: StructureShape
     UpdateSiteInput: StructureShape
@@ -238,7 +320,12 @@ module Aws::Outposts
     UplinkCount: EnumShape
     UplinkGbps: EnumShape
     VCPUCount: IntegerShape
+    ValidateOnly: BooleanShape
     ValidationException: StructureShape
+    VpcEndpointId: StringShape
+    VpcId: StringShape
+    VpcInformation: StructureShape
+    VpcInformationList: ListShape
     WireGuardPublicKey: StringShape
     OutpostListDefinition: ListShape
     SiteListDefinition: ListShape

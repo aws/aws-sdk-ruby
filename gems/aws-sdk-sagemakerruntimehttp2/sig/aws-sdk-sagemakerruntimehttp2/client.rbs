@@ -1,0 +1,67 @@
+module Aws::SageMakerRuntimeHTTP2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SageMakerRuntimeHTTP2::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _InvokeEndpointWithBidirectionalStreamResponse
+      include Smithy::Client::_Response[Types::InvokeEndpointWithBidirectionalStreamOutput]
+      def body: () -> Types::ResponseStreamEvent?
+      def invoked_production_variant: () -> String?
+    end
+    def invoke_endpoint_with_bidirectional_stream: (
+      ?endpoint_name: String,
+      ?body: {
+        payload_part: {
+          bytes: String,
+          data_type: String,
+          completion_state: untyped,
+          p: untyped
+        }
+      },
+      ?target_variant: String,
+      ?model_invocation_path: String,
+      ?model_query_string: String
+    ) -> _InvokeEndpointWithBidirectionalStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeEndpointWithBidirectionalStreamResponse
+  end
+end

@@ -266,6 +266,45 @@ module Aws::Mgn
       attr_accessor state: String?
     end
 
+    class Checksum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_algorithm: String,
+        ?hash: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_algorithm: String?
+      attr_accessor hash: String?
+    end
+
+    class CidrMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?original_cidr: String,
+        ?updated_cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor original_cidr: String?
+      attr_accessor updated_cidr: String?
+    end
+
+    class CodeGenerationOutputFormatStatusDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_detail_list: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_detail_list: String?
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -425,6 +464,8 @@ module Aws::Mgn
         ?small_volume_max_size: Integer,
         ?small_volume_conf: Types::LaunchTemplateDiskConf,
         ?large_volume_conf: Types::LaunchTemplateDiskConf,
+        ?enable_parameters_encryption: bool,
+        ?parameters_encryption_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -442,6 +483,8 @@ module Aws::Mgn
       attr_accessor small_volume_max_size: Integer?
       attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
       attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor enable_parameters_encryption: bool?
+      attr_accessor parameters_encryption_key: String?
     end
 
     class CreateLaunchConfigurationTemplateOutput
@@ -465,6 +508,8 @@ module Aws::Mgn
         ?small_volume_max_size: Integer,
         ?small_volume_conf: Types::LaunchTemplateDiskConf,
         ?large_volume_conf: Types::LaunchTemplateDiskConf,
+        ?enable_parameters_encryption: bool,
+        ?parameters_encryption_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -485,6 +530,74 @@ module Aws::Mgn
       attr_accessor small_volume_max_size: Integer?
       attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
       attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor enable_parameters_encryption: bool?
+      attr_accessor parameters_encryption_key: String?
+    end
+
+    class CreateNetworkMigrationDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?network_migration_definition_id: String,
+        ?name: String,
+        ?description: String,
+        ?source_configurations: Array[Types::SourceConfiguration],
+        ?target_s3_configuration: Types::TargetS3Configuration,
+        ?target_network: Types::TargetNetwork,
+        ?target_deployment: String,
+        ?vpc_provisioning_strategy: String,
+        ?cidr_mappings: Array[Types::CidrMapping],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+        ?scope_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source_configurations: Array[Types::SourceConfiguration]?
+      attr_accessor target_s3_configuration: Types::TargetS3Configuration?
+      attr_accessor target_network: Types::TargetNetwork?
+      attr_accessor target_deployment: String?
+      attr_accessor vpc_provisioning_strategy: String?
+      attr_accessor cidr_mappings: Array[Types::CidrMapping]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor scope_tags: Hash[String, String]?
+    end
+
+    class CreateNetworkMigrationDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?source_configurations: Array[Types::SourceConfiguration],
+        ?target_s3_configuration: Types::TargetS3Configuration,
+        ?target_network: Types::TargetNetwork,
+        ?target_deployment: String,
+        ?vpc_provisioning_strategy: String,
+        ?cidr_mappings: Array[Types::CidrMapping],
+        ?tags: Hash[String, String],
+        ?scope_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source_configurations: Array[Types::SourceConfiguration]?
+      attr_accessor target_s3_configuration: Types::TargetS3Configuration?
+      attr_accessor target_network: Types::TargetNetwork?
+      attr_accessor target_deployment: String?
+      attr_accessor vpc_provisioning_strategy: String?
+      attr_accessor cidr_mappings: Array[Types::CidrMapping]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor scope_tags: Hash[String, String]?
     end
 
     class CreateReplicationConfigurationTemplateInput
@@ -505,6 +618,9 @@ module Aws::Mgn
         ?staging_area_tags: Hash[String, String],
         ?use_fips_endpoint: bool,
         ?tags: Hash[String, String],
+        ?internet_protocol: String,
+        ?store_snapshot_on_local_zone: bool,
+        ?storage_configuration: Types::StorageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -522,6 +638,9 @@ module Aws::Mgn
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor use_fips_endpoint: bool?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor internet_protocol: String?
+      attr_accessor store_snapshot_on_local_zone: bool?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
     end
 
     class CreateReplicationConfigurationTemplateOutput
@@ -544,6 +663,9 @@ module Aws::Mgn
         ?staging_area_tags: Hash[String, String],
         ?use_fips_endpoint: bool,
         ?tags: Hash[String, String],
+        ?internet_protocol: String,
+        ?store_snapshot_on_local_zone: bool,
+        ?storage_configuration: Types::StorageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -563,6 +685,9 @@ module Aws::Mgn
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor use_fips_endpoint: bool?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor internet_protocol: String?
+      attr_accessor store_snapshot_on_local_zone: bool?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
     end
 
     class CreateWaveInput
@@ -633,6 +758,7 @@ module Aws::Mgn
         ?data_replication_initiation: Types::DataReplicationInitiation,
         ?data_replication_error: Types::DataReplicationError,
         ?last_snapshot_date_time: String,
+        ?replicator_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -643,6 +769,7 @@ module Aws::Mgn
       attr_accessor data_replication_initiation: Types::DataReplicationInitiation?
       attr_accessor data_replication_error: Types::DataReplicationError?
       attr_accessor last_snapshot_date_time: String?
+      attr_accessor replicator_id: String?
     end
 
     class DataReplicationInfoReplicatedDisk
@@ -759,6 +886,35 @@ module Aws::Mgn
     end
 
     class DeleteLaunchConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNetworkMigrationDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_definition_id: String?
+    end
+
+    class DeleteNetworkMigrationDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteOperation
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -1159,6 +1315,36 @@ module Aws::Mgn
       attr_accessor bytes: Integer?
     end
 
+    class EnrichmentSourceS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_bucket_owner: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_bucket_owner: String?
+      attr_accessor s3_key: String?
+    end
+
+    class EnrichmentTargetS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_bucket_owner: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_bucket_owner: String?
+      attr_accessor s3_key: String?
+    end
+
     class ErrorDetails
       include Smithy::Schema::Structure
 
@@ -1192,6 +1378,7 @@ module Aws::Mgn
 
       def initialize: (
         ?export_id: String,
+        ?arn: String,
         ?s3_bucket: String,
         ?s3_key: String,
         ?s3_bucket_owner: String,
@@ -1200,10 +1387,12 @@ module Aws::Mgn
         ?status: String,
         ?progress_percentage: Float,
         ?summary: Types::ExportTaskSummary,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor export_id: String?
+      attr_accessor arn: String?
       attr_accessor s3_bucket: String?
       attr_accessor s3_key: String?
       attr_accessor s3_bucket_owner: String?
@@ -1212,6 +1401,7 @@ module Aws::Mgn
       attr_accessor status: String?
       attr_accessor progress_percentage: Float?
       attr_accessor summary: Types::ExportTaskSummary?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class ExportTaskError
@@ -1292,6 +1482,19 @@ module Aws::Mgn
       attr_accessor connector_action: Types::SourceServerConnectorAction?
     end
 
+    class FsxOntapConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_virtual_machine_id: String,
+        ?credentials_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_virtual_machine_id: String?
+      attr_accessor credentials_secret_arn: String?
+    end
+
     class GetLaunchConfigurationInput
       include Smithy::Schema::Structure
 
@@ -1338,6 +1541,82 @@ module Aws::Mgn
       attr_accessor map_auto_tagging_mpe_id: String?
     end
 
+    class GetNetworkMigrationDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?network_migration_definition_id: String,
+        ?name: String,
+        ?description: String,
+        ?source_configurations: Array[Types::SourceConfiguration],
+        ?target_s3_configuration: Types::TargetS3Configuration,
+        ?target_network: Types::TargetNetwork,
+        ?target_deployment: String,
+        ?vpc_provisioning_strategy: String,
+        ?cidr_mappings: Array[Types::CidrMapping],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+        ?scope_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source_configurations: Array[Types::SourceConfiguration]?
+      attr_accessor target_s3_configuration: Types::TargetS3Configuration?
+      attr_accessor target_network: Types::TargetNetwork?
+      attr_accessor target_deployment: String?
+      attr_accessor vpc_provisioning_strategy: String?
+      attr_accessor cidr_mappings: Array[Types::CidrMapping]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor scope_tags: Hash[String, String]?
+    end
+
+    class GetNetworkMigrationDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_definition_id: String?
+    end
+
+    class GetNetworkMigrationMapperSegmentConstructRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_definition_id: String,
+        ?network_migration_execution_id: String,
+        ?segment_id: String,
+        ?construct_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor segment_id: String?
+      attr_accessor construct_id: String?
+    end
+
+    class GetNetworkMigrationMapperSegmentConstructResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?construct: Types::NetworkMigrationMapperSegmentConstruct,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor construct: Types::NetworkMigrationMapperSegmentConstruct?
+    end
+
     class GetReplicationConfigurationInput
       include Smithy::Schema::Structure
 
@@ -1371,6 +1650,9 @@ module Aws::Mgn
         ?create_public_ip: bool,
         ?staging_area_tags: Hash[String, String],
         ?use_fips_endpoint: bool,
+        ?internet_protocol: String,
+        ?store_snapshot_on_local_zone: bool,
+        ?storage_configuration: Types::StorageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1390,6 +1672,9 @@ module Aws::Mgn
       attr_accessor create_public_ip: bool?
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor use_fips_endpoint: bool?
+      attr_accessor internet_protocol: String?
+      attr_accessor store_snapshot_on_local_zone: bool?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
     end
 
     class IdentificationHints
@@ -1434,27 +1719,54 @@ module Aws::Mgn
       attr_accessor account_id: String?
     end
 
+    class ImportFileEnrichment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?status: String,
+        ?status_details: String,
+        ?checksum: Types::Checksum,
+        ?s3_bucket_target: Types::EnrichmentTargetS3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor status: String?
+      attr_accessor status_details: String?
+      attr_accessor checksum: Types::Checksum?
+      attr_accessor s3_bucket_target: Types::EnrichmentTargetS3Configuration?
+    end
+
     class ImportTask
       include Smithy::Schema::Structure
 
       def initialize: (
         ?import_id: String,
+        ?arn: String,
         ?s3_bucket_source: Types::S3BucketSource,
         ?creation_date_time: String,
         ?end_date_time: String,
         ?status: String,
         ?progress_percentage: Float,
         ?summary: Types::ImportTaskSummary,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor import_id: String?
+      attr_accessor arn: String?
       attr_accessor s3_bucket_source: Types::S3BucketSource?
       attr_accessor creation_date_time: String?
       attr_accessor end_date_time: String?
       attr_accessor status: String?
       attr_accessor progress_percentage: Float?
       attr_accessor summary: Types::ImportTaskSummary?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class ImportTaskError
@@ -1607,6 +1919,8 @@ module Aws::Mgn
         ?conversion_server_id: String,
         ?target_instance_id: String,
         ?raw_error: String,
+        ?attempt_count: Integer,
+        ?max_attempts_count: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1614,6 +1928,8 @@ module Aws::Mgn
       attr_accessor conversion_server_id: String?
       attr_accessor target_instance_id: String?
       attr_accessor raw_error: String?
+      attr_accessor attempt_count: Integer?
+      attr_accessor max_attempts_count: Integer?
     end
 
     class JobPostLaunchActionsLaunchStatus
@@ -1633,6 +1949,25 @@ module Aws::Mgn
       attr_accessor execution_id: String?
       attr_accessor execution_status: String?
       attr_accessor failure_reason: String?
+    end
+
+    class LastKnownCheck
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?status: String,
+        ?error: String,
+        ?checked_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor error: String?
+      attr_accessor checked_at: Time?
     end
 
     class LaunchConfigurationTemplate
@@ -1656,6 +1991,8 @@ module Aws::Mgn
         ?small_volume_max_size: Integer,
         ?small_volume_conf: Types::LaunchTemplateDiskConf,
         ?large_volume_conf: Types::LaunchTemplateDiskConf,
+        ?enable_parameters_encryption: bool,
+        ?parameters_encryption_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1676,6 +2013,8 @@ module Aws::Mgn
       attr_accessor small_volume_max_size: Integer?
       attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
       attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor enable_parameters_encryption: bool?
+      attr_accessor parameters_encryption_key: String?
     end
 
     class LaunchTemplateDiskConf
@@ -1685,12 +2024,16 @@ module Aws::Mgn
         ?volume_type: String,
         ?iops: Integer,
         ?throughput: Integer,
+        ?volume_initialization_rate: Integer,
+        ?delete_on_termination: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor volume_type: String?
       attr_accessor iops: Integer?
       attr_accessor throughput: Integer?
+      attr_accessor volume_initialization_rate: Integer?
+      attr_accessor delete_on_termination: bool?
     end
 
     class LaunchedInstance
@@ -1700,12 +2043,16 @@ module Aws::Mgn
         ?ec2_instance_id: String,
         ?job_id: String,
         ?first_boot: String,
+        ?last_known_checks: Array[Types::LastKnownCheck],
+        ?last_known_fsx_checks_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ec2_instance_id: String?
       attr_accessor job_id: String?
       attr_accessor first_boot: String?
+      attr_accessor last_known_checks: Array[Types::LastKnownCheck]?
+      attr_accessor last_known_fsx_checks_status: String?
     end
 
     class Licensing
@@ -2021,6 +2368,45 @@ module Aws::Mgn
       attr_accessor next_token: String?
     end
 
+    class ListImportFileEnrichmentsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_i_ds: Array[String]?
+    end
+
+    class ListImportFileEnrichmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListImportFileEnrichmentsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListImportFileEnrichmentsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListImportFileEnrichmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ImportFileEnrichment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ImportFileEnrichment]?
+      attr_accessor next_token: String?
+    end
+
     class ListImportsInput
       include Smithy::Schema::Structure
 
@@ -2083,6 +2469,509 @@ module Aws::Mgn
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor items: Array[Types::ManagedAccount]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationAnalysesFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_i_ds: Array[String]?
+    end
+
+    class ListNetworkMigrationAnalysesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?filters: Types::ListNetworkMigrationAnalysesFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationAnalysesFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationAnalysesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationAnalysisJobDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationAnalysisJobDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationAnalysisResultsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_i_ds: Array[String]?
+    end
+
+    class ListNetworkMigrationAnalysisResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?filters: Types::ListNetworkMigrationAnalysisResultsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationAnalysisResultsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationAnalysisResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationAnalysisResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationAnalysisResult]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationCodeGenerationSegmentsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_i_ds: Array[String]?
+    end
+
+    class ListNetworkMigrationCodeGenerationSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?filters: Types::ListNetworkMigrationCodeGenerationSegmentsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationCodeGenerationSegmentsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationCodeGenerationSegmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationCodeGenerationSegment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationCodeGenerationSegment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationCodeGenerationsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_i_ds: Array[String]?
+    end
+
+    class ListNetworkMigrationCodeGenerationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?filters: Types::ListNetworkMigrationCodeGenerationsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationCodeGenerationsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationCodeGenerationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationCodeGenerationJobDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationCodeGenerationJobDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::ListNetworkMigrationDefinitionsRequestFilters,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::ListNetworkMigrationDefinitionsRequestFilters?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListNetworkMigrationDefinitionsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_definition_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_definition_i_ds: Array[String]?
+    end
+
+    class ListNetworkMigrationDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationDefinitionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationDefinitionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationDeployedStacksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationDeployedStacksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationDeployedStackDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationDeployedStackDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationDeployerJobFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_i_ds: Array[String]?
+    end
+
+    class ListNetworkMigrationDeploymentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationDeployerJobDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationDeployerJobDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?filters: Types::ListNetworkMigrationDeployerJobFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationDeployerJobFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationExecutionRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_i_ds: Array[String],
+        ?network_migration_execution_statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_i_ds: Array[String]?
+      attr_accessor network_migration_execution_statuses: Array[String]?
+    end
+
+    class ListNetworkMigrationExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_definition_id: String,
+        ?filters: Types::ListNetworkMigrationExecutionRequestFilters,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationExecutionRequestFilters?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListNetworkMigrationExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationExecution],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationExecution]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationMapperSegmentConstructsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?construct_i_ds: Array[String],
+        ?construct_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor construct_i_ds: Array[String]?
+      attr_accessor construct_types: Array[String]?
+    end
+
+    class ListNetworkMigrationMapperSegmentConstructsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?segment_id: String,
+        ?filters: Types::ListNetworkMigrationMapperSegmentConstructsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor segment_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationMapperSegmentConstructsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationMapperSegmentConstructsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationMapperSegmentConstruct],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationMapperSegmentConstruct]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationMapperSegmentsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_i_ds: Array[String]?
+    end
+
+    class ListNetworkMigrationMapperSegmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?filters: Types::ListNetworkMigrationMapperSegmentsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationMapperSegmentsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationMapperSegmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationMapperSegment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationMapperSegment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationMappingUpdatesFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_i_ds: Array[String]?
+    end
+
+    class ListNetworkMigrationMappingUpdatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?filters: Types::ListNetworkMigrationMappingUpdatesFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationMappingUpdatesFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationMappingUpdatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationMappingUpdateJobDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationMappingUpdateJobDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationMappingsFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_i_ds: Array[String]?
+    end
+
+    class ListNetworkMigrationMappingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?filters: Types::ListNetworkMigrationMappingsFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor filters: Types::ListNetworkMigrationMappingsFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListNetworkMigrationMappingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::NetworkMigrationMappingJobDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::NetworkMigrationMappingJobDetails]?
       attr_accessor next_token: String?
     end
 
@@ -2274,6 +3163,30 @@ module Aws::Mgn
       attr_accessor connector_action: Types::SourceServerConnectorAction?
     end
 
+    class MergeConstruct
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_id: String,
+        ?construct_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_id: String?
+      attr_accessor construct_id: String?
+    end
+
+    class MergeOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merge_constructs: Array[Types::MergeConstruct],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merge_constructs: Array[Types::MergeConstruct]?
+    end
+
     class NetworkInterface
       include Smithy::Schema::Structure
 
@@ -2289,6 +3202,374 @@ module Aws::Mgn
       attr_accessor is_primary: bool?
     end
 
+    class NetworkMigrationAnalysisJobDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?status: String,
+        ?status_details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor status: String?
+      attr_accessor status_details: String?
+    end
+
+    class NetworkMigrationAnalysisResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?analyzer_type: String,
+        ?source: Types::NetworkMigrationAnalysisResultSource,
+        ?target: Types::NetworkMigrationAnalysisResultTarget,
+        ?status: String,
+        ?analysis_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor analyzer_type: String?
+      attr_accessor source: Types::NetworkMigrationAnalysisResultSource?
+      attr_accessor target: Types::NetworkMigrationAnalysisResultTarget?
+      attr_accessor status: String?
+      attr_accessor analysis_result: String?
+    end
+
+    class NetworkMigrationAnalysisResultSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_id: String?
+    end
+
+    class NetworkMigrationAnalysisResultTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?subnet_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_id: String?
+    end
+
+    class NetworkMigrationCodeGenerationArtifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_id: String,
+        ?artifact_type: String,
+        ?artifact_sub_type: String,
+        ?logical_id: String,
+        ?output_s3_configuration: Types::S3Configuration,
+        ?checksum: Types::Checksum,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_id: String?
+      attr_accessor artifact_type: String?
+      attr_accessor artifact_sub_type: String?
+      attr_accessor logical_id: String?
+      attr_accessor output_s3_configuration: Types::S3Configuration?
+      attr_accessor checksum: Types::Checksum?
+      attr_accessor created_at: Time?
+    end
+
+    class NetworkMigrationCodeGenerationJobDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?status: String,
+        ?status_details: String,
+        ?code_generation_output_format_status_details_map: Hash[String, Types::CodeGenerationOutputFormatStatusDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor status: String?
+      attr_accessor status_details: String?
+      attr_accessor code_generation_output_format_status_details_map: Hash[String, Types::CodeGenerationOutputFormatStatusDetails]?
+    end
+
+    class NetworkMigrationCodeGenerationSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?segment_id: String,
+        ?segment_type: String,
+        ?logical_id: String,
+        ?mapper_segment_id: String,
+        ?artifacts: Array[Types::NetworkMigrationCodeGenerationArtifact],
+        ?referenced_segments: Array[String],
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor segment_id: String?
+      attr_accessor segment_type: String?
+      attr_accessor logical_id: String?
+      attr_accessor mapper_segment_id: String?
+      attr_accessor artifacts: Array[Types::NetworkMigrationCodeGenerationArtifact]?
+      attr_accessor referenced_segments: Array[String]?
+      attr_accessor created_at: Time?
+    end
+
+    class NetworkMigrationDefinitionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_definition_id: String,
+        ?name: String,
+        ?source_environment: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?scope_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor name: String?
+      attr_accessor source_environment: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor scope_tags: Hash[String, String]?
+    end
+
+    class NetworkMigrationDeployedStackDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?stack_physical_id: String,
+        ?stack_logical_id: String,
+        ?segment_id: String,
+        ?target_account: String,
+        ?failed_resources: Array[Types::NetworkMigrationFailedResourceDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor stack_physical_id: String?
+      attr_accessor stack_logical_id: String?
+      attr_accessor segment_id: String?
+      attr_accessor target_account: String?
+      attr_accessor failed_resources: Array[Types::NetworkMigrationFailedResourceDetails]?
+    end
+
+    class NetworkMigrationDeployerJobDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?status: String,
+        ?status_details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor status: String?
+      attr_accessor status_details: String?
+    end
+
+    class NetworkMigrationExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_definition_id: String,
+        ?network_migration_execution_id: String,
+        ?status: String,
+        ?stage: String,
+        ?activity: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor status: String?
+      attr_accessor stage: String?
+      attr_accessor activity: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class NetworkMigrationFailedResourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logical_id: String,
+        ?status: String,
+        ?status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logical_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class NetworkMigrationMapperSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?segment_id: String,
+        ?segment_type: String,
+        ?name: String,
+        ?description: String,
+        ?logical_id: String,
+        ?checksum: Types::Checksum,
+        ?output_s3_configuration: Types::S3Configuration,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?scope_tags: Hash[String, String],
+        ?target_account: String,
+        ?referenced_segments: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor segment_id: String?
+      attr_accessor segment_type: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor logical_id: String?
+      attr_accessor checksum: Types::Checksum?
+      attr_accessor output_s3_configuration: Types::S3Configuration?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor scope_tags: Hash[String, String]?
+      attr_accessor target_account: String?
+      attr_accessor referenced_segments: Array[String]?
+    end
+
+    class NetworkMigrationMapperSegmentConstruct
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?construct_id: String,
+        ?construct_type: String,
+        ?name: String,
+        ?description: String,
+        ?logical_id: String,
+        ?excluded: bool,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor construct_id: String?
+      attr_accessor construct_type: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor logical_id: String?
+      attr_accessor excluded: bool?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor properties: Hash[String, String]?
+    end
+
+    class NetworkMigrationMappingJobDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?status: String,
+        ?status_details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor status: String?
+      attr_accessor status_details: String?
+    end
+
+    class NetworkMigrationMappingUpdateJobDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?status: String,
+        ?status_details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor status: String?
+      attr_accessor status_details: String?
+    end
+
     class OS
       include Smithy::Schema::Structure
 
@@ -2298,6 +3579,34 @@ module Aws::Mgn
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor full_string: String?
+    end
+
+    class OperationUnion
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?merge: Types::MergeOperation,
+        ?split: Types::SplitOperation,
+        ?delete: Types::DeleteOperation,
+        ?update: Types::UpdateOperation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merge: Types::MergeOperation?
+      attr_accessor split: Types::SplitOperation?
+      attr_accessor delete: Types::DeleteOperation?
+      attr_accessor update: Types::UpdateOperation?
+
+      class Merge < OperationUnion
+      end
+      class Split < OperationUnion
+      end
+      class Delete < OperationUnion
+      end
+      class Update < OperationUnion
+      end
+      class Unknown < OperationUnion
+      end
     end
 
     class ParticipatingServer
@@ -2626,6 +3935,9 @@ module Aws::Mgn
         ?staging_area_tags: Hash[String, String],
         ?use_fips_endpoint: bool,
         ?tags: Hash[String, String],
+        ?internet_protocol: String,
+        ?store_snapshot_on_local_zone: bool,
+        ?storage_configuration: Types::StorageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2645,6 +3957,9 @@ module Aws::Mgn
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor use_fips_endpoint: bool?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor internet_protocol: String?
+      attr_accessor store_snapshot_on_local_zone: bool?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
     end
 
     class ResourceNotFoundException
@@ -2779,6 +4094,21 @@ module Aws::Mgn
       attr_accessor s3_bucket_owner: String?
     end
 
+    class S3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_bucket_owner: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_bucket_owner: String?
+      attr_accessor s3_key: String?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -2800,6 +4130,19 @@ module Aws::Mgn
       attr_accessor service_code: String?
       attr_accessor quota_code: String?
       attr_accessor quota_value: Integer?
+    end
+
+    class SourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_environment: String,
+        ?source_s3_configuration: Types::SourceS3Configuration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_environment: String?
+      attr_accessor source_s3_configuration: Types::SourceS3Configuration?
     end
 
     class SourceProperties
@@ -2825,6 +4168,21 @@ module Aws::Mgn
       attr_accessor cpus: Array[Types::CPU]?
       attr_accessor ram_bytes: Integer?
       attr_accessor os: Types::OS?
+    end
+
+    class SourceS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_bucket_owner: String,
+        ?s3_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_bucket_owner: String?
+      attr_accessor s3_key: String?
     end
 
     class SourceServer
@@ -2921,6 +4279,28 @@ module Aws::Mgn
       attr_accessor connector_arn: String?
     end
 
+    class SplitConstruct
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr_block: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr_block: String?
+    end
+
+    class SplitOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?split_constructs: Array[Types::SplitConstruct],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor split_constructs: Array[Types::SplitConstruct]?
+    end
+
     class SsmDocument
       include Smithy::Schema::Structure
 
@@ -3004,12 +4384,14 @@ module Aws::Mgn
         ?s3_bucket: String,
         ?s3_key: String,
         ?s3_bucket_owner: String,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor s3_bucket: String?
       attr_accessor s3_key: String?
       attr_accessor s3_bucket_owner: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class StartExportOutput
@@ -3023,17 +4405,47 @@ module Aws::Mgn
       attr_accessor export_task: Types::ExportTask?
     end
 
+    class StartImportFileEnrichmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?s3_bucket_source: Types::EnrichmentSourceS3Configuration,
+        ?s3_bucket_target: Types::EnrichmentTargetS3Configuration,
+        ?ip_assignment_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor s3_bucket_source: Types::EnrichmentSourceS3Configuration?
+      attr_accessor s3_bucket_target: Types::EnrichmentTargetS3Configuration?
+      attr_accessor ip_assignment_strategy: String?
+    end
+
+    class StartImportFileEnrichmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
     class StartImportInput
       include Smithy::Schema::Structure
 
       def initialize: (
         ?client_token: String,
         ?s3_bucket_source: Types::S3BucketSource,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor client_token: String?
       attr_accessor s3_bucket_source: Types::S3BucketSource?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class StartImportOutput
@@ -3045,6 +4457,166 @@ module Aws::Mgn
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor import_task: Types::ImportTask?
+    end
+
+    class StartNetworkMigrationAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+    end
+
+    class StartNetworkMigrationAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartNetworkMigrationCodeGenerationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?code_generation_output_format_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor code_generation_output_format_types: Array[String]?
+    end
+
+    class StartNetworkMigrationCodeGenerationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartNetworkMigrationDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartNetworkMigrationDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+    end
+
+    class StartNetworkMigrationMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?security_group_mapping_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor security_group_mapping_strategy: String?
+    end
+
+    class StartNetworkMigrationMappingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartNetworkMigrationMappingUpdateConstruct
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_id: String,
+        ?construct_id: String,
+        ?construct_type: String,
+        ?operation: Types::OperationUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_id: String?
+      attr_accessor construct_id: String?
+      attr_accessor construct_type: String?
+      attr_accessor operation: Types::OperationUnion?
+    end
+
+    class StartNetworkMigrationMappingUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?constructs: Array[Types::StartNetworkMigrationMappingUpdateConstruct],
+        ?segments: Array[Types::StartNetworkMigrationMappingUpdateSegment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor constructs: Array[Types::StartNetworkMigrationMappingUpdateConstruct]?
+      attr_accessor segments: Array[Types::StartNetworkMigrationMappingUpdateSegment]?
+    end
+
+    class StartNetworkMigrationMappingUpdateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartNetworkMigrationMappingUpdateSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_id: String,
+        ?target_account: String,
+        ?scope_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_id: String?
+      attr_accessor target_account: String?
+      attr_accessor scope_tags: Hash[String, String]?
     end
 
     class StartReplicationInput
@@ -3173,6 +4745,19 @@ module Aws::Mgn
       attr_accessor account_id: String?
     end
 
+    class StorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_type: String,
+        ?fsx_ontap_configuration: Types::FsxOntapConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_type: String?
+      attr_accessor fsx_ontap_configuration: Types::FsxOntapConfiguration?
+    end
+
     class TagResourceInput
       include Smithy::Schema::Structure
 
@@ -3184,6 +4769,66 @@ module Aws::Mgn
 
       attr_accessor resource_arn: String?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class TargetNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topology: String,
+        ?inbound_cidr: String,
+        ?outbound_cidr: String,
+        ?inspection_cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topology: String?
+      attr_accessor inbound_cidr: String?
+      attr_accessor outbound_cidr: String?
+      attr_accessor inspection_cidr: String?
+    end
+
+    class TargetNetworkUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topology: String,
+        ?inbound_cidr: String,
+        ?outbound_cidr: String,
+        ?inspection_cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topology: String?
+      attr_accessor inbound_cidr: String?
+      attr_accessor outbound_cidr: String?
+      attr_accessor inspection_cidr: String?
+    end
+
+    class TargetS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_bucket_owner: String?
+    end
+
+    class TargetS3ConfigurationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_bucket_owner: String?
     end
 
     class TemplateActionDocument
@@ -3549,6 +5194,8 @@ module Aws::Mgn
         ?small_volume_max_size: Integer,
         ?small_volume_conf: Types::LaunchTemplateDiskConf,
         ?large_volume_conf: Types::LaunchTemplateDiskConf,
+        ?enable_parameters_encryption: bool,
+        ?parameters_encryption_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3566,6 +5213,8 @@ module Aws::Mgn
       attr_accessor small_volume_max_size: Integer?
       attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
       attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor enable_parameters_encryption: bool?
+      attr_accessor parameters_encryption_key: String?
     end
 
     class UpdateLaunchConfigurationTemplateOutput
@@ -3589,6 +5238,8 @@ module Aws::Mgn
         ?small_volume_max_size: Integer,
         ?small_volume_conf: Types::LaunchTemplateDiskConf,
         ?large_volume_conf: Types::LaunchTemplateDiskConf,
+        ?enable_parameters_encryption: bool,
+        ?parameters_encryption_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3609,6 +5260,145 @@ module Aws::Mgn
       attr_accessor small_volume_max_size: Integer?
       attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf?
       attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf?
+      attr_accessor enable_parameters_encryption: bool?
+      attr_accessor parameters_encryption_key: String?
+    end
+
+    class UpdateNetworkMigrationDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?network_migration_definition_id: String,
+        ?name: String,
+        ?description: String,
+        ?source_configurations: Array[Types::SourceConfiguration],
+        ?target_s3_configuration: Types::TargetS3Configuration,
+        ?target_network: Types::TargetNetwork,
+        ?target_deployment: String,
+        ?vpc_provisioning_strategy: String,
+        ?cidr_mappings: Array[Types::CidrMapping],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?tags: Hash[String, String],
+        ?scope_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source_configurations: Array[Types::SourceConfiguration]?
+      attr_accessor target_s3_configuration: Types::TargetS3Configuration?
+      attr_accessor target_network: Types::TargetNetwork?
+      attr_accessor target_deployment: String?
+      attr_accessor vpc_provisioning_strategy: String?
+      attr_accessor cidr_mappings: Array[Types::CidrMapping]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor scope_tags: Hash[String, String]?
+    end
+
+    class UpdateNetworkMigrationDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_definition_id: String,
+        ?name: String,
+        ?description: String,
+        ?source_configurations: Array[Types::SourceConfiguration],
+        ?target_s3_configuration: Types::TargetS3ConfigurationUpdate,
+        ?target_network: Types::TargetNetworkUpdate,
+        ?target_deployment: String,
+        ?vpc_provisioning_strategy: String,
+        ?cidr_mappings: Array[Types::CidrMapping],
+        ?scope_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source_configurations: Array[Types::SourceConfiguration]?
+      attr_accessor target_s3_configuration: Types::TargetS3ConfigurationUpdate?
+      attr_accessor target_network: Types::TargetNetworkUpdate?
+      attr_accessor target_deployment: String?
+      attr_accessor vpc_provisioning_strategy: String?
+      attr_accessor cidr_mappings: Array[Types::CidrMapping]?
+      attr_accessor scope_tags: Hash[String, String]?
+    end
+
+    class UpdateNetworkMigrationMapperSegmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?network_migration_execution_id: String,
+        ?network_migration_definition_id: String,
+        ?segment_id: String,
+        ?segment_type: String,
+        ?name: String,
+        ?description: String,
+        ?logical_id: String,
+        ?checksum: Types::Checksum,
+        ?output_s3_configuration: Types::S3Configuration,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?scope_tags: Hash[String, String],
+        ?target_account: String,
+        ?referenced_segments: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor segment_id: String?
+      attr_accessor segment_type: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor logical_id: String?
+      attr_accessor checksum: Types::Checksum?
+      attr_accessor output_s3_configuration: Types::S3Configuration?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor scope_tags: Hash[String, String]?
+      attr_accessor target_account: String?
+      attr_accessor referenced_segments: Array[String]?
+    end
+
+    class UpdateNetworkMigrationMapperSegmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_migration_definition_id: String,
+        ?network_migration_execution_id: String,
+        ?segment_id: String,
+        ?scope_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_migration_definition_id: String?
+      attr_accessor network_migration_execution_id: String?
+      attr_accessor segment_id: String?
+      attr_accessor scope_tags: Hash[String, String]?
+    end
+
+    class UpdateOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?excluded: bool,
+        ?properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor excluded: bool?
+      attr_accessor properties: Hash[String, String]?
     end
 
     class UpdateReplicationConfigurationInput
@@ -3632,6 +5422,9 @@ module Aws::Mgn
         ?staging_area_tags: Hash[String, String],
         ?use_fips_endpoint: bool,
         ?account_id: String,
+        ?internet_protocol: String,
+        ?store_snapshot_on_local_zone: bool,
+        ?storage_configuration: Types::StorageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3652,6 +5445,9 @@ module Aws::Mgn
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor use_fips_endpoint: bool?
       attr_accessor account_id: String?
+      attr_accessor internet_protocol: String?
+      attr_accessor store_snapshot_on_local_zone: bool?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
     end
 
     class UpdateReplicationConfigurationOutput
@@ -3674,6 +5470,9 @@ module Aws::Mgn
         ?create_public_ip: bool,
         ?staging_area_tags: Hash[String, String],
         ?use_fips_endpoint: bool,
+        ?internet_protocol: String,
+        ?store_snapshot_on_local_zone: bool,
+        ?storage_configuration: Types::StorageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3693,6 +5492,9 @@ module Aws::Mgn
       attr_accessor create_public_ip: bool?
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor use_fips_endpoint: bool?
+      attr_accessor internet_protocol: String?
+      attr_accessor store_snapshot_on_local_zone: bool?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
     end
 
     class UpdateReplicationConfigurationTemplateInput
@@ -3714,6 +5516,9 @@ module Aws::Mgn
         ?create_public_ip: bool,
         ?staging_area_tags: Hash[String, String],
         ?use_fips_endpoint: bool,
+        ?internet_protocol: String,
+        ?store_snapshot_on_local_zone: bool,
+        ?storage_configuration: Types::StorageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3732,6 +5537,9 @@ module Aws::Mgn
       attr_accessor create_public_ip: bool?
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor use_fips_endpoint: bool?
+      attr_accessor internet_protocol: String?
+      attr_accessor store_snapshot_on_local_zone: bool?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
     end
 
     class UpdateReplicationConfigurationTemplateOutput
@@ -3754,6 +5562,9 @@ module Aws::Mgn
         ?staging_area_tags: Hash[String, String],
         ?use_fips_endpoint: bool,
         ?tags: Hash[String, String],
+        ?internet_protocol: String,
+        ?store_snapshot_on_local_zone: bool,
+        ?storage_configuration: Types::StorageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3773,6 +5584,9 @@ module Aws::Mgn
       attr_accessor staging_area_tags: Hash[String, String]?
       attr_accessor use_fips_endpoint: bool?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor internet_protocol: String?
+      attr_accessor store_snapshot_on_local_zone: bool?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
     end
 
     class UpdateSourceServerOutput
@@ -3871,12 +5685,18 @@ module Aws::Mgn
         ?account_id: String,
         ?source_server_id: String,
         ?connector_action: Types::SourceServerConnectorAction,
+        ?user_provided_id: String,
+        ?fqdn_for_action_framework: String,
+        ?platform: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor account_id: String?
       attr_accessor source_server_id: String?
       attr_accessor connector_action: Types::SourceServerConnectorAction?
+      attr_accessor user_provided_id: String?
+      attr_accessor fqdn_for_action_framework: String?
+      attr_accessor platform: String?
     end
 
     class UpdateWaveInput

@@ -128,6 +128,7 @@ module Aws::DataSync
     InputTagList: ListShape
     InternalException: StructureShape
     InvalidRequestException: StructureShape
+    ItemCount: IntegerShape
     KerberosKeytabFile: BlobShape
     KerberosKrb5ConfFile: BlobShape
     KerberosPrincipal: StringShape
@@ -163,6 +164,7 @@ module Aws::DataSync
     NfsMountOptions: StructureShape
     NfsSubdirectory: StringShape
     NfsVersion: EnumShape
+    ObjectMetadata: EnumShape
     ObjectStorageAccessKey: StringShape
     ObjectStorageBucketName: StringShape
     ObjectStorageCertificate: BlobShape
@@ -229,6 +231,8 @@ module Aws::DataSync
     TaskExecutionArn: StringShape
     TaskExecutionFilesFailedDetail: StructureShape
     TaskExecutionFilesListedDetail: StructureShape
+    TaskExecutionFoldersFailedDetail: StructureShape
+    TaskExecutionFoldersListedDetail: StructureShape
     TaskExecutionList: ListShape
     TaskExecutionListEntry: StructureShape
     TaskExecutionResultDetail: StructureShape

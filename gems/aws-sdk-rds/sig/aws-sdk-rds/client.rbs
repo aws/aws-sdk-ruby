@@ -257,7 +257,13 @@ module Aws::RDS
       ?target_iops: Integer,
       ?target_storage_type: String,
       ?target_allocated_storage: Integer,
-      ?target_storage_throughput: Integer
+      ?target_storage_throughput: Integer,
+      ?target_resource_configurations: Array[
+        {
+          source_arn: String,
+          target_kms_key_id: String
+        }
+      ]
     ) -> _CreateBlueGreenDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBlueGreenDeploymentResponse
 
     interface _CreateCustomDBEngineVersionResponse
@@ -267,12 +273,14 @@ module Aws::RDS
       def engine_version: () -> String?
       def database_installation_files_s3_bucket_name: () -> String?
       def database_installation_files_s3_prefix: () -> String?
+      def database_installation_files: () -> Array[String]?
       def custom_db_engine_version_manifest: () -> String?
       def db_parameter_group_family: () -> String?
       def db_engine_description: () -> String?
       def db_engine_version_arn: () -> String?
       def db_engine_version_description: () -> String?
       def default_character_set: () -> Types::CharacterSet?
+      def failure_reason: () -> String?
       def image: () -> Types::CustomDBEngineVersionAMI?
       def db_engine_media_type: () -> String?
       def kms_key_id: () -> String?
@@ -303,6 +311,7 @@ module Aws::RDS
       ?engine_version: String,
       ?database_installation_files_s3_bucket_name: String,
       ?database_installation_files_s3_prefix: String,
+      ?database_installation_files: Array[String],
       ?image_id: String,
       ?kms_key_id: String,
       ?source_custom_db_engine_version_identifier: String,
@@ -398,7 +407,25 @@ module Aws::RDS
       ?master_user_secret_kms_key_id: String,
       ?ca_certificate_identifier: String,
       ?engine_lifecycle_support: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ],
       ?master_user_authentication_type: String,
+      ?with_express_configuration: bool,
+      ?associated_roles: Array[
+        {
+          role_arn: String,
+          feature_name: String
+        }
+      ],
       ?source_region: String
     ) -> _CreateDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterResponse
 
@@ -539,6 +566,27 @@ module Aws::RDS
       ?multi_tenant: bool,
       ?dedicated_log_volume: bool,
       ?engine_lifecycle_support: String,
+      ?additional_storage_volumes: Array[
+        {
+          volume_name: String,
+          allocated_storage: Integer,
+          iops: untyped,
+          max_allocated_storage: untyped,
+          storage_throughput: untyped,
+          storage_type: untyped
+        }
+      ],
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ],
       ?master_user_authentication_type: String
     ) -> _CreateDBInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBInstanceResponse
 
@@ -604,6 +652,27 @@ module Aws::RDS
       ?dedicated_log_volume: bool,
       ?upgrade_storage_config: bool,
       ?ca_certificate_identifier: String,
+      ?additional_storage_volumes: Array[
+        {
+          volume_name: String,
+          allocated_storage: Integer,
+          iops: untyped,
+          max_allocated_storage: untyped,
+          storage_throughput: untyped,
+          storage_type: untyped
+        }
+      ],
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ],
       ?source_region: String
     ) -> _CreateDBInstanceReadReplicaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBInstanceReadReplicaResponse
 
@@ -876,12 +945,14 @@ module Aws::RDS
       def engine_version: () -> String?
       def database_installation_files_s3_bucket_name: () -> String?
       def database_installation_files_s3_prefix: () -> String?
+      def database_installation_files: () -> Array[String]?
       def custom_db_engine_version_manifest: () -> String?
       def db_parameter_group_family: () -> String?
       def db_engine_description: () -> String?
       def db_engine_version_arn: () -> String?
       def db_engine_version_description: () -> String?
       def default_character_set: () -> Types::CharacterSet?
+      def failure_reason: () -> String?
       def image: () -> Types::CustomDBEngineVersionAMI?
       def db_engine_media_type: () -> String?
       def kms_key_id: () -> String?
@@ -1864,6 +1935,26 @@ module Aws::RDS
       ?marker: String
     ) -> _DescribeReservedDBInstancesOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReservedDBInstancesOfferingsResponse
 
+    interface _DescribeServerlessV2PlatformVersionsResponse
+      include Smithy::Client::_Response[Types::ServerlessV2PlatformVersionsMessage]
+      def marker: () -> String?
+      def serverless_v2_platform_versions: () -> Array[Types::ServerlessV2PlatformVersionInfo]?
+    end
+    def describe_serverless_v2_platform_versions: (
+      ?serverless_v2_platform_version: String,
+      ?engine: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?default_only: bool,
+      ?include_all: bool,
+      ?max_records: Integer,
+      ?marker: String
+    ) -> _DescribeServerlessV2PlatformVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServerlessV2PlatformVersionsResponse
+
     interface _DescribeSourceRegionsResponse
       include Smithy::Client::_Response[Types::SourceRegionMessage]
       def marker: () -> String?
@@ -2017,12 +2108,14 @@ module Aws::RDS
       def engine_version: () -> String?
       def database_installation_files_s3_bucket_name: () -> String?
       def database_installation_files_s3_prefix: () -> String?
+      def database_installation_files: () -> Array[String]?
       def custom_db_engine_version_manifest: () -> String?
       def db_parameter_group_family: () -> String?
       def db_engine_description: () -> String?
       def db_engine_version_arn: () -> String?
       def db_engine_version_description: () -> String?
       def default_character_set: () -> Types::CharacterSet?
+      def failure_reason: () -> String?
       def image: () -> Types::CustomDBEngineVersionAMI?
       def db_engine_media_type: () -> String?
       def kms_key_id: () -> String?
@@ -2120,7 +2213,8 @@ module Aws::RDS
       ?aws_backup_recovery_point_arn: String,
       ?enable_limitless_database: bool,
       ?ca_certificate_identifier: String,
-      ?master_user_authentication_type: String
+      ?master_user_authentication_type: String,
+      ?engine_lifecycle_support: String
     ) -> _ModifyDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBClusterResponse
 
     interface _ModifyDBClusterEndpointResponse
@@ -2251,7 +2345,30 @@ module Aws::RDS
       ?multi_tenant: bool,
       ?dedicated_log_volume: bool,
       ?engine: String,
-      ?master_user_authentication_type: String
+      ?additional_storage_volumes: Array[
+        {
+          volume_name: String,
+          allocated_storage: Integer,
+          iops: untyped,
+          max_allocated_storage: untyped,
+          storage_throughput: untyped,
+          storage_type: untyped,
+          set_for_delete: bool
+        }
+      ],
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?master_user_authentication_type: String,
+      ?engine_lifecycle_support: String
     ) -> _ModifyDBInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBInstanceResponse
 
     interface _ModifyDBParameterGroupResponse
@@ -2496,7 +2613,18 @@ module Aws::RDS
     def promote_read_replica: (
       ?db_instance_identifier: String,
       ?backup_retention_period: Integer,
-      ?preferred_backup_window: String
+      ?preferred_backup_window: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ]
     ) -> _PromoteReadReplicaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PromoteReadReplicaResponse
 
     interface _PromoteReadReplicaDBClusterResponse
@@ -2711,7 +2839,24 @@ module Aws::RDS
       },
       ?manage_master_user_password: bool,
       ?master_user_secret_kms_key_id: String,
-      ?engine_lifecycle_support: String
+      ?engine_lifecycle_support: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?associated_roles: Array[
+        {
+          role_arn: String,
+          feature_name: String
+        }
+      ]
     ) -> _RestoreDBClusterFromS3Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBClusterFromS3Response
 
     interface _RestoreDBClusterFromSnapshotResponse
@@ -2773,7 +2918,28 @@ module Aws::RDS
       ?enable_performance_insights: bool,
       ?performance_insights_kms_key_id: String,
       ?performance_insights_retention_period: Integer,
-      ?engine_lifecycle_support: String
+      ?backup_retention_period: Integer,
+      ?preferred_backup_window: String,
+      ?engine_lifecycle_support: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?enable_vpc_networking: bool,
+      ?enable_internet_access_gateway: bool,
+      ?associated_roles: Array[
+        {
+          role_arn: String,
+          feature_name: String
+        }
+      ]
     ) -> _RestoreDBClusterFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBClusterFromSnapshotResponse
 
     interface _RestoreDBClusterToPointInTimeResponse
@@ -2835,7 +3001,28 @@ module Aws::RDS
       ?enable_performance_insights: bool,
       ?performance_insights_kms_key_id: String,
       ?performance_insights_retention_period: Integer,
-      ?engine_lifecycle_support: String
+      ?backup_retention_period: Integer,
+      ?preferred_backup_window: String,
+      ?engine_lifecycle_support: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?enable_vpc_networking: bool,
+      ?enable_internet_access_gateway: bool,
+      ?associated_roles: Array[
+        {
+          role_arn: String,
+          feature_name: String
+        }
+      ]
     ) -> _RestoreDBClusterToPointInTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBClusterToPointInTimeResponse
 
     interface _RestoreDBInstanceFromDBSnapshotResponse
@@ -2892,9 +3079,32 @@ module Aws::RDS
       ?custom_iam_instance_profile: String,
       ?allocated_storage: Integer,
       ?db_cluster_snapshot_identifier: String,
+      ?backup_retention_period: Integer,
+      ?preferred_backup_window: String,
       ?dedicated_log_volume: bool,
       ?ca_certificate_identifier: String,
       ?engine_lifecycle_support: String,
+      ?additional_storage_volumes: Array[
+        {
+          volume_name: String,
+          allocated_storage: Integer,
+          iops: untyped,
+          max_allocated_storage: untyped,
+          storage_throughput: untyped,
+          storage_type: untyped
+        }
+      ],
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ],
       ?manage_master_user_password: bool,
       ?master_user_secret_kms_key_id: String
     ) -> _RestoreDBInstanceFromDBSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBInstanceFromDBSnapshotResponse
@@ -2965,7 +3175,28 @@ module Aws::RDS
       ?master_user_secret_kms_key_id: String,
       ?dedicated_log_volume: bool,
       ?ca_certificate_identifier: String,
-      ?engine_lifecycle_support: String
+      ?engine_lifecycle_support: String,
+      ?additional_storage_volumes: Array[
+        {
+          volume_name: String,
+          allocated_storage: Integer,
+          iops: untyped,
+          max_allocated_storage: untyped,
+          storage_throughput: untyped,
+          storage_type: untyped
+        }
+      ],
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ]
     ) -> _RestoreDBInstanceFromS3Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBInstanceFromS3Response
 
     interface _RestoreDBInstanceToPointInTimeResponse
@@ -3026,9 +3257,32 @@ module Aws::RDS
       ?backup_target: String,
       ?custom_iam_instance_profile: String,
       ?allocated_storage: Integer,
+      ?backup_retention_period: Integer,
+      ?preferred_backup_window: String,
       ?dedicated_log_volume: bool,
       ?ca_certificate_identifier: String,
       ?engine_lifecycle_support: String,
+      ?additional_storage_volumes: Array[
+        {
+          volume_name: String,
+          allocated_storage: Integer,
+          iops: untyped,
+          max_allocated_storage: untyped,
+          storage_throughput: untyped,
+          storage_type: untyped
+        }
+      ],
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ]
+        }
+      ],
       ?manage_master_user_password: bool,
       ?master_user_secret_kms_key_id: String
     ) -> _RestoreDBInstanceToPointInTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBInstanceToPointInTimeResponse
@@ -3087,6 +3341,12 @@ module Aws::RDS
       ?backup_retention_period: Integer,
       ?kms_key_id: String,
       ?pre_signed_url: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
       ?source_region: String
     ) -> _StartDBInstanceAutomatedBackupsReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDBInstanceAutomatedBackupsReplicationResponse
 

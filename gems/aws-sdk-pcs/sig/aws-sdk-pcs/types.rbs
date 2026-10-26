@@ -43,6 +43,19 @@ module Aws::PCS
       attr_accessor mode: String?
     end
 
+    class CgroupCustomSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?parameter_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor parameter_value: String?
+    end
+
     class Cluster
       include Smithy::Schema::Structure
 
@@ -82,15 +95,23 @@ module Aws::PCS
       def initialize: (
         ?scale_down_idle_time_in_seconds: Integer,
         ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+        ?slurmdbd_custom_settings: Array[Types::SlurmdbdCustomSetting],
+        ?cgroup_custom_settings: Array[Types::CgroupCustomSetting],
         ?auth_key: Types::SlurmAuthKey,
+        ?jwt_auth: Types::JwtAuth,
         ?accounting: Types::Accounting,
+        ?slurm_rest: Types::SlurmRest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor scale_down_idle_time_in_seconds: Integer?
       attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+      attr_accessor slurmdbd_custom_settings: Array[Types::SlurmdbdCustomSetting]?
+      attr_accessor cgroup_custom_settings: Array[Types::CgroupCustomSetting]?
       attr_accessor auth_key: Types::SlurmAuthKey?
+      attr_accessor jwt_auth: Types::JwtAuth?
       attr_accessor accounting: Types::Accounting?
+      attr_accessor slurm_rest: Types::SlurmRest?
     end
 
     class ClusterSlurmConfigurationRequest
@@ -99,13 +120,19 @@ module Aws::PCS
       def initialize: (
         ?scale_down_idle_time_in_seconds: Integer,
         ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+        ?slurmdbd_custom_settings: Array[Types::SlurmdbdCustomSetting],
+        ?cgroup_custom_settings: Array[Types::CgroupCustomSetting],
         ?accounting: Types::AccountingRequest,
+        ?slurm_rest: Types::SlurmRestRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor scale_down_idle_time_in_seconds: Integer?
       attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+      attr_accessor slurmdbd_custom_settings: Array[Types::SlurmdbdCustomSetting]?
+      attr_accessor cgroup_custom_settings: Array[Types::CgroupCustomSetting]?
       attr_accessor accounting: Types::AccountingRequest?
+      attr_accessor slurm_rest: Types::SlurmRestRequest?
     end
 
     module ClusterStatus
@@ -118,6 +145,7 @@ module Aws::PCS
       UPDATE_FAILED: String
       SUSPENDING: String
       SUSPENDED: String
+      RESUMING: String
     end
 
     class ClusterSummary
@@ -161,6 +189,7 @@ module Aws::PCS
         ?instance_configs: Array[Types::InstanceConfig],
         ?spot_options: Types::SpotOptions,
         ?slurm_configuration: Types::ComputeNodeGroupSlurmConfiguration,
+        ?node_lifecycle_actions: Types::NodeLifecycleActions,
         ?error_info: Array[Types::ErrorInfo],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -181,6 +210,7 @@ module Aws::PCS
       attr_accessor instance_configs: Array[Types::InstanceConfig]?
       attr_accessor spot_options: Types::SpotOptions?
       attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfiguration?
+      attr_accessor node_lifecycle_actions: Types::NodeLifecycleActions?
       attr_accessor error_info: Array[Types::ErrorInfo]?
     end
 
@@ -199,22 +229,30 @@ module Aws::PCS
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?scale_down_idle_time_in_seconds: Integer,
         ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+        ?gres_custom_settings: Array[Hash[String, String]],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor scale_down_idle_time_in_seconds: Integer?
       attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+      attr_accessor gres_custom_settings: Array[Hash[String, String]]?
     end
 
     class ComputeNodeGroupSlurmConfigurationRequest
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?scale_down_idle_time_in_seconds: Integer,
         ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+        ?gres_custom_settings: Array[Hash[String, String]],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor scale_down_idle_time_in_seconds: Integer?
       attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+      attr_accessor gres_custom_settings: Array[Hash[String, String]]?
     end
 
     module ComputeNodeGroupStatus
@@ -228,6 +266,7 @@ module Aws::PCS
       DELETED: String
       SUSPENDING: String
       SUSPENDED: String
+      RESUMING: String
     end
 
     class ComputeNodeGroupSummary
@@ -317,6 +356,7 @@ module Aws::PCS
         ?instance_configs: Array[Types::InstanceConfig],
         ?spot_options: Types::SpotOptions,
         ?slurm_configuration: Types::ComputeNodeGroupSlurmConfigurationRequest,
+        ?node_lifecycle_actions: Types::NodeLifecycleActionsRequest,
         ?client_token: String,
         ?tags: Hash[String, String],
       ) -> void
@@ -333,6 +373,7 @@ module Aws::PCS
       attr_accessor instance_configs: Array[Types::InstanceConfig]?
       attr_accessor spot_options: Types::SpotOptions?
       attr_accessor slurm_configuration: Types::ComputeNodeGroupSlurmConfigurationRequest?
+      attr_accessor node_lifecycle_actions: Types::NodeLifecycleActionsRequest?
       attr_accessor client_token: String?
       attr_accessor tags: Hash[String, String]?
     end
@@ -485,6 +526,7 @@ module Aws::PCS
     module EndpointType
       SLURMCTLD: String
       SLURMDBD: String
+      SLURMRESTD: String
     end
 
     class ErrorInfo
@@ -498,6 +540,11 @@ module Aws::PCS
 
       attr_accessor code: String?
       attr_accessor message: String?
+    end
+
+    module ExecutionPolicy
+      FIRST_BOOT_ONLY: String
+      EVERY_BOOT: String
     end
 
     class GetClusterRequest
@@ -590,6 +637,30 @@ module Aws::PCS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class JwtAuth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jwt_key: Types::JwtKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jwt_key: Types::JwtKey?
+    end
+
+    class JwtKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?secret_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor secret_version: String?
     end
 
     class ListClustersRequest
@@ -731,10 +802,75 @@ module Aws::PCS
       attr_accessor network_type: String?
     end
 
+    class NodeLifecycleActions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stages: Types::NodeLifecycleStages,
+        ?script_caching_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stages: Types::NodeLifecycleStages?
+      attr_accessor script_caching_policy: String?
+    end
+
+    class NodeLifecycleActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stages: Types::NodeLifecycleStages,
+        ?script_caching_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stages: Types::NodeLifecycleStages?
+      attr_accessor script_caching_policy: String?
+    end
+
+    class NodeLifecycleScript
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?script_source: Types::ScriptSource,
+        ?arguments: Array[String],
+        ?on_error: String,
+        ?execution_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor script_source: Types::ScriptSource?
+      attr_accessor arguments: Array[String]?
+      attr_accessor on_error: String?
+      attr_accessor execution_policy: String?
+    end
+
+    class NodeLifecycleStages
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_bootstrapped: Array[Types::NodeLifecycleScript],
+        ?node_ready: Array[Types::NodeLifecycleScript],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_bootstrapped: Array[Types::NodeLifecycleScript]?
+      attr_accessor node_ready: Array[Types::NodeLifecycleScript]?
+    end
+
+    module OnError
+      TERMINATE: String
+      STOP_SEQUENCE: String
+      CONTINUE: String
+    end
+
     module PurchaseOption
       ONDEMAND: String
       SPOT: String
       CAPACITY_BLOCK: String
+      INTERRUPTIBLE_CAPACITY_RESERVATION: String
     end
 
     class Queue
@@ -798,6 +934,7 @@ module Aws::PCS
       UPDATE_FAILED: String
       SUSPENDING: String
       SUSPENDED: String
+      RESUMING: String
     end
 
     class QueueSummary
@@ -843,12 +980,22 @@ module Aws::PCS
         ?node_id: String,
         ?shared_secret: String,
         ?endpoints: Array[Types::Endpoint],
+        ?cluster_name: String,
+        ?compute_node_group_id: String,
+        ?compute_node_group_name: String,
+        ?node_lifecycle_actions: Types::NodeLifecycleActions,
+        ?scheduler_version: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor node_id: String?
       attr_accessor shared_secret: String?
       attr_accessor endpoints: Array[Types::Endpoint]?
+      attr_accessor cluster_name: String?
+      attr_accessor compute_node_group_id: String?
+      attr_accessor compute_node_group_name: String?
+      attr_accessor node_lifecycle_actions: Types::NodeLifecycleActions?
+      attr_accessor scheduler_version: String?
     end
 
     class ResourceNotFoundException
@@ -922,6 +1069,26 @@ module Aws::PCS
       SLURM: String
     end
 
+    module ScriptCachingPolicy
+      CACHE_ONCE: String
+      REFRESH_ON_REBOOT: String
+    end
+
+    class ScriptSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_location: String,
+        ?s3_version_id: String,
+        ?checksum: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_location: String?
+      attr_accessor s3_version_id: String?
+      attr_accessor checksum: String?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -973,6 +1140,46 @@ module Aws::PCS
       attr_accessor parameter_value: String?
     end
 
+    class SlurmRest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+    end
+
+    module SlurmRestMode
+      STANDARD: String
+      NONE: String
+    end
+
+    class SlurmRestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+    end
+
+    class SlurmdbdCustomSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?parameter_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor parameter_value: String?
+    end
+
     module SpotAllocationStrategy
       LOWEST_PRICE: String
       CAPACITY_OPTIMIZED: String
@@ -1003,6 +1210,15 @@ module Aws::PCS
       attr_accessor tags: Hash[String, String]?
     end
 
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class ThrottlingException
       include Smithy::Schema::Structure
 
@@ -1029,6 +1245,15 @@ module Aws::PCS
       attr_accessor tag_keys: Array[String]?
     end
 
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class UpdateAccountingRequest
       include Smithy::Schema::Structure
 
@@ -1049,12 +1274,14 @@ module Aws::PCS
         ?cluster_identifier: String,
         ?client_token: String,
         ?slurm_configuration: Types::UpdateClusterSlurmConfigurationRequest,
+        ?scheduler: Types::UpdateSchedulerRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cluster_identifier: String?
       attr_accessor client_token: String?
       attr_accessor slurm_configuration: Types::UpdateClusterSlurmConfigurationRequest?
+      attr_accessor scheduler: Types::UpdateSchedulerRequest?
     end
 
     class UpdateClusterResponse
@@ -1074,13 +1301,19 @@ module Aws::PCS
       def initialize: (
         ?scale_down_idle_time_in_seconds: Integer,
         ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+        ?slurmdbd_custom_settings: Array[Types::SlurmdbdCustomSetting],
+        ?cgroup_custom_settings: Array[Types::CgroupCustomSetting],
         ?accounting: Types::UpdateAccountingRequest,
+        ?slurm_rest: Types::UpdateSlurmRestRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor scale_down_idle_time_in_seconds: Integer?
       attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+      attr_accessor slurmdbd_custom_settings: Array[Types::SlurmdbdCustomSetting]?
+      attr_accessor cgroup_custom_settings: Array[Types::CgroupCustomSetting]?
       attr_accessor accounting: Types::UpdateAccountingRequest?
+      attr_accessor slurm_rest: Types::UpdateSlurmRestRequest?
     end
 
     class UpdateComputeNodeGroupRequest
@@ -1097,6 +1330,7 @@ module Aws::PCS
         ?scaling_configuration: Types::ScalingConfigurationRequest,
         ?iam_instance_profile_arn: String,
         ?slurm_configuration: Types::UpdateComputeNodeGroupSlurmConfigurationRequest,
+        ?node_lifecycle_actions: Types::UpdateNodeLifecycleActionsRequest,
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1111,6 +1345,7 @@ module Aws::PCS
       attr_accessor scaling_configuration: Types::ScalingConfigurationRequest?
       attr_accessor iam_instance_profile_arn: String?
       attr_accessor slurm_configuration: Types::UpdateComputeNodeGroupSlurmConfigurationRequest?
+      attr_accessor node_lifecycle_actions: Types::UpdateNodeLifecycleActionsRequest?
       attr_accessor client_token: String?
     end
 
@@ -1129,11 +1364,28 @@ module Aws::PCS
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?scale_down_idle_time_in_seconds: Integer,
         ?slurm_custom_settings: Array[Types::SlurmCustomSetting],
+        ?gres_custom_settings: Array[Hash[String, String]],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor scale_down_idle_time_in_seconds: Integer?
       attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+      attr_accessor gres_custom_settings: Array[Hash[String, String]]?
+    end
+
+    class UpdateNodeLifecycleActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stages: Types::NodeLifecycleStages,
+        ?script_caching_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stages: Types::NodeLifecycleStages?
+      attr_accessor script_caching_policy: String?
     end
 
     class UpdateQueueRequest
@@ -1175,6 +1427,28 @@ module Aws::PCS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor slurm_custom_settings: Array[Types::SlurmCustomSetting]?
+    end
+
+    class UpdateSchedulerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+    end
+
+    class UpdateSlurmRestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
     end
 
     class ValidationException

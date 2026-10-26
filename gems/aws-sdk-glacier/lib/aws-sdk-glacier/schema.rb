@@ -76,6 +76,7 @@ module Aws::Glacier
     ListVaultsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glacier#ListVaultsInput", name: "ListVaultsInput")
     ListVaultsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glacier#ListVaultsOutput", name: "ListVaultsOutput")
     MissingParameterValueException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glacier#MissingParameterValueException", name: "MissingParameterValueException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    NoLongerSupportedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glacier#NoLongerSupportedException", name: "NoLongerSupportedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     NotificationEventList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.glacier#NotificationEventList", name: "NotificationEventList")
     NullableLong = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.glacier#NullableLong", name: "NullableLong")
     OutputLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.glacier#OutputLocation", name: "OutputLocation")
@@ -436,6 +437,10 @@ module Aws::Glacier
     MissingParameterValueException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "code"))
     MissingParameterValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
     MissingParameterValueException.type = Types::MissingParameterValueException
+    NoLongerSupportedException.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "type"))
+    NoLongerSupportedException.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "code"))
+    NoLongerSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "message"))
+    NoLongerSupportedException.type = Types::NoLongerSupportedException
     NotificationEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     OutputLocation.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "S3"))
     OutputLocation.type = Types::OutputLocation
@@ -567,7 +572,7 @@ module Aws::Glacier
       service.id = "com.amazonaws.glacier#Glacier"
       service.name = "Glacier"
       service.version = "2012-06-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Glacier", "arnNamespace" => "glacier", "cloudFormationName" => "Glacier", "cloudTrailEventSource" => "glacier.amazonaws.com", "endpointPrefix" => "glacier"}, "aws.auth#sigv4" => {"name" => "glacier"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Glacier", "smithy.api#xmlNamespace" => {"uri" => "http://glacier.amazonaws.com/doc/2012-06-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Glacier", "arnNamespace" => "glacier", "cloudFormationName" => "Glacier", "cloudTrailEventSource" => "glacier.amazonaws.com", "endpointPrefix" => "glacier"}, "aws.auth#sigv4" => {"name" => "glacier"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Glacier", "smithy.api#xmlNamespace" => {"uri" => "http://glacier.amazonaws.com/doc/2012-06-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://glacier-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://glacier.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://glacier-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://glacier.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://glacier.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:abort_multipart_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glacier#AbortMultipartUpload"
         operation.name = "AbortMultipartUpload"
@@ -575,6 +580,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}", "code" => 204}}
@@ -586,6 +592,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/lock-policy", "code" => 204}}
@@ -598,6 +605,7 @@ module Aws::Glacier
         operation.errors << InvalidParameterValueException
         operation.errors << LimitExceededException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/tags?operation=add", "code" => 204}}
@@ -609,6 +617,7 @@ module Aws::Glacier
         operation.output = CompleteMultipartUploadOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}", "code" => 201}}
@@ -620,6 +629,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/lock-policy/{lockId}", "code" => 204}}
@@ -632,6 +642,7 @@ module Aws::Glacier
         operation.errors << InvalidParameterValueException
         operation.errors << LimitExceededException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/vaults/{vaultName}", "code" => 201}}
       end)
@@ -642,6 +653,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/archives/{archiveId}", "code" => 204}}
@@ -653,6 +665,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}", "code" => 204}}
@@ -664,6 +677,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/access-policy", "code" => 204}}
@@ -675,6 +689,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/{accountId}/vaults/{vaultName}/notification-configuration", "code" => 204}}
@@ -686,6 +701,7 @@ module Aws::Glacier
         operation.output = DescribeJobOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/jobs/{jobId}", "code" => 200}}
@@ -697,6 +713,7 @@ module Aws::Glacier
         operation.output = DescribeVaultOperationOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}", "code" => 200}}
@@ -708,6 +725,7 @@ module Aws::Glacier
         operation.output = GetDataRetrievalPolicyOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/policies/data-retrieval", "code" => 200}}
       end)
@@ -718,6 +736,7 @@ module Aws::Glacier
         operation.output = GetJobOutputOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/jobs/{jobId}/output", "code" => 200}}
@@ -729,6 +748,7 @@ module Aws::Glacier
         operation.output = GetVaultAccessPolicyOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/access-policy", "code" => 200}}
@@ -740,6 +760,7 @@ module Aws::Glacier
         operation.output = GetVaultLockOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/lock-policy", "code" => 200}}
@@ -751,6 +772,7 @@ module Aws::Glacier
         operation.output = GetVaultNotificationsOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/notification-configuration", "code" => 200}}
@@ -763,6 +785,7 @@ module Aws::Glacier
         operation.errors << InsufficientCapacityException
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << PolicyEnforcedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
@@ -775,6 +798,7 @@ module Aws::Glacier
         operation.output = InitiateMultipartUploadOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads", "code" => 201}}
@@ -786,6 +810,7 @@ module Aws::Glacier
         operation.output = InitiateVaultLockOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/lock-policy", "code" => 201}}
@@ -797,6 +822,7 @@ module Aws::Glacier
         operation.output = ListJobsOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/jobs", "code" => 200}}
@@ -809,6 +835,7 @@ module Aws::Glacier
         operation.output = ListMultipartUploadsOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads", "code" => 200}}
@@ -821,6 +848,7 @@ module Aws::Glacier
         operation.output = ListPartsOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}", "code" => 200}}
@@ -833,6 +861,7 @@ module Aws::Glacier
         operation.output = ListProvisionedCapacityOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/provisioned-capacity", "code" => 200}}
       end)
@@ -843,6 +872,7 @@ module Aws::Glacier
         operation.output = ListTagsForVaultOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults/{vaultName}/tags", "code" => 200}}
@@ -854,6 +884,7 @@ module Aws::Glacier
         operation.output = ListVaultsOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/{accountId}/vaults", "code" => 200}}
@@ -867,6 +898,7 @@ module Aws::Glacier
         operation.errors << InvalidParameterValueException
         operation.errors << LimitExceededException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/provisioned-capacity", "code" => 201}}
       end)
@@ -877,6 +909,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/{accountId}/vaults/{vaultName}/tags?operation=remove", "code" => 204}}
@@ -888,6 +921,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/policies/data-retrieval", "code" => 204}}
       end)
@@ -898,6 +932,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/vaults/{vaultName}/access-policy", "code" => 204}}
@@ -909,6 +944,7 @@ module Aws::Glacier
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
         operation.traits = {"smithy.api#http" => {"method" => "PUT", "uri" => "/{accountId}/vaults/{vaultName}/notification-configuration", "code" => 204}}
@@ -920,6 +956,7 @@ module Aws::Glacier
         operation.output = UploadArchiveOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << RequestTimeoutException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException
@@ -932,6 +969,7 @@ module Aws::Glacier
         operation.output = UploadMultipartPartOutput
         operation.errors << InvalidParameterValueException
         operation.errors << MissingParameterValueException
+        operation.errors << NoLongerSupportedException
         operation.errors << RequestTimeoutException
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceUnavailableException

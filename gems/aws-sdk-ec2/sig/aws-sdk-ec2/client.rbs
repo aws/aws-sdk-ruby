@@ -88,6 +88,15 @@ module Aws::EC2
       ]
     ) -> _AcceptReservedInstancesExchangeQuoteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptReservedInstancesExchangeQuoteResponse
 
+    interface _AcceptTransitGatewayClientVpnAttachmentResponse
+      include Smithy::Client::_Response[Types::AcceptTransitGatewayClientVpnAttachmentResult]
+      def transit_gateway_client_vpn_attachment: () -> Types::TransitGatewayClientVpnAttachment?
+    end
+    def accept_transit_gateway_client_vpn_attachment: (
+      ?transit_gateway_attachment_id: String,
+      ?dry_run: bool
+    ) -> _AcceptTransitGatewayClientVpnAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptTransitGatewayClientVpnAttachmentResponse
+
     interface _AcceptTransitGatewayMulticastDomainAssociationsResponse
       include Smithy::Client::_Response[Types::AcceptTransitGatewayMulticastDomainAssociationsResult]
       def associations: () -> Types::TransitGatewayMulticastDomainAssociations?
@@ -201,6 +210,9 @@ module Aws::EC2
       ?host_maintenance: String,
       ?asset_ids: Array[String],
       ?availability_zone_id: String,
+      ?cpu_options: {
+        amd_sev_snp: String
+      },
       ?auto_placement: String,
       ?client_token: String,
       ?instance_type: String,
@@ -221,7 +233,18 @@ module Aws::EC2
       ?description: String,
       ?preview_next_cidr: bool,
       ?allowed_cidrs: Array[String],
-      ?disallowed_cidrs: Array[String]
+      ?disallowed_cidrs: Array[String],
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ]
     ) -> _AllocateIpamPoolCidrResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AllocateIpamPoolCidrResponse
 
     interface _ApplySecurityGroupsToClientVpnTargetNetworkResponse
@@ -290,6 +313,24 @@ module Aws::EC2
       ?allow_reassociation: bool
     ) -> _AssociateAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAddressResponse
 
+    interface _AssociateApplicationStatusCheckResponse
+      include Smithy::Client::_Response[Types::AssociateApplicationStatusCheckResult]
+      def successful_results: () -> Array[Types::SuccessfulAssociationResponseObject]?
+      def unsuccessful_results: () -> Array[Types::UnsuccessfulAssociationResponseObject]?
+    end
+    def associate_application_status_check: (
+      ?application_status_check_id: String,
+      ?target_tag_associations: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?instance_ids: Array[String],
+      ?client_token: String,
+      ?dry_run: bool
+    ) -> _AssociateApplicationStatusCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateApplicationStatusCheckResponse
+
     interface _AssociateCapacityReservationBillingOwnerResponse
       include Smithy::Client::_Response[Types::AssociateCapacityReservationBillingOwnerResult]
       def return: () -> bool?
@@ -309,7 +350,9 @@ module Aws::EC2
       ?client_vpn_endpoint_id: String,
       ?subnet_id: String,
       ?client_token: String,
-      ?dry_run: bool
+      ?dry_run: bool,
+      ?availability_zone: String,
+      ?availability_zone_id: String
     ) -> _AssociateClientVpnTargetNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateClientVpnTargetNetworkResponse
 
     interface _AssociateDhcpOptionsResponse
@@ -405,7 +448,9 @@ module Aws::EC2
       ?nat_gateway_id: String,
       ?allocation_ids: Array[String],
       ?private_ip_addresses: Array[String],
-      ?dry_run: bool
+      ?dry_run: bool,
+      ?availability_zone: String,
+      ?availability_zone_id: String
     ) -> _AssociateNatGatewayAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateNatGatewayAddressResponse
 
     interface _AssociateRouteServerResponse
@@ -528,6 +573,16 @@ module Aws::EC2
       ?groups: Array[String]
     ) -> _AttachClassicLinkVpcResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachClassicLinkVpcResponse
 
+    interface _AttachImageWatermarkResponse
+      include Smithy::Client::_Response[Types::AttachImageWatermarkResult]
+      def watermark_key: () -> String?
+    end
+    def attach_image_watermark: (
+      ?image_id: String,
+      ?watermark_name: String,
+      ?dry_run: bool
+    ) -> _AttachImageWatermarkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachImageWatermarkResponse
+
     interface _AttachInternetGatewayResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -574,6 +629,7 @@ module Aws::EC2
       def delete_on_termination: () -> bool?
       def associated_resource: () -> String?
       def instance_owning_service: () -> String?
+      def ebs_card_index: () -> Integer?
       def volume_id: () -> String?
       def instance_id: () -> String?
       def device: () -> String?
@@ -584,6 +640,7 @@ module Aws::EC2
       ?device: String,
       ?instance_id: String,
       ?volume_id: String,
+      ?ebs_card_index: Integer,
       ?dry_run: bool
     ) -> _AttachVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachVolumeResponse
 
@@ -738,6 +795,18 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _AuthorizeSecurityGroupIngressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AuthorizeSecurityGroupIngressResponse
 
+    interface _BatchModifyIpamRoutingPolicyRegistrationsResponse
+      include Smithy::Client::_Response[Types::BatchModifyIpamRoutingPolicyRegistrationsResult]
+      def ipam_routing_policy_registration_delta: () -> Types::IpamRoutingPolicyRegistrationDelta?
+    end
+    def batch_modify_ipam_routing_policy_registrations: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?delta_json: String,
+      ?force: bool,
+      ?client_token: String
+    ) -> _BatchModifyIpamRoutingPolicyRegistrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchModifyIpamRoutingPolicyRegistrationsResponse
+
     interface _BundleInstanceResponse
       include Smithy::Client::_Response[Types::BundleInstanceResult]
       def bundle_task: () -> Types::BundleTask?
@@ -771,7 +840,9 @@ module Aws::EC2
     end
     def cancel_capacity_reservation: (
       ?capacity_reservation_id: String,
-      ?dry_run: bool
+      ?dry_run: bool,
+      ?apply_cancellation_charges: String,
+      ?quote_id: String
     ) -> _CancelCapacityReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelCapacityReservationResponse
 
     interface _CancelCapacityReservationFleetsResponse
@@ -943,6 +1014,105 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _CopySnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopySnapshotResponse
 
+    interface _CopyVolumesResponse
+      include Smithy::Client::_Response[Types::CopyVolumesResult]
+      def volumes: () -> Array[Types::Volume]?
+    end
+    def copy_volumes: (
+      ?source_volume_id: String,
+      ?iops: Integer,
+      ?size: Integer,
+      ?volume_type: String,
+      ?dry_run: bool,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?multi_attach_enabled: bool,
+      ?throughput: Integer,
+      ?client_token: String,
+      ?encrypted: bool,
+      ?kms_key_id: String
+    ) -> _CopyVolumesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyVolumesResponse
+
+    interface _CreateApplicationStatusCheckResponse
+      include Smithy::Client::_Response[Types::CreateApplicationStatusCheckResult]
+      def application_status_check: () -> Types::ApplicationStatusCheckResponseObject?
+    end
+    def create_application_status_check: (
+      ?health_check_paths: Array[
+        {
+          source: {
+            subnet_id: String,
+            security_group_id: String
+          },
+          destinations: Array[
+            {
+              subnet_id: untyped,
+              security_group_id: untyped
+            }
+          ]
+        }
+      ],
+      ?aggregation: String,
+      ?protocol: String,
+      ?port: Integer,
+      ?path: String,
+      ?device_index: Integer,
+      ?ip_version: String,
+      ?ip_scope: String,
+      ?interval: Integer,
+      ?timeout: Integer,
+      ?failure_threshold: Integer,
+      ?success_threshold: Integer,
+      ?status_code_matcher: String,
+      ?initialization_grace_period_seconds: Integer,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?client_token: String,
+      ?dry_run: bool
+    ) -> _CreateApplicationStatusCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationStatusCheckResponse
+
+    interface _CreateCapacityManagerDataExportResponse
+      include Smithy::Client::_Response[Types::CreateCapacityManagerDataExportResult]
+      def capacity_manager_data_export_id: () -> String?
+    end
+    def create_capacity_manager_data_export: (
+      ?s3_bucket_name: String,
+      ?s3_bucket_prefix: String,
+      ?schedule: String,
+      ?output_format: String,
+      ?client_token: String,
+      ?dry_run: bool,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _CreateCapacityManagerDataExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCapacityManagerDataExportResponse
+
     interface _CreateCapacityReservationResponse
       include Smithy::Client::_Response[Types::CreateCapacityReservationResult]
       def capacity_reservation: () -> Types::CapacityReservation?
@@ -1002,6 +1172,49 @@ module Aws::EC2
         }
       ]
     ) -> _CreateCapacityReservationBySplittingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCapacityReservationBySplittingResponse
+
+    interface _CreateCapacityReservationCancellationQuoteResponse
+      include Smithy::Client::_Response[Types::CreateCapacityReservationCancellationQuoteResult]
+      def capacity_reservation_cancellation_quote: () -> Types::CapacityReservationCancellationQuote?
+    end
+    def create_capacity_reservation_cancellation_quote: (
+      ?capacity_reservation_id: String,
+      ?client_token: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?dry_run: bool
+    ) -> _CreateCapacityReservationCancellationQuoteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCapacityReservationCancellationQuoteResponse
+
+    interface _CreateCapacityReservationDateChangeQuoteResponse
+      include Smithy::Client::_Response[Types::CreateCapacityReservationDateChangeQuoteResult]
+      def capacity_reservation_modification_quote: () -> Types::CapacityReservationModificationQuote?
+    end
+    def create_capacity_reservation_date_change_quote: (
+      ?capacity_reservation_id: String,
+      ?new_start_date: Time,
+      ?client_token: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?dry_run: bool
+    ) -> _CreateCapacityReservationDateChangeQuoteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCapacityReservationDateChangeQuoteResponse
 
     interface _CreateCapacityReservationFleetResponse
       include Smithy::Client::_Response[Types::CreateCapacityReservationFleetResult]
@@ -1097,7 +1310,8 @@ module Aws::EC2
       ?connection_log_options: {
         enabled: bool,
         cloudwatch_log_group: String,
-        cloudwatch_log_stream: untyped
+        cloudwatch_log_stream: untyped,
+        include_authorization_policy_context: untyped
       },
       ?dns_servers: Array[String],
       ?transport_protocol: String,
@@ -1134,7 +1348,22 @@ module Aws::EC2
       },
       ?disconnect_on_session_timeout: bool,
       ?endpoint_ip_address_type: String,
-      ?traffic_ip_address_type: String
+      ?traffic_ip_address_type: String,
+      ?transit_gateway_configuration: {
+        transit_gateway_id: String,
+        availability_zones: Array[String],
+        availability_zone_ids: Array[String]
+      },
+      ?device_posture_options: {
+        trust_providers: Array[
+          {
+            trust_provider_type: String,
+            tenant_id: String,
+            public_signing_key_url: untyped
+          }
+        ],
+        enabled: bool
+      }
     ) -> _CreateClientVpnEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClientVpnEndpointResponse
 
     interface _CreateClientVpnRouteResponse
@@ -1328,13 +1557,25 @@ module Aws::EC2
         min_target_capacity: Integer,
         max_total_price: String
       },
+      ?reserved_capacity_options: {
+        allocation_strategy: String,
+        reservation_types: Array[String],
+        capacity_reservation_target: {
+          capacity_reservation_ids: Array[String],
+          capacity_reservation_resource_group_arns: Array[String]
+        },
+        reserved_capacity_fallback_options: {
+          market_types: Array[String]
+        }
+      },
       ?excess_capacity_termination_policy: String,
       ?launch_template_configs: Array[
         {
           launch_template_specification: {
             launch_template_id: String,
             launch_template_name: String,
-            version: String
+            version: String,
+            launch_template_specification_user_data: String
           },
           overrides: Array[
             {
@@ -1356,6 +1597,7 @@ module Aws::EC2
                 group_id: String,
                 availability_zone: untyped
               },
+              key_name: untyped,
               block_device_mappings: Array[
                 {
                   device_name: untyped,
@@ -1373,6 +1615,15 @@ module Aws::EC2
                   no_device: untyped
                 }
               ],
+              iam_instance_profile: {
+                arn: untyped,
+                name: untyped
+              },
+              metadata_options: {
+                http_tokens: String,
+                http_put_response_hop_limit: untyped,
+                http_endpoint: String
+              },
               instance_requirements: {
                 v_cpu_count: {
                   min: untyped,
@@ -1433,9 +1684,11 @@ module Aws::EC2
                       }
                     ]
                   }
-                }
+                },
+                require_encryption_in_transit: untyped
               },
-              image_id: untyped
+              image_id: untyped,
+              availability_zone_id: untyped
             }
           ]
         }
@@ -1500,7 +1753,13 @@ module Aws::EC2
         file_format: String,
         hive_compatible_partitions: bool,
         per_hour_partition: untyped
-      }
+      },
+      ?tag_field_specifications: Array[
+        {
+          resource_type: String,
+          tag_keys: Array[String]
+        }
+      ]
     ) -> _CreateFlowLogsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFlowLogsResponse
 
     interface _CreateFpgaImageResponse
@@ -1551,6 +1810,7 @@ module Aws::EC2
         }
       ],
       ?snapshot_location: String,
+      ?boot_mode_override: String,
       ?dry_run: bool,
       ?instance_id: String,
       ?name: String,
@@ -1570,7 +1830,8 @@ module Aws::EC2
             availability_zone: untyped,
             encrypted: untyped,
             volume_initialization_rate: untyped,
-            availability_zone_id: untyped
+            availability_zone_id: untyped,
+            ebs_card_index: untyped
           },
           no_device: untyped,
           device_name: untyped,
@@ -1712,6 +1973,32 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _CreateInternetGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInternetGatewayResponse
 
+    interface _CreateInterruptibleCapacityReservationAllocationResponse
+      include Smithy::Client::_Response[Types::CreateInterruptibleCapacityReservationAllocationResult]
+      def source_capacity_reservation_id: () -> String?
+      def target_instance_count: () -> Integer?
+      def status: () -> String?
+      def interruption_type: () -> String?
+    end
+    def create_interruptible_capacity_reservation_allocation: (
+      ?capacity_reservation_id: String,
+      ?instance_count: Integer,
+      ?client_token: String,
+      ?dry_run: bool,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?zero_size_preference: String
+    ) -> _CreateInterruptibleCapacityReservationAllocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInterruptibleCapacityReservationAllocationResponse
+
     interface _CreateIpamResponse
       include Smithy::Client::_Response[Types::CreateIpamResult]
       def ipam: () -> Types::Ipam?
@@ -1762,6 +2049,51 @@ module Aws::EC2
       ?client_token: String
     ) -> _CreateIpamExternalResourceVerificationTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpamExternalResourceVerificationTokenResponse
 
+    interface _CreateIpamInternetRegistryAssociationResponse
+      include Smithy::Client::_Response[Types::CreateIpamInternetRegistryAssociationResult]
+      def ipam_internet_registry_association: () -> Types::IpamInternetRegistryAssociation?
+    end
+    def create_ipam_internet_registry_association: (
+      ?dry_run: bool,
+      ?ipam_id: String,
+      ?rir: String,
+      ?organization_handle: String,
+      ?description: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateIpamInternetRegistryAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpamInternetRegistryAssociationResponse
+
+    interface _CreateIpamPolicyResponse
+      include Smithy::Client::_Response[Types::CreateIpamPolicyResult]
+      def ipam_policy: () -> Types::IpamPolicy?
+    end
+    def create_ipam_policy: (
+      ?dry_run: bool,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?client_token: String,
+      ?ipam_id: String
+    ) -> _CreateIpamPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpamPolicyResponse
+
     interface _CreateIpamPoolResponse
       include Smithy::Client::_Response[Types::CreateIpamPoolResult]
       def ipam_pool: () -> Types::IpamPool?
@@ -1806,6 +2138,76 @@ module Aws::EC2
       }
     ) -> _CreateIpamPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpamPoolResponse
 
+    interface _CreateIpamPrefixListResolverResponse
+      include Smithy::Client::_Response[Types::CreateIpamPrefixListResolverResult]
+      def ipam_prefix_list_resolver: () -> Types::IpamPrefixListResolver?
+    end
+    def create_ipam_prefix_list_resolver: (
+      ?dry_run: bool,
+      ?ipam_id: String,
+      ?description: String,
+      ?address_family: String,
+      ?rules: Array[
+        {
+          rule_type: String,
+          static_cidr: String,
+          ipam_scope_id: String,
+          resource_type: String,
+          conditions: Array[
+            {
+              operation: String,
+              ipam_pool_id: untyped,
+              resource_id: untyped,
+              resource_owner: untyped,
+              resource_region: untyped,
+              resource_tag: {
+                key: untyped,
+                value: untyped
+              },
+              cidr: untyped
+            }
+          ]
+        }
+      ],
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateIpamPrefixListResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpamPrefixListResolverResponse
+
+    interface _CreateIpamPrefixListResolverTargetResponse
+      include Smithy::Client::_Response[Types::CreateIpamPrefixListResolverTargetResult]
+      def ipam_prefix_list_resolver_target: () -> Types::IpamPrefixListResolverTarget?
+    end
+    def create_ipam_prefix_list_resolver_target: (
+      ?dry_run: bool,
+      ?ipam_prefix_list_resolver_id: String,
+      ?prefix_list_id: String,
+      ?prefix_list_region: String,
+      ?desired_version: Integer,
+      ?track_latest_version: bool,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateIpamPrefixListResolverTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpamPrefixListResolverTargetResponse
+
     interface _CreateIpamResourceDiscoveryResponse
       include Smithy::Client::_Response[Types::CreateIpamResourceDiscoveryResult]
       def ipam_resource_discovery: () -> Types::IpamResourceDiscovery?
@@ -1832,6 +2234,22 @@ module Aws::EC2
       ?client_token: String
     ) -> _CreateIpamResourceDiscoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpamResourceDiscoveryResponse
 
+    interface _CreateIpamRoutingPolicyRegistrationResponse
+      include Smithy::Client::_Response[Types::CreateIpamRoutingPolicyRegistrationResult]
+      def ipam_routing_policy_registration_delta: () -> Types::IpamRoutingPolicyRegistrationDelta?
+    end
+    def create_ipam_routing_policy_registration: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?cidr: String,
+      ?asns: Array[String],
+      ?permit_more_specific_announcements: bool,
+      ?max_length: Integer,
+      ?description: String,
+      ?force: bool,
+      ?client_token: String
+    ) -> _CreateIpamRoutingPolicyRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpamRoutingPolicyRegistrationResponse
+
     interface _CreateIpamScopeResponse
       include Smithy::Client::_Response[Types::CreateIpamScopeResult]
       def ipam_scope: () -> Types::IpamScope?
@@ -1851,7 +2269,11 @@ module Aws::EC2
           ]
         }
       ],
-      ?client_token: String
+      ?client_token: String,
+      ?external_authority_configuration: {
+        type: String,
+        external_resource_identifier: String
+      }
     ) -> _CreateIpamScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpamScopeResponse
 
     interface _CreateKeyPairResponse
@@ -1910,7 +2332,8 @@ module Aws::EC2
               volume_size: untyped,
               volume_type: String,
               throughput: untyped,
-              volume_initialization_rate: untyped
+              volume_initialization_rate: untyped,
+              ebs_card_index: untyped
             },
             no_device: untyped
           }
@@ -2030,7 +2453,8 @@ module Aws::EC2
         cpu_options: {
           core_count: untyped,
           threads_per_core: untyped,
-          amd_sev_snp: String
+          amd_sev_snp: String,
+          nested_virtualization: String
         },
         capacity_reservation_specification: {
           capacity_reservation_preference: String,
@@ -2117,7 +2541,8 @@ module Aws::EC2
                 }
               ]
             }
-          }
+          },
+          require_encryption_in_transit: untyped
         },
         private_dns_name_options: {
           hostname_type: String,
@@ -2133,7 +2558,22 @@ module Aws::EC2
         },
         network_performance_options: {
           bandwidth_weighting: String
-        }
+        },
+        secondary_interfaces: Array[
+          {
+            delete_on_termination: untyped,
+            device_index: untyped,
+            private_ip_addresses: Array[
+              {
+                private_ip_address: untyped
+              }
+            ],
+            private_ip_address_count: untyped,
+            secondary_subnet_id: String,
+            interface_type: String,
+            network_card_index: untyped
+          }
+        ]
       },
       ?operator: {
         principal: String
@@ -2183,7 +2623,8 @@ module Aws::EC2
               volume_size: untyped,
               volume_type: String,
               throughput: untyped,
-              volume_initialization_rate: untyped
+              volume_initialization_rate: untyped,
+              ebs_card_index: untyped
             },
             no_device: untyped
           }
@@ -2303,7 +2744,8 @@ module Aws::EC2
         cpu_options: {
           core_count: untyped,
           threads_per_core: untyped,
-          amd_sev_snp: String
+          amd_sev_snp: String,
+          nested_virtualization: String
         },
         capacity_reservation_specification: {
           capacity_reservation_preference: String,
@@ -2390,7 +2832,8 @@ module Aws::EC2
                 }
               ]
             }
-          }
+          },
+          require_encryption_in_transit: untyped
         },
         private_dns_name_options: {
           hostname_type: String,
@@ -2406,7 +2849,22 @@ module Aws::EC2
         },
         network_performance_options: {
           bandwidth_weighting: String
-        }
+        },
+        secondary_interfaces: Array[
+          {
+            delete_on_termination: untyped,
+            device_index: untyped,
+            private_ip_addresses: Array[
+              {
+                private_ip_address: untyped
+              }
+            ],
+            private_ip_address_count: untyped,
+            secondary_subnet_id: String,
+            interface_type: String,
+            network_card_index: untyped
+          }
+        ]
       },
       ?resolve_alias: bool
     ) -> _CreateLaunchTemplateVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLaunchTemplateVersionResponse
@@ -2602,10 +3060,19 @@ module Aws::EC2
       def nat_gateway: () -> Types::NatGateway?
     end
     def create_nat_gateway: (
+      ?availability_mode: String,
       ?allocation_id: String,
       ?client_token: String,
       ?dry_run: bool,
       ?subnet_id: String,
+      ?vpc_id: String,
+      ?availability_zone_addresses: Array[
+        {
+          availability_zone: String,
+          availability_zone_id: String,
+          allocation_ids: Array[String]
+        }
+      ],
       ?tag_specifications: Array[
         {
           resource_type: String,
@@ -2874,6 +3341,11 @@ module Aws::EC2
         }
       ],
       ?spread_level: String,
+      ?linked_group_id: String,
+      ?operator: {
+        principal: String
+      },
+      ?parent_group_id: String,
       ?dry_run: bool,
       ?group_name: String,
       ?strategy: String
@@ -2921,7 +3393,8 @@ module Aws::EC2
       ],
       ?image_id: String,
       ?delete_replaced_root_volume: bool,
-      ?volume_initialization_rate: Integer
+      ?volume_initialization_rate: Integer,
+      ?volume_id: String
     ) -> _CreateReplaceRootVolumeTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplaceRootVolumeTaskResponse
 
     interface _CreateReservedInstancesListingResponse
@@ -3079,6 +3552,54 @@ module Aws::EC2
       ?dry_run: bool,
       ?vpc_id: String
     ) -> _CreateRouteTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRouteTableResponse
+
+    interface _CreateSecondaryNetworkResponse
+      include Smithy::Client::_Response[Types::CreateSecondaryNetworkResult]
+      def secondary_network: () -> Types::SecondaryNetwork?
+      def client_token: () -> String?
+    end
+    def create_secondary_network: (
+      ?client_token: String,
+      ?dry_run: bool,
+      ?ipv4_cidr_block: String,
+      ?network_type: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _CreateSecondaryNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecondaryNetworkResponse
+
+    interface _CreateSecondarySubnetResponse
+      include Smithy::Client::_Response[Types::CreateSecondarySubnetResult]
+      def secondary_subnet: () -> Types::SecondarySubnet?
+      def client_token: () -> String?
+    end
+    def create_secondary_subnet: (
+      ?client_token: String,
+      ?availability_zone: String,
+      ?availability_zone_id: String,
+      ?dry_run: bool,
+      ?ipv4_cidr_block: String,
+      ?secondary_network_id: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _CreateSecondarySubnetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecondarySubnetResponse
 
     interface _CreateSecurityGroupResponse
       include Smithy::Client::_Response[Types::CreateSecurityGroupResult]
@@ -3462,6 +3983,47 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _CreateTransitGatewayConnectPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTransitGatewayConnectPeerResponse
 
+    interface _CreateTransitGatewayMeteringPolicyResponse
+      include Smithy::Client::_Response[Types::CreateTransitGatewayMeteringPolicyResult]
+      def transit_gateway_metering_policy: () -> Types::TransitGatewayMeteringPolicy?
+    end
+    def create_transit_gateway_metering_policy: (
+      ?transit_gateway_id: String,
+      ?middlebox_attachment_ids: Array[String],
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?dry_run: bool
+    ) -> _CreateTransitGatewayMeteringPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTransitGatewayMeteringPolicyResponse
+
+    interface _CreateTransitGatewayMeteringPolicyEntryResponse
+      include Smithy::Client::_Response[Types::CreateTransitGatewayMeteringPolicyEntryResult]
+      def transit_gateway_metering_policy_entry: () -> Types::TransitGatewayMeteringPolicyEntry?
+    end
+    def create_transit_gateway_metering_policy_entry: (
+      ?transit_gateway_metering_policy_id: String,
+      ?policy_rule_number: Integer,
+      ?source_transit_gateway_attachment_id: String,
+      ?source_transit_gateway_attachment_type: String,
+      ?source_cidr_block: String,
+      ?source_port_range: String,
+      ?destination_transit_gateway_attachment_id: String,
+      ?destination_transit_gateway_attachment_type: String,
+      ?destination_cidr_block: String,
+      ?destination_port_range: String,
+      ?protocol: String,
+      ?metered_account: String,
+      ?dry_run: bool
+    ) -> _CreateTransitGatewayMeteringPolicyEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTransitGatewayMeteringPolicyEntryResponse
+
     interface _CreateTransitGatewayMulticastDomainResponse
       include Smithy::Client::_Response[Types::CreateTransitGatewayMulticastDomainResult]
       def transit_gateway_multicast_domain: () -> Types::TransitGatewayMulticastDomain?
@@ -3532,6 +4094,28 @@ module Aws::EC2
       ],
       ?dry_run: bool
     ) -> _CreateTransitGatewayPolicyTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTransitGatewayPolicyTableResponse
+
+    interface _CreateTransitGatewayPolicyTableEntryResponse
+      include Smithy::Client::_Response[Types::CreateTransitGatewayPolicyTableEntryResult]
+      def transit_gateway_policy_table_entry: () -> Types::TransitGatewayPolicyTableEntry?
+    end
+    def create_transit_gateway_policy_table_entry: (
+      ?transit_gateway_policy_table_id: String,
+      ?policy_rule_number: String,
+      ?policy_rule: {
+        source_cidr_block: String,
+        source_port_range: untyped,
+        destination_cidr_block: untyped,
+        destination_port_range: untyped,
+        protocol: untyped,
+        meta_data: {
+          meta_data_key: untyped,
+          meta_data_value: untyped
+        }
+      },
+      ?target_route_table_id: String,
+      ?dry_run: bool
+    ) -> _CreateTransitGatewayPolicyTableEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTransitGatewayPolicyTableEntryResponse
 
     interface _CreateTransitGatewayPrefixListReferenceResponse
       include Smithy::Client::_Response[Types::CreateTransitGatewayPrefixListReferenceResult]
@@ -3808,6 +4392,7 @@ module Aws::EC2
       include Smithy::Client::_Response[Types::CreateVolumeOutput]
       def availability_zone_id: () -> String?
       def outpost_arn: () -> String?
+      def source_volume_id: () -> String?
       def iops: () -> Integer?
       def tags: () -> Array[Types::Tag]?
       def volume_type: () -> String?
@@ -3817,6 +4402,8 @@ module Aws::EC2
       def sse_type: () -> String?
       def operator: () -> Types::OperatorResponse?
       def volume_initialization_rate: () -> Integer?
+      def volume_arn: () -> String?
+      def owner_id: () -> String?
       def volume_id: () -> String?
       def size: () -> Integer?
       def snapshot_id: () -> String?
@@ -3871,6 +4458,17 @@ module Aws::EC2
       ?ipv6_ipam_pool_id: String,
       ?ipv6_netmask_length: Integer,
       ?ipv6_cidr_block_network_border_group: String,
+      ?vpc_encryption_control: {
+        mode: String,
+        internet_gateway_exclusion: String,
+        egress_only_internet_gateway_exclusion: untyped,
+        nat_gateway_exclusion: untyped,
+        virtual_private_gateway_exclusion: untyped,
+        vpc_peering_exclusion: untyped,
+        lambda_exclusion: untyped,
+        vpc_lattice_exclusion: untyped,
+        elastic_file_system_exclusion: untyped
+      },
       ?tag_specifications: Array[
         {
           resource_type: String,
@@ -3909,6 +4507,26 @@ module Aws::EC2
       ]
     ) -> _CreateVpcBlockPublicAccessExclusionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcBlockPublicAccessExclusionResponse
 
+    interface _CreateVpcEncryptionControlResponse
+      include Smithy::Client::_Response[Types::CreateVpcEncryptionControlResult]
+      def vpc_encryption_control: () -> Types::VpcEncryptionControl?
+    end
+    def create_vpc_encryption_control: (
+      ?dry_run: bool,
+      ?vpc_id: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _CreateVpcEncryptionControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcEncryptionControlResponse
+
     interface _CreateVpcEndpointResponse
       include Smithy::Client::_Response[Types::CreateVpcEndpointResult]
       def vpc_endpoint: () -> Types::VpcEndpoint?
@@ -3926,7 +4544,9 @@ module Aws::EC2
       ?ip_address_type: String,
       ?dns_options: {
         dns_record_ip_type: String,
-        private_dns_only_for_inbound_resolver_endpoint: bool
+        private_dns_only_for_inbound_resolver_endpoint: bool,
+        private_dns_preference: String,
+        private_dns_specified_domains: Array[String]
       },
       ?client_token: String,
       ?private_dns_enabled: bool,
@@ -4017,6 +4637,27 @@ module Aws::EC2
       ?peer_owner_id: String
     ) -> _CreateVpcPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcPeeringConnectionResponse
 
+    interface _CreateVpnConcentratorResponse
+      include Smithy::Client::_Response[Types::CreateVpnConcentratorResult]
+      def vpn_concentrator: () -> Types::VpnConcentrator?
+    end
+    def create_vpn_concentrator: (
+      ?type: String,
+      ?transit_gateway_id: String,
+      ?tag_specifications: Array[
+        {
+          resource_type: String,
+          tags: Array[
+            {
+              key: String,
+              value: untyped
+            }
+          ]
+        }
+      ],
+      ?dry_run: bool
+    ) -> _CreateVpnConcentratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpnConcentratorResponse
+
     interface _CreateVpnConnectionResponse
       include Smithy::Client::_Response[Types::CreateVpnConnectionResult]
       def vpn_connection: () -> Types::VpnConnection?
@@ -4026,6 +4667,7 @@ module Aws::EC2
       ?type: String,
       ?vpn_gateway_id: String,
       ?transit_gateway_id: String,
+      ?vpn_concentrator_id: String,
       ?tag_specifications: Array[
         {
           resource_type: String,
@@ -4094,7 +4736,10 @@ module Aws::EC2
               cloud_watch_log_options: {
                 log_enabled: untyped,
                 log_group_arn: String,
-                log_output_format: untyped
+                log_output_format: untyped,
+                bgp_log_enabled: untyped,
+                bgp_log_group_arn: untyped,
+                bgp_log_output_format: untyped
               }
             },
             enable_tunnel_lifecycle_control: untyped
@@ -4106,6 +4751,7 @@ module Aws::EC2
         remote_ipv6_network_cidr: untyped,
         outside_ip_address_type: untyped,
         transport_transit_gateway_attachment_id: String,
+        tunnel_bandwidth: String,
         static_routes_only: untyped
       }
     ) -> _CreateVpnConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpnConnectionResponse
@@ -4140,6 +4786,25 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _CreateVpnGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpnGatewayResponse
 
+    interface _DeleteApplicationStatusCheckResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationStatusCheckResult]
+      def application_status_check: () -> Types::ApplicationStatusCheckResponseObject?
+    end
+    def delete_application_status_check: (
+      ?application_status_check_id: String,
+      ?client_token: String,
+      ?dry_run: bool
+    ) -> _DeleteApplicationStatusCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationStatusCheckResponse
+
+    interface _DeleteCapacityManagerDataExportResponse
+      include Smithy::Client::_Response[Types::DeleteCapacityManagerDataExportResult]
+      def capacity_manager_data_export_id: () -> String?
+    end
+    def delete_capacity_manager_data_export: (
+      ?capacity_manager_data_export_id: String,
+      ?dry_run: bool
+    ) -> _DeleteCapacityManagerDataExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCapacityManagerDataExportResponse
+
     interface _DeleteCarrierGatewayResponse
       include Smithy::Client::_Response[Types::DeleteCarrierGatewayResult]
       def carrier_gateway: () -> Types::CarrierGateway?
@@ -4157,6 +4822,15 @@ module Aws::EC2
       ?client_vpn_endpoint_id: String,
       ?dry_run: bool
     ) -> _DeleteClientVpnEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClientVpnEndpointResponse
+
+    interface _DeleteClientVpnEndpointAuthorizationPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteClientVpnEndpointAuthorizationPolicyResult]
+      def status: () -> String?
+    end
+    def delete_client_vpn_endpoint_authorization_policy: (
+      ?client_vpn_endpoint_id: String,
+      ?dry_run: bool
+    ) -> _DeleteClientVpnEndpointAuthorizationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClientVpnEndpointAuthorizationPolicyResponse
 
     interface _DeleteClientVpnRouteResponse
       include Smithy::Client::_Response[Types::DeleteClientVpnRouteResult]
@@ -4297,6 +4971,24 @@ module Aws::EC2
       ?ipam_external_resource_verification_token_id: String
     ) -> _DeleteIpamExternalResourceVerificationTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpamExternalResourceVerificationTokenResponse
 
+    interface _DeleteIpamInternetRegistryAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteIpamInternetRegistryAssociationResult]
+      def ipam_internet_registry_association: () -> Types::IpamInternetRegistryAssociation?
+    end
+    def delete_ipam_internet_registry_association: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String
+    ) -> _DeleteIpamInternetRegistryAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpamInternetRegistryAssociationResponse
+
+    interface _DeleteIpamPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteIpamPolicyResult]
+      def ipam_policy: () -> Types::IpamPolicy?
+    end
+    def delete_ipam_policy: (
+      ?dry_run: bool,
+      ?ipam_policy_id: String
+    ) -> _DeleteIpamPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpamPolicyResponse
+
     interface _DeleteIpamPoolResponse
       include Smithy::Client::_Response[Types::DeleteIpamPoolResult]
       def ipam_pool: () -> Types::IpamPool?
@@ -4307,6 +4999,24 @@ module Aws::EC2
       ?cascade: bool
     ) -> _DeleteIpamPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpamPoolResponse
 
+    interface _DeleteIpamPrefixListResolverResponse
+      include Smithy::Client::_Response[Types::DeleteIpamPrefixListResolverResult]
+      def ipam_prefix_list_resolver: () -> Types::IpamPrefixListResolver?
+    end
+    def delete_ipam_prefix_list_resolver: (
+      ?dry_run: bool,
+      ?ipam_prefix_list_resolver_id: String
+    ) -> _DeleteIpamPrefixListResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpamPrefixListResolverResponse
+
+    interface _DeleteIpamPrefixListResolverTargetResponse
+      include Smithy::Client::_Response[Types::DeleteIpamPrefixListResolverTargetResult]
+      def ipam_prefix_list_resolver_target: () -> Types::IpamPrefixListResolverTarget?
+    end
+    def delete_ipam_prefix_list_resolver_target: (
+      ?dry_run: bool,
+      ?ipam_prefix_list_resolver_target_id: String
+    ) -> _DeleteIpamPrefixListResolverTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpamPrefixListResolverTargetResponse
+
     interface _DeleteIpamResourceDiscoveryResponse
       include Smithy::Client::_Response[Types::DeleteIpamResourceDiscoveryResult]
       def ipam_resource_discovery: () -> Types::IpamResourceDiscovery?
@@ -4315,6 +5025,18 @@ module Aws::EC2
       ?dry_run: bool,
       ?ipam_resource_discovery_id: String
     ) -> _DeleteIpamResourceDiscoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpamResourceDiscoveryResponse
+
+    interface _DeleteIpamRoutingPolicyRegistrationResponse
+      include Smithy::Client::_Response[Types::DeleteIpamRoutingPolicyRegistrationResult]
+      def ipam_routing_policy_registration_delta: () -> Types::IpamRoutingPolicyRegistrationDelta?
+    end
+    def delete_ipam_routing_policy_registration: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?cidr: String,
+      ?force: bool,
+      ?client_token: String
+    ) -> _DeleteIpamRoutingPolicyRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpamRoutingPolicyRegistrationResponse
 
     interface _DeleteIpamScopeResponse
       include Smithy::Client::_Response[Types::DeleteIpamScopeResult]
@@ -4578,6 +5300,28 @@ module Aws::EC2
       ?route_table_id: String
     ) -> _DeleteRouteTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRouteTableResponse
 
+    interface _DeleteSecondaryNetworkResponse
+      include Smithy::Client::_Response[Types::DeleteSecondaryNetworkResult]
+      def secondary_network: () -> Types::SecondaryNetwork?
+      def client_token: () -> String?
+    end
+    def delete_secondary_network: (
+      ?client_token: String,
+      ?dry_run: bool,
+      ?secondary_network_id: String
+    ) -> _DeleteSecondaryNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecondaryNetworkResponse
+
+    interface _DeleteSecondarySubnetResponse
+      include Smithy::Client::_Response[Types::DeleteSecondarySubnetResult]
+      def secondary_subnet: () -> Types::SecondarySubnet?
+      def client_token: () -> String?
+    end
+    def delete_secondary_subnet: (
+      ?client_token: String,
+      ?dry_run: bool,
+      ?secondary_subnet_id: String
+    ) -> _DeleteSecondarySubnetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecondarySubnetResponse
+
     interface _DeleteSecurityGroupResponse
       include Smithy::Client::_Response[Types::DeleteSecurityGroupResult]
       def return: () -> bool?
@@ -4680,6 +5424,15 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _DeleteTransitGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTransitGatewayResponse
 
+    interface _DeleteTransitGatewayClientVpnAttachmentResponse
+      include Smithy::Client::_Response[Types::DeleteTransitGatewayClientVpnAttachmentResult]
+      def transit_gateway_client_vpn_attachment: () -> Types::TransitGatewayClientVpnAttachment?
+    end
+    def delete_transit_gateway_client_vpn_attachment: (
+      ?transit_gateway_attachment_id: String,
+      ?dry_run: bool
+    ) -> _DeleteTransitGatewayClientVpnAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTransitGatewayClientVpnAttachmentResponse
+
     interface _DeleteTransitGatewayConnectResponse
       include Smithy::Client::_Response[Types::DeleteTransitGatewayConnectResult]
       def transit_gateway_connect: () -> Types::TransitGatewayConnect?
@@ -4697,6 +5450,25 @@ module Aws::EC2
       ?transit_gateway_connect_peer_id: String,
       ?dry_run: bool
     ) -> _DeleteTransitGatewayConnectPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTransitGatewayConnectPeerResponse
+
+    interface _DeleteTransitGatewayMeteringPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteTransitGatewayMeteringPolicyResult]
+      def transit_gateway_metering_policy: () -> Types::TransitGatewayMeteringPolicy?
+    end
+    def delete_transit_gateway_metering_policy: (
+      ?transit_gateway_metering_policy_id: String,
+      ?dry_run: bool
+    ) -> _DeleteTransitGatewayMeteringPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTransitGatewayMeteringPolicyResponse
+
+    interface _DeleteTransitGatewayMeteringPolicyEntryResponse
+      include Smithy::Client::_Response[Types::DeleteTransitGatewayMeteringPolicyEntryResult]
+      def transit_gateway_metering_policy_entry: () -> Types::TransitGatewayMeteringPolicyEntry?
+    end
+    def delete_transit_gateway_metering_policy_entry: (
+      ?transit_gateway_metering_policy_id: String,
+      ?policy_rule_number: Integer,
+      ?dry_run: bool
+    ) -> _DeleteTransitGatewayMeteringPolicyEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTransitGatewayMeteringPolicyEntryResponse
 
     interface _DeleteTransitGatewayMulticastDomainResponse
       include Smithy::Client::_Response[Types::DeleteTransitGatewayMulticastDomainResult]
@@ -4724,6 +5496,16 @@ module Aws::EC2
       ?transit_gateway_policy_table_id: String,
       ?dry_run: bool
     ) -> _DeleteTransitGatewayPolicyTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTransitGatewayPolicyTableResponse
+
+    interface _DeleteTransitGatewayPolicyTableEntryResponse
+      include Smithy::Client::_Response[Types::DeleteTransitGatewayPolicyTableEntryResult]
+      def transit_gateway_policy_table_entry: () -> Types::TransitGatewayPolicyTableEntry?
+    end
+    def delete_transit_gateway_policy_table_entry: (
+      ?transit_gateway_policy_table_id: String,
+      ?policy_rule_number: String,
+      ?dry_run: bool
+    ) -> _DeleteTransitGatewayPolicyTableEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTransitGatewayPolicyTableEntryResponse
 
     interface _DeleteTransitGatewayPrefixListReferenceResponse
       include Smithy::Client::_Response[Types::DeleteTransitGatewayPrefixListReferenceResult]
@@ -4837,6 +5619,15 @@ module Aws::EC2
       ?exclusion_id: String
     ) -> _DeleteVpcBlockPublicAccessExclusionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcBlockPublicAccessExclusionResponse
 
+    interface _DeleteVpcEncryptionControlResponse
+      include Smithy::Client::_Response[Types::DeleteVpcEncryptionControlResult]
+      def vpc_encryption_control: () -> Types::VpcEncryptionControl?
+    end
+    def delete_vpc_encryption_control: (
+      ?dry_run: bool,
+      ?vpc_encryption_control_id: String
+    ) -> _DeleteVpcEncryptionControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcEncryptionControlResponse
+
     interface _DeleteVpcEndpointConnectionNotificationsResponse
       include Smithy::Client::_Response[Types::DeleteVpcEndpointConnectionNotificationsResult]
       def unsuccessful: () -> Array[Types::UnsuccessfulItem]?
@@ -4872,6 +5663,15 @@ module Aws::EC2
       ?dry_run: bool,
       ?vpc_peering_connection_id: String
     ) -> _DeleteVpcPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcPeeringConnectionResponse
+
+    interface _DeleteVpnConcentratorResponse
+      include Smithy::Client::_Response[Types::DeleteVpnConcentratorResult]
+      def return: () -> bool?
+    end
+    def delete_vpn_concentrator: (
+      ?vpn_concentrator_id: String,
+      ?dry_run: bool
+    ) -> _DeleteVpnConcentratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpnConcentratorResponse
 
     interface _DeleteVpnConnectionResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -4991,6 +5791,14 @@ module Aws::EC2
       ?attribute_names: Array[String]
     ) -> _DescribeAccountAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountAttributesResponse
 
+    interface _DescribeAccountVpcEncryptionControlResponse
+      include Smithy::Client::_Response[Types::DescribeAccountVpcEncryptionControlResult]
+      def account_vpc_encryption_control: () -> Types::AccountVpcEncryptionControl?
+    end
+    def describe_account_vpc_encryption_control: (
+      ?dry_run: bool
+    ) -> _DescribeAccountVpcEncryptionControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountVpcEncryptionControlResponse
+
     interface _DescribeAddressTransfersResponse
       include Smithy::Client::_Response[Types::DescribeAddressTransfersResult]
       def address_transfers: () -> Array[Types::AddressTransfer]?
@@ -5040,6 +5848,62 @@ module Aws::EC2
     def describe_aggregate_id_format: (
       ?dry_run: bool
     ) -> _DescribeAggregateIdFormatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAggregateIdFormatResponse
+
+    interface _DescribeApplicationStatusResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationStatusResult]
+      def application_statuses: () -> Types::ApplicationStatusesResponseType?
+      def next_token: () -> String?
+    end
+    def describe_application_status: (
+      ?instance_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool
+    ) -> _DescribeApplicationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationStatusResponse
+
+    interface _DescribeApplicationStatusCheckAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationStatusCheckAssociationsResult]
+      def associations: () -> Array[Types::ApplicationStatusCheckAssociationObject]?
+      def next_token: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def describe_application_status_check_associations: (
+      ?application_status_check_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool
+    ) -> _DescribeApplicationStatusCheckAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationStatusCheckAssociationsResponse
+
+    interface _DescribeApplicationStatusChecksResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationStatusChecksResult]
+      def application_status_checks: () -> Array[Types::ApplicationStatusCheckResponseObject]?
+      def next_token: () -> String?
+    end
+    def describe_application_status_checks: (
+      ?application_status_check_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?include_all: bool,
+      ?dry_run: bool
+    ) -> _DescribeApplicationStatusChecksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationStatusChecksResponse
 
     interface _DescribeAvailabilityZonesResponse
       include Smithy::Client::_Response[Types::DescribeAvailabilityZonesResult]
@@ -5147,7 +6011,8 @@ module Aws::EC2
       ?next_token: String,
       ?max_results: Integer,
       ?ultraserver_type: String,
-      ?ultraserver_count: Integer
+      ?ultraserver_count: Integer,
+      ?all_availability_zones: bool
     ) -> _DescribeCapacityBlockOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapacityBlockOfferingsResponse
 
     interface _DescribeCapacityBlockStatusResponse
@@ -5186,6 +6051,24 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _DescribeCapacityBlocksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapacityBlocksResponse
 
+    interface _DescribeCapacityManagerDataExportsResponse
+      include Smithy::Client::_Response[Types::DescribeCapacityManagerDataExportsResult]
+      def capacity_manager_data_exports: () -> Array[Types::CapacityManagerDataExportResponse]?
+      def next_token: () -> String?
+    end
+    def describe_capacity_manager_data_exports: (
+      ?capacity_manager_data_export_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeCapacityManagerDataExportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapacityManagerDataExportsResponse
+
     interface _DescribeCapacityReservationBillingRequestsResponse
       include Smithy::Client::_Response[Types::DescribeCapacityReservationBillingRequestsResult]
       def next_token: () -> String?
@@ -5205,6 +6088,42 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _DescribeCapacityReservationBillingRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapacityReservationBillingRequestsResponse
 
+    interface _DescribeCapacityReservationCancellationQuotesResponse
+      include Smithy::Client::_Response[Types::DescribeCapacityReservationCancellationQuotesResult]
+      def capacity_reservation_cancellation_quotes: () -> Array[Types::CapacityReservationCancellationQuote]?
+      def next_token: () -> String?
+    end
+    def describe_capacity_reservation_cancellation_quotes: (
+      ?capacity_reservation_cancellation_quote_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeCapacityReservationCancellationQuotesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapacityReservationCancellationQuotesResponse
+
+    interface _DescribeCapacityReservationDateChangeQuotesResponse
+      include Smithy::Client::_Response[Types::DescribeCapacityReservationDateChangeQuotesResult]
+      def capacity_reservation_modification_quotes: () -> Array[Types::CapacityReservationModificationQuote]?
+      def next_token: () -> String?
+    end
+    def describe_capacity_reservation_date_change_quotes: (
+      ?capacity_reservation_modification_quote_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeCapacityReservationDateChangeQuotesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapacityReservationDateChangeQuotesResponse
+
     interface _DescribeCapacityReservationFleetsResponse
       include Smithy::Client::_Response[Types::DescribeCapacityReservationFleetsResult]
       def capacity_reservation_fleets: () -> Array[Types::CapacityReservationFleet]?
@@ -5222,6 +6141,24 @@ module Aws::EC2
       ],
       ?dry_run: bool
     ) -> _DescribeCapacityReservationFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapacityReservationFleetsResponse
+
+    interface _DescribeCapacityReservationTopologyResponse
+      include Smithy::Client::_Response[Types::DescribeCapacityReservationTopologyResult]
+      def next_token: () -> String?
+      def capacity_reservations: () -> Array[Types::CapacityReservationTopology]?
+    end
+    def describe_capacity_reservation_topology: (
+      ?dry_run: bool,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?capacity_reservation_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeCapacityReservationTopologyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCapacityReservationTopologyResponse
 
     interface _DescribeCapacityReservationsResponse
       include Smithy::Client::_Response[Types::DescribeCapacityReservationsResult]
@@ -5981,6 +6918,44 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _DescribeInstanceImageMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceImageMetadataResponse
 
+    interface _DescribeInstanceSqlHaHistoryStatesResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceSqlHaHistoryStatesResult]
+      def instances: () -> Array[Types::RegisteredInstance]?
+      def next_token: () -> String?
+    end
+    def describe_instance_sql_ha_history_states: (
+      ?instance_ids: Array[String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?dry_run: bool
+    ) -> _DescribeInstanceSqlHaHistoryStatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceSqlHaHistoryStatesResponse
+
+    interface _DescribeInstanceSqlHaStatesResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceSqlHaStatesResult]
+      def instances: () -> Array[Types::RegisteredInstance]?
+      def next_token: () -> String?
+    end
+    def describe_instance_sql_ha_states: (
+      ?instance_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?dry_run: bool
+    ) -> _DescribeInstanceSqlHaStatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceSqlHaStatesResponse
+
     interface _DescribeInstanceStatusResponse
       include Smithy::Client::_Response[Types::DescribeInstanceStatusResult]
       def instance_statuses: () -> Array[Types::InstanceStatus]?
@@ -5990,6 +6965,7 @@ module Aws::EC2
       ?instance_ids: Array[String],
       ?max_results: Integer,
       ?next_token: String,
+      ?include_managed_resources: bool,
       ?dry_run: bool,
       ?filters: Array[
         {
@@ -6052,7 +7028,8 @@ module Aws::EC2
         }
       ],
       ?max_results: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?include_unsupported_in_region: bool
     ) -> _DescribeInstanceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceTypesResponse
 
     interface _DescribeInstancesResponse
@@ -6062,6 +7039,7 @@ module Aws::EC2
     end
     def describe_instances: (
       ?instance_ids: Array[String],
+      ?include_managed_resources: bool,
       ?dry_run: bool,
       ?filters: Array[
         {
@@ -6120,6 +7098,60 @@ module Aws::EC2
       ?ipam_external_resource_verification_token_ids: Array[String]
     ) -> _DescribeIpamExternalResourceVerificationTokensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIpamExternalResourceVerificationTokensResponse
 
+    interface _DescribeIpamInternetRegistryAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeIpamInternetRegistryAssociationsResult]
+      def next_token: () -> String?
+      def ipam_internet_registry_associations: () -> Array[Types::IpamInternetRegistryAssociation]?
+    end
+    def describe_ipam_internet_registry_associations: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeIpamInternetRegistryAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIpamInternetRegistryAssociationsResponse
+
+    interface _DescribeIpamPoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeIpamPoliciesResult]
+      def next_token: () -> String?
+      def ipam_policies: () -> Array[Types::IpamPolicy]?
+    end
+    def describe_ipam_policies: (
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?ipam_policy_ids: Array[String]
+    ) -> _DescribeIpamPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIpamPoliciesResponse
+
+    interface _DescribeIpamPoolAllocationsResponse
+      include Smithy::Client::_Response[Types::DescribeIpamPoolAllocationsResult]
+      def ipam_pool_allocations: () -> Array[Types::IpamPoolAllocation]?
+      def next_token: () -> String?
+    end
+    def describe_ipam_pool_allocations: (
+      ?dry_run: bool,
+      ?ipam_pool_allocation_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeIpamPoolAllocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIpamPoolAllocationsResponse
+
     interface _DescribeIpamPoolsResponse
       include Smithy::Client::_Response[Types::DescribeIpamPoolsResult]
       def next_token: () -> String?
@@ -6137,6 +7169,43 @@ module Aws::EC2
       ?next_token: String,
       ?ipam_pool_ids: Array[String]
     ) -> _DescribeIpamPoolsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIpamPoolsResponse
+
+    interface _DescribeIpamPrefixListResolverTargetsResponse
+      include Smithy::Client::_Response[Types::DescribeIpamPrefixListResolverTargetsResult]
+      def next_token: () -> String?
+      def ipam_prefix_list_resolver_targets: () -> Array[Types::IpamPrefixListResolverTarget]?
+    end
+    def describe_ipam_prefix_list_resolver_targets: (
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?ipam_prefix_list_resolver_target_ids: Array[String],
+      ?ipam_prefix_list_resolver_id: String
+    ) -> _DescribeIpamPrefixListResolverTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIpamPrefixListResolverTargetsResponse
+
+    interface _DescribeIpamPrefixListResolversResponse
+      include Smithy::Client::_Response[Types::DescribeIpamPrefixListResolversResult]
+      def next_token: () -> String?
+      def ipam_prefix_list_resolvers: () -> Array[Types::IpamPrefixListResolver]?
+    end
+    def describe_ipam_prefix_list_resolvers: (
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?ipam_prefix_list_resolver_ids: Array[String]
+    ) -> _DescribeIpamPrefixListResolversResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIpamPrefixListResolversResponse
 
     interface _DescribeIpamResourceDiscoveriesResponse
       include Smithy::Client::_Response[Types::DescribeIpamResourceDiscoveriesResult]
@@ -6265,7 +7334,8 @@ module Aws::EC2
           values: Array[String]
         }
       ],
-      ?resolve_alias: bool
+      ?resolve_alias: bool,
+      ?include_managed_resources: bool
     ) -> _DescribeLaunchTemplateVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLaunchTemplateVersionsResponse
 
     interface _DescribeLaunchTemplatesResponse
@@ -6284,7 +7354,8 @@ module Aws::EC2
         }
       ],
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?include_managed_resources: bool
     ) -> _DescribeLaunchTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLaunchTemplatesResponse
 
     interface _DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResponse
@@ -6638,6 +7709,7 @@ module Aws::EC2
     def describe_network_interfaces: (
       ?next_token: String,
       ?max_results: Integer,
+      ?include_managed_resources: bool,
       ?dry_run: bool,
       ?network_interface_ids: Array[String],
       ?filters: Array[
@@ -6963,6 +8035,60 @@ module Aws::EC2
         latest_time: untyped
       }
     ) -> _DescribeScheduledInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScheduledInstancesResponse
+
+    interface _DescribeSecondaryInterfacesResponse
+      include Smithy::Client::_Response[Types::DescribeSecondaryInterfacesResult]
+      def secondary_interfaces: () -> Array[Types::SecondaryInterface]?
+      def next_token: () -> String?
+    end
+    def describe_secondary_interfaces: (
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?secondary_interface_ids: Array[String]
+    ) -> _DescribeSecondaryInterfacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSecondaryInterfacesResponse
+
+    interface _DescribeSecondaryNetworksResponse
+      include Smithy::Client::_Response[Types::DescribeSecondaryNetworksResult]
+      def secondary_networks: () -> Array[Types::SecondaryNetwork]?
+      def next_token: () -> String?
+    end
+    def describe_secondary_networks: (
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?secondary_network_ids: Array[String]
+    ) -> _DescribeSecondaryNetworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSecondaryNetworksResponse
+
+    interface _DescribeSecondarySubnetsResponse
+      include Smithy::Client::_Response[Types::DescribeSecondarySubnetsResult]
+      def secondary_subnets: () -> Array[Types::SecondarySubnet]?
+      def next_token: () -> String?
+    end
+    def describe_secondary_subnets: (
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?secondary_subnet_ids: Array[String]
+    ) -> _DescribeSecondarySubnetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSecondarySubnetsResponse
 
     interface _DescribeSecurityGroupReferencesResponse
       include Smithy::Client::_Response[Types::DescribeSecurityGroupReferencesResult]
@@ -7377,6 +8503,24 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _DescribeTransitGatewayConnectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTransitGatewayConnectsResponse
 
+    interface _DescribeTransitGatewayMeteringPoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeTransitGatewayMeteringPoliciesResult]
+      def transit_gateway_metering_policies: () -> Array[Types::TransitGatewayMeteringPolicy]?
+      def next_token: () -> String?
+    end
+    def describe_transit_gateway_metering_policies: (
+      ?transit_gateway_metering_policy_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool
+    ) -> _DescribeTransitGatewayMeteringPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTransitGatewayMeteringPoliciesResponse
+
     interface _DescribeTransitGatewayMulticastDomainsResponse
       include Smithy::Client::_Response[Types::DescribeTransitGatewayMulticastDomainsResult]
       def transit_gateway_multicast_domains: () -> Array[Types::TransitGatewayMulticastDomain]?
@@ -7635,6 +8779,7 @@ module Aws::EC2
       ?max_results: Integer,
       ?next_token: String,
       ?volume_ids: Array[String],
+      ?include_managed_resources: bool,
       ?dry_run: bool,
       ?filters: Array[
         {
@@ -7651,6 +8796,7 @@ module Aws::EC2
     end
     def describe_volumes: (
       ?volume_ids: Array[String],
+      ?include_managed_resources: bool,
       ?dry_run: bool,
       ?filters: Array[
         {
@@ -7677,7 +8823,8 @@ module Aws::EC2
         }
       ],
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?include_managed_resources: bool
     ) -> _DescribeVolumesModificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVolumesModificationsResponse
 
     interface _DescribeVpcAttributeResponse
@@ -7744,6 +8891,25 @@ module Aws::EC2
       ?max_results: Integer,
       ?next_token: String
     ) -> _DescribeVpcClassicLinkDnsSupportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcClassicLinkDnsSupportResponse
+
+    interface _DescribeVpcEncryptionControlsResponse
+      include Smithy::Client::_Response[Types::DescribeVpcEncryptionControlsResult]
+      def vpc_encryption_controls: () -> Array[Types::VpcEncryptionControl]?
+      def next_token: () -> String?
+    end
+    def describe_vpc_encryption_controls: (
+      ?dry_run: bool,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?vpc_encryption_control_ids: Array[String],
+      ?vpc_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeVpcEncryptionControlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcEncryptionControlsResponse
 
     interface _DescribeVpcEndpointAssociationsResponse
       include Smithy::Client::_Response[Types::DescribeVpcEndpointAssociationsResult]
@@ -7908,6 +9074,24 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _DescribeVpcsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcsResponse
 
+    interface _DescribeVpnConcentratorsResponse
+      include Smithy::Client::_Response[Types::DescribeVpnConcentratorsResult]
+      def vpn_concentrators: () -> Array[Types::VpnConcentrator]?
+      def next_token: () -> String?
+    end
+    def describe_vpn_concentrators: (
+      ?vpn_concentrator_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool
+    ) -> _DescribeVpnConcentratorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpnConcentratorsResponse
+
     interface _DescribeVpnConnectionsResponse
       include Smithy::Client::_Response[Types::DescribeVpnConnectionsResult]
       def vpn_connections: () -> Array[Types::VpnConnection]?
@@ -7948,6 +9132,16 @@ module Aws::EC2
       ?vpc_id: String
     ) -> _DetachClassicLinkVpcResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachClassicLinkVpcResponse
 
+    interface _DetachImageWatermarkResponse
+      include Smithy::Client::_Response[Types::DetachImageWatermarkResult]
+      def return: () -> bool?
+    end
+    def detach_image_watermark: (
+      ?image_id: String,
+      ?watermark_key: String,
+      ?dry_run: bool
+    ) -> _DetachImageWatermarkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachImageWatermarkResponse
+
     interface _DetachInternetGatewayResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -7983,6 +9177,7 @@ module Aws::EC2
       def delete_on_termination: () -> bool?
       def associated_resource: () -> String?
       def instance_owning_service: () -> String?
+      def ebs_card_index: () -> Integer?
       def volume_id: () -> String?
       def instance_id: () -> String?
       def device: () -> String?
@@ -8023,6 +9218,17 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _DisableAllowedImagesSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableAllowedImagesSettingsResponse
 
+    interface _DisableApplicationStatusCheckSuppressionResponse
+      include Smithy::Client::_Response[Types::DisableApplicationStatusCheckSuppressionResult]
+      def successful_results: () -> Array[Types::SuccessfulSuppressionResponseObject]?
+      def unsuccessful_results: () -> Array[Types::UnsuccessfulSuppressionResponseObject]?
+    end
+    def disable_application_status_check_suppression: (
+      ?instance_ids: Array[String],
+      ?client_token: String,
+      ?dry_run: bool
+    ) -> _DisableApplicationStatusCheckSuppressionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableApplicationStatusCheckSuppressionResponse
+
     interface _DisableAwsNetworkPerformanceMetricSubscriptionResponse
       include Smithy::Client::_Response[Types::DisableAwsNetworkPerformanceMetricSubscriptionResult]
       def output: () -> bool?
@@ -8034,6 +9240,16 @@ module Aws::EC2
       ?statistic: String,
       ?dry_run: bool
     ) -> _DisableAwsNetworkPerformanceMetricSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableAwsNetworkPerformanceMetricSubscriptionResponse
+
+    interface _DisableCapacityManagerResponse
+      include Smithy::Client::_Response[Types::DisableCapacityManagerResult]
+      def capacity_manager_status: () -> String?
+      def organizations_access: () -> bool?
+    end
+    def disable_capacity_manager: (
+      ?dry_run: bool,
+      ?client_token: String
+    ) -> _DisableCapacityManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableCapacityManagerResponse
 
     interface _DisableEbsEncryptionByDefaultResponse
       include Smithy::Client::_Response[Types::DisableEbsEncryptionByDefaultResult]
@@ -8068,6 +9284,7 @@ module Aws::EC2
     end
     def disable_fast_snapshot_restores: (
       ?availability_zones: Array[String],
+      ?availability_zone_ids: Array[String],
       ?source_snapshot_ids: Array[String],
       ?dry_run: bool
     ) -> _DisableFastSnapshotRestoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableFastSnapshotRestoresResponse
@@ -8107,6 +9324,15 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _DisableImageDeregistrationProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableImageDeregistrationProtectionResponse
 
+    interface _DisableInstanceSqlHaStandbyDetectionsResponse
+      include Smithy::Client::_Response[Types::DisableInstanceSqlHaStandbyDetectionsResult]
+      def instances: () -> Array[Types::RegisteredInstance]?
+    end
+    def disable_instance_sql_ha_standby_detections: (
+      ?instance_ids: Array[String],
+      ?dry_run: bool
+    ) -> _DisableInstanceSqlHaStandbyDetectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableInstanceSqlHaStandbyDetectionsResponse
+
     interface _DisableIpamOrganizationAdminAccountResponse
       include Smithy::Client::_Response[Types::DisableIpamOrganizationAdminAccountResult]
       def success: () -> bool?
@@ -8115,6 +9341,16 @@ module Aws::EC2
       ?dry_run: bool,
       ?delegated_admin_account_id: String
     ) -> _DisableIpamOrganizationAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableIpamOrganizationAdminAccountResponse
+
+    interface _DisableIpamPolicyResponse
+      include Smithy::Client::_Response[Types::DisableIpamPolicyResult]
+      def return: () -> bool?
+    end
+    def disable_ipam_policy: (
+      ?dry_run: bool,
+      ?ipam_policy_id: String,
+      ?organization_target_id: String
+    ) -> _DisableIpamPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableIpamPolicyResponse
 
     interface _DisableRouteServerPropagationResponse
       include Smithy::Client::_Response[Types::DisableRouteServerPropagationResult]
@@ -8187,6 +9423,24 @@ module Aws::EC2
       ?public_ip: String,
       ?dry_run: bool
     ) -> _DisassociateAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAddressResponse
+
+    interface _DisassociateApplicationStatusCheckResponse
+      include Smithy::Client::_Response[Types::DisassociateApplicationStatusCheckResult]
+      def successful_results: () -> Array[Types::SuccessfulAssociationResponseObject]?
+      def unsuccessful_results: () -> Array[Types::UnsuccessfulAssociationResponseObject]?
+    end
+    def disassociate_application_status_check: (
+      ?application_status_check_id: String,
+      ?target_tag_associations: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?instance_ids: Array[String],
+      ?client_token: String,
+      ?dry_run: bool
+    ) -> _DisassociateApplicationStatusCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateApplicationStatusCheckResponse
 
     interface _DisassociateCapacityReservationBillingOwnerResponse
       include Smithy::Client::_Response[Types::DisassociateCapacityReservationBillingOwnerResult]
@@ -8385,6 +9639,18 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _EnableAllowedImagesSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableAllowedImagesSettingsResponse
 
+    interface _EnableApplicationStatusCheckSuppressionResponse
+      include Smithy::Client::_Response[Types::EnableApplicationStatusCheckSuppressionResult]
+      def successful_results: () -> Array[Types::SuccessfulSuppressionResponseObject]?
+      def unsuccessful_results: () -> Array[Types::UnsuccessfulSuppressionResponseObject]?
+    end
+    def enable_application_status_check_suppression: (
+      ?instance_ids: Array[String],
+      ?duration_seconds: Integer,
+      ?client_token: String,
+      ?dry_run: bool
+    ) -> _EnableApplicationStatusCheckSuppressionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableApplicationStatusCheckSuppressionResponse
+
     interface _EnableAwsNetworkPerformanceMetricSubscriptionResponse
       include Smithy::Client::_Response[Types::EnableAwsNetworkPerformanceMetricSubscriptionResult]
       def output: () -> bool?
@@ -8396,6 +9662,17 @@ module Aws::EC2
       ?statistic: String,
       ?dry_run: bool
     ) -> _EnableAwsNetworkPerformanceMetricSubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableAwsNetworkPerformanceMetricSubscriptionResponse
+
+    interface _EnableCapacityManagerResponse
+      include Smithy::Client::_Response[Types::EnableCapacityManagerResult]
+      def capacity_manager_status: () -> String?
+      def organizations_access: () -> bool?
+    end
+    def enable_capacity_manager: (
+      ?organizations_access: bool,
+      ?dry_run: bool,
+      ?client_token: String
+    ) -> _EnableCapacityManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableCapacityManagerResponse
 
     interface _EnableEbsEncryptionByDefaultResponse
       include Smithy::Client::_Response[Types::EnableEbsEncryptionByDefaultResult]
@@ -8439,6 +9716,7 @@ module Aws::EC2
     end
     def enable_fast_snapshot_restores: (
       ?availability_zones: Array[String],
+      ?availability_zone_ids: Array[String],
       ?source_snapshot_ids: Array[String],
       ?dry_run: bool
     ) -> _EnableFastSnapshotRestoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableFastSnapshotRestoresResponse
@@ -8481,6 +9759,31 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _EnableImageDeregistrationProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableImageDeregistrationProtectionResponse
 
+    interface _EnableInstanceSqlHaStandbyDetectionsResponse
+      include Smithy::Client::_Response[Types::EnableInstanceSqlHaStandbyDetectionsResult]
+      def instances: () -> Array[Types::RegisteredInstance]?
+    end
+    def enable_instance_sql_ha_standby_detections: (
+      ?instance_ids: Array[String],
+      ?sql_server_credentials: String,
+      ?dry_run: bool
+    ) -> _EnableInstanceSqlHaStandbyDetectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableInstanceSqlHaStandbyDetectionsResponse
+
+    interface _EnableIpamInternetRegistryAssociationResponse
+      include Smithy::Client::_Response[Types::EnableIpamInternetRegistryAssociationResult]
+      def ipam_internet_registry_association: () -> Types::IpamInternetRegistryAssociation?
+    end
+    def enable_ipam_internet_registry_association: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?rpki_version: String,
+      ?service_uri: String,
+      ?child_handle: String,
+      ?parent_handle: String,
+      ?parent_bpki_ta: String,
+      ?client_token: String
+    ) -> _EnableIpamInternetRegistryAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableIpamInternetRegistryAssociationResponse
+
     interface _EnableIpamOrganizationAdminAccountResponse
       include Smithy::Client::_Response[Types::EnableIpamOrganizationAdminAccountResult]
       def success: () -> bool?
@@ -8489,6 +9792,16 @@ module Aws::EC2
       ?dry_run: bool,
       ?delegated_admin_account_id: String
     ) -> _EnableIpamOrganizationAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableIpamOrganizationAdminAccountResponse
+
+    interface _EnableIpamPolicyResponse
+      include Smithy::Client::_Response[Types::EnableIpamPolicyResult]
+      def ipam_policy_id: () -> String?
+    end
+    def enable_ipam_policy: (
+      ?dry_run: bool,
+      ?ipam_policy_id: String,
+      ?organization_target_id: String
+    ) -> _EnableIpamPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableIpamPolicyResponse
 
     interface _EnableReachabilityAnalyzerOrganizationSharingResponse
       include Smithy::Client::_Response[Types::EnableReachabilityAnalyzerOrganizationSharingResult]
@@ -8720,6 +10033,80 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _GetAwsNetworkPerformanceDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAwsNetworkPerformanceDataResponse
 
+    interface _GetCapacityManagerAttributesResponse
+      include Smithy::Client::_Response[Types::GetCapacityManagerAttributesResult]
+      def capacity_manager_status: () -> String?
+      def organizations_access: () -> bool?
+      def data_export_count: () -> Integer?
+      def ingestion_status: () -> String?
+      def ingestion_status_message: () -> String?
+      def earliest_datapoint_timestamp: () -> Time?
+      def latest_datapoint_timestamp: () -> Time?
+    end
+    def get_capacity_manager_attributes: (
+      ?dry_run: bool
+    ) -> _GetCapacityManagerAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityManagerAttributesResponse
+
+    interface _GetCapacityManagerMetricDataResponse
+      include Smithy::Client::_Response[Types::GetCapacityManagerMetricDataResult]
+      def metric_data_results: () -> Array[Types::MetricDataResult]?
+      def next_token: () -> String?
+    end
+    def get_capacity_manager_metric_data: (
+      ?metric_names: Array[String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?period: Integer,
+      ?group_by: Array[String],
+      ?filter_by: Array[
+        {
+          dimension_condition: {
+            dimension: String,
+            comparison: String,
+            values: Array[String]
+          }
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool
+    ) -> _GetCapacityManagerMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityManagerMetricDataResponse
+
+    interface _GetCapacityManagerMetricDimensionsResponse
+      include Smithy::Client::_Response[Types::GetCapacityManagerMetricDimensionsResult]
+      def metric_dimension_results: () -> Array[Types::CapacityManagerDimension]?
+      def next_token: () -> String?
+    end
+    def get_capacity_manager_metric_dimensions: (
+      ?group_by: Array[String],
+      ?filter_by: Array[
+        {
+          dimension_condition: {
+            dimension: String,
+            comparison: String,
+            values: Array[String]
+          }
+        }
+      ],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?metric_names: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool
+    ) -> _GetCapacityManagerMetricDimensionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityManagerMetricDimensionsResponse
+
+    interface _GetCapacityManagerMonitoredTagKeysResponse
+      include Smithy::Client::_Response[Types::GetCapacityManagerMonitoredTagKeysResult]
+      def capacity_manager_tag_keys: () -> Array[Types::CapacityManagerMonitoredTagKey]?
+      def next_token: () -> String?
+    end
+    def get_capacity_manager_monitored_tag_keys: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool
+    ) -> _GetCapacityManagerMonitoredTagKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityManagerMonitoredTagKeysResponse
+
     interface _GetCapacityReservationUsageResponse
       include Smithy::Client::_Response[Types::GetCapacityReservationUsageResult]
       def next_token: () -> String?
@@ -8729,6 +10116,9 @@ module Aws::EC2
       def available_instance_count: () -> Integer?
       def state: () -> String?
       def instance_usages: () -> Array[Types::InstanceUsage]?
+      def interruptible: () -> bool?
+      def interruptible_capacity_allocation: () -> Types::InterruptibleCapacityAllocation?
+      def interruption_info: () -> Types::InterruptionInfo?
     end
     def get_capacity_reservation_usage: (
       ?capacity_reservation_id: String,
@@ -8736,6 +10126,19 @@ module Aws::EC2
       ?max_results: Integer,
       ?dry_run: bool
     ) -> _GetCapacityReservationUsageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapacityReservationUsageResponse
+
+    interface _GetClientVpnEndpointAuthorizationPolicyResponse
+      include Smithy::Client::_Response[Types::GetClientVpnEndpointAuthorizationPolicyResult]
+      def client_vpn_endpoint_id: () -> String?
+      def policy_document: () -> String?
+      def description: () -> String?
+      def shadow_mode: () -> String?
+      def status: () -> String?
+    end
+    def get_client_vpn_endpoint_authorization_policy: (
+      ?client_vpn_endpoint_id: String,
+      ?dry_run: bool
+    ) -> _GetClientVpnEndpointAuthorizationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClientVpnEndpointAuthorizationPolicyResponse
 
     interface _GetCoipPoolUsageResponse
       include Smithy::Client::_Response[Types::GetCoipPoolUsageResult]
@@ -8823,6 +10226,16 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _GetEbsEncryptionByDefaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEbsEncryptionByDefaultResponse
 
+    interface _GetEnabledIpamPolicyResponse
+      include Smithy::Client::_Response[Types::GetEnabledIpamPolicyResult]
+      def ipam_policy_enabled: () -> bool?
+      def ipam_policy_id: () -> String?
+      def managed_by: () -> String?
+    end
+    def get_enabled_ipam_policy: (
+      ?dry_run: bool
+    ) -> _GetEnabledIpamPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnabledIpamPolicyResponse
+
     interface _GetFlowLogsIntegrationTemplateResponse
       include Smithy::Client::_Response[Types::GetFlowLogsIntegrationTemplateResult]
       def result: () -> String?
@@ -8866,6 +10279,15 @@ module Aws::EC2
       ?host_id_set: Array[String],
       ?offering_id: String
     ) -> _GetHostReservationPurchasePreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHostReservationPurchasePreviewResponse
+
+    interface _GetImageAncestryResponse
+      include Smithy::Client::_Response[Types::GetImageAncestryResult]
+      def image_ancestry_entries: () -> Array[Types::ImageAncestryEntry]?
+    end
+    def get_image_ancestry: (
+      ?image_id: String,
+      ?dry_run: bool
+    ) -> _GetImageAncestryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImageAncestryResponse
 
     interface _GetImageBlockPublicAccessStateResponse
       include Smithy::Client::_Response[Types::GetImageBlockPublicAccessStateResult]
@@ -8967,7 +10389,8 @@ module Aws::EC2
               }
             ]
           }
-        }
+        },
+        require_encryption_in_transit: untyped
       },
       ?max_results: Integer,
       ?next_token: String,
@@ -9058,6 +10481,99 @@ module Aws::EC2
       ?max_results: Integer
     ) -> _GetIpamDiscoveredResourceCidrsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamDiscoveredResourceCidrsResponse
 
+    interface _GetIpamDiscoveredRoutesResponse
+      include Smithy::Client::_Response[Types::GetIpamDiscoveredRoutesResult]
+      def ipam_discovered_routes: () -> Array[Types::IpamDiscoveredRoute]?
+      def next_token: () -> String?
+    end
+    def get_ipam_discovered_routes: (
+      ?dry_run: bool,
+      ?ipam_resource_discovery_id: String,
+      ?resource_region: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetIpamDiscoveredRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamDiscoveredRoutesResponse
+
+    interface _GetIpamInternetRegistryAssociationAsnsResponse
+      include Smithy::Client::_Response[Types::GetIpamInternetRegistryAssociationAsnsResult]
+      def next_token: () -> String?
+      def ipam_internet_registry_association_asns: () -> Array[Types::IpamInternetRegistryAssociationAsn]?
+    end
+    def get_ipam_internet_registry_association_asns: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _GetIpamInternetRegistryAssociationAsnsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamInternetRegistryAssociationAsnsResponse
+
+    interface _GetIpamInternetRegistryAssociationCidrsResponse
+      include Smithy::Client::_Response[Types::GetIpamInternetRegistryAssociationCidrsResult]
+      def next_token: () -> String?
+      def ipam_internet_registry_association_cidrs: () -> Array[Types::IpamInternetRegistryAssociationCidr]?
+    end
+    def get_ipam_internet_registry_association_cidrs: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _GetIpamInternetRegistryAssociationCidrsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamInternetRegistryAssociationCidrsResponse
+
+    interface _GetIpamPolicyAllocationRulesResponse
+      include Smithy::Client::_Response[Types::GetIpamPolicyAllocationRulesResult]
+      def ipam_policy_documents: () -> Array[Types::IpamPolicyDocument]?
+      def next_token: () -> String?
+    end
+    def get_ipam_policy_allocation_rules: (
+      ?dry_run: bool,
+      ?ipam_policy_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?locale: String,
+      ?resource_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetIpamPolicyAllocationRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamPolicyAllocationRulesResponse
+
+    interface _GetIpamPolicyOrganizationTargetsResponse
+      include Smithy::Client::_Response[Types::GetIpamPolicyOrganizationTargetsResult]
+      def organization_targets: () -> Array[Types::IpamPolicyOrganizationTarget]?
+      def next_token: () -> String?
+    end
+    def get_ipam_policy_organization_targets: (
+      ?dry_run: bool,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?ipam_policy_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _GetIpamPolicyOrganizationTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamPolicyOrganizationTargetsResponse
+
     interface _GetIpamPoolAllocationsResponse
       include Smithy::Client::_Response[Types::GetIpamPoolAllocationsResult]
       def ipam_pool_allocations: () -> Array[Types::IpamPoolAllocation]?
@@ -9095,6 +10611,56 @@ module Aws::EC2
       ?next_token: String
     ) -> _GetIpamPoolCidrsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamPoolCidrsResponse
 
+    interface _GetIpamPrefixListResolverRulesResponse
+      include Smithy::Client::_Response[Types::GetIpamPrefixListResolverRulesResult]
+      def rules: () -> Array[Types::IpamPrefixListResolverRule]?
+      def next_token: () -> String?
+    end
+    def get_ipam_prefix_list_resolver_rules: (
+      ?dry_run: bool,
+      ?ipam_prefix_list_resolver_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetIpamPrefixListResolverRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamPrefixListResolverRulesResponse
+
+    interface _GetIpamPrefixListResolverVersionEntriesResponse
+      include Smithy::Client::_Response[Types::GetIpamPrefixListResolverVersionEntriesResult]
+      def entries: () -> Array[Types::IpamPrefixListResolverVersionEntry]?
+      def next_token: () -> String?
+    end
+    def get_ipam_prefix_list_resolver_version_entries: (
+      ?dry_run: bool,
+      ?ipam_prefix_list_resolver_id: String,
+      ?ipam_prefix_list_resolver_version: Integer,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetIpamPrefixListResolverVersionEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamPrefixListResolverVersionEntriesResponse
+
+    interface _GetIpamPrefixListResolverVersionsResponse
+      include Smithy::Client::_Response[Types::GetIpamPrefixListResolverVersionsResult]
+      def ipam_prefix_list_resolver_versions: () -> Array[Types::IpamPrefixListResolverVersion]?
+      def next_token: () -> String?
+    end
+    def get_ipam_prefix_list_resolver_versions: (
+      ?dry_run: bool,
+      ?ipam_prefix_list_resolver_id: String,
+      ?ipam_prefix_list_resolver_versions: Array[Integer],
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String
+    ) -> _GetIpamPrefixListResolverVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamPrefixListResolverVersionsResponse
+
     interface _GetIpamResourceCidrsResponse
       include Smithy::Client::_Response[Types::GetIpamResourceCidrsResult]
       def next_token: () -> String?
@@ -9120,6 +10686,67 @@ module Aws::EC2
       },
       ?resource_owner: String
     ) -> _GetIpamResourceCidrsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamResourceCidrsResponse
+
+    interface _GetIpamRouteOriginAuthorizationsResponse
+      include Smithy::Client::_Response[Types::GetIpamRouteOriginAuthorizationsResult]
+      def ipam_route_origin_authorizations: () -> Array[Types::IpamRouteOriginAuthorizationInfo]?
+      def next_token: () -> String?
+    end
+    def get_ipam_route_origin_authorizations: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?cidr: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetIpamRouteOriginAuthorizationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamRouteOriginAuthorizationsResponse
+
+    interface _GetIpamRouteProtectionFindingsResponse
+      include Smithy::Client::_Response[Types::GetIpamRouteProtectionFindingsResult]
+      def ipam_id: () -> String?
+      def route_protection_findings: () -> Array[Types::IpamRouteProtectionFinding]?
+      def next_token: () -> String?
+    end
+    def get_ipam_route_protection_findings: (
+      ?dry_run: bool,
+      ?ipam_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetIpamRouteProtectionFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamRouteProtectionFindingsResponse
+
+    interface _GetIpamRoutingPolicyRegistrationDeltasResponse
+      include Smithy::Client::_Response[Types::GetIpamRoutingPolicyRegistrationDeltasResult]
+      def ipam_routing_policy_registration_deltas: () -> Array[Types::IpamRoutingPolicyRegistrationDelta]?
+      def next_token: () -> String?
+    end
+    def get_ipam_routing_policy_registration_deltas: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?delta_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?chronological_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetIpamRoutingPolicyRegistrationDeltasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamRoutingPolicyRegistrationDeltasResponse
+
+    interface _GetIpamRoutingPolicyRegistrationsResponse
+      include Smithy::Client::_Response[Types::GetIpamRoutingPolicyRegistrationsResult]
+      def ipam_routing_policy_registrations: () -> Array[Types::IpamRoutingPolicyRegistration]?
+      def next_token: () -> String?
+    end
+    def get_ipam_routing_policy_registrations: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?cidr: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetIpamRoutingPolicyRegistrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpamRoutingPolicyRegistrationsResponse
 
     interface _GetLaunchTemplateDataResponse
       include Smithy::Client::_Response[Types::GetLaunchTemplateDataResult]
@@ -9154,6 +10781,14 @@ module Aws::EC2
       ?max_results: Integer,
       ?next_token: String
     ) -> _GetManagedPrefixListEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedPrefixListEntriesResponse
+
+    interface _GetManagedResourceVisibilityResponse
+      include Smithy::Client::_Response[Types::GetManagedResourceVisibilityResult]
+      def visibility: () -> Types::ManagedResourceVisibilitySettings?
+    end
+    def get_managed_resource_visibility: (
+      ?dry_run: bool
+    ) -> _GetManagedResourceVisibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedResourceVisibilityResponse
 
     interface _GetNetworkInsightsAccessScopeAnalysisFindingsResponse
       include Smithy::Client::_Response[Types::GetNetworkInsightsAccessScopeAnalysisFindingsResult]
@@ -9360,12 +10995,14 @@ module Aws::EC2
                 }
               ]
             }
-          }
+          },
+          require_encryption_in_transit: untyped
         }
       },
       ?dry_run: bool,
       ?max_results: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?include_local_zones: bool
     ) -> _GetSpotPlacementScoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSpotPlacementScoresResponse
 
     interface _GetSubnetCidrReservationsResponse
@@ -9404,6 +11041,24 @@ module Aws::EC2
       ?next_token: String,
       ?dry_run: bool
     ) -> _GetTransitGatewayAttachmentPropagationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransitGatewayAttachmentPropagationsResponse
+
+    interface _GetTransitGatewayMeteringPolicyEntriesResponse
+      include Smithy::Client::_Response[Types::GetTransitGatewayMeteringPolicyEntriesResult]
+      def transit_gateway_metering_policy_entries: () -> Array[Types::TransitGatewayMeteringPolicyEntry]?
+      def next_token: () -> String?
+    end
+    def get_transit_gateway_metering_policy_entries: (
+      ?transit_gateway_metering_policy_id: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool
+    ) -> _GetTransitGatewayMeteringPolicyEntriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransitGatewayMeteringPolicyEntriesResponse
 
     interface _GetTransitGatewayMulticastDomainAssociationsResponse
       include Smithy::Client::_Response[Types::GetTransitGatewayMulticastDomainAssociationsResult]
@@ -9444,6 +11099,7 @@ module Aws::EC2
     interface _GetTransitGatewayPolicyTableEntriesResponse
       include Smithy::Client::_Response[Types::GetTransitGatewayPolicyTableEntriesResult]
       def transit_gateway_policy_table_entries: () -> Array[Types::TransitGatewayPolicyTableEntry]?
+      def next_token: () -> String?
     end
     def get_transit_gateway_policy_table_entries: (
       ?transit_gateway_policy_table_id: String,
@@ -9543,6 +11199,18 @@ module Aws::EC2
       ?verified_access_group_id: String,
       ?dry_run: bool
     ) -> _GetVerifiedAccessGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVerifiedAccessGroupPolicyResponse
+
+    interface _GetVpcResourcesBlockingEncryptionEnforcementResponse
+      include Smithy::Client::_Response[Types::GetVpcResourcesBlockingEncryptionEnforcementResult]
+      def non_compliant_resources: () -> Array[Types::VpcEncryptionNonCompliantResource]?
+      def next_token: () -> String?
+    end
+    def get_vpc_resources_blocking_encryption_enforcement: (
+      ?vpc_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?dry_run: bool
+    ) -> _GetVpcResourcesBlockingEncryptionEnforcementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVpcResourcesBlockingEncryptionEnforcementResponse
 
     interface _GetVpnConnectionDeviceSampleConfigurationResponse
       include Smithy::Client::_Response[Types::GetVpnConnectionDeviceSampleConfigurationResult]
@@ -9819,6 +11487,18 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _ListSnapshotsInRecycleBinResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSnapshotsInRecycleBinResponse
 
+    interface _ListVolumesInRecycleBinResponse
+      include Smithy::Client::_Response[Types::ListVolumesInRecycleBinResult]
+      def volumes: () -> Array[Types::VolumeRecycleBinInfo]?
+      def next_token: () -> String?
+    end
+    def list_volumes_in_recycle_bin: (
+      ?volume_ids: Array[String],
+      ?dry_run: bool,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListVolumesInRecycleBinResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVolumesInRecycleBinResponse
+
     interface _LockSnapshotResponse
       include Smithy::Client::_Response[Types::LockSnapshotResult]
       def snapshot_id: () -> String?
@@ -9839,6 +11519,23 @@ module Aws::EC2
       ?expiration_date: Time
     ) -> _LockSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LockSnapshotResponse
 
+    interface _ModifyAccountVpcEncryptionControlResponse
+      include Smithy::Client::_Response[Types::ModifyAccountVpcEncryptionControlResult]
+      def account_vpc_encryption_control: () -> Types::AccountVpcEncryptionControl?
+    end
+    def modify_account_vpc_encryption_control: (
+      ?dry_run: bool,
+      ?mode: String,
+      ?internet_gateway: String,
+      ?egress_only_internet_gateway: String,
+      ?nat_gateway: String,
+      ?virtual_private_gateway: String,
+      ?vpc_peering: String,
+      ?lambda: String,
+      ?vpc_lattice: String,
+      ?elastic_file_system: String
+    ) -> _ModifyAccountVpcEncryptionControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyAccountVpcEncryptionControlResponse
+
     interface _ModifyAddressAttributeResponse
       include Smithy::Client::_Response[Types::ModifyAddressAttributeResult]
       def address: () -> Types::AddressAttribute?
@@ -9848,6 +11545,43 @@ module Aws::EC2
       ?domain_name: String,
       ?dry_run: bool
     ) -> _ModifyAddressAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyAddressAttributeResponse
+
+    interface _ModifyApplicationStatusCheckResponse
+      include Smithy::Client::_Response[Types::ModifyApplicationStatusCheckResult]
+      def application_status_check: () -> Types::ApplicationStatusCheckResponseObject?
+    end
+    def modify_application_status_check: (
+      ?application_status_check_id: String,
+      ?aggregation: String,
+      ?health_check_paths: Array[
+        {
+          source: {
+            subnet_id: String,
+            security_group_id: String
+          },
+          destinations: Array[
+            {
+              subnet_id: untyped,
+              security_group_id: untyped
+            }
+          ]
+        }
+      ],
+      ?protocol: String,
+      ?port: Integer,
+      ?path: String,
+      ?device_index: Integer,
+      ?ip_version: String,
+      ?ip_scope: String,
+      ?interval: Integer,
+      ?timeout: Integer,
+      ?failure_threshold: Integer,
+      ?success_threshold: Integer,
+      ?status_code_matcher: String,
+      ?initialization_grace_period_seconds: Integer,
+      ?client_token: String,
+      ?dry_run: bool
+    ) -> _ModifyApplicationStatusCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyApplicationStatusCheckResponse
 
     interface _ModifyAvailabilityZoneGroupResponse
       include Smithy::Client::_Response[Types::ModifyAvailabilityZoneGroupResult]
@@ -9862,6 +11596,8 @@ module Aws::EC2
     interface _ModifyCapacityReservationResponse
       include Smithy::Client::_Response[Types::ModifyCapacityReservationResult]
       def return: () -> bool?
+      def adjustment_status: () -> String?
+      def adjustment_details: () -> Types::CapacityReservationAdjustmentDetails?
     end
     def modify_capacity_reservation: (
       ?capacity_reservation_id: String,
@@ -9871,7 +11607,10 @@ module Aws::EC2
       ?accept: bool,
       ?dry_run: bool,
       ?additional_info: String,
-      ?instance_match_criteria: String
+      ?instance_match_criteria: String,
+      ?accept_modification_terms: bool,
+      ?start_date: Time,
+      ?quote_id: String
     ) -> _ModifyCapacityReservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyCapacityReservationResponse
 
     interface _ModifyCapacityReservationFleetResponse
@@ -9896,7 +11635,8 @@ module Aws::EC2
       ?connection_log_options: {
         enabled: bool,
         cloudwatch_log_group: String,
-        cloudwatch_log_stream: untyped
+        cloudwatch_log_stream: untyped,
+        include_authorization_policy_context: untyped
       },
       ?dns_servers: {
         custom_dns_servers: Array[String],
@@ -9921,8 +11661,36 @@ module Aws::EC2
       ?client_route_enforcement_options: {
         enforced: bool
       },
-      ?disconnect_on_session_timeout: bool
+      ?disconnect_on_session_timeout: bool,
+      ?transit_gateway_configuration: {
+        transit_gateway_id: String,
+        availability_zones: Array[String],
+        availability_zone_ids: Array[String]
+      },
+      ?device_posture_options: {
+        trust_providers: Array[
+          {
+            trust_provider_type: String,
+            tenant_id: String,
+            public_signing_key_url: untyped
+          }
+        ],
+        enabled: bool
+      }
     ) -> _ModifyClientVpnEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyClientVpnEndpointResponse
+
+    interface _ModifyClientVpnEndpointAuthorizationPolicyResponse
+      include Smithy::Client::_Response[Types::ModifyClientVpnEndpointAuthorizationPolicyResult]
+      def status: () -> String?
+    end
+    def modify_client_vpn_endpoint_authorization_policy: (
+      ?client_vpn_endpoint_id: String,
+      ?policy_document: String,
+      ?description: String,
+      ?shadow_mode: String,
+      ?client_token: String,
+      ?dry_run: bool
+    ) -> _ModifyClientVpnEndpointAuthorizationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyClientVpnEndpointAuthorizationPolicyResponse
 
     interface _ModifyDefaultCreditSpecificationResponse
       include Smithy::Client::_Response[Types::ModifyDefaultCreditSpecificationResult]
@@ -9955,7 +11723,8 @@ module Aws::EC2
           launch_template_specification: {
             launch_template_id: String,
             launch_template_name: String,
-            version: String
+            version: String,
+            launch_template_specification_user_data: String
           },
           overrides: Array[
             {
@@ -9977,6 +11746,7 @@ module Aws::EC2
                 group_id: String,
                 availability_zone: untyped
               },
+              key_name: untyped,
               block_device_mappings: Array[
                 {
                   device_name: untyped,
@@ -9994,6 +11764,15 @@ module Aws::EC2
                   no_device: untyped
                 }
               ],
+              iam_instance_profile: {
+                arn: untyped,
+                name: untyped
+              },
+              metadata_options: {
+                http_tokens: String,
+                http_put_response_hop_limit: untyped,
+                http_endpoint: String
+              },
               instance_requirements: {
                 v_cpu_count: {
                   min: untyped,
@@ -10054,9 +11833,11 @@ module Aws::EC2
                       }
                     ]
                   }
-                }
+                },
+                require_encryption_in_transit: untyped
               },
-              image_id: untyped
+              image_id: untyped,
+              availability_zone_id: untyped
             }
           ]
         }
@@ -10168,6 +11949,9 @@ module Aws::EC2
       ?source_dest_check: {
         value: bool
       },
+      ?enclave_options: {
+        enabled: bool
+      },
       ?disable_api_stop: {
         value: bool
       },
@@ -10249,11 +12033,13 @@ module Aws::EC2
       def instance_id: () -> String?
       def core_count: () -> Integer?
       def threads_per_core: () -> Integer?
+      def nested_virtualization: () -> String?
     end
     def modify_instance_cpu_options: (
       ?instance_id: String,
       ?core_count: Integer,
       ?threads_per_core: Integer,
+      ?nested_virtualization: String,
       ?dry_run: bool
     ) -> _ModifyInstanceCpuOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyInstanceCpuOptionsResponse
 
@@ -10325,7 +12111,8 @@ module Aws::EC2
       ?http_put_response_hop_limit: Integer,
       ?http_endpoint: String,
       ?instance_metadata_tags: String,
-      ?dry_run: bool
+      ?dry_run: bool,
+      ?http_tokens_enforced: String
     ) -> _ModifyInstanceMetadataDefaultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyInstanceMetadataDefaultsResponse
 
     interface _ModifyInstanceMetadataOptionsResponse
@@ -10392,6 +12179,22 @@ module Aws::EC2
       ?metered_account: String
     ) -> _ModifyIpamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpamResponse
 
+    interface _ModifyIpamPolicyAllocationRulesResponse
+      include Smithy::Client::_Response[Types::ModifyIpamPolicyAllocationRulesResult]
+      def ipam_policy_document: () -> Types::IpamPolicyDocument?
+    end
+    def modify_ipam_policy_allocation_rules: (
+      ?dry_run: bool,
+      ?ipam_policy_id: String,
+      ?locale: String,
+      ?resource_type: String,
+      ?allocation_rules: Array[
+        {
+          source_ipam_pool_id: String
+        }
+      ]
+    ) -> _ModifyIpamPolicyAllocationRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpamPolicyAllocationRulesResponse
+
     interface _ModifyIpamPoolResponse
       include Smithy::Client::_Response[Types::ModifyIpamPoolResult]
       def ipam_pool: () -> Types::IpamPool?
@@ -10418,6 +12221,60 @@ module Aws::EC2
         }
       ]
     ) -> _ModifyIpamPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpamPoolResponse
+
+    interface _ModifyIpamPoolAllocationResponse
+      include Smithy::Client::_Response[Types::ModifyIpamPoolAllocationResult]
+      def ipam_pool_allocation: () -> Types::IpamPoolAllocation?
+    end
+    def modify_ipam_pool_allocation: (
+      ?dry_run: bool,
+      ?ipam_pool_allocation_id: String,
+      ?description: String
+    ) -> _ModifyIpamPoolAllocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpamPoolAllocationResponse
+
+    interface _ModifyIpamPrefixListResolverResponse
+      include Smithy::Client::_Response[Types::ModifyIpamPrefixListResolverResult]
+      def ipam_prefix_list_resolver: () -> Types::IpamPrefixListResolver?
+    end
+    def modify_ipam_prefix_list_resolver: (
+      ?dry_run: bool,
+      ?ipam_prefix_list_resolver_id: String,
+      ?description: String,
+      ?rules: Array[
+        {
+          rule_type: String,
+          static_cidr: String,
+          ipam_scope_id: String,
+          resource_type: String,
+          conditions: Array[
+            {
+              operation: String,
+              ipam_pool_id: untyped,
+              resource_id: untyped,
+              resource_owner: untyped,
+              resource_region: untyped,
+              resource_tag: {
+                key: untyped,
+                value: untyped
+              },
+              cidr: untyped
+            }
+          ]
+        }
+      ]
+    ) -> _ModifyIpamPrefixListResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpamPrefixListResolverResponse
+
+    interface _ModifyIpamPrefixListResolverTargetResponse
+      include Smithy::Client::_Response[Types::ModifyIpamPrefixListResolverTargetResult]
+      def ipam_prefix_list_resolver_target: () -> Types::IpamPrefixListResolverTarget?
+    end
+    def modify_ipam_prefix_list_resolver_target: (
+      ?dry_run: bool,
+      ?ipam_prefix_list_resolver_target_id: String,
+      ?desired_version: Integer,
+      ?track_latest_version: bool,
+      ?client_token: String
+    ) -> _ModifyIpamPrefixListResolverTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpamPrefixListResolverTargetResponse
 
     interface _ModifyIpamResourceCidrResponse
       include Smithy::Client::_Response[Types::ModifyIpamResourceCidrResult]
@@ -10463,6 +12320,22 @@ module Aws::EC2
       ]
     ) -> _ModifyIpamResourceDiscoveryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpamResourceDiscoveryResponse
 
+    interface _ModifyIpamRoutingPolicyRegistrationResponse
+      include Smithy::Client::_Response[Types::ModifyIpamRoutingPolicyRegistrationResult]
+      def ipam_routing_policy_registration_delta: () -> Types::IpamRoutingPolicyRegistrationDelta?
+    end
+    def modify_ipam_routing_policy_registration: (
+      ?dry_run: bool,
+      ?ipam_internet_registry_association_id: String,
+      ?cidr: String,
+      ?asns: Array[String],
+      ?permit_more_specific_announcements: bool,
+      ?max_length: Integer,
+      ?description: String,
+      ?force: bool,
+      ?client_token: String
+    ) -> _ModifyIpamRoutingPolicyRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpamRoutingPolicyRegistrationResponse
+
     interface _ModifyIpamScopeResponse
       include Smithy::Client::_Response[Types::ModifyIpamScopeResult]
       def ipam_scope: () -> Types::IpamScope?
@@ -10470,7 +12343,12 @@ module Aws::EC2
     def modify_ipam_scope: (
       ?dry_run: bool,
       ?ipam_scope_id: String,
-      ?description: String
+      ?description: String,
+      ?external_authority_configuration: {
+        type: String,
+        external_resource_identifier: String
+      },
+      ?remove_external_authority_configuration: bool
     ) -> _ModifyIpamScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIpamScopeResponse
 
     interface _ModifyLaunchTemplateResponse
@@ -10518,8 +12396,18 @@ module Aws::EC2
           cidr: String
         }
       ],
-      ?max_entries: Integer
+      ?max_entries: Integer,
+      ?ipam_prefix_list_resolver_sync_enabled: bool
     ) -> _ModifyManagedPrefixListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyManagedPrefixListResponse
+
+    interface _ModifyManagedResourceVisibilityResponse
+      include Smithy::Client::_Response[Types::ModifyManagedResourceVisibilityResult]
+      def visibility: () -> Types::ManagedResourceVisibilitySettings?
+    end
+    def modify_managed_resource_visibility: (
+      ?dry_run: bool,
+      ?default_visibility: String
+    ) -> _ModifyManagedResourceVisibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyManagedResourceVisibilityResponse
 
     interface _ModifyNetworkInterfaceAttributeResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -10745,8 +12633,10 @@ module Aws::EC2
                       }
                     ]
                   }
-                }
-              }
+                },
+                require_encryption_in_transit: untyped
+              },
+              availability_zone_id: String
             }
           ]
         }
@@ -10859,10 +12749,44 @@ module Aws::EC2
         association_default_route_table_id: String,
         default_route_table_propagation: String,
         propagation_default_route_table_id: untyped,
-        amazon_side_asn: Integer
+        amazon_side_asn: Integer,
+        encryption_support: String
       },
       ?dry_run: bool
     ) -> _ModifyTransitGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyTransitGatewayResponse
+
+    interface _ModifyTransitGatewayMeteringPolicyResponse
+      include Smithy::Client::_Response[Types::ModifyTransitGatewayMeteringPolicyResult]
+      def transit_gateway_metering_policy: () -> Types::TransitGatewayMeteringPolicy?
+    end
+    def modify_transit_gateway_metering_policy: (
+      ?transit_gateway_metering_policy_id: String,
+      ?add_middlebox_attachment_ids: Array[String],
+      ?remove_middlebox_attachment_ids: Array[String],
+      ?dry_run: bool
+    ) -> _ModifyTransitGatewayMeteringPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyTransitGatewayMeteringPolicyResponse
+
+    interface _ModifyTransitGatewayPolicyTableEntryResponse
+      include Smithy::Client::_Response[Types::ModifyTransitGatewayPolicyTableEntryResult]
+      def transit_gateway_policy_table_entry: () -> Types::TransitGatewayPolicyTableEntry?
+    end
+    def modify_transit_gateway_policy_table_entry: (
+      ?transit_gateway_policy_table_id: String,
+      ?policy_rule_number: String,
+      ?policy_rule: {
+        source_cidr_block: String,
+        source_port_range: untyped,
+        destination_cidr_block: untyped,
+        destination_port_range: untyped,
+        protocol: untyped,
+        meta_data: {
+          meta_data_key: untyped,
+          meta_data_value: untyped
+        }
+      },
+      ?target_route_table_id: String,
+      ?dry_run: bool
+    ) -> _ModifyTransitGatewayPolicyTableEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyTransitGatewayPolicyTableEntryResponse
 
     interface _ModifyTransitGatewayPrefixListReferenceResponse
       include Smithy::Client::_Response[Types::ModifyTransitGatewayPrefixListReferenceResult]
@@ -11124,6 +13048,24 @@ module Aws::EC2
       ?internet_gateway_block_mode: String
     ) -> _ModifyVpcBlockPublicAccessOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyVpcBlockPublicAccessOptionsResponse
 
+    interface _ModifyVpcEncryptionControlResponse
+      include Smithy::Client::_Response[Types::ModifyVpcEncryptionControlResult]
+      def vpc_encryption_control: () -> Types::VpcEncryptionControl?
+    end
+    def modify_vpc_encryption_control: (
+      ?dry_run: bool,
+      ?vpc_encryption_control_id: String,
+      ?mode: String,
+      ?internet_gateway_exclusion: String,
+      ?egress_only_internet_gateway_exclusion: String,
+      ?nat_gateway_exclusion: String,
+      ?virtual_private_gateway_exclusion: String,
+      ?vpc_peering_exclusion: String,
+      ?lambda_exclusion: String,
+      ?vpc_lattice_exclusion: String,
+      ?elastic_file_system_exclusion: String
+    ) -> _ModifyVpcEncryptionControlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyVpcEncryptionControlResponse
+
     interface _ModifyVpcEndpointResponse
       include Smithy::Client::_Response[Types::ModifyVpcEndpointResult]
       def return: () -> bool?
@@ -11142,7 +13084,9 @@ module Aws::EC2
       ?ip_address_type: String,
       ?dns_options: {
         dns_record_ip_type: String,
-        private_dns_only_for_inbound_resolver_endpoint: bool
+        private_dns_only_for_inbound_resolver_endpoint: bool,
+        private_dns_preference: String,
+        private_dns_specified_domains: Array[String]
       },
       ?private_dns_enabled: bool,
       ?subnet_configurations: Array[
@@ -11164,6 +13108,19 @@ module Aws::EC2
       ?connection_notification_arn: String,
       ?connection_events: Array[String]
     ) -> _ModifyVpcEndpointConnectionNotificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyVpcEndpointConnectionNotificationResponse
+
+    interface _ModifyVpcEndpointPayerResponsibilityResponse
+      include Smithy::Client::_Response[Types::ModifyVpcEndpointPayerResponsibilityResult]
+      def vpc_endpoint_id: () -> String?
+      def payer_responsibilities: () -> Array[Types::PayerResponsibilityEntry]?
+    end
+    def modify_vpc_endpoint_payer_responsibility: (
+      ?dry_run: bool,
+      ?service_id: String,
+      ?vpc_endpoint_id: String,
+      ?payer_responsibility: String,
+      ?scope: String
+    ) -> _ModifyVpcEndpointPayerResponsibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyVpcEndpointPayerResponsibilityResponse
 
     interface _ModifyVpcEndpointServiceConfigurationResponse
       include Smithy::Client::_Response[Types::ModifyVpcEndpointServiceConfigurationResult]
@@ -11259,6 +13216,7 @@ module Aws::EC2
       ?remote_ipv4_network_cidr: String,
       ?local_ipv6_network_cidr: String,
       ?remote_ipv6_network_cidr: String,
+      ?tunnel_bandwidth: String,
       ?dry_run: bool
     ) -> _ModifyVpnConnectionOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyVpnConnectionOptionsResponse
 
@@ -11330,7 +13288,10 @@ module Aws::EC2
           cloud_watch_log_options: {
             log_enabled: bool,
             log_group_arn: String,
-            log_output_format: untyped
+            log_output_format: untyped,
+            bgp_log_enabled: untyped,
+            bgp_log_group_arn: untyped,
+            bgp_log_output_format: untyped
           }
         },
         enable_tunnel_lifecycle_control: untyped
@@ -11597,7 +13558,8 @@ module Aws::EC2
             availability_zone: untyped,
             encrypted: untyped,
             volume_initialization_rate: untyped,
-            availability_zone_id: untyped
+            availability_zone_id: untyped,
+            ebs_card_index: untyped
           },
           no_device: untyped,
           device_name: untyped,
@@ -11651,6 +13613,15 @@ module Aws::EC2
       ?dry_run: bool,
       ?capacity_reservation_id: String
     ) -> _RejectCapacityReservationBillingOwnershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectCapacityReservationBillingOwnershipResponse
+
+    interface _RejectTransitGatewayClientVpnAttachmentResponse
+      include Smithy::Client::_Response[Types::RejectTransitGatewayClientVpnAttachmentResult]
+      def transit_gateway_client_vpn_attachment: () -> Types::TransitGatewayClientVpnAttachment?
+    end
+    def reject_transit_gateway_client_vpn_attachment: (
+      ?transit_gateway_attachment_id: String,
+      ?dry_run: bool
+    ) -> _RejectTransitGatewayClientVpnAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectTransitGatewayClientVpnAttachmentResponse
 
     interface _RejectTransitGatewayMulticastDomainAssociationsResponse
       include Smithy::Client::_Response[Types::RejectTransitGatewayMulticastDomainAssociationsResult]
@@ -11757,11 +13728,32 @@ module Aws::EC2
           },
           creation_date_condition: {
             maximum_days_since_created: Integer
-          }
+          },
+          image_watermarks: Array[
+            {
+              watermark_key: String,
+              source_image_region: untyped,
+              maximum_days_since_source_image_created: Integer,
+              maximum_days_since_watermark_created: untyped
+            }
+          ]
         }
       ],
       ?dry_run: bool
     ) -> _ReplaceImageCriteriaInAllowedImagesSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReplaceImageCriteriaInAllowedImagesSettingsResponse
+
+    interface _ReplaceImageInstanceTypeSpecificationResponse
+      include Smithy::Client::_Response[Types::ReplaceImageInstanceTypeSpecificationResult]
+      def return_value: () -> bool?
+    end
+    def replace_image_instance_type_specification: (
+      ?image_id: String,
+      ?instance_type_specification: {
+        supported_instance_types: Array[String],
+        unsupported_instance_types: Array[String]
+      },
+      ?dry_run: bool
+    ) -> _ReplaceImageInstanceTypeSpecificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReplaceImageInstanceTypeSpecificationResponse
 
     interface _ReplaceNetworkAclAssociationResponse
       include Smithy::Client::_Response[Types::ReplaceNetworkAclAssociationResult]
@@ -11903,7 +13895,8 @@ module Aws::EC2
                   availability_zone: untyped,
                   encrypted: untyped,
                   volume_initialization_rate: untyped,
-                  availability_zone_id: untyped
+                  availability_zone_id: untyped,
+                  ebs_card_index: untyped
                 },
                 no_device: untyped,
                 device_name: untyped,
@@ -11979,7 +13972,8 @@ module Aws::EC2
             placement: {
               availability_zone: untyped,
               group_name: String,
-              tenancy: String
+              tenancy: String,
+              availability_zone_id: untyped
             },
             ramdisk_id: untyped,
             spot_price: untyped,
@@ -12057,7 +14051,8 @@ module Aws::EC2
                     }
                   ]
                 }
-              }
+              },
+              require_encryption_in_transit: untyped
             },
             security_groups: Array[
               {
@@ -12082,7 +14077,8 @@ module Aws::EC2
                 availability_zone: untyped,
                 weighted_capacity: untyped,
                 priority: untyped,
-                instance_requirements: untyped
+                instance_requirements: untyped,
+                availability_zone_id: String
               }
             ]
           }
@@ -12149,7 +14145,8 @@ module Aws::EC2
               availability_zone: untyped,
               encrypted: untyped,
               volume_initialization_rate: untyped,
-              availability_zone_id: untyped
+              availability_zone_id: untyped,
+              ebs_card_index: untyped
             },
             no_device: untyped,
             device_name: untyped,
@@ -12225,7 +14222,8 @@ module Aws::EC2
         placement: {
           availability_zone: untyped,
           group_name: String,
-          tenancy: String
+          tenancy: String,
+          availability_zone_id: untyped
         },
         ramdisk_id: String,
         subnet_id: String,
@@ -12382,6 +14380,15 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _RestoreSnapshotTierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreSnapshotTierResponse
 
+    interface _RestoreVolumeFromRecycleBinResponse
+      include Smithy::Client::_Response[Types::RestoreVolumeFromRecycleBinResult]
+      def return: () -> bool?
+    end
+    def restore_volume_from_recycle_bin: (
+      ?volume_id: String,
+      ?dry_run: bool
+    ) -> _RestoreVolumeFromRecycleBinResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreVolumeFromRecycleBinResponse
+
     interface _RevokeClientVpnIngressResponse
       include Smithy::Client::_Response[Types::RevokeClientVpnIngressResult]
       def status: () -> Types::ClientVpnAuthorizationRuleStatus?
@@ -12526,7 +14533,8 @@ module Aws::EC2
             availability_zone: untyped,
             encrypted: untyped,
             volume_initialization_rate: untyped,
-            availability_zone_id: untyped
+            availability_zone_id: untyped,
+            ebs_card_index: untyped
           },
           no_device: untyped,
           device_name: untyped,
@@ -12609,7 +14617,8 @@ module Aws::EC2
       ?cpu_options: {
         core_count: Integer,
         threads_per_core: untyped,
-        amd_sev_snp: String
+        amd_sev_snp: String,
+        nested_virtualization: String
       },
       ?capacity_reservation_specification: {
         capacity_reservation_preference: String,
@@ -12652,6 +14661,21 @@ module Aws::EC2
       ?operator: {
         principal: String
       },
+      ?secondary_interfaces: Array[
+        {
+          delete_on_termination: bool,
+          device_index: Integer,
+          private_ip_addresses: Array[
+            {
+              private_ip_address: String
+            }
+          ],
+          private_ip_address_count: untyped,
+          secondary_subnet_id: String,
+          interface_type: String,
+          network_card_index: untyped
+        }
+      ],
       ?dry_run: bool,
       ?disable_api_termination: bool,
       ?instance_initiated_shutdown_behavior: String,
@@ -12832,6 +14856,7 @@ module Aws::EC2
       include Smithy::Client::_Response[Types::SearchTransitGatewayRoutesResult]
       def routes: () -> Array[Types::TransitGatewayRoute]?
       def additional_routes_available: () -> bool?
+      def next_token: () -> String?
     end
     def search_transit_gateway_routes: (
       ?transit_gateway_route_table_id: String,
@@ -12842,7 +14867,8 @@ module Aws::EC2
         }
       ],
       ?max_results: Integer,
-      ?dry_run: bool
+      ?dry_run: bool,
+      ?next_token: String
     ) -> _SearchTransitGatewayRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchTransitGatewayRoutesResponse
 
     interface _SendDiagnosticInterruptResponse
@@ -13026,6 +15052,44 @@ module Aws::EC2
       ?dry_run: bool
     ) -> _UnmonitorInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnmonitorInstancesResponse
 
+    interface _UpdateCapacityManagerMonitoredTagKeysResponse
+      include Smithy::Client::_Response[Types::UpdateCapacityManagerMonitoredTagKeysResult]
+      def capacity_manager_tag_keys: () -> Array[Types::CapacityManagerMonitoredTagKey]?
+    end
+    def update_capacity_manager_monitored_tag_keys: (
+      ?activate_tag_keys: Array[String],
+      ?deactivate_tag_keys: Array[String],
+      ?dry_run: bool,
+      ?client_token: String
+    ) -> _UpdateCapacityManagerMonitoredTagKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCapacityManagerMonitoredTagKeysResponse
+
+    interface _UpdateCapacityManagerOrganizationsAccessResponse
+      include Smithy::Client::_Response[Types::UpdateCapacityManagerOrganizationsAccessResult]
+      def capacity_manager_status: () -> String?
+      def organizations_access: () -> bool?
+    end
+    def update_capacity_manager_organizations_access: (
+      ?organizations_access: bool,
+      ?dry_run: bool,
+      ?client_token: String
+    ) -> _UpdateCapacityManagerOrganizationsAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCapacityManagerOrganizationsAccessResponse
+
+    interface _UpdateInterruptibleCapacityReservationAllocationResponse
+      include Smithy::Client::_Response[Types::UpdateInterruptibleCapacityReservationAllocationResult]
+      def interruptible_capacity_reservation_id: () -> String?
+      def source_capacity_reservation_id: () -> String?
+      def instance_count: () -> Integer?
+      def target_instance_count: () -> Integer?
+      def status: () -> String?
+      def interruption_type: () -> String?
+    end
+    def update_interruptible_capacity_reservation_allocation: (
+      ?capacity_reservation_id: String,
+      ?target_instance_count: Integer,
+      ?dry_run: bool,
+      ?zero_size_preference: String
+    ) -> _UpdateInterruptibleCapacityReservationAllocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInterruptibleCapacityReservationAllocationResponse
+
     interface _UpdateSecurityGroupRuleDescriptionsEgressResponse
       include Smithy::Client::_Response[Types::UpdateSecurityGroupRuleDescriptionsEgressResult]
       def return: () -> bool?
@@ -13129,6 +15193,15 @@ module Aws::EC2
         }
       ]
     ) -> _UpdateSecurityGroupRuleDescriptionsIngressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSecurityGroupRuleDescriptionsIngressResponse
+
+    interface _ValidateSecurityGroupQuotasForInterfaceResponse
+      include Smithy::Client::_Response[Types::ValidateSecurityGroupQuotasForInterfaceResult]
+      def valid: () -> bool?
+    end
+    def validate_security_group_quotas_for_interface: (
+      ?security_group_ids: Array[String],
+      ?dry_run: bool
+    ) -> _ValidateSecurityGroupQuotasForInterfaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateSecurityGroupQuotasForInterfaceResponse
 
     interface _WithdrawByoipCidrResponse
       include Smithy::Client::_Response[Types::WithdrawByoipCidrResult]

@@ -1,0 +1,21 @@
+module Aws::SageMakerRuntimeHTTP2
+  module Schema
+    include Smithy::Schema::Shapes
+
+    InputValidationError: StructureShape
+    InternalServerError: StructureShape
+    InternalStreamFailure: StructureShape
+    InvokeEndpointWithBidirectionalStreamInput: StructureShape
+    InvokeEndpointWithBidirectionalStreamOutput: StructureShape
+    ModelError: StructureShape
+    ModelStreamError: StructureShape
+    RequestPayloadPart: StructureShape
+    RequestStreamEvent: UnionShape
+    ResponsePayloadPart: StructureShape
+    ResponseStreamEvent: UnionShape
+    SensitiveBlob: BlobShape
+    ServiceUnavailableError: StructureShape
+
+    AmazonSageMakerRuntimeHttp2: ServiceShape
+  end
+end

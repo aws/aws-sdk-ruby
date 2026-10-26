@@ -5,11 +5,65 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
+    end
+
+    class AdConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?media_tailor_playback_configurations: Array[Types::MediaTailorPlaybackConfiguration],
+        ?post_roll_configuration: Types::PostRollConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor media_tailor_playback_configurations: Array[Types::MediaTailorPlaybackConfiguration]?
+      attr_accessor post_roll_configuration: Types::PostRollConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AdConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?media_tailor_playback_configurations: Array[Types::MediaTailorPlaybackConfiguration],
+        ?post_roll_configuration: Types::PostRollConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor media_tailor_playback_configurations: Array[Types::MediaTailorPlaybackConfiguration]?
+      attr_accessor post_roll_configuration: Types::PostRollConfiguration?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class AudioConfiguration
@@ -61,11 +115,25 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
         ?channels: Array[Types::Channel],
         ?errors: Array[Types::BatchError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
       attr_accessor channels: Array[Types::Channel]?
       attr_accessor errors: Array[Types::BatchError]?
     end
@@ -85,11 +153,25 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
         ?stream_keys: Array[Types::StreamKey],
         ?errors: Array[Types::BatchError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
       attr_accessor stream_keys: Array[Types::StreamKey]?
       attr_accessor errors: Array[Types::BatchError]?
     end
@@ -126,10 +208,24 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
         ?errors: Array[Types::BatchStartViewerSessionRevocationError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
       attr_accessor errors: Array[Types::BatchStartViewerSessionRevocationError]?
     end
 
@@ -167,6 +263,7 @@ module Aws::Ivs
         ?playback_restriction_policy_arn: String,
         ?multitrack_input_configuration: Types::MultitrackInputConfiguration,
         ?container_format: String,
+        ?ad_configuration_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -185,16 +282,33 @@ module Aws::Ivs
       attr_accessor playback_restriction_policy_arn: String?
       attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration?
       attr_accessor container_format: String?
+      attr_accessor ad_configuration_arn: String?
     end
 
     class ChannelNotBroadcasting
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
     end
 
@@ -212,6 +326,7 @@ module Aws::Ivs
         ?type: String,
         ?preset: String,
         ?playback_restriction_policy_arn: String,
+        ?ad_configuration_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -225,6 +340,7 @@ module Aws::Ivs
       attr_accessor type: String?
       attr_accessor preset: String?
       attr_accessor playback_restriction_policy_arn: String?
+      attr_accessor ad_configuration_arn: String?
     end
 
     module ChannelType
@@ -238,11 +354,55 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
+    end
+
+    class CreateAdConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?media_tailor_playback_configurations: Array[Types::MediaTailorPlaybackConfiguration],
+        ?post_roll_configuration: Types::PostRollConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor media_tailor_playback_configurations: Array[Types::MediaTailorPlaybackConfiguration]?
+      attr_accessor post_roll_configuration: Types::PostRollConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAdConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_configuration: Types::AdConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_configuration: Types::AdConfiguration?
     end
 
     class CreateChannelInput
@@ -260,6 +420,7 @@ module Aws::Ivs
         ?playback_restriction_policy_arn: String,
         ?multitrack_input_configuration: Types::MultitrackInputConfiguration,
         ?container_format: String,
+        ?ad_configuration_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -274,6 +435,7 @@ module Aws::Ivs
       attr_accessor playback_restriction_policy_arn: String?
       attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration?
       attr_accessor container_format: String?
+      attr_accessor ad_configuration_arn: String?
     end
 
     class CreateChannelOutput
@@ -375,6 +537,17 @@ module Aws::Ivs
       attr_accessor stream_key: Types::StreamKey?
     end
 
+    class DeleteAdConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
     class DeleteChannelInput
       include Smithy::Schema::Structure
 
@@ -448,6 +621,28 @@ module Aws::Ivs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor s3: Types::S3DestinationConfiguration?
+    end
+
+    class GetAdConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetAdConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_configuration: Types::AdConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_configuration: Types::AdConfiguration?
     end
 
     class GetChannelInput
@@ -658,15 +853,81 @@ module Aws::Ivs
       attr_accessor audio_configurations: Array[Types::AudioConfiguration]?
     end
 
+    class InsertAdBreakRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor duration_seconds: Integer?
+    end
+
+    class InsertAdBreakResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_break_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_break_id: String?
+    end
+
     class InternalServerException
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
+    end
+
+    class ListAdConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAdConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_configurations: Array[Types::AdConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_configurations: Array[Types::AdConfigurationSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListChannelsInput
@@ -676,6 +937,7 @@ module Aws::Ivs
         ?filter_by_name: String,
         ?filter_by_recording_configuration_arn: String,
         ?filter_by_playback_restriction_policy_arn: String,
+        ?filter_by_ad_configuration_arn: String,
         ?next_token: String,
         ?max_results: Integer,
       ) -> void
@@ -684,6 +946,7 @@ module Aws::Ivs
       attr_accessor filter_by_name: String?
       attr_accessor filter_by_recording_configuration_arn: String?
       attr_accessor filter_by_playback_restriction_policy_arn: String?
+      attr_accessor filter_by_ad_configuration_arn: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
     end
@@ -885,6 +1148,17 @@ module Aws::Ivs
       attr_accessor tags: Hash[String, String]?
     end
 
+    class MediaTailorPlaybackConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?playback_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor playback_configuration_arn: String?
+    end
+
     class MultitrackInputConfiguration
       include Smithy::Schema::Structure
 
@@ -915,10 +1189,26 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
     end
 
@@ -994,6 +1284,19 @@ module Aws::Ivs
       attr_accessor enable_strict_origin_enforcement: bool?
       attr_accessor name: String?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class PostRollConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_seconds: Integer,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_seconds: Integer?
+      attr_accessor enabled: bool?
     end
 
     class PutMetadataInput
@@ -1077,10 +1380,26 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
     end
 
@@ -1099,10 +1418,53 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
+      attr_accessor exception_message: String?
+    end
+
+    class ServiceUnavailable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
+        ?exception_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
     end
 
@@ -1313,10 +1675,26 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
     end
 
@@ -1346,10 +1724,26 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
     end
 
@@ -1404,6 +1798,34 @@ module Aws::Ivs
 
     end
 
+    class UpdateAdConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?media_tailor_playback_configurations: Array[Types::MediaTailorPlaybackConfiguration],
+        ?post_roll_configuration: Types::PostRollConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor media_tailor_playback_configurations: Array[Types::MediaTailorPlaybackConfiguration]?
+      attr_accessor post_roll_configuration: Types::PostRollConfiguration?
+    end
+
+    class UpdateAdConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_configuration: Types::AdConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_configuration: Types::AdConfiguration?
+    end
+
     class UpdateChannelInput
       include Smithy::Schema::Structure
 
@@ -1419,6 +1841,7 @@ module Aws::Ivs
         ?playback_restriction_policy_arn: String,
         ?multitrack_input_configuration: Types::MultitrackInputConfiguration,
         ?container_format: String,
+        ?ad_configuration_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1433,6 +1856,7 @@ module Aws::Ivs
       attr_accessor playback_restriction_policy_arn: String?
       attr_accessor multitrack_input_configuration: Types::MultitrackInputConfiguration?
       attr_accessor container_format: String?
+      attr_accessor ad_configuration_arn: String?
     end
 
     class UpdateChannelOutput
@@ -1480,10 +1904,26 @@ module Aws::Ivs
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?access_control_allow_origin: String,
+        ?access_control_expose_headers: String,
+        ?cache_control: String,
+        ?content_security_policy: String,
+        ?strict_transport_security: String,
+        ?x_content_type_options: String,
+        ?x_frame_options: String,
+        ?x_amzn_error_type: String,
         ?exception_message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor access_control_allow_origin: String?
+      attr_accessor access_control_expose_headers: String?
+      attr_accessor cache_control: String?
+      attr_accessor content_security_policy: String?
+      attr_accessor strict_transport_security: String?
+      attr_accessor x_content_type_options: String?
+      attr_accessor x_frame_options: String?
+      attr_accessor x_amzn_error_type: String?
       attr_accessor exception_message: String?
     end
 

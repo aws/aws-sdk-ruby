@@ -1,0 +1,891 @@
+module Aws::S3Files
+  module Types
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateAccessPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+        ?file_system_id: String,
+        ?posix_user: Types::PosixUser,
+        ?root_directory: Types::RootDirectory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor file_system_id: String?
+      attr_accessor posix_user: Types::PosixUser?
+      attr_accessor root_directory: Types::RootDirectory?
+    end
+
+    class CreateAccessPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_arn: String,
+        ?access_point_id: String,
+        ?client_token: String,
+        ?file_system_id: String,
+        ?status: String,
+        ?owner_id: String,
+        ?posix_user: Types::PosixUser,
+        ?root_directory: Types::RootDirectory,
+        ?tags: Array[Types::Tag],
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_arn: String?
+      attr_accessor access_point_id: String?
+      attr_accessor client_token: String?
+      attr_accessor file_system_id: String?
+      attr_accessor status: String?
+      attr_accessor owner_id: String?
+      attr_accessor posix_user: Types::PosixUser?
+      attr_accessor root_directory: Types::RootDirectory?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor name: String?
+    end
+
+    class CreateFileSystemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+        ?client_token: String,
+        ?kms_key_id: String,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?accept_bucket_warning: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+      attr_accessor client_token: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor accept_bucket_warning: bool?
+    end
+
+    class CreateFileSystemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?file_system_arn: String,
+        ?file_system_id: String,
+        ?bucket: String,
+        ?prefix: String,
+        ?client_token: String,
+        ?kms_key_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?role_arn: String,
+        ?owner_id: String,
+        ?tags: Array[Types::Tag],
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor file_system_arn: String?
+      attr_accessor file_system_id: String?
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+      attr_accessor client_token: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor role_arn: String?
+      attr_accessor owner_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor name: String?
+    end
+
+    class CreateMountTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?subnet_id: String,
+        ?ipv4_address: String,
+        ?ipv6_address: String,
+        ?ip_address_type: String,
+        ?security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor ipv4_address: String?
+      attr_accessor ipv6_address: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor security_groups: Array[String]?
+    end
+
+    class CreateMountTargetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone_id: String,
+        ?owner_id: String,
+        ?mount_target_id: String,
+        ?file_system_id: String,
+        ?subnet_id: String,
+        ?ipv4_address: String,
+        ?ipv6_address: String,
+        ?network_interface_id: String,
+        ?vpc_id: String,
+        ?security_groups: Array[String],
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone_id: String?
+      attr_accessor owner_id: String?
+      attr_accessor mount_target_id: String?
+      attr_accessor file_system_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor ipv4_address: String?
+      attr_accessor ipv6_address: String?
+      attr_accessor network_interface_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class CreationPermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?owner_uid: Integer,
+        ?owner_gid: Integer,
+        ?permissions: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor owner_uid: Integer?
+      attr_accessor owner_gid: Integer?
+      attr_accessor permissions: String?
+    end
+
+    class DeleteAccessPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_id: String?
+    end
+
+    class DeleteFileSystemPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+    end
+
+    class DeleteFileSystemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor force_delete: bool?
+    end
+
+    class DeleteMountTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mount_target_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mount_target_id: String?
+    end
+
+    class ExpirationDataRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days_after_last_access: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days_after_last_access: Integer?
+    end
+
+    class GetAccessPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_id: String?
+    end
+
+    class GetAccessPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_arn: String,
+        ?access_point_id: String,
+        ?client_token: String,
+        ?file_system_id: String,
+        ?status: String,
+        ?owner_id: String,
+        ?posix_user: Types::PosixUser,
+        ?root_directory: Types::RootDirectory,
+        ?tags: Array[Types::Tag],
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_arn: String?
+      attr_accessor access_point_id: String?
+      attr_accessor client_token: String?
+      attr_accessor file_system_id: String?
+      attr_accessor status: String?
+      attr_accessor owner_id: String?
+      attr_accessor posix_user: Types::PosixUser?
+      attr_accessor root_directory: Types::RootDirectory?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor name: String?
+    end
+
+    class GetFileSystemPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+    end
+
+    class GetFileSystemPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor policy: String?
+    end
+
+    class GetFileSystemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+    end
+
+    class GetFileSystemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?file_system_arn: String,
+        ?file_system_id: String,
+        ?bucket: String,
+        ?prefix: String,
+        ?client_token: String,
+        ?kms_key_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?role_arn: String,
+        ?owner_id: String,
+        ?tags: Array[Types::Tag],
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor file_system_arn: String?
+      attr_accessor file_system_id: String?
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+      attr_accessor client_token: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor role_arn: String?
+      attr_accessor owner_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor name: String?
+    end
+
+    class GetMountTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mount_target_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mount_target_id: String?
+    end
+
+    class GetMountTargetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone_id: String,
+        ?owner_id: String,
+        ?mount_target_id: String,
+        ?file_system_id: String,
+        ?subnet_id: String,
+        ?ipv4_address: String,
+        ?ipv6_address: String,
+        ?network_interface_id: String,
+        ?vpc_id: String,
+        ?security_groups: Array[String],
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone_id: String?
+      attr_accessor owner_id: String?
+      attr_accessor mount_target_id: String?
+      attr_accessor file_system_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor ipv4_address: String?
+      attr_accessor ipv6_address: String?
+      attr_accessor network_interface_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class GetSynchronizationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+    end
+
+    class GetSynchronizationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_version_number: Integer,
+        ?import_data_rules: Array[Types::ImportDataRule],
+        ?expiration_data_rules: Array[Types::ExpirationDataRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_version_number: Integer?
+      attr_accessor import_data_rules: Array[Types::ImportDataRule]?
+      attr_accessor expiration_data_rules: Array[Types::ExpirationDataRule]?
+    end
+
+    class ImportDataRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?trigger: String,
+        ?size_less_than: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor trigger: String?
+      attr_accessor size_less_than: Integer?
+    end
+
+    module ImportTrigger
+      ON_DIRECTORY_FIRST_ACCESS: String
+      ON_FILE_ACCESS: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    module IpAddressType
+      IPV4_ONLY: String
+      IPV6_ONLY: String
+      DUAL_STACK: String
+    end
+
+    module LifeCycleState
+      available: String
+      creating: String
+      deleting: String
+      deleted: String
+      error: String
+      updating: String
+    end
+
+    class ListAccessPointsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_arn: String,
+        ?access_point_id: String,
+        ?file_system_id: String,
+        ?status: String,
+        ?owner_id: String,
+        ?posix_user: Types::PosixUser,
+        ?root_directory: Types::RootDirectory,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_arn: String?
+      attr_accessor access_point_id: String?
+      attr_accessor file_system_id: String?
+      attr_accessor status: String?
+      attr_accessor owner_id: String?
+      attr_accessor posix_user: Types::PosixUser?
+      attr_accessor root_directory: Types::RootDirectory?
+      attr_accessor name: String?
+    end
+
+    class ListAccessPointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAccessPointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?access_points: Array[Types::ListAccessPointsDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor access_points: Array[Types::ListAccessPointsDescription]?
+    end
+
+    class ListFileSystemsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?file_system_arn: String,
+        ?file_system_id: String,
+        ?name: String,
+        ?bucket: String,
+        ?status: String,
+        ?status_message: String,
+        ?role_arn: String,
+        ?owner_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor file_system_arn: String?
+      attr_accessor file_system_id: String?
+      attr_accessor name: String?
+      attr_accessor bucket: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor role_arn: String?
+      attr_accessor owner_id: String?
+    end
+
+    class ListFileSystemsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFileSystemsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?file_systems: Array[Types::ListFileSystemsDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor file_systems: Array[Types::ListFileSystemsDescription]?
+    end
+
+    class ListMountTargetsDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone_id: String,
+        ?file_system_id: String,
+        ?ipv4_address: String,
+        ?ipv6_address: String,
+        ?status: String,
+        ?status_message: String,
+        ?mount_target_id: String,
+        ?network_interface_id: String,
+        ?owner_id: String,
+        ?subnet_id: String,
+        ?vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone_id: String?
+      attr_accessor file_system_id: String?
+      attr_accessor ipv4_address: String?
+      attr_accessor ipv6_address: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor mount_target_id: String?
+      attr_accessor network_interface_id: String?
+      attr_accessor owner_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor vpc_id: String?
+    end
+
+    class ListMountTargetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?access_point_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor access_point_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMountTargetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?mount_targets: Array[Types::ListMountTargetsDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor mount_targets: Array[Types::ListMountTargetsDescription]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class PosixUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uid: Integer,
+        ?gid: Integer,
+        ?secondary_gids: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uid: Integer?
+      attr_accessor gid: Integer?
+      attr_accessor secondary_gids: Array[Integer]?
+    end
+
+    class PutFileSystemPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor policy: String?
+    end
+
+    class PutFileSystemPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutSynchronizationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?latest_version_number: Integer,
+        ?import_data_rules: Array[Types::ImportDataRule],
+        ?expiration_data_rules: Array[Types::ExpirationDataRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor latest_version_number: Integer?
+      attr_accessor import_data_rules: Array[Types::ImportDataRule]?
+      attr_accessor expiration_data_rules: Array[Types::ExpirationDataRule]?
+    end
+
+    class PutSynchronizationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class RootDirectory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?creation_permissions: Types::CreationPermissions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor creation_permissions: Types::CreationPermissions?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateMountTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mount_target_id: String,
+        ?security_groups: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mount_target_id: String?
+      attr_accessor security_groups: Array[String]?
+    end
+
+    class UpdateMountTargetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone_id: String,
+        ?owner_id: String,
+        ?mount_target_id: String,
+        ?file_system_id: String,
+        ?subnet_id: String,
+        ?ipv4_address: String,
+        ?ipv6_address: String,
+        ?network_interface_id: String,
+        ?vpc_id: String,
+        ?security_groups: Array[String],
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone_id: String?
+      attr_accessor owner_id: String?
+      attr_accessor mount_target_id: String?
+      attr_accessor file_system_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor ipv4_address: String?
+      attr_accessor ipv6_address: String?
+      attr_accessor network_interface_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor security_groups: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+  end
+end

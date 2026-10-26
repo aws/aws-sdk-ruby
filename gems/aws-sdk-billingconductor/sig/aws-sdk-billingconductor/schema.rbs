@@ -18,12 +18,15 @@ module Aws::Billingconductor
     AssociatePricingRulesOperationInput: StructureShape
     AssociatePricingRulesOperationOutput: StructureShape
     AssociateResourceError: StructureShape
-    AssociateResourceErrorReason: StringShape
+    AssociateResourceErrorReason: EnumShape
     AssociateResourceResponseElement: StructureShape
     AssociateResourcesResponseList: ListShape
     Association: StringShape
     Attribute: StructureShape
+    AttributeValue: StringShape
+    AttributeValueList: ListShape
     AttributesList: ListShape
+    AutoTransferBillingGroupCreationPreference: StructureShape
     BatchAssociateResourcesToCustomLineItemOperationInput: StructureShape
     BatchAssociateResourcesToCustomLineItemOperationOutput: StructureShape
     BatchDisassociateResourcesFromCustomLineItemOperationInput: StructureShape
@@ -40,15 +43,18 @@ module Aws::Billingconductor
     BillingGroupList: ListShape
     BillingGroupListElement: StructureShape
     BillingGroupName: StringShape
-    BillingGroupStatus: StringShape
+    BillingGroupStatus: EnumShape
     BillingGroupStatusList: ListShape
     BillingGroupStatusReason: StringShape
+    BillingGroupType: EnumShape
+    BillingGroupTypeList: ListShape
     BillingPeriod: StringShape
     BillingPeriodRange: StructureShape
     ClientToken: StringShape
     ComputationPreference: StructureShape
+    ComputationRuleEnum: EnumShape
     ConflictException: StructureShape
-    ConflictExceptionReason: StringShape
+    ConflictExceptionReason: EnumShape
     CreateBillingGroupOperationInput: StructureShape
     CreateBillingGroupOperationOutput: StructureShape
     CreateCustomLineItemOperationInput: StructureShape
@@ -60,7 +66,7 @@ module Aws::Billingconductor
     CreatePricingRuleOperationOutput: StructureShape
     CreateTieringInput: StructureShape
     Currency: StringShape
-    CurrencyCode: StringShape
+    CurrencyCode: EnumShape
     CustomLineItemArn: StringShape
     CustomLineItemArns: ListShape
     CustomLineItemAssociationElement: StringShape
@@ -79,10 +85,15 @@ module Aws::Billingconductor
     CustomLineItemPercentageChargeDetails: StructureShape
     CustomLineItemPercentageChargeValue: FloatShape
     CustomLineItemProductCode: StringShape
-    CustomLineItemRelationship: StringShape
-    CustomLineItemType: StringShape
+    CustomLineItemRelationship: EnumShape
+    CustomLineItemType: EnumShape
     CustomLineItemVersionList: ListShape
     CustomLineItemVersionListElement: StructureShape
+    CustomTier: StructureShape
+    CustomTierBeginRangeInclusive: FloatShape
+    CustomTierEndRangeExclusive: FloatShape
+    CustomTierRateValue: FloatShape
+    CustomTiersList: ListShape
     DeleteBillingGroupOperationInput: StructureShape
     DeleteBillingGroupOperationOutput: StructureShape
     DeleteCustomLineItemOperationInput: StructureShape
@@ -100,13 +111,15 @@ module Aws::Billingconductor
     FreeTierConfig: StructureShape
     GetBillingGroupCostReportInput: StructureShape
     GetBillingGroupCostReportOutput: StructureShape
-    GroupByAttributeName: StringShape
+    GetBillingTransferPreferenceInput: StructureShape
+    GetBillingTransferPreferenceOutput: StructureShape
+    GroupByAttributeName: EnumShape
     GroupByAttributesList: ListShape
     Instant: IntegerShape
     InternalServerException: StructureShape
     LineItemFilter: StructureShape
-    LineItemFilterAttributeName: StringShape
-    LineItemFilterValue: StringShape
+    LineItemFilterAttributeName: EnumShape
+    LineItemFilterValue: EnumShape
     LineItemFilterValuesList: ListShape
     LineItemFiltersList: ListShape
     ListAccountAssociationsFilter: StructureShape
@@ -148,7 +161,7 @@ module Aws::Billingconductor
     ListTagsForResourceOutput: StructureShape
     Margin: StringShape
     MarginPercentage: StringShape
-    MatchOption: StringShape
+    MatchOption: EnumShape
     MaxBillingGroupCostReportResults: IntegerShape
     MaxBillingGroupResults: IntegerShape
     MaxCustomLineItemResults: IntegerShape
@@ -160,6 +173,7 @@ module Aws::Billingconductor
     NumberOfAssociations: IntegerShape
     NumberOfPricingPlansAssociatedWith: IntegerShape
     Operation: StringShape
+    PresentationObject: StructureShape
     PricingPlanArn: StringShape
     PricingPlanArns: ListShape
     PricingPlanDescription: StringShape
@@ -175,14 +189,21 @@ module Aws::Billingconductor
     PricingRuleList: ListShape
     PricingRuleListElement: StructureShape
     PricingRuleName: StringShape
-    PricingRuleScope: StringShape
-    PricingRuleType: StringShape
+    PricingRuleScope: EnumShape
+    PricingRuleType: EnumShape
+    PrimaryAccountIdList: ListShape
     ProformaCost: StringShape
     ResourceNotFoundException: StructureShape
+    ResponsibilityTransferArn: StringShape
+    ResponsibilityTransferArnsList: ListShape
     RetryAfterSeconds: IntegerShape
+    SearchOption: EnumShape
+    SearchValue: StringShape
     Service: StringShape
     ServiceLimitExceededException: StructureShape
     String: StringShape
+    StringSearch: StructureShape
+    StringSearches: ListShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagMap: MapShape
@@ -198,6 +219,8 @@ module Aws::Billingconductor
     UpdateBillingGroupAccountGrouping: StructureShape
     UpdateBillingGroupOperationInput: StructureShape
     UpdateBillingGroupOperationOutput: StructureShape
+    UpdateBillingTransferPreferenceInput: StructureShape
+    UpdateBillingTransferPreferenceOutput: StructureShape
     UpdateCustomLineItemChargeDetails: StructureShape
     UpdateCustomLineItemFlatChargeDetails: StructureShape
     UpdateCustomLineItemOperationInput: StructureShape
@@ -213,7 +236,7 @@ module Aws::Billingconductor
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
-    ValidationExceptionReason: StringShape
+    ValidationExceptionReason: EnumShape
 
     AWSBillingConductor: ServiceShape
   end

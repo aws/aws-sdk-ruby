@@ -51,6 +51,186 @@ module Aws::Odb
       ?marketplace_registration_token: String
     ) -> _AcceptMarketplaceRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptMarketplaceRegistrationResponse
 
+    interface _AssociateIamRoleToResourceResponse
+      include Smithy::Client::_Response[Types::AssociateIamRoleToResourceOutput]
+    end
+    def associate_iam_role_to_resource: (
+      ?iam_role_arn: String,
+      ?aws_integration: String,
+      ?resource_arn: String
+    ) -> _AssociateIamRoleToResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateIamRoleToResourceResponse
+
+    interface _AssociateVirtualMachinesToExadbVmClusterResponse
+      include Smithy::Client::_Response[Types::AssociateVirtualMachinesToExadbVmClusterOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def exadb_vm_cluster_id: () -> String?
+    end
+    def associate_virtual_machines_to_exadb_vm_cluster: (
+      ?exadb_vm_cluster_id: String,
+      ?desired_node_count: Integer
+    ) -> _AssociateVirtualMachinesToExadbVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateVirtualMachinesToExadbVmClusterResponse
+
+    interface _CreateAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::CreateAutonomousDatabaseOutput]
+      def autonomous_database_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def create_autonomous_database: (
+      ?odb_network_id: String,
+      ?display_name: String,
+      ?db_name: String,
+      ?admin_password: String,
+      ?compute_count: Float,
+      ?data_storage_size_in_t_bs: Integer,
+      ?data_storage_size_in_g_bs: Integer,
+      ?db_workload: String,
+      ?is_auto_scaling_enabled: bool,
+      ?is_auto_scaling_for_storage_enabled: bool,
+      ?license_model: String,
+      ?character_set: String,
+      ?ncharacter_set: String,
+      ?db_version: String,
+      ?database_edition: String,
+      ?standby_allowlisted_ips_source: String,
+      ?autonomous_maintenance_schedule_type: String,
+      ?backup_retention_period_in_days: Integer,
+      ?byol_compute_count_limit: Float,
+      ?cpu_core_count: Integer,
+      ?customer_contacts_to_send_to_oci: Array[
+        {
+          email: String
+        }
+      ],
+      ?private_endpoint_ip: String,
+      ?private_endpoint_label: String,
+      ?resource_pool_leader_id: String,
+      ?resource_pool_summary: {
+        is_disabled: bool,
+        pool_size: Integer,
+        pool_storage_size_in_t_bs: untyped,
+        available_storage_capacity_in_t_bs: Float,
+        total_compute_capacity: untyped,
+        available_compute_capacity: untyped
+      },
+      ?scheduled_operations: Array[
+        {
+          day_of_week: {
+            name: String
+          },
+          scheduled_start_time: String,
+          scheduled_stop_time: untyped
+        }
+      ],
+      ?standby_allowlisted_ips: Array[String],
+      ?allowlisted_ips: Array[String],
+      ?transportable_tablespace: {
+        tts_bundle_url: String
+      },
+      ?is_backup_retention_locked: bool,
+      ?is_local_data_guard_enabled: bool,
+      ?is_mtls_connection_required: bool,
+      ?db_tools_details: Array[
+        {
+          is_enabled: bool,
+          name: String,
+          compute_count: Float,
+          max_idle_time_in_minutes: Integer
+        }
+      ],
+      ?source: String,
+      ?source_configuration: {
+        database_clone: {
+          source_autonomous_database_id: String,
+          clone_type: String
+        },
+        restore_from_backup: {
+          autonomous_database_backup_id: untyped,
+          clone_type: untyped,
+          clone_table_space_list: Array[Integer]
+        },
+        point_in_time_restore: {
+          source_autonomous_database_id: untyped,
+          clone_type: untyped,
+          timestamp: Time,
+          use_latest_available_backup_timestamp: bool,
+          clone_table_space_list: untyped
+        },
+        cross_region_data_guard: {
+          source_autonomous_database_arn: String
+        },
+        cross_region_disaster_recovery: {
+          source_autonomous_database_arn: untyped,
+          remote_disaster_recovery_type: String,
+          is_replicate_automatic_backups: untyped
+        },
+        clone_to_refreshable: {
+          source_autonomous_database_id: untyped,
+          refreshable_mode: String,
+          auto_refresh_frequency_in_seconds: Integer,
+          auto_refresh_point_lag_in_seconds: untyped,
+          time_of_auto_refresh_start: untyped,
+          open_mode: String,
+          clone_type: untyped
+        }
+      },
+      ?encryption_key_provider: String,
+      ?encryption_key_configuration: {
+        aws_encryption_key: {
+          iam_role_arn: String,
+          external_id_type: String,
+          kms_key_id: String
+        }
+      },
+      ?admin_password_source: String,
+      ?admin_password_source_configuration: {
+        customer_managed_aws_secret: {
+          secret_id: String,
+          iam_role_arn: String,
+          external_id_type: String
+        }
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutonomousDatabaseResponse
+
+    interface _CreateAutonomousDatabaseBackupResponse
+      include Smithy::Client::_Response[Types::CreateAutonomousDatabaseBackupOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def autonomous_database_backup_id: () -> String?
+    end
+    def create_autonomous_database_backup: (
+      ?autonomous_database_id: String,
+      ?display_name: String,
+      ?retention_period_in_days: Integer,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateAutonomousDatabaseBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutonomousDatabaseBackupResponse
+
+    interface _CreateAutonomousDatabaseWalletResponse
+      include Smithy::Client::_Response[Types::CreateAutonomousDatabaseWalletOutput]
+      def autonomous_database_wallet_file: () -> String?
+    end
+    def create_autonomous_database_wallet: (
+      ?autonomous_database_id: String,
+      ?wallet_type: String,
+      ?password: String,
+      ?password_source: String,
+      ?password_source_configuration: {
+        customer_managed_aws_secret: {
+          secret_id: String,
+          iam_role_arn: String,
+          external_id_type: String
+        }
+      },
+      ?client_token: String
+    ) -> _CreateAutonomousDatabaseWalletResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutonomousDatabaseWalletResponse
+
     interface _CreateCloudAutonomousVmClusterResponse
       include Smithy::Client::_Response[Types::CreateCloudAutonomousVmClusterOutput]
       def display_name: () -> String?
@@ -177,6 +357,62 @@ module Aws::Odb
       ?scan_listener_port_tcp: Integer
     ) -> _CreateCloudVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudVmClusterResponse
 
+    interface _CreateExadbVmClusterResponse
+      include Smithy::Client::_Response[Types::CreateExadbVmClusterOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def exadb_vm_cluster_id: () -> String?
+    end
+    def create_exadb_vm_cluster: (
+      ?display_name: String,
+      ?enabled_ecpu_count: Integer,
+      ?exascale_db_storage_vault_id: String,
+      ?grid_image_id: String,
+      ?hostname: String,
+      ?node_count: Integer,
+      ?odb_network_id: String,
+      ?shape: String,
+      ?ssh_public_keys: Array[String],
+      ?total_ecpu_count: Integer,
+      ?vm_file_system_storage_total_size_in_g_bs: Integer,
+      ?cluster_name: String,
+      ?data_collection_options: {
+        is_diagnostics_events_enabled: bool,
+        is_health_monitoring_enabled: untyped,
+        is_incident_logs_enabled: untyped
+      },
+      ?license_model: String,
+      ?scan_listener_port_tcp: Integer,
+      ?scan_listener_port_tcp_ssl: Integer,
+      ?shape_attribute: String,
+      ?system_version: String,
+      ?tags: Hash[String, String],
+      ?time_zone: String,
+      ?client_token: String
+    ) -> _CreateExadbVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExadbVmClusterResponse
+
+    interface _CreateExascaleDbStorageVaultResponse
+      include Smithy::Client::_Response[Types::CreateExascaleDbStorageVaultOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def exascale_db_storage_vault_id: () -> String?
+    end
+    def create_exascale_db_storage_vault: (
+      ?display_name: String,
+      ?high_capacity_database_storage_total_size_in_g_bs: Integer,
+      ?additional_flash_cache_in_percent: Integer,
+      ?autoscale_limit_in_g_bs: Integer,
+      ?availability_zone_id: String,
+      ?availability_zone: String,
+      ?description: String,
+      ?is_autoscale_enabled: bool,
+      ?tags: Hash[String, String],
+      ?time_zone: String,
+      ?client_token: String
+    ) -> _CreateExascaleDbStorageVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExascaleDbStorageVaultResponse
+
     interface _CreateOdbNetworkResponse
       include Smithy::Client::_Response[Types::CreateOdbNetworkOutput]
       def display_name: () -> String?
@@ -195,7 +431,12 @@ module Aws::Odb
       ?client_token: String,
       ?s3_access: String,
       ?zero_etl_access: String,
+      ?sts_access: String,
+      ?kms_access: String,
       ?s3_policy_document: String,
+      ?sts_policy_document: String,
+      ?kms_policy_document: String,
+      ?cross_region_s3_restore_sources_to_enable: Array[String],
       ?tags: Hash[String, String]
     ) -> _CreateOdbNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOdbNetworkResponse
 
@@ -210,9 +451,25 @@ module Aws::Odb
       ?odb_network_id: String,
       ?peer_network_id: String,
       ?display_name: String,
+      ?peer_network_cidrs_to_be_added: Array[String],
+      ?peer_network_route_table_ids: Array[String],
       ?client_token: String,
       ?tags: Hash[String, String]
     ) -> _CreateOdbPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOdbPeeringConnectionResponse
+
+    interface _DeleteAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::DeleteAutonomousDatabaseOutput]
+    end
+    def delete_autonomous_database: (
+      ?autonomous_database_id: String
+    ) -> _DeleteAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutonomousDatabaseResponse
+
+    interface _DeleteAutonomousDatabaseBackupResponse
+      include Smithy::Client::_Response[Types::DeleteAutonomousDatabaseBackupOutput]
+    end
+    def delete_autonomous_database_backup: (
+      ?autonomous_database_backup_id: String
+    ) -> _DeleteAutonomousDatabaseBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutonomousDatabaseBackupResponse
 
     interface _DeleteCloudAutonomousVmClusterResponse
       include Smithy::Client::_Response[Types::DeleteCloudAutonomousVmClusterOutput]
@@ -235,6 +492,20 @@ module Aws::Odb
       ?cloud_vm_cluster_id: String
     ) -> _DeleteCloudVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCloudVmClusterResponse
 
+    interface _DeleteExadbVmClusterResponse
+      include Smithy::Client::_Response[Types::DeleteExadbVmClusterOutput]
+    end
+    def delete_exadb_vm_cluster: (
+      ?exadb_vm_cluster_id: String
+    ) -> _DeleteExadbVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExadbVmClusterResponse
+
+    interface _DeleteExascaleDbStorageVaultResponse
+      include Smithy::Client::_Response[Types::DeleteExascaleDbStorageVaultOutput]
+    end
+    def delete_exascale_db_storage_vault: (
+      ?exascale_db_storage_vault_id: String
+    ) -> _DeleteExascaleDbStorageVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExascaleDbStorageVaultResponse
+
     interface _DeleteOdbNetworkResponse
       include Smithy::Client::_Response[Types::DeleteOdbNetworkOutput]
     end
@@ -249,6 +520,63 @@ module Aws::Odb
     def delete_odb_peering_connection: (
       ?odb_peering_connection_id: String
     ) -> _DeleteOdbPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOdbPeeringConnectionResponse
+
+    interface _DisassociateIamRoleFromResourceResponse
+      include Smithy::Client::_Response[Types::DisassociateIamRoleFromResourceOutput]
+    end
+    def disassociate_iam_role_from_resource: (
+      ?iam_role_arn: String,
+      ?aws_integration: String,
+      ?resource_arn: String
+    ) -> _DisassociateIamRoleFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateIamRoleFromResourceResponse
+
+    interface _DisassociateVirtualMachinesFromExadbVmClusterResponse
+      include Smithy::Client::_Response[Types::DisassociateVirtualMachinesFromExadbVmClusterOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def exadb_vm_cluster_id: () -> String?
+    end
+    def disassociate_virtual_machines_from_exadb_vm_cluster: (
+      ?exadb_vm_cluster_id: String,
+      ?db_node_ids: Array[String]
+    ) -> _DisassociateVirtualMachinesFromExadbVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateVirtualMachinesFromExadbVmClusterResponse
+
+    interface _FailoverAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::FailoverAutonomousDatabaseOutput]
+      def autonomous_database_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def failover_autonomous_database: (
+      ?autonomous_database_id: String,
+      ?peer_db_arn: String
+    ) -> _FailoverAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _FailoverAutonomousDatabaseResponse
+
+    interface _GetAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::GetAutonomousDatabaseOutput]
+      def autonomous_database: () -> Types::AutonomousDatabase?
+    end
+    def get_autonomous_database: (
+      ?autonomous_database_id: String
+    ) -> _GetAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutonomousDatabaseResponse
+
+    interface _GetAutonomousDatabaseBackupResponse
+      include Smithy::Client::_Response[Types::GetAutonomousDatabaseBackupOutput]
+      def autonomous_database_backup: () -> Types::AutonomousDatabaseBackup?
+    end
+    def get_autonomous_database_backup: (
+      ?autonomous_database_backup_id: String
+    ) -> _GetAutonomousDatabaseBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutonomousDatabaseBackupResponse
+
+    interface _GetAutonomousDatabaseWalletDetailsResponse
+      include Smithy::Client::_Response[Types::GetAutonomousDatabaseWalletDetailsOutput]
+      def autonomous_database_wallet_details: () -> Types::AutonomousDatabaseWalletDetails?
+    end
+    def get_autonomous_database_wallet_details: (
+      ?autonomous_database_id: String
+    ) -> _GetAutonomousDatabaseWalletDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutonomousDatabaseWalletDetailsResponse
 
     interface _GetCloudAutonomousVmClusterResponse
       include Smithy::Client::_Response[Types::GetCloudAutonomousVmClusterOutput]
@@ -289,6 +617,7 @@ module Aws::Odb
     end
     def get_db_node: (
       ?cloud_vm_cluster_id: String,
+      ?exadb_vm_cluster_id: String,
       ?db_node_id: String
     ) -> _GetDbNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDbNodeResponse
 
@@ -301,11 +630,32 @@ module Aws::Odb
       ?db_server_id: String
     ) -> _GetDbServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDbServerResponse
 
+    interface _GetExadbVmClusterResponse
+      include Smithy::Client::_Response[Types::GetExadbVmClusterOutput]
+      def exadb_vm_cluster: () -> Types::ExadbVmCluster?
+    end
+    def get_exadb_vm_cluster: (
+      ?exadb_vm_cluster_id: String
+    ) -> _GetExadbVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExadbVmClusterResponse
+
+    interface _GetExascaleDbStorageVaultResponse
+      include Smithy::Client::_Response[Types::GetExascaleDbStorageVaultOutput]
+      def exascale_db_storage_vault: () -> Types::ExascaleDbStorageVault?
+    end
+    def get_exascale_db_storage_vault: (
+      ?exascale_db_storage_vault_id: String
+    ) -> _GetExascaleDbStorageVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExascaleDbStorageVaultResponse
+
     interface _GetOciOnboardingStatusResponse
       include Smithy::Client::_Response[Types::GetOciOnboardingStatusOutput]
       def status: () -> String?
       def existing_tenancy_activation_link: () -> String?
       def new_tenancy_activation_link: () -> String?
+      def oci_identity_domain: () -> Types::OciIdentityDomain?
+      def autonomous_database_oci_integration_iam_roles: () -> Array[Types::OciIamRole]?
+      def linked_oci_tenancy_id: () -> String?
+      def linked_oci_compartment_id: () -> String?
+      def subscription_errors: () -> Array[Types::SubscriptionError]?
     end
     def get_oci_onboarding_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOciOnboardingStatusResponse
 
@@ -328,7 +678,77 @@ module Aws::Odb
     interface _InitializeServiceResponse
       include Smithy::Client::_Response[Types::InitializeServiceOutput]
     end
-    def initialize_service: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitializeServiceResponse
+    def initialize_service: (
+      ?oci_identity_domain: bool,
+      ?autonomous_database_oci_aws_secrets_manager_integration: String
+    ) -> _InitializeServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitializeServiceResponse
+
+    interface _ListAutonomousDatabaseBackupsResponse
+      include Smithy::Client::_Response[Types::ListAutonomousDatabaseBackupsOutput]
+      def next_token: () -> String?
+      def autonomous_database_backups: () -> Array[Types::AutonomousDatabaseBackupSummary]?
+    end
+    def list_autonomous_database_backups: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?autonomous_database_id: String,
+      ?status: String,
+      ?type: String
+    ) -> _ListAutonomousDatabaseBackupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutonomousDatabaseBackupsResponse
+
+    interface _ListAutonomousDatabaseCharacterSetsResponse
+      include Smithy::Client::_Response[Types::ListAutonomousDatabaseCharacterSetsOutput]
+      def next_token: () -> String?
+      def autonomous_database_character_sets: () -> Array[Types::AutonomousDatabaseCharacterSetSummary]?
+    end
+    def list_autonomous_database_character_sets: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?character_set_type: String
+    ) -> _ListAutonomousDatabaseCharacterSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutonomousDatabaseCharacterSetsResponse
+
+    interface _ListAutonomousDatabaseClonesResponse
+      include Smithy::Client::_Response[Types::ListAutonomousDatabaseClonesOutput]
+      def next_token: () -> String?
+      def autonomous_database_clones: () -> Array[Types::AutonomousDatabaseSummary]?
+    end
+    def list_autonomous_database_clones: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?autonomous_database_id: String
+    ) -> _ListAutonomousDatabaseClonesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutonomousDatabaseClonesResponse
+
+    interface _ListAutonomousDatabasePeersResponse
+      include Smithy::Client::_Response[Types::ListAutonomousDatabasePeersOutput]
+      def next_token: () -> String?
+      def autonomous_database_peers: () -> Array[Types::AutonomousDatabasePeerSummary]?
+    end
+    def list_autonomous_database_peers: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?autonomous_database_id: String
+    ) -> _ListAutonomousDatabasePeersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutonomousDatabasePeersResponse
+
+    interface _ListAutonomousDatabaseVersionsResponse
+      include Smithy::Client::_Response[Types::ListAutonomousDatabaseVersionsOutput]
+      def next_token: () -> String?
+      def autonomous_database_versions: () -> Array[Types::AutonomousDatabaseVersionSummary]?
+    end
+    def list_autonomous_database_versions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?db_workload: String
+    ) -> _ListAutonomousDatabaseVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutonomousDatabaseVersionsResponse
+
+    interface _ListAutonomousDatabasesResponse
+      include Smithy::Client::_Response[Types::ListAutonomousDatabasesOutput]
+      def next_token: () -> String?
+      def autonomous_databases: () -> Array[Types::AutonomousDatabaseSummary]?
+    end
+    def list_autonomous_databases: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAutonomousDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutonomousDatabasesResponse
 
     interface _ListAutonomousVirtualMachinesResponse
       include Smithy::Client::_Response[Types::ListAutonomousVirtualMachinesOutput]
@@ -381,7 +801,8 @@ module Aws::Odb
     def list_db_nodes: (
       ?max_results: Integer,
       ?next_token: String,
-      ?cloud_vm_cluster_id: String
+      ?cloud_vm_cluster_id: String,
+      ?exadb_vm_cluster_id: String
     ) -> _ListDbNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDbNodesResponse
 
     interface _ListDbServersResponse
@@ -404,8 +825,55 @@ module Aws::Odb
       ?max_results: Integer,
       ?next_token: String,
       ?availability_zone: String,
-      ?availability_zone_id: String
+      ?availability_zone_id: String,
+      ?shape_family: String
     ) -> _ListDbSystemShapesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDbSystemShapesResponse
+
+    interface _ListExadbVmClustersResponse
+      include Smithy::Client::_Response[Types::ListExadbVmClustersOutput]
+      def next_token: () -> String?
+      def exadb_vm_clusters: () -> Array[Types::ExadbVmClusterSummary]?
+    end
+    def list_exadb_vm_clusters: (
+      ?exascale_db_storage_vault_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExadbVmClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExadbVmClustersResponse
+
+    interface _ListExascaleDbStorageVaultsResponse
+      include Smithy::Client::_Response[Types::ListExascaleDbStorageVaultsOutput]
+      def next_token: () -> String?
+      def exascale_db_storage_vaults: () -> Array[Types::ExascaleDbStorageVaultSummary]?
+    end
+    def list_exascale_db_storage_vaults: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExascaleDbStorageVaultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExascaleDbStorageVaultsResponse
+
+    interface _ListFlexComponentsResponse
+      include Smithy::Client::_Response[Types::ListFlexComponentsOutput]
+      def next_token: () -> String?
+      def flex_components: () -> Array[Types::FlexComponentSummary]?
+    end
+    def list_flex_components: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?shape: String
+    ) -> _ListFlexComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlexComponentsResponse
+
+    interface _ListGiMinorVersionsResponse
+      include Smithy::Client::_Response[Types::ListGiMinorVersionsOutput]
+      def next_token: () -> String?
+      def gi_minor_versions: () -> Array[Types::GiMinorVersionSummary]?
+    end
+    def list_gi_minor_versions: (
+      ?gi_version: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?shape_family: String,
+      ?availability_zone: String,
+      ?availability_zone_id: String
+    ) -> _ListGiMinorVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGiMinorVersionsResponse
 
     interface _ListGiVersionsResponse
       include Smithy::Client::_Response[Types::ListGiVersionsOutput]
@@ -459,6 +927,18 @@ module Aws::Odb
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _RebootAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::RebootAutonomousDatabaseOutput]
+      def autonomous_database_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def reboot_autonomous_database: (
+      ?autonomous_database_id: String,
+      ?is_online_reboot: bool
+    ) -> _RebootAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootAutonomousDatabaseResponse
+
     interface _RebootDbNodeResponse
       include Smithy::Client::_Response[Types::RebootDbNodeOutput]
       def db_node_id: () -> String?
@@ -467,8 +947,43 @@ module Aws::Odb
     end
     def reboot_db_node: (
       ?cloud_vm_cluster_id: String,
+      ?exadb_vm_cluster_id: String,
       ?db_node_id: String
     ) -> _RebootDbNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootDbNodeResponse
+
+    interface _RestoreAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::RestoreAutonomousDatabaseOutput]
+      def autonomous_database_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def restore_autonomous_database: (
+      ?autonomous_database_id: String,
+      ?timestamp: Time
+    ) -> _RestoreAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreAutonomousDatabaseResponse
+
+    interface _ShrinkAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::ShrinkAutonomousDatabaseOutput]
+      def autonomous_database_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def shrink_autonomous_database: (
+      ?autonomous_database_id: String
+    ) -> _ShrinkAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ShrinkAutonomousDatabaseResponse
+
+    interface _StartAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::StartAutonomousDatabaseOutput]
+      def autonomous_database_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def start_autonomous_database: (
+      ?autonomous_database_id: String
+    ) -> _StartAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAutonomousDatabaseResponse
 
     interface _StartDbNodeResponse
       include Smithy::Client::_Response[Types::StartDbNodeOutput]
@@ -478,8 +993,20 @@ module Aws::Odb
     end
     def start_db_node: (
       ?cloud_vm_cluster_id: String,
+      ?exadb_vm_cluster_id: String,
       ?db_node_id: String
     ) -> _StartDbNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDbNodeResponse
+
+    interface _StopAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::StopAutonomousDatabaseOutput]
+      def autonomous_database_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def stop_autonomous_database: (
+      ?autonomous_database_id: String
+    ) -> _StopAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAutonomousDatabaseResponse
 
     interface _StopDbNodeResponse
       include Smithy::Client::_Response[Types::StopDbNodeOutput]
@@ -489,8 +1016,21 @@ module Aws::Odb
     end
     def stop_db_node: (
       ?cloud_vm_cluster_id: String,
+      ?exadb_vm_cluster_id: String,
       ?db_node_id: String
     ) -> _StopDbNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDbNodeResponse
+
+    interface _SwitchoverAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::SwitchoverAutonomousDatabaseOutput]
+      def autonomous_database_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def switchover_autonomous_database: (
+      ?autonomous_database_id: String,
+      ?peer_db_arn: String
+    ) -> _SwitchoverAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SwitchoverAutonomousDatabaseResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
@@ -507,6 +1047,116 @@ module Aws::Odb
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAutonomousDatabaseResponse
+      include Smithy::Client::_Response[Types::UpdateAutonomousDatabaseOutput]
+      def autonomous_database_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def update_autonomous_database: (
+      ?autonomous_database_id: String,
+      ?admin_password: String,
+      ?compute_count: Float,
+      ?cpu_core_count: Integer,
+      ?data_storage_size_in_t_bs: Integer,
+      ?data_storage_size_in_g_bs: Integer,
+      ?display_name: String,
+      ?db_name: String,
+      ?db_version: String,
+      ?db_workload: String,
+      ?db_tools_details: Array[
+        {
+          is_enabled: bool,
+          name: String,
+          compute_count: Float,
+          max_idle_time_in_minutes: Integer
+        }
+      ],
+      ?database_edition: String,
+      ?license_model: String,
+      ?is_auto_scaling_enabled: bool,
+      ?is_auto_scaling_for_storage_enabled: bool,
+      ?is_backup_retention_locked: bool,
+      ?is_local_data_guard_enabled: bool,
+      ?is_mtls_connection_required: bool,
+      ?is_refreshable_clone: bool,
+      ?is_disconnect_peer: bool,
+      ?backup_retention_period_in_days: Integer,
+      ?byol_compute_count_limit: Float,
+      ?local_adg_auto_failover_max_data_loss_limit: Integer,
+      ?autonomous_maintenance_schedule_type: String,
+      ?customer_contacts_to_send_to_oci: Array[
+        {
+          email: String
+        }
+      ],
+      ?scheduled_operations: Array[
+        {
+          day_of_week: {
+            name: String
+          },
+          scheduled_start_time: String,
+          scheduled_stop_time: untyped
+        }
+      ],
+      ?long_term_backup_schedule: {
+        is_disabled: bool,
+        repeat_cadence: String,
+        retention_period_in_days: Integer,
+        time_of_backup: Time
+      },
+      ?open_mode: String,
+      ?permission_level: String,
+      ?refreshable_mode: String,
+      ?private_endpoint_ip: String,
+      ?private_endpoint_label: String,
+      ?peer_db_id: String,
+      ?resource_pool_leader_id: String,
+      ?resource_pool_summary: {
+        is_disabled: bool,
+        pool_size: Integer,
+        pool_storage_size_in_t_bs: untyped,
+        available_storage_capacity_in_t_bs: Float,
+        total_compute_capacity: untyped,
+        available_compute_capacity: untyped
+      },
+      ?standby_allowlisted_ips_source: String,
+      ?standby_allowlisted_ips: Array[String],
+      ?allowlisted_ips: Array[String],
+      ?auto_refresh_frequency_in_seconds: Integer,
+      ?auto_refresh_point_lag_in_seconds: Integer,
+      ?time_of_auto_refresh_start: Time,
+      ?encryption_key_provider: String,
+      ?encryption_key_configuration: {
+        aws_encryption_key: {
+          iam_role_arn: String,
+          external_id_type: String,
+          kms_key_id: String
+        }
+      },
+      ?admin_password_source: String,
+      ?admin_password_source_configuration: {
+        customer_managed_aws_secret: {
+          secret_id: String,
+          iam_role_arn: String,
+          external_id_type: String
+        }
+      }
+    ) -> _UpdateAutonomousDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutonomousDatabaseResponse
+
+    interface _UpdateAutonomousDatabaseBackupResponse
+      include Smithy::Client::_Response[Types::UpdateAutonomousDatabaseBackupOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def autonomous_database_backup_id: () -> String?
+    end
+    def update_autonomous_database_backup: (
+      ?autonomous_database_backup_id: String,
+      ?retention_period_in_days: Integer
+    ) -> _UpdateAutonomousDatabaseBackupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutonomousDatabaseBackupResponse
 
     interface _UpdateCloudExadataInfrastructureResponse
       include Smithy::Client::_Response[Types::UpdateCloudExadataInfrastructureOutput]
@@ -539,6 +1189,48 @@ module Aws::Odb
       }
     ) -> _UpdateCloudExadataInfrastructureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCloudExadataInfrastructureResponse
 
+    interface _UpdateExadbVmClusterResponse
+      include Smithy::Client::_Response[Types::UpdateExadbVmClusterOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def exadb_vm_cluster_id: () -> String?
+    end
+    def update_exadb_vm_cluster: (
+      ?exadb_vm_cluster_id: String,
+      ?data_collection_options: {
+        is_diagnostics_events_enabled: bool,
+        is_health_monitoring_enabled: untyped,
+        is_incident_logs_enabled: untyped
+      },
+      ?display_name: String,
+      ?enabled_ecpu_count: Integer,
+      ?grid_image_id: String,
+      ?license_model: String,
+      ?ssh_public_keys: Array[String],
+      ?system_version: String,
+      ?total_ecpu_count: Integer,
+      ?update_action: String,
+      ?vm_file_system_storage_total_size_in_g_bs: Integer
+    ) -> _UpdateExadbVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExadbVmClusterResponse
+
+    interface _UpdateExascaleDbStorageVaultResponse
+      include Smithy::Client::_Response[Types::UpdateExascaleDbStorageVaultOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def exascale_db_storage_vault_id: () -> String?
+    end
+    def update_exascale_db_storage_vault: (
+      ?exascale_db_storage_vault_id: String,
+      ?additional_flash_cache_in_percent: Integer,
+      ?autoscale_limit_in_g_bs: Integer,
+      ?description: String,
+      ?display_name: String,
+      ?high_capacity_database_storage_total_size_in_g_bs: Integer,
+      ?is_autoscale_enabled: bool
+    ) -> _UpdateExascaleDbStorageVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExascaleDbStorageVaultResponse
+
     interface _UpdateOdbNetworkResponse
       include Smithy::Client::_Response[Types::UpdateOdbNetworkOutput]
       def display_name: () -> String?
@@ -553,7 +1245,27 @@ module Aws::Odb
       ?peered_cidrs_to_be_removed: Array[String],
       ?s3_access: String,
       ?zero_etl_access: String,
-      ?s3_policy_document: String
+      ?sts_access: String,
+      ?kms_access: String,
+      ?s3_policy_document: String,
+      ?sts_policy_document: String,
+      ?kms_policy_document: String,
+      ?cross_region_s3_restore_sources_to_enable: Array[String],
+      ?cross_region_s3_restore_sources_to_disable: Array[String]
     ) -> _UpdateOdbNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOdbNetworkResponse
+
+    interface _UpdateOdbPeeringConnectionResponse
+      include Smithy::Client::_Response[Types::UpdateOdbPeeringConnectionOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def odb_peering_connection_id: () -> String?
+    end
+    def update_odb_peering_connection: (
+      ?odb_peering_connection_id: String,
+      ?display_name: String,
+      ?peer_network_cidrs_to_be_added: Array[String],
+      ?peer_network_cidrs_to_be_removed: Array[String]
+    ) -> _UpdateOdbPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOdbPeeringConnectionResponse
   end
 end

@@ -28,16 +28,10 @@ module Aws::TrustedAdvisor
     #   <p>The lifecycle stage from AWS Trusted Advisor Priority</p>
     #   @return [String]
     # @!attribute updated_on_behalf_of
-    #   <p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information
-    #               is only available when a Technical Account Manager takes an action on a recommendation managed by AWS
-    #               Trusted Advisor Priority
-    #           </p>
+    #   <p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>
     #   @return [String]
     # @!attribute updated_on_behalf_of_job_title
-    #   <p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation.
-    #               This information is only available when a Technical Account Manager takes an action on a recommendation
-    #               managed by AWS Trusted Advisor Priority
-    #           </p>
+    #   <p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>
     #   @return [String]
     # @!attribute update_reason
     #   <p>Reason for the lifecycle stage change</p>
@@ -110,6 +104,18 @@ module Aws::TrustedAdvisor
     # @!attribute metadata
     #   <p>The column headings for the metadata returned in the resource</p>
     #   @return [Hash<String, String>]
+    # @!attribute resource_arn_queryable
+    #   <p>Indicates whether this check is supported by the ListRecommendationsForResource API.</p>
+    #   @return [Boolean]
+    # @!attribute aws_resource_types
+    #   <p>The AWS resource types that this check evaluates (for example, AWS::EC2::Instance).</p>
+    #   @return [Array<String>]
+    # @!attribute check_granularity
+    #   <p>The granularity level at which the check operates: resource, account, or account_region.</p>
+    #   @return [String]
+    # @!attribute recommendation_id
+    #   <p>The recommendation identifier associated with the check.</p>
+    #   @return [String]
     class CheckSummary < Struct.new(
       nil,
       :id,
@@ -120,9 +126,19 @@ module Aws::TrustedAdvisor
       :aws_services,
       :source,
       :metadata,
+      :resource_arn_queryable,
+      :aws_resource_types,
+      :check_granularity,
+      :recommendation_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:resource_arn_queryable] = false unless options.key?(:resource_arn_queryable)
+        options[:aws_resource_types] = [] unless options.key?(:aws_resource_types)
+        super
+      end
     end
 
     # <p>Exception that the request was denied due to conflictions in state</p>
@@ -161,9 +177,13 @@ module Aws::TrustedAdvisor
     # @!attribute recommendation_identifier
     #   <p>The Recommendation identifier</p>
     #   @return [String]
+    # @!attribute language
+    #   <p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>
+    #   @return [String]
     class GetRecommendationRequest < Struct.new(
       nil,
       :recommendation_identifier,
+      :language,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -192,9 +212,7 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -225,9 +243,7 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute check_summaries
     #   <p>The list of Checks</p>
@@ -242,9 +258,7 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -267,9 +281,7 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute account_recommendation_lifecycle_summaries
     #   <p>The account recommendations lifecycles that are applicable to the Recommendation</p>
@@ -284,9 +296,7 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -321,9 +331,7 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute organization_recommendation_resource_summaries
     #   <p>A list of Recommendation Resources</p>
@@ -338,9 +346,7 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -387,9 +393,7 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute organization_recommendation_summaries
     #   <p>The list of Recommendations</p>
@@ -404,9 +408,7 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -423,6 +425,9 @@ module Aws::TrustedAdvisor
     # @!attribute recommendation_identifier
     #   <p>The Recommendation identifier</p>
     #   @return [String]
+    # @!attribute language
+    #   <p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>
+    #   @return [String]
     class ListRecommendationResourcesRequest < Struct.new(
       nil,
       :next_token,
@@ -431,15 +436,14 @@ module Aws::TrustedAdvisor
       :exclusion_status,
       :region_code,
       :recommendation_identifier,
+      :language,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute recommendation_resource_summaries
     #   <p>A list of Recommendation Resources</p>
@@ -454,9 +458,57 @@ module Aws::TrustedAdvisor
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return per page</p>
+    #   @return [Integer]
+    # @!attribute aws_resource_arn
+    #   <p>The ARN of the AWS resource to query recommendations for</p>
+    #   @return [String]
+    # @!attribute pillar
+    #   <p>The pillar that the recommendation belongs to</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the Recommendation Resource</p>
+    #   @return [String]
+    # @!attribute check_arn
+    #   <p>The AWS Trusted Advisor Check ARN that relates to the Recommendation</p>
+    #   @return [String]
+    # @!attribute language
+    #   <p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>
+    #   @return [String]
+    class ListRecommendationsForResourceRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :aws_resource_arn,
+      :pillar,
+      :status,
+      :check_arn,
+      :language,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
+    #   @return [String]
+    # @!attribute recommendation_for_resource_summaries
+    #   <p>List of Trusted Advisor recommendations associated with the given AWS resource</p>
+    #   @return [Array<Types::RecommendationForResourceSummary>]
+    class ListRecommendationsForResourceResponse < Struct.new(
+      nil,
+      :next_token,
+      :recommendation_for_resource_summaries,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -485,6 +537,9 @@ module Aws::TrustedAdvisor
     # @!attribute before_last_updated_at
     #   <p>Before the last update of the Recommendation</p>
     #   @return [Time]
+    # @!attribute language
+    #   <p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>
+    #   @return [String]
     class ListRecommendationsRequest < Struct.new(
       nil,
       :next_token,
@@ -497,15 +552,14 @@ module Aws::TrustedAdvisor
       :check_identifier,
       :after_last_updated_at,
       :before_last_updated_at,
+      :language,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request
-    #               to retrieve the next set of results.
-    #           </p>
+    #   <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>
     #   @return [String]
     # @!attribute recommendation_summaries
     #   <p>The list of Recommendations</p>
@@ -569,16 +623,10 @@ module Aws::TrustedAdvisor
     #   <p>The creator, if created by AWS Trusted Advisor Priority</p>
     #   @return [String]
     # @!attribute updated_on_behalf_of
-    #   <p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information
-    #               is only available when a Technical Account Manager takes an action on a recommendation managed by AWS
-    #               Trusted Advisor Priority
-    #           </p>
+    #   <p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>
     #   @return [String]
     # @!attribute updated_on_behalf_of_job_title
-    #   <p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation.
-    #               This information is only available when a Technical Account Manager takes an action on a recommendation
-    #               managed by AWS Trusted Advisor Priority
-    #           </p>
+    #   <p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>
     #   @return [String]
     # @!attribute update_reason
     #   <p>Reason for the lifecycle stage change</p>
@@ -625,7 +673,7 @@ module Aws::TrustedAdvisor
     #   <p>The ARN of the Recommendation Resource</p>
     #   @return [String]
     # @!attribute aws_resource_id
-    #   <p>The AWS resource identifier</p>
+    #   <p>The AWS resource identifier. There are certain checks that generate recommendation resources without an awsResourceId.</p>
     #   @return [String]
     # @!attribute region_code
     #   <p>The AWS Region code that the Recommendation Resource is in</p>
@@ -777,6 +825,9 @@ module Aws::TrustedAdvisor
     # @!attribute arn
     #   <p>The ARN of the Recommendation</p>
     #   @return [String]
+    # @!attribute status_reason
+    #   <p>This attribute provides additional details about potential discrepancies in check status determination.</p>
+    #   @return [String]
     # @!attribute description
     #   <p>A description for AWS Trusted Advisor recommendations</p>
     #   @return [String]
@@ -784,16 +835,10 @@ module Aws::TrustedAdvisor
     #   <p>The creator, if created by AWS Trusted Advisor Priority</p>
     #   @return [String]
     # @!attribute updated_on_behalf_of
-    #   <p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information
-    #               is only available when a Technical Account Manager takes an action on a recommendation managed by AWS
-    #               Trusted Advisor Priority
-    #           </p>
+    #   <p>The person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>
     #   @return [String]
     # @!attribute updated_on_behalf_of_job_title
-    #   <p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation.
-    #               This information is only available when a Technical Account Manager takes an action on a recommendation
-    #               managed by AWS Trusted Advisor Priority
-    #           </p>
+    #   <p>The job title of the person on whose behalf a Technical Account Manager (TAM) updated the recommendation. This information is only available when a Technical Account Manager takes an action on a recommendation managed by AWS Trusted Advisor Priority </p>
     #   @return [String]
     # @!attribute update_reason
     #   <p>Reason for the lifecycle stage change</p>
@@ -820,6 +865,7 @@ module Aws::TrustedAdvisor
       :created_at,
       :last_updated_at,
       :arn,
+      :status_reason,
       :description,
       :created_by,
       :updated_on_behalf_of,
@@ -843,6 +889,46 @@ module Aws::TrustedAdvisor
       nil,
       :estimated_monthly_savings,
       :estimated_percent_monthly_savings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary of a Recommendation for a specific AWS Resource</p>
+    # @!attribute check_arn
+    #   <p>The Check ARN</p>
+    #   @return [String]
+    # @!attribute recommendation_arn
+    #   <p>The Recommendation ARN</p>
+    #   @return [String]
+    # @!attribute aws_resource_arn
+    #   <p>The AWS Resource ARN</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the recommendation</p>
+    #   @return [String]
+    # @!attribute last_updated_at
+    #   <p>When the recommendation was last updated</p>
+    #   @return [Time]
+    # @!attribute exclusion_status
+    #   <p>The exclusion status of the recommendation</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>Metadata associated with the recommendation</p>
+    #   @return [Hash<String, String>]
+    # @!attribute pillars
+    #   <p>The Pillars that the Recommendation is optimizing</p>
+    #   @return [Array<String>]
+    class RecommendationForResourceSummary < Struct.new(
+      nil,
+      :check_arn,
+      :recommendation_arn,
+      :aws_resource_arn,
+      :status,
+      :last_updated_at,
+      :exclusion_status,
+      :metadata,
+      :pillars,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -884,7 +970,7 @@ module Aws::TrustedAdvisor
     #   <p>The ARN of the Recommendation Resource</p>
     #   @return [String]
     # @!attribute aws_resource_id
-    #   <p>The AWS resource identifier</p>
+    #   <p>The AWS resource identifier. There are certain checks that generate recommendation resources without an awsResourceId.</p>
     #   @return [String]
     # @!attribute region_code
     #   <p>The AWS Region code that the Recommendation Resource is in</p>
@@ -930,17 +1016,20 @@ module Aws::TrustedAdvisor
     #   <p>The number of AWS resources that were flagged to be OK according to the Trusted Advisor check</p>
     #   @return [Integer]
     # @!attribute warning_count
-    #   <p>The number of AWS resources that were flagged to have warning according to the Trusted Advisor check
-    #           </p>
+    #   <p>The number of AWS resources that were flagged to have warning according to the Trusted Advisor check </p>
     #   @return [Integer]
     # @!attribute error_count
     #   <p>The number of AWS resources that were flagged to have errors according to the Trusted Advisor check</p>
+    #   @return [Integer]
+    # @!attribute excluded_count
+    #   <p>The number of AWS resources belonging to this Trusted Advisor check that were excluded by the customer</p>
     #   @return [Integer]
     class RecommendationResourcesAggregates < Struct.new(
       nil,
       :ok_count,
       :warning_count,
       :error_count,
+      :excluded_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -989,6 +1078,9 @@ module Aws::TrustedAdvisor
     # @!attribute arn
     #   <p>The ARN of the Recommendation</p>
     #   @return [String]
+    # @!attribute status_reason
+    #   <p>This attribute provides additional details about potential discrepancies in check status determination.</p>
+    #   @return [String]
     class RecommendationSummary < Struct.new(
       nil,
       :id,
@@ -1005,6 +1097,7 @@ module Aws::TrustedAdvisor
       :created_at,
       :last_updated_at,
       :arn,
+      :status_reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

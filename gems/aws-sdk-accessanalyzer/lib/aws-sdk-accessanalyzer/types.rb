@@ -331,7 +331,7 @@ module Aws::AccessAnalyzer
     #   <p>The name of the analyzer.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of analyzer, which corresponds to the zone of trust chosen for the analyzer.</p>
+    #   <p>The type represents the zone of trust or scope for the analyzer.</p>
     #   @return [String]
     # @!attribute created_at
     #   <p>A timestamp for the time at which the analyzer was created.</p>
@@ -343,7 +343,7 @@ module Aws::AccessAnalyzer
     #   <p>The time at which the most recently analyzed resource was analyzed.</p>
     #   @return [Time]
     # @!attribute tags
-    #   <p>The tags added to the analyzer.</p>
+    #   <p>An array of key-value pairs applied to the analyzer. The key-value pairs consist of the set of Unicode letters, digits, whitespace, <code>_</code>, <code>.</code>, <code>/</code>, <code>=</code>, <code>+</code>, and <code>-</code>.</p> <p>The tag key is a value that is 1 to 128 characters in length and cannot be prefixed with <code>aws:</code>.</p> <p>The tag value is a value that is 0 to 256 characters in length.</p>
     #   @return [Hash<String, String>]
     # @!attribute status
     #   <p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing trusted access for Identity and Access Management Access Analyzer from Organizations, causes the analyzer to stop generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress and <code>Failed</code> when the analyzer creation has failed. </p>
@@ -352,8 +352,11 @@ module Aws::AccessAnalyzer
     #   <p>The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is returned. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the Amazon Web Services organization.</p>
     #   @return [Types::StatusReason]
     # @!attribute configuration
-    #   <p>Specifies if the analyzer is an external access, unused access, or internal access analyzer.</p>
+    #   <p>Specifies if the analyzer is an external access, unused access, or internal access analyzer. The <a href="https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_GetAnalyzer.html">GetAnalyzer</a> action includes this property in its response if a configuration is specified, while the <a href="https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ListAnalyzers.html">ListAnalyzers</a> action omits it.</p>
     #   @return [Types::AnalyzerConfiguration]
+    # @!attribute managed_by
+    #   <p>The service principal that manages this analyzer (for example, <code>securityhubv2.amazonaws.com</code>). This field is only present for service-linked analyzers and is not included for customer-managed analyzers.</p>
+    #   @return [String]
     class AnalyzerSummary < Struct.new(
       nil,
       :arn,
@@ -366,6 +369,7 @@ module Aws::AccessAnalyzer
       :status,
       :status_reason,
       :configuration,
+      :managed_by,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -784,6 +788,42 @@ module Aws::AccessAnalyzer
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Creates a service-linked analyzer.</p>
+    # @!attribute type
+    #   <p>The type of analyzer to create. Valid values are <code>ACCOUNT_UNUSED_ACCESS</code> and <code>ORGANIZATION_UNUSED_ACCESS</code>.</p>
+    #   @return [String]
+    # @!attribute archive_rules
+    #   <p>Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.</p>
+    #   @return [Array<Types::InlineArchiveRule>]
+    # @!attribute client_token
+    #   <p>A client token.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>Specifies the configuration of the analyzer. The specified scope of unused access is used for the configuration.</p>
+    #   @return [Types::AnalyzerConfiguration]
+    class CreateServiceLinkedAnalyzerRequest < Struct.new(
+      nil,
+      :type,
+      :archive_rules,
+      :client_token,
+      :configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The response to the request to create a service-linked analyzer.</p>
+    # @!attribute arn
+    #   <p>The ARN of the service-linked analyzer that was created by the request. The analyzer name follows the format <code>_AccessAnalyzerFor{ServiceName}-{Id}</code> where <code>Id</code> is a randomly generated identifier.</p>
+    #   @return [String]
+    class CreateServiceLinkedAnalyzerResponse < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The criteria to use in the filter that defines the archive rule. For more information on available filter keys, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html">IAM Access Analyzer filter keys</a>.</p>
     # @!attribute eq
     #   <p>An "equals" operator to match for the filter used to create the rule.</p>
@@ -838,6 +878,22 @@ module Aws::AccessAnalyzer
       nil,
       :analyzer_name,
       :rule_name,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Deletes a service-linked analyzer.</p>
+    # @!attribute analyzer_name
+    #   <p>The name of the service-linked analyzer to delete. Service-linked analyzer names follow the format <code>_AccessAnalyzerFor{ServiceName}-{Id}</code>.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A client token.</p>
+    #   @return [String]
+    class DeleteServiceLinkedAnalyzerRequest < Struct.new(
+      nil,
+      :analyzer_name,
       :client_token,
       keyword_init: true
     )
@@ -2561,10 +2617,14 @@ module Aws::AccessAnalyzer
     # @!attribute total_active_cross_account
     #   <p>The total number of active cross-account findings for the resource type.</p>
     #   @return [Integer]
+    # @!attribute total_active_errors
+    #   <p>The total number of active errors for the resource type.</p>
+    #   @return [Integer]
     class ResourceTypeDetails < Struct.new(
       nil,
       :total_active_public,
       :total_active_cross_account,
+      :total_active_errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

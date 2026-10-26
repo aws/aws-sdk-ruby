@@ -16,6 +16,7 @@ module Aws::ARCRegionswitch
         ?execution_state: String,
         ?execution_action: String,
         ?execution_region: String,
+        ?recovery_execution_id: String,
         ?actual_recovery_time: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -31,6 +32,7 @@ module Aws::ARCRegionswitch
       attr_accessor execution_state: String?
       attr_accessor execution_action: String?
       attr_accessor execution_region: String?
+      attr_accessor recovery_execution_id: String?
       attr_accessor actual_recovery_time: String?
     end
 
@@ -183,6 +185,48 @@ module Aws::ARCRegionswitch
       attr_accessor alarm_type: String?
     end
 
+    class AuroraProvisionedScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?global_cluster_identifier: String,
+        ?region_database_cluster_arns: Hash[String, String],
+        ?instance_arns: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor region_database_cluster_arns: Hash[String, String]?
+      attr_accessor instance_arns: Hash[String, String]?
+    end
+
+    class AuroraServerlessScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?global_cluster_identifier: String,
+        ?region_database_cluster_arns: Hash[String, String],
+        ?target_percent: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor region_database_cluster_arns: Hash[String, String]?
+      attr_accessor target_percent: Integer?
+    end
+
     class CancelPlanExecutionRequest
       include Smithy::Schema::Structure
 
@@ -207,6 +251,21 @@ module Aws::ARCRegionswitch
 
     end
 
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
     class CreatePlanRequest
       include Smithy::Schema::Structure
 
@@ -217,6 +276,8 @@ module Aws::ARCRegionswitch
         ?recovery_time_objective_minutes: Integer,
         ?associated_alarms: Hash[String, Types::AssociatedAlarm],
         ?triggers: Array[Types::Trigger],
+        ?report_configuration: Types::ReportConfiguration,
+        ?service_quota_checks_enabled: bool,
         ?name: String,
         ?regions: Array[String],
         ?recovery_approach: String,
@@ -231,6 +292,8 @@ module Aws::ARCRegionswitch
       attr_accessor recovery_time_objective_minutes: Integer?
       attr_accessor associated_alarms: Hash[String, Types::AssociatedAlarm]?
       attr_accessor triggers: Array[Types::Trigger]?
+      attr_accessor report_configuration: Types::ReportConfiguration?
+      attr_accessor service_quota_checks_enabled: bool?
       attr_accessor name: String?
       attr_accessor regions: Array[String]?
       attr_accessor recovery_approach: String?
@@ -288,6 +351,49 @@ module Aws::ARCRegionswitch
 
     end
 
+    class DocumentDbConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?behavior: String,
+        ?ungraceful: Types::DocumentDbUngraceful,
+        ?global_cluster_identifier: String,
+        ?database_cluster_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor behavior: String?
+      attr_accessor ungraceful: Types::DocumentDbUngraceful?
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor database_cluster_arns: Array[String]?
+    end
+
+    module DocumentDbDefaultBehavior
+      SWITCHOVER_ONLY: String
+      FAILOVER: String
+    end
+
+    class DocumentDbUngraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ungraceful: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ungraceful: String?
+    end
+
+    module DocumentDbUngracefulBehavior
+      FAILOVER: String
+    end
+
     class Ec2AsgCapacityIncreaseConfiguration
       include Smithy::Schema::Structure
 
@@ -297,6 +403,7 @@ module Aws::ARCRegionswitch
         ?ungraceful: Types::Ec2Ungraceful,
         ?target_percent: Integer,
         ?capacity_monitoring_approach: String,
+        ?wait_elb_target_group_healthy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -305,6 +412,7 @@ module Aws::ARCRegionswitch
       attr_accessor ungraceful: Types::Ec2Ungraceful?
       attr_accessor target_percent: Integer?
       attr_accessor capacity_monitoring_approach: String?
+      attr_accessor wait_elb_target_group_healthy: String?
     end
 
     module Ec2AsgCapacityMonitoringApproach
@@ -332,6 +440,7 @@ module Aws::ARCRegionswitch
         ?ungraceful: Types::EcsUngraceful,
         ?target_percent: Integer,
         ?capacity_monitoring_approach: String,
+        ?wait_elb_target_group_healthy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -340,6 +449,7 @@ module Aws::ARCRegionswitch
       attr_accessor ungraceful: Types::EcsUngraceful?
       attr_accessor target_percent: Integer?
       attr_accessor capacity_monitoring_approach: String?
+      attr_accessor wait_elb_target_group_healthy: String?
     end
 
     module EcsCapacityMonitoringApproach
@@ -418,9 +528,30 @@ module Aws::ARCRegionswitch
       UNKNOWN: String
     end
 
+    class EventSourceMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor arn: String?
+    end
+
+    module EventSourceMappingAction
+      ENABLE: String
+      DISABLE: String
+    end
+
     module ExecutionAction
       ACTIVATE: String
       DEACTIVATE: String
+      POST_RECOVERY: String
     end
 
     class ExecutionApprovalConfiguration
@@ -450,6 +581,15 @@ module Aws::ARCRegionswitch
         ?ecs_capacity_increase_config: Types::EcsCapacityIncreaseConfiguration,
         ?eks_resource_scaling_config: Types::EksResourceScalingConfiguration,
         ?route53_health_check_config: Types::Route53HealthCheckConfiguration,
+        ?document_db_config: Types::DocumentDbConfiguration,
+        ?rds_promote_read_replica_config: Types::RdsPromoteReadReplicaConfiguration,
+        ?rds_create_cross_region_read_replica_config: Types::RdsCreateCrossRegionReplicaConfiguration,
+        ?lambda_event_source_mapping_config: Types::LambdaEventSourceMappingConfiguration,
+        ?aurora_serverless_scaling_config: Types::AuroraServerlessScalingConfiguration,
+        ?aurora_provisioned_scaling_config: Types::AuroraProvisionedScalingConfiguration,
+        ?neptune_global_database_config: Types::NeptuneGlobalDatabaseConfiguration,
+        ?rds_switchover_read_replica_config: Types::RdsSwitchoverReadReplicaConfiguration,
+        ?ssm_send_command_config: Types::SsmSendCommandConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -463,6 +603,15 @@ module Aws::ARCRegionswitch
       attr_accessor ecs_capacity_increase_config: Types::EcsCapacityIncreaseConfiguration?
       attr_accessor eks_resource_scaling_config: Types::EksResourceScalingConfiguration?
       attr_accessor route53_health_check_config: Types::Route53HealthCheckConfiguration?
+      attr_accessor document_db_config: Types::DocumentDbConfiguration?
+      attr_accessor rds_promote_read_replica_config: Types::RdsPromoteReadReplicaConfiguration?
+      attr_accessor rds_create_cross_region_read_replica_config: Types::RdsCreateCrossRegionReplicaConfiguration?
+      attr_accessor lambda_event_source_mapping_config: Types::LambdaEventSourceMappingConfiguration?
+      attr_accessor aurora_serverless_scaling_config: Types::AuroraServerlessScalingConfiguration?
+      attr_accessor aurora_provisioned_scaling_config: Types::AuroraProvisionedScalingConfiguration?
+      attr_accessor neptune_global_database_config: Types::NeptuneGlobalDatabaseConfiguration?
+      attr_accessor rds_switchover_read_replica_config: Types::RdsSwitchoverReadReplicaConfiguration?
+      attr_accessor ssm_send_command_config: Types::SsmSendCommandConfiguration?
 
       class CustomActionLambdaConfig < ExecutionBlockConfiguration
       end
@@ -484,6 +633,24 @@ module Aws::ARCRegionswitch
       end
       class Route53HealthCheckConfig < ExecutionBlockConfiguration
       end
+      class DocumentDbConfig < ExecutionBlockConfiguration
+      end
+      class RdsPromoteReadReplicaConfig < ExecutionBlockConfiguration
+      end
+      class RdsCreateCrossRegionReadReplicaConfig < ExecutionBlockConfiguration
+      end
+      class LambdaEventSourceMappingConfig < ExecutionBlockConfiguration
+      end
+      class AuroraServerlessScalingConfig < ExecutionBlockConfiguration
+      end
+      class AuroraProvisionedScalingConfig < ExecutionBlockConfiguration
+      end
+      class NeptuneGlobalDatabaseConfig < ExecutionBlockConfiguration
+      end
+      class RdsSwitchoverReadReplicaConfig < ExecutionBlockConfiguration
+      end
+      class SsmSendCommandConfig < ExecutionBlockConfiguration
+      end
       class Unknown < ExecutionBlockConfiguration
       end
     end
@@ -499,6 +666,15 @@ module Aws::ARCRegionswitch
       ECS: String
       EKS_RESOURCE_SCALING: String
       ROUTE53_HEALTH_CHECK: String
+      DOCUMENTDB: String
+      RDS_PROMOTE_READ_REPLICA: String
+      RDS_CREATE_CROSS_REGION_REPLICA: String
+      LAMBDA_EVENT_SOURCE_MAPPING: String
+      AURORA_SERVERLESS_SCALING: String
+      AURORA_PROVISIONED_SCALING: String
+      NEPTUNE: String
+      RDS_SWITCHOVER_READ_REPLICA: String
+      SSM_SEND_COMMAND: String
     end
 
     class ExecutionEvent
@@ -554,6 +730,7 @@ module Aws::ARCRegionswitch
       STEP_PENDING_APPROVAL: String
       STEP_EXECUTION_BEHAVIOR_CHANGED_TO_UNGRACEFUL: String
       STEP_PENDING_APPLICATION_HEALTH_MONITOR: String
+      PLAN_EVALUATION_WARNING: String
     end
 
     module ExecutionMode
@@ -573,6 +750,38 @@ module Aws::ARCRegionswitch
       FAILED: String
       PENDING: String
       COMPLETED_MONITORING_APPLICATION_HEALTH: String
+    end
+
+    module FailedReportErrorCode
+      INSUFFICIENT_PERMISSIONS: String
+      INVALID_RESOURCE: String
+      CONFIGURATION_ERROR: String
+    end
+
+    class FailedReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class GeneratedReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_generation_time: Time,
+        ?report_output: Types::ReportOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_generation_time: Time?
+      attr_accessor report_output: Types::ReportOutput?
     end
 
     class GetPlanEvaluationStatusRequest
@@ -645,9 +854,11 @@ module Aws::ARCRegionswitch
         ?execution_state: String,
         ?execution_action: String,
         ?execution_region: String,
+        ?recovery_execution_id: String,
         ?step_states: Array[Types::StepState],
         ?plan: Types::Plan,
         ?actual_recovery_time: String,
+        ?generated_report_details: Array[Types::GeneratedReport],
         ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -663,9 +874,11 @@ module Aws::ARCRegionswitch
       attr_accessor execution_state: String?
       attr_accessor execution_action: String?
       attr_accessor execution_region: String?
+      attr_accessor recovery_execution_id: String?
       attr_accessor step_states: Array[Types::StepState]?
       attr_accessor plan: Types::Plan?
       attr_accessor actual_recovery_time: String?
+      attr_accessor generated_report_details: Array[Types::GeneratedReport]?
       attr_accessor next_token: String?
     end
 
@@ -817,6 +1030,38 @@ module Aws::ARCRegionswitch
       attr_accessor hpa_name: String?
     end
 
+    class LambdaEventSourceMappingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?action: String,
+        ?region_event_source_mappings: Hash[String, Types::EventSourceMapping],
+        ?ungraceful: Types::LambdaEventSourceMappingUngraceful,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor action: String?
+      attr_accessor region_event_source_mappings: Hash[String, Types::EventSourceMapping]?
+      attr_accessor ungraceful: Types::LambdaEventSourceMappingUngraceful?
+    end
+
+    class LambdaEventSourceMappingUngraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor behavior: String?
+    end
+
+    module LambdaEventSourceMappingUngracefulBehavior
+      SKIP: String
+    end
+
     class LambdaUngraceful
       include Smithy::Schema::Structure
 
@@ -839,12 +1084,14 @@ module Aws::ARCRegionswitch
         ?cross_account_role: String,
         ?external_id: String,
         ?arn: String,
+        ?payload: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cross_account_role: String?
       attr_accessor external_id: String?
       attr_accessor arn: String?
+      attr_accessor payload: String?
     end
 
     class ListPlanExecutionEventsRequest
@@ -961,6 +1208,38 @@ module Aws::ARCRegionswitch
       attr_accessor next_token: String?
     end
 
+    class ListRoute53HealthChecksInRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?hosted_zone_id: String,
+        ?record_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor record_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoute53HealthChecksInRegionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_checks: Array[Types::Route53HealthCheck],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_checks: Array[Types::Route53HealthCheck]?
+      attr_accessor next_token: String?
+    end
+
     class ListRoute53HealthChecksRequest
       include Smithy::Schema::Structure
 
@@ -990,6 +1269,34 @@ module Aws::ARCRegionswitch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor health_checks: Array[Types::Route53HealthCheck]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceQuotaWarningsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arns: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arns: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceQuotaWarningsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_quota_warning_summaries: Array[Types::ServiceQuotaWarningSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_quota_warning_summaries: Array[Types::ServiceQuotaWarningSummary]?
       attr_accessor next_token: String?
     end
 
@@ -1028,6 +1335,49 @@ module Aws::ARCRegionswitch
       attr_accessor name: String?
     end
 
+    module NeptuneDefaultBehavior
+      SWITCHOVER_ONLY: String
+      FAILOVER: String
+    end
+
+    class NeptuneGlobalDatabaseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?behavior: String,
+        ?ungraceful: Types::NeptuneUngraceful,
+        ?global_cluster_identifier: String,
+        ?region_database_cluster_arns: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor behavior: String?
+      attr_accessor ungraceful: Types::NeptuneUngraceful?
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor region_database_cluster_arns: Hash[String, String]?
+    end
+
+    class NeptuneUngraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ungraceful: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ungraceful: String?
+    end
+
+    module NeptuneUngracefulBehavior
+      FAILOVER: String
+    end
+
     class ParallelExecutionBlockConfiguration
       include Smithy::Schema::Structure
 
@@ -1050,6 +1400,8 @@ module Aws::ARCRegionswitch
         ?recovery_time_objective_minutes: Integer,
         ?associated_alarms: Hash[String, Types::AssociatedAlarm],
         ?triggers: Array[Types::Trigger],
+        ?report_configuration: Types::ReportConfiguration,
+        ?service_quota_checks_enabled: bool,
         ?name: String,
         ?regions: Array[String],
         ?recovery_approach: String,
@@ -1067,6 +1419,8 @@ module Aws::ARCRegionswitch
       attr_accessor recovery_time_objective_minutes: Integer?
       attr_accessor associated_alarms: Hash[String, Types::AssociatedAlarm]?
       attr_accessor triggers: Array[Types::Trigger]?
+      attr_accessor report_configuration: Types::ReportConfiguration?
+      attr_accessor service_quota_checks_enabled: bool?
       attr_accessor name: String?
       attr_accessor regions: Array[String]?
       attr_accessor recovery_approach: String?
@@ -1074,6 +1428,74 @@ module Aws::ARCRegionswitch
       attr_accessor owner: String?
       attr_accessor version: String?
       attr_accessor updated_at: Time?
+    end
+
+    class RdsCreateCrossRegionReplicaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?db_instance_arn_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor db_instance_arn_map: Hash[String, String]?
+    end
+
+    class RdsPromoteReadReplicaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?db_instance_arn_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor db_instance_arn_map: Hash[String, String]?
+    end
+
+    class RdsSwitchoverReadReplicaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?db_instance_arn_map: Hash[String, String],
+        ?ungraceful: Types::RdsUngraceful,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor db_instance_arn_map: Hash[String, String]?
+      attr_accessor ungraceful: Types::RdsUngraceful?
+    end
+
+    class RdsUngraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ungraceful: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ungraceful: String?
+    end
+
+    module RdsUngracefulBehavior
+      PROMOTE_READ_REPLICA: String
     end
 
     module RecoveryApproach
@@ -1099,6 +1521,55 @@ module Aws::ARCRegionswitch
     module RegionToRunIn
       ACTIVATING_REGION: String
       DEACTIVATING_REGION: String
+      ACTIVE_REGION: String
+      INACTIVE_REGION: String
+    end
+
+    class ReportConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_output: Array[Types::ReportOutputConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_output: Array[Types::ReportOutputConfiguration]?
+    end
+
+    class ReportOutput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_report_output: Types::S3ReportOutput,
+        ?failed_report_output: Types::FailedReportOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_report_output: Types::S3ReportOutput?
+      attr_accessor failed_report_output: Types::FailedReportOutput?
+
+      class S3ReportOutput < ReportOutput
+      end
+      class FailedReportOutput < ReportOutput
+      end
+      class Unknown < ReportOutput
+      end
+    end
+
+    class ReportOutputConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_configuration: Types::S3ReportOutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::S3ReportOutputConfiguration?
+
+      class S3Configuration < ReportOutputConfiguration
+      end
+      class Unknown < ReportOutputConfiguration
+      end
     end
 
     class ResourceNotFoundException
@@ -1147,6 +1618,7 @@ module Aws::ARCRegionswitch
         ?hosted_zone_id: String,
         ?record_name: String,
         ?health_check_id: String,
+        ?status: String,
         ?region: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1154,6 +1626,7 @@ module Aws::ARCRegionswitch
       attr_accessor hosted_zone_id: String?
       attr_accessor record_name: String?
       attr_accessor health_check_id: String?
+      attr_accessor status: String?
       attr_accessor region: String?
     end
 
@@ -1178,6 +1651,12 @@ module Aws::ARCRegionswitch
       attr_accessor record_sets: Array[Types::Route53ResourceRecordSet]?
     end
 
+    module Route53HealthCheckStatus
+      HEALTHY: String
+      UNHEALTHY: String
+      UNKNOWN: String
+    end
+
     class Route53ResourceRecordSet
       include Smithy::Schema::Structure
 
@@ -1194,6 +1673,30 @@ module Aws::ARCRegionswitch
     module RoutingControlStateChange
       ON: String
       OFF: String
+    end
+
+    class S3ReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_object_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_object_key: String?
+    end
+
+    class S3ReportOutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_path: String,
+        ?bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_path: String?
+      attr_accessor bucket_owner: String?
     end
 
     class Service
@@ -1213,6 +1716,113 @@ module Aws::ARCRegionswitch
       attr_accessor service_arn: String?
     end
 
+    module ServiceQuotaWarningStatus
+      PENDING: String
+      DENIED: String
+      INSUFFICIENT_PERMISSIONS: String
+      MAX_REGION_SWITCH_REQUESTS_EXCEEDED: String
+      MAX_ACCOUNT_REQUESTS_EXCEEDED: String
+    end
+
+    class ServiceQuotaWarningSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?quota_region: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?quota_name: String,
+        ?status: String,
+        ?plan_arn: String,
+        ?request_id: String,
+        ?case_id: String,
+        ?warning_message: String,
+        ?last_checked_at: Time,
+        ?warning_created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor quota_region: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor quota_name: String?
+      attr_accessor status: String?
+      attr_accessor plan_arn: String?
+      attr_accessor request_id: String?
+      attr_accessor case_id: String?
+      attr_accessor warning_message: String?
+      attr_accessor last_checked_at: Time?
+      attr_accessor warning_created_at: Time?
+    end
+
+    class SsmDocumentConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?document_arn: String,
+        ?targets: Array[Types::SsmTarget],
+        ?parameters: Hash[String, Array[String]],
+        ?document_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor document_arn: String?
+      attr_accessor targets: Array[Types::SsmTarget]?
+      attr_accessor parameters: Hash[String, Array[String]]?
+      attr_accessor document_version: String?
+    end
+
+    class SsmSendCommandConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?region_documents: Hash[String, Types::SsmDocumentConfig],
+        ?retry_interval_minutes: Float,
+        ?ungraceful: Types::SsmSendCommandUngraceful,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor region_documents: Hash[String, Types::SsmDocumentConfig]?
+      attr_accessor retry_interval_minutes: Float?
+      attr_accessor ungraceful: Types::SsmSendCommandUngraceful?
+    end
+
+    class SsmSendCommandUngraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor behavior: String?
+    end
+
+    module SsmSendCommandUngracefulBehavior
+      SKIP: String
+    end
+
+    class SsmTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+    end
+
     class StartPlanExecutionRequest
       include Smithy::Schema::Structure
 
@@ -1223,6 +1833,8 @@ module Aws::ARCRegionswitch
         ?mode: String,
         ?comment: String,
         ?latest_version: String,
+        ?recovery_execution_id: String,
+        ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1232,6 +1844,8 @@ module Aws::ARCRegionswitch
       attr_accessor mode: String?
       attr_accessor comment: String?
       attr_accessor latest_version: String?
+      attr_accessor recovery_execution_id: String?
+      attr_accessor client_token: String?
     end
 
     class StartPlanExecutionResponse
@@ -1452,6 +2066,8 @@ module Aws::ARCRegionswitch
         ?recovery_time_objective_minutes: Integer,
         ?associated_alarms: Hash[String, Types::AssociatedAlarm],
         ?triggers: Array[Types::Trigger],
+        ?report_configuration: Types::ReportConfiguration,
+        ?service_quota_checks_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1462,6 +2078,8 @@ module Aws::ARCRegionswitch
       attr_accessor recovery_time_objective_minutes: Integer?
       attr_accessor associated_alarms: Hash[String, Types::AssociatedAlarm]?
       attr_accessor triggers: Array[Types::Trigger]?
+      attr_accessor report_configuration: Types::ReportConfiguration?
+      attr_accessor service_quota_checks_enabled: bool?
     end
 
     class UpdatePlanResponse
@@ -1473,6 +2091,11 @@ module Aws::ARCRegionswitch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor plan: Types::Plan?
+    end
+
+    module WaitELBTargetGroupHealthy
+      ENABLED: String
+      DISABLED: String
     end
 
     class Workflow
@@ -1495,6 +2118,7 @@ module Aws::ARCRegionswitch
     module WorkflowTargetAction
       ACTIVATE: String
       DEACTIVATE: String
+      POST_RECOVERY: String
     end
   end
 end

@@ -1,0 +1,400 @@
+module Aws::PartnerCentralRevenueMeasurement
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PartnerCentralRevenueMeasurement::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateMarketplaceRevenueShareResponse
+      include Smithy::Client::_Response[Types::CreateMarketplaceRevenueShareOutput]
+      def product_id: () -> String?
+      def arn: () -> String?
+      def catalog: () -> String?
+      def product_code: () -> String?
+      def product_name: () -> String?
+      def created_date: () -> Time?
+      def last_modified_date: () -> Time?
+      def revision: () -> Integer?
+    end
+    def create_marketplace_revenue_share: (
+      ?catalog: String,
+      ?client_token: String,
+      ?product_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMarketplaceRevenueShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMarketplaceRevenueShareResponse
+
+    interface _CreateMarketplaceRevenueShareAllocationResponse
+      include Smithy::Client::_Response[Types::CreateMarketplaceRevenueShareAllocationOutput]
+      def marketplace_revenue_share_allocation_id: () -> String?
+      def product_id: () -> String?
+      def product_name: () -> String?
+      def arn: () -> String?
+      def effective_from: () -> String?
+      def effective_until: () -> String?
+      def revenue_share_percent: () -> String?
+      def status: () -> String?
+      def created_date: () -> Time?
+      def last_modified_date: () -> Time?
+      def latest_marketplace_revenue_share_revision: () -> String?
+    end
+    def create_marketplace_revenue_share_allocation: (
+      ?catalog: String,
+      ?product_id: String,
+      ?client_token: String,
+      ?effective_from: String,
+      ?effective_until: String,
+      ?revenue_share_percent: String
+    ) -> _CreateMarketplaceRevenueShareAllocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMarketplaceRevenueShareAllocationResponse
+
+    interface _CreateRevenueAttributionResponse
+      include Smithy::Client::_Response[Types::CreateRevenueAttributionOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def tenancy_model: () -> String?
+      def marketplace_product: () -> Types::MarketplaceProductSummary?
+      def revision: () -> String?
+    end
+    def create_revenue_attribution: (
+      ?catalog: String,
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?tenancy_model: String,
+      ?product_identifier: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRevenueAttributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRevenueAttributionResponse
+
+    interface _GetMarketplaceRevenueShareResponse
+      include Smithy::Client::_Response[Types::GetMarketplaceRevenueShareOutput]
+      def product_id: () -> String?
+      def arn: () -> String?
+      def catalog: () -> String?
+      def product_code: () -> String?
+      def product_name: () -> String?
+      def created_date: () -> Time?
+      def last_modified_date: () -> Time?
+      def revision: () -> Integer?
+      def latest_revision: () -> Integer?
+      def total_active_marketplace_revenue_share_allocation_count: () -> Integer?
+      def total_marketplace_revenue_share_allocation_count: () -> Integer?
+    end
+    def get_marketplace_revenue_share: (
+      ?catalog: String,
+      ?product_id: String,
+      ?revision: Integer
+    ) -> _GetMarketplaceRevenueShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMarketplaceRevenueShareResponse
+
+    interface _GetMarketplaceRevenueShareAllocationResponse
+      include Smithy::Client::_Response[Types::GetMarketplaceRevenueShareAllocationOutput]
+      def marketplace_revenue_share_allocation_id: () -> String?
+      def product_id: () -> String?
+      def product_name: () -> String?
+      def arn: () -> String?
+      def effective_from: () -> String?
+      def effective_until: () -> String?
+      def revenue_share_percent: () -> String?
+      def status: () -> String?
+      def created_date: () -> Time?
+      def last_modified_date: () -> Time?
+      def latest_marketplace_revenue_share_revision: () -> String?
+    end
+    def get_marketplace_revenue_share_allocation: (
+      ?catalog: String,
+      ?product_id: String,
+      ?marketplace_revenue_share_allocation_id: String,
+      ?marketplace_revenue_share_revision: String
+    ) -> _GetMarketplaceRevenueShareAllocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMarketplaceRevenueShareAllocationResponse
+
+    interface _GetRevenueAttributionResponse
+      include Smithy::Client::_Response[Types::GetRevenueAttributionOutput]
+      def arn: () -> String?
+      def id: () -> String?
+      def catalog: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def tenancy_model: () -> String?
+      def marketplace_product: () -> Types::MarketplaceProductSummary?
+      def created_date: () -> Time?
+      def last_modified_date: () -> Time?
+      def revision: () -> String?
+      def latest_revision: () -> String?
+      def effective_from: () -> String?
+      def effective_until: () -> String?
+      def total_active_revenue_attribution_allocation_count: () -> Integer?
+      def total_revenue_attribution_allocation_count: () -> Integer?
+    end
+    def get_revenue_attribution: (
+      ?catalog: String,
+      ?identifier: String,
+      ?revision: String
+    ) -> _GetRevenueAttributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevenueAttributionResponse
+
+    interface _GetRevenueAttributionAllocationResponse
+      include Smithy::Client::_Response[Types::GetRevenueAttributionAllocationOutput]
+      def revenue_attribution_allocation_id: () -> String?
+      def revenue_attribution_identifier: () -> String?
+      def entity_type: () -> String?
+      def entity_identifier: () -> String?
+      def entity_name: () -> String?
+      def customer_aws_account_id: () -> String?
+      def revenue_share_percent: () -> String?
+      def effective_from: () -> String?
+      def effective_until: () -> String?
+      def status: () -> String?
+      def created_date: () -> Time?
+      def last_modified_date: () -> Time?
+      def revenue_attribution_revision: () -> String?
+      def revenue_attribution_latest_revision: () -> String?
+    end
+    def get_revenue_attribution_allocation: (
+      ?catalog: String,
+      ?revenue_attribution_identifier: String,
+      ?revenue_attribution_allocation_id: String,
+      ?revenue_attribution_revision: String
+    ) -> _GetRevenueAttributionAllocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevenueAttributionAllocationResponse
+
+    interface _GetRevenueAttributionAllocationsTaskResponse
+      include Smithy::Client::_Response[Types::GetRevenueAttributionAllocationsTaskOutput]
+      def task_id: () -> String?
+      def status: () -> String?
+      def catalog: () -> String?
+      def revenue_attribution_arn: () -> String?
+      def started_at: () -> Time?
+      def ended_at: () -> Time?
+      def total_revenue_attribution_allocation_records: () -> Integer?
+      def description: () -> String?
+      def revenue_attribution_latest_revision: () -> String?
+      def error_detail_list: () -> Array[Types::RevenueAttributionAllocationErrorDetail]?
+    end
+    def get_revenue_attribution_allocations_task: (
+      ?catalog: String,
+      ?revenue_attribution_identifier: String
+    ) -> _GetRevenueAttributionAllocationsTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevenueAttributionAllocationsTaskResponse
+
+    interface _ListMarketplaceRevenueShareAllocationsResponse
+      include Smithy::Client::_Response[Types::ListMarketplaceRevenueShareAllocationsOutput]
+      def marketplace_revenue_share_allocation_summaries: () -> Array[Types::MarketplaceRevenueShareAllocationSummary]?
+      def next_token: () -> String?
+    end
+    def list_marketplace_revenue_share_allocations: (
+      ?catalog: String,
+      ?product_id: String,
+      ?status: String,
+      ?after_effective_from: String,
+      ?before_effective_from: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?marketplace_revenue_share_revision: String
+    ) -> _ListMarketplaceRevenueShareAllocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMarketplaceRevenueShareAllocationsResponse
+
+    interface _ListMarketplaceRevenueSharesResponse
+      include Smithy::Client::_Response[Types::ListMarketplaceRevenueSharesOutput]
+      def marketplace_revenue_share_summaries: () -> Array[Types::MarketplaceRevenueShareSummary]?
+      def next_token: () -> String?
+    end
+    def list_marketplace_revenue_shares: (
+      ?catalog: String,
+      ?product_ids: Array[String],
+      ?product_codes: Array[String],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?created_after: Time,
+      ?created_before: Time
+    ) -> _ListMarketplaceRevenueSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMarketplaceRevenueSharesResponse
+
+    interface _ListRevenueAttributionAllocationsResponse
+      include Smithy::Client::_Response[Types::ListRevenueAttributionAllocationsOutput]
+      def revenue_attribution_allocation_summaries: () -> Array[Types::RevenueAttributionAllocationSummary]?
+      def next_token: () -> String?
+    end
+    def list_revenue_attribution_allocations: (
+      ?catalog: String,
+      ?revenue_attribution_identifier: String,
+      ?entity_type_filters: Array[String],
+      ?entity_identifier_filters: Array[String],
+      ?customer_aws_account_id_filters: Array[String],
+      ?status_filter: String,
+      ?after_effective_from: String,
+      ?before_effective_from: String,
+      ?after_effective_until: String,
+      ?before_effective_until: String,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?revenue_attribution_revision: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRevenueAttributionAllocationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRevenueAttributionAllocationsResponse
+
+    interface _ListRevenueAttributionsResponse
+      include Smithy::Client::_Response[Types::ListRevenueAttributionsOutput]
+      def revenue_attribution_summaries: () -> Array[Types::AttributionSummary]?
+      def next_token: () -> String?
+    end
+    def list_revenue_attributions: (
+      ?catalog: String,
+      ?identifiers: Array[String],
+      ?created_after: Time,
+      ?created_before: Time,
+      ?sort_by: String,
+      ?sort_order: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRevenueAttributionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRevenueAttributionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartRevenueAttributionAllocationsTaskResponse
+      include Smithy::Client::_Response[Types::StartRevenueAttributionAllocationsTaskOutput]
+      def task_id: () -> String?
+      def status: () -> String?
+      def catalog: () -> String?
+      def revenue_attribution_arn: () -> String?
+      def started_at: () -> Time?
+      def total_revenue_attribution_allocation_records: () -> Integer?
+    end
+    def start_revenue_attribution_allocations_task: (
+      ?catalog: String,
+      ?revenue_attribution_identifier: String,
+      ?revenue_attribution_revision: String,
+      ?revenue_share_allocations: Array[
+        {
+          action: String,
+          revenue_attribution_allocation_id: String,
+          entity_type: String,
+          entity_identifier: String,
+          customer_aws_account_id: String,
+          revenue_share_percent: String,
+          effective_from: String,
+          effective_until: untyped,
+          status: String
+        }
+      ],
+      ?client_token: String,
+      ?description: String
+    ) -> _StartRevenueAttributionAllocationsTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRevenueAttributionAllocationsTaskResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateMarketplaceRevenueShareAllocationResponse
+      include Smithy::Client::_Response[Types::UpdateMarketplaceRevenueShareAllocationOutput]
+      def marketplace_revenue_share_allocation_id: () -> String?
+      def product_id: () -> String?
+      def product_name: () -> String?
+      def arn: () -> String?
+      def effective_from: () -> String?
+      def effective_until: () -> String?
+      def revenue_share_percent: () -> String?
+      def status: () -> String?
+      def created_date: () -> Time?
+      def last_modified_date: () -> Time?
+      def latest_marketplace_revenue_share_revision: () -> String?
+    end
+    def update_marketplace_revenue_share_allocation: (
+      ?catalog: String,
+      ?product_id: String,
+      ?marketplace_revenue_share_allocation_id: String,
+      ?marketplace_revenue_share_revision: String,
+      ?client_token: String,
+      ?effective_from: String,
+      ?effective_until: String,
+      ?revenue_share_percent: String,
+      ?status: String
+    ) -> _UpdateMarketplaceRevenueShareAllocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMarketplaceRevenueShareAllocationResponse
+
+    interface _UpdateRevenueAttributionResponse
+      include Smithy::Client::_Response[Types::UpdateRevenueAttributionOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def last_modified_date: () -> Time?
+      def latest_revision: () -> String?
+    end
+    def update_revenue_attribution: (
+      ?catalog: String,
+      ?identifier: String,
+      ?client_token: String,
+      ?description: String,
+      ?revision: String
+    ) -> _UpdateRevenueAttributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRevenueAttributionResponse
+  end
+end

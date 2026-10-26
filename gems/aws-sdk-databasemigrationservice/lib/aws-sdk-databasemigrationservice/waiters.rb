@@ -58,6 +58,402 @@ module Aws::DatabaseMigrationService
 
     # @api private
     #
+    # Wait until DMS extension pack is associated.
+    #
+    class ExtensionPackAssociated
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 10,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_extension_pack_associations,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "SUCCESS",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "FAILED",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until DMS metadata model is assessed.
+    #
+    class MetadataModelAssessed
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 30,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_assessments,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "SUCCESS",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "FAILED",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until DMS metadata model conversion is cancelled.
+    #
+    class MetadataModelConversionCancelled
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 10,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_conversions,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "CANCELED",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "FAILED",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until DMS metadata model is converted.
+    #
+    class MetadataModelConverted
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 30,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_conversions,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "SUCCESS",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "FAILED",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until DMS metadata model is created.
+    #
+    class MetadataModelCreated
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 15,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_creations,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "SUCCESS",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "FAILED",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until DMS metadata model creation is cancelled.
+    #
+    class MetadataModelCreationCancelled
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 10,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_creations,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "CANCELED",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "FAILED",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until DMS metadata model is exported as script.
+    #
+    class MetadataModelExportedAsScript
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 20,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_exports_as_script,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "SUCCESS",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "FAILED",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until DMS metadata model is exported to target.
+    #
+    class MetadataModelExportedToTarget
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 20,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_exports_to_target,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "SUCCESS",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "FAILED",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until DMS metadata model is imported.
+    #
+    class MetadataModelImported
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 60,
+          max_delay: options[:max_delay] || 120,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_imports,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "SUCCESS",
+                    "comparator" => "allStringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "requests[].status",
+                    "expected" => "FAILED",
+                    "comparator" => "anyStringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
     # Wait until DMS replication instance is available.
     #
     class ReplicationInstanceAvailable

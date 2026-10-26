@@ -28,6 +28,15 @@ module Aws::CloudWatch
     class InvalidParameterValueException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class KmsAccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsKeyDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KmsKeyNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class LimitExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -37,12 +46,18 @@ module Aws::CloudWatch
     class MissingRequiredParameterException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ResourceConflict < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ResourceNotFound < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def resource_type: () -> String?
       def resource_id: () -> String?
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
       def message: () -> String?
     end
   end

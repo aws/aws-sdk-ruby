@@ -42,7 +42,7 @@ module Aws::Keyspaces
         super
       end
 
-      # <p>Description of the error.</p>
+      # <p>You don't have the required permissions to perform this operation. Verify your IAM permissions and try again.</p>
       def message
         @data[:message]
       end
@@ -56,7 +56,7 @@ module Aws::Keyspaces
         super
       end
 
-      # <p>Description of the error.</p>
+      # <p>The requested operation conflicts with the current state of the resource or another concurrent operation.</p>
       def message
         @data[:message]
       end
@@ -70,7 +70,7 @@ module Aws::Keyspaces
         super
       end
 
-      # <p>Description of the error.</p>
+      # <p>An internal service error occurred. Retry your request. If the problem persists, contact Amazon Web Services Support.</p>
       def message
         @data[:message]
       end
@@ -84,12 +84,12 @@ module Aws::Keyspaces
         super
       end
 
-      # <p>Description of the error.</p>
+      # <p>The specified resource was not found. Verify the resource identifier and ensure the resource exists and is in an ACTIVE state.</p>
       def message
         @data[:message]
       end
 
-      # <p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn’t be found.</p>
+      # <p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource couldn't be found.</p>
       def resource_arn
         @data[:resource_arn]
       end
@@ -103,7 +103,7 @@ module Aws::Keyspaces
         super
       end
 
-      # <p>Description of the error.</p>
+      # <p>The requested operation would exceed the service quota for this resource. Review the service quotas and adjust your request accordingly.</p>
       def message
         @data[:message]
       end
@@ -117,7 +117,7 @@ module Aws::Keyspaces
         super
       end
 
-      # <p>Description of the error.</p>
+      # <p>The request parameters are invalid or malformed. Review the API documentation and correct the request format.</p>
       def message
         @data[:message]
       end

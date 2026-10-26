@@ -144,18 +144,18 @@ module Aws::Transcribe
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -213,11 +213,11 @@ module Aws::Transcribe
     #          <p>All categories are automatically applied to your Call Analytics transcriptions. Note that in
     #             order to apply categories to your transcriptions, you must create them before submitting your
     #             transcription request, as categories cannot be applied retroactively.</p>
-    #          <p>When creating a new category, you can use the <code>InputType</code> parameter to 
-    #             label the category as a <code>POST_CALL</code> or a <code>REAL_TIME</code> category. 
-    #             <code>POST_CALL</code> categories can only be applied to post-call transcriptions and 
-    #             <code>REAL_TIME</code> categories can only be applied to real-time transcriptions. If you 
-    #             do not include <code>InputType</code>, your category is created as a 
+    #          <p>When creating a new category, you can use the <code>InputType</code> parameter to
+    #             label the category as a <code>POST_CALL</code> or a <code>REAL_TIME</code> category.
+    #             <code>POST_CALL</code> categories can only be applied to post-call transcriptions and
+    #             <code>REAL_TIME</code> categories can only be applied to real-time transcriptions. If you
+    #             do not include <code>InputType</code>, your category is created as a
     #             <code>POST_CALL</code> category by default.</p>
     #          <p>Call Analytics categories are composed of rules. For each category, you must create
     #             between 1 and 20 rules. Rules can include these parameters: , , , and .</p>
@@ -233,9 +233,9 @@ module Aws::Transcribe
     #               generic name like <code>test-category</code>.</p>
     #            <p>Category names are case sensitive.</p>
     # @option params [Array<Types::Rule>] :rules
-    #   <p>Rules define a Call Analytics category. When creating a new category, you must create 
-    #               between 1 and 20 rules for that category. For each rule, you specify a filter you want 
-    #               applied to the attributes of a call. For example, you can choose a sentiment filter that 
+    #   <p>Rules define a Call Analytics category. When creating a new category, you must create
+    #               between 1 and 20 rules for that category. For each rule, you specify a filter you want
+    #               applied to the attributes of a call. For example, you can choose a sentiment filter that
     #               detects if a customer's sentiment was positive during the last 30 seconds of the call.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Adds one or more custom tags, each in the form of a key:value pair, to a new
@@ -243,14 +243,14 @@ module Aws::Transcribe
     #            <p>To learn more about using tags with Amazon Transcribe, refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html">Tagging
     #               resources</a>.</p>
     # @option params [String] :input_type
-    #   <p>Choose whether you want to create a real-time or a post-call category for your Call 
+    #   <p>Choose whether you want to create a real-time or a post-call category for your Call
     #               Analytics transcription.</p>
-    #            <p>Specifying <code>POST_CALL</code> assigns your category to post-call transcriptions; 
-    #               categories with this input type cannot be applied to streaming (real-time) 
+    #            <p>Specifying <code>POST_CALL</code> assigns your category to post-call transcriptions;
+    #               categories with this input type cannot be applied to streaming (real-time)
     #               transcriptions.</p>
-    #            <p>Specifying <code>REAL_TIME</code> assigns your category to streaming transcriptions; 
+    #            <p>Specifying <code>REAL_TIME</code> assigns your category to streaming transcriptions;
     #               categories with this input type cannot be applied to post-call transcriptions.</p>
-    #            <p>If you do not include <code>InputType</code>, your category is created as a post-call 
+    #            <p>If you do not include <code>InputType</code>, your category is created as a post-call
     #               category by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -452,7 +452,7 @@ module Aws::Transcribe
     #               model must contain terms in only one language, and the language you select for your
     #               custom language model must match the language of your training and tuning data.</p>
     #            <p>For a list of supported languages and their associated language codes, refer to the
-    #                   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages</a> table. Note that US English (<code>en-US</code>) is the 
+    #                   <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages</a> table. Note that US English (<code>en-US</code>) is the
     #               only language supported with Amazon Transcribe Medical.</p>
     #            <p>A custom language model can only be used to transcribe files in the same language as
     #               the model. For example, if you create a custom language model using US English
@@ -481,6 +481,8 @@ module Aws::Transcribe
     #               optionally include <code>TuningDataS3Uri</code>, which is the Amazon S3 location
     #               of your tuning data. If you specify different Amazon S3 locations for training
     #               and tuning data, the ARN you use must have permissions to access both locations.</p>
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   <p>Specifies the encryption configuration for your custom language model. Your model artifacts are encrypted with the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Adds one or more custom tags, each in the form of a key:value pair, to a new custom
     #               language model at the time you create this new model.</p>
@@ -495,6 +497,12 @@ module Aws::Transcribe
     #       s3_uri: "Uri", # required
     #       tuning_data_s3_uri: "Uri",
     #       data_access_role_arn: "DataAccessRoleArn", # required
+    #     },
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #       },
+    #       kms_key: "KMSKeyId", # required
     #     },
     #     tags: [
     #       {
@@ -562,7 +570,7 @@ module Aws::Transcribe
     # @example Request syntax with placeholder values
     #   params = {
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
     #     vocabulary_file_uri: "Uri", # required
     #     tags: [
     #       {
@@ -577,7 +585,7 @@ module Aws::Transcribe
     #   response.to_h #=>
     #   {
     #     vocabulary_name: "VocabularyName",
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     vocabulary_state: "PENDING" # One of: ["PENDING", "READY", "FAILED"],
     #     last_modified_time: Time.now,
     #     failure_reason: "FailureReason"
@@ -644,17 +652,20 @@ module Aws::Transcribe
     # @option params [String] :data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files (in this case, your custom
-    #               vocabulary). If the role that you specify doesn’t have the appropriate permissions to access
-    #               the specified Amazon S3 location, your request fails.</p>
+    #               vocabulary). If you include <code>EncryptionConfiguration</code> in your request, this role
+    #               must also have permissions to access the specified KMS key. If the role that
+    #               you specify doesn’t have the appropriate permissions, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
     #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
     #               ARNs</a>.</p>
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   <p>Specifies the encryption configuration for your custom vocabulary. Your vocabulary artifacts are encrypted with the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #     tags: [
@@ -663,7 +674,13 @@ module Aws::Transcribe
     #         value: "TagValue", # required
     #       }
     #     ],
-    #     data_access_role_arn: "DataAccessRoleArn"
+    #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     }
     #   }
     #   options = {}
     #   response = client.create_vocabulary(params, options)
@@ -671,7 +688,7 @@ module Aws::Transcribe
     #   response.to_h #=>
     #   {
     #     vocabulary_name: "VocabularyName",
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     vocabulary_state: "PENDING" # One of: ["PENDING", "READY", "FAILED"],
     #     last_modified_time: Time.now,
     #     failure_reason: "FailureReason"
@@ -737,17 +754,20 @@ module Aws::Transcribe
     # @option params [String] :data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files (in this case, your custom
-    #               vocabulary filter). If the role that you specify doesn’t have the appropriate permissions to access
-    #               the specified Amazon S3 location, your request fails.</p>
+    #               vocabulary filter). If you include <code>EncryptionConfiguration</code> in your request, this role
+    #               must also have permissions to access the specified KMS key. If the role that
+    #               you specify doesn’t have the appropriate permissions, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
     #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
     #               ARNs</a>.</p>
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   <p>Specifies the encryption configuration for your custom vocabulary filter. Your vocabulary filter artifacts are encrypted with the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     vocabulary_filter_name: "VocabularyFilterName", # required
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
     #     words: ["Word"],
     #     vocabulary_filter_file_uri: "Uri",
     #     tags: [
@@ -756,7 +776,13 @@ module Aws::Transcribe
     #         value: "TagValue", # required
     #       }
     #     ],
-    #     data_access_role_arn: "DataAccessRoleArn"
+    #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     }
     #   }
     #   options = {}
     #   response = client.create_vocabulary_filter(params, options)
@@ -764,7 +790,7 @@ module Aws::Transcribe
     #   response.to_h #=>
     #   {
     #     vocabulary_filter_name: "VocabularyFilterName",
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     last_modified_time: Time.now
     #   }
     # @return [Types::CreateVocabularyFilterResponse]
@@ -1004,6 +1030,12 @@ module Aws::Transcribe
     #         s3_uri: "Uri", # required
     #         tuning_data_s3_uri: "Uri",
     #         data_access_role_arn: "DataAccessRoleArn", # required
+    #       },
+    #       encryption_configuration: {
+    #         kms_encryption_context: {
+    #           "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #         },
+    #         kms_key: "KMSKeyId", # required
     #       }
     #     }
     #   }
@@ -1155,7 +1187,7 @@ module Aws::Transcribe
     #           }
     #         ]
     #       },
-    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #       media_sample_rate_hertz: 1,
     #       media_format: "mp3" # One of: ["mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"],
     #       media: {
@@ -1180,9 +1212,9 @@ module Aws::Transcribe
     #         content_redaction: {
     #           redaction_type: "PII" # One of: ["PII"], # required
     #           redaction_output: "redacted" # One of: ["redacted", "redacted_and_unredacted"], # required
-    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"]]
+    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"]]
     #         },
-    #         language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
+    #         language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
     #         language_id_settings: {
     #           "LanguageCode" => {
     #             vocabulary_name: "VocabularyName",
@@ -1218,7 +1250,7 @@ module Aws::Transcribe
     #          <p>To view the status of the specified medical transcription job, check the
     #                 <code>MedicalScribeJobStatus</code> field. If the status is <code>COMPLETED</code>,
     #             the job is finished. You can find the results at the location specified in
-    #                 <code>MedicalScribeOutput</code>. 
+    #                 <code>MedicalScribeOutput</code>.
     #                 If the status is <code>FAILED</code>, <code>FailureReason</code> provides details on why your Medical Scribe job
     #             failed.</p>
     #          <p>To get a list of your Medical Scribe jobs, use the  operation.</p>
@@ -1308,7 +1340,7 @@ module Aws::Transcribe
     #     medical_transcription_job: {
     #       medical_transcription_job_name: "TranscriptionJobName",
     #       transcription_job_status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"],
-    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #       media_sample_rate_hertz: 1,
     #       media_format: "mp3" # One of: ["mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"],
     #       media: {
@@ -1367,7 +1399,7 @@ module Aws::Transcribe
     #   response.to_h #=>
     #   {
     #     vocabulary_name: "VocabularyName",
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     vocabulary_state: "PENDING" # One of: ["PENDING", "READY", "FAILED"],
     #     last_modified_time: Time.now,
     #     failure_reason: "FailureReason",
@@ -1405,7 +1437,7 @@ module Aws::Transcribe
     #     transcription_job: {
     #       transcription_job_name: "TranscriptionJobName",
     #       transcription_job_status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"],
-    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #       media_sample_rate_hertz: 1,
     #       media_format: "mp3" # One of: ["mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"],
     #       media: {
@@ -1440,15 +1472,15 @@ module Aws::Transcribe
     #       content_redaction: {
     #         redaction_type: "PII" # One of: ["PII"], # required
     #         redaction_output: "redacted" # One of: ["redacted", "redacted_and_unredacted"], # required
-    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"]]
+    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"]]
     #       },
     #       identify_language: false,
     #       identify_multiple_languages: false,
-    #       language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
+    #       language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
     #       identified_language_score: 1.0,
     #       language_codes: [
     #         {
-    #           language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #           language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #           duration_in_seconds: 1.0
     #         }
     #       ],
@@ -1504,11 +1536,18 @@ module Aws::Transcribe
     #   response.to_h #=>
     #   {
     #     vocabulary_name: "VocabularyName",
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     vocabulary_state: "PENDING" # One of: ["PENDING", "READY", "FAILED"],
     #     last_modified_time: Time.now,
     #     failure_reason: "FailureReason",
-    #     download_uri: "Uri"
+    #     download_uri: "Uri",
+    #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     }
     #   }
     # @return [Types::GetVocabularyResponse]
     def get_vocabulary(params = {}, options = {})
@@ -1532,9 +1571,16 @@ module Aws::Transcribe
     #   response.to_h #=>
     #   {
     #     vocabulary_filter_name: "VocabularyFilterName",
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     last_modified_time: Time.now,
-    #     download_uri: "Uri"
+    #     download_uri: "Uri",
+    #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     }
     #   }
     # @return [Types::GetVocabularyFilterResponse]
     def get_vocabulary_filter(params = {}, options = {})
@@ -1700,7 +1746,7 @@ module Aws::Transcribe
     #         creation_time: Time.now,
     #         start_time: Time.now,
     #         completion_time: Time.now,
-    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #         call_analytics_job_status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"],
     #         call_analytics_job_details: {
     #           skipped: [
@@ -1769,6 +1815,12 @@ module Aws::Transcribe
     #           s3_uri: "Uri", # required
     #           tuning_data_s3_uri: "Uri",
     #           data_access_role_arn: "DataAccessRoleArn", # required
+    #         },
+    #         encryption_configuration: {
+    #           kms_encryption_context: {
+    #             "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #           },
+    #           kms_key: "KMSKeyId", # required
     #         }
     #       }
     #     ]
@@ -1873,7 +1925,7 @@ module Aws::Transcribe
     #         creation_time: Time.now,
     #         start_time: Time.now,
     #         completion_time: Time.now,
-    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #         transcription_job_status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"],
     #         failure_reason: "FailureReason",
     #         output_location_type: "CUSTOMER_BUCKET" # One of: ["CUSTOMER_BUCKET", "SERVICE_BUCKET"],
@@ -1927,7 +1979,7 @@ module Aws::Transcribe
     #     vocabularies: [
     #       {
     #         vocabulary_name: "VocabularyName",
-    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #         last_modified_time: Time.now,
     #         vocabulary_state: "PENDING" # One of: ["PENDING", "READY", "FAILED"]
     #       }
@@ -2018,14 +2070,14 @@ module Aws::Transcribe
     #         creation_time: Time.now,
     #         start_time: Time.now,
     #         completion_time: Time.now,
-    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #         transcription_job_status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"],
     #         failure_reason: "FailureReason",
     #         output_location_type: "CUSTOMER_BUCKET" # One of: ["CUSTOMER_BUCKET", "SERVICE_BUCKET"],
     #         content_redaction: {
     #           redaction_type: "PII" # One of: ["PII"], # required
     #           redaction_output: "redacted" # One of: ["redacted", "redacted_and_unredacted"], # required
-    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"]]
+    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"]]
     #         },
     #         model_settings: {
     #           language_model_name: "ModelName"
@@ -2035,7 +2087,7 @@ module Aws::Transcribe
     #         identified_language_score: 1.0,
     #         language_codes: [
     #           {
-    #             language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #             language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #             duration_in_seconds: 1.0
     #           }
     #         ],
@@ -2091,7 +2143,7 @@ module Aws::Transcribe
     #     vocabularies: [
     #       {
     #         vocabulary_name: "VocabularyName",
-    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #         last_modified_time: Time.now,
     #         vocabulary_state: "PENDING" # One of: ["PENDING", "READY", "FAILED"]
     #       }
@@ -2135,7 +2187,7 @@ module Aws::Transcribe
     #     vocabulary_filters: [
     #       {
     #         vocabulary_filter_name: "VocabularyFilterName",
-    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #         language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #         last_modified_time: Time.now
     #       }
     #     ]
@@ -2155,15 +2207,15 @@ module Aws::Transcribe
     #                 center audio with Call Analytics</a>.</p>
     #          <p>If you want to apply categories to your Call Analytics job, you must create them
     #             before submitting your job request. Categories cannot be retroactively applied to a job.
-    #             To create a new category, use the 
-    #             operation. To learn more about Call Analytics categories, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html">Creating categories for post-call 
-    #                 transcriptions</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html">Creating categories for 
+    #             To create a new category, use the
+    #             operation. To learn more about Call Analytics categories, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html">Creating categories for post-call
+    #                 transcriptions</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html">Creating categories for
     #                     real-time transcriptions</a>.</p>
     #          <p>To make a <code>StartCallAnalyticsJob</code> request, you must first upload your media
     #             file into an Amazon S3 bucket; you can then specify the Amazon S3
     #             location of the file using the <code>Media</code> parameter.</p>
-    #          <p>Job queuing is available for Call Analytics jobs. If you pass a <code>DataAccessRoleArn</code> 
-    #             in your request and you exceed your Concurrent Job Limit, your job will automatically be 
+    #          <p>Job queuing is available for Call Analytics jobs. If you pass a <code>DataAccessRoleArn</code>
+    #             in your request and you exceed your Concurrent Job Limit, your job will automatically be
     #             added to a queue to be processed once your concurrent job count is below the limit.</p>
     #          <p>You must include the following parameters in your <code>StartCallAnalyticsJob</code>
     #             request:</p>
@@ -2226,49 +2278,17 @@ module Aws::Transcribe
     #               service-managed Amazon S3 bucket and you are provided with a URI to access your
     #               transcript.</p>
     # @option params [String] :output_encryption_kms_key_id
-    #   <p>The KMS key you want to use to encrypt your Call Analytics
-    #               output.</p>
-    #            <p>If using a key located in the <b>current</b>
-    #               Amazon Web Services account, you can specify your KMS key in one of four
-    #               ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the KMS key ID itself. For example,
-    #                           <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use an alias for the KMS key ID. For example,
-    #                           <code>alias/ExampleAlias</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For
-    #                       example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
-    #            <p>If using a key located in a <b>different</b>
-    #               Amazon Web Services account than the current Amazon Web Services account, you can specify
-    #               your KMS key in one of two ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key ID. For example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
+    #   <p>The Amazon Resource Name (ARN) of a KMS key that you want to use to
+    #               encrypt your Call Analytics output.</p>
+    #            <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:
+    #       	<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">
+    #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
-    #                   Amazon S3 key (SSE-S3).</p>
-    #            <p>If you specify a KMS key to encrypt your output, you must also specify
-    #               an output location using the <code>OutputLocation</code> parameter.</p>
-    #            <p>Note that the role making the  request must
-    #               have permission to use the specified KMS key.</p>
+    #               Amazon S3 key (SSE-S3).</p>
+    #            <p>Note that the role making the  request and the role specified in
+    #   		the <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the
+    #   		specified KMS key.</p>
     # @option params [String] :data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files. If the role that you
@@ -2309,9 +2329,9 @@ module Aws::Transcribe
     #       content_redaction: {
     #         redaction_type: "PII" # One of: ["PII"], # required
     #         redaction_output: "redacted" # One of: ["redacted", "redacted_and_unredacted"], # required
-    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"]]
+    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"]]
     #       },
-    #       language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
+    #       language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
     #       language_id_settings: {
     #         "LanguageCode" => {
     #           vocabulary_name: "VocabularyName",
@@ -2353,7 +2373,7 @@ module Aws::Transcribe
     #           }
     #         ]
     #       },
-    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #       media_sample_rate_hertz: 1,
     #       media_format: "mp3" # One of: ["mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"],
     #       media: {
@@ -2378,9 +2398,9 @@ module Aws::Transcribe
     #         content_redaction: {
     #           redaction_type: "PII" # One of: ["PII"], # required
     #           redaction_output: "redacted" # One of: ["redacted", "redacted_and_unredacted"], # required
-    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"]]
+    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"]]
     #         },
-    #         language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
+    #         language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
     #         language_id_settings: {
     #           "LanguageCode" => {
     #             vocabulary_name: "VocabularyName",
@@ -2413,7 +2433,7 @@ module Aws::Transcribe
     end
 
     # <p>Transcribes patient-clinician conversations and generates clinical notes. </p>
-    #          <p>Amazon Web Services HealthScribe automatically provides rich conversation transcripts, identifies speaker roles, 
+    #          <p>Amazon Web Services HealthScribe automatically provides rich conversation transcripts, identifies speaker roles,
     #             classifies dialogues, extracts medical terms, and generates preliminary clinical notes.
     #             To learn more about these features, refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/health-scribe.html">Amazon Web Services HealthScribe</a>.</p>
     #          <p>To make a <code>StartMedicalScribeJob</code> request, you must first upload
@@ -2454,7 +2474,7 @@ module Aws::Transcribe
     #             <li>
     #                <p>
     #                   <code>ChannelDefinitions</code>: A <code>MedicalScribeChannelDefinitions</code> array should be set if and only if the <code>ChannelIdentification</code>
-    #                 value of <code>Settings</code> is set to true. 
+    #                 value of <code>Settings</code> is set to true.
     #                 </p>
     #             </li>
     #          </ul>
@@ -2467,65 +2487,35 @@ module Aws::Transcribe
     # @option params [Types::Media] :media
     #   <p>Describes the Amazon S3 location of the media file you want to use in your
     #               request.</p>
-    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code> 
-    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section 
+    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code>
+    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section
     #               in the Amazon S3 Developer Guide.</p>
     # @option params [String] :output_bucket_name
     #   <p>The name of the Amazon S3 bucket where you want your Medical Scribe
     #               output stored. Do not include the <code>S3://</code> prefix of the specified
     #               bucket.</p>
-    #            <p>Note that the role specified in the <code>DataAccessRoleArn</code> request parameter 
+    #            <p>Note that the role specified in the <code>DataAccessRoleArn</code> request parameter
     #               must have permission to use the specified location. You
     #               can change Amazon S3 permissions using the <a href="https://console.aws.amazon.com/s3">Amazon Web Services Management Console</a>. See also <a href="https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user">Permissions Required for IAM User Roles</a>.</p>
     # @option params [String] :output_encryption_kms_key_id
-    #   <p>The KMS key you want to use to encrypt your Medical Scribe
-    #               output.</p>
-    #            <p>If using a key located in the <b>current</b>
-    #               Amazon Web Services account, you can specify your KMS key in one of four
-    #               ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the KMS key ID itself. For example,
-    #                           <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use an alias for the KMS key ID. For example,
-    #                           <code>alias/ExampleAlias</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For
-    #                       example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
-    #            <p>If using a key located in a <b>different</b>
-    #               Amazon Web Services account than the current Amazon Web Services account, you can specify
-    #               your KMS key in one of two ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key ID. For example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
+    #   <p>The Amazon Resource Name (ARN) of a KMS key that you want to use to
+    #               encrypt your Medical Scribe output.</p>
+    #            <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:
+    #   		<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.
+    #               	For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">
+    #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
     #                   Amazon S3 key (SSE-S3).</p>
-    #            <p>Note that the role specified in the <code>DataAccessRoleArn</code> request parameter 
-    #               must have permission to use the specified KMS key.</p>
+    #            <p>Note that the role making the  request and the role specified in
+    #   		the <code>DataAccessRoleArn</code> request parameter (if present)
+    #   		must have permission to use the specified KMS key.</p>
     # @option params [Hash<String, String>] :kms_encryption_context
     #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs,
     #               that provide an added layer of security for your data. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context">KMS encryption context</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html">Asymmetric keys in KMS</a>.</p>
     # @option params [String] :data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
-    #               access the Amazon S3 bucket that contains your input files, 
-    #               write to the output bucket, and use your KMS key if supplied.  
+    #               access the Amazon S3 bucket that contains your input files,
+    #               write to the output bucket, and use your KMS key if supplied.
     #                If the role that you specify doesn’t have the appropriate permissions your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
@@ -2534,16 +2524,16 @@ module Aws::Transcribe
     #               ARNs</a>.</p>
     # @option params [Types::MedicalScribeSettings] :settings
     #   <p>Makes it possible to control how your Medical Scribe job is processed using a
-    #               <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if 
-    #               <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code> 
+    #               <code>MedicalScribeSettings</code> object. Specify <code>ChannelIdentification</code> if
+    #               <code>ChannelDefinitions</code> are set. Enabled <code>ShowSpeakerLabels</code> if <code>ChannelIdentification</code>
     #               and <code>ChannelDefinitions</code> are not set. One and only one of <code>ChannelIdentification</code> and <code>ShowSpeakerLabels</code>
     #               must be set. If <code>ShowSpeakerLabels</code> is set, <code>MaxSpeakerLabels</code> must also be set. Use <code>Settings</code>
-    #               to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>. 
+    #               to specify a vocabulary or vocabulary filter or both using <code>VocabularyName</code>, <code>VocabularyFilterName</code>.
     #               <code>VocabularyFilterMethod</code> must be specified if <code>VocabularyFilterName</code> is set.
     #           </p>
     # @option params [Array<Types::MedicalScribeChannelDefinition>] :channel_definitions
     #   <p>Makes it possible to specify which speaker is on which channel. For example, if the clinician
-    #                is the first participant to speak, you would set <code>ChannelId</code> of the first <code>ChannelDefinition</code> 
+    #                is the first participant to speak, you would set <code>ChannelId</code> of the first <code>ChannelDefinition</code>
     #                in the list to <code>0</code> (to indicate the first channel) and <code>ParticipantRole</code> to
     #                   <code>CLINICIAN</code> (to indicate that it's the clinician speaking).
     #                   Then you would set the <code>ChannelId</code> of the second <code>ChannelDefinition</code> in the list to
@@ -2567,7 +2557,7 @@ module Aws::Transcribe
     #     output_bucket_name: "OutputBucketName", # required
     #     output_encryption_kms_key_id: "KMSKeyId",
     #     kms_encryption_context: {
-    #       "NonEmptyString" => "NonEmptyString"
+    #       "PrintableNonEmptyString" => "PrintableNonEmptyString"
     #     },
     #     data_access_role_arn: "DataAccessRoleArn", # required
     #     settings: { # required
@@ -2728,8 +2718,8 @@ module Aws::Transcribe
     # @option params [Types::Media] :media
     #   <p>Describes the Amazon S3 location of the media file you want to use in your
     #               request.</p>
-    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code> 
-    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section 
+    #            <p>For information on supported media formats, refer to the <code>MediaFormat</code>
+    #               parameter or the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio">Media formats</a> section
     #               in the Amazon S3 Developer Guide.</p>
     # @option params [String] :output_bucket_name
     #   <p>The name of the Amazon S3 bucket where you want your medical transcription
@@ -2781,49 +2771,17 @@ module Aws::Transcribe
     #            <p>If you specify the name of an Amazon S3 bucket sub-folder that doesn't exist,
     #               one is created for you.</p>
     # @option params [String] :output_encryption_kms_key_id
-    #   <p>The KMS key you want to use to encrypt your medical transcription
-    #               output.</p>
-    #            <p>If using a key located in the <b>current</b>
-    #               Amazon Web Services account, you can specify your KMS key in one of four
-    #               ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the KMS key ID itself. For example,
-    #                           <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use an alias for the KMS key ID. For example,
-    #                           <code>alias/ExampleAlias</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For
-    #                       example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
-    #            <p>If using a key located in a <b>different</b>
-    #               Amazon Web Services account than the current Amazon Web Services account, you can specify
-    #               your KMS key in one of two ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key ID. For example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
+    #   <p>The Amazon Resource Name (ARN) of a KMS key that you want to use to
+    #               encrypt your medical transcription output.</p>
+    #            <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:
+    #       	<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">
+    #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
-    #                   Amazon S3 key (SSE-S3).</p>
-    #            <p>If you specify a KMS key to encrypt your output, you must also specify
-    #               an output location using the <code>OutputLocation</code> parameter.</p>
-    #            <p>Note that the role making the  request must
-    #               have permission to use the specified KMS key.</p>
+    #               Amazon S3 key (SSE-S3).</p>
+    #            <p>Note that the role making the  request and the role specified
+    #       		in the <code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the
+    #   		specified KMS key.</p>
     # @option params [Hash<String, String>] :kms_encryption_context
     #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs,
     #               that provide an added layer of security for your data. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context">KMS encryption context</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html">Asymmetric keys in KMS</a>.</p>
@@ -2852,7 +2810,7 @@ module Aws::Transcribe
     # @example Request syntax with placeholder values
     #   params = {
     #     medical_transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3" # One of: ["mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"],
     #     media: { # required
@@ -2863,7 +2821,7 @@ module Aws::Transcribe
     #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
     #     kms_encryption_context: {
-    #       "NonEmptyString" => "NonEmptyString"
+    #       "PrintableNonEmptyString" => "PrintableNonEmptyString"
     #     },
     #     settings: {
     #       show_speaker_labels: false,
@@ -2891,7 +2849,7 @@ module Aws::Transcribe
     #     medical_transcription_job: {
     #       medical_transcription_job_name: "TranscriptionJobName",
     #       transcription_job_status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"],
-    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #       media_sample_rate_hertz: 1,
     #       media_format: "mp3" # One of: ["mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"],
     #       media: {
@@ -3052,54 +3010,22 @@ module Aws::Transcribe
     #            <p>If you specify the name of an Amazon S3 bucket sub-folder that doesn't exist,
     #               one is created for you.</p>
     # @option params [String] :output_encryption_kms_key_id
-    #   <p>The KMS key you want to use to encrypt your transcription
-    #               output.</p>
-    #            <p>If using a key located in the <b>current</b>
-    #               Amazon Web Services account, you can specify your KMS key in one of four
-    #               ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the KMS key ID itself. For example,
-    #                           <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use an alias for the KMS key ID. For example,
-    #                           <code>alias/ExampleAlias</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For
-    #                       example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
-    #            <p>If using a key located in a <b>different</b>
-    #               Amazon Web Services account than the current Amazon Web Services account, you can specify
-    #               your KMS key in one of two ways:</p>
-    #            <ol>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key ID. For example,
-    #                           <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>Use the ARN for the KMS key alias. For example,
-    #                           <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>
-    #               </li>
-    #            </ol>
+    #   <p>The Amazon Resource Name (ARN) of a KMS key that you want to use to
+    #               encrypt your transcription output.</p>
+    #            <p>KMS key ARNs have the format <code>arn:partition:kms:region:account:key/key-id</code>. For example:
+    #       	<code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.
+    #               For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">
+    #                   KMS key ARNs</a>.</p>
     #            <p>If you do not specify an encryption key, your output is encrypted with the default
-    #                   Amazon S3 key (SSE-S3).</p>
-    #            <p>If you specify a KMS key to encrypt your output, you must also specify
-    #               an output location using the <code>OutputLocation</code> parameter.</p>
-    #            <p>Note that the role making the  request must
-    #               have permission to use the specified KMS key.</p>
+    #               Amazon S3 key (SSE-S3).</p>
+    #            <p>Note that the role making the  request and the role specified in the
+    #   		<code>DataAccessRoleArn</code> request parameter (if present) must have permission to use the specified
+    #   		KMS key.</p>
     # @option params [Hash<String, String>] :kms_encryption_context
     #   <p>A map of plain text, non-secret key:value pairs, known as encryption context pairs,
     #               that provide an added layer of security for your data. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context">KMS encryption context</a> and <a href="https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html">Asymmetric keys in KMS</a>.</p>
     # @option params [Types::Settings] :settings
-    #   <p>Specify additional optional settings in your  
+    #   <p>Specify additional optional settings in your
     #               request, including channel identification, alternative transcriptions, speaker
     #               partitioning. You can use that to apply custom vocabularies and vocabulary filters.</p>
     #            <p>If you want to include a custom vocabulary or a custom vocabulary filter (or both)
@@ -3125,9 +3051,9 @@ module Aws::Transcribe
     #               include the sub-parameters: <code>AllowDeferredExecution</code> and
     #                   <code>DataAccessRoleArn</code>.</p>
     # @option params [Types::ContentRedaction] :content_redaction
-    #   <p>Makes it possible to redact or flag specified personally identifiable information (PII) in 
-    #               your transcript. If you use <code>ContentRedaction</code>, you must also include the 
-    #               sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can 
+    #   <p>Makes it possible to redact or flag specified personally identifiable information (PII) in
+    #               your transcript. If you use <code>ContentRedaction</code>, you must also include the
+    #               sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can
     #               optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to redact.
     #               If you do not include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>
     # @option params [Boolean] :identify_language
@@ -3215,16 +3141,16 @@ module Aws::Transcribe
     #                   <code>VocabularyName</code> or <code>VocabularyFilterName</code> (or both)
     #               sub-parameter.</p>
     # @option params [Array<Types::ToxicityDetectionSettings>] :toxicity_detection
-    #   <p>Enables toxic speech detection in your transcript. If you include 
+    #   <p>Enables toxic speech detection in your transcript. If you include
     #               <code>ToxicityDetection</code> in your request, you must also include
     #               <code>ToxicityCategories</code>.</p>
-    #            <p>For information on the types of toxic speech Amazon Transcribe can detect, see 
+    #            <p>For information on the types of toxic speech Amazon Transcribe can detect, see
     #               <a href="https://docs.aws.amazon.com/transcribe/latest/dg/toxic-language.html">Detecting toxic
     #                   speech</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     transcription_job_name: "TranscriptionJobName", # required
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     media_sample_rate_hertz: 1,
     #     media_format: "mp3" # One of: ["mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"],
     #     media: { # required
@@ -3235,7 +3161,7 @@ module Aws::Transcribe
     #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
     #     kms_encryption_context: {
-    #       "NonEmptyString" => "NonEmptyString"
+    #       "PrintableNonEmptyString" => "PrintableNonEmptyString"
     #     },
     #     settings: {
     #       vocabulary_name: "VocabularyName",
@@ -3257,11 +3183,11 @@ module Aws::Transcribe
     #     content_redaction: {
     #       redaction_type: "PII" # One of: ["PII"], # required
     #       redaction_output: "redacted" # One of: ["redacted", "redacted_and_unredacted"], # required
-    #       pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"]]
+    #       pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"]]
     #     },
     #     identify_language: false,
     #     identify_multiple_languages: false,
-    #     language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
+    #     language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
     #     subtitles: {
     #       formats: ["vtt" # One of: ["vtt", "srt"]],
     #       output_start_index: 1
@@ -3293,7 +3219,7 @@ module Aws::Transcribe
     #     transcription_job: {
     #       transcription_job_name: "TranscriptionJobName",
     #       transcription_job_status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"],
-    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #       language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #       media_sample_rate_hertz: 1,
     #       media_format: "mp3" # One of: ["mp3", "mp4", "wav", "flac", "ogg", "amr", "webm", "m4a"],
     #       media: {
@@ -3328,15 +3254,15 @@ module Aws::Transcribe
     #       content_redaction: {
     #         redaction_type: "PII" # One of: ["PII"], # required
     #         redaction_output: "redacted" # One of: ["redacted", "redacted_and_unredacted"], # required
-    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"]]
+    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER" # One of: ["BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"]]
     #       },
     #       identify_language: false,
     #       identify_multiple_languages: false,
-    #       language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
+    #       language_options: ["af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"]],
     #       identified_language_score: 1.0,
     #       language_codes: [
     #         {
-    #           language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #           language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #           duration_in_seconds: 1.0
     #         }
     #       ],
@@ -3456,7 +3382,7 @@ module Aws::Transcribe
     #   <p>The rules used for the updated Call Analytics category. The rules you provide in this
     #               field replace the ones that are currently being used in the specified category.</p>
     # @option params [String] :input_type
-    #   <p>Choose whether you want to update a real-time or a post-call category. The 
+    #   <p>Choose whether you want to update a real-time or a post-call category. The
     #               input type you specify must match the input type specified when the category was created. For
     #               example, if you created a category with the <code>POST_CALL</code> input type, you must
     #               use <code>POST_CALL</code> as the input type when updating this category.</p>
@@ -3631,6 +3557,56 @@ module Aws::Transcribe
       request.send_request(options)
     end
 
+    # <p>Updates the encryption configuration for an existing custom language model. You can
+    #             use this operation to change the KMS key used to encrypt your model artifacts. The model
+    #             artifacts are re-encrypted in place. No model training is required.</p>
+    #          <p>Your custom language model must not be in the <code>IN_PROGRESS</code> state when you
+    #             call this operation. You cannot submit another update while a previous update is in
+    #             progress. Use  to check the current state of
+    #             your model.</p>
+    #          <p>Your custom language model remains available for transcription jobs while the update
+    #             is being processed.</p>
+    # @param [Hash, Types::UpdateLanguageModelRequest] params
+    # @option params [String] :model_name
+    #   <p>The name of the custom language model you want to update. Model names are case sensitive.</p>
+    # @option params [String] :data_access_role_arn
+    #   <p>The Amazon Resource Name (ARN) of an IAM role. If you include
+    #               <code>EncryptionConfiguration</code> in your request, this role must have permissions to
+    #               access the specified KMS key. If the role that you specify doesn't have
+    #               the appropriate permissions, your request fails.</p>
+    #            <p>IAM role ARNs have the format
+    #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
+    #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
+    #               ARNs</a>.</p>
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   <p>Specifies the new encryption configuration for your custom language model. The model artifacts are re-encrypted in place using the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     model_name: "ModelName", # required
+    #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_language_model(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     model_name: "ModelName",
+    #     model_status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "FAILED", "COMPLETED"],
+    #     last_modified_time: Time.now
+    #   }
+    # @return [Types::UpdateLanguageModelResponse]
+    def update_language_model(params = {}, options = {})
+      request = build_request(:update_language_model, params)
+      request.send_request(options)
+    end
+
     # <p>Updates an existing custom medical vocabulary with new values. This operation
     #             overwrites all existing information with your new values; you cannot append new terms
     #             onto an existing custom vocabulary.</p>
@@ -3652,7 +3628,7 @@ module Aws::Transcribe
     # @example Request syntax with placeholder values
     #   params = {
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
     #     vocabulary_file_uri: "Uri", # required
     #   }
     #   options = {}
@@ -3661,7 +3637,7 @@ module Aws::Transcribe
     #   response.to_h #=>
     #   {
     #     vocabulary_name: "VocabularyName",
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     last_modified_time: Time.now,
     #     vocabulary_state: "PENDING" # One of: ["PENDING", "READY", "FAILED"]
     #   }
@@ -3674,6 +3650,9 @@ module Aws::Transcribe
     # <p>Updates an existing custom vocabulary with new values. This operation overwrites all
     #             existing information with your new values; you cannot append new terms onto an existing
     #             custom vocabulary.</p>
+    #          <p>Your custom vocabulary must be in a terminal state (<code>READY</code> or
+    #             <code>FAILED</code>) before you can update it. You must include either
+    #             <code>Phrases</code> or <code>VocabularyFileUri</code> in your request.</p>
     # @param [Hash, Types::UpdateVocabularyRequest] params
     # @option params [String] :vocabulary_name
     #   <p>The name of the custom vocabulary you want to update. Custom vocabulary names are case
@@ -3712,20 +3691,29 @@ module Aws::Transcribe
     # @option params [String] :data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files (in this case, your custom
-    #               vocabulary). If the role that you specify doesn’t have the appropriate permissions to access
-    #               the specified Amazon S3 location, your request fails.</p>
+    #               vocabulary). If you include <code>EncryptionConfiguration</code> in your request, this role
+    #               must also have permissions to access the specified KMS key. If the role that
+    #               you specify doesn’t have the appropriate permissions, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
     #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
     #               ARNs</a>.</p>
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   <p>Specifies the new encryption configuration for your custom vocabulary. The vocabulary artifacts are re-encrypted in place using the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     vocabulary_name: "VocabularyName", # required
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"], # required
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
-    #     data_access_role_arn: "DataAccessRoleArn"
+    #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     }
     #   }
     #   options = {}
     #   response = client.update_vocabulary(params, options)
@@ -3733,7 +3721,7 @@ module Aws::Transcribe
     #   response.to_h #=>
     #   {
     #     vocabulary_name: "VocabularyName",
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     last_modified_time: Time.now,
     #     vocabulary_state: "PENDING" # One of: ["PENDING", "READY", "FAILED"]
     #   }
@@ -3746,6 +3734,8 @@ module Aws::Transcribe
     # <p>Updates an existing custom vocabulary filter with a new list of words. The new list
     #             you provide overwrites all previous entries; you cannot append new terms onto an
     #             existing custom vocabulary filter.</p>
+    #          <p>You must include either <code>Words</code> or <code>VocabularyFilterFileUri</code>
+    #             in your request.</p>
     # @param [Hash, Types::UpdateVocabularyFilterRequest] params
     # @option params [String] :vocabulary_filter_name
     #   <p>The name of the custom vocabulary filter you want to update. Custom vocabulary filter
@@ -3774,19 +3764,28 @@ module Aws::Transcribe
     # @option params [String] :data_access_role_arn
     #   <p>The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #               access the Amazon S3 bucket that contains your input files (in this case, your custom
-    #               vocabulary filter). If the role that you specify doesn’t have the appropriate permissions to access
-    #               the specified Amazon S3 location, your request fails.</p>
+    #               vocabulary filter). If you include <code>EncryptionConfiguration</code> in your request, this role
+    #               must also have permissions to access the specified KMS key. If the role that
+    #               you specify doesn’t have the appropriate permissions, your request fails.</p>
     #            <p>IAM role ARNs have the format
     #               <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:
     #               <code>arn:aws:iam::111122223333:role/Admin</code>.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM
     #               ARNs</a>.</p>
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   <p>Specifies the new encryption configuration for your custom vocabulary filter. The vocabulary filter artifacts are re-encrypted in place using the specified KMS key or with an AWS-owned key if a key is not supplied.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     vocabulary_filter_name: "VocabularyFilterName", # required
     #     words: ["Word"],
     #     vocabulary_filter_file_uri: "Uri",
-    #     data_access_role_arn: "DataAccessRoleArn"
+    #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString"
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     }
     #   }
     #   options = {}
     #   response = client.update_vocabulary_filter(params, options)
@@ -3794,7 +3793,7 @@ module Aws::Transcribe
     #   response.to_h #=>
     #   {
     #     vocabulary_filter_name: "VocabularyFilterName",
-    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
+    #     language_code: "af-ZA" # One of: ["af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"],
     #     last_modified_time: Time.now
     #   }
     # @return [Types::UpdateVocabularyFilterResponse]
@@ -3886,7 +3885,15 @@ module Aws::Transcribe
     private
 
     def waiters
-      {}
+      {
+        call_analytics_job_completed: Waiters::CallAnalyticsJobCompleted,
+        language_model_completed: Waiters::LanguageModelCompleted,
+        medical_scribe_job_completed: Waiters::MedicalScribeJobCompleted,
+        medical_transcription_job_completed: Waiters::MedicalTranscriptionJobCompleted,
+        medical_vocabulary_ready: Waiters::MedicalVocabularyReady,
+        transcription_job_completed: Waiters::TranscriptionJobCompleted,
+        vocabulary_ready: Waiters::VocabularyReady
+      }
     end
 
     class << self

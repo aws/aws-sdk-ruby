@@ -73,6 +73,7 @@ module Aws::IoT
         ?kafka: Types::KafkaAction,
         ?open_search: Types::OpenSearchAction,
         ?location: Types::LocationAction,
+        ?influx_db: Types::InfluxDBAction,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -99,6 +100,7 @@ module Aws::IoT
       attr_accessor kafka: Types::KafkaAction?
       attr_accessor open_search: Types::OpenSearchAction?
       attr_accessor location: Types::LocationAction?
+      attr_accessor influx_db: Types::InfluxDBAction?
     end
 
     module ActionType
@@ -906,6 +908,34 @@ module Aws::IoT
       attr_accessor in_progress_timeout_in_minutes: Integer?
     end
 
+    class AwsJsonSubstitutionCommandPreprocessorConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_format: String?
+    end
+
+    class BatchConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_batch_open_ms: Integer,
+        ?max_batch_size: Integer,
+        ?max_batch_size_bytes: Integer,
+        ?batch_across_topics: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_batch_open_ms: Integer?
+      attr_accessor max_batch_size: Integer?
+      attr_accessor max_batch_size_bytes: Integer?
+      attr_accessor batch_across_topics: bool?
+    end
+
     class Behavior
       include Smithy::Schema::Structure
 
@@ -1526,16 +1556,30 @@ module Aws::IoT
 
       def initialize: (
         ?name: String,
+        ?type: String,
         ?value: Types::CommandParameterValue,
         ?default_value: Types::CommandParameterValue,
+        ?value_conditions: Array[Types::CommandParameterValueCondition],
         ?description: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
+      attr_accessor type: String?
       attr_accessor value: Types::CommandParameterValue?
       attr_accessor default_value: Types::CommandParameterValue?
+      attr_accessor value_conditions: Array[Types::CommandParameterValueCondition]?
       attr_accessor description: String?
+    end
+
+    module CommandParameterType
+      STRING: String
+      INTEGER: String
+      DOUBLE: String
+      LONG: String
+      UNSIGNEDLONG: String
+      BOOLEAN: String
+      BINARY: String
     end
 
     class CommandParameterValue
@@ -1561,6 +1605,64 @@ module Aws::IoT
       attr_accessor ul: String?
     end
 
+    class CommandParameterValueComparisonOperand
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number: String,
+        ?numbers: Array[String],
+        ?string: String,
+        ?strings: Array[String],
+        ?number_range: Types::CommandParameterValueNumberRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number: String?
+      attr_accessor numbers: Array[String]?
+      attr_accessor string: String?
+      attr_accessor strings: Array[String]?
+      attr_accessor number_range: Types::CommandParameterValueNumberRange?
+    end
+
+    module CommandParameterValueComparisonOperator
+      EQUALS: String
+      NOT_EQUALS: String
+      LESS_THAN: String
+      LESS_THAN_EQUALS: String
+      GREATER_THAN: String
+      GREATER_THAN_EQUALS: String
+      IN_SET: String
+      NOT_IN_SET: String
+      IN_RANGE: String
+      NOT_IN_RANGE: String
+    end
+
+    class CommandParameterValueCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison_operator: String,
+        ?operand: Types::CommandParameterValueComparisonOperand,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison_operator: String?
+      attr_accessor operand: Types::CommandParameterValueComparisonOperand?
+    end
+
+    class CommandParameterValueNumberRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: String,
+        ?max: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: String?
+      attr_accessor max: String?
+    end
+
     class CommandPayload
       include Smithy::Schema::Structure
 
@@ -1572,6 +1674,17 @@ module Aws::IoT
 
       attr_accessor content: String?
       attr_accessor content_type: String?
+    end
+
+    class CommandPreprocessor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_json_substitution: Types::AwsJsonSubstitutionCommandPreprocessorConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_json_substitution: Types::AwsJsonSubstitutionCommandPreprocessorConfig?
     end
 
     class CommandSummary
@@ -1694,6 +1807,17 @@ module Aws::IoT
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ConnectivityFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_socket_information: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_socket_information: Array[String]?
     end
 
     class CreateAuditSuppressionRequest
@@ -1863,6 +1987,8 @@ module Aws::IoT
         ?display_name: String,
         ?description: String,
         ?payload: Types::CommandPayload,
+        ?payload_template: String,
+        ?preprocessor: Types::CommandPreprocessor,
         ?mandatory_parameters: Array[Types::CommandParameter],
         ?role_arn: String,
         ?tags: Array[Types::Tag],
@@ -1874,6 +2000,8 @@ module Aws::IoT
       attr_accessor display_name: String?
       attr_accessor description: String?
       attr_accessor payload: Types::CommandPayload?
+      attr_accessor payload_template: String?
+      attr_accessor preprocessor: Types::CommandPreprocessor?
       attr_accessor mandatory_parameters: Array[Types::CommandParameter]?
       attr_accessor role_arn: String?
       attr_accessor tags: Array[Types::Tag]?
@@ -4910,6 +5038,7 @@ module Aws::IoT
       MQTT_KEEP_ALIVE_TIMEOUT: String
       SERVER_ERROR: String
       SERVER_INITIATED_DISCONNECT: String
+      API_INITIATED_DISCONNECT: String
       THROTTLED: String
       WEBSOCKET_TTL_EXPIRATION: String
       CUSTOMAUTH_TTL_EXPIRATION: String
@@ -5180,6 +5309,10 @@ module Aws::IoT
       attr_accessor batch_mode: bool?
     end
 
+    module FleetIndexingApi
+      GET_THING_CONNECTIVITY_DATA: String
+    end
+
     class FleetMetricNameAndArn
       include Smithy::Schema::Structure
 
@@ -5396,6 +5529,8 @@ module Aws::IoT
         ?description: String,
         ?mandatory_parameters: Array[Types::CommandParameter],
         ?payload: Types::CommandPayload,
+        ?payload_template: String,
+        ?preprocessor: Types::CommandPreprocessor,
         ?role_arn: String,
         ?created_at: Time,
         ?last_updated_at: Time,
@@ -5411,6 +5546,8 @@ module Aws::IoT
       attr_accessor description: String?
       attr_accessor mandatory_parameters: Array[Types::CommandParameter]?
       attr_accessor payload: Types::CommandPayload?
+      attr_accessor payload_template: String?
+      attr_accessor preprocessor: Types::CommandPreprocessor?
       attr_accessor role_arn: String?
       attr_accessor created_at: Time?
       attr_accessor last_updated_at: Time?
@@ -5789,10 +5926,12 @@ module Aws::IoT
 
       def initialize: (
         ?thing_name: String,
+        ?include_socket_information: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor thing_name: String?
+      attr_accessor include_socket_information: bool?
     end
 
     class GetThingConnectivityDataResponse
@@ -5803,6 +5942,15 @@ module Aws::IoT
         ?connected: bool,
         ?timestamp: Time,
         ?disconnect_reason: String,
+        ?source_ip: String,
+        ?source_port: Integer,
+        ?target_ip: String,
+        ?target_port: Integer,
+        ?vpc_endpoint_id: String,
+        ?keep_alive_duration: Integer,
+        ?clean_session: bool,
+        ?session_expiry: Integer,
+        ?client_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5810,6 +5958,15 @@ module Aws::IoT
       attr_accessor connected: bool?
       attr_accessor timestamp: Time?
       attr_accessor disconnect_reason: String?
+      attr_accessor source_ip: String?
+      attr_accessor source_port: Integer?
+      attr_accessor target_ip: String?
+      attr_accessor target_port: Integer?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor keep_alive_duration: Integer?
+      attr_accessor clean_session: bool?
+      attr_accessor session_expiry: Integer?
+      attr_accessor client_id: String?
     end
 
     class GetTopicRuleDestinationRequest
@@ -5862,9 +6019,11 @@ module Aws::IoT
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?verbose: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor verbose: bool?
     end
 
     class GetV2LoggingOptionsResponse
@@ -5874,12 +6033,14 @@ module Aws::IoT
         ?role_arn: String,
         ?default_log_level: String,
         ?disable_all_logs: bool,
+        ?event_configurations: Array[Types::LogEventConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor role_arn: String?
       attr_accessor default_log_level: String?
       attr_accessor disable_all_logs: bool?
+      attr_accessor event_configurations: Array[Types::LogEventConfiguration]?
     end
 
     class GroupNameAndArn
@@ -5903,6 +6064,8 @@ module Aws::IoT
         ?confirmation_url: String,
         ?headers: Array[Types::HttpActionHeader],
         ?auth: Types::HttpAuthorization,
+        ?enable_batching: bool,
+        ?batch_config: Types::BatchConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5910,6 +6073,8 @@ module Aws::IoT
       attr_accessor confirmation_url: String?
       attr_accessor headers: Array[Types::HttpActionHeader]?
       attr_accessor auth: Types::HttpAuthorization?
+      attr_accessor enable_batching: bool?
+      attr_accessor batch_config: Types::BatchConfig?
     end
 
     class HttpActionHeader
@@ -6016,11 +6181,129 @@ module Aws::IoT
       def initialize: (
         ?named_shadow_names: Array[String],
         ?geo_locations: Array[Types::GeoLocationTarget],
+        ?connectivity: Types::ConnectivityFilter,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor named_shadow_names: Array[String]?
       attr_accessor geo_locations: Array[Types::GeoLocationTarget]?
+      attr_accessor connectivity: Types::ConnectivityFilter?
+    end
+
+    class InfluxDBAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_arn: String,
+        ?role_arn: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?organization: String,
+        ?tags: Hash[String, String],
+        ?timestamp_unit: String,
+        ?batch_config: Types::InfluxDBBatchConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor organization: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor timestamp_unit: String?
+      attr_accessor batch_config: Types::InfluxDBBatchConfig?
+    end
+
+    class InfluxDBBatchConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_batch_size: Integer,
+        ?max_batch_open_ms: Integer,
+        ?max_batch_size_bytes: Integer,
+        ?batch_across_topics: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_batch_size: Integer?
+      attr_accessor max_batch_open_ms: Integer?
+      attr_accessor max_batch_size_bytes: Integer?
+      attr_accessor batch_across_topics: bool?
+    end
+
+    class InfluxDBDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?influx_db_version: String,
+        ?secret_id: String,
+        ?secret_type: String,
+        ?secret_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor influx_db_version: String?
+      attr_accessor secret_id: String?
+      attr_accessor secret_type: String?
+      attr_accessor secret_key: String?
+    end
+
+    class InfluxDBDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?influx_db_version: String,
+        ?secret_id: String,
+        ?secret_type: String,
+        ?secret_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor influx_db_version: String?
+      attr_accessor secret_id: String?
+      attr_accessor secret_type: String?
+      attr_accessor secret_key: String?
+    end
+
+    class InfluxDBDestinationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?influx_db_version: String,
+        ?secret_id: String,
+        ?secret_type: String,
+        ?secret_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor influx_db_version: String?
+      attr_accessor secret_id: String?
+      attr_accessor secret_type: String?
+      attr_accessor secret_key: String?
+    end
+
+    module InfluxDBSecretType
+      SECRET_STRING: String
+      SECRET_BINARY: String
+    end
+
+    module InfluxDBTimestampUnit
+      SECONDS: String
+      MILLISECONDS: String
+      MICROSECONDS: String
+      NANOSECONDS: String
+    end
+
+    module InfluxDBVersion
+      V2: String
+      V3: String
     end
 
     class InternalException
@@ -8506,6 +8789,21 @@ module Aws::IoT
       attr_accessor unit: String?
     end
 
+    class LogEventConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type: String,
+        ?log_level: String,
+        ?log_destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type: String?
+      attr_accessor log_level: String?
+      attr_accessor log_destination: String?
+    end
+
     module LogLevel
       DEBUG: String
       INFO: String
@@ -8965,6 +9263,11 @@ module Aws::IoT
       attr_accessor transfer_date: Time?
       attr_accessor transfer_message: String?
       attr_accessor creation_date: Time?
+    end
+
+    module OutputFormat
+      JSON: String
+      CBOR: String
     end
 
     class PackageSummary
@@ -9999,12 +10302,14 @@ module Aws::IoT
         ?role_arn: String,
         ?default_log_level: String,
         ?disable_all_logs: bool,
+        ?event_configurations: Array[Types::LogEventConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor role_arn: String?
       attr_accessor default_log_level: String?
       attr_accessor disable_all_logs: bool?
+      attr_accessor event_configurations: Array[Types::LogEventConfiguration]?
     end
 
     class SigV4Authorization
@@ -10582,12 +10887,20 @@ module Aws::IoT
         ?connected: bool,
         ?timestamp: Integer,
         ?disconnect_reason: String,
+        ?keep_alive_duration: Integer,
+        ?clean_session: bool,
+        ?session_expiry: Integer,
+        ?client_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connected: bool?
       attr_accessor timestamp: Integer?
       attr_accessor disconnect_reason: String?
+      attr_accessor keep_alive_duration: Integer?
+      attr_accessor clean_session: bool?
+      attr_accessor session_expiry: Integer?
+      attr_accessor client_id: String?
     end
 
     module ThingConnectivityIndexingMode
@@ -10919,6 +11232,7 @@ module Aws::IoT
         ?status_reason: String,
         ?http_url_properties: Types::HttpUrlDestinationProperties,
         ?vpc_properties: Types::VpcDestinationProperties,
+        ?influx_db_properties: Types::InfluxDBDestinationProperties,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10929,6 +11243,7 @@ module Aws::IoT
       attr_accessor status_reason: String?
       attr_accessor http_url_properties: Types::HttpUrlDestinationProperties?
       attr_accessor vpc_properties: Types::VpcDestinationProperties?
+      attr_accessor influx_db_properties: Types::InfluxDBDestinationProperties?
     end
 
     class TopicRuleDestinationConfiguration
@@ -10937,11 +11252,13 @@ module Aws::IoT
       def initialize: (
         ?http_url_configuration: Types::HttpUrlDestinationConfiguration,
         ?vpc_configuration: Types::VpcDestinationConfiguration,
+        ?influx_db_configuration: Types::InfluxDBDestinationConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor http_url_configuration: Types::HttpUrlDestinationConfiguration?
       attr_accessor vpc_configuration: Types::VpcDestinationConfiguration?
+      attr_accessor influx_db_configuration: Types::InfluxDBDestinationConfiguration?
     end
 
     module TopicRuleDestinationStatus
@@ -10963,6 +11280,7 @@ module Aws::IoT
         ?status_reason: String,
         ?http_url_summary: Types::HttpUrlDestinationSummary,
         ?vpc_destination_summary: Types::VpcDestinationSummary,
+        ?influx_db_summary: Types::InfluxDBDestinationSummary,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -10973,6 +11291,7 @@ module Aws::IoT
       attr_accessor status_reason: String?
       attr_accessor http_url_summary: Types::HttpUrlDestinationSummary?
       attr_accessor vpc_destination_summary: Types::VpcDestinationSummary?
+      attr_accessor influx_db_summary: Types::InfluxDBDestinationSummary?
     end
 
     class TopicRuleListItem

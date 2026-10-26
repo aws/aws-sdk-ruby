@@ -278,6 +278,9 @@ module Aws::BCMPricingCalculator
       def cost_summary: () -> Types::BillEstimateCostSummary?
       def created_at: () -> Time?
       def expires_at: () -> Time?
+      def group_sharing_preference: () -> String?
+      def cost_category_group_sharing_preference_arn: () -> String?
+      def cost_category_group_sharing_preference_effective_date: () -> Time?
     end
     def create_bill_estimate: (
       ?bill_scenario_id: String,
@@ -295,11 +298,15 @@ module Aws::BCMPricingCalculator
       def created_at: () -> Time?
       def expires_at: () -> Time?
       def failure_message: () -> String?
+      def group_sharing_preference: () -> String?
+      def cost_category_group_sharing_preference_arn: () -> String?
     end
     def create_bill_scenario: (
       ?name: String,
       ?client_token: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?group_sharing_preference: String,
+      ?cost_category_group_sharing_preference_arn: String
     ) -> _CreateBillScenarioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBillScenarioResponse
 
     interface _CreateWorkloadEstimateResponse
@@ -353,6 +360,9 @@ module Aws::BCMPricingCalculator
       def cost_summary: () -> Types::BillEstimateCostSummary?
       def created_at: () -> Time?
       def expires_at: () -> Time?
+      def group_sharing_preference: () -> String?
+      def cost_category_group_sharing_preference_arn: () -> String?
+      def cost_category_group_sharing_preference_effective_date: () -> Time?
     end
     def get_bill_estimate: (
       ?identifier: String
@@ -367,6 +377,8 @@ module Aws::BCMPricingCalculator
       def created_at: () -> Time?
       def expires_at: () -> Time?
       def failure_message: () -> String?
+      def group_sharing_preference: () -> String?
+      def cost_category_group_sharing_preference_arn: () -> String?
     end
     def get_bill_scenario: (
       ?identifier: String
@@ -611,6 +623,9 @@ module Aws::BCMPricingCalculator
       def cost_summary: () -> Types::BillEstimateCostSummary?
       def created_at: () -> Time?
       def expires_at: () -> Time?
+      def group_sharing_preference: () -> String?
+      def cost_category_group_sharing_preference_arn: () -> String?
+      def cost_category_group_sharing_preference_effective_date: () -> Time?
     end
     def update_bill_estimate: (
       ?identifier: String,
@@ -627,11 +642,15 @@ module Aws::BCMPricingCalculator
       def created_at: () -> Time?
       def expires_at: () -> Time?
       def failure_message: () -> String?
+      def group_sharing_preference: () -> String?
+      def cost_category_group_sharing_preference_arn: () -> String?
     end
     def update_bill_scenario: (
       ?identifier: String,
       ?name: String,
-      ?expires_at: Time
+      ?expires_at: Time,
+      ?group_sharing_preference: String,
+      ?cost_category_group_sharing_preference_arn: String
     ) -> _UpdateBillScenarioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBillScenarioResponse
 
     interface _UpdatePreferencesResponse

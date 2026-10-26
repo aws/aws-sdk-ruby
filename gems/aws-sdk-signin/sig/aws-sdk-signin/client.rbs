@@ -58,5 +58,114 @@ module Aws::Signin
         refresh_token: String
       }
     ) -> _CreateOAuth2TokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOAuth2TokenResponse
+
+    interface _CreateOAuth2TokenWithIAMResponse
+      include Smithy::Client::_Response[Types::CreateOAuth2TokenWithIAMResponse]
+      def access_token: () -> String?
+      def token_type: () -> String?
+      def expires_in: () -> Integer?
+    end
+    def create_o_auth2_token_with_iam: (
+      ?grant_type: String,
+      ?resource: String
+    ) -> _CreateOAuth2TokenWithIAMResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOAuth2TokenWithIAMResponse
+
+    interface _DeleteConsoleAuthorizationConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteConsoleAuthorizationConfigurationOutput]
+      def target_id: () -> String?
+      def scope: () -> String?
+      def console_authorization_enabled: () -> bool?
+    end
+    def delete_console_authorization_configuration: (
+      ?target_id: String
+    ) -> _DeleteConsoleAuthorizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConsoleAuthorizationConfigurationResponse
+
+    interface _DeleteResourcePermissionStatementResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePermissionStatementOutput]
+    end
+    def delete_resource_permission_statement: (
+      ?statement_id: String,
+      ?client_token: String
+    ) -> _DeleteResourcePermissionStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePermissionStatementResponse
+
+    interface _GetConsoleAuthorizationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetConsoleAuthorizationConfigurationOutput]
+      def target_id: () -> String?
+      def scope: () -> String?
+      def console_authorization_enabled: () -> bool?
+    end
+    def get_console_authorization_configuration: (
+      ?target_id: String
+    ) -> _GetConsoleAuthorizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConsoleAuthorizationConfigurationResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyOutput]
+      def signin_resource_based_policy: () -> Types::SigninResourceBasedPolicy?
+    end
+    def get_resource_policy: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _IntrospectOAuth2TokenWithIAMResponse
+      include Smithy::Client::_Response[Types::IntrospectOAuth2TokenWithIAMResponse]
+      def active: () -> bool?
+      def client_id: () -> String?
+      def user_id: () -> String?
+      def token_type: () -> String?
+      def exp: () -> Integer?
+      def iat: () -> Integer?
+      def nbf: () -> Integer?
+      def sub: () -> String?
+      def aud: () -> String?
+      def iss: () -> String?
+      def jti: () -> String?
+      def account_id: () -> String?
+      def signin_session: () -> String?
+      def resource: () -> String?
+    end
+    def introspect_o_auth2_token_with_iam: (
+      ?token: String,
+      ?token_type_hint: String
+    ) -> _IntrospectOAuth2TokenWithIAMResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IntrospectOAuth2TokenWithIAMResponse
+
+    interface _ListResourcePermissionStatementsResponse
+      include Smithy::Client::_Response[Types::ListResourcePermissionStatementsOutput]
+      def permission_statements: () -> Array[Types::PermissionStatementSummary]?
+      def next_token: () -> String?
+    end
+    def list_resource_permission_statements: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourcePermissionStatementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcePermissionStatementsResponse
+
+    interface _PutConsoleAuthorizationConfigurationResponse
+      include Smithy::Client::_Response[Types::PutConsoleAuthorizationConfigurationOutput]
+      def target_id: () -> String?
+      def scope: () -> String?
+      def console_authorization_enabled: () -> bool?
+    end
+    def put_console_authorization_configuration: (
+      ?target_id: String
+    ) -> _PutConsoleAuthorizationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutConsoleAuthorizationConfigurationResponse
+
+    interface _PutResourcePermissionStatementResponse
+      include Smithy::Client::_Response[Types::PutResourcePermissionStatementOutput]
+      def statement_id: () -> String?
+    end
+    def put_resource_permission_statement: (
+      ?source_vpc: String,
+      ?signin_source_vpce: String,
+      ?console_source_vpce: String,
+      ?vpc_source_ip: String,
+      ?source_ip: String,
+      ?requested_region: String,
+      ?excluded_principal: String,
+      ?client_token: String
+    ) -> _PutResourcePermissionStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePermissionStatementResponse
+
+    interface _RevokeOAuth2TokenWithIAMResponse
+      include Smithy::Client::_Response[Types::RevokeOAuth2TokenWithIAMResponse]
+    end
+    def revoke_o_auth2_token_with_iam: (
+      ?token: String
+    ) -> _RevokeOAuth2TokenWithIAMResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeOAuth2TokenWithIAMResponse
   end
 end

@@ -6,9 +6,87 @@ module Aws::SageMaker
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AIAdapterId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIAdapterId", name: "AIAdapterId", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"})
+    AIAdapterModelPackageEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIAdapterModelPackageEntry", name: "AIAdapterModelPackageEntry")
+    AIAdapterModelPackageEntryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIAdapterModelPackageEntryList", name: "AIAdapterModelPackageEntryList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    AIAdapterS3Entry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIAdapterS3Entry", name: "AIAdapterS3Entry")
+    AIAdapterS3EntryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIAdapterS3EntryList", name: "AIAdapterS3EntryList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    AIAdapterSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.sagemaker#AIAdapterSource", name: "AIAdapterSource")
+    AIBenchmarkEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkEndpoint", name: "AIBenchmarkEndpoint")
+    AIBenchmarkInferenceComponent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkInferenceComponent", name: "AIBenchmarkInferenceComponent")
+    AIBenchmarkInferenceComponentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkInferenceComponentList", name: "AIBenchmarkInferenceComponentList")
+    AIBenchmarkJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkJobArn", name: "AIBenchmarkJobArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:ai-benchmark-job/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
+    AIBenchmarkJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkJobStatus", name: "AIBenchmarkJobStatus")
+    AIBenchmarkJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkJobSummary", name: "AIBenchmarkJobSummary")
+    AIBenchmarkJobSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkJobSummaryList", name: "AIBenchmarkJobSummaryList")
+    AIBenchmarkNetworkConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkNetworkConfig", name: "AIBenchmarkNetworkConfig")
+    AIBenchmarkOutputConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkOutputConfig", name: "AIBenchmarkOutputConfig")
+    AIBenchmarkOutputResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkOutputResult", name: "AIBenchmarkOutputResult")
+    AIBenchmarkTarget = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.sagemaker#AIBenchmarkTarget", name: "AIBenchmarkTarget")
+    AICapacityReservationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AICapacityReservationConfig", name: "AICapacityReservationConfig")
+    AICapacityReservationPreference = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AICapacityReservationPreference", name: "AICapacityReservationPreference")
+    AIChannelName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIChannelName", name: "AIChannelName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9\\.\\-_]+$"})
+    AICloudWatchLogs = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AICloudWatchLogs", name: "AICloudWatchLogs")
+    AICloudWatchLogsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AICloudWatchLogsList", name: "AICloudWatchLogsList")
+    AIDatasetConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.sagemaker#AIDatasetConfig", name: "AIDatasetConfig")
+    AIEntityName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIEntityName", name: "AIEntityName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
+    AIInferenceSpecificationName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIInferenceSpecificationName", name: "AIInferenceSpecificationName", traits: {"smithy.api#length" => {"max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
+    AIMlReservationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIMlReservationArn", name: "AIMlReservationArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z0-9\\-]{1,14}/"})
+    AIMlReservationArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIMlReservationArnList", name: "AIMlReservationArnList")
+    AIMlflowConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIMlflowConfig", name: "AIMlflowConfig")
+    AIMlflowExperimentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIMlflowExperimentName", name: "AIMlflowExperimentName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-_./]+$"})
+    AIMlflowResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIMlflowResourceArn", name: "AIMlflowResourceArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-(app|tracking-server)/.*$"})
+    AIMlflowRunName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIMlflowRunName", name: "AIMlflowRunName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-_./]+$"})
+    AIModelSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.sagemaker#AIModelSource", name: "AIModelSource")
+    AIModelSourceS3 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIModelSourceS3", name: "AIModelSourceS3")
+    AIRecommendation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendation", name: "AIRecommendation")
+    AIRecommendationAdapterDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationAdapterDetails", name: "AIRecommendationAdapterDetails")
+    AIRecommendationAllowOptimization = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#AIRecommendationAllowOptimization", name: "AIRecommendationAllowOptimization")
+    AIRecommendationComputeSpec = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationComputeSpec", name: "AIRecommendationComputeSpec")
+    AIRecommendationConstraint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationConstraint", name: "AIRecommendationConstraint")
+    AIRecommendationConstraintList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIRecommendationConstraintList", name: "AIRecommendationConstraintList")
+    AIRecommendationCopyCountPerInstance = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#AIRecommendationCopyCountPerInstance", name: "AIRecommendationCopyCountPerInstance")
+    AIRecommendationDeploymentConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationDeploymentConfiguration", name: "AIRecommendationDeploymentConfiguration")
+    AIRecommendationDeploymentS3Channel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationDeploymentS3Channel", name: "AIRecommendationDeploymentS3Channel")
+    AIRecommendationDeploymentS3ChannelList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIRecommendationDeploymentS3ChannelList", name: "AIRecommendationDeploymentS3ChannelList")
+    AIRecommendationInferenceFramework = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AIRecommendationInferenceFramework", name: "AIRecommendationInferenceFramework")
+    AIRecommendationInferenceSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationInferenceSpecification", name: "AIRecommendationInferenceSpecification")
+    AIRecommendationInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#AIRecommendationInstanceCount", name: "AIRecommendationInstanceCount")
+    AIRecommendationInstanceDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationInstanceDetail", name: "AIRecommendationInstanceDetail")
+    AIRecommendationInstanceDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIRecommendationInstanceDetailList", name: "AIRecommendationInstanceDetailList")
+    AIRecommendationInstanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AIRecommendationInstanceType", name: "AIRecommendationInstanceType")
+    AIRecommendationInstanceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIRecommendationInstanceTypeList", name: "AIRecommendationInstanceTypeList", traits: {"smithy.api#length" => {"max" => 3}})
+    AIRecommendationJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIRecommendationJobArn", name: "AIRecommendationJobArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:ai-recommendation-job/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
+    AIRecommendationJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AIRecommendationJobStatus", name: "AIRecommendationJobStatus")
+    AIRecommendationJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationJobSummary", name: "AIRecommendationJobSummary")
+    AIRecommendationJobSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIRecommendationJobSummaryList", name: "AIRecommendationJobSummaryList")
+    AIRecommendationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIRecommendationList", name: "AIRecommendationList")
+    AIRecommendationMetric = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AIRecommendationMetric", name: "AIRecommendationMetric")
+    AIRecommendationMinCpuMemoryRequiredInMb = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#AIRecommendationMinCpuMemoryRequiredInMb", name: "AIRecommendationMinCpuMemoryRequiredInMb", traits: {"smithy.api#range" => {"min" => 1}})
+    AIRecommendationModelDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationModelDetails", name: "AIRecommendationModelDetails")
+    AIRecommendationOptimizationConfigMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#AIRecommendationOptimizationConfigMap", name: "AIRecommendationOptimizationConfigMap")
+    AIRecommendationOptimizationDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationOptimizationDetail", name: "AIRecommendationOptimizationDetail")
+    AIRecommendationOptimizationDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIRecommendationOptimizationDetailList", name: "AIRecommendationOptimizationDetailList")
+    AIRecommendationOptimizationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AIRecommendationOptimizationType", name: "AIRecommendationOptimizationType")
+    AIRecommendationOutputConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationOutputConfig", name: "AIRecommendationOutputConfig")
+    AIRecommendationOutputResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationOutputResult", name: "AIRecommendationOutputResult")
+    AIRecommendationPerformanceMetric = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationPerformanceMetric", name: "AIRecommendationPerformanceMetric")
+    AIRecommendationPerformanceTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIRecommendationPerformanceTarget", name: "AIRecommendationPerformanceTarget")
+    AIResourceIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIResourceIdentifier", name: "AIResourceIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*/)?([a-zA-Z0-9]([a-zA-Z0-9\\-]){0,62})(?<!-)$"})
+    AIWorkloadConfigArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AIWorkloadConfigArn", name: "AIWorkloadConfigArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:ai-workload-config/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
+    AIWorkloadConfigSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIWorkloadConfigSummary", name: "AIWorkloadConfigSummary")
+    AIWorkloadConfigSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIWorkloadConfigSummaryList", name: "AIWorkloadConfigSummaryList")
+    AIWorkloadConfigs = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIWorkloadConfigs", name: "AIWorkloadConfigs")
+    AIWorkloadDataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIWorkloadDataSource", name: "AIWorkloadDataSource")
+    AIWorkloadInputDataConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIWorkloadInputDataConfig", name: "AIWorkloadInputDataConfig")
+    AIWorkloadInputDataConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AIWorkloadInputDataConfigList", name: "AIWorkloadInputDataConfigList")
+    AIWorkloadS3DataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AIWorkloadS3DataSource", name: "AIWorkloadS3DataSource")
+    AbsoluteBorrowLimitResourceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AbsoluteBorrowLimitResourceList", name: "AbsoluteBorrowLimitResourceList", traits: {"smithy.api#length" => {"min" => 0, "max" => 15}})
+    AcceleratorPartitionConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AcceleratorPartitionConfig", name: "AcceleratorPartitionConfig")
     AcceleratorsAmount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#AcceleratorsAmount", name: "AcceleratorsAmount", traits: {"smithy.api#range" => {"min" => 0, "max" => 10000000}})
     Accept = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#Accept", name: "Accept", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => ".*"})
     AcceptEula = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#AcceptEula", name: "AcceptEula")
+    AccountDefaultStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AccountDefaultStatus", name: "AccountDefaultStatus")
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AccountId", name: "AccountId", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\d+$"})
     ActionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ActionArn", name: "ActionArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:action/"})
     ActionSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ActionSource", name: "ActionSource")
@@ -16,6 +94,9 @@ module Aws::SageMaker
     ActionSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ActionSummaries", name: "ActionSummaries")
     ActionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ActionSummary", name: "ActionSummary")
     ActivationState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ActivationState", name: "ActivationState")
+    ActiveClusterOperationCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ActiveClusterOperationCount", name: "ActiveClusterOperationCount", traits: {"smithy.api#range" => {"min" => 1}})
+    ActiveClusterOperationName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ActiveClusterOperationName", name: "ActiveClusterOperationName")
+    ActiveOperations = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#ActiveOperations", name: "ActiveOperations")
     AddAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AddAssociationRequest", name: "AddAssociationRequest")
     AddAssociationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AddAssociationResponse", name: "AddAssociationResponse")
     AddClusterNodeSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AddClusterNodeSpecification", name: "AddClusterNodeSpecification")
@@ -39,7 +120,7 @@ module Aws::SageMaker
     AlarmDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AlarmDetails", name: "AlarmDetails")
     AlarmList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AlarmList", name: "AlarmList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     AlarmName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AlarmName", name: "AlarmName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(?!\\s*$).+$"})
-    AlgorithmArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AlgorithmArn", name: "AlgorithmArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"})
+    AlgorithmArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AlgorithmArn", name: "AlgorithmArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"})
     AlgorithmImage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AlgorithmImage", name: "AlgorithmImage", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => ".*"})
     AlgorithmSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AlgorithmSortBy", name: "AlgorithmSortBy")
     AlgorithmSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AlgorithmSpecification", name: "AlgorithmSpecification")
@@ -72,6 +153,7 @@ module Aws::SageMaker
     AppSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AppSpecification", name: "AppSpecification")
     AppStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AppStatus", name: "AppStatus")
     AppType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AppType", name: "AppType")
+    ApplicationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ApplicationArn", name: "ApplicationArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sso::[0-9]{12}:application/(sso)?ins-[a-zA-Z0-9.-]{16}/apl-[a-zA-Z0-9.-]{16}$"})
     ApprovalDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ApprovalDescription", name: "ApprovalDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => ".*"})
     ArnOrName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ArnOrName", name: "ArnOrName", traits: {"smithy.api#length" => {"min" => 1, "max" => 170}, "smithy.api#pattern" => "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*\\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)$"})
     ArtifactArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ArtifactArn", name: "ArtifactArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:artifact/"})
@@ -85,10 +167,13 @@ module Aws::SageMaker
     ArtifactSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ArtifactSummaries", name: "ArtifactSummaries")
     ArtifactSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ArtifactSummary", name: "ArtifactSummary")
     AssemblyType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AssemblyType", name: "AssemblyType")
+    AssignedGroupPatternsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AssignedGroupPatternsList", name: "AssignedGroupPatternsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     AssociateTrialComponentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AssociateTrialComponentRequest", name: "AssociateTrialComponentRequest")
     AssociateTrialComponentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AssociateTrialComponentResponse", name: "AssociateTrialComponentResponse")
     AssociationEdgeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AssociationEdgeType", name: "AssociationEdgeType")
     AssociationEntityArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AssociationEntityArn", name: "AssociationEntityArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:(experiment|experiment-trial-component|artifact|action|context)/"})
+    AssociationInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AssociationInfo", name: "AssociationInfo")
+    AssociationInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AssociationInfoList", name: "AssociationInfoList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     AssociationSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AssociationSummaries", name: "AssociationSummaries")
     AssociationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AssociationSummary", name: "AssociationSummary")
     AssumableRoleArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#AssumableRoleArns", name: "AssumableRoleArns", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
@@ -104,7 +189,10 @@ module Aws::SageMaker
     AthenaQueryString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AthenaQueryString", name: "AthenaQueryString", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}, "smithy.api#pattern" => "^[\\s\\S]+$"})
     AthenaResultCompressionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AthenaResultCompressionType", name: "AthenaResultCompressionType")
     AthenaResultFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AthenaResultFormat", name: "AthenaResultFormat")
+    AthenaStepMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AthenaStepMetadata", name: "AthenaStepMetadata")
     AthenaWorkGroup = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AthenaWorkGroup", name: "AthenaWorkGroup", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9._-]+$"})
+    AttachClusterNodeNetworkInterfaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceRequest", name: "AttachClusterNodeNetworkInterfaceRequest")
+    AttachClusterNodeNetworkInterfaceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceResponse", name: "AttachClusterNodeNetworkInterfaceResponse")
     AttachClusterNodeVolumeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AttachClusterNodeVolumeRequest", name: "AttachClusterNodeVolumeRequest")
     AttachClusterNodeVolumeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AttachClusterNodeVolumeResponse", name: "AttachClusterNodeVolumeResponse")
     AttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AttributeName", name: "AttributeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^.+$"})
@@ -175,10 +263,16 @@ module Aws::SageMaker
     Autotune = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Autotune", name: "Autotune")
     AutotuneMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AutotuneMode", name: "AutotuneMode")
     AvailabilityZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AvailabilityZone", name: "AvailabilityZone", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[a-z]+\\-[0-9a-z\\-]+$"})
+    AvailabilityZoneBalanceEnforcementMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AvailabilityZoneBalanceEnforcementMode", name: "AvailabilityZoneBalanceEnforcementMode")
+    AvailabilityZoneBalanceMaxImbalance = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#AvailabilityZoneBalanceMaxImbalance", name: "AvailabilityZoneBalanceMaxImbalance", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
+    AvailabilityZoneId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#AvailabilityZoneId", name: "AvailabilityZoneId", traits: {"smithy.api#pattern" => "^[a-z]{3}\\d-az\\d$"})
     AvailableInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#AvailableInstanceCount", name: "AvailableInstanceCount", traits: {"smithy.api#range" => {"min" => 0}})
     AvailableSpareInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#AvailableSpareInstanceCount", name: "AvailableSpareInstanceCount", traits: {"smithy.api#range" => {"min" => 0}})
+    AvailableUpgrade = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#AvailableUpgrade", name: "AvailableUpgrade")
     AwsManagedHumanLoopRequestSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#AwsManagedHumanLoopRequestSource", name: "AwsManagedHumanLoopRequestSource")
     BacktestResultsLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#BacktestResultsLocation", name: "BacktestResultsLocation", traits: {"smithy.api#length" => {"min" => 1}})
+    BaseModel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BaseModel", name: "BaseModel")
+    BaseModelArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#BaseModelArn", name: "BaseModelArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:[a-z0-9-.]{1,63}:sagemaker:[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)+:([0-9]{12}|aws):hub-content/)[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}/Model/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}(/[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4})?$"})
     BaseModelName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#BaseModelName", name: "BaseModelName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"})
     BatchAddClusterNodesError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchAddClusterNodesError", name: "BatchAddClusterNodesError")
     BatchAddClusterNodesErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#BatchAddClusterNodesErrorCode", name: "BatchAddClusterNodesErrorCode")
@@ -200,16 +294,36 @@ module Aws::SageMaker
     BatchDescribeModelPackageInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchDescribeModelPackageInput", name: "BatchDescribeModelPackageInput")
     BatchDescribeModelPackageOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchDescribeModelPackageOutput", name: "BatchDescribeModelPackageOutput")
     BatchDescribeModelPackageSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchDescribeModelPackageSummary", name: "BatchDescribeModelPackageSummary")
+    BatchRebootClusterNodeLogicalIdsError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchRebootClusterNodeLogicalIdsError", name: "BatchRebootClusterNodeLogicalIdsError")
+    BatchRebootClusterNodeLogicalIdsErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#BatchRebootClusterNodeLogicalIdsErrors", name: "BatchRebootClusterNodeLogicalIdsErrors", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    BatchRebootClusterNodesError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchRebootClusterNodesError", name: "BatchRebootClusterNodesError")
+    BatchRebootClusterNodesErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#BatchRebootClusterNodesErrorCode", name: "BatchRebootClusterNodesErrorCode")
+    BatchRebootClusterNodesErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#BatchRebootClusterNodesErrors", name: "BatchRebootClusterNodesErrors", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    BatchRebootClusterNodesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchRebootClusterNodesRequest", name: "BatchRebootClusterNodesRequest")
+    BatchRebootClusterNodesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchRebootClusterNodesResponse", name: "BatchRebootClusterNodesResponse")
+    BatchReplaceClusterNodeLogicalIdsError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchReplaceClusterNodeLogicalIdsError", name: "BatchReplaceClusterNodeLogicalIdsError")
+    BatchReplaceClusterNodeLogicalIdsErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#BatchReplaceClusterNodeLogicalIdsErrors", name: "BatchReplaceClusterNodeLogicalIdsErrors", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    BatchReplaceClusterNodesError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchReplaceClusterNodesError", name: "BatchReplaceClusterNodesError")
+    BatchReplaceClusterNodesErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#BatchReplaceClusterNodesErrorCode", name: "BatchReplaceClusterNodesErrorCode")
+    BatchReplaceClusterNodesErrors = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#BatchReplaceClusterNodesErrors", name: "BatchReplaceClusterNodesErrors", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    BatchReplaceClusterNodesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchReplaceClusterNodesRequest", name: "BatchReplaceClusterNodesRequest")
+    BatchReplaceClusterNodesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchReplaceClusterNodesResponse", name: "BatchReplaceClusterNodesResponse")
     BatchStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#BatchStrategy", name: "BatchStrategy")
     BatchTransformInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BatchTransformInput", name: "BatchTransformInput")
+    BedrockCustomModelDeploymentMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BedrockCustomModelDeploymentMetadata", name: "BedrockCustomModelDeploymentMetadata")
+    BedrockCustomModelMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BedrockCustomModelMetadata", name: "BedrockCustomModelMetadata")
+    BedrockModelImportMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BedrockModelImportMetadata", name: "BedrockModelImportMetadata")
+    BedrockProvisionedModelThroughputMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BedrockProvisionedModelThroughputMetadata", name: "BedrockProvisionedModelThroughputMetadata")
     BestObjectiveNotImproving = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BestObjectiveNotImproving", name: "BestObjectiveNotImproving")
     Bias = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Bias", name: "Bias")
     BillableTimeInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#BillableTimeInSeconds", name: "BillableTimeInSeconds", traits: {"smithy.api#range" => {"min" => 1}})
+    BillableTokenCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#BillableTokenCount", name: "BillableTokenCount", traits: {"smithy.api#range" => {"min" => 0}})
+    BillableTokenUsage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BillableTokenUsage", name: "BillableTokenUsage")
     BlockedReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#BlockedReason", name: "BlockedReason", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     BlueGreenUpdatePolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#BlueGreenUpdatePolicy", name: "BlueGreenUpdatePolicy")
     Boolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#Boolean", name: "Boolean")
     BooleanOperator = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#BooleanOperator", name: "BooleanOperator")
-    BorrowLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#BorrowLimit", name: "BorrowLimit", traits: {"smithy.api#range" => {"min" => 0, "max" => 500}})
+    BorrowLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#BorrowLimit", name: "BorrowLimit", traits: {"smithy.api#range" => {"min" => 0, "max" => 10000}})
     Branch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#Branch", name: "Branch", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[^ ~^:?*\\[]+$"})
     BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#BucketName", name: "BucketName", traits: {"smithy.api#length" => {"min" => 3, "max" => 63}, "smithy.api#pattern" => "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"})
     CacheHitResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CacheHitResult", name: "CacheHitResult")
@@ -300,25 +414,47 @@ module Aws::SageMaker
     ClarifyTextConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClarifyTextConfig", name: "ClarifyTextConfig")
     ClarifyTextGranularity = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClarifyTextGranularity", name: "ClarifyTextGranularity")
     ClarifyTextLanguage = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClarifyTextLanguage", name: "ClarifyTextLanguage")
+    CleanupFailure = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CleanupFailure", name: "CleanupFailure")
+    CleanupFailureErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#CleanupFailureErrorCode", name: "CleanupFailureErrorCode")
+    CleanupFailureList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#CleanupFailureList", name: "CleanupFailureList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    CleanupStepMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CleanupStepMetadata", name: "CleanupStepMetadata")
+    CleanupStepNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#CleanupStepNameList", name: "CleanupStepNameList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ClientId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClientId", name: "ClientId", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[ -~]+$"})
     ClientSecret = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClientSecret", name: "ClientSecret", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^[ -~]+$", "smithy.api#sensitive" => {}})
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 36}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
+    ClusterAccountingDatabase = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterAccountingDatabase", name: "ClusterAccountingDatabase")
+    ClusterAccountingDatabaseEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterAccountingDatabaseEndpoint", name: "ClusterAccountingDatabaseEndpoint", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(?=.{1,255}$)([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)(\\.[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)*$"})
+    ClusterAccountingDatabaseName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterAccountingDatabaseName", name: "ClusterAccountingDatabaseName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9$_]+$"})
+    ClusterAccountingDatabasePort = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ClusterAccountingDatabasePort", name: "ClusterAccountingDatabasePort", traits: {"smithy.api#range" => {"min" => 1, "max" => 65535}})
+    ClusterAccountingDatabaseSecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterAccountingDatabaseSecretArn", name: "ClusterAccountingDatabaseSecretArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:secretsmanager:[a-z0-9\\-]*:[0-9]{12}:secret:.+$"})
     ClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterArn", name: "ClusterArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:cluster/[a-z0-9]{12}$"})
+    ClusterAutoPatchConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterAutoPatchConfig", name: "ClusterAutoPatchConfig")
+    ClusterAutoPatchConfigDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterAutoPatchConfigDetails", name: "ClusterAutoPatchConfigDetails")
     ClusterAutoScalerType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterAutoScalerType", name: "ClusterAutoScalerType")
     ClusterAutoScalingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterAutoScalingConfig", name: "ClusterAutoScalingConfig")
     ClusterAutoScalingConfigOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterAutoScalingConfigOutput", name: "ClusterAutoScalingConfigOutput")
     ClusterAutoScalingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterAutoScalingMode", name: "ClusterAutoScalingMode")
     ClusterAutoScalingStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterAutoScalingStatus", name: "ClusterAutoScalingStatus")
     ClusterAvailabilityZone = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterAvailabilityZone", name: "ClusterAvailabilityZone", traits: {"smithy.api#pattern" => "^[a-z]{2}-[a-z]+-\\d[a-z]$"})
-    ClusterAvailabilityZoneId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterAvailabilityZoneId", name: "ClusterAvailabilityZoneId", traits: {"smithy.api#pattern" => "^[a-z]{3}\\d-az\\d$"})
+    ClusterAvailabilityZoneId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterAvailabilityZoneId", name: "ClusterAvailabilityZoneId", traits: {"smithy.api#pattern" => "^[a-z]{3,5}\\d-az\\d$"})
+    ClusterAvailabilityZones = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterAvailabilityZones", name: "ClusterAvailabilityZones", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    ClusterCapacityRequirements = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterCapacityRequirements", name: "ClusterCapacityRequirements")
+    ClusterCapacityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterCapacityType", name: "ClusterCapacityType")
     ClusterConfigMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterConfigMode", name: "ClusterConfigMode")
+    ClusterDnsName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterDnsName", name: "ClusterDnsName", traits: {"smithy.api#length" => {"min" => 16, "max" => 275}, "smithy.api#pattern" => "^((fs|fc)i?-[0-9a-f]{8,}\\..{4,253})$"})
     ClusterEbsVolumeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterEbsVolumeConfig", name: "ClusterEbsVolumeConfig")
     ClusterEbsVolumeSizeInGB = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ClusterEbsVolumeSizeInGB", name: "ClusterEbsVolumeSizeInGB", traits: {"smithy.api#range" => {"min" => 1, "max" => 16384}})
     ClusterEventDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterEventDetail", name: "ClusterEventDetail")
+    ClusterEventLevel = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterEventLevel", name: "ClusterEventLevel")
     ClusterEventMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ClusterEventMaxResults", name: "ClusterEventMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     ClusterEventResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterEventResourceType", name: "ClusterEventResourceType")
     ClusterEventSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterEventSummaries", name: "ClusterEventSummaries", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ClusterEventSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterEventSummary", name: "ClusterEventSummary")
+    ClusterFSxLustreDeletionPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterFSxLustreDeletionPolicy", name: "ClusterFSxLustreDeletionPolicy")
+    ClusterFsxLustreConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterFsxLustreConfig", name: "ClusterFsxLustreConfig")
+    ClusterFsxMountPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterFsxMountPath", name: "ClusterFsxMountPath", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^/[a-zA-Z0-9._/-]+$"})
+    ClusterFsxOpenZfsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterFsxOpenZfsConfig", name: "ClusterFsxOpenZfsConfig")
+    ClusterImageVersionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterImageVersionStatus", name: "ClusterImageVersionStatus")
     ClusterInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceCount", name: "ClusterInstanceCount", traits: {"smithy.api#range" => {"min" => 0, "max" => 6758}})
     ClusterInstanceGroupDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceGroupDetails", name: "ClusterInstanceGroupDetails")
     ClusterInstanceGroupDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceGroupDetailsList", name: "ClusterInstanceGroupDetailsList")
@@ -328,16 +464,38 @@ module Aws::SageMaker
     ClusterInstanceGroupsToDelete = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceGroupsToDelete", name: "ClusterInstanceGroupsToDelete", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ClusterInstanceMemoryAllocationPercentage = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceMemoryAllocationPercentage", name: "ClusterInstanceMemoryAllocationPercentage", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
     ClusterInstancePlacement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterInstancePlacement", name: "ClusterInstancePlacement")
+    ClusterInstanceRequirementDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceRequirementDetails", name: "ClusterInstanceRequirementDetails")
+    ClusterInstanceRequirements = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceRequirements", name: "ClusterInstanceRequirements")
     ClusterInstanceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceStatus", name: "ClusterInstanceStatus")
     ClusterInstanceStatusDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceStatusDetails", name: "ClusterInstanceStatusDetails")
     ClusterInstanceStorageConfig = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceStorageConfig", name: "ClusterInstanceStorageConfig")
-    ClusterInstanceStorageConfigs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs", name: "ClusterInstanceStorageConfigs", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
+    ClusterInstanceStorageConfigs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs", name: "ClusterInstanceStorageConfigs", traits: {"smithy.api#length" => {"min" => 0, "max" => 4}})
     ClusterInstanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceType", name: "ClusterInstanceType")
+    ClusterInstanceTypeDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceTypeDetail", name: "ClusterInstanceTypeDetail")
+    ClusterInstanceTypeDetails = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceTypeDetails", name: "ClusterInstanceTypeDetails", traits: {"smithy.api#length" => {"max" => 20}})
+    ClusterInstanceTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterInstanceTypes", name: "ClusterInstanceTypes", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
+    ClusterInterfaceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterInterfaceType", name: "ClusterInterfaceType")
+    ClusterKubernetesConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesConfig", name: "ClusterKubernetesConfig")
+    ClusterKubernetesConfigDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesConfigDetails", name: "ClusterKubernetesConfigDetails")
+    ClusterKubernetesConfigNodeDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesConfigNodeDetails", name: "ClusterKubernetesConfigNodeDetails")
+    ClusterKubernetesLabelKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesLabelKey", name: "ClusterKubernetesLabelKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 317}, "smithy.api#pattern" => "^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?[A-Za-z0-9]([-A-Za-z0-9_.]*[A-Za-z0-9])?$"})
+    ClusterKubernetesLabelValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesLabelValue", name: "ClusterKubernetesLabelValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])?$"})
+    ClusterKubernetesLabels = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesLabels", name: "ClusterKubernetesLabels", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    ClusterKubernetesTaint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesTaint", name: "ClusterKubernetesTaint")
+    ClusterKubernetesTaintEffect = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesTaintEffect", name: "ClusterKubernetesTaintEffect")
+    ClusterKubernetesTaintKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesTaintKey", name: "ClusterKubernetesTaintKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 317}, "smithy.api#pattern" => "^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?[A-Za-z0-9]([-A-Za-z0-9_.]*[A-Za-z0-9])?$"})
+    ClusterKubernetesTaintValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesTaintValue", name: "ClusterKubernetesTaintValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])?$"})
+    ClusterKubernetesTaints = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterKubernetesTaints", name: "ClusterKubernetesTaints", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     ClusterLifeCycleConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterLifeCycleConfig", name: "ClusterLifeCycleConfig")
     ClusterLifeCycleConfigFileName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterLifeCycleConfigFileName", name: "ClusterLifeCycleConfigFileName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\S\\s]+$"})
     ClusterMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterMetadata", name: "ClusterMetadata")
+    ClusterMountName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterMountName", name: "ClusterMountName", traits: {"smithy.api#length" => {"min" => 1, "max" => 8}, "smithy.api#pattern" => "^([A-Za-z0-9_-]{1,8})$"})
     ClusterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterName", name: "ClusterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"})
     ClusterNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterNameOrArn", name: "ClusterNameOrArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:cluster/[a-z0-9]{12})|([a-zA-Z0-9](-*[a-zA-Z0-9]){0,62})$"})
+    ClusterNetworkInterface = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterNetworkInterface", name: "ClusterNetworkInterface")
+    ClusterNetworkInterfaceAttachmentId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterNetworkInterfaceAttachmentId", name: "ClusterNetworkInterfaceAttachmentId", traits: {"smithy.api#length" => {"min" => 1, "max" => 28}, "smithy.api#pattern" => "^eni-attach-[0-9a-f]{8}(?:[0-9a-f]{9})?$"})
+    ClusterNetworkInterfaceDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterNetworkInterfaceDetails", name: "ClusterNetworkInterfaceDetails")
+    ClusterNetworkInterfaceId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterNetworkInterfaceId", name: "ClusterNetworkInterfaceId", traits: {"smithy.api#length" => {"min" => 1, "max" => 21}, "smithy.api#pattern" => "^eni-[0-9a-f]{8}(?:[0-9a-f]{9})?$"})
     ClusterNodeDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterNodeDetails", name: "ClusterNodeDetails")
     ClusterNodeId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterNodeId", name: "ClusterNodeId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^i-[a-f0-9]{8}(?:[a-f0-9]{9})?$"})
     ClusterNodeIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterNodeIds", name: "ClusterNodeIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 3000}})
@@ -348,8 +506,15 @@ module Aws::SageMaker
     ClusterNodeSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterNodeSummaries", name: "ClusterNodeSummaries")
     ClusterNodeSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterNodeSummary", name: "ClusterNodeSummary")
     ClusterNonNegativeInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ClusterNonNegativeInstanceCount", name: "ClusterNonNegativeInstanceCount", traits: {"smithy.api#range" => {"min" => 0}})
+    ClusterOnDemandOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterOnDemandOptions", name: "ClusterOnDemandOptions")
     ClusterOrchestrator = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterOrchestrator", name: "ClusterOrchestrator")
     ClusterOrchestratorEksConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterOrchestratorEksConfig", name: "ClusterOrchestratorEksConfig")
+    ClusterOrchestratorSlurmConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterOrchestratorSlurmConfig", name: "ClusterOrchestratorSlurmConfig")
+    ClusterPartitionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterPartitionName", name: "ClusterPartitionName", traits: {"smithy.api#length" => {"max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"})
+    ClusterPartitionNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterPartitionNames", name: "ClusterPartitionNames", traits: {"smithy.api#length" => {"max" => 1}})
+    ClusterPatchSchedule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterPatchSchedule", name: "ClusterPatchSchedule")
+    ClusterPatchScheduleDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterPatchScheduleDetails", name: "ClusterPatchScheduleDetails")
+    ClusterPatchingStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterPatchingStrategy", name: "ClusterPatchingStrategy")
     ClusterPrivateDnsHostname = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterPrivateDnsHostname", name: "ClusterPrivateDnsHostname", traits: {"smithy.api#pattern" => "^ip-((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)-?\\b){4}\\..*$"})
     ClusterPrivatePrimaryIp = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterPrivatePrimaryIp", name: "ClusterPrivatePrimaryIp", traits: {"smithy.api#pattern" => "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$"})
     ClusterPrivatePrimaryIpv6 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterPrivatePrimaryIpv6", name: "ClusterPrivatePrimaryIpv6")
@@ -357,12 +522,21 @@ module Aws::SageMaker
     ClusterRestrictedInstanceGroupDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupDetailsList", name: "ClusterRestrictedInstanceGroupDetailsList")
     ClusterRestrictedInstanceGroupSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupSpecification", name: "ClusterRestrictedInstanceGroupSpecification")
     ClusterRestrictedInstanceGroupSpecifications = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupSpecifications", name: "ClusterRestrictedInstanceGroupSpecifications", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    ClusterRestrictedInstanceGroupsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupsConfig", name: "ClusterRestrictedInstanceGroupsConfig")
+    ClusterRestrictedInstanceGroupsConfigOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterRestrictedInstanceGroupsConfigOutput", name: "ClusterRestrictedInstanceGroupsConfigOutput")
     ClusterSchedulerConfigArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterSchedulerConfigArn", name: "ClusterSchedulerConfigArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:cluster-scheduler-config/[a-z0-9]{12}$"})
     ClusterSchedulerConfigId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterSchedulerConfigId", name: "ClusterSchedulerConfigId", traits: {"smithy.api#length" => {"min" => 0, "max" => 12}, "smithy.api#pattern" => "^[a-z0-9]{12}$"})
     ClusterSchedulerConfigSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterSchedulerConfigSummary", name: "ClusterSchedulerConfigSummary")
     ClusterSchedulerConfigSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterSchedulerConfigSummaryList", name: "ClusterSchedulerConfigSummaryList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ClusterSchedulerPriorityClassName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ClusterSchedulerPriorityClassName", name: "ClusterSchedulerPriorityClassName", traits: {"smithy.api#pattern" => "^[a-z0-9]([-a-z0-9]*[a-z0-9]){0,39}?$"})
+    ClusterSharedEnvironmentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterSharedEnvironmentConfig", name: "ClusterSharedEnvironmentConfig")
+    ClusterSharedEnvironmentConfigDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterSharedEnvironmentConfigDetails", name: "ClusterSharedEnvironmentConfigDetails")
+    ClusterSlurmConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterSlurmConfig", name: "ClusterSlurmConfig")
+    ClusterSlurmConfigDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterSlurmConfigDetails", name: "ClusterSlurmConfigDetails")
+    ClusterSlurmConfigStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterSlurmConfigStrategy", name: "ClusterSlurmConfigStrategy")
+    ClusterSlurmNodeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterSlurmNodeType", name: "ClusterSlurmNodeType")
     ClusterSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterSortBy", name: "ClusterSortBy")
+    ClusterSpotOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterSpotOptions", name: "ClusterSpotOptions")
     ClusterStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ClusterStatus", name: "ClusterStatus")
     ClusterSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ClusterSummaries", name: "ClusterSummaries")
     ClusterSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ClusterSummary", name: "ClusterSummary")
@@ -372,7 +546,7 @@ module Aws::SageMaker
     CodeEditorAppSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CodeEditorAppSettings", name: "CodeEditorAppSettings")
     CodeRepositories = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#CodeRepositories", name: "CodeRepositories", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     CodeRepository = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CodeRepository", name: "CodeRepository")
-    CodeRepositoryArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#CodeRepositoryArn", name: "CodeRepositoryArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"})
+    CodeRepositoryArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#CodeRepositoryArn", name: "CodeRepositoryArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"})
     CodeRepositoryContains = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#CodeRepositoryContains", name: "CodeRepositoryContains", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
     CodeRepositoryNameContains = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#CodeRepositoryNameContains", name: "CodeRepositoryNameContains", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
     CodeRepositoryNameOrUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#CodeRepositoryNameOrUrl", name: "CodeRepositoryNameOrUrl", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^https://([^/]+)/?(.*)$|^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"})
@@ -422,6 +596,7 @@ module Aws::SageMaker
     ContainerEntrypointString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ContainerEntrypointString", name: "ContainerEntrypointString", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => ".*"})
     ContainerHostname = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ContainerHostname", name: "ContainerHostname", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
     ContainerImage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ContainerImage", name: "ContainerImage", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => "^[\\S]+$"})
+    ContainerMetricsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ContainerMetricsConfig", name: "ContainerMetricsConfig")
     ContainerMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ContainerMode", name: "ContainerMode")
     ContentClassifier = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ContentClassifier", name: "ContentClassifier")
     ContentClassifiers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ContentClassifiers", name: "ContentClassifiers", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
@@ -440,6 +615,12 @@ module Aws::SageMaker
     ContinuousParameterRanges = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ContinuousParameterRanges", name: "ContinuousParameterRanges", traits: {"smithy.api#length" => {"min" => 0, "max" => 30}})
     ConvergenceDetected = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ConvergenceDetected", name: "ConvergenceDetected")
     CountryCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#CountryCode", name: "CountryCode", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#pattern" => "^[A-Z]{2}$"})
+    CreateAIBenchmarkJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateAIBenchmarkJobRequest", name: "CreateAIBenchmarkJobRequest")
+    CreateAIBenchmarkJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateAIBenchmarkJobResponse", name: "CreateAIBenchmarkJobResponse")
+    CreateAIRecommendationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateAIRecommendationJobRequest", name: "CreateAIRecommendationJobRequest")
+    CreateAIRecommendationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateAIRecommendationJobResponse", name: "CreateAIRecommendationJobResponse")
+    CreateAIWorkloadConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateAIWorkloadConfigRequest", name: "CreateAIWorkloadConfigRequest")
+    CreateAIWorkloadConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateAIWorkloadConfigResponse", name: "CreateAIWorkloadConfigResponse")
     CreateActionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateActionRequest", name: "CreateActionRequest")
     CreateActionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateActionResponse", name: "CreateActionResponse")
     CreateAlgorithmInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateAlgorithmInput", name: "CreateAlgorithmInput")
@@ -505,8 +686,12 @@ module Aws::SageMaker
     CreateInferenceExperimentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateInferenceExperimentResponse", name: "CreateInferenceExperimentResponse")
     CreateInferenceRecommendationsJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateInferenceRecommendationsJobRequest", name: "CreateInferenceRecommendationsJobRequest")
     CreateInferenceRecommendationsJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateInferenceRecommendationsJobResponse", name: "CreateInferenceRecommendationsJobResponse")
+    CreateJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateJobRequest", name: "CreateJobRequest")
+    CreateJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateJobResponse", name: "CreateJobResponse")
     CreateLabelingJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateLabelingJobRequest", name: "CreateLabelingJobRequest")
     CreateLabelingJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateLabelingJobResponse", name: "CreateLabelingJobResponse")
+    CreateMlflowAppRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateMlflowAppRequest", name: "CreateMlflowAppRequest")
+    CreateMlflowAppResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateMlflowAppResponse", name: "CreateMlflowAppResponse")
     CreateMlflowTrackingServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateMlflowTrackingServerRequest", name: "CreateMlflowTrackingServerRequest")
     CreateMlflowTrackingServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateMlflowTrackingServerResponse", name: "CreateMlflowTrackingServerResponse")
     CreateModelBiasJobDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateModelBiasJobDefinitionRequest", name: "CreateModelBiasJobDefinitionRequest")
@@ -541,6 +726,8 @@ module Aws::SageMaker
     CreatePipelineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreatePipelineResponse", name: "CreatePipelineResponse")
     CreatePresignedDomainUrlRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreatePresignedDomainUrlRequest", name: "CreatePresignedDomainUrlRequest")
     CreatePresignedDomainUrlResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreatePresignedDomainUrlResponse", name: "CreatePresignedDomainUrlResponse")
+    CreatePresignedMlflowAppUrlRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreatePresignedMlflowAppUrlRequest", name: "CreatePresignedMlflowAppUrlRequest")
+    CreatePresignedMlflowAppUrlResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreatePresignedMlflowAppUrlResponse", name: "CreatePresignedMlflowAppUrlResponse")
     CreatePresignedMlflowTrackingServerUrlRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrlRequest", name: "CreatePresignedMlflowTrackingServerUrlRequest")
     CreatePresignedMlflowTrackingServerUrlResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrlResponse", name: "CreatePresignedMlflowTrackingServerUrlResponse")
     CreatePresignedNotebookInstanceUrlInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreatePresignedNotebookInstanceUrlInput", name: "CreatePresignedNotebookInstanceUrlInput")
@@ -559,6 +746,8 @@ module Aws::SageMaker
     CreateTrainingJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateTrainingJobResponse", name: "CreateTrainingJobResponse")
     CreateTrainingPlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateTrainingPlanRequest", name: "CreateTrainingPlanRequest")
     CreateTrainingPlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateTrainingPlanResponse", name: "CreateTrainingPlanResponse")
+    CreateTrainingSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateTrainingSessionRequest", name: "CreateTrainingSessionRequest")
+    CreateTrainingSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateTrainingSessionResponse", name: "CreateTrainingSessionResponse")
     CreateTransformJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateTransformJobRequest", name: "CreateTransformJobRequest")
     CreateTransformJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateTransformJobResponse", name: "CreateTransformJobResponse")
     CreateTrialComponentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CreateTrialComponentRequest", name: "CreateTrialComponentRequest")
@@ -587,10 +776,12 @@ module Aws::SageMaker
     CustomImageContainerEnvironmentVariables = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#CustomImageContainerEnvironmentVariables", name: "CustomImageContainerEnvironmentVariables", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     CustomImages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#CustomImages", name: "CustomImages", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
     CustomPosixUserConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CustomPosixUserConfig", name: "CustomPosixUserConfig")
+    CustomerKmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#CustomerKmsKeyArn", name: "CustomerKmsKeyArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:kms:[a-z0-9\\-]+:[0-9]{12}:key/(mrk-)?[a-f0-9\\-]+$"})
     CustomerMetadataKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#CustomerMetadataKey", name: "CustomerMetadataKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,128}$"})
     CustomerMetadataKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#CustomerMetadataKeyList", name: "CustomerMetadataKeyList")
     CustomerMetadataMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#CustomerMetadataMap", name: "CustomerMetadataMap", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     CustomerMetadataValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#CustomerMetadataValue", name: "CustomerMetadataValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}$"})
+    CustomizationTechnique = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#CustomizationTechnique", name: "CustomizationTechnique")
     CustomizedMetricSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#CustomizedMetricSpecification", name: "CustomizedMetricSpecification")
     DataCaptureConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DataCaptureConfig", name: "DataCaptureConfig")
     DataCaptureConfigSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DataCaptureConfigSummary", name: "DataCaptureConfigSummary")
@@ -605,18 +796,30 @@ module Aws::SageMaker
     DataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DataSource", name: "DataSource")
     DataSourceName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#DataSourceName", name: "DataSourceName")
     Database = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#Database", name: "Database", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
+    DatabaseConfigurationMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DatabaseConfigurationMetadata", name: "DatabaseConfigurationMetadata")
+    DatabaseConfigurationRollbackStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#DatabaseConfigurationRollbackStatus", name: "DatabaseConfigurationRollbackStatus")
     DatasetDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DatasetDefinition", name: "DatasetDefinition")
+    DatasetSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DatasetSource", name: "DatasetSource")
     DebugHookConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DebugHookConfig", name: "DebugHookConfig")
     DebugRuleConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DebugRuleConfiguration", name: "DebugRuleConfiguration")
     DebugRuleConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#DebugRuleConfigurations", name: "DebugRuleConfigurations", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     DebugRuleEvaluationStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DebugRuleEvaluationStatus", name: "DebugRuleEvaluationStatus")
     DebugRuleEvaluationStatuses = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#DebugRuleEvaluationStatuses", name: "DebugRuleEvaluationStatuses", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    DeepHealthCheckConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#DeepHealthCheckConfigurations", name: "DeepHealthCheckConfigurations", traits: {"smithy.api#length" => {"min" => 1, "max" => 99}})
     DeepHealthCheckType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#DeepHealthCheckType", name: "DeepHealthCheckType")
+    DeepHealthChecks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#DeepHealthChecks", name: "DeepHealthChecks", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
+    DefaultDomainIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#DefaultDomainIdList", name: "DefaultDomainIdList")
     DefaultEbsStorageSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DefaultEbsStorageSettings", name: "DefaultEbsStorageSettings")
     DefaultGid = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#DefaultGid", name: "DefaultGid", traits: {"smithy.api#range" => {"min" => 0, "max" => 65535}})
     DefaultSpaceSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DefaultSpaceSettings", name: "DefaultSpaceSettings")
     DefaultSpaceStorageSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DefaultSpaceStorageSettings", name: "DefaultSpaceStorageSettings")
     DefaultUid = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#DefaultUid", name: "DefaultUid", traits: {"smithy.api#range" => {"min" => 0, "max" => 65535}})
+    DeleteAIBenchmarkJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteAIBenchmarkJobRequest", name: "DeleteAIBenchmarkJobRequest")
+    DeleteAIBenchmarkJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteAIBenchmarkJobResponse", name: "DeleteAIBenchmarkJobResponse")
+    DeleteAIRecommendationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteAIRecommendationJobRequest", name: "DeleteAIRecommendationJobRequest")
+    DeleteAIRecommendationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteAIRecommendationJobResponse", name: "DeleteAIRecommendationJobResponse")
+    DeleteAIWorkloadConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteAIWorkloadConfigRequest", name: "DeleteAIWorkloadConfigRequest")
+    DeleteAIWorkloadConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteAIWorkloadConfigResponse", name: "DeleteAIWorkloadConfigResponse")
     DeleteActionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteActionRequest", name: "DeleteActionRequest")
     DeleteActionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteActionResponse", name: "DeleteActionResponse")
     DeleteAlgorithmInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteAlgorithmInput", name: "DeleteAlgorithmInput")
@@ -659,6 +862,10 @@ module Aws::SageMaker
     DeleteInferenceComponentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteInferenceComponentInput", name: "DeleteInferenceComponentInput")
     DeleteInferenceExperimentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteInferenceExperimentRequest", name: "DeleteInferenceExperimentRequest")
     DeleteInferenceExperimentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteInferenceExperimentResponse", name: "DeleteInferenceExperimentResponse")
+    DeleteJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteJobRequest", name: "DeleteJobRequest")
+    DeleteJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteJobResponse", name: "DeleteJobResponse")
+    DeleteMlflowAppRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteMlflowAppRequest", name: "DeleteMlflowAppRequest")
+    DeleteMlflowAppResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteMlflowAppResponse", name: "DeleteMlflowAppResponse")
     DeleteMlflowTrackingServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteMlflowTrackingServerRequest", name: "DeleteMlflowTrackingServerRequest")
     DeleteMlflowTrackingServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteMlflowTrackingServerResponse", name: "DeleteMlflowTrackingServerResponse")
     DeleteModelBiasJobDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteModelBiasJobDefinitionRequest", name: "DeleteModelBiasJobDefinitionRequest")
@@ -677,11 +884,15 @@ module Aws::SageMaker
     DeletePartnerAppResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeletePartnerAppResponse", name: "DeletePartnerAppResponse")
     DeletePipelineRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeletePipelineRequest", name: "DeletePipelineRequest")
     DeletePipelineResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeletePipelineResponse", name: "DeletePipelineResponse")
+    DeleteProcessingJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteProcessingJobRequest", name: "DeleteProcessingJobRequest")
     DeleteProjectInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteProjectInput", name: "DeleteProjectInput")
     DeleteSpaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteSpaceRequest", name: "DeleteSpaceRequest")
     DeleteStudioLifecycleConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteStudioLifecycleConfigRequest", name: "DeleteStudioLifecycleConfigRequest")
     DeleteTagsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteTagsInput", name: "DeleteTagsInput")
     DeleteTagsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteTagsOutput", name: "DeleteTagsOutput")
+    DeleteTrainingJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteTrainingJobRequest", name: "DeleteTrainingJobRequest")
+    DeleteTrainingSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteTrainingSessionRequest", name: "DeleteTrainingSessionRequest")
+    DeleteTrainingSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteTrainingSessionResponse", name: "DeleteTrainingSessionResponse")
     DeleteTrialComponentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteTrialComponentRequest", name: "DeleteTrialComponentRequest")
     DeleteTrialComponentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteTrialComponentResponse", name: "DeleteTrialComponentResponse")
     DeleteTrialRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeleteTrialRequest", name: "DeleteTrialRequest")
@@ -705,6 +916,12 @@ module Aws::SageMaker
     DeploymentStages = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#DeploymentStages", name: "DeploymentStages")
     DeregisterDevicesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DeregisterDevicesRequest", name: "DeregisterDevicesRequest")
     DerivedInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DerivedInformation", name: "DerivedInformation")
+    DescribeAIBenchmarkJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeAIBenchmarkJobRequest", name: "DescribeAIBenchmarkJobRequest")
+    DescribeAIBenchmarkJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeAIBenchmarkJobResponse", name: "DescribeAIBenchmarkJobResponse")
+    DescribeAIRecommendationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeAIRecommendationJobRequest", name: "DescribeAIRecommendationJobRequest")
+    DescribeAIRecommendationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeAIRecommendationJobResponse", name: "DescribeAIRecommendationJobResponse")
+    DescribeAIWorkloadConfigRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeAIWorkloadConfigRequest", name: "DescribeAIWorkloadConfigRequest")
+    DescribeAIWorkloadConfigResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeAIWorkloadConfigResponse", name: "DescribeAIWorkloadConfigResponse")
     DescribeActionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeActionRequest", name: "DescribeActionRequest")
     DescribeActionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeActionResponse", name: "DescribeActionResponse")
     DescribeAlgorithmInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeAlgorithmInput", name: "DescribeAlgorithmInput")
@@ -777,10 +994,16 @@ module Aws::SageMaker
     DescribeInferenceExperimentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeInferenceExperimentResponse", name: "DescribeInferenceExperimentResponse")
     DescribeInferenceRecommendationsJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeInferenceRecommendationsJobRequest", name: "DescribeInferenceRecommendationsJobRequest")
     DescribeInferenceRecommendationsJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeInferenceRecommendationsJobResponse", name: "DescribeInferenceRecommendationsJobResponse")
+    DescribeJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeJobRequest", name: "DescribeJobRequest")
+    DescribeJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeJobResponse", name: "DescribeJobResponse")
+    DescribeJobSchemaVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeJobSchemaVersionRequest", name: "DescribeJobSchemaVersionRequest")
+    DescribeJobSchemaVersionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeJobSchemaVersionResponse", name: "DescribeJobSchemaVersionResponse")
     DescribeLabelingJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeLabelingJobRequest", name: "DescribeLabelingJobRequest")
     DescribeLabelingJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeLabelingJobResponse", name: "DescribeLabelingJobResponse")
     DescribeLineageGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeLineageGroupRequest", name: "DescribeLineageGroupRequest")
     DescribeLineageGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeLineageGroupResponse", name: "DescribeLineageGroupResponse")
+    DescribeMlflowAppRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeMlflowAppRequest", name: "DescribeMlflowAppRequest")
+    DescribeMlflowAppResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeMlflowAppResponse", name: "DescribeMlflowAppResponse")
     DescribeMlflowTrackingServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeMlflowTrackingServerRequest", name: "DescribeMlflowTrackingServerRequest")
     DescribeMlflowTrackingServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeMlflowTrackingServerResponse", name: "DescribeMlflowTrackingServerResponse")
     DescribeModelBiasJobDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeModelBiasJobDefinitionRequest", name: "DescribeModelBiasJobDefinitionRequest")
@@ -829,8 +1052,12 @@ module Aws::SageMaker
     DescribeSubscribedWorkteamResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeSubscribedWorkteamResponse", name: "DescribeSubscribedWorkteamResponse")
     DescribeTrainingJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTrainingJobRequest", name: "DescribeTrainingJobRequest")
     DescribeTrainingJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTrainingJobResponse", name: "DescribeTrainingJobResponse")
+    DescribeTrainingPlanExtensionHistoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTrainingPlanExtensionHistoryRequest", name: "DescribeTrainingPlanExtensionHistoryRequest")
+    DescribeTrainingPlanExtensionHistoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTrainingPlanExtensionHistoryResponse", name: "DescribeTrainingPlanExtensionHistoryResponse")
     DescribeTrainingPlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTrainingPlanRequest", name: "DescribeTrainingPlanRequest")
     DescribeTrainingPlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTrainingPlanResponse", name: "DescribeTrainingPlanResponse")
+    DescribeTrainingSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTrainingSessionRequest", name: "DescribeTrainingSessionRequest")
+    DescribeTrainingSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTrainingSessionResponse", name: "DescribeTrainingSessionResponse")
     DescribeTransformJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTransformJobRequest", name: "DescribeTransformJobRequest")
     DescribeTransformJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTransformJobResponse", name: "DescribeTransformJobResponse")
     DescribeTrialComponentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DescribeTrialComponentRequest", name: "DescribeTrialComponentRequest")
@@ -905,6 +1132,9 @@ module Aws::SageMaker
     DynamicScalingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#DynamicScalingConfiguration", name: "DynamicScalingConfiguration")
     EFSFileSystem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#EFSFileSystem", name: "EFSFileSystem")
     EFSFileSystemConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#EFSFileSystemConfig", name: "EFSFileSystemConfig")
+    EMRServerlessApplicationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#EMRServerlessApplicationId", name: "EMRServerlessApplicationId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "[0-9a-z]+"})
+    EMRServerlessJobRunId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#EMRServerlessJobRunId", name: "EMRServerlessJobRunId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "[0-9a-z]+"})
+    EMRServerlessStepMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#EMRServerlessStepMetadata", name: "EMRServerlessStepMetadata")
     EMRStepMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#EMRStepMetadata", name: "EMRStepMetadata")
     EbsStorageSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#EbsStorageSettings", name: "EbsStorageSettings")
     Ec2CapacityReservation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Ec2CapacityReservation", name: "Ec2CapacityReservation")
@@ -942,7 +1172,10 @@ module Aws::SageMaker
     EmrServerlessComputeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#EmrServerlessComputeConfig", name: "EmrServerlessComputeConfig")
     EmrServerlessSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#EmrServerlessSettings", name: "EmrServerlessSettings")
     EmrSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#EmrSettings", name: "EmrSettings")
+    EnableCaching = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#EnableCaching", name: "EnableCaching")
     EnableCapture = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#EnableCapture", name: "EnableCapture")
+    EnableDetailedObservability = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#EnableDetailedObservability", name: "EnableDetailedObservability")
+    EnableEnhancedMetrics = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#EnableEnhancedMetrics", name: "EnableEnhancedMetrics")
     EnableInfraCheck = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#EnableInfraCheck", name: "EnableInfraCheck")
     EnableIotRoleAlias = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#EnableIotRoleAlias", name: "EnableIotRoleAlias")
     EnableRemoteDebug = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#EnableRemoteDebug", name: "EnableRemoteDebug")
@@ -986,6 +1219,8 @@ module Aws::SageMaker
     EnvironmentParameters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#EnvironmentParameters", name: "EnvironmentParameters", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     EnvironmentValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#EnvironmentValue", name: "EnvironmentValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]*$"})
     ErrorInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ErrorInfo", name: "ErrorInfo")
+    EvaluationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#EvaluationType", name: "EvaluationType")
+    EvaluatorArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#EvaluatorArn", name: "EvaluatorArn", traits: {"smithy.api#pattern" => ".*"})
     EventDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#EventDetails", name: "EventDetails")
     EventId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#EventId", name: "EventId", traits: {"smithy.api#pattern" => "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
     EventMetadata = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.sagemaker#EventMetadata", name: "EventMetadata")
@@ -993,8 +1228,10 @@ module Aws::SageMaker
     ExcludeFeaturesAttribute = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ExcludeFeaturesAttribute", name: "ExcludeFeaturesAttribute", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ExecutionRoleArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ExecutionRoleArns", name: "ExecutionRoleArns", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     ExecutionRoleIdentityConfig = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ExecutionRoleIdentityConfig", name: "ExecutionRoleIdentityConfig")
+    ExecutionRoleSessionNameMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ExecutionRoleSessionNameMode", name: "ExecutionRoleSessionNameMode")
     ExecutionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ExecutionStatus", name: "ExecutionStatus")
     ExitMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ExitMessage", name: "ExitMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]*$"})
+    ExpectedPerformanceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ExpectedPerformanceList", name: "ExpectedPerformanceList")
     Experiment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Experiment", name: "Experiment")
     ExperimentArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ExperimentArn", name: "ExperimentArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:experiment/"})
     ExperimentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ExperimentConfig", name: "ExperimentConfig")
@@ -1009,6 +1246,8 @@ module Aws::SageMaker
     Explainability = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Explainability", name: "Explainability")
     ExplainabilityLocation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ExplainabilityLocation", name: "ExplainabilityLocation", traits: {"smithy.api#length" => {"min" => 1}})
     ExplainerConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ExplainerConfig", name: "ExplainerConfig")
+    ExtendTrainingPlanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ExtendTrainingPlanRequest", name: "ExtendTrainingPlanRequest")
+    ExtendTrainingPlanResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ExtendTrainingPlanResponse", name: "ExtendTrainingPlanResponse")
     FSxLustreConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#FSxLustreConfig", name: "FSxLustreConfig")
     FSxLustreFileSystem = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#FSxLustreFileSystem", name: "FSxLustreFileSystem")
     FSxLustreFileSystemConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#FSxLustreFileSystemConfig", name: "FSxLustreFileSystemConfig")
@@ -1076,6 +1315,9 @@ module Aws::SageMaker
     FlowDefinitionTaskKeywords = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#FlowDefinitionTaskKeywords", name: "FlowDefinitionTaskKeywords", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     FlowDefinitionTaskTimeLimitInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#FlowDefinitionTaskTimeLimitInSeconds", name: "FlowDefinitionTaskTimeLimitInSeconds", traits: {"smithy.api#range" => {"min" => 30}})
     FlowDefinitionTaskTitle = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#FlowDefinitionTaskTitle", name: "FlowDefinitionTaskTitle", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\t\\n\\r -\\uD7FF\\uE000-\\uFFFD]*$"})
+    ForEachSelectorResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ForEachSelectorResult", name: "ForEachSelectorResult")
+    ForEachStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ForEachStatus", name: "ForEachStatus")
+    ForEachStepMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ForEachStepMetadata", name: "ForEachStepMetadata")
     ForecastFrequency = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ForecastFrequency", name: "ForecastFrequency", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#pattern" => "^1Y|Y|([1-9]|1[0-1])M|M|[1-4]W|W|[1-6]D|D|([1-9]|1[0-9]|2[0-3])H|H|([1-9]|[1-5][0-9])min$"})
     ForecastHorizon = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ForecastHorizon", name: "ForecastHorizon", traits: {"smithy.api#range" => {"min" => 1}})
     ForecastQuantile = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ForecastQuantile", name: "ForecastQuantile", traits: {"smithy.api#length" => {"min" => 2, "max" => 4}, "smithy.api#pattern" => "^(^p[1-9]\\d?$)$"})
@@ -1101,6 +1343,8 @@ module Aws::SageMaker
     GitConfigForUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#GitConfigForUpdate", name: "GitConfigForUpdate")
     GitConfigUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#GitConfigUrl", name: "GitConfigUrl", traits: {"smithy.api#length" => {"min" => 11, "max" => 1024}, "smithy.api#pattern" => "^https://([^/]+)/?.{3,1016}$"})
     Group = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#Group", name: "Group", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"})
+    GroupNamePattern = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#GroupNamePattern", name: "GroupNamePattern", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[\\w+=,.@*-]+$"})
+    GroupPatternsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#GroupPatternsList", name: "GroupPatternsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     GroupingAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#GroupingAttributeName", name: "GroupingAttributeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     GroupingAttributeNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#GroupingAttributeNames", name: "GroupingAttributeNames", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     Groups = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#Groups", name: "Groups", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
@@ -1111,26 +1355,30 @@ module Aws::SageMaker
     HiddenSageMakerImageVersionAliasesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#HiddenSageMakerImageVersionAliasesList", name: "HiddenSageMakerImageVersionAliasesList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     HolidayConfig = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#HolidayConfig", name: "HolidayConfig", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     HolidayConfigAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#HolidayConfigAttributes", name: "HolidayConfigAttributes")
+    HomeEfsFileSystemCreation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#HomeEfsFileSystemCreation", name: "HomeEfsFileSystemCreation")
     HookParameters = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#HookParameters", name: "HookParameters", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     Horovod = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#Horovod", name: "Horovod")
     HubAccessConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#HubAccessConfig", name: "HubAccessConfig")
     HubArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubArn", name: "HubArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => ".*"})
+    HubContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#HubContent", name: "HubContent")
     HubContentArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentArn", name: "HubContentArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => ".*"})
     HubContentDependency = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#HubContentDependency", name: "HubContentDependency")
     HubContentDependencyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#HubContentDependencyList", name: "HubContentDependencyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     HubContentDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentDescription", name: "HubContentDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1023}, "smithy.api#pattern" => ".*"})
     HubContentDisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentDisplayName", name: "HubContentDisplayName", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => ".*"})
-    HubContentDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentDocument", name: "HubContentDocument", traits: {"smithy.api#length" => {"min" => 0, "max" => 65535}, "smithy.api#pattern" => ".*"})
+    HubContentDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentDocument", name: "HubContentDocument", traits: {"smithy.api#length" => {"min" => 0, "max" => 327680}, "smithy.api#pattern" => ".*"})
     HubContentInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#HubContentInfo", name: "HubContentInfo")
     HubContentInfoList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#HubContentInfoList", name: "HubContentInfoList")
-    HubContentMarkdown = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentMarkdown", name: "HubContentMarkdown", traits: {"smithy.api#length" => {"min" => 0, "max" => 65535}})
+    HubContentMarkdown = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentMarkdown", name: "HubContentMarkdown", traits: {"smithy.api#length" => {"min" => 0, "max" => 170391}})
     HubContentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentName", name: "HubContentName", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
+    HubContentSearchKeyword = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentSearchKeyword", name: "HubContentSearchKeyword", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => ".*"})
     HubContentSearchKeywordList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#HubContentSearchKeywordList", name: "HubContentSearchKeywordList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     HubContentSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#HubContentSortBy", name: "HubContentSortBy")
     HubContentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#HubContentStatus", name: "HubContentStatus")
     HubContentSupportStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#HubContentSupportStatus", name: "HubContentSupportStatus")
     HubContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#HubContentType", name: "HubContentType")
     HubContentVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubContentVersion", name: "HubContentVersion", traits: {"smithy.api#length" => {"min" => 5, "max" => 14}, "smithy.api#pattern" => "^\\d{1,4}.\\d{1,4}.\\d{1,4}$"})
+    HubDataSetArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubDataSetArn", name: "HubDataSetArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^(arn:[a-z0-9-\\.]{1,63}:sagemaker:\\w+(?:-\\w+)+:(\\d{12}|aws):hub-content\\/)[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}\\/DataSet\\/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}(\\/\\d{1,4}.\\d{1,4}.\\d{1,4})?$"})
     HubDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubDescription", name: "HubDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1023}, "smithy.api#pattern" => ".*"})
     HubDisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#HubDisplayName", name: "HubDisplayName", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}, "smithy.api#pattern" => ".*"})
     HubInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#HubInfo", name: "HubInfo")
@@ -1196,9 +1444,12 @@ module Aws::SageMaker
     IPAddressType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#IPAddressType", name: "IPAddressType")
     IamIdentity = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#IamIdentity", name: "IamIdentity")
     IamPolicyConstraints = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#IamPolicyConstraints", name: "IamPolicyConstraints")
+    IdcConfigInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#IdcConfigInput", name: "IdcConfigInput")
+    IdcConfigOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#IdcConfigOutput", name: "IdcConfigOutput")
     IdempotencyToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#IdempotencyToken", name: "IdempotencyToken", traits: {"smithy.api#length" => {"min" => 32, "max" => 128}})
     IdentityProviderOAuthSetting = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#IdentityProviderOAuthSetting", name: "IdentityProviderOAuthSetting")
     IdentityProviderOAuthSettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#IdentityProviderOAuthSettings", name: "IdentityProviderOAuthSettings", traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
+    IdleResourceSharing = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#IdleResourceSharing", name: "IdleResourceSharing")
     IdleSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#IdleSettings", name: "IdleSettings")
     IdleTimeoutInMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#IdleTimeoutInMinutes", name: "IdleTimeoutInMinutes", traits: {"smithy.api#range" => {"min" => 60, "max" => 525600}})
     Image = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Image", name: "Image")
@@ -1215,6 +1466,7 @@ module Aws::SageMaker
     ImageId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ImageId", name: "ImageId", traits: {"smithy.api#length" => {"min" => 7, "max" => 21}, "smithy.api#pattern" => "^ami-[0-9a-fA-F]{8,17}|default$"})
     ImageName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ImageName", name: "ImageName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"})
     ImageNameContains = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ImageNameContains", name: "ImageNameContains", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-.]+$"})
+    ImageReleaseVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ImageReleaseVersion", name: "ImageReleaseVersion", traits: {"smithy.api#length" => {"max" => 64}, "smithy.api#pattern" => "^[0-9]+\\.[0-9]+\\.[0-9]+$"})
     ImageSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ImageSortBy", name: "ImageSortBy")
     ImageSortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ImageSortOrder", name: "ImageSortOrder")
     ImageStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ImageStatus", name: "ImageStatus")
@@ -1233,22 +1485,33 @@ module Aws::SageMaker
     ImportHubContentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ImportHubContentResponse", name: "ImportHubContentResponse")
     InUseInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#InUseInstanceCount", name: "InUseInstanceCount", traits: {"smithy.api#range" => {"min" => 0}})
     IncludeNodeLogicalIdsBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#IncludeNodeLogicalIdsBoolean", name: "IncludeNodeLogicalIdsBoolean")
+    IncludedData = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#IncludedData", name: "IncludedData")
     InferenceComponentArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#InferenceComponentArn", name: "InferenceComponentArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}})
+    InferenceComponentAvailabilityZoneBalance = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentAvailabilityZoneBalance", name: "InferenceComponentAvailabilityZoneBalance")
     InferenceComponentCapacitySize = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentCapacitySize", name: "InferenceComponentCapacitySize")
     InferenceComponentCapacitySizeType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#InferenceComponentCapacitySizeType", name: "InferenceComponentCapacitySizeType")
     InferenceComponentComputeResourceRequirements = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentComputeResourceRequirements", name: "InferenceComponentComputeResourceRequirements")
     InferenceComponentContainerSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentContainerSpecification", name: "InferenceComponentContainerSpecification")
     InferenceComponentContainerSpecificationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentContainerSpecificationSummary", name: "InferenceComponentContainerSpecificationSummary")
     InferenceComponentCopyCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#InferenceComponentCopyCount", name: "InferenceComponentCopyCount", traits: {"smithy.api#range" => {"min" => 0}})
+    InferenceComponentDataCacheConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentDataCacheConfig", name: "InferenceComponentDataCacheConfig")
+    InferenceComponentDataCacheConfigSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentDataCacheConfigSummary", name: "InferenceComponentDataCacheConfigSummary")
     InferenceComponentDeploymentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentDeploymentConfig", name: "InferenceComponentDeploymentConfig")
+    InferenceComponentMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentMetadata", name: "InferenceComponentMetadata")
     InferenceComponentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#InferenceComponentName", name: "InferenceComponentName", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?$"})
     InferenceComponentNameContains = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#InferenceComponentNameContains", name: "InferenceComponentNameContains", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
+    InferenceComponentPlacementStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentPlacementStatus", name: "InferenceComponentPlacementStatus")
+    InferenceComponentPlacementStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InferenceComponentPlacementStatusList", name: "InferenceComponentPlacementStatusList", traits: {"smithy.api#length" => {"min" => 1}})
+    InferenceComponentPlacementStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#InferenceComponentPlacementStrategy", name: "InferenceComponentPlacementStrategy")
     InferenceComponentRollingUpdatePolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentRollingUpdatePolicy", name: "InferenceComponentRollingUpdatePolicy")
     InferenceComponentRuntimeConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentRuntimeConfig", name: "InferenceComponentRuntimeConfig")
     InferenceComponentRuntimeConfigSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentRuntimeConfigSummary", name: "InferenceComponentRuntimeConfigSummary")
+    InferenceComponentSchedulingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentSchedulingConfig", name: "InferenceComponentSchedulingConfig")
     InferenceComponentSortKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#InferenceComponentSortKey", name: "InferenceComponentSortKey")
     InferenceComponentSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentSpecification", name: "InferenceComponentSpecification")
+    InferenceComponentSpecificationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InferenceComponentSpecificationList", name: "InferenceComponentSpecificationList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     InferenceComponentSpecificationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentSpecificationSummary", name: "InferenceComponentSpecificationSummary")
+    InferenceComponentSpecificationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InferenceComponentSpecificationSummaryList", name: "InferenceComponentSpecificationSummaryList", traits: {"smithy.api#length" => {"min" => 1}})
     InferenceComponentStartupParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentStartupParameters", name: "InferenceComponentStartupParameters")
     InferenceComponentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#InferenceComponentStatus", name: "InferenceComponentStatus")
     InferenceComponentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InferenceComponentSummary", name: "InferenceComponentSummary")
@@ -1285,8 +1548,10 @@ module Aws::SageMaker
     InputDataConfig = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InputDataConfig", name: "InputDataConfig", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
     InputMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#InputMode", name: "InputMode")
     InputModes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InputModes", name: "InputModes", traits: {"smithy.api#length" => {"min" => 1}})
+    InstanceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#InstanceArn", name: "InstanceArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sso:::instance/(sso)?ins-[a-zA-Z0-9.-]{16}$"})
     InstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#InstanceCount", name: "InstanceCount", traits: {"smithy.api#range" => {"min" => 0, "max" => 10000000}})
     InstanceGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstanceGroup", name: "InstanceGroup")
+    InstanceGroupHealthCheckConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstanceGroupHealthCheckConfiguration", name: "InstanceGroupHealthCheckConfiguration")
     InstanceGroupMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstanceGroupMetadata", name: "InstanceGroupMetadata")
     InstanceGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#InstanceGroupName", name: "InstanceGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^.+$"})
     InstanceGroupNames = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InstanceGroupNames", name: "InstanceGroupNames", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
@@ -1294,9 +1559,19 @@ module Aws::SageMaker
     InstanceGroupStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#InstanceGroupStatus", name: "InstanceGroupStatus")
     InstanceGroupTrainingPlanStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#InstanceGroupTrainingPlanStatus", name: "InstanceGroupTrainingPlanStatus", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}})
     InstanceGroups = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InstanceGroups", name: "InstanceGroups", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
+    InstanceIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InstanceIds", name: "InstanceIds", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}})
     InstanceMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstanceMetadata", name: "InstanceMetadata")
     InstanceMetadataServiceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstanceMetadataServiceConfiguration", name: "InstanceMetadataServiceConfiguration")
     InstancePlacementConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstancePlacementConfig", name: "InstancePlacementConfig")
+    InstancePool = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstancePool", name: "InstancePool")
+    InstancePoolList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InstancePoolList", name: "InstancePoolList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    InstancePoolPriority = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#InstancePoolPriority", name: "InstancePoolPriority", traits: {"smithy.api#range" => {"min" => 1, "max" => 5}})
+    InstancePoolSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstancePoolSummary", name: "InstancePoolSummary")
+    InstancePoolSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InstancePoolSummaryList", name: "InstancePoolSummaryList", traits: {"smithy.api#length" => {"min" => 1}})
+    InstancePreference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstancePreference", name: "InstancePreference")
+    InstancePreferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InstancePreferenceList", name: "InstancePreferenceList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    InstanceRequirementsEniConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#InstanceRequirementsEniConfiguration", name: "InstanceRequirementsEniConfiguration")
+    InstanceRequirementsEniConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#InstanceRequirementsEniConfigurations", name: "InstanceRequirementsEniConfigurations")
     InstanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#InstanceType", name: "InstanceType")
     Integer = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#Integer", name: "Integer")
     IntegerParameterRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#IntegerParameterRange", name: "IntegerParameterRange")
@@ -1309,9 +1584,28 @@ module Aws::SageMaker
     IotRoleAlias = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#IotRoleAlias", name: "IotRoleAlias", traits: {"smithy.api#pattern" => "^arn:aws[a-z\\-]*:iam::\\d{12}:rolealias/?[a-zA-Z_0-9+=,.@\\-_/]+$"})
     IsTrackingServerActive = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#IsTrackingServerActive", name: "IsTrackingServerActive")
     ItemIdentifierAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ItemIdentifierAttributeName", name: "ItemIdentifierAttributeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    IterationContext = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#IterationContext", name: "IterationContext")
+    JavaBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#JavaBoolean", name: "JavaBoolean")
+    JavaInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#JavaInteger", name: "JavaInteger")
+    JavaLong = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#JavaLong", name: "JavaLong")
+    Job = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Job", name: "Job")
+    JobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#JobArn", name: "JobArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:(aws[a-z\\-]*):sagemaker:[a-z0-9\\-]+:[0-9]{12}:job/[a-zA-Z0-9]+/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
+    JobCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#JobCategory", name: "JobCategory")
+    JobConfigDocument = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#JobConfigDocument", name: "JobConfigDocument", traits: {"smithy.api#length" => {"min" => 1, "max" => 262144}})
+    JobConfigSchemaVersionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#JobConfigSchemaVersionSummary", name: "JobConfigSchemaVersionSummary")
+    JobConfigSchemas = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#JobConfigSchemas", name: "JobConfigSchemas", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     JobDurationInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#JobDurationInSeconds", name: "JobDurationInSeconds", traits: {"smithy.api#range" => {"min" => 1}})
+    JobName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#JobName", name: "JobName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
     JobReferenceCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#JobReferenceCode", name: "JobReferenceCode", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^.+$"})
     JobReferenceCodeContains = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#JobReferenceCodeContains", name: "JobReferenceCodeContains", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^.+$"})
+    JobSchemaVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#JobSchemaVersion", name: "JobSchemaVersion", traits: {"smithy.api#length" => {"min" => 5, "max" => 16}, "smithy.api#pattern" => "^\\d+\\.\\d+\\.\\d+$"})
+    JobSecondaryStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#JobSecondaryStatus", name: "JobSecondaryStatus")
+    JobSecondaryStatusTransition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#JobSecondaryStatusTransition", name: "JobSecondaryStatusTransition")
+    JobSecondaryStatusTransitions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#JobSecondaryStatusTransitions", name: "JobSecondaryStatusTransitions", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    JobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#JobStatus", name: "JobStatus")
+    JobStepMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#JobStepMetadata", name: "JobStepMetadata")
+    JobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#JobSummaries", name: "JobSummaries", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    JobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#JobSummary", name: "JobSummary")
     JobType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#JobType", name: "JobType")
     JoinSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#JoinSource", name: "JoinSource")
     JsonContentType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#JsonContentType", name: "JsonContentType", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9])*\\/[a-zA-Z0-9](-*[a-zA-Z0-9.])*$"})
@@ -1320,7 +1614,7 @@ module Aws::SageMaker
     JupyterLabAppImageConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#JupyterLabAppImageConfig", name: "JupyterLabAppImageConfig")
     JupyterLabAppSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#JupyterLabAppSettings", name: "JupyterLabAppSettings")
     JupyterServerAppSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#JupyterServerAppSettings", name: "JupyterServerAppSettings")
-    KeepAlivePeriodInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#KeepAlivePeriodInSeconds", name: "KeepAlivePeriodInSeconds", traits: {"smithy.api#range" => {"min" => 0, "max" => 3600}})
+    KeepAlivePeriodInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#KeepAlivePeriodInSeconds", name: "KeepAlivePeriodInSeconds", traits: {"smithy.api#range" => {"min" => 0, "max" => 21600}})
     KendraSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#KendraSettings", name: "KendraSettings")
     KernelDisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#KernelDisplayName", name: "KernelDisplayName", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     KernelGatewayAppSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#KernelGatewayAppSettings", name: "KernelGatewayAppSettings")
@@ -1365,7 +1659,17 @@ module Aws::SageMaker
     LineageGroupNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#LineageGroupNameOrArn", name: "LineageGroupNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:lineage-group\\/)?([a-zA-Z0-9](-*[a-zA-Z0-9]){0,119})$"})
     LineageGroupSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#LineageGroupSummaries", name: "LineageGroupSummaries")
     LineageGroupSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#LineageGroupSummary", name: "LineageGroupSummary")
+    LineageMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#LineageMetadata", name: "LineageMetadata")
     LineageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#LineageType", name: "LineageType")
+    ListAIBenchmarkJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListAIBenchmarkJobsRequest", name: "ListAIBenchmarkJobsRequest")
+    ListAIBenchmarkJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListAIBenchmarkJobsResponse", name: "ListAIBenchmarkJobsResponse")
+    ListAIBenchmarkJobsSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ListAIBenchmarkJobsSortBy", name: "ListAIBenchmarkJobsSortBy")
+    ListAIRecommendationJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListAIRecommendationJobsRequest", name: "ListAIRecommendationJobsRequest")
+    ListAIRecommendationJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListAIRecommendationJobsResponse", name: "ListAIRecommendationJobsResponse")
+    ListAIRecommendationJobsSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ListAIRecommendationJobsSortBy", name: "ListAIRecommendationJobsSortBy")
+    ListAIWorkloadConfigsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListAIWorkloadConfigsRequest", name: "ListAIWorkloadConfigsRequest")
+    ListAIWorkloadConfigsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListAIWorkloadConfigsResponse", name: "ListAIWorkloadConfigsResponse")
+    ListAIWorkloadConfigsSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ListAIWorkloadConfigsSortBy", name: "ListAIWorkloadConfigsSortBy")
     ListActionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListActionsRequest", name: "ListActionsRequest")
     ListActionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListActionsResponse", name: "ListActionsResponse")
     ListAlgorithmsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListAlgorithmsInput", name: "ListAlgorithmsInput")
@@ -1449,6 +1753,10 @@ module Aws::SageMaker
     ListInferenceRecommendationsJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListInferenceRecommendationsJobsRequest", name: "ListInferenceRecommendationsJobsRequest")
     ListInferenceRecommendationsJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListInferenceRecommendationsJobsResponse", name: "ListInferenceRecommendationsJobsResponse")
     ListInferenceRecommendationsJobsSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ListInferenceRecommendationsJobsSortBy", name: "ListInferenceRecommendationsJobsSortBy")
+    ListJobSchemaVersionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListJobSchemaVersionsRequest", name: "ListJobSchemaVersionsRequest")
+    ListJobSchemaVersionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListJobSchemaVersionsResponse", name: "ListJobSchemaVersionsResponse")
+    ListJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListJobsRequest", name: "ListJobsRequest")
+    ListJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListJobsResponse", name: "ListJobsResponse")
     ListLabelingJobsForWorkteamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListLabelingJobsForWorkteamRequest", name: "ListLabelingJobsForWorkteamRequest")
     ListLabelingJobsForWorkteamResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListLabelingJobsForWorkteamResponse", name: "ListLabelingJobsForWorkteamResponse")
     ListLabelingJobsForWorkteamSortByOptions = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ListLabelingJobsForWorkteamSortByOptions", name: "ListLabelingJobsForWorkteamSortByOptions")
@@ -1458,6 +1766,8 @@ module Aws::SageMaker
     ListLineageGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListLineageGroupsRequest", name: "ListLineageGroupsRequest")
     ListLineageGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListLineageGroupsResponse", name: "ListLineageGroupsResponse")
     ListMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ListMaxResults", name: "ListMaxResults", traits: {"smithy.api#range" => {"max" => 100}})
+    ListMlflowAppsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListMlflowAppsRequest", name: "ListMlflowAppsRequest")
+    ListMlflowAppsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListMlflowAppsResponse", name: "ListMlflowAppsResponse")
     ListMlflowTrackingServersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListMlflowTrackingServersRequest", name: "ListMlflowTrackingServersRequest")
     ListMlflowTrackingServersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListMlflowTrackingServersResponse", name: "ListMlflowTrackingServersResponse")
     ListModelBiasJobDefinitionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListModelBiasJobDefinitionsRequest", name: "ListModelBiasJobDefinitionsRequest")
@@ -1530,6 +1840,8 @@ module Aws::SageMaker
     ListTrainingJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListTrainingJobsResponse", name: "ListTrainingJobsResponse")
     ListTrainingPlansRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListTrainingPlansRequest", name: "ListTrainingPlansRequest")
     ListTrainingPlansResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListTrainingPlansResponse", name: "ListTrainingPlansResponse")
+    ListTrainingSessionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListTrainingSessionsRequest", name: "ListTrainingSessionsRequest")
+    ListTrainingSessionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListTrainingSessionsResponse", name: "ListTrainingSessionsResponse")
     ListTransformJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListTransformJobsRequest", name: "ListTransformJobsRequest")
     ListTransformJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ListTransformJobsResponse", name: "ListTransformJobsResponse")
     ListTrialComponentKey256 = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ListTrialComponentKey256", name: "ListTrialComponentKey256")
@@ -1550,10 +1862,23 @@ module Aws::SageMaker
     LocalPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#LocalPath", name: "LocalPath", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^\\/"})
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#Long", name: "Long")
     LongS3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#LongS3Uri", name: "LongS3Uri", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^(https|s3)://([^/]+)/?(.*)$"})
+    LoraAlpha = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#LoraAlpha", name: "LoraAlpha", traits: {"smithy.api#range" => {"min" => 1}})
+    LoraConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#LoraConfig", name: "LoraConfig")
+    MIGProfileType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#MIGProfileType", name: "MIGProfileType")
     MLFramework = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MLFramework", name: "MLFramework", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$"})
+    MLflowArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MLflowArn", name: "MLflowArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-[a-zA-Z-]*/"})
+    MLflowConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#MLflowConfiguration", name: "MLflowConfiguration")
+    MaintenanceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#MaintenanceStatus", name: "MaintenanceStatus")
+    MajorMinorVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MajorMinorVersion", name: "MajorMinorVersion", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}, "smithy.api#pattern" => "^\\d+\\.\\d+$"})
+    ManagedConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ManagedConfiguration", name: "ManagedConfiguration")
+    ManagedInstanceScalingCooldownInMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ManagedInstanceScalingCooldownInMinutes", name: "ManagedInstanceScalingCooldownInMinutes", traits: {"smithy.api#range" => {"min" => 5, "max" => 1440}})
     ManagedInstanceScalingMaxInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ManagedInstanceScalingMaxInstanceCount", name: "ManagedInstanceScalingMaxInstanceCount", traits: {"smithy.api#range" => {"min" => 1}})
+    ManagedInstanceScalingMaximumStepSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ManagedInstanceScalingMaximumStepSize", name: "ManagedInstanceScalingMaximumStepSize", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     ManagedInstanceScalingMinInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ManagedInstanceScalingMinInstanceCount", name: "ManagedInstanceScalingMinInstanceCount", traits: {"smithy.api#range" => {"min" => 0}})
+    ManagedInstanceScalingScaleInStrategy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ManagedInstanceScalingScaleInStrategy", name: "ManagedInstanceScalingScaleInStrategy")
     ManagedInstanceScalingStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ManagedInstanceScalingStatus", name: "ManagedInstanceScalingStatus")
+    ManagedStorageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ManagedStorageType", name: "ManagedStorageType")
+    MapString2048 = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#MapString2048", name: "MapString2048", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     MaxAutoMLJobRuntimeInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxAutoMLJobRuntimeInSeconds", name: "MaxAutoMLJobRuntimeInSeconds", traits: {"smithy.api#range" => {"min" => 1}})
     MaxCandidates = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxCandidates", name: "MaxCandidates", traits: {"smithy.api#range" => {"min" => 1, "max" => 750}})
     MaxConcurrentInvocationsPerInstance = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxConcurrentInvocationsPerInstance", name: "MaxConcurrentInvocationsPerInstance", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
@@ -1567,7 +1892,7 @@ module Aws::SageMaker
     MaxParallelOfTests = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxParallelOfTests", name: "MaxParallelOfTests", traits: {"smithy.api#range" => {"min" => 1}})
     MaxParallelTrainingJobs = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxParallelTrainingJobs", name: "MaxParallelTrainingJobs", traits: {"smithy.api#range" => {"min" => 1}})
     MaxPayloadInMB = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxPayloadInMB", name: "MaxPayloadInMB", traits: {"smithy.api#range" => {"min" => 0}})
-    MaxPendingTimeInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxPendingTimeInSeconds", name: "MaxPendingTimeInSeconds", traits: {"smithy.api#range" => {"min" => 7200, "max" => 2419200}})
+    MaxPendingTimeInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxPendingTimeInSeconds", name: "MaxPendingTimeInSeconds", traits: {"smithy.api#range" => {"min" => 1800, "max" => 2419200}})
     MaxPercentageOfInputDatasetLabeled = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxPercentageOfInputDatasetLabeled", name: "MaxPercentageOfInputDatasetLabeled", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxRuntimeInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#MaxRuntimeInSeconds", name: "MaxRuntimeInSeconds", traits: {"smithy.api#range" => {"min" => 1}})
@@ -1588,14 +1913,33 @@ module Aws::SageMaker
     MetricDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#MetricDefinition", name: "MetricDefinition")
     MetricDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#MetricDefinitionList", name: "MetricDefinitionList", traits: {"smithy.api#length" => {"min" => 0, "max" => 40}})
     MetricName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MetricName", name: "MetricName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^.+$"})
+    MetricPublishFrequencyInSeconds = ::Smithy::Schema::Shapes::IntEnumShape.new(id: "com.amazonaws.sagemaker#MetricPublishFrequencyInSeconds", name: "MetricPublishFrequencyInSeconds")
     MetricRegex = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MetricRegex", name: "MetricRegex", traits: {"smithy.api#length" => {"min" => 1, "max" => 500}, "smithy.api#pattern" => "^.+$"})
     MetricSetSource = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#MetricSetSource", name: "MetricSetSource")
     MetricSpecification = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.sagemaker#MetricSpecification", name: "MetricSpecification")
     MetricValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.sagemaker#MetricValue", name: "MetricValue")
+    MetricsConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#MetricsConfig", name: "MetricsConfig")
+    MetricsEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#MetricsEndpoint", name: "MetricsEndpoint")
+    MetricsEndpointList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#MetricsEndpointList", name: "MetricsEndpointList", traits: {"smithy.api#length" => {"max" => 1}})
+    MetricsEndpointPath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MetricsEndpointPath", name: "MetricsEndpointPath", traits: {"smithy.api#length" => {"max" => 256}, "smithy.api#pattern" => "^/(?!.*\\.\\.)[a-zA-Z0-9/_.\\-]+$"})
     MetricsSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#MetricsSource", name: "MetricsSource")
     MinimumInstanceMetadataServiceVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MinimumInstanceMetadataServiceVersion", name: "MinimumInstanceMetadataServiceVersion", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}, "smithy.api#pattern" => "^1|2$"})
-    MlReservationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlReservationArn", name: "MlReservationArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 258}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:ml-reservation/"})
+    MlFlowResourceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlFlowResourceArn", name: "MlFlowResourceArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-[a-zA-Z-]*/"})
+    MlReservationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlReservationArn", name: "MlReservationArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 258}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z0-9\\-]{1,14}/"})
     MlTools = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#MlTools", name: "MlTools")
+    MlflowAppArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlflowAppArn", name: "MlflowAppArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-app/"})
+    MlflowAppName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlflowAppName", name: "MlflowAppName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$"})
+    MlflowAppStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#MlflowAppStatus", name: "MlflowAppStatus")
+    MlflowAppSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#MlflowAppSummaries", name: "MlflowAppSummaries", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    MlflowAppSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#MlflowAppSummary", name: "MlflowAppSummary")
+    MlflowAppUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlflowAppUrl", name: "MlflowAppUrl", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
+    MlflowConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#MlflowConfig", name: "MlflowConfig")
+    MlflowDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#MlflowDetails", name: "MlflowDetails")
+    MlflowExperimentEntityName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlflowExperimentEntityName", name: "MlflowExperimentEntityName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => ".*"})
+    MlflowExperimentId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlflowExperimentId", name: "MlflowExperimentId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => ".*"})
+    MlflowExperimentName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlflowExperimentName", name: "MlflowExperimentName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => ".*"})
+    MlflowRunId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlflowRunId", name: "MlflowRunId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => ".*"})
+    MlflowRunName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlflowRunName", name: "MlflowRunName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => ".*"})
     MlflowVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#MlflowVersion", name: "MlflowVersion", traits: {"smithy.api#length" => {"min" => 0, "max" => 16}, "smithy.api#pattern" => "^[0-9]*.[0-9]*.[0-9]*$"})
     Model = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Model", name: "Model")
     ModelAccessConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelAccessConfig", name: "ModelAccessConfig")
@@ -1664,18 +2008,20 @@ module Aws::SageMaker
     ModelName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ModelName", name: "ModelName", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?$"})
     ModelNameContains = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ModelNameContains", name: "ModelNameContains", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
     ModelPackage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelPackage", name: "ModelPackage")
-    ModelPackageArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ModelPackageArn", name: "ModelPackageArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"})
+    ModelPackageArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ModelPackageArn", name: "ModelPackageArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"})
     ModelPackageArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ModelPackageArnList", name: "ModelPackageArnList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    ModelPackageConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelPackageConfig", name: "ModelPackageConfig")
     ModelPackageContainerDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelPackageContainerDefinition", name: "ModelPackageContainerDefinition")
     ModelPackageContainerDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ModelPackageContainerDefinitionList", name: "ModelPackageContainerDefinitionList", traits: {"smithy.api#length" => {"min" => 1, "max" => 15}})
     ModelPackageFrameworkVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ModelPackageFrameworkVersion", name: "ModelPackageFrameworkVersion", traits: {"smithy.api#length" => {"min" => 3, "max" => 10}, "smithy.api#pattern" => "^[0-9]\\.[A-Za-z0-9.-]+$"})
     ModelPackageGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelPackageGroup", name: "ModelPackageGroup")
-    ModelPackageGroupArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ModelPackageGroupArn", name: "ModelPackageGroupArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"})
+    ModelPackageGroupArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ModelPackageGroupArn", name: "ModelPackageGroupArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"})
     ModelPackageGroupSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ModelPackageGroupSortBy", name: "ModelPackageGroupSortBy")
     ModelPackageGroupStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ModelPackageGroupStatus", name: "ModelPackageGroupStatus")
     ModelPackageGroupSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelPackageGroupSummary", name: "ModelPackageGroupSummary")
     ModelPackageGroupSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ModelPackageGroupSummaryList", name: "ModelPackageGroupSummaryList")
     ModelPackageModelCard = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelPackageModelCard", name: "ModelPackageModelCard")
+    ModelPackageRegistrationType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ModelPackageRegistrationType", name: "ModelPackageRegistrationType")
     ModelPackageSecurityConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelPackageSecurityConfig", name: "ModelPackageSecurityConfig")
     ModelPackageSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ModelPackageSortBy", name: "ModelPackageSortBy")
     ModelPackageSourceUri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ModelPackageSourceUri", name: "ModelPackageSourceUri", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\p{L}\\p{M}\\p{Z}\\p{N}\\p{P}]{0,1024}$"})
@@ -1697,9 +2043,14 @@ module Aws::SageMaker
     ModelQualityJobInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelQualityJobInput", name: "ModelQualityJobInput")
     ModelQuantizationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelQuantizationConfig", name: "ModelQuantizationConfig")
     ModelRegisterSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelRegisterSettings", name: "ModelRegisterSettings")
+    ModelRegistrationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ModelRegistrationMode", name: "ModelRegistrationMode")
     ModelSetupTime = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ModelSetupTime", name: "ModelSetupTime", traits: {"smithy.api#range" => {"min" => 0}})
     ModelShardingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelShardingConfig", name: "ModelShardingConfig")
     ModelSortKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ModelSortKey", name: "ModelSortKey")
+    ModelSpeculativeDecodingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelSpeculativeDecodingConfig", name: "ModelSpeculativeDecodingConfig")
+    ModelSpeculativeDecodingS3DataType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ModelSpeculativeDecodingS3DataType", name: "ModelSpeculativeDecodingS3DataType")
+    ModelSpeculativeDecodingTechnique = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ModelSpeculativeDecodingTechnique", name: "ModelSpeculativeDecodingTechnique")
+    ModelSpeculativeDecodingTrainingDataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelSpeculativeDecodingTrainingDataSource", name: "ModelSpeculativeDecodingTrainingDataSource")
     ModelStepMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelStepMetadata", name: "ModelStepMetadata")
     ModelSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ModelSummary", name: "ModelSummary")
     ModelSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ModelSummaryList", name: "ModelSummaryList")
@@ -1822,7 +2173,7 @@ module Aws::SageMaker
     OidcConfigForResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OidcConfigForResponse", name: "OidcConfigForResponse")
     OidcEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#OidcEndpoint", name: "OidcEndpoint", traits: {"smithy.api#length" => {"min" => 0, "max" => 500}, "smithy.api#pattern" => "^https://\\S+$"})
     OidcMemberDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OidcMemberDefinition", name: "OidcMemberDefinition")
-    OnStartDeepHealthChecks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#OnStartDeepHealthChecks", name: "OnStartDeepHealthChecks", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    OnStartDeepHealthChecks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#OnStartDeepHealthChecks", name: "OnStartDeepHealthChecks", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
     OnlineStoreConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OnlineStoreConfig", name: "OnlineStoreConfig")
     OnlineStoreConfigUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OnlineStoreConfigUpdate", name: "OnlineStoreConfigUpdate")
     OnlineStoreSecurityConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OnlineStoreSecurityConfig", name: "OnlineStoreSecurityConfig")
@@ -1834,15 +2185,18 @@ module Aws::SageMaker
     OptimizationJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#OptimizationJobArn", name: "OptimizationJobArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:optimization-job/"})
     OptimizationJobDeploymentInstanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#OptimizationJobDeploymentInstanceType", name: "OptimizationJobDeploymentInstanceType")
     OptimizationJobEnvironmentVariables = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#OptimizationJobEnvironmentVariables", name: "OptimizationJobEnvironmentVariables", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
+    OptimizationJobMaxInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#OptimizationJobMaxInstanceCount", name: "OptimizationJobMaxInstanceCount", traits: {"smithy.api#range" => {"min" => 1}})
     OptimizationJobModelSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OptimizationJobModelSource", name: "OptimizationJobModelSource")
     OptimizationJobModelSourceS3 = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OptimizationJobModelSourceS3", name: "OptimizationJobModelSourceS3")
     OptimizationJobOutputConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OptimizationJobOutputConfig", name: "OptimizationJobOutputConfig")
     OptimizationJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#OptimizationJobStatus", name: "OptimizationJobStatus")
     OptimizationJobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#OptimizationJobSummaries", name: "OptimizationJobSummaries")
     OptimizationJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OptimizationJobSummary", name: "OptimizationJobSummary")
+    OptimizationJobTrainingPlanArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#OptimizationJobTrainingPlanArns", name: "OptimizationJobTrainingPlanArns", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     OptimizationModelAcceptEula = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#OptimizationModelAcceptEula", name: "OptimizationModelAcceptEula")
     OptimizationModelAccessConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OptimizationModelAccessConfig", name: "OptimizationModelAccessConfig")
     OptimizationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OptimizationOutput", name: "OptimizationOutput")
+    OptimizationSageMakerModel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OptimizationSageMakerModel", name: "OptimizationSageMakerModel")
     OptimizationType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#OptimizationType", name: "OptimizationType")
     OptimizationTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#OptimizationTypes", name: "OptimizationTypes")
     OptimizationVpcConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OptimizationVpcConfig", name: "OptimizationVpcConfig")
@@ -1859,6 +2213,7 @@ module Aws::SageMaker
     OutputDataConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OutputDataConfig", name: "OutputDataConfig")
     OutputParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OutputParameter", name: "OutputParameter")
     OutputParameterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#OutputParameterList", name: "OutputParameterList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    OutputS3Path = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#OutputS3Path", name: "OutputS3Path", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^(https|s3)://([^/]+)/?(.*)$"})
     OwnershipSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OwnershipSettings", name: "OwnershipSettings")
     OwnershipSettingsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#OwnershipSettingsSummary", name: "OwnershipSettingsSummary")
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"min" => 0, "max" => 8192}, "smithy.api#pattern" => ".*"})
@@ -1887,6 +2242,7 @@ module Aws::SageMaker
     PartnerAppSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#PartnerAppSummaries", name: "PartnerAppSummaries")
     PartnerAppSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PartnerAppSummary", name: "PartnerAppSummary")
     PartnerAppType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#PartnerAppType", name: "PartnerAppType")
+    Peft = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#Peft", name: "Peft")
     PendingDeploymentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PendingDeploymentSummary", name: "PendingDeploymentSummary")
     PendingProductionVariantSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PendingProductionVariantSummary", name: "PendingProductionVariantSummary")
     PendingProductionVariantSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#PendingProductionVariantSummaryList", name: "PendingProductionVariantSummaryList", traits: {"smithy.api#length" => {"min" => 1}})
@@ -1894,7 +2250,7 @@ module Aws::SageMaker
     Phase = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Phase", name: "Phase")
     Phases = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#Phases", name: "Phases", traits: {"smithy.api#length" => {"min" => 1}})
     Pipeline = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Pipeline", name: "Pipeline")
-    PipelineArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PipelineArn", name: "PipelineArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:pipeline/"})
+    PipelineArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PipelineArn", name: "PipelineArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:([0-9]{12}|aws):pipeline/"})
     PipelineDefinition = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PipelineDefinition", name: "PipelineDefinition", traits: {"smithy.api#length" => {"min" => 1, "max" => 1048576}, "smithy.api#pattern" => "(?:[ \\r\\n\\t].*)*$"})
     PipelineDefinitionS3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PipelineDefinitionS3Location", name: "PipelineDefinitionS3Location")
     PipelineDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PipelineDescription", name: "PipelineDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 3072}, "smithy.api#pattern" => ".*"})
@@ -1911,7 +2267,7 @@ module Aws::SageMaker
     PipelineExecutionSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#PipelineExecutionSummaryList", name: "PipelineExecutionSummaryList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     PipelineExperimentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PipelineExperimentConfig", name: "PipelineExperimentConfig")
     PipelineName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PipelineName", name: "PipelineName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$"})
-    PipelineNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PipelineNameOrArn", name: "PipelineNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:pipeline/.*)?([a-zA-Z0-9](-*[a-zA-Z0-9]){0,255})$"})
+    PipelineNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PipelineNameOrArn", name: "PipelineNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:([0-9]{12}|aws):pipeline/.*)?([a-zA-Z0-9](-*[a-zA-Z0-9]){0,255})$"})
     PipelineParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PipelineParameterName", name: "PipelineParameterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Za-z0-9\\-_]*$"})
     PipelineStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#PipelineStatus", name: "PipelineStatus")
     PipelineSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PipelineSummary", name: "PipelineSummary")
@@ -1928,6 +2284,9 @@ module Aws::SageMaker
     PolicyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PolicyString", name: "PolicyString", traits: {"smithy.api#length" => {"min" => 1, "max" => 20480}, "smithy.api#pattern" => ".*"})
     PredefinedMetricSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PredefinedMetricSpecification", name: "PredefinedMetricSpecification")
     PreemptTeamTasks = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#PreemptTeamTasks", name: "PreemptTeamTasks")
+    PrefixAwareRoutingConcurrencyThreshold = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#PrefixAwareRoutingConcurrencyThreshold", name: "PrefixAwareRoutingConcurrencyThreshold", traits: {"smithy.api#range" => {"min" => 1, "max" => 1024}})
+    PrefixAwareRoutingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PrefixAwareRoutingConfig", name: "PrefixAwareRoutingConfig")
+    PrefixAwareRoutingPrefixLength = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#PrefixAwareRoutingPrefixLength", name: "PrefixAwareRoutingPrefixLength", traits: {"smithy.api#range" => {"min" => 1024, "max" => 65536}})
     PresignedDomainUrl = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#PresignedDomainUrl", name: "PresignedDomainUrl")
     PresignedUrlAccessConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PresignedUrlAccessConfig", name: "PresignedUrlAccessConfig")
     PriorityClass = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#PriorityClass", name: "PriorityClass")
@@ -1943,6 +2302,8 @@ module Aws::SageMaker
     ProcessingInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ProcessingInput", name: "ProcessingInput")
     ProcessingInputs = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ProcessingInputs", name: "ProcessingInputs", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     ProcessingInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ProcessingInstanceCount", name: "ProcessingInstanceCount", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    ProcessingInstancePreference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ProcessingInstancePreference", name: "ProcessingInstancePreference")
+    ProcessingInstancePreferenceList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ProcessingInstancePreferenceList", name: "ProcessingInstancePreferenceList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     ProcessingInstanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ProcessingInstanceType", name: "ProcessingInstanceType")
     ProcessingJob = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ProcessingJob", name: "ProcessingJob")
     ProcessingJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ProcessingJobArn", name: "ProcessingJobArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:processing-job/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
@@ -1979,6 +2340,7 @@ module Aws::SageMaker
     ProductionVariantInstanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ProductionVariantInstanceType", name: "ProductionVariantInstanceType")
     ProductionVariantList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ProductionVariantList", name: "ProductionVariantList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ProductionVariantManagedInstanceScaling = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ProductionVariantManagedInstanceScaling", name: "ProductionVariantManagedInstanceScaling")
+    ProductionVariantManagedInstanceScalingScaleInPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ProductionVariantManagedInstanceScalingScaleInPolicy", name: "ProductionVariantManagedInstanceScalingScaleInPolicy")
     ProductionVariantModelDataDownloadTimeoutInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ProductionVariantModelDataDownloadTimeoutInSeconds", name: "ProductionVariantModelDataDownloadTimeoutInSeconds", traits: {"smithy.api#range" => {"min" => 60, "max" => 3600}})
     ProductionVariantRoutingConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ProductionVariantRoutingConfig", name: "ProductionVariantRoutingConfig")
     ProductionVariantSSMAccess = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.sagemaker#ProductionVariantSSMAccess", name: "ProductionVariantSSMAccess")
@@ -2000,7 +2362,7 @@ module Aws::SageMaker
     ProfilingStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ProfilingStatus", name: "ProfilingStatus")
     ProgrammingLang = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ProgrammingLang", name: "ProgrammingLang", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$"})
     Project = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Project", name: "Project")
-    ProjectArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ProjectArn", name: "ProjectArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"})
+    ProjectArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ProjectArn", name: "ProjectArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"})
     ProjectEntityName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ProjectEntityName", name: "ProjectEntityName", traits: {"smithy.api#length" => {"min" => 1, "max" => 32}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,31}$"})
     ProjectId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ProjectId", name: "ProjectId", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"})
     ProjectSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ProjectSortBy", name: "ProjectSortBy")
@@ -2038,10 +2400,12 @@ module Aws::SageMaker
     RStudioServerProDomainSettingsForUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RStudioServerProDomainSettingsForUpdate", name: "RStudioServerProDomainSettingsForUpdate")
     RStudioServerProUserGroup = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#RStudioServerProUserGroup", name: "RStudioServerProUserGroup")
     RandomSeed = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#RandomSeed", name: "RandomSeed", traits: {"smithy.api#range" => {"min" => 0}})
+    Rank = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#Rank", name: "Rank", traits: {"smithy.api#range" => {"min" => 1, "max" => 256}})
     RealTimeInferenceConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RealTimeInferenceConfig", name: "RealTimeInferenceConfig")
     RealTimeInferenceRecommendation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RealTimeInferenceRecommendation", name: "RealTimeInferenceRecommendation")
     RealTimeInferenceRecommendations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#RealTimeInferenceRecommendations", name: "RealTimeInferenceRecommendations", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
     RealtimeInferenceInstanceTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#RealtimeInferenceInstanceTypes", name: "RealtimeInferenceInstanceTypes")
+    RecipeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#RecipeName", name: "RecipeName", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
     RecommendationFailureReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#RecommendationFailureReason", name: "RecommendationFailureReason")
     RecommendationJobArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#RecommendationJobArn", name: "RecommendationJobArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:inference-recommendations-job/"})
     RecommendationJobCompilationJobName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#RecommendationJobCompilationJobName", name: "RecommendationJobCompilationJobName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
@@ -2087,6 +2451,7 @@ module Aws::SageMaker
     RegisterModelStepMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RegisterModelStepMetadata", name: "RegisterModelStepMetadata")
     Relation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#Relation", name: "Relation")
     ReleaseNotes = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ReleaseNotes", name: "ReleaseNotes", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => ".*"})
+    ReleaseNotesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#ReleaseNotesList", name: "ReleaseNotesList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     RemoteDebugConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RemoteDebugConfig", name: "RemoteDebugConfig")
     RemoteDebugConfigForUpdate = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RemoteDebugConfigForUpdate", name: "RemoteDebugConfigForUpdate")
     RenderUiTemplateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RenderUiTemplateRequest", name: "RenderUiTemplateRequest")
@@ -2141,6 +2506,8 @@ module Aws::SageMaker
     RetryPipelineExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RetryPipelineExecutionResponse", name: "RetryPipelineExecutionResponse")
     RetryStrategy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RetryStrategy", name: "RetryStrategy")
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#RoleArn", name: "RoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"})
+    RoleGroupAssignment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RoleGroupAssignment", name: "RoleGroupAssignment")
+    RoleGroupAssignmentsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#RoleGroupAssignmentsList", name: "RoleGroupAssignmentsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     RollingDeploymentPolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RollingDeploymentPolicy", name: "RollingDeploymentPolicy")
     RollingUpdatePolicy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#RollingUpdatePolicy", name: "RollingUpdatePolicy")
     RootAccess = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#RootAccess", name: "RootAccess")
@@ -2179,6 +2546,7 @@ module Aws::SageMaker
     ScheduleStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ScheduleStatus", name: "ScheduleStatus")
     ScheduledUpdateConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ScheduledUpdateConfig", name: "ScheduledUpdateConfig")
     SchedulerConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#SchedulerConfig", name: "SchedulerConfig")
+    SchedulerConfigComponent = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SchedulerConfigComponent", name: "SchedulerConfigComponent")
     SchedulerResourceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SchedulerResourceStatus", name: "SchedulerResourceStatus")
     Scope = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#Scope", name: "Scope", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[!#-\\[\\]-~]+( [!#-\\[\\]-~]+)*$"})
     SearchExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#SearchExpression", name: "SearchExpression")
@@ -2205,6 +2573,10 @@ module Aws::SageMaker
     SendPipelineExecutionStepFailureResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#SendPipelineExecutionStepFailureResponse", name: "SendPipelineExecutionStepFailureResponse")
     SendPipelineExecutionStepSuccessRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#SendPipelineExecutionStepSuccessRequest", name: "SendPipelineExecutionStepSuccessRequest")
     SendPipelineExecutionStepSuccessResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#SendPipelineExecutionStepSuccessResponse", name: "SendPipelineExecutionStepSuccessResponse")
+    SequenceLength = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#SequenceLength", name: "SequenceLength", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^\\d+K$"})
+    ServerlessJobBaseModelArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#ServerlessJobBaseModelArn", name: "ServerlessJobBaseModelArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:[a-z0-9-\\.]{1,63}:sagemaker:\\w+(?:-\\w+)+:(\\d{12}|aws):hub-content\\/)[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}\\/Model\\/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}(\\/\\d{1,4}.\\d{1,4}.\\d{1,4})?$"})
+    ServerlessJobConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#ServerlessJobConfig", name: "ServerlessJobConfig")
+    ServerlessJobType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#ServerlessJobType", name: "ServerlessJobType")
     ServerlessMaxConcurrency = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ServerlessMaxConcurrency", name: "ServerlessMaxConcurrency", traits: {"smithy.api#range" => {"min" => 1, "max" => 200}})
     ServerlessMemorySizeInMB = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ServerlessMemorySizeInMB", name: "ServerlessMemorySizeInMB", traits: {"smithy.api#range" => {"min" => 1024, "max" => 6144}})
     ServerlessProvisionedConcurrency = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#ServerlessProvisionedConcurrency", name: "ServerlessProvisionedConcurrency", traits: {"smithy.api#range" => {"min" => 1, "max" => 200}})
@@ -2224,7 +2596,12 @@ module Aws::SageMaker
     SingleSignOnApplicationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#SingleSignOnApplicationArn", name: "SingleSignOnApplicationArn", traits: {"smithy.api#pattern" => "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application\\/[a-zA-Z0-9-_.]+\\/apl-[a-zA-Z0-9]+$"})
     SingleSignOnUserIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#SingleSignOnUserIdentifier", name: "SingleSignOnUserIdentifier", traits: {"smithy.api#pattern" => "^UserName$"})
     SkipModelValidation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SkipModelValidation", name: "SkipModelValidation")
+    SlurmHealthComponent = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SlurmHealthComponent", name: "SlurmHealthComponent")
+    SlurmHealthMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#SlurmHealthMetadata", name: "SlurmHealthMetadata")
+    SlurmHealthReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SlurmHealthReason", name: "SlurmHealthReason")
+    SlurmHealthStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SlurmHealthStatus", name: "SlurmHealthStatus")
     SnsTopicArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#SnsTopicArn", name: "SnsTopicArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sns:[a-z0-9\\-]*:[0-9]{12}:[a-zA-Z0-9_.-]+$"})
+    SoftwareUpdateStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SoftwareUpdateStatus", name: "SoftwareUpdateStatus")
     SortActionsBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortActionsBy", name: "SortActionsBy")
     SortArtifactsBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortArtifactsBy", name: "SortArtifactsBy")
     SortAssociationsBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortAssociationsBy", name: "SortAssociationsBy")
@@ -2234,6 +2611,7 @@ module Aws::SageMaker
     SortExperimentsBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortExperimentsBy", name: "SortExperimentsBy")
     SortInferenceExperimentsBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortInferenceExperimentsBy", name: "SortInferenceExperimentsBy")
     SortLineageGroupsBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortLineageGroupsBy", name: "SortLineageGroupsBy")
+    SortMlflowAppBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortMlflowAppBy", name: "SortMlflowAppBy")
     SortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortOrder", name: "SortOrder")
     SortPipelineExecutionsBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortPipelineExecutionsBy", name: "SortPipelineExecutionsBy")
     SortPipelinesBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#SortPipelinesBy", name: "SortPipelinesBy")
@@ -2269,6 +2647,8 @@ module Aws::SageMaker
     StageDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#StageDescription", name: "StageDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^.{0,1024}$"})
     StageStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#StageStatus", name: "StageStatus")
     Stairs = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Stairs", name: "Stairs")
+    StartClusterHealthCheckRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StartClusterHealthCheckRequest", name: "StartClusterHealthCheckRequest")
+    StartClusterHealthCheckResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StartClusterHealthCheckResponse", name: "StartClusterHealthCheckResponse")
     StartEdgeDeploymentStageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StartEdgeDeploymentStageRequest", name: "StartEdgeDeploymentStageRequest")
     StartInferenceExperimentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StartInferenceExperimentRequest", name: "StartInferenceExperimentRequest")
     StartInferenceExperimentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StartInferenceExperimentResponse", name: "StartInferenceExperimentResponse")
@@ -2282,11 +2662,16 @@ module Aws::SageMaker
     StartSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StartSessionResponse", name: "StartSessionResponse")
     Statistic = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#Statistic", name: "Statistic")
     StatusDetails = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#StatusDetails", name: "StatusDetails", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => ".*"})
+    StatusDetailsMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#StatusDetailsMap", name: "StatusDetailsMap")
     StatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#StatusMessage", name: "StatusMessage")
     StepDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#StepDescription", name: "StepDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 3072}, "smithy.api#pattern" => ".*"})
     StepDisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#StepDisplayName", name: "StepDisplayName", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => ".*"})
     StepName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#StepName", name: "StepName", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9\\-_]*$"})
     StepStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#StepStatus", name: "StepStatus")
+    StopAIBenchmarkJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopAIBenchmarkJobRequest", name: "StopAIBenchmarkJobRequest")
+    StopAIBenchmarkJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopAIBenchmarkJobResponse", name: "StopAIBenchmarkJobResponse")
+    StopAIRecommendationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopAIRecommendationJobRequest", name: "StopAIRecommendationJobRequest")
+    StopAIRecommendationJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopAIRecommendationJobResponse", name: "StopAIRecommendationJobResponse")
     StopAutoMLJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopAutoMLJobRequest", name: "StopAutoMLJobRequest")
     StopCompilationJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopCompilationJobRequest", name: "StopCompilationJobRequest")
     StopEdgeDeploymentStageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopEdgeDeploymentStageRequest", name: "StopEdgeDeploymentStageRequest")
@@ -2295,6 +2680,8 @@ module Aws::SageMaker
     StopInferenceExperimentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopInferenceExperimentRequest", name: "StopInferenceExperimentRequest")
     StopInferenceExperimentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopInferenceExperimentResponse", name: "StopInferenceExperimentResponse")
     StopInferenceRecommendationsJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopInferenceRecommendationsJobRequest", name: "StopInferenceRecommendationsJobRequest")
+    StopJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopJobRequest", name: "StopJobRequest")
+    StopJobResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopJobResponse", name: "StopJobResponse")
     StopLabelingJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopLabelingJobRequest", name: "StopLabelingJobRequest")
     StopMlflowTrackingServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopMlflowTrackingServerRequest", name: "StopMlflowTrackingServerRequest")
     StopMlflowTrackingServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopMlflowTrackingServerResponse", name: "StopMlflowTrackingServerResponse")
@@ -2305,6 +2692,8 @@ module Aws::SageMaker
     StopPipelineExecutionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopPipelineExecutionResponse", name: "StopPipelineExecutionResponse")
     StopProcessingJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopProcessingJobRequest", name: "StopProcessingJobRequest")
     StopTrainingJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopTrainingJobRequest", name: "StopTrainingJobRequest")
+    StopTrainingSessionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopTrainingSessionRequest", name: "StopTrainingSessionRequest")
+    StopTrainingSessionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopTrainingSessionResponse", name: "StopTrainingSessionResponse")
     StopTransformJobRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StopTransformJobRequest", name: "StopTransformJobRequest")
     StoppingCondition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StoppingCondition", name: "StoppingCondition")
     StorageType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#StorageType", name: "StorageType")
@@ -2312,6 +2701,7 @@ module Aws::SageMaker
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#String", name: "String")
     String1024 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#String1024", name: "String1024", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     String128 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#String128", name: "String128", traits: {"smithy.api#length" => {"min" => 0, "max" => 128}})
+    String12800 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#String12800", name: "String12800", traits: {"smithy.api#length" => {"min" => 0, "max" => 12800}})
     String200 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#String200", name: "String200", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#pattern" => "^.+$"})
     String2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#String2048", name: "String2048", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
     String256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#String256", name: "String256", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
@@ -2327,6 +2717,7 @@ module Aws::SageMaker
     StudioLifecycleConfigName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#StudioLifecycleConfigName", name: "StudioLifecycleConfigName", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
     StudioLifecycleConfigSortKey = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#StudioLifecycleConfigSortKey", name: "StudioLifecycleConfigSortKey")
     StudioLifecycleConfigsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#StudioLifecycleConfigsList", name: "StudioLifecycleConfigsList")
+    StudioResourceSpecTrainingPlanArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#StudioResourceSpecTrainingPlanArn", name: "StudioResourceSpecTrainingPlanArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"})
     StudioWebPortal = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#StudioWebPortal", name: "StudioWebPortal")
     StudioWebPortalSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#StudioWebPortalSettings", name: "StudioWebPortalSettings")
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#SubnetId", name: "SubnetId", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}, "smithy.api#pattern" => "^[-0-9a-zA-Z]+$"})
@@ -2392,6 +2783,7 @@ module Aws::SageMaker
     TokenValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TokenValue", name: "TokenValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     TotalHits = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TotalHits", name: "TotalHits")
     TotalInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TotalInstanceCount", name: "TotalInstanceCount", traits: {"smithy.api#range" => {"min" => 0}})
+    TotalStepCountPerEpoch = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TotalStepCountPerEpoch", name: "TotalStepCountPerEpoch", traits: {"smithy.api#range" => {"min" => 0}})
     TrackingServerArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrackingServerArn", name: "TrackingServerArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-tracking-server/"})
     TrackingServerMaintenanceStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#TrackingServerMaintenanceStatus", name: "TrackingServerMaintenanceStatus")
     TrackingServerName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrackingServerName", name: "TrackingServerName", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$"})
@@ -2412,6 +2804,8 @@ module Aws::SageMaker
     TrainingEnvironmentKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingEnvironmentKey", name: "TrainingEnvironmentKey", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => "^[a-zA-Z_][a-zA-Z0-9_]*$"})
     TrainingEnvironmentMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.sagemaker#TrainingEnvironmentMap", name: "TrainingEnvironmentMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     TrainingEnvironmentValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingEnvironmentValue", name: "TrainingEnvironmentValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 512}, "smithy.api#pattern" => "^[\\S\\s]*$"})
+    TrainingEpochCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TrainingEpochCount", name: "TrainingEpochCount", traits: {"smithy.api#range" => {"min" => 0}})
+    TrainingEpochIndex = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TrainingEpochIndex", name: "TrainingEpochIndex", traits: {"smithy.api#range" => {"min" => 0}})
     TrainingImageConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingImageConfig", name: "TrainingImageConfig")
     TrainingInputMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#TrainingInputMode", name: "TrainingInputMode")
     TrainingInstanceCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TrainingInstanceCount", name: "TrainingInstanceCount", traits: {"smithy.api#range" => {"min" => 0}})
@@ -2430,14 +2824,22 @@ module Aws::SageMaker
     TrainingJobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#TrainingJobSummaries", name: "TrainingJobSummaries")
     TrainingJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingJobSummary", name: "TrainingJobSummary")
     TrainingPlanArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingPlanArn", name: "TrainingPlanArn", traits: {"smithy.api#length" => {"min" => 50, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/"})
+    TrainingPlanArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#TrainingPlanArnList", name: "TrainingPlanArnList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     TrainingPlanArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#TrainingPlanArns", name: "TrainingPlanArns")
     TrainingPlanDurationHours = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TrainingPlanDurationHours", name: "TrainingPlanDurationHours", traits: {"smithy.api#range" => {"min" => 0, "max" => 87600}})
     TrainingPlanDurationHoursInput = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TrainingPlanDurationHoursInput", name: "TrainingPlanDurationHoursInput", traits: {"smithy.api#range" => {"min" => 1, "max" => 87600}})
     TrainingPlanDurationMinutes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TrainingPlanDurationMinutes", name: "TrainingPlanDurationMinutes", traits: {"smithy.api#range" => {"min" => 0, "max" => 59}})
+    TrainingPlanExtension = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingPlanExtension", name: "TrainingPlanExtension")
+    TrainingPlanExtensionDurationHours = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TrainingPlanExtensionDurationHours", name: "TrainingPlanExtensionDurationHours", traits: {"smithy.api#range" => {"min" => 0, "max" => 4368}})
+    TrainingPlanExtensionOffering = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingPlanExtensionOffering", name: "TrainingPlanExtensionOffering")
+    TrainingPlanExtensionOfferingId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingPlanExtensionOfferingId", name: "TrainingPlanExtensionOfferingId")
+    TrainingPlanExtensionOfferings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#TrainingPlanExtensionOfferings", name: "TrainingPlanExtensionOfferings", traits: {"smithy.api#length" => {"min" => 0}})
+    TrainingPlanExtensions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#TrainingPlanExtensions", name: "TrainingPlanExtensions", traits: {"smithy.api#length" => {"min" => 0}})
     TrainingPlanFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingPlanFilter", name: "TrainingPlanFilter")
     TrainingPlanFilterName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#TrainingPlanFilterName", name: "TrainingPlanFilterName")
     TrainingPlanFilters = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#TrainingPlanFilters", name: "TrainingPlanFilters", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
     TrainingPlanName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingPlanName", name: "TrainingPlanName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"})
+    TrainingPlanNameOrArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingPlanNameOrArn", name: "TrainingPlanNameOrArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/)?[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}$"})
     TrainingPlanOffering = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingPlanOffering", name: "TrainingPlanOffering")
     TrainingPlanOfferingId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingPlanOfferingId", name: "TrainingPlanOfferingId", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-z0-9\\-]+$"})
     TrainingPlanOfferings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#TrainingPlanOfferings", name: "TrainingPlanOfferings", traits: {"smithy.api#length" => {"min" => 0}})
@@ -2447,10 +2849,21 @@ module Aws::SageMaker
     TrainingPlanStatusMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingPlanStatusMessage", name: "TrainingPlanStatusMessage", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
     TrainingPlanSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#TrainingPlanSummaries", name: "TrainingPlanSummaries")
     TrainingPlanSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingPlanSummary", name: "TrainingPlanSummary")
+    TrainingProgressInfo = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingProgressInfo", name: "TrainingProgressInfo")
     TrainingRepositoryAccessMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#TrainingRepositoryAccessMode", name: "TrainingRepositoryAccessMode")
     TrainingRepositoryAuthConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingRepositoryAuthConfig", name: "TrainingRepositoryAuthConfig")
     TrainingRepositoryCredentialsProviderArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingRepositoryCredentialsProviderArn", name: "TrainingRepositoryCredentialsProviderArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:[\\p{Alnum}\\-]+:lambda:[\\p{Alnum}\\-]+:[0-9]{12}:function:"})
+    TrainingSessionArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingSessionArn", name: "TrainingSessionArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:(aws[a-z\\-]*):sagemaker:[a-z0-9\\-]+:[0-9]{12}:training-session/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
+    TrainingSessionDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingSessionDetail", name: "TrainingSessionDetail")
+    TrainingSessionModelConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingSessionModelConfig", name: "TrainingSessionModelConfig")
+    TrainingSessionName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TrainingSessionName", name: "TrainingSessionName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
+    TrainingSessionOutputConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingSessionOutputConfig", name: "TrainingSessionOutputConfig")
+    TrainingSessionS3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingSessionS3Location", name: "TrainingSessionS3Location")
+    TrainingSessionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.sagemaker#TrainingSessionStatus", name: "TrainingSessionStatus")
+    TrainingSessionSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#TrainingSessionSummaries", name: "TrainingSessionSummaries", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
+    TrainingSessionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingSessionSummary", name: "TrainingSessionSummary")
     TrainingSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TrainingSpecification", name: "TrainingSpecification")
+    TrainingStepIndex = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TrainingStepIndex", name: "TrainingStepIndex", traits: {"smithy.api#range" => {"min" => 0}})
     TrainingTimeInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#TrainingTimeInSeconds", name: "TrainingTimeInSeconds", traits: {"smithy.api#range" => {"min" => 1}})
     TransformAmiVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#TransformAmiVersion", name: "TransformAmiVersion", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"})
     TransformDataSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#TransformDataSource", name: "TransformDataSource")
@@ -2574,6 +2987,8 @@ module Aws::SageMaker
     UpdateInferenceComponentRuntimeConfigOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#UpdateInferenceComponentRuntimeConfigOutput", name: "UpdateInferenceComponentRuntimeConfigOutput")
     UpdateInferenceExperimentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#UpdateInferenceExperimentRequest", name: "UpdateInferenceExperimentRequest")
     UpdateInferenceExperimentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#UpdateInferenceExperimentResponse", name: "UpdateInferenceExperimentResponse")
+    UpdateMlflowAppRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#UpdateMlflowAppRequest", name: "UpdateMlflowAppRequest")
+    UpdateMlflowAppResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#UpdateMlflowAppResponse", name: "UpdateMlflowAppResponse")
     UpdateMlflowTrackingServerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#UpdateMlflowTrackingServerRequest", name: "UpdateMlflowTrackingServerRequest")
     UpdateMlflowTrackingServerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#UpdateMlflowTrackingServerResponse", name: "UpdateMlflowTrackingServerResponse")
     UpdateModelCardRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#UpdateModelCardRequest", name: "UpdateModelCardRequest")
@@ -2628,6 +3043,7 @@ module Aws::SageMaker
     UtilizationPercentagePerCore = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#UtilizationPercentagePerCore", name: "UtilizationPercentagePerCore", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     VCpuAmount = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.sagemaker#VCpuAmount", name: "VCpuAmount", traits: {"smithy.api#range" => {"min" => 0, "max" => 10000000}})
     ValidationFraction = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.sagemaker#ValidationFraction", name: "ValidationFraction", traits: {"smithy.api#range" => {"min" => 0, "max" => 1}})
+    VariantInstanceProvisionTimeoutInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.sagemaker#VariantInstanceProvisionTimeoutInSeconds", name: "VariantInstanceProvisionTimeoutInSeconds", traits: {"smithy.api#range" => {"min" => 300, "max" => 3600}})
     VariantName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#VariantName", name: "VariantName", traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
     VariantProperty = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#VariantProperty", name: "VariantProperty")
     VariantPropertyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#VariantPropertyList", name: "VariantPropertyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 3}})
@@ -2676,12 +3092,227 @@ module Aws::SageMaker
     WorkforceVpcEndpointId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#WorkforceVpcEndpointId", name: "WorkforceVpcEndpointId", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^vpce-[0-9a-z]*$"})
     WorkforceVpcId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#WorkforceVpcId", name: "WorkforceVpcId", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}, "smithy.api#pattern" => "^vpc-[0-9a-z]*$"})
     Workforces = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#Workforces", name: "Workforces")
+    WorkloadSpec = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.sagemaker#WorkloadSpec", name: "WorkloadSpec")
     WorkspaceSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#WorkspaceSettings", name: "WorkspaceSettings")
     Workteam = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.sagemaker#Workteam", name: "Workteam")
     WorkteamArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#WorkteamArn", name: "WorkteamArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:workteam/"})
     WorkteamName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.sagemaker#WorkteamName", name: "WorkteamName", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"})
     Workteams = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.sagemaker#Workteams", name: "Workteams")
 
+    AIAdapterModelPackageEntry.add_member(:adapter_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterId, name: "AdapterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIAdapterModelPackageEntry.add_member(:model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "ModelPackageArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIAdapterModelPackageEntry.type = Types::AIAdapterModelPackageEntry
+    AIAdapterModelPackageEntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterModelPackageEntry, name: "member"))
+    AIAdapterS3Entry.add_member(:adapter_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterId, name: "AdapterId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIAdapterS3Entry.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIAdapterS3Entry.type = Types::AIAdapterS3Entry
+    AIAdapterS3EntryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterS3Entry, name: "member"))
+    AIAdapterSource.add_member(:model_package_arns, Types::AIAdapterSource::ModelPackageArns, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterModelPackageEntryList, name: "ModelPackageArns"))
+    AIAdapterSource.add_member(:s3_uris, Types::AIAdapterSource::S3Uris, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterS3EntryList, name: "S3Uris"))
+    AIAdapterSource.add_member(:unknown, Types::AIAdapterSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AIAdapterSource.type = Types::AIAdapterSource
+    AIBenchmarkEndpoint.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AIResourceIdentifier, name: "Identifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIBenchmarkEndpoint.add_member(:target_container_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TargetContainerHostname"))
+    AIBenchmarkEndpoint.add_member(:inference_components, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkInferenceComponentList, name: "InferenceComponents"))
+    AIBenchmarkEndpoint.type = Types::AIBenchmarkEndpoint
+    AIBenchmarkInferenceComponent.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AIResourceIdentifier, name: "Identifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIBenchmarkInferenceComponent.type = Types::AIBenchmarkInferenceComponent
+    AIBenchmarkInferenceComponentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkInferenceComponent, name: "member"))
+    AIBenchmarkJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
+    AIBenchmarkJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    AIBenchmarkJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    AIBenchmarkJobStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
+    AIBenchmarkJobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    AIBenchmarkJobSummary.add_member(:ai_benchmark_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIBenchmarkJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIBenchmarkJobSummary.add_member(:ai_benchmark_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobArn, name: "AIBenchmarkJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIBenchmarkJobSummary.add_member(:ai_benchmark_job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobStatus, name: "AIBenchmarkJobStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIBenchmarkJobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIBenchmarkJobSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    AIBenchmarkJobSummary.add_member(:ai_workload_config_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIWorkloadConfigName"))
+    AIBenchmarkJobSummary.type = Types::AIBenchmarkJobSummary
+    AIBenchmarkJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobSummary, name: "member"))
+    AIBenchmarkNetworkConfig.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
+    AIBenchmarkNetworkConfig.type = Types::AIBenchmarkNetworkConfig
+    AIBenchmarkOutputConfig.add_member(:s3_output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3OutputLocation", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIBenchmarkOutputConfig.add_member(:mlflow_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMlflowConfig, name: "MlflowConfig"))
+    AIBenchmarkOutputConfig.type = Types::AIBenchmarkOutputConfig
+    AIBenchmarkOutputResult.add_member(:s3_output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3OutputLocation", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIBenchmarkOutputResult.add_member(:cloud_watch_logs, ::Smithy::Schema::Shapes::MemberShape.new(target: AICloudWatchLogsList, name: "CloudWatchLogs"))
+    AIBenchmarkOutputResult.add_member(:mlflow_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMlflowConfig, name: "MlflowConfig"))
+    AIBenchmarkOutputResult.type = Types::AIBenchmarkOutputResult
+    AIBenchmarkTarget.add_member(:endpoint, Types::AIBenchmarkTarget::Endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkEndpoint, name: "Endpoint"))
+    AIBenchmarkTarget.add_member(:unknown, Types::AIBenchmarkTarget::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AIBenchmarkTarget.type = Types::AIBenchmarkTarget
+    AICapacityReservationConfig.add_member(:capacity_reservation_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: AICapacityReservationPreference, name: "CapacityReservationPreference"))
+    AICapacityReservationConfig.add_member(:ml_reservation_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMlReservationArnList, name: "MlReservationArns"))
+    AICapacityReservationConfig.type = Types::AICapacityReservationConfig
+    AICapacityReservationPreference.add_member(:capacity_reservations_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAPACITY_RESERVATIONS_ONLY", traits: {"smithy.api#enumValue" => "capacity-reservations-only"}))
+    AICloudWatchLogs.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogGroupArn"))
+    AICloudWatchLogs.add_member(:log_stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogStreamName"))
+    AICloudWatchLogs.type = Types::AICloudWatchLogs
+    AICloudWatchLogsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AICloudWatchLogs, name: "member"))
+    AIDatasetConfig.add_member(:input_data_config, Types::AIDatasetConfig::InputDataConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadInputDataConfigList, name: "InputDataConfig"))
+    AIDatasetConfig.add_member(:unknown, Types::AIDatasetConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AIDatasetConfig.type = Types::AIDatasetConfig
+    AIMlReservationArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMlReservationArn, name: "member"))
+    AIMlflowConfig.add_member(:mlflow_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMlflowResourceArn, name: "MlflowResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIMlflowConfig.add_member(:mlflow_experiment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMlflowExperimentName, name: "MlflowExperimentName"))
+    AIMlflowConfig.add_member(:mlflow_run_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMlflowRunName, name: "MlflowRunName"))
+    AIMlflowConfig.type = Types::AIMlflowConfig
+    AIModelSource.add_member(:s3, Types::AIModelSource::S3, ::Smithy::Schema::Shapes::MemberShape.new(target: AIModelSourceS3, name: "S3"))
+    AIModelSource.add_member(:unknown, Types::AIModelSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AIModelSource.type = Types::AIModelSource
+    AIModelSourceS3.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri"))
+    AIModelSourceS3.type = Types::AIModelSourceS3
+    AIRecommendation.add_member(:recommendation_description, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RecommendationDescription"))
+    AIRecommendation.add_member(:optimization_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationOptimizationDetailList, name: "OptimizationDetails"))
+    AIRecommendation.add_member(:model_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationModelDetails, name: "ModelDetails"))
+    AIRecommendation.add_member(:deployment_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationDeploymentConfiguration, name: "DeploymentConfiguration"))
+    AIRecommendation.add_member(:ai_benchmark_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobArn, name: "AIBenchmarkJobArn"))
+    AIRecommendation.add_member(:expected_performance, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpectedPerformanceList, name: "ExpectedPerformance"))
+    AIRecommendation.add_member(:adapter_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationAdapterDetails, name: "AdapterDetails"))
+    AIRecommendation.type = Types::AIRecommendation
+    AIRecommendationAdapterDetails.add_member(:model_package_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterModelPackageEntryList, name: "ModelPackageArns", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationAdapterDetails.add_member(:s3_uris, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterS3EntryList, name: "S3Uris", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationAdapterDetails.type = Types::AIRecommendationAdapterDetails
+    AIRecommendationComputeSpec.add_member(:instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInstanceTypeList, name: "InstanceTypes"))
+    AIRecommendationComputeSpec.add_member(:capacity_reservation_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AICapacityReservationConfig, name: "CapacityReservationConfig"))
+    AIRecommendationComputeSpec.type = Types::AIRecommendationComputeSpec
+    AIRecommendationConstraint.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationMetric, name: "Metric", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationConstraint.type = Types::AIRecommendationConstraint
+    AIRecommendationConstraintList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationConstraint, name: "member"))
+    AIRecommendationDeploymentConfiguration.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationDeploymentS3ChannelList, name: "S3"))
+    AIRecommendationDeploymentConfiguration.add_member(:image_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ImageUri"))
+    AIRecommendationDeploymentConfiguration.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInstanceType, name: "InstanceType"))
+    AIRecommendationDeploymentConfiguration.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInstanceCount, name: "InstanceCount"))
+    AIRecommendationDeploymentConfiguration.add_member(:copy_count_per_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationCopyCountPerInstance, name: "CopyCountPerInstance"))
+    AIRecommendationDeploymentConfiguration.add_member(:environment_variables, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentMap, name: "EnvironmentVariables"))
+    AIRecommendationDeploymentConfiguration.add_member(:min_cpu_memory_required_in_mb, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationMinCpuMemoryRequiredInMb, name: "MinCpuMemoryRequiredInMb"))
+    AIRecommendationDeploymentConfiguration.type = Types::AIRecommendationDeploymentConfiguration
+    AIRecommendationDeploymentS3Channel.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIChannelName, name: "ChannelName"))
+    AIRecommendationDeploymentS3Channel.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "Uri"))
+    AIRecommendationDeploymentS3Channel.type = Types::AIRecommendationDeploymentS3Channel
+    AIRecommendationDeploymentS3ChannelList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationDeploymentS3Channel, name: "member"))
+    AIRecommendationInferenceFramework.add_member(:lmi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LMI", traits: {"smithy.api#enumValue" => "LMI"}))
+    AIRecommendationInferenceFramework.add_member(:vllm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VLLM", traits: {"smithy.api#enumValue" => "VLLM"}))
+    AIRecommendationInferenceSpecification.add_member(:framework, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInferenceFramework, name: "Framework"))
+    AIRecommendationInferenceSpecification.type = Types::AIRecommendationInferenceSpecification
+    AIRecommendationInstanceDetail.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInstanceType, name: "InstanceType"))
+    AIRecommendationInstanceDetail.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInstanceCount, name: "InstanceCount"))
+    AIRecommendationInstanceDetail.add_member(:copy_count_per_instance, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationCopyCountPerInstance, name: "CopyCountPerInstance"))
+    AIRecommendationInstanceDetail.type = Types::AIRecommendationInstanceDetail
+    AIRecommendationInstanceDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInstanceDetail, name: "member"))
+    AIRecommendationInstanceType.add_member(:ml_g5_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g5_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.2xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.4xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g5_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.8xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g5_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.12xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g5_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.16xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g5_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.24xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g5_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.48xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.2xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.4xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.8xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.12xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.16xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.24xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.48xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_e_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.2xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.4xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.8xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.12xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_e_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.16xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.24xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g6_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.48xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.2xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.4xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.8xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.12xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.24xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.48xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.2xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.4xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.8xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.12xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.24xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_g7_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.48xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p3_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P3_2XLARGE", traits: {"smithy.api#deprecated" => {"message" => "ml.p3.* is deprecated in SageMaker and no longer deployable; requests are rejected.", "since" => "2026-07-01"}, "smithy.api#enumValue" => "ml.p3.2xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p3_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P3_8XLARGE", traits: {"smithy.api#deprecated" => {"message" => "ml.p3.* is deprecated in SageMaker and no longer deployable; requests are rejected.", "since" => "2026-07-01"}, "smithy.api#enumValue" => "ml.p3.8xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p3_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P3_16XLARGE", traits: {"smithy.api#deprecated" => {"message" => "ml.p3.* is deprecated in SageMaker and no longer deployable; requests are rejected.", "since" => "2026-07-01"}, "smithy.api#enumValue" => "ml.p3.16xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p4_d_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P4D_24XLARGE", traits: {"smithy.api#enumValue" => "ml.p4d.24xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p4_de_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P4DE_24XLARGE", traits: {"smithy.api#enumValue" => "ml.p4de.24xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.4xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p5_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.48xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p5_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5e.48xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p5_en_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5EN_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5en.48xlarge"}))
+    AIRecommendationInstanceType.add_member(:ml_p6_b200_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6_B200_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p6-b200.48xlarge"}))
+    AIRecommendationInstanceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInstanceType, name: "member"))
+    AIRecommendationJobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
+    AIRecommendationJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    AIRecommendationJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    AIRecommendationJobStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
+    AIRecommendationJobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    AIRecommendationJobSummary.add_member(:ai_recommendation_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIRecommendationJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationJobSummary.add_member(:ai_recommendation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobArn, name: "AIRecommendationJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationJobSummary.add_member(:ai_recommendation_job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobStatus, name: "AIRecommendationJobStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationJobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationJobSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    AIRecommendationJobSummary.type = Types::AIRecommendationJobSummary
+    AIRecommendationJobSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobSummary, name: "member"))
+    AIRecommendationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendation, name: "member"))
+    AIRecommendationMetric.add_member(:ttft_ms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TTFT_MS", traits: {"smithy.api#enumValue" => "ttft-ms"}))
+    AIRecommendationMetric.add_member(:throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "THROUGHPUT", traits: {"smithy.api#enumValue" => "throughput"}))
+    AIRecommendationMetric.add_member(:cost, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST", traits: {"smithy.api#enumValue" => "cost"}))
+    AIRecommendationModelDetails.add_member(:model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "ModelPackageArn"))
+    AIRecommendationModelDetails.add_member(:inference_specification_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIInferenceSpecificationName, name: "InferenceSpecificationName"))
+    AIRecommendationModelDetails.add_member(:instance_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInstanceDetailList, name: "InstanceDetails"))
+    AIRecommendationModelDetails.type = Types::AIRecommendationModelDetails
+    AIRecommendationOptimizationConfigMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    AIRecommendationOptimizationConfigMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    AIRecommendationOptimizationDetail.add_member(:optimization_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationOptimizationType, name: "OptimizationType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationOptimizationDetail.add_member(:optimization_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationOptimizationConfigMap, name: "OptimizationConfig"))
+    AIRecommendationOptimizationDetail.type = Types::AIRecommendationOptimizationDetail
+    AIRecommendationOptimizationDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationOptimizationDetail, name: "member"))
+    AIRecommendationOptimizationType.add_member(:speculative_decoding, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPECULATIVE_DECODING", traits: {"smithy.api#enumValue" => "SpeculativeDecoding"}))
+    AIRecommendationOptimizationType.add_member(:kernel_tuning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KERNEL_TUNING", traits: {"smithy.api#enumValue" => "KernelTuning"}))
+    AIRecommendationOutputConfig.add_member(:s3_output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3OutputLocation"))
+    AIRecommendationOutputConfig.add_member(:model_package_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AIResourceIdentifier, name: "ModelPackageGroupIdentifier"))
+    AIRecommendationOutputConfig.add_member(:mlflow_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMlflowConfig, name: "MlflowConfig"))
+    AIRecommendationOutputConfig.type = Types::AIRecommendationOutputConfig
+    AIRecommendationOutputResult.add_member(:s3_output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3OutputLocation", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationOutputResult.add_member(:model_package_group_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AIResourceIdentifier, name: "ModelPackageGroupIdentifier"))
+    AIRecommendationOutputResult.add_member(:mlflow_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIMlflowConfig, name: "MlflowConfig"))
+    AIRecommendationOutputResult.type = Types::AIRecommendationOutputResult
+    AIRecommendationPerformanceMetric.add_member(:metric, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Metric", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationPerformanceMetric.add_member(:stat, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Stat"))
+    AIRecommendationPerformanceMetric.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationPerformanceMetric.add_member(:unit, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Unit"))
+    AIRecommendationPerformanceMetric.type = Types::AIRecommendationPerformanceMetric
+    AIRecommendationPerformanceTarget.add_member(:constraints, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationConstraintList, name: "Constraints", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIRecommendationPerformanceTarget.type = Types::AIRecommendationPerformanceTarget
+    AIWorkloadConfigSummary.add_member(:ai_workload_config_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIWorkloadConfigName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIWorkloadConfigSummary.add_member(:ai_workload_config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadConfigArn, name: "AIWorkloadConfigArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIWorkloadConfigSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIWorkloadConfigSummary.type = Types::AIWorkloadConfigSummary
+    AIWorkloadConfigSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadConfigSummary, name: "member"))
+    AIWorkloadConfigs.add_member(:workload_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkloadSpec, name: "WorkloadSpec", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIWorkloadConfigs.type = Types::AIWorkloadConfigs
+    AIWorkloadDataSource.add_member(:s3_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadS3DataSource, name: "S3DataSource"))
+    AIWorkloadDataSource.type = Types::AIWorkloadDataSource
+    AIWorkloadInputDataConfig.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIChannelName, name: "ChannelName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIWorkloadInputDataConfig.add_member(:data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadDataSource, name: "DataSource", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIWorkloadInputDataConfig.type = Types::AIWorkloadInputDataConfig
+    AIWorkloadInputDataConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadInputDataConfig, name: "member"))
+    AIWorkloadS3DataSource.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AIWorkloadS3DataSource.type = Types::AIWorkloadS3DataSource
+    AbsoluteBorrowLimitResourceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeQuotaResourceConfig, name: "member"))
+    AcceleratorPartitionConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: MIGProfileType, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AcceleratorPartitionConfig.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Count", traits: {"smithy.api#clientOptional" => {}, "smithy.api#range" => {"min" => 0, "max" => 10000000}, "smithy.api#required" => {}}))
+    AcceleratorPartitionConfig.type = Types::AcceleratorPartitionConfig
+    AccountDefaultStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    AccountDefaultStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     ActionSource.add_member(:source_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceUri, name: "SourceUri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ActionSource.add_member(:source_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "SourceType"))
     ActionSource.add_member(:source_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "SourceId"))
@@ -2703,6 +3334,9 @@ module Aws::SageMaker
     ActionSummary.type = Types::ActionSummary
     ActivationState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
     ActivationState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
+    ActiveClusterOperationName.add_member(:scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCALING", traits: {"smithy.api#enumValue" => "Scaling"}))
+    ActiveOperations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveClusterOperationName, name: "key"))
+    ActiveOperations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveClusterOperationCount, name: "value"))
     AddAssociationRequest.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationEntityArn, name: "SourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AddAssociationRequest.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationEntityArn, name: "DestinationArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AddAssociationRequest.add_member(:association_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationEdgeType, name: "AssociationType"))
@@ -2712,6 +3346,8 @@ module Aws::SageMaker
     AddAssociationResponse.type = Types::AddAssociationResponse
     AddClusterNodeSpecification.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupName, name: "InstanceGroupName", traits: {"smithy.api#required" => {}}))
     AddClusterNodeSpecification.add_member(:increment_target_count_by, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAddIncrementCount, name: "IncrementTargetCountBy", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}, "smithy.api#required" => {}}))
+    AddClusterNodeSpecification.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAvailabilityZones, name: "AvailabilityZones"))
+    AddClusterNodeSpecification.add_member(:instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceTypes, name: "InstanceTypes"))
     AddClusterNodeSpecification.type = Types::AddClusterNodeSpecification
     AddClusterNodeSpecificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AddClusterNodeSpecification, name: "member"))
     AddTagsInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceArn, name: "ResourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -2986,6 +3622,19 @@ module Aws::SageMaker
     AppInstanceType.add_member(:ml_r6_id_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6ID_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r6id.16xlarge"}))
     AppInstanceType.add_member(:ml_r6_id_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6ID_24XLARGE", traits: {"smithy.api#enumValue" => "ml.r6id.24xlarge"}))
     AppInstanceType.add_member(:ml_r6_id_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6ID_32XLARGE", traits: {"smithy.api#enumValue" => "ml.r6id.32xlarge"}))
+    AppInstanceType.add_member(:ml_p5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.4xlarge"}))
+    AppInstanceType.add_member(:ml_g7_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.2xlarge"}))
+    AppInstanceType.add_member(:ml_g7_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.4xlarge"}))
+    AppInstanceType.add_member(:ml_g7_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.8xlarge"}))
+    AppInstanceType.add_member(:ml_g7_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.12xlarge"}))
+    AppInstanceType.add_member(:ml_g7_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.24xlarge"}))
+    AppInstanceType.add_member(:ml_g7_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.48xlarge"}))
+    AppInstanceType.add_member(:ml_g7_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.2xlarge"}))
+    AppInstanceType.add_member(:ml_g7_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.4xlarge"}))
+    AppInstanceType.add_member(:ml_g7_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.8xlarge"}))
+    AppInstanceType.add_member(:ml_g7_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.12xlarge"}))
+    AppInstanceType.add_member(:ml_g7_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.24xlarge"}))
+    AppInstanceType.add_member(:ml_g7_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.48xlarge"}))
     AppLifecycleManagement.add_member(:idle_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleSettings, name: "IdleSettings"))
     AppLifecycleManagement.type = Types::AppLifecycleManagement
     AppList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppDetails, name: "member"))
@@ -3035,6 +3684,7 @@ module Aws::SageMaker
     ArtifactSummary.type = Types::ArtifactSummary
     AssemblyType.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
     AssemblyType.add_member(:line, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINE", traits: {"smithy.api#enumValue" => "Line"}))
+    AssignedGroupPatternsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNamePattern, name: "member"))
     AssociateTrialComponentRequest.add_member(:trial_component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityName, name: "TrialComponentName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AssociateTrialComponentRequest.add_member(:trial_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityName, name: "TrialName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AssociateTrialComponentRequest.type = Types::AssociateTrialComponentRequest
@@ -3046,6 +3696,10 @@ module Aws::SageMaker
     AssociationEdgeType.add_member(:derived_from, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DERIVED_FROM", traits: {"smithy.api#enumValue" => "DerivedFrom"}))
     AssociationEdgeType.add_member(:produced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCED", traits: {"smithy.api#enumValue" => "Produced"}))
     AssociationEdgeType.add_member(:same_as, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAME_AS", traits: {"smithy.api#enumValue" => "SameAs"}))
+    AssociationInfo.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "SourceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AssociationInfo.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "DestinationArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AssociationInfo.type = Types::AssociationInfo
+    AssociationInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationInfo, name: "member"))
     AssociationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationSummary, name: "member"))
     AssociationSummary.add_member(:source_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationEntityArn, name: "SourceArn"))
     AssociationSummary.add_member(:destination_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationEntityArn, name: "DestinationArn"))
@@ -3092,6 +3746,18 @@ module Aws::SageMaker
     AthenaResultFormat.add_member(:avro, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVRO", traits: {"smithy.api#enumValue" => "AVRO"}))
     AthenaResultFormat.add_member(:json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON", traits: {"smithy.api#enumValue" => "JSON"}))
     AthenaResultFormat.add_member(:textfile, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXTFILE", traits: {"smithy.api#enumValue" => "TEXTFILE"}))
+    AthenaStepMetadata.add_member(:query_execution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "QueryExecutionId"))
+    AthenaStepMetadata.add_member(:s3_output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "S3OutputLocation"))
+    AthenaStepMetadata.type = Types::AthenaStepMetadata
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNameOrArn, name: "ClusterName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeId, name: "NodeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNetworkInterfaceId, name: "NetworkInterfaceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AttachClusterNodeNetworkInterfaceRequest.type = Types::AttachClusterNodeNetworkInterfaceRequest
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterArn, name: "ClusterArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeId, name: "NodeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:network_interface_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNetworkInterfaceId, name: "NetworkInterfaceId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:attachment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNetworkInterfaceAttachmentId, name: "AttachmentId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    AttachClusterNodeNetworkInterfaceResponse.type = Types::AttachClusterNodeNetworkInterfaceResponse
     AttachClusterNodeVolumeRequest.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterArn, name: "ClusterArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AttachClusterNodeVolumeRequest.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeId, name: "NodeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     AttachClusterNodeVolumeRequest.add_member(:volume_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeId, name: "VolumeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -3337,15 +4003,27 @@ module Aws::SageMaker
     Autotune.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AutotuneMode, name: "Mode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     Autotune.type = Types::Autotune
     AutotuneMode.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
+    AvailabilityZoneBalanceEnforcementMode.add_member(:permissive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PERMISSIVE", traits: {"smithy.api#enumValue" => "PERMISSIVE"}))
+    AvailableUpgrade.add_member(:version, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorMinorVersion, name: "Version"))
+    AvailableUpgrade.add_member(:release_notes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReleaseNotesList, name: "ReleaseNotes"))
+    AvailableUpgrade.type = Types::AvailableUpgrade
     AwsManagedHumanLoopRequestSource.add_member(:rekognition_detect_moderation_labels_image_v3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REKOGNITION_DETECT_MODERATION_LABELS_IMAGE_V3", traits: {"smithy.api#enumValue" => "AWS/Rekognition/DetectModerationLabels/Image/V3"}))
     AwsManagedHumanLoopRequestSource.add_member(:textract_analyze_document_forms_v1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEXTRACT_ANALYZE_DOCUMENT_FORMS_V1", traits: {"smithy.api#enumValue" => "AWS/Textract/AnalyzeDocument/Forms/V1"}))
+    BaseModel.add_member(:hub_content_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentName, name: "HubContentName"))
+    BaseModel.add_member(:hub_content_version, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentVersion, name: "HubContentVersion"))
+    BaseModel.add_member(:recipe_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecipeName, name: "RecipeName"))
+    BaseModel.type = Types::BaseModel
     BatchAddClusterNodesError.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupName, name: "InstanceGroupName", traits: {"smithy.api#required" => {}}))
     BatchAddClusterNodesError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAddClusterNodesErrorCode, name: "ErrorCode", traits: {"smithy.api#required" => {}}))
     BatchAddClusterNodesError.add_member(:failed_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAddFailureCount, name: "FailedCount", traits: {"smithy.api#required" => {}}))
+    BatchAddClusterNodesError.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAvailabilityZones, name: "AvailabilityZones"))
+    BatchAddClusterNodesError.add_member(:instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceTypes, name: "InstanceTypes"))
     BatchAddClusterNodesError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     BatchAddClusterNodesError.type = Types::BatchAddClusterNodesError
     BatchAddClusterNodesErrorCode.add_member(:instance_group_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_GROUP_NOT_FOUND", traits: {"smithy.api#enumValue" => "InstanceGroupNotFound"}))
     BatchAddClusterNodesErrorCode.add_member(:invalid_instance_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_INSTANCE_GROUP_STATUS", traits: {"smithy.api#enumValue" => "InvalidInstanceGroupStatus"}))
+    BatchAddClusterNodesErrorCode.add_member(:incompatible_availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMPATIBLE_AVAILABILITY_ZONES", traits: {"smithy.api#enumValue" => "IncompatibleAvailabilityZones"}))
+    BatchAddClusterNodesErrorCode.add_member(:incompatible_instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCOMPATIBLE_INSTANCE_TYPES", traits: {"smithy.api#enumValue" => "IncompatibleInstanceTypes"}))
     BatchAddClusterNodesErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchAddClusterNodesError, name: "member"))
     BatchAddClusterNodesRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNameOrArn, name: "ClusterName", traits: {"smithy.api#required" => {}}))
     BatchAddClusterNodesRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClientToken", traits: {"smithy.api#clientOptional" => {}, "smithy.api#idempotencyToken" => {}, "smithy.api#length" => {"max" => 64}, "smithy.api#pattern" => "^[\\x21-\\x7E]+$"}))
@@ -3398,7 +4076,54 @@ module Aws::SageMaker
     BatchDescribeModelPackageSummary.add_member(:inference_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceSpecification, name: "InferenceSpecification", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchDescribeModelPackageSummary.add_member(:model_package_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageStatus, name: "ModelPackageStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BatchDescribeModelPackageSummary.add_member(:model_approval_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelApprovalStatus, name: "ModelApprovalStatus"))
+    BatchDescribeModelPackageSummary.add_member(:model_package_registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageRegistrationType, name: "ModelPackageRegistrationType"))
     BatchDescribeModelPackageSummary.type = Types::BatchDescribeModelPackageSummary
+    BatchRebootClusterNodeLogicalIdsError.add_member(:node_logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeLogicalId, name: "NodeLogicalId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchRebootClusterNodeLogicalIdsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchRebootClusterNodesErrorCode, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchRebootClusterNodeLogicalIdsError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchRebootClusterNodeLogicalIdsError.type = Types::BatchRebootClusterNodeLogicalIdsError
+    BatchRebootClusterNodeLogicalIdsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchRebootClusterNodeLogicalIdsError, name: "member"))
+    BatchRebootClusterNodesError.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeId, name: "NodeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchRebootClusterNodesError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchRebootClusterNodesErrorCode, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchRebootClusterNodesError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchRebootClusterNodesError.type = Types::BatchRebootClusterNodesError
+    BatchRebootClusterNodesErrorCode.add_member(:instance_id_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_ID_NOT_FOUND", traits: {"smithy.api#enumValue" => "InstanceIdNotFound"}))
+    BatchRebootClusterNodesErrorCode.add_member(:invalid_instance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_INSTANCE_STATUS", traits: {"smithy.api#enumValue" => "InvalidInstanceStatus"}))
+    BatchRebootClusterNodesErrorCode.add_member(:instance_id_in_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_ID_IN_USE", traits: {"smithy.api#enumValue" => "InstanceIdInUse"}))
+    BatchRebootClusterNodesErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "InternalServerError"}))
+    BatchRebootClusterNodesErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchRebootClusterNodesError, name: "member"))
+    BatchRebootClusterNodesRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNameOrArn, name: "ClusterName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchRebootClusterNodesRequest.add_member(:node_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeIds, name: "NodeIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#length" => {"min" => 1, "max" => 25}}))
+    BatchRebootClusterNodesRequest.add_member(:node_logical_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeLogicalIdList, name: "NodeLogicalIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#length" => {"min" => 1, "max" => 25}}))
+    BatchRebootClusterNodesRequest.type = Types::BatchRebootClusterNodesRequest
+    BatchRebootClusterNodesResponse.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeIds, name: "Successful"))
+    BatchRebootClusterNodesResponse.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchRebootClusterNodesErrors, name: "Failed"))
+    BatchRebootClusterNodesResponse.add_member(:failed_node_logical_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchRebootClusterNodeLogicalIdsErrors, name: "FailedNodeLogicalIds"))
+    BatchRebootClusterNodesResponse.add_member(:successful_node_logical_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeLogicalIdList, name: "SuccessfulNodeLogicalIds"))
+    BatchRebootClusterNodesResponse.type = Types::BatchRebootClusterNodesResponse
+    BatchReplaceClusterNodeLogicalIdsError.add_member(:node_logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeLogicalId, name: "NodeLogicalId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchReplaceClusterNodeLogicalIdsError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReplaceClusterNodesErrorCode, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchReplaceClusterNodeLogicalIdsError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchReplaceClusterNodeLogicalIdsError.type = Types::BatchReplaceClusterNodeLogicalIdsError
+    BatchReplaceClusterNodeLogicalIdsErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReplaceClusterNodeLogicalIdsError, name: "member"))
+    BatchReplaceClusterNodesError.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeId, name: "NodeId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchReplaceClusterNodesError.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReplaceClusterNodesErrorCode, name: "ErrorCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchReplaceClusterNodesError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchReplaceClusterNodesError.type = Types::BatchReplaceClusterNodesError
+    BatchReplaceClusterNodesErrorCode.add_member(:instance_id_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_ID_NOT_FOUND", traits: {"smithy.api#enumValue" => "InstanceIdNotFound"}))
+    BatchReplaceClusterNodesErrorCode.add_member(:invalid_instance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_INSTANCE_STATUS", traits: {"smithy.api#enumValue" => "InvalidInstanceStatus"}))
+    BatchReplaceClusterNodesErrorCode.add_member(:instance_id_in_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_ID_IN_USE", traits: {"smithy.api#enumValue" => "InstanceIdInUse"}))
+    BatchReplaceClusterNodesErrorCode.add_member(:internal_server_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_SERVER_ERROR", traits: {"smithy.api#enumValue" => "InternalServerError"}))
+    BatchReplaceClusterNodesErrors.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReplaceClusterNodesError, name: "member"))
+    BatchReplaceClusterNodesRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNameOrArn, name: "ClusterName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    BatchReplaceClusterNodesRequest.add_member(:node_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeIds, name: "NodeIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#length" => {"min" => 1, "max" => 25}}))
+    BatchReplaceClusterNodesRequest.add_member(:node_logical_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeLogicalIdList, name: "NodeLogicalIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#length" => {"min" => 1, "max" => 25}}))
+    BatchReplaceClusterNodesRequest.type = Types::BatchReplaceClusterNodesRequest
+    BatchReplaceClusterNodesResponse.add_member(:successful, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeIds, name: "Successful"))
+    BatchReplaceClusterNodesResponse.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReplaceClusterNodesErrors, name: "Failed"))
+    BatchReplaceClusterNodesResponse.add_member(:failed_node_logical_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchReplaceClusterNodeLogicalIdsErrors, name: "FailedNodeLogicalIds"))
+    BatchReplaceClusterNodesResponse.add_member(:successful_node_logical_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeLogicalIdList, name: "SuccessfulNodeLogicalIds"))
+    BatchReplaceClusterNodesResponse.type = Types::BatchReplaceClusterNodesResponse
     BatchStrategy.add_member(:multi_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI_RECORD", traits: {"smithy.api#enumValue" => "MultiRecord"}))
     BatchStrategy.add_member(:single_record, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_RECORD", traits: {"smithy.api#enumValue" => "SingleRecord"}))
     BatchTransformInput.add_member(:data_captured_destination_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: DestinationS3Uri, name: "DataCapturedDestinationS3Uri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -3414,12 +4139,24 @@ module Aws::SageMaker
     BatchTransformInput.add_member(:end_time_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringTimeOffsetString, name: "EndTimeOffset"))
     BatchTransformInput.add_member(:exclude_features_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ExcludeFeaturesAttribute, name: "ExcludeFeaturesAttribute"))
     BatchTransformInput.type = Types::BatchTransformInput
+    BedrockCustomModelDeploymentMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "Arn"))
+    BedrockCustomModelDeploymentMetadata.type = Types::BedrockCustomModelDeploymentMetadata
+    BedrockCustomModelMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "Arn"))
+    BedrockCustomModelMetadata.type = Types::BedrockCustomModelMetadata
+    BedrockModelImportMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "Arn"))
+    BedrockModelImportMetadata.type = Types::BedrockModelImportMetadata
+    BedrockProvisionedModelThroughputMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "Arn"))
+    BedrockProvisionedModelThroughputMetadata.type = Types::BedrockProvisionedModelThroughputMetadata
     BestObjectiveNotImproving.add_member(:max_number_of_training_jobs_not_improving, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxNumberOfTrainingJobsNotImproving, name: "MaxNumberOfTrainingJobsNotImproving"))
     BestObjectiveNotImproving.type = Types::BestObjectiveNotImproving
     Bias.add_member(:report, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsSource, name: "Report"))
     Bias.add_member(:pre_training_report, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsSource, name: "PreTrainingReport"))
     Bias.add_member(:post_training_report, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsSource, name: "PostTrainingReport"))
     Bias.type = Types::Bias
+    BillableTokenUsage.add_member(:prefill_token_count, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaLong, name: "PrefillTokenCount"))
+    BillableTokenUsage.add_member(:sample_token_count, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaLong, name: "SampleTokenCount"))
+    BillableTokenUsage.add_member(:training_token_count, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaLong, name: "TrainingTokenCount"))
+    BillableTokenUsage.type = Types::BillableTokenUsage
     BlueGreenUpdatePolicy.add_member(:traffic_routing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: TrafficRoutingConfig, name: "TrafficRoutingConfiguration", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     BlueGreenUpdatePolicy.add_member(:termination_wait_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: TerminationWaitInSeconds, name: "TerminationWaitInSeconds"))
     BlueGreenUpdatePolicy.add_member(:maximum_execution_timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumExecutionTimeoutInSeconds, name: "MaximumExecutionTimeoutInSeconds"))
@@ -3656,6 +4393,32 @@ module Aws::SageMaker
     ClarifyTextLanguage.add_member(:yoruba, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "YORUBA", traits: {"smithy.api#enumValue" => "yo"}))
     ClarifyTextLanguage.add_member(:ligurian, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIGURIAN", traits: {"smithy.api#enumValue" => "lij"}))
     ClarifyTextLanguage.add_member(:multi_language, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI_LANGUAGE", traits: {"smithy.api#enumValue" => "xx"}))
+    CleanupFailure.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "StepName"))
+    CleanupFailure.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CleanupFailureErrorCode, name: "ErrorCode"))
+    CleanupFailure.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "ErrorMessage"))
+    CleanupFailure.type = Types::CleanupFailure
+    CleanupFailureErrorCode.add_member(:client_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLIENT_ERROR", traits: {"smithy.api#enumValue" => "ClientError"}))
+    CleanupFailureErrorCode.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_FAILURE", traits: {"smithy.api#enumValue" => "InternalFailure"}))
+    CleanupFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CleanupFailure, name: "member"))
+    CleanupStepMetadata.add_member(:cleaned_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: CleanupStepNameList, name: "CleanedSteps"))
+    CleanupStepMetadata.add_member(:failed_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: CleanupFailureList, name: "FailedSteps"))
+    CleanupStepMetadata.add_member(:skipped_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: CleanupStepNameList, name: "SkippedSteps"))
+    CleanupStepMetadata.type = Types::CleanupStepMetadata
+    CleanupStepNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "member"))
+    ClusterAccountingDatabase.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAccountingDatabaseEndpoint, name: "Endpoint", traits: {"smithy.api#required" => {}}))
+    ClusterAccountingDatabase.add_member(:port, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAccountingDatabasePort, name: "Port"))
+    ClusterAccountingDatabase.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAccountingDatabaseName, name: "Name"))
+    ClusterAccountingDatabase.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAccountingDatabaseSecretArn, name: "SecretArn", traits: {"smithy.api#required" => {}}))
+    ClusterAccountingDatabase.type = Types::ClusterAccountingDatabase
+    ClusterAutoPatchConfig.add_member(:patching_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPatchingStrategy, name: "PatchingStrategy", traits: {"smithy.api#required" => {}}))
+    ClusterAutoPatchConfig.add_member(:patch_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPatchSchedule, name: "PatchSchedule"))
+    ClusterAutoPatchConfig.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfiguration, name: "DeploymentConfig"))
+    ClusterAutoPatchConfig.type = Types::ClusterAutoPatchConfig
+    ClusterAutoPatchConfigDetails.add_member(:patching_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPatchingStrategy, name: "PatchingStrategy"))
+    ClusterAutoPatchConfigDetails.add_member(:current_patch_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPatchScheduleDetails, name: "CurrentPatchSchedule"))
+    ClusterAutoPatchConfigDetails.add_member(:desired_patch_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPatchScheduleDetails, name: "DesiredPatchSchedule"))
+    ClusterAutoPatchConfigDetails.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfiguration, name: "DeploymentConfig"))
+    ClusterAutoPatchConfigDetails.type = Types::ClusterAutoPatchConfigDetails
     ClusterAutoScalerType.add_member(:karpenter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KARPENTER", traits: {"smithy.api#enumValue" => "Karpenter"}))
     ClusterAutoScalingConfig.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAutoScalingMode, name: "Mode", traits: {"smithy.api#required" => {}}))
     ClusterAutoScalingConfig.add_member(:auto_scaler_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAutoScalerType, name: "AutoScalerType"))
@@ -3671,6 +4434,12 @@ module Aws::SageMaker
     ClusterAutoScalingStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     ClusterAutoScalingStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
     ClusterAutoScalingStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    ClusterAvailabilityZones.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAvailabilityZone, name: "member"))
+    ClusterCapacityRequirements.add_member(:spot, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSpotOptions, name: "Spot"))
+    ClusterCapacityRequirements.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterOnDemandOptions, name: "OnDemand"))
+    ClusterCapacityRequirements.type = Types::ClusterCapacityRequirements
+    ClusterCapacityType.add_member(:spot, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPOT", traits: {"smithy.api#enumValue" => "Spot"}))
+    ClusterCapacityType.add_member(:on_demand, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_DEMAND", traits: {"smithy.api#enumValue" => "OnDemand"}))
     ClusterConfigMode.add_member(:enable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLE", traits: {"smithy.api#enumValue" => "Enable"}))
     ClusterConfigMode.add_member(:disable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLE", traits: {"smithy.api#enumValue" => "Disable"}))
     ClusterEbsVolumeConfig.add_member(:volume_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterEbsVolumeSizeInGB, name: "VolumeSizeInGB", traits: {"smithy.api#clientOptional" => {}}))
@@ -3686,7 +4455,11 @@ module Aws::SageMaker
     ClusterEventDetail.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EventTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterEventDetail.add_member(:event_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EventDetails, name: "EventDetails"))
     ClusterEventDetail.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Description"))
+    ClusterEventDetail.add_member(:event_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterEventLevel, name: "EventLevel"))
     ClusterEventDetail.type = Types::ClusterEventDetail
+    ClusterEventLevel.add_member(:info, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFO", traits: {"smithy.api#enumValue" => "Info"}))
+    ClusterEventLevel.add_member(:warn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WARN", traits: {"smithy.api#enumValue" => "Warn"}))
+    ClusterEventLevel.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ERROR", traits: {"smithy.api#enumValue" => "Error"}))
     ClusterEventResourceType.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLUSTER", traits: {"smithy.api#enumValue" => "Cluster"}))
     ClusterEventResourceType.add_member(:instance_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_GROUP", traits: {"smithy.api#enumValue" => "InstanceGroup"}))
     ClusterEventResourceType.add_member(:instance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE", traits: {"smithy.api#enumValue" => "Instance"}))
@@ -3699,11 +4472,28 @@ module Aws::SageMaker
     ClusterEventSummary.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterEventResourceType, name: "ResourceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterEventSummary.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EventTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterEventSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Description"))
+    ClusterEventSummary.add_member(:event_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterEventLevel, name: "EventLevel"))
     ClusterEventSummary.type = Types::ClusterEventSummary
+    ClusterFSxLustreDeletionPolicy.add_member(:delete_if_not_used, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_IF_NOT_USED", traits: {"smithy.api#enumValue" => "DeleteIfNotUsed"}))
+    ClusterFSxLustreDeletionPolicy.add_member(:keep, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KEEP", traits: {"smithy.api#enumValue" => "Keep"}))
+    ClusterFsxLustreConfig.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterDnsName, name: "DnsName", traits: {"smithy.api#required" => {}}))
+    ClusterFsxLustreConfig.add_member(:mount_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterMountName, name: "MountName", traits: {"smithy.api#required" => {}}))
+    ClusterFsxLustreConfig.add_member(:mount_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterFsxMountPath, name: "MountPath"))
+    ClusterFsxLustreConfig.type = Types::ClusterFsxLustreConfig
+    ClusterFsxOpenZfsConfig.add_member(:dns_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterDnsName, name: "DnsName", traits: {"smithy.api#required" => {}}))
+    ClusterFsxOpenZfsConfig.add_member(:mount_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterFsxMountPath, name: "MountPath"))
+    ClusterFsxOpenZfsConfig.type = Types::ClusterFsxOpenZfsConfig
+    ClusterImageVersionStatus.add_member(:up_to_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UP_TO_DATE", traits: {"smithy.api#enumValue" => "UpToDate"}))
+    ClusterImageVersionStatus.add_member(:update_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_AVAILABLE", traits: {"smithy.api#enumValue" => "UpdateAvailable"}))
+    ClusterImageVersionStatus.add_member(:security_update_required, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECURITY_UPDATE_REQUIRED", traits: {"smithy.api#enumValue" => "SecurityUpdateRequired"}))
+    ClusterImageVersionStatus.add_member(:end_of_life, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "END_OF_LIFE", traits: {"smithy.api#enumValue" => "EndOfLife"}))
     ClusterInstanceGroupDetails.add_member(:current_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNonNegativeInstanceCount, name: "CurrentCount"))
     ClusterInstanceGroupDetails.add_member(:target_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceCount, name: "TargetCount"))
+    ClusterInstanceGroupDetails.add_member(:min_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceCount, name: "MinCount"))
     ClusterInstanceGroupDetails.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupName, name: "InstanceGroupName"))
     ClusterInstanceGroupDetails.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceType, name: "InstanceType"))
+    ClusterInstanceGroupDetails.add_member(:instance_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceRequirementDetails, name: "InstanceRequirements"))
+    ClusterInstanceGroupDetails.add_member(:instance_type_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceTypeDetails, name: "InstanceTypeDetails"))
     ClusterInstanceGroupDetails.add_member(:life_cycle_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterLifeCycleConfig, name: "LifeCycleConfig"))
     ClusterInstanceGroupDetails.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "ExecutionRole"))
     ClusterInstanceGroupDetails.add_member(:threads_per_core, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterThreadsPerCore, name: "ThreadsPerCore"))
@@ -3714,14 +4504,28 @@ module Aws::SageMaker
     ClusterInstanceGroupDetails.add_member(:training_plan_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupTrainingPlanStatus, name: "TrainingPlanStatus"))
     ClusterInstanceGroupDetails.add_member(:override_vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "OverrideVpcConfig"))
     ClusterInstanceGroupDetails.add_member(:scheduled_update_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledUpdateConfig, name: "ScheduledUpdateConfig"))
+    ClusterInstanceGroupDetails.add_member(:auto_patch_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAutoPatchConfigDetails, name: "AutoPatchConfig"))
     ClusterInstanceGroupDetails.add_member(:current_image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageId, name: "CurrentImageId"))
     ClusterInstanceGroupDetails.add_member(:desired_image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageId, name: "DesiredImageId"))
+    ClusterInstanceGroupDetails.add_member(:current_image_release_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReleaseVersion, name: "CurrentImageReleaseVersion"))
+    ClusterInstanceGroupDetails.add_member(:desired_image_release_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReleaseVersion, name: "DesiredImageReleaseVersion"))
+    ClusterInstanceGroupDetails.add_member(:image_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterImageVersionStatus, name: "ImageVersionStatus"))
+    ClusterInstanceGroupDetails.add_member(:active_operations, ::Smithy::Schema::Shapes::MemberShape.new(target: ActiveOperations, name: "ActiveOperations"))
+    ClusterInstanceGroupDetails.add_member(:kubernetes_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesConfigDetails, name: "KubernetesConfig"))
+    ClusterInstanceGroupDetails.add_member(:capacity_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterCapacityRequirements, name: "CapacityRequirements"))
+    ClusterInstanceGroupDetails.add_member(:target_state_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceCount, name: "TargetStateCount"))
+    ClusterInstanceGroupDetails.add_member(:software_update_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SoftwareUpdateStatus, name: "SoftwareUpdateStatus"))
+    ClusterInstanceGroupDetails.add_member(:active_software_update_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentConfiguration, name: "ActiveSoftwareUpdateConfig"))
+    ClusterInstanceGroupDetails.add_member(:slurm_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSlurmConfigDetails, name: "SlurmConfig"))
+    ClusterInstanceGroupDetails.add_member(:network_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNetworkInterfaceDetails, name: "NetworkInterface"))
     ClusterInstanceGroupDetails.type = Types::ClusterInstanceGroupDetails
     ClusterInstanceGroupDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupDetails, name: "member"))
     ClusterInstanceGroupSpecification.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceCount, name: "InstanceCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterInstanceGroupSpecification.add_member(:min_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceCount, name: "MinInstanceCount"))
     ClusterInstanceGroupSpecification.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupName, name: "InstanceGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ClusterInstanceGroupSpecification.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ClusterInstanceGroupSpecification.add_member(:life_cycle_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterLifeCycleConfig, name: "LifeCycleConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterInstanceGroupSpecification.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceType, name: "InstanceType"))
+    ClusterInstanceGroupSpecification.add_member(:instance_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceRequirements, name: "InstanceRequirements"))
+    ClusterInstanceGroupSpecification.add_member(:life_cycle_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterLifeCycleConfig, name: "LifeCycleConfig"))
     ClusterInstanceGroupSpecification.add_member(:execution_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "ExecutionRole", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterInstanceGroupSpecification.add_member(:threads_per_core, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterThreadsPerCore, name: "ThreadsPerCore"))
     ClusterInstanceGroupSpecification.add_member(:instance_storage_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceStorageConfigs, name: "InstanceStorageConfigs"))
@@ -3730,12 +4534,23 @@ module Aws::SageMaker
     ClusterInstanceGroupSpecification.add_member(:override_vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "OverrideVpcConfig"))
     ClusterInstanceGroupSpecification.add_member(:scheduled_update_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledUpdateConfig, name: "ScheduledUpdateConfig"))
     ClusterInstanceGroupSpecification.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageId, name: "ImageId"))
+    ClusterInstanceGroupSpecification.add_member(:auto_patch_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAutoPatchConfig, name: "AutoPatchConfig"))
+    ClusterInstanceGroupSpecification.add_member(:image_release_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReleaseVersion, name: "ImageReleaseVersion"))
+    ClusterInstanceGroupSpecification.add_member(:kubernetes_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesConfig, name: "KubernetesConfig"))
+    ClusterInstanceGroupSpecification.add_member(:slurm_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSlurmConfig, name: "SlurmConfig"))
+    ClusterInstanceGroupSpecification.add_member(:capacity_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterCapacityRequirements, name: "CapacityRequirements"))
+    ClusterInstanceGroupSpecification.add_member(:network_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNetworkInterface, name: "NetworkInterface"))
     ClusterInstanceGroupSpecification.type = Types::ClusterInstanceGroupSpecification
     ClusterInstanceGroupSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupSpecification, name: "member"))
     ClusterInstanceGroupsToDelete.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupName, name: "member"))
     ClusterInstancePlacement.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAvailabilityZone, name: "AvailabilityZone"))
     ClusterInstancePlacement.add_member(:availability_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAvailabilityZoneId, name: "AvailabilityZoneId"))
     ClusterInstancePlacement.type = Types::ClusterInstancePlacement
+    ClusterInstanceRequirementDetails.add_member(:current_instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceTypes, name: "CurrentInstanceTypes"))
+    ClusterInstanceRequirementDetails.add_member(:desired_instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceTypes, name: "DesiredInstanceTypes"))
+    ClusterInstanceRequirementDetails.type = Types::ClusterInstanceRequirementDetails
+    ClusterInstanceRequirements.add_member(:instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceTypes, name: "InstanceTypes", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterInstanceRequirements.type = Types::ClusterInstanceRequirements
     ClusterInstanceStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "Running"}))
     ClusterInstanceStatus.add_member(:failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILURE", traits: {"smithy.api#enumValue" => "Failure"}))
     ClusterInstanceStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
@@ -3747,12 +4562,15 @@ module Aws::SageMaker
     ClusterInstanceStatusDetails.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Message"))
     ClusterInstanceStatusDetails.type = Types::ClusterInstanceStatusDetails
     ClusterInstanceStorageConfig.add_member(:ebs_volume_config, Types::ClusterInstanceStorageConfig::EbsVolumeConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterEbsVolumeConfig, name: "EbsVolumeConfig"))
+    ClusterInstanceStorageConfig.add_member(:fsx_lustre_config, Types::ClusterInstanceStorageConfig::FsxLustreConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterFsxLustreConfig, name: "FsxLustreConfig"))
+    ClusterInstanceStorageConfig.add_member(:fsx_open_zfs_config, Types::ClusterInstanceStorageConfig::FsxOpenZfsConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterFsxOpenZfsConfig, name: "FsxOpenZfsConfig"))
     ClusterInstanceStorageConfig.add_member(:unknown, Types::ClusterInstanceStorageConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ClusterInstanceStorageConfig.type = Types::ClusterInstanceStorageConfig
     ClusterInstanceStorageConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceStorageConfig, name: "member"))
     ClusterInstanceType.add_member(:ml_p4_d_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P4D_24XLARGE", traits: {"smithy.api#enumValue" => "ml.p4d.24xlarge"}))
     ClusterInstanceType.add_member(:ml_p4_de_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P4DE_24XLARGE", traits: {"smithy.api#enumValue" => "ml.p4de.24xlarge"}))
     ClusterInstanceType.add_member(:ml_p5_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.48xlarge"}))
+    ClusterInstanceType.add_member(:ml_p5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.4xlarge"}))
     ClusterInstanceType.add_member(:ml_p6_e_gb200_36_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6E_GB200_36XLARGE", traits: {"smithy.api#enumValue" => "ml.p6e-gb200.36xlarge"}))
     ClusterInstanceType.add_member(:ml_trn1_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_TRN1_32XLARGE", traits: {"smithy.api#enumValue" => "ml.trn1.32xlarge"}))
     ClusterInstanceType.add_member(:ml_trn1_n_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_TRN1N_32XLARGE", traits: {"smithy.api#enumValue" => "ml.trn1n.32xlarge"}))
@@ -3810,6 +4628,7 @@ module Aws::SageMaker
     ClusterInstanceType.add_member(:ml_p5_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5e.48xlarge"}))
     ClusterInstanceType.add_member(:ml_p5_en_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5EN_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5en.48xlarge"}))
     ClusterInstanceType.add_member(:ml_p6_b200_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6_B200_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p6-b200.48xlarge"}))
+    ClusterInstanceType.add_member(:ml_trn2_3_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_TRN2_3XLARGE", traits: {"smithy.api#enumValue" => "ml.trn2.3xlarge"}))
     ClusterInstanceType.add_member(:ml_trn2_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_TRN2_48XLARGE", traits: {"smithy.api#enumValue" => "ml.trn2.48xlarge"}))
     ClusterInstanceType.add_member(:ml_c6_i_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6I_LARGE", traits: {"smithy.api#enumValue" => "ml.c6i.large"}))
     ClusterInstanceType.add_member(:ml_c6_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6I_XLARGE", traits: {"smithy.api#enumValue" => "ml.c6i.xlarge"}))
@@ -3863,13 +4682,143 @@ module Aws::SageMaker
     ClusterInstanceType.add_member(:ml_r7_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R7I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r7i.16xlarge"}))
     ClusterInstanceType.add_member(:ml_r7_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R7I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.r7i.24xlarge"}))
     ClusterInstanceType.add_member(:ml_r7_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R7I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.r7i.48xlarge"}))
-    ClusterLifeCycleConfig.add_member(:source_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "SourceS3Uri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ClusterLifeCycleConfig.add_member(:on_create, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterLifeCycleConfigFileName, name: "OnCreate", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterInstanceType.add_member(:ml_r5_d_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R5D_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r5d.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.24xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.48xlarge"}))
+    ClusterInstanceType.add_member(:ml_p6_b300_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6_B300_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p6-b300.48xlarge"}))
+    ClusterInstanceType.add_member(:ml_g4_dn_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.xlarge"}))
+    ClusterInstanceType.add_member(:ml_g4_dn_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_g4_dn_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_g4_dn_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_g4_dn_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_g4_dn_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_g_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6G_MEDIUM", traits: {"smithy.api#enumValue" => "ml.c6g.medium"}))
+    ClusterInstanceType.add_member(:ml_c6_g_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6G_LARGE", traits: {"smithy.api#enumValue" => "ml.c6g.large"}))
+    ClusterInstanceType.add_member(:ml_c6_g_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6G_XLARGE", traits: {"smithy.api#enumValue" => "ml.c6g.xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_g_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6G_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c6g.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_g_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6G_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c6g.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_g_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6G_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c6g.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_g_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6G_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c6g.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_g_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6G_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c6g.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_c7_g_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_MEDIUM", traits: {"smithy.api#enumValue" => "ml.c7g.medium"}))
+    ClusterInstanceType.add_member(:ml_c7_g_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_LARGE", traits: {"smithy.api#enumValue" => "ml.c7g.large"}))
+    ClusterInstanceType.add_member(:ml_c7_g_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_XLARGE", traits: {"smithy.api#enumValue" => "ml.c7g.xlarge"}))
+    ClusterInstanceType.add_member(:ml_c7_g_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c7g.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_c7_g_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c7g.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_c7_g_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c7g.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_c7_g_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c7g.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_c7_g_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c7g.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_c8_g_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_MEDIUM", traits: {"smithy.api#enumValue" => "ml.c8g.medium"}))
+    ClusterInstanceType.add_member(:ml_c8_g_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_LARGE", traits: {"smithy.api#enumValue" => "ml.c8g.large"}))
+    ClusterInstanceType.add_member(:ml_c8_g_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_XLARGE", traits: {"smithy.api#enumValue" => "ml.c8g.xlarge"}))
+    ClusterInstanceType.add_member(:ml_c8_g_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c8g.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_c8_g_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c8g.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_c8_g_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c8g.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_c8_g_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c8g.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_c8_g_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c8g.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_c8_g_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_24XLARGE", traits: {"smithy.api#enumValue" => "ml.c8g.24xlarge"}))
+    ClusterInstanceType.add_member(:ml_c8_g_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8G_48XLARGE", traits: {"smithy.api#enumValue" => "ml.c8g.48xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_a_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_LARGE", traits: {"smithy.api#enumValue" => "ml.c6a.large"}))
+    ClusterInstanceType.add_member(:ml_c6_a_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_XLARGE", traits: {"smithy.api#enumValue" => "ml.c6a.xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_a_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c6a.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_a_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c6a.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_a_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c6a.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_a_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c6a.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_a_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c6a.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_a_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_24XLARGE", traits: {"smithy.api#enumValue" => "ml.c6a.24xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_a_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_32XLARGE", traits: {"smithy.api#enumValue" => "ml.c6a.32xlarge"}))
+    ClusterInstanceType.add_member(:ml_c6_a_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6A_48XLARGE", traits: {"smithy.api#enumValue" => "ml.c6a.48xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_a_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_LARGE", traits: {"smithy.api#enumValue" => "ml.m6a.large"}))
+    ClusterInstanceType.add_member(:ml_m6_a_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_XLARGE", traits: {"smithy.api#enumValue" => "ml.m6a.xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_a_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m6a.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_a_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m6a.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_a_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m6a.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_a_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m6a.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_a_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m6a.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_a_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_24XLARGE", traits: {"smithy.api#enumValue" => "ml.m6a.24xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_a_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_32XLARGE", traits: {"smithy.api#enumValue" => "ml.m6a.32xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_a_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6A_48XLARGE", traits: {"smithy.api#enumValue" => "ml.m6a.48xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_g_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6G_MEDIUM", traits: {"smithy.api#enumValue" => "ml.m6g.medium"}))
+    ClusterInstanceType.add_member(:ml_m6_g_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6G_LARGE", traits: {"smithy.api#enumValue" => "ml.m6g.large"}))
+    ClusterInstanceType.add_member(:ml_m6_g_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6G_XLARGE", traits: {"smithy.api#enumValue" => "ml.m6g.xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_g_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6G_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m6g.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_g_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6G_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m6g.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_g_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6G_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m6g.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_g_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6G_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m6g.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_m6_g_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M6G_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m6g.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_m7_g_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7G_MEDIUM", traits: {"smithy.api#enumValue" => "ml.m7g.medium"}))
+    ClusterInstanceType.add_member(:ml_m7_g_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7G_LARGE", traits: {"smithy.api#enumValue" => "ml.m7g.large"}))
+    ClusterInstanceType.add_member(:ml_m7_g_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7G_XLARGE", traits: {"smithy.api#enumValue" => "ml.m7g.xlarge"}))
+    ClusterInstanceType.add_member(:ml_m7_g_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7G_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m7g.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_m7_g_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7G_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m7g.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_m7_g_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7G_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m7g.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_m7_g_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7G_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m7g.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_m7_g_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7G_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m7g.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_m8_g_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_MEDIUM", traits: {"smithy.api#enumValue" => "ml.m8g.medium"}))
+    ClusterInstanceType.add_member(:ml_m8_g_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_LARGE", traits: {"smithy.api#enumValue" => "ml.m8g.large"}))
+    ClusterInstanceType.add_member(:ml_m8_g_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_XLARGE", traits: {"smithy.api#enumValue" => "ml.m8g.xlarge"}))
+    ClusterInstanceType.add_member(:ml_m8_g_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m8g.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_m8_g_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m8g.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_m8_g_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m8g.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_m8_g_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m8g.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_m8_g_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m8g.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_m8_g_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_24XLARGE", traits: {"smithy.api#enumValue" => "ml.m8g.24xlarge"}))
+    ClusterInstanceType.add_member(:ml_m8_g_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8G_48XLARGE", traits: {"smithy.api#enumValue" => "ml.m8g.48xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.2xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.4xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.8xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.12xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.24xlarge"}))
+    ClusterInstanceType.add_member(:ml_g7_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.48xlarge"}))
+    ClusterInstanceType.add_member(:ml_c8_a_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8A_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c8a.16xlarge"}))
+    ClusterInstanceType.add_member(:ml_m8_a_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8A_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m8a.16xlarge"}))
+    ClusterInstanceTypeDetail.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceType, name: "InstanceType"))
+    ClusterInstanceTypeDetail.add_member(:current_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNonNegativeInstanceCount, name: "CurrentCount"))
+    ClusterInstanceTypeDetail.add_member(:threads_per_core, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterThreadsPerCore, name: "ThreadsPerCore"))
+    ClusterInstanceTypeDetail.type = Types::ClusterInstanceTypeDetail
+    ClusterInstanceTypeDetails.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceTypeDetail, name: "member"))
+    ClusterInstanceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceType, name: "member"))
+    ClusterInterfaceType.add_member(:efa, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EFA", traits: {"smithy.api#enumValue" => "efa"}))
+    ClusterInterfaceType.add_member(:efa_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EFA_ONLY", traits: {"smithy.api#enumValue" => "efa-only"}))
+    ClusterKubernetesConfig.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesLabels, name: "Labels"))
+    ClusterKubernetesConfig.add_member(:taints, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesTaints, name: "Taints"))
+    ClusterKubernetesConfig.type = Types::ClusterKubernetesConfig
+    ClusterKubernetesConfigDetails.add_member(:current_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesLabels, name: "CurrentLabels"))
+    ClusterKubernetesConfigDetails.add_member(:desired_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesLabels, name: "DesiredLabels"))
+    ClusterKubernetesConfigDetails.add_member(:current_taints, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesTaints, name: "CurrentTaints"))
+    ClusterKubernetesConfigDetails.add_member(:desired_taints, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesTaints, name: "DesiredTaints"))
+    ClusterKubernetesConfigDetails.type = Types::ClusterKubernetesConfigDetails
+    ClusterKubernetesConfigNodeDetails.add_member(:current_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesLabels, name: "CurrentLabels"))
+    ClusterKubernetesConfigNodeDetails.add_member(:desired_labels, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesLabels, name: "DesiredLabels"))
+    ClusterKubernetesConfigNodeDetails.add_member(:current_taints, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesTaints, name: "CurrentTaints"))
+    ClusterKubernetesConfigNodeDetails.add_member(:desired_taints, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesTaints, name: "DesiredTaints"))
+    ClusterKubernetesConfigNodeDetails.type = Types::ClusterKubernetesConfigNodeDetails
+    ClusterKubernetesLabels.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesLabelKey, name: "key"))
+    ClusterKubernetesLabels.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesLabelValue, name: "value"))
+    ClusterKubernetesTaint.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesTaintKey, name: "Key", traits: {"smithy.api#required" => {}}))
+    ClusterKubernetesTaint.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesTaintValue, name: "Value"))
+    ClusterKubernetesTaint.add_member(:effect, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesTaintEffect, name: "Effect", traits: {"smithy.api#required" => {}}))
+    ClusterKubernetesTaint.type = Types::ClusterKubernetesTaint
+    ClusterKubernetesTaintEffect.add_member(:no_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_SCHEDULE", traits: {"smithy.api#enumValue" => "NoSchedule"}))
+    ClusterKubernetesTaintEffect.add_member(:prefer_no_schedule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREFER_NO_SCHEDULE", traits: {"smithy.api#enumValue" => "PreferNoSchedule"}))
+    ClusterKubernetesTaintEffect.add_member(:no_execute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_EXECUTE", traits: {"smithy.api#enumValue" => "NoExecute"}))
+    ClusterKubernetesTaints.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesTaint, name: "member"))
+    ClusterLifeCycleConfig.add_member(:source_s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "SourceS3Uri"))
+    ClusterLifeCycleConfig.add_member(:on_create, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterLifeCycleConfigFileName, name: "OnCreate"))
+    ClusterLifeCycleConfig.add_member(:on_init_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterLifeCycleConfigFileName, name: "OnInitComplete"))
     ClusterLifeCycleConfig.type = Types::ClusterLifeCycleConfig
     ClusterMetadata.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureMessage"))
     ClusterMetadata.add_member(:eks_role_access_entries, ::Smithy::Schema::Shapes::MemberShape.new(target: EksRoleAccessEntries, name: "EksRoleAccessEntries"))
     ClusterMetadata.add_member(:slr_access_entry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "SlrAccessEntry"))
     ClusterMetadata.type = Types::ClusterMetadata
+    ClusterNetworkInterface.add_member(:interface_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInterfaceType, name: "InterfaceType"))
+    ClusterNetworkInterface.type = Types::ClusterNetworkInterface
+    ClusterNetworkInterfaceDetails.add_member(:interface_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInterfaceType, name: "InterfaceType"))
+    ClusterNetworkInterfaceDetails.type = Types::ClusterNetworkInterfaceDetails
     ClusterNodeDetails.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupName, name: "InstanceGroupName"))
     ClusterNodeDetails.add_member(:instance_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "InstanceId"))
     ClusterNodeDetails.add_member(:node_logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeLogicalId, name: "NodeLogicalId"))
@@ -3887,7 +4836,13 @@ module Aws::SageMaker
     ClusterNodeDetails.add_member(:placement, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstancePlacement, name: "Placement"))
     ClusterNodeDetails.add_member(:current_image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageId, name: "CurrentImageId"))
     ClusterNodeDetails.add_member(:desired_image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageId, name: "DesiredImageId"))
+    ClusterNodeDetails.add_member(:current_image_release_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReleaseVersion, name: "CurrentImageReleaseVersion"))
+    ClusterNodeDetails.add_member(:desired_image_release_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReleaseVersion, name: "DesiredImageReleaseVersion"))
+    ClusterNodeDetails.add_member(:image_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterImageVersionStatus, name: "ImageVersionStatus"))
     ClusterNodeDetails.add_member(:ultra_server_info, ::Smithy::Schema::Shapes::MemberShape.new(target: UltraServerInfo, name: "UltraServerInfo", traits: {"smithy.api#clientOptional" => {}}))
+    ClusterNodeDetails.add_member(:kubernetes_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterKubernetesConfigNodeDetails, name: "KubernetesConfig"))
+    ClusterNodeDetails.add_member(:capacity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterCapacityType, name: "CapacityType"))
+    ClusterNodeDetails.add_member(:network_interface, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNetworkInterfaceDetails, name: "NetworkInterface"))
     ClusterNodeDetails.type = Types::ClusterNodeDetails
     ClusterNodeIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeId, name: "member"))
     ClusterNodeLogicalIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeLogicalId, name: "member"))
@@ -3903,11 +4858,26 @@ module Aws::SageMaker
     ClusterNodeSummary.add_member(:last_software_update_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastSoftwareUpdateTime"))
     ClusterNodeSummary.add_member(:instance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceStatusDetails, name: "InstanceStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterNodeSummary.add_member(:ultra_server_info, ::Smithy::Schema::Shapes::MemberShape.new(target: UltraServerInfo, name: "UltraServerInfo", traits: {"smithy.api#clientOptional" => {}}))
+    ClusterNodeSummary.add_member(:private_dns_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPrivateDnsHostname, name: "PrivateDnsHostname", traits: {"smithy.api#clientOptional" => {}}))
+    ClusterNodeSummary.add_member(:current_image_release_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReleaseVersion, name: "CurrentImageReleaseVersion"))
+    ClusterNodeSummary.add_member(:image_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterImageVersionStatus, name: "ImageVersionStatus"))
     ClusterNodeSummary.type = Types::ClusterNodeSummary
-    ClusterOrchestrator.add_member(:eks, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterOrchestratorEksConfig, name: "Eks", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterOnDemandOptions.type = Types::ClusterOnDemandOptions
+    ClusterOrchestrator.add_member(:eks, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterOrchestratorEksConfig, name: "Eks", traits: {"smithy.api#clientOptional" => {}}))
+    ClusterOrchestrator.add_member(:slurm, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterOrchestratorSlurmConfig, name: "Slurm"))
     ClusterOrchestrator.type = Types::ClusterOrchestrator
     ClusterOrchestratorEksConfig.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EksClusterArn, name: "ClusterArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterOrchestratorEksConfig.type = Types::ClusterOrchestratorEksConfig
+    ClusterOrchestratorSlurmConfig.add_member(:slurm_config_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSlurmConfigStrategy, name: "SlurmConfigStrategy"))
+    ClusterOrchestratorSlurmConfig.add_member(:accounting_database, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAccountingDatabase, name: "AccountingDatabase"))
+    ClusterOrchestratorSlurmConfig.type = Types::ClusterOrchestratorSlurmConfig
+    ClusterPartitionNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPartitionName, name: "member"))
+    ClusterPatchSchedule.add_member(:next_patch_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "NextPatchDate"))
+    ClusterPatchSchedule.type = Types::ClusterPatchSchedule
+    ClusterPatchScheduleDetails.add_member(:next_patch_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "NextPatchDate"))
+    ClusterPatchScheduleDetails.type = Types::ClusterPatchScheduleDetails
+    ClusterPatchingStrategy.add_member(:when_idle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WHEN_IDLE", traits: {"smithy.api#enumValue" => "WhenIdle"}))
+    ClusterPatchingStrategy.add_member(:when_all_idle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WHEN_ALL_IDLE", traits: {"smithy.api#enumValue" => "WhenAllIdle"}))
     ClusterRestrictedInstanceGroupDetails.add_member(:current_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNonNegativeInstanceCount, name: "CurrentCount"))
     ClusterRestrictedInstanceGroupDetails.add_member(:target_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceCount, name: "TargetCount"))
     ClusterRestrictedInstanceGroupDetails.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupName, name: "InstanceGroupName"))
@@ -3934,9 +4904,13 @@ module Aws::SageMaker
     ClusterRestrictedInstanceGroupSpecification.add_member(:training_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArn, name: "TrainingPlanArn"))
     ClusterRestrictedInstanceGroupSpecification.add_member(:override_vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "OverrideVpcConfig"))
     ClusterRestrictedInstanceGroupSpecification.add_member(:scheduled_update_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduledUpdateConfig, name: "ScheduledUpdateConfig"))
-    ClusterRestrictedInstanceGroupSpecification.add_member(:environment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfig, name: "EnvironmentConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterRestrictedInstanceGroupSpecification.add_member(:environment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentConfig, name: "EnvironmentConfig"))
     ClusterRestrictedInstanceGroupSpecification.type = Types::ClusterRestrictedInstanceGroupSpecification
     ClusterRestrictedInstanceGroupSpecifications.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterRestrictedInstanceGroupSpecification, name: "member"))
+    ClusterRestrictedInstanceGroupsConfig.add_member(:shared_environment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSharedEnvironmentConfig, name: "SharedEnvironmentConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterRestrictedInstanceGroupsConfig.type = Types::ClusterRestrictedInstanceGroupsConfig
+    ClusterRestrictedInstanceGroupsConfigOutput.add_member(:shared_environment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSharedEnvironmentConfigDetails, name: "SharedEnvironmentConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterRestrictedInstanceGroupsConfigOutput.type = Types::ClusterRestrictedInstanceGroupsConfigOutput
     ClusterSchedulerConfigSummary.add_member(:cluster_scheduler_config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSchedulerConfigArn, name: "ClusterSchedulerConfigArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterSchedulerConfigSummary.add_member(:cluster_scheduler_config_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSchedulerConfigId, name: "ClusterSchedulerConfigId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterSchedulerConfigSummary.add_member(:cluster_scheduler_config_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ClusterSchedulerConfigVersion"))
@@ -3947,8 +4921,29 @@ module Aws::SageMaker
     ClusterSchedulerConfigSummary.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterArn, name: "ClusterArn"))
     ClusterSchedulerConfigSummary.type = Types::ClusterSchedulerConfigSummary
     ClusterSchedulerConfigSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSchedulerConfigSummary, name: "member"))
+    ClusterSharedEnvironmentConfig.add_member(:f_sx_lustre_deletion_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterFSxLustreDeletionPolicy, name: "FSxLustreDeletionPolicy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterSharedEnvironmentConfig.add_member(:f_sx_lustre_config, ::Smithy::Schema::Shapes::MemberShape.new(target: FSxLustreConfig, name: "FSxLustreConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ClusterSharedEnvironmentConfig.type = Types::ClusterSharedEnvironmentConfig
+    ClusterSharedEnvironmentConfigDetails.add_member(:current_f_sx_lustre_config, ::Smithy::Schema::Shapes::MemberShape.new(target: FSxLustreConfig, name: "CurrentFSxLustreConfig"))
+    ClusterSharedEnvironmentConfigDetails.add_member(:desired_f_sx_lustre_config, ::Smithy::Schema::Shapes::MemberShape.new(target: FSxLustreConfig, name: "DesiredFSxLustreConfig"))
+    ClusterSharedEnvironmentConfigDetails.add_member(:current_f_sx_lustre_deletion_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterFSxLustreDeletionPolicy, name: "CurrentFSxLustreDeletionPolicy"))
+    ClusterSharedEnvironmentConfigDetails.add_member(:desired_f_sx_lustre_deletion_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterFSxLustreDeletionPolicy, name: "DesiredFSxLustreDeletionPolicy"))
+    ClusterSharedEnvironmentConfigDetails.type = Types::ClusterSharedEnvironmentConfigDetails
+    ClusterSlurmConfig.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSlurmNodeType, name: "NodeType", traits: {"smithy.api#required" => {}}))
+    ClusterSlurmConfig.add_member(:partition_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPartitionNames, name: "PartitionNames"))
+    ClusterSlurmConfig.type = Types::ClusterSlurmConfig
+    ClusterSlurmConfigDetails.add_member(:node_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterSlurmNodeType, name: "NodeType", traits: {"smithy.api#required" => {}}))
+    ClusterSlurmConfigDetails.add_member(:partition_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterPartitionNames, name: "PartitionNames"))
+    ClusterSlurmConfigDetails.type = Types::ClusterSlurmConfigDetails
+    ClusterSlurmConfigStrategy.add_member(:overwrite, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OVERWRITE", traits: {"smithy.api#enumValue" => "Overwrite"}))
+    ClusterSlurmConfigStrategy.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED", traits: {"smithy.api#enumValue" => "Managed"}))
+    ClusterSlurmConfigStrategy.add_member(:merge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MERGE", traits: {"smithy.api#enumValue" => "Merge"}))
+    ClusterSlurmNodeType.add_member(:controller, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTROLLER", traits: {"smithy.api#enumValue" => "Controller"}))
+    ClusterSlurmNodeType.add_member(:login, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOGIN", traits: {"smithy.api#enumValue" => "Login"}))
+    ClusterSlurmNodeType.add_member(:compute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPUTE", traits: {"smithy.api#enumValue" => "Compute"}))
     ClusterSortBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CREATION_TIME"}))
     ClusterSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    ClusterSpotOptions.type = Types::ClusterSpotOptions
     ClusterStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
     ClusterStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
     ClusterStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
@@ -3962,6 +4957,7 @@ module Aws::SageMaker
     ClusterSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterSummary.add_member(:cluster_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterStatus, name: "ClusterStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterSummary.add_member(:training_plan_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArns, name: "TrainingPlanArns"))
+    ClusterSummary.add_member(:image_version_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterImageVersionStatus, name: "ImageVersionStatus"))
     ClusterSummary.type = Types::ClusterSummary
     ClusterTieredStorageConfig.add_member(:mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterConfigMode, name: "Mode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ClusterTieredStorageConfig.add_member(:instance_memory_allocation_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceMemoryAllocationPercentage, name: "InstanceMemoryAllocationPercentage"))
@@ -4042,6 +5038,7 @@ module Aws::SageMaker
     ComputeQuotaResourceConfig.add_member(:accelerators, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorsAmount, name: "Accelerators"))
     ComputeQuotaResourceConfig.add_member(:v_cpu, ::Smithy::Schema::Shapes::MemberShape.new(target: VCpuAmount, name: "VCpu"))
     ComputeQuotaResourceConfig.add_member(:memory_in_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: MemoryInGiBAmount, name: "MemoryInGiB"))
+    ComputeQuotaResourceConfig.add_member(:accelerator_partition, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceleratorPartitionConfig, name: "AcceleratorPartition"))
     ComputeQuotaResourceConfig.type = Types::ComputeQuotaResourceConfig
     ComputeQuotaResourceConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeQuotaResourceConfig, name: "member"))
     ComputeQuotaSummary.add_member(:compute_quota_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeQuotaArn, name: "ComputeQuotaArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -4082,9 +5079,12 @@ module Aws::SageMaker
     ContainerDefinition.add_member(:model_package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionedArnOrName, name: "ModelPackageName"))
     ContainerDefinition.add_member(:inference_specification_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceSpecificationName, name: "InferenceSpecificationName"))
     ContainerDefinition.add_member(:multi_model_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiModelConfig, name: "MultiModelConfig"))
+    ContainerDefinition.add_member(:container_metrics_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerMetricsConfig, name: "ContainerMetricsConfig"))
     ContainerDefinition.type = Types::ContainerDefinition
     ContainerDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDefinition, name: "member"))
     ContainerEntrypoint.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerEntrypointString, name: "member"))
+    ContainerMetricsConfig.add_member(:metrics_endpoints, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsEndpointList, name: "MetricsEndpoints"))
+    ContainerMetricsConfig.type = Types::ContainerMetricsConfig
     ContainerMode.add_member(:single_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_MODEL", traits: {"smithy.api#enumValue" => "SingleModel"}))
     ContainerMode.add_member(:multi_model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTI_MODEL", traits: {"smithy.api#enumValue" => "MultiModel"}))
     ContentClassifier.add_member(:free_of_personally_identifiable_information, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", traits: {"smithy.api#enumValue" => "FreeOfPersonallyIdentifiableInformation"}))
@@ -4114,6 +5114,37 @@ module Aws::SageMaker
     ContinuousParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContinuousParameterRange, name: "member"))
     ConvergenceDetected.add_member(:complete_on_convergence, ::Smithy::Schema::Shapes::MemberShape.new(target: CompleteOnConvergence, name: "CompleteOnConvergence"))
     ConvergenceDetected.type = Types::ConvergenceDetected
+    CreateAIBenchmarkJobRequest.add_member(:ai_benchmark_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIBenchmarkJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIBenchmarkJobRequest.add_member(:benchmark_target, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkTarget, name: "BenchmarkTarget", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIBenchmarkJobRequest.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkOutputConfig, name: "OutputConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIBenchmarkJobRequest.add_member(:ai_workload_config_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AIResourceIdentifier, name: "AIWorkloadConfigIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIBenchmarkJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIBenchmarkJobRequest.add_member(:network_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkNetworkConfig, name: "NetworkConfig"))
+    CreateAIBenchmarkJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateAIBenchmarkJobRequest.type = Types::CreateAIBenchmarkJobRequest
+    CreateAIBenchmarkJobResponse.add_member(:ai_benchmark_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobArn, name: "AIBenchmarkJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIBenchmarkJobResponse.type = Types::CreateAIBenchmarkJobResponse
+    CreateAIRecommendationJobRequest.add_member(:ai_recommendation_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIRecommendationJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIRecommendationJobRequest.add_member(:model_source, ::Smithy::Schema::Shapes::MemberShape.new(target: AIModelSource, name: "ModelSource", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIRecommendationJobRequest.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationOutputConfig, name: "OutputConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIRecommendationJobRequest.add_member(:ai_workload_config_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AIResourceIdentifier, name: "AIWorkloadConfigIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIRecommendationJobRequest.add_member(:performance_target, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationPerformanceTarget, name: "PerformanceTarget", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIRecommendationJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIRecommendationJobRequest.add_member(:inference_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInferenceSpecification, name: "InferenceSpecification"))
+    CreateAIRecommendationJobRequest.add_member(:optimize_model, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationAllowOptimization, name: "OptimizeModel"))
+    CreateAIRecommendationJobRequest.add_member(:compute_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationComputeSpec, name: "ComputeSpec"))
+    CreateAIRecommendationJobRequest.add_member(:adapter_source, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterSource, name: "AdapterSource"))
+    CreateAIRecommendationJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateAIRecommendationJobRequest.type = Types::CreateAIRecommendationJobRequest
+    CreateAIRecommendationJobResponse.add_member(:ai_recommendation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobArn, name: "AIRecommendationJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIRecommendationJobResponse.type = Types::CreateAIRecommendationJobResponse
+    CreateAIWorkloadConfigRequest.add_member(:ai_workload_config_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIWorkloadConfigName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIWorkloadConfigRequest.add_member(:dataset_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIDatasetConfig, name: "DatasetConfig"))
+    CreateAIWorkloadConfigRequest.add_member(:ai_workload_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadConfigs, name: "AIWorkloadConfigs"))
+    CreateAIWorkloadConfigRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateAIWorkloadConfigRequest.type = Types::CreateAIWorkloadConfigRequest
+    CreateAIWorkloadConfigResponse.add_member(:ai_workload_config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadConfigArn, name: "AIWorkloadConfigArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateAIWorkloadConfigResponse.type = Types::CreateAIWorkloadConfigResponse
     CreateActionRequest.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityName, name: "ActionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateActionRequest.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionSource, name: "Source", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateActionRequest.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "ActionType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -4193,6 +5224,7 @@ module Aws::SageMaker
     CreateClusterRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterName, name: "ClusterName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateClusterRequest.add_member(:instance_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupSpecifications, name: "InstanceGroups", traits: {"smithy.api#clientOptional" => {}}))
     CreateClusterRequest.add_member(:restricted_instance_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterRestrictedInstanceGroupSpecifications, name: "RestrictedInstanceGroups"))
+    CreateClusterRequest.add_member(:restricted_instance_groups_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterRestrictedInstanceGroupsConfig, name: "RestrictedInstanceGroupsConfig"))
     CreateClusterRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
     CreateClusterRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateClusterRequest.add_member(:orchestrator, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterOrchestrator, name: "Orchestrator"))
@@ -4281,6 +5313,7 @@ module Aws::SageMaker
     CreateDomainRequest.add_member(:home_efs_file_system_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "HomeEfsFileSystemKmsKeyId", traits: {"smithy.api#deprecated" => {"message" => "This property is deprecated, use KmsKeyId instead."}}))
     CreateDomainRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId"))
     CreateDomainRequest.add_member(:app_security_group_management, ::Smithy::Schema::Shapes::MemberShape.new(target: AppSecurityGroupManagement, name: "AppSecurityGroupManagement"))
+    CreateDomainRequest.add_member(:home_efs_file_system_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeEfsFileSystemCreation, name: "HomeEfsFileSystemCreation"))
     CreateDomainRequest.add_member(:tag_propagation, ::Smithy::Schema::Shapes::MemberShape.new(target: TagPropagation, name: "TagPropagation"))
     CreateDomainRequest.add_member(:default_space_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultSpaceSettings, name: "DefaultSpaceSettings"))
     CreateDomainRequest.type = Types::CreateDomainRequest
@@ -4319,6 +5352,7 @@ module Aws::SageMaker
     CreateEndpointConfigInput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "ExecutionRoleArn"))
     CreateEndpointConfigInput.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
     CreateEndpointConfigInput.add_member(:enable_network_isolation, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableNetworkIsolation"))
+    CreateEndpointConfigInput.add_member(:metrics_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsConfig, name: "MetricsConfig"))
     CreateEndpointConfigInput.type = Types::CreateEndpointConfigInput
     CreateEndpointConfigOutput.add_member(:endpoint_config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfigArn, name: "EndpointConfigArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateEndpointConfigOutput.type = Types::CreateEndpointConfigOutput
@@ -4429,7 +5463,8 @@ module Aws::SageMaker
     CreateInferenceComponentInput.add_member(:inference_component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentName, name: "InferenceComponentName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateInferenceComponentInput.add_member(:endpoint_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointName, name: "EndpointName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateInferenceComponentInput.add_member(:variant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantName, name: "VariantName"))
-    CreateInferenceComponentInput.add_member(:specification, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSpecification, name: "Specification", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateInferenceComponentInput.add_member(:specification, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSpecification, name: "Specification"))
+    CreateInferenceComponentInput.add_member(:specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSpecificationList, name: "Specifications"))
     CreateInferenceComponentInput.add_member(:runtime_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentRuntimeConfig, name: "RuntimeConfig"))
     CreateInferenceComponentInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateInferenceComponentInput.type = Types::CreateInferenceComponentInput
@@ -4460,6 +5495,15 @@ module Aws::SageMaker
     CreateInferenceRecommendationsJobRequest.type = Types::CreateInferenceRecommendationsJobRequest
     CreateInferenceRecommendationsJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationJobArn, name: "JobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateInferenceRecommendationsJobResponse.type = Types::CreateInferenceRecommendationsJobResponse
+    CreateJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateJobRequest.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateJobRequest.add_member(:job_config_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSchemaVersion, name: "JobConfigSchemaVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateJobRequest.add_member(:job_config_document, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfigDocument, name: "JobConfigDocument", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateJobRequest.type = Types::CreateJobRequest
+    CreateJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, name: "JobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateJobResponse.type = Types::CreateJobResponse
     CreateLabelingJobRequest.add_member(:labeling_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelingJobName, name: "LabelingJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateLabelingJobRequest.add_member(:label_attribute_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelAttributeName, name: "LabelAttributeName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateLabelingJobRequest.add_member(:input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelingJobInputConfig, name: "InputConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -4473,6 +5517,18 @@ module Aws::SageMaker
     CreateLabelingJobRequest.type = Types::CreateLabelingJobRequest
     CreateLabelingJobResponse.add_member(:labeling_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelingJobArn, name: "LabelingJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateLabelingJobResponse.type = Types::CreateLabelingJobResponse
+    CreateMlflowAppRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateMlflowAppRequest.add_member(:artifact_store_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "ArtifactStoreUri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateMlflowAppRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateMlflowAppRequest.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId"))
+    CreateMlflowAppRequest.add_member(:model_registration_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelRegistrationMode, name: "ModelRegistrationMode"))
+    CreateMlflowAppRequest.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyMaintenanceWindowStart, name: "WeeklyMaintenanceWindowStart"))
+    CreateMlflowAppRequest.add_member(:account_default_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDefaultStatus, name: "AccountDefaultStatus"))
+    CreateMlflowAppRequest.add_member(:default_domain_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultDomainIdList, name: "DefaultDomainIdList"))
+    CreateMlflowAppRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateMlflowAppRequest.type = Types::CreateMlflowAppRequest
+    CreateMlflowAppResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppArn, name: "Arn"))
+    CreateMlflowAppResponse.type = Types::CreateMlflowAppResponse
     CreateMlflowTrackingServerRequest.add_member(:tracking_server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerName, name: "TrackingServerName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateMlflowTrackingServerRequest.add_member(:artifact_store_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "ArtifactStoreUri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateMlflowTrackingServerRequest.add_member(:tracking_server_size, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerSize, name: "TrackingServerSize"))
@@ -4481,6 +5537,8 @@ module Aws::SageMaker
     CreateMlflowTrackingServerRequest.add_member(:automatic_model_registration, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutomaticModelRegistration"))
     CreateMlflowTrackingServerRequest.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyMaintenanceWindowStart, name: "WeeklyMaintenanceWindowStart"))
     CreateMlflowTrackingServerRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateMlflowTrackingServerRequest.add_member(:s3_bucket_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "S3BucketOwnerAccountId"))
+    CreateMlflowTrackingServerRequest.add_member(:s3_bucket_owner_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "S3BucketOwnerVerification"))
     CreateMlflowTrackingServerRequest.type = Types::CreateMlflowTrackingServerRequest
     CreateMlflowTrackingServerResponse.add_member(:tracking_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerArn, name: "TrackingServerArn"))
     CreateMlflowTrackingServerResponse.type = Types::CreateMlflowTrackingServerResponse
@@ -4539,12 +5597,14 @@ module Aws::SageMaker
     CreateModelPackageGroupInput.add_member(:model_package_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "ModelPackageGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateModelPackageGroupInput.add_member(:model_package_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "ModelPackageGroupDescription"))
     CreateModelPackageGroupInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateModelPackageGroupInput.add_member(:managed_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedConfiguration, name: "ManagedConfiguration"))
     CreateModelPackageGroupInput.type = Types::CreateModelPackageGroupInput
     CreateModelPackageGroupOutput.add_member(:model_package_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageGroupArn, name: "ModelPackageGroupArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateModelPackageGroupOutput.type = Types::CreateModelPackageGroupOutput
     CreateModelPackageInput.add_member(:model_package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "ModelPackageName"))
     CreateModelPackageInput.add_member(:model_package_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ArnOrName, name: "ModelPackageGroupName"))
     CreateModelPackageInput.add_member(:model_package_description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "ModelPackageDescription"))
+    CreateModelPackageInput.add_member(:model_package_registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageRegistrationType, name: "ModelPackageRegistrationType"))
     CreateModelPackageInput.add_member(:inference_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceSpecification, name: "InferenceSpecification"))
     CreateModelPackageInput.add_member(:validation_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageValidationSpecification, name: "ValidationSpecification"))
     CreateModelPackageInput.add_member(:source_algorithm_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceAlgorithmSpecification, name: "SourceAlgorithmSpecification"))
@@ -4565,6 +5625,7 @@ module Aws::SageMaker
     CreateModelPackageInput.add_member(:security_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageSecurityConfig, name: "SecurityConfig"))
     CreateModelPackageInput.add_member(:model_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageModelCard, name: "ModelCard"))
     CreateModelPackageInput.add_member(:model_life_cycle, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelLifeCycle, name: "ModelLifeCycle"))
+    CreateModelPackageInput.add_member(:managed_storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedStorageType, name: "ManagedStorageType"))
     CreateModelPackageInput.type = Types::CreateModelPackageInput
     CreateModelPackageOutput.add_member(:model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "ModelPackageArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateModelPackageOutput.type = Types::CreateModelPackageOutput
@@ -4618,12 +5679,14 @@ module Aws::SageMaker
     CreateOptimizationJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateOptimizationJobRequest.add_member(:model_source, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobModelSource, name: "ModelSource", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateOptimizationJobRequest.add_member(:deployment_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobDeploymentInstanceType, name: "DeploymentInstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateOptimizationJobRequest.add_member(:max_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobMaxInstanceCount, name: "MaxInstanceCount"))
     CreateOptimizationJobRequest.add_member(:optimization_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobEnvironmentVariables, name: "OptimizationEnvironment"))
     CreateOptimizationJobRequest.add_member(:optimization_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationConfigs, name: "OptimizationConfigs", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateOptimizationJobRequest.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobOutputConfig, name: "OutputConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateOptimizationJobRequest.add_member(:stopping_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StoppingCondition, name: "StoppingCondition", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateOptimizationJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateOptimizationJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationVpcConfig, name: "VpcConfig"))
+    CreateOptimizationJobRequest.add_member(:training_plan_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobTrainingPlanArns, name: "TrainingPlanArns"))
     CreateOptimizationJobRequest.type = Types::CreateOptimizationJobRequest
     CreateOptimizationJobResponse.add_member(:optimization_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobArn, name: "OptimizationJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateOptimizationJobResponse.type = Types::CreateOptimizationJobResponse
@@ -4640,8 +5703,10 @@ module Aws::SageMaker
     CreatePartnerAppRequest.add_member(:maintenance_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppMaintenanceConfig, name: "MaintenanceConfig"))
     CreatePartnerAppRequest.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString64, name: "Tier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreatePartnerAppRequest.add_member(:application_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppConfig, name: "ApplicationConfig"))
+    CreatePartnerAppRequest.add_member(:idc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IdcConfigInput, name: "IdcConfig"))
     CreatePartnerAppRequest.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppAuthType, name: "AuthType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreatePartnerAppRequest.add_member(:enable_iam_session_based_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableIamSessionBasedIdentity"))
+    CreatePartnerAppRequest.add_member(:enable_auto_minor_version_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableAutoMinorVersionUpgrade"))
     CreatePartnerAppRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreatePartnerAppRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreatePartnerAppRequest.type = Types::CreatePartnerAppRequest
@@ -4668,6 +5733,12 @@ module Aws::SageMaker
     CreatePresignedDomainUrlRequest.type = Types::CreatePresignedDomainUrlRequest
     CreatePresignedDomainUrlResponse.add_member(:authorized_url, ::Smithy::Schema::Shapes::MemberShape.new(target: PresignedDomainUrl, name: "AuthorizedUrl"))
     CreatePresignedDomainUrlResponse.type = Types::CreatePresignedDomainUrlResponse
+    CreatePresignedMlflowAppUrlRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppArn, name: "Arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreatePresignedMlflowAppUrlRequest.add_member(:expires_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiresInSeconds, name: "ExpiresInSeconds"))
+    CreatePresignedMlflowAppUrlRequest.add_member(:session_expiration_duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionExpirationDurationInSeconds, name: "SessionExpirationDurationInSeconds"))
+    CreatePresignedMlflowAppUrlRequest.type = Types::CreatePresignedMlflowAppUrlRequest
+    CreatePresignedMlflowAppUrlResponse.add_member(:authorized_url, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppUrl, name: "AuthorizedUrl"))
+    CreatePresignedMlflowAppUrlResponse.type = Types::CreatePresignedMlflowAppUrlResponse
     CreatePresignedMlflowTrackingServerUrlRequest.add_member(:tracking_server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerName, name: "TrackingServerName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreatePresignedMlflowTrackingServerUrlRequest.add_member(:expires_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ExpiresInSeconds, name: "ExpiresInSeconds"))
     CreatePresignedMlflowTrackingServerUrlRequest.add_member(:session_expiration_duration_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionExpirationDurationInSeconds, name: "SessionExpirationDurationInSeconds"))
@@ -4724,13 +5795,13 @@ module Aws::SageMaker
     CreateTemplateProviderList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateTemplateProvider, name: "member"))
     CreateTrainingJobRequest.add_member(:training_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobName, name: "TrainingJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateTrainingJobRequest.add_member(:hyper_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HyperParameters, name: "HyperParameters"))
-    CreateTrainingJobRequest.add_member(:algorithm_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmSpecification, name: "AlgorithmSpecification", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateTrainingJobRequest.add_member(:algorithm_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmSpecification, name: "AlgorithmSpecification", traits: {"smithy.api#clientOptional" => {}}))
     CreateTrainingJobRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateTrainingJobRequest.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, name: "InputDataConfig"))
     CreateTrainingJobRequest.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, name: "OutputDataConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    CreateTrainingJobRequest.add_member(:resource_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfig, name: "ResourceConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateTrainingJobRequest.add_member(:resource_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfig, name: "ResourceConfig", traits: {"smithy.api#clientOptional" => {}}))
     CreateTrainingJobRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
-    CreateTrainingJobRequest.add_member(:stopping_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StoppingCondition, name: "StoppingCondition", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateTrainingJobRequest.add_member(:stopping_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StoppingCondition, name: "StoppingCondition", traits: {"smithy.api#clientOptional" => {}}))
     CreateTrainingJobRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     CreateTrainingJobRequest.add_member(:enable_network_isolation, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableNetworkIsolation"))
     CreateTrainingJobRequest.add_member(:enable_inter_container_traffic_encryption, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableInterContainerTrafficEncryption"))
@@ -4747,6 +5818,9 @@ module Aws::SageMaker
     CreateTrainingJobRequest.add_member(:remote_debug_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDebugConfig, name: "RemoteDebugConfig"))
     CreateTrainingJobRequest.add_member(:infra_check_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InfraCheckConfig, name: "InfraCheckConfig"))
     CreateTrainingJobRequest.add_member(:session_chaining_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionChainingConfig, name: "SessionChainingConfig"))
+    CreateTrainingJobRequest.add_member(:serverless_job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessJobConfig, name: "ServerlessJobConfig"))
+    CreateTrainingJobRequest.add_member(:mlflow_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowConfig, name: "MlflowConfig"))
+    CreateTrainingJobRequest.add_member(:model_package_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageConfig, name: "ModelPackageConfig"))
     CreateTrainingJobRequest.type = Types::CreateTrainingJobRequest
     CreateTrainingJobResponse.add_member(:training_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobArn, name: "TrainingJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateTrainingJobResponse.type = Types::CreateTrainingJobResponse
@@ -4757,6 +5831,17 @@ module Aws::SageMaker
     CreateTrainingPlanRequest.type = Types::CreateTrainingPlanRequest
     CreateTrainingPlanResponse.add_member(:training_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArn, name: "TrainingPlanArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateTrainingPlanResponse.type = Types::CreateTrainingPlanResponse
+    CreateTrainingSessionRequest.add_member(:training_session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionName, name: "TrainingSessionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateTrainingSessionRequest.add_member(:model_package_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageGroupArn, name: "ModelPackageGroupArn", traits: {"smithy.api#clientOptional" => {}}))
+    CreateTrainingSessionRequest.add_member(:lora_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LoraConfig, name: "LoraConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateTrainingSessionRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateTrainingSessionRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
+    CreateTrainingSessionRequest.add_member(:model_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionModelConfig, name: "ModelConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateTrainingSessionRequest.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionOutputConfig, name: "OutputConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateTrainingSessionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    CreateTrainingSessionRequest.type = Types::CreateTrainingSessionRequest
+    CreateTrainingSessionResponse.add_member(:training_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionArn, name: "TrainingSessionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    CreateTrainingSessionResponse.type = Types::CreateTrainingSessionResponse
     CreateTransformJobRequest.add_member(:transform_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformJobName, name: "TransformJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateTransformJobRequest.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateTransformJobRequest.add_member(:max_concurrent_transforms, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxConcurrentTransforms, name: "MaxConcurrentTransforms"))
@@ -4854,6 +5939,10 @@ module Aws::SageMaker
     CustomerMetadataKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerMetadataKey, name: "member"))
     CustomerMetadataMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerMetadataKey, name: "key"))
     CustomerMetadataMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerMetadataValue, name: "value"))
+    CustomizationTechnique.add_member(:sft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SFT", traits: {"smithy.api#enumValue" => "SFT"}))
+    CustomizationTechnique.add_member(:dpo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DPO", traits: {"smithy.api#enumValue" => "DPO"}))
+    CustomizationTechnique.add_member(:rlvr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RLVR", traits: {"smithy.api#enumValue" => "RLVR"}))
+    CustomizationTechnique.add_member(:rlaif, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RLAIF", traits: {"smithy.api#enumValue" => "RLAIF"}))
     CustomizedMetricSpecification.add_member(:metric_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MetricName"))
     CustomizedMetricSpecification.add_member(:namespace, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Namespace"))
     CustomizedMetricSpecification.add_member(:statistic, ::Smithy::Schema::Shapes::MemberShape.new(target: Statistic, name: "Statistic"))
@@ -4897,15 +5986,25 @@ module Aws::SageMaker
     DataQualityJobInput.type = Types::DataQualityJobInput
     DataSource.add_member(:s3_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: S3DataSource, name: "S3DataSource"))
     DataSource.add_member(:file_system_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemDataSource, name: "FileSystemDataSource"))
+    DataSource.add_member(:dataset_source, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetSource, name: "DatasetSource"))
     DataSource.type = Types::DataSource
     DataSourceName.add_member(:salesforce_genie, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SalesforceGenie", traits: {"smithy.api#enumValue" => "SalesforceGenie"}))
     DataSourceName.add_member(:snowflake, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Snowflake", traits: {"smithy.api#enumValue" => "Snowflake"}))
+    DatabaseConfigurationMetadata.add_member(:rollback_status, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseConfigurationRollbackStatus, name: "RollbackStatus"))
+    DatabaseConfigurationMetadata.add_member(:advisory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Advisory"))
+    DatabaseConfigurationMetadata.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureMessage"))
+    DatabaseConfigurationMetadata.type = Types::DatabaseConfigurationMetadata
+    DatabaseConfigurationRollbackStatus.add_member(:not_applicable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_APPLICABLE", traits: {"smithy.api#enumValue" => "NotApplicable"}))
+    DatabaseConfigurationRollbackStatus.add_member(:reverted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVERTED", traits: {"smithy.api#enumValue" => "Reverted"}))
+    DatabaseConfigurationRollbackStatus.add_member(:revert_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVERT_FAILED", traits: {"smithy.api#enumValue" => "RevertFailed"}))
     DatasetDefinition.add_member(:athena_dataset_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaDatasetDefinition, name: "AthenaDatasetDefinition"))
     DatasetDefinition.add_member(:redshift_dataset_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: RedshiftDatasetDefinition, name: "RedshiftDatasetDefinition"))
     DatasetDefinition.add_member(:local_path, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingLocalPath, name: "LocalPath"))
     DatasetDefinition.add_member(:data_distribution_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DataDistributionType, name: "DataDistributionType"))
     DatasetDefinition.add_member(:input_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: InputMode, name: "InputMode"))
     DatasetDefinition.type = Types::DatasetDefinition
+    DatasetSource.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HubDataSetArn, name: "DatasetArn", traits: {"smithy.api#required" => {}}))
+    DatasetSource.type = Types::DatasetSource
     DebugHookConfig.add_member(:local_path, ::Smithy::Schema::Shapes::MemberShape.new(target: DirectoryPath, name: "LocalPath"))
     DebugHookConfig.add_member(:s3_output_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3OutputPath", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DebugHookConfig.add_member(:hook_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HookParameters, name: "HookParameters"))
@@ -4927,8 +6026,11 @@ module Aws::SageMaker
     DebugRuleEvaluationStatus.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     DebugRuleEvaluationStatus.type = Types::DebugRuleEvaluationStatus
     DebugRuleEvaluationStatuses.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DebugRuleEvaluationStatus, name: "member"))
+    DeepHealthCheckConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupHealthCheckConfiguration, name: "member"))
     DeepHealthCheckType.add_member(:instance_stress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_STRESS", traits: {"smithy.api#enumValue" => "InstanceStress"}))
     DeepHealthCheckType.add_member(:instance_connectivity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_CONNECTIVITY", traits: {"smithy.api#enumValue" => "InstanceConnectivity"}))
+    DeepHealthChecks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeepHealthCheckType, name: "member"))
+    DefaultDomainIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "member"))
     DefaultEbsStorageSettings.add_member(:default_ebs_volume_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceEbsVolumeSizeInGb, name: "DefaultEbsVolumeSizeInGb", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DefaultEbsStorageSettings.add_member(:maximum_ebs_volume_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: SpaceEbsVolumeSizeInGb, name: "MaximumEbsVolumeSizeInGb", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DefaultEbsStorageSettings.type = Types::DefaultEbsStorageSettings
@@ -4943,6 +6045,18 @@ module Aws::SageMaker
     DefaultSpaceSettings.type = Types::DefaultSpaceSettings
     DefaultSpaceStorageSettings.add_member(:default_ebs_storage_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultEbsStorageSettings, name: "DefaultEbsStorageSettings"))
     DefaultSpaceStorageSettings.type = Types::DefaultSpaceStorageSettings
+    DeleteAIBenchmarkJobRequest.add_member(:ai_benchmark_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIBenchmarkJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteAIBenchmarkJobRequest.type = Types::DeleteAIBenchmarkJobRequest
+    DeleteAIBenchmarkJobResponse.add_member(:ai_benchmark_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobArn, name: "AIBenchmarkJobArn"))
+    DeleteAIBenchmarkJobResponse.type = Types::DeleteAIBenchmarkJobResponse
+    DeleteAIRecommendationJobRequest.add_member(:ai_recommendation_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIRecommendationJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteAIRecommendationJobRequest.type = Types::DeleteAIRecommendationJobRequest
+    DeleteAIRecommendationJobResponse.add_member(:ai_recommendation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobArn, name: "AIRecommendationJobArn"))
+    DeleteAIRecommendationJobResponse.type = Types::DeleteAIRecommendationJobResponse
+    DeleteAIWorkloadConfigRequest.add_member(:ai_workload_config_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIWorkloadConfigName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteAIWorkloadConfigRequest.type = Types::DeleteAIWorkloadConfigRequest
+    DeleteAIWorkloadConfigResponse.add_member(:ai_workload_config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadConfigArn, name: "AIWorkloadConfigArn"))
+    DeleteAIWorkloadConfigResponse.type = Types::DeleteAIWorkloadConfigResponse
     DeleteActionRequest.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityName, name: "ActionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteActionRequest.type = Types::DeleteActionRequest
     DeleteActionResponse.add_member(:action_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionArn, name: "ActionArn"))
@@ -5039,6 +6153,14 @@ module Aws::SageMaker
     DeleteInferenceExperimentRequest.type = Types::DeleteInferenceExperimentRequest
     DeleteInferenceExperimentResponse.add_member(:inference_experiment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceExperimentArn, name: "InferenceExperimentArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteInferenceExperimentResponse.type = Types::DeleteInferenceExperimentResponse
+    DeleteJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteJobRequest.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteJobRequest.type = Types::DeleteJobRequest
+    DeleteJobResponse.type = Types::DeleteJobResponse
+    DeleteMlflowAppRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppArn, name: "Arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteMlflowAppRequest.type = Types::DeleteMlflowAppRequest
+    DeleteMlflowAppResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppArn, name: "Arn"))
+    DeleteMlflowAppResponse.type = Types::DeleteMlflowAppResponse
     DeleteMlflowTrackingServerRequest.add_member(:tracking_server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerName, name: "TrackingServerName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteMlflowTrackingServerRequest.type = Types::DeleteMlflowTrackingServerRequest
     DeleteMlflowTrackingServerResponse.add_member(:tracking_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerArn, name: "TrackingServerArn"))
@@ -5077,6 +6199,8 @@ module Aws::SageMaker
     DeletePipelineRequest.type = Types::DeletePipelineRequest
     DeletePipelineResponse.add_member(:pipeline_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineArn, name: "PipelineArn"))
     DeletePipelineResponse.type = Types::DeletePipelineResponse
+    DeleteProcessingJobRequest.add_member(:processing_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingJobName, name: "ProcessingJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteProcessingJobRequest.type = Types::DeleteProcessingJobRequest
     DeleteProjectInput.add_member(:project_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProjectEntityName, name: "ProjectName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteProjectInput.type = Types::DeleteProjectInput
     DeleteSpaceRequest.add_member(:domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainId, name: "DomainId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5088,6 +6212,11 @@ module Aws::SageMaker
     DeleteTagsInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteTagsInput.type = Types::DeleteTagsInput
     DeleteTagsOutput.type = Types::DeleteTagsOutput
+    DeleteTrainingJobRequest.add_member(:training_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobName, name: "TrainingJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteTrainingJobRequest.type = Types::DeleteTrainingJobRequest
+    DeleteTrainingSessionRequest.add_member(:training_session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionName, name: "TrainingSessionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DeleteTrainingSessionRequest.type = Types::DeleteTrainingSessionRequest
+    DeleteTrainingSessionResponse.type = Types::DeleteTrainingSessionResponse
     DeleteTrialComponentRequest.add_member(:trial_component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityName, name: "TrialComponentName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DeleteTrialComponentRequest.type = Types::DeleteTrialComponentRequest
     DeleteTrialComponentResponse.add_member(:trial_component_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrialComponentArn, name: "TrialComponentArn"))
@@ -5138,6 +6267,52 @@ module Aws::SageMaker
     DeregisterDevicesRequest.type = Types::DeregisterDevicesRequest
     DerivedInformation.add_member(:derived_data_input_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DataInputConfig, name: "DerivedDataInputConfig"))
     DerivedInformation.type = Types::DerivedInformation
+    DescribeAIBenchmarkJobRequest.add_member(:ai_benchmark_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIBenchmarkJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIBenchmarkJobRequest.type = Types::DescribeAIBenchmarkJobRequest
+    DescribeAIBenchmarkJobResponse.add_member(:ai_benchmark_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIBenchmarkJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIBenchmarkJobResponse.add_member(:ai_benchmark_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobArn, name: "AIBenchmarkJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIBenchmarkJobResponse.add_member(:ai_benchmark_job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobStatus, name: "AIBenchmarkJobStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIBenchmarkJobResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
+    DescribeAIBenchmarkJobResponse.add_member(:benchmark_target, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkTarget, name: "BenchmarkTarget", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIBenchmarkJobResponse.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkOutputResult, name: "OutputConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIBenchmarkJobResponse.add_member(:ai_workload_config_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AIResourceIdentifier, name: "AIWorkloadConfigIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIBenchmarkJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIBenchmarkJobResponse.add_member(:network_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkNetworkConfig, name: "NetworkConfig"))
+    DescribeAIBenchmarkJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIBenchmarkJobResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
+    DescribeAIBenchmarkJobResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    DescribeAIBenchmarkJobResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    DescribeAIBenchmarkJobResponse.type = Types::DescribeAIBenchmarkJobResponse
+    DescribeAIRecommendationJobRequest.add_member(:ai_recommendation_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIRecommendationJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIRecommendationJobRequest.type = Types::DescribeAIRecommendationJobRequest
+    DescribeAIRecommendationJobResponse.add_member(:ai_recommendation_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIRecommendationJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIRecommendationJobResponse.add_member(:ai_recommendation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobArn, name: "AIRecommendationJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIRecommendationJobResponse.add_member(:ai_recommendation_job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobStatus, name: "AIRecommendationJobStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIRecommendationJobResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
+    DescribeAIRecommendationJobResponse.add_member(:model_source, ::Smithy::Schema::Shapes::MemberShape.new(target: AIModelSource, name: "ModelSource", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIRecommendationJobResponse.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationOutputResult, name: "OutputConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIRecommendationJobResponse.add_member(:inference_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationInferenceSpecification, name: "InferenceSpecification"))
+    DescribeAIRecommendationJobResponse.add_member(:ai_workload_config_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AIResourceIdentifier, name: "AIWorkloadConfigIdentifier", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIRecommendationJobResponse.add_member(:optimize_model, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationAllowOptimization, name: "OptimizeModel"))
+    DescribeAIRecommendationJobResponse.add_member(:performance_target, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationPerformanceTarget, name: "PerformanceTarget"))
+    DescribeAIRecommendationJobResponse.add_member(:recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationList, name: "Recommendations"))
+    DescribeAIRecommendationJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIRecommendationJobResponse.add_member(:compute_spec, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationComputeSpec, name: "ComputeSpec"))
+    DescribeAIRecommendationJobResponse.add_member(:adapter_source, ::Smithy::Schema::Shapes::MemberShape.new(target: AIAdapterSource, name: "AdapterSource"))
+    DescribeAIRecommendationJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIRecommendationJobResponse.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
+    DescribeAIRecommendationJobResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    DescribeAIRecommendationJobResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    DescribeAIRecommendationJobResponse.type = Types::DescribeAIRecommendationJobResponse
+    DescribeAIWorkloadConfigRequest.add_member(:ai_workload_config_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIWorkloadConfigName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIWorkloadConfigRequest.type = Types::DescribeAIWorkloadConfigRequest
+    DescribeAIWorkloadConfigResponse.add_member(:ai_workload_config_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIWorkloadConfigName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIWorkloadConfigResponse.add_member(:ai_workload_config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadConfigArn, name: "AIWorkloadConfigArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIWorkloadConfigResponse.add_member(:dataset_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AIDatasetConfig, name: "DatasetConfig"))
+    DescribeAIWorkloadConfigResponse.add_member(:ai_workload_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadConfigs, name: "AIWorkloadConfigs"))
+    DescribeAIWorkloadConfigResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    DescribeAIWorkloadConfigResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeAIWorkloadConfigResponse.type = Types::DescribeAIWorkloadConfigResponse
     DescribeActionRequest.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityNameOrArn, name: "ActionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeActionRequest.type = Types::DescribeActionRequest
     DescribeActionResponse.add_member(:action_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityNameOrArn, name: "ActionName"))
@@ -5284,6 +6459,7 @@ module Aws::SageMaker
     DescribeClusterResponse.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FailureMessage"))
     DescribeClusterResponse.add_member(:instance_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupDetailsList, name: "InstanceGroups", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeClusterResponse.add_member(:restricted_instance_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterRestrictedInstanceGroupDetailsList, name: "RestrictedInstanceGroups"))
+    DescribeClusterResponse.add_member(:restricted_instance_groups_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterRestrictedInstanceGroupsConfigOutput, name: "RestrictedInstanceGroupsConfig"))
     DescribeClusterResponse.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
     DescribeClusterResponse.add_member(:orchestrator, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterOrchestrator, name: "Orchestrator"))
     DescribeClusterResponse.add_member(:tiered_storage_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterTieredStorageConfig, name: "TieredStorageConfig"))
@@ -5301,6 +6477,7 @@ module Aws::SageMaker
     DescribeClusterSchedulerConfigResponse.add_member(:cluster_scheduler_config_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ClusterSchedulerConfigVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeClusterSchedulerConfigResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerResourceStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeClusterSchedulerConfigResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
+    DescribeClusterSchedulerConfigResponse.add_member(:status_details, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusDetailsMap, name: "StatusDetails"))
     DescribeClusterSchedulerConfigResponse.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterArn, name: "ClusterArn"))
     DescribeClusterSchedulerConfigResponse.add_member(:scheduler_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfig, name: "SchedulerConfig"))
     DescribeClusterSchedulerConfigResponse.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "Description"))
@@ -5435,6 +6612,7 @@ module Aws::SageMaker
     DescribeDomainResponse.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "VpcId"))
     DescribeDomainResponse.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId"))
     DescribeDomainResponse.add_member(:app_security_group_management, ::Smithy::Schema::Shapes::MemberShape.new(target: AppSecurityGroupManagement, name: "AppSecurityGroupManagement"))
+    DescribeDomainResponse.add_member(:home_efs_file_system_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeEfsFileSystemCreation, name: "HomeEfsFileSystemCreation"))
     DescribeDomainResponse.add_member(:tag_propagation, ::Smithy::Schema::Shapes::MemberShape.new(target: TagPropagation, name: "TagPropagation"))
     DescribeDomainResponse.add_member(:default_space_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultSpaceSettings, name: "DefaultSpaceSettings"))
     DescribeDomainResponse.type = Types::DescribeDomainResponse
@@ -5486,6 +6664,7 @@ module Aws::SageMaker
     DescribeEndpointConfigOutput.add_member(:execution_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "ExecutionRoleArn"))
     DescribeEndpointConfigOutput.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
     DescribeEndpointConfigOutput.add_member(:enable_network_isolation, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableNetworkIsolation"))
+    DescribeEndpointConfigOutput.add_member(:metrics_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsConfig, name: "MetricsConfig"))
     DescribeEndpointConfigOutput.type = Types::DescribeEndpointConfigOutput
     DescribeEndpointInput.add_member(:endpoint_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointName, name: "EndpointName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeEndpointInput.type = Types::DescribeEndpointInput
@@ -5503,6 +6682,7 @@ module Aws::SageMaker
     DescribeEndpointOutput.add_member(:pending_deployment_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingDeploymentSummary, name: "PendingDeploymentSummary"))
     DescribeEndpointOutput.add_member(:explainer_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ExplainerConfig, name: "ExplainerConfig"))
     DescribeEndpointOutput.add_member(:shadow_production_variants, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantSummaryList, name: "ShadowProductionVariants"))
+    DescribeEndpointOutput.add_member(:metrics_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsConfig, name: "MetricsConfig"))
     DescribeEndpointOutput.type = Types::DescribeEndpointOutput
     DescribeExperimentRequest.add_member(:experiment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityName, name: "ExperimentName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeExperimentRequest.type = Types::DescribeExperimentRequest
@@ -5673,6 +6853,7 @@ module Aws::SageMaker
     DescribeInferenceComponentOutput.add_member(:variant_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantName, name: "VariantName"))
     DescribeInferenceComponentOutput.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
     DescribeInferenceComponentOutput.add_member(:specification, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSpecificationSummary, name: "Specification"))
+    DescribeInferenceComponentOutput.add_member(:specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSpecificationSummaryList, name: "Specifications"))
     DescribeInferenceComponentOutput.add_member(:runtime_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentRuntimeConfigSummary, name: "RuntimeConfig"))
     DescribeInferenceComponentOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeInferenceComponentOutput.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5715,6 +6896,31 @@ module Aws::SageMaker
     DescribeInferenceRecommendationsJobResponse.add_member(:inference_recommendations, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceRecommendations, name: "InferenceRecommendations"))
     DescribeInferenceRecommendationsJobResponse.add_member(:endpoint_performances, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointPerformances, name: "EndpointPerformances"))
     DescribeInferenceRecommendationsJobResponse.type = Types::DescribeInferenceRecommendationsJobResponse
+    DescribeJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobRequest.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobRequest.type = Types::DescribeJobRequest
+    DescribeJobResponse.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, name: "JobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:job_config_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSchemaVersion, name: "JobConfigSchemaVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:job_config_document, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfigDocument, name: "JobConfigDocument"))
+    DescribeJobResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    DescribeJobResponse.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "JobStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:secondary_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSecondaryStatus, name: "SecondaryStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:secondary_status_transitions, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSecondaryStatusTransitions, name: "SecondaryStatusTransitions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
+    DescribeJobResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    DescribeJobResponse.type = Types::DescribeJobResponse
+    DescribeJobSchemaVersionRequest.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobSchemaVersionRequest.add_member(:job_config_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSchemaVersion, name: "JobConfigSchemaVersion"))
+    DescribeJobSchemaVersionRequest.type = Types::DescribeJobSchemaVersionRequest
+    DescribeJobSchemaVersionResponse.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobSchemaVersionResponse.add_member(:job_config_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSchemaVersion, name: "JobConfigSchemaVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobSchemaVersionResponse.add_member(:job_config_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfigDocument, name: "JobConfigSchema", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeJobSchemaVersionResponse.type = Types::DescribeJobSchemaVersionResponse
     DescribeLabelingJobRequest.add_member(:labeling_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelingJobName, name: "LabelingJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeLabelingJobRequest.type = Types::DescribeLabelingJobRequest
     DescribeLabelingJobResponse.add_member(:labeling_job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelingJobStatus, name: "LabelingJobStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5747,6 +6953,25 @@ module Aws::SageMaker
     DescribeLineageGroupResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     DescribeLineageGroupResponse.add_member(:last_modified_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "LastModifiedBy"))
     DescribeLineageGroupResponse.type = Types::DescribeLineageGroupResponse
+    DescribeMlflowAppRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppArn, name: "Arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeMlflowAppRequest.type = Types::DescribeMlflowAppRequest
+    DescribeMlflowAppResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppArn, name: "Arn"))
+    DescribeMlflowAppResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppName, name: "Name"))
+    DescribeMlflowAppResponse.add_member(:artifact_store_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "ArtifactStoreUri"))
+    DescribeMlflowAppResponse.add_member(:mlflow_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowVersion, name: "MlflowVersion"))
+    DescribeMlflowAppResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
+    DescribeMlflowAppResponse.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId"))
+    DescribeMlflowAppResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppStatus, name: "Status"))
+    DescribeMlflowAppResponse.add_member(:model_registration_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelRegistrationMode, name: "ModelRegistrationMode"))
+    DescribeMlflowAppResponse.add_member(:account_default_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDefaultStatus, name: "AccountDefaultStatus"))
+    DescribeMlflowAppResponse.add_member(:default_domain_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultDomainIdList, name: "DefaultDomainIdList"))
+    DescribeMlflowAppResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
+    DescribeMlflowAppResponse.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "CreatedBy"))
+    DescribeMlflowAppResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
+    DescribeMlflowAppResponse.add_member(:last_modified_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "LastModifiedBy"))
+    DescribeMlflowAppResponse.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyMaintenanceWindowStart, name: "WeeklyMaintenanceWindowStart"))
+    DescribeMlflowAppResponse.add_member(:maintenance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: MaintenanceStatus, name: "MaintenanceStatus"))
+    DescribeMlflowAppResponse.type = Types::DescribeMlflowAppResponse
     DescribeMlflowTrackingServerRequest.add_member(:tracking_server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerName, name: "TrackingServerName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeMlflowTrackingServerRequest.type = Types::DescribeMlflowTrackingServerRequest
     DescribeMlflowTrackingServerResponse.add_member(:tracking_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerArn, name: "TrackingServerArn"))
@@ -5765,6 +6990,8 @@ module Aws::SageMaker
     DescribeMlflowTrackingServerResponse.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "CreatedBy"))
     DescribeMlflowTrackingServerResponse.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     DescribeMlflowTrackingServerResponse.add_member(:last_modified_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "LastModifiedBy"))
+    DescribeMlflowTrackingServerResponse.add_member(:s3_bucket_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "S3BucketOwnerAccountId"))
+    DescribeMlflowTrackingServerResponse.add_member(:s3_bucket_owner_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "S3BucketOwnerVerification"))
     DescribeMlflowTrackingServerResponse.type = Types::DescribeMlflowTrackingServerResponse
     DescribeModelBiasJobDefinitionRequest.add_member(:job_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringJobDefinitionName, name: "JobDefinitionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeModelBiasJobDefinitionRequest.type = Types::DescribeModelBiasJobDefinitionRequest
@@ -5795,6 +7022,7 @@ module Aws::SageMaker
     DescribeModelCardExportJobResponse.type = Types::DescribeModelCardExportJobResponse
     DescribeModelCardRequest.add_member(:model_card_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelCardNameOrArn, name: "ModelCardName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeModelCardRequest.add_member(:model_card_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ModelCardVersion"))
+    DescribeModelCardRequest.add_member(:included_data, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedData, name: "IncludedData"))
     DescribeModelCardRequest.type = Types::DescribeModelCardRequest
     DescribeModelCardResponse.add_member(:model_card_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelCardArn, name: "ModelCardArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeModelCardResponse.add_member(:model_card_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "ModelCardName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5843,12 +7071,15 @@ module Aws::SageMaker
     DescribeModelPackageGroupOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeModelPackageGroupOutput.add_member(:created_by, ::Smithy::Schema::Shapes::MemberShape.new(target: UserContext, name: "CreatedBy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeModelPackageGroupOutput.add_member(:model_package_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageGroupStatus, name: "ModelPackageGroupStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeModelPackageGroupOutput.add_member(:managed_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedConfiguration, name: "ManagedConfiguration"))
     DescribeModelPackageGroupOutput.type = Types::DescribeModelPackageGroupOutput
     DescribeModelPackageInput.add_member(:model_package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionedArnOrName, name: "ModelPackageName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeModelPackageInput.add_member(:included_data, ::Smithy::Schema::Shapes::MemberShape.new(target: IncludedData, name: "IncludedData"))
     DescribeModelPackageInput.type = Types::DescribeModelPackageInput
     DescribeModelPackageOutput.add_member(:model_package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "ModelPackageName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeModelPackageOutput.add_member(:model_package_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "ModelPackageGroupName"))
     DescribeModelPackageOutput.add_member(:model_package_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageVersion, name: "ModelPackageVersion"))
+    DescribeModelPackageOutput.add_member(:model_package_registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageRegistrationType, name: "ModelPackageRegistrationType"))
     DescribeModelPackageOutput.add_member(:model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "ModelPackageArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeModelPackageOutput.add_member(:model_package_description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "ModelPackageDescription"))
     DescribeModelPackageOutput.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -5876,6 +7107,7 @@ module Aws::SageMaker
     DescribeModelPackageOutput.add_member(:security_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageSecurityConfig, name: "SecurityConfig"))
     DescribeModelPackageOutput.add_member(:model_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageModelCard, name: "ModelCard"))
     DescribeModelPackageOutput.add_member(:model_life_cycle, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelLifeCycle, name: "ModelLifeCycle"))
+    DescribeModelPackageOutput.add_member(:managed_storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedStorageType, name: "ManagedStorageType"))
     DescribeModelPackageOutput.type = Types::DescribeModelPackageOutput
     DescribeModelQualityJobDefinitionRequest.add_member(:job_definition_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitoringJobDefinitionName, name: "JobDefinitionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeModelQualityJobDefinitionRequest.type = Types::DescribeModelQualityJobDefinitionRequest
@@ -5952,14 +7184,17 @@ module Aws::SageMaker
     DescribeOptimizationJobResponse.add_member(:model_source, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobModelSource, name: "ModelSource", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeOptimizationJobResponse.add_member(:optimization_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobEnvironmentVariables, name: "OptimizationEnvironment"))
     DescribeOptimizationJobResponse.add_member(:deployment_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobDeploymentInstanceType, name: "DeploymentInstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeOptimizationJobResponse.add_member(:max_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobMaxInstanceCount, name: "MaxInstanceCount"))
     DescribeOptimizationJobResponse.add_member(:optimization_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationConfigs, name: "OptimizationConfigs", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeOptimizationJobResponse.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobOutputConfig, name: "OutputConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeOptimizationJobResponse.add_member(:optimization_output, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationOutput, name: "OptimizationOutput"))
     DescribeOptimizationJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeOptimizationJobResponse.add_member(:stopping_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StoppingCondition, name: "StoppingCondition", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeOptimizationJobResponse.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationVpcConfig, name: "VpcConfig"))
+    DescribeOptimizationJobResponse.add_member(:training_plan_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobTrainingPlanArns, name: "TrainingPlanArns"))
     DescribeOptimizationJobResponse.type = Types::DescribeOptimizationJobResponse
     DescribePartnerAppRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppArn, name: "Arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribePartnerAppRequest.add_member(:include_available_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IncludeAvailableUpgrade"))
     DescribePartnerAppRequest.type = Types::DescribePartnerAppRequest
     DescribePartnerAppResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppArn, name: "Arn"))
     DescribePartnerAppResponse.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppName, name: "Name"))
@@ -5977,6 +7212,10 @@ module Aws::SageMaker
     DescribePartnerAppResponse.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppAuthType, name: "AuthType"))
     DescribePartnerAppResponse.add_member(:enable_iam_session_based_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableIamSessionBasedIdentity"))
     DescribePartnerAppResponse.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorInfo, name: "Error"))
+    DescribePartnerAppResponse.add_member(:enable_auto_minor_version_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableAutoMinorVersionUpgrade"))
+    DescribePartnerAppResponse.add_member(:current_version_eol_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CurrentVersionEolDate"))
+    DescribePartnerAppResponse.add_member(:available_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailableUpgrade, name: "AvailableUpgrade"))
+    DescribePartnerAppResponse.add_member(:idc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IdcConfigOutput, name: "IdcConfig"))
     DescribePartnerAppResponse.type = Types::DescribePartnerAppResponse
     DescribePipelineDefinitionForExecutionRequest.add_member(:pipeline_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionArn, name: "PipelineExecutionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribePipelineDefinitionForExecutionRequest.type = Types::DescribePipelineDefinitionForExecutionRequest
@@ -5999,6 +7238,7 @@ module Aws::SageMaker
     DescribePipelineExecutionResponse.add_member(:parallelism_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelismConfiguration, name: "ParallelismConfiguration"))
     DescribePipelineExecutionResponse.add_member(:selective_execution_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveExecutionConfig, name: "SelectiveExecutionConfig"))
     DescribePipelineExecutionResponse.add_member(:pipeline_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVersionId, name: "PipelineVersionId"))
+    DescribePipelineExecutionResponse.add_member(:m_lflow_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MLflowConfiguration, name: "MLflowConfig"))
     DescribePipelineExecutionResponse.type = Types::DescribePipelineExecutionResponse
     DescribePipelineRequest.add_member(:pipeline_name, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineNameOrArn, name: "PipelineName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribePipelineRequest.add_member(:pipeline_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVersionId, name: "PipelineVersionId"))
@@ -6116,11 +7356,11 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:secondary_status, ::Smithy::Schema::Shapes::MemberShape.new(target: SecondaryStatus, name: "SecondaryStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeTrainingJobResponse.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
     DescribeTrainingJobResponse.add_member(:hyper_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HyperParameters, name: "HyperParameters"))
-    DescribeTrainingJobResponse.add_member(:algorithm_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmSpecification, name: "AlgorithmSpecification", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeTrainingJobResponse.add_member(:algorithm_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: AlgorithmSpecification, name: "AlgorithmSpecification"))
     DescribeTrainingJobResponse.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     DescribeTrainingJobResponse.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, name: "InputDataConfig"))
     DescribeTrainingJobResponse.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, name: "OutputDataConfig"))
-    DescribeTrainingJobResponse.add_member(:resource_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfig, name: "ResourceConfig", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeTrainingJobResponse.add_member(:resource_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfig, name: "ResourceConfig"))
     DescribeTrainingJobResponse.add_member(:warm_pool_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmPoolStatus, name: "WarmPoolStatus"))
     DescribeTrainingJobResponse.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
     DescribeTrainingJobResponse.add_member(:stopping_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StoppingCondition, name: "StoppingCondition", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6136,6 +7376,7 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:checkpoint_config, ::Smithy::Schema::Shapes::MemberShape.new(target: CheckpointConfig, name: "CheckpointConfig"))
     DescribeTrainingJobResponse.add_member(:training_time_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingTimeInSeconds, name: "TrainingTimeInSeconds"))
     DescribeTrainingJobResponse.add_member(:billable_time_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: BillableTimeInSeconds, name: "BillableTimeInSeconds"))
+    DescribeTrainingJobResponse.add_member(:billable_token_count, ::Smithy::Schema::Shapes::MemberShape.new(target: BillableTokenCount, name: "BillableTokenCount"))
     DescribeTrainingJobResponse.add_member(:debug_hook_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DebugHookConfig, name: "DebugHookConfig"))
     DescribeTrainingJobResponse.add_member(:experiment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentConfig, name: "ExperimentConfig"))
     DescribeTrainingJobResponse.add_member(:debug_rule_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: DebugRuleConfigurations, name: "DebugRuleConfigurations"))
@@ -6149,8 +7390,21 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:retry_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryStrategy, name: "RetryStrategy"))
     DescribeTrainingJobResponse.add_member(:remote_debug_config, ::Smithy::Schema::Shapes::MemberShape.new(target: RemoteDebugConfig, name: "RemoteDebugConfig"))
     DescribeTrainingJobResponse.add_member(:infra_check_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InfraCheckConfig, name: "InfraCheckConfig"))
+    DescribeTrainingJobResponse.add_member(:serverless_job_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessJobConfig, name: "ServerlessJobConfig"))
+    DescribeTrainingJobResponse.add_member(:mlflow_config, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowConfig, name: "MlflowConfig"))
+    DescribeTrainingJobResponse.add_member(:model_package_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageConfig, name: "ModelPackageConfig"))
+    DescribeTrainingJobResponse.add_member(:mlflow_details, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowDetails, name: "MlflowDetails"))
+    DescribeTrainingJobResponse.add_member(:progress_info, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingProgressInfo, name: "ProgressInfo"))
+    DescribeTrainingJobResponse.add_member(:output_model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "OutputModelPackageArn"))
     DescribeTrainingJobResponse.type = Types::DescribeTrainingJobResponse
-    DescribeTrainingPlanRequest.add_member(:training_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanName, name: "TrainingPlanName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeTrainingPlanExtensionHistoryRequest.add_member(:training_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArn, name: "TrainingPlanArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeTrainingPlanExtensionHistoryRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeTrainingPlanExtensionHistoryRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    DescribeTrainingPlanExtensionHistoryRequest.type = Types::DescribeTrainingPlanExtensionHistoryRequest
+    DescribeTrainingPlanExtensionHistoryResponse.add_member(:training_plan_extensions, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtensions, name: "TrainingPlanExtensions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeTrainingPlanExtensionHistoryResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeTrainingPlanExtensionHistoryResponse.type = Types::DescribeTrainingPlanExtensionHistoryResponse
+    DescribeTrainingPlanRequest.add_member(:training_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanNameOrArn, name: "TrainingPlanName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeTrainingPlanRequest.type = Types::DescribeTrainingPlanRequest
     DescribeTrainingPlanResponse.add_member(:training_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArn, name: "TrainingPlanArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeTrainingPlanResponse.add_member(:training_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanName, name: "TrainingPlanName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6171,6 +7425,10 @@ module Aws::SageMaker
     DescribeTrainingPlanResponse.add_member(:target_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerResourceNames, name: "TargetResources"))
     DescribeTrainingPlanResponse.add_member(:reserved_capacity_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCapacitySummaries, name: "ReservedCapacitySummaries"))
     DescribeTrainingPlanResponse.type = Types::DescribeTrainingPlanResponse
+    DescribeTrainingSessionRequest.add_member(:training_session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionName, name: "TrainingSessionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeTrainingSessionRequest.type = Types::DescribeTrainingSessionRequest
+    DescribeTrainingSessionResponse.add_member(:training_session_detail, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionDetail, name: "TrainingSessionDetail", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    DescribeTrainingSessionResponse.type = Types::DescribeTrainingSessionResponse
     DescribeTransformJobRequest.add_member(:transform_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformJobName, name: "TransformJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     DescribeTransformJobRequest.type = Types::DescribeTransformJobRequest
     DescribeTransformJobResponse.add_member(:transform_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformJobName, name: "TransformJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -6413,6 +7671,11 @@ module Aws::SageMaker
     EFSFileSystemConfig.add_member(:file_system_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemId, name: "FileSystemId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     EFSFileSystemConfig.add_member(:file_system_path, ::Smithy::Schema::Shapes::MemberShape.new(target: FileSystemPath, name: "FileSystemPath"))
     EFSFileSystemConfig.type = Types::EFSFileSystemConfig
+    EMRServerlessStepMetadata.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EMRServerlessApplicationId, name: "ApplicationId"))
+    EMRServerlessStepMetadata.add_member(:job_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EMRServerlessJobRunId, name: "JobRunId"))
+    EMRServerlessStepMetadata.add_member(:job_run_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "JobRunName"))
+    EMRServerlessStepMetadata.add_member(:log_file_path, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "LogFilePath"))
+    EMRServerlessStepMetadata.type = Types::EMRServerlessStepMetadata
     EMRStepMetadata.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "ClusterId"))
     EMRStepMetadata.add_member(:step_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "StepId"))
     EMRStepMetadata.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "StepName"))
@@ -6611,18 +7874,25 @@ module Aws::SageMaker
     ErrorInfo.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString64, name: "Code"))
     ErrorInfo.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "Reason"))
     ErrorInfo.type = Types::ErrorInfo
+    EvaluationType.add_member(:llmaj_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LLMAJ_EVALUATION", traits: {"smithy.api#enumValue" => "LLMAJEvaluation"}))
+    EvaluationType.add_member(:custom_scorer_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_SCORER_EVALUATION", traits: {"smithy.api#enumValue" => "CustomScorerEvaluation"}))
+    EvaluationType.add_member(:benchmark_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BENCHMARK_EVALUATION", traits: {"smithy.api#enumValue" => "BenchmarkEvaluation"}))
     EventDetails.add_member(:event_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: EventMetadata, name: "EventMetadata"))
     EventDetails.type = Types::EventDetails
     EventMetadata.add_member(:cluster, Types::EventMetadata::Cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterMetadata, name: "Cluster"))
     EventMetadata.add_member(:instance_group, Types::EventMetadata::InstanceGroup, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupMetadata, name: "InstanceGroup"))
     EventMetadata.add_member(:instance_group_scaling, Types::EventMetadata::InstanceGroupScaling, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupScalingMetadata, name: "InstanceGroupScaling"))
     EventMetadata.add_member(:instance, Types::EventMetadata::Instance, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceMetadata, name: "Instance"))
+    EventMetadata.add_member(:database_configuration, Types::EventMetadata::DatabaseConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: DatabaseConfigurationMetadata, name: "DatabaseConfiguration"))
+    EventMetadata.add_member(:slurm_health, Types::EventMetadata::SlurmHealth, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmHealthMetadata, name: "SlurmHealth"))
     EventMetadata.add_member(:unknown, Types::EventMetadata::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EventMetadata.type = Types::EventMetadata
     EventSortBy.add_member(:event_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVENT_TIME", traits: {"smithy.api#enumValue" => "EventTime"}))
     ExecutionRoleArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "member"))
     ExecutionRoleIdentityConfig.add_member(:user_profile_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER_PROFILE_NAME", traits: {"smithy.api#enumValue" => "USER_PROFILE_NAME"}))
     ExecutionRoleIdentityConfig.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ExecutionRoleSessionNameMode.add_member(:static, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Static", traits: {"smithy.api#enumValue" => "STATIC"}))
+    ExecutionRoleSessionNameMode.add_member(:user_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UserIdentity", traits: {"smithy.api#enumValue" => "USER_IDENTITY"}))
     ExecutionStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
     ExecutionStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
     ExecutionStatus.add_member(:completed_with_violations, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_WITH_VIOLATIONS", traits: {"smithy.api#enumValue" => "CompletedWithViolations"}))
@@ -6630,6 +7900,7 @@ module Aws::SageMaker
     ExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     ExecutionStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
     ExecutionStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    ExpectedPerformanceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationPerformanceMetric, name: "member"))
     Experiment.add_member(:experiment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityName, name: "ExperimentName"))
     Experiment.add_member(:experiment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentArn, name: "ExperimentArn"))
     Experiment.add_member(:display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentEntityName, name: "DisplayName"))
@@ -6661,6 +7932,10 @@ module Aws::SageMaker
     Explainability.type = Types::Explainability
     ExplainerConfig.add_member(:clarify_explainer_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClarifyExplainerConfig, name: "ClarifyExplainerConfig"))
     ExplainerConfig.type = Types::ExplainerConfig
+    ExtendTrainingPlanRequest.add_member(:training_plan_extension_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtensionOfferingId, name: "TrainingPlanExtensionOfferingId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExtendTrainingPlanRequest.type = Types::ExtendTrainingPlanRequest
+    ExtendTrainingPlanResponse.add_member(:training_plan_extensions, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtensions, name: "TrainingPlanExtensions", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ExtendTrainingPlanResponse.type = Types::ExtendTrainingPlanResponse
     FSxLustreConfig.add_member(:size_in_gi_b, ::Smithy::Schema::Shapes::MemberShape.new(target: FSxLustreSizeInGiB, name: "SizeInGiB", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     FSxLustreConfig.add_member(:per_unit_storage_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: FSxLustrePerUnitStorageThroughput, name: "PerUnitStorageThroughput", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     FSxLustreConfig.type = Types::FSxLustreConfig
@@ -6798,6 +8073,20 @@ module Aws::SageMaker
     FlowDefinitionSummary.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
     FlowDefinitionSummary.type = Types::FlowDefinitionSummary
     FlowDefinitionTaskKeywords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FlowDefinitionTaskKeyword, name: "member"))
+    ForEachSelectorResult.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "StepName"))
+    ForEachSelectorResult.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Index"))
+    ForEachSelectorResult.type = Types::ForEachSelectorResult
+    ForEachStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "Succeeded"}))
+    ForEachStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    ForEachStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    ForEachStepMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ForEachStatus, name: "Status"))
+    ForEachStepMetadata.add_member(:input_item_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "InputItemCount"))
+    ForEachStepMetadata.add_member(:total_step_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "TotalStepCount"))
+    ForEachStepMetadata.add_member(:succeeded_step_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "SucceededStepCount"))
+    ForEachStepMetadata.add_member(:failed_step_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "FailedStepCount"))
+    ForEachStepMetadata.add_member(:stopped_step_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "StoppedStepCount"))
+    ForEachStepMetadata.add_member(:selector, ::Smithy::Schema::Shapes::MemberShape.new(target: ForEachSelectorResult, name: "Selector"))
+    ForEachStepMetadata.type = Types::ForEachStepMetadata
     ForecastQuantiles.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ForecastQuantile, name: "member"))
     Framework.add_member(:tensorflow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TENSORFLOW", traits: {"smithy.api#enumValue" => "TENSORFLOW"}))
     Framework.add_member(:keras, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KERAS", traits: {"smithy.api#enumValue" => "KERAS"}))
@@ -6858,6 +8147,7 @@ module Aws::SageMaker
     GitConfig.type = Types::GitConfig
     GitConfigForUpdate.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn"))
     GitConfigForUpdate.type = Types::GitConfigForUpdate
+    GroupPatternsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupNamePattern, name: "member"))
     GroupingAttributeNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupingAttributeName, name: "member"))
     Groups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     HiddenAppTypesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppType, name: "member"))
@@ -6870,10 +8160,34 @@ module Aws::SageMaker
     HolidayConfig.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HolidayConfigAttributes, name: "member"))
     HolidayConfigAttributes.add_member(:country_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CountryCode, name: "CountryCode"))
     HolidayConfigAttributes.type = Types::HolidayConfigAttributes
+    HomeEfsFileSystemCreation.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Enabled", traits: {"smithy.api#enumValue" => "Enabled"}))
+    HomeEfsFileSystemCreation.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Disabled", traits: {"smithy.api#enumValue" => "Disabled"}))
     HookParameters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigKey, name: "key"))
     HookParameters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigValue, name: "value"))
     HubAccessConfig.add_member(:hub_content_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentArn, name: "HubContentArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     HubAccessConfig.type = Types::HubAccessConfig
+    HubContent.add_member(:hub_content_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentName, name: "HubContentName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HubContent.add_member(:hub_content_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentArn, name: "HubContentArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HubContent.add_member(:hub_content_version, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentVersion, name: "HubContentVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HubContent.add_member(:hub_content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentType, name: "HubContentType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HubContent.add_member(:document_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentSchemaVersion, name: "DocumentSchemaVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HubContent.add_member(:hub_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HubName, name: "HubName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HubContent.add_member(:hub_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HubArn, name: "HubArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HubContent.add_member(:hub_content_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentDisplayName, name: "HubContentDisplayName"))
+    HubContent.add_member(:hub_content_description, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentDescription, name: "HubContentDescription"))
+    HubContent.add_member(:hub_content_markdown, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentMarkdown, name: "HubContentMarkdown"))
+    HubContent.add_member(:hub_content_document, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentDocument, name: "HubContentDocument", traits: {"smithy.api#clientOptional" => {}}))
+    HubContent.add_member(:sage_maker_public_hub_content_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerPublicHubContentArn, name: "SageMakerPublicHubContentArn"))
+    HubContent.add_member(:reference_min_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ReferenceMinVersion, name: "ReferenceMinVersion"))
+    HubContent.add_member(:support_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentSupportStatus, name: "SupportStatus"))
+    HubContent.add_member(:hub_content_search_keywords, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentSearchKeywordList, name: "HubContentSearchKeywords"))
+    HubContent.add_member(:hub_content_dependencies, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentDependencyList, name: "HubContentDependencies"))
+    HubContent.add_member(:hub_content_status, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentStatus, name: "HubContentStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HubContent.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
+    HubContent.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    HubContent.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
+    HubContent.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    HubContent.type = Types::HubContent
     HubContentDependency.add_member(:dependency_origin_path, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyOriginPath, name: "DependencyOriginPath"))
     HubContentDependency.add_member(:dependency_copy_path, ::Smithy::Schema::Shapes::MemberShape.new(target: DependencyCopyPath, name: "DependencyCopyPath"))
     HubContentDependency.type = Types::HubContentDependency
@@ -6893,7 +8207,7 @@ module Aws::SageMaker
     HubContentInfo.add_member(:original_creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "OriginalCreationTime"))
     HubContentInfo.type = Types::HubContentInfo
     HubContentInfoList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentInfo, name: "member"))
-    HubContentSearchKeywordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HubSearchKeyword, name: "member"))
+    HubContentSearchKeywordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentSearchKeyword, name: "member"))
     HubContentSortBy.add_member(:hub_content_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HUB_CONTENT_NAME", traits: {"smithy.api#enumValue" => "HubContentName"}))
     HubContentSortBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
     HubContentSortBy.add_member(:hub_content_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HUB_CONTENT_STATUS", traits: {"smithy.api#enumValue" => "HubContentStatus"}))
@@ -6902,12 +8216,16 @@ module Aws::SageMaker
     HubContentStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
     HubContentStatus.add_member(:import_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPORT_FAILED", traits: {"smithy.api#enumValue" => "ImportFailed"}))
     HubContentStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DeleteFailed"}))
+    HubContentStatus.add_member(:pending_import, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_IMPORT", traits: {"smithy.api#enumValue" => "PendingImport"}))
+    HubContentStatus.add_member(:pending_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING_DELETE", traits: {"smithy.api#enumValue" => "PendingDelete"}))
     HubContentSupportStatus.add_member(:supported, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUPPORTED", traits: {"smithy.api#enumValue" => "Supported"}))
     HubContentSupportStatus.add_member(:deprecated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPRECATED", traits: {"smithy.api#enumValue" => "Deprecated"}))
     HubContentSupportStatus.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTRICTED", traits: {"smithy.api#enumValue" => "Restricted"}))
     HubContentType.add_member(:model, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODEL", traits: {"smithy.api#enumValue" => "Model"}))
     HubContentType.add_member(:notebook, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOTEBOOK", traits: {"smithy.api#enumValue" => "Notebook"}))
     HubContentType.add_member(:model_reference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODEL_REFERENCE", traits: {"smithy.api#enumValue" => "ModelReference"}))
+    HubContentType.add_member(:data_set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATA_SET", traits: {"smithy.api#enumValue" => "DataSet"}))
+    HubContentType.add_member(:json_doc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON_DOC", traits: {"smithy.api#enumValue" => "JsonDoc"}))
     HubInfo.add_member(:hub_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HubName, name: "HubName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     HubInfo.add_member(:hub_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HubArn, name: "HubArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     HubInfo.add_member(:hub_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: HubDisplayName, name: "HubDisplayName"))
@@ -7121,11 +8439,18 @@ module Aws::SageMaker
     IamPolicyConstraints.add_member(:source_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledOrDisabled, name: "SourceIp"))
     IamPolicyConstraints.add_member(:vpc_source_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: EnabledOrDisabled, name: "VpcSourceIp"))
     IamPolicyConstraints.type = Types::IamPolicyConstraints
+    IdcConfigInput.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
+    IdcConfigInput.type = Types::IdcConfigInput
+    IdcConfigOutput.add_member(:instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceArn, name: "InstanceArn", traits: {"smithy.api#required" => {}}))
+    IdcConfigOutput.add_member(:application_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationArn, name: "ApplicationArn"))
+    IdcConfigOutput.type = Types::IdcConfigOutput
     IdentityProviderOAuthSetting.add_member(:data_source_name, ::Smithy::Schema::Shapes::MemberShape.new(target: DataSourceName, name: "DataSourceName"))
     IdentityProviderOAuthSetting.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, name: "Status"))
     IdentityProviderOAuthSetting.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn"))
     IdentityProviderOAuthSetting.type = Types::IdentityProviderOAuthSetting
     IdentityProviderOAuthSettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IdentityProviderOAuthSetting, name: "member"))
+    IdleResourceSharing.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
+    IdleResourceSharing.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
     IdleSettings.add_member(:lifecycle_management, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecycleManagement, name: "LifecycleManagement"))
     IdleSettings.add_member(:idle_timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeoutInMinutes, name: "IdleTimeoutInMinutes"))
     IdleSettings.add_member(:min_idle_timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleTimeoutInMinutes, name: "MinIdleTimeoutInMinutes"))
@@ -7194,6 +8519,11 @@ module Aws::SageMaker
     ImportHubContentResponse.add_member(:hub_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HubArn, name: "HubArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ImportHubContentResponse.add_member(:hub_content_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContentArn, name: "HubContentArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ImportHubContentResponse.type = Types::ImportHubContentResponse
+    IncludedData.add_member(:all_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_DATA", traits: {"smithy.api#enumValue" => "AllData"}))
+    IncludedData.add_member(:metadata_only, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_ONLY", traits: {"smithy.api#enumValue" => "MetadataOnly"}))
+    InferenceComponentAvailabilityZoneBalance.add_member(:enforcement_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneBalanceEnforcementMode, name: "EnforcementMode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InferenceComponentAvailabilityZoneBalance.add_member(:max_imbalance, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneBalanceMaxImbalance, name: "MaxImbalance"))
+    InferenceComponentAvailabilityZoneBalance.type = Types::InferenceComponentAvailabilityZoneBalance
     InferenceComponentCapacitySize.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentCapacitySizeType, name: "Type", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InferenceComponentCapacitySize.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacitySizeValue, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InferenceComponentCapacitySize.type = Types::InferenceComponentCapacitySize
@@ -7207,14 +8537,28 @@ module Aws::SageMaker
     InferenceComponentContainerSpecification.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImage, name: "Image"))
     InferenceComponentContainerSpecification.add_member(:artifact_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "ArtifactUrl"))
     InferenceComponentContainerSpecification.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentMap, name: "Environment"))
+    InferenceComponentContainerSpecification.add_member(:container_metrics_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerMetricsConfig, name: "ContainerMetricsConfig"))
     InferenceComponentContainerSpecification.type = Types::InferenceComponentContainerSpecification
     InferenceComponentContainerSpecificationSummary.add_member(:deployed_image, ::Smithy::Schema::Shapes::MemberShape.new(target: DeployedImage, name: "DeployedImage"))
     InferenceComponentContainerSpecificationSummary.add_member(:artifact_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "ArtifactUrl"))
     InferenceComponentContainerSpecificationSummary.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentMap, name: "Environment"))
+    InferenceComponentContainerSpecificationSummary.add_member(:container_metrics_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerMetricsConfig, name: "ContainerMetricsConfig"))
     InferenceComponentContainerSpecificationSummary.type = Types::InferenceComponentContainerSpecificationSummary
+    InferenceComponentDataCacheConfig.add_member(:enable_caching, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableCaching, name: "EnableCaching", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InferenceComponentDataCacheConfig.type = Types::InferenceComponentDataCacheConfig
+    InferenceComponentDataCacheConfigSummary.add_member(:enable_caching, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableCaching, name: "EnableCaching", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InferenceComponentDataCacheConfigSummary.type = Types::InferenceComponentDataCacheConfigSummary
     InferenceComponentDeploymentConfig.add_member(:rolling_update_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentRollingUpdatePolicy, name: "RollingUpdatePolicy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InferenceComponentDeploymentConfig.add_member(:auto_rollback_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoRollbackConfig, name: "AutoRollbackConfiguration"))
     InferenceComponentDeploymentConfig.type = Types::InferenceComponentDeploymentConfig
+    InferenceComponentMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "Arn"))
+    InferenceComponentMetadata.type = Types::InferenceComponentMetadata
+    InferenceComponentPlacementStatus.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InferenceComponentPlacementStatus.add_member(:current_copy_count, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentCopyCount, name: "CurrentCopyCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InferenceComponentPlacementStatus.type = Types::InferenceComponentPlacementStatus
+    InferenceComponentPlacementStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentPlacementStatus, name: "member"))
+    InferenceComponentPlacementStrategy.add_member(:spread, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SPREAD", traits: {"smithy.api#enumValue" => "SPREAD"}))
+    InferenceComponentPlacementStrategy.add_member(:binpack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BINPACK", traits: {"smithy.api#enumValue" => "BINPACK"}))
     InferenceComponentRollingUpdatePolicy.add_member(:maximum_batch_size, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentCapacitySize, name: "MaximumBatchSize", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InferenceComponentRollingUpdatePolicy.add_member(:wait_interval_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitIntervalInSeconds, name: "WaitIntervalInSeconds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InferenceComponentRollingUpdatePolicy.add_member(:maximum_execution_timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumExecutionTimeoutInSeconds, name: "MaximumExecutionTimeoutInSeconds"))
@@ -7224,22 +8568,34 @@ module Aws::SageMaker
     InferenceComponentRuntimeConfig.type = Types::InferenceComponentRuntimeConfig
     InferenceComponentRuntimeConfigSummary.add_member(:desired_copy_count, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentCopyCount, name: "DesiredCopyCount"))
     InferenceComponentRuntimeConfigSummary.add_member(:current_copy_count, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentCopyCount, name: "CurrentCopyCount"))
+    InferenceComponentRuntimeConfigSummary.add_member(:placement_status, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentPlacementStatusList, name: "PlacementStatus"))
     InferenceComponentRuntimeConfigSummary.type = Types::InferenceComponentRuntimeConfigSummary
+    InferenceComponentSchedulingConfig.add_member(:placement_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentPlacementStrategy, name: "PlacementStrategy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InferenceComponentSchedulingConfig.add_member(:availability_zone_balance, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentAvailabilityZoneBalance, name: "AvailabilityZoneBalance"))
+    InferenceComponentSchedulingConfig.type = Types::InferenceComponentSchedulingConfig
     InferenceComponentSortKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Name", traits: {"smithy.api#enumValue" => "Name"}))
     InferenceComponentSortKey.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CreationTime", traits: {"smithy.api#enumValue" => "CreationTime"}))
     InferenceComponentSortKey.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Status", traits: {"smithy.api#enumValue" => "Status"}))
+    InferenceComponentSpecification.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantInstanceType, name: "InstanceType"))
     InferenceComponentSpecification.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName"))
     InferenceComponentSpecification.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentContainerSpecification, name: "Container"))
     InferenceComponentSpecification.add_member(:startup_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentStartupParameters, name: "StartupParameters"))
     InferenceComponentSpecification.add_member(:compute_resource_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentComputeResourceRequirements, name: "ComputeResourceRequirements"))
     InferenceComponentSpecification.add_member(:base_inference_component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentName, name: "BaseInferenceComponentName"))
+    InferenceComponentSpecification.add_member(:data_cache_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentDataCacheConfig, name: "DataCacheConfig"))
+    InferenceComponentSpecification.add_member(:scheduling_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSchedulingConfig, name: "SchedulingConfig"))
     InferenceComponentSpecification.type = Types::InferenceComponentSpecification
+    InferenceComponentSpecificationList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSpecification, name: "member"))
+    InferenceComponentSpecificationSummary.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantInstanceType, name: "InstanceType"))
     InferenceComponentSpecificationSummary.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName"))
     InferenceComponentSpecificationSummary.add_member(:container, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentContainerSpecificationSummary, name: "Container"))
     InferenceComponentSpecificationSummary.add_member(:startup_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentStartupParameters, name: "StartupParameters"))
     InferenceComponentSpecificationSummary.add_member(:compute_resource_requirements, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentComputeResourceRequirements, name: "ComputeResourceRequirements"))
     InferenceComponentSpecificationSummary.add_member(:base_inference_component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentName, name: "BaseInferenceComponentName"))
+    InferenceComponentSpecificationSummary.add_member(:data_cache_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentDataCacheConfigSummary, name: "DataCacheConfig"))
+    InferenceComponentSpecificationSummary.add_member(:scheduling_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSchedulingConfig, name: "SchedulingConfig"))
     InferenceComponentSpecificationSummary.type = Types::InferenceComponentSpecificationSummary
+    InferenceComponentSpecificationSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSpecificationSummary, name: "member"))
     InferenceComponentStartupParameters.add_member(:model_data_download_timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantModelDataDownloadTimeoutInSeconds, name: "ModelDataDownloadTimeoutInSeconds"))
     InferenceComponentStartupParameters.add_member(:container_startup_health_check_timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantContainerStartupHealthCheckTimeoutInSeconds, name: "ContainerStartupHealthCheckTimeoutInSeconds"))
     InferenceComponentStartupParameters.type = Types::InferenceComponentStartupParameters
@@ -7347,6 +8703,10 @@ module Aws::SageMaker
     InstanceGroup.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingInstanceCount, name: "InstanceCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InstanceGroup.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupName, name: "InstanceGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     InstanceGroup.type = Types::InstanceGroup
+    InstanceGroupHealthCheckConfiguration.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupName, name: "InstanceGroupName", traits: {"smithy.api#required" => {}}))
+    InstanceGroupHealthCheckConfiguration.add_member(:instance_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceIds, name: "InstanceIds"))
+    InstanceGroupHealthCheckConfiguration.add_member(:deep_health_checks, ::Smithy::Schema::Shapes::MemberShape.new(target: DeepHealthChecks, name: "DeepHealthChecks", traits: {"smithy.api#required" => {}}))
+    InstanceGroupHealthCheckConfiguration.type = Types::InstanceGroupHealthCheckConfiguration
     InstanceGroupMetadata.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureMessage"))
     InstanceGroupMetadata.add_member(:availability_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "AvailabilityZoneId"))
     InstanceGroupMetadata.add_member(:capacity_reservation, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservation, name: "CapacityReservation"))
@@ -7357,6 +8717,7 @@ module Aws::SageMaker
     InstanceGroupNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroupName, name: "member"))
     InstanceGroupScalingMetadata.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceCount, name: "InstanceCount"))
     InstanceGroupScalingMetadata.add_member(:target_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetCount, name: "TargetCount"))
+    InstanceGroupScalingMetadata.add_member(:min_count, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceCount, name: "MinCount"))
     InstanceGroupScalingMetadata.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureMessage"))
     InstanceGroupScalingMetadata.type = Types::InstanceGroupScalingMetadata
     InstanceGroupStatus.add_member(:inservice, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSERVICE", traits: {"smithy.api#enumValue" => "InService"}))
@@ -7367,8 +8728,10 @@ module Aws::SageMaker
     InstanceGroupStatus.add_member(:systemupdating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEMUPDATING", traits: {"smithy.api#enumValue" => "SystemUpdating"}))
     InstanceGroupStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
     InstanceGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroup, name: "member"))
+    InstanceIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeId, name: "member"))
     InstanceMetadata.add_member(:customer_eni, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CustomerEni"))
     InstanceMetadata.add_member(:additional_enis, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalEnis, name: "AdditionalEnis"))
+    InstanceMetadata.add_member(:instance_requirements_eni_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRequirementsEniConfigurations, name: "InstanceRequirementsEniConfigurations"))
     InstanceMetadata.add_member(:capacity_reservation, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacityReservation, name: "CapacityReservation"))
     InstanceMetadata.add_member(:failure_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "FailureMessage"))
     InstanceMetadata.add_member(:lcs_execution_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "LcsExecutionState"))
@@ -7379,6 +8742,24 @@ module Aws::SageMaker
     InstancePlacementConfig.add_member(:enable_multiple_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableMultipleJobs"))
     InstancePlacementConfig.add_member(:placement_specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: PlacementSpecifications, name: "PlacementSpecifications"))
     InstancePlacementConfig.type = Types::InstancePlacementConfig
+    InstancePool.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InstancePool.add_member(:model_name_override, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelNameOverride"))
+    InstancePool.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePoolPriority, name: "Priority", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InstancePool.type = Types::InstancePool
+    InstancePoolList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePool, name: "member"))
+    InstancePoolSummary.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InstancePoolSummary.add_member(:current_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskCount, name: "CurrentInstanceCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InstancePoolSummary.type = Types::InstancePoolSummary
+    InstancePoolSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePoolSummary, name: "member"))
+    InstancePreference.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    InstancePreference.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingInstanceCount, name: "InstanceCount"))
+    InstancePreference.add_member(:training_plan_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArnList, name: "TrainingPlanArns"))
+    InstancePreference.type = Types::InstancePreference
+    InstancePreferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePreference, name: "member"))
+    InstanceRequirementsEniConfiguration.add_member(:customer_eni, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "CustomerEni"))
+    InstanceRequirementsEniConfiguration.add_member(:additional_enis, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalEnis, name: "AdditionalEnis"))
+    InstanceRequirementsEniConfiguration.type = Types::InstanceRequirementsEniConfiguration
+    InstanceRequirementsEniConfigurations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceRequirementsEniConfiguration, name: "member"))
     InstanceType.add_member(:ml_t2_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_T2_MEDIUM", traits: {"smithy.api#enumValue" => "ml.t2.medium"}))
     InstanceType.add_member(:ml_t2_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_T2_LARGE", traits: {"smithy.api#enumValue" => "ml.t2.large"}))
     InstanceType.add_member(:ml_t2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_T2_XLARGE", traits: {"smithy.api#enumValue" => "ml.t2.xlarge"}))
@@ -7552,6 +8933,22 @@ module Aws::SageMaker
     InstanceType.add_member(:ml_g6_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.16xlarge"}))
     InstanceType.add_member(:ml_g6_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.24xlarge"}))
     InstanceType.add_member(:ml_g6_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.48xlarge"}))
+    InstanceType.add_member(:ml_g7_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.2xlarge"}))
+    InstanceType.add_member(:ml_g7_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.4xlarge"}))
+    InstanceType.add_member(:ml_g7_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.8xlarge"}))
+    InstanceType.add_member(:ml_g7_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.12xlarge"}))
+    InstanceType.add_member(:ml_g7_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.24xlarge"}))
+    InstanceType.add_member(:ml_g7_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.48xlarge"}))
+    InstanceType.add_member(:ml_p5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.4xlarge"}))
+    InstanceType.add_member(:ml_p5_en_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5EN_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5en.48xlarge"}))
+    InstanceType.add_member(:ml_g6_e_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.xlarge"}))
+    InstanceType.add_member(:ml_g6_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.2xlarge"}))
+    InstanceType.add_member(:ml_g6_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.4xlarge"}))
+    InstanceType.add_member(:ml_g6_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.8xlarge"}))
+    InstanceType.add_member(:ml_g6_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.12xlarge"}))
+    InstanceType.add_member(:ml_g6_e_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.16xlarge"}))
+    InstanceType.add_member(:ml_g6_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.24xlarge"}))
+    InstanceType.add_member(:ml_g6_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.48xlarge"}))
     IntegerParameterRange.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterKey, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     IntegerParameterRange.add_member(:min_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "MinValue", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     IntegerParameterRange.add_member(:max_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "MaxValue", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -7563,6 +8960,70 @@ module Aws::SageMaker
     IntegerParameterRanges.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IntegerParameterRange, name: "member"))
     IsTrackingServerActive.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "Active"}))
     IsTrackingServerActive.add_member(:inactive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INACTIVE", traits: {"smithy.api#enumValue" => "Inactive"}))
+    IterationContext.add_member(:parent_step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "ParentStepName"))
+    IterationContext.add_member(:index, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Index"))
+    IterationContext.add_member(:item, ::Smithy::Schema::Shapes::MemberShape.new(target: String12800, name: "Item"))
+    IterationContext.type = Types::IterationContext
+    Job.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName"))
+    Job.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, name: "JobArn"))
+    Job.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
+    Job.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory"))
+    Job.add_member(:job_config_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSchemaVersion, name: "JobConfigSchemaVersion"))
+    Job.add_member(:job_config_document, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfigDocument, name: "JobConfigDocument"))
+    Job.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
+    Job.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
+    Job.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    Job.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "JobStatus"))
+    Job.add_member(:secondary_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSecondaryStatus, name: "SecondaryStatus"))
+    Job.add_member(:secondary_status_transitions, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSecondaryStatusTransitions, name: "SecondaryStatusTransitions"))
+    Job.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "FailureReason"))
+    Job.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    Job.type = Types::Job
+    JobCategory.add_member(:agent_rft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_RFT", traits: {"smithy.api#enumValue" => "AgentRFT"}))
+    JobCategory.add_member(:agent_rft_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGENT_RFT_EVALUATION", traits: {"smithy.api#enumValue" => "AgentRFTEvaluation"}))
+    JobConfigSchemaVersionSummary.add_member(:job_config_schema_version, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSchemaVersion, name: "JobConfigSchemaVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobConfigSchemaVersionSummary.type = Types::JobConfigSchemaVersionSummary
+    JobConfigSchemas.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfigSchemaVersionSummary, name: "member"))
+    JobSecondaryStatus.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "Starting"}))
+    JobSecondaryStatus.add_member(:downloading, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DOWNLOADING", traits: {"smithy.api#enumValue" => "Downloading"}))
+    JobSecondaryStatus.add_member(:training, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING", traits: {"smithy.api#enumValue" => "Training"}))
+    JobSecondaryStatus.add_member(:uploading, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPLOADING", traits: {"smithy.api#enumValue" => "Uploading"}))
+    JobSecondaryStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
+    JobSecondaryStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    JobSecondaryStatus.add_member(:max_runtime_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX_RUNTIME_EXCEEDED", traits: {"smithy.api#enumValue" => "MaxRuntimeExceeded"}))
+    JobSecondaryStatus.add_member(:interrupted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERRUPTED", traits: {"smithy.api#enumValue" => "Interrupted"}))
+    JobSecondaryStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    JobSecondaryStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    JobSecondaryStatus.add_member(:restarting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTARTING", traits: {"smithy.api#enumValue" => "Restarting"}))
+    JobSecondaryStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
+    JobSecondaryStatus.add_member(:evaluating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVALUATING", traits: {"smithy.api#enumValue" => "Evaluating"}))
+    JobSecondaryStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    JobSecondaryStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DeleteFailed"}))
+    JobSecondaryStatusTransition.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSecondaryStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobSecondaryStatusTransition.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobSecondaryStatusTransition.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    JobSecondaryStatusTransition.add_member(:status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StatusMessage"))
+    JobSecondaryStatusTransition.type = Types::JobSecondaryStatusTransition
+    JobSecondaryStatusTransitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSecondaryStatusTransition, name: "member"))
+    JobStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
+    JobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "Completed"}))
+    JobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    JobStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
+    JobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    JobStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    JobStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DeleteFailed"}))
+    JobStepMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "Arn"))
+    JobStepMetadata.type = Types::JobStepMetadata
+    JobSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummary, name: "member"))
+    JobSummary.add_member(:job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: JobArn, name: "JobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobSummary.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobSummary.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobSummary.add_member(:job_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "JobStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobSummary.add_member(:job_secondary_status, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSecondaryStatus, name: "JobSecondaryStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    JobSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    JobSummary.type = Types::JobSummary
     JobType.add_member(:training, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING", traits: {"smithy.api#enumValue" => "TRAINING"}))
     JobType.add_member(:inference, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFERENCE", traits: {"smithy.api#enumValue" => "INFERENCE"}))
     JobType.add_member(:notebook_kernel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOTEBOOK_KERNEL", traits: {"smithy.api#enumValue" => "NOTEBOOK_KERNEL"}))
@@ -7685,10 +9146,58 @@ module Aws::SageMaker
     LineageGroupSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
     LineageGroupSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
     LineageGroupSummary.type = Types::LineageGroupSummary
+    LineageMetadata.add_member(:action_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: MapString2048, name: "ActionArns"))
+    LineageMetadata.add_member(:artifact_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: MapString2048, name: "ArtifactArns"))
+    LineageMetadata.add_member(:context_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: MapString2048, name: "ContextArns"))
+    LineageMetadata.add_member(:associations, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociationInfoList, name: "Associations"))
+    LineageMetadata.type = Types::LineageMetadata
     LineageType.add_member(:trial_component, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRIAL_COMPONENT", traits: {"smithy.api#enumValue" => "TrialComponent"}))
     LineageType.add_member(:artifact, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARTIFACT", traits: {"smithy.api#enumValue" => "Artifact"}))
     LineageType.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTEXT", traits: {"smithy.api#enumValue" => "Context"}))
     LineageType.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTION", traits: {"smithy.api#enumValue" => "Action"}))
+    ListAIBenchmarkJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListAIBenchmarkJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAIBenchmarkJobsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: NameContains, name: "NameContains"))
+    ListAIBenchmarkJobsRequest.add_member(:status_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobStatus, name: "StatusEquals"))
+    ListAIBenchmarkJobsRequest.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeAfter"))
+    ListAIBenchmarkJobsRequest.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeBefore"))
+    ListAIBenchmarkJobsRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAIBenchmarkJobsSortBy, name: "SortBy"))
+    ListAIBenchmarkJobsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
+    ListAIBenchmarkJobsRequest.type = Types::ListAIBenchmarkJobsRequest
+    ListAIBenchmarkJobsResponse.add_member(:ai_benchmark_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobSummaryList, name: "AIBenchmarkJobs", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListAIBenchmarkJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAIBenchmarkJobsResponse.type = Types::ListAIBenchmarkJobsResponse
+    ListAIBenchmarkJobsSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
+    ListAIBenchmarkJobsSortBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
+    ListAIBenchmarkJobsSortBy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
+    ListAIRecommendationJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListAIRecommendationJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAIRecommendationJobsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: NameContains, name: "NameContains"))
+    ListAIRecommendationJobsRequest.add_member(:status_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobStatus, name: "StatusEquals"))
+    ListAIRecommendationJobsRequest.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeAfter"))
+    ListAIRecommendationJobsRequest.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeBefore"))
+    ListAIRecommendationJobsRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAIRecommendationJobsSortBy, name: "SortBy"))
+    ListAIRecommendationJobsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
+    ListAIRecommendationJobsRequest.type = Types::ListAIRecommendationJobsRequest
+    ListAIRecommendationJobsResponse.add_member(:ai_recommendation_jobs, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobSummaryList, name: "AIRecommendationJobs", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListAIRecommendationJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAIRecommendationJobsResponse.type = Types::ListAIRecommendationJobsResponse
+    ListAIRecommendationJobsSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
+    ListAIRecommendationJobsSortBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
+    ListAIRecommendationJobsSortBy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
+    ListAIWorkloadConfigsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListAIWorkloadConfigsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAIWorkloadConfigsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: NameContains, name: "NameContains"))
+    ListAIWorkloadConfigsRequest.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeAfter"))
+    ListAIWorkloadConfigsRequest.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeBefore"))
+    ListAIWorkloadConfigsRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAIWorkloadConfigsSortBy, name: "SortBy"))
+    ListAIWorkloadConfigsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
+    ListAIWorkloadConfigsRequest.type = Types::ListAIWorkloadConfigsRequest
+    ListAIWorkloadConfigsResponse.add_member(:ai_workload_configs, ::Smithy::Schema::Shapes::MemberShape.new(target: AIWorkloadConfigSummaryList, name: "AIWorkloadConfigs", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListAIWorkloadConfigsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAIWorkloadConfigsResponse.type = Types::ListAIWorkloadConfigsResponse
+    ListAIWorkloadConfigsSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
+    ListAIWorkloadConfigsSortBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
     ListActionsRequest.add_member(:source_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceUri, name: "SourceUri"))
     ListActionsRequest.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "ActionType"))
     ListActionsRequest.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAfter"))
@@ -8192,6 +9701,28 @@ module Aws::SageMaker
     ListInferenceRecommendationsJobsSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
     ListInferenceRecommendationsJobsSortBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
     ListInferenceRecommendationsJobsSortBy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
+    ListJobSchemaVersionsRequest.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListJobSchemaVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListJobSchemaVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListJobSchemaVersionsRequest.type = Types::ListJobSchemaVersionsRequest
+    ListJobSchemaVersionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListJobSchemaVersionsResponse.add_member(:job_config_schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: JobConfigSchemas, name: "JobConfigSchemas", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListJobSchemaVersionsResponse.type = Types::ListJobSchemaVersionsResponse
+    ListJobsRequest.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListJobsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListJobsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListJobsRequest.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeAfter"))
+    ListJobsRequest.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeBefore"))
+    ListJobsRequest.add_member(:last_modified_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTimeAfter"))
+    ListJobsRequest.add_member(:last_modified_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTimeBefore"))
+    ListJobsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: NameContains, name: "NameContains"))
+    ListJobsRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortBy, name: "SortBy"))
+    ListJobsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
+    ListJobsRequest.add_member(:status_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStatus, name: "StatusEquals"))
+    ListJobsRequest.type = Types::ListJobsRequest
+    ListJobsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListJobsResponse.add_member(:job_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: JobSummaries, name: "JobSummaries", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListJobsResponse.type = Types::ListJobsResponse
     ListLabelingJobsForWorkteamRequest.add_member(:workteam_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkteamArn, name: "WorkteamArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListLabelingJobsForWorkteamRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
     ListLabelingJobsForWorkteamRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
@@ -8230,6 +9761,20 @@ module Aws::SageMaker
     ListLineageGroupsResponse.add_member(:lineage_group_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageGroupSummaries, name: "LineageGroupSummaries"))
     ListLineageGroupsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListLineageGroupsResponse.type = Types::ListLineageGroupsResponse
+    ListMlflowAppsRequest.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAfter"))
+    ListMlflowAppsRequest.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedBefore"))
+    ListMlflowAppsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppStatus, name: "Status"))
+    ListMlflowAppsRequest.add_member(:mlflow_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowVersion, name: "MlflowVersion"))
+    ListMlflowAppsRequest.add_member(:default_for_domain_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DefaultForDomainId"))
+    ListMlflowAppsRequest.add_member(:account_default_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDefaultStatus, name: "AccountDefaultStatus"))
+    ListMlflowAppsRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortMlflowAppBy, name: "SortBy"))
+    ListMlflowAppsRequest.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
+    ListMlflowAppsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListMlflowAppsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListMlflowAppsRequest.type = Types::ListMlflowAppsRequest
+    ListMlflowAppsResponse.add_member(:summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppSummaries, name: "Summaries"))
+    ListMlflowAppsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListMlflowAppsResponse.type = Types::ListMlflowAppsResponse
     ListMlflowTrackingServersRequest.add_member(:created_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedAfter"))
     ListMlflowTrackingServersRequest.add_member(:created_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreatedBefore"))
     ListMlflowTrackingServersRequest.add_member(:tracking_server_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerStatus, name: "TrackingServerStatus"))
@@ -8637,6 +10182,16 @@ module Aws::SageMaker
     ListTrainingPlansResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListTrainingPlansResponse.add_member(:training_plan_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanSummaries, name: "TrainingPlanSummaries", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ListTrainingPlansResponse.type = Types::ListTrainingPlansResponse
+    ListTrainingSessionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListTrainingSessionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults"))
+    ListTrainingSessionsRequest.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeAfter"))
+    ListTrainingSessionsRequest.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeBefore"))
+    ListTrainingSessionsRequest.add_member(:name_contains, ::Smithy::Schema::Shapes::MemberShape.new(target: NameContains, name: "NameContains"))
+    ListTrainingSessionsRequest.add_member(:status_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionStatus, name: "StatusEquals"))
+    ListTrainingSessionsRequest.type = Types::ListTrainingSessionsRequest
+    ListTrainingSessionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListTrainingSessionsResponse.add_member(:training_session_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionSummaries, name: "TrainingSessionSummaries", traits: {"smithy.api#clientOptional" => {}}))
+    ListTrainingSessionsResponse.type = Types::ListTrainingSessionsResponse
     ListTransformJobsRequest.add_member(:creation_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeAfter"))
     ListTransformJobsRequest.add_member(:creation_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTimeBefore"))
     ListTransformJobsRequest.add_member(:last_modified_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTimeAfter"))
@@ -8716,8 +10271,52 @@ module Aws::SageMaker
     ListWorkteamsResponse.type = Types::ListWorkteamsResponse
     ListWorkteamsSortByOptions.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Name", traits: {"smithy.api#enumValue" => "Name"}))
     ListWorkteamsSortByOptions.add_member(:create_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CreateDate", traits: {"smithy.api#enumValue" => "CreateDate"}))
+    LoraConfig.add_member(:rank, ::Smithy::Schema::Shapes::MemberShape.new(target: Rank, name: "Rank", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    LoraConfig.add_member(:alpha, ::Smithy::Schema::Shapes::MemberShape.new(target: LoraAlpha, name: "Alpha", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    LoraConfig.type = Types::LoraConfig
+    MIGProfileType.add_member(:mig_1_g_5_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_1G_5GB", traits: {"smithy.api#enumValue" => "mig-1g.5gb"}))
+    MIGProfileType.add_member(:mig_1_g_10_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_1G_10GB", traits: {"smithy.api#enumValue" => "mig-1g.10gb"}))
+    MIGProfileType.add_member(:mig_1_g_18_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_1G_18GB", traits: {"smithy.api#enumValue" => "mig-1g.18gb"}))
+    MIGProfileType.add_member(:mig_1_g_20_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_1G_20GB", traits: {"smithy.api#enumValue" => "mig-1g.20gb"}))
+    MIGProfileType.add_member(:mig_1_g_23_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_1G_23GB", traits: {"smithy.api#enumValue" => "mig-1g.23gb"}))
+    MIGProfileType.add_member(:mig_1_g_35_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_1G_35GB", traits: {"smithy.api#enumValue" => "mig-1g.35gb"}))
+    MIGProfileType.add_member(:mig_1_g_45_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_1G_45GB", traits: {"smithy.api#enumValue" => "mig-1g.45gb"}))
+    MIGProfileType.add_member(:mig_1_g_47_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_1G_47GB", traits: {"smithy.api#enumValue" => "mig-1g.47gb"}))
+    MIGProfileType.add_member(:mig_2_g_10_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_2G_10GB", traits: {"smithy.api#enumValue" => "mig-2g.10gb"}))
+    MIGProfileType.add_member(:mig_2_g_20_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_2G_20GB", traits: {"smithy.api#enumValue" => "mig-2g.20gb"}))
+    MIGProfileType.add_member(:mig_2_g_35_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_2G_35GB", traits: {"smithy.api#enumValue" => "mig-2g.35gb"}))
+    MIGProfileType.add_member(:mig_2_g_45_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_2G_45GB", traits: {"smithy.api#enumValue" => "mig-2g.45gb"}))
+    MIGProfileType.add_member(:mig_2_g_47_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_2G_47GB", traits: {"smithy.api#enumValue" => "mig-2g.47gb"}))
+    MIGProfileType.add_member(:mig_3_g_20_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_3G_20GB", traits: {"smithy.api#enumValue" => "mig-3g.20gb"}))
+    MIGProfileType.add_member(:mig_3_g_40_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_3G_40GB", traits: {"smithy.api#enumValue" => "mig-3g.40gb"}))
+    MIGProfileType.add_member(:mig_3_g_71_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_3G_71GB", traits: {"smithy.api#enumValue" => "mig-3g.71gb"}))
+    MIGProfileType.add_member(:mig_3_g_90_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_3G_90GB", traits: {"smithy.api#enumValue" => "mig-3g.90gb"}))
+    MIGProfileType.add_member(:mig_3_g_93_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_3G_93GB", traits: {"smithy.api#enumValue" => "mig-3g.93gb"}))
+    MIGProfileType.add_member(:mig_4_g_20_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_4G_20GB", traits: {"smithy.api#enumValue" => "mig-4g.20gb"}))
+    MIGProfileType.add_member(:mig_4_g_40_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_4G_40GB", traits: {"smithy.api#enumValue" => "mig-4g.40gb"}))
+    MIGProfileType.add_member(:mig_4_g_71_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_4G_71GB", traits: {"smithy.api#enumValue" => "mig-4g.71gb"}))
+    MIGProfileType.add_member(:mig_4_g_90_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_4G_90GB", traits: {"smithy.api#enumValue" => "mig-4g.90gb"}))
+    MIGProfileType.add_member(:mig_4_g_93_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_4G_93GB", traits: {"smithy.api#enumValue" => "mig-4g.93gb"}))
+    MIGProfileType.add_member(:mig_7_g_40_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_7G_40GB", traits: {"smithy.api#enumValue" => "mig-7g.40gb"}))
+    MIGProfileType.add_member(:mig_7_g_80_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_7G_80GB", traits: {"smithy.api#enumValue" => "mig-7g.80gb"}))
+    MIGProfileType.add_member(:mig_7_g_141_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_7G_141GB", traits: {"smithy.api#enumValue" => "mig-7g.141gb"}))
+    MIGProfileType.add_member(:mig_7_g_180_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_7G_180GB", traits: {"smithy.api#enumValue" => "mig-7g.180gb"}))
+    MIGProfileType.add_member(:mig_7_g_186_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MIG_7G_186GB", traits: {"smithy.api#enumValue" => "mig-7g.186gb"}))
+    MLflowConfiguration.add_member(:mlflow_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MLflowArn, name: "MlflowResourceArn"))
+    MLflowConfiguration.add_member(:mlflow_experiment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowExperimentEntityName, name: "MlflowExperimentName"))
+    MLflowConfiguration.type = Types::MLflowConfiguration
+    MaintenanceStatus.add_member(:maintenance_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAINTENANCE_IN_PROGRESS", traits: {"smithy.api#enumValue" => "MaintenanceInProgress"}))
+    MaintenanceStatus.add_member(:maintenance_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAINTENANCE_COMPLETE", traits: {"smithy.api#enumValue" => "MaintenanceComplete"}))
+    MaintenanceStatus.add_member(:maintenance_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAINTENANCE_FAILED", traits: {"smithy.api#enumValue" => "MaintenanceFailed"}))
+    ManagedConfiguration.add_member(:managed_storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedStorageType, name: "ManagedStorageType"))
+    ManagedConfiguration.type = Types::ManagedConfiguration
+    ManagedInstanceScalingScaleInStrategy.add_member(:idle_release, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDLE_RELEASE", traits: {"smithy.api#enumValue" => "IDLE_RELEASE"}))
+    ManagedInstanceScalingScaleInStrategy.add_member(:consolidation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONSOLIDATION", traits: {"smithy.api#enumValue" => "CONSOLIDATION"}))
     ManagedInstanceScalingStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     ManagedInstanceScalingStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    ManagedStorageType.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESTRICTED", traits: {"smithy.api#enumValue" => "Restricted"}))
+    MapString2048.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "key"))
+    MapString2048.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String2048, name: "value"))
     MemberDefinition.add_member(:cognito_member_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: CognitoMemberDefinition, name: "CognitoMemberDefinition"))
     MemberDefinition.add_member(:oidc_member_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: OidcMemberDefinition, name: "OidcMemberDefinition"))
     MemberDefinition.type = Types::MemberDefinition
@@ -8741,6 +10340,13 @@ module Aws::SageMaker
     MetricDefinition.add_member(:regex, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricRegex, name: "Regex", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricDefinition.type = Types::MetricDefinition
     MetricDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricDefinition, name: "member"))
+    MetricPublishFrequencyInSeconds.add_member(:freq_10_s, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQ_10_S", traits: {"smithy.api#enumValue" => 10}))
+    MetricPublishFrequencyInSeconds.add_member(:freq_30_s, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQ_30_S", traits: {"smithy.api#enumValue" => 30}))
+    MetricPublishFrequencyInSeconds.add_member(:freq_60_s, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQ_60_S", traits: {"smithy.api#enumValue" => 60}))
+    MetricPublishFrequencyInSeconds.add_member(:freq_120_s, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQ_120_S", traits: {"smithy.api#enumValue" => 120}))
+    MetricPublishFrequencyInSeconds.add_member(:freq_180_s, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQ_180_S", traits: {"smithy.api#enumValue" => 180}))
+    MetricPublishFrequencyInSeconds.add_member(:freq_240_s, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQ_240_S", traits: {"smithy.api#enumValue" => 240}))
+    MetricPublishFrequencyInSeconds.add_member(:freq_300_s, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FREQ_300_S", traits: {"smithy.api#enumValue" => 300}))
     MetricSetSource.add_member(:train, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAIN", traits: {"smithy.api#enumValue" => "Train"}))
     MetricSetSource.add_member(:validation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATION", traits: {"smithy.api#enumValue" => "Validation"}))
     MetricSetSource.add_member(:test, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TEST", traits: {"smithy.api#enumValue" => "Test"}))
@@ -8748,6 +10354,14 @@ module Aws::SageMaker
     MetricSpecification.add_member(:customized, Types::MetricSpecification::Customized, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizedMetricSpecification, name: "Customized"))
     MetricSpecification.add_member(:unknown, Types::MetricSpecification::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     MetricSpecification.type = Types::MetricSpecification
+    MetricsConfig.add_member(:enable_enhanced_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableEnhancedMetrics, name: "EnableEnhancedMetrics"))
+    MetricsConfig.add_member(:enable_detailed_observability, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableDetailedObservability, name: "EnableDetailedObservability"))
+    MetricsConfig.add_member(:metric_publish_frequency_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPublishFrequencyInSeconds, name: "MetricPublishFrequencyInSeconds"))
+    MetricsConfig.type = Types::MetricsConfig
+    MetricsEndpoint.add_member(:metrics_endpoint_path, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsEndpointPath, name: "MetricsEndpointPath", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    MetricsEndpoint.add_member(:metric_publish_frequency_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricPublishFrequencyInSeconds, name: "MetricPublishFrequencyInSeconds"))
+    MetricsEndpoint.type = Types::MetricsEndpoint
+    MetricsEndpointList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MetricsEndpoint, name: "member"))
     MetricsSource.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentType, name: "ContentType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     MetricsSource.add_member(:content_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentDigest, name: "ContentDigest"))
     MetricsSource.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -8772,6 +10386,33 @@ module Aws::SageMaker
     MlTools.add_member(:deepchecks_llm_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEEPCHECKS_LLM_EVALUATION", traits: {"smithy.api#enumValue" => "DeepchecksLLMEvaluation"}))
     MlTools.add_member(:fiddler, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIDDLER", traits: {"smithy.api#enumValue" => "Fiddler"}))
     MlTools.add_member(:hyper_pod_clusters, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HYPER_POD_CLUSTERS", traits: {"smithy.api#enumValue" => "HyperPodClusters"}))
+    MlTools.add_member(:running_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING_INSTANCES", traits: {"smithy.api#enumValue" => "RunningInstances"}))
+    MlTools.add_member(:datasets, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATASETS", traits: {"smithy.api#enumValue" => "Datasets"}))
+    MlTools.add_member(:evaluators, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVALUATORS", traits: {"smithy.api#enumValue" => "Evaluators"}))
+    MlflowAppStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
+    MlflowAppStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "Created"}))
+    MlflowAppStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CreateFailed"}))
+    MlflowAppStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "Updating"}))
+    MlflowAppStatus.add_member(:updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATED", traits: {"smithy.api#enumValue" => "Updated"}))
+    MlflowAppStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UpdateFailed"}))
+    MlflowAppStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    MlflowAppStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETE_FAILED", traits: {"smithy.api#enumValue" => "DeleteFailed"}))
+    MlflowAppStatus.add_member(:deleted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETED", traits: {"smithy.api#enumValue" => "Deleted"}))
+    MlflowAppSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppSummary, name: "member"))
+    MlflowAppSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppArn, name: "Arn"))
+    MlflowAppSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppName, name: "Name"))
+    MlflowAppSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppStatus, name: "Status"))
+    MlflowAppSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
+    MlflowAppSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
+    MlflowAppSummary.add_member(:mlflow_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowVersion, name: "MlflowVersion"))
+    MlflowAppSummary.type = Types::MlflowAppSummary
+    MlflowConfig.add_member(:mlflow_resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlFlowResourceArn, name: "MlflowResourceArn", traits: {"smithy.api#required" => {}}))
+    MlflowConfig.add_member(:mlflow_experiment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowExperimentName, name: "MlflowExperimentName"))
+    MlflowConfig.add_member(:mlflow_run_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowRunName, name: "MlflowRunName"))
+    MlflowConfig.type = Types::MlflowConfig
+    MlflowDetails.add_member(:mlflow_experiment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowExperimentId, name: "MlflowExperimentId"))
+    MlflowDetails.add_member(:mlflow_run_id, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowRunId, name: "MlflowRunId"))
+    MlflowDetails.type = Types::MlflowDetails
     Model.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName"))
     Model.add_member(:primary_container, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDefinition, name: "PrimaryContainer"))
     Model.add_member(:containers, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerDefinitionList, name: "Containers"))
@@ -8987,6 +10628,7 @@ module Aws::SageMaker
     ModelPackage.add_member(:model_package_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "ModelPackageName"))
     ModelPackage.add_member(:model_package_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "ModelPackageGroupName"))
     ModelPackage.add_member(:model_package_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageVersion, name: "ModelPackageVersion"))
+    ModelPackage.add_member(:model_package_registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageRegistrationType, name: "ModelPackageRegistrationType"))
     ModelPackage.add_member(:model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "ModelPackageArn"))
     ModelPackage.add_member(:model_package_description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "ModelPackageDescription"))
     ModelPackage.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "CreationTime"))
@@ -9017,8 +10659,11 @@ module Aws::SageMaker
     ModelPackage.add_member(:skip_model_validation, ::Smithy::Schema::Shapes::MemberShape.new(target: SkipModelValidation, name: "SkipModelValidation"))
     ModelPackage.type = Types::ModelPackage
     ModelPackageArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "member"))
+    ModelPackageConfig.add_member(:model_package_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageGroupArn, name: "ModelPackageGroupArn", traits: {"smithy.api#required" => {}}))
+    ModelPackageConfig.add_member(:source_model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "SourceModelPackageArn"))
+    ModelPackageConfig.type = Types::ModelPackageConfig
     ModelPackageContainerDefinition.add_member(:container_hostname, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerHostname, name: "ContainerHostname"))
-    ModelPackageContainerDefinition.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImage, name: "Image", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ModelPackageContainerDefinition.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImage, name: "Image"))
     ModelPackageContainerDefinition.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "ImageDigest"))
     ModelPackageContainerDefinition.add_member(:model_data_url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "ModelDataUrl"))
     ModelPackageContainerDefinition.add_member(:model_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelDataSource, name: "ModelDataSource"))
@@ -9028,8 +10673,11 @@ module Aws::SageMaker
     ModelPackageContainerDefinition.add_member(:framework, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Framework"))
     ModelPackageContainerDefinition.add_member(:framework_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageFrameworkVersion, name: "FrameworkVersion"))
     ModelPackageContainerDefinition.add_member(:nearest_model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NearestModelName"))
+    ModelPackageContainerDefinition.add_member(:additional_model_data_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelDataSources, name: "AdditionalModelDataSources"))
     ModelPackageContainerDefinition.add_member(:additional_s3_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalS3DataSource, name: "AdditionalS3DataSource"))
     ModelPackageContainerDefinition.add_member(:model_data_e_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ModelDataETag"))
+    ModelPackageContainerDefinition.add_member(:is_checkpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "IsCheckpoint"))
+    ModelPackageContainerDefinition.add_member(:base_model, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseModel, name: "BaseModel"))
     ModelPackageContainerDefinition.type = Types::ModelPackageContainerDefinition
     ModelPackageContainerDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageContainerDefinition, name: "member"))
     ModelPackageGroup.add_member(:model_package_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "ModelPackageGroupName"))
@@ -9053,11 +10701,14 @@ module Aws::SageMaker
     ModelPackageGroupSummary.add_member(:model_package_group_description, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDescription, name: "ModelPackageGroupDescription"))
     ModelPackageGroupSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTime, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModelPackageGroupSummary.add_member(:model_package_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageGroupStatus, name: "ModelPackageGroupStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ModelPackageGroupSummary.add_member(:managed_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedConfiguration, name: "ManagedConfiguration"))
     ModelPackageGroupSummary.type = Types::ModelPackageGroupSummary
     ModelPackageGroupSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageGroupSummary, name: "member"))
     ModelPackageModelCard.add_member(:model_card_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelCardContent, name: "ModelCardContent"))
     ModelPackageModelCard.add_member(:model_card_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelCardStatus, name: "ModelCardStatus"))
     ModelPackageModelCard.type = Types::ModelPackageModelCard
+    ModelPackageRegistrationType.add_member(:logged, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOGGED", traits: {"smithy.api#enumValue" => "Logged"}))
+    ModelPackageRegistrationType.add_member(:registered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGISTERED", traits: {"smithy.api#enumValue" => "Registered"}))
     ModelPackageSecurityConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModelPackageSecurityConfig.type = Types::ModelPackageSecurityConfig
     ModelPackageSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
@@ -9086,6 +10737,7 @@ module Aws::SageMaker
     ModelPackageSummary.add_member(:model_package_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageStatus, name: "ModelPackageStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModelPackageSummary.add_member(:model_approval_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelApprovalStatus, name: "ModelApprovalStatus"))
     ModelPackageSummary.add_member(:model_life_cycle, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelLifeCycle, name: "ModelLifeCycle"))
+    ModelPackageSummary.add_member(:model_package_registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageRegistrationType, name: "ModelPackageRegistrationType"))
     ModelPackageSummary.type = Types::ModelPackageSummary
     ModelPackageSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageSummary, name: "member"))
     ModelPackageType.add_member(:versioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VERSIONED", traits: {"smithy.api#enumValue" => "Versioned"}))
@@ -9122,11 +10774,22 @@ module Aws::SageMaker
     ModelRegisterSettings.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: FeatureStatus, name: "Status"))
     ModelRegisterSettings.add_member(:cross_account_model_register_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "CrossAccountModelRegisterRoleArn"))
     ModelRegisterSettings.type = Types::ModelRegisterSettings
+    ModelRegistrationMode.add_member(:auto_model_registration_enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO_MODEL_REGISTRATION_ENABLED", traits: {"smithy.api#enumValue" => "AutoModelRegistrationEnabled"}))
+    ModelRegistrationMode.add_member(:auto_model_registration_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO_MODEL_REGISTRATION_DISABLED", traits: {"smithy.api#enumValue" => "AutoModelRegistrationDisabled"}))
     ModelShardingConfig.add_member(:image, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationContainerImage, name: "Image"))
     ModelShardingConfig.add_member(:override_environment, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobEnvironmentVariables, name: "OverrideEnvironment"))
     ModelShardingConfig.type = Types::ModelShardingConfig
     ModelSortKey.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Name", traits: {"smithy.api#enumValue" => "Name"}))
     ModelSortKey.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CreationTime", traits: {"smithy.api#enumValue" => "CreationTime"}))
+    ModelSpeculativeDecodingConfig.add_member(:technique, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelSpeculativeDecodingTechnique, name: "Technique", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ModelSpeculativeDecodingConfig.add_member(:training_data_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelSpeculativeDecodingTrainingDataSource, name: "TrainingDataSource"))
+    ModelSpeculativeDecodingConfig.type = Types::ModelSpeculativeDecodingConfig
+    ModelSpeculativeDecodingS3DataType.add_member(:s3_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3Prefix", traits: {"smithy.api#enumValue" => "S3Prefix"}))
+    ModelSpeculativeDecodingS3DataType.add_member(:manifest_file, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ManifestFile", traits: {"smithy.api#enumValue" => "ManifestFile"}))
+    ModelSpeculativeDecodingTechnique.add_member(:eagle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EAGLE", traits: {"smithy.api#enumValue" => "EAGLE"}))
+    ModelSpeculativeDecodingTrainingDataSource.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ModelSpeculativeDecodingTrainingDataSource.add_member(:s3_data_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelSpeculativeDecodingS3DataType, name: "S3DataType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ModelSpeculativeDecodingTrainingDataSource.type = Types::ModelSpeculativeDecodingTrainingDataSource
     ModelStepMetadata.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "Arn"))
     ModelStepMetadata.type = Types::ModelStepMetadata
     ModelSummary.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -9320,6 +10983,8 @@ module Aws::SageMaker
     NodeAdditionResult.add_member(:node_logical_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeLogicalId, name: "NodeLogicalId", traits: {"smithy.api#required" => {}}))
     NodeAdditionResult.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupName, name: "InstanceGroupName", traits: {"smithy.api#required" => {}}))
     NodeAdditionResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceStatus, name: "Status", traits: {"smithy.api#required" => {}}))
+    NodeAdditionResult.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAvailabilityZones, name: "AvailabilityZones"))
+    NodeAdditionResult.add_member(:instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceTypes, name: "InstanceTypes"))
     NodeAdditionResult.type = Types::NodeAdditionResult
     NodeAdditionResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NodeAdditionResult, name: "member"))
     NodeUnavailabilityType.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_COUNT", traits: {"smithy.api#enumValue" => "INSTANCE_COUNT"}))
@@ -9357,6 +11022,8 @@ module Aws::SageMaker
     NotebookInstanceStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Failed", traits: {"smithy.api#enumValue" => "Failed"}))
     NotebookInstanceStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Deleting", traits: {"smithy.api#enumValue" => "Deleting"}))
     NotebookInstanceStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Updating", traits: {"smithy.api#enumValue" => "Updating"}))
+    NotebookInstanceStatus.add_member(:pending_maintenance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PendingMaintenance", traits: {"smithy.api#enumValue" => "PendingMaintenance"}))
+    NotebookInstanceStatus.add_member(:in_maintenance, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InMaintenance", traits: {"smithy.api#enumValue" => "InMaintenance"}))
     NotebookInstanceSummary.add_member(:notebook_instance_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookInstanceName, name: "NotebookInstanceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     NotebookInstanceSummary.add_member(:notebook_instance_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookInstanceArn, name: "NotebookInstanceArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     NotebookInstanceSummary.add_member(:notebook_instance_status, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookInstanceStatus, name: "NotebookInstanceStatus"))
@@ -9421,6 +11088,7 @@ module Aws::SageMaker
     OnlineStoreConfig.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "StorageType"))
     OnlineStoreConfig.type = Types::OnlineStoreConfig
     OnlineStoreConfigUpdate.add_member(:ttl_duration, ::Smithy::Schema::Shapes::MemberShape.new(target: TtlDuration, name: "TtlDuration"))
+    OnlineStoreConfigUpdate.add_member(:storage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StorageType, name: "StorageType"))
     OnlineStoreConfigUpdate.type = Types::OnlineStoreConfigUpdate
     OnlineStoreSecurityConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId"))
     OnlineStoreSecurityConfig.type = Types::OnlineStoreSecurityConfig
@@ -9437,12 +11105,21 @@ module Aws::SageMaker
     OptimizationConfig.add_member(:model_quantization_config, Types::OptimizationConfig::ModelQuantizationConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelQuantizationConfig, name: "ModelQuantizationConfig"))
     OptimizationConfig.add_member(:model_compilation_config, Types::OptimizationConfig::ModelCompilationConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelCompilationConfig, name: "ModelCompilationConfig"))
     OptimizationConfig.add_member(:model_sharding_config, Types::OptimizationConfig::ModelShardingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelShardingConfig, name: "ModelShardingConfig"))
+    OptimizationConfig.add_member(:model_speculative_decoding_config, Types::OptimizationConfig::ModelSpeculativeDecodingConfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelSpeculativeDecodingConfig, name: "ModelSpeculativeDecodingConfig"))
     OptimizationConfig.add_member(:unknown, Types::OptimizationConfig::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     OptimizationConfig.type = Types::OptimizationConfig
     OptimizationConfigs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationConfig, name: "member"))
     OptimizationJobDeploymentInstanceType.add_member(:ml_p4_d_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P4D_24XLARGE", traits: {"smithy.api#enumValue" => "ml.p4d.24xlarge"}))
     OptimizationJobDeploymentInstanceType.add_member(:ml_p4_de_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P4DE_24XLARGE", traits: {"smithy.api#enumValue" => "ml.p4de.24xlarge"}))
     OptimizationJobDeploymentInstanceType.add_member(:ml_p5_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.48xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_p5_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5e.48xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_p5_en_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5EN_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p5en.48xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g4_dn_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g4_dn_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.2xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g4_dn_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.4xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g4_dn_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.8xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g4_dn_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.12xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g4_dn_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G4DN_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g4dn.16xlarge"}))
     OptimizationJobDeploymentInstanceType.add_member(:ml_g5_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.xlarge"}))
     OptimizationJobDeploymentInstanceType.add_member(:ml_g5_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.2xlarge"}))
     OptimizationJobDeploymentInstanceType.add_member(:ml_g5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g5.4xlarge"}))
@@ -9474,15 +11151,30 @@ module Aws::SageMaker
     OptimizationJobDeploymentInstanceType.add_member(:ml_trn1_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_TRN1_2XLARGE", traits: {"smithy.api#enumValue" => "ml.trn1.2xlarge"}))
     OptimizationJobDeploymentInstanceType.add_member(:ml_trn1_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_TRN1_32XLARGE", traits: {"smithy.api#enumValue" => "ml.trn1.32xlarge"}))
     OptimizationJobDeploymentInstanceType.add_member(:ml_trn1_n_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_TRN1N_32XLARGE", traits: {"smithy.api#enumValue" => "ml.trn1n.32xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_p6_b200_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6_B200_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p6-b200.48xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.2xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.4xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.8xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.12xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.24xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.48xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.2xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.4xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.8xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.12xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.24xlarge"}))
+    OptimizationJobDeploymentInstanceType.add_member(:ml_g7_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.48xlarge"}))
     OptimizationJobEnvironmentVariables.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "key"))
     OptimizationJobEnvironmentVariables.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "value"))
     OptimizationJobModelSource.add_member(:s3, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobModelSourceS3, name: "S3"))
+    OptimizationJobModelSource.add_member(:sage_maker_model, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationSageMakerModel, name: "SageMakerModel"))
     OptimizationJobModelSource.type = Types::OptimizationJobModelSource
     OptimizationJobModelSourceS3.add_member(:s3_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3Uri"))
     OptimizationJobModelSourceS3.add_member(:model_access_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationModelAccessConfig, name: "ModelAccessConfig"))
     OptimizationJobModelSourceS3.type = Types::OptimizationJobModelSourceS3
     OptimizationJobOutputConfig.add_member(:kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "KmsKeyId"))
     OptimizationJobOutputConfig.add_member(:s3_output_location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3OutputLocation", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OptimizationJobOutputConfig.add_member(:sage_maker_model, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationSageMakerModel, name: "SageMakerModel"))
     OptimizationJobOutputConfig.type = Types::OptimizationJobOutputConfig
     OptimizationJobStatus.add_member(:inprogress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INPROGRESS", traits: {"smithy.api#enumValue" => "INPROGRESS"}))
     OptimizationJobStatus.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED", traits: {"smithy.api#enumValue" => "COMPLETED"}))
@@ -9499,12 +11191,16 @@ module Aws::SageMaker
     OptimizationJobSummary.add_member(:optimization_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "OptimizationEndTime"))
     OptimizationJobSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: LastModifiedTime, name: "LastModifiedTime"))
     OptimizationJobSummary.add_member(:deployment_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobDeploymentInstanceType, name: "DeploymentInstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    OptimizationJobSummary.add_member(:max_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationJobMaxInstanceCount, name: "MaxInstanceCount"))
     OptimizationJobSummary.add_member(:optimization_types, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationTypes, name: "OptimizationTypes", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OptimizationJobSummary.type = Types::OptimizationJobSummary
+    OptimizationJobTrainingPlanArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArn, name: "member"))
     OptimizationModelAccessConfig.add_member(:accept_eula, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationModelAcceptEula, name: "AcceptEula", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OptimizationModelAccessConfig.type = Types::OptimizationModelAccessConfig
     OptimizationOutput.add_member(:recommended_inference_image, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationContainerImage, name: "RecommendedInferenceImage"))
     OptimizationOutput.type = Types::OptimizationOutput
+    OptimizationSageMakerModel.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName"))
+    OptimizationSageMakerModel.type = Types::OptimizationSageMakerModel
     OptimizationTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationType, name: "member"))
     OptimizationVpcConfig.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationVpcSecurityGroupIds, name: "SecurityGroupIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     OptimizationVpcConfig.add_member(:subnets, ::Smithy::Schema::Shapes::MemberShape.new(target: OptimizationVpcSubnets, name: "Subnets", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -9564,8 +11260,11 @@ module Aws::SageMaker
     PartnerAppArguments.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "key"))
     PartnerAppArguments.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "value"))
     PartnerAppAuthType.add_member(:iam, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IAM", traits: {"smithy.api#enumValue" => "IAM"}))
+    PartnerAppAuthType.add_member(:idc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDC", traits: {"smithy.api#enumValue" => "IDC"}))
     PartnerAppConfig.add_member(:admin_users, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppAdminUserList, name: "AdminUsers"))
     PartnerAppConfig.add_member(:arguments, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppArguments, name: "Arguments"))
+    PartnerAppConfig.add_member(:assigned_group_patterns, ::Smithy::Schema::Shapes::MemberShape.new(target: AssignedGroupPatternsList, name: "AssignedGroupPatterns"))
+    PartnerAppConfig.add_member(:role_group_assignments, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleGroupAssignmentsList, name: "RoleGroupAssignments"))
     PartnerAppConfig.type = Types::PartnerAppConfig
     PartnerAppMaintenanceConfig.add_member(:maintenance_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyScheduleTimeFormat, name: "MaintenanceWindowStart"))
     PartnerAppMaintenanceConfig.type = Types::PartnerAppMaintenanceConfig
@@ -9587,6 +11286,7 @@ module Aws::SageMaker
     PartnerAppType.add_member(:comet, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMET", traits: {"smithy.api#enumValue" => "comet"}))
     PartnerAppType.add_member(:deepchecks_llm_evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEEPCHECKS_LLM_EVALUATION", traits: {"smithy.api#enumValue" => "deepchecks-llm-evaluation"}))
     PartnerAppType.add_member(:fiddler, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIDDLER", traits: {"smithy.api#enumValue" => "fiddler"}))
+    Peft.add_member(:lora, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LORA", traits: {"smithy.api#enumValue" => "LORA"}))
     PendingDeploymentSummary.add_member(:endpoint_config_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfigName, name: "EndpointConfigName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     PendingDeploymentSummary.add_member(:production_variants, ::Smithy::Schema::Shapes::MemberShape.new(target: PendingProductionVariantSummaryList, name: "ProductionVariants"))
     PendingDeploymentSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
@@ -9599,6 +11299,7 @@ module Aws::SageMaker
     PendingProductionVariantSummary.add_member(:current_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskCount, name: "CurrentInstanceCount"))
     PendingProductionVariantSummary.add_member(:desired_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskCount, name: "DesiredInstanceCount"))
     PendingProductionVariantSummary.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantInstanceType, name: "InstanceType"))
+    PendingProductionVariantSummary.add_member(:instance_pools, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePoolSummaryList, name: "InstancePools"))
     PendingProductionVariantSummary.add_member(:accelerator_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantAcceleratorType, name: "AcceleratorType"))
     PendingProductionVariantSummary.add_member(:variant_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantStatusList, name: "VariantStatus"))
     PendingProductionVariantSummary.add_member(:current_serverless_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantServerlessConfig, name: "CurrentServerlessConfig"))
@@ -9652,6 +11353,7 @@ module Aws::SageMaker
     PipelineExecutionStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
     PipelineExecutionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     PipelineExecutionStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "Succeeded"}))
+    PipelineExecutionStatus.add_member(:completed_with_failures, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETED_WITH_FAILURES", traits: {"smithy.api#enumValue" => "CompletedWithFailures"}))
     PipelineExecutionStep.add_member(:step_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StepName, name: "StepName"))
     PipelineExecutionStep.add_member(:step_display_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StepDisplayName, name: "StepDisplayName"))
     PipelineExecutionStep.add_member(:step_description, ::Smithy::Schema::Shapes::MemberShape.new(target: StepDescription, name: "StepDescription"))
@@ -9663,6 +11365,7 @@ module Aws::SageMaker
     PipelineExecutionStep.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionStepMetadata, name: "Metadata"))
     PipelineExecutionStep.add_member(:attempt_count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "AttemptCount"))
     PipelineExecutionStep.add_member(:selective_execution_result, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveExecutionResult, name: "SelectiveExecutionResult"))
+    PipelineExecutionStep.add_member(:iteration_context, ::Smithy::Schema::Shapes::MemberShape.new(target: IterationContext, name: "IterationContext"))
     PipelineExecutionStep.type = Types::PipelineExecutionStep
     PipelineExecutionStepList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionStep, name: "member"))
     PipelineExecutionStepMetadata.add_member(:training_job, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobStepMetadata, name: "TrainingJob"))
@@ -9675,12 +11378,23 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:callback, ::Smithy::Schema::Shapes::MemberShape.new(target: CallbackStepMetadata, name: "Callback"))
     PipelineExecutionStepMetadata.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: LambdaStepMetadata, name: "Lambda"))
     PipelineExecutionStepMetadata.add_member(:emr, ::Smithy::Schema::Shapes::MemberShape.new(target: EMRStepMetadata, name: "EMR"))
+    PipelineExecutionStepMetadata.add_member(:emr_serverless, ::Smithy::Schema::Shapes::MemberShape.new(target: EMRServerlessStepMetadata, name: "EMRServerless"))
     PipelineExecutionStepMetadata.add_member(:quality_check, ::Smithy::Schema::Shapes::MemberShape.new(target: QualityCheckStepMetadata, name: "QualityCheck"))
     PipelineExecutionStepMetadata.add_member(:clarify_check, ::Smithy::Schema::Shapes::MemberShape.new(target: ClarifyCheckStepMetadata, name: "ClarifyCheck"))
     PipelineExecutionStepMetadata.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: FailStepMetadata, name: "Fail"))
     PipelineExecutionStepMetadata.add_member(:auto_ml_job, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoMLJobStepMetadata, name: "AutoMLJob"))
     PipelineExecutionStepMetadata.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointStepMetadata, name: "Endpoint"))
     PipelineExecutionStepMetadata.add_member(:endpoint_config, ::Smithy::Schema::Shapes::MemberShape.new(target: EndpointConfigStepMetadata, name: "EndpointConfig"))
+    PipelineExecutionStepMetadata.add_member(:bedrock_custom_model, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockCustomModelMetadata, name: "BedrockCustomModel"))
+    PipelineExecutionStepMetadata.add_member(:bedrock_custom_model_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockCustomModelDeploymentMetadata, name: "BedrockCustomModelDeployment"))
+    PipelineExecutionStepMetadata.add_member(:bedrock_provisioned_model_throughput, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockProvisionedModelThroughputMetadata, name: "BedrockProvisionedModelThroughput"))
+    PipelineExecutionStepMetadata.add_member(:bedrock_model_import, ::Smithy::Schema::Shapes::MemberShape.new(target: BedrockModelImportMetadata, name: "BedrockModelImport"))
+    PipelineExecutionStepMetadata.add_member(:inference_component, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentMetadata, name: "InferenceComponent"))
+    PipelineExecutionStepMetadata.add_member(:lineage, ::Smithy::Schema::Shapes::MemberShape.new(target: LineageMetadata, name: "Lineage"))
+    PipelineExecutionStepMetadata.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: JobStepMetadata, name: "Job"))
+    PipelineExecutionStepMetadata.add_member(:athena, ::Smithy::Schema::Shapes::MemberShape.new(target: AthenaStepMetadata, name: "Athena"))
+    PipelineExecutionStepMetadata.add_member(:cleanup, ::Smithy::Schema::Shapes::MemberShape.new(target: CleanupStepMetadata, name: "Cleanup"))
+    PipelineExecutionStepMetadata.add_member(:for_each, ::Smithy::Schema::Shapes::MemberShape.new(target: ForEachStepMetadata, name: "ForEach"))
     PipelineExecutionStepMetadata.type = Types::PipelineExecutionStepMetadata
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionArn, name: "PipelineExecutionArn"))
     PipelineExecutionSummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
@@ -9733,6 +11447,9 @@ module Aws::SageMaker
     PredefinedMetricSpecification.type = Types::PredefinedMetricSpecification
     PreemptTeamTasks.add_member(:never, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NEVER", traits: {"smithy.api#enumValue" => "Never"}))
     PreemptTeamTasks.add_member(:lowerpriority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOWERPRIORITY", traits: {"smithy.api#enumValue" => "LowerPriority"}))
+    PrefixAwareRoutingConfig.add_member(:prefix_length, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixAwareRoutingPrefixLength, name: "PrefixLength"))
+    PrefixAwareRoutingConfig.add_member(:concurrency_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixAwareRoutingConcurrencyThreshold, name: "ConcurrencyThreshold"))
+    PrefixAwareRoutingConfig.type = Types::PrefixAwareRoutingConfig
     PresignedUrlAccessConfig.add_member(:accept_eula, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AcceptEula"))
     PresignedUrlAccessConfig.add_member(:expected_s3_url, ::Smithy::Schema::Shapes::MemberShape.new(target: S3ModelUri, name: "ExpectedS3Url"))
     PresignedUrlAccessConfig.type = Types::PresignedUrlAccessConfig
@@ -9743,10 +11460,13 @@ module Aws::SageMaker
     ProblemType.add_member(:binary_classification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BINARY_CLASSIFICATION", traits: {"smithy.api#enumValue" => "BinaryClassification"}))
     ProblemType.add_member(:multiclass_classification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTICLASS_CLASSIFICATION", traits: {"smithy.api#enumValue" => "MulticlassClassification"}))
     ProblemType.add_member(:regression, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REGRESSION", traits: {"smithy.api#enumValue" => "Regression"}))
-    ProcessingClusterConfig.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstanceCount, name: "InstanceCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ProcessingClusterConfig.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ProcessingClusterConfig.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstanceCount, name: "InstanceCount", traits: {"smithy.api#clientOptional" => {}}))
+    ProcessingClusterConfig.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}}))
     ProcessingClusterConfig.add_member(:volume_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingVolumeSizeInGB, name: "VolumeSizeInGB", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ProcessingClusterConfig.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "VolumeKmsKeyId"))
+    ProcessingClusterConfig.add_member(:instance_preferences, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstancePreferenceList, name: "InstancePreferences"))
+    ProcessingClusterConfig.add_member(:selected_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstanceType, name: "SelectedInstanceType"))
+    ProcessingClusterConfig.add_member(:selected_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstanceCount, name: "SelectedInstanceCount"))
     ProcessingClusterConfig.type = Types::ProcessingClusterConfig
     ProcessingEnvironmentMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingEnvironmentKey, name: "key"))
     ProcessingEnvironmentMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingEnvironmentValue, name: "value"))
@@ -9758,6 +11478,10 @@ module Aws::SageMaker
     ProcessingInput.add_member(:dataset_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: DatasetDefinition, name: "DatasetDefinition"))
     ProcessingInput.type = Types::ProcessingInput
     ProcessingInputs.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInput, name: "member"))
+    ProcessingInstancePreference.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ProcessingInstancePreference.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstanceCount, name: "InstanceCount"))
+    ProcessingInstancePreference.type = Types::ProcessingInstancePreference
+    ProcessingInstancePreferenceList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInstancePreference, name: "member"))
     ProcessingInstanceType.add_member(:ml_t3_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_T3_MEDIUM", traits: {"smithy.api#enumValue" => "ml.t3.medium"}))
     ProcessingInstanceType.add_member(:ml_t3_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_T3_LARGE", traits: {"smithy.api#enumValue" => "ml.t3.large"}))
     ProcessingInstanceType.add_member(:ml_t3_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_T3_XLARGE", traits: {"smithy.api#enumValue" => "ml.t3.xlarge"}))
@@ -9879,6 +11603,92 @@ module Aws::SageMaker
     ProcessingInstanceType.add_member(:ml_r7_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R7I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.r7i.24xlarge"}))
     ProcessingInstanceType.add_member(:ml_r7_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R7I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.r7i.48xlarge"}))
     ProcessingInstanceType.add_member(:ml_p5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.24xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.48xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.24xlarge"}))
+    ProcessingInstanceType.add_member(:ml_g7_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.48xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r6_i_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_LARGE", traits: {"smithy.api#enumValue" => "ml.r6i.large"}))
+    ProcessingInstanceType.add_member(:ml_r6_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r6_i_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_2XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r6_i_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_4XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r6_i_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_8XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r6_i_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_12XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r6_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.16xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r6_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.24xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r6_i_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_32XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.32xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_LARGE", traits: {"smithy.api#enumValue" => "ml.m8i.large"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.16xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.24xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_32XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.32xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.48xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_96_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_96XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.96xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.16xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.24xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_32XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.32xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.48xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_96_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_96XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.96xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_LARGE", traits: {"smithy.api#enumValue" => "ml.r8i.large"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_2XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_4XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_8XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_12XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.16xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.24xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_32XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.32xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.48xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_96_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_96XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.96xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m7_i_flex_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_LARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.large"}))
+    ProcessingInstanceType.add_member(:ml_m7_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m7_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m7_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m7_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m7_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m7_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.16xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c7_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c7_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c7_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c7_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c7_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c7_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.16xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_flex_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_LARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.large"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_m8_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.16xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_c8_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.16xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_flex_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_LARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.large"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.2xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.4xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.8xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.12xlarge"}))
+    ProcessingInstanceType.add_member(:ml_r8_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.16xlarge"}))
     ProcessingJob.add_member(:processing_inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingInputs, name: "ProcessingInputs"))
     ProcessingJob.add_member(:processing_output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingOutputConfig, name: "ProcessingOutputConfig"))
     ProcessingJob.add_member(:processing_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ProcessingJobName, name: "ProcessingJobName"))
@@ -9960,6 +11770,8 @@ module Aws::SageMaker
     ProductionVariant.add_member(:model_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelName, name: "ModelName"))
     ProductionVariant.add_member(:initial_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: InitialTaskCount, name: "InitialInstanceCount"))
     ProductionVariant.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantInstanceType, name: "InstanceType"))
+    ProductionVariant.add_member(:instance_pools, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePoolList, name: "InstancePools"))
+    ProductionVariant.add_member(:variant_instance_provision_timeout_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantInstanceProvisionTimeoutInSeconds, name: "VariantInstanceProvisionTimeoutInSeconds"))
     ProductionVariant.add_member(:initial_variant_weight, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantWeight, name: "InitialVariantWeight"))
     ProductionVariant.add_member(:accelerator_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantAcceleratorType, name: "AcceleratorType"))
     ProductionVariant.add_member(:core_dump_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantCoreDumpConfig, name: "CoreDumpConfig"))
@@ -9996,6 +11808,7 @@ module Aws::SageMaker
     ProductionVariantInferenceAmiVersion.add_member(:al2_gpu_2_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AL2_GPU_2_1", traits: {"smithy.api#enumValue" => "al2-ami-sagemaker-inference-gpu-2-1"}))
     ProductionVariantInferenceAmiVersion.add_member(:al2_gpu_3_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AL2_GPU_3_1", traits: {"smithy.api#enumValue" => "al2-ami-sagemaker-inference-gpu-3-1"}))
     ProductionVariantInferenceAmiVersion.add_member(:al2_neuron_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AL2_NEURON_2", traits: {"smithy.api#enumValue" => "al2-ami-sagemaker-inference-neuron-2"}))
+    ProductionVariantInferenceAmiVersion.add_member(:al2023_gpu_4_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AL2023_GPU_4_1", traits: {"smithy.api#enumValue" => "al2023-ami-sagemaker-inference-gpu-4-1"}))
     ProductionVariantInstanceType.add_member(:ml_t2_medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_T2_MEDIUM", traits: {"smithy.api#enumValue" => "ml.t2.medium"}))
     ProductionVariantInstanceType.add_member(:ml_t2_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_T2_LARGE", traits: {"smithy.api#enumValue" => "ml.t2.large"}))
     ProductionVariantInstanceType.add_member(:ml_t2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_T2_XLARGE", traits: {"smithy.api#enumValue" => "ml.t2.xlarge"}))
@@ -10124,6 +11937,18 @@ module Aws::SageMaker
     ProductionVariantInstanceType.add_member(:ml_g6_e_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.16xlarge"}))
     ProductionVariantInstanceType.add_member(:ml_g6_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.24xlarge"}))
     ProductionVariantInstanceType.add_member(:ml_g6_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.48xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.2xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.4xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.8xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.12xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.24xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.48xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.2xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.4xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.8xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.12xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.24xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_g7_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.48xlarge"}))
     ProductionVariantInstanceType.add_member(:ml_p4_d_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P4D_24XLARGE", traits: {"smithy.api#enumValue" => "ml.p4d.24xlarge"}))
     ProductionVariantInstanceType.add_member(:ml_c7_g_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_LARGE", traits: {"smithy.api#enumValue" => "ml.c7g.large"}))
     ProductionVariantInstanceType.add_member(:ml_c7_g_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7G_XLARGE", traits: {"smithy.api#enumValue" => "ml.c7g.xlarge"}))
@@ -10258,14 +12083,21 @@ module Aws::SageMaker
     ProductionVariantInstanceType.add_member(:ml_c6_in_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6IN_24XLARGE", traits: {"smithy.api#enumValue" => "ml.c6in.24xlarge"}))
     ProductionVariantInstanceType.add_member(:ml_c6_in_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C6IN_32XLARGE", traits: {"smithy.api#enumValue" => "ml.c6in.32xlarge"}))
     ProductionVariantInstanceType.add_member(:ml_p6_b200_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6_B200_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p6-b200.48xlarge"}))
+    ProductionVariantInstanceType.add_member(:ml_p6_b300_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6_B300_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p6-b300.48xlarge"}))
     ProductionVariantInstanceType.add_member(:ml_p6_e_gb200_36_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6E_GB200_36XLARGE", traits: {"smithy.api#enumValue" => "ml.p6e-gb200.36xlarge"}))
     ProductionVariantInstanceType.add_member(:ml_p5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.4xlarge"}))
     ProductionVariantList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariant, name: "member"))
     ProductionVariantManagedInstanceScaling.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstanceScalingStatus, name: "Status"))
     ProductionVariantManagedInstanceScaling.add_member(:min_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstanceScalingMinInstanceCount, name: "MinInstanceCount"))
     ProductionVariantManagedInstanceScaling.add_member(:max_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstanceScalingMaxInstanceCount, name: "MaxInstanceCount"))
+    ProductionVariantManagedInstanceScaling.add_member(:scale_in_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantManagedInstanceScalingScaleInPolicy, name: "ScaleInPolicy"))
     ProductionVariantManagedInstanceScaling.type = Types::ProductionVariantManagedInstanceScaling
+    ProductionVariantManagedInstanceScalingScaleInPolicy.add_member(:strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstanceScalingScaleInStrategy, name: "Strategy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ProductionVariantManagedInstanceScalingScaleInPolicy.add_member(:maximum_step_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstanceScalingMaximumStepSize, name: "MaximumStepSize"))
+    ProductionVariantManagedInstanceScalingScaleInPolicy.add_member(:cooldown_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ManagedInstanceScalingCooldownInMinutes, name: "CooldownInMinutes"))
+    ProductionVariantManagedInstanceScalingScaleInPolicy.type = Types::ProductionVariantManagedInstanceScalingScaleInPolicy
     ProductionVariantRoutingConfig.add_member(:routing_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: RoutingStrategy, name: "RoutingStrategy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ProductionVariantRoutingConfig.add_member(:prefix_aware_routing_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PrefixAwareRoutingConfig, name: "PrefixAwareRoutingConfig"))
     ProductionVariantRoutingConfig.type = Types::ProductionVariantRoutingConfig
     ProductionVariantServerlessConfig.add_member(:memory_size_in_mb, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessMemorySizeInMB, name: "MemorySizeInMB", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ProductionVariantServerlessConfig.add_member(:max_concurrency, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessMaxConcurrency, name: "MaxConcurrency", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -10285,6 +12117,7 @@ module Aws::SageMaker
     ProductionVariantSummary.add_member(:desired_weight, ::Smithy::Schema::Shapes::MemberShape.new(target: VariantWeight, name: "DesiredWeight"))
     ProductionVariantSummary.add_member(:current_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskCount, name: "CurrentInstanceCount"))
     ProductionVariantSummary.add_member(:desired_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskCount, name: "DesiredInstanceCount"))
+    ProductionVariantSummary.add_member(:instance_pools, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePoolSummaryList, name: "InstancePools"))
     ProductionVariantSummary.add_member(:variant_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantStatusList, name: "VariantStatus"))
     ProductionVariantSummary.add_member(:current_serverless_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantServerlessConfig, name: "CurrentServerlessConfig"))
     ProductionVariantSummary.add_member(:desired_serverless_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantServerlessConfig, name: "DesiredServerlessConfig"))
@@ -10431,7 +12264,7 @@ module Aws::SageMaker
     RStudioServerProDomainSettingsForUpdate.type = Types::RStudioServerProDomainSettingsForUpdate
     RStudioServerProUserGroup.add_member(:admin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Admin", traits: {"smithy.api#enumValue" => "R_STUDIO_ADMIN"}))
     RStudioServerProUserGroup.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "User", traits: {"smithy.api#enumValue" => "R_STUDIO_USER"}))
-    RealTimeInferenceConfig.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    RealTimeInferenceConfig.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductionVariantInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RealTimeInferenceConfig.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TaskCount, name: "InstanceCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RealTimeInferenceConfig.type = Types::RealTimeInferenceConfig
     RealTimeInferenceRecommendation.add_member(:recommendation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RecommendationId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -10545,6 +12378,7 @@ module Aws::SageMaker
     RegisterModelStepMetadata.type = Types::RegisterModelStepMetadata
     Relation.add_member(:equal_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUAL_TO", traits: {"smithy.api#enumValue" => "EqualTo"}))
     Relation.add_member(:greater_than_or_equal_to, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GREATER_THAN_OR_EQUAL_TO", traits: {"smithy.api#enumValue" => "GreaterThanOrEqualTo"}))
+    ReleaseNotesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String1024, name: "member"))
     RemoteDebugConfig.add_member(:enable_remote_debug, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableRemoteDebug, name: "EnableRemoteDebug"))
     RemoteDebugConfig.type = Types::RemoteDebugConfig
     RemoteDebugConfigForUpdate.add_member(:enable_remote_debug, ::Smithy::Schema::Shapes::MemberShape.new(target: EnableRemoteDebug, name: "EnableRemoteDebug"))
@@ -10577,6 +12411,7 @@ module Aws::SageMaker
     ReservedCapacityInstanceType.add_member(:ml_p4_de_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P4DE_24XLARGE", traits: {"smithy.api#enumValue" => "ml.p4de.24xlarge"}))
     ReservedCapacityInstanceType.add_member(:ml_p6_e_gb200_36_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6E_GB200_36XLARGE", traits: {"smithy.api#enumValue" => "ml.p6e-gb200.36xlarge"}))
     ReservedCapacityInstanceType.add_member(:ml_p5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.4xlarge"}))
+    ReservedCapacityInstanceType.add_member(:ml_p6_b300_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6_B300_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p6-b300.48xlarge"}))
     ReservedCapacityOffering.add_member(:reserved_capacity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCapacityType, name: "ReservedCapacityType"))
     ReservedCapacityOffering.add_member(:ultra_server_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UltraServerType, name: "UltraServerType"))
     ReservedCapacityOffering.add_member(:ultra_server_count, ::Smithy::Schema::Shapes::MemberShape.new(target: UltraServerCount, name: "UltraServerCount"))
@@ -10587,6 +12422,8 @@ module Aws::SageMaker
     ReservedCapacityOffering.add_member(:duration_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCapacityDurationMinutes, name: "DurationMinutes"))
     ReservedCapacityOffering.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
     ReservedCapacityOffering.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    ReservedCapacityOffering.add_member(:extension_start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExtensionStartTime"))
+    ReservedCapacityOffering.add_member(:extension_end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExtensionEndTime"))
     ReservedCapacityOffering.type = Types::ReservedCapacityOffering
     ReservedCapacityOfferings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCapacityOffering, name: "member"))
     ReservedCapacityStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
@@ -10603,6 +12440,7 @@ module Aws::SageMaker
     ReservedCapacitySummary.add_member(:total_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalInstanceCount, name: "TotalInstanceCount", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ReservedCapacitySummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCapacityStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ReservedCapacitySummary.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZone, name: "AvailabilityZone"))
+    ReservedCapacitySummary.add_member(:availability_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneId, name: "AvailabilityZoneId"))
     ReservedCapacitySummary.add_member(:duration_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCapacityDurationHours, name: "DurationHours"))
     ReservedCapacitySummary.add_member(:duration_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCapacityDurationMinutes, name: "DurationMinutes"))
     ReservedCapacitySummary.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTime"))
@@ -10625,12 +12463,15 @@ module Aws::SageMaker
     ResourceCatalogSortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "Descending"}))
     ResourceConfig.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingInstanceType, name: "InstanceType"))
     ResourceConfig.add_member(:instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingInstanceCount, name: "InstanceCount"))
-    ResourceConfig.add_member(:volume_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: VolumeSizeInGB, name: "VolumeSizeInGB", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ResourceConfig.add_member(:volume_size_in_gb, ::Smithy::Schema::Shapes::MemberShape.new(target: OptionalVolumeSizeInGB, name: "VolumeSizeInGB", traits: {"smithy.api#clientOptional" => {}}))
     ResourceConfig.add_member(:volume_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "VolumeKmsKeyId"))
     ResourceConfig.add_member(:keep_alive_period_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: KeepAlivePeriodInSeconds, name: "KeepAlivePeriodInSeconds"))
     ResourceConfig.add_member(:instance_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceGroups, name: "InstanceGroups"))
     ResourceConfig.add_member(:training_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArn, name: "TrainingPlanArn"))
     ResourceConfig.add_member(:instance_placement_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePlacementConfig, name: "InstancePlacementConfig"))
+    ResourceConfig.add_member(:instance_preferences, ::Smithy::Schema::Shapes::MemberShape.new(target: InstancePreferenceList, name: "InstancePreferences"))
+    ResourceConfig.add_member(:selected_instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingInstanceType, name: "SelectedInstanceType"))
+    ResourceConfig.add_member(:selected_instance_count, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingInstanceCount, name: "SelectedInstanceCount"))
     ResourceConfig.type = Types::ResourceConfig
     ResourceConfigForUpdate.add_member(:keep_alive_period_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: KeepAlivePeriodInSeconds, name: "KeepAlivePeriodInSeconds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceConfigForUpdate.type = Types::ResourceConfigForUpdate
@@ -10646,6 +12487,7 @@ module Aws::SageMaker
     ResourceNotFound.type = Types::ResourceNotFound
     ResourceSharingConfig.add_member(:strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceSharingStrategy, name: "Strategy", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ResourceSharingConfig.add_member(:borrow_limit, ::Smithy::Schema::Shapes::MemberShape.new(target: BorrowLimit, name: "BorrowLimit"))
+    ResourceSharingConfig.add_member(:absolute_borrow_limits, ::Smithy::Schema::Shapes::MemberShape.new(target: AbsoluteBorrowLimitResourceList, name: "AbsoluteBorrowLimits"))
     ResourceSharingConfig.type = Types::ResourceSharingConfig
     ResourceSharingStrategy.add_member(:lend, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEND", traits: {"smithy.api#enumValue" => "Lend"}))
     ResourceSharingStrategy.add_member(:dontlend, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DONTLEND", traits: {"smithy.api#enumValue" => "DontLend"}))
@@ -10655,6 +12497,7 @@ module Aws::SageMaker
     ResourceSpec.add_member(:sage_maker_image_version_alias, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageVersionAlias, name: "SageMakerImageVersionAlias"))
     ResourceSpec.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AppInstanceType, name: "InstanceType"))
     ResourceSpec.add_member(:lifecycle_config_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StudioLifecycleConfigArn, name: "LifecycleConfigArn"))
+    ResourceSpec.add_member(:training_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: StudioResourceSpecTrainingPlanArn, name: "TrainingPlanArn"))
     ResourceSpec.type = Types::ResourceSpec
     ResourceType.add_member(:training_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING_JOB", traits: {"smithy.api#enumValue" => "TrainingJob"}))
     ResourceType.add_member(:experiment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPERIMENT", traits: {"smithy.api#enumValue" => "Experiment"}))
@@ -10674,6 +12517,8 @@ module Aws::SageMaker
     ResourceType.add_member(:hyper_parameter_tuning_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HYPER_PARAMETER_TUNING_JOB", traits: {"smithy.api#enumValue" => "HyperParameterTuningJob"}))
     ResourceType.add_member(:model_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODEL_CARD", traits: {"smithy.api#enumValue" => "ModelCard"}))
     ResourceType.add_member(:pipeline_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PIPELINE_VERSION", traits: {"smithy.api#enumValue" => "PipelineVersion"}))
+    ResourceType.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JOB", traits: {"smithy.api#enumValue" => "Job"}))
+    ResourceType.add_member(:hub_content, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HUB_CONTENT", traits: {"smithy.api#enumValue" => "HubContent"}))
     ResponseMIMETypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseMIMEType, name: "member"))
     RetentionPolicy.add_member(:home_efs_file_system, ::Smithy::Schema::Shapes::MemberShape.new(target: RetentionType, name: "HomeEfsFileSystem"))
     RetentionPolicy.type = Types::RetentionPolicy
@@ -10687,6 +12532,10 @@ module Aws::SageMaker
     RetryPipelineExecutionResponse.type = Types::RetryPipelineExecutionResponse
     RetryStrategy.add_member(:maximum_retry_attempts, ::Smithy::Schema::Shapes::MemberShape.new(target: MaximumRetryAttempts, name: "MaximumRetryAttempts", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RetryStrategy.type = Types::RetryStrategy
+    RoleGroupAssignment.add_member(:role_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString256, name: "RoleName", traits: {"smithy.api#required" => {}}))
+    RoleGroupAssignment.add_member(:group_patterns, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupPatternsList, name: "GroupPatterns", traits: {"smithy.api#required" => {}}))
+    RoleGroupAssignment.type = Types::RoleGroupAssignment
+    RoleGroupAssignmentsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleGroupAssignment, name: "member"))
     RollingDeploymentPolicy.add_member(:maximum_batch_size, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacitySizeConfig, name: "MaximumBatchSize", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     RollingDeploymentPolicy.add_member(:rollback_maximum_batch_size, ::Smithy::Schema::Shapes::MemberShape.new(target: CapacitySizeConfig, name: "RollbackMaximumBatchSize"))
     RollingDeploymentPolicy.type = Types::RollingDeploymentPolicy
@@ -10699,6 +12548,7 @@ module Aws::SageMaker
     RootAccess.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
     RoutingStrategy.add_member(:least_outstanding_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LEAST_OUTSTANDING_REQUESTS", traits: {"smithy.api#enumValue" => "LEAST_OUTSTANDING_REQUESTS"}))
     RoutingStrategy.add_member(:random, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RANDOM", traits: {"smithy.api#enumValue" => "RANDOM"}))
+    RoutingStrategy.add_member(:prefix_aware, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PREFIX_AWARE", traits: {"smithy.api#enumValue" => "PREFIX_AWARE"}))
     RuleEvaluationStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
     RuleEvaluationStatus.add_member(:no_issues_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_ISSUES_FOUND", traits: {"smithy.api#enumValue" => "NoIssuesFound"}))
     RuleEvaluationStatus.add_member(:issues_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ISSUES_FOUND", traits: {"smithy.api#enumValue" => "IssuesFound"}))
@@ -10747,6 +12597,8 @@ module Aws::SageMaker
     SageMakerImageVersionAliases.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerImageVersionAlias, name: "member"))
     SageMakerResourceName.add_member(:training_job, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRAINING_JOB", traits: {"smithy.api#enumValue" => "training-job"}))
     SageMakerResourceName.add_member(:hyperpod_cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HYPERPOD_CLUSTER", traits: {"smithy.api#enumValue" => "hyperpod-cluster"}))
+    SageMakerResourceName.add_member(:endpoint, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENDPOINT", traits: {"smithy.api#enumValue" => "endpoint"}))
+    SageMakerResourceName.add_member(:studio_apps, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STUDIO_APPS", traits: {"smithy.api#enumValue" => "studio-apps"}))
     SageMakerResourceNames.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerResourceName, name: "member"))
     SagemakerServicecatalogStatus.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "Enabled"}))
     SagemakerServicecatalogStatus.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "Disabled"}))
@@ -10773,7 +12625,11 @@ module Aws::SageMaker
     ScheduledUpdateConfig.type = Types::ScheduledUpdateConfig
     SchedulerConfig.add_member(:priority_classes, ::Smithy::Schema::Shapes::MemberShape.new(target: PriorityClassList, name: "PriorityClasses"))
     SchedulerConfig.add_member(:fair_share, ::Smithy::Schema::Shapes::MemberShape.new(target: FairShare, name: "FairShare"))
+    SchedulerConfig.add_member(:idle_resource_sharing, ::Smithy::Schema::Shapes::MemberShape.new(target: IdleResourceSharing, name: "IdleResourceSharing"))
     SchedulerConfig.type = Types::SchedulerConfig
+    SchedulerConfigComponent.add_member(:priority_classes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIORITY_CLASSES", traits: {"smithy.api#enumValue" => "PriorityClasses"}))
+    SchedulerConfigComponent.add_member(:fair_share, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAIR_SHARE", traits: {"smithy.api#enumValue" => "FairShare"}))
+    SchedulerConfigComponent.add_member(:idle_resource_sharing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDLE_RESOURCE_SHARING", traits: {"smithy.api#enumValue" => "IdleResourceSharing"}))
     SchedulerResourceStatus.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "Creating"}))
     SchedulerResourceStatus.add_member(:create_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_FAILED", traits: {"smithy.api#enumValue" => "CreateFailed"}))
     SchedulerResourceStatus.add_member(:create_rollback_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_ROLLBACK_FAILED", traits: {"smithy.api#enumValue" => "CreateRollbackFailed"}))
@@ -10808,6 +12664,8 @@ module Aws::SageMaker
     SearchRecord.add_member(:hyper_parameter_tuning_job, ::Smithy::Schema::Shapes::MemberShape.new(target: HyperParameterTuningJobSearchEntity, name: "HyperParameterTuningJob"))
     SearchRecord.add_member(:model_card, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelCard, name: "ModelCard"))
     SearchRecord.add_member(:model, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelDashboardModel, name: "Model"))
+    SearchRecord.add_member(:job, ::Smithy::Schema::Shapes::MemberShape.new(target: Job, name: "Job"))
+    SearchRecord.add_member(:hub_content, ::Smithy::Schema::Shapes::MemberShape.new(target: HubContent, name: "HubContent"))
     SearchRecord.type = Types::SearchRecord
     SearchRequest.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "Resource", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     SearchRequest.add_member(:search_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchExpression, name: "SearchExpression"))
@@ -10831,10 +12689,12 @@ module Aws::SageMaker
     SearchTrainingPlanOfferingsRequest.add_member(:ultra_server_count, ::Smithy::Schema::Shapes::MemberShape.new(target: UltraServerCount, name: "UltraServerCount"))
     SearchTrainingPlanOfferingsRequest.add_member(:start_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartTimeAfter"))
     SearchTrainingPlanOfferingsRequest.add_member(:end_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTimeBefore"))
-    SearchTrainingPlanOfferingsRequest.add_member(:duration_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanDurationHoursInput, name: "DurationHours", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    SearchTrainingPlanOfferingsRequest.add_member(:target_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerResourceNames, name: "TargetResources", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SearchTrainingPlanOfferingsRequest.add_member(:duration_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanDurationHoursInput, name: "DurationHours"))
+    SearchTrainingPlanOfferingsRequest.add_member(:target_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerResourceNames, name: "TargetResources"))
+    SearchTrainingPlanOfferingsRequest.add_member(:training_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "TrainingPlanArn"))
     SearchTrainingPlanOfferingsRequest.type = Types::SearchTrainingPlanOfferingsRequest
     SearchTrainingPlanOfferingsResponse.add_member(:training_plan_offerings, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanOfferings, name: "TrainingPlanOfferings", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SearchTrainingPlanOfferingsResponse.add_member(:training_plan_extension_offerings, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtensionOfferings, name: "TrainingPlanExtensionOfferings"))
     SearchTrainingPlanOfferingsResponse.type = Types::SearchTrainingPlanOfferingsResponse
     SecondaryStatus.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "Starting"}))
     SecondaryStatus.add_member(:launching_ml_instances, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAUNCHING_ML_INSTANCES", traits: {"smithy.api#enumValue" => "LaunchingMLInstances"}))
@@ -10880,6 +12740,17 @@ module Aws::SageMaker
     SendPipelineExecutionStepSuccessRequest.type = Types::SendPipelineExecutionStepSuccessRequest
     SendPipelineExecutionStepSuccessResponse.add_member(:pipeline_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionArn, name: "PipelineExecutionArn"))
     SendPipelineExecutionStepSuccessResponse.type = Types::SendPipelineExecutionStepSuccessResponse
+    ServerlessJobConfig.add_member(:base_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessJobBaseModelArn, name: "BaseModelArn", traits: {"smithy.api#required" => {}}))
+    ServerlessJobConfig.add_member(:accept_eula, ::Smithy::Schema::Shapes::MemberShape.new(target: AcceptEula, name: "AcceptEula"))
+    ServerlessJobConfig.add_member(:job_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServerlessJobType, name: "JobType", traits: {"smithy.api#required" => {}}))
+    ServerlessJobConfig.add_member(:customization_technique, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomizationTechnique, name: "CustomizationTechnique"))
+    ServerlessJobConfig.add_member(:peft, ::Smithy::Schema::Shapes::MemberShape.new(target: Peft, name: "Peft"))
+    ServerlessJobConfig.add_member(:evaluation_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluationType, name: "EvaluationType"))
+    ServerlessJobConfig.add_member(:evaluator_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: EvaluatorArn, name: "EvaluatorArn"))
+    ServerlessJobConfig.add_member(:sequence_length, ::Smithy::Schema::Shapes::MemberShape.new(target: SequenceLength, name: "SequenceLength"))
+    ServerlessJobConfig.type = Types::ServerlessJobConfig
+    ServerlessJobType.add_member(:fine_tuning, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINE_TUNING", traits: {"smithy.api#enumValue" => "FineTuning"}))
+    ServerlessJobType.add_member(:evaluation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EVALUATION", traits: {"smithy.api#enumValue" => "Evaluation"}))
     ServiceCatalogProvisionedProductDetails.add_member(:provisioned_product_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceCatalogEntityId, name: "ProvisionedProductId"))
     ServiceCatalogProvisionedProductDetails.add_member(:provisioned_product_status_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ProvisionedProductStatusMessage, name: "ProvisionedProductStatusMessage"))
     ServiceCatalogProvisionedProductDetails.type = Types::ServiceCatalogProvisionedProductDetails
@@ -10910,6 +12781,22 @@ module Aws::SageMaker
     ShuffleConfig.type = Types::ShuffleConfig
     SkipModelValidation.add_member(:all, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL", traits: {"smithy.api#enumValue" => "All"}))
     SkipModelValidation.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "None"}))
+    SlurmHealthComponent.add_member(:slurmdbd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SLURMDBD", traits: {"smithy.api#enumValue" => "Slurmdbd"}))
+    SlurmHealthMetadata.add_member(:component, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmHealthComponent, name: "Component", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SlurmHealthMetadata.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmHealthStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    SlurmHealthMetadata.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SlurmHealthReason, name: "Reason"))
+    SlurmHealthMetadata.type = Types::SlurmHealthMetadata
+    SlurmHealthReason.add_member(:daemon_down, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAEMON_DOWN", traits: {"smithy.api#enumValue" => "DaemonDown"}))
+    SlurmHealthReason.add_member(:daemon_disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DAEMON_DISABLED", traits: {"smithy.api#enumValue" => "DaemonDisabled"}))
+    SlurmHealthReason.add_member(:db_unreachable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DB_UNREACHABLE", traits: {"smithy.api#enumValue" => "DbUnreachable"}))
+    SlurmHealthStatus.add_member(:healthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HEALTHY", traits: {"smithy.api#enumValue" => "Healthy"}))
+    SlurmHealthStatus.add_member(:unhealthy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNHEALTHY", traits: {"smithy.api#enumValue" => "Unhealthy"}))
+    SoftwareUpdateStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "Pending"}))
+    SoftwareUpdateStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "InProgress"}))
+    SoftwareUpdateStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "Succeeded"}))
+    SoftwareUpdateStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    SoftwareUpdateStatus.add_member(:rollback_in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_IN_PROGRESS", traits: {"smithy.api#enumValue" => "RollbackInProgress"}))
+    SoftwareUpdateStatus.add_member(:rollback_complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLBACK_COMPLETE", traits: {"smithy.api#enumValue" => "RollbackComplete"}))
     SortActionsBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
     SortActionsBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
     SortArtifactsBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
@@ -10933,6 +12820,9 @@ module Aws::SageMaker
     SortInferenceExperimentsBy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
     SortLineageGroupsBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
     SortLineageGroupsBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
+    SortMlflowAppBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "Name"}))
+    SortMlflowAppBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
+    SortMlflowAppBy.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STATUS", traits: {"smithy.api#enumValue" => "Status"}))
     SortOrder.add_member(:ascending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASCENDING", traits: {"smithy.api#enumValue" => "Ascending"}))
     SortOrder.add_member(:descending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESCENDING", traits: {"smithy.api#enumValue" => "Descending"}))
     SortPipelineExecutionsBy.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_TIME", traits: {"smithy.api#enumValue" => "CreationTime"}))
@@ -11027,6 +12917,11 @@ module Aws::SageMaker
     Stairs.add_member(:number_of_steps, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfSteps, name: "NumberOfSteps"))
     Stairs.add_member(:users_per_step, ::Smithy::Schema::Shapes::MemberShape.new(target: UsersPerStep, name: "UsersPerStep"))
     Stairs.type = Types::Stairs
+    StartClusterHealthCheckRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNameOrArn, name: "ClusterName", traits: {"smithy.api#required" => {}}))
+    StartClusterHealthCheckRequest.add_member(:deep_health_check_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: DeepHealthCheckConfigurations, name: "DeepHealthCheckConfigurations", traits: {"smithy.api#required" => {}}))
+    StartClusterHealthCheckRequest.type = Types::StartClusterHealthCheckRequest
+    StartClusterHealthCheckResponse.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterArn, name: "ClusterArn", traits: {"smithy.api#required" => {}}))
+    StartClusterHealthCheckResponse.type = Types::StartClusterHealthCheckResponse
     StartEdgeDeploymentStageRequest.add_member(:edge_deployment_plan_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "EdgeDeploymentPlanName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StartEdgeDeploymentStageRequest.add_member(:stage_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "StageName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StartEdgeDeploymentStageRequest.type = Types::StartEdgeDeploymentStageRequest
@@ -11050,6 +12945,7 @@ module Aws::SageMaker
     StartPipelineExecutionRequest.add_member(:parallelism_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ParallelismConfiguration, name: "ParallelismConfiguration"))
     StartPipelineExecutionRequest.add_member(:selective_execution_config, ::Smithy::Schema::Shapes::MemberShape.new(target: SelectiveExecutionConfig, name: "SelectiveExecutionConfig"))
     StartPipelineExecutionRequest.add_member(:pipeline_version_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineVersionId, name: "PipelineVersionId"))
+    StartPipelineExecutionRequest.add_member(:mlflow_experiment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowExperimentEntityName, name: "MlflowExperimentName"))
     StartPipelineExecutionRequest.type = Types::StartPipelineExecutionRequest
     StartPipelineExecutionResponse.add_member(:pipeline_execution_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineExecutionArn, name: "PipelineExecutionArn"))
     StartPipelineExecutionResponse.type = Types::StartPipelineExecutionResponse
@@ -11064,12 +12960,22 @@ module Aws::SageMaker
     Statistic.add_member(:maximum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAXIMUM", traits: {"smithy.api#enumValue" => "Maximum"}))
     Statistic.add_member(:sample_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAMPLE_COUNT", traits: {"smithy.api#enumValue" => "SampleCount"}))
     Statistic.add_member(:sum, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUM", traits: {"smithy.api#enumValue" => "Sum"}))
+    StatusDetailsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerConfigComponent, name: "key"))
+    StatusDetailsMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: SchedulerResourceStatus, name: "value"))
     StepStatus.add_member(:starting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTING", traits: {"smithy.api#enumValue" => "Starting"}))
     StepStatus.add_member(:executing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXECUTING", traits: {"smithy.api#enumValue" => "Executing"}))
     StepStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
     StepStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
     StepStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     StepStatus.add_member(:succeeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUCCEEDED", traits: {"smithy.api#enumValue" => "Succeeded"}))
+    StopAIBenchmarkJobRequest.add_member(:ai_benchmark_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIBenchmarkJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StopAIBenchmarkJobRequest.type = Types::StopAIBenchmarkJobRequest
+    StopAIBenchmarkJobResponse.add_member(:ai_benchmark_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIBenchmarkJobArn, name: "AIBenchmarkJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StopAIBenchmarkJobResponse.type = Types::StopAIBenchmarkJobResponse
+    StopAIRecommendationJobRequest.add_member(:ai_recommendation_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AIEntityName, name: "AIRecommendationJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StopAIRecommendationJobRequest.type = Types::StopAIRecommendationJobRequest
+    StopAIRecommendationJobResponse.add_member(:ai_recommendation_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AIRecommendationJobArn, name: "AIRecommendationJobArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StopAIRecommendationJobResponse.type = Types::StopAIRecommendationJobResponse
     StopAutoMLJobRequest.add_member(:auto_ml_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoMLJobName, name: "AutoMLJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StopAutoMLJobRequest.type = Types::StopAutoMLJobRequest
     StopCompilationJobRequest.add_member(:compilation_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityName, name: "CompilationJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -11091,6 +12997,10 @@ module Aws::SageMaker
     StopInferenceExperimentResponse.type = Types::StopInferenceExperimentResponse
     StopInferenceRecommendationsJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationJobName, name: "JobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StopInferenceRecommendationsJobRequest.type = Types::StopInferenceRecommendationsJobRequest
+    StopJobRequest.add_member(:job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: JobName, name: "JobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StopJobRequest.add_member(:job_category, ::Smithy::Schema::Shapes::MemberShape.new(target: JobCategory, name: "JobCategory", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StopJobRequest.type = Types::StopJobRequest
+    StopJobResponse.type = Types::StopJobResponse
     StopLabelingJobRequest.add_member(:labeling_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: LabelingJobName, name: "LabelingJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StopLabelingJobRequest.type = Types::StopLabelingJobRequest
     StopMlflowTrackingServerRequest.add_member(:tracking_server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerName, name: "TrackingServerName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -11112,6 +13022,9 @@ module Aws::SageMaker
     StopProcessingJobRequest.type = Types::StopProcessingJobRequest
     StopTrainingJobRequest.add_member(:training_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobName, name: "TrainingJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StopTrainingJobRequest.type = Types::StopTrainingJobRequest
+    StopTrainingSessionRequest.add_member(:training_session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionName, name: "TrainingSessionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    StopTrainingSessionRequest.type = Types::StopTrainingSessionRequest
+    StopTrainingSessionResponse.type = Types::StopTrainingSessionResponse
     StopTransformJobRequest.add_member(:transform_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformJobName, name: "TransformJobName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     StopTransformJobRequest.type = Types::StopTransformJobRequest
     StoppingCondition.add_member(:max_runtime_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxRuntimeInSeconds, name: "MaxRuntimeInSeconds"))
@@ -11119,6 +13032,7 @@ module Aws::SageMaker
     StoppingCondition.add_member(:max_pending_time_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxPendingTimeInSeconds, name: "MaxPendingTimeInSeconds"))
     StoppingCondition.type = Types::StoppingCondition
     StorageType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "Standard"}))
+    StorageType.add_member(:standard_v2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD_V2", traits: {"smithy.api#enumValue" => "Standard_V2"}))
     StorageType.add_member(:in_memory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_MEMORY", traits: {"smithy.api#enumValue" => "InMemory"}))
     StudioLifecycleConfigAppType.add_member(:jupyter_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JupyterServer", traits: {"smithy.api#enumValue" => "JupyterServer"}))
     StudioLifecycleConfigAppType.add_member(:kernel_gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "KernelGateway", traits: {"smithy.api#enumValue" => "KernelGateway"}))
@@ -11140,6 +13054,7 @@ module Aws::SageMaker
     StudioWebPortalSettings.add_member(:hidden_app_types, ::Smithy::Schema::Shapes::MemberShape.new(target: HiddenAppTypesList, name: "HiddenAppTypes"))
     StudioWebPortalSettings.add_member(:hidden_instance_types, ::Smithy::Schema::Shapes::MemberShape.new(target: HiddenInstanceTypesList, name: "HiddenInstanceTypes"))
     StudioWebPortalSettings.add_member(:hidden_sage_maker_image_version_aliases, ::Smithy::Schema::Shapes::MemberShape.new(target: HiddenSageMakerImageVersionAliasesList, name: "HiddenSageMakerImageVersionAliases"))
+    StudioWebPortalSettings.add_member(:execution_role_session_name_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionRoleSessionNameMode, name: "ExecutionRoleSessionNameMode"))
     StudioWebPortalSettings.type = Types::StudioWebPortalSettings
     Subnets.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetId, name: "member"))
     SubscribedWorkteam.add_member(:workteam_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkteamArn, name: "WorkteamArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -11481,6 +13396,93 @@ module Aws::SageMaker
     TrainingInstanceType.add_member(:ml_r7_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R7I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.r7i.48xlarge"}))
     TrainingInstanceType.add_member(:ml_p6_e_gb200_36_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6E_GB200_36XLARGE", traits: {"smithy.api#enumValue" => "ml.p6e-gb200.36xlarge"}))
     TrainingInstanceType.add_member(:ml_p5_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P5_4XLARGE", traits: {"smithy.api#enumValue" => "ml.p5.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_p6_b300_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_P6_B300_48XLARGE", traits: {"smithy.api#enumValue" => "ml.p6-b300.48xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.24xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7e.48xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.24xlarge"}))
+    TrainingInstanceType.add_member(:ml_g7_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G7_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g7.48xlarge"}))
+    TrainingInstanceType.add_member(:ml_r6_i_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_LARGE", traits: {"smithy.api#enumValue" => "ml.r6i.large"}))
+    TrainingInstanceType.add_member(:ml_r6_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.xlarge"}))
+    TrainingInstanceType.add_member(:ml_r6_i_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_2XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_r6_i_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_4XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_r6_i_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_8XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_r6_i_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_12XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_r6_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.16xlarge"}))
+    TrainingInstanceType.add_member(:ml_r6_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.24xlarge"}))
+    TrainingInstanceType.add_member(:ml_r6_i_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R6I_32XLARGE", traits: {"smithy.api#enumValue" => "ml.r6i.32xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_LARGE", traits: {"smithy.api#enumValue" => "ml.m8i.large"}))
+    TrainingInstanceType.add_member(:ml_m8_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.16xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.24xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_32XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.32xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.48xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_96_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_96XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i.96xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.16xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.24xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_32XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.32xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.48xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_96_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_96XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i.96xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_LARGE", traits: {"smithy.api#enumValue" => "ml.r8i.large"}))
+    TrainingInstanceType.add_member(:ml_r8_i_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_2XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_4XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_8XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_12XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.16xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_24XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.24xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_32_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_32XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.32xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_48XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.48xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_96_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_96XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i.96xlarge"}))
+    TrainingInstanceType.add_member(:ml_m7_i_flex_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_LARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.large"}))
+    TrainingInstanceType.add_member(:ml_m7_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.xlarge"}))
+    TrainingInstanceType.add_member(:ml_m7_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_m7_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_m7_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_m7_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_m7_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M7I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m7i-flex.16xlarge"}))
+    TrainingInstanceType.add_member(:ml_c7_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.xlarge"}))
+    TrainingInstanceType.add_member(:ml_c7_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_c7_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_c7_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_c7_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_c7_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C7I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c7i-flex.16xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_flex_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_LARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.large"}))
+    TrainingInstanceType.add_member(:ml_m8_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_m8_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_M8I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.m8i-flex.16xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_c8_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_C8I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.c8i-flex.16xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_flex_large, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_LARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.large"}))
+    TrainingInstanceType.add_member(:ml_r8_i_flex_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_flex_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_2XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.2xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_flex_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_4XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.4xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_flex_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_8XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.8xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_flex_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_12XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.12xlarge"}))
+    TrainingInstanceType.add_member(:ml_r8_i_flex_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_R8I_FLEX_16XLARGE", traits: {"smithy.api#enumValue" => "ml.r8i-flex.16xlarge"}))
     TrainingInstanceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingInstanceType, name: "member"))
     TrainingJob.add_member(:training_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobName, name: "TrainingJobName"))
     TrainingJob.add_member(:training_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobArn, name: "TrainingJobArn"))
@@ -11497,6 +13499,7 @@ module Aws::SageMaker
     TrainingJob.add_member(:input_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDataConfig, name: "InputDataConfig"))
     TrainingJob.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDataConfig, name: "OutputDataConfig"))
     TrainingJob.add_member(:resource_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceConfig, name: "ResourceConfig"))
+    TrainingJob.add_member(:warm_pool_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmPoolStatus, name: "WarmPoolStatus"))
     TrainingJob.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
     TrainingJob.add_member(:stopping_condition, ::Smithy::Schema::Shapes::MemberShape.new(target: StoppingCondition, name: "StoppingCondition"))
     TrainingJob.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime"))
@@ -11516,6 +13519,8 @@ module Aws::SageMaker
     TrainingJob.add_member(:debug_rule_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: DebugRuleConfigurations, name: "DebugRuleConfigurations"))
     TrainingJob.add_member(:tensor_board_output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TensorBoardOutputConfig, name: "TensorBoardOutputConfig"))
     TrainingJob.add_member(:debug_rule_evaluation_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: DebugRuleEvaluationStatuses, name: "DebugRuleEvaluationStatuses"))
+    TrainingJob.add_member(:output_model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "OutputModelPackageArn"))
+    TrainingJob.add_member(:model_package_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageConfig, name: "ModelPackageConfig"))
     TrainingJob.add_member(:profiler_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ProfilerConfig, name: "ProfilerConfig"))
     TrainingJob.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingEnvironmentMap, name: "Environment"))
     TrainingJob.add_member(:retry_strategy, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryStrategy, name: "RetryStrategy"))
@@ -11539,6 +13544,7 @@ module Aws::SageMaker
     TrainingJobStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
     TrainingJobStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
     TrainingJobStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    TrainingJobStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
     TrainingJobStatusCounters.add_member(:completed, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobStatusCounter, name: "Completed"))
     TrainingJobStatusCounters.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobStatusCounter, name: "InProgress"))
     TrainingJobStatusCounters.add_member(:retryable_error, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingJobStatusCounter, name: "RetryableError"))
@@ -11558,7 +13564,30 @@ module Aws::SageMaker
     TrainingJobSummary.add_member(:warm_pool_status, ::Smithy::Schema::Shapes::MemberShape.new(target: WarmPoolStatus, name: "WarmPoolStatus"))
     TrainingJobSummary.add_member(:training_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArn, name: "TrainingPlanArn"))
     TrainingJobSummary.type = Types::TrainingJobSummary
+    TrainingPlanArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArn, name: "member"))
     TrainingPlanArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanArn, name: "member"))
+    TrainingPlanExtension.add_member(:training_plan_extension_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtensionOfferingId, name: "TrainingPlanExtensionOfferingId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingPlanExtension.add_member(:extended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "ExtendedAt"))
+    TrainingPlanExtension.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartDate"))
+    TrainingPlanExtension.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndDate"))
+    TrainingPlanExtension.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "Status"))
+    TrainingPlanExtension.add_member(:payment_status, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "PaymentStatus"))
+    TrainingPlanExtension.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "AvailabilityZone"))
+    TrainingPlanExtension.add_member(:availability_zone_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailabilityZoneId, name: "AvailabilityZoneId"))
+    TrainingPlanExtension.add_member(:duration_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtensionDurationHours, name: "DurationHours"))
+    TrainingPlanExtension.add_member(:upfront_fee, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "UpfrontFee"))
+    TrainingPlanExtension.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "CurrencyCode"))
+    TrainingPlanExtension.type = Types::TrainingPlanExtension
+    TrainingPlanExtensionOffering.add_member(:training_plan_extension_offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtensionOfferingId, name: "TrainingPlanExtensionOfferingId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingPlanExtensionOffering.add_member(:availability_zone, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "AvailabilityZone"))
+    TrainingPlanExtensionOffering.add_member(:start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "StartDate"))
+    TrainingPlanExtensionOffering.add_member(:end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndDate"))
+    TrainingPlanExtensionOffering.add_member(:duration_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtensionDurationHours, name: "DurationHours"))
+    TrainingPlanExtensionOffering.add_member(:upfront_fee, ::Smithy::Schema::Shapes::MemberShape.new(target: String256, name: "UpfrontFee"))
+    TrainingPlanExtensionOffering.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: CurrencyCode, name: "CurrencyCode"))
+    TrainingPlanExtensionOffering.type = Types::TrainingPlanExtensionOffering
+    TrainingPlanExtensionOfferings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtensionOffering, name: "member"))
+    TrainingPlanExtensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanExtension, name: "member"))
     TrainingPlanFilter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingPlanFilterName, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TrainingPlanFilter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String64, name: "Value", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TrainingPlanFilter.type = Types::TrainingPlanFilter
@@ -11603,10 +13632,56 @@ module Aws::SageMaker
     TrainingPlanSummary.add_member(:target_resources, ::Smithy::Schema::Shapes::MemberShape.new(target: SageMakerResourceNames, name: "TargetResources"))
     TrainingPlanSummary.add_member(:reserved_capacity_summaries, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCapacitySummaries, name: "ReservedCapacitySummaries"))
     TrainingPlanSummary.type = Types::TrainingPlanSummary
+    TrainingProgressInfo.add_member(:total_step_count_per_epoch, ::Smithy::Schema::Shapes::MemberShape.new(target: TotalStepCountPerEpoch, name: "TotalStepCountPerEpoch"))
+    TrainingProgressInfo.add_member(:current_step, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingStepIndex, name: "CurrentStep"))
+    TrainingProgressInfo.add_member(:current_epoch, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingEpochIndex, name: "CurrentEpoch"))
+    TrainingProgressInfo.add_member(:max_epoch, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingEpochCount, name: "MaxEpoch"))
+    TrainingProgressInfo.type = Types::TrainingProgressInfo
     TrainingRepositoryAccessMode.add_member(:platform, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PLATFORM", traits: {"smithy.api#enumValue" => "Platform"}))
     TrainingRepositoryAccessMode.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VPC", traits: {"smithy.api#enumValue" => "Vpc"}))
     TrainingRepositoryAuthConfig.add_member(:training_repository_credentials_provider_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingRepositoryCredentialsProviderArn, name: "TrainingRepositoryCredentialsProviderArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TrainingRepositoryAuthConfig.type = Types::TrainingRepositoryAuthConfig
+    TrainingSessionDetail.add_member(:training_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionArn, name: "TrainingSessionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionDetail.add_member(:training_session_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionName, name: "TrainingSessionName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionDetail.add_member(:training_session_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionStatus, name: "TrainingSessionStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionDetail.add_member(:model_package_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageGroupArn, name: "ModelPackageGroupArn"))
+    TrainingSessionDetail.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionDetail.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
+    TrainingSessionDetail.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "EndTime"))
+    TrainingSessionDetail.add_member(:error_details, ::Smithy::Schema::Shapes::MemberShape.new(target: FailureReason, name: "ErrorDetails"))
+    TrainingSessionDetail.add_member(:last_received_sequence_number, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaInteger, name: "LastReceivedSequenceNumber"))
+    TrainingSessionDetail.add_member(:billable_token_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: BillableTokenUsage, name: "BillableTokenUsage"))
+    TrainingSessionDetail.add_member(:vpc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfig, name: "VpcConfig"))
+    TrainingSessionDetail.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
+    TrainingSessionDetail.add_member(:lora_config, ::Smithy::Schema::Shapes::MemberShape.new(target: LoraConfig, name: "LoraConfig"))
+    TrainingSessionDetail.add_member(:model_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionModelConfig, name: "ModelConfig"))
+    TrainingSessionDetail.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionOutputConfig, name: "OutputConfig"))
+    TrainingSessionDetail.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
+    TrainingSessionDetail.type = Types::TrainingSessionDetail
+    TrainingSessionModelConfig.add_member(:base_model_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BaseModelArn, name: "BaseModelArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionModelConfig.add_member(:accept_eula, ::Smithy::Schema::Shapes::MemberShape.new(target: JavaBoolean, name: "AcceptEula"))
+    TrainingSessionModelConfig.type = Types::TrainingSessionModelConfig
+    TrainingSessionOutputConfig.add_member(:s3_location, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionS3Location, name: "S3Location", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionOutputConfig.type = Types::TrainingSessionOutputConfig
+    TrainingSessionS3Location.add_member(:path, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputS3Path, name: "Path", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionS3Location.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerKmsKeyArn, name: "KmsKeyArn"))
+    TrainingSessionS3Location.type = Types::TrainingSessionS3Location
+    TrainingSessionStatus.add_member(:created, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATED", traits: {"smithy.api#enumValue" => "Created"}))
+    TrainingSessionStatus.add_member(:blocked, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BLOCKED", traits: {"smithy.api#enumValue" => "Blocked"}))
+    TrainingSessionStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "Running"}))
+    TrainingSessionStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "Failed"}))
+    TrainingSessionStatus.add_member(:scheduled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCHEDULED", traits: {"smithy.api#enumValue" => "Scheduled"}))
+    TrainingSessionStatus.add_member(:stopping, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPING", traits: {"smithy.api#enumValue" => "Stopping"}))
+    TrainingSessionStatus.add_member(:stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOPPED", traits: {"smithy.api#enumValue" => "Stopped"}))
+    TrainingSessionStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "Expired"}))
+    TrainingSessionStatus.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "Deleting"}))
+    TrainingSessionStatus.add_member(:deletion_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETION_FAILED", traits: {"smithy.api#enumValue" => "DeletionFailed"}))
+    TrainingSessionSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionSummary, name: "member"))
+    TrainingSessionSummary.add_member(:training_session_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionArn, name: "TrainingSessionArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionSummary.add_member(:training_session_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TrainingSessionStatus, name: "TrainingSessionStatus", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionSummary.add_member(:creation_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "CreationTime", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    TrainingSessionSummary.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "LastModifiedTime"))
+    TrainingSessionSummary.type = Types::TrainingSessionSummary
     TrainingSpecification.add_member(:training_image, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerImage, name: "TrainingImage", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     TrainingSpecification.add_member(:training_image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "TrainingImageDigest"))
     TrainingSpecification.add_member(:supported_hyper_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: HyperParameterSpecifications, name: "SupportedHyperParameters"))
@@ -11726,6 +13801,22 @@ module Aws::SageMaker
     TransformInstanceType.add_member(:ml_inf2_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_INF2_8XLARGE", traits: {"smithy.api#enumValue" => "ml.inf2.8xlarge"}))
     TransformInstanceType.add_member(:ml_inf2_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_INF2_24XLARGE", traits: {"smithy.api#enumValue" => "ml.inf2.24xlarge"}))
     TransformInstanceType.add_member(:ml_inf2_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_INF2_48XLARGE", traits: {"smithy.api#enumValue" => "ml.inf2.48xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.2xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.4xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.8xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.12xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.16xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.24xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g6.48xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_e_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_e_2_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_2XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.2xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_e_4_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_4XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.4xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_e_8_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_8XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.8xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_e_12_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_12XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.12xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_e_16_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_16XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.16xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_e_24_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_24XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.24xlarge"}))
+    TransformInstanceType.add_member(:ml_g6_e_48_xlarge, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ML_G6E_48XLARGE", traits: {"smithy.api#enumValue" => "ml.g6e.48xlarge"}))
     TransformInstanceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformInstanceType, name: "member"))
     TransformJob.add_member(:transform_job_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformJobName, name: "TransformJobName"))
     TransformJob.add_member(:transform_job_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TransformJobArn, name: "TransformJobArn"))
@@ -11936,6 +14027,7 @@ module Aws::SageMaker
     UltraServerHealthStatus.add_member(:impaired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMPAIRED", traits: {"smithy.api#enumValue" => "Impaired"}))
     UltraServerHealthStatus.add_member(:insufficient_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSUFFICIENT_DATA", traits: {"smithy.api#enumValue" => "Insufficient-Data"}))
     UltraServerInfo.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Id"))
+    UltraServerInfo.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Type"))
     UltraServerInfo.type = Types::UltraServerInfo
     UltraServerSummary.add_member(:ultra_server_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UltraServerType, name: "UltraServerType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UltraServerSummary.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservedCapacityInstanceType, name: "InstanceType", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -11978,11 +14070,14 @@ module Aws::SageMaker
     UpdateClusterRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNameOrArn, name: "ClusterName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateClusterRequest.add_member(:instance_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupSpecifications, name: "InstanceGroups", traits: {"smithy.api#clientOptional" => {}}))
     UpdateClusterRequest.add_member(:restricted_instance_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterRestrictedInstanceGroupSpecifications, name: "RestrictedInstanceGroups"))
+    UpdateClusterRequest.add_member(:restricted_instance_groups_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterRestrictedInstanceGroupsConfig, name: "RestrictedInstanceGroupsConfig"))
     UpdateClusterRequest.add_member(:tiered_storage_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterTieredStorageConfig, name: "TieredStorageConfig"))
     UpdateClusterRequest.add_member(:node_recovery, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeRecovery, name: "NodeRecovery"))
     UpdateClusterRequest.add_member(:instance_groups_to_delete, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupsToDelete, name: "InstanceGroupsToDelete"))
+    UpdateClusterRequest.add_member(:node_provisioning_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNodeProvisioningMode, name: "NodeProvisioningMode"))
     UpdateClusterRequest.add_member(:cluster_role, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "ClusterRole"))
     UpdateClusterRequest.add_member(:auto_scaling, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAutoScalingConfig, name: "AutoScaling"))
+    UpdateClusterRequest.add_member(:orchestrator, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterOrchestrator, name: "Orchestrator"))
     UpdateClusterRequest.type = Types::UpdateClusterRequest
     UpdateClusterResponse.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterArn, name: "ClusterArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateClusterResponse.type = Types::UpdateClusterResponse
@@ -11995,6 +14090,7 @@ module Aws::SageMaker
     UpdateClusterSchedulerConfigResponse.add_member(:cluster_scheduler_config_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "ClusterSchedulerConfigVersion", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateClusterSchedulerConfigResponse.type = Types::UpdateClusterSchedulerConfigResponse
     UpdateClusterSoftwareInstanceGroupSpecification.add_member(:instance_group_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterInstanceGroupName, name: "InstanceGroupName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateClusterSoftwareInstanceGroupSpecification.add_member(:image_release_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReleaseVersion, name: "ImageReleaseVersion"))
     UpdateClusterSoftwareInstanceGroupSpecification.type = Types::UpdateClusterSoftwareInstanceGroupSpecification
     UpdateClusterSoftwareInstanceGroups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateClusterSoftwareInstanceGroupSpecification, name: "member"))
     UpdateClusterSoftwareRequest.add_member(:cluster_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNameOrArn, name: "ClusterName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -12043,6 +14139,8 @@ module Aws::SageMaker
     UpdateDomainRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: Subnets, name: "SubnetIds"))
     UpdateDomainRequest.add_member(:app_network_access_type, ::Smithy::Schema::Shapes::MemberShape.new(target: AppNetworkAccessType, name: "AppNetworkAccessType"))
     UpdateDomainRequest.add_member(:tag_propagation, ::Smithy::Schema::Shapes::MemberShape.new(target: TagPropagation, name: "TagPropagation"))
+    UpdateDomainRequest.add_member(:home_efs_file_system_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: HomeEfsFileSystemCreation, name: "HomeEfsFileSystemCreation"))
+    UpdateDomainRequest.add_member(:vpc_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcId, name: "VpcId"))
     UpdateDomainRequest.type = Types::UpdateDomainRequest
     UpdateDomainResponse.add_member(:domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: DomainArn, name: "DomainArn"))
     UpdateDomainResponse.type = Types::UpdateDomainResponse
@@ -12132,6 +14230,7 @@ module Aws::SageMaker
     UpdateImageVersionResponse.type = Types::UpdateImageVersionResponse
     UpdateInferenceComponentInput.add_member(:inference_component_name, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentName, name: "InferenceComponentName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateInferenceComponentInput.add_member(:specification, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSpecification, name: "Specification"))
+    UpdateInferenceComponentInput.add_member(:specifications, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentSpecificationList, name: "Specifications"))
     UpdateInferenceComponentInput.add_member(:runtime_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentRuntimeConfig, name: "RuntimeConfig"))
     UpdateInferenceComponentInput.add_member(:deployment_config, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceComponentDeploymentConfig, name: "DeploymentConfig"))
     UpdateInferenceComponentInput.type = Types::UpdateInferenceComponentInput
@@ -12151,11 +14250,23 @@ module Aws::SageMaker
     UpdateInferenceExperimentRequest.type = Types::UpdateInferenceExperimentRequest
     UpdateInferenceExperimentResponse.add_member(:inference_experiment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceExperimentArn, name: "InferenceExperimentArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateInferenceExperimentResponse.type = Types::UpdateInferenceExperimentResponse
+    UpdateMlflowAppRequest.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppArn, name: "Arn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    UpdateMlflowAppRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppName, name: "Name"))
+    UpdateMlflowAppRequest.add_member(:artifact_store_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "ArtifactStoreUri"))
+    UpdateMlflowAppRequest.add_member(:model_registration_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelRegistrationMode, name: "ModelRegistrationMode"))
+    UpdateMlflowAppRequest.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyMaintenanceWindowStart, name: "WeeklyMaintenanceWindowStart"))
+    UpdateMlflowAppRequest.add_member(:default_domain_id_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DefaultDomainIdList, name: "DefaultDomainIdList"))
+    UpdateMlflowAppRequest.add_member(:account_default_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountDefaultStatus, name: "AccountDefaultStatus"))
+    UpdateMlflowAppRequest.type = Types::UpdateMlflowAppRequest
+    UpdateMlflowAppResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: MlflowAppArn, name: "Arn"))
+    UpdateMlflowAppResponse.type = Types::UpdateMlflowAppResponse
     UpdateMlflowTrackingServerRequest.add_member(:tracking_server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerName, name: "TrackingServerName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateMlflowTrackingServerRequest.add_member(:artifact_store_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "ArtifactStoreUri"))
     UpdateMlflowTrackingServerRequest.add_member(:tracking_server_size, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerSize, name: "TrackingServerSize"))
     UpdateMlflowTrackingServerRequest.add_member(:automatic_model_registration, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AutomaticModelRegistration"))
     UpdateMlflowTrackingServerRequest.add_member(:weekly_maintenance_window_start, ::Smithy::Schema::Shapes::MemberShape.new(target: WeeklyMaintenanceWindowStart, name: "WeeklyMaintenanceWindowStart"))
+    UpdateMlflowTrackingServerRequest.add_member(:s3_bucket_owner_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "S3BucketOwnerAccountId"))
+    UpdateMlflowTrackingServerRequest.add_member(:s3_bucket_owner_verification, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "S3BucketOwnerVerification"))
     UpdateMlflowTrackingServerRequest.type = Types::UpdateMlflowTrackingServerRequest
     UpdateMlflowTrackingServerResponse.add_member(:tracking_server_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: TrackingServerArn, name: "TrackingServerArn"))
     UpdateMlflowTrackingServerResponse.type = Types::UpdateMlflowTrackingServerResponse
@@ -12167,6 +14278,7 @@ module Aws::SageMaker
     UpdateModelCardResponse.type = Types::UpdateModelCardResponse
     UpdateModelPackageInput.add_member(:model_package_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageArn, name: "ModelPackageArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateModelPackageInput.add_member(:model_approval_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelApprovalStatus, name: "ModelApprovalStatus"))
+    UpdateModelPackageInput.add_member(:model_package_registration_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ModelPackageRegistrationType, name: "ModelPackageRegistrationType"))
     UpdateModelPackageInput.add_member(:approval_description, ::Smithy::Schema::Shapes::MemberShape.new(target: ApprovalDescription, name: "ApprovalDescription"))
     UpdateModelPackageInput.add_member(:customer_metadata_properties, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerMetadataMap, name: "CustomerMetadataProperties"))
     UpdateModelPackageInput.add_member(:customer_metadata_properties_to_remove, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomerMetadataKeyList, name: "CustomerMetadataPropertiesToRemove"))
@@ -12195,6 +14307,7 @@ module Aws::SageMaker
     UpdateNotebookInstanceInput.add_member(:notebook_instance_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookInstanceName, name: "NotebookInstanceName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     UpdateNotebookInstanceInput.add_member(:instance_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceType, name: "InstanceType"))
     UpdateNotebookInstanceInput.add_member(:ip_address_type, ::Smithy::Schema::Shapes::MemberShape.new(target: IPAddressType, name: "IpAddressType"))
+    UpdateNotebookInstanceInput.add_member(:platform_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformIdentifier, name: "PlatformIdentifier"))
     UpdateNotebookInstanceInput.add_member(:role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RoleArn"))
     UpdateNotebookInstanceInput.add_member(:lifecycle_config_name, ::Smithy::Schema::Shapes::MemberShape.new(target: NotebookInstanceLifecycleConfigName, name: "LifecycleConfigName"))
     UpdateNotebookInstanceInput.add_member(:disassociate_lifecycle_config, ::Smithy::Schema::Shapes::MemberShape.new(target: DisassociateNotebookInstanceLifecycleConfig, name: "DisassociateLifecycleConfig"))
@@ -12218,7 +14331,11 @@ module Aws::SageMaker
     UpdatePartnerAppRequest.add_member(:maintenance_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppMaintenanceConfig, name: "MaintenanceConfig"))
     UpdatePartnerAppRequest.add_member(:tier, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString64, name: "Tier"))
     UpdatePartnerAppRequest.add_member(:application_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppConfig, name: "ApplicationConfig"))
+    UpdatePartnerAppRequest.add_member(:idc_config, ::Smithy::Schema::Shapes::MemberShape.new(target: IdcConfigInput, name: "IdcConfig"))
+    UpdatePartnerAppRequest.add_member(:auth_type, ::Smithy::Schema::Shapes::MemberShape.new(target: PartnerAppAuthType, name: "AuthType"))
     UpdatePartnerAppRequest.add_member(:enable_iam_session_based_identity, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableIamSessionBasedIdentity"))
+    UpdatePartnerAppRequest.add_member(:enable_auto_minor_version_upgrade, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "EnableAutoMinorVersionUpgrade"))
+    UpdatePartnerAppRequest.add_member(:app_version, ::Smithy::Schema::Shapes::MemberShape.new(target: MajorMinorVersion, name: "AppVersion"))
     UpdatePartnerAppRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdatePartnerAppRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "Tags"))
     UpdatePartnerAppRequest.type = Types::UpdatePartnerAppRequest
@@ -12436,6 +14553,9 @@ module Aws::SageMaker
     WorkforceVpcConfigResponse.add_member(:vpc_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkforceVpcEndpointId, name: "VpcEndpointId"))
     WorkforceVpcConfigResponse.type = Types::WorkforceVpcConfigResponse
     Workforces.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Workforce, name: "member"))
+    WorkloadSpec.add_member(:inline, Types::WorkloadSpec::Inline, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Inline"))
+    WorkloadSpec.add_member(:unknown, Types::WorkloadSpec::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    WorkloadSpec.type = Types::WorkloadSpec
     WorkspaceSettings.add_member(:s3_artifact_path, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "S3ArtifactPath"))
     WorkspaceSettings.add_member(:s3_kms_key_id, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyId, name: "S3KmsKeyId"))
     WorkspaceSettings.type = Types::WorkspaceSettings
@@ -12457,7 +14577,7 @@ module Aws::SageMaker
       service.id = "com.amazonaws.sagemaker#SageMaker"
       service.name = "SageMaker"
       service.version = "2017-07-24"
-      service.traits = {"aws.api#service" => {"sdkId" => "SageMaker", "arnNamespace" => "sagemaker", "cloudFormationName" => "SageMaker", "cloudTrailEventSource" => "sagemaker.amazonaws.com", "endpointPrefix" => "api.sagemaker"}, "aws.auth#sigv4" => {"name" => "sagemaker"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon SageMaker Service", "smithy.api#xmlNamespace" => {"uri" => "http://sagemaker.amazonaws.com/doc/2017-05-13/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "SageMaker", "arnNamespace" => "sagemaker", "cloudFormationName" => "SageMaker", "cloudTrailEventSource" => "sagemaker.amazonaws.com", "endpointPrefix" => "api.sagemaker"}, "aws.auth#sigv4" => {"name" => "sagemaker"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon SageMaker Service", "smithy.api#xmlNamespace" => {"uri" => "http://sagemaker.amazonaws.com/doc/2017-05-13/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api-fips.sagemaker.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.sagemaker-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.sagemaker.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAwAAAAJAAAABgAAAAoF9eEIAAAABwX14QYAAAALAAAACAX14QYF9eEHAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
       service.add_operation(:add_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#AddAssociation"
         operation.name = "AddAssociation"
@@ -12479,6 +14599,15 @@ module Aws::SageMaker
         operation.name = "AssociateTrialComponent"
         operation.input = AssociateTrialComponentRequest
         operation.output = AssociateTrialComponentResponse
+        operation.errors << ResourceLimitExceeded
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:attach_cluster_node_network_interface, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterface"
+        operation.name = "AttachClusterNodeNetworkInterface"
+        operation.input = AttachClusterNodeNetworkInterfaceRequest
+        operation.output = AttachClusterNodeNetworkInterfaceResponse
         operation.errors << ResourceLimitExceeded
         operation.errors << ResourceNotFound
         operation.traits = {}
@@ -12513,6 +14642,51 @@ module Aws::SageMaker
         operation.name = "BatchDescribeModelPackage"
         operation.input = BatchDescribeModelPackageInput
         operation.output = BatchDescribeModelPackageOutput
+        operation.traits = {}
+      end)
+      service.add_operation(:batch_reboot_cluster_nodes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#BatchRebootClusterNodes"
+        operation.name = "BatchRebootClusterNodes"
+        operation.input = BatchRebootClusterNodesRequest
+        operation.output = BatchRebootClusterNodesResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:batch_replace_cluster_nodes, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#BatchReplaceClusterNodes"
+        operation.name = "BatchReplaceClusterNodes"
+        operation.input = BatchReplaceClusterNodesRequest
+        operation.output = BatchReplaceClusterNodesResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:create_ai_benchmark_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#CreateAIBenchmarkJob"
+        operation.name = "CreateAIBenchmarkJob"
+        operation.input = CreateAIBenchmarkJobRequest
+        operation.output = CreateAIBenchmarkJobResponse
+        operation.errors << ResourceInUse
+        operation.errors << ResourceLimitExceeded
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:create_ai_recommendation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#CreateAIRecommendationJob"
+        operation.name = "CreateAIRecommendationJob"
+        operation.input = CreateAIRecommendationJobRequest
+        operation.output = CreateAIRecommendationJobResponse
+        operation.errors << ResourceInUse
+        operation.errors << ResourceLimitExceeded
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:create_ai_workload_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#CreateAIWorkloadConfig"
+        operation.name = "CreateAIWorkloadConfig"
+        operation.input = CreateAIWorkloadConfigRequest
+        operation.output = CreateAIWorkloadConfigResponse
+        operation.errors << ResourceInUse
+        operation.errors << ResourceLimitExceeded
         operation.traits = {}
       end)
       service.add_operation(:create_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -12807,12 +14981,30 @@ module Aws::SageMaker
         operation.errors << ResourceLimitExceeded
         operation.traits = {}
       end)
+      service.add_operation(:create_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#CreateJob"
+        operation.name = "CreateJob"
+        operation.input = CreateJobRequest
+        operation.output = CreateJobResponse
+        operation.errors << ResourceInUse
+        operation.errors << ResourceLimitExceeded
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
       service.add_operation(:create_labeling_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#CreateLabelingJob"
         operation.name = "CreateLabelingJob"
         operation.input = CreateLabelingJobRequest
         operation.output = CreateLabelingJobResponse
         operation.errors << ResourceInUse
+        operation.errors << ResourceLimitExceeded
+        operation.traits = {}
+      end)
+      service.add_operation(:create_mlflow_app, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#CreateMlflowApp"
+        operation.name = "CreateMlflowApp"
+        operation.input = CreateMlflowAppRequest
+        operation.output = CreateMlflowAppResponse
         operation.errors << ResourceLimitExceeded
         operation.traits = {}
       end)
@@ -12964,6 +15156,14 @@ module Aws::SageMaker
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
+      service.add_operation(:create_presigned_mlflow_app_url, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#CreatePresignedMlflowAppUrl"
+        operation.name = "CreatePresignedMlflowAppUrl"
+        operation.input = CreatePresignedMlflowAppUrlRequest
+        operation.output = CreatePresignedMlflowAppUrlResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
       service.add_operation(:create_presigned_mlflow_tracking_server_url, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#CreatePresignedMlflowTrackingServerUrl"
         operation.name = "CreatePresignedMlflowTrackingServerUrl"
@@ -13034,6 +15234,16 @@ module Aws::SageMaker
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
+      service.add_operation(:create_training_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#CreateTrainingSession"
+        operation.name = "CreateTrainingSession"
+        operation.input = CreateTrainingSessionRequest
+        operation.output = CreateTrainingSessionResponse
+        operation.errors << ResourceInUse
+        operation.errors << ResourceLimitExceeded
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
       service.add_operation(:create_transform_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#CreateTransformJob"
         operation.name = "CreateTransformJob"
@@ -13084,6 +15294,31 @@ module Aws::SageMaker
         operation.output = CreateWorkteamResponse
         operation.errors << ResourceInUse
         operation.errors << ResourceLimitExceeded
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_ai_benchmark_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DeleteAIBenchmarkJob"
+        operation.name = "DeleteAIBenchmarkJob"
+        operation.input = DeleteAIBenchmarkJobRequest
+        operation.output = DeleteAIBenchmarkJobResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_ai_recommendation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DeleteAIRecommendationJob"
+        operation.name = "DeleteAIRecommendationJob"
+        operation.input = DeleteAIRecommendationJobRequest
+        operation.output = DeleteAIRecommendationJobResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_ai_workload_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DeleteAIWorkloadConfig"
+        operation.name = "DeleteAIWorkloadConfig"
+        operation.input = DeleteAIWorkloadConfigRequest
+        operation.output = DeleteAIWorkloadConfigResponse
+        operation.errors << ResourceInUse
+        operation.errors << ResourceNotFound
         operation.traits = {}
       end)
       service.add_operation(:delete_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -13338,6 +15573,23 @@ module Aws::SageMaker
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
+      service.add_operation(:delete_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DeleteJob"
+        operation.name = "DeleteJob"
+        operation.input = DeleteJobRequest
+        operation.output = DeleteJobResponse
+        operation.errors << ResourceInUse
+        operation.errors << ResourceNotFound
+        operation.traits = {"smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_mlflow_app, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DeleteMlflowApp"
+        operation.name = "DeleteMlflowApp"
+        operation.input = DeleteMlflowAppRequest
+        operation.output = DeleteMlflowAppResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
       service.add_operation(:delete_mlflow_tracking_server, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#DeleteMlflowTrackingServer"
         operation.name = "DeleteMlflowTrackingServer"
@@ -13457,6 +15709,15 @@ module Aws::SageMaker
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
+      service.add_operation(:delete_processing_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DeleteProcessingJob"
+        operation.name = "DeleteProcessingJob"
+        operation.input = DeleteProcessingJobRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ResourceInUse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
       service.add_operation(:delete_project, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#DeleteProject"
         operation.name = "DeleteProject"
@@ -13488,6 +15749,23 @@ module Aws::SageMaker
         operation.name = "DeleteTags"
         operation.input = DeleteTagsInput
         operation.output = DeleteTagsOutput
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_training_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DeleteTrainingJob"
+        operation.name = "DeleteTrainingJob"
+        operation.input = DeleteTrainingJobRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ResourceInUse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_training_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DeleteTrainingSession"
+        operation.name = "DeleteTrainingSession"
+        operation.input = DeleteTrainingSessionRequest
+        operation.output = DeleteTrainingSessionResponse
+        operation.errors << ResourceNotFound
         operation.traits = {}
       end)
       service.add_operation(:delete_trial, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -13535,6 +15813,30 @@ module Aws::SageMaker
         operation.name = "DeregisterDevices"
         operation.input = DeregisterDevicesRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_ai_benchmark_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DescribeAIBenchmarkJob"
+        operation.name = "DescribeAIBenchmarkJob"
+        operation.input = DescribeAIBenchmarkJobRequest
+        operation.output = DescribeAIBenchmarkJobResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_ai_recommendation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DescribeAIRecommendationJob"
+        operation.name = "DescribeAIRecommendationJob"
+        operation.input = DescribeAIRecommendationJobRequest
+        operation.output = DescribeAIRecommendationJobResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_ai_workload_config, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DescribeAIWorkloadConfig"
+        operation.name = "DescribeAIWorkloadConfig"
+        operation.input = DescribeAIWorkloadConfigRequest
+        operation.output = DescribeAIWorkloadConfigResponse
+        operation.errors << ResourceNotFound
         operation.traits = {}
       end)
       service.add_operation(:describe_action, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -13820,6 +16122,22 @@ module Aws::SageMaker
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
+      service.add_operation(:describe_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DescribeJob"
+        operation.name = "DescribeJob"
+        operation.input = DescribeJobRequest
+        operation.output = DescribeJobResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_job_schema_version, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DescribeJobSchemaVersion"
+        operation.name = "DescribeJobSchemaVersion"
+        operation.input = DescribeJobSchemaVersionRequest
+        operation.output = DescribeJobSchemaVersionResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
       service.add_operation(:describe_labeling_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#DescribeLabelingJob"
         operation.name = "DescribeLabelingJob"
@@ -13833,6 +16151,14 @@ module Aws::SageMaker
         operation.name = "DescribeLineageGroup"
         operation.input = DescribeLineageGroupRequest
         operation.output = DescribeLineageGroupResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:describe_mlflow_app, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DescribeMlflowApp"
+        operation.name = "DescribeMlflowApp"
+        operation.input = DescribeMlflowAppRequest
+        operation.output = DescribeMlflowAppResponse
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
@@ -14029,6 +16355,23 @@ module Aws::SageMaker
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
+      service.add_operation(:describe_training_plan_extension_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DescribeTrainingPlanExtensionHistory"
+        operation.name = "DescribeTrainingPlanExtensionHistory"
+        operation.input = DescribeTrainingPlanExtensionHistoryRequest
+        operation.output = DescribeTrainingPlanExtensionHistoryResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+        operation[:paginator] = Paginators::DescribeTrainingPlanExtensionHistory.new
+      end)
+      service.add_operation(:describe_training_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#DescribeTrainingSession"
+        operation.name = "DescribeTrainingSession"
+        operation.input = DescribeTrainingSessionRequest
+        operation.output = DescribeTrainingSessionResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {"smithy.api#readonly" => {}}
+      end)
       service.add_operation(:describe_transform_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#DescribeTransformJob"
         operation.name = "DescribeTransformJob"
@@ -14106,6 +16449,14 @@ module Aws::SageMaker
         operation.output = EnableSagemakerServicecatalogPortfolioOutput
         operation.traits = {}
       end)
+      service.add_operation(:extend_training_plan, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#ExtendTrainingPlan"
+        operation.name = "ExtendTrainingPlan"
+        operation.input = ExtendTrainingPlanRequest
+        operation.output = ExtendTrainingPlanResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
       service.add_operation(:get_device_fleet_report, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#GetDeviceFleetReport"
         operation.name = "GetDeviceFleetReport"
@@ -14159,6 +16510,30 @@ module Aws::SageMaker
         operation.errors << ResourceLimitExceeded
         operation.errors << ResourceNotFound
         operation.traits = {}
+      end)
+      service.add_operation(:list_ai_benchmark_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#ListAIBenchmarkJobs"
+        operation.name = "ListAIBenchmarkJobs"
+        operation.input = ListAIBenchmarkJobsRequest
+        operation.output = ListAIBenchmarkJobsResponse
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListAIBenchmarkJobs.new
+      end)
+      service.add_operation(:list_ai_recommendation_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#ListAIRecommendationJobs"
+        operation.name = "ListAIRecommendationJobs"
+        operation.input = ListAIRecommendationJobsRequest
+        operation.output = ListAIRecommendationJobsResponse
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListAIRecommendationJobs.new
+      end)
+      service.add_operation(:list_ai_workload_configs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#ListAIWorkloadConfigs"
+        operation.name = "ListAIWorkloadConfigs"
+        operation.input = ListAIWorkloadConfigsRequest
+        operation.output = ListAIWorkloadConfigsResponse
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListAIWorkloadConfigs.new
       end)
       service.add_operation(:list_actions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#ListActions"
@@ -14481,6 +16856,23 @@ module Aws::SageMaker
         operation.traits = {}
         operation[:paginator] = Paginators::ListInferenceRecommendationsJobs.new
       end)
+      service.add_operation(:list_job_schema_versions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#ListJobSchemaVersions"
+        operation.name = "ListJobSchemaVersions"
+        operation.input = ListJobSchemaVersionsRequest
+        operation.output = ListJobSchemaVersionsResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListJobSchemaVersions.new
+      end)
+      service.add_operation(:list_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#ListJobs"
+        operation.name = "ListJobs"
+        operation.input = ListJobsRequest
+        operation.output = ListJobsResponse
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListJobs.new
+      end)
       service.add_operation(:list_labeling_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#ListLabelingJobs"
         operation.name = "ListLabelingJobs"
@@ -14505,6 +16897,14 @@ module Aws::SageMaker
         operation.output = ListLineageGroupsResponse
         operation.traits = {}
         operation[:paginator] = Paginators::ListLineageGroups.new
+      end)
+      service.add_operation(:list_mlflow_apps, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#ListMlflowApps"
+        operation.name = "ListMlflowApps"
+        operation.input = ListMlflowAppsRequest
+        operation.output = ListMlflowAppsResponse
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListMlflowApps.new
       end)
       service.add_operation(:list_mlflow_tracking_servers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#ListMlflowTrackingServers"
@@ -14795,6 +17195,14 @@ module Aws::SageMaker
         operation.traits = {}
         operation[:paginator] = Paginators::ListTrainingPlans.new
       end)
+      service.add_operation(:list_training_sessions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#ListTrainingSessions"
+        operation.name = "ListTrainingSessions"
+        operation.input = ListTrainingSessionsRequest
+        operation.output = ListTrainingSessionsResponse
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListTrainingSessions.new
+      end)
       service.add_operation(:list_transform_jobs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#ListTransformJobs"
         operation.name = "ListTransformJobs"
@@ -14933,6 +17341,14 @@ module Aws::SageMaker
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
+      service.add_operation(:start_cluster_health_check, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#StartClusterHealthCheck"
+        operation.name = "StartClusterHealthCheck"
+        operation.input = StartClusterHealthCheckRequest
+        operation.output = StartClusterHealthCheckResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
       service.add_operation(:start_edge_deployment_stage, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#StartEdgeDeploymentStage"
         operation.name = "StartEdgeDeploymentStage"
@@ -14993,6 +17409,22 @@ module Aws::SageMaker
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
+      service.add_operation(:stop_ai_benchmark_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#StopAIBenchmarkJob"
+        operation.name = "StopAIBenchmarkJob"
+        operation.input = StopAIBenchmarkJobRequest
+        operation.output = StopAIBenchmarkJobResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:stop_ai_recommendation_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#StopAIRecommendationJob"
+        operation.name = "StopAIRecommendationJob"
+        operation.input = StopAIRecommendationJobRequest
+        operation.output = StopAIRecommendationJobResponse
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
       service.add_operation(:stop_auto_ml_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.sagemaker#StopAutoMLJob"
         operation.name = "StopAutoMLJob"
@@ -15045,6 +17477,14 @@ module Aws::SageMaker
         operation.name = "StopInferenceRecommendationsJob"
         operation.input = StopInferenceRecommendationsJobRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:stop_job, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#StopJob"
+        operation.name = "StopJob"
+        operation.input = StopJobRequest
+        operation.output = StopJobResponse
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
@@ -15110,6 +17550,14 @@ module Aws::SageMaker
         operation.name = "StopTrainingJob"
         operation.input = StopTrainingJobRequest
         operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:stop_training_session, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#StopTrainingSession"
+        operation.name = "StopTrainingSession"
+        operation.input = StopTrainingSessionRequest
+        operation.output = StopTrainingSessionResponse
         operation.errors << ResourceNotFound
         operation.traits = {}
       end)
@@ -15335,6 +17783,15 @@ module Aws::SageMaker
         operation.name = "UpdateInferenceExperiment"
         operation.input = UpdateInferenceExperimentRequest
         operation.output = UpdateInferenceExperimentResponse
+        operation.errors << ConflictException
+        operation.errors << ResourceNotFound
+        operation.traits = {}
+      end)
+      service.add_operation(:update_mlflow_app, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.sagemaker#UpdateMlflowApp"
+        operation.name = "UpdateMlflowApp"
+        operation.input = UpdateMlflowAppRequest
+        operation.output = UpdateMlflowAppResponse
         operation.errors << ConflictException
         operation.errors << ResourceNotFound
         operation.traits = {}

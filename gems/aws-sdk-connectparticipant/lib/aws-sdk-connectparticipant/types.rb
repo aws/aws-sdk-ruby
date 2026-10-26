@@ -272,7 +272,7 @@ module Aws::ConnectParticipant
     end
 
     # @!attribute url
-    #   <p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response 
+    #   <p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response
     #   to <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html">StartAttachmentUpload</a>.</p>
     #   @return [String]
     # @!attribute url_expiry
@@ -478,10 +478,26 @@ module Aws::ConnectParticipant
     # @!attribute receipts
     #   <p>The list of receipt information for a message for different recipients.</p>
     #   @return [Array<Types::Receipt>]
+    # @!attribute message_processing_status
+    #   <p>The status of Message Processing for the message.</p>
+    #   @return [String]
     class MessageMetadata < Struct.new(
       nil,
       :message_id,
       :receipts,
+      :message_processing_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains metadata for chat messages.</p>
+    # @!attribute message_processing_status
+    #   <p>The status of Message Processing for the message.</p>
+    #   @return [String]
+    class MessageProcessingMetadata < Struct.new(
+      nil,
+      :message_processing_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -514,7 +530,7 @@ module Aws::ConnectParticipant
     #   <p>The identifier of the resource.</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>The type of Amazon Connect resource.</p>
+    #   <p>The type of Connect Customer resource.</p>
     #   @return [String]
     class ResourceNotFoundException < Struct.new(
       nil,
@@ -643,10 +659,14 @@ module Aws::ConnectParticipant
     #            <p>It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
     #               2019-11-08T02:41:28.172Z.</p>
     #   @return [String]
+    # @!attribute message_metadata
+    #   <p>Contains metadata for the message.</p>
+    #   @return [Types::MessageProcessingMetadata]
     class SendMessageResponse < Struct.new(
       nil,
       :id,
       :absolute_time,
+      :message_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -749,7 +769,7 @@ module Aws::ConnectParticipant
 
     # <p>Fields to be used while uploading the attachment.</p>
     # @!attribute url
-    #   <p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response 
+    #   <p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response
     #   to <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html">StartAttachmentUpload</a>.</p>
     #   @return [String]
     # @!attribute url_expiry

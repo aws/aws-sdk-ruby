@@ -41,10 +41,14 @@ module Aws::Mq
     # @!attribute message
     #   <p>The explanation of the error.</p>
     #   @return [String]
+    # @!attribute resource_share_errors
+    #   <p>The list of resource share errors.</p>
+    #   @return [Array<Types::ResourceShareError>]
     class BadRequestException < Struct.new(
       nil,
       :error_attribute,
       :message,
+      :resource_share_errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -269,10 +273,14 @@ module Aws::Mq
     # @!attribute message
     #   <p>The explanation of the error.</p>
     #   @return [String]
+    # @!attribute resource_share_errors
+    #   <p>The list of resource share errors.</p>
+    #   @return [Array<Types::ResourceShareError>]
     class ConflictException < Struct.new(
       nil,
       :error_attribute,
       :message,
+      :resource_share_errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -324,6 +332,9 @@ module Aws::Mq
     # @!attribute security_groups
     #   <p>The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.</p>
     #   @return [Array<String>]
+    # @!attribute storage_size
+    #   <p>The broker's storage size in GB.</p>
+    #   @return [Integer]
     # @!attribute storage_type
     #   <p>The broker's storage type.</p>
     #   @return [String]
@@ -359,6 +370,7 @@ module Aws::Mq
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
+      :storage_size,
       :storage_type,
       :subnet_ids,
       :tags,
@@ -776,12 +788,18 @@ module Aws::Mq
     # @!attribute pending_security_groups
     #   <p>The list of pending security groups to authorize connections to brokers.</p>
     #   @return [Array<String>]
+    # @!attribute pending_storage_size
+    #   <p>The pending storage size in GB, to be applied on the next broker restart.</p>
+    #   @return [Integer]
     # @!attribute publicly_accessible
     #   <p>Enables connections from applications outside of the VPC that hosts the broker's subnets.</p>
     #   @return [Boolean]
     # @!attribute security_groups
     #   <p>The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.</p>
     #   @return [Array<String>]
+    # @!attribute storage_size
+    #   <p>The broker's storage size in GB.</p>
+    #   @return [Integer]
     # @!attribute storage_type
     #   <p>The broker's storage type.</p>
     #   @return [String]
@@ -831,8 +849,10 @@ module Aws::Mq
       :pending_host_instance_type,
       :pending_ldap_server_metadata,
       :pending_security_groups,
+      :pending_storage_size,
       :publicly_accessible,
       :security_groups,
+      :storage_size,
       :storage_type,
       :subnet_ids,
       :tags,
@@ -945,6 +965,40 @@ module Aws::Mq
     # @!attribute broker_id
     #   <p>The unique ID that Amazon MQ generates for the broker.</p>
     #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of resources that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
+    #   @return [String]
+    class DescribeSharedResourcesRequest < Struct.new(
+      nil,
+      :broker_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.</p>
+    #   @return [String]
+    # @!attribute shared_resources
+    #   <p>A list of resources shared to the broker.</p>
+    #   @return [Array<Types::SharedResource>]
+    class DescribeSharedResourcesResponse < Struct.new(
+      nil,
+      :next_token,
+      :shared_resources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute broker_id
+    #   <p>The unique ID that Amazon MQ generates for the broker.</p>
+    #   @return [String]
     # @!attribute username
     #   <p>The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p>
     #   @return [String]
@@ -1023,10 +1077,14 @@ module Aws::Mq
     # @!attribute message
     #   <p>The explanation of the error.</p>
     #   @return [String]
+    # @!attribute resource_share_errors
+    #   <p>The list of resource share errors.</p>
+    #   @return [Array<Types::ResourceShareError>]
     class ForbiddenException < Struct.new(
       nil,
       :error_attribute,
       :message,
+      :resource_share_errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1039,10 +1097,14 @@ module Aws::Mq
     # @!attribute message
     #   <p>The explanation of the error.</p>
     #   @return [String]
+    # @!attribute resource_share_errors
+    #   <p>The list of resource share errors.</p>
+    #   @return [Array<Types::ResourceShareError>]
     class InternalServerErrorException < Struct.new(
       nil,
       :error_attribute,
       :message,
+      :resource_share_errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1378,10 +1440,14 @@ module Aws::Mq
     # @!attribute message
     #   <p>The explanation of the error.</p>
     #   @return [String]
+    # @!attribute resource_share_errors
+    #   <p>The list of resource share errors.</p>
+    #   @return [Array<Types::ResourceShareError>]
     class NotFoundException < Struct.new(
       nil,
       :error_attribute,
       :message,
+      :resource_share_errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1448,6 +1514,26 @@ module Aws::Mq
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Returns info about the resource share error after updating the broker.</p>
+    # @!attribute error_code
+    #   <p>The error code of the resource share.</p>
+    #   @return [String]
+    # @!attribute resource_share_arn
+    #   <p>The ARN of the resource share.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the resource share.</p>
+    #   @return [String]
+    class ResourceShareError < Struct.new(
+      nil,
+      :error_code,
+      :resource_share_arn,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Returns information about the configuration element or attribute that was sanitized in the configuration.</p>
     # @!attribute attribute_name
     #   <p>The name of the configuration attribute that has been sanitized.</p>
@@ -1468,6 +1554,54 @@ module Aws::Mq
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Represents a resource that is shared with the broker, including its type, ARN, and current status.</p>
+    # @!attribute dns_names
+    #   <p>The DNS names accessible by the broker.</p>
+    #   @return [Array<String>]
+    # @!attribute error
+    #   <p>Information on the error encountered by the resource.</p>
+    #   @return [Types::SharedResourceError]
+    # @!attribute resource_arn
+    #   <p>The ARN of the shared resource.</p>
+    #   @return [String]
+    # @!attribute resource_share_arns
+    #   <p>The resource share ARNs to which the resource belongs.</p>
+    #   @return [Array<String>]
+    # @!attribute status
+    #   <p>The status of the shared resource.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of shared resource.</p>
+    #   @return [String]
+    class SharedResource < Struct.new(
+      nil,
+      :dns_names,
+      :error,
+      :resource_arn,
+      :resource_share_arns,
+      :status,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information on the error encountered by the resource.</p>
+    # @!attribute code
+    #   <p>The error code associated with the error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The error message.</p>
+    #   @return [String]
+    class SharedResourceError < Struct.new(
+      nil,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Returns information about an error.</p>
     # @!attribute error_attribute
     #   <p>The attribute which caused the error.</p>
@@ -1475,10 +1609,14 @@ module Aws::Mq
     # @!attribute message
     #   <p>The explanation of the error.</p>
     #   @return [String]
+    # @!attribute resource_share_errors
+    #   <p>The list of resource share errors.</p>
+    #   @return [Array<Types::ResourceShareError>]
     class UnauthorizedException < Struct.new(
       nil,
       :error_attribute,
       :message,
+      :resource_share_errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1512,9 +1650,15 @@ module Aws::Mq
     # @!attribute maintenance_window_start_time
     #   <p>The parameters that determine the WeeklyStartTime.</p>
     #   @return [Types::WeeklyStartTime]
+    # @!attribute resource_share_arns
+    #   <p>The list of resource shares to update on the broker</p>
+    #   @return [Array<String>]
     # @!attribute security_groups
     #   <p>The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.</p>
     #   @return [Array<String>]
+    # @!attribute storage_size
+    #   <p>The broker's storage size in GB.</p>
+    #   @return [Integer]
     # @!attribute data_replication_mode
     #   <p>Defines whether this broker is a part of a data replication pair.</p>
     #   @return [String]
@@ -1529,7 +1673,9 @@ module Aws::Mq
       :ldap_server_metadata,
       :logs,
       :maintenance_window_start_time,
+      :resource_share_arns,
       :security_groups,
+      :storage_size,
       :data_replication_mode,
       keyword_init: true
     )
@@ -1563,6 +1709,9 @@ module Aws::Mq
     # @!attribute maintenance_window_start_time
     #   <p>The parameters that determine the WeeklyStartTime.</p>
     #   @return [Types::WeeklyStartTime]
+    # @!attribute resource_share_arns
+    #   <p>The pending broker's target list of resource shares</p>
+    #   @return [Array<String>]
     # @!attribute security_groups
     #   <p>The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.</p>
     #   @return [Array<String>]
@@ -1578,6 +1727,9 @@ module Aws::Mq
     # @!attribute pending_data_replication_mode
     #   <p>Describes whether this broker will be a part of a data replication pair after reboot.</p>
     #   @return [String]
+    # @!attribute storage_size
+    #   <p>The broker's storage size in GB.</p>
+    #   @return [Integer]
     class UpdateBrokerResponse < Struct.new(
       nil,
       :authentication_strategy,
@@ -1589,11 +1741,13 @@ module Aws::Mq
       :ldap_server_metadata,
       :logs,
       :maintenance_window_start_time,
+      :resource_share_arns,
       :security_groups,
       :data_replication_metadata,
       :data_replication_mode,
       :pending_data_replication_metadata,
       :pending_data_replication_mode,
+      :storage_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

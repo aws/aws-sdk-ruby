@@ -70,6 +70,7 @@ module Aws::S3Control
         ?advanced_cost_optimization_metrics: Types::AdvancedCostOptimizationMetrics,
         ?advanced_data_protection_metrics: Types::AdvancedDataProtectionMetrics,
         ?detailed_status_codes_metrics: Types::DetailedStatusCodesMetrics,
+        ?advanced_performance_metrics: Types::AdvancedPerformanceMetrics,
         ?storage_lens_group_level: Types::StorageLensGroupLevel,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -79,6 +80,7 @@ module Aws::S3Control
       attr_accessor advanced_cost_optimization_metrics: Types::AdvancedCostOptimizationMetrics?
       attr_accessor advanced_data_protection_metrics: Types::AdvancedDataProtectionMetrics?
       attr_accessor detailed_status_codes_metrics: Types::DetailedStatusCodesMetrics?
+      attr_accessor advanced_performance_metrics: Types::AdvancedPerformanceMetrics?
       attr_accessor storage_lens_group_level: Types::StorageLensGroupLevel?
     end
 
@@ -105,6 +107,17 @@ module Aws::S3Control
     end
 
     class AdvancedDataProtectionMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_enabled: bool?
+    end
+
+    class AdvancedPerformanceMetrics
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -258,6 +271,7 @@ module Aws::S3Control
         ?advanced_cost_optimization_metrics: Types::AdvancedCostOptimizationMetrics,
         ?advanced_data_protection_metrics: Types::AdvancedDataProtectionMetrics,
         ?detailed_status_codes_metrics: Types::DetailedStatusCodesMetrics,
+        ?advanced_performance_metrics: Types::AdvancedPerformanceMetrics,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -266,6 +280,7 @@ module Aws::S3Control
       attr_accessor advanced_cost_optimization_metrics: Types::AdvancedCostOptimizationMetrics?
       attr_accessor advanced_data_protection_metrics: Types::AdvancedDataProtectionMetrics?
       attr_accessor detailed_status_codes_metrics: Types::DetailedStatusCodesMetrics?
+      attr_accessor advanced_performance_metrics: Types::AdvancedPerformanceMetrics?
     end
 
     module BucketLocationConstraint
@@ -305,6 +320,10 @@ module Aws::S3Control
       MD5: String
       SHA1: String
       SHA256: String
+      SHA512: String
+      XXHASH64: String
+      XXHASH3: String
+      XXHASH128: String
     end
 
     module ComputeObjectChecksumType
@@ -1700,6 +1719,7 @@ module Aws::S3Control
         ?duration_seconds: Integer,
         ?privilege: String,
         ?target_type: String,
+        ?audit_context: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1709,6 +1729,7 @@ module Aws::S3Control
       attr_accessor duration_seconds: Integer?
       attr_accessor privilege: String?
       attr_accessor target_type: String?
+      attr_accessor audit_context: String?
     end
 
     class GetDataAccessResult
@@ -2213,6 +2234,7 @@ module Aws::S3Control
         ?s3_put_object_retention: Types::S3SetObjectRetentionOperation,
         ?s3_replicate_object: Types::S3ReplicateObjectOperation,
         ?s3_compute_object_checksum: Types::S3ComputeObjectChecksumOperation,
+        ?s3_update_object_encryption: Types::S3UpdateObjectEncryptionOperation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2226,6 +2248,7 @@ module Aws::S3Control
       attr_accessor s3_put_object_retention: Types::S3SetObjectRetentionOperation?
       attr_accessor s3_replicate_object: Types::S3ReplicateObjectOperation?
       attr_accessor s3_compute_object_checksum: Types::S3ComputeObjectChecksumOperation?
+      attr_accessor s3_update_object_encryption: Types::S3UpdateObjectEncryptionOperation?
     end
 
     class JobProgressSummary
@@ -3126,6 +3149,17 @@ module Aws::S3Control
 
     end
 
+    class ObjectEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ssekms: Types::S3UpdateObjectEncryptionSSEKMS,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssekms: Types::S3UpdateObjectEncryptionSSEKMS?
+    end
+
     class ObjectEncryptionFilter
       include Smithy::Schema::Union
 
@@ -3262,6 +3296,7 @@ module Aws::S3Control
       S3PutObjectRetention: String
       S3ReplicateObject: String
       S3ComputeObjectChecksum: String
+      S3UpdateObjectEncryption: String
     end
 
     module OutputSchemaVersion
@@ -3849,6 +3884,11 @@ module Aws::S3Control
       attr_accessor canned_access_control_list: String?
     end
 
+    module S3AnnotationDirective
+      COPY: String
+      EXCLUDE: String
+    end
+
     class S3BucketDestination
       include Smithy::Schema::Structure
 
@@ -3886,6 +3926,11 @@ module Aws::S3Control
       SHA1: String
       SHA256: String
       CRC64NVME: String
+      SHA512: String
+      MD5: String
+      XXHASH64: String
+      XXHASH3: String
+      XXHASH128: String
     end
 
     class S3ComputeObjectChecksumOperation
@@ -3909,6 +3954,7 @@ module Aws::S3Control
         ?canned_access_control_list: String,
         ?access_control_grants: Array[Types::S3Grant],
         ?metadata_directive: String,
+        ?annotation_directive: String,
         ?modified_since_constraint: Time,
         ?new_object_metadata: Types::S3ObjectMetadata,
         ?new_object_tagging: Array[Types::S3Tag],
@@ -3923,6 +3969,8 @@ module Aws::S3Control
         ?object_lock_retain_until_date: Time,
         ?bucket_key_enabled: bool,
         ?checksum_algorithm: String,
+        ?object_lock_event_hold: String,
+        ?object_lock_event_hold_duration: Types::S3ObjectLockEventHoldDuration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3930,6 +3978,7 @@ module Aws::S3Control
       attr_accessor canned_access_control_list: String?
       attr_accessor access_control_grants: Array[Types::S3Grant]?
       attr_accessor metadata_directive: String?
+      attr_accessor annotation_directive: String?
       attr_accessor modified_since_constraint: Time?
       attr_accessor new_object_metadata: Types::S3ObjectMetadata?
       attr_accessor new_object_tagging: Array[Types::S3Tag]?
@@ -3944,6 +3993,8 @@ module Aws::S3Control
       attr_accessor object_lock_retain_until_date: Time?
       attr_accessor bucket_key_enabled: bool?
       attr_accessor checksum_algorithm: String?
+      attr_accessor object_lock_event_hold: String?
+      attr_accessor object_lock_event_hold_duration: Types::S3ObjectLockEventHoldDuration?
     end
 
     class S3DeleteObjectTaggingOperation
@@ -4063,6 +4114,24 @@ module Aws::S3Control
       REPLACE: String
     end
 
+    module S3ObjectLockEventHold
+      ON: String
+      OFF: String
+    end
+
+    class S3ObjectLockEventHoldDuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days: Integer,
+        ?years: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days: Integer?
+      attr_accessor years: Integer?
+    end
+
     class S3ObjectLockLegalHold
       include Smithy::Schema::Structure
 
@@ -4082,6 +4151,24 @@ module Aws::S3Control
     module S3ObjectLockMode
       COMPLIANCE: String
       GOVERNANCE: String
+    end
+
+    module S3ObjectLockRetentionEventHold
+      ON: String
+      OFF: String
+    end
+
+    class S3ObjectLockRetentionEventHoldDuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days: Integer,
+        ?years: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days: Integer?
+      attr_accessor years: Integer?
     end
 
     module S3ObjectLockRetentionMode
@@ -4160,11 +4247,15 @@ module Aws::S3Control
       def initialize: (
         ?retain_until_date: Time,
         ?mode: String,
+        ?event_hold: String,
+        ?event_hold_duration: Types::S3ObjectLockRetentionEventHoldDuration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor retain_until_date: Time?
       attr_accessor mode: String?
+      attr_accessor event_hold: String?
+      attr_accessor event_hold_duration: Types::S3ObjectLockRetentionEventHoldDuration?
     end
 
     module S3SSEAlgorithm
@@ -4239,6 +4330,30 @@ module Aws::S3Control
 
       attr_accessor key: String?
       attr_accessor value: String?
+    end
+
+    class S3UpdateObjectEncryptionOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_encryption: Types::ObjectEncryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_encryption: Types::ObjectEncryption?
+    end
+
+    class S3UpdateObjectEncryptionSSEKMS
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+        ?bucket_key_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+      attr_accessor bucket_key_enabled: bool?
     end
 
     class SSECFilter
@@ -4400,9 +4515,11 @@ module Aws::S3Control
         ?include: Types::Include,
         ?exclude: Types::Exclude,
         ?data_export: Types::StorageLensDataExport,
+        ?expanded_prefixes_data_export: Types::StorageLensExpandedPrefixesDataExport,
         ?is_enabled: bool,
         ?aws_org: Types::StorageLensAwsOrg,
         ?storage_lens_arn: String,
+        ?prefix_delimiter: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4411,9 +4528,11 @@ module Aws::S3Control
       attr_accessor include: Types::Include?
       attr_accessor exclude: Types::Exclude?
       attr_accessor data_export: Types::StorageLensDataExport?
+      attr_accessor expanded_prefixes_data_export: Types::StorageLensExpandedPrefixesDataExport?
       attr_accessor is_enabled: bool?
       attr_accessor aws_org: Types::StorageLensAwsOrg?
       attr_accessor storage_lens_arn: String?
+      attr_accessor prefix_delimiter: String?
     end
 
     class StorageLensDataExport
@@ -4422,11 +4541,13 @@ module Aws::S3Control
       def initialize: (
         ?s3_bucket_destination: Types::S3BucketDestination,
         ?cloud_watch_metrics: Types::CloudWatchMetrics,
+        ?storage_lens_table_destination: Types::StorageLensTableDestination,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor s3_bucket_destination: Types::S3BucketDestination?
       attr_accessor cloud_watch_metrics: Types::CloudWatchMetrics?
+      attr_accessor storage_lens_table_destination: Types::StorageLensTableDestination?
     end
 
     class StorageLensDataExportEncryption
@@ -4440,6 +4561,19 @@ module Aws::S3Control
 
       attr_accessor sses3: Types::SSES3?
       attr_accessor ssekms: Types::SSEKMS?
+    end
+
+    class StorageLensExpandedPrefixesDataExport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket_destination: Types::S3BucketDestination,
+        ?storage_lens_table_destination: Types::StorageLensTableDestination,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket_destination: Types::S3BucketDestination?
+      attr_accessor storage_lens_table_destination: Types::StorageLensTableDestination?
     end
 
     class StorageLensGroup
@@ -4540,6 +4674,19 @@ module Aws::S3Control
       attr_accessor match_any_tag: Array[Types::S3Tag]?
       attr_accessor match_object_age: Types::MatchObjectAge?
       attr_accessor match_object_size: Types::MatchObjectSize?
+    end
+
+    class StorageLensTableDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_enabled: bool,
+        ?encryption: Types::StorageLensDataExportEncryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_enabled: bool?
+      attr_accessor encryption: Types::StorageLensDataExportEncryption?
     end
 
     class StorageLensTag

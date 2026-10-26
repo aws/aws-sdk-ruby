@@ -60,6 +60,7 @@ module Aws::CostExplorer
     module AnalysisType
       MAX_SAVINGS: String
       CUSTOM_COMMITMENT: String
+      TARGET_AVERAGE_COVERAGE: String
     end
 
     class Anomaly
@@ -401,6 +402,7 @@ module Aws::CostExplorer
         ?processing_status: Array[Types::CostCategoryProcessingStatus],
         ?values: Array[String],
         ?default_value: String,
+        ?supported_resource_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -412,6 +414,22 @@ module Aws::CostExplorer
       attr_accessor processing_status: Array[Types::CostCategoryProcessingStatus]?
       attr_accessor values: Array[String]?
       attr_accessor default_value: String?
+      attr_accessor supported_resource_types: Array[String]?
+    end
+
+    class CostCategoryResourceAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?cost_category_name: String,
+        ?cost_category_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor cost_category_name: String?
+      attr_accessor cost_category_arn: String?
     end
 
     class CostCategoryRule
@@ -872,6 +890,7 @@ module Aws::CostExplorer
       INVOICING_ENTITY: String
       ANOMALY_TOTAL_IMPACT_ABSOLUTE: String
       ANOMALY_TOTAL_IMPACT_PERCENTAGE: String
+      PRODUCT_ATTRIBUTE: String
     end
 
     class DimensionValues
@@ -1091,6 +1110,7 @@ module Aws::CostExplorer
         ?dimensions: Types::DimensionValues,
         ?tags: Types::TagValues,
         ?cost_categories: Types::CostCategoryValues,
+        ?product_attributes: Types::ProductAttributeValues,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1100,6 +1120,7 @@ module Aws::CostExplorer
       attr_accessor dimensions: Types::DimensionValues?
       attr_accessor tags: Types::TagValues?
       attr_accessor cost_categories: Types::CostCategoryValues?
+      attr_accessor product_attributes: Types::ProductAttributeValues?
     end
 
     module FindingReasonCode
@@ -1575,6 +1596,7 @@ module Aws::CostExplorer
         ?search_string: String,
         ?time_period: Types::DateInterval,
         ?dimension: String,
+        ?dimension_key: String,
         ?context: String,
         ?filter: Types::Expression,
         ?sort_by: Array[Types::SortDefinition],
@@ -1587,6 +1609,7 @@ module Aws::CostExplorer
       attr_accessor search_string: String?
       attr_accessor time_period: Types::DateInterval?
       attr_accessor dimension: String?
+      attr_accessor dimension_key: String?
       attr_accessor context: String?
       attr_accessor filter: Types::Expression?
       attr_accessor sort_by: Array[Types::SortDefinition]?
@@ -2054,6 +2077,7 @@ module Aws::CostExplorer
       DIMENSION: String
       TAG: String
       COST_CATEGORY: String
+      PRODUCT_ATTRIBUTE: String
     end
 
     class Impact
@@ -2213,12 +2237,14 @@ module Aws::CostExplorer
         ?effective_on: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?supported_resource_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor effective_on: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor supported_resource_types: Array[String]?
     end
 
     class ListCostCategoryDefinitionsResponse
@@ -2231,6 +2257,34 @@ module Aws::CostExplorer
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cost_category_references: Array[Types::CostCategoryReference]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCostCategoryResourceAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCostCategoryResourceAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_resource_associations: Array[Types::CostCategoryResourceAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_resource_associations: Array[Types::CostCategoryResourceAssociation]?
       attr_accessor next_token: String?
     end
 
@@ -2358,6 +2412,9 @@ module Aws::CostExplorer
 
     module MonitorDimension
       SERVICE: String
+      LINKED_ACCOUNT: String
+      TAG: String
+      COST_CATEGORY: String
     end
 
     module MonitorType
@@ -2413,6 +2470,21 @@ module Aws::CostExplorer
       VIRTUALIZATION_TYPE: String
     end
 
+    class ProductAttributeValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
     class ProvideAnomalyFeedbackRequest
       include Smithy::Schema::Structure
 
@@ -2450,6 +2522,7 @@ module Aws::CostExplorer
         ?license_model: String,
         ?current_generation: bool,
         ?size_flex_eligible: bool,
+        ?deployment_model: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2462,6 +2535,7 @@ module Aws::CostExplorer
       attr_accessor license_model: String?
       attr_accessor current_generation: bool?
       attr_accessor size_flex_eligible: bool?
+      attr_accessor deployment_model: String?
     end
 
     class RecommendationDetailData
@@ -3051,6 +3125,7 @@ module Aws::CostExplorer
         ?savings_plans_to_add: Array[Types::SavingsPlans],
         ?savings_plans_to_exclude: Array[String],
         ?look_back_time_period: Types::DateInterval,
+        ?savings_plans_target_coverage: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3060,6 +3135,7 @@ module Aws::CostExplorer
       attr_accessor savings_plans_to_add: Array[Types::SavingsPlans]?
       attr_accessor savings_plans_to_exclude: Array[String]?
       attr_accessor look_back_time_period: Types::DateInterval?
+      attr_accessor savings_plans_target_coverage: Integer?
     end
 
     class SavingsPlansPurchaseAnalysisDetails
@@ -3449,6 +3525,7 @@ module Aws::CostExplorer
       COMPUTE_SP: String
       EC2_INSTANCE_SP: String
       SAGEMAKER_SP: String
+      DATABASE_SP: String
     end
 
     class TagResourceRequest

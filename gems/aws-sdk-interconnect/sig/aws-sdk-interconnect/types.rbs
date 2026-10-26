@@ -1,0 +1,634 @@
+module Aws::Interconnect
+  module Types
+
+    class AcceptConnectionProposalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attach_point: Types::AttachPoint,
+        ?activation_key: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attach_point: Types::AttachPoint?
+      attr_accessor activation_key: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class AcceptConnectionProposalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttachPoint
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?direct_connect_gateway: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway: String?
+      attr_accessor arn: String?
+
+      class DirectConnectGateway < AttachPoint
+      end
+      class Arn < AttachPoint
+      end
+      class Unknown < AttachPoint
+      end
+    end
+
+    class AttachPointDescriptor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?identifier: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+    end
+
+    module AttachPointType
+      DirectConnectGateway: String
+    end
+
+    class Bandwidths
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available: Array[String],
+        ?supported: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available: Array[String]?
+      attr_accessor supported: Array[String]?
+    end
+
+    class Connection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?bandwidth: String,
+        ?attach_point: Types::AttachPoint,
+        ?environment_id: String,
+        ?provider: Types::Provider,
+        ?location: String,
+        ?type: String,
+        ?state: String,
+        ?shared_id: String,
+        ?billing_tier: Integer,
+        ?owner_account: String,
+        ?activation_key: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor bandwidth: String?
+      attr_accessor attach_point: Types::AttachPoint?
+      attr_accessor environment_id: String?
+      attr_accessor provider: Types::Provider?
+      attr_accessor location: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor shared_id: String?
+      attr_accessor billing_tier: Integer?
+      attr_accessor owner_account: String?
+      attr_accessor activation_key: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module ConnectionState
+      AVAILABLE: String
+      REQUESTED: String
+      PENDING: String
+      DOWN: String
+      DELETING: String
+      DELETED: String
+      FAILED: String
+      UPDATING: String
+    end
+
+    class ConnectionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?description: String,
+        ?bandwidth: String,
+        ?attach_point: Types::AttachPoint,
+        ?environment_id: String,
+        ?provider: Types::Provider,
+        ?location: String,
+        ?type: String,
+        ?state: String,
+        ?shared_id: String,
+        ?billing_tier: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor bandwidth: String?
+      attr_accessor attach_point: Types::AttachPoint?
+      attr_accessor environment_id: String?
+      attr_accessor provider: Types::Provider?
+      attr_accessor location: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor shared_id: String?
+      attr_accessor billing_tier: Integer?
+    end
+
+    class CreateConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?bandwidth: String,
+        ?attach_point: Types::AttachPoint,
+        ?environment_id: String,
+        ?remote_account: Types::RemoteAccountIdentifier,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor bandwidth: String?
+      attr_accessor attach_point: Types::AttachPoint?
+      attr_accessor environment_id: String?
+      attr_accessor remote_account: Types::RemoteAccountIdentifier?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class DeleteConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class DescribeConnectionProposalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activation_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activation_key: String?
+    end
+
+    class DescribeConnectionProposalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bandwidth: String,
+        ?environment_id: String,
+        ?provider: Types::Provider,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bandwidth: String?
+      attr_accessor environment_id: String?
+      attr_accessor provider: Types::Provider?
+      attr_accessor location: String?
+    end
+
+    class Environment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: Types::Provider,
+        ?location: String,
+        ?environment_id: String,
+        ?state: String,
+        ?bandwidths: Types::Bandwidths,
+        ?type: String,
+        ?activation_page_url: String,
+        ?remote_identifier_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: Types::Provider?
+      attr_accessor location: String?
+      attr_accessor environment_id: String?
+      attr_accessor state: String?
+      attr_accessor bandwidths: Types::Bandwidths?
+      attr_accessor type: String?
+      attr_accessor activation_page_url: String?
+      attr_accessor remote_identifier_type: String?
+    end
+
+    module EnvironmentState
+      AVAILABLE: String
+      LIMITED: String
+      UNAVAILABLE: String
+    end
+
+    class GetConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class GetEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetEnvironmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class InterconnectClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InterconnectServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InterconnectValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAttachPointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAttachPointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attach_points: Array[Types::AttachPointDescriptor],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attach_points: Array[Types::AttachPointDescriptor]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?state: String,
+        ?environment_id: String,
+        ?provider: Types::Provider,
+        ?attach_point: Types::AttachPoint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor state: String?
+      attr_accessor environment_id: String?
+      attr_accessor provider: Types::Provider?
+      attr_accessor attach_point: Types::AttachPoint?
+    end
+
+    class ListConnectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::ConnectionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::ConnectionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?provider: Types::Provider,
+        ?location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor provider: Types::Provider?
+      attr_accessor location: String?
+    end
+
+    class ListEnvironmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environments: Array[Types::Environment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environments: Array[Types::Environment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Provider
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cloud_service_provider: String,
+        ?last_mile_provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_service_provider: String?
+      attr_accessor last_mile_provider: String?
+
+      class CloudServiceProvider < Provider
+      end
+      class LastMileProvider < Provider
+      end
+      class Unknown < Provider
+      end
+    end
+
+    class RemoteAccountIdentifier
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+
+      class Identifier < RemoteAccountIdentifier
+      end
+      class Unknown < RemoteAccountIdentifier
+      end
+    end
+
+    module RemoteAccountIdentifierType
+      ACCOUNT: String
+      EMAIL: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?description: String,
+        ?bandwidth: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor description: String?
+      attr_accessor bandwidth: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+  end
+end

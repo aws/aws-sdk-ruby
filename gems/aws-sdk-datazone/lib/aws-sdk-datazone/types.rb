@@ -104,12 +104,16 @@ module Aws::DataZone
     # @!attribute asset_scopes
     #   <p>The asset scopes of the accept subscription request.</p>
     #   @return [Array<Types::AcceptedAssetScope>]
+    # @!attribute asset_permissions
+    #   <p>The asset permissions of the accept subscription request.</p>
+    #   @return [Array<Types::AssetPermission>]
     class AcceptSubscriptionRequestInput < Struct.new(
       nil,
       :domain_identifier,
       :identifier,
       :decision_comment,
       :asset_scopes,
+      :asset_permissions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -388,6 +392,18 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Additional details on the queried entity that can be requested in the response.</p>
+    # @!attribute form_names
+    #   <p>Names of forms on the query entity that can be requested in the response.</p>
+    #   @return [Array<String>]
+    class AdditionalAttributes < Struct.new(
+      nil,
+      :form_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An aggregation list item.</p>
     # @!attribute attribute
     #   <p>An attribute on which to compute aggregations.</p>
@@ -455,6 +471,66 @@ module Aws::DataZone
     # <p>The all users grant filter.</p>
     class AllUsersGrantFilter < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon Q properties of the connection.</p>
+    # @!attribute is_enabled
+    #   <p>Specifies whether Amazon Q is enabled for the connection.</p>
+    #   @return [Boolean]
+    # @!attribute profile_arn
+    #   <p>The profile ARN of the connection's Amazon Q properties.</p>
+    #   @return [String]
+    # @!attribute auth_mode
+    #   <p>The authentication mode of the connection's Amazon Q properties.</p>
+    #   @return [String]
+    class AmazonQPropertiesInput < Struct.new(
+      nil,
+      :is_enabled,
+      :profile_arn,
+      :auth_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon Q properties of the connection.</p>
+    # @!attribute is_enabled
+    #   <p>Specifies whether Amazon Q is enabled for the connection.</p>
+    #   @return [Boolean]
+    # @!attribute profile_arn
+    #   <p>The profile ARN of the connection's Amazon Q properties.</p>
+    #   @return [String]
+    # @!attribute auth_mode
+    #   <p>The authentication mode of the connection's Amazon Q properties.</p>
+    #   @return [String]
+    class AmazonQPropertiesOutput < Struct.new(
+      nil,
+      :is_enabled,
+      :profile_arn,
+      :auth_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon Q properties of the connection.</p>
+    # @!attribute is_enabled
+    #   <p>Specifies whether Amazon Q is enabled for the connection.</p>
+    #   @return [Boolean]
+    # @!attribute profile_arn
+    #   <p>The profile ARN of the connection's Amazon Q properties.</p>
+    #   @return [String]
+    # @!attribute auth_mode
+    #   <p>The authentication mode of the connection's Amazon Q properties.</p>
+    #   @return [String]
+    class AmazonQPropertiesPatch < Struct.new(
+      nil,
+      :is_enabled,
+      :profile_arn,
+      :auth_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -784,6 +860,22 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The asset permissions.</p>
+    # @!attribute asset_id
+    #   <p>The asset ID as part of the asset permissions.</p>
+    #   @return [String]
+    # @!attribute permissions
+    #   <p>The details as part of the asset permissions.</p>
+    #   @return [Types::Permissions]
+    class AssetPermission < Struct.new(
+      nil,
+      :asset_id,
+      :permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The revision of an inventory asset.</p>
     # @!attribute domain_id
     #   <p>The Amazon DataZone user who created the inventory asset.</p>
@@ -822,6 +914,9 @@ module Aws::DataZone
     # @!attribute status
     #   <p>The status of the asset scope.</p>
     #   @return [String]
+    # @!attribute scope_name
+    #   <p>The name of the materialized asset scope.</p>
+    #   @return [String]
     # @!attribute error_message
     #   <p>The error message of the asset scope.</p>
     #   @return [String]
@@ -830,6 +925,7 @@ module Aws::DataZone
       :asset_id,
       :filter_ids,
       :status,
+      :scope_name,
       :error_message,
       keyword_init: true
     )
@@ -1016,6 +1112,42 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The attribute error.</p>
+    # @!attribute attribute_identifier
+    #   <p>The attribute ID as part of the attribute error.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The code generated as part of the attribute error.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The message generated as part of the attribute error.</p>
+    #   @return [String]
+    class AttributeError < Struct.new(
+      nil,
+      :attribute_identifier,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The attribute input.</p>
+    # @!attribute attribute_identifier
+    #   <p>The ID of the attribute.</p>
+    #   @return [String]
+    # @!attribute forms
+    #   <p>The metadata forms as part of the attribute input.</p>
+    #   @return [Array<Types::FormInput>]
+    class AttributeInput < Struct.new(
+      nil,
+      :attribute_identifier,
+      :forms,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The authentication configuration of a connection.</p>
     # @!attribute authentication_type
     #   <p>The authentication type of a connection.</p>
@@ -1173,6 +1305,118 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The results of the BatchGetAttribute action.</p>
+    # @!attribute attribute_identifier
+    #   <p>The attribute ID.</p>
+    #   @return [String]
+    # @!attribute forms
+    #   <p>The metadata forms that are part of the results of the BatchGetAttribute action.</p>
+    #   @return [Array<Types::FormOutput>]
+    class BatchGetAttributeOutput < Struct.new(
+      nil,
+      :attribute_identifier,
+      :forms,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The domain ID where you want to get the attribute metadata.</p>
+    #   @return [String]
+    # @!attribute entity_type
+    #   <p>The entity type for which you want to get attribute metadata.</p>
+    #   @return [String]
+    # @!attribute entity_identifier
+    #   <p>The entity ID for which you want to get attribute metadata.</p>
+    #   @return [String]
+    # @!attribute entity_revision
+    #   <p>The entity revision for which you want to get attribute metadata.</p>
+    #   @return [String]
+    # @!attribute attribute_identifiers
+    #   <p>The attribute identifier.</p>
+    #   @return [Array<String>]
+    class BatchGetAttributesMetadataInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :entity_type,
+      :entity_identifier,
+      :entity_revision,
+      :attribute_identifiers,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute attributes
+    #   <p>The results of the BatchGetAttributesMetadata action.</p>
+    #   @return [Array<Types::BatchGetAttributeOutput>]
+    # @!attribute errors
+    #   <p>The errors generated when the BatchGetAttributesMetadata action is invoked.</p>
+    #   @return [Array<Types::AttributeError>]
+    class BatchGetAttributesMetadataOutput < Struct.new(
+      nil,
+      :attributes,
+      :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The results of the BatchPutAttribute action.</p>
+    # @!attribute attribute_identifier
+    #   <p>The attribute ID.</p>
+    #   @return [String]
+    class BatchPutAttributeOutput < Struct.new(
+      nil,
+      :attribute_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The domain ID where you want to write the attribute metadata.</p>
+    #   @return [String]
+    # @!attribute entity_type
+    #   <p>The entity type for which you want to write the attribute metadata.</p>
+    #   @return [String]
+    # @!attribute entity_identifier
+    #   <p>The entity ID for which you want to write the attribute metadata.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    # @!attribute attributes
+    #   <p>The attributes of the metadata.</p>
+    #   @return [Array<Types::AttributeInput>]
+    class BatchPutAttributesMetadataInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :entity_type,
+      :entity_identifier,
+      :client_token,
+      :attributes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute errors
+    #   <p>The errors generated when the BatchPutAttributeMetadata action is invoked.</p>
+    #   @return [Array<Types::AttributeError>]
+    # @!attribute attributes
+    #   <p>The results of the BatchPutAttributeMetadata action.</p>
+    #   @return [Array<Types::BatchPutAttributeOutput>]
+    class BatchPutAttributesMetadataOutput < Struct.new(
+      nil,
+      :errors,
+      :attributes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration of the business name generation.</p>
     # @!attribute enabled
     #   <p>Specifies whether the business name generation is enabled.</p>
@@ -1273,6 +1517,14 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The information about a cell in a notebook run in Amazon SageMaker Unified Studio.</p>
+    class CellInformation < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Part of the provisioning properties of the environment blueprint.</p>
     # @!attribute template_url
     #   <p>The template URL of the cloud formation provisioning properties of the environment blueprint.</p>
@@ -1292,6 +1544,22 @@ module Aws::DataZone
     class ColumnFilterConfiguration < Struct.new(
       nil,
       :included_column_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The compute configuration for a notebook run in Amazon SageMaker Unified Studio.</p>
+    # @!attribute instance_type
+    #   <p>The instance type for the notebook run compute.</p>
+    #   @return [String]
+    # @!attribute environment_version
+    #   <p>The environment version for the notebook run compute.</p>
+    #   @return [String]
+    class ComputeConfig < Struct.new(
+      nil,
+      :instance_type,
+      :environment_version,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1328,6 +1596,22 @@ module Aws::DataZone
       :type,
       :auth,
       :parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration of a connection.</p>
+    # @!attribute classification
+    #   <p>The classification of the connection configuration.</p>
+    #   @return [String]
+    # @!attribute properties
+    #   <p>The properties of the connection configuration.</p>
+    #   @return [Hash<String, String>]
+    class Configuration < Struct.new(
+      nil,
+      :classification,
+      :properties,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1394,6 +1678,30 @@ module Aws::DataZone
     # @!attribute s3_properties
     #   <p>The Amazon S3 properties of a connection.</p>
     #   @return [Types::S3PropertiesInput]
+    # @!attribute snowflake_properties
+    #   <p>The Snowflake-specific connection properties to use when creating the connection.</p>
+    #   @return [Types::SnowflakePropertiesInput]
+    # @!attribute amazon_q_properties
+    #   <p>The Amazon Q properties of the connection.</p>
+    #   @return [Types::AmazonQPropertiesInput]
+    # @!attribute mlflow_properties
+    #   <p>The MLflow properties of a connection.</p>
+    #   @return [Types::MlflowPropertiesInput]
+    # @!attribute workflows_mwaa_properties
+    #   <p>The Amazon MWAA properties of a connection.</p>
+    #   @return [Types::WorkflowsMwaaPropertiesInput]
+    # @!attribute workflows_serverless_properties
+    #   <p>The MWAA serverless properties of a connection.</p>
+    #   @return [Types::WorkflowsServerlessPropertiesInput]
+    # @!attribute lakehouse_properties
+    #   <p>The lakehouse properties of a connection.</p>
+    #   @return [Types::LakehousePropertiesInput]
+    # @!attribute vpc_properties
+    #   <p>The VPC properties of a connection.</p>
+    #   @return [Types::VpcPropertiesInput]
+    # @!attribute git_properties
+    #   <p>The Git properties of a connection.</p>
+    #   @return [Types::GitPropertiesInput]
     class ConnectionPropertiesInput < Struct.new(
       :athena_properties,
       :glue_properties,
@@ -1403,6 +1711,14 @@ module Aws::DataZone
       :spark_emr_properties,
       :spark_glue_properties,
       :s3_properties,
+      :snowflake_properties,
+      :amazon_q_properties,
+      :mlflow_properties,
+      :workflows_mwaa_properties,
+      :workflows_serverless_properties,
+      :lakehouse_properties,
+      :vpc_properties,
+      :git_properties,
       :unknown,
       keyword_init: true
     )
@@ -1416,6 +1732,14 @@ module Aws::DataZone
       class SparkEmrProperties < ConnectionPropertiesInput; end
       class SparkGlueProperties < ConnectionPropertiesInput; end
       class S3Properties < ConnectionPropertiesInput; end
+      class SnowflakeProperties < ConnectionPropertiesInput; end
+      class AmazonQProperties < ConnectionPropertiesInput; end
+      class MlflowProperties < ConnectionPropertiesInput; end
+      class WorkflowsMwaaProperties < ConnectionPropertiesInput; end
+      class WorkflowsServerlessProperties < ConnectionPropertiesInput; end
+      class LakehouseProperties < ConnectionPropertiesInput; end
+      class VpcProperties < ConnectionPropertiesInput; end
+      class GitProperties < ConnectionPropertiesInput; end
       class Unknown < ConnectionPropertiesInput; end
     end
 
@@ -1444,6 +1768,30 @@ module Aws::DataZone
     # @!attribute s3_properties
     #   <p>The Amazon S3 properties of a connection.</p>
     #   @return [Types::S3PropertiesOutput]
+    # @!attribute snowflake_properties
+    #   <p>The Snowflake-specific connection properties for an existing connection.</p>
+    #   @return [Types::SnowflakePropertiesOutput]
+    # @!attribute amazon_q_properties
+    #   <p>The Amazon Q properties of the connection.</p>
+    #   @return [Types::AmazonQPropertiesOutput]
+    # @!attribute mlflow_properties
+    #   <p>The MLflow properties of a connection.</p>
+    #   @return [Types::MlflowPropertiesOutput]
+    # @!attribute workflows_mwaa_properties
+    #   <p>The Amazon MWAA properties of a connection.</p>
+    #   @return [Types::WorkflowsMwaaPropertiesOutput]
+    # @!attribute workflows_serverless_properties
+    #   <p>The MWAA serverless properties of a connection.</p>
+    #   @return [Types::WorkflowsServerlessPropertiesOutput]
+    # @!attribute lakehouse_properties
+    #   <p>The lakehouse properties of a connection.</p>
+    #   @return [Types::LakehousePropertiesOutput]
+    # @!attribute vpc_properties
+    #   <p>The VPC properties of a connection.</p>
+    #   @return [Types::VpcPropertiesOutput]
+    # @!attribute git_properties
+    #   <p>The Git properties of a connection.</p>
+    #   @return [Types::GitPropertiesOutput]
     class ConnectionPropertiesOutput < Struct.new(
       :athena_properties,
       :glue_properties,
@@ -1453,6 +1801,14 @@ module Aws::DataZone
       :spark_emr_properties,
       :spark_glue_properties,
       :s3_properties,
+      :snowflake_properties,
+      :amazon_q_properties,
+      :mlflow_properties,
+      :workflows_mwaa_properties,
+      :workflows_serverless_properties,
+      :lakehouse_properties,
+      :vpc_properties,
+      :git_properties,
       :unknown,
       keyword_init: true
     )
@@ -1466,6 +1822,14 @@ module Aws::DataZone
       class SparkEmrProperties < ConnectionPropertiesOutput; end
       class SparkGlueProperties < ConnectionPropertiesOutput; end
       class S3Properties < ConnectionPropertiesOutput; end
+      class SnowflakeProperties < ConnectionPropertiesOutput; end
+      class AmazonQProperties < ConnectionPropertiesOutput; end
+      class MlflowProperties < ConnectionPropertiesOutput; end
+      class WorkflowsMwaaProperties < ConnectionPropertiesOutput; end
+      class WorkflowsServerlessProperties < ConnectionPropertiesOutput; end
+      class LakehouseProperties < ConnectionPropertiesOutput; end
+      class VpcProperties < ConnectionPropertiesOutput; end
+      class GitProperties < ConnectionPropertiesOutput; end
       class Unknown < ConnectionPropertiesOutput; end
     end
 
@@ -1488,6 +1852,24 @@ module Aws::DataZone
     # @!attribute s3_properties
     #   <p>The Amazon S3 properties of a connection properties patch.</p>
     #   @return [Types::S3PropertiesPatch]
+    # @!attribute snowflake_properties
+    #   <p>The Snowflake-specific connection properties to update.</p>
+    #   @return [Types::SnowflakePropertiesPatch]
+    # @!attribute amazon_q_properties
+    #   <p>The Amazon Q properties of the connection.</p>
+    #   @return [Types::AmazonQPropertiesPatch]
+    # @!attribute mlflow_properties
+    #   <p>The MLflow properties of a connection.</p>
+    #   @return [Types::MlflowPropertiesPatch]
+    # @!attribute lakehouse_properties
+    #   <p>The lakehouse properties of a connection properties patch.</p>
+    #   @return [Types::LakehousePropertiesPatch]
+    # @!attribute vpc_properties
+    #   <p>The VPC properties of a connection properties patch.</p>
+    #   @return [Types::VpcPropertiesPatch]
+    # @!attribute git_properties
+    #   <p>The Git properties of a connection properties patch.</p>
+    #   @return [Types::GitPropertiesPatch]
     class ConnectionPropertiesPatch < Struct.new(
       :athena_properties,
       :glue_properties,
@@ -1495,6 +1877,12 @@ module Aws::DataZone
       :redshift_properties,
       :spark_emr_properties,
       :s3_properties,
+      :snowflake_properties,
+      :amazon_q_properties,
+      :mlflow_properties,
+      :lakehouse_properties,
+      :vpc_properties,
+      :git_properties,
       :unknown,
       keyword_init: true
     )
@@ -1506,10 +1894,19 @@ module Aws::DataZone
       class RedshiftProperties < ConnectionPropertiesPatch; end
       class SparkEmrProperties < ConnectionPropertiesPatch; end
       class S3Properties < ConnectionPropertiesPatch; end
+      class SnowflakeProperties < ConnectionPropertiesPatch; end
+      class AmazonQProperties < ConnectionPropertiesPatch; end
+      class MlflowProperties < ConnectionPropertiesPatch; end
+      class LakehouseProperties < ConnectionPropertiesPatch; end
+      class VpcProperties < ConnectionPropertiesPatch; end
+      class GitProperties < ConnectionPropertiesPatch; end
       class Unknown < ConnectionPropertiesPatch; end
     end
 
     # <p>The summary of a connection.</p>
+    # @!attribute configurations
+    #   <p>The configurations of a connection summary.</p>
+    #   @return [Array<Types::Configuration>]
     # @!attribute connection_id
     #   <p>The ID of a connection.</p>
     #   @return [String]
@@ -1537,8 +1934,12 @@ module Aws::DataZone
     # @!attribute type
     #   <p>The connection type.</p>
     #   @return [String]
+    # @!attribute scope
+    #   <p>The scope of the connection.</p>
+    #   @return [String]
     class ConnectionSummary < Struct.new(
       nil,
+      :configurations,
       :connection_id,
       :domain_id,
       :domain_unit_id,
@@ -1548,6 +1949,75 @@ module Aws::DataZone
       :project_id,
       :props,
       :type,
+      :scope,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the network and authentication settings for a connection, including connection credentials, physical network requirements, and compute-environment validation options.</p>
+    # @!attribute connection_properties
+    #   <p>The connection properties for this configuration.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute physical_connection_requirements
+    #   <p>The physical network requirements for the connection, such as the subnet, security group, and VPC settings needed to reach the data source.</p>
+    #   @return [Types::PhysicalConnectionRequirements]
+    # @!attribute name
+    #   <p>The name of the connectivity configuration.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the connectivity configuration.</p>
+    #   @return [String]
+    # @!attribute validate_credentials
+    #   <p>Specifies whether to validate credentials for the connectivity configuration. Defaults to true if not specified.</p>
+    #   @return [Boolean]
+    # @!attribute validate_for_compute_environments
+    #   <p>The compute environments to use when validating connectivity. The service validates that the connection is reachable from each specified environment.</p>
+    #   @return [Array<String>]
+    # @!attribute spark_properties
+    #   <p>The Spark properties for this configuration.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute athena_properties
+    #   <p>The Athena properties for this configuration.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute python_properties
+    #   <p>The Python properties for this configuration.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute authentication_configuration
+    #   <p>The authentication settings for this configuration.</p>
+    #   @return [Types::AuthenticationConfigurationInput]
+    class ConnectivityProperties < Struct.new(
+      nil,
+      :connection_properties,
+      :physical_connection_requirements,
+      :name,
+      :description,
+      :validate_credentials,
+      :validate_for_compute_environments,
+      :spark_properties,
+      :athena_properties,
+      :python_properties,
+      :authentication_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the connectivity settings to update on an existing connection. Include only the fields you want to change.</p>
+    # @!attribute description
+    #   <p>A description of the connectivity properties update.</p>
+    #   @return [String]
+    # @!attribute connection_properties
+    #   <p>The connection properties to update.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute authentication_configuration
+    #   <p>The authentication settings to update.</p>
+    #   @return [Types::AuthenticationConfigurationPatch]
+    class ConnectivityPropertiesPatch < Struct.new(
+      nil,
+      :description,
+      :connection_properties,
+      :authentication_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2081,6 +2551,9 @@ module Aws::DataZone
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
+    # @!attribute configurations
+    #   <p>The configurations of the connection.</p>
+    #   @return [Array<Types::Configuration>]
     # @!attribute description
     #   <p>A connection description.</p>
     #   @return [String]
@@ -2096,15 +2569,24 @@ module Aws::DataZone
     # @!attribute props
     #   <p>The connection props.</p>
     #   @return [Types::ConnectionPropertiesInput]
+    # @!attribute enable_trusted_identity_propagation
+    #   <p>Specifies whether the trusted identity propagation is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute scope
+    #   <p>The scope of the connection.</p>
+    #   @return [String]
     class CreateConnectionInput < Struct.new(
       nil,
       :aws_location,
       :client_token,
+      :configurations,
       :description,
       :domain_identifier,
       :environment_identifier,
       :name,
       :props,
+      :enable_trusted_identity_propagation,
+      :scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2113,6 +2595,9 @@ module Aws::DataZone
     # @!attribute connection_id
     #   <p>The ID of the connection.</p>
     #   @return [String]
+    # @!attribute configurations
+    #   <p>The configurations of the connection.</p>
+    #   @return [Array<Types::Configuration>]
     # @!attribute description
     #   <p>The connection description.</p>
     #   @return [String]
@@ -2140,9 +2625,13 @@ module Aws::DataZone
     # @!attribute type
     #   <p>The connection type.</p>
     #   @return [String]
+    # @!attribute scope
+    #   <p>The scope of the connection.</p>
+    #   @return [String]
     class CreateConnectionOutput < Struct.new(
       nil,
       :connection_id,
+      :configurations,
       :description,
       :domain_id,
       :domain_unit_id,
@@ -2152,6 +2641,7 @@ module Aws::DataZone
       :project_id,
       :props,
       :type,
+      :scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2782,6 +3272,9 @@ module Aws::DataZone
     # @!attribute user_parameters
     #   <p>The user parameters of this Amazon DataZone blueprint.</p>
     #   @return [Array<Types::CustomParameter>]
+    # @!attribute blueprint_category
+    #   <p>The category of the Amazon DataZone blueprint. The only valid value is <code>TOOLING</code>, which creates a blueprint that provisions the tooling resources of a project.</p>
+    #   @return [String]
     class CreateEnvironmentBlueprintInput < Struct.new(
       nil,
       :domain_identifier,
@@ -2789,6 +3282,7 @@ module Aws::DataZone
       :description,
       :provisioning_properties,
       :user_parameters,
+      :blueprint_category,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2818,6 +3312,9 @@ module Aws::DataZone
     # @!attribute glossary_terms
     #   <p>The glossary terms attached to this Amazon DataZone blueprint.</p>
     #   @return [Array<String>]
+    # @!attribute blueprint_category
+    #   <p>The category of the Amazon DataZone blueprint. The only valid value is <code>TOOLING</code>, which indicates a blueprint that provisions the tooling resources of a project.</p>
+    #   @return [String]
     # @!attribute created_at
     #   <p>The timestamp at which the environment blueprint was created.</p>
     #   @return [Time]
@@ -2834,6 +3331,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at,
       keyword_init: true
@@ -2869,13 +3367,16 @@ module Aws::DataZone
     #   <p>The region of the account in which the environment is being created.</p>
     #   @return [String]
     # @!attribute environment_blueprint_identifier
-    #   <p>The ID of the blueprint with which the environment is being created.</p>
+    #   <p>The ID of the blueprint with which the environment is being created.</p> <note> <p>This parameter is only valid for V1 domains. If provided for a V2 domain, the service returns a ValidationException.</p> </note>
     #   @return [String]
     # @!attribute deployment_order
     #   <p>The deployment order of the environment.</p>
     #   @return [Integer]
     # @!attribute environment_configuration_id
     #   <p>The configuration ID of the environment.</p>
+    #   @return [String]
+    # @!attribute environment_configuration_name
+    #   <p>The configuration name of the environment.</p>
     #   @return [String]
     class CreateEnvironmentInput < Struct.new(
       nil,
@@ -2891,6 +3392,7 @@ module Aws::DataZone
       :environment_blueprint_identifier,
       :deployment_order,
       :environment_configuration_id,
+      :environment_configuration_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2962,6 +3464,9 @@ module Aws::DataZone
     # @!attribute environment_configuration_id
     #   <p>The configuration ID of the environment.</p>
     #   @return [String]
+    # @!attribute environment_configuration_name
+    #   <p>The configuration name of the environment.</p>
+    #   @return [String]
     class CreateEnvironmentOutput < Struct.new(
       nil,
       :project_id,
@@ -2986,6 +3491,7 @@ module Aws::DataZone
       :deployment_properties,
       :environment_blueprint_id,
       :environment_configuration_id,
+      :environment_configuration_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3350,6 +3856,9 @@ module Aws::DataZone
     # @!attribute group_identifier
     #   <p>The identifier of the group for which the group profile is created.</p>
     #   @return [String]
+    # @!attribute role_principal_arn
+    #   <p>The ARN of the IAM role that will be associated with the group profile. This role defines the permissions that group members will assume when accessing Amazon DataZone resources.</p>
+    #   @return [String]
     # @!attribute client_token
     #   <p> A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
@@ -3357,6 +3866,7 @@ module Aws::DataZone
       nil,
       :domain_identifier,
       :group_identifier,
+      :role_principal_arn,
       :client_token,
       keyword_init: true
     )
@@ -3375,12 +3885,20 @@ module Aws::DataZone
     # @!attribute group_name
     #   <p>The name of the group for which group profile is created.</p>
     #   @return [String]
+    # @!attribute role_principal_arn
+    #   <p>The ARN of the IAM role principal. This role is associated with the group profile.</p>
+    #   @return [String]
+    # @!attribute role_principal_id
+    #   <p>The unique identifier of the IAM role principal. This principal is associated with the group profile.</p>
+    #   @return [String]
     class CreateGroupProfileOutput < Struct.new(
       nil,
       :domain_id,
       :id,
       :status,
       :group_name,
+      :role_principal_arn,
+      :role_principal_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3436,6 +3954,136 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to create the notebook.</p>
+    #   @return [String]
+    # @!attribute owning_project_identifier
+    #   <p>The identifier of the project that owns the notebook.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the notebook. The name must be between 1 and 256 characters.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the notebook.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the notebook.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>The metadata for the notebook, specified as key-value pairs. You can specify up to 50 entries, with keys up to 128 characters and values up to 1024 characters.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute parameters
+    #   <p>The sensitive parameters for the notebook, specified as key-value pairs. You can specify up to 50 entries, with keys up to 128 characters and values up to 1024 characters.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    class CreateNotebookInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :owning_project_identifier,
+      :name,
+      :description,
+      :type,
+      :metadata,
+      :parameters,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the notebook.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute cell_order
+    #   <p>The ordered list of cells in the notebook.</p>
+    #   @return [Array<Types::CellInformation>]
+    # @!attribute status
+    #   <p>The status of the notebook.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the notebook.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the notebook.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who created the notebook.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp of when the notebook was last updated.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The identifier of the user who last updated the notebook.</p>
+    #   @return [String]
+    # @!attribute locked_by
+    #   <p>The identifier of the user who locked the notebook.</p>
+    #   @return [String]
+    # @!attribute locked_at
+    #   <p>The timestamp of when the notebook was locked.</p>
+    #   @return [Time]
+    # @!attribute lock_expires_at
+    #   <p>The timestamp of when the notebook lock expires.</p>
+    #   @return [Time]
+    # @!attribute compute_id
+    #   <p>The identifier of the compute associated with the notebook.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>The metadata of the notebook.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute parameters
+    #   <p>The sensitive parameters of the notebook.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute environment_configuration
+    #   <p>The environment configuration of the notebook.</p>
+    #   @return [Types::EnvironmentConfig]
+    # @!attribute error
+    #   <p>The error details if the notebook creation failed.</p>
+    #   @return [Types::NotebookError]
+    # @!attribute git_metadata
+    #   <p>The Git metadata associated with the notebook.</p>
+    #   @return [Types::GitMetadata]
+    class CreateNotebookOutput < Struct.new(
+      nil,
+      :id,
+      :name,
+      :owning_project_id,
+      :domain_id,
+      :cell_order,
+      :status,
+      :type,
+      :description,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :locked_by,
+      :locked_at,
+      :lock_expires_at,
+      :compute_id,
+      :metadata,
+      :parameters,
+      :environment_configuration,
+      :error,
+      :git_metadata,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies whether to create a project from project profile policy grant details.</p>
     # @!attribute include_child_domain_units
     #   <p>Specifies whether to include child domain units when creating a project from project profile policy grant details</p>
@@ -3461,6 +4109,9 @@ module Aws::DataZone
     # @!attribute description
     #   <p>The description of the Amazon DataZone project.</p>
     #   @return [String]
+    # @!attribute resource_tags
+    #   <p>The resource tags of the project.</p>
+    #   @return [Hash<String, String>]
     # @!attribute glossary_terms
     #   <p>The glossary terms that can be used in this Amazon DataZone project.</p>
     #   @return [Array<String>]
@@ -3473,15 +4124,28 @@ module Aws::DataZone
     # @!attribute user_parameters
     #   <p>The user parameters of the project.</p>
     #   @return [Array<Types::EnvironmentConfigurationUserParameter>]
+    # @!attribute project_category
+    #   <p>The category of the project. Set to 'ADMIN' designates this as an administrative project for the Amazon DataZone domain.</p>
+    #   @return [String]
+    # @!attribute project_execution_role
+    #   <p>The default project IAM role that is used to access project resources and run computes such as Glue and Sagemaker.</p>
+    #   @return [String]
+    # @!attribute membership_assignments
+    #   <p>The members to be assigned to the project.</p>
+    #   @return [Array<Types::ProjectMembershipAssignment>]
     class CreateProjectInput < Struct.new(
       nil,
       :domain_identifier,
       :name,
       :description,
+      :resource_tags,
       :glossary_terms,
       :domain_unit_id,
       :project_profile_id,
       :user_parameters,
+      :project_category,
+      :project_execution_role,
+      :membership_assignments,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3544,6 +4208,9 @@ module Aws::DataZone
     # @!attribute last_updated_at
     #   <p>The timestamp of when the project was last updated.</p>
     #   @return [Time]
+    # @!attribute resource_tags
+    #   <p>The resource tags of the project.</p>
+    #   @return [Array<Types::ResourceTag>]
     # @!attribute glossary_terms
     #   <p>The glossary terms that can be used in the project.</p>
     #   @return [Array<String>]
@@ -3559,6 +4226,9 @@ module Aws::DataZone
     # @!attribute environment_deployment_details
     #   <p>The environment deployment details.</p>
     #   @return [Types::EnvironmentDeploymentDetails]
+    # @!attribute project_category
+    #   <p>The category of the project.</p>
+    #   @return [String]
     class CreateProjectOutput < Struct.new(
       nil,
       :domain_id,
@@ -3570,11 +4240,13 @@ module Aws::DataZone
       :created_by,
       :created_at,
       :last_updated_at,
+      :resource_tags,
       :glossary_terms,
       :domain_unit_id,
       :project_profile_id,
       :user_parameters,
       :environment_deployment_details,
+      :project_category,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3604,6 +4276,15 @@ module Aws::DataZone
     # @!attribute status
     #   <p>Project profile status.</p>
     #   @return [String]
+    # @!attribute project_resource_tags
+    #   <p>The resource tags of the project profile.</p>
+    #   @return [Array<Types::ResourceTagParameter>]
+    # @!attribute allow_custom_project_resource_tags
+    #   <p>Specifies whether custom project resource tags are supported.</p>
+    #   @return [Boolean]
+    # @!attribute project_resource_tags_description
+    #   <p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>
+    #   @return [String]
     # @!attribute environment_configurations
     #   <p>Environment configurations of the project profile.</p>
     #   @return [Array<Types::EnvironmentConfiguration>]
@@ -3616,6 +4297,9 @@ module Aws::DataZone
       :name,
       :description,
       :status,
+      :project_resource_tags,
+      :allow_custom_project_resource_tags,
+      :project_resource_tags_description,
       :environment_configurations,
       :domain_unit_identifier,
       keyword_init: true
@@ -3637,6 +4321,15 @@ module Aws::DataZone
     #   @return [String]
     # @!attribute status
     #   <p>Project profile status.</p>
+    #   @return [String]
+    # @!attribute project_resource_tags
+    #   <p>The resource tags of the project profile.</p>
+    #   @return [Array<Types::ResourceTagParameter>]
+    # @!attribute allow_custom_project_resource_tags
+    #   <p>Specifies whether custom project resource tags are supported.</p>
+    #   @return [Boolean]
+    # @!attribute project_resource_tags_description
+    #   <p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>
     #   @return [String]
     # @!attribute environment_configurations
     #   <p>Environment configurations of a project profile.</p>
@@ -3660,6 +4353,9 @@ module Aws::DataZone
       :name,
       :description,
       :status,
+      :project_resource_tags,
+      :allow_custom_project_resource_tags,
+      :project_resource_tags_description,
       :environment_configurations,
       :created_by,
       :created_at,
@@ -3809,6 +4505,9 @@ module Aws::DataZone
     # @!attribute updated_at
     #   <p>A timestamp of when the subscription grant was updated.</p>
     #   @return [Time]
+    # @!attribute environment_id
+    #   <p>The environment ID for which subscription grant is created.</p>
+    #   @return [String]
     # @!attribute subscription_target_id
     #   <p>The ID of the subscription target for which the subscription grant is created.</p>
     #   @return [String]
@@ -3834,6 +4533,7 @@ module Aws::DataZone
       :domain_id,
       :created_at,
       :updated_at,
+      :environment_id,
       :subscription_target_id,
       :granted_entity,
       :status,
@@ -3862,6 +4562,12 @@ module Aws::DataZone
     # @!attribute metadata_forms
     #   <p>The metadata form included in the subscription request.</p>
     #   @return [Array<Types::FormInput>]
+    # @!attribute asset_permissions
+    #   <p>The asset permissions of the subscription request.</p>
+    #   @return [Array<Types::AssetPermission>]
+    # @!attribute asset_scopes
+    #   <p>The asset scopes of the subscription request.</p>
+    #   @return [Array<Types::AcceptedAssetScope>]
     class CreateSubscriptionRequestInput < Struct.new(
       nil,
       :domain_identifier,
@@ -3870,6 +4576,8 @@ module Aws::DataZone
       :request_reason,
       :client_token,
       :metadata_forms,
+      :asset_permissions,
+      :asset_scopes,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3968,6 +4676,9 @@ module Aws::DataZone
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
+    # @!attribute subscription_grant_creation_mode
+    #   <p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>
+    #   @return [String]
     class CreateSubscriptionTargetInput < Struct.new(
       nil,
       :domain_identifier,
@@ -3980,6 +4691,7 @@ module Aws::DataZone
       :applicable_asset_types,
       :provider,
       :client_token,
+      :subscription_grant_creation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4030,6 +4742,9 @@ module Aws::DataZone
     # @!attribute provider
     #   <p>The provider of the subscription target.</p>
     #   @return [String]
+    # @!attribute subscription_grant_creation_mode
+    #   <p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>
+    #   @return [String]
     class CreateSubscriptionTargetOutput < Struct.new(
       nil,
       :id,
@@ -4047,6 +4762,7 @@ module Aws::DataZone
       :applicable_asset_types,
       :subscription_target_config,
       :provider,
+      :subscription_grant_creation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4061,6 +4777,9 @@ module Aws::DataZone
     # @!attribute user_type
     #   <p>The user type of the user for which the user profile is created.</p>
     #   @return [String]
+    # @!attribute session_name
+    #   <p>The session name for IAM role sessions.</p>
+    #   @return [String]
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
@@ -4069,6 +4788,7 @@ module Aws::DataZone
       :domain_identifier,
       :user_identifier,
       :user_type,
+      :session_name,
       :client_token,
       keyword_init: true
     )
@@ -4088,7 +4808,7 @@ module Aws::DataZone
     #   <p>The status of the user profile.</p>
     #   @return [String]
     # @!attribute details
-    #   <p>The details of the user profile in Amazon DataZone.</p>
+    #   <p>The user profile details.</p>
     #   @return [Types::UserProfileDetails]
     class CreateUserProfileOutput < Struct.new(
       nil,
@@ -4752,6 +5472,24 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
+    #   <p>The domain ID for which you want to delete the data export configuration.</p>
+    #   @return [String]
+    class DeleteDataExportConfigurationInput < Struct.new(
+      nil,
+      :domain_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteDataExportConfigurationOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the data product is deleted.</p>
     #   @return [String]
     # @!attribute identifier
@@ -4901,13 +5639,17 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     #   @return [String]
     # @!attribute skip_deletion_check
-    #   <p>Specifies the optional flag to delete all child entities within the domain.</p>
+    #   <p>Specifies whether to skip the check that prevents deletion of a domain that still contains resources. When you use this parameter, Amazon DataZone deletes the domain but might not remove its associated resources, which can leave orphaned resources behind. To delete a domain and fully clean up its associated resources, use <code>cascadeDelete</code> instead. You can't use this parameter together with <code>cascadeDelete</code>.</p>
+    #   @return [Boolean]
+    # @!attribute cascade_delete
+    #   <p>Specifies whether to delete the domain along with all of its associated resources. When you use this parameter, Amazon DataZone deletes the domain and cleanly removes its associated resources without leaving orphaned resources behind. Amazon DataZone reports deletion progress in the <code>deleteProgress</code> field. Amazon DataZone reports any resources that it can't delete in the <code>failureReasons</code> field of the <code>GetDomain</code> response. You can't use this parameter together with <code>skipDeletionCheck</code>. If you don't specify a value, the default is <code>false</code>.</p>
     #   @return [Boolean]
     class DeleteDomainInput < Struct.new(
       nil,
       :identifier,
       :client_token,
       :skip_deletion_check,
+      :cascade_delete,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5099,6 +5841,40 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
+    #   <p>The ID of the domain.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The ID of the lineage event.</p>
+    #   @return [String]
+    class DeleteLineageEventInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The ID of the lineage event.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The ID of the domain.</p>
+    #   @return [String]
+    # @!attribute processing_status
+    #   <p>The progressing status of the lineage event.</p>
+    #   @return [String]
+    class DeleteLineageEventOutput < Struct.new(
+      nil,
+      :id,
+      :domain_id,
+      :processing_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
     #   <p>The ID of the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute identifier
@@ -5115,6 +5891,40 @@ module Aws::DataZone
 
     class DeleteListingOutput < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook exists.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The identifier of the notebook to delete.</p>
+    #   @return [String]
+    class DeleteNotebookInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteNotebookOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The progress of a domain deletion, including the number of projects that Amazon DataZone successfully deleted. Amazon DataZone returns this structure in the response to a <code>GetDomain</code> request while a cascade deletion is in progress.</p>
+    # @!attribute successfully_deleted_project_count
+    #   <p>The number of projects that Amazon DataZone successfully deleted during the domain deletion.</p>
+    #   @return [Integer]
+    class DeleteProgress < Struct.new(
+      nil,
+      :successfully_deleted_project_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5249,6 +6059,9 @@ module Aws::DataZone
     # @!attribute updated_at
     #   <p>The timestamp of when the subscription grant that is deleted was updated.</p>
     #   @return [Time]
+    # @!attribute environment_id
+    #   <p>The ID of the environment in which the subscription grant is deleted.</p>
+    #   @return [String]
     # @!attribute subscription_target_id
     #   <p>The ID of the subscription target associated with the subscription grant that is deleted.</p>
     #   @return [String]
@@ -5274,6 +6087,7 @@ module Aws::DataZone
       :domain_id,
       :created_at,
       :updated_at,
+      :environment_id,
       :subscription_target_id,
       :granted_entity,
       :status,
@@ -5652,6 +6466,42 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The encryption configuration details.</p>
+    # @!attribute kms_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key to use for encryption. This field is required only when <code>sseAlgorithm</code> is set to <code>aws:kms</code>.</p>
+    #   @return [String]
+    # @!attribute sse_algorithm
+    #   <p>The server-side encryption algorithm to use. Valid values are AES256 for S3-managed encryption keys, or aws:kms for Amazon Web Services KMS-managed encryption keys. If you choose SSE-KMS encryption you must grant the S3 Tables maintenance principal access to your KMS key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html">Permissions requirements for S3 Tables SSE-KMS encryption</a>.</p>
+    #   @return [String]
+    class EncryptionConfiguration < Struct.new(
+      nil,
+      :kms_key_arn,
+      :sse_algorithm,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The pattern describing the entities to be matched during the graph query.</p>
+    # @!attribute entity_type
+    #   <p>The type of entity to be matched during the graph query.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The identifier of the root entity to start traversal from during the graph query.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>A search filter clause in Amazon DataZone.</p>
+    #   @return [Types::FilterClause]
+    class EntityPattern < Struct.new(
+      nil,
+      :entity_type,
+      :identifier,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The details about the specified action configured for an environment. For example, the details of the specified console links for an analytics tool that is available in this environment.</p>
     # @!attribute domain_id
     #   <p>The Amazon DataZone domain ID of the environment action.</p>
@@ -5706,12 +6556,18 @@ module Aws::DataZone
     # @!attribute regional_parameters
     #   <p>The regional parameters of the environment blueprint.</p>
     #   @return [Hash<String, Hash<String, String>>]
+    # @!attribute allow_user_provided_configurations
+    #   <p>Specifies whether user-provided resource configurations are allowed for the environment blueprint.</p>
+    #   @return [Boolean]
     # @!attribute created_at
     #   <p>The timestamp of when an environment blueprint was created.</p>
     #   @return [Time]
     # @!attribute updated_at
     #   <p>The timestamp of when the environment blueprint was updated.</p>
     #   @return [Time]
+    # @!attribute resource_configurations
+    #   <p>The resource configurations of the environment blueprint.</p>
+    #   @return [Array<Types::ResourceConfiguration>]
     # @!attribute provisioning_configurations
     #   <p>The provisioning configuration of a blueprint.</p>
     #   @return [Array<Types::ProvisioningConfiguration>]
@@ -5724,8 +6580,10 @@ module Aws::DataZone
       :manage_access_role_arn,
       :enabled_regions,
       :regional_parameters,
+      :allow_user_provided_configurations,
       :created_at,
       :updated_at,
+      :resource_configurations,
       :provisioning_configurations,
       keyword_init: true
     )
@@ -5754,6 +6612,9 @@ module Aws::DataZone
     # @!attribute updated_at
     #   <p>The timestamp of when the blueprint was enabled.</p>
     #   @return [Time]
+    # @!attribute blueprint_category
+    #   <p>The category of the environment blueprint. The only valid value is <code>TOOLING</code>.</p>
+    #   @return [String]
     class EnvironmentBlueprintSummary < Struct.new(
       nil,
       :id,
@@ -5763,6 +6624,23 @@ module Aws::DataZone
       :provisioning_properties,
       :created_at,
       :updated_at,
+      :blueprint_category,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The environment configuration for a notebook run in Amazon SageMaker Unified Studio.</p>
+    # @!attribute image_version
+    #   <p>The image version for the notebook run environment.</p>
+    #   @return [String]
+    # @!attribute package_config
+    #   <p>The package configuration for the notebook run environment.</p>
+    #   @return [Types::PackageConfig]
+    class EnvironmentConfig < Struct.new(
+      nil,
+      :image_version,
+      :package_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6043,6 +6921,9 @@ module Aws::DataZone
     # @!attribute environment_configuration_id
     #   <p>The configuration ID with which the environment is created.</p>
     #   @return [String]
+    # @!attribute environment_configuration_name
+    #   <p>The configuration name with which the environment is created.</p>
+    #   @return [String]
     class EnvironmentSummary < Struct.new(
       nil,
       :project_id,
@@ -6059,6 +6940,7 @@ module Aws::DataZone
       :provider,
       :status,
       :environment_configuration_id,
+      :environment_configuration_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6112,20 +6994,50 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The details of a resource deletion failure during a cascade deletion of the domain.</p>
+    # @!attribute id
+    #   <p>The identifier of the resource that failed to delete.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The error message associated with the resource that failed to delete.</p>
+    #   @return [String]
+    class FailureReason < Struct.new(
+      nil,
+      :id,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A search filter in Amazon DataZone.</p>
     # @!attribute attribute
     #   <p>A search filter attribute in Amazon DataZone.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>A search filter value in Amazon DataZone.</p>
+    #   <p>A search filter string value in Amazon DataZone.</p>
+    #   @return [String]
+    # @!attribute int_value
+    #   <p>A search filter integer value in Amazon DataZone.</p>
+    #   @return [Integer]
+    # @!attribute operator
+    #   <p>Specifies the search filter operator.</p>
     #   @return [String]
     class Filter < Struct.new(
       nil,
       :attribute,
       :value,
+      :int_value,
+      :operator,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:value] = '' unless options.key?(:value)
+        options[:operator] = 'EQ' unless options.key?(:operator)
+        super
+      end
     end
 
     # <p>A search filter clause in Amazon DataZone.</p>
@@ -6648,6 +7560,9 @@ module Aws::DataZone
     # @!attribute connection_credentials
     #   <p>Connection credentials.</p>
     #   @return [Types::ConnectionCredentials]
+    # @!attribute configurations
+    #   <p>The configurations of the connection.</p>
+    #   @return [Array<Types::Configuration>]
     # @!attribute connection_id
     #   <p>The ID of the connection.</p>
     #   @return [String]
@@ -6681,9 +7596,13 @@ module Aws::DataZone
     # @!attribute type
     #   <p>The type of the connection.</p>
     #   @return [String]
+    # @!attribute scope
+    #   <p>The scope of the connection.</p>
+    #   @return [String]
     class GetConnectionOutput < Struct.new(
       nil,
       :connection_credentials,
+      :configurations,
       :connection_id,
       :description,
       :domain_id,
@@ -6695,6 +7614,49 @@ module Aws::DataZone
       :project_id,
       :props,
       :type,
+      :scope,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The ID of the domain where you want to get the data export configuration details.</p>
+    #   @return [String]
+    class GetDataExportConfigurationInput < Struct.new(
+      nil,
+      :domain_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute is_export_enabled
+    #   <p>Specifies whether the export is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute status
+    #   <p>The status of the data export configuration.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration as part of the data export configuration details.</p>
+    #   @return [Types::EncryptionConfiguration]
+    # @!attribute s3_table_bucket_arn
+    #   <p>The Amazon S3 table bucket ARN as part of the data export configuration details.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp at which the data export configuration report was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp at which the data export configuration report was updated.</p>
+    #   @return [Time]
+    class GetDataExportConfigurationOutput < Struct.new(
+      nil,
+      :is_export_enabled,
+      :status,
+      :encryption_configuration,
+      :s3_table_bucket_arn,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7035,6 +7997,12 @@ module Aws::DataZone
     # @!attribute service_role
     #   <p>The service role of the domain.</p>
     #   @return [String]
+    # @!attribute failure_reasons
+    #   <p>The list of failure reasons for resources that Amazon DataZone could not delete during a cascade deletion of the domain.</p>
+    #   @return [Array<Types::FailureReason>]
+    # @!attribute delete_progress
+    #   <p>The progress of the current domain deletion, including the number of projects that Amazon DataZone successfully deleted.</p>
+    #   @return [Types::DeleteProgress]
     class GetDomainOutput < Struct.new(
       nil,
       :id,
@@ -7052,6 +8020,8 @@ module Aws::DataZone
       :tags,
       :domain_version,
       :service_role,
+      :failure_reasons,
+      :delete_progress,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7205,12 +8175,18 @@ module Aws::DataZone
     # @!attribute regional_parameters
     #   <p>The regional parameters of the blueprint.</p>
     #   @return [Hash<String, Hash<String, String>>]
+    # @!attribute allow_user_provided_configurations
+    #   <p>Specifies whether user-provided resource configurations are allowed for the environment blueprint.</p>
+    #   @return [Boolean]
     # @!attribute created_at
     #   <p>The timestamp of when this blueprint was created.</p>
     #   @return [Time]
     # @!attribute updated_at
     #   <p>The timestamp of when this blueprint was upated.</p>
     #   @return [Time]
+    # @!attribute resource_configurations
+    #   <p>The resource configurations of the environment blueprint.</p>
+    #   @return [Array<Types::ResourceConfiguration>]
     # @!attribute provisioning_configurations
     #   <p>The provisioning configuration of a blueprint.</p>
     #   @return [Array<Types::ProvisioningConfiguration>]
@@ -7223,8 +8199,10 @@ module Aws::DataZone
       :manage_access_role_arn,
       :enabled_regions,
       :regional_parameters,
+      :allow_user_provided_configurations,
       :created_at,
       :updated_at,
+      :resource_configurations,
       :provisioning_configurations,
       keyword_init: true
     )
@@ -7270,6 +8248,9 @@ module Aws::DataZone
     # @!attribute glossary_terms
     #   <p>The glossary terms attached to this Amazon DataZone blueprint.</p>
     #   @return [Array<String>]
+    # @!attribute blueprint_category
+    #   <p>The category of this Amazon DataZone blueprint. The only valid value is <code>TOOLING</code>, which indicates a blueprint that provisions the tooling resources of a project.</p>
+    #   @return [String]
     # @!attribute created_at
     #   <p>A timestamp of when this blueprint was created.</p>
     #   @return [Time]
@@ -7286,6 +8267,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at,
       keyword_init: true
@@ -7413,6 +8395,9 @@ module Aws::DataZone
     # @!attribute environment_configuration_id
     #   <p>The configuration ID that is used to create the environment.</p>
     #   @return [String]
+    # @!attribute environment_configuration_name
+    #   <p>The configuration name that is used to create the environment.</p>
+    #   @return [String]
     class GetEnvironmentOutput < Struct.new(
       nil,
       :project_id,
@@ -7437,6 +8422,7 @@ module Aws::DataZone
       :deployment_properties,
       :environment_blueprint_id,
       :environment_configuration_id,
+      :environment_configuration_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7758,12 +8744,20 @@ module Aws::DataZone
     # @!attribute group_name
     #   <p>The name of the group for which the specified group profile exists.</p>
     #   @return [String]
+    # @!attribute role_principal_arn
+    #   <p>The ARN of the IAM role principal. This role is associated with the group profile.</p>
+    #   @return [String]
+    # @!attribute role_principal_id
+    #   <p>The unique identifier of the IAM role principal. This principal is associated with the group profile.</p>
+    #   @return [String]
     class GetGroupProfileOutput < Struct.new(
       nil,
       :domain_id,
       :id,
       :status,
       :group_name,
+      :role_principal_arn,
+      :role_principal_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8077,10 +9071,14 @@ module Aws::DataZone
     # @!attribute identifier
     #   <p>The identifier of the metadata generation run.</p>
     #   @return [String]
+    # @!attribute type
+    #   <p>The type of the metadata generation run.</p>
+    #   @return [String]
     class GetMetadataGenerationRunInput < Struct.new(
       nil,
       :domain_identifier,
       :identifier,
+      :type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8100,7 +9098,13 @@ module Aws::DataZone
     #   @return [String]
     # @!attribute type
     #   <p>The type of metadata generation run.</p>
+    #   @deprecated
+    #     This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types
+    #     Since: 2025-11-21
     #   @return [String]
+    # @!attribute types
+    #   <p>The types of the metadata generation run.</p>
+    #   @return [Array<String>]
     # @!attribute created_at
     #   <p>The timestamp of when the metadata generation run was start.</p>
     #   @return [Time]
@@ -8110,6 +9114,9 @@ module Aws::DataZone
     # @!attribute owning_project_id
     #   <p>The ID of the project that owns the assets for which you're running metadata generation.</p>
     #   @return [String]
+    # @!attribute type_stats
+    #   <p>The type stats included in the metadata generation run output details.</p>
+    #   @return [Array<Types::MetadataGenerationRunTypeStat>]
     class GetMetadataGenerationRunOutput < Struct.new(
       nil,
       :domain_id,
@@ -8117,9 +9124,297 @@ module Aws::DataZone
       :target,
       :status,
       :type,
+      :types,
       :created_at,
       :created_by,
       :owning_project_id,
+      :type_stats,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook export exists.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The identifier of the notebook export.</p>
+    #   @return [String]
+    class GetNotebookExportInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the notebook export.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook.</p>
+    #   @return [String]
+    # @!attribute notebook_id
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    # @!attribute file_format
+    #   <p>The file format of the notebook export.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the notebook export.</p>
+    #   @return [String]
+    # @!attribute output_location
+    #   <p>The output location of the exported notebook in Amazon Simple Storage Service.</p>
+    #   @return [Types::OutputLocation]
+    # @!attribute error
+    #   <p>The error details if the notebook export failed.</p>
+    #   @return [Types::NotebookExportError]
+    # @!attribute completed_at
+    #   <p>The timestamp of when the notebook export completed.</p>
+    #   @return [Time]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook export was started.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who started the notebook export.</p>
+    #   @return [String]
+    class GetNotebookExportOutput < Struct.new(
+      nil,
+      :id,
+      :domain_id,
+      :owning_project_id,
+      :notebook_id,
+      :file_format,
+      :status,
+      :output_location,
+      :error,
+      :completed_at,
+      :created_at,
+      :created_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook exists.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    class GetNotebookInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the notebook.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute cell_order
+    #   <p>The ordered list of cells in the notebook.</p>
+    #   @return [Array<Types::CellInformation>]
+    # @!attribute status
+    #   <p>The status of the notebook.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the notebook.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the notebook.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who created the notebook.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp of when the notebook was last updated.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The identifier of the user who last updated the notebook.</p>
+    #   @return [String]
+    # @!attribute locked_by
+    #   <p>The identifier of the user who locked the notebook.</p>
+    #   @return [String]
+    # @!attribute locked_at
+    #   <p>The timestamp of when the notebook was locked.</p>
+    #   @return [Time]
+    # @!attribute lock_expires_at
+    #   <p>The timestamp of when the notebook lock expires.</p>
+    #   @return [Time]
+    # @!attribute compute_id
+    #   <p>The identifier of the compute associated with the notebook.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>The metadata of the notebook.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute parameters
+    #   <p>The sensitive parameters of the notebook.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute environment_configuration
+    #   <p>The environment configuration of the notebook.</p>
+    #   @return [Types::EnvironmentConfig]
+    # @!attribute error
+    #   <p>The error details if the notebook is in a failed state.</p>
+    #   @return [Types::NotebookError]
+    # @!attribute git_metadata
+    #   <p>The Git metadata associated with the notebook.</p>
+    #   @return [Types::GitMetadata]
+    class GetNotebookOutput < Struct.new(
+      nil,
+      :id,
+      :name,
+      :owning_project_id,
+      :domain_id,
+      :cell_order,
+      :status,
+      :type,
+      :description,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :locked_by,
+      :locked_at,
+      :lock_expires_at,
+      :compute_id,
+      :metadata,
+      :parameters,
+      :environment_configuration,
+      :error,
+      :git_metadata,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook run exists.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The identifier of the notebook run.</p>
+    #   @return [String]
+    class GetNotebookRunInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the notebook run.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook run.</p>
+    #   @return [String]
+    # @!attribute notebook_id
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    # @!attribute schedule_id
+    #   <p>The identifier of the schedule associated with the notebook run.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the notebook run.</p>
+    #   @return [String]
+    # @!attribute cell_order
+    #   <p>The ordered list of cells in the notebook run.</p>
+    #   @return [Array<Types::CellInformation>]
+    # @!attribute metadata
+    #   <p>The metadata of the notebook run.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute parameters
+    #   <p>The sensitive parameters of the notebook run.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute compute_configuration
+    #   <p>The compute configuration of the notebook run.</p>
+    #   @return [Types::ComputeConfig]
+    # @!attribute network_configuration
+    #   <p>The network configuration of the notebook run.</p>
+    #   @return [Types::NetworkConfig]
+    # @!attribute timeout_configuration
+    #   <p>The timeout configuration of the notebook run.</p>
+    #   @return [Types::TimeoutConfig]
+    # @!attribute environment_configuration
+    #   <p>The environment configuration of the notebook run, including image version and package settings.</p>
+    #   @return [Types::EnvironmentConfig]
+    # @!attribute storage_configuration
+    #   <p>The storage configuration of the notebook run, including the Amazon Simple Storage Service path and KMS key ARN.</p>
+    #   @return [Types::StorageConfig]
+    # @!attribute notification_configuration
+    #   <p>The notification configuration of the notebook run, including the notebook run states that trigger notifications.</p>
+    #   @return [Types::NotificationConfig]
+    # @!attribute trigger_source
+    #   <p>The source that triggered the notebook run.</p>
+    #   @return [Types::TriggerSource]
+    # @!attribute error
+    #   <p>The error details if the notebook run failed.</p>
+    #   @return [Types::NotebookRunError]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook run was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who created the notebook run.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp of when the notebook run was last updated.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The identifier of the user who last updated the notebook run.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The timestamp of when the notebook run started executing.</p>
+    #   @return [Time]
+    # @!attribute completed_at
+    #   <p>The timestamp of when the notebook run completed.</p>
+    #   @return [Time]
+    class GetNotebookRunOutput < Struct.new(
+      nil,
+      :id,
+      :domain_id,
+      :owning_project_id,
+      :notebook_id,
+      :schedule_id,
+      :status,
+      :cell_order,
+      :metadata,
+      :parameters,
+      :compute_configuration,
+      :network_configuration,
+      :timeout_configuration,
+      :environment_configuration,
+      :storage_configuration,
+      :notification_configuration,
+      :trigger_source,
+      :error,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :started_at,
+      :completed_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8167,6 +9462,9 @@ module Aws::DataZone
     # @!attribute last_updated_at
     #   <p>The timestamp of when the project was last updated.</p>
     #   @return [Time]
+    # @!attribute resource_tags
+    #   <p>The resource tags of the project.</p>
+    #   @return [Array<Types::ResourceTag>]
     # @!attribute glossary_terms
     #   <p>The business glossary terms that can be used in the project.</p>
     #   @return [Array<String>]
@@ -8182,6 +9480,9 @@ module Aws::DataZone
     # @!attribute environment_deployment_details
     #   <p>The environment deployment status of a project.</p>
     #   @return [Types::EnvironmentDeploymentDetails]
+    # @!attribute project_category
+    #   <p>The category of the project.</p>
+    #   @return [String]
     class GetProjectOutput < Struct.new(
       nil,
       :domain_id,
@@ -8193,11 +9494,13 @@ module Aws::DataZone
       :created_by,
       :created_at,
       :last_updated_at,
+      :resource_tags,
       :glossary_terms,
       :domain_unit_id,
       :project_profile_id,
       :user_parameters,
       :environment_deployment_details,
+      :project_category,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8233,6 +9536,15 @@ module Aws::DataZone
     # @!attribute status
     #   <p>The status of the project profile.</p>
     #   @return [String]
+    # @!attribute project_resource_tags
+    #   <p>The resource tags of the project profile.</p>
+    #   @return [Array<Types::ResourceTagParameter>]
+    # @!attribute allow_custom_project_resource_tags
+    #   <p>Specifies whether custom project resource tags are supported.</p>
+    #   @return [Boolean]
+    # @!attribute project_resource_tags_description
+    #   <p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>
+    #   @return [String]
     # @!attribute environment_configurations
     #   <p>The environment configurations of the project profile.</p>
     #   @return [Array<Types::EnvironmentConfiguration>]
@@ -8255,6 +9567,9 @@ module Aws::DataZone
       :name,
       :description,
       :status,
+      :project_resource_tags,
+      :allow_custom_project_resource_tags,
+      :project_resource_tags_description,
       :environment_configurations,
       :created_by,
       :created_at,
@@ -8380,6 +9695,9 @@ module Aws::DataZone
     # @!attribute updated_at
     #   <p>The timestamp of when the subscription grant was upated.</p>
     #   @return [Time]
+    # @!attribute environment_id
+    #   <p>The environment ID of the subscription grant.</p>
+    #   @return [String]
     # @!attribute subscription_target_id
     #   <p>The subscription target ID associated with the subscription grant.</p>
     #   @return [String]
@@ -8405,6 +9723,7 @@ module Aws::DataZone
       :domain_id,
       :created_at,
       :updated_at,
+      :environment_id,
       :subscription_target_id,
       :granted_entity,
       :status,
@@ -8623,6 +9942,9 @@ module Aws::DataZone
     # @!attribute provider
     #   <p>The provider of the subscription target.</p>
     #   @return [String]
+    # @!attribute subscription_grant_creation_mode
+    #   <p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>
+    #   @return [String]
     class GetSubscriptionTargetOutput < Struct.new(
       nil,
       :id,
@@ -8640,6 +9962,7 @@ module Aws::DataZone
       :applicable_asset_types,
       :subscription_target_config,
       :provider,
+      :subscription_grant_creation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8708,11 +10031,15 @@ module Aws::DataZone
     # @!attribute type
     #   <p>The type of the user profile.</p>
     #   @return [String]
+    # @!attribute session_name
+    #   <p>The session name for IAM role sessions.</p>
+    #   @return [String]
     class GetUserProfileInput < Struct.new(
       nil,
       :domain_identifier,
       :user_identifier,
       :type,
+      :session_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8731,7 +10058,7 @@ module Aws::DataZone
     #   <p>The status of the user profile.</p>
     #   @return [String]
     # @!attribute details
-    #   <p>The details of the user profile in Amazon DataZone.</p>
+    #   <p>The user profile details.</p>
     #   @return [Types::UserProfileDetails]
     class GetUserProfileOutput < Struct.new(
       nil,
@@ -8740,6 +10067,106 @@ module Aws::DataZone
       :type,
       :status,
       :details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Git metadata for a notebook sync operation in Amazon SageMaker Unified Studio. Contains information about the Git repository, branch, and commit associated with the notebook.</p>
+    # @!attribute connection_id
+    #   <p>The identifier of the Git connection.</p>
+    #   @return [String]
+    # @!attribute repository
+    #   <p>The name of the Git repository.</p>
+    #   @return [String]
+    # @!attribute branch
+    #   <p>The name of the Git branch.</p>
+    #   @return [String]
+    # @!attribute commit_hash
+    #   <p>The commit hash in the Git repository.</p>
+    #   @return [String]
+    # @!attribute file_name
+    #   <p>The name of the file in the Git repository.</p>
+    #   @return [String]
+    # @!attribute committed_at
+    #   <p>The timestamp of when the commit was made.</p>
+    #   @return [Time]
+    # @!attribute commit_message
+    #   <p>The commit message associated with the Git commit.</p>
+    #   @return [String]
+    class GitMetadata < Struct.new(
+      nil,
+      :connection_id,
+      :repository,
+      :branch,
+      :commit_hash,
+      :file_name,
+      :committed_at,
+      :commit_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the Git connection properties that you specify when creating a Git connection.</p>
+    # @!attribute code_connection_arn
+    #   <p>The ARN of the CodeConnections connection used to connect to the Git repository.</p>
+    #   @return [String]
+    # @!attribute repository_id
+    #   <p>The ID of the Git repository. This is the owner and repository name, for example, owner/repo-name.</p>
+    #   @return [String]
+    # @!attribute default_branch
+    #   <p>The default branch of the Git repository.</p>
+    #   @return [String]
+    class GitPropertiesInput < Struct.new(
+      nil,
+      :code_connection_arn,
+      :repository_id,
+      :default_branch,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The properties of a Git connection returned by get and list operations, including connection status and any error details.</p>
+    # @!attribute code_connection_arn
+    #   <p>The ARN of the CodeConnections connection used to connect to the Git repository.</p>
+    #   @return [String]
+    # @!attribute repository_id
+    #   <p>The ID of the Git repository. This is the owner and repository name, for example, owner/repo-name.</p>
+    #   @return [String]
+    # @!attribute default_branch
+    #   <p>The default branch of the Git repository.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the Git connection.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message that describes why the Git connection failed. This member is populated when the connection status is CREATE_FAILED or UPDATE_FAILED.</p>
+    #   @return [String]
+    class GitPropertiesOutput < Struct.new(
+      nil,
+      :code_connection_arn,
+      :repository_id,
+      :default_branch,
+      :status,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The properties used to update an existing Git connection, such as the CodeConnections ARN or the default branch.</p>
+    # @!attribute code_connection_arn
+    #   <p>The ARN of the CodeConnections connection used to connect to the Git repository.</p>
+    #   @return [String]
+    # @!attribute default_branch
+    #   <p>The default branch of the Git repository.</p>
+    #   @return [String]
+    class GitPropertiesPatch < Struct.new(
+      nil,
+      :code_connection_arn,
+      :default_branch,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8808,6 +10235,18 @@ module Aws::DataZone
     class GlossaryItemAdditionalAttributes < Struct.new(
       nil,
       :match_rationale,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The enforcement details of a glossary term.</p>
+    # @!attribute required_glossary_term_ids
+    #   <p>The ID of the required glossary term.</p>
+    #   @return [Array<String>]
+    class GlossaryTermEnforcementDetail < Struct.new(
+      nil,
+      :required_glossary_term_ids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9280,12 +10719,20 @@ module Aws::DataZone
     # @!attribute group_name
     #   <p>The group name of a group profile.</p>
     #   @return [String]
+    # @!attribute role_principal_arn
+    #   <p>The ARN of the IAM role principal. This role is associated with the group profile.</p>
+    #   @return [String]
+    # @!attribute role_principal_id
+    #   <p>The unique identifier of the IAM role principal. This principal is associated with the group profile.</p>
+    #   @return [String]
     class GroupProfileSummary < Struct.new(
       nil,
       :domain_id,
       :id,
       :status,
       :group_name,
+      :role_principal_arn,
+      :role_principal_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9327,9 +10774,13 @@ module Aws::DataZone
     # @!attribute glue_lineage_sync_enabled
     #   <p>Specifies whether Amazon Web Services Glue lineage sync is enabled for a connection.</p>
     #   @return [Boolean]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role to associate with the connection as the project user role. To use this operation, you must have <code>iam:PassRole</code> permission for this role.</p>
+    #   @return [String]
     class IamPropertiesInput < Struct.new(
       nil,
       :glue_lineage_sync_enabled,
+      :role_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9363,17 +10814,41 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The details of an IAM user profile in Amazon DataZone.</p>
+    # <p>The details of the IAM user profile.</p>
     # @!attribute arn
-    #   <p>The ARN of an IAM user profile in Amazon DataZone.</p>
+    #   <p>The ARN of the IAM user.</p>
     #   @return [String]
     # @!attribute principal_id
-    #   <p>Principal ID of the IAM user.</p>
+    #   <p>The principal ID as part of the IAM user profile details.</p>
+    #   @return [String]
+    # @!attribute session_name
+    #   <p>The session name for IAM role sessions.</p>
+    #   @return [String]
+    # @!attribute group_profile_id
+    #   <p>The identifier of the group profile associated with the IAM user profile. This links the user to a specific group profile within the Amazon DataZone domain.</p>
     #   @return [String]
     class IamUserProfileDetails < Struct.new(
       nil,
       :arn,
       :principal_id,
+      :session_name,
+      :group_profile_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration for mapping user identities to Snowflake users, including the username attribute and optional prefix applied during the mapping.</p>
+    # @!attribute username_attribute
+    #   <p>The username attribute used for the identity mapping.</p>
+    #   @return [String]
+    # @!attribute prefix
+    #   <p>The prefix used for the identity mapping.</p>
+    #   @return [String]
+    class IdentityMapping < Struct.new(
+      nil,
+      :username_attribute,
+      :prefix,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9541,6 +11016,42 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The lakehouse properties of a connection.</p>
+    # @!attribute glue_lineage_sync_enabled
+    #   <p>Specifies whether to enable Glue lineage sync for tables managed by Glue crawlers.</p>
+    #   @return [Boolean]
+    class LakehousePropertiesInput < Struct.new(
+      nil,
+      :glue_lineage_sync_enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The lakehouse properties of a connection.</p>
+    # @!attribute glue_lineage_sync_enabled
+    #   <p>Specifies whether Glue lineage sync is enabled for tables managed by Glue crawlers.</p>
+    #   @return [Boolean]
+    class LakehousePropertiesOutput < Struct.new(
+      nil,
+      :glue_lineage_sync_enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The lakehouse properties of a connection properties patch.</p>
+    # @!attribute glue_lineage_sync_enabled
+    #   <p>Specifies whether to enable Glue lineage sync for tables managed by Glue crawlers.</p>
+    #   @return [Boolean]
+    class LakehousePropertiesPatch < Struct.new(
+      nil,
+      :glue_lineage_sync_enabled,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies that a value is less than an expression.</p>
     # @!attribute column_name
     #   <p>The name of the column.</p>
@@ -9640,6 +11151,74 @@ module Aws::DataZone
       :event_id,
       :event_status,
       :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The summary and output forms of a LineageNode</p>
+    # @!attribute domain_id
+    #   <p>The ID of the domain of the data lineage node.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the data lineage node.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the data lineage node.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp at which the data lineage node was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The user who created the data lineage node.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp at which the data lineage node was updated.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The user who updated the data lineage node.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The ID of the data lineage node.</p>
+    #   @return [String]
+    # @!attribute type_name
+    #   <p>The name of the type of the data lineage node.</p>
+    #   @return [String]
+    # @!attribute type_revision
+    #   <p>The type of the revision of the data lineage node.</p>
+    #   @return [String]
+    # @!attribute source_identifier
+    #   <p>The alternate ID of the data lineage node.</p>
+    #   @return [String]
+    # @!attribute event_timestamp
+    #   <p>The event timestamp of the data lineage node.</p>
+    #   @return [Time]
+    # @!attribute forms_output
+    #   <p>The forms included in the additional attributes of a data lineage node.</p>
+    #   @return [Array<Types::FormOutput>]
+    # @!attribute upstream_lineage_node_ids
+    #   <p>The IDs of the upstream data lineage nodes.</p>
+    #   @return [Array<String>]
+    # @!attribute downstream_lineage_node_ids
+    #   <p>The IDs of the downstream data lineage nodes.</p>
+    #   @return [Array<String>]
+    class LineageNodeItem < Struct.new(
+      nil,
+      :domain_id,
+      :name,
+      :description,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :id,
+      :type_name,
+      :type_revision,
+      :source_identifier,
+      :event_timestamp,
+      :forms_output,
+      :upstream_lineage_node_ids,
+      :downstream_lineage_node_ids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9796,6 +11375,50 @@ module Aws::DataZone
       :total_queries_processed,
       :num_queries_failed,
       :error_messages,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the settings for configuring lineage sync on a Snowflake connection, including the schedule, timezone, and enabled state.</p>
+    # @!attribute timezone
+    #   <p>The timezone of the lineage sync schedule.</p>
+    #   @return [String]
+    # @!attribute enabled
+    #   <p>Specifies whether lineage sync is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute schedule
+    #   <p>The schedule of the lineage sync.</p>
+    #   @return [String]
+    class LineageSyncInput < Struct.new(
+      nil,
+      :timezone,
+      :enabled,
+      :schedule,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the current state of lineage sync for a Snowflake connection, including the schedule, timezone, enabled state, and the ID of the associated lineage job.</p>
+    # @!attribute lineage_job_id
+    #   <p>The ID of the lineage sync job.</p>
+    #   @return [String]
+    # @!attribute timezone
+    #   <p>The timezone of the lineage sync schedule.</p>
+    #   @return [String]
+    # @!attribute enabled
+    #   <p>Specifies whether lineage sync is enabled.</p>
+    #   @return [Boolean]
+    # @!attribute schedule
+    #   <p>The schedule of the lineage sync.</p>
+    #   @return [String]
+    class LineageSyncOutput < Struct.new(
+      nil,
+      :lineage_job_id,
+      :timezone,
+      :enabled,
+      :schedule,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10004,6 +11627,9 @@ module Aws::DataZone
     # @!attribute type
     #   <p>The type of connection.</p>
     #   @return [String]
+    # @!attribute scope
+    #   <p>The scope of the connection.</p>
+    #   @return [String]
     class ListConnectionsInput < Struct.new(
       nil,
       :domain_identifier,
@@ -10015,6 +11641,7 @@ module Aws::DataZone
       :environment_identifier,
       :project_identifier,
       :type,
+      :scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10728,6 +12355,9 @@ module Aws::DataZone
     # @!attribute max_results
     #   <p>The maximum number of metadata generation runs to return in a single call to ListMetadataGenerationRuns. When the number of metadata generation runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     #   @return [Integer]
+    # @!attribute target_identifier
+    #   <p>The target ID for which you want to list metadata generation runs.</p>
+    #   @return [String]
     class ListMetadataGenerationRunsInput < Struct.new(
       nil,
       :domain_identifier,
@@ -10735,6 +12365,7 @@ module Aws::DataZone
       :type,
       :next_token,
       :max_results,
+      :target_identifier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10747,6 +12378,114 @@ module Aws::DataZone
     #   <p>When the number of metadata generation runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of metadata generation runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     #   @return [String]
     class ListMetadataGenerationRunsOutput < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to list notebook runs.</p>
+    #   @return [String]
+    # @!attribute owning_project_identifier
+    #   <p>The identifier of the project that owns the notebook runs.</p>
+    #   @return [String]
+    # @!attribute notebook_identifier
+    #   <p>The identifier of the notebook to filter runs by.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status to filter notebook runs by.</p>
+    #   @return [String]
+    # @!attribute schedule_identifier
+    #   <p>The identifier of the schedule to filter notebook runs by.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of notebook runs to return in a single call. When the number of notebook runs exceeds the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value.</p>
+    #   @return [Integer]
+    # @!attribute sort_order
+    #   <p>The sort order for the results.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>When the number of notebook runs is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notebook runs, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotebookRuns</code> to list the next set of notebook runs.</p>
+    #   @return [String]
+    class ListNotebookRunsInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :owning_project_identifier,
+      :notebook_identifier,
+      :status,
+      :schedule_identifier,
+      :max_results,
+      :sort_order,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The results of the <code>ListNotebookRuns</code> action.</p>
+    #   @return [Array<Types::NotebookRunSummary>]
+    # @!attribute next_token
+    #   <p>When the number of notebook runs is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notebook runs, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotebookRuns</code> to list the next set of notebook runs.</p>
+    #   @return [String]
+    class ListNotebookRunsOutput < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to list notebooks.</p>
+    #   @return [String]
+    # @!attribute owning_project_identifier
+    #   <p>The identifier of the project that owns the notebooks.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of notebooks to return in a single call. When the number of notebooks exceeds the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value.</p>
+    #   @return [Integer]
+    # @!attribute sort_order
+    #   <p>The sort order for the results.</p>
+    #   @return [String]
+    # @!attribute sort_by
+    #   <p>The field to sort the results by.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status to filter notebooks by.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type to filter notebooks by.</p>
+    #   @return [String]
+    # @!attribute next_token
+    #   <p>When the number of notebooks is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notebooks, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotebooks</code> to list the next set of notebooks.</p>
+    #   @return [String]
+    class ListNotebooksInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :owning_project_identifier,
+      :max_results,
+      :sort_order,
+      :sort_by,
+      :status,
+      :type,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The results of the <code>ListNotebooks</code> action.</p>
+    #   @return [Array<Types::NotebookSummary>]
+    # @!attribute next_token
+    #   <p>When the number of notebooks is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notebooks, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotebooks</code> to list the next set of notebooks.</p>
+    #   @return [String]
+    class ListNotebooksOutput < Struct.new(
       nil,
       :items,
       :next_token,
@@ -10959,6 +12698,9 @@ module Aws::DataZone
     # @!attribute name
     #   <p>The name of the project.</p>
     #   @return [String]
+    # @!attribute project_category
+    #   <p>A parameter to filter projects by their category.</p>
+    #   @return [String]
     # @!attribute next_token
     #   <p>When the number of projects is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of projects, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjects</code> to list the next set of projects.</p>
     #   @return [String]
@@ -10971,6 +12713,7 @@ module Aws::DataZone
       :user_identifier,
       :group_identifier,
       :name,
+      :project_category,
       :next_token,
       :max_results,
       keyword_init: true
@@ -11077,8 +12820,20 @@ module Aws::DataZone
     # @!attribute owning_project_id
     #   <p>The ID of the owning project of the subscription grants.</p>
     #   @return [String]
+    # @!attribute owning_iam_principal_arn
+    #   <p>The ARN of the owning IAM principal.</p>
+    #   @return [String]
+    # @!attribute owning_user_id
+    #   <p>The ID of the owning user.</p>
+    #   @return [String]
+    # @!attribute owning_group_id
+    #   <p>The ID of the owning group.</p>
+    #   @return [String]
     # @!attribute sort_by
     #   <p>Specifies the way of sorting the results of this action.</p>
+    #   @deprecated
+    #     Results are always sorted by updatedAt
+    #     Since: Jan 31 2026
     #   @return [String]
     # @!attribute sort_order
     #   <p>Specifies the sort order of this action.</p>
@@ -11097,6 +12852,9 @@ module Aws::DataZone
       :subscribed_listing_id,
       :subscription_id,
       :owning_project_id,
+      :owning_iam_principal_arn,
+      :owning_user_id,
+      :owning_group_id,
       :sort_by,
       :sort_order,
       :max_results,
@@ -11133,11 +12891,23 @@ module Aws::DataZone
     # @!attribute owning_project_id
     #   <p>The identifier of the project for the subscription requests.</p>
     #   @return [String]
+    # @!attribute owning_iam_principal_arn
+    #   <p>The ARN of the owning IAM principal.</p>
+    #   @return [String]
     # @!attribute approver_project_id
     #   <p>The identifier of the subscription request approver's project.</p>
     #   @return [String]
+    # @!attribute owning_user_id
+    #   <p>The ID of the owning user.</p>
+    #   @return [String]
+    # @!attribute owning_group_id
+    #   <p>The ID of the owning group.</p>
+    #   @return [String]
     # @!attribute sort_by
     #   <p>Specifies the way to sort the results of this action.</p>
+    #   @deprecated
+    #     Results are always sorted by updatedAt
+    #     Since: Jan 31 2026
     #   @return [String]
     # @!attribute sort_order
     #   <p>Specifies the sort order for the results of this action.</p>
@@ -11154,7 +12924,10 @@ module Aws::DataZone
       :status,
       :subscribed_listing_id,
       :owning_project_id,
+      :owning_iam_principal_arn,
       :approver_project_id,
+      :owning_user_id,
+      :owning_group_id,
       :sort_by,
       :sort_order,
       :max_results,
@@ -11240,11 +13013,23 @@ module Aws::DataZone
     # @!attribute owning_project_id
     #   <p>The identifier of the owning project.</p>
     #   @return [String]
+    # @!attribute owning_iam_principal_arn
+    #   <p>The ARN of the owning IAM principal.</p>
+    #   @return [String]
+    # @!attribute owning_user_id
+    #   <p>The ID of the owning user.</p>
+    #   @return [String]
+    # @!attribute owning_group_id
+    #   <p>The ID of the owning group.</p>
+    #   @return [String]
     # @!attribute approver_project_id
     #   <p>The identifier of the project for the subscription's approver.</p>
     #   @return [String]
     # @!attribute sort_by
     #   <p>Specifies the way in which the results of this action are to be sorted.</p>
+    #   @deprecated
+    #     Results are always sorted by updatedAt
+    #     Since: Jan 31 2026
     #   @return [String]
     # @!attribute sort_order
     #   <p>Specifies the sort order for the results of this action.</p>
@@ -11262,6 +13047,9 @@ module Aws::DataZone
       :status,
       :subscribed_listing_id,
       :owning_project_id,
+      :owning_iam_principal_arn,
+      :owning_user_id,
+      :owning_group_id,
       :approver_project_id,
       :sort_by,
       :sort_order,
@@ -11472,6 +13260,26 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A clause to match a query pattern</p>
+    # @!attribute relation_pattern
+    #   <p>The pattern describing the query's relational traversal.</p>
+    #   @return [Types::RelationPattern]
+    # @!attribute entity_pattern
+    #   <p>The pattern describing the entities for the query to traverse.</p>
+    #   @return [Types::EntityPattern]
+    class MatchClause < Struct.new(
+      :relation_pattern,
+      :entity_pattern,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class RelationPattern < MatchClause; end
+      class EntityPattern < MatchClause; end
+      class Unknown < MatchClause; end
+    end
+
     # <p>The offset of a matched term.</p>
     # @!attribute start_offset
     #   <p>The 0-indexed number indicating the start position (inclusive) of a matched term.</p>
@@ -11606,7 +13414,13 @@ module Aws::DataZone
     #   @return [String]
     # @!attribute type
     #   <p>The type of the metadata generation run.</p>
+    #   @deprecated
+    #     This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types
+    #     Since: 2025-11-21
     #   @return [String]
+    # @!attribute types
+    #   <p>The types of the metadata generation run.</p>
+    #   @return [Array<String>]
     # @!attribute created_at
     #   <p>The timestamp at which the metadata generation run was created.</p>
     #   @return [Time]
@@ -11623,6 +13437,7 @@ module Aws::DataZone
       :target,
       :status,
       :type,
+      :types,
       :created_at,
       :created_by,
       :owning_project_id,
@@ -11646,6 +13461,62 @@ module Aws::DataZone
       :type,
       :identifier,
       :revision,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The statistics of the metadata generation run type.</p>
+    # @!attribute type
+    #   <p>The type of the metadata generation run type statistics.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the metadata generation run type statistics.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>The error message displayed if the action fails to run.</p>
+    #   @return [String]
+    class MetadataGenerationRunTypeStat < Struct.new(
+      nil,
+      :type,
+      :status,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The MLflow properties of a connection.</p>
+    # @!attribute tracking_server_arn
+    #   <p>The tracking server ARN as part of the MLflow properties of a connection.</p>
+    #   @return [String]
+    class MlflowPropertiesInput < Struct.new(
+      nil,
+      :tracking_server_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The MLflow properties of a connection.</p>
+    # @!attribute tracking_server_arn
+    #   <p>The tracking server ARN as part of the MLflow properties of a connection.</p>
+    #   @return [String]
+    class MlflowPropertiesOutput < Struct.new(
+      nil,
+      :tracking_server_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The MLflow properties of a connection.</p>
+    # @!attribute tracking_server_arn
+    #   <p>The tracking server ARN as part of the MLflow properties of a connection.</p>
+    #   @return [String]
+    class MlflowPropertiesPatch < Struct.new(
+      nil,
+      :tracking_server_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11678,6 +13549,30 @@ module Aws::DataZone
       nil,
       :name,
       :namespace,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The network configuration for a notebook run in Amazon SageMaker Unified Studio.</p>
+    # @!attribute network_access_type
+    #   <p>The network access type for the notebook run. Valid values are <code>PUBLIC_INTERNET_ONLY</code> and <code>VPC_ONLY</code>.</p>
+    #   @return [String]
+    # @!attribute vpc_id
+    #   <p>The identifier of the VPC for the notebook run. This is required when the network access type is <code>VPC_ONLY</code>.</p>
+    #   @return [String]
+    # @!attribute subnet_ids
+    #   <p>The identifiers of the subnets for the notebook run. You can specify up to 10 subnets.</p>
+    #   @return [Array<String>]
+    # @!attribute security_group_ids
+    #   <p>The identifiers of the security groups for the notebook run. You can specify up to 5 security groups.</p>
+    #   @return [Array<String>]
+    class NetworkConfig < Struct.new(
+      nil,
+      :network_access_type,
+      :vpc_id,
+      :subnet_ids,
+      :security_group_ids,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11726,6 +13621,166 @@ module Aws::DataZone
       nil,
       :column_name,
       :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The error details of a notebook in Amazon SageMaker Unified Studio.</p>
+    # @!attribute message
+    #   <p>The error message. The maximum length is 256 characters.</p>
+    #   @return [String]
+    class NotebookError < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The error details of a failed notebook export in Amazon SageMaker Unified Studio.</p>
+    # @!attribute message
+    #   <p>The error message. The maximum length is 256 characters.</p>
+    #   @return [String]
+    class NotebookExportError < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The error details of a failed notebook run in Amazon SageMaker Unified Studio.</p>
+    # @!attribute message
+    #   <p>The error message. The maximum length is 1024 characters.</p>
+    #   @return [String]
+    class NotebookRunError < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The summary of a notebook run in Amazon SageMaker Unified Studio.</p>
+    # @!attribute id
+    #   <p>The identifier of the notebook run.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook run.</p>
+    #   @return [String]
+    # @!attribute notebook_id
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    # @!attribute schedule_id
+    #   <p>The identifier of the schedule associated with the notebook run.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the notebook run.</p>
+    #   @return [String]
+    # @!attribute trigger_source
+    #   <p>The source that triggered the notebook run.</p>
+    #   @return [Types::TriggerSource]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook run was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who created the notebook run.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp of when the notebook run was last updated.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The identifier of the user who last updated the notebook run.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The timestamp of when the notebook run started executing.</p>
+    #   @return [Time]
+    # @!attribute completed_at
+    #   <p>The timestamp of when the notebook run completed.</p>
+    #   @return [Time]
+    class NotebookRunSummary < Struct.new(
+      nil,
+      :id,
+      :domain_id,
+      :owning_project_id,
+      :notebook_id,
+      :schedule_id,
+      :status,
+      :trigger_source,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :started_at,
+      :completed_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The summary of a notebook in Amazon SageMaker Unified Studio.</p>
+    # @!attribute id
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the notebook.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the notebook.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the notebook.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the notebook.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who created the notebook.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp of when the notebook was last updated.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The identifier of the user who last updated the notebook.</p>
+    #   @return [String]
+    class NotebookSummary < Struct.new(
+      nil,
+      :id,
+      :name,
+      :owning_project_id,
+      :domain_id,
+      :status,
+      :type,
+      :description,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The notification configuration for a notebook run in Amazon SageMaker Unified Studio.</p>
+    # @!attribute notify_on
+    #   Notebook run states that trigger notifications. Ordering is not significant.
+    #   @return [Array<String>]
+    class NotificationConfig < Struct.new(
+      nil,
+      :notify_on,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11879,6 +13934,21 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The output location for a notebook export in Amazon SageMaker Unified Studio.</p>
+    # @!attribute s3
+    #   <p>The Amazon Simple Storage Service destination for the notebook export.</p>
+    #   @return [Types::S3Destination]
+    class OutputLocation < Struct.new(
+      :s3,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class S3 < OutputLocation; end
+      class Unknown < OutputLocation; end
+    end
+
     # <p>The grant details of the override domain unit owners policy.</p>
     # @!attribute include_child_domain_units
     #   <p>Specifies whether the policy is inherited by child domain units.</p>
@@ -11991,6 +14061,42 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The package configuration for a notebook run environment in Amazon SageMaker Unified Studio.</p>
+    # @!attribute package_manager
+    #   <p>The package manager for the notebook run environment. The default value is <code>UV</code>.</p>
+    #   @return [String]
+    # @!attribute package_specification
+    #   <p>The package specification content for the notebook run environment. The maximum length is 10240 characters.</p>
+    #   @return [String]
+    class PackageConfig < Struct.new(
+      nil,
+      :package_manager,
+      :package_specification,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:package_manager] = 'UV' unless options.key?(:package_manager)
+        super
+      end
+    end
+
+    # <p>The asset permissions.</p>
+    # @!attribute s3
+    #   <p>The S3 details of the asset permissions.</p>
+    #   @return [Array<String>]
+    class Permissions < Struct.new(
+      :s3,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class S3 < Permissions; end
+      class Unknown < Permissions; end
+    end
+
     # <p>Physical connection requirements of a connection.</p>
     # @!attribute subnet_id
     #   <p>The subnet ID of the physical connection requirements of a connection. </p>
@@ -12022,9 +14128,15 @@ module Aws::DataZone
     # @!attribute glue_connection_name
     #   <p>The Amazon Web Services Glue connection name.</p>
     #   @return [String]
+    # @!attribute glue_connection_names
+    #   <p>The Amazon Web Services Glue connection names in the physical endpoint.</p>
+    #   @return [Array<String>]
     # @!attribute glue_connection
     #   <p>The Amazon Web Services Glue connection.</p>
     #   @return [Types::GlueConnection]
+    # @!attribute enable_trusted_identity_propagation
+    #   <p>Specified whether trusted identity propagation for the connection is enabled.</p>
+    #   @return [Boolean]
     # @!attribute host
     #   <p>The host in the physical endpoints of a connection.</p>
     #   @return [String]
@@ -12041,7 +14153,9 @@ module Aws::DataZone
       nil,
       :aws_location,
       :glue_connection_name,
+      :glue_connection_names,
       :glue_connection,
+      :enable_trusted_identity_propagation,
       :host,
       :port,
       :protocol,
@@ -12332,6 +14446,22 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A map of user or group profiles to designations that need to be assigned in the project.</p>
+    # @!attribute member
+    #   <p>The details about a project member.</p>
+    #   @return [Types::Member]
+    # @!attribute designation
+    #   <p>The designation of the project membership.</p>
+    #   @return [String]
+    class ProjectMembershipAssignment < Struct.new(
+      nil,
+      :member,
+      :designation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The project policy grant principal.</p>
     # @!attribute project_designation
     #   <p>The project designation of the project policy grant principal.</p>
@@ -12427,6 +14557,9 @@ module Aws::DataZone
     # @!attribute domain_unit_id
     #   <p>The ID of the domain unit.</p>
     #   @return [String]
+    # @!attribute project_category
+    #   <p>The category of the project.</p>
+    #   @return [String]
     class ProjectSummary < Struct.new(
       nil,
       :domain_id,
@@ -12439,6 +14572,7 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       :domain_unit_id,
+      :project_category,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12491,6 +14625,36 @@ module Aws::DataZone
     end
 
     # @!attribute domain_identifier
+    #   <p>The domain ID for which you want to create data export configuration details.</p>
+    #   @return [String]
+    # @!attribute enable_export
+    #   <p>Specifies that the export is to be enabled as part of creating data export configuration details.</p>
+    #   @return [Boolean]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration as part of creating data export configuration details.</p> <p>The KMS key provided here as part of encryptionConfiguration must have the required permissions as described in <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/adminguide/sagemaker-unified-studio-export-asset-metadata-kms-permissions.html">KMS permissions for exporting asset metadata in Amazon SageMaker Unified Studio</a>.</p>
+    #   @return [Types::EncryptionConfiguration]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    class PutDataExportConfigurationInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :enable_export,
+      :encryption_configuration,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class PutDataExportConfigurationOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
     #   @return [String]
     # @!attribute environment_blueprint_identifier
@@ -12511,6 +14675,12 @@ module Aws::DataZone
     # @!attribute regional_parameters
     #   <p>The regional parameters in the environment blueprint.</p>
     #   @return [Hash<String, Hash<String, String>>]
+    # @!attribute resource_configurations
+    #   <p>The resource configurations of the environment blueprint.</p>
+    #   @return [Array<Types::PutResourceConfiguration>]
+    # @!attribute allow_user_provided_configurations
+    #   <p>Specifies whether user-provided resource configurations are allowed for the environment blueprint.</p>
+    #   @return [Boolean]
     # @!attribute global_parameters
     #   <p>Region-agnostic environment blueprint parameters. </p>
     #   @return [Hash<String, String>]
@@ -12526,6 +14696,8 @@ module Aws::DataZone
       :environment_role_permission_boundary,
       :enabled_regions,
       :regional_parameters,
+      :resource_configurations,
+      :allow_user_provided_configurations,
       :global_parameters,
       :provisioning_configurations,
       keyword_init: true
@@ -12554,12 +14726,18 @@ module Aws::DataZone
     # @!attribute regional_parameters
     #   <p>The regional parameters in the environment blueprint.</p>
     #   @return [Hash<String, Hash<String, String>>]
+    # @!attribute allow_user_provided_configurations
+    #   <p>Specifies whether user-provided resource configurations are allowed for the environment blueprint.</p>
+    #   @return [Boolean]
     # @!attribute created_at
     #   <p>The timestamp of when the environment blueprint was created.</p>
     #   @return [Time]
     # @!attribute updated_at
     #   <p>The timestamp of when the environment blueprint was updated.</p>
     #   @return [Time]
+    # @!attribute resource_configurations
+    #   <p>The resource configurations of the environment blueprint.</p>
+    #   @return [Array<Types::ResourceConfiguration>]
     # @!attribute provisioning_configurations
     #   <p>The provisioning configuration of a blueprint.</p>
     #   @return [Array<Types::ProvisioningConfiguration>]
@@ -12572,9 +14750,77 @@ module Aws::DataZone
       :manage_access_role_arn,
       :enabled_regions,
       :regional_parameters,
+      :allow_user_provided_configurations,
       :created_at,
       :updated_at,
+      :resource_configurations,
       :provisioning_configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The resource configuration that is used to configure the environment blueprint.</p>
+    # @!attribute name
+    #   <p>The name of the resource configuration.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the resource configuration.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>The Amazon Web Services Region of the resource configuration.</p>
+    #   @return [String]
+    # @!attribute parameters
+    #   <p>The parameters of the resource configuration.</p>
+    #   @return [Hash<String, String>]
+    class PutResourceConfiguration < Struct.new(
+      nil,
+      :name,
+      :description,
+      :region,
+      :parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon DataZone domain.</p>
+    #   @return [String]
+    # @!attribute match
+    #   <p>List of query match clauses.</p>
+    #   @return [Array<Types::MatchClause>]
+    # @!attribute max_results
+    #   <p>The maximum number of entities to return in a single call to <code>QueryGraph</code>. When the number of entities to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>QueryGraph</code> to list the next set of entities.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>QueryGraph</code> to list the next set of entities.</p>
+    #   @return [String]
+    # @!attribute additional_attributes
+    #   <p>Additional details on the queried entity that can be requested in the response.</p>
+    #   @return [Types::AdditionalAttributes]
+    class QueryGraphInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :match,
+      :max_results,
+      :next_token,
+      :additional_attributes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The results of the <code>QueryGraph</code> action.</p>
+    #   @return [Array<Types::ResultItem>]
+    # @!attribute next_token
+    #   <p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>QueryGraph</code> to list the next set of entities.</p>
+    #   @return [String]
+    class QueryGraphOutput < Struct.new(
+      nil,
+      :items,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13085,6 +15331,26 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The pattern describing the query's relational traversal.</p>
+    # @!attribute relation_type
+    #   <p>The type of relation to query.</p>
+    #   @return [String]
+    # @!attribute relation_direction
+    #   <p>The direction to query.</p>
+    #   @return [String]
+    # @!attribute max_path_length
+    #   <p>The number of hops to query.</p>
+    #   @return [Integer]
+    class RelationPattern < Struct.new(
+      nil,
+      :relation_type,
+      :relation_direction,
+      :max_path_length,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The relational filter configuration for the data source.</p>
     # @!attribute database_name
     #   <p>The database name specified in the relational filter configuration for the data source.</p>
@@ -13205,6 +15471,34 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The details of the resource configuration.</p>
+    # @!attribute identifier
+    #   <p>The identifier of the resource configuration.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the resource configuration.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the resource configuration.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>The Amazon Web Services Region of the resource configuration.</p>
+    #   @return [String]
+    # @!attribute parameters
+    #   <p>The parameters of the resource configuration.</p>
+    #   @return [Hash<String, String>]
+    class ResourceConfiguration < Struct.new(
+      nil,
+      :identifier,
+      :name,
+      :description,
+      :region,
+      :parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified resource cannot be found.</p>
     # @!attribute message
     #   @return [String]
@@ -13214,6 +15508,61 @@ module Aws::DataZone
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The resource tag of the project.</p>
+    # @!attribute key
+    #   <p>The key of the resource tag of the project.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the resource tag of the project.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The source of the resource tag of the project.</p>
+    #   @return [String]
+    class ResourceTag < Struct.new(
+      nil,
+      :key,
+      :value,
+      :source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The resource tag parameter of the project profile.</p>
+    # @!attribute key
+    #   <p>The key of the resource tag parameter of the project profile.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the resource tag parameter key of the project profile.</p>
+    #   @return [String]
+    # @!attribute is_value_editable
+    #   <p>Specifies whether the value of the resource tag parameter of the project profile is editable at the project level.</p>
+    #   @return [Boolean]
+    class ResourceTagParameter < Struct.new(
+      nil,
+      :key,
+      :value,
+      :is_value_editable,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Resulting entity from the query.</p>
+    # @!attribute lineage_node
+    #   <p>Resulting data lineage node from the query.</p>
+    #   @return [Types::LineageNodeItem]
+    class ResultItem < Struct.new(
+      :lineage_node,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class LineageNode < ResultItem; end
+      class Unknown < ResultItem; end
     end
 
     # @!attribute domain_identifier
@@ -13406,14 +15755,19 @@ module Aws::DataZone
     # @!attribute metadata_form_enforcement_detail
     #   <p>The enforcement detail of the metadata form.</p>
     #   @return [Types::MetadataFormEnforcementDetail]
+    # @!attribute glossary_term_enforcement_detail
+    #   <p>The enforcement details of a glossary term that's part of the metadata rule.</p>
+    #   @return [Types::GlossaryTermEnforcementDetail]
     class RuleDetail < Struct.new(
       :metadata_form_enforcement_detail,
+      :glossary_term_enforcement_detail,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class MetadataFormEnforcementDetail < RuleDetail; end
+      class GlossaryTermEnforcementDetail < RuleDetail; end
       class Unknown < RuleDetail; end
     end
 
@@ -13528,17 +15882,41 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Amazon S3 properties of a connection.</p>
-    # @!attribute s3_uri
-    #   <p>The Amazon S3 URI that's part of the Amazon S3 properties of a connection.</p>
+    # <p>The Amazon Simple Storage Service destination for a notebook export in Amazon SageMaker Unified Studio.</p>
+    # @!attribute uri
+    #   <p>The Amazon Simple Storage Service URI of the exported notebook.</p>
     #   @return [String]
-    # @!attribute s3_access_grant_location_id
-    #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>
-    #   @return [String]
-    class S3PropertiesInput < Struct.new(
+    class S3Destination < Struct.new(
       nil,
-      :s3_uri,
-      :s3_access_grant_location_id,
+      :uri,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A single Amazon Simple Storage Service object to import as a notebook cell.</p>
+    # @!attribute key
+    #   <p>The key of the Amazon Simple Storage Service object to import.</p>
+    #   @return [String]
+    class S3File < Struct.new(
+      nil,
+      :key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon Simple Storage Service objects to import as the cells of a notebook, specified as a bucket and an ordered list of object keys.</p>
+    # @!attribute bucket
+    #   <p>The name of the Amazon Simple Storage Service bucket that contains the files to import.</p>
+    #   @return [String]
+    # @!attribute file_list
+    #   <p>The files to import. Cells are created in the order in which you list the files. You can specify between 1 and 100 files.</p>
+    #   @return [Array<Types::S3File>]
+    class S3FilesLocation < Struct.new(
+      nil,
+      :bucket,
+      :file_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13551,6 +15929,29 @@ module Aws::DataZone
     # @!attribute s3_access_grant_location_id
     #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>
     #   @return [String]
+    # @!attribute register_s3_access_grant_location
+    #   <p>Specifies whether to register the Amazon S3 Access Grant location.</p>
+    #   @return [Boolean]
+    class S3PropertiesInput < Struct.new(
+      nil,
+      :s3_uri,
+      :s3_access_grant_location_id,
+      :register_s3_access_grant_location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon S3 properties of a connection.</p>
+    # @!attribute s3_uri
+    #   <p>The Amazon S3 URI that's part of the Amazon S3 properties of a connection.</p>
+    #   @return [String]
+    # @!attribute s3_access_grant_location_id
+    #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.</p>
+    #   @return [String]
+    # @!attribute register_s3_access_grant_location
+    #   <p>Specifies whether to register the Amazon S3 Access Grant location.</p>
+    #   @return [Boolean]
     # @!attribute status
     #   <p>The status of the Amazon S3 connection.</p>
     #   @return [String]
@@ -13561,6 +15962,7 @@ module Aws::DataZone
       nil,
       :s3_uri,
       :s3_access_grant_location_id,
+      :register_s3_access_grant_location,
       :status,
       :error_message,
       keyword_init: true
@@ -13575,10 +15977,14 @@ module Aws::DataZone
     # @!attribute s3_access_grant_location_id
     #   <p>The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties patch of a connection.</p>
     #   @return [String]
+    # @!attribute register_s3_access_grant_location
+    #   <p>Specifies whether to register the Amazon S3 Access Grant location.</p>
+    #   @return [Boolean]
     class S3PropertiesPatch < Struct.new(
       nil,
       :s3_uri,
       :s3_access_grant_location_id,
+      :register_s3_access_grant_location,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14089,6 +16495,98 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the Snowflake-specific settings required when creating or updating a connection, including the Snowflake role, identity mapping, and lineage sync configuration.</p>
+    # @!attribute connectivity_properties
+    #   <p>The connectivity properties of the Snowflake connection.</p>
+    #   @return [Types::ConnectivityProperties]
+    # @!attribute snowflake_role
+    #   <p>The Snowflake role used to access Snowflake resources.</p>
+    #   @return [String]
+    # @!attribute identity_mapping
+    #   <p>The identity mapping configuration for the Snowflake connection.</p>
+    #   @return [Types::IdentityMapping]
+    # @!attribute lineage_sync
+    #   <p>The lineage sync configuration for the Snowflake connection.</p>
+    #   @return [Types::LineageSyncInput]
+    class SnowflakePropertiesInput < Struct.new(
+      nil,
+      :connectivity_properties,
+      :snowflake_role,
+      :identity_mapping,
+      :lineage_sync,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the Snowflake-specific settings returned for an existing connection, including the current role, identity mapping, lineage sync state, and connection status.</p>
+    # @!attribute snowflake_role
+    #   <p>The Snowflake role used to access Snowflake resources.</p>
+    #   @return [String]
+    # @!attribute identity_mapping
+    #   <p>The identity mapping configuration for the Snowflake connection.</p>
+    #   @return [Types::IdentityMapping]
+    # @!attribute lineage_sync
+    #   <p>The lineage sync configuration for the Snowflake connection.</p>
+    #   @return [Types::LineageSyncOutput]
+    # @!attribute status
+    #   <p>The status of the Snowflake connection.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>An error message returned if the Snowflake connection failed to establish or validate.</p>
+    #   @return [String]
+    class SnowflakePropertiesOutput < Struct.new(
+      nil,
+      :snowflake_role,
+      :identity_mapping,
+      :lineage_sync,
+      :status,
+      :error_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the Snowflake-specific settings to update on an existing connection. Include only the fields you want to change.</p>
+    # @!attribute connectivity_properties_patch
+    #   <p>The connectivity properties patch of the Snowflake connection.</p>
+    #   @return [Types::ConnectivityPropertiesPatch]
+    # @!attribute snowflake_role
+    #   <p>The Snowflake role used to access Snowflake resources.</p>
+    #   @return [String]
+    # @!attribute lineage_sync
+    #   <p>The lineage sync configuration for the Snowflake connection.</p>
+    #   @return [Types::LineageSyncInput]
+    class SnowflakePropertiesPatch < Struct.new(
+      nil,
+      :connectivity_properties_patch,
+      :snowflake_role,
+      :lineage_sync,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The source location for a notebook import in Amazon SageMaker Unified Studio.</p>
+    # @!attribute s3
+    #   <p>The Amazon Simple Storage Service URI of the notebook source file.</p>
+    #   @return [String]
+    # @!attribute s3_files
+    #   <p>The Amazon Simple Storage Service objects to import as the notebook's cells. One cell is created for each object, in the order in which you list them.</p>
+    #   @return [Types::S3FilesLocation]
+    class SourceLocation < Struct.new(
+      :s3,
+      :s3_files,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class S3 < SourceLocation; end
+      class S3Files < SourceLocation; end
+      class Unknown < SourceLocation; end
+    end
+
     # <p>The Spark EMR properties.</p>
     # @!attribute compute_arn
     #   <p>The compute ARN of Spark EMR.</p>
@@ -14250,8 +16748,11 @@ module Aws::DataZone
     #   <p>The additional args in the Spark Amazon Web Services Glue properties.</p>
     #   @return [Types::SparkGlueArgs]
     # @!attribute glue_connection_name
-    #   <p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue properties.</p>
+    #   <p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue properties. Specify either <code>glueConnectionName</code> or <code>glueConnectionNames</code>, but not both.</p>
     #   @return [String]
+    # @!attribute glue_connection_names
+    #   <p>The Amazon Web Services Glue connection names in the Spark Amazon Web Services Glue properties. Specify either <code>glueConnectionName</code> or <code>glueConnectionNames</code>, but not both.</p>
+    #   @return [Array<String>]
     # @!attribute glue_version
     #   <p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue properties.</p>
     #   @return [String]
@@ -14274,6 +16775,7 @@ module Aws::DataZone
       nil,
       :additional_args,
       :glue_connection_name,
+      :glue_connection_names,
       :glue_version,
       :idle_timeout,
       :java_virtual_env,
@@ -14292,6 +16794,9 @@ module Aws::DataZone
     # @!attribute glue_connection_name
     #   <p>The Amazon Web Services Glue connection name in the Spark Amazon Web Services Glue properties. </p>
     #   @return [String]
+    # @!attribute glue_connection_names
+    #   <p>The Amazon Web Services Glue connection names in the Spark Amazon Web Services Glue properties.</p>
+    #   @return [Array<String>]
     # @!attribute glue_version
     #   <p>The Amazon Web Services Glue version in the Spark Amazon Web Services Glue properties. </p>
     #   @return [String]
@@ -14314,6 +16819,7 @@ module Aws::DataZone
       nil,
       :additional_args,
       :glue_connection_name,
+      :glue_connection_names,
       :glue_version,
       :idle_timeout,
       :java_virtual_env,
@@ -14325,15 +16831,15 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The single sign-on details of the user profile.</p>
+    # <p>The SSO user profile detail.</p>
     # @!attribute username
-    #   <p>The username included in the single sign-on details of the user profile.</p>
+    #   <p>The username as part of the SSO user profile detail. </p>
     #   @return [String]
     # @!attribute first_name
-    #   <p>The first name included in the single sign-on details of the user profile.</p>
+    #   <p>The first name as part of the SSO user profile detail.</p>
     #   @return [String]
     # @!attribute last_name
-    #   <p>The last name included in the single sign-on details of the user profile.</p>
+    #   <p>The last name as part of the SSO user profile detail.</p>
     #   @return [String]
     class SsoUserProfileDetails < Struct.new(
       nil,
@@ -14428,7 +16934,13 @@ module Aws::DataZone
     #   @return [String]
     # @!attribute type
     #   <p>The type of the metadata generation run.</p>
+    #   @deprecated
+    #     This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types
+    #     Since: 2025-11-21
     #   @return [String]
+    # @!attribute types
+    #   <p>The types of the metadata generation run.</p>
+    #   @return [Array<String>]
     # @!attribute target
     #   <p>The asset for which you want to start a metadata generation run.</p>
     #   @return [Types::MetadataGenerationRunTarget]
@@ -14442,6 +16954,7 @@ module Aws::DataZone
       nil,
       :domain_identifier,
       :type,
+      :types,
       :target,
       :client_token,
       :owning_project_identifier,
@@ -14461,7 +16974,13 @@ module Aws::DataZone
     #   @return [String]
     # @!attribute type
     #   <p>The type of the metadata generation run.</p>
+    #   @deprecated
+    #     This field is going to be deprecated, please use the 'types' field to provide the MetadataGenerationRun types
+    #     Since: 2025-11-21
     #   @return [String]
+    # @!attribute types
+    #   <p>The types of the metadata generation run.</p>
+    #   @return [Array<String>]
     # @!attribute created_at
     #   <p>The timestamp at which the metadata generation run was started.</p>
     #   @return [Time]
@@ -14477,9 +16996,456 @@ module Aws::DataZone
       :id,
       :status,
       :type,
+      :types,
       :created_at,
       :created_by,
       :owning_project_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to export the notebook.</p>
+    #   @return [String]
+    # @!attribute notebook_identifier
+    #   <p>The identifier of the notebook to export.</p>
+    #   @return [String]
+    # @!attribute owning_project_identifier
+    #   <p>The identifier of the project that owns the notebook.</p>
+    #   @return [String]
+    # @!attribute file_format
+    #   <p>The file format for the notebook export. Valid values are <code>PDF</code> and <code>IPYNB</code>.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    class StartNotebookExportInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :notebook_identifier,
+      :owning_project_identifier,
+      :file_format,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the notebook export.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook.</p>
+    #   @return [String]
+    # @!attribute notebook_id
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    # @!attribute file_format
+    #   <p>The file format of the notebook export.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the notebook export.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook export was started.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who started the notebook export.</p>
+    #   @return [String]
+    class StartNotebookExportOutput < Struct.new(
+      nil,
+      :id,
+      :domain_id,
+      :owning_project_id,
+      :notebook_id,
+      :file_format,
+      :status,
+      :created_at,
+      :created_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to import the notebook.</p>
+    #   @return [String]
+    # @!attribute owning_project_identifier
+    #   <p>The identifier of the project that will own the imported notebook.</p>
+    #   @return [String]
+    # @!attribute source_location
+    #   <p>The source location of the notebook to import. Specify either a single Amazon Simple Storage Service URI, or a list of objects to import as the notebook's cells.</p>
+    #   @return [Types::SourceLocation]
+    # @!attribute name
+    #   <p>The name of the imported notebook. The name must be between 1 and 256 characters.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the imported notebook.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the notebook to import. If not specified, defaults to <code>DATA</code>.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    class StartNotebookImportInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :owning_project_identifier,
+      :source_location,
+      :name,
+      :description,
+      :type,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute notebook_id
+    #   <p>The identifier of the imported notebook.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the notebook import.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the imported notebook.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the imported notebook.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the imported notebook.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the imported notebook.</p>
+    #   @return [String]
+    # @!attribute source_location
+    #   <p>The source location from which the notebook was imported.</p>
+    #   @return [Types::SourceLocation]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook import was started.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who started the notebook import.</p>
+    #   @return [String]
+    class StartNotebookImportOutput < Struct.new(
+      nil,
+      :notebook_id,
+      :status,
+      :domain_id,
+      :owning_project_id,
+      :name,
+      :description,
+      :type,
+      :source_location,
+      :created_at,
+      :created_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook run is started.</p>
+    #   @return [String]
+    # @!attribute owning_project_identifier
+    #   <p>The identifier of the project that owns the notebook run.</p>
+    #   @return [String]
+    # @!attribute notebook_identifier
+    #   <p>The identifier of the notebook to run.</p>
+    #   @return [String]
+    # @!attribute schedule_identifier
+    #   <p>The identifier of the schedule associated with the notebook run.</p>
+    #   @return [String]
+    # @!attribute compute_configuration
+    #   <p>The compute configuration for the notebook run, including instance type and environment version.</p>
+    #   @return [Types::ComputeConfig]
+    # @!attribute network_configuration
+    #   <p>The network configuration for the notebook run, including network access type and optional VPC settings.</p>
+    #   @return [Types::NetworkConfig]
+    # @!attribute timeout_configuration
+    #   <p>The timeout configuration for the notebook run. The default timeout is 720 minutes (12 hours) and the maximum is 1440 minutes (24 hours).</p>
+    #   @return [Types::TimeoutConfig]
+    # @!attribute notification_configuration
+    #   <p>The notification configuration for the notebook run. Use this to specify the notebook run states that trigger notifications.</p>
+    #   @return [Types::NotificationConfig]
+    # @!attribute trigger_source
+    #   <p>The source that triggered the notebook run.</p>
+    #   @return [Types::TriggerSource]
+    # @!attribute metadata
+    #   <p>The metadata for the notebook run, specified as key-value pairs. You can specify up to 50 entries, with keys up to 128 characters and values up to 1024 characters.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute parameters
+    #   <p>The sensitive parameters for the notebook run, specified as key-value pairs. You can specify up to 50 entries, with keys up to 128 characters and values up to 1024 characters.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    class StartNotebookRunInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :owning_project_identifier,
+      :notebook_identifier,
+      :schedule_identifier,
+      :compute_configuration,
+      :network_configuration,
+      :timeout_configuration,
+      :notification_configuration,
+      :trigger_source,
+      :metadata,
+      :parameters,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the notebook run.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook run.</p>
+    #   @return [String]
+    # @!attribute notebook_id
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    # @!attribute schedule_id
+    #   <p>The identifier of the schedule associated with the notebook run.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the notebook run.</p>
+    #   @return [String]
+    # @!attribute cell_order
+    #   <p>The ordered list of cells in the notebook run.</p>
+    #   @return [Array<Types::CellInformation>]
+    # @!attribute metadata
+    #   <p>The metadata of the notebook run.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute parameters
+    #   <p>The sensitive parameters of the notebook run.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute compute_configuration
+    #   <p>The compute configuration of the notebook run.</p>
+    #   @return [Types::ComputeConfig]
+    # @!attribute network_configuration
+    #   <p>The network configuration of the notebook run.</p>
+    #   @return [Types::NetworkConfig]
+    # @!attribute timeout_configuration
+    #   <p>The timeout configuration of the notebook run.</p>
+    #   @return [Types::TimeoutConfig]
+    # @!attribute environment_configuration
+    #   <p>The environment configuration of the notebook run, including image version and package settings.</p>
+    #   @return [Types::EnvironmentConfig]
+    # @!attribute storage_configuration
+    #   <p>The storage configuration of the notebook run, including the Amazon Simple Storage Service path and KMS key ARN.</p>
+    #   @return [Types::StorageConfig]
+    # @!attribute notification_configuration
+    #   <p>The notification configuration of the notebook run, including the notebook run states that trigger notifications.</p>
+    #   @return [Types::NotificationConfig]
+    # @!attribute trigger_source
+    #   <p>The source that triggered the notebook run.</p>
+    #   @return [Types::TriggerSource]
+    # @!attribute error
+    #   <p>The error details if the notebook run failed.</p>
+    #   @return [Types::NotebookRunError]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook run was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who created the notebook run.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp of when the notebook run was last updated.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The identifier of the user who last updated the notebook run.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The timestamp of when the notebook run started executing.</p>
+    #   @return [Time]
+    # @!attribute completed_at
+    #   <p>The timestamp of when the notebook run completed.</p>
+    #   @return [Time]
+    class StartNotebookRunOutput < Struct.new(
+      nil,
+      :id,
+      :domain_id,
+      :owning_project_id,
+      :notebook_id,
+      :schedule_id,
+      :status,
+      :cell_order,
+      :metadata,
+      :parameters,
+      :compute_configuration,
+      :network_configuration,
+      :timeout_configuration,
+      :environment_configuration,
+      :storage_configuration,
+      :notification_configuration,
+      :trigger_source,
+      :error,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :started_at,
+      :completed_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to sync the notebook.</p>
+    #   @return [String]
+    # @!attribute owning_project_identifier
+    #   <p>The identifier of the project that will own the synced notebook.</p>
+    #   @return [String]
+    # @!attribute source_location
+    #   <p>The source location of the notebook to sync. This specifies the Amazon Simple Storage Service URI of the notebook file.</p>
+    #   @return [Types::SourceLocation]
+    # @!attribute git_metadata
+    #   <p>The Git metadata for the notebook sync, including repository, branch, and commit information.</p>
+    #   @return [Types::GitMetadata]
+    # @!attribute notebook_id
+    #   <p>The identifier of an existing notebook to sync. If not specified, a new notebook is created.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the notebook. The name must be between 1 and 256 characters.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the notebook.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    class StartNotebookSyncInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :owning_project_identifier,
+      :source_location,
+      :git_metadata,
+      :notebook_id,
+      :name,
+      :description,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute notebook_id
+    #   <p>The identifier of the synced notebook.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the notebook sync.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the synced notebook.</p>
+    #   @return [String]
+    # @!attribute source_location
+    #   <p>The source location from which the notebook was synced.</p>
+    #   @return [Types::SourceLocation]
+    # @!attribute git_metadata
+    #   <p>The Git metadata associated with the synced notebook.</p>
+    #   @return [Types::GitMetadata]
+    # @!attribute name
+    #   <p>The name of the synced notebook.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the synced notebook.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook sync was started.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who started the notebook sync.</p>
+    #   @return [String]
+    class StartNotebookSyncOutput < Struct.new(
+      nil,
+      :notebook_id,
+      :status,
+      :domain_id,
+      :owning_project_id,
+      :source_location,
+      :git_metadata,
+      :name,
+      :description,
+      :created_at,
+      :created_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook run is stopped.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The identifier of the notebook run to stop.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    class StopNotebookRunInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :identifier,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the notebook run.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook run.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the notebook run.</p>
+    #   @return [String]
+    class StopNotebookRunOutput < Struct.new(
+      nil,
+      :id,
+      :domain_id,
+      :owning_project_id,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The storage configuration for a notebook run in Amazon SageMaker Unified Studio.</p>
+    # @!attribute project_s3_path
+    #   <p>The Amazon Simple Storage Service path for the project storage.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The ARN of the KMS key used for encryption.</p>
+    #   @return [String]
+    class StorageConfig < Struct.new(
+      nil,
+      :project_s3_path,
+      :kms_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14510,6 +17476,9 @@ module Aws::DataZone
     # @!attribute asset_scope
     #   <p>The asset scope of the subscribed asset.</p>
     #   @return [Types::AssetScope]
+    # @!attribute permissions
+    #   <p>The asset permissions.</p>
+    #   @return [Types::Permissions]
     class SubscribedAsset < Struct.new(
       nil,
       :asset_id,
@@ -14520,6 +17489,7 @@ module Aws::DataZone
       :granted_timestamp,
       :failure_timestamp,
       :asset_scope,
+      :permissions,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14544,6 +17514,9 @@ module Aws::DataZone
     # @!attribute asset_scope
     #   <p>The asset scope of the subscribed asset listing.</p>
     #   @return [Types::AssetScope]
+    # @!attribute permissions
+    #   <p>The asset permissions.</p>
+    #   @return [Types::Permissions]
     class SubscribedAssetListing < Struct.new(
       nil,
       :entity_id,
@@ -14552,6 +17525,59 @@ module Aws::DataZone
       :forms,
       :glossary_terms,
       :asset_scope,
+      :permissions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The group that subscribes to the asset.</p>
+    # @!attribute id
+    #   <p>The ID of the subscribed group.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the subscribed group.</p>
+    #   @return [String]
+    class SubscribedGroup < Struct.new(
+      nil,
+      :id,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The details of the subscribed group.</p>
+    # @!attribute identifier
+    #   <p>The ID of the subscribed group.</p>
+    #   @return [String]
+    class SubscribedGroupInput < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The IAM principal that subscribes to the asset.</p>
+    # @!attribute principal_arn
+    #   <p>The ARN of the subscribed IAM principal.</p>
+    #   @return [String]
+    class SubscribedIamPrincipal < Struct.new(
+      nil,
+      :principal_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The details of the subscribed IAM principal.</p>
+    # @!attribute identifier
+    #   <p>The ARN of the subscribed IAM principal.</p>
+    #   @return [String]
+    class SubscribedIamPrincipalInput < Struct.new(
+      nil,
+      :identifier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14629,14 +17655,29 @@ module Aws::DataZone
     # @!attribute project
     #   <p>The project that has the subscription grant.</p>
     #   @return [Types::SubscribedProject]
+    # @!attribute user
+    #   <p>The subscribed user.</p>
+    #   @return [Types::SubscribedUser]
+    # @!attribute group
+    #   <p>The subscribed group.</p>
+    #   @return [Types::SubscribedGroup]
+    # @!attribute iam
+    #   <p>The subscribed IAM principal.</p>
+    #   @return [Types::SubscribedIamPrincipal]
     class SubscribedPrincipal < Struct.new(
       :project,
+      :user,
+      :group,
+      :iam,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class Project < SubscribedPrincipal; end
+      class User < SubscribedPrincipal; end
+      class Group < SubscribedPrincipal; end
+      class Iam < SubscribedPrincipal; end
       class Unknown < SubscribedPrincipal; end
     end
 
@@ -14644,14 +17685,29 @@ module Aws::DataZone
     # @!attribute project
     #   <p>The project that is to be given a subscription grant.</p>
     #   @return [Types::SubscribedProjectInput]
+    # @!attribute user
+    #   <p>The subscribed user.</p>
+    #   @return [Types::SubscribedUserInput]
+    # @!attribute group
+    #   <p>The subscribed group.</p>
+    #   @return [Types::SubscribedGroupInput]
+    # @!attribute iam
+    #   <p>The subscribed IAM principal.</p>
+    #   @return [Types::SubscribedIamPrincipalInput]
     class SubscribedPrincipalInput < Struct.new(
       :project,
+      :user,
+      :group,
+      :iam,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class Project < SubscribedPrincipalInput; end
+      class User < SubscribedPrincipalInput; end
+      class Group < SubscribedPrincipalInput; end
+      class Iam < SubscribedPrincipalInput; end
       class Unknown < SubscribedPrincipalInput; end
     end
 
@@ -14715,6 +17771,34 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The subscribed user.</p>
+    # @!attribute id
+    #   <p>The ID of the subscribed user.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>The subscribed user details.</p>
+    #   @return [Types::UserProfileDetails]
+    class SubscribedUser < Struct.new(
+      nil,
+      :id,
+      :details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The subscribed user.</p>
+    # @!attribute identifier
+    #   <p>The ID of the subscribed user.</p>
+    #   @return [String]
+    class SubscribedUserInput < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The details of the subscription grant.</p>
     # @!attribute id
     #   <p>The identifier of the subscription grant.</p>
@@ -14734,6 +17818,9 @@ module Aws::DataZone
     # @!attribute updated_at
     #   <p>The timestamp of when the subscription grant was updated.</p>
     #   @return [Time]
+    # @!attribute environment_id
+    #   <p>The environment ID of the subscription grant.</p>
+    #   @return [String]
     # @!attribute subscription_target_id
     #   <p>The identifier of the target of the subscription grant.</p>
     #   @return [String]
@@ -14759,6 +17846,7 @@ module Aws::DataZone
       :domain_id,
       :created_at,
       :updated_at,
+      :environment_id,
       :subscription_target_id,
       :granted_entity,
       :status,
@@ -14947,6 +18035,9 @@ module Aws::DataZone
     # @!attribute provider
     #   <p>The provider of the subscription target.</p>
     #   @return [String]
+    # @!attribute subscription_grant_creation_mode
+    #   <p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>
+    #   @return [String]
     class SubscriptionTargetSummary < Struct.new(
       nil,
       :id,
@@ -14964,6 +18055,7 @@ module Aws::DataZone
       :applicable_asset_types,
       :subscription_target_config,
       :provider,
+      :subscription_grant_creation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15130,6 +18222,18 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The timeout configuration for a notebook run in Amazon SageMaker Unified Studio.</p>
+    # @!attribute run_timeout_in_minutes
+    #   <p>The timeout for the notebook run, in minutes. The minimum value is 60 minutes (1 hour), the maximum value is 1440 minutes (24 hours), and the default value is 720 minutes (12 hours).</p>
+    #   @return [Integer]
+    class TimeoutConfig < Struct.new(
+      nil,
+      :run_timeout_in_minutes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The topic of the notification.</p>
     # @!attribute subject
     #   <p>The subject of the resource mentioned in a notification.</p>
@@ -15145,6 +18249,22 @@ module Aws::DataZone
       :subject,
       :resource,
       :role,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The source that triggered a notebook run in Amazon SageMaker Unified Studio.</p>
+    # @!attribute type
+    #   <p>The type of the trigger source. Valid values are <code>MANUAL</code>, <code>SCHEDULED</code>, and <code>WORKFLOW</code>.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the trigger source.</p>
+    #   @return [String]
+    class TriggerSource < Struct.new(
+      nil,
+      :type,
+      :name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15355,6 +18475,9 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute configurations
+    #   <p>The configurations of the connection.</p>
+    #   @return [Array<Types::Configuration>]
     # @!attribute domain_identifier
     #   <p>The ID of the domain where a connection is to be updated.</p>
     #   @return [String]
@@ -15372,6 +18495,7 @@ module Aws::DataZone
     #   @return [Types::ConnectionPropertiesPatch]
     class UpdateConnectionInput < Struct.new(
       nil,
+      :configurations,
       :domain_identifier,
       :identifier,
       :description,
@@ -15382,6 +18506,9 @@ module Aws::DataZone
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute configurations
+    #   <p>The configurations of the connection.</p>
+    #   @return [Array<Types::Configuration>]
     # @!attribute connection_id
     #   <p>The ID of the connection.</p>
     #   @return [String]
@@ -15412,8 +18539,12 @@ module Aws::DataZone
     # @!attribute type
     #   <p>The connection type.</p>
     #   @return [String]
+    # @!attribute scope
+    #   <p>The scope of the connection.</p>
+    #   @return [String]
     class UpdateConnectionOutput < Struct.new(
       nil,
+      :configurations,
       :connection_id,
       :description,
       :domain_id,
@@ -15424,6 +18555,7 @@ module Aws::DataZone
       :project_id,
       :props,
       :type,
+      :scope,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15800,6 +18932,9 @@ module Aws::DataZone
     # @!attribute user_parameters
     #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
     #   @return [Array<Types::CustomParameter>]
+    # @!attribute blueprint_category
+    #   <p>The category to update. The only valid value is <code>TOOLING</code>.</p>
+    #   @return [String]
     class UpdateEnvironmentBlueprintInput < Struct.new(
       nil,
       :domain_identifier,
@@ -15807,6 +18942,7 @@ module Aws::DataZone
       :description,
       :provisioning_properties,
       :user_parameters,
+      :blueprint_category,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15836,6 +18972,9 @@ module Aws::DataZone
     # @!attribute glossary_terms
     #   <p>The glossary terms to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
     #   @return [Array<String>]
+    # @!attribute blueprint_category
+    #   <p>The category of the environment blueprint. The only valid value is <code>TOOLING</code>.</p>
+    #   @return [String]
     # @!attribute created_at
     #   <p>The timestamp of when the environment blueprint was created.</p>
     #   @return [Time]
@@ -15852,6 +18991,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at,
       keyword_init: true
@@ -15880,6 +19020,9 @@ module Aws::DataZone
     # @!attribute user_parameters
     #   <p>The user parameters of the environment.</p>
     #   @return [Array<Types::EnvironmentParameter>]
+    # @!attribute environment_configuration_name
+    #   <p>The configuration name of the environment.</p>
+    #   @return [String]
     class UpdateEnvironmentInput < Struct.new(
       nil,
       :domain_identifier,
@@ -15889,6 +19032,7 @@ module Aws::DataZone
       :glossary_terms,
       :blueprint_version,
       :user_parameters,
+      :environment_configuration_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15960,6 +19104,9 @@ module Aws::DataZone
     # @!attribute environment_configuration_id
     #   <p>The configuration ID of the environment.</p>
     #   @return [String]
+    # @!attribute environment_configuration_name
+    #   <p>The configuration name of the environment.</p>
+    #   @return [String]
     class UpdateEnvironmentOutput < Struct.new(
       nil,
       :project_id,
@@ -15984,6 +19131,7 @@ module Aws::DataZone
       :deployment_properties,
       :environment_blueprint_id,
       :environment_configuration_id,
+      :environment_configuration_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16263,12 +19411,162 @@ module Aws::DataZone
     # @!attribute group_name
     #   <p>The name of the group profile that is updated.</p>
     #   @return [String]
+    # @!attribute role_principal_arn
+    #   <p>The ARN of the IAM role principal. This role is associated with the updated group profile.</p>
+    #   @return [String]
+    # @!attribute role_principal_id
+    #   <p>The unique identifier of the IAM role principal. This principal is associated with the updated group profile.</p>
+    #   @return [String]
     class UpdateGroupProfileOutput < Struct.new(
       nil,
       :domain_id,
       :id,
       :status,
       :group_name,
+      :role_principal_arn,
+      :role_principal_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook exists.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The identifier of the notebook to update.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The updated description of the notebook.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The updated status of the notebook.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The updated name of the notebook.</p>
+    #   @return [String]
+    # @!attribute cell_order
+    #   <p>The updated ordered list of cells in the notebook.</p>
+    #   @return [Array<Types::CellInformation>]
+    # @!attribute type
+    #   <p>The updated type of the notebook.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>The updated metadata for the notebook, specified as key-value pairs.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute parameters
+    #   <p>The updated sensitive parameters for the notebook, specified as key-value pairs.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute environment_configuration
+    #   <p>The updated environment configuration for the notebook.</p>
+    #   @return [Types::EnvironmentConfig]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    class UpdateNotebookInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :identifier,
+      :description,
+      :status,
+      :name,
+      :cell_order,
+      :type,
+      :metadata,
+      :parameters,
+      :environment_configuration,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the notebook.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the notebook.</p>
+    #   @return [String]
+    # @!attribute owning_project_id
+    #   <p>The identifier of the project that owns the notebook.</p>
+    #   @return [String]
+    # @!attribute domain_id
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain.</p>
+    #   @return [String]
+    # @!attribute cell_order
+    #   <p>The ordered list of cells in the notebook.</p>
+    #   @return [Array<Types::CellInformation>]
+    # @!attribute status
+    #   <p>The status of the notebook.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the notebook.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the notebook.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp of when the notebook was created.</p>
+    #   @return [Time]
+    # @!attribute created_by
+    #   <p>The identifier of the user who created the notebook.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp of when the notebook was last updated.</p>
+    #   @return [Time]
+    # @!attribute updated_by
+    #   <p>The identifier of the user who last updated the notebook.</p>
+    #   @return [String]
+    # @!attribute locked_by
+    #   <p>The identifier of the user who locked the notebook.</p>
+    #   @return [String]
+    # @!attribute locked_at
+    #   <p>The timestamp of when the notebook was locked.</p>
+    #   @return [Time]
+    # @!attribute lock_expires_at
+    #   <p>The timestamp of when the notebook lock expires.</p>
+    #   @return [Time]
+    # @!attribute compute_id
+    #   <p>The identifier of the compute associated with the notebook.</p>
+    #   @return [String]
+    # @!attribute metadata
+    #   <p>The metadata of the notebook.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute parameters
+    #   <p>The sensitive parameters of the notebook.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute environment_configuration
+    #   <p>The environment configuration of the notebook.</p>
+    #   @return [Types::EnvironmentConfig]
+    # @!attribute error
+    #   <p>The error details if the notebook is in a failed state.</p>
+    #   @return [Types::NotebookError]
+    # @!attribute git_metadata
+    #   <p>The Git metadata associated with the notebook.</p>
+    #   @return [Types::GitMetadata]
+    class UpdateNotebookOutput < Struct.new(
+      nil,
+      :id,
+      :name,
+      :owning_project_id,
+      :domain_id,
+      :cell_order,
+      :status,
+      :type,
+      :description,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :locked_by,
+      :locked_at,
+      :lock_expires_at,
+      :compute_id,
+      :metadata,
+      :parameters,
+      :environment_configuration,
+      :error,
+      :git_metadata,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16286,6 +19584,9 @@ module Aws::DataZone
     # @!attribute description
     #   <p>The description to be updated as part of the <code>UpdateProject</code> action.</p>
     #   @return [String]
+    # @!attribute resource_tags
+    #   <p>The resource tags of the project.</p>
+    #   @return [Hash<String, String>]
     # @!attribute glossary_terms
     #   <p>The glossary terms to be updated as part of the <code>UpdateProject</code> action.</p>
     #   @return [Array<String>]
@@ -16307,6 +19608,7 @@ module Aws::DataZone
       :identifier,
       :name,
       :description,
+      :resource_tags,
       :glossary_terms,
       :domain_unit_id,
       :environment_deployment_details,
@@ -16344,6 +19646,9 @@ module Aws::DataZone
     # @!attribute last_updated_at
     #   <p>The timestamp of when the project was last updated.</p>
     #   @return [Time]
+    # @!attribute resource_tags
+    #   <p>The resource tags of the project.</p>
+    #   @return [Array<Types::ResourceTag>]
     # @!attribute glossary_terms
     #   <p>The glossary terms of the project that are to be updated.</p>
     #   @return [Array<String>]
@@ -16359,6 +19664,9 @@ module Aws::DataZone
     # @!attribute environment_deployment_details
     #   <p>The environment deployment details of the project.</p>
     #   @return [Types::EnvironmentDeploymentDetails]
+    # @!attribute project_category
+    #   <p>The category of the project.</p>
+    #   @return [String]
     class UpdateProjectOutput < Struct.new(
       nil,
       :domain_id,
@@ -16370,11 +19678,13 @@ module Aws::DataZone
       :created_by,
       :created_at,
       :last_updated_at,
+      :resource_tags,
       :glossary_terms,
       :domain_unit_id,
       :project_profile_id,
       :user_parameters,
       :environment_deployment_details,
+      :project_category,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16395,6 +19705,15 @@ module Aws::DataZone
     # @!attribute status
     #   <p>The status of a project profile.</p>
     #   @return [String]
+    # @!attribute project_resource_tags
+    #   <p>The resource tags of the project profile.</p>
+    #   @return [Array<Types::ResourceTagParameter>]
+    # @!attribute allow_custom_project_resource_tags
+    #   <p>Specifies whether custom project resource tags are supported.</p>
+    #   @return [Boolean]
+    # @!attribute project_resource_tags_description
+    #   <p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>
+    #   @return [String]
     # @!attribute environment_configurations
     #   <p>The environment configurations of a project profile.</p>
     #   @return [Array<Types::EnvironmentConfiguration>]
@@ -16408,6 +19727,9 @@ module Aws::DataZone
       :name,
       :description,
       :status,
+      :project_resource_tags,
+      :allow_custom_project_resource_tags,
+      :project_resource_tags_description,
       :environment_configurations,
       :domain_unit_identifier,
       keyword_init: true
@@ -16429,6 +19751,15 @@ module Aws::DataZone
     #   @return [String]
     # @!attribute status
     #   <p>The status of the project profile.</p>
+    #   @return [String]
+    # @!attribute project_resource_tags
+    #   <p>The resource tags of the project profile.</p>
+    #   @return [Array<Types::ResourceTagParameter>]
+    # @!attribute allow_custom_project_resource_tags
+    #   <p>Specifies whether custom project resource tags are supported.</p>
+    #   @return [Boolean]
+    # @!attribute project_resource_tags_description
+    #   <p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>
     #   @return [String]
     # @!attribute environment_configurations
     #   <p>The environment configurations of a project profile.</p>
@@ -16452,11 +19783,44 @@ module Aws::DataZone
       :name,
       :description,
       :status,
+      :project_resource_tags,
+      :allow_custom_project_resource_tags,
+      :project_resource_tags_description,
       :environment_configurations,
       :created_by,
       :created_at,
       :last_updated_at,
       :domain_unit_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute domain_identifier
+    #   <p>The ID of the domain where the root domain unit owner is to be updated.</p>
+    #   @return [String]
+    # @!attribute current_owner
+    #   <p>The current owner of the root domain unit.</p>
+    #   @return [String]
+    # @!attribute new_owner
+    #   <p>The new owner of the root domain unit.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    #   @return [String]
+    class UpdateRootDomainUnitOwnerInput < Struct.new(
+      nil,
+      :domain_identifier,
+      :current_owner,
+      :new_owner,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateRootDomainUnitOwnerOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16605,6 +19969,9 @@ module Aws::DataZone
     # @!attribute updated_at
     #   <p>The timestamp of when the subscription grant status is to be updated.</p>
     #   @return [Time]
+    # @!attribute environment_id
+    #   <p>The ID of the environment in which the subscription grant is updated.</p>
+    #   @return [String]
     # @!attribute subscription_target_id
     #   <p>The identifier of the subscription target whose subscription grant status is to be updated.</p>
     #   @return [String]
@@ -16630,6 +19997,7 @@ module Aws::DataZone
       :domain_id,
       :created_at,
       :updated_at,
+      :environment_id,
       :subscription_target_id,
       :granted_entity,
       :status,
@@ -16749,6 +20117,9 @@ module Aws::DataZone
     # @!attribute provider
     #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
+    # @!attribute subscription_grant_creation_mode
+    #   <p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>
+    #   @return [String]
     class UpdateSubscriptionTargetInput < Struct.new(
       nil,
       :domain_identifier,
@@ -16760,6 +20131,7 @@ module Aws::DataZone
       :subscription_target_config,
       :manage_access_role,
       :provider,
+      :subscription_grant_creation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16810,6 +20182,9 @@ module Aws::DataZone
     # @!attribute provider
     #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     #   @return [String]
+    # @!attribute subscription_grant_creation_mode
+    #   <p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>
+    #   @return [String]
     class UpdateSubscriptionTargetOutput < Struct.new(
       nil,
       :id,
@@ -16827,6 +20202,7 @@ module Aws::DataZone
       :applicable_asset_types,
       :subscription_target_config,
       :provider,
+      :subscription_grant_creation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16844,12 +20220,16 @@ module Aws::DataZone
     # @!attribute status
     #   <p>The status of the user profile that are to be updated.</p>
     #   @return [String]
+    # @!attribute session_name
+    #   <p>The session name for IAM role sessions.</p>
+    #   @return [String]
     class UpdateUserProfileInput < Struct.new(
       nil,
       :domain_identifier,
       :user_identifier,
       :type,
       :status,
+      :session_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -16868,7 +20248,7 @@ module Aws::DataZone
     #   <p>The status of the user profile.</p>
     #   @return [String]
     # @!attribute details
-    #   <p>The details of the user profile in Amazon DataZone.</p>
+    #   <p>The results of the UpdateUserProfile action.</p>
     #   @return [Types::UserProfileDetails]
     class UpdateUserProfileOutput < Struct.new(
       nil,
@@ -16926,12 +20306,12 @@ module Aws::DataZone
       class Unknown < UserPolicyGrantPrincipal; end
     end
 
-    # <p>The details of the user profile in Amazon DataZone.</p>
+    # <p>The user profile details.</p>
     # @!attribute iam
-    #   <p>The IAM details included in the user profile details.</p>
+    #   <p>The IAM details of the user profile.</p>
     #   @return [Types::IamUserProfileDetails]
     # @!attribute sso
-    #   <p>The single sign-on details included in the user profile details.</p>
+    #   <p>The SSO details of the user profile.</p>
     #   @return [Types::SsoUserProfileDetails]
     class UserProfileDetails < Struct.new(
       :iam,
@@ -16997,6 +20377,114 @@ module Aws::DataZone
     class ValidationException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The VPC connection properties used when creating a connection.</p>
+    # @!attribute vpc_id
+    #   <p>The identifier of the VPC. Must match the pattern <code>^vpc-[a-z0-9]+$</code>. Maximum length of 32.</p>
+    #   @return [String]
+    # @!attribute subnet_ids
+    #   <p>The subnet IDs of the VPC connection. You can specify between 1 and 16 subnet IDs.</p>
+    #   @return [Array<String>]
+    # @!attribute security_group_id
+    #   <p>The security group ID of the VPC connection. Must match the pattern <code>^sg-[a-z0-9]+$</code>. Maximum length of 32.</p>
+    #   @return [String]
+    class VpcPropertiesInput < Struct.new(
+      nil,
+      :vpc_id,
+      :subnet_ids,
+      :security_group_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The VPC connection properties returned in responses.</p>
+    # @!attribute vpc_id
+    #   <p>The identifier of the VPC.</p>
+    #   @return [String]
+    # @!attribute subnet_ids
+    #   <p>The subnet IDs of the VPC connection.</p>
+    #   @return [Array<String>]
+    # @!attribute status
+    #   <p>The status of the VPC connection.</p>
+    #   @return [String]
+    # @!attribute security_group_id
+    #   <p>The security group ID of the VPC connection.</p>
+    #   @return [String]
+    # @!attribute glue_connection_names
+    #   <p>The Amazon Web Services Glue connection names associated with the VPC connection.</p>
+    #   @return [Array<String>]
+    class VpcPropertiesOutput < Struct.new(
+      nil,
+      :vpc_id,
+      :subnet_ids,
+      :status,
+      :security_group_id,
+      :glue_connection_names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The VPC connection properties used when updating a connection.</p>
+    # @!attribute vpc_id
+    #   <p>The identifier of the VPC.</p>
+    #   @return [String]
+    # @!attribute subnet_ids
+    #   <p>The subnet IDs of the VPC connection.</p>
+    #   @return [Array<String>]
+    # @!attribute security_group_id
+    #   <p>The security group ID of the VPC connection.</p>
+    #   @return [String]
+    class VpcPropertiesPatch < Struct.new(
+      nil,
+      :vpc_id,
+      :subnet_ids,
+      :security_group_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon MWAA properties.</p>
+    # @!attribute mwaa_environment_name
+    #   <p>The MWAA environment name.</p>
+    #   @return [String]
+    class WorkflowsMwaaPropertiesInput < Struct.new(
+      nil,
+      :mwaa_environment_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The Amazon MWAA properties.</p>
+    # @!attribute mwaa_environment_name
+    #   <p>The MWAA environment name.</p>
+    #   @return [String]
+    class WorkflowsMwaaPropertiesOutput < Struct.new(
+      nil,
+      :mwaa_environment_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The MWAA serverless properties.</p>
+    class WorkflowsServerlessPropertiesInput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The MWAA serverless properties.</p>
+    class WorkflowsServerlessPropertiesOutput < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -1,6 +1,17 @@
 module Aws::BCMDataExports
   module Types
 
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class Column
       include Smithy::Schema::Structure
 
@@ -19,6 +30,7 @@ module Aws::BCMDataExports
     module CompressionOption
       GZIP: String
       PARQUET: String
+      ZIP: String
     end
 
     class CreateExportRequest
@@ -137,6 +149,7 @@ module Aws::BCMDataExports
       INSUFFICIENT_PERMISSION: String
       BILL_OWNER_CHANGED: String
       INTERNAL_FAILURE: String
+      DEPRECATED: String
     end
 
     class Export
@@ -458,6 +471,7 @@ module Aws::BCMDataExports
 
       def initialize: (
         ?s3_bucket: String,
+        ?s3_bucket_owner: String,
         ?s3_prefix: String,
         ?s3_region: String,
         ?s3_output_configurations: Types::S3OutputConfigurations,
@@ -465,6 +479,7 @@ module Aws::BCMDataExports
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor s3_bucket: String?
+      attr_accessor s3_bucket_owner: String?
       attr_accessor s3_prefix: String?
       attr_accessor s3_region: String?
       attr_accessor s3_output_configurations: Types::S3OutputConfigurations?
@@ -489,6 +504,8 @@ module Aws::BCMDataExports
 
     module S3OutputType
       CUSTOM: String
+      ATHENA: String
+      REDSHIFT: String
     end
 
     class ServiceQuotaExceededException

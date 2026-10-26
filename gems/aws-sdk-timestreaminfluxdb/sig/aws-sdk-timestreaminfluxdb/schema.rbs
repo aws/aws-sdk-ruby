@@ -5,16 +5,34 @@ module Aws::TimestreamInfluxDB
     AccessDeniedException: StructureShape
     AllocatedStorage: IntegerShape
     Arn: StringShape
+    AutomatedBackupRetentionDays: IntegerShape
+    AutomatedDbBackupType: EnumShape
+    AwsCronSchedule: StringShape
     Bucket: StringShape
+    ClusterConfiguration: StructureShape
     ClusterDeploymentType: EnumShape
     ClusterStatus: EnumShape
     ConflictException: StructureShape
+    CreateDbBackupInput: StructureShape
+    CreateDbBackupOutput: StructureShape
     CreateDbClusterInput: StructureShape
     CreateDbClusterOutput: StructureShape
     CreateDbInstanceInput: StructureShape
     CreateDbInstanceOutput: StructureShape
     CreateDbParameterGroupInput: StructureShape
     CreateDbParameterGroupOutput: StructureShape
+    DataFusionRuntimeType: EnumShape
+    Date: StringShape
+    DbBackupConfiguration: StructureShape
+    DbBackupConfigurationInputList: ListShape
+    DbBackupConfigurationOutput: StructureShape
+    DbBackupConfigurationOutputList: ListShape
+    DbBackupId: StringShape
+    DbBackupName: StringShape
+    DbBackupStatus: EnumShape
+    DbBackupSummary: StructureShape
+    DbBackupSummaryList: ListShape
+    DbBackupType: EnumShape
     DbClusterId: StringShape
     DbClusterName: StringShape
     DbClusterSummary: StructureShape
@@ -22,6 +40,7 @@ module Aws::TimestreamInfluxDB
     DbInstanceForClusterSummary: StructureShape
     DbInstanceForClusterSummaryList: ListShape
     DbInstanceId: StringShape
+    DbInstanceIdList: ListShape
     DbInstanceIdentifier: StringShape
     DbInstanceName: StringShape
     DbInstanceSummary: StructureShape
@@ -32,7 +51,11 @@ module Aws::TimestreamInfluxDB
     DbParameterGroupName: StringShape
     DbParameterGroupSummary: StructureShape
     DbParameterGroupSummaryList: ListShape
+    DbResourceId: StringShape
+    DbResourceName: StringShape
     DbStorageType: EnumShape
+    DeleteDbBackupInput: StructureShape
+    DeleteDbBackupOutput: StructureShape
     DeleteDbClusterInput: StructureShape
     DeleteDbClusterOutput: StructureShape
     DeleteDbInstanceInput: StructureShape
@@ -40,16 +63,26 @@ module Aws::TimestreamInfluxDB
     DeploymentType: EnumShape
     Duration: StructureShape
     DurationType: EnumShape
+    EngineType: EnumShape
     FailoverMode: EnumShape
+    GetDbBackupInput: StructureShape
+    GetDbBackupOutput: StructureShape
     GetDbClusterInput: StructureShape
     GetDbClusterOutput: StructureShape
     GetDbInstanceInput: StructureShape
     GetDbInstanceOutput: StructureShape
     GetDbParameterGroupInput: StructureShape
     GetDbParameterGroupOutput: StructureShape
+    IanaTimezone: StringShape
     InfluxDBv2Parameters: StructureShape
+    InfluxDBv3CoreParameters: StructureShape
+    InfluxDBv3EnterpriseParameters: StructureShape
     InstanceMode: EnumShape
+    InstanceModeList: ListShape
     InternalServerException: StructureShape
+    KmsKeyId: StringShape
+    ListDbBackupsInput: StructureShape
+    ListDbBackupsOutput: StructureShape
     ListDbClustersInput: StructureShape
     ListDbClustersOutput: StructureShape
     ListDbInstancesForClusterInput: StructureShape
@@ -61,17 +94,33 @@ module Aws::TimestreamInfluxDB
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     LogDeliveryConfiguration: StructureShape
+    LogFormats: EnumShape
     LogLevel: EnumShape
+    MaintenanceSchedule: StructureShape
+    MaintenanceWindow: StringShape
     MaxResults: IntegerShape
     NetworkType: EnumShape
     NextToken: StringShape
     Organization: StringShape
     Parameters: UnionShape
     Password: StringShape
+    PercentOrAbsoluteLong: UnionShape
+    PluginRepositorySecretArn: StringShape
     Port: IntegerShape
+    RebootDbClusterInput: StructureShape
+    RebootDbClusterOutput: StructureShape
+    RebootDbInstanceInput: StructureShape
+    RebootDbInstanceOutput: StructureShape
     RequestTagMap: MapShape
+    ResourceDeploymentType: EnumShape
     ResourceNotFoundException: StructureShape
+    ResourceType: EnumShape
     ResponseTagMap: MapShape
+    RestoreFromDbBackupInput: StructureShape
+    RestoreFromDbBackupOutput: StructureShape
+    RestoreMode: EnumShape
+    RestoreStatus: EnumShape
+    RetentionDays: IntegerShape
     S3Configuration: StructureShape
     ServiceQuotaExceededException: StructureShape
     Status: EnumShape

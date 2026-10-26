@@ -114,6 +114,19 @@ module Aws::CloudTrail
       attr_accessor not_ends_with: Array[String]?
     end
 
+    class AggregationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?templates: Array[String],
+        ?event_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor templates: Array[String]?
+      attr_accessor event_category: String?
+    end
+
     module BillingMode
       EXTENDABLE_RETENTION_PRICING: String
       FIXED_RETENTION_PRICING: String
@@ -465,6 +478,7 @@ module Aws::CloudTrail
         ?kms_key_id: String,
         ?is_organization_trail: bool,
         ?tags_list: Array[Types::Tag],
+        ?recursive_logging: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -480,6 +494,7 @@ module Aws::CloudTrail
       attr_accessor kms_key_id: String?
       attr_accessor is_organization_trail: bool?
       attr_accessor tags_list: Array[Types::Tag]?
+      attr_accessor recursive_logging: bool?
     end
 
     class CreateTrailResponse
@@ -499,6 +514,7 @@ module Aws::CloudTrail
         ?cloud_watch_logs_role_arn: String,
         ?kms_key_id: String,
         ?is_organization_trail: bool,
+        ?recursive_logging: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -515,6 +531,7 @@ module Aws::CloudTrail
       attr_accessor cloud_watch_logs_role_arn: String?
       attr_accessor kms_key_id: String?
       attr_accessor is_organization_trail: bool?
+      attr_accessor recursive_logging: bool?
     end
 
     class DashboardDetail
@@ -870,6 +887,10 @@ module Aws::CloudTrail
       Insight: String
     end
 
+    module EventCategoryAggregation
+      Data: String
+    end
+
     class EventDataStore
       include Smithy::Schema::Structure
 
@@ -1124,10 +1145,12 @@ module Aws::CloudTrail
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?trail_name: String,
         ?event_data_store: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor trail_name: String?
       attr_accessor event_data_store: String?
     end
 
@@ -1135,15 +1158,19 @@ module Aws::CloudTrail
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?trail_arn: String,
         ?event_data_store_arn: String,
         ?max_event_size: String,
         ?context_key_selectors: Array[Types::ContextKeySelector],
+        ?aggregation_configurations: Array[Types::AggregationConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor trail_arn: String?
       attr_accessor event_data_store_arn: String?
       attr_accessor max_event_size: String?
       attr_accessor context_key_selectors: Array[Types::ContextKeySelector]?
+      attr_accessor aggregation_configurations: Array[Types::AggregationConfiguration]?
     end
 
     class GetEventDataStoreRequest
@@ -1580,10 +1607,12 @@ module Aws::CloudTrail
 
       def initialize: (
         ?insight_type: String,
+        ?event_categories: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor insight_type: String?
+      attr_accessor event_categories: Array[String]?
     end
 
     module InsightType
@@ -2110,10 +2139,57 @@ module Aws::CloudTrail
       attr_accessor next_token: String?
     end
 
+    module ListInsightsDataDimensionKey
+      EVENT_ID: String
+      EVENT_NAME: String
+      EVENT_SOURCE: String
+    end
+
+    class ListInsightsDataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insight_source: String,
+        ?data_type: String,
+        ?dimensions: Hash[String, String],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insight_source: String?
+      attr_accessor data_type: String?
+      attr_accessor dimensions: Hash[String, String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListInsightsDataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::Event],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::Event]?
+      attr_accessor next_token: String?
+    end
+
+    module ListInsightsDataType
+      INSIGHTS_EVENTS: String
+    end
+
     class ListInsightsMetricDataRequest
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?trail_name: String,
         ?event_source: String,
         ?event_name: String,
         ?insight_type: String,
@@ -2127,6 +2203,7 @@ module Aws::CloudTrail
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor trail_name: String?
       attr_accessor event_source: String?
       attr_accessor event_name: String?
       attr_accessor insight_type: String?
@@ -2143,6 +2220,7 @@ module Aws::CloudTrail
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?trail_arn: String,
         ?event_source: String,
         ?event_name: String,
         ?insight_type: String,
@@ -2153,6 +2231,7 @@ module Aws::CloudTrail
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor trail_arn: String?
       attr_accessor event_source: String?
       attr_accessor event_name: String?
       attr_accessor insight_type: String?
@@ -2459,30 +2538,38 @@ module Aws::CloudTrail
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?trail_name: String,
         ?event_data_store: String,
         ?max_event_size: String,
         ?context_key_selectors: Array[Types::ContextKeySelector],
+        ?aggregation_configurations: Array[Types::AggregationConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor trail_name: String?
       attr_accessor event_data_store: String?
       attr_accessor max_event_size: String?
       attr_accessor context_key_selectors: Array[Types::ContextKeySelector]?
+      attr_accessor aggregation_configurations: Array[Types::AggregationConfiguration]?
     end
 
     class PutEventConfigurationResponse
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?trail_arn: String,
         ?event_data_store_arn: String,
         ?max_event_size: String,
         ?context_key_selectors: Array[Types::ContextKeySelector],
+        ?aggregation_configurations: Array[Types::AggregationConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor trail_arn: String?
       attr_accessor event_data_store_arn: String?
       attr_accessor max_event_size: String?
       attr_accessor context_key_selectors: Array[Types::ContextKeySelector]?
+      attr_accessor aggregation_configurations: Array[Types::AggregationConfiguration]?
     end
 
     class PutEventSelectorsRequest
@@ -2967,6 +3054,11 @@ module Aws::CloudTrail
       attr_accessor advanced_event_selectors: Array[Types::AdvancedEventSelector]?
     end
 
+    module SourceEventCategory
+      Management: String
+      Data: String
+    end
+
     class StartDashboardRefreshRequest
       include Smithy::Schema::Structure
 
@@ -3209,6 +3301,12 @@ module Aws::CloudTrail
       attr_accessor message: String?
     end
 
+    module Template
+      API_ACTIVITY: String
+      RESOURCE_ACCESS: String
+      USER_ACTIONS: String
+    end
+
     class ThrottlingException
       include Smithy::Schema::Structure
 
@@ -3240,6 +3338,7 @@ module Aws::CloudTrail
         ?has_custom_event_selectors: bool,
         ?has_insight_selectors: bool,
         ?is_organization_trail: bool,
+        ?recursive_logging: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3259,6 +3358,7 @@ module Aws::CloudTrail
       attr_accessor has_custom_event_selectors: bool?
       attr_accessor has_insight_selectors: bool?
       attr_accessor is_organization_trail: bool?
+      attr_accessor recursive_logging: bool?
     end
 
     class TrailAlreadyExistsException
@@ -3478,6 +3578,7 @@ module Aws::CloudTrail
         ?cloud_watch_logs_role_arn: String,
         ?kms_key_id: String,
         ?is_organization_trail: bool,
+        ?recursive_logging: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3492,6 +3593,7 @@ module Aws::CloudTrail
       attr_accessor cloud_watch_logs_role_arn: String?
       attr_accessor kms_key_id: String?
       attr_accessor is_organization_trail: bool?
+      attr_accessor recursive_logging: bool?
     end
 
     class UpdateTrailResponse
@@ -3511,6 +3613,7 @@ module Aws::CloudTrail
         ?cloud_watch_logs_role_arn: String,
         ?kms_key_id: String,
         ?is_organization_trail: bool,
+        ?recursive_logging: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3527,6 +3630,7 @@ module Aws::CloudTrail
       attr_accessor cloud_watch_logs_role_arn: String?
       attr_accessor kms_key_id: String?
       attr_accessor is_organization_trail: bool?
+      attr_accessor recursive_logging: bool?
     end
 
     class Widget

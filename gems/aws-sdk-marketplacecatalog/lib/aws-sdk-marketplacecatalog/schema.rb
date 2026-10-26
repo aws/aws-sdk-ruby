@@ -6,6 +6,8 @@ module Aws::MarketplaceCatalog
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
+    AMISecurityFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#AMISecurityFilters", name: "AMISecurityFilters")
+    AMISecuritySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#AMISecuritySummary", name: "AMISecuritySummary")
     ARN = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ARN", name: "ARN", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[a-zA-Z0-9:*/-]+$"})
     AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#AccessDeniedException", name: "AccessDeniedException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     AmiProductEntityIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#AmiProductEntityIdFilter", name: "AmiProductEntityIdFilter")
@@ -23,6 +25,12 @@ module Aws::MarketplaceCatalog
     AmiProductVisibilityFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#AmiProductVisibilityFilter", name: "AmiProductVisibilityFilter")
     AmiProductVisibilityFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#AmiProductVisibilityFilterValueList", name: "AmiProductVisibilityFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     AmiProductVisibilityString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#AmiProductVisibilityString", name: "AmiProductVisibilityString")
+    AssessmentIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#AssessmentIdentifier", name: "AssessmentIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(assessment-[a-zA-Z0-9]+|arn:[a-zA-Z0-9-]+:[a-zA-Z0-9-]+:[a-zA-Z0-9-]*:[0-9]*:[a-zA-Z0-9-]+/Assessment/assessment-[a-zA-Z0-9]+)$"})
+    AssessmentResult = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#AssessmentResult", name: "AssessmentResult")
+    AssessmentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#AssessmentSummary", name: "AssessmentSummary")
+    AssessmentSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#AssessmentSummaryList", name: "AssessmentSummaryList")
+    AssessmentTargetFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#AssessmentTargetFilter", name: "AssessmentTargetFilter")
+    AssessmentTargetSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#AssessmentTargetSummary", name: "AssessmentTargetSummary")
     BatchDescribeEntitiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#BatchDescribeEntitiesRequest", name: "BatchDescribeEntitiesRequest")
     BatchDescribeEntitiesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#BatchDescribeEntitiesResponse", name: "BatchDescribeEntitiesResponse")
     BatchDescribeErrorCodeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#BatchDescribeErrorCodeString", name: "BatchDescribeErrorCodeString", traits: {"smithy.api#length" => {"min" => 1, "max" => 72}, "smithy.api#pattern" => "^[a-zA-Z_]+$"})
@@ -56,6 +64,13 @@ module Aws::MarketplaceCatalog
     ContainerProductVisibilityFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ContainerProductVisibilityFilter", name: "ContainerProductVisibilityFilter")
     ContainerProductVisibilityFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ContainerProductVisibilityFilterValueList", name: "ContainerProductVisibilityFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ContainerProductVisibilityString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#ContainerProductVisibilityString", name: "ContainerProductVisibilityString")
+    ContainerSecurityFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ContainerSecurityFilters", name: "ContainerSecurityFilters")
+    ContainerSecuritySummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ContainerSecuritySummary", name: "ContainerSecuritySummary")
+    ControlAssessment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ControlAssessment", name: "ControlAssessment")
+    ControlAssessmentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ControlAssessmentList", name: "ControlAssessmentList")
+    ControlAssessmentResult = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#ControlAssessmentResult", name: "ControlAssessmentResult")
+    ControlError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ControlError", name: "ControlError")
+    ControlErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ControlErrorList", name: "ControlErrorList")
     DataProductEntityIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#DataProductEntityIdFilter", name: "DataProductEntityIdFilter")
     DataProductEntityIdFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#DataProductEntityIdFilterValueList", name: "DataProductEntityIdFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     DataProductEntityIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#DataProductEntityIdString", name: "DataProductEntityIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"})
@@ -74,6 +89,9 @@ module Aws::MarketplaceCatalog
     DateTimeISO8601 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#DateTimeISO8601", name: "DateTimeISO8601", traits: {"smithy.api#length" => {"min" => 20, "max" => 20}, "smithy.api#pattern" => "^([\\d]{4})\\-(1[0-2]|0[1-9])\\-(3[01]|0[1-9]|[12][\\d])T(2[0-3]|[01][\\d]):([0-5][\\d]):([0-5][\\d])Z$"})
     DeleteResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#DeleteResourcePolicyRequest", name: "DeleteResourcePolicyRequest")
     DeleteResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#DeleteResourcePolicyResponse", name: "DeleteResourcePolicyResponse")
+    DescribeAssessmentMaxResultInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.marketplacecatalog#DescribeAssessmentMaxResultInteger", name: "DescribeAssessmentMaxResultInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    DescribeAssessmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#DescribeAssessmentRequest", name: "DescribeAssessmentRequest")
+    DescribeAssessmentResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#DescribeAssessmentResponse", name: "DescribeAssessmentResponse")
     DescribeChangeSetRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#DescribeChangeSetRequest", name: "DescribeChangeSetRequest")
     DescribeChangeSetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#DescribeChangeSetResponse", name: "DescribeChangeSetResponse")
     DescribeEntityRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#DescribeEntityRequest", name: "DescribeEntityRequest")
@@ -90,16 +108,24 @@ module Aws::MarketplaceCatalog
     EntityType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#EntityType", name: "EntityType", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z]+$"})
     EntityTypeFilters = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.marketplacecatalog#EntityTypeFilters", name: "EntityTypeFilters")
     EntityTypeSort = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.marketplacecatalog#EntityTypeSort", name: "EntityTypeSort")
+    ErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ErrorCode", name: "ErrorCode", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[A-Z_]+$"})
     ErrorCodeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ErrorCodeString", name: "ErrorCodeString", traits: {"smithy.api#length" => {"min" => 1, "max" => 72}, "smithy.api#pattern" => "^[a-zA-Z_]+$"})
     ErrorDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ErrorDetail", name: "ErrorDetail")
     ErrorDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ErrorDetailList", name: "ErrorDetailList")
+    ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ErrorMessage", name: "ErrorMessage", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    ErrorScope = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ErrorScope", name: "ErrorScope")
+    ErrorScopeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ErrorScopeList", name: "ErrorScopeList")
     Errors = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.marketplacecatalog#Errors", name: "Errors")
     ExceptionMessageContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ExceptionMessageContent", name: "ExceptionMessageContent", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(.)+$"})
     FailureCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#FailureCode", name: "FailureCode")
+    FieldName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#FieldName", name: "FieldName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9\\-_\\.\\/]+$"})
     Filter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#Filter", name: "Filter")
     FilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#FilterList", name: "FilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 8}})
     FilterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#FilterName", name: "FilterName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z]+$"})
     FilterValueContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#FilterValueContent", name: "FilterValueContent", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(.)+$"})
+    FrameworkFilters = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.marketplacecatalog#FrameworkFilters", name: "FrameworkFilters")
+    FrameworkId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#FrameworkId", name: "FrameworkId", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\w\\-@]+$"})
+    FrameworkSummary = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.marketplacecatalog#FrameworkSummary", name: "FrameworkSummary")
     GetResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#GetResourcePolicyRequest", name: "GetResourcePolicyRequest")
     GetResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#GetResourcePolicyResponse", name: "GetResourcePolicyResponse")
     Identifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#Identifier", name: "Identifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\w\\-@]+$"})
@@ -107,6 +133,9 @@ module Aws::MarketplaceCatalog
     InternalServiceException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#InternalServiceException", name: "InternalServiceException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     Json = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#Json", name: "Json", traits: {"smithy.api#length" => {"min" => 2, "max" => 16384}, "smithy.api#pattern" => "^[\\s]*\\{[\\s\\S]*\\}[\\s]*$"})
     JsonDocumentType = ::Smithy::Schema::Shapes::DocumentShape.new(id: "com.amazonaws.marketplacecatalog#JsonDocumentType", name: "JsonDocumentType")
+    ListAssessmentsMaxResultInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.marketplacecatalog#ListAssessmentsMaxResultInteger", name: "ListAssessmentsMaxResultInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    ListAssessmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ListAssessmentsRequest", name: "ListAssessmentsRequest")
+    ListAssessmentsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ListAssessmentsResponse", name: "ListAssessmentsResponse")
     ListChangeSetsMaxResultInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.marketplacecatalog#ListChangeSetsMaxResultInteger", name: "ListChangeSetsMaxResultInteger", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
     ListChangeSetsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ListChangeSetsRequest", name: "ListChangeSetsRequest")
     ListChangeSetsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ListChangeSetsResponse", name: "ListChangeSetsResponse")
@@ -130,13 +159,16 @@ module Aws::MarketplaceCatalog
     MachineLearningProductVisibilityFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityFilter", name: "MachineLearningProductVisibilityFilter")
     MachineLearningProductVisibilityFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityFilterValueList", name: "MachineLearningProductVisibilityFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     MachineLearningProductVisibilityString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#MachineLearningProductVisibilityString", name: "MachineLearningProductVisibilityString")
-    NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^[\\w+=.:@\\-\\/]$"})
+    NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}, "smithy.api#pattern" => "^[\\w+=.:@\\-\\/]+$"})
     OfferAvailabilityEndDateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferAvailabilityEndDateFilter", name: "OfferAvailabilityEndDateFilter")
     OfferAvailabilityEndDateFilterDateRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferAvailabilityEndDateFilterDateRange", name: "OfferAvailabilityEndDateFilterDateRange")
     OfferBuyerAccountsFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferBuyerAccountsFilter", name: "OfferBuyerAccountsFilter")
     OfferBuyerAccountsFilterWildcard = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferBuyerAccountsFilterWildcard", name: "OfferBuyerAccountsFilterWildcard", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(.)+$"})
     OfferBuyerAccountsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferBuyerAccountsList", name: "OfferBuyerAccountsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 26}})
     OfferBuyerAccountsString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferBuyerAccountsString", name: "OfferBuyerAccountsString", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\d{12}$"})
+    OfferCreatedBySourceFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferCreatedBySourceFilter", name: "OfferCreatedBySourceFilter")
+    OfferCreatedBySourceFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferCreatedBySourceFilterValueList", name: "OfferCreatedBySourceFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    OfferCreatedBySourceString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#OfferCreatedBySourceString", name: "OfferCreatedBySourceString")
     OfferEntityIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferEntityIdFilter", name: "OfferEntityIdFilter")
     OfferEntityIdFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferEntityIdFilterValueList", name: "OfferEntityIdFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     OfferEntityIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferEntityIdString", name: "OfferEntityIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"})
@@ -154,12 +186,45 @@ module Aws::MarketplaceCatalog
     OfferResaleAuthorizationIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdFilter", name: "OfferResaleAuthorizationIdFilter")
     OfferResaleAuthorizationIdFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdFilterValueList", name: "OfferResaleAuthorizationIdFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     OfferResaleAuthorizationIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdString", name: "OfferResaleAuthorizationIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"})
+    OfferSetAssociatedOfferIdsFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetAssociatedOfferIdsFilter", name: "OfferSetAssociatedOfferIdsFilter")
+    OfferSetAssociatedOfferIdsFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetAssociatedOfferIdsFilterValueList", name: "OfferSetAssociatedOfferIdsFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    OfferSetAssociatedOfferIdsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetAssociatedOfferIdsList", name: "OfferSetAssociatedOfferIdsList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    OfferSetAssociatedOfferIdsString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetAssociatedOfferIdsString", name: "OfferSetAssociatedOfferIdsString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"})
+    OfferSetEntityIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetEntityIdFilter", name: "OfferSetEntityIdFilter")
+    OfferSetEntityIdFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetEntityIdFilterValueList", name: "OfferSetEntityIdFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    OfferSetEntityIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetEntityIdString", name: "OfferSetEntityIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^offerset-[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"})
+    OfferSetFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetFilters", name: "OfferSetFilters")
+    OfferSetIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetIdFilter", name: "OfferSetIdFilter")
+    OfferSetIdFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetIdFilterValueList", name: "OfferSetIdFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    OfferSetIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetIdString", name: "OfferSetIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^offerset-[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"})
+    OfferSetLastModifiedDateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetLastModifiedDateFilter", name: "OfferSetLastModifiedDateFilter")
+    OfferSetLastModifiedDateFilterDateRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetLastModifiedDateFilterDateRange", name: "OfferSetLastModifiedDateFilterDateRange")
+    OfferSetNameFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetNameFilter", name: "OfferSetNameFilter")
+    OfferSetNameFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetNameFilterValueList", name: "OfferSetNameFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    OfferSetNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetNameString", name: "OfferSetNameString", traits: {"smithy.api#length" => {"min" => 1, "max" => 150}, "smithy.api#pattern" => "^(.)+$"})
+    OfferSetReleaseDateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetReleaseDateFilter", name: "OfferSetReleaseDateFilter")
+    OfferSetReleaseDateFilterDateRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetReleaseDateFilterDateRange", name: "OfferSetReleaseDateFilterDateRange")
+    OfferSetSolutionIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetSolutionIdFilter", name: "OfferSetSolutionIdFilter")
+    OfferSetSolutionIdFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetSolutionIdFilterValueList", name: "OfferSetSolutionIdFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    OfferSetSolutionIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetSolutionIdString", name: "OfferSetSolutionIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"})
+    OfferSetSort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetSort", name: "OfferSetSort")
+    OfferSetSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetSortBy", name: "OfferSetSortBy")
+    OfferSetStateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetStateFilter", name: "OfferSetStateFilter")
+    OfferSetStateFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetStateFilterValueList", name: "OfferSetStateFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    OfferSetStateString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetStateString", name: "OfferSetStateString")
+    OfferSetSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSetSummary", name: "OfferSetSummary")
     OfferSort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSort", name: "OfferSort")
     OfferSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#OfferSortBy", name: "OfferSortBy")
     OfferStateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferStateFilter", name: "OfferStateFilter")
     OfferStateFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferStateFilterValueList", name: "OfferStateFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     OfferStateString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#OfferStateString", name: "OfferStateString")
     OfferSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferSummary", name: "OfferSummary")
+    OfferTargetAgreementIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferTargetAgreementIdFilter", name: "OfferTargetAgreementIdFilter")
+    OfferTargetAgreementIdFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferTargetAgreementIdFilterValueList", name: "OfferTargetAgreementIdFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    OfferTargetAgreementIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#OfferTargetAgreementIdString", name: "OfferTargetAgreementIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^(.)+$"})
+    OfferTargetAgreementIntentFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferTargetAgreementIntentFilter", name: "OfferTargetAgreementIntentFilter")
+    OfferTargetAgreementIntentFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferTargetAgreementIntentFilterValueList", name: "OfferTargetAgreementIntentFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    OfferTargetAgreementIntentString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#OfferTargetAgreementIntentString", name: "OfferTargetAgreementIntentString")
     OfferTargetingFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#OfferTargetingFilter", name: "OfferTargetingFilter")
     OfferTargetingFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferTargetingFilterValueList", name: "OfferTargetingFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 4}})
     OfferTargetingList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#OfferTargetingList", name: "OfferTargetingList", traits: {"smithy.api#length" => {"min" => 0, "max" => 4}})
@@ -178,6 +243,9 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationEntityIdFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationEntityIdFilterValueList", name: "ResaleAuthorizationEntityIdFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ResaleAuthorizationEntityIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationEntityIdString", name: "ResaleAuthorizationEntityIdString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"})
     ResaleAuthorizationFilters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationFilters", name: "ResaleAuthorizationFilters")
+    ResaleAuthorizationIssuerAccountIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdFilter", name: "ResaleAuthorizationIssuerAccountIdFilter")
+    ResaleAuthorizationIssuerAccountIdFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdFilterValueList", name: "ResaleAuthorizationIssuerAccountIdFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    ResaleAuthorizationIssuerAccountIdString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdString", name: "ResaleAuthorizationIssuerAccountIdString", traits: {"smithy.api#length" => {"min" => 12, "max" => 12}, "smithy.api#pattern" => "^\\d{12}$"})
     ResaleAuthorizationLastModifiedDateFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationLastModifiedDateFilter", name: "ResaleAuthorizationLastModifiedDateFilter")
     ResaleAuthorizationLastModifiedDateFilterDateRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationLastModifiedDateFilterDateRange", name: "ResaleAuthorizationLastModifiedDateFilterDateRange")
     ResaleAuthorizationManufacturerAccountIdFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationManufacturerAccountIdFilter", name: "ResaleAuthorizationManufacturerAccountIdFilter")
@@ -211,8 +279,14 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationResellerLegalNameFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameFilterValueList", name: "ResaleAuthorizationResellerLegalNameFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ResaleAuthorizationResellerLegalNameFilterWildcard = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameFilterWildcard", name: "ResaleAuthorizationResellerLegalNameFilterWildcard", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(.)+$"})
     ResaleAuthorizationResellerLegalNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerLegalNameString", name: "ResaleAuthorizationResellerLegalNameString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(.)+$"})
+    ResaleAuthorizationResellerRoleFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleFilter", name: "ResaleAuthorizationResellerRoleFilter")
+    ResaleAuthorizationResellerRoleFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleFilterValueList", name: "ResaleAuthorizationResellerRoleFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    ResaleAuthorizationResellerRoleString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleString", name: "ResaleAuthorizationResellerRoleString")
     ResaleAuthorizationSort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationSort", name: "ResaleAuthorizationSort")
     ResaleAuthorizationSortBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationSortBy", name: "ResaleAuthorizationSortBy")
+    ResaleAuthorizationSourceAuthorizationFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationFilter", name: "ResaleAuthorizationSourceAuthorizationFilter")
+    ResaleAuthorizationSourceAuthorizationFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationFilterValueList", name: "ResaleAuthorizationSourceAuthorizationFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    ResaleAuthorizationSourceAuthorizationString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationString", name: "ResaleAuthorizationSourceAuthorizationString", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^(.)+$"})
     ResaleAuthorizationStatusFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusFilter", name: "ResaleAuthorizationStatusFilter")
     ResaleAuthorizationStatusFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusFilterValueList", name: "ResaleAuthorizationStatusFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ResaleAuthorizationStatusString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusString", name: "ResaleAuthorizationStatusString")
@@ -239,6 +313,8 @@ module Aws::MarketplaceCatalog
     SaaSProductVisibilityFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#SaaSProductVisibilityFilter", name: "SaaSProductVisibilityFilter")
     SaaSProductVisibilityFilterValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#SaaSProductVisibilityFilterValueList", name: "SaaSProductVisibilityFilterValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     SaaSProductVisibilityString = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#SaaSProductVisibilityString", name: "SaaSProductVisibilityString")
+    ScopeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ScopeName", name: "ScopeName", traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    ScopeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#ScopeValue", name: "ScopeValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     Sort = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#Sort", name: "Sort")
     SortBy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#SortBy", name: "SortBy", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[a-zA-Z]+$"})
@@ -256,9 +332,17 @@ module Aws::MarketplaceCatalog
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#UntagResourceResponse", name: "UntagResourceResponse")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 422})
+    ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.marketplacecatalog#ValidationExceptionField", name: "ValidationExceptionField")
+    ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
+    ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.marketplacecatalog#ValidationExceptionReason", name: "ValidationExceptionReason")
     ValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.marketplacecatalog#ValueList", name: "ValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
+    VersionedFrameworkId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#VersionedFrameworkId", name: "VersionedFrameworkId", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\w\\-@.]+$"})
     VisibilityValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.marketplacecatalog#VisibilityValue", name: "VisibilityValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z]+$"})
 
+    AMISecurityFilters.add_member(:delivery_option_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "DeliveryOptionId"))
+    AMISecurityFilters.type = Types::AMISecurityFilters
+    AMISecuritySummary.add_member(:delivery_option_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "DeliveryOptionId"))
+    AMISecuritySummary.type = Types::AMISecuritySummary
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "Message"))
     AccessDeniedException.type = Types::AccessDeniedException
     AmiProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AmiProductEntityIdFilterValueList, name: "ValueList"))
@@ -295,6 +379,24 @@ module Aws::MarketplaceCatalog
     AmiProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
     AmiProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
     AmiProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    AssessmentResult.add_member(:pass, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASS", traits: {"smithy.api#enumValue" => "PASS"}))
+    AssessmentResult.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAIL", traits: {"smithy.api#enumValue" => "FAIL"}))
+    AssessmentSummary.add_member(:assessment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "AssessmentArn"))
+    AssessmentSummary.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "AssessmentId"))
+    AssessmentSummary.add_member(:framework_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionedFrameworkId, name: "FrameworkId"))
+    AssessmentSummary.add_member(:assessment_target_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTargetSummary, name: "AssessmentTargetSummary"))
+    AssessmentSummary.add_member(:framework_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkSummary, name: "FrameworkSummary"))
+    AssessmentSummary.add_member(:assessment_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentResult, name: "AssessmentResult"))
+    AssessmentSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "CreatedAt"))
+    AssessmentSummary.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "ExpiresAt"))
+    AssessmentSummary.type = Types::AssessmentSummary
+    AssessmentSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentSummary, name: "member"))
+    AssessmentTargetFilter.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "EntityId"))
+    AssessmentTargetFilter.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ChangeSetId"))
+    AssessmentTargetFilter.type = Types::AssessmentTargetFilter
+    AssessmentTargetSummary.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "EntityId"))
+    AssessmentTargetSummary.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ChangeSetId"))
+    AssessmentTargetSummary.type = Types::AssessmentTargetSummary
     BatchDescribeEntitiesRequest.add_member(:entity_request_list, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityRequestList, name: "EntityRequestList", traits: {"smithy.api#required" => {}}))
     BatchDescribeEntitiesRequest.type = Types::BatchDescribeEntitiesRequest
     BatchDescribeEntitiesResponse.add_member(:entity_details, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityDetails, name: "EntityDetails"))
@@ -359,6 +461,7 @@ module Aws::MarketplaceCatalog
     ContainerProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
     ContainerProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
     ContainerProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
+    ContainerProductSortBy.add_member(:compatible_aws_services, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CompatibleAWSServices", traits: {"smithy.api#enumValue" => "CompatibleAWSServices"}))
     ContainerProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductTitleString, name: "ProductTitle"))
     ContainerProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductVisibilityString, name: "Visibility"))
     ContainerProductSummary.type = Types::ContainerProductSummary
@@ -373,6 +476,24 @@ module Aws::MarketplaceCatalog
     ContainerProductVisibilityString.add_member(:public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Public", traits: {"smithy.api#enumValue" => "Public"}))
     ContainerProductVisibilityString.add_member(:restricted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Restricted", traits: {"smithy.api#enumValue" => "Restricted"}))
     ContainerProductVisibilityString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    ContainerSecurityFilters.add_member(:delivery_option_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "DeliveryOptionId"))
+    ContainerSecurityFilters.type = Types::ContainerSecurityFilters
+    ContainerSecuritySummary.add_member(:delivery_option_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "DeliveryOptionId"))
+    ContainerSecuritySummary.type = Types::ContainerSecuritySummary
+    ControlAssessment.add_member(:control_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ControlId"))
+    ControlAssessment.add_member(:control_assessment_result, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlAssessmentResult, name: "ControlAssessmentResult"))
+    ControlAssessment.add_member(:errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlErrorList, name: "Errors"))
+    ControlAssessment.type = Types::ControlAssessment
+    ControlAssessmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlAssessment, name: "member"))
+    ControlAssessmentResult.add_member(:pass, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASS", traits: {"smithy.api#enumValue" => "PASS"}))
+    ControlAssessmentResult.add_member(:fail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAIL", traits: {"smithy.api#enumValue" => "FAIL"}))
+    ControlAssessmentResult.add_member(:not_executed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EXECUTED", traits: {"smithy.api#enumValue" => "NOT_EXECUTED"}))
+    ControlAssessmentResult.add_member(:exemption_pass, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXEMPTION_PASS", traits: {"smithy.api#enumValue" => "EXEMPTION_PASS"}))
+    ControlError.add_member(:code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCode, name: "Code"))
+    ControlError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorMessage, name: "Message"))
+    ControlError.add_member(:scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorScopeList, name: "Scope"))
+    ControlError.type = Types::ControlError
+    ControlErrorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlError, name: "member"))
     DataProductEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductEntityIdFilterValueList, name: "ValueList"))
     DataProductEntityIdFilter.type = Types::DataProductEntityIdFilter
     DataProductEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductEntityIdString, name: "member"))
@@ -411,6 +532,22 @@ module Aws::MarketplaceCatalog
     DeleteResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     DeleteResourcePolicyRequest.type = Types::DeleteResourcePolicyRequest
     DeleteResourcePolicyResponse.type = Types::DeleteResourcePolicyResponse
+    DescribeAssessmentRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, name: "Catalog", traits: {"smithy.api#required" => {}}))
+    DescribeAssessmentRequest.add_member(:assessment_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentIdentifier, name: "AssessmentIdentifier", traits: {"smithy.api#required" => {}}))
+    DescribeAssessmentRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeAssessmentMaxResultInteger, name: "MaxResults", traits: {"smithy.api#default" => 50}))
+    DescribeAssessmentRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeAssessmentRequest.type = Types::DescribeAssessmentRequest
+    DescribeAssessmentResponse.add_member(:assessment_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ARN, name: "AssessmentArn"))
+    DescribeAssessmentResponse.add_member(:assessment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "AssessmentId"))
+    DescribeAssessmentResponse.add_member(:framework_id, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionedFrameworkId, name: "FrameworkId"))
+    DescribeAssessmentResponse.add_member(:assessment_target_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTargetSummary, name: "AssessmentTargetSummary"))
+    DescribeAssessmentResponse.add_member(:framework_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkSummary, name: "FrameworkSummary"))
+    DescribeAssessmentResponse.add_member(:assessment_result, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentResult, name: "AssessmentResult"))
+    DescribeAssessmentResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "CreatedAt"))
+    DescribeAssessmentResponse.add_member(:expires_at, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "ExpiresAt"))
+    DescribeAssessmentResponse.add_member(:control_assessments, ::Smithy::Schema::Shapes::MemberShape.new(target: ControlAssessmentList, name: "ControlAssessments"))
+    DescribeAssessmentResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    DescribeAssessmentResponse.type = Types::DescribeAssessmentResponse
     DescribeChangeSetRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, name: "Catalog", traits: {"smithy.api#httpQuery" => "catalog", "smithy.api#required" => {}}))
     DescribeChangeSetRequest.add_member(:change_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ChangeSetId", traits: {"smithy.api#httpQuery" => "changeSetId", "smithy.api#required" => {}}))
     DescribeChangeSetRequest.type = Types::DescribeChangeSetRequest
@@ -463,6 +600,7 @@ module Aws::MarketplaceCatalog
     EntitySummary.add_member(:offer_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSummary, name: "OfferSummary"))
     EntitySummary.add_member(:resale_authorization_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSummary, name: "ResaleAuthorizationSummary"))
     EntitySummary.add_member(:machine_learning_product_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductSummary, name: "MachineLearningProductSummary"))
+    EntitySummary.add_member(:offer_set_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetSummary, name: "OfferSetSummary"))
     EntitySummary.type = Types::EntitySummary
     EntitySummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EntitySummary, name: "member"))
     EntityTypeFilters.add_member(:data_product_filters, Types::EntityTypeFilters::DataProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductFilters, name: "DataProductFilters"))
@@ -472,6 +610,7 @@ module Aws::MarketplaceCatalog
     EntityTypeFilters.add_member(:container_product_filters, Types::EntityTypeFilters::ContainerProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductFilters, name: "ContainerProductFilters"))
     EntityTypeFilters.add_member(:resale_authorization_filters, Types::EntityTypeFilters::ResaleAuthorizationFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationFilters, name: "ResaleAuthorizationFilters"))
     EntityTypeFilters.add_member(:machine_learning_product_filters, Types::EntityTypeFilters::MachineLearningProductFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductFilters, name: "MachineLearningProductFilters"))
+    EntityTypeFilters.add_member(:offer_set_filters, Types::EntityTypeFilters::OfferSetFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetFilters, name: "OfferSetFilters"))
     EntityTypeFilters.add_member(:unknown, Types::EntityTypeFilters::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EntityTypeFilters.type = Types::EntityTypeFilters
     EntityTypeSort.add_member(:data_product_sort, Types::EntityTypeSort::DataProductSort, ::Smithy::Schema::Shapes::MemberShape.new(target: DataProductSort, name: "DataProductSort"))
@@ -481,12 +620,17 @@ module Aws::MarketplaceCatalog
     EntityTypeSort.add_member(:container_product_sort, Types::EntityTypeSort::ContainerProductSort, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerProductSort, name: "ContainerProductSort"))
     EntityTypeSort.add_member(:resale_authorization_sort, Types::EntityTypeSort::ResaleAuthorizationSort, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSort, name: "ResaleAuthorizationSort"))
     EntityTypeSort.add_member(:machine_learning_product_sort, Types::EntityTypeSort::MachineLearningProductSort, ::Smithy::Schema::Shapes::MemberShape.new(target: MachineLearningProductSort, name: "MachineLearningProductSort"))
+    EntityTypeSort.add_member(:offer_set_sort, Types::EntityTypeSort::OfferSetSort, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetSort, name: "OfferSetSort"))
     EntityTypeSort.add_member(:unknown, Types::EntityTypeSort::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     EntityTypeSort.type = Types::EntityTypeSort
     ErrorDetail.add_member(:error_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorCodeString, name: "ErrorCode"))
     ErrorDetail.add_member(:error_message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "ErrorMessage"))
     ErrorDetail.type = Types::ErrorDetail
     ErrorDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorDetail, name: "member"))
+    ErrorScope.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeName, name: "Name"))
+    ErrorScope.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ScopeValue, name: "Value"))
+    ErrorScope.type = Types::ErrorScope
+    ErrorScopeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorScope, name: "member"))
     Errors.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "key"))
     Errors.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchDescribeErrorDetail, name: "value"))
     FailureCode.add_member(:client_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ClientError", traits: {"smithy.api#enumValue" => "CLIENT_ERROR"}))
@@ -495,6 +639,14 @@ module Aws::MarketplaceCatalog
     Filter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueList, name: "ValueList"))
     Filter.type = Types::Filter
     FilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Filter, name: "member"))
+    FrameworkFilters.add_member(:ami_security_filters, Types::FrameworkFilters::AMISecurityFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: AMISecurityFilters, name: "AMISecurityFilters"))
+    FrameworkFilters.add_member(:container_security_filters, Types::FrameworkFilters::ContainerSecurityFilters, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerSecurityFilters, name: "ContainerSecurityFilters"))
+    FrameworkFilters.add_member(:unknown, Types::FrameworkFilters::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    FrameworkFilters.type = Types::FrameworkFilters
+    FrameworkSummary.add_member(:ami_security_summary, Types::FrameworkSummary::AMISecuritySummary, ::Smithy::Schema::Shapes::MemberShape.new(target: AMISecuritySummary, name: "AMISecuritySummary"))
+    FrameworkSummary.add_member(:container_security_summary, Types::FrameworkSummary::ContainerSecuritySummary, ::Smithy::Schema::Shapes::MemberShape.new(target: ContainerSecuritySummary, name: "ContainerSecuritySummary"))
+    FrameworkSummary.add_member(:unknown, Types::FrameworkSummary::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    FrameworkSummary.type = Types::FrameworkSummary
     GetResourcePolicyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceARN, name: "ResourceArn", traits: {"smithy.api#httpQuery" => "resourceArn", "smithy.api#required" => {}}))
     GetResourcePolicyRequest.type = Types::GetResourcePolicyRequest
     GetResourcePolicyResponse.add_member(:policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourcePolicyJson, name: "Policy"))
@@ -503,6 +655,16 @@ module Aws::MarketplaceCatalog
     Intent.add_member(:apply, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLY", traits: {"smithy.api#enumValue" => "APPLY"}))
     InternalServiceException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "Message"))
     InternalServiceException.type = Types::InternalServiceException
+    ListAssessmentsRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, name: "Catalog", traits: {"smithy.api#required" => {}}))
+    ListAssessmentsRequest.add_member(:framework_id, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkId, name: "FrameworkId"))
+    ListAssessmentsRequest.add_member(:assessment_target_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentTargetFilter, name: "AssessmentTargetFilter"))
+    ListAssessmentsRequest.add_member(:framework_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameworkFilters, name: "FrameworkFilters"))
+    ListAssessmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListAssessmentsMaxResultInteger, name: "MaxResults", traits: {"smithy.api#default" => 20}))
+    ListAssessmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAssessmentsRequest.type = Types::ListAssessmentsRequest
+    ListAssessmentsResponse.add_member(:assessment_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AssessmentSummaryList, name: "AssessmentSummaryList"))
+    ListAssessmentsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListAssessmentsResponse.type = Types::ListAssessmentsResponse
     ListChangeSetsRequest.add_member(:catalog, ::Smithy::Schema::Shapes::MemberShape.new(target: Catalog, name: "Catalog", traits: {"smithy.api#required" => {}}))
     ListChangeSetsRequest.add_member(:filter_list, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterList, name: "FilterList"))
     ListChangeSetsRequest.add_member(:sort, ::Smithy::Schema::Shapes::MemberShape.new(target: Sort, name: "Sort"))
@@ -572,6 +734,11 @@ module Aws::MarketplaceCatalog
     OfferBuyerAccountsFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsFilterWildcard, name: "WildCardValue"))
     OfferBuyerAccountsFilter.type = Types::OfferBuyerAccountsFilter
     OfferBuyerAccountsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsString, name: "member"))
+    OfferCreatedBySourceFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferCreatedBySourceFilterValueList, name: "ValueList"))
+    OfferCreatedBySourceFilter.type = Types::OfferCreatedBySourceFilter
+    OfferCreatedBySourceFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferCreatedBySourceString, name: "member"))
+    OfferCreatedBySourceString.add_member(:seller, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Seller", traits: {"smithy.api#enumValue" => "Seller"}))
+    OfferCreatedBySourceString.add_member(:aws_marketplace, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AwsMarketplace", traits: {"smithy.api#enumValue" => "AwsMarketplace"}))
     OfferEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferEntityIdFilterValueList, name: "ValueList"))
     OfferEntityIdFilter.type = Types::OfferEntityIdFilter
     OfferEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferEntityIdString, name: "member"))
@@ -585,6 +752,10 @@ module Aws::MarketplaceCatalog
     OfferFilters.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateFilter, name: "State"))
     OfferFilters.add_member(:targeting, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingFilter, name: "Targeting"))
     OfferFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferLastModifiedDateFilter, name: "LastModifiedDate"))
+    OfferFilters.add_member(:offer_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetIdFilter, name: "OfferSetId"))
+    OfferFilters.add_member(:target_agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetAgreementIdFilter, name: "TargetAgreementId"))
+    OfferFilters.add_member(:target_agreement_intent, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetAgreementIntentFilter, name: "TargetAgreementIntent"))
+    OfferFilters.add_member(:created_by_source, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferCreatedBySourceFilter, name: "CreatedBySource"))
     OfferFilters.type = Types::OfferFilters
     OfferLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferLastModifiedDateFilterDateRange, name: "DateRange"))
     OfferLastModifiedDateFilter.type = Types::OfferLastModifiedDateFilter
@@ -606,6 +777,60 @@ module Aws::MarketplaceCatalog
     OfferResaleAuthorizationIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferResaleAuthorizationIdFilterValueList, name: "ValueList"))
     OfferResaleAuthorizationIdFilter.type = Types::OfferResaleAuthorizationIdFilter
     OfferResaleAuthorizationIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferResaleAuthorizationIdString, name: "member"))
+    OfferSetAssociatedOfferIdsFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetAssociatedOfferIdsFilterValueList, name: "ValueList"))
+    OfferSetAssociatedOfferIdsFilter.type = Types::OfferSetAssociatedOfferIdsFilter
+    OfferSetAssociatedOfferIdsFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetAssociatedOfferIdsString, name: "member"))
+    OfferSetAssociatedOfferIdsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetAssociatedOfferIdsString, name: "member"))
+    OfferSetEntityIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetEntityIdFilterValueList, name: "ValueList"))
+    OfferSetEntityIdFilter.type = Types::OfferSetEntityIdFilter
+    OfferSetEntityIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetEntityIdString, name: "member"))
+    OfferSetFilters.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetEntityIdFilter, name: "EntityId"))
+    OfferSetFilters.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetNameFilter, name: "Name"))
+    OfferSetFilters.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetStateFilter, name: "State"))
+    OfferSetFilters.add_member(:release_date, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetReleaseDateFilter, name: "ReleaseDate"))
+    OfferSetFilters.add_member(:associated_offer_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetAssociatedOfferIdsFilter, name: "AssociatedOfferIds"))
+    OfferSetFilters.add_member(:solution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetSolutionIdFilter, name: "SolutionId"))
+    OfferSetFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetLastModifiedDateFilter, name: "LastModifiedDate"))
+    OfferSetFilters.type = Types::OfferSetFilters
+    OfferSetIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetIdFilterValueList, name: "ValueList"))
+    OfferSetIdFilter.type = Types::OfferSetIdFilter
+    OfferSetIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetIdString, name: "member"))
+    OfferSetLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetLastModifiedDateFilterDateRange, name: "DateRange"))
+    OfferSetLastModifiedDateFilter.type = Types::OfferSetLastModifiedDateFilter
+    OfferSetLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "AfterValue"))
+    OfferSetLastModifiedDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "BeforeValue"))
+    OfferSetLastModifiedDateFilterDateRange.type = Types::OfferSetLastModifiedDateFilterDateRange
+    OfferSetNameFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetNameFilterValueList, name: "ValueList"))
+    OfferSetNameFilter.type = Types::OfferSetNameFilter
+    OfferSetNameFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetNameString, name: "member"))
+    OfferSetReleaseDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetReleaseDateFilterDateRange, name: "DateRange"))
+    OfferSetReleaseDateFilter.type = Types::OfferSetReleaseDateFilter
+    OfferSetReleaseDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "AfterValue"))
+    OfferSetReleaseDateFilterDateRange.add_member(:before_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "BeforeValue"))
+    OfferSetReleaseDateFilterDateRange.type = Types::OfferSetReleaseDateFilterDateRange
+    OfferSetSolutionIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetSolutionIdFilterValueList, name: "ValueList"))
+    OfferSetSolutionIdFilter.type = Types::OfferSetSolutionIdFilter
+    OfferSetSolutionIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetSolutionIdString, name: "member"))
+    OfferSetSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetSortBy, name: "SortBy"))
+    OfferSetSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
+    OfferSetSort.type = Types::OfferSetSort
+    OfferSetSortBy.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Name", traits: {"smithy.api#enumValue" => "Name"}))
+    OfferSetSortBy.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "State", traits: {"smithy.api#enumValue" => "State"}))
+    OfferSetSortBy.add_member(:release_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ReleaseDate", traits: {"smithy.api#enumValue" => "ReleaseDate"}))
+    OfferSetSortBy.add_member(:solution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SolutionId", traits: {"smithy.api#enumValue" => "SolutionId"}))
+    OfferSetSortBy.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EntityId", traits: {"smithy.api#enumValue" => "EntityId"}))
+    OfferSetSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    OfferSetStateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetStateFilterValueList, name: "ValueList"))
+    OfferSetStateFilter.type = Types::OfferSetStateFilter
+    OfferSetStateFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetStateString, name: "member"))
+    OfferSetStateString.add_member(:draft, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Draft", traits: {"smithy.api#enumValue" => "Draft"}))
+    OfferSetStateString.add_member(:released, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Released", traits: {"smithy.api#enumValue" => "Released"}))
+    OfferSetSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetNameString, name: "Name"))
+    OfferSetSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetStateString, name: "State"))
+    OfferSetSummary.add_member(:release_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "ReleaseDate"))
+    OfferSetSummary.add_member(:associated_offer_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetAssociatedOfferIdsList, name: "AssociatedOfferIds"))
+    OfferSetSummary.add_member(:solution_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetSolutionIdString, name: "SolutionId"))
+    OfferSetSummary.type = Types::OfferSetSummary
     OfferSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSortBy, name: "SortBy"))
     OfferSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
     OfferSort.type = Types::OfferSort
@@ -619,6 +844,10 @@ module Aws::MarketplaceCatalog
     OfferSortBy.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "State", traits: {"smithy.api#enumValue" => "State"}))
     OfferSortBy.add_member(:targeting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Targeting", traits: {"smithy.api#enumValue" => "Targeting"}))
     OfferSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    OfferSortBy.add_member(:offer_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OfferSetId", traits: {"smithy.api#enumValue" => "OfferSetId"}))
+    OfferSortBy.add_member(:target_agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TargetAgreementId", traits: {"smithy.api#enumValue" => "TargetAgreementId"}))
+    OfferSortBy.add_member(:target_agreement_intent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TargetAgreementIntent", traits: {"smithy.api#enumValue" => "TargetAgreementIntent"}))
+    OfferSortBy.add_member(:created_by_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CreatedBySource", traits: {"smithy.api#enumValue" => "CreatedBySource"}))
     OfferStateFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateFilterValueList, name: "ValueList"))
     OfferStateFilter.type = Types::OfferStateFilter
     OfferStateFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateString, name: "member"))
@@ -632,7 +861,18 @@ module Aws::MarketplaceCatalog
     OfferSummary.add_member(:buyer_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferBuyerAccountsList, name: "BuyerAccounts"))
     OfferSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferStateString, name: "State"))
     OfferSummary.add_member(:targeting, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingList, name: "Targeting"))
+    OfferSummary.add_member(:offer_set_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferSetIdString, name: "OfferSetId"))
+    OfferSummary.add_member(:target_agreement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetAgreementIdString, name: "TargetAgreementId"))
+    OfferSummary.add_member(:target_agreement_intent, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetAgreementIntentString, name: "TargetAgreementIntent"))
+    OfferSummary.add_member(:created_by_source, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferCreatedBySourceString, name: "CreatedBySource"))
     OfferSummary.type = Types::OfferSummary
+    OfferTargetAgreementIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetAgreementIdFilterValueList, name: "ValueList"))
+    OfferTargetAgreementIdFilter.type = Types::OfferTargetAgreementIdFilter
+    OfferTargetAgreementIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetAgreementIdString, name: "member"))
+    OfferTargetAgreementIntentFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetAgreementIntentFilterValueList, name: "ValueList"))
+    OfferTargetAgreementIntentFilter.type = Types::OfferTargetAgreementIntentFilter
+    OfferTargetAgreementIntentFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetAgreementIntentString, name: "member"))
+    OfferTargetAgreementIntentString.add_member(:renew, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Renew", traits: {"smithy.api#enumValue" => "Renew"}))
     OfferTargetingFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingFilterValueList, name: "ValueList"))
     OfferTargetingFilter.type = Types::OfferTargetingFilter
     OfferTargetingFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OfferTargetingString, name: "member"))
@@ -678,7 +918,13 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationFilters.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusFilter, name: "Status"))
     ResaleAuthorizationFilters.add_member(:offer_extended_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationOfferExtendedStatusFilter, name: "OfferExtendedStatus"))
     ResaleAuthorizationFilters.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationLastModifiedDateFilter, name: "LastModifiedDate"))
+    ResaleAuthorizationFilters.add_member(:reseller_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerRoleFilter, name: "ResellerRole"))
+    ResaleAuthorizationFilters.add_member(:source_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSourceAuthorizationFilter, name: "SourceAuthorization"))
+    ResaleAuthorizationFilters.add_member(:issuer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationIssuerAccountIdFilter, name: "IssuerAccountId"))
     ResaleAuthorizationFilters.type = Types::ResaleAuthorizationFilters
+    ResaleAuthorizationIssuerAccountIdFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationIssuerAccountIdFilterValueList, name: "ValueList"))
+    ResaleAuthorizationIssuerAccountIdFilter.type = Types::ResaleAuthorizationIssuerAccountIdFilter
+    ResaleAuthorizationIssuerAccountIdFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationIssuerAccountIdString, name: "member"))
     ResaleAuthorizationLastModifiedDateFilter.add_member(:date_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationLastModifiedDateFilterDateRange, name: "DateRange"))
     ResaleAuthorizationLastModifiedDateFilter.type = Types::ResaleAuthorizationLastModifiedDateFilter
     ResaleAuthorizationLastModifiedDateFilterDateRange.add_member(:after_value, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "AfterValue"))
@@ -715,6 +961,11 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationResellerLegalNameFilter.add_member(:wild_card_value, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameFilterWildcard, name: "WildCardValue"))
     ResaleAuthorizationResellerLegalNameFilter.type = Types::ResaleAuthorizationResellerLegalNameFilter
     ResaleAuthorizationResellerLegalNameFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerLegalNameString, name: "member"))
+    ResaleAuthorizationResellerRoleFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerRoleFilterValueList, name: "ValueList"))
+    ResaleAuthorizationResellerRoleFilter.type = Types::ResaleAuthorizationResellerRoleFilter
+    ResaleAuthorizationResellerRoleFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerRoleString, name: "member"))
+    ResaleAuthorizationResellerRoleString.add_member(:channel_partner, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ChannelPartner", traits: {"smithy.api#enumValue" => "ChannelPartner"}))
+    ResaleAuthorizationResellerRoleString.add_member(:distributor, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Distributor", traits: {"smithy.api#enumValue" => "Distributor"}))
     ResaleAuthorizationSort.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSortBy, name: "SortBy"))
     ResaleAuthorizationSort.add_member(:sort_order, ::Smithy::Schema::Shapes::MemberShape.new(target: SortOrder, name: "SortOrder"))
     ResaleAuthorizationSort.type = Types::ResaleAuthorizationSort
@@ -731,6 +982,12 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationSortBy.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CreatedDate", traits: {"smithy.api#enumValue" => "CreatedDate"}))
     ResaleAuthorizationSortBy.add_member(:availability_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AvailabilityEndDate", traits: {"smithy.api#enumValue" => "AvailabilityEndDate"}))
     ResaleAuthorizationSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    ResaleAuthorizationSortBy.add_member(:reseller_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ResellerRole", traits: {"smithy.api#enumValue" => "ResellerRole"}))
+    ResaleAuthorizationSortBy.add_member(:source_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SourceAuthorization", traits: {"smithy.api#enumValue" => "SourceAuthorization"}))
+    ResaleAuthorizationSortBy.add_member(:issuer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IssuerAccountId", traits: {"smithy.api#enumValue" => "IssuerAccountId"}))
+    ResaleAuthorizationSourceAuthorizationFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSourceAuthorizationFilterValueList, name: "ValueList"))
+    ResaleAuthorizationSourceAuthorizationFilter.type = Types::ResaleAuthorizationSourceAuthorizationFilter
+    ResaleAuthorizationSourceAuthorizationFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSourceAuthorizationString, name: "member"))
     ResaleAuthorizationStatusFilter.add_member(:value_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusFilterValueList, name: "ValueList"))
     ResaleAuthorizationStatusFilter.type = Types::ResaleAuthorizationStatusFilter
     ResaleAuthorizationStatusFilterValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationStatusString, name: "member"))
@@ -748,6 +1005,9 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationSummary.add_member(:offer_extended_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationOfferExtendedStatusString, name: "OfferExtendedStatus"))
     ResaleAuthorizationSummary.add_member(:created_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "CreatedDate"))
     ResaleAuthorizationSummary.add_member(:availability_end_date, ::Smithy::Schema::Shapes::MemberShape.new(target: DateTimeISO8601, name: "AvailabilityEndDate"))
+    ResaleAuthorizationSummary.add_member(:reseller_role, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationResellerRoleString, name: "ResellerRole"))
+    ResaleAuthorizationSummary.add_member(:source_authorization, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationSourceAuthorizationString, name: "SourceAuthorization"))
+    ResaleAuthorizationSummary.add_member(:issuer_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResaleAuthorizationIssuerAccountIdString, name: "IssuerAccountId"))
     ResaleAuthorizationSummary.type = Types::ResaleAuthorizationSummary
     ResourceIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "member"))
     ResourceInUseException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "Message"))
@@ -776,6 +1036,7 @@ module Aws::MarketplaceCatalog
     SaaSProductSortBy.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ProductTitle", traits: {"smithy.api#enumValue" => "ProductTitle"}))
     SaaSProductSortBy.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Visibility", traits: {"smithy.api#enumValue" => "Visibility"}))
     SaaSProductSortBy.add_member(:last_modified_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LastModifiedDate", traits: {"smithy.api#enumValue" => "LastModifiedDate"}))
+    SaaSProductSortBy.add_member(:delivery_option_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DeliveryOptionTypes", traits: {"smithy.api#enumValue" => "DeliveryOptionTypes"}))
     SaaSProductSummary.add_member(:product_title, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductTitleString, name: "ProductTitle"))
     SaaSProductSummary.add_member(:visibility, ::Smithy::Schema::Shapes::MemberShape.new(target: SaaSProductVisibilityString, name: "Visibility"))
     SaaSProductSummary.type = Types::SaaSProductSummary
@@ -823,14 +1084,27 @@ module Aws::MarketplaceCatalog
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "Message"))
+    ValidationException.add_member(:validation_exception_field_list, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionFieldList, name: "ValidationExceptionFieldList"))
     ValidationException.type = Types::ValidationException
+    ValidationExceptionField.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "Reason"))
+    ValidationExceptionField.add_member(:entity_type, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityType, name: "EntityType"))
+    ValidationExceptionField.add_member(:entity_id, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "EntityId"))
+    ValidationExceptionField.add_member(:change_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ChangeType, name: "ChangeType"))
+    ValidationExceptionField.add_member(:field, ::Smithy::Schema::Shapes::MemberShape.new(target: FieldName, name: "Field"))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessageContent, name: "Message"))
+    ValidationExceptionField.type = Types::ValidationExceptionField
+    ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UnknownOperation"}))
+    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CannotParse"}))
+    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FieldValidationFailed"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "Other"}))
     ValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValueContent, name: "member"))
 
     AWSMPSeymour = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.marketplacecatalog#AWSMPSeymour"
       service.name = "AWSMPSeymour"
       service.version = "2018-09-17"
-      service.traits = {"aws.api#service" => {"sdkId" => "Marketplace Catalog", "arnNamespace" => "aws-marketplace", "cloudFormationName" => "MarketplaceCatalog", "cloudTrailEventSource" => "marketplacecatalog.amazonaws.com", "endpointPrefix" => "catalog.marketplace"}, "aws.auth#sigv4" => {"name" => "aws-marketplace"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Marketplace Catalog Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Marketplace Catalog", "arnNamespace" => "aws-marketplace", "cloudFormationName" => "MarketplaceCatalog", "cloudTrailEventSource" => "marketplacecatalog.amazonaws.com", "endpointPrefix" => "catalog.marketplace"}, "aws.auth#sigv4" => {"name" => "aws-marketplace"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Marketplace Catalog Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-east-1"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://catalog-marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://catalog.marketplace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://catalog.marketplace-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://catalog.marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://catalog.marketplace.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAkAAAAGAAAABQAAAAcF9eELAAAABgX14QQAAAAIAAAABwX14QkF9eEKAAAABAAAAAsAAAAKAAAABQX14QYF9eEIAAAABQAAAAwF9eEHAAAABwX14QUF9eEGAAAAAwX14QEAAAAOAAAABQX14QIF9eED"}}
       service.add_operation(:batch_describe_entities, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#BatchDescribeEntities"
         operation.name = "BatchDescribeEntities"
@@ -866,6 +1140,19 @@ module Aws::MarketplaceCatalog
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/DeleteResourcePolicy", "code" => 200}}
+      end)
+      service.add_operation(:describe_assessment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.marketplacecatalog#DescribeAssessment"
+        operation.name = "DescribeAssessment"
+        operation.input = DescribeAssessmentRequest
+        operation.output = DescribeAssessmentResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/DescribeAssessment", "code" => 200}}
+        operation[:paginator] = Paginators::DescribeAssessment.new
       end)
       service.add_operation(:describe_change_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#DescribeChangeSet"
@@ -903,6 +1190,18 @@ module Aws::MarketplaceCatalog
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/GetResourcePolicy", "code" => 200}}
+      end)
+      service.add_operation(:list_assessments, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.marketplacecatalog#ListAssessments"
+        operation.name = "ListAssessments"
+        operation.input = ListAssessmentsRequest
+        operation.output = ListAssessmentsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServiceException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/ListAssessments", "code" => 200}}
+        operation[:paginator] = Paginators::ListAssessments.new
       end)
       service.add_operation(:list_change_sets, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.marketplacecatalog#ListChangeSets"

@@ -7,6 +7,31 @@ module Aws::Kafka
   module Paginators
 
     # @api private
+    class DescribeTopicPartitions
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.partitions
+      end
+    end
+
+    # @api private
     class ListClientVpcConnections
       def next_tokens(data)
         next_token = data.next_token
@@ -278,6 +303,31 @@ module Aws::Kafka
 
       def items(data)
         data.secret_arn_list
+      end
+    end
+
+    # @api private
+    class ListTopics
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.topics
       end
     end
 

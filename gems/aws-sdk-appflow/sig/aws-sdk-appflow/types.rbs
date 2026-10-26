@@ -409,11 +409,13 @@ module Aws::Appflow
       def initialize: (
         ?auth_code: String,
         ?redirect_uri: String,
+        ?code_verifier: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor auth_code: String?
       attr_accessor redirect_uri: String?
+      attr_accessor code_verifier: String?
     end
 
     class ConnectorOperator
@@ -3035,11 +3037,13 @@ module Aws::Appflow
       def initialize: (
         ?username: String,
         ?password: String,
+        ?private_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor username: String?
       attr_accessor password: String?
+      attr_accessor private_key: String?
     end
 
     class SnowflakeConnectorProfileProperties

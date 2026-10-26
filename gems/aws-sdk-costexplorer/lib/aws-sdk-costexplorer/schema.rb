@@ -10,6 +10,7 @@ module Aws::CostExplorer
     AccountScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costexplorer#AccountScope", name: "AccountScope")
     AmortizedRecurringFee = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#AmortizedRecurringFee", name: "AmortizedRecurringFee")
     AmortizedUpfrontFee = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#AmortizedUpfrontFee", name: "AmortizedUpfrontFee")
+    AnalysesPageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.costexplorer#AnalysesPageSize", name: "AnalysesPageSize", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 600}})
     AnalysisDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#AnalysisDetails", name: "AnalysisDetails")
     AnalysisId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#AnalysisId", name: "AnalysisId", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[\\S\\s]{8}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{12}$"})
     AnalysisIds = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#AnalysisIds", name: "AnalysisIds", traits: {"smithy.api#length" => {"min" => 0, "max" => 600}})
@@ -66,6 +67,8 @@ module Aws::CostExplorer
     CostCategoryProcessingStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#CostCategoryProcessingStatusList", name: "CostCategoryProcessingStatusList")
     CostCategoryReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#CostCategoryReference", name: "CostCategoryReference")
     CostCategoryReferencesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#CostCategoryReferencesList", name: "CostCategoryReferencesList")
+    CostCategoryResourceAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#CostCategoryResourceAssociation", name: "CostCategoryResourceAssociation")
+    CostCategoryResourceAssociations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#CostCategoryResourceAssociations", name: "CostCategoryResourceAssociations")
     CostCategoryRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#CostCategoryRule", name: "CostCategoryRule")
     CostCategoryRuleType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costexplorer#CostCategoryRuleType", name: "CostCategoryRuleType")
     CostCategoryRuleVersion = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costexplorer#CostCategoryRuleVersion", name: "CostCategoryRuleVersion")
@@ -114,6 +117,7 @@ module Aws::CostExplorer
     DescribeCostCategoryDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#DescribeCostCategoryDefinitionRequest", name: "DescribeCostCategoryDefinitionRequest")
     DescribeCostCategoryDefinitionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#DescribeCostCategoryDefinitionResponse", name: "DescribeCostCategoryDefinitionResponse")
     Dimension = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costexplorer#Dimension", name: "Dimension")
+    DimensionKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#DimensionKey", name: "DimensionKey", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]*$"})
     DimensionValues = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#DimensionValues", name: "DimensionValues")
     DimensionValuesWithAttributes = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#DimensionValuesWithAttributes", name: "DimensionValuesWithAttributes")
     DimensionValuesWithAttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#DimensionValuesWithAttributesList", name: "DimensionValuesWithAttributesList")
@@ -140,6 +144,7 @@ module Aws::CostExplorer
     GenerationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costexplorer#GenerationStatus", name: "GenerationStatus")
     GenerationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#GenerationSummary", name: "GenerationSummary")
     GenerationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#GenerationSummaryList", name: "GenerationSummaryList")
+    GenericArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#GenericArn", name: "GenericArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"})
     GenericBoolean = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.costexplorer#GenericBoolean", name: "GenericBoolean", traits: {"smithy.api#default" => false})
     GenericDouble = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.costexplorer#GenericDouble", name: "GenericDouble", traits: {"smithy.api#default" => 0})
     GenericString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#GenericString", name: "GenericString", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^[\\S\\s]*$"})
@@ -210,6 +215,8 @@ module Aws::CostExplorer
     ListCostAllocationTagsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ListCostAllocationTagsResponse", name: "ListCostAllocationTagsResponse")
     ListCostCategoryDefinitionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ListCostCategoryDefinitionsRequest", name: "ListCostCategoryDefinitionsRequest")
     ListCostCategoryDefinitionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ListCostCategoryDefinitionsResponse", name: "ListCostCategoryDefinitionsResponse")
+    ListCostCategoryResourceAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsRequest", name: "ListCostCategoryResourceAssociationsRequest")
+    ListCostCategoryResourceAssociationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ListCostCategoryResourceAssociationsResponse", name: "ListCostCategoryResourceAssociationsResponse")
     ListSavingsPlansPurchaseRecommendationGenerationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGenerationRequest", name: "ListSavingsPlansPurchaseRecommendationGenerationRequest")
     ListSavingsPlansPurchaseRecommendationGenerationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGenerationResponse", name: "ListSavingsPlansPurchaseRecommendationGenerationResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
@@ -248,6 +255,9 @@ module Aws::CostExplorer
     PlatformDifference = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costexplorer#PlatformDifference", name: "PlatformDifference")
     PlatformDifferences = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#PlatformDifferences", name: "PlatformDifferences")
     PredictionIntervalLevel = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.costexplorer#PredictionIntervalLevel", name: "PredictionIntervalLevel", traits: {"smithy.api#range" => {"min" => 51, "max" => 99}})
+    ProductAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#ProductAttributeName", name: "ProductAttributeName", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^([a-zA-Z][a-zA-Z0-9]*)?$"})
+    ProductAttributeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#ProductAttributeValueList", name: "ProductAttributeValueList", traits: {"smithy.api#length" => {"min" => 1, "max" => 6000}})
+    ProductAttributeValues = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ProductAttributeValues", name: "ProductAttributeValues")
     ProvideAnomalyFeedbackRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ProvideAnomalyFeedbackRequest", name: "ProvideAnomalyFeedbackRequest")
     ProvideAnomalyFeedbackResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ProvideAnomalyFeedbackResponse", name: "ProvideAnomalyFeedbackResponse")
     PurchasedHours = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#PurchasedHours", name: "PurchasedHours")
@@ -261,6 +271,7 @@ module Aws::CostExplorer
     RecommendationId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#RecommendationId", name: "RecommendationId", traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[\\S\\s]{8}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{4}-[\\S\\s]{12}$"})
     RecommendationIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#RecommendationIdList", name: "RecommendationIdList")
     RecommendationTarget = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.costexplorer#RecommendationTarget", name: "RecommendationTarget")
+    RecommendationsPageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.costexplorer#RecommendationsPageSize", name: "RecommendationsPageSize", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 6000}})
     RedshiftInstanceDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#RedshiftInstanceDetails", name: "RedshiftInstanceDetails")
     RequestChangedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#RequestChangedException", name: "RequestChangedException", traits: {"smithy.api#error" => "client"})
     ReservationAggregates = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ReservationAggregates", name: "ReservationAggregates")
@@ -286,6 +297,9 @@ module Aws::CostExplorer
     ResourceTagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#ResourceTagKeyList", name: "ResourceTagKeyList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
     ResourceTagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#ResourceTagList", name: "ResourceTagList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
     ResourceTagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#ResourceTagValue", name: "ResourceTagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}, "smithy.api#pattern" => "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"})
+    ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.costexplorer#ResourceType", name: "ResourceType", traits: {"smithy.api#pattern" => "^[-a-zA-Z0-9/_]+:[-a-zA-Z0-9/_]+$"})
+    ResourceTypes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#ResourceTypes", name: "ResourceTypes")
+    ResourceTypesFilterInput = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#ResourceTypesFilterInput", name: "ResourceTypesFilterInput", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     ResourceUtilization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ResourceUtilization", name: "ResourceUtilization")
     ResultByTime = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#ResultByTime", name: "ResultByTime")
     ResultsByTime = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#ResultsByTime", name: "ResultsByTime")
@@ -317,6 +331,7 @@ module Aws::CostExplorer
     SavingsPlansPurchaseRecommendationMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#SavingsPlansPurchaseRecommendationMetadata", name: "SavingsPlansPurchaseRecommendationMetadata")
     SavingsPlansPurchaseRecommendationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#SavingsPlansPurchaseRecommendationSummary", name: "SavingsPlansPurchaseRecommendationSummary")
     SavingsPlansSavings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#SavingsPlansSavings", name: "SavingsPlansSavings")
+    SavingsPlansTargetCoverage = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.costexplorer#SavingsPlansTargetCoverage", name: "SavingsPlansTargetCoverage", traits: {"smithy.api#range" => {"min" => 10, "max" => 100}})
     SavingsPlansToAdd = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#SavingsPlansToAdd", name: "SavingsPlansToAdd", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     SavingsPlansToExclude = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.costexplorer#SavingsPlansToExclude", name: "SavingsPlansToExclude", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     SavingsPlansUtilization = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.costexplorer#SavingsPlansUtilization", name: "SavingsPlansUtilization")
@@ -411,6 +426,7 @@ module Aws::CostExplorer
     AnalysisSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSummary, name: "member"))
     AnalysisType.add_member(:max_savings, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAX_SAVINGS", traits: {"smithy.api#enumValue" => "MAX_SAVINGS"}))
     AnalysisType.add_member(:custom_commitment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_COMMITMENT", traits: {"smithy.api#enumValue" => "CUSTOM_COMMITMENT"}))
+    AnalysisType.add_member(:target_average_coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TARGET_AVERAGE_COVERAGE", traits: {"smithy.api#enumValue" => "TARGET_AVERAGE_COVERAGE"}))
     Anomalies.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Anomaly, name: "member"))
     Anomaly.add_member(:anomaly_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AnomalyId", traits: {"smithy.api#required" => {}}))
     Anomaly.add_member(:anomaly_start_date, ::Smithy::Schema::Shapes::MemberShape.new(target: YearMonthDay, name: "AnomalyStartDate"))
@@ -537,8 +553,14 @@ module Aws::CostExplorer
     CostCategoryReference.add_member(:processing_status, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryProcessingStatusList, name: "ProcessingStatus"))
     CostCategoryReference.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValuesList, name: "Values"))
     CostCategoryReference.add_member(:default_value, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValue, name: "DefaultValue"))
+    CostCategoryReference.add_member(:supported_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypes, name: "SupportedResourceTypes"))
     CostCategoryReference.type = Types::CostCategoryReference
     CostCategoryReferencesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryReference, name: "member"))
+    CostCategoryResourceAssociation.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericArn, name: "ResourceArn"))
+    CostCategoryResourceAssociation.add_member(:cost_category_name, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryName, name: "CostCategoryName"))
+    CostCategoryResourceAssociation.add_member(:cost_category_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CostCategoryArn"))
+    CostCategoryResourceAssociation.type = Types::CostCategoryResourceAssociation
+    CostCategoryResourceAssociations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryResourceAssociation, name: "member"))
     CostCategoryRule.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValue, name: "Value"))
     CostCategoryRule.add_member(:rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Rule"))
     CostCategoryRule.add_member(:inherited_value, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryInheritedValueDimension, name: "InheritedValue"))
@@ -692,6 +714,7 @@ module Aws::CostExplorer
     Dimension.add_member(:invoicing_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVOICING_ENTITY", traits: {"smithy.api#enumValue" => "INVOICING_ENTITY"}))
     Dimension.add_member(:anomaly_total_impact_absolute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANOMALY_TOTAL_IMPACT_ABSOLUTE", traits: {"smithy.api#enumValue" => "ANOMALY_TOTAL_IMPACT_ABSOLUTE"}))
     Dimension.add_member(:anomaly_total_impact_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANOMALY_TOTAL_IMPACT_PERCENTAGE", traits: {"smithy.api#enumValue" => "ANOMALY_TOTAL_IMPACT_PERCENTAGE"}))
+    Dimension.add_member(:product_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCT_ATTRIBUTE", traits: {"smithy.api#enumValue" => "PRODUCT_ATTRIBUTE"}))
     DimensionValues.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "Key"))
     DimensionValues.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: Values, name: "Values"))
     DimensionValues.add_member(:match_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOptions, name: "MatchOptions"))
@@ -765,6 +788,7 @@ module Aws::CostExplorer
     Expression.add_member(:dimensions, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionValues, name: "Dimensions"))
     Expression.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValues, name: "Tags"))
     Expression.add_member(:cost_categories, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryValues, name: "CostCategories"))
+    Expression.add_member(:product_attributes, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductAttributeValues, name: "ProductAttributes"))
     Expression.type = Types::Expression
     Expressions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "member"))
     FindingReasonCode.add_member(:cpu_over_provisioned, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CPU_OVER_PROVISIONED", traits: {"smithy.api#enumValue" => "CPU_OVER_PROVISIONED"}))
@@ -925,6 +949,7 @@ module Aws::CostExplorer
     GetDimensionValuesRequest.add_member(:search_string, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchString, name: "SearchString"))
     GetDimensionValuesRequest.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: DateInterval, name: "TimePeriod", traits: {"smithy.api#required" => {}}))
     GetDimensionValuesRequest.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: Dimension, name: "Dimension", traits: {"smithy.api#required" => {}}))
+    GetDimensionValuesRequest.add_member(:dimension_key, ::Smithy::Schema::Shapes::MemberShape.new(target: DimensionKey, name: "DimensionKey"))
     GetDimensionValuesRequest.add_member(:context, ::Smithy::Schema::Shapes::MemberShape.new(target: Context, name: "Context"))
     GetDimensionValuesRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Filter"))
     GetDimensionValuesRequest.add_member(:sort_by, ::Smithy::Schema::Shapes::MemberShape.new(target: SortDefinitions, name: "SortBy"))
@@ -958,7 +983,7 @@ module Aws::CostExplorer
     GetReservationPurchaseRecommendationRequest.add_member(:term_in_years, ::Smithy::Schema::Shapes::MemberShape.new(target: TermInYears, name: "TermInYears"))
     GetReservationPurchaseRecommendationRequest.add_member(:payment_option, ::Smithy::Schema::Shapes::MemberShape.new(target: PaymentOption, name: "PaymentOption"))
     GetReservationPurchaseRecommendationRequest.add_member(:service_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceSpecification, name: "ServiceSpecification"))
-    GetReservationPurchaseRecommendationRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "PageSize", traits: {"smithy.api#default" => 0}))
+    GetReservationPurchaseRecommendationRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationsPageSize, name: "PageSize", traits: {"smithy.api#default" => 0}))
     GetReservationPurchaseRecommendationRequest.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "NextPageToken"))
     GetReservationPurchaseRecommendationRequest.type = Types::GetReservationPurchaseRecommendationRequest
     GetReservationPurchaseRecommendationResponse.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationPurchaseRecommendationMetadata, name: "Metadata"))
@@ -980,7 +1005,7 @@ module Aws::CostExplorer
     GetRightsizingRecommendationRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Filter"))
     GetRightsizingRecommendationRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RightsizingRecommendationConfiguration, name: "Configuration"))
     GetRightsizingRecommendationRequest.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "Service", traits: {"smithy.api#required" => {}}))
-    GetRightsizingRecommendationRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "PageSize", traits: {"smithy.api#default" => 0}))
+    GetRightsizingRecommendationRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationsPageSize, name: "PageSize", traits: {"smithy.api#default" => 0}))
     GetRightsizingRecommendationRequest.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "NextPageToken"))
     GetRightsizingRecommendationRequest.type = Types::GetRightsizingRecommendationRequest
     GetRightsizingRecommendationResponse.add_member(:metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RightsizingRecommendationMetadata, name: "Metadata"))
@@ -1011,7 +1036,7 @@ module Aws::CostExplorer
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:payment_option, ::Smithy::Schema::Shapes::MemberShape.new(target: PaymentOption, name: "PaymentOption", traits: {"smithy.api#required" => {}}))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:account_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountScope, name: "AccountScope"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "NextPageToken"))
-    GetSavingsPlansPurchaseRecommendationRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "PageSize", traits: {"smithy.api#default" => 0}))
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationsPageSize, name: "PageSize", traits: {"smithy.api#default" => 0}))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:lookback_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: LookbackPeriodInDays, name: "LookbackPeriodInDays", traits: {"smithy.api#required" => {}}))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: Expression, name: "Filter"))
     GetSavingsPlansPurchaseRecommendationRequest.type = Types::GetSavingsPlansPurchaseRecommendationRequest
@@ -1075,6 +1100,7 @@ module Aws::CostExplorer
     GroupDefinitionType.add_member(:dimension, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIMENSION", traits: {"smithy.api#enumValue" => "DIMENSION"}))
     GroupDefinitionType.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "TAG"}))
     GroupDefinitionType.add_member(:cost_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_CATEGORY", traits: {"smithy.api#enumValue" => "COST_CATEGORY"}))
+    GroupDefinitionType.add_member(:product_attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCT_ATTRIBUTE", traits: {"smithy.api#enumValue" => "PRODUCT_ATTRIBUTE"}))
     GroupDefinitions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupDefinition, name: "member"))
     Groups.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Group, name: "member"))
     Impact.add_member(:max_impact, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericDouble, name: "MaxImpact", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
@@ -1097,7 +1123,7 @@ module Aws::CostExplorer
     LimitExceededException.type = Types::LimitExceededException
     ListCommitmentPurchaseAnalysesRequest.add_member(:analysis_status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisStatus, name: "AnalysisStatus"))
     ListCommitmentPurchaseAnalysesRequest.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "NextPageToken"))
-    ListCommitmentPurchaseAnalysesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "PageSize", traits: {"smithy.api#default" => 0}))
+    ListCommitmentPurchaseAnalysesRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysesPageSize, name: "PageSize", traits: {"smithy.api#default" => 0}))
     ListCommitmentPurchaseAnalysesRequest.add_member(:analysis_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisIds, name: "AnalysisIds"))
     ListCommitmentPurchaseAnalysesRequest.type = Types::ListCommitmentPurchaseAnalysesRequest
     ListCommitmentPurchaseAnalysesResponse.add_member(:analysis_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalysisSummaryList, name: "AnalysisSummaryList"))
@@ -1121,13 +1147,21 @@ module Aws::CostExplorer
     ListCostCategoryDefinitionsRequest.add_member(:effective_on, ::Smithy::Schema::Shapes::MemberShape.new(target: ZonedDateTime, name: "EffectiveOn"))
     ListCostCategoryDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "NextToken"))
     ListCostCategoryDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryMaxResults, name: "MaxResults"))
+    ListCostCategoryDefinitionsRequest.add_member(:supported_resource_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTypesFilterInput, name: "SupportedResourceTypes"))
     ListCostCategoryDefinitionsRequest.type = Types::ListCostCategoryDefinitionsRequest
     ListCostCategoryDefinitionsResponse.add_member(:cost_category_references, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryReferencesList, name: "CostCategoryReferences"))
     ListCostCategoryDefinitionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "NextToken"))
     ListCostCategoryDefinitionsResponse.type = Types::ListCostCategoryDefinitionsResponse
+    ListCostCategoryResourceAssociationsRequest.add_member(:cost_category_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "CostCategoryArn"))
+    ListCostCategoryResourceAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "NextToken"))
+    ListCostCategoryResourceAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryMaxResults, name: "MaxResults"))
+    ListCostCategoryResourceAssociationsRequest.type = Types::ListCostCategoryResourceAssociationsRequest
+    ListCostCategoryResourceAssociationsResponse.add_member(:cost_category_resource_associations, ::Smithy::Schema::Shapes::MemberShape.new(target: CostCategoryResourceAssociations, name: "CostCategoryResourceAssociations"))
+    ListCostCategoryResourceAssociationsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "NextToken"))
+    ListCostCategoryResourceAssociationsResponse.type = Types::ListCostCategoryResourceAssociationsResponse
     ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:generation_status, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerationStatus, name: "GenerationStatus"))
     ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:recommendation_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationIdList, name: "RecommendationIds"))
-    ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "PageSize", traits: {"smithy.api#default" => 0}))
+    ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:page_size, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationsPageSize, name: "PageSize", traits: {"smithy.api#default" => 0}))
     ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:next_page_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextPageToken, name: "NextPageToken"))
     ListSavingsPlansPurchaseRecommendationGenerationRequest.type = Types::ListSavingsPlansPurchaseRecommendationGenerationRequest
     ListSavingsPlansPurchaseRecommendationGenerationResponse.add_member(:generation_summary_list, ::Smithy::Schema::Shapes::MemberShape.new(target: GenerationSummaryList, name: "GenerationSummaryList"))
@@ -1173,6 +1207,9 @@ module Aws::CostExplorer
     ModifyRecommendationDetail.type = Types::ModifyRecommendationDetail
     MonitorArnList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "member"))
     MonitorDimension.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
+    MonitorDimension.add_member(:linked_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINKED_ACCOUNT", traits: {"smithy.api#enumValue" => "LINKED_ACCOUNT"}))
+    MonitorDimension.add_member(:tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TAG", traits: {"smithy.api#enumValue" => "TAG"}))
+    MonitorDimension.add_member(:cost_category, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COST_CATEGORY", traits: {"smithy.api#enumValue" => "COST_CATEGORY"}))
     MonitorType.add_member(:dimensional, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DIMENSIONAL", traits: {"smithy.api#enumValue" => "DIMENSIONAL"}))
     MonitorType.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
     NetworkResourceUtilization.add_member(:network_in_bytes_per_second, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "NetworkInBytesPerSecond"))
@@ -1200,6 +1237,11 @@ module Aws::CostExplorer
     PlatformDifference.add_member(:instance_store_availability, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSTANCE_STORE_AVAILABILITY", traits: {"smithy.api#enumValue" => "INSTANCE_STORE_AVAILABILITY"}))
     PlatformDifference.add_member(:virtualization_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIRTUALIZATION_TYPE", traits: {"smithy.api#enumValue" => "VIRTUALIZATION_TYPE"}))
     PlatformDifferences.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PlatformDifference, name: "member"))
+    ProductAttributeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Value, name: "member"))
+    ProductAttributeValues.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductAttributeName, name: "Key", traits: {"smithy.api#required" => {}}))
+    ProductAttributeValues.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: ProductAttributeValueList, name: "Values"))
+    ProductAttributeValues.add_member(:match_options, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOptions, name: "MatchOptions"))
+    ProductAttributeValues.type = Types::ProductAttributeValues
     ProvideAnomalyFeedbackRequest.add_member(:anomaly_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "AnomalyId", traits: {"smithy.api#required" => {}}))
     ProvideAnomalyFeedbackRequest.add_member(:feedback, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyFeedbackType, name: "Feedback", traits: {"smithy.api#required" => {}}))
     ProvideAnomalyFeedbackRequest.type = Types::ProvideAnomalyFeedbackRequest
@@ -1214,6 +1256,7 @@ module Aws::CostExplorer
     RDSInstanceDetails.add_member(:license_model, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "LicenseModel"))
     RDSInstanceDetails.add_member(:current_generation, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericBoolean, name: "CurrentGeneration", traits: {"smithy.api#default" => false}))
     RDSInstanceDetails.add_member(:size_flex_eligible, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericBoolean, name: "SizeFlexEligible", traits: {"smithy.api#default" => false}))
+    RDSInstanceDetails.add_member(:deployment_model, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "DeploymentModel"))
     RDSInstanceDetails.type = Types::RDSInstanceDetails
     RecommendationDetailData.add_member(:account_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountScope, name: "AccountScope"))
     RecommendationDetailData.add_member(:lookback_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: LookbackPeriodInDays, name: "LookbackPeriodInDays"))
@@ -1345,6 +1388,8 @@ module Aws::CostExplorer
     ResourceTag.type = Types::ResourceTag
     ResourceTagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagKey, name: "member"))
     ResourceTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTag, name: "member"))
+    ResourceTypes.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
+    ResourceTypesFilterInput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
     ResourceUtilization.add_member(:ec2_resource_utilization, ::Smithy::Schema::Shapes::MemberShape.new(target: EC2ResourceUtilization, name: "EC2ResourceUtilization"))
     ResourceUtilization.type = Types::ResourceUtilization
     ResultByTime.add_member(:time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: DateInterval, name: "TimePeriod"))
@@ -1423,6 +1468,7 @@ module Aws::CostExplorer
     SavingsPlansPurchaseAnalysisConfiguration.add_member(:savings_plans_to_add, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansToAdd, name: "SavingsPlansToAdd", traits: {"smithy.api#required" => {}}))
     SavingsPlansPurchaseAnalysisConfiguration.add_member(:savings_plans_to_exclude, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansToExclude, name: "SavingsPlansToExclude"))
     SavingsPlansPurchaseAnalysisConfiguration.add_member(:look_back_time_period, ::Smithy::Schema::Shapes::MemberShape.new(target: DateInterval, name: "LookBackTimePeriod", traits: {"smithy.api#required" => {}}))
+    SavingsPlansPurchaseAnalysisConfiguration.add_member(:savings_plans_target_coverage, ::Smithy::Schema::Shapes::MemberShape.new(target: SavingsPlansTargetCoverage, name: "SavingsPlansTargetCoverage"))
     SavingsPlansPurchaseAnalysisConfiguration.type = Types::SavingsPlansPurchaseAnalysisConfiguration
     SavingsPlansPurchaseAnalysisDetails.add_member(:currency_code, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "CurrencyCode"))
     SavingsPlansPurchaseAnalysisDetails.add_member(:lookback_period_in_hours, ::Smithy::Schema::Shapes::MemberShape.new(target: GenericString, name: "LookbackPeriodInHours"))
@@ -1554,6 +1600,7 @@ module Aws::CostExplorer
     SupportedSavingsPlansType.add_member(:compute_sp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPUTE_SP", traits: {"smithy.api#enumValue" => "COMPUTE_SP"}))
     SupportedSavingsPlansType.add_member(:ec2_instance_sp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EC2_INSTANCE_SP", traits: {"smithy.api#enumValue" => "EC2_INSTANCE_SP"}))
     SupportedSavingsPlansType.add_member(:sagemaker_sp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAGEMAKER_SP", traits: {"smithy.api#enumValue" => "SAGEMAKER_SP"}))
+    SupportedSavingsPlansType.add_member(:database_sp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DATABASE_SP", traits: {"smithy.api#enumValue" => "DATABASE_SP"}))
     TagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Entity, name: "member"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.add_member(:resource_tags, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceTagList, name: "ResourceTags", traits: {"smithy.api#required" => {}}))
@@ -1641,7 +1688,7 @@ module Aws::CostExplorer
       service.id = "com.amazonaws.costexplorer#AWSInsightsIndexService"
       service.name = "AWSInsightsIndexService"
       service.version = "2017-10-25"
-      service.traits = {"aws.api#service" => {"sdkId" => "Cost Explorer", "arnNamespace" => "ce", "cloudFormationName" => "CostExplorer", "cloudTrailEventSource" => "costexplorer.amazonaws.com", "docId" => "ce-2017-10-25", "endpointPrefix" => "ce"}, "aws.auth#sigv4" => {"name" => "ce"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Cost Explorer Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Cost Explorer", "arnNamespace" => "ce", "cloudFormationName" => "CostExplorer", "cloudTrailEventSource" => "costexplorer.amazonaws.com", "docId" => "ce-2017-10-25", "endpointPrefix" => "ce"}, "aws.auth#sigv4" => {"name" => "ce"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "AWS Cost Explorer Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-b"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-e"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-cn"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-f"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-eusc"]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ce.us-east-1.api.aws", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ce.cn-northwest-1.api.amazonwebservices.com.cn", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ce.us-iso-east-1.c2s.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-iso-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ce.us-isob-east-1.sc2s.sgov.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isob-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ce.eu-isoe-west-1.cloud.adc-e.uk", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eu-isoe-west-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ce.us-isof-south-1.csp.hci.ic.gov", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-isof-south-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ce.eusc-de-east-1.api.amazonwebservices.eu", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "eusc-de-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ce-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ce-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ce.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://ce.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "{PartitionResult#implicitGlobalRegion}"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 21, "nodes" => "/////wAAAAH/////AAAAAAAAABQAAAADAAAAAQAAAAQF9eESAAAAAgAAAAUF9eESAAAAAwAAABAAAAAGAAAABQAAAAwAAAAHAAAABgX14QYAAAAIAAAABwX14QcAAAAJAAAACAX14QgAAAAKAAAACwX14QkAAAALAAAADAX14QoF9eERAAAACQX14QQAAAANAAAACgX14QUAAAAOAAAADAX14QoAAAAPAAAADQX14Q8F9eEQAAAABAAAABIAAAARAAAABQX14QwF9eEOAAAABQAAABMF9eENAAAADQX14QsF9eEMAAAAAwX14QEAAAAVAAAABQX14QIF9eED"}}
       service.add_operation(:create_anomaly_monitor, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.costexplorer#CreateAnomalyMonitor"
         operation.name = "CreateAnomalyMonitor"
@@ -1867,6 +1914,7 @@ module Aws::CostExplorer
         operation.errors << InvalidNextTokenException
         operation.errors << LimitExceededException
         operation.traits = {}
+        operation[:paginator] = Paginators::GetReservationPurchaseRecommendation.new
       end)
       service.add_operation(:get_reservation_utilization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.costexplorer#GetReservationUtilization"
@@ -1886,6 +1934,7 @@ module Aws::CostExplorer
         operation.errors << InvalidNextTokenException
         operation.errors << LimitExceededException
         operation.traits = {}
+        operation[:paginator] = Paginators::GetRightsizingRecommendation.new
       end)
       service.add_operation(:get_savings_plan_purchase_recommendation_details, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.costexplorer#GetSavingsPlanPurchaseRecommendationDetails"
@@ -1971,6 +2020,7 @@ module Aws::CostExplorer
         operation.errors << InvalidNextTokenException
         operation.errors << LimitExceededException
         operation.traits = {}
+        operation[:paginator] = Paginators::ListCommitmentPurchaseAnalyses.new
       end)
       service.add_operation(:list_cost_allocation_tag_backfill_history, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistory"
@@ -2001,6 +2051,16 @@ module Aws::CostExplorer
         operation.traits = {}
         operation[:paginator] = Paginators::ListCostCategoryDefinitions.new
       end)
+      service.add_operation(:list_cost_category_resource_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.costexplorer#ListCostCategoryResourceAssociations"
+        operation.name = "ListCostCategoryResourceAssociations"
+        operation.input = ListCostCategoryResourceAssociationsRequest
+        operation.output = ListCostCategoryResourceAssociationsResponse
+        operation.errors << LimitExceededException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {}
+        operation[:paginator] = Paginators::ListCostCategoryResourceAssociations.new
+      end)
       service.add_operation(:list_savings_plans_purchase_recommendation_generation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.costexplorer#ListSavingsPlansPurchaseRecommendationGeneration"
         operation.name = "ListSavingsPlansPurchaseRecommendationGeneration"
@@ -2010,6 +2070,7 @@ module Aws::CostExplorer
         operation.errors << InvalidNextTokenException
         operation.errors << LimitExceededException
         operation.traits = {}
+        operation[:paginator] = Paginators::ListSavingsPlansPurchaseRecommendationGeneration.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.costexplorer#ListTagsForResource"

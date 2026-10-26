@@ -21,6 +21,15 @@ module Aws::BedrockAgent
       end
     end
 
+    module AccessControlAccess
+      ALLOW: String
+      DENY: String
+    end
+
+    module AccessControlPrincipalType
+      USER: String
+    end
+
     class AccessDeniedException
       include Smithy::Schema::Structure
 
@@ -579,6 +588,39 @@ module Aws::BedrockAgent
       attr_accessor agent_knowledge_base: Types::AgentKnowledgeBase?
     end
 
+    class AudioConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segmentation_configuration: Types::AudioSegmentationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segmentation_configuration: Types::AudioSegmentationConfiguration?
+    end
+
+    class AudioExtractionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio_extraction_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio_extraction_status: String?
+    end
+
+    class AudioSegmentationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fixed_length_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixed_length_duration: Integer?
+    end
+
     class AutoToolChoice
       include Smithy::Schema::Structure
 
@@ -605,11 +647,17 @@ module Aws::BedrockAgent
       def initialize: (
         ?dimensions: Integer,
         ?embedding_data_type: String,
+        ?audio: Array[Types::AudioConfiguration],
+        ?video: Array[Types::VideoConfiguration],
+        ?model_configuration: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dimensions: Integer?
       attr_accessor embedding_data_type: String?
+      attr_accessor audio: Array[Types::AudioConfiguration]?
+      attr_accessor video: Array[Types::VideoConfiguration]?
+      attr_accessor model_configuration: Smithy::Schema::document?
     end
 
     class BedrockFoundationModelConfiguration
@@ -1299,6 +1347,52 @@ module Aws::BedrockAgent
       attr_accessor updated_at: Time?
     end
 
+    class CreateVpcConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?client_token: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?resource_target: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?resolution_mode: String,
+        ?host_header: String,
+        ?tls_server_name: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor client_token: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor resource_target: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor resolution_mode: String?
+      attr_accessor host_header: String?
+      attr_accessor tls_server_name: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class CreateVpcConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_configuration_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_configuration_id: String?
+      attr_accessor status: String?
+    end
+
     module CreationMode
       DEFAULT: String
       OVERRIDDEN: String
@@ -1402,6 +1496,15 @@ module Aws::BedrockAgent
       attr_accessor connection: String?
     end
 
+    class DailySchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     module DataDeletionPolicy
       RETAIN: String
       DELETE: String
@@ -1445,6 +1548,7 @@ module Aws::BedrockAgent
 
       def initialize: (
         ?type: String,
+        ?managed_knowledge_base_connector_configuration: Types::ManagedKnowledgeBaseConnectorConfiguration,
         ?s3_configuration: Types::S3DataSourceConfiguration,
         ?web_configuration: Types::WebDataSourceConfiguration,
         ?confluence_configuration: Types::ConfluenceDataSourceConfiguration,
@@ -1454,6 +1558,7 @@ module Aws::BedrockAgent
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor managed_knowledge_base_connector_configuration: Types::ManagedKnowledgeBaseConnectorConfiguration?
       attr_accessor s3_configuration: Types::S3DataSourceConfiguration?
       attr_accessor web_configuration: Types::WebDataSourceConfiguration?
       attr_accessor confluence_configuration: Types::ConfluenceDataSourceConfiguration?
@@ -1465,6 +1570,9 @@ module Aws::BedrockAgent
       AVAILABLE: String
       DELETING: String
       DELETE_UNSUCCESSFUL: String
+      CREATING: String
+      UPDATING: String
+      FAILED: String
     end
 
     class DataSourceSummary
@@ -1496,6 +1604,37 @@ module Aws::BedrockAgent
       SHAREPOINT: String
       CUSTOM: String
       REDSHIFT_METADATA: String
+      MANAGED_KNOWLEDGE_BASE_CONNECTOR: String
+    end
+
+    class DayOfMonth
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?day_number: Integer,
+        ?last_day_of_month: Types::LastDayOfMonth,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor day_number: Integer?
+      attr_accessor last_day_of_month: Types::LastDayOfMonth?
+
+      class DayNumber < DayOfMonth
+      end
+      class LastDayOfMonth < DayOfMonth
+      end
+      class Unknown < DayOfMonth
+      end
+    end
+
+    module DayOfWeek
+      SUNDAY: String
+      MONDAY: String
+      TUESDAY: String
+      WEDNESDAY: String
+      THURSDAY: String
+      FRIDAY: String
+      SATURDAY: String
     end
 
     class DeleteAgentActionGroupRequest
@@ -1792,6 +1931,71 @@ module Aws::BedrockAgent
       attr_accessor version: String?
     end
 
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?expected_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor expected_revision_id: String?
+    end
+
+    class DeleteResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor revision_id: String?
+    end
+
+    class DeleteVpcConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?vpc_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor vpc_configuration_id: String?
+    end
+
+    class DeleteVpcConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_configuration_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_configuration_id: String?
+      attr_accessor status: String?
+    end
+
+    class DeletionProtectionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_protection_status: String,
+        ?deletion_protection_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_protection_status: String?
+      attr_accessor deletion_protection_threshold: Integer?
+    end
+
     class DisassociateAgentCollaboratorRequest
       include Smithy::Schema::Structure
 
@@ -1840,6 +2044,21 @@ module Aws::BedrockAgent
 
     end
 
+    class DocumentAccessControlEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?access: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor access: String?
+    end
+
     class DocumentContent
       include Smithy::Schema::Structure
 
@@ -1877,12 +2096,14 @@ module Aws::BedrockAgent
         ?type: String,
         ?inline_attributes: Array[Types::MetadataAttribute],
         ?s3_location: Types::CustomS3Location,
+        ?access_control_list: Array[Types::DocumentAccessControlEntry],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
       attr_accessor inline_attributes: Array[Types::MetadataAttribute]?
       attr_accessor s3_location: Types::CustomS3Location?
+      attr_accessor access_control_list: Array[Types::DocumentAccessControlEntry]?
     end
 
     module DocumentStatus
@@ -1940,6 +2161,16 @@ module Aws::BedrockAgent
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor bedrock_embedding_model_configuration: Types::BedrockEmbeddingModelConfiguration?
+    end
+
+    module EmbeddingModelType
+      CUSTOM: String
+      MANAGED: String
+    end
+
+    module EnabledOrDisabledState
+      ENABLED: String
+      DISABLED: String
     end
 
     class EnrichmentStrategyConfiguration
@@ -2787,10 +3018,12 @@ module Aws::BedrockAgent
 
       def initialize: (
         ?flow_identifier: String,
+        ?included_data: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor flow_identifier: String?
+      attr_accessor included_data: String?
     end
 
     class GetFlowResponse
@@ -2832,11 +3065,13 @@ module Aws::BedrockAgent
       def initialize: (
         ?flow_identifier: String,
         ?flow_version: String,
+        ?included_data: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor flow_identifier: String?
       attr_accessor flow_version: String?
+      attr_accessor included_data: String?
     end
 
     class GetFlowVersionResponse
@@ -2948,11 +3183,13 @@ module Aws::BedrockAgent
       def initialize: (
         ?prompt_identifier: String,
         ?prompt_version: String,
+        ?included_data: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor prompt_identifier: String?
       attr_accessor prompt_version: String?
+      attr_accessor included_data: String?
     end
 
     class GetPromptResponse
@@ -2982,6 +3219,56 @@ module Aws::BedrockAgent
       attr_accessor version: String?
       attr_accessor created_at: Time?
       attr_accessor updated_at: Time?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+      attr_accessor revision_id: String?
+    end
+
+    class GetVpcConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?vpc_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor vpc_configuration_id: String?
+    end
+
+    class GetVpcConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_configuration: Types::VpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
     end
 
     class GuardrailConfiguration
@@ -3021,9 +3308,25 @@ module Aws::BedrockAgent
       attr_accessor max_tokens: Integer?
     end
 
+    class ImageExtractionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_extraction_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_extraction_status: String?
+    end
+
     module IncludeExclude
       INCLUDE: String
       EXCLUDE: String
+    end
+
+    module IncludedData
+      ALL_DATA: String
+      METADATA_ONLY: String
     end
 
     class IncompatibleConnectionDataTypeFlowValidationDetails
@@ -3104,6 +3407,7 @@ module Aws::BedrockAgent
         ?failure_reasons: Array[String],
         ?started_at: Time,
         ?updated_at: Time,
+        ?text_ready_at: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3116,6 +3420,7 @@ module Aws::BedrockAgent
       attr_accessor failure_reasons: Array[String]?
       attr_accessor started_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor text_ready_at: Time?
     end
 
     class IngestionJobFilter
@@ -3170,6 +3475,7 @@ module Aws::BedrockAgent
         ?number_of_metadata_documents_modified: Integer,
         ?number_of_documents_deleted: Integer,
         ?number_of_documents_failed: Integer,
+        ?number_of_documents_skipped: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3180,6 +3486,7 @@ module Aws::BedrockAgent
       attr_accessor number_of_metadata_documents_modified: Integer?
       attr_accessor number_of_documents_deleted: Integer?
       attr_accessor number_of_documents_failed: Integer?
+      attr_accessor number_of_documents_skipped: Integer?
     end
 
     module IngestionJobStatus
@@ -3202,6 +3509,7 @@ module Aws::BedrockAgent
         ?status: String,
         ?started_at: Time,
         ?updated_at: Time,
+        ?text_ready_at: Time,
         ?statistics: Types::IngestionJobStatistics,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3213,6 +3521,7 @@ module Aws::BedrockAgent
       attr_accessor status: String?
       attr_accessor started_at: Time?
       attr_accessor updated_at: Time?
+      attr_accessor text_ready_at: Time?
       attr_accessor statistics: Types::IngestionJobStatistics?
     end
 
@@ -3352,6 +3661,7 @@ module Aws::BedrockAgent
       def initialize: (
         ?type: String,
         ?vector_knowledge_base_configuration: Types::VectorKnowledgeBaseConfiguration,
+        ?managed_knowledge_base_configuration: Types::ManagedKnowledgeBaseConfiguration,
         ?kendra_knowledge_base_configuration: Types::KendraKnowledgeBaseConfiguration,
         ?sql_knowledge_base_configuration: Types::SqlKnowledgeBaseConfiguration,
       ) -> void
@@ -3359,6 +3669,7 @@ module Aws::BedrockAgent
 
       attr_accessor type: String?
       attr_accessor vector_knowledge_base_configuration: Types::VectorKnowledgeBaseConfiguration?
+      attr_accessor managed_knowledge_base_configuration: Types::ManagedKnowledgeBaseConfiguration?
       attr_accessor kendra_knowledge_base_configuration: Types::KendraKnowledgeBaseConfiguration?
       attr_accessor sql_knowledge_base_configuration: Types::SqlKnowledgeBaseConfiguration?
     end
@@ -3462,6 +3773,7 @@ module Aws::BedrockAgent
       UPDATING: String
       FAILED: String
       DELETE_UNSUCCESSFUL: String
+      UPDATE_UNSUCCESSFUL: String
     end
 
     module KnowledgeBaseStorageType
@@ -3498,6 +3810,7 @@ module Aws::BedrockAgent
       VECTOR: String
       KENDRA: String
       SQL: String
+      MANAGED: String
     end
 
     class LambdaFunctionFlowNodeConfiguration
@@ -3509,6 +3822,15 @@ module Aws::BedrockAgent
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor lambda_arn: String?
+    end
+
+    class LastDayOfMonth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class LexFlowNodeConfiguration
@@ -3946,6 +4268,36 @@ module Aws::BedrockAgent
       attr_accessor tags: Hash[String, String]?
     end
 
+    class ListVpcConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_id: String,
+        ?status_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_id: String?
+      attr_accessor status_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListVpcConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::VpcConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::VpcConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
     class LoopControllerFlowNodeConfiguration
       include Smithy::Schema::Structure
 
@@ -4022,6 +4374,57 @@ module Aws::BedrockAgent
       attr_accessor node: String?
       attr_accessor input: String?
       attr_accessor cause: String?
+    end
+
+    class ManagedKnowledgeBaseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?embedding_model_type: String,
+        ?embedding_model_arn: String,
+        ?embedding_model_configuration: Types::EmbeddingModelConfiguration,
+        ?server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration,
+        ?supplemental_data_storage_configuration: Types::SupplementalDataStorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor embedding_model_type: String?
+      attr_accessor embedding_model_arn: String?
+      attr_accessor embedding_model_configuration: Types::EmbeddingModelConfiguration?
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration?
+      attr_accessor supplemental_data_storage_configuration: Types::SupplementalDataStorageConfiguration?
+    end
+
+    class ManagedKnowledgeBaseConnectorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_protection_configuration: Types::DeletionProtectionConfiguration,
+        ?media_extraction_configuration: Types::MediaExtractionConfiguration,
+        ?connector_parameters: Smithy::Schema::document,
+        ?sync_schedule: Types::SyncSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_protection_configuration: Types::DeletionProtectionConfiguration?
+      attr_accessor media_extraction_configuration: Types::MediaExtractionConfiguration?
+      attr_accessor connector_parameters: Smithy::Schema::document?
+      attr_accessor sync_schedule: Types::SyncSchedule?
+    end
+
+    class MediaExtractionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_extraction_configuration: Types::ImageExtractionConfiguration,
+        ?audio_extraction_configuration: Types::AudioExtractionConfiguration,
+        ?video_extraction_configuration: Types::VideoExtractionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_extraction_configuration: Types::ImageExtractionConfiguration?
+      attr_accessor audio_extraction_configuration: Types::AudioExtractionConfiguration?
+      attr_accessor video_extraction_configuration: Types::VideoExtractionConfiguration?
     end
 
     class MemoryConfiguration
@@ -4282,6 +4685,17 @@ module Aws::BedrockAgent
       attr_accessor metadata_field: String?
     end
 
+    class MonthlySchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?day_of_month: Types::DayOfMonth,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor day_of_month: Types::DayOfMonth?
+    end
+
     class MultipleLoopControllerNodesFlowValidationDetails
       include Smithy::Schema::Structure
 
@@ -4483,6 +4897,8 @@ module Aws::BedrockAgent
     module ParsingStrategy
       BEDROCK_FOUNDATION_MODEL: String
       BEDROCK_DATA_AUTOMATION: String
+      SMART_PARSING: String
+      MULTI_MODAL_EMBEDDINGS: String
     end
 
     class PatternObjectFilter
@@ -4878,6 +5294,34 @@ module Aws::BedrockAgent
       attr_accessor metadata: Array[Types::PromptMetadataEntry]?
       attr_accessor additional_model_request_fields: Smithy::Schema::document?
       attr_accessor gen_ai_resource: Types::PromptGenAiResource?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+        ?expected_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+      attr_accessor expected_revision_id: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor revision_id: String?
     end
 
     module QueryEngineType
@@ -5643,6 +6087,30 @@ module Aws::BedrockAgent
       PYTHON_3: String
     end
 
+    class SyncSchedule
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?daily: Types::DailySchedule,
+        ?weekly: Types::WeeklySchedule,
+        ?monthly: Types::MonthlySchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daily: Types::DailySchedule?
+      attr_accessor weekly: Types::WeeklySchedule?
+      attr_accessor monthly: Types::MonthlySchedule?
+
+      class Daily < SyncSchedule
+      end
+      class Weekly < SyncSchedule
+      end
+      class Monthly < SyncSchedule
+      end
+      class Unknown < SyncSchedule
+      end
+    end
+
     class SystemContentBlock
       include Smithy::Schema::Union
 
@@ -5802,12 +6270,14 @@ module Aws::BedrockAgent
         ?name: String,
         ?description: String,
         ?input_schema: Types::ToolInputSchema,
+        ?strict: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor description: String?
       attr_accessor input_schema: Types::ToolInputSchema?
+      attr_accessor strict: bool?
     end
 
     class Transformation
@@ -6540,6 +7010,131 @@ module Aws::BedrockAgent
       BEDROCK_RERANKING_MODEL: String
     end
 
+    class VideoConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segmentation_configuration: Types::VideoSegmentationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segmentation_configuration: Types::VideoSegmentationConfiguration?
+    end
+
+    class VideoExtractionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?video_extraction_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor video_extraction_status: String?
+    end
+
+    class VideoSegmentationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fixed_length_duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fixed_length_duration: Integer?
+    end
+
+    class VpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_configuration_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?vpc_id: String,
+        ?subnet_ids: Array[String],
+        ?resource_target: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?resolution_mode: String,
+        ?host_header: String,
+        ?tls_server_name: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_configuration_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor resource_target: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor resolution_mode: String?
+      attr_accessor host_header: String?
+      attr_accessor tls_server_name: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module VpcConfigurationStatus
+      CREATING: String
+      CREATED: String
+      DELETING: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+    end
+
+    class VpcConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_configuration_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?vpc_id: String,
+        ?resource_target: String,
+        ?port: Integer,
+        ?protocol: String,
+        ?resolution_mode: String,
+        ?host_header: String,
+        ?tls_server_name: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_configuration_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor vpc_id: String?
+      attr_accessor resource_target: String?
+      attr_accessor port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor resolution_mode: String?
+      attr_accessor host_header: String?
+      attr_accessor tls_server_name: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+    end
+
+    module VpcProtocol
+      HTTP: String
+      HTTPS: String
+    end
+
+    module VpcResolutionMode
+      PUBLIC: String
+      IN_VPC: String
+    end
+
     class WebCrawlerConfiguration
       include Smithy::Schema::Structure
 
@@ -6601,6 +7196,17 @@ module Aws::BedrockAgent
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor url_configuration: Types::UrlConfiguration?
+    end
+
+    class WeeklySchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?day_of_week: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor day_of_week: String?
     end
   end
 end

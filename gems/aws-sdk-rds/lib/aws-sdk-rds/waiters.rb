@@ -15,7 +15,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_db_clusters,
             acceptors: [
@@ -98,7 +98,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_db_clusters,
             acceptors: [
@@ -177,7 +177,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_db_cluster_snapshots,
             acceptors: [
@@ -260,7 +260,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_db_cluster_snapshots,
             acceptors: [
@@ -339,7 +339,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_db_instances,
             acceptors: [
@@ -422,7 +422,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_db_instances,
             acceptors: [
@@ -501,7 +501,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_db_snapshots,
             acceptors: [
@@ -584,7 +584,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_db_snapshots,
             acceptors: [
@@ -663,7 +663,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_tenant_databases,
             acceptors: [
@@ -726,7 +726,7 @@ module Aws::RDS
         @waiter = Smithy::Client::Waiters::Waiter.new(
           max_wait_time: options[:max_wait_time],
           min_delay: options[:min_delay] || 30,
-          max_delay: options[:max_delay] || 120,
+          max_delay: options[:max_delay] || 1800,
           poller: Smithy::Client::Waiters::Poller.new(
             operation_name: :describe_tenant_databases,
             acceptors: [

@@ -85,6 +85,12 @@ module Aws::AppIntegrations
       ?iframe_config: {
         allow: Array[String],
         sandbox: untyped
+      },
+      ?application_type: String,
+      ?auth_config: {
+        auth_type: String,
+        credential_provider_identifier: String,
+        audience_override: String
       }
     ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
 
@@ -176,7 +182,8 @@ module Aws::AppIntegrations
       include Smithy::Client::_Response[Types::DeleteApplicationResponse]
     end
     def delete_application: (
-      ?arn: String
+      ?arn: String,
+      ?force: bool
     ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
 
     interface _DeleteDataIntegrationResponse
@@ -211,6 +218,8 @@ module Aws::AppIntegrations
       def initialization_timeout: () -> Integer?
       def application_config: () -> Types::ApplicationConfig?
       def iframe_config: () -> Types::IframeConfig?
+      def application_type: () -> String?
+      def auth_config: () -> Types::AuthConfig?
     end
     def get_application: (
       ?arn: String
@@ -264,7 +273,8 @@ module Aws::AppIntegrations
     end
     def list_applications: (
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?application_type: String
     ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
 
     interface _ListDataIntegrationAssociationsResponse
@@ -370,6 +380,12 @@ module Aws::AppIntegrations
       ?iframe_config: {
         allow: Array[String],
         sandbox: untyped
+      },
+      ?application_type: String,
+      ?auth_config: {
+        auth_type: String,
+        credential_provider_identifier: String,
+        audience_override: String
       }
     ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
 

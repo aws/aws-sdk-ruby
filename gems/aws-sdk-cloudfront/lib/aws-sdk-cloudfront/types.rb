@@ -122,6 +122,12 @@ module Aws::CloudFront
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the Anycast static IP list.</p>
     #   @return [String]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the Anycast static IP list.</p>
+    #   @return [String]
+    # @!attribute ipam_config
+    #   <p>The IPAM configuration for the Anycast static IP list, that contains the quantity and list of IPAM CIDR configurations.</p>
+    #   @return [Types::IpamConfig]
     # @!attribute anycast_ips
     #   <p>The static IP addresses that are allocated to the Anycast static IP list.</p>
     #   @return [Array<String>]
@@ -137,6 +143,8 @@ module Aws::CloudFront
       :name,
       :status,
       :arn,
+      :ip_address_type,
+      :ipam_config,
       :anycast_ips,
       :ip_count,
       :last_modified_time,
@@ -196,6 +204,15 @@ module Aws::CloudFront
     # @!attribute last_modified_time
     #   <p>The last time the Anycast static IP list was modified.</p>
     #   @return [Time]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the Anycast static IP list.</p>
+    #   @return [String]
+    # @!attribute e_tag
+    #   <p>The current version (ETag value) of the Anycast static IP list.</p>
+    #   @return [String]
+    # @!attribute ipam_config
+    #   <p>The IPAM configuration for the Anycast static IP list, that contains the quantity and list of IPAM CIDR configurations.</p>
+    #   @return [Types::IpamConfig]
     class AnycastIpListSummary < Struct.new(
       nil,
       :id,
@@ -204,6 +221,9 @@ module Aws::CloudFront
       :arn,
       :ip_count,
       :last_modified_time,
+      :ip_address_type,
+      :e_tag,
+      :ipam_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -320,6 +340,45 @@ module Aws::CloudFront
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The CA certificates bundle location in Amazon S3.</p>
+    # @!attribute bucket
+    #   <p>The S3 bucket.</p>
+    #   @return [String]
+    # @!attribute key
+    #   <p>The location's key.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>The location's Region.</p>
+    #   @return [String]
+    # @!attribute version
+    #   <p>The location's version.</p>
+    #   @return [String]
+    class CaCertificatesBundleS3Location < Struct.new(
+      nil,
+      :bucket,
+      :key,
+      :region,
+      :version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A CA certificates bundle source.</p>
+    # @!attribute ca_certificates_bundle_s3_location
+    #   <p>The CA certificates bundle location in Amazon S3.</p>
+    #   @return [Types::CaCertificatesBundleS3Location]
+    class CaCertificatesBundleSource < Struct.new(
+      :ca_certificates_bundle_s3_location,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class CaCertificatesBundleS3Location < CaCertificatesBundleSource; end
+      class Unknown < CaCertificatesBundleSource; end
     end
 
     # <p>A complex type that describes how CloudFront processes requests.</p> <p>You must create at least as many cache behaviors (including the default cache behavior) as you have origins if you want CloudFront to serve objects from all of the origins. Each cache behavior specifies the one origin from which you want CloudFront to get objects. If you have two origins and only the default cache behavior, the default cache behavior will cause CloudFront to get objects from one of the origins, but the other origin is never used.</p> <p>For the current quota (formerly known as limit) on the number of cache behaviors that you can add to a distribution, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you don't want to specify any cache behaviors, include only an empty <code>CacheBehaviors</code> element. Don't specify an empty individual <code>CacheBehavior</code> element, because this is invalid. For more information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CacheBehaviors.html">CacheBehaviors</a>. </p> <p>To delete all cache behaviors in an existing distribution, update the distribution configuration and include only an empty <code>CacheBehaviors</code> element.</p> <p>To add, change, or remove one or more cache behaviors, update the distribution configuration and specify all of the cache behaviors that you want to include in the updated distribution.</p> <important> <p>If your minimum TTL is greater than 0, CloudFront will cache content for at least the duration specified in the cache policy's minimum TTL, even if the <code>Cache-Control: no-cache</code>, <code>no-store</code>, or <code>private</code> directives are present in the origin headers.</p> </important> <p>For more information about cache behaviors, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior">Cache Behavior Settings</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -592,6 +651,18 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A complex type that specifies the HTTP header name from which CloudFront extracts cache tags from origin responses. When you add <code>CacheTagConfig</code> to a distribution, CloudFront reads the specified header from origin responses, parses the comma-separated tag values, and stores them with the cached object. You can then invalidate cached objects by tag using the <code>CreateInvalidation</code> API.</p>
+    # @!attribute header_name
+    #   <p>The name of the HTTP header that your origin includes in responses. CloudFront uses this header to extract cache tags. The header value must contain comma-separated tag values (for example, <code>product:electronics, category:tv, brand:example</code>).</p>
+    #   @return [String]
+    class CacheTagConfig < Struct.new(
+      nil,
+      :header_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:</p> <ul> <li> <p>CloudFront caches responses to <code>GET</code> and <code>HEAD</code> requests.</p> </li> <li> <p>CloudFront caches responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests.</p> </li> </ul> <p>If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly.</p>
     # @!attribute quantity
     #   <p>The number of HTTP methods for which you want CloudFront to cache responses. Valid values are <code>2</code> (for caching responses to <code>GET</code> and <code>HEAD</code> requests) and <code>3</code> (for caching responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests).</p>
@@ -802,6 +873,86 @@ module Aws::CloudFront
       :max_items,
       :quantity,
       :items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A connection function association.</p>
+    # @!attribute id
+    #   <p>The association's ID.</p>
+    #   @return [String]
+    class ConnectionFunctionAssociation < Struct.new(
+      nil,
+      :id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A connection function summary.</p>
+    # @!attribute name
+    #   <p>The connection function name.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The connection function ID.</p>
+    #   @return [String]
+    # @!attribute connection_function_config
+    #   <p>Contains configuration information about a CloudFront function.</p>
+    #   @return [Types::FunctionConfig]
+    # @!attribute connection_function_arn
+    #   <p>The connection function Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The connection function status.</p>
+    #   @return [String]
+    # @!attribute stage
+    #   <p>The connection function stage.</p>
+    #   @return [String]
+    # @!attribute created_time
+    #   <p>The connection function created time.</p>
+    #   @return [Time]
+    # @!attribute last_modified_time
+    #   <p>The connection function last modified time.</p>
+    #   @return [Time]
+    class ConnectionFunctionSummary < Struct.new(
+      nil,
+      :name,
+      :id,
+      :connection_function_config,
+      :connection_function_arn,
+      :status,
+      :stage,
+      :created_time,
+      :last_modified_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A connection function test result.</p>
+    # @!attribute connection_function_summary
+    #   <p>The connection function summary.</p>
+    #   @return [Types::ConnectionFunctionSummary]
+    # @!attribute compute_utilization
+    #   <p>The connection function compute utilization.</p>
+    #   @return [String]
+    # @!attribute connection_function_execution_logs
+    #   <p>The connection function execution logs.</p>
+    #   @return [Array<String>]
+    # @!attribute connection_function_error_message
+    #   <p>The connection function error message.</p>
+    #   @return [String]
+    # @!attribute connection_function_output
+    #   <p>The connection function output.</p>
+    #   @return [String]
+    class ConnectionFunctionTestResult < Struct.new(
+      nil,
+      :connection_function_summary,
+      :compute_utilization,
+      :connection_function_execution_logs,
+      :connection_function_error_message,
+      :connection_function_output,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1196,11 +1347,19 @@ module Aws::CloudFront
     # @!attribute tags
     #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
     #   @return [Types::Tags]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> only</p> </li> <li> <p> <code>ipv6</code> only </p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>
+    #   @return [String]
+    # @!attribute ipam_cidr_configs
+    #   <p> A list of IPAM CIDR configurations that specify the IP address ranges and IPAM pool settings for creating the Anycast static IP list. </p>
+    #   @return [Array<Types::IpamCidrConfig>]
     class CreateAnycastIpListRequest < Struct.new(
       nil,
       :name,
       :ip_count,
       :tags,
+      :ip_address_type,
+      :ipam_cidr_configs,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1276,6 +1435,48 @@ module Aws::CloudFront
     class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
       nil,
       :cloud_front_origin_access_identity,
+      :location,
+      :e_tag,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>A name for the connection function.</p>
+    #   @return [String]
+    # @!attribute connection_function_config
+    #   <p>Contains configuration information about a CloudFront function.</p>
+    #   @return [Types::FunctionConfig]
+    # @!attribute connection_function_code
+    #   <p>The code for the connection function.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
+    #   @return [Types::Tags]
+    class CreateConnectionFunctionRequest < Struct.new(
+      nil,
+      :name,
+      :connection_function_config,
+      :connection_function_code,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_function_summary
+    #   <p>The summary for the connection function.</p>
+    #   @return [Types::ConnectionFunctionSummary]
+    # @!attribute location
+    #   <p>The location of the connection function.</p>
+    #   @return [String]
+    # @!attribute e_tag
+    #   <p>The version identifier for the current version of the connection function.</p>
+    #   @return [String]
+    class CreateConnectionFunctionResult < Struct.new(
+      nil,
+      :connection_function_summary,
       :location,
       :e_tag,
       keyword_init: true
@@ -1546,11 +1747,15 @@ module Aws::CloudFront
     # @!attribute function_code
     #   <p>The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
+    #   @return [Types::Tags]
     class CreateFunctionRequest < Struct.new(
       nil,
       :name,
       :function_config,
       :function_code,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1676,11 +1881,15 @@ module Aws::CloudFront
     # @!attribute import_source
     #   <p>The S3 bucket that provides the source for the import. The source must be in a valid JSON format.</p>
     #   @return [Types::ImportSource]
+    # @!attribute tags
+    #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
+    #   @return [Types::Tags]
     class CreateKeyValueStoreRequest < Struct.new(
       nil,
       :name,
       :comment,
       :import_source,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1949,6 +2158,44 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute name
+    #   <p>A name for the trust store.</p>
+    #   @return [String]
+    # @!attribute ca_certificates_bundle_source
+    #   <p>The CA certificates bundle source for the trust store.</p>
+    #   @return [Types::CaCertificatesBundleSource]
+    # @!attribute use_client_certificate_ocsp_endpoint
+    #   <p>A Boolean that determines whether to use the CA certificate's OCSP endpoint to check certificate revocation status.</p>
+    #   @return [Boolean]
+    # @!attribute tags
+    #   <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
+    #   @return [Types::Tags]
+    class CreateTrustStoreRequest < Struct.new(
+      nil,
+      :name,
+      :ca_certificates_bundle_source,
+      :use_client_certificate_ocsp_endpoint,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute trust_store
+    #   <p>The trust store.</p>
+    #   @return [Types::TrustStore]
+    # @!attribute e_tag
+    #   <p>The version identifier for the current version of the trust store.</p>
+    #   @return [String]
+    class CreateTrustStoreResult < Struct.new(
+      nil,
+      :trust_store,
+      :e_tag,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute vpc_origin_endpoint_config
     #   <p>The VPC origin endpoint configuration.</p>
     #   @return [Types::VpcOriginEndpointConfig]
@@ -2061,6 +2308,9 @@ module Aws::CloudFront
     # @!attribute ip_address_type
     #   <p>Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose <code>dualstack</code> to help optimize reliability.</p>
     #   @return [String]
+    # @!attribute origin_mtls_config
+    #   <p>Configures mutual TLS authentication between CloudFront and your origin server.</p>
+    #   @return [Types::OriginMtlsConfig]
     class CustomOriginConfig < Struct.new(
       nil,
       :http_port,
@@ -2070,6 +2320,7 @@ module Aws::CloudFront
       :origin_read_timeout,
       :origin_keepalive_timeout,
       :ip_address_type,
+      :origin_mtls_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2221,6 +2472,21 @@ module Aws::CloudFront
     #   <p>The value of the <code>ETag</code> header you received from a previous <code>GET</code> or <code>PUT</code> request. For example: <code>E2QWRUHAPOMQZL</code>.</p>
     #   @return [String]
     class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
+      nil,
+      :id,
+      :if_match,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The connection function's ID.</p>
+    #   @return [String]
+    # @!attribute if_match
+    #   <p>The current version (<code>ETag</code> value) of the connection function you are deleting.</p>
+    #   @return [String]
+    class DeleteConnectionFunctionRequest < Struct.new(
       nil,
       :id,
       :if_match,
@@ -2443,6 +2709,17 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudFront resource for which the resource policy should be deleted.</p>
+    #   @return [String]
+    class DeleteResourcePolicyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute id
     #   <p>The identifier for the response headers policy that you are deleting.</p> <p>To get the identifier, you can use <code>ListResponseHeadersPolicies</code>.</p>
     #   @return [String]
@@ -2475,6 +2752,21 @@ module Aws::CloudFront
     end
 
     # @!attribute id
+    #   <p>The trust store's ID.</p>
+    #   @return [String]
+    # @!attribute if_match
+    #   <p>The current version (<code>ETag</code> value) of the trust store you are deleting.</p>
+    #   @return [String]
+    class DeleteTrustStoreRequest < Struct.new(
+      nil,
+      :id,
+      :if_match,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
     #   <p>The VPC origin ID.</p>
     #   @return [String]
     # @!attribute if_match
@@ -2498,6 +2790,36 @@ module Aws::CloudFront
     class DeleteVpcOriginResult < Struct.new(
       nil,
       :vpc_origin,
+      :e_tag,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The connection function's identifier.</p>
+    #   @return [String]
+    # @!attribute stage
+    #   <p>The connection function's stage.</p>
+    #   @return [String]
+    class DescribeConnectionFunctionRequest < Struct.new(
+      nil,
+      :identifier,
+      :stage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_function_summary
+    #   <p>The connection function's summary.</p>
+    #   @return [Types::ConnectionFunctionSummary]
+    # @!attribute e_tag
+    #   <p>The version identifier for the current version of the connection function.</p>
+    #   @return [String]
+    class DescribeConnectionFunctionResult < Struct.new(
+      nil,
+      :connection_function_summary,
       :e_tag,
       keyword_init: true
     )
@@ -2746,6 +3068,15 @@ module Aws::CloudFront
     # @!attribute connection_mode
     #   <p>This field specifies whether the connection mode is through a standard distribution (direct) or a multi-tenant distribution with distribution tenants (tenant-only).</p>
     #   @return [String]
+    # @!attribute viewer_mtls_config
+    #   <p>The distribution's viewer mTLS configuration.</p>
+    #   @return [Types::ViewerMtlsConfig]
+    # @!attribute connection_function_association
+    #   <p>The distribution's connection function association.</p>
+    #   @return [Types::ConnectionFunctionAssociation]
+    # @!attribute cache_tag_config
+    #   <p>Configuration for cache tag extraction from origin responses. When specified, CloudFront reads the header named in <code>HeaderName</code> from origin responses and stores the comma-separated values as cache tags on the object.</p> <p>Distributions without <code>CacheTagConfig</code> do not extract tags. When <code>CacheTagConfig</code> is removed from a distribution via <code>UpdateDistribution</code>, CloudFront stops extracting tags from origin responses.</p> <note> <p>Changing the <code>HeaderName</code> on an existing distribution does not retroactively affect previously cached objects. Tag-based invalidations will not apply to objects already cached using a previous header. To ensure tag invalidations function after updating the header name, use path-based invalidations to recache all objects that use cache tags.</p> </note>
+    #   @return [Types::CacheTagConfig]
     class DistributionConfig < Struct.new(
       nil,
       :caller_reference,
@@ -2770,6 +3101,9 @@ module Aws::CloudFront
       :anycast_ip_list_id,
       :tenant_config,
       :connection_mode,
+      :viewer_mtls_config,
+      :connection_function_association,
+      :cache_tag_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2811,6 +3145,54 @@ module Aws::CloudFront
     #   <p>Contains the distribution IDs in the list.</p>
     #   @return [Array<String>]
     class DistributionIdList < Struct.new(
+      nil,
+      :marker,
+      :next_marker,
+      :max_items,
+      :is_truncated,
+      :quantity,
+      :items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that pairs a CloudFront distribution ID with its owning Amazon Web Services account ID.</p>
+    # @!attribute distribution_id
+    #   <p>The ID of the distribution.</p>
+    #   @return [String]
+    # @!attribute owner_account_id
+    #   <p>The ID of the Amazon Web Services account that owns the distribution. </p>
+    #   @return [String]
+    class DistributionIdOwner < Struct.new(
+      nil,
+      :distribution_id,
+      :owner_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The list of distribution IDs and the Amazon Web Services accounts that they belong to.</p>
+    # @!attribute marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list of <code>DistributionIdOwner</code> objects. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    #   @return [String]
+    # @!attribute next_marker
+    #   <p>A token used for pagination of results returned in the response. You can use the token from the previous request to define where the current request should begin.</p>
+    #   @return [String]
+    # @!attribute max_items
+    #   <p>The maximum number of <code>DistributionIdOwner</code> objects to return.</p>
+    #   @return [Integer]
+    # @!attribute is_truncated
+    #   <p>A flag that indicates whether more <code>DistributionIdOwner</code> objects remain to be listed. If your results were truncated, you can make a follow-up pagination request using the <code>Marker</code> request parameter to retrieve more results in the list.</p>
+    #   @return [Boolean]
+    # @!attribute quantity
+    #   <p>Specifies the actual number of <code>DistributionIdOwner</code> objects included in the list for the current page.</p>
+    #   @return [Integer]
+    # @!attribute items
+    #   <p>The number of <code>DistributionIdOwner</code> objects.</p>
+    #   @return [Array<Types::DistributionIdOwner>]
+    class DistributionIdOwnerList < Struct.new(
       nil,
       :marker,
       :next_marker,
@@ -2955,6 +3337,12 @@ module Aws::CloudFront
     # @!attribute anycast_ip_list_id
     #   <p>ID of the Anycast static IP list that is associated with the distribution.</p>
     #   @return [String]
+    # @!attribute viewer_mtls_config
+    #   <p>The distribution's viewer mTLS configuration.</p>
+    #   @return [Types::ViewerMtlsConfig]
+    # @!attribute connection_function_association
+    #   <p>The distribution's connection function association.</p>
+    #   @return [Types::ConnectionFunctionAssociation]
     class DistributionSummary < Struct.new(
       nil,
       :id,
@@ -2981,6 +3369,8 @@ module Aws::CloudFront
       :staging,
       :connection_mode,
       :anycast_ip_list_id,
+      :viewer_mtls_config,
+      :connection_function_association,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3900,6 +4290,40 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute identifier
+    #   <p>The connection function's identifier.</p>
+    #   @return [String]
+    # @!attribute stage
+    #   <p>The connection function's stage.</p>
+    #   @return [String]
+    class GetConnectionFunctionRequest < Struct.new(
+      nil,
+      :identifier,
+      :stage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_function_code
+    #   <p>The connection function's code.</p>
+    #   @return [String]
+    # @!attribute e_tag
+    #   <p>The version identifier for the current version of the connection function.</p>
+    #   @return [String]
+    # @!attribute content_type
+    #   <p>The connection function's content type.</p>
+    #   @return [String]
+    class GetConnectionFunctionResult < Struct.new(
+      nil,
+      :connection_function_code,
+      :e_tag,
+      :content_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute routing_endpoint
     #   <p>The routing endpoint for the target connection group, such as d111111abcdef8.cloudfront.net.</p>
     #   @return [String]
@@ -4582,6 +5006,32 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudFront resource that is associated with the resource policy.</p>
+    #   @return [String]
+    class GetResourcePolicyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudFront resource that is associated with the resource policy.</p>
+    #   @return [String]
+    # @!attribute policy_document
+    #   <p>The resource policy in JSON format.</p>
+    #   @return [String]
+    class GetResourcePolicyResult < Struct.new(
+      nil,
+      :resource_arn,
+      :policy_document,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute id
     #   <p>The identifier for the response headers policy.</p> <p>If the response headers policy is attached to a distribution's cache behavior, you can get the policy's identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the response headers policy is not attached to a cache behavior, you can get the identifier using <code>ListResponseHeadersPolicies</code>.</p>
     #   @return [String]
@@ -4684,6 +5134,32 @@ module Aws::CloudFront
     class GetStreamingDistributionResult < Struct.new(
       nil,
       :streaming_distribution,
+      :e_tag,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The trust store's identifier.</p>
+    #   @return [String]
+    class GetTrustStoreRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute trust_store
+    #   <p>The trust store.</p>
+    #   @return [Types::TrustStore]
+    # @!attribute e_tag
+    #   <p>The version identifier for the current version of the trust store.</p>
+    #   @return [String]
+    class GetTrustStoreResult < Struct.new(
+      nil,
+      :trust_store,
       :e_tag,
       keyword_init: true
     )
@@ -5204,6 +5680,46 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration for an IPAM CIDR that defines a specific IP address range, IPAM pool, and associated Anycast IP address.</p>
+    # @!attribute cidr
+    #   <p>The CIDR that specifies the IP address range for this IPAM configuration.</p>
+    #   @return [String]
+    # @!attribute ipam_pool_arn
+    #   <p>The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to.</p>
+    #   @return [String]
+    # @!attribute anycast_ip
+    #   <p>The specified Anycast IP address allocated from the IPAM pool for this CIDR configuration.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the IPAM CIDR configuration.</p>
+    #   @return [String]
+    class IpamCidrConfig < Struct.new(
+      nil,
+      :cidr,
+      :ipam_pool_arn,
+      :anycast_ip,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration IPAM settings that includes the quantity of CIDR configurations and the list of IPAM CIDR configurations.</p>
+    # @!attribute quantity
+    #   <p>The number of IPAM CIDR configurations in the <code>IpamCidrConfigs</code> list.</p>
+    #   @return [Integer]
+    # @!attribute ipam_cidr_configs
+    #   <p>A list of IPAM CIDR configurations that define the IP address ranges, IPAM pools, and associated Anycast IP addresses.</p>
+    #   @return [Array<Types::IpamCidrConfig>]
+    class IpamConfig < Struct.new(
+      nil,
+      :quantity,
+      :ipam_cidr_configs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A list of identifiers for the public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>
     # @!attribute key_group_id
     #   <p>The identifier of the key group that contains the public keys.</p>
@@ -5577,6 +6093,40 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    #   @return [String]
+    # @!attribute max_items
+    #   <p>The maximum number of connection functions that you want returned in the response.</p>
+    #   @return [Integer]
+    # @!attribute stage
+    #   <p>The connection function's stage.</p>
+    #   @return [String]
+    class ListConnectionFunctionsRequest < Struct.new(
+      nil,
+      :marker,
+      :max_items,
+      :stage,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_marker
+    #   <p>Indicates the next page of connection functions. To get the next page of the list, use this value in the <code>Marker</code> field of your request.</p>
+    #   @return [String]
+    # @!attribute connection_functions
+    #   <p>A list of connection functions.</p>
+    #   @return [Array<Types::ConnectionFunctionSummary>]
+    class ListConnectionFunctionsResult < Struct.new(
+      nil,
+      :next_marker,
+      :connection_functions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute association_filter
     #   <p>Filter by associated Anycast IP list ID.</p>
     #   @return [Types::ConnectionGroupAssociationFilter]
@@ -5770,6 +6320,36 @@ module Aws::CloudFront
     end
 
     # @!attribute marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    #   @return [String]
+    # @!attribute max_items
+    #   <p>The maximum number of distributions that you want returned in the response.</p>
+    #   @return [Integer]
+    # @!attribute connection_function_identifier
+    #   <p>The distributions by connection function identifier.</p>
+    #   @return [String]
+    class ListDistributionsByConnectionFunctionRequest < Struct.new(
+      nil,
+      :marker,
+      :max_items,
+      :connection_function_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute distribution_list
+    #   <p>A distribution list.</p>
+    #   @return [Types::DistributionList]
+    class ListDistributionsByConnectionFunctionResult < Struct.new(
+      nil,
+      :distribution_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute marker
     #   <p> The marker for the next set of distributions to retrieve.</p>
     #   @return [String]
     # @!attribute max_items
@@ -5859,6 +6439,36 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The ARN of the CloudFront resource that you've shared with other Amazon Web Services accounts.</p>
+    #   @return [String]
+    # @!attribute marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list of distributions. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    #   @return [String]
+    # @!attribute max_items
+    #   <p>The maximum number of distributions to return.</p>
+    #   @return [Integer]
+    class ListDistributionsByOwnedResourceRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :marker,
+      :max_items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute distribution_list
+    #   <p>The list of distributions that are using the shared resource.</p>
+    #   @return [Types::DistributionIdOwnerList]
+    class ListDistributionsByOwnedResourceResult < Struct.new(
+      nil,
+      :distribution_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute marker
     #   <p>Use this field when paginating results to indicate where to begin in your list of distributions. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
     #   @return [String]
@@ -5918,6 +6528,36 @@ module Aws::CloudFront
     class ListDistributionsByResponseHeadersPolicyIdResult < Struct.new(
       nil,
       :distribution_id_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute trust_store_identifier
+    #   <p>The distributions by trust store identifier.</p>
+    #   @return [String]
+    # @!attribute marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    #   @return [String]
+    # @!attribute max_items
+    #   <p>The maximum number of distributions that you want returned in the response.</p>
+    #   @return [Integer]
+    class ListDistributionsByTrustStoreRequest < Struct.new(
+      nil,
+      :trust_store_identifier,
+      :marker,
+      :max_items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute distribution_list
+    #   <p>A distribution list.</p>
+    #   @return [Types::DistributionList]
+    class ListDistributionsByTrustStoreResult < Struct.new(
+      nil,
+      :distribution_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6442,6 +7082,36 @@ module Aws::CloudFront
     end
 
     # @!attribute marker
+    #   <p>Use this field when paginating results to indicate where to begin in your list. The response includes items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of <code>NextMarker</code> from the current page's response.</p>
+    #   @return [String]
+    # @!attribute max_items
+    #   <p>The maximum number of trust stores that you want returned in the response.</p>
+    #   @return [Integer]
+    class ListTrustStoresRequest < Struct.new(
+      nil,
+      :marker,
+      :max_items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_marker
+    #   <p>Indicates the next page of trust stores. To get the next page of the list, use this value in the <code>Marker</code> field of your request.</p>
+    #   @return [String]
+    # @!attribute trust_store_list
+    #   <p>The trust store list.</p>
+    #   @return [Array<Types::TrustStoreSummary>]
+    class ListTrustStoresResult < Struct.new(
+      nil,
+      :next_marker,
+      :trust_store_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute marker
     #   <p>The marker associated with the VPC origins list.</p>
     #   @return [String]
     # @!attribute max_items
@@ -6855,10 +7525,10 @@ module Aws::CloudFront
     #   <p>A description of the origin access control.</p>
     #   @return [String]
     # @!attribute signing_protocol
-    #   <p>The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is <code>sigv4</code>.</p>
+    #   <p>The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid values are <code>sigv4</code> and <code>sigv4a</code>.</p>
     #   @return [String]
     # @!attribute signing_behavior
-    #   <p>Specifies which requests CloudFront signs (adds authentication information to). Specify <code>always</code> for the most common use case. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings">origin access control advanced settings</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>This field can have one of the following values:</p> <ul> <li> <p> <code>always</code> – CloudFront signs all origin requests, overwriting the <code>Authorization</code> header from the viewer request if one exists.</p> </li> <li> <p> <code>never</code> – CloudFront doesn't sign any origin requests. This value turns off origin access control for all origins in all distributions that use this origin access control.</p> </li> <li> <p> <code>no-override</code> – If the viewer request doesn't contain the <code>Authorization</code> header, then CloudFront signs the origin request. If the viewer request contains the <code>Authorization</code> header, then CloudFront doesn't sign the origin request and instead passes along the <code>Authorization</code> header from the viewer request. <b>WARNING: To pass along the <code>Authorization</code> header from the viewer request, you <i>must</i> add the <code>Authorization</code> header to a <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html">cache policy</a> for all cache behaviors that use origins associated with this origin access control.</b> </p> </li> </ul>
+    #   <p>Specifies which requests CloudFront signs (adds authentication information to). Specify <code>always</code> for the most common use case. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings">origin access control advanced settings</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>This field can have one of the following values:</p> <ul> <li> <p> <code>always</code> – CloudFront signs all origin requests, overwriting the <code>Authorization</code> header from the viewer request if one exists.</p> </li> <li> <p> <code>never</code> – CloudFront doesn't sign any origin requests. This value turns off origin access control for all origins in all distributions that use this origin access control.</p> </li> <li> <p> <code>no-override</code> – If the viewer request doesn't contain the <code>Authorization</code> header, then CloudFront signs the origin request. If the viewer request contains the <code>Authorization</code> header, then CloudFront doesn't sign the origin request and instead passes along the <code>Authorization</code> header from the viewer request. <b>WARNING: To pass along the <code>Authorization</code> header from the viewer request, you <i>must</i> add the <code>Authorization</code> header to a <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html">cache policy</a> for all cache behaviors that use origins associated with this origin access control.</b> </p> </li> <li> <p> <code>always-amz-auth</code> – CloudFront signs all origin requests with Amazon authentication headers. If the viewer request contains the <code>Authorization</code> header, then CloudFront also forwards that header to the origin. This value is only valid with Lambda-Web origins. <b>WARNING: To forward the <code>Authorization</code> header from the viewer request, you <i>must</i> add the <code>Authorization</code> header to a <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html">cache policy</a> for all cache behaviors that use origins associated with this origin access control.</b> </p> </li> </ul>
     #   @return [String]
     # @!attribute origin_access_control_origin_type
     #   <p>The type of origin that this origin access control is for.</p>
@@ -6929,10 +7599,10 @@ module Aws::CloudFront
     #   <p>A unique name that identifies the origin access control.</p>
     #   @return [String]
     # @!attribute signing_protocol
-    #   <p>The signing protocol of the origin access control. The signing protocol determines how CloudFront signs (authenticates) requests. The only valid value is <code>sigv4</code>.</p>
+    #   <p>The signing protocol of the origin access control. The signing protocol determines how CloudFront signs (authenticates) requests. The only valid values are <code>sigv4</code> and <code>sigv4a</code>.</p>
     #   @return [String]
     # @!attribute signing_behavior
-    #   <p>A value that specifies which requests CloudFront signs (adds authentication information to). This field can have one of the following values:</p> <ul> <li> <p> <code>never</code> – CloudFront doesn't sign any origin requests.</p> </li> <li> <p> <code>always</code> – CloudFront signs all origin requests, overwriting the <code>Authorization</code> header from the viewer request if necessary.</p> </li> <li> <p> <code>no-override</code> – If the viewer request doesn't contain the <code>Authorization</code> header, CloudFront signs the origin request. If the viewer request contains the <code>Authorization</code> header, CloudFront doesn't sign the origin request, but instead passes along the <code>Authorization</code> header that it received in the viewer request.</p> </li> </ul>
+    #   <p>A value that specifies which requests CloudFront signs (adds authentication information to). This field can have one of the following values:</p> <ul> <li> <p> <code>never</code> – CloudFront doesn't sign any origin requests.</p> </li> <li> <p> <code>always</code> – CloudFront signs all origin requests, overwriting the <code>Authorization</code> header from the viewer request if necessary.</p> </li> <li> <p> <code>no-override</code> – If the viewer request doesn't contain the <code>Authorization</code> header, CloudFront signs the origin request. If the viewer request contains the <code>Authorization</code> header, CloudFront doesn't sign the origin request, but instead passes along the <code>Authorization</code> header that it received in the viewer request.</p> </li> <li> <p> <code>always-amz-auth</code> – CloudFront signs all origin requests with Amazon authentication headers, and forwards the viewer's <code>Authorization</code> header to the origin if one is present. This value is only valid with Lambda-Web origins.</p> </li> </ul>
     #   @return [String]
     # @!attribute origin_access_control_origin_type
     #   <p>The type of origin that this origin access control is for.</p>
@@ -7041,6 +7711,18 @@ module Aws::CloudFront
       nil,
       :quantity,
       :items,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configures mutual TLS authentication between CloudFront and your origin server.</p>
+    # @!attribute client_certificate_arn
+    #   <p>The Amazon Resource Name (ARN) of the client certificate stored in Amazon Web Services Certificate Manager (ACM) that CloudFront uses to authenticate with your origin using Mutual TLS.</p>
+    #   @return [String]
+    class OriginMtlsConfig < Struct.new(
+      nil,
+      :client_certificate_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7351,7 +8033,7 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.</p>
+    # <p>A public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.</p> <p>CloudFront supports signed URLs and signed cookies with RSA 2048 or ECDSA 256 key signatures. Field-level encryption is only compatible with RSA 2048 key signatures.</p>
     # @!attribute id
     #   <p>The identifier of the public key.</p>
     #   @return [String]
@@ -7382,7 +8064,7 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Configuration information about a public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.</p>
+    # <p>Configuration information about a public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.</p> <p>CloudFront supports signed URLs and signed cookies with RSA 2048 or ECDSA 256 key signatures. Field-level encryption is only compatible with RSA 2048 key signatures.</p>
     # @!attribute caller_reference
     #   <p>A string included in the request to help make sure that the request can't be replayed.</p>
     #   @return [String]
@@ -7469,6 +8151,32 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute id
+    #   <p>The connection function ID.</p>
+    #   @return [String]
+    # @!attribute if_match
+    #   <p>The current version (<code>ETag</code> value) of the connection function.</p>
+    #   @return [String]
+    class PublishConnectionFunctionRequest < Struct.new(
+      nil,
+      :id,
+      :if_match,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_function_summary
+    #   <p>The connection function summary.</p>
+    #   @return [Types::ConnectionFunctionSummary]
+    class PublishConnectionFunctionResult < Struct.new(
+      nil,
+      :connection_function_summary,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of the function that you are publishing.</p>
     #   @return [String]
@@ -7490,6 +8198,32 @@ module Aws::CloudFront
     class PublishFunctionResult < Struct.new(
       nil,
       :function_summary,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudFront resource for which the policy is being created.</p>
+    #   @return [String]
+    # @!attribute policy_document
+    #   <p>The JSON-formatted resource policy to create.</p>
+    #   @return [String]
+    class PutResourcePolicyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      :policy_document,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the CloudFront resource for which the policy was created.</p>
+    #   @return [String]
+    class PutResourcePolicyResult < Struct.new(
+      nil,
+      :resource_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8577,6 +9311,40 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute id
+    #   <p>The connection function ID.</p>
+    #   @return [String]
+    # @!attribute if_match
+    #   <p>The current version (<code>ETag</code> value) of the connection function.</p>
+    #   @return [String]
+    # @!attribute stage
+    #   <p>The connection function stage.</p>
+    #   @return [String]
+    # @!attribute connection_object
+    #   <p>The connection object.</p>
+    #   @return [String]
+    class TestConnectionFunctionRequest < Struct.new(
+      nil,
+      :id,
+      :if_match,
+      :stage,
+      :connection_object,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_function_test_result
+    #   <p>The connection function test result.</p>
+    #   @return [Types::ConnectionFunctionTestResult]
+    class TestConnectionFunctionResult < Struct.new(
+      nil,
+      :connection_function_test_result,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The CloudFront function failed.</p>
     # @!attribute message
     #   @return [String]
@@ -9242,6 +10010,106 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A trust store.</p>
+    # @!attribute id
+    #   <p>The trust store's ID.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The trust store's Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The trust store's name.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The trust store's status.</p>
+    #   @return [String]
+    # @!attribute number_of_ca_certificates
+    #   <p>The trust store's number of CA certificates.</p>
+    #   @return [Integer]
+    # @!attribute last_modified_time
+    #   <p>The trust store's last modified time.</p>
+    #   @return [Time]
+    # @!attribute reason
+    #   <p>The trust store's reason.</p>
+    #   @return [String]
+    # @!attribute use_client_certificate_ocsp_endpoint
+    #   <p>A Boolean that determines whether the trust store uses the CA certificate's OCSP endpoint to check certificate revocation status.</p>
+    #   @return [Boolean]
+    class TrustStore < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :name,
+      :status,
+      :number_of_ca_certificates,
+      :last_modified_time,
+      :reason,
+      :use_client_certificate_ocsp_endpoint,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A trust store configuration.</p>
+    # @!attribute trust_store_id
+    #   <p>The trust store ID.</p>
+    #   @return [String]
+    # @!attribute advertise_trust_store_ca_names
+    #   <p>The configuration to use to advertise trust store CA names.</p>
+    #   @return [Boolean]
+    # @!attribute ignore_certificate_expiry
+    #   <p>The configuration to use to ignore certificate expiration.</p>
+    #   @return [Boolean]
+    class TrustStoreConfig < Struct.new(
+      nil,
+      :trust_store_id,
+      :advertise_trust_store_ca_names,
+      :ignore_certificate_expiry,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A trust store summary.</p>
+    # @!attribute id
+    #   <p>The trust store's ID.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The trust store's Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The trust store's name.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The trust store's status.</p>
+    #   @return [String]
+    # @!attribute number_of_ca_certificates
+    #   <p>The trust store's number of CA certificates.</p>
+    #   @return [Integer]
+    # @!attribute last_modified_time
+    #   <p>The trust store's last modified time.</p>
+    #   @return [Time]
+    # @!attribute reason
+    #   <p>The trust store's reason.</p>
+    #   @return [String]
+    # @!attribute e_tag
+    #   <p>The version identifier for the current version of the trust store.</p>
+    #   @return [String]
+    class TrustStoreSummary < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :name,
+      :status,
+      :number_of_ca_certificates,
+      :last_modified_time,
+      :reason,
+      :e_tag,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified key group does not exist.</p>
     # @!attribute message
     #   @return [String]
@@ -9331,6 +10199,44 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute id
+    #   <p>The ID of the Anycast static IP list.</p>
+    #   @return [String]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for the Anycast static IP list. You can specify one of the following options:</p> <ul> <li> <p> <code>ipv4</code> only</p> </li> <li> <p> <code>ipv6</code> only</p> </li> <li> <p> <code>dualstack</code> - Allocate a list of both IPv4 and IPv6 addresses</p> </li> </ul>
+    #   @return [String]
+    # @!attribute ipam_cidr_configs
+    #   <p>A list of IPAM CIDR configurations that specify the IP address ranges and IPAM pool settings for updating the Anycast static IP list.</p>
+    #   @return [Array<Types::IpamCidrConfig>]
+    # @!attribute if_match
+    #   <p>The current version (ETag value) of the Anycast static IP list that you are updating.</p>
+    #   @return [String]
+    class UpdateAnycastIpListRequest < Struct.new(
+      nil,
+      :id,
+      :ip_address_type,
+      :ipam_cidr_configs,
+      :if_match,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute anycast_ip_list
+    #   <p>An Anycast static IP list. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/request-static-ips.html">Request Anycast static IPs to use for allowlisting</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
+    #   @return [Types::AnycastIpList]
+    # @!attribute e_tag
+    #   <p>The current version of the Anycast static IP list.</p>
+    #   @return [String]
+    class UpdateAnycastIpListResult < Struct.new(
+      nil,
+      :anycast_ip_list,
+      :e_tag,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute cache_policy_config
     #   <p>A cache policy configuration.</p>
     #   @return [Types::CachePolicyConfig]
@@ -9395,6 +10301,44 @@ module Aws::CloudFront
     class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
       nil,
       :cloud_front_origin_access_identity,
+      :e_tag,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The connection function ID.</p>
+    #   @return [String]
+    # @!attribute if_match
+    #   <p>The current version (<code>ETag</code> value) of the connection function you are updating.</p>
+    #   @return [String]
+    # @!attribute connection_function_config
+    #   <p>Contains configuration information about a CloudFront function.</p>
+    #   @return [Types::FunctionConfig]
+    # @!attribute connection_function_code
+    #   <p>The connection function code.</p>
+    #   @return [String]
+    class UpdateConnectionFunctionRequest < Struct.new(
+      nil,
+      :id,
+      :if_match,
+      :connection_function_config,
+      :connection_function_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_function_summary
+    #   <p>The connection function summary.</p>
+    #   @return [Types::ConnectionFunctionSummary]
+    # @!attribute e_tag
+    #   <p>The version identifier for the current version of the connection function.</p>
+    #   @return [String]
+    class UpdateConnectionFunctionResult < Struct.new(
+      nil,
+      :connection_function_summary,
       :e_tag,
       keyword_init: true
     )
@@ -10027,6 +10971,44 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute id
+    #   <p>The trust store ID.</p>
+    #   @return [String]
+    # @!attribute ca_certificates_bundle_source
+    #   <p>The CA certificates bundle source.</p>
+    #   @return [Types::CaCertificatesBundleSource]
+    # @!attribute use_client_certificate_ocsp_endpoint
+    #   <p>A Boolean that determines whether to use the CA certificate's OCSP endpoint to check certificate revocation status.</p>
+    #   @return [Boolean]
+    # @!attribute if_match
+    #   <p>The current version (<code>ETag</code> value) of the trust store you are updating.</p>
+    #   @return [String]
+    class UpdateTrustStoreRequest < Struct.new(
+      nil,
+      :id,
+      :ca_certificates_bundle_source,
+      :use_client_certificate_ocsp_endpoint,
+      :if_match,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute trust_store
+    #   <p>The trust store.</p>
+    #   @return [Types::TrustStore]
+    # @!attribute e_tag
+    #   <p>The version identifier for the current version of the trust store.</p>
+    #   @return [String]
+    class UpdateTrustStoreResult < Struct.new(
+      nil,
+      :trust_store,
+      :e_tag,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute vpc_origin_endpoint_config
     #   <p>The VPC origin endpoint configuration.</p>
     #   @return [Types::VpcOriginEndpointConfig]
@@ -10145,12 +11127,36 @@ module Aws::CloudFront
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A viewer mTLS configuration.</p>
+    # @!attribute mode
+    #   <p>The viewer mTLS mode.</p>
+    #   @return [String]
+    # @!attribute trust_store_config
+    #   <p>The trust store configuration associated with the viewer mTLS configuration.</p>
+    #   @return [Types::TrustStoreConfig]
+    class ViewerMtlsConfig < Struct.new(
+      nil,
+      :mode,
+      :trust_store_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:mode] = 'required' unless options.key?(:mode)
+        super
+      end
+    end
+
     # <p>An Amazon CloudFront VPC origin.</p>
     # @!attribute id
     #   <p>The VPC origin ID.</p>
     #   @return [String]
     # @!attribute arn
     #   <p>The VPC origin ARN.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The account ID of the Amazon Web Services account that owns the VPC origin.</p>
     #   @return [String]
     # @!attribute status
     #   <p>The VPC origin status.</p>
@@ -10168,6 +11174,7 @@ module Aws::CloudFront
       nil,
       :id,
       :arn,
+      :account_id,
       :status,
       :created_time,
       :last_modified_time,
@@ -10181,6 +11188,9 @@ module Aws::CloudFront
     # @!attribute vpc_origin_id
     #   <p>The VPC origin ID.</p>
     #   @return [String]
+    # @!attribute owner_account_id
+    #   <p>The account ID of the Amazon Web Services account that owns the VPC origin.</p>
+    #   @return [String]
     # @!attribute origin_read_timeout
     #   <p>Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the <i>origin response timeout</i>. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 30 seconds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout">Response timeout</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [Integer]
@@ -10190,6 +11200,7 @@ module Aws::CloudFront
     class VpcOriginConfig < Struct.new(
       nil,
       :vpc_origin_id,
+      :owner_account_id,
       :origin_read_timeout,
       :origin_keepalive_timeout,
       keyword_init: true
@@ -10216,6 +11227,9 @@ module Aws::CloudFront
     # @!attribute origin_ssl_protocols
     #   <p>A complex type that contains information about the SSL/TLS protocols that CloudFront can use when establishing an HTTPS connection with your origin.</p>
     #   @return [Types::OriginSslProtocols]
+    # @!attribute ip_address_type
+    #   <p>The IP address type of the CloudFront VPC origin endpoint configuration. Valid values are <code>ipv4</code> and <code>dualstack</code>. IPv6-only is not supported for VPC origins.</p>
+    #   @return [String]
     class VpcOriginEndpointConfig < Struct.new(
       nil,
       :name,
@@ -10224,6 +11238,7 @@ module Aws::CloudFront
       :https_port,
       :origin_protocol_policy,
       :origin_ssl_protocols,
+      :ip_address_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10280,8 +11295,14 @@ module Aws::CloudFront
     # @!attribute arn
     #   <p>The VPC origin summary ARN.</p>
     #   @return [String]
+    # @!attribute account_id
+    #   <p>The account ID of the Amazon Web Services account that owns the VPC origin.</p>
+    #   @return [String]
     # @!attribute origin_endpoint_arn
     #   <p>The VPC origin summary origin endpoint ARN.</p>
+    #   @return [String]
+    # @!attribute ip_address_type
+    #   <p>The IP address type of the CloudFront VPC origin. Valid values are <code>ipv4</code> and <code>dualstack</code>. IPv6-only is not supported for VPC origins.</p>
     #   @return [String]
     class VpcOriginSummary < Struct.new(
       nil,
@@ -10291,7 +11312,9 @@ module Aws::CloudFront
       :created_time,
       :last_modified_time,
       :arn,
+      :account_id,
       :origin_endpoint_arn,
+      :ip_address_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

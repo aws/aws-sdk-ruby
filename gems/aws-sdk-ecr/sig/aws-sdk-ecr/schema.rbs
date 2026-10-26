@@ -4,8 +4,13 @@ module Aws::ECR
 
     AccountSettingName: StringShape
     AccountSettingValue: StringShape
+    Annotations: MapShape
     Arch: StringShape
     Arn: StringShape
+    ArtifactStatus: EnumShape
+    ArtifactStatusFilter: EnumShape
+    ArtifactType: StringShape
+    ArtifactTypeList: ListShape
     Attribute: StructureShape
     AttributeKey: StringShape
     AttributeList: ListShape
@@ -26,6 +31,7 @@ module Aws::ECR
     BatchGetRepositoryScanningConfigurationResponse: StructureShape
     BatchedOperationLayerDigest: StringShape
     BatchedOperationLayerDigestList: ListShape
+    BlockedByOrganizationPolicyException: StructureShape
     CompleteLayerUploadRequest: StructureShape
     CompleteLayerUploadResponse: StructureShape
     CreatePullThroughCacheRuleRequest: StructureShape
@@ -55,10 +61,16 @@ module Aws::ECR
     DeleteRepositoryPolicyResponse: StructureShape
     DeleteRepositoryRequest: StructureShape
     DeleteRepositoryResponse: StructureShape
+    DeleteSigningConfigurationRequest: StructureShape
+    DeleteSigningConfigurationResponse: StructureShape
+    DeregisterPullTimeUpdateExclusionRequest: StructureShape
+    DeregisterPullTimeUpdateExclusionResponse: StructureShape
     DescribeImageReplicationStatusRequest: StructureShape
     DescribeImageReplicationStatusResponse: StructureShape
     DescribeImageScanFindingsRequest: StructureShape
     DescribeImageScanFindingsResponse: StructureShape
+    DescribeImageSigningStatusRequest: StructureShape
+    DescribeImageSigningStatusResponse: StructureShape
     DescribeImagesFilter: StructureShape
     DescribeImagesRequest: StructureShape
     DescribeImagesResponse: StructureShape
@@ -79,8 +91,11 @@ module Aws::ECR
     Epoch: IntegerShape
     EvaluationTimestamp: TimestampShape
     ExceptionMessage: StringShape
+    ExclusionAlreadyExistsException: StructureShape
+    ExclusionNotFoundException: StructureShape
     ExpirationTimestamp: TimestampShape
     ExploitAvailable: StringShape
+    FiftyMaxResults: IntegerShape
     FilePath: StringShape
     FindingArn: StringShape
     FindingDescription: StringShape
@@ -107,9 +122,12 @@ module Aws::ECR
     GetRegistryScanningConfigurationResponse: StructureShape
     GetRepositoryPolicyRequest: StructureShape
     GetRepositoryPolicyResponse: StructureShape
+    GetSigningConfigurationRequest: StructureShape
+    GetSigningConfigurationResponse: StructureShape
     Image: StructureShape
     ImageActionType: EnumShape
     ImageAlreadyExistsException: StructureShape
+    ImageArchivedException: StructureShape
     ImageCount: IntegerShape
     ImageDetail: StructureShape
     ImageDetailList: ListShape
@@ -124,6 +142,8 @@ module Aws::ECR
     ImageList: ListShape
     ImageManifest: StringShape
     ImageNotFoundException: StructureShape
+    ImageReferrer: StructureShape
+    ImageReferrerList: ListShape
     ImageReplicationStatus: StructureShape
     ImageReplicationStatusList: ListShape
     ImageScanFinding: StructureShape
@@ -132,7 +152,12 @@ module Aws::ECR
     ImageScanFindingsSummary: StructureShape
     ImageScanStatus: StructureShape
     ImageScanningConfiguration: StructureShape
+    ImageSigningStatus: StructureShape
+    ImageSigningStatusList: ListShape
     ImageSizeInBytes: IntegerShape
+    ImageStatus: EnumShape
+    ImageStatusFilter: EnumShape
+    ImageStorageClassUpdateNotSupportedException: StructureShape
     ImageTag: StringShape
     ImageTagAlreadyExistsException: StructureShape
     ImageTagList: ListShape
@@ -154,6 +179,8 @@ module Aws::ECR
     KmsException: StructureShape
     KmsKey: StringShape
     KmsKeyForRepositoryCreationTemplate: StringShape
+    LastActivatedAtTimestamp: TimestampShape
+    LastArchivedAtTimestamp: TimestampShape
     Layer: StructureShape
     LayerAlreadyExistsException: StructureShape
     LayerAvailability: EnumShape
@@ -179,13 +206,20 @@ module Aws::ECR
     LifecyclePolicyPreviewSummary: StructureShape
     LifecyclePolicyRuleAction: StructureShape
     LifecyclePolicyRulePriority: IntegerShape
+    LifecyclePolicyStorageClass: EnumShape
+    LifecyclePolicyTargetStorageClass: EnumShape
     LifecyclePolicyText: StringShape
     LifecyclePolicyTextForRepositoryCreationTemplate: StringShape
     LifecyclePreviewMaxResults: IntegerShape
     LimitExceededException: StructureShape
+    ListImageReferrersFilter: StructureShape
+    ListImageReferrersRequest: StructureShape
+    ListImageReferrersResponse: StructureShape
     ListImagesFilter: StructureShape
     ListImagesRequest: StructureShape
     ListImagesResponse: StructureShape
+    ListPullTimeUpdateExclusionsRequest: StructureShape
+    ListPullTimeUpdateExclusionsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     MaxResults: IntegerShape
@@ -200,6 +234,7 @@ module Aws::ECR
     Platform: StringShape
     Prefix: StringShape
     PrefixList: ListShape
+    PrincipalArn: StringShape
     ProxyEndpoint: StringShape
     PullThroughCacheRule: StructureShape
     PullThroughCacheRuleAlreadyExistsException: StructureShape
@@ -207,6 +242,7 @@ module Aws::ECR
     PullThroughCacheRuleNotFoundException: StructureShape
     PullThroughCacheRuleRepositoryPrefix: StringShape
     PullThroughCacheRuleRepositoryPrefixList: ListShape
+    PullTimeUpdateExclusionList: ListShape
     PushTimestamp: TimestampShape
     PutAccountSettingRequest: StructureShape
     PutAccountSettingResponse: StructureShape
@@ -224,6 +260,8 @@ module Aws::ECR
     PutRegistryScanningConfigurationResponse: StructureShape
     PutReplicationConfigurationRequest: StructureShape
     PutReplicationConfigurationResponse: StructureShape
+    PutSigningConfigurationRequest: StructureShape
+    PutSigningConfigurationResponse: StructureShape
     RCTAppliedFor: EnumShape
     RCTAppliedForList: ListShape
     Reason: StringShape
@@ -233,6 +271,8 @@ module Aws::ECR
     ReferenceUrlsList: ListShape
     ReferencedImagesNotFoundException: StructureShape
     Region: StringShape
+    RegisterPullTimeUpdateExclusionRequest: StructureShape
+    RegisterPullTimeUpdateExclusionResponse: StructureShape
     RegistryId: StringShape
     RegistryPolicyNotFoundException: StructureShape
     RegistryPolicyText: StringShape
@@ -297,6 +337,18 @@ module Aws::ECR
     SetRepositoryPolicyResponse: StructureShape
     Severity: StringShape
     SeverityCount: IntegerShape
+    SigningConfiguration: StructureShape
+    SigningConfigurationNotFoundException: StructureShape
+    SigningProfileArn: StringShape
+    SigningRepositoryFilter: StructureShape
+    SigningRepositoryFilterList: ListShape
+    SigningRepositoryFilterType: EnumShape
+    SigningRepositoryFilterValue: StringShape
+    SigningRule: StructureShape
+    SigningRuleList: ListShape
+    SigningStatus: EnumShape
+    SigningStatusFailureCode: StringShape
+    SigningStatusFailureReason: StringShape
     Source: StringShape
     SourceLayerHash: StringShape
     StartImageScanRequest: StructureShape
@@ -304,6 +356,8 @@ module Aws::ECR
     StartLifecyclePolicyPreviewRequest: StructureShape
     StartLifecyclePolicyPreviewResponse: StructureShape
     Status: StringShape
+    String: StringShape
+    SubjectIdentifier: StructureShape
     Tag: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -313,19 +367,25 @@ module Aws::ECR
     TagStatus: EnumShape
     TagValue: StringShape
     Tags: MapShape
+    TargetStorageClass: EnumShape
     TemplateAlreadyExistsException: StructureShape
     TemplateNotFoundException: StructureShape
     Title: StringShape
     TooManyTagsException: StructureShape
+    TransitioningImageTotalCount: StructureShape
+    TransitioningImageTotalCounts: ListShape
     Type: StringShape
     UnableToAccessSecretException: StructureShape
     UnableToDecryptSecretValueException: StructureShape
     UnableToGetUpstreamImageException: StructureShape
     UnableToGetUpstreamLayerException: StructureShape
+    UnableToListUpstreamImageReferrersException: StructureShape
     UnsupportedImageTypeException: StructureShape
     UnsupportedUpstreamRegistryException: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateImageStorageClassRequest: StructureShape
+    UpdateImageStorageClassResponse: StructureShape
     UpdatePullThroughCacheRuleRequest: StructureShape
     UpdatePullThroughCacheRuleResponse: StructureShape
     UpdateRepositoryCreationTemplateRequest: StructureShape

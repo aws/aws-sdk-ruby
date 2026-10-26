@@ -103,6 +103,10 @@ module Aws::LakeFormation
         lf_tag_expression: {
           catalog_id: untyped,
           name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
         }
       },
       ?lf_tags: Array[
@@ -127,6 +131,79 @@ module Aws::LakeFormation
       ?principal_arn: String,
       ?duration_seconds: Integer
     ) -> _AssumeDecoratedRoleWithSAMLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeDecoratedRoleWithSAMLResponse
+
+    interface _AttachRLSPolicyResponse
+      include Smithy::Client::_Response[Types::AttachRLSPolicyResponse]
+    end
+    def attach_rls_policy: (
+      ?name: String,
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?principal: {
+        data_lake_principal_identifier: String
+      },
+      ?condition: {
+        expression: String
+      },
+      ?set_default: bool
+    ) -> _AttachRLSPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachRLSPolicyResponse
 
     interface _BatchGrantPermissionsResponse
       include Smithy::Client::_Response[Types::BatchGrantPermissionsResponse]
@@ -191,6 +268,10 @@ module Aws::LakeFormation
               expression_name: untyped
             },
             lf_tag_expression: {
+              catalog_id: untyped,
+              name: untyped
+            },
+            rls_policy: {
               catalog_id: untyped,
               name: untyped
             }
@@ -267,6 +348,10 @@ module Aws::LakeFormation
               expression_name: untyped
             },
             lf_tag_expression: {
+              catalog_id: untyped,
+              name: untyped
+            },
+            rls_policy: {
               catalog_id: untyped,
               name: untyped
             }
@@ -356,6 +441,17 @@ module Aws::LakeFormation
         {
           data_lake_principal_identifier: String
         }
+      ],
+      ?service_integrations: Array[
+        {
+          redshift: Array[
+            {
+              redshift_connect: {
+                authorization: String
+              }
+            }
+          ]
+        }
       ]
     ) -> _CreateLakeFormationIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLakeFormationIdentityCenterConfigurationResponse
 
@@ -419,12 +515,30 @@ module Aws::LakeFormation
         lf_tag_expression: {
           catalog_id: untyped,
           name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
         }
       },
       ?condition: {
         expression: String
       }
     ) -> _CreateLakeFormationOptInResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLakeFormationOptInResponse
+
+    interface _CreateRLSPolicyResponse
+      include Smithy::Client::_Response[Types::CreateRLSPolicyResponse]
+    end
+    def create_rls_policy: (
+      ?name: String,
+      ?attachment_columns: Array[
+        {
+          name: String,
+          type: String
+        }
+      ],
+      ?filter_expression: String
+    ) -> _CreateRLSPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRLSPolicyResponse
 
     interface _DeleteDataCellsFilterResponse
       include Smithy::Client::_Response[Types::DeleteDataCellsFilterResponse]
@@ -519,6 +633,10 @@ module Aws::LakeFormation
         lf_tag_expression: {
           catalog_id: untyped,
           name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
         }
       },
       ?condition: {
@@ -542,6 +660,13 @@ module Aws::LakeFormation
       ]
     ) -> _DeleteObjectsOnCancelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObjectsOnCancelResponse
 
+    interface _DeleteRLSPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteRLSPolicyResponse]
+    end
+    def delete_rls_policy: (
+      ?name: String
+    ) -> _DeleteRLSPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRLSPolicyResponse
+
     interface _DeregisterResourceResponse
       include Smithy::Client::_Response[Types::DeregisterResourceResponse]
     end
@@ -556,6 +681,7 @@ module Aws::LakeFormation
       def application_arn: () -> String?
       def external_filtering: () -> Types::ExternalFilteringConfiguration?
       def share_recipients: () -> Array[Types::DataLakePrincipal]?
+      def service_integrations: () -> Array[Types::ServiceIntegrationUnion]?
       def resource_share: () -> String?
     end
     def describe_lake_formation_identity_center_configuration: (
@@ -577,6 +703,79 @@ module Aws::LakeFormation
     def describe_transaction: (
       ?transaction_id: String
     ) -> _DescribeTransactionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTransactionResponse
+
+    interface _DetachRLSPolicyResponse
+      include Smithy::Client::_Response[Types::DetachRLSPolicyResponse]
+    end
+    def detach_rls_policy: (
+      ?name: String,
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?principal: {
+        data_lake_principal_identifier: String
+      },
+      ?condition: {
+        expression: String
+      },
+      ?remove_default: bool
+    ) -> _DetachRLSPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachRLSPolicyResponse
 
     interface _ExtendTransactionResponse
       include Smithy::Client::_Response[Types::ExtendTransactionResponse]
@@ -664,6 +863,14 @@ module Aws::LakeFormation
       ?query_id: String
     ) -> _GetQueryStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueryStatisticsResponse
 
+    interface _GetRLSPolicyResponse
+      include Smithy::Client::_Response[Types::GetRLSPolicyResponse]
+      def rls_policy: () -> Types::RLSPolicy?
+    end
+    def get_rls_policy: (
+      ?name: String
+    ) -> _GetRLSPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRLSPolicyResponse
+
     interface _GetResourceLFTagsResponse
       include Smithy::Client::_Response[Types::GetResourceLFTagsResponse]
       def lf_tag_on_database: () -> Array[Types::LFTagPair]?
@@ -725,6 +932,10 @@ module Aws::LakeFormation
         lf_tag_expression: {
           catalog_id: untyped,
           name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
         }
       },
       ?show_assigned_lf_tags: bool
@@ -745,6 +956,21 @@ module Aws::LakeFormation
       ?max_results: Integer,
       ?next_token: String
     ) -> _GetTableObjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableObjectsResponse
+
+    interface _GetTemporaryDataLocationCredentialsResponse
+      include Smithy::Client::_Response[Types::GetTemporaryDataLocationCredentialsResponse]
+      def credentials: () -> Types::TemporaryCredentials?
+      def accessible_data_locations: () -> Array[String]?
+      def credentials_scope: () -> String?
+    end
+    def get_temporary_data_location_credentials: (
+      ?duration_seconds: Integer,
+      ?audit_context: {
+        additional_audit_context: String
+      },
+      ?data_locations: Array[String],
+      ?credentials_scope: String
+    ) -> _GetTemporaryDataLocationCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemporaryDataLocationCredentialsResponse
 
     interface _GetTemporaryGluePartitionCredentialsResponse
       include Smithy::Client::_Response[Types::GetTemporaryGluePartitionCredentialsResponse]
@@ -875,6 +1101,10 @@ module Aws::LakeFormation
         lf_tag_expression: {
           catalog_id: untyped,
           name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
         }
       },
       ?permissions: Array[String],
@@ -986,6 +1216,10 @@ module Aws::LakeFormation
         lf_tag_expression: {
           catalog_id: untyped,
           name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
         }
       },
       ?max_results: Integer,
@@ -1056,12 +1290,99 @@ module Aws::LakeFormation
         lf_tag_expression: {
           catalog_id: untyped,
           name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
         }
       },
       ?next_token: String,
       ?max_results: Integer,
       ?include_related: String
     ) -> _ListPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionsResponse
+
+    interface _ListRLSPoliciesResponse
+      include Smithy::Client::_Response[Types::ListRLSPoliciesResponse]
+      def rls_policies: () -> Array[Types::RLSPolicy]?
+      def next_token: () -> String?
+    end
+    def list_rls_policies: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRLSPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRLSPoliciesResponse
+
+    interface _ListRLSPolicyAttachmentsResponse
+      include Smithy::Client::_Response[Types::ListRLSPolicyAttachmentsResponse]
+      def rls_policy_attachments: () -> Array[Types::RLSPolicyAttachment]?
+      def next_token: () -> String?
+    end
+    def list_rls_policy_attachments: (
+      ?resource: {
+        catalog: {
+          id: String
+        },
+        database: {
+          catalog_id: untyped,
+          name: String
+        },
+        table: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          table_wildcard: {
+          }
+        },
+        table_with_columns: {
+          catalog_id: untyped,
+          database_name: untyped,
+          name: untyped,
+          column_names: Array[String],
+          column_wildcard: {
+            excluded_column_names: untyped
+          }
+        },
+        data_location: {
+          catalog_id: untyped,
+          resource_arn: String
+        },
+        data_cells_filter: {
+          table_catalog_id: untyped,
+          database_name: untyped,
+          table_name: untyped,
+          name: untyped
+        },
+        lf_tag: {
+          catalog_id: untyped,
+          tag_key: untyped,
+          tag_values: Array[String]
+        },
+        lf_tag_policy: {
+          catalog_id: untyped,
+          resource_type: String,
+          expression: Array[
+            {
+              tag_key: String,
+              tag_values: untyped
+            }
+          ],
+          expression_name: untyped
+        },
+        lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        },
+        rls_policy: {
+          catalog_id: untyped,
+          name: untyped
+        }
+      },
+      ?principal: {
+        data_lake_principal_identifier: String
+      },
+      ?policy_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRLSPolicyAttachmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRLSPolicyAttachmentsResponse
 
     interface _ListResourcesResponse
       include Smithy::Client::_Response[Types::ListResourcesResponse]
@@ -1145,7 +1466,8 @@ module Aws::LakeFormation
       ?role_arn: String,
       ?with_federation: bool,
       ?hybrid_access_enabled: bool,
-      ?with_privileged_access: bool
+      ?with_privileged_access: bool,
+      ?expected_resource_owner_account: String
     ) -> _RegisterResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterResourceResponse
 
     interface _RemoveLFTagsFromResourceResponse
@@ -1205,6 +1527,10 @@ module Aws::LakeFormation
           expression_name: untyped
         },
         lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        },
+        rls_policy: {
           catalog_id: untyped,
           name: untyped
         }
@@ -1277,6 +1603,10 @@ module Aws::LakeFormation
           expression_name: untyped
         },
         lf_tag_expression: {
+          catalog_id: untyped,
+          name: untyped
+        },
+        rls_policy: {
           catalog_id: untyped,
           name: untyped
         }
@@ -1402,12 +1732,31 @@ module Aws::LakeFormation
           data_lake_principal_identifier: String
         }
       ],
+      ?service_integrations: Array[
+        {
+          redshift: Array[
+            {
+              redshift_connect: {
+                authorization: String
+              }
+            }
+          ]
+        }
+      ],
       ?application_status: String,
       ?external_filtering: {
         status: String,
         authorized_targets: Array[String]
       }
     ) -> _UpdateLakeFormationIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLakeFormationIdentityCenterConfigurationResponse
+
+    interface _UpdateRLSPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateRLSPolicyResponse]
+    end
+    def update_rls_policy: (
+      ?name: String,
+      ?filter_expression: String
+    ) -> _UpdateRLSPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRLSPolicyResponse
 
     interface _UpdateResourceResponse
       include Smithy::Client::_Response[Types::UpdateResourceResponse]
@@ -1416,7 +1765,8 @@ module Aws::LakeFormation
       ?role_arn: String,
       ?resource_arn: String,
       ?with_federation: bool,
-      ?hybrid_access_enabled: bool
+      ?hybrid_access_enabled: bool,
+      ?expected_resource_owner_account: String
     ) -> _UpdateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceResponse
 
     interface _UpdateTableObjectsResponse

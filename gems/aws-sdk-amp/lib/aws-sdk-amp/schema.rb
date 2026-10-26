@@ -12,12 +12,27 @@ module Aws::Amp
     AlertManagerDefinitionStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#AlertManagerDefinitionStatus", name: "AlertManagerDefinitionStatus")
     AlertManagerDefinitionStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#AlertManagerDefinitionStatusCode", name: "AlertManagerDefinitionStatusCode", traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Definition is being created. Update/Deletion is disallowed until definition is ACTIVE and workspace status is ACTIVE."}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Definition has been created/updated. Update/Deletion is disallowed until definition is ACTIVE and workspace status is ACTIVE."}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Definition is being updated. Update/Deletion is disallowed until definition is ACTIVE and workspace status is ACTIVE."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Definition is being deleting. Update/Deletion is disallowed until definition is ACTIVE and workspace status is ACTIVE."}, {"name" => "CREATION_FAILED", "value" => "CREATION_FAILED", "documentation" => "Definition creation failed."}, {"name" => "UPDATE_FAILED", "value" => "UPDATE_FAILED", "documentation" => "Definition update failed."}]})
     AmpConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#AmpConfiguration", name: "AmpConfiguration")
+    AnomalyDetectorAlias = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#AnomalyDetectorAlias", name: "AnomalyDetectorAlias", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[0-9A-Za-z][-.0-9A-Z_a-z]*$"})
+    AnomalyDetectorArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#AnomalyDetectorArn", name: "AnomalyDetectorArn", traits: {"aws.api#arnReference" => {"type" => "AWS::APS::AnomalyDetector", "service" => "ManagedPrometheusCP", "resource" => "AnomalyDetector"}, "smithy.api#pattern" => "^arn:aws[-a-z]*:aps:[-a-z0-9]+:[0-9]{12}:anomalydetector/ws-.+/ad-.+$"})
+    AnomalyDetectorConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.amp#AnomalyDetectorConfiguration", name: "AnomalyDetectorConfiguration")
+    AnomalyDetectorDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#AnomalyDetectorDescription", name: "AnomalyDetectorDescription")
+    AnomalyDetectorEvaluationInterval = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.amp#AnomalyDetectorEvaluationInterval", name: "AnomalyDetectorEvaluationInterval", traits: {"smithy.api#range" => {"min" => 30, "max" => 86400}})
+    AnomalyDetectorId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#AnomalyDetectorId", name: "AnomalyDetectorId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^ad-[0-9A-Za-z][-.0-9A-Z_a-z]*$"})
+    AnomalyDetectorMissingDataAction = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.amp#AnomalyDetectorMissingDataAction", name: "AnomalyDetectorMissingDataAction")
+    AnomalyDetectorStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#AnomalyDetectorStatus", name: "AnomalyDetectorStatus")
+    AnomalyDetectorStatusCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.amp#AnomalyDetectorStatusCode", name: "AnomalyDetectorStatusCode")
+    AnomalyDetectorSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#AnomalyDetectorSummary", name: "AnomalyDetectorSummary")
+    AnomalyDetectorSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.amp#AnomalyDetectorSummaryList", name: "AnomalyDetectorSummaryList")
+    CloudWatchConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CloudWatchConfiguration", name: "CloudWatchConfiguration")
+    CloudWatchDatasetArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#CloudWatchDatasetArn", name: "CloudWatchDatasetArn", traits: {"smithy.api#pattern" => "^arn:aws[-a-z]*:cloudwatch:[-a-z0-9]+:[0-9]{12}:dataset\\/.+$"})
     CloudWatchLogDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CloudWatchLogDestination", name: "CloudWatchLogDestination")
     ClusterArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#ClusterArn", name: "ClusterArn", traits: {"aws.api#arnReference" => {"type" => "AWS::EKS::Cluster"}, "smithy.api#pattern" => "^arn:aws[-a-z]*:eks:[-a-z0-9]+:[0-9]{12}:cluster/.+$"})
     ComponentConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#ComponentConfig", name: "ComponentConfig")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CreateAlertManagerDefinitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CreateAlertManagerDefinitionInput", name: "CreateAlertManagerDefinitionInput")
     CreateAlertManagerDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CreateAlertManagerDefinitionOutput", name: "CreateAlertManagerDefinitionOutput")
+    CreateAnomalyDetectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CreateAnomalyDetectorRequest", name: "CreateAnomalyDetectorRequest")
+    CreateAnomalyDetectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CreateAnomalyDetectorResponse", name: "CreateAnomalyDetectorResponse")
     CreateLoggingConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CreateLoggingConfigurationInput", name: "CreateLoggingConfigurationInput")
     CreateLoggingConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CreateLoggingConfigurationOutput", name: "CreateLoggingConfigurationOutput")
     CreateQueryLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CreateQueryLoggingConfigurationRequest", name: "CreateQueryLoggingConfigurationRequest")
@@ -29,6 +44,7 @@ module Aws::Amp
     CreateWorkspaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CreateWorkspaceInput", name: "CreateWorkspaceInput")
     CreateWorkspaceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#CreateWorkspaceOutput", name: "CreateWorkspaceOutput")
     DeleteAlertManagerDefinitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DeleteAlertManagerDefinitionInput", name: "DeleteAlertManagerDefinitionInput")
+    DeleteAnomalyDetectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DeleteAnomalyDetectorRequest", name: "DeleteAnomalyDetectorRequest")
     DeleteLoggingConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DeleteLoggingConfigurationInput", name: "DeleteLoggingConfigurationInput")
     DeleteQueryLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DeleteQueryLoggingConfigurationRequest", name: "DeleteQueryLoggingConfigurationRequest")
     DeleteResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DeleteResourcePolicyRequest", name: "DeleteResourcePolicyRequest")
@@ -39,6 +55,8 @@ module Aws::Amp
     DeleteWorkspaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DeleteWorkspaceInput", name: "DeleteWorkspaceInput")
     DescribeAlertManagerDefinitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DescribeAlertManagerDefinitionInput", name: "DescribeAlertManagerDefinitionInput")
     DescribeAlertManagerDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DescribeAlertManagerDefinitionOutput", name: "DescribeAlertManagerDefinitionOutput")
+    DescribeAnomalyDetectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DescribeAnomalyDetectorRequest", name: "DescribeAnomalyDetectorRequest")
+    DescribeAnomalyDetectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DescribeAnomalyDetectorResponse", name: "DescribeAnomalyDetectorResponse")
     DescribeLoggingConfigurationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DescribeLoggingConfigurationInput", name: "DescribeLoggingConfigurationInput")
     DescribeLoggingConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DescribeLoggingConfigurationOutput", name: "DescribeLoggingConfigurationOutput")
     DescribeQueryLoggingConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DescribeQueryLoggingConfigurationRequest", name: "DescribeQueryLoggingConfigurationRequest")
@@ -57,6 +75,8 @@ module Aws::Amp
     DescribeWorkspaceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#DescribeWorkspaceOutput", name: "DescribeWorkspaceOutput")
     Destination = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.amp#Destination", name: "Destination")
     EksConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#EksConfiguration", name: "EksConfiguration")
+    ExporterConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.amp#ExporterConfiguration", name: "ExporterConfiguration")
+    ExporterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.amp#ExporterList", name: "ExporterList", traits: {"smithy.api#length" => {"max" => 1}})
     FilterKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#FilterKey", name: "FilterKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     FilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#FilterValue", name: "FilterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     FilterValues = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.amp#FilterValues", name: "FilterValues", traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
@@ -64,6 +84,7 @@ module Aws::Amp
     GetDefaultScraperConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#GetDefaultScraperConfigurationResponse", name: "GetDefaultScraperConfigurationResponse")
     IamRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#IamRoleArn", name: "IamRoleArn", traits: {"aws.api#arnReference" => {"type" => "AWS::IAM::Role"}, "smithy.api#pattern" => "^arn:aws[-a-z]*:iam::[0-9]{12}:role/.+$"})
     IdempotencyToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#IdempotencyToken", name: "IdempotencyToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[!-~]+$"})
+    IgnoreNearExpected = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.amp#IgnoreNearExpected", name: "IgnoreNearExpected")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
     KmsKeyArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#KmsKeyArn", name: "KmsKeyArn", traits: {"aws.api#arnReference" => {"type" => "AWS::KMS::Key"}, "smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key/[-a-f0-9]+$"})
     LabelName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#LabelName", name: "LabelName", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#pattern" => "^[a-zA-Z_][a-zA-Z0-9_]*$"})
@@ -72,6 +93,8 @@ module Aws::Amp
     LimitsPerLabelSet = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#LimitsPerLabelSet", name: "LimitsPerLabelSet")
     LimitsPerLabelSetEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#LimitsPerLabelSetEntry", name: "LimitsPerLabelSetEntry")
     LimitsPerLabelSetList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.amp#LimitsPerLabelSetList", name: "LimitsPerLabelSetList")
+    ListAnomalyDetectorsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#ListAnomalyDetectorsRequest", name: "ListAnomalyDetectorsRequest")
+    ListAnomalyDetectorsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#ListAnomalyDetectorsResponse", name: "ListAnomalyDetectorsResponse")
     ListRuleGroupsNamespacesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#ListRuleGroupsNamespacesInput", name: "ListRuleGroupsNamespacesInput")
     ListRuleGroupsNamespacesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#ListRuleGroupsNamespacesOutput", name: "ListRuleGroupsNamespacesOutput")
     ListScrapersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#ListScrapersRequest", name: "ListScrapersRequest")
@@ -87,9 +110,16 @@ module Aws::Amp
     LoggingDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#LoggingDestination", name: "LoggingDestination")
     LoggingDestinations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.amp#LoggingDestinations", name: "LoggingDestinations", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     LoggingFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#LoggingFilter", name: "LoggingFilter")
+    OpenSearchDomainArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#OpenSearchDomainArn", name: "OpenSearchDomainArn", traits: {"smithy.api#pattern" => "^arn:aws[-a-z]*:es:[-a-z0-9]+:[0-9]{12}:domain\\/.+$"})
+    OpenSearchExporterConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#OpenSearchExporterConfiguration", name: "OpenSearchExporterConfiguration")
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"max" => 1000}})
+    PrometheusMetricLabelKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#PrometheusMetricLabelKey", name: "PrometheusMetricLabelKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 7168}, "smithy.api#pattern" => "^(?!__)[a-zA-Z_][a-zA-Z0-9_]*$"})
+    PrometheusMetricLabelMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.amp#PrometheusMetricLabelMap", name: "PrometheusMetricLabelMap")
+    PrometheusMetricLabelValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#PrometheusMetricLabelValue", name: "PrometheusMetricLabelValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 7168}})
     PutAlertManagerDefinitionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#PutAlertManagerDefinitionInput", name: "PutAlertManagerDefinitionInput")
     PutAlertManagerDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#PutAlertManagerDefinitionOutput", name: "PutAlertManagerDefinitionOutput")
+    PutAnomalyDetectorRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#PutAnomalyDetectorRequest", name: "PutAnomalyDetectorRequest")
+    PutAnomalyDetectorResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#PutAnomalyDetectorResponse", name: "PutAnomalyDetectorResponse")
     PutResourcePolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#PutResourcePolicyRequest", name: "PutResourcePolicyRequest")
     PutResourcePolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#PutResourcePolicyResponse", name: "PutResourcePolicyResponse")
     PutRuleGroupsNamespaceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#PutRuleGroupsNamespaceInput", name: "PutRuleGroupsNamespaceInput")
@@ -97,6 +127,8 @@ module Aws::Amp
     QueryLoggingConfigurationMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#QueryLoggingConfigurationMetadata", name: "QueryLoggingConfigurationMetadata")
     QueryLoggingConfigurationStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#QueryLoggingConfigurationStatus", name: "QueryLoggingConfigurationStatus")
     QueryLoggingConfigurationStatusCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#QueryLoggingConfigurationStatusCode", name: "QueryLoggingConfigurationStatusCode", traits: {"smithy.api#enum" => [{"name" => "CREATING", "value" => "CREATING", "documentation" => "Query logging configuration is being created."}, {"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "Query logging configuration is active."}, {"name" => "UPDATING", "value" => "UPDATING", "documentation" => "Query logging configuration is being updated."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "Query logging configuration is being deleted."}, {"name" => "CREATION_FAILED", "value" => "CREATION_FAILED", "documentation" => "Query logging configuration creation failed."}, {"name" => "UPDATE_FAILED", "value" => "UPDATE_FAILED", "documentation" => "Query logging configuration update failed."}]})
+    RandomCutForestConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#RandomCutForestConfiguration", name: "RandomCutForestConfiguration")
+    RandomCutForestQuery = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#RandomCutForestQuery", name: "RandomCutForestQuery", traits: {"smithy.api#length" => {"min" => 1, "max" => 8192}})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     RoleConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#RoleConfiguration", name: "RoleConfiguration")
     RuleGroupsNamespaceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#RuleGroupsNamespaceArn", name: "RuleGroupsNamespaceArn", traits: {"aws.api#arnReference" => {"type" => "AWS::APS::RuleGroupsNamespace", "service" => "ManagedPrometheusCP", "resource" => "RuleGroupsNamespace"}})
@@ -156,6 +188,7 @@ module Aws::Amp
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.amp#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
     ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"name" => "UNKNOWN_OPERATION", "value" => "UNKNOWN_OPERATION"}, {"name" => "CANNOT_PARSE", "value" => "CANNOT_PARSE"}, {"name" => "FIELD_VALIDATION_FAILED", "value" => "FIELD_VALIDATION_FAILED"}, {"name" => "OTHER", "value" => "OTHER"}]})
+    VpcConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#VpcConfiguration", name: "VpcConfiguration")
     WorkspaceAlias = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#WorkspaceAlias", name: "WorkspaceAlias", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     WorkspaceArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.amp#WorkspaceArn", name: "WorkspaceArn", traits: {"aws.api#arnReference" => {"type" => "AWS::APS::Workspace", "service" => "ManagedPrometheusCP", "resource" => "Workspace"}, "smithy.api#pattern" => "^arn:aws[-a-z]*:aps:[-a-z0-9]+:[0-9]{12}:workspace/.+$"})
     WorkspaceConfigurationDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.amp#WorkspaceConfigurationDescription", name: "WorkspaceConfigurationDescription")
@@ -181,6 +214,46 @@ module Aws::Amp
     AlertManagerDefinitionStatus.type = Types::AlertManagerDefinitionStatus
     AmpConfiguration.add_member(:workspace_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceArn, name: "workspaceArn", traits: {"smithy.api#required" => {}}))
     AmpConfiguration.type = Types::AmpConfiguration
+    AnomalyDetectorConfiguration.add_member(:random_cut_forest, Types::AnomalyDetectorConfiguration::RandomCutForest, ::Smithy::Schema::Shapes::MemberShape.new(target: RandomCutForestConfiguration, name: "randomCutForest"))
+    AnomalyDetectorConfiguration.add_member(:unknown, Types::AnomalyDetectorConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AnomalyDetectorConfiguration.type = Types::AnomalyDetectorConfiguration
+    AnomalyDetectorDescription.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorDescription.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "anomalyDetectorId", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorDescription.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorAlias, name: "alias", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorDescription.add_member(:evaluation_interval_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorEvaluationInterval, name: "evaluationIntervalInSeconds"))
+    AnomalyDetectorDescription.add_member(:missing_data_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorMissingDataAction, name: "missingDataAction"))
+    AnomalyDetectorDescription.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorConfiguration, name: "configuration"))
+    AnomalyDetectorDescription.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: PrometheusMetricLabelMap, name: "labels"))
+    AnomalyDetectorDescription.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorDescription.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorDescription.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "modifiedAt", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorDescription.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    AnomalyDetectorDescription.type = Types::AnomalyDetectorDescription
+    AnomalyDetectorMissingDataAction.add_member(:mark_as_anomaly, Types::AnomalyDetectorMissingDataAction::MarkAsAnomaly, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "markAsAnomaly"))
+    AnomalyDetectorMissingDataAction.add_member(:skip, Types::AnomalyDetectorMissingDataAction::Skip, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "skip"))
+    AnomalyDetectorMissingDataAction.add_member(:unknown, Types::AnomalyDetectorMissingDataAction::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AnomalyDetectorMissingDataAction.type = Types::AnomalyDetectorMissingDataAction
+    AnomalyDetectorStatus.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorStatusCode, name: "statusCode", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorStatus.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
+    AnomalyDetectorStatus.type = Types::AnomalyDetectorStatus
+    AnomalyDetectorStatusCode.add_member(:creating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATING", traits: {"smithy.api#enumValue" => "CREATING"}))
+    AnomalyDetectorStatusCode.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    AnomalyDetectorStatusCode.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    AnomalyDetectorStatusCode.add_member(:deleting, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETING", traits: {"smithy.api#enumValue" => "DELETING"}))
+    AnomalyDetectorStatusCode.add_member(:creation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATION_FAILED", traits: {"smithy.api#enumValue" => "CREATION_FAILED"}))
+    AnomalyDetectorStatusCode.add_member(:update_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATE_FAILED", traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    AnomalyDetectorStatusCode.add_member(:deletion_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DELETION_FAILED", traits: {"smithy.api#enumValue" => "DELETION_FAILED"}))
+    AnomalyDetectorSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorSummary.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "anomalyDetectorId", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorSummary.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorAlias, name: "alias", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorSummary.add_member(:modified_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "modifiedAt", traits: {"smithy.api#required" => {}}))
+    AnomalyDetectorSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    AnomalyDetectorSummary.type = Types::AnomalyDetectorSummary
+    AnomalyDetectorSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorSummary, name: "member"))
+    CloudWatchConfiguration.add_member(:dataset_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchDatasetArn, name: "datasetArn", traits: {"smithy.api#required" => {}}))
+    CloudWatchConfiguration.type = Types::CloudWatchConfiguration
     CloudWatchLogDestination.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, name: "logGroupArn", traits: {"smithy.api#required" => {}}))
     CloudWatchLogDestination.type = Types::CloudWatchLogDestination
     ComponentConfig.add_member(:options, ::Smithy::Schema::Shapes::MemberShape.new(target: StringMap, name: "options"))
@@ -195,6 +268,20 @@ module Aws::Amp
     CreateAlertManagerDefinitionInput.type = Types::CreateAlertManagerDefinitionInput
     CreateAlertManagerDefinitionOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AlertManagerDefinitionStatus, name: "status", traits: {"smithy.api#required" => {}}))
     CreateAlertManagerDefinitionOutput.type = Types::CreateAlertManagerDefinitionOutput
+    CreateAnomalyDetectorRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateAnomalyDetectorRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorAlias, name: "alias", traits: {"smithy.api#required" => {}}))
+    CreateAnomalyDetectorRequest.add_member(:evaluation_interval_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorEvaluationInterval, name: "evaluationIntervalInSeconds", traits: {"smithy.api#default" => 60}))
+    CreateAnomalyDetectorRequest.add_member(:missing_data_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorMissingDataAction, name: "missingDataAction"))
+    CreateAnomalyDetectorRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorConfiguration, name: "configuration", traits: {"smithy.api#required" => {}}))
+    CreateAnomalyDetectorRequest.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: PrometheusMetricLabelMap, name: "labels", traits: {"smithy.api#length" => {"max" => 140}}))
+    CreateAnomalyDetectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateAnomalyDetectorRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateAnomalyDetectorRequest.type = Types::CreateAnomalyDetectorRequest
+    CreateAnomalyDetectorResponse.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "anomalyDetectorId", traits: {"smithy.api#required" => {}}))
+    CreateAnomalyDetectorResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    CreateAnomalyDetectorResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    CreateAnomalyDetectorResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateAnomalyDetectorResponse.type = Types::CreateAnomalyDetectorResponse
     CreateLoggingConfigurationInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateLoggingConfigurationInput.add_member(:log_group_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: LogGroupArn, name: "logGroupArn", traits: {"smithy.api#required" => {}}))
     CreateLoggingConfigurationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -225,6 +312,7 @@ module Aws::Amp
     CreateScraperRequest.add_member(:role_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleConfiguration, name: "roleConfiguration"))
     CreateScraperRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateScraperRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    CreateScraperRequest.add_member(:exporters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExporterList, name: "exporters"))
     CreateScraperRequest.type = Types::CreateScraperRequest
     CreateScraperResponse.add_member(:scraper_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperId, name: "scraperId", traits: {"smithy.api#required" => {}}))
     CreateScraperResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -245,6 +333,10 @@ module Aws::Amp
     DeleteAlertManagerDefinitionInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAlertManagerDefinitionInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteAlertManagerDefinitionInput.type = Types::DeleteAlertManagerDefinitionInput
+    DeleteAnomalyDetectorRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAnomalyDetectorRequest.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "anomalyDetectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAnomalyDetectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
+    DeleteAnomalyDetectorRequest.type = Types::DeleteAnomalyDetectorRequest
     DeleteLoggingConfigurationInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteLoggingConfigurationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteLoggingConfigurationInput.type = Types::DeleteLoggingConfigurationInput
@@ -275,6 +367,11 @@ module Aws::Amp
     DescribeAlertManagerDefinitionInput.type = Types::DescribeAlertManagerDefinitionInput
     DescribeAlertManagerDefinitionOutput.add_member(:alert_manager_definition, ::Smithy::Schema::Shapes::MemberShape.new(target: AlertManagerDefinitionDescription, name: "alertManagerDefinition", traits: {"smithy.api#required" => {}}))
     DescribeAlertManagerDefinitionOutput.type = Types::DescribeAlertManagerDefinitionOutput
+    DescribeAnomalyDetectorRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAnomalyDetectorRequest.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "anomalyDetectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DescribeAnomalyDetectorRequest.type = Types::DescribeAnomalyDetectorRequest
+    DescribeAnomalyDetectorResponse.add_member(:anomaly_detector, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorDescription, name: "anomalyDetector", traits: {"smithy.api#required" => {}}))
+    DescribeAnomalyDetectorResponse.type = Types::DescribeAnomalyDetectorResponse
     DescribeLoggingConfigurationInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeLoggingConfigurationInput.type = Types::DescribeLoggingConfigurationInput
     DescribeLoggingConfigurationOutput.add_member(:logging_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingConfigurationMetadata, name: "loggingConfiguration", traits: {"smithy.api#required" => {}}))
@@ -315,16 +412,25 @@ module Aws::Amp
     DescribeWorkspaceOutput.add_member(:workspace, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceDescription, name: "workspace", traits: {"smithy.api#required" => {}}))
     DescribeWorkspaceOutput.type = Types::DescribeWorkspaceOutput
     Destination.add_member(:amp_configuration, Types::Destination::AmpConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: AmpConfiguration, name: "ampConfiguration"))
+    Destination.add_member(:cloud_watch_configuration, Types::Destination::CloudWatchConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchConfiguration, name: "cloudWatchConfiguration"))
     Destination.add_member(:unknown, Types::Destination::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Destination.type = Types::Destination
     EksConfiguration.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterArn, name: "clusterArn", traits: {"smithy.api#required" => {}}))
     EksConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds"))
     EksConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds", traits: {"smithy.api#required" => {}}))
     EksConfiguration.type = Types::EksConfiguration
+    ExporterConfiguration.add_member(:open_search_configuration, Types::ExporterConfiguration::OpenSearchConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchExporterConfiguration, name: "openSearchConfiguration"))
+    ExporterConfiguration.add_member(:unknown, Types::ExporterConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ExporterConfiguration.type = Types::ExporterConfiguration
+    ExporterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExporterConfiguration, name: "member"))
     FilterValues.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValue, name: "member"))
     GetDefaultScraperConfigurationRequest.type = Types::GetDefaultScraperConfigurationRequest
     GetDefaultScraperConfigurationResponse.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, name: "configuration", traits: {"smithy.api#required" => {}}))
     GetDefaultScraperConfigurationResponse.type = Types::GetDefaultScraperConfigurationResponse
+    IgnoreNearExpected.add_member(:amount, Types::IgnoreNearExpected::Amount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "amount", traits: {"smithy.api#range" => {"min" => 0}}))
+    IgnoreNearExpected.add_member(:ratio, Types::IgnoreNearExpected::Ratio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "ratio", traits: {"smithy.api#range" => {"min" => 0}}))
+    IgnoreNearExpected.add_member(:unknown, Types::IgnoreNearExpected::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    IgnoreNearExpected.type = Types::IgnoreNearExpected
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retryAfterSeconds", traits: {"smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
@@ -336,6 +442,14 @@ module Aws::Amp
     LimitsPerLabelSetEntry.add_member(:max_series, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "maxSeries", traits: {"smithy.api#range" => {"min" => 0}}))
     LimitsPerLabelSetEntry.type = Types::LimitsPerLabelSetEntry
     LimitsPerLabelSetList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitsPerLabelSet, name: "member"))
+    ListAnomalyDetectorsRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAnomalyDetectorsRequest.add_member(:alias, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorAlias, name: "alias", traits: {"smithy.api#httpQuery" => "alias"}))
+    ListAnomalyDetectorsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 1000}}))
+    ListAnomalyDetectorsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAnomalyDetectorsRequest.type = Types::ListAnomalyDetectorsRequest
+    ListAnomalyDetectorsResponse.add_member(:anomaly_detectors, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorSummaryList, name: "anomalyDetectors", traits: {"smithy.api#required" => {}}))
+    ListAnomalyDetectorsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken"))
+    ListAnomalyDetectorsResponse.type = Types::ListAnomalyDetectorsResponse
     ListRuleGroupsNamespacesInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListRuleGroupsNamespacesInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: RuleGroupsNamespaceName, name: "name", traits: {"smithy.api#httpQuery" => "name"}))
     ListRuleGroupsNamespacesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: PaginationToken, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -377,12 +491,29 @@ module Aws::Amp
     LoggingDestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LoggingDestination, name: "member"))
     LoggingFilter.add_member(:qsp_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "qspThreshold", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     LoggingFilter.type = Types::LoggingFilter
+    OpenSearchExporterConfiguration.add_member(:domain_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: OpenSearchDomainArn, name: "domainArn", traits: {"smithy.api#required" => {}}))
+    OpenSearchExporterConfiguration.type = Types::OpenSearchExporterConfiguration
+    PrometheusMetricLabelMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: PrometheusMetricLabelKey, name: "key"))
+    PrometheusMetricLabelMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: PrometheusMetricLabelValue, name: "value"))
     PutAlertManagerDefinitionInput.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutAlertManagerDefinitionInput.add_member(:data, ::Smithy::Schema::Shapes::MemberShape.new(target: AlertManagerDefinitionData, name: "data", traits: {"smithy.api#required" => {}}))
     PutAlertManagerDefinitionInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     PutAlertManagerDefinitionInput.type = Types::PutAlertManagerDefinitionInput
     PutAlertManagerDefinitionOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AlertManagerDefinitionStatus, name: "status", traits: {"smithy.api#required" => {}}))
     PutAlertManagerDefinitionOutput.type = Types::PutAlertManagerDefinitionOutput
+    PutAnomalyDetectorRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutAnomalyDetectorRequest.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "anomalyDetectorId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    PutAnomalyDetectorRequest.add_member(:evaluation_interval_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorEvaluationInterval, name: "evaluationIntervalInSeconds", traits: {"smithy.api#default" => 60}))
+    PutAnomalyDetectorRequest.add_member(:missing_data_action, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorMissingDataAction, name: "missingDataAction"))
+    PutAnomalyDetectorRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorConfiguration, name: "configuration", traits: {"smithy.api#required" => {}}))
+    PutAnomalyDetectorRequest.add_member(:labels, ::Smithy::Schema::Shapes::MemberShape.new(target: PrometheusMetricLabelMap, name: "labels"))
+    PutAnomalyDetectorRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    PutAnomalyDetectorRequest.type = Types::PutAnomalyDetectorRequest
+    PutAnomalyDetectorResponse.add_member(:anomaly_detector_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorId, name: "anomalyDetectorId", traits: {"smithy.api#required" => {}}))
+    PutAnomalyDetectorResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorArn, name: "arn", traits: {"smithy.api#required" => {}}))
+    PutAnomalyDetectorResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnomalyDetectorStatus, name: "status", traits: {"smithy.api#required" => {}}))
+    PutAnomalyDetectorResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "tags"))
+    PutAnomalyDetectorResponse.type = Types::PutAnomalyDetectorResponse
     PutResourcePolicyRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceId, name: "workspaceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     PutResourcePolicyRequest.add_member(:policy_document, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "policyDocument", traits: {"smithy.api#required" => {}}))
     PutResourcePolicyRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -410,6 +541,12 @@ module Aws::Amp
     QueryLoggingConfigurationStatus.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryLoggingConfigurationStatusCode, name: "statusCode", traits: {"smithy.api#required" => {}}))
     QueryLoggingConfigurationStatus.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
     QueryLoggingConfigurationStatus.type = Types::QueryLoggingConfigurationStatus
+    RandomCutForestConfiguration.add_member(:query, ::Smithy::Schema::Shapes::MemberShape.new(target: RandomCutForestQuery, name: "query", traits: {"smithy.api#required" => {}}))
+    RandomCutForestConfiguration.add_member(:shingle_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "shingleSize", traits: {"smithy.api#default" => 8, "smithy.api#range" => {"min" => 2, "max" => 1024}}))
+    RandomCutForestConfiguration.add_member(:sample_size, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "sampleSize", traits: {"smithy.api#default" => 256, "smithy.api#range" => {"min" => 256, "max" => 1024}}))
+    RandomCutForestConfiguration.add_member(:ignore_near_expected_from_above, ::Smithy::Schema::Shapes::MemberShape.new(target: IgnoreNearExpected, name: "ignoreNearExpectedFromAbove"))
+    RandomCutForestConfiguration.add_member(:ignore_near_expected_from_below, ::Smithy::Schema::Shapes::MemberShape.new(target: IgnoreNearExpected, name: "ignoreNearExpectedFromBelow"))
+    RandomCutForestConfiguration.type = Types::RandomCutForestConfiguration
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "resourceType", traits: {"smithy.api#required" => {}}))
@@ -456,6 +593,7 @@ module Aws::Amp
     ScraperDescription.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source", traits: {"smithy.api#required" => {}}))
     ScraperDescription.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination", traits: {"smithy.api#required" => {}}))
     ScraperDescription.add_member(:role_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleConfiguration, name: "roleConfiguration"))
+    ScraperDescription.add_member(:exporters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExporterList, name: "exporters"))
     ScraperDescription.type = Types::ScraperDescription
     ScraperFilters.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterKey, name: "key"))
     ScraperFilters.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterValues, name: "value"))
@@ -479,6 +617,7 @@ module Aws::Amp
     ScraperSummary.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: Source, name: "source", traits: {"smithy.api#required" => {}}))
     ScraperSummary.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination", traits: {"smithy.api#required" => {}}))
     ScraperSummary.add_member(:role_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleConfiguration, name: "roleConfiguration"))
+    ScraperSummary.add_member(:exporters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExporterList, name: "exporters"))
     ScraperSummary.type = Types::ScraperSummary
     ScraperSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperSummary, name: "member"))
     SecurityGroupIds.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupId, name: "member"))
@@ -489,6 +628,7 @@ module Aws::Amp
     ServiceQuotaExceededException.add_member(:quota_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "quotaCode", traits: {"smithy.api#required" => {}}))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
     Source.add_member(:eks_configuration, Types::Source::EksConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: EksConfiguration, name: "eksConfiguration"))
+    Source.add_member(:vpc_configuration, Types::Source::VpcConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcConfiguration, name: "vpcConfiguration"))
     Source.add_member(:unknown, Types::Source::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Source.type = Types::Source
     StringMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
@@ -534,6 +674,7 @@ module Aws::Amp
     UpdateScraperRequest.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: Destination, name: "destination"))
     UpdateScraperRequest.add_member(:role_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleConfiguration, name: "roleConfiguration"))
     UpdateScraperRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    UpdateScraperRequest.add_member(:exporters, ::Smithy::Schema::Shapes::MemberShape.new(target: ExporterList, name: "exporters"))
     UpdateScraperRequest.type = Types::UpdateScraperRequest
     UpdateScraperResponse.add_member(:scraper_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperId, name: "scraperId", traits: {"smithy.api#required" => {}}))
     UpdateScraperResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ScraperArn, name: "arn", traits: {"smithy.api#required" => {}}))
@@ -548,6 +689,8 @@ module Aws::Amp
     UpdateWorkspaceConfigurationRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: IdempotencyToken, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     UpdateWorkspaceConfigurationRequest.add_member(:limits_per_label_set, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitsPerLabelSetList, name: "limitsPerLabelSet"))
     UpdateWorkspaceConfigurationRequest.add_member(:retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retentionPeriodInDays", traits: {"smithy.api#range" => {"min" => 1}}))
+    UpdateWorkspaceConfigurationRequest.add_member(:out_of_order_time_window_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "outOfOrderTimeWindowInSeconds", traits: {"smithy.api#range" => {"min" => 0}}))
+    UpdateWorkspaceConfigurationRequest.add_member(:rule_query_offset_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "ruleQueryOffsetInSeconds", traits: {"smithy.api#range" => {"min" => 0}}))
     UpdateWorkspaceConfigurationRequest.type = Types::UpdateWorkspaceConfigurationRequest
     UpdateWorkspaceConfigurationResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceConfigurationStatus, name: "status", traits: {"smithy.api#required" => {}}))
     UpdateWorkspaceConfigurationResponse.type = Types::UpdateWorkspaceConfigurationResponse
@@ -559,9 +702,14 @@ module Aws::Amp
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
     ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    VpcConfiguration.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SecurityGroupIds, name: "securityGroupIds", traits: {"smithy.api#required" => {}}))
+    VpcConfiguration.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: SubnetIds, name: "subnetIds", traits: {"smithy.api#required" => {}}))
+    VpcConfiguration.type = Types::VpcConfiguration
     WorkspaceConfigurationDescription.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceConfigurationStatus, name: "status", traits: {"smithy.api#required" => {}}))
     WorkspaceConfigurationDescription.add_member(:limits_per_label_set, ::Smithy::Schema::Shapes::MemberShape.new(target: LimitsPerLabelSetList, name: "limitsPerLabelSet"))
     WorkspaceConfigurationDescription.add_member(:retention_period_in_days, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "retentionPeriodInDays", traits: {"smithy.api#range" => {"min" => 1}}))
+    WorkspaceConfigurationDescription.add_member(:out_of_order_time_window_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "outOfOrderTimeWindowInSeconds", traits: {"smithy.api#range" => {"min" => 0}}))
+    WorkspaceConfigurationDescription.add_member(:rule_query_offset_in_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "ruleQueryOffsetInSeconds", traits: {"smithy.api#range" => {"min" => 0}}))
     WorkspaceConfigurationDescription.type = Types::WorkspaceConfigurationDescription
     WorkspaceConfigurationStatus.add_member(:status_code, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkspaceConfigurationStatusCode, name: "statusCode", traits: {"smithy.api#required" => {}}))
     WorkspaceConfigurationStatus.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "statusReason"))
@@ -591,7 +739,7 @@ module Aws::Amp
       service.id = "com.amazonaws.amp#AmazonPrometheusService"
       service.name = "AmazonPrometheusService"
       service.version = "2020-08-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "amp", "arnNamespace" => "aps", "cloudTrailEventSource" => "CLOUDTRAIL_PLACEHOLDER_REPLACED_BY_CDK"}, "aws.auth#sigv4" => {"name" => "aps"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id", "X-Amz-Security-Token", "X-Amz-Target"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id", "x-amzn-errormessage", "x-amz-apigw-id", "date"]}, "smithy.api#title" => "Amazon Prometheus Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "amp", "arnNamespace" => "aps", "cloudTrailEventSource" => "CLOUDTRAIL_PLACEHOLDER_REPLACED_BY_CDK"}, "aws.auth#sigv4" => {"name" => "aps"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["*", "Authorization", "Date", "X-Amz-Date", "content-type", "x-amz-content-sha256", "x-amz-user-agent", "x-amzn-platform-id", "x-amzn-trace-id", "X-Amz-Security-Token", "X-Amz-Target"], "additionalExposedHeaders" => ["x-amzn-errortype", "x-amzn-requestid", "x-amzn-trace-id", "x-amzn-errormessage", "x-amz-apigw-id", "date"]}, "smithy.api#title" => "Amazon Prometheus Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://aps-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://aps-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://aps.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://aps.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:create_alert_manager_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#CreateAlertManagerDefinition"
         operation.name = "CreateAlertManagerDefinition"
@@ -605,6 +753,19 @@ module Aws::Amp
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "POST", "uri" => "/workspaces/{workspaceId}/alertmanager/definition"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:create_anomaly_detector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#CreateAnomalyDetector"
+        operation.name = "CreateAnomalyDetector"
+        operation.input = CreateAnomalyDetectorRequest
+        operation.output = CreateAnomalyDetectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "POST", "uri" => "/workspaces/{workspaceId}/anomalydetectors"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:create_logging_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#CreateLoggingConfiguration"
@@ -681,6 +842,19 @@ module Aws::Amp
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "DELETE", "uri" => "/workspaces/{workspaceId}/alertmanager/definition"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_anomaly_detector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#DeleteAnomalyDetector"
+        operation.name = "DeleteAnomalyDetector"
+        operation.input = DeleteAnomalyDetectorRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "DELETE", "uri" => "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_logging_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#DeleteLoggingConfiguration"
@@ -781,6 +955,18 @@ module Aws::Amp
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/workspaces/{workspaceId}/alertmanager/definition"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:describe_anomaly_detector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#DescribeAnomalyDetector"
+        operation.name = "DescribeAnomalyDetector"
+        operation.input = DescribeAnomalyDetectorRequest
+        operation.output = DescribeAnomalyDetectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:describe_logging_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#DescribeLoggingConfiguration"
@@ -885,6 +1071,19 @@ module Aws::Amp
         operation.errors << ThrottlingException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/scraperconfiguration"}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:list_anomaly_detectors, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#ListAnomalyDetectors"
+        operation.name = "ListAnomalyDetectors"
+        operation.input = ListAnomalyDetectorsRequest
+        operation.output = ListAnomalyDetectorsResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/workspaces/{workspaceId}/anomalydetectors"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListAnomalyDetectors.new
+      end)
       service.add_operation(:list_rule_groups_namespaces, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#ListRuleGroupsNamespaces"
         operation.name = "ListRuleGroupsNamespaces"
@@ -947,6 +1146,19 @@ module Aws::Amp
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "PUT", "uri" => "/workspaces/{workspaceId}/alertmanager/definition"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:put_anomaly_detector, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.amp#PutAnomalyDetector"
+        operation.name = "PutAnomalyDetector"
+        operation.input = PutAnomalyDetectorRequest
+        operation.output = PutAnomalyDetectorResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 202, "method" => "PUT", "uri" => "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:put_resource_policy, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.amp#PutResourcePolicy"

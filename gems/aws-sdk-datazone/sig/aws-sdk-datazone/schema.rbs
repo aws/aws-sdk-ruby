@@ -28,6 +28,7 @@ module Aws::DataZone
     AddPolicyGrantInput: StructureShape
     AddPolicyGrantOutput: StructureShape
     AddToProjectMemberPoolPolicyGrantDetail: StructureShape
+    AdditionalAttributes: StructureShape
     AggregationAttributeDisplayValue: StringShape
     AggregationAttributeValue: StringShape
     AggregationDisplayValue: StringShape
@@ -39,6 +40,9 @@ module Aws::DataZone
     AggregationOutputList: ListShape
     AllDomainUnitsGrantFilter: StructureShape
     AllUsersGrantFilter: StructureShape
+    AmazonQPropertiesInput: StructureShape
+    AmazonQPropertiesOutput: StructureShape
+    AmazonQPropertiesPatch: StructureShape
     ApplicableAssetTypes: ListShape
     AssetFilterConfiguration: UnionShape
     AssetFilterSummary: StructureShape
@@ -54,6 +58,8 @@ module Aws::DataZone
     AssetListingItem: StructureShape
     AssetListingItemAdditionalAttributes: StructureShape
     AssetName: StringShape
+    AssetPermission: StructureShape
+    AssetPermissions: ListShape
     AssetRevision: StructureShape
     AssetRevisions: ListShape
     AssetScope: StructureShape
@@ -71,6 +77,13 @@ module Aws::DataZone
     AthenaPropertiesOutput: StructureShape
     AthenaPropertiesPatch: StructureShape
     Attribute: StringShape
+    AttributeEntityType: EnumShape
+    AttributeError: StructureShape
+    AttributeIdentifier: StringShape
+    AttributeInput: StructureShape
+    Attributes: ListShape
+    AttributesErrors: ListShape
+    AttributesList: ListShape
     AuthType: EnumShape
     AuthenticationConfiguration: StructureShape
     AuthenticationConfigurationInput: StructureShape
@@ -87,22 +100,41 @@ module Aws::DataZone
     AwsRegion: StringShape
     AwsRegionList: ListShape
     BasicAuthenticationCredentials: StructureShape
+    BatchGetAttributeItems: ListShape
+    BatchGetAttributeOutput: StructureShape
+    BatchGetAttributesMetadataInput: StructureShape
+    BatchGetAttributesMetadataOutput: StructureShape
+    BatchPutAttributeItems: ListShape
+    BatchPutAttributeOutput: StructureShape
+    BatchPutAttributesMetadataInput: StructureShape
+    BatchPutAttributesMetadataOutput: StructureShape
+    BlueprintCategory: EnumShape
     BusinessNameGenerationConfiguration: StructureShape
     CancelMetadataGenerationRunInput: StructureShape
     CancelMetadataGenerationRunOutput: StructureShape
     CancelSubscriptionInput: StructureShape
     CancelSubscriptionOutput: StructureShape
+    CellInformation: StructureShape
+    CellOrder: ListShape
     ChangeAction: EnumShape
     ClientToken: StringShape
     CloudFormationProperties: StructureShape
     ColumnFilterConfiguration: StructureShape
     ColumnNameList: ListShape
+    CommitHash: StringShape
+    CommitMessage: StringShape
+    CompletedAt: TimestampShape
+    ComputeConfig: StructureShape
     ComputeEnvironments: EnumShape
     ComputeEnvironmentsList: ListShape
+    ComputeId: StringShape
     ConfigurableActionParameter: StructureShape
     ConfigurableActionParameterList: ListShape
     ConfigurableActionTypeAuthorization: EnumShape
     ConfigurableEnvironmentAction: StructureShape
+    Configuration: StructureShape
+    ConfigurationStatus: EnumShape
+    Configurations: ListShape
     ConflictException: StructureShape
     ConnectionCredentials: StructureShape
     ConnectionId: StringShape
@@ -111,10 +143,13 @@ module Aws::DataZone
     ConnectionPropertiesInput: UnionShape
     ConnectionPropertiesOutput: UnionShape
     ConnectionPropertiesPatch: UnionShape
+    ConnectionScope: EnumShape
     ConnectionStatus: EnumShape
     ConnectionSummaries: ListShape
     ConnectionSummary: StructureShape
     ConnectionType: EnumShape
+    ConnectivityProperties: StructureShape
+    ConnectivityPropertiesPatch: StructureShape
     CreateAccountPoolInput: StructureShape
     CreateAccountPoolOutput: StructureShape
     CreateAssetFilterInput: StructureShape
@@ -160,6 +195,8 @@ module Aws::DataZone
     CreateGroupProfileOutput: StructureShape
     CreateListingChangeSetInput: StructureShape
     CreateListingChangeSetOutput: StructureShape
+    CreateNotebookInput: StructureShape
+    CreateNotebookOutput: StructureShape
     CreateProjectFromProjectProfilePolicyGrantDetail: StructureShape
     CreateProjectInput: StructureShape
     CreateProjectMembershipInput: StructureShape
@@ -230,6 +267,8 @@ module Aws::DataZone
     DeleteAssetTypeOutput: StructureShape
     DeleteConnectionInput: StructureShape
     DeleteConnectionOutput: StructureShape
+    DeleteDataExportConfigurationInput: StructureShape
+    DeleteDataExportConfigurationOutput: StructureShape
     DeleteDataProductInput: StructureShape
     DeleteDataProductOutput: StructureShape
     DeleteDataSourceInput: StructureShape
@@ -250,8 +289,13 @@ module Aws::DataZone
     DeleteGlossaryOutput: StructureShape
     DeleteGlossaryTermInput: StructureShape
     DeleteGlossaryTermOutput: StructureShape
+    DeleteLineageEventInput: StructureShape
+    DeleteLineageEventOutput: StructureShape
     DeleteListingInput: StructureShape
     DeleteListingOutput: StructureShape
+    DeleteNotebookInput: StructureShape
+    DeleteNotebookOutput: StructureShape
+    DeleteProgress: StructureShape
     DeleteProjectInput: StructureShape
     DeleteProjectMembershipInput: StructureShape
     DeleteProjectMembershipOutput: StructureShape
@@ -307,9 +351,11 @@ module Aws::DataZone
     EditedValue: StringShape
     EnableSetting: EnumShape
     EnabledRegionList: ListShape
+    EncryptionConfiguration: StructureShape
     EntityId: StringShape
     EntityIdentifier: StringShape
     EntityOwners: ListShape
+    EntityPattern: StructureShape
     EntityType: EnumShape
     EnvironmentActionId: StringShape
     EnvironmentActionList: ListShape
@@ -320,6 +366,7 @@ module Aws::DataZone
     EnvironmentBlueprintName: StringShape
     EnvironmentBlueprintSummaries: ListShape
     EnvironmentBlueprintSummary: StructureShape
+    EnvironmentConfig: StructureShape
     EnvironmentConfiguration: StructureShape
     EnvironmentConfigurationId: StringShape
     EnvironmentConfigurationName: StringShape
@@ -349,10 +396,15 @@ module Aws::DataZone
     EqualToExpression: StructureShape
     ErrorMessage: StringShape
     EventSummary: UnionShape
+    ExportId: StringShape
     ExternalIdentifier: StringShape
     FailedQueryProcessingErrorMessages: ListShape
     FailureCause: StructureShape
+    FailureReason: StructureShape
     FailureReasons: ListShape
+    FailureReasonsList: ListShape
+    FileFormat: EnumShape
+    FileName: StringShape
     Filter: StructureShape
     FilterClause: UnionShape
     FilterExpression: StructureShape
@@ -362,6 +414,7 @@ module Aws::DataZone
     FilterIds: ListShape
     FilterList: ListShape
     FilterName: StringShape
+    FilterOperator: EnumShape
     FilterStatus: EnumShape
     FirstName: StringShape
     FormEntryInput: StructureShape
@@ -369,6 +422,7 @@ module Aws::DataZone
     FormInput: StructureShape
     FormInputList: ListShape
     FormName: StringShape
+    FormNameList: ListShape
     FormOutput: StructureShape
     FormOutputList: ListShape
     FormTypeData: StructureShape
@@ -388,6 +442,8 @@ module Aws::DataZone
     GetAssetTypeOutput: StructureShape
     GetConnectionInput: StructureShape
     GetConnectionOutput: StructureShape
+    GetDataExportConfigurationInput: StructureShape
+    GetDataExportConfigurationOutput: StructureShape
     GetDataProductInput: StructureShape
     GetDataProductOutput: StructureShape
     GetDataSourceInput: StructureShape
@@ -430,6 +486,12 @@ module Aws::DataZone
     GetListingOutput: StructureShape
     GetMetadataGenerationRunInput: StructureShape
     GetMetadataGenerationRunOutput: StructureShape
+    GetNotebookExportInput: StructureShape
+    GetNotebookExportOutput: StructureShape
+    GetNotebookInput: StructureShape
+    GetNotebookOutput: StructureShape
+    GetNotebookRunInput: StructureShape
+    GetNotebookRunOutput: StructureShape
     GetProjectInput: StructureShape
     GetProjectOutput: StructureShape
     GetProjectProfileInput: StructureShape
@@ -448,6 +510,13 @@ module Aws::DataZone
     GetTimeSeriesDataPointOutput: StructureShape
     GetUserProfileInput: StructureShape
     GetUserProfileOutput: StructureShape
+    GitBranch: StringShape
+    GitConnectionId: StringShape
+    GitMetadata: StructureShape
+    GitPropertiesInput: StructureShape
+    GitPropertiesOutput: StructureShape
+    GitPropertiesPatch: StructureShape
+    GitRepository: StringShape
     GlobalParameterMap: MapShape
     GlossaryDescription: StringShape
     GlossaryId: StringShape
@@ -455,7 +524,9 @@ module Aws::DataZone
     GlossaryItemAdditionalAttributes: StructureShape
     GlossaryName: StringShape
     GlossaryStatus: EnumShape
+    GlossaryTermEnforcementDetail: StructureShape
     GlossaryTermId: StringShape
+    GlossaryTermIdentifiers: ListShape
     GlossaryTermItem: StructureShape
     GlossaryTermItemAdditionalAttributes: StructureShape
     GlossaryTermName: StringShape
@@ -465,6 +536,8 @@ module Aws::DataZone
     GlossaryUsageRestrictions: ListShape
     GlueConnection: StructureShape
     GlueConnectionInput: StructureShape
+    GlueConnectionName: StringShape
+    GlueConnectionNames: ListShape
     GlueConnectionPatch: StructureShape
     GlueConnectionType: EnumShape
     GlueOAuth2Credentials: StructureShape
@@ -480,6 +553,7 @@ module Aws::DataZone
     GrantIdentifier: StringShape
     GrantedEntity: UnionShape
     GrantedEntityInput: UnionShape
+    GraphEntityType: EnumShape
     GreaterThanExpression: StructureShape
     GreaterThanOrEqualToExpression: StructureShape
     GroupDetails: StructureShape
@@ -495,14 +569,17 @@ module Aws::DataZone
     HyperPodOrchestrator: EnumShape
     HyperPodPropertiesInput: StructureShape
     HyperPodPropertiesOutput: StructureShape
+    IamPrincipalArn: StringShape
     IamPropertiesInput: StructureShape
     IamPropertiesOutput: StructureShape
     IamPropertiesPatch: StructureShape
     IamRoleArn: StringShape
     IamUserProfileDetails: StructureShape
+    IdentityMapping: StructureShape
     Import: StructureShape
     ImportList: ListShape
     InExpression: StructureShape
+    InstanceType: StringShape
     InternalServerException: StructureShape
     InventorySearchScope: EnumShape
     IsNotNullExpression: StructureShape
@@ -517,6 +594,9 @@ module Aws::DataZone
     JobType: EnumShape
     KmsKeyArn: StringShape
     LakeFormationConfiguration: StructureShape
+    LakehousePropertiesInput: StructureShape
+    LakehousePropertiesOutput: StructureShape
+    LakehousePropertiesPatch: StructureShape
     LambdaExecutionRoleArn: StringShape
     LambdaFunctionArn: StringShape
     LastName: StringShape
@@ -533,6 +613,8 @@ module Aws::DataZone
     LineageInfo: StructureShape
     LineageNodeId: StringShape
     LineageNodeIdentifier: StringShape
+    LineageNodeIds: ListShape
+    LineageNodeItem: StructureShape
     LineageNodeReference: StructureShape
     LineageNodeReferenceList: ListShape
     LineageNodeSummaries: ListShape
@@ -540,7 +622,10 @@ module Aws::DataZone
     LineageNodeTypeItem: StructureShape
     LineageRunDetails: StructureShape
     LineageSqlQueryRunDetails: StructureShape
+    LineageSyncInput: StructureShape
+    LineageSyncOutput: StructureShape
     LineageSyncSchedule: StructureShape
+    LineageSyncScheduleCronString: StringShape
     ListAccountPoolsInput: StructureShape
     ListAccountPoolsOutput: StructureShape
     ListAccountsInAccountPoolInput: StructureShape
@@ -584,6 +669,10 @@ module Aws::DataZone
     ListLineageNodeHistoryOutput: StructureShape
     ListMetadataGenerationRunsInput: StructureShape
     ListMetadataGenerationRunsOutput: StructureShape
+    ListNotebookRunsInput: StructureShape
+    ListNotebookRunsOutput: StructureShape
+    ListNotebooksInput: StructureShape
+    ListNotebooksOutput: StructureShape
     ListNotificationsInput: StructureShape
     ListNotificationsOutput: StructureShape
     ListPolicyGrantsInput: StructureShape
@@ -621,6 +710,8 @@ module Aws::DataZone
     LongDescription: StringShape
     ManagedEndpointCredentials: StructureShape
     ManagedPolicyType: EnumShape
+    MatchClause: UnionShape
+    MatchClauses: ListShape
     MatchCriteria: ListShape
     MatchOffset: StructureShape
     MatchOffsets: ListShape
@@ -631,6 +722,7 @@ module Aws::DataZone
     Member: UnionShape
     MemberDetails: UnionShape
     Message: StringShape
+    Metadata: MapShape
     MetadataFormEnforcementDetail: StructureShape
     MetadataFormInputs: ListShape
     MetadataFormReference: StructureShape
@@ -642,16 +734,42 @@ module Aws::DataZone
     MetadataGenerationRunStatus: EnumShape
     MetadataGenerationRunTarget: StructureShape
     MetadataGenerationRunType: EnumShape
+    MetadataGenerationRunTypeStat: StructureShape
+    MetadataGenerationRunTypeStats: ListShape
+    MetadataGenerationRunTypes: ListShape
     MetadataGenerationRuns: ListShape
     MetadataGenerationTargetType: EnumShape
+    MetadataKey: StringShape
     MetadataMap: MapShape
+    MetadataValue: StringShape
+    MlflowPropertiesInput: StructureShape
+    MlflowPropertiesOutput: StructureShape
+    MlflowPropertiesPatch: StructureShape
     Model: UnionShape
     Name: StringShape
     NameIdentifier: StructureShape
     NameIdentifiers: ListShape
+    NetworkAccessType: EnumShape
+    NetworkConfig: StructureShape
     NotEqualToExpression: StructureShape
     NotInExpression: StructureShape
     NotLikeExpression: StructureShape
+    NotebookError: StructureShape
+    NotebookExportError: StructureShape
+    NotebookExportStatus: EnumShape
+    NotebookId: StringShape
+    NotebookName: StringShape
+    NotebookRunError: StructureShape
+    NotebookRunId: StringShape
+    NotebookRunStatus: EnumShape
+    NotebookRunSummary: StructureShape
+    NotebookRunSummaryList: ListShape
+    NotebookS3Uri: StringShape
+    NotebookStatus: EnumShape
+    NotebookSummary: StructureShape
+    NotebookSummaryList: ListShape
+    NotebookType: EnumShape
+    NotificationConfig: StructureShape
     NotificationOutput: StructureShape
     NotificationResource: StructureShape
     NotificationResourceType: EnumShape
@@ -659,11 +777,14 @@ module Aws::DataZone
     NotificationSubjects: ListShape
     NotificationType: EnumShape
     NotificationsList: ListShape
+    NotifyOnState: EnumShape
+    NotifyOnStates: ListShape
     OAuth2ClientApplication: StructureShape
     OAuth2GrantType: EnumShape
     OAuth2Properties: StructureShape
     OpenLineageRunEventSummary: StructureShape
     OpenLineageRunState: EnumShape
+    OutputLocation: UnionShape
     OverallDeploymentStatus: EnumShape
     OverrideDomainUnitOwnersPolicyGrantDetail: StructureShape
     OverrideProjectOwnersPolicyGrantDetail: StructureShape
@@ -673,9 +794,15 @@ module Aws::DataZone
     OwnerPropertiesOutput: UnionShape
     OwnerUserProperties: StructureShape
     OwnerUserPropertiesOutput: StructureShape
+    PackageConfig: StructureShape
+    PackageManager: EnumShape
     PaginationToken: StringShape
+    ParameterKey: StringShape
     ParameterStorePath: StringShape
+    ParameterValue: StringShape
+    Parameters: MapShape
     Password: StringShape
+    Permissions: UnionShape
     PhysicalConnectionRequirements: StructureShape
     PhysicalEndpoint: StructureShape
     PhysicalEndpoints: ListShape
@@ -697,6 +824,8 @@ module Aws::DataZone
     ProjectIds: ListShape
     ProjectMember: StructureShape
     ProjectMembers: ListShape
+    ProjectMembershipAssignment: StructureShape
+    ProjectMembershipAssignments: ListShape
     ProjectName: StringShape
     ProjectPolicyGrantPrincipal: StructureShape
     ProjectProfileId: StringShape
@@ -704,6 +833,7 @@ module Aws::DataZone
     ProjectProfileName: StringShape
     ProjectProfileSummaries: ListShape
     ProjectProfileSummary: StructureShape
+    ProjectResourceTagParameters: ListShape
     ProjectStatus: EnumShape
     ProjectSummaries: ListShape
     ProjectSummary: StructureShape
@@ -713,8 +843,14 @@ module Aws::DataZone
     ProvisioningConfiguration: UnionShape
     ProvisioningConfigurationList: ListShape
     ProvisioningProperties: UnionShape
+    PutDataExportConfigurationInput: StructureShape
+    PutDataExportConfigurationOutput: StructureShape
     PutEnvironmentBlueprintConfigurationInput: StructureShape
     PutEnvironmentBlueprintConfigurationOutput: StructureShape
+    PutResourceConfiguration: StructureShape
+    PutResourceConfigurations: ListShape
+    QueryGraphInput: StructureShape
+    QueryGraphOutput: StructureShape
     RecommendationConfiguration: StructureShape
     RedshiftClusterStorage: StructureShape
     RedshiftCredentialConfiguration: StructureShape
@@ -742,6 +878,9 @@ module Aws::DataZone
     RejectRuleBehavior: EnumShape
     RejectSubscriptionRequestInput: StructureShape
     RejectSubscriptionRequestOutput: StructureShape
+    RelationDirection: EnumShape
+    RelationPattern: StructureShape
+    RelationType: EnumShape
     RelationalFilterConfiguration: StructureShape
     RelationalFilterConfigurations: ListShape
     RemoveEntityOwnerInput: StructureShape
@@ -752,8 +891,17 @@ module Aws::DataZone
     RequiredMetadataFormList: ListShape
     ResolutionStrategy: EnumShape
     Resource: StructureShape
+    ResourceConfiguration: StructureShape
+    ResourceConfigurationParameterMap: MapShape
+    ResourceConfigurations: ListShape
     ResourceList: ListShape
     ResourceNotFoundException: StructureShape
+    ResourceTag: StructureShape
+    ResourceTagParameter: StructureShape
+    ResourceTagSource: EnumShape
+    ResourceTags: ListShape
+    ResultItem: UnionShape
+    ResultItemList: ListShape
     Revision: StringShape
     RevisionInput: StringShape
     RevokeSubscriptionInput: StructureShape
@@ -779,17 +927,28 @@ module Aws::DataZone
     RunIdentifier: StringShape
     RunStatisticsForAssets: StructureShape
     S3AccessGrantLocationId: StringShape
+    S3BucketName: StringShape
+    S3Destination: StructureShape
+    S3File: StructureShape
+    S3FileList: ListShape
+    S3FilesLocation: StructureShape
     S3Location: StringShape
     S3LocationList: ListShape
+    S3ObjectKey: StringShape
+    S3Path: StringShape
+    S3Permission: EnumShape
+    S3Permissions: ListShape
     S3PropertiesInput: StructureShape
     S3PropertiesOutput: StructureShape
     S3PropertiesPatch: StructureShape
+    S3SourceLocation: StringShape
     S3Uri: StringShape
     SageMakerAssetType: StringShape
     SageMakerResourceArn: StringShape
     SageMakerRunConfigurationInput: StructureShape
     SageMakerRunConfigurationOutput: StructureShape
     ScheduleConfiguration: StructureShape
+    ScheduleId: StringShape
     SearchGroupProfilesInput: StructureShape
     SearchGroupProfilesOutput: StructureShape
     SearchInItem: StructureShape
@@ -812,7 +971,9 @@ module Aws::DataZone
     SearchTypesResultItems: ListShape
     SearchUserProfilesInput: StructureShape
     SearchUserProfilesOutput: StructureShape
+    SecurityGroupId: StringShape
     SecurityGroupIdList: ListShape
+    SecurityGroupIds: ListShape
     SelfGrantStatus: EnumShape
     SelfGrantStatusDetail: StructureShape
     SelfGrantStatusDetails: ListShape
@@ -821,11 +982,16 @@ module Aws::DataZone
     ShortDescription: StringShape
     SingleSignOn: StructureShape
     Smithy: StringShape
+    SnowflakePropertiesInput: StructureShape
+    SnowflakePropertiesOutput: StructureShape
+    SnowflakePropertiesPatch: StructureShape
+    SnowflakeRole: StringShape
     SortFieldAccountPool: EnumShape
     SortFieldConnection: EnumShape
     SortFieldProject: EnumShape
     SortKey: EnumShape
     SortOrder: EnumShape
+    SourceLocation: UnionShape
     SparkEmrPropertiesInput: StructureShape
     SparkEmrPropertiesOutput: StructureShape
     SparkEmrPropertiesPatch: StructureShape
@@ -837,13 +1003,29 @@ module Aws::DataZone
     StartDataSourceRunOutput: StructureShape
     StartMetadataGenerationRunInput: StructureShape
     StartMetadataGenerationRunOutput: StructureShape
+    StartNotebookExportInput: StructureShape
+    StartNotebookExportOutput: StructureShape
+    StartNotebookImportInput: StructureShape
+    StartNotebookImportOutput: StructureShape
+    StartNotebookRunInput: StructureShape
+    StartNotebookRunOutput: StructureShape
+    StartNotebookSyncInput: StructureShape
+    StartNotebookSyncOutput: StructureShape
     Status: EnumShape
+    StopNotebookRunInput: StructureShape
+    StopNotebookRunOutput: StructureShape
+    StorageConfig: StructureShape
     StringList: ListShape
     SubnetId: StringShape
     SubnetIdList: ListShape
+    SubnetIds: ListShape
     SubscribedAsset: StructureShape
     SubscribedAssetListing: StructureShape
     SubscribedAssets: ListShape
+    SubscribedGroup: StructureShape
+    SubscribedGroupInput: StructureShape
+    SubscribedIamPrincipal: StructureShape
+    SubscribedIamPrincipalInput: StructureShape
     SubscribedListing: StructureShape
     SubscribedListingInput: StructureShape
     SubscribedListingInputs: ListShape
@@ -856,6 +1038,9 @@ module Aws::DataZone
     SubscribedProductListing: StructureShape
     SubscribedProject: StructureShape
     SubscribedProjectInput: StructureShape
+    SubscribedUser: StructureShape
+    SubscribedUserInput: StructureShape
+    SubscriptionGrantCreationMode: EnumShape
     SubscriptionGrantId: StringShape
     SubscriptionGrantOverallStatus: EnumShape
     SubscriptionGrantStatus: EnumShape
@@ -897,12 +1082,15 @@ module Aws::DataZone
     TimeSeriesDataPointSummaryFormOutputList: ListShape
     TimeSeriesEntityType: EnumShape
     TimeSeriesFormName: StringShape
+    TimeoutConfig: StructureShape
     Timezone: EnumShape
     Title: StringShape
     TokenUrlParametersMap: MapShape
     Topic: StructureShape
     TrackingAssetArns: ListShape
     TrackingAssets: MapShape
+    TriggerSource: StructureShape
+    TriggerSourceType: EnumShape
     TypeName: StringShape
     TypesSearchScope: EnumShape
     UnauthorizedException: StructureShape
@@ -935,10 +1123,14 @@ module Aws::DataZone
     UpdateGlossaryTermOutput: StructureShape
     UpdateGroupProfileInput: StructureShape
     UpdateGroupProfileOutput: StructureShape
+    UpdateNotebookInput: StructureShape
+    UpdateNotebookOutput: StructureShape
     UpdateProjectInput: StructureShape
     UpdateProjectOutput: StructureShape
     UpdateProjectProfileInput: StructureShape
     UpdateProjectProfileOutput: StructureShape
+    UpdateRootDomainUnitOwnerInput: StructureShape
+    UpdateRootDomainUnitOwnerOutput: StructureShape
     UpdateRuleInput: StructureShape
     UpdateRuleOutput: StructureShape
     UpdateSubscriptionGrantStatusInput: StructureShape
@@ -970,6 +1162,15 @@ module Aws::DataZone
     Username: StringShape
     UsernamePassword: StructureShape
     ValidationException: StructureShape
+    VpcConnectionSubnetIdList: ListShape
+    VpcId: StringShape
+    VpcPropertiesInput: StructureShape
+    VpcPropertiesOutput: StructureShape
+    VpcPropertiesPatch: StructureShape
+    WorkflowsMwaaPropertiesInput: StructureShape
+    WorkflowsMwaaPropertiesOutput: StructureShape
+    WorkflowsServerlessPropertiesInput: StructureShape
+    WorkflowsServerlessPropertiesOutput: StructureShape
 
     DataZone: ServiceShape
   end

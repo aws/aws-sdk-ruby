@@ -44,6 +44,21 @@ module Aws::Glue
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _AssociateGlossaryTermsResponse
+      include Smithy::Client::_Response[Types::AssociateGlossaryTermsResponse]
+      def asset_identifier: () -> String?
+      def iterable_form_name: () -> String?
+      def item_identifier: () -> String?
+      def glossary_terms: () -> Array[String]?
+    end
+    def associate_glossary_terms: (
+      ?asset_identifier: String,
+      ?iterable_form_name: String,
+      ?item_identifier: String,
+      ?glossary_term_identifiers: Array[String],
+      ?client_token: String
+    ) -> _AssociateGlossaryTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateGlossaryTermsResponse
+
     interface _BatchCreatePartitionResponse
       include Smithy::Client::_Response[Types::BatchCreatePartitionResponse]
       def errors: () -> Array[Types::PartitionError]?
@@ -191,6 +206,24 @@ module Aws::Glue
       ?result_ids: Array[String]
     ) -> _BatchGetDataQualityResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDataQualityResultResponse
 
+    interface _BatchGetDataQualityResultV2Response
+      include Smithy::Client::_Response[Types::BatchGetDataQualityResultV2Response]
+      def results: () -> Array[Types::DataQualityResultV2Item]?
+      def results_not_found: () -> Array[String]?
+    end
+    def batch_get_data_quality_result_v2: (
+      ?result_ids: Array[String]
+    ) -> _BatchGetDataQualityResultV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDataQualityResultV2Response
+
+    interface _BatchGetDataQualityRulesetEvaluationRunResponse
+      include Smithy::Client::_Response[Types::BatchGetDataQualityRulesetEvaluationRunResponse]
+      def runs: () -> Array[Types::DataQualityRulesetEvaluationRun]?
+      def runs_not_found: () -> Array[String]?
+    end
+    def batch_get_data_quality_ruleset_evaluation_run: (
+      ?run_ids: Array[String]
+    ) -> _BatchGetDataQualityRulesetEvaluationRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDataQualityRulesetEvaluationRunResponse
+
     interface _BatchGetDevEndpointsResponse
       include Smithy::Client::_Response[Types::BatchGetDevEndpointsResponse]
       def dev_endpoints: () -> Array[Types::DevEndpoint]?
@@ -199,6 +232,17 @@ module Aws::Glue
     def batch_get_dev_endpoints: (
       ?dev_endpoint_names: Array[String]
     ) -> _BatchGetDevEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDevEndpointsResponse
+
+    interface _BatchGetIterableFormsResponse
+      include Smithy::Client::_Response[Types::BatchGetIterableFormsResponse]
+      def items: () -> Array[Types::IterableFormItem]?
+      def errors: () -> Array[Types::ItemError]?
+    end
+    def batch_get_iterable_forms: (
+      ?asset_identifier: String,
+      ?iterable_form_name: String,
+      ?item_identifiers: Array[String]
+    ) -> _BatchGetIterableFormsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetIterableFormsResponse
 
     interface _BatchGetJobsResponse
       include Smithy::Client::_Response[Types::BatchGetJobsResponse]
@@ -222,7 +266,19 @@ module Aws::Glue
         {
           values: Array[String]
         }
-      ]
+      ],
+      ?audit_context: {
+        additional_audit_context: String,
+        requested_columns: Array[String],
+        all_columns_requested: bool
+      },
+      ?query_session_context: {
+        query_id: String,
+        query_start_time: Time,
+        cluster_id: String,
+        query_authorization_id: untyped,
+        additional_context: Hash[String, String]
+      }
     ) -> _BatchGetPartitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetPartitionResponse
 
     interface _BatchGetTableOptimizerResponse
@@ -445,7 +501,8 @@ module Aws::Glue
           }
         ],
         create_database_default_permissions: untyped,
-        allow_full_table_external_data_access: String
+        allow_full_table_external_data_access: String,
+        overwrite_child_resource_permissions_with_default: String
       },
       ?tags: Hash[String, String]
     ) -> _CreateCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCatalogResponse
@@ -647,7 +704,8 @@ module Aws::Glue
       },
       ?configuration: String,
       ?crawler_security_configuration: String,
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?catalog_id: String
     ) -> _CreateCrawlerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCrawlerResponse
 
     interface _CreateCustomEntityTypeResponse
@@ -751,13 +809,42 @@ module Aws::Glue
       ?arguments: Hash[String, String]
     ) -> _CreateDevEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDevEndpointResponse
 
+    interface _CreateGlossaryResponse
+      include Smithy::Client::_Response[Types::CreateGlossaryResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+    end
+    def create_glossary: (
+      ?name: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _CreateGlossaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlossaryResponse
+
+    interface _CreateGlossaryTermResponse
+      include Smithy::Client::_Response[Types::CreateGlossaryTermResponse]
+      def id: () -> String?
+      def glossary_id: () -> String?
+      def name: () -> String?
+      def short_description: () -> String?
+      def long_description: () -> String?
+    end
+    def create_glossary_term: (
+      ?glossary_identifier: String,
+      ?name: String,
+      ?short_description: String,
+      ?long_description: String,
+      ?client_token: String
+    ) -> _CreateGlossaryTermResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlossaryTermResponse
+
     interface _CreateGlueIdentityCenterConfigurationResponse
       include Smithy::Client::_Response[Types::CreateGlueIdentityCenterConfigurationResponse]
       def application_arn: () -> String?
     end
     def create_glue_identity_center_configuration: (
       ?instance_arn: String,
-      ?scopes: Array[String]
+      ?scopes: Array[String],
+      ?user_background_sessions_enabled: bool
     ) -> _CreateGlueIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlueIdentityCenterConfigurationResponse
 
     interface _CreateIntegrationResponse
@@ -793,13 +880,15 @@ module Aws::Glue
       ?integration_config: {
         refresh_interval: String,
         source_properties: Hash[String, String],
-        continuous_sync: bool
+        continuous_sync: bool,
+        target_namespace: String
       }
     ) -> _CreateIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationResponse
 
     interface _CreateIntegrationResourcePropertyResponse
       include Smithy::Client::_Response[Types::CreateIntegrationResourcePropertyResponse]
       def resource_arn: () -> String?
+      def resource_property_arn: () -> String?
       def source_processing_properties: () -> Types::SourceProcessingProperties?
       def target_processing_properties: () -> Types::TargetProcessingProperties?
     end
@@ -813,7 +902,13 @@ module Aws::Glue
         kms_arn: String,
         connection_name: untyped,
         event_bus_arn: untyped
-      }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
     ) -> _CreateIntegrationResourcePropertyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationResourcePropertyResponse
 
     interface _CreateIntegrationTablePropertiesResponse
@@ -837,7 +932,8 @@ module Aws::Glue
             conversion_spec: untyped
           }
         ],
-        target_table_name: untyped
+        target_table_name: untyped,
+        integration_arn: untyped
       }
     ) -> _CreateIntegrationTablePropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationTablePropertiesResponse
 
@@ -2005,7 +2101,8 @@ module Aws::Glue
       ?security_configuration: String,
       ?glue_version: String,
       ?tags: Hash[String, String],
-      ?request_origin: String
+      ?request_origin: String,
+      ?session_type: String
     ) -> _CreateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSessionResponse
 
     interface _CreateTableResponse
@@ -2077,8 +2174,15 @@ module Aws::Glue
           name: untyped,
           region: untyped
         },
+        federated_table: {
+          identifier: String,
+          database_identifier: untyped,
+          connection_name: untyped,
+          connection_type: untyped
+        },
         view_definition: {
           is_protected: bool,
+          is_managed: untyped,
           definer: String,
           representations: Array[
             {
@@ -2089,7 +2193,22 @@ module Aws::Glue
               view_expanded_text: untyped
             }
           ],
-          sub_objects: Array[String]
+          view_version_id: Integer,
+          view_version_token: String,
+          refresh_seconds: Integer,
+          last_refresh_type: String,
+          sub_objects: Array[String],
+          sub_object_version_ids: Array[Integer],
+          sub_objects_statistics: Array[
+            {
+              source_type: String,
+              glue_version_id: String,
+              partition_count: Integer,
+              file_count: untyped,
+              total_file_bytes: untyped
+            }
+          ],
+          spark_pipeline_info: Hash[String, String]
         }
       },
       ?partition_indexes: Array[
@@ -2115,7 +2234,9 @@ module Aws::Glue
                   name: String,
                   type: Smithy::Schema::document,
                   required: bool,
-                  doc: String
+                  doc: String,
+                  initial_default: untyped,
+                  write_default: untyped
                 }
               ]
             },
@@ -2259,6 +2380,7 @@ module Aws::Glue
         function_name: String,
         class_name: untyped,
         owner_name: untyped,
+        function_type: String,
         owner_type: String,
         resource_uris: Array[
           {
@@ -2280,6 +2402,33 @@ module Aws::Glue
       ?tags: Hash[String, String],
       ?max_concurrent_runs: Integer
     ) -> _CreateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowResponse
+
+    interface _DeleteAssetResponse
+      include Smithy::Client::_Response[Types::DeleteAssetResponse]
+    end
+    def delete_asset: (
+      ?identifier: String
+    ) -> _DeleteAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetResponse
+
+    interface _DeleteAssetTypeResponse
+      include Smithy::Client::_Response[Types::DeleteAssetTypeResponse]
+    end
+    def delete_asset_type: (
+      ?identifier: String
+    ) -> _DeleteAssetTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetTypeResponse
+
+    interface _DeleteAttachmentResponse
+      include Smithy::Client::_Response[Types::DeleteAttachmentResponse]
+      def asset_identifier: () -> String?
+      def iterable_form_name: () -> String?
+      def item_identifier: () -> String?
+    end
+    def delete_attachment: (
+      ?asset_identifier: String,
+      ?iterable_form_name: String,
+      ?item_identifier: String,
+      ?attachment_name: String
+    ) -> _DeleteAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAttachmentResponse
 
     interface _DeleteBlueprintResponse
       include Smithy::Client::_Response[Types::DeleteBlueprintResponse]
@@ -2329,7 +2478,8 @@ module Aws::Glue
     end
     def delete_column_statistics_task_settings: (
       ?database_name: String,
-      ?table_name: String
+      ?table_name: String,
+      ?catalog_id: String
     ) -> _DeleteColumnStatisticsTaskSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteColumnStatisticsTaskSettingsResponse
 
     interface _DeleteConnectionResponse
@@ -2339,6 +2489,13 @@ module Aws::Glue
       ?catalog_id: String,
       ?connection_name: String
     ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteConnectionTypeResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionTypeResponse]
+    end
+    def delete_connection_type: (
+      ?connection_type: String
+    ) -> _DeleteConnectionTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionTypeResponse
 
     interface _DeleteCrawlerResponse
       include Smithy::Client::_Response[Types::DeleteCrawlerResponse]
@@ -2377,6 +2534,27 @@ module Aws::Glue
       ?endpoint_name: String
     ) -> _DeleteDevEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDevEndpointResponse
 
+    interface _DeleteFormTypeResponse
+      include Smithy::Client::_Response[Types::DeleteFormTypeResponse]
+    end
+    def delete_form_type: (
+      ?identifier: String
+    ) -> _DeleteFormTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFormTypeResponse
+
+    interface _DeleteGlossaryResponse
+      include Smithy::Client::_Response[Types::DeleteGlossaryResponse]
+    end
+    def delete_glossary: (
+      ?identifier: String
+    ) -> _DeleteGlossaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGlossaryResponse
+
+    interface _DeleteGlossaryTermResponse
+      include Smithy::Client::_Response[Types::DeleteGlossaryTermResponse]
+    end
+    def delete_glossary_term: (
+      ?identifier: String
+    ) -> _DeleteGlossaryTermResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGlossaryTermResponse
+
     interface _DeleteGlueIdentityCenterConfigurationResponse
       include Smithy::Client::_Response[Types::DeleteGlueIdentityCenterConfigurationResponse]
     end
@@ -2400,6 +2578,13 @@ module Aws::Glue
     def delete_integration: (
       ?integration_identifier: String
     ) -> _DeleteIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntegrationResponse
+
+    interface _DeleteIntegrationResourcePropertyResponse
+      include Smithy::Client::_Response[Types::DeleteIntegrationResourcePropertyResponse]
+    end
+    def delete_integration_resource_property: (
+      ?resource_arn: String
+    ) -> _DeleteIntegrationResourcePropertyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntegrationResourcePropertyResponse
 
     interface _DeleteIntegrationTablePropertiesResponse
       include Smithy::Client::_Response[Types::DeleteIntegrationTablePropertiesResponse]
@@ -2584,6 +2769,7 @@ module Aws::Glue
       def athena_connection_properties: () -> Hash[String, Types::Property]?
       def python_connection_properties: () -> Hash[String, Types::Property]?
       def spark_connection_properties: () -> Hash[String, Types::Property]?
+      def rest_configuration: () -> Types::RestConfiguration?
     end
     def describe_connection_type: (
       ?connection_type: String
@@ -2630,6 +2816,48 @@ module Aws::Glue
         }
       ]
     ) -> _DescribeIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIntegrationsResponse
+
+    interface _DisassociateGlossaryTermsResponse
+      include Smithy::Client::_Response[Types::DisassociateGlossaryTermsResponse]
+      def asset_identifier: () -> String?
+      def iterable_form_name: () -> String?
+      def item_identifier: () -> String?
+      def glossary_terms: () -> Array[String]?
+    end
+    def disassociate_glossary_terms: (
+      ?asset_identifier: String,
+      ?iterable_form_name: String,
+      ?item_identifier: String,
+      ?glossary_term_identifiers: Array[String],
+      ?client_token: String
+    ) -> _DisassociateGlossaryTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateGlossaryTermsResponse
+
+    interface _GetAssetResponse
+      include Smithy::Client::_Response[Types::GetAssetOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def asset_type_id: () -> String?
+      def glossary_terms: () -> Array[String]?
+      def forms: () -> Hash[String, Types::AssetFormEntry]?
+      def attachments: () -> Hash[String, Types::AssetFormEntry]?
+      def iterable_forms: () -> Hash[String, Types::IterableFormEntry]?
+    end
+    def get_asset: (
+      ?identifier: String
+    ) -> _GetAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetResponse
+
+    interface _GetAssetTypeResponse
+      include Smithy::Client::_Response[Types::GetAssetTypeResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def forms: () -> Hash[String, Types::AssetTypeFormReference]?
+    end
+    def get_asset_type: (
+      ?identifier: String
+    ) -> _GetAssetTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetTypeResponse
 
     interface _GetBlueprintResponse
       include Smithy::Client::_Response[Types::GetBlueprintResponse]
@@ -2687,7 +2915,8 @@ module Aws::Glue
       ?next_token: String,
       ?max_results: Integer,
       ?recursive: bool,
-      ?include_root: bool
+      ?include_root: bool,
+      ?has_databases: bool
     ) -> _GetCatalogsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCatalogsResponse
 
     interface _GetClassifierResponse
@@ -2750,7 +2979,8 @@ module Aws::Glue
       ?database_name: String,
       ?table_name: String,
       ?max_results: Integer,
-      ?next_token: String
+      ?next_token: String,
+      ?catalog_id: String
     ) -> _GetColumnStatisticsTaskRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetColumnStatisticsTaskRunsResponse
 
     interface _GetColumnStatisticsTaskSettingsResponse
@@ -2759,7 +2989,8 @@ module Aws::Glue
     end
     def get_column_statistics_task_settings: (
       ?database_name: String,
-      ?table_name: String
+      ?table_name: String,
+      ?catalog_id: String
     ) -> _GetColumnStatisticsTaskSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetColumnStatisticsTaskSettingsResponse
 
     interface _GetConnectionResponse
@@ -2829,6 +3060,16 @@ module Aws::Glue
       ?name: String
     ) -> _GetCustomEntityTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomEntityTypeResponse
 
+    interface _GetDashboardUrlResponse
+      include Smithy::Client::_Response[Types::GetDashboardUrlResponse]
+      def url: () -> String?
+    end
+    def get_dashboard_url: (
+      ?resource_id: String,
+      ?resource_type: String,
+      ?request_origin: String
+    ) -> _GetDashboardUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDashboardUrlResponse
+
     interface _GetDataCatalogEncryptionSettingsResponse
       include Smithy::Client::_Response[Types::GetDataCatalogEncryptionSettingsResponse]
       def data_catalog_encryption_settings: () -> Types::DataCatalogEncryptionSettings?
@@ -2836,6 +3077,17 @@ module Aws::Glue
     def get_data_catalog_encryption_settings: (
       ?catalog_id: String
     ) -> _GetDataCatalogEncryptionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataCatalogEncryptionSettingsResponse
+
+    interface _GetDataCatalogExportConfigurationResponse
+      include Smithy::Client::_Response[Types::GetDataCatalogExportConfigurationOutput]
+      def export_setting: () -> String?
+      def status: () -> String?
+      def encryption_configuration: () -> Types::ExportEncryptionConfiguration?
+      def s3_table_bucket_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_data_catalog_export_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataCatalogExportConfigurationResponse
 
     interface _GetDataQualityModelResponse
       include Smithy::Client::_Response[Types::GetDataQualityModelResponse]
@@ -2881,6 +3133,29 @@ module Aws::Glue
       ?result_id: String
     ) -> _GetDataQualityResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataQualityResultResponse
 
+    interface _GetDataQualityResultV2Response
+      include Smithy::Client::_Response[Types::GetDataQualityResultV2Response]
+      def result_id: () -> String?
+      def data_source: () -> Types::DataSource?
+      def profile_id: () -> String?
+      def dimensions: () -> Hash[String, String]?
+      def tags: () -> Hash[String, String]?
+      def execution_started_on: () -> Time?
+      def execution_completed_on: () -> Time?
+      def result_published_on: () -> Time?
+      def score: () -> Float?
+      def rule_results: () -> Array[Types::DataQualityRuleResult]?
+      def analyzer_results: () -> Array[Types::DataQualityAnalyzerResult]?
+      def observations: () -> Array[Types::DataQualityObservation]?
+      def evaluation_context: () -> String?
+      def descriptors: () -> Hash[String, String]?
+      def aggregated_metrics: () -> Types::DataQualityAggregatedMetrics?
+      def ruleset_name: () -> String?
+    end
+    def get_data_quality_result_v2: (
+      ?result_id: String
+    ) -> _GetDataQualityResultV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataQualityResultV2Response
+
     interface _GetDataQualityRuleRecommendationRunResponse
       include Smithy::Client::_Response[Types::GetDataQualityRuleRecommendationRunResponse]
       def run_id: () -> String?
@@ -2897,6 +3172,8 @@ module Aws::Glue
       def recommended_ruleset: () -> String?
       def created_ruleset_name: () -> String?
       def data_quality_security_configuration: () -> String?
+      def additional_run_options: () -> Types::DataQualityRuleRecommendationRunAdditionalRunOptions?
+      def recommendation_mode: () -> String?
     end
     def get_data_quality_rule_recommendation_run: (
       ?run_id: String
@@ -3006,17 +3283,51 @@ module Aws::Glue
       ?selected_fields: Array[String]
     ) -> _GetEntityRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEntityRecordsResponse
 
+    interface _GetFormTypeResponse
+      include Smithy::Client::_Response[Types::GetFormTypeResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def schema: () -> String?
+    end
+    def get_form_type: (
+      ?identifier: String
+    ) -> _GetFormTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFormTypeResponse
+
+    interface _GetGlossaryResponse
+      include Smithy::Client::_Response[Types::GetGlossaryResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+    end
+    def get_glossary: (
+      ?identifier: String
+    ) -> _GetGlossaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlossaryResponse
+
+    interface _GetGlossaryTermResponse
+      include Smithy::Client::_Response[Types::GetGlossaryTermResponse]
+      def id: () -> String?
+      def glossary_id: () -> String?
+      def name: () -> String?
+      def short_description: () -> String?
+      def long_description: () -> String?
+    end
+    def get_glossary_term: (
+      ?identifier: String
+    ) -> _GetGlossaryTermResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlossaryTermResponse
+
     interface _GetGlueIdentityCenterConfigurationResponse
       include Smithy::Client::_Response[Types::GetGlueIdentityCenterConfigurationResponse]
       def application_arn: () -> String?
       def instance_arn: () -> String?
       def scopes: () -> Array[String]?
+      def user_background_sessions_enabled: () -> bool?
     end
     def get_glue_identity_center_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGlueIdentityCenterConfigurationResponse
 
     interface _GetIntegrationResourcePropertyResponse
       include Smithy::Client::_Response[Types::GetIntegrationResourcePropertyResponse]
       def resource_arn: () -> String?
+      def resource_property_arn: () -> String?
       def source_processing_properties: () -> Types::SourceProcessingProperties?
       def target_processing_properties: () -> Types::TargetProcessingProperties?
     end
@@ -3207,6 +3518,15 @@ module Aws::Glue
       }
     ) -> _GetMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMappingResponse
 
+    interface _GetMaterializedViewRefreshTaskRunResponse
+      include Smithy::Client::_Response[Types::GetMaterializedViewRefreshTaskRunResponse]
+      def materialized_view_refresh_task_run: () -> Types::MaterializedViewRefreshTaskRun?
+    end
+    def get_materialized_view_refresh_task_run: (
+      ?catalog_id: String,
+      ?materialized_view_refresh_task_run_id: String
+    ) -> _GetMaterializedViewRefreshTaskRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMaterializedViewRefreshTaskRunResponse
+
     interface _GetPartitionResponse
       include Smithy::Client::_Response[Types::GetPartitionResponse]
       def partition: () -> Types::Partition?
@@ -3215,7 +3535,12 @@ module Aws::Glue
       ?catalog_id: String,
       ?database_name: String,
       ?table_name: String,
-      ?partition_values: Array[String]
+      ?partition_values: Array[String],
+      ?audit_context: {
+        additional_audit_context: String,
+        requested_columns: Array[String],
+        all_columns_requested: bool
+      }
     ) -> _GetPartitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPartitionResponse
 
     interface _GetPartitionIndexesResponse
@@ -3248,7 +3573,12 @@ module Aws::Glue
       ?max_results: Integer,
       ?exclude_column_schema: bool,
       ?transaction_id: String,
-      ?query_as_of_time: Time
+      ?query_as_of_time: Time,
+      ?audit_context: {
+        additional_audit_context: String,
+        requested_columns: Array[String],
+        all_columns_requested: bool
+      }
     ) -> _GetPartitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPartitionsResponse
 
     interface _GetPlanResponse
@@ -3441,6 +3771,14 @@ module Aws::Glue
       ?request_origin: String
     ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
 
+    interface _GetSessionEndpointResponse
+      include Smithy::Client::_Response[Types::GetSessionEndpointResponse]
+      def spark_connect: () -> Types::SessionEndpoint?
+    end
+    def get_session_endpoint: (
+      ?session_id: String
+    ) -> _GetSessionEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionEndpointResponse
+
     interface _GetStatementResponse
       include Smithy::Client::_Response[Types::GetStatementResponse]
       def statement: () -> Types::Statement?
@@ -3450,6 +3788,23 @@ module Aws::Glue
       ?id: Integer,
       ?request_origin: String
     ) -> _GetStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStatementResponse
+
+    interface _GetSystemLogsForJobRunResponse
+      include Smithy::Client::_Response[Types::GetSystemLogsForJobRunResponse]
+      def system_logs_url: () -> String?
+    end
+    def get_system_logs_for_job_run: (
+      ?job_name: String,
+      ?run_id: String
+    ) -> _GetSystemLogsForJobRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSystemLogsForJobRunResponse
+
+    interface _GetSystemLogsForSessionResponse
+      include Smithy::Client::_Response[Types::GetSystemLogsForSessionResponse]
+      def system_logs_url: () -> String?
+    end
+    def get_system_logs_for_session: (
+      ?id: String
+    ) -> _GetSystemLogsForSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSystemLogsForSessionResponse
 
     interface _GetTableResponse
       include Smithy::Client::_Response[Types::GetTableResponse]
@@ -3461,7 +3816,13 @@ module Aws::Glue
       ?name: String,
       ?transaction_id: String,
       ?query_as_of_time: Time,
-      ?include_status_details: bool
+      ?audit_context: {
+        additional_audit_context: String,
+        requested_columns: Array[String],
+        all_columns_requested: bool
+      },
+      ?include_status_details: bool,
+      ?attributes_to_get: Array[String]
     ) -> _GetTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableResponse
 
     interface _GetTableOptimizerResponse
@@ -3486,7 +3847,12 @@ module Aws::Glue
       ?catalog_id: String,
       ?database_name: String,
       ?table_name: String,
-      ?version_id: String
+      ?version_id: String,
+      ?audit_context: {
+        additional_audit_context: String,
+        requested_columns: Array[String],
+        all_columns_requested: bool
+      }
     ) -> _GetTableVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableVersionResponse
 
     interface _GetTableVersionsResponse
@@ -3499,7 +3865,12 @@ module Aws::Glue
       ?database_name: String,
       ?table_name: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?audit_context: {
+        additional_audit_context: String,
+        requested_columns: Array[String],
+        all_columns_requested: bool
+      }
     ) -> _GetTableVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableVersionsResponse
 
     interface _GetTablesResponse
@@ -3515,6 +3886,12 @@ module Aws::Glue
       ?max_results: Integer,
       ?transaction_id: String,
       ?query_as_of_time: Time,
+      ?audit_context: {
+        additional_audit_context: String,
+        requested_columns: Array[String],
+        all_columns_requested: bool
+      },
+      ?resource_share_type: String,
       ?include_status_details: bool,
       ?attributes_to_get: Array[String]
     ) -> _GetTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTablesResponse
@@ -3613,6 +3990,7 @@ module Aws::Glue
       def cell_filters: () -> Array[Types::ColumnRowFilter]?
       def query_authorization_id: () -> String?
       def is_multi_dialect_view: () -> bool?
+      def is_materialized_view: () -> bool?
       def resource_arn: () -> String?
       def is_protected: () -> bool?
       def permissions: () -> Array[String]?
@@ -3676,6 +4054,7 @@ module Aws::Glue
       ?catalog_id: String,
       ?database_name: String,
       ?pattern: String,
+      ?function_type: String,
       ?next_token: String,
       ?max_results: Integer
     ) -> _GetUserDefinedFunctionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserDefinedFunctionsResponse
@@ -3726,6 +4105,16 @@ module Aws::Glue
     def import_catalog_to_glue: (
       ?catalog_id: String
     ) -> _ImportCatalogToGlueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportCatalogToGlueResponse
+
+    interface _ListAssetTypesResponse
+      include Smithy::Client::_Response[Types::ListAssetTypesResponse]
+      def items: () -> Array[Types::AssetTypeItem]?
+      def next_token: () -> String?
+    end
+    def list_asset_types: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssetTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetTypesResponse
 
     interface _ListBlueprintsResponse
       include Smithy::Client::_Response[Types::ListBlueprintsResponse]
@@ -3831,6 +4220,39 @@ module Aws::Glue
       ?max_results: Integer
     ) -> _ListDataQualityResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataQualityResultsResponse
 
+    interface _ListDataQualityResultsV2Response
+      include Smithy::Client::_Response[Types::ListDataQualityResultsV2Response]
+      def results: () -> Array[Types::DataQualityResultsV2Description]?
+      def next_token: () -> String?
+    end
+    def list_data_quality_results_v2: (
+      ?filter: {
+        data_source: {
+          glue_table: {
+            database_name: String,
+            table_name: untyped,
+            catalog_id: untyped,
+            connection_name: untyped,
+            additional_options: Hash[String, String]
+          },
+          data_quality_glue_table: {
+            database_name: untyped,
+            table_name: untyped,
+            catalog_id: untyped,
+            connection_name: untyped,
+            additional_options: untyped,
+            pre_processing_query: String
+          }
+        },
+        published_after: Time,
+        published_before: untyped,
+        dimensions: Hash[String, String],
+        evaluation_context: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataQualityResultsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataQualityResultsV2Response
+
     interface _ListDataQualityRuleRecommendationRunsResponse
       include Smithy::Client::_Response[Types::ListDataQualityRuleRecommendationRunsResponse]
       def runs: () -> Array[Types::DataQualityRuleRecommendationRunDescription]?
@@ -3859,7 +4281,8 @@ module Aws::Glue
         started_after: untyped
       },
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?tags: Hash[String, String]
     ) -> _ListDataQualityRuleRecommendationRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataQualityRuleRecommendationRunsResponse
 
     interface _ListDataQualityRulesetEvaluationRunsResponse
@@ -3887,7 +4310,8 @@ module Aws::Glue
           }
         },
         started_before: Time,
-        started_after: untyped
+        started_after: untyped,
+        ruleset_name: untyped
       },
       ?next_token: String,
       ?max_results: Integer
@@ -3973,6 +4397,81 @@ module Aws::Glue
       ?data_store_api_version: String
     ) -> _ListEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntitiesResponse
 
+    interface _ListFormTypesResponse
+      include Smithy::Client::_Response[Types::ListFormTypesResponse]
+      def items: () -> Array[Types::FormTypeItem]?
+      def next_token: () -> String?
+    end
+    def list_form_types: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFormTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFormTypesResponse
+
+    interface _ListGlossariesResponse
+      include Smithy::Client::_Response[Types::ListGlossariesResponse]
+      def items: () -> Array[Types::GlossaryItem]?
+      def next_token: () -> String?
+    end
+    def list_glossaries: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGlossariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGlossariesResponse
+
+    interface _ListGlossaryTermsResponse
+      include Smithy::Client::_Response[Types::ListGlossaryTermsResponse]
+      def items: () -> Array[Types::GlossaryTermItem]?
+      def next_token: () -> String?
+    end
+    def list_glossary_terms: (
+      ?glossary_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGlossaryTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGlossaryTermsResponse
+
+    interface _ListIntegrationResourcePropertiesResponse
+      include Smithy::Client::_Response[Types::ListIntegrationResourcePropertiesResponse]
+      def integration_resource_property_list: () -> Array[Types::IntegrationResourceProperty]?
+      def marker: () -> String?
+    end
+    def list_integration_resource_properties: (
+      ?marker: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer
+    ) -> _ListIntegrationResourcePropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntegrationResourcePropertiesResponse
+
+    interface _ListIntegrationTablePropertiesResponse
+      include Smithy::Client::_Response[Types::ListIntegrationTablePropertiesResponse]
+      def integration_table_properties_list: () -> Array[Types::IntegrationTableProperties]?
+      def marker: () -> String?
+    end
+    def list_integration_table_properties: (
+      ?marker: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?max_records: Integer
+    ) -> _ListIntegrationTablePropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntegrationTablePropertiesResponse
+
+    interface _ListIterableFormsResponse
+      include Smithy::Client::_Response[Types::ListIterableFormsResponse]
+      def items: () -> Array[Types::IterableFormListItem]?
+      def next_token: () -> String?
+    end
+    def list_iterable_forms: (
+      ?asset_identifier: String,
+      ?iterable_form_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIterableFormsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIterableFormsResponse
+
     interface _ListJobsResponse
       include Smithy::Client::_Response[Types::ListJobsResponse]
       def job_names: () -> Array[String]?
@@ -4014,6 +4513,19 @@ module Aws::Glue
       },
       ?tags: Hash[String, String]
     ) -> _ListMLTransformsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMLTransformsResponse
+
+    interface _ListMaterializedViewRefreshTaskRunsResponse
+      include Smithy::Client::_Response[Types::ListMaterializedViewRefreshTaskRunsResponse]
+      def materialized_view_refresh_task_runs: () -> Array[Types::MaterializedViewRefreshTaskRun]?
+      def next_token: () -> String?
+    end
+    def list_materialized_view_refresh_task_runs: (
+      ?catalog_id: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMaterializedViewRefreshTaskRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMaterializedViewRefreshTaskRunsResponse
 
     interface _ListRegistriesResponse
       include Smithy::Client::_Response[Types::ListRegistriesResponse]
@@ -4150,10 +4662,173 @@ module Aws::Glue
       ?integration_config: {
         refresh_interval: String,
         source_properties: Hash[String, String],
-        continuous_sync: bool
+        continuous_sync: bool,
+        target_namespace: String
       },
       ?integration_name: String
     ) -> _ModifyIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyIntegrationResponse
+
+    interface _PublishDataQualityResultV2Response
+      include Smithy::Client::_Response[Types::PublishDataQualityResultV2Response]
+      def result_id: () -> String?
+    end
+    def publish_data_quality_result_v2: (
+      ?dimensions: Hash[String, String],
+      ?tags: Hash[String, String],
+      ?execution_started_on: Time,
+      ?execution_completed_on: Time,
+      ?score: Float,
+      ?rule_results: Array[
+        {
+          name: String,
+          description: String,
+          evaluation_message: untyped,
+          result: String,
+          evaluated_metrics: Hash[String, Float],
+          evaluated_rule: untyped,
+          rule_metrics: Hash[String, Float],
+          labels: Hash[String, String]
+        }
+      ],
+      ?analyzer_results: Array[
+        {
+          name: String,
+          description: String,
+          evaluation_message: untyped,
+          evaluated_metrics: Hash[String, Float],
+          evaluated_distributions: Hash[String,
+            {
+              bin_edges: Array[String],
+              count: Array[Integer],
+              data_type: untyped
+            }
+          ]
+        }
+      ],
+      ?observations: Array[
+        {
+          description: String,
+          metric_based_observation: {
+            metric_name: String,
+            statistic_id: String,
+            metric_values: {
+              actual_value: Float,
+              expected_value: untyped,
+              lower_limit: untyped,
+              upper_limit: untyped
+            },
+            new_rules: Array[String]
+          }
+        }
+      ],
+      ?aggregated_metrics: {
+        total_rows_processed: Float,
+        total_rows_passed: untyped,
+        total_rows_failed: untyped,
+        total_rules_processed: untyped,
+        total_rules_passed: untyped,
+        total_rules_failed: untyped
+      },
+      ?statistics: Array[
+        {
+          statistic_id: String,
+          profile_id: untyped,
+          run_identifier: {
+            run_id: untyped,
+            job_run_id: untyped
+          },
+          statistic_name: String,
+          double_value: Float,
+          distribution_value: {
+            bin_edges: Array[String],
+            count: Array[Integer],
+            data_type: String
+          },
+          evaluation_level: String,
+          columns_referenced: Array[String],
+          referenced_datasets: Array[String],
+          statistic_properties: Hash[String, String],
+          recorded_on: Time,
+          inclusion_annotation: {
+            value: String,
+            last_modified_on: untyped
+          }
+        }
+      ],
+      ?run_configuration: {
+        observations_enabled: String,
+        observation_mode: String
+      },
+      ?client_token: String,
+      ?evaluation_context: String,
+      ?descriptors: Hash[String, String],
+      ?ruleset_name: String,
+      ?data_quality_security_configuration: String,
+      ?telemetry: {
+        vcpu_hours: Float,
+        flags_enabled: Hash[String, String],
+        library_version: String,
+        spark_version: untyped,
+        host_runtime_version: untyped,
+        engine: String
+      }
+    ) -> _PublishDataQualityResultV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishDataQualityResultV2Response
+
+    interface _PutAssetResponse
+      include Smithy::Client::_Response[Types::PutAssetResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def forms: () -> Hash[String, Types::AssetFormEntry]?
+    end
+    def put_asset: (
+      ?asset_type_id: String,
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?forms: Hash[String,
+        {
+          form_type_id: String,
+          content: String
+        }
+      ],
+      ?client_token: String
+    ) -> _PutAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAssetResponse
+
+    interface _PutAssetTypeResponse
+      include Smithy::Client::_Response[Types::PutAssetTypeResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def forms: () -> Hash[String, Types::AssetTypeFormReference]?
+    end
+    def put_asset_type: (
+      ?name: String,
+      ?forms: Hash[String,
+        {
+          form_type_identifier: String
+        }
+      ],
+      ?client_token: String
+    ) -> _PutAssetTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAssetTypeResponse
+
+    interface _PutAttachmentResponse
+      include Smithy::Client::_Response[Types::PutAttachmentResponse]
+      def asset_identifier: () -> String?
+      def iterable_form_name: () -> String?
+      def item_identifier: () -> String?
+      def attachment_name: () -> String?
+      def form_type_id: () -> String?
+    end
+    def put_attachment: (
+      ?asset_identifier: String,
+      ?iterable_form_name: String,
+      ?item_identifier: String,
+      ?attachment_name: String,
+      ?content: String,
+      ?form_type_id: String,
+      ?client_token: String
+    ) -> _PutAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAttachmentResponse
 
     interface _PutDataCatalogEncryptionSettingsResponse
       include Smithy::Client::_Response[Types::PutDataCatalogEncryptionSettingsResponse]
@@ -4173,6 +4848,20 @@ module Aws::Glue
       }
     ) -> _PutDataCatalogEncryptionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDataCatalogEncryptionSettingsResponse
 
+    interface _PutDataCatalogExportConfigurationResponse
+      include Smithy::Client::_Response[Types::PutDataCatalogExportConfigurationOutput]
+      def export_setting: () -> String?
+      def encryption_configuration: () -> Types::ExportEncryptionConfiguration?
+    end
+    def put_data_catalog_export_configuration: (
+      ?export_setting: String,
+      ?encryption_configuration: {
+        sse_algorithm: String,
+        kms_key_arn: String
+      },
+      ?client_token: String
+    ) -> _PutDataCatalogExportConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDataCatalogExportConfigurationResponse
+
     interface _PutDataQualityProfileAnnotationResponse
       include Smithy::Client::_Response[Types::PutDataQualityProfileAnnotationResponse]
     end
@@ -4180,6 +4869,18 @@ module Aws::Glue
       ?profile_id: String,
       ?inclusion_annotation: String
     ) -> _PutDataQualityProfileAnnotationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDataQualityProfileAnnotationResponse
+
+    interface _PutFormTypeResponse
+      include Smithy::Client::_Response[Types::PutFormTypeResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def schema: () -> String?
+    end
+    def put_form_type: (
+      ?name: String,
+      ?schema: String,
+      ?client_token: String
+    ) -> _PutFormTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFormTypeResponse
 
     interface _PutResourcePolicyResponse
       include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
@@ -4257,6 +4958,182 @@ module Aws::Glue
       ?next_token: String
     ) -> _QuerySchemaVersionMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QuerySchemaVersionMetadataResponse
 
+    interface _RegisterConnectionTypeResponse
+      include Smithy::Client::_Response[Types::RegisterConnectionTypeResponse]
+      def connection_type_arn: () -> String?
+    end
+    def register_connection_type: (
+      ?connection_type: String,
+      ?integration_type: String,
+      ?description: String,
+      ?connection_properties: {
+        url: {
+          name: String,
+          key_override: String,
+          required: bool,
+          default_value: String,
+          allowed_values: Array[String],
+          property_location: String,
+          property_type: String,
+          format: untyped
+        },
+        additional_request_parameters: Array[
+          {
+            name: untyped,
+            key_override: untyped,
+            required: untyped,
+            default_value: untyped,
+            allowed_values: untyped,
+            property_location: untyped,
+            property_type: untyped,
+            format: untyped
+          }
+        ]
+      },
+      ?connector_authentication_configuration: {
+        authentication_types: Array[String],
+        o_auth2_properties: {
+          o_auth2_grant_type: String,
+          client_credentials_properties: {
+            token_url: {
+              name: String,
+              key_override: String,
+              required: bool,
+              default_value: String,
+              allowed_values: Array[String],
+              property_location: String,
+              property_type: String,
+              format: untyped
+            },
+            request_method: String,
+            content_type: String,
+            client_id: untyped,
+            client_secret: untyped,
+            scope: untyped,
+            token_url_parameters: Array[
+              {
+                name: untyped,
+                key_override: untyped,
+                required: untyped,
+                default_value: untyped,
+                allowed_values: untyped,
+                property_location: untyped,
+                property_type: untyped,
+                format: untyped
+              }
+            ]
+          },
+          jwt_bearer_properties: {
+            token_url: untyped,
+            request_method: untyped,
+            content_type: untyped,
+            jwt_token: untyped,
+            token_url_parameters: untyped
+          },
+          authorization_code_properties: {
+            authorization_code_url: untyped,
+            authorization_code: untyped,
+            redirect_uri: untyped,
+            token_url: untyped,
+            request_method: untyped,
+            content_type: untyped,
+            client_id: untyped,
+            client_secret: untyped,
+            scope: untyped,
+            prompt: untyped,
+            token_url_parameters: untyped
+          }
+        },
+        basic_authentication_properties: {
+          username: untyped,
+          password: untyped
+        },
+        custom_authentication_properties: {
+          authentication_parameters: untyped
+        }
+      },
+      ?rest_configuration: {
+        global_source_configuration: {
+          request_method: String,
+          request_path: String,
+          request_parameters: Array[
+            {
+              name: String,
+              key_override: String,
+              required: bool,
+              default_value: String,
+              allowed_values: Array[String],
+              property_location: String,
+              property_type: String,
+              format: untyped
+            }
+          ],
+          response_configuration: {
+            result_path: String,
+            error_path: untyped
+          },
+          pagination_configuration: {
+            cursor_configuration: {
+              next_page: {
+                key: untyped,
+                default_value: String,
+                property_location: untyped,
+                value: {
+                  content_path: untyped,
+                  header_key: untyped
+                }
+              },
+              limit_parameter: untyped
+            },
+            offset_configuration: {
+              offset_parameter: untyped,
+              limit_parameter: untyped
+            }
+          },
+          filter_configuration: {
+            filter_mode: String,
+            operator_mappings: Hash[String, String],
+            date_time_format: untyped,
+            strip_quotes: untyped,
+            between_configuration: {
+              low_bound_key: untyped,
+              high_bound_key: untyped,
+              template: untyped
+            },
+            filter_string_configuration: {
+              query_parameter_name: untyped,
+              quote_string_values: untyped,
+              quote_character: untyped
+            }
+          }
+        },
+        validation_endpoint_configuration: untyped,
+        entity_configurations: Hash[String,
+          {
+            source_configuration: untyped,
+            schema: Hash[String,
+              {
+                name: untyped,
+                field_data_type: String,
+                response_date_format: untyped,
+                is_partitionable: untyped,
+                is_nullable: untyped,
+                is_queryable: untyped,
+                is_orderable: untyped,
+                filter_overrides: {
+                  field_name: untyped,
+                  operator_mappings: untyped,
+                  between_configuration: untyped,
+                  date_time_format: untyped
+                }
+              }
+            ]
+          }
+        ]
+      },
+      ?tags: Hash[String, String]
+    ) -> _RegisterConnectionTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterConnectionTypeResponse
+
     interface _RegisterSchemaVersionResponse
       include Smithy::Client::_Response[Types::RegisterSchemaVersionResponse]
       def schema_version_id: () -> String?
@@ -4330,6 +5207,47 @@ module Aws::Glue
       ?request_origin: String
     ) -> _RunStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RunStatementResponse
 
+    interface _SearchAssetsResponse
+      include Smithy::Client::_Response[Types::SearchAssetsOutput]
+      def items: () -> Array[Types::SearchResultItem]?
+      def next_token: () -> String?
+    end
+    def search_assets: (
+      ?search_text: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort: {
+        attribute: String,
+        order: String
+      },
+      ?filter_clause: {
+        and_all_filters: Array[
+          {
+            and_all_filters: untyped,
+            or_any_filters: untyped,
+            attribute_filter: {
+              attribute: String,
+              operator: String,
+              value: {
+                string_value: String,
+                long_value: Integer
+              }
+            },
+            map_filter: {
+              attribute: untyped,
+              key: String,
+              value: {
+                string_value: untyped
+              }
+            }
+          }
+        ],
+        or_any_filters: untyped,
+        attribute_filter: untyped,
+        map_filter: untyped
+      }
+    ) -> _SearchAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAssetsResponse
+
     interface _SearchTablesResponse
       include Smithy::Client::_Response[Types::SearchTablesResponse]
       def next_token: () -> String?
@@ -4386,7 +5304,8 @@ module Aws::Glue
     end
     def start_column_statistics_task_run_schedule: (
       ?database_name: String,
-      ?table_name: String
+      ?table_name: String,
+      ?catalog_id: String
     ) -> _StartColumnStatisticsTaskRunScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartColumnStatisticsTaskRunScheduleResponse
 
     interface _StartCrawlerResponse
@@ -4430,7 +5349,11 @@ module Aws::Glue
       ?timeout: Integer,
       ?created_ruleset_name: String,
       ?data_quality_security_configuration: String,
-      ?client_token: String
+      ?client_token: String,
+      ?additional_run_options: {
+        custom_log_group_prefix: String
+      },
+      ?recommendation_mode: String
     ) -> _StartDataQualityRuleRecommendationRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDataQualityRuleRecommendationRunResponse
 
     interface _StartDataQualityRulesetEvaluationRunResponse
@@ -4462,7 +5385,36 @@ module Aws::Glue
       ?additional_run_options: {
         cloud_watch_metrics_enabled: bool,
         results_s3_prefix: String,
-        composite_rule_evaluation_method: String
+        composite_rule_evaluation_method: String,
+        custom_log_group_prefix: String,
+        row_level_results: {
+          max_rows_to_write: Integer,
+          result_type: String,
+          catalog_table_config: {
+            database_name: String,
+            table_name: untyped,
+            s3_location: untyped,
+            catalog_id: untyped
+          }
+        },
+        profiling_results: {
+          write_profiling_results_enabled: untyped,
+          catalog_table_config: untyped,
+          distribution_results: {
+            write_distribution_results_enabled: untyped,
+            catalog_table_config: untyped
+          }
+        },
+        observation_scope: String,
+        observation_mode: String,
+        data_quality_rule_results: {
+          write_data_quality_rule_results_enabled: untyped,
+          catalog_table_config: untyped
+        },
+        observation_results: {
+          write_observation_results_enabled: untyped,
+          catalog_table_config: untyped
+        }
       },
       ?ruleset_names: Array[String],
       ?additional_data_sources: Hash[String,
@@ -4544,6 +5496,17 @@ module Aws::Glue
       ?output_s3_path: String
     ) -> _StartMLLabelingSetGenerationTaskRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMLLabelingSetGenerationTaskRunResponse
 
+    interface _StartMaterializedViewRefreshTaskRunResponse
+      include Smithy::Client::_Response[Types::StartMaterializedViewRefreshTaskRunResponse]
+      def materialized_view_refresh_task_run_id: () -> String?
+    end
+    def start_materialized_view_refresh_task_run: (
+      ?catalog_id: String,
+      ?database_name: String,
+      ?table_name: String,
+      ?full_refresh: bool
+    ) -> _StartMaterializedViewRefreshTaskRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMaterializedViewRefreshTaskRunResponse
+
     interface _StartTriggerResponse
       include Smithy::Client::_Response[Types::StartTriggerResponse]
       def name: () -> String?
@@ -4566,7 +5529,8 @@ module Aws::Glue
     end
     def stop_column_statistics_task_run: (
       ?database_name: String,
-      ?table_name: String
+      ?table_name: String,
+      ?catalog_id: String
     ) -> _StopColumnStatisticsTaskRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopColumnStatisticsTaskRunResponse
 
     interface _StopColumnStatisticsTaskRunScheduleResponse
@@ -4574,7 +5538,8 @@ module Aws::Glue
     end
     def stop_column_statistics_task_run_schedule: (
       ?database_name: String,
-      ?table_name: String
+      ?table_name: String,
+      ?catalog_id: String
     ) -> _StopColumnStatisticsTaskRunScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopColumnStatisticsTaskRunScheduleResponse
 
     interface _StopCrawlerResponse
@@ -4590,6 +5555,15 @@ module Aws::Glue
     def stop_crawler_schedule: (
       ?crawler_name: String
     ) -> _StopCrawlerScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopCrawlerScheduleResponse
+
+    interface _StopMaterializedViewRefreshTaskRunResponse
+      include Smithy::Client::_Response[Types::StopMaterializedViewRefreshTaskRunResponse]
+    end
+    def stop_materialized_view_refresh_task_run: (
+      ?catalog_id: String,
+      ?database_name: String,
+      ?table_name: String
+    ) -> _StopMaterializedViewRefreshTaskRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopMaterializedViewRefreshTaskRunResponse
 
     interface _StopSessionResponse
       include Smithy::Client::_Response[Types::StopSessionResponse]
@@ -4673,6 +5647,20 @@ module Aws::Glue
       ?tags_to_remove: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
 
+    interface _UpdateAssetResponse
+      include Smithy::Client::_Response[Types::UpdateAssetResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_asset: (
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _UpdateAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssetResponse
+
     interface _UpdateBlueprintResponse
       include Smithy::Client::_Response[Types::UpdateBlueprintResponse]
       def name: () -> String?
@@ -4723,7 +5711,8 @@ module Aws::Glue
           }
         ],
         create_database_default_permissions: untyped,
-        allow_full_table_external_data_access: String
+        allow_full_table_external_data_access: String,
+        overwrite_child_resource_permissions_with_default: String
       }
     ) -> _UpdateCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCatalogResponse
 
@@ -5048,7 +6037,8 @@ module Aws::Glue
         account_id: String
       },
       ?configuration: String,
-      ?crawler_security_configuration: String
+      ?crawler_security_configuration: String,
+      ?catalog_id: String
     ) -> _UpdateCrawlerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCrawlerResponse
 
     interface _UpdateCrawlerScheduleResponse
@@ -5120,16 +6110,47 @@ module Aws::Glue
       ?add_arguments: Hash[String, String]
     ) -> _UpdateDevEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDevEndpointResponse
 
+    interface _UpdateGlossaryResponse
+      include Smithy::Client::_Response[Types::UpdateGlossaryResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+    end
+    def update_glossary: (
+      ?identifier: String,
+      ?name: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _UpdateGlossaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlossaryResponse
+
+    interface _UpdateGlossaryTermResponse
+      include Smithy::Client::_Response[Types::UpdateGlossaryTermResponse]
+      def id: () -> String?
+      def glossary_id: () -> String?
+      def name: () -> String?
+      def short_description: () -> String?
+      def long_description: () -> String?
+    end
+    def update_glossary_term: (
+      ?identifier: String,
+      ?name: String,
+      ?short_description: String,
+      ?long_description: String,
+      ?client_token: String
+    ) -> _UpdateGlossaryTermResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlossaryTermResponse
+
     interface _UpdateGlueIdentityCenterConfigurationResponse
       include Smithy::Client::_Response[Types::UpdateGlueIdentityCenterConfigurationResponse]
     end
     def update_glue_identity_center_configuration: (
-      ?scopes: Array[String]
+      ?scopes: Array[String],
+      ?user_background_sessions_enabled: bool
     ) -> _UpdateGlueIdentityCenterConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlueIdentityCenterConfigurationResponse
 
     interface _UpdateIntegrationResourcePropertyResponse
       include Smithy::Client::_Response[Types::UpdateIntegrationResourcePropertyResponse]
       def resource_arn: () -> String?
+      def resource_property_arn: () -> String?
       def source_processing_properties: () -> Types::SourceProcessingProperties?
       def target_processing_properties: () -> Types::TargetProcessingProperties?
     end
@@ -5167,7 +6188,8 @@ module Aws::Glue
             conversion_spec: untyped
           }
         ],
-        target_table_name: untyped
+        target_table_name: untyped,
+        integration_arn: untyped
       }
     ) -> _UpdateIntegrationTablePropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIntegrationTablePropertiesResponse
 
@@ -6316,8 +7338,15 @@ module Aws::Glue
           name: untyped,
           region: untyped
         },
+        federated_table: {
+          identifier: String,
+          database_identifier: untyped,
+          connection_name: untyped,
+          connection_type: untyped
+        },
         view_definition: {
           is_protected: bool,
+          is_managed: untyped,
           definer: String,
           representations: Array[
             {
@@ -6328,7 +7357,22 @@ module Aws::Glue
               view_expanded_text: untyped
             }
           ],
-          sub_objects: Array[String]
+          view_version_id: Integer,
+          view_version_token: String,
+          refresh_seconds: Integer,
+          last_refresh_type: String,
+          sub_objects: Array[String],
+          sub_object_version_ids: Array[Integer],
+          sub_objects_statistics: Array[
+            {
+              source_type: String,
+              glue_version_id: String,
+              partition_count: Integer,
+              file_count: untyped,
+              total_file_bytes: untyped
+            }
+          ],
+          spark_pipeline_info: Hash[String, String]
         }
       },
       ?skip_archive: bool,
@@ -6351,7 +7395,9 @@ module Aws::Glue
                       name: String,
                       type: Smithy::Schema::document,
                       required: bool,
-                      doc: String
+                      doc: String,
+                      initial_default: untyped,
+                      write_default: untyped
                     }
                   ]
                 },
@@ -6378,7 +7424,15 @@ module Aws::Glue
                   ]
                 },
                 location: String,
-                properties: Hash[String, String]
+                properties: Hash[String, String],
+                action: String,
+                encryption_key: {
+                  key_id: String,
+                  encrypted_key_metadata: String,
+                  encrypted_by_id: untyped,
+                  properties: untyped
+                },
+                key_id: untyped
               }
             ]
           }
@@ -6497,6 +7551,7 @@ module Aws::Glue
         function_name: String,
         class_name: untyped,
         owner_name: untyped,
+        function_type: String,
         owner_type: String,
         resource_uris: Array[
           {

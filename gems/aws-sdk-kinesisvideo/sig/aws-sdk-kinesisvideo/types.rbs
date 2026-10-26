@@ -155,6 +155,7 @@ module Aws::KinesisVideo
         ?kms_key_id: String,
         ?data_retention_in_hours: Integer,
         ?tags: Hash[String, String],
+        ?stream_storage_configuration: Types::StreamStorageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -164,6 +165,7 @@ module Aws::KinesisVideo
       attr_accessor kms_key_id: String?
       attr_accessor data_retention_in_hours: Integer?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor stream_storage_configuration: Types::StreamStorageConfiguration?
     end
 
     class CreateStreamOutput
@@ -175,6 +177,11 @@ module Aws::KinesisVideo
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_arn: String?
+    end
+
+    module DefaultStorageTier
+      HOT: String
+      WARM: String
     end
 
     class DeleteEdgeConfigurationInput
@@ -444,6 +451,34 @@ module Aws::KinesisVideo
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_info: Types::StreamInfo?
+    end
+
+    class DescribeStreamStorageConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+    end
+
+    class DescribeStreamStorageConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?stream_storage_configuration: Types::StreamStorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor stream_storage_configuration: Types::StreamStorageConfiguration?
     end
 
     class DeviceStreamLimitExceededException
@@ -1117,6 +1152,17 @@ module Aws::KinesisVideo
       attr_accessor comparison_value: String?
     end
 
+    class StreamStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_storage_tier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_storage_tier: String?
+    end
+
     module SyncStatus
       SYNCING: String
       ACKNOWLEDGED: String
@@ -1390,6 +1436,32 @@ module Aws::KinesisVideo
     end
 
     class UpdateStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateStreamStorageConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?current_version: String,
+        ?stream_storage_configuration: Types::StreamStorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor current_version: String?
+      attr_accessor stream_storage_configuration: Types::StreamStorageConfiguration?
+    end
+
+    class UpdateStreamStorageConfigurationOutput
       include Smithy::Schema::Structure
 
       def initialize: (

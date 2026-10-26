@@ -7,6 +7,7 @@ module Aws::DeviceFarm
     AccountsCleanup: BooleanShape
     AmazonResourceName: StringShape
     AmazonResourceNames: ListShape
+    AmazonRoleResourceName: StringShape
     AndroidPaths: ListShape
     AppPackagesCleanup: BooleanShape
     ArgumentException: StructureShape
@@ -14,11 +15,11 @@ module Aws::DeviceFarm
     ArtifactCategory: EnumShape
     ArtifactType: EnumShape
     Artifacts: ListShape
+    AuxiliaryAppArnList: ListShape
     BillingMethod: EnumShape
     Boolean: BooleanShape
     CPU: StructureShape
     CannotDeleteException: StructureShape
-    ClientId: StringShape
     ContentType: StringShape
     Counters: StructureShape
     CreateDevicePoolRequest: StructureShape
@@ -87,6 +88,10 @@ module Aws::DeviceFarm
     DeviceSelectionResult: StructureShape
     Devices: ListShape
     Double: FloatShape
+    EnvironmentVariable: StructureShape
+    EnvironmentVariableName: StringShape
+    EnvironmentVariableValue: StringShape
+    EnvironmentVariables: ListShape
     ExceptionMessage: StringShape
     ExecutionConfiguration: StructureShape
     ExecutionResult: EnumShape
@@ -129,10 +134,11 @@ module Aws::DeviceFarm
     GetUploadResult: StructureShape
     GetVPCEConfigurationRequest: StructureShape
     GetVPCEConfigurationResult: StructureShape
-    HostAddress: StringShape
     IdempotencyException: StructureShape
     IncompatibilityMessage: StructureShape
     IncompatibilityMessages: ListShape
+    InsightsType: EnumShape
+    InsightsTypes: ListShape
     InstallToRemoteAccessSessionRequest: StructureShape
     InstallToRemoteAccessSessionResult: StructureShape
     InstanceLabels: ListShape
@@ -145,6 +151,9 @@ module Aws::DeviceFarm
     InvalidOperationException: StructureShape
     IosPaths: ListShape
     Job: StructureShape
+    JobInsights: StructureShape
+    JobReport: StructureShape
+    JobReportMetrics: StructureShape
     JobTimeoutMinutes: IntegerShape
     Jobs: ListShape
     LimitExceededException: StructureShape
@@ -237,10 +246,16 @@ module Aws::DeviceFarm
     RecurringCharge: StructureShape
     RecurringChargeFrequency: EnumShape
     RecurringCharges: ListShape
+    RemoteAccessEndpoints: StructureShape
+    RemoteAccessParameterKey: StringShape
+    RemoteAccessParameterValue: StringShape
+    RemoteAccessParameters: MapShape
     RemoteAccessSession: StructureShape
     RemoteAccessSessions: ListShape
     RenewOfferingRequest: StructureShape
     RenewOfferingResult: StructureShape
+    ReportMessage: StringShape
+    ReportStatus: EnumShape
     Resolution: StructureShape
     ResourceDescription: StringShape
     ResourceId: StringShape
@@ -249,6 +264,7 @@ module Aws::DeviceFarm
     RuleOperator: EnumShape
     Rules: ListShape
     Run: StructureShape
+    RunInsights: StructureShape
     Runs: ListShape
     Sample: StructureShape
     SampleType: EnumShape
@@ -264,7 +280,6 @@ module Aws::DeviceFarm
     ServiceAccountException: StructureShape
     ServiceDnsName: StringShape
     SkipAppResign: BooleanShape
-    SshPublicKey: StringShape
     StopJobRequest: StructureShape
     StopJobResult: StructureShape
     StopRemoteAccessSessionRequest: StructureShape
@@ -300,6 +315,8 @@ module Aws::DeviceFarm
     TestGridUrlExpiresInSecondsInput: IntegerShape
     TestGridVpcConfig: StructureShape
     TestParameters: MapShape
+    TestReport: StructureShape
+    TestReportMetrics: StructureShape
     TestType: EnumShape
     Tests: ListShape
     TooManyTagsException: StructureShape

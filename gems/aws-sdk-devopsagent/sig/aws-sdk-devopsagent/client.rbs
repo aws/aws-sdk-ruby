@@ -1,0 +1,1285 @@
+module Aws::DevOpsAgent
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DevOpsAgent::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateServiceResponse
+      include Smithy::Client::_Response[Types::AssociateServiceOutput]
+      def association: () -> Types::Association?
+      def webhook: () -> Types::GenericWebhook?
+    end
+    def associate_service: (
+      ?agent_space_id: String,
+      ?service_id: String,
+      ?configuration: {
+        source_aws: {
+          account_id: String,
+          account_type: String,
+          assumable_role_arn: String,
+          external_id: untyped,
+          agent_elevated_role_arn: untyped,
+          agent_elevated_role_arn_status: String
+        },
+        aws: {
+          assumable_role_arn: untyped,
+          account_id: untyped,
+          account_type: String,
+          agent_elevated_role_arn: untyped,
+          agent_elevated_role_arn_status: untyped
+        },
+        github: {
+          repo_name: untyped,
+          repo_id: untyped,
+          owner: untyped,
+          owner_type: String,
+          instance_identifier: untyped,
+          runtime_role_arn: untyped,
+          release_management_association_id: String
+        },
+        slack: {
+          workspace_id: untyped,
+          workspace_name: untyped,
+          transmission_target: {
+            ops_oncall_target: {
+              channel_name: untyped,
+              channel_id: untyped
+            },
+            ops_sre_target: untyped
+          },
+          bidirectional: {
+            role_arn: untyped,
+            enabled: bool
+          }
+        },
+        dynatrace: {
+          env_id: untyped,
+          resources: Array[String]
+        },
+        servicenow: {
+          instance_id: untyped,
+          auth_scopes: Array[String]
+        },
+        mcpservernewrelic: {
+          account_id: untyped,
+          endpoint: untyped
+        },
+        mcpserverdatadog: {
+          enabled_elevated_tools: Array[
+            {
+              name: untyped,
+              tool_classification: String
+            }
+          ]
+        },
+        mcpserver: {
+          tools: Array[String],
+          tool_details: untyped
+        },
+        gitlab: {
+          project_id: untyped,
+          project_path: untyped,
+          instance_identifier: untyped,
+          runtime_role_arn: untyped,
+          release_management_association_id: untyped
+        },
+        mcpserversplunk: {
+        },
+        event_channel: {
+        },
+        azure: {
+          subscription_id: untyped
+        },
+        azuredevops: {
+          organization_name: untyped,
+          project_id: untyped,
+          project_name: untyped
+        },
+        mcpservergrafana: {
+          endpoint: untyped,
+          organization_id: untyped,
+          tools: untyped,
+          enabled_elevated_tools: untyped
+        },
+        pagerduty: {
+          services: Array[String],
+          customer_email: String
+        },
+        mcpserversigv4: {
+          tools: untyped,
+          tool_details: untyped
+        },
+        remoteagent: {
+        },
+        remoteagentsigv4: {
+        },
+        release_management: {
+          name: String,
+          network_access: {
+            private_access: {
+              private_connection_name: String,
+              runtime_role_arn: untyped
+            }
+          }
+        }
+      },
+      ?capabilities: Hash[String,
+        {
+          enabled: bool,
+          trigger_filter_groups: Array[
+            {
+              events: Array[String],
+              target_branches: {
+                patterns: Array[String]
+              }
+            }
+          ]
+        }
+      ]
+    ) -> _AssociateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateServiceResponse
+
+    interface _CreateAgentSpaceResponse
+      include Smithy::Client::_Response[Types::CreateAgentSpaceOutput]
+      def agent_space: () -> Types::AgentSpace?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_agent_space: (
+      ?name: String,
+      ?description: String,
+      ?locale: String,
+      ?kms_key_arn: String,
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?preferences: Hash[String, bool]
+    ) -> _CreateAgentSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentSpaceResponse
+
+    interface _CreateAssetResponse
+      include Smithy::Client::_Response[Types::CreateAssetResponse]
+      def asset: () -> Types::Asset?
+    end
+    def create_asset: (
+      ?agent_space_id: String,
+      ?asset_type: String,
+      ?metadata: Smithy::Schema::document,
+      ?content: {
+        file: {
+          path: String,
+          body: {
+            bytes: String,
+            text: String
+          },
+          metadata: Smithy::Schema::document
+        },
+        zip: {
+          zip_file: String
+        },
+        source_url: {
+          url: String
+        }
+      },
+      ?client_token: String
+    ) -> _CreateAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetResponse
+
+    interface _CreateAssetFileResponse
+      include Smithy::Client::_Response[Types::CreateAssetFileResponse]
+      def file: () -> Types::AssetFile?
+    end
+    def create_asset_file: (
+      ?agent_space_id: String,
+      ?asset_id: String,
+      ?path: String,
+      ?content: {
+        bytes: String,
+        text: String
+      },
+      ?metadata: Smithy::Schema::document,
+      ?client_token: String
+    ) -> _CreateAssetFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssetFileResponse
+
+    interface _CreateBacklogTaskResponse
+      include Smithy::Client::_Response[Types::CreateBacklogTaskResponse]
+      def task: () -> Types::Task?
+    end
+    def create_backlog_task: (
+      ?agent_space_id: String,
+      ?reference: {
+        system: String,
+        title: untyped,
+        reference_id: String,
+        reference_url: untyped,
+        association_id: untyped
+      },
+      ?task_type: String,
+      ?title: String,
+      ?description: String,
+      ?priority: String,
+      ?client_token: String
+    ) -> _CreateBacklogTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBacklogTaskResponse
+
+    interface _CreateChatResponse
+      include Smithy::Client::_Response[Types::CreateChatResponse]
+      def execution_id: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_chat: (
+      ?agent_space_id: String,
+      ?user_id: String,
+      ?user_type: String
+    ) -> _CreateChatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChatResponse
+
+    interface _CreatePrivateConnectionResponse
+      include Smithy::Client::_Response[Types::CreatePrivateConnectionOutput]
+      def name: () -> String?
+      def type: () -> String?
+      def resource_gateway_id: () -> String?
+      def host_address: () -> String?
+      def vpc_id: () -> String?
+      def resource_configuration_id: () -> String?
+      def status: () -> String?
+      def certificate_expiry_time: () -> Time?
+      def dns_resolution: () -> String?
+      def failure_message: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_private_connection: (
+      ?name: String,
+      ?mode: {
+        service_managed: {
+          host_address: String,
+          vpc_id: String,
+          subnet_ids: Array[String],
+          security_group_ids: Array[String],
+          ip_address_type: String,
+          ipv4_addresses_per_eni: Integer,
+          port_ranges: Array[String],
+          certificate: String,
+          dns_resolution: String
+        },
+        self_managed: {
+          resource_configuration_id: String,
+          certificate: untyped
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreatePrivateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePrivateConnectionResponse
+
+    interface _CreateTriggerResponse
+      include Smithy::Client::_Response[Types::CreateTriggerResponse]
+      def trigger: () -> Types::Trigger?
+    end
+    def create_trigger: (
+      ?agent_space_id: String,
+      ?type: String,
+      ?condition: {
+        schedule: {
+          expression: String,
+          spec: {
+            cron: {
+              expression: untyped
+            },
+            time_range: {
+              start_after: String,
+              start_before: untyped,
+              recurrence: {
+                daily: {
+                },
+                weekly: {
+                  day_of_week: String
+                },
+                monthly: {
+                  day_of_month: Integer
+                }
+              }
+            }
+          }
+        }
+      },
+      ?action: Smithy::Schema::document,
+      ?status: String,
+      ?client_token: String
+    ) -> _CreateTriggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTriggerResponse
+
+    interface _DeleteAgentSpaceResponse
+      include Smithy::Client::_Response[Types::DeleteAgentSpaceOutput]
+    end
+    def delete_agent_space: (
+      ?agent_space_id: String
+    ) -> _DeleteAgentSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentSpaceResponse
+
+    interface _DeleteAssetResponse
+      include Smithy::Client::_Response[Types::DeleteAssetResponse]
+    end
+    def delete_asset: (
+      ?agent_space_id: String,
+      ?asset_id: String
+    ) -> _DeleteAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetResponse
+
+    interface _DeleteAssetFileResponse
+      include Smithy::Client::_Response[Types::DeleteAssetFileResponse]
+    end
+    def delete_asset_file: (
+      ?agent_space_id: String,
+      ?asset_id: String,
+      ?path: String
+    ) -> _DeleteAssetFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssetFileResponse
+
+    interface _DeletePrivateConnectionResponse
+      include Smithy::Client::_Response[Types::DeletePrivateConnectionOutput]
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def delete_private_connection: (
+      ?name: String
+    ) -> _DeletePrivateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePrivateConnectionResponse
+
+    interface _DeleteTriggerResponse
+      include Smithy::Client::_Response[Types::DeleteTriggerResponse]
+    end
+    def delete_trigger: (
+      ?agent_space_id: String,
+      ?trigger_id: String
+    ) -> _DeleteTriggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTriggerResponse
+
+    interface _DeregisterServiceResponse
+      include Smithy::Client::_Response[Types::DeregisterServiceOutput]
+    end
+    def deregister_service: (
+      ?service_id: String
+    ) -> _DeregisterServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterServiceResponse
+
+    interface _DescribePrivateConnectionResponse
+      include Smithy::Client::_Response[Types::DescribePrivateConnectionOutput]
+      def name: () -> String?
+      def type: () -> String?
+      def resource_gateway_id: () -> String?
+      def host_address: () -> String?
+      def vpc_id: () -> String?
+      def resource_configuration_id: () -> String?
+      def status: () -> String?
+      def certificate_expiry_time: () -> Time?
+      def dns_resolution: () -> String?
+      def failure_message: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_private_connection: (
+      ?name: String
+    ) -> _DescribePrivateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePrivateConnectionResponse
+
+    interface _DisableOperatorAppResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_operator_app: (
+      ?agent_space_id: String,
+      ?auth_flow: String
+    ) -> _DisableOperatorAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableOperatorAppResponse
+
+    interface _DisassociateServiceResponse
+      include Smithy::Client::_Response[Types::DisassociateServiceOutput]
+    end
+    def disassociate_service: (
+      ?agent_space_id: String,
+      ?association_id: String
+    ) -> _DisassociateServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateServiceResponse
+
+    interface _EnableOperatorAppResponse
+      include Smithy::Client::_Response[Types::EnableOperatorAppOutput]
+      def agent_space_id: () -> String?
+      def operator_app_url: () -> String?
+      def iam: () -> Types::IamAuthConfiguration?
+      def idc: () -> Types::IdcAuthConfiguration?
+      def idp: () -> Types::IdpAuthConfiguration?
+    end
+    def enable_operator_app: (
+      ?agent_space_id: String,
+      ?auth_flow: String,
+      ?operator_app_role_arn: String,
+      ?idc_instance_arn: String,
+      ?issuer_url: String,
+      ?idp_client_id: String,
+      ?idp_client_secret: String,
+      ?provider: String
+    ) -> _EnableOperatorAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableOperatorAppResponse
+
+    interface _GetAccountUsageResponse
+      include Smithy::Client::_Response[Types::GetAccountUsageOutput]
+      def monthly_account_investigation_hours: () -> Types::UsageMetric?
+      def monthly_account_evaluation_hours: () -> Types::UsageMetric?
+      def monthly_account_system_learning_hours: () -> Types::UsageMetric?
+      def monthly_account_on_demand_hours: () -> Types::UsageMetric?
+      def monthly_account_grader_hours: () -> Types::UsageMetric?
+      def usage_period_start_time: () -> Time?
+      def usage_period_end_time: () -> Time?
+    end
+    def get_account_usage: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountUsageResponse
+
+    interface _GetAgentSpaceResponse
+      include Smithy::Client::_Response[Types::GetAgentSpaceOutput]
+      def agent_space: () -> Types::AgentSpace?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_agent_space: (
+      ?agent_space_id: String,
+      ?included_data: String
+    ) -> _GetAgentSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentSpaceResponse
+
+    interface _GetAssetResponse
+      include Smithy::Client::_Response[Types::GetAssetResponse]
+      def asset: () -> Types::Asset?
+    end
+    def get_asset: (
+      ?agent_space_id: String,
+      ?asset_id: String,
+      ?asset_version: Integer
+    ) -> _GetAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetResponse
+
+    interface _GetAssetContentResponse
+      include Smithy::Client::_Response[Types::GetAssetContentResponse]
+      def content: () -> Types::AssetZipContent?
+      def version: () -> Integer?
+    end
+    def get_asset_content: (
+      ?agent_space_id: String,
+      ?asset_id: String,
+      ?asset_version: Integer
+    ) -> _GetAssetContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetContentResponse
+
+    interface _GetAssetFileResponse
+      include Smithy::Client::_Response[Types::GetAssetFileResponse]
+      def file: () -> Types::AssetFile?
+    end
+    def get_asset_file: (
+      ?agent_space_id: String,
+      ?asset_id: String,
+      ?path: String,
+      ?asset_version: Integer
+    ) -> _GetAssetFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetFileResponse
+
+    interface _GetAssociationResponse
+      include Smithy::Client::_Response[Types::GetAssociationOutput]
+      def association: () -> Types::Association?
+    end
+    def get_association: (
+      ?agent_space_id: String,
+      ?association_id: String
+    ) -> _GetAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssociationResponse
+
+    interface _GetBacklogTaskResponse
+      include Smithy::Client::_Response[Types::GetBacklogTaskResponse]
+      def task: () -> Types::Task?
+    end
+    def get_backlog_task: (
+      ?agent_space_id: String,
+      ?task_id: String
+    ) -> _GetBacklogTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBacklogTaskResponse
+
+    interface _GetOperatorAppResponse
+      include Smithy::Client::_Response[Types::GetOperatorAppOutput]
+      def operator_app_url: () -> String?
+      def iam: () -> Types::IamAuthConfiguration?
+      def idc: () -> Types::IdcAuthConfiguration?
+      def idp: () -> Types::IdpAuthConfiguration?
+    end
+    def get_operator_app: (
+      ?agent_space_id: String
+    ) -> _GetOperatorAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOperatorAppResponse
+
+    interface _GetRecommendationResponse
+      include Smithy::Client::_Response[Types::GetRecommendationResponse]
+      def recommendation: () -> Types::Recommendation?
+    end
+    def get_recommendation: (
+      ?agent_space_id: String,
+      ?recommendation_id: String,
+      ?recommendation_version: Integer
+    ) -> _GetRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationResponse
+
+    interface _GetServiceResponse
+      include Smithy::Client::_Response[Types::GetServiceOutput]
+      def service: () -> Types::RegisteredService?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_service: (
+      ?service_id: String
+    ) -> _GetServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceResponse
+
+    interface _GetTriggerResponse
+      include Smithy::Client::_Response[Types::GetTriggerResponse]
+      def trigger: () -> Types::Trigger?
+    end
+    def get_trigger: (
+      ?agent_space_id: String,
+      ?trigger_id: String
+    ) -> _GetTriggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTriggerResponse
+
+    interface _ListAgentSpacesResponse
+      include Smithy::Client::_Response[Types::ListAgentSpacesOutput]
+      def next_token: () -> String?
+      def agent_spaces: () -> Array[Types::AgentSpace]?
+    end
+    def list_agent_spaces: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?included_data: String
+    ) -> _ListAgentSpacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentSpacesResponse
+
+    interface _ListAssetFilesResponse
+      include Smithy::Client::_Response[Types::ListAssetFilesResponse]
+      def items: () -> Array[Types::AssetFileSummary]?
+      def next_token: () -> String?
+    end
+    def list_asset_files: (
+      ?agent_space_id: String,
+      ?asset_id: String,
+      ?asset_version: Integer,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssetFilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetFilesResponse
+
+    interface _ListAssetTypesResponse
+      include Smithy::Client::_Response[Types::ListAssetTypesResponse]
+      def items: () -> Array[Types::AssetTypeSummary]?
+      def next_token: () -> String?
+    end
+    def list_asset_types: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssetTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetTypesResponse
+
+    interface _ListAssetVersionsResponse
+      include Smithy::Client::_Response[Types::ListAssetVersionsResponse]
+      def items: () -> Array[Types::AssetVersionMetadata]?
+      def next_token: () -> String?
+    end
+    def list_asset_versions: (
+      ?agent_space_id: String,
+      ?asset_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssetVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetVersionsResponse
+
+    interface _ListAssetsResponse
+      include Smithy::Client::_Response[Types::ListAssetsResponse]
+      def items: () -> Array[Types::Asset]?
+      def next_token: () -> String?
+    end
+    def list_assets: (
+      ?agent_space_id: String,
+      ?asset_type: String,
+      ?updated_after: Time,
+      ?updated_before: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetsResponse
+
+    interface _ListAssociationsResponse
+      include Smithy::Client::_Response[Types::ListAssociationsOutput]
+      def next_token: () -> String?
+      def associations: () -> Array[Types::Association]?
+    end
+    def list_associations: (
+      ?agent_space_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter_service_types: String
+    ) -> _ListAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociationsResponse
+
+    interface _ListBacklogTasksResponse
+      include Smithy::Client::_Response[Types::ListBacklogTasksResponse]
+      def tasks: () -> Array[Types::Task]?
+      def next_token: () -> String?
+    end
+    def list_backlog_tasks: (
+      ?agent_space_id: String,
+      ?filter: {
+        created_after: Time,
+        created_before: untyped,
+        priority: Array[String],
+        status: Array[String],
+        task_type: Array[String],
+        primary_task_id: String
+      },
+      ?limit: Integer,
+      ?next_token: String,
+      ?sort_field: String,
+      ?order: String
+    ) -> _ListBacklogTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBacklogTasksResponse
+
+    interface _ListChatsResponse
+      include Smithy::Client::_Response[Types::ListChatsResponse]
+      def executions: () -> Array[Types::ChatExecution]?
+      def next_token: () -> String?
+    end
+    def list_chats: (
+      ?agent_space_id: String,
+      ?user_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChatsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChatsResponse
+
+    interface _ListExecutionsResponse
+      include Smithy::Client::_Response[Types::ListExecutionsResponse]
+      def executions: () -> Array[Types::Execution]?
+      def next_token: () -> String?
+    end
+    def list_executions: (
+      ?agent_space_id: String,
+      ?task_id: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExecutionsResponse
+
+    interface _ListGoalsResponse
+      include Smithy::Client::_Response[Types::ListGoalsResponse]
+      def goals: () -> Array[Types::Goal]?
+      def next_token: () -> String?
+    end
+    def list_goals: (
+      ?agent_space_id: String,
+      ?status: String,
+      ?goal_type: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListGoalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGoalsResponse
+
+    interface _ListJournalRecordsResponse
+      include Smithy::Client::_Response[Types::ListJournalRecordsResponse]
+      def records: () -> Array[Types::JournalRecord]?
+      def next_token: () -> String?
+    end
+    def list_journal_records: (
+      ?agent_space_id: String,
+      ?execution_id: String,
+      ?limit: Integer,
+      ?next_token: String,
+      ?record_type: String,
+      ?order: String
+    ) -> _ListJournalRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJournalRecordsResponse
+
+    interface _ListPendingMessagesResponse
+      include Smithy::Client::_Response[Types::ListPendingMessagesResponse]
+      def agent_space_id: () -> String?
+      def execution_id: () -> String?
+      def messages: () -> Array[Types::PendingMessage]?
+      def created_at: () -> Time?
+    end
+    def list_pending_messages: (
+      ?agent_space_id: String,
+      ?execution_id: String
+    ) -> _ListPendingMessagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPendingMessagesResponse
+
+    interface _ListPrivateConnectionsResponse
+      include Smithy::Client::_Response[Types::ListPrivateConnectionsOutput]
+      def private_connections: () -> Array[Types::PrivateConnectionSummary]?
+    end
+    def list_private_connections: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPrivateConnectionsResponse
+
+    interface _ListRecommendationsResponse
+      include Smithy::Client::_Response[Types::ListRecommendationsResponse]
+      def recommendations: () -> Array[Types::Recommendation]?
+      def next_token: () -> String?
+    end
+    def list_recommendations: (
+      ?agent_space_id: String,
+      ?task_id: String,
+      ?goal_id: String,
+      ?status: String,
+      ?priority: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecommendationsResponse
+
+    interface _ListServicesResponse
+      include Smithy::Client::_Response[Types::ListServicesOutput]
+      def next_token: () -> String?
+      def services: () -> Array[Types::RegisteredService]?
+    end
+    def list_services: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter_service_type: String
+    ) -> _ListServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServicesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTriggersResponse
+      include Smithy::Client::_Response[Types::ListTriggersResponse]
+      def items: () -> Array[Types::Trigger]?
+      def next_token: () -> String?
+    end
+    def list_triggers: (
+      ?agent_space_id: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTriggersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTriggersResponse
+
+    interface _ListWebhooksResponse
+      include Smithy::Client::_Response[Types::ListWebhooksOutput]
+      def webhooks: () -> Array[Types::Webhook]?
+    end
+    def list_webhooks: (
+      ?agent_space_id: String,
+      ?association_id: String
+    ) -> _ListWebhooksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebhooksResponse
+
+    interface _RegisterServiceResponse
+      include Smithy::Client::_Response[Types::RegisterServiceOutput]
+      def service_id: () -> String?
+      def additional_step: () -> Types::AdditionalServiceRegistrationStep?
+      def kms_key_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def register_service: (
+      ?service: String,
+      ?service_details: {
+        dynatrace: {
+          account_urn: String,
+          authorization_config: {
+            o_auth_client_credentials: {
+              client_name: untyped,
+              client_id: String,
+              exchange_parameters: Hash[String, String],
+              client_secret: String
+            }
+          }
+        },
+        servicenow: {
+          instance_url: String,
+          authorization_config: {
+            o_auth_client_credentials: {
+              client_name: untyped,
+              client_id: untyped,
+              exchange_parameters: untyped,
+              client_secret: untyped
+            }
+          }
+        },
+        mcpserverdatadog: {
+          name: String,
+          endpoint: String,
+          description: String,
+          authorization_config: {
+            authorization_discovery: {
+              return_to_endpoint: untyped
+            }
+          }
+        },
+        mcpserver: {
+          name: untyped,
+          endpoint: untyped,
+          description: untyped,
+          authorization_config: {
+            o_auth_client_credentials: {
+              client_name: untyped,
+              client_id: untyped,
+              exchange_parameters: untyped,
+              client_secret: untyped,
+              exchange_url: untyped,
+              scopes: Array[String]
+            },
+            o_auth3_lo: {
+              client_name: untyped,
+              client_id: untyped,
+              exchange_parameters: untyped,
+              return_to_endpoint: untyped,
+              authorization_url: untyped,
+              exchange_url: untyped,
+              client_secret: untyped,
+              support_code_challenge: bool,
+              scopes: untyped
+            },
+            api_key: {
+              api_key_name: untyped,
+              api_key_value: String,
+              api_key_header: untyped
+            },
+            bearer_token: {
+              token_name: untyped,
+              token_value: String,
+              authorization_header: untyped
+            },
+            custom_headers: {
+              headers: Hash[String, String]
+            },
+            authorization_discovery: untyped
+          }
+        },
+        gitlab: {
+          target_url: untyped,
+          token_type: String,
+          token_value: String,
+          group_id: untyped
+        },
+        mcpserversplunk: untyped,
+        mcpservernewrelic: {
+          authorization_config: {
+            api_key: {
+              api_key: String,
+              account_id: untyped,
+              region: String,
+              application_ids: Array[String],
+              entity_guids: Array[String],
+              alert_policy_ids: Array[String]
+            }
+          }
+        },
+        event_channel: {
+          type: String
+        },
+        mcpservergrafana: {
+          name: untyped,
+          endpoint: untyped,
+          description: untyped,
+          authorization_config: untyped
+        },
+        pagerduty: {
+          scopes: Array[String],
+          authorization_config: {
+            o_auth_client_credentials: {
+              client_name: untyped,
+              client_id: untyped,
+              exchange_parameters: untyped,
+              client_secret: untyped
+            }
+          }
+        },
+        azureidentity: {
+          tenant_id: String,
+          client_id: untyped,
+          web_identity_role_arn: String,
+          web_identity_token_audiences: Array[String]
+        },
+        mcpserversigv4: {
+          name: untyped,
+          endpoint: untyped,
+          description: untyped,
+          authorization_config: {
+            region: String,
+            service: untyped,
+            role_arn: untyped,
+            mcp_role_arn: untyped,
+            custom_headers: untyped
+          }
+        },
+        remoteagent: {
+          name: String,
+          endpoint: String,
+          description: untyped,
+          authorization_config: {
+            api_key: {
+              api_key_name: untyped,
+              api_key_value: untyped,
+              api_key_header: untyped
+            },
+            o_auth_client_credentials: {
+              client_name: untyped,
+              client_id: untyped,
+              exchange_parameters: untyped,
+              client_secret: untyped,
+              exchange_url: untyped,
+              scopes: untyped
+            },
+            bearer_token: {
+              token_name: untyped,
+              token_value: untyped,
+              authorization_header: untyped
+            }
+          }
+        },
+        remoteagentsigv4: {
+          name: untyped,
+          endpoint: untyped,
+          description: untyped,
+          authorization_config: {
+            region: untyped,
+            service: untyped,
+            role_arn: untyped
+          }
+        }
+      },
+      ?kms_key_arn: String,
+      ?private_connection_name: String,
+      ?target_url_private_connection_name: String,
+      ?exchange_url_private_connection_name: String,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _RegisterServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterServiceResponse
+
+    interface _SendMessageResponse
+      include Smithy::Client::_Response[Types::SendMessageResponse]
+      def events: () -> Types::SendMessageEvents?
+    end
+    def send_message: (
+      ?agent_space_id: String,
+      ?execution_id: String,
+      ?content: String,
+      ?context: {
+        current_page: String,
+        last_message: untyped,
+        user_action_response: untyped,
+        approval_action: {
+          tool_use_id: String,
+          interrupt_id: String,
+          approval_id: String,
+          button_text: String,
+          action: String
+        }
+      },
+      ?user_id: String,
+      ?asset_ids: Array[String],
+      ?model_tier: String
+    ) -> _SendMessageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendMessageResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAgentSpaceResponse
+      include Smithy::Client::_Response[Types::UpdateAgentSpaceOutput]
+      def agent_space: () -> Types::AgentSpace?
+    end
+    def update_agent_space: (
+      ?agent_space_id: String,
+      ?name: String,
+      ?description: String,
+      ?locale: String,
+      ?preferences: Hash[String, bool]
+    ) -> _UpdateAgentSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentSpaceResponse
+
+    interface _UpdateApprovalActionResponse
+      include Smithy::Client::_Response[Types::UpdateApprovalActionResponse]
+      def approval_id: () -> String?
+      def status: () -> String?
+      def expires_at: () -> Time?
+    end
+    def update_approval_action: (
+      ?agent_space_id: String,
+      ?approval_id: String,
+      ?action: String,
+      ?final_pattern: {
+        tool: String,
+        argument_pins: Hash[String, String]
+      },
+      ?reason: String,
+      ?ttl_seconds: Integer,
+      ?single_use: bool
+    ) -> _UpdateApprovalActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApprovalActionResponse
+
+    interface _UpdateAssetResponse
+      include Smithy::Client::_Response[Types::UpdateAssetResponse]
+      def asset: () -> Types::Asset?
+    end
+    def update_asset: (
+      ?agent_space_id: String,
+      ?asset_id: String,
+      ?metadata: Smithy::Schema::document,
+      ?content: {
+        file: {
+          path: String,
+          body: {
+            bytes: String,
+            text: String
+          },
+          metadata: Smithy::Schema::document
+        },
+        zip: {
+          zip_file: String
+        },
+        source_url: {
+          url: String
+        }
+      },
+      ?client_token: String
+    ) -> _UpdateAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssetResponse
+
+    interface _UpdateAssetFileResponse
+      include Smithy::Client::_Response[Types::UpdateAssetFileResponse]
+      def file: () -> Types::AssetFile?
+    end
+    def update_asset_file: (
+      ?agent_space_id: String,
+      ?asset_id: String,
+      ?path: String,
+      ?content: {
+        bytes: String,
+        text: String
+      },
+      ?metadata: Smithy::Schema::document,
+      ?client_token: String
+    ) -> _UpdateAssetFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssetFileResponse
+
+    interface _UpdateAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateAssociationOutput]
+      def association: () -> Types::Association?
+      def webhook: () -> Types::GenericWebhook?
+    end
+    def update_association: (
+      ?agent_space_id: String,
+      ?association_id: String,
+      ?configuration: {
+        source_aws: {
+          account_id: String,
+          account_type: String,
+          assumable_role_arn: String,
+          external_id: untyped,
+          agent_elevated_role_arn: untyped,
+          agent_elevated_role_arn_status: String
+        },
+        aws: {
+          assumable_role_arn: untyped,
+          account_id: untyped,
+          account_type: String,
+          agent_elevated_role_arn: untyped,
+          agent_elevated_role_arn_status: untyped
+        },
+        github: {
+          repo_name: untyped,
+          repo_id: untyped,
+          owner: untyped,
+          owner_type: String,
+          instance_identifier: untyped,
+          runtime_role_arn: untyped,
+          release_management_association_id: String
+        },
+        slack: {
+          workspace_id: untyped,
+          workspace_name: untyped,
+          transmission_target: {
+            ops_oncall_target: {
+              channel_name: untyped,
+              channel_id: untyped
+            },
+            ops_sre_target: untyped
+          },
+          bidirectional: {
+            role_arn: untyped,
+            enabled: bool
+          }
+        },
+        dynatrace: {
+          env_id: untyped,
+          resources: Array[String]
+        },
+        servicenow: {
+          instance_id: untyped,
+          auth_scopes: Array[String]
+        },
+        mcpservernewrelic: {
+          account_id: untyped,
+          endpoint: untyped
+        },
+        mcpserverdatadog: {
+          enabled_elevated_tools: Array[
+            {
+              name: untyped,
+              tool_classification: String
+            }
+          ]
+        },
+        mcpserver: {
+          tools: Array[String],
+          tool_details: untyped
+        },
+        gitlab: {
+          project_id: untyped,
+          project_path: untyped,
+          instance_identifier: untyped,
+          runtime_role_arn: untyped,
+          release_management_association_id: untyped
+        },
+        mcpserversplunk: {
+        },
+        event_channel: {
+        },
+        azure: {
+          subscription_id: untyped
+        },
+        azuredevops: {
+          organization_name: untyped,
+          project_id: untyped,
+          project_name: untyped
+        },
+        mcpservergrafana: {
+          endpoint: untyped,
+          organization_id: untyped,
+          tools: untyped,
+          enabled_elevated_tools: untyped
+        },
+        pagerduty: {
+          services: Array[String],
+          customer_email: String
+        },
+        mcpserversigv4: {
+          tools: untyped,
+          tool_details: untyped
+        },
+        remoteagent: {
+        },
+        remoteagentsigv4: {
+        },
+        release_management: {
+          name: String,
+          network_access: {
+            private_access: {
+              private_connection_name: String,
+              runtime_role_arn: untyped
+            }
+          }
+        }
+      },
+      ?capabilities: Hash[String,
+        {
+          enabled: bool,
+          trigger_filter_groups: Array[
+            {
+              events: Array[String],
+              target_branches: {
+                patterns: Array[String]
+              }
+            }
+          ]
+        }
+      ]
+    ) -> _UpdateAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssociationResponse
+
+    interface _UpdateBacklogTaskResponse
+      include Smithy::Client::_Response[Types::UpdateBacklogTaskResponse]
+      def task: () -> Types::Task?
+    end
+    def update_backlog_task: (
+      ?agent_space_id: String,
+      ?task_id: String,
+      ?task_status: String,
+      ?client_token: String
+    ) -> _UpdateBacklogTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBacklogTaskResponse
+
+    interface _UpdateGoalResponse
+      include Smithy::Client::_Response[Types::UpdateGoalResponse]
+      def goal: () -> Types::Goal?
+    end
+    def update_goal: (
+      ?agent_space_id: String,
+      ?goal_id: String,
+      ?evaluation_schedule: {
+        state: String
+      },
+      ?client_token: String
+    ) -> _UpdateGoalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGoalResponse
+
+    interface _UpdateOperatorAppIdpConfigResponse
+      include Smithy::Client::_Response[Types::UpdateOperatorAppIdpConfigOutput]
+      def agent_space_id: () -> String?
+      def idp: () -> Types::IdpAuthConfiguration?
+    end
+    def update_operator_app_idp_config: (
+      ?agent_space_id: String,
+      ?idp_client_secret: String
+    ) -> _UpdateOperatorAppIdpConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOperatorAppIdpConfigResponse
+
+    interface _UpdatePrivateConnectionCertificateResponse
+      include Smithy::Client::_Response[Types::UpdatePrivateConnectionCertificateOutput]
+      def name: () -> String?
+      def type: () -> String?
+      def resource_gateway_id: () -> String?
+      def host_address: () -> String?
+      def vpc_id: () -> String?
+      def resource_configuration_id: () -> String?
+      def status: () -> String?
+      def certificate_expiry_time: () -> Time?
+      def dns_resolution: () -> String?
+      def failure_message: () -> String?
+    end
+    def update_private_connection_certificate: (
+      ?name: String,
+      ?certificate: String
+    ) -> _UpdatePrivateConnectionCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePrivateConnectionCertificateResponse
+
+    interface _UpdateRecommendationResponse
+      include Smithy::Client::_Response[Types::UpdateRecommendationResponse]
+      def recommendation: () -> Types::Recommendation?
+    end
+    def update_recommendation: (
+      ?agent_space_id: String,
+      ?recommendation_id: String,
+      ?status: String,
+      ?additional_context: String,
+      ?client_token: String
+    ) -> _UpdateRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecommendationResponse
+
+    interface _UpdateTriggerResponse
+      include Smithy::Client::_Response[Types::UpdateTriggerResponse]
+      def trigger: () -> Types::Trigger?
+    end
+    def update_trigger: (
+      ?agent_space_id: String,
+      ?trigger_id: String,
+      ?status: String,
+      ?client_token: String
+    ) -> _UpdateTriggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTriggerResponse
+
+    interface _ValidateAwsAssociationsResponse
+      include Smithy::Client::_Response[Types::ValidateAwsAssociationsOutput]
+    end
+    def validate_aws_associations: (
+      ?agent_space_id: String
+    ) -> _ValidateAwsAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateAwsAssociationsResponse
+  end
+end

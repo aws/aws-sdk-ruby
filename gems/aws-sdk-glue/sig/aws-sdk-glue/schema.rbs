@@ -35,7 +35,23 @@ module Aws::Glue
     ApplicationArn: StringShape
     ApplyMapping: StructureShape
     ArnString: StringShape
+    AssetDescription: StringShape
+    AssetFormEntry: StructureShape
+    AssetFormKey: StringShape
+    AssetFormMap: MapShape
+    AssetId: StringShape
+    AssetName: StringShape
+    AssetTypeFormKey: StringShape
+    AssetTypeFormReference: StructureShape
+    AssetTypeFormsMap: MapShape
+    AssetTypeId: StringShape
+    AssetTypeItem: StructureShape
+    AssetTypeItemList: ListShape
+    AssetTypeName: StringShape
+    AssociateGlossaryTermsRequest: StructureShape
+    AssociateGlossaryTermsResponse: StructureShape
     AthenaConnectorSource: StructureShape
+    AttachmentName: StringShape
     AttemptCount: IntegerShape
     AuditColumnNamesList: ListShape
     AuditContext: StructureShape
@@ -54,6 +70,7 @@ module Aws::Glue
     BackfillErroredPartitionsList: ListShape
     BackfillErrors: ListShape
     BasicAuthenticationCredentials: StructureShape
+    BasicAuthenticationProperties: StructureShape
     BasicCatalogTarget: StructureShape
     BatchCreatePartitionRequest: StructureShape
     BatchCreatePartitionResponse: StructureShape
@@ -77,8 +94,14 @@ module Aws::Glue
     BatchGetCustomEntityTypesResponse: StructureShape
     BatchGetDataQualityResultRequest: StructureShape
     BatchGetDataQualityResultResponse: StructureShape
+    BatchGetDataQualityResultV2Request: StructureShape
+    BatchGetDataQualityResultV2Response: StructureShape
+    BatchGetDataQualityRulesetEvaluationRunRequest: StructureShape
+    BatchGetDataQualityRulesetEvaluationRunResponse: StructureShape
     BatchGetDevEndpointsRequest: StructureShape
     BatchGetDevEndpointsResponse: StructureShape
+    BatchGetIterableFormsRequest: StructureShape
+    BatchGetIterableFormsResponse: StructureShape
     BatchGetJobsRequest: StructureShape
     BatchGetJobsResponse: StructureShape
     BatchGetPartitionRequest: StructureShape
@@ -113,6 +136,8 @@ module Aws::Glue
     BatchUpdatePartitionRequestEntryList: ListShape
     BatchUpdatePartitionResponse: StructureShape
     BatchWindow: IntegerShape
+    BetweenConfiguration: StructureShape
+    BinEdges: ListShape
     BinaryColumnStatisticsData: StructureShape
     Blob: BlobShape
     Blueprint: StructureShape
@@ -137,6 +162,7 @@ module Aws::Glue
     BoxedNonNegativeInt: IntegerShape
     BoxedNonNegativeLong: IntegerShape
     BoxedPositiveInt: IntegerShape
+    ByteCount: IntegerShape
     CancelDataQualityRuleRecommendationRunRequest: StructureShape
     CancelDataQualityRuleRecommendationRunResponse: StructureShape
     CancelDataQualityRulesetEvaluationRunRequest: StructureShape
@@ -165,6 +191,7 @@ module Aws::Glue
     CatalogPropertiesOutput: StructureShape
     CatalogSchemaChangePolicy: StructureShape
     CatalogSource: StructureShape
+    CatalogTableConfigOptions: StructureShape
     CatalogTablesList: ListShape
     CatalogTarget: StructureShape
     CatalogTargetList: ListShape
@@ -175,6 +202,8 @@ module Aws::Glue
     Classifier: StructureShape
     ClassifierList: ListShape
     ClassifierNameList: ListShape
+    ClientCredentialsProperties: StructureShape
+    ClientTokenString: StringShape
     CloudWatchEncryption: StructureShape
     CloudWatchEncryptionMode: EnumShape
     CodeGenArgName: StringShape
@@ -250,24 +279,35 @@ module Aws::Glue
     ConnectionOptions: MapShape
     ConnectionPasswordEncryption: StructureShape
     ConnectionProperties: MapShape
+    ConnectionPropertiesConfiguration: StructureShape
     ConnectionPropertyKey: EnumShape
     ConnectionSchemaVersion: IntegerShape
     ConnectionStatus: EnumShape
     ConnectionString: StringShape
     ConnectionStringList: ListShape
+    ConnectionStringToStringMap: MapShape
     ConnectionType: EnumShape
     ConnectionTypeBrief: StructureShape
     ConnectionTypeList: ListShape
     ConnectionTypeVariant: StructureShape
     ConnectionTypeVariantList: ListShape
     ConnectionsList: StructureShape
+    ConnectorAuthenticationConfiguration: StructureShape
+    ConnectorAuthorizationCodeProperties: StructureShape
     ConnectorDataSource: StructureShape
     ConnectorDataTarget: StructureShape
+    ConnectorOAuth2GrantType: EnumShape
+    ConnectorOAuth2Properties: StructureShape
     ConnectorOptions: MapShape
+    ConnectorProperty: StructureShape
+    ConnectorPropertyKey: StringShape
+    ConnectorPropertyList: ListShape
+    ContentType: EnumShape
     ContextKey: StringShape
     ContextValue: StringShape
     ContextWords: ListShape
     ContinuousSync: BooleanShape
+    Count: ListShape
     Crawl: StructureShape
     CrawlId: StringShape
     CrawlList: ListShape
@@ -312,6 +352,10 @@ module Aws::Glue
     CreateDatabaseResponse: StructureShape
     CreateDevEndpointRequest: StructureShape
     CreateDevEndpointResponse: StructureShape
+    CreateGlossaryRequest: StructureShape
+    CreateGlossaryResponse: StructureShape
+    CreateGlossaryTermRequest: StructureShape
+    CreateGlossaryTermResponse: StructureShape
     CreateGlueIdentityCenterConfigurationRequest: StructureShape
     CreateGlueIdentityCenterConfigurationResponse: StructureShape
     CreateGrokClassifierRequest: StructureShape
@@ -354,6 +398,7 @@ module Aws::Glue
     CreateWorkflowRequest: StructureShape
     CreateWorkflowResponse: StructureShape
     CreateXMLClassifierRequest: StructureShape
+    CreatedAt: TimestampShape
     CreatedTimestamp: StringShape
     CredentialKey: StringShape
     CredentialMap: MapShape
@@ -365,6 +410,8 @@ module Aws::Glue
     CsvHeaderOption: EnumShape
     CsvQuoteSymbol: StringShape
     CsvSerdeOption: EnumShape
+    CursorConfiguration: StructureShape
+    CustomAuthenticationProperties: StructureShape
     CustomCode: StructureShape
     CustomDatatypes: ListShape
     CustomEntityType: StructureShape
@@ -395,9 +442,12 @@ module Aws::Glue
     DataQualityAggregatedMetrics: StructureShape
     DataQualityAnalyzerResult: StructureShape
     DataQualityAnalyzerResults: ListShape
+    DataQualityConfigurationV2: StructureShape
     DataQualityEncryption: StructureShape
     DataQualityEncryptionMode: EnumShape
+    DataQualityEngine: EnumShape
     DataQualityEvaluationRunAdditionalRunOptions: StructureShape
+    DataQualityFlagsEnabled: MapShape
     DataQualityGlueTable: StructureShape
     DataQualityMetricValues: StructureShape
     DataQualityModelStatus: EnumShape
@@ -410,7 +460,14 @@ module Aws::Glue
     DataQualityResultFilterCriteria: StructureShape
     DataQualityResultIdList: ListShape
     DataQualityResultIds: ListShape
+    DataQualityResultV2IdList: ListShape
+    DataQualityResultV2Item: StructureShape
+    DataQualityResultV2List: ListShape
     DataQualityResultsList: ListShape
+    DataQualityResultsV2Description: StructureShape
+    DataQualityResultsV2DescriptionList: ListShape
+    DataQualityResultsV2FilterCriteria: StructureShape
+    DataQualityRuleRecommendationRunAdditionalRunOptions: StructureShape
     DataQualityRuleRecommendationRunDescription: StructureShape
     DataQualityRuleRecommendationRunFilter: StructureShape
     DataQualityRuleRecommendationRunList: ListShape
@@ -418,14 +475,19 @@ module Aws::Glue
     DataQualityRuleResultDescription: StringShape
     DataQualityRuleResultStatus: EnumShape
     DataQualityRuleResults: ListShape
+    DataQualityRuleResultsOptions: StructureShape
+    DataQualityRulesetEvaluationRun: StructureShape
     DataQualityRulesetEvaluationRunDescription: StructureShape
     DataQualityRulesetEvaluationRunFilter: StructureShape
+    DataQualityRulesetEvaluationRunIdList: ListShape
     DataQualityRulesetEvaluationRunList: ListShape
+    DataQualityRulesetEvaluationRunsList: ListShape
     DataQualityRulesetFilterCriteria: StructureShape
     DataQualityRulesetList: ListShape
     DataQualityRulesetListDetails: StructureShape
     DataQualityRulesetString: StringShape
     DataQualityTargetTable: StructureShape
+    DataQualityTelemetry: StructureShape
     DataSource: StructureShape
     DataSourceMap: MapShape
     Database: StructureShape
@@ -443,6 +505,13 @@ module Aws::Glue
     DdbExportType: EnumShape
     DecimalColumnStatisticsData: StructureShape
     DecimalNumber: StructureShape
+    DefaultValue: StringShape
+    DeleteAssetRequest: StructureShape
+    DeleteAssetResponse: StructureShape
+    DeleteAssetTypeRequest: StructureShape
+    DeleteAssetTypeResponse: StructureShape
+    DeleteAttachmentRequest: StructureShape
+    DeleteAttachmentResponse: StructureShape
     DeleteBehavior: EnumShape
     DeleteBlueprintRequest: StructureShape
     DeleteBlueprintResponse: StructureShape
@@ -459,6 +528,8 @@ module Aws::Glue
     DeleteConnectionNameList: ListShape
     DeleteConnectionRequest: StructureShape
     DeleteConnectionResponse: StructureShape
+    DeleteConnectionTypeRequest: StructureShape
+    DeleteConnectionTypeResponse: StructureShape
     DeleteCrawlerRequest: StructureShape
     DeleteCrawlerResponse: StructureShape
     DeleteCustomEntityTypeRequest: StructureShape
@@ -469,9 +540,17 @@ module Aws::Glue
     DeleteDatabaseResponse: StructureShape
     DeleteDevEndpointRequest: StructureShape
     DeleteDevEndpointResponse: StructureShape
+    DeleteFormTypeRequest: StructureShape
+    DeleteFormTypeResponse: StructureShape
+    DeleteGlossaryRequest: StructureShape
+    DeleteGlossaryResponse: StructureShape
+    DeleteGlossaryTermRequest: StructureShape
+    DeleteGlossaryTermResponse: StructureShape
     DeleteGlueIdentityCenterConfigurationRequest: StructureShape
     DeleteGlueIdentityCenterConfigurationResponse: StructureShape
     DeleteIntegrationRequest: StructureShape
+    DeleteIntegrationResourcePropertyRequest: StructureShape
+    DeleteIntegrationResourcePropertyResponse: StructureShape
     DeleteIntegrationResponse: StructureShape
     DeleteIntegrationTablePropertiesRequest: StructureShape
     DeleteIntegrationTablePropertiesResponse: StructureShape
@@ -532,7 +611,11 @@ module Aws::Glue
     DirectKafkaSource: StructureShape
     DirectKinesisSource: StructureShape
     DirectSchemaChangePolicy: StructureShape
+    DisassociateGlossaryTermsRequest: StructureShape
+    DisassociateGlossaryTermsResponse: StructureShape
     DisplayName: StringShape
+    DistributionData: StructureShape
+    DistributionResultsOptions: StructureShape
     Double: FloatShape
     DoubleColumnStatisticsData: StructureShape
     DoubleValue: FloatShape
@@ -552,9 +635,14 @@ module Aws::Glue
     EnclosedInStringPropertiesMinOne: ListShape
     EnclosedInStringProperty: StringShape
     EnclosedInStringPropertyWithQuote: StringShape
+    EncryptedKeyMetadataString: StringShape
     EncryptionAtRest: StructureShape
     EncryptionConfiguration: StructureShape
+    EncryptionKeyIdString: StringShape
     Entity: StructureShape
+    EntityConfiguration: StructureShape
+    EntityConfigurationMap: MapShape
+    EntityConfigurationMapKeyString: StringShape
     EntityDescription: StringShape
     EntityFieldName: StringShape
     EntityLabel: StringShape
@@ -569,6 +657,7 @@ module Aws::Glue
     ErrorString: StringShape
     EvaluateDataQuality: StructureShape
     EvaluateDataQualityMultiFrame: StructureShape
+    EvaluatedDistributionsMap: MapShape
     EvaluatedMetricsMap: MapShape
     EvaluationMetrics: StructureShape
     EventBatchingCondition: StructureShape
@@ -579,8 +668,12 @@ module Aws::Glue
     ExecutionStatus: EnumShape
     ExecutionTime: IntegerShape
     ExistCondition: EnumShape
+    ExportEncryptionConfiguration: StructureShape
     ExportLabelsTaskRunProperties: StructureShape
+    ExportSetting: EnumShape
+    ExportStatus: EnumShape
     ExtendedString: StringShape
+    ExtractedParameter: StructureShape
     FederatedCatalog: StructureShape
     FederatedDatabase: StructureShape
     FederatedResourceAlreadyExistsException: StructureShape
@@ -591,6 +684,9 @@ module Aws::Glue
     FederationSourceRetryableException: StructureShape
     Field: StructureShape
     FieldDataType: EnumShape
+    FieldDefinition: StructureShape
+    FieldDefinitionMap: MapShape
+    FieldDefinitionMapKeyString: StringShape
     FieldDescription: StringShape
     FieldFilterOperator: EnumShape
     FieldFilterOperatorsList: ListShape
@@ -600,25 +696,40 @@ module Aws::Glue
     FieldsList: ListShape
     FillMissingValues: StructureShape
     Filter: StructureShape
+    FilterConfiguration: StructureShape
     FilterExpression: StructureShape
     FilterExpressions: ListShape
     FilterLogicalOperator: EnumShape
+    FilterMode: EnumShape
     FilterOperation: EnumShape
     FilterOperator: EnumShape
+    FilterOverrides: StructureShape
     FilterPredicate: StringShape
     FilterString: StringShape
+    FilterStringConfiguration: StructureShape
     FilterValue: StructureShape
     FilterValueType: EnumShape
     FilterValues: ListShape
     FindMatchesMetrics: StructureShape
     FindMatchesParameters: StructureShape
     FindMatchesTaskRunProperties: StructureShape
+    FormContent: StringShape
+    FormTypeId: StringShape
+    FormTypeItem: StructureShape
+    FormTypeItemList: ListShape
+    FormTypeName: StringShape
+    FormTypeSchema: StringShape
     FormatString: StringShape
+    FunctionType: EnumShape
     Generic512CharString: StringShape
     GenericBoundedDouble: FloatShape
     GenericLimitedString: StringShape
     GenericMap: MapShape
     GenericString: StringShape
+    GetAssetInput: StructureShape
+    GetAssetOutput: StructureShape
+    GetAssetTypeRequest: StructureShape
+    GetAssetTypeResponse: StructureShape
     GetBlueprintRequest: StructureShape
     GetBlueprintResponse: StructureShape
     GetBlueprintRunRequest: StructureShape
@@ -659,14 +770,20 @@ module Aws::Glue
     GetCrawlersResponse: StructureShape
     GetCustomEntityTypeRequest: StructureShape
     GetCustomEntityTypeResponse: StructureShape
+    GetDashboardUrlRequest: StructureShape
+    GetDashboardUrlResponse: StructureShape
     GetDataCatalogEncryptionSettingsRequest: StructureShape
     GetDataCatalogEncryptionSettingsResponse: StructureShape
+    GetDataCatalogExportConfigurationInput: StructureShape
+    GetDataCatalogExportConfigurationOutput: StructureShape
     GetDataQualityModelRequest: StructureShape
     GetDataQualityModelResponse: StructureShape
     GetDataQualityModelResultRequest: StructureShape
     GetDataQualityModelResultResponse: StructureShape
     GetDataQualityResultRequest: StructureShape
     GetDataQualityResultResponse: StructureShape
+    GetDataQualityResultV2Request: StructureShape
+    GetDataQualityResultV2Response: StructureShape
     GetDataQualityRuleRecommendationRunRequest: StructureShape
     GetDataQualityRuleRecommendationRunResponse: StructureShape
     GetDataQualityRulesetEvaluationRunRequest: StructureShape
@@ -685,6 +802,12 @@ module Aws::Glue
     GetDevEndpointsResponse: StructureShape
     GetEntityRecordsRequest: StructureShape
     GetEntityRecordsResponse: StructureShape
+    GetFormTypeRequest: StructureShape
+    GetFormTypeResponse: StructureShape
+    GetGlossaryRequest: StructureShape
+    GetGlossaryResponse: StructureShape
+    GetGlossaryTermRequest: StructureShape
+    GetGlossaryTermResponse: StructureShape
     GetGlueIdentityCenterConfigurationRequest: StructureShape
     GetGlueIdentityCenterConfigurationResponse: StructureShape
     GetIntegrationResourcePropertyRequest: StructureShape
@@ -711,6 +834,8 @@ module Aws::Glue
     GetMLTransformsResponse: StructureShape
     GetMappingRequest: StructureShape
     GetMappingResponse: StructureShape
+    GetMaterializedViewRefreshTaskRunRequest: StructureShape
+    GetMaterializedViewRefreshTaskRunResponse: StructureShape
     GetPartitionIndexesRequest: StructureShape
     GetPartitionIndexesResponse: StructureShape
     GetPartitionRequest: StructureShape
@@ -738,10 +863,16 @@ module Aws::Glue
     GetSecurityConfigurationResponse: StructureShape
     GetSecurityConfigurationsRequest: StructureShape
     GetSecurityConfigurationsResponse: StructureShape
+    GetSessionEndpointRequest: StructureShape
+    GetSessionEndpointResponse: StructureShape
     GetSessionRequest: StructureShape
     GetSessionResponse: StructureShape
     GetStatementRequest: StructureShape
     GetStatementResponse: StructureShape
+    GetSystemLogsForJobRunRequest: StructureShape
+    GetSystemLogsForJobRunResponse: StructureShape
+    GetSystemLogsForSessionRequest: StructureShape
+    GetSystemLogsForSessionResponse: StructureShape
     GetTableOptimizerRequest: StructureShape
     GetTableOptimizerResponse: StructureShape
     GetTableRequest: StructureShape
@@ -779,10 +910,22 @@ module Aws::Glue
     GetWorkflowRunResponse: StructureShape
     GetWorkflowRunsRequest: StructureShape
     GetWorkflowRunsResponse: StructureShape
+    GlossaryId: StringShape
+    GlossaryItem: StructureShape
+    GlossaryItemList: ListShape
+    GlossaryLongDescription: StringShape
+    GlossaryName: StringShape
+    GlossaryShortDescription: StringShape
+    GlossaryTermId: StringShape
+    GlossaryTermIdList: ListShape
+    GlossaryTermItem: StructureShape
+    GlossaryTermItemList: ListShape
+    GlossaryTermName: StringShape
     GlueEncryptionException: StructureShape
     GluePolicy: StructureShape
     GlueRecordType: EnumShape
     GlueResourceArn: StringShape
+    GlueResourceType: EnumShape
     GlueSchema: StructureShape
     GlueSchemas: ListShape
     GlueStudioColumnNameString: StringShape
@@ -799,6 +942,7 @@ module Aws::Glue
     GrokPattern: StringShape
     GroupFilters: StructureShape
     GroupFiltersList: ListShape
+    HTTPMethod: EnumShape
     HashString: StringShape
     HudiTarget: StructureShape
     HudiTargetCompressionType: EnumShape
@@ -808,6 +952,7 @@ module Aws::Glue
     IcebergCompactionConfiguration: StructureShape
     IcebergCompactionMetrics: StructureShape
     IcebergDocument: DocumentShape
+    IcebergEncryptedKey: StructureShape
     IcebergInput: StructureShape
     IcebergNullOrder: EnumShape
     IcebergOptimizationProperties: StructureShape
@@ -817,22 +962,27 @@ module Aws::Glue
     IcebergPartitionField: StructureShape
     IcebergPartitionSpec: StructureShape
     IcebergPartitionSpecFieldList: ListShape
+    IcebergPartitionSpecList: ListShape
     IcebergRetentionConfiguration: StructureShape
     IcebergRetentionMetrics: StructureShape
     IcebergSchema: StructureShape
+    IcebergSchemaList: ListShape
     IcebergSortDirection: EnumShape
     IcebergSortField: StructureShape
     IcebergSortOrder: StructureShape
     IcebergSortOrderFieldList: ListShape
+    IcebergSortOrderList: ListShape
     IcebergStructField: StructureShape
     IcebergStructFieldList: ListShape
     IcebergStructTypeEnum: EnumShape
+    IcebergTableMetadata: StructureShape
     IcebergTableUpdate: StructureShape
     IcebergTableUpdateList: ListShape
     IcebergTarget: StructureShape
     IcebergTargetCompressionType: EnumShape
     IcebergTargetList: ListShape
     IcebergTransformString: StringShape
+    IcebergUpdateAction: EnumShape
     IdString: StringShape
     IdempotentParameterMismatchException: StructureShape
     IdentityCenterInstanceArn: StringShape
@@ -869,11 +1019,22 @@ module Aws::Glue
     IntegrationPartition: StructureShape
     IntegrationPartitionSpecList: ListShape
     IntegrationQuotaExceededFault: StructureShape
+    IntegrationResourceProperty: StructureShape
+    IntegrationResourcePropertyFilter: StructureShape
+    IntegrationResourcePropertyFilterList: ListShape
+    IntegrationResourcePropertyFilterValues: ListShape
+    IntegrationResourcePropertyList: ListShape
     IntegrationSourcePropertiesMap: MapShape
     IntegrationStatus: EnumShape
     IntegrationString: StringShape
+    IntegrationTableProperties: StructureShape
+    IntegrationTablePropertiesFilter: StructureShape
+    IntegrationTablePropertiesFilterList: ListShape
+    IntegrationTablePropertiesFilterValues: ListShape
+    IntegrationTablePropertiesList: ListShape
     IntegrationTagsList: ListShape
     IntegrationTimestamp: TimestampShape
+    IntegrationType: EnumShape
     IntegrationsList: ListShape
     InternalServerException: StructureShape
     InternalServiceException: StructureShape
@@ -883,12 +1044,30 @@ module Aws::Glue
     IsParentEntity: BooleanShape
     IsVersionValid: BooleanShape
     Iso8601DateTime: TimestampShape
+    ItemDescription: StringShape
+    ItemError: StructureShape
+    ItemErrorCode: StringShape
+    ItemErrorList: ListShape
+    ItemErrorMessage: StringShape
+    ItemId: StringShape
+    ItemIdentifier: StringShape
+    ItemIdentifierList: ListShape
+    ItemName: StringShape
+    IterableFormEntry: StructureShape
+    IterableFormItem: StructureShape
+    IterableFormItemList: ListShape
+    IterableFormKey: StringShape
+    IterableFormListItem: StructureShape
+    IterableFormListItemList: ListShape
+    IterableFormMap: MapShape
+    IterableFormName: StringShape
     JDBCConnectionType: EnumShape
     JDBCConnectorOptions: StructureShape
     JDBCConnectorSource: StructureShape
     JDBCConnectorTarget: StructureShape
     JDBCDataType: EnumShape
     JDBCDataTypeMapping: MapShape
+    JWTBearerProperties: StructureShape
     JdbcMetadataEntry: EnumShape
     JdbcTarget: StructureShape
     JdbcTargetList: ListShape
@@ -912,6 +1091,7 @@ module Aws::Glue
     JoinType: EnumShape
     JsonClassifier: StructureShape
     JsonPath: StringShape
+    JsonPathString: StringShape
     JsonValue: StringShape
     JwtToken: StringShape
     KMSKeyNotAccessibleFault: StructureShape
@@ -922,18 +1102,23 @@ module Aws::Glue
     KeyString: StringShape
     KinesisStreamingSourceOptions: StructureShape
     KmsKeyArn: StringShape
+    KmsKeyArnString: StringShape
     LabelCount: IntegerShape
     LabelingSetGenerationTaskRunProperties: StructureShape
+    Labels: MapShape
     LakeFormationConfiguration: StructureShape
     Language: EnumShape
     LastActiveDefinition: StructureShape
     LastCrawlInfo: StructureShape
     LastCrawlStatus: EnumShape
+    LastRefreshType: EnumShape
     LatestSchemaVersionBoolean: BooleanShape
     Limit: IntegerShape
     LimitedPathList: ListShape
     LimitedStringList: ListShape
     LineageConfiguration: StructureShape
+    ListAssetTypesRequest: StructureShape
+    ListAssetTypesResponse: StructureShape
     ListBlueprintsRequest: StructureShape
     ListBlueprintsResponse: StructureShape
     ListColumnStatisticsTaskRunsRequest: StructureShape
@@ -948,6 +1133,8 @@ module Aws::Glue
     ListCustomEntityTypesResponse: StructureShape
     ListDataQualityResultsRequest: StructureShape
     ListDataQualityResultsResponse: StructureShape
+    ListDataQualityResultsV2Request: StructureShape
+    ListDataQualityResultsV2Response: StructureShape
     ListDataQualityRuleRecommendationRunsRequest: StructureShape
     ListDataQualityRuleRecommendationRunsResponse: StructureShape
     ListDataQualityRulesetEvaluationRunsRequest: StructureShape
@@ -962,10 +1149,24 @@ module Aws::Glue
     ListDevEndpointsResponse: StructureShape
     ListEntitiesRequest: StructureShape
     ListEntitiesResponse: StructureShape
+    ListFormTypesRequest: StructureShape
+    ListFormTypesResponse: StructureShape
+    ListGlossariesRequest: StructureShape
+    ListGlossariesResponse: StructureShape
+    ListGlossaryTermsRequest: StructureShape
+    ListGlossaryTermsResponse: StructureShape
+    ListIntegrationResourcePropertiesRequest: StructureShape
+    ListIntegrationResourcePropertiesResponse: StructureShape
+    ListIntegrationTablePropertiesRequest: StructureShape
+    ListIntegrationTablePropertiesResponse: StructureShape
+    ListIterableFormsRequest: StructureShape
+    ListIterableFormsResponse: StructureShape
     ListJobsRequest: StructureShape
     ListJobsResponse: StructureShape
     ListMLTransformsRequest: StructureShape
     ListMLTransformsResponse: StructureShape
+    ListMaterializedViewRefreshTaskRunsRequest: StructureShape
+    ListMaterializedViewRefreshTaskRunsResponse: StructureShape
     ListOfString: ListShape
     ListRegistriesInput: StructureShape
     ListRegistriesResponse: StructureShape
@@ -1011,6 +1212,13 @@ module Aws::Glue
     Mappings: ListShape
     MaskValue: StringShape
     MatchCriteria: ListShape
+    MaterializedViewRefreshState: EnumShape
+    MaterializedViewRefreshTaskNotRunningException: StructureShape
+    MaterializedViewRefreshTaskRun: StructureShape
+    MaterializedViewRefreshTaskRunningException: StructureShape
+    MaterializedViewRefreshTaskRunsList: ListShape
+    MaterializedViewRefreshTaskStoppingException: StructureShape
+    MaterializedViewRefreshType: EnumShape
     MaxConcurrentRuns: IntegerShape
     MaxListTableOptimizerRunsTokenResults: IntegerShape
     MaxResults: IntegerShape
@@ -1019,6 +1227,7 @@ module Aws::Glue
     Merge: StructureShape
     MessagePrefix: StringShape
     MessageString: StringShape
+    MetadataDescription: StringShape
     MetadataInfo: StructureShape
     MetadataInfoMap: MapShape
     MetadataKeyString: StringShape
@@ -1059,6 +1268,7 @@ module Aws::Glue
     NullableBoolean: BooleanShape
     NullableDouble: FloatShape
     NullableInteger: IntegerShape
+    NullableLong: IntegerShape
     NullableString: StringShape
     NumberTargetPartitionsString: StringShape
     OAuth2ClientApplication: StructureShape
@@ -1066,6 +1276,10 @@ module Aws::Glue
     OAuth2GrantType: EnumShape
     OAuth2Properties: StructureShape
     OAuth2PropertiesInput: StructureShape
+    ObservationConfiguration: EnumShape
+    ObservationMode: EnumShape
+    ObservationResultsOptions: StructureShape
+    OffsetConfiguration: StructureShape
     OneInput: ListShape
     OpenTableFormatInput: StructureShape
     Operation: StringShape
@@ -1096,8 +1310,10 @@ module Aws::Glue
     OrphanFileDeletionMetrics: StructureShape
     OtherMetadataValueList: ListShape
     OtherMetadataValueListItem: StructureShape
+    OverwriteChildResourcePermissionsWithDefaultEnum: EnumShape
     PIIDetection: StructureShape
     PageSize: IntegerShape
+    PaginationConfiguration: StructureShape
     PaginationToken: StringShape
     ParamType: EnumShape
     ParameterMap: MapShape
@@ -1121,6 +1337,7 @@ module Aws::Glue
     Password: StringShape
     Path: StringShape
     PathList: ListShape
+    PathString: StringShape
     Permission: EnumShape
     PermissionList: ListShape
     PermissionType: EnumShape
@@ -1145,10 +1362,12 @@ module Aws::Glue
     PrincipalType: EnumShape
     Prob: FloatShape
     ProfileConfiguration: StructureShape
+    ProfilingResultsOptions: StructureShape
     PropertiesMap: MapShape
     Property: StructureShape
     PropertyDescriptionString: StringShape
     PropertyKey: StringShape
+    PropertyLocation: EnumShape
     PropertyMap: MapShape
     PropertyName: StringShape
     PropertyNameOverrides: MapShape
@@ -1157,10 +1376,25 @@ module Aws::Glue
     PropertyTypes: ListShape
     PropertyValue: StringShape
     PublicKeysList: ListShape
+    PublishDataQualityResultDescriptors: MapShape
+    PublishDataQualityResultDimensions: MapShape
+    PublishDataQualityResultTags: MapShape
+    PublishDataQualityResultV2Request: StructureShape
+    PublishDataQualityResultV2Response: StructureShape
+    PutAssetRequest: StructureShape
+    PutAssetResponse: StructureShape
+    PutAssetTypeRequest: StructureShape
+    PutAssetTypeResponse: StructureShape
+    PutAttachmentRequest: StructureShape
+    PutAttachmentResponse: StructureShape
     PutDataCatalogEncryptionSettingsRequest: StructureShape
     PutDataCatalogEncryptionSettingsResponse: StructureShape
+    PutDataCatalogExportConfigurationInput: StructureShape
+    PutDataCatalogExportConfigurationOutput: StructureShape
     PutDataQualityProfileAnnotationRequest: StructureShape
     PutDataQualityProfileAnnotationResponse: StructureShape
+    PutFormTypeRequest: StructureShape
+    PutFormTypeResponse: StructureShape
     PutResourcePolicyRequest: StructureShape
     PutResourcePolicyResponse: StructureShape
     PutSchemaVersionMetadataInput: StructureShape
@@ -1174,12 +1408,14 @@ module Aws::Glue
     QuerySchemaVersionMetadataResponse: StructureShape
     QuerySessionContext: StructureShape
     QuoteChar: EnumShape
+    RLSProperties: StructureShape
     Recipe: StructureShape
     RecipeAction: StructureShape
     RecipeReference: StructureShape
     RecipeStep: StructureShape
     RecipeSteps: ListShape
     RecipeVersion: StringShape
+    RecommendationMode: EnumShape
     Record: DocumentShape
     Records: ListShape
     RecordsCount: IntegerShape
@@ -1189,7 +1425,10 @@ module Aws::Glue
     RedshiftSource: StructureShape
     RedshiftTarget: StructureShape
     ReferenceDatasetsList: ListShape
+    RefreshSeconds: IntegerShape
     RefreshToken: StringShape
+    RegisterConnectionTypeRequest: StructureShape
+    RegisterConnectionTypeResponse: StructureShape
     RegisterSchemaVersionInput: StructureShape
     RegisterSchemaVersionResponse: StructureShape
     RegistryId: StructureShape
@@ -1213,6 +1452,10 @@ module Aws::Glue
     ResourceType: EnumShape
     ResourceUri: StructureShape
     ResourceUriList: ListShape
+    ResponseConfiguration: StructureShape
+    ResponseExtractionMapping: StructureShape
+    RestConfiguration: StructureShape
+    ResultTypeEnum: EnumShape
     ResumeWorkflowRunRequest: StructureShape
     ResumeWorkflowRunResponse: StructureShape
     RetentionConfiguration: StructureShape
@@ -1221,6 +1464,7 @@ module Aws::Glue
     RoleArn: StringShape
     RoleString: StringShape
     Route: StructureShape
+    RowLevelResultsOptions: StructureShape
     RowTag: StringShape
     RuleMetricsMap: MapShape
     RulesetNames: ListShape
@@ -1255,6 +1499,7 @@ module Aws::Glue
     S3JsonSource: StructureShape
     S3ParquetSource: StructureShape
     S3SourceAdditionalOptions: StructureShape
+    S3TableBucketArn: StringShape
     S3Target: StructureShape
     S3TargetList: ListShape
     SampleSizePercentage: FloatShape
@@ -1288,9 +1533,30 @@ module Aws::Glue
     SchemaVersionNumber: StructureShape
     SchemaVersionStatus: EnumShape
     ScriptLocationString: StringShape
+    SearchAssetsInput: StructureShape
+    SearchAssetsOutput: StructureShape
+    SearchAttribute: StringShape
+    SearchAttributeFilter: StructureShape
+    SearchFilterClause: UnionShape
+    SearchFilterClauseList: ListShape
+    SearchFilterLongValue: IntegerShape
+    SearchFilterOperator: EnumShape
+    SearchFilterStringValue: StringShape
+    SearchFilterValue: UnionShape
+    SearchMapFilter: StructureShape
+    SearchMapFilterValue: UnionShape
+    SearchMapKey: StringShape
+    SearchMaxResults: IntegerShape
+    SearchNextToken: StringShape
     SearchPropertyPredicates: ListShape
+    SearchResultItem: StructureShape
+    SearchResultItemList: ListShape
+    SearchResultName: StringShape
+    SearchSort: StructureShape
+    SearchSortOrder: EnumShape
     SearchTablesRequest: StructureShape
     SearchTablesResponse: StructureShape
+    SearchText: StringShape
     SecretArn: StringShape
     SecurityConfiguration: StructureShape
     SecurityConfigurationList: ListShape
@@ -1299,13 +1565,18 @@ module Aws::Glue
     SelectFields: StructureShape
     SelectFromCollection: StructureShape
     SelectedFields: ListShape
+    SensitiveString: StringShape
+    SensitiveUrl: StringShape
     Separator: EnumShape
     SerDeInfo: StructureShape
     Session: StructureShape
+    SessionBusyException: StructureShape
     SessionCommand: StructureShape
+    SessionEndpoint: StructureShape
     SessionIdList: ListShape
     SessionList: ListShape
     SessionStatus: EnumShape
+    SessionType: EnumShape
     SettingSource: EnumShape
     SkewedInfo: StructureShape
     SnowflakeNodeData: StructureShape
@@ -1315,20 +1586,26 @@ module Aws::Glue
     SortCriteria: ListShape
     SortCriterion: StructureShape
     SortDirectionType: EnumShape
+    SourceConfiguration: StructureShape
     SourceControlAuthStrategy: EnumShape
     SourceControlDetails: StructureShape
     SourceControlProvider: EnumShape
     SourceProcessingProperties: StructureShape
     SourceTableConfig: StructureShape
     SourceTableFieldsList: ListShape
+    SparkConnectEndpointUrl: StringShape
     SparkConnectorSource: StructureShape
     SparkConnectorTarget: StructureShape
+    SparkPipelineInfoKey: StringShape
+    SparkPipelineInfoMap: MapShape
+    SparkPipelineInfoValue: StringShape
     SparkSQL: StructureShape
     Spigot: StructureShape
     SplitFields: StructureShape
     SqlAlias: StructureShape
     SqlAliases: ListShape
     SqlQuery: StringShape
+    SseAlgorithm: StringShape
     StartBlueprintRunRequest: StructureShape
     StartBlueprintRunResponse: StructureShape
     StartColumnStatisticsTaskRunRequest: StructureShape
@@ -1353,6 +1630,8 @@ module Aws::Glue
     StartMLEvaluationTaskRunResponse: StructureShape
     StartMLLabelingSetGenerationTaskRunRequest: StructureShape
     StartMLLabelingSetGenerationTaskRunResponse: StructureShape
+    StartMaterializedViewRefreshTaskRunRequest: StructureShape
+    StartMaterializedViewRefreshTaskRunResponse: StructureShape
     StartTriggerRequest: StructureShape
     StartTriggerResponse: StructureShape
     StartWorkflowRunRequest: StructureShape
@@ -1381,6 +1660,8 @@ module Aws::Glue
     StopCrawlerResponse: StructureShape
     StopCrawlerScheduleRequest: StructureShape
     StopCrawlerScheduleResponse: StructureShape
+    StopMaterializedViewRefreshTaskRunRequest: StructureShape
+    StopMaterializedViewRefreshTaskRunResponse: StructureShape
     StopSessionRequest: StructureShape
     StopSessionResponse: StructureShape
     StopTriggerRequest: StructureShape
@@ -1391,15 +1672,21 @@ module Aws::Glue
     StreamingDataPreviewOptions: StructureShape
     String128: StringShape
     String2048: StringShape
+    String4096: StringShape
+    String512: StringShape
     StringColumnStatisticsData: StructureShape
     StringList: ListShape
     StringToStringMap: MapShape
+    SubObjectSourceType: EnumShape
+    SubObjectStatistics: StructureShape
+    SubObjectsStatisticsList: ListShape
     SupportedDialect: StructureShape
     Table: StructureShape
     TableAttributes: EnumShape
     TableAttributesList: ListShape
     TableError: StructureShape
     TableErrors: ListShape
+    TableIdString: StringShape
     TableIdentifier: StructureShape
     TableInput: StructureShape
     TableList: ListShape
@@ -1413,11 +1700,13 @@ module Aws::Glue
     TableOptimizerType: EnumShape
     TableOptimizerVpcConfiguration: UnionShape
     TablePrefix: StringShape
+    TableResourceShareType: EnumShape
     TableStatus: StructureShape
     TableTypeString: StringShape
     TableVersion: StructureShape
     TableVersionError: StructureShape
     TableVersionErrors: ListShape
+    TableVersionId: IntegerShape
     Tag: StructureShape
     TagKey: StringShape
     TagKeysList: ListShape
@@ -1427,6 +1716,7 @@ module Aws::Glue
     TagsMap: MapShape
     TargetColumn: StringShape
     TargetFormat: EnumShape
+    TargetNamespace: StringShape
     TargetProcessingProperties: StructureShape
     TargetRedshiftCatalog: StructureShape
     TargetResourceNotFound: StructureShape
@@ -1478,6 +1768,7 @@ module Aws::Glue
     TwoInputs: ListShape
     TypeString: StringShape
     URI: StringShape
+    UUIDv4: StringShape
     UnfilteredPartition: StructureShape
     UnfilteredPartitionList: ListShape
     Union: StructureShape
@@ -1485,6 +1776,8 @@ module Aws::Glue
     UnnestSpec: EnumShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateAssetRequest: StructureShape
+    UpdateAssetResponse: StructureShape
     UpdateBehavior: EnumShape
     UpdateBlueprintRequest: StructureShape
     UpdateBlueprintResponse: StructureShape
@@ -1513,6 +1806,10 @@ module Aws::Glue
     UpdateDatabaseResponse: StructureShape
     UpdateDevEndpointRequest: StructureShape
     UpdateDevEndpointResponse: StructureShape
+    UpdateGlossaryRequest: StructureShape
+    UpdateGlossaryResponse: StructureShape
+    UpdateGlossaryTermRequest: StructureShape
+    UpdateGlossaryTermResponse: StructureShape
     UpdateGlueIdentityCenterConfigurationRequest: StructureShape
     UpdateGlueIdentityCenterConfigurationResponse: StructureShape
     UpdateGrokClassifierRequest: StructureShape
@@ -1551,9 +1848,11 @@ module Aws::Glue
     UpdateWorkflowRequest: StructureShape
     UpdateWorkflowResponse: StructureShape
     UpdateXMLClassifierRequest: StructureShape
+    UpdatedAt: TimestampShape
     UpdatedTimestamp: StringShape
     UpsertRedshiftTargetOptions: StructureShape
     UriString: StringShape
+    Url: StringShape
     UrlString: StringShape
     UsageProfileDefinition: StructureShape
     UsageProfileDefinitionList: ListShape
@@ -1580,6 +1879,7 @@ module Aws::Glue
     ViewRepresentationInput: StructureShape
     ViewRepresentationInputList: ListShape
     ViewRepresentationList: ListShape
+    ViewSubObjectVersionIdsList: ListShape
     ViewSubObjectsList: ListShape
     ViewTextString: StringShape
     ViewUpdateAction: EnumShape

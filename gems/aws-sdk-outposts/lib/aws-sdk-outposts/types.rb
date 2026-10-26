@@ -18,11 +18,13 @@ module Aws::Outposts
     end
 
     # <p> Information about an address. </p>
+    # @note This shape contains sensitive data and should be treated as such.
     # @!attribute contact_name
     #   <p>The name of the contact.</p>
     #   @return [String]
     # @!attribute contact_phone_number
-    #   <p>The phone number of the contact.</p>
+    #   <p>The phone number of the contact, including the country code (for example,
+    #         <code>+12065550100</code>).</p>
     #   @return [String]
     # @!attribute address_line1
     #   <p>The first line of the address.</p>
@@ -221,6 +223,26 @@ module Aws::Outposts
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A summary of the capacity changes for a quote option.</p>
+    # @!attribute existing_capacities
+    #   <p>The existing capacities on the Outpost before the quote is fulfilled.</p>
+    #   @return [Array<Types::QuoteCapacity>]
+    # @!attribute final_capacities
+    #   <p>The final capacities on the Outpost after the quote is fulfilled.</p>
+    #   @return [Array<Types::QuoteCapacity>]
+    # @!attribute capacity_change
+    #   <p>The change in capacity between the existing and final state.</p>
+    #   @return [Array<Types::QuoteCapacity>]
+    class CapacitySummary < Struct.new(
+      nil,
+      :existing_capacities,
+      :final_capacities,
+      :capacity_change,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The capacity tasks that failed.</p>
     # @!attribute reason
     #   <p>The reason that the specified capacity task failed.</p>
@@ -300,6 +322,10 @@ module Aws::Outposts
     # @!attribute supported_storage
     #   <p> The supported storage options for the catalog item. </p>
     #   @return [Array<String>]
+    # @!attribute rack_scaling_type
+    #   <p>The rack scaling type supported by the catalog item. Valid values are
+    #         <code>SINGLE_RACK</code> and <code>MULTI_RACK</code>.</p>
+    #   @return [String]
     class CatalogItem < Struct.new(
       nil,
       :catalog_item_id,
@@ -309,6 +335,7 @@ module Aws::Outposts
       :weight_lbs,
       :supported_uplink_gbps,
       :supported_storage,
+      :rack_scaling_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -333,6 +360,10 @@ module Aws::Outposts
     #                  <p>RETIRING - The underlying hardware for the asset is degraded. Capacity for new compute
     #             resources is reduced. Amazon Web Services sends notifications for resources that must be stopped before
     #             the asset can be replaced.</p>
+    #               </li>
+    #               <li>
+    #                  <p>INSTALLING - The asset is being installed and can't yet provide capacity for new compute
+    #             resources.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -413,6 +444,12 @@ module Aws::Outposts
     # @!attribute outpost_identifier
     #   <p> The ID or the Amazon Resource Name (ARN) of the Outpost. </p>
     #   @return [String]
+    # @!attribute quote_identifier
+    #   <p>The ID of the quote to use for the order.</p>
+    #   @return [String]
+    # @!attribute quote_option_identifier
+    #   <p>The ID of the quote option to use for the order.</p>
+    #   @return [String]
     # @!attribute line_items
     #   <p>The line items that make up the order.</p>
     #   @return [Array<Types::LineItemRequest>]
@@ -425,6 +462,8 @@ module Aws::Outposts
     class CreateOrderInput < Struct.new(
       nil,
       :outpost_identifier,
+      :quote_identifier,
+      :quote_option_identifier,
       :line_items,
       :payment_option,
       :payment_term,
@@ -490,6 +529,145 @@ module Aws::Outposts
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute outpost_id
+    #   <p>The ID or ARN of the Outpost.</p>
+    #   @return [String]
+    # @!attribute vpc_information_list
+    #   <p>Information about the VPC used for private connectivity, including the VPC, its subnets,
+    #         and an associated VPC endpoint. You can specify at most one entry.</p>
+    #   @return [Array<Types::VpcInformation>]
+    class CreatePrivateConnectivityConfigInput < Struct.new(
+      nil,
+      :outpost_id,
+      :vpc_information_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute private_connectivity_config
+    #   <p>The private connectivity configuration for the Outpost.</p>
+    #   @return [Types::PrivateConnectivityConfig]
+    # @!attribute outpost_id
+    #   <p>The ID of the Outpost.</p>
+    #   @return [String]
+    class CreatePrivateConnectivityConfigOutput < Struct.new(
+      nil,
+      :private_connectivity_config,
+      :outpost_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute outpost_identifier
+    #   <p>The ID or ARN of the Outpost to associate with the quote. If not specified, the quote is
+    #         created without an Outpost association.</p>
+    #   @return [String]
+    # @!attribute country_code
+    #   <p>The country code for the Outpost site location.</p>
+    #   @return [String]
+    # @!attribute requested_capacities
+    #   <p>The capacity requirements for the quote. Each entry specifies a capacity type (such as
+    #         Amazon EC2), the unit, and the quantity. For Amazon EC2, the quantity is the number of additional
+    #         instances to add to the Outpost. For Amazon EBS and Amazon S3, the quantity is the total desired
+    #         end-state capacity of the Outpost.</p>
+    #   @return [Array<Types::QuoteCapacity>]
+    # @!attribute requested_constraints
+    #   <p>The physical constraints for the quote, such as maximum number of racks, maximum power
+    #         draw per rack, or maximum weight per rack.</p>
+    #   @return [Array<Types::QuoteConstraint>]
+    # @!attribute requested_payment_options
+    #   <p>The payment options to include in the quote pricing. If not specified, all available
+    #         payment options are returned.</p>
+    #   @return [Array<String>]
+    # @!attribute requested_payment_terms
+    #   <p>The payment terms to include in the quote pricing. If not specified, all available
+    #         payment terms are returned.</p>
+    #   @return [Array<String>]
+    # @!attribute description
+    #   <p>A description for the quote.</p>
+    #   @return [String]
+    class CreateQuoteInput < Struct.new(
+      nil,
+      :outpost_identifier,
+      :country_code,
+      :requested_capacities,
+      :requested_constraints,
+      :requested_payment_options,
+      :requested_payment_terms,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quote
+    #   <p>Information about the quote.</p>
+    #   @return [Types::Quote]
+    class CreateQuoteOutput < Struct.new(
+      nil,
+      :quote,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute payment_option
+    #   <p>The payment option.</p>
+    #   @return [String]
+    # @!attribute payment_term
+    #   <p>The payment term.</p>
+    #   @return [String]
+    # @!attribute outpost_identifier
+    #   <p>The ID or ARN of the Outpost.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+    #         request.</p>
+    #   @return [String]
+    class CreateRenewalInput < Struct.new(
+      nil,
+      :payment_option,
+      :payment_term,
+      :outpost_identifier,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute payment_option
+    #   <p>The payment option.</p>
+    #   @return [String]
+    # @!attribute payment_term
+    #   <p>The payment term.</p>
+    #   @return [String]
+    # @!attribute outpost_id
+    #   <p>The ID of the Outpost.</p>
+    #   @return [String]
+    # @!attribute upfront_price
+    #   <p>The upfront price of the renewal.</p>
+    #   @return [Float]
+    # @!attribute monthly_recurring_price
+    #   <p>The monthly recurring price of the renewal.</p>
+    #   @return [Float]
+    # @!attribute currency
+    #   <p>The currency of the renewal price.</p>
+    #   @return [String]
+    class CreateRenewalOutput < Struct.new(
+      nil,
+      :payment_option,
+      :payment_term,
+      :outpost_id,
+      :upfront_price,
+      :monthly_recurring_price,
+      :currency,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of the site.</p>
     #   @return [String]
@@ -515,7 +693,7 @@ module Aws::Outposts
     # @!attribute rack_physical_properties
     #   <p> Information about the physical and logistical details for the rack at this site.
     #         For more information
-    #         about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network 
+    #         about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network
     #           readiness checklist</a> in the Amazon Web Services Outposts User Guide.
     #           </p>
     #   @return [Types::RackPhysicalProperties]
@@ -562,6 +740,24 @@ module Aws::Outposts
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute quote_identifier
+    #   <p>The ID of the quote.</p>
+    #   @return [String]
+    class DeleteQuoteInput < Struct.new(
+      nil,
+      :quote_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteQuoteOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute site_id
     #   <p> The ID or the Amazon Resource Name (ARN) of the site. </p>
     #   @return [String]
@@ -580,6 +776,41 @@ module Aws::Outposts
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about an instance type that can be ordered for an Outpost, including
+    #       hardware specifications and supported form factors.</p>
+    # @!attribute instance_type
+    #   <p>The instance type.</p>
+    #   @return [String]
+    # @!attribute vcp_us
+    #   <p>The number of default VCPUs in the instance type.</p>
+    #   @return [Integer]
+    # @!attribute memory_in_mib
+    #   <p>The memory size of the instance type, in MiB.</p>
+    #   @return [Integer]
+    # @!attribute network_performance
+    #   <p>The network performance of the instance type.</p>
+    #   @return [String]
+    # @!attribute form_factor_configs
+    #   <p>The supported form factor and Outpost generation configurations for the instance
+    #         type.</p>
+    #   @return [Array<Types::FormFactorConfig>]
+    class DetailedInstanceTypeItem < Struct.new(
+      nil,
+      :instance_type,
+      :vcp_us,
+      :memory_in_mib,
+      :network_performance,
+      :form_factor_configs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:memory_in_mib] = 0 unless options.key?(:memory_in_mib)
+        super
+      end
+    end
+
     # <p> Information about EC2 capacity. </p>
     # @!attribute family
     #   <p> The family of the EC2 capacity. </p>
@@ -595,6 +826,25 @@ module Aws::Outposts
       :family,
       :max_size,
       :quantity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A supported form factor and Outpost generation configuration for an instance type.</p>
+    # @!attribute form_factor
+    #   <p>The form factor. Valid values are <code>RACK</code> for rack-based Outposts and
+    #         <code>SERVER</code> for server-based Outposts.</p>
+    #   @return [String]
+    # @!attribute outpost_generation
+    #   <p>The Outpost generation. Valid values are <code>GENERATION_1</code> for first-generation
+    #         rack deployments and <code>GENERATION_2</code> for second-generation rack deployments. This
+    #         value is not set for server form factors.</p>
+    #   @return [String]
+    class FormFactorConfig < Struct.new(
+      nil,
+      :form_factor,
+      :outpost_generation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -825,16 +1075,24 @@ module Aws::Outposts
     #   <p>The subscription details for the specified Outpost.</p>
     #   @return [Array<Types::Subscription>]
     # @!attribute contract_end_date
-    #   <p>The date the current contract term ends for the specified Outpost. You must start the renewal or
-    #         decommission process at least 5 business days before the current term for your
-    #         Amazon Web Services Outposts ends. Failing to complete these steps at least 5 business days before the
-    #         current term ends might result in unanticipated charges.</p>
+    #   <p>The date the current contract term ends for the specified Outpost. You must start the
+    #         renewal or decommission process at least 5 business days before the current term for your
+    #         Amazon Web Services Outposts ends. Failing to complete these steps at least 5 business days before the current term
+    #         ends might result in unanticipated charges.</p>
+    #   @return [String]
+    # @!attribute payment_term
+    #   <p>The payment term.</p>
+    #   @return [String]
+    # @!attribute payment_option
+    #   <p>The payment option.</p>
     #   @return [String]
     class GetOutpostBillingInformationOutput < Struct.new(
       nil,
       :next_token,
       :subscriptions,
       :contract_end_date,
+      :payment_term,
+      :payment_option,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -942,6 +1200,76 @@ module Aws::Outposts
       nil,
       :instance_types,
       :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute outpost_id
+    #   <p>The ID or ARN of the Outpost.</p>
+    #   @return [String]
+    class GetPrivateConnectivityConfigInput < Struct.new(
+      nil,
+      :outpost_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute private_connectivity_config
+    #   <p>The private connectivity configuration for the Outpost.</p>
+    #   @return [Types::PrivateConnectivityConfig]
+    class GetPrivateConnectivityConfigOutput < Struct.new(
+      nil,
+      :private_connectivity_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quote_identifier
+    #   <p>The ID of the quote.</p>
+    #   @return [String]
+    class GetQuoteInput < Struct.new(
+      nil,
+      :quote_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quote
+    #   <p>Information about the quote.</p>
+    #   @return [Types::Quote]
+    class GetQuoteOutput < Struct.new(
+      nil,
+      :quote,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute outpost_identifier
+    #   <p>The ID or ARN of the Outpost.</p>
+    #   @return [String]
+    class GetRenewalPricingInput < Struct.new(
+      nil,
+      :outpost_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute pricing_result
+    #   <p>The result of the pricing request.</p>
+    #   @return [String]
+    # @!attribute pricing_options
+    #   <p>The pricing options for the specified Outpost.</p>
+    #   @return [Array<Types::PricingOption>]
+    class GetRenewalPricingOutput < Struct.new(
+      nil,
+      :pricing_result,
+      :pricing_options,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1213,6 +1541,26 @@ module Aws::Outposts
     # @!attribute status_filter
     #   <p>Filters the results by state.</p>
     #   @return [Array<String>]
+    # @!attribute asset_type_filter
+    #   <p>Filters the results by asset type.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>COMPUTE - Server asset used for customer compute </p>
+    #               </li>
+    #               <li>
+    #                  <p>STORAGE - Server asset used by storage services </p>
+    #               </li>
+    #               <li>
+    #                  <p>POWERSHELF - Powershelf assets </p>
+    #               </li>
+    #               <li>
+    #                  <p>SWITCH - Switch assets </p>
+    #               </li>
+    #               <li>
+    #                  <p>NETWORKING - Asset managed by Amazon Web Services for networking purposes </p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
     class ListAssetsInput < Struct.new(
       nil,
       :outpost_identifier,
@@ -1220,6 +1568,7 @@ module Aws::Outposts
       :max_results,
       :next_token,
       :status_filter,
+      :asset_type_filter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1360,6 +1709,42 @@ module Aws::Outposts
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute outpost_generation_filter
+    #   <p>Filters the results by Outpost generation. Specify <code>GENERATION_1</code> for
+    #         first-generation rack deployments or <code>GENERATION_2</code> for second-generation rack
+    #         deployments.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum page size.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token.</p>
+    #   @return [String]
+    class ListOrderableInstanceTypesInput < Struct.new(
+      nil,
+      :outpost_generation_filter,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute instance_types
+    #   <p>Information about the instance types that can be ordered for the Outpost.</p>
+    #   @return [Array<Types::DetailedInstanceTypeItem>]
+    # @!attribute next_token
+    #   <p>The pagination token.</p>
+    #   @return [String]
+    class ListOrderableInstanceTypesOutput < Struct.new(
+      nil,
+      :instance_types,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute outpost_identifier_filter
     #   <p> The ID or the Amazon Resource Name (ARN) of the Outpost. </p>
     #   @return [String]
@@ -1430,6 +1815,36 @@ module Aws::Outposts
     class ListOutpostsOutput < Struct.new(
       nil,
       :outposts,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The pagination token.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum page size.</p>
+    #   @return [Integer]
+    class ListQuotesInput < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quotes
+    #   <p>Information about the quotes.</p>
+    #   @return [Array<Types::QuoteSummary>]
+    # @!attribute next_token
+    #   <p>The pagination token.</p>
+    #   @return [String]
+    class ListQuotesOutput < Struct.new(
+      nil,
+      :quotes,
       :next_token,
       keyword_init: true
     )
@@ -1515,6 +1930,12 @@ module Aws::Outposts
     # @!attribute outpost_id
     #   <p> The ID of the Outpost in the order. </p>
     #   @return [String]
+    # @!attribute quote_identifier
+    #   <p>The ID of the quote associated with the order.</p>
+    #   @return [String]
+    # @!attribute quote_option_identifier
+    #   <p>The ID of the quote option associated with the order.</p>
+    #   @return [String]
     # @!attribute order_id
     #   <p>The ID of the order.</p>
     #   @return [String]
@@ -1573,6 +1994,8 @@ module Aws::Outposts
     class Order < Struct.new(
       nil,
       :outpost_id,
+      :quote_identifier,
+      :quote_option_identifier,
       :order_id,
       :status,
       :line_items,
@@ -1649,6 +2072,114 @@ module Aws::Outposts
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A requirement that must be met before an order can be submitted for a quote.</p>
+    # @!attribute status_message
+    #   <p>A message about the ordering requirement.</p>
+    #   @return [String]
+    # @!attribute ordering_requirement_type
+    #   <p>The type of ordering requirement. Indicates which check failed or passed.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>OUTPOST_ACTIVE_CHECK_ERROR</code> - The Outpost must be in
+    #             an active state.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR</code> - The maximum
+    #             number of allowed orders has been reached.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>VALID_ZIP_CODE_CHECK_ERROR</code> - The site address must
+    #             have a valid zip code.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>RACK_PHYSICAL_PROPERTIES_CHECK_ERROR</code> - The rack
+    #             physical properties do not meet requirements.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR</code> - The site
+    #             must have an operating address.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR</code> - The site
+    #             must have a shipping address.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>COUNTRY_CODE_MISMATCH_CHECK_ERROR</code> - The country
+    #             code on the quote does not match the Outpost site country.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>OUTPOST_GENERATION_MISMATCH_ERROR</code> - The Outpost generation
+    #             does not match the requested configuration.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>OUTPOST_ID_MISSING_ON_QUOTE_ERROR</code> - The quote must
+    #             be associated with an Outpost before submitting an order.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ENTERPRISE_SUPPORT_ERROR</code> - Enterprise Support is
+    #             required.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR</code> - The
+    #             shipping address must have a contact name.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR</code> - The
+    #             shipping address must have a contact phone number.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR</code> - The
+    #             shipping address must have contact information.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>OUTPOST_STATE_CHANGED_ERROR</code> - The Outpost state has
+    #             changed since the quote was created.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>OUTPOST_NOT_FOUND_ERROR</code> - The Outpost associated
+    #             with the quote was not found.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>OUTPOST_RENEWAL_REQUIRED_ERROR</code> - The Outpost
+    #             requires a renewal before a new order can be submitted.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>UNSUPPORTED</code> - The requirement type is not
+    #             recognized.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the ordering requirement. Valid values are <code>PASS</code>,
+    #         <code>FAIL</code>, and <code>EXEMPT</code>.</p>
+    #   @return [String]
+    class OrderingRequirement < Struct.new(
+      nil,
+      :status_message,
+      :ordering_requirement_type,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about an Outpost.</p>
     # @!attribute outpost_id
     #   <p> The ID of the Outpost. </p>
@@ -1686,6 +2217,15 @@ module Aws::Outposts
     # @!attribute supported_hardware_type
     #   <p> The hardware type. </p>
     #   @return [String]
+    # @!attribute generation
+    #   <p>The Outpost generation. Valid values are <code>GENERATION_1</code> for first-generation
+    #         rack deployments and <code>GENERATION_2</code> for second-generation rack deployments.</p>
+    #   @return [String]
+    # @!attribute rack_scaling_type
+    #   <p>The rack scaling type. Valid values are <code>SINGLE_RACK</code> for single-rack
+    #         Outposts and <code>MULTI_RACK</code> for multi-rack Outposts that can expand across
+    #         multiple racks.</p>
+    #   @return [String]
     class Outpost < Struct.new(
       nil,
       :outpost_id,
@@ -1700,6 +2240,313 @@ module Aws::Outposts
       :tags,
       :site_arn,
       :supported_hardware_type,
+      :generation,
+      :rack_scaling_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A pricing option for the specified Outpost.</p>
+    # @!attribute pricing_type
+    #   <p>The type of pricing model.</p>
+    #   @return [String]
+    # @!attribute subscription_pricing_details
+    #   <p>The subscription pricing details for this pricing option.</p>
+    #   @return [Types::SubscriptionPricingDetails]
+    class PricingOption < Struct.new(
+      nil,
+      :pricing_type,
+      :subscription_pricing_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about the private connectivity configuration for an Outpost.</p>
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the service-linked role that Amazon Web Services Outposts creates and uses to
+    #         provision and attach the network interfaces for private connectivity in your VPC. The role's
+    #         permissions are scoped to the specific Outpost and VPC.</p>
+    #   @return [String]
+    # @!attribute private_connectivity_status
+    #   <p>The status of private connectivity for the Outpost. Valid values are <code>ENABLED</code>
+    #         and <code>DISABLED</code>.</p>
+    #   @return [String]
+    # @!attribute vpc_information_list
+    #   <p>Information about the VPC used for private connectivity.</p>
+    #   @return [Array<Types::VpcInformation>]
+    # @!attribute provisioning_role_arn
+    #   <p>The Amazon Resource Name (ARN) of the provisioning role in your account that Amazon Web Services Outposts uses
+    #         to establish the service link connection during Outpost installation. This field is present
+    #         only when VPC endpoint-based provisioning is configured.</p>
+    #   @return [String]
+    class PrivateConnectivityConfig < Struct.new(
+      nil,
+      :role_arn,
+      :private_connectivity_status,
+      :vpc_information_list,
+      :provisioning_role_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a quote for an Outpost. A quote provides pricing and configuration
+    #       options based on the requested capacity.</p>
+    # @!attribute quote_id
+    #   <p>The ID of the quote.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The ID of the account that owns the quote.</p>
+    #   @return [String]
+    # @!attribute quote_status
+    #   <p>The status of the quote.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>CREATED</code> - The quote has been created and is
+    #             available for review.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ORDER_SUBMITTED</code> - An order has been submitted for
+    #             the quote.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EXPIRED</code> - The quote has expired and can no longer
+    #             be used to submit an order.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>A message about the status of the quote.</p>
+    #   @return [String]
+    # @!attribute outpost_arn
+    #   <p>The ARN of the Outpost associated with the quote.</p>
+    #   @return [String]
+    # @!attribute country_code
+    #   <p>The country code for the Outpost site location.</p>
+    #   @return [String]
+    # @!attribute requested_capacities
+    #   <p>The capacity requirements specified in the quote request.</p>
+    #   @return [Array<Types::QuoteCapacity>]
+    # @!attribute requested_constraints
+    #   <p>The physical constraints specified in the quote request.</p>
+    #   @return [Array<Types::QuoteConstraint>]
+    # @!attribute requested_payment_options
+    #   <p>The payment options specified in the quote request.</p>
+    #   @return [Array<String>]
+    # @!attribute requested_payment_terms
+    #   <p>The payment terms specified in the quote request.</p>
+    #   @return [Array<String>]
+    # @!attribute quote_options
+    #   <p>The configuration and pricing options for the quote. Each option includes capacity
+    #         details, physical specifications, and pricing information.</p>
+    #   @return [Array<Types::QuoteOption>]
+    # @!attribute ordering_requirements
+    #   <p>The requirements that must be met before an order can be submitted for the quote.</p>
+    #   @return [Array<Types::OrderingRequirement>]
+    # @!attribute submitted_order_id
+    #   <p>The ID of the order submitted for the quote.</p>
+    #   @return [String]
+    # @!attribute created_date
+    #   <p>The date the quote was created.</p>
+    #   @return [Time]
+    # @!attribute expiration_date
+    #   <p>The date the quote expires.</p>
+    #   @return [Time]
+    # @!attribute description
+    #   <p>The description of the quote.</p>
+    #   @return [String]
+    class Quote < Struct.new(
+      nil,
+      :quote_id,
+      :account_id,
+      :quote_status,
+      :status_message,
+      :outpost_arn,
+      :country_code,
+      :requested_capacities,
+      :requested_constraints,
+      :requested_payment_options,
+      :requested_payment_terms,
+      :quote_options,
+      :ordering_requirements,
+      :submitted_order_id,
+      :created_date,
+      :expiration_date,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A capacity requirement for a quote. Specifies the type of capacity, the unit, and the
+    #       quantity.</p>
+    # @!attribute quote_capacity_type
+    #   <p>The type of capacity. Valid values are <code>EC2</code>, <code>EBS</code>, and
+    #         <code>S3</code>.</p>
+    #   @return [String]
+    # @!attribute unit
+    #   <p>The unit of measurement for the capacity. For Amazon EC2, this is the instance type (for
+    #         example, <code>c5.24xlarge</code>). For Amazon EBS and Amazon S3, this is the storage unit (for
+    #         example, <code>TiB</code> for tebibytes).</p>
+    #   @return [String]
+    # @!attribute quantity
+    #   <p>The quantity of the specified capacity unit. For Amazon EC2, this is the number of
+    #         additional instances to add to the Outpost. For Amazon EBS and Amazon S3, this is the total
+    #         desired end-state capacity of the Outpost.</p>
+    #   @return [Float]
+    class QuoteCapacity < Struct.new(
+      nil,
+      :quote_capacity_type,
+      :unit,
+      :quantity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A physical constraint for a quote.</p>
+    # @!attribute quote_constraint_type
+    #   <p>The type of constraint. Valid values are <code>RACK_MAXIMUM</code>,
+    #         <code>RACK_MAX_POWER_KVA</code>, <code>RACK_MAX_WEIGHT_LBS</code>, and
+    #         <code>RACK_SPACE_CONSTRAINED</code>.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the constraint.</p>
+    #   @return [String]
+    class QuoteConstraint < Struct.new(
+      nil,
+      :quote_constraint_type,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A configuration and pricing option for a quote. Each option includes the capacity
+    #       breakdown, physical specifications for the racks or servers, and pricing details.</p>
+    # @!attribute quote_option_identifier
+    #   <p>The ID of the quote option.</p>
+    #   @return [String]
+    # @!attribute capacities
+    #   <p>The capacities included in this quote option.</p>
+    #   @return [Array<Types::QuoteCapacity>]
+    # @!attribute capacity_summary
+    #   <p>A summary of the existing, final, and changed capacity for this quote option.</p>
+    #   @return [Types::CapacitySummary]
+    # @!attribute specifications
+    #   <p>The physical specifications for the racks or servers in this quote option.</p>
+    #   @return [Array<Types::QuoteSpecification>]
+    # @!attribute pricing_options
+    #   <p>The pricing options for this quote option.</p>
+    #   @return [Array<Types::PricingOption>]
+    class QuoteOption < Struct.new(
+      nil,
+      :quote_option_identifier,
+      :capacities,
+      :capacity_summary,
+      :specifications,
+      :pricing_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A physical specification for a quote option. Describes the rack or server configuration
+    #       that would be deployed.</p>
+    # @!attribute quote_specification_type
+    #   <p>The type of specification. Valid values are <code>NEW_RACK</code>,
+    #         <code>UPDATED_RACK</code>, <code>EXISTING_RACK</code>, and <code>SERVER</code>.</p>
+    #   @return [String]
+    # @!attribute existing_rack_specification_details
+    #   <p>The existing rack specification details, if the specification type is
+    #         <code>UPDATED_RACK</code> or <code>EXISTING_RACK</code>.</p>
+    #   @return [Types::RackSpecificationDetails]
+    # @!attribute final_rack_specification_details
+    #   <p>The final rack specification details after the quote is fulfilled.</p>
+    #   @return [Types::RackSpecificationDetails]
+    # @!attribute server_specification_details
+    #   <p>The server specification details, if the specification type is
+    #         <code>SERVER</code>.</p>
+    #   @return [Types::ServerSpecificationDetails]
+    class QuoteSpecification < Struct.new(
+      nil,
+      :quote_specification_type,
+      :existing_rack_specification_details,
+      :final_rack_specification_details,
+      :server_specification_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a quote.</p>
+    # @!attribute quote_id
+    #   <p>The ID of the quote.</p>
+    #   @return [String]
+    # @!attribute account_id
+    #   <p>The ID of the account that owns the quote.</p>
+    #   @return [String]
+    # @!attribute quote_status
+    #   <p>The status of the quote.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>A message about the status of the quote.</p>
+    #   @return [String]
+    # @!attribute outpost_arn
+    #   <p>The ARN of the Outpost associated with the quote.</p>
+    #   @return [String]
+    # @!attribute country_code
+    #   <p>The country code for the Outpost site location.</p>
+    #   @return [String]
+    # @!attribute requested_capacities
+    #   <p>The capacity requirements specified in the quote request.</p>
+    #   @return [Array<Types::QuoteCapacity>]
+    # @!attribute requested_constraints
+    #   <p>The physical constraints specified in the quote request.</p>
+    #   @return [Array<Types::QuoteConstraint>]
+    # @!attribute requested_payment_options
+    #   <p>The payment options specified in the quote request.</p>
+    #   @return [Array<String>]
+    # @!attribute requested_payment_terms
+    #   <p>The payment terms specified in the quote request.</p>
+    #   @return [Array<String>]
+    # @!attribute quote_options
+    #   <p>The configuration and pricing options for the quote.</p>
+    #   @return [Array<Types::QuoteOption>]
+    # @!attribute submitted_order_id
+    #   <p>The ID of the order submitted for the quote.</p>
+    #   @return [String]
+    # @!attribute created_date
+    #   <p>The date the quote was created.</p>
+    #   @return [Time]
+    # @!attribute expiration_date
+    #   <p>The date the quote expires.</p>
+    #   @return [Time]
+    # @!attribute description
+    #   <p>The description of the quote.</p>
+    #   @return [String]
+    class QuoteSummary < Struct.new(
+      nil,
+      :quote_id,
+      :account_id,
+      :quote_status,
+      :status_message,
+      :outpost_arn,
+      :country_code,
+      :requested_capacities,
+      :requested_constraints,
+      :requested_payment_options,
+      :requested_payment_terms,
+      :quote_options,
+      :submitted_order_id,
+      :created_date,
+      :expiration_date,
+      :description,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1707,7 +2554,7 @@ module Aws::Outposts
 
     # <p> Information about the physical and logistical details for racks at sites.
     #       For more information
-    #       about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network 
+    #       about hardware requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist">Network
     #         readiness checklist</a> in the Amazon Web Services Outposts User Guide.
     #         </p>
     # @!attribute power_draw_kva
@@ -1735,7 +2582,7 @@ module Aws::Outposts
     #   <p>The type of optical standard used to attach the Outpost to the network. This field is
     #         dependent on uplink speed, fiber type, and distance to the upstream device.
     #         For more information
-    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> 
+    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a>
     #           in the Amazon Web Services Outposts User Guide.
     #           </p>
     #   @return [String]
@@ -1754,6 +2601,111 @@ module Aws::Outposts
       :fiber_optic_cable_type,
       :optical_standard,
       :maximum_supported_weight_lbs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The physical specification details for a rack in a quote option.</p>
+    # @!attribute rack_id
+    #   <p>The ID of the rack.</p>
+    #   @return [String]
+    # @!attribute rack_use
+    #   <p>The use of the rack. Valid values are <code>COMPUTE</code> and
+    #         <code>NETWORKING</code>.</p>
+    #   @return [String]
+    # @!attribute rack_power_draw_kva
+    #   <p>The maximum power draw of the rack in kVA.</p>
+    #   @return [Float]
+    # @!attribute rack_weight_lbs
+    #   <p>The weight of the rack in pounds.</p>
+    #   @return [Float]
+    # @!attribute rack_height_inches
+    #   <p>The height of the rack in inches.</p>
+    #   @return [Float]
+    # @!attribute rack_width_inches
+    #   <p>The width of the rack in inches.</p>
+    #   @return [Float]
+    # @!attribute rack_depth_inches
+    #   <p>The depth of the rack in inches.</p>
+    #   @return [Float]
+    # @!attribute rack_unit_height
+    #   <p>The rack unit height.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>HEIGHT_42U</code> - 42 rack units.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HEIGHT_2U</code> - 2 rack units.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HEIGHT_1U</code> - 1 rack unit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute ec2_capacities
+    #   <p>The Amazon EC2 capacities for the rack.</p>
+    #   @return [Array<Types::EC2Capacity>]
+    class RackSpecificationDetails < Struct.new(
+      nil,
+      :rack_id,
+      :rack_use,
+      :rack_power_draw_kva,
+      :rack_weight_lbs,
+      :rack_height_inches,
+      :rack_width_inches,
+      :rack_depth_inches,
+      :rack_unit_height,
+      :ec2_capacities,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The physical specification details for a server in a quote option.</p>
+    # @!attribute server_power_draw_kva
+    #   <p>The maximum power draw of the server in kVA.</p>
+    #   @return [Float]
+    # @!attribute server_weight_lbs
+    #   <p>The weight of the server in pounds.</p>
+    #   @return [Float]
+    # @!attribute server_height_inches
+    #   <p>The height of the server in inches.</p>
+    #   @return [Float]
+    # @!attribute server_width_inches
+    #   <p>The width of the server in inches.</p>
+    #   @return [Float]
+    # @!attribute server_depth_inches
+    #   <p>The depth of the server in inches.</p>
+    #   @return [Float]
+    # @!attribute rack_unit_height
+    #   <p>The rack unit height of the server.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>HEIGHT_2U</code> - 2 rack units.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>HEIGHT_1U</code> - 1 rack unit.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute ec2_capacities
+    #   <p>The Amazon EC2 capacities for the server.</p>
+    #   @return [Array<Types::EC2Capacity>]
+    class ServerSpecificationDetails < Struct.new(
+      nil,
+      :server_power_draw_kva,
+      :server_weight_lbs,
+      :server_height_inches,
+      :server_width_inches,
+      :server_depth_inches,
+      :rack_unit_height,
+      :ec2_capacities,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2007,6 +2959,36 @@ module Aws::Outposts
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute outpost_identifier
+    #   <p>The ID or ARN of the Outpost that you want to decommission.</p>
+    #   @return [String]
+    # @!attribute validate_only
+    #   <p>Validates the request without starting the decommission process.</p>
+    #   @return [Boolean]
+    class StartOutpostDecommissionInput < Struct.new(
+      nil,
+      :outpost_identifier,
+      :validate_only,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute status
+    #   <p>The status of the decommission request.</p>
+    #   @return [String]
+    # @!attribute blocking_resource_types
+    #   <p>The resources still associated with the Outpost that you are decommissioning.</p>
+    #   @return [Array<String>]
+    class StartOutpostDecommissionOutput < Struct.new(
+      nil,
+      :status,
+      :blocking_resource_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Provides information about your Amazon Web Services Outposts subscriptions.</p>
     # @!attribute subscription_id
     #   <p>The ID of the subscription that appears on the Amazon Web Services Billing Center console.</p>
@@ -2044,6 +3026,11 @@ module Aws::Outposts
     #               </li>
     #               <li>
     #                  <p>
+    #                     <b>PENDING</b> - Subscription has been created but billing
+    #             has not yet commenced because the subscription begin date has not been reached.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
     #                     <b>CANCELLED</b> - Subscription requests that are
     #             cancelled.</p>
     #               </li>
@@ -2058,6 +3045,10 @@ module Aws::Outposts
     # @!attribute end_date
     #   <p>The date your subscription ends.</p>
     #   @return [Time]
+    # @!attribute currency
+    #   <p>The currency of the subscription price. Currently only <code>USD</code> is
+    #         supported.</p>
+    #   @return [String]
     # @!attribute monthly_recurring_price
     #   <p>The amount you are billed each month in the subscription period.</p>
     #   @return [Float]
@@ -2072,8 +3063,37 @@ module Aws::Outposts
       :order_ids,
       :begin_date,
       :end_date,
+      :currency,
       :monthly_recurring_price,
       :upfront_price,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The pricing details for a subscription.</p>
+    # @!attribute payment_option
+    #   <p>The payment option.</p>
+    #   @return [String]
+    # @!attribute payment_term
+    #   <p>The payment term.</p>
+    #   @return [String]
+    # @!attribute upfront_price
+    #   <p>The upfront price.</p>
+    #   @return [Float]
+    # @!attribute monthly_recurring_price
+    #   <p>The monthly recurring price.</p>
+    #   @return [Float]
+    # @!attribute currency
+    #   <p>The currency of the price. Currently only <code>USD</code> is supported.</p>
+    #   @return [String]
+    class SubscriptionPricingDetails < Struct.new(
+      nil,
+      :payment_option,
+      :payment_term,
+      :upfront_price,
+      :monthly_recurring_price,
+      :currency,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2152,6 +3172,57 @@ module Aws::Outposts
     class UpdateOutpostOutput < Struct.new(
       nil,
       :outpost,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quote_identifier
+    #   <p>The ID of the quote.</p>
+    #   @return [String]
+    # @!attribute outpost_identifier
+    #   <p>The ID or ARN of the Outpost to associate with the quote. Specify an empty string to
+    #         remove the Outpost association.</p>
+    #   @return [String]
+    # @!attribute country_code
+    #   <p>The country code for the Outpost site location.</p>
+    #   @return [String]
+    # @!attribute requested_capacities
+    #   <p>The updated capacity requirements for the quote.</p>
+    #   @return [Array<Types::QuoteCapacity>]
+    # @!attribute requested_constraints
+    #   <p>The updated physical constraints for the quote.</p>
+    #   @return [Array<Types::QuoteConstraint>]
+    # @!attribute requested_payment_options
+    #   <p>The updated payment options to include in the quote pricing.</p>
+    #   @return [Array<String>]
+    # @!attribute requested_payment_terms
+    #   <p>The updated payment terms to include in the quote pricing.</p>
+    #   @return [Array<String>]
+    # @!attribute description
+    #   <p>A description for the quote.</p>
+    #   @return [String]
+    class UpdateQuoteInput < Struct.new(
+      nil,
+      :quote_identifier,
+      :outpost_identifier,
+      :country_code,
+      :requested_capacities,
+      :requested_constraints,
+      :requested_payment_options,
+      :requested_payment_terms,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute quote
+    #   <p>Information about the updated quote.</p>
+    #   @return [Types::Quote]
+    class UpdateQuoteOutput < Struct.new(
+      nil,
+      :quote,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2312,7 +3383,7 @@ module Aws::Outposts
     #   <p>The type of optical standard that you will use to attach the Outpost to your network. This
     #         field is dependent on uplink speed, fiber type, and distance to the upstream device.
     #         For more information
-    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a> 
+    #         about networking requirements for racks, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking">Network</a>
     #           in the Amazon Web Services Outposts User Guide.
     #           </p>
     #            <ul>
@@ -2408,6 +3479,30 @@ module Aws::Outposts
     class ValidationException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a VPC used for private connectivity, including its subnets and an
+    #       associated VPC endpoint.</p>
+    # @!attribute vpc_id
+    #   <p>The ID of the VPC used for private connectivity.</p>
+    #   @return [String]
+    # @!attribute subnet_ids
+    #   <p>The IDs of the subnets associated with the VPC endpoint. Currently, only one subnet is
+    #         supported.</p>
+    #   @return [Array<String>]
+    # @!attribute vpc_endpoint_id
+    #   <p>The ID of the interface VPC endpoint for the Amazon Web Services Outposts service. When specified, the endpoint
+    #         must be in the <code>available</code> state and the specified subnets must be associated with
+    #         it.</p>
+    #   @return [String]
+    class VpcInformation < Struct.new(
+      nil,
+      :vpc_id,
+      :subnet_ids,
+      :vpc_endpoint_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -18,9 +18,16 @@ module Aws::CloudFormation
     ActivateTypeOutput: StructureShape
     AfterContext: StringShape
     AfterValue: StringShape
+    AfterValueFrom: EnumShape
     AllowedValue: StringShape
     AllowedValues: ListShape
     AlreadyExistsException: StructureShape
+    Annotation: StructureShape
+    AnnotationList: ListShape
+    AnnotationName: StringShape
+    AnnotationRemediationLink: StringShape
+    AnnotationSeverityLevel: EnumShape
+    AnnotationStatus: EnumShape
     Arn: StringShape
     AttributeChangeType: EnumShape
     AutoDeployment: StructureShape
@@ -30,8 +37,10 @@ module Aws::CloudFormation
     BatchDescribeTypeConfigurationsErrors: ListShape
     BatchDescribeTypeConfigurationsInput: StructureShape
     BatchDescribeTypeConfigurationsOutput: StructureShape
+    BeaconStackOperationStatus: EnumShape
     BeforeContext: StringShape
     BeforeValue: StringShape
+    BeforeValueFrom: EnumShape
     BoxedInteger: IntegerShape
     BoxedMaxResults: IntegerShape
     CFNRegistryException: StructureShape
@@ -97,6 +106,9 @@ module Aws::CloudFormation
     DeleteStackSetOutput: StructureShape
     DeletionMode: EnumShape
     DeletionTime: TimestampShape
+    DeploymentConfig: StructureShape
+    DeploymentConfigMode: EnumShape
+    DeploymentMode: EnumShape
     DeploymentTargets: StructureShape
     DeprecatedStatus: EnumShape
     DeregisterTypeInput: StructureShape
@@ -107,6 +119,8 @@ module Aws::CloudFormation
     DescribeChangeSetHooksOutput: StructureShape
     DescribeChangeSetInput: StructureShape
     DescribeChangeSetOutput: StructureShape
+    DescribeEventsInput: StructureShape
+    DescribeEventsOutput: StructureShape
     DescribeGeneratedTemplateInput: StructureShape
     DescribeGeneratedTemplateOutput: StructureShape
     DescribeOrganizationsAccessInput: StructureShape
@@ -150,6 +164,8 @@ module Aws::CloudFormation
     DetectionReason: StringShape
     DifferenceType: EnumShape
     DisableRollback: BooleanShape
+    DisableValidation: BooleanShape
+    DriftIgnoredReason: EnumShape
     DriftedStackInstancesCount: IntegerShape
     EnableStackCreation: BooleanShape
     EnableTerminationProtection: BooleanShape
@@ -158,7 +174,9 @@ module Aws::CloudFormation
     EstimateTemplateCostInput: StructureShape
     EstimateTemplateCostOutput: StructureShape
     EvaluationType: EnumShape
+    EventFilter: StructureShape
     EventId: StringShape
+    EventType: EnumShape
     ExecuteChangeSetInput: StructureShape
     ExecuteChangeSetOutput: StructureShape
     ExecuteStackRefactorInput: StructureShape
@@ -169,9 +187,11 @@ module Aws::CloudFormation
     ExportName: StringShape
     ExportValue: StringShape
     Exports: ListShape
+    FailedEventsFilter: BooleanShape
     FailedStackInstancesCount: IntegerShape
     FailureToleranceCount: IntegerShape
     FailureTolerancePercentage: IntegerShape
+    ForceRollback: BooleanShape
     GeneratedTemplateDeletionPolicy: EnumShape
     GeneratedTemplateId: StringShape
     GeneratedTemplateName: StringShape
@@ -181,6 +201,8 @@ module Aws::CloudFormation
     GeneratedTemplateUpdateReplacePolicy: EnumShape
     GetGeneratedTemplateInput: StructureShape
     GetGeneratedTemplateOutput: StructureShape
+    GetHookResultInput: StructureShape
+    GetHookResultOutput: StructureShape
     GetStackPolicyInput: StructureShape
     GetStackPolicyOutput: StructureShape
     GetTemplateInput: StructureShape
@@ -198,6 +220,9 @@ module Aws::CloudFormation
     HookResultSummary: StructureShape
     HookStatus: EnumShape
     HookStatusReason: StringShape
+    HookTarget: StructureShape
+    HookTargetAction: EnumShape
+    HookTargetId: StringShape
     HookTargetType: EnumShape
     HookTargetTypeName: StringShape
     HookType: StringShape
@@ -226,6 +251,7 @@ module Aws::CloudFormation
     JazzResourceIdentifierPropertyKey: StringShape
     JazzResourceIdentifierPropertyValue: StringShape
     Key: StringShape
+    LastOperations: ListShape
     LastUpdatedTime: TimestampShape
     LimitExceededException: StructureShape
     LimitName: StringShape
@@ -273,6 +299,7 @@ module Aws::CloudFormation
     ListTypeVersionsOutput: StructureShape
     ListTypesInput: StructureShape
     ListTypesOutput: StructureShape
+    LiveResourceDrift: StructureShape
     LogGroupName: StringShape
     LoggingConfig: StructureShape
     LogicalIdHierarchy: StringShape
@@ -296,6 +323,10 @@ module Aws::CloudFormation
     NumberOfResources: IntegerShape
     OnFailure: EnumShape
     OnStackFailure: EnumShape
+    OperationEntry: StructureShape
+    OperationEvent: StructureShape
+    OperationEvents: ListShape
+    OperationId: StringShape
     OperationIdAlreadyExistsException: StructureShape
     OperationInProgressException: StructureShape
     OperationNotFoundException: StructureShape
@@ -305,6 +336,7 @@ module Aws::CloudFormation
     OperationResultFilters: ListShape
     OperationStatus: EnumShape
     OperationStatusCheckFailedException: StructureShape
+    OperationType: EnumShape
     OptionalSecureUrl: StringShape
     OrganizationStatus: EnumShape
     OrganizationalUnitId: StringShape
@@ -327,6 +359,7 @@ module Aws::CloudFormation
     PhysicalResourceIdContext: ListShape
     PhysicalResourceIdContextKeyValuePair: StructureShape
     PolicyAction: EnumShape
+    PreviousDeploymentContext: StringShape
     PrivateTypeArn: StringShape
     Properties: StringShape
     PropertyDescription: StringShape
@@ -359,6 +392,8 @@ module Aws::CloudFormation
     RegistrationTokenList: ListShape
     RegistryType: EnumShape
     RelatedResources: ListShape
+    RemediationMessageRemediationMessage: StringShape
+    RemediationMessageStatusMessage: StringShape
     Replacement: EnumShape
     RequestToken: StringShape
     RequiredActivatedType: StructureShape
@@ -373,6 +408,10 @@ module Aws::CloudFormation
     ResourceDefinitions: ListShape
     ResourceDetail: StructureShape
     ResourceDetails: ListShape
+    ResourceDriftActualValue: StringShape
+    ResourceDriftIgnoredAttribute: StructureShape
+    ResourceDriftIgnoredAttributes: ListShape
+    ResourceDriftPreviousValue: StringShape
     ResourceIdentifier: StringShape
     ResourceIdentifierProperties: MapShape
     ResourceIdentifierPropertyKey: StringShape
@@ -508,6 +547,7 @@ module Aws::CloudFormation
     StackResources: ListShape
     StackSet: StructureShape
     StackSetARN: StringShape
+    StackSetARNList: ListShape
     StackSetAutoDeploymentTargetSummaries: ListShape
     StackSetAutoDeploymentTargetSummary: StructureShape
     StackSetDriftDetectionDetails: StructureShape
@@ -615,6 +655,10 @@ module Aws::CloudFormation
     UsePreviousValue: BooleanShape
     ValidateTemplateInput: StructureShape
     ValidateTemplateOutput: StructureShape
+    ValidationName: StringShape
+    ValidationPath: StringShape
+    ValidationStatus: EnumShape
+    ValidationStatusReason: StringShape
     Value: StringShape
     Version: StringShape
     VersionBump: EnumShape

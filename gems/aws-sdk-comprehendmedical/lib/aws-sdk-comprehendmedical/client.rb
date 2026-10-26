@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:comprehendmedical)
@@ -123,7 +124,7 @@ module Aws::ComprehendMedical
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::ComprehendMedical
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -525,7 +526,7 @@ module Aws::ComprehendMedical
     #       operation. This new action uses a different model for determining the entities in your medical
     #       text and changes the way that some entities are returned in the output. You should use the
     #         <code>DetectEntitiesV2</code> operation in all new applications.</p>
-    #       
+    #
     #          <p>The <code>DetectEntitiesV2</code> operation returns the <code>Acuity</code> and
     #         <code>Direction</code> entities as attributes instead of types. </p>
     # @param [Hash, Types::DetectEntitiesV2Request] params
@@ -1380,7 +1381,7 @@ module Aws::ComprehendMedical
     #   <p>The output properties for a detection job.</p>
     # @option params [String] :data_access_role_arn
     #   <p>
-    #         The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. 
+    #         The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data.
     #       </p>
     # @option params [String] :job_name
     #   <p>
@@ -1644,6 +1645,7 @@ module Aws::ComprehendMedical
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

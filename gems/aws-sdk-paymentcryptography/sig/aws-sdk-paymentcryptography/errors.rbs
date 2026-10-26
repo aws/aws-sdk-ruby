@@ -9,6 +9,9 @@ module Aws::PaymentCryptography
     class InternalServerException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class PublicPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def resource_id: () -> String?
     end

@@ -137,6 +137,9 @@ module Aws::IoT
     AwsJobRolloutRatePerMinute: IntegerShape
     AwsJobTimeoutConfig: StructureShape
     AwsJobTimeoutInProgressTimeoutInMinutes: IntegerShape
+    AwsJsonSubstitutionCommandPreprocessorConfig: StructureShape
+    BatchAcrossTopics: BooleanShape
+    BatchConfig: StructureShape
     BatchMode: BooleanShape
     BeforeSubstitutionFlag: BooleanShape
     Behavior: StructureShape
@@ -247,9 +250,18 @@ module Aws::IoT
     CommandParameterDescription: StringShape
     CommandParameterList: ListShape
     CommandParameterName: StringShape
+    CommandParameterType: EnumShape
     CommandParameterValue: StructureShape
+    CommandParameterValueComparisonOperand: StructureShape
+    CommandParameterValueComparisonOperator: EnumShape
+    CommandParameterValueCondition: StructureShape
+    CommandParameterValueConditionList: ListShape
+    CommandParameterValueNumberRange: StructureShape
+    CommandParameterValueStringList: ListShape
     CommandPayload: StructureShape
     CommandPayloadBlob: BlobShape
+    CommandPayloadTemplateString: StringShape
+    CommandPreprocessor: StructureShape
     CommandSummary: StructureShape
     CommandSummaryList: ListShape
     Comment: StringShape
@@ -268,6 +280,7 @@ module Aws::IoT
     ConflictingResourceUpdateException: StructureShape
     ConnectionAttributeName: StringShape
     ConnectivityApiThingName: StringShape
+    ConnectivityFilter: StructureShape
     ConnectivityTimestamp: IntegerShape
     ConsecutiveDatapointsToAlarm: IntegerShape
     ConsecutiveDatapointsToClear: IntegerShape
@@ -559,6 +572,7 @@ module Aws::IoT
     ElasticsearchId: StringShape
     ElasticsearchIndex: StringShape
     ElasticsearchType: StringShape
+    EnableBatching: BooleanShape
     EnableCachingForHttp: BooleanShape
     EnableIoTLoggingParams: StructureShape
     EnableOCSPCheck: BooleanShape
@@ -603,6 +617,8 @@ module Aws::IoT
     FirehoseAction: StructureShape
     FirehoseSeparator: StringShape
     Flag: BooleanShape
+    FleetIndexingApi: EnumShape
+    FleetIndexingApiList: ListShape
     FleetMetricArn: StringShape
     FleetMetricDescription: StringShape
     FleetMetricName: StringShape
@@ -692,6 +708,26 @@ module Aws::IoT
     IndexSchema: StringShape
     IndexStatus: EnumShape
     IndexingFilter: StructureShape
+    InfluxDBAction: StructureShape
+    InfluxDBBatchAcrossTopics: BooleanShape
+    InfluxDBBatchConfig: StructureShape
+    InfluxDBDatabaseName: StringShape
+    InfluxDBDestinationConfiguration: StructureShape
+    InfluxDBDestinationProperties: StructureShape
+    InfluxDBDestinationSummary: StructureShape
+    InfluxDBMaxBatchOpenMs: IntegerShape
+    InfluxDBMaxBatchSize: IntegerShape
+    InfluxDBMaxBatchSizeBytes: IntegerShape
+    InfluxDBOrganization: StringShape
+    InfluxDBSecretId: StringShape
+    InfluxDBSecretKey: StringShape
+    InfluxDBSecretType: EnumShape
+    InfluxDBTableName: StringShape
+    InfluxDBTagMap: MapShape
+    InfluxDBTagName: StringShape
+    InfluxDBTagValue: StringShape
+    InfluxDBTimestampUnit: EnumShape
+    InfluxDBVersion: EnumShape
     InlineDocument: StringShape
     InputName: StringShape
     IntegerParameterValue: IntegerShape
@@ -747,6 +783,7 @@ module Aws::IoT
     KafkaHeaderKey: StringShape
     KafkaHeaderValue: StringShape
     KafkaHeaders: ListShape
+    KeepAliveDuration: IntegerShape
     Key: StringShape
     KeyName: StringShape
     KeyPair: StructureShape
@@ -893,6 +930,10 @@ module Aws::IoT
     ListViolationEventsResponse: StructureShape
     LocationAction: StructureShape
     LocationTimestamp: StructureShape
+    LogDestination: StringShape
+    LogEventConfiguration: StructureShape
+    LogEventConfigurations: ListShape
+    LogEventType: StringShape
     LogGroupName: StringShape
     LogLevel: EnumShape
     LogTarget: StructureShape
@@ -911,6 +952,9 @@ module Aws::IoT
     ManagedJobTemplatesSummaryList: ListShape
     ManagedTemplateVersion: StringShape
     Marker: StringShape
+    MaxBatchOpenMs: IntegerShape
+    MaxBatchSize: IntegerShape
+    MaxBatchSizeBytes: IntegerShape
     MaxBuckets: IntegerShape
     MaxJobExecutionsPerMin: IntegerShape
     MaxResults: IntegerShape
@@ -982,6 +1026,7 @@ module Aws::IoT
     OptionalVersion: IntegerShape
     OutgoingCertificate: StructureShape
     OutgoingCertificates: ListShape
+    OutputFormat: EnumShape
     OverrideDynamicGroups: BooleanShape
     PackageArn: StringShape
     PackageCatalogMaxResults: IntegerShape
@@ -1188,6 +1233,7 @@ module Aws::IoT
     ServiceQuotaExceededException: StructureShape
     ServiceType: EnumShape
     ServiceUnavailableException: StructureShape
+    SessionExpiry: IntegerShape
     SetAsActive: BooleanShape
     SetAsActiveFlag: BooleanShape
     SetAsDefault: BooleanShape
@@ -1210,6 +1256,8 @@ module Aws::IoT
     SnsAction: StructureShape
     SnsTopicArn: StringShape
     SortOrder: EnumShape
+    SourceIp: StringShape
+    SourcePort: IntegerShape
     SqlParseException: StructureShape
     SqsAction: StructureShape
     StartAuditMitigationActionsTaskRequest: StructureShape
@@ -1275,6 +1323,8 @@ module Aws::IoT
     TargetAuditCheckNames: ListShape
     TargetFieldName: StringShape
     TargetFieldOrder: EnumShape
+    TargetIp: StringShape
+    TargetPort: IntegerShape
     TargetSelection: EnumShape
     TargetViolationIdsForDetectMitigationActions: ListShape
     Targets: ListShape
@@ -1455,6 +1505,7 @@ module Aws::IoT
     ValidationException: StructureShape
     Value: StringShape
     Variance: FloatShape
+    VerboseFlag: BooleanShape
     VerificationState: EnumShape
     VerificationStateDescription: StringShape
     Version: IntegerShape
@@ -1472,6 +1523,7 @@ module Aws::IoT
     VpcDestinationConfiguration: StructureShape
     VpcDestinationProperties: StructureShape
     VpcDestinationSummary: StructureShape
+    VpcEndpointId: StringShape
     VpcId: StringShape
     WaitingForDataCollectionChecksCount: IntegerShape
     ResourceId: StringShape

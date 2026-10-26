@@ -99,6 +99,36 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute ids
+    #   <p>A list of collection group IDs. You can't provide names and IDs in the same request.</p>
+    #   @return [Array<String>]
+    # @!attribute names
+    #   <p>A list of collection group names. You can't provide names and IDs in the same request.</p>
+    #   @return [Array<String>]
+    class BatchGetCollectionGroupRequest < Struct.new(
+      nil,
+      :ids,
+      :names,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collection_group_details
+    #   <p>Details about each collection group.</p>
+    #   @return [Array<Types::CollectionGroupDetail>]
+    # @!attribute collection_group_error_details
+    #   <p>Error information for the request.</p>
+    #   @return [Array<Types::CollectionGroupErrorDetail>]
+    class BatchGetCollectionGroupResponse < Struct.new(
+      nil,
+      :collection_group_details,
+      :collection_group_error_details,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute ids
     #   <p>A list of collection IDs. You can't provide names and IDs in the same request. The ID is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.</p>
     #   @return [Array<String>]
     # @!attribute names
@@ -206,6 +236,22 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Capacity details for an OpenSearch Serverless collection group, including the current capacity and autoscaling status.</p>
+    # @!attribute capacity_in_ocu
+    #   <p>The current capacity in OpenSearch Compute Units (OCUs).</p>
+    #   @return [Float]
+    # @!attribute autoscaling_status
+    #   <p>The current autoscaling status for the collection group.</p>
+    #   @return [String]
+    class CapacityDetails < Struct.new(
+      nil,
+      :capacity_in_ocu,
+      :autoscaling_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units (OCUs). These limits are used to scale your collections based on the current workload. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>
     # @!attribute max_indexing_capacity_in_ocu
     #   <p>The maximum indexing capacity for collections.</p>
@@ -247,6 +293,12 @@ module Aws::OpenSearchServerless
     # @!attribute standby_replicas
     #   <p>Details about an OpenSearch Serverless collection.</p>
     #   @return [String]
+    # @!attribute deletion_protection
+    #   <p>Indicates whether deletion protection is <code>ENABLED</code> or <code>DISABLED</code> for the collection.</p>
+    #   @return [String]
+    # @!attribute vector_options
+    #   <p>Configuration options for vector search capabilities in the collection.</p>
+    #   @return [Types::VectorOptions]
     # @!attribute created_date
     #   <p>The Epoch time when the collection was created.</p>
     #   @return [Integer]
@@ -268,6 +320,9 @@ module Aws::OpenSearchServerless
     # @!attribute failure_message
     #   <p>A message associated with the failure code.</p>
     #   @return [String]
+    # @!attribute collection_group_name
+    #   <p>The name of the collection group that contains this collection.</p>
+    #   @return [String]
     class CollectionDetail < Struct.new(
       nil,
       :id,
@@ -278,6 +333,8 @@ module Aws::OpenSearchServerless
       :arn,
       :kms_key_arn,
       :standby_replicas,
+      :deletion_protection,
+      :vector_options,
       :created_date,
       :last_modified_date,
       :collection_endpoint,
@@ -285,6 +342,7 @@ module Aws::OpenSearchServerless
       :fips_endpoints,
       :failure_code,
       :failure_message,
+      :collection_group_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -321,10 +379,150 @@ module Aws::OpenSearchServerless
     # @!attribute status
     #   <p>The current status of the collection.</p>
     #   @return [String]
+    # @!attribute collection_group_name
+    #   <p>The name of the collection group to filter by.</p>
+    #   @return [String]
     class CollectionFilters < Struct.new(
       nil,
       :name,
       :status,
+      :collection_group_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Capacity limits for a collection group. These limits define the minimum and maximum OpenSearch Compute Units (OCUs) for indexing and search operations that can be used by collections in the group.</p>
+    # @!attribute max_indexing_capacity_in_ocu
+    #   <p>The maximum indexing capacity for collections in the group.</p>
+    #   @return [Float]
+    # @!attribute max_search_capacity_in_ocu
+    #   <p>The maximum search capacity for collections in the group.</p>
+    #   @return [Float]
+    # @!attribute min_indexing_capacity_in_ocu
+    #   <p>The minimum indexing capacity for collections in the group.</p>
+    #   @return [Float]
+    # @!attribute min_search_capacity_in_ocu
+    #   <p>The minimum search capacity for collections in the group.</p>
+    #   @return [Float]
+    class CollectionGroupCapacityLimits < Struct.new(
+      nil,
+      :max_indexing_capacity_in_ocu,
+      :max_search_capacity_in_ocu,
+      :min_indexing_capacity_in_ocu,
+      :min_search_capacity_in_ocu,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about a collection group.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the collection group.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the collection group.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the collection group.</p>
+    #   @return [String]
+    # @!attribute standby_replicas
+    #   <p>Indicates whether standby replicas are used for the collection group.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the collection group.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A map of key-value pairs associated with the collection group.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute created_date
+    #   <p>The Epoch time when the collection group was created.</p>
+    #   @return [Integer]
+    # @!attribute capacity_limits
+    #   <p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>
+    #   @return [Types::CollectionGroupCapacityLimits]
+    # @!attribute current_capacity
+    #   <p>Current search and indexing capacity for the collection group.</p>
+    #   @return [Types::CurrentCapacity]
+    # @!attribute number_of_collections
+    #   <p>The number of collections associated with the collection group.</p>
+    #   @return [Integer]
+    # @!attribute generation
+    #   <p>The generation of Amazon OpenSearch Serverless for the collection group.</p>
+    #   @return [String]
+    class CollectionGroupDetail < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :name,
+      :standby_replicas,
+      :description,
+      :tags,
+      :created_date,
+      :capacity_limits,
+      :current_capacity,
+      :number_of_collections,
+      :generation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Error details for a collection group operation.</p>
+    # @!attribute id
+    #   <p>If the request contains collection group IDs, the response includes the IDs provided in the request.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>If the request contains collection group names, the response includes the names provided in the request.</p>
+    #   @return [String]
+    # @!attribute error_message
+    #   <p>A description of the error. For example, <code>The specified Collection Group is not found.</code> </p>
+    #   @return [String]
+    # @!attribute error_code
+    #   <p>The error code for the request. For example, <code>NOT_FOUND</code>.</p>
+    #   @return [String]
+    class CollectionGroupErrorDetail < Struct.new(
+      nil,
+      :id,
+      :name,
+      :error_message,
+      :error_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a collection group.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the collection group.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the collection group.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the collection group.</p>
+    #   @return [String]
+    # @!attribute number_of_collections
+    #   <p>The number of collections within the collection group.</p>
+    #   @return [Integer]
+    # @!attribute created_date
+    #   <p>The Epoch time when the collection group was created.</p>
+    #   @return [Integer]
+    # @!attribute capacity_limits
+    #   <p>Capacity limits for a collection group. These limits define the minimum and maximum OpenSearch Compute Units (OCUs) for indexing and search operations that can be used by collections in the group.</p>
+    #   @return [Types::CollectionGroupCapacityLimits]
+    # @!attribute generation
+    #   <p>The generation of Amazon OpenSearch Serverless for the collection group.</p>
+    #   @return [String]
+    class CollectionGroupSummary < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :name,
+      :number_of_collections,
+      :created_date,
+      :capacity_limits,
+      :generation,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -343,18 +541,26 @@ module Aws::OpenSearchServerless
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the collection.</p>
     #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The ARN of the Amazon Web Services Key Management Service key used to encrypt the collection.</p>
+    #   @return [String]
+    # @!attribute collection_group_name
+    #   <p>The name of the collection group that contains this collection.</p>
+    #   @return [String]
     class CollectionSummary < Struct.new(
       nil,
       :id,
       :name,
       :status,
       :arn,
+      :kms_key_arn,
+      :collection_group_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
     end
 
-    # <p>When creating a resource, thrown when a resource with the same name already exists or is being created. When deleting a resource, thrown when the resource is not in the ACTIVE or FAILED state.</p>
+    # <p>When creating a resource, thrown when a resource with the same name already exists or is being created. When deleting a resource, thrown when the resource is not in the ACTIVE, FAILED, or UPDATE_FAILED state.</p>
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
@@ -428,12 +634,21 @@ module Aws::OpenSearchServerless
     # @!attribute standby_replicas
     #   <p>Creates details about an OpenSearch Serverless collection.</p>
     #   @return [String]
+    # @!attribute deletion_protection
+    #   <p>Indicates whether deletion protection is <code>ENABLED</code> or <code>DISABLED</code> for the collection.</p>
+    #   @return [String]
+    # @!attribute vector_options
+    #   <p>Configuration options for vector search capabilities in the collection.</p>
+    #   @return [Types::VectorOptions]
     # @!attribute created_date
     #   <p>The Epoch time when the collection was created.</p>
     #   @return [Integer]
     # @!attribute last_modified_date
     #   <p>The date and time when the collection was last modified.</p>
     #   @return [Integer]
+    # @!attribute collection_group_name
+    #   <p>The name of the collection group that contains this collection.</p>
+    #   @return [String]
     class CreateCollectionDetail < Struct.new(
       nil,
       :id,
@@ -444,8 +659,101 @@ module Aws::OpenSearchServerless
       :arn,
       :kms_key_arn,
       :standby_replicas,
+      :deletion_protection,
+      :vector_options,
       :created_date,
       :last_modified_date,
+      :collection_group_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about the created collection group.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the collection group.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the collection group.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the collection group.</p>
+    #   @return [String]
+    # @!attribute standby_replicas
+    #   <p>Indicates whether standby replicas are used for the collection group.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the collection group.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A map of key-value pairs associated with the collection group.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute created_date
+    #   <p>The Epoch time when the collection group was created.</p>
+    #   @return [Integer]
+    # @!attribute capacity_limits
+    #   <p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>
+    #   @return [Types::CollectionGroupCapacityLimits]
+    # @!attribute generation
+    #   <p>The generation of Amazon OpenSearch Serverless for the collection group.</p>
+    #   @return [String]
+    class CreateCollectionGroupDetail < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :name,
+      :standby_replicas,
+      :description,
+      :tags,
+      :created_date,
+      :capacity_limits,
+      :generation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the collection group.</p>
+    #   @return [String]
+    # @!attribute standby_replicas
+    #   <p>Indicates whether standby replicas should be used for a collection group.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the collection group.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection group.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute capacity_limits
+    #   <p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs). These limits control the maximum and minimum capacity for collections within the group.</p>
+    #   @return [Types::CollectionGroupCapacityLimits]
+    # @!attribute generation
+    #   <p>The generation of Amazon OpenSearch Serverless for the collection group. Valid values are <code>CLASSIC</code> and <code>NEXTGEN</code>.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    #   @return [String]
+    class CreateCollectionGroupRequest < Struct.new(
+      nil,
+      :name,
+      :standby_replicas,
+      :description,
+      :tags,
+      :capacity_limits,
+      :generation,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute create_collection_group_detail
+    #   <p>Details about the created collection group.</p>
+    #   @return [Types::CreateCollectionGroupDetail]
+    class CreateCollectionGroupResponse < Struct.new(
+      nil,
+      :create_collection_group_detail,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -466,6 +774,18 @@ module Aws::OpenSearchServerless
     # @!attribute standby_replicas
     #   <p>Indicates whether standby replicas should be used for a collection.</p>
     #   @return [String]
+    # @!attribute vector_options
+    #   <p>Configuration options for vector search capabilities in the collection.</p>
+    #   @return [Types::VectorOptions]
+    # @!attribute collection_group_name
+    #   <p>The name of the collection group to associate with the collection.</p>
+    #   @return [String]
+    # @!attribute encryption_config
+    #   <p>Encryption settings for the collection.</p>
+    #   @return [Types::EncryptionConfig]
+    # @!attribute deletion_protection
+    #   <p>Indicates whether to enable deletion protection for the collection. When set to <code>ENABLED</code>, the collection cannot be deleted.</p>
+    #   @return [String]
     # @!attribute client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
@@ -476,6 +796,10 @@ module Aws::OpenSearchServerless
       :description,
       :tags,
       :standby_replicas,
+      :vector_options,
+      :collection_group_name,
+      :encryption_config,
+      :deletion_protection,
       :client_token,
       keyword_init: true
     )
@@ -587,10 +911,10 @@ module Aws::OpenSearchServerless
     #   <p>A description of the security configuration.</p>
     #   @return [String]
     # @!attribute saml_options
-    #   <p>Describes SAML options in in the form of a key-value map. This field is required if you specify <code>SAML</code> for the <code>type</code> parameter.</p>
+    #   <p>Describes SAML options in the form of a key-value map. This field is required if you specify <code>SAML</code> for the <code>type</code> parameter.</p>
     #   @return [Types::SamlConfigOptions]
     # @!attribute iam_identity_center_options
-    #   <p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify iamidentitycenter for the type parameter.</p>
+    #   <p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify <code>iamidentitycenter</code> for the <code>type</code> parameter.</p>
     #   @return [Types::CreateIamIdentityCenterConfigOptions]
     # @!attribute iam_federation_options
     #   <p>Describes IAM federation options in the form of a key-value map. This field is required if you specify <code>iamFederation</code> for the <code>type</code> parameter.</p>
@@ -719,6 +1043,22 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Current search and indexing capacity for an OpenSearch Serverless collection group. Measured in OpenSearch Compute Units (OCUs).</p>
+    # @!attribute search
+    #   <p>The search capacity for the collection group.</p>
+    #   @return [Types::CapacityDetails]
+    # @!attribute indexing
+    #   <p>The indexing capacity for the collection group.</p>
+    #   @return [Types::CapacityDetails]
+    class CurrentCapacity < Struct.new(
+      nil,
+      :search,
+      :indexing,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute type
     #   <p>The type of policy.</p>
     #   @return [String]
@@ -755,11 +1095,37 @@ module Aws::OpenSearchServerless
     # @!attribute status
     #   <p>The current status of the collection.</p>
     #   @return [String]
+    # @!attribute deletion_protection
+    #   <p>Indicates whether deletion protection is <code>ENABLED</code> or <code>DISABLED</code> for the collection.</p>
+    #   @return [String]
     class DeleteCollectionDetail < Struct.new(
       nil,
       :id,
       :name,
       :status,
+      :deletion_protection,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the collection group to delete.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    #   @return [String]
+    class DeleteCollectionGroupRequest < Struct.new(
+      nil,
+      :id,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteCollectionGroupResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -984,6 +1350,22 @@ module Aws::OpenSearchServerless
       :resource,
       :error_message,
       :error_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Encryption settings for a collection.</p>
+    # @!attribute a_ws_owned_key
+    #   <p>Indicates whether to use an Amazon Web Services-owned key for encryption.</p>
+    #   @return [Boolean]
+    # @!attribute kms_key_arn
+    #   <p>The ARN of the Amazon Web Services Key Management Service key used to encrypt the collection.</p>
+    #   @return [String]
+    class EncryptionConfig < Struct.new(
+      nil,
+      :a_ws_owned_key,
+      :kms_key_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1384,6 +1766,36 @@ module Aws::OpenSearchServerless
     class ListAccessPoliciesOutput < Struct.new(
       nil,
       :access_policy_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>If your initial <code>ListCollectionGroups</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListCollectionGroups</code> operations, which returns results in the next page.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return. Default is 20. You can use <code>nextToken</code> to get the next page of results.</p>
+    #   @return [Integer]
+    class ListCollectionGroupsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute collection_group_summaries
+    #   <p>Details about each collection group.</p>
+    #   @return [Array<Types::CollectionGroupSummary>]
+    # @!attribute next_token
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
+    #   @return [String]
+    class ListCollectionGroupsResponse < Struct.new(
+      nil,
+      :collection_group_summaries,
       :next_token,
       keyword_init: true
     )
@@ -1981,6 +2393,9 @@ module Aws::OpenSearchServerless
     # @!attribute description
     #   <p>The description of the collection.</p>
     #   @return [String]
+    # @!attribute vector_options
+    #   <p>Configuration options for vector search capabilities in the collection.</p>
+    #   @return [Types::VectorOptions]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the collection.</p>
     #   @return [String]
@@ -1990,6 +2405,9 @@ module Aws::OpenSearchServerless
     # @!attribute last_modified_date
     #   <p>The date and time when the collection was last modified.</p>
     #   @return [Integer]
+    # @!attribute deletion_protection
+    #   <p>Indicates whether deletion protection is <code>ENABLED</code> or <code>DISABLED</code> for the collection.</p>
+    #   @return [String]
     class UpdateCollectionDetail < Struct.new(
       nil,
       :id,
@@ -1997,9 +2415,85 @@ module Aws::OpenSearchServerless
       :status,
       :type,
       :description,
+      :vector_options,
       :arn,
       :created_date,
       :last_modified_date,
+      :deletion_protection,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Details about the updated collection group.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the collection group.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the collection group.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the collection group.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the collection group.</p>
+    #   @return [String]
+    # @!attribute capacity_limits
+    #   <p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>
+    #   @return [Types::CollectionGroupCapacityLimits]
+    # @!attribute created_date
+    #   <p>The Epoch time when the collection group was created.</p>
+    #   @return [Integer]
+    # @!attribute last_modified_date
+    #   <p>The date and time when the collection group was last modified.</p>
+    #   @return [Integer]
+    # @!attribute generation
+    #   <p>The generation of Amazon OpenSearch Serverless for the collection group.</p>
+    #   @return [String]
+    class UpdateCollectionGroupDetail < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :name,
+      :description,
+      :capacity_limits,
+      :created_date,
+      :last_modified_date,
+      :generation,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the collection group to update.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A new description for the collection group.</p>
+    #   @return [String]
+    # @!attribute capacity_limits
+    #   <p>Updated capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>
+    #   @return [Types::CollectionGroupCapacityLimits]
+    # @!attribute client_token
+    #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
+    #   @return [String]
+    class UpdateCollectionGroupRequest < Struct.new(
+      nil,
+      :id,
+      :description,
+      :capacity_limits,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute update_collection_group_detail
+    #   <p>Details about the updated collection group.</p>
+    #   @return [Types::UpdateCollectionGroupDetail]
+    class UpdateCollectionGroupResponse < Struct.new(
+      nil,
+      :update_collection_group_detail,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2011,6 +2505,12 @@ module Aws::OpenSearchServerless
     # @!attribute description
     #   <p>A description of the collection.</p>
     #   @return [String]
+    # @!attribute vector_options
+    #   <p>Configuration options for vector search capabilities in the collection.</p>
+    #   @return [Types::VectorOptions]
+    # @!attribute deletion_protection
+    #   <p>Indicates whether to enable or disable deletion protection for the collection. When set to <code>ENABLED</code>, the collection cannot be deleted.</p>
+    #   @return [String]
     # @!attribute client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
     #   @return [String]
@@ -2018,6 +2518,8 @@ module Aws::OpenSearchServerless
       nil,
       :id,
       :description,
+      :vector_options,
+      :deletion_protection,
       :client_token,
       keyword_init: true
     )
@@ -2287,6 +2789,18 @@ module Aws::OpenSearchServerless
     class ValidationException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration options for vector search capabilities in an OpenSearch Serverless collection.</p>
+    # @!attribute serverless_vector_acceleration
+    #   <p>Specifies whether serverless vector acceleration is enabled for the collection.</p>
+    #   @return [String]
+    class VectorOptions < Struct.new(
+      nil,
+      :serverless_vector_acceleration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

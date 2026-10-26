@@ -351,6 +351,7 @@ module Aws::GameLift
         ?deployment_details: Types::DeploymentDetails,
         ?log_configuration: Types::LogConfiguration,
         ?location_attributes: Array[Types::ContainerFleetLocationAttributes],
+        ?player_gateway_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -376,6 +377,7 @@ module Aws::GameLift
       attr_accessor deployment_details: Types::DeploymentDetails?
       attr_accessor log_configuration: Types::LogConfiguration?
       attr_accessor location_attributes: Array[Types::ContainerFleetLocationAttributes]?
+      attr_accessor player_gateway_mode: String?
     end
 
     module ContainerFleetBillingType
@@ -389,11 +391,13 @@ module Aws::GameLift
       def initialize: (
         ?location: String,
         ?status: String,
+        ?player_gateway_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor location: String?
       attr_accessor status: String?
+      attr_accessor player_gateway_status: String?
     end
 
     module ContainerFleetLocationStatus
@@ -404,6 +408,7 @@ module Aws::GameLift
       ACTIVE: String
       UPDATING: String
       DELETING: String
+      EXPIRED: String
     end
 
     module ContainerFleetRemoveAttribute
@@ -418,6 +423,7 @@ module Aws::GameLift
       ACTIVE: String
       UPDATING: String
       DELETING: String
+      EXPIRED: String
     end
 
     class ContainerGroupDefinition
@@ -455,10 +461,29 @@ module Aws::GameLift
       attr_accessor status_reason: String?
     end
 
+    module ContainerGroupDefinitionRemoveAttribute
+      TOTAL_VCPU_LIMIT: String
+    end
+
     module ContainerGroupDefinitionStatus
       READY: String
       COPYING: String
       FAILED: String
+    end
+
+    class ContainerGroupPortMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?container_runtime_id: String,
+        ?container_port_mappings: Array[Types::ContainerPortMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor container_runtime_id: String?
+      attr_accessor container_port_mappings: Array[Types::ContainerPortMapping]?
     end
 
     module ContainerGroupType
@@ -531,6 +556,21 @@ module Aws::GameLift
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor container_port_ranges: Array[Types::ContainerPortRange]?
+    end
+
+    class ContainerPortMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_port: Integer,
+        ?connection_port: Integer,
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_port: Integer?
+      attr_accessor connection_port: Integer?
+      attr_accessor protocol: String?
     end
 
     class ContainerPortRange
@@ -631,6 +671,7 @@ module Aws::GameLift
         ?game_session_creation_limit_policy: Types::GameSessionCreationLimitPolicy,
         ?log_configuration: Types::LogConfiguration,
         ?tags: Array[Types::Tag],
+        ?player_gateway_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -649,6 +690,7 @@ module Aws::GameLift
       attr_accessor game_session_creation_limit_policy: Types::GameSessionCreationLimitPolicy?
       attr_accessor log_configuration: Types::LogConfiguration?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor player_gateway_mode: String?
     end
 
     class CreateContainerFleetOutput
@@ -727,6 +769,8 @@ module Aws::GameLift
         ?compute_type: String,
         ?anywhere_configuration: Types::AnywhereConfiguration,
         ?instance_role_credentials_provider: String,
+        ?player_gateway_mode: String,
+        ?player_gateway_configuration: Types::PlayerGatewayConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -753,6 +797,8 @@ module Aws::GameLift
       attr_accessor compute_type: String?
       attr_accessor anywhere_configuration: Types::AnywhereConfiguration?
       attr_accessor instance_role_credentials_provider: String?
+      attr_accessor player_gateway_mode: String?
+      attr_accessor player_gateway_configuration: Types::PlayerGatewayConfiguration?
     end
 
     class CreateFleetLocationsInput
@@ -1077,6 +1123,7 @@ module Aws::GameLift
         ?storage_location: Types::S3Location,
         ?zip_file: String,
         ?tags: Array[Types::Tag],
+        ?node_js_version: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1085,6 +1132,7 @@ module Aws::GameLift
       attr_accessor storage_location: Types::S3Location?
       attr_accessor zip_file: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor node_js_version: String?
     end
 
     class CreateScriptOutput
@@ -1616,6 +1664,50 @@ module Aws::GameLift
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor container_group_definition: Types::ContainerGroupDefinition?
+    end
+
+    class DescribeContainerGroupPortMappingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?container_group_type: String,
+        ?compute_name: String,
+        ?instance_id: String,
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor container_group_type: String?
+      attr_accessor compute_name: String?
+      attr_accessor instance_id: String?
+      attr_accessor container_name: String?
+    end
+
+    class DescribeContainerGroupPortMappingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fleet_id: String,
+        ?fleet_arn: String,
+        ?location: String,
+        ?container_group_definition_arn: String,
+        ?container_group_type: String,
+        ?compute_name: String,
+        ?instance_id: String,
+        ?container_group_port_mappings: Array[Types::ContainerGroupPortMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fleet_id: String?
+      attr_accessor fleet_arn: String?
+      attr_accessor location: String?
+      attr_accessor container_group_definition_arn: String?
+      attr_accessor container_group_type: String?
+      attr_accessor compute_name: String?
+      attr_accessor instance_id: String?
+      attr_accessor container_group_port_mappings: Array[Types::ContainerGroupPortMapping]?
     end
 
     class DescribeEC2InstanceLimitsInput
@@ -2919,6 +3011,40 @@ module Aws::GameLift
       r7a_24xlarge: String
       r7a_32xlarge: String
       r7a_48xlarge: String
+      c8a_medium: String
+      c8a_large: String
+      c8a_xlarge: String
+      c8a_2xlarge: String
+      c8a_4xlarge: String
+      c8a_8xlarge: String
+      c8i_large: String
+      c8i_xlarge: String
+      c8i_2xlarge: String
+      c8i_4xlarge: String
+      c8i_8xlarge: String
+      c9g_medium: String
+      c9g_large: String
+      c9g_xlarge: String
+      c9g_2xlarge: String
+      c9g_4xlarge: String
+      c9g_8xlarge: String
+      m8a_medium: String
+      m8a_large: String
+      m8a_xlarge: String
+      m8a_2xlarge: String
+      m8a_4xlarge: String
+      m8a_8xlarge: String
+      m8i_large: String
+      m8i_xlarge: String
+      m8i_2xlarge: String
+      m8i_4xlarge: String
+      m8i_8xlarge: String
+      m9g_medium: String
+      m9g_large: String
+      m9g_xlarge: String
+      m9g_2xlarge: String
+      m9g_4xlarge: String
+      m9g_8xlarge: String
     end
 
     class Event
@@ -2948,6 +3074,7 @@ module Aws::GameLift
       GENERIC_EVENT: String
       FLEET_CREATED: String
       FLEET_DELETED: String
+      FLEET_EXPIRED: String
       FLEET_SCALING_EVENT: String
       FLEET_STATE_DOWNLOADING: String
       FLEET_STATE_VALIDATING: String
@@ -3053,6 +3180,8 @@ module Aws::GameLift
         ?compute_type: String,
         ?anywhere_configuration: Types::AnywhereConfiguration,
         ?instance_role_credentials_provider: String,
+        ?player_gateway_mode: String,
+        ?player_gateway_configuration: Types::PlayerGatewayConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3082,6 +3211,8 @@ module Aws::GameLift
       attr_accessor compute_type: String?
       attr_accessor anywhere_configuration: Types::AnywhereConfiguration?
       attr_accessor instance_role_credentials_provider: String?
+      attr_accessor player_gateway_mode: String?
+      attr_accessor player_gateway_configuration: Types::PlayerGatewayConfiguration?
     end
 
     class FleetCapacity
@@ -3094,6 +3225,7 @@ module Aws::GameLift
         ?instance_counts: Types::EC2InstanceCounts,
         ?location: String,
         ?game_server_container_group_counts: Types::GameServerContainerGroupCounts,
+        ?managed_capacity_configuration: Types::ManagedCapacityConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3103,6 +3235,7 @@ module Aws::GameLift
       attr_accessor instance_counts: Types::EC2InstanceCounts?
       attr_accessor location: String?
       attr_accessor game_server_container_group_counts: Types::GameServerContainerGroupCounts?
+      attr_accessor managed_capacity_configuration: Types::ManagedCapacityConfiguration?
     end
 
     class FleetCapacityExceededException
@@ -3154,6 +3287,7 @@ module Aws::GameLift
       ERROR: String
       TERMINATED: String
       NOT_FOUND: String
+      EXPIRED: String
     end
 
     module FleetType
@@ -3249,6 +3383,8 @@ module Aws::GameLift
         ?port_configuration: Types::ContainerPortConfiguration,
         ?resolved_image_digest: String,
         ?server_sdk_version: String,
+        ?linux_capabilities: Types::LinuxCapabilities,
+        ?vcpu: Float,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3260,6 +3396,8 @@ module Aws::GameLift
       attr_accessor port_configuration: Types::ContainerPortConfiguration?
       attr_accessor resolved_image_digest: String?
       attr_accessor server_sdk_version: String?
+      attr_accessor linux_capabilities: Types::LinuxCapabilities?
+      attr_accessor vcpu: Float?
     end
 
     class GameServerContainerDefinitionInput
@@ -3273,6 +3411,8 @@ module Aws::GameLift
         ?image_uri: String,
         ?port_configuration: Types::ContainerPortConfiguration,
         ?server_sdk_version: String,
+        ?linux_capabilities: Types::LinuxCapabilities,
+        ?vcpu: Float,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3283,6 +3423,8 @@ module Aws::GameLift
       attr_accessor image_uri: String?
       attr_accessor port_configuration: Types::ContainerPortConfiguration?
       attr_accessor server_sdk_version: String?
+      attr_accessor linux_capabilities: Types::LinuxCapabilities?
+      attr_accessor vcpu: Float?
     end
 
     class GameServerContainerGroupCounts
@@ -3486,6 +3628,11 @@ module Aws::GameLift
       SPOT_TERMINATING: String
     end
 
+    module GameServerIpProtocolSupported
+      IPv4: String
+      DUAL_STACK: String
+    end
+
     module GameServerProtectionPolicy
       NO_PROTECTION: String
       FULL_PROTECTION: String
@@ -3519,6 +3666,8 @@ module Aws::GameLift
         ?game_session_data: String,
         ?matchmaker_data: String,
         ?location: String,
+        ?compute_name: String,
+        ?player_gateway_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3541,6 +3690,8 @@ module Aws::GameLift
       attr_accessor game_session_data: String?
       attr_accessor matchmaker_data: String?
       attr_accessor location: String?
+      attr_accessor compute_name: String?
+      attr_accessor player_gateway_status: String?
     end
 
     class GameSessionConnectionInfo
@@ -3552,6 +3703,7 @@ module Aws::GameLift
         ?dns_name: String,
         ?port: Integer,
         ?matched_player_sessions: Array[Types::MatchedPlayerSession],
+        ?player_gateway_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3560,6 +3712,7 @@ module Aws::GameLift
       attr_accessor dns_name: String?
       attr_accessor port: Integer?
       attr_accessor matched_player_sessions: Array[Types::MatchedPlayerSession]?
+      attr_accessor player_gateway_status: String?
     end
 
     class GameSessionCreationLimitPolicy
@@ -3622,6 +3775,7 @@ module Aws::GameLift
         ?game_session_data: String,
         ?matchmaker_data: String,
         ?priority_configuration_override: Types::PriorityConfigurationOverride,
+        ?player_gateway_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3644,6 +3798,7 @@ module Aws::GameLift
       attr_accessor game_session_data: String?
       attr_accessor matchmaker_data: String?
       attr_accessor priority_configuration_override: Types::PriorityConfigurationOverride?
+      attr_accessor player_gateway_status: String?
     end
 
     module GameSessionPlacementState
@@ -3820,6 +3975,32 @@ module Aws::GameLift
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_access: Types::InstanceAccess?
+    end
+
+    class GetPlayerConnectionDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_id: String,
+        ?player_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_id: String?
+      attr_accessor player_ids: Array[String]?
+    end
+
+    class GetPlayerConnectionDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_session_id: String,
+        ?player_connection_details: Array[Types::PlayerConnectionDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_session_id: String?
+      attr_accessor player_connection_details: Array[Types::PlayerConnectionDetail]?
     end
 
     class IdempotentParameterMismatchException
@@ -4007,6 +4188,57 @@ module Aws::GameLift
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class LinuxCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include: Array[String]?
+    end
+
+    module LinuxCapability
+      AUDIT_CONTROL: String
+      AUDIT_WRITE: String
+      BLOCK_SUSPEND: String
+      CHOWN: String
+      DAC_OVERRIDE: String
+      DAC_READ_SEARCH: String
+      FOWNER: String
+      FSETID: String
+      IPC_LOCK: String
+      IPC_OWNER: String
+      KILL: String
+      LEASE: String
+      LINUX_IMMUTABLE: String
+      MAC_ADMIN: String
+      MAC_OVERRIDE: String
+      MKNOD: String
+      NET_ADMIN: String
+      NET_BIND_SERVICE: String
+      NET_BROADCAST: String
+      NET_RAW: String
+      SETFCAP: String
+      SETGID: String
+      SETPCAP: String
+      SETUID: String
+      SYS_ADMIN: String
+      SYS_BOOT: String
+      SYS_CHROOT: String
+      SYS_MODULE: String
+      SYS_NICE: String
+      SYS_PACCT: String
+      SYS_PTRACE: String
+      SYS_RAWIO: String
+      SYS_RESOURCE: String
+      SYS_TIME: String
+      SYS_TTY_CONFIG: String
+      SYSLOG: String
+      WAKE_ALARM: String
     end
 
     class ListAliasesInput
@@ -4432,11 +4664,13 @@ module Aws::GameLift
       def initialize: (
         ?location: String,
         ?status: String,
+        ?player_gateway_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor location: String?
       attr_accessor status: String?
+      attr_accessor player_gateway_status: String?
     end
 
     module LocationUpdateStatus
@@ -4473,6 +4707,19 @@ module Aws::GameLift
       NONE: String
       CLOUDWATCH: String
       S3: String
+    end
+
+    class ManagedCapacityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zero_capacity_strategy: String,
+        ?scale_in_after_inactivity_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zero_capacity_strategy: String?
+      attr_accessor scale_in_after_inactivity_minutes: Integer?
     end
 
     class MatchedPlayerSession
@@ -4633,6 +4880,7 @@ module Aws::GameLift
       AMAZON_LINUX_2: String
       WINDOWS_2016: String
       AMAZON_LINUX_2023: String
+      WINDOWS_2022: String
     end
 
     class OutOfCapacityException
@@ -4690,6 +4938,58 @@ module Aws::GameLift
       attr_accessor player_attributes: Hash[String, Types::AttributeValue]?
       attr_accessor team: String?
       attr_accessor latency_in_ms: Hash[String, Integer]?
+    end
+
+    class PlayerConnectionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?player_id: String,
+        ?endpoints: Array[Types::PlayerConnectionEndpoint],
+        ?player_gateway_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor player_id: String?
+      attr_accessor endpoints: Array[Types::PlayerConnectionEndpoint]?
+      attr_accessor player_gateway_token: String?
+      attr_accessor expiration: Time?
+    end
+
+    class PlayerConnectionEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor port: Integer?
+    end
+
+    class PlayerGatewayConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?game_server_ip_protocol_supported: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor game_server_ip_protocol_supported: String?
+    end
+
+    module PlayerGatewayMode
+      DISABLED: String
+      ENABLED: String
+      REQUIRED: String
+    end
+
+    module PlayerGatewayStatus
+      DISABLED: String
+      ENABLED: String
     end
 
     class PlayerLatency
@@ -5111,6 +5411,7 @@ module Aws::GameLift
         ?size_on_disk: Integer,
         ?creation_time: Time,
         ?storage_location: Types::S3Location,
+        ?node_js_version: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5121,6 +5422,7 @@ module Aws::GameLift
       attr_accessor size_on_disk: Integer?
       attr_accessor creation_time: Time?
       attr_accessor storage_location: Types::S3Location?
+      attr_accessor node_js_version: String?
     end
 
     class SearchGameSessionsInput
@@ -5384,6 +5686,7 @@ module Aws::GameLift
         ?port_configuration: Types::ContainerPortConfiguration,
         ?resolved_image_digest: String,
         ?vcpu: Float,
+        ?linux_capabilities: Types::LinuxCapabilities,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5398,6 +5701,7 @@ module Aws::GameLift
       attr_accessor port_configuration: Types::ContainerPortConfiguration?
       attr_accessor resolved_image_digest: String?
       attr_accessor vcpu: Float?
+      attr_accessor linux_capabilities: Types::LinuxCapabilities?
     end
 
     class SupportContainerDefinitionInput
@@ -5414,6 +5718,7 @@ module Aws::GameLift
         ?memory_hard_limit_mebibytes: Integer,
         ?port_configuration: Types::ContainerPortConfiguration,
         ?vcpu: Float,
+        ?linux_capabilities: Types::LinuxCapabilities,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5427,6 +5732,7 @@ module Aws::GameLift
       attr_accessor memory_hard_limit_mebibytes: Integer?
       attr_accessor port_configuration: Types::ContainerPortConfiguration?
       attr_accessor vcpu: Float?
+      attr_accessor linux_capabilities: Types::LinuxCapabilities?
     end
 
     class SuspendGameServerGroupInput
@@ -5732,6 +6038,7 @@ module Aws::GameLift
         ?version_description: String,
         ?source_version_number: Integer,
         ?operating_system: String,
+        ?remove_attributes: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5743,6 +6050,7 @@ module Aws::GameLift
       attr_accessor version_description: String?
       attr_accessor source_version_number: Integer?
       attr_accessor operating_system: String?
+      attr_accessor remove_attributes: Array[String]?
     end
 
     class UpdateContainerGroupDefinitionOutput
@@ -5801,6 +6109,7 @@ module Aws::GameLift
         ?min_size: Integer,
         ?max_size: Integer,
         ?location: String,
+        ?managed_capacity_configuration: Types::ManagedCapacityConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5809,6 +6118,7 @@ module Aws::GameLift
       attr_accessor min_size: Integer?
       attr_accessor max_size: Integer?
       attr_accessor location: String?
+      attr_accessor managed_capacity_configuration: Types::ManagedCapacityConfiguration?
     end
 
     class UpdateFleetCapacityOutput
@@ -5818,12 +6128,14 @@ module Aws::GameLift
         ?fleet_id: String,
         ?fleet_arn: String,
         ?location: String,
+        ?managed_capacity_configuration: Types::ManagedCapacityConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor fleet_id: String?
       attr_accessor fleet_arn: String?
       attr_accessor location: String?
+      attr_accessor managed_capacity_configuration: Types::ManagedCapacityConfiguration?
     end
 
     class UpdateFleetPortSettingsInput
@@ -6159,6 +6471,11 @@ module Aws::GameLift
 
       attr_accessor code: String?
       attr_accessor message: String?
+    end
+
+    module ZeroCapacityStrategy
+      MANUAL: String
+      SCALE_TO_AND_FROM_ZERO: String
     end
   end
 end

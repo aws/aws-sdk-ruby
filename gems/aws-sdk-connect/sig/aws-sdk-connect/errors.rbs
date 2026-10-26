@@ -15,6 +15,9 @@ module Aws::Connect
     class ContactNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ContactNotTerminatedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class DestinationNotAllowedException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -25,6 +28,9 @@ module Aws::Connect
       def message: () -> String?
     end
     class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidActiveRegionException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class InvalidContactFlowException < Smithy::Client::ServiceError
@@ -39,6 +45,9 @@ module Aws::Connect
     class InvalidRequestException < Smithy::Client::ServiceError
       def message: () -> String?
       def reason: () -> Types::InvalidRequestExceptionReason?
+    end
+    class InvalidTestCaseException < Smithy::Client::ServiceError
+      def problems: () -> Array[Types::ProblemDetail]?
     end
     class LimitExceededException < Smithy::Client::ServiceError
       def message: () -> String?

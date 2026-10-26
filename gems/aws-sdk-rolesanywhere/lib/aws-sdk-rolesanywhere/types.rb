@@ -37,7 +37,7 @@ module Aws::RolesAnywhere
     #   <p>The name of the profile.</p>
     #   @return [String]
     # @!attribute require_instance_properties
-    #   <p>Specifies whether instance properties are required in temporary credential requests with this profile. </p>
+    #   <p>Unused, saved for future use. Will likely specify whether instance properties are required in temporary credential requests with this profile. </p>
     #   @return [Boolean]
     # @!attribute session_policy
     #   <p>A session policy that applies to the trust boundary of the vended session credentials. </p>
@@ -49,9 +49,7 @@ module Aws::RolesAnywhere
     #   <p>A list of managed policy ARNs that apply to the vended session credentials. </p>
     #   @return [Array<String>]
     # @!attribute duration_seconds
-    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the 
-    #   <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a>
-    #   page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
+    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a> page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
     #   @return [Integer]
     # @!attribute enabled
     #   <p>Specifies whether the profile is enabled.</p>
@@ -727,10 +725,7 @@ module Aws::RolesAnywhere
       include ::Smithy::Schema::Structure
     end
 
-    # <p>
-    #          Customizable notification settings that will be applied to notification events.
-    #          IAM Roles Anywhere consumes these settings while notifying across multiple channels - CloudWatch metrics, EventBridge, and Health Dashboard.
-    #       </p>
+    # <p> Customizable notification settings that will be applied to notification events. IAM Roles Anywhere consumes these settings while notifying across multiple channels - CloudWatch metrics, EventBridge, and Health Dashboard. </p>
     # @!attribute enabled
     #   <p>Indicates whether the notification setting is enabled.</p>
     #   @return [Boolean]
@@ -741,11 +736,7 @@ module Aws::RolesAnywhere
     #   <p>The number of days before a notification event. This value is required for a notification setting that is enabled.</p>
     #   @return [Integer]
     # @!attribute channel
-    #   <p>The specified channel of notification.
-    #         IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p>
-    #            <note>
-    #               <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p>
-    #            </note>
+    #   <p>The specified channel of notification. IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p> <note> <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p> </note>
     #   @return [String]
     class NotificationSetting < Struct.new(
       nil,
@@ -758,9 +749,7 @@ module Aws::RolesAnywhere
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The state of a notification setting.</p>
-    #          <p>A notification setting includes information such as event name, threshold, status of
-    #          the notification setting, and the channel to notify.</p>
+    # <p>The state of a notification setting.</p> <p>A notification setting includes information such as event name, threshold, status of the notification setting, and the channel to notify.</p>
     # @!attribute enabled
     #   <p>Indicates whether the notification setting is enabled.</p>
     #   @return [Boolean]
@@ -771,18 +760,10 @@ module Aws::RolesAnywhere
     #   <p>The number of days before a notification event.</p>
     #   @return [Integer]
     # @!attribute channel
-    #   <p>The specified channel of notification.
-    #         IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p>
-    #            <note>
-    #               <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p>
-    #            </note>
+    #   <p>The specified channel of notification. IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p> <note> <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p> </note>
     #   @return [String]
     # @!attribute configured_by
-    #   <p>The principal that configured the notification setting.
-    #         For default settings configured by IAM Roles Anywhere,
-    #         the value is <code>rolesanywhere.amazonaws.com</code>, and
-    #         for customized notifications settings, it is the respective account ID.
-    #         </p>
+    #   <p>The principal that configured the notification setting. For default settings configured by IAM Roles Anywhere, the value is <code>rolesanywhere.amazonaws.com</code>, and for customized notifications settings, it is the respective account ID. </p>
     #   @return [String]
     class NotificationSettingDetail < Struct.new(
       nil,
@@ -796,9 +777,7 @@ module Aws::RolesAnywhere
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A notification setting key to reset.
-    #          A notification setting key includes the event and the channel.
-    #       </p>
+    # <p>A notification setting key to reset. A notification setting key includes the event and the channel. </p>
     # @!attribute event
     #   <p>The notification setting event to reset.</p>
     #   @return [String]
@@ -825,7 +804,7 @@ module Aws::RolesAnywhere
     #   <p>The name of the profile.</p>
     #   @return [String]
     # @!attribute require_instance_properties
-    #   <p>Specifies whether instance properties are required in temporary credential requests with this profile. </p>
+    #   <p>Unused, saved for future use. Will likely specify whether instance properties are required in temporary credential requests with this profile. </p>
     #   @return [Boolean]
     # @!attribute enabled
     #   <p>Indicates whether the profile is enabled.</p>
@@ -849,9 +828,7 @@ module Aws::RolesAnywhere
     #   <p>The ISO-8601 timestamp when the profile was last updated. </p>
     #   @return [Time]
     # @!attribute duration_seconds
-    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the 
-    #   <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a>
-    #   page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
+    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a> page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
     #   @return [Integer]
     # @!attribute accept_role_session_name
     #   <p>Used to determine if a custom role session name will be accepted in a temporary credential request.</p>
@@ -940,9 +917,7 @@ module Aws::RolesAnywhere
     #   <p>The unique identifier of the trust anchor.</p>
     #   @return [String]
     # @!attribute notification_setting_keys
-    #   <p>A list of notification setting keys to reset.
-    #            A notification setting key includes the event and the channel.
-    #         </p>
+    #   <p>A list of notification setting keys to reset. A notification setting key includes the event and the channel. </p>
     #   @return [Array<Types::NotificationSettingKey>]
     class ResetNotificationSettingsRequest < Struct.new(
       nil,
@@ -996,10 +971,7 @@ module Aws::RolesAnywhere
     #   <p>The PEM-encoded data for the certificate anchor. Included for trust anchors of type <code>CERTIFICATE_BUNDLE</code>. </p>
     #   @return [String]
     # @!attribute acm_pca_arn
-    #   <p>
-    #            The root certificate of the Private Certificate Authority specified by this ARN is used in trust
-    #            validation for temporary credential requests. Included for trust anchors of type <code>AWS_ACM_PCA</code>.
-    #         </p>
+    #   <p> The root certificate of the Private Certificate Authority specified by this ARN is used in trust validation for temporary credential requests. Included for trust anchors of type <code>AWS_ACM_PCA</code>. </p>
     #   @return [String]
     class SourceData < Struct.new(
       :x509_certificate_data,
@@ -1251,9 +1223,7 @@ module Aws::RolesAnywhere
     #   <p>A list of managed policy ARNs that apply to the vended session credentials. </p>
     #   @return [Array<String>]
     # @!attribute duration_seconds
-    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the 
-    #   <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a>
-    #   page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
+    #   <p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object">CreateSession API documentation</a> page for more details. In requests, if this value is not provided, the default value will be 3600. </p>
     #   @return [Integer]
     # @!attribute accept_role_session_name
     #   <p>Used to determine if a custom role session name will be accepted in a temporary credential request.</p>

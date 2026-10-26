@@ -17,6 +17,10 @@ module Aws::AppConfig
     AppliedExtension = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#AppliedExtension", name: "AppliedExtension")
     AppliedExtensions = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#AppliedExtensions", name: "AppliedExtensions")
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z-]*)?:[a-z]+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:[a-zA-Z0-9-_/:.]+$"})
+    AttributeKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#AttributeKey", name: "AttributeKey", traits: {"smithy.api#pattern" => "^(?!enabled$)[a-z][a-zA-Z0-9_-]{0,63}$"})
+    AttributeString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#AttributeString", name: "AttributeString", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    AttributeValue = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.appconfig#AttributeValue", name: "AttributeValue")
+    AttributeValueMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.appconfig#AttributeValueMap", name: "AttributeValueMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     BadRequestDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.appconfig#BadRequestDetails", name: "BadRequestDetails")
     BadRequestException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#BadRequestException", name: "BadRequestException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     BadRequestReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#BadRequestReason", name: "BadRequestReason")
@@ -25,7 +29,7 @@ module Aws::AppConfig
     BytesMeasure = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#BytesMeasure", name: "BytesMeasure")
     ConfigurationProfileSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ConfigurationProfileSummary", name: "ConfigurationProfileSummary")
     ConfigurationProfileSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#ConfigurationProfileSummaryList", name: "ConfigurationProfileSummaryList")
-    ConfigurationProfileType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#ConfigurationProfileType", name: "ConfigurationProfileType", traits: {"smithy.api#pattern" => "^[a-zA-Z\\.]+$"})
+    ConfigurationProfileType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#ConfigurationProfileType", name: "ConfigurationProfileType", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9\\.\\-]+$"})
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     CreateApplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateApplicationOutput", name: "CreateApplicationOutput")
     CreateApplicationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateApplicationRequest", name: "CreateApplicationRequest")
@@ -35,6 +39,8 @@ module Aws::AppConfig
     CreateDeploymentStrategyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateDeploymentStrategyRequest", name: "CreateDeploymentStrategyRequest")
     CreateEnvironmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateEnvironmentOutput", name: "CreateEnvironmentOutput")
     CreateEnvironmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateEnvironmentRequest", name: "CreateEnvironmentRequest")
+    CreateExperimentDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateExperimentDefinitionOutput", name: "CreateExperimentDefinitionOutput")
+    CreateExperimentDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateExperimentDefinitionRequest", name: "CreateExperimentDefinitionRequest")
     CreateExtensionAssociationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateExtensionAssociationOutput", name: "CreateExtensionAssociationOutput")
     CreateExtensionAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateExtensionAssociationRequest", name: "CreateExtensionAssociationRequest")
     CreateExtensionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#CreateExtensionOutput", name: "CreateExtensionOutput")
@@ -45,9 +51,11 @@ module Aws::AppConfig
     DeleteConfigurationProfileRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeleteConfigurationProfileRequest", name: "DeleteConfigurationProfileRequest")
     DeleteDeploymentStrategyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeleteDeploymentStrategyRequest", name: "DeleteDeploymentStrategyRequest")
     DeleteEnvironmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeleteEnvironmentRequest", name: "DeleteEnvironmentRequest")
+    DeleteExperimentDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeleteExperimentDefinitionRequest", name: "DeleteExperimentDefinitionRequest")
     DeleteExtensionAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeleteExtensionAssociationRequest", name: "DeleteExtensionAssociationRequest")
     DeleteExtensionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeleteExtensionRequest", name: "DeleteExtensionRequest")
     DeleteHostedConfigurationVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeleteHostedConfigurationVersionRequest", name: "DeleteHostedConfigurationVersionRequest")
+    DeleteType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#DeleteType", name: "DeleteType")
     DeletionProtectionCheck = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#DeletionProtectionCheck", name: "DeletionProtectionCheck")
     DeletionProtectionDuration = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.appconfig#DeletionProtectionDuration", name: "DeletionProtectionDuration", traits: {"smithy.api#range" => {"min" => 15, "max" => 1440}})
     DeletionProtectionSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeletionProtectionSettings", name: "DeletionProtectionSettings")
@@ -55,22 +63,39 @@ module Aws::AppConfig
     DeploymentEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#DeploymentEventType", name: "DeploymentEventType")
     DeploymentEvents = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#DeploymentEvents", name: "DeploymentEvents")
     DeploymentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#DeploymentList", name: "DeploymentList")
+    DeploymentParameters = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeploymentParameters", name: "DeploymentParameters")
     DeploymentState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#DeploymentState", name: "DeploymentState")
     DeploymentStrategy = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeploymentStrategy", name: "DeploymentStrategy")
     DeploymentStrategyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#DeploymentStrategyId", name: "DeploymentStrategyId", traits: {"smithy.api#pattern" => "^(^[a-z0-9]{4,7}$|^AppConfig\\.[A-Za-z0-9]{9,40}$)$"})
     DeploymentStrategyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#DeploymentStrategyList", name: "DeploymentStrategyList")
     DeploymentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#DeploymentSummary", name: "DeploymentSummary")
+    DeploymentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#DeploymentType", name: "DeploymentType")
     Description = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#Description", name: "Description", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
+    Double = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.appconfig#Double", name: "Double", traits: {"smithy.api#default" => 0})
     DynamicParameterKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#DynamicParameterKey", name: "DynamicParameterKey", traits: {"smithy.api#pattern" => "^([^#\\n]{1,96})#([^\\/#\\n]{1,64})$"})
     DynamicParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.appconfig#DynamicParameterMap", name: "DynamicParameterMap", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#sensitive" => {}})
+    EntityId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#EntityId", name: "EntityId", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     Environment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#Environment", name: "Environment")
     EnvironmentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#EnvironmentList", name: "EnvironmentList")
     EnvironmentState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#EnvironmentState", name: "EnvironmentState")
+    ExperimentDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#ExperimentDefinitionList", name: "ExperimentDefinitionList")
+    ExperimentDefinitionSnapshot = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ExperimentDefinitionSnapshot", name: "ExperimentDefinitionSnapshot")
+    ExperimentDefinitionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#ExperimentDefinitionStatus", name: "ExperimentDefinitionStatus")
+    ExperimentDefinitionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ExperimentDefinitionSummary", name: "ExperimentDefinitionSummary")
+    ExperimentRunEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ExperimentRunEvent", name: "ExperimentRunEvent")
+    ExperimentRunEventList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#ExperimentRunEventList", name: "ExperimentRunEventList")
+    ExperimentRunEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#ExperimentRunEventType", name: "ExperimentRunEventType")
+    ExperimentRunResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ExperimentRunResult", name: "ExperimentRunResult")
+    ExperimentRunStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#ExperimentRunStatus", name: "ExperimentRunStatus")
+    ExperimentRunSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ExperimentRunSummary", name: "ExperimentRunSummary")
+    ExperimentRunSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#ExperimentRunSummaryList", name: "ExperimentRunSummaryList")
     ExtensionAssociationSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#ExtensionAssociationSummaries", name: "ExtensionAssociationSummaries")
     ExtensionAssociationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ExtensionAssociationSummary", name: "ExtensionAssociationSummary")
     ExtensionOrParameterName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#ExtensionOrParameterName", name: "ExtensionOrParameterName", traits: {"smithy.api#pattern" => "^[^\\/#:\\n]{1,64}$"})
     ExtensionSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#ExtensionSummaries", name: "ExtensionSummaries")
     ExtensionSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ExtensionSummary", name: "ExtensionSummary")
+    FlagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#FlagKey", name: "FlagKey", traits: {"smithy.api#pattern" => "^[a-z][a-zA-Z0-9_-]{1,64}$"})
+    FlagValue = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#FlagValue", name: "FlagValue")
     Float = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.appconfig#Float", name: "Float", traits: {"smithy.api#default" => 0})
     GetAccountSettingsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetAccountSettingsOutput", name: "GetAccountSettingsOutput")
     GetApplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetApplicationOutput", name: "GetApplicationOutput")
@@ -85,6 +110,10 @@ module Aws::AppConfig
     GetDeploymentStrategyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetDeploymentStrategyRequest", name: "GetDeploymentStrategyRequest")
     GetEnvironmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetEnvironmentOutput", name: "GetEnvironmentOutput")
     GetEnvironmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetEnvironmentRequest", name: "GetEnvironmentRequest")
+    GetExperimentDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetExperimentDefinitionOutput", name: "GetExperimentDefinitionOutput")
+    GetExperimentDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetExperimentDefinitionRequest", name: "GetExperimentDefinitionRequest")
+    GetExperimentRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetExperimentRunOutput", name: "GetExperimentRunOutput")
+    GetExperimentRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetExperimentRunRequest", name: "GetExperimentRunRequest")
     GetExtensionAssociationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetExtensionAssociationOutput", name: "GetExtensionAssociationOutput")
     GetExtensionAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetExtensionAssociationRequest", name: "GetExtensionAssociationRequest")
     GetExtensionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#GetExtensionOutput", name: "GetExtensionOutput")
@@ -114,6 +143,12 @@ module Aws::AppConfig
     ListDeploymentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListDeploymentsRequest", name: "ListDeploymentsRequest")
     ListEnvironmentsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListEnvironmentsOutput", name: "ListEnvironmentsOutput")
     ListEnvironmentsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListEnvironmentsRequest", name: "ListEnvironmentsRequest")
+    ListExperimentDefinitionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListExperimentDefinitionsOutput", name: "ListExperimentDefinitionsOutput")
+    ListExperimentDefinitionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListExperimentDefinitionsRequest", name: "ListExperimentDefinitionsRequest")
+    ListExperimentRunEventsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListExperimentRunEventsOutput", name: "ListExperimentRunEventsOutput")
+    ListExperimentRunEventsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListExperimentRunEventsRequest", name: "ListExperimentRunEventsRequest")
+    ListExperimentRunsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListExperimentRunsOutput", name: "ListExperimentRunsOutput")
+    ListExperimentRunsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListExperimentRunsRequest", name: "ListExperimentRunsRequest")
     ListExtensionAssociationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListExtensionAssociationsOutput", name: "ListExtensionAssociationsOutput")
     ListExtensionAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListExtensionAssociationsRequest", name: "ListExtensionAssociationsRequest")
     ListExtensionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ListExtensionsOutput", name: "ListExtensionsOutput")
@@ -128,22 +163,32 @@ module Aws::AppConfig
     Monitor = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#Monitor", name: "Monitor")
     MonitorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#MonitorList", name: "MonitorList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     Name = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#Name", name: "Name", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
+    NameWithReservedAwsPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#NameWithReservedAwsPrefix", name: "NameWithReservedAwsPrefix", traits: {"smithy.api#pattern" => "^(?!AWS\\.).{1,64}$"})
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#NextToken", name: "NextToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
+    NullablePercentage = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.appconfig#NullablePercentage", name: "NullablePercentage", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 100.0}})
+    NumberList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#NumberList", name: "NumberList", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     Parameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#Parameter", name: "Parameter")
     ParameterMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.appconfig#ParameterMap", name: "ParameterMap", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     ParameterValueMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.appconfig#ParameterValueMap", name: "ParameterValueMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     PayloadTooLargeException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#PayloadTooLargeException", name: "PayloadTooLargeException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 413})
     Percentage = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.appconfig#Percentage", name: "Percentage", traits: {"smithy.api#range" => {"min" => 1.0, "max" => 100.0}})
+    PositiveInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.appconfig#PositiveInteger", name: "PositiveInteger", traits: {"smithy.api#range" => {"min" => 1}})
     QueryName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#QueryName", name: "QueryName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     ReplicateTo = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#ReplicateTo", name: "ReplicateTo")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     RoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#RoleArn", name: "RoleArn", traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}, "smithy.api#pattern" => "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov|aws-eusc):(iam)::\\d{12}:role[/].*)$"})
+    Rule = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#Rule", name: "Rule", traits: {"smithy.api#length" => {"min" => 1, "max" => 16384}})
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     StartDeploymentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#StartDeploymentOutput", name: "StartDeploymentOutput")
     StartDeploymentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#StartDeploymentRequest", name: "StartDeploymentRequest")
+    StartExperimentRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#StartExperimentRunOutput", name: "StartExperimentRunOutput")
+    StartExperimentRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#StartExperimentRunRequest", name: "StartExperimentRunRequest")
     StopDeploymentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#StopDeploymentOutput", name: "StopDeploymentOutput")
     StopDeploymentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#StopDeploymentRequest", name: "StopDeploymentRequest")
+    StopExperimentRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#StopExperimentRunOutput", name: "StopExperimentRunOutput")
+    StopExperimentRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#StopExperimentRunRequest", name: "StopExperimentRunRequest")
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#String", name: "String")
+    StringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#StringList", name: "StringList", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     StringWithLengthBetween0And32768 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#StringWithLengthBetween0And32768", name: "StringWithLengthBetween0And32768", traits: {"smithy.api#length" => {"min" => 0, "max" => 32768}, "smithy.api#sensitive" => {}})
     StringWithLengthBetween1And2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#StringWithLengthBetween1And2048", name: "StringWithLengthBetween1And2048", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     StringWithLengthBetween1And255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#StringWithLengthBetween1And255", name: "StringWithLengthBetween1And255", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
@@ -153,6 +198,13 @@ module Aws::AppConfig
     TagMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.appconfig#TagMap", name: "TagMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
     TagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#TagResourceRequest", name: "TagResourceRequest")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#TagValue", name: "TagValue", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
+    Treatment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#Treatment", name: "Treatment")
+    TreatmentInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#TreatmentInput", name: "TreatmentInput")
+    TreatmentInputList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#TreatmentInputList", name: "TreatmentInputList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    TreatmentKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#TreatmentKey", name: "TreatmentKey", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9]{1,8}$"})
+    TreatmentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#TreatmentList", name: "TreatmentList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    TreatmentOverrideMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.appconfig#TreatmentOverrideMap", name: "TreatmentOverrideMap", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}})
+    TreatmentOverrides = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.appconfig#TreatmentOverrides", name: "TreatmentOverrides")
     TriggeredBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#TriggeredBy", name: "TriggeredBy")
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UntagResourceRequest", name: "UntagResourceRequest")
     UpdateAccountSettingsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateAccountSettingsOutput", name: "UpdateAccountSettingsOutput")
@@ -165,6 +217,10 @@ module Aws::AppConfig
     UpdateDeploymentStrategyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateDeploymentStrategyRequest", name: "UpdateDeploymentStrategyRequest")
     UpdateEnvironmentOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateEnvironmentOutput", name: "UpdateEnvironmentOutput")
     UpdateEnvironmentRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateEnvironmentRequest", name: "UpdateEnvironmentRequest")
+    UpdateExperimentDefinitionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateExperimentDefinitionOutput", name: "UpdateExperimentDefinitionOutput")
+    UpdateExperimentDefinitionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateExperimentDefinitionRequest", name: "UpdateExperimentDefinitionRequest")
+    UpdateExperimentRunOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateExperimentRunOutput", name: "UpdateExperimentRunOutput")
+    UpdateExperimentRunRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateExperimentRunRequest", name: "UpdateExperimentRunRequest")
     UpdateExtensionAssociationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateExtensionAssociationOutput", name: "UpdateExtensionAssociationOutput")
     UpdateExtensionAssociationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateExtensionAssociationRequest", name: "UpdateExtensionAssociationRequest")
     UpdateExtensionOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#UpdateExtensionOutput", name: "UpdateExtensionOutput")
@@ -175,8 +231,10 @@ module Aws::AppConfig
     ValidatorList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#ValidatorList", name: "ValidatorList", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
     ValidatorType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.appconfig#ValidatorType", name: "ValidatorType")
     ValidatorTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.appconfig#ValidatorTypeList", name: "ValidatorTypeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 2}})
+    VendedMetricsSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.appconfig#VendedMetricsSettings", name: "VendedMetricsSettings")
     Version = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#Version", name: "Version", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}})
     VersionLabel = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.appconfig#VersionLabel", name: "VersionLabel", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "[^0-9]"})
+    Weight = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.appconfig#Weight", name: "Weight", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0.0}})
 
     Action.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     Action.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
@@ -214,6 +272,15 @@ module Aws::AppConfig
     AppliedExtension.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValueMap, name: "Parameters"))
     AppliedExtension.type = Types::AppliedExtension
     AppliedExtensions.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedExtension, name: "member"))
+    AttributeValue.add_member(:string_value, Types::AttributeValue::StringValue, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeString, name: "StringValue"))
+    AttributeValue.add_member(:number_value, Types::AttributeValue::NumberValue, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "NumberValue"))
+    AttributeValue.add_member(:boolean_value, Types::AttributeValue::BooleanValue, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "BooleanValue"))
+    AttributeValue.add_member(:string_array, Types::AttributeValue::StringArray, ::Smithy::Schema::Shapes::MemberShape.new(target: StringList, name: "StringArray"))
+    AttributeValue.add_member(:number_array, Types::AttributeValue::NumberArray, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberList, name: "NumberArray"))
+    AttributeValue.add_member(:unknown, Types::AttributeValue::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AttributeValue.type = Types::AttributeValue
+    AttributeValueMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key"))
+    AttributeValueMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     BadRequestDetails.add_member(:invalid_configuration, Types::BadRequestDetails::InvalidConfiguration, ::Smithy::Schema::Shapes::MemberShape.new(target: InvalidConfigurationDetailList, name: "InvalidConfiguration"))
     BadRequestDetails.add_member(:unknown, Types::BadRequestDetails::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     BadRequestDetails.type = Types::BadRequestDetails
@@ -252,7 +319,7 @@ module Aws::AppConfig
     CreateConfigurationProfileOutput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "KmsKeyArn"))
     CreateConfigurationProfileOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
     CreateConfigurationProfileOutput.type = Types::CreateConfigurationProfileOutput
-    CreateConfigurationProfileRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateConfigurationProfileRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateConfigurationProfileRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "Name", traits: {"smithy.api#required" => {}}))
     CreateConfigurationProfileRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     CreateConfigurationProfileRequest.add_member(:location_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: Uri, name: "LocationUri", traits: {"smithy.api#required" => {}}))
@@ -287,12 +354,42 @@ module Aws::AppConfig
     CreateEnvironmentOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentState, name: "State"))
     CreateEnvironmentOutput.add_member(:monitors, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorList, name: "Monitors"))
     CreateEnvironmentOutput.type = Types::CreateEnvironmentOutput
-    CreateEnvironmentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateEnvironmentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateEnvironmentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name", traits: {"smithy.api#required" => {}}))
     CreateEnvironmentRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     CreateEnvironmentRequest.add_member(:monitors, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorList, name: "Monitors"))
     CreateEnvironmentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     CreateEnvironmentRequest.type = Types::CreateEnvironmentRequest
+    CreateExperimentDefinitionOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
+    CreateExperimentDefinitionOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
+    CreateExperimentDefinitionOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    CreateExperimentDefinitionOutput.add_member(:hypothesis, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Hypothesis"))
+    CreateExperimentDefinitionOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionStatus, name: "Status"))
+    CreateExperimentDefinitionOutput.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId"))
+    CreateExperimentDefinitionOutput.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId"))
+    CreateExperimentDefinitionOutput.add_member(:flag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: FlagKey, name: "FlagKey"))
+    CreateExperimentDefinitionOutput.add_member(:audience_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "AudienceRule"))
+    CreateExperimentDefinitionOutput.add_member(:audience_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "AudienceDescription"))
+    CreateExperimentDefinitionOutput.add_member(:launch_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "LaunchCriteria"))
+    CreateExperimentDefinitionOutput.add_member(:treatments, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentList, name: "Treatments"))
+    CreateExperimentDefinitionOutput.add_member(:control, ::Smithy::Schema::Shapes::MemberShape.new(target: Treatment, name: "Control"))
+    CreateExperimentDefinitionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "CreatedAt"))
+    CreateExperimentDefinitionOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "UpdatedAt"))
+    CreateExperimentDefinitionOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
+    CreateExperimentDefinitionOutput.type = Types::CreateExperimentDefinitionOutput
+    CreateExperimentDefinitionRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateExperimentDefinitionRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: NameWithReservedAwsPrefix, name: "Name", traits: {"smithy.api#required" => {}}))
+    CreateExperimentDefinitionRequest.add_member(:configuration_profile_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ConfigurationProfileIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateExperimentDefinitionRequest.add_member(:environment_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "EnvironmentIdentifier", traits: {"smithy.api#required" => {}}))
+    CreateExperimentDefinitionRequest.add_member(:flag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: FlagKey, name: "FlagKey", traits: {"smithy.api#required" => {}}))
+    CreateExperimentDefinitionRequest.add_member(:treatments, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentInputList, name: "Treatments", traits: {"smithy.api#required" => {}}))
+    CreateExperimentDefinitionRequest.add_member(:control, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentInput, name: "Control", traits: {"smithy.api#required" => {}}))
+    CreateExperimentDefinitionRequest.add_member(:audience_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "AudienceRule", traits: {"smithy.api#required" => {}}))
+    CreateExperimentDefinitionRequest.add_member(:hypothesis, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Hypothesis"))
+    CreateExperimentDefinitionRequest.add_member(:audience_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "AudienceDescription"))
+    CreateExperimentDefinitionRequest.add_member(:launch_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "LaunchCriteria"))
+    CreateExperimentDefinitionRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    CreateExperimentDefinitionRequest.type = Types::CreateExperimentDefinitionRequest
     CreateExtensionAssociationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Id"))
     CreateExtensionAssociationOutput.add_member(:extension_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExtensionArn"))
     CreateExtensionAssociationOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn"))
@@ -332,8 +429,8 @@ module Aws::AppConfig
     CreateHostedConfigurationVersionOutput[:http_payload] = :content
     CreateHostedConfigurationVersionOutput[:http_payload_member] = CreateHostedConfigurationVersionOutput.member(:content)
     CreateHostedConfigurationVersionOutput.type = Types::CreateHostedConfigurationVersionOutput
-    CreateHostedConfigurationVersionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    CreateHostedConfigurationVersionRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateHostedConfigurationVersionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateHostedConfigurationVersionRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateHostedConfigurationVersionRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description", traits: {"smithy.api#httpHeader" => "Description"}))
     CreateHostedConfigurationVersionRequest.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, name: "Content", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     CreateHostedConfigurationVersionRequest.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And255, name: "ContentType", traits: {"smithy.api#httpHeader" => "Content-Type", "smithy.api#required" => {}}))
@@ -342,27 +439,33 @@ module Aws::AppConfig
     CreateHostedConfigurationVersionRequest[:http_payload] = :content
     CreateHostedConfigurationVersionRequest[:http_payload_member] = CreateHostedConfigurationVersionRequest.member(:content)
     CreateHostedConfigurationVersionRequest.type = Types::CreateHostedConfigurationVersionRequest
-    DeleteApplicationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteApplicationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteApplicationRequest.type = Types::DeleteApplicationRequest
-    DeleteConfigurationProfileRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteConfigurationProfileRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConfigurationProfileRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteConfigurationProfileRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteConfigurationProfileRequest.add_member(:deletion_protection_check, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionCheck, name: "DeletionProtectionCheck", traits: {"smithy.api#httpHeader" => "x-amzn-deletion-protection-check"}))
     DeleteConfigurationProfileRequest.type = Types::DeleteConfigurationProfileRequest
     DeleteDeploymentStrategyRequest.add_member(:deployment_strategy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyId, name: "DeploymentStrategyId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteDeploymentStrategyRequest.type = Types::DeleteDeploymentStrategyRequest
-    DeleteEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteEnvironmentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteEnvironmentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteEnvironmentRequest.add_member(:deletion_protection_check, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionCheck, name: "DeletionProtectionCheck", traits: {"smithy.api#httpHeader" => "x-amzn-deletion-protection-check"}))
     DeleteEnvironmentRequest.type = Types::DeleteEnvironmentRequest
+    DeleteExperimentDefinitionRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteExperimentDefinitionRequest.add_member(:experiment_definition_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExperimentDefinitionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteExperimentDefinitionRequest.add_member(:delete_type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeleteType, name: "DeleteType", traits: {"smithy.api#httpQuery" => "delete_type"}))
+    DeleteExperimentDefinitionRequest.type = Types::DeleteExperimentDefinitionRequest
     DeleteExtensionAssociationRequest.add_member(:extension_association_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ExtensionAssociationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteExtensionAssociationRequest.type = Types::DeleteExtensionAssociationRequest
     DeleteExtensionRequest.add_member(:extension_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExtensionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteExtensionRequest.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VersionNumber", traits: {"smithy.api#default" => nil, "smithy.api#httpQuery" => "version"}))
     DeleteExtensionRequest.type = Types::DeleteExtensionRequest
-    DeleteHostedConfigurationVersionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    DeleteHostedConfigurationVersionRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteHostedConfigurationVersionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteHostedConfigurationVersionRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteHostedConfigurationVersionRequest.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VersionNumber", traits: {"smithy.api#default" => nil, "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteHostedConfigurationVersionRequest.type = Types::DeleteHostedConfigurationVersionRequest
+    DeleteType.add_member(:archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVE", traits: {"smithy.api#enumValue" => "ARCHIVE"}))
+    DeleteType.add_member(:destroy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DESTROY", traits: {"smithy.api#enumValue" => "DESTROY"}))
     DeletionProtectionCheck.add_member(:account_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_DEFAULT", traits: {"smithy.api#enumValue" => "ACCOUNT_DEFAULT"}))
     DeletionProtectionCheck.add_member(:apply, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPLY", traits: {"smithy.api#enumValue" => "APPLY"}))
     DeletionProtectionCheck.add_member(:bypass, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BYPASS", traits: {"smithy.api#enumValue" => "BYPASS"}))
@@ -384,6 +487,9 @@ module Aws::AppConfig
     DeploymentEventType.add_member(:revert_completed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVERT_COMPLETED", traits: {"smithy.api#enumValue" => "REVERT_COMPLETED"}))
     DeploymentEvents.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentEvent, name: "member"))
     DeploymentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentSummary, name: "member"))
+    DeploymentParameters.add_member(:dynamic_extension_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicParameterMap, name: "DynamicExtensionParameters"))
+    DeploymentParameters.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    DeploymentParameters.type = Types::DeploymentParameters
     DeploymentState.add_member(:baking, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BAKING", traits: {"smithy.api#enumValue" => "BAKING"}))
     DeploymentState.add_member(:validating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VALIDATING", traits: {"smithy.api#enumValue" => "VALIDATING"}))
     DeploymentState.add_member(:deploying, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPLOYING", traits: {"smithy.api#enumValue" => "DEPLOYING"}))
@@ -402,6 +508,7 @@ module Aws::AppConfig
     DeploymentStrategy.type = Types::DeploymentStrategy
     DeploymentStrategyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategy, name: "member"))
     DeploymentSummary.add_member(:deployment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DeploymentNumber", traits: {"smithy.api#default" => 0}))
+    DeploymentSummary.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId"))
     DeploymentSummary.add_member(:configuration_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ConfigurationName"))
     DeploymentSummary.add_member(:configuration_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "ConfigurationVersion"))
     DeploymentSummary.add_member(:deployment_duration_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: MinutesBetween0And24Hours, name: "DeploymentDurationInMinutes", traits: {"smithy.api#default" => 0}))
@@ -413,7 +520,10 @@ module Aws::AppConfig
     DeploymentSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "StartedAt"))
     DeploymentSummary.add_member(:completed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "CompletedAt"))
     DeploymentSummary.add_member(:version_label, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "VersionLabel"))
+    DeploymentSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentType, name: "Type"))
     DeploymentSummary.type = Types::DeploymentSummary
+    DeploymentType.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
+    DeploymentType.add_member(:managed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANAGED", traits: {"smithy.api#enumValue" => "MANAGED"}))
     DynamicParameterMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicParameterKey, name: "key"))
     DynamicParameterMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And2048, name: "value"))
     Environment.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
@@ -429,6 +539,62 @@ module Aws::AppConfig
     EnvironmentState.add_member(:rolling_back, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLING_BACK", traits: {"smithy.api#enumValue" => "ROLLING_BACK"}))
     EnvironmentState.add_member(:rolled_back, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROLLED_BACK", traits: {"smithy.api#enumValue" => "ROLLED_BACK"}))
     EnvironmentState.add_member(:reverted, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REVERTED", traits: {"smithy.api#enumValue" => "REVERTED"}))
+    ExperimentDefinitionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionSummary, name: "member"))
+    ExperimentDefinitionSnapshot.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
+    ExperimentDefinitionSnapshot.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
+    ExperimentDefinitionSnapshot.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    ExperimentDefinitionSnapshot.add_member(:hypothesis, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Hypothesis"))
+    ExperimentDefinitionSnapshot.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId"))
+    ExperimentDefinitionSnapshot.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId"))
+    ExperimentDefinitionSnapshot.add_member(:flag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: FlagKey, name: "FlagKey"))
+    ExperimentDefinitionSnapshot.add_member(:audience_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "AudienceRule"))
+    ExperimentDefinitionSnapshot.add_member(:audience_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "AudienceDescription"))
+    ExperimentDefinitionSnapshot.add_member(:launch_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "LaunchCriteria"))
+    ExperimentDefinitionSnapshot.add_member(:treatments, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentList, name: "Treatments"))
+    ExperimentDefinitionSnapshot.add_member(:control, ::Smithy::Schema::Shapes::MemberShape.new(target: Treatment, name: "Control"))
+    ExperimentDefinitionSnapshot.type = Types::ExperimentDefinitionSnapshot
+    ExperimentDefinitionStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ExperimentDefinitionStatus.add_member(:idle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDLE", traits: {"smithy.api#enumValue" => "IDLE"}))
+    ExperimentDefinitionStatus.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
+    ExperimentDefinitionSummary.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
+    ExperimentDefinitionSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
+    ExperimentDefinitionSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    ExperimentDefinitionSummary.add_member(:hypothesis, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Hypothesis"))
+    ExperimentDefinitionSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionStatus, name: "Status"))
+    ExperimentDefinitionSummary.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId"))
+    ExperimentDefinitionSummary.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId"))
+    ExperimentDefinitionSummary.add_member(:flag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: FlagKey, name: "FlagKey"))
+    ExperimentDefinitionSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "CreatedAt"))
+    ExperimentDefinitionSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "UpdatedAt"))
+    ExperimentDefinitionSummary.type = Types::ExperimentDefinitionSummary
+    ExperimentRunEvent.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    ExperimentRunEvent.add_member(:associated_deployment, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "AssociatedDeployment"))
+    ExperimentRunEvent.add_member(:event_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunEventType, name: "EventType"))
+    ExperimentRunEvent.add_member(:occurred_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "OccurredAt"))
+    ExperimentRunEvent.add_member(:triggered_by, ::Smithy::Schema::Shapes::MemberShape.new(target: TriggeredBy, name: "TriggeredBy"))
+    ExperimentRunEvent.add_member(:exposure_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePercentage, name: "ExposurePercentage"))
+    ExperimentRunEvent.add_member(:treatment_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentOverrides, name: "TreatmentOverrides"))
+    ExperimentRunEvent.type = Types::ExperimentRunEvent
+    ExperimentRunEventList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunEvent, name: "member"))
+    ExperimentRunEventType.add_member(:run_started, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUN_STARTED", traits: {"smithy.api#enumValue" => "RUN_STARTED"}))
+    ExperimentRunEventType.add_member(:exposure_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPOSURE_UPDATED", traits: {"smithy.api#enumValue" => "EXPOSURE_UPDATED"}))
+    ExperimentRunEventType.add_member(:overrides_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OVERRIDES_UPDATED", traits: {"smithy.api#enumValue" => "OVERRIDES_UPDATED"}))
+    ExperimentRunEventType.add_member(:run_stopped, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUN_STOPPED", traits: {"smithy.api#enumValue" => "RUN_STOPPED"}))
+    ExperimentRunResult.add_member(:executive_summary, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "ExecutiveSummary"))
+    ExperimentRunResult.add_member(:reasons_to_launch, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "ReasonsToLaunch"))
+    ExperimentRunResult.add_member(:reasons_not_to_launch, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "ReasonsNotToLaunch"))
+    ExperimentRunResult.type = Types::ExperimentRunResult
+    ExperimentRunStatus.add_member(:running, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RUNNING", traits: {"smithy.api#enumValue" => "RUNNING"}))
+    ExperimentRunStatus.add_member(:done, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DONE", traits: {"smithy.api#enumValue" => "DONE"}))
+    ExperimentRunSummary.add_member(:experiment_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ExperimentDefinitionId"))
+    ExperimentRunSummary.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Run", traits: {"smithy.api#default" => 0}))
+    ExperimentRunSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    ExperimentRunSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunStatus, name: "Status"))
+    ExperimentRunSummary.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "StartedAt"))
+    ExperimentRunSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "UpdatedAt"))
+    ExperimentRunSummary.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "EndedAt"))
+    ExperimentRunSummary.type = Types::ExperimentRunSummary
+    ExperimentRunSummaryList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunSummary, name: "member"))
     ExtensionAssociationSummaries.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionAssociationSummary, name: "member"))
     ExtensionAssociationSummary.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Id"))
     ExtensionAssociationSummary.add_member(:extension_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExtensionArn"))
@@ -441,13 +607,17 @@ module Aws::AppConfig
     ExtensionSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "Arn"))
     ExtensionSummary.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     ExtensionSummary.type = Types::ExtensionSummary
+    FlagValue.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#default" => false, "smithy.api#required" => {}}))
+    FlagValue.add_member(:attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueMap, name: "AttributeValues"))
+    FlagValue.type = Types::FlagValue
     GetAccountSettingsOutput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionSettings, name: "DeletionProtection"))
+    GetAccountSettingsOutput.add_member(:vended_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: VendedMetricsSettings, name: "VendedMetrics"))
     GetAccountSettingsOutput.type = Types::GetAccountSettingsOutput
     GetApplicationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
     GetApplicationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     GetApplicationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     GetApplicationOutput.type = Types::GetApplicationOutput
-    GetApplicationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetApplicationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetApplicationRequest.type = Types::GetApplicationRequest
     GetConfigurationOutput.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: Blob, name: "Content", traits: {"smithy.api#httpPayload" => {}}))
     GetConfigurationOutput.add_member(:configuration_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "ConfigurationVersion", traits: {"smithy.api#httpHeader" => "Configuration-Version"}))
@@ -466,8 +636,8 @@ module Aws::AppConfig
     GetConfigurationProfileOutput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "KmsKeyArn"))
     GetConfigurationProfileOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
     GetConfigurationProfileOutput.type = Types::GetConfigurationProfileOutput
-    GetConfigurationProfileRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetConfigurationProfileRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetConfigurationProfileRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetConfigurationProfileRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConfigurationProfileRequest.type = Types::GetConfigurationProfileRequest
     GetConfigurationRequest.add_member(:application, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And64, name: "Application", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetConfigurationRequest.add_member(:environment, ::Smithy::Schema::Shapes::MemberShape.new(target: StringWithLengthBetween1And64, name: "Environment", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -498,8 +668,8 @@ module Aws::AppConfig
     GetDeploymentOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
     GetDeploymentOutput.add_member(:version_label, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "VersionLabel"))
     GetDeploymentOutput.type = Types::GetDeploymentOutput
-    GetDeploymentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetDeploymentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDeploymentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetDeploymentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDeploymentRequest.add_member(:deployment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DeploymentNumber", traits: {"smithy.api#default" => nil, "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetDeploymentRequest.type = Types::GetDeploymentRequest
     GetDeploymentStrategyOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
@@ -520,9 +690,46 @@ module Aws::AppConfig
     GetEnvironmentOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentState, name: "State"))
     GetEnvironmentOutput.add_member(:monitors, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorList, name: "Monitors"))
     GetEnvironmentOutput.type = Types::GetEnvironmentOutput
-    GetEnvironmentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetEnvironmentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetEnvironmentRequest.type = Types::GetEnvironmentRequest
+    GetExperimentDefinitionOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
+    GetExperimentDefinitionOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
+    GetExperimentDefinitionOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    GetExperimentDefinitionOutput.add_member(:hypothesis, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Hypothesis"))
+    GetExperimentDefinitionOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionStatus, name: "Status"))
+    GetExperimentDefinitionOutput.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId"))
+    GetExperimentDefinitionOutput.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId"))
+    GetExperimentDefinitionOutput.add_member(:flag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: FlagKey, name: "FlagKey"))
+    GetExperimentDefinitionOutput.add_member(:audience_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "AudienceRule"))
+    GetExperimentDefinitionOutput.add_member(:audience_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "AudienceDescription"))
+    GetExperimentDefinitionOutput.add_member(:launch_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "LaunchCriteria"))
+    GetExperimentDefinitionOutput.add_member(:treatments, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentList, name: "Treatments"))
+    GetExperimentDefinitionOutput.add_member(:control, ::Smithy::Schema::Shapes::MemberShape.new(target: Treatment, name: "Control"))
+    GetExperimentDefinitionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "CreatedAt"))
+    GetExperimentDefinitionOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "UpdatedAt"))
+    GetExperimentDefinitionOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
+    GetExperimentDefinitionOutput.type = Types::GetExperimentDefinitionOutput
+    GetExperimentDefinitionRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExperimentDefinitionRequest.add_member(:experiment_definition_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExperimentDefinitionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExperimentDefinitionRequest.type = Types::GetExperimentDefinitionRequest
+    GetExperimentRunOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
+    GetExperimentRunOutput.add_member(:experiment_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ExperimentDefinitionId"))
+    GetExperimentRunOutput.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Run", traits: {"smithy.api#default" => 0}))
+    GetExperimentRunOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    GetExperimentRunOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunStatus, name: "Status"))
+    GetExperimentRunOutput.add_member(:exposure_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePercentage, name: "ExposurePercentage"))
+    GetExperimentRunOutput.add_member(:treatment_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentOverrides, name: "TreatmentOverrides"))
+    GetExperimentRunOutput.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunResult, name: "Result"))
+    GetExperimentRunOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "StartedAt"))
+    GetExperimentRunOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "UpdatedAt"))
+    GetExperimentRunOutput.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "EndedAt"))
+    GetExperimentRunOutput.add_member(:experiment_definition_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionSnapshot, name: "ExperimentDefinitionSnapshot"))
+    GetExperimentRunOutput.type = Types::GetExperimentRunOutput
+    GetExperimentRunRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExperimentRunRequest.add_member(:experiment_definition_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExperimentDefinitionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExperimentRunRequest.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "Run", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetExperimentRunRequest.type = Types::GetExperimentRunRequest
     GetExtensionAssociationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Id"))
     GetExtensionAssociationOutput.add_member(:extension_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExtensionArn"))
     GetExtensionAssociationOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn"))
@@ -554,8 +761,8 @@ module Aws::AppConfig
     GetHostedConfigurationVersionOutput[:http_payload] = :content
     GetHostedConfigurationVersionOutput[:http_payload_member] = GetHostedConfigurationVersionOutput.member(:content)
     GetHostedConfigurationVersionOutput.type = Types::GetHostedConfigurationVersionOutput
-    GetHostedConfigurationVersionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    GetHostedConfigurationVersionRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetHostedConfigurationVersionRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetHostedConfigurationVersionRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetHostedConfigurationVersionRequest.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VersionNumber", traits: {"smithy.api#default" => nil, "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetHostedConfigurationVersionRequest.type = Types::GetHostedConfigurationVersionRequest
     GrowthType.add_member(:linear, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINEAR", traits: {"smithy.api#enumValue" => "LINEAR"}))
@@ -587,7 +794,7 @@ module Aws::AppConfig
     ListConfigurationProfilesOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationProfileSummaryList, name: "Items"))
     ListConfigurationProfilesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListConfigurationProfilesOutput.type = Types::ListConfigurationProfilesOutput
-    ListConfigurationProfilesRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListConfigurationProfilesRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListConfigurationProfilesRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max_results"}))
     ListConfigurationProfilesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
     ListConfigurationProfilesRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ConfigurationProfileType, name: "Type", traits: {"smithy.api#httpQuery" => "type"}))
@@ -601,18 +808,46 @@ module Aws::AppConfig
     ListDeploymentsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentList, name: "Items"))
     ListDeploymentsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListDeploymentsOutput.type = Types::ListDeploymentsOutput
-    ListDeploymentsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListDeploymentsRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListDeploymentsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListDeploymentsRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListDeploymentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max_results"}))
     ListDeploymentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
     ListDeploymentsRequest.type = Types::ListDeploymentsRequest
     ListEnvironmentsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentList, name: "Items"))
     ListEnvironmentsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListEnvironmentsOutput.type = Types::ListEnvironmentsOutput
-    ListEnvironmentsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListEnvironmentsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListEnvironmentsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max_results"}))
     ListEnvironmentsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
     ListEnvironmentsRequest.type = Types::ListEnvironmentsRequest
+    ListExperimentDefinitionsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionList, name: "Items"))
+    ListExperimentDefinitionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListExperimentDefinitionsOutput.type = Types::ListExperimentDefinitionsOutput
+    ListExperimentDefinitionsRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpQuery" => "application_identifier"}))
+    ListExperimentDefinitionsRequest.add_member(:configuration_profile_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ConfigurationProfileIdentifier", traits: {"smithy.api#httpQuery" => "configuration_profile_identifier"}))
+    ListExperimentDefinitionsRequest.add_member(:environment_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "EnvironmentIdentifier", traits: {"smithy.api#httpQuery" => "environment_identifier"}))
+    ListExperimentDefinitionsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionStatus, name: "Status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListExperimentDefinitionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max_results"}))
+    ListExperimentDefinitionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
+    ListExperimentDefinitionsRequest.type = Types::ListExperimentDefinitionsRequest
+    ListExperimentRunEventsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunEventList, name: "Items"))
+    ListExperimentRunEventsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListExperimentRunEventsOutput.type = Types::ListExperimentRunEventsOutput
+    ListExperimentRunEventsRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListExperimentRunEventsRequest.add_member(:experiment_definition_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExperimentDefinitionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListExperimentRunEventsRequest.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "Run", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListExperimentRunEventsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max_results"}))
+    ListExperimentRunEventsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
+    ListExperimentRunEventsRequest.type = Types::ListExperimentRunEventsRequest
+    ListExperimentRunsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunSummaryList, name: "Items"))
+    ListExperimentRunsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
+    ListExperimentRunsOutput.type = Types::ListExperimentRunsOutput
+    ListExperimentRunsRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListExperimentRunsRequest.add_member(:experiment_definition_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExperimentDefinitionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListExperimentRunsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max_results"}))
+    ListExperimentRunsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
+    ListExperimentRunsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunStatus, name: "Status", traits: {"smithy.api#httpQuery" => "status"}))
+    ListExperimentRunsRequest.type = Types::ListExperimentRunsRequest
     ListExtensionAssociationsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: ExtensionAssociationSummaries, name: "Items"))
     ListExtensionAssociationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListExtensionAssociationsOutput.type = Types::ListExtensionAssociationsOutput
@@ -632,8 +867,8 @@ module Aws::AppConfig
     ListHostedConfigurationVersionsOutput.add_member(:items, ::Smithy::Schema::Shapes::MemberShape.new(target: HostedConfigurationVersionSummaryList, name: "Items"))
     ListHostedConfigurationVersionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken"))
     ListHostedConfigurationVersionsOutput.type = Types::ListHostedConfigurationVersionsOutput
-    ListHostedConfigurationVersionsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ListHostedConfigurationVersionsRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListHostedConfigurationVersionsRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListHostedConfigurationVersionsRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListHostedConfigurationVersionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "max_results"}))
     ListHostedConfigurationVersionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "NextToken", traits: {"smithy.api#httpQuery" => "next_token"}))
     ListHostedConfigurationVersionsRequest.add_member(:version_label, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryName, name: "VersionLabel", traits: {"smithy.api#httpQuery" => "version_label"}))
@@ -646,6 +881,7 @@ module Aws::AppConfig
     Monitor.add_member(:alarm_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "AlarmRoleArn"))
     Monitor.type = Types::Monitor
     MonitorList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Monitor, name: "member"))
+    NumberList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "member"))
     Parameter.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     Parameter.add_member(:required, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Required", traits: {"smithy.api#default" => false}))
     Parameter.add_member(:dynamic, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Dynamic", traits: {"smithy.api#default" => false}))
@@ -689,16 +925,38 @@ module Aws::AppConfig
     StartDeploymentOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
     StartDeploymentOutput.add_member(:version_label, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "VersionLabel"))
     StartDeploymentOutput.type = Types::StartDeploymentOutput
-    StartDeploymentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StartDeploymentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartDeploymentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartDeploymentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartDeploymentRequest.add_member(:deployment_strategy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentStrategyId, name: "DeploymentStrategyId", traits: {"smithy.api#required" => {}}))
-    StartDeploymentRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId", traits: {"smithy.api#required" => {}}))
+    StartDeploymentRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "ConfigurationProfileId", traits: {"smithy.api#required" => {}}))
     StartDeploymentRequest.add_member(:configuration_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "ConfigurationVersion", traits: {"smithy.api#required" => {}}))
     StartDeploymentRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     StartDeploymentRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     StartDeploymentRequest.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
     StartDeploymentRequest.add_member(:dynamic_extension_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamicParameterMap, name: "DynamicExtensionParameters"))
+    StartDeploymentRequest.add_member(:latest_deployment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "LatestDeploymentNumber", traits: {"smithy.api#default" => nil}))
     StartDeploymentRequest.type = Types::StartDeploymentRequest
+    StartExperimentRunOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
+    StartExperimentRunOutput.add_member(:experiment_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ExperimentDefinitionId"))
+    StartExperimentRunOutput.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Run", traits: {"smithy.api#default" => 0}))
+    StartExperimentRunOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    StartExperimentRunOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunStatus, name: "Status"))
+    StartExperimentRunOutput.add_member(:exposure_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePercentage, name: "ExposurePercentage"))
+    StartExperimentRunOutput.add_member(:treatment_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentOverrides, name: "TreatmentOverrides"))
+    StartExperimentRunOutput.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunResult, name: "Result"))
+    StartExperimentRunOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "StartedAt"))
+    StartExperimentRunOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "UpdatedAt"))
+    StartExperimentRunOutput.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "EndedAt"))
+    StartExperimentRunOutput.add_member(:experiment_definition_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionSnapshot, name: "ExperimentDefinitionSnapshot"))
+    StartExperimentRunOutput.type = Types::StartExperimentRunOutput
+    StartExperimentRunRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartExperimentRunRequest.add_member(:experiment_definition_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExperimentDefinitionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartExperimentRunRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    StartExperimentRunRequest.add_member(:exposure_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePercentage, name: "ExposurePercentage"))
+    StartExperimentRunRequest.add_member(:treatment_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentOverrides, name: "TreatmentOverrides"))
+    StartExperimentRunRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
+    StartExperimentRunRequest.add_member(:deployment_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentParameters, name: "DeploymentParameters"))
+    StartExperimentRunRequest.type = Types::StartExperimentRunRequest
     StopDeploymentOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
     StopDeploymentOutput.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId"))
     StopDeploymentOutput.add_member(:deployment_strategy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "DeploymentStrategyId"))
@@ -722,17 +980,53 @@ module Aws::AppConfig
     StopDeploymentOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
     StopDeploymentOutput.add_member(:version_label, ::Smithy::Schema::Shapes::MemberShape.new(target: VersionLabel, name: "VersionLabel"))
     StopDeploymentOutput.type = Types::StopDeploymentOutput
-    StopDeploymentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    StopDeploymentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopDeploymentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopDeploymentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopDeploymentRequest.add_member(:deployment_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "DeploymentNumber", traits: {"smithy.api#default" => nil, "smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopDeploymentRequest.add_member(:allow_revert, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "AllowRevert", traits: {"smithy.api#default" => nil, "smithy.api#httpHeader" => "Allow-Revert"}))
     StopDeploymentRequest.type = Types::StopDeploymentRequest
+    StopExperimentRunOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
+    StopExperimentRunOutput.add_member(:experiment_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ExperimentDefinitionId"))
+    StopExperimentRunOutput.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Run", traits: {"smithy.api#default" => 0}))
+    StopExperimentRunOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    StopExperimentRunOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunStatus, name: "Status"))
+    StopExperimentRunOutput.add_member(:exposure_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePercentage, name: "ExposurePercentage"))
+    StopExperimentRunOutput.add_member(:treatment_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentOverrides, name: "TreatmentOverrides"))
+    StopExperimentRunOutput.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunResult, name: "Result"))
+    StopExperimentRunOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "StartedAt"))
+    StopExperimentRunOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "UpdatedAt"))
+    StopExperimentRunOutput.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "EndedAt"))
+    StopExperimentRunOutput.add_member(:experiment_definition_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionSnapshot, name: "ExperimentDefinitionSnapshot"))
+    StopExperimentRunOutput.type = Types::StopExperimentRunOutput
+    StopExperimentRunRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopExperimentRunRequest.add_member(:experiment_definition_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExperimentDefinitionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopExperimentRunRequest.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "Run", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopExperimentRunRequest.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunResult, name: "Result"))
+    StopExperimentRunRequest.add_member(:deployment_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentParameters, name: "DeploymentParameters"))
+    StopExperimentRunRequest.type = Types::StopExperimentRunRequest
+    StringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeString, name: "member"))
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
     TagResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     TagResourceRequest.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#required" => {}}))
     TagResourceRequest.type = Types::TagResourceRequest
+    Treatment.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentKey, name: "Key"))
+    Treatment.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: Weight, name: "Weight", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    Treatment.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    Treatment.add_member(:flag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FlagValue, name: "FlagValue", traits: {"smithy.api#required" => {}}))
+    Treatment.type = Types::Treatment
+    TreatmentInput.add_member(:weight, ::Smithy::Schema::Shapes::MemberShape.new(target: Weight, name: "Weight", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    TreatmentInput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    TreatmentInput.add_member(:flag_value, ::Smithy::Schema::Shapes::MemberShape.new(target: FlagValue, name: "FlagValue", traits: {"smithy.api#required" => {}}))
+    TreatmentInput.type = Types::TreatmentInput
+    TreatmentInputList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentInput, name: "member"))
+    TreatmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Treatment, name: "member"))
+    TreatmentOverrideMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: EntityId, name: "key"))
+    TreatmentOverrideMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentKey, name: "value"))
+    TreatmentOverrides.add_member(:inline, Types::TreatmentOverrides::Inline, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentOverrideMap, name: "Inline"))
+    TreatmentOverrides.add_member(:unknown, Types::TreatmentOverrides::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    TreatmentOverrides.type = Types::TreatmentOverrides
     TriggeredBy.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "USER"}))
     TriggeredBy.add_member(:appconfig, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "APPCONFIG", traits: {"smithy.api#enumValue" => "APPCONFIG"}))
     TriggeredBy.add_member(:cloudwatch_alarm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLOUDWATCH_ALARM", traits: {"smithy.api#enumValue" => "CLOUDWATCH_ALARM"}))
@@ -741,14 +1035,16 @@ module Aws::AppConfig
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UpdateAccountSettingsOutput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionSettings, name: "DeletionProtection"))
+    UpdateAccountSettingsOutput.add_member(:vended_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: VendedMetricsSettings, name: "VendedMetrics"))
     UpdateAccountSettingsOutput.type = Types::UpdateAccountSettingsOutput
     UpdateAccountSettingsRequest.add_member(:deletion_protection, ::Smithy::Schema::Shapes::MemberShape.new(target: DeletionProtectionSettings, name: "DeletionProtection"))
+    UpdateAccountSettingsRequest.add_member(:vended_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: VendedMetricsSettings, name: "VendedMetrics"))
     UpdateAccountSettingsRequest.type = Types::UpdateAccountSettingsRequest
     UpdateApplicationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
     UpdateApplicationOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     UpdateApplicationOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     UpdateApplicationOutput.type = Types::UpdateApplicationOutput
-    UpdateApplicationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateApplicationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateApplicationRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     UpdateApplicationRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     UpdateApplicationRequest.type = Types::UpdateApplicationRequest
@@ -763,8 +1059,8 @@ module Aws::AppConfig
     UpdateConfigurationProfileOutput.add_member(:kms_key_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "KmsKeyArn"))
     UpdateConfigurationProfileOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
     UpdateConfigurationProfileOutput.type = Types::UpdateConfigurationProfileOutput
-    UpdateConfigurationProfileRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateConfigurationProfileRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateConfigurationProfileRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateConfigurationProfileRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateConfigurationProfileRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "Name"))
     UpdateConfigurationProfileRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     UpdateConfigurationProfileRequest.add_member(:retrieval_role_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: RoleArn, name: "RetrievalRoleArn"))
@@ -794,12 +1090,59 @@ module Aws::AppConfig
     UpdateEnvironmentOutput.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentState, name: "State"))
     UpdateEnvironmentOutput.add_member(:monitors, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorList, name: "Monitors"))
     UpdateEnvironmentOutput.type = Types::UpdateEnvironmentOutput
-    UpdateEnvironmentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    UpdateEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateEnvironmentRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateEnvironmentRequest.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "EnvironmentId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateEnvironmentRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
     UpdateEnvironmentRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
     UpdateEnvironmentRequest.add_member(:monitors, ::Smithy::Schema::Shapes::MemberShape.new(target: MonitorList, name: "Monitors"))
     UpdateEnvironmentRequest.type = Types::UpdateEnvironmentRequest
+    UpdateExperimentDefinitionOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
+    UpdateExperimentDefinitionOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "Id"))
+    UpdateExperimentDefinitionOutput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "Name"))
+    UpdateExperimentDefinitionOutput.add_member(:hypothesis, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Hypothesis"))
+    UpdateExperimentDefinitionOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionStatus, name: "Status"))
+    UpdateExperimentDefinitionOutput.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId"))
+    UpdateExperimentDefinitionOutput.add_member(:environment_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "EnvironmentId"))
+    UpdateExperimentDefinitionOutput.add_member(:flag_key, ::Smithy::Schema::Shapes::MemberShape.new(target: FlagKey, name: "FlagKey"))
+    UpdateExperimentDefinitionOutput.add_member(:audience_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "AudienceRule"))
+    UpdateExperimentDefinitionOutput.add_member(:audience_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "AudienceDescription"))
+    UpdateExperimentDefinitionOutput.add_member(:launch_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "LaunchCriteria"))
+    UpdateExperimentDefinitionOutput.add_member(:treatments, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentList, name: "Treatments"))
+    UpdateExperimentDefinitionOutput.add_member(:control, ::Smithy::Schema::Shapes::MemberShape.new(target: Treatment, name: "Control"))
+    UpdateExperimentDefinitionOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "CreatedAt"))
+    UpdateExperimentDefinitionOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "UpdatedAt"))
+    UpdateExperimentDefinitionOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: KmsKeyIdentifier, name: "KmsKeyIdentifier"))
+    UpdateExperimentDefinitionOutput.type = Types::UpdateExperimentDefinitionOutput
+    UpdateExperimentDefinitionRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateExperimentDefinitionRequest.add_member(:experiment_definition_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExperimentDefinitionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateExperimentDefinitionRequest.add_member(:treatments, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentInputList, name: "Treatments"))
+    UpdateExperimentDefinitionRequest.add_member(:control, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentInput, name: "Control"))
+    UpdateExperimentDefinitionRequest.add_member(:hypothesis, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Hypothesis"))
+    UpdateExperimentDefinitionRequest.add_member(:audience_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: Rule, name: "AudienceRule"))
+    UpdateExperimentDefinitionRequest.add_member(:audience_description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "AudienceDescription"))
+    UpdateExperimentDefinitionRequest.add_member(:launch_criteria, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "LaunchCriteria"))
+    UpdateExperimentDefinitionRequest.type = Types::UpdateExperimentDefinitionRequest
+    UpdateExperimentRunOutput.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId"))
+    UpdateExperimentRunOutput.add_member(:experiment_definition_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ExperimentDefinitionId"))
+    UpdateExperimentRunOutput.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Run", traits: {"smithy.api#default" => 0}))
+    UpdateExperimentRunOutput.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    UpdateExperimentRunOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunStatus, name: "Status"))
+    UpdateExperimentRunOutput.add_member(:exposure_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePercentage, name: "ExposurePercentage"))
+    UpdateExperimentRunOutput.add_member(:treatment_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentOverrides, name: "TreatmentOverrides"))
+    UpdateExperimentRunOutput.add_member(:result, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentRunResult, name: "Result"))
+    UpdateExperimentRunOutput.add_member(:started_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "StartedAt"))
+    UpdateExperimentRunOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "UpdatedAt"))
+    UpdateExperimentRunOutput.add_member(:ended_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Iso8601DateTime, name: "EndedAt"))
+    UpdateExperimentRunOutput.add_member(:experiment_definition_snapshot, ::Smithy::Schema::Shapes::MemberShape.new(target: ExperimentDefinitionSnapshot, name: "ExperimentDefinitionSnapshot"))
+    UpdateExperimentRunOutput.type = Types::UpdateExperimentRunOutput
+    UpdateExperimentRunRequest.add_member(:application_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ApplicationIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateExperimentRunRequest.add_member(:experiment_definition_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "ExperimentDefinitionIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateExperimentRunRequest.add_member(:run, ::Smithy::Schema::Shapes::MemberShape.new(target: PositiveInteger, name: "Run", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateExperimentRunRequest.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: Description, name: "Description"))
+    UpdateExperimentRunRequest.add_member(:exposure_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: NullablePercentage, name: "ExposurePercentage"))
+    UpdateExperimentRunRequest.add_member(:treatment_overrides, ::Smithy::Schema::Shapes::MemberShape.new(target: TreatmentOverrides, name: "TreatmentOverrides"))
+    UpdateExperimentRunRequest.add_member(:deployment_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: DeploymentParameters, name: "DeploymentParameters"))
+    UpdateExperimentRunRequest.type = Types::UpdateExperimentRunRequest
     UpdateExtensionAssociationOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: Identifier, name: "Id"))
     UpdateExtensionAssociationOutput.add_member(:extension_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ExtensionArn"))
     UpdateExtensionAssociationOutput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn"))
@@ -824,8 +1167,8 @@ module Aws::AppConfig
     UpdateExtensionRequest.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterMap, name: "Parameters"))
     UpdateExtensionRequest.add_member(:version_number, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "VersionNumber", traits: {"smithy.api#default" => nil}))
     UpdateExtensionRequest.type = Types::UpdateExtensionRequest
-    ValidateConfigurationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
-    ValidateConfigurationRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Id, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ValidateConfigurationRequest.add_member(:application_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ApplicationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ValidateConfigurationRequest.add_member(:configuration_profile_id, ::Smithy::Schema::Shapes::MemberShape.new(target: LongName, name: "ConfigurationProfileId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ValidateConfigurationRequest.add_member(:configuration_version, ::Smithy::Schema::Shapes::MemberShape.new(target: Version, name: "ConfigurationVersion", traits: {"smithy.api#httpQuery" => "configuration_version", "smithy.api#required" => {}}))
     ValidateConfigurationRequest.type = Types::ValidateConfigurationRequest
     Validator.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatorType, name: "Type", traits: {"smithy.api#required" => {}}))
@@ -835,12 +1178,14 @@ module Aws::AppConfig
     ValidatorType.add_member(:json_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON_SCHEMA", traits: {"smithy.api#enumValue" => "JSON_SCHEMA"}))
     ValidatorType.add_member(:lambda, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LAMBDA", traits: {"smithy.api#enumValue" => "LAMBDA"}))
     ValidatorTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidatorType, name: "member"))
+    VendedMetricsSettings.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "Enabled", traits: {"smithy.api#default" => nil}))
+    VendedMetricsSettings.type = Types::VendedMetricsSettings
 
     AmazonAppConfig = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.appconfig#AmazonAppConfig"
       service.name = "AmazonAppConfig"
       service.version = "2019-10-09"
-      service.traits = {"aws.api#service" => {"sdkId" => "AppConfig", "arnNamespace" => "appconfig", "cloudFormationName" => "AppConfig", "cloudTrailEventSource" => "appconfig.amazonaws.com", "endpointPrefix" => "appconfig"}, "aws.auth#sigv4" => {"name" => "appconfig"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon AppConfig"}
+      service.traits = {"aws.api#service" => {"sdkId" => "AppConfig", "arnNamespace" => "appconfig", "cloudFormationName" => "AppConfig", "cloudTrailEventSource" => "appconfig.amazonaws.com", "endpointPrefix" => "appconfig"}, "aws.auth#sigv4" => {"name" => "appconfig"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon AppConfig", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-east-1"]}, {"fn" => "stringEquals", "argv" => [{"ref" => "Region"}, "us-gov-west-1"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://appconfig-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://appconfig.us-gov-east-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://appconfig.us-gov-west-1.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://appconfig-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://appconfig.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://appconfig.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 15, "nodes" => "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED"}}
       service.add_operation(:create_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfig#CreateApplication"
         operation.name = "CreateApplication"
@@ -882,6 +1227,18 @@ module Aws::AppConfig
         operation.errors << ResourceNotFoundException
         operation.errors << ServiceQuotaExceededException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{ApplicationId}/environments", "code" => 201}}
+      end)
+      service.add_operation(:create_experiment_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#CreateExperimentDefinition"
+        operation.name = "CreateExperimentDefinition"
+        operation.input = CreateExperimentDefinitionRequest
+        operation.output = CreateExperimentDefinitionOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ServiceQuotaExceededException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions", "code" => 201}}
       end)
       service.add_operation(:create_extension, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfig#CreateExtension"
@@ -959,6 +1316,17 @@ module Aws::AppConfig
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/applications/{ApplicationId}/environments/{EnvironmentId}", "code" => 204}}
+      end)
+      service.add_operation(:delete_experiment_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#DeleteExperimentDefinition"
+        operation.name = "DeleteExperimentDefinition"
+        operation.input = DeleteExperimentDefinitionRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}", "code" => 204}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:delete_extension, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfig#DeleteExtension"
@@ -1059,6 +1427,26 @@ module Aws::AppConfig
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{ApplicationId}/environments/{EnvironmentId}", "code" => 200}}
       end)
+      service.add_operation(:get_experiment_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#GetExperimentDefinition"
+        operation.name = "GetExperimentDefinition"
+        operation.input = GetExperimentDefinitionRequest
+        operation.output = GetExperimentDefinitionOutput
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:get_experiment_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#GetExperimentRun"
+        operation.name = "GetExperimentRun"
+        operation.input = GetExperimentRunRequest
+        operation.output = GetExperimentRunOutput
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns/{Run}", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_extension, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfig#GetExtension"
         operation.name = "GetExtension"
@@ -1142,6 +1530,39 @@ module Aws::AppConfig
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{ApplicationId}/environments", "code" => 200}}
         operation[:paginator] = Paginators::ListEnvironments.new
       end)
+      service.add_operation(:list_experiment_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#ListExperimentDefinitions"
+        operation.name = "ListExperimentDefinitions"
+        operation.input = ListExperimentDefinitionsRequest
+        operation.output = ListExperimentDefinitionsOutput
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/experimentdefinitions", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListExperimentDefinitions.new
+      end)
+      service.add_operation(:list_experiment_run_events, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#ListExperimentRunEvents"
+        operation.name = "ListExperimentRunEvents"
+        operation.input = ListExperimentRunEventsRequest
+        operation.output = ListExperimentRunEventsOutput
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns/{Run}/events", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListExperimentRunEvents.new
+      end)
+      service.add_operation(:list_experiment_runs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#ListExperimentRuns"
+        operation.name = "ListExperimentRuns"
+        operation.input = ListExperimentRunsRequest
+        operation.output = ListExperimentRunsOutput
+        operation.errors << BadRequestException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns", "code" => 200}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListExperimentRuns.new
+      end)
       service.add_operation(:list_extension_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfig#ListExtensionAssociations"
         operation.name = "ListExtensionAssociations"
@@ -1194,6 +1615,17 @@ module Aws::AppConfig
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{ApplicationId}/environments/{EnvironmentId}/deployments", "code" => 201}}
       end)
+      service.add_operation(:start_experiment_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#StartExperimentRun"
+        operation.name = "StartExperimentRun"
+        operation.input = StartExperimentRunRequest
+        operation.output = StartExperimentRunOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns", "code" => 201}}
+      end)
       service.add_operation(:stop_deployment, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfig#StopDeployment"
         operation.name = "StopDeployment"
@@ -1203,6 +1635,17 @@ module Aws::AppConfig
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "DELETE", "uri" => "/applications/{ApplicationId}/environments/{EnvironmentId}/deployments/{DeploymentNumber}", "code" => 202}}
+      end)
+      service.add_operation(:stop_experiment_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#StopExperimentRun"
+        operation.name = "StopExperimentRun"
+        operation.input = StopExperimentRunRequest
+        operation.output = StopExperimentRunOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns/{Run}/stop", "code" => 200}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfig#TagResource"
@@ -1272,6 +1715,28 @@ module Aws::AppConfig
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/applications/{ApplicationId}/environments/{EnvironmentId}", "code" => 200}}
+      end)
+      service.add_operation(:update_experiment_definition, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#UpdateExperimentDefinition"
+        operation.name = "UpdateExperimentDefinition"
+        operation.input = UpdateExperimentDefinitionRequest
+        operation.output = UpdateExperimentDefinitionOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}", "code" => 200}}
+      end)
+      service.add_operation(:update_experiment_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.appconfig#UpdateExperimentRun"
+        operation.name = "UpdateExperimentRun"
+        operation.input = UpdateExperimentRunRequest
+        operation.output = UpdateExperimentRunOutput
+        operation.errors << BadRequestException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.traits = {"smithy.api#http" => {"method" => "PATCH", "uri" => "/applications/{ApplicationIdentifier}/experimentdefinitions/{ExperimentDefinitionIdentifier}/experimentruns/{Run}/update", "code" => 200}}
       end)
       service.add_operation(:update_extension, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.appconfig#UpdateExtension"

@@ -138,7 +138,12 @@ module Aws::WorkSpacesWeb
       ?customer_managed_key: String,
       ?additional_encryption_context: Hash[String, String],
       ?browser_policy: String,
-      ?client_token: String
+      ?client_token: String,
+      ?web_content_filtering_policy: {
+        blocked_categories: Array[String],
+        allowed_urls: Array[String],
+        blocked_urls: untyped
+      }
     ) -> _CreateBrowserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrowserSettingsResponse
 
     interface _CreateDataProtectionSettingsResponse
@@ -259,7 +264,8 @@ module Aws::WorkSpacesWeb
       ?client_token: String,
       ?authentication_type: String,
       ?instance_type: String,
-      ?max_concurrent_sessions: Integer
+      ?max_concurrent_sessions: Integer,
+      ?portal_custom_domain: String
     ) -> _CreatePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePortalResponse
 
     interface _CreateSessionLoggerResponse
@@ -360,7 +366,33 @@ module Aws::WorkSpacesWeb
         visual_mode: String,
         hidden_toolbar_items: Array[String],
         max_display_resolution: String
-      }
+      },
+      ?branding_configuration_input: {
+        logo: {
+          blob: String,
+          s3_uri: String
+        },
+        wallpaper: {
+          blob: String,
+          s3_uri: untyped
+        },
+        favicon: untyped,
+        localized_strings: Hash[String,
+          {
+            browser_tab_title: String,
+            welcome_text: untyped,
+            login_title: untyped,
+            login_description: untyped,
+            login_button_text: untyped,
+            contact_link: String,
+            contact_button_text: untyped,
+            loading_text: untyped
+          }
+        ],
+        color_theme: String,
+        terms_of_service: String
+      },
+      ?web_authn_allowed: String
     ) -> _CreateUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserSettingsResponse
 
     interface _DeleteBrowserSettingsResponse
@@ -770,7 +802,12 @@ module Aws::WorkSpacesWeb
     def update_browser_settings: (
       ?browser_settings_arn: String,
       ?browser_policy: String,
-      ?client_token: String
+      ?client_token: String,
+      ?web_content_filtering_policy: {
+        blocked_categories: Array[String],
+        allowed_urls: Array[String],
+        blocked_urls: untyped
+      }
     ) -> _UpdateBrowserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrowserSettingsResponse
 
     interface _UpdateDataProtectionSettingsResponse
@@ -857,7 +894,8 @@ module Aws::WorkSpacesWeb
       ?display_name: String,
       ?authentication_type: String,
       ?instance_type: String,
-      ?max_concurrent_sessions: Integer
+      ?max_concurrent_sessions: Integer,
+      ?portal_custom_domain: String
     ) -> _UpdatePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePortalResponse
 
     interface _UpdateSessionLoggerResponse
@@ -934,7 +972,33 @@ module Aws::WorkSpacesWeb
         visual_mode: String,
         hidden_toolbar_items: Array[String],
         max_display_resolution: String
-      }
+      },
+      ?branding_configuration_input: {
+        logo: {
+          blob: String,
+          s3_uri: String
+        },
+        wallpaper: {
+          blob: String,
+          s3_uri: untyped
+        },
+        favicon: untyped,
+        localized_strings: Hash[String,
+          {
+            browser_tab_title: String,
+            welcome_text: untyped,
+            login_title: untyped,
+            login_description: untyped,
+            login_button_text: untyped,
+            contact_link: String,
+            contact_button_text: untyped,
+            loading_text: untyped
+          }
+        ],
+        color_theme: String,
+        terms_of_service: String
+      },
+      ?web_authn_allowed: String
     ) -> _UpdateUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserSettingsResponse
   end
 end

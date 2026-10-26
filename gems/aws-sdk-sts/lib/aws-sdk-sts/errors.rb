@@ -23,13 +23,17 @@ module Aws::STS
   # ## Error Classes
   #
   # * {ExpiredTokenException}
+  # * {ExpiredTradeInTokenException}
   # * {IDPCommunicationErrorException}
   # * {IDPRejectedClaimException}
   # * {InvalidAuthorizationMessageException}
   # * {InvalidIdentityTokenException}
+  # * {JWTPayloadSizeExceededException}
   # * {MalformedPolicyDocumentException}
+  # * {OutboundWebIdentityFederationDisabledException}
   # * {PackedPolicyTooLargeException}
   # * {RegionDisabledException}
+  # * {SessionDurationEscalationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -41,6 +45,20 @@ module Aws::STS
     class ExpiredTokenException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::STS::Types::ExpiredTokenException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The trade-in token provided in the request has expired and can no longer be exchanged
+    #             for credentials. Request a new token and retry the operation.</p>
+    class ExpiredTradeInTokenException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::STS::Types::ExpiredTradeInTokenException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -112,11 +130,38 @@ module Aws::STS
       end
     end
 
+    # <p>The requested token payload size exceeds the maximum allowed size. Reduce the number of request tags included in the <code>GetWebIdentityToken</code> API call to reduce the token payload size.</p>
+    class JWTPayloadSizeExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::STS::Types::JWTPayloadSizeExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The request was rejected because the policy document was malformed. The error message
     #             describes the specific error.</p>
     class MalformedPolicyDocumentException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::STS::Types::MalformedPolicyDocumentException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The outbound web identity federation feature is not enabled for this account. To use
+    #             this feature, you must first enable it through the Amazon Web Services Management Console or API.</p>
+    class OutboundWebIdentityFederationDisabledException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::STS::Types::OutboundWebIdentityFederationDisabledException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -149,12 +194,25 @@ module Aws::STS
 
     # <p>STS is not activated in the requested region for the account that is being asked to
     #             generate credentials. The account administrator must use the IAM console to activate
-    #             STS in that region. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
-    #                 Deactivating STS in an Amazon Web Services Region</a> in the <i>IAM User
-    #                 Guide</i>.</p>
+    #             STS in that region. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-activate-deactivate">Activating and Deactivating STS in an Amazon Web Services Region</a> in the <i>IAM
+    #                 User Guide</i>.</p>
     class RegionDisabledException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::STS::Types::RegionDisabledException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The requested token duration would extend the session beyond its original expiration time.
+    #             You cannot use this operation to extend the lifetime of a session beyond what was granted when the session was originally created.</p>
+    class SessionDurationEscalationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::STS::Types::SessionDurationEscalationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

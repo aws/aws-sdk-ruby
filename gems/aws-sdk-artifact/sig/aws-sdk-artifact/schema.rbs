@@ -7,42 +7,94 @@ module Aws::Artifact
     AccountSettings: StructureShape
     AgreementTerms: ListShape
     AgreementType: EnumShape
+    Citation: StructureShape
+    CitationList: ListShape
     ConflictException: StructureShape
+    CreateComplianceInquiryRequest: StructureShape
+    CreateComplianceInquiryResponse: StructureShape
     CustomerAgreementIdAttribute: StringShape
     CustomerAgreementList: ListShape
     CustomerAgreementState: EnumShape
     CustomerAgreementSummary: StructureShape
+    ExportComplianceInquiryRequest: StructureShape
+    ExportComplianceInquiryResponse: StructureShape
+    FeedbackCommentAttribute: StringShape
+    FeedbackRating: EnumShape
+    FeedbackReasonCode: EnumShape
+    FeedbackReasonCodeList: ListShape
+    FileSectionList: ListShape
     GetAccountSettingsRequest: StructureShape
     GetAccountSettingsResponse: StructureShape
+    GetComplianceInquiryMetadataRequest: StructureShape
+    GetComplianceInquiryMetadataResponse: StructureShape
     GetReportMetadataRequest: StructureShape
     GetReportMetadataResponse: StructureShape
     GetReportRequest: StructureShape
     GetReportResponse: StructureShape
     GetTermForReportRequest: StructureShape
     GetTermForReportResponse: StructureShape
+    IdempotentClientToken: StringShape
+    InputSource: EnumShape
+    InquiriesList: ListShape
+    InquiryContent: UnionShape
+    InquiryDetail: StructureShape
+    InquiryFileContent: StructureShape
+    InquiryId: StringShape
+    InquiryName: StringShape
+    InquiryStatus: EnumShape
+    InquiryStatusMessage: EnumShape
+    InquirySummary: StructureShape
+    InquirySupportMode: EnumShape
     InternalServerException: StructureShape
+    ListComplianceInquiriesRequest: StructureShape
+    ListComplianceInquiriesResponse: StructureShape
+    ListComplianceInquiryQueriesRequest: StructureShape
+    ListComplianceInquiryQueriesResponse: StructureShape
     ListCustomerAgreementsRequest: StructureShape
     ListCustomerAgreementsResponse: StructureShape
+    ListReportVersionsRequest: StructureShape
+    ListReportVersionsResponse: StructureShape
     ListReportsRequest: StructureShape
     ListReportsResponse: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
     LongStringAttribute: StringShape
     MaxResultsAttribute: IntegerShape
     NextTokenAttribute: StringShape
     NotificationSubscriptionStatus: EnumShape
+    PresignedUrl: StringShape
     PublishedState: EnumShape
     PutAccountSettingsRequest: StructureShape
     PutAccountSettingsResponse: StructureShape
+    PutComplianceInquiryFeedbackRequest: StructureShape
+    PutComplianceInquiryFeedbackResponse: StructureShape
+    QueriesList: ListShape
+    QueryIdentifiersList: ListShape
+    QueryStatus: EnumShape
+    QueryStatusMessage: EnumShape
+    QuerySummary: StructureShape
     ReportDetail: StructureShape
     ReportId: StringShape
     ReportSummary: StructureShape
     ReportsList: ListShape
     ResourceNotFoundException: StructureShape
+    ResponseVersion: StructureShape
+    ResponseVersionList: ListShape
+    ReviewType: EnumShape
     SequenceNumberAttribute: IntegerShape
     ServiceQuotaExceededException: StructureShape
     ShortStringAttribute: StringShape
     StatusMessage: StringShape
+    TagKey: StringShape
+    TagKeys: ListShape
+    TagResourceRequest: StructureShape
+    TagResourceResponse: StructureShape
+    TagValue: StringShape
+    TagsMap: MapShape
     ThrottlingException: StructureShape
     TimestampAttribute: TimestampShape
+    UntagResourceRequest: StructureShape
+    UntagResourceResponse: StructureShape
     UploadState: EnumShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape

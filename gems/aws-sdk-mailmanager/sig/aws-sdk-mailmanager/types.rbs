@@ -280,6 +280,29 @@ module Aws::MailManager
       end
     end
 
+    class BounceAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_failure_policy: String,
+        ?role_arn: String,
+        ?sender: String,
+        ?status_code: String,
+        ?smtp_reply_code: String,
+        ?diagnostic_message: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_failure_policy: String?
+      attr_accessor role_arn: String?
+      attr_accessor sender: String?
+      attr_accessor status_code: String?
+      attr_accessor smtp_reply_code: String?
+      attr_accessor diagnostic_message: String?
+      attr_accessor message: String?
+    end
+
     class ConflictException
       include Smithy::Schema::Structure
 
@@ -440,6 +463,7 @@ module Aws::MailManager
         ?traffic_policy_id: String,
         ?ingress_point_configuration: Types::IngressPointConfiguration,
         ?network_configuration: Types::NetworkConfiguration,
+        ?tls_policy: String,
         ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -451,6 +475,7 @@ module Aws::MailManager
       attr_accessor traffic_policy_id: String?
       attr_accessor ingress_point_configuration: Types::IngressPointConfiguration?
       attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor tls_policy: String?
       attr_accessor tags: Array[Types::Tag]?
     end
 
@@ -1155,10 +1180,12 @@ module Aws::MailManager
 
       def initialize: (
         ?ingress_point_id: String,
+        ?include_trust_store_contents: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ingress_point_id: String?
+      attr_accessor include_trust_store_contents: String?
     end
 
     class GetIngressPointResponse
@@ -1175,6 +1202,7 @@ module Aws::MailManager
         ?traffic_policy_id: String,
         ?ingress_point_auth_configuration: Types::IngressPointAuthConfiguration,
         ?network_configuration: Types::NetworkConfiguration,
+        ?tls_policy: String,
         ?created_timestamp: Time,
         ?last_updated_timestamp: Time,
       ) -> void
@@ -1190,6 +1218,7 @@ module Aws::MailManager
       attr_accessor traffic_policy_id: String?
       attr_accessor ingress_point_auth_configuration: Types::IngressPointAuthConfiguration?
       attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor tls_policy: String?
       attr_accessor created_timestamp: Time?
       attr_accessor last_updated_timestamp: Time?
     end
@@ -1549,11 +1578,13 @@ module Aws::MailManager
       def initialize: (
         ?ingress_point_password_configuration: Types::IngressPointPasswordConfiguration,
         ?secret_arn: String,
+        ?tls_auth_configuration: Types::TlsAuthConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor ingress_point_password_configuration: Types::IngressPointPasswordConfiguration?
       attr_accessor secret_arn: String?
+      attr_accessor tls_auth_configuration: Types::TlsAuthConfiguration?
     end
 
     class IngressPointConfiguration
@@ -1562,15 +1593,19 @@ module Aws::MailManager
       def initialize: (
         ?smtp_password: String,
         ?secret_arn: String,
+        ?tls_auth_configuration: Types::TlsAuthConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor smtp_password: String?
       attr_accessor secret_arn: String?
+      attr_accessor tls_auth_configuration: Types::TlsAuthConfiguration?
 
       class SmtpPassword < IngressPointConfiguration
       end
       class SecretArn < IngressPointConfiguration
+      end
+      class TlsAuthConfiguration < IngressPointConfiguration
       end
       class Unknown < IngressPointConfiguration
       end
@@ -1598,6 +1633,7 @@ module Aws::MailManager
       ACTIVE: String
       CLOSED: String
       FAILED: String
+      ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST: String
     end
 
     module IngressPointStatusToUpdate
@@ -1608,6 +1644,7 @@ module Aws::MailManager
     module IngressPointType
       OPEN: String
       AUTH: String
+      MTLS: String
     end
 
     module IngressStringEmailAttribute
@@ -1702,9 +1739,33 @@ module Aws::MailManager
       end
     end
 
+    class InvokeLambdaAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_failure_policy: String,
+        ?function_arn: String,
+        ?invocation_type: String,
+        ?role_arn: String,
+        ?retry_time_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_failure_policy: String?
+      attr_accessor function_arn: String?
+      attr_accessor invocation_type: String?
+      attr_accessor role_arn: String?
+      attr_accessor retry_time_minutes: Integer?
+    end
+
     module IpType
       IPV4: String
       DUAL_STACK: String
+    end
+
+    module LambdaInvocationType
+      EVENT: String
+      REQUEST_RESPONSE: String
     end
 
     class ListAddonInstancesRequest
@@ -2393,6 +2454,8 @@ module Aws::MailManager
         ?deliver_to_mailbox: Types::DeliverToMailboxAction,
         ?deliver_to_q_business: Types::DeliverToQBusinessAction,
         ?publish_to_sns: Types::SnsAction,
+        ?bounce: Types::BounceAction,
+        ?invoke_lambda: Types::InvokeLambdaAction,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2406,6 +2469,8 @@ module Aws::MailManager
       attr_accessor deliver_to_mailbox: Types::DeliverToMailboxAction?
       attr_accessor deliver_to_q_business: Types::DeliverToQBusinessAction?
       attr_accessor publish_to_sns: Types::SnsAction?
+      attr_accessor bounce: Types::BounceAction?
+      attr_accessor invoke_lambda: Types::InvokeLambdaAction?
 
       class Drop < RuleAction
       end
@@ -2426,6 +2491,10 @@ module Aws::MailManager
       class DeliverToQBusiness < RuleAction
       end
       class PublishToSns < RuleAction
+      end
+      class Bounce < RuleAction
+      end
+      class InvokeLambda < RuleAction
       end
       class Unknown < RuleAction
       end
@@ -2486,6 +2555,17 @@ module Aws::MailManager
       end
       class Unknown < RuleBooleanToEvaluate
       end
+    end
+
+    module RuleClientCertificateAttribute
+      CN: String
+      SAN_RFC822_NAME: String
+      SAN_DNS_NAME: String
+      SAN_DIRECTORY_NAME: String
+      SAN_UNIFORM_RESOURCE_IDENTIFIER: String
+      SAN_IP_ADDRESS: String
+      SAN_REGISTERED_ID: String
+      SERIAL_NUMBER: String
     end
 
     class RuleCondition
@@ -2701,18 +2781,22 @@ module Aws::MailManager
         ?attribute: String,
         ?mime_header_attribute: String,
         ?analysis: Types::Analysis,
+        ?client_certificate_attribute: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor attribute: String?
       attr_accessor mime_header_attribute: String?
       attr_accessor analysis: Types::Analysis?
+      attr_accessor client_certificate_attribute: String?
 
       class Attribute < RuleStringToEvaluate
       end
       class MimeHeaderAttribute < RuleStringToEvaluate
       end
       class Analysis < RuleStringToEvaluate
+      end
+      class ClientCertificateAttribute < RuleStringToEvaluate
       end
       class Unknown < RuleStringToEvaluate
       end
@@ -3094,6 +3178,23 @@ module Aws::MailManager
       attr_accessor message: String?
     end
 
+    class TlsAuthConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_store: Types::TrustStore,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_store: Types::TrustStore?
+    end
+
+    module TlsPolicy
+      REQUIRED: String
+      OPTIONAL: String
+      FIPS: String
+    end
+
     class TrafficPolicy
       include Smithy::Schema::Structure
 
@@ -3107,6 +3208,26 @@ module Aws::MailManager
       attr_accessor traffic_policy_name: String?
       attr_accessor traffic_policy_id: String?
       attr_accessor default_action: String?
+    end
+
+    class TrustStore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ca_content: String,
+        ?crl_content: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ca_content: String?
+      attr_accessor crl_content: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    module TrustStoreResponseOption
+      EXCLUDE: String
+      INCLUDE: String
     end
 
     class UntagResourceRequest
@@ -3165,6 +3286,7 @@ module Aws::MailManager
         ?rule_set_id: String,
         ?traffic_policy_id: String,
         ?ingress_point_configuration: Types::IngressPointConfiguration,
+        ?tls_policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3174,6 +3296,7 @@ module Aws::MailManager
       attr_accessor rule_set_id: String?
       attr_accessor traffic_policy_id: String?
       attr_accessor ingress_point_configuration: Types::IngressPointConfiguration?
+      attr_accessor tls_policy: String?
     end
 
     class UpdateIngressPointResponse

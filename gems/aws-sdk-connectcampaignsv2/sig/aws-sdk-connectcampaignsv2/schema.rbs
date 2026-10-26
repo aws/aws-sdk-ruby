@@ -2,7 +2,10 @@ module Aws::ConnectCampaignsV2
   module Schema
     include Smithy::Schema::Shapes
 
+    AbandonmentRatePacingConfig: StructureShape
     AccessDeniedException: StructureShape
+    AgentAction: StringShape
+    AgentActions: ListShape
     AgentlessConfig: StructureShape
     AnswerMachineDetectionConfig: StructureShape
     Arn: StringShape
@@ -10,6 +13,7 @@ module Aws::ConnectCampaignsV2
     AttributeValue: StringShape
     Attributes: MapShape
     BandwidthAllocation: FloatShape
+    BrowserId: StringShape
     Campaign: StructureShape
     CampaignArn: StringShape
     CampaignDeletionPolicy: StringShape
@@ -21,6 +25,7 @@ module Aws::ConnectCampaignsV2
     CampaignSummary: StructureShape
     CampaignSummaryList: ListShape
     Capacity: FloatShape
+    ChannelContext: StructureShape
     ChannelSubtype: StringShape
     ChannelSubtypeConfig: StructureShape
     ChannelSubtypeList: ListShape
@@ -35,6 +40,7 @@ module Aws::ConnectCampaignsV2
     CommunicationTimeConfig: StructureShape
     CommunicationTimeConfigType: StringShape
     ConflictException: StructureShape
+    ConnectionStartPoint: StringShape
     ContactFlowId: StringShape
     CreateCampaignRequest: StructureShape
     CreateCampaignResponse: StructureShape
@@ -46,6 +52,7 @@ module Aws::ConnectCampaignsV2
     DeleteCampaignChannelSubtypeConfigRequest: StructureShape
     DeleteCampaignCommunicationLimitsRequest: StructureShape
     DeleteCampaignCommunicationTimeRequest: StructureShape
+    DeleteCampaignEntryLimitsRequest: StructureShape
     DeleteCampaignRequest: StructureShape
     DeleteConnectInstanceConfigRequest: StructureShape
     DeleteConnectInstanceIntegrationRequest: StructureShape
@@ -64,8 +71,12 @@ module Aws::ConnectCampaignsV2
     EncryptionConfig: StructureShape
     EncryptionKey: StringShape
     EncryptionType: StringShape
+    EntryLimitsConfig: StructureShape
+    EvaluationWindow: StringShape
     EventTrigger: StructureShape
+    EventTriggerContext: StructureShape
     EventType: StringShape
+    ExternalCampaignType: StringShape
     FailedCampaignStateResponse: StructureShape
     FailedCampaignStateResponseList: ListShape
     FailedProfileOutboundRequest: StructureShape
@@ -103,6 +114,10 @@ module Aws::ConnectCampaignsV2
     Iso8601Date: StringShape
     Iso8601Duration: StringShape
     Iso8601Time: StringShape
+    LambdaArn: StringShape
+    LambdaIntegrationConfig: StructureShape
+    LambdaIntegrationIdentifier: StructureShape
+    LambdaIntegrationSummary: StructureShape
     ListCampaignsRequest: StructureShape
     ListCampaignsResponse: StructureShape
     ListConnectInstanceIntegrationsRequest: StructureShape
@@ -111,6 +126,7 @@ module Aws::ConnectCampaignsV2
     ListTagsForResourceResponse: StructureShape
     LocalTimeZoneConfig: StructureShape
     LocalTimeZoneDetection: ListShape
+    LocalTimeZoneDetectionScope: StringShape
     LocalTimeZoneDetectionType: StringShape
     MaxResults: IntegerShape
     NextToken: StringShape
@@ -119,8 +135,11 @@ module Aws::ConnectCampaignsV2
     OpenHours: UnionShape
     OutboundRequest: StructureShape
     OutboundRequestList: ListShape
+    PacingStrategy: UnionShape
+    PacingStrategyList: ListShape
     PauseCampaignRequest: StructureShape
     PredictiveConfig: StructureShape
+    PreviewConfig: StructureShape
     ProfileId: StringShape
     ProfileOutboundRequest: StructureShape
     ProfileOutboundRequestFailureCode: StringShape
@@ -143,14 +162,17 @@ module Aws::ConnectCampaignsV2
     RestrictedPeriodName: StringShape
     RestrictedPeriods: UnionShape
     ResumeCampaignRequest: StructureShape
+    RingTimeout: IntegerShape
     Schedule: StructureShape
     ServiceLinkedRoleArn: StringShape
     ServiceQuotaExceededException: StructureShape
+    SessionId: StringShape
     SmsChannelSubtypeConfig: StructureShape
     SmsChannelSubtypeParameters: StructureShape
     SmsOutboundConfig: StructureShape
     SmsOutboundMode: UnionShape
     Source: UnionShape
+    SourceEvent: StringShape
     SourcePhoneNumber: StringShape
     StartCampaignRequest: StructureShape
     StartInstanceOnboardingJobRequest: StructureShape
@@ -167,6 +189,7 @@ module Aws::ConnectCampaignsV2
     TagMap: MapShape
     TagResourceRequest: StructureShape
     TagValue: StringShape
+    TargetRate: FloatShape
     TelephonyChannelSubtypeConfig: StructureShape
     TelephonyChannelSubtypeParameters: StructureShape
     TelephonyOutboundConfig: StructureShape
@@ -177,15 +200,23 @@ module Aws::ConnectCampaignsV2
     TimeStamp: TimestampShape
     TimeWindow: StructureShape
     TimeZone: StringShape
+    TimeoutConfig: StructureShape
+    TimeoutDuration: IntegerShape
     UntagResourceRequest: StructureShape
     UpdateCampaignChannelSubtypeConfigRequest: StructureShape
     UpdateCampaignCommunicationLimitsRequest: StructureShape
     UpdateCampaignCommunicationTimeRequest: StructureShape
+    UpdateCampaignEntryLimitsRequest: StructureShape
     UpdateCampaignFlowAssociationRequest: StructureShape
     UpdateCampaignNameRequest: StructureShape
     UpdateCampaignScheduleRequest: StructureShape
     UpdateCampaignSourceRequest: StructureShape
     ValidationException: StructureShape
+    WebNotificationContext: StructureShape
+    WhatsAppChannelSubtypeConfig: StructureShape
+    WhatsAppChannelSubtypeParameters: StructureShape
+    WhatsAppOutboundConfig: StructureShape
+    WhatsAppOutboundMode: UnionShape
     XAmazonErrorType: StringShape
 
     AmazonConnectCampaignServiceV2: ServiceShape

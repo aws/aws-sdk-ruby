@@ -144,18 +144,18 @@ module Aws::LicenseManager
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -587,11 +587,223 @@ module Aws::LicenseManager
       request.send_request(options)
     end
 
+    # <p>Creates a license asset group.</p>
+    # @param [Hash, Types::CreateLicenseAssetGroupRequest] params
+    # @option params [String] :name
+    #   <p>License asset group name.</p>
+    # @option params [String] :description
+    #   <p>License asset group description.</p>
+    # @option params [Array<Types::LicenseAssetGroupConfiguration>] :license_asset_group_configurations
+    #   <p>License asset group configurations.</p>
+    # @option params [Array<String>] :associated_license_asset_ruleset_ar_ns
+    #   <p>ARNs of associated license asset rulesets.</p>
+    # @option params [Array<Types::LicenseAssetGroupProperty>] :properties
+    #   <p>License asset group properties.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>Tags to add to the license asset group.</p>
+    # @option params [String] :client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "LicenseAssetResourceName", # required
+    #     description: "LicenseAssetResourceDescription",
+    #     license_asset_group_configurations: [ # required
+    #       {
+    #         usage_dimension: "String"
+    #       }
+    #     ],
+    #     associated_license_asset_ruleset_ar_ns: ["Arn"], # required
+    #     properties: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String"
+    #       }
+    #     ],
+    #     client_token: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.create_license_asset_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     license_asset_group_arn: "String", # required
+    #     status: "String", # required
+    #   }
+    # @return [Types::CreateLicenseAssetGroupResponse]
+    def create_license_asset_group(params = {}, options = {})
+      request = build_request(:create_license_asset_group, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a license asset ruleset.</p>
+    # @param [Hash, Types::CreateLicenseAssetRulesetRequest] params
+    # @option params [String] :name
+    #   <p>License asset ruleset name.</p>
+    # @option params [String] :description
+    #   <p>License asset ruleset description.</p>
+    # @option params [Array<Types::LicenseAssetRule>] :rules
+    #   <p>License asset rules.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>Tags to add to the license asset ruleset.</p>
+    # @option params [String] :client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "LicenseAssetResourceName", # required
+    #     description: "LicenseAssetResourceDescription",
+    #     rules: [ # required
+    #       {
+    #         rule_statement: { # required
+    #           license_configuration_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             }
+    #           },
+    #           license_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             }
+    #           },
+    #           instance_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             },
+    #             script_rule_statement: {
+    #               key_to_match: "String", # required
+    #               script: "String", # required
+    #             }
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String"
+    #       }
+    #     ],
+    #     client_token: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.create_license_asset_ruleset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     license_asset_ruleset_arn: "String", # required
+    #   }
+    # @return [Types::CreateLicenseAssetRulesetResponse]
+    def create_license_asset_ruleset(params = {}, options = {})
+      request = build_request(:create_license_asset_ruleset, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a license configuration.</p>
     #          <p>A license configuration is an abstraction of a customer license agreement that can be
     #          consumed and enforced by License Manager. Components include specifications for the license
-    #          type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, 
-    #          Dedicated Instance, Dedicated Host, or all of these), license affinity  to host (how long a 
+    #          type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
+    #          Dedicated Instance, Dedicated Host, or all of these), license affinity  to host (how long a
     #          license must be associated with a host), and the number of licenses purchased and used.</p>
     # @param [Hash, Types::CreateLicenseConfigurationRequest] params
     # @option params [String] :name
@@ -606,7 +818,7 @@ module Aws::LicenseManager
     #   <p>Indicates whether hard or soft license enforcement is used. Exceeding a hard limit
     #            blocks the launch of new instances.</p>
     # @option params [Array<String>] :license_rules
-    #   <p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules 
+    #   <p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules
     #            vary by dimension, as follows.</p>
     #            <ul>
     #               <li>
@@ -618,28 +830,28 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Instances</code> dimension: <code>allowedTenancy</code> | 
+    #                     <code>Instances</code> dimension: <code>allowedTenancy</code> |
     #                  <code>maximumVcpus</code> | <code>minimumVcpus</code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Sockets</code> dimension: <code>allowedTenancy</code> | 
+    #                     <code>Sockets</code> dimension: <code>allowedTenancy</code> |
     #                  <code>licenseAffinityToHost</code> |
     #                  <code>maximumSockets</code> | <code>minimumSockets</code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>vCPUs</code> dimension: <code>allowedTenancy</code> | 
-    #                  <code>honorVcpuOptimization</code> | 
+    #                     <code>vCPUs</code> dimension: <code>allowedTenancy</code> |
+    #                  <code>honorVcpuOptimization</code> |
     #                  <code>maximumVcpus</code> | <code>minimumVcpus</code>
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible 
-    #            values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and 
-    #            <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are 
+    #            <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible
+    #            values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and
+    #            <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are
     #            <code>True</code> and <code>False</code>.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Tags to add to the license configuration.</p>
@@ -647,6 +859,8 @@ module Aws::LicenseManager
     #   <p>When true, disassociates a resource when software is uninstalled.</p>
     # @option params [Array<Types::ProductInformation>] :product_information_list
     #   <p>Product information.</p>
+    # @option params [Integer] :license_expiry
+    #   <p>License configuration expiry.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "String", # required
@@ -673,7 +887,8 @@ module Aws::LicenseManager
     #           }
     #         ]
     #       }
-    #     ]
+    #     ],
+    #     license_expiry: 1
     #   }
     #   options = {}
     #   response = client.create_license_configuration(params, options)
@@ -693,8 +908,8 @@ module Aws::LicenseManager
     # @option params [String] :resource_arn
     #   <p>Amazon Resource Name (ARN) of the resource you are converting the license type for.</p>
     # @option params [Types::LicenseConversionContext] :source_license_context
-    #   <p>Information that identifies the license type you are converting from. 
-    #   
+    #   <p>Information that identifies the license type you are converting from.
+    #
     #            For the structure of the source license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the CLI </a> in the <i>License Manager User Guide</i>.</p>
     # @option params [Types::LicenseConversionContext] :destination_license_context
     #   <p>Information that identifies the license type you are converting to. For the structure of the destination license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the CLI </a> in the <i>License Manager User Guide</i>.</p>
@@ -760,13 +975,16 @@ module Aws::LicenseManager
     # @example Request syntax with placeholder values
     #   params = {
     #     report_generator_name: "ReportGeneratorName", # required
-    #     type: ["LicenseConfigurationSummaryReport" # One of: ["LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport"]], # required
+    #     type: ["LicenseConfigurationSummaryReport" # One of: ["LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport", "LicenseAssetGroupUsageReport"]], # required
     #     report_context: { # required
-    #       license_configuration_arns: ["Arn"], # required
+    #       license_configuration_arns: ["Arn"],
+    #       license_asset_group_arns: ["Arn"],
+    #       report_start_date: Time.now,
+    #       report_end_date: Time.now
     #     },
     #     report_frequency: { # required
     #       value: 1,
-    #       period: "DAY" # One of: ["DAY", "WEEK", "MONTH"]
+    #       period: "DAY" # One of: ["DAY", "WEEK", "MONTH", "ONE_TIME"]
     #     },
     #     client_token: "ClientRequestToken", # required
     #     description: "String",
@@ -818,6 +1036,8 @@ module Aws::LicenseManager
     #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
     # @option params [String] :source_version
     #   <p>Current version of the license.</p>
+    # @option params [Boolean] :reset_usage
+    #   <p>Specifies whether to reset the license usage for the new license version. If you don't specify a value, the license usage is not reset.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     license_arn: "Arn", # required
@@ -860,7 +1080,8 @@ module Aws::LicenseManager
     #     },
     #     status: "AVAILABLE" # One of: ["AVAILABLE", "PENDING_AVAILABLE", "DEACTIVATED", "SUSPENDED", "EXPIRED", "PENDING_DELETE", "DELETED"], # required
     #     client_token: "ClientToken", # required
-    #     source_version: "String"
+    #     source_version: "String",
+    #     reset_usage: false
     #   }
     #   options = {}
     #   response = client.create_license_version(params, options)
@@ -879,14 +1100,14 @@ module Aws::LicenseManager
 
     # <p>Creates a long-lived token.</p>
     #          <p>A refresh token is a JWT token used to get an access token. With an access token,
-    #           you can call AssumeRoleWithWebIdentity to get role credentials that you can use to 
+    #           you can call AssumeRoleWithWebIdentity to get role credentials that you can use to
     #           call License Manager to manage the specified license.</p>
     # @param [Hash, Types::CreateTokenRequest] params
     # @option params [String] :license_arn
     #   <p>Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim of the
     #             JWT token.</p>
     # @option params [Array<String>] :role_arns
-    #   <p>Amazon Resource Name (ARN) of the IAM roles to embed in the token. 
+    #   <p>Amazon Resource Name (ARN) of the IAM roles to embed in the token.
     #            License Manager does not check whether the roles are in use.</p>
     # @option params [Integer] :expiration_in_days
     #   <p>Token expiration, in days, counted from token creation. The default is 365 days.</p>
@@ -969,6 +1190,46 @@ module Aws::LicenseManager
     # @return [Types::DeleteLicenseResponse]
     def delete_license(params = {}, options = {})
       request = build_request(:delete_license, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a license asset group.</p>
+    # @param [Hash, Types::DeleteLicenseAssetGroupRequest] params
+    # @option params [String] :license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     license_asset_group_arn: "Arn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_license_asset_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: "ACTIVE" # One of: ["ACTIVE", "DISABLED", "DELETED"], # required
+    #   }
+    # @return [Types::DeleteLicenseAssetGroupResponse]
+    def delete_license_asset_group(params = {}, options = {})
+      request = build_request(:delete_license_asset_group, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a license asset ruleset.</p>
+    # @param [Hash, Types::DeleteLicenseAssetRulesetRequest] params
+    # @option params [String] :license_asset_ruleset_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     license_asset_ruleset_arn: "Arn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_license_asset_ruleset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteLicenseAssetRulesetResponse]
+    def delete_license_asset_ruleset(params = {}, options = {})
+      request = build_request(:delete_license_asset_ruleset, params)
       request.send_request(options)
     end
 
@@ -1189,6 +1450,193 @@ module Aws::LicenseManager
       request.send_request(options)
     end
 
+    # <p>Gets a license asset group.</p>
+    # @param [Hash, Types::GetLicenseAssetGroupRequest] params
+    # @option params [String] :license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     license_asset_group_arn: "Arn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_license_asset_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     license_asset_group: { # required
+    #       name: "String", # required
+    #       description: "String",
+    #       license_asset_group_configurations: [
+    #         {
+    #           usage_dimension: "String"
+    #         }
+    #       ],
+    #       associated_license_asset_ruleset_ar_ns: ["Arn"], # required
+    #       properties: [
+    #         {
+    #           key: "String", # required
+    #           value: "String", # required
+    #         }
+    #       ],
+    #       license_asset_group_arn: "Arn", # required
+    #       status: "ACTIVE" # One of: ["ACTIVE", "DISABLED", "DELETED"], # required
+    #       status_message: "String",
+    #       latest_usage_analysis_time: Time.now,
+    #       latest_resource_discovery_time: Time.now
+    #     }
+    #   }
+    # @return [Types::GetLicenseAssetGroupResponse]
+    def get_license_asset_group(params = {}, options = {})
+      request = build_request(:get_license_asset_group, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets a license asset ruleset.</p>
+    # @param [Hash, Types::GetLicenseAssetRulesetRequest] params
+    # @option params [String] :license_asset_ruleset_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     license_asset_ruleset_arn: "Arn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_license_asset_ruleset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     license_asset_ruleset: { # required
+    #       name: "String", # required
+    #       description: "String",
+    #       rules: [ # required
+    #         {
+    #           rule_statement: { # required
+    #             license_configuration_rule_statement: {
+    #               and_rule_statement: {
+    #                 matching_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     constraint: "String", # required
+    #                     value_to_match: ["String"], # required
+    #                   }
+    #                 ],
+    #                 script_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     script: "String", # required
+    #                   }
+    #                 ]
+    #               },
+    #               or_rule_statement: {
+    #                 matching_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     constraint: "String", # required
+    #                     value_to_match: ["String"], # required
+    #                   }
+    #                 ],
+    #                 script_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     script: "String", # required
+    #                   }
+    #                 ]
+    #               },
+    #               matching_rule_statement: {
+    #                 key_to_match: "String", # required
+    #                 constraint: "String", # required
+    #                 value_to_match: ["String"], # required
+    #               }
+    #             },
+    #             license_rule_statement: {
+    #               and_rule_statement: {
+    #                 matching_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     constraint: "String", # required
+    #                     value_to_match: ["String"], # required
+    #                   }
+    #                 ],
+    #                 script_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     script: "String", # required
+    #                   }
+    #                 ]
+    #               },
+    #               or_rule_statement: {
+    #                 matching_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     constraint: "String", # required
+    #                     value_to_match: ["String"], # required
+    #                   }
+    #                 ],
+    #                 script_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     script: "String", # required
+    #                   }
+    #                 ]
+    #               },
+    #               matching_rule_statement: {
+    #                 key_to_match: "String", # required
+    #                 constraint: "String", # required
+    #                 value_to_match: ["String"], # required
+    #               }
+    #             },
+    #             instance_rule_statement: {
+    #               and_rule_statement: {
+    #                 matching_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     constraint: "String", # required
+    #                     value_to_match: ["String"], # required
+    #                   }
+    #                 ],
+    #                 script_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     script: "String", # required
+    #                   }
+    #                 ]
+    #               },
+    #               or_rule_statement: {
+    #                 matching_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     constraint: "String", # required
+    #                     value_to_match: ["String"], # required
+    #                   }
+    #                 ],
+    #                 script_rule_statements: [
+    #                   {
+    #                     key_to_match: "String", # required
+    #                     script: "String", # required
+    #                   }
+    #                 ]
+    #               },
+    #               matching_rule_statement: {
+    #                 key_to_match: "String", # required
+    #                 constraint: "String", # required
+    #                 value_to_match: ["String"], # required
+    #               },
+    #               script_rule_statement: {
+    #                 key_to_match: "String", # required
+    #                 script: "String", # required
+    #               }
+    #             }
+    #           }
+    #         }
+    #       ],
+    #       license_asset_ruleset_arn: "Arn", # required
+    #     }
+    #   }
+    # @return [Types::GetLicenseAssetRulesetResponse]
+    def get_license_asset_ruleset(params = {}, options = {})
+      request = build_request(:get_license_asset_ruleset, params)
+      request.send_request(options)
+    end
+
     # <p>Gets detailed information about the specified license configuration.</p>
     # @param [Hash, Types::GetLicenseConfigurationRequest] params
     # @option params [String] :license_configuration_arn
@@ -1246,7 +1694,8 @@ module Aws::LicenseManager
     #     automated_discovery_information: {
     #       last_run_time: Time.now
     #     },
-    #     disassociate_when_not_found: false
+    #     disassociate_when_not_found: false,
+    #     license_expiry: 1
     #   }
     # @return [Types::GetLicenseConfigurationResponse]
     def get_license_configuration(params = {}, options = {})
@@ -1314,13 +1763,16 @@ module Aws::LicenseManager
     #   {
     #     report_generator: {
     #       report_generator_name: "String",
-    #       report_type: ["LicenseConfigurationSummaryReport" # One of: ["LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport"]],
+    #       report_type: ["LicenseConfigurationSummaryReport" # One of: ["LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport", "LicenseAssetGroupUsageReport"]],
     #       report_context: {
-    #         license_configuration_arns: ["Arn"], # required
+    #         license_configuration_arns: ["Arn"],
+    #         license_asset_group_arns: ["Arn"],
+    #         report_start_date: Time.now,
+    #         report_end_date: Time.now
     #       },
     #       report_frequency: {
     #         value: 1,
-    #         period: "DAY" # One of: ["DAY", "WEEK", "MONTH"]
+    #         period: "DAY" # One of: ["DAY", "WEEK", "MONTH", "ONE_TIME"]
     #       },
     #       license_manager_report_generator_arn: "String",
     #       last_run_status: "String",
@@ -1392,7 +1844,21 @@ module Aws::LicenseManager
     #       enable_integration: false, # required
     #     },
     #     enable_cross_accounts_discovery: false,
-    #     license_manager_resource_share_arn: "String"
+    #     license_manager_resource_share_arn: "String",
+    #     cross_region_discovery_home_region: "String",
+    #     cross_region_discovery_source_regions: ["String"],
+    #     service_status: {
+    #       cross_account_discovery: {
+    #         message: "String"
+    #       },
+    #       cross_region_discovery: {
+    #         message: {
+    #           "String" => {
+    #             status: "String"
+    #           }
+    #         }
+    #       }
+    #     }
     #   }
     # @return [Types::GetServiceSettingsResponse]
     def get_service_settings(params = {}, options = {})
@@ -1400,9 +1866,45 @@ module Aws::LicenseManager
       request.send_request(options)
     end
 
+    # <p>Lists assets for a license asset group.</p>
+    # @param [Hash, Types::ListAssetsForLicenseAssetGroupRequest] params
+    # @option params [String] :license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    # @option params [String] :asset_type
+    #   <p>Asset type. The possible values are <code>Instance</code> | <code>License</code> | <code>LicenseConfiguration</code>.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>Token for the next set of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     license_asset_group_arn: "String", # required
+    #     asset_type: "String", # required
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_assets_for_license_asset_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     assets: [
+    #       {
+    #         asset_arn: "String",
+    #         latest_asset_discovery_time: Time.now
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListAssetsForLicenseAssetGroupResponse]
+    def list_assets_for_license_asset_group(params = {}, options = {})
+      request = build_request(:list_assets_for_license_asset_group, params)
+      request.send_request(options)
+    end
+
     # <p>Lists the resource associations for the specified license configuration.</p>
-    #          <p>Resource associations need not consume licenses from a license configuration. 
-    #          For example, an AMI or a stopped instance might not consume a license (depending on 
+    #          <p>Resource associations need not consume licenses from a license configuration.
+    #          For example, an AMI or a stopped instance might not consume a license (depending on
     #          the license rules).</p>
     # @param [Hash, Types::ListAssociationsForLicenseConfigurationRequest] params
     # @option params [String] :license_configuration_arn
@@ -1562,6 +2064,238 @@ module Aws::LicenseManager
       request.send_request(options)
     end
 
+    # <p>Lists license asset groups.</p>
+    # @param [Hash, Types::ListLicenseAssetGroupsRequest] params
+    # @option params [Array<Types::Filter>] :filters
+    #   <p>Filters to scope the results. Following filters are supported</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>LicenseAssetRulesetArn</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>Token for the next set of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"]
+    #       }
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_license_asset_groups(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     license_asset_groups: [
+    #       {
+    #         name: "String", # required
+    #         description: "String",
+    #         license_asset_group_configurations: [
+    #           {
+    #             usage_dimension: "String"
+    #           }
+    #         ],
+    #         associated_license_asset_ruleset_ar_ns: ["Arn"], # required
+    #         properties: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           }
+    #         ],
+    #         license_asset_group_arn: "Arn", # required
+    #         status: "ACTIVE" # One of: ["ACTIVE", "DISABLED", "DELETED"], # required
+    #         status_message: "String",
+    #         latest_usage_analysis_time: Time.now,
+    #         latest_resource_discovery_time: Time.now
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListLicenseAssetGroupsResponse]
+    def list_license_asset_groups(params = {}, options = {})
+      request = build_request(:list_license_asset_groups, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists license asset rulesets.</p>
+    # @param [Hash, Types::ListLicenseAssetRulesetsRequest] params
+    # @option params [Array<Types::Filter>] :filters
+    #   <p>Filters to scope the results. Following filters are supported</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>Name</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    # @option params [Boolean] :show_aws_managed_license_asset_rulesets
+    #   <p>Specifies whether to show License Manager managed license asset rulesets.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>Token for the next set of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"]
+    #       }
+    #     ],
+    #     show_aws_managed_license_asset_rulesets: false,
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_license_asset_rulesets(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     license_asset_rulesets: [
+    #       {
+    #         name: "String", # required
+    #         description: "String",
+    #         rules: [ # required
+    #           {
+    #             rule_statement: { # required
+    #               license_configuration_rule_statement: {
+    #                 and_rule_statement: {
+    #                   matching_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       constraint: "String", # required
+    #                       value_to_match: ["String"], # required
+    #                     }
+    #                   ],
+    #                   script_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       script: "String", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 or_rule_statement: {
+    #                   matching_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       constraint: "String", # required
+    #                       value_to_match: ["String"], # required
+    #                     }
+    #                   ],
+    #                   script_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       script: "String", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 matching_rule_statement: {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               },
+    #               license_rule_statement: {
+    #                 and_rule_statement: {
+    #                   matching_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       constraint: "String", # required
+    #                       value_to_match: ["String"], # required
+    #                     }
+    #                   ],
+    #                   script_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       script: "String", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 or_rule_statement: {
+    #                   matching_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       constraint: "String", # required
+    #                       value_to_match: ["String"], # required
+    #                     }
+    #                   ],
+    #                   script_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       script: "String", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 matching_rule_statement: {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               },
+    #               instance_rule_statement: {
+    #                 and_rule_statement: {
+    #                   matching_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       constraint: "String", # required
+    #                       value_to_match: ["String"], # required
+    #                     }
+    #                   ],
+    #                   script_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       script: "String", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 or_rule_statement: {
+    #                   matching_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       constraint: "String", # required
+    #                       value_to_match: ["String"], # required
+    #                     }
+    #                   ],
+    #                   script_rule_statements: [
+    #                     {
+    #                       key_to_match: "String", # required
+    #                       script: "String", # required
+    #                     }
+    #                   ]
+    #                 },
+    #                 matching_rule_statement: {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 },
+    #                 script_rule_statement: {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               }
+    #             }
+    #           }
+    #         ],
+    #         license_asset_ruleset_arn: "Arn", # required
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListLicenseAssetRulesetsResponse]
+    def list_license_asset_rulesets(params = {}, options = {})
+      request = build_request(:list_license_asset_rulesets, params)
+      request.send_request(options)
+    end
+
     # <p>Lists the license configurations for your account.</p>
     # @param [Hash, Types::ListLicenseConfigurationsRequest] params
     # @option params [Array<String>] :license_configuration_arns
@@ -1645,7 +2379,8 @@ module Aws::LicenseManager
     #         ],
     #         automated_discovery_information: {
     #           last_run_time: Time.now
-    #         }
+    #         },
+    #         license_expiry: 1
     #       }
     #     ],
     #     next_token: "String"
@@ -1653,6 +2388,85 @@ module Aws::LicenseManager
     # @return [Types::ListLicenseConfigurationsResponse]
     def list_license_configurations(params = {}, options = {})
       request = build_request(:list_license_configurations, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists license configurations for an organization.</p>
+    # @param [Hash, Types::ListLicenseConfigurationsForOrganizationRequest] params
+    # @option params [Array<String>] :license_configuration_arns
+    #   <p>License configuration ARNs.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of results to return in a single call.</p>
+    # @option params [String] :next_token
+    #   <p>Token for the next set of results.</p>
+    # @option params [Array<Types::Filter>] :filters
+    #   <p>Filters to scope the results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     license_configuration_arns: ["String"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.list_license_configurations_for_organization(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     license_configurations: [
+    #       {
+    #         license_configuration_id: "String",
+    #         license_configuration_arn: "String",
+    #         name: "String",
+    #         description: "String",
+    #         license_counting_type: "vCPU" # One of: ["vCPU", "Instance", "Core", "Socket"],
+    #         license_rules: ["String"],
+    #         license_count: 1,
+    #         license_count_hard_limit: false,
+    #         disassociate_when_not_found: false,
+    #         consumed_licenses: 1,
+    #         status: "String",
+    #         owner_account_id: "String",
+    #         consumed_license_summary_list: [
+    #           {
+    #             resource_type: "EC2_INSTANCE" # One of: ["EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"],
+    #             consumed_licenses: 1
+    #           }
+    #         ],
+    #         managed_resource_summary_list: [
+    #           {
+    #             resource_type: "EC2_INSTANCE" # One of: ["EC2_INSTANCE", "EC2_HOST", "EC2_AMI", "RDS", "SYSTEMS_MANAGER_MANAGED_INSTANCE"],
+    #             association_count: 1
+    #           }
+    #         ],
+    #         product_information_list: [
+    #           {
+    #             resource_type: "String", # required
+    #             product_information_filter_list: [ # required
+    #               {
+    #                 product_information_filter_name: "String", # required
+    #                 product_information_filter_value: ["String"],
+    #                 product_information_filter_comparator: "String", # required
+    #               }
+    #             ]
+    #           }
+    #         ],
+    #         automated_discovery_information: {
+    #           last_run_time: Time.now
+    #         },
+    #         license_expiry: 1
+    #       }
+    #     ],
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListLicenseConfigurationsForOrganizationResponse]
+    def list_license_configurations_for_organization(params = {}, options = {})
+      request = build_request(:list_license_configurations_for_organization, params)
       request.send_request(options)
     end
 
@@ -1753,13 +2567,16 @@ module Aws::LicenseManager
     #     report_generators: [
     #       {
     #         report_generator_name: "String",
-    #         report_type: ["LicenseConfigurationSummaryReport" # One of: ["LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport"]],
+    #         report_type: ["LicenseConfigurationSummaryReport" # One of: ["LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport", "LicenseAssetGroupUsageReport"]],
     #         report_context: {
-    #           license_configuration_arns: ["Arn"], # required
+    #           license_configuration_arns: ["Arn"],
+    #           license_asset_group_arns: ["Arn"],
+    #           report_start_date: Time.now,
+    #           report_end_date: Time.now
     #         },
     #         report_frequency: {
     #           value: 1,
-    #           period: "DAY" # One of: ["DAY", "WEEK", "MONTH"]
+    #           period: "DAY" # One of: ["DAY", "WEEK", "MONTH", "ONE_TIME"]
     #         },
     #         license_manager_report_generator_arn: "String",
     #         last_run_status: "String",
@@ -2375,16 +3192,16 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>application_name</code> - The name of the application. 
+    #                     <code>application_name</code> - The name of the application.
     #                  Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>license_included</code> - The type of license included. 
+    #                     <code>license_included</code> - The type of license included.
     #                  Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.
-    #                  Possible values are <code>sql-server-enterprise</code> | 
-    #                  <code>sql-server-standard</code> | 
-    #                  <code>sql-server-web</code> |  
+    #                  Possible values are <code>sql-server-enterprise</code> |
+    #                  <code>sql-server-standard</code> |
+    #                  <code>sql-server-web</code> |
     #                  <code>windows-server-datacenter</code>.</p>
     #               </li>
     #               <li>
@@ -2394,12 +3211,12 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resource_id</code> - The ID of the resource. 
+    #                     <code>resource_id</code> - The ID of the resource.
     #                  Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>tag:<key></code> - The key/value combination of a tag assigned 
+    #                     <code>tag:<key></code> - The key/value combination of a tag assigned
     #                  to the resource. Logical operators are <code>EQUALS</code> (single account) or
     #                  <code>EQUALS</code> | <code>NOT_EQUALS</code> (cross account).</p>
     #               </li>
@@ -2428,7 +3245,13 @@ module Aws::LicenseManager
     #         resource_arn: "String",
     #         platform: "String",
     #         platform_version: "String",
-    #         resource_owning_account_id: "String"
+    #         resource_owning_account_id: "String",
+    #         marketplace_product_codes: ["String"],
+    #         usage_operation: "String",
+    #         ami_id: "String",
+    #         host_id: "String",
+    #         region: "String",
+    #         instance_type: "String"
     #       }
     #     ],
     #     next_token: "String"
@@ -2539,7 +3362,7 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | 
+    #                     <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> |
     #               	<code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>).</p>
     #               </li>
     #               <li>
@@ -2692,6 +3515,211 @@ module Aws::LicenseManager
       request.send_request(options)
     end
 
+    # <p>Updates a license asset group.</p>
+    # @param [Hash, Types::UpdateLicenseAssetGroupRequest] params
+    # @option params [String] :name
+    #   <p>License asset group name.</p>
+    # @option params [String] :description
+    #   <p>License asset group description.</p>
+    # @option params [Array<Types::LicenseAssetGroupConfiguration>] :license_asset_group_configurations
+    #   <p>License asset group configurations.</p>
+    # @option params [Array<String>] :associated_license_asset_ruleset_ar_ns
+    #   <p>ARNs of associated license asset rulesets.</p>
+    # @option params [Array<Types::LicenseAssetGroupProperty>] :properties
+    #   <p>License asset group properties.</p>
+    # @option params [String] :license_asset_group_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset group.</p>
+    # @option params [String] :status
+    #   <p>License asset group status. The possible values are <code>ACTIVE</code> | <code>DISABLED</code>.</p>
+    # @option params [String] :client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "LicenseAssetResourceName",
+    #     description: "LicenseAssetResourceDescription",
+    #     license_asset_group_configurations: [
+    #       {
+    #         usage_dimension: "String"
+    #       }
+    #     ],
+    #     associated_license_asset_ruleset_ar_ns: ["Arn"], # required
+    #     properties: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #     ],
+    #     license_asset_group_arn: "Arn", # required
+    #     status: "ACTIVE" # One of: ["ACTIVE", "DISABLED", "DELETED"],
+    #     client_token: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.update_license_asset_group(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     license_asset_group_arn: "String", # required
+    #     status: "String", # required
+    #   }
+    # @return [Types::UpdateLicenseAssetGroupResponse]
+    def update_license_asset_group(params = {}, options = {})
+      request = build_request(:update_license_asset_group, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a license asset ruleset.</p>
+    # @param [Hash, Types::UpdateLicenseAssetRulesetRequest] params
+    # @option params [String] :name
+    #   <p>License asset ruleset name.</p>
+    # @option params [String] :description
+    #   <p>License asset ruleset description.</p>
+    # @option params [Array<Types::LicenseAssetRule>] :rules
+    #   <p>License asset rules.</p>
+    # @option params [String] :license_asset_ruleset_arn
+    #   <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+    # @option params [String] :client_token
+    #   <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "LicenseAssetResourceName",
+    #     description: "LicenseAssetResourceDescription",
+    #     rules: [ # required
+    #       {
+    #         rule_statement: { # required
+    #           license_configuration_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             }
+    #           },
+    #           license_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             }
+    #           },
+    #           instance_rule_statement: {
+    #             and_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             or_rule_statement: {
+    #               matching_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   constraint: "String", # required
+    #                   value_to_match: ["String"], # required
+    #                 }
+    #               ],
+    #               script_rule_statements: [
+    #                 {
+    #                   key_to_match: "String", # required
+    #                   script: "String", # required
+    #                 }
+    #               ]
+    #             },
+    #             matching_rule_statement: {
+    #               key_to_match: "String", # required
+    #               constraint: "String", # required
+    #               value_to_match: ["String"], # required
+    #             },
+    #             script_rule_statement: {
+    #               key_to_match: "String", # required
+    #               script: "String", # required
+    #             }
+    #           }
+    #         }
+    #       }
+    #     ],
+    #     license_asset_ruleset_arn: "Arn", # required
+    #     client_token: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.update_license_asset_ruleset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     license_asset_ruleset_arn: "String", # required
+    #   }
+    # @return [Types::UpdateLicenseAssetRulesetResponse]
+    def update_license_asset_ruleset(params = {}, options = {})
+      request = build_request(:update_license_asset_ruleset, params)
+      request.send_request(options)
+    end
+
     # <p>Modifies the attributes of an existing license configuration.</p>
     # @param [Hash, Types::UpdateLicenseConfigurationRequest] params
     # @option params [String] :license_configuration_arn
@@ -2713,6 +3741,8 @@ module Aws::LicenseManager
     #   <p>New product information.</p>
     # @option params [Boolean] :disassociate_when_not_found
     #   <p>When true, disassociates a resource when software is uninstalled.</p>
+    # @option params [Integer] :license_expiry
+    #   <p>License configuration expiry time.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     license_configuration_arn: "String", # required
@@ -2734,7 +3764,8 @@ module Aws::LicenseManager
     #         ]
     #       }
     #     ],
-    #     disassociate_when_not_found: false
+    #     disassociate_when_not_found: false,
+    #     license_expiry: 1
     #   }
     #   options = {}
     #   response = client.update_license_configuration(params, options)
@@ -2776,13 +3807,16 @@ module Aws::LicenseManager
     #   params = {
     #     license_manager_report_generator_arn: "String", # required
     #     report_generator_name: "ReportGeneratorName", # required
-    #     type: ["LicenseConfigurationSummaryReport" # One of: ["LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport"]], # required
+    #     type: ["LicenseConfigurationSummaryReport" # One of: ["LicenseConfigurationSummaryReport", "LicenseConfigurationUsageReport", "LicenseAssetGroupUsageReport"]], # required
     #     report_context: { # required
-    #       license_configuration_arns: ["Arn"], # required
+    #       license_configuration_arns: ["Arn"],
+    #       license_asset_group_arns: ["Arn"],
+    #       report_start_date: Time.now,
+    #       report_end_date: Time.now
     #     },
     #     report_frequency: { # required
     #       value: 1,
-    #       period: "DAY" # One of: ["DAY", "WEEK", "MONTH"]
+    #       period: "DAY" # One of: ["DAY", "WEEK", "MONTH", "ONE_TIME"]
     #     },
     #     client_token: "ClientRequestToken", # required
     #     description: "String"
@@ -2800,7 +3834,7 @@ module Aws::LicenseManager
 
     # <p>Adds or removes the specified license configurations for the specified Amazon Web Services resource.</p>
     #          <p>You can update the license specifications of AMIs, instances, and hosts.
-    #          You cannot update the license specifications for launch templates and CloudFormation templates, 
+    #          You cannot update the license specifications for launch templates and CloudFormation templates,
     #          as they send license configurations to the operation that creates the resource.</p>
     # @param [Hash, Types::UpdateLicenseSpecificationsForResourceRequest] params
     # @option params [String] :resource_arn
@@ -2846,6 +3880,8 @@ module Aws::LicenseManager
     #   <p>Enables integration with Organizations for cross-account discovery.</p>
     # @option params [Boolean] :enable_cross_accounts_discovery
     #   <p>Activates cross-account discovery.</p>
+    # @option params [Array<String>] :enabled_discovery_source_regions
+    #   <p>Cross region discovery enabled source regions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     s3_bucket_arn: "String",
@@ -2853,7 +3889,8 @@ module Aws::LicenseManager
     #     organization_configuration: {
     #       enable_integration: false, # required
     #     },
-    #     enable_cross_accounts_discovery: false
+    #     enable_cross_accounts_discovery: false,
+    #     enabled_discovery_source_regions: ["String"]
     #   }
     #   options = {}
     #   response = client.update_service_settings(params, options)

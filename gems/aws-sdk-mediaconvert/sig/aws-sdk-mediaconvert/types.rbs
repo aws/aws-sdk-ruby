@@ -19,11 +19,17 @@ module Aws::MediaConvert
       CODING_MODE_1_1: String
       CODING_MODE_2_0: String
       CODING_MODE_5_1: String
+      CODING_MODE_AUTO: String
     end
 
     module AacLoudnessMeasurementMode
       PROGRAM: String
       ANCHOR: String
+    end
+
+    module AacPassthroughControl
+      WHEN_POSSIBLE: String
+      NO_PASSTHROUGH: String
     end
 
     module AacRateControlMode
@@ -45,6 +51,7 @@ module Aws::MediaConvert
         ?codec_profile: String,
         ?coding_mode: String,
         ?loudness_measurement_mode: String,
+        ?passthrough_control: String,
         ?rap_interval: Integer,
         ?rate_control_mode: String,
         ?raw_format: String,
@@ -60,6 +67,7 @@ module Aws::MediaConvert
       attr_accessor codec_profile: String?
       attr_accessor coding_mode: String?
       attr_accessor loudness_measurement_mode: String?
+      attr_accessor passthrough_control: String?
       attr_accessor rap_interval: Integer?
       attr_accessor rate_control_mode: String?
       attr_accessor raw_format: String?
@@ -97,6 +105,7 @@ module Aws::MediaConvert
       CODING_MODE_1_1: String
       CODING_MODE_2_0: String
       CODING_MODE_3_2_LFE: String
+      CODING_MODE_AUTO: String
     end
 
     module Ac3DynamicRangeCompressionLine
@@ -159,6 +168,68 @@ module Aws::MediaConvert
       attr_accessor lfe_filter: String?
       attr_accessor metadata_control: String?
       attr_accessor sample_rate: Integer?
+    end
+
+    module Ac4BitstreamMode
+      COMPLETE_MAIN: String
+      EMERGENCY: String
+    end
+
+    module Ac4CodingMode
+      CODING_MODE_2_0: String
+      CODING_MODE_3_2_LFE: String
+      CODING_MODE_5_1_4: String
+    end
+
+    module Ac4DynamicRangeCompressionDrcProfile
+      NONE: String
+      FILM_STANDARD: String
+      FILM_LIGHT: String
+      MUSIC_STANDARD: String
+      MUSIC_LIGHT: String
+      SPEECH: String
+    end
+
+    class Ac4Settings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bitrate: Integer,
+        ?bitstream_mode: String,
+        ?coding_mode: String,
+        ?dynamic_range_compression_flat_panel_tv: String,
+        ?dynamic_range_compression_home_theater: String,
+        ?dynamic_range_compression_portable_headphones: String,
+        ?dynamic_range_compression_portable_speakers: String,
+        ?lo_ro_center_mix_level: Float,
+        ?lo_ro_surround_mix_level: Float,
+        ?lt_rt_center_mix_level: Float,
+        ?lt_rt_surround_mix_level: Float,
+        ?sample_rate: Integer,
+        ?stereo_downmix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bitrate: Integer?
+      attr_accessor bitstream_mode: String?
+      attr_accessor coding_mode: String?
+      attr_accessor dynamic_range_compression_flat_panel_tv: String?
+      attr_accessor dynamic_range_compression_home_theater: String?
+      attr_accessor dynamic_range_compression_portable_headphones: String?
+      attr_accessor dynamic_range_compression_portable_speakers: String?
+      attr_accessor lo_ro_center_mix_level: Float?
+      attr_accessor lo_ro_surround_mix_level: Float?
+      attr_accessor lt_rt_center_mix_level: Float?
+      attr_accessor lt_rt_surround_mix_level: Float?
+      attr_accessor sample_rate: Integer?
+      attr_accessor stereo_downmix: String?
+    end
+
+    module Ac4StereoDownmix
+      NOT_INDICATED: String
+      LO_RO: String
+      LT_RT: String
+      DPL2: String
     end
 
     module AccelerationMode
@@ -285,6 +356,19 @@ module Aws::MediaConvert
       ENABLED: String
     end
 
+    class AspectRatio
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?denominator: Integer,
+        ?numerator: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor denominator: Integer?
+      attr_accessor numerator: Integer?
+    end
+
     class AssociateCertificateRequest
       include Smithy::Schema::Structure
 
@@ -356,6 +440,7 @@ module Aws::MediaConvert
       WAV: String
       AIFF: String
       AC3: String
+      AC4: String
       EAC3: String
       EAC3_ATMOS: String
       VORBIS: String
@@ -370,6 +455,7 @@ module Aws::MediaConvert
       def initialize: (
         ?aac_settings: Types::AacSettings,
         ?ac3_settings: Types::Ac3Settings,
+        ?ac4_settings: Types::Ac4Settings,
         ?aiff_settings: Types::AiffSettings,
         ?codec: String,
         ?eac3_atmos_settings: Types::Eac3AtmosSettings,
@@ -385,6 +471,7 @@ module Aws::MediaConvert
 
       attr_accessor aac_settings: Types::AacSettings?
       attr_accessor ac3_settings: Types::Ac3Settings?
+      attr_accessor ac4_settings: Types::Ac4Settings?
       attr_accessor aiff_settings: Types::AiffSettings?
       attr_accessor codec: String?
       attr_accessor eac3_atmos_settings: Types::Eac3AtmosSettings?
@@ -408,6 +495,7 @@ module Aws::MediaConvert
       def initialize: (
         ?audio_channel_tagging_settings: Types::AudioChannelTaggingSettings,
         ?audio_normalization_settings: Types::AudioNormalizationSettings,
+        ?audio_pitch_correction_settings: Types::AudioPitchCorrectionSettings,
         ?audio_source_name: String,
         ?audio_type: Integer,
         ?audio_type_control: String,
@@ -422,6 +510,7 @@ module Aws::MediaConvert
 
       attr_accessor audio_channel_tagging_settings: Types::AudioChannelTaggingSettings?
       attr_accessor audio_normalization_settings: Types::AudioNormalizationSettings?
+      attr_accessor audio_pitch_correction_settings: Types::AudioPitchCorrectionSettings?
       attr_accessor audio_source_name: String?
       attr_accessor audio_type: Integer?
       attr_accessor audio_type_control: String?
@@ -491,24 +580,39 @@ module Aws::MediaConvert
       attr_accessor true_peak_limiter_threshold: Float?
     end
 
+    class AudioPitchCorrectionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slow_pal_pitch_correction: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slow_pal_pitch_correction: String?
+    end
+
     class AudioProperties
       include Smithy::Schema::Structure
 
       def initialize: (
         ?bit_depth: Integer,
         ?bit_rate: Integer,
+        ?channel_layout: String,
         ?channels: Integer,
         ?frame_rate: Types::FrameRate,
         ?language_code: String,
+        ?object_count: Integer,
         ?sample_rate: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor bit_depth: Integer?
       attr_accessor bit_rate: Integer?
+      attr_accessor channel_layout: String?
       attr_accessor channels: Integer?
       attr_accessor frame_rate: Types::FrameRate?
       attr_accessor language_code: String?
+      attr_accessor object_count: Integer?
       attr_accessor sample_rate: Integer?
     end
 
@@ -527,6 +631,8 @@ module Aws::MediaConvert
         ?program_selection: Integer,
         ?remix_settings: Types::RemixSettings,
         ?selector_type: String,
+        ?smpte337_passthrough: String,
+        ?streams: Array[Integer],
         ?tracks: Array[Integer],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -542,6 +648,8 @@ module Aws::MediaConvert
       attr_accessor program_selection: Integer?
       attr_accessor remix_settings: Types::RemixSettings?
       attr_accessor selector_type: String?
+      attr_accessor smpte337_passthrough: String?
+      attr_accessor streams: Array[Integer]?
       attr_accessor tracks: Array[Integer]?
     end
 
@@ -562,6 +670,12 @@ module Aws::MediaConvert
       LANGUAGE_CODE: String
       HLS_RENDITION_GROUP: String
       ALL_PCM: String
+      STREAM: String
+    end
+
+    module AudioSmpte337Passthrough
+      ENABLED: String
+      DISABLED: String
     end
 
     module AudioTypeControl
@@ -1160,6 +1274,7 @@ module Aws::MediaConvert
       NULL_SOURCE: String
       IMSC: String
       WEBVTT: String
+      TT_3GPP: String
     end
 
     module CaptionSourceUpconvertSTLToTeletext
@@ -1228,6 +1343,7 @@ module Aws::MediaConvert
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?clear_lead_segments: Integer,
         ?constant_initialization_vector: String,
         ?encryption_method: String,
         ?initialization_vector_in_manifest: String,
@@ -1237,6 +1353,7 @@ module Aws::MediaConvert
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor clear_lead_segments: Integer?
       attr_accessor constant_initialization_vector: String?
       attr_accessor encryption_method: String?
       attr_accessor initialization_vector_in_manifest: String?
@@ -1266,6 +1383,7 @@ module Aws::MediaConvert
         ?fragment_length: Integer,
         ?image_based_trick_play: String,
         ?image_based_trick_play_settings: Types::CmafImageBasedTrickPlaySettings,
+        ?image_based_trick_play_variants: Array[Types::CmafImageBasedTrickPlayVariant],
         ?manifest_compression: String,
         ?manifest_duration_format: String,
         ?min_buffer_time: Integer,
@@ -1297,6 +1415,7 @@ module Aws::MediaConvert
       attr_accessor fragment_length: Integer?
       attr_accessor image_based_trick_play: String?
       attr_accessor image_based_trick_play_settings: Types::CmafImageBasedTrickPlaySettings?
+      attr_accessor image_based_trick_play_variants: Array[Types::CmafImageBasedTrickPlayVariant]?
       attr_accessor manifest_compression: String?
       attr_accessor manifest_duration_format: String?
       attr_accessor min_buffer_time: Integer?
@@ -1320,9 +1439,31 @@ module Aws::MediaConvert
       THUMBNAIL: String
       THUMBNAIL_AND_FULLFRAME: String
       ADVANCED: String
+      VARIANTS: String
     end
 
     class CmafImageBasedTrickPlaySettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval_cadence: String,
+        ?thumbnail_height: Integer,
+        ?thumbnail_interval: Float,
+        ?thumbnail_width: Integer,
+        ?tile_height: Integer,
+        ?tile_width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval_cadence: String?
+      attr_accessor thumbnail_height: Integer?
+      attr_accessor thumbnail_interval: Float?
+      attr_accessor thumbnail_width: Integer?
+      attr_accessor tile_height: Integer?
+      attr_accessor tile_width: Integer?
+    end
+
+    class CmafImageBasedTrickPlayVariant
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -1351,6 +1492,7 @@ module Aws::MediaConvert
     module CmafIntervalCadence
       FOLLOW_IFRAME: String
       FOLLOW_CUSTOM: String
+      FOLLOW_SEGMENTATION: String
     end
 
     module CmafKeyProviderType
@@ -1436,6 +1578,11 @@ module Aws::MediaConvert
       AUDIO_ONLY_VARIANT_STREAM: String
     end
 
+    module CmfcC2paManifest
+      INCLUDE: String
+      EXCLUDE: String
+    end
+
     module CmfcDescriptiveVideoServiceFlag
       DONT_FLAG: String
       FLAG: String
@@ -1464,6 +1611,7 @@ module Aws::MediaConvert
     module CmfcScte35Source
       PASSTHROUGH: String
       NONE: String
+      MANIFEST_CUES: String
     end
 
     class CmfcSettings
@@ -1474,12 +1622,15 @@ module Aws::MediaConvert
         ?audio_group_id: String,
         ?audio_rendition_sets: String,
         ?audio_track_type: String,
+        ?c2pa_manifest: String,
+        ?certificate_secret: String,
         ?descriptive_video_service_flag: String,
         ?i_frame_only_manifest: String,
         ?klv_metadata: String,
         ?manifest_metadata_signaling: String,
         ?scte35_esam: String,
         ?scte35_source: String,
+        ?signing_kms_key: String,
         ?timed_metadata: String,
         ?timed_metadata_box_version: String,
         ?timed_metadata_scheme_id_uri: String,
@@ -1491,12 +1642,15 @@ module Aws::MediaConvert
       attr_accessor audio_group_id: String?
       attr_accessor audio_rendition_sets: String?
       attr_accessor audio_track_type: String?
+      attr_accessor c2pa_manifest: String?
+      attr_accessor certificate_secret: String?
       attr_accessor descriptive_video_service_flag: String?
       attr_accessor i_frame_only_manifest: String?
       attr_accessor klv_metadata: String?
       attr_accessor manifest_metadata_signaling: String?
       attr_accessor scte35_esam: String?
       attr_accessor scte35_source: String?
+      attr_accessor signing_kms_key: String?
       attr_accessor timed_metadata: String?
       attr_accessor timed_metadata_box_version: String?
       attr_accessor timed_metadata_scheme_id_uri: String?
@@ -1517,26 +1671,84 @@ module Aws::MediaConvert
       UNKNOWN: String
       AAC: String
       AC3: String
+      AMR: String
       EAC3: String
       FLAC: String
+      MP2: String
       MP3: String
       OPUS: String
       PCM: String
       VORBIS: String
+      WMA: String
+      WMA2: String
+      WMAPRO: String
       AV1: String
       AVC: String
+      DV: String
+      H263: String
       HEVC: String
       JPEG2000: String
       MJPEG: String
+      MPEG1: String
       MP4V: String
       MPEG2: String
       PRORES: String
+      QTRLE: String
       THEORA: String
+      UNCOMPRESSED: String
+      VC1: String
+      VC3: String
+      VFW: String
       VP8: String
       VP9: String
       C608: String
       C708: String
       WEBVTT: String
+    end
+
+    class CodecMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bit_depth: Integer,
+        ?chroma_subsampling: String,
+        ?coded_frame_rate: Types::FrameRate,
+        ?color_primaries: String,
+        ?content_light_level: Types::ContentLightLevel,
+        ?display_aspect_ratio: Types::AspectRatio,
+        ?dolby_vision: Types::DolbyVisionMetadata,
+        ?field_order: String,
+        ?hdr10_plus_presence: String,
+        ?height: Integer,
+        ?level: String,
+        ?matrix_coefficients: String,
+        ?profile: String,
+        ?rotation: Integer,
+        ?sample_aspect_ratio: Types::AspectRatio,
+        ?scan_type: String,
+        ?transfer_characteristics: String,
+        ?width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bit_depth: Integer?
+      attr_accessor chroma_subsampling: String?
+      attr_accessor coded_frame_rate: Types::FrameRate?
+      attr_accessor color_primaries: String?
+      attr_accessor content_light_level: Types::ContentLightLevel?
+      attr_accessor display_aspect_ratio: Types::AspectRatio?
+      attr_accessor dolby_vision: Types::DolbyVisionMetadata?
+      attr_accessor field_order: String?
+      attr_accessor hdr10_plus_presence: String?
+      attr_accessor height: Integer?
+      attr_accessor level: String?
+      attr_accessor matrix_coefficients: String?
+      attr_accessor profile: String?
+      attr_accessor rotation: Integer?
+      attr_accessor sample_aspect_ratio: Types::AspectRatio?
+      attr_accessor scan_type: String?
+      attr_accessor transfer_characteristics: String?
+      attr_accessor width: Integer?
     end
 
     class ColorConversion3DLUTSetting
@@ -1659,14 +1871,18 @@ module Aws::MediaConvert
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?bit_rate: Integer,
         ?duration: Float,
         ?format: String,
+        ?start_timecode: String,
         ?tracks: Array[Types::Track],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor bit_rate: Integer?
       attr_accessor duration: Float?
       attr_accessor format: String?
+      attr_accessor start_timecode: String?
       attr_accessor tracks: Array[Types::Track]?
     end
 
@@ -1712,6 +1928,19 @@ module Aws::MediaConvert
       WEBM: String
       RAW: String
       Y4M: String
+    end
+
+    class ContentLightLevel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_content_light_level: Integer,
+        ?max_frame_average_light_level: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_content_light_level: Integer?
+      attr_accessor max_frame_average_light_level: Integer?
     end
 
     module CopyProtectionAction
@@ -1843,6 +2072,7 @@ module Aws::MediaConvert
       def initialize: (
         ?concurrent_jobs: Integer,
         ?description: String,
+        ?maximum_concurrent_feeds: Integer,
         ?name: String,
         ?pricing_plan: String,
         ?reservation_plan_settings: Types::ReservationPlanSettings,
@@ -1853,6 +2083,7 @@ module Aws::MediaConvert
 
       attr_accessor concurrent_jobs: Integer?
       attr_accessor description: String?
+      attr_accessor maximum_concurrent_feeds: Integer?
       attr_accessor name: String?
       attr_accessor pricing_plan: String?
       attr_accessor reservation_plan_settings: Types::ReservationPlanSettings?
@@ -1940,6 +2171,7 @@ module Aws::MediaConvert
         ?hbbtv_compliance: String,
         ?image_based_trick_play: String,
         ?image_based_trick_play_settings: Types::DashIsoImageBasedTrickPlaySettings,
+        ?image_based_trick_play_variants: Array[Types::DashIsoImageBasedTrickPlayVariant],
         ?min_buffer_time: Integer,
         ?min_final_segment_length: Float,
         ?mpd_manifest_bandwidth_type: String,
@@ -1965,6 +2197,7 @@ module Aws::MediaConvert
       attr_accessor hbbtv_compliance: String?
       attr_accessor image_based_trick_play: String?
       attr_accessor image_based_trick_play_settings: Types::DashIsoImageBasedTrickPlaySettings?
+      attr_accessor image_based_trick_play_variants: Array[Types::DashIsoImageBasedTrickPlayVariant]?
       attr_accessor min_buffer_time: Integer?
       attr_accessor min_final_segment_length: Float?
       attr_accessor mpd_manifest_bandwidth_type: String?
@@ -1987,6 +2220,7 @@ module Aws::MediaConvert
       THUMBNAIL: String
       THUMBNAIL_AND_FULLFRAME: String
       ADVANCED: String
+      VARIANTS: String
     end
 
     class DashIsoImageBasedTrickPlaySettings
@@ -2010,9 +2244,31 @@ module Aws::MediaConvert
       attr_accessor tile_width: Integer?
     end
 
+    class DashIsoImageBasedTrickPlayVariant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval_cadence: String,
+        ?thumbnail_height: Integer,
+        ?thumbnail_interval: Float,
+        ?thumbnail_width: Integer,
+        ?tile_height: Integer,
+        ?tile_width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval_cadence: String?
+      attr_accessor thumbnail_height: Integer?
+      attr_accessor thumbnail_interval: Float?
+      attr_accessor thumbnail_width: Integer?
+      attr_accessor tile_height: Integer?
+      attr_accessor tile_width: Integer?
+    end
+
     module DashIsoIntervalCadence
       FOLLOW_IFRAME: String
       FOLLOW_CUSTOM: String
+      FOLLOW_SEGMENTATION: String
     end
 
     module DashIsoMpdManifestBandwidthType
@@ -2028,6 +2284,7 @@ module Aws::MediaConvert
     module DashIsoPlaybackDeviceCompatibility
       CENC_V1: String
       UNENCRYPTED_SEI: String
+      CENC_V1_UNENCRYPTED_HEADERS: String
     end
 
     module DashIsoPtsOffsetHandlingForBFrames
@@ -2060,6 +2317,7 @@ module Aws::MediaConvert
       BASIC: String
       COMPACT: String
       DISTINCT: String
+      FULL: String
     end
 
     class DataProperties
@@ -2259,6 +2517,7 @@ module Aws::MediaConvert
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?compatibility: String,
         ?l6_metadata: Types::DolbyVisionLevel6Metadata,
         ?l6_mode: String,
         ?mapping: String,
@@ -2266,10 +2525,16 @@ module Aws::MediaConvert
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor compatibility: String?
       attr_accessor l6_metadata: Types::DolbyVisionLevel6Metadata?
       attr_accessor l6_mode: String?
       attr_accessor mapping: String?
       attr_accessor profile: String?
+    end
+
+    module DolbyVisionCompatibility
+      DUPLICATE_STREAM: String
+      SUPPLEMENTAL_CODECS: String
     end
 
     class DolbyVisionLevel6Metadata
@@ -2296,6 +2561,30 @@ module Aws::MediaConvert
       HDR10_1000: String
     end
 
+    class DolbyVisionMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_layer: String,
+        ?enhancement_layer: String,
+        ?level: Integer,
+        ?profile: Integer,
+        ?rpu: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_layer: String?
+      attr_accessor enhancement_layer: String?
+      attr_accessor level: Integer?
+      attr_accessor profile: Integer?
+      attr_accessor rpu: String?
+    end
+
+    module DolbyVisionPresence
+      PRESENT: String
+      ABSENT: String
+    end
+
     module DolbyVisionProfile
       PROFILE_5: String
       PROFILE_8_1: String
@@ -2304,6 +2593,21 @@ module Aws::MediaConvert
     module DropFrameTimecode
       DISABLED: String
       ENABLED: String
+    end
+
+    class DurationControl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integer_duration_maximum_compression_denominator: Integer,
+        ?integer_duration_maximum_compression_numerator: Integer,
+        ?integer_duration_trim_threshold_milliseconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integer_duration_maximum_compression_denominator: Integer?
+      attr_accessor integer_duration_maximum_compression_numerator: Integer?
+      attr_accessor integer_duration_trim_threshold_milliseconds: Integer?
     end
 
     class DvbNitSettings
@@ -2657,6 +2961,7 @@ module Aws::MediaConvert
       CODING_MODE_1_0: String
       CODING_MODE_2_0: String
       CODING_MODE_3_2: String
+      CODING_MODE_AUTO: String
     end
 
     module Eac3DcFilter
@@ -2775,6 +3080,43 @@ module Aws::MediaConvert
       NOT_INDICATED: String
       ENABLED: String
       DISABLED: String
+    end
+
+    class ElementalInferenceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?features: Array[String],
+        ?feeds: Array[Types::ElementalInferenceFeed],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor features: Array[String]?
+      attr_accessor feeds: Array[Types::ElementalInferenceFeed]?
+    end
+
+    module ElementalInferenceFeature
+      SMART_CROP: String
+    end
+
+    class ElementalInferenceFeed
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?feed_management_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor feed_management_state: String?
+    end
+
+    module ElementalInferenceFeedManagementState
+      CREATED: String
+      ASSOCIATED: String
+      PENDING_DELETION: String
+      DELETED: String
     end
 
     module EmbeddedConvert608To708
@@ -3011,6 +3353,19 @@ module Aws::MediaConvert
       matroska: String
       webm: String
       mxf: String
+      wave: String
+      avi: String
+      mpegts: String
+      mpegps: String
+      mp3: String
+      flac: String
+      asf: String
+      ogg: String
+      three_gp: String
+      three_g2: String
+      aac: String
+      ac3: String
+      eac3: String
     end
 
     class FrameCaptureSettings
@@ -3030,6 +3385,11 @@ module Aws::MediaConvert
       attr_accessor quality: Integer?
     end
 
+    module FrameControl
+      NEAREST_IDRFRAME: String
+      NEAREST_IFRAME: String
+    end
+
     module FrameMetricType
       PSNR: String
       SSIM: String
@@ -3037,6 +3397,7 @@ module Aws::MediaConvert
       PSNR_HVS: String
       VMAF: String
       QVBR: String
+      SHOT_CHANGE: String
     end
 
     class FrameRate
@@ -3094,6 +3455,32 @@ module Aws::MediaConvert
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor job_template: Types::JobTemplate?
+    end
+
+    class GetJobsQueryResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetJobsQueryResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::Job],
+        ?next_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::Job]?
+      attr_accessor next_token: String?
+      attr_accessor status: String?
     end
 
     class GetPolicyRequest
@@ -3241,6 +3628,11 @@ module Aws::MediaConvert
       CAVLC: String
     end
 
+    module H264ExplicitWeightedPrediction
+      DISABLED: String
+      ENABLED: String
+    end
+
     module H264FieldEncoding
       PAFF: String
       FORCE_FIELD: String
@@ -3348,6 +3740,7 @@ module Aws::MediaConvert
         ?dynamic_sub_gop: String,
         ?end_of_stream_markers: String,
         ?entropy_encoding: String,
+        ?explicit_weighted_prediction: String,
         ?field_encoding: String,
         ?flicker_adaptive_quantization: String,
         ?framerate_control: String,
@@ -3397,6 +3790,7 @@ module Aws::MediaConvert
       attr_accessor dynamic_sub_gop: String?
       attr_accessor end_of_stream_markers: String?
       attr_accessor entropy_encoding: String?
+      attr_accessor explicit_weighted_prediction: String?
       attr_accessor field_encoding: String?
       attr_accessor flicker_adaptive_quantization: String?
       attr_accessor framerate_control: String?
@@ -3567,6 +3961,16 @@ module Aws::MediaConvert
       FOLLOW_BOTTOM_FIELD: String
     end
 
+    module H265MvOverPictureBoundaries
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module H265MvTemporalPredictor
+      ENABLED: String
+      DISABLED: String
+    end
+
     module H265ParControl
       INITIALIZE_FROM_SOURCE: String
       SPECIFIED: String
@@ -3644,6 +4048,8 @@ module Aws::MediaConvert
         ?interlace_mode: String,
         ?max_bitrate: Integer,
         ?min_i_interval: Integer,
+        ?mv_over_picture_boundaries: String,
+        ?mv_temporal_predictor: String,
         ?number_b_frames_between_reference_frames: Integer,
         ?number_reference_frames: Integer,
         ?par_control: String,
@@ -3662,7 +4068,11 @@ module Aws::MediaConvert
         ?telecine: String,
         ?temporal_adaptive_quantization: String,
         ?temporal_ids: String,
+        ?tile_height: Integer,
+        ?tile_padding: String,
+        ?tile_width: Integer,
         ?tiles: String,
+        ?tree_block_size: String,
         ?unregistered_sei_timecode: String,
         ?write_mp4_packaging_type: String,
       ) -> void
@@ -3692,6 +4102,8 @@ module Aws::MediaConvert
       attr_accessor interlace_mode: String?
       attr_accessor max_bitrate: Integer?
       attr_accessor min_i_interval: Integer?
+      attr_accessor mv_over_picture_boundaries: String?
+      attr_accessor mv_temporal_predictor: String?
       attr_accessor number_b_frames_between_reference_frames: Integer?
       attr_accessor number_reference_frames: Integer?
       attr_accessor par_control: String?
@@ -3710,7 +4122,11 @@ module Aws::MediaConvert
       attr_accessor telecine: String?
       attr_accessor temporal_adaptive_quantization: String?
       attr_accessor temporal_ids: String?
+      attr_accessor tile_height: Integer?
+      attr_accessor tile_padding: String?
+      attr_accessor tile_width: Integer?
       attr_accessor tiles: String?
+      attr_accessor tree_block_size: String?
       attr_accessor unregistered_sei_timecode: String?
       attr_accessor write_mp4_packaging_type: String?
     end
@@ -3741,9 +4157,19 @@ module Aws::MediaConvert
       ENABLED: String
     end
 
+    module H265TilePadding
+      NONE: String
+      PADDED: String
+    end
+
     module H265Tiles
       DISABLED: String
       ENABLED: String
+    end
+
+    module H265TreeBlockSize
+      AUTO: String
+      TREE_SIZE_32X32: String
     end
 
     module H265UnregisteredSeiTimecode
@@ -3805,6 +4231,23 @@ module Aws::MediaConvert
 
       attr_accessor mastering_monitor_nits: Integer?
       attr_accessor target_monitor_nits: Integer?
+    end
+
+    module Hdr10PlusPresence
+      PRESENT: String
+    end
+
+    class HdrMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_light_level: Types::ContentLightLevel,
+        ?mastering_display_color_volume: Types::MasteringDisplayColorVolume,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_light_level: Types::ContentLightLevel?
+      attr_accessor mastering_display_color_volume: Types::MasteringDisplayColorVolume?
     end
 
     module HlsAdMarkers
@@ -3937,6 +4380,7 @@ module Aws::MediaConvert
         ?encryption: Types::HlsEncryptionSettings,
         ?image_based_trick_play: String,
         ?image_based_trick_play_settings: Types::HlsImageBasedTrickPlaySettings,
+        ?image_based_trick_play_variants: Array[Types::HlsImageBasedTrickPlayVariant],
         ?manifest_compression: String,
         ?manifest_duration_format: String,
         ?min_final_segment_length: Float,
@@ -3972,6 +4416,7 @@ module Aws::MediaConvert
       attr_accessor encryption: Types::HlsEncryptionSettings?
       attr_accessor image_based_trick_play: String?
       attr_accessor image_based_trick_play_settings: Types::HlsImageBasedTrickPlaySettings?
+      attr_accessor image_based_trick_play_variants: Array[Types::HlsImageBasedTrickPlayVariant]?
       attr_accessor manifest_compression: String?
       attr_accessor manifest_duration_format: String?
       attr_accessor min_final_segment_length: Float?
@@ -4002,9 +4447,31 @@ module Aws::MediaConvert
       THUMBNAIL: String
       THUMBNAIL_AND_FULLFRAME: String
       ADVANCED: String
+      VARIANTS: String
     end
 
     class HlsImageBasedTrickPlaySettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval_cadence: String,
+        ?thumbnail_height: Integer,
+        ?thumbnail_interval: Float,
+        ?thumbnail_width: Integer,
+        ?tile_height: Integer,
+        ?tile_width: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval_cadence: String?
+      attr_accessor thumbnail_height: Integer?
+      attr_accessor thumbnail_interval: Float?
+      attr_accessor thumbnail_width: Integer?
+      attr_accessor tile_height: Integer?
+      attr_accessor tile_width: Integer?
+    end
+
+    class HlsImageBasedTrickPlayVariant
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -4033,6 +4500,7 @@ module Aws::MediaConvert
     module HlsIntervalCadence
       FOLLOW_IFRAME: String
       FOLLOW_CUSTOM: String
+      FOLLOW_SEGMENTATION: String
     end
 
     module HlsKeyProviderType
@@ -4220,6 +4688,7 @@ module Aws::MediaConvert
         ?image_inserter: Types::ImageInserter,
         ?input_clippings: Array[Types::InputClipping],
         ?input_scan_type: String,
+        ?multi_view_settings: Array[Types::MultiViewSettings],
         ?position: Types::Rectangle,
         ?program_number: Integer,
         ?psi_control: String,
@@ -4250,6 +4719,7 @@ module Aws::MediaConvert
       attr_accessor image_inserter: Types::ImageInserter?
       attr_accessor input_clippings: Array[Types::InputClipping]?
       attr_accessor input_scan_type: String?
+      attr_accessor multi_view_settings: Array[Types::MultiViewSettings]?
       attr_accessor position: Types::Rectangle?
       attr_accessor program_number: Integer?
       attr_accessor psi_control: String?
@@ -4373,6 +4843,7 @@ module Aws::MediaConvert
         ?image_inserter: Types::ImageInserter,
         ?input_clippings: Array[Types::InputClipping],
         ?input_scan_type: String,
+        ?multi_view_settings: Array[Types::MultiViewSettings],
         ?position: Types::Rectangle,
         ?program_number: Integer,
         ?psi_control: String,
@@ -4398,6 +4869,7 @@ module Aws::MediaConvert
       attr_accessor image_inserter: Types::ImageInserter?
       attr_accessor input_clippings: Array[Types::InputClipping]?
       attr_accessor input_scan_type: String?
+      attr_accessor multi_view_settings: Array[Types::MultiViewSettings]?
       attr_accessor position: Types::Rectangle?
       attr_accessor program_number: Integer?
       attr_accessor psi_control: String?
@@ -4421,7 +4893,10 @@ module Aws::MediaConvert
         ?duration: Integer,
         ?framerate_denominator: Integer,
         ?framerate_numerator: Integer,
+        ?height: Integer,
+        ?image_input: String,
         ?sample_rate: Integer,
+        ?width: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4429,7 +4904,10 @@ module Aws::MediaConvert
       attr_accessor duration: Integer?
       attr_accessor framerate_denominator: Integer?
       attr_accessor framerate_numerator: Integer?
+      attr_accessor height: Integer?
+      attr_accessor image_input: String?
       attr_accessor sample_rate: Integer?
+      attr_accessor width: Integer?
     end
 
     class InsertableImage
@@ -4485,6 +4963,7 @@ module Aws::MediaConvert
         ?client_request_token: String,
         ?created_at: Time,
         ?current_phase: String,
+        ?elemental_inference_configuration: Types::ElementalInferenceConfiguration,
         ?error_code: Integer,
         ?error_message: String,
         ?hop_destinations: Array[Types::HopDestination],
@@ -4519,6 +4998,7 @@ module Aws::MediaConvert
       attr_accessor client_request_token: String?
       attr_accessor created_at: Time?
       attr_accessor current_phase: String?
+      attr_accessor elemental_inference_configuration: Types::ElementalInferenceConfiguration?
       attr_accessor error_code: Integer?
       attr_accessor error_message: String?
       attr_accessor hop_destinations: Array[Types::HopDestination]?
@@ -4590,6 +5070,7 @@ module Aws::MediaConvert
         ?inputs: Array[Types::Input],
         ?kantar_watermark: Types::KantarWatermarkSettings,
         ?motion_image_inserter: Types::MotionImageInserter,
+        ?motion_image_inserters: Array[Types::MotionImageInserter],
         ?nielsen_configuration: Types::NielsenConfiguration,
         ?nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings,
         ?output_groups: Array[Types::OutputGroup],
@@ -4607,6 +5088,7 @@ module Aws::MediaConvert
       attr_accessor inputs: Array[Types::Input]?
       attr_accessor kantar_watermark: Types::KantarWatermarkSettings?
       attr_accessor motion_image_inserter: Types::MotionImageInserter?
+      attr_accessor motion_image_inserters: Array[Types::MotionImageInserter]?
       attr_accessor nielsen_configuration: Types::NielsenConfiguration?
       attr_accessor nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings?
       attr_accessor output_groups: Array[Types::OutputGroup]?
@@ -4676,6 +5158,7 @@ module Aws::MediaConvert
         ?inputs: Array[Types::InputTemplate],
         ?kantar_watermark: Types::KantarWatermarkSettings,
         ?motion_image_inserter: Types::MotionImageInserter,
+        ?motion_image_inserters: Array[Types::MotionImageInserter],
         ?nielsen_configuration: Types::NielsenConfiguration,
         ?nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings,
         ?output_groups: Array[Types::OutputGroup],
@@ -4693,11 +5176,43 @@ module Aws::MediaConvert
       attr_accessor inputs: Array[Types::InputTemplate]?
       attr_accessor kantar_watermark: Types::KantarWatermarkSettings?
       attr_accessor motion_image_inserter: Types::MotionImageInserter?
+      attr_accessor motion_image_inserters: Array[Types::MotionImageInserter]?
       attr_accessor nielsen_configuration: Types::NielsenConfiguration?
       attr_accessor nielsen_non_linear_watermark: Types::NielsenNonLinearWatermarkSettings?
       attr_accessor output_groups: Array[Types::OutputGroup]?
       attr_accessor timecode_config: Types::TimecodeConfig?
       attr_accessor timed_metadata_insertion: Types::TimedMetadataInsertion?
+    end
+
+    class JobsQueryFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module JobsQueryFilterKey
+      queue: String
+      status: String
+      fileInput: String
+      jobEngineVersionRequested: String
+      jobEngineVersionUsed: String
+      audioCodec: String
+      videoCodec: String
+      errorCode: String
+    end
+
+    module JobsQueryStatus
+      SUBMITTED: String
+      PROGRESSING: String
+      COMPLETE: String
+      ERROR: String
     end
 
     class KantarWatermarkSettings
@@ -5187,6 +5702,7 @@ module Aws::MediaConvert
     module M2tsScte35Source
       PASSTHROUGH: String
       NONE: String
+      MANIFEST_CUES: String
     end
 
     module M2tsSegmentationMarkers
@@ -5321,6 +5837,7 @@ module Aws::MediaConvert
     module M3u8Scte35Source
       PASSTHROUGH: String
       NONE: String
+      MANIFEST_CUES: String
     end
 
     class M3u8Settings
@@ -5374,6 +5891,35 @@ module Aws::MediaConvert
       attr_accessor timed_metadata_pid: Integer?
       attr_accessor transport_stream_id: Integer?
       attr_accessor video_pid: Integer?
+    end
+
+    class MasteringDisplayColorVolume
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blue_primary_x: Integer,
+        ?blue_primary_y: Integer,
+        ?green_primary_x: Integer,
+        ?green_primary_y: Integer,
+        ?max_luminance: Integer,
+        ?min_luminance: Integer,
+        ?red_primary_x: Integer,
+        ?red_primary_y: Integer,
+        ?white_point_x: Integer,
+        ?white_point_y: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blue_primary_x: Integer?
+      attr_accessor blue_primary_y: Integer?
+      attr_accessor green_primary_x: Integer?
+      attr_accessor green_primary_y: Integer?
+      attr_accessor max_luminance: Integer?
+      attr_accessor min_luminance: Integer?
+      attr_accessor red_primary_x: Integer?
+      attr_accessor red_primary_y: Integer?
+      attr_accessor white_point_x: Integer?
+      attr_accessor white_point_y: Integer?
     end
 
     module MatrixCoefficients
@@ -5526,6 +6072,7 @@ module Aws::MediaConvert
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?audio_duration: String,
         ?clap_atom: String,
         ?cslg_atom: String,
         ?mpeg2_four_cc_control: String,
@@ -5534,6 +6081,7 @@ module Aws::MediaConvert
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor audio_duration: String?
       attr_accessor clap_atom: String?
       attr_accessor cslg_atom: String?
       attr_accessor mpeg2_four_cc_control: String?
@@ -5644,6 +6192,11 @@ module Aws::MediaConvert
       MATCH_VIDEO_DURATION: String
     end
 
+    module MpdC2paManifest
+      INCLUDE: String
+      EXCLUDE: String
+    end
+
     module MpdCaptionContainerType
       RAW: String
       FRAGMENTED_MP4: String
@@ -5667,6 +6220,7 @@ module Aws::MediaConvert
     module MpdScte35Source
       PASSTHROUGH: String
       NONE: String
+      MANIFEST_CUES: String
     end
 
     class MpdSettings
@@ -5675,11 +6229,14 @@ module Aws::MediaConvert
       def initialize: (
         ?accessibility_caption_hints: String,
         ?audio_duration: String,
+        ?c2pa_manifest: String,
         ?caption_container_type: String,
+        ?certificate_secret: String,
         ?klv_metadata: String,
         ?manifest_metadata_signaling: String,
         ?scte35_esam: String,
         ?scte35_source: String,
+        ?signing_kms_key: String,
         ?timed_metadata: String,
         ?timed_metadata_box_version: String,
         ?timed_metadata_scheme_id_uri: String,
@@ -5689,11 +6246,14 @@ module Aws::MediaConvert
 
       attr_accessor accessibility_caption_hints: String?
       attr_accessor audio_duration: String?
+      attr_accessor c2pa_manifest: String?
       attr_accessor caption_container_type: String?
+      attr_accessor certificate_secret: String?
       attr_accessor klv_metadata: String?
       attr_accessor manifest_metadata_signaling: String?
       attr_accessor scte35_esam: String?
       attr_accessor scte35_source: String?
+      attr_accessor signing_kms_key: String?
       attr_accessor timed_metadata: String?
       attr_accessor timed_metadata_box_version: String?
       attr_accessor timed_metadata_scheme_id_uri: String?
@@ -5960,6 +6520,28 @@ module Aws::MediaConvert
       UTF16: String
     end
 
+    class MultiViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_input: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_input: String?
+    end
+
+    class MultiViewSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: Types::MultiViewInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: Types::MultiViewInput?
+    end
+
     module MxfAfdSignaling
       NO_COPY: String
       COPY_FROM_VIDEO: String
@@ -5979,13 +6561,20 @@ module Aws::MediaConvert
       def initialize: (
         ?afd_signaling: String,
         ?profile: String,
+        ?uncompressed_audio_wrapping: String,
         ?xavc_profile_settings: Types::MxfXavcProfileSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor afd_signaling: String?
       attr_accessor profile: String?
+      attr_accessor uncompressed_audio_wrapping: String?
       attr_accessor xavc_profile_settings: Types::MxfXavcProfileSettings?
+    end
+
+    module MxfUncompressedAudioWrapping
+      AUTO: String
+      AES3: String
     end
 
     module MxfXavcDurationMode
@@ -6345,6 +6934,29 @@ module Aws::MediaConvert
       attr_accessor nexguard_file_marker_settings: Types::NexGuardFileMarkerSettings?
     end
 
+    module PassthroughSegmentationMode
+      AUTO: String
+      DURATION_BASED: String
+      GOP_COUNT: String
+    end
+
+    class PassthroughSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?frame_control: String,
+        ?gops_per_segment: Integer,
+        ?segmentation_mode: String,
+        ?video_selector_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor frame_control: String?
+      attr_accessor gops_per_segment: Integer?
+      attr_accessor segmentation_mode: String?
+      attr_accessor video_selector_mode: String?
+    end
+
     class Policy
       include Smithy::Schema::Structure
 
@@ -6604,6 +7216,7 @@ module Aws::MediaConvert
         ?created_at: Time,
         ?description: String,
         ?last_updated: Time,
+        ?maximum_concurrent_feeds: Integer,
         ?name: String,
         ?pricing_plan: String,
         ?progressing_jobs_count: Integer,
@@ -6620,6 +7233,7 @@ module Aws::MediaConvert
       attr_accessor created_at: Time?
       attr_accessor description: String?
       attr_accessor last_updated: Time?
+      attr_accessor maximum_concurrent_feeds: Integer?
       attr_accessor name: String?
       attr_accessor pricing_plan: String?
       attr_accessor progressing_jobs_count: Integer?
@@ -6834,6 +7448,7 @@ module Aws::MediaConvert
       INTELLIGENT_TIERING: String
       GLACIER: String
       DEEP_ARCHIVE: String
+      GLACIER_IR: String
     end
 
     module SampleRangeConversion
@@ -6848,6 +7463,7 @@ module Aws::MediaConvert
       FIT: String
       FIT_NO_UPSCALE: String
       FILL: String
+      SMART_CROP: String
     end
 
     module SccDestinationFramerate
@@ -6920,6 +7536,17 @@ module Aws::MediaConvert
       attr_accessor value: String?
     end
 
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     module ShareStatus
       NOT_SHARED: String
       INITIATED: String
@@ -6927,6 +7554,11 @@ module Aws::MediaConvert
     end
 
     module SimulateReservedQueue
+      DISABLED: String
+      ENABLED: String
+    end
+
+    module SlowPalPitchCorrection
       DISABLED: String
       ENABLED: String
     end
@@ -6985,6 +7617,34 @@ module Aws::MediaConvert
     module SrtStylePassthrough
       ENABLED: String
       DISABLED: String
+    end
+
+    class StartJobsQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_list: Array[Types::JobsQueryFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+        ?order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_list: Array[Types::JobsQueryFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor order: String?
+    end
+
+    class StartJobsQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
     end
 
     class StaticKeyProvider
@@ -7221,10 +7881,12 @@ module Aws::MediaConvert
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?stream_number: Integer,
         ?track_number: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor stream_number: Integer?
       attr_accessor track_number: Integer?
     end
 
@@ -7262,20 +7924,68 @@ module Aws::MediaConvert
       MILLISECONDS: String
     end
 
+    module TtmlBackgroundColor
+      NONE: String
+      BLACK: String
+      WHITE: String
+      AUTO: String
+    end
+
     class TtmlDestinationSettings
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?background_color: String,
+        ?background_opacity: Integer,
+        ?font_color: String,
+        ?font_opacity: Integer,
+        ?font_size: Integer,
+        ?font_style: String,
+        ?font_weight: String,
         ?style_passthrough: String,
+        ?text_decoration: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor background_color: String?
+      attr_accessor background_opacity: Integer?
+      attr_accessor font_color: String?
+      attr_accessor font_opacity: Integer?
+      attr_accessor font_size: Integer?
+      attr_accessor font_style: String?
+      attr_accessor font_weight: String?
       attr_accessor style_passthrough: String?
+      attr_accessor text_decoration: String?
+    end
+
+    module TtmlFontColor
+      WHITE: String
+      BLACK: String
+      YELLOW: String
+      RED: String
+      GREEN: String
+      BLUE: String
+      AUTO: String
+    end
+
+    module TtmlFontStyle
+      NORMAL: String
+      ITALIC: String
+    end
+
+    module TtmlFontWeight
+      NORMAL: String
+      BOLD: String
     end
 
     module TtmlStylePassthrough
       ENABLED: String
       DISABLED: String
+    end
+
+    module TtmlTextDecoration
+      NONE: String
+      UNDERLINE: String
     end
 
     module Type
@@ -7346,6 +8056,17 @@ module Aws::MediaConvert
     module UncompressedTelecine
       NONE: String
       HARD: String
+    end
+
+    class UnprocessableEntityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class UntagResourceRequest
@@ -7442,6 +8163,7 @@ module Aws::MediaConvert
       def initialize: (
         ?concurrent_jobs: Integer,
         ?description: String,
+        ?maximum_concurrent_feeds: Integer,
         ?name: String,
         ?reservation_plan_settings: Types::ReservationPlanSettings,
         ?status: String,
@@ -7450,6 +8172,7 @@ module Aws::MediaConvert
 
       attr_accessor concurrent_jobs: Integer?
       attr_accessor description: String?
+      attr_accessor maximum_concurrent_feeds: Integer?
       attr_accessor name: String?
       attr_accessor reservation_plan_settings: Types::ReservationPlanSettings?
       attr_accessor status: String?
@@ -7565,6 +8288,7 @@ module Aws::MediaConvert
         ?h264_settings: Types::H264Settings,
         ?h265_settings: Types::H265Settings,
         ?mpeg2_settings: Types::Mpeg2Settings,
+        ?passthrough_settings: Types::PassthroughSettings,
         ?prores_settings: Types::ProresSettings,
         ?uncompressed_settings: Types::UncompressedSettings,
         ?vc3_settings: Types::Vc3Settings,
@@ -7582,6 +8306,7 @@ module Aws::MediaConvert
       attr_accessor h264_settings: Types::H264Settings?
       attr_accessor h265_settings: Types::H265Settings?
       attr_accessor mpeg2_settings: Types::Mpeg2Settings?
+      attr_accessor passthrough_settings: Types::PassthroughSettings?
       attr_accessor prores_settings: Types::ProresSettings?
       attr_accessor uncompressed_settings: Types::UncompressedSettings?
       attr_accessor vc3_settings: Types::Vc3Settings?
@@ -7692,6 +8417,7 @@ module Aws::MediaConvert
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?audio_selectors: Hash[String, Types::AudioSelector],
         ?file_input: String,
         ?input_clippings: Array[Types::VideoOverlayInputClipping],
         ?timecode_source: String,
@@ -7699,6 +8425,7 @@ module Aws::MediaConvert
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor audio_selectors: Hash[String, Types::AudioSelector]?
       attr_accessor file_input: String?
       attr_accessor input_clippings: Array[Types::VideoOverlayInputClipping]?
       attr_accessor timecode_source: String?
@@ -7728,6 +8455,7 @@ module Aws::MediaConvert
 
       def initialize: (
         ?height: Integer,
+        ?opacity: Integer,
         ?unit: String,
         ?width: Integer,
         ?x_position: Integer,
@@ -7736,6 +8464,7 @@ module Aws::MediaConvert
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor height: Integer?
+      attr_accessor opacity: Integer?
       attr_accessor unit: String?
       attr_accessor width: Integer?
       attr_accessor x_position: Integer?
@@ -7769,6 +8498,7 @@ module Aws::MediaConvert
         ?color_corrector: Types::ColorCorrector,
         ?deinterlacer: Types::Deinterlacer,
         ?dolby_vision: Types::DolbyVision,
+        ?duration_control: Types::DurationControl,
         ?hdr10_plus: Types::Hdr10Plus,
         ?image_inserter: Types::ImageInserter,
         ?noise_reducer: Types::NoiseReducer,
@@ -7780,6 +8510,7 @@ module Aws::MediaConvert
       attr_accessor color_corrector: Types::ColorCorrector?
       attr_accessor deinterlacer: Types::Deinterlacer?
       attr_accessor dolby_vision: Types::DolbyVision?
+      attr_accessor duration_control: Types::DurationControl?
       attr_accessor hdr10_plus: Types::Hdr10Plus?
       attr_accessor image_inserter: Types::ImageInserter?
       attr_accessor noise_reducer: Types::NoiseReducer?
@@ -7793,10 +8524,15 @@ module Aws::MediaConvert
       def initialize: (
         ?bit_depth: Integer,
         ?bit_rate: Integer,
+        ?codec_metadata: Types::CodecMetadata,
         ?color_primaries: String,
+        ?display_aspect_ratio: Types::AspectRatio,
         ?frame_rate: Types::FrameRate,
+        ?hdr_metadata: Types::HdrMetadata,
         ?height: Integer,
         ?matrix_coefficients: String,
+        ?rotation: Integer,
+        ?sample_aspect_ratio: Types::AspectRatio,
         ?transfer_characteristics: String,
         ?width: Integer,
       ) -> void
@@ -7804,10 +8540,15 @@ module Aws::MediaConvert
 
       attr_accessor bit_depth: Integer?
       attr_accessor bit_rate: Integer?
+      attr_accessor codec_metadata: Types::CodecMetadata?
       attr_accessor color_primaries: String?
+      attr_accessor display_aspect_ratio: Types::AspectRatio?
       attr_accessor frame_rate: Types::FrameRate?
+      attr_accessor hdr_metadata: Types::HdrMetadata?
       attr_accessor height: Integer?
       attr_accessor matrix_coefficients: String?
+      attr_accessor rotation: Integer?
+      attr_accessor sample_aspect_ratio: Types::AspectRatio?
       attr_accessor transfer_characteristics: String?
       attr_accessor width: Integer?
     end
@@ -7845,6 +8586,11 @@ module Aws::MediaConvert
       attr_accessor sample_range: String?
       attr_accessor selector_type: String?
       attr_accessor streams: Array[Integer]?
+    end
+
+    module VideoSelectorMode
+      AUTO: String
+      REMUX_ALL: String
     end
 
     module VideoSelectorType
@@ -8202,10 +8948,12 @@ module Aws::MediaConvert
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?interlace_mode: String,
         ?xavc_class: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor interlace_mode: String?
       attr_accessor xavc_class: String?
     end
 

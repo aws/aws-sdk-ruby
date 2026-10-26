@@ -5,61 +5,144 @@ module Aws::ObservabilityAdmin
     AccessDeniedException: StructureShape
     AccountIdentifier: StringShape
     AccountIdentifiers: ListShape
+    Action: EnumShape
+    ActionCondition: StructureShape
+    AdvancedEventSelector: StructureShape
+    AdvancedEventSelectors: ListShape
+    AdvancedFieldSelector: StructureShape
+    AllRegions: BooleanShape
+    AwsResourceExplorerManagedViewArn: StringShape
     CentralizationFailureReason: EnumShape
     CentralizationRule: StructureShape
     CentralizationRuleDestination: StructureShape
     CentralizationRuleSource: StructureShape
     CentralizationRuleSummaries: ListShape
     CentralizationRuleSummary: StructureShape
+    CloudtrailParameters: StructureShape
+    Condition: StructureShape
+    Conditions: ListShape
+    ConfigurationSummary: StructureShape
     ConflictException: StructureShape
+    ContextGraphStatus: EnumShape
     CreateCentralizationRuleForOrganizationInput: StructureShape
     CreateCentralizationRuleForOrganizationOutput: StructureShape
+    CreateDatasetIntegrationInput: StructureShape
+    CreateDatasetIntegrationOutput: StructureShape
+    CreateS3TableIntegrationInput: StructureShape
+    CreateS3TableIntegrationOutput: StructureShape
+    CreateTelemetryPipelineInput: StructureShape
+    CreateTelemetryPipelineOutput: StructureShape
     CreateTelemetryRuleForOrganizationInput: StructureShape
     CreateTelemetryRuleForOrganizationOutput: StructureShape
     CreateTelemetryRuleInput: StructureShape
     CreateTelemetryRuleOutput: StructureShape
+    DataSource: StructureShape
+    DataSourceFilterString: StringShape
+    DataSources: ListShape
+    DatasetIntegrationSummaries: ListShape
+    DatasetIntegrationSummary: StructureShape
     DeleteCentralizationRuleForOrganizationInput: StructureShape
+    DeleteDatasetIntegrationInput: StructureShape
+    DeleteS3TableIntegrationInput: StructureShape
+    DeleteTelemetryPipelineInput: StructureShape
+    DeleteTelemetryPipelineOutput: StructureShape
     DeleteTelemetryRuleForOrganizationInput: StructureShape
     DeleteTelemetryRuleInput: StructureShape
     DestinationLogsConfiguration: StructureShape
+    DestinationMetricsConfiguration: StructureShape
     DestinationType: EnumShape
+    ELBLoadBalancerLoggingParameters: StructureShape
     EncryptedLogGroupStrategy: EnumShape
+    Encryption: StructureShape
     EncryptionConflictResolutionStrategy: EnumShape
+    EncryptionScope: EnumShape
     EncryptionStrategy: EnumShape
     FailureReason: StringShape
+    FieldMap: MapShape
+    FieldSelectors: ListShape
+    FieldToMatch: StructureShape
+    Filter: StructureShape
+    FilterBehavior: EnumShape
+    FilterRequirement: EnumShape
+    Filters: ListShape
     GetCentralizationRuleForOrganizationInput: StructureShape
     GetCentralizationRuleForOrganizationOutput: StructureShape
+    GetDatasetIntegrationInput: StructureShape
+    GetDatasetIntegrationOutput: StructureShape
+    GetS3TableIntegrationInput: StructureShape
+    GetS3TableIntegrationOutput: StructureShape
+    GetTelemetryEnrichmentStatusOutput: StructureShape
     GetTelemetryEvaluationStatusForOrganizationOutput: StructureShape
     GetTelemetryEvaluationStatusOutput: StructureShape
+    GetTelemetryPipelineInput: StructureShape
+    GetTelemetryPipelineOutput: StructureShape
     GetTelemetryRuleForOrganizationInput: StructureShape
     GetTelemetryRuleForOrganizationOutput: StructureShape
     GetTelemetryRuleInput: StructureShape
     GetTelemetryRuleOutput: StructureShape
+    IamRoleArn: StringShape
+    IntegrationStatus: EnumShape
+    IntegrationSummaries: ListShape
+    IntegrationSummary: StructureShape
     InternalServerException: StructureShape
+    InvalidStateException: StructureShape
+    IsReplicated: BooleanShape
+    KmsKeyArn: StringShape
+    LabelNameCondition: StructureShape
     ListCentralizationRulesForOrganizationInput: StructureShape
     ListCentralizationRulesForOrganizationMaxResults: IntegerShape
     ListCentralizationRulesForOrganizationOutput: StructureShape
+    ListDatasetIntegrationsInput: StructureShape
+    ListDatasetIntegrationsMaxResults: IntegerShape
+    ListDatasetIntegrationsOutput: StructureShape
     ListResourceTelemetryForOrganizationInput: StructureShape
     ListResourceTelemetryForOrganizationMaxResults: IntegerShape
     ListResourceTelemetryForOrganizationOutput: StructureShape
     ListResourceTelemetryInput: StructureShape
     ListResourceTelemetryMaxResults: IntegerShape
     ListResourceTelemetryOutput: StructureShape
+    ListS3TableIntegrationsInput: StructureShape
+    ListS3TableIntegrationsMaxResults: IntegerShape
+    ListS3TableIntegrationsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
+    ListTelemetryPipelinesInput: StructureShape
+    ListTelemetryPipelinesMaxResults: IntegerShape
+    ListTelemetryPipelinesOutput: StructureShape
     ListTelemetryRulesForOrganizationInput: StructureShape
     ListTelemetryRulesForOrganizationMaxResults: IntegerShape
     ListTelemetryRulesForOrganizationOutput: StructureShape
     ListTelemetryRulesInput: StructureShape
     ListTelemetryRulesMaxResults: IntegerShape
     ListTelemetryRulesOutput: StructureShape
+    LogDeliveryParameters: StructureShape
+    LogGroupNameConfiguration: StructureShape
+    LogGroupNamePattern: StringShape
+    LogType: EnumShape
+    LogTypes: ListShape
+    LoggingFilter: StructureShape
     LogsBackupConfiguration: StructureShape
     LogsEncryptionConfiguration: StructureShape
     LogsFilterString: StringShape
+    MetricsBackupConfiguration: StructureShape
+    MetricsFilterString: StringShape
+    MskEnhancedMonitoringLevel: EnumShape
+    MskMonitoringParameters: StructureShape
     NextToken: StringShape
     OrganizationUnitIdentifier: StringShape
     OrganizationUnitIdentifiers: ListShape
+    OutputFormat: EnumShape
+    PipelineOutput: StructureShape
+    PipelineOutputError: StructureShape
+    PipelineOutputs: ListShape
+    Processors: ListShape
+    Record: StructureShape
+    RecordFormat: EnumShape
+    Records: ListShape
+    RedactedFields: ListShape
     Region: StringShape
+    RegionStatus: StructureShape
+    RegionStatuses: ListShape
     Regions: ListShape
     ResourceArn: StringShape
     ResourceIdentifier: StringShape
@@ -71,35 +154,76 @@ module Aws::ObservabilityAdmin
     RuleHealth: EnumShape
     RuleIdentifier: StringShape
     RuleName: StringShape
+    SSEAlgorithm: EnumShape
     ServiceQuotaExceededException: StructureShape
+    SignalType: EnumShape
+    SingleHeader: StructureShape
+    Sinks: ListShape
+    Source: StructureShape
+    SourceContextGraphConfiguration: StructureShape
     SourceFilterString: StringShape
     SourceLogsConfiguration: StructureShape
+    SourceMetricsConfiguration: StructureShape
+    Sources: ListShape
+    StartTelemetryEnrichmentOutput: StructureShape
+    StartTelemetryEvaluationForOrganizationInput: StructureShape
+    StartTelemetryEvaluationInput: StructureShape
     Status: EnumShape
+    StopTelemetryEnrichmentOutput: StructureShape
+    StringList: ListShape
+    TagConflictResolutionStrategy: EnumShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagMapInput: MapShape
     TagMapOutput: MapShape
+    TagPropagationConfiguration: StructureShape
+    TagPropagationFailureReason: EnumShape
+    TagPropagationStatus: EnumShape
     TagResourceInput: StructureShape
     TagValue: StringShape
     TelemetryConfiguration: StructureShape
     TelemetryConfigurationState: MapShape
     TelemetryConfigurations: ListShape
     TelemetryDestinationConfiguration: StructureShape
+    TelemetryEnrichmentStatus: EnumShape
+    TelemetryPipeline: StructureShape
+    TelemetryPipelineConfiguration: StructureShape
+    TelemetryPipelineConfigurationBody: StringShape
+    TelemetryPipelineIdentifier: StringShape
+    TelemetryPipelineName: StringShape
+    TelemetryPipelineStatus: EnumShape
+    TelemetryPipelineStatusReason: StructureShape
+    TelemetryPipelineSummaries: ListShape
+    TelemetryPipelineSummary: StructureShape
     TelemetryRule: StructureShape
     TelemetryRuleSummaries: ListShape
     TelemetryRuleSummary: StructureShape
+    TelemetrySourceType: EnumShape
+    TelemetrySourceTypes: ListShape
     TelemetryState: EnumShape
     TelemetryType: EnumShape
+    TestTelemetryPipelineInput: StructureShape
+    TestTelemetryPipelineOutput: StructureShape
     TooManyRequestsException: StructureShape
     UntagResourceInput: StructureShape
     UpdateCentralizationRuleForOrganizationInput: StructureShape
     UpdateCentralizationRuleForOrganizationOutput: StructureShape
+    UpdateDatasetIntegrationInput: StructureShape
+    UpdateDatasetIntegrationOutput: StructureShape
+    UpdateTelemetryPipelineInput: StructureShape
+    UpdateTelemetryPipelineOutput: StructureShape
     UpdateTelemetryRuleForOrganizationInput: StructureShape
     UpdateTelemetryRuleForOrganizationOutput: StructureShape
     UpdateTelemetryRuleInput: StructureShape
     UpdateTelemetryRuleOutput: StructureShape
     VPCFlowLogParameters: StructureShape
+    ValidateTelemetryPipelineConfigurationInput: StructureShape
+    ValidateTelemetryPipelineConfigurationOutput: StructureShape
+    ValidationError: StructureShape
+    ValidationErrors: ListShape
     ValidationException: StructureShape
+    WAFLogType: EnumShape
+    WAFLoggingParameters: StructureShape
 
     ObservabilityAdmin: ServiceShape
   end

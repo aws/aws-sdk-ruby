@@ -60,6 +60,7 @@ module Aws::AppIntegrations
         ?created_time: Time,
         ?last_modified_time: Time,
         ?is_service: bool,
+        ?application_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -70,6 +71,45 @@ module Aws::AppIntegrations
       attr_accessor created_time: Time?
       attr_accessor last_modified_time: Time?
       attr_accessor is_service: bool?
+      attr_accessor application_type: String?
+    end
+
+    module ApplicationType
+      STANDARD: String
+      SERVICE: String
+      MCP_SERVER: String
+      A2A_SERVER: String
+    end
+
+    class AuthConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_type: String,
+        ?credential_provider_identifier: String,
+        ?audience_override: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_type: String?
+      attr_accessor credential_provider_identifier: String?
+      attr_accessor audience_override: String?
+    end
+
+    module AuthType
+      API_KEY: String
+      CONNECT_JWT: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class ContactHandling
@@ -105,6 +145,8 @@ module Aws::AppIntegrations
         ?initialization_timeout: Integer,
         ?application_config: Types::ApplicationConfig,
         ?iframe_config: Types::IframeConfig,
+        ?application_type: String,
+        ?auth_config: Types::AuthConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -121,6 +163,8 @@ module Aws::AppIntegrations
       attr_accessor initialization_timeout: Integer?
       attr_accessor application_config: Types::ApplicationConfig?
       attr_accessor iframe_config: Types::IframeConfig?
+      attr_accessor application_type: String?
+      attr_accessor auth_config: Types::AuthConfig?
     end
 
     class CreateApplicationResponse
@@ -303,10 +347,12 @@ module Aws::AppIntegrations
 
       def initialize: (
         ?arn: String,
+        ?force: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
+      attr_accessor force: bool?
     end
 
     class DeleteApplicationResponse
@@ -505,6 +551,8 @@ module Aws::AppIntegrations
         ?initialization_timeout: Integer,
         ?application_config: Types::ApplicationConfig,
         ?iframe_config: Types::IframeConfig,
+        ?application_type: String,
+        ?auth_config: Types::AuthConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -524,6 +572,8 @@ module Aws::AppIntegrations
       attr_accessor initialization_timeout: Integer?
       attr_accessor application_config: Types::ApplicationConfig?
       attr_accessor iframe_config: Types::IframeConfig?
+      attr_accessor application_type: String?
+      attr_accessor auth_config: Types::AuthConfig?
     end
 
     class GetDataIntegrationRequest
@@ -680,11 +730,13 @@ module Aws::AppIntegrations
       def initialize: (
         ?next_token: String,
         ?max_results: Integer,
+        ?application_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor application_type: String?
     end
 
     class ListApplicationsResponse
@@ -989,6 +1041,8 @@ module Aws::AppIntegrations
         ?initialization_timeout: Integer,
         ?application_config: Types::ApplicationConfig,
         ?iframe_config: Types::IframeConfig,
+        ?application_type: String,
+        ?auth_config: Types::AuthConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1003,6 +1057,8 @@ module Aws::AppIntegrations
       attr_accessor initialization_timeout: Integer?
       attr_accessor application_config: Types::ApplicationConfig?
       attr_accessor iframe_config: Types::IframeConfig?
+      attr_accessor application_type: String?
+      attr_accessor auth_config: Types::AuthConfig?
     end
 
     class UpdateApplicationResponse

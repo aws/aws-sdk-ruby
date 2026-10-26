@@ -1,0 +1,5 @@
+  module Aws
+    module ElementalInference
+      VERSION: String
+    end
+  end

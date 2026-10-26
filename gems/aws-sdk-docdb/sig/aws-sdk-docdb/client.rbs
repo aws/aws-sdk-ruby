@@ -148,6 +148,8 @@ module Aws::DocDB
       },
       ?manage_master_user_password: bool,
       ?master_user_secret_kms_key_id: String,
+      ?network_type: String,
+      ?copy_tags_to_snapshot: bool,
       ?source_region: String
     ) -> _CreateDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterResponse
 
@@ -653,7 +655,9 @@ module Aws::DocDB
       },
       ?manage_master_user_password: bool,
       ?master_user_secret_kms_key_id: String,
-      ?rotate_master_user_password: bool
+      ?rotate_master_user_password: bool,
+      ?network_type: String,
+      ?copy_tags_to_snapshot: bool
     ) -> _ModifyDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBClusterResponse
 
     interface _ModifyDBClusterParameterGroupResponse
@@ -825,7 +829,9 @@ module Aws::DocDB
         min_capacity: Float,
         max_capacity: untyped
       },
-      ?storage_type: String
+      ?storage_type: String,
+      ?network_type: String,
+      ?copy_tags_to_snapshot: bool
     ) -> _RestoreDBClusterFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBClusterFromSnapshotResponse
 
     interface _RestoreDBClusterToPointInTimeResponse
@@ -854,7 +860,9 @@ module Aws::DocDB
         min_capacity: Float,
         max_capacity: untyped
       },
-      ?storage_type: String
+      ?storage_type: String,
+      ?network_type: String,
+      ?copy_tags_to_snapshot: bool
     ) -> _RestoreDBClusterToPointInTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBClusterToPointInTimeResponse
 
     interface _StartDBClusterResponse

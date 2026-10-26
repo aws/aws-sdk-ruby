@@ -49,10 +49,11 @@ module Aws::Deadline
     end
     def associate_member_to_farm: (
       ?farm_id: String,
-      ?principal_id: String,
       ?principal_type: String,
       ?identity_store_id: String,
-      ?membership_level: String
+      ?membership_level: String,
+      ?principal_id: String,
+      ?identity_center_region: String
     ) -> _AssociateMemberToFarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberToFarmResponse
 
     interface _AssociateMemberToFleetResponse
@@ -61,10 +62,11 @@ module Aws::Deadline
     def associate_member_to_fleet: (
       ?farm_id: String,
       ?fleet_id: String,
-      ?principal_id: String,
       ?principal_type: String,
       ?identity_store_id: String,
-      ?membership_level: String
+      ?membership_level: String,
+      ?principal_id: String,
+      ?identity_center_region: String
     ) -> _AssociateMemberToFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberToFleetResponse
 
     interface _AssociateMemberToJobResponse
@@ -74,10 +76,11 @@ module Aws::Deadline
       ?farm_id: String,
       ?queue_id: String,
       ?job_id: String,
-      ?principal_id: String,
       ?principal_type: String,
       ?identity_store_id: String,
-      ?membership_level: String
+      ?membership_level: String,
+      ?principal_id: String,
+      ?identity_center_region: String
     ) -> _AssociateMemberToJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberToJobResponse
 
     interface _AssociateMemberToQueueResponse
@@ -86,10 +89,11 @@ module Aws::Deadline
     def associate_member_to_queue: (
       ?farm_id: String,
       ?queue_id: String,
-      ?principal_id: String,
       ?principal_type: String,
       ?identity_store_id: String,
-      ?membership_level: String
+      ?membership_level: String,
+      ?principal_id: String,
+      ?identity_center_region: String
     ) -> _AssociateMemberToQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberToQueueResponse
 
     interface _AssumeFleetRoleForReadResponse
@@ -140,6 +144,21 @@ module Aws::Deadline
       ?queue_id: String
     ) -> _AssumeQueueRoleForWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeQueueRoleForWorkerResponse
 
+    interface _BatchGetJobResponse
+      include Smithy::Client::_Response[Types::BatchGetJobResponse]
+      def jobs: () -> Array[Types::BatchGetJobItem]?
+      def errors: () -> Array[Types::BatchGetJobError]?
+    end
+    def batch_get_job: (
+      ?identifiers: Array[
+        {
+          farm_id: String,
+          queue_id: String,
+          job_id: String
+        }
+      ]
+    ) -> _BatchGetJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetJobResponse
+
     interface _BatchGetJobEntityResponse
       include Smithy::Client::_Response[Types::BatchGetJobEntityResponse]
       def entities: () -> Array[Types::JobEntity]?
@@ -169,14 +188,135 @@ module Aws::Deadline
       ]
     ) -> _BatchGetJobEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetJobEntityResponse
 
+    interface _BatchGetSessionResponse
+      include Smithy::Client::_Response[Types::BatchGetSessionResponse]
+      def sessions: () -> Array[Types::BatchGetSessionItem]?
+      def errors: () -> Array[Types::BatchGetSessionError]?
+    end
+    def batch_get_session: (
+      ?identifiers: Array[
+        {
+          farm_id: String,
+          queue_id: String,
+          job_id: String,
+          session_id: String
+        }
+      ]
+    ) -> _BatchGetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetSessionResponse
+
+    interface _BatchGetSessionActionResponse
+      include Smithy::Client::_Response[Types::BatchGetSessionActionResponse]
+      def session_actions: () -> Array[Types::BatchGetSessionActionItem]?
+      def errors: () -> Array[Types::BatchGetSessionActionError]?
+    end
+    def batch_get_session_action: (
+      ?identifiers: Array[
+        {
+          farm_id: String,
+          queue_id: String,
+          job_id: String,
+          session_action_id: String
+        }
+      ]
+    ) -> _BatchGetSessionActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetSessionActionResponse
+
+    interface _BatchGetStepResponse
+      include Smithy::Client::_Response[Types::BatchGetStepResponse]
+      def steps: () -> Array[Types::BatchGetStepItem]?
+      def errors: () -> Array[Types::BatchGetStepError]?
+    end
+    def batch_get_step: (
+      ?identifiers: Array[
+        {
+          farm_id: String,
+          queue_id: String,
+          job_id: String,
+          step_id: String
+        }
+      ]
+    ) -> _BatchGetStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetStepResponse
+
+    interface _BatchGetTaskResponse
+      include Smithy::Client::_Response[Types::BatchGetTaskResponse]
+      def tasks: () -> Array[Types::BatchGetTaskItem]?
+      def errors: () -> Array[Types::BatchGetTaskError]?
+    end
+    def batch_get_task: (
+      ?identifiers: Array[
+        {
+          farm_id: String,
+          queue_id: String,
+          job_id: String,
+          step_id: String,
+          task_id: String
+        }
+      ]
+    ) -> _BatchGetTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetTaskResponse
+
+    interface _BatchGetWorkerResponse
+      include Smithy::Client::_Response[Types::BatchGetWorkerResponse]
+      def workers: () -> Array[Types::BatchGetWorkerItem]?
+      def errors: () -> Array[Types::BatchGetWorkerError]?
+    end
+    def batch_get_worker: (
+      ?identifiers: Array[
+        {
+          farm_id: String,
+          fleet_id: String,
+          worker_id: String
+        }
+      ]
+    ) -> _BatchGetWorkerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetWorkerResponse
+
+    interface _BatchUpdateJobResponse
+      include Smithy::Client::_Response[Types::BatchUpdateJobResponse]
+      def errors: () -> Array[Types::BatchUpdateJobError]?
+    end
+    def batch_update_job: (
+      ?client_token: String,
+      ?jobs: Array[
+        {
+          farm_id: String,
+          queue_id: String,
+          job_id: String,
+          target_task_run_status: String,
+          priority: Integer,
+          max_failed_tasks_count: Integer,
+          max_retries_per_task: Integer,
+          lifecycle_status: String,
+          max_worker_count: Integer,
+          name: String,
+          description: String
+        }
+      ]
+    ) -> _BatchUpdateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateJobResponse
+
+    interface _BatchUpdateTaskResponse
+      include Smithy::Client::_Response[Types::BatchUpdateTaskResponse]
+      def errors: () -> Array[Types::BatchUpdateTaskError]?
+    end
+    def batch_update_task: (
+      ?client_token: String,
+      ?tasks: Array[
+        {
+          farm_id: String,
+          queue_id: String,
+          job_id: String,
+          step_id: String,
+          task_id: String,
+          target_run_status: String
+        }
+      ]
+    ) -> _BatchUpdateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateTaskResponse
+
     interface _CopyJobTemplateResponse
       include Smithy::Client::_Response[Types::CopyJobTemplateResponse]
       def template_type: () -> String?
     end
     def copy_job_template: (
       ?farm_id: String,
-      ?job_id: String,
       ?queue_id: String,
+      ?job_id: String,
       ?target_s3_location: {
         bucket_name: String,
         key: String
@@ -188,13 +328,13 @@ module Aws::Deadline
       def budget_id: () -> String?
     end
     def create_budget: (
-      ?client_token: String,
       ?farm_id: String,
+      ?display_name: String,
+      ?description: String,
+      ?client_token: String,
       ?usage_tracking_resource: {
         queue_id: String
       },
-      ?display_name: String,
-      ?description: String,
       ?approximate_dollar_limit: Float,
       ?actions: Array[
         {
@@ -208,7 +348,8 @@ module Aws::Deadline
           start_time: Time,
           end_time: Time
         }
-      }
+      },
+      ?tags: Hash[String, String]
     ) -> _CreateBudgetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBudgetResponse
 
     interface _CreateFarmResponse
@@ -220,6 +361,7 @@ module Aws::Deadline
       ?display_name: String,
       ?description: String,
       ?kms_key_arn: String,
+      ?cost_scale_factor: Float,
       ?tags: Hash[String, String]
     ) -> _CreateFarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFarmResponse
 
@@ -228,8 +370,8 @@ module Aws::Deadline
       def fleet_id: () -> String?
     end
     def create_fleet: (
-      ?client_token: String,
       ?farm_id: String,
+      ?client_token: String,
       ?display_name: String,
       ?description: String,
       ?role_arn: String,
@@ -238,6 +380,11 @@ module Aws::Deadline
       ?configuration: {
         customer_managed: {
           mode: String,
+          auto_scaling_configuration: {
+            standby_worker_count: Integer,
+            worker_idle_duration_seconds: untyped,
+            scale_out_workers_per_minute: Integer
+          },
           worker_capabilities: {
             v_cpu_count: {
               min: Integer,
@@ -249,7 +396,7 @@ module Aws::Deadline
             },
             accelerator_types: Array[String],
             accelerator_count: {
-              min: Integer,
+              min: untyped,
               max: untyped
             },
             accelerator_total_memory_mi_b: {
@@ -298,7 +445,12 @@ module Aws::Deadline
             allowed_instance_types: Array[String],
             excluded_instance_types: untyped,
             custom_amounts: untyped,
-            custom_attributes: untyped
+            custom_attributes: untyped,
+            software_add_ons: Array[
+              {
+                name: String
+              }
+            ]
           },
           instance_market_options: {
             type: String
@@ -306,7 +458,19 @@ module Aws::Deadline
           vpc_configuration: {
             resource_configuration_arns: Array[String]
           },
-          storage_profile_id: untyped
+          storage_profile_id: untyped,
+          persistent_volume_configuration: {
+            size_gi_b: Integer,
+            iops: Integer,
+            throughput_mi_b: Integer,
+            mount_path: String,
+            last_used_ttl_hours: Integer
+          },
+          auto_scaling_configuration: {
+            standby_worker_count: untyped,
+            worker_idle_duration_seconds: Integer,
+            scale_out_workers_per_minute: untyped
+          }
         }
       },
       ?tags: Hash[String, String],
@@ -332,7 +496,17 @@ module Aws::Deadline
           int: String,
           float: String,
           string: String,
-          path: String
+          path: String,
+          bool: String,
+          range_expr: String,
+          string_list: Array[String],
+          path_list: Array[String],
+          int_list: Array[String],
+          float_list: Array[String],
+          bool_list: Array[String],
+          int_list_list: Array[
+            Array[String]
+          ]
         }
       ],
       ?attachments: {
@@ -353,7 +527,10 @@ module Aws::Deadline
       ?max_failed_tasks_count: Integer,
       ?max_retries_per_task: Integer,
       ?max_worker_count: Integer,
-      ?source_job_id: String
+      ?source_job_id: String,
+      ?name_override: String,
+      ?description_override: String,
+      ?tags: Hash[String, String]
     ) -> _CreateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateJobResponse
 
     interface _CreateLicenseEndpointResponse
@@ -373,11 +550,11 @@ module Aws::Deadline
       def limit_id: () -> String?
     end
     def create_limit: (
+      ?farm_id: String,
       ?client_token: String,
       ?display_name: String,
       ?amount_requirement_name: String,
       ?max_count: Integer,
-      ?farm_id: String,
       ?description: String
     ) -> _CreateLimitResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLimitResponse
 
@@ -390,6 +567,7 @@ module Aws::Deadline
       ?client_token: String,
       ?display_name: String,
       ?identity_center_instance_arn: String,
+      ?identity_center_region: String,
       ?subdomain: String,
       ?role_arn: String,
       ?tags: Hash[String, String]
@@ -400,8 +578,8 @@ module Aws::Deadline
       def queue_id: () -> String?
     end
     def create_queue: (
-      ?client_token: String,
       ?farm_id: String,
+      ?client_token: String,
       ?display_name: String,
       ?description: String,
       ?default_budget_action: String,
@@ -423,7 +601,29 @@ module Aws::Deadline
       },
       ?required_file_system_location_names: Array[String],
       ?allowed_storage_profile_ids: Array[String],
-      ?tags: Hash[String, String]
+      ?tags: Hash[String, String],
+      ?scheduling_configuration: {
+        priority_fifo: {
+        },
+        priority_balanced: {
+          rendering_task_buffer: Integer
+        },
+        weighted_balanced: {
+          priority_weight: Float,
+          error_weight: Float,
+          submission_time_weight: Float,
+          rendering_task_weight: Float,
+          rendering_task_buffer: untyped,
+          max_priority_override: {
+            always_schedule_first: {
+            }
+          },
+          min_priority_override: {
+            always_schedule_last: {
+            }
+          }
+        }
+      }
     ) -> _CreateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueResponse
 
     interface _CreateQueueEnvironmentResponse
@@ -431,9 +631,9 @@ module Aws::Deadline
       def queue_environment_id: () -> String?
     end
     def create_queue_environment: (
-      ?client_token: String,
       ?farm_id: String,
       ?queue_id: String,
+      ?client_token: String,
       ?priority: Integer,
       ?template_type: String,
       ?template: String
@@ -462,8 +662,8 @@ module Aws::Deadline
       def storage_profile_id: () -> String?
     end
     def create_storage_profile: (
-      ?client_token: String,
       ?farm_id: String,
+      ?client_token: String,
       ?display_name: String,
       ?os_family: String,
       ?file_system_locations: Array[
@@ -512,9 +712,9 @@ module Aws::Deadline
       include Smithy::Client::_Response[Types::DeleteFleetResponse]
     end
     def delete_fleet: (
-      ?client_token: String,
       ?farm_id: String,
-      ?fleet_id: String
+      ?fleet_id: String,
+      ?client_token: String
     ) -> _DeleteFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetResponse
 
     interface _DeleteLicenseEndpointResponse
@@ -590,6 +790,15 @@ module Aws::Deadline
       ?storage_profile_id: String
     ) -> _DeleteStorageProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStorageProfileResponse
 
+    interface _DeleteVolumeResponse
+      include Smithy::Client::_Response[Types::DeleteVolumeResponse]
+    end
+    def delete_volume: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?volume_id: String
+    ) -> _DeleteVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVolumeResponse
+
     interface _DeleteWorkerResponse
       include Smithy::Client::_Response[Types::DeleteWorkerResponse]
     end
@@ -641,15 +850,15 @@ module Aws::Deadline
       def usage_tracking_resource: () -> Types::UsageTrackingResource?
       def status: () -> String?
       def display_name: () -> String?
-      def description: () -> String?
       def approximate_dollar_limit: () -> Float?
       def usages: () -> Types::ConsumedUsages?
-      def actions: () -> Array[Types::ResponseBudgetAction]?
-      def schedule: () -> Types::BudgetSchedule?
       def created_by: () -> String?
       def created_at: () -> Time?
       def updated_by: () -> String?
       def updated_at: () -> Time?
+      def description: () -> String?
+      def actions: () -> Array[Types::ResponseBudgetAction]?
+      def schedule: () -> Types::BudgetSchedule?
       def queue_stopped_at: () -> Time?
     end
     def get_budget: (
@@ -661,12 +870,13 @@ module Aws::Deadline
       include Smithy::Client::_Response[Types::GetFarmResponse]
       def farm_id: () -> String?
       def display_name: () -> String?
-      def description: () -> String?
       def kms_key_arn: () -> String?
       def created_at: () -> Time?
       def created_by: () -> String?
       def updated_at: () -> Time?
       def updated_by: () -> String?
+      def description: () -> String?
+      def cost_scale_factor: () -> Float?
     end
     def get_farm: (
       ?farm_id: String
@@ -677,7 +887,6 @@ module Aws::Deadline
       def fleet_id: () -> String?
       def farm_id: () -> String?
       def display_name: () -> String?
-      def description: () -> String?
       def status: () -> String?
       def status_message: () -> String?
       def auto_scaling_status: () -> String?
@@ -686,13 +895,14 @@ module Aws::Deadline
       def min_worker_count: () -> Integer?
       def max_worker_count: () -> Integer?
       def configuration: () -> Types::FleetConfiguration?
-      def host_configuration: () -> Types::HostConfiguration?
-      def capabilities: () -> Types::FleetCapabilities?
-      def role_arn: () -> String?
       def created_at: () -> Time?
       def created_by: () -> String?
       def updated_at: () -> Time?
       def updated_by: () -> String?
+      def description: () -> String?
+      def host_configuration: () -> Types::HostConfiguration?
+      def capabilities: () -> Types::FleetCapabilities?
+      def role_arn: () -> String?
     end
     def get_fleet: (
       ?farm_id: String,
@@ -747,16 +957,16 @@ module Aws::Deadline
 
     interface _GetLimitResponse
       include Smithy::Client::_Response[Types::GetLimitResponse]
-      def display_name: () -> String?
-      def amount_requirement_name: () -> String?
-      def max_count: () -> Integer?
+      def farm_id: () -> String?
+      def limit_id: () -> String?
+      def current_count: () -> Integer?
       def created_at: () -> Time?
       def created_by: () -> String?
       def updated_at: () -> Time?
       def updated_by: () -> String?
-      def farm_id: () -> String?
-      def limit_id: () -> String?
-      def current_count: () -> Integer?
+      def display_name: () -> String?
+      def amount_requirement_name: () -> String?
+      def max_count: () -> Integer?
       def description: () -> String?
     end
     def get_limit: (
@@ -772,6 +982,7 @@ module Aws::Deadline
       def url: () -> String?
       def role_arn: () -> String?
       def identity_center_instance_arn: () -> String?
+      def identity_center_region: () -> String?
       def identity_center_application_arn: () -> String?
       def created_at: () -> Time?
       def created_by: () -> String?
@@ -782,24 +993,33 @@ module Aws::Deadline
       ?monitor_id: String
     ) -> _GetMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMonitorResponse
 
+    interface _GetMonitorSettingsResponse
+      include Smithy::Client::_Response[Types::GetMonitorSettingsResponse]
+      def settings: () -> Hash[String, String]?
+    end
+    def get_monitor_settings: (
+      ?monitor_id: String
+    ) -> _GetMonitorSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMonitorSettingsResponse
+
     interface _GetQueueResponse
       include Smithy::Client::_Response[Types::GetQueueResponse]
+      def farm_id: () -> String?
       def queue_id: () -> String?
       def display_name: () -> String?
-      def description: () -> String?
-      def farm_id: () -> String?
       def status: () -> String?
       def default_budget_action: () -> String?
       def blocked_reason: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def description: () -> String?
       def job_attachment_settings: () -> Types::JobAttachmentSettings?
       def role_arn: () -> String?
       def required_file_system_location_names: () -> Array[String]?
       def allowed_storage_profile_ids: () -> Array[String]?
       def job_run_as_user: () -> Types::JobRunAsUser?
-      def created_at: () -> Time?
-      def created_by: () -> String?
-      def updated_at: () -> Time?
-      def updated_by: () -> String?
+      def scheduling_configuration: () -> Types::SchedulingConfiguration?
     end
     def get_queue: (
       ?farm_id: String,
@@ -842,13 +1062,13 @@ module Aws::Deadline
 
     interface _GetQueueLimitAssociationResponse
       include Smithy::Client::_Response[Types::GetQueueLimitAssociationResponse]
+      def queue_id: () -> String?
+      def limit_id: () -> String?
+      def status: () -> String?
       def created_at: () -> Time?
       def created_by: () -> String?
       def updated_at: () -> Time?
       def updated_by: () -> String?
-      def queue_id: () -> String?
-      def limit_id: () -> String?
-      def status: () -> String?
     end
     def get_queue_limit_association: (
       ?farm_id: String,
@@ -862,12 +1082,12 @@ module Aws::Deadline
       def fleet_id: () -> String?
       def worker_id: () -> String?
       def started_at: () -> Time?
-      def log: () -> Types::LogConfiguration?
       def lifecycle_status: () -> String?
       def ended_at: () -> Time?
+      def target_lifecycle_status: () -> String?
       def updated_at: () -> Time?
       def updated_by: () -> String?
-      def target_lifecycle_status: () -> String?
+      def log: () -> Types::LogConfiguration?
       def host_properties: () -> Types::HostPropertiesResponse?
       def worker_log: () -> Types::LogConfiguration?
     end
@@ -886,12 +1106,12 @@ module Aws::Deadline
       def ended_at: () -> Time?
       def worker_updated_at: () -> Time?
       def progress_percent: () -> Float?
+      def manifests: () -> Array[Types::TaskRunManifestPropertiesResponse]?
       def session_id: () -> String?
       def process_exit_code: () -> Integer?
       def progress_message: () -> String?
-      def definition: () -> Types::SessionActionDefinition?
       def acquired_limits: () -> Array[Types::AcquiredLimit]?
-      def manifests: () -> Array[Types::TaskRunManifestPropertiesResponse]?
+      def definition: () -> Types::SessionActionDefinition?
     end
     def get_session_action: (
       ?farm_id: String,
@@ -903,15 +1123,15 @@ module Aws::Deadline
     interface _GetSessionsStatisticsAggregationResponse
       include Smithy::Client::_Response[Types::GetSessionsStatisticsAggregationResponse]
       def statistics: () -> Array[Types::Statistics]?
-      def next_token: () -> String?
       def status: () -> String?
       def status_message: () -> String?
+      def next_token: () -> String?
     end
     def get_sessions_statistics_aggregation: (
       ?farm_id: String,
-      ?aggregation_id: String,
+      ?next_token: String,
       ?max_results: Integer,
-      ?next_token: String
+      ?aggregation_id: String
     ) -> _GetSessionsStatisticsAggregationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionsStatisticsAggregationResponse
 
     interface _GetStepResponse
@@ -979,12 +1199,12 @@ module Aws::Deadline
       def run_status: () -> String?
       def target_run_status: () -> String?
       def failure_retry_count: () -> Integer?
-      def parameters: () -> Hash[String, Types::TaskParameterValue]?
       def started_at: () -> Time?
       def ended_at: () -> Time?
       def updated_at: () -> Time?
       def updated_by: () -> String?
       def latest_session_action_id: () -> String?
+      def parameters: () -> Hash[String, Types::TaskParameterValue]?
     end
     def get_task: (
       ?farm_id: String,
@@ -993,6 +1213,29 @@ module Aws::Deadline
       ?step_id: String,
       ?task_id: String
     ) -> _GetTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTaskResponse
+
+    interface _GetVolumeResponse
+      include Smithy::Client::_Response[Types::GetVolumeResponse]
+      def volume_id: () -> String?
+      def farm_id: () -> String?
+      def fleet_id: () -> String?
+      def state: () -> String?
+      def size_gi_b: () -> Integer?
+      def availability_zone_id: () -> String?
+      def attached_worker_id: () -> String?
+      def volume_type: () -> String?
+      def iops: () -> Integer?
+      def throughput_mi_b: () -> Integer?
+      def created_at: () -> Time?
+      def last_assigned_at: () -> Time?
+      def last_released_at: () -> Time?
+      def expires_at: () -> Time?
+    end
+    def get_volume: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?volume_id: String
+    ) -> _GetVolumeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVolumeResponse
 
     interface _GetWorkerResponse
       include Smithy::Client::_Response[Types::GetWorkerResponse]
@@ -1025,12 +1268,12 @@ module Aws::Deadline
 
     interface _ListBudgetsResponse
       include Smithy::Client::_Response[Types::ListBudgetsResponse]
-      def next_token: () -> String?
       def budgets: () -> Array[Types::BudgetSummary]?
+      def next_token: () -> String?
     end
     def list_budgets: (
-      ?next_token: String,
       ?farm_id: String,
+      ?next_token: String,
       ?max_results: Integer,
       ?status: String
     ) -> _ListBudgetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBudgetsResponse
@@ -1048,13 +1291,13 @@ module Aws::Deadline
 
     interface _ListFarmsResponse
       include Smithy::Client::_Response[Types::ListFarmsResponse]
-      def next_token: () -> String?
       def farms: () -> Array[Types::FarmSummary]?
+      def next_token: () -> String?
     end
     def list_farms: (
       ?next_token: String,
-      ?principal_id: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?principal_id: String
     ) -> _ListFarmsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFarmsResponse
 
     interface _ListFleetMembersResponse
@@ -1076,11 +1319,11 @@ module Aws::Deadline
     end
     def list_fleets: (
       ?farm_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
       ?principal_id: String,
       ?display_name: String,
-      ?status: String,
-      ?next_token: String,
-      ?max_results: Integer
+      ?status: String
     ) -> _ListFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFleetsResponse
 
     interface _ListJobMembersResponse
@@ -1103,8 +1346,8 @@ module Aws::Deadline
     end
     def list_job_parameter_definitions: (
       ?farm_id: String,
-      ?job_id: String,
       ?queue_id: String,
+      ?job_id: String,
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListJobParameterDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobParameterDefinitionsResponse
@@ -1116,10 +1359,10 @@ module Aws::Deadline
     end
     def list_jobs: (
       ?farm_id: String,
-      ?principal_id: String,
       ?queue_id: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?principal_id: String
     ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
 
     interface _ListLicenseEndpointsResponse
@@ -1143,6 +1386,20 @@ module Aws::Deadline
       ?max_results: Integer
     ) -> _ListLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLimitsResponse
 
+    interface _ListMembershipsResponse
+      include Smithy::Client::_Response[Types::ListMembershipsResponse]
+      def memberships: () -> Array[Types::MembershipSummary]?
+      def next_token: () -> String?
+    end
+    def list_memberships: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?principal_id: String,
+      ?identity_store_id: String,
+      ?identity_center_region: String,
+      ?resource_types: Array[String]
+    ) -> _ListMembershipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMembershipsResponse
+
     interface _ListMeteredProductsResponse
       include Smithy::Client::_Response[Types::ListMeteredProductsResponse]
       def metered_products: () -> Array[Types::MeteredProductSummary]?
@@ -1156,8 +1413,8 @@ module Aws::Deadline
 
     interface _ListMonitorsResponse
       include Smithy::Client::_Response[Types::ListMonitorsResponse]
-      def next_token: () -> String?
       def monitors: () -> Array[Types::MonitorSummary]?
+      def next_token: () -> String?
     end
     def list_monitors: (
       ?next_token: String,
@@ -1183,10 +1440,10 @@ module Aws::Deadline
     end
     def list_queue_fleet_associations: (
       ?farm_id: String,
-      ?queue_id: String,
-      ?fleet_id: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?queue_id: String,
+      ?fleet_id: String
     ) -> _ListQueueFleetAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueueFleetAssociationsResponse
 
     interface _ListQueueLimitAssociationsResponse
@@ -1196,10 +1453,10 @@ module Aws::Deadline
     end
     def list_queue_limit_associations: (
       ?farm_id: String,
-      ?queue_id: String,
-      ?limit_id: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?queue_id: String,
+      ?limit_id: String
     ) -> _ListQueueLimitAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueueLimitAssociationsResponse
 
     interface _ListQueueMembersResponse
@@ -1221,10 +1478,10 @@ module Aws::Deadline
     end
     def list_queues: (
       ?farm_id: String,
-      ?principal_id: String,
-      ?status: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?principal_id: String,
+      ?status: String
     ) -> _ListQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueuesResponse
 
     interface _ListSessionActionsResponse
@@ -1236,10 +1493,10 @@ module Aws::Deadline
       ?farm_id: String,
       ?queue_id: String,
       ?job_id: String,
-      ?session_id: String,
-      ?task_id: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?session_id: String,
+      ?task_id: String
     ) -> _ListSessionActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionActionsResponse
 
     interface _ListSessionsResponse
@@ -1354,10 +1611,22 @@ module Aws::Deadline
       ?max_results: Integer
     ) -> _ListTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTasksResponse
 
+    interface _ListVolumesResponse
+      include Smithy::Client::_Response[Types::ListVolumesResponse]
+      def volumes: () -> Array[Types::VolumeSummary]?
+      def next_token: () -> String?
+    end
+    def list_volumes: (
+      ?farm_id: String,
+      ?fleet_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListVolumesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVolumesResponse
+
     interface _ListWorkersResponse
       include Smithy::Client::_Response[Types::ListWorkersResponse]
-      def next_token: () -> String?
       def workers: () -> Array[Types::WorkerSummary]?
+      def next_token: () -> String?
     end
     def list_workers: (
       ?farm_id: String,
@@ -1382,7 +1651,6 @@ module Aws::Deadline
     end
     def search_jobs: (
       ?farm_id: String,
-      ?queue_ids: Array[String],
       ?filter_expressions: {
         filters: Array[
           {
@@ -1405,6 +1673,11 @@ module Aws::Deadline
               operator: untyped,
               value: String
             },
+            string_list_filter: {
+              name: untyped,
+              operator: untyped,
+              values: Array[String]
+            },
             group_filter: untyped
           }
         ],
@@ -1426,7 +1699,8 @@ module Aws::Deadline
         }
       ],
       ?item_offset: Integer,
-      ?page_size: Integer
+      ?page_size: Integer,
+      ?queue_ids: Array[String]
     ) -> _SearchJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchJobsResponse
 
     interface _SearchStepsResponse
@@ -1437,8 +1711,6 @@ module Aws::Deadline
     end
     def search_steps: (
       ?farm_id: String,
-      ?queue_ids: Array[String],
-      ?job_id: String,
       ?filter_expressions: {
         filters: Array[
           {
@@ -1461,6 +1733,11 @@ module Aws::Deadline
               operator: untyped,
               value: String
             },
+            string_list_filter: {
+              name: untyped,
+              operator: untyped,
+              values: Array[String]
+            },
             group_filter: untyped
           }
         ],
@@ -1482,7 +1759,9 @@ module Aws::Deadline
         }
       ],
       ?item_offset: Integer,
-      ?page_size: Integer
+      ?page_size: Integer,
+      ?queue_ids: Array[String],
+      ?job_id: String
     ) -> _SearchStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchStepsResponse
 
     interface _SearchTasksResponse
@@ -1493,8 +1772,6 @@ module Aws::Deadline
     end
     def search_tasks: (
       ?farm_id: String,
-      ?queue_ids: Array[String],
-      ?job_id: String,
       ?filter_expressions: {
         filters: Array[
           {
@@ -1517,6 +1794,11 @@ module Aws::Deadline
               operator: untyped,
               value: String
             },
+            string_list_filter: {
+              name: untyped,
+              operator: untyped,
+              values: Array[String]
+            },
             group_filter: untyped
           }
         ],
@@ -1538,7 +1820,9 @@ module Aws::Deadline
         }
       ],
       ?item_offset: Integer,
-      ?page_size: Integer
+      ?page_size: Integer,
+      ?queue_ids: Array[String],
+      ?job_id: String
     ) -> _SearchTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchTasksResponse
 
     interface _SearchWorkersResponse
@@ -1549,7 +1833,6 @@ module Aws::Deadline
     end
     def search_workers: (
       ?farm_id: String,
-      ?fleet_ids: Array[String],
       ?filter_expressions: {
         filters: Array[
           {
@@ -1572,6 +1855,11 @@ module Aws::Deadline
               operator: untyped,
               value: String
             },
+            string_list_filter: {
+              name: untyped,
+              operator: untyped,
+              values: Array[String]
+            },
             group_filter: untyped
           }
         ],
@@ -1593,7 +1881,8 @@ module Aws::Deadline
         }
       ],
       ?item_offset: Integer,
-      ?page_size: Integer
+      ?page_size: Integer,
+      ?fleet_ids: Array[String]
     ) -> _SearchWorkersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchWorkersResponse
 
     interface _StartSessionsStatisticsAggregationResponse
@@ -1634,9 +1923,9 @@ module Aws::Deadline
       include Smithy::Client::_Response[Types::UpdateBudgetResponse]
     end
     def update_budget: (
-      ?client_token: String,
       ?farm_id: String,
       ?budget_id: String,
+      ?client_token: String,
       ?display_name: String,
       ?description: String,
       ?status: String,
@@ -1668,16 +1957,17 @@ module Aws::Deadline
     def update_farm: (
       ?farm_id: String,
       ?display_name: String,
-      ?description: String
+      ?description: String,
+      ?cost_scale_factor: Float
     ) -> _UpdateFarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFarmResponse
 
     interface _UpdateFleetResponse
       include Smithy::Client::_Response[Types::UpdateFleetResponse]
     end
     def update_fleet: (
-      ?client_token: String,
       ?farm_id: String,
       ?fleet_id: String,
+      ?client_token: String,
       ?display_name: String,
       ?description: String,
       ?role_arn: String,
@@ -1686,6 +1976,11 @@ module Aws::Deadline
       ?configuration: {
         customer_managed: {
           mode: String,
+          auto_scaling_configuration: {
+            standby_worker_count: Integer,
+            worker_idle_duration_seconds: untyped,
+            scale_out_workers_per_minute: Integer
+          },
           worker_capabilities: {
             v_cpu_count: {
               min: Integer,
@@ -1697,7 +1992,7 @@ module Aws::Deadline
             },
             accelerator_types: Array[String],
             accelerator_count: {
-              min: Integer,
+              min: untyped,
               max: untyped
             },
             accelerator_total_memory_mi_b: {
@@ -1746,7 +2041,12 @@ module Aws::Deadline
             allowed_instance_types: Array[String],
             excluded_instance_types: untyped,
             custom_amounts: untyped,
-            custom_attributes: untyped
+            custom_attributes: untyped,
+            software_add_ons: Array[
+              {
+                name: String
+              }
+            ]
           },
           instance_market_options: {
             type: String
@@ -1754,7 +2054,19 @@ module Aws::Deadline
           vpc_configuration: {
             resource_configuration_arns: Array[String]
           },
-          storage_profile_id: untyped
+          storage_profile_id: untyped,
+          persistent_volume_configuration: {
+            size_gi_b: Integer,
+            iops: Integer,
+            throughput_mi_b: Integer,
+            mount_path: String,
+            last_used_ttl_hours: Integer
+          },
+          auto_scaling_configuration: {
+            standby_worker_count: untyped,
+            worker_idle_duration_seconds: Integer,
+            scale_out_workers_per_minute: untyped
+          }
         }
       },
       ?host_configuration: {
@@ -1767,6 +2079,9 @@ module Aws::Deadline
       include Smithy::Client::_Response[Types::UpdateJobResponse]
     end
     def update_job: (
+      ?farm_id: String,
+      ?queue_id: String,
+      ?job_id: String,
       ?client_token: String,
       ?target_task_run_status: String,
       ?priority: Integer,
@@ -1774,9 +2089,8 @@ module Aws::Deadline
       ?max_retries_per_task: Integer,
       ?lifecycle_status: String,
       ?max_worker_count: Integer,
-      ?farm_id: String,
-      ?queue_id: String,
-      ?job_id: String
+      ?name: String,
+      ?description: String
     ) -> _UpdateJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateJobResponse
 
     interface _UpdateLimitResponse
@@ -1800,13 +2114,21 @@ module Aws::Deadline
       ?role_arn: String
     ) -> _UpdateMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMonitorResponse
 
+    interface _UpdateMonitorSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateMonitorSettingsResponse]
+    end
+    def update_monitor_settings: (
+      ?monitor_id: String,
+      ?settings: Hash[String, String]
+    ) -> _UpdateMonitorSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMonitorSettingsResponse
+
     interface _UpdateQueueResponse
       include Smithy::Client::_Response[Types::UpdateQueueResponse]
     end
     def update_queue: (
-      ?client_token: String,
       ?farm_id: String,
       ?queue_id: String,
+      ?client_token: String,
       ?display_name: String,
       ?description: String,
       ?default_budget_action: String,
@@ -1829,17 +2151,39 @@ module Aws::Deadline
       ?required_file_system_location_names_to_add: Array[String],
       ?required_file_system_location_names_to_remove: Array[String],
       ?allowed_storage_profile_ids_to_add: Array[String],
-      ?allowed_storage_profile_ids_to_remove: Array[String]
+      ?allowed_storage_profile_ids_to_remove: Array[String],
+      ?scheduling_configuration: {
+        priority_fifo: {
+        },
+        priority_balanced: {
+          rendering_task_buffer: Integer
+        },
+        weighted_balanced: {
+          priority_weight: Float,
+          error_weight: Float,
+          submission_time_weight: Float,
+          rendering_task_weight: Float,
+          rendering_task_buffer: untyped,
+          max_priority_override: {
+            always_schedule_first: {
+            }
+          },
+          min_priority_override: {
+            always_schedule_last: {
+            }
+          }
+        }
+      }
     ) -> _UpdateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueResponse
 
     interface _UpdateQueueEnvironmentResponse
       include Smithy::Client::_Response[Types::UpdateQueueEnvironmentResponse]
     end
     def update_queue_environment: (
-      ?client_token: String,
       ?farm_id: String,
       ?queue_id: String,
       ?queue_environment_id: String,
+      ?client_token: String,
       ?priority: Integer,
       ?template_type: String,
       ?template: String
@@ -1869,33 +2213,33 @@ module Aws::Deadline
       include Smithy::Client::_Response[Types::UpdateSessionResponse]
     end
     def update_session: (
-      ?client_token: String,
-      ?target_lifecycle_status: String,
       ?farm_id: String,
       ?queue_id: String,
       ?job_id: String,
-      ?session_id: String
+      ?session_id: String,
+      ?client_token: String,
+      ?target_lifecycle_status: String
     ) -> _UpdateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSessionResponse
 
     interface _UpdateStepResponse
       include Smithy::Client::_Response[Types::UpdateStepResponse]
     end
     def update_step: (
-      ?target_task_run_status: String,
-      ?client_token: String,
       ?farm_id: String,
       ?queue_id: String,
       ?job_id: String,
-      ?step_id: String
+      ?step_id: String,
+      ?client_token: String,
+      ?target_task_run_status: String
     ) -> _UpdateStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStepResponse
 
     interface _UpdateStorageProfileResponse
       include Smithy::Client::_Response[Types::UpdateStorageProfileResponse]
     end
     def update_storage_profile: (
-      ?client_token: String,
       ?farm_id: String,
       ?storage_profile_id: String,
+      ?client_token: String,
       ?display_name: String,
       ?os_family: String,
       ?file_system_locations_to_add: Array[
@@ -1918,13 +2262,13 @@ module Aws::Deadline
       include Smithy::Client::_Response[Types::UpdateTaskResponse]
     end
     def update_task: (
-      ?client_token: String,
-      ?target_run_status: String,
       ?farm_id: String,
       ?queue_id: String,
       ?job_id: String,
       ?step_id: String,
-      ?task_id: String
+      ?task_id: String,
+      ?client_token: String,
+      ?target_run_status: String
     ) -> _UpdateTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTaskResponse
 
     interface _UpdateWorkerResponse

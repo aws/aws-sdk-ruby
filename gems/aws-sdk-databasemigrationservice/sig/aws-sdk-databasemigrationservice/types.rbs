@@ -139,6 +139,54 @@ module Aws::DatabaseMigrationService
       attr_accessor error_entries: Array[Types::BatchStartRecommendationsErrorEntry]?
     end
 
+    class CancelMetadataModelConversionMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_project_identifier: String,
+        ?request_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_project_identifier: String?
+      attr_accessor request_identifier: String?
+    end
+
+    class CancelMetadataModelConversionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request: Types::SchemaConversionRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request: Types::SchemaConversionRequest?
+    end
+
+    class CancelMetadataModelCreationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_project_identifier: String,
+        ?request_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_project_identifier: String?
+      attr_accessor request_identifier: String?
+    end
+
+    class CancelMetadataModelCreationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request: Types::SchemaConversionRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request: Types::SchemaConversionRequest?
+    end
+
     class CancelReplicationTaskAssessmentRunMessage
       include Smithy::Schema::Structure
 
@@ -186,6 +234,7 @@ module Aws::DatabaseMigrationService
         ?valid_to_date: Time,
         ?signing_algorithm: String,
         ?key_length: Integer,
+        ?kms_key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -199,6 +248,7 @@ module Aws::DatabaseMigrationService
       attr_accessor valid_to_date: Time?
       attr_accessor signing_algorithm: String?
       attr_accessor key_length: Integer?
+      attr_accessor kms_key_id: String?
     end
 
     module CharLengthSemantics
@@ -968,6 +1018,7 @@ module Aws::DatabaseMigrationService
         ?postgre_sql_settings: Types::PostgreSqlDataProviderSettings,
         ?my_sql_settings: Types::MySqlDataProviderSettings,
         ?oracle_settings: Types::OracleDataProviderSettings,
+        ?sybase_ase_settings: Types::SybaseAseDataProviderSettings,
         ?microsoft_sql_server_settings: Types::MicrosoftSqlServerDataProviderSettings,
         ?doc_db_settings: Types::DocDbDataProviderSettings,
         ?maria_db_settings: Types::MariaDbDataProviderSettings,
@@ -981,6 +1032,7 @@ module Aws::DatabaseMigrationService
       attr_accessor postgre_sql_settings: Types::PostgreSqlDataProviderSettings?
       attr_accessor my_sql_settings: Types::MySqlDataProviderSettings?
       attr_accessor oracle_settings: Types::OracleDataProviderSettings?
+      attr_accessor sybase_ase_settings: Types::SybaseAseDataProviderSettings?
       attr_accessor microsoft_sql_server_settings: Types::MicrosoftSqlServerDataProviderSettings?
       attr_accessor doc_db_settings: Types::DocDbDataProviderSettings?
       attr_accessor maria_db_settings: Types::MariaDbDataProviderSettings?
@@ -995,6 +1047,8 @@ module Aws::DatabaseMigrationService
       class MySqlSettings < DataProviderSettings
       end
       class OracleSettings < DataProviderSettings
+      end
+      class SybaseAseSettings < DataProviderSettings
       end
       class MicrosoftSqlServerSettings < DataProviderSettings
       end
@@ -2055,6 +2109,38 @@ module Aws::DatabaseMigrationService
       attr_accessor requests: Array[Types::SchemaConversionRequest]?
     end
 
+    class DescribeMetadataModelChildrenMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selection_rules: String,
+        ?migration_project_identifier: String,
+        ?origin: String,
+        ?marker: String,
+        ?max_records: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selection_rules: String?
+      attr_accessor migration_project_identifier: String?
+      attr_accessor origin: String?
+      attr_accessor marker: String?
+      attr_accessor max_records: Integer?
+    end
+
+    class DescribeMetadataModelChildrenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?metadata_model_children: Array[Types::MetadataModelReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor metadata_model_children: Array[Types::MetadataModelReference]?
+    end
+
     class DescribeMetadataModelConversionsMessage
       include Smithy::Schema::Structure
 
@@ -2073,6 +2159,36 @@ module Aws::DatabaseMigrationService
     end
 
     class DescribeMetadataModelConversionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+        ?requests: Array[Types::SchemaConversionRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+      attr_accessor requests: Array[Types::SchemaConversionRequest]?
+    end
+
+    class DescribeMetadataModelCreationsMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::Filter],
+        ?marker: String,
+        ?max_records: Integer,
+        ?migration_project_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor marker: String?
+      attr_accessor max_records: Integer?
+      attr_accessor migration_project_identifier: String?
+    end
+
+    class DescribeMetadataModelCreationsResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2173,6 +2289,38 @@ module Aws::DatabaseMigrationService
 
       attr_accessor marker: String?
       attr_accessor requests: Array[Types::SchemaConversionRequest]?
+    end
+
+    class DescribeMetadataModelMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selection_rules: String,
+        ?migration_project_identifier: String,
+        ?origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selection_rules: String?
+      attr_accessor migration_project_identifier: String?
+      attr_accessor origin: String?
+    end
+
+    class DescribeMetadataModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_model_name: String,
+        ?metadata_model_type: String,
+        ?target_metadata_models: Array[Types::MetadataModelReference],
+        ?definition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_model_name: String?
+      attr_accessor metadata_model_type: String?
+      attr_accessor target_metadata_models: Array[Types::MetadataModelReference]?
+      attr_accessor definition: String?
     end
 
     class DescribeMigrationProjectsMessage
@@ -2823,6 +2971,7 @@ module Aws::DatabaseMigrationService
         ?service_access_role_arn: String,
         ?external_table_definition: String,
         ?external_id: String,
+        ?is_read_only: bool,
         ?dynamo_db_settings: Types::DynamoDbSettings,
         ?s3_settings: Types::S3Settings,
         ?dms_transfer_settings: Types::DmsTransferSettings,
@@ -2842,6 +2991,7 @@ module Aws::DatabaseMigrationService
         ?redis_settings: Types::RedisSettings,
         ?gcp_my_sql_settings: Types::GcpMySQLSettings,
         ?timestream_settings: Types::TimestreamSettings,
+        ?lakehouse_settings: Types::LakehouseSettings,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2862,6 +3012,7 @@ module Aws::DatabaseMigrationService
       attr_accessor service_access_role_arn: String?
       attr_accessor external_table_definition: String?
       attr_accessor external_id: String?
+      attr_accessor is_read_only: bool?
       attr_accessor dynamo_db_settings: Types::DynamoDbSettings?
       attr_accessor s3_settings: Types::S3Settings?
       attr_accessor dms_transfer_settings: Types::DmsTransferSettings?
@@ -2881,6 +3032,7 @@ module Aws::DatabaseMigrationService
       attr_accessor redis_settings: Types::RedisSettings?
       attr_accessor gcp_my_sql_settings: Types::GcpMySQLSettings?
       attr_accessor timestream_settings: Types::TimestreamSettings?
+      attr_accessor lakehouse_settings: Types::LakehouseSettings?
     end
 
     class EndpointSetting
@@ -3166,6 +3318,30 @@ module Aws::DatabaseMigrationService
       attr_accessor secrets_manager_secret_id: String?
     end
 
+    class GetTargetSelectionRulesMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_project_identifier: String,
+        ?selection_rules: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_project_identifier: String?
+      attr_accessor selection_rules: String?
+    end
+
+    class GetTargetSelectionRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_selection_rules: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_selection_rules: String?
+    end
+
     class IBMDb2Settings
       include Smithy::Schema::Structure
 
@@ -3212,6 +3388,8 @@ module Aws::DatabaseMigrationService
         ?database_name: String,
         ?ssl_mode: String,
         ?certificate_arn: String,
+        ?encryption_algorithm: Integer,
+        ?security_mechanism: Integer,
         ?s3_path: String,
         ?s3_access_role_arn: String,
       ) -> void
@@ -3222,6 +3400,8 @@ module Aws::DatabaseMigrationService
       attr_accessor database_name: String?
       attr_accessor ssl_mode: String?
       attr_accessor certificate_arn: String?
+      attr_accessor encryption_algorithm: Integer?
+      attr_accessor security_mechanism: Integer?
       attr_accessor s3_path: String?
       attr_accessor s3_access_role_arn: String?
     end
@@ -3257,6 +3437,7 @@ module Aws::DatabaseMigrationService
         ?certificate_pem: String,
         ?certificate_wallet: String,
         ?tags: Array[Types::Tag],
+        ?kms_key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3264,6 +3445,7 @@ module Aws::DatabaseMigrationService
       attr_accessor certificate_pem: String?
       attr_accessor certificate_wallet: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor kms_key_id: String?
     end
 
     class ImportCertificateResponse
@@ -3565,6 +3747,17 @@ module Aws::DatabaseMigrationService
       attr_accessor use_large_integer_value: bool?
     end
 
+    class LakehouseSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
     class Limitation
       include Smithy::Schema::Structure
 
@@ -3640,6 +3833,35 @@ module Aws::DatabaseMigrationService
     module MessageFormatValue
       JSON: String
       JSON_UNFORMATTED: String
+    end
+
+    class MetadataModelProperties
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?statement_properties: Types::StatementProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statement_properties: Types::StatementProperties?
+
+      class StatementProperties < MetadataModelProperties
+      end
+      class Unknown < MetadataModelProperties
+      end
+    end
+
+    class MetadataModelReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_model_name: String,
+        ?selection_rules: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_model_name: String?
+      attr_accessor selection_rules: String?
     end
 
     class MicrosoftSQLServerSettings
@@ -4689,6 +4911,38 @@ module Aws::DatabaseMigrationService
       attr_accessor result_statistic: Types::ReplicationTaskAssessmentRunResultStatistic?
     end
 
+    class ProcessedObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?endpoint_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor endpoint_type: String?
+    end
+
+    class Progress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?progress_percent: Float,
+        ?total_objects: Integer,
+        ?progress_step: String,
+        ?processed_object: Types::ProcessedObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progress_percent: Float?
+      attr_accessor total_objects: Integer?
+      attr_accessor progress_step: String?
+      attr_accessor processed_object: Types::ProcessedObject?
+    end
+
     class ProvisionData
       include Smithy::Schema::Structure
 
@@ -5122,6 +5376,7 @@ module Aws::DatabaseMigrationService
         ?replication_update_time: Time,
         ?replication_last_stop_time: Time,
         ?replication_deprovision_time: Time,
+        ?is_read_only: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5145,6 +5400,7 @@ module Aws::DatabaseMigrationService
       attr_accessor replication_update_time: Time?
       attr_accessor replication_last_stop_time: Time?
       attr_accessor replication_deprovision_time: Time?
+      attr_accessor is_read_only: bool?
     end
 
     class ReplicationConfig
@@ -5162,6 +5418,7 @@ module Aws::DatabaseMigrationService
         ?table_mappings: String,
         ?replication_config_create_time: Time,
         ?replication_config_update_time: Time,
+        ?is_read_only: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5176,6 +5433,7 @@ module Aws::DatabaseMigrationService
       attr_accessor table_mappings: String?
       attr_accessor replication_config_create_time: Time?
       attr_accessor replication_config_update_time: Time?
+      attr_accessor is_read_only: bool?
     end
 
     module ReplicationEndpointTypeValue
@@ -5319,6 +5577,7 @@ module Aws::DatabaseMigrationService
         ?subnet_group_status: String,
         ?subnets: Array[Types::Subnet],
         ?supported_network_types: Array[String],
+        ?is_read_only: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5328,6 +5587,7 @@ module Aws::DatabaseMigrationService
       attr_accessor subnet_group_status: String?
       attr_accessor subnets: Array[Types::Subnet]?
       attr_accessor supported_network_types: Array[String]?
+      attr_accessor is_read_only: bool?
     end
 
     class ReplicationSubnetGroupDoesNotCoverEnoughAZs
@@ -5756,6 +6016,7 @@ module Aws::DatabaseMigrationService
         ?migration_project_arn: String,
         ?error: Types::ErrorDetails,
         ?export_sql_details: Types::ExportSqlDetails,
+        ?progress: Types::Progress,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5764,6 +6025,7 @@ module Aws::DatabaseMigrationService
       attr_accessor migration_project_arn: String?
       attr_accessor error: Types::ErrorDetails?
       attr_accessor export_sql_details: Types::ExportSqlDetails?
+      attr_accessor progress: Types::Progress?
     end
 
     class SchemaResponse
@@ -5942,6 +6204,34 @@ module Aws::DatabaseMigrationService
     end
 
     class StartMetadataModelConversionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_identifier: String?
+    end
+
+    class StartMetadataModelCreationMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?migration_project_identifier: String,
+        ?selection_rules: String,
+        ?metadata_model_name: String,
+        ?properties: Types::MetadataModelProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor migration_project_identifier: String?
+      attr_accessor selection_rules: String?
+      attr_accessor metadata_model_name: String?
+      attr_accessor properties: Types::MetadataModelProperties?
+    end
+
+    class StartMetadataModelCreationResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -6196,6 +6486,17 @@ module Aws::DatabaseMigrationService
       RELOAD_TARGET: String
     end
 
+    class StatementProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definition: String?
+    end
+
     class StopDataMigrationMessage
       include Smithy::Schema::Structure
 
@@ -6316,6 +6617,27 @@ module Aws::DatabaseMigrationService
       attr_accessor endpoint_type: String?
       attr_accessor replication_instance_engine_minimum_version: String?
       attr_accessor engine_display_name: String?
+    end
+
+    class SybaseAseDataProviderSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_name: String,
+        ?port: Integer,
+        ?database_name: String,
+        ?ssl_mode: String,
+        ?encrypt_password: bool,
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_name: String?
+      attr_accessor port: Integer?
+      attr_accessor database_name: String?
+      attr_accessor ssl_mode: String?
+      attr_accessor encrypt_password: bool?
+      attr_accessor certificate_arn: String?
     end
 
     class SybaseSettings

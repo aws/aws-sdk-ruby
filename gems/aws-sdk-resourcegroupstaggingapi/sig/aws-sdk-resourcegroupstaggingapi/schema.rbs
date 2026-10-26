@@ -3,6 +3,8 @@ module Aws::ResourceGroupsTaggingAPI
     include Smithy::Schema::Shapes
 
     AmazonResourceType: StringShape
+    CloudFormationResourceType: StringShape
+    CloudFormationResourceTypes: ListShape
     ComplianceDetails: StructureShape
     ComplianceStatus: BooleanShape
     ConcurrentModificationException: StructureShape
@@ -29,17 +31,24 @@ module Aws::ResourceGroupsTaggingAPI
     InternalServiceException: StructureShape
     InvalidParameterException: StructureShape
     LastUpdated: StringShape
+    ListRequiredTagsInput: StructureShape
+    ListRequiredTagsOutput: StructureShape
+    MaxResultsForListRequiredTags: IntegerShape
     MaxResultsGetComplianceSummary: IntegerShape
     NonCompliantResources: IntegerShape
     PaginationToken: StringShape
     PaginationTokenExpiredException: StructureShape
     Region: StringShape
     RegionFilterList: ListShape
+    ReportingTagKeys: ListShape
+    RequiredTag: StructureShape
+    RequiredTagsForListRequiredTags: ListShape
     ResourceARN: StringShape
     ResourceARNListForGet: ListShape
     ResourceARNListForTagUntag: ListShape
     ResourceTagMapping: StructureShape
     ResourceTagMappingList: ListShape
+    ResourceType: StringShape
     ResourceTypeFilterList: ListShape
     ResourcesPerPage: IntegerShape
     S3Bucket: StringShape

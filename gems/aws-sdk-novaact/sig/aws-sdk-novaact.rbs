@@ -1,0 +1,5 @@
+  module Aws
+    module NovaAct
+      VERSION: String
+    end
+  end

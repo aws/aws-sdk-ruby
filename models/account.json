@@ -115,7 +115,13 @@
                     "target": "com.amazonaws.account#AlternateContactResource"
                 },
                 {
+                    "target": "com.amazonaws.account#CommercialToGovCloudGatewayResource"
+                },
+                {
                     "target": "com.amazonaws.account#ContactInformationResource"
+                },
+                {
+                    "target": "com.amazonaws.account#PhoneNumberVerificationResource"
                 },
                 {
                     "target": "com.amazonaws.account#PrimaryEmailResource"
@@ -148,6 +154,222 @@
                     "EventSource"
                 ],
                 "smithy.api#title": "AWS Account",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://account-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://account-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://account.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://account.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -156,26 +378,26 @@
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         },
                         "Region": {
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -724,85 +946,43 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://account-fips.us-gov-west-1.api.aws"
+                                    "url": "https://account-fips.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://account-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
+                                                "signingRegion": "eusc-de-east-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://account.us-gov-west-1.api.aws"
+                                    "url": "https://account.eusc-de-east-1.amazonaws.eu"
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "name": "sigv4",
-                                                "signingRegion": "us-gov-west-1"
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://account.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
+                                "Region": "eusc-de-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -976,43 +1156,85 @@
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://account-fips.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://account-fips.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
                         {
-                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
                                     "properties": {
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "eusc-de-east-1"
+                                                "signingRegion": "us-gov-west-1"
                                             }
                                         ]
                                     },
-                                    "url": "https://account.eusc-de-east-1.amazonaws.eu"
+                                    "url": "https://account.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
-                                "Region": "eusc-de-east-1",
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://account.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
                             }
@@ -1063,6 +1285,29 @@
                 "aws.api#arn": {
                     "template": "AccountName"
                 }
+            }
+        },
+        "com.amazonaws.account#AccountState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING_ACTIVATION",
+                        "name": "PENDING_ACTIVATION"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "SUSPENDED",
+                        "name": "SUSPENDED"
+                    },
+                    {
+                        "value": "CLOSED",
+                        "name": "CLOSED"
+                    }
+                ]
             }
         },
         "com.amazonaws.account#AddressLine": {
@@ -1154,6 +1399,29 @@
                 ]
             }
         },
+        "com.amazonaws.account#AwsAccountState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING_ACTIVATION",
+                        "name": "PENDING_ACTIVATION"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "SUSPENDED",
+                        "name": "SUSPENDED"
+                    },
+                    {
+                        "value": "CLOSED",
+                        "name": "CLOSED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.account#City": {
             "type": "string",
             "traits": {
@@ -1162,6 +1430,19 @@
                     "max": 50
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.account#CommercialToGovCloudGatewayResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.account#GetGovCloudAccountInformation"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "CommercialToGovCloudGateway"
+                }
             }
         },
         "com.amazonaws.account#CompanyName": {
@@ -1344,7 +1625,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified alternate contact from an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html\">Access or updating the alternate contacts</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html\">Enabling trusted access for Amazon Web Services Account Management</a>.</p> </note>",
+                "smithy.api#documentation": "<p>Deletes the specified alternate contact from an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html\">Update the alternate contacts for your Amazon Web Services account</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html\">Enable trusted access for Amazon Web Services Account Management</a>.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/deleteAlternateContact",
                     "method": "POST",
@@ -1366,7 +1647,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.account#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated administrator</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
                     }
                 }
             },
@@ -1538,7 +1819,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the specified account including its account name, account ID, and account creation date and time. To use this API, an IAM user or role must have the <code>account:GetAccountInformation</code> IAM permission. </p>",
+                "smithy.api#documentation": "<p>Retrieves information about the specified account including its account name, account ID, account creation date and time, and account state. To use this API, an IAM user or role must have the <code>account:GetAccountInformation</code> IAM permission. </p>",
                 "smithy.api#http": {
                     "uri": "/getAccountInformation",
                     "method": "POST",
@@ -1556,7 +1837,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.account#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated administrator</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
                     }
                 }
             },
@@ -1583,6 +1864,12 @@
                     "target": "com.amazonaws.account#AccountCreatedDate",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the account was created.</p>"
+                    }
+                },
+                "AccountState": {
+                    "target": "com.amazonaws.account#AccountState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the account. Each account state represents a specific phase in the account lifecycle. Use this information to manage account access, automate workflows, or trigger actions based on account state changes.</p> <p>Valid values: <code>PENDING_ACTIVATION | ACTIVE | SUSPENDED | CLOSED</code> </p>"
                     }
                 }
             },
@@ -1616,7 +1903,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the specified alternate contact attached to an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html\">Access or updating the alternate contacts</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html\">Enabling trusted access for Amazon Web Services Account Management</a>.</p> </note>",
+                "smithy.api#documentation": "<p>Retrieves the specified alternate contact attached to an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html\">Update the alternate contacts for your Amazon Web Services account</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html\">Enable trusted access for Amazon Web Services Account Management</a>.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/getAlternateContact",
                     "method": "POST",
@@ -1641,7 +1928,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.account#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated administrator</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
                     }
                 }
             },
@@ -1689,7 +1976,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the primary contact information of an Amazon Web Services account.</p> <p>For complete details about how to use the primary contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html\">Update the primary and alternate contact information</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves the primary contact information of an Amazon Web Services account.</p> <p>For complete details about how to use the primary contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html\">Update the primary contact for your Amazon Web Services account</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/getContactInformation",
                     "method": "POST",
@@ -1722,6 +2009,86 @@
                     "target": "com.amazonaws.account#ContactInformation",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the details of the primary contact information associated with an Amazon Web Services account.</p>"
+                    }
+                },
+                "VerificationStatus": {
+                    "target": "com.amazonaws.account#PhoneNumberVerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification status of the phone number in the primary contact information associated with an Amazon Web Services account. Valid values:</p> <ul> <li> <p> <code>PENDING</code> – A one-time passcode has been sent and is waiting to be submitted.</p> </li> <li> <p> <code>VERIFIED</code> – The phone number has been verified.</p> </li> <li> <p> <code>UNVERIFIED</code> – The phone number has not been verified.</p> </li> <li> <p> <code>NOT_SUPPORTED</code> – Phone number verification isn't available for this account.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.account#GetGovCloudAccountInformation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.account#GetGovCloudAccountInformationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.account#GetGovCloudAccountInformationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.account#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.account#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.account#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.account#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.account#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.account#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about the GovCloud account linked to the specified standard account (if it exists) including the GovCloud account ID and state. To use this API, an IAM user or role must have the <code>account:GetGovCloudAccountInformation</code> IAM permission. </p>",
+                "smithy.api#http": {
+                    "uri": "/getGovCloudAccountInformation",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.account#GetGovCloudAccountInformationRequest": {
+            "type": "structure",
+            "members": {
+                "StandardAccountId": {
+                    "target": "com.amazonaws.account#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated administrator</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.account#GetGovCloudAccountInformationResponse": {
+            "type": "structure",
+            "members": {
+                "GovCloudAccountId": {
+                    "target": "com.amazonaws.account#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit account ID number of the linked GovCloud account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountState": {
+                    "target": "com.amazonaws.account#AwsAccountState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account state of the linked GovCloud account.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1789,6 +2156,79 @@
                     "target": "com.amazonaws.account#PrimaryEmailAddress",
                     "traits": {
                         "smithy.api#documentation": "<p>Retrieves the primary email address associated with the specified account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.account#GetPrimaryEmailUpdateStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.account#GetPrimaryEmailUpdateStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.account#GetPrimaryEmailUpdateStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.account#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.account#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.account#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.account#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.account#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the status of the most recent primary email update for the specified account. For complete details about how to update the primary email address, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-root-user-email.html\">Update the primary email address for your AWS account</a>.</p>",
+                "smithy.api#http": {
+                    "uri": "/getPrimaryEmailUpdateStatus",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#suppress": [
+                    "HttpMethodSemantics"
+                ]
+            }
+        },
+        "com.amazonaws.account#GetPrimaryEmailUpdateStatusRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.account#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <p>This operation can only be called from the management account or the delegated administrator account of an organization for a member account.</p> <note> <p>The management account can't specify its own <code>AccountId</code>.</p> </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.account#GetPrimaryEmailUpdateStatusResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.account#PrimaryEmailUpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the most recent primary email update request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the most recent primary email update status was last changed.</p>"
                     }
                 }
             },
@@ -2024,6 +2464,45 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.account#PhoneNumberVerificationResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.account#SendPhoneNumberVerification"
+                },
+                {
+                    "target": "com.amazonaws.account#VerifyPhoneNumber"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "PhoneNumberVerification"
+                }
+            }
+        },
+        "com.amazonaws.account#PhoneNumberVerificationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "VERIFIED",
+                        "name": "VERIFIED"
+                    },
+                    {
+                        "value": "UNVERIFIED",
+                        "name": "UNVERIFIED"
+                    },
+                    {
+                        "value": "NOT_SUPPORTED",
+                        "name": "NOT_SUPPORTED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.account#PostalCode": {
             "type": "string",
             "traits": {
@@ -2054,6 +2533,9 @@
                     "target": "com.amazonaws.account#GetPrimaryEmail"
                 },
                 {
+                    "target": "com.amazonaws.account#GetPrimaryEmailUpdateStatus"
+                },
+                {
                     "target": "com.amazonaws.account#StartPrimaryEmailUpdate"
                 }
             ],
@@ -2074,6 +2556,14 @@
                     {
                         "value": "ACCEPTED",
                         "name": "ACCEPTED"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
                     }
                 ]
             }
@@ -2123,7 +2613,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.account#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated administrator</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
                     }
                 }
             },
@@ -2154,7 +2644,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the specified alternate contact attached to an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html\">Access or updating the alternate contacts</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html\">Enabling trusted access for Amazon Web Services Account Management</a>.</p> </note>",
+                "smithy.api#documentation": "<p>Modifies the specified alternate contact attached to an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html\">Update the alternate contacts for your Amazon Web Services account</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html\">Enable trusted access for Amazon Web Services Account Management</a>.</p> </note>",
                 "smithy.api#http": {
                     "uri": "/putAlternateContact",
                     "method": "POST",
@@ -2204,7 +2694,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.account#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated administrator</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
                     }
                 }
             },
@@ -2235,7 +2725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the primary contact information of an Amazon Web Services account.</p> <p>For complete details about how to use the primary contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html\">Update the primary and alternate contact information</a>.</p>",
+                "smithy.api#documentation": "<p>Updates the primary contact information of an Amazon Web Services account.</p> <p>For complete details about how to use the primary contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html\">Update the primary contact for your Amazon Web Services account</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/putContactInformation",
                     "method": "POST",
@@ -2257,7 +2747,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.account#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
+                        "smithy.api#documentation": "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated administrator</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
                     }
                 }
             },
@@ -2376,6 +2866,94 @@
                 "smithy.api#documentation": "<p>The operation failed because it specified a resource that can't be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.account#ResourceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed because it specified a resource that is not currently available.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 424
+            }
+        },
+        "com.amazonaws.account#SendPhoneNumberVerification": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.account#SendPhoneNumberVerificationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.account#SendPhoneNumberVerificationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.account#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.account#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.account#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.account#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.account#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.account#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends a one-time passcode to the phone number in the primary contact information of an Amazon Web Services account. Use <a>VerifyPhoneNumber</a> to submit the passcode and complete the verification.</p> <p>For complete details about how to use the primary contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html\">Update the primary contact for your Amazon Web Services account</a>.</p>",
+                "smithy.api#http": {
+                    "uri": "/sendPhoneNumberVerification",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.account#SendPhoneNumberVerificationRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.account#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated administrator</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.account#SendPhoneNumberVerificationResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.account#PhoneNumberVerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification status of the phone number in the primary contact information after the one-time passcode is sent. Valid values:</p> <ul> <li> <p> <code>PENDING</code> – A one-time passcode has been sent and is waiting to be submitted.</p> </li> <li> <p> <code>VERIFIED</code> – The phone number has been verified.</p> </li> <li> <p> <code>UNVERIFIED</code> – The phone number has not been verified.</p> </li> <li> <p> <code>NOT_SUPPORTED</code> – Phone number verification isn't available for this account.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.account#SensitiveString": {
@@ -2573,6 +3151,78 @@
                         "name": "FIELD_VALIDATION_FAILED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.account#VerifyPhoneNumber": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.account#VerifyPhoneNumberRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.account#VerifyPhoneNumberResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.account#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.account#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.account#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.account#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.account#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.account#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Verifies the phone number in the primary contact information of an Amazon Web Services account by submitting the one-time passcode that <a>SendPhoneNumberVerification</a> sent to that phone number.</p> <p>For complete details about how to use the primary contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html\">Update the primary contact for your Amazon Web Services account</a>.</p>",
+                "smithy.api#http": {
+                    "uri": "/verifyPhoneNumber",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.account#VerifyPhoneNumberRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.account#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated administrator</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"
+                    }
+                },
+                "Otp": {
+                    "target": "com.amazonaws.account#Otp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The one-time passcode sent to the phone number in the primary contact information by the <code>SendPhoneNumberVerification</code> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.account#VerifyPhoneNumberResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.account#PhoneNumberVerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification status of the phone number in the primary contact information after the submitted one-time passcode is evaluated. Valid values:</p> <ul> <li> <p> <code>PENDING</code> – A one-time passcode has been sent and is waiting to be submitted.</p> </li> <li> <p> <code>VERIFIED</code> – The phone number has been verified.</p> </li> <li> <p> <code>UNVERIFIED</code> – The phone number has not been verified.</p> </li> <li> <p> <code>NOT_SUPPORTED</code> – Phone number verification isn't available for this account.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.account#WebsiteUrl": {

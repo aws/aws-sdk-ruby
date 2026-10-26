@@ -131,6 +131,8 @@ module Aws::GlobalAccelerator
     InvalidNextTokenException: StructureShape
     InvalidPortRangeException: StructureShape
     IpAddress: StringShape
+    IpAddressDetail: StructureShape
+    IpAddressDetails: ListShape
     IpAddressFamily: EnumShape
     IpAddressType: EnumShape
     IpAddresses: ListShape
@@ -167,6 +169,7 @@ module Aws::GlobalAccelerator
     ListenerNotFoundException: StructureShape
     Listeners: ListShape
     MaxResults: IntegerShape
+    NetworkZone: StringShape
     PortMapping: StructureShape
     PortMappings: ListShape
     PortMappingsMaxResults: IntegerShape

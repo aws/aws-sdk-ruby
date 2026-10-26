@@ -1,6 +1,17 @@
 module Aws::S3
   module Types
 
+    class AbacStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
     class AbortIncompleteMultipartUpload
       include Smithy::Schema::Structure
 
@@ -77,6 +88,15 @@ module Aws::S3
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor owner: String?
+    end
+
+    class AccessDenied
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class AnalyticsAndOperator
@@ -163,9 +183,120 @@ module Aws::S3
       CSV: String
     end
 
+    module AnnotationConfigurationState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module AnnotationDirective
+      COPY: String
+      EXCLUDE: String
+    end
+
+    class AnnotationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotation_name: String,
+        ?last_modified: Time,
+        ?e_tag: String,
+        ?checksum_algorithm: Array[String],
+        ?size: Integer,
+        ?replication_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotation_name: String?
+      attr_accessor last_modified: Time?
+      attr_accessor e_tag: String?
+      attr_accessor checksum_algorithm: Array[String]?
+      attr_accessor size: Integer?
+      attr_accessor replication_status: String?
+    end
+
+    class AnnotationLimitExceeded
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AnnotationNameTooLong
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AnnotationTableConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_state: String,
+        ?encryption_configuration: Types::MetadataTableEncryptionConfiguration,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_state: String?
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration?
+      attr_accessor role: String?
+    end
+
+    class AnnotationTableConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_state: String,
+        ?table_status: String,
+        ?error: Types::ErrorDetails,
+        ?table_name: String,
+        ?table_arn: String,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_state: String?
+      attr_accessor table_status: String?
+      attr_accessor error: Types::ErrorDetails?
+      attr_accessor table_name: String?
+      attr_accessor table_arn: String?
+      attr_accessor role: String?
+    end
+
+    class AnnotationTableConfigurationUpdates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_state: String,
+        ?encryption_configuration: Types::MetadataTableEncryptionConfiguration,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_state: String?
+      attr_accessor encryption_configuration: Types::MetadataTableEncryptionConfiguration?
+      attr_accessor role: String?
+    end
+
     module ArchiveStatus
       ARCHIVE_ACCESS: String
       DEEP_ARCHIVE_ACCESS: String
+    end
+
+    class BlockedEncryptionTypes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: Array[String]?
     end
 
     class Bucket
@@ -183,6 +314,11 @@ module Aws::S3
       attr_accessor creation_date: Time?
       attr_accessor bucket_region: String?
       attr_accessor bucket_arn: String?
+    end
+
+    module BucketAbacStatus
+      Enabled: String
+      Disabled: String
     end
 
     module BucketAccelerateStatus
@@ -242,6 +378,7 @@ module Aws::S3
     module BucketLocationConstraint
       af_south_1: String
       ap_east_1: String
+      ap_east_2: String
       ap_northeast_1: String
       ap_northeast_2: String
       ap_northeast_3: String
@@ -252,7 +389,10 @@ module Aws::S3
       ap_southeast_3: String
       ap_southeast_4: String
       ap_southeast_5: String
+      ap_southeast_6: String
+      ap_southeast_7: String
       ca_central_1: String
+      ca_west_1: String
       cn_north_1: String
       cn_northwest_1: String
       EU: String
@@ -267,6 +407,7 @@ module Aws::S3
       il_central_1: String
       me_central_1: String
       me_south_1: String
+      mx_central_1: String
       sa_east_1: String
       us_east_2: String
       us_gov_east_1: String
@@ -290,6 +431,11 @@ module Aws::S3
       FULL_CONTROL: String
       READ: String
       WRITE: String
+    end
+
+    module BucketNamespace
+      ACCOUNT_REGIONAL: String
+      GLOBAL: String
     end
 
     module BucketType
@@ -384,6 +530,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?checksum_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -393,6 +544,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor checksum_type: String?
     end
 
@@ -402,6 +558,11 @@ module Aws::S3
       SHA1: String
       SHA256: String
       CRC64NVME: String
+      SHA512: String
+      MD5: String
+      XXHASH64: String
+      XXHASH3: String
+      XXHASH128: String
     end
 
     module ChecksumMode
@@ -438,6 +599,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?checksum_type: String,
         ?server_side_encryption: String,
         ?version_id: String,
@@ -457,6 +623,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor checksum_type: String?
       attr_accessor server_side_encryption: String?
       attr_accessor version_id: String?
@@ -478,6 +649,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?checksum_type: String,
         ?mpu_object_size: Integer,
         ?request_payer: String,
@@ -499,6 +675,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor checksum_type: String?
       attr_accessor mpu_object_size: Integer?
       attr_accessor request_payer: String?
@@ -531,6 +712,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?part_number: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -541,6 +727,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor part_number: Integer?
     end
 
@@ -625,10 +816,13 @@ module Aws::S3
         ?grant_read: String,
         ?grant_read_acp: String,
         ?grant_write_acp: String,
+        ?if_match: String,
+        ?if_none_match: String,
         ?key: String,
         ?metadata: Hash[String, String],
         ?metadata_directive: String,
         ?tagging_directive: String,
+        ?annotation_directive: String,
         ?server_side_encryption: String,
         ?storage_class: String,
         ?website_redirect_location: String,
@@ -646,6 +840,9 @@ module Aws::S3
         ?object_lock_mode: String,
         ?object_lock_retain_until_date: Time,
         ?object_lock_legal_hold_status: String,
+        ?object_lock_event_hold: String,
+        ?object_lock_event_hold_duration_days: Integer,
+        ?object_lock_event_hold_duration_years: Integer,
         ?expected_bucket_owner: String,
         ?expected_source_bucket_owner: String,
       ) -> void
@@ -669,10 +866,13 @@ module Aws::S3
       attr_accessor grant_read: String?
       attr_accessor grant_read_acp: String?
       attr_accessor grant_write_acp: String?
+      attr_accessor if_match: String?
+      attr_accessor if_none_match: String?
       attr_accessor key: String?
       attr_accessor metadata: Hash[String, String]?
       attr_accessor metadata_directive: String?
       attr_accessor tagging_directive: String?
+      attr_accessor annotation_directive: String?
       attr_accessor server_side_encryption: String?
       attr_accessor storage_class: String?
       attr_accessor website_redirect_location: String?
@@ -690,6 +890,9 @@ module Aws::S3
       attr_accessor object_lock_mode: String?
       attr_accessor object_lock_retain_until_date: Time?
       attr_accessor object_lock_legal_hold_status: String?
+      attr_accessor object_lock_event_hold: String?
+      attr_accessor object_lock_event_hold_duration_days: Integer?
+      attr_accessor object_lock_event_hold_duration_years: Integer?
       attr_accessor expected_bucket_owner: String?
       attr_accessor expected_source_bucket_owner: String?
     end
@@ -706,6 +909,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -717,6 +925,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
     end
 
     class CopyPartResult
@@ -730,6 +943,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -740,6 +958,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
     end
 
     class CreateBucketConfiguration
@@ -824,6 +1047,7 @@ module Aws::S3
         ?grant_write_acp: String,
         ?object_lock_enabled_for_bucket: bool,
         ?object_ownership: String,
+        ?bucket_namespace: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -837,6 +1061,7 @@ module Aws::S3
       attr_accessor grant_write_acp: String?
       attr_accessor object_lock_enabled_for_bucket: bool?
       attr_accessor object_ownership: String?
+      attr_accessor bucket_namespace: String?
     end
 
     class CreateMultipartUploadOutput
@@ -908,6 +1133,9 @@ module Aws::S3
         ?object_lock_mode: String,
         ?object_lock_retain_until_date: Time,
         ?object_lock_legal_hold_status: String,
+        ?object_lock_event_hold: String,
+        ?object_lock_event_hold_duration_days: Integer,
+        ?object_lock_event_hold_duration_years: Integer,
         ?expected_bucket_owner: String,
         ?checksum_algorithm: String,
         ?checksum_type: String,
@@ -942,6 +1170,9 @@ module Aws::S3
       attr_accessor object_lock_mode: String?
       attr_accessor object_lock_retain_until_date: Time?
       attr_accessor object_lock_legal_hold_status: String?
+      attr_accessor object_lock_event_hold: String?
+      attr_accessor object_lock_event_hold_duration_days: Integer?
+      attr_accessor object_lock_event_hold_duration_years: Integer?
       attr_accessor expected_bucket_owner: String?
       attr_accessor checksum_algorithm: String?
       attr_accessor checksum_type: String?
@@ -999,12 +1230,14 @@ module Aws::S3
         ?mode: String,
         ?days: Integer,
         ?years: Integer,
+        ?default_event_hold: Types::EventHoldDuration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor mode: String?
       attr_accessor days: Integer?
       attr_accessor years: Integer?
+      attr_accessor default_event_hold: Types::EventHoldDuration?
     end
 
     class Delete
@@ -1258,6 +1491,42 @@ module Aws::S3
       Disabled: String
     end
 
+    class DeleteObjectAnnotationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_version_id: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_version_id: String?
+      attr_accessor request_charged: String?
+    end
+
+    class DeleteObjectAnnotationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?annotation_name: String,
+        ?version_id: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?object_if_match: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor annotation_name: String?
+      attr_accessor version_id: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor object_if_match: String?
+    end
+
     class DeleteObjectOutput
       include Smithy::Schema::Structure
 
@@ -1466,6 +1735,11 @@ module Aws::S3
       attr_accessor replica_kms_key_id: String?
     end
 
+    module EncryptionType
+      NONE: String
+      SSE_C: String
+    end
+
     class EncryptionTypeMismatch
       include Smithy::Schema::Structure
 
@@ -1553,6 +1827,10 @@ module Aws::S3
       s3_ObjectTagging_: String
       s3_ObjectTagging_Put: String
       s3_ObjectTagging_Delete: String
+      s3_ObjectAnnotation_: String
+      s3_ObjectAnnotation_Put: String
+      s3_ObjectAnnotation_Delete: String
+      s3_ObjectRetention_Put: String
     end
 
     class EventBridgeConfiguration
@@ -1562,6 +1840,19 @@ module Aws::S3
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class EventHoldDuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days: Integer,
+        ?years: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days: Integer?
+      attr_accessor years: Integer?
     end
 
     class ExistingObjectReplication
@@ -1616,6 +1907,30 @@ module Aws::S3
     module FilterRuleName
       prefix: String
       suffix: String
+    end
+
+    class GetBucketAbacOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?abac_status: Types::AbacStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor abac_status: Types::AbacStatus?
+    end
+
+    class GetBucketAbacRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor expected_bucket_owner: String?
     end
 
     class GetBucketAccelerateConfigurationOutput
@@ -2236,6 +2551,76 @@ module Aws::S3
       attr_accessor expected_bucket_owner: String?
     end
 
+    class GetObjectAnnotationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotation_payload: String,
+        ?object_version_id: String,
+        ?last_modified: Time,
+        ?content_length: Integer,
+        ?e_tag: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
+        ?checksum_type: String,
+        ?server_side_encryption: String,
+        ?request_charged: String,
+        ?replication_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotation_payload: String?
+      attr_accessor object_version_id: String?
+      attr_accessor last_modified: Time?
+      attr_accessor content_length: Integer?
+      attr_accessor e_tag: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
+      attr_accessor checksum_type: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor request_charged: String?
+      attr_accessor replication_status: String?
+    end
+
+    class GetObjectAnnotationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?annotation_name: String,
+        ?version_id: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?checksum_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor annotation_name: String?
+      attr_accessor version_id: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor checksum_mode: String?
+    end
+
     class GetObjectAttributesOutput
       include Smithy::Schema::Structure
 
@@ -2386,6 +2771,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?checksum_type: String,
         ?missing_meta: Integer,
         ?version_id: String,
@@ -2411,6 +2801,9 @@ module Aws::S3
         ?object_lock_mode: String,
         ?object_lock_retain_until_date: Time,
         ?object_lock_legal_hold_status: String,
+        ?object_lock_event_hold: String,
+        ?object_lock_event_hold_duration_days: Integer,
+        ?object_lock_event_hold_duration_years: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2427,6 +2820,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor checksum_type: String?
       attr_accessor missing_meta: Integer?
       attr_accessor version_id: String?
@@ -2452,6 +2850,9 @@ module Aws::S3
       attr_accessor object_lock_mode: String?
       attr_accessor object_lock_retain_until_date: Time?
       attr_accessor object_lock_legal_hold_status: String?
+      attr_accessor object_lock_event_hold: String?
+      attr_accessor object_lock_event_hold_duration_days: Integer?
+      attr_accessor object_lock_event_hold_duration_years: Integer?
     end
 
     class GetObjectRequest
@@ -2712,6 +3113,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?checksum_type: String,
         ?e_tag: String,
         ?missing_meta: Integer,
@@ -2738,6 +3144,9 @@ module Aws::S3
         ?object_lock_mode: String,
         ?object_lock_retain_until_date: Time,
         ?object_lock_legal_hold_status: String,
+        ?object_lock_event_hold: String,
+        ?object_lock_event_hold_duration_days: Integer,
+        ?object_lock_event_hold_duration_years: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2753,6 +3162,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor checksum_type: String?
       attr_accessor e_tag: String?
       attr_accessor missing_meta: Integer?
@@ -2779,6 +3193,9 @@ module Aws::S3
       attr_accessor object_lock_mode: String?
       attr_accessor object_lock_retain_until_date: Time?
       attr_accessor object_lock_legal_hold_status: String?
+      attr_accessor object_lock_event_hold: String?
+      attr_accessor object_lock_event_hold_duration_days: Integer?
+      attr_accessor object_lock_event_hold_duration_years: Integer?
     end
 
     class HeadObjectRequest
@@ -2937,6 +3354,15 @@ module Aws::S3
       Disabled: String
     end
 
+    class InvalidAnnotationName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class InvalidObjectState
       include Smithy::Schema::Structure
 
@@ -2948,6 +3374,15 @@ module Aws::S3
 
       attr_accessor storage_class: String?
       attr_accessor access_tier: String?
+    end
+
+    class InvalidPrefix
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class InvalidRequest
@@ -3058,11 +3493,15 @@ module Aws::S3
       ObjectLockRetainUntilDate: String
       ObjectLockMode: String
       ObjectLockLegalHoldStatus: String
+      ObjectLockEventHoldStatus: String
+      ObjectLockEventHoldDuration: String
       IntelligentTieringAccessTier: String
       BucketKeyStatus: String
       ChecksumAlgorithm: String
       ObjectAccessControlList: String
       ObjectOwner: String
+      LifecycleExpirationDate: String
+      IntelligentTieringReferenceDate: String
     end
 
     class InventoryS3BucketDestination
@@ -3555,6 +3994,60 @@ module Aws::S3
       attr_accessor request_payer: String?
     end
 
+    class ListObjectAnnotationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?annotations: Array[Types::AnnotationEntry],
+        ?bucket: String,
+        ?key: String,
+        ?object_version_id: String,
+        ?annotation_prefix: String,
+        ?max_annotation_results: Integer,
+        ?annotation_count: Integer,
+        ?continuation_token: String,
+        ?next_continuation_token: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor annotations: Array[Types::AnnotationEntry]?
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor object_version_id: String?
+      attr_accessor annotation_prefix: String?
+      attr_accessor max_annotation_results: Integer?
+      attr_accessor annotation_count: Integer?
+      attr_accessor continuation_token: String?
+      attr_accessor next_continuation_token: String?
+      attr_accessor request_charged: String?
+    end
+
+    class ListObjectAnnotationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?max_annotation_results: Integer,
+        ?annotation_prefix: String,
+        ?continuation_token: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor max_annotation_results: Integer?
+      attr_accessor annotation_prefix: String?
+      attr_accessor continuation_token: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
     class ListObjectVersionsOutput
       include Smithy::Schema::Structure
 
@@ -3866,11 +4359,13 @@ module Aws::S3
       def initialize: (
         ?journal_table_configuration: Types::JournalTableConfiguration,
         ?inventory_table_configuration: Types::InventoryTableConfiguration,
+        ?annotation_table_configuration: Types::AnnotationTableConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor journal_table_configuration: Types::JournalTableConfiguration?
       attr_accessor inventory_table_configuration: Types::InventoryTableConfiguration?
+      attr_accessor annotation_table_configuration: Types::AnnotationTableConfiguration?
     end
 
     class MetadataConfigurationResult
@@ -3880,12 +4375,14 @@ module Aws::S3
         ?destination_result: Types::DestinationResult,
         ?journal_table_configuration_result: Types::JournalTableConfigurationResult,
         ?inventory_table_configuration_result: Types::InventoryTableConfigurationResult,
+        ?annotation_table_configuration_result: Types::AnnotationTableConfigurationResult,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor destination_result: Types::DestinationResult?
       attr_accessor journal_table_configuration_result: Types::JournalTableConfigurationResult?
       attr_accessor inventory_table_configuration_result: Types::InventoryTableConfigurationResult?
+      attr_accessor annotation_table_configuration_result: Types::AnnotationTableConfigurationResult?
     end
 
     module MetadataDirective
@@ -4040,6 +4537,15 @@ module Aws::S3
       attr_accessor checksum_type: String?
     end
 
+    class NoSuchAnnotation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class NoSuchBucket
       include Smithy::Schema::Structure
 
@@ -4186,6 +4692,22 @@ module Aws::S3
       bucket_owner_full_control: String
     end
 
+    class ObjectEncryption
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ssekms: Types::SSEKMSEncryption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssekms: Types::SSEKMSEncryption?
+
+      class SSEKMS < ObjectEncryption
+      end
+      class Unknown < ObjectEncryption
+      end
+    end
+
     class ObjectIdentifier
       include Smithy::Schema::Structure
 
@@ -4222,6 +4744,11 @@ module Aws::S3
       Enabled: String
     end
 
+    module ObjectLockEventHold
+      ON: String
+      OFF: String
+    end
+
     class ObjectLockLegalHold
       include Smithy::Schema::Structure
 
@@ -4249,11 +4776,15 @@ module Aws::S3
       def initialize: (
         ?mode: String,
         ?retain_until_date: Time,
+        ?event_hold: String,
+        ?event_hold_duration: Types::EventHoldDuration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor mode: String?
       attr_accessor retain_until_date: Time?
+      attr_accessor event_hold: String?
+      attr_accessor event_hold_duration: Types::EventHoldDuration?
     end
 
     module ObjectLockRetentionMode
@@ -4298,6 +4829,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4308,6 +4844,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
     end
 
     module ObjectStorageClass
@@ -4323,6 +4864,9 @@ module Aws::S3
       SNOW: String
       EXPRESS_ONEZONE: String
       FSX_OPENZFS: String
+      FSX_ONTAP: String
+      AWS_BACKUP_WARM: String
+      AWS_BACKUP_LOW_COST_WARM: String
     end
 
     class ObjectVersion
@@ -4449,6 +4993,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4461,6 +5010,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
     end
 
     module PartitionDateSource
@@ -4549,6 +5103,25 @@ module Aws::S3
       attr_accessor ignore_public_acls: bool?
       attr_accessor block_public_policy: bool?
       attr_accessor restrict_public_buckets: bool?
+    end
+
+    class PutBucketAbacRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?expected_bucket_owner: String,
+        ?abac_status: Types::AbacStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor abac_status: Types::AbacStatus?
     end
 
     class PutBucketAccelerateConfigurationRequest
@@ -4958,6 +5531,98 @@ module Aws::S3
       attr_accessor expected_bucket_owner: String?
     end
 
+    class PutObjectAnnotationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?annotation_name: String,
+        ?object_version_id: String,
+        ?e_tag: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
+        ?checksum_type: String,
+        ?server_side_encryption: String,
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor annotation_name: String?
+      attr_accessor object_version_id: String?
+      attr_accessor e_tag: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
+      attr_accessor checksum_type: String?
+      attr_accessor server_side_encryption: String?
+      attr_accessor request_charged: String?
+    end
+
+    class PutObjectAnnotationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?annotation_name: String,
+        ?annotation_payload: String,
+        ?object_if_match: String,
+        ?checksum_algorithm: String,
+        ?checksum_crc32: String,
+        ?checksum_crc32_c: String,
+        ?checksum_crc64_nvme: String,
+        ?checksum_sha1: String,
+        ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
+        ?content_md5: String,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor annotation_name: String?
+      attr_accessor annotation_payload: String?
+      attr_accessor object_if_match: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor checksum_crc32: String?
+      attr_accessor checksum_crc32_c: String?
+      attr_accessor checksum_crc64_nvme: String?
+      attr_accessor checksum_sha1: String?
+      attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
+      attr_accessor content_md5: String?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
     class PutObjectLegalHoldOutput
       include Smithy::Schema::Structure
 
@@ -5039,6 +5704,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?checksum_type: String,
         ?server_side_encryption: String,
         ?version_id: String,
@@ -5059,6 +5729,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor checksum_type: String?
       attr_accessor server_side_encryption: String?
       attr_accessor version_id: String?
@@ -5091,6 +5766,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?expires: String,
         ?if_match: String,
         ?if_none_match: String,
@@ -5115,6 +5795,9 @@ module Aws::S3
         ?object_lock_mode: String,
         ?object_lock_retain_until_date: Time,
         ?object_lock_legal_hold_status: String,
+        ?object_lock_event_hold: String,
+        ?object_lock_event_hold_duration_days: Integer,
+        ?object_lock_event_hold_duration_years: Integer,
         ?expected_bucket_owner: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -5135,6 +5818,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor expires: String?
       attr_accessor if_match: String?
       attr_accessor if_none_match: String?
@@ -5159,6 +5847,9 @@ module Aws::S3
       attr_accessor object_lock_mode: String?
       attr_accessor object_lock_retain_until_date: Time?
       attr_accessor object_lock_legal_hold_status: String?
+      attr_accessor object_lock_event_hold: String?
+      attr_accessor object_lock_event_hold_duration_days: Integer?
+      attr_accessor object_lock_event_hold_duration_years: Integer?
       attr_accessor expected_bucket_owner: String?
     end
 
@@ -5702,6 +6393,19 @@ module Aws::S3
       attr_accessor key_id: String?
     end
 
+    class SSEKMSEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+        ?bucket_key_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+      attr_accessor bucket_key_enabled: bool?
+    end
+
     class SSES3
       include Smithy::Schema::Structure
 
@@ -5820,6 +6524,7 @@ module Aws::S3
     module ServerSideEncryption
       AES256: String
       aws_fsx: String
+      aws_backup: String
       aws_kms: String
       aws_kms_dsse: String
     end
@@ -5854,11 +6559,13 @@ module Aws::S3
       def initialize: (
         ?apply_server_side_encryption_by_default: Types::ServerSideEncryptionByDefault,
         ?bucket_key_enabled: bool,
+        ?blocked_encryption_types: Types::BlockedEncryptionTypes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor apply_server_side_encryption_by_default: Types::ServerSideEncryptionByDefault?
       attr_accessor bucket_key_enabled: bool?
+      attr_accessor blocked_encryption_types: Types::BlockedEncryptionTypes?
     end
 
     class SessionCredentials
@@ -5960,6 +6667,9 @@ module Aws::S3
       SNOW: String
       EXPRESS_ONEZONE: String
       FSX_OPENZFS: String
+      FSX_ONTAP: String
+      AWS_BACKUP_WARM: String
+      AWS_BACKUP_LOW_COST_WARM: String
     end
 
     class StorageClassAnalysis
@@ -6130,6 +6840,34 @@ module Aws::S3
       Group: String
     end
 
+    class UnsupportedMediaType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBucketMetadataAnnotationTableConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+        ?annotation_table_configuration: Types::AnnotationTableConfigurationUpdates,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+      attr_accessor annotation_table_configuration: Types::AnnotationTableConfigurationUpdates?
+      attr_accessor expected_bucket_owner: String?
+    end
+
     class UpdateBucketMetadataInventoryTableConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -6166,6 +6904,42 @@ module Aws::S3
       attr_accessor checksum_algorithm: String?
       attr_accessor journal_table_configuration: Types::JournalTableConfigurationUpdates?
       attr_accessor expected_bucket_owner: String?
+    end
+
+    class UpdateObjectEncryptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?object_encryption: Types::ObjectEncryption,
+        ?request_payer: String,
+        ?expected_bucket_owner: String,
+        ?content_md5: String,
+        ?checksum_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor object_encryption: Types::ObjectEncryption?
+      attr_accessor request_payer: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor content_md5: String?
+      attr_accessor checksum_algorithm: String?
+    end
+
+    class UpdateObjectEncryptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_charged: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_charged: String?
     end
 
     class UploadPartCopyOutput
@@ -6251,6 +7025,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?sse_customer_algorithm: String,
         ?sse_customer_key_md5: String,
         ?ssekms_key_id: String,
@@ -6266,6 +7045,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor sse_customer_algorithm: String?
       attr_accessor sse_customer_key_md5: String?
       attr_accessor ssekms_key_id: String?
@@ -6287,6 +7071,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?key: String,
         ?part_number: Integer,
         ?upload_id: String,
@@ -6308,6 +7097,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor key: String?
       attr_accessor part_number: Integer?
       attr_accessor upload_id: String?
@@ -6371,6 +7165,11 @@ module Aws::S3
         ?checksum_crc64_nvme: String,
         ?checksum_sha1: String,
         ?checksum_sha256: String,
+        ?checksum_sha512: String,
+        ?checksum_md5: String,
+        ?checksum_xxhash64: String,
+        ?checksum_xxhash3: String,
+        ?checksum_xxhash128: String,
         ?delete_marker: bool,
         ?e_tag: String,
         ?expires: String,
@@ -6415,6 +7214,11 @@ module Aws::S3
       attr_accessor checksum_crc64_nvme: String?
       attr_accessor checksum_sha1: String?
       attr_accessor checksum_sha256: String?
+      attr_accessor checksum_sha512: String?
+      attr_accessor checksum_md5: String?
+      attr_accessor checksum_xxhash64: String?
+      attr_accessor checksum_xxhash3: String?
+      attr_accessor checksum_xxhash128: String?
       attr_accessor delete_marker: bool?
       attr_accessor e_tag: String?
       attr_accessor expires: String?

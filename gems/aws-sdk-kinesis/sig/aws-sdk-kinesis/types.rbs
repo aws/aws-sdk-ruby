@@ -19,12 +19,165 @@ module Aws::Kinesis
         ?stream_name: String,
         ?tags: Hash[String, String],
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_name: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
+    end
+
+    class ChannelDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?channel_arn: String,
+        ?channel_id: String,
+        ?channel_status: String,
+        ?channel_status_reason: String,
+        ?channel_creation_timestamp: Time,
+        ?service_execution_role_arn: String,
+        ?stream_configuration_list: Array[Types::ChannelStreamDescription],
+        ?s3_destination_configuration: Types::S3DestinationDescription,
+        ?s3_tables_destination_configuration: Types::S3TablesDestinationDescription,
+        ?encryption_configuration: Types::ChannelEncryptionConfiguration,
+        ?logging_configuration: Types::ChannelLoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor channel_arn: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_status: String?
+      attr_accessor channel_status_reason: String?
+      attr_accessor channel_creation_timestamp: Time?
+      attr_accessor service_execution_role_arn: String?
+      attr_accessor stream_configuration_list: Array[Types::ChannelStreamDescription]?
+      attr_accessor s3_destination_configuration: Types::S3DestinationDescription?
+      attr_accessor s3_tables_destination_configuration: Types::S3TablesDestinationDescription?
+      attr_accessor encryption_configuration: Types::ChannelEncryptionConfiguration?
+      attr_accessor logging_configuration: Types::ChannelLoggingConfiguration?
+    end
+
+    module ChannelDestinationType
+      S3: String
+      S3_TABLES: String
+    end
+
+    class ChannelEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor key_id: String?
+    end
+
+    module ChannelEncryptionType
+      KMS: String
+    end
+
+    class ChannelLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs: Types::CloudWatchLogs,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogs?
+    end
+
+    class ChannelLoggingUpdateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs: Types::CloudWatchLogsUpdateInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsUpdateInput?
+    end
+
+    module ChannelStatus
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class ChannelStreamConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?record_configuration: Types::RecordConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor record_configuration: Types::RecordConfiguration?
+    end
+
+    class ChannelStreamDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_creation_timestamp: Time,
+        ?record_configuration: Types::RecordConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_creation_timestamp: Time?
+      attr_accessor record_configuration: Types::RecordConfiguration?
+    end
+
+    class ChannelStreamIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_creation_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_creation_timestamp: Time?
+    end
+
+    class ChannelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?channel_arn: String,
+        ?channel_id: String,
+        ?channel_status: String,
+        ?channel_status_reason: String,
+        ?channel_creation_timestamp: Time,
+        ?channel_destination_type: String,
+        ?streams: Array[Types::ChannelStreamIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor channel_arn: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_status: String?
+      attr_accessor channel_status_reason: String?
+      attr_accessor channel_creation_timestamp: Time?
+      attr_accessor channel_destination_type: String?
+      attr_accessor streams: Array[Types::ChannelStreamIdentifier]?
     end
 
     class ChildShard
@@ -40,6 +193,36 @@ module Aws::Kinesis
       attr_accessor shard_id: String?
       attr_accessor parent_shards: Array[String]?
       attr_accessor hash_key_range: Types::HashKeyRange?
+    end
+
+    class CloudWatchLogs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_group_name: String,
+        ?log_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name: String?
+    end
+
+    class CloudWatchLogsUpdateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_group_name: String,
+        ?log_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name: String?
     end
 
     class Consumer
@@ -84,6 +267,42 @@ module Aws::Kinesis
       ACTIVE: String
     end
 
+    class CreateChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?service_execution_role_arn: String,
+        ?stream_configuration_list: Array[Types::ChannelStreamConfiguration],
+        ?s3_destination_configuration: Types::S3DestinationConfiguration,
+        ?s3_tables_destination_configuration: Types::S3TablesDestinationConfiguration,
+        ?encryption_configuration: Types::ChannelEncryptionConfiguration,
+        ?tags: Hash[String, String],
+        ?logging_configuration: Types::ChannelLoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor service_execution_role_arn: String?
+      attr_accessor stream_configuration_list: Array[Types::ChannelStreamConfiguration]?
+      attr_accessor s3_destination_configuration: Types::S3DestinationConfiguration?
+      attr_accessor s3_tables_destination_configuration: Types::S3TablesDestinationConfiguration?
+      attr_accessor encryption_configuration: Types::ChannelEncryptionConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor logging_configuration: Types::ChannelLoggingConfiguration?
+    end
+
+    class CreateChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_description: Types::ChannelDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_description: Types::ChannelDescription?
+    end
+
     class CreateStreamInput
       include Smithy::Schema::Structure
 
@@ -92,6 +311,9 @@ module Aws::Kinesis
         ?shard_count: Integer,
         ?stream_mode_details: Types::StreamModeDetails,
         ?tags: Hash[String, String],
+        ?warm_throughput_mi_bps: Integer,
+        ?max_record_size_in_ki_b: Integer,
+        ?record_distribution_strategy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -99,6 +321,24 @@ module Aws::Kinesis
       attr_accessor shard_count: Integer?
       attr_accessor stream_mode_details: Types::StreamModeDetails?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor warm_throughput_mi_bps: Integer?
+      attr_accessor max_record_size_in_ki_b: Integer?
+      attr_accessor record_distribution_strategy: String?
+    end
+
+    class DeadLetterQueueS3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?expected_bucket_owner: String,
+        ?error_output_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor error_output_prefix: String?
     end
 
     class DecreaseStreamRetentionPeriodInput
@@ -108,12 +348,25 @@ module Aws::Kinesis
         ?stream_name: String,
         ?retention_period_hours: Integer,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_name: String?
       attr_accessor retention_period_hours: Integer?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
+    end
+
+    class DeleteChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
     end
 
     class DeleteResourcePolicyInput
@@ -121,10 +374,12 @@ module Aws::Kinesis
 
       def initialize: (
         ?resource_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class DeleteStreamInput
@@ -134,12 +389,14 @@ module Aws::Kinesis
         ?stream_name: String,
         ?enforce_consumer_deletion: bool,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_name: String?
       attr_accessor enforce_consumer_deletion: bool?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class DeregisterStreamConsumerInput
@@ -149,12 +406,56 @@ module Aws::Kinesis
         ?stream_arn: String,
         ?consumer_name: String,
         ?consumer_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_arn: String?
       attr_accessor consumer_name: String?
       attr_accessor consumer_arn: String?
+      attr_accessor stream_id: String?
+    end
+
+    class DescribeAccountSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_throughput_billing_commitment: Types::MinimumThroughputBillingCommitmentOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_throughput_billing_commitment: Types::MinimumThroughputBillingCommitmentOutput?
+    end
+
+    class DescribeChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+    end
+
+    class DescribeChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_description: Types::ChannelDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_description: Types::ChannelDescription?
     end
 
     class DescribeLimitsInput
@@ -174,6 +475,8 @@ module Aws::Kinesis
         ?open_shard_count: Integer,
         ?on_demand_stream_count: Integer,
         ?on_demand_stream_count_limit: Integer,
+        ?channel_count: Integer,
+        ?channel_count_limit: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -181,6 +484,8 @@ module Aws::Kinesis
       attr_accessor open_shard_count: Integer?
       attr_accessor on_demand_stream_count: Integer?
       attr_accessor on_demand_stream_count_limit: Integer?
+      attr_accessor channel_count: Integer?
+      attr_accessor channel_count_limit: Integer?
     end
 
     class DescribeStreamConsumerInput
@@ -190,12 +495,14 @@ module Aws::Kinesis
         ?stream_arn: String,
         ?consumer_name: String,
         ?consumer_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_arn: String?
       attr_accessor consumer_name: String?
       attr_accessor consumer_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class DescribeStreamConsumerOutput
@@ -217,6 +524,7 @@ module Aws::Kinesis
         ?limit: Integer,
         ?exclusive_start_shard_id: String,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -224,6 +532,7 @@ module Aws::Kinesis
       attr_accessor limit: Integer?
       attr_accessor exclusive_start_shard_id: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class DescribeStreamOutput
@@ -243,11 +552,13 @@ module Aws::Kinesis
       def initialize: (
         ?stream_name: String,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_name: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class DescribeStreamSummaryOutput
@@ -268,12 +579,14 @@ module Aws::Kinesis
         ?stream_name: String,
         ?shard_level_metrics: Array[String],
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_name: String?
       attr_accessor shard_level_metrics: Array[String]?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class DisableEnhancedMonitoringOutput
@@ -293,6 +606,17 @@ module Aws::Kinesis
       attr_accessor stream_arn: String?
     end
 
+    class DryRunOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class EnableEnhancedMonitoringInput
       include Smithy::Schema::Structure
 
@@ -300,12 +624,14 @@ module Aws::Kinesis
         ?stream_name: String,
         ?shard_level_metrics: Array[String],
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_name: String?
       attr_accessor shard_level_metrics: Array[String]?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class EnableEnhancedMonitoringOutput
@@ -370,12 +696,16 @@ module Aws::Kinesis
         ?shard_iterator: String,
         ?limit: Integer,
         ?stream_arn: String,
+        ?stream_id: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor shard_iterator: String?
       attr_accessor limit: Integer?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
+      attr_accessor dry_run: bool?
     end
 
     class GetRecordsOutput
@@ -400,10 +730,12 @@ module Aws::Kinesis
 
       def initialize: (
         ?resource_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class GetResourcePolicyOutput
@@ -427,6 +759,8 @@ module Aws::Kinesis
         ?starting_sequence_number: String,
         ?timestamp: Time,
         ?stream_arn: String,
+        ?stream_id: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -436,6 +770,8 @@ module Aws::Kinesis
       attr_accessor starting_sequence_number: String?
       attr_accessor timestamp: Time?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
+      attr_accessor dry_run: bool?
     end
 
     class GetShardIteratorOutput
@@ -469,12 +805,14 @@ module Aws::Kinesis
         ?stream_name: String,
         ?retention_period_hours: Integer,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_name: String?
       attr_accessor retention_period_hours: Integer?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class InternalFailureException
@@ -576,6 +914,34 @@ module Aws::Kinesis
       attr_accessor message: String?
     end
 
+    class ListChannelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_filter: Array[Types::StreamFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_filter: Array[Types::StreamFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListChannelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_summaries: Array[Types::ChannelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_summaries: Array[Types::ChannelSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListShardsInput
       include Smithy::Schema::Structure
 
@@ -587,6 +953,7 @@ module Aws::Kinesis
         ?stream_creation_timestamp: Time,
         ?shard_filter: Types::ShardFilter,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -597,6 +964,7 @@ module Aws::Kinesis
       attr_accessor stream_creation_timestamp: Time?
       attr_accessor shard_filter: Types::ShardFilter?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class ListShardsOutput
@@ -620,6 +988,7 @@ module Aws::Kinesis
         ?next_token: String,
         ?max_results: Integer,
         ?stream_creation_timestamp: Time,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -627,6 +996,7 @@ module Aws::Kinesis
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
       attr_accessor stream_creation_timestamp: Time?
+      attr_accessor stream_id: String?
     end
 
     class ListStreamConsumersOutput
@@ -679,10 +1049,12 @@ module Aws::Kinesis
 
       def initialize: (
         ?resource_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class ListTagsForResourceOutput
@@ -704,6 +1076,7 @@ module Aws::Kinesis
         ?exclusive_start_tag_key: String,
         ?limit: Integer,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -711,6 +1084,7 @@ module Aws::Kinesis
       attr_accessor exclusive_start_tag_key: String?
       attr_accessor limit: Integer?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class ListTagsForStreamOutput
@@ -734,6 +1108,7 @@ module Aws::Kinesis
         ?shard_to_merge: String,
         ?adjacent_shard_to_merge: String,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -741,6 +1116,7 @@ module Aws::Kinesis
       attr_accessor shard_to_merge: String?
       attr_accessor adjacent_shard_to_merge: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     module MetricsName
@@ -752,6 +1128,73 @@ module Aws::Kinesis
       READ_PROVISIONED_THROUGHPUT_EXCEEDED: String
       ITERATOR_AGE_MILLISECONDS: String
       ALL: String
+    end
+
+    class MinimumThroughputBillingCommitmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module MinimumThroughputBillingCommitmentInputStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class MinimumThroughputBillingCommitmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?earliest_allowed_end_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor earliest_allowed_end_at: Time?
+    end
+
+    module MinimumThroughputBillingCommitmentOutputStatus
+      ENABLED: String
+      DISABLED: String
+      ENABLED_UNTIL_EARLIEST_ALLOWED_END: String
+    end
+
+    class PartitionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transform: String,
+        ?source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transform: String?
+      attr_accessor source_name: String?
+    end
+
+    class PartitionSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partition_fields: Array[Types::PartitionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partition_fields: Array[Types::PartitionField]?
+    end
+
+    module PartitionTransform
+      TIME_HOUR: String
     end
 
     class ProvisionedThroughputExceededException
@@ -775,6 +1218,8 @@ module Aws::Kinesis
         ?explicit_hash_key: String,
         ?sequence_number_for_ordering: String,
         ?stream_arn: String,
+        ?stream_id: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -784,6 +1229,8 @@ module Aws::Kinesis
       attr_accessor explicit_hash_key: String?
       attr_accessor sequence_number_for_ordering: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
+      attr_accessor dry_run: bool?
     end
 
     class PutRecordOutput
@@ -808,12 +1255,16 @@ module Aws::Kinesis
         ?records: Array[Types::PutRecordsRequestEntry],
         ?stream_name: String,
         ?stream_arn: String,
+        ?stream_id: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor records: Array[Types::PutRecordsRequestEntry]?
       attr_accessor stream_name: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
+      attr_accessor dry_run: bool?
     end
 
     class PutRecordsOutput
@@ -868,11 +1319,13 @@ module Aws::Kinesis
 
       def initialize: (
         ?resource_arn: String,
+        ?stream_id: String,
         ?policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_arn: String?
+      attr_accessor stream_id: String?
       attr_accessor policy: String?
     end
 
@@ -895,18 +1348,45 @@ module Aws::Kinesis
       attr_accessor encryption_type: String?
     end
 
+    class RecordConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_format_type: String,
+        ?gsr_schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_format_type: String?
+      attr_accessor gsr_schema_arn: String?
+    end
+
+    module RecordDistributionStrategy
+      AUTO: String
+      USER_PARTITION_KEY: String
+    end
+
+    module RecordFormatType
+      GSR_JSON: String
+      JSON: String
+      STRING: String
+      BYTE_ARRAY: String
+    end
+
     class RegisterStreamConsumerInput
       include Smithy::Schema::Structure
 
       def initialize: (
         ?stream_arn: String,
         ?consumer_name: String,
+        ?stream_id: String,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_arn: String?
       attr_accessor consumer_name: String?
+      attr_accessor stream_id: String?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -928,12 +1408,14 @@ module Aws::Kinesis
         ?stream_name: String,
         ?tag_keys: Array[String],
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_name: String?
       attr_accessor tag_keys: Array[String]?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class ResourceInUseException
@@ -956,6 +1438,144 @@ module Aws::Kinesis
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module S3CompressionType
+      NONE: String
+      GZIP: String
+      ZSTD: String
+    end
+
+    class S3DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_freshness_in_seconds: Integer,
+        ?dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration,
+        ?storage_configuration: Types::S3StorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_freshness_in_seconds: Integer?
+      attr_accessor dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration?
+      attr_accessor storage_configuration: Types::S3StorageConfiguration?
+    end
+
+    class S3DestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_freshness_in_seconds: Integer,
+        ?dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration,
+        ?storage_configuration: Types::S3StorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_freshness_in_seconds: Integer?
+      attr_accessor dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration?
+      attr_accessor storage_configuration: Types::S3StorageConfiguration?
+    end
+
+    class S3DestinationUpdateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_freshness_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_freshness_in_seconds: Integer?
+    end
+
+    module S3StorageClass
+      STANDARD: String
+      INTELLIGENT_TIERING: String
+      GLACIER_IR: String
+    end
+
+    class S3StorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?expected_bucket_owner: String,
+        ?output_key_template: String,
+        ?storage_class: String,
+        ?compression_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor expected_bucket_owner: String?
+      attr_accessor output_key_template: String?
+      attr_accessor storage_class: String?
+      attr_accessor compression_type: String?
+    end
+
+    module S3TablesCompressionType
+      NONE: String
+      ZSTD: String
+      SNAPPY: String
+    end
+
+    class S3TablesConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?table_name: String,
+        ?compression_type: String,
+        ?partition_spec: Types::PartitionSpec,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor table_name: String?
+      attr_accessor compression_type: String?
+      attr_accessor partition_spec: Types::PartitionSpec?
+    end
+
+    class S3TablesDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_freshness_in_seconds: Integer,
+        ?dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration,
+        ?s3_tables_configuration_list: Array[Types::S3TablesConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_freshness_in_seconds: Integer?
+      attr_accessor dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration?
+      attr_accessor s3_tables_configuration_list: Array[Types::S3TablesConfiguration]?
+    end
+
+    class S3TablesDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_freshness_in_seconds: Integer,
+        ?dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration,
+        ?s3_tables_configuration_list: Array[Types::S3TablesConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_freshness_in_seconds: Integer?
+      attr_accessor dead_letter_queue_s3_configuration: Types::DeadLetterQueueS3Configuration?
+      attr_accessor s3_tables_configuration_list: Array[Types::S3TablesConfiguration]?
+    end
+
+    class S3TablesDestinationUpdateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_freshness_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_freshness_in_seconds: Integer?
     end
 
     module ScalingType
@@ -1034,6 +1654,7 @@ module Aws::Kinesis
         ?shard_to_split: String,
         ?new_starting_hash_key: String,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1041,6 +1662,7 @@ module Aws::Kinesis
       attr_accessor shard_to_split: String?
       attr_accessor new_starting_hash_key: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class StartStreamEncryptionInput
@@ -1051,6 +1673,7 @@ module Aws::Kinesis
         ?encryption_type: String,
         ?key_id: String,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1058,6 +1681,7 @@ module Aws::Kinesis
       attr_accessor encryption_type: String?
       attr_accessor key_id: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class StartingPosition
@@ -1083,6 +1707,7 @@ module Aws::Kinesis
         ?encryption_type: String,
         ?key_id: String,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1090,6 +1715,7 @@ module Aws::Kinesis
       attr_accessor encryption_type: String?
       attr_accessor key_id: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class StreamDescription
@@ -1129,6 +1755,7 @@ module Aws::Kinesis
       def initialize: (
         ?stream_name: String,
         ?stream_arn: String,
+        ?stream_id: String,
         ?stream_status: String,
         ?stream_mode_details: Types::StreamModeDetails,
         ?retention_period_hours: Integer,
@@ -1138,11 +1765,16 @@ module Aws::Kinesis
         ?key_id: String,
         ?open_shard_count: Integer,
         ?consumer_count: Integer,
+        ?warm_throughput: Types::WarmThroughputObject,
+        ?max_record_size_in_ki_b: Integer,
+        ?channel_count: Integer,
+        ?record_distribution_strategy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_name: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
       attr_accessor stream_status: String?
       attr_accessor stream_mode_details: Types::StreamModeDetails?
       attr_accessor retention_period_hours: Integer?
@@ -1152,6 +1784,23 @@ module Aws::Kinesis
       attr_accessor key_id: String?
       attr_accessor open_shard_count: Integer?
       attr_accessor consumer_count: Integer?
+      attr_accessor warm_throughput: Types::WarmThroughputObject?
+      attr_accessor max_record_size_in_ki_b: Integer?
+      attr_accessor channel_count: Integer?
+      attr_accessor record_distribution_strategy: String?
+    end
+
+    class StreamFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_creation_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_creation_timestamp: Time?
     end
 
     module StreamMode
@@ -1270,14 +1919,18 @@ module Aws::Kinesis
 
       def initialize: (
         ?consumer_arn: String,
+        ?stream_id: String,
         ?shard_id: String,
         ?starting_position: Types::StartingPosition,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor consumer_arn: String?
+      attr_accessor stream_id: String?
       attr_accessor shard_id: String?
       attr_accessor starting_position: Types::StartingPosition?
+      attr_accessor dry_run: bool?
     end
 
     class SubscribeToShardOutput
@@ -1310,11 +1963,13 @@ module Aws::Kinesis
       def initialize: (
         ?tags: Hash[String, String],
         ?resource_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tags: Hash[String, String]?
       attr_accessor resource_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class UntagResourceInput
@@ -1323,11 +1978,78 @@ module Aws::Kinesis
       def initialize: (
         ?tag_keys: Array[String],
         ?resource_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tag_keys: Array[String]?
       attr_accessor resource_arn: String?
+      attr_accessor stream_id: String?
+    end
+
+    class UpdateAccountSettingsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_throughput_billing_commitment: Types::MinimumThroughputBillingCommitmentInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_throughput_billing_commitment: Types::MinimumThroughputBillingCommitmentInput?
+    end
+
+    class UpdateAccountSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_throughput_billing_commitment: Types::MinimumThroughputBillingCommitmentOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_throughput_billing_commitment: Types::MinimumThroughputBillingCommitmentOutput?
+    end
+
+    class UpdateChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?s3_destination_configuration: Types::S3DestinationUpdateInput,
+        ?s3_tables_destination_configuration: Types::S3TablesDestinationUpdateInput,
+        ?logging_configuration: Types::ChannelLoggingUpdateInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor s3_destination_configuration: Types::S3DestinationUpdateInput?
+      attr_accessor s3_tables_destination_configuration: Types::S3TablesDestinationUpdateInput?
+      attr_accessor logging_configuration: Types::ChannelLoggingUpdateInput?
+    end
+
+    class UpdateChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_description: Types::ChannelDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_description: Types::ChannelDescription?
+    end
+
+    class UpdateMaxRecordSizeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_id: String,
+        ?max_record_size_in_ki_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
+      attr_accessor max_record_size_in_ki_b: Integer?
     end
 
     class UpdateShardCountInput
@@ -1338,6 +2060,7 @@ module Aws::Kinesis
         ?target_shard_count: Integer,
         ?scaling_type: String,
         ?stream_arn: String,
+        ?stream_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1345,6 +2068,7 @@ module Aws::Kinesis
       attr_accessor target_shard_count: Integer?
       attr_accessor scaling_type: String?
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
     end
 
     class UpdateShardCountOutput
@@ -1369,12 +2093,63 @@ module Aws::Kinesis
 
       def initialize: (
         ?stream_arn: String,
+        ?stream_id: String,
         ?stream_mode_details: Types::StreamModeDetails,
+        ?warm_throughput_mi_bps: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
       attr_accessor stream_mode_details: Types::StreamModeDetails?
+      attr_accessor warm_throughput_mi_bps: Integer?
+    end
+
+    class UpdateStreamRecordDistributionStrategyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_id: String,
+        ?record_distribution_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_id: String?
+      attr_accessor record_distribution_strategy: String?
+    end
+
+    class UpdateStreamWarmThroughputInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_name: String,
+        ?stream_id: String,
+        ?warm_throughput_mi_bps: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_name: String?
+      attr_accessor stream_id: String?
+      attr_accessor warm_throughput_mi_bps: Integer?
+    end
+
+    class UpdateStreamWarmThroughputOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_name: String,
+        ?warm_throughput: Types::WarmThroughputObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_name: String?
+      attr_accessor warm_throughput: Types::WarmThroughputObject?
     end
 
     class ValidationException
@@ -1386,6 +2161,19 @@ module Aws::Kinesis
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class WarmThroughputObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_mi_bps: Integer,
+        ?current_mi_bps: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_mi_bps: Integer?
+      attr_accessor current_mi_bps: Integer?
     end
   end
 end

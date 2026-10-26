@@ -144,18 +144,18 @@ module Aws::SFN
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -228,9 +228,7 @@ module Aws::SFN
     #          </note>
     # @param [Hash, Types::CreateActivityInput] params
     # @option params [String] :name
-    #   <p>The name of the activity to create. This name must be unique for your Amazon Web Services account and region for 90 days. For more information,
-    #       see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions">
-    #       Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p>
+    #   <p>The name of the activity to create. This name must be unique for your Amazon Web Services account and region.</p>
     #            <p>A name must <i>not</i> contain:</p>
     #            <ul>
     #               <li>
@@ -1017,9 +1015,6 @@ module Aws::SFN
     #       an execution of a task of this type is needed.) The maximum time the service holds on to the
     #       request before responding is 60 seconds. If no task is available within 60 seconds, the poll
     #       returns a <code>taskToken</code> with a null string.</p>
-    #          <note>
-    #             <p>This API action isn't logged in CloudTrail.</p>
-    #          </note>
     #          <important>
     #             <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds
     #         higher than the maximum time the service may hold the poll request).</p>
@@ -1348,14 +1343,13 @@ module Aws::SFN
 
     # <p>Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN. Using this API action, you can also list all <a href="https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html">redriven</a> executions.</p>
     #          <p>You can also provide a state machine <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html">alias</a> ARN or <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html">version</a> ARN to list the executions associated with a specific alias or version.</p>
-    #          <p>Results are
-    #       sorted by time, with the most recent execution first.</p>
+    #          <p>Results are sorted by time, with the most recent execution first. Running executions are sorted by their <code>startDate</code> or <code>redriveDate</code>, and other executions are sorted by their <code>stopDate</code>.</p>
     #          <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.
     #     Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>
     #          <note>
     #             <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>
     #          </note>
-    #          <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>
+    #          <p>This API action is not supported by <code>EXPRESS</code> state machines. However, you may list <code>EXPRESS</code> children started by a map run using the <code>mapRunArn</code> parameter.</p>
     # @param [Hash, Types::ListExecutionsInput] params
     # @option params [String] :state_machine_arn
     #   <p>The Amazon Resource Name (ARN) of the state machine whose executions is listed.</p>
@@ -1364,7 +1358,7 @@ module Aws::SFN
     # @option params [String] :status_filter
     #   <p>If specified, only list the executions whose current execution status matches the given
     #         filter.</p>
-    #            <p>If you provide a <code>PENDING_REDRIVE</code> statusFilter, you must specify <code>mapRunArn</code>. 
+    #            <p>If you provide a <code>PENDING_REDRIVE</code> statusFilter, you must specify <code>mapRunArn</code>.
     #         For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html#redrive-child-workflow-behavior">Child workflow execution redrive behaviour</a>
     #         in the <i>Step Functions Developer Guide</i>.
     #       </p>
@@ -1884,7 +1878,7 @@ module Aws::SFN
     #           <code>STANDARD</code> workflow, if you call <code>StartExecution</code> with the same name
     #         and input as a running execution, the call succeeds and return the same response as the
     #         original request. If the execution is closed or if the input is different, it returns a
-    #           <code>400 ExecutionAlreadyExists</code> error. You can reuse names after 90 days. </p>
+    #           <code>400 ExecutionAlreadyExists</code> error. You can reuse the name 90 days after it closes. </p>
     #             <p>
     #                <code>StartExecution</code> isn't idempotent for <code>EXPRESS</code> workflows. </p>
     #          </note>
@@ -1921,8 +1915,10 @@ module Aws::SFN
     #               </li>
     #            </ul>
     # @option params [String] :name
-    #   <p>Optional name of the execution. This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information,
-    #       see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions">
+    #   <p>Optional name of the execution. For STANDARD workflows, this name must be unique for your Amazon Web Services account, region, and state machine.
+    #       If a previous execution with the same name exists, you can reuse the name 90 days after it closes.  For EXPRESS workflows, execution names
+    #       can be reused immediately.
+    #       For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions">
     #       Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p>
     #            <p>If you don't provide a name for the execution, Step Functions automatically generates a universally unique identifier (UUID) as the execution name.</p>
     #            <p>A name must <i>not</i> contain:</p>
@@ -1993,7 +1989,7 @@ module Aws::SFN
       request.send_request(options)
     end
 
-    # <p>Starts a Synchronous Express state machine execution. <code>StartSyncExecution</code> 
+    # <p>Starts a Synchronous Express state machine execution. <code>StartSyncExecution</code>
     # 			  is not available for <code>STANDARD</code> workflows.</p>
     #          <note>
     #             <p>
@@ -2002,9 +1998,6 @@ module Aws::SFN
     #         errors. Error codes are reserved for errors that prevent your execution from running, such
     #         as permissions errors, limit errors, or issues with your state machine code and
     #         configuration. </p>
-    #          </note>
-    #          <note>
-    #             <p>This API action isn't logged in CloudTrail.</p>
     #          </note>
     # @param [Hash, Types::StartSyncExecutionInput] params
     # @option params [String] :state_machine_arn
@@ -2184,11 +2177,11 @@ module Aws::SFN
     #          <p>The <code>TestState</code> API assumes an IAM role which must contain the required IAM permissions for the resources your state is accessing. For information about the permissions a state might need, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions">IAM permissions to test a state</a>.</p>
     #          <p>The <code>TestState</code> API can run for up to five minutes. If the execution of a state exceeds this duration, it fails with the <code>States.Timeout</code> error.</p>
     #          <p>
-    #             <code>TestState</code> doesn't support <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html">Activity tasks</a>, <code>.sync</code> or <code>.waitForTaskToken</code>
+    #             <code>TestState</code> only supports the following when a mock is specified: <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html">Activity tasks</a>, <code>.sync</code> or <code>.waitForTaskToken</code>
     #             <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html">service integration patterns</a>, <a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html">Parallel</a>, or <a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html">Map</a> states.</p>
     # @param [Hash, Types::TestStateInput] params
     # @option params [String] :definition
-    #   <p>The <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a> (ASL) definition of the state.</p>
+    #   <p>The <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a> (ASL) definition of the state or state machine.</p>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the execution role with the required IAM permissions for the state.</p>
     # @option params [String] :input
@@ -2216,6 +2209,15 @@ module Aws::SFN
     #            <p>By default, <code>revealSecrets</code> is set to <code>false</code>.</p>
     # @option params [String] :variables
     #   <p>JSON object literal that sets variables used in the state under test. Object keys are the variable names and values are the variable values.</p>
+    # @option params [String] :state_name
+    #   <p>Denotes the particular state within a state machine definition to be tested. If this field is specified, the <code>definition</code> must contain a fully-formed state machine definition.</p>
+    # @option params [Types::MockInput] :mock
+    #   <p>Defines a mocked result or error for the state under test.</p>
+    #            <p>A mock can only be specified for Task, Map, or Parallel states. If it is specified for another state type, an exception will be thrown.</p>
+    # @option params [String] :context
+    #   <p>A JSON string representing a valid Context object for the state under test. This field may only be specified if a mock is specified in the same request.</p>
+    # @option params [Types::TestStateConfiguration] :state_configuration
+    #   <p>Contains configurations for the state under test.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     definition: "Definition", # required
@@ -2223,7 +2225,23 @@ module Aws::SFN
     #     input: "SensitiveData",
     #     inspection_level: "INFO" # One of: ["INFO", "DEBUG", "TRACE"],
     #     reveal_secrets: false,
-    #     variables: "SensitiveData"
+    #     variables: "SensitiveData",
+    #     state_name: "TestStateStateName",
+    #     mock: {
+    #       result: "SensitiveData",
+    #       error_output: {
+    #         error: "SensitiveError",
+    #         cause: "SensitiveCause"
+    #       },
+    #       field_validation_mode: "STRICT" # One of: ["STRICT", "PRESENT", "NONE"]
+    #     },
+    #     context: "SensitiveData",
+    #     state_configuration: {
+    #       retrier_retry_count: 1,
+    #       error_caused_by_state: "TestStateStateName",
+    #       map_iteration_failure_count: 1,
+    #       map_item_reader_data: "SensitiveData"
+    #     }
     #   }
     #   options = {}
     #   response = client.test_state(params, options)
@@ -2255,7 +2273,19 @@ module Aws::SFN
     #         headers: "HTTPHeaders",
     #         body: "HTTPBody"
     #       },
-    #       variables: "SensitiveData"
+    #       variables: "SensitiveData",
+    #       error_details: {
+    #         catch_index: 1,
+    #         retry_index: 1,
+    #         retry_backoff_interval_seconds: 1
+    #       },
+    #       after_items_path: "SensitiveData",
+    #       after_item_selector: "SensitiveData",
+    #       after_item_batcher: "SensitiveData",
+    #       after_items_pointer: "SensitiveData",
+    #       tolerated_failure_count: 1,
+    #       tolerated_failure_percentage: 1.0,
+    #       max_concurrency: 1
     #     },
     #     next_state: "StateName",
     #     status: "SUCCEEDED" # One of: ["SUCCEEDED", "FAILED", "RETRIABLE", "CAUGHT_ERROR"]

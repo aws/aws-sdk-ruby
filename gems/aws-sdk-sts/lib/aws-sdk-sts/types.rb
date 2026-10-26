@@ -22,9 +22,9 @@ module Aws::STS
     #            assume the role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_rolesessionname">
     #                  <code>sts:RoleSessionName</code>
     #               </a>.</p>
-    #            <p>The regex used to validate this parameter is a string of characters 
-    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can 
-    #       also include underscores or any of the following characters: =,.@-</p>
+    #            <p>The regex used to validate this parameter is a string of
+    #       characters consisting of upper- and lower-case alphanumeric characters with no spaces.
+    #       You can also include underscores or any of the following characters: +=,.@-</p>
     #   @return [String]
     # @!attribute policy_arns
     #   <p>The Amazon Resource Names (ARNs) of the IAM managed policies that you want to use as
@@ -40,22 +40,22 @@ module Aws::STS
     #                  <code>PackedPolicySize</code> response element indicates by percentage how close the
     #               policies and tags for your request are to the upper size limit.</p>
     #            </note>
-    #            <p>Passing policies to this operation returns new 
-    #            temporary credentials. The resulting session's permissions are the intersection of the 
-    #            role's identity-based policy and the session policies. You can use the role's temporary 
-    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns 
-    #            the role. You cannot use session policies to grant more permissions than those allowed 
+    #            <p>Passing policies to this operation returns new
+    #            temporary credentials. The resulting session's permissions are the intersection of the
+    #            role's identity-based policy and the session policies. You can use the role's temporary
+    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns
+    #            the role. You cannot use session policies to grant more permissions than those allowed
     #            by the identity-based policy of the role that is being assumed. For more information, see
     #               <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
     #               Policies</a> in the <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::PolicyDescriptorType>]
     # @!attribute policy
     #   <p>An IAM policy in JSON format that you want to use as an inline session policy.</p>
-    #            <p>This parameter is optional. Passing policies to this operation returns new 
-    #            temporary credentials. The resulting session's permissions are the intersection of the 
-    #            role's identity-based policy and the session policies. You can use the role's temporary 
-    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns 
-    #            the role. You cannot use session policies to grant more permissions than those allowed 
+    #            <p>This parameter is optional. Passing policies to this operation returns new
+    #            temporary credentials. The resulting session's permissions are the intersection of the
+    #            role's identity-based policy and the session policies. You can use the role's temporary
+    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns
+    #            the role. You cannot use session policies to grant more permissions than those allowed
     #            by the identity-based policy of the role that is being assumed. For more information, see
     #               <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
     #               Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -149,9 +149,9 @@ module Aws::STS
     #            about the external ID, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html">How to Use an External ID
     #               When Granting Access to Your Amazon Web Services Resources to a Third Party</a> in the
     #               <i>IAM User Guide</i>.</p>
-    #            <p>The regex used to validate this parameter is a string of 
-    #       characters consisting of upper- and lower-case alphanumeric characters with no spaces. 
-    #       You can also include underscores or any of the following characters: =,.@:/-</p>
+    #            <p>The regex used to validate this parameter is a string of
+    #       characters consisting of upper- and lower-case alphanumeric characters with no spaces.
+    #       You can also include underscores or any of the following characters: +=,.@:\/-</p>
     #   @return [String]
     # @!attribute serial_number
     #   <p>The identification number of the MFA device that is associated with the user who is
@@ -160,9 +160,9 @@ module Aws::STS
     #            the serial number for a hardware device (such as <code>GAHT12345678</code>) or an Amazon
     #            Resource Name (ARN) for a virtual device (such as
     #               <code>arn:aws:iam::123456789012:mfa/user</code>).</p>
-    #            <p>The regex used to validate this parameter is a string of characters 
-    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can 
-    #       also include underscores or any of the following characters: =,.@-</p>
+    #            <p>The regex used to validate this parameter is a string of
+    #       characters consisting of upper- and lower-case alphanumeric characters with no spaces.
+    #       You can also include underscores or any of the following characters: +=/:,.@-</p>
     #   @return [String]
     # @!attribute token_code
     #   <p>The value provided by the MFA device, if the trust policy of the role being assumed
@@ -200,6 +200,11 @@ module Aws::STS
     #               <code>[{"ProviderArn":"arn:aws:iam::aws:contextProvider/IdentityCenter","ContextAssertion":"trusted-context-assertion"}]</code>
     #            </p>
     #   @return [Array<Types::ProvidedContext>]
+    # @!attribute minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for the request. STS increases
+    #       the session token to at least this size, regardless of its actual content. The value must not
+    #       exceed 4,096 bytes. When set to 0 or not specified, the session token size is unchanged.
+    #   @return [Integer]
     class AssumeRoleRequest < Struct.new(
       nil,
       :role_arn,
@@ -214,6 +219,7 @@ module Aws::STS
       :token_code,
       :source_identity,
       :provided_contexts,
+      :minimum_session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -237,9 +243,12 @@ module Aws::STS
     #            when you called <code>AssumeRole</code>. </p>
     #   @return [Types::AssumedRoleUser]
     # @!attribute packed_policy_size
-    #   <p>A percentage value that indicates the packed size of the session policies and session 
-    #         tags combined passed in the request. The request fails if the packed size is greater than 100 percent, 
+    #   <p>A percentage value that indicates the packed size of the session policies and session
+    #         tags combined passed in the request. The request fails if the packed size is greater than 100 percent,
     #         which means the policies and tags exceeded the allowed space.</p>
+    #   @deprecated
+    #     Deprecated. Replaced by SessionTokenUtilization.
+    #     Since: 2026-06-17
     #   @return [Integer]
     # @!attribute source_identity
     #   <p>The source identity specified by the principal that is calling the
@@ -256,12 +265,21 @@ module Aws::STS
     #            and lower-case alphanumeric characters with no spaces. You can also include underscores or
     #            any of the following characters: =,.@-</p>
     #   @return [String]
+    # @!attribute session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size that the returned session
+    #       token consumes.
+    #   @return [Integer]
+    # @!attribute session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials for this response.
+    #   @return [Integer]
     class AssumeRoleResponse < Struct.new(
       nil,
       :credentials,
       :assumed_role_user,
       :packed_policy_size,
       :source_identity,
+      :session_token_utilization,
+      :session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -293,22 +311,22 @@ module Aws::STS
     #                  <code>PackedPolicySize</code> response element indicates by percentage how close the
     #               policies and tags for your request are to the upper size limit.</p>
     #            </note>
-    #            <p>Passing policies to this operation returns new 
-    #            temporary credentials. The resulting session's permissions are the intersection of the 
-    #            role's identity-based policy and the session policies. You can use the role's temporary 
-    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns 
-    #            the role. You cannot use session policies to grant more permissions than those allowed 
+    #            <p>Passing policies to this operation returns new
+    #            temporary credentials. The resulting session's permissions are the intersection of the
+    #            role's identity-based policy and the session policies. You can use the role's temporary
+    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns
+    #            the role. You cannot use session policies to grant more permissions than those allowed
     #            by the identity-based policy of the role that is being assumed. For more information, see
     #               <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
     #               Policies</a> in the <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::PolicyDescriptorType>]
     # @!attribute policy
     #   <p>An IAM policy in JSON format that you want to use as an inline session policy.</p>
-    #            <p>This parameter is optional. Passing policies to this operation returns new 
-    #            temporary credentials. The resulting session's permissions are the intersection of the 
-    #            role's identity-based policy and the session policies. You can use the role's temporary 
-    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns 
-    #            the role. You cannot use session policies to grant more permissions than those allowed 
+    #            <p>This parameter is optional. Passing policies to this operation returns new
+    #            temporary credentials. The resulting session's permissions are the intersection of the
+    #            role's identity-based policy and the session policies. You can use the role's temporary
+    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns
+    #            the role. You cannot use session policies to grant more permissions than those allowed
     #            by the identity-based policy of the role that is being assumed. For more information, see
     #               <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
     #               Policies</a> in the <i>IAM User Guide</i>. </p>
@@ -350,6 +368,11 @@ module Aws::STS
     #                  <i>IAM User Guide</i>.</p>
     #            </note>
     #   @return [Integer]
+    # @!attribute minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for the request. STS increases
+    #       the session token to at least this size, regardless of its actual content. The value must not
+    #       exceed 4,096 bytes. When set to 0 or not specified, the session token size is unchanged.
+    #   @return [Integer]
     class AssumeRoleWithSAMLRequest < Struct.new(
       nil,
       :role_arn,
@@ -358,6 +381,7 @@ module Aws::STS
       :policy_arns,
       :policy,
       :duration_seconds,
+      :minimum_session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -378,9 +402,12 @@ module Aws::STS
     #            returns.</p>
     #   @return [Types::AssumedRoleUser]
     # @!attribute packed_policy_size
-    #   <p>A percentage value that indicates the packed size of the session policies and session 
-    #         tags combined passed in the request. The request fails if the packed size is greater than 100 percent, 
+    #   <p>A percentage value that indicates the packed size of the session policies and session
+    #         tags combined passed in the request. The request fails if the packed size is greater than 100 percent,
     #         which means the policies and tags exceeded the allowed space.</p>
+    #   @deprecated
+    #     Deprecated. Replaced by SessionTokenUtilization.
+    #     Since: 2026-06-17
     #   @return [Integer]
     # @!attribute subject
     #   <p>The value of the <code>NameID</code> element in the <code>Subject</code> element of the
@@ -438,10 +465,17 @@ module Aws::STS
     #            assertion. For more information about using source identity, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html">Monitor and control
     #               actions taken with assumed roles</a> in the
     #            <i>IAM User Guide</i>.</p>
-    #            <p>The regex used to validate this parameter is a string of characters 
-    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can 
+    #            <p>The regex used to validate this parameter is a string of characters
+    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can
     #       also include underscores or any of the following characters: =,.@-</p>
     #   @return [String]
+    # @!attribute session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size that the returned session
+    #       token consumes.
+    #   @return [Integer]
+    # @!attribute session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials for this response.
+    #   @return [Integer]
     class AssumeRoleWithSAMLResponse < Struct.new(
       nil,
       :credentials,
@@ -453,6 +487,8 @@ module Aws::STS
       :audience,
       :name_qualifier,
       :source_identity,
+      :session_token_utilization,
+      :session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -482,8 +518,8 @@ module Aws::STS
     #            assume the role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_rolesessionname">
     #                  <code>sts:RoleSessionName</code>
     #               </a>.</p>
-    #            <p>The regex used to validate this parameter is a string of characters 
-    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can 
+    #            <p>The regex used to validate this parameter is a string of characters
+    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can
     #       also include underscores or any of the following characters: =,.@-</p>
     #   @return [String]
     # @!attribute web_identity_token
@@ -516,22 +552,22 @@ module Aws::STS
     #                  <code>PackedPolicySize</code> response element indicates by percentage how close the
     #               policies and tags for your request are to the upper size limit.</p>
     #            </note>
-    #            <p>Passing policies to this operation returns new 
-    #            temporary credentials. The resulting session's permissions are the intersection of the 
-    #            role's identity-based policy and the session policies. You can use the role's temporary 
-    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns 
-    #            the role. You cannot use session policies to grant more permissions than those allowed 
+    #            <p>Passing policies to this operation returns new
+    #            temporary credentials. The resulting session's permissions are the intersection of the
+    #            role's identity-based policy and the session policies. You can use the role's temporary
+    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns
+    #            the role. You cannot use session policies to grant more permissions than those allowed
     #            by the identity-based policy of the role that is being assumed. For more information, see
     #               <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
     #               Policies</a> in the <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::PolicyDescriptorType>]
     # @!attribute policy
     #   <p>An IAM policy in JSON format that you want to use as an inline session policy.</p>
-    #            <p>This parameter is optional. Passing policies to this operation returns new 
-    #            temporary credentials. The resulting session's permissions are the intersection of the 
-    #            role's identity-based policy and the session policies. You can use the role's temporary 
-    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns 
-    #            the role. You cannot use session policies to grant more permissions than those allowed 
+    #            <p>This parameter is optional. Passing policies to this operation returns new
+    #            temporary credentials. The resulting session's permissions are the intersection of the
+    #            role's identity-based policy and the session policies. You can use the role's temporary
+    #            credentials in subsequent Amazon Web Services API calls to access resources in the account that owns
+    #            the role. You cannot use session policies to grant more permissions than those allowed
     #            by the identity-based policy of the role that is being assumed. For more information, see
     #               <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
     #               Policies</a> in the <i>IAM User Guide</i>.</p>
@@ -570,6 +606,11 @@ module Aws::STS
     #                  <i>IAM User Guide</i>.</p>
     #            </note>
     #   @return [Integer]
+    # @!attribute minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for the request. STS increases
+    #       the session token to at least this size, regardless of its actual content. The value must not
+    #       exceed 4,096 bytes. When set to 0 or not specified, the session token size is unchanged.
+    #   @return [Integer]
     class AssumeRoleWithWebIdentityRequest < Struct.new(
       nil,
       :role_arn,
@@ -579,6 +620,7 @@ module Aws::STS
       :policy_arns,
       :policy,
       :duration_seconds,
+      :minimum_session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -610,9 +652,12 @@ module Aws::STS
     #            when you called <code>AssumeRole</code>. </p>
     #   @return [Types::AssumedRoleUser]
     # @!attribute packed_policy_size
-    #   <p>A percentage value that indicates the packed size of the session policies and session 
-    #         tags combined passed in the request. The request fails if the packed size is greater than 100 percent, 
+    #   <p>A percentage value that indicates the packed size of the session policies and session
+    #         tags combined passed in the request. The request fails if the packed size is greater than 100 percent,
     #         which means the policies and tags exceeded the allowed space.</p>
+    #   @deprecated
+    #     Deprecated. Replaced by SessionTokenUtilization.
+    #     Since: 2026-06-17
     #   @return [Integer]
     # @!attribute provider
     #   <p> The issuing authority of the web identity token presented. For OpenID Connect ID
@@ -640,10 +685,17 @@ module Aws::STS
     #            For more information about using source identity, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html">Monitor and control
     #               actions taken with assumed roles</a> in the
     #            <i>IAM User Guide</i>.</p>
-    #            <p>The regex used to validate this parameter is a string of characters 
-    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can 
+    #            <p>The regex used to validate this parameter is a string of characters
+    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can
     #       also include underscores or any of the following characters: =,.@-</p>
     #   @return [String]
+    # @!attribute session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size that the returned session
+    #       token consumes.
+    #   @return [Integer]
+    # @!attribute session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials for this response.
+    #   @return [Integer]
     class AssumeRoleWithWebIdentityResponse < Struct.new(
       nil,
       :credentials,
@@ -653,6 +705,8 @@ module Aws::STS
       :provider,
       :audience,
       :source_identity,
+      :session_token_utilization,
+      :session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -663,8 +717,10 @@ module Aws::STS
     #   @return [String]
     # @!attribute task_policy_arn
     #   <p>The identity based policy that scopes the session to the privileged tasks that can be
-    #            performed. You can use one of following Amazon Web Services managed policies to scope root session
-    #            actions.</p>
+    #            performed. You must
+    #
+    #            use one of following Amazon Web Services managed policies to scope root session
+    #            actions:</p>
     #            <ul>
     #               <li>
     #                  <p>
@@ -699,11 +755,17 @@ module Aws::STS
     #            higher than this setting, the operation fails.</p>
     #            <p>By default, the value is set to <code>900</code> seconds.</p>
     #   @return [Integer]
+    # @!attribute minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for the request. STS increases
+    #       the session token to at least this size, regardless of its actual content. The value must not
+    #       exceed 4,096 bytes. When set to 0 or not specified, the session token size is unchanged.
+    #   @return [Integer]
     class AssumeRootRequest < Struct.new(
       nil,
       :target_principal,
       :task_policy_arn,
       :duration_seconds,
+      :minimum_session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -728,10 +790,19 @@ module Aws::STS
     #            and lower-case alphanumeric characters with no spaces. You can also include underscores or
     #            any of the following characters: =,.@-</p>
     #   @return [String]
+    # @!attribute session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size that the returned session
+    #       token consumes.
+    #   @return [Integer]
+    # @!attribute session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials for this response.
+    #   @return [Integer]
     class AssumeRootResponse < Struct.new(
       nil,
       :credentials,
       :source_identity,
+      :session_token_utilization,
+      :session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -818,6 +889,18 @@ module Aws::STS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The trade-in token provided in the request has expired and can no longer be exchanged
+    #             for credentials. Request a new token and retry the operation.</p>
+    # @!attribute message
+    #   @return [String]
+    class ExpiredTradeInTokenException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Identifiers for the federated user that is associated with the credentials.</p>
     # @!attribute federated_user_id
     #   <p>The string that identifies the federated user associated with the credentials, similar
@@ -893,12 +976,50 @@ module Aws::STS
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute trade_in_token
+    #   <p>The token to exchange for temporary Amazon Web Services credentials. This token must be valid and
+    #            unexpired at the time of the request.</p>
+    #   @return [String]
+    class GetDelegatedAccessTokenRequest < Struct.new(
+      nil,
+      :trade_in_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute credentials
+    #   <p>Amazon Web Services credentials for API authentication.</p>
+    #   @return [Types::Credentials]
+    # @!attribute packed_policy_size
+    #   <p>The percentage of the maximum policy size that is used by the session policy. The policy
+    #            size is calculated as the sum of all the session policies and permission boundaries
+    #            attached to the session. If the packed size exceeds 100%, the request fails.</p>
+    #   @deprecated
+    #     Deprecated. This field is not populated for GetDelegatedAccessToken.
+    #     Since: 2026-06-17
+    #   @return [Integer]
+    # @!attribute assumed_principal
+    #   <p>The Amazon Resource Name (ARN) of the principal that was assumed when obtaining the
+    #            delegated access token. This ARN identifies the IAM entity whose permissions are granted
+    #            by the temporary credentials.</p>
+    #   @return [String]
+    class GetDelegatedAccessTokenResponse < Struct.new(
+      nil,
+      :credentials,
+      :packed_policy_size,
+      :assumed_principal,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of the federated user. The name is used as an identifier for the temporary
     #            security credentials (such as <code>Bob</code>). For example, you can reference the
     #            federated user name in a resource-based policy, such as in an Amazon S3 bucket policy.</p>
-    #            <p>The regex used to validate this parameter is a string of characters 
-    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can 
+    #            <p>The regex used to validate this parameter is a string of characters
+    #       consisting of upper- and lower-case alphanumeric characters with no spaces. You can
     #       also include underscores or any of the following characters: =,.@-</p>
     #   @return [String]
     # @!attribute policy
@@ -996,6 +1117,11 @@ module Aws::STS
     #            and <code>department</code> are not saved as separate tags, and the session tag passed in
     #            the request takes precedence over the role tag.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for the request. STS increases
+    #       the session token to at least this size, regardless of its actual content. The value must not
+    #       exceed 4,096 bytes. When set to 0 or not specified, the session token size is unchanged.
+    #   @return [Integer]
     class GetFederationTokenRequest < Struct.new(
       nil,
       :name,
@@ -1003,6 +1129,7 @@ module Aws::STS
       :policy_arns,
       :duration_seconds,
       :tags,
+      :minimum_session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1025,15 +1152,27 @@ module Aws::STS
     #            resource-based policies, such as an Amazon S3 bucket policy. </p>
     #   @return [Types::FederatedUser]
     # @!attribute packed_policy_size
-    #   <p>A percentage value that indicates the packed size of the session policies and session 
-    #         tags combined passed in the request. The request fails if the packed size is greater than 100 percent, 
+    #   <p>A percentage value that indicates the packed size of the session policies and session
+    #         tags combined passed in the request. The request fails if the packed size is greater than 100 percent,
     #         which means the policies and tags exceeded the allowed space.</p>
+    #   @deprecated
+    #     Deprecated. Replaced by SessionTokenUtilization.
+    #     Since: 2026-06-17
+    #   @return [Integer]
+    # @!attribute session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size that the returned session
+    #       token consumes.
+    #   @return [Integer]
+    # @!attribute session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials for this response.
     #   @return [Integer]
     class GetFederationTokenResponse < Struct.new(
       nil,
       :credentials,
       :federated_user,
       :packed_policy_size,
+      :session_token_utilization,
+      :session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1052,8 +1191,8 @@ module Aws::STS
     #            either the serial number for a hardware device (such as <code>GAHT12345678</code>) or an
     #            Amazon Resource Name (ARN) for a virtual device (such as
     #               <code>arn:aws:iam::123456789012:mfa/user</code>). You can find the device for an IAM user by going to the Amazon Web Services Management Console and viewing the user's security credentials. </p>
-    #            <p>The regex used to validate this parameter is a string of 
-    #       characters consisting of upper- and lower-case alphanumeric characters with no spaces. 
+    #            <p>The regex used to validate this parameter is a string of
+    #       characters consisting of upper- and lower-case alphanumeric characters with no spaces.
     #       You can also include underscores or any of the following characters: =,.@:/-</p>
     #   @return [String]
     # @!attribute token_code
@@ -1065,11 +1204,17 @@ module Aws::STS
     #            <p>The format for this parameter, as described by its regex pattern, is a sequence of six
     #            numeric digits.</p>
     #   @return [String]
+    # @!attribute minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for the request. STS increases
+    #       the session token to at least this size, regardless of its actual content. The value must not
+    #       exceed 4,096 bytes. When set to 0 or not specified, the session token size is unchanged.
+    #   @return [Integer]
     class GetSessionTokenRequest < Struct.new(
       nil,
       :duration_seconds,
       :serial_number,
       :token_code,
+      :minimum_session_token_size,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1085,9 +1230,69 @@ module Aws::STS
     #           strongly recommend that you make no assumptions about the maximum size.</p>
     #            </note>
     #   @return [Types::Credentials]
+    # @!attribute session_token_utilization
+    #   The percentage (0-100) of the maximum allowed session token size that the returned session
+    #       token consumes.
+    #   @return [Integer]
+    # @!attribute session_token_size
+    #   The size, in bytes, of the session token returned in the Credentials for this response.
+    #   @return [Integer]
     class GetSessionTokenResponse < Struct.new(
       nil,
       :credentials,
+      :session_token_utilization,
+      :session_token_size,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute audience
+    #   <p>The intended recipient of the web identity token. This value populates the
+    #               <code>aud</code> claim in the JWT and should identify the service or application that
+    #            will validate and use the token. The external service should verify this claim to ensure the token was intended for their use.</p>
+    #   @return [Array<String>]
+    # @!attribute duration_seconds
+    #   <p>The duration, in seconds, for which the JSON Web Token (JWT) will remain valid.
+    #            The value can range from 60 seconds (1 minute) to 3600 seconds (1 hour). If not specified,
+    #            the default duration is 300 seconds (5 minutes). The token is designed to be short-lived and
+    #            should be used for proof of identity, then exchanged for credentials or short-lived tokens in the external service.</p>
+    #   @return [Integer]
+    # @!attribute signing_algorithm
+    #   <p>The cryptographic algorithm to use for signing the JSON Web Token (JWT). Valid values are
+    #            RS256 (RSA with SHA-256) and ES384 (ECDSA using P-384 curve with SHA-384). </p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>An optional list of tags to include in the JSON Web Token (JWT). These tags are added as custom
+    #            claims to the JWT and can be used by the downstream service for authorization decisions. </p>
+    #   @return [Array<Types::Tag>]
+    class GetWebIdentityTokenRequest < Struct.new(
+      nil,
+      :audience,
+      :duration_seconds,
+      :signing_algorithm,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute web_identity_token
+    #   <p>A signed JSON Web Token (JWT) that represents the caller's Amazon Web Services identity. The token contains
+    #            standard JWT claims such as subject, audience, expiration time, and additional identity attributes
+    #            added by STS as custom claims. You can also add your own custom claims to the token by passing tags
+    #            as request parameters to the <code>GetWebIdentityToken</code> API. The token is signed using the specified signing
+    #            algorithm and can be verified using the verification keys available at the issuer's JWKS endpoint.</p>
+    #   @return [String]
+    # @!attribute expiration
+    #   <p>The date and time when the web identity token expires, in UTC. The expiration is
+    #            determined by adding the <code>DurationSeconds</code> value to the time the token was
+    #            issued. After this time, the token should no longer be considered valid.</p>
+    #   @return [Time]
+    class GetWebIdentityTokenResponse < Struct.new(
+      nil,
+      :web_identity_token,
+      :expiration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1147,11 +1352,34 @@ module Aws::STS
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The requested token payload size exceeds the maximum allowed size. Reduce the number of request tags included in the <code>GetWebIdentityToken</code> API call to reduce the token payload size.</p>
+    # @!attribute message
+    #   @return [String]
+    class JWTPayloadSizeExceededException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request was rejected because the policy document was malformed. The error message
     #             describes the specific error.</p>
     # @!attribute message
     #   @return [String]
     class MalformedPolicyDocumentException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The outbound web identity federation feature is not enabled for this account. To use
+    #             this feature, you must first enable it through the Amazon Web Services Management Console or API.</p>
+    # @!attribute message
+    #   @return [String]
+    class OutboundWebIdentityFederationDisabledException < Struct.new(
       nil,
       :message,
       keyword_init: true
@@ -1214,12 +1442,23 @@ module Aws::STS
 
     # <p>STS is not activated in the requested region for the account that is being asked to
     #             generate credentials. The account administrator must use the IAM console to activate
-    #             STS in that region. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and
-    #                 Deactivating STS in an Amazon Web Services Region</a> in the <i>IAM User
-    #                 Guide</i>.</p>
+    #             STS in that region. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-activate-deactivate">Activating and Deactivating STS in an Amazon Web Services Region</a> in the <i>IAM
+    #                 User Guide</i>.</p>
     # @!attribute message
     #   @return [String]
     class RegionDisabledException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The requested token duration would extend the session beyond its original expiration time.
+    #             You cannot use this operation to extend the lifetime of a session beyond what was granted when the session was originally created.</p>
+    # @!attribute message
+    #   @return [String]
+    class SessionDurationEscalationException < Struct.new(
       nil,
       :message,
       keyword_init: true

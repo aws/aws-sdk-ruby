@@ -1,0 +1,89 @@
+module Aws::AgentRegistry
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AgentRegistry::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetDiscoverableRegistryRecordResponse
+      include Smithy::Client::_Response[Types::BatchGetDiscoverableRegistryRecordResponse]
+      def registry_records: () -> Array[Types::RegistryRecordSummary]?
+      def errors: () -> Array[Types::BatchGetDiscoverableRegistryRecordError]?
+    end
+    def batch_get_discoverable_registry_record: (
+      ?entries: Array[
+        {
+          registry_id: String,
+          record_ids: Array[String]
+        }
+      ]
+    ) -> _BatchGetDiscoverableRegistryRecordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDiscoverableRegistryRecordResponse
+
+    interface _ListDiscoverableRegistryRecordsResponse
+      include Smithy::Client::_Response[Types::ListDiscoverableRegistryRecordsResponse]
+      def registry_records: () -> Array[Types::DiscoverableRegistryRecordSummary]?
+      def next_token: () -> String?
+    end
+    def list_discoverable_registry_records: (
+      ?registry_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListDiscoverableRegistryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDiscoverableRegistryRecordsResponse
+
+    interface _SearchDiscoverableRegistryRecordsResponse
+      include Smithy::Client::_Response[Types::SearchDiscoverableRegistryRecordsResponse]
+      def registry_records: () -> Array[Types::RegistryRecordSummary]?
+    end
+    def search_discoverable_registry_records: (
+      ?search_query: String,
+      ?registry_ids: Array[String],
+      ?max_results: Integer,
+      ?filters: Smithy::Schema::document
+    ) -> _SearchDiscoverableRegistryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchDiscoverableRegistryRecordsResponse
+  end
+end

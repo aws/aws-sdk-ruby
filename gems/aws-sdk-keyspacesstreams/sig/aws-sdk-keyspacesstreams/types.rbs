@@ -31,11 +31,13 @@ module Aws::KeyspacesStreams
       def initialize: (
         ?change_records: Array[Types::Record],
         ?next_shard_iterator: String,
+        ?iterator_description: Types::IteratorDescription,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor change_records: Array[Types::Record]?
       attr_accessor next_shard_iterator: String?
+      attr_accessor iterator_description: Types::IteratorDescription?
     end
 
     class GetShardIteratorInput
@@ -121,6 +123,22 @@ module Aws::KeyspacesStreams
       attr_accessor message: String?
     end
 
+    class IteratorDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iterator_position: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iterator_position: String?
+    end
+
+    module IteratorPosition
+      AT_TIP: String
+      BEHIND_TIP: String
+    end
+
     class KeyspacesCell
       include Smithy::Schema::Structure
 
@@ -161,6 +179,7 @@ module Aws::KeyspacesStreams
         ?date_t: String,
         ?decimal_t: String,
         ?double_t: String,
+        ?duration_t: String,
         ?float_t: String,
         ?inet_t: String,
         ?int_t: String,
@@ -189,6 +208,7 @@ module Aws::KeyspacesStreams
       attr_accessor date_t: String?
       attr_accessor decimal_t: String?
       attr_accessor double_t: String?
+      attr_accessor duration_t: String?
       attr_accessor float_t: String?
       attr_accessor inet_t: String?
       attr_accessor int_t: String?
@@ -222,6 +242,8 @@ module Aws::KeyspacesStreams
       class DecimalT < KeyspacesCellValue
       end
       class DoubleT < KeyspacesCellValue
+      end
+      class DurationT < KeyspacesCellValue
       end
       class FloatT < KeyspacesCellValue
       end

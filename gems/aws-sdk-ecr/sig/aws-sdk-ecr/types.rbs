@@ -1,6 +1,19 @@
 module Aws::ECR
   module Types
 
+    module ArtifactStatus
+      ACTIVE: String
+      ARCHIVED: String
+      ACTIVATING: String
+    end
+
+    module ArtifactStatusFilter
+      ACTIVE: String
+      ARCHIVED: String
+      ACTIVATING: String
+      ANY: String
+    end
+
     class Attribute
       include Smithy::Schema::Structure
 
@@ -166,6 +179,17 @@ module Aws::ECR
 
       attr_accessor scanning_configurations: Array[Types::RepositoryScanningConfiguration]?
       attr_accessor failures: Array[Types::RepositoryScanningConfigurationFailure]?
+    end
+
+    class BlockedByOrganizationPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class CompleteLayerUploadRequest
@@ -541,6 +565,50 @@ module Aws::ECR
       attr_accessor repository: Types::Repository?
     end
 
+    class DeleteSigningConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSigningConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?signing_configuration: Types::SigningConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor signing_configuration: Types::SigningConfiguration?
+    end
+
+    class DeregisterPullTimeUpdateExclusionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_arn: String?
+    end
+
+    class DeregisterPullTimeUpdateExclusionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_arn: String?
+    end
+
     class DescribeImageReplicationStatusRequest
       include Smithy::Schema::Structure
 
@@ -611,15 +679,49 @@ module Aws::ECR
       attr_accessor next_token: String?
     end
 
+    class DescribeImageSigningStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?image_id: Types::ImageIdentifier,
+        ?registry_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor image_id: Types::ImageIdentifier?
+      attr_accessor registry_id: String?
+    end
+
+    class DescribeImageSigningStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?image_id: Types::ImageIdentifier,
+        ?registry_id: String,
+        ?signing_statuses: Array[Types::ImageSigningStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor image_id: Types::ImageIdentifier?
+      attr_accessor registry_id: String?
+      attr_accessor signing_statuses: Array[Types::ImageSigningStatus]?
+    end
+
     class DescribeImagesFilter
       include Smithy::Schema::Structure
 
       def initialize: (
         ?tag_status: String,
+        ?image_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tag_status: String?
+      attr_accessor image_status: String?
     end
 
     class DescribeImagesRequest
@@ -854,6 +956,28 @@ module Aws::ECR
       attr_accessor exploit_available: String?
     end
 
+    class ExclusionAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ExclusionNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     module FindingSeverity
       INFORMATIONAL: String
       LOW: String
@@ -1083,6 +1207,28 @@ module Aws::ECR
       attr_accessor policy_text: String?
     end
 
+    class GetSigningConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetSigningConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?signing_configuration: Types::SigningConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor signing_configuration: Types::SigningConfiguration?
+    end
+
     class Image
       include Smithy::Schema::Structure
 
@@ -1104,9 +1250,21 @@ module Aws::ECR
 
     module ImageActionType
       EXPIRE: String
+      TRANSITION: String
     end
 
     class ImageAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ImageArchivedException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -1132,6 +1290,10 @@ module Aws::ECR
         ?image_manifest_media_type: String,
         ?artifact_media_type: String,
         ?last_recorded_pull_time: Time,
+        ?subject_manifest_digest: String,
+        ?image_status: String,
+        ?last_archived_at: Time,
+        ?last_activated_at: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1146,6 +1308,10 @@ module Aws::ECR
       attr_accessor image_manifest_media_type: String?
       attr_accessor artifact_media_type: String?
       attr_accessor last_recorded_pull_time: Time?
+      attr_accessor subject_manifest_digest: String?
+      attr_accessor image_status: String?
+      attr_accessor last_archived_at: Time?
+      attr_accessor last_activated_at: Time?
     end
 
     class ImageDigestDoesNotMatchException
@@ -1185,6 +1351,7 @@ module Aws::ECR
       UpstreamAccessDenied: String
       UpstreamTooManyRequests: String
       UpstreamUnavailable: String
+      ImageInaccessible: String
     end
 
     class ImageIdentifier
@@ -1209,6 +1376,27 @@ module Aws::ECR
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ImageReferrer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?digest: String,
+        ?media_type: String,
+        ?artifact_type: String,
+        ?size: Integer,
+        ?annotations: Hash[String, String],
+        ?artifact_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor digest: String?
+      attr_accessor media_type: String?
+      attr_accessor artifact_type: String?
+      attr_accessor size: Integer?
+      attr_accessor annotations: Hash[String, String]?
+      attr_accessor artifact_status: String?
     end
 
     class ImageReplicationStatus
@@ -1303,6 +1491,47 @@ module Aws::ECR
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor scan_on_push: bool?
+    end
+
+    class ImageSigningStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_profile_arn: String,
+        ?failure_code: String,
+        ?failure_reason: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_profile_arn: String?
+      attr_accessor failure_code: String?
+      attr_accessor failure_reason: String?
+      attr_accessor status: String?
+    end
+
+    module ImageStatus
+      ACTIVE: String
+      ARCHIVED: String
+      ACTIVATING: String
+    end
+
+    module ImageStatusFilter
+      ACTIVE: String
+      ARCHIVED: String
+      ACTIVATING: String
+      ANY: String
+    end
+
+    class ImageStorageClassUpdateNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class ImageTagAlreadyExistsException
@@ -1462,6 +1691,7 @@ module Aws::ECR
     module LayerAvailability
       AVAILABLE: String
       UNAVAILABLE: String
+      ARCHIVED: String
     end
 
     class LayerFailure
@@ -1570,6 +1800,7 @@ module Aws::ECR
         ?image_pushed_at: Time,
         ?action: Types::LifecyclePolicyRuleAction,
         ?applied_rule_priority: Integer,
+        ?storage_class: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1578,6 +1809,7 @@ module Aws::ECR
       attr_accessor image_pushed_at: Time?
       attr_accessor action: Types::LifecyclePolicyRuleAction?
       attr_accessor applied_rule_priority: Integer?
+      attr_accessor storage_class: String?
     end
 
     module LifecyclePolicyPreviewStatus
@@ -1592,10 +1824,12 @@ module Aws::ECR
 
       def initialize: (
         ?expiring_image_total_count: Integer,
+        ?transitioning_image_total_counts: Array[Types::TransitioningImageTotalCount],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor expiring_image_total_count: Integer?
+      attr_accessor transitioning_image_total_counts: Array[Types::TransitioningImageTotalCount]?
     end
 
     class LifecyclePolicyRuleAction
@@ -1603,10 +1837,21 @@ module Aws::ECR
 
       def initialize: (
         ?type: String,
+        ?target_storage_class: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor target_storage_class: String?
+    end
+
+    module LifecyclePolicyStorageClass
+      ARCHIVE: String
+      STANDARD: String
+    end
+
+    module LifecyclePolicyTargetStorageClass
+      ARCHIVE: String
     end
 
     class LimitExceededException
@@ -1620,15 +1865,64 @@ module Aws::ECR
       attr_accessor message: String?
     end
 
+    class ListImageReferrersFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifact_types: Array[String],
+        ?artifact_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifact_types: Array[String]?
+      attr_accessor artifact_status: String?
+    end
+
+    class ListImageReferrersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?subject_id: Types::SubjectIdentifier,
+        ?filter: Types::ListImageReferrersFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor subject_id: Types::SubjectIdentifier?
+      attr_accessor filter: Types::ListImageReferrersFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListImageReferrersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?referrers: Array[Types::ImageReferrer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor referrers: Array[Types::ImageReferrer]?
+      attr_accessor next_token: String?
+    end
+
     class ListImagesFilter
       include Smithy::Schema::Structure
 
       def initialize: (
         ?tag_status: String,
+        ?image_status: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tag_status: String?
+      attr_accessor image_status: String?
     end
 
     class ListImagesRequest
@@ -1660,6 +1954,32 @@ module Aws::ECR
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor image_ids: Array[Types::ImageIdentifier]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPullTimeUpdateExclusionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPullTimeUpdateExclusionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pull_time_update_exclusions: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pull_time_update_exclusions: Array[String]?
       attr_accessor next_token: String?
     end
 
@@ -1985,9 +2305,32 @@ module Aws::ECR
       attr_accessor replication_configuration: Types::ReplicationConfiguration?
     end
 
+    class PutSigningConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_configuration: Types::SigningConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_configuration: Types::SigningConfiguration?
+    end
+
+    class PutSigningConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_configuration: Types::SigningConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_configuration: Types::SigningConfiguration?
+    end
+
     module RCTAppliedFor
       REPLICATION: String
       PULL_THROUGH_CACHE: String
+      CREATE_ON_PUSH: String
     end
 
     class Recommendation
@@ -2012,6 +2355,30 @@ module Aws::ECR
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class RegisterPullTimeUpdateExclusionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_arn: String?
+    end
+
+    class RegisterPullTimeUpdateExclusionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_arn: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_arn: String?
+      attr_accessor created_at: Time?
     end
 
     class RegistryPolicyNotFoundException
@@ -2315,6 +2682,7 @@ module Aws::ECR
       SCAN_ELIGIBILITY_EXPIRED: String
       FINDINGS_UNAVAILABLE: String
       LIMIT_EXCEEDED: String
+      IMAGE_ARCHIVED: String
     end
 
     module ScanType
@@ -2408,6 +2776,64 @@ module Aws::ECR
       attr_accessor policy_text: String?
     end
 
+    class SigningConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::SigningRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::SigningRule]?
+    end
+
+    class SigningConfigurationNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SigningRepositoryFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: String,
+        ?filter_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: String?
+      attr_accessor filter_type: String?
+    end
+
+    module SigningRepositoryFilterType
+      WILDCARD_MATCH: String
+    end
+
+    class SigningRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?signing_profile_arn: String,
+        ?repository_filters: Array[Types::SigningRepositoryFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor signing_profile_arn: String?
+      attr_accessor repository_filters: Array[Types::SigningRepositoryFilter]?
+    end
+
+    module SigningStatus
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+    end
+
     class StartImageScanRequest
       include Smithy::Schema::Structure
 
@@ -2472,6 +2898,17 @@ module Aws::ECR
       attr_accessor status: String?
     end
 
+    class SubjectIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_digest: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_digest: String?
+    end
+
     class Tag
       include Smithy::Schema::Structure
 
@@ -2513,6 +2950,11 @@ module Aws::ECR
       ANY: String
     end
 
+    module TargetStorageClass
+      STANDARD: String
+      ARCHIVE: String
+    end
+
     class TemplateAlreadyExistsException
       include Smithy::Schema::Structure
 
@@ -2544,6 +2986,19 @@ module Aws::ECR
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class TransitioningImageTotalCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_storage_class: String,
+        ?image_total_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_storage_class: String?
+      attr_accessor image_total_count: Integer?
     end
 
     class UnableToAccessSecretException
@@ -2580,6 +3035,17 @@ module Aws::ECR
     end
 
     class UnableToGetUpstreamLayerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnableToListUpstreamImageReferrersException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2632,6 +3098,40 @@ module Aws::ECR
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class UpdateImageStorageClassRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?image_id: Types::ImageIdentifier,
+        ?target_storage_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor image_id: Types::ImageIdentifier?
+      attr_accessor target_storage_class: String?
+    end
+
+    class UpdateImageStorageClassResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_id: String,
+        ?repository_name: String,
+        ?image_id: Types::ImageIdentifier,
+        ?image_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_id: String?
+      attr_accessor repository_name: String?
+      attr_accessor image_id: Types::ImageIdentifier?
+      attr_accessor image_status: String?
     end
 
     class UpdatePullThroughCacheRuleRequest
@@ -2772,6 +3272,7 @@ module Aws::ECR
       GitHubContainerRegistry: String
       AzureContainerRegistry: String
       GitLabContainerRegistry: String
+      Chainguard: String
     end
 
     class ValidatePullThroughCacheRuleRequest

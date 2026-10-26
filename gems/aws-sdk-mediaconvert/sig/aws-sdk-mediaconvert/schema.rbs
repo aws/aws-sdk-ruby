@@ -6,6 +6,7 @@ module Aws::MediaConvert
     AacCodecProfile: EnumShape
     AacCodingMode: EnumShape
     AacLoudnessMeasurementMode: EnumShape
+    AacPassthroughControl: EnumShape
     AacRateControlMode: EnumShape
     AacRawFormat: EnumShape
     AacSettings: StructureShape
@@ -19,6 +20,11 @@ module Aws::MediaConvert
     Ac3LfeFilter: EnumShape
     Ac3MetadataControl: EnumShape
     Ac3Settings: StructureShape
+    Ac4BitstreamMode: EnumShape
+    Ac4CodingMode: EnumShape
+    Ac4DynamicRangeCompressionDrcProfile: EnumShape
+    Ac4Settings: StructureShape
+    Ac4StereoDownmix: EnumShape
     AccelerationMode: EnumShape
     AccelerationSettings: StructureShape
     AccelerationStatus: EnumShape
@@ -34,6 +40,7 @@ module Aws::MediaConvert
     AncillarySourceSettings: StructureShape
     AncillaryTerminateCaptions: EnumShape
     AntiAlias: EnumShape
+    AspectRatio: StructureShape
     AssociateCertificateRequest: StructureShape
     AssociateCertificateResponse: StructureShape
     AudioChannelTag: EnumShape
@@ -49,10 +56,12 @@ module Aws::MediaConvert
     AudioNormalizationLoudnessLogging: EnumShape
     AudioNormalizationPeakCalculation: EnumShape
     AudioNormalizationSettings: StructureShape
+    AudioPitchCorrectionSettings: StructureShape
     AudioProperties: StructureShape
     AudioSelector: StructureShape
     AudioSelectorGroup: StructureShape
     AudioSelectorType: EnumShape
+    AudioSmpte337Passthrough: EnumShape
     AudioTypeControl: EnumShape
     AutomatedAbrRule: StructureShape
     AutomatedAbrSettings: StructureShape
@@ -116,6 +125,7 @@ module Aws::MediaConvert
     CmafGroupSettings: StructureShape
     CmafImageBasedTrickPlay: EnumShape
     CmafImageBasedTrickPlaySettings: StructureShape
+    CmafImageBasedTrickPlayVariant: StructureShape
     CmafInitializationVectorInManifest: EnumShape
     CmafIntervalCadence: EnumShape
     CmafKeyProviderType: EnumShape
@@ -134,6 +144,7 @@ module Aws::MediaConvert
     CmafWriteSegmentTimelineInRepresentation: EnumShape
     CmfcAudioDuration: EnumShape
     CmfcAudioTrackType: EnumShape
+    CmfcC2paManifest: EnumShape
     CmfcDescriptiveVideoServiceFlag: EnumShape
     CmfcIFrameOnlyManifest: EnumShape
     CmfcKlvMetadata: EnumShape
@@ -144,6 +155,7 @@ module Aws::MediaConvert
     CmfcTimedMetadata: EnumShape
     CmfcTimedMetadataBoxVersion: EnumShape
     Codec: EnumShape
+    CodecMetadata: StructureShape
     ColorConversion3DLUTSetting: StructureShape
     ColorCorrector: StructureShape
     ColorMetadata: EnumShape
@@ -156,6 +168,7 @@ module Aws::MediaConvert
     Container: StructureShape
     ContainerSettings: StructureShape
     ContainerType: EnumShape
+    ContentLightLevel: StructureShape
     CopyProtectionAction: EnumShape
     CreateJobRequest: StructureShape
     CreateJobResponse: StructureShape
@@ -174,6 +187,7 @@ module Aws::MediaConvert
     DashIsoHbbtvCompliance: EnumShape
     DashIsoImageBasedTrickPlay: EnumShape
     DashIsoImageBasedTrickPlaySettings: StructureShape
+    DashIsoImageBasedTrickPlayVariant: StructureShape
     DashIsoIntervalCadence: EnumShape
     DashIsoMpdManifestBandwidthType: EnumShape
     DashIsoMpdProfile: EnumShape
@@ -205,11 +219,15 @@ module Aws::MediaConvert
     DisassociateCertificateRequest: StructureShape
     DisassociateCertificateResponse: StructureShape
     DolbyVision: StructureShape
+    DolbyVisionCompatibility: EnumShape
     DolbyVisionLevel6Metadata: StructureShape
     DolbyVisionLevel6Mode: EnumShape
     DolbyVisionMapping: EnumShape
+    DolbyVisionMetadata: StructureShape
+    DolbyVisionPresence: EnumShape
     DolbyVisionProfile: EnumShape
     DropFrameTimecode: EnumShape
+    DurationControl: StructureShape
     DvbNitSettings: StructureShape
     DvbSdtSettings: StructureShape
     DvbSubDestinationSettings: StructureShape
@@ -254,6 +272,10 @@ module Aws::MediaConvert
     Eac3StereoDownmix: EnumShape
     Eac3SurroundExMode: EnumShape
     Eac3SurroundMode: EnumShape
+    ElementalInferenceConfiguration: StructureShape
+    ElementalInferenceFeature: EnumShape
+    ElementalInferenceFeed: StructureShape
+    ElementalInferenceFeedManagementState: EnumShape
     EmbeddedConvert608To708: EnumShape
     EmbeddedDestinationSettings: StructureShape
     EmbeddedSourceSettings: StructureShape
@@ -277,12 +299,15 @@ module Aws::MediaConvert
     ForceIncludeRenditionSize: StructureShape
     Format: EnumShape
     FrameCaptureSettings: StructureShape
+    FrameControl: EnumShape
     FrameMetricType: EnumShape
     FrameRate: StructureShape
     GetJobRequest: StructureShape
     GetJobResponse: StructureShape
     GetJobTemplateRequest: StructureShape
     GetJobTemplateResponse: StructureShape
+    GetJobsQueryResultsRequest: StructureShape
+    GetJobsQueryResultsResponse: StructureShape
     GetPolicyRequest: StructureShape
     GetPolicyResponse: StructureShape
     GetPresetRequest: StructureShape
@@ -298,6 +323,7 @@ module Aws::MediaConvert
     H264DynamicSubGop: EnumShape
     H264EndOfStreamMarkers: EnumShape
     H264EntropyEncoding: EnumShape
+    H264ExplicitWeightedPrediction: EnumShape
     H264FieldEncoding: EnumShape
     H264FlickerAdaptiveQuantization: EnumShape
     H264FramerateControl: EnumShape
@@ -334,6 +360,8 @@ module Aws::MediaConvert
     H265GopBReference: EnumShape
     H265GopSizeUnits: EnumShape
     H265InterlaceMode: EnumShape
+    H265MvOverPictureBoundaries: EnumShape
+    H265MvTemporalPredictor: EnumShape
     H265ParControl: EnumShape
     H265QualityTuningLevel: EnumShape
     H265QvbrSettings: StructureShape
@@ -347,12 +375,16 @@ module Aws::MediaConvert
     H265Telecine: EnumShape
     H265TemporalAdaptiveQuantization: EnumShape
     H265TemporalIds: EnumShape
+    H265TilePadding: EnumShape
     H265Tiles: EnumShape
+    H265TreeBlockSize: EnumShape
     H265UnregisteredSeiTimecode: EnumShape
     H265WriteMp4PackagingType: EnumShape
     HDRToSDRToneMapper: EnumShape
     Hdr10Metadata: StructureShape
     Hdr10Plus: StructureShape
+    Hdr10PlusPresence: EnumShape
+    HdrMetadata: StructureShape
     HlsAdMarkers: EnumShape
     HlsAdditionalManifest: StructureShape
     HlsAudioOnlyContainer: EnumShape
@@ -371,6 +403,7 @@ module Aws::MediaConvert
     HlsIFrameOnlyManifest: EnumShape
     HlsImageBasedTrickPlay: EnumShape
     HlsImageBasedTrickPlaySettings: StructureShape
+    HlsImageBasedTrickPlayVariant: StructureShape
     HlsInitializationVectorInManifest: EnumShape
     HlsIntervalCadence: EnumShape
     HlsKeyProviderType: EnumShape
@@ -419,6 +452,9 @@ module Aws::MediaConvert
     JobTemplate: StructureShape
     JobTemplateListBy: EnumShape
     JobTemplateSettings: StructureShape
+    JobsQueryFilter: StructureShape
+    JobsQueryFilterKey: EnumShape
+    JobsQueryStatus: EnumShape
     KantarWatermarkSettings: StructureShape
     LanguageCode: EnumShape
     ListJobTemplatesRequest: StructureShape
@@ -457,6 +493,7 @@ module Aws::MediaConvert
     M3u8PcrControl: EnumShape
     M3u8Scte35Source: EnumShape
     M3u8Settings: StructureShape
+    MasteringDisplayColorVolume: StructureShape
     MatrixCoefficients: EnumShape
     Metadata: StructureShape
     MinBottomRenditionSize: StructureShape
@@ -483,6 +520,7 @@ module Aws::MediaConvert
     Mp4Settings: StructureShape
     MpdAccessibilityCaptionHints: EnumShape
     MpdAudioDuration: EnumShape
+    MpdC2paManifest: EnumShape
     MpdCaptionContainerType: EnumShape
     MpdKlvMetadata: EnumShape
     MpdManifestMetadataSignaling: EnumShape
@@ -517,9 +555,12 @@ module Aws::MediaConvert
     MsSmoothFragmentLengthControl: EnumShape
     MsSmoothGroupSettings: StructureShape
     MsSmoothManifestEncoding: EnumShape
+    MultiViewInput: StructureShape
+    MultiViewSettings: StructureShape
     MxfAfdSignaling: EnumShape
     MxfProfile: EnumShape
     MxfSettings: StructureShape
+    MxfUncompressedAudioWrapping: EnumShape
     MxfXavcDurationMode: EnumShape
     MxfXavcProfileSettings: StructureShape
     NexGuardFileMarkerSettings: StructureShape
@@ -549,6 +590,8 @@ module Aws::MediaConvert
     OutputSettings: StructureShape
     PadVideo: EnumShape
     PartnerWatermarking: StructureShape
+    PassthroughSegmentationMode: EnumShape
+    PassthroughSettings: StructureShape
     Policy: StructureShape
     Preset: StructureShape
     PresetListBy: EnumShape
@@ -600,12 +643,16 @@ module Aws::MediaConvert
     SearchJobsRequest: StructureShape
     SearchJobsResponse: StructureShape
     ServiceOverride: StructureShape
+    ServiceQuotaExceededException: StructureShape
     ShareStatus: EnumShape
     SimulateReservedQueue: EnumShape
+    SlowPalPitchCorrection: EnumShape
     SpekeKeyProvider: StructureShape
     SpekeKeyProviderCmaf: StructureShape
     SrtDestinationSettings: StructureShape
     SrtStylePassthrough: EnumShape
+    StartJobsQueryRequest: StructureShape
+    StartJobsQueryResponse: StructureShape
     StaticKeyProvider: StructureShape
     StatusUpdateInterval: EnumShape
     TagResourceRequest: StructureShape
@@ -629,8 +676,13 @@ module Aws::MediaConvert
     TrackType: EnumShape
     TransferCharacteristics: EnumShape
     TsPtsOffset: EnumShape
+    TtmlBackgroundColor: EnumShape
     TtmlDestinationSettings: StructureShape
+    TtmlFontColor: EnumShape
+    TtmlFontStyle: EnumShape
+    TtmlFontWeight: EnumShape
     TtmlStylePassthrough: EnumShape
+    TtmlTextDecoration: EnumShape
     Type: EnumShape
     UncompressedFourcc: EnumShape
     UncompressedFramerateControl: EnumShape
@@ -640,6 +692,7 @@ module Aws::MediaConvert
     UncompressedSettings: StructureShape
     UncompressedSlowPal: EnumShape
     UncompressedTelecine: EnumShape
+    UnprocessableEntityException: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
     UpdateJobTemplateRequest: StructureShape
@@ -672,6 +725,7 @@ module Aws::MediaConvert
     VideoPreprocessor: StructureShape
     VideoProperties: StructureShape
     VideoSelector: StructureShape
+    VideoSelectorMode: EnumShape
     VideoSelectorType: EnumShape
     VideoTimecodeInsertion: EnumShape
     VorbisSettings: StructureShape
@@ -726,6 +780,8 @@ module Aws::MediaConvert
     Doublemin0max1: FloatShape
     Doublemin0max2147483647: FloatShape
     Doublemin1max10: FloatShape
+    Doubleminnegative1000max3: FloatShape
+    Doubleminnegative1000maxnegative1: FloatShape
     Doubleminnegative59max0: FloatShape
     Doubleminnegative60max3: FloatShape
     Doubleminnegative60max6: FloatShape
@@ -733,6 +789,7 @@ module Aws::MediaConvert
     Doubleminnegative6max3: FloatShape
     Doubleminnegative8max0: FloatShape
     Integer: IntegerShape
+    Integermin0: IntegerShape
     Integermin0max0: IntegerShape
     Integermin0max1: IntegerShape
     Integermin0max10: IntegerShape
@@ -744,6 +801,7 @@ module Aws::MediaConvert
     Integermin0max1466400000: IntegerShape
     Integermin0max15: IntegerShape
     Integermin0max16: IntegerShape
+    Integermin0max2: IntegerShape
     Integermin0max2147483647: IntegerShape
     Integermin0max255: IntegerShape
     Integermin0max3: IntegerShape
@@ -757,6 +815,7 @@ module Aws::MediaConvert
     Integermin0max5: IntegerShape
     Integermin0max500: IntegerShape
     Integermin0max50000: IntegerShape
+    Integermin0max64: IntegerShape
     Integermin0max65534: IntegerShape
     Integermin0max65535: IntegerShape
     Integermin0max7: IntegerShape
@@ -783,7 +842,6 @@ module Aws::MediaConvert
     Integermin1max1001: IntegerShape
     Integermin1max150: IntegerShape
     Integermin1max17895697: IntegerShape
-    Integermin1max2: IntegerShape
     Integermin1max20: IntegerShape
     Integermin1max2048: IntegerShape
     Integermin1max2147483640: IntegerShape
@@ -796,11 +854,13 @@ module Aws::MediaConvert
     Integermin1max6: IntegerShape
     Integermin1max60000: IntegerShape
     Integermin1max64: IntegerShape
-    Integermin1max8: IntegerShape
+    Integermin1max86400000: IntegerShape
+    Integermin1max9999: IntegerShape
     Integermin2000max30000: IntegerShape
     Integermin22050max192000: IntegerShape
     Integermin22050max48000: IntegerShape
     Integermin24max60000: IntegerShape
+    Integermin256max3840: IntegerShape
     Integermin25max10000: IntegerShape
     Integermin25max2000: IntegerShape
     Integermin2max2147483647: IntegerShape
@@ -814,10 +874,11 @@ module Aws::MediaConvert
     Integermin384000max1024000: IntegerShape
     Integermin3max15: IntegerShape
     Integermin48000max48000: IntegerShape
+    Integermin48000max768000: IntegerShape
     Integermin4max12: IntegerShape
-    Integermin50max86400000: IntegerShape
     Integermin6000max1024000: IntegerShape
     Integermin64000max640000: IntegerShape
+    Integermin64max2160: IntegerShape
     Integermin6max16: IntegerShape
     Integermin8000max192000: IntegerShape
     Integermin8000max96000: IntegerShape
@@ -845,14 +906,19 @@ module Aws::MediaConvert
     Listofcaptiondescription: ListShape
     Listofcaptiondescriptionpreset: ListShape
     Listofcmafadditionalmanifest: ListShape
+    Listofcmafimagebasedtrickplayvariant: ListShape
     Listofcolorconversion3dlutsetting: ListShape
     Listofdashadditionalmanifest: ListShape
+    Listofdashisoimagebasedtrickplayvariant: ListShape
+    Listofelementalinferencefeature: ListShape
+    Listofelementalinferencefeed: ListShape
     Listofendpoint: ListShape
     Listofforceincluderenditionsize: ListShape
     Listofframemetrictype: ListShape
     Listofhlsadmarkers: ListShape
     Listofhlsadditionalmanifest: ListShape
     Listofhlscaptionlanguagemapping: ListShape
+    Listofhlsimagebasedtrickplayvariant: ListShape
     Listofhopdestination: ListShape
     Listofid3insertion: ListShape
     Listofinput: ListShape
@@ -862,7 +928,10 @@ module Aws::MediaConvert
     Listofjob: ListShape
     Listofjobengineversion: ListShape
     Listofjobtemplate: ListShape
+    Listofjobsqueryfilter: ListShape
+    Listofmotionimageinserter: ListShape
     Listofmssmoothadditionalmanifest: ListShape
+    Listofmultiviewsettings: ListShape
     Listofoutput: ListShape
     Listofoutputchannelmapping: ListShape
     Listofoutputdetail: ListShape
@@ -887,6 +956,7 @@ module Aws::MediaConvert
     ListofIntegermin32max8182: ListShape
     ListofIntegerminnegative60max6: ListShape
     ListofString: ListShape
+    ListofStringmax100: ListShape
     ListofStringmin1: ListShape
     ListofStringmin36max36pattern09afaf809afaf409afaf409afaf409afaf12: ListShape
     ListofStringpattern09afaf809afaf409afaf409afaf409afaf12: ListShape
@@ -898,6 +968,7 @@ module Aws::MediaConvert
     Mapofdynamicaudioselector: MapShape
     MapofString: MapShape
     String: StringShape
+    Stringmax100: StringShape
     Stringmax1000: StringShape
     Stringmax2048: StringShape
     Stringmax2048patterns3https: StringShape
@@ -944,7 +1015,7 @@ module Aws::MediaConvert
     Stringpatterndd: StringShape
     Stringpatternhttps: StringShape
     Stringpatternhttpsd: StringShape
-    Stringpatternhttpskantarmedia: StringShape
+    Stringpatternhttpskantarmedia55prod: StringShape
     Stringpatternidentityazaz26azaz09163: StringShape
     Stringpatterns3: StringShape
     Stringpatterns3assetmapxml: StringShape

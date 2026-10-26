@@ -44,6 +44,26 @@ module Aws::ApplicationSignals
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _BatchDeleteInstrumentationConfigurationsResponse
+      include Smithy::Client::_Response[Types::BatchDeleteInstrumentationConfigurationsResponse]
+      def deleted_count: () -> Integer?
+      def successful_deletions: () -> Array[Types::BatchDeleteSuccessfulDeletion]?
+      def errors: () -> Array[Types::BatchDeleteError]?
+    end
+    def batch_delete_instrumentation_configurations: (
+      ?deletion_target: {
+        scope: {
+          service: String,
+          environment: untyped,
+          instrumentation_type: String
+        },
+        resource_arns: {
+          resource_arns: Array[String],
+          instrumentation_type: untyped
+        }
+      }
+    ) -> _BatchDeleteInstrumentationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteInstrumentationConfigurationsResponse
+
     interface _BatchGetServiceLevelObjectiveBudgetReportResponse
       include Smithy::Client::_Response[Types::BatchGetServiceLevelObjectiveBudgetReportOutput]
       def timestamp: () -> Time?
@@ -90,6 +110,67 @@ module Aws::ApplicationSignals
       ]
     ) -> _BatchUpdateExclusionWindowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateExclusionWindowsResponse
 
+    interface _CreateInstrumentationConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateInstrumentationConfigurationResponse]
+      def instrumentation_type: () -> String?
+      def service: () -> String?
+      def environment: () -> String?
+      def signal_type: () -> String?
+      def location: () -> Types::Location?
+      def location_hash: () -> String?
+      def description: () -> String?
+      def expires_at: () -> Time?
+      def attribute_filters: () -> Array[Hash[String, String]]?
+      def capture_configuration: () -> Types::CaptureConfiguration?
+      def created_at: () -> Time?
+      def arn: () -> String?
+    end
+    def create_instrumentation_configuration: (
+      ?instrumentation_type: String,
+      ?service: String,
+      ?environment: String,
+      ?signal_type: String,
+      ?location: {
+        code_location: {
+          language: String,
+          code_unit: String,
+          class_name: untyped,
+          method_name: untyped,
+          file_path: untyped,
+          line_number: Integer
+        }
+      },
+      ?description: String,
+      ?expires_at: Time,
+      ?attribute_filters: Array[
+        Hash[String, String]
+      ],
+      ?capture_configuration: {
+        code_capture: {
+          capture_arguments: Array[String],
+          capture_return: bool,
+          capture_stack_trace: untyped,
+          capture_locals: untyped,
+          capture_limits: {
+            max_hits: Integer,
+            max_string_length: untyped,
+            max_collection_width: untyped,
+            max_collection_depth: untyped,
+            max_stack_frames: untyped,
+            max_stack_trace_size: untyped,
+            max_object_depth: untyped,
+            max_fields_per_object: untyped
+          }
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateInstrumentationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInstrumentationConfigurationResponse
+
     interface _CreateServiceLevelObjectiveResponse
       include Smithy::Client::_Response[Types::CreateServiceLevelObjectiveOutput]
       def slo: () -> Types::ServiceLevelObjective?
@@ -105,6 +186,10 @@ module Aws::ApplicationSignals
           metric_name: String,
           statistic: String,
           period_seconds: Integer,
+          metric_source: {
+            metric_source_key_attributes: untyped,
+            metric_source_attributes: untyped
+          },
           metric_data_queries: Array[
             {
               id: String,
@@ -133,6 +218,17 @@ module Aws::ApplicationSignals
           dependency_config: {
             dependency_key_attributes: untyped,
             dependency_operation_name: untyped
+          },
+          composite_sli_config: {
+            selection_config: {
+              type: String,
+              pattern: String
+            },
+            components: Array[
+              {
+                operation_name: untyped
+              }
+            ]
           }
         },
         metric_threshold: Float,
@@ -175,6 +271,22 @@ module Aws::ApplicationSignals
           dependency_config: {
             dependency_key_attributes: untyped,
             dependency_operation_name: untyped
+          },
+          metric_source: {
+            metric_source_key_attributes: untyped,
+            metric_source_attributes: untyped
+          },
+          metric_name: untyped,
+          composite_sli_config: {
+            selection_config: {
+              type: String,
+              pattern: String
+            },
+            components: Array[
+              {
+                operation_name: untyped
+              }
+            ]
           }
         },
         metric_threshold: Float,
@@ -205,7 +317,9 @@ module Aws::ApplicationSignals
         {
           look_back_window_minutes: Integer
         }
-      ]
+      ],
+      ?create_recommended_slo: bool,
+      ?auto_investigation_enabled: bool
     ) -> _CreateServiceLevelObjectiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceLevelObjectiveResponse
 
     interface _DeleteGroupingConfigurationResponse
@@ -213,12 +327,89 @@ module Aws::ApplicationSignals
     end
     def delete_grouping_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupingConfigurationResponse
 
+    interface _DeleteInstrumentationConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteInstrumentationConfigurationResponse]
+      def deletion_status: () -> String?
+    end
+    def delete_instrumentation_configuration: (
+      ?instrumentation_type: String,
+      ?service: String,
+      ?environment: String,
+      ?signal_type: String,
+      ?location_identifier: {
+        code_location: {
+          language: String,
+          code_unit: String,
+          class_name: untyped,
+          method_name: untyped,
+          file_path: untyped,
+          line_number: Integer
+        },
+        location_hash: untyped
+      }
+    ) -> _DeleteInstrumentationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInstrumentationConfigurationResponse
+
     interface _DeleteServiceLevelObjectiveResponse
       include Smithy::Client::_Response[Types::DeleteServiceLevelObjectiveOutput]
     end
     def delete_service_level_objective: (
       ?id: String
     ) -> _DeleteServiceLevelObjectiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceLevelObjectiveResponse
+
+    interface _GetInstrumentationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetInstrumentationConfigurationResponse]
+      def configuration: () -> Types::InstrumentationConfiguration?
+    end
+    def get_instrumentation_configuration: (
+      ?instrumentation_type: String,
+      ?service: String,
+      ?environment: String,
+      ?signal_type: String,
+      ?location_identifier: {
+        code_location: {
+          language: String,
+          code_unit: String,
+          class_name: untyped,
+          method_name: untyped,
+          file_path: untyped,
+          line_number: Integer
+        },
+        location_hash: untyped
+      }
+    ) -> _GetInstrumentationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstrumentationConfigurationResponse
+
+    interface _GetInstrumentationConfigurationStatusResponse
+      include Smithy::Client::_Response[Types::GetInstrumentationConfigurationStatusResponse]
+      def service: () -> String?
+      def environment: () -> String?
+      def signal_type: () -> String?
+      def location: () -> Types::Location?
+      def status: () -> String?
+      def events: () -> Array[Types::InstrumentationStatusEvent]?
+      def next_token: () -> String?
+    end
+    def get_instrumentation_configuration_status: (
+      ?instrumentation_type: String,
+      ?service: String,
+      ?environment: String,
+      ?signal_type: String,
+      ?location_identifier: {
+        code_location: {
+          language: String,
+          code_unit: String,
+          class_name: untyped,
+          method_name: untyped,
+          file_path: untyped,
+          line_number: Integer
+        },
+        location_hash: untyped
+      },
+      ?status: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetInstrumentationConfigurationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstrumentationConfigurationStatusResponse
 
     interface _GetServiceResponse
       include Smithy::Client::_Response[Types::GetServiceOutput]
@@ -243,6 +434,8 @@ module Aws::ApplicationSignals
 
     interface _ListAuditFindingsResponse
       include Smithy::Client::_Response[Types::ListAuditFindingsOutput]
+      def start_time: () -> Time?
+      def end_time: () -> Time?
       def audit_findings: () -> Array[Types::AuditFinding]?
       def next_token: () -> String?
     end
@@ -268,13 +461,32 @@ module Aws::ApplicationSignals
               service: untyped,
               operation: untyped,
               metric_type: untyped
+            },
+            canary: {
+              canary_name: untyped
             }
           }
         }
       ],
+      ?detail_level: String,
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListAuditFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAuditFindingsResponse
+
+    interface _ListEntityEventsResponse
+      include Smithy::Client::_Response[Types::ListEntityEventsOutput]
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def change_events: () -> Array[Types::ChangeEvent]?
+      def next_token: () -> String?
+    end
+    def list_entity_events: (
+      ?entity: Hash[String, String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEntityEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEntityEventsResponse
 
     interface _ListGroupingAttributeDefinitionsResponse
       include Smithy::Client::_Response[Types::ListGroupingAttributeDefinitionsOutput]
@@ -283,8 +495,29 @@ module Aws::ApplicationSignals
       def next_token: () -> String?
     end
     def list_grouping_attribute_definitions: (
-      ?next_token: String
+      ?next_token: String,
+      ?aws_account_id: String,
+      ?include_linked_accounts: bool
     ) -> _ListGroupingAttributeDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupingAttributeDefinitionsResponse
+
+    interface _ListInstrumentationConfigurationsResponse
+      include Smithy::Client::_Response[Types::InstrumentationConfigurationsPage]
+      def service: () -> String?
+      def environment: () -> String?
+      def changed: () -> bool?
+      def latest_configurations: () -> Array[Types::InstrumentationConfigurationWithoutServiceEnv]?
+      def synced_at: () -> Time?
+      def sync_interval: () -> Integer?
+      def next_token: () -> String?
+    end
+    def list_instrumentation_configurations: (
+      ?service: String,
+      ?environment: String,
+      ?instrumentation_type: String,
+      ?synced_at: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInstrumentationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstrumentationConfigurationsResponse
 
     interface _ListServiceDependenciesResponse
       include Smithy::Client::_Response[Types::ListServiceDependenciesOutput]
@@ -341,9 +574,13 @@ module Aws::ApplicationSignals
       },
       ?max_results: Integer,
       ?next_token: String,
+      ?metric_source_types: Array[String],
       ?include_linked_accounts: bool,
       ?slo_owner_aws_account_id: String,
-      ?metric_source_types: Array[String]
+      ?metric_source: {
+        metric_source_key_attributes: Hash[String, String],
+        metric_source_attributes: untyped
+      }
     ) -> _ListServiceLevelObjectivesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServiceLevelObjectivesResponse
 
     interface _ListServiceOperationsResponse
@@ -421,6 +658,27 @@ module Aws::ApplicationSignals
       ]
     ) -> _PutGroupingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutGroupingConfigurationResponse
 
+    interface _ReportInstrumentationConfigurationStatusResponse
+      include Smithy::Client::_Response[Types::ReportInstrumentationConfigurationStatusResponse]
+      def service: () -> String?
+      def environment: () -> String?
+      def unprocessed_status_events: () -> Array[Types::UnprocessedStatusEvent]?
+    end
+    def report_instrumentation_configuration_status: (
+      ?service: String,
+      ?environment: String,
+      ?configurations: Array[
+        {
+          instrumentation_type: String,
+          signal_type: String,
+          location_hash: String,
+          status: String,
+          time: Time,
+          error_cause: String
+        }
+      ]
+    ) -> _ReportInstrumentationConfigurationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReportInstrumentationConfigurationStatusResponse
+
     interface _StartDiscoveryResponse
       include Smithy::Client::_Response[Types::StartDiscoveryOutput]
     end
@@ -462,6 +720,10 @@ module Aws::ApplicationSignals
           metric_name: String,
           statistic: String,
           period_seconds: Integer,
+          metric_source: {
+            metric_source_key_attributes: untyped,
+            metric_source_attributes: untyped
+          },
           metric_data_queries: Array[
             {
               id: String,
@@ -490,6 +752,17 @@ module Aws::ApplicationSignals
           dependency_config: {
             dependency_key_attributes: untyped,
             dependency_operation_name: untyped
+          },
+          composite_sli_config: {
+            selection_config: {
+              type: String,
+              pattern: String
+            },
+            components: Array[
+              {
+                operation_name: untyped
+              }
+            ]
           }
         },
         metric_threshold: Float,
@@ -532,6 +805,22 @@ module Aws::ApplicationSignals
           dependency_config: {
             dependency_key_attributes: untyped,
             dependency_operation_name: untyped
+          },
+          metric_source: {
+            metric_source_key_attributes: untyped,
+            metric_source_attributes: untyped
+          },
+          metric_name: untyped,
+          composite_sli_config: {
+            selection_config: {
+              type: String,
+              pattern: String
+            },
+            components: Array[
+              {
+                operation_name: untyped
+              }
+            ]
           }
         },
         metric_threshold: Float,
@@ -556,7 +845,8 @@ module Aws::ApplicationSignals
         {
           look_back_window_minutes: Integer
         }
-      ]
+      ],
+      ?auto_investigation_enabled: bool
     ) -> _UpdateServiceLevelObjectiveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceLevelObjectiveResponse
   end
 end

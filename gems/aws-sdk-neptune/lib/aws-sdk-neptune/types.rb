@@ -267,6 +267,11 @@ module Aws::Neptune
     # @!attribute iops
     #   <p>The Provisioned IOPS (I/O operations per second) value. This setting is only for Multi-AZ DB clusters.</p>
     #   @return [Integer]
+    # @!attribute network_type
+    #   <p>The pending change in network type for the DB cluster.</p>
+    #            <p>Valid Values: <code>IPV4</code>, <code>DUAL</code>
+    #            </p>
+    #   @return [String]
     class ClusterPendingModifiedValues < Struct.new(
       nil,
       :pending_cloudwatch_logs_exports,
@@ -277,6 +282,7 @@ module Aws::Neptune
       :storage_type,
       :allocated_storage,
       :iops,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -292,14 +298,13 @@ module Aws::Neptune
     #                  <p>Must specify a valid DB cluster parameter group.</p>
     #               </li>
     #               <li>
-    #                  <p>If the source DB cluster parameter group is in the same Amazon Region as the copy,
-    #             specify a valid DB parameter group identifier, for example
+    #                  <p>Must specify a valid DB cluster parameter group identifier, for example
     #             <code>my-db-cluster-param-group</code>, or a valid ARN.</p>
     #               </li>
     #               <li>
-    #                  <p>If the source DB parameter group is in a different Amazon Region than the copy, specify a
-    #             valid DB cluster parameter group ARN, for example
-    #             <code>arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1</code>.</p>
+    #                  <p>The source DB cluster parameter group must be in the same Amazon Region as the
+    #             copy. Neptune does not support cross-Region copying of parameter
+    #             groups.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -354,7 +359,7 @@ module Aws::Neptune
 
     # @!attribute source_db_cluster_snapshot_identifier
     #   <p>The identifier of the DB cluster snapshot to copy. This parameter is not
-    #         case-sensitive. If the source DB cluster snapshot is in a different region or 
+    #         case-sensitive. If the source DB cluster snapshot is in a different region or
     #         owned by another account, specify the snapshot ARN.</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -387,7 +392,7 @@ module Aws::Neptune
     #            </p>
     #   @return [String]
     # @!attribute kms_key_id
-    #   <p>The Amazon Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon
+    #   <p>The Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon
     #         Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>
     #            <p>If you copy an encrypted DB cluster snapshot from your Amazon account, you can specify a
     #         value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you
@@ -412,7 +417,7 @@ module Aws::Neptune
     #   <p>The tags to assign to the new DB cluster snapshot copy.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute source_region
-    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   <p>The source region of the snapshot. This is only needed when the snapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CopyDBClusterSnapshotMessage < Struct.new(
       nil,
@@ -452,6 +457,11 @@ module Aws::Neptune
     #               <li>
     #                  <p>Must specify a valid DB parameter group identifier, for example
     #           <code>my-db-param-group</code>, or a valid ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>The source DB parameter group must be in the same Amazon Region as the
+    #           copy. Neptune does not support cross-Region copying of parameter
+    #           groups.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -643,8 +653,7 @@ module Aws::Neptune
     #            </p>
     #   @return [Boolean]
     # @!attribute database_name
-    #   <p>The name for your database of up to 64 alpha-numeric characters. If you do not provide a
-    #         name, Amazon Neptune will not create a database in the DB cluster you are creating.</p>
+    #   <p>Not supported by Neptune.</p>
     #   @return [String]
     # @!attribute db_cluster_identifier
     #   <p>The DB cluster identifier. This parameter is stored as a lowercase string.</p>
@@ -832,8 +841,29 @@ module Aws::Neptune
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>IPV4</code>
+    #                     </b>   –  
+    #           ( <i>the default</i> ) The DB cluster uses only IPv4 addresses for communication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>DUAL</code>
+    #                     </b>   –  
+    #             The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB subnet group
+    #             associated with the cluster must support IPv6.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     # @!attribute source_region
-    #   <p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>
+    #   <p>The source region of the snapshot. This is only needed when the snapshot is encrypted and in a different region.</p>
     #   @return [String]
     class CreateDBClusterMessage < Struct.new(
       nil,
@@ -865,6 +895,7 @@ module Aws::Neptune
       :serverless_v2_scaling_configuration,
       :global_cluster_identifier,
       :storage_type,
+      :network_type,
       :source_region,
       keyword_init: true
     )
@@ -1136,12 +1167,12 @@ module Aws::Neptune
     #   @return [String]
     # @!attribute publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
     #         private IP address.</p>
     #   @return [Boolean]
     # @!attribute tags
@@ -1172,7 +1203,7 @@ module Aws::Neptune
     #            <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If
     #         you are creating a DB instance with the same Amazon account that owns the KMS encryption key used
     #         to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the
-    #         KM encryption key.</p>
+    #         KMS encryption key.</p>
     #            <p>Not applicable. The KMS key identifier is managed by the DB cluster. For more information,
     #         see <a>CreateDBCluster</a>.</p>
     #            <p>If the <code>StorageEncrypted</code> parameter is true, and you do not specify a value for
@@ -1447,7 +1478,7 @@ module Aws::Neptune
     # @!attribute enabled
     #   <p> A Boolean value; set to <b>true</b> to activate the
     #         subscription, set to <b>false</b> to create the subscription but not
-    #         active it.</p>
+    #         activate it.</p>
     #   @return [Boolean]
     # @!attribute tags
     #   <p>The tags to be applied to the new event subscription.</p>
@@ -1499,6 +1530,13 @@ module Aws::Neptune
     #         The global database can't be deleted when deletion protection is
     #         enabled.</p>
     #   @return [Boolean]
+    # @!attribute database_name
+    #   <p>The name for the new global database (up to 64 alpha-numeric
+    #         characters).</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Tags to assign to the global cluster.</p>
+    #   @return [Array<Types::Tag>]
     # @!attribute storage_encrypted
     #   <p>The storage encryption setting for the new global database
     #         cluster.</p>
@@ -1510,6 +1548,8 @@ module Aws::Neptune
       :engine,
       :engine_version,
       :deletion_protection,
+      :database_name,
+      :tags,
       :storage_encrypted,
       keyword_init: true
     )
@@ -1728,6 +1768,26 @@ module Aws::Neptune
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>IPV4</code>
+    #                     </b>   –  
+    #           The DB cluster uses only IPv4 addresses for communication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>DUAL</code>
+    #                     </b>   –  
+    #             The DB cluster uses both IPv4 and IPv6 addresses for communication.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class DBCluster < Struct.new(
       nil,
       :allocated_storage,
@@ -1775,6 +1835,7 @@ module Aws::Neptune
       :global_cluster_identifier,
       :io_optimized_next_allowed_modification_time,
       :storage_type,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1883,7 +1944,7 @@ module Aws::Neptune
     end
 
     # @!attribute marker
-    #   <p> n optional pagination token provided by a previous
+    #   <p>An optional pagination token provided by a previous
     #         <code>DescribeDBClusterEndpoints</code> request.
     #         If this parameter is specified, the response includes
     #         only records beyond the marker,
@@ -2536,12 +2597,12 @@ module Aws::Neptune
     #   @return [String]
     # @!attribute publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
     #         private IP address.</p>
     #   @return [Boolean]
     # @!attribute status_infos
@@ -2628,6 +2689,11 @@ module Aws::Neptune
     #         The instance can't be deleted when deletion protection is enabled. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html">Deleting
     #         a DB Instance</a>.</p>
     #   @return [Boolean]
+    # @!attribute network_type
+    #   <p>The network type of the DB instance. Inherited from the DB cluster.</p>
+    #            <p>Valid Values: <code>IPV4</code>, <code>DUAL</code>
+    #            </p>
+    #   @return [String]
     class DBInstance < Struct.new(
       nil,
       :db_instance_identifier,
@@ -2683,6 +2749,7 @@ module Aws::Neptune
       :performance_insights_kms_key_id,
       :enabled_cloudwatch_logs_exports,
       :deletion_protection,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2846,7 +2913,7 @@ module Aws::Neptune
     #             </li>
     #          </ul>
     # @!attribute db_parameter_group_name
-    #   <p>The name of the DP parameter group.</p>
+    #   <p>The name of the DB parameter group.</p>
     #   @return [String]
     # @!attribute parameter_apply_status
     #   <p>The status of parameter updates.</p>
@@ -2953,6 +3020,11 @@ module Aws::Neptune
     # @!attribute db_subnet_group_arn
     #   <p>The Amazon Resource Name (ARN) for the DB subnet group.</p>
     #   @return [String]
+    # @!attribute supported_network_types
+    #   <p>The network types supported by the DB subnet group.</p>
+    #            <p>Valid network types include <code>IPV4</code> and <code>DUAL</code>. A DB subnet group
+    #         supports <code>DUAL</code> if all subnets in the group have both IPv4 and IPv6 CIDRs.</p>
+    #   @return [Array<String>]
     class DBSubnetGroup < Struct.new(
       nil,
       :db_subnet_group_name,
@@ -2961,6 +3033,7 @@ module Aws::Neptune
       :subnet_group_status,
       :subnets,
       :db_subnet_group_arn,
+      :supported_network_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3174,7 +3247,7 @@ module Aws::Neptune
     #   <p> The DB cluster snapshot identifier of the new DB cluster snapshot created when
     #         <code>SkipFinalSnapshot</code> is set to <code>false</code>.</p>
     #            <note>
-    #               <p> Specifying this parameter and also setting the <code>SkipFinalShapshot</code> parameter
+    #               <p> Specifying this parameter and also setting the <code>SkipFinalSnapshot</code> parameter
     #           to true results in an error.</p>
     #            </note>
     #            <p>Constraints:</p>
@@ -3289,7 +3362,7 @@ module Aws::Neptune
     #   <p> The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to
     #         <code>false</code>.</p>
     #            <note>
-    #               <p>Specifying this parameter and also setting the SkipFinalShapshot parameter to true
+    #               <p>Specifying this parameter and also setting the SkipFinalSnapshot parameter to true
     #           results in an error.</p>
     #            </note>
     #            <p>Constraints:</p>
@@ -4640,7 +4713,7 @@ module Aws::Neptune
 
     # @!attribute global_cluster_identifier
     #   <p>Identifier of the Neptune global database that should be failed over.
-    #         The identifier is the unique key assigned by the user when the Neptune 
+    #         The identifier is the unique key assigned by the user when the Neptune
     #         global database was created. In other words, it's the name of the global
     #         database that you want to fail over.</p>
     #            <p>Constraints: Must match the identifier of an existing Neptune global
@@ -4655,11 +4728,11 @@ module Aws::Neptune
     #         Allowing data loss triggers a global failover operation.</p>
     #            <p>If you don't specify <code>AllowDataLoss</code>, the global database cluster operation
     #         defaults to a switchover.</p>
-    #            <p>Constraints:Can't be specified together with the <code>Switchover</code> parameter.</p>
+    #            <p>Constraints: Can't be specified together with the <code>Switchover</code> parameter.</p>
     #   @return [Boolean]
     # @!attribute switchover
     #   <p>Specifies whether to switch over this global database cluster.</p>
-    #            <p>Constraints:Can't be specified together with the <code>AllowDataLoss</code> parameter.</p>
+    #            <p>Constraints: Can't be specified together with the <code>AllowDataLoss</code> parameter.</p>
     #   @return [Boolean]
     class FailoverGlobalClusterMessage < Struct.new(
       nil,
@@ -4766,7 +4839,7 @@ module Aws::Neptune
     #         is the unique key that identifies a global database.</p>
     #   @return [String]
     # @!attribute global_cluster_resource_id
-    #   <p>An immutable identifier for the global database that is unique within in all
+    #   <p>An immutable identifier for the global database that is unique within all
     #         regions. This identifier is found in CloudTrail log entries whenever the KMS
     #         key for the DB cluster is accessed.</p>
     #   @return [String]
@@ -4783,6 +4856,9 @@ module Aws::Neptune
     # @!attribute engine_version
     #   <p>The Neptune engine version used by the global database.</p>
     #   @return [String]
+    # @!attribute database_name
+    #   <p>The default database name within the new global database cluster.</p>
+    #   @return [String]
     # @!attribute storage_encrypted
     #   <p>The storage encryption setting for the global database.</p>
     #   @return [Boolean]
@@ -4797,6 +4873,9 @@ module Aws::Neptune
     #   <p>A data object containing all properties for the current state of an in-process or pending switchover or failover process for this global cluster (Neptune global database).
     #         This object is empty unless the <code>SwitchoverGlobalCluster</code> or <code>FailoverGlobalCluster</code> operation was called on this global cluster.</p>
     #   @return [Types::FailoverState]
+    # @!attribute tag_list
+    #   <p>A list of global cluster tags.</p>
+    #   @return [Array<Types::Tag>]
     class GlobalCluster < Struct.new(
       nil,
       :global_cluster_identifier,
@@ -4805,10 +4884,12 @@ module Aws::Neptune
       :status,
       :engine,
       :engine_version,
+      :database_name,
       :storage_encrypted,
       :deletion_protection,
       :global_cluster_members,
       :failover_state,
+      :tag_list,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5441,6 +5522,27 @@ module Aws::Neptune
     #               </li>
     #            </ul>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>IPV4</code>
+    #                     </b>   –  
+    #           The DB cluster uses only IPv4 addresses for communication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>DUAL</code>
+    #                     </b>   –  
+    #             The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB subnet group
+    #             associated with the cluster must support IPv6.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class ModifyDBClusterMessage < Struct.new(
       nil,
       :db_cluster_identifier,
@@ -5463,6 +5565,7 @@ module Aws::Neptune
       :copy_tags_to_snapshot,
       :serverless_v2_scaling_configuration,
       :storage_type,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5784,12 +5887,12 @@ module Aws::Neptune
     #   @return [Integer]
     # @!attribute publicly_accessible
     #   <p>Indicates whether the DB instance is publicly accessible.</p>
-    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
-    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
-    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
-    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned
     #         to the DB cluster doesn't permit it.</p>
-    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a
     #         private IP address.</p>
     #   @return [Boolean]
     # @!attribute monitoring_role_arn
@@ -5984,7 +6087,7 @@ module Aws::Neptune
     # @!attribute event_categories
     #   <p> A list of event categories for a SourceType that you want to subscribe to. You can see a
     #         list of the categories for a given SourceType
-    #         
+    #
     #         by using the <b>DescribeEventCategories</b> action.</p>
     #   @return [Array<String>]
     # @!attribute enabled
@@ -6087,6 +6190,18 @@ module Aws::Neptune
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The specified <i>NetworkType</i> is not supported for the DB cluster, DB subnet group, or orderable DB instance option.</p>
+    # @!attribute message
+    #   <p>A message describing the details of the problem.</p>
+    #   @return [String]
+    class NetworkTypeNotSupportedFault < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Not supported by Neptune.</p>
     # @!attribute option_group_name
     #   <p>Not supported by Neptune.</p>
@@ -6183,6 +6298,9 @@ module Aws::Neptune
     # @!attribute supports_global_databases
     #   <p>A value that indicates whether you can use Neptune global databases with a specific combination of other DB engine attributes.</p>
     #   @return [Boolean]
+    # @!attribute supported_network_types
+    #   <p>The network types supported by the orderable DB instance option.</p>
+    #   @return [Array<String>]
     class OrderableDBInstanceOption < Struct.new(
       nil,
       :engine,
@@ -6206,6 +6324,7 @@ module Aws::Neptune
       :min_iops_per_gib,
       :max_iops_per_gib,
       :supports_global_databases,
+      :supported_network_types,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6876,6 +6995,27 @@ module Aws::Neptune
     #            <p>Default: <code>standard</code>
     #            </p>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>IPV4</code>
+    #                     </b>   –  
+    #           ( <i>the default</i> ) The DB cluster uses only IPv4 addresses for communication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>DUAL</code>
+    #                     </b>   –  
+    #             The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB subnet group
+    #             associated with the cluster must support IPv6.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
       nil,
       :availability_zones,
@@ -6897,6 +7037,7 @@ module Aws::Neptune
       :copy_tags_to_snapshot,
       :serverless_v2_scaling_configuration,
       :storage_type,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7071,6 +7212,27 @@ module Aws::Neptune
     #            <p>Default: <code>standard</code>
     #            </p>
     #   @return [String]
+    # @!attribute network_type
+    #   <p>The network type of the DB cluster.</p>
+    #            <p>Valid Values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>IPV4</code>
+    #                     </b>   –  
+    #           ( <i>the default</i> ) The DB cluster uses only IPv4 addresses for communication.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <b>
+    #                        <code>DUAL</code>
+    #                     </b>   –  
+    #             The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB subnet group
+    #             associated with the cluster must support IPv6.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
       nil,
       :db_cluster_identifier,
@@ -7090,6 +7252,7 @@ module Aws::Neptune
       :deletion_protection,
       :serverless_v2_scaling_configuration,
       :storage_type,
+      :network_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

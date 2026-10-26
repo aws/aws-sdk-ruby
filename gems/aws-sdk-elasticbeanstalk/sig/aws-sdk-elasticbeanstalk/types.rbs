@@ -123,6 +123,9 @@ module Aws::ElasticBeanstalk
         ?source_build_information: Types::SourceBuildInformation,
         ?build_arn: String,
         ?source_bundle: Types::S3Location,
+        ?image_source: Types::ImageSource,
+        ?image_build_configuration: Types::ImageBuildConfiguration,
+        ?process: bool,
         ?date_created: Time,
         ?date_updated: Time,
         ?status: String,
@@ -136,6 +139,9 @@ module Aws::ElasticBeanstalk
       attr_accessor source_build_information: Types::SourceBuildInformation?
       attr_accessor build_arn: String?
       attr_accessor source_bundle: Types::S3Location?
+      attr_accessor image_source: Types::ImageSource?
+      attr_accessor image_build_configuration: Types::ImageBuildConfiguration?
+      attr_accessor process: bool?
       attr_accessor date_created: Time?
       attr_accessor date_updated: Time?
       attr_accessor status: String?
@@ -205,6 +211,11 @@ module Aws::ElasticBeanstalk
       attr_accessor action_description: String?
       attr_accessor action_type: String?
       attr_accessor status: String?
+    end
+
+    module ArchitectureType
+      amd64: String
+      arm64: String
     end
 
     class AssociateEnvironmentOperationsRoleMessage
@@ -308,6 +319,17 @@ module Aws::ElasticBeanstalk
 
       attr_accessor available: bool?
       attr_accessor fully_qualified_cname: String?
+    end
+
+    class Cluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
     end
 
     class CodeBuildNotInServiceRegionException
@@ -484,6 +506,7 @@ module Aws::ElasticBeanstalk
         ?auto_create_application: bool,
         ?process: bool,
         ?tags: Array[Types::Tag],
+        ?image_configuration: Types::ImageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -496,6 +519,7 @@ module Aws::ElasticBeanstalk
       attr_accessor auto_create_application: bool?
       attr_accessor process: bool?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor image_configuration: Types::ImageConfiguration?
     end
 
     class CreateApplicationVersionOutput
@@ -1262,6 +1286,7 @@ module Aws::ElasticBeanstalk
     module EnvironmentInfoType
       tail: String
       bundle: String
+      analyze: String
     end
 
     class EnvironmentLink
@@ -1283,6 +1308,7 @@ module Aws::ElasticBeanstalk
       def initialize: (
         ?environment_name: String,
         ?auto_scaling_groups: Array[Types::AutoScalingGroup],
+        ?cluster: Types::Cluster,
         ?instances: Array[Types::Instance],
         ?launch_configurations: Array[Types::LaunchConfiguration],
         ?launch_templates: Array[Types::LaunchTemplate],
@@ -1294,6 +1320,7 @@ module Aws::ElasticBeanstalk
 
       attr_accessor environment_name: String?
       attr_accessor auto_scaling_groups: Array[Types::AutoScalingGroup]?
+      attr_accessor cluster: Types::Cluster?
       attr_accessor instances: Array[Types::Instance]?
       attr_accessor launch_configurations: Array[Types::LaunchConfiguration]?
       attr_accessor launch_templates: Array[Types::LaunchTemplate]?
@@ -1407,6 +1434,58 @@ module Aws::ElasticBeanstalk
       InternalFailure: String
       InvalidEnvironmentState: String
       PermissionsError: String
+    end
+
+    class ImageBuildConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?dockerfile_location: String,
+        ?buildpack: String,
+        ?architecture: String,
+        ?code_build_service_role: String,
+        ?compute_type: String,
+        ?timeout_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor dockerfile_location: String?
+      attr_accessor buildpack: String?
+      attr_accessor architecture: String?
+      attr_accessor code_build_service_role: String?
+      attr_accessor compute_type: String?
+      attr_accessor timeout_in_minutes: Integer?
+    end
+
+    module ImageBuildType
+      docker: String
+      buildpack: String
+    end
+
+    class ImageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::ImageSource,
+        ?build: Types::ImageBuildConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::ImageSource?
+      attr_accessor build: Types::ImageBuildConfiguration?
+    end
+
+    class ImageSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
     end
 
     class Instance

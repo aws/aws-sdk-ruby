@@ -478,6 +478,13 @@ module Aws::SSM
     # @!attribute triggered_alarms
     #   <p>The CloudWatch alarm that was invoked during the association.</p>
     #   @return [Array<Types::AlarmStateInformation>]
+    # @!attribute association_dispatch_assume_role
+    #   <p>A role used by association to take actions on your behalf.
+    #      State Manager will assume this role and call required APIs when dispatching
+    #      configurations to nodes. If not specified, <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html">
+    #      service-linked role for Systems Manager</a> will be used by default.
+    #     </p>
+    #   @return [String]
     class AssociationDescription < Struct.new(
       nil,
       :name,
@@ -509,6 +516,7 @@ module Aws::SSM
       :target_maps,
       :alarm_configuration,
       :triggered_alarms,
+      :association_dispatch_assume_role,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -843,6 +851,13 @@ module Aws::SSM
     #   <p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps
     #      can't be specified together.</p>
     #   @return [Array<Hash<String, Array<String>>>]
+    # @!attribute association_dispatch_assume_role
+    #   <p>A role used by association to take actions on your behalf.
+    #      State Manager will assume this role and call required APIs when dispatching
+    #      configurations to nodes. If not specified, <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html">
+    #      service-linked role for Systems Manager</a> will be used by default.
+    #     </p>
+    #   @return [String]
     class AssociationVersionInfo < Struct.new(
       nil,
       :association_id,
@@ -865,6 +880,7 @@ module Aws::SSM
       :schedule_offset,
       :duration,
       :target_maps,
+      :association_dispatch_assume_role,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1058,6 +1074,9 @@ module Aws::SSM
     # @!attribute failure_message
     #   <p>A message describing why an execution has failed, if the status is set to Failed.</p>
     #   @return [String]
+    # @!attribute warning_message
+    #   <p>A message that describes a non-critical issue that occurred during the automation execution.</p>
+    #   @return [String]
     # @!attribute mode
     #   <p>The automation execution mode.</p>
     #   @return [String]
@@ -1152,6 +1171,7 @@ module Aws::SSM
       :parameters,
       :outputs,
       :failure_message,
+      :warning_message,
       :mode,
       :parent_automation_execution_id,
       :executed_by,
@@ -1296,7 +1316,10 @@ module Aws::SSM
     #   <p>The action of the step that is currently running.</p>
     #   @return [String]
     # @!attribute failure_message
-    #   <p>The list of execution outputs as defined in the Automation runbook.</p>
+    #   <p>A message that describes a failure that occurred during the automation execution.</p>
+    #   @return [String]
+    # @!attribute warning_message
+    #   <p>A message that describes a non-critical issue that occurred during the automation execution.</p>
     #   @return [String]
     # @!attribute target_parameter_name
     #   <p>The list of execution outputs as defined in the Automation runbook.</p>
@@ -1376,6 +1399,7 @@ module Aws::SSM
       :current_step_name,
       :current_action,
       :failure_message,
+      :warning_message,
       :target_parameter_name,
       :targets,
       :target_maps,
@@ -1467,6 +1491,51 @@ module Aws::SSM
     class AutomationStepNotFoundException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The access details and targets for connecting to a Microsoft Azure tenant, including
+    #    the application registration used for authentication and the subscriptions to target.</p>
+    # @!attribute tenant_id
+    #   <p>The ID of the Azure tenant.</p>
+    #   @return [String]
+    # @!attribute tenant_display_name
+    #   <p>The display name of the Azure tenant.</p>
+    #   @return [String]
+    # @!attribute application_id
+    #   <p>The ID of the Azure application registration used for authentication.</p>
+    #   @return [String]
+    # @!attribute application_display_name
+    #   <p>The display name of the Azure application registration.</p>
+    #   @return [String]
+    # @!attribute targets
+    #   <p>The target Azure subscriptions for the cloud connector.</p>
+    #   @return [Types::ConfigurationTargets]
+    class AzureConfiguration < Struct.new(
+      nil,
+      :tenant_id,
+      :tenant_display_name,
+      :application_id,
+      :application_display_name,
+      :targets,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an Azure subscription targeted by the cloud connector.</p>
+    # @!attribute id
+    #   <p>The ID of the Azure subscription.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The display name of the Azure subscription.</p>
+    #   @return [String]
+    class AzureSubscription < Struct.new(
+      nil,
+      :id,
+      :display_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1584,6 +1653,82 @@ module Aws::SSM
     class CancelMaintenanceWindowExecutionResult < Struct.new(
       nil,
       :window_execution_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration that provides access details and targets for connecting to a third-party
+    #    cloud environment.</p>
+    # @!attribute azure_configuration
+    #   <p>The access details and targets for connecting to a Microsoft Azure environment.</p>
+    #   @return [Types::AzureConfiguration]
+    class CloudConnectorConfiguration < Struct.new(
+      :azure_configuration,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AzureConfiguration < CloudConnectorConfiguration; end
+      class Unknown < CloudConnectorConfiguration; end
+    end
+
+    # <p>A filter for listing cloud connectors.</p>
+    # @!attribute filter_key
+    #   <p>The name of the filter key.</p>
+    #   @return [String]
+    # @!attribute filter_values
+    #   <p>The filter values. Valid values for each filter key are as follows:</p>
+    #            <dl>
+    #               <dt>SubscriptionId</dt>
+    #               <dd>
+    #                  <p>The Azure subscription ID to filter by. To return only tenant-level connectors,
+    #        specify <code>NONE</code>.</p>
+    #               </dd>
+    #               <dt>TenantId</dt>
+    #               <dd>
+    #                  <p>The Azure tenant ID to filter by. Filters the results to connectors
+    #        that target the specified tenant.</p>
+    #               </dd>
+    #            </dl>
+    #   @return [Array<String>]
+    class CloudConnectorFilter < Struct.new(
+      nil,
+      :filter_key,
+      :filter_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Summary information about a cloud connector.</p>
+    # @!attribute cloud_connector_id
+    #   <p>The ID of the cloud connector.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The friendly name of the cloud connector.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the cloud connector.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role used by the cloud connector.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time the cloud connector was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the cloud connector was last updated.</p>
+    #   @return [Time]
+    class CloudConnectorSummary < Struct.new(
+      nil,
+      :cloud_connector_id,
+      :display_name,
+      :description,
+      :role_arn,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2486,6 +2631,33 @@ module Aws::SSM
       end
     end
 
+    # <p>The target resources in the third-party cloud environment.</p>
+    # @!attribute subscriptions
+    #   <p>A list of Azure subscriptions to target.</p>
+    #   @return [Array<Types::AzureSubscription>]
+    class ConfigurationTargets < Struct.new(
+      :subscriptions,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Subscriptions < ConfigurationTargets; end
+      class Unknown < ConfigurationTargets; end
+    end
+
+    # <p>An error occurred because of a conflict with a concurrent request or the current state of
+    #    the resource. Retry your request.</p>
+    # @!attribute message
+    #   @return [String]
+    class ConflictException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute description
     #   <p>A user-defined description of the resource that you want to register with Systems Manager. </p>
     #            <important>
@@ -2583,9 +2755,24 @@ module Aws::SSM
     # @!attribute entries
     #   <p>One or more associations.</p>
     #   @return [Array<Types::CreateAssociationBatchRequestEntry>]
+    # @!attribute association_dispatch_assume_role
+    #   <p>A role used by association to take actions on your behalf.
+    #      State Manager will assume this role and call required APIs when dispatching
+    #      configurations to nodes. If not specified, <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html">
+    #      service-linked role for Systems Manager</a> will be used by default.
+    #     </p>
+    #            <note>
+    #               <p>It is recommended that you define a custom IAM role so that you have full control of
+    #       the permissions that State Manager has when taking actions on your behalf.</p>
+    #               <p>Service-linked role support in State Manager is being phased out. Associations
+    #       relying on service-linked role may require updates in the future to continue
+    #       functioning properly.</p>
+    #            </note>
+    #   @return [String]
     class CreateAssociationBatchRequest < Struct.new(
       nil,
       :entries,
+      :association_dispatch_assume_role,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2906,7 +3093,8 @@ module Aws::SSM
     #      association. Use this action to create an association in multiple Regions and multiple
     #      accounts.</p>
     #            <note>
-    #               <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>
+    #               <p>The <code>TargetLocationAlarmConfiguration</code> parameter is not supported by State
+    #       Manager.</p>
     #            </note>
     #   @return [Array<Types::TargetLocation>]
     # @!attribute schedule_offset
@@ -2953,6 +3141,20 @@ module Aws::SSM
     #   <p>The details for the CloudWatch alarm you want to apply to an automation or
     #      command.</p>
     #   @return [Types::AlarmConfiguration]
+    # @!attribute association_dispatch_assume_role
+    #   <p>A role used by association to take actions on your behalf.
+    #      State Manager will assume this role and call required APIs when dispatching
+    #      configurations to nodes. If not specified, <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html">
+    #      service-linked role for Systems Manager</a> will be used by default.
+    #     </p>
+    #            <note>
+    #               <p>It is recommended that you define a custom IAM role so that you have full control of
+    #       the permissions that State Manager has when taking actions on your behalf.</p>
+    #               <p>Service-linked role support in State Manager is being phased out. Associations
+    #       relying on service-linked role may require updates in the future to continue
+    #       functioning properly.</p>
+    #            </note>
+    #   @return [String]
     class CreateAssociationRequest < Struct.new(
       nil,
       :name,
@@ -2976,6 +3178,7 @@ module Aws::SSM
       :target_maps,
       :tags,
       :alarm_configuration,
+      :association_dispatch_assume_role,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2987,6 +3190,50 @@ module Aws::SSM
     class CreateAssociationResult < Struct.new(
       nil,
       :association_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute display_name
+    #   <p>A friendly name for the cloud connector.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM role that the cloud connector
+    #      uses to communicate with the third-party cloud environment.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description for the cloud connector.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration details for connecting to the third-party cloud environment.</p>
+    #   @return [Types::CloudConnectorConfiguration]
+    # @!attribute config_connector_arn
+    #   <p>The ARN of the Amazon Web Services Config connector associated with this cloud connector.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource
+    #      in different ways, such as by purpose, owner, or environment.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateCloudConnectorRequest < Struct.new(
+      nil,
+      :display_name,
+      :role_arn,
+      :description,
+      :configuration,
+      :config_connector_arn,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cloud_connector_id
+    #   <p>The ID of the cloud connector that was created.</p>
+    #   @return [String]
+    class CreateCloudConnectorResult < Struct.new(
+      nil,
+      :cloud_connector_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3282,17 +3529,22 @@ module Aws::SSM
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>/aws/changerequest</code>
-    #                  </p>
-    #                  <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change
-    #        requests. </p>
-    #               </li>
-    #               <li>
-    #                  <p>
     #                     <code>/aws/insight</code>
     #                  </p>
     #                  <p>This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate
     #        OpsItems. </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>/aws/changerequest</code>
+    #                  </p>
+    #                  <p>This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change
+    #        requests. </p>
+    #                  <important>
+    #                     <p>Amazon Web Services Systems Manager Change Manager is no longer open to new customers. Existing customers can
+    #     continue to use the service as normal. For more information, see
+    #   <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html">Amazon Web Services Systems Manager Change Manager availability change</a>.</p>
+    #                  </important>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -3747,6 +3999,28 @@ module Aws::SSM
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute cloud_connector_id
+    #   <p>The ID of the cloud connector to delete.</p>
+    #   @return [String]
+    class DeleteCloudConnectorRequest < Struct.new(
+      nil,
+      :cloud_connector_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cloud_connector_id
+    #   <p>The ID of the cloud connector that was deleted.</p>
+    #   @return [String]
+    class DeleteCloudConnectorResult < Struct.new(
+      nil,
+      :cloud_connector_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of the document.</p>
     #   @return [String]
@@ -4002,11 +4276,29 @@ module Aws::SSM
     #   <p>ID of the current policy version. The hash helps to prevent multiple calls from attempting
     #      to overwrite a policy.</p>
     #   @return [String]
+    # @!attribute deletion_mode
+    #   <p>Specifies the intended outcome of the operation. Applies only to the <code>Document</code>
+    #      resource type. The operation ignores this parameter for other resource types. Optional. Defaults
+    #      to <code>RemoveSharing</code>.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>RemoveSharing</code> – Deletes the resource policy and removes sharing of the
+    #        document.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>RollbackMigration</code> – Reverts the document to Custom sharing, preserving
+    #        existing consumer access, instead of removing the policy.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class DeleteResourcePolicyRequest < Struct.new(
       nil,
       :resource_arn,
       :policy_id,
       :policy_hash,
+      :deletion_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6875,6 +7167,56 @@ module Aws::SSM
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute cloud_connector_id
+    #   <p>The ID of the cloud connector to retrieve information about.</p>
+    #   @return [String]
+    class GetCloudConnectorRequest < Struct.new(
+      nil,
+      :cloud_connector_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cloud_connector_arn
+    #   <p>The ARN of the cloud connector.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>The friendly name of the cloud connector.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the cloud connector.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The ARN of the IAM role used by the cloud connector.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The configuration details for the third-party cloud environment connection.</p>
+    #   @return [Types::CloudConnectorConfiguration]
+    # @!attribute config_connector_arn
+    #   <p>The ARN of the Amazon Web Services Config connector associated with this cloud connector.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time the cloud connector was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time the cloud connector was last updated.</p>
+    #   @return [Time]
+    class GetCloudConnectorResult < Struct.new(
+      nil,
+      :cloud_connector_arn,
+      :display_name,
+      :description,
+      :role_arn,
+      :configuration,
+      :config_connector_arn,
+      :created_at,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute command_id
     #   <p>(Required) The parent command ID of the invocation plugin.</p>
     #   @return [String]
@@ -7124,11 +7466,10 @@ module Aws::SSM
     #   <p>Defines the basic information about a patch baseline override.</p>
     #   @return [Types::BaselineOverride]
     # @!attribute use_s3_dual_stack_endpoint
-    #   <p>Specifies whether to use S3 dualstack endpoints
-    #      for the patch snapshot download URL. Set to <code>true</code> to receive a presigned URL that
-    #      supports both IPv4 and IPv6 connectivity. Set to <code>false</code> to use standard IPv4-only
-    #      endpoints. Default is <code>false</code>. This parameter is required for managed nodes in
-    #      IPv6-only environments. </p>
+    #   <p>Specifies whether to use S3 dualstack endpoints for the patch snapshot download URL. Set to
+    #       <code>true</code> to receive a presigned URL that supports both IPv4 and IPv6 connectivity. Set
+    #      to <code>false</code> to use standard IPv4-only endpoints. Default is <code>false</code>. This
+    #      parameter is required for managed nodes in IPv6-only environments. </p>
     #   @return [Boolean]
     class GetDeployablePatchSnapshotForInstanceRequest < Struct.new(
       nil,
@@ -8156,7 +8497,7 @@ module Aws::SSM
     #   @return [String]
     # @!attribute operating_system
     #   <p>Returns the operating system rule specified for patch groups using the patch
-    #      baseline.</p>
+    #     baseline. The default value is <code>WINDOWS</code>. </p>
     #   @return [String]
     class GetPatchBaselineForPatchGroupRequest < Struct.new(
       nil,
@@ -8624,6 +8965,9 @@ module Aws::SSM
     # @!attribute managed_status
     #   <p>Indicates whether the node is managed by Systems Manager.</p>
     #   @return [String]
+    # @!attribute name
+    #   <p>The name assigned to the managed node.</p>
+    #   @return [String]
     # @!attribute platform_type
     #   <p>The operating system platform type of the managed node.</p>
     #   @return [String]
@@ -8637,6 +8981,23 @@ module Aws::SSM
     #   <p>The type of instance, either an EC2 instance or another supported machine type in a hybrid
     #      fleet.</p>
     #   @return [String]
+    # @!attribute source_type
+    #   <p>The type of the source resource. For IoT Greengrass devices,
+    #      <code>SourceType</code> is <code>AWS::IoT::Thing</code>.</p>
+    #   @return [String]
+    # @!attribute source_id
+    #   <p>The ID of the source resource. For IoT Greengrass devices, <code>SourceId</code> is
+    #      the Thing name.</p>
+    #   @return [String]
+    # @!attribute source_location
+    #   <p>The location of the source resource in the third-party cloud environment.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone where the managed node is located.</p>
+    #   @return [String]
+    # @!attribute availability_zone_id
+    #   <p>The Availability Zone ID where the managed node is located.</p>
+    #   @return [String]
     class InstanceInfo < Struct.new(
       nil,
       :agent_type,
@@ -8645,10 +9006,16 @@ module Aws::SSM
       :instance_status,
       :ip_address,
       :managed_status,
+      :name,
       :platform_type,
       :platform_name,
       :platform_version,
       :resource_type,
+      :source_type,
+      :source_id,
+      :source_location,
+      :availability_zone,
+      :availability_zone_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8741,7 +9108,11 @@ module Aws::SSM
     #   @return [String]
     # @!attribute source_type
     #   <p>The type of the source resource. For IoT Greengrass devices, <code>SourceType</code>
-    #      is <code>AWS::IoT::Thing</code>. </p>
+    #      is <code>AWS::IoT::Thing</code>. For Azure Virtual Machines, <code>SourceType</code> is
+    #       <code>Microsoft.Compute/virtualMachines</code>.</p>
+    #   @return [String]
+    # @!attribute source_location
+    #   <p>The location of the source resource in the third-party cloud environment.</p>
     #   @return [String]
     class InstanceInformation < Struct.new(
       nil,
@@ -8766,6 +9137,7 @@ module Aws::SSM
       :association_overview,
       :source_id,
       :source_type,
+      :source_location,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8800,7 +9172,7 @@ module Aws::SSM
     # @!attribute key
     #   <p>The filter key name to describe your managed nodes.</p>
     #            <p>Valid filter key values: ActivationIds | AgentVersion | AssociationStatus | IamRole |
-    #      InstanceIds | PingStatus | PlatformType | ResourceType | SourceIds | SourceTypes | "tag-key" |
+    #      InstanceIds | PingStatus | PlatformTypes | ResourceType | SourceIds | SourceTypes | "tag-key" |
     #       "tag:<code>{keyname}</code>
     #            </p>
     #            <ul>
@@ -8813,7 +9185,7 @@ module Aws::SSM
     #        Inactive (deprecated)</p>
     #               </li>
     #               <li>
-    #                  <p>Valid values for the <code>PlatformType</code> filter key: Windows | Linux | MacOS</p>
+    #                  <p>Valid values for the <code>PlatformTypes</code> filter key: Windows | Linux | MacOS</p>
     #               </li>
     #               <li>
     #                  <p>Valid values for the <code>ResourceType</code> filter key: EC2Instance |
@@ -8821,7 +9193,7 @@ module Aws::SSM
     #               </li>
     #               <li>
     #                  <p>Valid values for the <code>SourceType</code> filter key: AWS::EC2::Instance |
-    #        AWS::SSM::ManagedInstance | AWS::IoT::Thing</p>
+    #        AWS::SSM::ManagedInstance | AWS::IoT::Thing | Microsoft.Compute/virtualMachines</p>
     #               </li>
     #               <li>
     #                  <p>Valid tag examples: <code>Key=tag-key,Values=Purpose</code> |
@@ -9190,7 +9562,15 @@ module Aws::SSM
     #   <p>The ID of the source resource.</p>
     #   @return [String]
     # @!attribute source_type
-    #   <p>The type of the source resource.</p>
+    #   <p>The type of the source resource. Valid values: <code>AWS::EC2::Instance</code> |
+    #       <code>AWS::SSM::ManagedInstance</code> | <code>AWS::IoT::Thing</code> |
+    #       <code>Microsoft.Compute/virtualMachines</code>.</p>
+    #   @return [String]
+    # @!attribute source_location
+    #   <p>The location of the source resource in the third-party cloud environment.</p>
+    #   @return [String]
+    # @!attribute availability_zone
+    #   <p>The Availability Zone where the managed node is located.</p>
     #   @return [String]
     class InstanceProperty < Struct.new(
       nil,
@@ -9220,6 +9600,8 @@ module Aws::SSM
       :association_overview,
       :source_id,
       :source_type,
+      :source_location,
+      :availability_zone,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10337,6 +10719,41 @@ module Aws::SSM
     class ListAssociationsResult < Struct.new(
       nil,
       :associations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of items to return for this call.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #      call.)</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>One or more filters to limit the cloud connectors returned in the response.</p>
+    #   @return [Array<Types::CloudConnectorFilter>]
+    class ListCloudConnectorsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cloud_connectors
+    #   <p>A list of cloud connector summary objects.</p>
+    #   @return [Array<Types::CloudConnectorSummary>]
+    # @!attribute next_token
+    #   <p>The token to use when requesting the next set of items.</p>
+    #   @return [String]
+    class ListCloudConnectorsResult < Struct.new(
+      nil,
+      :cloud_connectors,
       :next_token,
       keyword_init: true
     )
@@ -11607,6 +12024,10 @@ module Aws::SSM
     #       <code>AUTOMATION</code> task types, <code>TaskArn</code> is the Amazon Web Services Systems Manager (SSM document) name or
     #      ARN. For <code>LAMBDA</code> tasks, it's the function name or ARN. For
     #       <code>STEP_FUNCTIONS</code> tasks, it's the state machine ARN.</p>
+    #            <note>
+    #               <p>Maintenance Window does not validate the TaskArn when you register a task.
+    #      A successful registration does not guarantee that the TaskArn is valid.</p>
+    #            </note>
     #   @return [String]
     # @!attribute type
     #   <p>The type of task.</p>
@@ -11824,6 +12245,17 @@ module Aws::SSM
 
     class ModifyDocumentPermissionResponse < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The requested operation is no longer supported by Systems Manager.</p>
+    # @!attribute message
+    #   @return [String]
+    class NoLongerSupportedException < Struct.new(
+      nil,
+      :message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13535,6 +13967,9 @@ module Aws::SSM
     #   <p>The number of days after the release date of each patch matched by the rule that the patch
     #      is marked as approved in the patch baseline. For example, a value of <code>7</code> means that
     #      patches are approved seven days after they are released.</p>
+    #            <p>Patch Manager evaluates patch release dates using Coordinated Universal Time (UTC). If a
+    #      patch is released at <code>2025-11-09T18:00:00Z</code> and <code>ApproveAfterDays</code> is set to
+    #       <code>7</code>, the patch will be approved after <code>2025-11-16T18:00:00Z</code>.</p>
     #            <p>This parameter is marked as <code>Required: No</code>, but your request must include a value
     #      for either <code>ApproveAfterDays</code> or <code>ApproveUntilDate</code>.</p>
     #            <p>Not supported for Debian Server or Ubuntu Server.</p>
@@ -13550,7 +13985,11 @@ module Aws::SSM
     #   <p>The cutoff date for auto approval of released patches. Any patches released on or before
     #      this date are installed automatically.</p>
     #            <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example,
-    #      <code>2024-12-31</code>.</p>
+    #      <code>2025-11-16</code>.</p>
+    #            <p>Patch Manager evaluates patch release dates using Coordinated Universal Time (UTC). If you
+    #      enter the date <code>2025-11-16</code>, patches released between
+    #       <code>2025-11-16T00:00:00Z</code> and <code>2025-11-16T23:59:59Z</code> will be included in the
+    #      approval.</p>
     #            <p>This parameter is marked as <code>Required: No</code>, but your request must include a value
     #      for either <code>ApproveUntilDate</code> or <code>ApproveAfterDays</code>.</p>
     #            <p>Not supported for Debian Server or Ubuntu Server.</p>
@@ -16159,6 +16598,9 @@ module Aws::SSM
     # @!attribute failure_message
     #   <p>If a step failed, this message explains why the execution failed.</p>
     #   @return [String]
+    # @!attribute warning_message
+    #   <p>A message that describes a non-critical issue that occurred during the step execution. Present only if the step status includes a warning.</p>
+    #   @return [String]
     # @!attribute failure_details
     #   <p>Information about the Automation failure.</p>
     #   @return [Types::FailureDetails]
@@ -16213,6 +16655,7 @@ module Aws::SSM
       :outputs,
       :response,
       :failure_message,
+      :warning_message,
       :failure_details,
       :step_execution_id,
       :overridden_parameters,
@@ -16479,9 +16922,6 @@ module Aws::SSM
     # @!attribute include_child_organization_units
     #   <p>Indicates whether to include child organizational units (OUs) that are children of the
     #      targeted OUs. The default is <code>false</code>.</p>
-    #            <note>
-    #               <p>This parameter is not supported by State Manager.</p>
-    #            </note>
     #   @return [Boolean]
     # @!attribute exclude_accounts
     #   <p>Amazon Web Services accounts or organizational units to exclude as expanded targets.</p>
@@ -16901,7 +17341,8 @@ module Aws::SSM
     #      association. Use this action to update an association in multiple Regions and multiple
     #      accounts.</p>
     #            <note>
-    #               <p>The <code>IncludeChildOrganizationUnits</code> parameter is not supported by State Manager.</p>
+    #               <p>The <code>TargetLocationAlarmConfiguration</code> parameter is not supported by State
+    #       Manager.</p>
     #            </note>
     #   @return [Array<Types::TargetLocation>]
     # @!attribute schedule_offset
@@ -16942,6 +17383,20 @@ module Aws::SSM
     #   <p>The details for the CloudWatch alarm you want to apply to an automation or
     #      command.</p>
     #   @return [Types::AlarmConfiguration]
+    # @!attribute association_dispatch_assume_role
+    #   <p>A role used by association to take actions on your behalf.
+    #      State Manager will assume this role and call required APIs when dispatching
+    #      configurations to nodes. If not specified, <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html">
+    #      service-linked role for Systems Manager</a> will be used by default.
+    #     </p>
+    #            <note>
+    #               <p>It is recommended that you define a custom IAM role so that you have full control of
+    #       the permissions that State Manager has when taking actions on your behalf.</p>
+    #               <p>Service-linked role support in State Manager is being phased out. Associations
+    #       relying on service-linked role may require updates in the future to continue
+    #       functioning properly.</p>
+    #            </note>
+    #   @return [String]
     class UpdateAssociationRequest < Struct.new(
       nil,
       :association_id,
@@ -16965,6 +17420,7 @@ module Aws::SSM
       :duration,
       :target_maps,
       :alarm_configuration,
+      :association_dispatch_assume_role,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17006,6 +17462,41 @@ module Aws::SSM
     class UpdateAssociationStatusResult < Struct.new(
       nil,
       :association_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cloud_connector_id
+    #   <p>The ID of the cloud connector to update.</p>
+    #   @return [String]
+    # @!attribute display_name
+    #   <p>A new friendly name for the cloud connector.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>The updated configuration details for connecting to the third-party cloud
+    #      environment.</p>
+    #   @return [Types::CloudConnectorConfiguration]
+    # @!attribute description
+    #   <p>A new description for the cloud connector.</p>
+    #   @return [String]
+    class UpdateCloudConnectorRequest < Struct.new(
+      nil,
+      :cloud_connector_id,
+      :display_name,
+      :configuration,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cloud_connector_id
+    #   <p>The ID of the cloud connector that was updated.</p>
+    #   @return [String]
+    class UpdateCloudConnectorResult < Struct.new(
+      nil,
+      :cloud_connector_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17093,8 +17584,8 @@ module Aws::SSM
     #            </note>
     #   @return [String]
     # @!attribute document_format
-    #   <p>Specify the document format for the new document version. Systems Manager supports JSON and YAML
-    #      documents. JSON is the default format.</p>
+    #   <p>Specify the document format for the new document version. The document format can be JSON,
+    #      YAML, or TEXT. JSON is the default format.</p>
     #   @return [String]
     # @!attribute target_type
     #   <p>Specify a new target type for the document.</p>
@@ -18116,6 +18607,41 @@ module Aws::SSM
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute cloud_connector_id
+    #   <p>The ID of the cloud connector to validate.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of validation findings to return.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next set of items to return. (You received this token from a previous
+    #      call.)</p>
+    #   @return [String]
+    class ValidateCloudConnectorRequest < Struct.new(
+      nil,
+      :cloud_connector_id,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute validation_findings
+    #   <p>A list of validation findings for the cloud connector.</p>
+    #   @return [Array<Types::ValidationFinding>]
+    # @!attribute next_token
+    #   <p>The token to use when requesting the next set of items.</p>
+    #   @return [String]
+    class ValidateCloudConnectorResult < Struct.new(
+      nil,
+      :validation_findings,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request isn't valid. Verify that you entered valid contents for the command and try
     #    again.</p>
     # @!attribute message
@@ -18127,6 +18653,50 @@ module Aws::SSM
       nil,
       :message,
       :reason_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A validation finding from a cloud connector validation check.</p>
+    # @!attribute type
+    #   <p>The type of the validation finding.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>A code that identifies the specific validation finding.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message that describes the validation finding.</p>
+    #   @return [String]
+    # @!attribute provider_message
+    #   <p>A message from the third-party cloud provider related to the validation finding.</p>
+    #   @return [String]
+    # @!attribute scope
+    #   <p>The scope of the validation finding, identifying the specific resource affected.</p>
+    #   @return [Types::ValidationFindingScope]
+    class ValidationFinding < Struct.new(
+      nil,
+      :type,
+      :code,
+      :message,
+      :provider_message,
+      :scope,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Identifies the specific resource scope of a validation finding.</p>
+    # @!attribute type
+    #   <p>The type of the resource scope.</p>
+    #   @return [String]
+    # @!attribute id
+    #   <p>The ID of the resource within the scope.</p>
+    #   @return [String]
+    class ValidationFindingScope < Struct.new(
+      nil,
+      :type,
+      :id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

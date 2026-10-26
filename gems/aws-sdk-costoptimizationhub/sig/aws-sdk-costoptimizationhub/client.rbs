@@ -82,6 +82,26 @@ module Aws::CostOptimizationHub
       ?recommendation_id: String
     ) -> _GetRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationResponse
 
+    interface _ListEfficiencyMetricsResponse
+      include Smithy::Client::_Response[Types::ListEfficiencyMetricsResponse]
+      def efficiency_metrics_by_group: () -> Array[Types::EfficiencyMetricsByGroup]?
+      def next_token: () -> String?
+    end
+    def list_efficiency_metrics: (
+      ?group_by: String,
+      ?granularity: String,
+      ?time_period: {
+        start: String,
+        end: untyped
+      },
+      ?max_results: Integer,
+      ?order_by: {
+        dimension: String,
+        order: String
+      },
+      ?next_token: String
+    ) -> _ListEfficiencyMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEfficiencyMetricsResponse
+
     interface _ListEnrollmentStatusesResponse
       include Smithy::Client::_Response[Types::ListEnrollmentStatusesResponse]
       def items: () -> Array[Types::AccountEnrollmentStatus]?

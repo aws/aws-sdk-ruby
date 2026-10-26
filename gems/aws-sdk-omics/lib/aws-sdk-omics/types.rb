@@ -344,6 +344,58 @@ module Aws::Omics
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A summary of a batch returned by <code>ListBatch</code>.</p>
+    # @!attribute id
+    #   <p>The batch identifier.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The batch name.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current batch status.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp when the batch was created.</p>
+    #   @return [Time]
+    # @!attribute total_runs
+    #   <p>The total number of runs in the batch.</p>
+    #   @return [Integer]
+    # @!attribute workflow_id
+    #   <p>The identifier of the workflow used for the batch.</p>
+    #   @return [String]
+    class BatchListItem < Struct.new(
+      nil,
+      :id,
+      :name,
+      :status,
+      :created_at,
+      :total_runs,
+      :workflow_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A union type representing per-run configurations for the batch. Specify exactly one of the following members.</p>
+    # @!attribute inline_settings
+    #   <p>A list of per-run configurations provided inline in the request. Each entry must include a unique <code>runSettingId</code>. Supports up to 100 entries. For batches with more than 100 runs, use <code>s3UriSettings</code>.</p>
+    #   @return [Array<Types::InlineSetting>]
+    # @!attribute s3_uri_settings
+    #   <p>An Amazon S3 URI pointing to a JSON file containing per-run configurations. The file must be a JSON array in the same format as <code>inlineSettings</code>. Supports up to 100,000 run configurations. The maximum file size is 6 GB.</p> <p>The IAM service role in <code>roleArn</code> must have read access to this S3 object. HealthOmics validates access to the file during the synchronous API call and records the file's ETag. If the file is modified after submission, the batch fails.</p>
+    #   @return [String]
+    class BatchRunSettings < Struct.new(
+      :inline_settings,
+      :s3_uri_settings,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class InlineSettings < BatchRunSettings; end
+      class S3UriSettings < BatchRunSettings; end
+      class Unknown < BatchRunSettings; end
+    end
+
     # @!attribute job_id
     #   <p>The job's ID.</p>
     #   @return [String]
@@ -356,6 +408,24 @@ module Aws::Omics
     end
 
     class CancelAnnotationImportResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute batch_id
+    #   <p>The identifier portion of the run batch ARN.</p>
+    #   @return [String]
+    class CancelRunBatchRequest < Struct.new(
+      nil,
+      :batch_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class CancelRunBatchResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -441,6 +511,54 @@ module Aws::Omics
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Minimal details for a configuration resource.</p>
+    # @!attribute name
+    #   <p>User-friendly name for the configuration.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>Unique resource identifier for the configuration.</p>
+    #   @return [String]
+    # @!attribute uuid
+    #   <p>Unique identifier for the configuration.</p>
+    #   @return [String]
+    class ConfigurationDetails < Struct.new(
+      nil,
+      :name,
+      :arn,
+      :uuid,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration list item with summary information.</p>
+    # @!attribute arn
+    #   <p>Unique resource identifier for the configuration.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>User-friendly name for the configuration.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>Description for the configuration.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Current configuration status.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>Configuration creation timestamp.</p>
+    #   @return [Time]
+    class ConfigurationListItem < Struct.new(
+      nil,
+      :arn,
+      :name,
+      :description,
+      :status,
+      :creation_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request cannot be applied to the target resource in its current state.</p>
     # @!attribute message
     #   @return [String]
@@ -452,7 +570,7 @@ module Aws::Omics
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>
+    # <p>Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     # @!attribute registry_mappings
     #   <p>Mapping that provides the ECR repository path where upstream container images are pulled and synchronized.</p>
     #   @return [Array<Types::RegistryMapping>]
@@ -603,6 +721,72 @@ module Aws::Omics
       :name,
       :status,
       :creation_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>User-friendly name for the configuration.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>Optional description for the configuration.</p>
+    #   @return [String]
+    # @!attribute run_configurations
+    #   <p>Required run-specific configurations.</p>
+    #   @return [Types::RunConfigurations]
+    # @!attribute tags
+    #   <p>Optional tags for the configuration.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute request_id
+    #   <p>Optional request idempotency token. If not specified, a universally unique identifier (UUID) will be automatically generated for the request.</p>
+    #   @return [String]
+    class CreateConfigurationRequest < Struct.new(
+      nil,
+      :name,
+      :description,
+      :run_configurations,
+      :tags,
+      :request_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>Unique resource identifier for the configuration.</p>
+    #   @return [String]
+    # @!attribute uuid
+    #   <p>Unique identifier for the configuration.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>User-friendly name for the configuration.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>Description for the configuration.</p>
+    #   @return [String]
+    # @!attribute run_configurations
+    #   <p>Run-specific configurations.</p>
+    #   @return [Types::RunConfigurationsResponse]
+    # @!attribute status
+    #   <p>Current configuration status.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>Configuration creation timestamp.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>Tags for the configuration.</p>
+    #   @return [Hash<String, String>]
+    class CreateConfigurationResponse < Struct.new(
+      nil,
+      :arn,
+      :uuid,
+      :name,
+      :description,
+      :run_configurations,
+      :status,
+      :creation_time,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1073,7 +1257,7 @@ module Aws::Omics
     #   <p>A description for the workflow.</p>
     #   @return [String]
     # @!attribute engine
-    #   <p>The workflow engine for the workflow. This is only required if you have workflow definition files from more than one engine in your zip file. Otherwise, the service can detect the engine automatically from your workflow definition.</p>
+    #   <p>The workflow engine for the workflow. By default, Amazon Web Services HealthOmics detects the engine automatically from your workflow definition. Provide a value if you have workflow definition files from more than one engine in your zip file, or to use WDL lenient.</p> <p>WDL lenient is designed to handle workflows migrated from Cromwell. It supports customer Cromwell directives and some non-conformant logic. For details, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflow-wdl-type-conversion.html">Implicit type conversion in WDL lenient</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     #   @return [String]
     # @!attribute definition_zip
     #   <p>A ZIP archive containing the main workflow definition file and dependencies that it imports for the workflow. You can use a file with a ://fileb prefix instead of the Base64 string. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflow-defn-requirements.html">Workflow definition requirements</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
@@ -1103,7 +1287,7 @@ module Aws::Omics
     #   <p>The default storage type for runs that use this workflow. The <code>storageType</code> can be overridden at run time. <code>DYNAMIC</code> storage dynamically scales the storage up or down, based on file system utilization. <code>STATIC</code> storage allocates a fixed amount of storage. For more information about dynamic and static storage types, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html">Run storage types</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     #   @return [String]
     # @!attribute container_registry_map
-    #   <p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>
+    #   <p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     #   @return [Types::ContainerRegistryMap]
     # @!attribute container_registry_map_uri
     #   <p>(Optional) URI of the S3 location for the registry mapping file.</p>
@@ -1223,7 +1407,7 @@ module Aws::Omics
     #   <p>Amazon Web Services Id of the owner of the S3 bucket that contains the workflow definition. You need to specify this parameter if your account is not the bucket owner.</p>
     #   @return [String]
     # @!attribute container_registry_map
-    #   <p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>. </p>
+    #   <p>(Optional) Use a container registry map to specify mappings between the ECR private repository and one or more upstream registries. For more information, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     #   @return [Types::ContainerRegistryMap]
     # @!attribute container_registry_map_uri
     #   <p>(Optional) URI of the S3 location for the registry mapping file.</p>
@@ -1297,6 +1481,106 @@ module Aws::Omics
       :status,
       :tags,
       :uuid,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Shared configuration applied to all runs in a batch. Fields specified in a per-run <code>InlineSetting</code> entry override the corresponding fields in this object for that run. The <code>parameters</code> and <code>runTags</code> fields are merged rather than replaced — run-specific values take precedence when keys overlap.</p>
+    # @!attribute workflow_id
+    #   <p>The identifier of the workflow to run.</p>
+    #   @return [String]
+    # @!attribute workflow_type
+    #   <p>The type of the originating workflow. Batch runs are not supported with <code>READY2RUN</code> workflows.</p>
+    #   @return [String]
+    # @!attribute role_arn
+    #   <p>The IAM role ARN that grants HealthOmics permissions to access required Amazon Web Services resources such as Amazon S3 and CloudWatch. The role must have the same permissions required for individual <code>StartRun</code> calls.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>An optional user-friendly name applied to each workflow run. Can be overridden per run.</p>
+    #   @return [String]
+    # @!attribute cache_id
+    #   <p>The identifier of the run cache to associate with the runs.</p>
+    #   @return [String]
+    # @!attribute cache_behavior
+    #   <p>The cache behavior for the runs. Requires <code>cacheId</code> to be set.</p>
+    #   @return [String]
+    # @!attribute run_group_id
+    #   <p>The ID of the run group to contain all workflow runs in the batch.</p>
+    #   @return [String]
+    # @!attribute priority
+    #   <p>An integer priority for the workflow runs. Higher values correspond to higher priority. A value of 0 corresponds to the lowest priority. Can be overridden per run.</p>
+    #   @return [Integer]
+    # @!attribute parameters
+    #   <p>Workflow parameter names and values shared across all runs. Merged with per-run parameters; run-specific values take precedence when keys overlap. Can be overridden per run.</p>
+    #   @return [JSON]
+    # @!attribute storage_capacity
+    #   <p>The filesystem size in gibibytes (GiB) provisioned for each workflow run and shared by all tasks in that run. Defaults to 1200 GiB if not specified.</p>
+    #   @return [Integer]
+    # @!attribute output_uri
+    #   <p>The destination S3 URI for workflow outputs. Must begin with <code>s3://</code>. The <code>roleArn</code> must grant write permissions to this bucket. Can be overridden per run.</p>
+    #   @return [String]
+    # @!attribute log_level
+    #   <p>The verbosity level for CloudWatch Logs emitted during each run.</p>
+    #   @return [String]
+    # @!attribute run_tags
+    #   <p>Amazon Web Services tags to associate with each workflow run. Merged with per-run <code>runTags</code>; run-specific values take precedence when keys overlap.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute retention_mode
+    #   <p>The retention behavior for runs after completion.</p>
+    #   @return [String]
+    # @!attribute storage_type
+    #   <p>The storage type for the workflow runs.</p>
+    #   @return [String]
+    # @!attribute workflow_owner_id
+    #   <p>The Amazon Web Services account ID of the workflow owner, used for cross-account workflow sharing.</p>
+    #   @return [String]
+    # @!attribute output_bucket_owner_id
+    #   <p>The expected Amazon Web Services account ID of the owner of the output S3 bucket. Can be overridden per run.</p>
+    #   @return [String]
+    # @!attribute workflow_version_name
+    #   <p>The version name of the specified workflow.</p>
+    #   @return [String]
+    # @!attribute networking_mode
+    #   <p>Optional configuration for run networking behavior. If not specified, this will default to RESTRICTED.</p>
+    #   @return [String]
+    # @!attribute configuration_name
+    #   <p>Optional configuration name to use for the workflow run.</p>
+    #   @return [String]
+    # @!attribute session_policy
+    #   <p>Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter.</p>
+    #   @return [String]
+    # @!attribute engine_settings
+    #   <p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles).</p>
+    #   @return [JSON]
+    # @!attribute scratch_storage_mode
+    #   <p>Optional configuration for enabling scratch ephemeral storage mounted at /tmp. If not specified, this will default to SHARED. This configuration is applicable only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.</p>
+    #   @return [String]
+    class DefaultRunSetting < Struct.new(
+      nil,
+      :workflow_id,
+      :workflow_type,
+      :role_arn,
+      :name,
+      :cache_id,
+      :cache_behavior,
+      :run_group_id,
+      :priority,
+      :parameters,
+      :storage_capacity,
+      :output_uri,
+      :log_level,
+      :run_tags,
+      :retention_mode,
+      :storage_type,
+      :workflow_owner_id,
+      :output_bucket_owner_id,
+      :workflow_version_name,
+      :networking_mode,
+      :configuration_name,
+      :session_policy,
+      :engine_settings,
+      :scratch_storage_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1410,6 +1694,28 @@ module Aws::Omics
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute batch_id
+    #   <p>The identifier portion of the run batch ARN.</p>
+    #   @return [String]
+    class DeleteBatchRequest < Struct.new(
+      nil,
+      :batch_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>Configuration name to delete.</p>
+    #   @return [String]
+    class DeleteConfigurationRequest < Struct.new(
+      nil,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute id
     #   <p>The reference's ID.</p>
     #   @return [String]
@@ -1444,6 +1750,24 @@ module Aws::Omics
     end
 
     class DeleteReferenceStoreResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute batch_id
+    #   <p>The identifier portion of the run batch ARN.</p>
+    #   @return [String]
+    class DeleteRunBatchRequest < Struct.new(
+      nil,
+      :batch_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteRunBatchResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -1983,6 +2307,134 @@ module Aws::Omics
       :version_options,
       :status_message,
       :version_size_bytes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute batch_id
+    #   <p>The identifier portion of the run batch ARN.</p>
+    #   @return [String]
+    class GetBatchRequest < Struct.new(
+      nil,
+      :batch_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier portion of the run batch ARN.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The unique ARN of the run batch.</p>
+    #   @return [String]
+    # @!attribute uuid
+    #   <p>The universally unique identifier (UUID) for the run batch.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The optional user-friendly name of the batch.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the run batch. Possible values: <code>CREATING</code> (initial setup), <code>PENDING</code> (ready to submit runs), <code>SUBMITTING</code> (submitting runs), <code>INPROGRESS</code> (runs executing), <code>STOPPING</code> (cancellation in progress), <code>PROCESSED</code> (all runs completed), <code>CANCELLED</code> (batch cancelled), <code>FAILED</code> (batch failed), <code>RUNS_DELETING</code> (deleting runs), <code>RUNS_DELETE_FAILED</code> (run deletion failed for some or all runs), <code>RUNS_DELETED</code> (runs deleted).</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Amazon Web Services tags associated with the run batch.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute total_runs
+    #   <p>The total number of runs in the batch.</p>
+    #   @return [Integer]
+    # @!attribute default_run_setting
+    #   <p>The shared configuration applied to all runs in the batch. See <code>DefaultRunSetting</code>.</p>
+    #   @return [Types::DefaultRunSetting]
+    # @!attribute submission_summary
+    #   <p>A summary of run submission outcomes. See <code>SubmissionSummary</code>.</p>
+    #   @return [Types::SubmissionSummary]
+    # @!attribute run_summary
+    #   <p>A summary of run execution states. Run execution counts are eventually consistent and may lag behind actual run states. Final counts are accurate once the batch reaches <code>PROCESSED</code> status. See <code>RunSummary</code>.</p>
+    #   @return [Types::RunSummary]
+    # @!attribute creation_time
+    #   <p>The timestamp when the batch was created.</p>
+    #   @return [Time]
+    # @!attribute submitted_time
+    #   <p>The timestamp when all run submissions completed.</p>
+    #   @return [Time]
+    # @!attribute processed_time
+    #   <p>The timestamp when all run executions completed.</p>
+    #   @return [Time]
+    # @!attribute failed_time
+    #   <p>The timestamp when the batch transitioned to a <code>FAILED</code> status.</p>
+    #   @return [Time]
+    # @!attribute failure_reason
+    #   <p>A description of the batch failure. Present only when status is <code>FAILED</code>.</p>
+    #   @return [String]
+    class GetBatchResponse < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :uuid,
+      :name,
+      :status,
+      :tags,
+      :total_runs,
+      :default_run_setting,
+      :submission_summary,
+      :run_summary,
+      :creation_time,
+      :submitted_time,
+      :processed_time,
+      :failed_time,
+      :failure_reason,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>Configuration name to retrieve.</p>
+    #   @return [String]
+    class GetConfigurationRequest < Struct.new(
+      nil,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute arn
+    #   <p>Unique resource identifier for the configuration.</p>
+    #   @return [String]
+    # @!attribute uuid
+    #   <p>Unique identifier for the configuration.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>User-friendly name for the configuration.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>Description for the configuration.</p>
+    #   @return [String]
+    # @!attribute run_configurations
+    #   <p>Run-specific configurations.</p>
+    #   @return [Types::RunConfigurationsResponse]
+    # @!attribute status
+    #   <p>Current configuration status.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>Configuration creation timestamp.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>Tags for the configuration.</p>
+    #   @return [Hash<String, String>]
+    class GetConfigurationResponse < Struct.new(
+      nil,
+      :arn,
+      :uuid,
+      :name,
+      :description,
+      :run_configurations,
+      :status,
+      :creation_time,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2647,6 +3099,9 @@ module Aws::Omics
     # @!attribute run_group_id
     #   <p>The run's group ID.</p>
     #   @return [String]
+    # @!attribute batch_id
+    #   <p>The run's batch ID.</p>
+    #   @return [String]
     # @!attribute priority
     #   <p>The run's priority.</p>
     #   @return [Integer]
@@ -2719,6 +3174,24 @@ module Aws::Omics
     # @!attribute workflow_uuid
     #   <p>The universally unique identifier (UUID) value for the workflow.</p>
     #   @return [String]
+    # @!attribute networking_mode
+    #   <p>Configuration for run networking behavior. If absent, this will default to RESTRICTED.</p>
+    #   @return [String]
+    # @!attribute scratch_storage_mode
+    #   <p>Optional configuration for enabling scratch ephemeral storage mounted at /tmp. If absent, this will default to SHARED. This configuration is applicable only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.</p>
+    #   @return [String]
+    # @!attribute configuration
+    #   <p>Configuration details for the workflow run.</p>
+    #   @return [Types::ConfigurationDetails]
+    # @!attribute vpc_config
+    #   <p>VPC configuration for the workflow run.</p>
+    #   @return [Types::VpcConfigResponse]
+    # @!attribute engine_settings
+    #   <p>The engine-specific settings for the workflow run.</p>
+    #   @return [JSON]
+    # @!attribute session_policy
+    #   <p>Inline policy json for scoping down permissions via a session policy on the IAM role.</p>
+    #   @return [String]
     class GetRunResponse < Struct.new(
       nil,
       :arn,
@@ -2733,6 +3206,7 @@ module Aws::Omics
       :role_arn,
       :name,
       :run_group_id,
+      :batch_id,
       :priority,
       :definition,
       :digest,
@@ -2757,6 +3231,12 @@ module Aws::Omics
       :workflow_owner_id,
       :workflow_version_name,
       :workflow_uuid,
+      :networking_mode,
+      :scratch_storage_mode,
+      :configuration,
+      :vpc_config,
+      :engine_settings,
+      :session_policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2825,6 +3305,9 @@ module Aws::Omics
     # @!attribute image_details
     #   <p>Details about the container image that this task uses.</p>
     #   @return [Types::ImageDetails]
+    # @!attribute uuid
+    #   <p>The universally unique identifier (UUID) for the workflow task.</p>
+    #   @return [String]
     class GetRunTaskResponse < Struct.new(
       nil,
       :task_id,
@@ -2843,6 +3326,7 @@ module Aws::Omics
       :instance_type,
       :failure_reason,
       :image_details,
+      :uuid,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3203,6 +3687,12 @@ module Aws::Omics
     # @!attribute readme_path
     #   <p>The path to the workflow README markdown file within the repository. This file provides documentation and usage information for the workflow. If not specified, the <code>README.md</code> file from the root directory of the repository will be used.</p>
     #   @return [String]
+    # @!attribute profiles
+    #   <p>The list of Nextflow profiles that are available for this workflow. Profiles allow you to select predefined configuration settings at runtime.</p>
+    #   @return [Array<String>]
+    # @!attribute profile_parameter_templates
+    #   <p>A mapping of profile names to their parameter templates. Each profile defines its own set of parameters that you can use when starting a run with that profile.</p>
+    #   @return [Hash<String, Hash<String, Types::WorkflowParameter>>]
     class GetWorkflowResponse < Struct.new(
       nil,
       :arn,
@@ -3228,6 +3718,8 @@ module Aws::Omics
       :readme,
       :definition_repository_details,
       :readme_path,
+      :profiles,
+      :profile_parameter_templates,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3332,6 +3824,12 @@ module Aws::Omics
     # @!attribute readme_path
     #   <p>The path to the workflow version README markdown file within the repository. This file provides documentation and usage information for the workflow. If not specified, the <code>README.md</code> file from the root directory of the repository will be used.</p>
     #   @return [String]
+    # @!attribute profiles
+    #   <p>The list of Nextflow profiles that are available for this workflow version. Profiles allow you to select predefined configuration settings at runtime.</p>
+    #   @return [Array<String>]
+    # @!attribute profile_parameter_templates
+    #   <p>A mapping of profile names to their parameter templates. Each profile defines its own set of parameters that you can use when starting a run with that profile.</p>
+    #   @return [Hash<String, Hash<String, Types::WorkflowParameter>>]
     class GetWorkflowVersionResponse < Struct.new(
       nil,
       :arn,
@@ -3358,6 +3856,8 @@ module Aws::Omics
       :readme,
       :definition_repository_details,
       :readme_path,
+      :profiles,
+      :profile_parameter_templates,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3595,6 +4095,46 @@ module Aws::Omics
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A per-run configuration that overrides or merges with fields from <code>DefaultRunSetting</code> for a specific run.</p>
+    # @!attribute run_setting_id
+    #   <p>A customer-provided unique identifier for this run configuration within the batch. After submission, use <code>ListRunsInBatch</code> to map each <code>runSettingId</code> to the HealthOmics-generated <code>runId</code>.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>An optional user-friendly name for this run.</p>
+    #   @return [String]
+    # @!attribute output_uri
+    #   <p>Override the destination S3 URI for this run's outputs.</p>
+    #   @return [String]
+    # @!attribute priority
+    #   <p>Override the priority for this run.</p>
+    #   @return [Integer]
+    # @!attribute parameters
+    #   <p>Per-run workflow parameters. Merged with <code>defaultRunSetting.parameters</code>; values in this object take precedence when keys overlap.</p>
+    #   @return [JSON]
+    # @!attribute output_bucket_owner_id
+    #   <p>The expected Amazon Web Services account ID of the owner of the output S3 bucket for this run.</p>
+    #   @return [String]
+    # @!attribute run_tags
+    #   <p>Per-run Amazon Web Services tags. Merged with <code>defaultRunSetting.runTags</code>; values in this object take precedence when keys overlap.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute engine_settings
+    #   <p>Per-run engine-specific settings. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles). Overrides <code>defaultRunSetting.engineSettings</code> for this run.</p>
+    #   @return [JSON]
+    class InlineSetting < Struct.new(
+      nil,
+      :run_setting_id,
+      :name,
+      :output_uri,
+      :priority,
+      :parameters,
+      :output_bucket_owner_id,
+      :run_tags,
+      :engine_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An unexpected error occurred. Try the request again.</p>
     # @!attribute message
     #   @return [String]
@@ -3754,6 +4294,78 @@ module Aws::Omics
     class ListAnnotationStoresResponse < Struct.new(
       nil,
       :annotation_stores,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_items
+    #   <p>The maximum number of batches to return. If not specified, defaults to 100.</p>
+    #   @return [Integer]
+    # @!attribute starting_token
+    #   <p>A pagination token returned from a prior <code>ListBatch</code> call.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>Filter batches by status.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>Filter batches by name.</p>
+    #   @return [String]
+    # @!attribute run_group_id
+    #   <p>Filter batches by run group ID.</p>
+    #   @return [String]
+    class ListBatchRequest < Struct.new(
+      nil,
+      :max_items,
+      :starting_token,
+      :status,
+      :name,
+      :run_group_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>A list of batch summary objects. See <code>BatchListItem</code>.</p>
+    #   @return [Array<Types::BatchListItem>]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next page of results. Absent when no further results are available.</p>
+    #   @return [String]
+    class ListBatchResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>Maximum number of results to return.</p>
+    #   @return [Integer]
+    # @!attribute starting_token
+    #   <p>Pagination token for retrieving next page of results.</p>
+    #   @return [String]
+    class ListConfigurationsRequest < Struct.new(
+      nil,
+      :max_results,
+      :starting_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>List of configuration items.</p>
+    #   @return [Array<Types::ConfigurationListItem>]
+    # @!attribute next_token
+    #   <p>Token for retrieving next page of results.</p>
+    #   @return [String]
+    class ListConfigurationsResponse < Struct.new(
+      nil,
+      :items,
       :next_token,
       keyword_init: true
     )
@@ -4204,11 +4816,60 @@ module Aws::Omics
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute batch_id
+    #   <p>The identifier portion of the run batch ARN.</p>
+    #   @return [String]
+    # @!attribute max_items
+    #   <p>The maximum number of runs to return.</p>
+    #   @return [Integer]
+    # @!attribute starting_token
+    #   <p>A pagination token returned from a prior <code>ListRunsInBatch</code> call.</p>
+    #   @return [String]
+    # @!attribute submission_status
+    #   <p>Filter runs by submission status.</p>
+    #   @return [String]
+    # @!attribute run_setting_id
+    #   <p>Filter runs by the customer-provided run setting ID.</p>
+    #   @return [String]
+    # @!attribute run_id
+    #   <p>Filter runs by the HealthOmics-generated run ID.</p>
+    #   @return [String]
+    class ListRunsInBatchRequest < Struct.new(
+      nil,
+      :batch_id,
+      :max_items,
+      :starting_token,
+      :submission_status,
+      :run_setting_id,
+      :run_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute runs
+    #   <p>A list of run entries in the batch. See <code>RunBatchListItem</code>.</p>
+    #   @return [Array<Types::RunBatchListItem>]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next page of results. Absent when the last run has been returned.</p>
+    #   @return [String]
+    class ListRunsInBatchResponse < Struct.new(
+      nil,
+      :runs,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>Filter the list by run name.</p>
     #   @return [String]
     # @!attribute run_group_id
     #   <p>Filter the list by run group ID.</p>
+    #   @return [String]
+    # @!attribute batch_id
+    #   <p>Filter by batch ID.</p>
     #   @return [String]
     # @!attribute starting_token
     #   <p>Specify the pagination token from a previous request to retrieve the next page of results.</p>
@@ -4223,6 +4884,7 @@ module Aws::Omics
       nil,
       :name,
       :run_group_id,
+      :batch_id,
       :starting_token,
       :max_results,
       :status,
@@ -5059,12 +5721,16 @@ module Aws::Omics
     # @!attribute ecr_account_id
     #   <p>Account ID of the account that owns the upstream container image.</p>
     #   @return [String]
+    # @!attribute credential_arn
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that holds the credentials for the upstream registry. You must specify this value when Amazon Elastic Container Registry (Amazon ECR) doesn't support pull through cache for the upstream registry. HealthOmics supports only some of these registries. The workflow role must have permission to call the <code>secretsmanager:GetSecretValue</code> operation on the secret. For more information about the supported registries, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html">Container images</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
+    #   @return [String]
     class RegistryMapping < Struct.new(
       nil,
       :upstream_registry_url,
       :ecr_repository_prefix,
       :upstream_repository_prefix,
       :ecr_account_id,
+      :credential_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5087,6 +5753,42 @@ module Aws::Omics
     class ResourceNotFoundException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A single run entry returned by <code>ListRunsInBatch</code>.</p>
+    # @!attribute run_setting_id
+    #   <p>The customer-provided identifier for the run configuration. Use this to correlate results back to the input configuration provided in <code>inlineSettings</code> or <code>s3UriSettings</code>.</p>
+    #   @return [String]
+    # @!attribute run_id
+    #   <p>The HealthOmics-generated identifier for the workflow run. Empty if submission failed.</p>
+    #   @return [String]
+    # @!attribute run_internal_uuid
+    #   <p>The universally unique identifier (UUID) for the run.</p>
+    #   @return [String]
+    # @!attribute run_arn
+    #   <p>The unique ARN of the workflow run.</p>
+    #   @return [String]
+    # @!attribute submission_status
+    #   <p>The submission outcome for this run.</p>
+    #   @return [String]
+    # @!attribute submission_failure_reason
+    #   <p>The error category for a failed submission. See the run-level failure table in the HealthOmics User Guide for details on each value.</p>
+    #   @return [String]
+    # @!attribute submission_failure_message
+    #   <p>A detailed message describing the submission failure.</p>
+    #   @return [String]
+    class RunBatchListItem < Struct.new(
+      nil,
+      :run_setting_id,
+      :run_id,
+      :run_internal_uuid,
+      :run_arn,
+      :submission_status,
+      :submission_failure_reason,
+      :submission_failure_message,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5123,6 +5825,30 @@ module Aws::Omics
       :id,
       :name,
       :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Run-specific configuration settings.</p>
+    # @!attribute vpc_config
+    #   <p>VPC configuration for workflow runs.</p>
+    #   @return [Types::VpcConfig]
+    class RunConfigurations < Struct.new(
+      nil,
+      :vpc_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Run-specific configuration settings with computed values.</p>
+    # @!attribute vpc_config
+    #   <p>VPC configuration for workflow runs with computed VPC ID.</p>
+    #   @return [Types::VpcConfigResponse]
+    class RunConfigurationsResponse < Struct.new(
+      nil,
+      :vpc_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5181,6 +5907,9 @@ module Aws::Omics
     # @!attribute workflow_id
     #   <p>The run's workflow ID.</p>
     #   @return [String]
+    # @!attribute batch_id
+    #   <p>The run's batch ID.</p>
+    #   @return [String]
     # @!attribute name
     #   <p>The run's name.</p>
     #   @return [String]
@@ -5205,12 +5934,16 @@ module Aws::Omics
     # @!attribute workflow_version_name
     #   <p>The name of the workflow version.</p>
     #   @return [String]
+    # @!attribute workflow_name
+    #   <p>The name of the workflow.</p>
+    #   @return [String]
     class RunListItem < Struct.new(
       nil,
       :arn,
       :id,
       :status,
       :workflow_id,
+      :batch_id,
       :name,
       :priority,
       :storage_capacity,
@@ -5219,6 +5952,7 @@ module Aws::Omics
       :stop_time,
       :storage_type,
       :workflow_version_name,
+      :workflow_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5235,6 +5969,46 @@ module Aws::Omics
       nil,
       :engine_log_stream,
       :run_log_stream,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of the runs in a batch.</p>
+    # @!attribute pending_run_count
+    #   <p>The number of pending runs.</p>
+    #   @return [Integer]
+    # @!attribute starting_run_count
+    #   <p>The number of starting runs.</p>
+    #   @return [Integer]
+    # @!attribute running_run_count
+    #   <p>The number of running runs.</p>
+    #   @return [Integer]
+    # @!attribute stopping_run_count
+    #   <p>The number of stopping runs.</p>
+    #   @return [Integer]
+    # @!attribute completed_run_count
+    #   <p>The number of completed runs.</p>
+    #   @return [Integer]
+    # @!attribute deleted_run_count
+    #   <p>The number of deleted runs.</p>
+    #   @return [Integer]
+    # @!attribute failed_run_count
+    #   <p>The number of failed runs.</p>
+    #   @return [Integer]
+    # @!attribute cancelled_run_count
+    #   <p>The number of cancelled runs.</p>
+    #   @return [Integer]
+    class RunSummary < Struct.new(
+      nil,
+      :pending_run_count,
+      :starting_run_count,
+      :running_run_count,
+      :stopping_run_count,
+      :completed_run_count,
+      :deleted_run_count,
+      :failed_run_count,
+      :cancelled_run_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5809,6 +6583,60 @@ module Aws::Omics
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute batch_name
+    #   <p>An optional user-friendly name for the run batch.</p>
+    #   @return [String]
+    # @!attribute request_id
+    #   <p>A client token used to deduplicate retry requests and prevent duplicate batches from being created.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Amazon Web Services tags to associate with the batch resource. These tags are not inherited by individual runs. To tag individual runs, use <code>defaultRunSetting.runTags</code>.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute default_run_setting
+    #   <p>Shared configuration applied to all runs in the batch. See <code>DefaultRunSetting</code>.</p>
+    #   @return [Types::DefaultRunSetting]
+    # @!attribute batch_run_settings
+    #   <p>The individual run configurations. Specify exactly one of <code>inlineSettings</code> or <code>s3UriSettings</code>. See <code>BatchRunSettings</code>.</p>
+    #   @return [Types::BatchRunSettings]
+    class StartRunBatchRequest < Struct.new(
+      nil,
+      :batch_name,
+      :request_id,
+      :tags,
+      :default_run_setting,
+      :batch_run_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier portion of the run batch ARN.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The unique ARN of the run batch.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The initial status of the run batch. Returns <code>CREATING</code> while the batch is being initialized.</p>
+    #   @return [String]
+    # @!attribute uuid
+    #   <p>The universally unique identifier (UUID) for the run batch.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>Amazon Web Services tags associated with the run batch.</p>
+    #   @return [Hash<String, String>]
+    class StartRunBatchResponse < Struct.new(
+      nil,
+      :id,
+      :arn,
+      :status,
+      :uuid,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute workflow_id
     #   <p>The run's workflow ID. The <code>workflowId</code> is not the UUID.</p>
     #   @return [String]
@@ -5819,7 +6647,7 @@ module Aws::Omics
     #   <p>The ID of a run to duplicate.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>A service role for the run. The <code>roleArn</code> requires access to Amazon Web Services HealthOmics, S3, Cloudwatch logs, and EC2. An example <code>roleArn</code> is <code>arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ</code>. In this example, the AWS account ID is <code>123456789012</code> and the role name is <code>omics-service-role-serviceRole-W8O1XMPL7QZ</code>.</p>
+    #   <p>A service role for the run. The <code>roleArn</code> requires access to Amazon Web Services HealthOmics, S3, Cloudwatch logs, and EC2. An example <code>roleArn</code> is <code>arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ</code>. In this example, the Amazon Web Services account ID is <code>123456789012</code> and the role name is <code>omics-service-role-serviceRole-W8O1XMPL7QZ</code>.</p>
     #   @return [String]
     # @!attribute name
     #   <p>A name for the run. This is recommended to view and organize runs in the Amazon Web Services HealthOmics console and CloudWatch logs.</p>
@@ -5866,6 +6694,21 @@ module Aws::Omics
     # @!attribute workflow_version_name
     #   <p>The name of the workflow version. Use workflow versions to track and organize changes to the workflow. If your workflow has multiple versions, the run uses the default version unless you specify a version name. To learn more, see <a href="https://docs.aws.amazon.com/omics/latest/dev/workflow-versions.html">Workflow versioning</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>
     #   @return [String]
+    # @!attribute networking_mode
+    #   <p>Optional configuration for run networking behavior. If not specified, this will default to RESTRICTED.</p>
+    #   @return [String]
+    # @!attribute scratch_storage_mode
+    #   <p>Optional configuration for enabling scratch ephemeral storage mounted at /tmp. If not specified, this will default to SHARED. This configuration is applicable only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.</p>
+    #   @return [String]
+    # @!attribute configuration_name
+    #   <p>Optional configuration name to use for the workflow run.</p>
+    #   @return [String]
+    # @!attribute session_policy
+    #   <p>Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter.</p>
+    #   @return [String]
+    # @!attribute engine_settings
+    #   <p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles).</p>
+    #   @return [JSON]
     class StartRunRequest < Struct.new(
       nil,
       :workflow_id,
@@ -5887,6 +6730,11 @@ module Aws::Omics
       :storage_type,
       :workflow_owner_id,
       :workflow_version_name,
+      :networking_mode,
+      :scratch_storage_mode,
+      :configuration_name,
+      :session_policy,
+      :engine_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5910,6 +6758,12 @@ module Aws::Omics
     # @!attribute run_output_uri
     #   <p>The destination for workflow outputs.</p>
     #   @return [String]
+    # @!attribute configuration
+    #   <p>Configuration details for the workflow run.</p>
+    #   @return [Types::ConfigurationDetails]
+    # @!attribute networking_mode
+    #   <p>Networking mode for the workflow run.</p>
+    #   @return [String]
     class StartRunResponse < Struct.new(
       nil,
       :arn,
@@ -5918,6 +6772,8 @@ module Aws::Omics
       :tags,
       :uuid,
       :run_output_uri,
+      :configuration,
+      :networking_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5974,6 +6830,42 @@ module Aws::Omics
 
       class TsvStoreOptions < StoreOptions; end
       class Unknown < StoreOptions; end
+    end
+
+    # <p>A summary of the submissions in a batch.</p>
+    # @!attribute successful_start_submission_count
+    #   <p>The number of successful start submissions.</p>
+    #   @return [Integer]
+    # @!attribute failed_start_submission_count
+    #   <p>The number of failed start submissions.</p>
+    #   @return [Integer]
+    # @!attribute pending_start_submission_count
+    #   <p>The number of pending start submissions.</p>
+    #   @return [Integer]
+    # @!attribute successful_cancel_submission_count
+    #   <p>The number of successful cancel submissions.</p>
+    #   @return [Integer]
+    # @!attribute failed_cancel_submission_count
+    #   <p>The number of failed cancel submissions.</p>
+    #   @return [Integer]
+    # @!attribute successful_delete_submission_count
+    #   <p>The number of successful delete submissions.</p>
+    #   @return [Integer]
+    # @!attribute failed_delete_submission_count
+    #   <p>The number of failed delete submissions.</p>
+    #   @return [Integer]
+    class SubmissionSummary < Struct.new(
+      nil,
+      :successful_start_submission_count,
+      :failed_start_submission_count,
+      :pending_start_submission_count,
+      :successful_cancel_submission_count,
+      :failed_cancel_submission_count,
+      :successful_delete_submission_count,
+      :failed_delete_submission_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6035,6 +6927,9 @@ module Aws::Omics
     # @!attribute instance_type
     #   <p> The instance type for a task.</p>
     #   @return [String]
+    # @!attribute uuid
+    #   <p>The universally unique identifier (UUID) for the workflow task.</p>
+    #   @return [String]
     class TaskListItem < Struct.new(
       nil,
       :task_id,
@@ -6049,6 +6944,7 @@ module Aws::Omics
       :stop_time,
       :gpus,
       :instance_type,
+      :uuid,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6553,7 +7449,7 @@ module Aws::Omics
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
+    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
@@ -6742,6 +7638,50 @@ module Aws::Omics
 
       class TsvVersionOptions < VersionOptions; end
       class Unknown < VersionOptions; end
+    end
+
+    # <p>VPC configuration for workflow runs.</p>
+    # @!attribute security_group_ids
+    #   <p>List of security group IDs. Maximum of 5 security groups allowed.</p>
+    #   @return [Array<String>]
+    # @!attribute subnet_ids
+    #   <p>List of subnet IDs. Maximum of 16 subnets allowed.</p>
+    #   @return [Array<String>]
+    # @!attribute vpc_owner_account_id
+    #   <p>The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.</p>
+    #   @return [String]
+    class VpcConfig < Struct.new(
+      nil,
+      :security_group_ids,
+      :subnet_ids,
+      :vpc_owner_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>VPC configuration for workflow runs with computed VPC ID.</p>
+    # @!attribute security_group_ids
+    #   <p>List of security group IDs.</p>
+    #   @return [Array<String>]
+    # @!attribute subnet_ids
+    #   <p>List of subnet IDs.</p>
+    #   @return [Array<String>]
+    # @!attribute vpc_id
+    #   <p>VPC ID computed from the provided subnet IDs.</p>
+    #   @return [String]
+    # @!attribute vpc_owner_account_id
+    #   <p>The Amazon Web Services account ID of the cross-account VPC owner for RAM-shared VPC configurations.</p>
+    #   @return [String]
+    class VpcConfigResponse < Struct.new(
+      nil,
+      :security_group_ids,
+      :subnet_ids,
+      :vpc_id,
+      :vpc_owner_account_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workflow.</p>

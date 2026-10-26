@@ -17,6 +17,19 @@ module Aws::Transfer
       INACTIVE: String
     end
 
+    class As2AsyncMdnConnectorConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?server_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor server_ids: Array[String]?
+    end
+
     class As2ConnectorConfig
       include Smithy::Schema::Structure
 
@@ -31,6 +44,7 @@ module Aws::Transfer
         ?mdn_response: String,
         ?basic_auth_secret_id: String,
         ?preserve_content_type: String,
+        ?async_mdn_config: Types::As2AsyncMdnConnectorConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -44,6 +58,7 @@ module Aws::Transfer
       attr_accessor mdn_response: String?
       attr_accessor basic_auth_secret_id: String?
       attr_accessor preserve_content_type: String?
+      attr_accessor async_mdn_config: Types::As2AsyncMdnConnectorConfig?
     end
 
     module As2Transport
@@ -67,6 +82,11 @@ module Aws::Transfer
       TLS: String
     end
 
+    module CommunicationMode
+      CLIENT_TALK_FIRST: String
+      SERVER_TALK_FIRST: String
+    end
+
     module CompressionEnum
       ZLIB: String
       DISABLED: String
@@ -81,6 +101,27 @@ module Aws::Transfer
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ConnectorEgressConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vpc_lattice: Types::ConnectorVpcLatticeEgressConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_lattice: Types::ConnectorVpcLatticeEgressConfig?
+
+      class VpcLattice < ConnectorEgressConfig
+      end
+      class Unknown < ConnectorEgressConfig
+      end
+    end
+
+    module ConnectorEgressType
+      SERVICE_MANAGED: String
+      VPC_LATTICE: String
     end
 
     class ConnectorFileTransferResult
@@ -98,6 +139,30 @@ module Aws::Transfer
       attr_accessor status_code: String?
       attr_accessor failure_code: String?
       attr_accessor failure_message: String?
+    end
+
+    module ConnectorStatus
+      ACTIVE: String
+      ERRORED: String
+      PENDING: String
+    end
+
+    class ConnectorVpcLatticeEgressConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_configuration_arn: String,
+        ?port_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_arn: String?
+      attr_accessor port_number: Integer?
+    end
+
+    module ConnectorsIpAddressType
+      IPV4: String
+      DUALSTACK: String
     end
 
     class CopyStepDetails
@@ -208,6 +273,8 @@ module Aws::Transfer
         ?tags: Array[Types::Tag],
         ?sftp_config: Types::SftpConnectorConfig,
         ?security_policy_name: String,
+        ?egress_config: Types::ConnectorEgressConfig,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -218,6 +285,8 @@ module Aws::Transfer
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor sftp_config: Types::SftpConnectorConfig?
       attr_accessor security_policy_name: String?
+      attr_accessor egress_config: Types::ConnectorEgressConfig?
+      attr_accessor ip_address_type: String?
     end
 
     class CreateConnectorResponse
@@ -281,6 +350,7 @@ module Aws::Transfer
         ?structured_log_destinations: Array[String],
         ?s3_storage_options: Types::S3StorageOptions,
         ?ip_address_type: String,
+        ?host_key_storage_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -302,6 +372,7 @@ module Aws::Transfer
       attr_accessor structured_log_destinations: Array[String]?
       attr_accessor s3_storage_options: Types::S3StorageOptions?
       attr_accessor ip_address_type: String?
+      attr_accessor host_key_storage_type: String?
     end
 
     class CreateServerResponse
@@ -366,6 +437,7 @@ module Aws::Transfer
         ?web_app_units: Types::WebAppUnits,
         ?tags: Array[Types::Tag],
         ?web_app_endpoint_policy: String,
+        ?endpoint_details: Types::WebAppEndpointDetails,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -374,6 +446,7 @@ module Aws::Transfer
       attr_accessor web_app_units: Types::WebAppUnits?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor web_app_endpoint_policy: String?
+      attr_accessor endpoint_details: Types::WebAppEndpointDetails?
     end
 
     class CreateWebAppResponse
@@ -395,6 +468,7 @@ module Aws::Transfer
         ?steps: Array[Types::WorkflowStep],
         ?on_exception_steps: Array[Types::WorkflowStep],
         ?tags: Array[Types::Tag],
+        ?structured_log_destinations: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -402,6 +476,7 @@ module Aws::Transfer
       attr_accessor steps: Array[Types::WorkflowStep]?
       attr_accessor on_exception_steps: Array[Types::WorkflowStep]?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor structured_log_destinations: Array[String]?
     end
 
     class CreateWorkflowResponse
@@ -432,6 +507,19 @@ module Aws::Transfer
       attr_accessor payload_files_directory: String?
       attr_accessor status_files_directory: String?
       attr_accessor temporary_files_directory: String?
+    end
+
+    class CustomHttpHeader
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
     end
 
     class CustomStepDetails
@@ -1043,6 +1131,11 @@ module Aws::Transfer
         ?sftp_config: Types::SftpConnectorConfig,
         ?service_managed_egress_ip_addresses: Array[String],
         ?security_policy_name: String,
+        ?egress_config: Types::DescribedConnectorEgressConfig,
+        ?egress_type: String,
+        ?error_message: String,
+        ?status: String,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1056,6 +1149,40 @@ module Aws::Transfer
       attr_accessor sftp_config: Types::SftpConnectorConfig?
       attr_accessor service_managed_egress_ip_addresses: Array[String]?
       attr_accessor security_policy_name: String?
+      attr_accessor egress_config: Types::DescribedConnectorEgressConfig?
+      attr_accessor egress_type: String?
+      attr_accessor error_message: String?
+      attr_accessor status: String?
+      attr_accessor ip_address_type: String?
+    end
+
+    class DescribedConnectorEgressConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vpc_lattice: Types::DescribedConnectorVpcLatticeEgressConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_lattice: Types::DescribedConnectorVpcLatticeEgressConfig?
+
+      class VpcLattice < DescribedConnectorEgressConfig
+      end
+      class Unknown < DescribedConnectorEgressConfig
+      end
+    end
+
+    class DescribedConnectorVpcLatticeEgressConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_configuration_arn: String,
+        ?port_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_arn: String?
+      attr_accessor port_number: Integer?
     end
 
     class DescribedExecution
@@ -1094,6 +1221,8 @@ module Aws::Transfer
         ?type: String,
         ?date_imported: Time,
         ?tags: Array[Types::Tag],
+        ?storage_type: String,
+        ?secret_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1104,6 +1233,8 @@ module Aws::Transfer
       attr_accessor type: String?
       attr_accessor date_imported: Time?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor storage_type: String?
+      attr_accessor secret_id: String?
     end
 
     class DescribedIdentityCenterConfig
@@ -1265,6 +1396,8 @@ module Aws::Transfer
         ?web_app_units: Types::WebAppUnits,
         ?tags: Array[Types::Tag],
         ?web_app_endpoint_policy: String,
+        ?endpoint_type: String,
+        ?described_endpoint_details: Types::DescribedWebAppEndpointDetails,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1276,6 +1409,8 @@ module Aws::Transfer
       attr_accessor web_app_units: Types::WebAppUnits?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor web_app_endpoint_policy: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor described_endpoint_details: Types::DescribedWebAppEndpointDetails?
     end
 
     class DescribedWebAppCustomization
@@ -1297,6 +1432,22 @@ module Aws::Transfer
       attr_accessor favicon_file: String?
     end
 
+    class DescribedWebAppEndpointDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vpc: Types::DescribedWebAppVpcConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc: Types::DescribedWebAppVpcConfig?
+
+      class Vpc < DescribedWebAppEndpointDetails
+      end
+      class Unknown < DescribedWebAppEndpointDetails
+      end
+    end
+
     class DescribedWebAppIdentityProviderDetails
       include Smithy::Schema::Union
 
@@ -1313,6 +1464,21 @@ module Aws::Transfer
       end
     end
 
+    class DescribedWebAppVpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?vpc_id: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor vpc_id: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
     class DescribedWorkflow
       include Smithy::Schema::Structure
 
@@ -1323,6 +1489,7 @@ module Aws::Transfer
         ?on_exception_steps: Array[Types::WorkflowStep],
         ?workflow_id: String,
         ?tags: Array[Types::Tag],
+        ?structured_log_destinations: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1332,6 +1499,7 @@ module Aws::Transfer
       attr_accessor on_exception_steps: Array[Types::WorkflowStep]?
       attr_accessor workflow_id: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor structured_log_destinations: Array[String]?
     end
 
     module DirectoryListingOptimization
@@ -1491,6 +1659,11 @@ module Aws::Transfer
       LOGICAL: String
     end
 
+    module HostKeyStorageType
+      SERVICE_MANAGED: String
+      SECRETS_MANAGER: String
+    end
+
     class IdentityCenterConfig
       include Smithy::Schema::Structure
 
@@ -1574,6 +1747,8 @@ module Aws::Transfer
         ?host_key_body: String,
         ?description: String,
         ?tags: Array[Types::Tag],
+        ?storage_type: String,
+        ?kms_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1581,6 +1756,8 @@ module Aws::Transfer
       attr_accessor host_key_body: String?
       attr_accessor description: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor storage_type: String?
+      attr_accessor kms_key: String?
     end
 
     class ImportHostKeyResponse
@@ -2176,6 +2353,8 @@ module Aws::Transfer
         ?description: String,
         ?type: String,
         ?date_imported: Time,
+        ?storage_type: String,
+        ?secret_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2185,6 +2364,8 @@ module Aws::Transfer
       attr_accessor description: String?
       attr_accessor type: String?
       attr_accessor date_imported: Time?
+      attr_accessor storage_type: String?
+      attr_accessor secret_id: String?
     end
 
     class ListedProfile
@@ -2258,6 +2439,7 @@ module Aws::Transfer
         ?web_app_id: String,
         ?access_endpoint: String,
         ?web_app_endpoint: String,
+        ?endpoint_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2265,6 +2447,7 @@ module Aws::Transfer
       attr_accessor web_app_id: String?
       attr_accessor access_endpoint: String?
       attr_accessor web_app_endpoint: String?
+      attr_accessor endpoint_type: String?
     end
 
     class ListedWorkflow
@@ -2303,6 +2486,7 @@ module Aws::Transfer
     module MdnResponse
       SYNC: String
       NONE: String
+      ASYNC: String
     end
 
     module MdnSigningAlg
@@ -2363,14 +2547,34 @@ module Aws::Transfer
         ?passive_ip: String,
         ?tls_session_resumption_mode: String,
         ?set_stat_option: String,
+        ?sftp_ports: Array[Types::SftpPortWithOptions],
         ?as2_transports: Array[String],
+        ?proxy_config: Types::ProxyConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor passive_ip: String?
       attr_accessor tls_session_resumption_mode: String?
       attr_accessor set_stat_option: String?
+      attr_accessor sftp_ports: Array[Types::SftpPortWithOptions]?
       attr_accessor as2_transports: Array[String]?
+      attr_accessor proxy_config: Types::ProxyConfig?
+    end
+
+    class ProxyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sftp_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sftp_mode: String?
+    end
+
+    module ProxyMode
+      NONE: String
+      PROXY_PROTOCOL_V2_ENFORCED: String
     end
 
     class ResourceExistsException
@@ -2534,12 +2738,14 @@ module Aws::Transfer
         ?user_secret_id: String,
         ?trusted_host_keys: Array[String],
         ?max_concurrent_connections: Integer,
+        ?ordered_user_secret_version_stages: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor user_secret_id: String?
       attr_accessor trusted_host_keys: Array[String]?
       attr_accessor max_concurrent_connections: Integer?
+      attr_accessor ordered_user_secret_version_stages: Array[String]?
     end
 
     class SftpConnectorConnectionDetails
@@ -2551,6 +2757,19 @@ module Aws::Transfer
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor host_key: String?
+    end
+
+    class SftpPortWithOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sftp_port: Integer,
+        ?communication_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sftp_port: Integer?
+      attr_accessor communication_mode: String?
     end
 
     module SigningAlg
@@ -2615,6 +2834,7 @@ module Aws::Transfer
         ?retrieve_file_paths: Array[String],
         ?local_directory_path: String,
         ?remote_directory_path: String,
+        ?custom_http_headers: Array[Types::CustomHttpHeader],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2623,6 +2843,7 @@ module Aws::Transfer
       attr_accessor retrieve_file_paths: Array[String]?
       attr_accessor local_directory_path: String?
       attr_accessor remote_directory_path: String?
+      attr_accessor custom_http_headers: Array[Types::CustomHttpHeader]?
     end
 
     class StartFileTransferResponse
@@ -2967,6 +3188,22 @@ module Aws::Transfer
       attr_accessor certificate_id: String?
     end
 
+    class UpdateConnectorEgressConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vpc_lattice: Types::UpdateConnectorVpcLatticeEgressConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_lattice: Types::UpdateConnectorVpcLatticeEgressConfig?
+
+      class VpcLattice < UpdateConnectorEgressConfig
+      end
+      class Unknown < UpdateConnectorEgressConfig
+      end
+    end
+
     class UpdateConnectorRequest
       include Smithy::Schema::Structure
 
@@ -2978,6 +3215,8 @@ module Aws::Transfer
         ?logging_role: String,
         ?sftp_config: Types::SftpConnectorConfig,
         ?security_policy_name: String,
+        ?egress_config: Types::UpdateConnectorEgressConfig,
+        ?ip_address_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2988,6 +3227,8 @@ module Aws::Transfer
       attr_accessor logging_role: String?
       attr_accessor sftp_config: Types::SftpConnectorConfig?
       attr_accessor security_policy_name: String?
+      attr_accessor egress_config: Types::UpdateConnectorEgressConfig?
+      attr_accessor ip_address_type: String?
     end
 
     class UpdateConnectorResponse
@@ -3001,6 +3242,19 @@ module Aws::Transfer
       attr_accessor connector_id: String?
     end
 
+    class UpdateConnectorVpcLatticeEgressConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_configuration_arn: String,
+        ?port_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_configuration_arn: String?
+      attr_accessor port_number: Integer?
+    end
+
     class UpdateHostKeyRequest
       include Smithy::Schema::Structure
 
@@ -3008,12 +3262,16 @@ module Aws::Transfer
         ?server_id: String,
         ?host_key_id: String,
         ?description: String,
+        ?storage_type: String,
+        ?kms_key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor server_id: String?
       attr_accessor host_key_id: String?
       attr_accessor description: String?
+      attr_accessor storage_type: String?
+      attr_accessor kms_key: String?
     end
 
     class UpdateHostKeyResponse
@@ -3173,6 +3431,22 @@ module Aws::Transfer
       attr_accessor web_app_id: String?
     end
 
+    class UpdateWebAppEndpointDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vpc: Types::UpdateWebAppVpcConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc: Types::UpdateWebAppVpcConfig?
+
+      class Vpc < UpdateWebAppEndpointDetails
+      end
+      class Unknown < UpdateWebAppEndpointDetails
+      end
+    end
+
     class UpdateWebAppIdentityCenterConfig
       include Smithy::Schema::Structure
 
@@ -3208,6 +3482,7 @@ module Aws::Transfer
         ?identity_provider_details: Types::UpdateWebAppIdentityProviderDetails,
         ?access_endpoint: String,
         ?web_app_units: Types::WebAppUnits,
+        ?endpoint_details: Types::UpdateWebAppEndpointDetails,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3215,6 +3490,7 @@ module Aws::Transfer
       attr_accessor identity_provider_details: Types::UpdateWebAppIdentityProviderDetails?
       attr_accessor access_endpoint: String?
       attr_accessor web_app_units: Types::WebAppUnits?
+      attr_accessor endpoint_details: Types::UpdateWebAppEndpointDetails?
     end
 
     class UpdateWebAppResponse
@@ -3226,6 +3502,19 @@ module Aws::Transfer
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor web_app_id: String?
+    end
+
+    class UpdateWebAppVpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor ip_address_type: String?
     end
 
     class UserDetails
@@ -3243,9 +3532,30 @@ module Aws::Transfer
       attr_accessor session_id: String?
     end
 
+    class WebAppEndpointDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?vpc: Types::WebAppVpcConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc: Types::WebAppVpcConfig?
+
+      class Vpc < WebAppEndpointDetails
+      end
+      class Unknown < WebAppEndpointDetails
+      end
+    end
+
     module WebAppEndpointPolicy
       FIPS: String
       STANDARD: String
+    end
+
+    module WebAppEndpointType
+      PUBLIC: String
+      VPC: String
     end
 
     class WebAppIdentityProviderDetails
@@ -3278,6 +3588,28 @@ module Aws::Transfer
       end
       class Unknown < WebAppUnits
       end
+    end
+
+    class WebAppVpcConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?vpc_id: String,
+        ?security_group_ids: Array[String],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor vpc_id: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor ip_address_type: String?
+    end
+
+    module WebAppVpcEndpointIpAddressType
+      IPV4: String
+      DUALSTACK: String
     end
 
     class WorkflowDetail

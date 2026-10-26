@@ -320,6 +320,20 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#AnalysisScope": {
+            "type": "enum",
+            "members": {
+                "BotLocale": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotLocale"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scope of analysis to perform on the bot.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotLocale</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#AnalyticsBinByList": {
             "type": "list",
             "member": {
@@ -2082,6 +2096,26 @@
         "com.amazonaws.lexmodelsv2#AnswerField": {
             "type": "string"
         },
+        "com.amazonaws.lexmodelsv2#AssistedNluMode": {
+            "type": "enum",
+            "members": {
+                "Primary": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Primary"
+                    }
+                },
+                "Fallback": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Fallback"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the operational mode for Assisted Natural Language Understanding. This enum determines how the enhanced NLU capabilities integrate with standard intent recognition.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#AssociatedTranscript": {
             "type": "structure",
             "members": {
@@ -2206,6 +2240,108 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^s3://([a-z0-9\\\\.-]+)/(.+)$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AudioFillerDelayInMilliseconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.lexmodelsv2#AudioFillerDeliveryDelayInMilliseconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.lexmodelsv2#AudioFillerDurationInMilliseconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.lexmodelsv2#AudioFillerSettings": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether audio filler playback is enabled for the bot locale.\n         Set to <code>true</code> to play filler audio while Amazon Lex processes a\n         user utterance. Set to <code>false</code> to disable filler audio.</p>"
+                    }
+                },
+                "audioType": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the audio filler to play while Amazon Lex processes the\n         user's input. This field is required when <code>enabled</code> is\n         <code>true</code>.</p>"
+                    }
+                },
+                "startDelayInMilliseconds": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerDelayInMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds, to wait after the end of the user's\n         utterance before starting audio filler playback. Valid range is\n         <code>500</code> to <code>5000</code> milliseconds. If not specified,\n         Amazon Lex uses a default of <code>2500</code> milliseconds.</p>"
+                    }
+                },
+                "minimumPlayDurationInMilliseconds": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerDurationInMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum time, in milliseconds, that audio filler plays once it\n         has started, even if the bot response becomes ready sooner. Valid range\n         is <code>1000</code> to <code>5000</code> milliseconds. If not\n         specified, Amazon Lex uses a default of <code>3000</code>\n         milliseconds.</p>"
+                    }
+                },
+                "responseDeliveryDelayInMilliseconds": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerDeliveryDelayInMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The silent delay, in milliseconds, inserted between the end of audio\n         filler playback and the start of the bot's response. Valid range is\n         <code>200</code> to <code>1000</code> milliseconds. If not specified,\n         Amazon Lex uses a default of <code>500</code> milliseconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that plays background filler audio during speech-to-speech\n         interactions to mask processing delays and improve the perceived\n         responsiveness of the bot.</p>\n         <p>Audio filler requires <code>unifiedSpeechSettings</code> (speech-to-speech)\n         to be enabled on the bot locale when <code>enabled</code> is\n         <code>true</code>.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AudioFillerType": {
+            "type": "enum",
+            "members": {
+                "MELODY_CHIPPER_CHIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_CHIPPER_CHIME"
+                    }
+                },
+                "MELODY_CURIOUS_CRAWL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_CURIOUS_CRAWL"
+                    }
+                },
+                "MELODY_RISING_RIPPLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_RISING_RIPPLE"
+                    }
+                },
+                "MELODY_PATIENT_PING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_PATIENT_PING"
+                    }
+                },
+                "MELODY_PONDERING_PONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_PONDERING_PONG"
+                    }
+                },
+                "TYPING_KINETIC_KEYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TYPING_KINETIC_KEYS"
+                    }
+                },
+                "TYPING_QUIET_QWERTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TYPING_QUIET_QWERTY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The audio filler identifier played during speech-to-speech\n         interactions. Supported values include melody and typing variants such\n         as <code>MELODY_CHIPPER_CHIME</code>, <code>MELODY_CURIOUS_CRAWL</code>,\n         <code>MELODY_RISING_RIPPLE</code>, <code>MELODY_PATIENT_PING</code>,\n         <code>MELODY_PONDERING_PONG</code>, <code>TYPING_KINETIC_KEYS</code>,\n         and <code>TYPING_QUIET_QWERTY</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#AudioLogDestination": {
@@ -3080,6 +3216,120 @@
                 "smithy.api#documentation": "<p>The target Amazon S3 location for the test set execution using a bot alias.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerHistoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#BotAnalyzerHistorySummary"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerHistorySummary": {
+            "type": "structure",
+            "members": {
+                "botAnalyzerStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the historical analysis execution.</p>\n         <p>Valid Values: <code>Processing | Available | Failed | Stopping | Stopped</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the analysis was initiated.</p>"
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the analysis request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a historical bot analysis execution.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendation": {
+            "type": "structure",
+            "members": {
+                "issueLocation": {
+                    "target": "com.amazonaws.lexmodelsv2#IssueLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location information for the identified issue within the bot configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "priority": {
+                    "target": "com.amazonaws.lexmodelsv2#Priority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority level of the recommendation.</p>\n         <p>Valid Values: <code>High | Medium | Low</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "issueDescription": {
+                    "target": "com.amazonaws.lexmodelsv2#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the identified configuration issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "proposedFix": {
+                    "target": "com.amazonaws.lexmodelsv2#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended solution to address the identified issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a recommendation for bot optimization identified by the Bot Analyzer.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendation"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotAnalyzerStatus": {
+            "type": "enum",
+            "members": {
+                "Processing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Processing"
+                    }
+                },
+                "Available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Available"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Stopping": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopping"
+                    }
+                },
+                "Stopped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the bot analysis execution.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Processing</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Available</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Stopping</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Stopped</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#BotExportSpecification": {
             "type": "structure",
             "members": {
@@ -3396,6 +3646,36 @@
                 },
                 "voiceSettings": {
                     "target": "com.amazonaws.lexmodelsv2#VoiceSettings"
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Speech-to-text settings to apply when importing the bot locale configuration.</p>"
+                    }
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
+                    }
+                },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unified speech settings to apply when importing the bot locale configuration.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Audio filler settings to apply when importing the bot locale\n         configuration. Audio filler requires <code>unifiedSpeechSettings</code>\n         (speech-to-speech) to be enabled when <code>enabled</code> is\n         <code>true</code>.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings to apply when importing the bot\n         locale configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5351,8 +5631,38 @@
                         "smithy.api#documentation": "<p>The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the\n         user.</p>"
                     }
                 },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unified speech settings to configure for the new bot locale.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Audio filler settings to configure for the new bot locale. When\n         enabled, Amazon Lex plays a brief background audio filler during\n         speech-to-speech interactions to mask processing delays. Requires\n         <code>unifiedSpeechSettings</code> (speech-to-speech) to be configured\n         on the bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Speech-to-text settings to configure for the new bot locale.</p>"
+                    }
+                },
                 "generativeAISettings": {
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings"
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings to configure for the new bot\n         locale. When enabled, Amazon Lex restricts speech detection to the primary\n         (loudest) speaker during streaming audio conversations.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5404,6 +5714,24 @@
                         "smithy.api#documentation": "<p>The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the\n         user.</p>"
                     }
                 },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unified speech settings configured for the created bot locale.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio filler settings configured for the created bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speech-to-text settings configured for the created bot locale.</p>"
+                    }
+                },
                 "botLocaleStatus": {
                     "target": "com.amazonaws.lexmodelsv2#BotLocaleStatus",
                     "traits": {
@@ -5418,6 +5746,18 @@
                 },
                 "generativeAISettings": {
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings"
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) that was specified for the bot locale.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings configured for the created bot\n         locale.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5952,6 +6292,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A display name for the intent. If configured, This name will be shown to\n          users during Intent Disambiguation instead of the intent name. Display names\n          should be user-friendly, descriptive and match the intent's purpose to improve user experience\n          during disambiguation.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.lexmodelsv2#Description",
                     "traits": {
@@ -6072,6 +6418,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The name specified for the intent.</p>"
+                    }
+                },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name specified for the intent.</p>"
                     }
                 },
                 "description": {
@@ -6930,6 +7282,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#CustomDisambiguationMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#CustomPayload": {
             "type": "structure",
             "members": {
@@ -7208,6 +7569,37 @@
                 "smithy.api#documentation": "<p>The object used for specifying the data range that the customer\n            wants Amazon Lex to read through in the input transcripts.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#DeepgramModelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeepgramSpeechModelConfig": {
+            "type": "structure",
+            "members": {
+                "apiTokenSecretArn": {
+                    "target": "com.amazonaws.lexmodelsv2#SecretsManagerSecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the Deepgram API token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelId": {
+                    "target": "com.amazonaws.lexmodelsv2#DeepgramModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Deepgram speech-to-text model to use for processing speech input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings for integrating Deepgram speech-to-text models with Amazon Lex.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#DefaultConditionalBranch": {
             "type": "structure",
             "members": {
@@ -7353,6 +7745,68 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Permanently deletes the recommendations and analysis results for a specific bot analysis request. This operation is provided for GDPR compliance and cannot be undone.</p>\n         <p>After deletion, the analysis results cannot be retrieved. The analysis request ID will still appear in the history list, but attempting to describe the recommendations will return a <code>ResourceNotFoundException</code>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/bots/{botId}/botanalyzer/{botAnalyzerRequestId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis request whose recommendations should be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendationResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -8720,6 +9174,129 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the analysis results and recommendations for bot optimization. The analysis must be in <code>Available</code> status before recommendations can be retrieved.</p>\n         <p>Recommendations are returned with pagination support. Each recommendation includes the issue location, priority level, detailed description, and proposed fix.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botanalyzer/describe/{botAnalyzerRequestId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "botAnalyzerRecommendationList",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from a previous request was truncated, the <code>nextToken</code> value is used to retrieve the next page of recommendations.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommendations to return in the response. The default is 5.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendationResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that was analyzed.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot locale that was analyzed.</p>"
+                    }
+                },
+                "botAnalyzerStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the analysis.</p>\n         <p>Valid Values: <code>Processing | Available | Failed | Stopping | Stopped</code>\n         </p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the analysis was initiated.</p>"
+                    }
+                },
+                "botAnalyzerRecommendationList": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerRecommendationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recommendations for optimizing your bot configuration. Each recommendation includes the issue location, priority, description, and proposed fix.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, this token can be used in a subsequent request to retrieve the next page of recommendations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#DescribeBotLocale": {
             "type": "operation",
             "input": {
@@ -8991,6 +9568,24 @@
                         "smithy.api#documentation": "<p>The Amazon Polly voice Amazon Lex uses for voice interaction with the\n         user.</p>"
                     }
                 },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unified speech settings configured for the bot locale.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio filler settings configured for the bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speech-to-text settings configured for the bot locale.</p>"
+                    }
+                },
                 "intentsCount": {
                     "target": "com.amazonaws.lexmodelsv2#ResourceCount",
                     "traits": {
@@ -9049,6 +9644,18 @@
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for Amazon Bedrock's generative AI features for your bot locale.</p>"
+                    }
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity level for voice activity detection (VAD) configured for the bot locale.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker diarization settings configured for the bot\n         locale.</p>"
                     }
                 }
             },
@@ -10223,6 +10830,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The name specified for the intent.</p>"
+                    }
+                },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name specified for the intent.</p>"
                     }
                 },
                 "description": {
@@ -11403,6 +12016,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The current state of the conversation with the user.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#DomainEndpoint": {
@@ -12995,6 +13617,34 @@
                 "smithy.api#documentation": "<p>Provides a prompt for making sure that the user is ready for the\n         intent to be fulfilled.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#IntentDisambiguationSettings": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Enabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether the Intent Disambiguation feature is enabled. When set to <code>true</code>, Amazon Lex will present disambiguation options to users when multiple intents could match their input, with the default being <code>false</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxDisambiguationIntents": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxDisambiguationIntents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of intent options (2-5) to present to users when disambiguation is needed. This setting determines how many intent options will be shown to users when the system detects ambiguous input. The default value is 3.</p>"
+                    }
+                },
+                "customDisambiguationMessage": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomDisambiguationMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a custom message that will be displayed before presenting the disambiguation options to users. This message helps set the context for users and can be customized to match your bot's tone and brand. If not specified, a default message will be used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the Intent Disambiguation feature that helps resolve ambiguous user inputs when multiple intents could match. When enabled, the system presents clarifying questions to users, helping them specify their exact intent for improved conversation accuracy.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#IntentFilter": {
             "type": "structure",
             "members": {
@@ -13247,6 +13897,12 @@
                         "smithy.api#documentation": "<p>The name of the intent.</p>"
                     }
                 },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the intent.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.lexmodelsv2#Description",
                     "traits": {
@@ -13319,6 +13975,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lexmodelsv2#InvokedIntentSample"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#IssueLocation": {
+            "type": "structure",
+            "members": {
+                "botLocale": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier where the issue was found.</p>"
+                    }
+                },
+                "intentId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The intent identifier where the issue was found, if applicable.</p>"
+                    }
+                },
+                "slotId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The slot identifier where the issue was found, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the location of an identified issue within the bot configuration.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#ItemId": {
@@ -13472,6 +14154,9 @@
                     "target": "com.amazonaws.lexmodelsv2#DeleteBotAlias"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteBotAnalyzerRecommendation"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#DeleteBotLocale"
                 },
                 {
@@ -13515,6 +14200,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotAlias"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DescribeBotAnalyzerRecommendation"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotLocale"
@@ -13578,6 +14266,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBotAliasReplicas"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistory"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBotLocales"
@@ -13667,6 +14358,9 @@
                     "target": "com.amazonaws.lexmodelsv2#SearchAssociatedTranscripts"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#StartBotAnalyzer"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#StartBotRecommendation"
                 },
                 {
@@ -13680,6 +14374,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#StartTestSetGeneration"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#StopBotAnalyzer"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#StopBotRecommendation"
@@ -13734,8 +14431,196 @@
                     "name": "lex"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>This document provides detailed information about the Amazon Lex V2 API actions and their parameters.</p>\n         <p>For information about the IAM access control permissions you need to use this API, see\n        <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html\">Identity-based policies for Amazon Lex V2</a>.</p>\n         <p>Amazon Lex V2 Model Building V2 operations let you build and manage bots.</p>\n         <p>If you use a custom HTTP client to call Amazon Lex Model Building\n        V2 operations, you must set the \"Content-Type\" HTTP header to\n        \"application/x-amz-json-1.1\". Otherwise, you receive an HTTP 404 -\n        UnknownOperationException in the response.</p>\n         <p>Amazon Lex Model Building V2 operations return the responses with\n        the \"application/x-amz-json-1.1\" content type.</p>\n         <p>You can use <a href=\"http://aws.amazon.com/tools/#sdk\">Amazon Web Services SDKs</a> to access Amazon Lex V2 APIs using your favorite programming language.\n        The SDKs automatically perform useful tasks for you, such as:</p>\n         <ul>\n            <li>\n               <p>Cryptographically sign your service requests</p>\n            </li>\n            <li>\n               <p>Retry requests</p>\n            </li>\n            <li>\n               <p>Handle error responses</p>\n            </li>\n         </ul>\n         <p>The following resources provide additional information about the Amazon Lex V2 Model Building API.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Amazon Web Services General Reference</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/lex.html\">Amazon Lex V2 Endpoints for each region</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <i>Command Line Interface</i>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/cli/latest/reference/lexv2-models/index.html\">\n                    Amazon Lex Model Building V2 CLI commands</a>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Lex Model Building V2",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://models-v2-lex-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://models-v2-lex-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://models-v2-lex.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://models-v2-lex.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -13743,27 +14628,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -14829,6 +15714,121 @@
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the bot associated with the aliases.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of historical bot analysis executions for a specific bot. You can filter the results by locale and bot version.</p>\n         <p>The history includes all analysis executions regardless of their status, allowing you to track past analyses and their outcomes.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botanalyzer/history",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "botAnalyzerHistoryList",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier to filter the history. If not specified, returns history for all locales.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version to filter the history. If not specified, defaults to <code>DRAFT</code>.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from a previous request was truncated, the <code>nextToken</code> value is used to retrieve the next page of history entries.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of history entries to return in the response. The default is 10.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListBotAnalyzerHistoryResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier used to filter the history.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version used to filter the history.</p>"
+                    }
+                },
+                "botAnalyzerHistoryList": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerHistoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of historical analysis executions, ordered by creation date with the most recent first.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, this token can be used in a subsequent request to retrieve the next page of history entries.</p>"
                     }
                 }
             },
@@ -17945,6 +18945,15 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#MaxDisambiguationIntents": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#MaxResults": {
             "type": "integer",
             "traits": {
@@ -18154,13 +19163,25 @@
                     "target": "com.amazonaws.lexmodelsv2#Enabled",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether the assisted nlu feature is enabled.</p>",
+                        "smithy.api#documentation": "<p>Determines whether the Assisted NLU feature is enabled for the bot. When set to <code>true</code>, Amazon Lex uses advanced models to improve intent recognition and slot resolution, with the default being <code>false</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "assistedNluMode": {
+                    "target": "com.amazonaws.lexmodelsv2#AssistedNluMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the mode for Assisted NLU operation. Use <code>Primary</code> to make Assisted NLU the primary intent recognition method, or <code>Fallback</code> to use it only when standard NLU confidence is low.</p>"
+                    }
+                },
+                "intentDisambiguationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#IntentDisambiguationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing specifications for the Intent Disambiguation feature within the Assisted NLU settings. These settings determine how the bot handles ambiguous user inputs that could match multiple intents.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether the assisted nlu feature is turned on or off.</p>"
+                "smithy.api#documentation": "<p>Configures the Assisted Natural Language Understanding (NLU) feature for your bot. This specification determines whether enhanced intent recognition and utterance understanding capabilities are active.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#NonEmptyString": {
@@ -18664,6 +19685,32 @@
                 "target": "com.amazonaws.lexmodelsv2#Principal"
             }
         },
+        "com.amazonaws.lexmodelsv2#Priority": {
+            "type": "enum",
+            "members": {
+                "High": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                },
+                "Medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "Low": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The priority level of a recommendation.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>High</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Medium</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Low</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#PriorityValue": {
             "type": "integer",
             "traits": {
@@ -19143,7 +20190,7 @@
                 "nluImprovement": {
                     "target": "com.amazonaws.lexmodelsv2#NluImprovementSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing specifications for the assisted nlu feature.</p>"
+                        "smithy.api#documentation": "<p>An object containing specifications for the Assisted NLU feature within the bot's runtime settings. These settings determine how the bot processes and interprets user utterances during conversations.</p>"
                     }
                 }
             },
@@ -19495,6 +20542,16 @@
                         "smithy.api#enumValue": "Descending"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SecretsManagerSecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[A-Za-z-]*:secretsmanager:[a-z0-9-]{1,20}:[0-9]{12}:secret:[A-Za-z0-9/_+=.@-]{1,512}-[A-Za-z0-9]{6}$"
             }
         },
         "com.amazonaws.lexmodelsv2#SentimentAnalysisSettings": {
@@ -20557,6 +21614,22 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Enabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether speaker diarization is enabled for the bot locale.\n         Set to <code>true</code> to have Amazon Lex treat speech from speakers other\n         than the primary speaker as non-speech. Set to <code>false</code> to\n         disable speaker diarization and rely on voice activity detection\n         alone.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configuration that restricts speech detection to the\n         primary (loudest) speaker during streaming audio conversations, so that\n         speech from background speakers does not start a turn, interrupt the\n         bot, or reach speech recognition.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#Specifications": {
             "type": "structure",
             "members": {
@@ -20577,6 +21650,229 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Subslot specifications.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity": {
+            "type": "enum",
+            "members": {
+                "Default": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Default"
+                    }
+                },
+                "HighNoiseTolerance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HighNoiseTolerance"
+                    }
+                },
+                "MaximumNoiseTolerance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaximumNoiseTolerance"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines the sensitivity level for voice activity detection (VAD) in noisy environments. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Default</code> - Standard sensitivity level suitable for most environments</p>\n            </li>\n            <li>\n               <p>\n                  <code>HighNoiseTolerance</code> - Increased tolerance for moderate background noise</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumNoiseTolerance</code> - Maximum tolerance for high levels of background noise</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechFoundationModel": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.lexmodelsv2#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the foundation model used for speech processing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "voiceId": {
+                    "target": "com.amazonaws.lexmodelsv2#VoiceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the voice to use for speech synthesis with the foundation model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a foundation model used for speech synthesis and recognition capabilities.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechModelConfig": {
+            "type": "structure",
+            "members": {
+                "deepgramConfig": {
+                    "target": "com.amazonaws.lexmodelsv2#DeepgramSpeechModelConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for using Deepgram as the speech-to-text provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration settings that define which speech-to-text model to use for processing speech input.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechModelPreference": {
+            "type": "enum",
+            "members": {
+                "Standard": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Standard"
+                    }
+                },
+                "Neural": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Neural"
+                    }
+                },
+                "Deepgram": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deepgram"
+                    }
+                },
+                "Advanced": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Advanced"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings": {
+            "type": "structure",
+            "members": {
+                "speechModelPreference": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechModelPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speech-to-text model to use.</p>"
+                    }
+                },
+                "speechModelConfig": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechModelConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for the selected speech-to-text model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings that control how Amazon Lex processes and recognizes speech input from users.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotAnalyzer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#StartBotAnalyzerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#StartBotAnalyzerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates an asynchronous analysis of your bot configuration using AI-powered analysis to identify potential issues and recommend improvements based on AWS best practices.</p>\n         <p>The analysis examines your bot's configuration, including intents, utterances, slots, and conversation flows, to provide actionable recommendations for optimization.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botanalyzer",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotAnalyzerRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to analyze.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "analysisScope": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalysisScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of analysis to perform. Currently only <code>BotLocale</code> scope is supported.</p>\n         <p>Valid Values: <code>BotLocale</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier for the bot locale to analyze. Required when <code>analysisScope</code> is <code>BotLocale</code>.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to analyze. Defaults to <code>DRAFT</code> if not specified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartBotAnalyzerResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot being analyzed.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot being analyzed.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot locale being analyzed.</p>"
+                    }
+                },
+                "botAnalyzerStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the analysis. The initial status is <code>Processing</code>.</p>\n         <p>Valid Values: <code>Processing | Available | Failed | Stopping | Stopped</code>\n         </p>"
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for this analysis request. Use this identifier to check the status and retrieve results.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the analysis was initiated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lexmodelsv2#StartBotRecommendation": {
@@ -21273,6 +22569,99 @@
                     "min": 1,
                     "max": 900
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StopBotAnalyzer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#StopBotAnalyzerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#StopBotAnalyzerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels an ongoing bot analysis execution. Once stopped, the analysis cannot be resumed and no recommendations will be generated.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/bots/{botId}/botanalyzer/{botAnalyzerRequestId}/stop",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StopBotAnalyzerRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis request to stop.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StopBotAnalyzerResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot locale.</p>"
+                    }
+                },
+                "botAnalyzerStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAnalyzerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated status of the analysis. The status will be <code>Stopping</code> and will eventually transition to <code>Stopped</code>.</p>\n         <p>Valid Values: <code>Processing | Available | Failed | Stopping | Stopped</code>\n         </p>"
+                    }
+                },
+                "botAnalyzerRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the analysis request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lexmodelsv2#StopBotRecommendation": {
@@ -22745,6 +24134,31 @@
                 "smithy.api#documentation": "<p>Contains information about the messages in the turn.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings": {
+            "type": "structure",
+            "members": {
+                "speechFoundationModel": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechFoundationModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The foundation model configuration to use for unified speech processing capabilities.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unified configuration settings that combine speech recognition and synthesis capabilities.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#UntagResource": {
             "type": "operation",
             "input": {
@@ -23093,10 +24507,40 @@
                         "smithy.api#documentation": "<p>The new Amazon Polly voice Amazon Lex should use for voice interaction with the\n         user.</p>"
                     }
                 },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated unified speech settings to apply to the bot locale.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated audio filler settings to apply to the bot locale. When\n         enabled, requires <code>unifiedSpeechSettings</code> (speech-to-speech)\n         to be configured on the bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated speech-to-text settings to apply to the bot locale.</p>"
+                    }
+                },
                 "generativeAISettings": {
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing \n      may differ if you turn a feature on. For more information, see LINK.</p>"
+                    }
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated speaker diarization settings to apply to the bot locale.\n         If you omit this field, Amazon Lex keeps the setting currently stored on the\n         bot locale. To turn speaker diarization off, set <code>enabled</code>\n         to <code>false</code> explicitly.</p>"
                     }
                 }
             },
@@ -23149,6 +24593,24 @@
                         "smithy.api#documentation": "<p>The updated Amazon Polly voice to use for voice interaction with the\n         user.</p>"
                     }
                 },
+                "unifiedSpeechSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated unified speech settings for the bot locale.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated audio filler settings for the bot locale.</p>"
+                    }
+                },
+                "speechRecognitionSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated speech-to-text settings for the bot locale.</p>"
+                    }
+                },
                 "botLocaleStatus": {
                     "target": "com.amazonaws.lexmodelsv2#BotLocaleStatus",
                     "traits": {
@@ -23183,6 +24645,18 @@
                     "target": "com.amazonaws.lexmodelsv2#GenerativeAISettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale.</p>"
+                    }
+                },
+                "speechDetectionSensitivity": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeechDetectionSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated sensitivity level for voice activity detection (VAD) in the bot locale.</p>"
+                    }
+                },
+                "speakerDiarizationSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#SpeakerDiarizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated speaker diarization settings for the bot locale.</p>"
                     }
                 }
             },
@@ -23657,6 +25131,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new display name for the intent.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.lexmodelsv2#Description",
                     "traits": {
@@ -23783,6 +25263,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated name of the intent.</p>"
+                    }
+                },
+                "intentDisplayName": {
+                    "target": "com.amazonaws.lexmodelsv2#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated display name of the intent.</p>"
                     }
                 },
                 "description": {
@@ -25138,17 +26624,17 @@
         "com.amazonaws.lexmodelsv2#VoiceSettings": {
             "type": "structure",
             "members": {
+                "engine": {
+                    "target": "com.amazonaws.lexmodelsv2#VoiceEngine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine\">\n               <code>engine</code> parameter of the <code>SynthesizeSpeech</code> operation</a> in the <i>Amazon Polly developer guide</i>.</p>\n         <p>If you do not specify a value, the default is <code>standard</code>.</p>"
+                    }
+                },
                 "voiceId": {
                     "target": "com.amazonaws.lexmodelsv2#VoiceId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the Amazon Polly voice to use.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "engine": {
-                    "target": "com.amazonaws.lexmodelsv2#VoiceEngine",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine\">\n               <code>engine</code> parameter of the <code>SynthesizeSpeech</code> operation</a> in the <i>Amazon Polly developer guide</i>.</p>\n         <p>If you do not specify a value, the default is <code>standard</code>.</p>"
                     }
                 }
             },

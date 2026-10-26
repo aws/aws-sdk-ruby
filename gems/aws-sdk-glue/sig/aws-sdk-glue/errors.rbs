@@ -97,6 +97,15 @@ module Aws::Glue
     class MLTransformNotReadyException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class MaterializedViewRefreshTaskNotRunningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaterializedViewRefreshTaskRunningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaterializedViewRefreshTaskStoppingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class NoScheduleException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -125,6 +134,9 @@ module Aws::Glue
       def message: () -> String?
     end
     class SchedulerTransitioningException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SessionBusyException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class TargetResourceNotFound < Smithy::Client::ServiceError

@@ -10,6 +10,13 @@ module Aws::EKS
     AccessPolicy: StructureShape
     AccessScope: StructureShape
     AccessScopeType: EnumShape
+    AckConfigRequest: StructureShape
+    AckConfigResponse: StructureShape
+    AckDisabledServicesList: ListShape
+    AckServiceName: StringShape
+    ActivateCertificateAuthorityRequest: StructureShape
+    ActivateCertificateAuthorityResponse: StructureShape
+    ActiveCertificateAuthority: StructureShape
     AdditionalInfoMap: MapShape
     Addon: StructureShape
     AddonCompatibilityDetail: StructureShape
@@ -29,6 +36,18 @@ module Aws::EKS
     AddonVersionInfo: StructureShape
     AddonVersionInfoList: ListShape
     Addons: ListShape
+    AllowedValuesConstraint: StructureShape
+    AllowedValuesList: ListShape
+    ArgoCdAwsIdcConfigRequest: StructureShape
+    ArgoCdAwsIdcConfigResponse: StructureShape
+    ArgoCdConfigRequest: StructureShape
+    ArgoCdConfigResponse: StructureShape
+    ArgoCdEndpointPrefix: StringShape
+    ArgoCdNetworkAccessConfigRequest: StructureShape
+    ArgoCdNetworkAccessConfigResponse: StructureShape
+    ArgoCdRole: EnumShape
+    ArgoCdRoleMapping: StructureShape
+    ArgoCdRoleMappingList: ListShape
     AssociateAccessPolicyRequest: StructureShape
     AssociateAccessPolicyResponse: StructureShape
     AssociateEncryptionConfigRequest: StructureShape
@@ -45,11 +64,37 @@ module Aws::EKS
     Boolean: BooleanShape
     BoxedBoolean: BooleanShape
     BoxedInteger: IntegerShape
+    CancelUpdateRequest: StructureShape
+    CancelUpdateResponse: StructureShape
+    Cancellation: StructureShape
+    CancellationStatus: EnumShape
+    Capability: StructureShape
+    CapabilityConfigurationRequest: StructureShape
+    CapabilityConfigurationResponse: StructureShape
+    CapabilityDeletePropagationPolicy: EnumShape
+    CapabilityHealth: StructureShape
+    CapabilityIssue: StructureShape
+    CapabilityIssueCode: EnumShape
+    CapabilityIssueList: ListShape
+    CapabilityStatus: EnumShape
+    CapabilitySummary: StructureShape
+    CapabilitySummaryList: ListShape
+    CapabilityType: EnumShape
     Capacity: IntegerShape
     CapacityTypes: EnumShape
     Category: EnumShape
     CategoryList: ListShape
     Certificate: StructureShape
+    CertificateAuthority: StructureShape
+    CertificateAuthorityActivatedBy: EnumShape
+    CertificateAuthorityCreatedBy: EnumShape
+    CertificateAuthorityDistributionStatus: EnumShape
+    CertificateAuthorityMaxResults: IntegerShape
+    CertificateAuthorityScheduledEvents: StructureShape
+    CertificateAuthoritySigningStatus: EnumShape
+    CertificateAuthoritySummary: StructureShape
+    CertificateAuthoritySummaryList: ListShape
+    CertificateAuthorityValidity: StructureShape
     ClientException: StructureShape
     ClientStat: StructureShape
     ClientStats: ListShape
@@ -70,13 +115,22 @@ module Aws::EKS
     ConnectorConfigProvider: EnumShape
     ConnectorConfigRequest: StructureShape
     ConnectorConfigResponse: StructureShape
+    ControlPlaneConfigInfo: StructureShape
+    ControlPlaneEgressModeType: EnumShape
     ControlPlanePlacementRequest: StructureShape
     ControlPlanePlacementResponse: StructureShape
+    ControlPlaneScalingConfig: StructureShape
+    ControlPlaneScalingTierInfo: StructureShape
+    ControlPlaneScalingTierList: ListShape
     CreateAccessConfigRequest: StructureShape
     CreateAccessEntryRequest: StructureShape
     CreateAccessEntryResponse: StructureShape
     CreateAddonRequest: StructureShape
     CreateAddonResponse: StructureShape
+    CreateCapabilityRequest: StructureShape
+    CreateCapabilityResponse: StructureShape
+    CreateCertificateAuthorityRequest: StructureShape
+    CreateCertificateAuthorityResponse: StructureShape
     CreateClusterRequest: StructureShape
     CreateClusterResponse: StructureShape
     CreateEksAnywhereSubscriptionRequest: StructureShape
@@ -91,6 +145,10 @@ module Aws::EKS
     DeleteAccessEntryResponse: StructureShape
     DeleteAddonRequest: StructureShape
     DeleteAddonResponse: StructureShape
+    DeleteCapabilityRequest: StructureShape
+    DeleteCapabilityResponse: StructureShape
+    DeleteCertificateAuthorityRequest: StructureShape
+    DeleteCertificateAuthorityResponse: StructureShape
     DeleteClusterRequest: StructureShape
     DeleteClusterResponse: StructureShape
     DeleteEksAnywhereSubscriptionRequest: StructureShape
@@ -114,6 +172,10 @@ module Aws::EKS
     DescribeAddonVersionsRequest: StructureShape
     DescribeAddonVersionsRequestMaxResults: IntegerShape
     DescribeAddonVersionsResponse: StructureShape
+    DescribeCapabilityRequest: StructureShape
+    DescribeCapabilityResponse: StructureShape
+    DescribeCertificateAuthorityRequest: StructureShape
+    DescribeCertificateAuthorityResponse: StructureShape
     DescribeClusterRequest: StructureShape
     DescribeClusterResponse: StructureShape
     DescribeClusterVersionMaxResults: IntegerShape
@@ -139,6 +201,8 @@ module Aws::EKS
     DisassociateAccessPolicyResponse: StructureShape
     DisassociateIdentityProviderConfigRequest: StructureShape
     DisassociateIdentityProviderConfigResponse: StructureShape
+    DurationConstraints: StructureShape
+    DurationParameterConfig: StructureShape
     EksAnywhereSubscription: StructureShape
     EksAnywhereSubscriptionLicenseType: EnumShape
     EksAnywhereSubscriptionList: ListShape
@@ -153,6 +217,8 @@ module Aws::EKS
     ErrorCode: EnumShape
     ErrorDetail: StructureShape
     ErrorDetails: ListShape
+    EtcdPlacementRequest: StructureShape
+    EtcdPlacementResponse: StructureShape
     FargateProfile: StructureShape
     FargateProfileHealth: StructureShape
     FargateProfileIssue: StructureShape
@@ -163,6 +229,9 @@ module Aws::EKS
     FargateProfileSelectors: ListShape
     FargateProfileStatus: EnumShape
     FargateProfilesRequestMaxResults: IntegerShape
+    HorizontalPodAutoscalerControllerConfigRequest: StructureShape
+    HorizontalPodAutoscalerControllerConfigResponse: StructureShape
+    HorizontalPodAutoscalerControllerVersionConfig: StructureShape
     Identity: StructureShape
     IdentityProviderConfig: StructureShape
     IdentityProviderConfigResponse: StructureShape
@@ -180,12 +249,24 @@ module Aws::EKS
     InsightsFilter: StructureShape
     InsightsRefreshStatus: EnumShape
     Integer: IntegerShape
+    IntegerConstraints: StructureShape
+    IntegerParameterConfig: StructureShape
+    IntegerRangeConstraint: StructureShape
     InvalidParameterException: StructureShape
     InvalidRequestException: StructureShape
     InvalidStateException: StructureShape
     IpFamily: EnumShape
     Issue: StructureShape
     IssueList: ListShape
+    KubeApiServerConfigRequest: StructureShape
+    KubeApiServerConfigResponse: StructureShape
+    KubeApiServerVersionConfig: StructureShape
+    KubeControllerManagerConfigRequest: StructureShape
+    KubeControllerManagerConfigResponse: StructureShape
+    KubeControllerManagerVersionConfig: StructureShape
+    KubeSchedulerConfigRequest: StructureShape
+    KubeSchedulerConfigResponse: StructureShape
+    KubeSchedulerVersionConfig: StructureShape
     KubernetesNetworkConfigRequest: StructureShape
     KubernetesNetworkConfigResponse: StructureShape
     LaunchTemplateSpecification: StructureShape
@@ -203,6 +284,11 @@ module Aws::EKS
     ListAssociatedAccessPoliciesRequest: StructureShape
     ListAssociatedAccessPoliciesRequestMaxResults: IntegerShape
     ListAssociatedAccessPoliciesResponse: StructureShape
+    ListCapabilitiesRequest: StructureShape
+    ListCapabilitiesRequestMaxResults: IntegerShape
+    ListCapabilitiesResponse: StructureShape
+    ListCertificateAuthoritiesRequest: StructureShape
+    ListCertificateAuthoritiesResponse: StructureShape
     ListClustersRequest: StructureShape
     ListClustersRequestMaxResults: IntegerShape
     ListClustersResponse: StructureShape
@@ -237,6 +323,8 @@ module Aws::EKS
     NodeRepairConfig: StructureShape
     NodeRepairConfigOverrides: StructureShape
     NodeRepairConfigOverridesList: ListShape
+    NodeResourcesFitConfig: StructureShape
+    NodeResourcesFitVersionConfig: StructureShape
     Nodegroup: StructureShape
     NodegroupHealth: StructureShape
     NodegroupIssueCode: EnumShape
@@ -253,10 +341,16 @@ module Aws::EKS
     OutpostConfigRequest: StructureShape
     OutpostConfigResponse: StructureShape
     PercentCapacity: IntegerShape
+    PodGcControllerConfigRequest: StructureShape
+    PodGcControllerConfigResponse: StructureShape
+    PodGcControllerVersionConfig: StructureShape
     PodIdentityAssociation: StructureShape
     PodIdentityAssociationSummaries: ListShape
     PodIdentityAssociationSummary: StructureShape
+    PortRangeConstraints: StructureShape
+    PortRangeParameterConfig: StructureShape
     Provider: StructureShape
+    ProvisionedControlPlaneTier: EnumShape
     RegisterClusterRequest: StructureShape
     RegisterClusterResponse: StructureShape
     RemoteAccessConfig: StructureShape
@@ -268,13 +362,28 @@ module Aws::EKS
     RemotePodNetworkList: ListShape
     RepairAction: EnumShape
     ResolveConflicts: EnumShape
+    ResourceConstraints: StructureShape
     ResourceInUseException: StructureShape
     ResourceLimitExceededException: StructureShape
     ResourceNotFoundException: StructureShape
     ResourcePropagationDelayException: StructureShape
+    ResourceWeight: StructureShape
+    ResourceWeightList: ListShape
+    ResourceWeightName: StringShape
+    ResourceWeightValue: IntegerShape
     RoleArn: StringShape
+    RollbackConfig: StructureShape
+    ScoringStrategy: StructureShape
+    ScoringStrategyConfig: StructureShape
+    ScoringStrategyConstraints: StructureShape
+    ScoringStrategyType: EnumShape
     ServerException: StructureShape
+    ServiceNodePortRange: StructureShape
     ServiceUnavailableException: StructureShape
+    SpreadLevel: EnumShape
+    SsoIdentity: StructureShape
+    SsoIdentityList: ListShape
+    SsoIdentityType: EnumShape
     StartInsightsRefreshRequest: StructureShape
     StartInsightsRefreshResponse: StructureShape
     StorageConfigRequest: StructureShape
@@ -290,6 +399,7 @@ module Aws::EKS
     TagValue: StringShape
     Taint: StructureShape
     TaintEffect: EnumShape
+    TerminatedPodGcThresholdValue: IntegerShape
     ThrottlingException: StructureShape
     Timestamp: TimestampShape
     UnsupportedAvailabilityZoneException: StructureShape
@@ -299,8 +409,13 @@ module Aws::EKS
     UpdateAccessConfigRequest: StructureShape
     UpdateAccessEntryRequest: StructureShape
     UpdateAccessEntryResponse: StructureShape
+    UpdateAckConfig: StructureShape
     UpdateAddonRequest: StructureShape
     UpdateAddonResponse: StructureShape
+    UpdateArgoCdConfig: StructureShape
+    UpdateCapabilityConfiguration: StructureShape
+    UpdateCapabilityRequest: StructureShape
+    UpdateCapabilityResponse: StructureShape
     UpdateClusterConfigRequest: StructureShape
     UpdateClusterConfigResponse: StructureShape
     UpdateClusterVersionRequest: StructureShape
@@ -317,6 +432,7 @@ module Aws::EKS
     UpdateParams: ListShape
     UpdatePodIdentityAssociationRequest: StructureShape
     UpdatePodIdentityAssociationResponse: StructureShape
+    UpdateRoleMappings: StructureShape
     UpdateStatus: EnumShape
     UpdateTaintsPayload: StructureShape
     UpdateType: EnumShape
@@ -325,6 +441,8 @@ module Aws::EKS
     VersionStatus: EnumShape
     VpcConfigRequest: StructureShape
     VpcConfigResponse: StructureShape
+    WarmPoolConfig: StructureShape
+    WarmPoolState: EnumShape
     ZeroCapacity: IntegerShape
     ZonalShiftConfigRequest: StructureShape
     ZonalShiftConfigResponse: StructureShape

@@ -144,18 +144,18 @@ module Aws::BCMDataExports
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,30 +209,12 @@ module Aws::BCMDataExports
       super
     end
 
-    # <p>Creates a data export and specifies the data query, the delivery preference, and any
-    #       optional resource tags.</p>
-    #          <p>A <code>DataQuery</code> consists of both a <code>QueryStatement</code> and
-    #         <code>TableConfigurations</code>.</p>
-    #          <p>The <code>QueryStatement</code> is an SQL statement. Data Exports only supports a limited
-    #       subset of the SQL syntax. For more information on the SQL syntax that is supported, see <a href="https://docs.aws.amazon.com/cur/latest/userguide/de-data-query.html">Data query</a>. To
-    #       view the available tables and columns, see the <a href="https://docs.aws.amazon.com/cur/latest/userguide/de-table-dictionary.html">Data Exports table
-    #         dictionary</a>.</p>
-    #          <p>The <code>TableConfigurations</code> is a collection of specified
-    #         <code>TableProperties</code> for the table being queried in the <code>QueryStatement</code>.
-    #       TableProperties are additional configurations you can provide to change the data and schema of
-    #       a table. Each table can have different TableProperties. However, tables are not required to
-    #       have any TableProperties. Each table property has a default value that it assumes if not
-    #       specified. For more information on table configurations, see <a href="https://docs.aws.amazon.com/cur/latest/userguide/de-data-query.html">Data query</a>. To
-    #       view the table properties available for each table, see the <a href="https://docs.aws.amazon.com/cur/latest/userguide/de-table-dictionary.html">Data Exports table
-    #         dictionary</a> or use the <code>ListTables</code> API to get a response of all tables
-    #       and their available properties.</p>
+    # <p>Creates a data export and specifies the data query, the delivery preference, and any optional resource tags.</p> <p>A <code>DataQuery</code> consists of both a <code>QueryStatement</code> and <code>TableConfigurations</code>.</p> <p>The <code>QueryStatement</code> is an SQL statement. Data Exports only supports a limited subset of the SQL syntax. For more information on the SQL syntax that is supported, see <a href="https://docs.aws.amazon.com/cur/latest/userguide/de-data-query.html">Data query</a>. To view the available tables and columns, see the <a href="https://docs.aws.amazon.com/cur/latest/userguide/de-table-dictionary.html">Data Exports table dictionary</a>.</p> <p>The <code>TableConfigurations</code> is a collection of specified <code>TableProperties</code> for the table being queried in the <code>QueryStatement</code>. TableProperties are additional configurations you can provide to change the data and schema of a table. Each table can have different TableProperties. However, tables are not required to have any TableProperties. Each table property has a default value that it assumes if not specified. For more information on table configurations, see <a href="https://docs.aws.amazon.com/cur/latest/userguide/de-data-query.html">Data query</a>. To view the table properties available for each table, see the <a href="https://docs.aws.amazon.com/cur/latest/userguide/de-table-dictionary.html">Data Exports table dictionary</a> or use the <code>ListTables</code> API to get a response of all tables and their available properties.</p>
     # @param [Hash, Types::CreateExportRequest] params
     # @option params [Types::Export] :export
-    #   <p>The details of the export, including data query, name, description, and destination
-    #         configuration.</p>
+    #   <p>The details of the export, including data query, name, description, and destination configuration.</p>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>An optional list of tags to associate with the specified export. Each tag consists of a
-    #         key and a value, and each key must be unique for the resource.</p>
+    #   <p>An optional list of tags to associate with the specified export. Each tag consists of a key and a value, and each key must be unique for the resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     export: { # required
@@ -243,19 +225,20 @@ module Aws::BCMDataExports
     #         query_statement: "QueryStatement", # required
     #         table_configurations: {
     #           "TableName" => {
-    #             "TableProperty" => "GenericString"
+    #             "TableProperty" => "TablePropertyGenericString"
     #           }
     #         }
     #       },
     #       destination_configurations: { # required
     #         s3_destination: { # required
     #           s3_bucket: "GenericString", # required
+    #           s3_bucket_owner: "AccountId",
     #           s3_prefix: "GenericString", # required
     #           s3_region: "GenericString", # required
     #           s3_output_configurations: { # required
-    #             output_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #             output_type: "CUSTOM" # One of: ["CUSTOM", "ATHENA", "REDSHIFT"], # required
     #             format: "TEXT_OR_CSV" # One of: ["TEXT_OR_CSV", "PARQUET"], # required
-    #             compression: "GZIP" # One of: ["GZIP", "PARQUET"], # required
+    #             compression: "GZIP" # One of: ["GZIP", "PARQUET", "ZIP"], # required
     #             overwrite: "CREATE_NEW_REPORT" # One of: ["CREATE_NEW_REPORT", "OVERWRITE_REPORT"], # required
     #           }
     #         }
@@ -308,8 +291,7 @@ module Aws::BCMDataExports
     # <p>Exports data based on the source data update.</p>
     # @param [Hash, Types::GetExecutionRequest] params
     # @option params [String] :export_arn
-    #   <p>The Amazon Resource Name (ARN) of the Export object that generated this specific
-    #         execution.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Export object that generated this specific execution.</p>
     # @option params [String] :execution_id
     #   <p>The ID for this specific execution.</p>
     # @example Request syntax with placeholder values
@@ -331,19 +313,20 @@ module Aws::BCMDataExports
     #         query_statement: "QueryStatement", # required
     #         table_configurations: {
     #           "TableName" => {
-    #             "TableProperty" => "GenericString"
+    #             "TableProperty" => "TablePropertyGenericString"
     #           }
     #         }
     #       },
     #       destination_configurations: { # required
     #         s3_destination: { # required
     #           s3_bucket: "GenericString", # required
+    #           s3_bucket_owner: "AccountId",
     #           s3_prefix: "GenericString", # required
     #           s3_region: "GenericString", # required
     #           s3_output_configurations: { # required
-    #             output_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #             output_type: "CUSTOM" # One of: ["CUSTOM", "ATHENA", "REDSHIFT"], # required
     #             format: "TEXT_OR_CSV" # One of: ["TEXT_OR_CSV", "PARQUET"], # required
-    #             compression: "GZIP" # One of: ["GZIP", "PARQUET"], # required
+    #             compression: "GZIP" # One of: ["GZIP", "PARQUET", "ZIP"], # required
     #             overwrite: "CREATE_NEW_REPORT" # One of: ["CREATE_NEW_REPORT", "OVERWRITE_REPORT"], # required
     #           }
     #         }
@@ -354,7 +337,7 @@ module Aws::BCMDataExports
     #     },
     #     execution_status: {
     #       status_code: "INITIATION_IN_PROCESS" # One of: ["INITIATION_IN_PROCESS", "QUERY_QUEUED", "QUERY_IN_PROCESS", "QUERY_FAILURE", "DELIVERY_IN_PROCESS", "DELIVERY_SUCCESS", "DELIVERY_FAILURE"],
-    #       status_reason: "INSUFFICIENT_PERMISSION" # One of: ["INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"],
+    #       status_reason: "INSUFFICIENT_PERMISSION" # One of: ["INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE", "DEPRECATED"],
     #       created_at: Time.now,
     #       completed_at: Time.now,
     #       last_updated_at: Time.now
@@ -387,19 +370,20 @@ module Aws::BCMDataExports
     #         query_statement: "QueryStatement", # required
     #         table_configurations: {
     #           "TableName" => {
-    #             "TableProperty" => "GenericString"
+    #             "TableProperty" => "TablePropertyGenericString"
     #           }
     #         }
     #       },
     #       destination_configurations: { # required
     #         s3_destination: { # required
     #           s3_bucket: "GenericString", # required
+    #           s3_bucket_owner: "AccountId",
     #           s3_prefix: "GenericString", # required
     #           s3_region: "GenericString", # required
     #           s3_output_configurations: { # required
-    #             output_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #             output_type: "CUSTOM" # One of: ["CUSTOM", "ATHENA", "REDSHIFT"], # required
     #             format: "TEXT_OR_CSV" # One of: ["TEXT_OR_CSV", "PARQUET"], # required
-    #             compression: "GZIP" # One of: ["GZIP", "PARQUET"], # required
+    #             compression: "GZIP" # One of: ["GZIP", "PARQUET", "ZIP"], # required
     #             overwrite: "CREATE_NEW_REPORT" # One of: ["CREATE_NEW_REPORT", "OVERWRITE_REPORT"], # required
     #           }
     #         }
@@ -410,7 +394,7 @@ module Aws::BCMDataExports
     #     },
     #     export_status: {
     #       status_code: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"],
-    #       status_reason: "INSUFFICIENT_PERMISSION" # One of: ["INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"],
+    #       status_reason: "INSUFFICIENT_PERMISSION" # One of: ["INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE", "DEPRECATED"],
     #       created_at: Time.now,
     #       last_updated_at: Time.now,
     #       last_refreshed_at: Time.now
@@ -422,21 +406,17 @@ module Aws::BCMDataExports
       request.send_request(options)
     end
 
-    # <p>Returns the metadata for the specified table and table properties. This includes the list
-    #       of columns in the table schema, their data types, and column descriptions.</p>
+    # <p>Returns the metadata for the specified table and table properties. This includes the list of columns in the table schema, their data types, and column descriptions.</p>
     # @param [Hash, Types::GetTableRequest] params
     # @option params [String] :table_name
     #   <p>The name of the table.</p>
     # @option params [Hash<String, String>] :table_properties
-    #   <p>TableProperties are additional configurations you can provide to change the data and
-    #         schema of a table. Each table can have different TableProperties. Tables are not required to
-    #         have any TableProperties. Each table property has a default value that it assumes if not
-    #         specified.</p>
+    #   <p>TableProperties are additional configurations you can provide to change the data and schema of a table. Each table can have different TableProperties. Tables are not required to have any TableProperties. Each table property has a default value that it assumes if not specified.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     table_name: "TableName", # required
     #     table_properties: {
-    #       "TableProperty" => "GenericString"
+    #       "TableProperty" => "TablePropertyGenericString"
     #     }
     #   }
     #   options = {}
@@ -447,7 +427,7 @@ module Aws::BCMDataExports
     #     table_name: "TableName",
     #     description: "GenericString",
     #     table_properties: {
-    #       "TableProperty" => "GenericString"
+    #       "TableProperty" => "TablePropertyGenericString"
     #     },
     #     schema: [
     #       {
@@ -487,7 +467,7 @@ module Aws::BCMDataExports
     #         execution_id: "GenericString", # required
     #         execution_status: { # required
     #           status_code: "INITIATION_IN_PROCESS" # One of: ["INITIATION_IN_PROCESS", "QUERY_QUEUED", "QUERY_IN_PROCESS", "QUERY_FAILURE", "DELIVERY_IN_PROCESS", "DELIVERY_SUCCESS", "DELIVERY_FAILURE"],
-    #           status_reason: "INSUFFICIENT_PERMISSION" # One of: ["INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"],
+    #           status_reason: "INSUFFICIENT_PERMISSION" # One of: ["INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE", "DEPRECATED"],
     #           created_at: Time.now,
     #           completed_at: Time.now,
     #           last_updated_at: Time.now
@@ -524,7 +504,7 @@ module Aws::BCMDataExports
     #         export_name: "ExportName", # required
     #         export_status: { # required
     #           status_code: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"],
-    #           status_reason: "INSUFFICIENT_PERMISSION" # One of: ["INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE"],
+    #           status_reason: "INSUFFICIENT_PERMISSION" # One of: ["INSUFFICIENT_PERMISSION", "BILL_OWNER_CHANGED", "INTERNAL_FAILURE", "DEPRECATED"],
     #           created_at: Time.now,
     #           last_updated_at: Time.now,
     #           last_refreshed_at: Time.now
@@ -615,8 +595,7 @@ module Aws::BCMDataExports
     # @option params [String] :resource_arn
     #   <p>The unique identifier for the resource.</p>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>The tags to associate with the resource. Each tag consists of a key and a value, and each
-    #         key must be unique for the resource.</p>
+    #   <p>The tags to associate with the resource. Each tag consists of a key and a value, and each key must be unique for the resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -660,8 +639,7 @@ module Aws::BCMDataExports
       request.send_request(options)
     end
 
-    # <p>Updates an existing data export by overwriting all export parameters. All export
-    #       parameters must be provided in the UpdateExport request.</p>
+    # <p>Updates an existing data export by overwriting all export parameters. All export parameters must be provided in the UpdateExport request.</p>
     # @param [Hash, Types::UpdateExportRequest] params
     # @option params [String] :export_arn
     #   <p>The Amazon Resource Name (ARN) for this export.</p>
@@ -678,19 +656,20 @@ module Aws::BCMDataExports
     #         query_statement: "QueryStatement", # required
     #         table_configurations: {
     #           "TableName" => {
-    #             "TableProperty" => "GenericString"
+    #             "TableProperty" => "TablePropertyGenericString"
     #           }
     #         }
     #       },
     #       destination_configurations: { # required
     #         s3_destination: { # required
     #           s3_bucket: "GenericString", # required
+    #           s3_bucket_owner: "AccountId",
     #           s3_prefix: "GenericString", # required
     #           s3_region: "GenericString", # required
     #           s3_output_configurations: { # required
-    #             output_type: "CUSTOM" # One of: ["CUSTOM"], # required
+    #             output_type: "CUSTOM" # One of: ["CUSTOM", "ATHENA", "REDSHIFT"], # required
     #             format: "TEXT_OR_CSV" # One of: ["TEXT_OR_CSV", "PARQUET"], # required
-    #             compression: "GZIP" # One of: ["GZIP", "PARQUET"], # required
+    #             compression: "GZIP" # One of: ["GZIP", "PARQUET", "ZIP"], # required
     #             overwrite: "CREATE_NEW_REPORT" # One of: ["CREATE_NEW_REPORT", "OVERWRITE_REPORT"], # required
     #           }
     #         }

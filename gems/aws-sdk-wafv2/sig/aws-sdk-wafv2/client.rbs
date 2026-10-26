@@ -130,22 +130,31 @@ module Aws::WAFV2
                   type: String
                 }
               ],
+              pre_parse_text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
               positional_constraint: String
             },
             sqli_match_statement: {
               field_to_match: untyped,
               text_transformations: untyped,
+              pre_parse_text_transformations: untyped,
               sensitivity_level: String
             },
             xss_match_statement: {
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             size_constraint_statement: {
               field_to_match: untyped,
               comparison_operator: String,
               size: Integer,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             geo_match_statement: {
               country_codes: Array[String],
@@ -190,6 +199,9 @@ module Aws::WAFV2
                     },
                     challenge: {
                       custom_request_handling: untyped
+                    },
+                    monetize: {
+                      price_multiplier: String
                     }
                   }
                 }
@@ -206,7 +218,8 @@ module Aws::WAFV2
             regex_pattern_set_reference_statement: {
               arn: untyped,
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             rate_based_statement: {
               limit: Integer,
@@ -371,7 +384,8 @@ module Aws::WAFV2
                   regex_match_statement: {
                     regex_string: untyped,
                     field_to_match: untyped,
-                    text_transformations: untyped
+                    text_transformations: untyped,
+                    pre_parse_text_transformations: untyped
                   },
                   asn_match_statement: {
                     asn_list: Array[Integer],
@@ -544,22 +558,31 @@ module Aws::WAFV2
                   type: String
                 }
               ],
+              pre_parse_text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
               positional_constraint: String
             },
             sqli_match_statement: {
               field_to_match: untyped,
               text_transformations: untyped,
+              pre_parse_text_transformations: untyped,
               sensitivity_level: String
             },
             xss_match_statement: {
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             size_constraint_statement: {
               field_to_match: untyped,
               comparison_operator: String,
               size: Integer,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             geo_match_statement: {
               country_codes: Array[String],
@@ -604,6 +627,9 @@ module Aws::WAFV2
                     },
                     challenge: {
                       custom_request_handling: untyped
+                    },
+                    monetize: {
+                      price_multiplier: String
                     }
                   }
                 }
@@ -620,7 +646,8 @@ module Aws::WAFV2
             regex_pattern_set_reference_statement: {
               arn: untyped,
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             rate_based_statement: {
               limit: Integer,
@@ -785,7 +812,8 @@ module Aws::WAFV2
                   regex_match_statement: {
                     regex_string: untyped,
                     field_to_match: untyped,
-                    text_transformations: untyped
+                    text_transformations: untyped,
+                    pre_parse_text_transformations: untyped
                   },
                   asn_match_statement: {
                     asn_list: Array[Integer],
@@ -843,7 +871,24 @@ module Aws::WAFV2
           content_type: String,
           content: String
         }
-      ]
+      ],
+      ?monetization_config: {
+        crypto_config: {
+          payment_networks: Array[
+            {
+              chain: String,
+              wallet_address: String,
+              prices: Array[
+                {
+                  amount: String,
+                  currency: String
+                }
+              ]
+            }
+          ]
+        },
+        currency_mode: String
+      }
     ) -> _CreateRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleGroupResponse
 
     interface _CreateWebACLResponse
@@ -945,22 +990,31 @@ module Aws::WAFV2
                   type: String
                 }
               ],
+              pre_parse_text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
               positional_constraint: String
             },
             sqli_match_statement: {
               field_to_match: untyped,
               text_transformations: untyped,
+              pre_parse_text_transformations: untyped,
               sensitivity_level: String
             },
             xss_match_statement: {
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             size_constraint_statement: {
               field_to_match: untyped,
               comparison_operator: String,
               size: Integer,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             geo_match_statement: {
               country_codes: Array[String],
@@ -1005,6 +1059,9 @@ module Aws::WAFV2
                     },
                     challenge: {
                       custom_request_handling: untyped
+                    },
+                    monetize: {
+                      price_multiplier: String
                     }
                   }
                 }
@@ -1021,7 +1078,8 @@ module Aws::WAFV2
             regex_pattern_set_reference_statement: {
               arn: untyped,
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             rate_based_statement: {
               limit: Integer,
@@ -1186,7 +1244,8 @@ module Aws::WAFV2
                   regex_match_statement: {
                     regex_string: untyped,
                     field_to_match: untyped,
-                    text_transformations: untyped
+                    text_transformations: untyped,
+                    pre_parse_text_transformations: untyped
                   },
                   asn_match_statement: {
                     asn_list: Array[Integer],
@@ -1286,6 +1345,23 @@ module Aws::WAFV2
             values: Array[String]
           }
         ]
+      },
+      ?monetization_config: {
+        crypto_config: {
+          payment_networks: Array[
+            {
+              chain: String,
+              wallet_address: String,
+              prices: Array[
+                {
+                  amount: String,
+                  currency: String
+                }
+              ]
+            }
+          ]
+        },
+        currency_mode: String
       }
     ) -> _CreateWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebACLResponse
 
@@ -1495,6 +1571,77 @@ module Aws::WAFV2
       ?id: String
     ) -> _GetRegexPatternSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegexPatternSetResponse
 
+    interface _GetRevenueStatisticsResponse
+      include Smithy::Client::_Response[Types::GetRevenueStatisticsResponse]
+      def source_statistics: () -> Array[Types::SourceStatistics]?
+      def revenue_path_statistics: () -> Array[Types::RevenuePathStatistics]?
+      def next_marker: () -> String?
+    end
+    def get_revenue_statistics: (
+      ?statistic_type: String,
+      ?time_window: {
+        start_time: Time,
+        end_time: untyped
+      },
+      ?scope: String,
+      ?currency: String,
+      ?group_by: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_marker: String,
+      ?limit: Integer,
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _GetRevenueStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevenueStatisticsResponse
+
+    interface _GetRevenueStatisticsSummaryResponse
+      include Smithy::Client::_Response[Types::GetRevenueStatisticsSummaryResponse]
+      def revenue_breakdown: () -> Types::RevenueBreakdown?
+    end
+    def get_revenue_statistics_summary: (
+      ?time_window: {
+        start_time: Time,
+        end_time: untyped
+      },
+      ?scope: String,
+      ?currency: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _GetRevenueStatisticsSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevenueStatisticsSummaryResponse
+
+    interface _GetRevenueStatisticsTimeSeriesResponse
+      include Smithy::Client::_Response[Types::GetRevenueStatisticsTimeSeriesResponse]
+      def data_points: () -> Array[Types::DataPointEntry]?
+      def next_marker: () -> String?
+    end
+    def get_revenue_statistics_time_series: (
+      ?statistic_type: String,
+      ?time_window: {
+        start_time: Time,
+        end_time: untyped
+      },
+      ?scope: String,
+      ?interval: String,
+      ?currency: String,
+      ?group_by: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?limit: Integer,
+      ?next_marker: String
+    ) -> _GetRevenueStatisticsTimeSeriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRevenueStatisticsTimeSeriesResponse
+
     interface _GetRuleGroupResponse
       include Smithy::Client::_Response[Types::GetRuleGroupResponse]
       def rule_group: () -> Types::RuleGroup?
@@ -1523,6 +1670,29 @@ module Aws::WAFV2
       },
       ?max_items: Integer
     ) -> _GetSampledRequestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSampledRequestsResponse
+
+    interface _GetTopPathStatisticsByTrafficResponse
+      include Smithy::Client::_Response[Types::GetTopPathStatisticsByTrafficResponse]
+      def path_statistics: () -> Array[Types::PathStatistics]?
+      def total_request_count: () -> Integer?
+      def next_marker: () -> String?
+      def top_categories: () -> Array[Types::PathStatistics]?
+    end
+    def get_top_path_statistics_by_traffic: (
+      ?web_acl_arn: String,
+      ?scope: String,
+      ?uri_path_prefix: String,
+      ?time_window: {
+        start_time: Time,
+        end_time: untyped
+      },
+      ?bot_category: String,
+      ?bot_organization: String,
+      ?bot_name: String,
+      ?limit: Integer,
+      ?number_of_top_traffic_bots_per_path: Integer,
+      ?next_marker: String
+    ) -> _GetTopPathStatisticsByTrafficResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTopPathStatisticsByTrafficResponse
 
     interface _GetWebACLResponse
       include Smithy::Client::_Response[Types::GetWebACLResponse]
@@ -1657,6 +1827,30 @@ module Aws::WAFV2
       ?next_marker: String,
       ?limit: Integer
     ) -> _ListRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleGroupsResponse
+
+    interface _ListSettlementRecordsResponse
+      include Smithy::Client::_Response[Types::ListSettlementRecordsResponse]
+      def settlements: () -> Array[Types::SettlementRecord]?
+      def next_marker: () -> String?
+    end
+    def list_settlement_records: (
+      ?time_window: {
+        start_time: Time,
+        end_time: untyped
+      },
+      ?scope: String,
+      ?currency: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?sort_by: String,
+      ?sort_order: String,
+      ?limit: Integer,
+      ?next_marker: String
+    ) -> _ListSettlementRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSettlementRecordsResponse
 
     interface _ListTagsForResourceResponse
       include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
@@ -1947,22 +2141,31 @@ module Aws::WAFV2
                   type: String
                 }
               ],
+              pre_parse_text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
               positional_constraint: String
             },
             sqli_match_statement: {
               field_to_match: untyped,
               text_transformations: untyped,
+              pre_parse_text_transformations: untyped,
               sensitivity_level: String
             },
             xss_match_statement: {
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             size_constraint_statement: {
               field_to_match: untyped,
               comparison_operator: String,
               size: Integer,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             geo_match_statement: {
               country_codes: Array[String],
@@ -2007,6 +2210,9 @@ module Aws::WAFV2
                     },
                     challenge: {
                       custom_request_handling: untyped
+                    },
+                    monetize: {
+                      price_multiplier: String
                     }
                   }
                 }
@@ -2023,7 +2229,8 @@ module Aws::WAFV2
             regex_pattern_set_reference_statement: {
               arn: untyped,
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             rate_based_statement: {
               limit: Integer,
@@ -2188,7 +2395,8 @@ module Aws::WAFV2
                   regex_match_statement: {
                     regex_string: untyped,
                     field_to_match: untyped,
-                    text_transformations: untyped
+                    text_transformations: untyped,
+                    pre_parse_text_transformations: untyped
                   },
                   asn_match_statement: {
                     asn_list: Array[Integer],
@@ -2241,7 +2449,24 @@ module Aws::WAFV2
           content_type: String,
           content: String
         }
-      ]
+      ],
+      ?monetization_config: {
+        crypto_config: {
+          payment_networks: Array[
+            {
+              chain: String,
+              wallet_address: String,
+              prices: Array[
+                {
+                  amount: String,
+                  currency: String
+                }
+              ]
+            }
+          ]
+        },
+        currency_mode: String
+      }
     ) -> _UpdateRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleGroupResponse
 
     interface _UpdateWebACLResponse
@@ -2344,22 +2569,31 @@ module Aws::WAFV2
                   type: String
                 }
               ],
+              pre_parse_text_transformations: Array[
+                {
+                  priority: Integer,
+                  type: String
+                }
+              ],
               positional_constraint: String
             },
             sqli_match_statement: {
               field_to_match: untyped,
               text_transformations: untyped,
+              pre_parse_text_transformations: untyped,
               sensitivity_level: String
             },
             xss_match_statement: {
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             size_constraint_statement: {
               field_to_match: untyped,
               comparison_operator: String,
               size: Integer,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             geo_match_statement: {
               country_codes: Array[String],
@@ -2404,6 +2638,9 @@ module Aws::WAFV2
                     },
                     challenge: {
                       custom_request_handling: untyped
+                    },
+                    monetize: {
+                      price_multiplier: String
                     }
                   }
                 }
@@ -2420,7 +2657,8 @@ module Aws::WAFV2
             regex_pattern_set_reference_statement: {
               arn: untyped,
               field_to_match: untyped,
-              text_transformations: untyped
+              text_transformations: untyped,
+              pre_parse_text_transformations: untyped
             },
             rate_based_statement: {
               limit: Integer,
@@ -2585,7 +2823,8 @@ module Aws::WAFV2
                   regex_match_statement: {
                     regex_string: untyped,
                     field_to_match: untyped,
-                    text_transformations: untyped
+                    text_transformations: untyped,
+                    pre_parse_text_transformations: untyped
                   },
                   asn_match_statement: {
                     asn_list: Array[Integer],
@@ -2680,6 +2919,23 @@ module Aws::WAFV2
             values: Array[String]
           }
         ]
+      },
+      ?monetization_config: {
+        crypto_config: {
+          payment_networks: Array[
+            {
+              chain: String,
+              wallet_address: String,
+              prices: Array[
+                {
+                  amount: String,
+                  currency: String
+                }
+              ]
+            }
+          ]
+        },
+        currency_mode: String
       }
     ) -> _UpdateWebACLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebACLResponse
   end

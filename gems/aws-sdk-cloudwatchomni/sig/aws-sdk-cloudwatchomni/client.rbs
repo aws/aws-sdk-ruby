@@ -1,0 +1,915 @@
+module Aws::CloudWatchOmni
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudWatchOmni::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAccessGrantResponse
+      include Smithy::Client::_Response[Types::CreateAccessGrantOutput]
+      def access_grant: () -> Types::AccessGrant?
+    end
+    def create_access_grant: (
+      ?domain_id: String,
+      ?space_id: String,
+      ?name: String,
+      ?principal: {
+        principal_type: String,
+        principal_id: String,
+        principal_attributes: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ]
+      },
+      ?permission: String,
+      ?scoped_actions: Array[
+        {
+          actions: Array[String],
+          resources: Array[
+            {
+              resource_type: String,
+              resource_arns: Array[String],
+              tags: Hash[String, String],
+              signal_types: Array[String],
+              row_scope_groups: Array[
+                Array[
+                  {
+                    field: untyped,
+                    operator: String,
+                    values: Array[String]
+                  }
+                ]
+              ]
+            }
+          ],
+          context_conditions: Hash[String,
+            Array[String]
+          ]
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateAccessGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessGrantResponse
+
+    interface _CreateAccessProfileResponse
+      include Smithy::Client::_Response[Types::CreateAccessProfileOutput]
+      def access_profile: () -> Types::AccessProfile?
+    end
+    def create_access_profile: (
+      ?space_id: String,
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateAccessProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessProfileResponse
+
+    interface _CreateAlertResponse
+      include Smithy::Client::_Response[Types::CreateAlertOutput]
+      def alert_arn: () -> String?
+      def alert: () -> Types::Alert?
+    end
+    def create_alert: (
+      ?space_id: String,
+      ?profile_id: String,
+      ?name: String,
+      ?description: String,
+      ?rule: {
+        telemetry_rule: {
+          query: {
+            language: String,
+            expression: String
+          },
+          condition: {
+            threshold_mode: String,
+            threshold_field: untyped,
+            comparator: String,
+            warning_threshold: Float,
+            critical_threshold: untyped
+          },
+          evaluation: {
+            interval_seconds: Integer,
+            pending_duration_seconds: untyped,
+            recovery_duration_seconds: untyped
+          },
+          no_data: {
+            treat_as: String
+          }
+        }
+      },
+      ?notifications_enabled: bool,
+      ?tags: Hash[String, String],
+      ?notification_rules: Array[
+        {
+          trigger: {
+            state_values: Array[String]
+          },
+          target: {
+            type: String,
+            arn: String,
+            metadata: Hash[String, String]
+          }
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateAlertResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAlertResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainOutput]
+      def domain: () -> Types::Domain?
+    end
+    def create_domain: (
+      ?name: String,
+      ?identity_providers: Array[String],
+      ?identity_provider_configuration: {
+        identity_center_configuration: {
+          identity_center_instance_arn: String
+        }
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreateDomainAccessGrantForOrganizationResponse
+      include Smithy::Client::_Response[Types::CreateDomainAccessGrantForOrganizationOutput]
+      def access_grant: () -> Types::OrganizationAccessGrant?
+    end
+    def create_domain_access_grant_for_organization: (
+      ?domain_id: String,
+      ?name: String,
+      ?principal: {
+        principal_type: String,
+        principal_id: String,
+        principal_attributes: Array[
+          {
+            key: String,
+            value: untyped
+          }
+        ]
+      },
+      ?permission: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateDomainAccessGrantForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainAccessGrantForOrganizationResponse
+
+    interface _CreateDomainForOrganizationResponse
+      include Smithy::Client::_Response[Types::CreateDomainForOrganizationOutput]
+      def organization_domain: () -> Types::OrganizationDomain?
+    end
+    def create_domain_for_organization: (
+      ?name: String,
+      ?identity_providers: Array[String],
+      ?identity_provider_configuration: {
+        identity_center_configuration: {
+          identity_center_instance_arn: String
+        }
+      },
+      ?domain_access_role_arn: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateDomainForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainForOrganizationResponse
+
+    interface _CreateIntegrationResponse
+      include Smithy::Client::_Response[Types::CreateIntegrationOutput]
+      def integration: () -> Types::Integration?
+    end
+    def create_integration: (
+      ?integration_type: String,
+      ?name: String,
+      ?credential: {
+        oauth_code_credential: {
+          auth_code: String
+        },
+        oauth_client_credential: {
+          client_id: untyped,
+          client_secret: String,
+          provider_id: untyped
+        },
+        api_key_credential: {
+          api_key_value: untyped
+        }
+      },
+      ?integration_attributes: Hash[String, String],
+      ?role_arn: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationResponse
+
+    interface _CreateOmniDashboardResponse
+      include Smithy::Client::_Response[Types::CreateOmniDashboardOutput]
+      def omni_dashboard: () -> Types::OmniDashboard?
+    end
+    def create_omni_dashboard: (
+      ?space_id: String,
+      ?name: String,
+      ?body: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateOmniDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOmniDashboardResponse
+
+    interface _CreateOneTimeDeepLinkCodeResponse
+      include Smithy::Client::_Response[Types::CreateOneTimeDeepLinkCodeOutput]
+      def code: () -> String?
+      def deep_link_url: () -> String?
+      def expires_at: () -> Time?
+    end
+    def create_one_time_deep_link_code: (
+      ?domain_id: String,
+      ?ttl_seconds: Integer,
+      ?redirect_url: String
+    ) -> _CreateOneTimeDeepLinkCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOneTimeDeepLinkCodeResponse
+
+    interface _CreateSpaceResponse
+      include Smithy::Client::_Response[Types::CreateSpaceOutput]
+      def space: () -> Types::Space?
+    end
+    def create_space: (
+      ?name: String,
+      ?domain_id: String,
+      ?data_access_role_arn: String,
+      ?agent_core_evaluation_role_arn: String,
+      ?encryption_configuration: {
+        encryption_strategy: String,
+        kms_key_arn: String
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSpaceResponse
+
+    interface _CreateViewResponse
+      include Smithy::Client::_Response[Types::CreateViewResponse]
+      def name: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def definition: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def arn: () -> String?
+    end
+    def create_view: (
+      ?name: String,
+      ?definition: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateViewResponse
+
+    interface _DeleteAccessGrantResponse
+      include Smithy::Client::_Response[Types::DeleteAccessGrantOutput]
+    end
+    def delete_access_grant: (
+      ?grant_id: String
+    ) -> _DeleteAccessGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessGrantResponse
+
+    interface _DeleteAccessProfileResponse
+      include Smithy::Client::_Response[Types::DeleteAccessProfileOutput]
+    end
+    def delete_access_profile: (
+      ?space_id: String,
+      ?profile_id: String
+    ) -> _DeleteAccessProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessProfileResponse
+
+    interface _DeleteAlertResponse
+      include Smithy::Client::_Response[Types::DeleteAlertOutput]
+    end
+    def delete_alert: (
+      ?space_id: String,
+      ?alert_id: String
+    ) -> _DeleteAlertResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAlertResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainOutput]
+    end
+    def delete_domain: (
+      ?domain_id: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteDomainAccessGrantForOrganizationResponse
+      include Smithy::Client::_Response[Types::DeleteDomainAccessGrantForOrganizationOutput]
+    end
+    def delete_domain_access_grant_for_organization: (
+      ?grant_id: String
+    ) -> _DeleteDomainAccessGrantForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainAccessGrantForOrganizationResponse
+
+    interface _DeleteDomainForOrganizationResponse
+      include Smithy::Client::_Response[Types::DeleteDomainForOrganizationOutput]
+    end
+    def delete_domain_for_organization: (
+      ?domain_id: String
+    ) -> _DeleteDomainForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainForOrganizationResponse
+
+    interface _DeleteIntegrationResponse
+      include Smithy::Client::_Response[Types::DeleteIntegrationOutput]
+    end
+    def delete_integration: (
+      ?identifier: {
+        integration_id: String,
+        integration_arn: String,
+        integration_name: untyped
+      }
+    ) -> _DeleteIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntegrationResponse
+
+    interface _DeleteOmniDashboardResponse
+      include Smithy::Client::_Response[Types::DeleteOmniDashboardOutput]
+    end
+    def delete_omni_dashboard: (
+      ?space_id: String,
+      ?dashboard_id: String
+    ) -> _DeleteOmniDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOmniDashboardResponse
+
+    interface _DeleteSpaceResponse
+      include Smithy::Client::_Response[Types::DeleteSpaceOutput]
+    end
+    def delete_space: (
+      ?space_id: String
+    ) -> _DeleteSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSpaceResponse
+
+    interface _DeleteViewResponse
+      include Smithy::Client::_Response[Types::DeleteViewResponse]
+    end
+    def delete_view: (
+      ?name: String
+    ) -> _DeleteViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteViewResponse
+
+    interface _GetAccessGrantResponse
+      include Smithy::Client::_Response[Types::GetAccessGrantOutput]
+      def access_grant: () -> Types::AccessGrant?
+    end
+    def get_access_grant: (
+      ?grant_id: String
+    ) -> _GetAccessGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessGrantResponse
+
+    interface _GetAccessProfileResponse
+      include Smithy::Client::_Response[Types::GetAccessProfileOutput]
+      def access_profile: () -> Types::AccessProfile?
+    end
+    def get_access_profile: (
+      ?space_id: String,
+      ?profile_id: String
+    ) -> _GetAccessProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessProfileResponse
+
+    interface _GetAlertResponse
+      include Smithy::Client::_Response[Types::GetAlertOutput]
+      def alert: () -> Types::Alert?
+    end
+    def get_alert: (
+      ?space_id: String,
+      ?alert_id: String
+    ) -> _GetAlertResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAlertResponse
+
+    interface _GetContextGraphResponse
+      include Smithy::Client::_Response[Types::GetContextGraphOutput]
+      def nodes: () -> Array[Types::Node]?
+      def next_token: () -> String?
+    end
+    def get_context_graph: (
+      ?node_filters: {
+        node_id: String,
+        node_type: String,
+        name: String,
+        tags: Array[
+          {
+            key: String,
+            values: Array[String]
+          }
+        ],
+        telemetry_attributes: untyped,
+        region: Array[String],
+        cloud_provider: untyped,
+        source_account_id: untyped,
+        namespace: untyped,
+        category: Array[String],
+        stage: untyped,
+        sources: Array[String]
+      },
+      ?edge_filters: {
+        edge_id: String,
+        from: untyped,
+        to: untyped,
+        edge_type: String,
+        operations: Array[String],
+        telemetry_attributes: Array[
+          {
+            key: String,
+            values: Array[String]
+          }
+        ],
+        sources: Array[String]
+      },
+      ?start_time: Time,
+      ?end_time: Time,
+      ?depth: Integer,
+      ?max_results: Integer,
+      ?max_edges_per_node: Integer,
+      ?include_metadata: bool,
+      ?next_token: String
+    ) -> _GetContextGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContextGraphResponse
+
+    interface _GetDomainResponse
+      include Smithy::Client::_Response[Types::GetDomainOutput]
+      def domain: () -> Types::Domain?
+    end
+    def get_domain: (
+      ?domain_id: String
+    ) -> _GetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainResponse
+
+    interface _GetDomainAccessGrantForOrganizationResponse
+      include Smithy::Client::_Response[Types::GetDomainAccessGrantForOrganizationOutput]
+      def access_grant: () -> Types::OrganizationAccessGrant?
+    end
+    def get_domain_access_grant_for_organization: (
+      ?grant_id: String
+    ) -> _GetDomainAccessGrantForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainAccessGrantForOrganizationResponse
+
+    interface _GetDomainForOrganizationResponse
+      include Smithy::Client::_Response[Types::GetDomainForOrganizationOutput]
+      def organization_domain: () -> Types::OrganizationDomain?
+    end
+    def get_domain_for_organization: (
+      ?domain_id: String
+    ) -> _GetDomainForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainForOrganizationResponse
+
+    interface _GetIntegrationResponse
+      include Smithy::Client::_Response[Types::GetIntegrationOutput]
+      def integration: () -> Types::Integration?
+    end
+    def get_integration: (
+      ?identifier: {
+        integration_id: String,
+        integration_arn: String,
+        integration_name: untyped
+      }
+    ) -> _GetIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntegrationResponse
+
+    interface _GetIntelligenceConfigurationResponse
+      include Smithy::Client::_Response[Types::GetIntelligenceConfigurationOutput]
+      def account_id: () -> String?
+      def kms_key_arn: () -> String?
+      def updated_at: () -> Time?
+      def created_at: () -> Time?
+    end
+    def get_intelligence_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntelligenceConfigurationResponse
+
+    interface _GetOmniDashboardResponse
+      include Smithy::Client::_Response[Types::GetOmniDashboardOutput]
+      def omni_dashboard: () -> Types::OmniDashboard?
+    end
+    def get_omni_dashboard: (
+      ?space_id: String,
+      ?dashboard_id: String
+    ) -> _GetOmniDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOmniDashboardResponse
+
+    interface _GetSpaceResponse
+      include Smithy::Client::_Response[Types::GetSpaceOutput]
+      def space: () -> Types::Space?
+    end
+    def get_space: (
+      ?space_id: String
+    ) -> _GetSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSpaceResponse
+
+    interface _GetSpaceCredentialsForOrganizationResponse
+      include Smithy::Client::_Response[Types::GetSpaceCredentialsForOrganizationOutput]
+      def credentials: () -> Types::AwsCredentials?
+    end
+    def get_space_credentials_for_organization: (
+      ?context: {
+        space_id: String,
+        domain_id: String,
+        target_account_id: String
+      },
+      ?credential_type: String
+    ) -> _GetSpaceCredentialsForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSpaceCredentialsForOrganizationResponse
+
+    interface _GetTelemetryQueryResultsResponse
+      include Smithy::Client::_Response[Types::GetTelemetryQueryResultsResponse]
+      def status: () -> String?
+      def rows: () -> Array[Hash[String, String]]?
+      def next_token: () -> String?
+      def statistics: () -> Types::QueryStatistics?
+    end
+    def get_telemetry_query_results: (
+      ?query_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetTelemetryQueryResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTelemetryQueryResultsResponse
+
+    interface _GetViewResponse
+      include Smithy::Client::_Response[Types::GetViewResponse]
+      def name: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def definition: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def arn: () -> String?
+    end
+    def get_view: (
+      ?name: String
+    ) -> _GetViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetViewResponse
+
+    interface _ListAccessGrantsResponse
+      include Smithy::Client::_Response[Types::ListAccessGrantsOutput]
+      def items: () -> Array[Types::AccessGrantSummary]?
+      def next_token: () -> String?
+    end
+    def list_access_grants: (
+      ?domain_id: String,
+      ?space_id: String,
+      ?principal_id: String,
+      ?principal_type: String,
+      ?permission: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessGrantsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessGrantsResponse
+
+    interface _ListAccessProfilesResponse
+      include Smithy::Client::_Response[Types::ListAccessProfilesOutput]
+      def items: () -> Array[Types::AccessProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_access_profiles: (
+      ?space_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessProfilesResponse
+
+    interface _ListAlertsResponse
+      include Smithy::Client::_Response[Types::ListAlertsOutput]
+      def items: () -> Array[Types::AlertSummary]?
+      def next_token: () -> String?
+    end
+    def list_alerts: (
+      ?space_id: String,
+      ?filter_criteria: {
+        names: Array[String],
+        name_prefix: String,
+        ids: Array[String],
+        state_value: Array[String],
+        notifications_enabled: bool
+      },
+      ?sort_by: String,
+      ?sort_order: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAlertsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAlertsResponse
+
+    interface _ListDomainAccessGrantsForOrganizationResponse
+      include Smithy::Client::_Response[Types::ListDomainAccessGrantsForOrganizationOutput]
+      def items: () -> Array[Types::OrganizationAccessGrantSummary]?
+      def next_token: () -> String?
+    end
+    def list_domain_access_grants_for_organization: (
+      ?domain_id: String,
+      ?principal_id: String,
+      ?principal_type: String,
+      ?permission: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDomainAccessGrantsForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainAccessGrantsForOrganizationResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsOutput]
+      def items: () -> Array[Types::DomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_domains: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListIntegrationsOutput]
+      def items: () -> Array[Types::Integration]?
+      def next_token: () -> String?
+    end
+    def list_integrations: (
+      ?integration_type: String,
+      ?status: String,
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntegrationsResponse
+
+    interface _ListOmniDashboardsResponse
+      include Smithy::Client::_Response[Types::ListOmniDashboardsOutput]
+      def items: () -> Array[Types::OmniDashboardSummary]?
+      def next_token: () -> String?
+    end
+    def list_omni_dashboards: (
+      ?space_id: String,
+      ?name_prefix: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOmniDashboardsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOmniDashboardsResponse
+
+    interface _ListSpacesResponse
+      include Smithy::Client::_Response[Types::ListSpacesOutput]
+      def items: () -> Array[Types::SpaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_spaces: (
+      ?domain_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSpacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSpacesResponse
+
+    interface _ListSpacesForOrganizationResponse
+      include Smithy::Client::_Response[Types::ListSpacesForOrganizationOutput]
+      def items: () -> Array[Types::SpaceSummary]?
+      def next_token: () -> String?
+    end
+    def list_spaces_for_organization: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSpacesForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSpacesForOrganizationResponse
+
+    interface _ListTelemetryFieldsResponse
+      include Smithy::Client::_Response[Types::ListTelemetryFieldsResponse]
+      def fields: () -> Array[Types::Field]?
+      def next_token: () -> String?
+    end
+    def list_telemetry_fields: (
+      ?data_set_name: String,
+      ?telemetry_type: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String
+    ) -> _ListTelemetryFieldsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTelemetryFieldsResponse
+
+    interface _ListTelemetryQuerySessionsResponse
+      include Smithy::Client::_Response[Types::ListTelemetryQuerySessionsResponse]
+      def sessions: () -> Array[Types::SessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_telemetry_query_sessions: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTelemetryQuerySessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTelemetryQuerySessionsResponse
+
+    interface _ListViewsResponse
+      include Smithy::Client::_Response[Types::ListViewsResponse]
+      def items: () -> Array[Types::ViewSummary]?
+      def next_token: () -> String?
+    end
+    def list_views: (
+      ?type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListViewsResponse
+
+    interface _PutIntelligenceConfigurationResponse
+      include Smithy::Client::_Response[Types::PutIntelligenceConfigurationOutput]
+      def account_id: () -> String?
+      def kms_key_arn: () -> String?
+      def updated_at: () -> Time?
+      def created_at: () -> Time?
+    end
+    def put_intelligence_configuration: (
+      ?kms_key_arn: String,
+      ?remove_kms_key: bool,
+      ?client_token: String
+    ) -> _PutIntelligenceConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutIntelligenceConfigurationResponse
+
+    interface _SearchPrincipalsResponse
+      include Smithy::Client::_Response[Types::SearchPrincipalsOutput]
+      def results: () -> Array[Types::PrincipalSearchResult]?
+      def next_token: () -> String?
+    end
+    def search_principals: (
+      ?domain_id: String,
+      ?search_query: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchPrincipalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchPrincipalsResponse
+
+    interface _StartTelemetryQueryResponse
+      include Smithy::Client::_Response[Types::StartTelemetryQueryResponse]
+      def query_id: () -> String?
+      def session_id: () -> String?
+    end
+    def start_telemetry_query: (
+      ?query_string: String,
+      ?session_id: String
+    ) -> _StartTelemetryQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTelemetryQueryResponse
+
+    interface _StartTelemetryQuerySessionResponse
+      include Smithy::Client::_Response[Types::StartTelemetryQuerySessionResponse]
+      def session_id: () -> String?
+    end
+    def start_telemetry_query_session: (
+      ?session_name: String
+    ) -> _StartTelemetryQuerySessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTelemetryQuerySessionResponse
+
+    interface _StopTelemetryQueryResponse
+      include Smithy::Client::_Response[Types::StopTelemetryQueryResponse]
+    end
+    def stop_telemetry_query: (
+      ?query_id: String
+    ) -> _StopTelemetryQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTelemetryQueryResponse
+
+    interface _StopTelemetryQuerySessionResponse
+      include Smithy::Client::_Response[Types::StopTelemetryQuerySessionResponse]
+    end
+    def stop_telemetry_query_session: (
+      ?session_id: String
+    ) -> _StopTelemetryQuerySessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopTelemetryQuerySessionResponse
+
+    interface _UpdateAccessProfileResponse
+      include Smithy::Client::_Response[Types::UpdateAccessProfileOutput]
+      def access_profile: () -> Types::AccessProfile?
+    end
+    def update_access_profile: (
+      ?space_id: String,
+      ?profile_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateAccessProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessProfileResponse
+
+    interface _UpdateAlertResponse
+      include Smithy::Client::_Response[Types::UpdateAlertOutput]
+    end
+    def update_alert: (
+      ?space_id: String,
+      ?alert_id: String,
+      ?profile_id: String,
+      ?name: String,
+      ?description: String,
+      ?rule: {
+        telemetry_rule: {
+          query: {
+            language: String,
+            expression: String
+          },
+          condition: {
+            threshold_mode: String,
+            threshold_field: untyped,
+            comparator: String,
+            warning_threshold: Float,
+            critical_threshold: untyped
+          },
+          evaluation: {
+            interval_seconds: Integer,
+            pending_duration_seconds: untyped,
+            recovery_duration_seconds: untyped
+          },
+          no_data: {
+            treat_as: String
+          }
+        }
+      },
+      ?notifications_enabled: bool,
+      ?notification_rules: Array[
+        {
+          trigger: {
+            state_values: Array[String]
+          },
+          target: {
+            type: String,
+            arn: String,
+            metadata: Hash[String, String]
+          }
+        }
+      ]
+    ) -> _UpdateAlertResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAlertResponse
+
+    interface _UpdateDomainResponse
+      include Smithy::Client::_Response[Types::UpdateDomainOutput]
+      def domain: () -> Types::Domain?
+    end
+    def update_domain: (
+      ?domain_id: String,
+      ?name: String,
+      ?identity_providers: Array[String],
+      ?identity_provider_configuration: {
+        identity_center_configuration: {
+          identity_center_instance_arn: String
+        }
+      }
+    ) -> _UpdateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainResponse
+
+    interface _UpdateDomainForOrganizationResponse
+      include Smithy::Client::_Response[Types::UpdateDomainForOrganizationOutput]
+      def organization_domain: () -> Types::OrganizationDomain?
+    end
+    def update_domain_for_organization: (
+      ?domain_id: String,
+      ?name: String,
+      ?identity_providers: Array[String],
+      ?identity_provider_configuration: {
+        identity_center_configuration: {
+          identity_center_instance_arn: String
+        }
+      }
+    ) -> _UpdateDomainForOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainForOrganizationResponse
+
+    interface _UpdateIntegrationResponse
+      include Smithy::Client::_Response[Types::UpdateIntegrationOutput]
+      def integration: () -> Types::Integration?
+    end
+    def update_integration: (
+      ?identifier: {
+        integration_id: String,
+        integration_arn: String,
+        integration_name: untyped
+      },
+      ?credential: {
+        oauth_code_credential: {
+          auth_code: String
+        },
+        oauth_client_credential: {
+          client_id: untyped,
+          client_secret: String,
+          provider_id: untyped
+        },
+        api_key_credential: {
+          api_key_value: untyped
+        }
+      },
+      ?integration_attributes: Hash[String, String],
+      ?role_arn: String
+    ) -> _UpdateIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIntegrationResponse
+
+    interface _UpdateOmniDashboardResponse
+      include Smithy::Client::_Response[Types::UpdateOmniDashboardOutput]
+      def omni_dashboard: () -> Types::OmniDashboard?
+    end
+    def update_omni_dashboard: (
+      ?space_id: String,
+      ?dashboard_id: String,
+      ?body: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateOmniDashboardResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOmniDashboardResponse
+
+    interface _UpdateSpaceResponse
+      include Smithy::Client::_Response[Types::UpdateSpaceOutput]
+      def space: () -> Types::Space?
+    end
+    def update_space: (
+      ?space_id: String,
+      ?name: String,
+      ?agent_core_evaluation_role_arn: String,
+      ?encryption_configuration: {
+        encryption_strategy: String,
+        kms_key_arn: String
+      }
+    ) -> _UpdateSpaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSpaceResponse
+
+    interface _UpdateViewResponse
+      include Smithy::Client::_Response[Types::UpdateViewResponse]
+      def name: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def definition: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def arn: () -> String?
+    end
+    def update_view: (
+      ?name: String,
+      ?definition: String,
+      ?description: String
+    ) -> _UpdateViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateViewResponse
+  end
+end

@@ -97,6 +97,7 @@ module Aws::WAFV2
       COUNT: String
       CAPTCHA: String
       CHALLENGE: String
+      MONETIZE: String
       EXCLUDED_AS_COUNT: String
     end
 
@@ -216,6 +217,7 @@ module Aws::WAFV2
       COGNITO_USER_POOL: String
       APP_RUNNER_SERVICE: String
       VERIFIED_ACCESS_INSTANCE: String
+      AGENTCORE_GATEWAY: String
     end
 
     class AssociationConfig
@@ -240,6 +242,13 @@ module Aws::WAFV2
       attr_accessor custom_response: Types::CustomResponse?
     end
 
+    module BlockchainChain
+      BASE: String
+      SOLANA: String
+      BASE_SEPOLIA: String
+      SOLANA_DEVNET: String
+    end
+
     class Body
       include Smithy::Schema::Structure
 
@@ -257,6 +266,21 @@ module Aws::WAFV2
       EVALUATE_AS_STRING: String
     end
 
+    class BotStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_name: String,
+        ?request_count: Integer,
+        ?percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_name: String?
+      attr_accessor request_count: Integer?
+      attr_accessor percentage: Float?
+    end
+
     class ByteMatchStatement
       include Smithy::Schema::Structure
 
@@ -264,6 +288,7 @@ module Aws::WAFV2
         ?search_string: String,
         ?field_to_match: Types::FieldToMatch,
         ?text_transformations: Array[Types::TextTransformation],
+        ?pre_parse_text_transformations: Array[Types::PreParseTextTransformation],
         ?positional_constraint: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -271,6 +296,7 @@ module Aws::WAFV2
       attr_accessor search_string: String?
       attr_accessor field_to_match: Types::FieldToMatch?
       attr_accessor text_transformations: Array[Types::TextTransformation]?
+      attr_accessor pre_parse_text_transformations: Array[Types::PreParseTextTransformation]?
       attr_accessor positional_constraint: String?
     end
 
@@ -812,6 +838,7 @@ module Aws::WAFV2
         ?visibility_config: Types::VisibilityConfig,
         ?tags: Array[Types::Tag],
         ?custom_response_bodies: Hash[String, Types::CustomResponseBody],
+        ?monetization_config: Types::MonetizationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -823,6 +850,7 @@ module Aws::WAFV2
       attr_accessor visibility_config: Types::VisibilityConfig?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor custom_response_bodies: Hash[String, Types::CustomResponseBody]?
+      attr_accessor monetization_config: Types::MonetizationConfig?
     end
 
     class CreateRuleGroupResponse
@@ -855,6 +883,7 @@ module Aws::WAFV2
         ?association_config: Types::AssociationConfig,
         ?on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig,
         ?application_config: Types::ApplicationConfig,
+        ?monetization_config: Types::MonetizationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -873,6 +902,7 @@ module Aws::WAFV2
       attr_accessor association_config: Types::AssociationConfig?
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig?
       attr_accessor application_config: Types::ApplicationConfig?
+      attr_accessor monetization_config: Types::MonetizationConfig?
     end
 
     class CreateWebACLResponse
@@ -884,6 +914,30 @@ module Aws::WAFV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor summary: Types::WebACLSummary?
+    end
+
+    class CryptoConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_networks: Array[Types::PaymentNetwork],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_networks: Array[Types::PaymentNetwork]?
+    end
+
+    module CryptoCurrency
+      USDC: String
+    end
+
+    module Currency
+      USDC: String
+    end
+
+    module CurrencyMode
+      REAL: String
+      TEST: String
     end
 
     class CustomHTTPHeader
@@ -936,6 +990,29 @@ module Aws::WAFV2
 
       attr_accessor content_type: String?
       attr_accessor content: String?
+    end
+
+    class DataPointEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date: Time,
+        ?monetize_served_count: Integer,
+        ?settled_count: Integer,
+        ?total_amount: String,
+        ?category: String,
+        ?intent: String,
+        ?group_by_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date: Time?
+      attr_accessor monetize_served_count: Integer?
+      attr_accessor settled_count: Integer?
+      attr_accessor total_amount: String?
+      attr_accessor category: String?
+      attr_accessor intent: String?
+      attr_accessor group_by_value: String?
     end
 
     class DataProtection
@@ -1264,6 +1341,19 @@ module Aws::WAFV2
       attr_accessor consumed_labels: Array[Types::LabelSummary]?
     end
 
+    class DisallowedFeature
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature: String,
+        ?required_pricing_plan: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature: String?
+      attr_accessor required_pricing_plan: String?
+    end
+
     class DisassociateWebACLRequest
       include Smithy::Schema::Structure
 
@@ -1399,6 +1489,21 @@ module Aws::WAFV2
     module FilterRequirement
       MEETS_ALL: String
       MEETS_ANY: String
+    end
+
+    class FilterSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_category: String,
+        ?bot_organization: String,
+        ?bot_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_category: String?
+      attr_accessor bot_organization: String?
+      attr_accessor bot_name: String?
     end
 
     class FirewallManagerRuleGroup
@@ -1703,6 +1808,118 @@ module Aws::WAFV2
       attr_accessor lock_token: String?
     end
 
+    class GetRevenueStatisticsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statistic_type: String,
+        ?time_window: Types::TimeWindow,
+        ?scope: String,
+        ?currency: String,
+        ?group_by: String,
+        ?filters: Array[Types::MonetizationFilter],
+        ?next_marker: String,
+        ?limit: Integer,
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statistic_type: String?
+      attr_accessor time_window: Types::TimeWindow?
+      attr_accessor scope: String?
+      attr_accessor currency: String?
+      attr_accessor group_by: String?
+      attr_accessor filters: Array[Types::MonetizationFilter]?
+      attr_accessor next_marker: String?
+      attr_accessor limit: Integer?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    class GetRevenueStatisticsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_statistics: Array[Types::SourceStatistics],
+        ?revenue_path_statistics: Array[Types::RevenuePathStatistics],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_statistics: Array[Types::SourceStatistics]?
+      attr_accessor revenue_path_statistics: Array[Types::RevenuePathStatistics]?
+      attr_accessor next_marker: String?
+    end
+
+    class GetRevenueStatisticsSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_window: Types::TimeWindow,
+        ?scope: String,
+        ?currency: String,
+        ?filters: Array[Types::MonetizationFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_window: Types::TimeWindow?
+      attr_accessor scope: String?
+      attr_accessor currency: String?
+      attr_accessor filters: Array[Types::MonetizationFilter]?
+    end
+
+    class GetRevenueStatisticsSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revenue_breakdown: Types::RevenueBreakdown,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revenue_breakdown: Types::RevenueBreakdown?
+    end
+
+    class GetRevenueStatisticsTimeSeriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statistic_type: String,
+        ?time_window: Types::TimeWindow,
+        ?scope: String,
+        ?interval: String,
+        ?currency: String,
+        ?group_by: String,
+        ?filters: Array[Types::MonetizationFilter],
+        ?limit: Integer,
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statistic_type: String?
+      attr_accessor time_window: Types::TimeWindow?
+      attr_accessor scope: String?
+      attr_accessor interval: String?
+      attr_accessor currency: String?
+      attr_accessor group_by: String?
+      attr_accessor filters: Array[Types::MonetizationFilter]?
+      attr_accessor limit: Integer?
+      attr_accessor next_marker: String?
+    end
+
+    class GetRevenueStatisticsTimeSeriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_points: Array[Types::DataPointEntry],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_points: Array[Types::DataPointEntry]?
+      attr_accessor next_marker: String?
+    end
+
     class GetRuleGroupRequest
       include Smithy::Schema::Structure
 
@@ -1767,6 +1984,52 @@ module Aws::WAFV2
       attr_accessor time_window: Types::TimeWindow?
     end
 
+    class GetTopPathStatisticsByTrafficRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_acl_arn: String,
+        ?scope: String,
+        ?uri_path_prefix: String,
+        ?time_window: Types::TimeWindow,
+        ?bot_category: String,
+        ?bot_organization: String,
+        ?bot_name: String,
+        ?limit: Integer,
+        ?number_of_top_traffic_bots_per_path: Integer,
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_acl_arn: String?
+      attr_accessor scope: String?
+      attr_accessor uri_path_prefix: String?
+      attr_accessor time_window: Types::TimeWindow?
+      attr_accessor bot_category: String?
+      attr_accessor bot_organization: String?
+      attr_accessor bot_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor number_of_top_traffic_bots_per_path: Integer?
+      attr_accessor next_marker: String?
+    end
+
+    class GetTopPathStatisticsByTrafficResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path_statistics: Array[Types::PathStatistics],
+        ?total_request_count: Integer,
+        ?next_marker: String,
+        ?top_categories: Array[Types::PathStatistics],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path_statistics: Array[Types::PathStatistics]?
+      attr_accessor total_request_count: Integer?
+      attr_accessor next_marker: String?
+      attr_accessor top_categories: Array[Types::PathStatistics]?
+    end
+
     class GetWebACLForResourceRequest
       include Smithy::Schema::Structure
 
@@ -1819,6 +2082,14 @@ module Aws::WAFV2
       attr_accessor web_acl: Types::WebACL?
       attr_accessor lock_token: String?
       attr_accessor application_integration_url: String?
+    end
+
+    module GroupByType
+      NAME: String
+      CATEGORY: String
+      INTENT: String
+      ORGANIZATION: String
+      WEBACL: String
     end
 
     class HTTPHeader
@@ -1983,6 +2254,13 @@ module Aws::WAFV2
     module InspectionLevel
       COMMON: String
       TARGETED: String
+    end
+
+    module IntervalType
+      MINUTELY: String
+      FIVE_MINUTELY: String
+      HOURLY: String
+      DAILY: String
     end
 
     class JA3Fingerprint
@@ -2380,6 +2658,44 @@ module Aws::WAFV2
       attr_accessor rule_groups: Array[Types::RuleGroupSummary]?
     end
 
+    class ListSettlementRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_window: Types::TimeWindow,
+        ?scope: String,
+        ?currency: String,
+        ?filters: Array[Types::MonetizationFilter],
+        ?sort_by: String,
+        ?sort_order: String,
+        ?limit: Integer,
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_window: Types::TimeWindow?
+      attr_accessor scope: String?
+      attr_accessor currency: String?
+      attr_accessor filters: Array[Types::MonetizationFilter]?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_marker: String?
+    end
+
+    class ListSettlementRecordsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?settlements: Array[Types::SettlementRecord],
+        ?next_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor settlements: Array[Types::SettlementRecord]?
+      attr_accessor next_marker: String?
+    end
+
     class ListTagsForResourceRequest
       include Smithy::Schema::Structure
 
@@ -2439,6 +2755,7 @@ module Aws::WAFV2
     module LogScope
       CUSTOMER: String
       SECURITY_LAKE: String
+      CLOUDWATCH_TELEMETRY_RULE_MANAGED: String
     end
 
     module LogType
@@ -2688,6 +3005,43 @@ module Aws::WAFV2
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    class MonetizationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crypto_config: Types::CryptoConfig,
+        ?currency_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crypto_config: Types::CryptoConfig?
+      attr_accessor currency_mode: String?
+    end
+
+    class MonetizationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class MonetizeAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?price_multiplier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor price_multiplier: String?
+    end
+
     class NoneAction
       include Smithy::Schema::Structure
 
@@ -2822,6 +3176,11 @@ module Aws::WAFV2
       ACP_RULE_SET_RESPONSE_INSPECTION: String
       DATA_PROTECTION_CONFIG: String
       LOW_REPUTATION_MODE: String
+      MONETIZATION_CONFIG: String
+      WALLET_ADDRESS: String
+      PRICE_AMOUNT: String
+      PAYMENT_NETWORK: String
+      PRE_PARSE_TEXT_TRANSFORMATION: String
     end
 
     class PasswordField
@@ -2835,9 +3194,43 @@ module Aws::WAFV2
       attr_accessor identifier: String?
     end
 
+    class PathStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::FilterSource,
+        ?path: String,
+        ?request_count: Integer,
+        ?percentage: Float,
+        ?top_bots: Array[Types::BotStatistics],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::FilterSource?
+      attr_accessor path: String?
+      attr_accessor request_count: Integer?
+      attr_accessor percentage: Float?
+      attr_accessor top_bots: Array[Types::BotStatistics]?
+    end
+
     module PayloadType
       JSON: String
       FORM_ENCODED: String
+    end
+
+    class PaymentNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?chain: String,
+        ?wallet_address: String,
+        ?prices: Array[Types::Price],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor chain: String?
+      attr_accessor wallet_address: String?
+      attr_accessor prices: Array[Types::Price]?
     end
 
     class PhoneNumberField
@@ -2862,6 +3255,40 @@ module Aws::WAFV2
       ENDS_WITH: String
       CONTAINS: String
       CONTAINS_WORD: String
+    end
+
+    class PreParseTextTransformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?priority: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor priority: Integer?
+      attr_accessor type: String?
+    end
+
+    module PreParseTextTransformationType
+      NONE: String
+      URL_DECODE: String
+      URL_DECODE_UNI: String
+      COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA: String
+      REPLACE_SEMICOLONS_WITH_AMPERSANDS: String
+    end
+
+    class Price
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: String,
+        ?currency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: String?
+      attr_accessor currency: String?
     end
 
     class PutLoggingConfigurationRequest
@@ -2947,6 +3374,17 @@ module Aws::WAFV2
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    module RankingSortBy
+      REVENUE: String
+      PERCENTAGE: String
+      NAME: String
+    end
+
+    module RankingStatisticType
+      TOP_SOURCES_BY_REVENUE: String
+      TOP_PATHS_BY_REVENUE: String
     end
 
     class RateBasedStatement
@@ -3171,12 +3609,14 @@ module Aws::WAFV2
         ?regex_string: String,
         ?field_to_match: Types::FieldToMatch,
         ?text_transformations: Array[Types::TextTransformation],
+        ?pre_parse_text_transformations: Array[Types::PreParseTextTransformation],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor regex_string: String?
       attr_accessor field_to_match: Types::FieldToMatch?
       attr_accessor text_transformations: Array[Types::TextTransformation]?
+      attr_accessor pre_parse_text_transformations: Array[Types::PreParseTextTransformation]?
     end
 
     class RegexPatternSet
@@ -3205,12 +3645,14 @@ module Aws::WAFV2
         ?arn: String,
         ?field_to_match: Types::FieldToMatch,
         ?text_transformations: Array[Types::TextTransformation],
+        ?pre_parse_text_transformations: Array[Types::PreParseTextTransformation],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor arn: String?
       attr_accessor field_to_match: Types::FieldToMatch?
       attr_accessor text_transformations: Array[Types::TextTransformation]?
+      attr_accessor pre_parse_text_transformations: Array[Types::PreParseTextTransformation]?
     end
 
     class RegexPatternSetSummary
@@ -3300,6 +3742,7 @@ module Aws::WAFV2
       APP_RUNNER_SERVICE: String
       VERIFIED_ACCESS_INSTANCE: String
       AMPLIFY: String
+      AGENTCORE_GATEWAY: String
     end
 
     module ResponseContentType
@@ -3381,6 +3824,44 @@ module Aws::WAFV2
       attr_accessor failure_codes: Array[Integer]?
     end
 
+    class RevenueBreakdown
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_amount: String,
+        ?verified_amount: String,
+        ?unverified_amount: String,
+        ?currency: String,
+        ?total_settled: Integer,
+        ?total_monetize_served: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_amount: String?
+      attr_accessor verified_amount: String?
+      attr_accessor unverified_amount: String?
+      attr_accessor currency: String?
+      attr_accessor total_settled: Integer?
+      attr_accessor total_monetize_served: Integer?
+    end
+
+    class RevenuePathStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?percentage: Float,
+        ?amount: String,
+        ?request_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor percentage: Float?
+      attr_accessor amount: String?
+      attr_accessor request_count: Integer?
+    end
+
     class Rule
       include Smithy::Schema::Structure
 
@@ -3417,6 +3898,7 @@ module Aws::WAFV2
         ?count: Types::CountAction,
         ?captcha: Types::CaptchaAction,
         ?challenge: Types::ChallengeAction,
+        ?monetize: Types::MonetizeAction,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3425,6 +3907,7 @@ module Aws::WAFV2
       attr_accessor count: Types::CountAction?
       attr_accessor captcha: Types::CaptchaAction?
       attr_accessor challenge: Types::ChallengeAction?
+      attr_accessor monetize: Types::MonetizeAction?
     end
 
     class RuleActionOverride
@@ -3455,6 +3938,7 @@ module Aws::WAFV2
         ?custom_response_bodies: Hash[String, Types::CustomResponseBody],
         ?available_labels: Array[Types::LabelSummary],
         ?consumed_labels: Array[Types::LabelSummary],
+        ?monetization_config: Types::MonetizationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3469,6 +3953,7 @@ module Aws::WAFV2
       attr_accessor custom_response_bodies: Hash[String, Types::CustomResponseBody]?
       attr_accessor available_labels: Array[Types::LabelSummary]?
       attr_accessor consumed_labels: Array[Types::LabelSummary]?
+      attr_accessor monetization_config: Types::MonetizationConfig?
     end
 
     class RuleGroupReferenceStatement
@@ -3565,6 +4050,65 @@ module Aws::WAFV2
       HIGH: String
     end
 
+    class SettlementRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?payer_address: String,
+        ?wallet_address: String,
+        ?status: String,
+        ?amount: String,
+        ?currency: String,
+        ?network: String,
+        ?transaction_id: String,
+        ?request_id: String,
+        ?source_name: String,
+        ?organization: String,
+        ?source_category: String,
+        ?intent: String,
+        ?verified: bool,
+        ?content_path: String,
+        ?web_acl_arn: String,
+        ?request_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor payer_address: String?
+      attr_accessor wallet_address: String?
+      attr_accessor status: String?
+      attr_accessor amount: String?
+      attr_accessor currency: String?
+      attr_accessor network: String?
+      attr_accessor transaction_id: String?
+      attr_accessor request_id: String?
+      attr_accessor source_name: String?
+      attr_accessor organization: String?
+      attr_accessor source_category: String?
+      attr_accessor intent: String?
+      attr_accessor verified: bool?
+      attr_accessor content_path: String?
+      attr_accessor web_acl_arn: String?
+      attr_accessor request_timestamp: Time?
+    end
+
+    module SettlementSortBy
+      TIMESTAMP: String
+      AMOUNT: String
+      NAME: String
+      STATUS: String
+    end
+
+    module SettlementStatus
+      SETTLED: String
+      PENDING: String
+      FAILED: String
+      SERVICE_ERROR: String
+      SKIPPED_ORIGIN_ERROR: String
+      DUPLICATE: String
+    end
+
     class SingleHeader
       include Smithy::Schema::Structure
 
@@ -3595,6 +4139,7 @@ module Aws::WAFV2
         ?comparison_operator: String,
         ?size: Integer,
         ?text_transformations: Array[Types::TextTransformation],
+        ?pre_parse_text_transformations: Array[Types::PreParseTextTransformation],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3602,6 +4147,7 @@ module Aws::WAFV2
       attr_accessor comparison_operator: String?
       attr_accessor size: Integer?
       attr_accessor text_transformations: Array[Types::TextTransformation]?
+      attr_accessor pre_parse_text_transformations: Array[Types::PreParseTextTransformation]?
     end
 
     module SizeInspectionLimit
@@ -3611,18 +4157,52 @@ module Aws::WAFV2
       KB_64: String
     end
 
+    module SortOrder
+      ASC: String
+      DESC: String
+    end
+
+    class SourceStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+        ?percentage: Float,
+        ?amount: String,
+        ?request_count: Integer,
+        ?source_category: String,
+        ?intent: String,
+        ?organization: String,
+        ?verified: bool,
+        ?group_by_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+      attr_accessor percentage: Float?
+      attr_accessor amount: String?
+      attr_accessor request_count: Integer?
+      attr_accessor source_category: String?
+      attr_accessor intent: String?
+      attr_accessor organization: String?
+      attr_accessor verified: bool?
+      attr_accessor group_by_value: String?
+    end
+
     class SqliMatchStatement
       include Smithy::Schema::Structure
 
       def initialize: (
         ?field_to_match: Types::FieldToMatch,
         ?text_transformations: Array[Types::TextTransformation],
+        ?pre_parse_text_transformations: Array[Types::PreParseTextTransformation],
         ?sensitivity_level: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor field_to_match: Types::FieldToMatch?
       attr_accessor text_transformations: Array[Types::TextTransformation]?
+      attr_accessor pre_parse_text_transformations: Array[Types::PreParseTextTransformation]?
       attr_accessor sensitivity_level: String?
     end
 
@@ -3750,6 +4330,21 @@ module Aws::WAFV2
       BASE64_DECODE_EXT: String
       URL_DECODE_UNI: String
       UTF8_TO_UNICODE: String
+      REMOVE_WHITESPACE: String
+      TRIM: String
+      TRIM_LEFT: String
+      TRIM_RIGHT: String
+      REMOVE_COMMENTS_CHAR: String
+      UPPERCASE: String
+      CMD_LINE_WIN: String
+      CMD_LINE_UNIX: String
+      JS_DECODE_EXT: String
+      SHA256: String
+    end
+
+    module TimeSeriesStatisticType
+      DATE_HISTOGRAM: String
+      PAYMENT_TRAFFIC: String
     end
 
     class TimeWindow
@@ -3899,6 +4494,7 @@ module Aws::WAFV2
         ?visibility_config: Types::VisibilityConfig,
         ?lock_token: String,
         ?custom_response_bodies: Hash[String, Types::CustomResponseBody],
+        ?monetization_config: Types::MonetizationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3910,6 +4506,7 @@ module Aws::WAFV2
       attr_accessor visibility_config: Types::VisibilityConfig?
       attr_accessor lock_token: String?
       attr_accessor custom_response_bodies: Hash[String, Types::CustomResponseBody]?
+      attr_accessor monetization_config: Types::MonetizationConfig?
     end
 
     class UpdateRuleGroupResponse
@@ -3943,6 +4540,7 @@ module Aws::WAFV2
         ?association_config: Types::AssociationConfig,
         ?on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig,
         ?application_config: Types::ApplicationConfig,
+        ?monetization_config: Types::MonetizationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3962,6 +4560,7 @@ module Aws::WAFV2
       attr_accessor association_config: Types::AssociationConfig?
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig?
       attr_accessor application_config: Types::ApplicationConfig?
+      attr_accessor monetization_config: Types::MonetizationConfig?
     end
 
     class UpdateWebACLResponse
@@ -4081,6 +4680,19 @@ module Aws::WAFV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class WAFFeatureNotIncludedInPricingPlanException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?disallowed_features: Array[Types::DisallowedFeature],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor disallowed_features: Array[Types::DisallowedFeature]?
     end
 
     class WAFInternalErrorException
@@ -4281,6 +4893,7 @@ module Aws::WAFV2
         ?retrofitted_by_firewall_manager: bool,
         ?on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig,
         ?application_config: Types::ApplicationConfig,
+        ?monetization_config: Types::MonetizationConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4305,6 +4918,7 @@ module Aws::WAFV2
       attr_accessor retrofitted_by_firewall_manager: bool?
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig?
       attr_accessor application_config: Types::ApplicationConfig?
+      attr_accessor monetization_config: Types::MonetizationConfig?
     end
 
     class WebACLSummary
@@ -4332,11 +4946,13 @@ module Aws::WAFV2
       def initialize: (
         ?field_to_match: Types::FieldToMatch,
         ?text_transformations: Array[Types::TextTransformation],
+        ?pre_parse_text_transformations: Array[Types::PreParseTextTransformation],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor field_to_match: Types::FieldToMatch?
       attr_accessor text_transformations: Array[Types::TextTransformation]?
+      attr_accessor pre_parse_text_transformations: Array[Types::PreParseTextTransformation]?
     end
   end
 end

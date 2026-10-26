@@ -390,6 +390,34 @@ module Aws::Health
       attr_accessor health_service_access_status_for_organization: String?
     end
 
+    class DescribeServiceLifecycleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::ServiceLifecycleFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::ServiceLifecycleFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeServiceLifecycleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_lifecycles: Array[Types::ServiceLifecycle],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_lifecycles: Array[Types::ServiceLifecycle]?
+      attr_accessor next_token: String?
+    end
+
     class EntityAccountFilter
       include Smithy::Schema::Structure
 
@@ -456,6 +484,8 @@ module Aws::Health
         ?last_updated_time: Time,
         ?status_code: String,
         ?event_scope_code: String,
+        ?actionability: String,
+        ?personas: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -470,6 +500,8 @@ module Aws::Health
       attr_accessor last_updated_time: Time?
       attr_accessor status_code: String?
       attr_accessor event_scope_code: String?
+      attr_accessor actionability: String?
+      attr_accessor personas: Array[String]?
     end
 
     class EventAccountFilter
@@ -483,6 +515,12 @@ module Aws::Health
 
       attr_accessor event_arn: String?
       attr_accessor aws_account_id: String?
+    end
+
+    module EventActionability
+      ACTION_REQUIRED: String
+      ACTION_MAY_BE_REQUIRED: String
+      INFORMATIONAL: String
     end
 
     class EventAggregate
@@ -543,6 +581,7 @@ module Aws::Health
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?actionabilities: Array[String],
         ?event_arns: Array[String],
         ?event_type_codes: Array[String],
         ?services: Array[String],
@@ -556,9 +595,11 @@ module Aws::Health
         ?event_type_categories: Array[String],
         ?tags: Array[Hash[String, String]],
         ?event_status_codes: Array[String],
+        ?personas: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor actionabilities: Array[String]?
       attr_accessor event_arns: Array[String]?
       attr_accessor event_type_codes: Array[String]?
       attr_accessor services: Array[String]?
@@ -572,6 +613,13 @@ module Aws::Health
       attr_accessor event_type_categories: Array[String]?
       attr_accessor tags: Array[Hash[String, String]]?
       attr_accessor event_status_codes: Array[String]?
+      attr_accessor personas: Array[String]?
+    end
+
+    module EventPersona
+      OPERATIONS: String
+      SECURITY: String
+      BILLING: String
     end
 
     class EventType
@@ -581,12 +629,22 @@ module Aws::Health
         ?service: String,
         ?code: String,
         ?category: String,
+        ?actionability: String,
+        ?personas: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor service: String?
       attr_accessor code: String?
       attr_accessor category: String?
+      attr_accessor actionability: String?
+      attr_accessor personas: Array[String]?
+    end
+
+    module EventTypeActionability
+      ACTION_REQUIRED: String
+      ACTION_MAY_BE_REQUIRED: String
+      INFORMATIONAL: String
     end
 
     class EventTypeFilter
@@ -596,12 +654,22 @@ module Aws::Health
         ?event_type_codes: Array[String],
         ?services: Array[String],
         ?event_type_categories: Array[String],
+        ?actionabilities: Array[String],
+        ?personas: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor event_type_codes: Array[String]?
       attr_accessor services: Array[String]?
       attr_accessor event_type_categories: Array[String]?
+      attr_accessor actionabilities: Array[String]?
+      attr_accessor personas: Array[String]?
+    end
+
+    module EventTypePersona
+      OPERATIONS: String
+      SECURITY: String
+      BILLING: String
     end
 
     class InvalidPaginationToken
@@ -613,6 +681,25 @@ module Aws::Health
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class LifecycleEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_event_type: String,
+        ?date: Time,
+        ?regions: Array[String],
+        ?impact_risks: Array[String],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_event_type: String?
+      attr_accessor date: Time?
+      attr_accessor regions: Array[String]?
+      attr_accessor impact_risks: Array[String]?
+      attr_accessor description: String?
     end
 
     class OrganizationAffectedEntitiesErrorItem
@@ -663,6 +750,8 @@ module Aws::Health
         ?end_time: Time,
         ?last_updated_time: Time,
         ?status_code: String,
+        ?actionability: String,
+        ?personas: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -676,6 +765,8 @@ module Aws::Health
       attr_accessor end_time: Time?
       attr_accessor last_updated_time: Time?
       attr_accessor status_code: String?
+      attr_accessor actionability: String?
+      attr_accessor personas: Array[String]?
     end
 
     class OrganizationEventDetails
@@ -716,6 +807,7 @@ module Aws::Health
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?actionabilities: Array[String],
         ?event_type_codes: Array[String],
         ?aws_account_ids: Array[String],
         ?services: Array[String],
@@ -727,9 +819,11 @@ module Aws::Health
         ?entity_values: Array[String],
         ?event_type_categories: Array[String],
         ?event_status_codes: Array[String],
+        ?personas: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor actionabilities: Array[String]?
       attr_accessor event_type_codes: Array[String]?
       attr_accessor aws_account_ids: Array[String]?
       attr_accessor services: Array[String]?
@@ -741,6 +835,37 @@ module Aws::Health
       attr_accessor entity_values: Array[String]?
       attr_accessor event_type_categories: Array[String]?
       attr_accessor event_status_codes: Array[String]?
+      attr_accessor personas: Array[String]?
+    end
+
+    class ServiceLifecycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?version: String,
+        ?title: String,
+        ?recommended_version: String,
+        ?lifecycle_events: Array[Types::LifecycleEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor version: String?
+      attr_accessor title: String?
+      attr_accessor recommended_version: String?
+      attr_accessor lifecycle_events: Array[Types::LifecycleEvent]?
+    end
+
+    class ServiceLifecycleFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
     end
 
     class UnsupportedLocale

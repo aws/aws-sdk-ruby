@@ -144,18 +144,18 @@ module Aws::DataExchange
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -242,8 +242,7 @@ module Aws::DataExchange
       request.send_request(options)
     end
 
-    # <p>This operation cancels a job. Jobs can be cancelled only when they are in the WAITING
-    #          state.</p>
+    # <p>This operation cancels a job. Jobs can be cancelled only when they are in the WAITING state.</p>
     # @param [Hash, Types::CancelJobInput] params
     # @option params [String] :job_id
     #   <p>The unique identifier for a job.</p>
@@ -328,10 +327,7 @@ module Aws::DataExchange
     # @option params [String] :name
     #   <p>The name of the data set.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>A data set tag is an optional label that you can assign to a data set when you create
-    #            it. Each tag consists of a key and an optional value, both of which you define. When you
-    #            use tagging, you can also use tag-based access control in IAM policies to control access to
-    #            these data sets and revisions.</p>
+    #   <p>A data set tag is an optional label that you can assign to a data set when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     asset_type: "AssetType", # required
@@ -438,12 +434,22 @@ module Aws::DataExchange
 
     # <p>This operation creates a job.</p>
     # @param [Hash, Types::CreateJobInput] params
+    # @option params [Types::AssetConfiguration] :asset_configuration
+    #   <p>The configuration for the asset, including tags to be applied to assets created by the job.</p>
     # @option params [Types::RequestDetails] :details
     #   <p>The details for the CreateJob request.</p>
     # @option params [String] :type
     #   <p>The type of job to be created.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     asset_configuration: {
+    #       tags: [
+    #         {
+    #           key: "__string", # required
+    #           value: "__string", # required
+    #         }
+    #       ]
+    #     },
     #     details: { # required
     #       export_asset_to_signed_url: {
     #         asset_id: "Id", # required
@@ -562,6 +568,14 @@ module Aws::DataExchange
     #   response.to_h #=>
     #   {
     #     arn: "Arn",
+    #     asset_configuration: {
+    #       tags: [
+    #         {
+    #           key: "__string", # required
+    #           value: "__string", # required
+    #         }
+    #       ]
+    #     },
     #     created_at: Time.now,
     #     details: {
     #       export_asset_to_signed_url: {
@@ -719,10 +733,7 @@ module Aws::DataExchange
     # @option params [String] :data_set_id
     #   <p>The unique identifier for a data set.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>A revision tag is an optional label that you can assign to a revision when you create
-    #            it. Each tag consists of a key and an optional value, both of which you define. When you
-    #            use tagging, you can also use tag-based access control in IAM policies to control access to
-    #            these data sets and revisions.</p>
+    #   <p>A revision tag is an optional label that you can assign to a revision when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     comment: "__stringMin0Max16384",
@@ -948,6 +959,9 @@ module Aws::DataExchange
     #     name: "AssetName",
     #     revision_id: "Id",
     #     source_id: "Id",
+    #     tags: {
+    #       "__string" => "__string"
+    #     },
     #     updated_at: Time.now
     #   }
     # @return [Types::GetAssetOutput]
@@ -1087,6 +1101,14 @@ module Aws::DataExchange
     #   response.to_h #=>
     #   {
     #     arn: "Arn",
+    #     asset_configuration: {
+    #       tags: [
+    #         {
+    #           key: "__string", # required
+    #           value: "__string", # required
+    #         }
+    #       ]
+    #     },
     #     created_at: Time.now,
     #     details: {
     #       export_asset_to_signed_url: {
@@ -1312,8 +1334,7 @@ module Aws::DataExchange
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be included in the next page.</p>
     # @option params [String] :next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -1348,16 +1369,14 @@ module Aws::DataExchange
       request.send_request(options)
     end
 
-    # <p>This operation lists a data set's revisions sorted by CreatedAt in descending
-    #          order.</p>
+    # <p>This operation lists a data set's revisions sorted by CreatedAt in descending order.</p>
     # @param [Hash, Types::ListDataSetRevisionsInput] params
     # @option params [String] :data_set_id
     #   <p>The unique identifier for a data set.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results returned by a single call.</p>
     # @option params [String] :next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     data_set_id: "Id", # required
@@ -1392,17 +1411,14 @@ module Aws::DataExchange
       request.send_request(options)
     end
 
-    # <p>This operation lists your data sets. When listing by origin OWNED, results are sorted by
-    #          CreatedAt in descending order. When listing by origin ENTITLED, there is no order.</p>
+    # <p>This operation lists your data sets. When listing by origin OWNED, results are sorted by CreatedAt in descending order. When listing by origin ENTITLED, there is no order.</p>
     # @param [Hash, Types::ListDataSetsInput] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of results returned by a single call.</p>
     # @option params [String] :next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     # @option params [String] :origin
-    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED
-    #            to the account (for subscribers).</p>
+    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     max_results: 1,
@@ -1446,8 +1462,7 @@ module Aws::DataExchange
     # @option params [Integer] :max_results
     #   <p>The maximum number of results returned by a single call.</p>
     # @option params [String] :next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     event_source_id: "__string",
@@ -1499,8 +1514,7 @@ module Aws::DataExchange
     # @option params [Integer] :max_results
     #   <p>The maximum number of results returned by a single call.</p>
     # @option params [String] :next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     # @option params [String] :revision_id
     #   <p>The unique identifier for a revision.</p>
     # @example Request syntax with placeholder values
@@ -1518,6 +1532,14 @@ module Aws::DataExchange
     #     jobs: [
     #       {
     #         arn: "Arn", # required
+    #         asset_configuration: {
+    #           tags: [
+    #             {
+    #               key: "__string", # required
+    #               value: "__string", # required
+    #             }
+    #           ]
+    #         },
     #         created_at: Time.now, # required
     #         details: { # required
     #           export_asset_to_signed_url: {
@@ -1676,8 +1698,7 @@ module Aws::DataExchange
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be included in the next page.</p>
     # @option params [String] :next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     # @option params [Array<String>] :acceptance_state
     #   <p>The acceptance state of the data grants to list.</p>
     # @example Request syntax with placeholder values
@@ -1714,16 +1735,14 @@ module Aws::DataExchange
       request.send_request(options)
     end
 
-    # <p>This operation lists a revision's assets sorted alphabetically in descending
-    #          order.</p>
+    # <p>This operation lists a revision's assets sorted alphabetically in descending order.</p>
     # @param [Hash, Types::ListRevisionAssetsInput] params
     # @option params [String] :data_set_id
     #   <p>The unique identifier for a data set.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results returned by a single call.</p>
     # @option params [String] :next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     # @option params [String] :revision_id
     #   <p>The unique identifier for a revision.</p>
     # @example Request syntax with placeholder values
@@ -1849,8 +1868,7 @@ module Aws::DataExchange
     # @option params [String] :revision_id
     #   <p>The unique identifier for a revision.</p>
     # @option params [String] :revocation_comment
-    #   <p>A required comment to inform subscribers of the reason their access to the revision was
-    #            revoked.</p>
+    #   <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     data_set_id: "Id", # required
@@ -1880,29 +1898,22 @@ module Aws::DataExchange
       request.send_request(options)
     end
 
-    # <p>This operation invokes an API Gateway API asset. The request is proxied to the
-    #          provider’s API Gateway API.</p>
+    # <p>This operation invokes an API Gateway API asset. The request is proxied to the provider’s API Gateway API.</p>
     # @param [Hash, Types::SendApiAssetInput] params
     # @option params [String] :body
     #   <p>The request body.</p>
     # @option params [Hash<String, String>] :query_string_parameters
-    #   <p>Attach query string parameters to the end of the URI (for example,
-    #            /v1/examplePath?exampleParam=exampleValue).</p>
+    #   <p>Attach query string parameters to the end of the URI (for example, /v1/examplePath?exampleParam=exampleValue).</p>
     # @option params [String] :asset_id
     #   <p>Asset ID value for the API request.</p>
     # @option params [String] :data_set_id
     #   <p>Data set ID value for the API request.</p>
     # @option params [Hash<String, String>] :request_headers
-    #   <p>Any header value prefixed with x-amzn-dataexchange-header- will have that stripped
-    #            before sending the Asset API request. Use this when you want to override a header that AWS
-    #            Data Exchange uses. Alternatively, you can use the header without a prefix to the HTTP
-    #            request.</p>
+    #   <p>Any header value prefixed with x-amzn-dataexchange-header- will have that stripped before sending the Asset API request. Use this when you want to override a header that AWS Data Exchange uses. Alternatively, you can use the header without a prefix to the HTTP request.</p>
     # @option params [String] :method
-    #   <p>HTTP method value for the API request. Alternatively, you can use the appropriate verb
-    #            in your request.</p>
+    #   <p>HTTP method value for the API request. Alternatively, you can use the appropriate verb in your request.</p>
     # @option params [String] :path
-    #   <p>URI path value for the API request. Alternatively, you can set the URI path directly by
-    #            invoking /v1/{pathValue}.</p>
+    #   <p>URI path value for the API request. Alternatively, you can set the URI path directly by invoking /v1/{pathValue}.</p>
     # @option params [String] :revision_id
     #   <p>Revision ID value for the API request.</p>
     # @example Request syntax with placeholder values
@@ -1939,26 +1950,17 @@ module Aws::DataExchange
     # <p>The type of event associated with the data set.</p>
     # @param [Hash, Types::SendDataSetNotificationRequest] params
     # @option params [Types::ScopeDetails] :scope
-    #   <p>Affected
-    #            scope of this notification such as the underlying resources affected by the notification
-    #            event.</p>
+    #   <p>Affected scope of this notification such as the underlying resources affected by the notification event.</p>
     # @option params [String] :client_token
-    #   <p>Idempotency
-    #            key for the notification, this key allows us to deduplicate notifications that are sent in
-    #            quick succession erroneously.</p>
+    #   <p>Idempotency key for the notification, this key allows us to deduplicate notifications that are sent in quick succession erroneously.</p>
     # @option params [String] :comment
-    #   <p>Free-form
-    #            text field for providers to add information about their notifications.</p>
+    #   <p>Free-form text field for providers to add information about their notifications.</p>
     # @option params [String] :data_set_id
-    #   <p>Affected
-    #            data set of the notification.</p>
+    #   <p>Affected data set of the notification.</p>
     # @option params [Types::NotificationDetails] :details
-    #   <p>Extra
-    #            details specific to this notification type.</p>
+    #   <p>Extra details specific to this notification type.</p>
     # @option params [String] :type
-    #   <p>The
-    #            type of the notification. Describing the kind of event the notification is alerting you
-    #            to.</p>
+    #   <p>The type of the notification. Describing the kind of event the notification is alerting you to.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     scope: {
@@ -2091,13 +2093,7 @@ module Aws::DataExchange
     # @option params [String] :data_set_id
     #   <p>The unique identifier for a data set.</p>
     # @option params [String] :name
-    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used
-    #            as the asset name. When exporting to Amazon S3, the asset name is used as default target
-    #            Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as
-    #            the asset name. When importing from Amazon Redshift, the datashare name is used as the
-    #            asset name. When importing from AWS Lake Formation, the static values of "Database(s)
-    #            included in the LF-tag policy" or "Table(s) included in LF-tag policy" are used as the
-    #            name.</p>
+    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name. When importing from AWS Lake Formation, the static values of "Database(s) included in the LF-tag policy" or "Table(s) included in LF-tag policy" are used as the name.</p>
     # @option params [String] :revision_id
     #   <p>The unique identifier for a revision.</p>
     # @example Request syntax with placeholder values
@@ -2289,9 +2285,7 @@ module Aws::DataExchange
     # @option params [String] :data_set_id
     #   <p>The unique identifier for a data set.</p>
     # @option params [Boolean] :finalized
-    #   <p>Finalizing a revision tells AWS Data Exchange that your changes to the assets in the
-    #            revision are complete. After it's in this read-only state, you can publish the revision to
-    #            your products.</p>
+    #   <p>Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products.</p>
     # @option params [String] :revision_id
     #   <p>The unique identifier for a revision.</p>
     # @example Request syntax with placeholder values
